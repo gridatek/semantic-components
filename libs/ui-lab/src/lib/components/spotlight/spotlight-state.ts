@@ -14,6 +14,9 @@ export class ScSpotlightState {
   private readonly destroyRef = inject(DestroyRef);
 
   readonly maskId = `spotlight-mask-${nextMaskId++}`;
+  /** Ids linking the dialog to its title and description. */
+  readonly titleId = `${this.maskId}-title`;
+  readonly descriptionId = `${this.maskId}-description`;
 
   onOpened: (() => void) | undefined;
   onClosed: (() => void) | undefined;

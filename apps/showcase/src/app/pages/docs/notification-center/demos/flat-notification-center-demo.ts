@@ -11,6 +11,7 @@ import {
   template: `
     <div
       scNotificationCenter
+      aria-label="Flat notifications"
       [(notifications)]="notifications"
       [showFilters]="true"
       class="h-[400px] max-w-md"

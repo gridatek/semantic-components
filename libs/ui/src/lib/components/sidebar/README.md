@@ -271,7 +271,7 @@ The sidebar uses CSS variables that can be customized:
 
 ## State Persistence
 
-The sidebar state is automatically saved to `localStorage` (key: `sc-sidebar-state`). The state will be restored when the page is refreshed.
+The sidebar state is automatically saved to `localStorage` (key: `sc-sidebar-state`) and restored when the page is refreshed. Give each independent sidebar its own key with `storageKey="my-key"`, or pass `[storageKey]="null"` to disable persistence.
 
 ## Mobile Behavior
 
@@ -289,10 +289,10 @@ The mobile view uses the new ScSheet architecture with a provider pattern:
 
 ## Accessibility
 
-- All interactive elements are keyboard accessible
-- Proper ARIA attributes are applied
-- Focus management is handled automatically
-- Screen reader support included
+- The sidebar is a `navigation` landmark: give it an `aria-label` (unique on the page).
+- `scSidebarTrigger` reports the state with `aria-expanded`; give it an `aria-label` when it only holds an icon. `scSidebarRail` is labelled "Toggle Sidebar".
+- `scSidebarMenuButton` sets `aria-current="page"` when `isActive`, and shows its `tooltip` as a native tooltip while the sidebar is collapsed to icons (labels stay in the DOM, so names are kept).
+- Ctrl/⌘ + B toggles the sidebar.
 
 ## Demo
 

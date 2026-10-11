@@ -5,6 +5,7 @@ import { cn } from '@semantic-components/ui';
   selector: '[scMarqueeTextSeparator]',
   host: {
     '[class]': 'class()',
+    'aria-hidden': 'true',
   },
 })
 export class ScMarqueeTextSeparator {

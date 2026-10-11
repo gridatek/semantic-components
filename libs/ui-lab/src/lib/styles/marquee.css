@@ -35,7 +35,7 @@
 
 [data-slot='marquee'] > [data-slot='marquee-content'] {
   display: flex;
-  shrink: 0;
+  flex-shrink: 0;
   gap: var(--gap);
   animation: marquee var(--duration) linear infinite;
 }
@@ -54,7 +54,11 @@
   animation-direction: reverse;
 }
 
+/* Pause: on demand, and while hovered or holding keyboard focus. */
+[data-slot='marquee'][data-paused] > [data-slot='marquee-content'],
 [data-slot='marquee'][data-pause-on-hover]:hover
+  > [data-slot='marquee-content'],
+[data-slot='marquee'][data-pause-on-hover]:focus-within
   > [data-slot='marquee-content'] {
   animation-play-state: paused;
 }
@@ -74,6 +78,16 @@
   animation-direction: reverse;
 }
 
-[data-slot='marquee-text'][data-pause-on-hover]:hover > div {
+[data-slot='marquee-text'][data-paused] > div,
+[data-slot='marquee-text'][data-pause-on-hover]:hover > div,
+[data-slot='marquee-text'][data-pause-on-hover]:focus-within > div {
   animation-play-state: paused;
+}
+
+/* No motion when the user asks for less: the first copy stays in place. */
+@media (prefers-reduced-motion: reduce) {
+  [data-slot='marquee'] > [data-slot='marquee-content'],
+  [data-slot='marquee-text'] > div {
+    animation: none;
+  }
 }

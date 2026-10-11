@@ -14,7 +14,7 @@ import { SizesDockDemo } from './sizes-dock-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SizesDockDemoContainer {
-  readonly code = `import { NgComponentOutlet } from '@angular/common';
+  readonly code = `﻿import { NgComponentOutlet } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ScDock, ScDockItem, ScDockItems } from '@semantic-components/ui-lab';
 import type { DockItem } from '@semantic-components/ui-lab';
@@ -36,7 +36,7 @@ import {
     >
       <div class="text-center">
         <p class="text-muted-foreground mb-2 text-xs">Small</p>
-        <nav scDock size="sm">
+        <nav scDock ariaLabel="Small dock" size="sm">
           <div scDockItems>
             @for (item of items; track item.id) {
               <button scDockItem [item]="item">
@@ -52,7 +52,7 @@ import {
       </div>
       <div class="text-center">
         <p class="text-muted-foreground mb-2 text-xs">Medium (Default)</p>
-        <nav scDock size="md">
+        <nav scDock ariaLabel="Medium dock" size="md">
           <div scDockItems>
             @for (item of items; track item.id) {
               <button scDockItem [item]="item">
@@ -68,7 +68,7 @@ import {
       </div>
       <div class="text-center">
         <p class="text-muted-foreground mb-2 text-xs">Large</p>
-        <nav scDock size="lg">
+        <nav scDock ariaLabel="Large dock" size="lg">
           <div scDockItems>
             @for (item of items; track item.id) {
               <button scDockItem [item]="item">

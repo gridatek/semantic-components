@@ -4121,4 +4121,49 @@ export const demosRoutes: Route[] = [
       },
     ],
   },
+  {
+    path: 'demos/sidebar',
+    children: [
+      {
+        path: 'basic-sidebar-demo',
+        loadComponent: () =>
+          import('../pages/docs/sidebar/demos/basic-sidebar-demo').then(
+            (m) => m.BasicSidebarDemo,
+          ),
+      },
+      {
+        path: 'icon-sidebar-demo',
+        loadComponent: () =>
+          import('../pages/docs/sidebar/demos/icon-sidebar-demo').then(
+            (m) => m.IconSidebarDemo,
+          ),
+      },
+      {
+        path: 'floating-sidebar-demo',
+        loadComponent: () =>
+          import('../pages/docs/sidebar/demos/floating-sidebar-demo').then(
+            (m) => m.FloatingSidebarDemo,
+          ),
+      },
+    ],
+  },
+  {
+    path: 'demos/navbar',
+    children: [
+      {
+        path: 'basic-navbar-demo',
+        loadComponent: () =>
+          import('../pages/docs/navbar/demos/basic-navbar-demo').then(
+            (m) => m.BasicNavbarDemo,
+          ),
+      },
+      {
+        path: 'mobile-navbar-demo',
+        loadComponent: () =>
+          import('../pages/docs/navbar/demos/mobile-navbar-demo').then(
+            (m) => m.MobileNavbarDemo,
+          ),
+      },
+    ],
+  },
 ];

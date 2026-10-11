@@ -144,9 +144,10 @@ Scrollable content area.
 
 **Inputs:**
 
-| Input       | Type     | Default   | Description            |
-| ----------- | -------- | --------- | ---------------------- |
-| `maxHeight` | `string` | `'600px'` | Maximum content height |
+| Input        | Type     | Default         | Description                  |
+| ------------ | -------- | --------------- | ---------------------------- |
+| `maxHeight`  | `string` | `'600px'`       | Maximum content height       |
+| `aria-label` | `string` | `'Differences'` | Name of the scrollable group |
 
 ### ScDiffViewerSplit
 
@@ -358,3 +359,9 @@ const { oldParts, newParts } = computeWordDiff('the quick brown fox', 'the fast 
 - Red background: Removed lines
 - No highlight: Unchanged lines
 - Word-level highlighting within changed lines
+
+## Accessibility
+
+- The scrollable `scDiffViewerContent` is focusable (`tabindex="0"`) so keyboard users can scroll it; it is a `group` named by its `aria-label` input (default "Differences").
+- Lines never wrap and every row is one line tall, so the two panes of the split view stay aligned; each pane is at least as wide as its longest line and the content scrolls horizontally as a whole.
+- Line numbers on added/removed rows take the row's text color for contrast. Use the 700 shades (`text-green-700`, `text-red-700`) for counts on light backgrounds.

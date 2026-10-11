@@ -29,14 +29,16 @@ import type {
   ],
   template: `
     <!-- Group Header -->
-    <button
-      type="button"
-      class="text-muted-foreground hover:text-foreground hover:bg-muted/50 flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm font-medium transition-colors"
-      (click)="toggleCollapse()"
-      [attr.aria-expanded]="!collapsed()"
-      [attr.aria-controls]="'group-' + group().id"
+    <div
+      class="hover:bg-muted/50 flex w-full items-center justify-between rounded-lg pe-3 transition-colors"
     >
-      <div class="flex items-center gap-2">
+      <button
+        type="button"
+        class="text-muted-foreground hover:text-foreground focus-visible:ring-ring/50 flex flex-1 items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium outline-none focus-visible:ring-3"
+        (click)="toggleCollapse()"
+        [attr.aria-expanded]="!collapsed()"
+        [attr.aria-controls]="'group-' + group().id"
+      >
         <svg
           siChevronDownIcon
           [class]="
@@ -59,7 +61,7 @@ import type {
             {{ unreadCount() }} new
           </span>
         }
-      </div>
+      </button>
 
       @if (notifications().length > 0) {
         <div class="flex items-center gap-1">
@@ -81,7 +83,7 @@ import type {
           </button>
         </div>
       }
-    </button>
+    </div>
 
     <!-- Notifications List -->
     @if (!collapsed()) {

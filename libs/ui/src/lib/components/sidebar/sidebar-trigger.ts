@@ -9,6 +9,8 @@ import { ScSidebarState } from './sidebar-state';
     type: 'button',
     '[class]': 'class()',
     '(click)': 'onClick($event)',
+    '[attr.aria-expanded]':
+      'state.isMobile() ? state.openMobile() : state.open()',
   },
 })
 export class ScSidebarTrigger {

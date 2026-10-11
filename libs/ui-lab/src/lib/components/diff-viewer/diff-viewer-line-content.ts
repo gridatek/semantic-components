@@ -10,5 +10,7 @@ import { cn } from '@semantic-components/ui';
 export class ScDiffViewerLineContent {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => cn('px-2', this.classInput()));
+  protected readonly class = computed(() =>
+    cn('whitespace-pre px-2', this.classInput()),
+  );
 }

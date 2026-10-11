@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, computed, input } from '@angular/core';
+﻿import { Component, ViewEncapsulation, computed, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
 @Component({
@@ -16,7 +16,7 @@ export class ScCodeEditorFooter {
 
   protected readonly class = computed(() =>
     cn(
-      'flex items-center justify-between border-t border-border bg-background/50 px-3 py-1.5 text-xs text-muted-foreground',
+      'flex items-center justify-between border-t border-border bg-muted/50 px-3 py-1.5 text-xs text-muted-foreground',
       this.classInput(),
     ),
   );

@@ -187,7 +187,7 @@ export function detectLanguage(
   `,
   styles: `
     .sc-code-editor-content__line-numbers {
-      color: oklch(from var(--muted-foreground) l c h / 0.5);
+      color: var(--muted-foreground);
     }
 
     .sc-code-editor-content__line-numbers--active {
@@ -322,7 +322,12 @@ export class ScCodeEditorContent {
         },
         defaultColor: false,
       });
-      this.highlightedHtml.set(this.sanitizer.bypassSecurityTrustHtml(html));
+      // Shiki makes its <pre> focusable; this layer is aria-hidden and
+      // display-only (the textarea is the control), so keep it out of the tab order.
+      const displayOnly = html.replace(/tabindex="0"/g, 'tabindex="-1"');
+      this.highlightedHtml.set(
+        this.sanitizer.bypassSecurityTrustHtml(displayOnly),
+      );
     } catch {
       this.highlightedHtml.set(null);
     }

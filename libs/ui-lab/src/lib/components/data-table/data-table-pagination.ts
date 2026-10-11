@@ -1,10 +1,10 @@
+import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   Component,
   ViewEncapsulation,
   computed,
   inject,
   input,
-  model,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import {
@@ -35,28 +35,33 @@ import { SC_DATA_TABLE } from './data-table';
       </div>
       <div class="flex items-center space-x-6 lg:space-x-8 rtl:space-x-reverse">
         <div class="flex items-center space-x-2 rtl:space-x-reverse">
-          <p class="text-sm font-medium">Rows per page</p>
+          <label class="text-sm font-medium" [for]="pageSizeId">
+            Rows per page
+          </label>
           <select
+            [id]="pageSizeId"
             class="border-input bg-background h-8 w-[70px] rounded-md border text-sm"
-            [value]="pageSize()"
             (change)="onPageSizeChange($event)"
           >
             @for (size of pageSizes(); track size) {
-              <option [value]="size">{{ size }}</option>
+              <option [value]="size" [selected]="size === table.pageSize()">
+                {{ size }}
+              </option>
             }
           </select>
         </div>
         <div
           class="flex w-[100px] items-center justify-center text-sm font-medium"
+          aria-live="polite"
         >
-          Page {{ currentPage() }} of {{ totalPages() }}
+          Page {{ table.currentPage() }} of {{ table.pageCount() }}
         </div>
         <div class="flex items-center space-x-2 rtl:space-x-reverse">
           <button
             type="button"
             class="border-input bg-background hover:bg-accent inline-flex size-8 items-center justify-center rounded-md border disabled:opacity-50"
-            [disabled]="currentPage() === 1"
-            (click)="goToPage(1)"
+            [disabled]="table.currentPage() === 1"
+            (click)="table.goToPage(1)"
             aria-label="First page"
           >
             <svg siChevronsLeftIcon class="size-4 rtl:rotate-180"></svg>
@@ -64,8 +69,8 @@ import { SC_DATA_TABLE } from './data-table';
           <button
             type="button"
             class="border-input bg-background hover:bg-accent inline-flex size-8 items-center justify-center rounded-md border disabled:opacity-50"
-            [disabled]="currentPage() === 1"
-            (click)="goToPage(currentPage() - 1)"
+            [disabled]="table.currentPage() === 1"
+            (click)="table.goToPage(table.currentPage() - 1)"
             aria-label="Previous page"
           >
             <svg siChevronLeftIcon class="size-4 rtl:rotate-180"></svg>
@@ -73,8 +78,8 @@ import { SC_DATA_TABLE } from './data-table';
           <button
             type="button"
             class="border-input bg-background hover:bg-accent inline-flex size-8 items-center justify-center rounded-md border disabled:opacity-50"
-            [disabled]="currentPage() === totalPages()"
-            (click)="goToPage(currentPage() + 1)"
+            [disabled]="table.currentPage() === table.pageCount()"
+            (click)="table.goToPage(table.currentPage() + 1)"
             aria-label="Next page"
           >
             <svg siChevronRightIcon class="size-4 rtl:rotate-180"></svg>
@@ -82,8 +87,8 @@ import { SC_DATA_TABLE } from './data-table';
           <button
             type="button"
             class="border-input bg-background hover:bg-accent inline-flex size-8 items-center justify-center rounded-md border disabled:opacity-50"
-            [disabled]="currentPage() === totalPages()"
-            (click)="goToPage(totalPages())"
+            [disabled]="table.currentPage() === table.pageCount()"
+            (click)="table.goToPage(table.pageCount())"
             aria-label="Last page"
           >
             <svg siChevronsRightIcon class="size-4 rtl:rotate-180"></svg>
@@ -99,29 +104,19 @@ import { SC_DATA_TABLE } from './data-table';
 })
 export class ScDataTablePagination {
   readonly table = inject(SC_DATA_TABLE);
+  protected readonly pageSizeId = inject(_IdGenerator).getId(
+    'sc-data-table-page-size-',
+  );
 
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly pageSize = model<number>(10);
-  readonly currentPage = model<number>(1);
   readonly pageSizes = input<number[]>([10, 20, 30, 40, 50]);
   readonly showSelection = input<boolean>(true);
 
   protected readonly class = computed(() => cn('py-4', this.classInput()));
 
-  readonly totalPages = computed(() => {
-    const total = this.table.sortedData().length;
-    const size = this.pageSize();
-    return Math.max(1, Math.ceil(total / size));
-  });
-
   onPageSizeChange(event: Event): void {
-    const value = parseInt((event.target as HTMLSelectElement).value, 10);
-    this.pageSize.set(value);
-    this.currentPage.set(1);
-  }
-
-  goToPage(page: number): void {
-    const total = this.totalPages();
-    this.currentPage.set(Math.max(1, Math.min(page, total)));
+    this.table.setPageSize(
+      parseInt((event.target as HTMLSelectElement).value, 10),
+    );
   }
 }

@@ -13,7 +13,7 @@ export class ScDiffViewerPane {
 
   protected readonly class = computed(() =>
     cn(
-      'min-w-0 flex-1',
+      'min-w-max flex-1 basis-0',
       this.side() === 'old' && 'border-e',
       this.classInput(),
     ),

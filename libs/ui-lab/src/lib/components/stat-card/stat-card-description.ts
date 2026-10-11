@@ -11,6 +11,10 @@ export class ScStatCardDescription {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('text-xs text-muted-foreground', this.classInput()),
+    cn(
+      'text-xs text-muted-foreground',
+      'group-data-[variant=filled]/stat-card:text-primary-foreground/80',
+      this.classInput(),
+    ),
   );
 }

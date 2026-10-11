@@ -12,6 +12,7 @@ import {
   template: `
     <div
       scNotificationCenter
+      aria-label="Grouped notifications"
       [(notifications)]="notifications"
       [groups]="groups()"
       (markRead)="onMarkRead($event)"

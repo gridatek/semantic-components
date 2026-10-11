@@ -212,6 +212,6 @@ For `scMarqueeText`, the text is automatically duplicated multiple times interna
 
 ## Accessibility
 
-- Clone content is marked with `aria-hidden="true"` to prevent duplicate screen reader announcements
-- Pause on hover allows users to read content
-- Animations respect `prefers-reduced-motion` media query (can be added via CSS)
+- Moving content can be stopped (WCAG 2.2.2): it pauses while hovered **or while it holds keyboard focus**, and the `paused` input stops it from your own control (e.g. a Pause button with `aria-pressed`).
+- With `prefers-reduced-motion: reduce` there is no animation; the first copy stays in place.
+- Only the first `scMarqueeTextSegment` is exposed to assistive technology; its repeats get `aria-hidden`, and separators are always decorative. For `scMarqueeContent`, put `aria-hidden="true"` on the duplicate copy.

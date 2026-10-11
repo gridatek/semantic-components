@@ -19,7 +19,7 @@ type ScNavbarMobileMenuState = 'open' | 'closed';
     <ng-content />
   `,
   host: {
-    id: 'navbar-mobile-menu',
+    '[id]': 'provider.menuId',
     role: 'navigation',
     '[attr.aria-label]': '"Mobile navigation"',
     '[attr.data-state]': 'state()',
@@ -31,7 +31,7 @@ type ScNavbarMobileMenuState = 'open' | 'closed';
 })
 export class ScNavbarMobileMenu {
   private readonly elementRef = inject(ElementRef<HTMLElement>);
-  private readonly provider = inject(ScNavbarProvider);
+  protected readonly provider = inject(ScNavbarProvider);
   readonly classInput = input<string>('', { alias: 'class' });
   readonly state = signal<ScNavbarMobileMenuState>('closed');
 

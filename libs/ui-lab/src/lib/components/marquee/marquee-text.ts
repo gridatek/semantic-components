@@ -9,6 +9,7 @@ import { cn } from '@semantic-components/ui';
     '[style.--text-duration]': 'duration() + "s"',
     '[attr.data-pause-on-hover]': 'pauseOnHover() || null',
     '[attr.data-reverse]': 'reverse() || null',
+    '[attr.data-paused]': 'paused() || null',
   },
 })
 export class ScMarqueeText {
@@ -16,6 +17,8 @@ export class ScMarqueeText {
   readonly duration = input<number>(20);
   readonly pauseOnHover = input<boolean>(true);
   readonly reverse = input<boolean>(false);
+  /** Stops the motion, e.g. from a pause button (WCAG 2.2.2). */
+  readonly paused = input<boolean>(false);
 
   protected readonly class = computed(() => cn('w-full', this.classInput()));
 }

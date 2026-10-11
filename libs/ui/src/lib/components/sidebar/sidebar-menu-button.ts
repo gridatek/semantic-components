@@ -1,6 +1,7 @@
-import { Directive, computed, input } from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { VariantProps, cva } from 'class-variance-authority';
 import { cn } from '../../utils';
+import { ScSidebarState } from './sidebar-state';
 
 const sidebarMenuButtonVariants = cva(
   'peer/menu-button group/menu-button flex w-full items-center gap-2 overflow-hidden rounded-md p-2 text-start text-sm ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pe-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-open:hover:bg-sidebar-accent data-open:hover:text-sidebar-accent-foreground data-active:bg-sidebar-accent data-active:font-medium data-active:text-sidebar-accent-foreground [&_svg]:size-4 [&_svg]:shrink-0 [&>span:last-child]:truncate',
@@ -34,6 +35,8 @@ export type ScSidebarMenuButtonVariants = VariantProps<
     '[class]': 'class()',
     '[attr.data-active]': 'isActive() || null',
     '[attr.data-size]': 'size()',
+    '[attr.aria-current]': 'isActive() ? "page" : null',
+    '[attr.title]': 'title()',
   },
 })
 export class ScSidebarMenuButton {
@@ -42,7 +45,15 @@ export class ScSidebarMenuButton {
   readonly variant = input<ScSidebarMenuButtonVariants['variant']>('default');
   readonly size = input<ScSidebarMenuButtonVariants['size']>('default');
   readonly isActive = input<boolean>(false);
+  /** Shown as a native tooltip while the sidebar is collapsed to icons. */
   readonly tooltip = input<string>();
+
+  private readonly state = inject(ScSidebarState, { optional: true });
+  protected readonly title = computed(() =>
+    this.state?.state() === 'collapsed' && !this.state.isMobile()
+      ? (this.tooltip() ?? null)
+      : null,
+  );
 
   protected readonly class = computed(() => {
     const size = this.size();

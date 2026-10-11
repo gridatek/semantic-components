@@ -17,6 +17,7 @@ export class ScStatCardLabel {
 
     return cn(
       'font-medium text-muted-foreground',
+      'group-data-[variant=filled]/stat-card:text-primary-foreground/80',
       size === 'sm' && 'text-xs',
       size === 'md' && 'text-sm',
       size === 'lg' && 'text-base',

@@ -1,5 +1,6 @@
 import {
   Component,
+  ElementRef,
   ViewEncapsulation,
   computed,
   inject,
@@ -18,7 +19,7 @@ import { ScNavbarProvider } from './navbar-provider';
     type: 'button',
     '[class]': 'class()',
     '[attr.aria-expanded]': 'isMobileMenuOpen()',
-    '[attr.aria-controls]': '"navbar-mobile-menu"',
+    '[attr.aria-controls]': 'provider.menuId',
     '(click)': 'toggleMenu()',
   },
   encapsulation: ViewEncapsulation.None,
@@ -28,6 +29,10 @@ export class ScNavbarMobileTrigger {
   readonly classInput = input<string>('', { alias: 'class' });
 
   readonly isMobileMenuOpen = this.provider.open;
+
+  constructor() {
+    this.provider.trigger.set(inject(ElementRef));
+  }
 
   protected readonly class = computed(() =>
     cn(

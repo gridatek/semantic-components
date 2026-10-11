@@ -44,9 +44,14 @@ import {
     SiXIcon,
   ],
   template: \`
+    <p id="basic-kanban-hint" class="text-muted-foreground mb-2 text-sm">
+      Drag cards, or focus one and press Alt + arrow keys to move it.
+    </p>
     <div class="bg-muted/10 h-[600px] overflow-hidden rounded-lg border">
       <div
         scKanbanBoard
+        aria-label="Project board"
+        aria-describedby="basic-kanban-hint"
         #board="scKanbanBoard"
         [(columns)]="columns"
         [(cards)]="cards"
@@ -141,9 +146,8 @@ import {
                         <div class="mb-2 flex flex-wrap gap-1">
                           @for (label of card.labels; track label.id) {
                             <span
-                              class="rounded px-1.5 py-0.5 text-xs font-medium"
-                              [style.background-color]="label.color + '20'"
-                              [style.color]="label.color"
+                              class="rounded bg-[color-mix(in_oklab,var(--label)_14%,transparent)] px-1.5 py-0.5 text-xs font-medium text-[color-mix(in_oklab,var(--label)_55%,black)] dark:text-[color-mix(in_oklab,var(--label)_55%,white)]"
+                              [style.--label]="label.color"
                             >
                               {{ label.text }}
                             </span>
@@ -175,7 +179,7 @@ import {
                           <div class="flex items-center gap-2">
                             @if (card.priority) {
                               <span [class]="c.priorityClass()">
-                                {{ c.priorityIcon() }}
+                                {{ c.priorityLabel() }}
                               </span>
                             }
                             @if (card.dueDate) {
@@ -201,7 +205,7 @@ import {
                       <!-- Delete button -->
                       <button
                         type="button"
-                        class="hover:bg-destructive/10 text-muted-foreground hover:text-destructive absolute top-2 right-2 rounded p-1 opacity-0 transition-opacity group-hover:opacity-100"
+                        class="hover:bg-destructive/10 text-muted-foreground hover:text-destructive absolute top-2 right-2 rounded p-1 opacity-0 transition-opacity group-focus-within:opacity-100 group-hover:opacity-100 focus-visible:opacity-100"
                         (click)="
                           $event.stopPropagation();
                           board.deleteCard(column.id, card)
@@ -276,7 +280,7 @@ import {
 
               @if (col.isOverLimit()) {
                 <div
-                  class="border-t bg-orange-500/10 px-3 py-1.5 text-xs text-orange-600 dark:text-orange-400"
+                  class="border-t bg-orange-500/10 px-3 py-1.5 text-xs text-orange-700 dark:text-orange-400"
                 >
                   Column limit exceeded ({{ col.columnCards().length }}/{{
                     column.limit

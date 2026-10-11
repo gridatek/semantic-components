@@ -35,6 +35,10 @@ export const SC_DATA_TABLE = new InjectionToken<ScDataTable<unknown>>(
   'SC_DATA_TABLE',
 );
 
+/**
+ * Table state: filtering, sorting, paging, column visibility and selection.
+ * Render `rows()` (the current page of filtered, sorted data).
+ */
 @Directive({
   selector: '[scDataTable]',
   exportAs: 'scDataTable',
@@ -51,7 +55,11 @@ export class ScDataTable<T> {
   readonly sorting = model<SortingState | null>(null);
   readonly columnVisibility = model<ColumnVisibilityState>({});
   readonly globalFilter = model<string>('');
-  readonly rowSelection = model<Set<number>>(new Set());
+  /** Selected rows (by identity), across all pages. */
+  readonly rowSelection = model<ReadonlySet<T>>(new Set());
+  readonly pageSize = model<number>(10);
+  /** Current page, 1-based. Clamped to `pageCount()` when read via `currentPage()`. */
+  readonly page = model<number>(1);
 
   readonly sortChange = output<SortingState | null>();
   readonly filterChange = output<string>();
@@ -104,6 +112,20 @@ export class ScDataTable<T> {
     });
   });
 
+  readonly pageCount = computed(() =>
+    Math.max(1, Math.ceil(this.sortedData().length / this.pageSize())),
+  );
+
+  readonly currentPage = computed(() =>
+    Math.min(Math.max(1, this.page()), this.pageCount()),
+  );
+
+  /** The rows to render: the current page of filtered, sorted data. */
+  readonly rows = computed(() => {
+    const start = (this.currentPage() - 1) * this.pageSize();
+    return this.sortedData().slice(start, start + this.pageSize());
+  });
+
   getCellValue(row: T, column: ColumnDef<T>): unknown {
     if (column.accessorFn) {
       return column.accessorFn(row);
@@ -112,6 +134,12 @@ export class ScDataTable<T> {
       return row[column.accessorKey];
     }
     return '';
+  }
+
+  setFilter(value: string): void {
+    this.globalFilter.set(value);
+    this.page.set(1);
+    this.filterChange.emit(value);
   }
 
   toggleSort(columnId: string): void {
@@ -131,6 +159,19 @@ export class ScDataTable<T> {
     this.sortChange.emit(this.sorting());
   }
 
+  goToPage(page: number): void {
+    this.page.set(Math.min(Math.max(1, page), this.pageCount()));
+  }
+
+  setPageSize(size: number): void {
+    this.pageSize.set(size);
+    this.page.set(1);
+  }
+
+  isColumnVisible(columnId: string): boolean {
+    return this.columnVisibility()[columnId] !== false;
+  }
+
   toggleColumnVisibility(columnId: string): void {
     const current = this.columnVisibility();
     const isVisible = current[columnId] !== false;
@@ -142,39 +183,38 @@ export class ScDataTable<T> {
     this.columnVisibility.set({ ...current, [columnId]: visible });
   }
 
-  toggleRowSelection(index: number): void {
+  isRowSelected(row: T): boolean {
+    return this.rowSelection().has(row);
+  }
+
+  toggleRowSelection(row: T): void {
     const selection = new Set(this.rowSelection());
-    if (selection.has(index)) {
-      selection.delete(index);
+    if (selection.has(row)) {
+      selection.delete(row);
     } else {
-      selection.add(index);
+      selection.add(row);
     }
     this.rowSelection.set(selection);
   }
 
+  /** Selects every row matching the filter, or clears the selection. */
   toggleAllRowSelection(): void {
-    const data = this.sortedData();
-    const selection = this.rowSelection();
-
-    if (selection.size === data.length) {
-      this.rowSelection.set(new Set());
-    } else {
-      this.rowSelection.set(new Set(data.map((_, i) => i)));
-    }
-  }
-
-  isRowSelected(index: number): boolean {
-    return this.rowSelection().has(index);
+    this.rowSelection.set(
+      this.isAllRowsSelected() ? new Set() : new Set(this.sortedData()),
+    );
   }
 
   isAllRowsSelected(): boolean {
     const data = this.sortedData();
-    return data.length > 0 && this.rowSelection().size === data.length;
+    const selection = this.rowSelection();
+    return data.length > 0 && data.every((row) => selection.has(row));
   }
 
   isSomeRowsSelected(): boolean {
     const selection = this.rowSelection();
-    const data = this.sortedData();
-    return selection.size > 0 && selection.size < data.length;
+    return (
+      this.sortedData().some((row) => selection.has(row)) &&
+      !this.isAllRowsSelected()
+    );
   }
 }

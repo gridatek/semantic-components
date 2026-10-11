@@ -85,8 +85,7 @@
     "description": "Scan barcodes using the camera.",
     "status": "Experimental",
     "library": "ui-lab",
-    "category": "Media",
-    "hidden": true
+    "category": "Media"
   },
   {
     "name": "Breadcrumb",
@@ -166,8 +165,7 @@
     "description": "A syntax-highlighted code editor.",
     "status": "Experimental",
     "library": "code",
-    "category": "Editor",
-    "hidden": true
+    "category": "Editor"
   },
   {
     "name": "Code Viewer",
@@ -239,8 +237,7 @@
     "description": "A countdown timer display.",
     "status": "Experimental",
     "library": "ui-lab",
-    "category": "Data Display",
-    "hidden": true
+    "category": "Data Display"
   },
   {
     "name": "Data Table",
@@ -248,8 +245,7 @@
     "description": "An advanced table with sorting and filtering.",
     "status": "Experimental",
     "library": "ui-lab",
-    "category": "Data Display",
-    "hidden": true
+    "category": "Data Display"
   },
   {
     "name": "Date Picker",
@@ -281,8 +277,7 @@
     "description": "Compare and display text differences.",
     "status": "Experimental",
     "library": "ui-lab",
-    "category": "Editor",
-    "hidden": true
+    "category": "Editor"
   },
   {
     "name": "Dock",
@@ -290,8 +285,7 @@
     "description": "macOS-style icon dock with magnification.",
     "status": "Experimental",
     "library": "ui-lab",
-    "category": "Advanced",
-    "hidden": true
+    "category": "Advanced"
   },
   {
     "name": "Drawer",
@@ -355,8 +349,7 @@
     "description": "Draw and markup on images.",
     "status": "Experimental",
     "library": "ui-lab",
-    "category": "Media",
-    "hidden": true
+    "category": "Media"
   },
   {
     "name": "Image Compare",
@@ -428,8 +421,7 @@
     "description": "A drag-and-drop task board.",
     "status": "Experimental",
     "library": "ui-lab",
-    "category": "Advanced",
-    "hidden": true
+    "category": "Advanced"
   },
   {
     "name": "Kbd",
@@ -453,8 +445,7 @@
     "description": "Switch between different languages.",
     "status": "Experimental",
     "library": "ui-lab",
-    "category": "Advanced",
-    "hidden": true
+    "category": "Advanced"
   },
   {
     "name": "Lightbox",
@@ -478,8 +469,7 @@
     "description": "A scrolling text or content animation.",
     "status": "Experimental",
     "library": "ui-lab",
-    "category": "Advanced",
-    "hidden": true
+    "category": "Advanced"
   },
   {
     "name": "Masonry Grid",
@@ -527,8 +517,7 @@
     "description": "A responsive navigation bar with mobile menu support.",
     "status": "Experimental",
     "library": "ui-lab",
-    "category": "Navigation",
-    "hidden": true
+    "category": "Navigation"
   },
   {
     "name": "Navigation Menu",
@@ -544,8 +533,7 @@
     "description": "A modal dialog built on the native HTML dialog element.",
     "status": "Experimental",
     "library": "ui-lab",
-    "category": "Feedback",
-    "hidden": true
+    "category": "Feedback"
   },
   {
     "name": "Native Select",
@@ -561,8 +549,7 @@
     "description": "Grouped notification management with filtering.",
     "status": "Experimental",
     "library": "ui-lab",
-    "category": "Advanced",
-    "hidden": true
+    "category": "Advanced"
   },
   {
     "name": "Number",
@@ -618,8 +605,7 @@
     "description": "An input for international phone numbers.",
     "status": "Experimental",
     "library": "ui-lab",
-    "category": "Forms",
-    "hidden": true
+    "category": "Forms"
   },
   {
     "name": "Popover",
@@ -723,8 +709,7 @@
     "description": "A collapsible side navigation panel.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Navigation",
-    "hidden": true
+    "category": "Navigation"
   },
   {
     "name": "Signature Pad",
@@ -764,8 +749,7 @@
     "description": "Floating action button with expandable menu.",
     "status": "Experimental",
     "library": "ui-lab",
-    "category": "Buttons & Actions",
-    "hidden": true
+    "category": "Buttons & Actions"
   },
   {
     "name": "Spinner",
@@ -781,8 +765,7 @@
     "description": "A spotlight search interface.",
     "status": "Experimental",
     "library": "ui-lab",
-    "category": "Overlay",
-    "hidden": true
+    "category": "Overlay"
   },
   {
     "name": "Stat Card",
@@ -790,8 +773,7 @@
     "description": "Statistics and metrics display.",
     "status": "Experimental",
     "library": "ui-lab",
-    "category": "Data Display",
-    "hidden": true
+    "category": "Data Display"
   },
   {
     "name": "Stepper",
@@ -871,8 +853,7 @@
     "description": "Displays events in chronological order.",
     "status": "Experimental",
     "library": "ui-lab",
-    "category": "Data Display",
-    "hidden": true
+    "category": "Data Display"
   },
   {
     "name": "Toast",
@@ -920,8 +901,7 @@
     "description": "Create interactive product tours.",
     "status": "Experimental",
     "library": "ui-lab",
-    "category": "Advanced",
-    "hidden": true
+    "category": "Advanced"
   },
   {
     "name": "Transfer List",

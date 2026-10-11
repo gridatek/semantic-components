@@ -10,5 +10,7 @@ import { cn } from '@semantic-components/ui';
 export class ScDiffViewerSplit {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => cn('flex', this.classInput()));
+  protected readonly class = computed(() =>
+    cn('flex w-max min-w-full', this.classInput()),
+  );
 }

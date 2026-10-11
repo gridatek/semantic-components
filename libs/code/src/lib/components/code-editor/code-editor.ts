@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, computed, input } from '@angular/core';
+﻿import { Component, ViewEncapsulation, computed, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
 @Component({
@@ -16,7 +16,7 @@ export class ScCodeEditor {
 
   protected readonly class = computed(() =>
     cn(
-      'overflow-hidden rounded-lg border border-border bg-muted focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2',
+      'w-full overflow-hidden rounded-lg border border-border bg-background focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2',
       this.classInput(),
     ),
   );

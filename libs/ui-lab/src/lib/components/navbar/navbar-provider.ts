@@ -1,5 +1,7 @@
+import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   Component,
+  ElementRef,
   ViewEncapsulation,
   computed,
   contentChild,
@@ -45,6 +47,12 @@ export class ScNavbarProvider {
 
   protected readonly class = computed(() => cn('', this.classInput()));
 
+  /** Id of the mobile menu, referenced by the trigger's `aria-controls`. */
+  readonly menuId = inject(_IdGenerator).getId('sc-navbar-mobile-menu-');
+
+  /** The mobile trigger, registered by `ScNavbarMobileTrigger`. */
+  readonly trigger = signal<ElementRef<HTMLElement> | undefined>(undefined);
+
   private readonly navbar = contentChild(ScNavbar);
   readonly origin = computed(() => this.navbar()?.overlayOrigin);
 
@@ -69,6 +77,12 @@ export class ScNavbarProvider {
       // Note: When closing (open = false), overlayOpen stays true
       // until animation completes (handled by onMenuAnimationComplete)
     });
+  }
+
+  /** Closes the mobile menu and returns focus to its trigger (Escape). */
+  closeAndRestoreFocus(): void {
+    this.open.set(false);
+    this.trigger()?.nativeElement.focus();
   }
 
   /**

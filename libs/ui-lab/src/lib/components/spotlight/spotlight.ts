@@ -1,7 +1,9 @@
+import { FocusTrap, FocusTrapFactory } from '@angular/cdk/a11y';
 import {
   Directive,
   ElementRef,
   computed,
+  contentChild,
   effect,
   inject,
   input,
@@ -9,7 +11,9 @@ import {
   untracked,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
+import { ScSpotlightDescription } from './spotlight-description';
 import { ScSpotlightState } from './spotlight-state';
+import { ScSpotlightTitle } from './spotlight-title';
 
 export interface SpotlightOptions {
   target: string | Element;
@@ -33,6 +37,9 @@ export interface SpotlightOptions {
     tabindex: '-1',
     role: 'dialog',
     'aria-modal': 'true',
+    '[attr.aria-labelledby]': 'title() ? state.titleId : null',
+    '[attr.aria-describedby]': 'description() ? state.descriptionId : null',
+    '[attr.aria-label]': 'title() ? null : ariaLabel()',
     '(click)': 'onOverlayClick($event)',
     '(keydown)': 'onKeydown($event)',
     '(window:resize)': 'state.updateTargetRect()',
@@ -41,6 +48,8 @@ export interface SpotlightOptions {
 })
 export class ScSpotlight {
   readonly classInput = input<string>('', { alias: 'class' });
+  /** Name of the dialog when it has no `scSpotlightTitle`. */
+  readonly ariaLabel = input<string>('Spotlight', { alias: 'aria-label' });
 
   readonly target = input<string | Element | null>(null);
   readonly padding = input(8);
@@ -61,6 +70,17 @@ export class ScSpotlight {
 
   readonly state = inject(ScSpotlightState);
   private readonly elementRef = inject(ElementRef<HTMLDivElement>);
+  private readonly focusTrapFactory = inject(FocusTrapFactory);
+  private focusTrap: FocusTrap | null = null;
+  /** Element focused before opening; focus returns to it on close. */
+  private returnFocus: HTMLElement | null = null;
+
+  protected readonly title = contentChild(ScSpotlightTitle, {
+    descendants: true,
+  });
+  protected readonly description = contentChild(ScSpotlightDescription, {
+    descendants: true,
+  });
 
   readonly isActive = this.state.isActive;
   readonly targetRect = this.state.targetRect;
@@ -102,12 +122,27 @@ export class ScSpotlight {
     });
 
     this.state.onOpened = () => {
+      this.returnFocus = document.activeElement as HTMLElement | null;
       this.opened.emit();
       setTimeout(() => {
+        // Keep Tab inside the spotlight while it is open (it is modal).
+        this.focusTrap ??= this.focusTrapFactory.create(
+          this.elementRef.nativeElement,
+        );
         this.elementRef.nativeElement.focus();
       });
     };
-    this.state.onClosed = () => this.closed.emit();
+    this.state.onClosed = () => {
+      this.focusTrap?.destroy();
+      this.focusTrap = null;
+      const host = this.elementRef.nativeElement;
+      const active = document.activeElement;
+      if (!active || active === document.body || host.contains(active)) {
+        this.returnFocus?.focus();
+      }
+      this.returnFocus = null;
+      this.closed.emit();
+    };
   }
 
   show(target: string | Element): void {

@@ -17,9 +17,10 @@ export class ScStatCardChange {
 
     return cn(
       'inline-flex items-center gap-1 text-xs font-medium',
-      trend === 'up' && 'text-green-600',
-      trend === 'down' && 'text-red-600',
+      trend === 'up' && 'text-green-700 dark:text-green-400',
+      trend === 'down' && 'text-red-700 dark:text-red-400',
       trend === 'neutral' && 'text-muted-foreground',
+      'group-data-[variant=filled]/stat-card:text-primary-foreground',
       this.classInput(),
     );
   });

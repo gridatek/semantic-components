@@ -66,7 +66,8 @@ export class ScDiffViewer {
   });
 
   getLineClass(type: string): string {
-    const baseClass = 'flex items-start leading-6 min-h-6';
+    const baseClass =
+      'group/line flex h-6 items-start whitespace-nowrap leading-6';
 
     switch (type) {
       case 'added':

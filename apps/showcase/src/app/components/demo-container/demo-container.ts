@@ -1,4 +1,16 @@
-import { Component, ViewEncapsulation, inject, input } from '@angular/core';
+﻿import {
+  Component,
+  ElementRef,
+  ViewEncapsulation,
+  booleanAttribute,
+  computed,
+  effect,
+  inject,
+  input,
+  signal,
+  viewChild,
+} from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import {
   ScCodeViewer,
   ScCodeViewerContent,
@@ -71,13 +83,32 @@ import { TocHeading } from '../toc/toc-heading';
           <button scTab value="code">Code</button>
         </div>
 
-        <div
-          scTabPanel
-          value="preview"
-          class="flex min-h-40 items-center justify-center rounded-md border p-6"
-        >
+        <div scTabPanel value="preview" [class]="previewClass()">
           <ng-template scTabContent>
-            <ng-content />
+            @if (framed()) {
+              <!--
+                Full-page demos (e.g. a sidebar layout) run in their own
+                viewport, at desktop width, scaled down to fit the panel.
+              -->
+              <div
+                #frameBox
+                class="relative mx-auto overflow-hidden"
+                [style.height.px]="frameHeight()"
+                [style.max-width.px]="frameWidth()"
+              >
+                <iframe
+                  class="absolute top-0 left-0 origin-top-left"
+                  [style.width.px]="frameWidth()"
+                  [style.height.px]="frameHeight() / frameScale()"
+                  [style.transform]="'scale(' + frameScale() + ')'"
+                  [src]="frameSrc()"
+                  [title]="title() + ' demo'"
+                  loading="lazy"
+                ></iframe>
+              </div>
+            } @else {
+              <ng-content />
+            }
           </ng-template>
         </div>
 
@@ -126,6 +157,44 @@ export class DemoContainer {
   readonly demoUrl = input<string>('');
   readonly code = input.required<string>();
   readonly language = input<ScCodeViewerLanguage>('angular-ts');
+  /**
+   * Render the preview as an iframe of `demoUrl` instead of projected
+   * content. For demos that take over the viewport (fixed positioning, global
+   * shortcuts); the container then projects no demo element.
+   */
+  readonly framed = input(false, { transform: booleanAttribute });
+
+  private readonly sanitizer = inject(DomSanitizer);
+  protected readonly frameSrc = computed(() =>
+    // Same-origin route of this showcase, never user input.
+    this.sanitizer.bypassSecurityTrustResourceUrl(this.demoUrl()),
+  );
+  /** Viewport width a framed demo is laid out at (default: above the md breakpoint). */
+  readonly frameWidth = input(1024);
+  /** Visible height of a framed demo, in px. */
+  readonly frameHeight = input(560);
+  protected readonly frameScale = signal(1);
+  private readonly frameBox = viewChild<ElementRef<HTMLElement>>('frameBox');
+
+  constructor() {
+    effect((onCleanup) => {
+      const box = this.frameBox()?.nativeElement;
+      if (!box) return;
+      const observer = new ResizeObserver(([entry]) =>
+        this.frameScale.set(
+          Math.min(1, entry.contentRect.width / this.frameWidth()),
+        ),
+      );
+      observer.observe(box);
+      onCleanup(() => observer.disconnect());
+    });
+  }
+
+  protected readonly previewClass = computed(() =>
+    this.framed()
+      ? 'overflow-hidden rounded-md border'
+      : 'flex min-h-40 items-center justify-center rounded-md border p-6',
+  );
 
   protected readonly devMode = this.config.devMode;
 }

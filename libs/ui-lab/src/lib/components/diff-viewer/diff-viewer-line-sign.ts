@@ -11,6 +11,6 @@ export class ScDiffViewerLineSign {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('inline-block w-6 text-center select-none', this.classInput()),
+    cn('inline-block w-6 shrink-0 text-center select-none', this.classInput()),
   );
 }

@@ -6,6 +6,7 @@ import { SC_DIFF_VIEWER } from './diff-viewer';
   selector: 'div[scDiffViewerLine]',
   host: {
     '[class]': 'class()',
+    '[attr.data-type]': 'type()',
   },
 })
 export class ScDiffViewerLine {

@@ -39,6 +39,12 @@ export class ScSidebarProvider implements OnInit, OnDestroy {
   // Two-way binding support
   readonly open = model<boolean>(true);
 
+  /**
+   * localStorage key the open state is persisted under. Give each independent
+   * sidebar its own key; `null` disables persistence.
+   */
+  readonly storageKey = input<string | null>(SIDEBAR_STORAGE_KEY);
+
   protected readonly class = computed(() =>
     cn(
       'group/sidebar-wrapper flex min-h-svh w-full has-data-[variant=inset]:bg-sidebar',
@@ -109,8 +115,10 @@ export class ScSidebarProvider implements OnInit, OnDestroy {
   }
 
   private saveToStorage(open: boolean): void {
+    const key = this.storageKey();
+    if (!key) return;
     try {
-      localStorage.setItem(SIDEBAR_STORAGE_KEY, String(open));
+      localStorage.setItem(key, String(open));
     } catch (error) {
       // localStorage unavailable
       console.warn('Unable to save sidebar state to localStorage:', error);
@@ -118,8 +126,10 @@ export class ScSidebarProvider implements OnInit, OnDestroy {
   }
 
   private loadFromStorage(): boolean | null {
+    const key = this.storageKey();
+    if (!key) return null;
     try {
-      const value = localStorage.getItem(SIDEBAR_STORAGE_KEY);
+      const value = localStorage.getItem(key);
       return value !== null ? value === 'true' : null;
     } catch (error) {
       console.warn('Unable to load sidebar state from localStorage:', error);

@@ -1,4 +1,4 @@
-import { Directive, computed, inject, input, output } from '@angular/core';
+﻿import { Directive, computed, inject, input, output } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { SC_KANBAN_BOARD } from './kanban-board';
 import type { KanbanCard } from './kanban-types';
@@ -14,6 +14,7 @@ import type { KanbanCard } from './kanban-types';
     '(dragend)': 'onDragEnd($event)',
     role: 'listitem',
     '[attr.aria-label]': 'card().title',
+    '[attr.data-card-id]': 'card().id',
     tabindex: '0',
     '(keydown)': 'onKeyDown($event)',
   },
@@ -26,7 +27,7 @@ export class ScKanbanCard {
     cn(
       'group relative p-3 bg-card border rounded-lg shadow-sm cursor-grab active:cursor-grabbing block',
       'hover:border-primary/50 hover:shadow-md transition-all',
-      'focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2',
+      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
       this.board.disabled() && 'opacity-50 cursor-not-allowed',
       this.classInput(),
     ),
@@ -41,13 +42,13 @@ export class ScKanbanCard {
 
     switch (priority) {
       case 'urgent':
-        return cn(base, 'text-red-600 dark:text-red-400');
+        return cn(base, 'text-red-700 dark:text-red-400');
       case 'high':
-        return cn(base, 'text-orange-600 dark:text-orange-400');
+        return cn(base, 'text-orange-700 dark:text-orange-400');
       case 'medium':
-        return cn(base, 'text-yellow-600 dark:text-yellow-400');
+        return cn(base, 'text-yellow-800 dark:text-yellow-400');
       case 'low':
-        return cn(base, 'text-green-600 dark:text-green-400');
+        return cn(base, 'text-green-700 dark:text-green-400');
       default:
         return base;
     }
@@ -64,27 +65,17 @@ export class ScKanbanCard {
     );
 
     if (diffDays < 0) {
-      return 'text-red-600 dark:text-red-400';
+      return 'text-red-700 dark:text-red-400';
     } else if (diffDays <= 2) {
-      return 'text-orange-600 dark:text-orange-400';
+      return 'text-orange-700 dark:text-orange-400';
     }
     return 'text-muted-foreground';
   });
 
-  priorityIcon(): string {
+  /** Priority as text ("Urgent", "High"â€¦), readable by everyone. */
+  priorityLabel(): string {
     const priority = this.card().priority;
-    switch (priority) {
-      case 'urgent':
-        return '!!!';
-      case 'high':
-        return '!!';
-      case 'medium':
-        return '!';
-      case 'low':
-        return '-';
-      default:
-        return '';
-    }
+    return priority ? priority[0].toUpperCase() + priority.slice(1) : '';
   }
 
   formatDate(date: Date): string {
@@ -104,7 +95,7 @@ export class ScKanbanCard {
       'application/json',
       JSON.stringify(this.card()),
     );
-    event.dataTransfer!.effectAllowed = 'move';
+    if (event.dataTransfer) event.dataTransfer.effectAllowed = 'move';
 
     const target = event.target as HTMLElement;
     requestAnimationFrame(() => {
@@ -118,6 +109,25 @@ export class ScKanbanCard {
   }
 
   onKeyDown(event: KeyboardEvent): void {
+    // Keys from controls inside the card (e.g. its delete button) are theirs.
+    if (event.target !== event.currentTarget) return;
+
+    if (event.altKey) {
+      const direction = (
+        {
+          ArrowLeft: 'left',
+          ArrowRight: 'right',
+          ArrowUp: 'up',
+          ArrowDown: 'down',
+        } as const
+      )[event.key];
+      if (direction) {
+        event.preventDefault();
+        this.board.moveCardByKeyboard(this.card(), direction);
+      }
+      return;
+    }
+
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
       this.cardClick.emit(this.card());

@@ -1,10 +1,11 @@
-import { Directive, computed, input } from '@angular/core';
+﻿import { Directive, computed, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
 @Directive({
   selector: 'a[scNavbarMobileLink], button[scNavbarMobileLink]',
   host: {
     '[class]': 'class()',
+    '[attr.aria-current]': 'active() ? "page" : null',
   },
 })
 export class ScNavbarMobileLink {

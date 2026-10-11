@@ -31,7 +31,7 @@ import type { Notification, NotificationAction } from './notification-types';
     @if (!notification().read) {
       <div
         class="bg-primary absolute start-2 top-1/2 h-2 w-2 -translate-y-1/2 rounded-full"
-        aria-label="Unread"
+        aria-hidden="true"
       ></div>
     }
 
@@ -77,6 +77,9 @@ import type { Notification, NotificationAction } from './notification-types';
           class="text-foreground truncate text-sm font-medium"
           [class.font-semibold]="!notification().read"
         >
+          @if (!notification().read) {
+            <span class="sr-only">Unread:</span>
+          }
           {{ notification().title }}
         </p>
         <span class="text-muted-foreground text-xs whitespace-nowrap">
@@ -106,7 +109,7 @@ import type { Notification, NotificationAction } from './notification-types';
     @if (showDismiss()) {
       <button
         type="button"
-        class="hover:bg-muted text-muted-foreground hover:text-foreground ms-2 shrink-0 rounded-full p-1 opacity-0 transition-all group-hover:opacity-100"
+        class="hover:bg-muted text-muted-foreground hover:text-foreground ms-2 shrink-0 rounded-full p-1 opacity-0 transition-all group-focus-within:opacity-100 group-hover:opacity-100 focus-visible:opacity-100"
         (click)="onDismiss($event)"
         aria-label="Dismiss notification"
       >
@@ -120,8 +123,8 @@ import type { Notification, NotificationAction } from './notification-types';
     '[attr.aria-label]': 'notification().title',
     tabindex: '0',
     '(click)': 'onItemClick()',
-    '(keydown.enter)': 'onItemClick()',
-    '(keydown.space)': 'onItemClick(); $event.preventDefault()',
+    '(keydown.enter)': 'onItemKey($event)',
+    '(keydown.space)': 'onItemKey($event)',
   },
   encapsulation: ViewEncapsulation.None,
 })
@@ -186,6 +189,13 @@ export class ScNotificationItem {
     } else {
       return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
     }
+  }
+
+  /** Enter/Space on the item itself — not on its own buttons. */
+  protected onItemKey(event: Event): void {
+    if (event.target !== event.currentTarget) return;
+    event.preventDefault();
+    this.onItemClick();
   }
 
   protected onItemClick(): void {

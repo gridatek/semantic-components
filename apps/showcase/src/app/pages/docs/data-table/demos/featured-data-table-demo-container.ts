@@ -14,7 +14,7 @@ import { FeaturedDataTableDemo } from './featured-data-table-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class FeaturedDataTableDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScCheckbox, ScCheckboxField } from '@semantic-components/ui';
 import {
   ColumnDef,
@@ -155,7 +155,14 @@ const SAMPLE_DATA: User[] = [
     SiEllipsisIcon,
   ],
   template: \`
-    <div scDataTable [data]="data" [columns]="columns" class="w-full max-w-4xl">
+    <div
+      scDataTable
+      #table="scDataTable"
+      [data]="data"
+      [columns]="columns"
+      [pageSize]="5"
+      class="w-full max-w-4xl"
+    >
       <div class="flex items-center justify-between py-4">
         <input
           scDataTableFilter
@@ -174,9 +181,10 @@ const SAMPLE_DATA: User[] = [
                   <input
                     type="checkbox"
                     scCheckbox
-                    [checked]="isAllSelected()"
-                    [indeterminate]="isSomeSelected()"
-                    (checkedChange)="toggleAllSelection()"
+                    [checked]="table.isAllRowsSelected()"
+                    [indeterminate]="table.isSomeRowsSelected()"
+                    aria-label="Select all rows"
+                    (checkedChange)="table.toggleAllRowSelection()"
                   />
                 </label>
               </th>
@@ -193,24 +201,24 @@ const SAMPLE_DATA: User[] = [
             </tr>
           </thead>
           <tbody scDataTableBody>
-            @for (row of paginatedData(); track row.id) {
-              <tr
-                scDataTableRow
-                [selected]="rowSelection().has(getRowIndex(row))"
-              >
+            @for (row of table.rows(); track row.id) {
+              <tr scDataTableRow [selected]="table.isRowSelected(row)">
                 <td scDataTableCell>
                   <label scCheckboxField>
                     <input
                       type="checkbox"
                       scCheckbox
-                      [checked]="rowSelection().has(getRowIndex(row))"
-                      (checkedChange)="toggleRowSelection(getRowIndex(row))"
+                      [checked]="table.isRowSelected(row)"
+                      [attr.aria-label]="'Select ' + row.name"
+                      (checkedChange)="table.toggleRowSelection(row)"
                     />
                   </label>
                 </td>
-                <td scDataTableCell class="font-medium">{{ row.name }}</td>
-                <td scDataTableCell>{{ row.email }}</td>
-                <td scDataTableCell>
+                <td scDataTableCell columnId="name" class="font-medium">
+                  {{ row.name }}
+                </td>
+                <td scDataTableCell columnId="email">{{ row.email }}</td>
+                <td scDataTableCell columnId="role">
                   <span
                     class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset"
                     [class]="getRoleBadgeClass(row.role)"
@@ -218,7 +226,7 @@ const SAMPLE_DATA: User[] = [
                     {{ row.role }}
                   </span>
                 </td>
-                <td scDataTableCell>
+                <td scDataTableCell columnId="status">
                   <span
                     class="inline-flex items-center gap-1 rounded-full px-2 py-1 text-xs font-medium"
                     [class]="getStatusBadgeClass(row.status)"
@@ -230,11 +238,14 @@ const SAMPLE_DATA: User[] = [
                     {{ row.status }}
                   </span>
                 </td>
-                <td scDataTableCell>{{ formatDate(row.createdAt) }}</td>
+                <td scDataTableCell columnId="createdAt">
+                  {{ formatDate(row.createdAt) }}
+                </td>
                 <td scDataTableCell>
                   <button
                     type="button"
                     class="hover:bg-muted inline-flex size-8 items-center justify-center rounded-md"
+                    [attr.aria-label]="'Actions for ' + row.name"
                   >
                     <svg siEllipsisIcon class="size-4"></svg>
                   </button>
@@ -251,11 +262,7 @@ const SAMPLE_DATA: User[] = [
         </table>
       </div>
 
-      <div
-        scDataTablePagination
-        [(pageSize)]="pageSize"
-        [(currentPage)]="currentPage"
-      ></div>
+      <div scDataTablePagination [pageSizes]="[5, 10, 20]"></div>
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },
@@ -281,49 +288,6 @@ export class FeaturedDataTableDemo {
       enableSorting: true,
     },
   ];
-
-  readonly rowSelection = signal<Set<number>>(new Set());
-  readonly pageSize = signal(5);
-  readonly currentPage = signal(1);
-
-  readonly paginatedData = computed(() => {
-    const start = (this.currentPage() - 1) * this.pageSize();
-    const end = start + this.pageSize();
-    return this.data.slice(start, end);
-  });
-
-  getRowIndex(row: User): number {
-    return this.data.findIndex((r) => r.id === row.id);
-  }
-
-  isAllSelected(): boolean {
-    return (
-      this.data.length > 0 && this.rowSelection().size === this.data.length
-    );
-  }
-
-  isSomeSelected(): boolean {
-    const size = this.rowSelection().size;
-    return size > 0 && size < this.data.length;
-  }
-
-  toggleAllSelection(): void {
-    if (this.isAllSelected()) {
-      this.rowSelection.set(new Set());
-    } else {
-      this.rowSelection.set(new Set(this.data.map((_, i) => i)));
-    }
-  }
-
-  toggleRowSelection(index: number): void {
-    const selection = new Set(this.rowSelection());
-    if (selection.has(index)) {
-      selection.delete(index);
-    } else {
-      selection.add(index);
-    }
-    this.rowSelection.set(selection);
-  }
 
   getRoleBadgeClass(role: string): string {
     switch (role) {

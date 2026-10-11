@@ -57,10 +57,10 @@ import {
         </div>
         <div class="flex items-center gap-4">
           <div class="flex items-center gap-3 text-sm">
-            <span class="text-green-600 dark:text-green-400">
+            <span class="text-green-700 dark:text-green-400">
               +{{ diff.diffResult().additions }}
             </span>
-            <span class="text-red-600 dark:text-red-400">
+            <span class="text-red-700 dark:text-red-400">
               -{{ diff.diffResult().deletions }}
             </span>
           </div>
@@ -139,10 +139,10 @@ import {
                 <span scDiffViewerLineSign class="font-bold">
                   @switch (line.type) {
                     @case ('added') {
-                      <span class="text-green-600 dark:text-green-400">+</span>
+                      <span class="text-green-700 dark:text-green-400">+</span>
                     }
                     @case ('removed') {
-                      <span class="text-red-600 dark:text-red-400">-</span>
+                      <span class="text-red-700 dark:text-red-400">-</span>
                     }
                     @default {}
                   }

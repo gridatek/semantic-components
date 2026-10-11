@@ -11,9 +11,14 @@ import {
   selector: 'app-minimal-kanban-board-demo',
   imports: [ScKanbanBoard, ScKanbanColumn, ScKanbanCard],
   template: `
+    <p id="minimal-kanban-hint" class="text-muted-foreground mb-2 text-sm">
+      Drag cards, or focus one and press Alt + arrow keys to move it.
+    </p>
     <div class="bg-muted/10 h-[400px] overflow-hidden rounded-lg border">
       <div
         scKanbanBoard
+        aria-label="Minimal board"
+        aria-describedby="minimal-kanban-hint"
         #board="scKanbanBoard"
         [(columns)]="columns"
         [(cards)]="cards"

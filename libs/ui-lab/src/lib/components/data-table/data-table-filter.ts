@@ -37,6 +37,6 @@ export class ScDataTableFilter {
 
   onInput(event: Event): void {
     const value = (event.target as HTMLInputElement).value;
-    this.table.globalFilter.set(value);
+    this.table.setFilter(value);
   }
 }

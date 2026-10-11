@@ -6,6 +6,7 @@ import type { StatCardSize, StatCardVariant } from './stat-card-types';
   selector: '[scStatCard]',
   host: {
     '[class]': 'class()',
+    '[attr.data-variant]': 'variant()',
   },
 })
 export class ScStatCard {
@@ -18,7 +19,7 @@ export class ScStatCard {
     const size = this.size();
 
     return cn(
-      'rounded-lg transition-colors',
+      'group/stat-card rounded-lg transition-colors',
       // Variants
       variant === 'default' && 'border bg-card text-card-foreground',
       variant === 'outline' && 'border-2 bg-transparent',

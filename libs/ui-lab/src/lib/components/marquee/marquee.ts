@@ -11,6 +11,7 @@ import { cn } from '@semantic-components/ui';
     '[attr.data-direction]': 'direction()',
     '[attr.data-pause-on-hover]': 'pauseOnHover() || null',
     '[attr.data-reverse]': 'reverse() || null',
+    '[attr.data-paused]': 'paused() || null',
   },
 })
 export class ScMarquee {
@@ -20,6 +21,8 @@ export class ScMarquee {
   readonly gap = input<number>(16);
   readonly pauseOnHover = input<boolean>(true);
   readonly reverse = input<boolean>(false);
+  /** Stops the motion, e.g. from a pause button (WCAG 2.2.2). */
+  readonly paused = input<boolean>(false);
 
   protected readonly class = computed(() => cn(this.classInput()));
 }

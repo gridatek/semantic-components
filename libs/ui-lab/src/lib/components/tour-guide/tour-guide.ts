@@ -1,7 +1,13 @@
+﻿import { FocusTrap, FocusTrapFactory } from '@angular/cdk/a11y';
 import {
+  DestroyRef,
   Directive,
   DoCheck,
+  ElementRef,
+  Injector,
+  afterNextRender,
   computed,
+  effect,
   inject,
   input,
   output,
@@ -28,6 +34,8 @@ export class ScTourGuide implements DoCheck {
 
   readonly state = inject(ScTourGuideState);
   private readonly tourService = inject(TourService);
+  private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly injector = inject(Injector);
 
   readonly stepChange = output<number>();
   readonly tourComplete = output<void>();
@@ -49,6 +57,35 @@ export class ScTourGuide implements DoCheck {
     this.state.onStepChange = (step) => this.stepChange.emit(step);
     this.state.onTourComplete = () => this.tourComplete.emit();
     this.state.onTourClosed = () => this.tourClosed.emit();
+
+    // Modal while it runs: trap Tab inside, move focus to each step's dialog
+    // (so it is announced), and give focus back when the tour ends.
+    const host = this.elementRef.nativeElement;
+    const returnFocus = document.activeElement as HTMLElement | null;
+    // The trap's anchors go next to the host, so create it once it is attached.
+    const focusTrapFactory = inject(FocusTrapFactory);
+    let focusTrap: FocusTrap | undefined;
+    afterNextRender(() => (focusTrap = focusTrapFactory.create(host)));
+    effect(() => {
+      this.state.currentStep();
+      afterNextRender(
+        () =>
+          (host.querySelector<HTMLElement>('[role=dialog]') ?? host).focus(),
+        { injector: this.injector },
+      );
+    });
+    inject(DestroyRef).onDestroy(() => {
+      focusTrap?.destroy();
+      const active = document.activeElement;
+      if (
+        !active ||
+        active === document.body ||
+        !active.isConnected ||
+        host.contains(active)
+      ) {
+        returnFocus?.focus();
+      }
+    });
   }
 
   ngDoCheck(): void {
@@ -68,7 +105,11 @@ export class ScTourGuide implements DoCheck {
       this.state.close();
       event.preventDefault();
     } else if (this.state.allowKeyboard()) {
-      if (event.key === 'ArrowRight' || event.key === 'Enter') {
+      // Enter is the step's own when focus is on one of its buttons.
+      const onControl = (event.target as HTMLElement).closest(
+        'button, a, input, select, textarea',
+      );
+      if (event.key === 'ArrowRight' || (event.key === 'Enter' && !onControl)) {
         if (this.state.isLastStep()) {
           this.state.finish();
         } else {

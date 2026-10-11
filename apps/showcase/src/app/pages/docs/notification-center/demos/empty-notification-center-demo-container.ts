@@ -31,6 +31,7 @@ import {
   template: \`
     <div
       scNotificationCenter
+      aria-label="Empty notifications"
       [(notifications)]="notifications"
       emptyTitle="All caught up!"
       emptyDescription="No new notifications to show."

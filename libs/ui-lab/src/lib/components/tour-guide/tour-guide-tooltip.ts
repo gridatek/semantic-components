@@ -9,6 +9,7 @@ import { ScTourGuideState } from './tour-guide-state';
     '[style]': 'state.tooltipStyle()',
     role: 'dialog',
     'aria-modal': 'true',
+    tabindex: '-1',
     '[attr.aria-label]': 'state.currentStep()?.title',
   },
 })
@@ -19,7 +20,7 @@ export class ScTourGuideTooltip {
 
   protected readonly class = computed(() =>
     cn(
-      'bg-popover text-popover-foreground absolute z-10 w-80 rounded-lg border p-4 shadow-lg',
+      'bg-popover text-popover-foreground absolute z-10 w-80 rounded-lg border p-4 shadow-lg outline-none',
       'animate-in fade-in-0 zoom-in-95 duration-200',
       this.classInput(),
     ),

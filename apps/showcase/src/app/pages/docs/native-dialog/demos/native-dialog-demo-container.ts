@@ -18,7 +18,7 @@ import { NativeDialogDemo } from './native-dialog-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class NativeDialogDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  readonly code = `﻿import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScButton, ScInput, ScLabel } from '@semantic-components/ui';
 import {
   ScNativeDialog,
@@ -72,12 +72,24 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
           </div>
           <div scNativeDialogBody class="grid gap-4">
             <div class="grid grid-cols-4 items-center gap-4">
-              <label scLabel class="text-right">Name</label>
-              <input scInput class="col-span-3" value="Pedro Duarte" />
+              <label scLabel for="profile-name" class="text-right">Name</label>
+              <input
+                scInput
+                id="profile-name"
+                class="col-span-3"
+                value="Pedro Duarte"
+              />
             </div>
             <div class="grid grid-cols-4 items-center gap-4">
-              <label scLabel class="text-right">Username</label>
-              <input scInput class="col-span-3" value="@peduarte" />
+              <label scLabel for="profile-username" class="text-right">
+                Username
+              </label>
+              <input
+                scInput
+                id="profile-username"
+                class="col-span-3"
+                value="@peduarte"
+              />
             </div>
           </div>
           <div scNativeDialogFooter>

@@ -45,7 +45,7 @@ Directive-based drag-and-drop task board. Directives provide behavior and stylin
   <h4>{{ card.title }}</h4>
 
   @if (card.priority) {
-  <span [class]="c.priorityClass()">{{ c.priorityIcon() }}</span>
+  <span [class]="c.priorityClass()">{{ c.priorityLabel() }}</span>
   } @if (card.dueDate) {
   <span [class]="c.dueDateClass()">{{ c.formatDate(card.dueDate) }}</span>
   }
@@ -92,12 +92,14 @@ Directive-based drag-and-drop task board. Directives provide behavior and stylin
 
 #### Inputs
 
-| Input      | Type             | Default | Description                                       |
-| ---------- | ---------------- | ------- | ------------------------------------------------- |
-| `columns`  | `KanbanColumn[]` | `[]`    | Array of columns (two-way binding with `model()`) |
-| `cards`    | `KanbanCard[]`   | `[]`    | Array of cards (two-way binding with `model()`)   |
-| `disabled` | `boolean`        | `false` | Disable all drag and drop interactions            |
-| `class`    | `string`         | `''`    | Additional CSS classes                            |
+| Input              | Type             | Default          | Description                                       |
+| ------------------ | ---------------- | ---------------- | ------------------------------------------------- |
+| `columns`          | `KanbanColumn[]` | `[]`             | Array of columns (two-way binding with `model()`) |
+| `cards`            | `KanbanCard[]`   | `[]`             | Array of cards (two-way binding with `model()`)   |
+| `disabled`         | `boolean`        | `false`          | Disable all drag and drop interactions            |
+| `aria-label`       | `string`         | `'Kanban board'` | Name of the board region                          |
+| `aria-describedby` | `string \| null` | `null`           | Id of a hint for the keyboard moves               |
+| `class`            | `string`         | `''`             | Additional CSS classes                            |
 
 #### Outputs
 
@@ -121,6 +123,8 @@ Directive-based drag-and-drop task board. Directives provide behavior and stylin
 | `deleteCard(columnId, card)`          | `void`           | Delete a card                  |
 | `addColumn(title)`                    | `void`           | Add a new column               |
 | `collapseColumn(columnId, collapsed)` | `void`           | Collapse/expand a column       |
+
+Keyboard: `moveCardByKeyboard(card, 'left' | 'right' | 'up' | 'down')` moves a card, announces it and keeps focus on it (cards call it on Alt + arrow keys).
 
 ### ScKanbanColumn (`[scKanbanColumn]`)
 
@@ -160,13 +164,13 @@ Directive-based drag-and-drop task board. Directives provide behavior and stylin
 
 #### Public API
 
-| Property/Method    | Returns         | Description                    |
-| ------------------ | --------------- | ------------------------------ |
-| `board`            | `ScKanbanBoard` | Reference to parent board      |
-| `priorityClass()`  | `string`        | CSS class for priority display |
-| `dueDateClass()`   | `string`        | CSS class for due date display |
-| `priorityIcon()`   | `string`        | Text icon for priority         |
-| `formatDate(date)` | `string`        | Format date as "Mon DD"        |
+| Property/Method    | Returns         | Description                          |
+| ------------------ | --------------- | ------------------------------------ |
+| `board`            | `ScKanbanBoard` | Reference to parent board            |
+| `priorityClass()`  | `string`        | CSS class for priority display       |
+| `dueDateClass()`   | `string`        | CSS class for due date display       |
+| `priorityLabel()`  | `string`        | Priority as text ("Urgent", "High"…) |
+| `formatDate(date)` | `string`        | Format date as "Mon DD"              |
 
 ## Type Definitions
 
@@ -247,7 +251,8 @@ interface KanbanDragEvent {
 
 ## Accessibility
 
-- Board has `role="region"` with `aria-label="Kanban board"`
-- Cards have `role="listitem"`, are keyboard focusable (`tabindex="0"`)
-- Collapse buttons should use `aria-expanded` (consumer binds via `col.collapsed()`)
-- All interactive elements should have descriptive `aria-label` attributes
+- The board is a `region` named by its `aria-label` input (default "Kanban board"); give each board on a page its own name. `aria-describedby` can point at a hint explaining the keyboard moves.
+- Columns render their cards in a `role="list"`; each card is a focusable `listitem` named by its title.
+- **Keyboard moves** (alternative to drag and drop): focus a card and press **Alt + ←/→** to move it to the previous/next column, **Alt + ↑/↓** to move it within its column. The new position is announced ("Fix login moved to Done, position 2 of 3") and focus stays on the card.
+- Enter / Space on a card emits `cardClick`; keys on controls inside a card (e.g. its delete button) are left to those controls.
+- Show priority as text with `priorityLabel()` ("Urgent", "High"…), not symbols. Reveal hover-only controls on focus too (`group-focus-within:opacity-100`).

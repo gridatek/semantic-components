@@ -32,7 +32,7 @@ import {
   imports: [NgComponentOutlet, ScDock, ScDockItems, ScDockItem],
   template: \`
     <div class="bg-muted/30 flex justify-center rounded-lg border p-8">
-      <nav scDock [magnification]="false">
+      <nav scDock ariaLabel="No magnification dock" [magnification]="false">
         <div scDockItems>
           @for (item of items; track item.id) {
             <button scDockItem [item]="item">

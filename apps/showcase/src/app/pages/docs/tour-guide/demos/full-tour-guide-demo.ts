@@ -34,6 +34,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
     ScTourGuideAction,
     SiXIcon,
   ],
+  providers: [TourService],
   template: `
     <div class="space-y-8">
       <!-- Demo UI elements -->

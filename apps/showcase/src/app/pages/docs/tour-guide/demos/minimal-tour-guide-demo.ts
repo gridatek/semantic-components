@@ -26,6 +26,7 @@ import type { TourOptions } from '@semantic-components/ui-lab';
     ScTourGuideCounter,
     ScTourGuideAction,
   ],
+  providers: [TourService],
   template: `
     <div class="space-y-8">
       <!-- Demo UI elements -->

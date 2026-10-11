@@ -18,7 +18,7 @@ import { InteractiveCodeEditorDemo } from './interactive-code-editor-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class InteractiveCodeEditorDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  readonly code = `﻿import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCodeEditor,
   ScCodeEditorContent,
@@ -46,6 +46,7 @@ import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui';
       <div>
         <label class="mb-1 block text-sm font-medium">Language</label>
         <select
+          aria-label="Language"
           [value]="selectedLanguage()"
           (change)="selectedLanguage.set($any($event.target).value)"
           class="bg-background rounded-md border px-3 py-1.5"

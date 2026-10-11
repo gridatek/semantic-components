@@ -54,9 +54,8 @@ export const SC_NOTIFICATION_CENTER =
   ],
   host: {
     role: 'region',
-    'aria-live': 'polite',
     '[class]': 'class()',
-    '[attr.aria-label]': 'title()',
+    '[attr.aria-label]': 'ariaLabel() || title()',
   },
 })
 export class ScNotificationCenter implements ScNotificationCenterApi {
@@ -64,6 +63,8 @@ export class ScNotificationCenter implements ScNotificationCenterApi {
   readonly notifications = model<Notification[]>([]);
   readonly groups = input<NotificationGroup[]>([]);
   readonly title = input('Notifications');
+  /** Name of the region; defaults to `title`. Make it unique per page. */
+  readonly ariaLabel = input<string>('', { alias: 'aria-label' });
   readonly showFilters = input(true);
   readonly showClearAll = input(true);
   readonly showDismiss = input(true);

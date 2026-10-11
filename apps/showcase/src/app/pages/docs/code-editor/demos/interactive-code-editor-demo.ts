@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+﻿import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCodeEditor,
   ScCodeEditorContent,
@@ -26,6 +26,7 @@ import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui';
       <div>
         <label class="mb-1 block text-sm font-medium">Language</label>
         <select
+          aria-label="Language"
           [value]="selectedLanguage()"
           (change)="selectedLanguage.set($any($event.target).value)"
           class="bg-background rounded-md border px-3 py-1.5"

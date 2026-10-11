@@ -59,7 +59,7 @@ export class ScNavbarMobilePortal {
 
     // Handle Keyboard Close
     this.overlayRef.keydownEvents().subscribe((event) => {
-      if (event.key === 'Escape') this.closeMenu();
+      if (event.key === 'Escape') this.provider.closeAndRestoreFocus();
     });
 
     // Update Position Strategy when Origin becomes available
@@ -107,9 +107,5 @@ export class ScNavbarMobilePortal {
     if (this.overlayRef.hasAttached()) {
       this.overlayRef.detach();
     }
-  }
-
-  private closeMenu(): void {
-    this.provider.open.set(false);
   }
 }

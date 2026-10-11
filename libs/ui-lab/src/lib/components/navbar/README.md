@@ -237,10 +237,6 @@ The navbar uses the following CSS variable for positioning:
 
 ## Accessibility
 
-- Uses semantic `<nav>` element
-- Mobile trigger includes `aria-expanded` and `aria-controls` attributes
-- Mobile menu has `role="navigation"` and `aria-label="Mobile navigation"`
-- Screen reader text for hamburger icon state changes
-- Uses `inert` attribute to prevent focus on hidden mobile content
-- Overlay is marked with `aria-hidden="true"`
-- All interactive elements have visible focus indicators
+- The mobile trigger has `aria-expanded` and `aria-controls` pointing at the mobile menu (ids are generated per navbar, so several navbars can share a page).
+- The open mobile menu traps focus; Escape closes it and returns focus to the trigger.
+- Give each `nav` a unique `aria-label`. `scNavbarMobileLink` sets `aria-current="page"` when `active`.

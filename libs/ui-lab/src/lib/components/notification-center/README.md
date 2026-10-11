@@ -158,17 +158,18 @@ The root directive that manages notification state and business logic.
 
 #### Inputs
 
-| Input              | Type                  | Default                   | Description                      |
-| ------------------ | --------------------- | ------------------------- | -------------------------------- |
-| `class`            | `string`              | `''`                      | Additional CSS classes           |
-| `notifications`    | `Notification[]`      | `[]`                      | Array of notifications (two-way) |
-| `groups`           | `NotificationGroup[]` | `[]`                      | Groups for categorizing          |
-| `title`            | `string`              | `'Notifications'`         | Header title                     |
-| `showFilters`      | `boolean`             | `true`                    | Show all/unread/read filter tabs |
-| `showClearAll`     | `boolean`             | `true`                    | Show clear all button            |
-| `showDismiss`      | `boolean`             | `true`                    | Show dismiss button on items     |
-| `emptyTitle`       | `string`              | `'No notifications'`      | Empty state title                |
-| `emptyDescription` | `string`              | `"You're all caught up!"` | Empty state description          |
+| Input              | Type                  | Default                   | Description                                                |
+| ------------------ | --------------------- | ------------------------- | ---------------------------------------------------------- |
+| `class`            | `string`              | `''`                      | Additional CSS classes                                     |
+| `notifications`    | `Notification[]`      | `[]`                      | Array of notifications (two-way)                           |
+| `groups`           | `NotificationGroup[]` | `[]`                      | Groups for categorizing                                    |
+| `title`            | `string`              | `'Notifications'`         | Header title                                               |
+| `aria-label`       | `string`              | `''`                      | Region name (defaults to `title`); make it unique per page |
+| `showFilters`      | `boolean`             | `true`                    | Show all/unread/read filter tabs                           |
+| `showClearAll`     | `boolean`             | `true`                    | Show clear all button                                      |
+| `showDismiss`      | `boolean`             | `true`                    | Show dismiss button on items                               |
+| `emptyTitle`       | `string`              | `'No notifications'`      | Empty state title                                          |
+| `emptyDescription` | `string`              | `"You're all caught up!"` | Empty state description                                    |
 
 #### Outputs
 
@@ -350,11 +351,9 @@ type NotificationFilter = 'all' | 'unread' | 'read';
 
 ## Accessibility
 
-- Notifications use `role="article"` and are keyboard focusable
-- Groups use proper ARIA expanded states
-- All interactive elements have descriptive `aria-label` attributes
-- Focus indicators are visible for keyboard navigation
-- Notifications are contained in `role="feed"` regions
+- The center is a `region` named by `aria-label` (defaults to `title`); give each one on a page a unique name. It is not a live region — changes come from the user's own actions.
+- Group headers: the collapse toggle (`aria-expanded`, `aria-controls`) and the "mark all read" / "clear all" buttons are separate buttons.
+- Items are focusable `article`s named by their title; unread items say "Unread" to screen readers (the dot is decorative). Enter / Space on an item marks it read and emits `itemClick`; keys on its own buttons stay with those buttons. The dismiss button is revealed on focus as well as hover.
 
 ## Styling
 
