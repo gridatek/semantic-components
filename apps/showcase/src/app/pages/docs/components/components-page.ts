@@ -159,6 +159,10 @@ export default class ComponentsPage {
       bg: 'color-mix(in oklch, var(--chart-2) 15%, transparent)',
       text: 'var(--chart-2)',
     },
+    'pdf-viewer': {
+      bg: 'color-mix(in oklch, var(--chart-4) 15%, transparent)',
+      text: 'var(--chart-4)',
+    },
     'third-party': {
       bg: 'color-mix(in oklch, var(--chart-4) 15%, transparent)',
       text: 'var(--chart-4)',

@@ -65,6 +65,11 @@ export const gettingStartedRoutes: Route[] = [
         loadComponent: () => import('../pages/getting-started/qr-code.page'),
       },
       {
+        path: 'pdf-viewer',
+        title: 'PDF Viewer - Semantic Components',
+        loadComponent: () => import('../pages/getting-started/pdf-viewer.page'),
+      },
+      {
         path: 'code',
         title: 'Code - Semantic Components',
         loadComponent: () => import('../pages/getting-started/code.page'),

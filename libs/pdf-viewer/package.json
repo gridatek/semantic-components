@@ -1,0 +1,21 @@
+{
+  "name": "@semantic-components/pdf-viewer",
+  "version": "0.81.0",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "Khalil LAGRIDA",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gridatek/semantic-components",
+    "directory": "libs/pdf-viewer"
+  },
+  "peerDependencies": {
+    "@angular/core": ">=21.1.0",
+    "@semantic-components/ui": "0.81.0",
+    "pdfjs-dist": ">=6.0.0 <7.0.0"
+  },
+  "sideEffects": false
+}

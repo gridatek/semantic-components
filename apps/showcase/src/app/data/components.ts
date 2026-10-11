@@ -10,6 +10,7 @@ export type ComponentLibrary =
   | 'phone-input'
   | 'data-table'
   | 'qr-code'
+  | 'pdf-viewer'
   | 'third-party';
 
 export type ComponentCategory =

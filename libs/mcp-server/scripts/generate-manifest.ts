@@ -176,6 +176,7 @@ function main() {
     ['phone-input', '@semantic-components/phone-input'],
     ['data-table', '@semantic-components/data-table'],
     ['qr-code', '@semantic-components/qr-code'],
+    ['pdf-viewer', '@semantic-components/pdf-viewer'],
   ];
 
   const visiblePaths = loadVisibleComponentPaths();

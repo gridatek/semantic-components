@@ -620,7 +620,7 @@
     "path": "pdf-viewer",
     "description": "Document viewer with navigation and zoom controls.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "pdf-viewer",
     "category": "Media"
   },
   {

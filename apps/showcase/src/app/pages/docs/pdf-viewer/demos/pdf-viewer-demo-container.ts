@@ -107,7 +107,7 @@ import {
   ScPdfViewerZoomIn,
   ScPdfViewerZoomOut,
   ScPdfViewerZoomSelect,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/pdf-viewer';
 import {
   SiChevronDownIcon,
   SiChevronUpIcon,

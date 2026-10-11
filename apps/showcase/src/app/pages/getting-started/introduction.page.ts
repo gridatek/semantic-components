@@ -109,6 +109,10 @@ import { ConfigService } from '../../services/config.service';
             — QR codes generated with uqr
           </li>
           <li>
+            <strong>&#64;semantic-components/pdf-viewer</strong>
+            — PDF viewer powered by PDF.js
+          </li>
+          <li>
             <strong>&#64;semantic-components/code</strong>
             — Code viewer and editor powered by Shiki
           </li>

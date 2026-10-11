@@ -13,6 +13,7 @@ All libraries are versioned together:
 - `@semantic-components/phone-input`
 - `@semantic-components/data-table`
 - `@semantic-components/qr-code`
+- `@semantic-components/pdf-viewer`
 - `@semantic-components/code`
 
 ## Automated Release (CI)

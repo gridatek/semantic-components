@@ -24,7 +24,6 @@ export * from './native-dialog';
 export * from './navbar';
 export * from './notification-center';
 export * from './org-chart';
-export * from './pdf-viewer';
 export * from './signature-pad';
 export * from './speed-dial';
 export * from './spotlight';

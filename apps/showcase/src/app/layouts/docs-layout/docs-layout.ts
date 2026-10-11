@@ -288,6 +288,17 @@ import { ConfigService } from '../../services/config.service';
                     <li scSidebarMenuSubItem>
                       <a
                         scSidebarMenuSubButton
+                        routerLink="/docs/getting-started/pdf-viewer"
+                        routerLinkActive
+                        #pdfViewerRla="routerLinkActive"
+                        [isActive]="pdfViewerRla.isActive"
+                      >
+                        <span>PDF Viewer</span>
+                      </a>
+                    </li>
+                    <li scSidebarMenuSubItem>
+                      <a
+                        scSidebarMenuSubButton
                         routerLink="/docs/getting-started/code"
                         routerLinkActive
                         #codeRla="routerLinkActive"

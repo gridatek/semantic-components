@@ -24,8 +24,7 @@
     "@semantic-components/ui": "0.81.0",
     "@js-temporal/polyfill": "^0.5.1",
     "@semantic-components/carousel": "0.81.0",
-    "emojibase-data": "^17.0.0",
-    "pdfjs-dist": ">=4.0.0"
+    "emojibase-data": "^17.0.0"
   },
   "sideEffects": false
 }
