@@ -75,13 +75,13 @@ import { TocHeading } from '../../components/toc/toc-heading';
             </h3>
             <p class="text-muted-foreground">
               Next, add a
-              <code class="bg-muted rounded px-1.5 py-0.5 text-sm">
-                .postcssrc.json
-              </code>
+              <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+                >.postcssrc.json</code
+              >
               file in the file root of the project. Add the
-              <code class="bg-muted rounded px-1.5 py-0.5 text-sm">
-                &#64;tailwindcss/postcss
-              </code>
+              <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+                >&#64;tailwindcss/postcss</code
+              >
               plugin into your PostCSS configuration.
             </p>
             <div scCodeViewer>

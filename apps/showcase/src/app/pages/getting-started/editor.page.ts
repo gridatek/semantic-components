@@ -36,9 +36,9 @@ import { EditorUsageDemoContainer } from '../docs/editor/demos/editor-usage-demo
         <h1 scHeading>Editor</h1>
         <p class="text-muted-foreground">
           Install and configure the
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">
-            &#64;semantic-components/editor
-          </code>
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >&#64;semantic-components/editor</code
+          >
           package. Provides a rich text editor powered by Tiptap. Requires the
           ui library to be installed first.
         </p>
@@ -60,8 +60,8 @@ import { EditorUsageDemoContainer } from '../docs/editor/demos/editor-usage-demo
         <h2 scHeading appToc>2. Configure styles</h2>
         <p class="text-muted-foreground">
           Import the editor styles in your
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code>
-          :
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code
+          >:
         </p>
         <div scCodeViewer>
           <div scCodeViewerHeader>
@@ -91,8 +91,8 @@ import { EditorUsageDemoContainer } from '../docs/editor/demos/editor-usage-demo
         <h2 scHeading appToc>3. Configure Tailwind source</h2>
         <p class="text-muted-foreground">
           Add the library as a Tailwind source in your
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code>
-          :
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code
+          >:
         </p>
         <div scCodeViewer>
           <div scCodeViewerHeader>
@@ -116,9 +116,9 @@ import { EditorUsageDemoContainer } from '../docs/editor/demos/editor-usage-demo
         </div>
         <p class="text-muted-foreground text-sm">
           Adjust the path to
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">
-            node_modules
-          </code>
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >node_modules</code
+          >
           based on your project structure.
         </p>
       </section>

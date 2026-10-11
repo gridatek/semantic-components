@@ -36,9 +36,9 @@ import { ButtonPatternUsageDemoContainer } from '../docs/button-pattern/demos/bu
         <h1 scHeading>UI Lab</h1>
         <p class="text-muted-foreground">
           Install and configure the
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">
-            &#64;semantic-components/ui-lab
-          </code>
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >&#64;semantic-components/ui-lab</code
+          >
           package. This contains extended and experimental components. Requires
           the ui library to be installed first.
         </p>
@@ -55,8 +55,8 @@ import { ButtonPatternUsageDemoContainer } from '../docs/button-pattern/demos/bu
         <h2 scHeading appToc>2. Configure Tailwind source</h2>
         <p class="text-muted-foreground">
           Add the library as a Tailwind source in your
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code>
-          :
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code
+          >:
         </p>
         <div scCodeViewer>
           <div scCodeViewerHeader>
@@ -80,9 +80,9 @@ import { ButtonPatternUsageDemoContainer } from '../docs/button-pattern/demos/bu
         </div>
         <p class="text-muted-foreground text-sm">
           Adjust the path to
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">
-            node_modules
-          </code>
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >node_modules</code
+          >
           based on your project structure.
         </p>
       </section>

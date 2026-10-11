@@ -43,15 +43,8 @@ import { SelectOnFocusUsageDemoContainer } from './demos/select-on-focus-usage-d
             to highlight all text.
           </li>
           <li>
-            By default, responds to all focus origins (
-            <code>program</code>
-            ,
-            <code>keyboard</code>
-            ,
-            <code>mouse</code>
-            ,
-            <code>touch</code>
-            ).
+            By default, responds to all focus origins (<code>program</code>,
+            <code>keyboard</code>, <code>mouse</code>, <code>touch</code>).
           </li>
         </ul>
       </section>

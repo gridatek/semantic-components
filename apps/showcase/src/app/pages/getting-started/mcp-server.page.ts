@@ -32,9 +32,9 @@ import { TocHeading } from '../../components/toc/toc-heading';
         <h1 scHeading>MCP Server</h1>
         <p class="text-muted-foreground">
           Set up the
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">
-            &#64;semantic-components/mcp-server
-          </code>
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >&#64;semantic-components/mcp-server</code
+          >
           package. This provides an MCP server that exposes component
           documentation to AI coding assistants like Claude Code.
         </p>

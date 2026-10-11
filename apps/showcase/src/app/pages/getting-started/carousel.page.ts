@@ -36,9 +36,9 @@ import { CarouselUsageDemoContainer } from '../docs/carousel/demos/carousel-usag
         <h1 scHeading>Carousel</h1>
         <p class="text-muted-foreground">
           Install and configure the
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">
-            &#64;semantic-components/carousel
-          </code>
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >&#64;semantic-components/carousel</code
+          >
           package. Requires the ui library to be installed first.
         </p>
       </div>
@@ -47,10 +47,9 @@ import { CarouselUsageDemoContainer } from '../docs/carousel/demos/carousel-usag
         <h2 scHeading appToc>1. Install the package</h2>
         <p class="text-muted-foreground">
           Install the carousel library and its peer dependency
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">
-            embla-carousel
-          </code>
-          .
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >embla-carousel</code
+          >.
         </p>
         <app-package-manager-install
           packages="@semantic-components/carousel embla-carousel"
@@ -63,8 +62,8 @@ import { CarouselUsageDemoContainer } from '../docs/carousel/demos/carousel-usag
         <h2 scHeading appToc>2. Configure Tailwind source</h2>
         <p class="text-muted-foreground">
           Add the carousel library as a Tailwind source in your
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code>
-          :
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code
+          >:
         </p>
         <div scCodeViewer>
           <div scCodeViewerHeader>
@@ -88,9 +87,9 @@ import { CarouselUsageDemoContainer } from '../docs/carousel/demos/carousel-usag
         </div>
         <p class="text-muted-foreground text-sm">
           Adjust the path to
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">
-            node_modules
-          </code>
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >node_modules</code
+          >
           based on your project structure.
         </p>
       </section>

@@ -39,9 +39,9 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
         <h1 scHeading>UI</h1>
         <p class="text-muted-foreground">
           Install and configure the
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">
-            &#64;semantic-components/ui
-          </code>
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >&#64;semantic-components/ui</code
+          >
           package.
         </p>
       </div>
@@ -63,8 +63,8 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
         <h3 class="text-lg font-medium">Option A: Default theme</h3>
         <p class="text-muted-foreground">
           Import the pre-built styles in your
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code>
-          . This includes the default shadcn theme and Angular CDK styles.
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code
+          >. This includes the default shadcn theme and Angular CDK styles.
         </p>
         <div scCodeViewer>
           <div scCodeViewerHeader>
@@ -96,8 +96,8 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
           For full control over colors, border radius, and other design tokens,
           copy the CSS variables from the shadcn/ui manual installation guide
           into your
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code>
-          :
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code
+          >:
         </p>
         <a
           scLink
@@ -142,21 +142,16 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
       <section class="space-y-4">
         <h2 scHeading appToc>Optional: Preset color schemes</h2>
         <p class="text-muted-foreground">
-          The UI library ships a small set of opt-in color schemes (
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">red</code>
-          ,
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">rose</code>
-          ,
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">orange</code>
-          ,
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">green</code>
-          ,
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">blue</code>
-          ,
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">yellow</code>
-          ,
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">violet</code>
-          ) that override
+          The UI library ships a small set of opt-in color schemes (<code
+            class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >red</code
+          >, <code class="bg-muted rounded px-1.5 py-0.5 text-sm">rose</code>,
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">orange</code>,
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">green</code>,
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">blue</code>,
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">yellow</code>,
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">violet</code>)
+          that override
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">--primary</code>
           and related tokens. Import them in addition to the default styles:
         </p>
@@ -186,35 +181,33 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
         </div>
         <p class="text-muted-foreground">
           Activate a scheme at runtime via
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">
-            ScThemeManager.setColorScheme('blue')
-          </code>
-          , or statically by setting
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">
-            data-theme="blue"
-          </code>
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >ScThemeManager.setColorScheme('blue')</code
+          >, or statically by setting
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >data-theme="blue"</code
+          >
           on
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">
-            &lt;html&gt;
-          </code>
-          . Try them live on the
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >&lt;html&gt;</code
+          >. Try them live on the
           <a scLink variant="link" routerLink="/customize">Customize page</a>
           .
         </p>
         <p class="text-muted-foreground">
           Use the shipped file as-is, or drop it and author your own — any CSS
           rule matching
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">
-            [data-theme='my-scheme']
-          </code>
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >[data-theme='my-scheme']</code
+          >
           (and its
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">
-            [data-theme='my-scheme'].dark
-          </code>
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >[data-theme='my-scheme'].dark</code
+          >
           variant) that overrides the token variables will work the same way.
           This lets you add new palettes (e.g.
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">teal</code>
-          ) or customize tokens beyond
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">teal</code>) or
+          customize tokens beyond
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">--primary</code>
           without forking the library.
         </p>
@@ -227,8 +220,8 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
         <p class="text-muted-foreground">
           Add the library as a Tailwind source so its classes are included in
           the build. Add this to your
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code>
-          :
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code
+          >:
         </p>
         <div scCodeViewer>
           <div scCodeViewerHeader>
@@ -252,9 +245,9 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
         </div>
         <p class="text-muted-foreground text-sm">
           Adjust the path to
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">
-            node_modules
-          </code>
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >node_modules</code
+          >
           based on your project structure.
         </p>
       </section>

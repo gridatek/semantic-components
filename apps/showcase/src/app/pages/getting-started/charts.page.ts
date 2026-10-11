@@ -36,9 +36,9 @@ import { ChartsUsageDemoContainer } from '../docs/charts/demos/charts-usage-demo
         <h1 scHeading>Charts</h1>
         <p class="text-muted-foreground">
           Install and configure the
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">
-            &#64;semantic-components/charts
-          </code>
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >&#64;semantic-components/charts</code
+          >
           package. Requires the ui library to be installed first.
         </p>
       </div>
@@ -47,12 +47,10 @@ import { ChartsUsageDemoContainer } from '../docs/charts/demos/charts-usage-demo
         <h2 scHeading appToc>1. Install the package</h2>
         <p class="text-muted-foreground">
           Install the charts library and its peer dependencies
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">d3-scale</code>
-          ,
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">d3-shape</code>
-          , and
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">d3-array</code>
-          .
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">d3-scale</code>,
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">d3-shape</code>,
+          and
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">d3-array</code>.
         </p>
         <app-package-manager-install
           packages="@semantic-components/charts d3-scale d3-shape d3-array"
@@ -65,8 +63,8 @@ import { ChartsUsageDemoContainer } from '../docs/charts/demos/charts-usage-demo
         <h2 scHeading appToc>2. Configure Tailwind source</h2>
         <p class="text-muted-foreground">
           Add the charts library as a Tailwind source in your
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code>
-          :
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code
+          >:
         </p>
         <div scCodeViewer>
           <div scCodeViewerHeader>
@@ -90,9 +88,9 @@ import { ChartsUsageDemoContainer } from '../docs/charts/demos/charts-usage-demo
         </div>
         <p class="text-muted-foreground text-sm">
           Adjust the path to
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">
-            node_modules
-          </code>
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >node_modules</code
+          >
           based on your project structure.
         </p>
       </section>
