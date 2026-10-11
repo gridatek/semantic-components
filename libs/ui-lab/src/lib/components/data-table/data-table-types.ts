@@ -67,10 +67,6 @@ export interface ScDataTablePaginationTable {
   setPageSize(pageSize: number): void;
 }
 
-export interface ScDataTableColumnsTable {
-  getAllLeafColumns(): ScDataTableHideableColumn[];
-}
-
 /** A column's label: its string `header`, else its id. */
 export function dataTableColumnLabel(
   column: ScDataTableHideableColumn,

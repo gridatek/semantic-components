@@ -53,6 +53,10 @@ import {
   ScPaginationNext,
   ScPaginationPageSizeSelect,
   ScPaginationPrevious,
+  ScPopover,
+  ScPopoverPortal,
+  ScPopoverProvider,
+  ScPopoverTrigger,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -62,9 +66,6 @@ import {
 } from '@semantic-components/ui';
 import {
   ScDataTableCell,
-  ScDataTableColumnToggle,
-  ScDataTableColumnToggleContent,
-  ScDataTableColumnToggleTrigger,
   ScDataTableColumnVisibility,
   ScDataTableGlobalFilter,
   ScDataTableHeaderCell,
@@ -73,6 +74,7 @@ import {
   ScDataTableSelectAll,
   ScDataTableSelectRow,
   ScDataTableSortButton,
+  dataTableColumnLabel,
 } from '@semantic-components/ui-lab';
 import {
   SiArrowDownIcon,
@@ -251,6 +253,14 @@ const SAMPLE_DATA: User[] = [
     ScMenuSeparator,
     ScMenuTrigger,
     ScPagination,
+    ScPopover,
+    ScPopoverPortal,
+    ScPopoverProvider,
+    ScPopoverTrigger,
+    ScPopover,
+    ScPopoverPortal,
+    ScPopoverProvider,
+    ScPopoverTrigger,
     ScPaginationFirst,
     ScPaginationItem,
     ScPaginationLast,
@@ -265,9 +275,6 @@ const SAMPLE_DATA: User[] = [
     ScTableHeaderCell,
     ScTableRow,
     ScDataTableCell,
-    ScDataTableColumnToggle,
-    ScDataTableColumnToggleContent,
-    ScDataTableColumnToggleTrigger,
     ScDataTableColumnVisibility,
     ScDataTableGlobalFilter,
     ScDataTableHeaderCell,
@@ -301,28 +308,26 @@ const SAMPLE_DATA: User[] = [
           class="max-w-sm"
         />
 
-        <div
-          scDataTableColumnToggle
-          #columnToggle="scDataTableColumnToggle"
-          [table]="table"
-        >
-          <button scButton variant="outline" scDataTableColumnToggleTrigger>
+        <div scPopoverProvider align="end">
+          <button scButton variant="outline" scPopoverTrigger>
             <svg siColumns3Icon></svg>
             Columns
           </button>
-          <div scDataTableColumnToggleContent>
-            @for (column of columnToggle.columns(); track column.id) {
-              <label scCheckboxField>
-                <input
-                  type="checkbox"
-                  scCheckbox
-                  scDataTableColumnVisibility
-                  [column]="column"
-                />
-                {{ columnToggle.label(column) }}
-              </label>
-            }
-          </div>
+          <ng-template scPopoverPortal>
+            <div scPopover aria-label="Toggle columns" class="w-44 gap-1 p-2">
+              @for (column of hideableColumns(); track column.id) {
+                <label scCheckboxField>
+                  <input
+                    type="checkbox"
+                    scCheckbox
+                    scDataTableColumnVisibility
+                    [column]="column"
+                  />
+                  {{ columnLabel(column) }}
+                </label>
+              }
+            </div>
+          </ng-template>
         </div>
       </div>
 
@@ -553,6 +558,12 @@ export class FeaturedDataTableDemo {
     getRowId: (user) => String(user.id),
     initialState: { pagination: { pageIndex: 0, pageSize: 5 } },
   }));
+
+  /** Columns the user may hide (TanStack \`getCanHide()\`). */
+  readonly hideableColumns = computed(() =>
+    this.table.getAllLeafColumns().filter((column) => column.getCanHide()),
+  );
+  readonly columnLabel = dataTableColumnLabel;
 
   readonly selectedCount = computed(
     () => Object.keys(this.table.atoms.rowSelection.get()).length,

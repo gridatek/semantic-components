@@ -68,7 +68,9 @@ import { FeaturedDataTableDemoContainer } from './demos/featured-data-table-demo
           </li>
           <li>
             Column visibility with
-            <code>scDataTableColumnToggle</code>
+            <code>scDataTableColumnVisibility</code>
+            checkboxes, e.g. in a
+            <code>scPopover</code>
           </li>
         </ul>
         <p class="text-muted-foreground text-sm">

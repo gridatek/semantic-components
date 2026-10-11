@@ -58,7 +58,7 @@ test.describe('Featured Data Table Demo', () => {
     await expect(page.getByText('1 of 12 row(s) selected.')).toBeVisible();
   });
 
-  test('columns disclosure hides a column; Escape returns focus', async ({
+  test('columns popover hides a column; Escape returns focus', async ({
     page,
   }) => {
     const toggle = page.getByRole('button', { name: 'Columns' });
@@ -66,7 +66,7 @@ test.describe('Featured Data Table Demo', () => {
     await toggle.click();
     await expect(toggle).toHaveAttribute('aria-expanded', 'true');
     await page
-      .getByRole('group', { name: 'Toggle columns' })
+      .getByRole('dialog', { name: 'Toggle columns' })
       .getByLabel('Email')
       .uncheck();
     await expect(

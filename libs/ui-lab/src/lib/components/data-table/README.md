@@ -11,7 +11,7 @@ npm install @tanstack/angular-table
 ```
 
 ```typescript
-import { ScDataTableCell, ScDataTableColumnToggle, ScDataTableColumnToggleContent, ScDataTableColumnToggleTrigger, ScDataTableColumnVisibility, ScDataTableGlobalFilter, ScDataTableHeaderCell, ScDataTablePagination, ScDataTableRow, ScDataTableSelectAll, ScDataTableSelectRow, ScDataTableSortButton } from '@semantic-components/ui-lab';
+import { ScDataTableCell, ScDataTableColumnVisibility, ScDataTableGlobalFilter, ScDataTableHeaderCell, ScDataTablePagination, ScDataTableRow, ScDataTableSelectAll, ScDataTableSelectRow, ScDataTableSortButton } from '@semantic-components/ui-lab';
 ```
 
 ## Usage
@@ -102,50 +102,56 @@ export class UsersTable {
 </nav>
 ```
 
-### Column toggle
+### Column visibility
+
+Use `scDataTableColumnVisibility` checkboxes in a `scPopover` (it positions itself, flips when there's no room, and handles Escape and outside clicks):
 
 ```html
-<div scDataTableColumnToggle #columns="scDataTableColumnToggle" [table]="table">
-  <button scButton variant="outline" scDataTableColumnToggleTrigger>
+<div scPopoverProvider align="end">
+  <button scButton variant="outline" scPopoverTrigger>
     <svg siColumns3Icon></svg>
     Columns
   </button>
-  <div scDataTableColumnToggleContent>
-    @for (column of columns.columns(); track column.id) {
-    <label scCheckboxField>
-      <input type="checkbox" scCheckbox scDataTableColumnVisibility [column]="column" />
-      {{ columns.label(column) }}
-    </label>
-    }
-  </div>
+  <ng-template scPopoverPortal>
+    <div scPopover aria-label="Toggle columns">
+      @for (column of hideableColumns(); track column.id) {
+      <label scCheckboxField>
+        <input type="checkbox" scCheckbox scDataTableColumnVisibility [column]="column" />
+        {{ columnLabel(column) }}
+      </label>
+      }
+    </div>
+  </ng-template>
 </div>
+```
+
+```typescript
+readonly hideableColumns = computed(() => this.table.getAllLeafColumns().filter((column) => column.getCanHide()));
+readonly columnLabel = dataTableColumnLabel;
 ```
 
 Set `enableHiding: false` on columns that shouldn't be listed (selection, actions).
 
 ## Parts
 
-| Part                             | Selector                                            | Input                   | Does                                                                                                         |
-| -------------------------------- | --------------------------------------------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------ |
-| `ScDataTableHeaderCell`          | `th[scDataTableHeaderCell]`                         | `column`                | `aria-sort` on sortable columns; sticky when pinned (`data-pinned="start\|end"`, offsets with column sizing) |
-| `ScDataTableCell`                | `td[scDataTableCell]`                               | `column`                | Sticky when its column is pinned                                                                             |
-| `ScDataTableRow`                 | `tr[scDataTableRow]`                                | `row`                   | `data-state="selected"` while selected                                                                       |
-| `ScDataTableSortButton`          | `button[scDataTableSortButton]`                     | `column`                | Click sorts, Shift+click multi-sorts; `direction()` for your icons (`exportAs`)                              |
-| `ScDataTableSelectAll`           | `input[type=checkbox][scDataTableSelectAll]`        | `table`, `scope`        | Checked / indeterminate from the selection; `scope="page"` (default) or `"all"`; named "Select all rows"     |
-| `ScDataTableSelectRow`           | `input[type=checkbox][scDataTableSelectRow]`        | `row`                   | Row selection; disabled when the row can't be selected                                                       |
-| `ScDataTableGlobalFilter`        | `input[scDataTableGlobalFilter]`                    | `table`                 | Global filter as you type (`type="search"`)                                                                  |
-| `ScDataTableColumnFilter`        | `input[scDataTableColumnFilter]`                    | `column`                | Column filter as you type (empty clears it)                                                                  |
-| `ScDataTablePagination`          | `[scPagination][scDataTablePagination]`             | `table`                 | Feeds `scPagination` (page, size, row count) and sends its changes back                                      |
-| `ScDataTableColumnToggle`        | `[scDataTableColumnToggle]`                         | `table`, `open` (model) | Disclosure state; `columns()` (hideable columns), `label(column)`; Escape / outside click close              |
-| `ScDataTableColumnToggleTrigger` | `button[scDataTableColumnToggleTrigger]`            | —                       | Opens/closes; `aria-expanded`, `aria-controls`                                                               |
-| `ScDataTableColumnToggleContent` | `[scDataTableColumnToggleContent]`                  | `aria-label`            | The panel: a `group` named "Toggle columns"                                                                  |
-| `ScDataTableColumnVisibility`    | `input[type=checkbox][scDataTableColumnVisibility]` | `column`                | Shows/hides its column                                                                                       |
+| Part                          | Selector                                            | Input            | Does                                                                                                         |
+| ----------------------------- | --------------------------------------------------- | ---------------- | ------------------------------------------------------------------------------------------------------------ |
+| `ScDataTableHeaderCell`       | `th[scDataTableHeaderCell]`                         | `column`         | `aria-sort` on sortable columns; sticky when pinned (`data-pinned="start\|end"`, offsets with column sizing) |
+| `ScDataTableCell`             | `td[scDataTableCell]`                               | `column`         | Sticky when its column is pinned                                                                             |
+| `ScDataTableRow`              | `tr[scDataTableRow]`                                | `row`            | `data-state="selected"` while selected                                                                       |
+| `ScDataTableSortButton`       | `button[scDataTableSortButton]`                     | `column`         | Click sorts, Shift+click multi-sorts; `direction()` for your icons (`exportAs`)                              |
+| `ScDataTableSelectAll`        | `input[type=checkbox][scDataTableSelectAll]`        | `table`, `scope` | Checked / indeterminate from the selection; `scope="page"` (default) or `"all"`; named "Select all rows"     |
+| `ScDataTableSelectRow`        | `input[type=checkbox][scDataTableSelectRow]`        | `row`            | Row selection; disabled when the row can't be selected                                                       |
+| `ScDataTableGlobalFilter`     | `input[scDataTableGlobalFilter]`                    | `table`          | Global filter as you type (`type="search"`)                                                                  |
+| `ScDataTableColumnFilter`     | `input[scDataTableColumnFilter]`                    | `column`         | Column filter as you type (empty clears it)                                                                  |
+| `ScDataTablePagination`       | `[scPagination][scDataTablePagination]`             | `table`          | Feeds `scPagination` (page, size, row count) and sends its changes back                                      |
+| `ScDataTableColumnVisibility` | `input[type=checkbox][scDataTableColumnVisibility]` | `column`         | Shows/hides its column                                                                                       |
 
 The checkbox parts work alone or together with `scCheckbox` (they then drive its `checked` / `indeterminate`).
 
 ### Structural types
 
-Exported for your own wrappers: `ScDataTableCellColumn`, `ScDataTableSortableColumn`, `ScDataTableFilterableColumn`, `ScDataTableHideableColumn`, `ScDataTableSelectableRow`, `ScDataTableSelectAllTable`, `ScDataTableGlobalFilterTable`, `ScDataTablePaginationTable`, `ScDataTableColumnsTable`, plus `dataTableColumnLabel(column)` and `dataTablePinnedClasses`.
+Exported for your own wrappers: `ScDataTableCellColumn`, `ScDataTableSortableColumn`, `ScDataTableFilterableColumn`, `ScDataTableHideableColumn`, `ScDataTableSelectableRow`, `ScDataTableSelectAllTable`, `ScDataTableGlobalFilterTable`, `ScDataTablePaginationTable`, plus `dataTableColumnLabel(column)` and `dataTablePinnedClasses`.
 
 ## Notes
 
@@ -157,5 +163,5 @@ Exported for your own wrappers: `ScDataTableCellColumn`, `ScDataTableSortableCol
 
 - Sortable headers are real buttons inside `<th aria-sort>`.
 - Name the selection checkboxes ("Select all rows" by default; give rows `aria-label`s like "Select Jane"), column filters, the global filter and icon-only buttons.
-- The column toggle is a disclosure: `aria-expanded` on the trigger, a named group of checkboxes, Escape closes it and returns focus.
+- Put column checkboxes in a named `scPopover` (e.g. "Toggle columns"); the popover handles `aria-expanded`, Escape and focus return.
 - Announce paging with an `aria-live="polite"` "Page X of Y".

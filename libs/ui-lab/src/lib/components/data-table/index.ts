@@ -9,10 +9,4 @@ export { ScDataTableSelectRow } from './data-table-select-row';
 export { ScDataTableGlobalFilter } from './data-table-global-filter';
 export { ScDataTableColumnFilter } from './data-table-column-filter';
 export { ScDataTablePagination } from './data-table-pagination';
-export {
-  SC_DATA_TABLE_COLUMN_TOGGLE,
-  ScDataTableColumnToggle,
-} from './data-table-column-toggle';
-export { ScDataTableColumnToggleTrigger } from './data-table-column-toggle-trigger';
-export { ScDataTableColumnToggleContent } from './data-table-column-toggle-content';
 export { ScDataTableColumnVisibility } from './data-table-column-visibility';
