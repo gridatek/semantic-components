@@ -48,7 +48,6 @@ export const SC_FIELD = new InjectionToken<ScFieldContext>('SC_FIELD');
   host: {
     '[attr.role]': 'role()',
     'data-slot': 'field',
-    '[attr.id]': 'id()',
     '[attr.data-orientation]': 'orientation()',
     '[attr.data-invalid]': 'invalid()',
     '[attr.data-disabled]': 'disabled()',
@@ -64,6 +63,11 @@ export const SC_FIELD = new InjectionToken<ScFieldContext>('SC_FIELD');
 export class ScField implements ScFieldContext {
   private readonly elementRef = inject(ElementRef<HTMLElement>);
 
+  /**
+   * The id of the field's control, which its label points to. Not set on the
+   * field element itself: two elements with one id would leave the control
+   * unlabelled.
+   */
   readonly id = input(inject(_IdGenerator).getId('sc-field-'));
   readonly descriptionIds = signal<string[]>([]);
   readonly classInput = input<string>('', { alias: 'class' });
