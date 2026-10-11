@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { FormField, form } from '@angular/forms/signals';
 import {
   ScButton,
   ScField,
@@ -26,6 +27,7 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-horizontal-stepper-demo',
   imports: [
+    FormField,
     ScStepper,
     ScStepperList,
     ScStepperIndicator,
@@ -104,13 +106,19 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
             <div scFieldGroup>
               <div scField>
                 <label scLabel>Email</label>
-                <input scInput type="email" placeholder="Enter your email" />
+                <input
+                  scInput
+                  type="email"
+                  [formField]="signupForm.email"
+                  placeholder="Enter your email"
+                />
               </div>
               <div scField>
                 <label scLabel>Password</label>
                 <input
                   scInput
                   type="password"
+                  [formField]="signupForm.password"
                   placeholder="Create a password"
                 />
               </div>
@@ -123,12 +131,18 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
             <div scFieldGroup>
               <div scField>
                 <label scLabel>Full Name</label>
-                <input scInput type="text" placeholder="Enter your name" />
+                <input
+                  scInput
+                  type="text"
+                  [formField]="signupForm.name"
+                  placeholder="Enter your name"
+                />
               </div>
               <div scField>
                 <label scLabel>Bio</label>
                 <textarea
                   scTextarea
+                  [formField]="signupForm.bio"
                   placeholder="Tell us about yourself"
                   rows="3"
                 ></textarea>
@@ -144,9 +158,16 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
                 Review your information and click submit to complete
                 registration.
               </p>
-              <div class="bg-muted rounded-lg p-4">
-                <p class="text-sm">All steps completed! Ready to submit.</p>
-              </div>
+              <dl
+                class="bg-muted grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 rounded-lg p-4 text-sm"
+              >
+                <dt class="text-muted-foreground">Email</dt>
+                <dd>{{ model().email }}</dd>
+                <dt class="text-muted-foreground">Name</dt>
+                <dd>{{ model().name }}</dd>
+                <dt class="text-muted-foreground">Bio</dt>
+                <dd>{{ model().bio }}</dd>
+              </dl>
             </div>
           </ng-template>
         </div>
@@ -167,4 +188,9 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
 })
 export class HorizontalStepperDemo {
   readonly selectedIndex = signal(0);
+
+  // Panels destroy their content when you leave a step, so the values live
+  // here, in the model.
+  readonly model = signal({ email: '', password: '', name: '', bio: '' });
+  readonly signupForm = form(this.model);
 }

@@ -1,4 +1,3 @@
-import { DeferredContentAware } from '@angular/aria/private';
 import { Directive, type OnInit, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { ScAriaStepperPanel } from './aria-stepper-panel';
@@ -28,12 +27,6 @@ export class ScStepperPanel implements OnInit {
   readonly isActive = computed(() => this.stepper.isStepActive(this.step()));
 
   protected readonly class = computed(() => cn('mt-4', this.classInput()));
-
-  constructor() {
-    // Content is created the first time the step is shown, then kept: leaving a
-    // step doesn't destroy what was typed into it.
-    inject(DeferredContentAware).preserveContent.set(true);
-  }
 
   ngOnInit(): void {
     this.panel.setValue(String(this.step()));

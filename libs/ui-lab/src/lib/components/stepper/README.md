@@ -30,7 +30,7 @@ A multi-step wizard, built from directives. [`@angular/cdk/stepper`](https://mat
     </div>
   </div>
 
-  <!-- Content is created the first time its step becomes active, then kept -->
+  <!-- Content exists only while its step is active -->
   <div scStepperPanel [step]="0">
     <ng-template scStepperContent>Account content</ng-template>
   </div>
@@ -154,7 +154,7 @@ The content of step `[step]` (`role="tabpanel"`, labelled by its step), shown wh
 
 ### ScStepperContent — `ng-template[scStepperContent]`
 
-Required inside every panel (aria `TabContent`): creates the content the first time its step becomes active, and keeps it when you leave the step.
+Required inside every panel (aria `TabContent`): the content is created when its step becomes active and destroyed when you leave it. Keep what the user enters in your model (e.g. a Signal Forms `form()`), not in the DOM.
 
 ### ScStepperTitle / ScStepperDescription
 
