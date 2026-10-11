@@ -420,7 +420,7 @@ const SAMPLE_DATA: User[] = [
                         {{ formatDate(row.original.createdAt) }}
                       }
                       @case ('actions') {
-                        <div scMenuProvider align=" end>
+                        <div scMenuProvider align="end">
                           <button
                             scButton
                             scMenuTrigger
