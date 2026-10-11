@@ -24,7 +24,7 @@ Step-by-step UI tour component for user onboarding and feature discovery. Fully 
 
 ```typescript
 import { ScTourGuide, ScTourGuideAction, ScTourGuideClose, ScTourGuideCounter, ScTourGuideDescription, ScTourGuideHighlight, ScTourGuideMask, ScTourGuideNavigation, ScTourGuideProgress, ScTourGuideStepNumber, ScTourGuideTitle, ScTourGuideTooltip, TourService } from '@semantic-components/ui-lab';
-import type { TourOptions } from '@semantic-components/ui-lab';
+import type { ScTourOptions } from '@semantic-components/ui-lab';
 ```
 
 ### Full Example
@@ -133,17 +133,17 @@ Simply omit the parts you don't need from the template:
 
 ### TourService
 
-| Member        | Type                      | Description            |
-| ------------- | ------------------------- | ---------------------- |
-| `start`       | `(options: TourOptions)`  | Start a new tour       |
-| `stop`        | `() => void`              | Stop the current tour  |
-| `next`        | `() => void`              | Go to next step        |
-| `previous`    | `() => void`              | Go to previous step    |
-| `goTo`        | `(index: number) => void` | Jump to specific step  |
-| `isActive`    | `Signal<boolean>`         | Whether tour is active |
-| `currentStep` | `Signal<number>`          | Current step index     |
-| `steps`       | `Signal<TourStep[]>`      | All tour steps         |
-| `progress`    | `Signal<number>`          | Progress percentage    |
+| Member        | Type                       | Description            |
+| ------------- | -------------------------- | ---------------------- |
+| `start`       | `(options: ScTourOptions)` | Start a new tour       |
+| `stop`        | `() => void`               | Stop the current tour  |
+| `next`        | `() => void`               | Go to next step        |
+| `previous`    | `() => void`               | Go to previous step    |
+| `goTo`        | `(index: number) => void`  | Jump to specific step  |
+| `isActive`    | `Signal<boolean>`          | Whether tour is active |
+| `currentStep` | `Signal<number>`           | Current step index     |
+| `steps`       | `Signal<ScTourStep[]>`     | All tour steps         |
+| `progress`    | `Signal<number>`           | Progress percentage    |
 
 ### ScTourGuide (root)
 
@@ -155,15 +155,15 @@ Simply omit the parts you don't need from the template:
 
 Exposed via `exportAs: 'scTourGuide'`:
 
-| Signal            | Type                 | Description                    |
-| ----------------- | -------------------- | ------------------------------ |
-| `targetRect`      | `Signal<TargetRect>` | Current target element rect    |
-| `currentStep`     | `Signal<TourStep>`   | Current step data              |
-| `allowClose`      | `Signal<boolean>`    | Whether closing is allowed     |
-| `showStepNumbers` | `Signal<boolean>`    | Whether step numbers are shown |
-| `showProgress`    | `Signal<boolean>`    | Whether progress bar is shown  |
-| `isFirstStep`     | `Signal<boolean>`    | Whether on first step          |
-| `isLastStep`      | `Signal<boolean>`    | Whether on last step           |
+| Signal            | Type                            | Description                    |
+| ----------------- | ------------------------------- | ------------------------------ |
+| `targetRect`      | `Signal<ScTourGuideTargetRect>` | Current target element rect    |
+| `currentStep`     | `Signal<ScTourStep>`            | Current step data              |
+| `allowClose`      | `Signal<boolean>`               | Whether closing is allowed     |
+| `showStepNumbers` | `Signal<boolean>`               | Whether step numbers are shown |
+| `showProgress`    | `Signal<boolean>`               | Whether progress bar is shown  |
+| `isFirstStep`     | `Signal<boolean>`               | Whether on first step          |
+| `isLastStep`      | `Signal<boolean>`               | Whether on last step           |
 
 ### ScTourGuideAction
 
@@ -174,7 +174,7 @@ Exposed via `exportAs: 'scTourGuide'`:
 ### TourStep
 
 ```typescript
-interface TourStep {
+interface ScTourStep {
   target: string;
   title: string;
   content: string;
@@ -189,8 +189,8 @@ interface TourStep {
 ### TourOptions
 
 ```typescript
-interface TourOptions {
-  steps: TourStep[];
+interface ScTourOptions {
+  steps: ScTourStep[];
   overlayOpacity?: number; // Default: 0.5
   animationDuration?: number; // Default: 300
   showProgress?: boolean; // Default: true

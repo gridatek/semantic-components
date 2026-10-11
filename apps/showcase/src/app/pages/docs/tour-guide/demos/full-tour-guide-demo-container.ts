@@ -30,7 +30,7 @@ import {
   ScTourGuideTooltip,
   TourService,
 } from '@semantic-components/ui-lab';
-import type { TourOptions } from '@semantic-components/ui-lab';
+import type { ScTourOptions } from '@semantic-components/ui-lab';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
@@ -182,7 +182,7 @@ export class FullTourGuideDemo {
   protected readonly tourService = inject(TourService);
 
   startTour(): void {
-    const options: TourOptions = {
+    const options: ScTourOptions = {
       steps: [
         {
           target: '#tour-full-card-1',

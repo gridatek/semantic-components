@@ -20,7 +20,7 @@ import { MonthlyRevenueChartDemo } from './monthly-revenue-chart-demo';
 export class MonthlyRevenueChartDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ChartDataPoint,
+  ScChartDataPoint,
   ScBarChart,
   ScChartContainer,
 } from '@semantic-components/charts';
@@ -39,7 +39,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class MonthlyRevenueChartDemo {
-  readonly monthlyData: ChartDataPoint[] = [
+  readonly monthlyData: ScChartDataPoint[] = [
     { label: 'Jan', value: 4500 },
     { label: 'Feb', value: 5200 },
     { label: 'Mar', value: 4800 },

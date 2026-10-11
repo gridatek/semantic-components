@@ -1,24 +1,24 @@
 import { Service, computed, signal } from '@angular/core';
 
-export interface Emoji {
+export interface ScEmoji {
   emoji: string;
   name: string;
   keywords?: string[];
 }
 
-export interface EmojiCategory {
+export interface ScEmojiCategory {
   id: string;
   name: string;
   icon: string;
-  emojis: Emoji[];
+  emojis: ScEmoji[];
 }
 
 @Service({ autoProvided: false })
 export class ScEmojiPickerState {
-  readonly categories = signal<EmojiCategory[]>([]);
+  readonly categories = signal<ScEmojiCategory[]>([]);
   readonly searchQuery = signal<string>('');
   readonly activeCategory = signal<string>('');
-  readonly recentEmojis = signal<Emoji[]>([]);
+  readonly recentEmojis = signal<ScEmoji[]>([]);
   readonly maxRecent = signal<number>(8);
   readonly columns = signal<number>(8);
 
@@ -26,7 +26,7 @@ export class ScEmojiPickerState {
     const query = this.searchQuery().toLowerCase();
     if (!query) return [];
 
-    const results: Emoji[] = [];
+    const results: ScEmoji[] = [];
     for (const category of this.categories()) {
       for (const emoji of category.emojis) {
         if (
@@ -51,7 +51,7 @@ export class ScEmojiPickerState {
     () => `repeat(${this.columns()}, minmax(0, 1fr))`,
   );
 
-  addToRecent(emoji: Emoji): void {
+  addToRecent(emoji: ScEmoji): void {
     const recent = this.recentEmojis();
     const filtered = recent.filter((e) => e.emoji !== emoji.emoji);
     const updated = [emoji, ...filtered].slice(0, this.maxRecent());

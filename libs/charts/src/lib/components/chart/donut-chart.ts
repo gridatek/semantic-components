@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation, input } from '@angular/core';
-import { ChartDataPoint } from './chart-types';
+import { ScChartDataPoint } from './chart-types';
 import { ScPieChart } from './pie-chart';
 
 @Component({
@@ -21,7 +21,7 @@ import { ScPieChart } from './pie-chart';
 })
 export class ScDonutChart {
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly data = input<ChartDataPoint[]>([]);
+  readonly data = input<ScChartDataPoint[]>([]);
   readonly size = input<number>(300);
   readonly innerRadius = input<number>(60);
   readonly showLabels = input<boolean>(false);

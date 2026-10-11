@@ -6,7 +6,7 @@ import {
   ScMentionInputSuggestionItem,
   ScMentionInputSuggestions,
 } from '@semantic-components/ui-lab';
-import type { MentionUser } from '@semantic-components/ui-lab';
+import type { ScMentionUser } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-custom-trigger-mention-input-demo',
@@ -58,7 +58,7 @@ import type { MentionUser } from '@semantic-components/ui-lab';
   encapsulation: ViewEncapsulation.None,
 })
 export class CustomTriggerMentionInputDemo {
-  readonly channelList: MentionUser[] = [
+  readonly channelList: ScMentionUser[] = [
     { id: '1', name: 'General', username: 'general' },
     { id: '2', name: 'Engineering', username: 'engineering' },
     { id: '3', name: 'Design', username: 'design' },

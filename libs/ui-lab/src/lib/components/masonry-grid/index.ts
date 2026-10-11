@@ -7,9 +7,9 @@ export {
   SC_MASONRY_ITEM,
 } from './masonry-types';
 export type {
-  MasonryBreakpoint,
-  MasonryConfig,
-  MasonryGridRef,
-  MasonryItemRef,
-  MasonryLayoutMode,
+  ScMasonryBreakpoint,
+  ScMasonryConfig,
+  ScMasonryGridRef,
+  ScMasonryItemRef,
+  ScMasonryLayoutMode,
 } from './masonry-types';

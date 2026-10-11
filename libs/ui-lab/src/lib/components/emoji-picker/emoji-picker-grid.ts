@@ -1,6 +1,6 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import type { Emoji } from './emoji-picker-state';
+import type { ScEmoji } from './emoji-picker-state';
 import { ScEmojiPickerState } from './emoji-picker-state';
 
 @Directive({
@@ -34,7 +34,7 @@ export class ScEmojiPickerGrid {
   readonly rows = computed(() => {
     const items = this.emojis();
     const cols = this.state.columns();
-    const result: Emoji[][] = [];
+    const result: ScEmoji[][] = [];
     for (let i = 0; i < items.length; i += cols) {
       result.push(items.slice(i, i + cols));
     }

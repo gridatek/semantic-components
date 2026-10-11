@@ -46,9 +46,9 @@ Root container that manages color state. Provides `SC_COLOR_PICKER` injection to
 
 | Property | Type     | Description        |
 | -------- | -------- | ------------------ |
-| `hsv`    | `HSV`    | Current HSV values |
-| `rgb`    | `RGB`    | Current RGB values |
-| `hsl`    | `HSL`    | Current HSL values |
+| `hsv`    | `ScHSV`  | Current HSV values |
+| `rgb`    | `ScRGB`  | Current RGB values |
+| `hsl`    | `ScHSL`  | Current HSL values |
 | `hex`    | `string` | Current hex value  |
 
 **Methods:**
@@ -159,19 +159,19 @@ Uses the EyeDropper API to pick colors from the screen.
 ## Types
 
 ```typescript
-interface HSV {
+interface ScHSV {
   h: number; // 0-360
   s: number; // 0-100
   v: number; // 0-100
 }
 
-interface RGB {
+interface ScRGB {
   r: number; // 0-255
   g: number; // 0-255
   b: number; // 0-255
 }
 
-interface HSL {
+interface ScHSL {
   h: number; // 0-360
   s: number; // 0-100
   l: number; // 0-100

@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
-export type BarcodeFormat =
+export type ScBarcodeFormat =
   | 'aztec'
   | 'code_128'
   | 'code_39'
@@ -25,9 +25,9 @@ export type BarcodeFormat =
   | 'upc_a'
   | 'upc_e';
 
-export interface BarcodeResult {
+export interface ScBarcodeResult {
   rawValue: string;
-  format: BarcodeFormat;
+  format: ScBarcodeFormat;
   boundingBox?: DOMRectReadOnly;
   cornerPoints?: { x: number; y: number }[];
 }
@@ -66,7 +66,7 @@ export class ScBarcodeScanner {
     cn('bg-card border rounded-lg overflow-hidden block', this.classInput()),
   );
 
-  readonly formats = input<BarcodeFormat[]>([
+  readonly formats = input<ScBarcodeFormat[]>([
     'qr_code',
     'ean_13',
     'ean_8',
@@ -78,13 +78,13 @@ export class ScBarcodeScanner {
   readonly continuous = input<boolean>(true);
   readonly scanInterval = input<number>(100);
 
-  readonly detected = output<BarcodeResult>();
+  readonly detected = output<ScBarcodeResult>();
   readonly scanError = output<string>();
 
   readonly isSupported = signal(false);
   readonly isScanning = signal(false);
   readonly error = signal<string | null>(null);
-  readonly lastResult = signal<BarcodeResult | null>(null);
+  readonly lastResult = signal<ScBarcodeResult | null>(null);
   readonly hasMultipleCameras = signal(false);
   readonly hasTorch = signal(false);
   readonly torchOn = signal(false);
@@ -217,9 +217,9 @@ export class ScBarcodeScanner {
 
       if (barcodes.length > 0) {
         const barcode = barcodes[0];
-        const result: BarcodeResult = {
+        const result: ScBarcodeResult = {
           rawValue: barcode.rawValue,
-          format: barcode.format as BarcodeFormat,
+          format: barcode.format as ScBarcodeFormat,
           boundingBox: barcode.boundingBox,
           cornerPoints: barcode.cornerPoints,
         };

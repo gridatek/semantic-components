@@ -1,7 +1,7 @@
 import { Grid, GridCell, GridCellWidget, GridRow } from '@angular/aria/grid';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  Emoji,
+  ScEmoji,
   ScEmojiPicker,
   ScEmojiPickerCategoryTab,
   ScEmojiPickerCategoryTabs,
@@ -88,9 +88,9 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicEmojiPickerDemo {
-  readonly selectedEmoji = signal<Emoji | null>(null);
+  readonly selectedEmoji = signal<ScEmoji | null>(null);
 
-  onEmojiSelect(emoji: Emoji): void {
+  onEmojiSelect(emoji: ScEmoji): void {
     this.selectedEmoji.set(emoji);
   }
 }

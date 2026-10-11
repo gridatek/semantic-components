@@ -15,7 +15,7 @@ A composable, canvas-based image annotator: pen, line, rectangle, circle, arrow 
 
 ```typescript
 import { ScImageAnnotator, ScImageAnnotatorAction, ScImageAnnotatorCanvas, ScImageAnnotatorColorButton, ScImageAnnotatorLineWidth, ScImageAnnotatorToolButton, ScImageAnnotatorToolbar } from '@semantic-components/ui-lab';
-import type { Annotation, AnnotatorColor, AnnotatorToolOption } from '@semantic-components/ui-lab';
+import type { ScAnnotation, ScAnnotatorColor, ScAnnotatorToolOption } from '@semantic-components/ui-lab';
 ```
 
 ## Usage
@@ -64,11 +64,11 @@ Tool, color and action buttons get their accessible name automatically (the tool
 ```
 
 ```typescript
-readonly brandColors: AnnotatorColor[] = [
+readonly brandColors: ScAnnotatorColor[] = [
   { value: '#e11d48', label: 'Rose' },
   { value: '#0ea5e9', label: 'Sky' },
 ];
-readonly tools: AnnotatorToolOption[] = [
+readonly tools: ScAnnotatorToolOption[] = [
   { id: 'pen', label: 'Pen' },
   { id: 'arrow', label: 'Arrow' },
   { id: 'eraser', label: 'Eraser' },
@@ -84,7 +84,7 @@ readonly tools: AnnotatorToolOption[] = [
 ```typescript
 readonly annotator = viewChild.required(ScImageAnnotator);
 
-load(saved: Annotation[]) {
+load(saved: ScAnnotation[]) {
   this.annotator().setAnnotations(saved); // resets undo history, emits nothing
 }
 ```
@@ -93,20 +93,20 @@ load(saved: Annotation[]) {
 
 ### ScImageAnnotator — `div[scImageAnnotator]`
 
-| Input    | Type                    | Default                    | Description                                      |
-| -------- | ----------------------- | -------------------------- | ------------------------------------------------ |
-| `src`    | `string` (required)     | —                          | Image URL (served with CORS headers to download) |
-| `width`  | `number`                | `600`                      | Image coordinate width and export width (px)     |
-| `height` | `number`                | `400`                      | Image coordinate height and export height (px)   |
-| `alt`    | `string`                | `'Annotated image'`        | Accessible name of the canvas (`role="img"`)     |
-| `colors` | `AnnotatorColor[]`      | `DEFAULT_ANNOTATOR_COLORS` | Color palette (value + accessible label)         |
-| `tools`  | `AnnotatorToolOption[]` | `DEFAULT_ANNOTATOR_TOOLS`  | Available tools                                  |
-| `class`  | `string`                | `''`                       | Additional CSS classes                           |
+| Input    | Type                      | Default                    | Description                                      |
+| -------- | ------------------------- | -------------------------- | ------------------------------------------------ |
+| `src`    | `string` (required)       | —                          | Image URL (served with CORS headers to download) |
+| `width`  | `number`                  | `600`                      | Image coordinate width and export width (px)     |
+| `height` | `number`                  | `400`                      | Image coordinate height and export height (px)   |
+| `alt`    | `string`                  | `'Annotated image'`        | Accessible name of the canvas (`role="img"`)     |
+| `colors` | `ScAnnotatorColor[]`      | `DEFAULT_ANNOTATOR_COLORS` | Color palette (value + accessible label)         |
+| `tools`  | `ScAnnotatorToolOption[]` | `DEFAULT_ANNOTATOR_TOOLS`  | Available tools                                  |
+| `class`  | `string`                  | `''`                       | Additional CSS classes                           |
 
-| Output              | Type           | Description                                             |
-| ------------------- | -------------- | ------------------------------------------------------- |
-| `annotationsChange` | `Annotation[]` | After every user change: draw, erase, undo, redo, clear |
-| `save`              | `string`       | PNG data URL, when the image is downloaded              |
+| Output              | Type             | Description                                             |
+| ------------------- | ---------------- | ------------------------------------------------------- |
+| `annotationsChange` | `ScAnnotation[]` | After every user change: draw, erase, undo, redo, clear |
+| `save`              | `string`         | PNG data URL, when the image is downloaded              |
 
 Methods: `getAnnotations()`, `setAnnotations(annotations)`.
 
@@ -116,9 +116,9 @@ Methods: `getAnnotations()`, `setAnnotations(annotations)`.
 
 ### ScImageAnnotatorToolButton — `button[scImageAnnotatorToolButton]`
 
-| Input  | Type             | Description      |
-| ------ | ---------------- | ---------------- |
-| `tool` | `AnnotationTool` | Tool to activate |
+| Input  | Type               | Description      |
+| ------ | ------------------ | ---------------- |
+| `tool` | `ScAnnotationTool` | Tool to activate |
 
 `aria-pressed` reflects the active tool.
 
@@ -149,23 +149,23 @@ The drawing surface. `role="img"` named by `alt`; `data-state="loading" | "ready
 ## Types
 
 ```typescript
-type AnnotationTool = 'pen' | 'line' | 'rectangle' | 'circle' | 'arrow' | 'eraser';
+type ScAnnotationTool = 'pen' | 'line' | 'rectangle' | 'circle' | 'arrow' | 'eraser';
 
-interface Annotation {
+interface ScAnnotation {
   id: string;
-  tool: Exclude<AnnotationTool, 'eraser'>;
-  points: AnnotationPoint[]; // image coordinates
+  tool: Exclude<ScAnnotationTool, 'eraser'>;
+  points: ScAnnotationPoint[]; // image coordinates
   color: string;
   lineWidth: number; // image units
 }
 
-interface AnnotatorColor {
+interface ScAnnotatorColor {
   value: string;
   label: string;
 }
 
-interface AnnotatorToolOption {
-  id: AnnotationTool;
+interface ScAnnotatorToolOption {
+  id: ScAnnotationTool;
   label: string;
 }
 ```

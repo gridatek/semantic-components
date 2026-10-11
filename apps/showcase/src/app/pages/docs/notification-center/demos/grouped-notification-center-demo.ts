@@ -1,9 +1,9 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  type Notification,
-  type NotificationGroup,
+  type ScNotification,
   ScNotificationCenter,
   ScNotificationCenterContainer,
+  type ScNotificationGroupData,
 } from '@semantic-components/ui-lab';
 
 @Component({
@@ -27,13 +27,13 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class GroupedNotificationCenterDemo {
-  readonly groups = signal<NotificationGroup[]>([
+  readonly groups = signal<ScNotificationGroupData[]>([
     { id: 'messages', title: 'Messages' },
     { id: 'updates', title: 'Updates' },
     { id: 'alerts', title: 'Alerts' },
   ]);
 
-  readonly notifications = signal<Notification[]>([
+  readonly notifications = signal<ScNotification[]>([
     {
       id: '1',
       title: 'New message from Alice',
@@ -98,11 +98,11 @@ export class GroupedNotificationCenterDemo {
     },
   ]);
 
-  onMarkRead(event: { notification: Notification; read: boolean }): void {
+  onMarkRead(event: { notification: ScNotification; read: boolean }): void {
     console.log('Mark read:', event);
   }
 
-  onDismiss(notification: Notification): void {
+  onDismiss(notification: ScNotification): void {
     console.log('Dismissed:', notification);
   }
 

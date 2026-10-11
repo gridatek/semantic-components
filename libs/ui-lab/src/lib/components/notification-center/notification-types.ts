@@ -1,48 +1,48 @@
-export type NotificationType =
+export type ScNotificationType =
   'info' | 'success' | 'warning' | 'error' | 'message';
 
-export interface Notification {
+export interface ScNotification {
   id: string;
   title: string;
   description?: string;
-  type: NotificationType;
+  type: ScNotificationType;
   timestamp: Date;
   read: boolean;
   groupId?: string;
   avatar?: string;
   icon?: string;
-  action?: NotificationAction;
+  action?: ScNotificationAction;
   metadata?: Record<string, unknown>;
 }
 
-export interface NotificationAction {
+export interface ScNotificationAction {
   label: string;
   url?: string;
   handler?: () => void;
 }
 
-export interface NotificationGroup {
+export interface ScNotificationGroupData {
   id: string;
   title: string;
   icon?: string;
   collapsed?: boolean;
 }
 
-export interface NotificationMarkReadEvent {
-  notification: Notification;
+export interface ScNotificationMarkReadEvent {
+  notification: ScNotification;
   read: boolean;
 }
 
-export interface NotificationDismissEvent {
-  notification: Notification;
+export interface ScNotificationDismissEvent {
+  notification: ScNotification;
 }
 
-export interface NotificationActionEvent {
-  notification: Notification;
-  action: NotificationAction;
+export interface ScNotificationActionEvent {
+  notification: ScNotification;
+  action: ScNotificationAction;
 }
 
-export interface NotificationGroupCollapseEvent {
-  group: NotificationGroup;
+export interface ScNotificationGroupCollapseEvent {
+  group: ScNotificationGroupData;
   collapsed: boolean;
 }

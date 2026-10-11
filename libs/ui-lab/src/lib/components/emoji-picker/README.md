@@ -148,17 +148,17 @@ A composable, searchable emoji picker built from directive primitives.
 
 ### ScEmojiPicker
 
-| Input        | Type              | Default            | Description                      |
-| ------------ | ----------------- | ------------------ | -------------------------------- |
-| `class`      | `string`          | `''`               | Additional CSS classes           |
-| `categories` | `EmojiCategory[]` | Default categories | Custom emoji categories          |
-| `maxRecent`  | `number`          | `8`                | Max recently used emojis to show |
-| `columns`    | `number`          | `8`                | Number of columns in grid        |
-| `value`      | `string`          | `''`               | Selected emoji (two-way)         |
+| Input        | Type                | Default            | Description                      |
+| ------------ | ------------------- | ------------------ | -------------------------------- |
+| `class`      | `string`            | `''`               | Additional CSS classes           |
+| `categories` | `ScEmojiCategory[]` | Default categories | Custom emoji categories          |
+| `maxRecent`  | `number`            | `8`                | Max recently used emojis to show |
+| `columns`    | `number`            | `8`                | Number of columns in grid        |
+| `value`      | `string`            | `''`               | Selected emoji (two-way)         |
 
-| Output        | Type    | Description                    |
-| ------------- | ------- | ------------------------------ |
-| `emojiSelect` | `Emoji` | Emitted when emoji is selected |
+| Output        | Type      | Description                    |
+| ------------- | --------- | ------------------------------ |
+| `emojiSelect` | `ScEmoji` | Emitted when emoji is selected |
 
 ### ScEmojiPickerSearch
 
@@ -198,16 +198,16 @@ Auto-hides via `[hidden]` when not visible. Consumers write the `@for` loop.
 ## Types
 
 ```typescript
-interface Emoji {
+interface ScEmoji {
   emoji: string;
   name: string;
   keywords?: string[];
 }
 
-interface EmojiCategory {
+interface ScEmojiCategory {
   id: string;
   name: string;
   icon: string;
-  emojis: Emoji[];
+  emojis: ScEmoji[];
 }
 ```

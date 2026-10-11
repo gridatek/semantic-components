@@ -9,7 +9,7 @@ import {
 import { cn } from '@semantic-components/ui';
 import { PieArcDatum, arc, pie } from 'd3-shape';
 import { SC_CHART } from './chart-container';
-import { CHART_COLORS, ChartDataPoint } from './chart-types';
+import { CHART_COLORS, ScChartDataPoint } from './chart-types';
 
 @Component({
   selector: '[scPieChart]',
@@ -90,14 +90,14 @@ export class ScPieChart {
   private readonly container = inject(SC_CHART, { optional: true });
 
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly data = input<ChartDataPoint[]>([]);
+  readonly data = input<ScChartDataPoint[]>([]);
   readonly size = input<number>(300);
   readonly innerRadius = input<number>(0); // 0 for pie, >0 for donut
   readonly showLabels = input<boolean>(true);
   readonly ariaLabel = input<string>('Pie chart');
 
   readonly hoveredSlice = signal<
-    (ChartDataPoint & { percentage: number; color: string }) | null
+    (ScChartDataPoint & { percentage: number; color: string }) | null
   >(null);
   readonly tooltipX = signal(0);
   readonly tooltipY = signal(0);
@@ -121,11 +121,11 @@ export class ScPieChart {
     const outerRadius = this.size() / 2 - 10;
     const innerR = this.innerRadius();
 
-    const pieGen = pie<ChartDataPoint>()
+    const pieGen = pie<ScChartDataPoint>()
       .sort(null)
       .value((d) => d.value);
 
-    const arcGen = arc<PieArcDatum<ChartDataPoint>>()
+    const arcGen = arc<PieArcDatum<ScChartDataPoint>>()
       .outerRadius(outerRadius)
       .innerRadius(innerR);
 
@@ -143,7 +143,7 @@ export class ScPieChart {
       const labelArc =
         innerR > 0
           ? arcGen
-          : arc<PieArcDatum<ChartDataPoint>>()
+          : arc<PieArcDatum<ScChartDataPoint>>()
               .outerRadius(outerRadius)
               .innerRadius(outerRadius * 0.2);
 

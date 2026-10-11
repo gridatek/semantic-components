@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { ScMentionInputState } from './mention-input-state';
-import type { MentionUser } from './mention-input-types';
+import type { ScMentionUser } from './mention-input-types';
 
 @Component({
   selector: 'button[scMentionInputSuggestionItem]',
@@ -48,7 +48,7 @@ import type { MentionUser } from './mention-input-types';
 })
 export class ScMentionInputSuggestionItem {
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly user = input.required<MentionUser>();
+  readonly user = input.required<ScMentionUser>();
   readonly index = input.required<number>();
 
   protected readonly state = inject(ScMentionInputState);

@@ -22,7 +22,7 @@ import {
   ScMentionInputSuggestionItem,
   ScMentionInputSuggestions,
 } from '@semantic-components/ui-lab';
-import type { MentionUser } from '@semantic-components/ui-lab';
+import type { ScMentionUser } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-form-mention-input-demo',
@@ -89,7 +89,7 @@ import type { MentionUser } from '@semantic-components/ui-lab';
 export class FormMentionInputDemo {
   readonly commentValue = signal('');
 
-  readonly sampleUsers: MentionUser[] = [
+  readonly sampleUsers: ScMentionUser[] = [
     { id: '1', name: 'John Doe', username: 'johndoe' },
     { id: '2', name: 'Jane Smith', username: 'janesmith' },
     { id: '3', name: 'Bob Wilson', username: 'bobwilson' },

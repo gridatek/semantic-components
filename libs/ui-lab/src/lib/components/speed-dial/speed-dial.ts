@@ -15,8 +15,8 @@ import { cn } from '@semantic-components/ui';
 import { ScSpeedDialAction } from './speed-dial-action';
 import {
   SC_SPEED_DIAL,
-  SpeedDialDirection,
-  SpeedDialSize,
+  ScSpeedDialDirection,
+  ScSpeedDialSize,
 } from './speed-dial-types';
 
 @Directive({
@@ -33,8 +33,8 @@ export class ScSpeedDial {
   private readonly destroyRef = inject(DestroyRef);
 
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly direction = input<SpeedDialDirection>('up');
-  readonly size = input<SpeedDialSize>('md');
+  readonly direction = input<ScSpeedDialDirection>('up');
+  readonly size = input<ScSpeedDialSize>('md');
 
   readonly open = model(false);
 

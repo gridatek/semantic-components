@@ -1,4 +1,4 @@
-export interface TourStep {
+export interface ScTourStep {
   target: string;
   title: string;
   content: string;
@@ -9,8 +9,8 @@ export interface TourStep {
   afterHide?: () => void | Promise<void>;
 }
 
-export interface TourOptions {
-  steps: TourStep[];
+export interface ScTourOptions {
+  steps: ScTourStep[];
   overlayOpacity?: number;
   animationDuration?: number;
   showProgress?: boolean;
@@ -21,7 +21,7 @@ export interface TourOptions {
   scrollPadding?: number;
 }
 
-export interface TargetRect {
+export interface ScTourGuideTargetRect {
   top: number;
   left: number;
   width: number;

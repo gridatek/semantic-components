@@ -15,7 +15,7 @@ import { ScSpotlightDescription } from './spotlight-description';
 import { ScSpotlightState } from './spotlight-state';
 import { ScSpotlightTitle } from './spotlight-title';
 
-export interface SpotlightOptions {
+export interface ScSpotlightOptions {
   target: string | Element;
   padding?: number;
   borderRadius?: number;

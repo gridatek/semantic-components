@@ -1,7 +1,7 @@
 import { NgComponentOutlet } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ScDock, ScDockItem, ScDockItems } from '@semantic-components/ui-lab';
-import type { DockItem } from '@semantic-components/ui-lab';
+import type { ScDockItemData } from '@semantic-components/ui-lab';
 import {
   SiCompassIcon,
   SiFolderIcon,
@@ -72,7 +72,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class SizesDockDemo {
-  readonly items: DockItem[] = [
+  readonly items: ScDockItemData[] = [
     {
       id: 'finder',
       label: 'Finder',

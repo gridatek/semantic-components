@@ -20,7 +20,7 @@ import { LineChartDemo } from './line-chart-demo';
 export class LineChartDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ChartDataPoint,
+  ScChartDataPoint,
   ScChartContainer,
   ScLineChart,
 } from '@semantic-components/charts';
@@ -39,7 +39,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class LineChartDemo {
-  readonly lineData: ChartDataPoint[] = [
+  readonly lineData: ScChartDataPoint[] = [
     { label: 'Mon', value: 45 },
     { label: 'Tue', value: 52 },
     { label: 'Wed', value: 49 },

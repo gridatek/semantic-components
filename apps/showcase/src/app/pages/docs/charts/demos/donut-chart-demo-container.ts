@@ -20,7 +20,7 @@ import { DonutChartDemo } from './donut-chart-demo';
 export class DonutChartDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ChartDataPoint,
+  ScChartDataPoint,
   ScChartContainer,
   ScChartLegend,
   ScDonutChart,
@@ -46,7 +46,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class DonutChartDemo {
-  readonly pieData: ChartDataPoint[] = [
+  readonly pieData: ScChartDataPoint[] = [
     { label: 'Desktop', value: 45 },
     { label: 'Mobile', value: 35 },
     { label: 'Tablet', value: 20 },

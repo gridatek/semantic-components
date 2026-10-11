@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  BarcodeResult,
+  ScBarcodeResult,
   ScBarcodeScanner,
   ScBarcodeVideo,
 } from '@semantic-components/ui-lab';
@@ -97,9 +97,9 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class HistoryBarcodeScannerDemo {
-  readonly scanHistory = signal<BarcodeResult[]>([]);
+  readonly scanHistory = signal<ScBarcodeResult[]>([]);
 
-  addToHistory(result: BarcodeResult): void {
+  addToHistory(result: ScBarcodeResult): void {
     const current = this.scanHistory();
     if (!current.some((item) => item.rawValue === result.rawValue)) {
       this.scanHistory.set([result, ...current].slice(0, 20));

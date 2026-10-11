@@ -28,7 +28,7 @@ Child components inject `SC_DOCK` to access parent state and methods.
 
 ```typescript
 import { ScDock, ScDockBadge, ScDockItem, ScDockItems } from '@/ui/dock';
-import type { DockItem, DockPosition, DockSize } from '@/ui/dock';
+import type { ScDockItemData, ScDockPosition, ScDockSize } from '@/ui/dock';
 ```
 
 ## Usage
@@ -46,13 +46,13 @@ import type { DockItem, DockPosition, DockSize } from '@/ui/dock';
 ```
 
 ```typescript
-items: DockItem[] = [
+items: ScDockItemData[] = [
   { id: 'home', label: 'Home', icon: '<svg>...</svg>' },
   { id: 'mail', label: 'Mail', icon: '<svg>...</svg>' },
   { id: 'settings', label: 'Settings', icon: '<svg>...</svg>' },
 ];
 
-onItemClick(item: DockItem): void {
+onItemClick(item: ScDockItemData): void {
   console.log('Clicked:', item.label);
 }
 ```
@@ -74,7 +74,7 @@ onItemClick(item: DockItem): void {
 ```
 
 ```typescript
-items: DockItem[] = [
+items: ScDockItemData[] = [
   { id: 'mail', label: 'Mail', icon: '...', badge: 5 },
   { id: 'notifications', label: 'Notifications', icon: '...', badge: '!' },
 ];
@@ -134,9 +134,9 @@ items: DockItem[] = [
 
 #### Outputs
 
-| Output      | Type       | Description                  |
-| ----------- | ---------- | ---------------------------- |
-| `itemClick` | `DockItem` | Emitted when item is clicked |
+| Output      | Type             | Description                  |
+| ----------- | ---------------- | ---------------------------- |
+| `itemClick` | `ScDockItemData` | Emitted when item is clicked |
 
 ### ScDockItems (Component)
 
@@ -158,10 +158,10 @@ Individual dock item button.
 
 #### Inputs
 
-| Input   | Type       | Default | Description            |
-| ------- | ---------- | ------- | ---------------------- |
-| `item`  | `DockItem` | -       | Required. Item data    |
-| `class` | `string`   | `''`    | Additional CSS classes |
+| Input   | Type             | Default | Description            |
+| ------- | ---------------- | ------- | ---------------------- |
+| `item`  | `ScDockItemData` | -       | Required. Item data    |
+| `class` | `string`         | `''`    | Additional CSS classes |
 
 ### ScDockBadge (Component)
 
@@ -178,7 +178,7 @@ Badge indicator for dock items.
 ## Type Definitions
 
 ```typescript
-interface DockItem {
+interface ScDockItemData {
   id: string;
   label: string;
   icon: string;
@@ -187,8 +187,8 @@ interface DockItem {
   disabled?: boolean;
 }
 
-type DockPosition = 'bottom' | 'left' | 'right';
-type DockSize = 'sm' | 'md' | 'lg';
+type ScDockPosition = 'bottom' | 'left' | 'right';
+type ScDockSize = 'sm' | 'md' | 'lg';
 ```
 
 ## Features

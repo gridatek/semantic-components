@@ -1,11 +1,11 @@
 import type { WritableSignal } from '@angular/core';
 
-export interface Parser<T> {
+export interface ScParser<T> {
   parse(raw: string): T | null;
   serialize(value: T): string;
 }
 
-export interface QueryParamOptions {
+export interface ScQueryParamOptions {
   /** 'replace' (default) or 'push' — controls browser history behaviour */
   history?: 'replace' | 'push';
   /**
@@ -17,20 +17,20 @@ export interface QueryParamOptions {
   debounceMs?: number;
 }
 
-export interface ParserBuilder<T> extends Parser<T> {
-  withDefault(defaultValue: T): ParserBuilderWithDefault<T>;
-  withOptions(opts: QueryParamOptions): ParserBuilder<T>;
-  _options?: QueryParamOptions;
+export interface ScParserBuilder<T> extends ScParser<T> {
+  withDefault(defaultValue: T): ScParserBuilderWithDefault<T>;
+  withOptions(opts: ScQueryParamOptions): ScParserBuilder<T>;
+  _options?: ScQueryParamOptions;
   _default?: undefined;
 }
 
-export interface ParserBuilderWithDefault<T> extends Parser<T> {
-  withOptions(opts: QueryParamOptions): ParserBuilderWithDefault<T>;
-  _options?: QueryParamOptions;
+export interface ScParserBuilderWithDefault<T> extends ScParser<T> {
+  withOptions(opts: ScQueryParamOptions): ScParserBuilderWithDefault<T>;
+  _options?: ScQueryParamOptions;
   _default: T;
 }
 
-export interface QueryParamState<T> {
+export interface ScQueryParamState<T> {
   /** Signal holding the current parsed value (or default / null). */
   value: WritableSignal<T>;
   /**

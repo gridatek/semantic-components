@@ -14,7 +14,10 @@ import {
   SiTriangleAlertIcon,
   SiXIcon,
 } from '@semantic-icons/lucide-icons';
-import type { Notification, NotificationAction } from './notification-types';
+import type {
+  ScNotification,
+  ScNotificationAction,
+} from './notification-types';
 
 @Component({
   selector: 'div[scNotificationItem]',
@@ -130,12 +133,12 @@ import type { Notification, NotificationAction } from './notification-types';
 })
 export class ScNotificationItem {
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly notification = input.required<Notification>();
+  readonly notification = input.required<ScNotification>();
   readonly showDismiss = input(true);
 
   readonly markRead = output<boolean>();
   readonly dismiss = output<void>();
-  readonly actionClick = output<NotificationAction>();
+  readonly actionClick = output<ScNotificationAction>();
   readonly itemClick = output<void>();
 
   protected readonly class = computed(() =>
@@ -205,7 +208,10 @@ export class ScNotificationItem {
     this.itemClick.emit();
   }
 
-  protected onActionClick(event: MouseEvent, action: NotificationAction): void {
+  protected onActionClick(
+    event: MouseEvent,
+    action: ScNotificationAction,
+  ): void {
     event.stopPropagation();
     this.actionClick.emit(action);
 

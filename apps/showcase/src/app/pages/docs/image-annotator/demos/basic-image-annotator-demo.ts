@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  type Annotation,
+  type ScAnnotation,
   ScImageAnnotator,
   ScImageAnnotatorAction,
   ScImageAnnotatorCanvas,
@@ -130,7 +130,7 @@ export class BasicImageAnnotatorDemo {
   readonly annotationCount = signal(0);
   readonly imageSrc = signal('https://picsum.photos/seed/annotate1/700/450');
 
-  onAnnotationsChange(annotations: Annotation[]): void {
+  onAnnotationsChange(annotations: ScAnnotation[]): void {
     this.annotationCount.set(annotations.length);
   }
 

@@ -229,9 +229,9 @@ The `sc-stat-card-change` directive automatically applies colors based on the `t
 ## Type Definitions
 
 ```typescript
-type StatCardTrend = 'up' | 'down' | 'neutral';
-type StatCardVariant = 'default' | 'outline' | 'filled';
-type StatCardSize = 'sm' | 'md' | 'lg';
+type ScStatCardTrend = 'up' | 'down' | 'neutral';
+type ScStatCardVariant = 'default' | 'outline' | 'filled';
+type ScStatCardSize = 'sm' | 'md' | 'lg';
 ```
 
 ## Styling Reference

@@ -92,37 +92,37 @@ Directive-based drag-and-drop task board. Directives provide behavior and stylin
 
 #### Inputs
 
-| Input              | Type             | Default          | Description                                       |
-| ------------------ | ---------------- | ---------------- | ------------------------------------------------- |
-| `columns`          | `KanbanColumn[]` | `[]`             | Array of columns (two-way binding with `model()`) |
-| `cards`            | `KanbanCard[]`   | `[]`             | Array of cards (two-way binding with `model()`)   |
-| `disabled`         | `boolean`        | `false`          | Disable all drag and drop interactions            |
-| `aria-label`       | `string`         | `'Kanban board'` | Name of the board region                          |
-| `aria-describedby` | `string \| null` | `null`           | Id of a hint for the keyboard moves               |
-| `class`            | `string`         | `''`             | Additional CSS classes                            |
+| Input              | Type                   | Default          | Description                                       |
+| ------------------ | ---------------------- | ---------------- | ------------------------------------------------- |
+| `columns`          | `ScKanbanColumnData[]` | `[]`             | Array of columns (two-way binding with `model()`) |
+| `cards`            | `ScKanbanCardData[]`   | `[]`             | Array of cards (two-way binding with `model()`)   |
+| `disabled`         | `boolean`              | `false`          | Disable all drag and drop interactions            |
+| `aria-label`       | `string`               | `'Kanban board'` | Name of the board region                          |
+| `aria-describedby` | `string \| null`       | `null`           | Id of a hint for the keyboard moves               |
+| `class`            | `string`               | `''`             | Additional CSS classes                            |
 
 #### Outputs
 
 | Output            | Type                                       | Description                                 |
 | ----------------- | ------------------------------------------ | ------------------------------------------- |
-| `cardMoved`       | `KanbanDragEvent`                          | Emitted when a card is moved                |
-| `cardAdded`       | `KanbanCardAddEvent`                       | Emitted when a card is added                |
-| `cardDeleted`     | `KanbanCardDeleteEvent`                    | Emitted when a card is deleted              |
-| `cardClick`       | `KanbanCard`                               | Emitted when a card is clicked              |
+| `cardMoved`       | `ScKanbanDragEvent`                        | Emitted when a card is moved                |
+| `cardAdded`       | `ScKanbanCardAddEvent`                     | Emitted when a card is added                |
+| `cardDeleted`     | `ScKanbanCardDeleteEvent`                  | Emitted when a card is deleted              |
+| `cardClick`       | `ScKanbanCardData`                         | Emitted when a card is clicked              |
 | `columnAdded`     | `string`                                   | Emitted when a column is added (title)      |
 | `columnCollapsed` | `{ columnId: string; collapsed: boolean }` | Emitted when a column is collapsed/expanded |
 
 #### Public API
 
-| Property/Method                       | Returns          | Description                    |
-| ------------------------------------- | ---------------- | ------------------------------ |
-| `sortedColumns()`                     | `KanbanColumn[]` | Columns sorted by order        |
-| `getCardsForColumn(columnId)`         | `KanbanCard[]`   | Cards for a column, sorted     |
-| `moveCard(event)`                     | `void`           | Move a card (called by column) |
-| `addCard(columnId, title)`            | `void`           | Add a new card                 |
-| `deleteCard(columnId, card)`          | `void`           | Delete a card                  |
-| `addColumn(title)`                    | `void`           | Add a new column               |
-| `collapseColumn(columnId, collapsed)` | `void`           | Collapse/expand a column       |
+| Property/Method                       | Returns                | Description                    |
+| ------------------------------------- | ---------------------- | ------------------------------ |
+| `sortedColumns()`                     | `ScKanbanColumnData[]` | Columns sorted by order        |
+| `getCardsForColumn(columnId)`         | `ScKanbanCardData[]`   | Cards for a column, sorted     |
+| `moveCard(event)`                     | `void`                 | Move a card (called by column) |
+| `addCard(columnId, title)`            | `void`                 | Add a new card                 |
+| `deleteCard(columnId, card)`          | `void`                 | Delete a card                  |
+| `addColumn(title)`                    | `void`                 | Add a new column               |
+| `collapseColumn(columnId, collapsed)` | `void`                 | Collapse/expand a column       |
 
 Keyboard: `moveCardByKeyboard(card, 'left' | 'right' | 'up' | 'down')` moves a card, announces it and keeps focus on it (cards call it on Alt + arrow keys).
 
@@ -130,37 +130,37 @@ Keyboard: `moveCardByKeyboard(card, 'left' | 'right' | 'up' | 'down')` moves a c
 
 #### Inputs
 
-| Input    | Type           | Default | Description            |
-| -------- | -------------- | ------- | ---------------------- |
-| `column` | `KanbanColumn` | -       | **Required.** Column   |
-| `class`  | `string`       | `''`    | Additional CSS classes |
+| Input    | Type                 | Default | Description            |
+| -------- | -------------------- | ------- | ---------------------- |
+| `column` | `ScKanbanColumnData` | -       | **Required.** Column   |
+| `class`  | `string`             | `''`    | Additional CSS classes |
 
 #### Public API
 
-| Property/Method    | Returns          | Description                          |
-| ------------------ | ---------------- | ------------------------------------ |
-| `board`            | `ScKanbanBoard`  | Reference to parent board            |
-| `columnCards()`    | `KanbanCard[]`   | Cards in this column                 |
-| `collapsed()`      | `boolean`        | Whether column is collapsed          |
-| `isDragOver()`     | `boolean`        | Whether a card is being dragged over |
-| `dropIndex()`      | `number \| null` | Current drop position index          |
-| `isOverLimit()`    | `boolean`        | Whether WIP limit is exceeded        |
-| `toggleCollapse()` | `void`           | Toggle collapsed state               |
+| Property/Method    | Returns              | Description                          |
+| ------------------ | -------------------- | ------------------------------------ |
+| `board`            | `ScKanbanBoard`      | Reference to parent board            |
+| `columnCards()`    | `ScKanbanCardData[]` | Cards in this column                 |
+| `collapsed()`      | `boolean`            | Whether column is collapsed          |
+| `isDragOver()`     | `boolean`            | Whether a card is being dragged over |
+| `dropIndex()`      | `number \| null`     | Current drop position index          |
+| `isOverLimit()`    | `boolean`            | Whether WIP limit is exceeded        |
+| `toggleCollapse()` | `void`               | Toggle collapsed state               |
 
 ### ScKanbanCard (`[scKanbanCard]`)
 
 #### Inputs
 
-| Input   | Type         | Default | Description            |
-| ------- | ------------ | ------- | ---------------------- |
-| `card`  | `KanbanCard` | -       | **Required.** Card     |
-| `class` | `string`     | `''`    | Additional CSS classes |
+| Input   | Type               | Default | Description            |
+| ------- | ------------------ | ------- | ---------------------- |
+| `card`  | `ScKanbanCardData` | -       | **Required.** Card     |
+| `class` | `string`           | `''`    | Additional CSS classes |
 
 #### Outputs
 
-| Output      | Type         | Description                |
-| ----------- | ------------ | -------------------------- |
-| `cardClick` | `KanbanCard` | Emitted on Enter/Space key |
+| Output      | Type               | Description                |
+| ----------- | ------------------ | -------------------------- |
+| `cardClick` | `ScKanbanCardData` | Emitted on Enter/Space key |
 
 #### Public API
 
@@ -177,7 +177,7 @@ Keyboard: `moveCardByKeyboard(card, 'left' | 'right' | 'up' | 'down')` moves a c
 ### KanbanColumn
 
 ```typescript
-interface KanbanColumn {
+interface ScKanbanColumnData {
   id: string;
   title: string;
   order: number;
@@ -190,14 +190,14 @@ interface KanbanColumn {
 ### KanbanCard
 
 ```typescript
-interface KanbanCard {
+interface ScKanbanCardData {
   id: string;
   title: string;
   description?: string;
   columnId: string;
   order: number;
-  labels?: KanbanLabel[];
-  assignee?: KanbanAssignee;
+  labels?: ScKanbanLabel[];
+  assignee?: ScKanbanAssignee;
   dueDate?: Date;
   priority?: 'low' | 'medium' | 'high' | 'urgent';
   metadata?: Record<string, unknown>;
@@ -207,7 +207,7 @@ interface KanbanCard {
 ### KanbanLabel
 
 ```typescript
-interface KanbanLabel {
+interface ScKanbanLabel {
   id: string;
   text: string;
   color: string;
@@ -217,7 +217,7 @@ interface KanbanLabel {
 ### KanbanAssignee
 
 ```typescript
-interface KanbanAssignee {
+interface ScKanbanAssignee {
   id: string;
   name: string;
   avatar?: string;
@@ -228,8 +228,8 @@ interface KanbanAssignee {
 ### KanbanDragEvent
 
 ```typescript
-interface KanbanDragEvent {
-  card: KanbanCard;
+interface ScKanbanDragEvent {
+  card: ScKanbanCardData;
   sourceColumnId: string;
   targetColumnId: string;
   sourceIndex: number;

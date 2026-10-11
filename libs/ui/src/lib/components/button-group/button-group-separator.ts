@@ -1,7 +1,7 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from '../../utils';
 
-export type ButtonGroupSeparatorOrientation = 'horizontal' | 'vertical';
+export type ScButtonGroupSeparatorOrientation = 'horizontal' | 'vertical';
 
 @Directive({
   selector: 'div[scButtonGroupSeparator]',
@@ -14,7 +14,7 @@ export type ButtonGroupSeparatorOrientation = 'horizontal' | 'vertical';
 })
 export class ScButtonGroupSeparator {
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly orientation = input<ButtonGroupSeparatorOrientation>('vertical');
+  readonly orientation = input<ScButtonGroupSeparatorOrientation>('vertical');
 
   protected readonly class = computed(() =>
     cn(

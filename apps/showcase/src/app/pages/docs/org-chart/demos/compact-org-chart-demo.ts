@@ -1,9 +1,9 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  type OrgChartNode,
   ScOrgChart,
   ScOrgChartCard,
   ScOrgChartNode,
+  type ScOrgChartNodeData,
   ScOrgChartNodeDef,
 } from '@semantic-components/ui-lab';
 import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
@@ -64,7 +64,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class CompactOrgChartDemo {
-  readonly orgData = signal<OrgChartNode>({
+  readonly orgData = signal<ScOrgChartNodeData>({
     id: '1',
     name: 'Sarah Johnson',
     title: 'CEO',

@@ -7,14 +7,14 @@ import {
   signal,
 } from '@angular/core';
 
-export interface Language {
+export interface ScLanguage {
   code: string;
   label: string;
   nativeLabel: string;
 }
 
-export interface LanguageConfig {
-  languages: Language[];
+export interface ScLanguageConfig {
+  languages: ScLanguage[];
   defaultLanguage: string;
   /** Base path for localized URLs (e.g., '/' for '/en/', '/fr/') */
   basePath?: string;
@@ -24,7 +24,7 @@ export interface LanguageConfig {
   urlResolver?: (language: string, currentUrl: string) => string;
 }
 
-export const SC_LANGUAGE_CONFIG = new InjectionToken<LanguageConfig>(
+export const SC_LANGUAGE_CONFIG = new InjectionToken<ScLanguageConfig>(
   'SC_LANGUAGE_CONFIG',
   {
     providedIn: 'root',
@@ -48,7 +48,7 @@ export class ScLanguageService {
   private readonly storageKey = this.config.storageKey ?? 'sc-language';
 
   /** All available languages */
-  readonly languages = signal<Language[]>(this.config.languages);
+  readonly languages = signal<ScLanguage[]>(this.config.languages);
 
   /** Current language code */
   readonly language = signal<string>(this.detectCurrentLanguage());

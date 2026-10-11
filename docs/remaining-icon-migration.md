@@ -16,7 +16,7 @@ We converted 157 raw inline SVGs from `xmlns="http://www.w3.org/2000/svg"` to `@
 
 ### 2. Dock demos (10 files, 60 SVGs)
 
-- **Pattern**: `DockItem.icon: string` — SVG strings in data objects
+- **Pattern**: `ScDockItemData.icon: string` — SVG strings in data objects
 - **Type definition**: `libs/ui-lab/src/lib/components/dock/dock-types.ts` → `icon: string`
 - **Component**: `ScDockItem` renders the icon via innerHTML
 - **Files**:
@@ -26,7 +26,7 @@ We converted 157 raw inline SVGs from `xmlns="http://www.w3.org/2000/svg"` to `@
   - `apps/showcase/src/app/pages/docs/dock/demos/no-magnification-dock-demo.ts` + container
   - `apps/showcase/src/app/pages/docs/dock/demos/magnification-scale-dock-demo.ts` + container
 - **Icons used**: Folder, Compass, Mail, Image, Music, Settings (repeated across all 5 demos)
-- **Fix approach**: Change `DockItem.icon` from `string` to accept a `Type<any>` (component type) or use a different pattern. The `ScDockItem` component would need to dynamically render the icon component instead of using innerHTML.
+- **Fix approach**: Change `ScDockItemData.icon` from `string` to accept a `Type<any>` (component type) or use a different pattern. The `ScDockItem` component would need to dynamically render the icon component instead of using innerHTML.
 
 ### 3. Speed-dial demos (12 files, 48 SVGs)
 

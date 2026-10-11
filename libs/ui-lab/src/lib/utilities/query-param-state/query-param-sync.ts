@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
-import type { QueryParamOptions } from './query-param-types';
+import type { ScQueryParamOptions } from './query-param-types';
 
 @Service()
 export class QueryParamSyncService {
@@ -70,7 +70,7 @@ export class QueryParamSyncService {
    * Synchronous writes within the same microtask are batched into a single
    * navigation so they don't overwrite each other.
    */
-  write(key: string, raw: string | null, opts?: QueryParamOptions): void {
+  write(key: string, raw: string | null, opts?: ScQueryParamOptions): void {
     if (this.pendingParams === null) {
       this.pendingParams = {
         ...this.router.parseUrl(this.router.url).queryParams,

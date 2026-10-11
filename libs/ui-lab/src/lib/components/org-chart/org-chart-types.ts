@@ -1,13 +1,13 @@
 import { InjectionToken } from '@angular/core';
 import type { ScOrgChart } from './org-chart';
 
-export interface OrgChartNode {
+export interface ScOrgChartNodeData {
   id: string;
   name: string;
   title?: string;
   avatar?: string;
   department?: string;
-  children?: OrgChartNode[];
+  children?: ScOrgChartNodeData[];
   expanded?: boolean;
   data?: Record<string, unknown>;
 }
@@ -15,12 +15,12 @@ export interface OrgChartNode {
 export type ScOrgChartDirection = 'vertical' | 'horizontal';
 
 export interface ScOrgChartNodeExpandEvent {
-  node: OrgChartNode;
+  node: ScOrgChartNodeData;
   expanded: boolean;
 }
 
 export interface ScOrgChartNodeDefContext {
-  $implicit: OrgChartNode;
+  $implicit: ScOrgChartNodeData;
   expanded: boolean;
   hasChildren: boolean;
   toggle: () => void;

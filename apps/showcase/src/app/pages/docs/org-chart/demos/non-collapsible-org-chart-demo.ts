@@ -1,9 +1,9 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  type OrgChartNode,
   ScOrgChart,
   ScOrgChartCard,
   ScOrgChartNode,
+  type ScOrgChartNodeData,
   ScOrgChartNodeDef,
 } from '@semantic-components/ui-lab';
 
@@ -41,7 +41,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class NonCollapsibleOrgChartDemo {
-  readonly orgData = signal<OrgChartNode>({
+  readonly orgData = signal<ScOrgChartNodeData>({
     id: '1',
     name: 'John Smith',
     title: 'Team Lead',

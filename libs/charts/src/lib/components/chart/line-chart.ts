@@ -10,7 +10,7 @@ import { cn } from '@semantic-components/ui';
 import { scaleLinear, scalePoint } from 'd3-scale';
 import { area, line } from 'd3-shape';
 import { SC_CHART } from './chart-container';
-import { CHART_COLORS, ChartDataPoint } from './chart-types';
+import { CHART_COLORS, ScChartDataPoint } from './chart-types';
 
 @Component({
   selector: '[scLineChart]',
@@ -128,7 +128,7 @@ export class ScLineChart {
   private readonly container = inject(SC_CHART, { optional: true });
 
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly data = input<ChartDataPoint[]>([]);
+  readonly data = input<ScChartDataPoint[]>([]);
   readonly height = input<number>(300);
   readonly showArea = input<boolean>(false);
   readonly showPoints = input<boolean>(true);
@@ -136,7 +136,7 @@ export class ScLineChart {
   readonly labelStep = input<number>(1);
   readonly ariaLabel = input<string>('Line chart');
 
-  readonly hoveredPoint = signal<ChartDataPoint | null>(null);
+  readonly hoveredPoint = signal<ScChartDataPoint | null>(null);
   readonly tooltipX = signal(0);
   readonly tooltipY = signal(0);
 
@@ -214,7 +214,7 @@ export class ScLineChart {
       .y1((d) => d.y)(pts);
   });
 
-  onPointHover(event: MouseEvent, point: ChartDataPoint): void {
+  onPointHover(event: MouseEvent, point: ScChartDataPoint): void {
     const circle = event.target as SVGElement;
     const parentRect = circle.closest('[scLineChart]')?.getBoundingClientRect();
     const circleRect = circle.getBoundingClientRect();
@@ -227,7 +227,7 @@ export class ScLineChart {
     this.hoveredPoint.set(point);
   }
 
-  onPointFocus(event: FocusEvent, point: ChartDataPoint): void {
+  onPointFocus(event: FocusEvent, point: ScChartDataPoint): void {
     const circle = event.target as SVGElement;
     const parentRect = circle.closest('[scLineChart]')?.getBoundingClientRect();
     const circleRect = circle.getBoundingClientRect();

@@ -2,39 +2,40 @@ import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { injectQueryParam } from './inject-query-param';
 import type {
-  ParserBuilder,
-  ParserBuilderWithDefault,
-  QueryParamOptions,
-  QueryParamState,
+  ScParserBuilder,
+  ScParserBuilderWithDefault,
+  ScQueryParamOptions,
+  ScQueryParamState,
 } from './query-param-types';
 
-export type ParserMap = Record<
+export type ScParserMap = Record<
   string,
-  ParserBuilder<unknown> | ParserBuilderWithDefault<unknown>
+  ScParserBuilder<unknown> | ScParserBuilderWithDefault<unknown>
 >;
 
-export type InferParserMapValues<M extends ParserMap> = {
-  [K in keyof M]: M[K] extends ParserBuilderWithDefault<infer T>
-    ? QueryParamState<T>
-    : M[K] extends ParserBuilder<infer T>
-      ? QueryParamState<T | null>
+export type ScInferParserMapValues<M extends ScParserMap> = {
+  [K in keyof M]: M[K] extends ScParserBuilderWithDefault<infer T>
+    ? ScQueryParamState<T>
+    : M[K] extends ScParserBuilder<infer T>
+      ? ScQueryParamState<T | null>
       : never;
 };
 
-export type InferParserMapSetAll<M extends ParserMap> = {
-  [K in keyof M]?: M[K] extends ParserBuilderWithDefault<infer T>
+export type ScInferParserMapSetAll<M extends ScParserMap> = {
+  [K in keyof M]?: M[K] extends ScParserBuilderWithDefault<infer T>
     ? T | null
-    : M[K] extends ParserBuilder<infer T>
+    : M[K] extends ScParserBuilder<infer T>
       ? T | null
       : never;
 };
 
-export type QueryParamsState<M extends ParserMap> = InferParserMapValues<M> & {
-  /** Update multiple params at once in a single navigation call. */
-  setAll(values: InferParserMapSetAll<M>, opts?: QueryParamOptions): void;
-  /** Remove all managed params from the URL. */
-  clearAll(): void;
-};
+export type ScQueryParamsState<M extends ScParserMap> =
+  ScInferParserMapValues<M> & {
+    /** Update multiple params at once in a single navigation call. */
+    setAll(values: ScInferParserMapSetAll<M>, opts?: ScQueryParamOptions): void;
+    /** Remove all managed params from the URL. */
+    clearAll(): void;
+  };
 
 /**
  * `injectQueryParams` — manage multiple query params at once.
@@ -52,21 +53,21 @@ export type QueryParamsState<M extends ParserMap> = InferParserMapValues<M> & {
  * filters.setAll({ q: 'angular', page: 1 }); // batch update
  * ```
  */
-export function injectQueryParams<M extends ParserMap>(
+export function injectQueryParams<M extends ScParserMap>(
   parserMap: M,
-): QueryParamsState<M> {
+): ScQueryParamsState<M> {
   const router = inject(Router);
 
   // Inject each param individually
-  const states = {} as InferParserMapValues<M>;
+  const states = {} as ScInferParserMapValues<M>;
   for (const key of Object.keys(parserMap) as (keyof M & string)[]) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (states as any)[key] = injectQueryParam(key, parserMap[key] as any);
   }
 
   function setAll(
-    values: InferParserMapSetAll<M>,
-    opts?: QueryParamOptions,
+    values: ScInferParserMapSetAll<M>,
+    opts?: ScQueryParamOptions,
   ): void {
     const current = router.parseUrl(router.url);
     const qp = { ...current.queryParams };
@@ -80,7 +81,7 @@ export function injectQueryParams<M extends ParserMap>(
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (states as any)[key].value.set(
           '_default' in parser
-            ? (parser as ParserBuilderWithDefault<unknown>)._default
+            ? (parser as ScParserBuilderWithDefault<unknown>)._default
             : null,
         );
       } else {
@@ -97,7 +98,7 @@ export function injectQueryParams<M extends ParserMap>(
   }
 
   function clearAll(): void {
-    const patch: InferParserMapSetAll<M> = {};
+    const patch: ScInferParserMapSetAll<M> = {};
     for (const key of Object.keys(parserMap) as (keyof M & string)[]) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (patch as any)[key] = null;
@@ -105,5 +106,5 @@ export function injectQueryParams<M extends ParserMap>(
     setAll(patch);
   }
 
-  return { ...states, setAll, clearAll } as QueryParamsState<M>;
+  return { ...states, setAll, clearAll } as ScQueryParamsState<M>;
 }

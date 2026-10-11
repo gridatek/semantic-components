@@ -7,7 +7,7 @@ import {
   ScPopoverTrigger,
 } from '@semantic-components/ui';
 import {
-  Emoji,
+  ScEmoji,
   ScEmojiPicker,
   ScEmojiPickerCategoryTab,
   ScEmojiPickerCategoryTabs,
@@ -113,9 +113,9 @@ import { SiSmileIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class TriggerEmojiPickerDemo {
-  readonly selectedEmoji = signal<Emoji | null>(null);
+  readonly selectedEmoji = signal<ScEmoji | null>(null);
 
-  onEmojiSelect(emoji: Emoji): void {
+  onEmojiSelect(emoji: ScEmoji): void {
     this.selectedEmoji.set(emoji);
   }
 }

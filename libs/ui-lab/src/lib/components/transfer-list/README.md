@@ -6,7 +6,7 @@ A composable dual-list component for moving items between source and target list
 
 ```typescript
 import { ScTransferList, ScTransferListActions, ScTransferListCount, ScTransferListHeader, ScTransferListItem, ScTransferListItems, ScTransferListSearch, ScTransferListSelectAll, ScTransferListSource, ScTransferListTarget } from '@semantic-components/ui-lab';
-import type { TransferListItem, TransferListState } from '@semantic-components/ui-lab';
+import type { ScTransferListChange, ScTransferListItemData } from '@semantic-components/ui-lab';
 ```
 
 ## Usage
@@ -70,13 +70,13 @@ import type { TransferListItem, TransferListState } from '@semantic-components/u
 ```
 
 ```typescript
-sourceItems = signal<TransferListItem[]>([
+sourceItems = signal<ScTransferListItemData[]>([
   { id: '1', label: 'Item 1', description: 'Description' },
   { id: '2', label: 'Item 2' },
   { id: '3', label: 'Item 3' },
 ]);
 
-targetItems = signal<TransferListItem[]>([]);
+targetItems = signal<ScTransferListItemData[]>([]);
 ```
 
 ### Without Search
@@ -105,7 +105,7 @@ Omit the `scTransferListSearch` element from the panel to disable search:
 ### With Disabled Items
 
 ```typescript
-sourceItems = signal<TransferListItem[]>([
+sourceItems = signal<ScTransferListItemData[]>([
   { id: '1', label: 'Movable Item' },
   { id: '2', label: 'Locked Item', disabled: true },
 ]);
@@ -117,15 +117,15 @@ sourceItems = signal<TransferListItem[]>([
 
 Root directive. Provides shared state to all children.
 
-| Input         | Type                 | Default | Description                 |
-| ------------- | -------------------- | ------- | --------------------------- |
-| `sourceItems` | `TransferListItem[]` | `[]`    | Source list items (two-way) |
-| `targetItems` | `TransferListItem[]` | `[]`    | Target list items (two-way) |
-| `class`       | `string`             | `''`    | Additional CSS classes      |
+| Input         | Type                       | Default | Description                 |
+| ------------- | -------------------------- | ------- | --------------------------- |
+| `sourceItems` | `ScTransferListItemData[]` | `[]`    | Source list items (two-way) |
+| `targetItems` | `ScTransferListItemData[]` | `[]`    | Target list items (two-way) |
+| `class`       | `string`                   | `''`    | Additional CSS classes      |
 
-| Output           | Type                | Description               |
-| ---------------- | ------------------- | ------------------------- |
-| `transferChange` | `TransferListState` | Emitted when lists change |
+| Output           | Type                   | Description               |
+| ---------------- | ---------------------- | ------------------------- |
+| `transferChange` | `ScTransferListChange` | Emitted when lists change |
 
 ### ScTransferListSource / ScTransferListTarget
 
@@ -164,10 +164,10 @@ Scrollable container directive for the item list.
 
 Component on `label`. Renders a checkbox and projects content. Handles selection toggle on click.
 
-| Input   | Type               | Description            |
-| ------- | ------------------ | ---------------------- |
-| `item`  | `TransferListItem` | Required               |
-| `class` | `string`           | Additional CSS classes |
+| Input   | Type                     | Description            |
+| ------- | ------------------------ | ---------------------- |
+| `item`  | `ScTransferListItemData` | Required               |
+| `class` | `string`                 | Additional CSS classes |
 
 ### ScTransferListActions
 
@@ -176,16 +176,16 @@ Component rendering the four transfer action buttons (move selected, move all, i
 ## Type Definitions
 
 ```typescript
-interface TransferListItem {
+interface ScTransferListItemData {
   id: string;
   label: string;
   description?: string;
   disabled?: boolean;
 }
 
-interface TransferListState {
-  source: TransferListItem[];
-  target: TransferListItem[];
+interface ScTransferListChange {
+  source: ScTransferListItemData[];
+  target: ScTransferListItemData[];
 }
 ```
 

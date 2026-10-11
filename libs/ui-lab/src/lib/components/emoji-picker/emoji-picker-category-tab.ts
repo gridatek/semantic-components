@@ -1,7 +1,7 @@
 import { ToolbarWidget } from '@angular/aria/toolbar';
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import type { EmojiCategory } from './emoji-picker-state';
+import type { ScEmojiCategory } from './emoji-picker-state';
 import { ScEmojiPickerState } from './emoji-picker-state';
 
 /** A category toggle in the category toolbar; pressed when it is shown. */
@@ -19,7 +19,7 @@ import { ScEmojiPickerState } from './emoji-picker-state';
 export class ScEmojiPickerCategoryTab {
   readonly state = inject(ScEmojiPickerState);
 
-  readonly category = input.required<EmojiCategory>();
+  readonly category = input.required<ScEmojiCategory>();
 
   readonly classInput = input<string>('', { alias: 'class' });
 

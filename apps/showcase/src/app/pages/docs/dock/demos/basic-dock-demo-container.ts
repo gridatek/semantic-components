@@ -17,7 +17,7 @@ export class BasicDockDemoContainer {
   readonly code = `import { NgComponentOutlet } from '@angular/common';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScDock, ScDockItem, ScDockItems } from '@semantic-components/ui-lab';
-import type { DockItem } from '@semantic-components/ui-lab';
+import type { ScDockItemData } from '@semantic-components/ui-lab';
 import {
   SiCompassIcon,
   SiFolderIcon,
@@ -59,7 +59,7 @@ import {
 export class BasicDockDemo {
   readonly clickedItem = signal<string | null>(null);
 
-  readonly items: DockItem[] = [
+  readonly items: ScDockItemData[] = [
     {
       id: 'finder',
       label: 'Finder',
@@ -92,7 +92,7 @@ export class BasicDockDemo {
     },
   ];
 
-  onItemClick(item: DockItem): void {
+  onItemClick(item: ScDockItemData): void {
     this.clickedItem.set(item.label);
   }
 }`;

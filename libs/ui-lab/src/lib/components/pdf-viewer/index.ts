@@ -64,15 +64,15 @@ export { ScPdfViewerEditorUndoBar } from './pdf-viewer-editor-undo-bar';
 // Types
 export { ZOOM_LEVELS } from './pdf-viewer-types';
 export type {
-  PdfZoomLevel,
-  PdfEditorMode,
-  PdfEditorAnnotation,
-  PdfFindState,
-  PdfPageMatchInfo,
-  PdfLoadEvent,
-  PdfPageChangeEvent,
-  PdfZoomChangeEvent,
-  PdfErrorEvent,
-  PdfSignatureData,
-  PdfComment,
+  ScPdfZoomLevel,
+  ScPdfEditorMode,
+  ScPdfEditorAnnotation,
+  ScPdfFindState,
+  ScPdfPageMatchInfo,
+  ScPdfLoadEvent,
+  ScPdfPageChangeEvent,
+  ScPdfZoomChangeEvent,
+  ScPdfErrorEvent,
+  ScPdfSignatureData,
+  ScPdfComment,
 } from './pdf-viewer-types';

@@ -12,10 +12,10 @@ import {
 import { cn } from '@semantic-components/ui';
 import {
   DEFAULT_BREAKPOINTS,
-  type MasonryBreakpoint,
-  type MasonryLayoutMode,
   SC_MASONRY_GRID,
   SC_MASONRY_ITEM,
+  type ScMasonryBreakpoint,
+  type ScMasonryLayoutMode,
 } from './masonry-types';
 
 @Directive({
@@ -41,8 +41,8 @@ export class ScMasonryGrid {
 
   readonly columns = input(4);
   readonly gap = input(16);
-  readonly breakpoints = input<MasonryBreakpoint[]>(DEFAULT_BREAKPOINTS);
-  readonly layoutMode = input<MasonryLayoutMode>('columns');
+  readonly breakpoints = input<ScMasonryBreakpoint[]>(DEFAULT_BREAKPOINTS);
+  readonly layoutMode = input<ScMasonryLayoutMode>('columns');
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>

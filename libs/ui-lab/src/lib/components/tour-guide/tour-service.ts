@@ -1,12 +1,12 @@
 import { Service, computed, signal } from '@angular/core';
-import type { TourOptions, TourStep } from './tour-guide-types';
+import type { ScTourOptions, ScTourStep } from './tour-guide-types';
 
 @Service()
 export class TourService {
   private readonly _isActive = signal(false);
   private readonly _currentStep = signal(0);
-  private readonly _steps = signal<TourStep[]>([]);
-  private readonly _options = signal<Partial<TourOptions>>({});
+  private readonly _steps = signal<ScTourStep[]>([]);
+  private readonly _options = signal<Partial<ScTourOptions>>({});
 
   readonly isActive = this._isActive.asReadonly();
   readonly currentStep = this._currentStep.asReadonly();
@@ -30,7 +30,7 @@ export class TourService {
     () => this._currentStep() === this._steps().length - 1,
   );
 
-  start(options: TourOptions): void {
+  start(options: ScTourOptions): void {
     this._steps.set(options.steps);
     this._options.set(options);
     this._currentStep.set(0);

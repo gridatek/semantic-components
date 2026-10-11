@@ -11,10 +11,10 @@ export { ScImageAnnotatorToolbar } from './image-annotator-toolbar';
 export {
   DEFAULT_ANNOTATOR_COLORS,
   DEFAULT_ANNOTATOR_TOOLS,
-  type Annotation,
-  type AnnotationPoint,
-  type AnnotationTool,
-  type AnnotatorColor,
-  type AnnotatorToolOption,
-  type ImageAnnotatorState,
+  type ScAnnotation,
+  type ScAnnotationPoint,
+  type ScAnnotationTool,
+  type ScAnnotatorColor,
+  type ScAnnotatorToolOption,
+  type ScImageAnnotatorSnapshot,
 } from './image-annotator-types';

@@ -11,4 +11,8 @@ export { ScTourGuideNavigation } from './tour-guide-navigation';
 export { ScTourGuideCounter } from './tour-guide-counter';
 export { ScTourGuideAction } from './tour-guide-action';
 export { TourService } from './tour-service';
-export type { TourStep, TourOptions, TargetRect } from './tour-guide-types';
+export type {
+  ScTourStep,
+  ScTourOptions,
+  ScTourGuideTargetRect,
+} from './tour-guide-types';

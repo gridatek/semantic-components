@@ -12,8 +12,8 @@ import {
   SiTrash2Icon,
 } from '@semantic-icons/lucide-icons';
 import {
-  type NotificationFilter,
   SC_NOTIFICATION_CENTER,
+  type ScNotificationFilter,
 } from './notification-center';
 import { ScNotificationGroup } from './notification-group';
 import { ScNotificationItem } from './notification-item';
@@ -183,11 +183,12 @@ export class ScNotificationCenterContainer {
   readonly center = inject(SC_NOTIFICATION_CENTER);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly filters: { value: NotificationFilter; label: string }[] = [
-    { value: 'all', label: 'All' },
-    { value: 'unread', label: 'Unread' },
-    { value: 'read', label: 'Read' },
-  ];
+  protected readonly filters: { value: ScNotificationFilter; label: string }[] =
+    [
+      { value: 'all', label: 'All' },
+      { value: 'unread', label: 'Unread' },
+      { value: 'read', label: 'Read' },
+    ];
 
   protected readonly class = computed(() =>
     cn(

@@ -1,28 +1,28 @@
-export interface HSV {
+export interface ScHSV {
   h: number; // 0-360
   s: number; // 0-100
   v: number; // 0-100
 }
 
-export interface RGB {
+export interface ScRGB {
   r: number; // 0-255
   g: number; // 0-255
   b: number; // 0-255
 }
 
-export interface HSL {
+export interface ScHSL {
   h: number; // 0-360
   s: number; // 0-100
   l: number; // 0-100
 }
 
-export interface OKLCH {
+export interface ScOKLCH {
   l: number; // 0-1 (lightness)
   c: number; // 0-0.4 (chroma)
   h: number; // 0-360 (hue)
 }
 
-export function hsvToRgb(h: number, s: number, v: number): RGB {
+export function hsvToRgb(h: number, s: number, v: number): ScRGB {
   s = s / 100;
   v = v / 100;
   const c = v * s;
@@ -59,7 +59,7 @@ export function hsvToRgb(h: number, s: number, v: number): RGB {
   };
 }
 
-export function rgbToHsv(r: number, g: number, b: number): HSV {
+export function rgbToHsv(r: number, g: number, b: number): ScHSV {
   r = r / 255;
   g = g / 255;
   b = b / 255;
@@ -93,7 +93,7 @@ export function rgbToHex(r: number, g: number, b: number): string {
   return `#${[r, g, b].map((x) => x.toString(16).padStart(2, '0')).join('')}`;
 }
 
-export function hexToRgb(hex: string): RGB | null {
+export function hexToRgb(hex: string): ScRGB | null {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   return result
     ? {
@@ -104,7 +104,7 @@ export function hexToRgb(hex: string): RGB | null {
     : null;
 }
 
-export function rgbToHsl(r: number, g: number, b: number): HSL {
+export function rgbToHsl(r: number, g: number, b: number): ScHSL {
   r /= 255;
   g /= 255;
   b /= 255;
@@ -138,7 +138,7 @@ export function rgbToHsl(r: number, g: number, b: number): HSL {
   };
 }
 
-export function hslToRgb(h: number, s: number, l: number): RGB {
+export function hslToRgb(h: number, s: number, l: number): ScRGB {
   s /= 100;
   l /= 100;
   const c = (1 - Math.abs(2 * l - 1)) * s;
@@ -183,7 +183,7 @@ function delinearize(c: number): number {
   return c <= 0.0031308 ? c * 12.92 : 1.055 * Math.pow(c, 1 / 2.4) - 0.055;
 }
 
-export function rgbToOklch(r: number, g: number, b: number): OKLCH {
+export function rgbToOklch(r: number, g: number, b: number): ScOKLCH {
   const lr = linearize(r / 255);
   const lg = linearize(g / 255);
   const lb = linearize(b / 255);
@@ -213,7 +213,7 @@ export function rgbToOklch(r: number, g: number, b: number): OKLCH {
   };
 }
 
-export function oklchToRgb(l: number, c: number, h: number): RGB {
+export function oklchToRgb(l: number, c: number, h: number): ScRGB {
   const hRad = (h * Math.PI) / 180;
   const a = c * Math.cos(hRad);
   const bk = c * Math.sin(hRad);
@@ -237,7 +237,7 @@ export function oklchToRgb(l: number, c: number, h: number): RGB {
   };
 }
 
-export function parseOklch(value: string): OKLCH | null {
+export function parseOklch(value: string): ScOKLCH | null {
   const match = value.match(/^oklch\(\s*([\d.]+)\s+([\d.]+)\s+([\d.]+)\s*\)$/i);
   if (!match) return null;
   const l = parseFloat(match[1]);
@@ -248,7 +248,7 @@ export function parseOklch(value: string): OKLCH | null {
   return { l, c, h };
 }
 
-export function parseRgb(value: string): RGB | null {
+export function parseRgb(value: string): ScRGB | null {
   const match = value.match(
     /^rgb\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*\)$/i,
   );
@@ -260,7 +260,7 @@ export function parseRgb(value: string): RGB | null {
   return { r, g, b };
 }
 
-export function parseHsl(value: string): HSL | null {
+export function parseHsl(value: string): ScHSL | null {
   const match = value.match(
     /^hsl\(\s*(\d{1,3})\s*,\s*(\d{1,3})%?\s*,\s*(\d{1,3})%?\s*\)$/i,
   );

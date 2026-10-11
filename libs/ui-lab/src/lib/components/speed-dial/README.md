@@ -8,7 +8,7 @@ Import the components from the speed-dial module:
 
 ```typescript
 import { ScSpeedDial, ScSpeedDialAction } from '@/ui/speed-dial';
-import type { SpeedDialAction, SpeedDialDirection } from '@/ui/speed-dial';
+import type { ScSpeedDialDirection, SpeedDialAction } from '@/ui/speed-dial';
 ```
 
 ## Usage
@@ -188,7 +188,7 @@ interface SpeedDialActionClickEvent {
 ### SpeedDialDirection
 
 ```typescript
-type SpeedDialDirection = 'up' | 'down' | 'left' | 'right';
+type ScSpeedDialDirection = 'up' | 'down' | 'left' | 'right';
 ```
 
 ## Accessibility

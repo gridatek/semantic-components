@@ -1,11 +1,11 @@
-export interface TransferListItem {
+export interface ScTransferListItemData {
   id: string;
   label: string;
   description?: string;
   disabled?: boolean;
 }
 
-export interface TransferListState {
-  source: TransferListItem[];
-  target: TransferListItem[];
+export interface ScTransferListChange {
+  source: ScTransferListItemData[];
+  target: ScTransferListItemData[];
 }

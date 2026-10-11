@@ -1,7 +1,7 @@
 import { Directive, computed, inject, input, output } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { SC_KANBAN_BOARD } from './kanban-board';
-import type { KanbanCard } from './kanban-types';
+import type { ScKanbanCardData } from './kanban-types';
 
 @Directive({
   selector: '[scKanbanCard]',
@@ -33,8 +33,8 @@ export class ScKanbanCard {
     ),
   );
 
-  readonly card = input.required<KanbanCard>();
-  readonly cardClick = output<KanbanCard>();
+  readonly card = input.required<ScKanbanCardData>();
+  readonly cardClick = output<ScKanbanCardData>();
 
   readonly priorityClass = computed(() => {
     const priority = this.card().priority;

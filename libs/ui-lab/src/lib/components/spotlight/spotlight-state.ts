@@ -1,6 +1,6 @@
 import { DestroyRef, Service, computed, inject, signal } from '@angular/core';
 
-export interface TargetRect {
+export interface ScSpotlightTargetRect {
   top: number;
   left: number;
   width: number;
@@ -22,7 +22,7 @@ export class ScSpotlightState {
   onClosed: (() => void) | undefined;
 
   readonly isActive = signal(false);
-  readonly targetRect = signal<TargetRect | null>(null);
+  readonly targetRect = signal<ScSpotlightTargetRect | null>(null);
   private targetElement: Element | null = null;
   private resizeObserver: ResizeObserver | null = null;
 

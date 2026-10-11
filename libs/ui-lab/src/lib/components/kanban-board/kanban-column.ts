@@ -1,7 +1,7 @@
 import { Directive, computed, inject, input, signal } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { SC_KANBAN_BOARD } from './kanban-board';
-import type { KanbanCard, KanbanColumn } from './kanban-types';
+import type { ScKanbanCardData, ScKanbanColumnData } from './kanban-types';
 
 @Directive({
   selector: '[scKanbanColumn]',
@@ -24,7 +24,7 @@ export class ScKanbanColumn {
     ),
   );
 
-  readonly column = input.required<KanbanColumn>();
+  readonly column = input.required<ScKanbanColumnData>();
 
   readonly columnCards = computed(() =>
     this.board.getCardsForColumn(this.column().id),
@@ -88,7 +88,7 @@ export class ScKanbanColumn {
     if (!data) return;
 
     try {
-      const card = JSON.parse(data) as KanbanCard;
+      const card = JSON.parse(data) as ScKanbanCardData;
       const sourceColumnId = card.columnId;
       const targetColumnId = this.column().id;
       const sourceIndex = card.order;

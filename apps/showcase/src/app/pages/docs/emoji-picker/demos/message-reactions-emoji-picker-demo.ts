@@ -7,7 +7,7 @@ import {
   ScPopoverTrigger,
 } from '@semantic-components/ui';
 import {
-  Emoji,
+  ScEmoji,
   ScEmojiPicker,
   ScEmojiPickerCategoryTab,
   ScEmojiPickerCategoryTabs,
@@ -127,7 +127,7 @@ export class MessageReactionsEmojiPickerDemo {
     { emoji: '❤️', count: 1 },
   ]);
 
-  addReaction(emoji: Emoji): void {
+  addReaction(emoji: ScEmoji): void {
     const reactions = this.messageReactions();
     const existing = reactions.find((r) => r.emoji === emoji.emoji);
     if (existing) {

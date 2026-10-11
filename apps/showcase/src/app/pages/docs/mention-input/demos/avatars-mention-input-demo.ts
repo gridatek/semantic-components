@@ -6,7 +6,7 @@ import {
   ScMentionInputSuggestionItem,
   ScMentionInputSuggestions,
 } from '@semantic-components/ui-lab';
-import type { MentionUser } from '@semantic-components/ui-lab';
+import type { ScMentionUser } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-avatars-mention-input-demo',
@@ -57,7 +57,7 @@ import type { MentionUser } from '@semantic-components/ui-lab';
   encapsulation: ViewEncapsulation.None,
 })
 export class AvatarsMentionInputDemo {
-  readonly usersWithAvatars: MentionUser[] = [
+  readonly usersWithAvatars: ScMentionUser[] = [
     {
       id: '1',
       name: 'Sarah Connor',

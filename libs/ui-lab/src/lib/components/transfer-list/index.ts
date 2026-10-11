@@ -9,6 +9,6 @@ export { ScTransferListSelectAll } from './transfer-list-select-all';
 export { ScTransferListSource } from './transfer-list-source';
 export { ScTransferListTarget } from './transfer-list-target';
 export type {
-  TransferListItem,
-  TransferListState,
+  ScTransferListItemData,
+  ScTransferListChange,
 } from './transfer-list-types';

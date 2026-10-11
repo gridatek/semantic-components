@@ -1,5 +1,5 @@
 export { CHART_COLORS } from './chart-types';
-export type { ChartDataPoint, ChartConfig } from './chart-types';
+export type { ScChartDataPoint, ScChartConfig } from './chart-types';
 export { SC_CHART, ScChartContainer } from './chart-container';
 export { ScChartTooltip } from './chart-tooltip';
 export { ScChartLegend } from './chart-legend';

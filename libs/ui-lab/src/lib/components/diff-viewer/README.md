@@ -110,12 +110,12 @@ Root directive that manages diff state. Provides `SC_DIFF_VIEWER` injection toke
 
 **Exposed via `exportAs`:**
 
-| Property     | Type                           | Description                    |
-| ------------ | ------------------------------ | ------------------------------ |
-| `diffResult` | `Signal<DiffResult>`           | Computed diff result           |
-| `viewMode`   | `WritableSignal<DiffViewMode>` | Current view mode (toggleable) |
-| `oldTitle`   | `InputSignal<string>`          | Original title                 |
-| `newTitle`   | `InputSignal<string>`          | Modified title                 |
+| Property     | Type                             | Description                    |
+| ------------ | -------------------------------- | ------------------------------ |
+| `diffResult` | `Signal<ScDiffResult>`           | Computed diff result           |
+| `viewMode`   | `WritableSignal<ScDiffViewMode>` | Current view mode (toggleable) |
+| `oldTitle`   | `InputSignal<string>`            | Original title                 |
+| `newTitle`   | `InputSignal<string>`            | Modified title                 |
 
 **Methods:**
 
@@ -230,14 +230,14 @@ Empty state container.
 ## Types
 
 ```typescript
-interface DiffResult {
-  lines: DiffLine[];
+interface ScDiffResult {
+  lines: ScDiffLine[];
   additions: number;
   deletions: number;
   unchanged: number;
 }
 
-interface DiffLine {
+interface ScDiffLine {
   type: 'added' | 'removed' | 'unchanged' | 'modified';
   oldLineNumber?: number;
   newLineNumber?: number;

@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import type { StatCardSize, StatCardVariant } from './stat-card-types';
+import type { ScStatCardSize, ScStatCardVariant } from './stat-card-types';
 
 @Directive({
   selector: '[scStatCard]',
@@ -11,8 +11,8 @@ import type { StatCardSize, StatCardVariant } from './stat-card-types';
 })
 export class ScStatCard {
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly variant = input<StatCardVariant>('default');
-  readonly size = input<StatCardSize>('md');
+  readonly variant = input<ScStatCardVariant>('default');
+  readonly size = input<ScStatCardSize>('md');
 
   protected readonly class = computed(() => {
     const variant = this.variant();

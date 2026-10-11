@@ -1,37 +1,37 @@
-export type PdfZoomLevel =
+export type ScPdfZoomLevel =
   'auto' | 'page-actual' | 'page-fit' | 'page-width' | number;
 
-export interface PdfLoadEvent {
+export interface ScPdfLoadEvent {
   totalPages: number;
 }
 
-export interface PdfPageChangeEvent {
+export interface ScPdfPageChangeEvent {
   currentPage: number;
   totalPages: number;
 }
 
-export interface PdfZoomChangeEvent {
-  zoom: PdfZoomLevel;
+export interface ScPdfZoomChangeEvent {
+  zoom: ScPdfZoomLevel;
   scale: number;
 }
 
-export interface PdfErrorEvent {
+export interface ScPdfErrorEvent {
   error: Error;
   message: string;
 }
 
-export type PdfFindState =
+export type ScPdfFindState =
   'idle' | 'found' | 'not-found' | 'wrapped' | 'pending';
 
-export interface PdfPageMatchInfo {
+export interface ScPdfPageMatchInfo {
   matches: number[];
   matchesLength: number[];
 }
 
-export type PdfEditorMode =
+export type ScPdfEditorMode =
   'none' | 'highlight' | 'freetext' | 'ink' | 'stamp' | 'signature';
 
-export interface PdfEditorAnnotation {
+export interface ScPdfEditorAnnotation {
   id: string;
   type: 'highlight' | 'freetext' | 'ink' | 'stamp' | 'signature';
   pageNumber: number;
@@ -59,7 +59,7 @@ export interface PdfEditorAnnotation {
   description?: string;
 }
 
-export interface PdfSignatureData {
+export interface ScPdfSignatureData {
   id: string;
   dataUrl: string;
   description: string;
@@ -67,7 +67,7 @@ export interface PdfSignatureData {
   height: number;
 }
 
-export interface PdfComment {
+export interface ScPdfComment {
   id: string;
   pageNumber: number;
   x: number;
@@ -78,7 +78,7 @@ export interface PdfComment {
   color: string;
 }
 
-export const ZOOM_LEVELS: { label: string; value: PdfZoomLevel }[] = [
+export const ZOOM_LEVELS: { label: string; value: ScPdfZoomLevel }[] = [
   { label: 'Auto', value: 'auto' },
   { label: 'Actual Size', value: 'page-actual' },
   { label: 'Page Fit', value: 'page-fit' },

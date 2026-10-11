@@ -11,7 +11,7 @@ import {
   ScPopoverTrigger,
 } from '@semantic-components/ui';
 import {
-  Emoji,
+  ScEmoji,
   ScEmojiPicker,
   ScEmojiPickerCategoryTab,
   ScEmojiPickerCategoryTabs,
@@ -142,7 +142,7 @@ export class InputEmojiPickerDemo {
     this.inputValue.set(input.value);
   }
 
-  insertEmoji(emoji: Emoji): void {
+  insertEmoji(emoji: ScEmoji): void {
     this.inputValue.update((v) => v + emoji.emoji);
     this.popoverProvider().close();
   }

@@ -5,7 +5,7 @@ import {
   type ScTransferListPanelRef,
 } from './transfer-list-panel-ref';
 import { ScTransferListState } from './transfer-list-state';
-import type { TransferListItem } from './transfer-list-types';
+import type { ScTransferListItemData } from './transfer-list-types';
 
 @Directive({
   selector: 'div[scTransferListTarget]',
@@ -44,7 +44,7 @@ export class ScTransferListTarget implements ScTransferListPanelRef {
     this.state.toggleAll('target');
   }
 
-  toggleItem(item: TransferListItem): void {
+  toggleItem(item: ScTransferListItemData): void {
     this.state.toggleItem('target', item);
   }
 

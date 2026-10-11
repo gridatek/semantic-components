@@ -16,7 +16,7 @@ import { AvatarsOrgChartDemo } from './avatars-org-chart-demo';
 export class AvatarsOrgChartDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  type OrgChartNode,
+  type ScOrgChartNodeData,
   ScOrgChart,
   ScOrgChartCard,
   ScOrgChartNode,
@@ -88,7 +88,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class AvatarsOrgChartDemo {
-  readonly orgData = signal<OrgChartNode>({
+  readonly orgData = signal<ScOrgChartNodeData>({
     id: '1',
     name: 'Sarah Johnson',
     title: 'CEO',

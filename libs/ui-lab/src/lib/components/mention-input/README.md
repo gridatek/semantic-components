@@ -24,31 +24,31 @@ Text input with @mention support for users, channels, or custom entities.
 
 ### ScMentionInput
 
-| Input         | Type            | Default                          | Description              |
-| ------------- | --------------- | -------------------------------- | ------------------------ |
-| `class`       | `string`        | `''`                             | Additional CSS classes   |
-| `placeholder` | `string`        | `'Type @ to mention someone...'` | Placeholder text         |
-| `disabled`    | `boolean`       | `false`                          | Disable the input        |
-| `rows`        | `number`        | `3`                              | Number of visible rows   |
-| `users`       | `MentionUser[]` | `[]`                             | Available users/entities |
-| `trigger`     | `string`        | `'@'`                            | Trigger character        |
+| Input         | Type              | Default                          | Description              |
+| ------------- | ----------------- | -------------------------------- | ------------------------ |
+| `class`       | `string`          | `''`                             | Additional CSS classes   |
+| `placeholder` | `string`          | `'Type @ to mention someone...'` | Placeholder text         |
+| `disabled`    | `boolean`         | `false`                          | Disable the input        |
+| `rows`        | `number`          | `3`                              | Number of visible rows   |
+| `users`       | `ScMentionUser[]` | `[]`                             | Available users/entities |
+| `trigger`     | `string`          | `'@'`                            | Trigger character        |
 
-| Output          | Type            | Description                      |
-| --------------- | --------------- | -------------------------------- |
-| `value`         | `string`        | Two-way binding for text value   |
-| `mentions`      | `MentionUser[]` | Two-way binding for mentions     |
-| `mentionSelect` | `MentionUser`   | Emits when a mention is selected |
+| Output          | Type              | Description                      |
+| --------------- | ----------------- | -------------------------------- |
+| `value`         | `string`          | Two-way binding for text value   |
+| `mentions`      | `ScMentionUser[]` | Two-way binding for mentions     |
+| `mentionSelect` | `ScMentionUser`   | Emits when a mention is selected |
 
-| Method            | Returns         | Description        |
-| ----------------- | --------------- | ------------------ |
-| `focus()`         | `void`          | Focus the textarea |
-| `getMentions()`   | `MentionUser[]` | Get all mentions   |
-| `clearMentions()` | `void`          | Clear all mentions |
+| Method            | Returns           | Description        |
+| ----------------- | ----------------- | ------------------ |
+| `focus()`         | `void`            | Focus the textarea |
+| `getMentions()`   | `ScMentionUser[]` | Get all mentions   |
+| `clearMentions()` | `void`            | Clear all mentions |
 
 ## MentionUser Interface
 
 ```typescript
-interface MentionUser {
+interface ScMentionUser {
   id: string;
   name: string;
   username: string;
@@ -78,8 +78,8 @@ interface MentionUser {
 })
 export class ChatInput {
   message = signal('');
-  mentions = signal<MentionUser[]>([]);
-  teamMembers: MentionUser[] = [
+  mentions = signal<ScMentionUser[]>([]);
+  teamMembers: ScMentionUser[] = [
     { id: '1', name: 'John Doe', username: 'johndoe' },
     { id: '2', name: 'Jane Smith', username: 'janesmith' },
   ];
@@ -94,7 +94,7 @@ export class ChatInput {
 ### With Avatars
 
 ```typescript
-const users: MentionUser[] = [
+const users: ScMentionUser[] = [
   { id: '1', name: 'Sarah', username: 'sarah', avatar: 'https://example.com/sarah.jpg' },
   { id: '2', name: 'Mike', username: 'mike', avatar: 'https://example.com/mike.jpg' },
 ];
@@ -107,7 +107,7 @@ const users: MentionUser[] = [
 ```
 
 ```typescript
-const channels: MentionUser[] = [
+const channels: ScMentionUser[] = [
   { id: '1', name: 'General', username: 'general' },
   { id: '2', name: 'Engineering', username: 'engineering' },
   { id: '3', name: 'Design', username: 'design' },

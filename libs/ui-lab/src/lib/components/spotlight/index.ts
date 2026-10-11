@@ -1,5 +1,5 @@
 export { ScSpotlight } from './spotlight';
-export type { SpotlightOptions } from './spotlight';
+export type { ScSpotlightOptions } from './spotlight';
 export { ScSpotlightState } from './spotlight-state';
 export { ScSpotlightMask } from './spotlight-mask';
 export { ScSpotlightHighlight } from './spotlight-highlight';

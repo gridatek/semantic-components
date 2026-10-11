@@ -7,5 +7,5 @@ export { ScEmojiPickerItem } from './emoji-picker-item';
 export { ScEmojiPickerRecent } from './emoji-picker-recent';
 export { ScEmojiPickerSearch } from './emoji-picker-search';
 export { ScEmojiPickerState } from './emoji-picker-state';
-export type { Emoji, EmojiCategory } from './emoji-picker-state';
+export type { ScEmoji, ScEmojiCategory } from './emoji-picker-state';
 export { ScEmojiPickerTrigger } from './emoji-picker-trigger';

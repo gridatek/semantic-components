@@ -1,41 +1,41 @@
-export type AnnotationTool =
+export type ScAnnotationTool =
   'pen' | 'line' | 'rectangle' | 'circle' | 'arrow' | 'eraser';
 
 /** A point in image coordinates (0…width, 0…height of the annotator). */
-export interface AnnotationPoint {
+export interface ScAnnotationPoint {
   x: number;
   y: number;
 }
 
-export interface Annotation {
+export interface ScAnnotation {
   id: string;
-  tool: Exclude<AnnotationTool, 'eraser'>;
+  tool: Exclude<ScAnnotationTool, 'eraser'>;
   /** Points in image coordinates, independent of the displayed size. */
-  points: AnnotationPoint[];
+  points: ScAnnotationPoint[];
   color: string;
   /** Stroke width in image units. */
   lineWidth: number;
 }
 
-export interface AnnotatorColor {
+export interface ScAnnotatorColor {
   value: string;
   /** Accessible name, e.g. "Red". */
   label: string;
 }
 
-export interface AnnotatorToolOption {
-  id: AnnotationTool;
+export interface ScAnnotatorToolOption {
+  id: ScAnnotationTool;
   label: string;
 }
 
-export interface ImageAnnotatorState {
-  annotations: Annotation[];
-  currentTool: AnnotationTool;
+export interface ScImageAnnotatorSnapshot {
+  annotations: ScAnnotation[];
+  currentTool: ScAnnotationTool;
   currentColor: string;
   lineWidth: number;
 }
 
-export const DEFAULT_ANNOTATOR_COLORS: readonly AnnotatorColor[] = [
+export const DEFAULT_ANNOTATOR_COLORS: readonly ScAnnotatorColor[] = [
   { value: '#ef4444', label: 'Red' },
   { value: '#f97316', label: 'Orange' },
   { value: '#eab308', label: 'Yellow' },
@@ -46,7 +46,7 @@ export const DEFAULT_ANNOTATOR_COLORS: readonly AnnotatorColor[] = [
   { value: '#ffffff', label: 'White' },
 ];
 
-export const DEFAULT_ANNOTATOR_TOOLS: readonly AnnotatorToolOption[] = [
+export const DEFAULT_ANNOTATOR_TOOLS: readonly ScAnnotatorToolOption[] = [
   { id: 'pen', label: 'Pen' },
   { id: 'line', label: 'Line' },
   { id: 'rectangle', label: 'Rectangle' },

@@ -7,15 +7,15 @@ import {
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import {
-  DiffLine,
-  DiffResult,
+  ScDiffLine,
+  ScDiffResult,
   computeDiff,
   computeWordDiff,
 } from './diff-algorithm';
 
-export type DiffViewMode = 'split' | 'unified';
+export type ScDiffViewMode = 'split' | 'unified';
 
-export type { DiffLine, DiffResult } from './diff-algorithm';
+export type { ScDiffLine, ScDiffResult } from './diff-algorithm';
 
 export const SC_DIFF_VIEWER = new InjectionToken<ScDiffViewer>('ScDiffViewer');
 
@@ -33,12 +33,12 @@ export class ScDiffViewer {
   readonly newText = input<string>('');
   readonly oldTitle = input<string>('');
   readonly newTitle = input<string>('');
-  readonly defaultViewMode = input<DiffViewMode>('split');
+  readonly defaultViewMode = input<ScDiffViewMode>('split');
   readonly showWordDiff = input(true);
   readonly ignoreWhitespace = input(false);
   readonly ignoreCase = input(false);
 
-  readonly viewMode = signal<DiffViewMode>('split');
+  readonly viewMode = signal<ScDiffViewMode>('split');
 
   constructor() {
     this.viewMode.set(this.defaultViewMode());
@@ -51,7 +51,7 @@ export class ScDiffViewer {
     ),
   );
 
-  readonly diffResult = computed((): DiffResult => {
+  readonly diffResult = computed((): ScDiffResult => {
     const oldText = this.oldText();
     const newText = this.newText();
 
@@ -84,7 +84,7 @@ export class ScDiffViewer {
     }
   }
 
-  highlightLine(line: DiffLine, side: 'old' | 'new'): string {
+  highlightLine(line: ScDiffLine, side: 'old' | 'new'): string {
     if (!this.showWordDiff()) {
       const content =
         side === 'old'

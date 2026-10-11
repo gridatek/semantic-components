@@ -1,6 +1,6 @@
 import { Directive, effect, inject } from '@angular/core';
 import { ScToolbar } from '@semantic-components/ui';
-import { DiffViewMode, SC_DIFF_VIEWER } from './diff-viewer';
+import { SC_DIFF_VIEWER, ScDiffViewMode } from './diff-viewer';
 
 @Directive({
   selector: 'div[scDiffViewerModeSwitch]',
@@ -14,7 +14,7 @@ export class ScDiffViewerModeSwitch {
     this.toolbar.values.set([this.diffViewer.viewMode()]);
 
     effect(() => {
-      const values = this.toolbar.values() as DiffViewMode[];
+      const values = this.toolbar.values() as ScDiffViewMode[];
       if (values.length > 0) {
         this.diffViewer.viewMode.set(values[0]);
       }

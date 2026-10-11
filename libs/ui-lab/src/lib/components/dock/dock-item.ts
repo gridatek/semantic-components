@@ -1,7 +1,7 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { SC_DOCK } from './dock';
-import type { DockItem } from './dock-types';
+import type { ScDockItemData } from './dock-types';
 
 @Directive({
   selector: 'button[scDockItem]',
@@ -18,7 +18,7 @@ import type { DockItem } from './dock-types';
 })
 export class ScDockItem {
   readonly dock = inject(SC_DOCK);
-  readonly item = input.required<DockItem>();
+  readonly item = input.required<ScDockItemData>();
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly itemIndex = this.dock.registerItem();

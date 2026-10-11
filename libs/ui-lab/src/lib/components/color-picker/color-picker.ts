@@ -9,10 +9,10 @@ import {
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import {
-  type HSL,
-  type HSV,
-  type OKLCH,
-  type RGB,
+  type ScHSL,
+  type ScHSV,
+  type ScOKLCH,
+  type ScRGB,
   hexToRgb,
   hsvToRgb,
   oklchToRgb,
@@ -22,7 +22,12 @@ import {
   rgbToOklch,
 } from './color-utils';
 
-export { type HSV, type RGB, type HSL, type OKLCH } from './color-utils';
+export {
+  type ScHSV,
+  type ScRGB,
+  type ScHSL,
+  type ScOKLCH,
+} from './color-utils';
 
 export const SC_COLOR_PICKER = new InjectionToken<ScColorPicker>(
   'SC_COLOR_PICKER',
@@ -41,7 +46,7 @@ export class ScColorPicker {
   readonly value = model<string>('#000000');
   readonly disabled = input<boolean>(false);
 
-  private readonly _hsv = signal<HSV>({ h: 0, s: 0, v: 0 });
+  private readonly _hsv = signal<ScHSV>({ h: 0, s: 0, v: 0 });
   private _lastInternalHex = '';
 
   protected readonly class = computed(() =>
@@ -84,7 +89,7 @@ export class ScColorPicker {
     });
   }
 
-  setHsv(hsv: Partial<HSV>): void {
+  setHsv(hsv: Partial<ScHSV>): void {
     const current = this._hsv();
     const newHsv = { ...current, ...hsv };
     this._hsv.set(newHsv);
@@ -94,7 +99,7 @@ export class ScColorPicker {
     this.value.set(hex);
   }
 
-  setRgb(rgb: Partial<RGB>): void {
+  setRgb(rgb: Partial<ScRGB>): void {
     const current = this.rgb();
     const newRgb = { ...current, ...rgb };
     const hsv = rgbToHsv(newRgb.r, newRgb.g, newRgb.b);
@@ -109,7 +114,7 @@ export class ScColorPicker {
     }
   }
 
-  setOklch(oklch: OKLCH): void {
+  setOklch(oklch: ScOKLCH): void {
     const rgb = oklchToRgb(oklch.l, oklch.c, oklch.h);
     const hsv = rgbToHsv(rgb.r, rgb.g, rgb.b);
     this.setHsv(hsv);

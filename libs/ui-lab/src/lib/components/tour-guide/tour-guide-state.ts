@@ -1,5 +1,5 @@
 import { Service, computed, inject, signal } from '@angular/core';
-import type { TargetRect } from './tour-guide-types';
+import type { ScTourGuideTargetRect } from './tour-guide-types';
 import { TourService } from './tour-service';
 
 @Service({ autoProvided: false })
@@ -10,7 +10,7 @@ export class ScTourGuideState {
   onTourComplete: (() => void) | undefined;
   onTourClosed: (() => void) | undefined;
 
-  readonly targetRect = signal<TargetRect | null>(null);
+  readonly targetRect = signal<ScTourGuideTargetRect | null>(null);
 
   readonly isActive = this.tourService.isActive;
   readonly currentStep = computed(() => this.tourService.currentStepData());

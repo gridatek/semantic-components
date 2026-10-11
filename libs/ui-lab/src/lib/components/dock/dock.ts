@@ -7,7 +7,7 @@ import {
   signal,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import type { DockItem, DockPosition, DockSize } from './dock-types';
+import type { ScDockItemData, ScDockPosition, ScDockSize } from './dock-types';
 import { DEFAULT_DOCK_OPTIONS } from './dock-types';
 
 export const SC_DOCK = new InjectionToken<ScDock>('SC_DOCK');
@@ -23,13 +23,13 @@ export const SC_DOCK = new InjectionToken<ScDock>('SC_DOCK');
   },
 })
 export class ScDock {
-  readonly position = input<DockPosition>(DEFAULT_DOCK_OPTIONS.position);
-  readonly size = input<DockSize>(DEFAULT_DOCK_OPTIONS.size);
+  readonly position = input<ScDockPosition>(DEFAULT_DOCK_OPTIONS.position);
+  readonly size = input<ScDockSize>(DEFAULT_DOCK_OPTIONS.size);
   readonly magnification = input(DEFAULT_DOCK_OPTIONS.magnification);
   readonly magnificationScale = input(DEFAULT_DOCK_OPTIONS.magnificationScale);
   readonly ariaLabel = input('Application dock');
 
-  readonly itemClick = output<DockItem>();
+  readonly itemClick = output<ScDockItemData>();
 
   readonly hoveredIndex = signal<number | null>(null);
   private itemCount = signal(0);
@@ -91,7 +91,7 @@ export class ScDock {
     this.hoveredIndex.set(null);
   }
 
-  onItemClick(item: DockItem): void {
+  onItemClick(item: ScDockItemData): void {
     if (!item.disabled) {
       this.itemClick.emit(item);
     }

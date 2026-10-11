@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
-export interface CountdownTime {
+export interface ScCountdownTime {
   days: number;
   hours: number;
   minutes: number;
@@ -42,10 +42,10 @@ export class ScCountdown {
   readonly targetDate = input.required<Date>();
   readonly autoStart = input<boolean>(true);
 
-  readonly tick = output<CountdownTime>();
+  readonly tick = output<ScCountdownTime>();
   readonly complete = output<void>();
 
-  readonly time = signal<CountdownTime>({
+  readonly time = signal<ScCountdownTime>({
     days: 0,
     hours: 0,
     minutes: 0,
@@ -101,7 +101,7 @@ export class ScCountdown {
     this.updateTime();
   }
 
-  getTime(): CountdownTime {
+  getTime(): ScCountdownTime {
     return this.time();
   }
 
@@ -109,7 +109,7 @@ export class ScCountdown {
     return this.intervalId !== null;
   }
 
-  private calculateTime(): CountdownTime {
+  private calculateTime(): ScCountdownTime {
     const now = Date.now();
     const target = this.targetDate().getTime();
     const total = Math.max(0, target - now);

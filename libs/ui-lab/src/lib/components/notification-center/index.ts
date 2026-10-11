@@ -1,19 +1,19 @@
 export {
   ScNotificationCenter,
   SC_NOTIFICATION_CENTER,
-  type NotificationFilter,
+  type ScNotificationFilter,
   type ScNotificationCenterApi,
 } from './notification-center';
 export { ScNotificationCenterContainer } from './notification-center-container';
 export { ScNotificationGroup } from './notification-group';
 export { ScNotificationItem } from './notification-item';
 export type {
-  Notification,
-  NotificationType,
-  NotificationAction,
-  NotificationGroup,
-  NotificationMarkReadEvent,
-  NotificationDismissEvent,
-  NotificationActionEvent,
-  NotificationGroupCollapseEvent,
+  ScNotification,
+  ScNotificationType,
+  ScNotificationAction,
+  ScNotificationGroupData,
+  ScNotificationMarkReadEvent,
+  ScNotificationDismissEvent,
+  ScNotificationActionEvent,
+  ScNotificationGroupCollapseEvent,
 } from './notification-types';

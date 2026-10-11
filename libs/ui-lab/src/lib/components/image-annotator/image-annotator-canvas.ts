@@ -14,7 +14,7 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { cn } from '@semantic-components/ui';
 import { ScImageAnnotatorState } from './image-annotator-state';
-import type { Annotation, AnnotationPoint } from './image-annotator-types';
+import type { ScAnnotation, ScAnnotationPoint } from './image-annotator-types';
 
 /**
  * The drawing surface: the image plus an annotation layer.
@@ -76,10 +76,10 @@ export class ScImageAnnotatorCanvas {
   private readonly displayWidth = signal(0);
   private readonly image = signal<HTMLImageElement | null>(null);
   /** The annotation being drawn, not yet committed. */
-  private readonly draft = signal<Annotation | null>(null);
+  private readonly draft = signal<ScAnnotation | null>(null);
 
   private activePointer: number | null = null;
-  private startPoint: AnnotationPoint | null = null;
+  private startPoint: ScAnnotationPoint | null = null;
 
   protected readonly aspectRatio = computed(
     () => `${this.state.width()} / ${this.state.height()}`,
@@ -178,7 +178,7 @@ export class ScImageAnnotatorCanvas {
   }
 
   /** Pointer position in image coordinates. */
-  private toImagePoint(event: PointerEvent): AnnotationPoint {
+  private toImagePoint(event: PointerEvent): ScAnnotationPoint {
     const rect = this.annotationCanvas().nativeElement.getBoundingClientRect();
     const sx = this.state.width() / rect.width;
     const sy = this.state.height() / rect.height;
@@ -274,7 +274,10 @@ export class ScImageAnnotatorCanvas {
   }
 }
 
-function drawAnnotation(ctx: CanvasRenderingContext2D, ann: Annotation): void {
+function drawAnnotation(
+  ctx: CanvasRenderingContext2D,
+  ann: ScAnnotation,
+): void {
   const [a, b] = ann.points;
   ctx.strokeStyle = ann.color;
   ctx.fillStyle = ann.color;

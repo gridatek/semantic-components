@@ -10,7 +10,7 @@ import {
   ScTransferListSource,
   ScTransferListTarget,
 } from '@semantic-components/ui-lab';
-import type { TransferListItem } from '@semantic-components/ui-lab';
+import type { ScTransferListItemData } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-no-search-transfer-list-demo',
@@ -78,14 +78,14 @@ import type { TransferListItem } from '@semantic-components/ui-lab';
   encapsulation: ViewEncapsulation.None,
 })
 export class NoSearchTransferListDemo {
-  readonly sourceItems = signal<TransferListItem[]>([
+  readonly sourceItems = signal<ScTransferListItemData[]>([
     { id: '1', label: 'Option A' },
     { id: '2', label: 'Option B' },
     { id: '3', label: 'Option C' },
     { id: '4', label: 'Option D', disabled: true },
   ]);
 
-  readonly targetItems = signal<TransferListItem[]>([
+  readonly targetItems = signal<ScTransferListItemData[]>([
     { id: '5', label: 'Option E' },
   ]);
 }

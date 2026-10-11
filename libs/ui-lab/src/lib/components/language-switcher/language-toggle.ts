@@ -9,7 +9,7 @@ import { cn } from '@semantic-components/ui';
 import { SiGlobeIcon } from '@semantic-icons/lucide-icons';
 import { ScLanguageService } from './language.service';
 import { sizeStyles, variantStyles } from './styles';
-import { LanguageSwitcherSize, LanguageSwitcherVariant } from './styles';
+import { ScLanguageSwitcherSize, ScLanguageSwitcherVariant } from './styles';
 
 /**
  * Language toggle button - ideal for switching between 2 languages.
@@ -44,8 +44,8 @@ export class ScLanguageToggle {
   private readonly languageService = inject(ScLanguageService);
 
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly variant = input<LanguageSwitcherVariant>('ghost');
-  readonly size = input<LanguageSwitcherSize>('default');
+  readonly variant = input<ScLanguageSwitcherVariant>('ghost');
+  readonly size = input<ScLanguageSwitcherSize>('default');
   readonly iconOnly = input<boolean>(false);
 
   protected readonly currentLanguageCode = computed(() =>

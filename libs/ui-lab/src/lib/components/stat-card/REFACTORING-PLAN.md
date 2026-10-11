@@ -98,7 +98,7 @@ Following the pattern from `libs/ui/src/lib/components/card/`:
 
 #### Files to Remove:
 
-- None (keep types file for `StatCardTrend` type)
+- None (keep types file for `ScStatCardTrend` type)
 
 ## Implementation Details
 
@@ -107,7 +107,7 @@ Following the pattern from `libs/ui/src/lib/components/card/`:
 ```typescript
 import { Directive, computed, input } from '@angular/core';
 import { cn } from '../../utils';
-import type { StatCardSize, StatCardVariant } from './stat-card-types';
+import type { ScStatCardSize, ScStatCardVariant } from './stat-card-types';
 
 @Directive({
   selector: '[scStatCard]',
@@ -118,8 +118,8 @@ import type { StatCardSize, StatCardVariant } from './stat-card-types';
 })
 export class ScStatCard {
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly variant = input<StatCardVariant>('default');
-  readonly size = input<StatCardSize>('md');
+  readonly variant = input<ScStatCardVariant>('default');
+  readonly size = input<ScStatCardSize>('md');
 
   protected readonly class = computed(() => {
     const variant = this.variant();
@@ -146,7 +146,7 @@ export class ScStatCard {
 ```typescript
 import { Directive, computed, input } from '@angular/core';
 import { cn } from '../../utils';
-import type { StatCardSize } from './stat-card-types';
+import type { ScStatCardSize } from './stat-card-types';
 
 @Directive({
   selector: '[scStatCardLabel]',
@@ -157,7 +157,7 @@ import type { StatCardSize } from './stat-card-types';
 })
 export class ScStatCardLabel {
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly size = input<StatCardSize>('md');
+  readonly size = input<ScStatCardSize>('md');
 
   protected readonly class = computed(() => {
     const size = this.size();
@@ -172,7 +172,7 @@ export class ScStatCardLabel {
 ```typescript
 import { Directive, computed, input } from '@angular/core';
 import { cn } from '../../utils';
-import type { StatCardSize } from './stat-card-types';
+import type { ScStatCardSize } from './stat-card-types';
 
 @Directive({
   selector: '[scStatCardValue]',
@@ -183,7 +183,7 @@ import type { StatCardSize } from './stat-card-types';
 })
 export class ScStatCardValue {
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly size = input<StatCardSize>('md');
+  readonly size = input<ScStatCardSize>('md');
 
   protected readonly class = computed(() => {
     const size = this.size();
@@ -198,7 +198,7 @@ export class ScStatCardValue {
 ```typescript
 import { Directive, computed, input } from '@angular/core';
 import { cn } from '../../utils';
-import type { StatCardSize } from './stat-card-types';
+import type { ScStatCardSize } from './stat-card-types';
 
 @Directive({
   selector: '[scStatCardIcon]',
@@ -209,7 +209,7 @@ import type { StatCardSize } from './stat-card-types';
 })
 export class ScStatCardIcon {
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly size = input<StatCardSize>('md');
+  readonly size = input<ScStatCardSize>('md');
 
   protected readonly class = computed(() => {
     const size = this.size();
@@ -224,7 +224,7 @@ export class ScStatCardIcon {
 ```typescript
 import { Directive, computed, input } from '@angular/core';
 import { cn } from '../../utils';
-import type { StatCardTrend } from './stat-card-types';
+import type { ScStatCardTrend } from './stat-card-types';
 
 @Directive({
   selector: '[scStatCardChange]',
@@ -235,7 +235,7 @@ import type { StatCardTrend } from './stat-card-types';
 })
 export class ScStatCardChange {
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly trend = input<StatCardTrend>('neutral');
+  readonly trend = input<ScStatCardTrend>('neutral');
 
   protected readonly class = computed(() => {
     const trend = this.trend();
@@ -268,9 +268,9 @@ export class ScStatCardDescription {
 ### 7. `stat-card-types.ts` - Update
 
 ```typescript
-export type StatCardTrend = 'up' | 'down' | 'neutral';
-export type StatCardVariant = 'default' | 'outline' | 'filled';
-export type StatCardSize = 'sm' | 'md' | 'lg';
+export type ScStatCardTrend = 'up' | 'down' | 'neutral';
+export type ScStatCardVariant = 'default' | 'outline' | 'filled';
+export type ScStatCardSize = 'sm' | 'md' | 'lg';
 
 // Remove StatCardData interface - no longer needed
 ```
@@ -284,7 +284,7 @@ export { ScStatCardValue } from './stat-card-value';
 export { ScStatCardIcon } from './stat-card-icon';
 export { ScStatCardChange } from './stat-card-change';
 export { ScStatCardDescription } from './stat-card-description';
-export type { StatCardSize, StatCardTrend, StatCardVariant } from './stat-card-types';
+export type { ScStatCardSize, ScStatCardTrend, ScStatCardVariant } from './stat-card-types';
 ```
 
 ## Usage Examples

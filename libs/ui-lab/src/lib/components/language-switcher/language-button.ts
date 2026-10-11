@@ -9,8 +9,8 @@ import { cn } from '@semantic-components/ui';
 import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 import { ScLanguageService } from './language.service';
 import {
-  LanguageSwitcherSize,
-  LanguageSwitcherVariant,
+  ScLanguageSwitcherSize,
+  ScLanguageSwitcherVariant,
   sizeStyles,
   variantStyles,
 } from './styles';
@@ -43,8 +43,8 @@ export class ScLanguageButton {
   private readonly languageService = inject(ScLanguageService);
 
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly variant = input<LanguageSwitcherVariant>('ghost');
-  readonly size = input<LanguageSwitcherSize>('default');
+  readonly variant = input<ScLanguageSwitcherVariant>('ghost');
+  readonly size = input<ScLanguageSwitcherSize>('default');
   readonly showNativeLabels = input<boolean>(true);
 
   protected readonly currentLanguage = this.languageService.currentLanguage;

@@ -1,13 +1,13 @@
 import { Service, type Signal, computed, signal } from '@angular/core';
 import { Subject } from 'rxjs';
 import {
-  type Annotation,
-  type AnnotationPoint,
-  type AnnotationTool,
-  type AnnotatorColor,
-  type AnnotatorToolOption,
   DEFAULT_ANNOTATOR_COLORS,
   DEFAULT_ANNOTATOR_TOOLS,
+  type ScAnnotation,
+  type ScAnnotationPoint,
+  type ScAnnotationTool,
+  type ScAnnotatorColor,
+  type ScAnnotatorToolOption,
 } from './image-annotator-types';
 
 /**
@@ -22,24 +22,26 @@ export class ScImageAnnotatorState {
   width: Signal<number> = signal(600);
   height: Signal<number> = signal(400);
   alt: Signal<string> = signal('');
-  colors: Signal<readonly AnnotatorColor[]> = signal(DEFAULT_ANNOTATOR_COLORS);
-  tools: Signal<readonly AnnotatorToolOption[]> = signal(
+  colors: Signal<readonly ScAnnotatorColor[]> = signal(
+    DEFAULT_ANNOTATOR_COLORS,
+  );
+  tools: Signal<readonly ScAnnotatorToolOption[]> = signal(
     DEFAULT_ANNOTATOR_TOOLS,
   );
 
-  readonly annotations = signal<Annotation[]>([]);
-  readonly currentTool = signal<AnnotationTool>('pen');
+  readonly annotations = signal<ScAnnotation[]>([]);
+  readonly currentTool = signal<ScAnnotationTool>('pen');
   readonly currentColor = signal(DEFAULT_ANNOTATOR_COLORS[0].value);
   readonly lineWidth = signal(3);
   readonly imageLoaded = signal(false);
 
-  private readonly past = signal<Annotation[][]>([]);
-  private readonly future = signal<Annotation[][]>([]);
+  private readonly past = signal<ScAnnotation[][]>([]);
+  private readonly future = signal<ScAnnotation[][]>([]);
   readonly canUndo = computed(() => this.past().length > 0);
   readonly canRedo = computed(() => this.future().length > 0);
 
   /** Emits the annotations after every user change (draw, erase, undo…). */
-  readonly changes = new Subject<Annotation[]>();
+  readonly changes = new Subject<ScAnnotation[]>();
   /** Asks the canvas to export and download the annotated image. */
   readonly downloadRequests = new Subject<void>();
   /** Emits the exported PNG data URL. */
@@ -50,9 +52,9 @@ export class ScImageAnnotatorState {
   );
 
   /** Snapshot taken when an erase gesture starts (one undo step per gesture). */
-  private eraseSnapshot: Annotation[] | null = null;
+  private eraseSnapshot: ScAnnotation[] | null = null;
 
-  selectTool(tool: AnnotationTool): void {
+  selectTool(tool: ScAnnotationTool): void {
     this.currentTool.set(tool);
   }
 
@@ -64,7 +66,7 @@ export class ScImageAnnotatorState {
     this.lineWidth.set(width);
   }
 
-  addAnnotation(annotation: Annotation): void {
+  addAnnotation(annotation: ScAnnotation): void {
     this.commit([...this.annotations(), annotation]);
   }
 
@@ -73,7 +75,7 @@ export class ScImageAnnotatorState {
   }
 
   /** Removes annotations within reach of `point` (image coordinates). */
-  eraseAt(point: AnnotationPoint): void {
+  eraseAt(point: ScAnnotationPoint): void {
     const radius = Math.max(this.lineWidth() * 2, 8);
     this.annotations.update((anns) =>
       anns.filter((ann) => distanceTo(ann, point) > radius + ann.lineWidth / 2),
@@ -115,18 +117,18 @@ export class ScImageAnnotatorState {
     this.downloadRequests.next();
   }
 
-  getAnnotations(): Annotation[] {
+  getAnnotations(): ScAnnotation[] {
     return this.annotations();
   }
 
   /** Replaces the annotations from outside; resets the history, emits nothing. */
-  setAnnotations(annotations: Annotation[]): void {
+  setAnnotations(annotations: ScAnnotation[]): void {
     this.annotations.set(annotations);
     this.past.set([]);
     this.future.set([]);
   }
 
-  private commit(next: Annotation[]): void {
+  private commit(next: ScAnnotation[]): void {
     this.past.update((p) => [...p, this.annotations()]);
     this.future.set([]);
     this.annotations.set(next);
@@ -135,7 +137,7 @@ export class ScImageAnnotatorState {
 }
 
 /** Shortest distance from `p` to the stroke of an annotation. */
-function distanceTo(ann: Annotation, p: AnnotationPoint): number {
+function distanceTo(ann: ScAnnotation, p: ScAnnotationPoint): number {
   const [a, b] = ann.points;
   switch (ann.tool) {
     case 'pen':
@@ -162,14 +164,14 @@ function distanceTo(ann: Annotation, p: AnnotationPoint): number {
   }
 }
 
-function dist(p: AnnotationPoint, q: AnnotationPoint): number {
+function dist(p: ScAnnotationPoint, q: ScAnnotationPoint): number {
   return Math.hypot(p.x - q.x, p.y - q.y);
 }
 
 function segment(
-  p: AnnotationPoint,
-  a: AnnotationPoint,
-  b: AnnotationPoint,
+  p: ScAnnotationPoint,
+  a: ScAnnotationPoint,
+  b: ScAnnotationPoint,
 ): number {
   const len = (b.x - a.x) ** 2 + (b.y - a.y) ** 2;
   if (!len) return dist(p, a);

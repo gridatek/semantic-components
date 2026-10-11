@@ -20,7 +20,7 @@ import { AreaChartDemo } from './area-chart-demo';
 export class AreaChartDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ChartDataPoint,
+  ScChartDataPoint,
   ScChartContainer,
   ScLineChart,
 } from '@semantic-components/charts';
@@ -44,7 +44,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class AreaChartDemo {
-  readonly lineData: ChartDataPoint[] = [
+  readonly lineData: ScChartDataPoint[] = [
     { label: 'Mon', value: 45 },
     { label: 'Tue', value: 52 },
     { label: 'Wed', value: 49 },

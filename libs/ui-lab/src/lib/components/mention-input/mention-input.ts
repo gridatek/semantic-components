@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { ScMentionInputState } from './mention-input-state';
-import type { MentionUser } from './mention-input-types';
+import type { ScMentionUser } from './mention-input-types';
 
 export const SC_MENTION_INPUT = new InjectionToken<ScMentionInput>(
   'ScMentionInput',
@@ -28,13 +28,13 @@ export const SC_MENTION_INPUT = new InjectionToken<ScMentionInput>(
 })
 export class ScMentionInput {
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly users = input<MentionUser[]>([]);
+  readonly users = input<ScMentionUser[]>([]);
   readonly trigger = input<string>('@');
 
   readonly value = model<string>('');
-  readonly mentions = model<MentionUser[]>([]);
+  readonly mentions = model<ScMentionUser[]>([]);
 
-  readonly mentionSelect = output<MentionUser>();
+  readonly mentionSelect = output<ScMentionUser>();
 
   private readonly state = inject(ScMentionInputState);
 
@@ -57,7 +57,7 @@ export class ScMentionInput {
     this.state.focus();
   }
 
-  getMentions(): MentionUser[] {
+  getMentions(): ScMentionUser[] {
     return this.mentions();
   }
 

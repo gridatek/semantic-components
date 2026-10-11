@@ -1,8 +1,8 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ChartDataPoint,
   ScBarChart,
   ScChartContainer,
+  ScChartDataPoint,
   ScChartLegend,
 } from '@semantic-components/charts';
 
@@ -21,7 +21,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class ChartsUsageDemo {
-  readonly data: ChartDataPoint[] = [
+  readonly data: ScChartDataPoint[] = [
     { label: 'Jan', value: 120 },
     { label: 'Feb', value: 180 },
     { label: 'Mar', value: 150 },

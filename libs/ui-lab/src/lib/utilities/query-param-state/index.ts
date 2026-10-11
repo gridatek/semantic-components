@@ -21,15 +21,15 @@ export { injectQueryParams } from './inject-query-params';
 
 // Types
 export type {
-  InferParserMapSetAll,
-  InferParserMapValues,
-  ParserMap,
-  QueryParamsState,
+  ScInferParserMapSetAll,
+  ScInferParserMapValues,
+  ScParserMap,
+  ScQueryParamsState,
 } from './inject-query-params';
 export type {
-  Parser,
-  ParserBuilder,
-  ParserBuilderWithDefault,
-  QueryParamOptions,
-  QueryParamState,
+  ScParser,
+  ScParserBuilder,
+  ScParserBuilderWithDefault,
+  ScQueryParamOptions,
+  ScQueryParamState,
 } from './query-param-types';

@@ -20,7 +20,7 @@ import { UserGrowthChartDemo } from './user-growth-chart-demo';
 export class UserGrowthChartDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ChartDataPoint,
+  ScChartDataPoint,
   ScChartContainer,
   ScLineChart,
 } from '@semantic-components/charts';
@@ -46,7 +46,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class UserGrowthChartDemo {
-  readonly growthData: ChartDataPoint[] = [
+  readonly growthData: ScChartDataPoint[] = [
     { label: 'Week 1', value: 1200 },
     { label: 'Week 2', value: 1350 },
     { label: 'Week 3', value: 1480 },

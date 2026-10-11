@@ -1,7 +1,7 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { ScEmojiPicker } from './emoji-picker';
-import type { Emoji } from './emoji-picker-state';
+import type { ScEmoji } from './emoji-picker-state';
 
 @Directive({
   selector: 'button[scEmojiPickerItem]',
@@ -15,7 +15,7 @@ import type { Emoji } from './emoji-picker-state';
 export class ScEmojiPickerItem {
   readonly picker = inject(ScEmojiPicker);
 
-  readonly emoji = input.required<Emoji>();
+  readonly emoji = input.required<ScEmoji>();
 
   readonly classInput = input<string>('', { alias: 'class' });
 

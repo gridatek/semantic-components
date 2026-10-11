@@ -20,7 +20,7 @@ import { EmptyNotificationCenterDemo } from './empty-notification-center-demo';
 export class EmptyNotificationCenterDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  type Notification,
+  type ScNotification,
   ScNotificationCenter,
   ScNotificationCenterContainer,
 } from '@semantic-components/ui-lab';
@@ -44,6 +44,6 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class EmptyNotificationCenterDemo {
-  readonly notifications = signal<Notification[]>([]);
+  readonly notifications = signal<ScNotification[]>([]);
 }`;
 }

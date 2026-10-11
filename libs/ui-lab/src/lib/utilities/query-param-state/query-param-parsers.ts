@@ -1,5 +1,5 @@
 import { createParser } from './query-param-builder';
-import type { Parser, ParserBuilder } from './query-param-types';
+import type { ScParser, ScParserBuilder } from './query-param-types';
 
 /** Stores a plain string value. */
 export const parseAsString = createParser<string>(
@@ -81,7 +81,7 @@ export const parseAsTimestamp = createParser<Date>(
  */
 export function parseAsJson<T>(
   validate?: (raw: unknown) => T,
-): ParserBuilder<T> {
+): ScParserBuilder<T> {
   return createParser<T>(
     (raw) => {
       try {
@@ -103,9 +103,9 @@ export function parseAsJson<T>(
  * const tags = injectQueryParam('tags', parseAsTags.withDefault([]));
  */
 export function parseAsArrayOf<T>(
-  itemParser: Parser<T>,
+  itemParser: ScParser<T>,
   separator = ',',
-): ParserBuilder<T[]> {
+): ScParserBuilder<T[]> {
   return createParser<T[]>(
     (raw) => {
       if (raw === '') return [];
@@ -131,7 +131,7 @@ export function parseAsArrayOf<T>(
  */
 export function parseAsStringEnum<T extends string>(
   values: readonly T[],
-): ParserBuilder<T> {
+): ScParserBuilder<T> {
   return createParser<T>(
     (raw) => (values.includes(raw as T) ? (raw as T) : null),
     (v) => v,

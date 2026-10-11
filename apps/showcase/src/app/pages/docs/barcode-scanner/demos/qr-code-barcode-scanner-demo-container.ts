@@ -21,7 +21,7 @@ import { QrCodeBarcodeScannerDemo } from './qr-code-barcode-scanner-demo';
 export class QrCodeBarcodeScannerDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  BarcodeResult,
+  ScBarcodeResult,
   ScBarcodeScanner,
   ScBarcodeVideo,
 } from '@semantic-components/ui-lab';
@@ -102,9 +102,9 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class QrCodeBarcodeScannerDemo {
-  readonly lastQR = signal<BarcodeResult | null>(null);
+  readonly lastQR = signal<ScBarcodeResult | null>(null);
 
-  onDetected(result: BarcodeResult): void {
+  onDetected(result: ScBarcodeResult): void {
     this.lastQR.set(result);
   }
 }`;

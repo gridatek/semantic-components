@@ -16,7 +16,7 @@ import { NonCollapsibleOrgChartDemo } from './non-collapsible-org-chart-demo';
 export class NonCollapsibleOrgChartDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  type OrgChartNode,
+  type ScOrgChartNodeData,
   ScOrgChart,
   ScOrgChartCard,
   ScOrgChartNode,
@@ -57,7 +57,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class NonCollapsibleOrgChartDemo {
-  readonly orgData = signal<OrgChartNode>({
+  readonly orgData = signal<ScOrgChartNodeData>({
     id: '1',
     name: 'John Smith',
     title: 'Team Lead',

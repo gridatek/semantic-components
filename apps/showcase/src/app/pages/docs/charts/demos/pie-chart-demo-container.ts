@@ -20,7 +20,7 @@ import { PieChartDemo } from './pie-chart-demo';
 export class PieChartDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ChartDataPoint,
+  ScChartDataPoint,
   ScChartContainer,
   ScChartLegend,
   ScPieChart,
@@ -41,7 +41,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class PieChartDemo {
-  readonly pieData: ChartDataPoint[] = [
+  readonly pieData: ScChartDataPoint[] = [
     { label: 'Desktop', value: 45 },
     { label: 'Mobile', value: 35 },
     { label: 'Tablet', value: 20 },

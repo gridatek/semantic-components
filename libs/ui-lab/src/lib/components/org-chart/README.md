@@ -6,7 +6,7 @@ A hierarchical organization chart built from composable directives. The consumer
 
 ```typescript
 import { ScOrgChart, ScOrgChartCard, ScOrgChartNode, ScOrgChartNodeDef } from '@semantic-components/ui-lab';
-import type { OrgChartNode, ScOrgChartNodeExpandEvent } from '@semantic-components/ui-lab';
+import type { ScOrgChartNodeData, ScOrgChartNodeExpandEvent } from '@semantic-components/ui-lab';
 ```
 
 ## Usage
@@ -99,12 +99,12 @@ Root directive. Provides configuration to all child nodes via `SC_ORG_CHART` inj
 
 Captures the card template. Template context provides:
 
-| Variable      | Type           | Description                        |
-| ------------- | -------------- | ---------------------------------- |
-| `$implicit`   | `OrgChartNode` | The node data (use `let-node`)     |
-| `expanded`    | `boolean`      | Whether the node is expanded       |
-| `hasChildren` | `boolean`      | Whether the node has children      |
-| `toggle`      | `() => void`   | Function to toggle expand/collapse |
+| Variable      | Type                 | Description                        |
+| ------------- | -------------------- | ---------------------------------- |
+| `$implicit`   | `ScOrgChartNodeData` | The node data (use `let-node`)     |
+| `expanded`    | `boolean`            | Whether the node is expanded       |
+| `hasChildren` | `boolean`            | Whether the node has children      |
+| `toggle`      | `() => void`         | Function to toggle expand/collapse |
 
 ### ScOrgChartNode (`sc-org-chart-node`)
 
@@ -112,9 +112,9 @@ Handles recursion and connector lines. Reads config from the root `ScOrgChart` d
 
 #### Inputs
 
-| Input  | Type           | Description          |
-| ------ | -------------- | -------------------- |
-| `node` | `OrgChartNode` | Node data (required) |
+| Input  | Type                 | Description          |
+| ------ | -------------------- | -------------------- |
+| `node` | `ScOrgChartNodeData` | Node data (required) |
 
 ### ScOrgChartCard (`[scOrgChartCard]`)
 
@@ -125,13 +125,13 @@ Card styling directive. Reads `compact` from root to toggle min-width. Use a `di
 ### OrgChartNode
 
 ```typescript
-interface OrgChartNode {
+interface ScOrgChartNodeData {
   id: string;
   name: string;
   title?: string;
   avatar?: string;
   department?: string;
-  children?: OrgChartNode[];
+  children?: ScOrgChartNodeData[];
   expanded?: boolean;
   data?: Record<string, unknown>;
 }
@@ -141,7 +141,7 @@ interface OrgChartNode {
 
 ```typescript
 interface ScOrgChartNodeExpandEvent {
-  node: OrgChartNode;
+  node: ScOrgChartNodeData;
   expanded: boolean;
 }
 ```
@@ -150,7 +150,7 @@ interface ScOrgChartNodeExpandEvent {
 
 ```typescript
 interface ScOrgChartNodeDefContext {
-  $implicit: OrgChartNode;
+  $implicit: ScOrgChartNodeData;
   expanded: boolean;
   hasChildren: boolean;
   toggle: () => void;

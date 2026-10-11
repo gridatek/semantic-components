@@ -25,7 +25,7 @@ Successfully refactored the stat-card component from a monolithic input-driven c
 
 2. **stat-card-types.ts**
    - Removed `StatCardData` interface (no longer needed)
-   - Kept type definitions for `StatCardTrend`, `StatCardVariant`, `StatCardSize`
+   - Kept type definitions for `ScStatCardTrend`, `ScStatCardVariant`, `ScStatCardSize`
 
 3. **index.ts**
    - Added exports for all new sub-components

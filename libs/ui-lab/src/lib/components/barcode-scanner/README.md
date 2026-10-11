@@ -61,35 +61,35 @@ Directive-based barcode/QR code scanner using the Barcode Detection API. Directi
 
 #### Inputs
 
-| Input          | Type              | Default                      | Description                   |
-| -------------- | ----------------- | ---------------------------- | ----------------------------- |
-| `formats`      | `BarcodeFormat[]` | `['qr_code', 'ean_13', ...]` | Formats to detect             |
-| `continuous`   | `boolean`         | `true`                       | Keep scanning after detection |
-| `scanInterval` | `number`          | `100`                        | Detection interval (ms)       |
-| `class`        | `string`          | `''`                         | Additional CSS classes        |
+| Input          | Type                | Default                      | Description                   |
+| -------------- | ------------------- | ---------------------------- | ----------------------------- |
+| `formats`      | `ScBarcodeFormat[]` | `['qr_code', 'ean_13', ...]` | Formats to detect             |
+| `continuous`   | `boolean`           | `true`                       | Keep scanning after detection |
+| `scanInterval` | `number`            | `100`                        | Detection interval (ms)       |
+| `class`        | `string`            | `''`                         | Additional CSS classes        |
 
 #### Outputs
 
-| Output      | Type            | Description                 |
-| ----------- | --------------- | --------------------------- |
-| `detected`  | `BarcodeResult` | Emits when barcode detected |
-| `scanError` | `string`        | Emits on error              |
+| Output      | Type              | Description                 |
+| ----------- | ----------------- | --------------------------- |
+| `detected`  | `ScBarcodeResult` | Emits when barcode detected |
+| `scanError` | `string`          | Emits on error              |
 
 #### Public API
 
-| Property/Method        | Type                            | Description                        |
-| ---------------------- | ------------------------------- | ---------------------------------- |
-| `isSupported()`        | `Signal<boolean>`               | Whether Barcode API is available   |
-| `isScanning()`         | `Signal<boolean>`               | Whether actively scanning          |
-| `error()`              | `Signal<string \| null>`        | Current error message              |
-| `lastResult()`         | `Signal<BarcodeResult \| null>` | Last detected barcode              |
-| `hasMultipleCameras()` | `Signal<boolean>`               | Whether multiple cameras available |
-| `hasTorch()`           | `Signal<boolean>`               | Whether torch/flashlight available |
-| `torchOn()`            | `Signal<boolean>`               | Whether torch is on                |
-| `startScanning()`      | `Promise<void>`                 | Start camera and detection         |
-| `stopScanning()`       | `void`                          | Stop camera and detection          |
-| `switchCamera()`       | `Promise<void>`                 | Toggle front/back camera           |
-| `toggleTorch()`        | `Promise<void>`                 | Toggle flashlight                  |
+| Property/Method        | Type                              | Description                        |
+| ---------------------- | --------------------------------- | ---------------------------------- |
+| `isSupported()`        | `Signal<boolean>`                 | Whether Barcode API is available   |
+| `isScanning()`         | `Signal<boolean>`                 | Whether actively scanning          |
+| `error()`              | `Signal<string \| null>`          | Current error message              |
+| `lastResult()`         | `Signal<ScBarcodeResult \| null>` | Last detected barcode              |
+| `hasMultipleCameras()` | `Signal<boolean>`                 | Whether multiple cameras available |
+| `hasTorch()`           | `Signal<boolean>`                 | Whether torch/flashlight available |
+| `torchOn()`            | `Signal<boolean>`                 | Whether torch is on                |
+| `startScanning()`      | `Promise<void>`                   | Start camera and detection         |
+| `stopScanning()`       | `void`                            | Stop camera and detection          |
+| `switchCamera()`       | `Promise<void>`                   | Toggle front/back camera           |
+| `toggleTorch()`        | `Promise<void>`                   | Toggle flashlight                  |
 
 ### ScBarcodeVideo (`video[scBarcodeVideo]`)
 
@@ -100,15 +100,15 @@ Apply to a `<video>` element inside a `[scBarcodeScanner]` host. Automatically r
 ### BarcodeFormat
 
 ```typescript
-type BarcodeFormat = 'aztec' | 'code_128' | 'code_39' | 'code_93' | 'codabar' | 'data_matrix' | 'ean_13' | 'ean_8' | 'itf' | 'pdf417' | 'qr_code' | 'upc_a' | 'upc_e';
+type ScBarcodeFormat = 'aztec' | 'code_128' | 'code_39' | 'code_93' | 'codabar' | 'data_matrix' | 'ean_13' | 'ean_8' | 'itf' | 'pdf417' | 'qr_code' | 'upc_a' | 'upc_e';
 ```
 
 ### BarcodeResult
 
 ```typescript
-interface BarcodeResult {
+interface ScBarcodeResult {
   rawValue: string;
-  format: BarcodeFormat;
+  format: ScBarcodeFormat;
   boundingBox?: DOMRectReadOnly;
   cornerPoints?: { x: number; y: number }[];
 }

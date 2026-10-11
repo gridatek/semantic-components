@@ -20,7 +20,7 @@ import { BarChartDemo } from './bar-chart-demo';
 export class BarChartDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ChartDataPoint,
+  ScChartDataPoint,
   ScBarChart,
   ScChartContainer,
   ScChartLegend,
@@ -41,7 +41,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class BarChartDemo {
-  readonly barData: ChartDataPoint[] = [
+  readonly barData: ScChartDataPoint[] = [
     { label: 'Jan', value: 120 },
     { label: 'Feb', value: 180 },
     { label: 'Mar', value: 150 },

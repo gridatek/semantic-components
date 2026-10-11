@@ -1,4 +1,4 @@
-import type { EmojiCategory } from './emoji-picker-state';
+import type { ScEmojiCategory } from './emoji-picker-state';
 
 const CATEGORY_ICONS: Record<string, string> = {
   'smileys-emotion': '😀',
@@ -12,9 +12,9 @@ const CATEGORY_ICONS: Record<string, string> = {
   flags: '🏁',
 };
 
-let cached: Promise<EmojiCategory[]> | null = null;
+let cached: Promise<ScEmojiCategory[]> | null = null;
 
-export function loadDefaultCategories(): Promise<EmojiCategory[]> {
+export function loadDefaultCategories(): Promise<ScEmojiCategory[]> {
   if (!cached) {
     cached = Promise.all([
       import('emojibase-data/en/compact.json'),
@@ -41,7 +41,7 @@ type Messages = {
 function buildCategories(
   data: CompactEmoji[],
   messages: Messages,
-): EmojiCategory[] {
+): ScEmojiCategory[] {
   const grouped = new Map<number, CompactEmoji[]>();
 
   for (const emoji of data) {

@@ -7,13 +7,13 @@ export const CHART_COLORS = [
   'var(--chart-5)',
 ] as const;
 
-export interface ChartDataPoint {
+export interface ScChartDataPoint {
   label: string;
   value: number;
   color?: string;
 }
 
-export interface ChartConfig {
+export interface ScChartConfig {
   [key: string]: {
     label: string;
     color?: string;

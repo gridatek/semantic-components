@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { SC_PDF_VIEWER } from './pdf-viewer-root';
-import type { PdfComment } from './pdf-viewer-types';
+import type { ScPdfComment } from './pdf-viewer-types';
 
 @Component({
   selector: 'sc-pdf-viewer-comment-sidebar',
@@ -155,7 +155,7 @@ export class ScPdfViewerCommentSidebar {
     this.addingComment.set(false);
   }
 
-  startEdit(comment: PdfComment): void {
+  startEdit(comment: ScPdfComment): void {
     this.editingId.set(comment.id);
     this.editText.set(comment.text);
   }

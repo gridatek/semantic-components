@@ -9,8 +9,8 @@ import {
 import { cn } from '@semantic-components/ui';
 import { ScTransferListState } from './transfer-list-state';
 import type {
-  TransferListItem,
-  TransferListState,
+  ScTransferListChange,
+  ScTransferListItemData,
 } from './transfer-list-types';
 
 @Directive({
@@ -23,10 +23,10 @@ import type {
 export class ScTransferList {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  readonly sourceItems = model<TransferListItem[]>([]);
-  readonly targetItems = model<TransferListItem[]>([]);
+  readonly sourceItems = model<ScTransferListItemData[]>([]);
+  readonly targetItems = model<ScTransferListItemData[]>([]);
 
-  readonly transferChange = output<TransferListState>();
+  readonly transferChange = output<ScTransferListChange>();
 
   private readonly state = inject(ScTransferListState);
 

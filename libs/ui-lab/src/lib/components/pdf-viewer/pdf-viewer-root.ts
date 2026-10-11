@@ -15,17 +15,17 @@ import { cn } from '@semantic-components/ui';
 import type { PDFDocumentProxy } from 'pdfjs-dist';
 import { GlobalWorkerOptions, getDocument, version } from 'pdfjs-dist';
 import type {
-  PdfComment,
-  PdfEditorAnnotation,
-  PdfEditorMode,
-  PdfErrorEvent,
-  PdfFindState,
-  PdfLoadEvent,
-  PdfPageChangeEvent,
-  PdfPageMatchInfo,
-  PdfSignatureData,
-  PdfZoomChangeEvent,
-  PdfZoomLevel,
+  ScPdfComment,
+  ScPdfEditorAnnotation,
+  ScPdfEditorMode,
+  ScPdfErrorEvent,
+  ScPdfFindState,
+  ScPdfLoadEvent,
+  ScPdfPageChangeEvent,
+  ScPdfPageMatchInfo,
+  ScPdfSignatureData,
+  ScPdfZoomChangeEvent,
+  ScPdfZoomLevel,
 } from './pdf-viewer-types';
 
 export const SC_PDF_VIEWER = new InjectionToken<ScPdfViewerRoot>(
@@ -53,21 +53,21 @@ export class ScPdfViewerRoot {
   readonly src = input<string>('');
   readonly title = input<string>('');
   readonly initialPage = input(1);
-  readonly initialZoom = input<PdfZoomLevel>('auto');
+  readonly initialZoom = input<ScPdfZoomLevel>('auto');
   readonly workerSrc = input<string>('');
 
   // Outputs
-  readonly loaded = output<PdfLoadEvent>();
-  readonly pageChange = output<PdfPageChangeEvent>();
-  readonly zoomChange = output<PdfZoomChangeEvent>();
-  readonly errorEvent = output<PdfErrorEvent>();
+  readonly loaded = output<ScPdfLoadEvent>();
+  readonly pageChange = output<ScPdfPageChangeEvent>();
+  readonly zoomChange = output<ScPdfZoomChangeEvent>();
+  readonly errorEvent = output<ScPdfErrorEvent>();
 
   // State signals
   readonly isLoading = signal(true);
   readonly error = signal<string | null>(null);
   readonly currentPage = signal(1);
   readonly totalPages = signal(1);
-  readonly zoom = signal<PdfZoomLevel>('auto');
+  readonly zoom = signal<ScPdfZoomLevel>('auto');
   readonly rotation = signal(0);
   readonly isFullscreen = signal(false);
 
@@ -84,17 +84,17 @@ export class ScPdfViewerRoot {
   readonly findHighlightAll = signal(true);
   readonly findEntireWord = signal(false);
   readonly findMatchDiacritics = signal(false);
-  readonly findState = signal<PdfFindState>('idle');
+  readonly findState = signal<ScPdfFindState>('idle');
   readonly findCurrentMatchIndex = signal(0);
   readonly findTotalMatches = signal(0);
-  readonly pageMatches = signal<PdfPageMatchInfo[]>([]);
+  readonly pageMatches = signal<ScPdfPageMatchInfo[]>([]);
   readonly findTrigger = signal(0);
 
   private pageTexts: string[] = [];
 
   // Editor state
-  readonly editorMode = signal<PdfEditorMode>('none');
-  readonly editorAnnotations = signal<PdfEditorAnnotation[]>([]);
+  readonly editorMode = signal<ScPdfEditorMode>('none');
+  readonly editorAnnotations = signal<ScPdfEditorAnnotation[]>([]);
   readonly editorTrigger = signal(0);
 
   // Editor params
@@ -120,10 +120,10 @@ export class ScPdfViewerRoot {
 
   // Signature state
   readonly signatureDialogOpen = signal(false);
-  readonly savedSignatures = signal<PdfSignatureData[]>([]);
+  readonly savedSignatures = signal<ScPdfSignatureData[]>([]);
 
   // Comment state
-  readonly comments = signal<PdfComment[]>([]);
+  readonly comments = signal<ScPdfComment[]>([]);
 
   // Undo bar state
   readonly undoBarVisible = signal(false);
@@ -327,7 +327,7 @@ export class ScPdfViewerRoot {
     this.setZoom(newZoom);
   }
 
-  setZoom(level: PdfZoomLevel): void {
+  setZoom(level: ScPdfZoomLevel): void {
     this.zoom.set(level);
     this.zoomChange.emit({
       zoom: level,
@@ -512,7 +512,7 @@ export class ScPdfViewerRoot {
     this.signatureDialogOpen.set(false);
   }
 
-  addSavedSignature(sig: Omit<PdfSignatureData, 'id'>): void {
+  addSavedSignature(sig: Omit<ScPdfSignatureData, 'id'>): void {
     const id = `sig-${Date.now()}`;
     this.savedSignatures.update((list) => [...list, { ...sig, id }]);
   }
@@ -522,7 +522,7 @@ export class ScPdfViewerRoot {
   }
 
   // Comment methods
-  addComment(comment: Omit<PdfComment, 'id'>): void {
+  addComment(comment: Omit<ScPdfComment, 'id'>): void {
     const id = `comment-${++this.commentIdCounter}`;
     this.comments.update((list) => [...list, { ...comment, id }]);
   }
@@ -584,7 +584,7 @@ export class ScPdfViewerRoot {
     const matchCase = this.findMatchCase();
     const entireWord = this.findEntireWord();
     const matchDiacritics = this.findMatchDiacritics();
-    const allMatches: PdfPageMatchInfo[] = [];
+    const allMatches: ScPdfPageMatchInfo[] = [];
     let total = 0;
 
     // Strip diacritical marks: NFD splits accented chars, then remove combining marks
@@ -746,7 +746,7 @@ export class ScPdfViewerRoot {
   }
 
   // Editor methods
-  setEditorMode(mode: PdfEditorMode): void {
+  setEditorMode(mode: ScPdfEditorMode): void {
     if (mode === 'signature') {
       // Signature mode opens a dialog instead of toggling
       if (this.editorMode() === 'signature') {
@@ -760,7 +760,7 @@ export class ScPdfViewerRoot {
     this.editorMode.set(this.editorMode() === mode ? 'none' : mode);
   }
 
-  addEditorAnnotation(annotation: Omit<PdfEditorAnnotation, 'id'>): void {
+  addEditorAnnotation(annotation: Omit<ScPdfEditorAnnotation, 'id'>): void {
     const id = `editor-${++this.editorIdCounter}`;
     this.editorAnnotations.update((list) => [...list, { ...annotation, id }]);
     this.editorTrigger.update((v) => v + 1);
@@ -768,7 +768,7 @@ export class ScPdfViewerRoot {
 
   updateEditorAnnotation(
     id: string,
-    changes: Partial<Omit<PdfEditorAnnotation, 'id'>>,
+    changes: Partial<Omit<ScPdfEditorAnnotation, 'id'>>,
   ): void {
     this.editorAnnotations.update((list) =>
       list.map((a) => (a.id === id ? { ...a, ...changes } : a)),

@@ -798,7 +798,7 @@ export class ScPdfViewerCanvas {
   }
 
   private applyHighlights(
-    allMatches: import('./pdf-viewer-types').PdfPageMatchInfo[],
+    allMatches: import('./pdf-viewer-types').ScPdfPageMatchInfo[],
     highlightAll: boolean,
     currentMatchIndex: number,
   ): void {
@@ -865,7 +865,7 @@ export class ScPdfViewerCanvas {
 
   private renderPageHighlights(
     data: { divs: HTMLElement[]; texts: string[] },
-    matchInfo: import('./pdf-viewer-types').PdfPageMatchInfo,
+    matchInfo: import('./pdf-viewer-types').ScPdfPageMatchInfo,
     highlightAll: boolean,
     isSelectedPage: boolean,
     selectedMatchOnPage: number,
@@ -1138,7 +1138,7 @@ export class ScPdfViewerCanvas {
   }
 
   private renderEditorAnnotations(
-    annotations: import('./pdf-viewer-types').PdfEditorAnnotation[],
+    annotations: import('./pdf-viewer-types').ScPdfEditorAnnotation[],
     scale: number,
   ): void {
     const container = this.scrollContainer()?.nativeElement;
@@ -1202,7 +1202,7 @@ export class ScPdfViewerCanvas {
   }
 
   private createInteractiveHighlight(
-    ann: import('./pdf-viewer-types').PdfEditorAnnotation,
+    ann: import('./pdf-viewer-types').ScPdfEditorAnnotation,
     editorLayer: HTMLElement,
   ): void {
     const isSelected = this.selectedAnnotationId === ann.id;
@@ -1326,7 +1326,7 @@ export class ScPdfViewerCanvas {
   }
 
   private createInteractiveStamp(
-    ann: import('./pdf-viewer-types').PdfEditorAnnotation,
+    ann: import('./pdf-viewer-types').ScPdfEditorAnnotation,
     editorLayer: HTMLElement,
   ): void {
     const isSelected = this.selectedAnnotationId === ann.id;
@@ -1524,7 +1524,7 @@ export class ScPdfViewerCanvas {
   }
 
   private createInteractiveFreetext(
-    ann: import('./pdf-viewer-types').PdfEditorAnnotation,
+    ann: import('./pdf-viewer-types').ScPdfEditorAnnotation,
     editorLayer: HTMLElement,
     scale: number,
   ): void {

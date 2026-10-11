@@ -8,9 +8,9 @@ import {
 } from '@angular/core';
 import { QueryParamSyncService } from './query-param-sync';
 import type {
-  ParserBuilder,
-  ParserBuilderWithDefault,
-  QueryParamState,
+  ScParserBuilder,
+  ScParserBuilderWithDefault,
+  ScQueryParamState,
 } from './query-param-types';
 
 /**
@@ -36,21 +36,21 @@ import type {
  */
 export function injectQueryParam<T>(
   key: string,
-  parser: ParserBuilderWithDefault<T>,
-): QueryParamState<T>;
+  parser: ScParserBuilderWithDefault<T>,
+): ScQueryParamState<T>;
 export function injectQueryParam<T>(
   key: string,
-  parser: ParserBuilder<T>,
-): QueryParamState<T | null>;
+  parser: ScParserBuilder<T>,
+): ScQueryParamState<T | null>;
 export function injectQueryParam<T>(
   key: string,
-  parser: ParserBuilder<T> | ParserBuilderWithDefault<T>,
-): QueryParamState<T | null> {
+  parser: ScParserBuilder<T> | ScParserBuilderWithDefault<T>,
+): ScQueryParamState<T | null> {
   const sync = inject(QueryParamSyncService);
 
   const hasDefault = '_default' in parser && parser._default !== undefined;
   const defaultValue: T | null = hasDefault
-    ? (parser as ParserBuilderWithDefault<T>)._default
+    ? (parser as ScParserBuilderWithDefault<T>)._default
     : null;
 
   // Shared per-key raw value. Every call site for `key` observes this same

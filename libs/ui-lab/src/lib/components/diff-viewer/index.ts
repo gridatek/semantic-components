@@ -1,5 +1,5 @@
 export { SC_DIFF_VIEWER, ScDiffViewer } from './diff-viewer';
-export type { DiffViewMode, DiffLine, DiffResult } from './diff-viewer';
+export type { ScDiffViewMode, ScDiffLine, ScDiffResult } from './diff-viewer';
 export { ScDiffViewerHeader } from './diff-viewer-header';
 export { ScDiffViewerModeSwitch } from './diff-viewer-mode-switch';
 export { ScDiffViewerContent } from './diff-viewer-content';
@@ -18,4 +18,4 @@ export {
   computeWordDiff,
   createUnifiedDiff,
 } from './diff-algorithm';
-export type { DiffOptions } from './diff-algorithm';
+export type { ScDiffOptions } from './diff-algorithm';

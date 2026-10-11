@@ -31,7 +31,7 @@ import {
   ScTransferListSource,
   ScTransferListTarget,
 } from '@semantic-components/ui-lab';
-import type { TransferListItem } from '@semantic-components/ui-lab';
+import type { ScTransferListItemData } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-basic-transfer-list-demo',
@@ -142,7 +142,7 @@ import type { TransferListItem } from '@semantic-components/ui-lab';
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicTransferListDemo {
-  readonly sourceItems = signal<TransferListItem[]>([
+  readonly sourceItems = signal<ScTransferListItemData[]>([
     { id: '1', label: 'JavaScript', description: 'Programming language' },
     { id: '2', label: 'TypeScript', description: 'Typed JavaScript' },
     { id: '3', label: 'Python', description: 'General purpose language' },
@@ -153,14 +153,14 @@ export class BasicTransferListDemo {
     { id: '8', label: 'Ruby', description: 'Dynamic language' },
   ]);
 
-  readonly targetItems = signal<TransferListItem[]>([
+  readonly targetItems = signal<ScTransferListItemData[]>([
     { id: '9', label: 'Angular', description: 'Web framework' },
     { id: '10', label: 'React', description: 'UI library' },
   ]);
 
   onChange(state: {
-    source: TransferListItem[];
-    target: TransferListItem[];
+    source: ScTransferListItemData[];
+    target: ScTransferListItemData[];
   }): void {
     console.log('Transfer list changed:', state);
   }

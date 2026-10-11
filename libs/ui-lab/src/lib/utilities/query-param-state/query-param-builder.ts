@@ -1,30 +1,32 @@
 import type {
-  ParserBuilder,
-  ParserBuilderWithDefault,
-  QueryParamOptions,
+  ScParserBuilder,
+  ScParserBuilderWithDefault,
+  ScQueryParamOptions,
 } from './query-param-types';
 
 export function createParser<T>(
   parse: (raw: string) => T | null,
   serialize: (value: T) => string,
-  opts?: QueryParamOptions,
-): ParserBuilder<T> {
-  const builder: ParserBuilder<T> = {
+  opts?: ScQueryParamOptions,
+): ScParserBuilder<T> {
+  const builder: ScParserBuilder<T> = {
     parse,
     serialize,
     _options: opts,
-    withDefault(defaultValue: T): ParserBuilderWithDefault<T> {
+    withDefault(defaultValue: T): ScParserBuilderWithDefault<T> {
       return {
         parse,
         serialize,
         _default: defaultValue,
         _options: opts,
-        withOptions(newOpts: QueryParamOptions): ParserBuilderWithDefault<T> {
+        withOptions(
+          newOpts: ScQueryParamOptions,
+        ): ScParserBuilderWithDefault<T> {
           return { ...this, _options: { ...opts, ...newOpts } };
         },
       };
     },
-    withOptions(newOpts: QueryParamOptions): ParserBuilder<T> {
+    withOptions(newOpts: ScQueryParamOptions): ScParserBuilder<T> {
       return createParser(parse, serialize, { ...opts, ...newOpts });
     },
   };

@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { ScImageAnnotatorState } from './image-annotator-state';
-import type { AnnotationTool } from './image-annotator-types';
+import type { ScAnnotationTool } from './image-annotator-types';
 
 /** Selects a drawing tool. Named after the tool's label unless given an `aria-label`. */
 @Directive({
@@ -25,7 +25,7 @@ import type { AnnotationTool } from './image-annotator-types';
 })
 export class ScImageAnnotatorToolButton {
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly tool = input.required<AnnotationTool>();
+  readonly tool = input.required<ScAnnotationTool>();
 
   private readonly state = inject(ScImageAnnotatorState);
   private readonly ariaLabel = inject(new HostAttributeToken('aria-label'), {

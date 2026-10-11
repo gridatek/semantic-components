@@ -59,7 +59,7 @@ export class ChartsUsageDemoContainer {
 
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ChartDataPoint,
+  ScChartDataPoint,
   ScBarChart,
   ScChartContainer,
   ScChartLegend,
@@ -80,7 +80,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class ChartsUsageDemo {
-  readonly data: ChartDataPoint[] = [
+  readonly data: ScChartDataPoint[] = [
     { label: 'Jan', value: 120 },
     { label: 'Feb', value: 180 },
     { label: 'Mar', value: 150 },

@@ -1,30 +1,30 @@
-export interface KanbanCard {
+export interface ScKanbanCardData {
   id: string;
   title: string;
   description?: string;
   columnId: string;
   order: number;
-  labels?: KanbanLabel[];
-  assignee?: KanbanAssignee;
+  labels?: ScKanbanLabel[];
+  assignee?: ScKanbanAssignee;
   dueDate?: Date;
   priority?: 'low' | 'medium' | 'high' | 'urgent';
   metadata?: Record<string, unknown>;
 }
 
-export interface KanbanLabel {
+export interface ScKanbanLabel {
   id: string;
   text: string;
   color: string;
 }
 
-export interface KanbanAssignee {
+export interface ScKanbanAssignee {
   id: string;
   name: string;
   avatar?: string;
   initials?: string;
 }
 
-export interface KanbanColumn {
+export interface ScKanbanColumnData {
   id: string;
   title: string;
   order: number;
@@ -33,20 +33,20 @@ export interface KanbanColumn {
   collapsed?: boolean;
 }
 
-export interface KanbanDragEvent {
-  card: KanbanCard;
+export interface ScKanbanDragEvent {
+  card: ScKanbanCardData;
   sourceColumnId: string;
   targetColumnId: string;
   sourceIndex: number;
   targetIndex: number;
 }
 
-export interface KanbanCardAddEvent {
+export interface ScKanbanCardAddEvent {
   columnId: string;
   title: string;
 }
 
-export interface KanbanCardDeleteEvent {
-  card: KanbanCard;
+export interface ScKanbanCardDeleteEvent {
+  card: ScKanbanCardData;
   columnId: string;
 }

@@ -9,7 +9,7 @@ import {
 import { cn } from '@semantic-components/ui';
 import { scaleBand, scaleLinear } from 'd3-scale';
 import { SC_CHART } from './chart-container';
-import { CHART_COLORS, ChartDataPoint } from './chart-types';
+import { CHART_COLORS, ScChartDataPoint } from './chart-types';
 
 @Component({
   selector: '[scBarChart]',
@@ -108,13 +108,13 @@ export class ScBarChart {
   private readonly container = inject(SC_CHART, { optional: true });
 
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly data = input<ChartDataPoint[]>([]);
+  readonly data = input<ScChartDataPoint[]>([]);
   readonly height = input<number>(300);
   readonly barRadius = input<number>(4);
   readonly barGap = input<number>(8);
   readonly ariaLabel = input<string>('Bar chart');
 
-  readonly hoveredBar = signal<ChartDataPoint | null>(null);
+  readonly hoveredBar = signal<ScChartDataPoint | null>(null);
   readonly tooltipX = signal(0);
   readonly tooltipY = signal(0);
 
@@ -186,7 +186,7 @@ export class ScBarChart {
     });
   });
 
-  onBarHover(event: MouseEvent, bar: ChartDataPoint): void {
+  onBarHover(event: MouseEvent, bar: ScChartDataPoint): void {
     const rect = (event.target as SVGElement).getBoundingClientRect();
     const parentRect = (event.target as SVGElement)
       .closest('[scBarChart]')
@@ -198,7 +198,7 @@ export class ScBarChart {
     this.hoveredBar.set(bar);
   }
 
-  onBarFocus(event: FocusEvent, bar: ChartDataPoint): void {
+  onBarFocus(event: FocusEvent, bar: ScChartDataPoint): void {
     const el = (event.target as SVGElement).querySelector('rect');
     const parentRect = (event.target as SVGElement)
       .closest('[scBarChart]')

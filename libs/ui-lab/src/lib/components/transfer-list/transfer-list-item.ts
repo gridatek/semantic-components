@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { ScCheckbox, ScCheckboxField, cn } from '@semantic-components/ui';
 import { SC_TRANSFER_LIST_PANEL } from './transfer-list-panel-ref';
-import type { TransferListItem } from './transfer-list-types';
+import type { ScTransferListItemData } from './transfer-list-types';
 
 @Component({
   selector: 'label[scTransferListItem]',
@@ -33,7 +33,7 @@ import type { TransferListItem } from './transfer-list-types';
 })
 export class ScTransferListItem {
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly item = input.required<TransferListItem>();
+  readonly item = input.required<ScTransferListItemData>();
 
   private readonly panel = inject(SC_TRANSFER_LIST_PANEL);
 

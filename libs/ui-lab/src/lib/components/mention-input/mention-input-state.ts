@@ -10,16 +10,16 @@ import {
   signal,
 } from '@angular/core';
 import { getCaretOffset } from './mention-input-caret';
-import type { MentionUser } from './mention-input-types';
+import type { ScMentionUser } from './mention-input-types';
 
 @Service({ autoProvided: false })
 export class ScMentionInputState {
-  users!: Signal<MentionUser[]>;
+  users!: Signal<ScMentionUser[]>;
   trigger!: Signal<string>;
   value!: WritableSignal<string>;
-  mentions!: WritableSignal<MentionUser[]>;
+  mentions!: WritableSignal<ScMentionUser[]>;
 
-  onMentionSelect: ((user: MentionUser) => void) | undefined;
+  onMentionSelect: ((user: ScMentionUser) => void) | undefined;
 
   textareaEl: ElementRef<HTMLTextAreaElement> | undefined;
   overlayOrigin: CdkOverlayOrigin | undefined;
@@ -121,7 +121,7 @@ export class ScMentionInputState {
     }, 150);
   }
 
-  selectUser(user: MentionUser): void {
+  selectUser(user: ScMentionUser): void {
     const textarea = this.textareaEl?.nativeElement;
     if (!textarea) return;
 

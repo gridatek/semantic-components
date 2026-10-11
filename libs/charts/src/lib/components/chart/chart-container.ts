@@ -1,6 +1,6 @@
 import { Directive, InjectionToken, computed, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { CHART_COLORS, ChartConfig } from './chart-types';
+import { CHART_COLORS, ScChartConfig } from './chart-types';
 
 // Token for chart context
 export const SC_CHART = new InjectionToken<ScChartContainer>('SC_CHART');
@@ -14,7 +14,7 @@ export const SC_CHART = new InjectionToken<ScChartContainer>('SC_CHART');
 })
 export class ScChartContainer {
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly config = input<ChartConfig>({});
+  readonly config = input<ScChartConfig>({});
 
   protected readonly class = computed(() =>
     cn('flex flex-col gap-4', this.classInput()),

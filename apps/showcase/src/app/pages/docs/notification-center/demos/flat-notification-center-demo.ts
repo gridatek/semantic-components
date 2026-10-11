@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  type Notification,
+  type ScNotification,
   ScNotificationCenter,
   ScNotificationCenterContainer,
 } from '@semantic-components/ui-lab';
@@ -23,7 +23,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class FlatNotificationCenterDemo {
-  readonly notifications = signal<Notification[]>([
+  readonly notifications = signal<ScNotification[]>([
     {
       id: 'f1',
       title: 'Build completed successfully',

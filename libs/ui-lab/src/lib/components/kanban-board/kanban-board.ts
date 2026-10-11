@@ -13,11 +13,11 @@ import {
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import type {
-  KanbanCard,
-  KanbanCardAddEvent,
-  KanbanCardDeleteEvent,
-  KanbanColumn,
-  KanbanDragEvent,
+  ScKanbanCardAddEvent,
+  ScKanbanCardData,
+  ScKanbanCardDeleteEvent,
+  ScKanbanColumnData,
+  ScKanbanDragEvent,
 } from './kanban-types';
 
 export const SC_KANBAN_BOARD = new InjectionToken<ScKanbanBoard>(
@@ -51,14 +51,14 @@ export class ScKanbanBoard {
     cn('flex gap-4 overflow-x-auto h-full p-4', this.classInput()),
   );
 
-  readonly columns = model<KanbanColumn[]>([]);
-  readonly cards = model<KanbanCard[]>([]);
+  readonly columns = model<ScKanbanColumnData[]>([]);
+  readonly cards = model<ScKanbanCardData[]>([]);
   readonly disabled = input(false);
 
-  readonly cardMoved = output<KanbanDragEvent>();
-  readonly cardAdded = output<KanbanCardAddEvent>();
-  readonly cardDeleted = output<KanbanCardDeleteEvent>();
-  readonly cardClick = output<KanbanCard>();
+  readonly cardMoved = output<ScKanbanDragEvent>();
+  readonly cardAdded = output<ScKanbanCardAddEvent>();
+  readonly cardDeleted = output<ScKanbanCardDeleteEvent>();
+  readonly cardClick = output<ScKanbanCardData>();
   readonly columnAdded = output<string>();
   readonly columnCollapsed = output<{ columnId: string; collapsed: boolean }>();
 
@@ -66,13 +66,13 @@ export class ScKanbanBoard {
     [...this.columns()].sort((a, b) => a.order - b.order),
   );
 
-  getCardsForColumn(columnId: string): KanbanCard[] {
+  getCardsForColumn(columnId: string): ScKanbanCardData[] {
     return this.cards()
       .filter((card) => card.columnId === columnId)
       .sort((a, b) => a.order - b.order);
   }
 
-  moveCard(event: KanbanDragEvent): void {
+  moveCard(event: ScKanbanDragEvent): void {
     const cards = [...this.cards()];
     const cardIndex = cards.findIndex((c) => c.id === event.card.id);
 
@@ -122,7 +122,7 @@ export class ScKanbanBoard {
    * announces the new position.
    */
   moveCardByKeyboard(
-    card: KanbanCard,
+    card: ScKanbanCardData,
     direction: 'left' | 'right' | 'up' | 'down',
   ): void {
     if (this.disabled()) return;
@@ -167,7 +167,7 @@ export class ScKanbanBoard {
   }
 
   addCard(columnId: string, title: string): void {
-    const newCard: KanbanCard = {
+    const newCard: ScKanbanCardData = {
       id: this.generateId(),
       title,
       columnId,
@@ -178,7 +178,7 @@ export class ScKanbanBoard {
     this.cardAdded.emit({ columnId, title });
   }
 
-  deleteCard(columnId: string, card: KanbanCard): void {
+  deleteCard(columnId: string, card: ScKanbanCardData): void {
     this.cards.update((cards) => cards.filter((c) => c.id !== card.id));
 
     const columnCards = this.getCardsForColumn(columnId);
@@ -190,7 +190,7 @@ export class ScKanbanBoard {
   }
 
   addColumn(title: string): void {
-    const newColumn: KanbanColumn = {
+    const newColumn: ScKanbanColumnData = {
       id: this.generateId(),
       title,
       order: this.columns().length,

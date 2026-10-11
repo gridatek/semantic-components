@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { BarcodeFormat } from '@semantic-components/ui-lab';
+import { ScBarcodeFormat } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-formats-barcode-scanner-demo',
@@ -16,7 +16,7 @@ import { BarcodeFormat } from '@semantic-components/ui-lab';
   encapsulation: ViewEncapsulation.None,
 })
 export class FormatsBarcodeScannerDemo {
-  readonly allFormats: BarcodeFormat[] = [
+  readonly allFormats: ScBarcodeFormat[] = [
     'qr_code',
     'ean_13',
     'ean_8',

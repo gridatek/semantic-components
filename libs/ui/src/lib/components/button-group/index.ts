@@ -6,5 +6,5 @@ export {
 export { ScButtonGroupText } from './button-group-text';
 export {
   ScButtonGroupSeparator,
-  type ButtonGroupSeparatorOrientation,
+  type ScButtonGroupSeparatorOrientation,
 } from './button-group-separator';

@@ -7,7 +7,7 @@ A grouped notification management component with filtering, read states, and act
 Import the components from the notification-center module:
 
 ```typescript
-import { type Notification, type NotificationGroup, ScNotificationCenter, ScNotificationCenterContainer } from '@semantic-components/ui-lab';
+import { type ScNotification, ScNotificationCenter, ScNotificationCenterContainer, type ScNotificationGroupData } from '@semantic-components/ui-lab';
 ```
 
 ## Components
@@ -29,9 +29,9 @@ import { type Notification, type NotificationGroup, ScNotificationCenter, ScNoti
 
 ```typescript
 import { signal } from '@angular/core';
-import type { Notification } from '@semantic-components/ui-lab';
+import type { ScNotification } from '@semantic-components/ui-lab';
 
-notifications = signal<Notification[]>([
+notifications = signal<ScNotification[]>([
   {
     id: '1',
     title: 'New message',
@@ -59,15 +59,15 @@ notifications = signal<Notification[]>([
 ```
 
 ```typescript
-import type { Notification, NotificationGroup } from '@semantic-components/ui-lab';
+import type { ScNotification, ScNotificationGroupData } from '@semantic-components/ui-lab';
 
-groups = signal<NotificationGroup[]>([
+groups = signal<ScNotificationGroupData[]>([
   { id: 'messages', title: 'Messages' },
   { id: 'alerts', title: 'Alerts' },
   { id: 'updates', title: 'Updates' },
 ]);
 
-notifications = signal<Notification[]>([
+notifications = signal<ScNotification[]>([
   {
     id: '1',
     title: 'New message from Alice',
@@ -90,7 +90,7 @@ notifications = signal<Notification[]>([
 ### With Actions
 
 ```typescript
-notifications = signal<Notification[]>([
+notifications = signal<ScNotification[]>([
   {
     id: '1',
     title: 'Payment failed',
@@ -109,7 +109,7 @@ notifications = signal<Notification[]>([
 ### With Avatars
 
 ```typescript
-notifications = signal<Notification[]>([
+notifications = signal<ScNotification[]>([
   {
     id: '1',
     title: 'New message from Alice',
@@ -158,18 +158,18 @@ The root directive that manages notification state and business logic.
 
 #### Inputs
 
-| Input              | Type                  | Default                   | Description                                                |
-| ------------------ | --------------------- | ------------------------- | ---------------------------------------------------------- |
-| `class`            | `string`              | `''`                      | Additional CSS classes                                     |
-| `notifications`    | `Notification[]`      | `[]`                      | Array of notifications (two-way)                           |
-| `groups`           | `NotificationGroup[]` | `[]`                      | Groups for categorizing                                    |
-| `title`            | `string`              | `'Notifications'`         | Header title                                               |
-| `aria-label`       | `string`              | `''`                      | Region name (defaults to `title`); make it unique per page |
-| `showFilters`      | `boolean`             | `true`                    | Show all/unread/read filter tabs                           |
-| `showClearAll`     | `boolean`             | `true`                    | Show clear all button                                      |
-| `showDismiss`      | `boolean`             | `true`                    | Show dismiss button on items                               |
-| `emptyTitle`       | `string`              | `'No notifications'`      | Empty state title                                          |
-| `emptyDescription` | `string`              | `"You're all caught up!"` | Empty state description                                    |
+| Input              | Type                        | Default                   | Description                                                |
+| ------------------ | --------------------------- | ------------------------- | ---------------------------------------------------------- |
+| `class`            | `string`                    | `''`                      | Additional CSS classes                                     |
+| `notifications`    | `ScNotification[]`          | `[]`                      | Array of notifications (two-way)                           |
+| `groups`           | `ScNotificationGroupData[]` | `[]`                      | Groups for categorizing                                    |
+| `title`            | `string`                    | `'Notifications'`         | Header title                                               |
+| `aria-label`       | `string`                    | `''`                      | Region name (defaults to `title`); make it unique per page |
+| `showFilters`      | `boolean`                   | `true`                    | Show all/unread/read filter tabs                           |
+| `showClearAll`     | `boolean`                   | `true`                    | Show clear all button                                      |
+| `showDismiss`      | `boolean`                   | `true`                    | Show dismiss button on items                               |
+| `emptyTitle`       | `string`                    | `'No notifications'`      | Empty state title                                          |
+| `emptyDescription` | `string`                    | `"You're all caught up!"` | Empty state description                                    |
 
 #### Outputs
 
@@ -177,11 +177,11 @@ The root directive that manages notification state and business logic.
 | -------------- | -------------------------- | ------------------------- |
 | `markRead`     | `{ notification, read }`   | Read state changed        |
 | `markAllRead`  | `void`                     | All marked as read        |
-| `dismiss`      | `Notification`             | Notification dismissed    |
+| `dismiss`      | `ScNotification`           | Notification dismissed    |
 | `clearAll`     | `void`                     | All notifications cleared |
 | `actionClick`  | `{ notification, action }` | Action button clicked     |
-| `itemClick`    | `Notification`             | Notification clicked      |
-| `filterChange` | `NotificationFilter`       | Filter changed            |
+| `itemClick`    | `ScNotification`           | Notification clicked      |
+| `filterChange` | `ScNotificationFilter`     | Filter changed            |
 
 #### Exported As
 
@@ -280,17 +280,17 @@ You can build custom UIs by accessing the directive's state:
 ### Notification
 
 ```typescript
-interface Notification {
+interface ScNotification {
   id: string;
   title: string;
   description?: string;
-  type: NotificationType;
+  type: ScNotificationType;
   timestamp: Date;
   read: boolean;
-  groupId?: string; // Links to NotificationGroup.id
+  groupId?: string; // Links to ScNotificationGroupData.id
   avatar?: string; // URL for avatar image
   icon?: string; // Custom SVG icon
-  action?: NotificationAction;
+  action?: ScNotificationAction;
   metadata?: Record<string, unknown>;
 }
 ```
@@ -298,7 +298,7 @@ interface Notification {
 ### NotificationType
 
 ```typescript
-type NotificationType = 'info' | 'success' | 'warning' | 'error' | 'message';
+type ScNotificationType = 'info' | 'success' | 'warning' | 'error' | 'message';
 ```
 
 Each type has a distinct icon and color:
@@ -312,7 +312,7 @@ Each type has a distinct icon and color:
 ### NotificationAction
 
 ```typescript
-interface NotificationAction {
+interface ScNotificationAction {
   label: string; // Button text
   url?: string; // Optional URL to navigate
   handler?: () => void; // Optional click handler
@@ -322,7 +322,7 @@ interface NotificationAction {
 ### NotificationGroup
 
 ```typescript
-interface NotificationGroup {
+interface ScNotificationGroupData {
   id: string;
   title: string;
   icon?: string; // Custom SVG icon
@@ -333,7 +333,7 @@ interface NotificationGroup {
 ### NotificationFilter
 
 ```typescript
-type NotificationFilter = 'all' | 'unread' | 'read';
+type ScNotificationFilter = 'all' | 'unread' | 'read';
 ```
 
 ## Features

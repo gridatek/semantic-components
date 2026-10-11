@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import type { StatCardTrend } from './stat-card-types';
+import type { ScStatCardTrend } from './stat-card-types';
 
 @Directive({
   selector: '[scStatCardChange]',
@@ -10,7 +10,7 @@ import type { StatCardTrend } from './stat-card-types';
 })
 export class ScStatCardChange {
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly trend = input<StatCardTrend>('neutral');
+  readonly trend = input<ScStatCardTrend>('neutral');
 
   protected readonly class = computed(() => {
     const trend = this.trend();

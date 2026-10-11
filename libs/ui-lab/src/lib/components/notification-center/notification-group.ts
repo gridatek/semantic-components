@@ -14,9 +14,9 @@ import {
 } from '@semantic-icons/lucide-icons';
 import { ScNotificationItem } from './notification-item';
 import type {
-  Notification,
-  NotificationAction,
-  NotificationGroup,
+  ScNotification,
+  ScNotificationAction,
+  ScNotificationGroupData,
 } from './notification-types';
 
 @Component({
@@ -120,19 +120,19 @@ import type {
 })
 export class ScNotificationGroup {
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly group = input.required<NotificationGroup>();
-  readonly notifications = input<Notification[]>([]);
+  readonly group = input.required<ScNotificationGroupData>();
+  readonly notifications = input<ScNotification[]>([]);
   readonly showDismiss = input(true);
 
-  readonly markRead = output<{ notification: Notification; read: boolean }>();
+  readonly markRead = output<{ notification: ScNotification; read: boolean }>();
   readonly markAllRead = output<void>();
-  readonly dismiss = output<Notification>();
+  readonly dismiss = output<ScNotification>();
   readonly clearAll = output<void>();
   readonly actionClick = output<{
-    notification: Notification;
-    action: NotificationAction;
+    notification: ScNotification;
+    action: ScNotificationAction;
   }>();
-  readonly itemClick = output<Notification>();
+  readonly itemClick = output<ScNotification>();
   readonly collapseChange = output<boolean>();
 
   protected readonly collapsed = signal(false);
@@ -149,7 +149,7 @@ export class ScNotificationGroup {
     this.collapseChange.emit(newValue);
   }
 
-  protected onMarkRead(notification: Notification, read: boolean): void {
+  protected onMarkRead(notification: ScNotification, read: boolean): void {
     this.markRead.emit({ notification, read });
   }
 
@@ -158,7 +158,7 @@ export class ScNotificationGroup {
     this.markAllRead.emit();
   }
 
-  protected onDismiss(notification: Notification): void {
+  protected onDismiss(notification: ScNotification): void {
     this.dismiss.emit(notification);
   }
 
@@ -168,8 +168,8 @@ export class ScNotificationGroup {
   }
 
   protected onActionClick(
-    notification: Notification,
-    action: NotificationAction,
+    notification: ScNotification,
+    action: ScNotificationAction,
   ): void {
     this.actionClick.emit({ notification, action });
   }

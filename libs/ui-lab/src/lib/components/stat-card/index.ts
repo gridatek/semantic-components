@@ -5,7 +5,7 @@ export { ScStatCardIcon } from './stat-card-icon';
 export { ScStatCardChange } from './stat-card-change';
 export { ScStatCardDescription } from './stat-card-description';
 export type {
-  StatCardSize,
-  StatCardTrend,
-  StatCardVariant,
+  ScStatCardSize,
+  ScStatCardTrend,
+  ScStatCardVariant,
 } from './stat-card-types';

@@ -1,10 +1,10 @@
 import { Service, type WritableSignal, computed, signal } from '@angular/core';
-import type { TransferListItem } from './transfer-list-types';
+import type { ScTransferListItemData } from './transfer-list-types';
 
 @Service({ autoProvided: false })
 export class ScTransferListState {
-  sourceItems!: WritableSignal<TransferListItem[]>;
-  targetItems!: WritableSignal<TransferListItem[]>;
+  sourceItems!: WritableSignal<ScTransferListItemData[]>;
+  targetItems!: WritableSignal<ScTransferListItemData[]>;
 
   onTransfer: (() => void) | undefined;
 
@@ -59,7 +59,7 @@ export class ScTransferListState {
     return selected.length > 0 && selected.length < items.length;
   });
 
-  toggleItem(side: 'source' | 'target', item: TransferListItem): void {
+  toggleItem(side: 'source' | 'target', item: ScTransferListItemData): void {
     if (item.disabled) return;
     const ids =
       side === 'source' ? this.selectedSourceIds : this.selectedTargetIds;

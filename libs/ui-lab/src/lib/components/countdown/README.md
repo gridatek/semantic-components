@@ -91,26 +91,26 @@ export class EventTimer {
 | `targetDate` | `Date`    | -       | **Required.** End date |
 | `autoStart`  | `boolean` | `true`  | Start automatically    |
 
-| Output     | Type            | Description               |
-| ---------- | --------------- | ------------------------- |
-| `tick`     | `CountdownTime` | Emits every second        |
-| `complete` | `void`          | Emits when countdown ends |
+| Output     | Type              | Description               |
+| ---------- | ----------------- | ------------------------- |
+| `tick`     | `ScCountdownTime` | Emits every second        |
+| `complete` | `void`            | Emits when countdown ends |
 
-| Property/Method | Type                    | Description                          |
-| --------------- | ----------------------- | ------------------------------------ |
-| `time()`        | `Signal<CountdownTime>` | Current time values                  |
-| `padNumber(n)`  | `string`                | Zero-pad a number to 2 digits        |
-| `ariaLabel()`   | `Signal<string>`        | Human-readable time remaining string |
-| `start()`       | `void`                  | Start the countdown                  |
-| `stop()`        | `void`                  | Stop the countdown                   |
-| `reset()`       | `void`                  | Reset to initial time                |
-| `getTime()`     | `CountdownTime`         | Get current time values              |
-| `isRunning()`   | `boolean`               | Check if running                     |
+| Property/Method | Type                      | Description                          |
+| --------------- | ------------------------- | ------------------------------------ |
+| `time()`        | `Signal<ScCountdownTime>` | Current time values                  |
+| `padNumber(n)`  | `string`                  | Zero-pad a number to 2 digits        |
+| `ariaLabel()`   | `Signal<string>`          | Human-readable time remaining string |
+| `start()`       | `void`                    | Start the countdown                  |
+| `stop()`        | `void`                    | Stop the countdown                   |
+| `reset()`       | `void`                    | Reset to initial time                |
+| `getTime()`     | `ScCountdownTime`         | Get current time values              |
+| `isRunning()`   | `boolean`                 | Check if running                     |
 
 ## CountdownTime Interface
 
 ```typescript
-interface CountdownTime {
+interface ScCountdownTime {
   days: number;
   hours: number;
   minutes: number;

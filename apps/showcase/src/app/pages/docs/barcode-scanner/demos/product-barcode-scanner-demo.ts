@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  BarcodeFormat,
-  BarcodeResult,
+  ScBarcodeFormat,
+  ScBarcodeResult,
   ScBarcodeScanner,
   ScBarcodeVideo,
 } from '@semantic-components/ui-lab';
@@ -85,16 +85,16 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class ProductBarcodeScannerDemo {
-  readonly lastProduct = signal<BarcodeResult | null>(null);
+  readonly lastProduct = signal<ScBarcodeResult | null>(null);
 
-  readonly productFormats: BarcodeFormat[] = [
+  readonly productFormats: ScBarcodeFormat[] = [
     'ean_13',
     'ean_8',
     'upc_a',
     'upc_e',
   ];
 
-  onDetected(result: BarcodeResult): void {
+  onDetected(result: ScBarcodeResult): void {
     this.lastProduct.set(result);
   }
 }

@@ -1,7 +1,7 @@
-export type DiffLineType = 'added' | 'removed' | 'unchanged' | 'modified';
+export type ScDiffLineType = 'added' | 'removed' | 'unchanged' | 'modified';
 
-export interface DiffLine {
-  type: DiffLineType;
+export interface ScDiffLine {
+  type: ScDiffLineType;
   oldLineNumber?: number;
   newLineNumber?: number;
   oldContent?: string;
@@ -9,14 +9,14 @@ export interface DiffLine {
   content?: string;
 }
 
-export interface DiffResult {
-  lines: DiffLine[];
+export interface ScDiffResult {
+  lines: ScDiffLine[];
   additions: number;
   deletions: number;
   unchanged: number;
 }
 
-export interface DiffOptions {
+export interface ScDiffOptions {
   ignoreWhitespace?: boolean;
   ignoreCase?: boolean;
   contextLines?: number;
@@ -29,8 +29,8 @@ export interface DiffOptions {
 export function computeDiff(
   oldText: string,
   newText: string,
-  options: DiffOptions = {},
-): DiffResult {
+  options: ScDiffOptions = {},
+): ScDiffResult {
   const oldLines = oldText.split('\n');
   const newLines = newText.split('\n');
 
@@ -53,7 +53,7 @@ export function computeDiff(
   const lcs = computeLCS(oldNormalized, newNormalized);
 
   // Build diff from LCS
-  const diffLines: DiffLine[] = [];
+  const diffLines: ScDiffLine[] = [];
   let additions = 0;
   let deletions = 0;
   let unchanged = 0;
@@ -163,7 +163,7 @@ function computeLCS(oldLines: string[], newLines: string[]): string[] {
 export function createUnifiedDiff(
   oldText: string,
   newText: string,
-  options: DiffOptions & { oldHeader?: string; newHeader?: string } = {},
+  options: ScDiffOptions & { oldHeader?: string; newHeader?: string } = {},
 ): string {
   const diff = computeDiff(oldText, newText, options);
   const lines: string[] = [];
@@ -205,11 +205,11 @@ export function createUnifiedDiff(
  * Group diff lines into hunks with context
  */
 function createHunks(
-  diffLines: DiffLine[],
+  diffLines: ScDiffLine[],
   contextLines: number,
-): DiffLine[][] {
-  const hunks: DiffLine[][] = [];
-  let currentHunk: DiffLine[] = [];
+): ScDiffLine[][] {
+  const hunks: ScDiffLine[][] = [];
+  let currentHunk: ScDiffLine[] = [];
   let unchangedStreak = 0;
 
   for (let i = 0; i < diffLines.length; i++) {

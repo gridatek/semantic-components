@@ -27,7 +27,7 @@ import {
   ScTourGuideTooltip,
   TourService,
 } from '@semantic-components/ui-lab';
-import type { TourOptions } from '@semantic-components/ui-lab';
+import type { ScTourOptions } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-minimal-tour-guide-demo',
@@ -116,7 +116,7 @@ export class MinimalTourGuideDemo {
   protected readonly tourService = inject(TourService);
 
   startTour(): void {
-    const options: TourOptions = {
+    const options: ScTourOptions = {
       steps: [
         {
           target: '#tour-minimal-card-1',

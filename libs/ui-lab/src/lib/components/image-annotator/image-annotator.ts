@@ -3,11 +3,11 @@ import { outputFromObservable } from '@angular/core/rxjs-interop';
 import { cn } from '@semantic-components/ui';
 import { ScImageAnnotatorState } from './image-annotator-state';
 import {
-  type Annotation,
-  type AnnotatorColor,
-  type AnnotatorToolOption,
   DEFAULT_ANNOTATOR_COLORS,
   DEFAULT_ANNOTATOR_TOOLS,
+  type ScAnnotation,
+  type ScAnnotatorColor,
+  type ScAnnotatorToolOption,
 } from './image-annotator-types';
 
 /**
@@ -34,8 +34,10 @@ export class ScImageAnnotator {
   readonly height = input(400);
   /** Accessible name of the image. */
   readonly alt = input('Annotated image');
-  readonly colors = input<readonly AnnotatorColor[]>(DEFAULT_ANNOTATOR_COLORS);
-  readonly tools = input<readonly AnnotatorToolOption[]>(
+  readonly colors = input<readonly ScAnnotatorColor[]>(
+    DEFAULT_ANNOTATOR_COLORS,
+  );
+  readonly tools = input<readonly ScAnnotatorToolOption[]>(
     DEFAULT_ANNOTATOR_TOOLS,
   );
 
@@ -62,12 +64,12 @@ export class ScImageAnnotator {
     this.state.tools = this.tools;
   }
 
-  getAnnotations(): Annotation[] {
+  getAnnotations(): ScAnnotation[] {
     return this.state.getAnnotations();
   }
 
   /** Replaces the annotations (resets undo history, emits nothing). */
-  setAnnotations(annotations: Annotation[]): void {
+  setAnnotations(annotations: ScAnnotation[]): void {
     this.state.setAnnotations(annotations);
   }
 }

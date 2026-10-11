@@ -21,7 +21,7 @@ import { BasicBarcodeScannerDemo } from './basic-barcode-scanner-demo';
 export class BasicBarcodeScannerDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  BarcodeResult,
+  ScBarcodeResult,
   ScBarcodeScanner,
   ScBarcodeVideo,
 } from '@semantic-components/ui-lab';
@@ -206,9 +206,9 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicBarcodeScannerDemo {
-  readonly lastScanned = signal<BarcodeResult | null>(null);
+  readonly lastScanned = signal<ScBarcodeResult | null>(null);
 
-  onDetected(result: BarcodeResult): void {
+  onDetected(result: ScBarcodeResult): void {
     this.lastScanned.set(result);
   }
 }`;

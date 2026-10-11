@@ -20,9 +20,9 @@ import { BasicKanbanBoardDemo } from './basic-kanban-board-demo';
 export class BasicKanbanBoardDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  type KanbanCard,
-  type KanbanColumn,
-  type KanbanDragEvent,
+  type ScKanbanCardData,
+  type ScKanbanColumnData,
+  type ScKanbanDragEvent,
   ScKanbanBoard,
   ScKanbanCard,
   ScKanbanColumn,
@@ -342,7 +342,7 @@ export class BasicKanbanBoardDemo {
   readonly addingCardInColumn = signal<string | null>(null);
   readonly isAddingColumn = signal(false);
 
-  readonly columns = signal<KanbanColumn[]>([
+  readonly columns = signal<ScKanbanColumnData[]>([
     { id: 'backlog', title: 'Backlog', order: 0, color: '#6b7280' },
     { id: 'todo', title: 'To Do', order: 1, color: '#3b82f6' },
     {
@@ -356,7 +356,7 @@ export class BasicKanbanBoardDemo {
     { id: 'done', title: 'Done', order: 4, color: '#22c55e' },
   ]);
 
-  readonly cards = signal<KanbanCard[]>([
+  readonly cards = signal<ScKanbanCardData[]>([
     {
       id: '1',
       title: 'Set up project repository',
@@ -453,7 +453,7 @@ export class BasicKanbanBoardDemo {
     },
   ]);
 
-  onCardMoved(event: KanbanDragEvent): void {
+  onCardMoved(event: ScKanbanDragEvent): void {
     console.log('Card moved:', event);
   }
 
@@ -461,7 +461,7 @@ export class BasicKanbanBoardDemo {
     console.log('Card added:', event);
   }
 
-  onCardDeleted(event: { card: KanbanCard; columnId: string }): void {
+  onCardDeleted(event: { card: ScKanbanCardData; columnId: string }): void {
     console.log('Card deleted:', event);
   }
 
@@ -491,7 +491,7 @@ export class BasicKanbanBoardDemo {
     if (title) {
       // Access the board through template ref would be ideal,
       // but we can use the signal directly since we have two-way binding
-      const newCard: KanbanCard = {
+      const newCard: ScKanbanCardData = {
         id: \`\${Date.now()}-\${Math.random().toString(36).substr(2, 9)}\`,
         title,
         columnId,
@@ -511,7 +511,7 @@ export class BasicKanbanBoardDemo {
     const title = textarea?.value.trim();
 
     if (title) {
-      const newCard: KanbanCard = {
+      const newCard: ScKanbanCardData = {
         id: \`\${Date.now()}-\${Math.random().toString(36).substr(2, 9)}\`,
         title,
         columnId,
@@ -551,7 +551,7 @@ export class BasicKanbanBoardDemo {
     const title = input.value.trim();
 
     if (title) {
-      const newColumn: KanbanColumn = {
+      const newColumn: ScKanbanColumnData = {
         id: \`\${Date.now()}-\${Math.random().toString(36).substr(2, 9)}\`,
         title,
         order: this.columns().length,
@@ -570,7 +570,7 @@ export class BasicKanbanBoardDemo {
     const title = input?.value.trim();
 
     if (title) {
-      const newColumn: KanbanColumn = {
+      const newColumn: ScKanbanColumnData = {
         id: \`\${Date.now()}-\${Math.random().toString(36).substr(2, 9)}\`,
         title,
         order: this.columns().length,

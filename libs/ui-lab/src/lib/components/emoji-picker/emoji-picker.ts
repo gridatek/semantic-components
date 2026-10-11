@@ -11,8 +11,8 @@ import {
 import { cn } from '@semantic-components/ui';
 import { loadDefaultCategories } from './emoji-picker-data';
 import {
-  type Emoji,
-  type EmojiCategory,
+  type ScEmoji,
+  type ScEmojiCategory,
   ScEmojiPickerState,
 } from './emoji-picker-state';
 
@@ -28,14 +28,14 @@ export class ScEmojiPicker {
   private readonly state = inject(ScEmojiPickerState);
 
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly categories = input<EmojiCategory[]>([]);
+  readonly categories = input<ScEmojiCategory[]>([]);
   readonly maxRecent = input<number>(8);
   readonly columns = input<number>(8);
 
   readonly value = model<string>('');
-  readonly emojiSelect = output<Emoji>();
+  readonly emojiSelect = output<ScEmoji>();
 
-  private readonly defaultCategories = signal<EmojiCategory[]>([]);
+  private readonly defaultCategories = signal<ScEmojiCategory[]>([]);
 
   protected readonly class = computed(() =>
     cn(
@@ -65,7 +65,7 @@ export class ScEmojiPicker {
     });
   }
 
-  selectEmoji(emoji: Emoji): void {
+  selectEmoji(emoji: ScEmoji): void {
     this.value.set(emoji.emoji);
     this.emojiSelect.emit(emoji);
     this.state.addToRecent(emoji);

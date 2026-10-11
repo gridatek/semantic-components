@@ -12,7 +12,10 @@ import {
 } from '@angular/core';
 import { cn, setInput } from '@semantic-components/ui';
 import { ScAriaOrgChartItem } from './aria-org-chart-item';
-import type { OrgChartNode, ScOrgChartNodeDefContext } from './org-chart-types';
+import type {
+  ScOrgChartNodeData,
+  ScOrgChartNodeDefContext,
+} from './org-chart-types';
 import { SC_ORG_CHART } from './org-chart-types';
 
 @Component({
@@ -75,7 +78,7 @@ export class ScOrgChartNode implements OnInit {
   protected readonly treeItem =
     inject<ScAriaOrgChartItem<string>>(ScAriaOrgChartItem);
 
-  readonly node = input.required<OrgChartNode>();
+  readonly node = input.required<ScOrgChartNodeData>();
 
   readonly classInput = input<string>('', { alias: 'class' });
 

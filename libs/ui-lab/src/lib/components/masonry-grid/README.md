@@ -31,16 +31,16 @@ Root directive that manages layout state and responsive column calculation. Prov
 | ------------- | ------------------------- | --------------------- | --------------------------- |
 | `columns`     | `number`                  | `4`                   | Default number of columns   |
 | `gap`         | `number`                  | `16`                  | Gap between items in pixels |
-| `breakpoints` | `MasonryBreakpoint[]`     | `DEFAULT_BREAKPOINTS` | Responsive breakpoints      |
+| `breakpoints` | `ScMasonryBreakpoint[]`   | `DEFAULT_BREAKPOINTS` | Responsive breakpoints      |
 | `layoutMode`  | `'columns' \| 'absolute'` | `'columns'`           | Layout algorithm to use     |
 | `class`       | `string`                  | `''`                  | Additional CSS classes      |
 
 **Exposed via `exportAs`:**
 
-| Property         | Type                       | Description              |
-| ---------------- | -------------------------- | ------------------------ |
-| `currentColumns` | `Signal<number>`           | Computed current columns |
-| `items`          | `Signal<MasonryItemRef[]>` | Content-projected items  |
+| Property         | Type                         | Description              |
+| ---------------- | ---------------------------- | ------------------------ |
+| `currentColumns` | `Signal<number>`             | Computed current columns |
+| `items`          | `Signal<ScMasonryItemRef[]>` | Content-projected items  |
 
 **Methods:**
 
@@ -76,18 +76,18 @@ Item wrapper directive. Applies `break-inside-avoid` and vertical gap via inject
 ## Types
 
 ```typescript
-interface MasonryBreakpoint {
+interface ScMasonryBreakpoint {
   minWidth: number;
   columns: number;
 }
 
-interface MasonryConfig {
+interface ScMasonryConfig {
   columns?: number;
   gap?: number;
-  breakpoints?: MasonryBreakpoint[];
+  breakpoints?: ScMasonryBreakpoint[];
 }
 
-type MasonryLayoutMode = 'columns' | 'absolute';
+type ScMasonryLayoutMode = 'columns' | 'absolute';
 ```
 
 ## Examples
@@ -168,7 +168,7 @@ Uses JavaScript-calculated absolute positioning.
 ## Default Breakpoints
 
 ```typescript
-const DEFAULT_BREAKPOINTS: MasonryBreakpoint[] = [
+const DEFAULT_BREAKPOINTS: ScMasonryBreakpoint[] = [
   { minWidth: 0, columns: 1 },
   { minWidth: 640, columns: 2 },
   { minWidth: 768, columns: 3 },

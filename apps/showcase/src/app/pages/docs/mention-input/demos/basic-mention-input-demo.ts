@@ -6,7 +6,7 @@ import {
   ScMentionInputSuggestionItem,
   ScMentionInputSuggestions,
 } from '@semantic-components/ui-lab';
-import type { MentionUser } from '@semantic-components/ui-lab';
+import type { ScMentionUser } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-basic-mention-input-demo',
@@ -65,9 +65,9 @@ import type { MentionUser } from '@semantic-components/ui-lab';
 })
 export class BasicMentionInputDemo {
   readonly value = signal('');
-  readonly mentions = signal<MentionUser[]>([]);
+  readonly mentions = signal<ScMentionUser[]>([]);
 
-  readonly sampleUsers: MentionUser[] = [
+  readonly sampleUsers: ScMentionUser[] = [
     { id: '1', name: 'John Doe', username: 'johndoe' },
     { id: '2', name: 'Jane Smith', username: 'janesmith' },
     { id: '3', name: 'Bob Wilson', username: 'bobwilson' },
@@ -78,7 +78,7 @@ export class BasicMentionInputDemo {
     { id: '8', name: 'Grace Lee', username: 'gracelee' },
   ];
 
-  onMentionSelect(user: MentionUser): void {
+  onMentionSelect(user: ScMentionUser): void {
     console.log('Mentioned:', user);
   }
 }

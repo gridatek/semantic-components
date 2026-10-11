@@ -1,10 +1,10 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  type KanbanCard,
-  type KanbanColumn,
   ScKanbanBoard,
   ScKanbanCard,
+  type ScKanbanCardData,
   ScKanbanColumn,
+  type ScKanbanColumnData,
 } from '@semantic-components/ui-lab';
 
 @Component({
@@ -72,13 +72,13 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class MinimalKanbanBoardDemo {
-  readonly columns = signal<KanbanColumn[]>([
+  readonly columns = signal<ScKanbanColumnData[]>([
     { id: 'pending', title: 'Pending', order: 0 },
     { id: 'approved', title: 'Approved', order: 1 },
     { id: 'rejected', title: 'Rejected', order: 2 },
   ]);
 
-  readonly cards = signal<KanbanCard[]>([
+  readonly cards = signal<ScKanbanCardData[]>([
     { id: 'm1', title: 'Request #1001', columnId: 'pending', order: 0 },
     { id: 'm2', title: 'Request #1002', columnId: 'pending', order: 1 },
     { id: 'm3', title: 'Request #1003', columnId: 'approved', order: 0 },

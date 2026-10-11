@@ -8,36 +8,39 @@ import {
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import type {
-  Notification,
-  NotificationAction,
-  NotificationGroup,
+  ScNotification,
+  ScNotificationAction,
+  ScNotificationGroupData,
 } from './notification-types';
 
-export type NotificationFilter = 'all' | 'unread' | 'read';
+export type ScNotificationFilter = 'all' | 'unread' | 'read';
 
 export interface ScNotificationCenterApi {
-  readonly notifications: ReturnType<typeof model<Notification[]>>;
-  readonly groups: () => NotificationGroup[];
+  readonly notifications: ReturnType<typeof model<ScNotification[]>>;
+  readonly groups: () => ScNotificationGroupData[];
   readonly title: () => string;
   readonly showFilters: () => boolean;
   readonly showClearAll: () => boolean;
   readonly showDismiss: () => boolean;
   readonly emptyTitle: () => string;
   readonly emptyDescription: () => string;
-  readonly filter: ReturnType<typeof model<NotificationFilter>>;
+  readonly filter: ReturnType<typeof model<ScNotificationFilter>>;
   readonly totalUnread: () => number;
-  readonly filteredNotifications: () => Notification[];
-  readonly ungroupedNotifications: () => Notification[];
-  readonly itemClick: ReturnType<typeof output<Notification>>;
-  getGroupNotifications(groupId: string): Notification[];
-  setFilter(f: NotificationFilter): void;
-  onMarkRead(notification: Notification, read: boolean): void;
+  readonly filteredNotifications: () => ScNotification[];
+  readonly ungroupedNotifications: () => ScNotification[];
+  readonly itemClick: ReturnType<typeof output<ScNotification>>;
+  getGroupNotifications(groupId: string): ScNotification[];
+  setFilter(f: ScNotificationFilter): void;
+  onMarkRead(notification: ScNotification, read: boolean): void;
   onMarkAllRead(): void;
   onMarkAllReadInGroup(groupId: string): void;
-  onDismiss(notification: Notification): void;
+  onDismiss(notification: ScNotification): void;
   onClearAll(): void;
   onClearGroup(groupId: string): void;
-  onActionClick(notification: Notification, action: NotificationAction): void;
+  onActionClick(
+    notification: ScNotification,
+    action: ScNotificationAction,
+  ): void;
 }
 
 export const SC_NOTIFICATION_CENTER =
@@ -60,8 +63,8 @@ export const SC_NOTIFICATION_CENTER =
 })
 export class ScNotificationCenter implements ScNotificationCenterApi {
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly notifications = model<Notification[]>([]);
-  readonly groups = input<NotificationGroup[]>([]);
+  readonly notifications = model<ScNotification[]>([]);
+  readonly groups = input<ScNotificationGroupData[]>([]);
   readonly title = input('Notifications');
   /** Name of the region; defaults to `title`. Make it unique per page. */
   readonly ariaLabel = input<string>('', { alias: 'aria-label' });
@@ -71,17 +74,17 @@ export class ScNotificationCenter implements ScNotificationCenterApi {
   readonly emptyTitle = input('No notifications');
   readonly emptyDescription = input("You're all caught up!");
 
-  readonly markRead = output<{ notification: Notification; read: boolean }>();
+  readonly markRead = output<{ notification: ScNotification; read: boolean }>();
   readonly markAllRead = output<void>();
-  readonly dismiss = output<Notification>();
+  readonly dismiss = output<ScNotification>();
   readonly clearAll = output<void>();
   readonly actionClick = output<{
-    notification: Notification;
-    action: NotificationAction;
+    notification: ScNotification;
+    action: ScNotificationAction;
   }>();
-  readonly itemClick = output<Notification>();
+  readonly itemClick = output<ScNotification>();
 
-  readonly filter = model<NotificationFilter>('all');
+  readonly filter = model<ScNotificationFilter>('all');
 
   protected readonly class = computed(() => cn(this.classInput()));
 
@@ -107,15 +110,15 @@ export class ScNotificationCenter implements ScNotificationCenterApi {
     this.filteredNotifications().filter((n) => !n.groupId),
   );
 
-  getGroupNotifications(groupId: string): Notification[] {
+  getGroupNotifications(groupId: string): ScNotification[] {
     return this.filteredNotifications().filter((n) => n.groupId === groupId);
   }
 
-  setFilter(f: NotificationFilter): void {
+  setFilter(f: ScNotificationFilter): void {
     this.filter.set(f);
   }
 
-  onMarkRead(notification: Notification, read: boolean): void {
+  onMarkRead(notification: ScNotification, read: boolean): void {
     this.notifications.update((notifications) =>
       notifications.map((n) => (n.id === notification.id ? { ...n, read } : n)),
     );
@@ -137,7 +140,7 @@ export class ScNotificationCenter implements ScNotificationCenterApi {
     );
   }
 
-  onDismiss(notification: Notification): void {
+  onDismiss(notification: ScNotification): void {
     this.notifications.update((notifications) =>
       notifications.filter((n) => n.id !== notification.id),
     );
@@ -155,7 +158,10 @@ export class ScNotificationCenter implements ScNotificationCenterApi {
     );
   }
 
-  onActionClick(notification: Notification, action: NotificationAction): void {
+  onActionClick(
+    notification: ScNotification,
+    action: ScNotificationAction,
+  ): void {
     this.actionClick.emit({ notification, action });
   }
 }
