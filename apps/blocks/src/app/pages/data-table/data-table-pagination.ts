@@ -20,6 +20,8 @@ import {
   SiChevronsRightIcon,
   SiEllipsisIcon,
 } from '@semantic-icons/lucide-icons';
+import type { DataTableFeatures } from './data-table-features';
+import type { User } from './user.service';
 
 @Component({
   selector: 'app-data-table-pagination',
@@ -117,16 +119,15 @@ import {
     </div>
   `,
 })
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export class DataTablePagination {
-  readonly table = input.required<Table<any>>();
+  readonly table = input.required<Table<DataTableFeatures, User>>();
   readonly pageSizeOptions = input<number[]>([5, 10, 20, 30]);
 
   readonly currentPage = computed(
-    () => this.table().getState().pagination.pageIndex + 1,
+    () => this.table().atoms.pagination.get().pageIndex + 1,
   );
   readonly pageSize = computed(
-    () => this.table().getState().pagination.pageSize,
+    () => this.table().atoms.pagination.get().pageSize,
   );
   readonly totalItems = computed(
     () => this.table().getFilteredRowModel().rows.length,

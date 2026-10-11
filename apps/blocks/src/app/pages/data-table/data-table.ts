@@ -1,21 +1,16 @@
-import {
+﻿import {
   type ColumnDef,
   type ColumnFiltersState,
   type ColumnPinningState,
+  type ColumnVisibilityState,
   type ExpandedState,
   type GroupingState,
+  type Header,
   type PaginationState,
   type RowPinningState,
   type RowSelectionState,
   type SortingState,
-  type VisibilityState,
-  createAngularTable,
-  getCoreRowModel,
-  getExpandedRowModel,
-  getFilteredRowModel,
-  getGroupedRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
+  injectTable,
 } from '@tanstack/angular-table';
 import {
   Component,
@@ -46,6 +41,7 @@ import {
   SiChevronRightIcon,
 } from '@semantic-icons/lucide-icons';
 import { DataTableColumnPinning } from './data-table-column-pinning';
+import { type DataTableFeatures, features } from './data-table-features';
 import { DataTablePagination } from './data-table-pagination';
 import { DataTableToolbar } from './data-table-toolbar';
 import type { User } from './user.service';
@@ -95,8 +91,8 @@ import type { User } from './user.service';
                 <th
                   scTableHeaderCell
                   [class.sticky]="header.column.getIsPinned()"
-                  [class.left-0]="header.column.getIsPinned() === 'left'"
-                  [class.right-0]="header.column.getIsPinned() === 'right'"
+                  [class.start-0]="header.column.getIsPinned() === 'start'"
+                  [class.end-0]="header.column.getIsPinned() === 'end'"
                   [class.z-10]="header.column.getIsPinned()"
                   [class.bg-background]="header.column.getIsPinned()"
                   [attr.colSpan]="header.colSpan"
@@ -108,7 +104,10 @@ import type { User } from './user.service';
                           type="checkbox"
                           scCheckbox
                           [checked]="table.getIsAllPageRowsSelected()"
-                          [indeterminate]="table.getIsSomePageRowsSelected()"
+                          [indeterminate]="
+                            table.getIsSomePageRowsSelected() &&
+                            !table.getIsAllPageRowsSelected()
+                          "
                           (change)="table.toggleAllPageRowsSelected()"
                         />
                       </label>
@@ -175,8 +174,8 @@ import type { User } from './user.service';
                 <td
                   scTableCell
                   [class.sticky]="cell.column.getIsPinned()"
-                  [class.left-0]="cell.column.getIsPinned() === 'left'"
-                  [class.right-0]="cell.column.getIsPinned() === 'right'"
+                  [class.start-0]="cell.column.getIsPinned() === 'start'"
+                  [class.end-0]="cell.column.getIsPinned() === 'end'"
                   [class.z-10]="cell.column.getIsPinned()"
                   [class.bg-background]="cell.column.getIsPinned()"
                 >
@@ -416,7 +415,7 @@ export class DataTable {
   readonly sorting = signal<SortingState>([]);
   readonly columnFilters = signal<ColumnFiltersState>([]);
   readonly globalFilter = signal('');
-  readonly columnVisibility = signal<VisibilityState>({});
+  readonly columnVisibility = signal<ColumnVisibilityState>({});
   readonly rowSelection = signal<RowSelectionState>({});
   readonly pagination = signal<PaginationState>({
     pageIndex: 0,
@@ -424,13 +423,13 @@ export class DataTable {
   });
   readonly expanded = signal<ExpandedState>({});
   readonly grouping = signal<GroupingState>([]);
-  readonly columnPinning = signal<ColumnPinningState>({});
+  readonly columnPinning = signal<ColumnPinningState>({ start: [], end: [] });
   readonly rowPinning = signal<RowPinningState>({ top: [], bottom: [] });
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  readonly columns = input.required<ColumnDef<any, any>[]>();
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  readonly data = input.required<any[]>();
+  readonly columns =
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- each column has its own value type
+    input.required<ColumnDef<DataTableFeatures, User, any>[]>();
+  readonly data = input.required<User[]>();
 
   readonly editSave = output<{ row: User; columnId: string; value: string }>();
 
@@ -441,7 +440,8 @@ export class DataTable {
   readonly editValue = signal<string>('');
   readonly pageSizeOptions = [5, 10, 20, 30];
 
-  readonly table = createAngularTable(() => ({
+  readonly table = injectTable(() => ({
+    features,
     data: this.data(),
     columns: this.columns(),
     state: {
@@ -506,12 +506,6 @@ export class DataTable {
         typeof updater === 'function' ? updater(prev) : updater,
       );
     },
-    getCoreRowModel: getCoreRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    getGroupedRowModel: getGroupedRowModel(),
-    getExpandedRowModel: getExpandedRowModel(),
     enableRowSelection: true,
     enableExpanding: true,
     enableGrouping: true,
@@ -520,8 +514,7 @@ export class DataTable {
     getRowCanExpand: () => true,
   }));
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  getHeaderLabel(header: any): string {
+  getHeaderLabel(header: Header<DataTableFeatures, User, unknown>): string {
     const headerDef = header.column.columnDef.header;
     if (typeof headerDef === 'string') return headerDef;
     return header.column.id;
@@ -542,7 +535,7 @@ export class DataTable {
   }
 
   getColumnFilterValue(columnId: string): string {
-    const filters = this.table.getState().columnFilters;
+    const filters = this.table.atoms.columnFilters.get();
     const filter = filters.find((f) => f.id === columnId);
     return (filter?.value as string) ?? '';
   }

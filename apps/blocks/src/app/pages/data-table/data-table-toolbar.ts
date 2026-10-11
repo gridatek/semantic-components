@@ -12,6 +12,8 @@ import {
   ScCheckboxField,
   ScInput,
 } from '@semantic-components/ui';
+import type { DataTableFeatures } from './data-table-features';
+import type { User } from './user.service';
 
 @Component({
   selector: 'app-data-table-toolbar',
@@ -70,9 +72,8 @@ import {
     }
   `,
 })
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export class DataTableToolbar {
-  readonly table = input.required<Table<any>>();
+  readonly table = input.required<Table<DataTableFeatures, User>>();
   readonly globalFilter = input<string>('');
   readonly globalFilterChange = output<string>();
   readonly grouping = input<string[]>([]);
@@ -81,7 +82,7 @@ export class DataTableToolbar {
   readonly groupableColumns = ['role', 'plan'];
 
   readonly selectedRowCount = computed(
-    () => Object.keys(this.table().getState().rowSelection).length,
+    () => Object.keys(this.table().atoms.rowSelection.get()).length,
   );
 
   isGroupedBy(columnId: string): boolean {

@@ -1,4 +1,4 @@
-import type { ColumnPinningState } from '@tanstack/angular-table';
+﻿import type { ColumnPinningState } from '@tanstack/angular-table';
 import { Component, ViewEncapsulation, input, output } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
 
@@ -11,21 +11,21 @@ import { ScButton } from '@semantic-components/ui';
     <h3 class="w-full text-sm font-medium">Column Pinning</h3>
     <button
       scButton
-      [variant]="columnPinning().left?.includes('id') ? 'default' : 'outline'"
+      [variant]="columnPinning().start.includes('id') ? 'default' : 'outline'"
       size="sm"
-      (click)="togglePin('id', 'left')"
+      (click)="togglePin('id', 'start')"
     >
-      Pin ID Left
+      Pin ID to start
     </button>
     <button
       scButton
       [variant]="
-        columnPinning().right?.includes('apiCalls') ? 'default' : 'outline'
+        columnPinning().end.includes('apiCalls') ? 'default' : 'outline'
       "
       size="sm"
-      (click)="togglePin('apiCalls', 'right')"
+      (click)="togglePin('apiCalls', 'end')"
     >
-      Pin API Calls Right
+      Pin API Calls to end
     </button>
     <button scButton variant="outline" size="sm" (click)="reset()">
       Reset Pinning
@@ -36,9 +36,9 @@ export class DataTableColumnPinning {
   readonly columnPinning = input.required<ColumnPinningState>();
   readonly columnPinningChange = output<ColumnPinningState>();
 
-  togglePin(columnId: string, position: 'left' | 'right'): void {
+  togglePin(columnId: string, position: 'start' | 'end'): void {
     const prev = this.columnPinning();
-    const pinned = prev[position] ?? [];
+    const pinned = prev[position];
     if (pinned.includes(columnId)) {
       this.columnPinningChange.emit({
         ...prev,
@@ -53,6 +53,6 @@ export class DataTableColumnPinning {
   }
 
   reset(): void {
-    this.columnPinningChange.emit({});
+    this.columnPinningChange.emit({ start: [], end: [] });
   }
 }

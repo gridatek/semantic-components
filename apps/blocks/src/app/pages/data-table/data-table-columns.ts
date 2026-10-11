@@ -1,22 +1,22 @@
-import { type ColumnDef, createColumnHelper } from '@tanstack/angular-table';
+import { createColumnHelper } from '@tanstack/angular-table';
+import type { DataTableFeatures } from './data-table-features';
 import type { User } from './user.service';
 
-const columnHelper = createColumnHelper<User>();
+const columnHelper = createColumnHelper<DataTableFeatures, User>();
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const columns: ColumnDef<User, any>[] = [
-  {
+export const columns = columnHelper.columns([
+  columnHelper.display({
     id: 'select',
     header: 'Select',
     enableSorting: false,
     enableColumnFilter: false,
-  },
-  {
+  }),
+  columnHelper.display({
     id: 'expand',
     header: '',
     enableSorting: false,
     enableColumnFilter: false,
-  },
+  }),
   columnHelper.accessor('id', {
     header: 'ID',
     enableColumnFilter: false,
@@ -80,4 +80,4 @@ export const columns: ColumnDef<User, any>[] = [
     enableColumnFilter: false,
     aggregationFn: 'sum',
   }),
-];
+]);
