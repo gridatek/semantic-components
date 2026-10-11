@@ -3,6 +3,7 @@ import { ScButton } from '@semantic-components/ui';
 import {
   ScStepper,
   ScStepperDescription,
+  ScStepperIndicator,
   ScStepperItem,
   ScStepperList,
   ScStepperNext,
@@ -18,6 +19,7 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
   imports: [
     ScStepper,
     ScStepperList,
+    ScStepperIndicator,
     ScStepperItem,
     ScStepperTrigger,
     ScStepperSeparator,
@@ -34,11 +36,13 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
         <div scStepperList>
           <div scStepperItem [step]="0" #item0="scStepperItem">
             <button scStepperTrigger>
-              @if (item0.state() === 'complete') {
-                <svg siCheckIcon class="size-4"></svg>
-              } @else {
-                <span>1</span>
-              }
+              <span scStepperIndicator>
+                @if (item0.state() === 'complete') {
+                  <svg siCheckIcon></svg>
+                } @else {
+                  1
+                }
+              </span>
             </button>
             <div class="flex flex-col">
               <span scStepperTitle>Step 1</span>
@@ -54,11 +58,13 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
 
           <div scStepperItem [step]="1" #item1="scStepperItem">
             <button scStepperTrigger>
-              @if (item1.state() === 'complete') {
-                <svg siCheckIcon class="size-4"></svg>
-              } @else {
-                <span>2</span>
-              }
+              <span scStepperIndicator>
+                @if (item1.state() === 'complete') {
+                  <svg siCheckIcon></svg>
+                } @else {
+                  2
+                }
+              </span>
             </button>
             <div class="flex flex-col">
               <span scStepperTitle>Step 2</span>
@@ -73,11 +79,13 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
           <div scStepperSeparator [step]="1"></div>
           <div scStepperItem [step]="2" #item2="scStepperItem">
             <button scStepperTrigger>
-              @if (item2.state() === 'complete') {
-                <svg siCheckIcon class="size-4"></svg>
-              } @else {
-                <span>3</span>
-              }
+              <span scStepperIndicator>
+                @if (item2.state() === 'complete') {
+                  <svg siCheckIcon></svg>
+                } @else {
+                  3
+                }
+              </span>
             </button>
             <div class="flex flex-col">
               <span scStepperTitle>Step 3</span>

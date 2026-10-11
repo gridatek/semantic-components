@@ -21,12 +21,10 @@ export class ScStepperTrigger implements OnInit {
 
   protected readonly class = computed(() =>
     cn(
-      'inline-flex size-10 items-center justify-center rounded-full border-2 text-sm font-medium',
-      'transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
+      // The clickable step header; the circle is scStepperIndicator inside.
+      'inline-flex items-center gap-2 rounded-full outline-none',
+      'focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
       'disabled:pointer-events-none disabled:opacity-50',
-      'data-[state=complete]:border-primary data-[state=complete]:bg-primary data-[state=complete]:text-primary-foreground',
-      'data-[state=active]:border-primary data-[state=active]:text-primary',
-      'data-[state=inactive]:border-muted data-[state=inactive]:text-muted-foreground',
       this.classInput(),
     ),
   );

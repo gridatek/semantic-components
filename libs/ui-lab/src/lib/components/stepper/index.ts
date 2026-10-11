@@ -6,6 +6,7 @@ export { ScStepper } from './stepper';
 export { ScStepperList } from './stepper-list';
 export { ScStepperItem } from './stepper-item';
 export { ScStepperTrigger } from './stepper-trigger';
+export { ScStepperIndicator } from './stepper-indicator';
 export { ScStepperSeparator } from './stepper-separator';
 export { ScStepperPanel } from './stepper-panel';
 export { ScStepperContent } from './stepper-content';

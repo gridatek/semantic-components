@@ -9,11 +9,11 @@ A multi-step wizard component for guiding users through a process.
   <div scStepperList>
     <div scStepperItem [step]="0" #item0="scStepperItem">
       <button scStepperTrigger>
-        @if (item0.state() === 'complete') {
-        <svg siCheckIcon class="size-4"></svg>
-        } @else {
-        <span>1</span>
-        }
+        <span scStepperIndicator>
+          @if (item0.state() === 'complete') {
+          <svg siCheckIcon></svg>
+          } @else { 1 }
+        </span>
       </button>
       <div class="flex flex-col">
         <span scStepperTitle>Step 1</span>
@@ -23,11 +23,11 @@ A multi-step wizard component for guiding users through a process.
     <div scStepperSeparator [step]="0"></div>
     <div scStepperItem [step]="1" #item1="scStepperItem">
       <button scStepperTrigger>
-        @if (item1.state() === 'complete') {
-        <svg siCheckIcon class="size-4"></svg>
-        } @else {
-        <span>2</span>
-        }
+        <span scStepperIndicator>
+          @if (item1.state() === 'complete') {
+          <svg siCheckIcon></svg>
+          } @else { 2 }
+        </span>
       </button>
       <div class="flex flex-col">
         <span scStepperTitle>Step 2</span>
@@ -114,7 +114,7 @@ Individual step indicator. Exposes its state for template use via `exportAs`.
 
 ### ScStepperTrigger
 
-Clickable step button directive. The consumer provides the trigger content (step number, check icon, etc.).
+The clickable step header (the Aria tab): focus ring and disabled state. Put a `scStepperIndicator` inside, and optionally the title.
 
 **Selector:** `button[scStepperTrigger]`
 **Export As:** `scStepperTrigger`
@@ -124,6 +124,20 @@ Clickable step button directive. The consumer provides the trigger content (step
 | Attribute    | Values                                 |
 | ------------ | -------------------------------------- |
 | `data-state` | `'complete' \| 'active' \| 'inactive'` |
+
+### ScStepperIndicator
+
+The step's circle: border and colors follow the step's state, and icons inside are sized for you. The content is yours — a number, a check, any icon — chosen from `state()` and `step()`.
+
+**Selector:** `[scStepperIndicator]`
+**Export As:** `scStepperIndicator`
+
+| Signal    | Type                                   | Description              |
+| --------- | -------------------------------------- | ------------------------ |
+| `state()` | `'complete' \| 'active' \| 'inactive'` | The step's state         |
+| `step()`  | `number`                               | The step index (0-based) |
+
+**Data Attributes:** `data-state` (same values).
 
 ### ScStepperSeparator
 
@@ -196,11 +210,11 @@ Directive for the next step button. Use with `scButton` for styling.
   <div scStepperList>
     <div scStepperItem [step]="0" #item0="scStepperItem">
       <button scStepperTrigger>
-        @if (item0.state() === 'complete') {
-        <svg siCheckIcon class="size-4"></svg>
-        } @else {
-        <span>1</span>
-        }
+        <span scStepperIndicator>
+          @if (item0.state() === 'complete') {
+          <svg siCheckIcon></svg>
+          } @else { 1 }
+        </span>
       </button>
       <div class="flex flex-col">
         <span scStepperTitle>Account</span>
@@ -210,11 +224,11 @@ Directive for the next step button. Use with `scButton` for styling.
     <div scStepperSeparator [step]="0"></div>
     <div scStepperItem [step]="1" #item1="scStepperItem">
       <button scStepperTrigger>
-        @if (item1.state() === 'complete') {
-        <svg siCheckIcon class="size-4"></svg>
-        } @else {
-        <span>2</span>
-        }
+        <span scStepperIndicator>
+          @if (item1.state() === 'complete') {
+          <svg siCheckIcon></svg>
+          } @else { 2 }
+        </span>
       </button>
       <div class="flex flex-col">
         <span scStepperTitle>Profile</span>
@@ -224,11 +238,11 @@ Directive for the next step button. Use with `scButton` for styling.
     <div scStepperSeparator [step]="1"></div>
     <div scStepperItem [step]="2" #item2="scStepperItem">
       <button scStepperTrigger>
-        @if (item2.state() === 'complete') {
-        <svg siCheckIcon class="size-4"></svg>
-        } @else {
-        <span>3</span>
-        }
+        <span scStepperIndicator>
+          @if (item2.state() === 'complete') {
+          <svg siCheckIcon></svg>
+          } @else { 3 }
+        </span>
       </button>
       <div class="flex flex-col">
         <span scStepperTitle>Complete</span>
@@ -259,11 +273,11 @@ Directive for the next step button. Use with `scButton` for styling.
     <div scStepperItem [step]="0" #item0="scStepperItem">
       <div class="flex flex-col items-center">
         <button scStepperTrigger>
-          @if (item0.state() === 'complete') {
-          <svg siCheckIcon class="size-4"></svg>
-          } @else {
-          <span>1</span>
-          }
+          <span scStepperIndicator>
+            @if (item0.state() === 'complete') {
+            <svg siCheckIcon></svg>
+            } @else { 1 }
+          </span>
         </button>
         <div scStepperSeparator></div>
       </div>
@@ -280,11 +294,11 @@ Directive for the next step button. Use with `scButton` for styling.
     <div scStepperItem [step]="1" #item1="scStepperItem">
       <div class="flex flex-col items-center">
         <button scStepperTrigger>
-          @if (item1.state() === 'complete') {
-          <svg siCheckIcon class="size-4"></svg>
-          } @else {
-          <span>2</span>
-          }
+          <span scStepperIndicator>
+            @if (item1.state() === 'complete') {
+            <svg siCheckIcon></svg>
+            } @else { 2 }
+          </span>
         </button>
       </div>
       <div class="flex flex-col">
@@ -308,31 +322,31 @@ Directive for the next step button. Use with `scButton` for styling.
   <div scStepperList>
     <div scStepperItem [step]="0" #item0="scStepperItem">
       <button scStepperTrigger>
-        @if (item0.state() === 'complete') {
-        <svg siCheckIcon class="size-4"></svg>
-        } @else {
-        <span>1</span>
-        }
+        <span scStepperIndicator>
+          @if (item0.state() === 'complete') {
+          <svg siCheckIcon></svg>
+          } @else { 1 }
+        </span>
       </button>
     </div>
     <div scStepperSeparator [step]="0"></div>
     <div scStepperItem [step]="1" #item1="scStepperItem">
       <button scStepperTrigger>
-        @if (item1.state() === 'complete') {
-        <svg siCheckIcon class="size-4"></svg>
-        } @else {
-        <span>2</span>
-        }
+        <span scStepperIndicator>
+          @if (item1.state() === 'complete') {
+          <svg siCheckIcon></svg>
+          } @else { 2 }
+        </span>
       </button>
     </div>
     <div scStepperSeparator [step]="1"></div>
     <div scStepperItem [step]="2" #item2="scStepperItem">
       <button scStepperTrigger>
-        @if (item2.state() === 'complete') {
-        <svg siCheckIcon class="size-4"></svg>
-        } @else {
-        <span>3</span>
-        }
+        <span scStepperIndicator>
+          @if (item2.state() === 'complete') {
+          <svg siCheckIcon></svg>
+          } @else { 3 }
+        </span>
       </button>
     </div>
   </div>
