@@ -428,11 +428,19 @@ const SAMPLE_DATA: User[] = [
                             >
                               <ng-template scMenuContent>
                                 <div scMenuItem value="copy">
-                                  <svg siCopyIcon aria-hidden="true"></svg>
+                                  <svg
+                                    siCopyIcon
+                                    class="size-4"
+                                    aria-hidden="true"
+                                  ></svg>
                                   Copy email
                                 </div>
                                 <div scMenuItem value="view">
-                                  <svg siEyeIcon aria-hidden="true"></svg>
+                                  <svg
+                                    siEyeIcon
+                                    class="size-4"
+                                    aria-hidden="true"
+                                  ></svg>
                                   View details
                                 </div>
                                 <div scMenuSeparator></div>
@@ -441,7 +449,11 @@ const SAMPLE_DATA: User[] = [
                                   value="delete"
                                   class="text-destructive"
                                 >
-                                  <svg siTrash2Icon aria-hidden="true"></svg>
+                                  <svg
+                                    siTrash2Icon
+                                    class="size-4"
+                                    aria-hidden="true"
+                                  ></svg>
                                   Delete user
                                 </div>
                               </ng-template>
