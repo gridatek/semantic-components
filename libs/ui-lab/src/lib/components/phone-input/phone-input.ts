@@ -106,10 +106,15 @@ export class ScPhoneInput implements FormValueControl<string>, OnInit {
     if (!this.country()) this.country.set(this.defaultCountry());
   }
 
-  /** Formats what was typed or pasted, and updates the value (and country). */
-  type(raw: string): void {
+  /**
+   * Formats what was typed or pasted, and updates the value (and country).
+   * `keepSeparator`: the text ends with a space (or `-`, …) — typed, or left by
+   * deleting the digit after it. Keep it if the format puts one there next.
+   */
+  type(raw: string, keepSeparator = false): void {
     const typer = new AsYouType(this.country());
-    this.text.set(this.withoutTrunkPrefix(typer.input(raw), typer));
+    const text = this.withoutTrunkPrefix(typer.input(raw), typer);
+    this.text.set(keepSeparator ? this.withNextSeparator(text, raw) : text);
     const detected = typer.getCountry();
     if (raw.trimStart().startsWith('+') && detected) {
       this.country.set(detected);
@@ -125,6 +130,12 @@ export class ScPhoneInput implements FormValueControl<string>, OnInit {
     const national = typer.getNationalNumber();
     this.country.set(country);
     this.type(national);
+  }
+
+  /** How `raw` would be shown, without changing anything. */
+  format(raw: string): string {
+    const typer = new AsYouType(this.country());
+    return this.withoutTrunkPrefix(typer.input(raw), typer);
   }
 
   focus(options?: FocusOptions): void {
@@ -151,6 +162,18 @@ export class ScPhoneInput implements FormValueControl<string>, OnInit {
       .input(`+${code}${text}`)
       .slice(code.length + 1)
       .trim();
+  }
+
+  /**
+   * The format only adds a separator once the digit after it is typed (`6`,
+   * then `6 6`). When the user types it first, show it now — the format's
+   * own separator, found by formatting one more digit (`6` + space → `6 `).
+   */
+  private withNextSeparator(text: string, raw: string): string {
+    const next = this.format(`${raw}0`);
+    if (!next.startsWith(text)) return text;
+    const separator = /^\D+/.exec(next.slice(text.length))?.[0];
+    return separator ? text + separator : text;
   }
 
   private produce(value: string): void {

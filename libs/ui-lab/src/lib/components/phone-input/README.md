@@ -96,6 +96,8 @@ Makes the combobox the country picker: its value is the country code, kept in sy
 
 The number (`type="tel"`, `autocomplete="tel"`). Formats as you type — in the country's national format, or international after a `+` — and keeps the caret in place. Backspace or Delete next to a space or bracket removes the digit beyond it. Labelled by the field's label.
 
+Typing the spaces yourself works too: a space typed where the format puts one shows straight away (`6` then Space → `6 `), so `6 66 00 65 94` reads exactly as typed at every step. A space where the format has none is dropped.
+
 ### ScPhoneInputFlag — `img[scPhoneInputFlag]`
 
 A 3:2 flag image from `flagUrl`: the selected country, or `[country]`. Hidden while there's no country. Write `alt=""` when the country's name or code is beside it, a real `alt` when the flag stands alone.

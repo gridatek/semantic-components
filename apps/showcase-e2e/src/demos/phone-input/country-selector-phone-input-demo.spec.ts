@@ -51,6 +51,41 @@ test.describe('Country Selector Phone Input Demo', () => {
     await expect(page.getByText('Value: +33666006594')).toBeVisible();
   });
 
+  test('a typed space shows straight away where the format puts one', async ({
+    page,
+  }) => {
+    const trigger = page.locator('[scComboboxTrigger]');
+    await trigger.click();
+    await type(page, 'fra');
+    await page.getByRole('option', { name: /France/ }).click();
+
+    const input = page.getByLabel('Phone number');
+    await input.click();
+    await type(page, '6 ');
+    await expect(input).toHaveValue('6 ');
+    await type(page, '66 00 65 94');
+    await expect(input).toHaveValue('6 66 00 65 94');
+
+    // A space where the format has none is dropped.
+    await input.fill('');
+    await type(page, '66 ');
+    await expect(input).toHaveValue('6 6');
+
+    // The space just typed deletes normally.
+    await input.fill('');
+    await type(page, '6 ');
+    await press(page, 'Backspace');
+    await expect(input).toHaveValue('6');
+
+    // Fixing a mistyped digit keeps the space before it.
+    await input.fill('');
+    await type(page, '6 66 1');
+    await press(page, 'Backspace');
+    await expect(input).toHaveValue('6 66 ');
+    await type(page, '00 65 94');
+    await expect(input).toHaveValue('6 66 00 65 94');
+  });
+
   test('Backspace after formatting removes a digit', async ({ page }) => {
     const input = page.getByLabel('Phone number');
     await input.click();

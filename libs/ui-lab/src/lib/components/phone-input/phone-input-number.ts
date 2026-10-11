@@ -8,6 +8,7 @@ import {
   input,
 } from '@angular/core';
 import { SC_FIELD, cn, inputStyles } from '@semantic-components/ui';
+import { PHONE_SEPARATOR } from './phone-input-text';
 import { SC_PHONE_INPUT } from './phone-input-types';
 
 /** A character that's part of the number (not formatting). */
@@ -83,13 +84,22 @@ export class ScPhoneInputNumber {
   protected onInput(): void {
     const { value, selectionStart } = this.element;
     const caret = selectionStart ?? value.length;
-    this.apply(value, countSignificant(value.slice(0, caret)));
+    // Ends with a separator (one just typed, or left by deleting the digit
+    // after it): keep it if the format puts one there.
+    const endsWithSeparator =
+      caret === value.length && PHONE_SEPARATOR.test(value.slice(-1));
+    this.apply(
+      value,
+      countSignificant(value.slice(0, caret)),
+      endsWithSeparator,
+    );
   }
 
   /**
    * Backspace/Delete next to a formatting character (a space, a bracket)
    * removes the digit beyond it — otherwise reformatting would put the
-   * character straight back.
+   * character straight back. A character the format wouldn't put back (a
+   * separator just typed at the end) is deleted normally.
    */
   protected onKeydown(event: KeyboardEvent): void {
     const forward = event.key === 'Delete';
@@ -100,6 +110,9 @@ export class ScPhoneInputNumber {
     const caret = selectionStart;
     const next = forward ? value[caret] : value[caret - 1];
     if (next === undefined || isSignificant(next)) return;
+    const removed = forward ? caret : caret - 1;
+    const plain = value.slice(0, removed) + value.slice(removed + 1);
+    if (this.phone.format(plain) !== value) return;
 
     let index = forward ? caret : caret - 1;
     while (index >= 0 && index < value.length && !isSignificant(value[index])) {
@@ -113,11 +126,17 @@ export class ScPhoneInputNumber {
     this.apply(raw, countSignificant(before));
   }
 
-  private apply(raw: string, significantBeforeCaret: number): void {
-    this.phone.type(raw);
+  private apply(
+    raw: string,
+    significantBeforeCaret: number,
+    keepSeparator = false,
+  ): void {
+    this.phone.type(raw, keepSeparator);
     const text = this.phone.text();
     this.element.value = text;
-    const caret = positionAfter(text, significantBeforeCaret);
+    const caret = keepSeparator
+      ? text.length
+      : positionAfter(text, significantBeforeCaret);
     this.element.setSelectionRange(caret, caret);
   }
 }
