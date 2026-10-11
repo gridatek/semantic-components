@@ -49,6 +49,8 @@ export class ScPaginationFirst {
   protected readonly class = computed(() =>
     cn(
       buttonVariants({ variant: this.variant(), size: this.size() }),
+      // Balances a text button ("« First"); icon-only buttons stay centred.
+      !this.size()?.startsWith('icon') && 'ps-1.5',
       'rtl:[&>svg]:rotate-180',
       this.classInput(),
     ),
