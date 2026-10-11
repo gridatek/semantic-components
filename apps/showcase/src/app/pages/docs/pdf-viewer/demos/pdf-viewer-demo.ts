@@ -277,7 +277,7 @@ const TOOLS_WITH_OPTIONS: readonly ScPdfEditorMode[] = [
             <svg siSearchIcon></svg>
           </button>
 
-          <div scSeparator orientation="vertical" class="mx-1 h-5"></div>
+          <div scSeparator orientation="vertical"></div>
 
           <div scPdfViewerNav>
             <button
@@ -303,7 +303,7 @@ const TOOLS_WITH_OPTIONS: readonly ScPdfEditorMode[] = [
           </div>
           <div scPdfViewerPageInfo></div>
 
-          <div scSeparator orientation="vertical" class="mx-1 h-5"></div>
+          <div scSeparator orientation="vertical"></div>
 
           <div scPdfViewerZoom>
             <button
@@ -422,7 +422,7 @@ const TOOLS_WITH_OPTIONS: readonly ScPdfEditorMode[] = [
             <svg siSignatureIcon></svg>
           </button>
 
-          <div scSeparator orientation="vertical" class="mx-1 h-5"></div>
+          <div scSeparator orientation="vertical"></div>
 
           <button
             scButton

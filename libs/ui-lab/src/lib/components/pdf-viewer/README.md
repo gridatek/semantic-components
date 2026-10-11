@@ -19,7 +19,7 @@ The chrome is built from `@semantic-components/ui`: the viewer's parts add behav
         </button>
       </div>
       <div scPdfViewerPageInfo></div>
-      <div scSeparator orientation="vertical" class="h-5"></div>
+      <div scSeparator orientation="vertical"></div>
       <div scPdfViewerZoom>
         <button scButton variant="ghost" size="icon" scPdfViewerZoomOut><svg siZoomOutIcon></svg></button>
         <button scButton variant="ghost" size="icon" scPdfViewerZoomIn><svg siZoomInIcon></svg></button>
