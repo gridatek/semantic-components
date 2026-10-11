@@ -4,7 +4,6 @@ export * from './barcode-scanner';
 export * from './bubble';
 export * from './color-picker';
 export * from './countdown';
-export * from './data-table';
 export * from './date-range-picker';
 export * from './diff-viewer';
 export * from './dock';

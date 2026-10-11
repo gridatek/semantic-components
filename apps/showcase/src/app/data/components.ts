@@ -8,6 +8,7 @@ export type ComponentLibrary =
   | 'editor'
   | 'charts'
   | 'phone-input'
+  | 'data-table'
   | 'third-party';
 
 export type ComponentCategory =

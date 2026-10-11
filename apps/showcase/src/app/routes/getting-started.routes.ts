@@ -55,6 +55,11 @@ export const gettingStartedRoutes: Route[] = [
           import('../pages/getting-started/phone-input.page'),
       },
       {
+        path: 'data-table',
+        title: 'Data Table - Semantic Components',
+        loadComponent: () => import('../pages/getting-started/data-table.page'),
+      },
+      {
         path: 'code',
         title: 'Code - Semantic Components',
         loadComponent: () => import('../pages/getting-started/code.page'),

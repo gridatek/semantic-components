@@ -266,6 +266,17 @@ import { ConfigService } from '../../services/config.service';
                     <li scSidebarMenuSubItem>
                       <a
                         scSidebarMenuSubButton
+                        routerLink="/docs/getting-started/data-table"
+                        routerLinkActive
+                        #dataTableRla="routerLinkActive"
+                        [isActive]="dataTableRla.isActive"
+                      >
+                        <span>Data Table</span>
+                      </a>
+                    </li>
+                    <li scSidebarMenuSubItem>
+                      <a
+                        scSidebarMenuSubButton
                         routerLink="/docs/getting-started/code"
                         routerLinkActive
                         #codeRla="routerLinkActive"

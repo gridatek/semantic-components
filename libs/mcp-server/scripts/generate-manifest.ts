@@ -174,6 +174,7 @@ function main() {
     ['code', '@semantic-components/code'],
     ['editor', '@semantic-components/editor'],
     ['phone-input', '@semantic-components/phone-input'],
+    ['data-table', '@semantic-components/data-table'],
   ];
 
   const visiblePaths = loadVisibleComponentPaths();

@@ -75,7 +75,7 @@ import {
   ScDataTableSelectRow,
   ScDataTableSortButton,
   dataTableColumnLabel,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/data-table';
 import {
   SiArrowDownIcon,
   SiArrowUpIcon,

@@ -7,11 +7,11 @@ The parts are **typed structurally**: each one only declares the few methods it 
 ## Installation
 
 ```bash
-npm install @tanstack/angular-table
+npm install @semantic-components/data-table @tanstack/angular-table
 ```
 
 ```typescript
-import { ScDataTableCell, ScDataTableColumnVisibility, ScDataTableGlobalFilter, ScDataTableHeaderCell, ScDataTablePagination, ScDataTableRow, ScDataTableSelectAll, ScDataTableSelectRow, ScDataTableSortButton } from '@semantic-components/ui-lab';
+import { ScDataTableCell, ScDataTableColumnVisibility, ScDataTableGlobalFilter, ScDataTableHeaderCell, ScDataTablePagination, ScDataTableRow, ScDataTableSelectAll, ScDataTableSelectRow, ScDataTableSortButton } from '@semantic-components/data-table';
 ```
 
 ## Usage

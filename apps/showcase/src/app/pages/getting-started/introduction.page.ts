@@ -101,6 +101,10 @@ import { ConfigService } from '../../services/config.service';
             — Phone number input powered by libphonenumber-js
           </li>
           <li>
+            <strong>&#64;semantic-components/data-table</strong>
+            — Data table parts for TanStack Table
+          </li>
+          <li>
             <strong>&#64;semantic-components/code</strong>
             — Code viewer and editor powered by Shiki
           </li>

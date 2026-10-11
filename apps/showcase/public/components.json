@@ -252,7 +252,7 @@
     "path": "data-table",
     "description": "Styled, accessible parts for TanStack Table data tables.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "data-table",
     "category": "Data Display"
   },
   {

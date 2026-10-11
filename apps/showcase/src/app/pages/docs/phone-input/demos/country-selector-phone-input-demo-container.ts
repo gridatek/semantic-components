@@ -17,6 +17,14 @@ export class CountrySelectorPhoneInputDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import { FormField, form, required } from '@angular/forms/signals';
 import {
+  ScPhoneInput,
+  ScPhoneInputCountry,
+  ScPhoneInputFlag,
+  ScPhoneInputNumber,
+  phoneCountries,
+  phoneNumber,
+} from '@semantic-components/phone-input';
+import {
   ScCombobox,
   ScComboboxEmpty,
   ScComboboxIcon,
@@ -36,14 +44,6 @@ import {
   ScInputGroupAddon,
   ScLabel,
 } from '@semantic-components/ui';
-import {
-  ScPhoneInput,
-  ScPhoneInputCountry,
-  ScPhoneInputFlag,
-  ScPhoneInputNumber,
-  phoneCountries,
-  phoneNumber,
-} from '@semantic-components/phone-input';
 import { SiChevronDownIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
