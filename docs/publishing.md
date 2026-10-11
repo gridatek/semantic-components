@@ -10,6 +10,7 @@ All libraries are versioned together:
 - `@semantic-components/ui-lab`
 - `@semantic-components/editor`
 - `@semantic-components/carousel`
+- `@semantic-components/phone-input`
 - `@semantic-components/code`
 
 ## Automated Release (CI)

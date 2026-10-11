@@ -628,7 +628,7 @@
     "path": "phone-input",
     "description": "An input for international phone numbers.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "phone-input",
     "category": "Forms"
   },
   {

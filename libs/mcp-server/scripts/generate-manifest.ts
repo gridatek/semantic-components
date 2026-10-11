@@ -173,6 +173,7 @@ function main() {
     ['carousel', '@semantic-components/carousel'],
     ['code', '@semantic-components/code'],
     ['editor', '@semantic-components/editor'],
+    ['phone-input', '@semantic-components/phone-input'],
   ];
 
   const visiblePaths = loadVisibleComponentPaths();

@@ -49,6 +49,12 @@ export const gettingStartedRoutes: Route[] = [
         loadComponent: () => import('../pages/getting-started/editor.page'),
       },
       {
+        path: 'phone-input',
+        title: 'Phone Input - Semantic Components',
+        loadComponent: () =>
+          import('../pages/getting-started/phone-input.page'),
+      },
+      {
         path: 'code',
         title: 'Code - Semantic Components',
         loadComponent: () => import('../pages/getting-started/code.page'),

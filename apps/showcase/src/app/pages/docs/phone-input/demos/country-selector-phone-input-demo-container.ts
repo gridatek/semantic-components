@@ -43,7 +43,7 @@ import {
   ScPhoneInputNumber,
   phoneCountries,
   phoneNumber,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/phone-input';
 import { SiChevronDownIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
@@ -118,11 +118,7 @@ import { SiChevronDownIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
                         [value]="country.code"
                         [label]="country.name"
                       >
-                        <img
-                          scPhoneInputFlag
-                          [country]="country.code"
-                          alt=""
-                        />
+                        <img scPhoneInputFlag [country]="country.code" alt="" />
                         <span scComboboxItemLabel>
                           {{ country.name }} +{{ country.callingCode }}
                         </span>

@@ -255,6 +255,17 @@ import { ConfigService } from '../../services/config.service';
                     <li scSidebarMenuSubItem>
                       <a
                         scSidebarMenuSubButton
+                        routerLink="/docs/getting-started/phone-input"
+                        routerLinkActive
+                        #phoneInputRla="routerLinkActive"
+                        [isActive]="phoneInputRla.isActive"
+                      >
+                        <span>Phone Input</span>
+                      </a>
+                    </li>
+                    <li scSidebarMenuSubItem>
+                      <a
+                        scSidebarMenuSubButton
                         routerLink="/docs/getting-started/code"
                         routerLinkActive
                         #codeRla="routerLinkActive"

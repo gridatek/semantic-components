@@ -97,6 +97,10 @@ import { ConfigService } from '../../services/config.service';
             — Rich text editor powered by Tiptap
           </li>
           <li>
+            <strong>&#64;semantic-components/phone-input</strong>
+            — Phone number input powered by libphonenumber-js
+          </li>
+          <li>
             <strong>&#64;semantic-components/code</strong>
             — Code viewer and editor powered by Shiki
           </li>
