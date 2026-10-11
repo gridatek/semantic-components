@@ -16,7 +16,7 @@ import { DemoContainer } from '../../../../components/demo-container/demo-contai
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicSidebarDemoContainer {
-  readonly code = `﻿import { Component, ViewEncapsulation, signal } from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScSeparator,
   ScSidebar,

@@ -242,7 +242,7 @@
   {
     "name": "Data Table",
     "path": "data-table",
-    "description": "An advanced table with sorting and filtering.",
+    "description": "Styled, accessible parts for TanStack Table data tables.",
     "status": "Experimental",
     "library": "ui-lab",
     "category": "Data Display"

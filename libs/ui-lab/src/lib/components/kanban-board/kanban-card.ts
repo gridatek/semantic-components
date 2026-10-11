@@ -1,4 +1,4 @@
-﻿import { Directive, computed, inject, input, output } from '@angular/core';
+import { Directive, computed, inject, input, output } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { SC_KANBAN_BOARD } from './kanban-board';
 import type { KanbanCard } from './kanban-types';
@@ -72,7 +72,7 @@ export class ScKanbanCard {
     return 'text-muted-foreground';
   });
 
-  /** Priority as text ("Urgent", "High"â€¦), readable by everyone. */
+  /** Priority as text ("Urgent", "High"…), readable by everyone. */
   priorityLabel(): string {
     const priority = this.card().priority;
     return priority ? priority[0].toUpperCase() + priority.slice(1) : '';

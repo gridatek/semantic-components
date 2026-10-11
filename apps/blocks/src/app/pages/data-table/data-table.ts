@@ -1,4 +1,4 @@
-﻿import {
+import {
   type ColumnDef,
   type ColumnFiltersState,
   type ColumnPinningState,
@@ -33,7 +33,16 @@ import {
   ScTableHeaderCell,
   ScTableRow,
 } from '@semantic-components/ui';
-import { ScButtonPattern } from '@semantic-components/ui-lab';
+import {
+  ScButtonPattern,
+  ScDataTableCell,
+  ScDataTableColumnFilter,
+  ScDataTableHead,
+  ScDataTableRow,
+  ScDataTableSelectAll,
+  ScDataTableSelectRow,
+  ScDataTableSortButton,
+} from '@semantic-components/ui-lab';
 import {
   SiArrowDownIcon,
   SiArrowUpIcon,
@@ -67,6 +76,13 @@ import type { User } from './user.service';
     SiChevronDownIcon,
     SiChevronRightIcon,
     ScButtonPattern,
+    ScDataTableCell,
+    ScDataTableColumnFilter,
+    ScDataTableHead,
+    ScDataTableRow,
+    ScDataTableSelectAll,
+    ScDataTableSelectRow,
+    ScDataTableSortButton,
     DataTableToolbar,
     DataTablePagination,
     DataTableColumnPinning,
@@ -75,8 +91,6 @@ import type { User } from './user.service';
   template: `
     <app-data-table-toolbar
       [table]="table"
-      [globalFilter]="globalFilter()"
-      (globalFilterChange)="globalFilter.set($event)"
       [grouping]="grouping()"
       (groupingChange)="grouping.set($event)"
     />
@@ -90,11 +104,8 @@ import type { User } from './user.service';
               @for (header of headerGroup.headers; track header.id) {
                 <th
                   scTableHeaderCell
-                  [class.sticky]="header.column.getIsPinned()"
-                  [class.start-0]="header.column.getIsPinned() === 'start'"
-                  [class.end-0]="header.column.getIsPinned() === 'end'"
-                  [class.z-10]="header.column.getIsPinned()"
-                  [class.bg-background]="header.column.getIsPinned()"
+                  scDataTableHead
+                  [column]="header.column"
                   [attr.colSpan]="header.colSpan"
                 >
                   @if (!header.isPlaceholder) {
@@ -103,33 +114,25 @@ import type { User } from './user.service';
                         <input
                           type="checkbox"
                           scCheckbox
-                          [checked]="table.getIsAllPageRowsSelected()"
-                          [indeterminate]="
-                            table.getIsSomePageRowsSelected() &&
-                            !table.getIsAllPageRowsSelected()
-                          "
-                          (change)="table.toggleAllPageRowsSelected()"
+                          scDataTableSelectAll
+                          [table]="table"
                         />
                       </label>
-                    } @else {
-                      <div
-                        class="flex items-center gap-1 [&_svg]:size-4"
-                        [class.cursor-pointer]="header.column.getCanSort()"
-                        [class.select-none]="header.column.getCanSort()"
-                        [scButtonPattern]="header.column.getCanSort()"
-                        (click)="
-                          header.column.getCanSort()
-                            ? header.column.toggleSorting()
-                            : null
-                        "
+                    } @else if (header.column.getCanSort()) {
+                      <button
+                        scDataTableSortButton
+                        #sort="scDataTableSortButton"
+                        [column]="header.column"
                       >
-                        <span>{{ getHeaderLabel(header) }}</span>
-                        @if (header.column.getIsSorted() === 'asc') {
+                        {{ getHeaderLabel(header) }}
+                        @if (sort.direction() === 'asc') {
                           <svg siArrowUpIcon></svg>
-                        } @else if (header.column.getIsSorted() === 'desc') {
+                        } @else if (sort.direction() === 'desc') {
                           <svg siArrowDownIcon></svg>
                         }
-                      </div>
+                      </button>
+                    } @else {
+                      {{ getHeaderLabel(header) }}
                     }
                   }
                 </th>
@@ -148,11 +151,9 @@ import type { User } from './user.service';
                 @if (header.column.getCanFilter()) {
                   <input
                     scInput
-                    type="text"
-                    [value]="getColumnFilterValue(header.column.id)"
-                    (input)="
-                      header.column.setFilterValue($any($event.target).value)
-                    "
+                    scDataTableColumnFilter
+                    [column]="header.column"
+                    [attr.aria-label]="'Filter ' + getHeaderLabel(header)"
                     placeholder="Filter..."
                     class="h-7 text-xs"
                   />
@@ -167,18 +168,12 @@ import type { User } from './user.service';
           @for (row of table.getRowModel().rows; track row.id) {
             <tr
               scTableRow
-              [attr.data-state]="row.getIsSelected() ? 'selected' : null"
+              scDataTableRow
+              [row]="row"
               [class]="row.getIsGrouped() ? 'bg-muted/30' : ''"
             >
               @for (cell of row.getVisibleCells(); track cell.id) {
-                <td
-                  scTableCell
-                  [class.sticky]="cell.column.getIsPinned()"
-                  [class.start-0]="cell.column.getIsPinned() === 'start'"
-                  [class.end-0]="cell.column.getIsPinned() === 'end'"
-                  [class.z-10]="cell.column.getIsPinned()"
-                  [class.bg-background]="cell.column.getIsPinned()"
-                >
+                <td scTableCell scDataTableCell [column]="cell.column">
                   @if (cell.getIsGrouped()) {
                     <button
                       scButton
@@ -229,9 +224,9 @@ import type { User } from './user.service';
                         <input
                           type="checkbox"
                           scCheckbox
-                          [checked]="row.getIsSelected()"
-                          [disabled]="!row.getCanSelect()"
-                          (change)="row.toggleSelected()"
+                          scDataTableSelectRow
+                          [row]="row"
+                          [attr.aria-label]="'Select ' + row.original.username"
                         />
                       </label>
                     } @else if (cell.column.id === 'expand') {
@@ -532,12 +527,6 @@ export class DataTable {
     if (value >= 5000) return 'bg-red-500';
     if (value >= 2000) return 'bg-yellow-500';
     return 'bg-green-500';
-  }
-
-  getColumnFilterValue(columnId: string): string {
-    const filters = this.table.atoms.columnFilters.get();
-    const filter = filters.find((f) => f.id === columnId);
-    return (filter?.value as string) ?? '';
   }
 
   canEditColumn(columnId: string): boolean {

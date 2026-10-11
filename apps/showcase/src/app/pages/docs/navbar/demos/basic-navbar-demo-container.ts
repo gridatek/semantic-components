@@ -1,4 +1,4 @@
-﻿import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 
 @Component({
@@ -17,7 +17,7 @@ import { DemoContainer } from '../../../../components/demo-container/demo-contai
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicNavbarDemoContainer {
-  readonly code = `﻿import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScNavigationMenu,

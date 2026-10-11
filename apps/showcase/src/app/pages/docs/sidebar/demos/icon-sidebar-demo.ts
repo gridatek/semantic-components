@@ -1,4 +1,4 @@
-﻿import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScSidebar,
   ScSidebarBody,
@@ -102,8 +102,8 @@ import {
         </header>
         <div class="flex flex-1 flex-col gap-4 p-4 pt-0">
           <p class="text-muted-foreground text-sm">
-            Press the trigger, click the rail or use Ctrl/âŒ˜ + B. Collapsed
-            items keep their names and show a tooltip.
+            Press the trigger, click the rail or use Ctrl/⌘ + B. Collapsed items
+            keep their names and show a tooltip.
           </p>
           <div class="bg-muted/50 min-h-64 flex-1 rounded-xl"></div>
         </div>

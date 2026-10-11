@@ -14,21 +14,70 @@ import { FeaturedDataTableDemo } from './featured-data-table-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class FeaturedDataTableDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScCheckbox, ScCheckboxField } from '@semantic-components/ui';
+  readonly code = `import {
+  columnFilteringFeature,
+  columnVisibilityFeature,
+  createColumnHelper,
+  createFilteredRowModel,
+  createPaginatedRowModel,
+  createSortedRowModel,
+  globalFilteringFeature,
+  injectTable,
+  rowPaginationFeature,
+  rowSelectionFeature,
+  rowSortingFeature,
+  sortFn_alphanumeric,
+  sortFn_datetime,
+  sortFn_text,
+  tableFeatures,
+} from '@tanstack/angular-table';
+import { Component, ViewEncapsulation, computed } from '@angular/core';
 import {
-  ColumnDef,
-  ScDataTable,
-  ScDataTableBody,
+  ScBadge,
+  ScButton,
+  ScCheckbox,
+  ScCheckboxField,
+  ScInput,
+  ScPagination,
+  ScPaginationFirst,
+  ScPaginationItem,
+  ScPaginationLast,
+  ScPaginationList,
+  ScPaginationNext,
+  ScPaginationPageSizeSelect,
+  ScPaginationPrevious,
+  ScTable,
+  ScTableBody,
+  ScTableCell,
+  ScTableHeader,
+  ScTableHeaderCell,
+  ScTableRow,
+} from '@semantic-components/ui';
+import {
   ScDataTableCell,
   ScDataTableColumnToggle,
-  ScDataTableFilter,
+  ScDataTableColumnToggleContent,
+  ScDataTableColumnToggleTrigger,
+  ScDataTableColumnVisibility,
+  ScDataTableGlobalFilter,
   ScDataTableHead,
-  ScDataTableHeader,
   ScDataTablePagination,
   ScDataTableRow,
+  ScDataTableSelectAll,
+  ScDataTableSelectRow,
+  ScDataTableSortButton,
 } from '@semantic-components/ui-lab';
-import { SiEllipsisIcon } from '@semantic-icons/lucide-icons';
+import {
+  SiArrowDownIcon,
+  SiArrowUpIcon,
+  SiChevronLeftIcon,
+  SiChevronRightIcon,
+  SiChevronsLeftIcon,
+  SiChevronsRightIcon,
+  SiChevronsUpDownIcon,
+  SiColumns3Icon,
+  SiEllipsisIcon,
+} from '@semantic-icons/lucide-icons';
 
 interface User {
   id: number;
@@ -38,6 +87,44 @@ interface User {
   status: 'active' | 'inactive' | 'pending';
   createdAt: Date;
 }
+
+/** TanStack v9: register the features the table uses. */
+const features = tableFeatures({
+  columnFilteringFeature,
+  globalFilteringFeature,
+  rowSortingFeature,
+  rowPaginationFeature,
+  rowSelectionFeature,
+  columnVisibilityFeature,
+  filteredRowModel: createFilteredRowModel(),
+  sortedRowModel: createSortedRowModel(),
+  paginatedRowModel: createPaginatedRowModel(),
+  sortFns: {
+    alphanumeric: sortFn_alphanumeric,
+    text: sortFn_text,
+    datetime: sortFn_datetime,
+  },
+});
+
+const columnHelper = createColumnHelper<typeof features, User>();
+
+const columns = columnHelper.columns([
+  columnHelper.display({
+    id: 'select',
+    enableSorting: false,
+    enableHiding: false,
+  }),
+  columnHelper.accessor('name', { header: 'Name' }),
+  columnHelper.accessor('email', { header: 'Email' }),
+  columnHelper.accessor('role', { header: 'Role' }),
+  columnHelper.accessor('status', { header: 'Status' }),
+  columnHelper.accessor('createdAt', { header: 'Created' }),
+  columnHelper.display({
+    id: 'actions',
+    enableSorting: false,
+    enableHiding: false,
+  }),
+]);
 
 const SAMPLE_DATA: User[] = [
   {
@@ -141,120 +228,202 @@ const SAMPLE_DATA: User[] = [
 @Component({
   selector: 'app-featured-data-table-demo',
   imports: [
-    ScCheckboxField,
+    ScBadge,
+    ScButton,
     ScCheckbox,
-    ScDataTable,
-    ScDataTableHeader,
-    ScDataTableBody,
-    ScDataTableRow,
-    ScDataTableHead,
+    ScCheckboxField,
+    ScInput,
+    ScPagination,
+    ScPaginationFirst,
+    ScPaginationItem,
+    ScPaginationLast,
+    ScPaginationList,
+    ScPaginationNext,
+    ScPaginationPageSizeSelect,
+    ScPaginationPrevious,
+    ScTable,
+    ScTableBody,
+    ScTableCell,
+    ScTableHeader,
+    ScTableHeaderCell,
+    ScTableRow,
     ScDataTableCell,
-    ScDataTableFilter,
     ScDataTableColumnToggle,
+    ScDataTableColumnToggleContent,
+    ScDataTableColumnToggleTrigger,
+    ScDataTableColumnVisibility,
+    ScDataTableGlobalFilter,
+    ScDataTableHead,
     ScDataTablePagination,
+    ScDataTableRow,
+    ScDataTableSelectAll,
+    ScDataTableSelectRow,
+    ScDataTableSortButton,
+    SiArrowDownIcon,
+    SiArrowUpIcon,
+    SiChevronLeftIcon,
+    SiChevronRightIcon,
+    SiChevronsLeftIcon,
+    SiChevronsRightIcon,
+    SiChevronsUpDownIcon,
+    SiColumns3Icon,
     SiEllipsisIcon,
   ],
   template: \`
-    <div
-      scDataTable
-      #table="scDataTable"
-      [data]="data"
-      [columns]="columns"
-      [pageSize]="5"
-      class="w-full max-w-4xl"
-    >
-      <div class="flex items-center justify-between py-4">
+    <div class="w-full max-w-4xl space-y-4">
+      <div class="flex items-center justify-between gap-2">
         <input
-          scDataTableFilter
+          scInput
+          scDataTableGlobalFilter
+          [table]="table"
           placeholder="Search all columns..."
+          aria-label="Search users"
           class="max-w-sm"
         />
-        <div scDataTableColumnToggle></div>
+
+        <div
+          scDataTableColumnToggle
+          #columnToggle="scDataTableColumnToggle"
+          [table]="table"
+        >
+          <button scButton variant="outline" scDataTableColumnToggleTrigger>
+            <svg siColumns3Icon></svg>
+            Columns
+          </button>
+          <div scDataTableColumnToggleContent>
+            @for (column of columnToggle.columns(); track column.id) {
+              <label scCheckboxField>
+                <input
+                  type="checkbox"
+                  scCheckbox
+                  scDataTableColumnVisibility
+                  [column]="column"
+                />
+                {{ columnToggle.label(column) }}
+              </label>
+            }
+          </div>
+        </div>
       </div>
 
-      <div class="rounded-md border">
-        <table class="w-full caption-bottom text-sm">
-          <thead scDataTableHeader>
-            <tr>
-              <th scDataTableHead class="w-[50px]">
-                <label scCheckboxField>
-                  <input
-                    type="checkbox"
-                    scCheckbox
-                    [checked]="table.isAllRowsSelected()"
-                    [indeterminate]="table.isSomeRowsSelected()"
-                    aria-label="Select all rows"
-                    (checkedChange)="table.toggleAllRowSelection()"
-                  />
-                </label>
-              </th>
-              <th scDataTableHead columnId="name" [sortable]="true">Name</th>
-              <th scDataTableHead columnId="email" [sortable]="true">Email</th>
-              <th scDataTableHead columnId="role" [sortable]="true">Role</th>
-              <th scDataTableHead columnId="status" [sortable]="true">
-                Status
-              </th>
-              <th scDataTableHead columnId="createdAt" [sortable]="true">
-                Created
-              </th>
-              <th scDataTableHead class="w-[80px]">Actions</th>
-            </tr>
+      <div class="overflow-hidden rounded-md border">
+        <table scTable>
+          <thead scTableHeader>
+            @for (
+              headerGroup of table.getHeaderGroups();
+              track headerGroup.id
+            ) {
+              <tr scTableRow>
+                @for (header of headerGroup.headers; track header.id) {
+                  <th
+                    scTableHeaderCell
+                    scDataTableHead
+                    [column]="header.column"
+                  >
+                    @switch (header.column.id) {
+                      @case ('select') {
+                        <label scCheckboxField>
+                          <input
+                            type="checkbox"
+                            scCheckbox
+                            scDataTableSelectAll
+                            [table]="table"
+                          />
+                        </label>
+                      }
+                      @case ('actions') {
+                        <span class="sr-only">Actions</span>
+                      }
+                      @default {
+                        <button
+                          scDataTableSortButton
+                          #sort="scDataTableSortButton"
+                          [column]="header.column"
+                        >
+                          {{ header.column.columnDef.header }}
+                          @switch (sort.direction()) {
+                            @case ('asc') {
+                              <svg siArrowUpIcon></svg>
+                            }
+                            @case ('desc') {
+                              <svg siArrowDownIcon></svg>
+                            }
+                            @default {
+                              <svg siChevronsUpDownIcon></svg>
+                            }
+                          }
+                        </button>
+                      }
+                    }
+                  </th>
+                }
+              </tr>
+            }
           </thead>
-          <tbody scDataTableBody>
-            @for (row of table.rows(); track row.id) {
-              <tr scDataTableRow [selected]="table.isRowSelected(row)">
-                <td scDataTableCell>
-                  <label scCheckboxField>
-                    <input
-                      type="checkbox"
-                      scCheckbox
-                      [checked]="table.isRowSelected(row)"
-                      [attr.aria-label]="'Select ' + row.name"
-                      (checkedChange)="table.toggleRowSelection(row)"
-                    />
-                  </label>
-                </td>
-                <td scDataTableCell columnId="name" class="font-medium">
-                  {{ row.name }}
-                </td>
-                <td scDataTableCell columnId="email">{{ row.email }}</td>
-                <td scDataTableCell columnId="role">
-                  <span
-                    class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset"
-                    [class]="getRoleBadgeClass(row.role)"
-                  >
-                    {{ row.role }}
-                  </span>
-                </td>
-                <td scDataTableCell columnId="status">
-                  <span
-                    class="inline-flex items-center gap-1 rounded-full px-2 py-1 text-xs font-medium"
-                    [class]="getStatusBadgeClass(row.status)"
-                  >
-                    <span
-                      class="size-1.5 rounded-full"
-                      [class]="getStatusDotClass(row.status)"
-                    ></span>
-                    {{ row.status }}
-                  </span>
-                </td>
-                <td scDataTableCell columnId="createdAt">
-                  {{ formatDate(row.createdAt) }}
-                </td>
-                <td scDataTableCell>
-                  <button
-                    type="button"
-                    class="hover:bg-muted inline-flex size-8 items-center justify-center rounded-md"
-                    [attr.aria-label]="'Actions for ' + row.name"
-                  >
-                    <svg siEllipsisIcon class="size-4"></svg>
-                  </button>
-                </td>
+          <tbody scTableBody>
+            @for (row of table.getRowModel().rows; track row.id) {
+              <tr scTableRow scDataTableRow [row]="row">
+                @for (cell of row.getVisibleCells(); track cell.id) {
+                  <td scTableCell scDataTableCell [column]="cell.column">
+                    @switch (cell.column.id) {
+                      @case ('select') {
+                        <label scCheckboxField>
+                          <input
+                            type="checkbox"
+                            scCheckbox
+                            scDataTableSelectRow
+                            [row]="row"
+                            [attr.aria-label]="'Select ' + row.original.name"
+                          />
+                        </label>
+                      }
+                      @case ('name') {
+                        <span class="font-medium">{{ row.original.name }}</span>
+                      }
+                      @case ('role') {
+                        <span
+                          scBadge
+                          [variant]="roleVariant(row.original.role)"
+                        >
+                          {{ row.original.role }}
+                        </span>
+                      }
+                      @case ('status') {
+                        <span
+                          scBadge
+                          [variant]="statusVariant(row.original.status)"
+                        >
+                          {{ row.original.status }}
+                        </span>
+                      }
+                      @case ('createdAt') {
+                        {{ formatDate(row.original.createdAt) }}
+                      }
+                      @case ('actions') {
+                        <button
+                          scButton
+                          variant="ghost"
+                          size="icon-sm"
+                          [attr.aria-label]="'Actions for ' + row.original.name"
+                        >
+                          <svg siEllipsisIcon></svg>
+                        </button>
+                      }
+                      @default {
+                        {{ cell.getValue() }}
+                      }
+                    }
+                  </td>
+                }
               </tr>
             } @empty {
-              <tr>
-                <td colspan="7" class="text-muted-foreground h-24 text-center">
-                  No results found.
+              <tr scTableRow>
+                <td
+                  scTableCell
+                  [attr.colspan]="table.getVisibleLeafColumns().length"
+                  class="text-muted-foreground h-24 text-center"
+                >
+                  No results.
                 </td>
               </tr>
             }
@@ -262,75 +431,97 @@ const SAMPLE_DATA: User[] = [
         </table>
       </div>
 
-      <div scDataTablePagination [pageSizes]="[5, 10, 20]"></div>
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <p class="text-muted-foreground text-sm">
+          {{ selectedCount() }} of {{ table.getRowCount() }} row(s) selected.
+        </p>
+
+        <nav
+          scPagination
+          scDataTablePagination
+          #pagination="scPagination"
+          [table]="table"
+          [pageSizes]="[5, 10, 20]"
+          aria-label="Users pages"
+          class="mx-0 w-auto flex-wrap items-center gap-4"
+        >
+          <div class="flex items-center gap-2 text-sm">
+            <label for="users-page-size" class="font-medium">
+              Rows per page
+            </label>
+            <select scPaginationPageSizeSelect id="users-page-size">
+              @for (size of [5, 10, 20]; track size) {
+                <option [value]="size">{{ size }}</option>
+              }
+            </select>
+          </div>
+          <span class="text-sm font-medium" aria-live="polite">
+            Page {{ pagination.currentPage() }} of
+            {{ pagination.totalPages() }}
+          </span>
+          <ul scPaginationList>
+            <li scPaginationItem>
+              <button scPaginationFirst variant="outline" size="icon-sm">
+                <svg siChevronsLeftIcon></svg>
+              </button>
+            </li>
+            <li scPaginationItem>
+              <button scPaginationPrevious variant="outline" size="icon-sm">
+                <svg siChevronLeftIcon></svg>
+              </button>
+            </li>
+            <li scPaginationItem>
+              <button scPaginationNext variant="outline" size="icon-sm">
+                <svg siChevronRightIcon></svg>
+              </button>
+            </li>
+            <li scPaginationItem>
+              <button scPaginationLast variant="outline" size="icon-sm">
+                <svg siChevronsRightIcon></svg>
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
 export class FeaturedDataTableDemo {
-  readonly data = SAMPLE_DATA;
+  readonly table = injectTable(() => ({
+    features,
+    columns,
+    data: SAMPLE_DATA,
+    getRowId: (user) => String(user.id),
+    initialState: { pagination: { pageIndex: 0, pageSize: 5 } },
+  }));
 
-  readonly columns: ColumnDef<User>[] = [
-    { id: 'name', header: 'Name', accessorKey: 'name', enableSorting: true },
-    { id: 'email', header: 'Email', accessorKey: 'email', enableSorting: true },
-    { id: 'role', header: 'Role', accessorKey: 'role', enableSorting: true },
-    {
-      id: 'status',
-      header: 'Status',
-      accessorKey: 'status',
-      enableSorting: true,
-    },
-    {
-      id: 'createdAt',
-      header: 'Created',
-      accessorKey: 'createdAt',
-      enableSorting: true,
-    },
-  ];
+  readonly selectedCount = computed(
+    () => Object.keys(this.table.atoms.rowSelection.get()).length,
+  );
 
-  getRoleBadgeClass(role: string): string {
-    switch (role) {
-      case 'Admin':
-        return 'bg-purple-50 text-purple-700 ring-purple-700/10 dark:bg-purple-400/10 dark:text-purple-400 dark:ring-purple-400/20';
-      case 'Editor':
-        return 'bg-blue-50 text-blue-700 ring-blue-700/10 dark:bg-blue-400/10 dark:text-blue-400 dark:ring-blue-400/20';
-      default:
-        return 'bg-gray-50 text-gray-600 ring-gray-500/10 dark:bg-gray-400/10 dark:text-gray-400 dark:ring-gray-400/20';
-    }
+  roleVariant(role: string): 'default' | 'secondary' | 'outline' {
+    return role === 'Admin'
+      ? 'default'
+      : role === 'Editor'
+        ? 'secondary'
+        : 'outline';
   }
 
-  getStatusBadgeClass(status: string): string {
-    switch (status) {
-      case 'active':
-        return 'bg-green-50 text-green-700 dark:bg-green-500/10 dark:text-green-400';
-      case 'inactive':
-        return 'bg-gray-100 text-gray-700 dark:bg-gray-500/10 dark:text-gray-400';
-      case 'pending':
-        return 'bg-yellow-50 text-yellow-700 dark:bg-yellow-500/10 dark:text-yellow-400';
-      default:
-        return 'bg-gray-100 text-gray-700';
-    }
-  }
-
-  getStatusDotClass(status: string): string {
-    switch (status) {
-      case 'active':
-        return 'bg-green-500';
-      case 'inactive':
-        return 'bg-gray-400';
-      case 'pending':
-        return 'bg-yellow-500';
-      default:
-        return 'bg-gray-400';
-    }
+  statusVariant(status: User['status']): 'default' | 'secondary' | 'outline' {
+    return status === 'active'
+      ? 'default'
+      : status === 'pending'
+        ? 'secondary'
+        : 'outline';
   }
 
   formatDate(date: Date): string {
     return date.toLocaleDateString('en-US', {
-      year: 'numeric',
       month: 'short',
       day: 'numeric',
+      year: 'numeric',
     });
   }
 }`;

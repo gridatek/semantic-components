@@ -18,6 +18,9 @@ test.describe('TanStack data table (v9)', () => {
     });
     await page.goto('/data-table');
     await expect(bodyRows(page).first()).toBeVisible();
+    // Server-rendered: interact only once hydration is done (Angular removes
+    // its `ngh` markers), or early clicks are reset.
+    await page.waitForFunction(() => !document.querySelector('[ngh]'));
   });
 
   test.afterEach(() => {
@@ -86,16 +89,16 @@ test.describe('TanStack data table (v9)', () => {
 
     await rowBoxes.first().check();
     await expect(headerBox).not.toBeChecked();
-    expect(
-      await headerBox.evaluate((b: HTMLInputElement) => b.indeterminate),
-    ).toBe(true);
+    await expect
+      .poll(() => headerBox.evaluate((b: HTMLInputElement) => b.indeterminate))
+      .toBe(true);
 
     await headerBox.check();
     await expect(rowBoxes.nth(5)).toBeChecked();
     // All selected: checked, not indeterminate (v9 "some" includes "all").
-    expect(
-      await headerBox.evaluate((b: HTMLInputElement) => b.indeterminate),
-    ).toBe(false);
+    await expect
+      .poll(() => headerBox.evaluate((b: HTMLInputElement) => b.indeterminate))
+      .toBe(false);
     await expect(page.getByText(/10 of 10 row\(s\) selected/)).toBeVisible();
   });
 

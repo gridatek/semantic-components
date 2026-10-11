@@ -1,8 +1,7 @@
 import type { Table } from '@tanstack/angular-table';
-import { Component, ViewEncapsulation, computed, input } from '@angular/core';
+import { Component, ViewEncapsulation, input } from '@angular/core';
 import {
   ScPagination,
-  type ScPaginationChange,
   ScPaginationEllipsis,
   ScPaginationFirst,
   ScPaginationItem,
@@ -13,6 +12,7 @@ import {
   ScPaginationPageSizeSelect,
   ScPaginationPrevious,
 } from '@semantic-components/ui';
+import { ScDataTablePagination } from '@semantic-components/ui-lab';
 import {
   SiChevronLeftIcon,
   SiChevronRightIcon,
@@ -37,6 +37,7 @@ import type { User } from './user.service';
     ScPaginationLast,
     ScPaginationEllipsis,
     ScPaginationPageSizeSelect,
+    ScDataTablePagination,
     SiChevronsLeftIcon,
     SiChevronLeftIcon,
     SiChevronRightIcon,
@@ -47,17 +48,15 @@ import type { User } from './user.service';
   template: `
     <div
       scPagination
+      scDataTablePagination
       #pagination="scPagination"
-      [currentPage]="currentPage()"
-      [pageSize]="pageSize()"
-      [totalItems]="totalItems()"
+      [table]="table()"
       [pageSizes]="pageSizeOptions()"
-      (change)="onPageChange($event)"
       class="flex items-center justify-between py-4"
     >
       <div class="text-muted-foreground flex items-center gap-2 text-sm">
-        <span>Rows per page:</span>
-        <select scPaginationPageSizeSelect>
+        <label for="users-page-size">Rows per page:</label>
+        <select scPaginationPageSizeSelect id="users-page-size">
           @for (size of pageSizeOptions(); track size) {
             <option [value]="size">{{ size }}</option>
           }
@@ -65,8 +64,8 @@ import type { User } from './user.service';
       </div>
 
       <div class="flex items-center gap-2 text-sm">
-        <span class="text-muted-foreground">
-          Page {{ currentPage() }} of {{ table().getPageCount() }}
+        <span class="text-muted-foreground" aria-live="polite">
+          Page {{ pagination.currentPage() }} of {{ pagination.totalPages() }}
         </span>
         <ul scPaginationList>
           <li scPaginationItem>
@@ -122,19 +121,4 @@ import type { User } from './user.service';
 export class DataTablePagination {
   readonly table = input.required<Table<DataTableFeatures, User>>();
   readonly pageSizeOptions = input<number[]>([5, 10, 20, 30]);
-
-  readonly currentPage = computed(
-    () => this.table().atoms.pagination.get().pageIndex + 1,
-  );
-  readonly pageSize = computed(
-    () => this.table().atoms.pagination.get().pageSize,
-  );
-  readonly totalItems = computed(
-    () => this.table().getFilteredRowModel().rows.length,
-  );
-
-  onPageChange(event: ScPaginationChange): void {
-    this.table().setPageIndex(event.page - 1);
-    this.table().setPageSize(event.pageSize);
-  }
 }

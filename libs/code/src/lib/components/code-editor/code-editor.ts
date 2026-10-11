@@ -1,4 +1,4 @@
-﻿import { Component, ViewEncapsulation, computed, input } from '@angular/core';
+import { Component, ViewEncapsulation, computed, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
 @Component({

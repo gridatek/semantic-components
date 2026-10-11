@@ -1,4 +1,4 @@
-﻿import type { ColumnPinningState } from '@tanstack/angular-table';
+import type { ColumnPinningState } from '@tanstack/angular-table';
 import { Component, ViewEncapsulation, input, output } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
 

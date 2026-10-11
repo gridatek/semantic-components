@@ -1,4 +1,4 @@
-﻿import { NgComponentOutlet } from '@angular/common';
+import { NgComponentOutlet } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ScDock, ScDockItem, ScDockItems } from '@semantic-components/ui-lab';
 import type { DockItem } from '@semantic-components/ui-lab';

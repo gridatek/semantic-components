@@ -18,7 +18,7 @@ import { NativeDialogDemo } from './native-dialog-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class NativeDialogDemoContainer {
-  readonly code = `﻿import { Component, ViewEncapsulation, signal } from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScButton, ScInput, ScLabel } from '@semantic-components/ui';
 import {
   ScNativeDialog,

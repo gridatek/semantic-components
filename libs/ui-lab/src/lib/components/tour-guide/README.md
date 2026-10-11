@@ -1,24 +1,24 @@
-﻿# Tour Guide
+# Tour Guide
 
-Step-by-step UI tour component for user onboarding and feature discovery. Fully composable â€” pick only the pieces you need.
+Step-by-step UI tour component for user onboarding and feature discovery. Fully composable — pick only the pieces you need.
 
 ## Parts
 
-| Part                     | Selector                     | Type      | Description                             |
-| ------------------------ | ---------------------------- | --------- | --------------------------------------- |
-| `ScTourGuide`            | `div[scTourGuide]`           | Directive | Root overlay â€” provides state context |
-| `ScTourGuideMask`        | `svg[scTourGuideMask]`       | Component | SVG overlay with spotlight cutout       |
-| `ScTourGuideHighlight`   | `div[scTourGuideHighlight]`  | Component | Animated highlight border               |
-| `ScTourGuideTooltip`     | `div[scTourGuideTooltip]`    | Directive | Positioned tooltip container            |
-| `ScTourGuideClose`       | `button[scTourGuideClose]`   | Directive | Close button                            |
-| `ScTourGuideStepNumber`  | `[scTourGuideStepNumber]`    | Directive | Step number badge                       |
-| `ScTourGuideTitle`       | `h3[scTourGuideTitle]`       | Directive | Step title                              |
-| `ScTourGuideDescription` | `p[scTourGuideDescription]`  | Directive | Step description                        |
-| `ScTourGuideProgress`    | `div[scTourGuideProgress]`   | Component | Progress bar                            |
-| `ScTourGuideNavigation`  | `div[scTourGuideNavigation]` | Directive | Navigation footer                       |
-| `ScTourGuideCounter`     | `[scTourGuideCounter]`       | Directive | "X of Y" counter text                   |
-| `ScTourGuideAction`      | `button[scTourGuideAction]`  | Directive | Navigation button (prev/next/finish)    |
-| `TourService`            | â€”                          | Service   | Singleton service for tour control      |
+| Part                     | Selector                     | Type      | Description                           |
+| ------------------------ | ---------------------------- | --------- | ------------------------------------- |
+| `ScTourGuide`            | `div[scTourGuide]`           | Directive | Root overlay — provides state context |
+| `ScTourGuideMask`        | `svg[scTourGuideMask]`       | Component | SVG overlay with spotlight cutout     |
+| `ScTourGuideHighlight`   | `div[scTourGuideHighlight]`  | Component | Animated highlight border             |
+| `ScTourGuideTooltip`     | `div[scTourGuideTooltip]`    | Directive | Positioned tooltip container          |
+| `ScTourGuideClose`       | `button[scTourGuideClose]`   | Directive | Close button                          |
+| `ScTourGuideStepNumber`  | `[scTourGuideStepNumber]`    | Directive | Step number badge                     |
+| `ScTourGuideTitle`       | `h3[scTourGuideTitle]`       | Directive | Step title                            |
+| `ScTourGuideDescription` | `p[scTourGuideDescription]`  | Directive | Step description                      |
+| `ScTourGuideProgress`    | `div[scTourGuideProgress]`   | Component | Progress bar                          |
+| `ScTourGuideNavigation`  | `div[scTourGuideNavigation]` | Directive | Navigation footer                     |
+| `ScTourGuideCounter`     | `[scTourGuideCounter]`       | Directive | "X of Y" counter text                 |
+| `ScTourGuideAction`      | `button[scTourGuideAction]`  | Directive | Navigation button (prev/next/finish)  |
+| `TourService`            | —                            | Service   | Singleton service for tour control    |
 
 ## Usage
 
@@ -206,8 +206,8 @@ interface TourOptions {
 
 | Key     | Action                                              |
 | ------- | --------------------------------------------------- |
-| `â†’`   | Next step                                           |
-| `â†`    | Previous step                                       |
+| `→`     | Next step                                           |
+| `←`     | Previous step                                       |
 | `Enter` | Next step / Finish (when the step dialog has focus) |
 | `Esc`   | Close tour                                          |
 
@@ -215,5 +215,5 @@ interface TourOptions {
 
 - Each step is a `role="dialog"` (`aria-modal`) named by the step title.
 - When the tour starts, focus moves to the step dialog and Tab is trapped inside the tour; on every step change focus moves to the new step so it is announced. When the tour ends, focus returns to the element that started it.
-- Escape closes the tour (when `allowClose`); â† / â†’ go to the previous / next step; Enter goes to the next step only when the dialog itself has focus â€” on a button, Enter activates that button.
+- Escape closes the tour (when `allowClose`); ← / → go to the previous / next step; Enter goes to the next step only when the dialog itself has focus — on a button, Enter activates that button.
 - `TourService` is a root singleton. If a page has more than one independent tour, provide it per component (`providers: [TourService]`), otherwise every tour opens at once.

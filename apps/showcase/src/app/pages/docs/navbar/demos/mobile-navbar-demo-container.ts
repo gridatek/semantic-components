@@ -1,4 +1,4 @@
-﻿import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 
 @Component({
@@ -18,7 +18,7 @@ import { DemoContainer } from '../../../../components/demo-container/demo-contai
   encapsulation: ViewEncapsulation.None,
 })
 export class MobileNavbarDemoContainer {
-  readonly code = `﻿import { Component, ViewEncapsulation, signal } from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScNavbar,
   ScNavbarActions,

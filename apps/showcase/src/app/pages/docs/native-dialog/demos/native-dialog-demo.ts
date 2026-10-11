@@ -1,4 +1,4 @@
-﻿import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScButton, ScInput, ScLabel } from '@semantic-components/ui';
 import {
   ScNativeDialog,

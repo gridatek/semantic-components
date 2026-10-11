@@ -16,7 +16,7 @@ import { DemoContainer } from '../../../../components/demo-container/demo-contai
   encapsulation: ViewEncapsulation.None,
 })
 export class FloatingSidebarDemoContainer {
-  readonly code = `﻿import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScSidebar,
   ScSidebarBody,

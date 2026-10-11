@@ -1,4 +1,4 @@
-﻿import { FocusTrap, FocusTrapFactory } from '@angular/cdk/a11y';
+import { FocusTrap, FocusTrapFactory } from '@angular/cdk/a11y';
 import {
   DestroyRef,
   Directive,

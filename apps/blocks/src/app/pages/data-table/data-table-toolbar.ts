@@ -12,35 +12,46 @@ import {
   ScCheckboxField,
   ScInput,
 } from '@semantic-components/ui';
+import {
+  ScDataTableColumnVisibility,
+  ScDataTableGlobalFilter,
+} from '@semantic-components/ui-lab';
 import type { DataTableFeatures } from './data-table-features';
 import type { User } from './user.service';
 
 @Component({
   selector: 'app-data-table-toolbar',
   encapsulation: ViewEncapsulation.None,
-  imports: [ScButton, ScCheckbox, ScCheckboxField, ScInput],
+  imports: [
+    ScButton,
+    ScCheckbox,
+    ScCheckboxField,
+    ScInput,
+    ScDataTableColumnVisibility,
+    ScDataTableGlobalFilter,
+  ],
   host: { class: 'mb-4 flex flex-wrap items-center gap-4' },
   template: `
     <!-- Global Filter -->
     <input
       scInput
-      type="text"
-      [value]="globalFilter()"
-      (input)="globalFilterChange.emit($any($event.target).value)"
+      scDataTableGlobalFilter
+      [table]="table()"
       placeholder="Search all columns..."
+      aria-label="Search all columns"
     />
 
     <!-- Column Visibility -->
-    <div class="flex items-center gap-2">
-      <span class="text-sm font-medium">Columns:</span>
+    <div class="flex items-center gap-2" role="group" aria-label="Columns">
+      <span class="text-sm font-medium" aria-hidden="true">Columns:</span>
       @for (column of table().getAllLeafColumns(); track column.id) {
         @if (column.id !== 'select' && column.id !== 'expand') {
           <label scCheckboxField class="text-sm">
             <input
               type="checkbox"
               scCheckbox
-              [checked]="column.getIsVisible()"
-              (change)="column.toggleVisibility()"
+              scDataTableColumnVisibility
+              [column]="column"
             />
             {{ column.id }}
           </label>
@@ -56,6 +67,7 @@ import type { User } from './user.service';
           scButton
           [variant]="isGroupedBy(group) ? 'default' : 'outline'"
           size="sm"
+          [attr.aria-pressed]="isGroupedBy(group)"
           (click)="toggleGroup(group)"
         >
           {{ group }}
@@ -74,8 +86,6 @@ import type { User } from './user.service';
 })
 export class DataTableToolbar {
   readonly table = input.required<Table<DataTableFeatures, User>>();
-  readonly globalFilter = input<string>('');
-  readonly globalFilterChange = output<string>();
   readonly grouping = input<string[]>([]);
   readonly groupingChange = output<string[]>();
 

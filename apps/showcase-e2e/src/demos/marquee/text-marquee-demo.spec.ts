@@ -1,4 +1,4 @@
-﻿import { expect, test } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 import { collectErrors } from '../../interaction';
 
 test.describe('Text Marquee Demo', () => {

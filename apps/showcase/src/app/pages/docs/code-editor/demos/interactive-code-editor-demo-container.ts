@@ -18,7 +18,7 @@ import { InteractiveCodeEditorDemo } from './interactive-code-editor-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class InteractiveCodeEditorDemoContainer {
-  readonly code = `﻿import { Component, ViewEncapsulation, signal } from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCodeEditor,
   ScCodeEditorContent,

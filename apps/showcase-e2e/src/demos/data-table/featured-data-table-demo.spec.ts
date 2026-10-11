@@ -36,7 +36,7 @@ test.describe('Featured Data Table Demo', () => {
 
   test('pagination pages through filtered, sorted data', async ({ page }) => {
     await expect(page.getByText('Page 1 of 3')).toBeVisible();
-    await page.getByRole('button', { name: 'Next page' }).click();
+    await page.getByRole('button', { name: 'Go to next page' }).click();
     await expect(page.getByText('Page 2 of 3')).toBeVisible();
     await expect(page.locator('tbody tr').first()).toContainText(
       'Diana Miller',
@@ -52,8 +52,8 @@ test.describe('Featured Data Table Demo', () => {
       .getByRole('columnheader', { name: 'Name' })
       .getByRole('button')
       .click();
-    await page.getByRole('button', { name: 'Next page' }).click();
-    await page.getByRole('button', { name: 'Next page' }).click();
+    await page.getByRole('button', { name: 'Go to next page' }).click();
+    await page.getByRole('button', { name: 'Go to next page' }).click();
     await expect(page.getByLabel('Select John Doe')).toBeChecked();
     await expect(page.getByText('1 of 12 row(s) selected.')).toBeVisible();
   });
