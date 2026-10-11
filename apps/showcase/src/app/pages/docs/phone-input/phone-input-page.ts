@@ -17,7 +17,8 @@ import { CountrySelectorPhoneInputDemoContainer } from './demos/country-selector
       <div class="space-y-2">
         <h1 scHeading>Phone Input</h1>
         <p class="text-muted-foreground">
-          Phone number input with country code selector and formatting options.
+          An international phone number: a country picker and a number field
+          that formats as you type. The value is the full number (+33612345678).
         </p>
         <app-component-badges path="phone-input" />
       </div>

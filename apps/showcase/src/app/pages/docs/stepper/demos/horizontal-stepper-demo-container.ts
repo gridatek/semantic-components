@@ -164,8 +164,7 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
         <div scStepperPanel [step]="2">
           <div scFieldGroup>
             <p class="text-muted-foreground text-sm">
-              Review your information and click submit to complete
-              registration.
+              Review your information and click submit to complete registration.
             </p>
             <dl
               class="bg-muted grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 rounded-lg p-4 text-sm"
