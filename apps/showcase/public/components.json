@@ -40,20 +40,12 @@
     "category": "Layout"
   },
   {
-    "name": "Select On Focus",
-    "path": "select-on-focus",
-    "description": "A directive that automatically selects input text on programmatic focus.",
+    "name": "Attachment",
+    "path": "attachment",
+    "description": "Show a file alongside its upload state, on its own or in a scrollable row.",
     "status": "Experimental",
-    "library": "ui",
-    "category": "Utilities"
-  },
-  {
-    "name": "Autocomplete",
-    "path": "autocomplete",
-    "description": "An input with autocomplete suggestions.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Forms"
+    "library": "ui-lab",
+    "category": "Data Display"
   },
   {
     "name": "Audio Player",
@@ -62,6 +54,14 @@
     "status": "Experimental",
     "library": "ui-lab",
     "category": "Media"
+  },
+  {
+    "name": "Autocomplete",
+    "path": "autocomplete",
+    "description": "An input with autocomplete suggestions.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Forms"
   },
   {
     "name": "Avatar",
@@ -94,6 +94,14 @@
     "status": "Experimental",
     "library": "ui",
     "category": "Navigation"
+  },
+  {
+    "name": "Bubble",
+    "path": "bubble",
+    "description": "A single message in a conversation, aligned to either side and optionally carrying reactions.",
+    "status": "Experimental",
+    "library": "ui-lab",
+    "category": "Data Display"
   },
   {
     "name": "Button",
@@ -464,6 +472,14 @@
     "category": "Buttons & Actions"
   },
   {
+    "name": "Marker",
+    "path": "marker",
+    "description": "Label a point in a list or feed: a date divider, an unread boundary, or a short inline note.",
+    "status": "Experimental",
+    "library": "ui-lab",
+    "category": "Data Display"
+  },
+  {
     "name": "Marquee",
     "path": "marquee",
     "description": "A scrolling text or content animation.",
@@ -504,9 +520,33 @@
     "category": "Navigation"
   },
   {
+    "name": "Message",
+    "path": "message",
+    "description": "A row in a conversation: an avatar beside a column of bubbles, with an optional header and footer.",
+    "status": "Experimental",
+    "library": "ui-lab",
+    "category": "Data Display"
+  },
+  {
     "name": "Multiselect",
     "path": "multiselect",
     "description": "A select component for multiple selections.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Forms"
+  },
+  {
+    "name": "Native Dialog",
+    "path": "native-dialog",
+    "description": "A modal dialog built on the native HTML dialog element.",
+    "status": "Experimental",
+    "library": "ui-lab",
+    "category": "Feedback"
+  },
+  {
+    "name": "Native Select",
+    "path": "native-select",
+    "description": "A styled native select element with a custom chevron icon.",
     "status": "Experimental",
     "library": "ui",
     "category": "Forms"
@@ -528,22 +568,6 @@
     "category": "Navigation"
   },
   {
-    "name": "Native Dialog",
-    "path": "native-dialog",
-    "description": "A modal dialog built on the native HTML dialog element.",
-    "status": "Experimental",
-    "library": "ui-lab",
-    "category": "Feedback"
-  },
-  {
-    "name": "Native Select",
-    "path": "native-select",
-    "description": "A styled native select element with a custom chevron icon.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Forms"
-  },
-  {
     "name": "Notification Center",
     "path": "notification-center",
     "description": "Grouped notification management with filtering.",
@@ -560,14 +584,6 @@
     "category": "Forms"
   },
   {
-    "name": "OTP",
-    "path": "otp",
-    "description": "An input for entering one-time passwords.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Forms"
-  },
-  {
     "name": "Org Chart",
     "path": "org-chart",
     "description": "Hierarchical organization visualization.",
@@ -576,12 +592,12 @@
     "category": "Data Display"
   },
   {
-    "name": "PDF Viewer",
-    "path": "pdf-viewer",
-    "description": "Document viewer with navigation and zoom controls.",
+    "name": "OTP",
+    "path": "otp",
+    "description": "An input for entering one-time passwords.",
     "status": "Experimental",
-    "library": "ui-lab",
-    "category": "Media"
+    "library": "ui",
+    "category": "Forms"
   },
   {
     "name": "Pagination",
@@ -598,6 +614,14 @@
     "status": "Experimental",
     "library": "ui",
     "category": "Forms"
+  },
+  {
+    "name": "PDF Viewer",
+    "path": "pdf-viewer",
+    "description": "Document viewer with navigation and zoom controls.",
+    "status": "Experimental",
+    "library": "ui-lab",
+    "category": "Media"
   },
   {
     "name": "Phone Input",
@@ -686,6 +710,14 @@
     "status": "Experimental",
     "library": "ui",
     "category": "Forms"
+  },
+  {
+    "name": "Select On Focus",
+    "path": "select-on-focus",
+    "description": "A directive that automatically selects input text on programmatic focus.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Utilities"
   },
   {
     "name": "Separator",
