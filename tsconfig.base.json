@@ -23,6 +23,7 @@
       "@semantic-components/carousel": ["libs/carousel/src/index.ts"],
       "@semantic-components/phone-input": ["libs/phone-input/src/index.ts"],
       "@semantic-components/data-table": ["libs/data-table/src/index.ts"],
+      "@semantic-components/qr-code": ["libs/qr-code/src/index.ts"],
       "@semantic-components/editor": ["libs/editor/src/index.ts"],
       "@semantic-components/charts": ["libs/charts/src/index.ts"],
       "@semantic-components/mcp-server": ["libs/mcp-server/src/index.ts"]

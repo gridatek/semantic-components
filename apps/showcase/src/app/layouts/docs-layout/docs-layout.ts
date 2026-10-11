@@ -277,6 +277,17 @@ import { ConfigService } from '../../services/config.service';
                     <li scSidebarMenuSubItem>
                       <a
                         scSidebarMenuSubButton
+                        routerLink="/docs/getting-started/qr-code"
+                        routerLinkActive
+                        #qrCodeRla="routerLinkActive"
+                        [isActive]="qrCodeRla.isActive"
+                      >
+                        <span>QR Code</span>
+                      </a>
+                    </li>
+                    <li scSidebarMenuSubItem>
+                      <a
+                        scSidebarMenuSubButton
                         routerLink="/docs/getting-started/code"
                         routerLinkActive
                         #codeRla="routerLinkActive"

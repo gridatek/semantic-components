@@ -19,7 +19,7 @@ import { ColorsQrCodeDemo } from './colors-qr-code-demo';
 })
 export class ColorsQrCodeDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScQrCode } from '@semantic-components/ui-lab';
+import { ScQrCode } from '@semantic-components/qr-code';
 
 @Component({
   selector: 'app-colors-qr-code-demo',

@@ -19,7 +19,7 @@ import { ErrorCorrectionQrCodeDemo } from './error-correction-qr-code-demo';
 })
 export class ErrorCorrectionQrCodeDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScQrCode, ScQrCodeEcc } from '@semantic-components/ui-lab';
+import { ScQrCode, ScQrCodeEcc } from '@semantic-components/qr-code';
 
 @Component({
   selector: 'app-error-correction-qr-code-demo',

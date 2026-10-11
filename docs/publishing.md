@@ -12,6 +12,7 @@ All libraries are versioned together:
 - `@semantic-components/carousel`
 - `@semantic-components/phone-input`
 - `@semantic-components/data-table`
+- `@semantic-components/qr-code`
 - `@semantic-components/code`
 
 ## Automated Release (CI)

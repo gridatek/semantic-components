@@ -9,6 +9,7 @@ export type ComponentLibrary =
   | 'charts'
   | 'phone-input'
   | 'data-table'
+  | 'qr-code'
   | 'third-party';
 
 export type ComponentCategory =

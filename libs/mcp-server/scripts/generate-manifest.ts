@@ -175,6 +175,7 @@ function main() {
     ['editor', '@semantic-components/editor'],
     ['phone-input', '@semantic-components/phone-input'],
     ['data-table', '@semantic-components/data-table'],
+    ['qr-code', '@semantic-components/qr-code'],
   ];
 
   const visiblePaths = loadVisibleComponentPaths();

@@ -105,6 +105,10 @@ import { ConfigService } from '../../services/config.service';
             — Data table parts for TanStack Table
           </li>
           <li>
+            <strong>&#64;semantic-components/qr-code</strong>
+            — QR codes generated with uqr
+          </li>
+          <li>
             <strong>&#64;semantic-components/code</strong>
             — Code viewer and editor powered by Shiki
           </li>

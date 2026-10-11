@@ -19,7 +19,7 @@ import { SizesQrCodeDemo } from './sizes-qr-code-demo';
 })
 export class SizesQrCodeDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScQrCode } from '@semantic-components/ui-lab';
+import { ScQrCode } from '@semantic-components/qr-code';
 
 @Component({
   selector: 'app-sizes-qr-code-demo',

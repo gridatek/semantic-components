@@ -60,6 +60,11 @@ export const gettingStartedRoutes: Route[] = [
         loadComponent: () => import('../pages/getting-started/data-table.page'),
       },
       {
+        path: 'qr-code',
+        title: 'QR Code - Semantic Components',
+        loadComponent: () => import('../pages/getting-started/qr-code.page'),
+      },
+      {
         path: 'code',
         title: 'Code - Semantic Components',
         loadComponent: () => import('../pages/getting-started/code.page'),
