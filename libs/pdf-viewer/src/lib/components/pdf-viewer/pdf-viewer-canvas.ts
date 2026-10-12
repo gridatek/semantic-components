@@ -33,6 +33,7 @@ import type { ScPdfViewer } from './pdf-viewer';
 import { SC_PDF_VIEWER } from './pdf-viewer';
 import { ScPdfViewerAnnotationToolbar } from './pdf-viewer-annotation-toolbar';
 import { ScPdfViewerCommentMarker } from './pdf-viewer-comment-marker';
+import { ScPdfTextSelection } from './pdf-viewer-text-selection';
 import type { ScPdfComment, ScPdfEditorAnnotation } from './pdf-viewer-types';
 
 const DEFAULT_LINK_REL = 'noopener noreferrer nofollow';
@@ -575,6 +576,8 @@ export class ScPdfViewerCanvas {
   private readonly findTrigger = this.pdfViewer.findTrigger;
 
   private readonly linkService = new PdfLinkService(this.pdfViewer);
+  /** Drag-selecting text as in pdf.js (no jumping to the end of the page). */
+  private readonly textSelection = new ScPdfTextSelection();
 
   private activeRenderTasks = new Map<number, RenderTask>();
   private activeTextLayers = new Map<number, TextLayer>();
@@ -928,6 +931,7 @@ export class ScPdfViewerCanvas {
       document.removeEventListener('pointerup', this.onGlobalPointerUp);
       document.removeEventListener('pointerdown', this.onGlobalPointerDown);
       document.removeEventListener('keydown', this.onAnnotationKeyDown);
+      this.textSelection.destroy();
       this.renderObserver?.disconnect();
       this.visibilityObserver?.disconnect();
       this.resizeObserver?.disconnect();
@@ -1161,6 +1165,10 @@ export class ScPdfViewerCanvas {
       canvas.height = 0;
     }
     this.pdfViewer.pageReleased(pageNumber);
+    const textLayer = container.querySelector<HTMLElement>(
+      `[data-textlayer-page="${pageNumber}"]`,
+    );
+    if (textLayer) this.textSelection.remove(textLayer);
     for (const layer of [
       `[data-textlayer-page="${pageNumber}"]`,
       `[data-annotationlayer-page="${pageNumber}"]`,
@@ -1426,6 +1434,7 @@ export class ScPdfViewerCanvas {
         `[data-textlayer-page="${pageNumber}"]`,
       ) as HTMLDivElement;
       if (textLayerDiv) {
+        this.textSelection.remove(textLayerDiv);
         textLayerDiv.innerHTML = '';
         const scale = this.scaledValue();
         const displayViewport = this.pageViewport(page, scale);
@@ -1440,6 +1449,8 @@ export class ScPdfViewerCanvas {
         this.activeTextLayers.set(pageNumber, textLayer);
         await textLayer.render();
         this.activeTextLayers.delete(pageNumber);
+        // Selecting by dragging behaves as in pdf.js.
+        this.textSelection.add(textLayerDiv);
 
         // Store text layer data for find highlighting
         this.textLayerData.set(pageNumber, {
