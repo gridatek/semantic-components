@@ -132,6 +132,8 @@ export type {
   ScPdfLayer,
   ScPdfAttachment,
   ScPdfPageColors,
+  ScPdfDocumentProperties,
+  ScPdfPaperSize,
   ScPdfZoomLevel,
   ScPdfCursorTool,
   ScPdfScrollMode,

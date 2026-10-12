@@ -1,4 +1,4 @@
-import { NgTemplateOutlet } from '@angular/common';
+import { DatePipe, NgTemplateOutlet } from '@angular/common';
 import {
   Component,
   ViewEncapsulation,
@@ -9,8 +9,10 @@ import {
   viewChild,
 } from '@angular/core';
 import {
+  type ScPdfDocumentProperties,
   type ScPdfEditorMode,
   type ScPdfOutlineItem,
+  type ScPdfPaperSize,
   type ScPdfSidebarView,
   ScPdfViewer,
   ScPdfViewerAddImage,
@@ -195,6 +197,14 @@ import {
   SiZoomOutIcon,
 } from '@semantic-icons/lucide-icons';
 
+/** Your names for the standard paper sizes. */
+const PAPER_NAMES: Record<ScPdfPaperSize, string> = {
+  a3: 'A3',
+  a4: 'A4',
+  letter: 'Letter',
+  legal: 'Legal',
+};
+
 /** The tools in the toolbar's toggle group. */
 const TOOLS: readonly ScPdfEditorMode[] = [
   'highlight',
@@ -230,6 +240,7 @@ const INK_COLORS = [
 @Component({
   selector: 'app-pdf-viewer-demo',
   imports: [
+    DatePipe,
     NgTemplateOutlet,
     ScPdfViewer,
     ScPdfViewerContainer,
@@ -2058,19 +2069,43 @@ const INK_COLORS = [
         </ul>
       </ng-template>
 
-      <!-- Document properties (yours: the data comes from pdf.js) -->
-      <div scDialogProvider [(open)]="documentPropertiesOpen">
+      <!-- Document properties (the viewer reads them; the text is yours) -->
+      <div scDialogProvider scPdfViewerDialog="properties">
         <ng-template scDialogPortal>
           <div scDialog class="sm:max-w-lg">
             <div scDialogHeader>
               <h2 scDialogTitle>Document properties</h2>
             </div>
-            @if (documentProperties(); as props) {
+            @if (viewer.documentProperties(); as props) {
               <dl class="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1.5 text-sm">
-                @for (row of propertyRows(props); track row.label) {
-                  <dt class="text-muted-foreground">{{ row.label }}</dt>
-                  <dd class="break-words">{{ row.value }}</dd>
-                }
+                <dt class="text-muted-foreground">File name</dt>
+                <dd class="break-words">{{ props.fileName }}</dd>
+                <dt class="text-muted-foreground">File size</dt>
+                <dd>{{ fileSize(props.fileSize) }}</dd>
+                <dt class="text-muted-foreground">Title</dt>
+                <dd class="break-words">{{ props.title ?? '—' }}</dd>
+                <dt class="text-muted-foreground">Author</dt>
+                <dd class="break-words">{{ props.author ?? '—' }}</dd>
+                <dt class="text-muted-foreground">Subject</dt>
+                <dd class="break-words">{{ props.subject ?? '—' }}</dd>
+                <dt class="text-muted-foreground">Keywords</dt>
+                <dd class="break-words">{{ props.keywords ?? '—' }}</dd>
+                <dt class="text-muted-foreground">Created</dt>
+                <dd>{{ (props.creationDate | date: 'medium') ?? '—' }}</dd>
+                <dt class="text-muted-foreground">Modified</dt>
+                <dd>{{ (props.modificationDate | date: 'medium') ?? '—' }}</dd>
+                <dt class="text-muted-foreground">Creator</dt>
+                <dd class="break-words">{{ props.creator ?? '—' }}</dd>
+                <dt class="text-muted-foreground">PDF producer</dt>
+                <dd class="break-words">{{ props.producer ?? '—' }}</dd>
+                <dt class="text-muted-foreground">PDF version</dt>
+                <dd>{{ props.version ?? '—' }}</dd>
+                <dt class="text-muted-foreground">Page count</dt>
+                <dd>{{ props.pageCount }}</dd>
+                <dt class="text-muted-foreground">Page size</dt>
+                <dd>{{ pageSize(props.pageSize) }}</dd>
+                <dt class="text-muted-foreground">Fast Web View</dt>
+                <dd>{{ props.linearized ? 'Yes' : 'No' }}</dd>
               </dl>
             } @else {
               <p class="text-muted-foreground text-sm">Loading…</p>
@@ -2104,8 +2139,6 @@ export class PdfViewerDemo {
   readonly sidebarOpen = signal(false);
   readonly sidebarTab = signal<ScPdfSidebarView>('thumbnails');
   readonly signaturesOpen = signal(false);
-  readonly documentPropertiesOpen = signal(false);
-  readonly documentProperties = signal<Record<string, string> | null>(null);
   /** The comment being edited in the list. */
   readonly editingComment = signal<string | null>(null);
   /** The name of a file that couldn't be inserted. */
@@ -2190,85 +2223,24 @@ export class PdfViewerDemo {
         viewer.rotateLeft();
         break;
       case 'properties':
-        this.documentProperties.set(null);
-        this.documentPropertiesOpen.set(true);
-        this.loadDocumentProperties();
+        viewer.openProperties();
         break;
     }
   }
 
-  protected propertyRows(
-    props: Record<string, string>,
-  ): { label: string; value: string }[] {
-    return Object.entries(props).map(([label, value]) => ({ label, value }));
-  }
-
-  private parsePdfDate(dateStr: string): string {
-    const match = dateStr.match(/D:(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})/);
-    if (!match) return dateStr || '—';
-    const [, year, month, day, hour, minute, second] = match;
-    return new Date(
-      Number(year),
-      Number(month) - 1,
-      Number(day),
-      Number(hour),
-      Number(minute),
-      Number(second),
-    ).toLocaleString();
-  }
-
-  private formatFileSize(bytes: number): string {
+  protected fileSize(bytes: number | null): string {
+    if (bytes === null) return '—';
     if (bytes < 1024) return `${bytes} B`;
     if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
     return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
   }
 
-  private async loadDocumentProperties(): Promise<void> {
-    const viewer = this.viewerRef();
-    const doc = viewer?.pdfDocument();
-    if (!viewer || !doc) return;
-
-    try {
-      const metadata = await doc.getMetadata();
-      const info = (metadata.info ?? {}) as Record<string, string>;
-
-      let fileSize = '—';
-      try {
-        const { length } = await doc.getDownloadInfo();
-        if (length > 0) fileSize = this.formatFileSize(length);
-      } catch {
-        // Not available.
-      }
-
-      let pageSize = '—';
-      try {
-        const page = await doc.getPage(viewer.currentPage());
-        const { width, height } = page.getViewport({ scale: 1 });
-        const inches = (v: number) => (v / 72).toFixed(2);
-        const mm = (v: number) => ((v / 72) * 25.4).toFixed(0);
-        pageSize = `${inches(width)} × ${inches(height)} in (${mm(width)} × ${mm(height)} mm)`;
-      } catch {
-        // Not available.
-      }
-
-      this.documentProperties.set({
-        'File name': this.fileName() || '—',
-        'File size': fileSize,
-        Title: info['Title'] || '—',
-        Author: info['Author'] || '—',
-        Subject: info['Subject'] || '—',
-        Keywords: info['Keywords'] || '—',
-        Created: this.parsePdfDate(info['CreationDate'] ?? ''),
-        Modified: this.parsePdfDate(info['ModDate'] ?? ''),
-        Creator: info['Creator'] || '—',
-        Producer: info['Producer'] || '—',
-        'PDF version': info['PDFFormatVersion'] || '—',
-        Pages: String(doc.numPages),
-        'Page size': pageSize,
-        Linearized: info['IsLinearized'] ? 'Yes' : 'No',
-      });
-    } catch {
-      this.documentProperties.set({ Error: "Couldn't read the properties." });
-    }
+  /** E.g. "8.27 × 11.69 in (210 × 297 mm, A4, portrait)". */
+  protected pageSize(size: ScPdfDocumentProperties['pageSize']): string {
+    if (!size) return '—';
+    const inches = (points: number) => (points / 72).toFixed(2);
+    const mm = (points: number) => ((points / 72) * 25.4).toFixed(0);
+    const paper = size.paper ? `${PAPER_NAMES[size.paper]}, ` : '';
+    return `${inches(size.width)} × ${inches(size.height)} in (${mm(size.width)} × ${mm(size.height)} mm, ${paper}${size.orientation})`;
   }
 }

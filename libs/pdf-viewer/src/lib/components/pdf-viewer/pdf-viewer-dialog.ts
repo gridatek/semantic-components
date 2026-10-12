@@ -11,7 +11,7 @@ import { SC_PDF_VIEWER } from './pdf-viewer';
 
 /** The viewer's dialogs. */
 export type ScPdfViewerDialogKind =
-  'password' | 'print' | 'signature' | 'altText';
+  'password' | 'print' | 'signature' | 'altText' | 'properties';
 
 /**
  * Opens a `scDialogProvider` when the viewer needs that dialog, and tells the
@@ -20,7 +20,9 @@ export type ScPdfViewerDialogKind =
  * - `password` — a protected document; closing gives up on it;
  * - `print` — pages being prepared for print; closing cancels the print;
  * - `signature` — creating a signature (`viewer.openSignatureDialog()`);
- * - `altText` — an image annotation's alt text (`viewer.openAltText(id)`).
+ * - `altText` — an image annotation's alt text (`viewer.openAltText(id)`);
+ * - `properties` — the document's properties (`viewer.openProperties()`,
+ *   then `viewer.documentProperties()`).
  *
  * Write the dialog and its content.
  */
@@ -53,6 +55,8 @@ export class ScPdfViewerDialog {
         return viewer.signatureDialogOpen();
       case 'altText':
         return viewer.altTextDialogOpen();
+      case 'properties':
+        return viewer.propertiesDialogOpen();
     }
   });
 
@@ -82,6 +86,9 @@ export class ScPdfViewerDialog {
           break;
         case 'altText':
           viewer.closeAltText();
+          break;
+        case 'properties':
+          viewer.closeProperties();
           break;
       }
     });

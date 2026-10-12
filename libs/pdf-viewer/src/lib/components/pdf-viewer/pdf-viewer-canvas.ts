@@ -204,6 +204,9 @@ export class ScPdfViewerCanvas {
   private readonly pageCount = computed(() => this.pageLayouts().length);
   /** A navigation waiting for the pages to be laid out. */
   private pendingNavigation: { page: number; top: number } | null = null;
+  /** Where a navigation is scrolling to, until it gets there. */
+  private scrollTarget: { page: number; top: number } | null = null;
+  private scrollTargetTimeout: ReturnType<typeof setTimeout> | undefined;
 
   /** Rotated a quarter turn: the page's width and height swap on screen. */
   protected readonly sideways = computed(() => this.rotation() % 180 !== 0);
@@ -394,7 +397,7 @@ export class ScPdfViewerCanvas {
     // Navigate to page when navigateTrigger changes
     effect(() => {
       this.navigateTrigger();
-      const page = untracked(() => this.pdfViewer.currentPage());
+      const page = untracked(() => this.pdfViewer.navigatePage());
       const top = untracked(() => this.pdfViewer.navigateTop());
       const smooth = untracked(() => this.pdfViewer.navigateSmooth());
 
@@ -576,6 +579,18 @@ export class ScPdfViewerCanvas {
     this.pendingNavigation = null;
     const mode = this.pdfViewer.scrollMode();
 
+    // Until the scroll ends, where it's going is where the pages are
+    // (Back / Forward remember it, not a page passed on the way).
+    const target = { page, top };
+    this.scrollTarget = target;
+    clearTimeout(this.scrollTargetTimeout);
+    const settled = () => {
+      if (this.scrollTarget === target) this.scrollTarget = null;
+    };
+    container.addEventListener('scrollend', settled, { once: true });
+    // No scroll at all (already there) fires no scrollend.
+    this.scrollTargetTimeout = setTimeout(settled, 1000);
+
     // A position on the page (a destination's top) — in page units, so only
     // meaningful upright or upside down.
     const rotation = this.rotation();
@@ -647,6 +662,7 @@ export class ScPdfViewerCanvas {
    * it the viewport's top is (in page units, as `scrollToPage` takes it).
    */
   private location(): { page: number; top: number } {
+    if (this.scrollTarget) return this.scrollTarget;
     const page = this.pdfViewer.currentPage();
     const container = this.scrollContainer()?.nativeElement;
     const pageEl = container?.querySelector<HTMLElement>(

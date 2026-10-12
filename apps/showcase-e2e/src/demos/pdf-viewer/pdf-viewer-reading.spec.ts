@@ -62,6 +62,27 @@ test.describe('PDF Viewer reading', () => {
     expect(errors).toEqual([]);
   });
 
+  test('document properties', async ({ page }) => {
+    const errors = collectErrors(page);
+    await openPdf(page, 'find.pdf', findPdf());
+    await page.getByRole('button', { name: 'More' }).click();
+    await page.getByRole('menuitem', { name: 'Document properties…' }).click();
+    const dialog = page.getByRole('dialog', { name: 'Document properties' });
+    await expect(dialog).toBeVisible();
+    const value = (term: string) =>
+      dialog.locator(`dt:text-is("${term}") + dd`);
+    await expect(value('File name')).toHaveText('find.pdf');
+    await expect(value('Page count')).toHaveText('1');
+    await expect(value('PDF version')).toHaveText('1.7');
+    // 612 × 792 points.
+    await expect(value('Page size')).toHaveText(
+      '8.50 × 11.00 in (216 × 279 mm, Letter, portrait)',
+    );
+    await dialog.getByRole('button', { name: 'Close' }).click();
+    await expect(dialog).toBeHidden();
+    expect(errors).toEqual([]);
+  });
+
   test.describe('on a dense screen', () => {
     test.use({ deviceScaleFactor: 2 });
 
@@ -94,11 +115,28 @@ test.describe('PDF Viewer reading', () => {
 
   test('high contrast mode: pages are drawn in the system colours', async ({
     page,
+    browserName,
   }) => {
+    test.skip(
+      browserName === 'webkit',
+      "pdf.js draws page colours with a canvas filter, which WebKit's canvas doesn't apply",
+    );
     const errors = collectErrors(page);
     await page.emulateMedia({ forcedColors: 'active', colorScheme: 'dark' });
     await openPdf(page, 'find.pdf', findPdf());
-    // The page's background: the system's dark Canvas, not white.
+    // The page's background: the system's Canvas colour (black in a dark
+    // scheme where the browser emulates it; Firefox keeps it white).
+    const canvasColour = await page.evaluate(() => {
+      const probe = document.createElement('canvas');
+      const context = probe.getContext('2d') as CanvasRenderingContext2D;
+      const div = document.createElement('div');
+      div.style.color = 'Canvas';
+      document.body.append(div);
+      context.fillStyle = getComputedStyle(div).color;
+      div.remove();
+      context.fillRect(0, 0, 1, 1);
+      return Array.from(context.getImageData(0, 0, 1, 1).data.slice(0, 3));
+    });
     await expect
       .poll(() =>
         page.evaluate(() => {
@@ -109,7 +147,7 @@ test.describe('PDF Viewer reading', () => {
           return pixel ? Array.from(pixel.slice(0, 3)) : null;
         }),
       )
-      .toEqual([0, 0, 0]);
+      .toEqual(canvasColour);
     expect(errors).toEqual([]);
   });
 });

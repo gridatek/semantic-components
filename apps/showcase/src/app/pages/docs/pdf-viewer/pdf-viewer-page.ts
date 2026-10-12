@@ -6,6 +6,7 @@ import { PdfViewerDemoContainer } from './demos/pdf-viewer-demo-container';
 import { PdfViewerFormDemoContainer } from './demos/pdf-viewer-form-demo-container';
 import { PdfViewerOpenParametersDemoContainer } from './demos/pdf-viewer-open-parameters-demo-container';
 import { PdfViewerPresentationDemoContainer } from './demos/pdf-viewer-presentation-demo-container';
+import { PdfViewerReadingDemoContainer } from './demos/pdf-viewer-reading-demo-container';
 
 @Component({
   selector: 'app-pdf-viewer-page',
@@ -14,6 +15,7 @@ import { PdfViewerPresentationDemoContainer } from './demos/pdf-viewer-presentat
     PdfViewerFormDemoContainer,
     PdfViewerOpenParametersDemoContainer,
     PdfViewerPresentationDemoContainer,
+    PdfViewerReadingDemoContainer,
     TocHeading,
     ComponentBadges,
     ScHeading,
@@ -83,6 +85,41 @@ import { PdfViewerPresentationDemoContainer } from './demos/pdf-viewer-presentat
           restores the view.
         </p>
         <app-pdf-viewer-presentation-demo-container />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Reading</h2>
+        <p class="text-muted-foreground">
+          Jumps — a link, a bookmark, a thumbnail, the page field — are
+          remembered:
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">Back</code>
+          and
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">Forward</code>
+          return to where you were, in the viewer rather than the browser's
+          history.
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">pageColors</code>
+          draws the pages in your colours (a reading mode); in the system's
+          high-contrast mode they follow its colours. With the browser's caret
+          browsing (F7) on, tell the viewer (<code
+            class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >caretBrowsing</code
+          >) and ↑ / ↓ move the caret line by line through the text.
+        </p>
+        <app-pdf-viewer-reading-demo-container />
+        <p class="text-muted-foreground">
+          Zoom goes from 10% to 2500% (Ctrl + wheel or pinch around the
+          pointer): past what a canvas can hold, the visible part is drawn sharp
+          on its own. Tagged PDFs expose their structure — headings, lists,
+          tables, figures with alt text — to screen readers. With
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >enablePermissions</code
+          >, a document that forbids copying, printing, annotating or filling in
+          its form is shown that way. Document properties (More → Document
+          properties… in the full example) come from
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >documentProperties()</code
+          >; the dialog and its text are yours.
+        </p>
       </section>
 
       <section class="space-y-4">

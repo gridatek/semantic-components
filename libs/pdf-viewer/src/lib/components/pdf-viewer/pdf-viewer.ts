@@ -26,6 +26,7 @@ import {
 import { moveCaret } from './pdf-viewer-caret-browsing';
 import type { ScPdfNormalizedText } from './pdf-viewer-find';
 import { findInPage, normalizeText } from './pdf-viewer-find';
+import { loadDocumentProperties } from './pdf-viewer-properties';
 import { annotationStorageValues } from './pdf-viewer-save';
 import { ScPdfScripting } from './pdf-viewer-scripting';
 import type {
@@ -33,6 +34,7 @@ import type {
   ScPdfComment,
   ScPdfCursorTool,
   ScPdfDestination,
+  ScPdfDocumentProperties,
   ScPdfEditorAnnotation,
   ScPdfEditorMode,
   ScPdfFindState,
@@ -396,6 +398,11 @@ export class ScPdfViewer {
 
   // Navigation trigger — incremented to signal canvas to scroll to currentPage
   readonly navigateTrigger = signal(0);
+  /**
+   * The page the last navigation goes to — not `currentPage`, which pages
+   * passed while scrolling change.
+   */
+  readonly navigatePage = signal(1);
   /** Where on the page the last navigation goes, from 0 (top) to 1 (bottom). */
   readonly navigateTop = signal(0);
   /** Whether the last navigation scrolls smoothly (not while a document opens). */
@@ -932,6 +939,7 @@ export class ScPdfViewer {
     this.outlineExpanded.set(new Set());
     this.history.set({ entries: [], index: -1 });
     this.permissions.set(null);
+    this.propertiesDialogOpen.set(false);
     this.releaseThumbnails();
     this.renderedPageNumbers.clear();
     this.scripting.setDocument(null);
@@ -1466,6 +1474,7 @@ export class ScPdfViewer {
   /** Goes to a page; `top` is where on it, from 0 (top) to 1 (bottom). */
   goToPage(page: number, top = 0): void {
     if (page >= 1 && page <= this.totalPages()) {
+      this.navigatePage.set(page);
       this.navigateTop.set(top);
       this.navigateSmooth.set(!this.openingNavigation);
       this.currentPage.set(page);
@@ -2047,6 +2056,31 @@ export class ScPdfViewer {
   closeAltText(): void {
     this.altTextDialogOpen.set(false);
     this.altTextAnnotationId.set(null);
+  }
+
+  /** The `properties` dialog is open. */
+  readonly propertiesDialogOpen = signal(false);
+  /** The document's properties, loaded when the dialog opens. */
+  readonly documentProperties = signal<ScPdfDocumentProperties | null>(null);
+
+  /** Opens the `properties` dialog (pdf.js's Document Properties). */
+  async openProperties(): Promise<void> {
+    const doc = this.pdfDocument();
+    if (!doc) return;
+    this.documentProperties.set(null);
+    this.propertiesDialogOpen.set(true);
+    const properties = await loadDocumentProperties(
+      doc,
+      this.currentPage(),
+      this.localFile()?.name ?? `${this.downloadName()}.pdf`,
+    ).catch(() => null);
+    if (doc === this.pdfDocument() && this.propertiesDialogOpen()) {
+      this.documentProperties.set(properties);
+    }
+  }
+
+  closeProperties(): void {
+    this.propertiesDialogOpen.set(false);
   }
 
   /** Shows or hides a layer (optional content group); the pages redraw. */

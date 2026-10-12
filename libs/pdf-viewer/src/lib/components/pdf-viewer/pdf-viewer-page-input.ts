@@ -25,14 +25,20 @@ import { SC_PDF_VIEWER } from './pdf-viewer';
     '[attr.inputmode]': 'labelled() ? null : "numeric"',
     '[attr.min]': 'labelled() ? null : 1',
     '[attr.max]': 'labelled() ? null : pdfViewer.totalPages()',
-    '[value]': 'pdfViewer.pageLabel(pdfViewer.currentPage())',
+    '(input)': 'typing = true',
     '(change)': 'go($event)',
     '(keydown.enter)': 'go($event)',
+    '(blur)': 'show()',
   },
 })
 export class ScPdfViewerPageInput {
   readonly pdfViewer = inject(SC_PDF_VIEWER);
   readonly classInput = input<string>('', { alias: 'class' });
+
+  private readonly element =
+    inject<ElementRef<HTMLInputElement>>(ElementRef).nativeElement;
+  /** Typed in since the last Enter / leaving the field. */
+  protected typing = false;
 
   protected readonly labelled = computed(() => !!this.pdfViewer.pageLabels());
 
@@ -50,14 +56,24 @@ export class ScPdfViewerPageInput {
     // Into the input's own classes, so they merge with ours.
     bindInput(inject(ScInput).classInput, this.class);
 
+    // The current page — not over what's being typed (pages pass by while
+    // scrolling). Focused but untouched, it stays selected, so typing
+    // replaces it.
+    effect(() => {
+      const label = this.pdfViewer.pageLabel(this.pdfViewer.currentPage());
+      untracked(() => {
+        if (this.typing) return;
+        this.element.value = label;
+        if (document.activeElement === this.element) this.element.select();
+      });
+    });
+
     // Ctrl+Alt+G moves focus here.
-    const element =
-      inject<ElementRef<HTMLInputElement>>(ElementRef).nativeElement;
     effect(() => {
       if (!this.pdfViewer.pageFocusRequest()) return;
       untracked(() => {
-        element.focus();
-        element.select();
+        this.element.focus();
+        this.element.select();
       });
     });
   }
@@ -65,10 +81,17 @@ export class ScPdfViewerPageInput {
   protected go(event: Event): void {
     const field = event.target as HTMLInputElement;
     const page = this.pdfViewer.pageForLabel(field.value);
+    this.typing = false;
     if (page) this.pdfViewer.jumpToPage(page);
     // Normalise what was typed ("04" → "4", a number → its label).
     field.value = this.pdfViewer.pageLabel(
       page ?? this.pdfViewer.currentPage(),
     );
+  }
+
+  /** Leaving the field: back to the current page. */
+  protected show(): void {
+    this.typing = false;
+    this.element.value = this.pdfViewer.pageLabel(this.pdfViewer.currentPage());
   }
 }

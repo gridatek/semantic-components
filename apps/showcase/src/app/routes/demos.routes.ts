@@ -2686,6 +2686,13 @@ export const demosRoutes: Route[] = [
             (m) => m.PdfViewerPresentationDemo,
           ),
       },
+      {
+        path: 'pdf-viewer-reading-demo',
+        loadComponent: () =>
+          import('../pages/docs/pdf-viewer/demos/pdf-viewer-reading-demo').then(
+            (m) => m.PdfViewerReadingDemo,
+          ),
+      },
     ],
   },
   {

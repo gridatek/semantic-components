@@ -154,6 +154,44 @@ export interface ScPdfLayer {
   visible: boolean;
 }
 
+/** A standard paper size (pdf.js's document properties name these). */
+export type ScPdfPaperSize = 'a3' | 'a4' | 'letter' | 'legal';
+
+/**
+ * The document's properties, as pdf.js's properties dialog shows them;
+ * format them yourself (dates, sizes, units). Null when the document
+ * doesn't say.
+ */
+export interface ScPdfDocumentProperties {
+  fileName: string;
+  /** In bytes. */
+  fileSize: number | null;
+  title: string | null;
+  author: string | null;
+  subject: string | null;
+  keywords: string | null;
+  creationDate: Date | null;
+  modificationDate: Date | null;
+  /** The application that created the original document. */
+  creator: string | null;
+  /** The application that made the PDF. */
+  producer: string | null;
+  /** The PDF version, e.g. `1.7`. */
+  version: string | null;
+  /** The document's language, e.g. `en-US`. */
+  language: string | null;
+  pageCount: number;
+  /** The current page's size, in points (72 to the inch), as shown. */
+  pageSize: {
+    width: number;
+    height: number;
+    paper: ScPdfPaperSize | null;
+    orientation: 'portrait' | 'landscape';
+  } | null;
+  /** Fast Web View: it can be shown before it has all downloaded. */
+  linearized: boolean;
+}
+
 /** Colours to draw the pages with: their text and lines, on a background. */
 export interface ScPdfPageColors {
   /** Any CSS colour (system colours too, e.g. `CanvasText`). */
