@@ -427,6 +427,7 @@ const INK_COLORS = [
       [fileName]="fileName()"
       [(sidebarOpen)]="sidebarOpen"
       [(sidebarView)]="sidebarTab"
+      [enablePermissions]="true"
       (fileOpened)="fileName.set($event.name.replace('.pdf', ''))"
       #viewer="scPdfViewer"
     >
@@ -653,11 +654,12 @@ const INK_COLORS = [
 
           <div scPdfViewerSpacer></div>
 
-          <!-- Annotation tools -->
+          <!-- Annotation tools (off when the document forbids changes) -->
           <div
             scToggleGroup
             type="single"
             aria-label="Annotation tool"
+            [disabled]="!viewer.canEdit()"
             [value]="selectedTool()"
             (valueChange)="setTool($event)"
           >

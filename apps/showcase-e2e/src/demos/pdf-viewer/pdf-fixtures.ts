@@ -1,4 +1,5 @@
 import { type Page, expect } from '@playwright/test';
+import { createHash } from 'node:crypto';
 
 /**
  * Small PDFs built for the tests (not shipped with the showcase), opened in
@@ -147,6 +148,93 @@ export const taggedPdf = () =>
     );
     return catalog;
   });
+
+/** RC4, which the PDF standard security handler (revision 2) uses. */
+function rc4(key: Buffer, data: Buffer): Buffer {
+  const s = Array.from({ length: 256 }, (_, i) => i);
+  for (let i = 0, j = 0; i < 256; i++) {
+    j = (j + s[i] + key[i % key.length]) & 255;
+    [s[i], s[j]] = [s[j], s[i]];
+  }
+  const out = Buffer.alloc(data.length);
+  for (let n = 0, i = 0, j = 0; n < data.length; n++) {
+    i = (i + 1) & 255;
+    j = (j + s[i]) & 255;
+    [s[i], s[j]] = [s[j], s[i]];
+    out[n] = data[n] ^ s[(s[i] + s[j]) & 255];
+  }
+  return out;
+}
+
+const md5 = (...parts: Buffer[]) =>
+  createHash('md5').update(Buffer.concat(parts)).digest();
+
+/** The standard security handler's password padding. */
+const PADDING = Buffer.from(
+  '28bf4e5e4e758a4164004e56fffa01082e2e00b6d0683e802f0ca9fe6453697a',
+  'hex',
+);
+
+/**
+ * A page of text, encrypted (RC4 40-bit, no user password: it opens at once)
+ * with permissions that forbid printing, copying, changing and annotating
+ * it, and filling in forms.
+ */
+export function lockedPdf(): Buffer {
+  // Every permission bit cleared but the reserved ones (as a 32-bit int).
+  const flags = ~(4 | 8 | 16 | 32 | 256 | 512 | 1024 | 2048) | 0;
+  const id = Buffer.from('0123456789abcdef0123456789abcdef', 'hex');
+  const owner = rc4(
+    md5(
+      Buffer.concat([Buffer.from('owner'), PADDING]).subarray(0, 32),
+    ).subarray(0, 5),
+    PADDING,
+  );
+  const p = Buffer.alloc(4);
+  p.writeInt32LE(flags);
+  const key = md5(PADDING, owner, p, id).subarray(0, 5);
+  const user = rc4(key, PADDING);
+  /** An object's stream, encrypted with its own key. */
+  const encrypt = (objectNumber: number, data: string) => {
+    const salt = Buffer.from([
+      objectNumber & 255,
+      (objectNumber >> 8) & 255,
+      (objectNumber >> 16) & 255,
+      0,
+      0,
+    ]);
+    return rc4(
+      md5(key, salt).subarray(0, 10),
+      Buffer.from(data, 'latin1'),
+    ).toString('latin1');
+  };
+
+  const text = [
+    'BT /F1 18 Tf 72 700 Td (A locked document) Tj ET',
+    'BT /F1 12 Tf 72 670 Td (Its text cannot be copied, nor the document printed.) Tj ET',
+  ].join('\n');
+  const objects = [
+    '<< /Type /Catalog /Pages 2 0 R >>',
+    '<< /Type /Pages /Kids [4 0 R] /Count 1 >>',
+    '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>',
+    '<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 5 0 R >>',
+    `<< /Length ${text.length} >>\nstream\n${encrypt(5, text)}\nendstream`,
+    `<< /Filter /Standard /V 1 /R 2 /Length 40 /O <${owner.toString('hex')}> /U <${user.toString('hex')}> /P ${flags} >>`,
+  ];
+  let pdf = '%PDF-1.4\n';
+  const offsets: number[] = [];
+  objects.forEach((body, i) => {
+    offsets.push(pdf.length);
+    pdf += `${i + 1} 0 obj\n${body}\nendobj\n`;
+  });
+  const xref = pdf.length;
+  pdf += `xref\n0 ${objects.length + 1}\n0000000000 65535 f \n`;
+  for (const offset of offsets) {
+    pdf += `${String(offset).padStart(10, '0')} 00000 n \n`;
+  }
+  pdf += `trailer\n<< /Size ${objects.length + 1} /Root 1 0 R /Encrypt 6 0 R /ID [<${id.toString('hex')}> <${id.toString('hex')}>] >>\nstartxref\n${xref}\n%%EOF\n`;
+  return Buffer.from(pdf, 'latin1');
+}
 
 /** Opens a PDF (without page labels) in the full demo with More → Open file…. */
 export async function openPdf(

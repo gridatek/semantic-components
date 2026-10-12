@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 import { collectErrors } from '../../interaction';
-import { findPdf, openPdf, taggedPdf } from './pdf-fixtures';
+import { findPdf, lockedPdf, openPdf, taggedPdf } from './pdf-fixtures';
 
 test.describe('PDF Viewer reading', () => {
   test('find: hyphenated words, phrases across lines, several matches in a line', async ({
@@ -59,6 +59,56 @@ test.describe('PDF Viewer reading', () => {
     await expect(
       page.locator('.textLayer .markedContent[aria-hidden="true"]'),
     ).toHaveText('Footer');
+    expect(errors).toEqual([]);
+  });
+
+  test('permissions: a locked document cannot be printed, copied or annotated', async ({
+    page,
+  }) => {
+    const errors = collectErrors(page);
+    const print = page.getByRole('button', { name: 'Print' });
+    const tools = page.getByRole('group', { name: 'Annotation tool' });
+
+    // An ordinary document first: all allowed.
+    await openPdf(page, 'find.pdf', findPdf());
+    await expect(print).toBeEnabled();
+    await expect(
+      tools.getByRole('button', { name: 'Highlight' }),
+    ).toBeEnabled();
+
+    await openPdf(page, 'locked.pdf', lockedPdf());
+    await expect(page.locator('div[data-page="1"] .textLayer')).toContainText(
+      'A locked document',
+    );
+    await expect(print).toBeDisabled();
+    await expect(
+      tools.getByRole('button', { name: 'Highlight' }),
+    ).toBeDisabled();
+
+    // Copying the text puts nothing on the clipboard.
+    const copied = await page.evaluate(() => {
+      const span = document.querySelector(
+        'div[data-page="1"] .textLayer span[role="presentation"]',
+      ) as HTMLElement;
+      document.getSelection()?.selectAllChildren(span);
+      const clipboardData = new DataTransfer();
+      const event = new ClipboardEvent('copy', {
+        clipboardData,
+        bubbles: true,
+        cancelable: true,
+      });
+      span.dispatchEvent(event);
+      return {
+        text: clipboardData.getData('text/plain'),
+        prevented: event.defaultPrevented,
+      };
+    });
+    expect(copied).toEqual({ text: '', prevented: true });
+
+    // Ctrl+P doesn't print either.
+    await page.locator('[role="document"]').focus();
+    await page.keyboard.press('Control+p');
+    await expect(page.getByRole('dialog')).toHaveCount(0);
     expect(errors).toEqual([]);
   });
 
