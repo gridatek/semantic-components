@@ -1291,24 +1291,17 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'no-search-emoji-picker-demo',
+        path: 'categories-emoji-picker-demo',
         loadComponent: () =>
-          import('../pages/docs/emoji-picker/demos/no-search-emoji-picker-demo').then(
-            (m) => m.NoSearchEmojiPickerDemo,
+          import('../pages/docs/emoji-picker/demos/categories-emoji-picker-demo').then(
+            (m) => m.CategoriesEmojiPickerDemo,
           ),
       },
       {
-        path: 'no-categories-emoji-picker-demo',
+        path: 'locale-emoji-picker-demo',
         loadComponent: () =>
-          import('../pages/docs/emoji-picker/demos/no-categories-emoji-picker-demo').then(
-            (m) => m.NoCategoriesEmojiPickerDemo,
-          ),
-      },
-      {
-        path: 'no-recent-emoji-picker-demo',
-        loadComponent: () =>
-          import('../pages/docs/emoji-picker/demos/no-recent-emoji-picker-demo').then(
-            (m) => m.NoRecentEmojiPickerDemo,
+          import('../pages/docs/emoji-picker/demos/locale-emoji-picker-demo').then(
+            (m) => m.LocaleEmojiPickerDemo,
           ),
       },
       {

@@ -7,7 +7,7 @@ import { MessageReactionsEmojiPickerDemo } from './message-reactions-emoji-picke
   imports: [DemoContainer, MessageReactionsEmojiPickerDemo],
   template: `
     <app-demo-container
-      title="Message with Reactions"
+      title="Reactions to a message"
       demoUrl="/demos/emoji-picker/message-reactions-emoji-picker-demo"
       [code]="code"
     >
@@ -18,117 +18,138 @@ import { MessageReactionsEmojiPickerDemo } from './message-reactions-emoji-picke
   encapsulation: ViewEncapsulation.None,
 })
 export class MessageReactionsEmojiPickerDemoContainer {
-  readonly code = `import { Grid, GridCell, GridCellWidget, GridRow } from '@angular/aria/grid';
-import { Component, ViewEncapsulation, signal, viewChild } from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation, signal, viewChild } from '@angular/core';
 import {
+  ScButton,
   ScPopover,
   ScPopoverPortal,
   ScPopoverProvider,
   ScPopoverTrigger,
+  ScSpinner,
 } from '@semantic-components/ui';
 import {
-  ScEmoji,
+  type ScEmoji,
   ScEmojiPicker,
-  ScEmojiPickerCategoryTab,
-  ScEmojiPickerCategoryTabs,
-  ScEmojiPickerGrid,
-  ScEmojiPickerItem,
+  ScEmojiPickerAnnouncer,
+  ScEmojiPickerCategory,
+  ScEmojiPickerCategoryHeader,
+  ScEmojiPickerEmoji,
+  ScEmojiPickerEmpty,
+  ScEmojiPickerError,
+  ScEmojiPickerList,
+  ScEmojiPickerLoading,
+  ScEmojiPickerRow,
+  ScEmojiPickerSearch,
+  ScEmojiPickerSearchField,
+  ScEmojiPickerViewport,
 } from '@semantic-components/ui-lab';
-import { SiCirclePlusIcon } from '@semantic-icons/lucide-icons';
+import {
+  SiLoaderCircleIcon,
+  SiSearchIcon,
+  SiSmilePlusIcon,
+} from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-message-reactions-emoji-picker-demo',
   imports: [
-    Grid,
-    GridRow,
-    GridCell,
-    GridCellWidget,
+    ScButton,
     ScPopoverProvider,
     ScPopoverTrigger,
     ScPopoverPortal,
     ScPopover,
-    SiCirclePlusIcon,
+    ScSpinner,
     ScEmojiPicker,
-    ScEmojiPickerCategoryTabs,
-    ScEmojiPickerCategoryTab,
-    ScEmojiPickerGrid,
-    ScEmojiPickerItem,
+    ScEmojiPickerSearchField,
+    ScEmojiPickerSearch,
+    ScEmojiPickerViewport,
+    ScEmojiPickerLoading,
+    ScEmojiPickerEmpty,
+    ScEmojiPickerError,
+    ScEmojiPickerAnnouncer,
+    ScEmojiPickerList,
+    ScEmojiPickerCategory,
+    ScEmojiPickerCategoryHeader,
+    ScEmojiPickerRow,
+    ScEmojiPickerEmoji,
+    SiSearchIcon,
+    SiLoaderCircleIcon,
+    SiSmilePlusIcon,
   ],
   template: \`
-    <div class="max-w-md rounded-lg border p-4">
+    <div class="w-full max-w-md rounded-lg border p-4">
       <p class="text-sm">
         This is a sample message that can have emoji reactions.
       </p>
-      <div class="mt-2 flex items-center gap-1" scPopoverProvider>
-        @for (reaction of messageReactions(); track reaction.emoji) {
+      <div class="mt-2 flex flex-wrap items-center gap-1" scPopoverProvider>
+        @for (reaction of reactions(); track reaction.emoji) {
           <button
-            type="button"
-            class="hover:bg-accent inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-sm"
-            [attr.aria-label]="reaction.emoji + ' reaction, ' + reaction.count"
-            (click)="incrementReaction(reaction.emoji)"
+            scButton
+            variant="outline"
+            size="xs"
+            class="rounded-full"
+            [attr.aria-label]="reaction.label + ', ' + reaction.count"
+            (click)="add(reaction)"
           >
-            <span>{{ reaction.emoji }}</span>
-            <span class="text-muted-foreground text-xs">
-              {{ reaction.count }}
-            </span>
+            {{ reaction.emoji }}
+            <span class="text-muted-foreground">{{ reaction.count }}</span>
           </button>
         }
         <button
-          type="button"
-          class="hover:bg-accent rounded-full p-1"
-          aria-label="Add reaction"
+          scButton
+          variant="ghost"
+          size="icon-xs"
+          class="rounded-full"
           scPopoverTrigger
+          aria-label="Add a reaction"
         >
-          <svg siCirclePlusIcon class="text-muted-foreground size-4"></svg>
+          <svg siSmilePlusIcon></svg>
         </button>
         <ng-template scPopoverPortal>
-          <div scPopover class="w-auto p-0 ring-0">
+          <div scPopover class="w-fit p-0">
             <div
               scEmojiPicker
-              class="w-64"
-              [columns]="6"
-              (emojiSelect)="addReaction($event)"
+              class="h-[300px]"
+              [columns]="8"
+              (emojiSelect)="add($event); popover().close()"
             >
-              <div scEmojiPickerCategoryTabs #tabs="scEmojiPickerCategoryTabs">
-                @for (category of tabs.state.categories(); track category.id) {
-                  <button scEmojiPickerCategoryTab [category]="category">
-                    {{ category.icon }}
-                  </button>
-                }
+              <div scEmojiPickerSearchField>
+                <svg siSearchIcon></svg>
+                <input
+                  scEmojiPickerSearch
+                  placeholder="Search…"
+                  aria-label="Search emojis"
+                />
               </div>
-              <div scEmojiPickerGrid #grid="scEmojiPickerGrid">
-                @if (grid.isEmpty()) {
-                  <div class="text-muted-foreground p-4 text-center text-sm">
-                    No emoji found
-                  </div>
-                } @else {
-                  <table
-                    ngGrid
-                    tabindex="0"
-                    aria-label="Emoji grid"
-                    class="w-full table-fixed border-collapse"
-                    colWrap="continuous"
-                    rowWrap="continuous"
-                  >
-                    <tbody>
-                      @for (row of grid.rows(); track $index) {
-                        <tr ngGridRow>
-                          @for (emoji of row; track emoji.emoji) {
-                            <td ngGridCell class="p-0 text-center">
-                              <button
-                                ngGridCellWidget
-                                scEmojiPickerItem
-                                [emoji]="emoji"
-                              >
-                                {{ emoji.emoji }}
-                              </button>
-                            </td>
-                          }
-                        </tr>
+              <div scEmojiPickerViewport>
+                <span scEmojiPickerLoading>
+                  <svg scSpinner siLoaderCircleIcon class="size-4"></svg>
+                  <span class="sr-only">Loading emojis…</span>
+                </span>
+                <span scEmojiPickerEmpty>No emoji found.</span>
+                <span scEmojiPickerError>Couldn't load the emojis.</span>
+                <span scEmojiPickerAnnouncer></span>
+                <div
+                  scEmojiPickerList
+                  aria-label="Emojis"
+                  #list="scEmojiPickerList"
+                >
+                  @for (category of list.categories(); track category.key) {
+                    <div [scEmojiPickerCategory]="category">
+                      <div scEmojiPickerCategoryHeader>
+                        {{ category.label }}
+                      </div>
+                    </div>
+                  }
+                  @for (row of list.rows(); track row.index) {
+                    <div [scEmojiPickerRow]="row">
+                      @for (emoji of row.emojis; track emoji.columnIndex) {
+                        <button [scEmojiPickerEmoji]="emoji">
+                          {{ emoji.emoji }}
+                        </button>
                       }
-                    </tbody>
-                  </table>
-                }
+                    </div>
+                  }
+                </div>
               </div>
             </div>
           </div>
@@ -140,36 +161,20 @@ import { SiCirclePlusIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class MessageReactionsEmojiPickerDemo {
-  private readonly popoverProvider = viewChild.required(ScPopoverProvider);
+  protected readonly popover = viewChild.required(ScPopoverProvider);
 
-  readonly messageReactions = signal<{ emoji: string; count: number }[]>([
-    { emoji: '👍', count: 3 },
-    { emoji: '❤️', count: 1 },
+  readonly reactions = signal<(ScEmoji & { count: number })[]>([
+    { emoji: '👍', label: 'Thumbs up', count: 3 },
+    { emoji: '❤️', label: 'Red heart', count: 1 },
   ]);
 
-  addReaction(emoji: ScEmoji): void {
-    const reactions = this.messageReactions();
-    const existing = reactions.find((r) => r.emoji === emoji.emoji);
-    if (existing) {
-      this.messageReactions.set(
-        reactions.map((r) =>
-          r.emoji === emoji.emoji ? { ...r, count: r.count + 1 } : r,
-        ),
-      );
-    } else {
-      this.messageReactions.set([
-        ...reactions,
-        { emoji: emoji.emoji, count: 1 },
-      ]);
-    }
-    this.popoverProvider().close();
-  }
-
-  incrementReaction(emoji: string): void {
-    this.messageReactions.update((reactions) =>
-      reactions.map((r) =>
-        r.emoji === emoji ? { ...r, count: r.count + 1 } : r,
-      ),
+  add(emoji: ScEmoji): void {
+    this.reactions.update((reactions) =>
+      reactions.some((r) => r.emoji === emoji.emoji)
+        ? reactions.map((r) =>
+            r.emoji === emoji.emoji ? { ...r, count: r.count + 1 } : r,
+          )
+        : [...reactions, { ...emoji, count: 1 }],
     );
   }
 }`;

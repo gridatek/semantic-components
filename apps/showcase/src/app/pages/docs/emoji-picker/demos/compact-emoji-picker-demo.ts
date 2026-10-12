@@ -1,84 +1,73 @@
-import { Grid, GridCell, GridCellWidget, GridRow } from '@angular/aria/grid';
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { ScSpinner } from '@semantic-components/ui';
 import {
+  type ScEmoji,
   ScEmojiPicker,
-  ScEmojiPickerCategoryTab,
-  ScEmojiPickerCategoryTabs,
-  ScEmojiPickerGrid,
-  ScEmojiPickerItem,
-  ScEmojiPickerRecent,
-  ScEmojiPickerSearch,
+  ScEmojiPickerCategory,
+  ScEmojiPickerCategoryHeader,
+  ScEmojiPickerEmoji,
+  ScEmojiPickerError,
+  ScEmojiPickerList,
+  ScEmojiPickerLoading,
+  ScEmojiPickerRow,
+  ScEmojiPickerViewport,
 } from '@semantic-components/ui-lab';
+import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
 
+/** Just the list: fewer columns, no search, no footer. */
 @Component({
   selector: 'app-compact-emoji-picker-demo',
   imports: [
-    Grid,
-    GridRow,
-    GridCell,
-    GridCellWidget,
     ScEmojiPicker,
-    ScEmojiPickerSearch,
-    ScEmojiPickerCategoryTabs,
-    ScEmojiPickerCategoryTab,
-    ScEmojiPickerGrid,
-    ScEmojiPickerItem,
-    ScEmojiPickerRecent,
+    ScEmojiPickerViewport,
+    ScEmojiPickerLoading,
+    ScEmojiPickerError,
+    ScEmojiPickerList,
+    ScEmojiPickerCategory,
+    ScEmojiPickerCategoryHeader,
+    ScEmojiPickerRow,
+    ScEmojiPickerEmoji,
+    ScSpinner,
+    SiLoaderCircleIcon,
   ],
   template: `
-    <div scEmojiPicker [columns]="6" class="w-56">
-      <div class="p-2">
-        <input scEmojiPickerSearch />
-      </div>
-      <div scEmojiPickerCategoryTabs #tabs="scEmojiPickerCategoryTabs">
-        @for (category of tabs.state.categories(); track category.id) {
-          <button scEmojiPickerCategoryTab [category]="category">
-            {{ category.icon }}
-          </button>
-        }
-      </div>
-      <div scEmojiPickerGrid #grid="scEmojiPickerGrid">
-        @if (grid.isEmpty()) {
-          <div class="text-muted-foreground p-4 text-center text-sm">
-            No emoji found
-          </div>
-        } @else {
-          <table
-            ngGrid
-            tabindex="0"
-            aria-label="Emoji grid"
-            class="w-full table-fixed border-collapse"
-            colWrap="continuous"
-            rowWrap="continuous"
-          >
-            <tbody>
-              @for (row of grid.rows(); track $index) {
-                <tr ngGridRow>
-                  @for (emoji of row; track emoji.emoji) {
-                    <td ngGridCell class="p-0 text-center">
-                      <button
-                        ngGridCellWidget
-                        scEmojiPickerItem
-                        [emoji]="emoji"
-                      >
-                        {{ emoji.emoji }}
-                      </button>
-                    </td>
-                  }
-                </tr>
+    <div
+      scEmojiPicker
+      class="h-56 rounded-lg border shadow-md"
+      [columns]="8"
+      (emojiSelect)="selected.set($event)"
+    >
+      <div scEmojiPickerViewport aria-label="Emojis">
+        <span scEmojiPickerLoading>
+          <svg scSpinner siLoaderCircleIcon class="size-4"></svg>
+          <span class="sr-only">Loading emojis…</span>
+        </span>
+        <span scEmojiPickerError>Couldn't load the emojis.</span>
+        <div scEmojiPickerList aria-label="Emojis" #list="scEmojiPickerList">
+          @for (category of list.categories(); track category.key) {
+            <div [scEmojiPickerCategory]="category">
+              <div scEmojiPickerCategoryHeader>{{ category.label }}</div>
+            </div>
+          }
+          @for (row of list.rows(); track row.index) {
+            <div [scEmojiPickerRow]="row">
+              @for (emoji of row.emojis; track emoji.columnIndex) {
+                <button [scEmojiPickerEmoji]="emoji">{{ emoji.emoji }}</button>
               }
-            </tbody>
-          </table>
-        }
-      </div>
-      <div scEmojiPickerRecent #recent="scEmojiPickerRecent">
-        @for (emoji of recent.state.recentEmojis(); track emoji.emoji) {
-          <button scEmojiPickerItem [emoji]="emoji">{{ emoji.emoji }}</button>
-        }
+            </div>
+          }
+        </div>
       </div>
     </div>
+    <p class="text-muted-foreground mt-4 text-sm" aria-live="polite">
+      @if (selected(); as emoji) {
+        Selected: {{ emoji.emoji }} {{ emoji.label }}
+      }
+    </p>
   `,
-  host: { class: 'flex w-full justify-center' },
+  host: { class: 'flex w-full flex-col items-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class CompactEmojiPickerDemo {}
+export class CompactEmojiPickerDemo {
+  readonly selected = signal<ScEmoji | null>(null);
+}

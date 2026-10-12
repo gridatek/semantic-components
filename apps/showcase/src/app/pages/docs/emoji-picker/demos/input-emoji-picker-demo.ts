@@ -1,7 +1,13 @@
-import { Grid, GridCell, GridCellWidget, GridRow } from '@angular/aria/grid';
 import { CdkOverlayOrigin } from '@angular/cdk/overlay';
-import { Component, ViewEncapsulation, signal, viewChild } from '@angular/core';
 import {
+  Component,
+  ElementRef,
+  ViewEncapsulation,
+  signal,
+  viewChild,
+} from '@angular/core';
+import {
+  ScButton,
   ScInput,
   ScInputGroup,
   ScInputGroupAddon,
@@ -9,28 +15,35 @@ import {
   ScPopoverPortal,
   ScPopoverProvider,
   ScPopoverTrigger,
+  ScSpinner,
 } from '@semantic-components/ui';
 import {
-  ScEmoji,
+  type ScEmoji,
   ScEmojiPicker,
-  ScEmojiPickerCategoryTab,
-  ScEmojiPickerCategoryTabs,
-  ScEmojiPickerGrid,
-  ScEmojiPickerItem,
-  ScEmojiPickerRecent,
+  ScEmojiPickerAnnouncer,
+  ScEmojiPickerCategory,
+  ScEmojiPickerCategoryHeader,
+  ScEmojiPickerEmoji,
+  ScEmojiPickerEmpty,
+  ScEmojiPickerError,
+  ScEmojiPickerList,
+  ScEmojiPickerLoading,
+  ScEmojiPickerRow,
   ScEmojiPickerSearch,
-  ScEmojiPickerTrigger,
+  ScEmojiPickerSearchField,
+  ScEmojiPickerViewport,
 } from '@semantic-components/ui-lab';
-import { SiSmileIcon } from '@semantic-icons/lucide-icons';
+import {
+  SiLoaderCircleIcon,
+  SiSearchIcon,
+  SiSmileIcon,
+} from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-input-emoji-picker-demo',
   imports: [
-    Grid,
-    GridRow,
-    GridCell,
-    GridCellWidget,
     CdkOverlayOrigin,
+    ScButton,
     ScInput,
     ScInputGroup,
     ScInputGroupAddon,
@@ -38,90 +51,94 @@ import { SiSmileIcon } from '@semantic-icons/lucide-icons';
     ScPopoverTrigger,
     ScPopoverPortal,
     ScPopover,
-    SiSmileIcon,
+    ScSpinner,
     ScEmojiPicker,
+    ScEmojiPickerSearchField,
     ScEmojiPickerSearch,
-    ScEmojiPickerCategoryTabs,
-    ScEmojiPickerCategoryTab,
-    ScEmojiPickerGrid,
-    ScEmojiPickerItem,
-    ScEmojiPickerRecent,
-    ScEmojiPickerTrigger,
+    ScEmojiPickerViewport,
+    ScEmojiPickerLoading,
+    ScEmojiPickerEmpty,
+    ScEmojiPickerError,
+    ScEmojiPickerAnnouncer,
+    ScEmojiPickerList,
+    ScEmojiPickerCategory,
+    ScEmojiPickerCategoryHeader,
+    ScEmojiPickerRow,
+    ScEmojiPickerEmoji,
+    SiSearchIcon,
+    SiLoaderCircleIcon,
+    SiSmileIcon,
   ],
   template: `
     <div class="w-full max-w-sm">
-      <div scPopoverProvider [origin]="origin" align="start">
+      <div scPopoverProvider [origin]="origin" align="end">
         <div scInputGroup cdkOverlayOrigin #origin="cdkOverlayOrigin">
           <input
+            #message
             scInput
-            type="text"
-            [value]="inputValue()"
-            (input)="onInputChange($event)"
-            placeholder="Type a message..."
+            aria-label="Message"
+            placeholder="Type a message…"
+            [value]="text()"
+            (input)="text.set(message.value)"
           />
           <div scInputGroupAddon align="inline-end">
-            <button scEmojiPickerTrigger scPopoverTrigger>
-              <svg siSmileIcon class="size-4"></svg>
+            <button
+              scButton
+              variant="ghost"
+              size="icon-xs"
+              scPopoverTrigger
+              aria-label="Insert an emoji"
+            >
+              <svg siSmileIcon></svg>
             </button>
           </div>
         </div>
         <ng-template scPopoverPortal>
-          <div scPopover class="w-auto p-0 ring-0">
+          <div scPopover class="w-fit p-0">
             <div
               scEmojiPicker
-              (emojiSelect)="insertEmoji($event)"
-              [maxRecent]="6"
+              [columns]="8"
+              class="h-[300px]"
+              (emojiSelect)="insert($event)"
             >
-              <div class="p-2">
-                <input scEmojiPickerSearch />
+              <div scEmojiPickerSearchField>
+                <svg siSearchIcon></svg>
+                <input
+                  scEmojiPickerSearch
+                  placeholder="Search…"
+                  aria-label="Search emojis"
+                />
               </div>
-              <div scEmojiPickerCategoryTabs #tabs="scEmojiPickerCategoryTabs">
-                @for (category of tabs.state.categories(); track category.id) {
-                  <button scEmojiPickerCategoryTab [category]="category">
-                    {{ category.icon }}
-                  </button>
-                }
-              </div>
-              <div scEmojiPickerGrid #grid="scEmojiPickerGrid">
-                @if (grid.isEmpty()) {
-                  <div class="text-muted-foreground p-4 text-center text-sm">
-                    No emoji found
-                  </div>
-                } @else {
-                  <table
-                    ngGrid
-                    tabindex="0"
-                    aria-label="Emoji grid"
-                    class="w-full table-fixed border-collapse"
-                    colWrap="continuous"
-                    rowWrap="continuous"
-                  >
-                    <tbody>
-                      @for (row of grid.rows(); track $index) {
-                        <tr ngGridRow>
-                          @for (emoji of row; track emoji.emoji) {
-                            <td ngGridCell class="p-0 text-center">
-                              <button
-                                ngGridCellWidget
-                                scEmojiPickerItem
-                                [emoji]="emoji"
-                              >
-                                {{ emoji.emoji }}
-                              </button>
-                            </td>
-                          }
-                        </tr>
+              <div scEmojiPickerViewport>
+                <span scEmojiPickerLoading>
+                  <svg scSpinner siLoaderCircleIcon class="size-4"></svg>
+                  <span class="sr-only">Loading emojis…</span>
+                </span>
+                <span scEmojiPickerEmpty>No emoji found.</span>
+                <span scEmojiPickerError>Couldn't load the emojis.</span>
+                <span scEmojiPickerAnnouncer></span>
+                <div
+                  scEmojiPickerList
+                  aria-label="Emojis"
+                  #list="scEmojiPickerList"
+                >
+                  @for (category of list.categories(); track category.key) {
+                    <div [scEmojiPickerCategory]="category">
+                      <div scEmojiPickerCategoryHeader>
+                        {{ category.label }}
+                      </div>
+                    </div>
+                  }
+                  @for (row of list.rows(); track row.index) {
+                    <div [scEmojiPickerRow]="row">
+                      @for (emoji of row.emojis; track emoji.columnIndex) {
+                        <button [scEmojiPickerEmoji]="emoji">
+                          {{ emoji.emoji }}
+                        </button>
                       }
-                    </tbody>
-                  </table>
-                }
-              </div>
-              <div scEmojiPickerRecent #recent="scEmojiPickerRecent">
-                @for (emoji of recent.state.recentEmojis(); track emoji.emoji) {
-                  <button scEmojiPickerItem [emoji]="emoji">
-                    {{ emoji.emoji }}
-                  </button>
-                }
+                    </div>
+                  }
+                </div>
               </div>
             </div>
           </div>
@@ -133,17 +150,25 @@ import { SiSmileIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class InputEmojiPickerDemo {
-  private readonly popoverProvider = viewChild.required(ScPopoverProvider);
+  private readonly popover = viewChild.required(ScPopoverProvider);
+  private readonly message =
+    viewChild.required<ElementRef<HTMLInputElement>>('message');
 
-  readonly inputValue = signal('');
+  readonly text = signal('');
 
-  onInputChange(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    this.inputValue.set(input.value);
-  }
-
-  insertEmoji(emoji: ScEmoji): void {
-    this.inputValue.update((v) => v + emoji.emoji);
-    this.popoverProvider().close();
+  /** Inserts the emoji where the cursor was, and puts it after it. */
+  insert(emoji: ScEmoji): void {
+    const field = this.message().nativeElement;
+    const start = field.selectionStart ?? field.value.length;
+    const end = field.selectionEnd ?? start;
+    this.text.set(
+      field.value.slice(0, start) + emoji.emoji + field.value.slice(end),
+    );
+    this.popover().close();
+    const caret = start + emoji.emoji.length;
+    setTimeout(() => {
+      field.focus();
+      field.setSelectionRange(caret, caret);
+    });
   }
 }

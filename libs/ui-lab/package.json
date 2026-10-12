@@ -23,8 +23,7 @@
     "@semantic-icons/lucide-icons": ">=0.56.0",
     "@semantic-components/ui": "0.81.0",
     "@js-temporal/polyfill": "^0.5.1",
-    "@semantic-components/carousel": "0.81.0",
-    "emojibase-data": "^17.0.0"
+    "@semantic-components/carousel": "0.81.0"
   },
   "sideEffects": false
 }
