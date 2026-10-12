@@ -267,6 +267,8 @@ export class ScPdfViewer {
    * validation, actions) in pdf.js's sandbox, as pdf.js does.
    */
   readonly enableScripting = input(true);
+  /** Make URLs and email addresses in the text clickable (as pdf.js). */
+  readonly enableAutoLinking = input(true);
   /** URL of `pdf.sandbox.mjs`, if not under `assetsUrl`. */
   readonly sandboxSrc = input<string>('');
   /** URL of pdf.js's `wasm/` folder (trailing slash), if not under `assetsUrl`. */
@@ -422,9 +424,18 @@ export class ScPdfViewer {
   readonly attachments = signal<ScPdfAttachment[]>([]);
 
   /** Downloads an attached file. */
-  downloadAttachment(attachment: ScPdfAttachment): void {
+  async downloadAttachment(attachment: ScPdfAttachment): Promise<void> {
+    // pdf.js loads an attachment's content when it's asked for.
+    const content =
+      attachment.content ??
+      (attachment.id
+        ? await this.pdfDocument()
+            ?.getAttachmentContent(attachment.id)
+            .catch(() => null)
+        : null);
+    if (!content) return;
     this.saveAs(
-      new Blob([attachment.content as Uint8Array<ArrayBuffer>]),
+      new Blob([content as Uint8Array<ArrayBuffer>]),
       attachment.filename,
     );
   }
@@ -1857,17 +1868,31 @@ export class ScPdfViewer {
     );
   }
 
+  /** Applies a link's SetOCGState action (layers shown, hidden or toggled). */
+  applyLayerState(action: unknown): void {
+    const config = this.optionalContent();
+    if (!config) return;
+    config.setOCGState(action as Parameters<typeof config.setOCGState>[0]);
+    this.layers.update((layers) =>
+      layers.map((layer) => {
+        const visible = config.getGroup(layer.id)?.visible ?? layer.visible;
+        return visible === layer.visible ? layer : { ...layer, visible };
+      }),
+    );
+  }
+
   /** The document's attached files. */
   private async loadAttachments(doc: PDFDocumentProxy): Promise<void> {
     const attachments = await doc.getAttachments().catch(() => null);
     if (doc !== this.pdfDocument()) return;
     this.attachments.set(
       values(attachments).map((value) => {
-        const { filename, content } = value as {
+        const { filename, content, id } = value as {
           filename: string;
-          content: Uint8Array;
+          content?: Uint8Array;
+          id?: string;
         };
-        return { filename, content };
+        return { filename, content, id };
       }),
     );
   }
@@ -2203,7 +2228,10 @@ export class ScPdfViewer {
     const stripDiacritics = (text: string): string =>
       text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
-    for (const pageText of pageTexts) {
+    for (const rawText of pageTexts) {
+      // A line break matches a space — phrases wrap across lines. Same
+      // length, so match offsets still line up with the text layer.
+      const pageText = rawText.replace(/\n/g, ' ');
       const matches: number[] = [];
       const matchesLength: number[] = [];
 

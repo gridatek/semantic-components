@@ -56,7 +56,7 @@ providers: [{ provide: OverlayContainer, useClass: FullscreenOverlayContainer }]
 
 `ScPdfViewer` (`[scPdfViewer]`, `exportAs: 'scPdfViewer'`) holds the document and all state; your template reads it (`viewer.currentPage()`, `viewer.findState()`…) to write its text.
 
-- **Inputs**: `src`, `fileName` (download / print name, without `.pdf`), `initialPage`, `initialZoom`, `assetsUrl` (where pdf.js's worker, sandbox, fonts, CMaps, wasm decoders and colour profiles are — unpkg by default; host `pdfjs-dist`'s folders yourself for offline or strict-CSP apps), `workerSrc`, `sandboxSrc`, `wasmSrc`, `keyboardShortcuts`, `autoPrint`, `enableScripting`.
+- **Inputs**: `src`, `fileName` (download / print name, without `.pdf`), `initialPage`, `initialZoom`, `assetsUrl` (where pdf.js's worker, sandbox, fonts, CMaps, wasm decoders and colour profiles are — unpkg by default; host `pdfjs-dist`'s folders yourself for offline or strict-CSP apps), `workerSrc`, `sandboxSrc`, `wasmSrc`, `keyboardShortcuts`, `autoPrint`, `enableScripting`, `enableAutoLinking` (URLs and email addresses in the text become links; on by default).
 - **Two-way**: `sidebarOpen`, `sidebarView`, `cursorTool`, `scrollMode`, `spreadMode`, `savedSignatures`.
 - **Outputs**: `loaded`, `pageChange`, `zoomChange`, `errorEvent` (`ScPdfLoadError`), `fileOpened`.
 - **State for your text**: `currentPage()`, `totalPages()`, `pageLabels()` / `pageLabel(n)`, `zoom()`, `isLoading()`, `loadProgress()`, `error()` (`{ kind: 'invalid' | 'missing' | 'network' | 'password' | 'unknown' }`), `findState()`, `findCurrentMatchIndex()`, `findTotalMatches()`, `undoable()` (`{ kind, count }`), `printProgress()`, `outline()`, `attachments()`, `layers()`, `comments()`, `savedSignatures()`, `pageSelection()`…
@@ -174,6 +174,8 @@ Each change rebuilds the document with pdf.js's `extractPages` — form data com
 - **AcroForm** fields render as inputs over the page (pdf.js's annotation layer, styled by `pdfjs-dist/web/pdf_viewer.css` — import it in your global styles), named from the document. Their values are kept, saved and printed.
 - **XFA** forms render as HTML.
 - **Scripts** — calculations, formatting, validation, actions — run in pdf.js's sandbox (`[enableScripting]="false"` turns them off).
+- **Tagged PDFs** — the page's structure (headings, paragraphs, lists, tables, figures with their alt text, links) is exposed to assistive technology, as in pdf.js's viewer; artifacts (running headers, page numbers) are hidden from it.
+- **Annotations** — notes show pdf.js's icons (from `assetsUrl`), file attachments download on double-click, and links that show or hide layers update `layers()`.
 
 ### Saving and printing
 

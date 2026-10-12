@@ -32,7 +32,9 @@ import {
 import type { ScPdfViewer } from './pdf-viewer';
 import { SC_PDF_VIEWER } from './pdf-viewer';
 import { ScPdfViewerAnnotationToolbar } from './pdf-viewer-annotation-toolbar';
+import { inferLinkAnnotations } from './pdf-viewer-autolink';
 import { ScPdfViewerCommentMarker } from './pdf-viewer-comment-marker';
+import { ScPdfStructTree } from './pdf-viewer-struct-tree';
 import { ScPdfTextSelection } from './pdf-viewer-text-selection';
 import type { ScPdfComment, ScPdfEditorAnnotation } from './pdf-viewer-types';
 
@@ -156,6 +158,17 @@ class PdfLinkService {
     return this.viewer.goToDestination(dest);
   }
 
+  /** A file attachment annotation's content, loaded when it's opened. */
+  async getAttachmentContent(id: string): Promise<Uint8Array | null> {
+    try {
+      return (
+        (await this.viewer.pdfDocument()?.getAttachmentContent(id)) ?? null
+      );
+    } catch {
+      return null;
+    }
+  }
+
   goToPage(val: number | string): void {
     const doc = this.viewer.pdfDocument();
     if (!doc) return;
@@ -194,7 +207,7 @@ class PdfLinkService {
   }
 
   async executeSetOCGState(action: unknown): Promise<void> {
-    // OCG state changes are handled by the layers view component
+    this.viewer.applyLayerState(action);
   }
 }
 
@@ -582,9 +595,10 @@ export class ScPdfViewerCanvas {
   private activeRenderTasks = new Map<number, RenderTask>();
   private activeTextLayers = new Map<number, TextLayer>();
   private renderedPages = new Set<number>();
+  private structTrees = new WeakMap<PDFPageProxy, ScPdfStructTree>();
   private textLayerData = new Map<
     number,
-    { divs: HTMLElement[]; texts: string[] }
+    { divs: HTMLElement[]; texts: string[]; eols: boolean[] }
   >();
   private resizeObserver: ResizeObserver | null = null;
   private renderTimeout: ReturnType<typeof setTimeout> | null = null;
@@ -831,6 +845,16 @@ export class ScPdfViewerCanvas {
     });
     this.destroyRef.onDestroy(() => {
       if (this.idleTimer) clearTimeout(this.idleTimer);
+    });
+
+    // Form fields stop taking clicks in presentation mode (and back after).
+    effect(() => {
+      this.pdfViewer.presenting();
+      untracked(() =>
+        this.scrollContainer()
+          ?.nativeElement.querySelectorAll<HTMLElement>('.annotationLayer')
+          .forEach((layer) => this.updatePresentationState(layer)),
+      );
     });
 
     // The root's zoom steps start from the scale the pages are drawn at.
@@ -1163,6 +1187,8 @@ export class ScPdfViewerCanvas {
     if (canvas) {
       canvas.width = 0;
       canvas.height = 0;
+      // The structure tree, whose text goes with the text layer.
+      canvas.textContent = '';
     }
     this.pdfViewer.pageReleased(pageNumber);
     const textLayer = container.querySelector<HTMLElement>(
@@ -1407,10 +1433,14 @@ export class ScPdfViewerCanvas {
 
       // Form fields are drawn by the annotation layer (as HTML), not here.
       const optionalContent = this.pdfViewer.optionalContent();
+      // Annotations that draw on their own canvas get it here, and the
+      // annotation layer puts it in place.
+      const annotationCanvasMap = new Map<string, HTMLCanvasElement>();
       const renderTask = page.render({
         canvas,
         viewport,
         annotationMode: AnnotationMode.ENABLE_FORMS,
+        annotationCanvasMap,
         // The layers as shown / hidden in the viewer.
         ...(optionalContent && {
           optionalContentConfigPromise: Promise.resolve(optionalContent),
@@ -1440,7 +1470,10 @@ export class ScPdfViewerCanvas {
         const displayViewport = this.pageViewport(page, scale);
         textLayerDiv.style.setProperty('--total-scale-factor', String(scale));
         setLayerDimensions(textLayerDiv, displayViewport);
-        const textContent = await page.getTextContent();
+        // With its marked content, which the structure tree refers to.
+        const textContent = await page.getTextContent({
+          includeMarkedContent: true,
+        });
         const textLayer = new TextLayer({
           textContentSource: textContent,
           container: textLayerDiv,
@@ -1451,11 +1484,17 @@ export class ScPdfViewerCanvas {
         this.activeTextLayers.delete(pageNumber);
         // Selecting by dragging behaves as in pdf.js.
         this.textSelection.add(textLayerDiv);
+        await this.renderStructTree(page, canvas, textLayerDiv);
 
         // Store text layer data for find highlighting
+        // Which items end a line: find's page text has a "\n" after each
+        // (see viewer.documentTexts), so offsets must count it.
         this.textLayerData.set(pageNumber, {
           divs: [...textLayer.textDivs],
           texts: [...textLayer.textContentItemsStr],
+          eols: textContent.items
+            .filter((item) => 'str' in item)
+            .map((item) => 'hasEOL' in item && item.hasEOL),
         });
 
         // Apply highlights if a find query is active
@@ -1471,7 +1510,12 @@ export class ScPdfViewerCanvas {
 
       // Render annotation layer for clickable links
       try {
-        await this.renderAnnotationLayer(page, pageNumber, container);
+        await this.renderAnnotationLayer(
+          page,
+          pageNumber,
+          container,
+          annotationCanvasMap,
+        );
       } catch (annErr) {
         console.warn(`Annotation layer error on page ${pageNumber}:`, annErr);
       }
@@ -1484,6 +1528,39 @@ export class ScPdfViewerCanvas {
       this.activeTextLayers.delete(pageNumber);
       this.renderedPages.delete(pageNumber);
     }
+  }
+
+  /** A page's structure tree (built once per page of a document). */
+  private structTree(page: PDFPageProxy): ScPdfStructTree {
+    let tree = this.structTrees.get(page);
+    if (!tree) {
+      const { rawDims } = page.getViewport({ scale: 1 }) as unknown as {
+        rawDims: ConstructorParameters<typeof ScPdfStructTree>[1];
+      };
+      tree = new ScPdfStructTree(page, rawDims);
+      this.structTrees.set(page, tree);
+    }
+    return tree;
+  }
+
+  /**
+   * A tagged page's structure (headings, lists, tables, figures…) for
+   * assistive technology: inside its canvas, as pdf.js's viewer does,
+   * owning the text layer's text.
+   */
+  private async renderStructTree(
+    page: PDFPageProxy,
+    canvas: HTMLCanvasElement,
+    textLayer: HTMLElement,
+  ): Promise<void> {
+    const tree = this.structTree(page);
+    const dom = await tree.render();
+    for (const old of Array.from(canvas.children)) {
+      if (old !== dom) old.remove();
+    }
+    if (!dom) return;
+    tree.updateTextLayer(textLayer);
+    if (dom.parentNode !== canvas) canvas.append(dom);
   }
 
   /** The page at `scale`, turned by its own rotation plus the viewer's. */
@@ -1507,10 +1584,29 @@ export class ScPdfViewerCanvas {
       : dpr;
   }
 
+  /**
+   * In presentation mode form fields don't take clicks — links still do
+   * (as pdf.js's viewer).
+   */
+  private updatePresentationState(annotationLayer: HTMLElement): void {
+    const presenting = this.pdfViewer.presenting();
+    for (const section of annotationLayer.children) {
+      if (
+        section.hasAttribute('data-internal-link') ||
+        section.classList.contains('linkAnnotation') ||
+        section.classList.contains('mediaAnnotation')
+      ) {
+        continue;
+      }
+      (section as HTMLElement).inert = presenting;
+    }
+  }
+
   private async renderAnnotationLayer(
     page: PDFPageProxy,
     pageNumber: number,
     container: HTMLElement,
+    annotationCanvasMap: Map<string, HTMLCanvasElement>,
   ): Promise<void> {
     const annotationLayerDiv = container.querySelector(
       `[data-annotationlayer-page="${pageNumber}"]`,
@@ -1522,22 +1618,40 @@ export class ScPdfViewerCanvas {
     const displayViewport = this.pageViewport(page, scale);
 
     const annotations = await page.getAnnotations();
-    if (annotations.length === 0) return;
+    // URLs and emails in the text that aren't links yet (as pdf.js).
+    const textData = this.textLayerData.get(pageNumber);
+    const textLayerDiv = container.querySelector<HTMLElement>(
+      `[data-textlayer-page="${pageNumber}"]`,
+    );
+    const inferredLinks =
+      this.pdfViewer.enableAutoLinking() && textData && textLayerDiv
+        ? inferLinkAnnotations(
+            textLayerDiv,
+            textData.divs,
+            textData.texts,
+            displayViewport,
+            annotations,
+          )
+        : [];
+    if (annotations.length === 0 && inferredLinks.length === 0) return;
 
     annotationLayerDiv.style.setProperty('--total-scale-factor', String(scale));
     setLayerDimensions(annotationLayerDiv, displayViewport);
 
     const doc = this.pdfDocument();
-    const { fieldObjects, hasJSActions } = this.pdfViewer.formInfo();
+    const viewer = this.pdfViewer;
+    const { fieldObjects, hasJSActions } = viewer.formInfo();
     const annotationLayer = new AnnotationLayer({
       div: annotationLayerDiv,
       accessibilityManager: null,
-      annotationCanvasMap: null,
+      // Annotations drawn on their own canvas by page.render.
+      annotationCanvasMap,
       annotationEditorUIManager: null,
-      structTreeLayer: null,
+      // Names and owned text for annotations, from the structure tree.
+      structTreeLayer: this.structTree(page),
       commentManager: null,
       page,
-      viewport: displayViewport,
+      viewport: displayViewport.clone({ dontFlip: true }),
       linkService: this.linkService as never,
       annotationStorage: doc?.annotationStorage ?? null,
     } as never);
@@ -1547,10 +1661,25 @@ export class ScPdfViewerCanvas {
     await annotationLayer.render({
       annotations,
       renderForms: true,
-      enableScripting: this.pdfViewer.enableScripting(),
+      enableScripting: viewer.enableScripting(),
       hasJSActions,
       fieldObjects,
+      // Note icons (pdf.js's images), attachments on the page, layers.
+      imageResourcesPath: `${viewer.assetsUrl()}web/images/`,
+      downloadManager: {
+        openOrDownloadData: (content: Uint8Array, filename: string) =>
+          viewer.downloadAttachment({ filename, content }),
+      },
+      optionalContentConfig: viewer.optionalContent(),
     } as never);
+    if (inferredLinks.length) {
+      await (
+        annotationLayer as unknown as {
+          addLinkAnnotations(links: object[]): Promise<void>;
+        }
+      ).addLinkAnnotations(inferredLinks);
+    }
+    this.updatePresentationState(annotationLayerDiv);
 
     // pdf.js puts a field's name (its tooltip, /TU) on the wrapping section
     // as a title only; give the field itself that accessible name.
@@ -1704,7 +1833,7 @@ export class ScPdfViewerCanvas {
   }
 
   private renderPageHighlights(
-    data: { divs: HTMLElement[]; texts: string[] },
+    data: { divs: HTMLElement[]; texts: string[]; eols: boolean[] },
     matchInfo: import('./pdf-viewer-types').ScPdfPageMatchInfo,
     highlightAll: boolean,
     isSelectedPage: boolean,
@@ -1715,7 +1844,7 @@ export class ScPdfViewerCanvas {
     let flatOffset = 0;
     for (let i = 0; i < data.texts.length; i++) {
       divOffsets.push({ divIdx: i, start: flatOffset });
-      flatOffset += data.texts[i].length;
+      flatOffset += data.texts[i].length + (data.eols[i] ? 1 : 0);
     }
 
     // Convert flat match positions to div-relative coordinates

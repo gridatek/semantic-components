@@ -141,7 +141,9 @@ export interface ScPdfComment {
 /** A file attached to the document. */
 export interface ScPdfAttachment {
   filename: string;
-  content: Uint8Array;
+  /** The file, when pdf.js has loaded it (otherwise it's fetched by `id`). */
+  content?: Uint8Array;
+  id?: string;
 }
 
 /** A layer (optional content group) of the document. */

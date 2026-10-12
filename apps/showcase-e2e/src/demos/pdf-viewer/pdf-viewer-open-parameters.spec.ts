@@ -38,6 +38,10 @@ test.describe('PDF Viewer open parameters', () => {
     await expect(page.locator('[scPdfViewerFindResultsInfo]')).toHaveText(
       '1 of 1',
     );
+    // The match highlighted is the word searched for.
+    await expect(page.locator('.textLayer .highlight.selected')).toHaveText(
+      'Configuration',
+    );
 
     expect(errors).toEqual([]);
   });
