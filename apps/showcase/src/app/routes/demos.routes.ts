@@ -2665,6 +2665,27 @@ export const demosRoutes: Route[] = [
             (m) => m.PdfViewerDemo,
           ),
       },
+      {
+        path: 'pdf-viewer-form-demo',
+        loadComponent: () =>
+          import('../pages/docs/pdf-viewer/demos/pdf-viewer-form-demo').then(
+            (m) => m.PdfViewerFormDemo,
+          ),
+      },
+      {
+        path: 'pdf-viewer-open-parameters-demo',
+        loadComponent: () =>
+          import('../pages/docs/pdf-viewer/demos/pdf-viewer-open-parameters-demo').then(
+            (m) => m.PdfViewerOpenParametersDemo,
+          ),
+      },
+      {
+        path: 'pdf-viewer-presentation-demo',
+        loadComponent: () =>
+          import('../pages/docs/pdf-viewer/demos/pdf-viewer-presentation-demo').then(
+            (m) => m.PdfViewerPresentationDemo,
+          ),
+      },
     ],
   },
   {

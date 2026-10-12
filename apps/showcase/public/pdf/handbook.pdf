@@ -1,0 +1,131 @@
+%PDF-1.7
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R /Outlines 16 0 R /PageMode /UseOutlines /Dests 23 0 R /PageLabels << /Nums [0 << /S /r >> 2 << /S /D >>] >> >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [5 0 R 7 0 R 9 0 R 11 0 R 13 0 R 15 0 R] /Count 6 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Length 156 >>
+stream
+BT /F1 28 Tf 72 700 Td (Preface) Tj ET
+BT /F1 12 Tf 72 670 Td (Page 1 of the handbook.) Tj ET
+BT /F1 16 Tf 72 400 Td (Section in the middle of page 1) Tj ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 4 0 R >>
+endobj
+6 0 obj
+<< /Length 157 >>
+stream
+BT /F1 28 Tf 72 700 Td (Contents) Tj ET
+BT /F1 12 Tf 72 670 Td (Page 2 of the handbook.) Tj ET
+BT /F1 16 Tf 72 400 Td (Section in the middle of page 2) Tj ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 6 0 R >>
+endobj
+8 0 obj
+<< /Length 175 >>
+stream
+BT /F1 28 Tf 72 700 Td (Chapter 1: Getting started) Tj ET
+BT /F1 12 Tf 72 670 Td (Page 3 of the handbook.) Tj ET
+BT /F1 16 Tf 72 400 Td (Section in the middle of page 3) Tj ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 8 0 R >>
+endobj
+10 0 obj
+<< /Length 173 >>
+stream
+BT /F1 28 Tf 72 700 Td (Chapter 1: Configuration) Tj ET
+BT /F1 12 Tf 72 670 Td (Page 4 of the handbook.) Tj ET
+BT /F1 16 Tf 72 400 Td (Section in the middle of page 4) Tj ET
+endstream
+endobj
+11 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 10 0 R >>
+endobj
+12 0 obj
+<< /Length 169 >>
+stream
+BT /F1 28 Tf 72 700 Td (Chapter 2: Reference) Tj ET
+BT /F1 12 Tf 72 670 Td (Page 5 of the handbook.) Tj ET
+BT /F1 16 Tf 72 400 Td (Section in the middle of page 5) Tj ET
+endstream
+endobj
+13 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 12 0 R >>
+endobj
+14 0 obj
+<< /Length 163 >>
+stream
+BT /F1 28 Tf 72 700 Td (Chapter 2: API) Tj ET
+BT /F1 12 Tf 72 670 Td (Page 6 of the handbook.) Tj ET
+BT /F1 16 Tf 72 400 Td (Section in the middle of page 6) Tj ET
+endstream
+endobj
+15 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 14 0 R >>
+endobj
+16 0 obj
+<< /Type /Outlines /First 17 0 R /Last 21 0 R /Count 4 >>
+endobj
+17 0 obj
+<< /Title (Preface) /Parent 16 0 R /Next 18 0 R /Dest [5 0 R /XYZ 0 792 0] >>
+endobj
+18 0 obj
+<< /Title (Chapter 1) /Parent 16 0 R /Prev 17 0 R /Next 21 0 R /First 19 0 R /Last 20 0 R /Count 2 /F 2 /Dest [9 0 R /XYZ 0 792 0] >>
+endobj
+19 0 obj
+<< /Title (Middle of chapter 1) /Parent 18 0 R /Next 20 0 R /Dest [9 0 R /XYZ 0 420 0] >>
+endobj
+20 0 obj
+<< /Title (Configuration) /Parent 18 0 R /Prev 19 0 R /Dest [11 0 R /XYZ 0 792 0] >>
+endobj
+21 0 obj
+<< /Title (Chapter 2) /Parent 16 0 R /Prev 18 0 R /First 22 0 R /Last 22 0 R /Count -1 /Dest /chapter-2 >>
+endobj
+22 0 obj
+<< /Title (API) /Parent 21 0 R /Dest [15 0 R /XYZ 0 792 0] >>
+endobj
+23 0 obj
+<< /chapter-2 [13 0 R /XYZ 0 792 0] >>
+endobj
+xref
+0 24
+0000000000 65535 f 
+0000000009 00000 n 
+0000000166 00000 n 
+0000000256 00000 n 
+0000000326 00000 n 
+0000000533 00000 n 
+0000000659 00000 n 
+0000000867 00000 n 
+0000000993 00000 n 
+0000001219 00000 n 
+0000001345 00000 n 
+0000001570 00000 n 
+0000001698 00000 n 
+0000001919 00000 n 
+0000002047 00000 n 
+0000002262 00000 n 
+0000002390 00000 n 
+0000002464 00000 n 
+0000002558 00000 n 
+0000002708 00000 n 
+0000002814 00000 n 
+0000002915 00000 n 
+0000003038 00000 n 
+0000003116 00000 n 
+trailer
+<< /Size 24 /Root 1 0 R >>
+startxref
+3171
+%%EOF

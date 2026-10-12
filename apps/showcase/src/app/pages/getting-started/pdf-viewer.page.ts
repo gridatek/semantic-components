@@ -65,8 +65,8 @@ import { TocHeading } from '../../components/toc/toc-heading';
       <section class="space-y-4">
         <h2 scHeading appToc>2. Configure styles</h2>
         <p class="text-muted-foreground">
-          Import PDF.js's viewer styles (text selection, links) and add the
-          library as a Tailwind source in your
+          Import PDF.js's viewer styles (text selection, links, form fields) and
+          add the library as a Tailwind source in your
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code
           >:
         </p>
@@ -144,6 +144,63 @@ import { TocHeading } from '../../components/toc/toc-heading';
       <div scSeparator></div>
 
       <section class="space-y-4">
+        <h2 scHeading appToc>4. Host PDF.js's files (optional)</h2>
+        <p class="text-muted-foreground">
+          PDF.js loads its worker, form-script sandbox, fonts, CMaps and image
+          decoders as needed — from unpkg by default. For offline or strict-CSP
+          apps, copy them into your build in
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >angular.json</code
+          >
+          (the build target's
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">assets</code>):
+        </p>
+        <div scCodeViewer>
+          <div scCodeViewerHeader>
+            <span scCodeViewerLabel>json</span>
+            <button
+              scButton
+              variant="ghost"
+              size="icon"
+              [scCopyToClipboard]="assetsCode"
+              #copyAssets="scCopyToClipboard"
+              aria-label="Copy to clipboard"
+            >
+              @if (copyAssets.copied()) {
+                <svg siCheckIcon></svg>
+              } @else {
+                <svg siCopyIcon></svg>
+              }
+            </button>
+          </div>
+          <div scCodeViewerContent [code]="assetsCode" language="json"></div>
+        </div>
+        <p class="text-muted-foreground">and point the viewer at them:</p>
+        <div scCodeViewer>
+          <div scCodeViewerHeader>
+            <span scCodeViewerLabel>html</span>
+            <button
+              scButton
+              variant="ghost"
+              size="icon"
+              [scCopyToClipboard]="assetsUrlCode"
+              #copyAssetsUrl="scCopyToClipboard"
+              aria-label="Copy to clipboard"
+            >
+              @if (copyAssetsUrl.copied()) {
+                <svg siCheckIcon></svg>
+              } @else {
+                <svg siCopyIcon></svg>
+              }
+            </button>
+          </div>
+          <div scCodeViewerContent [code]="assetsUrlCode" language="html"></div>
+        </div>
+      </section>
+
+      <div scSeparator></div>
+
+      <section class="space-y-4">
         <h2 scHeading appToc>Usage</h2>
         <p class="text-muted-foreground">
           The viewer is assembled from parts — see the
@@ -158,6 +215,17 @@ import { TocHeading } from '../../components/toc/toc-heading';
 export default class PdfViewerInstallPage {
   readonly stylesCode = `@import 'pdfjs-dist/web/pdf_viewer.css';
 @source "../node_modules/@semantic-components/pdf-viewer";`;
+
+  readonly assetsCode = `"assets": [
+  {
+    "glob": "**/*",
+    "input": "node_modules/pdfjs-dist",
+    "ignore": ["legacy/**", "types/**", "web/**", "image_decoders/**", "**/*.map"],
+    "output": "pdfjs"
+  }
+]`;
+
+  readonly assetsUrlCode = `<div scPdfViewer src="document.pdf" assetsUrl="/pdfjs/">…</div>`;
 
   readonly overlayCode = `import {
   FullscreenOverlayContainer,

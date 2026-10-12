@@ -1196,6 +1196,16 @@ export class ScPdfViewerCanvas {
       hasJSActions,
       fieldObjects,
     } as never);
+
+    // pdf.js puts a field's name (its tooltip, /TU) on the wrapping section
+    // as a title only; give the field itself that accessible name.
+    for (const field of annotationLayerDiv.querySelectorAll<HTMLElement>(
+      'section[title] :is(input, textarea, select)',
+    )) {
+      if (field.hasAttribute('aria-label')) continue;
+      const name = field.closest('section')?.getAttribute('title');
+      if (name) field.setAttribute('aria-label', name);
+    }
   }
 
   /** A pure XFA form's page, as HTML (pdf.js's XFA layer). */

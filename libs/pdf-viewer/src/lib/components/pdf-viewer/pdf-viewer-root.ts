@@ -212,15 +212,25 @@ export class ScPdfViewerRoot {
   readonly title = input<string>('');
   readonly initialPage = input(1);
   readonly initialZoom = input<ScPdfZoomLevel>('auto');
+  /**
+   * Base URL of the `pdfjs-dist` package's files (trailing slash): the
+   * worker, the scripting sandbox, and the fonts, CMaps (Chinese, Japanese,
+   * Korean text), wasm image decoders and colour profiles pdf.js loads as
+   * needed. Defaults to unpkg for the installed version; host them yourself
+   * for offline or strict-CSP apps (`pdfjs-dist`'s `build`, `cmaps`,
+   * `standard_fonts`, `wasm` and `iccs` folders).
+   */
+  readonly assetsUrl = input(`https://unpkg.com/pdfjs-dist@${version}/`);
+  /** URL of `pdf.worker.mjs`, if not under `assetsUrl`. */
   readonly workerSrc = input<string>('');
   /**
    * Run the document's JavaScript (form calculations, formatting,
    * validation, actions) in pdf.js's sandbox, as pdf.js does.
    */
   readonly enableScripting = input(true);
-  /** URL of pdf.js's pdf.sandbox.mjs (defaults to unpkg, like the worker). */
+  /** URL of `pdf.sandbox.mjs`, if not under `assetsUrl`. */
   readonly sandboxSrc = input<string>('');
-  /** URL of pdf.js's wasm/ folder, with a trailing slash (defaults to unpkg). */
+  /** URL of pdf.js's `wasm/` folder (trailing slash), if not under `assetsUrl`. */
   readonly wasmSrc = input<string>('');
 
   // Outputs
@@ -351,10 +361,8 @@ export class ScPdfViewerRoot {
     },
     () => ({
       sandboxSrc:
-        this.sandboxSrc() ||
-        `https://unpkg.com/pdfjs-dist@${version}/build/pdf.sandbox.min.mjs`,
-      wasmSrc:
-        this.wasmSrc() || `https://unpkg.com/pdfjs-dist@${version}/wasm/`,
+        this.sandboxSrc() || `${this.assetsUrl()}build/pdf.sandbox.min.mjs`,
+      wasmSrc: this.wasmSrc() || `${this.assetsUrl()}wasm/`,
     }),
   );
 
@@ -538,7 +546,7 @@ export class ScPdfViewerRoot {
     if (customSrc) {
       GlobalWorkerOptions.workerSrc = customSrc;
     } else {
-      GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${version}/build/pdf.worker.min.mjs`;
+      GlobalWorkerOptions.workerSrc = `${this.assetsUrl()}build/pdf.worker.min.mjs`;
     }
   }
 
@@ -602,7 +610,7 @@ export class ScPdfViewerRoot {
 
     this.isLoading.set(true);
     // XFA forms render as HTML (the XFA layer), as in pdf.js.
-    const task = getDocument({ ...source, enableXfa: true });
+    const task = getDocument({ ...source, ...this.loadOptions() });
     this.loadingTask = task;
 
     task.onPassword = (
@@ -651,6 +659,23 @@ export class ScPdfViewerRoot {
         err instanceof Error ? err.message : 'Unable to load the PDF document.';
       this.onError(message);
     }
+  }
+
+  /**
+   * What pdf.js's viewer passes when loading: XFA as HTML, non-embedded
+   * standard fonts, CMaps for CJK text, wasm decoders (JPEG 2000, JBIG2) and
+   * colour profiles — all under `assetsUrl`.
+   */
+  private loadOptions() {
+    const assets = this.assetsUrl();
+    return {
+      enableXfa: true,
+      standardFontDataUrl: `${assets}standard_fonts/`,
+      cMapUrl: `${assets}cmaps/`,
+      cMapPacked: true,
+      wasmUrl: this.wasmSrc() || `${assets}wasm/`,
+      iccUrl: `${assets}iccs/`,
+    };
   }
 
   /** Opens a local file (e.g. from a file input or drag and drop). */
@@ -1244,7 +1269,10 @@ export class ScPdfViewerRoot {
     let count: number;
     try {
       // A copy: pdf.js may take over the buffer it's given.
-      const other = await getDocument({ data: data.slice() }).promise;
+      const other = await getDocument({
+        data: data.slice(),
+        ...this.loadOptions(),
+      }).promise;
       count = other.numPages;
       other.loadingTask.destroy();
     } catch {
@@ -1445,8 +1473,10 @@ export class ScPdfViewerRoot {
     try {
       await this.scripting.willPrint();
       if (this.hasChanges()) {
-        printed = await getDocument({ data: await this.saveDocument() })
-          .promise;
+        printed = await getDocument({
+          data: await this.saveDocument(),
+          ...this.loadOptions(),
+        }).promise;
       }
       for (let i = 1; i <= printed.numPages; i++) {
         if (this.printCancelled) break;
