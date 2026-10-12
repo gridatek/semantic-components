@@ -14,9 +14,9 @@ async function openHandbook(page: Page): Promise<void> {
     page.getByRole('menuitem', { name: 'Open file…' }).click(),
   ]);
   await chooser.setFiles(HANDBOOK);
-  await expect(
-    page.locator('[data-slot="pdf-viewer-page-info"] span'),
-  ).toHaveText('(1 of 6)', { timeout: 20_000 });
+  await expect(page.getByTestId('page-count')).toHaveText('(1 of 6)', {
+    timeout: 20_000,
+  });
 }
 
 /** The text of the first page. */
@@ -39,9 +39,7 @@ test.describe('PDF Viewer document features', () => {
     await expect(outline.getByRole('button', { name: 'API' })).toHaveCount(0);
 
     await outline.getByRole('button', { name: 'Middle of chapter 1' }).click();
-    await expect(
-      page.locator('[data-slot="pdf-viewer-page-info"] span'),
-    ).toHaveText('(3 of 6)');
+    await expect(page.getByTestId('page-count')).toHaveText('(3 of 6)');
     // The current bookmark: the first (top-level first) for the page, as
     // pdf.js — Chapter 1 also starts on page 3.
     await expect(outline.locator('[aria-current="location"]')).toHaveText(
@@ -54,7 +52,7 @@ test.describe('PDF Viewer document features', () => {
     const errors = collectErrors(page);
     await openHandbook(page);
     await page.getByRole('tab', { name: 'Pages' }).click();
-    const pageCount = page.locator('[data-slot="pdf-viewer-page-info"] span');
+    const pageCount = page.getByTestId('page-count');
 
     // Move page ii before page i.
     await page.getByRole('checkbox', { name: 'Select page ii' }).check();

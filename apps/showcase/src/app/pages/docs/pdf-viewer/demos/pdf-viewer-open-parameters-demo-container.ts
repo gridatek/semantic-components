@@ -26,11 +26,11 @@ import {
   ScPdfViewerContent,
   ScPdfViewerFindResultsInfo,
   ScPdfViewerLoading,
-  ScPdfViewerPageInfo,
+  ScPdfViewerPageInput,
   ScPdfViewerSpacer,
   ScPdfViewerToolbar,
 } from '@semantic-components/pdf-viewer';
-import { ScButton, ScSpinner, cn } from '@semantic-components/ui';
+import { ScButton, ScInput, ScSpinner, cn } from '@semantic-components/ui';
 import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
 
 /**
@@ -43,13 +43,14 @@ import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
     ScPdfViewer,
     ScPdfViewerContainer,
     ScPdfViewerToolbar,
-    ScPdfViewerPageInfo,
+    ScPdfViewerPageInput,
     ScPdfViewerSpacer,
     ScPdfViewerFindResultsInfo,
     ScPdfViewerContent,
     ScPdfViewerLoading,
     ScPdfViewerCanvas,
     ScButton,
+    ScInput,
     ScSpinner,
     SiLoaderCircleIcon,
   ],
@@ -62,8 +63,15 @@ import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
       #viewer="scPdfViewer"
     >
       <div scPdfViewerContainer class="flex size-full flex-col">
-        <div scPdfViewerToolbar class="flex-wrap py-1.5">
-          <div scPdfViewerPageInfo></div>
+        <div scPdfViewerToolbar aria-label="Handbook" class="flex-wrap py-1.5">
+          <input scInput scPdfViewerPageInput aria-label="Page" />
+          <span class="text-muted-foreground text-sm" data-testid="page-count">
+            @if (viewer.pageLabels()) {
+              ({{ viewer.currentPage() }} of {{ viewer.totalPages() }})
+            } @else {
+              / {{ viewer.totalPages() }}
+            }
+          </span>
           <div scPdfViewerSpacer></div>
           <button
             scButton
@@ -89,11 +97,27 @@ import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
           >
             #search=Configuration
           </button>
-          <span scPdfViewerFindResultsInfo class="text-sm"></span>
+          <span scPdfViewerFindResultsInfo>
+            @switch (viewer.findState()) {
+              @case ('not-found') {
+                Phrase not found
+              }
+              @case ('pending') {
+                Searching…
+              }
+              @default {
+                @if (viewer.findTotalMatches()) {
+                  {{ viewer.findCurrentMatchIndex() + 1 }} of
+                  {{ viewer.findTotalMatches() }}
+                }
+              }
+            }
+          </span>
         </div>
         <div scPdfViewerContent>
           <div scPdfViewerLoading>
             <svg scSpinner siLoaderCircleIcon class="size-6"></svg>
+            Loading the handbook…
           </div>
           <sc-pdf-viewer-canvas />
         </div>

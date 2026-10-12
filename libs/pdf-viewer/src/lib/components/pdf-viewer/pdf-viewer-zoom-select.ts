@@ -1,78 +1,81 @@
 import {
-  Component,
-  ViewEncapsulation,
+  Directive,
+  ElementRef,
+  afterRenderEffect,
   computed,
   inject,
   input,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { SC_PDF_VIEWER } from './pdf-viewer';
-import { ZOOM_LEVELS } from './pdf-viewer-types';
+import type { ScPdfZoomLevel } from './pdf-viewer-types';
+
+const NAMED: readonly string[] = [
+  'auto',
+  'page-actual',
+  'page-fit',
+  'page-width',
+];
 
 /**
- * The zoom levels as `<option>`s, bound to the viewer's zoom. Use on a
- * `select[scNativeSelect]` (inside a `scNativeSelectContainer`).
+ * Binds a `select` to the zoom (`#zoom="scPdfViewerZoomSelect"`). Write its
+ * options: `auto`, `page-actual`, `page-fit`, `page-width`, and one per
+ * `zoom.scales()` (`1.5` for 150%). A zoom between them (wheel, pinch) is
+ * `zoom.customZoom()` — add an option for it while it's set
+ * (`zoom.customPercent()`). Give the select an `aria-label`.
  */
-@Component({
+@Directive({
   selector: 'select[scPdfViewerZoomSelect]',
-  template: `
-    <!-- [selected] rather than the select's value: the custom option may not
-         exist yet when the select's own bindings run. -->
-    @for (level of zoomLevels; track level.value) {
-      <option
-        [value]="level.value"
-        [selected]="level.value.toString() === zoomLevelValue()"
-      >
-        {{ level.label }}
-      </option>
-    }
-    @if (customLevel(); as custom) {
-      <option [value]="custom.value" selected>{{ custom.label }}</option>
-    }
-  `,
+  exportAs: 'scPdfViewerZoomSelect',
   host: {
     'data-slot': 'pdf-viewer-zoom-select',
     '[class]': 'class()',
-    '[attr.aria-label]': 'ariaLabel()',
-    '(change)': 'onZoomSelect($event)',
+    '(change)': 'onChange($event)',
   },
-  encapsulation: ViewEncapsulation.None,
 })
 export class ScPdfViewerZoomSelect {
   readonly pdfViewer = inject(SC_PDF_VIEWER);
   readonly classInput = input<string>('', { alias: 'class' });
-  /** Accessible name. */
-  readonly ariaLabel = input('Zoom', { alias: 'aria-label' });
-
-  protected readonly zoomLevels = ZOOM_LEVELS;
+  /** The preset scales to offer (as pdf.js's viewer does). */
+  readonly scales = input<readonly number[]>([
+    0.5, 0.75, 1, 1.25, 1.5, 2, 3, 4,
+  ]);
 
   protected readonly class = computed(() => cn(this.classInput()));
 
-  /** A zoom that isn't a preset (wheel, pinch), shown as its percentage. */
-  protected readonly customLevel = computed(() => {
+  /** The zoom as an option value. */
+  readonly value = computed(() => String(this.pdfViewer.zoom()));
+
+  /** A scale that isn't a preset (as an option value), or null. */
+  readonly customZoom = computed(() => {
     const zoom = this.pdfViewer.zoom();
-    if (typeof zoom !== 'number') return null;
-    if (this.zoomLevels.some((level) => level.value === zoom)) return null;
-    return { value: zoom.toString(), label: `${Math.round(zoom * 100)}%` };
+    return typeof zoom === 'number' && !this.scales().includes(zoom)
+      ? String(zoom)
+      : null;
   });
 
-  protected readonly zoomLevelValue = computed(() => {
-    const z = this.pdfViewer.zoom();
-    return typeof z === 'number' ? z.toString() : z;
-  });
+  /** `customZoom()` in percent, rounded. */
+  readonly customPercent = computed(() =>
+    Math.round(Number(this.customZoom() ?? 0) * 100),
+  );
 
-  protected onZoomSelect(event: Event): void {
+  constructor() {
+    const select =
+      inject<ElementRef<HTMLSelectElement>>(ElementRef).nativeElement;
+    // After the options render — the custom one appears in the same pass —
+    // select the zoom's.
+    afterRenderEffect(() => {
+      select.value = this.value();
+    });
+  }
+
+  protected onChange(event: Event): void {
     const value = (event.target as HTMLSelectElement).value;
-    if (
-      value === 'auto' ||
-      value === 'page-fit' ||
-      value === 'page-width' ||
-      value === 'page-actual'
-    ) {
-      this.pdfViewer.setZoom(value);
+    if (NAMED.includes(value)) {
+      this.pdfViewer.setZoom(value as ScPdfZoomLevel);
       return;
     }
-    const numValue = parseFloat(value);
-    if (!isNaN(numValue)) this.pdfViewer.setZoom(numValue);
+    const scale = parseFloat(value);
+    if (!isNaN(scale)) this.pdfViewer.setZoom(scale);
   }
 }

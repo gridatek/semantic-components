@@ -1,50 +1,23 @@
-import {
-  Component,
-  ViewEncapsulation,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
-import { ScProgress, cn } from '@semantic-components/ui';
+import { Directive, computed, effect, inject, input } from '@angular/core';
+import { ScProgress, bindInput, cn } from '@semantic-components/ui';
 import { SC_PDF_VIEWER } from './pdf-viewer';
 
 /**
  * A thin bar along the top of the content while the document downloads —
  * also after the first pages show, since pdf.js renders before the whole
- * file has arrived. Hidden when the size isn't known (the loading state
- * covers that). Place it inside `scPdfViewerContent`.
+ * file has arrived; hidden when the size isn't known. Use on a `scProgress`
+ * inside `scPdfViewerContent`, and give it an `aria-label`.
  */
-@Component({
-  selector: 'sc-pdf-viewer-loading-bar',
-  imports: [ScProgress],
-  template: `
-    @if (percent() !== null) {
-      <div
-        scProgress
-        class="h-1 rounded-none bg-transparent"
-        [value]="percent()"
-        [aria-label]="ariaLabel()"
-      ></div>
-    }
-  `,
+@Directive({
+  selector: '[scProgress][scPdfViewerLoadingBar]',
   host: {
     'data-slot': 'pdf-viewer-loading-bar',
-    '[class]': 'class()',
+    '[hidden]': 'percent() === null',
   },
-  encapsulation: ViewEncapsulation.None,
 })
 export class ScPdfViewerLoadingBar {
   readonly pdfViewer = inject(SC_PDF_VIEWER);
   readonly classInput = input<string>('', { alias: 'class' });
-  /** Accessible name of the progress bar. */
-  readonly ariaLabel = input('Loading document', { alias: 'aria-label' });
-
-  protected readonly class = computed(() =>
-    cn(
-      'pointer-events-none absolute inset-x-0 top-0 z-20 block',
-      this.classInput(),
-    ),
-  );
 
   /** Download progress in percent, while it's known and not complete. */
   protected readonly percent = computed(() => {
@@ -53,4 +26,18 @@ export class ScPdfViewerLoadingBar {
       ? Math.round(progress * 100)
       : null;
   });
+
+  protected readonly class = computed(() =>
+    cn(
+      'pointer-events-none absolute inset-x-0 top-0 z-20 h-1 rounded-none bg-transparent',
+      this.classInput(),
+    ),
+  );
+
+  constructor() {
+    // Into the progress bar's own inputs, so its classes merge with ours.
+    const progress = inject(ScProgress);
+    bindInput(progress.classInput, this.class);
+    effect(() => progress.value.set(this.percent()));
+  }
 }

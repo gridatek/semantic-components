@@ -1,17 +1,14 @@
-import { Component, ViewEncapsulation, computed, input } from '@angular/core';
+import { Directive, computed, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
-// Toolbar Container (Composable)
-@Component({
+/** The toolbar row (`role="toolbar"`); give it an `aria-label`. */
+@Directive({
   selector: '[scPdfViewerToolbar]',
-  template: ` <ng-content /> `,
   host: {
     'data-slot': 'pdf-viewer-toolbar',
     role: 'toolbar',
-    '[attr.aria-label]': '"PDF viewer toolbar"',
     '[class]': 'class()',
   },
-  encapsulation: ViewEncapsulation.None,
 })
 export class ScPdfViewerToolbar {
   readonly classInput = input<string>('', { alias: 'class' });

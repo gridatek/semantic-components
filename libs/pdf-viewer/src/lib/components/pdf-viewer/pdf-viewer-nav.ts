@@ -1,15 +1,14 @@
-import { Component, ViewEncapsulation, computed, input } from '@angular/core';
+import { Directive, computed, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
-@Component({
+/** Groups the page navigation controls (`role="group"`); give it an `aria-label`. */
+@Directive({
   selector: '[scPdfViewerNav]',
-  template: ` <ng-content /> `,
   host: {
+    'data-slot': 'pdf-viewer-nav',
     role: 'group',
-    '[attr.aria-label]': '"Page navigation"',
     '[class]': 'class()',
   },
-  encapsulation: ViewEncapsulation.None,
 })
 export class ScPdfViewerNav {
   readonly classInput = input<string>('', { alias: 'class' });

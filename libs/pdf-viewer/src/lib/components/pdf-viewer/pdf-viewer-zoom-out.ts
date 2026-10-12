@@ -9,7 +9,6 @@ import { SC_PDF_VIEWER } from './pdf-viewer';
   selector: 'button[scPdfViewerZoomOut]',
   host: {
     '[class]': 'class()',
-    '[attr.aria-label]': 'ariaLabel()',
     '(click)': 'pdfViewer.zoomOut()',
   },
 })
@@ -17,8 +16,6 @@ export class ScPdfViewerZoomOut {
   readonly pdfViewer = inject(SC_PDF_VIEWER);
 
   readonly classInput = input<string>('', { alias: 'class' });
-  /** Accessible name — the button usually shows only an icon. */
-  readonly ariaLabel = input('Zoom out', { alias: 'aria-label' });
 
   protected readonly class = computed(() => cn(this.classInput()));
 

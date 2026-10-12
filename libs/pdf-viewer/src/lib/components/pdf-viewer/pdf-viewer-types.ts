@@ -15,9 +15,28 @@ export interface ScPdfZoomChangeEvent {
   scale: number;
 }
 
-export interface ScPdfErrorEvent {
-  error: Error;
-  message: string;
+/** Why a document couldn't be loaded; the consumer writes the message. */
+export type ScPdfLoadErrorKind =
+  'invalid' | 'missing' | 'network' | 'password' | 'unknown';
+
+/** A failed load: its kind, and pdf.js's error when there is one. */
+export interface ScPdfLoadError {
+  kind: ScPdfLoadErrorKind;
+  error: Error | null;
+}
+
+/** What the undo bar can undo, and how many items it concerns. */
+export type ScPdfUndoKind =
+  | 'annotation-deleted'
+  | 'annotations-cleared'
+  | 'pages-moved'
+  | 'pages-deleted'
+  | 'pages-pasted'
+  | 'pages-inserted';
+
+export interface ScPdfUndoable {
+  kind: ScPdfUndoKind;
+  count: number;
 }
 
 export type ScPdfFindState =
@@ -119,17 +138,30 @@ export interface ScPdfComment {
   color: string;
 }
 
-export const ZOOM_LEVELS: { label: string; value: ScPdfZoomLevel }[] = [
-  { label: 'Auto', value: 'auto' },
-  { label: 'Actual Size', value: 'page-actual' },
-  { label: 'Page Fit', value: 'page-fit' },
-  { label: 'Page Width', value: 'page-width' },
-  { label: '50%', value: 0.5 },
-  { label: '75%', value: 0.75 },
-  { label: '100%', value: 1 },
-  { label: '125%', value: 1.25 },
-  { label: '150%', value: 1.5 },
-  { label: '200%', value: 2 },
-  { label: '300%', value: 3 },
-  { label: '400%', value: 4 },
-];
+/** A file attached to the document. */
+export interface ScPdfAttachment {
+  filename: string;
+  content: Uint8Array;
+}
+
+/** A layer (optional content group) of the document. */
+export interface ScPdfLayer {
+  id: string;
+  /** From the document. */
+  name: string;
+  visible: boolean;
+}
+
+/** A viewer setting the consumer's controls bind to (`scPdfViewerSetting`). */
+export type ScPdfViewerSettingKey =
+  | 'cursorTool'
+  | 'scrollMode'
+  | 'spreadMode'
+  | 'highlightColor'
+  | 'highlightThickness'
+  | 'highlightShowAll'
+  | 'freetextColor'
+  | 'freetextSize'
+  | 'inkColor'
+  | 'inkThickness'
+  | 'inkOpacity';

@@ -1,15 +1,14 @@
-import { Component, ViewEncapsulation, computed, input } from '@angular/core';
+import { Directive, computed, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
-@Component({
+/** Groups the zoom controls (`role="group"`); give it an `aria-label`. */
+@Directive({
   selector: '[scPdfViewerZoom]',
-  template: ` <ng-content /> `,
   host: {
+    'data-slot': 'pdf-viewer-zoom',
     role: 'group',
-    '[attr.aria-label]': '"Zoom controls"',
     '[class]': 'class()',
   },
-  encapsulation: ViewEncapsulation.None,
 })
 export class ScPdfViewerZoom {
   readonly classInput = input<string>('', { alias: 'class' });

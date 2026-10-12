@@ -13,6 +13,7 @@
     "directory": "libs/pdf-viewer"
   },
   "peerDependencies": {
+    "@angular/common": ">=21.1.0",
     "@angular/core": ">=21.1.0",
     "@semantic-components/ui": "0.81.0",
     "pdfjs-dist": ">=6.0.0 <7.0.0"

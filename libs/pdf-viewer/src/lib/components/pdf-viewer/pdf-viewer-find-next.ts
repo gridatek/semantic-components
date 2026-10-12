@@ -9,7 +9,6 @@ import { SC_PDF_VIEWER } from './pdf-viewer';
   selector: 'button[scPdfViewerFindNext]',
   host: {
     '[class]': 'class()',
-    '[attr.aria-label]': 'ariaLabel()',
     '(click)': 'pdfViewer.findNext()',
   },
 })
@@ -17,8 +16,6 @@ export class ScPdfViewerFindNext {
   readonly pdfViewer = inject(SC_PDF_VIEWER);
 
   readonly classInput = input<string>('', { alias: 'class' });
-  /** Accessible name — the button usually shows only an icon. */
-  readonly ariaLabel = input('Next match', { alias: 'aria-label' });
 
   protected readonly class = computed(() => cn(this.classInput()));
 

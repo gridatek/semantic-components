@@ -9,7 +9,7 @@ export { ScPdfViewerToolbar } from './pdf-viewer-toolbar-base';
 export { ScPdfViewerNav } from './pdf-viewer-nav';
 export { ScPdfViewerPrevPage } from './pdf-viewer-prev-page';
 export { ScPdfViewerNextPage } from './pdf-viewer-next-page';
-export { ScPdfViewerPageInfo } from './pdf-viewer-page-info';
+export { ScPdfViewerPageInput } from './pdf-viewer-page-input';
 export { ScPdfViewerZoom } from './pdf-viewer-zoom';
 export { ScPdfViewerZoomIn } from './pdf-viewer-zoom-in';
 export { ScPdfViewerZoomOut } from './pdf-viewer-zoom-out';
@@ -24,8 +24,16 @@ export { ScPdfViewerSpacer } from './pdf-viewer-spacer';
 // Content
 export { ScPdfViewerContent } from './pdf-viewer-content';
 
-// Canvas renderer
+// Canvas renderer, and what you place on its pages
 export { ScPdfViewerCanvas } from './pdf-viewer-canvas';
+export { ScPdfViewerAnnotationToolbar } from './pdf-viewer-annotation-toolbar';
+export type { ScPdfAnnotationToolbarContext } from './pdf-viewer-annotation-toolbar';
+export { ScPdfViewerCommentMarker } from './pdf-viewer-comment-marker';
+export type { ScPdfCommentMarkerContext } from './pdf-viewer-comment-marker';
+export { ScPdfViewerAnnotationDelete } from './pdf-viewer-annotation-delete';
+export { ScPdfViewerAnnotationAltText } from './pdf-viewer-annotation-alt-text';
+export { ScPdfViewerAnnotationColor } from './pdf-viewer-annotation-color';
+export { ScPdfViewerAddImage } from './pdf-viewer-add-image';
 
 // State components
 export { ScPdfViewerLoading } from './pdf-viewer-loading';
@@ -42,39 +50,85 @@ export { ScPdfViewerFindNext } from './pdf-viewer-find-next';
 export { ScPdfViewerFindPrevious } from './pdf-viewer-find-previous';
 export { ScPdfViewerFindResultsInfo } from './pdf-viewer-find-results-info';
 
-// Editor param toolbars
-export { ScPdfViewerEditorHighlightParams } from './pdf-viewer-editor-highlight-params';
-export { ScPdfViewerEditorFreetextParams } from './pdf-viewer-editor-freetext-params';
-export { ScPdfViewerEditorInkParams } from './pdf-viewer-editor-ink-params';
+// Settings (view options, annotation tool options) on the consumer's controls
+export { ScPdfViewerSetting } from './pdf-viewer-setting';
 
-// View options
-export { ScPdfViewerViewOptions } from './pdf-viewer-view-options';
-
-// Dialogs
-export { ScPdfViewerPasswordDialog } from './pdf-viewer-password-dialog';
-export { ScPdfViewerSignatureDialog } from './pdf-viewer-signature-dialog';
-export { ScPdfViewerSignatureList } from './pdf-viewer-signature-list';
-export { ScPdfViewerAltTextDialog } from './pdf-viewer-alt-text-dialog';
+// Dialogs (on the consumer's scDialogProvider)
+export { ScPdfViewerDialog } from './pdf-viewer-dialog';
+export type { ScPdfViewerDialogKind } from './pdf-viewer-dialog';
+export { ScPdfViewerPasswordForm } from './pdf-viewer-password-form';
+export { ScPdfViewerPasswordInput } from './pdf-viewer-password-input';
 export { ScPdfViewerPrintProgress } from './pdf-viewer-print-progress';
+export { ScPdfViewerAltTextForm } from './pdf-viewer-alt-text-form';
+export { ScPdfViewerAltTextInput } from './pdf-viewer-alt-text-input';
+export { ScPdfViewerAltTextKind } from './pdf-viewer-alt-text-kind';
+
+// Signatures
+export {
+  ScPdfViewerSignatureForm,
+  SC_PDF_SIGNATURE_FONT,
+  SC_PDF_SIGNATURE_INK,
+} from './pdf-viewer-signature-form';
+export type {
+  ScPdfSignatureMode,
+  ScPdfSignatureStroke,
+} from './pdf-viewer-signature-form';
+export { ScPdfViewerSignatureName } from './pdf-viewer-signature-name';
+export { ScPdfViewerSignaturePad } from './pdf-viewer-signature-pad';
+export { ScPdfViewerSignatureImage } from './pdf-viewer-signature-image';
+export { ScPdfViewerSignatureDescription } from './pdf-viewer-signature-description';
+export { ScPdfViewerSignatureAdd } from './pdf-viewer-signature-add';
+export { ScPdfViewerSignatureClear } from './pdf-viewer-signature-clear';
+export { ScPdfViewerSignaturePlace } from './pdf-viewer-signature-place';
+export { ScPdfViewerSignatureRemove } from './pdf-viewer-signature-remove';
+export { ScPdfViewerSignatureNew } from './pdf-viewer-signature-new';
+
+// Comments
+export { ScPdfViewerComment } from './pdf-viewer-comment';
+export { ScPdfViewerCommentAdd } from './pdf-viewer-comment-add';
+export { ScPdfViewerCommentForm } from './pdf-viewer-comment-form';
+export { ScPdfViewerCommentInput } from './pdf-viewer-comment-input';
+export { ScPdfViewerCommentCancel } from './pdf-viewer-comment-cancel';
+export { ScPdfViewerCommentShow } from './pdf-viewer-comment-show';
+export { ScPdfViewerCommentRemove } from './pdf-viewer-comment-remove';
 
 // Sidebar
 export { ScPdfViewerSidebarResizer } from './pdf-viewer-sidebar-resizer';
-export { ScPdfViewerLayersView } from './pdf-viewer-layers-view';
-export { ScPdfViewerCommentSidebar } from './pdf-viewer-comment-sidebar';
+export { ScPdfViewerLayer } from './pdf-viewer-layer';
+export { ScPdfViewerAttachment } from './pdf-viewer-attachment';
 
-// Editor undo bar
-export { ScPdfViewerEditorUndoBar } from './pdf-viewer-editor-undo-bar';
+// Outline
+export { ScPdfViewerOutlineItem } from './pdf-viewer-outline-item';
+export { ScPdfViewerOutlineToggle } from './pdf-viewer-outline-toggle';
+export { ScPdfViewerOutlineExpandAll } from './pdf-viewer-outline-expand-all';
+export { ScPdfViewerOutlineCollapseAll } from './pdf-viewer-outline-collapse-all';
+export { ScPdfViewerOutlineFindCurrent } from './pdf-viewer-outline-find-current';
 
-// Editor colors
-export {
-  SC_PDF_HIGHLIGHT_COLORS,
-  SC_PDF_INK_COLORS,
-} from './pdf-viewer-editor-colors';
-export type { ScPdfEditorColor } from './pdf-viewer-editor-colors';
+// Pages (thumbnails) and page organisation
+export { ScPdfViewerPages } from './pdf-viewer-pages';
+export { ScPdfViewerPageItem } from './pdf-viewer-page-item';
+export { ScPdfViewerPageSelect } from './pdf-viewer-page-select';
+export { ScPdfViewerGoToPage } from './pdf-viewer-go-to-page';
+export { ScPdfViewerThumbnail } from './pdf-viewer-thumbnail';
+export { ScPdfViewerMovePagesEarlier } from './pdf-viewer-move-pages-earlier';
+export { ScPdfViewerMovePagesLater } from './pdf-viewer-move-pages-later';
+export { ScPdfViewerCopyPages } from './pdf-viewer-copy-pages';
+export { ScPdfViewerCutPages } from './pdf-viewer-cut-pages';
+export { ScPdfViewerPastePages } from './pdf-viewer-paste-pages';
+export { ScPdfViewerDeletePages } from './pdf-viewer-delete-pages';
+export { ScPdfViewerExportPages } from './pdf-viewer-export-pages';
+export { ScPdfViewerInsertPages } from './pdf-viewer-insert-pages';
+
+// Undo bar
+export { ScPdfViewerUndoBar } from './pdf-viewer-undo-bar';
+export { ScPdfViewerUndo } from './pdf-viewer-undo';
+export { ScPdfViewerUndoDismiss } from './pdf-viewer-undo-dismiss';
 
 // Types
-export { ZOOM_LEVELS } from './pdf-viewer-types';
 export type {
+  ScPdfViewerSettingKey,
+  ScPdfLayer,
+  ScPdfAttachment,
   ScPdfZoomLevel,
   ScPdfCursorTool,
   ScPdfScrollMode,
@@ -89,7 +143,10 @@ export type {
   ScPdfLoadEvent,
   ScPdfPageChangeEvent,
   ScPdfZoomChangeEvent,
-  ScPdfErrorEvent,
+  ScPdfLoadError,
+  ScPdfLoadErrorKind,
+  ScPdfUndoable,
+  ScPdfUndoKind,
   ScPdfSignatureData,
   ScPdfComment,
 } from './pdf-viewer-types';

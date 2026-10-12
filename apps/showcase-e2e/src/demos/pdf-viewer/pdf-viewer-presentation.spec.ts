@@ -12,9 +12,7 @@ test.describe('PDF Viewer presentation mode', () => {
 
     const viewer = page.locator('[scPdfViewer]');
     await expect(viewer).toHaveAttribute('data-presenting', 'true');
-    await expect(
-      page.getByRole('toolbar', { name: 'PDF viewer toolbar' }),
-    ).toBeHidden();
+    await expect(page.getByRole('toolbar', { name: 'Handbook' })).toBeHidden();
     const shown = page.locator('div[data-page]:visible .textLayer');
     await expect(shown).toHaveCount(1);
     await expect(shown).toContainText('Preface');
@@ -31,9 +29,7 @@ test.describe('PDF Viewer presentation mode', () => {
     // Leaving fullscreen (Escape) ends it and restores the view.
     await page.evaluate(() => document.exitFullscreen());
     await expect(viewer).not.toHaveAttribute('data-presenting');
-    await expect(
-      page.getByRole('toolbar', { name: 'PDF viewer toolbar' }),
-    ).toBeVisible();
+    await expect(page.getByRole('toolbar', { name: 'Handbook' })).toBeVisible();
     await expect(page.locator('div[data-page]:visible')).toHaveCount(6);
 
     expect(errors).toEqual([]);

@@ -1,10 +1,13 @@
+import { NgTemplateOutlet } from '@angular/common';
 import {
   Component,
   DestroyRef,
   ElementRef,
   ViewEncapsulation,
   afterNextRender,
+  afterRenderEffect,
   computed,
+  contentChild,
   effect,
   inject,
   input,
@@ -12,7 +15,7 @@ import {
   untracked,
   viewChild,
 } from '@angular/core';
-import { buttonVariants, cn } from '@semantic-components/ui';
+import { cn } from '@semantic-components/ui';
 import type {
   PDFDocumentProxy,
   PDFPageProxy,
@@ -28,6 +31,9 @@ import {
 } from 'pdfjs-dist';
 import type { ScPdfViewer } from './pdf-viewer';
 import { SC_PDF_VIEWER } from './pdf-viewer';
+import { ScPdfViewerAnnotationToolbar } from './pdf-viewer-annotation-toolbar';
+import { ScPdfViewerCommentMarker } from './pdf-viewer-comment-marker';
+import type { ScPdfComment, ScPdfEditorAnnotation } from './pdf-viewer-types';
 
 const DEFAULT_LINK_REL = 'noopener noreferrer nofollow';
 
@@ -199,6 +205,7 @@ interface PageLayout {
 
 @Component({
   selector: 'sc-pdf-viewer-canvas',
+  imports: [NgTemplateOutlet],
   template: `
     <div
       #scrollContainer
@@ -225,6 +232,8 @@ interface PageLayout {
               <div
                 class="bg-background relative shrink-0 shadow-sm [--scale-round-x:1px] [--scale-round-y:1px]"
                 [attr.data-page]="page.pageNumber"
+                [attr.role]="pageName() ? 'region' : null"
+                [attr.aria-label]="pageAriaLabel(page.pageNumber)"
                 [style.width.px]="displayWidth(page) * scaledValue()"
                 [style.height.px]="displayHeight(page) * scaledValue()"
                 [style.cursor]="pageCursor()"
@@ -251,6 +260,7 @@ interface PageLayout {
                 <!-- Annotations live in the unrotated page's coordinates,
                      turned with the page. -->
                 <div
+                  #layer
                   class="editorLayer absolute top-1/2 left-1/2 z-[5]"
                   [style.width.px]="page.width * scaledValue()"
                   [style.height.px]="page.height * scaledValue()"
@@ -261,9 +271,266 @@ interface PageLayout {
                   [style.cursor]="editorCursor()"
                   [attr.data-editorlayer-page]="page.pageNumber"
                   (pointerdown)="onEditorPointerDown($event, page.pageNumber)"
-                  (pointermove)="onEditorPointerMove($event, page.pageNumber)"
-                  (pointerup)="onEditorPointerUp($event, page.pageNumber)"
-                ></div>
+                  (pointermove)="onEditorPointerMove($event)"
+                  (pointerup)="onEditorPointerUp($event)"
+                >
+                  @for (
+                    annotation of annotationsOn(page.pageNumber);
+                    track annotation.id
+                  ) {
+                    @if (annotation.type === 'highlight') {
+                      @if (pdfViewer.highlightShowAll()) {
+                        @for (rect of annotation.rects; track $index) {
+                          <div
+                            data-annotation
+                            class="data-selected:outline-ring pointer-events-auto absolute cursor-pointer rounded-xs mix-blend-multiply outline-offset-1 data-selected:outline-2"
+                            [attr.data-selected]="
+                              isSelected(annotation) || null
+                            "
+                            [style.left.%]="rect.x * 100"
+                            [style.top.%]="rect.y * 100"
+                            [style.width.%]="rect.width * 100"
+                            [style.height.%]="rect.height * 100"
+                            [style.background-color]="annotation.color"
+                            [style.opacity]="annotation.opacity ?? 0.4"
+                            (pointerdown)="select($event, annotation)"
+                          ></div>
+                        }
+                        @if (
+                          isSelected(annotation) && annotation.rects?.[0];
+                          as first
+                        ) {
+                          <div
+                            data-annotation
+                            class="pointer-events-auto absolute z-20 -translate-y-full pb-1.5"
+                            [style.left.%]="first.x * 100"
+                            [style.top.%]="first.y * 100"
+                          >
+                            <ng-container
+                              [ngTemplateOutlet]="
+                                annotationToolbar()?.templateRef ?? null
+                              "
+                              [ngTemplateOutletContext]="{
+                                $implicit: annotation,
+                              }"
+                            />
+                          </div>
+                        }
+                      }
+                    } @else if (annotation.type === 'ink') {
+                      <svg
+                        class="pointer-events-none absolute inset-0 size-full overflow-visible"
+                        viewBox="0 0 1 1"
+                        preserveAspectRatio="none"
+                        aria-hidden="true"
+                      >
+                        @for (stroke of annotation.strokes; track $index) {
+                          <polyline
+                            fill="none"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            vector-effect="non-scaling-stroke"
+                            [attr.points]="points(stroke)"
+                            [attr.stroke]="annotation.color"
+                            [attr.stroke-width]="
+                              (annotation.strokeWidth ?? 1) * scaledValue()
+                            "
+                            [attr.stroke-opacity]="annotation.opacity ?? 1"
+                          />
+                        }
+                      </svg>
+                    } @else if (annotation.type === 'freetext') {
+                      <div
+                        data-annotation
+                        tabindex="0"
+                        class="data-selected:outline-ring pointer-events-auto absolute z-[5] cursor-move outline-offset-2 data-selected:z-10 data-selected:outline-2"
+                        [attr.data-selected]="isSelected(annotation) || null"
+                        [style.left.%]="position(annotation).x * 100"
+                        [style.top.%]="position(annotation).y * 100"
+                        (pointerdown)="
+                          onAnnotationPointerDown($event, annotation, layer)
+                        "
+                        (dblclick)="editText($event, annotation)"
+                      >
+                        <div
+                          data-text
+                          class="px-1 py-0.5 leading-[1.2] whitespace-pre-wrap select-none data-editing:cursor-text data-editing:outline-none data-editing:select-text"
+                          [attr.data-editing]="
+                            editingText() === annotation.id || null
+                          "
+                          [attr.contenteditable]="
+                            editingText() === annotation.id
+                              ? 'plaintext-only'
+                              : null
+                          "
+                          [style.font-size.px]="
+                            (annotation.fontSize ?? 14) * scaledValue()
+                          "
+                          [style.color]="annotation.fontColor"
+                          [textContent]="annotation.text"
+                          (blur)="commitText($event, annotation)"
+                          (keydown)="onTextKeydown($event, annotation)"
+                        ></div>
+                        @if (isSelected(annotation)) {
+                          <div class="absolute top-full left-0 z-20 mt-1.5">
+                            <ng-container
+                              [ngTemplateOutlet]="
+                                annotationToolbar()?.templateRef ?? null
+                              "
+                              [ngTemplateOutletContext]="{
+                                $implicit: annotation,
+                              }"
+                            />
+                          </div>
+                        }
+                      </div>
+                    } @else if (annotation.imageDataUrl) {
+                      <div
+                        data-annotation
+                        tabindex="0"
+                        class="data-selected:outline-ring pointer-events-auto absolute z-[5] cursor-move outline-offset-2 data-selected:z-10 data-selected:outline-2"
+                        [attr.data-selected]="isSelected(annotation) || null"
+                        [attr.role]="imageName(annotation) ? 'img' : null"
+                        [attr.aria-label]="imageName(annotation)"
+                        [style.left.%]="position(annotation).x * 100"
+                        [style.top.%]="position(annotation).y * 100"
+                        [style.width.%]="position(annotation).width * 100"
+                        (pointerdown)="
+                          onAnnotationPointerDown($event, annotation, layer)
+                        "
+                      >
+                        <img
+                          alt=""
+                          draggable="false"
+                          class="pointer-events-none block w-full select-none"
+                          [src]="annotation.imageDataUrl"
+                        />
+                        @if (isSelected(annotation)) {
+                          @for (handle of handles; track handle.corner) {
+                            <div
+                              class="bg-ring absolute z-[11] size-2.5 rounded-xs border border-white"
+                              [class]="handle.class"
+                              (pointerdown)="
+                                startResize(
+                                  $event,
+                                  annotation,
+                                  handle.corner,
+                                  layer
+                                )
+                              "
+                            ></div>
+                          }
+                          <div class="absolute top-full left-0 z-20 mt-1.5">
+                            <ng-container
+                              [ngTemplateOutlet]="
+                                annotationToolbar()?.templateRef ?? null
+                              "
+                              [ngTemplateOutletContext]="{
+                                $implicit: annotation,
+                              }"
+                            />
+                          </div>
+                        }
+                      </div>
+                    }
+                  }
+
+                  <!-- The ink stroke being drawn. -->
+                  @if (inkStroke(); as stroke) {
+                    @if (stroke.page === page.pageNumber) {
+                      <svg
+                        class="pointer-events-none absolute inset-0 size-full overflow-visible"
+                        viewBox="0 0 1 1"
+                        preserveAspectRatio="none"
+                        aria-hidden="true"
+                      >
+                        <polyline
+                          fill="none"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          vector-effect="non-scaling-stroke"
+                          [attr.points]="points(stroke.points)"
+                          [attr.stroke]="pdfViewer.inkColor()"
+                          [attr.stroke-width]="
+                            pdfViewer.inkThickness() * scaledValue()
+                          "
+                          [attr.stroke-opacity]="pdfViewer.inkOpacity()"
+                        />
+                      </svg>
+                    }
+                  }
+
+                  <!-- The text annotation being written (the text tool). -->
+                  @if (textDraft(); as draft) {
+                    @if (draft.page === page.pageNumber) {
+                      <div
+                        data-annotation
+                        data-text-draft
+                        contenteditable="plaintext-only"
+                        class="outline-ring bg-background/80 pointer-events-auto absolute z-10 min-h-[1em] min-w-5 px-1 py-0.5 leading-[1.2] whitespace-pre-wrap outline-2"
+                        [style.left.%]="draft.x * 100"
+                        [style.top.%]="draft.y * 100"
+                        [style.font-size.px]="
+                          pdfViewer.freetextSize() * scaledValue()
+                        "
+                        [style.color]="pdfViewer.freetextColor()"
+                        (pointerdown)="$event.stopPropagation()"
+                        (blur)="commitDraft($event)"
+                        (keydown)="onDraftKeydown($event)"
+                      ></div>
+                    }
+                  }
+
+                  <!-- Comment markers (yours). -->
+                  @for (
+                    entry of commentsOn(page.pageNumber);
+                    track entry.comment.id
+                  ) {
+                    <div
+                      data-annotation
+                      class="pointer-events-auto absolute z-[6] -translate-x-1/2 -translate-y-1/2"
+                      [style.left.%]="entry.comment.x * 100"
+                      [style.top.%]="entry.comment.y * 100"
+                      (pointerdown)="$event.stopPropagation()"
+                    >
+                      <ng-container
+                        [ngTemplateOutlet]="
+                          commentMarker()?.templateRef ?? null
+                        "
+                        [ngTemplateOutletContext]="{
+                          $implicit: entry.comment,
+                          index: entry.index,
+                          active:
+                            entry.comment.id === pdfViewer.activeCommentId(),
+                          pending: false,
+                        }"
+                      />
+                    </div>
+                  }
+                  @if (pdfViewer.pendingComment(); as pending) {
+                    @if (pending.pageNumber === page.pageNumber) {
+                      <div
+                        data-annotation
+                        class="pointer-events-auto absolute z-[6] -translate-x-1/2 -translate-y-1/2"
+                        [style.left.%]="pending.x * 100"
+                        [style.top.%]="pending.y * 100"
+                        (pointerdown)="$event.stopPropagation()"
+                      >
+                        <ng-container
+                          [ngTemplateOutlet]="
+                            commentMarker()?.templateRef ?? null
+                          "
+                          [ngTemplateOutletContext]="{
+                            $implicit: null,
+                            index: pdfViewer.comments().length,
+                            active: true,
+                            pending: true,
+                          }"
+                        />
+                      </div>
+                    }
+                  }
+                </div>
               </div>
             }
           </div>
@@ -278,7 +545,7 @@ interface PageLayout {
   encapsulation: ViewEncapsulation.None,
 })
 export class ScPdfViewerCanvas {
-  private readonly pdfViewer = inject(SC_PDF_VIEWER);
+  protected readonly pdfViewer = inject(SC_PDF_VIEWER);
   private readonly destroyRef = inject(DestroyRef);
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -387,15 +654,30 @@ export class ScPdfViewerCanvas {
   } | null = null;
   private pinch: { distance: number } | null = null;
 
-  // Editor state
+  // Annotation tools
   private readonly editorMode = this.pdfViewer.editorMode;
-  private readonly editorTrigger = this.pdfViewer.editorTrigger;
-  private inkCurrentStroke: { x: number; y: number }[] = [];
-  private inkCurrentPage = 0;
-  private inkDrawing = false;
+  /** The ink stroke being drawn, shown as it's drawn. */
+  protected readonly inkStroke = signal<{
+    page: number;
+    points: { x: number; y: number }[];
+  } | null>(null);
+  /** A text annotation being written (the text tool's click). */
+  protected readonly textDraft = signal<{
+    page: number;
+    x: number;
+    y: number;
+  } | null>(null);
+  /** The text annotation being edited (double-click), or null. */
+  protected readonly editingText = signal<string | null>(null);
+  /** A move / resize in progress, shown live and committed on release. */
+  protected readonly preview = signal<{
+    id: string;
+    x: number;
+    y: number;
+    width?: number;
+    height?: number;
+  } | null>(null);
 
-  // Interactive annotation state
-  private selectedAnnotationId: string | null = null;
   private dragState: {
     annotationId: string;
     startX: number;
@@ -417,6 +699,53 @@ export class ScPdfViewerCanvas {
     layerW: number;
     layerH: number;
   } | null = null;
+
+  /** Your toolbar for the selected annotation, and your comment markers. */
+  protected readonly annotationToolbar = contentChild(
+    ScPdfViewerAnnotationToolbar,
+  );
+  protected readonly commentMarker = contentChild(ScPdfViewerCommentMarker);
+
+  /**
+   * Each page's accessible name — your words, e.g.
+   * `(page, label) => \`Page \${label}\``; with it, pages are named regions.
+   */
+  readonly pageName = input<((page: number, label: string) => string) | null>(
+    null,
+  );
+
+  /** The resize handles of a selected image. */
+  protected readonly handles = [
+    { corner: 'nw', class: '-top-1.5 -left-1.5 cursor-nwse-resize' },
+    { corner: 'ne', class: '-top-1.5 -right-1.5 cursor-nesw-resize' },
+    { corner: 'sw', class: '-bottom-1.5 -left-1.5 cursor-nesw-resize' },
+    { corner: 'se', class: '-right-1.5 -bottom-1.5 cursor-nwse-resize' },
+  ];
+
+  /** The annotations of each page. */
+  private readonly annotationsByPage = computed(() => {
+    const byPage = new Map<number, ScPdfEditorAnnotation[]>();
+    for (const annotation of this.pdfViewer.editorAnnotations()) {
+      const list = byPage.get(annotation.pageNumber) ?? [];
+      list.push(annotation);
+      byPage.set(annotation.pageNumber, list);
+    }
+    return byPage;
+  });
+
+  /** The comments of each page, with their position in the list. */
+  private readonly commentsByPage = computed(() => {
+    const byPage = new Map<
+      number,
+      { comment: ScPdfComment; index: number }[]
+    >();
+    this.pdfViewer.comments().forEach((comment, index) => {
+      const list = byPage.get(comment.pageNumber) ?? [];
+      list.push({ comment, index });
+      byPage.set(comment.pageNumber, list);
+    });
+    return byPage;
+  });
 
   readonly editorPointerEvents = computed(() => {
     const mode = this.editorMode();
@@ -529,6 +858,8 @@ export class ScPdfViewerCanvas {
       // New spreads or layout recreate the page elements.
       this.spreads();
       this.pdfViewer.scrollMode();
+      // A layer shown or hidden.
+      this.pdfViewer.layers();
       if (this.pageCount() === 0) return;
 
       untracked(() => {
@@ -543,8 +874,11 @@ export class ScPdfViewerCanvas {
       this.navigateTrigger();
       const page = untracked(() => this.pdfViewer.currentPage());
       const top = untracked(() => this.pdfViewer.navigateTop());
+      const smooth = untracked(() => this.pdfViewer.navigateSmooth());
 
-      setTimeout(() => this.scrollToPage(page, top, 'smooth'));
+      setTimeout(() =>
+        this.scrollToPage(page, top, smooth ? 'smooth' : 'auto'),
+      );
     });
 
     // Apply find highlights when find state changes
@@ -559,19 +893,24 @@ export class ScPdfViewerCanvas {
       });
     });
 
-    // Render editor annotations when they change
-    effect(() => {
-      this.editorTrigger();
-      this.pdfViewer.highlightShowAll();
-      this.pdfViewer.comments();
-      this.pdfViewer.pendingComment();
-      this.pdfViewer.activeCommentId();
-      const annotations = this.pdfViewer.editorAnnotations();
-      const scale = this.scaledValue();
-
-      setTimeout(() => {
-        this.renderEditorAnnotations(annotations, scale);
-      });
+    // Focus the text being written or edited, all of it selected.
+    afterRenderEffect(() => {
+      const editing = this.editingText();
+      const drafting = this.textDraft();
+      if (!editing && !drafting) return;
+      const element =
+        this.scrollContainer()?.nativeElement.querySelector<HTMLElement>(
+          drafting ? '[data-text-draft]' : '[data-editing]',
+        );
+      if (!element || document.activeElement === element) return;
+      element.focus();
+      if (editing) {
+        const range = document.createRange();
+        range.selectNodeContents(element);
+        const selection = document.getSelection();
+        selection?.removeAllRanges();
+        selection?.addRange(range);
+      }
     });
 
     // Listen for text selection in highlight mode
@@ -1059,10 +1398,15 @@ export class ScPdfViewerCanvas {
       canvas.height = viewport.height;
 
       // Form fields are drawn by the annotation layer (as HTML), not here.
+      const optionalContent = this.pdfViewer.optionalContent();
       const renderTask = page.render({
         canvas,
         viewport,
         annotationMode: AnnotationMode.ENABLE_FORMS,
+        // The layers as shown / hidden in the viewer.
+        ...(optionalContent && {
+          optionalContentConfigPromise: Promise.resolve(optionalContent),
+        }),
       });
 
       this.activeRenderTasks.set(pageNumber, renderTask);
@@ -1271,25 +1615,6 @@ export class ScPdfViewerCanvas {
     return { dx: dx / layerW, dy: dy / layerH };
   }
 
-  /** The "Delete" button of a selected annotation's toolbar (ui button styles). */
-  private deleteButton(annotationId: string, label: string): HTMLButtonElement {
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.className = buttonVariants({ variant: 'outline', size: 'xs' });
-    button.textContent = 'Delete';
-    button.setAttribute('aria-label', label);
-    button.addEventListener('pointerdown', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-    });
-    button.addEventListener('click', (e) => {
-      e.stopPropagation();
-      this.selectedAnnotationId = null;
-      this.pdfViewer.removeEditorAnnotation(annotationId);
-    });
-    return button;
-  }
-
   private cancelAllRenderTasks(): void {
     for (const [, task] of this.activeRenderTasks) {
       task.cancel();
@@ -1490,10 +1815,187 @@ export class ScPdfViewerCanvas {
     selection.removeAllRanges();
   };
 
-  onEditorPointerDown(event: PointerEvent, pageNumber: number): void {
+  protected annotationsOn(page: number): ScPdfEditorAnnotation[] {
+    return this.annotationsByPage().get(page) ?? [];
+  }
+
+  protected commentsOn(
+    page: number,
+  ): { comment: ScPdfComment; index: number }[] {
+    return this.commentsByPage().get(page) ?? [];
+  }
+
+  protected pageAriaLabel(page: number): string | null {
+    const name = this.pageName();
+    return name ? name(page, this.pdfViewer.pageLabel(page)) : null;
+  }
+
+  /** An image annotation's name: its alt text or description, if any. */
+  protected imageName(annotation: ScPdfEditorAnnotation): string | null {
+    if (annotation.isDecorative) return null;
+    return annotation.altText || annotation.description || null;
+  }
+
+  /** Points of a stroke for an SVG polyline (0–1 of the page). */
+  protected points(stroke: { x: number; y: number }[]): string {
+    return stroke.map((p) => `${p.x},${p.y}`).join(' ');
+  }
+
+  protected isSelected(annotation: ScPdfEditorAnnotation): boolean {
+    return this.pdfViewer.selectedAnnotationId() === annotation.id;
+  }
+
+  /** Where an annotation shows — live while it's moved or resized. */
+  protected position(annotation: ScPdfEditorAnnotation): {
+    x: number;
+    y: number;
+    width: number;
+  } {
+    const preview = this.preview();
+    if (preview?.id === annotation.id) {
+      return {
+        x: preview.x,
+        y: preview.y,
+        width: preview.width ?? annotation.width ?? 0.15,
+      };
+    }
+    return {
+      x: annotation.x ?? 0,
+      y: annotation.y ?? 0,
+      width: annotation.width ?? 0.15,
+    };
+  }
+
+  protected select(
+    event: PointerEvent,
+    annotation: ScPdfEditorAnnotation,
+  ): void {
+    event.stopPropagation();
+    this.pdfViewer.selectedAnnotationId.set(annotation.id);
+  }
+
+  /** Selects an annotation; on a selected one, starts moving it. */
+  protected onAnnotationPointerDown(
+    event: PointerEvent,
+    annotation: ScPdfEditorAnnotation,
+    layer: HTMLElement,
+  ): void {
+    event.stopPropagation();
+    if (this.editingText() === annotation.id) return;
+    // Your toolbar inside it handles its own clicks.
+    if ((event.target as HTMLElement).closest('button, input, a')) return;
+    event.preventDefault();
+    if (!this.isSelected(annotation)) {
+      this.pdfViewer.selectedAnnotationId.set(annotation.id);
+      return;
+    }
+    this.dragState = {
+      annotationId: annotation.id,
+      startX: event.clientX,
+      startY: event.clientY,
+      origX: annotation.x ?? 0,
+      origY: annotation.y ?? 0,
+      layerW: layer.offsetWidth,
+      layerH: layer.offsetHeight,
+    };
+  }
+
+  protected startResize(
+    event: PointerEvent,
+    annotation: ScPdfEditorAnnotation,
+    handle: string,
+    layer: HTMLElement,
+  ): void {
+    event.preventDefault();
+    event.stopPropagation();
+    this.resizeState = {
+      annotationId: annotation.id,
+      handle,
+      startX: event.clientX,
+      startY: event.clientY,
+      origX: annotation.x ?? 0,
+      origY: annotation.y ?? 0,
+      origW: annotation.width ?? 0.15,
+      origH: annotation.height ?? 0.15,
+      layerW: layer.offsetWidth,
+      layerH: layer.offsetHeight,
+    };
+  }
+
+  /** Double-click a text annotation to edit it in place. */
+  protected editText(
+    event: MouseEvent,
+    annotation: ScPdfEditorAnnotation,
+  ): void {
+    event.preventDefault();
+    event.stopPropagation();
+    this.pdfViewer.selectedAnnotationId.set(annotation.id);
+    this.editingText.set(annotation.id);
+  }
+
+  protected commitText(
+    event: FocusEvent,
+    annotation: ScPdfEditorAnnotation,
+  ): void {
+    if (this.editingText() !== annotation.id) return;
+    this.editingText.set(null);
+    const text = (event.target as HTMLElement).textContent?.trim() ?? '';
+    if (!text) {
+      this.pdfViewer.removeEditorAnnotation(annotation.id);
+    } else if (text !== annotation.text) {
+      this.pdfViewer.updateEditorAnnotation(annotation.id, { text });
+    }
+  }
+
+  protected onTextKeydown(
+    event: KeyboardEvent,
+    annotation: ScPdfEditorAnnotation,
+  ): void {
+    if (this.editingText() !== annotation.id) return;
+    const element = event.target as HTMLElement;
+    if (event.key === 'Escape') {
+      event.stopPropagation();
+      this.editingText.set(null);
+      element.textContent = annotation.text ?? '';
+      element.blur();
+    } else if (event.key === 'Enter' && !event.shiftKey) {
+      event.preventDefault();
+      element.blur();
+    }
+  }
+
+  protected commitDraft(event: FocusEvent): void {
+    const draft = this.textDraft();
+    this.textDraft.set(null);
+    const text = (event.target as HTMLElement).textContent?.trim() ?? '';
+    if (!draft || !text) return;
+    this.pdfViewer.addEditorAnnotation({
+      type: 'freetext',
+      pageNumber: draft.page,
+      x: draft.x,
+      y: draft.y,
+      text,
+      fontSize: this.pdfViewer.freetextSize(),
+      fontColor: this.pdfViewer.freetextColor(),
+    });
+  }
+
+  protected onDraftKeydown(event: KeyboardEvent): void {
+    const element = event.target as HTMLElement;
+    if (event.key === 'Escape') {
+      event.stopPropagation();
+      this.textDraft.set(null);
+    } else if (event.key === 'Enter' && !event.shiftKey) {
+      event.preventDefault();
+      element.blur();
+    }
+  }
+
+  /** The tool's click on a page: place a comment, start a text, draw. */
+  protected onEditorPointerDown(event: PointerEvent, pageNumber: number): void {
     const mode = this.editorMode();
-    const target = event.currentTarget as HTMLElement;
-    const { x, y } = this.pointInLayer(target, event.clientX, event.clientY);
+    const layer = event.currentTarget as HTMLElement;
+    const { x, y } = this.pointInLayer(layer, event.clientX, event.clientY);
 
     if (mode === 'comment') {
       event.preventDefault();
@@ -1502,695 +2004,45 @@ export class ScPdfViewerCanvas {
     } else if (mode === 'freetext') {
       event.preventDefault();
       event.stopPropagation();
-      this.createFreetextEditor(pageNumber, x, y, target);
+      this.textDraft.set({ page: pageNumber, x, y });
     } else if (mode === 'ink') {
-      this.inkDrawing = true;
-      this.inkCurrentPage = pageNumber;
-      this.inkCurrentStroke = [{ x, y }];
-      target.setPointerCapture(event.pointerId);
-
-      // Start drawing preview
-      const canvas = this.getOrCreateInkCanvas(target);
-      const ctx = canvas.getContext('2d');
-      if (ctx) {
-        ctx.strokeStyle = this.pdfViewer.inkColor();
-        ctx.lineWidth = this.pdfViewer.inkThickness() * this.scaledValue();
-        ctx.lineCap = 'round';
-        ctx.lineJoin = 'round';
-        ctx.globalAlpha = this.pdfViewer.inkOpacity();
-        ctx.beginPath();
-        ctx.moveTo(x * target.offsetWidth, y * target.offsetHeight);
-      }
+      layer.setPointerCapture(event.pointerId);
+      this.inkStroke.set({ page: pageNumber, points: [{ x, y }] });
     }
   }
 
-  onEditorPointerMove(event: PointerEvent, _pageNumber: number): void {
-    if (!this.inkDrawing) return;
-
-    const target = event.currentTarget as HTMLElement;
-    const { x, y } = this.pointInLayer(target, event.clientX, event.clientY);
-
-    this.inkCurrentStroke.push({ x, y });
-
-    // Draw preview
-    const canvas = target.querySelector(
-      '.ink-preview-canvas',
-    ) as HTMLCanvasElement;
-    if (canvas) {
-      const ctx = canvas.getContext('2d');
-      if (ctx) {
-        ctx.lineTo(x * target.offsetWidth, y * target.offsetHeight);
-        ctx.stroke();
-      }
-    }
+  protected onEditorPointerMove(event: PointerEvent): void {
+    const stroke = this.inkStroke();
+    if (!stroke) return;
+    const layer = event.currentTarget as HTMLElement;
+    const point = this.pointInLayer(layer, event.clientX, event.clientY);
+    this.inkStroke.set({ ...stroke, points: [...stroke.points, point] });
   }
 
-  onEditorPointerUp(event: PointerEvent, _pageNumber: number): void {
-    if (!this.inkDrawing) return;
-    this.inkDrawing = false;
-
-    const target = event.currentTarget as HTMLElement;
-    target.releasePointerCapture(event.pointerId);
-
-    // Remove preview canvas
-    const canvas = target.querySelector('.ink-preview-canvas');
-    canvas?.remove();
-
-    if (this.inkCurrentStroke.length < 2) return;
-
+  protected onEditorPointerUp(event: PointerEvent): void {
+    const stroke = this.inkStroke();
+    if (!stroke) return;
+    this.inkStroke.set(null);
+    const layer = event.currentTarget as HTMLElement;
+    if (layer.hasPointerCapture(event.pointerId)) {
+      layer.releasePointerCapture(event.pointerId);
+    }
+    if (stroke.points.length < 2) return;
     this.pdfViewer.addEditorAnnotation({
       type: 'ink',
-      pageNumber: this.inkCurrentPage,
-      strokes: [this.inkCurrentStroke],
+      pageNumber: stroke.page,
+      strokes: [stroke.points],
       color: this.pdfViewer.inkColor(),
       strokeWidth: this.pdfViewer.inkThickness(),
       opacity: this.pdfViewer.inkOpacity(),
     });
-
-    this.inkCurrentStroke = [];
   }
 
-  private getOrCreateInkCanvas(container: HTMLElement): HTMLCanvasElement {
-    let canvas = container.querySelector(
-      '.ink-preview-canvas',
-    ) as HTMLCanvasElement;
-    if (!canvas) {
-      canvas = document.createElement('canvas');
-      canvas.className = 'ink-preview-canvas';
-      canvas.style.position = 'absolute';
-      canvas.style.inset = '0';
-      canvas.style.width = '100%';
-      canvas.style.height = '100%';
-      canvas.style.pointerEvents = 'none';
-      canvas.width = container.clientWidth;
-      canvas.height = container.clientHeight;
-      container.appendChild(canvas);
-    }
-    return canvas;
-  }
-
-  private createFreetextEditor(
-    pageNumber: number,
-    x: number,
-    y: number,
-    container: HTMLElement,
-  ): void {
-    const div = document.createElement('div');
-    div.contentEditable = 'true';
-    div.className = 'editor-freetext';
-    div.style.position = 'absolute';
-    div.style.left = `${x * 100}%`;
-    div.style.top = `${y * 100}%`;
-    div.style.fontSize = `${this.pdfViewer.freetextSize() * this.scaledValue()}px`;
-    div.style.color = this.pdfViewer.freetextColor();
-    div.style.minWidth = '20px';
-    div.style.minHeight = '1em';
-    div.style.outline = '2px solid #6b9edd';
-    div.style.padding = '2px 4px';
-    div.style.background = 'rgba(255,255,255,0.8)';
-    div.style.zIndex = '10';
-    div.style.whiteSpace = 'pre-wrap';
-    div.style.lineHeight = '1.2';
-    // Prevent clicks on the editor from creating new editors
-    div.addEventListener('pointerdown', (e) => e.stopPropagation());
-    container.appendChild(div);
-    // Defer focus to after event processing completes
-    setTimeout(() => div.focus());
-
-    const save = (): void => {
-      const text = div.textContent?.trim() ?? '';
-      div.remove();
-      if (!text) return;
-
-      this.pdfViewer.addEditorAnnotation({
-        type: 'freetext',
-        pageNumber,
-        x,
-        y,
-        text,
-        fontSize: this.pdfViewer.freetextSize(),
-        fontColor: this.pdfViewer.freetextColor(),
-      });
-    };
-
-    div.addEventListener('blur', save);
-    div.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        div.removeEventListener('blur', save);
-        div.remove();
-      } else if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        div.blur();
-      }
-    });
-  }
-
-  private renderEditorAnnotations(
-    annotations: import('./pdf-viewer-types').ScPdfEditorAnnotation[],
-    scale: number,
-  ): void {
-    const container = this.scrollContainer()?.nativeElement;
-    if (!container) return;
-
-    // Clear all existing editor annotations
-    container
-      .querySelectorAll('.editor-annotation')
-      .forEach((el) => el.remove());
-
-    // The highlight tool's "Show all" off hides every highlight.
-    const showHighlights = this.pdfViewer.highlightShowAll();
-
-    for (const ann of annotations) {
-      const editorLayer = container.querySelector(
-        `[data-editorlayer-page="${ann.pageNumber}"]`,
-      ) as HTMLElement;
-      if (!editorLayer) continue;
-
-      if (ann.type === 'highlight' && ann.rects) {
-        if (!showHighlights) continue;
-        this.createInteractiveHighlight(ann, editorLayer);
-      } else if (ann.type === 'freetext') {
-        this.createInteractiveFreetext(ann, editorLayer, scale);
-      } else if (ann.type === 'ink' && ann.strokes) {
-        const canvas = document.createElement('canvas');
-        canvas.className = 'editor-annotation editor-ink';
-        canvas.style.position = 'absolute';
-        canvas.style.inset = '0';
-        canvas.style.width = '100%';
-        canvas.style.height = '100%';
-        canvas.style.pointerEvents = 'none';
-        canvas.width = editorLayer.clientWidth;
-        canvas.height = editorLayer.clientHeight;
-        editorLayer.appendChild(canvas);
-
-        const ctx = canvas.getContext('2d');
-        if (ctx) {
-          ctx.strokeStyle = ann.color || '#000';
-          ctx.lineWidth = (ann.strokeWidth ?? 1) * scale;
-          ctx.lineCap = 'round';
-          ctx.lineJoin = 'round';
-          ctx.globalAlpha = ann.opacity ?? 1;
-
-          for (const stroke of ann.strokes) {
-            if (stroke.length < 2) continue;
-            ctx.beginPath();
-            ctx.moveTo(stroke[0].x * canvas.width, stroke[0].y * canvas.height);
-            for (let i = 1; i < stroke.length; i++) {
-              ctx.lineTo(
-                stroke[i].x * canvas.width,
-                stroke[i].y * canvas.height,
-              );
-            }
-            ctx.stroke();
-          }
-        }
-      } else if (
-        (ann.type === 'stamp' || ann.type === 'signature') &&
-        ann.imageDataUrl
-      ) {
-        this.createInteractiveStamp(ann, editorLayer);
-      }
-    }
-
-    this.renderCommentMarkers(container);
-  }
-
-  /**
-   * A numbered marker where each comment was placed (the number matches the
-   * comment list); clicking one selects its comment. The comment being
-   * written shows as an outlined marker.
-   */
-  private renderCommentMarkers(container: HTMLElement): void {
-    const activeId = this.pdfViewer.activeCommentId();
-    const marker = (
-      pageNumber: number,
-      x: number,
-      y: number,
-      label: string,
-      text: string,
-      variant: 'default' | 'outline',
-    ): HTMLButtonElement | null => {
-      const layer = container.querySelector<HTMLElement>(
-        `[data-editorlayer-page="${pageNumber}"]`,
-      );
-      if (!layer) return null;
-      const button = document.createElement('button');
-      button.type = 'button';
-      button.className = cn(
-        'editor-annotation pointer-events-auto absolute z-[6] -translate-x-1/2 -translate-y-1/2 rounded-full shadow-sm',
-        buttonVariants({ variant, size: 'icon-xs' }),
-      );
-      button.style.left = `${x * 100}%`;
-      button.style.top = `${y * 100}%`;
-      button.textContent = label;
-      button.setAttribute('aria-label', text);
-      button.addEventListener('pointerdown', (e) => e.stopPropagation());
-      layer.appendChild(button);
-      return button;
-    };
-
-    this.pdfViewer.comments().forEach((comment, index) => {
-      const button = marker(
-        comment.pageNumber,
-        comment.x,
-        comment.y,
-        String(index + 1),
-        `Comment ${index + 1}: ${comment.text}`,
-        'default',
-      );
-      if (!button) return;
-      if (comment.id === activeId) {
-        button.classList.add('ring-3', 'ring-ring/50');
-      }
-      button.addEventListener('click', () =>
-        this.pdfViewer.activeCommentId.set(comment.id),
-      );
-    });
-
-    const pending = this.pdfViewer.pendingComment();
-    if (pending) {
-      marker(
-        pending.pageNumber,
-        pending.x,
-        pending.y,
-        '+',
-        'New comment',
-        'outline',
-      );
-    }
-  }
-
-  private createInteractiveHighlight(
-    ann: import('./pdf-viewer-types').ScPdfEditorAnnotation,
-    editorLayer: HTMLElement,
-  ): void {
-    const isSelected = this.selectedAnnotationId === ann.id;
-    const highlightColor = ann.color || '#FFFF00';
-
-    // Container wrapping all rects for this highlight annotation
-    const wrapper = document.createElement('div');
-    wrapper.className = 'editor-annotation editor-highlight-wrapper';
-    wrapper.dataset['annotationId'] = ann.id;
-    wrapper.style.position = 'absolute';
-    wrapper.style.inset = '0';
-    wrapper.style.pointerEvents = 'none';
-    wrapper.style.zIndex = isSelected ? '10' : '3';
-
-    for (const rect of ann.rects!) {
-      const div = document.createElement('div');
-      div.style.position = 'absolute';
-      div.style.left = `${rect.x * 100}%`;
-      div.style.top = `${rect.y * 100}%`;
-      div.style.width = `${rect.width * 100}%`;
-      div.style.height = `${rect.height * 100}%`;
-      div.style.background = highlightColor;
-      div.style.opacity = String(ann.opacity ?? 0.4);
-      div.style.mixBlendMode = 'multiply';
-      div.style.pointerEvents = 'auto';
-      div.style.cursor = 'pointer';
-      div.style.borderRadius = '2px';
-
-      if (isSelected) {
-        div.style.outline = '2px solid #6b9edd';
-        div.style.outlineOffset = '1px';
-      }
-
-      div.addEventListener('pointerdown', (e) => {
-        e.stopPropagation();
-        if (this.selectedAnnotationId !== ann.id) {
-          this.selectedAnnotationId = ann.id;
-          const annotations = this.pdfViewer.editorAnnotations();
-          this.renderEditorAnnotations(annotations, this.scaledValue());
-        }
-      });
-
-      wrapper.appendChild(div);
-    }
-
-    // Toolbar when selected (color picker + delete)
-    if (isSelected && ann.rects!.length > 0) {
-      const firstRect = ann.rects![0];
-      const toolbar = document.createElement('div');
-      toolbar.className = 'editor-highlight-toolbar';
-      toolbar.style.position = 'absolute';
-      toolbar.style.left = `${firstRect.x * 100}%`;
-      toolbar.style.top = `${firstRect.y * 100}%`;
-      toolbar.style.transform = 'translateY(calc(-100% - 6px))';
-      toolbar.style.display = 'flex';
-      toolbar.style.gap = '4px';
-      toolbar.style.zIndex = '12';
-      toolbar.style.pointerEvents = 'auto';
-      toolbar.style.padding = '4px';
-      toolbar.style.borderRadius = '6px';
-      toolbar.style.background = '#fff';
-      toolbar.style.border = '1px solid #ccc';
-      toolbar.style.boxShadow = '0 2px 8px rgba(0,0,0,0.15)';
-
-      // Color swatches
-      const colors = ['#FFFF00', '#00FF00', '#00FFFF', '#FF69B4', '#FFA500'];
-      for (const color of colors) {
-        const swatch = document.createElement('button');
-        swatch.style.width = '20px';
-        swatch.style.height = '20px';
-        swatch.style.borderRadius = '50%';
-        swatch.style.background = color;
-        swatch.style.border =
-          color === highlightColor ? '2px solid #333' : '1px solid #ccc';
-        swatch.style.cursor = 'pointer';
-        swatch.style.padding = '0';
-        swatch.setAttribute('aria-label', `Highlight color ${color}`);
-        swatch.addEventListener('pointerdown', (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-        });
-        swatch.addEventListener('click', (e) => {
-          e.stopPropagation();
-          this.pdfViewer.updateEditorAnnotation(ann.id, { color });
-        });
-        toolbar.appendChild(swatch);
-      }
-
-      toolbar.appendChild(this.deleteButton(ann.id, 'Delete highlight'));
-
-      wrapper.appendChild(toolbar);
-    }
-
-    editorLayer.appendChild(wrapper);
-  }
-
-  private createInteractiveStamp(
-    ann: import('./pdf-viewer-types').ScPdfEditorAnnotation,
-    editorLayer: HTMLElement,
-  ): void {
-    const isSelected = this.selectedAnnotationId === ann.id;
-
-    // Wrapper
-    const wrapper = document.createElement('div');
-    wrapper.className = 'editor-annotation editor-stamp-wrapper';
-    wrapper.dataset['annotationId'] = ann.id;
-    wrapper.style.position = 'absolute';
-    wrapper.style.left = `${(ann.x ?? 0) * 100}%`;
-    wrapper.style.top = `${(ann.y ?? 0) * 100}%`;
-    wrapper.style.width = `${(ann.width ?? 0.15) * 100}%`;
-    wrapper.style.cursor = 'move';
-    wrapper.style.pointerEvents = 'auto';
-    wrapper.style.outline = isSelected ? '2px solid #6b9edd' : 'none';
-    wrapper.style.outlineOffset = '2px';
-    wrapper.style.zIndex = isSelected ? '10' : '5';
-    wrapper.tabIndex = 0;
-    wrapper.setAttribute('role', 'img');
-    wrapper.setAttribute(
-      'aria-label',
-      ann.description ||
-        (ann.type === 'signature'
-          ? 'Signature annotation'
-          : 'Stamp annotation'),
-    );
-
-    // Image
-    const img = document.createElement('img');
-    img.style.width = '100%';
-    img.style.display = 'block';
-    img.style.pointerEvents = 'none';
-    img.style.userSelect = 'none';
-    img.draggable = false;
-    img.src = ann.imageDataUrl!;
-    img.alt =
-      ann.description ||
-      (ann.type === 'signature' ? 'Signature annotation' : 'Stamp annotation');
-    wrapper.appendChild(img);
-
-    // Resize handles (only when selected)
-    if (isSelected) {
-      const handles = ['nw', 'ne', 'sw', 'se'];
-      for (const handle of handles) {
-        const h = document.createElement('div');
-        h.className = `editor-stamp-handle editor-stamp-handle-${handle}`;
-        h.dataset['handle'] = handle;
-        h.dataset['annotationId'] = ann.id;
-        h.style.position = 'absolute';
-        h.style.width = '10px';
-        h.style.height = '10px';
-        h.style.background = '#6b9edd';
-        h.style.border = '1px solid #fff';
-        h.style.borderRadius = '2px';
-        h.style.zIndex = '11';
-
-        if (handle.includes('n')) h.style.top = '-5px';
-        if (handle.includes('s')) h.style.bottom = '-5px';
-        if (handle.includes('w')) h.style.left = '-5px';
-        if (handle.includes('e')) h.style.right = '-5px';
-
-        if (handle === 'nw' || handle === 'se') h.style.cursor = 'nwse-resize';
-        if (handle === 'ne' || handle === 'sw') h.style.cursor = 'nesw-resize';
-
-        h.addEventListener('pointerdown', (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          this.resizeState = {
-            annotationId: ann.id,
-            handle,
-            startX: e.clientX,
-            startY: e.clientY,
-            origX: ann.x ?? 0,
-            origY: ann.y ?? 0,
-            origW: ann.width ?? 0.15,
-            origH: ann.height ?? 0.15,
-            layerW: editorLayer.offsetWidth,
-            layerH: editorLayer.offsetHeight,
-          };
-        });
-
-        wrapper.appendChild(h);
-      }
-
-      // Bottom toolbar (Alt text + Delete)
-      const toolbar = document.createElement('div');
-      toolbar.className = 'editor-stamp-toolbar';
-      toolbar.style.position = 'absolute';
-      toolbar.style.left = '0';
-      toolbar.style.top = '100%';
-      toolbar.style.marginTop = '6px';
-      toolbar.style.display = 'flex';
-      toolbar.style.gap = '4px';
-      toolbar.style.zIndex = '12';
-
-      // Alt text button
-      const altBtn = document.createElement('button');
-      altBtn.className = 'editor-stamp-alt-btn';
-      altBtn.style.display = 'flex';
-      altBtn.style.alignItems = 'center';
-      altBtn.style.gap = '4px';
-      altBtn.style.padding = '4px 10px';
-      altBtn.style.borderRadius = '20px';
-      altBtn.style.border = '1px solid #ccc';
-      altBtn.style.background = '#fff';
-      altBtn.style.color = '#15141a';
-      altBtn.style.fontSize = '12px';
-      altBtn.style.cursor = 'pointer';
-      altBtn.style.whiteSpace = 'nowrap';
-      altBtn.style.lineHeight = '1';
-
-      const hasAlt = !!(ann.altText || ann.isDecorative);
-      altBtn.textContent = hasAlt
-        ? ann.isDecorative
-          ? 'Decorative'
-          : ann.altText!
-        : '+ Alt text';
-      if (hasAlt) {
-        altBtn.style.maxWidth = '120px';
-        altBtn.style.overflow = 'hidden';
-        altBtn.style.textOverflow = 'ellipsis';
-      }
-
-      altBtn.setAttribute('aria-label', 'Edit alt text');
-      altBtn.addEventListener('pointerdown', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-      });
-      altBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        this.pdfViewer.altTextAnnotationId.set(ann.id);
-        this.pdfViewer.altTextDialogOpen.set(true);
-      });
-      toolbar.appendChild(altBtn);
-
-      toolbar.appendChild(this.deleteButton(ann.id, 'Delete image'));
-
-      wrapper.appendChild(toolbar);
-    }
-
-    // Click to select
-    wrapper.addEventListener('pointerdown', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-
-      if (this.selectedAnnotationId !== ann.id) {
-        this.selectedAnnotationId = ann.id;
-        // Re-render to show handles
-        const annotations = this.pdfViewer.editorAnnotations();
-        this.renderEditorAnnotations(annotations, this.scaledValue());
-        return;
-      }
-
-      // Start drag
-      this.dragState = {
-        annotationId: ann.id,
-        startX: e.clientX,
-        startY: e.clientY,
-        origX: ann.x ?? 0,
-        origY: ann.y ?? 0,
-        layerW: editorLayer.offsetWidth,
-        layerH: editorLayer.offsetHeight,
-      };
-    });
-
-    editorLayer.appendChild(wrapper);
-  }
-
-  private createInteractiveFreetext(
-    ann: import('./pdf-viewer-types').ScPdfEditorAnnotation,
-    editorLayer: HTMLElement,
-    scale: number,
-  ): void {
-    const isSelected = this.selectedAnnotationId === ann.id;
-    const fontSize = (ann.fontSize ?? 14) * scale;
-
-    const wrapper = document.createElement('div');
-    wrapper.className = 'editor-annotation editor-freetext-wrapper';
-    wrapper.dataset['annotationId'] = ann.id;
-    wrapper.style.position = 'absolute';
-    wrapper.style.left = `${(ann.x ?? 0) * 100}%`;
-    wrapper.style.top = `${(ann.y ?? 0) * 100}%`;
-    wrapper.style.cursor = 'move';
-    wrapper.style.pointerEvents = 'auto';
-    wrapper.style.outline = isSelected ? '2px solid #6b9edd' : 'none';
-    wrapper.style.outlineOffset = '2px';
-    wrapper.style.zIndex = isSelected ? '10' : '5';
-    wrapper.style.padding = '2px 4px';
-    wrapper.style.whiteSpace = 'pre-wrap';
-    wrapper.style.lineHeight = '1.2';
-    wrapper.tabIndex = 0;
-
-    const textEl = document.createElement('div');
-    textEl.style.fontSize = `${fontSize}px`;
-    textEl.style.color = ann.fontColor || '#000';
-    textEl.style.pointerEvents = 'none';
-    textEl.style.userSelect = 'none';
-    textEl.textContent = ann.text || '';
-    wrapper.appendChild(textEl);
-
-    if (isSelected) {
-      // Delete button toolbar
-      const toolbar = document.createElement('div');
-      toolbar.className = 'editor-freetext-toolbar';
-      toolbar.style.position = 'absolute';
-      toolbar.style.left = '0';
-      toolbar.style.top = '100%';
-      toolbar.style.marginTop = '6px';
-      toolbar.style.display = 'flex';
-      toolbar.style.gap = '4px';
-      toolbar.style.zIndex = '12';
-
-      toolbar.appendChild(this.deleteButton(ann.id, 'Delete text'));
-      wrapper.appendChild(toolbar);
-    }
-
-    // Click to select
-    wrapper.addEventListener('pointerdown', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-
-      if (this.selectedAnnotationId !== ann.id) {
-        this.selectedAnnotationId = ann.id;
-        const annotations = this.pdfViewer.editorAnnotations();
-        this.renderEditorAnnotations(annotations, this.scaledValue());
-        return;
-      }
-
-      // Start drag
-      this.dragState = {
-        annotationId: ann.id,
-        startX: e.clientX,
-        startY: e.clientY,
-        origX: ann.x ?? 0,
-        origY: ann.y ?? 0,
-        layerW: editorLayer.offsetWidth,
-        layerH: editorLayer.offsetHeight,
-      };
-    });
-
-    // Double-click to edit text inline
-    wrapper.addEventListener('dblclick', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      this.selectedAnnotationId = ann.id;
-
-      textEl.style.pointerEvents = 'auto';
-      textEl.style.userSelect = 'text';
-      textEl.contentEditable = 'true';
-      textEl.style.outline = 'none';
-      textEl.style.cursor = 'text';
-      wrapper.style.cursor = 'text';
-      wrapper.style.outline = '2px solid #6b9edd';
-      textEl.focus();
-
-      // Select all text
-      const range = document.createRange();
-      range.selectNodeContents(textEl);
-      const sel = window.getSelection();
-      sel?.removeAllRanges();
-      sel?.addRange(range);
-
-      const commitEdit = (): void => {
-        textEl.removeEventListener('blur', commitEdit);
-        const newText = textEl.textContent?.trim() ?? '';
-        textEl.contentEditable = 'false';
-        textEl.style.pointerEvents = 'none';
-        textEl.style.userSelect = 'none';
-        wrapper.style.cursor = 'move';
-
-        if (newText && newText !== ann.text) {
-          this.pdfViewer.updateEditorAnnotation(ann.id, { text: newText });
-        } else if (!newText) {
-          this.selectedAnnotationId = null;
-          this.pdfViewer.removeEditorAnnotation(ann.id);
-        }
-      };
-
-      textEl.addEventListener('blur', commitEdit);
-      textEl.addEventListener('keydown', (ke) => {
-        if (ke.key === 'Escape') {
-          textEl.removeEventListener('blur', commitEdit);
-          textEl.contentEditable = 'false';
-          textEl.style.pointerEvents = 'none';
-          textEl.style.userSelect = 'none';
-          wrapper.style.cursor = 'move';
-          // Re-render to restore original text
-          const annotations = this.pdfViewer.editorAnnotations();
-          this.renderEditorAnnotations(annotations, this.scaledValue());
-        } else if (ke.key === 'Enter' && !ke.shiftKey) {
-          ke.preventDefault();
-          textEl.blur();
-        }
-      });
-    });
-
-    editorLayer.appendChild(wrapper);
-  }
-
-  private readonly onGlobalPointerDown = (e: PointerEvent): void => {
-    if (!this.selectedAnnotationId) return;
-    const target = e.target as HTMLElement;
-    if (
-      !target.closest('.editor-stamp-wrapper') &&
-      !target.closest('.editor-freetext-wrapper') &&
-      !target.closest('.editor-highlight-wrapper')
-    ) {
-      this.selectedAnnotationId = null;
-      const annotations = this.pdfViewer.editorAnnotations();
-      this.renderEditorAnnotations(annotations, this.scaledValue());
-    }
+  /** A click away from the annotations deselects. */
+  private readonly onGlobalPointerDown = (event: PointerEvent): void => {
+    if (!this.pdfViewer.selectedAnnotationId()) return;
+    if ((event.target as HTMLElement).closest('[data-annotation]')) return;
+    this.pdfViewer.selectedAnnotationId.set(null);
   };
 
   /** How far the pointer moved since the drag / resize began, in page units. */
@@ -2206,112 +2058,96 @@ export class ScPdfViewerCanvas {
     );
   }
 
+  /** The size and place a resize gives, from the pointer's move. */
+  private resized(e: PointerEvent): {
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+  } {
+    const state = this.resizeState!;
+    const { dx } = this.pointerDelta(e, state);
+    const aspect = state.origH / state.origW;
+    let width = state.origW;
+    let x = state.origX;
+    let y = state.origY;
+    if (state.handle.includes('e')) {
+      width = Math.max(0.02, state.origW + dx);
+    } else if (state.handle.includes('w')) {
+      width = Math.max(0.02, state.origW - dx);
+      x = state.origX + (state.origW - width);
+    }
+    const height = width * aspect;
+    if (state.handle.includes('n')) y = state.origY + (state.origH - height);
+    return { x, y, width, height };
+  }
+
+  /** The place a move gives, from the pointer's move. */
+  private moved(e: PointerEvent): {
+    x: number;
+    y: number;
+    dx: number;
+    dy: number;
+  } {
+    const state = this.dragState!;
+    const { dx, dy } = this.pointerDelta(e, state);
+    return {
+      x: Math.max(0, Math.min(1, state.origX + dx)),
+      y: Math.max(0, Math.min(1, state.origY + dy)),
+      dx,
+      dy,
+    };
+  }
+
   private readonly onGlobalPointerMove = (e: PointerEvent): void => {
     if (this.dragState) {
-      const { dx, dy } = this.pointerDelta(e, this.dragState);
-      const newX = Math.max(0, Math.min(1, this.dragState.origX + dx));
-      const newY = Math.max(0, Math.min(1, this.dragState.origY + dy));
-
-      const wrapper = this.scrollContainer()?.nativeElement.querySelector(
-        `[data-annotation-id="${this.dragState.annotationId}"]`,
-      ) as HTMLElement;
-      if (wrapper) {
-        wrapper.style.left = `${newX * 100}%`;
-        wrapper.style.top = `${newY * 100}%`;
-      }
+      const { x, y } = this.moved(e);
+      this.preview.set({ id: this.dragState.annotationId, x, y });
     } else if (this.resizeState) {
-      const { dx } = this.pointerDelta(e, this.resizeState);
-      const handle = this.resizeState.handle;
-      const aspect = this.resizeState.origH / this.resizeState.origW;
-
-      let newW = this.resizeState.origW;
-      let newX = this.resizeState.origX;
-      let newY = this.resizeState.origY;
-
-      if (handle.includes('e')) {
-        newW = Math.max(0.02, this.resizeState.origW + dx);
-      } else if (handle.includes('w')) {
-        newW = Math.max(0.02, this.resizeState.origW - dx);
-        newX = this.resizeState.origX + (this.resizeState.origW - newW);
-      }
-
-      const newH = newW * aspect;
-      if (handle.includes('n')) {
-        newY = this.resizeState.origY + (this.resizeState.origH - newH);
-      }
-
-      const wrapper = this.scrollContainer()?.nativeElement.querySelector(
-        `[data-annotation-id="${this.resizeState.annotationId}"]`,
-      ) as HTMLElement;
-      if (wrapper) {
-        wrapper.style.left = `${newX * 100}%`;
-        wrapper.style.top = `${newY * 100}%`;
-        wrapper.style.width = `${newW * 100}%`;
-      }
+      this.preview.set({
+        id: this.resizeState.annotationId,
+        ...this.resized(e),
+      });
     }
   };
 
   private readonly onGlobalPointerUp = (e: PointerEvent): void => {
     if (this.dragState) {
-      const { dx, dy } = this.pointerDelta(e, this.dragState);
-      const newX = Math.max(0, Math.min(1, this.dragState.origX + dx));
-      const newY = Math.max(0, Math.min(1, this.dragState.origY + dy));
-
+      const { x, y, dx, dy } = this.moved(e);
       if (Math.abs(dx) > 0.001 || Math.abs(dy) > 0.001) {
         this.pdfViewer.updateEditorAnnotation(this.dragState.annotationId, {
-          x: newX,
-          y: newY,
+          x,
+          y,
         });
       }
       this.dragState = null;
     } else if (this.resizeState) {
-      const { dx } = this.pointerDelta(e, this.resizeState);
-      const handle = this.resizeState.handle;
-      const aspect = this.resizeState.origH / this.resizeState.origW;
-
-      let newW = this.resizeState.origW;
-      let newX = this.resizeState.origX;
-      let newY = this.resizeState.origY;
-
-      if (handle.includes('e')) {
-        newW = Math.max(0.02, this.resizeState.origW + dx);
-      } else if (handle.includes('w')) {
-        newW = Math.max(0.02, this.resizeState.origW - dx);
-        newX = this.resizeState.origX + (this.resizeState.origW - newW);
-      }
-
-      const newH = newW * aspect;
-      if (handle.includes('n')) {
-        newY = this.resizeState.origY + (this.resizeState.origH - newH);
-      }
-
-      this.pdfViewer.updateEditorAnnotation(this.resizeState.annotationId, {
-        x: newX,
-        y: newY,
-        width: newW,
-        height: newH,
-      });
+      this.pdfViewer.updateEditorAnnotation(
+        this.resizeState.annotationId,
+        this.resized(e),
+      );
       this.resizeState = null;
     }
+    this.preview.set(null);
   };
 
+  /** Delete / Backspace deletes the selected annotation; Escape deselects. */
   private readonly onAnnotationKeyDown = (e: KeyboardEvent): void => {
-    if (!this.selectedAnnotationId) return;
-
+    const id = this.pdfViewer.selectedAnnotationId();
+    if (!id) return;
+    const target = e.target as HTMLElement | null;
+    // Not while typing.
+    if (
+      target?.isContentEditable ||
+      ['INPUT', 'TEXTAREA', 'SELECT'].includes(target?.tagName ?? '')
+    ) {
+      return;
+    }
     if (e.key === 'Delete' || e.key === 'Backspace') {
-      // Don't delete if user is typing in an input/textarea
-      const tag = (e.target as HTMLElement)?.tagName;
-      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
-      if ((e.target as HTMLElement)?.isContentEditable) return;
-
       e.preventDefault();
-      const id = this.selectedAnnotationId;
-      this.selectedAnnotationId = null;
       this.pdfViewer.removeEditorAnnotation(id);
     } else if (e.key === 'Escape') {
-      this.selectedAnnotationId = null;
-      const annotations = this.pdfViewer.editorAnnotations();
-      this.renderEditorAnnotations(annotations, this.scaledValue());
+      this.pdfViewer.selectedAnnotationId.set(null);
     }
   };
 }

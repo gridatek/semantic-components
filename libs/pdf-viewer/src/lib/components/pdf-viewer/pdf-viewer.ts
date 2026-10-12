@@ -25,13 +25,15 @@ import {
 import { annotationStorageValues } from './pdf-viewer-save';
 import { ScPdfScripting } from './pdf-viewer-scripting';
 import type {
+  ScPdfAttachment,
   ScPdfComment,
   ScPdfCursorTool,
   ScPdfDestination,
   ScPdfEditorAnnotation,
   ScPdfEditorMode,
-  ScPdfErrorEvent,
   ScPdfFindState,
+  ScPdfLayer,
+  ScPdfLoadError,
   ScPdfLoadEvent,
   ScPdfOutlineItem,
   ScPdfPageChangeEvent,
@@ -40,12 +42,18 @@ import type {
   ScPdfSidebarView,
   ScPdfSignatureData,
   ScPdfSpreadMode,
+  ScPdfUndoable,
   ScPdfZoomChangeEvent,
   ScPdfZoomLevel,
 } from './pdf-viewer-types';
 
 const MIN_SCALE = 0.25;
 const MAX_SCALE = 4;
+
+/** pdf.js's optional content (layers) config; not exported by pdfjs-dist. */
+type OptionalContentConfig = Awaited<
+  ReturnType<PDFDocumentProxy['getOptionalContentConfig']>
+>;
 
 /** A script that prints, in a document's JavaScript actions (as pdf.js). */
 const AUTO_PRINT = /\bprint\s*\(/;
@@ -161,6 +169,38 @@ function pageInfos(entries: ScPdfPageEntry[]): {
   });
 }
 
+/** The ids of these bookmarks and all their descendants. */
+function outlineIds(items: ScPdfOutlineItem[]): string[] {
+  return items.flatMap((item) => [item.id, ...outlineIds(item.items)]);
+}
+
+/** The ids of the bookmarks the document wants open. */
+function openOutlineIds(items: ScPdfOutlineItem[]): string[] {
+  return items.flatMap((item) => [
+    ...(item.open ? [item.id] : []),
+    ...openOutlineIds(item.items),
+  ]);
+}
+
+/** pdf.js's load failure as a kind the consumer can word. */
+function loadError(err: unknown): ScPdfLoadError {
+  const error = err instanceof Error ? err : null;
+  switch (error?.name) {
+    case 'InvalidPDFException':
+      return { kind: 'invalid', error };
+    case 'PasswordException':
+      return { kind: 'password', error };
+    case 'MissingPDFException':
+      return { kind: 'missing', error };
+    case 'ResponseException': {
+      const status = (error as Error & { status?: number }).status;
+      return { kind: status === 404 ? 'missing' : 'network', error };
+    }
+  }
+  // fetch() rejects with a TypeError when the network fails.
+  return { kind: error instanceof TypeError ? 'network' : 'unknown', error };
+}
+
 /** A field of a pdf.js result that's a `Map` or a plain object. */
 function field(source: unknown, key: string): unknown {
   if (source instanceof Map) return source.get(key);
@@ -236,7 +276,7 @@ export class ScPdfViewer {
   readonly loaded = output<ScPdfLoadEvent>();
   readonly pageChange = output<ScPdfPageChangeEvent>();
   readonly zoomChange = output<ScPdfZoomChangeEvent>();
-  readonly errorEvent = output<ScPdfErrorEvent>();
+  readonly errorEvent = output<ScPdfLoadError>();
   /** A local file was opened (`openFile()`, `loadFile()`, drag and drop). */
   readonly fileOpened = output<{ name: string }>();
 
@@ -265,7 +305,8 @@ export class ScPdfViewer {
 
   // State signals
   readonly isLoading = signal(true);
-  readonly error = signal<string | null>(null);
+  /** Why the document couldn't be loaded (the consumer writes the message). */
+  readonly error = signal<ScPdfLoadError | null>(null);
   readonly currentPage = signal(1);
   readonly totalPages = signal(1);
   readonly zoom = signal<ScPdfZoomLevel>('auto');
@@ -300,6 +341,10 @@ export class ScPdfViewer {
   readonly navigateTrigger = signal(0);
   /** Where on the page the last navigation goes, from 0 (top) to 1 (bottom). */
   readonly navigateTop = signal(0);
+  /** Whether the last navigation scrolls smoothly (not while a document opens). */
+  readonly navigateSmooth = signal(true);
+  /** Navigations right now are part of opening a document: instant. */
+  private openingNavigation = false;
 
   /** The document's page labels (e.g. "iv", "A-1"), or null to show numbers. */
   readonly pageLabels = signal<string[] | null>(null);
@@ -332,6 +377,153 @@ export class ScPdfViewer {
     }
     return null;
   });
+
+  /** Open bookmarks (by id) — at first, the ones the document wants open. */
+  readonly outlineExpanded = signal<ReadonlySet<string>>(new Set());
+  /** Incremented to bring the current bookmark into view. */
+  readonly outlineRevealRequest = signal(0);
+
+  /** Opens or closes a bookmark — with `wholeBranch`, its descendants too. */
+  toggleOutlineItem(item: ScPdfOutlineItem, wholeBranch = false): void {
+    const open = !this.outlineExpanded().has(item.id);
+    const ids = wholeBranch ? outlineIds([item]) : [item.id];
+    this.outlineExpanded.update((expanded) => {
+      const next = new Set(expanded);
+      for (const id of ids) {
+        if (open) next.add(id);
+        else next.delete(id);
+      }
+      return next;
+    });
+  }
+
+  /** Opens or closes every bookmark. */
+  setOutlineExpanded(open: boolean): void {
+    this.outlineExpanded.set(new Set(open ? outlineIds(this.outline()) : []));
+  }
+
+  /** Opens the current bookmark's parents and brings it into view. */
+  revealCurrentOutlineItem(): void {
+    const current = this.currentOutlineItem();
+    if (!current) return;
+    // Ids are paths ("0.2.1"): the parents are its prefixes.
+    const parts = current.id.split('.');
+    this.outlineExpanded.update((expanded) => {
+      const next = new Set(expanded);
+      for (let i = 1; i < parts.length; i++) {
+        next.add(parts.slice(0, i).join('.'));
+      }
+      return next;
+    });
+    this.outlineRevealRequest.update((v) => v + 1);
+  }
+
+  /** The document's attached files. */
+  readonly attachments = signal<ScPdfAttachment[]>([]);
+
+  /** Downloads an attached file. */
+  downloadAttachment(attachment: ScPdfAttachment): void {
+    this.saveAs(
+      new Blob([attachment.content as Uint8Array<ArrayBuffer>]),
+      attachment.filename,
+    );
+  }
+
+  /** Every page number, in order — for a list of pages. */
+  readonly pageNumbers = computed(() =>
+    this.pdfDocument()
+      ? Array.from({ length: this.totalPages() }, (_, i) => i + 1)
+      : [],
+  );
+
+  /** Pages selected in a list of pages (for page organisation). */
+  readonly selectedPages = signal<ReadonlySet<number>>(new Set());
+  /** The selected pages that exist, ascending. */
+  readonly pageSelection = computed(() => {
+    const total = this.totalPages();
+    return [...this.selectedPages()]
+      .filter((page) => page <= total)
+      .sort((a, b) => a - b);
+  });
+
+  selectPage(page: number, selected: boolean): void {
+    this.selectedPages.update((pages) => {
+      const next = new Set(pages);
+      if (selected) next.add(page);
+      else next.delete(page);
+      return next;
+    });
+  }
+
+  clearPageSelection(): void {
+    this.selectedPages.set(new Set());
+  }
+
+  /** The selected pages one place earlier (-1) or later (1); they stay selected. */
+  async moveSelectedPages(delta: -1 | 1): Promise<void> {
+    const pages = this.pageSelection();
+    if (!pages.length) return;
+    const before = delta < 0 ? pages[0] - 1 : pages[pages.length - 1] + 2;
+    this.selectedPages.set(new Set(await this.movePages(pages, before)));
+  }
+
+  /** Thumbnails rendered for the current document (object URLs). */
+  private thumbnails = new Map<string, Promise<string | null>>();
+  private thumbnailsDocument: PDFDocumentProxy | null = null;
+  /** Thumbnails render one at a time. */
+  private thumbnailQueue: Promise<unknown> = Promise.resolve();
+
+  /**
+   * A page's thumbnail, `width` CSS pixels wide (at the screen's density,
+   * with the viewer's rotation), as an image URL — rendered once per document.
+   */
+  renderThumbnail(pageNumber: number, width: number): Promise<string | null> {
+    const doc = this.pdfDocument();
+    if (!doc) return Promise.resolve(null);
+    if (doc !== this.thumbnailsDocument) {
+      this.releaseThumbnails();
+      this.thumbnailsDocument = doc;
+    }
+    const rotation = this.rotation();
+    const key = `${pageNumber}:${width}:${rotation}`;
+    let thumbnail = this.thumbnails.get(key);
+    if (!thumbnail) {
+      thumbnail = this.thumbnailQueue.then(async () => {
+        try {
+          const page = await doc.getPage(pageNumber);
+          const rotate = (page.rotate + rotation) % 360;
+          const natural = page.getViewport({ scale: 1, rotation: rotate });
+          const density = this.document.defaultView?.devicePixelRatio ?? 1;
+          const viewport = page.getViewport({
+            scale: (width / natural.width) * density,
+            rotation: rotate,
+          });
+          const canvas = this.document.createElement('canvas');
+          canvas.width = viewport.width;
+          canvas.height = viewport.height;
+          await page.render({ canvas, viewport }).promise;
+          const blob = await new Promise<Blob | null>((resolve) =>
+            canvas.toBlob(resolve),
+          );
+          canvas.width = canvas.height = 0;
+          return blob ? URL.createObjectURL(blob) : null;
+        } catch {
+          return null;
+        }
+      });
+      this.thumbnailQueue = thumbnail;
+      this.thumbnails.set(key, thumbnail);
+    }
+    return thumbnail;
+  }
+
+  private releaseThumbnails(): void {
+    for (const thumbnail of this.thumbnails.values()) {
+      thumbnail.then((url) => url && URL.revokeObjectURL(url));
+    }
+    this.thumbnails = new Map();
+    this.thumbnailsDocument = null;
+  }
 
   /** The document's form fields, for the annotation layer (forms, scripts). */
   readonly formInfo = signal<{
@@ -391,9 +583,12 @@ export class ScPdfViewer {
   readonly editorMode = signal<ScPdfEditorMode>('none');
   readonly editorAnnotations = signal<ScPdfEditorAnnotation[]>([]);
   readonly editorTrigger = signal(0);
+  /** The annotation selected on the page (its toolbar shows), or null. */
+  readonly selectedAnnotationId = signal<string | null>(null);
 
   // Editor params
-  readonly highlightColor = signal('#FFFF00');
+  /** pdf.js's default highlight yellow. */
+  readonly highlightColor = signal('#FFFF98');
   readonly highlightThickness = signal(12);
   readonly highlightShowAll = signal(true);
   readonly freetextColor = signal('#000000');
@@ -412,6 +607,11 @@ export class ScPdfViewer {
   // Alt text state
   readonly altTextDialogOpen = signal(false);
   readonly altTextAnnotationId = signal<string | null>(null);
+
+  /** The document's optional content (layers), and whether each shows. */
+  readonly layers = signal<ScPdfLayer[]>([]);
+  /** The layers' visibility as pdf.js renders it (with the pages). */
+  readonly optionalContent = signal<OptionalContentConfig | null>(null);
 
   // Signature state
   readonly signatureDialogOpen = signal(false);
@@ -432,9 +632,8 @@ export class ScPdfViewer {
   /** The comment picked on the page or in the list. */
   readonly activeCommentId = signal<string | null>(null);
 
-  // Undo bar state
-  readonly undoBarVisible = signal(false);
-  readonly undoBarMessage = signal('');
+  /** What the undo bar can undo now (shown for a few seconds), or null. */
+  readonly undoable = signal<ScPdfUndoable | null>(null);
   private undoAction: (() => void) | null = null;
   private undoTimeout: ReturnType<typeof setTimeout> | null = null;
 
@@ -449,17 +648,6 @@ export class ScPdfViewer {
   private editorIdCounter = 0;
   private signatureIdCounter = 0;
   private commentIdCounter = 0;
-
-  readonly findResultsMessage = computed(() => {
-    const total = this.findTotalMatches();
-    const current = this.findCurrentMatchIndex();
-    const state = this.findState();
-
-    if (state === 'idle' || !this.findQuery()) return '';
-    if (state === 'not-found') return 'Phrase not found';
-    if (total === 0) return 'Phrase not found';
-    return `${current + 1} of ${total}`;
-  });
 
   // Container element ref for fullscreen
   private containerElement: ElementRef<HTMLElement> | null = null;
@@ -531,6 +719,7 @@ export class ScPdfViewer {
     });
 
     this.destroyRef.onDestroy(() => {
+      this.releaseThumbnails();
       this.scripting.destroy();
       this.loadingTask?.destroy();
       this.pdfDocument()?.loadingTask.destroy();
@@ -587,6 +776,7 @@ export class ScPdfViewer {
     // Annotations and comments belong to the document — except when it's
     // the same one rebuilt (page organisation), which remaps them itself.
     if (!keepAnnotations) {
+      this.clearPageSelection();
       this.editorAnnotations.set([]);
       this.comments.set([]);
       this.activeCommentId.set(null);
@@ -599,6 +789,11 @@ export class ScPdfViewer {
     this.pageLabels.set(null);
     this.outline.set([]);
     this.formInfo.set({ fieldObjects: null, hasJSActions: false });
+    this.layers.set([]);
+    this.optionalContent.set(null);
+    this.attachments.set([]);
+    this.outlineExpanded.set(new Set());
+    this.releaseThumbnails();
     this.renderedPageNumbers.clear();
     this.scripting.setDocument(null);
 
@@ -642,10 +837,12 @@ export class ScPdfViewer {
       this.loadingTask = null;
       this.pdfDocument.set(doc);
       this.totalPages.set(doc.numPages);
-      // Navigated (not just set), so the canvas scrolls there once laid out.
+      // Navigated (not just set), so the canvas goes there once laid out.
+      this.openingNavigation = true;
       this.goToPage(
         Math.min(Math.max(1, page ?? this.initialPage()), doc.numPages),
       );
+      this.openingNavigation = false;
       this.isLoading.set(false);
       this.passwordRequired.set(false);
       this.loadProgress.set(1);
@@ -654,9 +851,7 @@ export class ScPdfViewer {
     } catch (err) {
       if (task !== this.loadingTask || this.passwordRequired()) return;
       this.loadingTask = null;
-      const message =
-        err instanceof Error ? err.message : 'Unable to load the PDF document.';
-      this.onError(message);
+      this.fail(loadError(err));
     }
   }
 
@@ -707,13 +902,10 @@ export class ScPdfViewer {
     this.loaded.emit({ totalPages: this.totalPages() });
   }
 
-  onError(message = 'Unable to load the PDF document.'): void {
+  private fail(error: ScPdfLoadError): void {
     this.isLoading.set(false);
-    this.error.set(message);
-    this.errorEvent.emit({
-      error: new Error(message),
-      message,
-    });
+    this.error.set(error);
+    this.errorEvent.emit(error);
   }
 
   retry(): void {
@@ -752,10 +944,13 @@ export class ScPdfViewer {
     const [fieldObjects, hasJSActions] = await form;
     if (doc !== this.pdfDocument()) return;
     this.formInfo.set({ fieldObjects, hasJSActions });
+    this.loadLayers(doc);
     if (this.enableScripting()) this.scripting.setDocument(doc);
 
     this.pageLabels.set(usefulPageLabels(labels, doc.numPages));
     this.outline.set(outline);
+    this.outlineExpanded.set(new Set(openOutlineIds(outline)));
+    this.loadAttachments(doc);
     this.applyPageLayout(pageLayout);
 
     const view = pageMode ? PAGE_MODES[pageMode] : undefined;
@@ -765,8 +960,14 @@ export class ScPdfViewer {
     }
 
     const openDest = field(openAction, 'dest');
-    if (hash) await this.applyHash(hash);
-    else if (openDest) await this.goToDestination(openDest);
+    // Where the document opens is jumped to, not scrolled to (as pdf.js).
+    this.openingNavigation = true;
+    try {
+      if (hash) await this.applyHash(hash);
+      else if (openDest) await this.goToDestination(openDest);
+    } finally {
+      this.openingNavigation = false;
+    }
     if (doc !== this.pdfDocument()) return;
 
     const scripts = values(jsActions).flatMap((list) =>
@@ -1053,6 +1254,7 @@ export class ScPdfViewer {
   goToPage(page: number, top = 0): void {
     if (page >= 1 && page <= this.totalPages()) {
       this.navigateTop.set(top);
+      this.navigateSmooth.set(!this.openingNavigation);
       this.currentPage.set(page);
       this.navigateTrigger.update((v) => v + 1);
       this.pageChange.emit({
@@ -1181,7 +1383,7 @@ export class ScPdfViewer {
     const start = rest.indexOf(moving[0]) + 1;
     await this.rebuild(
       rest.map((page) => ({ page })),
-      moving.length === 1 ? 'Page moved' : `${moving.length} pages moved`,
+      { kind: 'pages-moved', count: moving.length },
       { focusPage: start },
     );
     return moving.map((_, i) => start + i);
@@ -1197,9 +1399,7 @@ export class ScPdfViewer {
       this.allPages()
         .filter((p) => !removing.includes(p))
         .map((page) => ({ page })),
-      removing.length === 1
-        ? 'Page deleted'
-        : `${removing.length} pages deleted`,
+      { kind: 'pages-deleted', count: removing.length },
     );
   }
 
@@ -1251,7 +1451,7 @@ export class ScPdfViewer {
     );
     return this.rebuild(
       entries,
-      clip.count === 1 ? 'Page pasted' : `${clip.count} pages pasted`,
+      { kind: 'pages-pasted', count: clip.count },
       { focusPage: afterPage + 1 },
     );
   }
@@ -1260,7 +1460,7 @@ export class ScPdfViewer {
   async insertFile(
     file: File | Uint8Array,
     afterPage = this.totalPages(),
-  ): Promise<void> {
+  ): Promise<boolean> {
     const data =
       file instanceof Uint8Array
         ? file
@@ -1275,8 +1475,8 @@ export class ScPdfViewer {
       count = other.numPages;
       other.loadingTask.destroy();
     } catch {
-      this.showUndoBar("Couldn't read that file as a PDF", () => undefined);
-      return;
+      // Not a PDF (or unreadable): the consumer says so.
+      return false;
     }
     const entries: ScPdfPageEntry[] = this.allPages().map((page) => ({
       page,
@@ -1288,9 +1488,10 @@ export class ScPdfViewer {
     );
     await this.rebuild(
       entries,
-      count === 1 ? '1 page inserted' : `${count} pages inserted`,
+      { kind: 'pages-inserted', count },
       { focusPage: afterPage + 1 },
     );
+    return true;
   }
 
   /** Downloads a PDF of just these pages, with their annotations, comments and form data. */
@@ -1324,7 +1525,7 @@ export class ScPdfViewer {
   /** Rebuilds the document from `entries` (its pages and others), undoably. */
   private async rebuild(
     entries: ScPdfPageEntry[],
-    message: string,
+    undo: ScPdfUndoable,
     { focusPage }: { focusPage?: number } = {},
   ): Promise<void> {
     const doc = this.pdfDocument();
@@ -1350,7 +1551,7 @@ export class ScPdfViewer {
         focusPage ??
           (moved >= 0 ? moved + 1 : Math.min(before.page, entries.length)),
       );
-      this.showUndoBar(message, () =>
+      this.showUndoBar(undo, () =>
         this.replaceDocument(
           before.data,
           before.annotations,
@@ -1419,6 +1620,8 @@ export class ScPdfViewer {
     this.editorAnnotations.set(annotations);
     this.comments.set(comments);
     this.editorTrigger.update((v) => v + 1);
+    // The pages are renumbered (movePages re-selects the moved ones).
+    this.clearPageSelection();
     await this.open({ data }, '', { keepAnnotations: true, page });
   }
 
@@ -1620,7 +1823,7 @@ export class ScPdfViewer {
       this.passwordCallback = null;
     }
     this.passwordRequired.set(false);
-    this.onError('Password required to open this document.');
+    this.fail({ kind: 'password', error: null });
   }
 
   // Signature methods
@@ -1630,6 +1833,55 @@ export class ScPdfViewer {
 
   closeSignatureDialog(): void {
     this.signatureDialogOpen.set(false);
+    if (this.editorMode() === 'signature') this.editorMode.set('none');
+  }
+
+  /** Opens the alt-text dialog for an image annotation. */
+  openAltText(annotationId: string): void {
+    this.altTextAnnotationId.set(annotationId);
+    this.altTextDialogOpen.set(true);
+  }
+
+  closeAltText(): void {
+    this.altTextDialogOpen.set(false);
+    this.altTextAnnotationId.set(null);
+  }
+
+  /** Shows or hides a layer (optional content group); the pages redraw. */
+  setLayerVisible(id: string, visible: boolean): void {
+    const config = this.optionalContent();
+    if (!config) return;
+    config.setVisibility(id, visible);
+    this.layers.update((layers) =>
+      layers.map((layer) => (layer.id === id ? { ...layer, visible } : layer)),
+    );
+  }
+
+  /** The document's attached files. */
+  private async loadAttachments(doc: PDFDocumentProxy): Promise<void> {
+    const attachments = await doc.getAttachments().catch(() => null);
+    if (doc !== this.pdfDocument()) return;
+    this.attachments.set(
+      values(attachments).map((value) => {
+        const { filename, content } = value as {
+          filename: string;
+          content: Uint8Array;
+        };
+        return { filename, content };
+      }),
+    );
+  }
+
+  /** The document's layers, with their default visibility. */
+  private async loadLayers(doc: PDFDocumentProxy): Promise<void> {
+    const config = await doc.getOptionalContentConfig().catch(() => null);
+    if (doc !== this.pdfDocument()) return;
+    this.optionalContent.set(config);
+    const layers: ScPdfLayer[] = [];
+    for (const [id, group] of config ?? []) {
+      layers.push({ id, name: group.name ?? id, visible: group.visible });
+    }
+    this.layers.set(layers);
   }
 
   addSavedSignature(sig: Omit<ScPdfSignatureData, 'id'>): void {
@@ -2179,12 +2431,13 @@ export class ScPdfViewer {
 
   removeEditorAnnotation(id: string): void {
     const removed = this.editorAnnotations().find((a) => a.id === id);
+    if (this.selectedAnnotationId() === id) this.selectedAnnotationId.set(null);
     this.editorAnnotations.update((list) => list.filter((a) => a.id !== id));
     this.editorTrigger.update((v) => v + 1);
 
     // Show undo bar
     if (removed) {
-      this.showUndoBar('Annotation deleted', () => {
+      this.showUndoBar({ kind: 'annotation-deleted', count: 1 }, () => {
         this.editorAnnotations.update((list) => [...list, removed]);
         this.editorTrigger.update((v) => v + 1);
       });
@@ -2197,21 +2450,23 @@ export class ScPdfViewer {
     this.editorTrigger.update((v) => v + 1);
 
     if (prev.length > 0) {
-      this.showUndoBar(`${prev.length} annotation(s) cleared`, () => {
-        this.editorAnnotations.set(prev);
-        this.editorTrigger.update((v) => v + 1);
-      });
+      this.showUndoBar(
+        { kind: 'annotations-cleared', count: prev.length },
+        () => {
+          this.editorAnnotations.set(prev);
+          this.editorTrigger.update((v) => v + 1);
+        },
+      );
     }
   }
 
   // Undo bar
-  private showUndoBar(message: string, action: () => void): void {
+  private showUndoBar(undo: ScPdfUndoable, action: () => void): void {
     if (this.undoTimeout) {
       clearTimeout(this.undoTimeout);
     }
-    this.undoBarMessage.set(message);
     this.undoAction = action;
-    this.undoBarVisible.set(true);
+    this.undoable.set(undo);
 
     this.undoTimeout = setTimeout(() => {
       this.closeUndoBar();
@@ -2227,8 +2482,7 @@ export class ScPdfViewer {
   }
 
   closeUndoBar(): void {
-    this.undoBarVisible.set(false);
-    this.undoBarMessage.set('');
+    this.undoable.set(null);
     this.undoAction = null;
     if (this.undoTimeout) {
       clearTimeout(this.undoTimeout);

@@ -12,16 +12,15 @@ import { SC_PDF_VIEWER } from './pdf-viewer';
 
 /**
  * Searches the document as you type; Enter goes to the next match,
- * Shift+Enter to the previous one. Use on an `input[scInput]`. Marked
- * `aria-invalid` when nothing matches.
+ * Shift+Enter to the previous one. Use on an `input[scInput]` and give it an
+ * `aria-label` (and a placeholder). Marked `aria-invalid` when nothing
+ * matches.
  */
 @Directive({
   selector: 'input[scPdfViewerFindInput]',
   host: {
     type: 'search',
     '[class]': 'class()',
-    '[attr.aria-label]': 'ariaLabel()',
-    '[attr.placeholder]': 'placeholder()',
     // Shows a search started elsewhere (the `search` open parameter).
     '[value]': 'pdfViewer.findQuery()',
     '[attr.aria-invalid]': 'pdfViewer.findState() === "not-found" || null',
@@ -33,9 +32,6 @@ import { SC_PDF_VIEWER } from './pdf-viewer';
 export class ScPdfViewerFindInput {
   readonly pdfViewer = inject(SC_PDF_VIEWER);
   readonly classInput = input<string>('', { alias: 'class' });
-  /** Accessible name. */
-  readonly ariaLabel = input('Find in document', { alias: 'aria-label' });
-  readonly placeholder = input('Find in document…');
 
   protected readonly class = computed(() => cn(this.classInput()));
 

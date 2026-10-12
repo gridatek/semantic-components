@@ -4,6 +4,7 @@ import {
   ScPdfViewerCanvas,
   ScPdfViewerContainer,
   ScPdfViewerContent,
+  ScPdfViewerDialog,
   ScPdfViewerDownload,
   ScPdfViewerLoading,
   ScPdfViewerPrint,
@@ -13,6 +14,15 @@ import {
 } from '@semantic-components/pdf-viewer';
 import {
   ScButton,
+  ScDialog,
+  ScDialogClose,
+  ScDialogDescription,
+  ScDialogFooter,
+  ScDialogHeader,
+  ScDialogPortal,
+  ScDialogProvider,
+  ScDialogTitle,
+  ScProgress,
   ScSpinner,
   ScTooltipTrigger,
   cn,
@@ -40,6 +50,16 @@ import {
     ScPdfViewerLoading,
     ScPdfViewerCanvas,
     ScPdfViewerPrintProgress,
+    ScPdfViewerDialog,
+    ScDialogProvider,
+    ScDialogPortal,
+    ScDialog,
+    ScDialogHeader,
+    ScDialogTitle,
+    ScDialogDescription,
+    ScDialogFooter,
+    ScDialogClose,
+    ScProgress,
     ScButton,
     ScTooltipTrigger,
     ScSpinner,
@@ -54,9 +74,10 @@ import {
       src="/pdf/order-form.pdf"
       fileName="order-form"
       initialZoom="page-width"
+      #viewer="scPdfViewer"
     >
       <div scPdfViewerContainer class="flex size-full flex-col">
-        <div scPdfViewerToolbar class="py-1.5">
+        <div scPdfViewerToolbar aria-label="Order form" class="py-1.5">
           <span class="text-sm font-medium">Order form</span>
           <div scPdfViewerSpacer></div>
           <button
@@ -64,6 +85,7 @@ import {
             variant="ghost"
             size="icon"
             scPdfViewerPrint
+            aria-label="Print"
             [scTooltipTrigger]="'Print'"
           >
             <svg siPrinterIcon></svg>
@@ -73,6 +95,7 @@ import {
             variant="ghost"
             size="icon"
             scPdfViewerDownload
+            aria-label="Download with your answers"
             [scTooltipTrigger]="'Download with your answers'"
           >
             <svg siDownloadIcon></svg>
@@ -81,10 +104,30 @@ import {
         <div scPdfViewerContent>
           <div scPdfViewerLoading>
             <svg scSpinner siLoaderCircleIcon class="size-6"></svg>
+            Loading the form…
           </div>
           <sc-pdf-viewer-canvas />
         </div>
-        <sc-pdf-viewer-print-progress />
+        <div scDialogProvider scPdfViewerDialog="print">
+          <ng-template scDialogPortal>
+            <div scDialog class="sm:w-sm">
+              <div scDialogHeader>
+                <h2 scDialogTitle>Preparing to print</h2>
+                <p scDialogDescription>
+                  {{ viewer.printProgress() }}% of the pages ready
+                </p>
+              </div>
+              <div
+                scProgress
+                scPdfViewerPrintProgress
+                aria-label="Print preparation"
+              ></div>
+              <div scDialogFooter>
+                <button scButton scDialogClose variant="outline">Cancel</button>
+              </div>
+            </div>
+          </ng-template>
+        </div>
       </div>
     </div>
   `,

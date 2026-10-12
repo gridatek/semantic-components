@@ -9,7 +9,7 @@ test.describe('PDF Viewer open parameters', () => {
     const errors = collectErrors(page);
     await page.goto('/demos/pdf-viewer/pdf-viewer-open-parameters-demo');
     const labelInput = page.getByRole('textbox', { name: 'Page' });
-    const pageCount = page.locator('[data-slot="pdf-viewer-page-info"] span');
+    const pageCount = page.getByTestId('page-count');
 
     // #nameddest=chapter-2 in src (the first load fetches pdf.js's worker).
     await expect(labelInput).toHaveValue('3', { timeout: 20_000 });
