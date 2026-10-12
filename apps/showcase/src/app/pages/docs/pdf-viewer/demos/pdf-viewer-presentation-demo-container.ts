@@ -7,7 +7,7 @@ import { PdfViewerPresentationDemo } from './pdf-viewer-presentation-demo';
   imports: [DemoContainer, PdfViewerPresentationDemo],
   template: `
     <app-demo-container
-      title="Presentation mode"
+      title="Present the handbook"
       demoUrl="/demos/pdf-viewer/pdf-viewer-presentation-demo"
       [code]="code"
     >

@@ -7,7 +7,7 @@ import { PdfViewerFormDemo } from './pdf-viewer-form-demo';
   imports: [DemoContainer, PdfViewerFormDemo],
   template: `
     <app-demo-container
-      title="Forms"
+      title="Order form with a script"
       demoUrl="/demos/pdf-viewer/pdf-viewer-form-demo"
       [code]="code"
     >
