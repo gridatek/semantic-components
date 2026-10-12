@@ -16,18 +16,28 @@ import {
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import type { PDFDocumentLoadingTask, PDFDocumentProxy } from 'pdfjs-dist';
-import { GlobalWorkerOptions, getDocument, version } from 'pdfjs-dist';
+import {
+  AnnotationMode,
+  GlobalWorkerOptions,
+  getDocument,
+  version,
+} from 'pdfjs-dist';
+import { annotationStorageValues } from './pdf-viewer-save';
+import { ScPdfScripting } from './pdf-viewer-scripting';
 import type {
   ScPdfComment,
   ScPdfCursorTool,
+  ScPdfDestination,
   ScPdfEditorAnnotation,
   ScPdfEditorMode,
   ScPdfErrorEvent,
   ScPdfFindState,
   ScPdfLoadEvent,
+  ScPdfOutlineItem,
   ScPdfPageChangeEvent,
   ScPdfPageMatchInfo,
   ScPdfScrollMode,
+  ScPdfSidebarView,
   ScPdfSignatureData,
   ScPdfSpreadMode,
   ScPdfZoomChangeEvent,
@@ -36,6 +46,142 @@ import type {
 
 const MIN_SCALE = 0.25;
 const MAX_SCALE = 4;
+
+/** A script that prints, in a document's JavaScript actions (as pdf.js). */
+const AUTO_PRINT = /\bprint\s*\(/;
+
+/** The document's `PageLayout` as scroll and spread modes. */
+const PAGE_LAYOUTS: Record<string, [ScPdfScrollMode, ScPdfSpreadMode]> = {
+  SinglePage: ['page', 'none'],
+  OneColumn: ['vertical', 'none'],
+  TwoColumnLeft: ['vertical', 'odd'],
+  TwoColumnRight: ['vertical', 'even'],
+  TwoPageLeft: ['page', 'odd'],
+  TwoPageRight: ['page', 'even'],
+};
+
+/** The document's `PageMode` as a sidebar view. */
+const PAGE_MODES: Record<string, ScPdfSidebarView> = {
+  UseOutlines: 'outline',
+  UseThumbs: 'thumbnails',
+  UseAttachments: 'attachments',
+  UseOC: 'layers',
+};
+
+/** The `pagemode` open parameter as a sidebar view (`none` closes it). */
+const HASH_PAGE_MODES: Record<string, ScPdfSidebarView> = {
+  thumbs: 'thumbnails',
+  bookmarks: 'outline',
+  attachments: 'attachments',
+  layers: 'layers',
+};
+
+const NAMED_ZOOMS: Record<string, ScPdfZoomLevel> = {
+  auto: 'auto',
+  'page-actual': 'page-actual',
+  'page-fit': 'page-fit',
+  'page-height': 'page-fit',
+  'page-width': 'page-width',
+};
+
+/** pdf.js's outline item, as `getOutline()` returns it. */
+interface PdfOutlineNode {
+  title: string;
+  dest: string | unknown[] | null;
+  url: string | null;
+  bold: boolean;
+  italic: boolean;
+  count: number | undefined;
+  items: PdfOutlineNode[];
+}
+
+/**
+ * Page labels worth showing: not when they're all empty or just the page
+ * numbers again (as pdf.js).
+ */
+function usefulPageLabels(
+  labels: string[] | null,
+  numPages: number,
+): string[] | null {
+  if (!labels || labels.length !== numPages) return null;
+  let standard = 0;
+  let empty = 0;
+  labels.forEach((label, i) => {
+    const trimmed = (label ?? '').trim();
+    if (!trimmed) empty++;
+    else if (trimmed === String(i + 1)) standard++;
+  });
+  return standard >= numPages || empty >= numPages ? null : labels;
+}
+
+/** A page of the rebuilt document: one of the current document's, or another PDF's. */
+type ScPdfPageEntry =
+  | { page: number }
+  | {
+      data: Uint8Array;
+      /** 0-based page index in `data`. */
+      index: number;
+      /** Annotations / comments of `data`'s pages (page = index + 1). */
+      annotations?: ScPdfEditorAnnotation[];
+      comments?: ScPdfComment[];
+    };
+
+/**
+ * `extractPages` page infos placing each entry at its position: one info per
+ * source document — and per repetition, since an info lists a page once —
+ * with its pages ascending, as pdf.js takes them.
+ */
+function pageInfos(entries: ScPdfPageEntry[]): {
+  document: Uint8Array | null;
+  includePages: number[];
+  pageIndices: number[];
+}[] {
+  const infos: {
+    document: Uint8Array | null;
+    pairs: [index: number, position: number][];
+  }[] = [];
+  entries.forEach((entry, position) => {
+    const document = 'page' in entry ? null : entry.data;
+    const index = 'page' in entry ? entry.page - 1 : entry.index;
+    let info = infos.find(
+      (candidate) =>
+        candidate.document === document &&
+        !candidate.pairs.some(([i]) => i === index),
+    );
+    if (!info) infos.push((info = { document, pairs: [] }));
+    info.pairs.push([index, position]);
+  });
+  return infos.map(({ document, pairs }) => {
+    pairs.sort((a, b) => a[0] - b[0]);
+    return {
+      document,
+      includePages: pairs.map(([index]) => index),
+      pageIndices: pairs.map(([, position]) => position),
+    };
+  });
+}
+
+/** A field of a pdf.js result that's a `Map` or a plain object. */
+function field(source: unknown, key: string): unknown {
+  if (source instanceof Map) return source.get(key);
+  return source && typeof source === 'object'
+    ? (source as Record<string, unknown>)[key]
+    : undefined;
+}
+
+/** The values of a pdf.js result that's a `Map` or a plain object. */
+function values(source: unknown): unknown[] {
+  if (source instanceof Map) return [...source.values()];
+  return source && typeof source === 'object' ? Object.values(source) : [];
+}
+
+/** `doc.pdf#page=3` → the URL and its open parameters. */
+function splitSource(source: string): { url: string; hash: string } {
+  const index = source.indexOf('#');
+  return index < 0
+    ? { url: source, hash: '' }
+    : { url: source.slice(0, index), hash: source.slice(index + 1) };
+}
 
 export const SC_PDF_VIEWER = new InjectionToken<ScPdfViewerRoot>(
   'SC_PDF_VIEWER',
@@ -50,6 +196,7 @@ export const SC_PDF_VIEWER = new InjectionToken<ScPdfViewerRoot>(
     '[attr.data-loading]': 'isLoading() || null',
     '[attr.data-error]': 'error() ? true : null',
     '[attr.data-fullscreen]': 'isFullscreen() || null',
+    '[attr.data-presenting]': 'presenting() || null',
     '(keydown)': 'onKeydown($event)',
   },
 })
@@ -66,6 +213,15 @@ export class ScPdfViewerRoot {
   readonly initialPage = input(1);
   readonly initialZoom = input<ScPdfZoomLevel>('auto');
   readonly workerSrc = input<string>('');
+  /**
+   * Run the document's JavaScript (form calculations, formatting,
+   * validation, actions) in pdf.js's sandbox, as pdf.js does.
+   */
+  readonly enableScripting = input(true);
+  /** URL of pdf.js's pdf.sandbox.mjs (defaults to unpkg, like the worker). */
+  readonly sandboxSrc = input<string>('');
+  /** URL of pdf.js's wasm/ folder, with a trailing slash (defaults to unpkg). */
+  readonly wasmSrc = input<string>('');
 
   // Outputs
   readonly loaded = output<ScPdfLoadEvent>();
@@ -77,8 +233,15 @@ export class ScPdfViewerRoot {
 
   /** pdf.js's keyboard shortcuts, while focus is in the viewer. */
   readonly keyboardShortcuts = input(true);
+  /** Print when the document asks to on opening (as pdf.js). */
+  readonly autoPrint = input(true);
   /** Whether the sidebar is open (F4 toggles it). Bind `[(sidebarOpen)]`. */
   readonly sidebarOpen = model(false);
+  /**
+   * The sidebar view to show. The document's page mode and the `pagemode`
+   * open parameter set it on load.
+   */
+  readonly sidebarView = model<ScPdfSidebarView>('thumbnails');
   /** Select text, or drag the pages to scroll (S / H). */
   readonly cursorTool = model<ScPdfCursorTool>('select');
   /** How the pages are laid out. */
@@ -99,12 +262,104 @@ export class ScPdfViewerRoot {
   readonly zoom = signal<ScPdfZoomLevel>('auto');
   readonly rotation = signal(0);
   readonly isFullscreen = signal(false);
+  /** Presentation mode: one page at a time, fit to the screen, fullscreen. */
+  readonly presenting = signal(false);
+  /** Pages copied or cut, for `pastePages`: a PDF of them, and what was on them. */
+  readonly pageClipboard = signal<{
+    data: Uint8Array;
+    count: number;
+    /** On page 1…count of the copied pages. */
+    annotations: ScPdfEditorAnnotation[];
+    comments: ScPdfComment[];
+  } | null>(null);
+  /** The document is being rebuilt (page organisation). */
+  readonly organizing = signal(false);
+
+  /** The view before presentation mode, restored after it. */
+  private presentationState: {
+    scrollMode: ScPdfScrollMode;
+    spreadMode: ScPdfSpreadMode;
+    zoom: ScPdfZoomLevel;
+    sidebarOpen: boolean;
+    cursorTool: ScPdfCursorTool;
+  } | null = null;
 
   // PDF.js document
   readonly pdfDocument = signal<PDFDocumentProxy | null>(null);
 
   // Navigation trigger — incremented to signal canvas to scroll to currentPage
   readonly navigateTrigger = signal(0);
+  /** Where on the page the last navigation goes, from 0 (top) to 1 (bottom). */
+  readonly navigateTop = signal(0);
+
+  /** The document's page labels (e.g. "iv", "A-1"), or null to show numbers. */
+  readonly pageLabels = signal<string[] | null>(null);
+  /** The document's outline (bookmarks), with destinations resolved. */
+  readonly outline = signal<ScPdfOutlineItem[]>([]);
+
+  /** The first bookmark (breadth first) pointing to each page. */
+  private readonly outlineByPage = computed(() => {
+    const byPage = new Map<number, ScPdfOutlineItem>();
+    const queue = [...this.outline()];
+    for (let item = queue.shift(); item; item = queue.shift()) {
+      if (item.pageNumber && !byPage.has(item.pageNumber)) {
+        byPage.set(item.pageNumber, item);
+      }
+      queue.push(...item.items);
+    }
+    return byPage;
+  });
+
+  /**
+   * The bookmark for the current page — or the nearest page before it that
+   * has one (as pdf.js's "find current outline item").
+   */
+  readonly currentOutlineItem = computed(() => {
+    const byPage = this.outlineByPage();
+    if (!byPage.size) return null;
+    for (let page = this.currentPage(); page > 0; page--) {
+      const item = byPage.get(page);
+      if (item) return item;
+    }
+    return null;
+  });
+
+  /** The document's form fields, for the annotation layer (forms, scripts). */
+  readonly formInfo = signal<{
+    fieldObjects: Map<string, object[]> | null;
+    hasJSActions: boolean;
+  }>({ fieldObjects: null, hasJSActions: false });
+
+  /** Pages drawn with their form fields in the DOM (for page scripts). */
+  private readonly renderedPageNumbers = new Set<number>();
+
+  /** The document's JavaScript, run in pdf.js's sandbox. */
+  readonly scripting = new ScPdfScripting(
+    {
+      currentPage: () => this.currentPage(),
+      totalPages: () => this.totalPages(),
+      goToPage: (page) => this.goToPage(page),
+      goToNextPage: () => this.goToNextPage(),
+      goToPrevPage: () => this.goToPrevPage(),
+      setScriptZoom: (value) => this.setScriptZoom(value),
+      zoomIn: () => this.zoomIn(),
+      zoomOut: () => this.zoomOut(),
+      print: () => this.printWithProgress(),
+      download: () => this.download(),
+      isPageRendered: (page) => this.renderedPageNumbers.has(page),
+      isPresenting: () => this.presenting(),
+    },
+    () => ({
+      sandboxSrc:
+        this.sandboxSrc() ||
+        `https://unpkg.com/pdfjs-dist@${version}/build/pdf.sandbox.min.mjs`,
+      wasmSrc:
+        this.wasmSrc() || `https://unpkg.com/pdfjs-dist@${version}/wasm/`,
+    }),
+  );
+
+  /** Page layout set from the last document, so the next can replace it. */
+  private documentLayout: [ScPdfScrollMode, ScPdfSpreadMode] | null = null;
 
   // Find state
   readonly findOpen = signal(false);
@@ -233,10 +488,13 @@ export class ScPdfViewerRoot {
     afterNextRender(() => {
       this.initWorker();
       this.workerReady = true;
-      if (this.src()) this.open({ url: this.src() });
+      this.openSrc();
 
-      const onFullscreenChange = () =>
+      const onFullscreenChange = () => {
         this.isFullscreen.set(!!this.document.fullscreenElement);
+        // Leaving fullscreen (Escape, F11…) ends presentation mode.
+        if (!this.document.fullscreenElement) this.endPresentation();
+      };
       this.document.addEventListener('fullscreenchange', onFullscreenChange);
       this.destroyRef.onDestroy(() =>
         this.document.removeEventListener(
@@ -249,15 +507,24 @@ export class ScPdfViewerRoot {
     // A new `src` replaces the document (and a file opened in the viewer);
     // an empty one clears it.
     effect(() => {
-      const source = this.src();
+      this.src();
       if (!this.workerReady) return;
       untracked(() => {
         this.localFile.set(null);
-        this.open(source ? { url: source } : null);
+        this.openSrc();
       });
     });
 
+    // Page scripts: the previous page closes, the new one opens.
+    let previousPage = this.currentPage();
+    effect(() => {
+      const page = this.currentPage();
+      untracked(() => this.scripting.pageChanged(previousPage, page));
+      previousPage = page;
+    });
+
     this.destroyRef.onDestroy(() => {
+      this.scripting.destroy();
       this.loadingTask?.destroy();
       this.pdfDocument()?.loadingTask.destroy();
       if (this.undoTimeout) {
@@ -276,11 +543,30 @@ export class ScPdfViewerRoot {
   }
 
   /**
+   * Opens `src`. Its fragment holds pdf.js's open parameters
+   * (`doc.pdf#page=3&zoom=150`), applied once the document is loaded.
+   */
+  private openSrc(): void {
+    const src = this.src();
+    if (!src) {
+      this.open(null);
+      return;
+    }
+    const { url, hash } = splitSource(src);
+    this.open({ url }, hash);
+  }
+
+  /**
    * Loads a document, replacing the current one. A load that's overtaken by
    * another (a new `src`, a file opened meanwhile) is cancelled and ignored.
    */
   private async open(
     source: { url: string } | { data: Uint8Array } | null,
+    hash = '',
+    {
+      keepAnnotations = false,
+      page,
+    }: { keepAnnotations?: boolean; page?: number } = {},
   ): Promise<void> {
     this.loadingTask?.destroy();
     this.loadingTask = null;
@@ -291,10 +577,23 @@ export class ScPdfViewerRoot {
     previous?.loadingTask.destroy();
     this.clearFind();
     this.pendingComment.set(null);
+    // Annotations and comments belong to the document — except when it's
+    // the same one rebuilt (page organisation), which remaps them itself.
+    if (!keepAnnotations) {
+      this.editorAnnotations.set([]);
+      this.comments.set([]);
+      this.activeCommentId.set(null);
+      this.closeUndoBar();
+    }
     this.error.set(null);
     this.passwordRequired.set(false);
     this.passwordCallback = null;
     this.loadProgress.set(null);
+    this.pageLabels.set(null);
+    this.outline.set([]);
+    this.formInfo.set({ fieldObjects: null, hasJSActions: false });
+    this.renderedPageNumbers.clear();
+    this.scripting.setDocument(null);
 
     if (!source) {
       this.isLoading.set(false);
@@ -302,7 +601,8 @@ export class ScPdfViewerRoot {
     }
 
     this.isLoading.set(true);
-    const task = getDocument(source);
+    // XFA forms render as HTML (the XFA layer), as in pdf.js.
+    const task = getDocument({ ...source, enableXfa: true });
     this.loadingTask = task;
 
     task.onPassword = (
@@ -335,13 +635,15 @@ export class ScPdfViewerRoot {
       this.loadingTask = null;
       this.pdfDocument.set(doc);
       this.totalPages.set(doc.numPages);
-      this.currentPage.set(
-        Math.min(Math.max(1, this.initialPage()), doc.numPages),
+      // Navigated (not just set), so the canvas scrolls there once laid out.
+      this.goToPage(
+        Math.min(Math.max(1, page ?? this.initialPage()), doc.numPages),
       );
       this.isLoading.set(false);
       this.passwordRequired.set(false);
       this.loadProgress.set(1);
       this.loaded.emit({ totalPages: doc.numPages });
+      await this.onDocumentReady(doc, hash);
     } catch (err) {
       if (task !== this.loadingTask || this.passwordRequired()) return;
       this.loadingTask = null;
@@ -395,8 +697,288 @@ export class ScPdfViewerRoot {
     if (file) {
       this.loadFile(file);
     } else if (this.src()) {
-      this.open({ url: this.src() });
+      this.openSrc();
     }
+  }
+
+  /**
+   * After a load: page labels and outline, then the view the document asks
+   * for (page layout, page mode, open action), the open parameters on top,
+   * and printing if the document asks for it.
+   */
+  private async onDocumentReady(
+    doc: PDFDocumentProxy,
+    hash: string,
+  ): Promise<void> {
+    const form = Promise.all([
+      doc.getFieldObjects().catch(() => null),
+      doc.hasJSActions().catch(() => false),
+    ]);
+    const [labels, outline, pageMode, pageLayout, openAction, jsActions] =
+      await Promise.all([
+        doc.getPageLabels().catch(() => null),
+        this.loadOutline(doc),
+        doc.getPageMode().catch(() => null),
+        doc.getPageLayout().catch(() => null),
+        doc.getOpenAction().catch(() => null),
+        this.autoPrint() ? doc.getJSActions().catch(() => null) : null,
+      ]);
+    if (doc !== this.pdfDocument()) return;
+
+    const [fieldObjects, hasJSActions] = await form;
+    if (doc !== this.pdfDocument()) return;
+    this.formInfo.set({ fieldObjects, hasJSActions });
+    if (this.enableScripting()) this.scripting.setDocument(doc);
+
+    this.pageLabels.set(usefulPageLabels(labels, doc.numPages));
+    this.outline.set(outline);
+    this.applyPageLayout(pageLayout);
+
+    const view = pageMode ? PAGE_MODES[pageMode] : undefined;
+    if (view) {
+      this.sidebarView.set(view);
+      this.sidebarOpen.set(true);
+    }
+
+    const openDest = field(openAction, 'dest');
+    if (hash) await this.applyHash(hash);
+    else if (openDest) await this.goToDestination(openDest);
+    if (doc !== this.pdfDocument()) return;
+
+    const scripts = values(jsActions).flatMap((list) =>
+      Array.isArray(list) ? list.map(String) : [],
+    );
+    if (
+      this.autoPrint() &&
+      (field(openAction, 'action') === 'Print' ||
+        scripts.some((js) => AUTO_PRINT.test(js)))
+    ) {
+      this.printWithProgress();
+    }
+  }
+
+  /**
+   * The document's page layout, unless the scroll / spread mode was changed
+   * by hand (still the default, or what the previous document set).
+   */
+  private applyPageLayout(layout: string | null): void {
+    const current = [this.scrollMode(), this.spreadMode()];
+    const previous = this.documentLayout ?? ['vertical', 'none'];
+    const untouched =
+      (current[0] === 'vertical' && current[1] === 'none') ||
+      (current[0] === previous[0] && current[1] === previous[1]);
+    if (!untouched) return;
+    const next = (layout && PAGE_LAYOUTS[layout]) || ['vertical', 'none'];
+    this.scrollMode.set(next[0]);
+    this.spreadMode.set(next[1]);
+    this.documentLayout = next;
+  }
+
+  /** The outline with each bookmark's destination resolved. */
+  private async loadOutline(
+    doc: PDFDocumentProxy,
+  ): Promise<ScPdfOutlineItem[]> {
+    const nodes = (await doc.getOutline().catch(() => null)) as
+      PdfOutlineNode[] | null;
+    const convert = (
+      items: PdfOutlineNode[],
+      path: string,
+    ): Promise<ScPdfOutlineItem[]> =>
+      Promise.all(
+        items.map(async (node, index) => {
+          const id = path ? `${path}.${index}` : String(index);
+          const target = node.dest
+            ? await this.resolveDestination(node.dest, doc)
+            : null;
+          return {
+            id,
+            title: node.title,
+            pageNumber: target?.pageNumber ?? null,
+            top: target?.top ?? 0,
+            zoom: target?.zoom,
+            url: node.url ?? null,
+            bold: !!node.bold,
+            italic: !!node.italic,
+            open: (node.count ?? 0) > 0,
+            items: await convert(node.items ?? [], id),
+          };
+        }),
+      );
+    return nodes ? convert(nodes, '') : [];
+  }
+
+  /**
+   * A destination — a name, or pdf.js's explicit array
+   * (`[pageRef, {name: 'XYZ'}, left, top, zoom]`) — as a page, a position on
+   * it and the zoom it asks for.
+   */
+  async resolveDestination(
+    dest: unknown,
+    doc = this.pdfDocument(),
+  ): Promise<ScPdfDestination | null> {
+    if (!doc) return null;
+    const explicit =
+      typeof dest === 'string'
+        ? await doc.getDestination(dest).catch(() => null)
+        : await dest;
+    if (!Array.isArray(explicit)) return null;
+
+    const [ref, kind, ...args] = explicit as [unknown, unknown, ...unknown[]];
+    let pageNumber: number;
+    if (ref && typeof ref === 'object') {
+      try {
+        pageNumber =
+          (await doc.getPageIndex(ref as { num: number; gen: number })) + 1;
+      } catch {
+        return null;
+      }
+    } else if (Number.isInteger(ref)) {
+      pageNumber = (ref as number) + 1;
+    } else {
+      return null;
+    }
+    if (pageNumber < 1 || pageNumber > doc.numPages) return null;
+
+    let pdfTop: unknown = null;
+    let zoom: ScPdfZoomLevel | undefined;
+    switch ((kind as { name?: string } | null)?.name) {
+      case 'XYZ':
+        pdfTop = args[1];
+        if (typeof args[2] === 'number' && args[2] > 0) zoom = args[2];
+        break;
+      case 'FitH':
+      case 'FitBH':
+        pdfTop = args[0];
+        zoom = 'page-width';
+        break;
+      case 'Fit':
+      case 'FitB':
+      case 'FitV':
+      case 'FitBV':
+        zoom = 'page-fit';
+        break;
+      case 'FitR':
+        pdfTop = args[3];
+        break;
+    }
+    const top = await this.topOnPage(doc, pageNumber, pdfTop);
+    return { pageNumber, top, zoom };
+  }
+
+  /** A y coordinate in PDF units (from the bottom) as 0 (top) – 1 (bottom). */
+  private async topOnPage(
+    doc: PDFDocumentProxy,
+    pageNumber: number,
+    pdfTop: unknown,
+  ): Promise<number> {
+    if (typeof pdfTop !== 'number' || !Number.isFinite(pdfTop)) return 0;
+    try {
+      const [, y0, , y1] = (await doc.getPage(pageNumber)).view;
+      return Math.min(1, Math.max(0, (y1 - pdfTop) / (y1 - y0)));
+    } catch {
+      return 0;
+    }
+  }
+
+  /** Goes to a destination (see `resolveDestination`), with its zoom. */
+  async goToDestination(dest: unknown): Promise<void> {
+    const target = await this.resolveDestination(dest);
+    if (!target) return;
+    if (target.zoom !== undefined) this.setZoom(target.zoom);
+    this.goToPage(target.pageNumber, target.top);
+  }
+
+  /** Goes to a bookmark's destination, or opens its web link. */
+  goToOutlineItem(item: ScPdfOutlineItem): void {
+    if (item.url) {
+      this.document.defaultView?.open(item.url, '_blank', 'noopener');
+      return;
+    }
+    if (!item.pageNumber) return;
+    if (item.zoom !== undefined) this.setZoom(item.zoom);
+    this.goToPage(item.pageNumber, item.top);
+  }
+
+  /**
+   * Applies pdf.js's open parameters — `page`, `zoom` (`150`, `page-width`,
+   * `150,0,720`…), `nameddest`, `search`, `pagemode` — or a bare named
+   * destination (`#chapter-2`). `src`'s fragment is applied on load.
+   */
+  async applyHash(hash: string): Promise<void> {
+    const doc = this.pdfDocument();
+    hash = hash.replace(/^#/, '');
+    if (!doc || !hash) return;
+
+    if (!hash.includes('=')) {
+      let dest: unknown = decodeURIComponent(hash);
+      try {
+        const parsed: unknown = JSON.parse(dest as string);
+        dest = Array.isArray(parsed) ? parsed : String(parsed);
+      } catch {
+        // A name.
+      }
+      await this.goToDestination(dest);
+      return;
+    }
+
+    // Keys are case-insensitive, as in pdf.js.
+    const params = new Map(
+      [...new URLSearchParams(hash)].map(([key, value]) => [
+        key.toLowerCase(),
+        value,
+      ]),
+    );
+
+    const pageMode = params.get('pagemode');
+    if (pageMode === 'none') {
+      this.sidebarOpen.set(false);
+    } else if (pageMode && HASH_PAGE_MODES[pageMode]) {
+      this.sidebarView.set(HASH_PAGE_MODES[pageMode]);
+      this.sidebarOpen.set(true);
+    }
+
+    let pdfTop: unknown = null;
+    const zoom = params.get('zoom');
+    if (zoom) {
+      const [scale, , top] = zoom.split(',');
+      const percent = parseFloat(scale);
+      const level: ScPdfZoomLevel | undefined = Number.isFinite(percent)
+        ? Math.min(MAX_SCALE, Math.max(MIN_SCALE, percent / 100))
+        : NAMED_ZOOMS[scale];
+      if (level !== undefined) this.setZoom(level);
+      if (top !== undefined) pdfTop = parseFloat(top);
+    }
+
+    const nameddest = params.get('nameddest');
+    const page = parseInt(params.get('page') ?? '', 10);
+    if (nameddest) {
+      await this.goToDestination(nameddest);
+    } else if (Number.isInteger(page)) {
+      const pageNumber = Math.min(Math.max(1, page), doc.numPages);
+      this.goToPage(pageNumber, await this.topOnPage(doc, pageNumber, pdfTop));
+    }
+
+    const search = params.get('search');
+    if (search) {
+      this.findOpen.set(true);
+      this.find(search);
+    }
+  }
+
+  /** A page's label, or its number when the document has none. */
+  pageLabel(pageNumber: number): string {
+    return this.pageLabels()?.[pageNumber - 1] ?? String(pageNumber);
+  }
+
+  /** The page a label refers to — or, failing that, a page number. */
+  pageForLabel(value: string): number | null {
+    const text = value.trim();
+    const index = this.pageLabels()?.indexOf(text) ?? -1;
+    if (index >= 0) return index + 1;
+    const page = Number(text);
+    return Number.isInteger(page) && page >= 1 && page <= this.totalPages()
+      ? page
+      : null;
   }
 
   /** The previous page — the previous spread in page scroll mode. */
@@ -443,8 +1025,10 @@ export class ScPdfViewerRoot {
     return [first, last];
   }
 
-  goToPage(page: number): void {
+  /** Goes to a page; `top` is where on it, from 0 (top) to 1 (bottom). */
+  goToPage(page: number, top = 0): void {
     if (page >= 1 && page <= this.totalPages()) {
+      this.navigateTop.set(top);
       this.currentPage.set(page);
       this.navigateTrigger.update((v) => v + 1);
       this.pageChange.emit({
@@ -492,14 +1076,345 @@ export class ScPdfViewerRoot {
   }
 
   /** Downloads the document as it was loaded. */
+  /**
+   * Downloads the document — with the annotations, comments and form data
+   * written into it when there are any (as pdf.js's "Save").
+   */
   async download(): Promise<void> {
     const doc = this.pdfDocument();
     if (!doc) return;
-    const data = await doc.getData();
+    const data = this.hasChanges()
+      ? await this.saveDocument()
+      : await doc.getData();
     this.saveAs(
       new Blob([data as Uint8Array<ArrayBuffer>], { type: 'application/pdf' }),
       this.downloadName() + '.pdf',
     );
+  }
+
+  /** Whether there's anything to write into the file: annotations, comments, form data. */
+  hasChanges(): boolean {
+    return (
+      this.editorAnnotations().length > 0 ||
+      this.comments().some((comment) => comment.text.trim()) ||
+      (this.pdfDocument()?.annotationStorage.size ?? 0) > 0
+    );
+  }
+
+  /**
+   * The document with the viewer's annotations and comments, and the form
+   * data, written into it — a new PDF file's bytes.
+   */
+  async saveDocument(): Promise<Uint8Array> {
+    const doc = this.pdfDocument();
+    if (!doc) throw new Error('No document to save.');
+    await this.scripting.willSave();
+    const storage = doc.annotationStorage;
+    const values = await annotationStorageValues(
+      doc,
+      this.editorAnnotations(),
+      this.comments(),
+    );
+    for (const [key, value] of values) storage.setValue(key, value);
+    try {
+      return await doc.saveDocument();
+    } finally {
+      // They stay editable in the viewer; only the file gets them.
+      for (const key of values.keys()) storage.remove(key);
+      this.scripting.didSave();
+    }
+  }
+
+  // Page organisation (as pdf.js's): each change rebuilds the document with
+  // pdf.js's extractPages — form data carried over, the viewer's annotations
+  // and comments following their pages — and can be undone.
+
+  /** All page numbers, in order. */
+  private allPages(): number[] {
+    return Array.from({ length: this.totalPages() }, (_, i) => i + 1);
+  }
+
+  /** Valid, unique page numbers, ascending. */
+  private pageSet(pageNumbers: number[]): number[] {
+    const total = this.totalPages();
+    return [...new Set(pageNumbers)]
+      .filter((p) => Number.isInteger(p) && p >= 1 && p <= total)
+      .sort((a, b) => a - b);
+  }
+
+  /**
+   * Moves pages to just before `beforePage` (past the end: to the end),
+   * keeping their order. Resolves with their new page numbers.
+   */
+  async movePages(
+    pageNumbers: number[],
+    beforePage: number,
+  ): Promise<number[]> {
+    const moving = this.pageSet(pageNumbers);
+    if (!moving.length) return [];
+    const rest = this.allPages().filter((p) => !moving.includes(p));
+    rest.splice(rest.filter((p) => p < beforePage).length, 0, ...moving);
+    const start = rest.indexOf(moving[0]) + 1;
+    await this.rebuild(
+      rest.map((page) => ({ page })),
+      moving.length === 1 ? 'Page moved' : `${moving.length} pages moved`,
+      { focusPage: start },
+    );
+    return moving.map((_, i) => start + i);
+  }
+
+  /** Deletes pages (not all of them). */
+  deletePages(pageNumbers: number[]): Promise<void> {
+    const removing = this.pageSet(pageNumbers);
+    if (!removing.length || removing.length >= this.totalPages()) {
+      return Promise.resolve();
+    }
+    return this.rebuild(
+      this.allPages()
+        .filter((p) => !removing.includes(p))
+        .map((page) => ({ page })),
+      removing.length === 1
+        ? 'Page deleted'
+        : `${removing.length} pages deleted`,
+    );
+  }
+
+  /** Copies pages (with their annotations, comments and form data) for `pastePages`. */
+  async copyPages(pageNumbers: number[]): Promise<void> {
+    const doc = this.pdfDocument();
+    const pages = this.pageSet(pageNumbers);
+    if (!doc || !pages.length) return;
+    const data = await doc.extractPages([
+      { document: null, includePages: pages.map((p) => p - 1) },
+    ]);
+    const onPages = <T extends { pageNumber: number }>(items: T[]): T[] =>
+      items
+        .filter((item) => pages.includes(item.pageNumber))
+        .map((item) => ({
+          ...item,
+          pageNumber: pages.indexOf(item.pageNumber) + 1,
+        }));
+    this.pageClipboard.set({
+      data,
+      count: pages.length,
+      annotations: onPages(this.editorAnnotations()),
+      comments: onPages(this.comments()),
+    });
+  }
+
+  /** Copies pages, then deletes them — paste them elsewhere to move them. */
+  async cutPages(pageNumbers: number[]): Promise<void> {
+    await this.copyPages(pageNumbers);
+    await this.deletePages(pageNumbers);
+  }
+
+  /** Pastes the copied / cut pages after `afterPage` (0: at the start). */
+  pastePages(afterPage = this.currentPage()): Promise<void> {
+    const clip = this.pageClipboard();
+    if (!clip) return Promise.resolve();
+    const entries: ScPdfPageEntry[] = this.allPages().map((page) => ({
+      page,
+    }));
+    entries.splice(
+      afterPage,
+      0,
+      ...Array.from({ length: clip.count }, (_, index) => ({
+        data: clip.data,
+        index,
+        annotations: clip.annotations,
+        comments: clip.comments,
+      })),
+    );
+    return this.rebuild(
+      entries,
+      clip.count === 1 ? 'Page pasted' : `${clip.count} pages pasted`,
+      { focusPage: afterPage + 1 },
+    );
+  }
+
+  /** Inserts the pages of another PDF after `afterPage` (merging files). */
+  async insertFile(
+    file: File | Uint8Array,
+    afterPage = this.totalPages(),
+  ): Promise<void> {
+    const data =
+      file instanceof Uint8Array
+        ? file
+        : new Uint8Array(await file.arrayBuffer());
+    let count: number;
+    try {
+      // A copy: pdf.js may take over the buffer it's given.
+      const other = await getDocument({ data: data.slice() }).promise;
+      count = other.numPages;
+      other.loadingTask.destroy();
+    } catch {
+      this.showUndoBar("Couldn't read that file as a PDF", () => undefined);
+      return;
+    }
+    const entries: ScPdfPageEntry[] = this.allPages().map((page) => ({
+      page,
+    }));
+    entries.splice(
+      afterPage,
+      0,
+      ...Array.from({ length: count }, (_, index) => ({ data, index })),
+    );
+    await this.rebuild(
+      entries,
+      count === 1 ? '1 page inserted' : `${count} pages inserted`,
+      { focusPage: afterPage + 1 },
+    );
+  }
+
+  /** Downloads a PDF of just these pages, with their annotations, comments and form data. */
+  async exportPages(pageNumbers: number[]): Promise<void> {
+    const doc = this.pdfDocument();
+    const pages = this.pageSet(pageNumbers);
+    if (!doc || !pages.length) return;
+    const onPages = <T extends { pageNumber: number }>(items: T[]): T[] =>
+      items.filter((item) => pages.includes(item.pageNumber));
+    const values = await annotationStorageValues(
+      doc,
+      onPages(this.editorAnnotations()),
+      onPages(this.comments()),
+    );
+    const storage = doc.annotationStorage;
+    for (const [key, value] of values) storage.setValue(key, value);
+    let data: Uint8Array;
+    try {
+      data = await doc.extractPages([
+        { document: null, includePages: pages.map((p) => p - 1) },
+      ]);
+    } finally {
+      for (const key of values.keys()) storage.remove(key);
+    }
+    this.saveAs(
+      new Blob([data as Uint8Array<ArrayBuffer>], { type: 'application/pdf' }),
+      `${this.downloadName()} (${pages.length === 1 ? `page ${pages[0]}` : `${pages.length} pages`}).pdf`,
+    );
+  }
+
+  /** Rebuilds the document from `entries` (its pages and others), undoably. */
+  private async rebuild(
+    entries: ScPdfPageEntry[],
+    message: string,
+    { focusPage }: { focusPage?: number } = {},
+  ): Promise<void> {
+    const doc = this.pdfDocument();
+    if (!doc || this.organizing() || !entries.length) return;
+    this.organizing.set(true);
+    try {
+      // For undo: the document as it is (form data included), and the rest.
+      const before = {
+        data: await doc.extractPages([{ document: null }]),
+        annotations: this.editorAnnotations(),
+        comments: this.comments(),
+        page: this.currentPage(),
+      };
+      const data = await doc.extractPages(pageInfos(entries));
+      const { annotations, comments } = this.remapToEntries(entries);
+      const moved = entries.findIndex(
+        (entry) => 'page' in entry && entry.page === before.page,
+      );
+      await this.replaceDocument(
+        data,
+        annotations,
+        comments,
+        focusPage ??
+          (moved >= 0 ? moved + 1 : Math.min(before.page, entries.length)),
+      );
+      this.showUndoBar(message, () =>
+        this.replaceDocument(
+          before.data,
+          before.annotations,
+          before.comments,
+          before.page,
+        ),
+      );
+    } catch (error) {
+      console.error('Page organisation:', error);
+    } finally {
+      this.organizing.set(false);
+    }
+  }
+
+  /** The annotations and comments of each entry's source page, on its new page. */
+  private remapToEntries(entries: ScPdfPageEntry[]): {
+    annotations: ScPdfEditorAnnotation[];
+    comments: ScPdfComment[];
+  } {
+    const annotations: ScPdfEditorAnnotation[] = [];
+    const comments: ScPdfComment[] = [];
+    const usedIds = new Set<string>();
+    entries.forEach((entry, position) => {
+      const [sourceAnnotations, sourceComments, sourcePage] =
+        'page' in entry
+          ? [this.editorAnnotations(), this.comments(), entry.page]
+          : [entry.annotations ?? [], entry.comments ?? [], entry.index + 1];
+      for (const ann of sourceAnnotations) {
+        if (ann.pageNumber !== sourcePage) continue;
+        // A page placed twice gets its annotations twice: fresh ids.
+        const id = usedIds.has(ann.id)
+          ? `editor-${++this.editorIdCounter}`
+          : ann.id;
+        usedIds.add(id);
+        annotations.push({ ...ann, id, pageNumber: position + 1 });
+      }
+      for (const comment of sourceComments) {
+        if (comment.pageNumber !== sourcePage) continue;
+        const id = usedIds.has(comment.id)
+          ? `comment-${++this.commentIdCounter}`
+          : comment.id;
+        usedIds.add(id);
+        comments.push({ ...comment, id, pageNumber: position + 1 });
+      }
+    });
+    return { annotations, comments };
+  }
+
+  /** Shows a rebuilt document in place of the current one. */
+  private async replaceDocument(
+    data: Uint8Array,
+    annotations: ScPdfEditorAnnotation[],
+    comments: ScPdfComment[],
+    page: number,
+  ): Promise<void> {
+    // It's a local file now (download name kept; Retry reloads this).
+    this.localFile.set(
+      new File(
+        [data as Uint8Array<ArrayBuffer>],
+        `${this.downloadName()}.pdf`,
+        {
+          type: 'application/pdf',
+        },
+      ),
+    );
+    this.editorAnnotations.set(annotations);
+    this.comments.set(comments);
+    this.editorTrigger.update((v) => v + 1);
+    await this.open({ data }, '', { keepAnnotations: true, page });
+  }
+
+  /** A page was drawn (its form fields are in the DOM) — for page scripts. */
+  pageRendered(pageNumber: number): void {
+    this.renderedPageNumbers.add(pageNumber);
+    this.scripting.pageRendered(pageNumber);
+  }
+
+  /** A page was released (scrolled far away). */
+  pageReleased(pageNumber: number): void {
+    this.renderedPageNumbers.delete(pageNumber);
+  }
+
+  /** A zoom asked for by a script: a scale, or Acrobat's zoom types. */
+  private setScriptZoom(value: number | string): void {
+    if (typeof value === 'number' && value > 0) {
+      this.setZoom(Math.min(MAX_SCALE, Math.max(MIN_SCALE, value)));
+    } else if (value === 'FitPage' || value === 'FitHeight') {
+      this.setZoom('page-fit');
+    } else if (value === 'FitWidth' || value === 'FitVisibleWidth') {
+      this.setZoom('page-width');
+    }
   }
 
   private saveAs(blob: Blob, filename: string): void {
@@ -523,55 +1438,107 @@ export class ScPdfViewerRoot {
     this.printDialogOpen.set(true);
     this.printProgress.set(0);
 
-    const printContainer = document.createElement('div');
-    printContainer.style.display = 'none';
-    document.body.appendChild(printContainer);
-
+    const urls: string[] = [];
+    // With annotations, comments or form data: print the saved file, so the
+    // page shows them as the PDF will.
+    let printed: PDFDocumentProxy = doc;
     try {
-      for (let i = 1; i <= doc.numPages; i++) {
+      await this.scripting.willPrint();
+      if (this.hasChanges()) {
+        printed = await getDocument({ data: await this.saveDocument() })
+          .promise;
+      }
+      for (let i = 1; i <= printed.numPages; i++) {
         if (this.printCancelled) break;
 
-        const page = await doc.getPage(i);
-        const viewport = page.getViewport({ scale: 1.5 });
-        const canvas = document.createElement('canvas');
+        const page = await printed.getPage(i);
+        // 150 DPI, as pdf.js prints.
+        const viewport = page.getViewport({
+          scale: 150 / 72,
+          rotation: (page.rotate + this.rotation()) % 360,
+        });
+        const canvas = this.document.createElement('canvas');
         canvas.width = viewport.width;
         canvas.height = viewport.height;
-        canvas.style.pageBreakAfter = 'always';
+        // Print intent and the typed-in form values, as pdf.js prints.
+        await page.render({
+          canvas,
+          viewport,
+          intent: 'print',
+          annotationMode: AnnotationMode.ENABLE_STORAGE,
+        }).promise;
+        const blob = await new Promise<Blob | null>((resolve) =>
+          canvas.toBlob(resolve),
+        );
+        canvas.width = canvas.height = 0;
+        if (blob) urls.push(URL.createObjectURL(blob));
 
-        await page.render({ canvas, viewport }).promise;
-        printContainer.appendChild(canvas);
-
-        this.printProgress.set(Math.round((i / doc.numPages) * 100));
+        this.printProgress.set(Math.round((i / printed.numPages) * 100));
       }
 
       if (!this.printCancelled) {
         this.printDialogOpen.set(false);
-        // Open print window with rendered pages
-        const printWindow = window.open('', '_blank');
-        if (printWindow) {
-          printWindow.document.write(
-            '<html><head><title>Print</title><style>' +
-              'body{margin:0}canvas{display:block;width:100%;page-break-after:always}' +
-              '@media print{canvas{page-break-after:always}}' +
-              '</style></head><body></body></html>',
-          );
-          const canvases = printContainer.querySelectorAll('canvas');
-          canvases.forEach((canvas) => {
-            printWindow!.document.body.appendChild(canvas);
-          });
-          printWindow.document.close();
-          printWindow.focus();
-          printWindow.print();
-          printWindow.close();
-        }
+        await this.printImages(urls);
+        this.scripting.didPrint();
+        return;
       }
     } catch (err) {
       console.error('Print error:', err);
     } finally {
-      printContainer.remove();
       this.printDialogOpen.set(false);
       this.printProgress.set(0);
+      if (printed !== doc) printed.loadingTask.destroy();
     }
+    for (const url of urls) URL.revokeObjectURL(url);
+  }
+
+  /**
+   * Prints page images from a hidden frame. No pop-up, so pop-up blockers
+   * don't stop it — and it works without a click (auto-print).
+   */
+  private async printImages(urls: string[]): Promise<void> {
+    const frame = this.document.createElement('iframe');
+    frame.setAttribute('aria-hidden', 'true');
+    frame.tabIndex = -1;
+    frame.style.cssText =
+      'position:fixed;inset-inline-start:0;bottom:0;width:0;height:0;border:0;visibility:hidden';
+    this.document.body.appendChild(frame);
+
+    let done = false;
+    const cleanup = (): void => {
+      if (done) return;
+      done = true;
+      frame.remove();
+      for (const url of urls) URL.revokeObjectURL(url);
+    };
+
+    const win = frame.contentWindow;
+    const doc = frame.contentDocument;
+    if (!win || !doc) {
+      cleanup();
+      return;
+    }
+    const title = doc.createElement('title');
+    title.textContent = this.downloadName();
+    const style = doc.createElement('style');
+    style.textContent =
+      '@page{margin:0}body{margin:0}img{display:block;width:100%;break-after:page}';
+    doc.head.append(title, style);
+    await Promise.all(
+      urls.map((url) => {
+        const img = doc.createElement('img');
+        img.src = url;
+        doc.body.appendChild(img);
+        return img.decode().catch(() => undefined);
+      }),
+    );
+
+    // Some browsers return from print() at once and fire `afterprint` when
+    // the dialog closes; others block until then.
+    win.addEventListener('afterprint', cleanup, { once: true });
+    win.focus();
+    win.print();
+    setTimeout(cleanup, 60_000);
   }
 
   cancelPrint(): void {
@@ -867,8 +1834,57 @@ export class ScPdfViewerRoot {
   }
 
   /** Presentation mode (fullscreen for now). */
-  togglePresentation(): void {
-    this.toggleFullscreen();
+  /**
+   * Presentation mode (as pdf.js): fullscreen, toolbar hidden, one page at a
+   * time fitted to the screen on black; click, wheel, swipe or the keys turn
+   * the page, Escape leaves. The view as it was comes back afterwards.
+   */
+  async togglePresentation(): Promise<void> {
+    if (this.presenting()) {
+      await this.document.exitFullscreen().catch(() => undefined);
+      return;
+    }
+    const container = this.containerElement?.nativeElement;
+    if (!container || !this.pdfDocument()) return;
+
+    this.presentationState = {
+      scrollMode: this.scrollMode(),
+      spreadMode: this.spreadMode(),
+      zoom: this.zoom(),
+      sidebarOpen: this.sidebarOpen(),
+      cursorTool: this.cursorTool(),
+    };
+    this.presenting.set(true);
+    this.scrollMode.set('page');
+    this.spreadMode.set('none');
+    this.zoom.set('page-fit');
+    this.sidebarOpen.set(false);
+    this.cursorTool.set('select');
+    this.setEditorMode('none');
+    if (this.findOpen()) this.toggleFind();
+    this.goToPage(this.currentPage());
+
+    try {
+      if (this.document.fullscreenElement !== container) {
+        await container.requestFullscreen();
+      }
+    } catch {
+      this.endPresentation();
+    }
+  }
+
+  /** Leaves presentation mode, restoring the view. */
+  private endPresentation(): void {
+    const state = this.presentationState;
+    if (!state) return;
+    this.presentationState = null;
+    this.presenting.set(false);
+    this.scrollMode.set(state.scrollMode);
+    this.spreadMode.set(state.spreadMode);
+    this.zoom.set(state.zoom);
+    this.sidebarOpen.set(state.sidebarOpen);
+    this.cursorTool.set(state.cursorTool);
+    this.goToPage(this.currentPage());
   }
 
   toggleFind(): void {

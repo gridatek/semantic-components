@@ -29,6 +29,7 @@ export { ScPdfViewerCanvas } from './pdf-viewer-canvas';
 
 // State components
 export { ScPdfViewerLoading } from './pdf-viewer-loading';
+export { ScPdfViewerLoadingBar } from './pdf-viewer-loading-bar';
 export { ScPdfViewerError } from './pdf-viewer-error';
 export { ScPdfViewerEmpty } from './pdf-viewer-empty';
 export { ScPdfViewerRetry } from './pdf-viewer-retry';
@@ -78,6 +79,9 @@ export type {
   ScPdfCursorTool,
   ScPdfScrollMode,
   ScPdfSpreadMode,
+  ScPdfSidebarView,
+  ScPdfOutlineItem,
+  ScPdfDestination,
   ScPdfEditorMode,
   ScPdfEditorAnnotation,
   ScPdfFindState,

@@ -1,9 +1,12 @@
 import { NgTemplateOutlet } from '@angular/common';
 import {
   Component,
+  Injector,
   ViewEncapsulation,
+  afterNextRender,
   computed,
   effect,
+  inject,
   input,
   signal,
   untracked,
@@ -11,6 +14,8 @@ import {
 } from '@angular/core';
 import {
   type ScPdfEditorMode,
+  type ScPdfOutlineItem,
+  type ScPdfSidebarView,
   ScPdfViewerAltTextDialog,
   ScPdfViewerCanvas,
   ScPdfViewerCommentSidebar,
@@ -31,6 +36,7 @@ import {
   ScPdfViewerFindbar,
   ScPdfViewerLayersView,
   ScPdfViewerLoading,
+  ScPdfViewerLoadingBar,
   ScPdfViewerNav,
   ScPdfViewerNextPage,
   ScPdfViewerPageInfo,
@@ -90,12 +96,21 @@ import {
   cn,
 } from '@semantic-components/ui';
 import {
+  SiArrowDownIcon,
+  SiArrowUpIcon,
   SiBookOpenIcon,
   SiChevronDownIcon,
+  SiChevronRightIcon,
   SiChevronUpIcon,
+  SiChevronsDownUpIcon,
+  SiChevronsUpDownIcon,
   SiCircleAlertIcon,
+  SiClipboardPasteIcon,
+  SiCopyIcon,
   SiDownloadIcon,
   SiEllipsisVerticalIcon,
+  SiFileOutputIcon,
+  SiFilePlusIcon,
   SiFileTextIcon,
   SiHighlighterIcon,
   SiImageIcon,
@@ -103,15 +118,18 @@ import {
   SiLayoutGridIcon,
   SiListTreeIcon,
   SiLoaderCircleIcon,
+  SiLocateFixedIcon,
   SiMessageSquareIcon,
   SiMessageSquarePlusIcon,
   SiPanelLeftIcon,
   SiPaperclipIcon,
   SiPenIcon,
   SiPrinterIcon,
+  SiScissorsIcon,
   SiSearchIcon,
   SiSignatureIcon,
   SiSlidersHorizontalIcon,
+  SiTrash2Icon,
   SiTypeIcon,
   SiZoomInIcon,
   SiZoomOutIcon,
@@ -122,19 +140,10 @@ interface ThumbnailData {
   dataUrl: string;
 }
 
-interface OutlineItem {
-  title: string;
-  dest: string | unknown[] | null;
-  items: OutlineItem[];
-}
-
 interface AttachmentData {
   filename: string;
   content: Uint8Array;
 }
-
-type SidebarTab =
-  'thumbnails' | 'outline' | 'attachments' | 'layers' | 'comments';
 
 /** The tools in the toolbar's toggle group. */
 const TOOLS: readonly ScPdfEditorMode[] = [
@@ -171,6 +180,7 @@ const TOOLS_WITH_OPTIONS: readonly ScPdfEditorMode[] = [
     ScPdfViewerSpacer,
     ScPdfViewerContent,
     ScPdfViewerLoading,
+    ScPdfViewerLoadingBar,
     ScPdfViewerError,
     ScPdfViewerEmpty,
     ScPdfViewerRetry,
@@ -230,8 +240,27 @@ const TOOLS_WITH_OPTIONS: readonly ScPdfEditorMode[] = [
     ScSpinner,
     ScEmptyMedia,
     SiBookOpenIcon,
+    SiTrash2Icon,
+    SiTrash2Icon,
+    SiScissorsIcon,
+    SiScissorsIcon,
+    SiFilePlusIcon,
+    SiFilePlusIcon,
+    SiFileOutputIcon,
+    SiFileOutputIcon,
+    SiCopyIcon,
+    SiCopyIcon,
+    SiClipboardPasteIcon,
+    SiClipboardPasteIcon,
+    SiArrowUpIcon,
+    SiArrowUpIcon,
+    SiArrowDownIcon,
+    SiArrowDownIcon,
     SiChevronDownIcon,
+    SiChevronRightIcon,
     SiChevronUpIcon,
+    SiChevronsDownUpIcon,
+    SiChevronsUpDownIcon,
     SiCircleAlertIcon,
     SiDownloadIcon,
     SiEllipsisVerticalIcon,
@@ -242,6 +271,7 @@ const TOOLS_WITH_OPTIONS: readonly ScPdfEditorMode[] = [
     SiLayoutGridIcon,
     SiListTreeIcon,
     SiLoaderCircleIcon,
+    SiLocateFixedIcon,
     SiMessageSquareIcon,
     SiMessageSquarePlusIcon,
     SiPanelLeftIcon,
@@ -262,6 +292,7 @@ const TOOLS_WITH_OPTIONS: readonly ScPdfEditorMode[] = [
       [src]="pdfSrc()"
       [title]="pdfTitle()"
       [(sidebarOpen)]="sidebarOpen"
+      [(sidebarView)]="sidebarTab"
       (fileOpened)="pdfTitle.set($event.name.replace('.pdf', ''))"
       #viewer="scPdfViewer"
     >
@@ -519,7 +550,8 @@ const TOOLS_WITH_OPTIONS: readonly ScPdfEditorMode[] = [
               <div scMenu (itemSelected)="onMenuItem($event)">
                 <ng-template scMenuContent>
                   <div scMenuItem value="open">Open file…</div>
-                  <div scMenuItem value="fullscreen">Presentation mode</div>
+                  <div scMenuItem value="presentation">Presentation mode</div>
+                  <div scMenuItem value="fullscreen">Full screen</div>
                   <div scMenuSeparator></div>
                   <div scMenuItem value="first">Go to first page</div>
                   <div scMenuItem value="last">Go to last page</div>
@@ -681,9 +713,144 @@ const TOOLS_WITH_OPTIONS: readonly ScPdfEditorMode[] = [
                   class="flex-1 overflow-y-auto"
                 >
                   <ng-template scTabContent>
-                    <ul class="grid gap-3 p-3">
+                    <!-- Page organisation: select pages (checkboxes), drag
+                         them to reorder, or use the buttons. -->
+                    <div
+                      role="toolbar"
+                      aria-label="Organise pages"
+                      class="bg-background sticky top-0 z-10 flex flex-wrap items-center gap-0.5 border-b px-2 py-1"
+                    >
+                      <button
+                        scButton
+                        variant="ghost"
+                        size="icon-sm"
+                        aria-label="Insert file"
+                        [scTooltipTrigger]="'Insert file after this page'"
+                        [disabled]="viewer.organizing()"
+                        (click)="insertFile()"
+                      >
+                        <svg siFilePlusIcon></svg>
+                      </button>
+                      <button
+                        scButton
+                        variant="ghost"
+                        size="icon-sm"
+                        aria-label="Paste"
+                        [scTooltipTrigger]="'Paste after this page'"
+                        [disabled]="
+                          !viewer.pageClipboard() || viewer.organizing()
+                        "
+                        (click)="viewer.pastePages()"
+                      >
+                        <svg siClipboardPasteIcon></svg>
+                      </button>
+                      @if (selection().length) {
+                        <div scSeparator orientation="vertical"></div>
+                        <button
+                          scButton
+                          variant="ghost"
+                          size="icon-sm"
+                          aria-label="Move earlier"
+                          [scTooltipTrigger]="'Move earlier'"
+                          [disabled]="
+                            selection()[0] === 1 || viewer.organizing()
+                          "
+                          (click)="moveSelection(-1)"
+                        >
+                          <svg siArrowUpIcon></svg>
+                        </button>
+                        <button
+                          scButton
+                          variant="ghost"
+                          size="icon-sm"
+                          aria-label="Move later"
+                          [scTooltipTrigger]="'Move later'"
+                          [disabled]="
+                            selection()[selection().length - 1] ===
+                              viewer.totalPages() || viewer.organizing()
+                          "
+                          (click)="moveSelection(1)"
+                        >
+                          <svg siArrowDownIcon></svg>
+                        </button>
+                        <button
+                          scButton
+                          variant="ghost"
+                          size="icon-sm"
+                          aria-label="Copy"
+                          [scTooltipTrigger]="'Copy'"
+                          (click)="organize('copy')"
+                        >
+                          <svg siCopyIcon></svg>
+                        </button>
+                        <button
+                          scButton
+                          variant="ghost"
+                          size="icon-sm"
+                          aria-label="Cut"
+                          [scTooltipTrigger]="'Cut'"
+                          [disabled]="viewer.organizing()"
+                          (click)="organize('cut')"
+                        >
+                          <svg siScissorsIcon></svg>
+                        </button>
+                        <button
+                          scButton
+                          variant="ghost"
+                          size="icon-sm"
+                          aria-label="Delete"
+                          [scTooltipTrigger]="'Delete'"
+                          [disabled]="
+                            selection().length >= viewer.totalPages() ||
+                            viewer.organizing()
+                          "
+                          (click)="organize('delete')"
+                        >
+                          <svg siTrash2Icon></svg>
+                        </button>
+                        <button
+                          scButton
+                          variant="ghost"
+                          size="icon-sm"
+                          aria-label="Save selected pages"
+                          [scTooltipTrigger]="'Save selected pages as…'"
+                          (click)="organize('export')"
+                        >
+                          <svg siFileOutputIcon></svg>
+                        </button>
+                        <span
+                          class="text-muted-foreground ms-auto text-xs"
+                          role="status"
+                        >
+                          {{ selection().length }} selected
+                        </span>
+                      }
+                    </div>
+                    <ul
+                      class="grid gap-3 p-3"
+                      aria-label="Pages"
+                      (keydown)="onPagesKeydown($event)"
+                    >
                       @for (thumb of thumbnails(); track thumb.page) {
-                        <li>
+                        <li
+                          draggable="true"
+                          [class]="dropIndicator(thumb.page)"
+                          (dragstart)="onPageDragStart($event, thumb.page)"
+                          (dragover)="onPageDragOver($event, thumb.page)"
+                          (dragleave)="dropTarget.set(null)"
+                          (drop)="onPageDrop($event, thumb.page)"
+                          (dragend)="onPageDragEnd()"
+                        >
+                          <input
+                            type="checkbox"
+                            scCheckbox
+                            class="absolute start-3 top-3 z-10"
+                            [attr.aria-label]="
+                              'Select page ' + viewer.pageLabel(thumb.page)
+                            "
+                            [checked]="selectedPages().has(thumb.page)"
+                            (checkedChange)="selectPage(thumb.page, $event)"
+                          />
                           <button
                             scButton
                             variant="ghost"
@@ -702,8 +869,14 @@ const TOOLS_WITH_OPTIONS: readonly ScPdfEditorMode[] = [
                               [src]="thumb.dataUrl"
                               alt=""
                               class="mx-auto border shadow-sm"
+                              [class.ring-2]="selectedPages().has(thumb.page)"
+                              [class.ring-primary]="
+                                selectedPages().has(thumb.page)
+                              "
                             />
-                            <span class="text-xs">Page {{ thumb.page }}</span>
+                            <span class="text-xs">
+                              Page {{ viewer.pageLabel(thumb.page) }}
+                            </span>
                           </button>
                         </li>
                       } @empty {
@@ -717,15 +890,50 @@ const TOOLS_WITH_OPTIONS: readonly ScPdfEditorMode[] = [
 
                 <div scTabPanel value="outline" class="flex-1 overflow-y-auto">
                   <ng-template scTabContent>
-                    @if (outline().length === 0) {
+                    @if (viewer.outline().length === 0) {
                       <p class="text-muted-foreground p-4 text-center text-sm">
                         No outline in this document.
                       </p>
                     } @else {
+                      <div class="flex gap-1 border-b px-2 py-1">
+                        <button
+                          scButton
+                          variant="ghost"
+                          size="icon-sm"
+                          aria-label="Expand all"
+                          [scTooltipTrigger]="'Expand all'"
+                          (click)="setAllOutlineExpanded(true)"
+                        >
+                          <svg siChevronsUpDownIcon></svg>
+                        </button>
+                        <button
+                          scButton
+                          variant="ghost"
+                          size="icon-sm"
+                          aria-label="Collapse all"
+                          [scTooltipTrigger]="'Collapse all'"
+                          (click)="setAllOutlineExpanded(false)"
+                        >
+                          <svg siChevronsDownUpIcon></svg>
+                        </button>
+                        <button
+                          scButton
+                          variant="ghost"
+                          size="icon-sm"
+                          aria-label="Find current outline item"
+                          [scTooltipTrigger]="'Find current outline item'"
+                          [disabled]="!viewer.currentOutlineItem()"
+                          (click)="revealCurrentOutlineItem()"
+                        >
+                          <svg siLocateFixedIcon></svg>
+                        </button>
+                      </div>
                       <nav aria-label="Outline" class="p-2">
                         <ng-container
                           [ngTemplateOutlet]="outlineList"
-                          [ngTemplateOutletContext]="{ $implicit: outline() }"
+                          [ngTemplateOutletContext]="{
+                            $implicit: viewer.outline(),
+                          }"
                         />
                       </nav>
                     }
@@ -779,6 +987,7 @@ const TOOLS_WITH_OPTIONS: readonly ScPdfEditorMode[] = [
           }
 
           <div scPdfViewerContent class="flex-1">
+            <sc-pdf-viewer-loading-bar />
             <div scPdfViewerLoading>
               <svg scSpinner siLoaderCircleIcon class="size-6"></svg>
             </div>
@@ -812,21 +1021,52 @@ const TOOLS_WITH_OPTIONS: readonly ScPdfEditorMode[] = [
       </div>
     </div>
 
+    <!-- Outline: disclosure toggles (Shift+click: the whole branch) and links. -->
     <ng-template #outlineList let-items>
       <ul class="grid gap-0.5">
-        @for (item of items; track $index) {
+        @for (item of asOutline(items); track item.id) {
           <li>
-            <button
-              scButton
-              variant="ghost"
-              size="sm"
-              class="h-auto w-full justify-start py-1 text-start whitespace-normal"
-              (click)="navigateOutline(item)"
-            >
-              {{ item.title }}
-            </button>
-            @if (item.items?.length) {
-              <div class="ps-3">
+            <div class="flex items-start">
+              @if (item.items.length) {
+                <button
+                  scButton
+                  variant="ghost"
+                  size="icon-xs"
+                  class="mt-0.5 shrink-0"
+                  [attr.aria-expanded]="outlineExpanded().has(item.id)"
+                  [attr.aria-label]="item.title"
+                  (click)="toggleOutlineItem(item, $event)"
+                >
+                  <svg
+                    siChevronRightIcon
+                    class="transition-transform rtl:-scale-x-100"
+                    [class.rotate-90]="outlineExpanded().has(item.id)"
+                  ></svg>
+                </button>
+              } @else {
+                <span class="w-6 shrink-0"></span>
+              }
+              <button
+                scButton
+                variant="ghost"
+                size="sm"
+                class="h-auto min-w-0 flex-1 justify-start py-1 text-start whitespace-normal"
+                [class.font-bold]="item.bold"
+                [class.italic]="item.italic"
+                [class.bg-accent]="viewer.currentOutlineItem()?.id === item.id"
+                [attr.aria-current]="
+                  viewer.currentOutlineItem()?.id === item.id
+                    ? 'location'
+                    : null
+                "
+                [attr.data-outline-item]="item.id"
+                (click)="viewer.goToOutlineItem(item)"
+              >
+                {{ item.title }}
+              </button>
+            </div>
+            @if (item.items.length && outlineExpanded().has(item.id)) {
+              <div class="ps-4">
                 <ng-container
                   [ngTemplateOutlet]="outlineList"
                   [ngTemplateOutletContext]="{ $implicit: item.items }"
@@ -876,6 +1116,7 @@ export class PdfViewerDemo {
   );
 
   private readonly viewerRef = viewChild<ScPdfViewerRoot>('viewer');
+  private readonly injector = inject(Injector);
 
   readonly pdfSrc = signal(
     'https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf',
@@ -883,11 +1124,12 @@ export class PdfViewerDemo {
   readonly pdfTitle = signal('tracemonkey');
 
   readonly sidebarOpen = signal(false);
-  readonly sidebarTab = signal<SidebarTab>('thumbnails');
+  readonly sidebarTab = signal<ScPdfSidebarView>('thumbnails');
   readonly documentPropertiesOpen = signal(false);
 
   readonly thumbnails = signal<ThumbnailData[]>([]);
-  readonly outline = signal<OutlineItem[]>([]);
+  /** Open outline items (by id). */
+  readonly outlineExpanded = signal<ReadonlySet<string>>(new Set());
   readonly attachments = signal<AttachmentData[]>([]);
 
   readonly documentProperties = signal<Record<string, string> | null>(null);
@@ -921,16 +1163,23 @@ export class PdfViewerDemo {
       }
     });
 
+    // A new outline: open the bookmarks the document wants open.
+    effect(() => {
+      const outline = this.viewerRef()?.outline() ?? [];
+      untracked(() =>
+        this.outlineExpanded.set(new Set(this.initialOutlineExpanded(outline))),
+      );
+    });
+
     // A new document: refill the sidebar lists.
     effect(() => {
       const doc = this.viewerRef()?.pdfDocument();
       untracked(() => {
+        if (!this.viewerRef()?.organizing()) this.selectedPages.set(new Set());
         this.thumbnails.set([]);
-        this.outline.set([]);
         this.attachments.set([]);
         if (doc) {
           this.renderThumbnails();
-          this.loadOutline();
           this.loadAttachments();
         }
       });
@@ -958,6 +1207,9 @@ export class PdfViewerDemo {
     switch (value) {
       case 'open':
         viewer.openFile();
+        break;
+      case 'presentation':
+        viewer.togglePresentation();
         break;
       case 'fullscreen':
         viewer.toggleFullscreen();
@@ -1018,30 +1270,196 @@ export class PdfViewerDemo {
     input.value = '';
   }
 
-  protected async navigateOutline(item: OutlineItem): Promise<void> {
+  // Page organisation (the Pages sidebar).
+
+  /** Selected pages (thumbnail checkboxes). */
+  readonly selectedPages = signal<ReadonlySet<number>>(new Set());
+  /** Where dragged pages would land. */
+  readonly dropTarget = signal<{ page: number; after: boolean } | null>(null);
+  private draggedPages: number[] = [];
+
+  /** The selected pages that exist, ascending. */
+  protected readonly selection = computed(() => {
+    const total = this.viewerRef()?.totalPages() ?? 0;
+    return [...this.selectedPages()]
+      .filter((page) => page <= total)
+      .sort((a, b) => a - b);
+  });
+
+  protected selectPage(page: number, selected: boolean): void {
+    this.selectedPages.update((pages) => {
+      const next = new Set(pages);
+      if (selected) next.add(page);
+      else next.delete(page);
+      return next;
+    });
+  }
+
+  /** The selected pages one place earlier / later. */
+  protected async moveSelection(delta: -1 | 1): Promise<void> {
     const viewer = this.viewerRef();
-    const doc = viewer?.pdfDocument();
-    if (!viewer || !doc || !item.dest) return;
+    const pages = this.selection();
+    if (!viewer || !pages.length) return;
+    const before = delta < 0 ? pages[0] - 1 : pages[pages.length - 1] + 2;
+    this.selectedPages.set(new Set(await viewer.movePages(pages, before)));
+  }
 
-    let dest = item.dest;
-    if (typeof dest === 'string') {
-      dest = (await doc.getDestination(dest)) as unknown[];
-    }
-    if (!Array.isArray(dest)) return;
-
-    const [ref] = dest;
-    let pageNumber: number | undefined;
-    if (ref && typeof ref === 'object') {
-      try {
-        pageNumber =
-          (await doc.getPageIndex(ref as { num: number; gen: number })) + 1;
-      } catch {
+  protected async organize(
+    action: 'copy' | 'cut' | 'delete' | 'export',
+  ): Promise<void> {
+    const viewer = this.viewerRef();
+    const pages = this.selection();
+    if (!viewer || !pages.length) return;
+    switch (action) {
+      case 'copy':
+        await viewer.copyPages(pages);
         return;
-      }
-    } else if (typeof ref === 'number') {
-      pageNumber = ref + 1;
+      case 'export':
+        await viewer.exportPages(pages);
+        return;
+      case 'cut':
+        await viewer.cutPages(pages);
+        break;
+      case 'delete':
+        await viewer.deletePages(pages);
+        break;
     }
-    if (pageNumber) viewer.goToPage(pageNumber);
+    this.selectedPages.set(new Set());
+  }
+
+  /** Inserts another PDF's pages after the current page. */
+  protected insertFile(): void {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.pdf,application/pdf';
+    input.addEventListener('change', () => {
+      const viewer = this.viewerRef();
+      const file = input.files?.[0];
+      if (viewer && file) viewer.insertFile(file, viewer.currentPage());
+    });
+    input.click();
+  }
+
+  /** Delete, Ctrl+C / X / V on the pages, as pdf.js. */
+  protected onPagesKeydown(event: KeyboardEvent): void {
+    const viewer = this.viewerRef();
+    if (!viewer) return;
+    const mod = event.ctrlKey || event.metaKey;
+    if (event.key === 'Delete' && this.selection().length) {
+      this.organize('delete');
+    } else if (mod && event.key === 'c' && this.selection().length) {
+      this.organize('copy');
+    } else if (mod && event.key === 'x' && this.selection().length) {
+      this.organize('cut');
+    } else if (mod && event.key === 'v' && viewer.pageClipboard()) {
+      viewer.pastePages();
+    } else {
+      return;
+    }
+    event.preventDefault();
+    event.stopPropagation();
+  }
+
+  protected onPageDragStart(event: DragEvent, page: number): void {
+    const selection = this.selection();
+    this.draggedPages = selection.includes(page) ? selection : [page];
+    if (event.dataTransfer) {
+      event.dataTransfer.effectAllowed = 'move';
+      event.dataTransfer.setData('text/plain', this.draggedPages.join(','));
+    }
+  }
+
+  protected onPageDragOver(event: DragEvent, page: number): void {
+    if (!this.draggedPages.length) return;
+    event.preventDefault();
+    const rect = (event.currentTarget as HTMLElement).getBoundingClientRect();
+    this.dropTarget.set({
+      page,
+      after: event.clientY - rect.top > rect.height / 2,
+    });
+  }
+
+  protected async onPageDrop(event: DragEvent, page: number): Promise<void> {
+    const viewer = this.viewerRef();
+    const target = this.dropTarget();
+    const pages = this.draggedPages;
+    this.onPageDragEnd();
+    if (!viewer || !target || !pages.length) return;
+    event.preventDefault();
+    const moved = await viewer.movePages(pages, target.after ? page + 1 : page);
+    this.selectedPages.set(new Set(moved));
+  }
+
+  protected onPageDragEnd(): void {
+    this.draggedPages = [];
+    this.dropTarget.set(null);
+  }
+
+  /** A line above / below the page the dragged pages would land next to. */
+  protected dropIndicator(page: number): string {
+    const target = this.dropTarget();
+    if (target?.page !== page) return 'relative rounded-md';
+    return target.after
+      ? 'relative rounded-md shadow-[0_3px_0_var(--color-primary)]'
+      : 'relative rounded-md shadow-[0_-3px_0_var(--color-primary)]';
+  }
+
+  /** Types the outline template's context. */
+  protected asOutline(items: unknown): ScPdfOutlineItem[] {
+    return items as ScPdfOutlineItem[];
+  }
+
+  /** Opens or closes a bookmark; Shift+click does its whole branch (as pdf.js). */
+  protected toggleOutlineItem(item: ScPdfOutlineItem, event: MouseEvent): void {
+    const open = !this.outlineExpanded().has(item.id);
+    const ids = event.shiftKey ? this.branchIds([item]) : [item.id];
+    this.outlineExpanded.update((expanded) => {
+      const next = new Set(expanded);
+      for (const id of ids) {
+        if (open) next.add(id);
+        else next.delete(id);
+      }
+      return next;
+    });
+  }
+
+  protected setAllOutlineExpanded(open: boolean): void {
+    const outline = this.viewerRef()?.outline() ?? [];
+    this.outlineExpanded.set(new Set(open ? this.branchIds(outline) : []));
+  }
+
+  /** Opens the current bookmark's parents and scrolls it into view. */
+  protected revealCurrentOutlineItem(): void {
+    const current = this.viewerRef()?.currentOutlineItem();
+    if (!current) return;
+    // Ids are paths ("0.2.1"): the parents are its prefixes.
+    const parts = current.id.split('.');
+    this.outlineExpanded.update((expanded) => {
+      const next = new Set(expanded);
+      for (let i = 1; i < parts.length; i++) {
+        next.add(parts.slice(0, i).join('.'));
+      }
+      return next;
+    });
+    afterNextRender(
+      () =>
+        document
+          .querySelector(`[data-outline-item="${current.id}"]`)
+          ?.scrollIntoView({ block: 'nearest' }),
+      { injector: this.injector },
+    );
+  }
+
+  /** The ids of these items and all their descendants. */
+  private branchIds(items: ScPdfOutlineItem[]): string[] {
+    return items.flatMap((item) => [item.id, ...this.branchIds(item.items)]);
+  }
+
+  private initialOutlineExpanded(items: ScPdfOutlineItem[]): string[] {
+    return items.flatMap((item) => [
+      ...(item.open ? [item.id] : []),
+      ...this.initialOutlineExpanded(item.items),
+    ]);
   }
 
   protected downloadAttachment(att: AttachmentData): void {
@@ -1144,16 +1562,6 @@ export class PdfViewerDemo {
     }
     // Not if another document was opened meanwhile.
     if (doc === this.viewerRef()?.pdfDocument()) this.thumbnails.set(thumbs);
-  }
-
-  private async loadOutline(): Promise<void> {
-    const doc = this.viewerRef()?.pdfDocument();
-    if (!doc) return;
-    try {
-      this.outline.set(((await doc.getOutline()) as OutlineItem[]) ?? []);
-    } catch {
-      this.outline.set([]);
-    }
   }
 
   private async loadAttachments(): Promise<void> {

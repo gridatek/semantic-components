@@ -22,6 +22,8 @@ import { SC_PDF_VIEWER } from './pdf-viewer-root';
     '[class]': 'class()',
     '[attr.aria-label]': 'ariaLabel()',
     '[attr.placeholder]': 'placeholder()',
+    // Shows a search started elsewhere (the `search` open parameter).
+    '[value]': 'pdfViewer.findQuery()',
     '[attr.aria-invalid]': 'pdfViewer.findState() === "not-found" || null',
     '(input)': 'onInput($event)',
     '(keydown.enter)': 'onEnter($event)',

@@ -63,18 +63,64 @@ providers: [{ provide: OverlayContainer, useClass: FullscreenOverlayContainer }]
 
 ### Root and layout
 
-| Part                   | Selector                 | Description                                                           |
-| ---------------------- | ------------------------ | --------------------------------------------------------------------- |
-| `ScPdfViewerRoot`      | `[scPdfViewer]`          | The document and all state (`exportAs: 'scPdfViewer'`). Inputs below. |
-| `ScPdfViewerContainer` | `[scPdfViewerContainer]` | The frame (border, rounded corners); the fullscreen element.          |
-| `ScPdfViewerToolbar`   | `[scPdfViewerToolbar]`   | The toolbar row.                                                      |
-| `ScPdfViewerNav`       | `[scPdfViewerNav]`       | Groups the page buttons (`role="group"`, "Page navigation").          |
-| `ScPdfViewerZoom`      | `[scPdfViewerZoom]`      | Groups the zoom buttons (`role="group"`, "Zoom controls").            |
-| `ScPdfViewerSpacer`    | `[scPdfViewerSpacer]`    | Pushes what follows to the end.                                       |
-| `ScPdfViewerContent`   | `[scPdfViewerContent]`   | The page area; holds the canvas and the state overlays.               |
-| `ScPdfViewerCanvas`    | `sc-pdf-viewer-canvas`   | Renders the pages lazily, with text, link and annotation layers.      |
+| Part                    | Selector                    | Description                                                                                                                                                          |
+| ----------------------- | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ScPdfViewerRoot`       | `[scPdfViewer]`             | The document and all state (`exportAs: 'scPdfViewer'`). Inputs below.                                                                                                |
+| `ScPdfViewerContainer`  | `[scPdfViewerContainer]`    | The frame (border, rounded corners); the fullscreen element.                                                                                                         |
+| `ScPdfViewerToolbar`    | `[scPdfViewerToolbar]`      | The toolbar row.                                                                                                                                                     |
+| `ScPdfViewerNav`        | `[scPdfViewerNav]`          | Groups the page buttons (`role="group"`, "Page navigation").                                                                                                         |
+| `ScPdfViewerZoom`       | `[scPdfViewerZoom]`         | Groups the zoom buttons (`role="group"`, "Zoom controls").                                                                                                           |
+| `ScPdfViewerSpacer`     | `[scPdfViewerSpacer]`       | Pushes what follows to the end.                                                                                                                                      |
+| `ScPdfViewerContent`    | `[scPdfViewerContent]`      | The page area; holds the canvas and the state overlays. Opens a file dropped on it (`data-dragging` while one is dragged over; turn off with `[dropFiles]="false"`). |
+| `ScPdfViewerCanvas`     | `sc-pdf-viewer-canvas`      | Renders the pages lazily, with text, link and annotation layers.                                                                                                     |
+| `ScPdfViewerLoadingBar` | `sc-pdf-viewer-loading-bar` | A thin progress bar along the top of the content while the file downloads (also after the first pages show).                                                         |
 
-Root inputs: `src`, `title` (download file name), `initialPage`, `initialZoom`, `workerSrc`, `keyboardShortcuts`. Two-way: `sidebarOpen`, `cursorTool` (`'select' | 'hand'`), `scrollMode` (`'page' | 'vertical' | 'horizontal' | 'wrapped'`), `spreadMode` (`'none' | 'odd' | 'even'`), `savedSignatures`. Outputs: `loaded`, `pageChange`, `zoomChange`, `errorEvent`, `fileOpened`.
+Root inputs: `src`, `title` (download file name), `initialPage`, `initialZoom`, `workerSrc`, `keyboardShortcuts`, `autoPrint`, `enableScripting`, `sandboxSrc`, `wasmSrc`. Two-way: `sidebarOpen`, `sidebarView` (`'thumbnails' | 'outline' | 'attachments' | 'layers' | 'comments'`), `cursorTool` (`'select' | 'hand'`), `scrollMode` (`'page' | 'vertical' | 'horizontal' | 'wrapped'`), `spreadMode` (`'none' | 'odd' | 'even'`), `savedSignatures`. Outputs: `loaded`, `pageChange`, `zoomChange`, `errorEvent`, `fileOpened`.
+
+### Opening a document
+
+The viewer opens a document the way pdf.js does:
+
+- **The document's preferences** — its page mode opens the sidebar on the outline, thumbnails, attachments or layers (`sidebarView`); its page layout sets the scroll and spread modes (unless you changed them); its open action goes to a destination, or prints.
+- **Open parameters** in the fragment of `src` override them: `doc.pdf#page=3`, `#zoom=150` (also `page-width`, `page-fit`, `auto`, `page-actual`, or `150,left,top` for a position on the page), `#nameddest=intro` or just `#intro`, `#search=word`, `#pagemode=thumbs|bookmarks|attachments|layers|none`. `viewer.applyHash('page=3')` applies them later.
+- **Auto-print** — a document that asks to print on opening is printed (`[autoPrint]="false"` turns it off). Printing renders the pages in a hidden frame, so no pop-up is needed.
+
+### Forms
+
+- **AcroForm** fields render as HTML inputs over the page (pdf.js's annotation layer, styled by `pdfjs-dist/web/pdf_viewer.css` — import it in your global styles). Their values live in the document's annotation storage, so they survive scrolling away and are saved and printed.
+- **XFA** forms render as HTML (pdf.js's XFA layer).
+- **Scripts** — calculations, formatting, validation, page and document actions — run in pdf.js's QuickJS sandbox, loaded only for documents that have them. `sandboxSrc` (`pdf.sandbox.mjs`) and `wasmSrc` (pdf.js's `wasm/` folder, trailing slash) default to unpkg, like `workerSrc`; host them yourself for offline or strict-CSP apps. `[enableScripting]="false"` turns scripts off.
+
+### Saving and printing
+
+- **Download** (`ScPdfViewerDownload`, Ctrl+S, `viewer.download()`) saves the document _with_ the annotations, comments and form data written into it — highlights as Highlight annotations, text as FreeText, drawings as Ink, images and signatures as Stamps, comments as a note icon with a popup holding the author and text. Without changes it downloads the original file.
+- `viewer.saveDocument()` gives the saved file's bytes (e.g. to upload); `viewer.hasChanges()` tells whether there's anything to save.
+- **Print** prints what you see: the saved file, so annotations and filled-in fields are on paper too.
+
+### Presentation mode
+
+`viewer.togglePresentation()` (Ctrl+Alt+P) shows one page at a time, fitted to the screen on black, in fullscreen with the toolbar hidden. Click or → / Space / PageDown for the next page, Shift+click or ← / PageUp for the previous, the wheel or a horizontal swipe either way; the cursor hides after 3 seconds still. Escape leaves and restores the view. `viewer.presenting()` and `data-presenting` on the root tell when it's on.
+
+### Page organisation
+
+Rebuild the document's pages (with pdf.js's `extractPages`); form data comes along and the viewer's annotations and comments follow their pages. Each change shows "… — Undo" in the undo bar.
+
+| Method                                 | Does                                                                                   |
+| -------------------------------------- | -------------------------------------------------------------------------------------- |
+| `movePages(pages, beforePage)`         | Moves pages before another (past the end: to the end); resolves with their new numbers |
+| `deletePages(pages)`                   | Deletes pages (not all of them)                                                        |
+| `copyPages(pages)` / `cutPages(pages)` | Copies (cuts) pages to `viewer.pageClipboard()`                                        |
+| `pastePages(afterPage?)`               | Pastes them after a page (default: the current one; 0: at the start)                   |
+| `insertFile(file, afterPage?)`         | Inserts another PDF's pages — merging files                                            |
+| `exportPages(pages)`                   | Downloads just these pages, with their annotations                                     |
+
+`viewer.organizing()` is true while the document is rebuilt. The demo's Pages sidebar uses them: select pages with their checkboxes, drag thumbnails to reorder, and a toolbar to insert a file, paste, move, copy, cut, delete or save the selection (Delete, Ctrl+C / X / V work there too).
+
+### Page labels and outline
+
+- `viewer.pageLabels()` holds the document's page labels ("iv", "A-1"), or null when they're just the numbers. The page field shows the label and "(4 of 120)", and accepts a label or a number; `viewer.pageLabel(n)` gives one.
+- `viewer.outline()` is the outline with each bookmark's page and position resolved (`ScPdfOutlineItem`: `title`, `pageNumber`, `top`, `url`, `bold`, `italic`, `open`, `items`). `viewer.goToOutlineItem(item)` goes there — to the right spot on the page, at the zoom it asks for. `viewer.currentOutlineItem()` is the bookmark for the current page (or the nearest before it). The demo renders it as a nested list with disclosure buttons (Shift+click opens a whole branch), expand / collapse all, and "find current outline item".
+- `viewer.goToDestination(dest)` / `viewer.resolveDestination(dest)` handle named and explicit destinations; links use them too.
 
 ### View options
 
@@ -148,7 +194,7 @@ Set the tool with `viewer.editorMode` (`'none' | 'highlight' | 'freetext' | 'ink
 | `ScPdfViewerEditorInkParams`       | `sc-pdf-viewer-editor-ink-params`       | Color, thickness, opacity                     |
 | `ScPdfViewerEditorUndoBar`         | `sc-pdf-viewer-editor-undo-bar`         | "Annotation deleted — Undo" (`role="status"`) |
 
-The swatches come from `SC_PDF_HIGHLIGHT_COLORS` and `SC_PDF_INK_COLORS` (`ScPdfEditorColor[]`). Annotations are an overlay on the viewer — they aren't written into the downloaded PDF.
+The swatches come from `SC_PDF_HIGHLIGHT_COLORS` and `SC_PDF_INK_COLORS` (`ScPdfEditorColor[]`). Annotations stay editable in the viewer and are written into the PDF when it's downloaded (see Saving and printing). They belong to the open document: opening another one clears them.
 
 ### Sidebar
 

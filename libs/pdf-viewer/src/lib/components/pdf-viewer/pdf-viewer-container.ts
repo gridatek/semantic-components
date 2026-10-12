@@ -16,6 +16,7 @@ import { SC_PDF_VIEWER } from './pdf-viewer-root';
     'data-slot': 'pdf-viewer-container',
     '[class]': 'class()',
     '[class.fullscreen]': 'pdfViewer.isFullscreen()',
+    '[attr.data-presenting]': 'pdfViewer.presenting() || null',
   },
   styles: `
     [data-slot='pdf-viewer-container'] {
@@ -29,6 +30,23 @@ import { SC_PDF_VIEWER } from './pdf-viewer-root';
       z-index: 50 !important;
       width: 100vw !important;
       height: 100vh !important;
+    }
+
+    /* Presentation mode: only the pages, on black. */
+    [data-slot='pdf-viewer-container'][data-presenting]
+      [data-slot='pdf-viewer-toolbar'] {
+      display: none !important;
+    }
+
+    [data-slot='pdf-viewer-container'][data-presenting] {
+      border: 0;
+      border-radius: 0;
+      background: #000;
+    }
+
+    [data-slot='pdf-viewer-container'][data-presenting]
+      [data-slot='pdf-viewer-content'] {
+      background: #000;
     }
   `,
   encapsulation: ViewEncapsulation.None,

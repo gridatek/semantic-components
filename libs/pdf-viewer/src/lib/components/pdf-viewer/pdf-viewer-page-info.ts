@@ -12,27 +12,47 @@ import {
 import { ScInput, cn } from '@semantic-components/ui';
 import { SC_PDF_VIEWER } from './pdf-viewer-root';
 
-/** The current page (editable — Enter or leaving the field goes there) and the page count. */
+/**
+ * The current page (editable — Enter or leaving the field goes there) and the
+ * page count. With page labels ("iv", "A-1"), the field shows the label and
+ * the count "(4 of 120)", as pdf.js; it accepts a label or a page number.
+ */
 @Component({
   selector: '[scPdfViewerPageInfo]',
   imports: [ScInput],
   template: `
-    <input
-      #pageInput
-      scInput
-      type="number"
-      inputmode="numeric"
-      class="w-14 [appearance:textfield] text-center [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
-      min="1"
-      [attr.max]="pdfViewer.totalPages()"
-      [value]="pdfViewer.currentPage()"
-      [attr.aria-label]="ariaLabel()"
-      (change)="onPageInput($event)"
-      (keydown.enter)="onPageInput($event)"
-    />
-    <span class="text-muted-foreground text-sm whitespace-nowrap">
-      / {{ pdfViewer.totalPages() }}
-    </span>
+    @if (pdfViewer.pageLabels()) {
+      <input
+        #pageInput
+        scInput
+        type="text"
+        class="w-20 text-center"
+        [value]="pdfViewer.pageLabel(pdfViewer.currentPage())"
+        [attr.aria-label]="ariaLabel()"
+        (change)="onPageInput($event)"
+        (keydown.enter)="onPageInput($event)"
+      />
+      <span class="text-muted-foreground text-sm whitespace-nowrap">
+        ({{ pdfViewer.currentPage() }} of {{ pdfViewer.totalPages() }})
+      </span>
+    } @else {
+      <input
+        #pageInput
+        scInput
+        type="number"
+        inputmode="numeric"
+        class="w-14 [appearance:textfield] text-center [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+        min="1"
+        [attr.max]="pdfViewer.totalPages()"
+        [value]="pdfViewer.currentPage()"
+        [attr.aria-label]="ariaLabel()"
+        (change)="onPageInput($event)"
+        (keydown.enter)="onPageInput($event)"
+      />
+      <span class="text-muted-foreground text-sm whitespace-nowrap">
+        / {{ pdfViewer.totalPages() }}
+      </span>
+    }
   `,
   host: {
     'data-slot': 'pdf-viewer-page-info',
@@ -67,11 +87,11 @@ export class ScPdfViewerPageInfo {
 
   protected onPageInput(event: Event): void {
     const input = event.target as HTMLInputElement;
-    const page = parseInt(input.value, 10);
-    if (!isNaN(page) && page >= 1 && page <= this.pdfViewer.totalPages()) {
-      this.pdfViewer.goToPage(page);
-    } else {
-      input.value = this.pdfViewer.currentPage().toString();
-    }
+    const page = this.pdfViewer.pageForLabel(input.value);
+    if (page) this.pdfViewer.goToPage(page);
+    // Normalise what was typed ("04" → "4", a number → its label).
+    input.value = this.pdfViewer.pageLabel(
+      page ?? this.pdfViewer.currentPage(),
+    );
   }
 }

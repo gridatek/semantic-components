@@ -40,6 +40,38 @@ export type ScPdfScrollMode = 'page' | 'vertical' | 'horizontal' | 'wrapped';
 /** Single pages, or two side by side starting with an odd / even page. */
 export type ScPdfSpreadMode = 'none' | 'odd' | 'even';
 
+/** The sidebar's views (the `pagemode` open parameter picks one). */
+export type ScPdfSidebarView =
+  'thumbnails' | 'outline' | 'attachments' | 'layers' | 'comments';
+
+/** A bookmark of the document's outline, with its destination resolved. */
+export interface ScPdfOutlineItem {
+  /** Unique within the outline (its path, e.g. `0.2.1`). */
+  id: string;
+  title: string;
+  /** The page it points to, or null for a web link / unresolvable target. */
+  pageNumber: number | null;
+  /** Where on that page, from 0 (top) to 1 (bottom). */
+  top: number;
+  /** A web link instead of a destination. */
+  url: string | null;
+  bold: boolean;
+  italic: boolean;
+  /** The zoom the destination asks for, if any. */
+  zoom?: ScPdfZoomLevel;
+  /** Whether the document wants it open initially. */
+  open: boolean;
+  items: ScPdfOutlineItem[];
+}
+
+/** A resolved destination: a page, a position on it and maybe a zoom. */
+export interface ScPdfDestination {
+  pageNumber: number;
+  /** From 0 (top of the page) to 1 (bottom). */
+  top: number;
+  zoom?: ScPdfZoomLevel;
+}
+
 export interface ScPdfEditorAnnotation {
   id: string;
   type: 'highlight' | 'freetext' | 'ink' | 'stamp' | 'signature';

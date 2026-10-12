@@ -19,7 +19,13 @@ import type {
   PageViewport,
   RenderTask,
 } from 'pdfjs-dist';
-import { AnnotationLayer, TextLayer, setLayerDimensions } from 'pdfjs-dist';
+import {
+  AnnotationLayer,
+  AnnotationMode,
+  TextLayer,
+  XfaLayer,
+  setLayerDimensions,
+} from 'pdfjs-dist';
 import type { ScPdfViewerRoot } from './pdf-viewer-root';
 import { SC_PDF_VIEWER } from './pdf-viewer-root';
 
@@ -74,7 +80,12 @@ class PdfLinkService {
   }
 
   get isInPresentationMode(): boolean {
-    return this.viewer.isFullscreen();
+    return this.viewer.presenting();
+  }
+
+  /** Form fields send their script events through it. */
+  get eventBus(): ScPdfViewerRoot['scripting']['eventBus'] {
+    return this.viewer.scripting.eventBus;
   }
 
   setDocument(baseUrl: string | null = null): void {
@@ -134,36 +145,8 @@ class PdfLinkService {
     return this.baseUrl ? this.baseUrl + anchor : anchor;
   }
 
-  async goToDestination(dest: unknown): Promise<void> {
-    const doc = this.viewer.pdfDocument();
-    if (!doc) return;
-
-    let explicitDest: unknown[];
-    if (typeof dest === 'string') {
-      explicitDest = (await doc.getDestination(dest)) as unknown[];
-    } else {
-      explicitDest = (await dest) as unknown[];
-    }
-
-    if (!Array.isArray(explicitDest)) return;
-
-    const [destRef] = explicitDest;
-    let pageNumber: number | undefined;
-
-    if (destRef && typeof destRef === 'object') {
-      try {
-        pageNumber =
-          (await doc.getPageIndex(destRef as { num: number; gen: number })) + 1;
-      } catch {
-        return;
-      }
-    } else if (Number.isInteger(destRef)) {
-      pageNumber = (destRef as number) + 1;
-    }
-
-    if (pageNumber && pageNumber >= 1 && pageNumber <= this.pagesCount) {
-      this.viewer.goToPage(pageNumber);
-    }
+  goToDestination(dest: unknown): Promise<void> {
+    return this.viewer.goToDestination(dest);
   }
 
   goToPage(val: number | string): void {
@@ -181,56 +164,7 @@ class PdfLinkService {
   }
 
   setHash(hash: string): void {
-    const doc = this.viewer.pdfDocument();
-    if (!doc) return;
-
-    if (hash.includes('=')) {
-      const params = new URLSearchParams(hash);
-
-      if (params.has('page')) {
-        const pageNumber = parseInt(params.get('page')!, 10) || 1;
-        this.viewer.goToPage(pageNumber);
-      }
-
-      if (params.has('zoom')) {
-        const zoomArgs = params.get('zoom')!.split(',');
-        const zoomArg = zoomArgs[0];
-        const zoomArgNumber = parseFloat(zoomArg);
-
-        if (!zoomArg.includes('Fit') && zoomArgNumber) {
-          this.viewer.setZoom(zoomArgNumber / 100);
-        } else if (zoomArg === 'Fit' || zoomArg === 'FitB') {
-          this.viewer.setZoom('page-fit');
-        } else if (
-          zoomArg === 'FitH' ||
-          zoomArg === 'FitBH' ||
-          zoomArg === 'FitV' ||
-          zoomArg === 'FitBV'
-        ) {
-          this.viewer.setZoom('page-width');
-        }
-      }
-
-      if (params.has('nameddest')) {
-        this.goToDestination(params.get('nameddest')!);
-      }
-      return;
-    }
-
-    // Named (or explicit) destination
-    let dest: unknown = unescape(hash);
-    try {
-      dest = JSON.parse(dest as string);
-      if (!Array.isArray(dest)) {
-        dest = (dest as object).toString();
-      }
-    } catch {
-      // dest stays as string
-    }
-
-    if (typeof dest === 'string' || Array.isArray(dest)) {
-      this.goToDestination(dest);
-    }
+    this.viewer.applyHash(hash);
   }
 
   executeNamedAction(action: string): void {
@@ -268,11 +202,12 @@ interface PageLayout {
   template: `
     <div
       #scrollContainer
-      class="h-full w-full touch-pan-x touch-pan-y overflow-auto outline-none data-hand:cursor-grab data-panning:cursor-grabbing data-hand:[&_.textLayer]:pointer-events-none"
+      class="h-full w-full touch-pan-x touch-pan-y overflow-auto outline-none data-hand:cursor-grab data-idle:cursor-none data-panning:cursor-grabbing data-idle:[&_*]:cursor-none data-hand:[&_.textLayer]:pointer-events-none"
       role="document"
       tabindex="0"
       [attr.data-hand]="handTool() || null"
       [attr.data-panning]="panning() || null"
+      [attr.data-idle]="cursorIdle() || null"
       (pointerdown)="onPanStart($event)"
       (pointermove)="onPanMove($event)"
       (pointerup)="onPanEnd($event)"
@@ -285,8 +220,10 @@ interface PageLayout {
             [hidden]="!isSpreadShown(spread)"
           >
             @for (page of spread; track page.pageNumber) {
+              <!-- pdf.js sizes its layers with round(…, var(--scale-round-*)),
+                   which its own viewer defines on each page. -->
               <div
-                class="bg-background relative shrink-0 shadow-sm"
+                class="bg-background relative shrink-0 shadow-sm [--scale-round-x:1px] [--scale-round-y:1px]"
                 [attr.data-page]="page.pageNumber"
                 [style.width.px]="displayWidth(page) * scaledValue()"
                 [style.height.px]="displayHeight(page) * scaledValue()"
@@ -306,6 +243,10 @@ interface PageLayout {
                 <div
                   class="annotationLayer"
                   [attr.data-annotationlayer-page]="page.pageNumber"
+                ></div>
+                <div
+                  class="xfaLayer"
+                  [attr.data-xfalayer-page]="page.pageNumber"
                 ></div>
                 <!-- Annotations live in the unrotated page's coordinates,
                      turned with the page. -->
@@ -386,6 +327,8 @@ export class ScPdfViewerCanvas {
   /** Visible area (px²) of each page in the viewport. */
   private readonly visibleAreas = new Map<number, number>();
   private readonly pageCount = computed(() => this.pageLayouts().length);
+  /** A navigation waiting for the pages to be laid out. */
+  private pendingNavigation: { page: number; top: number } | null = null;
 
   /** Rotated a quarter turn: the page's width and height swap on screen. */
   private readonly sideways = computed(() => this.rotation() % 180 !== 0);
@@ -544,6 +487,20 @@ export class ScPdfViewerCanvas {
       this.watchDevicePixelRatio();
     });
 
+    // Presentation mode: start the idle-cursor timer; show the cursor after.
+    effect(() => {
+      const presenting = this.pdfViewer.presenting();
+      untracked(() => {
+        if (this.idleTimer) clearTimeout(this.idleTimer);
+        this.idleTimer = null;
+        this.cursorIdle.set(false);
+        if (presenting) this.onPresentationPointerMove();
+      });
+    });
+    this.destroyRef.onDestroy(() => {
+      if (this.idleTimer) clearTimeout(this.idleTimer);
+    });
+
     // The root's zoom steps start from the scale the pages are drawn at.
     effect(() => this.pdfViewer.currentScale.set(this.scaledValue()));
 
@@ -557,6 +514,8 @@ export class ScPdfViewerCanvas {
         this.visibleAreas.clear();
         this.textLayerData.clear();
         this.pageLayouts.set([]);
+        // Start at the top, not where the previous document was scrolled.
+        this.scrollContainer()?.nativeElement.scrollTo({ top: 0, left: 0 });
         if (doc) this.computePageLayouts(doc);
       });
     });
@@ -583,24 +542,9 @@ export class ScPdfViewerCanvas {
     effect(() => {
       this.navigateTrigger();
       const page = untracked(() => this.pdfViewer.currentPage());
+      const top = untracked(() => this.pdfViewer.navigateTop());
 
-      setTimeout(() => {
-        const container = this.scrollContainer()?.nativeElement;
-        if (!container) return;
-        const mode = untracked(() => this.pdfViewer.scrollMode());
-        if (mode === 'page') {
-          // Only this page's spread shows: start at its top.
-          container.scrollTo({ top: 0, left: 0 });
-          return;
-        }
-        container
-          .querySelector<HTMLElement>(`div[data-page="${page}"]`)
-          ?.scrollIntoView({
-            behavior: 'smooth',
-            block: mode === 'horizontal' ? 'nearest' : 'start',
-            inline: mode === 'horizontal' ? 'start' : 'nearest',
-          });
-      });
+      setTimeout(() => this.scrollToPage(page, top, 'smooth'));
     });
 
     // Apply find highlights when find state changes
@@ -663,7 +607,13 @@ export class ScPdfViewerCanvas {
     // After Angular has rendered the pages: (re)observe them. The observers
     // then report every page, which renders the ones near the viewport.
     this.renderTimeout = setTimeout(() => {
-      requestAnimationFrame(() => this.observePages());
+      requestAnimationFrame(() => {
+        // A navigation that came before the pages existed (open parameters,
+        // the initial page): go there first, so the observers report it.
+        const pending = this.pendingNavigation;
+        if (pending) this.scrollToPage(pending.page, pending.top, 'auto');
+        this.observePages();
+      });
     }, 0);
   }
 
@@ -766,6 +716,60 @@ export class ScPdfViewerCanvas {
     );
   }
 
+  /**
+   * Scrolls a page into view, `top` (0–1) down it. Before the pages are laid
+   * out (a new document) it's kept and done once they are.
+   */
+  private scrollToPage(
+    page: number,
+    top: number,
+    behavior: ScrollBehavior,
+  ): void {
+    const container = this.scrollContainer()?.nativeElement;
+    const pageEl = container?.querySelector<HTMLElement>(
+      `div[data-page="${page}"]`,
+    );
+    if (!container) return;
+    if (!pageEl) {
+      this.pendingNavigation = { page, top };
+      return;
+    }
+    this.pendingNavigation = null;
+    const mode = this.pdfViewer.scrollMode();
+
+    // A position on the page (a destination's top) — in page units, so only
+    // meaningful upright or upside down.
+    const rotation = this.rotation();
+    const offset =
+      rotation === 0 ? top : rotation === 180 && top > 0 ? 1 - top : 0;
+
+    if (mode === 'page' || mode === 'horizontal') {
+      // Only this page's spread shows / pages sit in a row: bring the page
+      // into view horizontally, then scroll down to the position.
+      if (mode === 'page') container.scrollTo({ left: 0 });
+      else pageEl.scrollIntoView({ block: 'nearest', inline: 'start' });
+      container.scrollTo({
+        top: offset * pageEl.offsetHeight,
+        behavior: mode === 'page' ? 'auto' : behavior,
+      });
+      return;
+    }
+    const containerTop = container.getBoundingClientRect().top;
+    const pageTop = pageEl.getBoundingClientRect().top;
+    // To a page's top: keep the gap above it (p-2 / gap-2), as the first
+    // page has at rest.
+    const gap = offset ? 0 : 8;
+    container.scrollTo({
+      top:
+        container.scrollTop +
+        pageTop -
+        containerTop +
+        offset * pageEl.offsetHeight -
+        gap,
+      behavior,
+    });
+  }
+
   private observePages(): void {
     const container = this.scrollContainer()?.nativeElement;
     if (!container || !this.renderObserver || !this.visibilityObserver) return;
@@ -817,9 +821,11 @@ export class ScPdfViewerCanvas {
       canvas.width = 0;
       canvas.height = 0;
     }
+    this.pdfViewer.pageReleased(pageNumber);
     for (const layer of [
       `[data-textlayer-page="${pageNumber}"]`,
       `[data-annotationlayer-page="${pageNumber}"]`,
+      `[data-xfalayer-page="${pageNumber}"]`,
     ]) {
       const el = container.querySelector(layer);
       if (el) el.textContent = '';
@@ -858,6 +864,8 @@ export class ScPdfViewerCanvas {
         return;
       }
       event.preventDefault();
+      // The page stays fitted in presentation mode.
+      if (this.pdfViewer.presenting()) return;
       const pixels =
         event.deltaMode === WheelEvent.DOM_DELTA_LINE
           ? event.deltaY * 33
@@ -923,7 +931,52 @@ export class ScPdfViewerCanvas {
     });
   }
 
+  /** Presentation mode: the cursor hides after a few seconds still. */
+  protected readonly cursorIdle = signal(false);
+  private idleTimer: ReturnType<typeof setTimeout> | null = null;
+  /** Presentation mode: where a click / swipe started. */
+  private presentationPointer: { x: number; y: number } | null = null;
+
+  private onPresentationPointerMove(): void {
+    this.cursorIdle.set(false);
+    if (this.idleTimer) clearTimeout(this.idleTimer);
+    this.idleTimer = setTimeout(() => this.cursorIdle.set(true), 3000);
+  }
+
+  /**
+   * Presentation mode: a click turns to the next page (Shift+click the
+   * previous), a horizontal swipe either way — not on links or form fields.
+   */
+  private onPresentationPointerUp(event: PointerEvent): void {
+    const start = this.presentationPointer;
+    this.presentationPointer = null;
+    if (!start || event.type === 'pointercancel') return;
+    const dx = event.clientX - start.x;
+    const dy = event.clientY - start.y;
+    if (event.pointerType === 'touch') {
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+        if (dx < 0) this.pdfViewer.goToNextPage();
+        else this.pdfViewer.goToPrevPage();
+      }
+      return;
+    }
+    if (Math.hypot(dx, dy) > 5) return;
+    if (event.shiftKey) this.pdfViewer.goToPrevPage();
+    else this.pdfViewer.goToNextPage();
+  }
+
   protected onPanStart(event: PointerEvent): void {
+    if (this.pdfViewer.presenting()) {
+      const target = event.target as HTMLElement;
+      const interactive = target.closest(
+        'a, button, input, select, textarea, [contenteditable]',
+      );
+      this.presentationPointer =
+        event.button === 0 && !interactive
+          ? { x: event.clientX, y: event.clientY }
+          : null;
+      return;
+    }
     if (!this.handTool() || event.button !== 0) return;
     const container = event.currentTarget as HTMLElement;
     this.panStart = {
@@ -938,6 +991,10 @@ export class ScPdfViewerCanvas {
   }
 
   protected onPanMove(event: PointerEvent): void {
+    if (this.pdfViewer.presenting()) {
+      this.onPresentationPointerMove();
+      return;
+    }
     if (!this.panStart) return;
     const container = event.currentTarget as HTMLElement;
     container.scrollLeft =
@@ -946,6 +1003,10 @@ export class ScPdfViewerCanvas {
   }
 
   protected onPanEnd(event: PointerEvent): void {
+    if (this.pdfViewer.presenting()) {
+      this.onPresentationPointerUp(event);
+      return;
+    }
     if (!this.panStart) return;
     this.panStart = null;
     this.panning.set(false);
@@ -997,15 +1058,24 @@ export class ScPdfViewerCanvas {
       canvas.width = viewport.width;
       canvas.height = viewport.height;
 
+      // Form fields are drawn by the annotation layer (as HTML), not here.
       const renderTask = page.render({
         canvas,
         viewport,
+        annotationMode: AnnotationMode.ENABLE_FORMS,
       });
 
       this.activeRenderTasks.set(pageNumber, renderTask);
 
       await renderTask.promise;
       this.activeRenderTasks.delete(pageNumber);
+
+      // XFA forms are HTML, with their own text: no text or annotation layer.
+      if (doc.isPureXfa) {
+        await this.renderXfaLayer(page, pageNumber, container);
+        this.pdfViewer.pageRendered(pageNumber);
+        return;
+      }
 
       // Render text layer for text selection
       const textLayerDiv = container.querySelector(
@@ -1050,6 +1120,7 @@ export class ScPdfViewerCanvas {
       } catch (annErr) {
         console.warn(`Annotation layer error on page ${pageNumber}:`, annErr);
       }
+      this.pdfViewer.pageRendered(pageNumber);
     } catch (err) {
       if ((err as { name?: string })?.name !== 'RenderingCancelledException') {
         console.error(`Error rendering page ${pageNumber}:`, err);
@@ -1101,6 +1172,8 @@ export class ScPdfViewerCanvas {
     annotationLayerDiv.style.setProperty('--total-scale-factor', String(scale));
     setLayerDimensions(annotationLayerDiv, displayViewport);
 
+    const doc = this.pdfDocument();
+    const { fieldObjects, hasJSActions } = this.pdfViewer.formInfo();
     const annotationLayer = new AnnotationLayer({
       div: annotationLayerDiv,
       accessibilityManager: null,
@@ -1111,13 +1184,42 @@ export class ScPdfViewerCanvas {
       page,
       viewport: displayViewport,
       linkService: this.linkService as never,
-      annotationStorage: null,
+      annotationStorage: doc?.annotationStorage ?? null,
     } as never);
 
+    // Form fields as HTML inputs, their values kept in the document's
+    // annotation storage (so they survive re-rendering and are saved).
     await annotationLayer.render({
       annotations,
-      renderForms: false,
+      renderForms: true,
+      enableScripting: this.pdfViewer.enableScripting(),
+      hasJSActions,
+      fieldObjects,
     } as never);
+  }
+
+  /** A pure XFA form's page, as HTML (pdf.js's XFA layer). */
+  private async renderXfaLayer(
+    page: PDFPageProxy,
+    pageNumber: number,
+    container: HTMLElement,
+  ): Promise<void> {
+    const div = container.querySelector<HTMLDivElement>(
+      `[data-xfalayer-page="${pageNumber}"]`,
+    );
+    const xfaHtml = await page.getXfa();
+    if (!div || !xfaHtml) return;
+    div.textContent = '';
+    XfaLayer.render({
+      viewport: this.pageViewport(page, this.scaledValue()).clone({
+        dontFlip: true,
+      }),
+      div,
+      xfaHtml,
+      annotationStorage: this.pdfDocument()?.annotationStorage,
+      linkService: this.linkService as never,
+      intent: 'display',
+    });
   }
 
   /** A screen offset turned back by the pages' rotation. */
