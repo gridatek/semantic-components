@@ -23,6 +23,7 @@ import {
   getDocument,
   version,
 } from 'pdfjs-dist';
+import { moveCaret } from './pdf-viewer-caret-browsing';
 import type { ScPdfNormalizedText } from './pdf-viewer-find';
 import { findInPage, normalizeText } from './pdf-viewer-find';
 import { annotationStorageValues } from './pdf-viewer-save';
@@ -53,7 +54,7 @@ import type {
 
 /** As pdf.js (the detail canvas keeps high zoom sharp). */
 const MIN_SCALE = 0.1;
-const MAX_SCALE = 10;
+const MAX_SCALE = 25;
 
 /** pdf.js's optional content (layers) config; not exported by pdfjs-dist. */
 type OptionalContentConfig = Awaited<
@@ -298,6 +299,12 @@ export class ScPdfViewer {
    * in its `CanvasText` on `Canvas`, as in pdf.js.
    */
   readonly pageColors = input<ScPdfPageColors | null>(null);
+  /**
+   * The browser's caret browsing (F7) is on: ↑ / ↓ move the caret a line
+   * in the pages' text, as pdf.js does. The page can't tell, so say when
+   * your app knows (as pdf.js's `supportsCaretBrowsingMode`).
+   */
+  readonly caretBrowsing = input(false);
 
   /** The system's high-contrast mode is on. */
   private readonly forcedColors = signal(false);
@@ -1470,16 +1477,20 @@ export class ScPdfViewer {
     }
   }
 
-  /** To the next 25% step above the current scale (up to 1000%). */
+  /** Zooms in a step: ×1.1, rounded up to a tenth, as pdf.js (up to 2500%). */
   zoomIn(): void {
-    const steps = Math.floor(this.currentScale() * 4 + 1e-6) + 1;
-    this.setZoom(Math.min(MAX_SCALE, steps / 4));
+    this.setZoom(this.zoomStep(1.1, Math.ceil));
   }
 
-  /** To the next 25% step below the current scale (down to 10%). */
+  /** Zooms out a step: ÷1.1, rounded down to a tenth, as pdf.js (to 10%). */
   zoomOut(): void {
-    const steps = Math.ceil(this.currentScale() * 4 - 1e-6) - 1;
-    this.setZoom(Math.max(MIN_SCALE, steps / 4));
+    this.setZoom(this.zoomStep(1 / 1.1, Math.floor));
+  }
+
+  private zoomStep(delta: number, round: (x: number) => number): number {
+    const scale =
+      round(Number((this.currentScale() * delta).toFixed(2)) * 10) / 10;
+    return Math.min(MAX_SCALE, Math.max(MIN_SCALE, scale));
   }
 
   /** Multiplies the current scale (wheel and pinch zoom). */
@@ -1865,11 +1876,7 @@ export class ScPdfViewer {
 
   async printWithProgress(): Promise<void> {
     const doc = this.pdfDocument();
-    if (doc && !this.canPrint()) return;
-    if (!doc) {
-      this.print();
-      return;
-    }
+    if (!doc || !this.canPrint()) return;
 
     this.printCancelled = false;
     this.printDialogOpen.set(true);
@@ -1983,18 +1990,6 @@ export class ScPdfViewer {
   cancelPrint(): void {
     this.printCancelled = true;
     this.printDialogOpen.set(false);
-  }
-
-  print(): void {
-    const source = this.src();
-    if (!source) return;
-
-    const printWindow = window.open(source);
-    if (printWindow) {
-      printWindow.onload = () => {
-        printWindow.print();
-      };
-    }
   }
 
   toggleFullscreen(): void {
@@ -2262,6 +2257,15 @@ export class ScPdfViewer {
       }
     } else if (!ctrl && !alt && key === 'Escape' && this.findOpen()) {
       this.toggleFind();
+    } else if (
+      !ctrl &&
+      !alt &&
+      !typing &&
+      this.caretBrowsing() &&
+      (key === 'ArrowUp' || key === 'ArrowDown') &&
+      moveCaret(key === 'ArrowUp', shift)
+    ) {
+      // Handled: the caret moved a line (caret browsing).
     } else if (
       !ctrl &&
       !alt &&

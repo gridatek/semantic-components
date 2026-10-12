@@ -56,7 +56,7 @@ providers: [{ provide: OverlayContainer, useClass: FullscreenOverlayContainer }]
 
 `ScPdfViewer` (`[scPdfViewer]`, `exportAs: 'scPdfViewer'`) holds the document and all state; your template reads it (`viewer.currentPage()`, `viewer.findState()`…) to write its text.
 
-- **Inputs**: `src`, `fileName` (download / print name, without `.pdf`), `initialPage`, `initialZoom`, `assetsUrl` (where pdf.js's worker, sandbox, fonts, CMaps, wasm decoders and colour profiles are — unpkg by default; host `pdfjs-dist`'s folders yourself for offline or strict-CSP apps), `workerSrc`, `sandboxSrc`, `wasmSrc`, `keyboardShortcuts`, `autoPrint`, `enableScripting`, `enableAutoLinking` (URLs and email addresses in the text become links; on by default), `enablePermissions` (follow the document's permissions — no copying, printing, adding annotations or filling in forms when it forbids them; off by default, as in pdf.js), `pageColors` (`{ foreground, background }` to draw the pages with; unset, they follow the system's high-contrast mode).
+- **Inputs**: `src`, `fileName` (download / print name, without `.pdf`), `initialPage`, `initialZoom`, `assetsUrl` (where pdf.js's worker, sandbox, fonts, CMaps, wasm decoders and colour profiles are — unpkg by default; host `pdfjs-dist`'s folders yourself for offline or strict-CSP apps), `workerSrc`, `sandboxSrc`, `wasmSrc`, `keyboardShortcuts`, `autoPrint`, `enableScripting`, `enableAutoLinking` (URLs and email addresses in the text become links; on by default), `enablePermissions` (follow the document's permissions — no copying, printing, adding annotations or filling in forms when it forbids them; off by default, as in pdf.js), `pageColors` (`{ foreground, background }` to draw the pages with; unset, they follow the system's high-contrast mode), `caretBrowsing` (the browser's caret browsing, F7, is on — the page can't tell, so say when your app knows).
 - **Two-way**: `sidebarOpen`, `sidebarView`, `cursorTool`, `scrollMode`, `spreadMode`, `savedSignatures`.
 - **Outputs**: `loaded`, `pageChange`, `zoomChange`, `errorEvent` (`ScPdfLoadError`), `fileOpened`.
 - **State for your text**: `currentPage()`, `totalPages()`, `pageLabels()` / `pageLabel(n)`, `zoom()`, `isLoading()`, `loadProgress()`, `error()` (`{ kind: 'invalid' | 'missing' | 'network' | 'password' | 'unknown' }`), `findState()`, `findCurrentMatchIndex()`, `findTotalMatches()`, `undoable()` (`{ kind, count }`), `printProgress()`, `outline()`, `attachments()`, `layers()`, `comments()`, `savedSignatures()`, `pageSelection()`, `canGoBack()` / `canGoForward()`, `canCopy()` / `canPrint()` / `canEdit()` / `canFillForms()`…
@@ -83,7 +83,7 @@ Behaviour on a `scButton`: choose its look, write its icon, text or `aria-label`
 | --------------------------------------- | ---------------------------------------- | --------------------------------------------------- |
 | `scPdfViewerPrevPage` / `NextPage`      | Previous / next page                     | on the first / last page                            |
 | `scPdfViewerBack` / `Forward`           | Back to before the last jump, or again   | with nowhere to go                                  |
-| `scPdfViewerZoomIn` / `ZoomOut`         | Zoom by 25%                              | at 1000% / 10%                                      |
+| `scPdfViewerZoomIn` / `ZoomOut`         | Zoom a step (×1.1, as pdf.js)            | at 2500% / 10%                                      |
 | `scPdfViewerRotateLeft` / `RotateRight` | Rotate the pages                         | —                                                   |
 | `scPdfViewerPrint`                      | Print (with the `print` dialog)          | until the document loads, or if it forbids printing |
 | `scPdfViewerDownload`                   | Download, with annotations and form data | until the document loads                            |
@@ -190,7 +190,7 @@ Each change rebuilds the document with pdf.js's `extractPages` — form data com
 
 ### Keyboard
 
-pdf.js's shortcuts work while focus is in the viewer (`[keyboardShortcuts]="false"` turns them off): Ctrl+F / G find, Ctrl+= / − / 0 zoom, Ctrl+O open, Ctrl+S download, Ctrl+P print, Ctrl+Alt+G go to page, Ctrl+Alt+P presentation, n / j and p / k next / previous page, Home / End, r / Shift+R rotate, s / h select / hand tool, F4 sidebar. Ctrl+wheel and pinch zoom around the pointer. Rotation goes through pdf.js, so text, links and annotations stay aligned.
+pdf.js's shortcuts work while focus is in the viewer (`[keyboardShortcuts]="false"` turns them off): Ctrl+F / G find, Ctrl+= / − / 0 zoom, Ctrl+O open, Ctrl+S download, Ctrl+P print, Ctrl+Alt+G go to page, Ctrl+Alt+P presentation, n / j and p / k next / previous page, Home / End, r / Shift+R rotate, s / h select / hand tool, F4 sidebar. Ctrl+wheel and pinch zoom around the pointer. Rotation goes through pdf.js, so text, links and annotations stay aligned. With `caretBrowsing`, ↑ / ↓ move the caret a line in the text (Shift extends the selection), onto the next page at the end of one, as in pdf.js.
 
 ## Performance
 
