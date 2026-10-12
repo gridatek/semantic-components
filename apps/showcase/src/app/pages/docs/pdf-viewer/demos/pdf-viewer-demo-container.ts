@@ -310,10 +310,10 @@ const TOOLS_WITH_OPTIONS: readonly ScPdfEditorMode[] = [
       scPdfViewer
       class="size-full"
       [src]="pdfSrc()"
-      [title]="pdfTitle()"
+      [fileName]="fileName()"
       [(sidebarOpen)]="sidebarOpen"
       [(sidebarView)]="sidebarTab"
-      (fileOpened)="pdfTitle.set($event.name.replace('.pdf', ''))"
+      (fileOpened)="fileName.set($event.name.replace('.pdf', ''))"
       #viewer="scPdfViewer"
     >
       <div
@@ -1141,7 +1141,7 @@ export class PdfViewerDemo {
   readonly pdfSrc = signal(
     'https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf',
   );
-  readonly pdfTitle = signal('tracemonkey');
+  readonly fileName = signal('tracemonkey');
 
   readonly sidebarOpen = signal(false);
   readonly sidebarTab = signal<ScPdfSidebarView>('thumbnails');
@@ -1542,7 +1542,7 @@ export class PdfViewerDemo {
       }
 
       this.documentProperties.set({
-        'File name': this.pdfTitle() || '—',
+        'File name': this.fileName() || '—',
         'File size': fileSize,
         Title: info['Title'] || '—',
         Author: info['Author'] || '—',

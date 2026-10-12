@@ -7,7 +7,7 @@ The chrome is built from `@semantic-components/ui`: the viewer's parts add behav
 ## Usage
 
 ```html
-<div scPdfViewer [src]="url" title="Report" #viewer="scPdfViewer">
+<div scPdfViewer [src]="url" fileName="Report" #viewer="scPdfViewer">
   <div scPdfViewerContainer class="flex h-[800px] flex-col">
     <div scPdfViewerToolbar>
       <div scPdfViewerNav>
@@ -75,7 +75,7 @@ providers: [{ provide: OverlayContainer, useClass: FullscreenOverlayContainer }]
 | `ScPdfViewerCanvas`     | `sc-pdf-viewer-canvas`      | Renders the pages lazily, with text, link and annotation layers.                                                                                                     |
 | `ScPdfViewerLoadingBar` | `sc-pdf-viewer-loading-bar` | A thin progress bar along the top of the content while the file downloads (also after the first pages show).                                                         |
 
-Root inputs: `src`, `title` (download file name), `initialPage`, `initialZoom`, `assetsUrl` (where pdf.js's worker, sandbox, fonts, CMaps, wasm decoders and colour profiles are — unpkg by default; host `pdfjs-dist`'s folders yourself for offline or strict-CSP apps), `workerSrc`, `keyboardShortcuts`, `autoPrint`, `enableScripting`, `sandboxSrc`, `wasmSrc`. Two-way: `sidebarOpen`, `sidebarView` (`'thumbnails' | 'outline' | 'attachments' | 'layers' | 'comments'`), `cursorTool` (`'select' | 'hand'`), `scrollMode` (`'page' | 'vertical' | 'horizontal' | 'wrapped'`), `spreadMode` (`'none' | 'odd' | 'even'`), `savedSignatures`. Outputs: `loaded`, `pageChange`, `zoomChange`, `errorEvent`, `fileOpened`.
+Root inputs: `src`, `fileName` (download / print file name, without `.pdf`), `initialPage`, `initialZoom`, `assetsUrl` (where pdf.js's worker, sandbox, fonts, CMaps, wasm decoders and colour profiles are — unpkg by default; host `pdfjs-dist`'s folders yourself for offline or strict-CSP apps), `workerSrc`, `keyboardShortcuts`, `autoPrint`, `enableScripting`, `sandboxSrc`, `wasmSrc`. Two-way: `sidebarOpen`, `sidebarView` (`'thumbnails' | 'outline' | 'attachments' | 'layers' | 'comments'`), `cursorTool` (`'select' | 'hand'`), `scrollMode` (`'page' | 'vertical' | 'horizontal' | 'wrapped'`), `spreadMode` (`'none' | 'odd' | 'even'`), `savedSignatures`. Outputs: `loaded`, `pageChange`, `zoomChange`, `errorEvent`, `fileOpened`.
 
 ### Opening a document
 

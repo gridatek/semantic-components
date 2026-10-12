@@ -72,7 +72,7 @@ import {
       scPdfViewer
       class="size-full"
       src="/pdf/order-form.pdf"
-      [title]="'order-form'"
+      fileName="order-form"
       initialZoom="page-width"
     >
       <div scPdfViewerContainer class="flex size-full flex-col">

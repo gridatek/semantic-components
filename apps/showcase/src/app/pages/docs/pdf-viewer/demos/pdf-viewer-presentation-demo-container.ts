@@ -78,7 +78,7 @@ import {
       scPdfViewer
       class="size-full"
       src="/pdf/handbook.pdf"
-      [title]="'handbook'"
+      fileName="handbook"
       #viewer="scPdfViewer"
     >
       <div scPdfViewerContainer class="flex size-full flex-col">

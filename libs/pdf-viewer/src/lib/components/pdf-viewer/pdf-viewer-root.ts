@@ -209,7 +209,8 @@ export class ScPdfViewerRoot {
 
   // Inputs
   readonly src = input<string>('');
-  readonly title = input<string>('');
+  /** The file name for downloads and prints, without `.pdf`. */
+  readonly fileName = input<string>('');
   readonly initialPage = input(1);
   readonly initialZoom = input<ScPdfZoomLevel>('auto');
   /**
@@ -480,7 +481,7 @@ export class ScPdfViewerRoot {
   readonly downloadName = computed(
     () =>
       this.localFile()?.name.replace(/\.pdf$/i, '') ||
-      this.title() ||
+      this.fileName() ||
       'document',
   );
 

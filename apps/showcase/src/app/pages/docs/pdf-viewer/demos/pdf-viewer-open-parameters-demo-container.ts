@@ -58,7 +58,7 @@ import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
       scPdfViewer
       class="size-full"
       src="/pdf/handbook.pdf#nameddest=chapter-2"
-      [title]="'handbook'"
+      fileName="handbook"
       #viewer="scPdfViewer"
     >
       <div scPdfViewerContainer class="flex size-full flex-col">
