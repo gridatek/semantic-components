@@ -74,7 +74,19 @@ providers: [{ provide: OverlayContainer, useClass: FullscreenOverlayContainer }]
 | `ScPdfViewerContent`   | `[scPdfViewerContent]`   | The page area; holds the canvas and the state overlays.               |
 | `ScPdfViewerCanvas`    | `sc-pdf-viewer-canvas`   | Renders the pages lazily, with text, link and annotation layers.      |
 
-Root inputs: `src`, `title` (download file name), `initialPage`, `initialZoom`, `workerSrc`. Outputs: `loaded`, `pageChange`, `zoomChange`, `errorEvent`.
+Root inputs: `src`, `title` (download file name), `initialPage`, `initialZoom`, `workerSrc`, `keyboardShortcuts`. Two-way: `sidebarOpen`, `cursorTool` (`'select' | 'hand'`), `scrollMode` (`'page' | 'vertical' | 'horizontal' | 'wrapped'`), `spreadMode` (`'none' | 'odd' | 'even'`), `savedSignatures`. Outputs: `loaded`, `pageChange`, `zoomChange`, `errorEvent`, `fileOpened`.
+
+### View options
+
+| Part                     | Selector                     | Description                                                                       |
+| ------------------------ | ---------------------------- | --------------------------------------------------------------------------------- |
+| `ScPdfViewerViewOptions` | `sc-pdf-viewer-view-options` | Toggle groups for the cursor tool, scroll mode and spreads; show it in a popover. |
+
+Rotation goes through pdf.js, so the text layer, links and annotations stay aligned at any angle. In page scroll mode one spread shows at a time; the wheel past its top or bottom edge, PageUp/PageDown, Space and the arrow keys turn the page.
+
+### Keyboard
+
+The shortcuts of the pdf.js viewer work while focus is inside the viewer (turn them off with `[keyboardShortcuts]="false"`): Ctrl+F / Ctrl+G find, Ctrl+= / Ctrl+− / Ctrl+0 zoom, Ctrl+O open, Ctrl+S download, Ctrl+P print, Ctrl+Alt+G go to page, n / j and p / k next and previous page, Home / End, r / Shift+R rotate, s / h select and hand tool, F4 sidebar. Ctrl+wheel and pinch zoom around the pointer.
 
 ### Buttons
 
@@ -127,7 +139,7 @@ Built on `scDialog` (focus trap, Escape, focus return). Place them anywhere insi
 
 ### Annotation tools
 
-Set the tool with `viewer.editorMode` (`'none' | 'highlight' | 'freetext' | 'ink' | 'signature'`); the demo uses a `scToggleGroup`. Each tool's options are a part — show them in a popover:
+Set the tool with `viewer.editorMode` (`'none' | 'highlight' | 'freetext' | 'ink' | 'signature' | 'comment'`); the demo uses a `scToggleGroup`. Each tool's options are a part — show them in a popover:
 
 | Part                               | Selector                                | Options                                       |
 | ---------------------------------- | --------------------------------------- | --------------------------------------------- |

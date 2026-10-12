@@ -12,6 +12,8 @@ import {
 } from '@angular/core';
 import {
   ScButton,
+  ScCheckbox,
+  ScCheckboxField,
   ScDialog,
   ScDialogFooter,
   ScDialogHeader,
@@ -59,6 +61,8 @@ const SIGNATURE_FONT = '"Brush Script MT", "Segoe Script", cursive, serif';
     ScLabel,
     ScInput,
     ScSlider,
+    ScCheckbox,
+    ScCheckboxField,
     ScButton,
   ],
   template: `
@@ -180,6 +184,16 @@ const SIGNATURE_FONT = '"Brush Script MT", "Segoe Script", cursive, serif';
             />
           </div>
 
+          <label scCheckboxField>
+            <input
+              type="checkbox"
+              scCheckbox
+              [checked]="saveForReuse()"
+              (checkedChange)="saveForReuse.set($event)"
+            />
+            Save signature for later
+          </label>
+
           <div scDialogFooter class="sm:justify-between">
             <button scButton variant="ghost" (click)="clear()">Clear</button>
             <div class="flex gap-2">
@@ -219,6 +233,7 @@ export class ScPdfViewerSignatureDialog {
   readonly drawThickness = signal(2);
   readonly hasDrawn = signal(false);
   readonly imagePreview = signal<string | null>(null);
+  readonly saveForReuse = signal(true);
 
   private drawing = false;
   private drawPaths: { points: { x: number; y: number }[]; width: number }[] =
@@ -330,22 +345,15 @@ export class ScPdfViewerSignatureDialog {
     if (!dataUrl) return;
 
     const description = this.description();
-    this.pdfViewer.addSavedSignature({
-      dataUrl,
-      description,
-      width: 200,
-      height: 80,
-    });
-    this.pdfViewer.addEditorAnnotation({
-      type: 'signature',
-      pageNumber: this.pdfViewer.currentPage(),
-      x: 0.3,
-      y: 0.8,
-      imageDataUrl: dataUrl,
-      width: 0.25,
-      height: 0.1,
-      description,
-    });
+    if (this.saveForReuse()) {
+      this.pdfViewer.addSavedSignature({
+        dataUrl,
+        description,
+        width: 200,
+        height: 80,
+      });
+    }
+    this.pdfViewer.placeSignature(dataUrl, description);
 
     this.close();
   }

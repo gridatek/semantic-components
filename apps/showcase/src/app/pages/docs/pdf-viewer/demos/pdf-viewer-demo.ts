@@ -1,13 +1,12 @@
 import { NgTemplateOutlet } from '@angular/common';
 import {
   Component,
-  DestroyRef,
   ViewEncapsulation,
   computed,
   effect,
-  inject,
   input,
   signal,
+  untracked,
   viewChild,
 } from '@angular/core';
 import {
@@ -43,8 +42,10 @@ import {
   ScPdfViewerRoot,
   ScPdfViewerSidebarResizer,
   ScPdfViewerSignatureDialog,
+  ScPdfViewerSignatureList,
   ScPdfViewerSpacer,
   ScPdfViewerToolbar,
+  ScPdfViewerViewOptions,
   ScPdfViewerZoom,
   ScPdfViewerZoomIn,
   ScPdfViewerZoomOut,
@@ -89,6 +90,7 @@ import {
   cn,
 } from '@semantic-components/ui';
 import {
+  SiBookOpenIcon,
   SiChevronDownIcon,
   SiChevronUpIcon,
   SiCircleAlertIcon,
@@ -102,6 +104,7 @@ import {
   SiListTreeIcon,
   SiLoaderCircleIcon,
   SiMessageSquareIcon,
+  SiMessageSquarePlusIcon,
   SiPanelLeftIcon,
   SiPaperclipIcon,
   SiPenIcon,
@@ -133,7 +136,15 @@ interface AttachmentData {
 type SidebarTab =
   'thumbnails' | 'outline' | 'attachments' | 'layers' | 'comments';
 
-/** Editor tools with an options panel. */
+/** The tools in the toolbar's toggle group. */
+const TOOLS: readonly ScPdfEditorMode[] = [
+  'highlight',
+  'freetext',
+  'ink',
+  'comment',
+];
+
+/** Tools with an options panel. */
 const TOOLS_WITH_OPTIONS: readonly ScPdfEditorMode[] = [
   'highlight',
   'freetext',
@@ -173,8 +184,10 @@ const TOOLS_WITH_OPTIONS: readonly ScPdfEditorMode[] = [
     ScPdfViewerEditorHighlightParams,
     ScPdfViewerEditorFreetextParams,
     ScPdfViewerEditorInkParams,
+    ScPdfViewerViewOptions,
     ScPdfViewerPasswordDialog,
     ScPdfViewerSignatureDialog,
+    ScPdfViewerSignatureList,
     ScPdfViewerAltTextDialog,
     ScPdfViewerPrintProgress,
     ScPdfViewerSidebarResizer,
@@ -216,6 +229,7 @@ const TOOLS_WITH_OPTIONS: readonly ScPdfEditorMode[] = [
     ScDialogFooter,
     ScSpinner,
     ScEmptyMedia,
+    SiBookOpenIcon,
     SiChevronDownIcon,
     SiChevronUpIcon,
     SiCircleAlertIcon,
@@ -229,6 +243,7 @@ const TOOLS_WITH_OPTIONS: readonly ScPdfEditorMode[] = [
     SiListTreeIcon,
     SiLoaderCircleIcon,
     SiMessageSquareIcon,
+    SiMessageSquarePlusIcon,
     SiPanelLeftIcon,
     SiPaperclipIcon,
     SiPenIcon,
@@ -246,6 +261,8 @@ const TOOLS_WITH_OPTIONS: readonly ScPdfEditorMode[] = [
       class="size-full"
       [src]="pdfSrc()"
       [title]="pdfTitle()"
+      [(sidebarOpen)]="sidebarOpen"
+      (fileOpened)="pdfTitle.set($event.name.replace('.pdf', ''))"
       #viewer="scPdfViewer"
     >
       <div
@@ -331,6 +348,24 @@ const TOOLS_WITH_OPTIONS: readonly ScPdfEditorMode[] = [
             <select scNativeSelect size="sm" scPdfViewerZoomSelect></select>
             <svg siChevronDownIcon scNativeSelectIcon></svg>
           </div>
+          <div scPopoverProvider side="bottom" align="start">
+            <button
+              scButton
+              scPopoverTrigger
+              variant="ghost"
+              size="icon"
+              aria-label="View options"
+              [scTooltipTrigger]="'View options'"
+              tooltipPosition="bottom"
+            >
+              <svg siBookOpenIcon></svg>
+            </button>
+            <ng-template scPopoverPortal>
+              <div scPopover class="w-auto">
+                <sc-pdf-viewer-view-options />
+              </div>
+            </ng-template>
+          </div>
 
           <div scPdfViewerSpacer></div>
 
@@ -339,7 +374,7 @@ const TOOLS_WITH_OPTIONS: readonly ScPdfEditorMode[] = [
             scToggleGroup
             type="single"
             aria-label="Annotation tool"
-            [value]="activeTool()"
+            [value]="selectedTool()"
             (valueChange)="setTool($event)"
           >
             <button
@@ -368,6 +403,15 @@ const TOOLS_WITH_OPTIONS: readonly ScPdfEditorMode[] = [
               tooltipPosition="bottom"
             >
               <svg siPenIcon></svg>
+            </button>
+            <button
+              scToggleGroupItem
+              value="comment"
+              aria-label="Comment"
+              [scTooltipTrigger]="'Comment'"
+              tooltipPosition="bottom"
+            >
+              <svg siMessageSquarePlusIcon></svg>
             </button>
           </div>
           <div scPopoverProvider side="bottom" align="end">
@@ -410,17 +454,31 @@ const TOOLS_WITH_OPTIONS: readonly ScPdfEditorMode[] = [
           >
             <svg siImageIcon></svg>
           </button>
-          <button
-            scButton
-            variant="ghost"
-            size="icon"
-            aria-label="Add signature"
-            [scTooltipTrigger]="'Add signature'"
-            tooltipPosition="bottom"
-            (click)="viewer.setEditorMode('signature')"
+          <div
+            scPopoverProvider
+            side="bottom"
+            align="end"
+            [(open)]="signaturesOpen"
           >
-            <svg siSignatureIcon></svg>
-          </button>
+            <button
+              scButton
+              scPopoverTrigger
+              variant="ghost"
+              size="icon"
+              aria-label="Signature"
+              [scTooltipTrigger]="'Signature'"
+              tooltipPosition="bottom"
+            >
+              <svg siSignatureIcon></svg>
+            </button>
+            <ng-template scPopoverPortal>
+              <div scPopover class="w-auto">
+                <sc-pdf-viewer-signature-list
+                  (done)="signaturesOpen.set(false)"
+                />
+              </div>
+            </ng-template>
+          </div>
 
           <div scSeparator orientation="vertical"></div>
 
@@ -478,13 +536,6 @@ const TOOLS_WITH_OPTIONS: readonly ScPdfEditorMode[] = [
           </div>
         </div>
 
-        <input
-          #fileInput
-          type="file"
-          accept=".pdf,application/pdf"
-          class="hidden"
-          (change)="onFileSelected($event)"
-        />
         <input
           #stampImageInput
           type="file"
@@ -741,7 +792,7 @@ const TOOLS_WITH_OPTIONS: readonly ScPdfEditorMode[] = [
               <div scEmptyMedia variant="icon">
                 <svg siFileTextIcon></svg>
               </div>
-              <button scButton (click)="fileInput.click()">Open file…</button>
+              <button scButton (click)="viewer.openFile()">Open file…</button>
             </div>
 
             <sc-pdf-viewer-canvas />
@@ -824,11 +875,7 @@ export class PdfViewerDemo {
     cn('block h-dvh w-full', this.classInput()),
   );
 
-  private readonly destroyRef = inject(DestroyRef);
   private readonly viewerRef = viewChild<ScPdfViewerRoot>('viewer');
-  private readonly fileInputRef = viewChild<{
-    nativeElement: HTMLInputElement;
-  }>('fileInput');
 
   readonly pdfSrc = signal(
     'https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf',
@@ -845,26 +892,48 @@ export class PdfViewerDemo {
 
   readonly documentProperties = signal<Record<string, string> | null>(null);
 
-  /** The active annotation tool that has options, if any. */
+  /** The tool selected in the toggle group, if any. */
+  protected readonly selectedTool = computed(() => {
+    const mode = this.viewerRef()?.editorMode() ?? 'none';
+    return TOOLS.includes(mode) ? mode : null;
+  });
+
+  /** The active tool, if it has options. */
   protected readonly activeTool = computed(() => {
     const mode = this.viewerRef()?.editorMode() ?? 'none';
     return TOOLS_WITH_OPTIONS.includes(mode) ? mode : null;
   });
 
-  private currentBlobUrl: string | null = null;
+  readonly signaturesOpen = signal(false);
 
   constructor() {
+    // Placing or picking a comment shows the comments.
     effect(() => {
-      const doc = this.viewerRef()?.pdfDocument();
-      if (doc) {
-        this.renderThumbnails();
-        this.loadOutline();
-        this.loadAttachments();
+      const viewer = this.viewerRef();
+      if (!viewer) return;
+      if (
+        viewer.editorMode() === 'comment' ||
+        viewer.pendingComment() ||
+        viewer.activeCommentId()
+      ) {
+        this.sidebarOpen.set(true);
+        this.sidebarTab.set('comments');
       }
     });
 
-    this.destroyRef.onDestroy(() => {
-      if (this.currentBlobUrl) URL.revokeObjectURL(this.currentBlobUrl);
+    // A new document: refill the sidebar lists.
+    effect(() => {
+      const doc = this.viewerRef()?.pdfDocument();
+      untracked(() => {
+        this.thumbnails.set([]);
+        this.outline.set([]);
+        this.attachments.set([]);
+        if (doc) {
+          this.renderThumbnails();
+          this.loadOutline();
+          this.loadAttachments();
+        }
+      });
     });
   }
 
@@ -888,7 +957,7 @@ export class PdfViewerDemo {
     if (!viewer) return;
     switch (value) {
       case 'open':
-        this.fileInputRef()?.nativeElement.click();
+        viewer.openFile();
         break;
       case 'fullscreen':
         viewer.toggleFullscreen();
@@ -946,21 +1015,6 @@ export class PdfViewerDemo {
       img.src = reader.result as string;
     };
     reader.readAsDataURL(file);
-    input.value = '';
-  }
-
-  protected onFileSelected(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    const file = input.files?.[0];
-    if (!file) return;
-
-    if (this.currentBlobUrl) URL.revokeObjectURL(this.currentBlobUrl);
-    this.currentBlobUrl = URL.createObjectURL(file);
-    this.pdfSrc.set(this.currentBlobUrl);
-    this.pdfTitle.set(file.name.replace(/\.pdf$/i, ''));
-    this.thumbnails.set([]);
-    this.outline.set([]);
-    this.attachments.set([]);
     input.value = '';
   }
 
@@ -1088,7 +1142,8 @@ export class PdfViewerDemo {
         // Skip a page that fails to render.
       }
     }
-    this.thumbnails.set(thumbs);
+    // Not if another document was opened meanwhile.
+    if (doc === this.viewerRef()?.pdfDocument()) this.thumbnails.set(thumbs);
   }
 
   private async loadOutline(): Promise<void> {

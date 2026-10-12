@@ -13,7 +13,12 @@ import {
   viewChild,
 } from '@angular/core';
 import { buttonVariants, cn } from '@semantic-components/ui';
-import type { PDFDocumentProxy, PDFPageProxy, RenderTask } from 'pdfjs-dist';
+import type {
+  PDFDocumentProxy,
+  PDFPageProxy,
+  PageViewport,
+  RenderTask,
+} from 'pdfjs-dist';
 import { AnnotationLayer, TextLayer, setLayerDimensions } from 'pdfjs-dist';
 import type { ScPdfViewerRoot } from './pdf-viewer-root';
 import { SC_PDF_VIEWER } from './pdf-viewer-root';
@@ -242,12 +247,8 @@ class PdfLinkService {
       case 'LastPage':
         this.viewer.goToPage(this.viewer.totalPages());
         break;
-      case 'GoBack':
-        history.back();
-        break;
-      case 'GoForward':
-        history.forward();
-        break;
+      // GoBack / GoForward would navigate the host page's history (away
+      // from the app), so they're ignored.
     }
   }
 
@@ -267,46 +268,66 @@ interface PageLayout {
   template: `
     <div
       #scrollContainer
-      class="h-full w-full overflow-auto"
+      class="h-full w-full touch-pan-x touch-pan-y overflow-auto outline-none data-hand:cursor-grab data-panning:cursor-grabbing data-hand:[&_.textLayer]:pointer-events-none"
       role="document"
       tabindex="0"
+      [attr.data-hand]="handTool() || null"
+      [attr.data-panning]="panning() || null"
+      (pointerdown)="onPanStart($event)"
+      (pointermove)="onPanMove($event)"
+      (pointerup)="onPanEnd($event)"
+      (pointercancel)="onPanEnd($event)"
     >
-      @for (page of pageLayouts(); track page.pageNumber) {
-        <div
-          class="bg-background relative mx-auto mb-2 shadow-sm"
-          [attr.data-page]="page.pageNumber"
-          [style.width.px]="page.width * scaledValue()"
-          [style.height.px]="page.height * scaledValue()"
-          [style.transform]="'rotate(' + rotation() + 'deg)'"
-          [style.transform-origin]="'center center'"
-          [style.cursor]="pageCursor()"
-        >
-          <canvas
-            width="0"
-            height="0"
-            [attr.data-page]="page.pageNumber"
-            [style.width.px]="page.width * scaledValue()"
-            [style.height.px]="page.height * scaledValue()"
-          ></canvas>
+      <div [class]="pagesClass()">
+        @for (spread of spreads(); track spread[0].pageNumber) {
           <div
-            class="textLayer"
-            [attr.data-textlayer-page]="page.pageNumber"
-          ></div>
-          <div
-            class="annotationLayer"
-            [attr.data-annotationlayer-page]="page.pageNumber"
-          ></div>
-          <div
-            class="editorLayer absolute inset-0 z-[5]"
-            [style.pointer-events]="editorPointerEvents()"
-            [style.cursor]="editorCursor()"
-            [attr.data-editorlayer-page]="page.pageNumber"
-            (pointerdown)="onEditorPointerDown($event, page.pageNumber)"
-            (pointermove)="onEditorPointerMove($event, page.pageNumber)"
-            (pointerup)="onEditorPointerUp($event, page.pageNumber)"
-          ></div>
-        </div>
-      }
+            class="flex items-center justify-center gap-2"
+            [hidden]="!isSpreadShown(spread)"
+          >
+            @for (page of spread; track page.pageNumber) {
+              <div
+                class="bg-background relative shrink-0 shadow-sm"
+                [attr.data-page]="page.pageNumber"
+                [style.width.px]="displayWidth(page) * scaledValue()"
+                [style.height.px]="displayHeight(page) * scaledValue()"
+                [style.cursor]="pageCursor()"
+              >
+                <canvas
+                  width="0"
+                  height="0"
+                  [attr.data-page]="page.pageNumber"
+                  [style.width.px]="displayWidth(page) * scaledValue()"
+                  [style.height.px]="displayHeight(page) * scaledValue()"
+                ></canvas>
+                <div
+                  class="textLayer"
+                  [attr.data-textlayer-page]="page.pageNumber"
+                ></div>
+                <div
+                  class="annotationLayer"
+                  [attr.data-annotationlayer-page]="page.pageNumber"
+                ></div>
+                <!-- Annotations live in the unrotated page's coordinates,
+                     turned with the page. -->
+                <div
+                  class="editorLayer absolute top-1/2 left-1/2 z-[5]"
+                  [style.width.px]="page.width * scaledValue()"
+                  [style.height.px]="page.height * scaledValue()"
+                  [style.transform]="
+                    'translate(-50%, -50%) rotate(' + rotation() + 'deg)'
+                  "
+                  [style.pointer-events]="editorPointerEvents()"
+                  [style.cursor]="editorCursor()"
+                  [attr.data-editorlayer-page]="page.pageNumber"
+                  (pointerdown)="onEditorPointerDown($event, page.pageNumber)"
+                  (pointermove)="onEditorPointerMove($event, page.pageNumber)"
+                  (pointerup)="onEditorPointerUp($event, page.pageNumber)"
+                ></div>
+              </div>
+            }
+          </div>
+        }
+      </div>
     </div>
   `,
   host: {
@@ -362,9 +383,66 @@ export class ScPdfViewerCanvas {
   private visibilityObserver: IntersectionObserver | null = null;
   /** Pages within the render margin of the viewport. */
   private readonly nearPages = new Set<number>();
-  /** Visible height (px) of each page in the viewport. */
-  private readonly visibleHeights = new Map<number, number>();
+  /** Visible area (px²) of each page in the viewport. */
+  private readonly visibleAreas = new Map<number, number>();
   private readonly pageCount = computed(() => this.pageLayouts().length);
+
+  /** Rotated a quarter turn: the page's width and height swap on screen. */
+  private readonly sideways = computed(() => this.rotation() % 180 !== 0);
+
+  protected displayWidth(page: PageLayout): number {
+    return this.sideways() ? page.height : page.width;
+  }
+
+  protected displayHeight(page: PageLayout): number {
+    return this.sideways() ? page.width : page.height;
+  }
+
+  /** The pages grouped into spreads (one or two side by side). */
+  protected readonly spreads = computed((): PageLayout[][] => {
+    const layouts = this.pageLayouts();
+    if (this.pdfViewer.spreadMode() === 'none') return layouts.map((l) => [l]);
+    const spreads: PageLayout[][] = [];
+    for (let page = 1; page <= layouts.length;) {
+      const [first, last] = this.pdfViewer.spreadOf(page);
+      spreads.push(layouts.slice(first - 1, last));
+      page = last + 1;
+    }
+    return spreads;
+  });
+
+  protected readonly pagesClass = computed(() => {
+    switch (this.pdfViewer.scrollMode()) {
+      case 'horizontal':
+        return 'flex min-h-full w-max flex-row items-center gap-2 p-2';
+      case 'wrapped':
+        return 'flex flex-wrap items-start justify-center gap-2 p-2';
+      default:
+        return 'flex min-w-fit flex-col items-center gap-2 p-2';
+    }
+  });
+
+  /** In page scroll mode, only the current spread shows. */
+  protected isSpreadShown(spread: PageLayout[]): boolean {
+    if (this.pdfViewer.scrollMode() !== 'page') return true;
+    const current = this.pdfViewer.currentPage();
+    return spread.some((page) => page.pageNumber === current);
+  }
+
+  /** The hand tool drags the pages (not while an annotation tool is on). */
+  protected readonly handTool = computed(
+    () =>
+      this.pdfViewer.cursorTool() === 'hand' &&
+      this.pdfViewer.editorMode() === 'none',
+  );
+  protected readonly panning = signal(false);
+  private panStart: {
+    x: number;
+    y: number;
+    left: number;
+    top: number;
+  } | null = null;
+  private pinch: { distance: number } | null = null;
 
   // Editor state
   private readonly editorMode = this.pdfViewer.editorMode;
@@ -402,7 +480,9 @@ export class ScPdfViewerCanvas {
     // Highlight mode needs pointer-events:none so the text layer underneath
     // can handle text selection; onHighlightMouseUp captures via document listener.
     // Freetext and ink need auto for direct interaction on the editor layer.
-    if (mode === 'freetext' || mode === 'ink') return 'auto';
+    if (mode === 'freetext' || mode === 'ink' || mode === 'comment') {
+      return 'auto';
+    }
     // For 'none' and 'highlight', the layer passes through clicks,
     // but children (annotations) with pointer-events:auto stay clickable.
     return 'none';
@@ -412,6 +492,7 @@ export class ScPdfViewerCanvas {
     const mode = this.editorMode();
     if (mode === 'freetext') return 'text';
     if (mode === 'ink') return 'crosshair';
+    if (mode === 'comment') return 'cell';
     return 'default';
   });
 
@@ -435,22 +516,23 @@ export class ScPdfViewerCanvas {
     if (size.width === 0 || layouts.length === 0) {
       return 1;
     }
-    const containerWidth = size.width - 32;
-    const firstPage = layouts[0];
     if (z === 'page-actual') {
       return 1;
     }
+    // Fit the first page (or spread) as it shows: rotated, side by side.
+    const pagesPerSpread = this.pdfViewer.spreadMode() === 'none' ? 1 : 2;
+    const pageWidth = this.displayWidth(layouts[0]) * pagesPerSpread;
+    const pageHeight = this.displayHeight(layouts[0]);
+    const gaps = 16 + 8 * (pagesPerSpread - 1);
+    const fitWidth = (size.width - 16 - gaps) / pageWidth;
+    const fitHeight = (size.height - 16) / pageHeight;
     if (z === 'page-width') {
-      return containerWidth / firstPage.width;
+      return fitWidth;
     }
-    if (z === 'page-fit') {
-      const containerHeight = size.height - 16;
-      const scaleW = containerWidth / firstPage.width;
-      const scaleH = containerHeight / firstPage.height;
-      return Math.min(scaleW, scaleH);
+    if (z === 'page-fit' || this.pdfViewer.scrollMode() === 'horizontal') {
+      return Math.min(fitWidth, fitHeight);
     }
     // 'auto'
-    const fitWidth = containerWidth / firstPage.width;
     return Math.min(fitWidth, 1.5);
   });
 
@@ -458,8 +540,12 @@ export class ScPdfViewerCanvas {
     afterNextRender(() => {
       this.setupResizeObserver();
       this.setupObservers();
+      this.setupGestures();
       this.watchDevicePixelRatio();
     });
+
+    // The root's zoom steps start from the scale the pages are drawn at.
+    effect(() => this.pdfViewer.currentScale.set(this.scaledValue()));
 
     // A new document: forget the previous one's pages, then lay them out.
     effect(() => {
@@ -468,7 +554,7 @@ export class ScPdfViewerCanvas {
         this.cancelAllRenderTasks();
         this.renderedPages.clear();
         this.nearPages.clear();
-        this.visibleHeights.clear();
+        this.visibleAreas.clear();
         this.textLayerData.clear();
         this.pageLayouts.set([]);
         if (doc) this.computePageLayouts(doc);
@@ -481,6 +567,9 @@ export class ScPdfViewerCanvas {
       this.scaledValue();
       this.rotation();
       this.dpr();
+      // New spreads or layout recreate the page elements.
+      this.spreads();
+      this.pdfViewer.scrollMode();
       if (this.pageCount() === 0) return;
 
       untracked(() => {
@@ -498,12 +587,19 @@ export class ScPdfViewerCanvas {
       setTimeout(() => {
         const container = this.scrollContainer()?.nativeElement;
         if (!container) return;
-        const pageEl = container.querySelector(
-          `[data-page="${page}"]`,
-        ) as HTMLElement;
-        if (pageEl) {
-          pageEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const mode = untracked(() => this.pdfViewer.scrollMode());
+        if (mode === 'page') {
+          // Only this page's spread shows: start at its top.
+          container.scrollTo({ top: 0, left: 0 });
+          return;
         }
+        container
+          .querySelector<HTMLElement>(`div[data-page="${page}"]`)
+          ?.scrollIntoView({
+            behavior: 'smooth',
+            block: mode === 'horizontal' ? 'nearest' : 'start',
+            inline: mode === 'horizontal' ? 'start' : 'nearest',
+          });
       });
     });
 
@@ -522,6 +618,10 @@ export class ScPdfViewerCanvas {
     // Render editor annotations when they change
     effect(() => {
       this.editorTrigger();
+      this.pdfViewer.highlightShowAll();
+      this.pdfViewer.comments();
+      this.pdfViewer.pendingComment();
+      this.pdfViewer.activeCommentId();
       const annotations = this.pdfViewer.editorAnnotations();
       const scale = this.scaledValue();
 
@@ -651,9 +751,13 @@ export class ScPdfViewerCanvas {
           const page = this.pageNumberOf(entry.target);
           if (!page) continue;
           if (entry.isIntersecting) {
-            this.visibleHeights.set(page, entry.intersectionRect.height);
+            // Area, so it works for rows (horizontal) as well as columns.
+            this.visibleAreas.set(
+              page,
+              entry.intersectionRect.width * entry.intersectionRect.height,
+            );
           } else {
-            this.visibleHeights.delete(page);
+            this.visibleAreas.delete(page);
           }
         }
         this.updateCurrentPage();
@@ -669,8 +773,8 @@ export class ScPdfViewerCanvas {
     this.renderObserver.disconnect();
     this.visibilityObserver.disconnect();
     this.nearPages.clear();
-    this.visibleHeights.clear();
-    for (const el of container.querySelectorAll(':scope > [data-page]')) {
+    this.visibleAreas.clear();
+    for (const el of container.querySelectorAll('div[data-page]')) {
       this.renderObserver.observe(el);
       this.visibilityObserver.observe(el);
     }
@@ -684,7 +788,7 @@ export class ScPdfViewerCanvas {
   private updateCurrentPage(): void {
     let current = 0;
     let best = 0;
-    for (const [page, height] of this.visibleHeights) {
+    for (const [page, height] of this.visibleAreas) {
       if (height > best || (height === best && page < current)) {
         best = height;
         current = page;
@@ -722,6 +826,132 @@ export class ScPdfViewerCanvas {
     }
   }
 
+  /**
+   * Ctrl/⌘ + wheel (and trackpad pinch, which arrives as one) zooms around the
+   * pointer, 10% per wheel notch as in pdf.js; two fingers pinch on touch.
+   * In page scroll mode a plain wheel at the edge turns the page.
+   */
+  private setupGestures(): void {
+    const container = this.scrollContainer()?.nativeElement;
+    if (!container) return;
+
+    // In page scroll mode, wheeling past the top / bottom edge turns the page.
+    let lastTurn = 0;
+    const turnPage = (event: WheelEvent): void => {
+      if (this.pdfViewer.scrollMode() !== 'page' || !event.deltaY) return;
+      const down = event.deltaY > 0;
+      const atEdge = down
+        ? container.scrollTop + container.clientHeight >=
+          container.scrollHeight - 1
+        : container.scrollTop <= 0;
+      if (!atEdge) return;
+      event.preventDefault();
+      if (event.timeStamp - lastTurn < 400) return;
+      lastTurn = event.timeStamp;
+      if (down) this.pdfViewer.goToNextPage();
+      else this.pdfViewer.goToPrevPage();
+    };
+
+    const onWheel = (event: WheelEvent): void => {
+      if (!event.ctrlKey && !event.metaKey) {
+        turnPage(event);
+        return;
+      }
+      event.preventDefault();
+      const pixels =
+        event.deltaMode === WheelEvent.DOM_DELTA_LINE
+          ? event.deltaY * 33
+          : event.deltaY;
+      this.zoomAround(
+        Math.pow(1.1, -pixels / 100),
+        event.clientX,
+        event.clientY,
+      );
+    };
+
+    const distance = (touches: TouchList): number =>
+      Math.hypot(
+        touches[0].clientX - touches[1].clientX,
+        touches[0].clientY - touches[1].clientY,
+      );
+    const onTouchStart = (event: TouchEvent): void => {
+      if (event.touches.length === 2) {
+        this.pinch = { distance: distance(event.touches) };
+      }
+    };
+    const onTouchMove = (event: TouchEvent): void => {
+      if (!this.pinch || event.touches.length !== 2) return;
+      event.preventDefault();
+      const now = distance(event.touches);
+      const midX = (event.touches[0].clientX + event.touches[1].clientX) / 2;
+      const midY = (event.touches[0].clientY + event.touches[1].clientY) / 2;
+      this.zoomAround(now / this.pinch.distance, midX, midY);
+      this.pinch.distance = now;
+    };
+    const onTouchEnd = (event: TouchEvent): void => {
+      if (event.touches.length < 2) this.pinch = null;
+    };
+
+    container.addEventListener('wheel', onWheel, { passive: false });
+    container.addEventListener('touchstart', onTouchStart, { passive: true });
+    container.addEventListener('touchmove', onTouchMove, { passive: false });
+    container.addEventListener('touchend', onTouchEnd);
+    this.destroyRef.onDestroy(() => {
+      container.removeEventListener('wheel', onWheel);
+      container.removeEventListener('touchstart', onTouchStart);
+      container.removeEventListener('touchmove', onTouchMove);
+      container.removeEventListener('touchend', onTouchEnd);
+    });
+  }
+
+  /** Zooms by `factor`, keeping the point under (clientX, clientY) in place. */
+  private zoomAround(factor: number, clientX: number, clientY: number): void {
+    const container = this.scrollContainer()?.nativeElement;
+    if (!container || factor === 1) return;
+    const before = this.scaledValue();
+    this.pdfViewer.zoomBy(factor);
+
+    const rect = container.getBoundingClientRect();
+    const x = clientX - rect.left;
+    const y = clientY - rect.top;
+    const contentX = container.scrollLeft + x;
+    const contentY = container.scrollTop + y;
+    requestAnimationFrame(() => {
+      const ratio = this.scaledValue() / before;
+      container.scrollLeft = contentX * ratio - x;
+      container.scrollTop = contentY * ratio - y;
+    });
+  }
+
+  protected onPanStart(event: PointerEvent): void {
+    if (!this.handTool() || event.button !== 0) return;
+    const container = event.currentTarget as HTMLElement;
+    this.panStart = {
+      x: event.clientX,
+      y: event.clientY,
+      left: container.scrollLeft,
+      top: container.scrollTop,
+    };
+    this.panning.set(true);
+    container.setPointerCapture(event.pointerId);
+    event.preventDefault();
+  }
+
+  protected onPanMove(event: PointerEvent): void {
+    if (!this.panStart) return;
+    const container = event.currentTarget as HTMLElement;
+    container.scrollLeft =
+      this.panStart.left - (event.clientX - this.panStart.x);
+    container.scrollTop = this.panStart.top - (event.clientY - this.panStart.y);
+  }
+
+  protected onPanEnd(event: PointerEvent): void {
+    if (!this.panStart) return;
+    this.panStart = null;
+    this.panning.set(false);
+    (event.currentTarget as HTMLElement).releasePointerCapture(event.pointerId);
+  }
+
   /** Redraws when the window moves to a screen with another pixel density. */
   private watchDevicePixelRatio(): void {
     if (typeof window === 'undefined' || !window.matchMedia) return;
@@ -751,9 +981,10 @@ export class ScPdfViewerCanvas {
       }
       const natural = page.getViewport({ scale: 1 });
       this.correctPageLayout(pageNumber, natural.width, natural.height);
-      const viewport = page.getViewport({
-        scale: this.scaledValue() * this.outputScale(natural),
-      });
+      const viewport = this.pageViewport(
+        page,
+        this.scaledValue() * this.outputScale(natural),
+      );
 
       const container = this.scrollContainer()?.nativeElement;
       if (!container) return;
@@ -783,7 +1014,7 @@ export class ScPdfViewerCanvas {
       if (textLayerDiv) {
         textLayerDiv.innerHTML = '';
         const scale = this.scaledValue();
-        const displayViewport = page.getViewport({ scale });
+        const displayViewport = this.pageViewport(page, scale);
         textLayerDiv.style.setProperty('--total-scale-factor', String(scale));
         setLayerDimensions(textLayerDiv, displayViewport);
         const textContent = await page.getTextContent();
@@ -829,6 +1060,14 @@ export class ScPdfViewerCanvas {
     }
   }
 
+  /** The page at `scale`, turned by its own rotation plus the viewer's. */
+  private pageViewport(page: PDFPageProxy, scale: number): PageViewport {
+    return page.getViewport({
+      scale,
+      rotation: (page.rotate + this.rotation()) % 360,
+    });
+  }
+
   /**
    * Canvas pixels per CSS pixel: the screen's density, lowered when the
    * canvas would exceed MAX_CANVAS_PIXELS (high zoom on a dense screen).
@@ -854,7 +1093,7 @@ export class ScPdfViewerCanvas {
 
     annotationLayerDiv.innerHTML = '';
     const scale = this.scaledValue();
-    const displayViewport = page.getViewport({ scale });
+    const displayViewport = this.pageViewport(page, scale);
 
     const annotations = await page.getAnnotations();
     if (annotations.length === 0) return;
@@ -879,6 +1118,45 @@ export class ScPdfViewerCanvas {
       annotations,
       renderForms: false,
     } as never);
+  }
+
+  /** A screen offset turned back by the pages' rotation. */
+  private unrotate(dx: number, dy: number): { dx: number; dy: number } {
+    const angle = (-this.rotation() * Math.PI) / 180;
+    const cos = Math.cos(angle);
+    const sin = Math.sin(angle);
+    return { dx: dx * cos - dy * sin, dy: dx * sin + dy * cos };
+  }
+
+  /**
+   * A screen point as 0–1 of a page's editor layer — the unrotated page,
+   * whatever the rotation (offsetWidth/Height ignore the CSS rotation).
+   */
+  private pointInLayer(
+    layer: HTMLElement,
+    clientX: number,
+    clientY: number,
+  ): { x: number; y: number } {
+    const rect = layer.getBoundingClientRect();
+    const { dx, dy } = this.unrotate(
+      clientX - (rect.left + rect.width / 2),
+      clientY - (rect.top + rect.height / 2),
+    );
+    return {
+      x: dx / layer.offsetWidth + 0.5,
+      y: dy / layer.offsetHeight + 0.5,
+    };
+  }
+
+  /** A pointer move on screen, as a fraction of the unrotated page. */
+  private layerDelta(
+    dxScreen: number,
+    dyScreen: number,
+    layerW: number,
+    layerH: number,
+  ): { dx: number; dy: number } {
+    const { dx, dy } = this.unrotate(dxScreen, dyScreen);
+    return { dx: dx / layerW, dy: dy / layerH };
   }
 
   /** The "Delete" button of a selected annotation's toolbar (ui button styles). */
@@ -1066,20 +1344,24 @@ export class ScPdfViewerCanvas {
     const pageNumber = parseInt(pageEl.getAttribute('data-page') || '0', 10);
     if (!pageNumber) return;
 
-    const pageRect = pageEl.getBoundingClientRect();
-    const pageW = pageRect.width;
-    const pageH = pageRect.height;
+    const layer = pageEl.querySelector<HTMLElement>(
+      `[data-editorlayer-page="${pageNumber}"]`,
+    );
+    if (!layer) return;
 
-    // Get all client rects from the range
+    // Each selection rect, mapped corner by corner into the unrotated page.
     const clientRects = range.getClientRects();
     const rects: { x: number; y: number; width: number; height: number }[] = [];
     for (let i = 0; i < clientRects.length; i++) {
       const r = clientRects[i];
+      if (!r.width || !r.height) continue;
+      const a = this.pointInLayer(layer, r.left, r.top);
+      const b = this.pointInLayer(layer, r.right, r.bottom);
       rects.push({
-        x: (r.left - pageRect.left) / pageW,
-        y: (r.top - pageRect.top) / pageH,
-        width: r.width / pageW,
-        height: r.height / pageH,
+        x: Math.min(a.x, b.x),
+        y: Math.min(a.y, b.y),
+        width: Math.abs(b.x - a.x),
+        height: Math.abs(b.y - a.y),
       });
     }
 
@@ -1099,11 +1381,13 @@ export class ScPdfViewerCanvas {
   onEditorPointerDown(event: PointerEvent, pageNumber: number): void {
     const mode = this.editorMode();
     const target = event.currentTarget as HTMLElement;
-    const rect = target.getBoundingClientRect();
-    const x = (event.clientX - rect.left) / rect.width;
-    const y = (event.clientY - rect.top) / rect.height;
+    const { x, y } = this.pointInLayer(target, event.clientX, event.clientY);
 
-    if (mode === 'freetext') {
+    if (mode === 'comment') {
+      event.preventDefault();
+      event.stopPropagation();
+      this.pdfViewer.startComment(pageNumber, x, y);
+    } else if (mode === 'freetext') {
       event.preventDefault();
       event.stopPropagation();
       this.createFreetextEditor(pageNumber, x, y, target);
@@ -1123,7 +1407,7 @@ export class ScPdfViewerCanvas {
         ctx.lineJoin = 'round';
         ctx.globalAlpha = this.pdfViewer.inkOpacity();
         ctx.beginPath();
-        ctx.moveTo(event.clientX - rect.left, event.clientY - rect.top);
+        ctx.moveTo(x * target.offsetWidth, y * target.offsetHeight);
       }
     }
   }
@@ -1132,9 +1416,7 @@ export class ScPdfViewerCanvas {
     if (!this.inkDrawing) return;
 
     const target = event.currentTarget as HTMLElement;
-    const rect = target.getBoundingClientRect();
-    const x = (event.clientX - rect.left) / rect.width;
-    const y = (event.clientY - rect.top) / rect.height;
+    const { x, y } = this.pointInLayer(target, event.clientX, event.clientY);
 
     this.inkCurrentStroke.push({ x, y });
 
@@ -1145,7 +1427,7 @@ export class ScPdfViewerCanvas {
     if (canvas) {
       const ctx = canvas.getContext('2d');
       if (ctx) {
-        ctx.lineTo(event.clientX - rect.left, event.clientY - rect.top);
+        ctx.lineTo(x * target.offsetWidth, y * target.offsetHeight);
         ctx.stroke();
       }
     }
@@ -1263,6 +1545,9 @@ export class ScPdfViewerCanvas {
       .querySelectorAll('.editor-annotation')
       .forEach((el) => el.remove());
 
+    // The highlight tool's "Show all" off hides every highlight.
+    const showHighlights = this.pdfViewer.highlightShowAll();
+
     for (const ann of annotations) {
       const editorLayer = container.querySelector(
         `[data-editorlayer-page="${ann.pageNumber}"]`,
@@ -1270,6 +1555,7 @@ export class ScPdfViewerCanvas {
       if (!editorLayer) continue;
 
       if (ann.type === 'highlight' && ann.rects) {
+        if (!showHighlights) continue;
         this.createInteractiveHighlight(ann, editorLayer);
       } else if (ann.type === 'freetext') {
         this.createInteractiveFreetext(ann, editorLayer, scale);
@@ -1312,6 +1598,73 @@ export class ScPdfViewerCanvas {
       ) {
         this.createInteractiveStamp(ann, editorLayer);
       }
+    }
+
+    this.renderCommentMarkers(container);
+  }
+
+  /**
+   * A numbered marker where each comment was placed (the number matches the
+   * comment list); clicking one selects its comment. The comment being
+   * written shows as an outlined marker.
+   */
+  private renderCommentMarkers(container: HTMLElement): void {
+    const activeId = this.pdfViewer.activeCommentId();
+    const marker = (
+      pageNumber: number,
+      x: number,
+      y: number,
+      label: string,
+      text: string,
+      variant: 'default' | 'outline',
+    ): HTMLButtonElement | null => {
+      const layer = container.querySelector<HTMLElement>(
+        `[data-editorlayer-page="${pageNumber}"]`,
+      );
+      if (!layer) return null;
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = cn(
+        'editor-annotation pointer-events-auto absolute z-[6] -translate-x-1/2 -translate-y-1/2 rounded-full shadow-sm',
+        buttonVariants({ variant, size: 'icon-xs' }),
+      );
+      button.style.left = `${x * 100}%`;
+      button.style.top = `${y * 100}%`;
+      button.textContent = label;
+      button.setAttribute('aria-label', text);
+      button.addEventListener('pointerdown', (e) => e.stopPropagation());
+      layer.appendChild(button);
+      return button;
+    };
+
+    this.pdfViewer.comments().forEach((comment, index) => {
+      const button = marker(
+        comment.pageNumber,
+        comment.x,
+        comment.y,
+        String(index + 1),
+        `Comment ${index + 1}: ${comment.text}`,
+        'default',
+      );
+      if (!button) return;
+      if (comment.id === activeId) {
+        button.classList.add('ring-3', 'ring-ring/50');
+      }
+      button.addEventListener('click', () =>
+        this.pdfViewer.activeCommentId.set(comment.id),
+      );
+    });
+
+    const pending = this.pdfViewer.pendingComment();
+    if (pending) {
+      marker(
+        pending.pageNumber,
+        pending.x,
+        pending.y,
+        '+',
+        'New comment',
+        'outline',
+      );
     }
   }
 
@@ -1482,7 +1835,6 @@ export class ScPdfViewerCanvas {
         h.addEventListener('pointerdown', (e) => {
           e.preventDefault();
           e.stopPropagation();
-          const layerRect = editorLayer.getBoundingClientRect();
           this.resizeState = {
             annotationId: ann.id,
             handle,
@@ -1492,8 +1844,8 @@ export class ScPdfViewerCanvas {
             origY: ann.y ?? 0,
             origW: ann.width ?? 0.15,
             origH: ann.height ?? 0.15,
-            layerW: layerRect.width,
-            layerH: layerRect.height,
+            layerW: editorLayer.offsetWidth,
+            layerH: editorLayer.offsetHeight,
           };
         });
 
@@ -1570,15 +1922,14 @@ export class ScPdfViewerCanvas {
       }
 
       // Start drag
-      const layerRect = editorLayer.getBoundingClientRect();
       this.dragState = {
         annotationId: ann.id,
         startX: e.clientX,
         startY: e.clientY,
         origX: ann.x ?? 0,
         origY: ann.y ?? 0,
-        layerW: layerRect.width,
-        layerH: layerRect.height,
+        layerW: editorLayer.offsetWidth,
+        layerH: editorLayer.offsetHeight,
       };
     });
 
@@ -1646,15 +1997,14 @@ export class ScPdfViewerCanvas {
       }
 
       // Start drag
-      const layerRect = editorLayer.getBoundingClientRect();
       this.dragState = {
         annotationId: ann.id,
         startX: e.clientX,
         startY: e.clientY,
         origX: ann.x ?? 0,
         origY: ann.y ?? 0,
-        layerW: layerRect.width,
-        layerH: layerRect.height,
+        layerW: editorLayer.offsetWidth,
+        layerH: editorLayer.offsetHeight,
       };
     });
 
@@ -1731,10 +2081,22 @@ export class ScPdfViewerCanvas {
     }
   };
 
+  /** How far the pointer moved since the drag / resize began, in page units. */
+  private pointerDelta(
+    e: PointerEvent,
+    state: { startX: number; startY: number; layerW: number; layerH: number },
+  ): { dx: number; dy: number } {
+    return this.layerDelta(
+      e.clientX - state.startX,
+      e.clientY - state.startY,
+      state.layerW,
+      state.layerH,
+    );
+  }
+
   private readonly onGlobalPointerMove = (e: PointerEvent): void => {
     if (this.dragState) {
-      const dx = (e.clientX - this.dragState.startX) / this.dragState.layerW;
-      const dy = (e.clientY - this.dragState.startY) / this.dragState.layerH;
+      const { dx, dy } = this.pointerDelta(e, this.dragState);
       const newX = Math.max(0, Math.min(1, this.dragState.origX + dx));
       const newY = Math.max(0, Math.min(1, this.dragState.origY + dy));
 
@@ -1746,10 +2108,7 @@ export class ScPdfViewerCanvas {
         wrapper.style.top = `${newY * 100}%`;
       }
     } else if (this.resizeState) {
-      const dx =
-        (e.clientX - this.resizeState.startX) / this.resizeState.layerW;
-      const dy =
-        (e.clientY - this.resizeState.startY) / this.resizeState.layerH;
+      const { dx } = this.pointerDelta(e, this.resizeState);
       const handle = this.resizeState.handle;
       const aspect = this.resizeState.origH / this.resizeState.origW;
 
@@ -1782,8 +2141,7 @@ export class ScPdfViewerCanvas {
 
   private readonly onGlobalPointerUp = (e: PointerEvent): void => {
     if (this.dragState) {
-      const dx = (e.clientX - this.dragState.startX) / this.dragState.layerW;
-      const dy = (e.clientY - this.dragState.startY) / this.dragState.layerH;
+      const { dx, dy } = this.pointerDelta(e, this.dragState);
       const newX = Math.max(0, Math.min(1, this.dragState.origX + dx));
       const newY = Math.max(0, Math.min(1, this.dragState.origY + dy));
 
@@ -1795,8 +2153,7 @@ export class ScPdfViewerCanvas {
       }
       this.dragState = null;
     } else if (this.resizeState) {
-      const dx =
-        (e.clientX - this.resizeState.startX) / this.resizeState.layerW;
+      const { dx } = this.pointerDelta(e, this.resizeState);
       const handle = this.resizeState.handle;
       const aspect = this.resizeState.origH / this.resizeState.origW;
 

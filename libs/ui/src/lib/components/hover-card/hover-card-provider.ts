@@ -33,6 +33,7 @@ export type ScHoverCardAlign = ScOverlayAlign;
         [cdkConnectedOverlayOrigin]="origin"
         [cdkConnectedOverlayOpen]="overlayOpen()"
         [cdkConnectedOverlayPositions]="positions()"
+        (detach)="onDetach()"
       >
         <ng-container [ngTemplateOutlet]="hoverCardPortal().templateRef" />
       </ng-template>
@@ -106,6 +107,15 @@ export class ScHoverCardProvider {
   /** Called by hover-card when close animation completes */
   onAnimationComplete(): void {
     this.overlayOpen.set(false);
+  }
+
+  /**
+   * The CDK detached the overlay itself (Escape): sync both states, or the
+   * next hover would find them still true and never re-attach.
+   */
+  protected onDetach(): void {
+    if (this.open()) this.open.set(false);
+    if (this.overlayOpen()) this.overlayOpen.set(false);
   }
 
   /** Cancel pending hide timeout on the trigger */

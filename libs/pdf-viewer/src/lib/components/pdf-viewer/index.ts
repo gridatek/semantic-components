@@ -46,9 +46,13 @@ export { ScPdfViewerEditorHighlightParams } from './pdf-viewer-editor-highlight-
 export { ScPdfViewerEditorFreetextParams } from './pdf-viewer-editor-freetext-params';
 export { ScPdfViewerEditorInkParams } from './pdf-viewer-editor-ink-params';
 
+// View options
+export { ScPdfViewerViewOptions } from './pdf-viewer-view-options';
+
 // Dialogs
 export { ScPdfViewerPasswordDialog } from './pdf-viewer-password-dialog';
 export { ScPdfViewerSignatureDialog } from './pdf-viewer-signature-dialog';
+export { ScPdfViewerSignatureList } from './pdf-viewer-signature-list';
 export { ScPdfViewerAltTextDialog } from './pdf-viewer-alt-text-dialog';
 export { ScPdfViewerPrintProgress } from './pdf-viewer-print-progress';
 
@@ -71,6 +75,9 @@ export type { ScPdfEditorColor } from './pdf-viewer-editor-colors';
 export { ZOOM_LEVELS } from './pdf-viewer-types';
 export type {
   ScPdfZoomLevel,
+  ScPdfCursorTool,
+  ScPdfScrollMode,
+  ScPdfSpreadMode,
   ScPdfEditorMode,
   ScPdfEditorAnnotation,
   ScPdfFindState,

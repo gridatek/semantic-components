@@ -6,6 +6,7 @@ test.describe('PDF Viewer Signature Dialog', () => {
     const errors = collectErrors(page);
     await page.goto('/demos/pdf-viewer/pdf-viewer-demo');
     await page.getByRole('button', { name: 'Signature' }).first().click();
+    await page.getByRole('button', { name: 'Add new signature' }).click();
     const tablist = page.getByRole('tablist', { name: 'Signature type' });
     await expect(tablist).toBeVisible();
 

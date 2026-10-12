@@ -1,9 +1,13 @@
 import {
   Component,
+  ElementRef,
   ViewEncapsulation,
   computed,
+  effect,
   inject,
   input,
+  untracked,
+  viewChild,
 } from '@angular/core';
 import { ScInput, cn } from '@semantic-components/ui';
 import { SC_PDF_VIEWER } from './pdf-viewer-root';
@@ -14,6 +18,7 @@ import { SC_PDF_VIEWER } from './pdf-viewer-root';
   imports: [ScInput],
   template: `
     <input
+      #pageInput
       scInput
       type="number"
       inputmode="numeric"
@@ -44,6 +49,21 @@ export class ScPdfViewerPageInfo {
   protected readonly class = computed(() =>
     cn('flex items-center gap-1.5', this.classInput()),
   );
+
+  private readonly pageInput =
+    viewChild.required<ElementRef<HTMLInputElement>>('pageInput');
+
+  constructor() {
+    // Ctrl+Alt+G moves focus here.
+    effect(() => {
+      if (!this.pdfViewer.pageFocusRequest()) return;
+      untracked(() => {
+        const input = this.pageInput().nativeElement;
+        input.focus();
+        input.select();
+      });
+    });
+  }
 
   protected onPageInput(event: Event): void {
     const input = event.target as HTMLInputElement;

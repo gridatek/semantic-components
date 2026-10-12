@@ -1,4 +1,5 @@
 import {
+  DOCUMENT,
   DestroyRef,
   Directive,
   ElementRef,
@@ -8,14 +9,17 @@ import {
   effect,
   inject,
   input,
+  model,
   output,
   signal,
+  untracked,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import type { PDFDocumentProxy } from 'pdfjs-dist';
+import type { PDFDocumentLoadingTask, PDFDocumentProxy } from 'pdfjs-dist';
 import { GlobalWorkerOptions, getDocument, version } from 'pdfjs-dist';
 import type {
   ScPdfComment,
+  ScPdfCursorTool,
   ScPdfEditorAnnotation,
   ScPdfEditorMode,
   ScPdfErrorEvent,
@@ -23,10 +27,15 @@ import type {
   ScPdfLoadEvent,
   ScPdfPageChangeEvent,
   ScPdfPageMatchInfo,
+  ScPdfScrollMode,
   ScPdfSignatureData,
+  ScPdfSpreadMode,
   ScPdfZoomChangeEvent,
   ScPdfZoomLevel,
 } from './pdf-viewer-types';
+
+const MIN_SCALE = 0.25;
+const MAX_SCALE = 4;
 
 export const SC_PDF_VIEWER = new InjectionToken<ScPdfViewerRoot>(
   'SC_PDF_VIEWER',
@@ -41,10 +50,12 @@ export const SC_PDF_VIEWER = new InjectionToken<ScPdfViewerRoot>(
     '[attr.data-loading]': 'isLoading() || null',
     '[attr.data-error]': 'error() ? true : null',
     '[attr.data-fullscreen]': 'isFullscreen() || null',
+    '(keydown)': 'onKeydown($event)',
   },
 })
 export class ScPdfViewerRoot {
   private readonly destroyRef = inject(DestroyRef);
+  private readonly document = inject(DOCUMENT);
 
   readonly classInput = input<string>('', { alias: 'class' });
   protected readonly class = computed(() => cn('block', this.classInput()));
@@ -61,6 +72,24 @@ export class ScPdfViewerRoot {
   readonly pageChange = output<ScPdfPageChangeEvent>();
   readonly zoomChange = output<ScPdfZoomChangeEvent>();
   readonly errorEvent = output<ScPdfErrorEvent>();
+  /** A local file was opened (`openFile()`, `loadFile()`, drag and drop). */
+  readonly fileOpened = output<{ name: string }>();
+
+  /** pdf.js's keyboard shortcuts, while focus is in the viewer. */
+  readonly keyboardShortcuts = input(true);
+  /** Whether the sidebar is open (F4 toggles it). Bind `[(sidebarOpen)]`. */
+  readonly sidebarOpen = model(false);
+  /** Select text, or drag the pages to scroll (S / H). */
+  readonly cursorTool = model<ScPdfCursorTool>('select');
+  /** How the pages are laid out. */
+  readonly scrollMode = model<ScPdfScrollMode>('vertical');
+  /** Single pages or two side by side. */
+  readonly spreadMode = model<ScPdfSpreadMode>('none');
+  /** The scale the pages are drawn at (reported by the canvas). */
+  readonly currentScale = signal(1);
+  /** Incremented to move focus to the find field / the page field. */
+  readonly findFocusRequest = signal(0);
+  readonly pageFocusRequest = signal(0);
 
   // State signals
   readonly isLoading = signal(true);
@@ -124,10 +153,22 @@ export class ScPdfViewerRoot {
 
   // Signature state
   readonly signatureDialogOpen = signal(false);
-  readonly savedSignatures = signal<ScPdfSignatureData[]>([]);
+  /**
+   * Signatures saved for reuse. Bind `[(savedSignatures)]` to keep them
+   * between sessions (pdf.js remembers them).
+   */
+  readonly savedSignatures = model<ScPdfSignatureData[]>([]);
 
   // Comment state
   readonly comments = signal<ScPdfComment[]>([]);
+  /** Where a comment is being added (the comment tool's click), until posted. */
+  readonly pendingComment = signal<{
+    pageNumber: number;
+    x: number;
+    y: number;
+  } | null>(null);
+  /** The comment picked on the page or in the list. */
+  readonly activeCommentId = signal<string | null>(null);
 
   // Undo bar state
   readonly undoBarVisible = signal(false);
@@ -144,6 +185,7 @@ export class ScPdfViewerRoot {
   readonly sidebarWidth = signal(200);
 
   private editorIdCounter = 0;
+  private signatureIdCounter = 0;
   private commentIdCounter = 0;
 
   readonly findResultsMessage = computed(() => {
@@ -163,51 +205,60 @@ export class ScPdfViewerRoot {
   // Computed values
   readonly canGoPrev = computed(() => this.currentPage() > 1);
   readonly canGoNext = computed(() => this.currentPage() < this.totalPages());
-  readonly canZoomIn = computed(() => {
-    const zoom = this.zoom();
-    return typeof zoom !== 'number' || zoom < 4;
-  });
-  readonly canZoomOut = computed(() => {
-    const zoom = this.zoom();
-    return typeof zoom !== 'number' || zoom > 0.25;
-  });
-  readonly hasSource = computed(() => !!this.src());
+  readonly canZoomIn = computed(() => this.currentScale() < MAX_SCALE - 1e-6);
+  readonly canZoomOut = computed(() => this.currentScale() > MIN_SCALE + 1e-6);
+  /** A file opened in the viewer (`openFile()`, drag and drop) instead of `src`. */
+  readonly localFile = signal<File | null>(null);
+  readonly hasSource = computed(() => !!this.src() || !!this.localFile());
   readonly showContent = computed(() => this.hasSource() && !this.error());
+  /** Download progress of the document being loaded (0–1), or null if unknown. */
+  readonly loadProgress = signal<number | null>(null);
+  /** The file name used for downloads. */
+  readonly downloadName = computed(
+    () =>
+      this.localFile()?.name.replace(/\.pdf$/i, '') ||
+      this.title() ||
+      'document',
+  );
 
+  /** The document being loaded; destroyed when another load starts. */
+  private loadingTask: PDFDocumentLoadingTask | null = null;
   private workerReady = false;
 
   constructor() {
     this.currentPage.set(this.initialPage());
     this.zoom.set(this.initialZoom());
 
-    // Initialize worker and load initial document after first render
+    // Browser only: the worker, the first document, fullscreen tracking.
     afterNextRender(() => {
       this.initWorker();
       this.workerReady = true;
+      if (this.src()) this.open({ url: this.src() });
 
-      const source = this.src();
-      if (source) {
-        this.loadDocument(source);
-      }
+      const onFullscreenChange = () =>
+        this.isFullscreen.set(!!this.document.fullscreenElement);
+      this.document.addEventListener('fullscreenchange', onFullscreenChange);
+      this.destroyRef.onDestroy(() =>
+        this.document.removeEventListener(
+          'fullscreenchange',
+          onFullscreenChange,
+        ),
+      );
     });
 
-    // Watch src for subsequent changes (after worker is ready)
+    // A new `src` replaces the document (and a file opened in the viewer);
+    // an empty one clears it.
     effect(() => {
       const source = this.src();
       if (!this.workerReady) return;
-      if (source) {
-        this.loadDocument(source);
-      }
+      untracked(() => {
+        this.localFile.set(null);
+        this.open(source ? { url: source } : null);
+      });
     });
 
-    const handleFullscreenChange = () => {
-      this.isFullscreen.set(!!document.fullscreenElement);
-    };
-
-    document.addEventListener('fullscreenchange', handleFullscreenChange);
-
     this.destroyRef.onDestroy(() => {
-      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+      this.loadingTask?.destroy();
       this.pdfDocument()?.loadingTask.destroy();
       if (this.undoTimeout) {
         clearTimeout(this.undoTimeout);
@@ -224,43 +275,99 @@ export class ScPdfViewerRoot {
     }
   }
 
-  private async loadDocument(url: string): Promise<void> {
-    this.isLoading.set(true);
+  /**
+   * Loads a document, replacing the current one. A load that's overtaken by
+   * another (a new `src`, a file opened meanwhile) is cancelled and ignored.
+   */
+  private async open(
+    source: { url: string } | { data: Uint8Array } | null,
+  ): Promise<void> {
+    this.loadingTask?.destroy();
+    this.loadingTask = null;
+
+    // Release the previous document once nothing renders it any more.
+    const previous = this.pdfDocument();
+    this.pdfDocument.set(null);
+    previous?.loadingTask.destroy();
+    this.clearFind();
+    this.pendingComment.set(null);
     this.error.set(null);
     this.passwordRequired.set(false);
+    this.passwordCallback = null;
+    this.loadProgress.set(null);
+
+    if (!source) {
+      this.isLoading.set(false);
+      return;
+    }
+
+    this.isLoading.set(true);
+    const task = getDocument(source);
+    this.loadingTask = task;
+
+    task.onPassword = (
+      updateCallback: (password: string | Error) => void,
+      reason: number,
+    ) => {
+      if (task !== this.loadingTask) return;
+      this.isLoading.set(false);
+      this.passwordRequired.set(true);
+      this.passwordReason.set(
+        reason === 2 ? 'incorrect-password' : 'need-password',
+      );
+      this.passwordCallback = updateCallback;
+    };
+    task.onProgress = ({
+      loaded,
+      total,
+    }: {
+      loaded: number;
+      total: number;
+    }) => {
+      if (task === this.loadingTask && total > 0) {
+        this.loadProgress.set(Math.min(1, loaded / total));
+      }
+    };
 
     try {
-      // Destroy previous document if any
-      this.pdfDocument()?.loadingTask.destroy();
-
-      const loadingTask = getDocument({ url });
-
-      // Handle password-protected PDFs
-      loadingTask.onPassword = (
-        updateCallback: (password: string | Error) => void,
-        reason: number,
-      ) => {
-        this.isLoading.set(false);
-        this.passwordRequired.set(true);
-        this.passwordReason.set(
-          reason === 2 ? 'incorrect-password' : 'need-password',
-        );
-        this.passwordCallback = updateCallback;
-      };
-
-      const doc = await loadingTask.promise;
-      this.clearFind();
+      const doc = await task.promise;
+      if (task !== this.loadingTask) return;
+      this.loadingTask = null;
       this.pdfDocument.set(doc);
       this.totalPages.set(doc.numPages);
+      this.currentPage.set(
+        Math.min(Math.max(1, this.initialPage()), doc.numPages),
+      );
       this.isLoading.set(false);
       this.passwordRequired.set(false);
+      this.loadProgress.set(1);
       this.loaded.emit({ totalPages: doc.numPages });
     } catch (err) {
-      if (this.passwordRequired()) return;
+      if (task !== this.loadingTask || this.passwordRequired()) return;
+      this.loadingTask = null;
       const message =
         err instanceof Error ? err.message : 'Unable to load the PDF document.';
       this.onError(message);
     }
+  }
+
+  /** Opens a local file (e.g. from a file input or drag and drop). */
+  async loadFile(file: File): Promise<void> {
+    this.localFile.set(file);
+    this.fileOpened.emit({ name: file.name });
+    await this.open({ data: new Uint8Array(await file.arrayBuffer()) });
+  }
+
+  /** Asks the user for a PDF file and opens it. */
+  openFile(): void {
+    const input = this.document.createElement('input');
+    input.type = 'file';
+    input.accept = '.pdf,application/pdf';
+    input.addEventListener('change', () => {
+      const file = input.files?.[0];
+      if (file) this.loadFile(file);
+    });
+    input.click();
   }
 
   // Methods for child components to call
@@ -284,23 +391,56 @@ export class ScPdfViewerRoot {
   }
 
   retry(): void {
-    this.error.set(null);
-    const source = this.src();
-    if (source) {
-      this.loadDocument(source);
+    const file = this.localFile();
+    if (file) {
+      this.loadFile(file);
+    } else if (this.src()) {
+      this.open({ url: this.src() });
     }
   }
 
+  /** The previous page — the previous spread in page scroll mode. */
   goToPrevPage(): void {
-    if (this.canGoPrev()) {
+    if (!this.canGoPrev()) return;
+    if (this.scrollMode() === 'page') {
+      const [first] = this.spreadOf(this.currentPage());
+      this.goToPage(this.spreadOf(Math.max(1, first - 1))[0]);
+    } else {
       this.goToPage(this.currentPage() - 1);
     }
   }
 
+  /** The next page — the next spread in page scroll mode. */
   goToNextPage(): void {
-    if (this.canGoNext()) {
+    if (!this.canGoNext()) return;
+    if (this.scrollMode() === 'page') {
+      const [, last] = this.spreadOf(this.currentPage());
+      this.goToPage(Math.min(this.totalPages(), last + 1));
+    } else {
       this.goToPage(this.currentPage() + 1);
     }
+  }
+
+  /** The first and last page of the spread holding `page`. */
+  spreadOf(page: number): [number, number] {
+    const mode = this.spreadMode();
+    if (mode === 'none') return [page, page];
+    // Odd spreads pair 1–2, 3–4…; even spreads show 1 alone, then 2–3, 4–5…
+    const first =
+      mode === 'odd'
+        ? page % 2 === 1
+          ? page
+          : page - 1
+        : page === 1
+          ? 1
+          : page % 2 === 0
+            ? page
+            : page - 1;
+    const last =
+      mode === 'even' && first === 1
+        ? 1
+        : Math.min(first + 1, this.totalPages());
+    return [first, last];
   }
 
   goToPage(page: number): void {
@@ -314,30 +454,25 @@ export class ScPdfViewerRoot {
     }
   }
 
+  /** To the next 25% step above the current scale (up to 400%). */
   zoomIn(): void {
-    const current = this.zoom();
-    let newZoom: number;
-
-    if (typeof current === 'number') {
-      newZoom = Math.min(current + 0.25, 4);
-    } else {
-      newZoom = 1.25;
-    }
-
-    this.setZoom(newZoom);
+    const steps = Math.floor(this.currentScale() * 4 + 1e-6) + 1;
+    this.setZoom(Math.min(MAX_SCALE, steps / 4));
   }
 
+  /** To the next 25% step below the current scale (down to 25%). */
   zoomOut(): void {
-    const current = this.zoom();
-    let newZoom: number;
+    const steps = Math.ceil(this.currentScale() * 4 - 1e-6) - 1;
+    this.setZoom(Math.max(MIN_SCALE, steps / 4));
+  }
 
-    if (typeof current === 'number') {
-      newZoom = Math.max(current - 0.25, 0.25);
-    } else {
-      newZoom = 0.75;
-    }
-
-    this.setZoom(newZoom);
+  /** Multiplies the current scale (wheel and pinch zoom). */
+  zoomBy(factor: number): void {
+    const scale = Math.min(
+      MAX_SCALE,
+      Math.max(MIN_SCALE, this.currentScale() * factor),
+    );
+    this.setZoom(Math.round(scale * 1000) / 1000);
   }
 
   setZoom(level: ScPdfZoomLevel): void {
@@ -356,49 +491,25 @@ export class ScPdfViewerRoot {
     this.rotation.update((r) => (r + 90) % 360);
   }
 
+  /** Downloads the document as it was loaded. */
   async download(): Promise<void> {
     const doc = this.pdfDocument();
-    const source = this.src();
-    if (!source) return;
+    if (!doc) return;
+    const data = await doc.getData();
+    this.saveAs(
+      new Blob([data as Uint8Array<ArrayBuffer>], { type: 'application/pdf' }),
+      this.downloadName() + '.pdf',
+    );
+  }
 
-    const filename = (this.title() || 'document') + '.pdf';
-
-    // Try to get raw data from the loaded document
-    if (doc) {
-      try {
-        const data = await doc.getData();
-        const blob = new Blob([data.buffer as ArrayBuffer], {
-          type: 'application/pdf',
-        });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = filename;
-        link.click();
-        URL.revokeObjectURL(url);
-        return;
-      } catch {
-        // Fall through to fetch
-      }
-    }
-
-    // Fallback: fetch the source URL as blob
-    try {
-      const response = await fetch(source);
-      const blob = await response.blob();
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = filename;
-      link.click();
-      URL.revokeObjectURL(url);
-    } catch {
-      // Last resort: direct link (may navigate instead of download)
-      const link = document.createElement('a');
-      link.href = source;
-      link.download = filename;
-      link.click();
-    }
+  private saveAs(blob: Blob, filename: string): void {
+    const url = URL.createObjectURL(blob);
+    const link = this.document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    link.click();
+    // Give the browser time to start the download before releasing the file.
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
 
   async printWithProgress(): Promise<void> {
@@ -526,7 +637,7 @@ export class ScPdfViewerRoot {
   }
 
   addSavedSignature(sig: Omit<ScPdfSignatureData, 'id'>): void {
-    const id = `sig-${Date.now()}`;
+    const id = `sig-${Date.now()}-${++this.signatureIdCounter}`;
     this.savedSignatures.update((list) => [...list, { ...sig, id }]);
   }
 
@@ -534,14 +645,75 @@ export class ScPdfViewerRoot {
     this.savedSignatures.update((list) => list.filter((s) => s.id !== id));
   }
 
+  updateSavedSignature(id: string, description: string): void {
+    this.savedSignatures.update((list) =>
+      list.map((s) => (s.id === id ? { ...s, description } : s)),
+    );
+  }
+
+  /** Places a signature image on the current page. */
+  placeSignature(dataUrl: string, description = ''): void {
+    this.addEditorAnnotation({
+      type: 'signature',
+      pageNumber: this.currentPage(),
+      x: 0.3,
+      y: 0.8,
+      imageDataUrl: dataUrl,
+      width: 0.25,
+      height: 0.1,
+      description,
+    });
+    this.editorMode.set('none');
+  }
+
   // Comment methods
-  addComment(comment: Omit<ScPdfComment, 'id'>): void {
+  addComment(comment: Omit<ScPdfComment, 'id'>): string {
     const id = `comment-${++this.commentIdCounter}`;
     this.comments.update((list) => [...list, { ...comment, id }]);
+    return id;
   }
 
   removeComment(id: string): void {
     this.comments.update((list) => list.filter((c) => c.id !== id));
+    if (this.activeCommentId() === id) this.activeCommentId.set(null);
+  }
+
+  /** Starts a comment at a point of a page (positions are 0–1 of the page). */
+  startComment(pageNumber: number, x: number, y: number): void {
+    this.pendingComment.set({ pageNumber, x, y });
+    this.editorMode.set('none');
+  }
+
+  cancelComment(): void {
+    this.pendingComment.set(null);
+  }
+
+  /** Posts the pending comment (or one on the current page) and selects it. */
+  postComment(text: string, author = 'User'): void {
+    const place = this.pendingComment() ?? {
+      pageNumber: this.currentPage(),
+      x: 0.5,
+      y: 0.1,
+    };
+    const id = this.addComment({
+      ...place,
+      text,
+      author,
+      date: new Date().toLocaleString(),
+      color: '#FFFF00',
+    });
+    this.pendingComment.set(null);
+    this.activeCommentId.set(id);
+  }
+
+  /** Selects a comment and shows its page. */
+  showComment(id: string): void {
+    const comment = this.comments().find((c) => c.id === id);
+    if (!comment) return;
+    this.activeCommentId.set(id);
+    if (comment.pageNumber !== this.currentPage()) {
+      this.goToPage(comment.pageNumber);
+    }
   }
 
   updateComment(id: string, text: string): void {
@@ -551,9 +723,158 @@ export class ScPdfViewerRoot {
   }
 
   // Find methods
+  /**
+   * pdf.js's keyboard shortcuts. Only while focus is in the viewer, and not
+   * while typing in a field (apart from Escape and Ctrl/⌘ shortcuts).
+   */
+  protected onKeydown(event: KeyboardEvent): void {
+    if (!this.keyboardShortcuts() || event.defaultPrevented) return;
+    const ctrl = event.ctrlKey || event.metaKey;
+    const { altKey: alt, shiftKey: shift, key } = event;
+    const target = event.target as HTMLElement;
+    const typing =
+      target.isContentEditable ||
+      /^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName);
+    const last = this.totalPages();
+    let handled = true;
+
+    if (ctrl && alt && !shift) {
+      switch (key.toLowerCase()) {
+        case 'p':
+          this.togglePresentation();
+          break;
+        case 'g':
+          this.pageFocusRequest.update((v) => v + 1);
+          break;
+        default:
+          handled = false;
+      }
+    } else if (ctrl && !alt) {
+      switch (key) {
+        case 'f':
+        case 'F':
+          this.openFind();
+          break;
+        case 'g':
+        case 'G':
+          if (shift) this.findPrevious();
+          else this.findNext();
+          break;
+        case '+':
+        case '=':
+          this.zoomIn();
+          break;
+        case '-':
+        case '_':
+          this.zoomOut();
+          break;
+        case '0':
+          this.setZoom('auto');
+          break;
+        case 'ArrowUp':
+          handled = !typing && !shift;
+          if (handled) this.goToPage(1);
+          break;
+        case 'ArrowDown':
+          handled = !typing && !shift;
+          if (handled) this.goToPage(last);
+          break;
+        case 's':
+          this.download();
+          break;
+        case 'o':
+          this.openFile();
+          break;
+        case 'p':
+          this.printWithProgress();
+          break;
+        default:
+          handled = false;
+      }
+    } else if (!ctrl && !alt && key === 'Escape' && this.findOpen()) {
+      this.toggleFind();
+    } else if (
+      !ctrl &&
+      !alt &&
+      !typing &&
+      this.scrollMode() === 'page' &&
+      this.pageModeKey(key, shift, target)
+    ) {
+      // Handled: page mode turns spreads with these keys.
+    } else if (!ctrl && !alt && !typing) {
+      switch (key) {
+        case 'n':
+        case 'j':
+          this.goToNextPage();
+          break;
+        case 'p':
+        case 'k':
+          this.goToPrevPage();
+          break;
+        case 'Home':
+          this.goToPage(1);
+          break;
+        case 'End':
+          this.goToPage(last);
+          break;
+        case 'r':
+          this.rotateRight();
+          break;
+        case 'R':
+          this.rotateLeft();
+          break;
+        case 's':
+          this.cursorTool.set('select');
+          break;
+        case 'h':
+          this.cursorTool.set('hand');
+          break;
+        case 'F4':
+          this.sidebarOpen.update((open) => !open);
+          break;
+        default:
+          handled = false;
+      }
+    } else {
+      handled = false;
+    }
+
+    if (handled) event.preventDefault();
+  }
+
+  /** Page Down / → / Space: next spread; Page Up / ← / Shift+Space: previous. */
+  private pageModeKey(
+    key: string,
+    shift: boolean,
+    target: HTMLElement,
+  ): boolean {
+    const space = key === ' ' && target.tagName !== 'BUTTON';
+    if (key === 'PageDown' || key === 'ArrowRight' || (space && !shift)) {
+      this.goToNextPage();
+      return true;
+    }
+    if (key === 'PageUp' || key === 'ArrowLeft' || (space && shift)) {
+      this.goToPrevPage();
+      return true;
+    }
+    return false;
+  }
+
+  /** Opens the find bar and focuses its field. */
+  openFind(): void {
+    this.findOpen.set(true);
+    this.findFocusRequest.update((v) => v + 1);
+  }
+
+  /** Presentation mode (fullscreen for now). */
+  togglePresentation(): void {
+    this.toggleFullscreen();
+  }
+
   toggleFind(): void {
     const open = !this.findOpen();
     this.findOpen.set(open);
+    if (open) this.findFocusRequest.update((v) => v + 1);
     if (!open) {
       this.clearFind();
     }

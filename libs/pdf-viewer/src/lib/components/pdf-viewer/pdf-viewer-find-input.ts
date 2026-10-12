@@ -1,4 +1,12 @@
-import { Directive, computed, inject, input } from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  computed,
+  effect,
+  inject,
+  input,
+  untracked,
+} from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { SC_PDF_VIEWER } from './pdf-viewer-root';
 
@@ -28,6 +36,21 @@ export class ScPdfViewerFindInput {
   readonly placeholder = input('Find in document…');
 
   protected readonly class = computed(() => cn(this.classInput()));
+
+  constructor() {
+    // Opening the find bar (or Ctrl+F) puts the cursor here.
+    const element =
+      inject<ElementRef<HTMLInputElement>>(ElementRef).nativeElement;
+    effect(() => {
+      if (!this.pdfViewer.findFocusRequest()) return;
+      untracked(() =>
+        requestAnimationFrame(() => {
+          element.focus();
+          element.select();
+        }),
+      );
+    });
+  }
 
   protected onInput(event: Event): void {
     this.pdfViewer.find((event.target as HTMLInputElement).value);

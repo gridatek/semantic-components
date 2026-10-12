@@ -29,7 +29,16 @@ export interface ScPdfPageMatchInfo {
 }
 
 export type ScPdfEditorMode =
-  'none' | 'highlight' | 'freetext' | 'ink' | 'stamp' | 'signature';
+  'none' | 'highlight' | 'freetext' | 'ink' | 'stamp' | 'signature' | 'comment';
+
+/** Select text, or drag the pages to scroll. */
+export type ScPdfCursorTool = 'select' | 'hand';
+
+/** One spread at a time, or all pages in a column, a row, or wrapped. */
+export type ScPdfScrollMode = 'page' | 'vertical' | 'horizontal' | 'wrapped';
+
+/** Single pages, or two side by side starting with an odd / even page. */
+export type ScPdfSpreadMode = 'none' | 'odd' | 'even';
 
 export interface ScPdfEditorAnnotation {
   id: string;

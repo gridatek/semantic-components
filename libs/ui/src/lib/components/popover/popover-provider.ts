@@ -35,8 +35,10 @@ export type ScPopoverAlign = ScOverlayAlign;
         [cdkConnectedOverlayOrigin]="origin"
         [cdkConnectedOverlayOpen]="overlayOpen()"
         [cdkConnectedOverlayPositions]="positions()"
+        [cdkConnectedOverlayDisableClose]="true"
         (overlayOutsideClick)="close()"
         (overlayKeydown)="onKeydown($event)"
+        (detach)="onDetach()"
       >
         <div cdkTrapFocus [cdkTrapFocusAutoCapture]="true">
           <ng-container [ngTemplateOutlet]="popoverPortal().templateRef" />
@@ -117,6 +119,16 @@ export class ScPopoverProvider {
     if (!this.open()) {
       this.overlayOpen.set(false);
     }
+  }
+
+  /**
+   * The overlay went away without our close animation (e.g. the CDK detached
+   * it): sync both states, or the next open would find `overlayOpen` still
+   * true and never re-attach.
+   */
+  protected onDetach(): void {
+    if (this.open()) this.open.set(false);
+    if (this.overlayOpen()) this.overlayOpen.set(false);
   }
 
   protected onKeydown(event: KeyboardEvent): void {
