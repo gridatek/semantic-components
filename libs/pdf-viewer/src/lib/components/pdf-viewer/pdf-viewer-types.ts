@@ -154,6 +154,13 @@ export interface ScPdfLayer {
   visible: boolean;
 }
 
+/** Colours to draw the pages with: their text and lines, on a background. */
+export interface ScPdfPageColors {
+  /** Any CSS colour (system colours too, e.g. `CanvasText`). */
+  foreground: string;
+  background: string;
+}
+
 /** A viewer setting the consumer's controls bind to (`scPdfViewerSetting`). */
 export type ScPdfViewerSettingKey =
   | 'cursorTool'

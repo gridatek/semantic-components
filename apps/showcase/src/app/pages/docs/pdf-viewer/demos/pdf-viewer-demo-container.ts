@@ -42,6 +42,7 @@ import {
   ScPdfViewerAnnotationDelete,
   ScPdfViewerAnnotationToolbar,
   ScPdfViewerAttachment,
+  ScPdfViewerBack,
   ScPdfViewerCanvas,
   ScPdfViewerComment,
   ScPdfViewerCommentAdd,
@@ -67,6 +68,7 @@ import {
   ScPdfViewerFindResultsInfo,
   ScPdfViewerFindToggle,
   ScPdfViewerFindbar,
+  ScPdfViewerForward,
   ScPdfViewerGoToPage,
   ScPdfViewerInsertPages,
   ScPdfViewerLayer,
@@ -173,6 +175,8 @@ import {
 } from '@semantic-components/ui';
 import {
   SiArrowDownIcon,
+  SiArrowLeftIcon,
+  SiArrowRightIcon,
   SiArrowUpIcon,
   SiBookOpenIcon,
   SiChevronDownIcon,
@@ -251,6 +255,8 @@ const INK_COLORS = [
     ScPdfViewerContainer,
     ScPdfViewerToolbar,
     ScPdfViewerNav,
+    ScPdfViewerBack,
+    ScPdfViewerForward,
     ScPdfViewerPrevPage,
     ScPdfViewerNextPage,
     ScPdfViewerPageInput,
@@ -383,6 +389,8 @@ const INK_COLORS = [
     ScEmptyBody,
     ScSpinner,
     SiArrowDownIcon,
+    SiArrowLeftIcon,
+    SiArrowRightIcon,
     SiArrowUpIcon,
     SiBookOpenIcon,
     SiChevronDownIcon,
@@ -468,6 +476,28 @@ const INK_COLORS = [
           <div scSeparator orientation="vertical"></div>
 
           <div scPdfViewerNav aria-label="Page navigation">
+            <button
+              scButton
+              variant="ghost"
+              size="icon"
+              scPdfViewerBack
+              aria-label="Back"
+              [scTooltipTrigger]="'Back'"
+              tooltipPosition="bottom"
+            >
+              <svg siArrowLeftIcon></svg>
+            </button>
+            <button
+              scButton
+              variant="ghost"
+              size="icon"
+              scPdfViewerForward
+              aria-label="Forward"
+              [scTooltipTrigger]="'Forward'"
+              tooltipPosition="bottom"
+            >
+              <svg siArrowRightIcon></svg>
+            </button>
             <button
               scButton
               variant="ghost"

@@ -34,17 +34,14 @@ import { SC_PDF_VIEWER } from './pdf-viewer';
 import { ScPdfViewerAnnotationToolbar } from './pdf-viewer-annotation-toolbar';
 import { inferLinkAnnotations } from './pdf-viewer-autolink';
 import { ScPdfViewerCommentMarker } from './pdf-viewer-comment-marker';
+import { ScPdfDetailCanvas } from './pdf-viewer-detail-canvas';
+import type { ScPdfPageBox } from './pdf-viewer-output-scale';
+import { pageBox } from './pdf-viewer-output-scale';
 import { ScPdfStructTree } from './pdf-viewer-struct-tree';
 import { ScPdfTextSelection } from './pdf-viewer-text-selection';
 import type { ScPdfComment, ScPdfEditorAnnotation } from './pdf-viewer-types';
 
 const DEFAULT_LINK_REL = 'noopener noreferrer nofollow';
-
-/**
- * Canvases bigger than this are drawn at a lower resolution: browsers refuse
- * (blank page) or run out of memory beyond it (pdf.js uses the same limit).
- */
-const MAX_CANVAS_PIXELS = 16_777_216;
 
 /** Pages within one viewport height above or below are kept rendered. */
 const RENDER_MARGIN = '100% 0px';
@@ -179,7 +176,7 @@ class PdfLinkService {
       pageNumber > 0 &&
       pageNumber <= this.pagesCount
     ) {
-      this.viewer.goToPage(pageNumber);
+      this.viewer.jumpToPage(pageNumber);
     }
   }
 
@@ -201,8 +198,12 @@ class PdfLinkService {
       case 'LastPage':
         this.viewer.goToPage(this.viewer.totalPages());
         break;
-      // GoBack / GoForward would navigate the host page's history (away
-      // from the app), so they're ignored.
+      case 'GoBack':
+        this.viewer.goBack();
+        break;
+      case 'GoForward':
+        this.viewer.goForward();
+        break;
     }
   }
 
@@ -241,23 +242,38 @@ interface PageLayout {
             [hidden]="!isSpreadShown(spread)"
           >
             @for (page of spread; track page.pageNumber) {
-              <!-- pdf.js sizes its layers with round(…, var(--scale-round-*)),
-                   which its own viewer defines on each page. -->
+              <!-- pdf.js sizes its layers with round(…, var(--scale-round-*));
+                   the page's size is rounded the same way, so canvas pixels
+                   line up with the screen's. -->
+              @let box = pageBox(page);
               <div
-                class="bg-background relative shrink-0 shadow-sm [--scale-round-x:1px] [--scale-round-y:1px]"
+                class="bg-background relative shrink-0 shadow-sm"
                 [attr.data-page]="page.pageNumber"
                 [attr.role]="pageName() ? 'region' : null"
                 [attr.aria-label]="pageAriaLabel(page.pageNumber)"
-                [style.width.px]="displayWidth(page) * scaledValue()"
-                [style.height.px]="displayHeight(page) * scaledValue()"
+                [style.width.px]="box.width"
+                [style.height.px]="box.height"
+                [style.--scale-round-x]="box.roundX + 'px'"
+                [style.--scale-round-y]="box.roundY + 'px'"
+                [style.background-color]="
+                  pdfViewer.appliedPageColors()?.background ?? null
+                "
                 [style.cursor]="pageCursor()"
               >
                 <canvas
+                  class="block size-full"
                   width="0"
                   height="0"
                   [attr.data-page]="page.pageNumber"
-                  [style.width.px]="displayWidth(page) * scaledValue()"
-                  [style.height.px]="displayHeight(page) * scaledValue()"
+                ></canvas>
+                <!-- The visible part, sharp, when the page's canvas can't be. -->
+                <canvas
+                  class="absolute"
+                  width="0"
+                  height="0"
+                  hidden
+                  aria-hidden="true"
+                  [attr.data-detail-page]="page.pageNumber"
                 ></canvas>
                 <div
                   class="textLayer"
@@ -276,8 +292,8 @@ interface PageLayout {
                 <div
                   #layer
                   class="editorLayer absolute top-1/2 left-1/2 z-[5]"
-                  [style.width.px]="page.width * scaledValue()"
-                  [style.height.px]="page.height * scaledValue()"
+                  [style.width.px]="sideways() ? box.height : box.width"
+                  [style.height.px]="sideways() ? box.width : box.height"
                   [style.transform]="
                     'translate(-50%, -50%) rotate(' + rotation() + 'deg)'
                   "
@@ -590,15 +606,22 @@ export class ScPdfViewerCanvas {
 
   private readonly linkService = new PdfLinkService(this.pdfViewer);
   /** Drag-selecting text as in pdf.js (no jumping to the end of the page). */
-  private readonly textSelection = new ScPdfTextSelection();
+  private readonly textSelection = new ScPdfTextSelection(() =>
+    this.pdfViewer.canCopy(),
+  );
 
   private activeRenderTasks = new Map<number, RenderTask>();
   private activeTextLayers = new Map<number, TextLayer>();
   private renderedPages = new Set<number>();
   private structTrees = new WeakMap<PDFPageProxy, ScPdfStructTree>();
+  /** The sharp visible part of pages drawn below the screen's density. */
+  private readonly detail = new ScPdfDetailCanvas();
+  /** Rendered pages drawn below the screen's density. */
+  private readonly restrictedPages = new Set<number>();
+  private detailFrame = 0;
   private textLayerData = new Map<
     number,
-    { divs: HTMLElement[]; texts: string[]; eols: boolean[] }
+    { divs: HTMLElement[]; texts: string[] }
   >();
   private resizeObserver: ResizeObserver | null = null;
   private renderTimeout: ReturnType<typeof setTimeout> | null = null;
@@ -615,7 +638,7 @@ export class ScPdfViewerCanvas {
   private pendingNavigation: { page: number; top: number } | null = null;
 
   /** Rotated a quarter turn: the page's width and height swap on screen. */
-  private readonly sideways = computed(() => this.rotation() % 180 !== 0);
+  protected readonly sideways = computed(() => this.rotation() % 180 !== 0);
 
   protected displayWidth(page: PageLayout): number {
     return this.sideways() ? page.height : page.width;
@@ -623,6 +646,33 @@ export class ScPdfViewerCanvas {
 
   protected displayHeight(page: PageLayout): number {
     return this.sideways() ? page.width : page.height;
+  }
+
+  /** Each page's size on screen and its canvas's (pdf.js's rounding). */
+  private readonly pageBoxes = computed(() => {
+    const scale = this.scaledValue();
+    const dpr = this.dpr();
+    return new Map(
+      this.pageLayouts().map((page) => [
+        page.pageNumber,
+        pageBox(
+          this.displayWidth(page) * scale,
+          this.displayHeight(page) * scale,
+          dpr,
+        ),
+      ]),
+    );
+  });
+
+  protected pageBox(page: PageLayout): ScPdfPageBox {
+    return (
+      this.pageBoxes().get(page.pageNumber) ??
+      pageBox(
+        this.displayWidth(page) * this.scaledValue(),
+        this.displayHeight(page) * this.scaledValue(),
+        this.dpr(),
+      )
+    );
   }
 
   /** The pages grouped into spreads (one or two side by side). */
@@ -887,6 +937,9 @@ export class ScPdfViewerCanvas {
       this.pdfViewer.scrollMode();
       // A layer shown or hidden.
       this.pdfViewer.layers();
+      // Forms drawn as fields, or read-only (permissions).
+      this.pdfViewer.canFillForms();
+      this.pdfViewer.appliedPageColors();
       if (this.pageCount() === 0) return;
 
       untracked(() => {
@@ -949,7 +1002,11 @@ export class ScPdfViewerCanvas {
       document.addEventListener('keydown', this.onAnnotationKeyDown);
     });
 
+    // Back / Forward remember where the pages were scrolled to.
+    this.pdfViewer.setLocator(() => this.location());
+
     this.destroyRef.onDestroy(() => {
+      this.pdfViewer.setLocator(null);
       document.removeEventListener('mouseup', this.onHighlightMouseUp);
       document.removeEventListener('pointermove', this.onGlobalPointerMove);
       document.removeEventListener('pointerup', this.onGlobalPointerUp);
@@ -960,6 +1017,11 @@ export class ScPdfViewerCanvas {
       this.visibilityObserver?.disconnect();
       this.resizeObserver?.disconnect();
       this.dprQuery?.removeEventListener('change', this.onDprChange);
+      this.scrollContainer()?.nativeElement.removeEventListener(
+        'scroll',
+        this.onScroll,
+      );
+      cancelAnimationFrame(this.detailFrame);
       this.cancelAllRenderTasks();
       if (this.renderTimeout) {
         clearTimeout(this.renderTimeout);
@@ -1081,6 +1143,8 @@ export class ScPdfViewerCanvas {
       },
       { root: container, threshold: VISIBILITY_THRESHOLDS },
     );
+
+    container.addEventListener('scroll', this.onScroll, { passive: true });
   }
 
   /**
@@ -1170,6 +1234,28 @@ export class ScPdfViewerCanvas {
     }
   }
 
+  /**
+   * Where the pages are scrolled to: the current page, and how far down
+   * it the viewport's top is (in page units, as `scrollToPage` takes it).
+   */
+  private location(): { page: number; top: number } {
+    const page = this.pdfViewer.currentPage();
+    const container = this.scrollContainer()?.nativeElement;
+    const pageEl = container?.querySelector<HTMLElement>(
+      `div[data-page="${page}"]`,
+    );
+    if (!container || !pageEl) return { page, top: 0 };
+    const box = pageEl.getBoundingClientRect();
+    const scrolled =
+      (container.getBoundingClientRect().top - box.top) / box.height;
+    const down = Math.min(1, Math.max(0, scrolled));
+    const rotation = this.rotation();
+    return {
+      page,
+      top: rotation === 0 ? down : rotation === 180 && down > 0 ? 1 - down : 0,
+    };
+  }
+
   /** Frees a page that's far from the viewport; it's redrawn on return. */
   private releasePage(pageNumber: number): void {
     this.activeRenderTasks.get(pageNumber)?.cancel();
@@ -1190,6 +1276,11 @@ export class ScPdfViewerCanvas {
       // The structure tree, whose text goes with the text layer.
       canvas.textContent = '';
     }
+    this.restrictedPages.delete(pageNumber);
+    this.detail.reset(
+      pageNumber,
+      container.querySelector(`canvas[data-detail-page="${pageNumber}"]`),
+    );
     this.pdfViewer.pageReleased(pageNumber);
     const textLayer = container.querySelector<HTMLElement>(
       `[data-textlayer-page="${pageNumber}"]`,
@@ -1415,10 +1506,9 @@ export class ScPdfViewerCanvas {
       }
       const natural = page.getViewport({ scale: 1 });
       this.correctPageLayout(pageNumber, natural.width, natural.height);
-      const viewport = this.pageViewport(
-        page,
-        this.scaledValue() * this.outputScale(natural),
-      );
+      // At the CSS scale; the transform takes it to the canvas's pixels.
+      const viewport = this.pageViewport(page, this.scaledValue());
+      const box = pageBox(viewport.width, viewport.height, this.dpr());
 
       const container = this.scrollContainer()?.nativeElement;
       if (!container) return;
@@ -1426,31 +1516,46 @@ export class ScPdfViewerCanvas {
       const canvas = container.querySelector(
         `canvas[data-page="${pageNumber}"]`,
       ) as HTMLCanvasElement;
-      if (!canvas) return;
+      if (!canvas || !box.width || !box.height) return;
 
-      canvas.width = viewport.width;
-      canvas.height = viewport.height;
+      canvas.width = box.canvasWidth;
+      canvas.height = box.canvasHeight;
 
-      // Form fields are drawn by the annotation layer (as HTML), not here.
-      const optionalContent = this.pdfViewer.optionalContent();
       // Annotations that draw on their own canvas get it here, and the
       // annotation layer puts it in place.
       const annotationCanvasMap = new Map<string, HTMLCanvasElement>();
       const renderTask = page.render({
+        ...this.renderParams(),
         canvas,
         viewport,
-        annotationMode: AnnotationMode.ENABLE_FORMS,
+        transform: [
+          box.canvasWidth / box.width,
+          0,
+          0,
+          box.canvasHeight / box.height,
+          0,
+          0,
+        ],
         annotationCanvasMap,
-        // The layers as shown / hidden in the viewer.
-        ...(optionalContent && {
-          optionalContentConfigPromise: Promise.resolve(optionalContent),
-        }),
-      });
+      } as Parameters<PDFPageProxy['render']>[0]);
 
       this.activeRenderTasks.set(pageNumber, renderTask);
 
       await renderTask.promise;
       this.activeRenderTasks.delete(pageNumber);
+      this.pdfViewer.scheduleCleanup();
+
+      // The previous detail was drawn at the previous scale.
+      this.detail.reset(
+        pageNumber,
+        container.querySelector(`canvas[data-detail-page="${pageNumber}"]`),
+      );
+      if (box.restricted) {
+        this.restrictedPages.add(pageNumber);
+        this.updateDetail(pageNumber);
+      } else {
+        this.restrictedPages.delete(pageNumber);
+      }
 
       // XFA forms are HTML, with their own text: no text or annotation layer.
       if (doc.isPureXfa) {
@@ -1487,14 +1592,9 @@ export class ScPdfViewerCanvas {
         await this.renderStructTree(page, canvas, textLayerDiv);
 
         // Store text layer data for find highlighting
-        // Which items end a line: find's page text has a "\n" after each
-        // (see viewer.documentTexts), so offsets must count it.
         this.textLayerData.set(pageNumber, {
           divs: [...textLayer.textDivs],
           texts: [...textLayer.textContentItemsStr],
-          eols: textContent.items
-            .filter((item) => 'str' in item)
-            .map((item) => 'hasEOL' in item && item.hasEOL),
         });
 
         // Apply highlights if a find query is active
@@ -1571,18 +1671,70 @@ export class ScPdfViewerCanvas {
     });
   }
 
-  /**
-   * Canvas pixels per CSS pixel: the screen's density, lowered when the
-   * canvas would exceed MAX_CANVAS_PIXELS (high zoom on a dense screen).
-   */
-  private outputScale(natural: { width: number; height: number }): number {
-    const scale = this.scaledValue();
-    const cssPixels = natural.width * scale * (natural.height * scale);
-    const dpr = this.dpr();
-    return cssPixels * dpr * dpr > MAX_CANVAS_PIXELS
-      ? Math.sqrt(MAX_CANVAS_PIXELS / cssPixels)
-      : dpr;
+  /** What page.render draws, besides the canvas, viewport and transform. */
+  private renderParams(): object {
+    // Form fields are drawn by the annotation layer (as HTML), not here —
+    // unless they can't be filled in (then they're drawn, read-only).
+    const optionalContent = this.pdfViewer.optionalContent();
+    return {
+      annotationMode: this.pdfViewer.canFillForms()
+        ? AnnotationMode.ENABLE_FORMS
+        : AnnotationMode.ENABLE,
+      // High contrast mode, or the consumer's colours.
+      pageColors: this.pdfViewer.appliedPageColors(),
+      // The layers as shown / hidden in the viewer.
+      ...(optionalContent && {
+        optionalContentConfigPromise: Promise.resolve(optionalContent),
+      }),
+    };
   }
+
+  /**
+   * Draws, sharp, the visible part of a page whose canvas is drawn below
+   * the screen's density (high zoom) — again as the page is scrolled.
+   */
+  private async updateDetail(pageNumber: number): Promise<void> {
+    const doc = this.pdfDocument();
+    const container = this.scrollContainer()?.nativeElement;
+    const pageEl = container?.querySelector<HTMLElement>(
+      `div[data-page="${pageNumber}"]`,
+    );
+    const canvas = container?.querySelector<HTMLCanvasElement>(
+      `canvas[data-detail-page="${pageNumber}"]`,
+    );
+    if (!doc || !container || !pageEl || !canvas) return;
+    const view = container.getBoundingClientRect();
+    const box = pageEl.getBoundingClientRect();
+    const visible = {
+      minX: Math.max(0, view.left - box.left),
+      minY: Math.max(0, view.top - box.top),
+      maxX: Math.min(box.width, view.right - box.left),
+      maxY: Math.min(box.height, view.bottom - box.top),
+    };
+    if (visible.maxX <= visible.minX || visible.maxY <= visible.minY) return;
+    const page = await doc.getPage(pageNumber);
+    if (!this.restrictedPages.has(pageNumber)) return;
+    const drawn = await this.detail.update(
+      page,
+      canvas,
+      visible,
+      this.pageViewport(page, this.scaledValue()),
+      this.dpr(),
+      this.renderParams(),
+    );
+    if (drawn) this.pdfViewer.scheduleCleanup();
+  }
+
+  /** On scroll: the detail of the pages that have one, once a frame. */
+  private readonly onScroll = (): void => {
+    if (this.detailFrame || this.restrictedPages.size === 0) return;
+    this.detailFrame = requestAnimationFrame(() => {
+      this.detailFrame = 0;
+      for (const pageNumber of this.restrictedPages) {
+        this.updateDetail(pageNumber);
+      }
+    });
+  };
 
   /**
    * In presentation mode form fields don't take clicks — links still do
@@ -1660,7 +1812,7 @@ export class ScPdfViewerCanvas {
     // annotation storage (so they survive re-rendering and are saved).
     await annotationLayer.render({
       annotations,
-      renderForms: true,
+      renderForms: viewer.canFillForms(),
       enableScripting: viewer.enableScripting(),
       hasJSActions,
       fieldObjects,
@@ -1764,6 +1916,9 @@ export class ScPdfViewerCanvas {
       layer.cancel();
     }
     this.activeTextLayers.clear();
+    // Detail canvases stay shown until their page is drawn again.
+    this.detail.resetAll();
+    this.restrictedPages.clear();
   }
 
   private applyHighlights(
@@ -1833,64 +1988,72 @@ export class ScPdfViewerCanvas {
   }
 
   private renderPageHighlights(
-    data: { divs: HTMLElement[]; texts: string[]; eols: boolean[] },
+    data: { divs: HTMLElement[]; texts: string[] },
     matchInfo: import('./pdf-viewer-types').ScPdfPageMatchInfo,
     highlightAll: boolean,
     isSelectedPage: boolean,
     selectedMatchOnPage: number,
   ): void {
-    // Build a mapping from flat text offset to divIdx + offset within div
-    const divOffsets: { divIdx: number; start: number }[] = [];
-    let flatOffset = 0;
-    for (let i = 0; i < data.texts.length; i++) {
-      divOffsets.push({ divIdx: i, start: flatOffset });
-      flatOffset += data.texts[i].length + (data.eols[i] ? 1 : 0);
+    // Where each item starts in the page's text: the items joined, which
+    // find's offsets count in (as pdf.js's text highlighter).
+    const starts: number[] = [];
+    let offset = 0;
+    for (const text of data.texts) {
+      starts.push(offset);
+      offset += text.length;
     }
 
-    // Convert flat match positions to div-relative coordinates
+    // Each item's highlighted parts (a match can span items, and an item
+    // hold several matches).
+    const parts = new Map<
+      number,
+      { start: number; end: number; selected: boolean }[]
+    >();
     for (let m = 0; m < matchInfo.matches.length; m++) {
-      const isSelected = isSelectedPage && m === selectedMatchOnPage;
-      if (!highlightAll && !isSelected) continue;
-
+      const selected = isSelectedPage && m === selectedMatchOnPage;
+      if (!highlightAll && !selected) continue;
       const matchStart = matchInfo.matches[m];
       const matchEnd = matchStart + matchInfo.matchesLength[m];
+      for (let d = 0; d < data.texts.length; d++) {
+        const itemStart = starts[d];
+        const itemEnd = itemStart + data.texts[d].length;
+        if (matchEnd <= itemStart || matchStart >= itemEnd) continue;
+        const list = parts.get(d) ?? [];
+        list.push({
+          start: Math.max(0, matchStart - itemStart),
+          end: Math.min(data.texts[d].length, matchEnd - itemStart),
+          selected,
+        });
+        parts.set(d, list);
+      }
+    }
 
-      // Find which divs this match spans
-      for (let d = 0; d < divOffsets.length; d++) {
-        const divStart = divOffsets[d].start;
-        const divEnd = divStart + data.texts[divOffsets[d].divIdx].length;
-
-        if (matchEnd <= divStart || matchStart >= divEnd) continue;
-
-        const div = data.divs[divOffsets[d].divIdx];
-        const text = data.texts[divOffsets[d].divIdx];
-        const localStart = Math.max(0, matchStart - divStart);
-        const localEnd = Math.min(text.length, matchEnd - divStart);
-
-        // Build new content with highlight spans
-        const before = text.substring(0, localStart);
-        const matched = text.substring(localStart, localEnd);
-        const after = text.substring(localEnd);
-
-        const frag = document.createDocumentFragment();
-        if (before) {
-          frag.appendChild(document.createTextNode(before));
+    for (const [d, list] of parts) {
+      const text = data.texts[d];
+      const frag = document.createDocumentFragment();
+      let position = 0;
+      for (const part of list.sort((a, b) => a.start - b.start)) {
+        const from = Math.max(part.start, position);
+        if (part.end <= from) continue;
+        if (from > position) {
+          frag.appendChild(
+            document.createTextNode(text.substring(position, from)),
+          );
         }
-
-        const highlightSpan = document.createElement('span');
-        highlightSpan.className = isSelected
+        const highlight = document.createElement('span');
+        highlight.className = part.selected
           ? 'highlight selected'
           : 'highlight';
-        highlightSpan.textContent = matched;
-        frag.appendChild(highlightSpan);
-
-        if (after) {
-          frag.appendChild(document.createTextNode(after));
-        }
-
-        div.textContent = '';
-        div.appendChild(frag);
+        highlight.textContent = text.substring(from, part.end);
+        frag.appendChild(highlight);
+        position = part.end;
       }
+      if (position < text.length) {
+        frag.appendChild(document.createTextNode(text.substring(position)));
+      }
+      const div = data.divs[d];
+      div.textContent = '';
+      div.appendChild(frag);
     }
   }
 

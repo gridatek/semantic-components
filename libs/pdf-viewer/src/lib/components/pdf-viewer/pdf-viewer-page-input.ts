@@ -65,7 +65,7 @@ export class ScPdfViewerPageInput {
   protected go(event: Event): void {
     const field = event.target as HTMLInputElement;
     const page = this.pdfViewer.pageForLabel(field.value);
-    if (page) this.pdfViewer.goToPage(page);
+    if (page) this.pdfViewer.jumpToPage(page);
     // Normalise what was typed ("04" → "4", a number → its label).
     field.value = this.pdfViewer.pageLabel(
       page ?? this.pdfViewer.currentPage(),

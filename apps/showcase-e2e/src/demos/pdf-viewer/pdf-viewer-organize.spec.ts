@@ -45,6 +45,16 @@ test.describe('PDF Viewer document features', () => {
     await expect(outline.locator('[aria-current="location"]')).toHaveText(
       'Chapter 1',
     );
+
+    // Back returns to where the bookmark jumped from; Forward goes again.
+    const back = page.getByRole('button', { name: 'Back', exact: true });
+    const forward = page.getByRole('button', { name: 'Forward', exact: true });
+    await expect(forward).toBeDisabled();
+    await back.click();
+    await expect(page.getByTestId('page-count')).toHaveText('(1 of 6)');
+    await expect(back).toBeDisabled();
+    await forward.click();
+    await expect(page.getByTestId('page-count')).toHaveText('(3 of 6)');
     expect(errors).toEqual([]);
   });
 

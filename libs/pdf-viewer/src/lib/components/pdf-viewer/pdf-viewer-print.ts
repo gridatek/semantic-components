@@ -3,7 +3,9 @@ import { ScButton, bindInput, cn } from '@semantic-components/ui';
 import { SC_PDF_VIEWER } from './pdf-viewer';
 
 /**
- * Prints the document (with a progress dialog); disabled until it has loaded. Use on a `scButton`, which it disables.
+ * Prints the document (with a progress dialog); disabled until it has
+ * loaded, and when the document forbids printing (`enablePermissions`).
+ * Use on a `scButton`, which it disables.
  */
 @Directive({
   selector: 'button[scPdfViewerPrint]',
@@ -22,7 +24,7 @@ export class ScPdfViewerPrint {
   constructor() {
     bindInput(
       inject(ScButton).disabled,
-      computed(() => !this.pdfViewer.pdfDocument()),
+      computed(() => !this.pdfViewer.canPrint()),
     );
   }
 }

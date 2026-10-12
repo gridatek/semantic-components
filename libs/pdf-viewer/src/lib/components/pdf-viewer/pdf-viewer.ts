@@ -19,9 +19,12 @@ import type { PDFDocumentLoadingTask, PDFDocumentProxy } from 'pdfjs-dist';
 import {
   AnnotationMode,
   GlobalWorkerOptions,
+  PermissionFlag,
   getDocument,
   version,
 } from 'pdfjs-dist';
+import type { ScPdfNormalizedText } from './pdf-viewer-find';
+import { findInPage, normalizeText } from './pdf-viewer-find';
 import { annotationStorageValues } from './pdf-viewer-save';
 import { ScPdfScripting } from './pdf-viewer-scripting';
 import type {
@@ -37,6 +40,7 @@ import type {
   ScPdfLoadEvent,
   ScPdfOutlineItem,
   ScPdfPageChangeEvent,
+  ScPdfPageColors,
   ScPdfPageMatchInfo,
   ScPdfScrollMode,
   ScPdfSidebarView,
@@ -47,8 +51,9 @@ import type {
   ScPdfZoomLevel,
 } from './pdf-viewer-types';
 
-const MIN_SCALE = 0.25;
-const MAX_SCALE = 4;
+/** As pdf.js (the detail canvas keeps high zoom sharp). */
+const MIN_SCALE = 0.1;
+const MAX_SCALE = 10;
 
 /** pdf.js's optional content (layers) config; not exported by pdfjs-dist. */
 type OptionalContentConfig = Awaited<
@@ -57,6 +62,18 @@ type OptionalContentConfig = Awaited<
 
 /** A script that prints, in a document's JavaScript actions (as pdf.js). */
 const AUTO_PRINT = /\bprint\s*\(/;
+
+/** How long without rendering before pdf.js's caches are freed (as pdf.js). */
+const CLEANUP_TIMEOUT = 30_000;
+
+/** Back / Forward remembers this many places. */
+const MAX_HISTORY = 50;
+
+/** A place in the document: a page, and how far down it (0–1). */
+interface ScPdfPlace {
+  page: number;
+  top: number;
+}
 
 /** The document's `PageLayout` as scroll and spread modes. */
 const PAGE_LAYOUTS: Record<string, [ScPdfScrollMode, ScPdfSpreadMode]> = {
@@ -269,6 +286,37 @@ export class ScPdfViewer {
   readonly enableScripting = input(true);
   /** Make URLs and email addresses in the text clickable (as pdf.js). */
   readonly enableAutoLinking = input(true);
+  /**
+   * Follow the document's permissions: no copying, printing, editing or
+   * filling in forms when it forbids them. Off by default, as in pdf.js
+   * (they're easily bypassed, and only some viewers honour them).
+   */
+  readonly enablePermissions = input(false);
+  /**
+   * Colours to draw the pages with (e.g. a dark reading mode). Unset, the
+   * pages follow the system's high-contrast mode (forced colours), drawn
+   * in its `CanvasText` on `Canvas`, as in pdf.js.
+   */
+  readonly pageColors = input<ScPdfPageColors | null>(null);
+
+  /** The system's high-contrast mode is on. */
+  private readonly forcedColors = signal(false);
+
+  /** The colours pages are drawn with, or null for their own. */
+  readonly appliedPageColors = computed((): ScPdfPageColors | null => {
+    const colors =
+      this.pageColors() ??
+      (this.forcedColors()
+        ? { foreground: 'CanvasText', background: 'Canvas' }
+        : null);
+    // pdf.js needs both, and real colours.
+    return colors &&
+      typeof CSS !== 'undefined' &&
+      CSS.supports('color', colors.foreground) &&
+      CSS.supports('color', colors.background)
+      ? colors
+      : null;
+  });
   /** URL of `pdf.sandbox.mjs`, if not under `assetsUrl`. */
   readonly sandboxSrc = input<string>('');
   /** URL of pdf.js's `wasm/` folder (trailing slash), if not under `assetsUrl`. */
@@ -496,7 +544,8 @@ export class ScPdfViewer {
       this.thumbnailsDocument = doc;
     }
     const rotation = this.rotation();
-    const key = `${pageNumber}:${width}:${rotation}`;
+    const pageColors = this.appliedPageColors();
+    const key = `${pageNumber}:${width}:${rotation}:${JSON.stringify(pageColors)}`;
     let thumbnail = this.thumbnails.get(key);
     if (!thumbnail) {
       thumbnail = this.thumbnailQueue.then(async () => {
@@ -512,7 +561,12 @@ export class ScPdfViewer {
           const canvas = this.document.createElement('canvas');
           canvas.width = viewport.width;
           canvas.height = viewport.height;
-          await page.render({ canvas, viewport }).promise;
+          await page.render({
+            canvas,
+            viewport,
+            pageColors: pageColors ?? undefined,
+          }).promise;
+          this.scheduleCleanup();
           const blob = await new Promise<Blob | null>((resolve) =>
             canvas.toBlob(resolve),
           );
@@ -526,6 +580,57 @@ export class ScPdfViewer {
       this.thumbnails.set(key, thumbnail);
     }
     return thumbnail;
+  }
+
+  /** The document's permission flags (null: it sets none). */
+  private readonly permissions = signal<ReadonlySet<number> | null>(null);
+
+  private allows(...flags: number[]): boolean {
+    const permissions = this.permissions();
+    return (
+      !this.enablePermissions() ||
+      !permissions ||
+      flags.some((flag) => permissions.has(flag))
+    );
+  }
+
+  /** Text can be copied (see `enablePermissions`). */
+  readonly canCopy = computed(() => this.allows(PermissionFlag.COPY));
+  /** The document can be printed (see `enablePermissions`). */
+  readonly canPrint = computed(
+    () =>
+      !!this.pdfDocument() &&
+      this.allows(PermissionFlag.PRINT, PermissionFlag.PRINT_HIGH_QUALITY),
+  );
+  /** Annotations can be added (see `enablePermissions`). */
+  readonly canEdit = computed(() =>
+    this.allows(PermissionFlag.MODIFY_CONTENTS),
+  );
+  /** Form fields can be filled in (see `enablePermissions`). */
+  readonly canFillForms = computed(() =>
+    this.allows(
+      PermissionFlag.MODIFY_ANNOTATIONS,
+      PermissionFlag.FILL_INTERACTIVE_FORMS,
+    ),
+  );
+
+  private cleanupTimeout: ReturnType<typeof setTimeout> | null = null;
+
+  /**
+   * After a while without rendering, pdf.js frees what it keeps to draw
+   * pages again faster (fonts, images, operator lists), as its viewer does.
+   * Called after each render; a page still rendering by then puts it off.
+   */
+  scheduleCleanup(): void {
+    if (this.cleanupTimeout) clearTimeout(this.cleanupTimeout);
+    this.cleanupTimeout = setTimeout(() => {
+      this.cleanupTimeout = null;
+      this.pdfDocument()
+        ?.cleanup()
+        .catch(() => {
+          // Rendering: the render's end schedules it again.
+        });
+    }, CLEANUP_TIMEOUT);
   }
 
   private releaseThumbnails(): void {
@@ -585,7 +690,7 @@ export class ScPdfViewer {
   readonly findTrigger = signal(0);
 
   /** Each page's text, extracted once per document for find. */
-  private pageTexts: Promise<string[]> | null = null;
+  private pageTexts: Promise<ScPdfNormalizedText[]> | null = null;
   private pageTextsDocument: PDFDocumentProxy | null = null;
   /** Increments with each search, so an older one can't overwrite a newer one. */
   private findToken = 0;
@@ -692,6 +797,19 @@ export class ScPdfViewer {
 
     // Browser only: the worker, the first document, fullscreen tracking.
     afterNextRender(() => {
+      // High contrast mode, before the pages are drawn.
+      const forcedColors = this.document.defaultView?.matchMedia(
+        '(forced-colors: active)',
+      );
+      if (forcedColors) {
+        this.forcedColors.set(forcedColors.matches);
+        const onChange = () => this.forcedColors.set(forcedColors.matches);
+        forcedColors.addEventListener('change', onChange);
+        this.destroyRef.onDestroy(() =>
+          forcedColors.removeEventListener('change', onChange),
+        );
+      }
+
       this.initWorker();
       this.workerReady = true;
       this.openSrc();
@@ -730,6 +848,7 @@ export class ScPdfViewer {
     });
 
     this.destroyRef.onDestroy(() => {
+      if (this.cleanupTimeout) clearTimeout(this.cleanupTimeout);
       this.releaseThumbnails();
       this.scripting.destroy();
       this.loadingTask?.destroy();
@@ -804,6 +923,8 @@ export class ScPdfViewer {
     this.optionalContent.set(null);
     this.attachments.set([]);
     this.outlineExpanded.set(new Set());
+    this.history.set({ entries: [], index: -1 });
+    this.permissions.set(null);
     this.releaseThumbnails();
     this.renderedPageNumbers.clear();
     this.scripting.setDocument(null);
@@ -845,7 +966,12 @@ export class ScPdfViewer {
     try {
       const doc = await task.promise;
       if (task !== this.loadingTask) return;
+      // Known before the pages are drawn (forms may be read-only).
+      const permissions = await doc.getPermissions().catch(() => null);
+      if (task !== this.loadingTask) return;
       this.loadingTask = null;
+      this.permissions.set(permissions);
+      if (!this.canEdit()) this.editorMode.set('none');
       this.pdfDocument.set(doc);
       this.totalPages.set(doc.numPages);
       // Navigated (not just set), so the canvas goes there once laid out.
@@ -1121,7 +1247,7 @@ export class ScPdfViewer {
     const target = await this.resolveDestination(dest);
     if (!target) return;
     if (target.zoom !== undefined) this.setZoom(target.zoom);
-    this.goToPage(target.pageNumber, target.top);
+    this.jumpToPage(target.pageNumber, target.top);
   }
 
   /** Goes to a bookmark's destination, or opens its web link. */
@@ -1132,7 +1258,7 @@ export class ScPdfViewer {
     }
     if (!item.pageNumber) return;
     if (item.zoom !== undefined) this.setZoom(item.zoom);
-    this.goToPage(item.pageNumber, item.top);
+    this.jumpToPage(item.pageNumber, item.top);
   }
 
   /**
@@ -1191,7 +1317,10 @@ export class ScPdfViewer {
       await this.goToDestination(nameddest);
     } else if (Number.isInteger(page)) {
       const pageNumber = Math.min(Math.max(1, page), doc.numPages);
-      this.goToPage(pageNumber, await this.topOnPage(doc, pageNumber, pdfTop));
+      this.jumpToPage(
+        pageNumber,
+        await this.topOnPage(doc, pageNumber, pdfTop),
+      );
     }
 
     const search = params.get('search');
@@ -1261,6 +1390,72 @@ export class ScPdfViewer {
     return [first, last];
   }
 
+  /**
+   * Where the user was before each jump (a link, a bookmark, a thumbnail,
+   * the page input…), for Back and Forward, as pdf.js's history — kept in
+   * the viewer, not the browser's history (the app owns that).
+   */
+  private readonly history = signal<{ entries: ScPdfPlace[]; index: number }>({
+    entries: [],
+    index: -1,
+  });
+  readonly canGoBack = computed(() => this.history().index > 0);
+  readonly canGoForward = computed(() => {
+    const { entries, index } = this.history();
+    return index < entries.length - 1;
+  });
+  /** Where the pages are scrolled to (the canvas tells). */
+  private locator: (() => ScPdfPlace) | null = null;
+
+  /** @internal The canvas tells where the pages are scrolled to. */
+  setLocator(locator: (() => ScPdfPlace) | null): void {
+    this.locator = locator;
+  }
+
+  private location(): ScPdfPlace {
+    return this.locator?.() ?? { page: this.currentPage(), top: 0 };
+  }
+
+  /** Goes to a page, remembering where it came from (Back returns there). */
+  jumpToPage(page: number, top = 0): void {
+    if (page < 1 || page > this.totalPages()) return;
+    if (!this.openingNavigation) {
+      const from = this.location();
+      const to = { page, top };
+      this.history.update(({ entries, index }) => {
+        const kept = entries.slice(0, index + 1);
+        // The current entry is where the user is now (they may have scrolled).
+        kept.splice(Math.max(0, kept.length - 1), 1, from);
+        if (from.page !== to.page || Math.abs(from.top - to.top) > 0.01) {
+          kept.push(to);
+        }
+        const trimmed = kept.slice(-MAX_HISTORY);
+        return { entries: trimmed, index: trimmed.length - 1 };
+      });
+    }
+    this.goToPage(page, top);
+  }
+
+  /** Back to where the user was before the last jump. */
+  goBack(): void {
+    this.moveInHistory(-1);
+  }
+
+  /** Forward again, after going back. */
+  goForward(): void {
+    this.moveInHistory(1);
+  }
+
+  private moveInHistory(delta: number): void {
+    const { entries, index } = this.history();
+    const target = entries[index + delta];
+    if (!target) return;
+    const updated = entries.slice();
+    updated[index] = this.location();
+    this.history.set({ entries: updated, index: index + delta });
+    this.goToPage(target.page, target.top);
+  }
+
   /** Goes to a page; `top` is where on it, from 0 (top) to 1 (bottom). */
   goToPage(page: number, top = 0): void {
     if (page >= 1 && page <= this.totalPages()) {
@@ -1275,13 +1470,13 @@ export class ScPdfViewer {
     }
   }
 
-  /** To the next 25% step above the current scale (up to 400%). */
+  /** To the next 25% step above the current scale (up to 1000%). */
   zoomIn(): void {
     const steps = Math.floor(this.currentScale() * 4 + 1e-6) + 1;
     this.setZoom(Math.min(MAX_SCALE, steps / 4));
   }
 
-  /** To the next 25% step below the current scale (down to 25%). */
+  /** To the next 25% step below the current scale (down to 10%). */
   zoomOut(): void {
     const steps = Math.ceil(this.currentScale() * 4 - 1e-6) - 1;
     this.setZoom(Math.max(MIN_SCALE, steps / 4));
@@ -1670,6 +1865,7 @@ export class ScPdfViewer {
 
   async printWithProgress(): Promise<void> {
     const doc = this.pdfDocument();
+    if (doc && !this.canPrint()) return;
     if (!doc) {
       this.print();
       return;
@@ -2218,86 +2414,25 @@ export class ScPdfViewer {
     // A newer search started, or the document changed, meanwhile.
     if (token !== this.findToken || doc !== this.pdfDocument()) return;
 
-    const matchCase = this.findMatchCase();
-    const entireWord = this.findEntireWord();
-    const matchDiacritics = this.findMatchDiacritics();
+    const options = {
+      matchCase: this.findMatchCase(),
+      entireWord: this.findEntireWord(),
+      matchDiacritics: this.findMatchDiacritics(),
+    };
+    // Normalised as the pages' text is (a line break is a space…).
+    const normalizedQuery = normalizeText(query).text;
     const allMatches: ScPdfPageMatchInfo[] = [];
     let total = 0;
 
-    // Strip diacritical marks: NFD splits accented chars, then remove combining marks
-    const stripDiacritics = (text: string): string =>
-      text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-
-    for (const rawText of pageTexts) {
-      // A line break matches a space — phrases wrap across lines. Same
-      // length, so match offsets still line up with the text layer.
-      const pageText = rawText.replace(/\n/g, ' ');
-      const matches: number[] = [];
-      const matchesLength: number[] = [];
-
-      // When ignoring diacritics, build a mapping from normalized positions
-      // back to original text positions, since lengths may differ.
-      let normToOrig: number[] | undefined;
-      let searchIn: string;
-      let searchFor: string;
-
-      if (!matchDiacritics) {
-        // Build per-character position mapping
-        normToOrig = [];
-        let normalized = '';
-        for (let i = 0; i < pageText.length; i++) {
-          const stripped = stripDiacritics(pageText[i]);
-          for (let c = 0; c < stripped.length; c++) {
-            normToOrig.push(i);
-          }
-          normalized += stripped;
-        }
-        // Add sentinel for end-of-string lookups
-        normToOrig.push(pageText.length);
-        searchIn = matchCase ? normalized : normalized.toLowerCase();
-        searchFor = matchCase
-          ? stripDiacritics(query)
-          : stripDiacritics(query).toLowerCase();
-      } else {
-        searchIn = matchCase ? pageText : pageText.toLowerCase();
-        searchFor = matchCase ? query : query.toLowerCase();
-      }
-
-      if (entireWord) {
-        const escaped = searchFor.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-        const flags = matchCase ? 'g' : 'gi';
-        const regex = new RegExp(`\\b${escaped}\\b`, flags);
-        let m;
-        const target = matchDiacritics ? pageText : searchIn;
-        while ((m = regex.exec(target)) !== null) {
-          if (normToOrig) {
-            const origStart = normToOrig[m.index];
-            const origEnd = normToOrig[m.index + m[0].length];
-            matches.push(origStart);
-            matchesLength.push(origEnd - origStart);
-          } else {
-            matches.push(m.index);
-            matchesLength.push(m[0].length);
-          }
-        }
-      } else {
-        let idx = 0;
-        while ((idx = searchIn.indexOf(searchFor, idx)) !== -1) {
-          if (normToOrig) {
-            const origStart = normToOrig[idx];
-            const origEnd = normToOrig[idx + searchFor.length];
-            matches.push(origStart);
-            matchesLength.push(origEnd - origStart);
-          } else {
-            matches.push(idx);
-            matchesLength.push(searchFor.length);
-          }
-          idx += searchFor.length;
-        }
-      }
-
-      total += matches.length;
-      allMatches.push({ matches, matchesLength });
+    for (const pageText of pageTexts) {
+      // Offsets in the page's text (items, "\n" after each line), which
+      // the text layer highlights.
+      const found = findInPage(normalizedQuery, pageText, options);
+      total += found.length;
+      allMatches.push({
+        matches: found.map(([start]) => start),
+        matchesLength: found.map(([, length]) => length),
+      });
     }
 
     this.pageMatches.set(allMatches);
@@ -2374,16 +2509,20 @@ export class ScPdfViewer {
   }
 
   /**
-   * The text of every page, extracted once per document — a few pages at a
-   * time in parallel — and shared by the searches.
+   * The text of every page, normalised for searching (see `normalizeText`),
+   * extracted once per document — a few pages at a time in parallel — and
+   * shared by the searches.
    */
-  private documentTexts(doc: PDFDocumentProxy): Promise<string[]> {
+  private documentTexts(doc: PDFDocumentProxy): Promise<ScPdfNormalizedText[]> {
     if (this.pageTexts && this.pageTextsDocument === doc) {
       return this.pageTexts;
     }
     this.pageTextsDocument = doc;
     this.pageTexts = (async () => {
-      const texts: string[] = new Array(doc.numPages).fill('');
+      const texts: ScPdfNormalizedText[] = Array.from(
+        { length: doc.numPages },
+        () => ({ text: '', diffs: null, hasDiacritics: false }),
+      );
       const batch = 8;
       for (let start = 1; start <= doc.numPages; start += batch) {
         const pages = Array.from(
@@ -2402,7 +2541,7 @@ export class ScPdfViewer {
                   if (item.hasEOL) text += '\n';
                 }
               }
-              texts[pageNumber - 1] = text;
+              texts[pageNumber - 1] = normalizeText(text);
             } catch {
               // A page whose text can't be read just has no matches.
             }
@@ -2428,6 +2567,8 @@ export class ScPdfViewer {
 
   // Editor methods
   setEditorMode(mode: ScPdfEditorMode): void {
+    // The document forbids adding annotations (see `enablePermissions`).
+    if (mode !== 'none' && !this.canEdit()) return;
     if (mode === 'signature') {
       // Signature mode opens a dialog instead of toggling
       if (this.editorMode() === 'signature') {

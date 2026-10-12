@@ -56,10 +56,10 @@ providers: [{ provide: OverlayContainer, useClass: FullscreenOverlayContainer }]
 
 `ScPdfViewer` (`[scPdfViewer]`, `exportAs: 'scPdfViewer'`) holds the document and all state; your template reads it (`viewer.currentPage()`, `viewer.findState()`…) to write its text.
 
-- **Inputs**: `src`, `fileName` (download / print name, without `.pdf`), `initialPage`, `initialZoom`, `assetsUrl` (where pdf.js's worker, sandbox, fonts, CMaps, wasm decoders and colour profiles are — unpkg by default; host `pdfjs-dist`'s folders yourself for offline or strict-CSP apps), `workerSrc`, `sandboxSrc`, `wasmSrc`, `keyboardShortcuts`, `autoPrint`, `enableScripting`, `enableAutoLinking` (URLs and email addresses in the text become links; on by default).
+- **Inputs**: `src`, `fileName` (download / print name, without `.pdf`), `initialPage`, `initialZoom`, `assetsUrl` (where pdf.js's worker, sandbox, fonts, CMaps, wasm decoders and colour profiles are — unpkg by default; host `pdfjs-dist`'s folders yourself for offline or strict-CSP apps), `workerSrc`, `sandboxSrc`, `wasmSrc`, `keyboardShortcuts`, `autoPrint`, `enableScripting`, `enableAutoLinking` (URLs and email addresses in the text become links; on by default), `enablePermissions` (follow the document's permissions — no copying, printing, adding annotations or filling in forms when it forbids them; off by default, as in pdf.js), `pageColors` (`{ foreground, background }` to draw the pages with; unset, they follow the system's high-contrast mode).
 - **Two-way**: `sidebarOpen`, `sidebarView`, `cursorTool`, `scrollMode`, `spreadMode`, `savedSignatures`.
 - **Outputs**: `loaded`, `pageChange`, `zoomChange`, `errorEvent` (`ScPdfLoadError`), `fileOpened`.
-- **State for your text**: `currentPage()`, `totalPages()`, `pageLabels()` / `pageLabel(n)`, `zoom()`, `isLoading()`, `loadProgress()`, `error()` (`{ kind: 'invalid' | 'missing' | 'network' | 'password' | 'unknown' }`), `findState()`, `findCurrentMatchIndex()`, `findTotalMatches()`, `undoable()` (`{ kind, count }`), `printProgress()`, `outline()`, `attachments()`, `layers()`, `comments()`, `savedSignatures()`, `pageSelection()`…
+- **State for your text**: `currentPage()`, `totalPages()`, `pageLabels()` / `pageLabel(n)`, `zoom()`, `isLoading()`, `loadProgress()`, `error()` (`{ kind: 'invalid' | 'missing' | 'network' | 'password' | 'unknown' }`), `findState()`, `findCurrentMatchIndex()`, `findTotalMatches()`, `undoable()` (`{ kind, count }`), `printProgress()`, `outline()`, `attachments()`, `layers()`, `comments()`, `savedSignatures()`, `pageSelection()`, `canGoBack()` / `canGoForward()`, `canCopy()` / `canPrint()` / `canEdit()` / `canFillForms()`…
 
 ## Parts
 
@@ -79,18 +79,19 @@ providers: [{ provide: OverlayContainer, useClass: FullscreenOverlayContainer }]
 
 Behaviour on a `scButton`: choose its look, write its icon, text or `aria-label`.
 
-| Part                                    | Does                                     | Disabled when            |
-| --------------------------------------- | ---------------------------------------- | ------------------------ |
-| `scPdfViewerPrevPage` / `NextPage`      | Previous / next page                     | on the first / last page |
-| `scPdfViewerZoomIn` / `ZoomOut`         | Zoom by 25%                              | at 400% / 25%            |
-| `scPdfViewerRotateLeft` / `RotateRight` | Rotate the pages                         | —                        |
-| `scPdfViewerPrint`                      | Print (with the `print` dialog)          | until the document loads |
-| `scPdfViewerDownload`                   | Download, with annotations and form data | until the document loads |
-| `scPdfViewerFullscreen`                 | Toggle fullscreen (`aria-pressed`)       | —                        |
-| `scPdfViewerFindToggle`                 | Open / close the find bar                | —                        |
-| `scPdfViewerFindPrevious` / `FindNext`  | Previous / next match                    | while there are none     |
-| `scPdfViewerRetry`                      | Load again after an error                | —                        |
-| `scPdfViewerUndo` / `UndoDismiss`       | Undo / close what the undo bar offers    | —                        |
+| Part                                    | Does                                     | Disabled when                                       |
+| --------------------------------------- | ---------------------------------------- | --------------------------------------------------- |
+| `scPdfViewerPrevPage` / `NextPage`      | Previous / next page                     | on the first / last page                            |
+| `scPdfViewerBack` / `Forward`           | Back to before the last jump, or again   | with nowhere to go                                  |
+| `scPdfViewerZoomIn` / `ZoomOut`         | Zoom by 25%                              | at 1000% / 10%                                      |
+| `scPdfViewerRotateLeft` / `RotateRight` | Rotate the pages                         | —                                                   |
+| `scPdfViewerPrint`                      | Print (with the `print` dialog)          | until the document loads, or if it forbids printing |
+| `scPdfViewerDownload`                   | Download, with annotations and form data | until the document loads                            |
+| `scPdfViewerFullscreen`                 | Toggle fullscreen (`aria-pressed`)       | —                                                   |
+| `scPdfViewerFindToggle`                 | Open / close the find bar                | —                                                   |
+| `scPdfViewerFindPrevious` / `FindNext`  | Previous / next match                    | while there are none                                |
+| `scPdfViewerRetry`                      | Load again after an error                | —                                                   |
+| `scPdfViewerUndo` / `UndoDismiss`       | Undo / close what the undo bar offers    | —                                                   |
 
 ### Fields and settings
 
@@ -167,6 +168,7 @@ Each change rebuilds the document with pdf.js's `extractPages` — form data com
 
 - **The document's preferences** — its page mode opens the sidebar (`sidebarView`); its page layout sets the scroll and spread modes (unless you changed them); its open action goes to a destination, or prints.
 - **Open parameters** in the fragment of `src`: `doc.pdf#page=3`, `#zoom=150` (also `page-width`, `page-fit`, `auto`, `page-actual`, or `150,left,top`), `#nameddest=intro` or `#intro`, `#search=word`, `#pagemode=thumbs|bookmarks|attachments|layers|none`. `viewer.applyHash('page=3')` applies them later.
+- **Back / Forward** — jumps (links, bookmarks, thumbnails, the page input, destinations) are remembered, with where the pages were scrolled to: `viewer.goBack()` / `goForward()`, or `scPdfViewerBack` / `Forward`. The viewer keeps this history itself, not the browser's (your app owns that).
 - **Auto-print** — a document that asks to print on opening is printed (`[autoPrint]="false"` turns it off). Printing renders the pages in a hidden frame: no pop-up.
 
 ### Forms
@@ -194,7 +196,8 @@ pdf.js's shortcuts work while focus is in the viewer (`[keyboardShortcuts]="fals
 
 - The document shows as soon as its first page is read: pages are laid out at the first page's size and corrected when drawn.
 - Only pages near the viewport are drawn; the others are released and redrawn on return, so memory stays flat on long documents. Thumbnails render when they scroll near view, one at a time.
-- Canvases are capped at 16.7 megapixels; pages redraw when the window moves to a screen with another pixel density.
+- Canvas pixels line up with the screen's (the page's size is rounded so the ratio is exact), so text stays crisp. Canvases are capped at 16.7 megapixels; past that (high zoom on a dense screen) the page is drawn lower and a detail canvas draws the visible part sharp, again as you scroll. Pages redraw when the window moves to a screen with another pixel density.
+- After 30 s without drawing, pdf.js's caches (fonts, images) are freed.
 - Find extracts each page's text once per document, in parallel batches.
 
 ## Accessibility
@@ -203,3 +206,8 @@ pdf.js's shortcuts work while focus is in the viewer (`[keyboardShortcuts]="fals
 - Live regions (find results, the undo bar, loading) stay in place, so what you write in them is announced.
 - Dialogs (ui's `scDialog`) trap focus, close with Escape and return focus.
 - Form fields are named from the document; images with alt text are named by it.
+- In high-contrast mode (forced colours) the pages are drawn in the system's colours.
+
+## Find
+
+As in pdf.js: words hyphenated at a line end are found whole, phrases match across line breaks, ligatures and compatibility characters (`ﬁ`, `½`) and curly quotes match their plain forms, line breaks between Chinese, Japanese or Korean characters are ignored, and spaces around punctuation are optional. Match case, whole words and accents are options (`findMatchCase`, `findEntireWord`, `findMatchDiacritics`).

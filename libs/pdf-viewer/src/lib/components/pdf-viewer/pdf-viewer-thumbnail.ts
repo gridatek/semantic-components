@@ -58,9 +58,10 @@ export class ScPdfViewerThumbnail {
     });
 
     effect((onCleanup) => {
-      // Rendered for this document and rotation.
+      // Rendered for this document, rotation and page colours.
       this.pdfViewer.pdfDocument();
       this.pdfViewer.rotation();
+      this.pdfViewer.appliedPageColors();
       if (!this.near()) return;
       let current = true;
       onCleanup(() => (current = false));

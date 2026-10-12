@@ -3,7 +3,7 @@ import { ScButton, bindInput, cn } from '@semantic-components/ui';
 import { SC_PDF_VIEWER } from './pdf-viewer';
 
 /**
- * Zooms in by 25%; disabled at 400%. Use on a `scButton`, which it disables.
+ * Zooms in by 25%; disabled at 1000%. Use on a `scButton`, which it disables.
  */
 @Directive({
   selector: 'button[scPdfViewerZoomIn]',

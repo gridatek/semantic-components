@@ -10,12 +10,14 @@ import { normalizeUnicode } from 'pdfjs-dist';
  * (`pdf_viewer.css` styles `.endOfContent` and `.selecting`), so the pointer
  * over empty space lands on it — not on the page behind, which the browser
  * would read as "select to the end". Copying puts the normalised text on
- * the clipboard.
+ * the clipboard — or nothing, when the document forbids copying.
  */
 export class ScPdfTextSelection {
   /** Each text layer and its end-of-content element. */
   private readonly layers = new Map<HTMLElement, HTMLElement>();
   private abort: AbortController | null = null;
+
+  constructor(private readonly canCopy: () => boolean = () => true) {}
 
   /** Call after a text layer is rendered. */
   add(textLayer: HTMLElement): void {
@@ -46,12 +48,14 @@ export class ScPdfTextSelection {
   };
 
   private readonly onCopy = (event: ClipboardEvent): void => {
-    const text = document.getSelection()?.toString() ?? '';
-    event.clipboardData?.setData(
-      'text/plain',
-      // Without the null characters some PDFs' text contains.
-      normalizeUnicode(text.split(String.fromCharCode(0)).join('')),
-    );
+    if (this.canCopy()) {
+      const text = document.getSelection()?.toString() ?? '';
+      event.clipboardData?.setData(
+        'text/plain',
+        // Without the null characters some PDFs' text contains.
+        normalizeUnicode(text.split(String.fromCharCode(0)).join('')),
+      );
+    }
     event.preventDefault();
     event.stopPropagation();
   };

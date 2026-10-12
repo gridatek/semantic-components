@@ -12,7 +12,7 @@ import { SC_PDF_VIEWER } from './pdf-viewer';
     '[attr.aria-current]': 'current() ? "page" : null',
     '[attr.data-current]': 'current() || null',
     '[class]': 'class()',
-    '(click)': 'pdfViewer.goToPage(page())',
+    '(click)': 'pdfViewer.jumpToPage(page())',
   },
 })
 export class ScPdfViewerGoToPage {

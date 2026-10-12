@@ -9,6 +9,8 @@ export { ScPdfViewerToolbar } from './pdf-viewer-toolbar-base';
 export { ScPdfViewerNav } from './pdf-viewer-nav';
 export { ScPdfViewerPrevPage } from './pdf-viewer-prev-page';
 export { ScPdfViewerNextPage } from './pdf-viewer-next-page';
+export { ScPdfViewerBack } from './pdf-viewer-back';
+export { ScPdfViewerForward } from './pdf-viewer-forward';
 export { ScPdfViewerPageInput } from './pdf-viewer-page-input';
 export { ScPdfViewerZoom } from './pdf-viewer-zoom';
 export { ScPdfViewerZoomIn } from './pdf-viewer-zoom-in';
@@ -129,6 +131,7 @@ export type {
   ScPdfViewerSettingKey,
   ScPdfLayer,
   ScPdfAttachment,
+  ScPdfPageColors,
   ScPdfZoomLevel,
   ScPdfCursorTool,
   ScPdfScrollMode,
