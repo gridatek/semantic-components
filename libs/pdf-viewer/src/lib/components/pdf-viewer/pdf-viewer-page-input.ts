@@ -1,6 +1,7 @@
 import {
   Directive,
   ElementRef,
+  afterRenderEffect,
   computed,
   effect,
   inject,
@@ -58,9 +59,11 @@ export class ScPdfViewerPageInput {
 
     // The current page — not over what's being typed (pages pass by while
     // scrolling). Focused but untouched, it stays selected, so typing
-    // replaces it.
-    effect(() => {
+    // replaces it. After rendering: once the field is a text field for
+    // labels (a number field would drop "iv").
+    afterRenderEffect(() => {
       const label = this.pdfViewer.pageLabel(this.pdfViewer.currentPage());
+      this.labelled();
       untracked(() => {
         if (this.typing) return;
         this.element.value = label;
