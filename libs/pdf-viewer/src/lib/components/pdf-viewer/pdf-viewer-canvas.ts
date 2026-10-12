@@ -26,8 +26,8 @@ import {
   XfaLayer,
   setLayerDimensions,
 } from 'pdfjs-dist';
-import type { ScPdfViewerRoot } from './pdf-viewer-root';
-import { SC_PDF_VIEWER } from './pdf-viewer-root';
+import type { ScPdfViewer } from './pdf-viewer';
+import { SC_PDF_VIEWER } from './pdf-viewer';
 
 const DEFAULT_LINK_REL = 'noopener noreferrer nofollow';
 
@@ -57,7 +57,7 @@ class PdfLinkService {
   private externalLinkRel: string = DEFAULT_LINK_REL;
   private baseUrl: string | null = null;
 
-  constructor(private viewer: ScPdfViewerRoot) {}
+  constructor(private viewer: ScPdfViewer) {}
 
   get pagesCount(): number {
     return this.viewer.totalPages();
@@ -84,7 +84,7 @@ class PdfLinkService {
   }
 
   /** Form fields send their script events through it. */
-  get eventBus(): ScPdfViewerRoot['scripting']['eventBus'] {
+  get eventBus(): ScPdfViewer['scripting']['eventBus'] {
     return this.viewer.scripting.eventBus;
   }
 

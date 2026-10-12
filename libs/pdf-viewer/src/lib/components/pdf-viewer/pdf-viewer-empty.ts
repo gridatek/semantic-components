@@ -13,7 +13,7 @@ import {
   ScEmptyTitle,
   cn,
 } from '@semantic-components/ui';
-import { SC_PDF_VIEWER } from './pdf-viewer-root';
+import { SC_PDF_VIEWER } from './pdf-viewer';
 
 /**
  * Shown while there's no document (`src` empty). Project an icon in a

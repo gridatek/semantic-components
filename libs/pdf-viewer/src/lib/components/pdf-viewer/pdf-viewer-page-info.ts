@@ -10,7 +10,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { ScInput, cn } from '@semantic-components/ui';
-import { SC_PDF_VIEWER } from './pdf-viewer-root';
+import { SC_PDF_VIEWER } from './pdf-viewer';
 
 /**
  * The current page (editable — Enter or leaving the field goes there) and the

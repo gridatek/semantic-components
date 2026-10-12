@@ -11,7 +11,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { ScButton, ScTextarea, cn } from '@semantic-components/ui';
-import { SC_PDF_VIEWER } from './pdf-viewer-root';
+import { SC_PDF_VIEWER } from './pdf-viewer';
 import type { ScPdfComment } from './pdf-viewer-types';
 
 /**

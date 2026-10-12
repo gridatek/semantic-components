@@ -8,7 +8,7 @@ import {
   untracked,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { SC_PDF_VIEWER } from './pdf-viewer-root';
+import { SC_PDF_VIEWER } from './pdf-viewer';
 
 /**
  * Searches the document as you type; Enter goes to the next match,

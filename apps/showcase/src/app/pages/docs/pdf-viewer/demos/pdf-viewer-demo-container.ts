@@ -36,6 +36,7 @@ import {
   type ScPdfEditorMode,
   type ScPdfOutlineItem,
   type ScPdfSidebarView,
+  ScPdfViewer,
   ScPdfViewerAltTextDialog,
   ScPdfViewerCanvas,
   ScPdfViewerCommentSidebar,
@@ -65,7 +66,6 @@ import {
   ScPdfViewerPrint,
   ScPdfViewerPrintProgress,
   ScPdfViewerRetry,
-  ScPdfViewerRoot,
   ScPdfViewerSidebarResizer,
   ScPdfViewerSignatureDialog,
   ScPdfViewerSignatureList,
@@ -184,7 +184,7 @@ const TOOLS_WITH_OPTIONS: readonly ScPdfEditorMode[] = [
   selector: 'app-pdf-viewer-demo',
   imports: [
     NgTemplateOutlet,
-    ScPdfViewerRoot,
+    ScPdfViewer,
     ScPdfViewerContainer,
     ScPdfViewerToolbar,
     ScPdfViewerNav,
@@ -1135,7 +1135,7 @@ export class PdfViewerDemo {
     cn('block h-dvh w-full', this.classInput()),
   );
 
-  private readonly viewerRef = viewChild<ScPdfViewerRoot>('viewer');
+  private readonly viewerRef = viewChild<ScPdfViewer>('viewer');
   private readonly injector = inject(Injector);
 
   readonly pdfSrc = signal(

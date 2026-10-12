@@ -8,7 +8,7 @@ import {
   signal,
 } from '@angular/core';
 import { ScButton, ScInput, cn } from '@semantic-components/ui';
-import { SC_PDF_VIEWER } from './pdf-viewer-root';
+import { SC_PDF_VIEWER } from './pdf-viewer';
 import type { ScPdfSignatureData } from './pdf-viewer-types';
 
 /**

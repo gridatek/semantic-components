@@ -20,13 +20,13 @@ import { PdfViewerOpenParametersDemo } from './pdf-viewer-open-parameters-demo';
 export class PdfViewerOpenParametersDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, computed, input } from '@angular/core';
 import {
+  ScPdfViewer,
   ScPdfViewerCanvas,
   ScPdfViewerContainer,
   ScPdfViewerContent,
   ScPdfViewerFindResultsInfo,
   ScPdfViewerLoading,
   ScPdfViewerPageInfo,
-  ScPdfViewerRoot,
   ScPdfViewerSpacer,
   ScPdfViewerToolbar,
 } from '@semantic-components/pdf-viewer';
@@ -40,7 +40,7 @@ import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-pdf-viewer-open-parameters-demo',
   imports: [
-    ScPdfViewerRoot,
+    ScPdfViewer,
     ScPdfViewerContainer,
     ScPdfViewerToolbar,
     ScPdfViewerPageInfo,

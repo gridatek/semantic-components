@@ -13,8 +13,8 @@ import {
   ScToggleGroupItem,
   cn,
 } from '@semantic-components/ui';
+import { SC_PDF_VIEWER } from './pdf-viewer';
 import { SC_PDF_INK_COLORS } from './pdf-viewer-editor-colors';
-import { SC_PDF_VIEWER } from './pdf-viewer-root';
 
 /** The text tool's options: color and size. */
 @Component({

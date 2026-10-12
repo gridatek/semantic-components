@@ -1,6 +1,6 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { ScButton, bindInput, cn } from '@semantic-components/ui';
-import { SC_PDF_VIEWER } from './pdf-viewer-root';
+import { SC_PDF_VIEWER } from './pdf-viewer';
 
 /**
  * Zooms out by 25%; disabled at 25%. Use on a `scButton`, which it disables.

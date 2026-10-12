@@ -1,6 +1,6 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { ScButton, bindInput, cn } from '@semantic-components/ui';
-import { SC_PDF_VIEWER } from './pdf-viewer-root';
+import { SC_PDF_VIEWER } from './pdf-viewer';
 
 /**
  * Goes to the next match; disabled while there are none. Use on a `scButton`, which it disables.

@@ -1,6 +1,6 @@
 import { Directive, computed, inject, input, signal } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { SC_PDF_VIEWER } from './pdf-viewer-root';
+import { SC_PDF_VIEWER } from './pdf-viewer';
 
 /**
  * The page area. Dropping a file on it opens the file (as pdf.js); it's

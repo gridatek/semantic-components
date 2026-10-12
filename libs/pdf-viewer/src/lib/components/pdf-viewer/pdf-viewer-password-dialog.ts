@@ -20,7 +20,7 @@ import {
   ScLabel,
   cn,
 } from '@semantic-components/ui';
-import { SC_PDF_VIEWER } from './pdf-viewer-root';
+import { SC_PDF_VIEWER } from './pdf-viewer';
 
 /**
  * Asks for the password of a protected document. Closing it (Cancel, Escape,

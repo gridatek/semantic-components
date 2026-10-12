@@ -6,7 +6,7 @@ import {
   input,
 } from '@angular/core';
 import { ScButton, cn } from '@semantic-components/ui';
-import { SC_PDF_VIEWER } from './pdf-viewer-root';
+import { SC_PDF_VIEWER } from './pdf-viewer';
 
 /**
  * "Annotation deleted — Undo", shown for a few seconds after a deletion and

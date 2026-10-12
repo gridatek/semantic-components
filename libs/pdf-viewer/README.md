@@ -9,7 +9,7 @@ A composable PDF viewer for the Semantic Components library, built on PDF.js (`p
 ## Usage
 
 ```ts
-import { ScPdfViewerCanvas, ScPdfViewerContainer, ScPdfViewerContent, ScPdfViewerRoot, ScPdfViewerToolbar } from '@semantic-components/pdf-viewer';
+import { ScPdfViewer, ScPdfViewerCanvas, ScPdfViewerContainer, ScPdfViewerContent, ScPdfViewerToolbar } from '@semantic-components/pdf-viewer';
 ```
 
 Also import PDF.js's viewer styles in your `styles.css`: `@import 'pdfjs-dist/web/pdf_viewer.css';`

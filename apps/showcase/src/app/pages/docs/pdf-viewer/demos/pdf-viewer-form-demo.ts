@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation, computed, input } from '@angular/core';
 import {
+  ScPdfViewer,
   ScPdfViewerCanvas,
   ScPdfViewerContainer,
   ScPdfViewerContent,
@@ -7,7 +8,6 @@ import {
   ScPdfViewerLoading,
   ScPdfViewerPrint,
   ScPdfViewerPrintProgress,
-  ScPdfViewerRoot,
   ScPdfViewerSpacer,
   ScPdfViewerToolbar,
 } from '@semantic-components/pdf-viewer';
@@ -30,7 +30,7 @@ import {
 @Component({
   selector: 'app-pdf-viewer-form-demo',
   imports: [
-    ScPdfViewerRoot,
+    ScPdfViewer,
     ScPdfViewerContainer,
     ScPdfViewerToolbar,
     ScPdfViewerSpacer,

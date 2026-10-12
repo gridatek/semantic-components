@@ -8,7 +8,7 @@ import {
   signal,
 } from '@angular/core';
 import { ScCheckbox, ScCheckboxField, cn } from '@semantic-components/ui';
-import { SC_PDF_VIEWER } from './pdf-viewer-root';
+import { SC_PDF_VIEWER } from './pdf-viewer';
 
 interface LayerItem {
   id: string;

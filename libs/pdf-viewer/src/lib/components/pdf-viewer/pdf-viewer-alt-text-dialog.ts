@@ -26,7 +26,7 @@ import {
   ScTextarea,
   cn,
 } from '@semantic-components/ui';
-import { SC_PDF_VIEWER } from './pdf-viewer-root';
+import { SC_PDF_VIEWER } from './pdf-viewer';
 
 /**
  * Edits the alternative text of an image annotation (a stamp or a

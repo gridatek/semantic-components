@@ -183,14 +183,12 @@ function splitSource(source: string): { url: string; hash: string } {
     : { url: source.slice(0, index), hash: source.slice(index + 1) };
 }
 
-export const SC_PDF_VIEWER = new InjectionToken<ScPdfViewerRoot>(
-  'SC_PDF_VIEWER',
-);
+export const SC_PDF_VIEWER = new InjectionToken<ScPdfViewer>('SC_PDF_VIEWER');
 
 @Directive({
   selector: '[scPdfViewer]',
   exportAs: 'scPdfViewer',
-  providers: [{ provide: SC_PDF_VIEWER, useExisting: ScPdfViewerRoot }],
+  providers: [{ provide: SC_PDF_VIEWER, useExisting: ScPdfViewer }],
   host: {
     '[class]': 'class()',
     '[attr.data-loading]': 'isLoading() || null',
@@ -200,7 +198,7 @@ export const SC_PDF_VIEWER = new InjectionToken<ScPdfViewerRoot>(
     '(keydown)': 'onKeydown($event)',
   },
 })
-export class ScPdfViewerRoot {
+export class ScPdfViewer {
   private readonly destroyRef = inject(DestroyRef);
   private readonly document = inject(DOCUMENT);
 

@@ -1,6 +1,6 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { ScButton, bindInput, cn } from '@semantic-components/ui';
-import { SC_PDF_VIEWER } from './pdf-viewer-root';
+import { SC_PDF_VIEWER } from './pdf-viewer';
 
 /**
  * Downloads the document; disabled until it has loaded. Use on a `scButton`, which it disables.

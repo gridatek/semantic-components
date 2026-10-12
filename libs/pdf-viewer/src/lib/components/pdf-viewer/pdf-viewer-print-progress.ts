@@ -17,7 +17,7 @@ import {
   ScProgress,
   cn,
 } from '@semantic-components/ui';
-import { SC_PDF_VIEWER } from './pdf-viewer-root';
+import { SC_PDF_VIEWER } from './pdf-viewer';
 
 /**
  * Shows the progress while pages are prepared for printing. Closing it

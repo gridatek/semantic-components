@@ -6,7 +6,7 @@ import {
   input,
 } from '@angular/core';
 import { ScProgress, cn } from '@semantic-components/ui';
-import { SC_PDF_VIEWER } from './pdf-viewer-root';
+import { SC_PDF_VIEWER } from './pdf-viewer';
 
 /**
  * A thin bar along the top of the content while the document downloads —

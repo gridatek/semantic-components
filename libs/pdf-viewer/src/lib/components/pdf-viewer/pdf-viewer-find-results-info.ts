@@ -6,7 +6,7 @@ import {
   input,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { SC_PDF_VIEWER } from './pdf-viewer-root';
+import { SC_PDF_VIEWER } from './pdf-viewer';
 
 /** "3 of 12" / "Phrase not found", announced to screen readers as it changes. */
 @Component({

@@ -20,12 +20,12 @@ import { PdfViewerPresentationDemo } from './pdf-viewer-presentation-demo';
 export class PdfViewerPresentationDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, computed, input } from '@angular/core';
 import {
+  ScPdfViewer,
   ScPdfViewerCanvas,
   ScPdfViewerContainer,
   ScPdfViewerContent,
   ScPdfViewerLoading,
   ScPdfViewerPageInfo,
-  ScPdfViewerRoot,
   ScPdfViewerSpacer,
   ScPdfViewerToolbar,
   ScPdfViewerViewOptions,
@@ -53,7 +53,7 @@ import {
 @Component({
   selector: 'app-pdf-viewer-presentation-demo',
   imports: [
-    ScPdfViewerRoot,
+    ScPdfViewer,
     ScPdfViewerContainer,
     ScPdfViewerToolbar,
     ScPdfViewerPageInfo,

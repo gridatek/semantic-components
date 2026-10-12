@@ -1,5 +1,5 @@
-// Root directive
-export { ScPdfViewerRoot, SC_PDF_VIEWER } from './pdf-viewer-root';
+// The viewer: the document and all state
+export { ScPdfViewer, SC_PDF_VIEWER } from './pdf-viewer';
 
 // Container
 export { ScPdfViewerContainer } from './pdf-viewer-container';

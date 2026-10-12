@@ -7,7 +7,7 @@ import {
   viewChildren,
 } from '@angular/core';
 import { ScToggleGroup, ScToggleGroupItem, cn } from '@semantic-components/ui';
-import { SC_PDF_VIEWER } from './pdf-viewer-root';
+import { SC_PDF_VIEWER } from './pdf-viewer';
 import {
   ScPdfCursorTool,
   ScPdfScrollMode,

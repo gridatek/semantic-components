@@ -13,7 +13,7 @@ import {
   ScEmptyTitle,
   cn,
 } from '@semantic-components/ui';
-import { SC_PDF_VIEWER } from './pdf-viewer-root';
+import { SC_PDF_VIEWER } from './pdf-viewer';
 
 /**
  * Covers the content when the document can't be loaded, announced as an
