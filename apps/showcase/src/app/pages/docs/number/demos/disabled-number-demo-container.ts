@@ -7,7 +7,7 @@ import { DisabledNumberDemo } from './disabled-number-demo';
   imports: [DemoContainer, DisabledNumberDemo],
   template: `
     <app-demo-container
-      title="Disabled"
+      title="Disabled and read-only"
       demoUrl="/demos/number/disabled-number-demo"
       [code]="code"
     >
@@ -20,45 +20,65 @@ import { DisabledNumberDemo } from './disabled-number-demo';
 export default class DisabledNumberDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScButtonGroup,
+  ScField,
   ScLabel,
   ScNumber,
   ScNumberDecrement,
+  ScNumberGroup,
   ScNumberIncrement,
   ScNumberInput,
   ScNumberScrubArea,
 } from '@semantic-components/ui';
 import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
 
+/** Disabled: nothing changes it. Read-only: focusable and readable, not changed. */
 @Component({
   selector: 'app-disabled-number-demo',
   imports: [
+    ScField,
+    ScLabel,
     ScNumber,
     ScNumberScrubArea,
-    ScButtonGroup,
+    ScNumberGroup,
     ScNumberDecrement,
     ScNumberInput,
     ScNumberIncrement,
-    ScLabel,
     SiMinusIcon,
     SiPlusIcon,
   ],
   template: \`
-    <div scNumber [value]="42" [disabled]="true">
-      <div scNumberScrubArea>
-        <label scLabel>Locked Value</label>
+    <div class="flex flex-wrap gap-6">
+      <div scField scNumber class="w-40" [value]="42" [disabled]="true">
+        <div scNumberScrubArea>
+          <label scLabel>Disabled</label>
+        </div>
+        <div scNumberGroup>
+          <button scNumberDecrement>
+            <svg siMinusIcon></svg>
+            <span class="sr-only">Decrease value</span>
+          </button>
+          <input scNumberInput />
+          <button scNumberIncrement>
+            <svg siPlusIcon></svg>
+            <span class="sr-only">Increase value</span>
+          </button>
+        </div>
       </div>
-
-      <div scButtonGroup>
-        <button scNumberDecrement>
-          <svg siMinusIcon></svg>
-          <span class="sr-only">Decrease</span>
-        </button>
-        <input scNumberInput aria-label="Locked Value" />
-        <button scNumberIncrement>
-          <svg siPlusIcon></svg>
-          <span class="sr-only">Increase</span>
-        </button>
+      <div scField scNumber class="w-40" [value]="42" [readonly]="true">
+        <div scNumberScrubArea>
+          <label scLabel>Read-only</label>
+        </div>
+        <div scNumberGroup>
+          <button scNumberDecrement>
+            <svg siMinusIcon></svg>
+            <span class="sr-only">Decrease value</span>
+          </button>
+          <input scNumberInput />
+          <button scNumberIncrement>
+            <svg siPlusIcon></svg>
+            <span class="sr-only">Increase value</span>
+          </button>
+        </div>
       </div>
     </div>
   \`,

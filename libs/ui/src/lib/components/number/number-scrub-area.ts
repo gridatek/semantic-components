@@ -1,69 +1,142 @@
 import {
   DestroyRef,
   Directive,
+  ElementRef,
+  InjectionToken,
   computed,
   inject,
   input,
   signal,
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { fromEvent } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 import { cn } from '../../utils';
 import { SC_NUMBER } from './number';
 
+export const SC_NUMBER_SCRUB_AREA = new InjectionToken<ScNumberScrubArea>(
+  'SC_NUMBER_SCRUB_AREA',
+);
+
+/**
+ * Drag on it to change the value (e.g. on the label), as Base UI's scrub
+ * area: one step per `pixelSensitivity` pixels (Shift: `largeStep`, Alt:
+ * `smallStep`). With a mouse the pointer is locked — no edge of the screen
+ * stops you — and `scNumberScrubAreaCursor` stands in for it.
+ */
 @Directive({
   selector: '[scNumberScrubArea]',
+  exportAs: 'scNumberScrubArea',
+  providers: [
+    { provide: SC_NUMBER_SCRUB_AREA, useExisting: ScNumberScrubArea },
+  ],
   host: {
+    'data-slot': 'number-scrub-area',
     '[class]': 'class()',
-    '[attr.data-scrubbing]': 'isScrubbing() || null',
+    '[attr.data-scrubbing]': 'scrubbing() || null',
     '[attr.data-disabled]': 'number.disabled() || null',
-    '(mousedown)': 'onMouseDown($event)',
+    '(pointerdown)': 'onPointerDown($event)',
   },
 })
 export class ScNumberScrubArea {
-  private readonly destroyRef = inject(DestroyRef);
-  readonly number = inject(SC_NUMBER);
-  readonly classInput = input<string>('', { alias: 'class' });
+  protected readonly number = inject(SC_NUMBER);
+  private readonly element =
+    inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
-  protected readonly isScrubbing = signal(false);
-  private startX = 0;
-  private startValue = 0;
+  readonly classInput = input<string>('', { alias: 'class' });
+  /** Drag left–right, or up–down (up increases). */
+  readonly direction = input<'horizontal' | 'vertical'>('horizontal');
+  /** Pixels of movement per step. */
+  readonly pixelSensitivity = input(2);
+
+  readonly scrubbing = signal(false);
+  /** The pointer is locked: the cursor part shows instead of it. */
+  readonly locked = signal(false);
+  /** Where the (virtual) cursor is. */
+  readonly cursorX = signal(0);
+  readonly cursorY = signal(0);
 
   protected readonly class = computed(() =>
     cn(
-      'inline-flex items-center gap-2 mb-2',
-      'select-none cursor-ew-resize [&_*]:cursor-ew-resize',
-      'data-scrubbing:cursor-ew-resize',
-      'data-disabled:opacity-50 data-disabled:cursor-not-allowed data-disabled:[&_*]:cursor-not-allowed',
+      'touch-none select-none',
+      this.direction() === 'vertical' ? 'cursor-ns-resize' : 'cursor-ew-resize',
+      'data-disabled:cursor-not-allowed data-disabled:opacity-50',
       this.classInput(),
     ),
   );
 
-  protected onMouseDown(event: MouseEvent): void {
-    if (this.number.disabled()) return;
+  private end: (() => void) | null = null;
 
+  constructor() {
+    inject(DestroyRef).onDestroy(() => this.end?.());
+  }
+
+  protected onPointerDown(event: PointerEvent): void {
+    const number = this.number;
+    if (event.button !== 0 || number.disabled() || number.readonly()) return;
     event.preventDefault();
-    this.isScrubbing.set(true);
-    this.startX = event.clientX;
-    this.startValue = this.number.value() ?? 0;
+    number.flushInput();
+    this.end?.();
 
-    const mouseUp$ = fromEvent<MouseEvent>(document, 'mouseup');
+    this.scrubbing.set(true);
+    this.cursorX.set(event.clientX);
+    this.cursorY.set(event.clientY);
+    let lastX = event.clientX;
+    let lastY = event.clientY;
+    let travelled = 0;
+    const vertical = this.direction() === 'vertical';
 
-    fromEvent<MouseEvent>(document, 'mousemove')
-      .pipe(takeUntil(mouseUp$), takeUntilDestroyed(this.destroyRef))
-      .subscribe((e) => {
-        const deltaX = e.clientX - this.startX;
-        const step = this.number.step();
-        const speed = this.number.scrubSpeed();
-        const delta = deltaX * step * speed * 0.1;
-        const newValue = this.startValue + delta;
+    // A mouse: lock the pointer (the cursor part takes its place).
+    if (event.pointerType === 'mouse' && this.element.requestPointerLock) {
+      Promise.resolve(this.element.requestPointerLock())
+        .then(() =>
+          this.locked.set(document.pointerLockElement === this.element),
+        )
+        .catch(() => this.locked.set(false));
+    } else {
+      this.element.setPointerCapture?.(event.pointerId);
+    }
 
-        this.number.setValue(newValue);
-      });
+    const onMove = (move: PointerEvent) => {
+      const locked = document.pointerLockElement === this.element;
+      const dx = locked ? move.movementX : move.clientX - lastX;
+      const dy = locked ? move.movementY : move.clientY - lastY;
+      lastX = move.clientX;
+      lastY = move.clientY;
+      if (locked) this.moveCursor(dx, dy);
+      else {
+        this.cursorX.set(move.clientX);
+        this.cursorY.set(move.clientY);
+      }
+      // Right / up increases.
+      travelled += vertical ? -dy : dx;
+      const sensitivity = Math.max(1, this.pixelSensitivity());
+      const steps = Math.trunc(travelled / sensitivity);
+      if (!steps) return;
+      travelled -= steps * sensitivity;
+      number.stepBy(steps * number.stepSize(move));
+    };
+    const onUp = () => this.end?.();
 
-    mouseUp$
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(() => this.isScrubbing.set(false));
+    document.addEventListener('pointermove', onMove);
+    document.addEventListener('pointerup', onUp);
+    document.addEventListener('pointercancel', onUp);
+    this.end = () => {
+      document.removeEventListener('pointermove', onMove);
+      document.removeEventListener('pointerup', onUp);
+      document.removeEventListener('pointercancel', onUp);
+      if (document.pointerLockElement === this.element) {
+        document.exitPointerLock();
+      }
+      this.scrubbing.set(false);
+      this.locked.set(false);
+      this.end = null;
+      number.valueCommitted.emit(number.value());
+    };
+  }
+
+  /** Moves the virtual cursor, wrapping round the window's edges. */
+  private moveCursor(dx: number, dy: number): void {
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    this.cursorX.set((((this.cursorX() + dx) % width) + width) % width);
+    this.cursorY.set((((this.cursorY() + dy) % height) + height) % height);
   }
 }

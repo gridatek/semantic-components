@@ -1,56 +1,60 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScButtonGroup,
+  ScField,
   ScLabel,
   ScNumber,
   ScNumberDecrement,
+  ScNumberGroup,
   ScNumberIncrement,
   ScNumberInput,
   ScNumberScrubArea,
 } from '@semantic-components/ui';
 import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
 
+/** In euros, written the German way: type "1.234,5" — or "1234.5" — and leave the field. */
 @Component({
   selector: 'app-price-number-demo',
   imports: [
+    ScField,
+    ScLabel,
     ScNumber,
     ScNumberScrubArea,
-    ScButtonGroup,
+    ScNumberGroup,
     ScNumberDecrement,
     ScNumberInput,
     ScNumberIncrement,
-    ScLabel,
     SiMinusIcon,
     SiPlusIcon,
   ],
   template: `
-    <div class="space-y-4">
+    <div class="w-56 space-y-4">
       <div
+        scField
         scNumber
+        locale="de-DE"
         [(value)]="price"
-        [step]="0.01"
         [min]="0"
-        [formatOptions]="formatOptions"
+        [step]="0.5"
+        [largeStep]="10"
+        [format]="{ style: 'currency', currency: 'EUR' }"
       >
         <div scNumberScrubArea>
-          <label scLabel>Price ($)</label>
+          <label scLabel>Preis</label>
         </div>
-
-        <div scButtonGroup>
+        <div scNumberGroup>
           <button scNumberDecrement>
             <svg siMinusIcon></svg>
-            <span class="sr-only">Decrease</span>
+            <span class="sr-only">Decrease price</span>
           </button>
-          <input scNumberInput aria-label="Price" />
+          <input scNumberInput />
           <button scNumberIncrement>
             <svg siPlusIcon></svg>
-            <span class="sr-only">Increase</span>
+            <span class="sr-only">Increase price</span>
           </button>
         </div>
       </div>
-
-      <p class="text-muted-foreground text-sm">
-        Current price: {{ '$' + (price() ?? 0).toFixed(2) }}
+      <p class="bg-muted rounded-md p-4 text-sm">
+        Value: {{ price() ?? 'none' }}
       </p>
     </div>
   `,
@@ -58,9 +62,5 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class PriceNumberDemo {
-  readonly price = signal<number | null>(29.99);
-  readonly formatOptions: Intl.NumberFormatOptions = {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  };
+  readonly price = signal<number | null>(1234.5);
 }

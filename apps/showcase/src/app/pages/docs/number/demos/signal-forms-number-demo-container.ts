@@ -18,126 +18,103 @@ import { SignalFormsNumberDemo } from './signal-forms-number-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export default class SignalFormsNumberDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import { FormField, form, max, min, required } from '@angular/forms/signals';
 import {
-  ScButtonGroup,
+  ScField,
   ScLabel,
   ScNumber,
   ScNumberDecrement,
+  ScNumberGroup,
   ScNumberIncrement,
   ScNumberInput,
   ScNumberScrubArea,
 } from '@semantic-components/ui';
 import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
 
+/** \`[formField]\` on the number: min, max and required come from the schema. */
 @Component({
   selector: 'app-signal-forms-number-demo',
   imports: [
     FormField,
+    ScField,
+    ScLabel,
     ScNumber,
     ScNumberScrubArea,
-    ScButtonGroup,
+    ScNumberGroup,
     ScNumberDecrement,
     ScNumberInput,
     ScNumberIncrement,
-    ScLabel,
     SiMinusIcon,
     SiPlusIcon,
   ],
   template: \`
-    <div class="max-w-sm space-y-4">
-      <div scNumber [min]="0" [max]="100" class="space-y-2">
+    <div class="w-56 space-y-4">
+      <div scField scNumber [formField]="orderForm.quantity">
         <div scNumberScrubArea>
-          <label
-            scLabel
-            [class.text-destructive]="
-              quantityForm.quantity().invalid() &&
-              quantityForm.quantity().touched()
-            "
-          >
-            Quantity
-          </label>
+          <label scLabel>Quantity</label>
         </div>
-
-        <div scButtonGroup>
+        <div scNumberGroup>
           <button scNumberDecrement>
             <svg siMinusIcon></svg>
-            <span class="sr-only">Decrease</span>
+            <span class="sr-only">Decrease quantity</span>
           </button>
-          <input
-            scNumberInput
-            aria-label="Quantity"
-            [formField]="quantityForm.quantity"
-            [class.border-destructive]="
-              quantityForm.quantity().invalid() &&
-              quantityForm.quantity().touched()
-            "
-          />
+          <input scNumberInput />
           <button scNumberIncrement>
             <svg siPlusIcon></svg>
-            <span class="sr-only">Increase</span>
+            <span class="sr-only">Increase quantity</span>
           </button>
         </div>
-        @if (
-          quantityForm.quantity().invalid() && quantityForm.quantity().touched()
-        ) {
-          <p class="text-destructive text-sm font-medium" role="alert">
-            @if (hasError(quantityForm.quantity, 'required')) {
-              Quantity is required
-            } @else if (hasError(quantityForm.quantity, 'min')) {
-              Minimum value is 1
-            } @else if (hasError(quantityForm.quantity, 'max')) {
-              Maximum value is 100
+        @if (showErrors()) {
+          <p class="text-destructive text-sm" role="alert">
+            @switch (orderForm.quantity().errors()[0]?.kind) {
+              @case ('required') {
+                Enter a quantity.
+              }
+              @case ('min') {
+                At least 1.
+              }
+              @case ('max') {
+                At most 100.
+              }
             }
           </p>
         }
       </div>
 
-      <div class="bg-muted/50 rounded-lg border p-4">
-        <p class="text-sm font-medium">Form State:</p>
-        <pre class="text-muted-foreground mt-2 text-xs">{{ formState() }}</pre>
-      </div>
+      <pre class="bg-muted rounded-md p-4 text-xs">{{ state() }}</pre>
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
 export class SignalFormsNumberDemo {
-  private readonly formModel = signal<{ quantity: number | null }>({
+  private readonly order = signal<{ quantity: number | null }>({
     quantity: 10,
   });
 
-  readonly quantityForm = form(this.formModel, (path) => {
+  readonly orderForm = form(this.order, (path) => {
     required(path.quantity);
     min(path.quantity, 1);
     max(path.quantity, 100);
   });
 
-  formState(): string {
-    return JSON.stringify(
+  protected readonly showErrors = computed(
+    () =>
+      this.orderForm.quantity().invalid() &&
+      this.orderForm.quantity().touched(),
+  );
+
+  protected readonly state = computed(() =>
+    JSON.stringify(
       {
-        value: this.formModel(),
-        valid: this.quantityForm.quantity().valid(),
-        invalid: this.quantityForm.quantity().invalid(),
-        touched: this.quantityForm.quantity().touched(),
+        value: this.order().quantity,
+        valid: this.orderForm.quantity().valid(),
+        touched: this.orderForm.quantity().touched(),
       },
       null,
       2,
-    );
-  }
-
-  hasError(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    field: any,
-    errorKey: string,
-  ): boolean {
-    const errors = field().errors();
-    if (!errors || !Array.isArray(errors)) return false;
-    return errors.some(
-      (e: { rule?: string; name?: string }) =>
-        e.rule === errorKey || e.name === errorKey,
-    );
-  }
+    ),
+  );
 }`;
 }

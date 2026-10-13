@@ -1,87 +1,100 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScButtonGroup,
+  ScField,
   ScLabel,
   ScNumber,
   ScNumberDecrement,
+  ScNumberGroup,
   ScNumberIncrement,
   ScNumberInput,
   ScNumberScrubArea,
+  ScNumberScrubAreaCursor,
 } from '@semantic-components/ui';
 import {
-  SiLightbulbIcon,
   SiMinusIcon,
+  SiMoveHorizontalIcon,
+  SiMoveVerticalIcon,
   SiPlusIcon,
 } from '@semantic-icons/lucide-icons';
 
+/** Drag a label: the pointer is locked and the cursor part follows; Shift for big steps, Alt for small ones. */
 @Component({
   selector: 'app-scrubbing-number-demo',
   imports: [
+    ScField,
+    ScLabel,
     ScNumber,
     ScNumberScrubArea,
-    ScButtonGroup,
+    ScNumberGroup,
     ScNumberDecrement,
     ScNumberInput,
     ScNumberIncrement,
-    ScLabel,
-    SiLightbulbIcon,
+    ScNumberScrubAreaCursor,
     SiMinusIcon,
     SiPlusIcon,
+    SiMoveHorizontalIcon,
+    SiMoveVerticalIcon,
   ],
   template: `
-    <div class="space-y-6">
+    <div class="w-48 space-y-6">
       <div
+        scField
         scNumber
         [(value)]="opacity"
         [min]="0"
-        [max]="100"
-        [scrubSpeed]="0.5"
+        [max]="1"
+        [step]="0.01"
+        [smallStep]="0.001"
+        [largeStep]="0.1"
+        [format]="{ style: 'percent', maximumFractionDigits: 1 }"
       >
         <div scNumberScrubArea>
-          <label scLabel>Opacity (%)</label>
+          <label scLabel>Opacity</label>
+          <span scNumberScrubAreaCursor><svg siMoveHorizontalIcon></svg></span>
         </div>
-
-        <div scButtonGroup>
+        <div scNumberGroup>
           <button scNumberDecrement>
             <svg siMinusIcon></svg>
-            <span class="sr-only">Decrease</span>
+            <span class="sr-only">Decrease opacity</span>
           </button>
-          <input scNumberInput aria-label="Opacity" />
+          <input scNumberInput />
           <button scNumberIncrement>
             <svg siPlusIcon></svg>
-            <span class="sr-only">Increase</span>
+            <span class="sr-only">Increase opacity</span>
           </button>
         </div>
       </div>
 
-      <div scNumber [(value)]="rotation" [min]="0" [max]="360">
-        <div scNumberScrubArea>
-          <label scLabel>Rotation (deg)</label>
+      <div
+        scField
+        scNumber
+        [(value)]="rotation"
+        [min]="-180"
+        [max]="180"
+        [format]="{ style: 'unit', unit: 'degree' }"
+      >
+        <div scNumberScrubArea direction="vertical" [pixelSensitivity]="4">
+          <label scLabel>Rotation (drag up or down)</label>
+          <span scNumberScrubAreaCursor><svg siMoveVerticalIcon></svg></span>
         </div>
-
-        <div scButtonGroup>
+        <div scNumberGroup>
           <button scNumberDecrement>
             <svg siMinusIcon></svg>
-            <span class="sr-only">Decrease</span>
+            <span class="sr-only">Decrease rotation</span>
           </button>
-          <input scNumberInput aria-label="Rotation" />
+          <input scNumberInput />
           <button scNumberIncrement>
             <svg siPlusIcon></svg>
-            <span class="sr-only">Increase</span>
+            <span class="sr-only">Increase rotation</span>
           </button>
         </div>
       </div>
-
-      <p class="text-muted-foreground flex items-center gap-1 text-sm">
-        <svg siLightbulbIcon class="size-4"></svg>
-        Tip: Click and drag on the label to scrub values
-      </p>
     </div>
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
 export class ScrubbingNumberDemo {
-  readonly opacity = signal<number | null>(50);
+  readonly opacity = signal<number | null>(0.5);
   readonly rotation = signal<number | null>(0);
 }

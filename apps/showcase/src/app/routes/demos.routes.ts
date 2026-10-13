@@ -2450,6 +2450,13 @@ export const demosRoutes: Route[] = [
     path: 'demos/number',
     children: [
       {
+        path: 'steps-number-demo',
+        loadComponent: () =>
+          import('../pages/docs/number/demos/steps-number-demo').then(
+            (m) => m.StepsNumberDemo,
+          ),
+      },
+      {
         path: 'basic-number-demo',
         loadComponent: () =>
           import('../pages/docs/number/demos/basic-number-demo').then(
