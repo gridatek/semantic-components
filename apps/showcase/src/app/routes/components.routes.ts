@@ -409,9 +409,10 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/notification-center/notification-center-page'),
       },
       {
-        path: 'number',
-        title: 'Number - Semantic Components',
-        loadComponent: () => import('../pages/docs/number/number-page'),
+        path: 'number-field',
+        title: 'Number Field - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/number-field/number-field-page'),
       },
       {
         path: 'org-chart',
