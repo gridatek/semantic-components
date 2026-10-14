@@ -55,8 +55,9 @@ test.describe('Basic Pagination Demo', () => {
     const inactiveLinks = page.locator(
       'button[scPaginationLink]:not([aria-current])',
     );
+    // 3 pages, the first active.
+    await expect(inactiveLinks).toHaveCount(2);
     const count = await inactiveLinks.count();
-    expect(count).toBeGreaterThan(0);
     for (let i = 0; i < count; i++) {
       await expect(inactiveLinks.nth(i)).toHaveClass(/hover:bg-muted/);
     }
