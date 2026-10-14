@@ -174,13 +174,13 @@ export class MyComponent {
 
 ## Animation
 
-The popover uses `data-open`/`data-closed` boolean attributes for animation state, and `data-side` for directional slide-in animations.
+`ScPopover` animates with Angular's `animate.enter` / `animate.leave`: it fades and zooms in, sliding from its `data-side` when it is shown, and back out when it goes — Angular removes it once that animation ends.
 
 ### Animation Classes
 
 ```
-Entry: data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 duration-100
-Exit:  data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95
+Entry: animate.enter = animate-in fade-in-0 zoom-in-95 (duration-100)
+Exit:  animate.leave = animate-out fade-out-0 zoom-out-95
 Slide: data-[side=bottom]:slide-in-from-top-2
        data-[side=top]:slide-in-from-bottom-2
        data-[side=left]:slide-in-from-right-2

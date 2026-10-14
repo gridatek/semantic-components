@@ -104,15 +104,7 @@ The component supports 12 position combinations:
 
 ## Animation
 
-The hover card uses `data-open` and `data-closed` boolean attributes for animations, and `data-side` for directional slide-in:
-
-| Attribute     | When                           | Animation                         |
-| ------------- | ------------------------------ | --------------------------------- |
-| `data-open`   | Card is visible                | fade-in, zoom-in, slide-in (side) |
-| `data-closed` | Card is closing                | fade-out, zoom-out                |
-| `data-side`   | Always (top/right/bottom/left) | Controls slide-in direction       |
-
-The overlay stays open during the close animation and is removed after `animationend` fires.
+`ScHoverCard` animates with Angular's `animate.enter` / `animate.leave`: it fades and zooms in, sliding from its `data-side` when it is shown, and back out when it goes — Angular removes it once that animation ends.
 
 ## Differences from Tooltip
 

@@ -5,7 +5,6 @@ import {
   ViewEncapsulation,
   computed,
   contentChild,
-  effect,
   input,
   signal,
 } from '@angular/core';
@@ -31,7 +30,7 @@ export type ScHoverCardAlign = ScOverlayAlign;
       <ng-template
         cdkConnectedOverlay
         [cdkConnectedOverlayOrigin]="origin"
-        [cdkConnectedOverlayOpen]="overlayOpen()"
+        [cdkConnectedOverlayOpen]="open()"
         [cdkConnectedOverlayPositions]="positions()"
         (detach)="onDetach()"
       >
@@ -67,11 +66,8 @@ export class ScHoverCardProvider {
   /** Delay before hiding hover card (ms) */
   readonly closeDelay = input<number>(300);
 
-  /** Whether the hover card is logically open (controls animation state) */
+  /** Shown or not; the hover card animates in and out (`animate.enter` / `animate.leave`). */
   readonly open = signal<boolean>(false);
-
-  /** Whether the overlay should be physically open (stays true during close animation) */
-  readonly overlayOpen = signal<boolean>(false);
 
   private readonly triggerChild = contentChild(ScHoverCardTrigger);
   protected readonly hoverCardPortal = contentChild.required(ScHoverCardPortal);
@@ -86,36 +82,17 @@ export class ScHoverCardProvider {
 
   protected readonly class = computed(() => cn('contents', this.classInput()));
 
-  constructor() {
-    // When opening, open overlay immediately
-    effect(() => {
-      if (this.open()) {
-        this.overlayOpen.set(true);
-      }
-    });
-  }
-
   show(): void {
     this.open.set(true);
   }
 
   hide(): void {
     this.open.set(false);
-    // overlayOpen will be set to false by onAnimationComplete
   }
 
-  /** Called by hover-card when close animation completes */
-  onAnimationComplete(): void {
-    this.overlayOpen.set(false);
-  }
-
-  /**
-   * The CDK detached the overlay itself (Escape): sync both states, or the
-   * next hover would find them still true and never re-attach.
-   */
+  /** The CDK detached the overlay itself (Escape): closed. */
   protected onDetach(): void {
     if (this.open()) this.open.set(false);
-    if (this.overlayOpen()) this.overlayOpen.set(false);
   }
 
   /** Cancel pending hide timeout on the trigger */

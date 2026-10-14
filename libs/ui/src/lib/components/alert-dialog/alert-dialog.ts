@@ -1,46 +1,35 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   Component,
-  ElementRef,
   ViewEncapsulation,
   computed,
-  effect,
   inject,
   input,
-  signal,
 } from '@angular/core';
 import { cn } from '../../utils';
 import { ScAlertDialogProvider } from './alert-dialog-provider';
 
-type ScAlertDialogState = 'idle' | 'open' | 'closed';
-
+/** The alert dialog's panel: animates in when shown and out when it goes (`animate.enter` / `animate.leave`). */
 @Component({
   selector: 'div[scAlertDialog]',
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
   host: {
     role: 'alertdialog',
     'aria-modal': 'true',
     '[attr.aria-labelledby]': 'titleId',
     '[attr.aria-describedby]': 'descriptionId',
     '[attr.data-size]': 'size()',
-    '[attr.data-idle]': 'state() === "idle" ? "" : null',
-    '[attr.data-open]': 'state() === "open" ? "" : null',
-    '[attr.data-closed]': 'state() === "closed" ? "" : null',
     '[class]': 'class()',
     '[tabindex]': '-1',
-    '(animationend)': 'onAnimationEnd($event)',
+    'animate.enter': 'animate-in fade-in-0 zoom-in-95',
+    'animate.leave': 'animate-out fade-out-0 zoom-out-95',
   },
   encapsulation: ViewEncapsulation.None,
 })
 export class ScAlertDialog {
-  private readonly elementRef = inject(ElementRef<HTMLElement>);
-
   readonly alertDialogProvider = inject(ScAlertDialogProvider);
   readonly classInput = input<string>('', { alias: 'class' });
   readonly size = input<'default' | 'sm'>('default');
-  protected readonly state = signal<ScAlertDialogState>('idle');
 
   readonly dialogId = inject(_IdGenerator).getId('sc-alert-dialog-');
 
@@ -52,29 +41,7 @@ export class ScAlertDialog {
       'relative bg-background ring-foreground/10 grid w-full max-w-[calc(100%-2rem)] gap-4 rounded-xl p-4 text-sm ring-1 duration-100 outline-none',
       'data-[size=default]:max-w-xs data-[size=sm]:max-w-xs data-[size=default]:sm:max-w-sm',
       'group/alert-dialog-content',
-      'data-idle:opacity-0',
-      'data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95',
-      'data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95',
       this.classInput(),
     ),
   );
-
-  constructor() {
-    // Sync state with provider's open signal
-    effect(() => {
-      const isOpen = this.alertDialogProvider.open();
-      this.state.set(isOpen ? 'open' : 'closed');
-    });
-  }
-
-  protected onAnimationEnd(event: AnimationEvent): void {
-    // Only trigger cleanup when close animation completes
-    if (
-      this.state() === 'closed' &&
-      event.target === this.elementRef.nativeElement
-    ) {
-      this.state.set('idle');
-      this.alertDialogProvider.onDialogAnimationComplete();
-    }
-  }
 }

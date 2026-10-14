@@ -191,7 +191,7 @@ closeSheet(): void {
 
 ```typescript
 effect(() => {
-  if (this.overlayOpen()) {
+  if (this.open()) {
     this.attachSheet();
   } else {
     this.detachSheet();
@@ -203,23 +203,7 @@ The `scSheetPortal` directive marks the `ng-template` whose content is lazily in
 
 ### Slide Animations
 
-`ScSheet` applies different transform classes based on the side and open state:
-
-```typescript
-const sideClosedClasses: Record<SheetSide, string> = {
-  top: '-translate-y-full',
-  right: 'translate-x-full',
-  bottom: 'translate-y-full',
-  left: '-translate-x-full',
-};
-
-const sideOpenClasses: Record<SheetSide, string> = {
-  top: 'translate-y-0',
-  right: 'translate-x-0',
-  bottom: 'translate-y-0',
-  left: 'translate-x-0',
-};
-```
+`ScSheet` animates with Angular's `animate.enter` / `animate.leave`: it fades and slides in from its `side` (with the backdrop behind it fading in) when it is shown, and back out when it goes — Angular removes it once that animation ends.
 
 ## Accessibility
 
@@ -229,7 +213,7 @@ const sideOpenClasses: Record<SheetSide, string> = {
 - `aria-describedby` linked to `ScSheetDescription`
 - `aria-haspopup="dialog"` on the trigger
 - `aria-expanded` reflects open state on trigger
-- Focus trapped within the sheet via `cdkTrapFocus`
+- Focus trapped within the sheet via `scFocusTrap`
 - Escape key closes the sheet (via CDK overlay keydown events)
 - Click outside (backdrop) closes the sheet (via CDK overlay backdrop click)
 

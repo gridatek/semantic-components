@@ -8,13 +8,14 @@ import {
 import { cn } from '../../utils';
 import { ScNavigationMenuItem } from './navigation-menu-item';
 
+/** An item's content: animates in when shown and out when it goes (`animate.enter` / `animate.leave`). */
 @Component({
   selector: 'div[scNavigationMenuContent]',
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
   host: {
     '[class]': 'class()',
+    'animate.enter': 'animate-in fade-in-0 zoom-in-95',
+    'animate.leave': 'animate-out fade-out-0 zoom-out-95',
     '(mouseenter)': 'onMouseEnter()',
     '(mouseleave)': 'onMouseLeave()',
   },
@@ -30,11 +31,7 @@ export class ScNavigationMenuContent {
       'start-0 top-0 w-full md:absolute md:w-auto',
       'bg-popover text-popover-foreground',
       'rounded-md border shadow-lg',
-      'overflow-hidden',
-      'data-[motion^=from-]:animate-in data-[motion^=to-]:animate-out',
-      'data-[motion^=from-]:fade-in data-[motion^=to-]:fade-out',
-      'data-[motion=from-end]:slide-in-from-right-52 data-[motion=from-start]:slide-in-from-left-52',
-      'data-[motion=to-end]:slide-out-to-right-52 data-[motion=to-start]:slide-out-to-left-52',
+      'overflow-hidden duration-150',
       '**:data-[slot=navigation-menu-link]:focus:ring-0 **:data-[slot=navigation-menu-link]:focus:outline-none',
       this.classInput(),
     ),

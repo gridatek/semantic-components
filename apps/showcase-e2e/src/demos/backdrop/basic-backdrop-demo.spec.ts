@@ -2,24 +2,24 @@ import { expect, test } from '@playwright/test';
 import { collectErrors } from '../../interaction';
 
 test.describe('Backdrop', () => {
-  test('fades in and out, and says when it has faded out', async ({ page }) => {
+  test('fades in when shown, out when it goes, then is removed', async ({
+    page,
+  }) => {
     const errors = collectErrors(page);
     await page.goto('/demos/backdrop/basic-backdrop-demo');
     const backdrop = page.locator('[scBackdrop]');
     const toggle = page.getByRole('button', { name: 'Backdrop' });
-    const status = page.getByRole('status');
-    await expect(backdrop).toHaveAttribute('data-idle', '');
-    await expect(status).toHaveText('Not shown yet.');
+    await expect(backdrop).toHaveCount(0);
 
     await toggle.click();
     await expect(toggle).toHaveAttribute('aria-pressed', 'true');
-    await expect(backdrop).toHaveAttribute('data-open', '');
-    await expect(status).toHaveText('Shown.');
+    await expect(backdrop).toHaveCount(1);
+    await expect(backdrop).toHaveCSS('opacity', '1');
 
-    // animationComplete once the fade-out ends; idle again.
+    // Kept while it fades out, then removed.
     await toggle.click();
-    await expect(status).toHaveText('Faded out.');
-    await expect(backdrop).toHaveAttribute('data-idle', '');
+    await expect(backdrop).toHaveClass(/\banimate-out\b/);
+    await expect(backdrop).toHaveCount(0);
     expect(errors).toEqual([]);
   });
 });

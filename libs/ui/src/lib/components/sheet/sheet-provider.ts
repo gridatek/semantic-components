@@ -12,7 +12,6 @@ import {
   inject,
   input,
   model,
-  signal,
   viewChild,
 } from '@angular/core';
 import { ScFocusTrap } from '../../utilities';
@@ -28,11 +27,7 @@ export type ScSheetSide = 'top' | 'right' | 'bottom' | 'left';
   template: `
     <ng-content />
     <ng-template #overlayTemplate>
-      <div
-        scBackdrop
-        [open]="open()"
-        (animationComplete)="onBackdropAnimationComplete()"
-      ></div>
+      <div scBackdrop></div>
       <div scFocusTrap>
         <ng-container [ngTemplateOutlet]="sheetPortal().templateRef" />
       </div>
@@ -55,48 +50,21 @@ export class ScSheetProvider {
 
   protected readonly sheetPortal = contentChild.required(ScSheetPortal);
 
+  /** Shown or not; the sheet and backdrop animate in and out (`animate.enter` / `animate.leave`). */
   readonly open = model<boolean>(false);
-  readonly overlayOpen = signal<boolean>(false);
-  private readonly animationsCompleted = signal<number>(0);
   private overlayRef: OverlayRef | null = null;
 
   protected readonly class = computed(() => cn('contents', this.classInput()));
 
   constructor() {
+    // Detached on close: Angular keeps the parts until they've animated out.
     effect(() => {
       if (this.open()) {
-        this.overlayOpen.set(true);
-        this.animationsCompleted.set(0);
-      }
-    });
-
-    effect(() => {
-      const completed = this.animationsCompleted();
-      if (completed === 2 && !this.open()) {
-        this.overlayOpen.set(false);
-        this.animationsCompleted.set(0);
-      }
-    });
-
-    effect(() => {
-      if (this.overlayOpen()) {
         this.attachSheet();
       } else {
         this.detachSheet();
       }
     });
-  }
-
-  onSheetAnimationComplete(): void {
-    if (!this.open()) {
-      this.animationsCompleted.update((n) => n + 1);
-    }
-  }
-
-  onBackdropAnimationComplete(): void {
-    if (!this.open()) {
-      this.animationsCompleted.update((n) => n + 1);
-    }
   }
 
   private getOverlayRef() {

@@ -166,7 +166,7 @@ closeDialog(): void {
 
 ```typescript
 effect(() => {
-  if (this.overlayOpen()) {
+  if (this.open()) {
     this.attachDialog();
   } else {
     this.detachDialog();
@@ -178,17 +178,7 @@ The `scAlertDialogPortal` directive marks the `ng-template` whose content is laz
 
 ### Animations
 
-`ScAlertDialog` uses a three-state animation model:
-
-| State    | Data Attribute | Description                                              |
-| -------- | -------------- | -------------------------------------------------------- |
-| `idle`   | `data-idle`    | Hidden (`opacity-0`), resting state                      |
-| `open`   | `data-open`    | Entry animation (`fade-in`, `zoom-in`)                   |
-| `closed` | `data-closed`  | Exit animation (`fade-out`, `zoom-out`) → back to `idle` |
-
-The flow is: `idle` → `open` → `closed` → `idle`
-
-On `animationend`, the `closed` state resets to `idle`, which triggers overlay cleanup via `onDialogAnimationComplete()`.
+`ScAlertDialog` animates with Angular's `animate.enter` / `animate.leave`: it fades and zooms in (with the backdrop behind it fading in) when it is shown, and back out when it goes — Angular removes it once that animation ends.
 
 ## Accessibility
 

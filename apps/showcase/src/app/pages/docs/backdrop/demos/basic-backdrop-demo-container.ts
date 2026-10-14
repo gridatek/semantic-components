@@ -23,7 +23,7 @@ import { ScBackdrop, ScButton } from '@semantic-components/ui';
 
 /**
  * The backdrop over a card (kept inside it: \`absolute\` instead of the
- * overlay's \`fixed\`); \`animationComplete\` tells when it has faded out.
+ * overlay's \`fixed\`): it fades in when shown and out when it goes.
  */
 @Component({
   selector: 'app-basic-backdrop-demo',
@@ -34,30 +34,18 @@ import { ScBackdrop, ScButton } from '@semantic-components/ui';
         class="relative grid h-40 w-72 place-items-center overflow-hidden rounded-lg border"
       >
         <p class="text-sm">The page behind</p>
-        <div
-          scBackdrop
-          class="absolute z-0"
-          [open]="open()"
-          (animationComplete)="fadedOut.set(true)"
-        ></div>
+        @if (open()) {
+          <div scBackdrop class="absolute z-0"></div>
+        }
       </div>
       <button
         scButton
         variant="outline"
         [attr.aria-pressed]="open()"
-        (click)="toggle()"
+        (click)="open.set(!open())"
       >
         Backdrop
       </button>
-      <p class="text-muted-foreground text-sm" role="status">
-        @if (open()) {
-          Shown.
-        } @else if (fadedOut()) {
-          Faded out.
-        } @else {
-          Not shown yet.
-        }
-      </p>
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },
@@ -65,11 +53,5 @@ import { ScBackdrop, ScButton } from '@semantic-components/ui';
 })
 export class BasicBackdropDemo {
   protected readonly open = signal(false);
-  protected readonly fadedOut = signal(false);
-
-  protected toggle(): void {
-    this.fadedOut.set(false);
-    this.open.update((open) => !open);
-  }
 }`;
 }

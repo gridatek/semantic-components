@@ -151,7 +151,7 @@ closeDrawer(): void {
 
 ```typescript
 effect(() => {
-  if (this.overlayOpen()) {
+  if (this.open()) {
     this.attachDrawer();
   } else {
     this.detachDrawer();
@@ -163,14 +163,7 @@ The `scDrawerPortal` directive marks the `ng-template` whose content is lazily i
 
 ### Animations
 
-`ScDrawer` uses directional slide animations with a two-state model:
-
-| State    | Data Attribute        | Description                                   |
-| -------- | --------------------- | --------------------------------------------- |
-| `open`   | `data-state="open"`   | Entry animation (fade + slide from direction) |
-| `closed` | `data-state="closed"` | Exit animation (fade + slide to direction)    |
-
-On `animationend`, the `closed` state triggers overlay cleanup via `onDrawerAnimationComplete()`.
+`ScDrawer` animates with Angular's `animate.enter` / `animate.leave`: it fades and slides in from its `direction` (with the backdrop behind it fading in) when it is shown, and back out when it goes — Angular removes it once that animation ends.
 
 ## Accessibility
 

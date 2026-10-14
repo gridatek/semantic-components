@@ -10,7 +10,7 @@ The popover component uses a two-signal architecture pattern to ensure smooth an
 - No backdrop (closes on outside click via `overlayOutsideClick`)
 - Positioned dynamically based on `side` and `align` inputs
 - Lightweight fade + zoom + slide animations (100ms)
-- `data-open`/`data-closed` boolean attributes for animation state
+- `animate.enter` / `animate.leave` for its animations (see "Opening and closing")
 - `data-side` attribute for directional slide-in animations
 - Provider uses `display: contents` CSS to be invisible in layout
 
@@ -45,7 +45,7 @@ template: `
     <ng-template
       cdkConnectedOverlay
       [cdkConnectedOverlayOrigin]="origin"
-      [cdkConnectedOverlayOpen]="overlayOpen()"
+      [cdkConnectedOverlayOpen]="open()"
       [cdkConnectedOverlayPositions]="[position()]"
       (overlayOutsideClick)="close()"
       (overlayKeydown)="onKeydown($event)"
@@ -64,97 +64,24 @@ The provider uses `display: contents` so it doesn't create a layout box. This me
 protected readonly class = computed(() => cn('contents', this.classInput()));
 ```
 
-## The Two-Signal Pattern
+## Opening and closing
 
-Since popover has no backdrop, we only need to coordinate **one animation** (the popover itself). This simplifies the pattern to just two signals.
+`open` on `ScPopoverProvider` is the only state. While it is true the overlay is attached (a connected overlay next to its trigger, with the focus trap); when it turns false the overlay is detached.
 
-### Signal 1: `open` (Logical State)
+The animated parts — `scPopover` (fade and zoom, from the side it opens on) — declare their own animations with Angular's `animate.enter` / `animate.leave`:
 
-**Purpose:** Controls what the popover _should_ be doing
-
-```typescript
-// In ScPopoverProvider
-readonly open = model<boolean>(false);
-```
-
-**Responsibilities:**
-
-- Represents user intent ("should the popover be visible?")
-- Triggers animation state changes
-- When `true`: Triggers entry animation
-- When `false`: Triggers exit animation
-
-### Signal 2: `overlayOpen` (Physical State)
-
-**Purpose:** Controls whether DOM exists via `cdkConnectedOverlayOpen`
-
-```typescript
-// In ScPopoverProvider
-readonly overlayOpen = signal<boolean>(false);
-```
-
-**Responsibilities:**
-
-- Controls CDK connected overlay attachment/detachment
-- Stays `true` during close animation (critical!)
-- Only becomes `false` after animation completes
-- Ensures animation can play before DOM removal
-- Bound to `[cdkConnectedOverlayOpen]` in the provider template
-
-## Animation Architecture
-
-### Animation State Attributes
-
-The popover uses `data-open`/`data-closed` boolean attributes instead of `data-state`:
-
-```typescript
+```ts
 host: {
-  '[attr.data-open]': 'state() === "open" ? true : null',
-  '[attr.data-closed]': 'state() === "closed" ? true : null',
-  '[attr.data-side]': 'popover.side()',
+  'animate.enter': 'animate-in …',  // added when it is shown, removed once played
+  'animate.leave': 'animate-out …', // added when it goes; Angular removes it once played
 }
 ```
 
-### Animation Classes
+So on close Angular keeps each part in the page until its leave animation has ended, then removes it — in that same frame. The CDK waits for the overlay's pane to empty before tidying up, so nothing cuts the animation short. There is no flag for "still in the DOM", no counter of finished animations and no `animationend` handler.
 
-```typescript
-protected readonly class = computed(() =>
-  cn(
-    // Base styles
-    'bg-popover text-popover-foreground z-50 w-72 rounded-lg ring-1 ring-foreground/10 flex flex-col gap-2.5 p-2.5 text-sm shadow-md outline-hidden',
+Why not the old way (a second, "physical" open state, set to false from `animationend`): when an exit animation ends the element snaps back to its visible style, and removing it then took a change detection run. With zoneless Angular that run came a frame late, and the popover was painted fully visible once more before it went.
 
-    // Entry animation
-    'data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 duration-100',
-
-    // Exit animation
-    'data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95',
-
-    // Directional slide-in based on side
-    'data-[side=bottom]:slide-in-from-top-2',
-    'data-[side=left]:slide-in-from-right-2',
-    'data-[side=right]:slide-in-from-left-2',
-    'data-[side=top]:slide-in-from-bottom-2',
-  ),
-);
-```
-
-### Animation Flow
-
-**Opening:**
-
-1. `open` set to `true`
-2. Provider effect sets `overlayOpen = true` (DOM mounts)
-3. Popover effect sets `state = 'open'`
-4. `data-open` attribute triggers entry animation (fade + zoom + slide)
-
-**Closing:**
-
-1. `open` set to `false`
-2. Popover effect sets `state = 'closed'`
-3. `data-closed` attribute triggers exit animation
-4. `overlayOpen` stays `true` (DOM remains for animation)
-5. `animationend` fires → `onPopoverAnimationComplete()`
-6. `overlayOpen` set to `false` → CDK removes overlay
+Where it slides or zooms from and to is set by plain classes (`slide-in-from-*`, `slide-out-to-*`, `zoom-*`): they only set the variables `animate-in` / `animate-out` read, so they can stay on the element all the time.
 
 ## Sub-Components
 
@@ -193,20 +120,6 @@ Close button directive:
 @Directive({ selector: 'button[scPopoverClose]' })
 // Calls popover.open.set(false) on click
 ```
-
-## Comparison: Popover vs Dialog/Sheet/Drawer
-
-| Feature           | Popover                                | Dialog/Sheet/Drawer       |
-| ----------------- | -------------------------------------- | ------------------------- |
-| **Backdrop**      | None                                   | ScBackdrop component      |
-| **Positioning**   | Trigger-relative (cdkConnectedOverlay) | Global (Overlay.create)   |
-| **Animations**    | 1 (popover only)                       | 2 (content + backdrop)    |
-| **Coordination**  | Direct cleanup                         | Signal counter            |
-| **Duration**      | 100ms                                  | 300ms                     |
-| **Outside Click** | overlayOutsideClick                    | backdropClick             |
-| **Portal**        | ng-template directive                  | ng-template directive     |
-| **Provider CSS**  | `display: contents`                    | `display: contents`       |
-| **State attrs**   | `data-open`/`data-closed`              | `data-open`/`data-closed` |
 
 ## Accessibility
 

@@ -39,28 +39,24 @@ import BasicBackdropDemoContainer from './demos/basic-backdrop-demo-container';
         <h2 scHeading appToc>How It Works</h2>
         <ul class="text-muted-foreground list-inside list-disc space-y-1">
           <li>
-            <code>open</code>
-            fades it in or out. It covers the window (
+            It fades in when it is shown and out when it goes (
+            <code>animate.enter</code>
+            /
+            <code>animate.leave</code>
+            ): Angular removes it once it has faded out. Show it with
+            <code>&#64;if</code>
+            , or as part of an overlay.
+          </li>
+          <li>
+            It covers the window (
             <code>fixed inset-0</code>
             ) behind the overlay's content; a
             <code>class</code>
             changes that.
           </li>
           <li>
-            <code>animationComplete</code>
-            emits once it has faded out: the time to remove the overlay.
-          </li>
-          <li>
             It doesn't take clicks or focus: closing on a click outside, and
             trapping focus, are the overlay's.
-          </li>
-          <li>
-            <code>data-open</code>
-            ,
-            <code>data-closed</code>
-            and
-            <code>data-idle</code>
-            (before it first opens, and once faded out) tell its state.
           </li>
         </ul>
       </section>

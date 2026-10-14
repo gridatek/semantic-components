@@ -5,10 +5,8 @@ import {
   ViewEncapsulation,
   computed,
   contentChild,
-  effect,
   input,
   model,
-  signal,
 } from '@angular/core';
 import { ScFocusTrap } from '../../utilities';
 import {
@@ -33,7 +31,7 @@ export type ScPopoverAlign = ScOverlayAlign;
       <ng-template
         cdkConnectedOverlay
         [cdkConnectedOverlayOrigin]="origin"
-        [cdkConnectedOverlayOpen]="overlayOpen()"
+        [cdkConnectedOverlayOpen]="open()"
         [cdkConnectedOverlayPositions]="positions()"
         [cdkConnectedOverlayDisableClose]="true"
         (overlayOutsideClick)="close()"
@@ -68,20 +66,8 @@ export class ScPopoverProvider {
     alias: 'origin',
   });
 
-  /**
-   * Logical state: Controls animation state (open/closed)
-   * - When true: Triggers entry animation
-   * - When false: Triggers exit animation
-   */
+  /** Shown or not; the popover animates in and out (`animate.enter` / `animate.leave`). */
   readonly open = model<boolean>(false);
-
-  /**
-   * Physical state: Controls DOM presence via cdkConnectedOverlayOpen
-   * - When true: Content exists in DOM (can animate)
-   * - When false: Content removed from DOM
-   * - Stays true during close animation to allow it to complete
-   */
-  readonly overlayOpen = signal<boolean>(false);
 
   private readonly triggerChild = contentChild(ScPopoverTrigger);
   protected readonly popoverPortal = contentChild.required(ScPopoverPortal);
@@ -96,39 +82,13 @@ export class ScPopoverProvider {
 
   protected readonly class = computed(() => cn('contents', this.classInput()));
 
-  constructor() {
-    // Synchronize overlay state with logical state for opening
-    effect(() => {
-      if (this.open()) {
-        // Opening: Mount DOM immediately so animation can start
-        this.overlayOpen.set(true);
-      }
-      // Note: When closing (open = false), overlayOpen stays true
-      // until animation completes (handled by onPopoverAnimationComplete)
-    });
-  }
-
   close(): void {
     this.open.set(false);
   }
 
-  /**
-   * Called by popover when its close animation completes
-   */
-  onPopoverAnimationComplete(): void {
-    if (!this.open()) {
-      this.overlayOpen.set(false);
-    }
-  }
-
-  /**
-   * The overlay went away without our close animation (e.g. the CDK detached
-   * it): sync both states, or the next open would find `overlayOpen` still
-   * true and never re-attach.
-   */
+  /** The CDK detached the overlay (it was scrolled away, say): closed. */
   protected onDetach(): void {
     if (this.open()) this.open.set(false);
-    if (this.overlayOpen()) this.overlayOpen.set(false);
   }
 
   protected onKeydown(event: KeyboardEvent): void {

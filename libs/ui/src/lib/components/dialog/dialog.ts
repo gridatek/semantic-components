@@ -1,44 +1,33 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   Component,
-  ElementRef,
   ViewEncapsulation,
   computed,
-  effect,
   inject,
   input,
-  signal,
 } from '@angular/core';
 import { cn } from '../../utils';
 import { ScDialogProvider } from './dialog-provider';
 
-type ScDialogState = 'idle' | 'open' | 'closed';
-
+/** The dialog's panel: animates in when shown and out when it goes (`animate.enter` / `animate.leave`). */
 @Component({
   selector: 'div[scDialog]',
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
   host: {
     role: 'dialog',
     'aria-modal': 'true',
     '[attr.aria-labelledby]': 'titleId',
     '[attr.aria-describedby]': 'descriptionId',
-    '[attr.data-idle]': 'state() === "idle" ? "" : null',
-    '[attr.data-open]': 'state() === "open" ? "" : null',
-    '[attr.data-closed]': 'state() === "closed" ? "" : null',
     '[class]': 'class()',
     '[tabindex]': '-1',
-    '(animationend)': 'onAnimationEnd($event)',
+    'animate.enter': 'animate-in fade-in-0 zoom-in-95',
+    'animate.leave': 'animate-out fade-out-0 zoom-out-95',
   },
   encapsulation: ViewEncapsulation.None,
 })
 export class ScDialog {
-  private readonly elementRef = inject(ElementRef<HTMLElement>);
-
   readonly dialogProvider = inject(ScDialogProvider);
   readonly classInput = input<string>('', { alias: 'class' });
-  protected readonly state = signal<ScDialogState>('idle');
 
   readonly dialogId = inject(_IdGenerator).getId('sc-dialog-');
 
@@ -48,29 +37,7 @@ export class ScDialog {
   protected readonly class = computed(() =>
     cn(
       'mx-auto relative bg-popover text-popover-foreground ring-foreground/10 grid w-full max-w-[calc(100%-2rem)] gap-4 rounded-xl p-4 text-sm ring-1 duration-100 outline-none sm:max-w-sm',
-      'data-idle:opacity-0',
-      'data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95',
-      'data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95',
       this.classInput(),
     ),
   );
-
-  constructor() {
-    // Sync state with provider's open signal
-    effect(() => {
-      const isOpen = this.dialogProvider.open();
-      this.state.set(isOpen ? 'open' : 'closed');
-    });
-  }
-
-  protected onAnimationEnd(event: AnimationEvent): void {
-    // Only trigger cleanup when close animation completes
-    if (
-      this.state() === 'closed' &&
-      event.target === this.elementRef.nativeElement
-    ) {
-      this.state.set('idle');
-      this.dialogProvider.onDialogAnimationComplete();
-    }
-  }
 }

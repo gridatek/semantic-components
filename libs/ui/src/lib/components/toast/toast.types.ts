@@ -25,7 +25,6 @@ export interface ScToastData {
     onClick: () => void;
   };
   duration?: number;
-  state?: 'open' | 'closed';
 }
 
 export interface ScToastConfig {

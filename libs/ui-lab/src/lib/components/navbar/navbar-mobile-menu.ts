@@ -15,9 +15,7 @@ type ScNavbarMobileMenuState = 'open' | 'closed';
 
 @Component({
   selector: 'div[scNavbarMobileMenu]',
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
   host: {
     '[id]': 'provider.menuId',
     role: 'navigation',
@@ -44,6 +42,10 @@ export class ScNavbarMobileMenu {
       'bg-background border-t border-border',
       'animate-in fade-in-0 slide-in-from-top duration-300',
       'data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:slide-out-to-top data-[state=closed]:duration-300',
+      // Its content is projected, so Angular's animate.leave doesn't apply:
+      // it is removed once the exit animation ends (onAnimationEnd), and keeps
+      // that last, invisible frame until then.
+      'data-[state=closed]:fill-mode-forwards',
       this.classInput(),
     ),
   );

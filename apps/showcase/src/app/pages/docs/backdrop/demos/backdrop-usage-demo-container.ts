@@ -67,7 +67,9 @@ import { ScBackdrop, ScButton } from '@semantic-components/ui';
     <button scButton variant="outline" (click)="open.set(!open())">
       Backdrop
     </button>
-    <div scBackdrop [open]="open()"></div>
+    @if (open()) {
+      <div scBackdrop></div>
+    }
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,

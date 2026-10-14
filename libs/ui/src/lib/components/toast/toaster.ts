@@ -48,8 +48,7 @@ export class ScToaster {
     // Dismiss the oldest toast if the limit is exceeded
     const current = this.toastsSignal();
     if (current.length >= this.maxToasts) {
-      const oldest = current.find((t) => t.state !== 'closed');
-      if (oldest) this.dismiss(oldest.id);
+      this.dismiss(current[0].id);
     }
 
     this.toastsSignal.update((toasts) => [...toasts, toast]);
@@ -130,17 +129,7 @@ export class ScToaster {
     this.timerStartTimes.delete(id);
     this.timerRemaining.delete(id);
 
-    // Set state to 'closed' to trigger exit animation.
-    // Actual removal happens in toast-stack via (animationend).
-    this.toastsSignal.update((toasts) =>
-      toasts.map((t) => (t.id === id ? { ...t, state: 'closed' as const } : t)),
-    );
-  }
-
-  /**
-   * Called by toast-stack after the exit animation completes.
-   */
-  remove(id: string): void {
+    // Out of the list: Angular plays its exit animation, then removes it.
     this.toastsSignal.update((toasts) => toasts.filter((t) => t.id !== id));
   }
 
@@ -152,9 +141,7 @@ export class ScToaster {
     this.timeouts.clear();
     this.timerStartTimes.clear();
     this.timerRemaining.clear();
-    this.toastsSignal.update((toasts) =>
-      toasts.map((t) => ({ ...t, state: 'closed' as const })),
-    );
+    this.toastsSignal.set([]);
   }
 
   private ensureOverlay(): void {

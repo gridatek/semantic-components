@@ -36,12 +36,7 @@ export const SC_LIGHTBOX_PROVIDER = new InjectionToken<ScLightboxProvider>(
   template: `
     <ng-content />
     <ng-template #overlayTemplate>
-      <div
-        scBackdrop
-        [open]="isOpen()"
-        (animationComplete)="onBackdropAnimationComplete()"
-        class="z-0 bg-black/95"
-      ></div>
+      <div scBackdrop class="z-0 bg-black/95"></div>
       <div scFocusTrap>
         <ng-container [ngTemplateOutlet]="lightboxPortal().templateRef" />
       </div>
@@ -76,8 +71,6 @@ export class ScLightboxProvider {
 
   protected readonly lightboxPortal = contentChild.required(ScLightboxPortal);
 
-  private readonly overlayOpen = signal<boolean>(false);
-  private readonly animationsCompleted = signal<number>(0);
   private overlayRef: OverlayRef | null = null;
 
   protected readonly class = computed(() => this.classInput());
@@ -89,23 +82,9 @@ export class ScLightboxProvider {
   });
 
   constructor() {
+    // Detached on close: Angular keeps the backdrop until it has faded out.
     effect(() => {
       if (this.isOpen()) {
-        this.overlayOpen.set(true);
-        this.animationsCompleted.set(0);
-      }
-    });
-
-    effect(() => {
-      const completed = this.animationsCompleted();
-      if (completed >= 1 && !this.isOpen()) {
-        this.overlayOpen.set(false);
-        this.animationsCompleted.set(0);
-      }
-    });
-
-    effect(() => {
-      if (this.overlayOpen()) {
         this.attach();
       } else {
         this.detach();
@@ -176,12 +155,6 @@ export class ScLightboxProvider {
 
   onImageLoad(): void {
     this.imageLoading.set(false);
-  }
-
-  onBackdropAnimationComplete(): void {
-    if (!this.isOpen()) {
-      this.animationsCompleted.update((n) => n + 1);
-    }
   }
 
   private getOverlayRef() {

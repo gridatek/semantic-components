@@ -8,16 +8,17 @@ import {
 import { cn } from '../../utils';
 import { ScToastPosition, ScToastVariant } from './toast.types';
 
+/** A toast: slides in when shown and out when dismissed (`animate.enter` / `animate.leave`). */
 @Component({
   selector: 'div[scToast]',
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
   host: {
     role: 'status',
     'aria-live': 'polite',
     'aria-atomic': 'true',
     '[class]': 'class()',
+    'animate.enter': 'animate-in',
+    'animate.leave': 'animate-out',
     '(pointerenter)': 'onPointerEnter()',
     '(pointerleave)': 'onPointerLeave()',
   },
@@ -37,10 +38,11 @@ export class ScToast {
   protected readonly class = computed(() =>
     cn(
       'group pointer-events-auto relative flex w-full items-center justify-between gap-4 overflow-hidden rounded-2xl border p-4 pe-6 shadow-lg transition-all',
-      'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-80 data-[state=closed]:slide-out-to-right-full',
+      // Where it slides from and to (read by the enter / leave animations)
+      'fade-out-80 slide-out-to-right-full',
       this.position().startsWith('bottom')
-        ? 'data-[state=open]:slide-in-from-bottom-full'
-        : 'data-[state=open]:slide-in-from-top-full',
+        ? 'slide-in-from-bottom-full'
+        : 'slide-in-from-top-full',
       this.variantClass(),
       this.classInput(),
     ),

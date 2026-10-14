@@ -12,7 +12,6 @@ import {
   inject,
   input,
   model,
-  signal,
   viewChild,
 } from '@angular/core';
 import { ScFocusTrap } from '../../utilities';
@@ -26,11 +25,7 @@ import { ScDialogPortal } from './dialog-portal';
   template: `
     <ng-content />
     <ng-template #overlayTemplate>
-      <div
-        scBackdrop
-        [open]="open()"
-        (animationComplete)="onBackdropAnimationComplete()"
-      ></div>
+      <div scBackdrop></div>
       <div scFocusTrap>
         <ng-container [ngTemplateOutlet]="dialogPortal().templateRef" />
       </div>
@@ -52,80 +47,22 @@ export class ScDialogProvider {
 
   protected readonly dialogPortal = contentChild.required(ScDialogPortal);
 
-  /**
-   * Logical state: Controls animation state (open/closed)
-   * - When true: Triggers entry animation
-   * - When false: Triggers exit animation
-   */
+  /** Shown or not; the dialog and backdrop animate in and out (`animate.enter` / `animate.leave`). */
   readonly open = model<boolean>(false);
-
-  /**
-   * Physical state: Controls DOM presence
-   * - When true: Content exists in DOM (can animate)
-   * - When false: Content removed from DOM
-   * - Stays true during close animation to allow it to complete
-   */
-  readonly overlayOpen = signal<boolean>(false);
-
-  /**
-   * Tracks how many animations have completed during close sequence
-   * Target: 2 (dialog + backdrop)
-   */
-  private readonly animationsCompleted = signal<number>(0);
 
   private overlayRef: OverlayRef | null = null;
 
   protected readonly class = computed(() => cn('contents', this.classInput()));
 
   constructor() {
-    // Synchronize overlay state with logical state for opening
+    // Detached on close: Angular keeps the parts until they've animated out.
     effect(() => {
       if (this.open()) {
-        // Opening: Mount DOM immediately so animation can start
-        this.overlayOpen.set(true);
-        // Reset counter when opening for next close cycle
-        this.animationsCompleted.set(0);
-      }
-      // Note: When closing (open = false), overlayOpen stays true
-      // until both animations complete (handled by animation completion methods)
-    });
-
-    // Close overlay when both animations complete
-    effect(() => {
-      const completed = this.animationsCompleted();
-      if (completed === 2 && !this.open()) {
-        this.overlayOpen.set(false);
-        // Reset for next cycle
-        this.animationsCompleted.set(0);
-      }
-    });
-
-    // Attach/detach CDK overlay based on overlayOpen state
-    effect(() => {
-      if (this.overlayOpen()) {
         this.attachDialog();
       } else {
         this.detachDialog();
       }
     });
-  }
-
-  /**
-   * Called by dialog when its close animation completes
-   */
-  onDialogAnimationComplete(): void {
-    if (!this.open()) {
-      this.animationsCompleted.update((n) => n + 1);
-    }
-  }
-
-  /**
-   * Called when backdrop close animation completes
-   */
-  onBackdropAnimationComplete(): void {
-    if (!this.open()) {
-      this.animationsCompleted.update((n) => n + 1);
-    }
   }
 
   private getOverlayRef() {

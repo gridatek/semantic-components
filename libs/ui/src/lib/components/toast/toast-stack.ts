@@ -37,8 +37,6 @@ import { ScToaster } from './toaster';
         scToast
         [variant]="toast.variant ?? 'default'"
         [position]="toastService.position()"
-        [attr.data-state]="toast.state ?? 'open'"
-        (animationend)="onAnimationEnd($event, toast.id)"
         (pointerEnter)="toastService.pause(toast.id)"
         (pointerLeave)="toastService.resume(toast.id)"
         (touchstart)="onTouchStart($event)"
@@ -126,15 +124,6 @@ export class ScToastStack {
   protected onAction(id: string, onClick: () => void): void {
     onClick();
     this.toastService.dismiss(id);
-  }
-
-  protected onAnimationEnd(event: AnimationEvent, id: string): void {
-    if (event.target !== event.currentTarget) return;
-
-    const toast = this.toastService.toasts().find((t) => t.id === id);
-    if (toast?.state === 'closed') {
-      this.toastService.remove(id);
-    }
   }
 
   protected onTouchStart(event: TouchEvent): void {
