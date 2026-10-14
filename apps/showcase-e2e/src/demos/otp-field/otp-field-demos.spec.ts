@@ -74,19 +74,18 @@ test.describe('OTP field', () => {
 
   test('right to left, the arrows go the way they point', async ({ page }) => {
     const errors = collectErrors(page);
-    // The page served right to left (where Directionality reads it).
-    await page.route(
-      '**/demos/otp-field/basic-otp-field-demo',
-      async (route) => {
-        const response = await route.fetch();
-        const body = (await response.text()).replace(
-          '<html lang="en">',
-          '<html lang="en" dir="rtl">',
-        );
-        await route.fulfill({ response, body });
-      },
+    // The page right to left, from before the app starts (Directionality
+    // reads it then): once the HTML is parsed, before the scripts run. Not
+    // by rewriting the page's HTML — Chromium then blocks the dev server.
+    await page.addInitScript(() =>
+      document.addEventListener('readystatechange', () => {
+        if (document.readyState === 'interactive') {
+          document.documentElement.dir = 'rtl';
+        }
+      }),
     );
     await page.goto('/demos/otp-field/basic-otp-field-demo');
+    await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
     const input = (n: number) =>
       page.getByRole('textbox', { name: `Digit ${n} of 6` });
     await input(1).click();
