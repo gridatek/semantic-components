@@ -8,6 +8,7 @@ import {
   input,
   output,
   signal,
+  untracked,
 } from '@angular/core';
 import { cn } from '../../utils';
 
@@ -55,10 +56,11 @@ export class ScBackdrop {
   );
 
   constructor() {
-    // Sync state with open input
+    // Sync state with open input; closed only once it has been open (no
+    // fade-out, nor animationComplete, for a backdrop never shown).
     effect(() => {
-      const isOpen = this.open();
-      this.state.set(isOpen ? 'open' : 'closed');
+      if (this.open()) this.state.set('open');
+      else if (untracked(this.state) !== 'idle') this.state.set('closed');
     });
   }
 

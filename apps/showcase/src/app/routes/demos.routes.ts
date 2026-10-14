@@ -2447,6 +2447,18 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/backdrop',
+    children: [
+      {
+        path: 'basic-backdrop-demo',
+        loadComponent: () =>
+          import('../pages/docs/backdrop/demos/basic-backdrop-demo').then(
+            (m) => m.BasicBackdropDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/focus-trap',
     children: [
       {

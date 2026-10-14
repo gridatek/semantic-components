@@ -40,6 +40,17 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/aspect-ratio/aspect-ratio-page'),
       },
       {
+        path: 'backdrop',
+        title: 'Backdrop - Semantic Components',
+        loadComponent: () => import('../pages/docs/backdrop/backdrop-page'),
+      },
+      {
+        path: 'stacked-layout',
+        title: 'Stacked Layout - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/stacked-layout/stacked-layout-page'),
+      },
+      {
         path: 'focus-trap',
         title: 'Focus Trap - Semantic Components',
         loadComponent: () => import('../pages/docs/focus-trap/focus-trap-page'),
