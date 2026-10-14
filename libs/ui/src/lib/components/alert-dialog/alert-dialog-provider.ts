@@ -1,4 +1,3 @@
-import { CdkTrapFocus } from '@angular/cdk/a11y';
 import { Overlay, OverlayModule, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 import { NgTemplateOutlet } from '@angular/common';
@@ -16,13 +15,13 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { ScFocusTrap, cn } from '../../utils';
 import { ScBackdrop } from '../backdrop';
 import { ScAlertDialogPortal } from './alert-dialog-portal';
 
 @Component({
   selector: 'div[scAlertDialogProvider]',
-  imports: [OverlayModule, ScBackdrop, CdkTrapFocus, NgTemplateOutlet],
+  imports: [OverlayModule, ScBackdrop, ScFocusTrap, NgTemplateOutlet],
   template: `
     <ng-content />
     <ng-template #overlayTemplate>
@@ -31,7 +30,7 @@ import { ScAlertDialogPortal } from './alert-dialog-portal';
         [open]="open()"
         (animationComplete)="onBackdropAnimationComplete()"
       ></div>
-      <div cdkTrapFocus [cdkTrapFocusAutoCapture]="true">
+      <div scFocusTrap>
         <ng-container [ngTemplateOutlet]="alertDialogPortal().templateRef" />
       </div>
     </ng-template>

@@ -435,7 +435,7 @@ The provider's template includes the backdrop and focus trap, projecting the con
 <ng-content />
 <ng-template #overlayTemplate>
   <div scBackdrop [open]="open()" (animationComplete)="onBackdropAnimationComplete()"></div>
-  <div cdkTrapFocus [cdkTrapFocusAutoCapture]="true">
+  <div scFocusTrap>
     <ng-container [ngTemplateOutlet]="dialogPortal().templateRef" />
   </div>
 </ng-template>
@@ -712,7 +712,7 @@ onBackdropAnimationComplete(): void {
 
 The animation system preserves accessibility:
 
-1. **Focus Management:** Dialog auto-focuses on mount via `cdkTrapFocus` with `cdkTrapFocusAutoCapture`
+1. **Focus Management:** Dialog auto-focuses on mount via `scFocusTrap`, which gives focus back on close — unless it has moved on elsewhere
 2. **ARIA Attributes:** Set before animations start (`role="dialog"`, `aria-modal="true"`)
 3. **Screen Readers:** Announce dialog immediately (not after animation)
 4. **Keyboard:** Escape key closes the dialog (via CDK overlay keydown events)

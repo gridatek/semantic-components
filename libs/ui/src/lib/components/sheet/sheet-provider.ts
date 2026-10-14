@@ -1,4 +1,3 @@
-import { CdkTrapFocus } from '@angular/cdk/a11y';
 import { Overlay, OverlayModule, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 import { NgTemplateOutlet } from '@angular/common';
@@ -16,7 +15,7 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { ScFocusTrap, cn } from '../../utils';
 import { ScBackdrop } from '../backdrop';
 import { ScSheetPortal } from './sheet-portal';
 
@@ -24,7 +23,7 @@ export type ScSheetSide = 'top' | 'right' | 'bottom' | 'left';
 
 @Component({
   selector: 'div[scSheetProvider]',
-  imports: [OverlayModule, ScBackdrop, CdkTrapFocus, NgTemplateOutlet],
+  imports: [OverlayModule, ScBackdrop, ScFocusTrap, NgTemplateOutlet],
   template: `
     <ng-content />
     <ng-template #overlayTemplate>
@@ -33,7 +32,7 @@ export type ScSheetSide = 'top' | 'right' | 'bottom' | 'left';
         [open]="open()"
         (animationComplete)="onBackdropAnimationComplete()"
       ></div>
-      <div cdkTrapFocus [cdkTrapFocusAutoCapture]="true">
+      <div scFocusTrap>
         <ng-container [ngTemplateOutlet]="sheetPortal().templateRef" />
       </div>
     </ng-template>

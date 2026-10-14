@@ -1,4 +1,3 @@
-import { CdkTrapFocus } from '@angular/cdk/a11y';
 import { Directionality } from '@angular/cdk/bidi';
 import { Overlay, OverlayModule, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
@@ -19,7 +18,7 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
-import { ScBackdrop } from '@semantic-components/ui';
+import { ScBackdrop, ScFocusTrap } from '@semantic-components/ui';
 import { ScLightboxPortal } from './lightbox-portal';
 import { ScLightboxImageData } from './lightbox.types';
 
@@ -30,7 +29,7 @@ export const SC_LIGHTBOX_PROVIDER = new InjectionToken<ScLightboxProvider>(
 @Component({
   selector: 'div[scLightboxProvider]',
   exportAs: 'scLightboxProvider',
-  imports: [OverlayModule, ScBackdrop, CdkTrapFocus, NgTemplateOutlet],
+  imports: [OverlayModule, ScBackdrop, ScFocusTrap, NgTemplateOutlet],
   providers: [
     { provide: SC_LIGHTBOX_PROVIDER, useExisting: ScLightboxProvider },
   ],
@@ -43,7 +42,7 @@ export const SC_LIGHTBOX_PROVIDER = new InjectionToken<ScLightboxProvider>(
         (animationComplete)="onBackdropAnimationComplete()"
         class="z-0 bg-black/95"
       ></div>
-      <div cdkTrapFocus [cdkTrapFocusAutoCapture]="true">
+      <div scFocusTrap>
         <ng-container [ngTemplateOutlet]="lightboxPortal().templateRef" />
       </div>
     </ng-template>

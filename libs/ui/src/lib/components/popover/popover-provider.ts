@@ -1,4 +1,3 @@
-import { CdkTrapFocus } from '@angular/cdk/a11y';
 import { CdkOverlayOrigin, OverlayModule } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import {
@@ -12,6 +11,7 @@ import {
   signal,
 } from '@angular/core';
 import {
+  ScFocusTrap,
   type ScOverlayAlign,
   type ScOverlaySide,
   buildOverlayPositionsWithFallback,
@@ -25,7 +25,7 @@ export type ScPopoverAlign = ScOverlayAlign;
 
 @Component({
   selector: 'div[scPopoverProvider]',
-  imports: [OverlayModule, NgTemplateOutlet, CdkTrapFocus],
+  imports: [OverlayModule, NgTemplateOutlet, ScFocusTrap],
   template: `
     <ng-content />
 
@@ -40,7 +40,7 @@ export type ScPopoverAlign = ScOverlayAlign;
         (overlayKeydown)="onKeydown($event)"
         (detach)="onDetach()"
       >
-        <div cdkTrapFocus [cdkTrapFocusAutoCapture]="true">
+        <div scFocusTrap>
           <ng-container [ngTemplateOutlet]="popoverPortal().templateRef" />
         </div>
       </ng-template>

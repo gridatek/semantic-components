@@ -25,13 +25,10 @@ test.describe('Many Pages Pagination Demo', () => {
 
   test('should always render exactly 7 total page slots', async ({ page }) => {
     // 7 slots = page links + ellipses
-    const pageLinks = page.locator('button[scPaginationLink]');
-    const ellipses = page.locator('span[scPaginationEllipsis]');
-
-    const pageCount = await pageLinks.count();
-    const ellipsisCount = await ellipses.count();
-
-    expect(pageCount + ellipsisCount).toBe(7);
+    const slots = page.locator(
+      'button[scPaginationLink], span[scPaginationEllipsis]',
+    );
+    await expect(slots).toHaveCount(7);
   });
 
   test('should show first page (1) and last page (20)', async ({ page }) => {

@@ -156,7 +156,7 @@ describe('disabled on form controls', () => {
         fixture.componentInstance.disabled.set(true);
         fixture.detectChanges();
 
-        expect(fieldDisabled(fixture)).toBe('');
+        expect(fieldDisabled(fixture)).toBe('true');
       });
 
       it('tracks a runtime toggle back to enabled', () => {

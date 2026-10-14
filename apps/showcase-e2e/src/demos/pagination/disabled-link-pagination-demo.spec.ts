@@ -12,8 +12,8 @@ test.describe('Disabled Link Pagination Demo', () => {
 
   test('should use anchor elements for page links', async ({ page }) => {
     const pageLinks = page.locator('a[scPaginationLink]');
+    await expect(pageLinks.first()).toBeVisible();
     const count = await pageLinks.count();
-    expect(count).toBeGreaterThan(0);
     for (let i = 0; i < count; i++) {
       const tagName = await pageLinks.nth(i).evaluate((el) => el.tagName);
       expect(tagName).toBe('A');

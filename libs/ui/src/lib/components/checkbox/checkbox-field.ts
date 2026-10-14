@@ -9,8 +9,9 @@ import {
   input,
   signal,
 } from '@angular/core';
+import { FormField } from '@angular/forms/signals';
 import { cn } from '../../utils';
-import { SC_FIELD } from '../field';
+import { SC_FIELD, type ScFieldContext } from '../field';
 import { ScCheckbox } from './checkbox';
 import { SC_CHECKBOX_FIELD, type ScCheckboxContext } from './checkbox-types';
 import { ScCheckboxVisual } from './checkbox-visual';
@@ -26,7 +27,7 @@ import { ScCheckboxVisual } from './checkbox-visual';
     '[attr.role]': 'role()',
     '[class]': 'class()',
     '[attr.data-state]': 'dataState()',
-    '[attr.data-disabled]': 'disabled() ? "" : null',
+    '[attr.data-disabled]': 'disabled() || null',
   },
   template: `
     <ng-content select="[scCheckbox]" />
@@ -35,7 +36,7 @@ import { ScCheckboxVisual } from './checkbox-visual';
   `,
   encapsulation: ViewEncapsulation.None,
 })
-export class ScCheckboxField implements ScCheckboxContext {
+export class ScCheckboxField implements ScCheckboxContext, ScFieldContext {
   private readonly elementRef = inject(ElementRef<HTMLElement>);
   private readonly checkbox = contentChild(ScCheckbox);
 
@@ -43,6 +44,8 @@ export class ScCheckboxField implements ScCheckboxContext {
 
   readonly id = input(inject(_IdGenerator).getId('sc-checkbox-field-'));
   readonly descriptionIds = signal<string[]>([]);
+  /** The `[formField]` inside, for `scFieldErrors`. */
+  readonly formField = contentChild(FormField);
 
   protected readonly role = computed(() => {
     const tagName = this.elementRef.nativeElement.tagName;

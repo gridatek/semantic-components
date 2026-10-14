@@ -123,9 +123,7 @@ Container components group related sub-components and apply layout styles.
 ```typescript
 @Component({
   selector: '[scComponentNameGroup]',
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
   host: {
     'data-slot': 'component-name-group',
     '[class]': 'class()',
@@ -248,10 +246,10 @@ component-name/
 
 ### Class Names
 
-- **Root**: `ScComponentName` (e.g., `ScNumber`, `ScPassword`)
+- **Root**: `ScComponentName` (e.g., `ScNumberField`, `ScPassword`)
 - **Containers**: `ScInputGroup` for input grouping, `ScComponentNameGroup` for specialized grouping
-- **Actions**: `ScComponentName[Action]` (e.g., `ScNumberIncrement`, `ScPasswordToggle`)
-- **Inputs**: `ScComponentNameInput` (e.g., `ScNumberInput`)
+- **Actions**: `ScComponentName[Action]` (e.g., `ScNumberFieldIncrement`, `ScPasswordToggle`)
+- **Inputs**: `ScComponentNameInput` (e.g., `ScNumberFieldInput`)
 
 ### Selectors
 
@@ -331,9 +329,7 @@ export class ScPassword {
 // Group component
 @Component({
   selector: '[scPasswordInputGroup]',
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
 })
 export class ScPasswordInputGroup {
   readonly password = inject(SC_PASSWORD);
@@ -351,9 +347,7 @@ export class ScPasswordInput {
 // Toggle component
 @Component({
   selector: 'button[scPasswordToggle]',
-  template: `
-    <ng-content><svg>...</svg></ng-content>
-  `,
+  template: ` <ng-content><svg>...</svg></ng-content> `,
 })
 export class ScPasswordToggle {
   readonly password = inject(SC_PASSWORD);
@@ -416,17 +410,17 @@ export class ScPasswordToggle {
 
 ```typescript
 // number.ts (Root)
-export const SC_NUMBER = new InjectionToken<ScNumber>('SC_NUMBER');
+export const SC_NUMBER_FIELD = new InjectionToken<ScNumberField>('SC_NUMBER_FIELD');
 
 @Directive({
-  selector: '[scNumber]',
-  providers: [{ provide: SC_NUMBER, useExisting: ScNumber }],
+  selector: '[scNumberField]',
+  providers: [{ provide: SC_NUMBER_FIELD, useExisting: ScNumberField }],
   host: {
-    'data-slot': 'number',
+    'data-slot': 'number-field',
     '[attr.data-disabled]': 'disabled() || null',
   },
 })
-export class ScNumber {
+export class ScNumberField {
   readonly value = model<number | null>(null);
   readonly min = input<number | null>(null);
   readonly max = input<number | null>(null);
@@ -456,7 +450,7 @@ export class ScNumber {
 
 // number-input.ts (Input)
 @Component({
-  selector: 'input[scNumberInput]',
+  selector: 'input[scNumberFieldInput]',
   template: ``,
   host: {
     type: 'text',
@@ -466,8 +460,8 @@ export class ScNumber {
     '(input)': 'onInput($event)',
   },
 })
-export class ScNumberInput {
-  readonly number = inject(SC_NUMBER);
+export class ScNumberFieldInput {
+  readonly number = inject(SC_NUMBER_FIELD);
 
   onInput(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -480,18 +474,16 @@ export class ScNumberInput {
 
 // number-increment.ts (Action)
 @Component({
-  selector: 'button[scNumberIncrement]',
-  template: `
-    <ng-content><svg>+</svg></ng-content>
-  `,
+  selector: 'button[scNumberFieldIncrement]',
+  template: ` <ng-content><svg>+</svg></ng-content> `,
   host: {
     type: 'button',
     '[disabled]': '!number.canIncrement()',
     '(click)': 'onClick()',
   },
 })
-export class ScNumberIncrement {
-  readonly number = inject(SC_NUMBER);
+export class ScNumberFieldIncrement {
+  readonly number = inject(SC_NUMBER_FIELD);
 
   onClick(): void {
     this.number.increment();
@@ -500,18 +492,16 @@ export class ScNumberIncrement {
 
 // number-decrement.ts (Action)
 @Component({
-  selector: 'button[scNumberDecrement]',
-  template: `
-    <ng-content><svg>-</svg></ng-content>
-  `,
+  selector: 'button[scNumberFieldDecrement]',
+  template: ` <ng-content><svg>-</svg></ng-content> `,
   host: {
     type: 'button',
     '[disabled]': '!number.canDecrement()',
     '(click)': 'onClick()',
   },
 })
-export class ScNumberDecrement {
-  readonly number = inject(SC_NUMBER);
+export class ScNumberFieldDecrement {
+  readonly number = inject(SC_NUMBER_FIELD);
 
   onClick(): void {
     this.number.decrement();
@@ -522,13 +512,13 @@ export class ScNumberDecrement {
 **Usage:**
 
 ```html
-<div scNumber [(value)]="count" [min]="0" [max]="100">
+<div scNumberField [(value)]="count" [min]="0" [max]="100">
   <label scLabel>Count</label>
 
   <div scButtonGroup>
-    <button scNumberDecrement></button>
-    <input scNumberInput />
-    <button scNumberIncrement></button>
+    <button scNumberFieldDecrement></button>
+    <input scNumberFieldInput />
+    <button scNumberFieldIncrement></button>
   </div>
 </div>
 ```
@@ -607,20 +597,20 @@ get canSubmit() {
 
 ```typescript
 // Use specific types
-export const SC_NUMBER = new InjectionToken<ScNumber>('SC_NUMBER');
+export const SC_NUMBER_FIELD = new InjectionToken<ScNumberField>('SC_NUMBER_FIELD');
 
 // Type the injection
-readonly number = inject(SC_NUMBER);
+readonly number = inject(SC_NUMBER_FIELD);
 ```
 
 **DON'T:**
 
 ```typescript
 // Don't use any
-export const SC_NUMBER = new InjectionToken<any>('SC_NUMBER');
+export const SC_NUMBER_FIELD = new InjectionToken<any>('SC_NUMBER_FIELD');
 
 // Don't skip typing
-readonly number = inject(SC_NUMBER) as any;
+readonly number = inject(SC_NUMBER_FIELD) as any;
 ```
 
 ### 3. Naming
@@ -630,7 +620,7 @@ readonly number = inject(SC_NUMBER) as any;
 ```typescript
 // Use descriptive, specific names
 ScPasswordToggle;
-ScNumberIncrement;
+ScNumberFieldIncrement;
 ScDatePickerCalendar;
 ```
 
@@ -639,7 +629,7 @@ ScDatePickerCalendar;
 ```typescript
 // Don't use generic names
 ScPasswordButton;
-ScNumberButton;
+ScNumberFieldButton;
 ScDateButton;
 ```
 
@@ -892,7 +882,7 @@ TestBed.configureTestingModule({
 
 ## Resources
 
-- [Number Implementation](../libs/ui/src/lib/components/number/)
+- [Number Implementation](../libs/ui/src/lib/components/number-field/)
 - [Password Implementation](../libs/ui/src/lib/components/password/)
 - [Angular Dependency Injection](https://angular.dev/guide/di)
 - [Angular Signals](https://angular.dev/guide/signals)

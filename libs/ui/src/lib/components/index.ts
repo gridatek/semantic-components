@@ -35,7 +35,7 @@ export * from './menu-bar';
 export * from './multiselect';
 export * from './native-select';
 export * from './navigation-menu';
-export * from './number';
+export * from './number-field';
 export * from './otp';
 export * from './pagination';
 export * from './password';

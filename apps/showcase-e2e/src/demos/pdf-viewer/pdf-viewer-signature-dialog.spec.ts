@@ -27,4 +27,21 @@ test.describe('PDF Viewer Signature Dialog', () => {
     await expect(page.getByLabel('Thickness')).toBeVisible();
     expect(errors).toEqual([]);
   });
+
+  test('focus stays in the dialog once the popover that opened it is gone', async ({
+    page,
+  }) => {
+    const errors = collectErrors(page);
+    await page.goto('/demos/pdf-viewer/pdf-viewer-demo');
+    await page.getByRole('button', { name: 'Signature' }).first().click();
+    const add = page.getByRole('button', { name: 'Add new signature' });
+    await add.click();
+    const dialog = page.getByRole('dialog', { name: 'Add a signature' });
+    await expect(dialog).toBeVisible();
+
+    // The popover closed (its focus trap gone): focus isn't taken back to its trigger.
+    await expect(add).toHaveCount(0);
+    await expect(dialog.locator(':focus')).toHaveCount(1);
+    expect(errors).toEqual([]);
+  });
 });

@@ -2447,55 +2447,69 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/number',
+    path: 'demos/number-field',
     children: [
       {
-        path: 'steps-number-demo',
+        path: 'quantity-number-field-demo',
         loadComponent: () =>
-          import('../pages/docs/number/demos/steps-number-demo').then(
-            (m) => m.StepsNumberDemo,
+          import('../pages/docs/number-field/demos/quantity-number-field-demo').then(
+            (m) => m.QuantityNumberFieldDemo,
           ),
       },
       {
-        path: 'basic-number-demo',
+        path: 'stacked-number-field-demo',
         loadComponent: () =>
-          import('../pages/docs/number/demos/basic-number-demo').then(
-            (m) => m.BasicNumberDemo,
+          import('../pages/docs/number-field/demos/stacked-number-field-demo').then(
+            (m) => m.StackedNumberFieldDemo,
           ),
       },
       {
-        path: 'scrubbing-number-demo',
+        path: 'steps-number-field-demo',
         loadComponent: () =>
-          import('../pages/docs/number/demos/scrubbing-number-demo').then(
-            (m) => m.ScrubbingNumberDemo,
+          import('../pages/docs/number-field/demos/steps-number-field-demo').then(
+            (m) => m.StepsNumberFieldDemo,
           ),
       },
       {
-        path: 'price-number-demo',
+        path: 'basic-number-field-demo',
         loadComponent: () =>
-          import('../pages/docs/number/demos/price-number-demo').then(
-            (m) => m.PriceNumberDemo,
+          import('../pages/docs/number-field/demos/basic-number-field-demo').then(
+            (m) => m.BasicNumberFieldDemo,
           ),
       },
       {
-        path: 'disabled-number-demo',
+        path: 'scrubbing-number-field-demo',
         loadComponent: () =>
-          import('../pages/docs/number/demos/disabled-number-demo').then(
-            (m) => m.DisabledNumberDemo,
+          import('../pages/docs/number-field/demos/scrubbing-number-field-demo').then(
+            (m) => m.ScrubbingNumberFieldDemo,
           ),
       },
       {
-        path: 'without-label-number-demo',
+        path: 'price-number-field-demo',
         loadComponent: () =>
-          import('../pages/docs/number/demos/without-label-number-demo').then(
-            (m) => m.WithoutLabelNumberDemo,
+          import('../pages/docs/number-field/demos/price-number-field-demo').then(
+            (m) => m.PriceNumberFieldDemo,
           ),
       },
       {
-        path: 'signal-forms-number-demo',
+        path: 'disabled-number-field-demo',
         loadComponent: () =>
-          import('../pages/docs/number/demos/signal-forms-number-demo').then(
-            (m) => m.SignalFormsNumberDemo,
+          import('../pages/docs/number-field/demos/disabled-number-field-demo').then(
+            (m) => m.DisabledNumberFieldDemo,
+          ),
+      },
+      {
+        path: 'without-label-number-field-demo',
+        loadComponent: () =>
+          import('../pages/docs/number-field/demos/without-label-number-field-demo').then(
+            (m) => m.WithoutLabelNumberFieldDemo,
+          ),
+      },
+      {
+        path: 'signal-forms-number-field-demo',
+        loadComponent: () =>
+          import('../pages/docs/number-field/demos/signal-forms-number-field-demo').then(
+            (m) => m.SignalFormsNumberFieldDemo,
           ),
       },
     ],

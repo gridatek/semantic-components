@@ -576,9 +576,9 @@
     "category": "Advanced"
   },
   {
-    "name": "Number",
-    "path": "number",
-    "description": "A composable numeric input with scrubbing support.",
+    "name": "Number Field",
+    "path": "number-field",
+    "description": "A number input: typed and read in the locale, stepped with the keyboard, buttons, the wheel or by dragging its label.",
     "status": "Experimental",
     "library": "ui",
     "category": "Forms"

@@ -32,8 +32,8 @@ test.describe('With Icons Button Demo', () => {
     page,
   }) => {
     const svgs = page.locator('button[scButton] svg');
+    await expect(svgs).toHaveCount(3);
     const count = await svgs.count();
-    expect(count).toBe(3);
 
     for (let i = 0; i < count; i++) {
       await expect(svgs.nth(i)).toHaveCSS('pointer-events', 'none');

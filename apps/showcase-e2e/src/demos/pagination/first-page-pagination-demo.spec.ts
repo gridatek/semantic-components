@@ -78,8 +78,7 @@ test.describe('First Page Pagination Demo', () => {
 
   test('should render page items in list items', async ({ page }) => {
     const items = page.locator('li[scPaginationItem]');
-    const count = await items.count();
     // Previous + page links + ellipsis + Next = at least 4
-    expect(count).toBeGreaterThanOrEqual(4);
+    await expect(items.nth(3)).toBeAttached();
   });
 });

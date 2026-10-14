@@ -9,8 +9,9 @@ import {
   input,
   signal,
 } from '@angular/core';
+import { FormField } from '@angular/forms/signals';
 import { cn } from '../../utils';
-import { SC_FIELD } from '../field';
+import { SC_FIELD, type ScFieldContext } from '../field';
 import { ScSwitch } from './switch';
 import { SC_SWITCH_FIELD, type ScSwitchContext } from './switch-types';
 import { ScSwitchVisual } from './switch-visual';
@@ -26,7 +27,7 @@ import { ScSwitchVisual } from './switch-visual';
     '[attr.role]': 'role()',
     '[class]': 'class()',
     '[attr.data-state]': 'dataState()',
-    '[attr.data-disabled]': 'disabled() ? "" : null',
+    '[attr.data-disabled]': 'disabled() || null',
   },
   template: `
     <ng-content />
@@ -34,7 +35,7 @@ import { ScSwitchVisual } from './switch-visual';
   `,
   encapsulation: ViewEncapsulation.None,
 })
-export class ScSwitchField implements ScSwitchContext {
+export class ScSwitchField implements ScSwitchContext, ScFieldContext {
   private readonly elementRef = inject(ElementRef<HTMLElement>);
   private readonly switchInput = contentChild(ScSwitch);
 
@@ -46,6 +47,8 @@ export class ScSwitchField implements ScSwitchContext {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly id = input(inject(_IdGenerator).getId('sc-switch-field-'));
   readonly descriptionIds = signal<string[]>([]);
+  /** The `[formField]` inside, for `scFieldErrors`. */
+  readonly formField = contentChild(FormField);
 
   readonly checked = computed(() => this.switchInput()?.checked() ?? false);
   readonly disabled = computed(
