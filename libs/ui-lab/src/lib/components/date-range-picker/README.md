@@ -128,7 +128,7 @@ The calendar header controls the first month; the second month automatically fol
 ## Accessibility
 
 - Trigger: `aria-expanded`, `aria-haspopup="dialog"`
-- Popover: `role="dialog"`, focus trap via `cdkTrapFocus`
+- Popover: `role="dialog"`, focus trap via `scFocusTrap` (the popover's)
 - Escape key closes the popover
 - Focus restored to trigger on close
 - Calendar: full keyboard navigation via Angular ARIA Grid
