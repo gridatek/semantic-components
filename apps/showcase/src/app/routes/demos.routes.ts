@@ -2450,6 +2450,13 @@ export const demosRoutes: Route[] = [
     path: 'demos/number-field',
     children: [
       {
+        path: 'stacked-number-field-demo',
+        loadComponent: () =>
+          import('../pages/docs/number-field/demos/stacked-number-field-demo').then(
+            (m) => m.StackedNumberFieldDemo,
+          ),
+      },
+      {
         path: 'steps-number-field-demo',
         loadComponent: () =>
           import('../pages/docs/number-field/demos/steps-number-field-demo').then(

@@ -160,6 +160,58 @@ test.describe('Number field', () => {
     expect(errors).toEqual([]);
   });
 
+  test('stacked: nested groups join; the buttons share the row', async ({
+    page,
+  }) => {
+    const errors = collectErrors(page);
+    await page.goto('/demos/number-field/stacked-number-field-demo');
+    const quantity = page.getByRole('spinbutton', { name: 'Enter quantity' });
+    await expectValue(quantity, '123', '123');
+
+    await page.getByRole('button', { name: 'Increase quantity' }).click();
+    await expectValue(quantity, '124', '124');
+    await page.getByRole('button', { name: 'Decrease quantity' }).click();
+    await expectValue(quantity, '123', '123');
+
+    const box = async (name: string) =>
+      (await page.getByRole('button', { name }).boundingBox()) ?? {
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+      };
+    const input = (await quantity.boundingBox()) ?? { x: 0, y: 0, height: 0 };
+    const up = await box('Increase quantity');
+    const down = await box('Decrease quantity');
+    // Stacked to the input's right, half its height each (at least 24px).
+    expect(up.x).toBeGreaterThan(input.x);
+    expect(up.x).toBe(down.x);
+    expect(down.y).toBeCloseTo(up.y + up.height, 0);
+    expect(up.height + down.height).toBeCloseTo(input.height, 0);
+    expect(Math.min(up.height, down.height)).toBeGreaterThanOrEqual(24);
+
+    // Joined: square where the parts meet, round on the outside.
+    const corners = (el: Locator) =>
+      el.evaluate((node) => {
+        const s = getComputedStyle(node);
+        return [
+          s.borderStartStartRadius,
+          s.borderStartEndRadius,
+          s.borderEndEndRadius,
+          s.borderEndStartRadius,
+        ].map((r) => r !== '0px');
+      });
+    // [top-start, top-end, bottom-end, bottom-start]
+    expect(await corners(quantity)).toEqual([true, false, false, true]);
+    expect(
+      await corners(page.getByRole('button', { name: 'Increase quantity' })),
+    ).toEqual([false, true, false, false]);
+    expect(
+      await corners(page.getByRole('button', { name: 'Decrease quantity' })),
+    ).toEqual([false, false, true, false]);
+    expect(errors).toEqual([]);
+  });
+
   test('disabled and read-only: the field and its class', async ({ page }) => {
     const errors = collectErrors(page);
     await page.goto('/demos/number-field/disabled-number-field-demo');

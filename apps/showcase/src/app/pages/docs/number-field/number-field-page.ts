@@ -8,6 +8,7 @@ import { NumberFieldUsageDemoContainer } from './demos/number-field-usage-demo-c
 import PriceNumberFieldDemoContainer from './demos/price-number-field-demo-container';
 import ScrubbingNumberFieldDemoContainer from './demos/scrubbing-number-field-demo-container';
 import SignalFormsNumberFieldDemoContainer from './demos/signal-forms-number-field-demo-container';
+import StackedNumberFieldDemoContainer from './demos/stacked-number-field-demo-container';
 import StepsNumberFieldDemoContainer from './demos/steps-number-field-demo-container';
 import WithoutLabelNumberFieldDemoContainer from './demos/without-label-number-field-demo-container';
 
@@ -17,6 +18,7 @@ import WithoutLabelNumberFieldDemoContainer from './demos/without-label-number-f
     BasicNumberFieldDemoContainer,
     ScrubbingNumberFieldDemoContainer,
     StepsNumberFieldDemoContainer,
+    StackedNumberFieldDemoContainer,
     SignalFormsNumberFieldDemoContainer,
     PriceNumberFieldDemoContainer,
     DisabledNumberFieldDemoContainer,
@@ -49,6 +51,7 @@ import WithoutLabelNumberFieldDemoContainer from './demos/without-label-number-f
         <app-basic-number-field-demo-container />
         <app-scrubbing-number-field-demo-container />
         <app-steps-number-field-demo-container />
+        <app-stacked-number-field-demo-container />
         <app-price-number-field-demo-container />
         <app-signal-forms-number-field-demo-container />
         <app-disabled-number-field-demo-container />

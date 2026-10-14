@@ -29,6 +29,18 @@ You write the markup and every piece of text — labels, the buttons' names, ico
 </div>
 ```
 
+The buttons can go elsewhere — stacked after the input, say:
+
+```html
+<div scNumberFieldGroup>
+  <input scNumberFieldInput class="h-12 text-start" />
+  <div scNumberFieldGroup orientation="vertical">
+    <button scNumberFieldIncrement>…</button>
+    <button scNumberFieldDecrement>…</button>
+  </div>
+</div>
+```
+
 `scNumberField` is a `scField` too: the label, `scFieldDescription` and `scFieldErrors` are tied to the input. Without a visible label, give the input an `aria-label`.
 
 ## Parts
@@ -37,7 +49,7 @@ You write the markup and every piece of text — labels, the buttons' names, ico
 | ------------------------------ | -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `ScNumberField`                | `div[scNumberField]`             | The value, bounds, steps and format (`exportAs: 'scNumberField'`). Composes `scField` (`id`, `orientation`, `class`): `data-disabled`, `data-invalid` (invalid and touched); `data-readonly`.  |
 | `ScNumberFieldInput`           | `input[scNumberFieldInput]`      | The text field, a `spinbutton` with `aria-valuenow` / `-valuetext` (formatted) / `-valuemin` / `-valuemax`. Only what can be part of a number gets typed. Numeric or decimal keypad on phones. |
-| `ScNumberFieldGroup`           | `div[scNumberFieldGroup]`        | The input and its buttons, joined.                                                                                                                                                             |
+| `ScNumberFieldGroup`           | `div[scNumberFieldGroup]`        | The input and its buttons, joined. Groups nest: an `orientation="vertical"` group inside stacks its buttons, sharing the row's height, joined to the parts beside it.                          |
 | `ScNumberFieldIncrement`       | `button[scNumberFieldIncrement]` | Steps up — repeatedly while held (after 400 ms, every 60 ms). Out of the Tab order (the arrow keys do it), keeps focus in the input; `aria-controls` the input. Name it.                       |
 | `ScNumberFieldDecrement`       | `button[scNumberFieldDecrement]` | Steps down, likewise.                                                                                                                                                                          |
 | `ScNumberFieldScrubArea`       | `[scNumberFieldScrubArea]`       | Drag to change the value: one step per `pixelSensitivity` px (default 2), `direction` `horizontal` (right increases) or `vertical` (up increases). Pointer, pen and touch; `data-scrubbing`.   |
