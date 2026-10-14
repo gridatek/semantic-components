@@ -136,13 +136,13 @@ test.describe('Number field', () => {
     expect(errors).toEqual([]);
   });
 
-  test('scrubbing: dragging the label steps the value', async ({
-    page,
-    browserName,
-  }) => {
-    test.skip(
-      browserName === 'firefox',
-      "Firefox reports a locked pointer's synthetic moves from the window's centre",
+  test('scrubbing: dragging the label steps the value', async ({ page }) => {
+    // Without pointer lock (as touch and pen): headless browsers report a
+    // locked pointer's synthetic moves from the window's centre, or not at all.
+    await page.addInitScript(() =>
+      Object.defineProperty(Element.prototype, 'requestPointerLock', {
+        value: undefined,
+      }),
     );
     const errors = collectErrors(page);
     await page.goto('/demos/number-field/scrubbing-number-field-demo');
