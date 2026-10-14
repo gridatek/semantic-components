@@ -165,7 +165,7 @@ import {
         </div>
       </nav>
 
-      <div scNavbarMobilePortal>
+      <ng-template scNavbarMobilePortal>
         <div scNavbarMobileMenu>
           <a
             scNavbarMobileLink
@@ -247,7 +247,7 @@ import {
           </a>
           <a scLink routerLink="/signup" class="w-full">Get Started</a>
         </div>
-      </div>
+      </ng-template>
     </div>
   `,
   host: {

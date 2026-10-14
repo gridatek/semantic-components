@@ -83,14 +83,14 @@ import {
         </div>
       </nav>
 
-      <div scNavbarMobilePortal>
+      <ng-template scNavbarMobilePortal>
         <div scNavbarMobileMenu>
           @for (link of links; track link) {
             <a scNavbarMobileLink href="#">{{ link }}</a>
           }
           <button scButton class="mt-4">Get started</button>
         </div>
-      </div>
+      </ng-template>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,

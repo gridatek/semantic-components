@@ -5,7 +5,6 @@ import {
   ViewEncapsulation,
   computed,
   contentChild,
-  effect,
   inject,
   input,
   model,
@@ -19,9 +18,7 @@ import { ScNavbar } from './navbar';
 
 @Component({
   selector: 'div[scNavbarProvider]',
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
   host: {
     '[class]': 'class()',
   },
@@ -30,20 +27,8 @@ import { ScNavbar } from './navbar';
 export class ScNavbarProvider {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  /**
-   * Logical state: Controls animation state (open/closed)
-   * - When true: Triggers entry animation
-   * - When false: Triggers exit animation
-   */
+  /** Whether the mobile menu is shown; it animates in and out (`animate.enter` / `animate.leave`). */
   readonly open = model<boolean>(false);
-
-  /**
-   * Physical state: Controls DOM presence via overlay
-   * - When true: Content exists in DOM (can animate)
-   * - When false: Content removed from DOM
-   * - Stays true during close animation to allow it to complete
-   */
-  readonly overlayOpen = signal<boolean>(false);
 
   protected readonly class = computed(() => cn('', this.classInput()));
 
@@ -67,30 +52,11 @@ export class ScNavbarProvider {
         takeUntilDestroyed(),
       )
       .subscribe(() => this.open.set(false));
-
-    // Synchronize overlay state with logical state for opening
-    effect(() => {
-      if (this.open()) {
-        // Opening: Mount DOM immediately so animation can start
-        this.overlayOpen.set(true);
-      }
-      // Note: When closing (open = false), overlayOpen stays true
-      // until animation completes (handled by onMenuAnimationComplete)
-    });
   }
 
   /** Closes the mobile menu and returns focus to its trigger (Escape). */
   closeAndRestoreFocus(): void {
     this.open.set(false);
     this.trigger()?.nativeElement.focus();
-  }
-
-  /**
-   * Called by mobile menu when its close animation completes
-   */
-  onMenuAnimationComplete(): void {
-    if (!this.open()) {
-      this.overlayOpen.set(false);
-    }
   }
 }

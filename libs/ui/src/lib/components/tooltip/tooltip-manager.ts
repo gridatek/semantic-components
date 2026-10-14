@@ -4,7 +4,6 @@ import {
   ComponentRef,
   ElementRef,
   Injector,
-  OutputRefSubscription,
   Service,
   inject,
 } from '@angular/core';
@@ -93,18 +92,19 @@ export class ScTooltipManager {
   private overlayRef: OverlayRef | null = null;
   private tooltipRef: ComponentRef<ScTooltip> | null = null;
   private currentTooltipId: string | null = null;
-  private animationSubscription: OutputRefSubscription | null = null;
   private positionSubscription: Subscription | null = null;
+  /** The last hidden tooltip's overlay: its tooltip may still be animating out. */
+  private leavingOverlayRef: OverlayRef | null = null;
 
   show(
     elementRef: ElementRef,
     config: ScTooltipConfig,
     tooltipId: string,
   ): void {
-    // Immediately dispose any existing tooltip (skip close animation to avoid race conditions)
-    if (this.overlayRef) {
-      this.disposeTooltip();
-    }
+    // Any other tooltip goes at once (no leave animation, no overlap).
+    this.disposeTooltip();
+    this.leavingOverlayRef?.dispose();
+    this.leavingOverlayRef = null;
 
     this.currentTooltipId = tooltipId;
 
@@ -156,39 +156,33 @@ export class ScTooltipManager {
         this.tooltipRef?.instance.side.set(side);
       },
     );
-
-    // Subscribe to animation completion
-    this.animationSubscription =
-      this.tooltipRef.instance.animationComplete.subscribe(() => {
-        this.disposeTooltip();
-      });
   }
 
+  /**
+   * Detaches the tooltip: Angular plays its leave animation, then removes it.
+   * The overlay is disposed when the next tooltip shows.
+   */
   hide(): void {
-    if (!this.tooltipRef) {
+    if (!this.overlayRef) {
       return;
     }
-
-    // Trigger close animation (will dispose via animationComplete)
-    this.tooltipRef.instance.close();
+    const overlayRef = this.overlayRef;
+    this.release();
+    overlayRef.detach();
+    this.leavingOverlayRef = overlayRef;
   }
 
+  /** Removes the shown tooltip at once. */
   private disposeTooltip(): void {
-    if (this.positionSubscription) {
-      this.positionSubscription.unsubscribe();
-      this.positionSubscription = null;
-    }
+    const overlayRef = this.overlayRef;
+    this.release();
+    overlayRef?.dispose();
+  }
 
-    if (this.animationSubscription) {
-      this.animationSubscription.unsubscribe();
-      this.animationSubscription = null;
-    }
-
-    if (this.overlayRef) {
-      this.overlayRef.dispose();
-      this.overlayRef = null;
-    }
-
+  private release(): void {
+    this.positionSubscription?.unsubscribe();
+    this.positionSubscription = null;
+    this.overlayRef = null;
     this.tooltipRef = null;
     this.currentTooltipId = null;
   }

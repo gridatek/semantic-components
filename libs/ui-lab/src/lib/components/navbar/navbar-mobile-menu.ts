@@ -1,37 +1,36 @@
 import {
   Component,
-  ElementRef,
   ViewEncapsulation,
   computed,
-  effect,
   inject,
   input,
-  signal,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { ScFocusTrap, cn } from '@semantic-components/ui';
 import { ScNavbarProvider } from './navbar-provider';
 
-type ScNavbarMobileMenuState = 'open' | 'closed';
-
+/**
+ * The mobile menu (in a `scNavbarMobilePortal` template): slides in when
+ * shown and out when it goes (`animate.enter` / `animate.leave`); keeps
+ * focus inside while open.
+ */
 @Component({
   selector: 'div[scNavbarMobileMenu]',
+  hostDirectives: [ScFocusTrap],
   template: ` <ng-content /> `,
   host: {
     '[id]': 'provider.menuId',
     role: 'navigation',
     '[attr.aria-label]': '"Mobile navigation"',
-    '[attr.data-state]': 'state()',
     '[class]': 'class()',
     '[tabindex]': '-1',
-    '(animationend)': 'onAnimationEnd($event)',
+    'animate.enter': 'animate-in fade-in-0',
+    'animate.leave': 'animate-out fade-out-0',
   },
   encapsulation: ViewEncapsulation.None,
 })
 export class ScNavbarMobileMenu {
-  private readonly elementRef = inject(ElementRef<HTMLElement>);
   protected readonly provider = inject(ScNavbarProvider);
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly state = signal<ScNavbarMobileMenuState>('closed');
 
   protected readonly class = computed(() =>
     cn(
@@ -40,31 +39,9 @@ export class ScNavbarMobileMenu {
       'z-50',
       'flex flex-col gap-2 p-6',
       'bg-background border-t border-border',
-      'animate-in fade-in-0 slide-in-from-top duration-300',
-      'data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:slide-out-to-top data-[state=closed]:duration-300',
-      // Its content is projected, so Angular's animate.leave doesn't apply:
-      // it is removed once the exit animation ends (onAnimationEnd), and keeps
-      // that last, invisible frame until then.
-      'data-[state=closed]:fill-mode-forwards',
+      // Where it slides from and to (read by the enter / leave animations)
+      'slide-in-from-top slide-out-to-top duration-300',
       this.classInput(),
     ),
   );
-
-  constructor() {
-    // Sync state with provider's open signal
-    effect(() => {
-      const isOpen = this.provider.open();
-      this.state.set(isOpen ? 'open' : 'closed');
-    });
-  }
-
-  protected onAnimationEnd(event: AnimationEvent): void {
-    // Only trigger cleanup when close animation completes
-    if (
-      this.state() === 'closed' &&
-      event.target === this.elementRef.nativeElement
-    ) {
-      this.provider.onMenuAnimationComplete();
-    }
-  }
 }

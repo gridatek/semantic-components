@@ -216,7 +216,7 @@ import { Logo } from '../logo/logo';
       </nav>
 
       <!-- Mobile Menu -->
-      <div scNavbarMobilePortal>
+      <ng-template scNavbarMobilePortal>
         <div scNavbarMobileMenu>
           <a
             scNavbarMobileLink
@@ -246,7 +246,7 @@ import { Logo } from '../logo/logo';
             Customize
           </a>
         </div>
-      </div>
+      </ng-template>
     </div>
   `,
   host: {

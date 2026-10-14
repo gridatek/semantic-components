@@ -1,110 +1,71 @@
-import { Overlay, OverlayModule, OverlayRef } from '@angular/cdk/overlay';
+import { Overlay } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 import {
-  Component,
   DestroyRef,
+  Directive,
   TemplateRef,
-  ViewChild,
   ViewContainerRef,
-  ViewEncapsulation,
-  computed,
   effect,
   inject,
-  input,
 } from '@angular/core';
-import { ScFocusTrap, cn } from '@semantic-components/ui';
 import { ScNavbarProvider } from './navbar-provider';
 
-@Component({
-  selector: 'div[scNavbarMobilePortal]',
-  imports: [OverlayModule, ScFocusTrap],
-  template: `
-    <ng-template #mobileMenuTemplate>
-      <div scFocusTrap>
-        <ng-content />
-      </div>
-    </ng-template>
-  `,
-  host: {
-    '[class]': 'class()',
-  },
-  encapsulation: ViewEncapsulation.None,
-})
+/**
+ * The mobile menu's template, shown in an overlay under the navbar while the
+ * menu is open. Detached on close: Angular keeps the menu until it has
+ * animated out (`animate.leave`).
+ */
+@Directive({ selector: 'ng-template[scNavbarMobilePortal]' })
 export class ScNavbarMobilePortal {
   private readonly provider = inject(ScNavbarProvider);
   private readonly overlay = inject(Overlay);
+  private readonly templateRef = inject(TemplateRef);
   private readonly viewContainerRef = inject(ViewContainerRef);
-  private readonly destroyRef = inject(DestroyRef);
 
-  readonly classInput = input<string>('', { alias: 'class' });
-
-  @ViewChild('mobileMenuTemplate', { static: true })
-  private mobileMenuTemplate!: TemplateRef<unknown>;
-
-  protected readonly origin = computed(() => this.provider.origin());
-  protected readonly class = computed(() => cn('md:hidden', this.classInput()));
-
-  private overlayRef: OverlayRef = this.overlay.create({
+  private readonly overlayRef = this.overlay.create({
     positionStrategy: this.overlay.position().global(),
     hasBackdrop: false,
     scrollStrategy: this.overlay.scrollStrategies.block(),
   });
 
   constructor() {
-    // Cleanup memory when component is destroyed
-    this.destroyRef.onDestroy(() => {
-      this.overlayRef.dispose();
-    });
+    inject(DestroyRef).onDestroy(() => this.overlayRef.dispose());
 
-    // Handle Keyboard Close
     this.overlayRef.keydownEvents().subscribe((event) => {
       if (event.key === 'Escape') this.provider.closeAndRestoreFocus();
     });
 
-    // Update Position Strategy when Origin becomes available
+    // Under the navbar, once it is there.
     effect(() => {
-      const origin = this.origin();
+      const origin = this.provider.origin();
       if (origin?.elementRef) {
-        const positionStrategy = this.overlay
-          .position()
-          .flexibleConnectedTo(origin.elementRef)
-          .withPositions([
-            {
-              originX: 'start',
-              originY: 'bottom',
-              overlayX: 'start',
-              overlayY: 'top',
-            },
-          ])
-          .withPush(false);
-
-        this.overlayRef.updatePositionStrategy(positionStrategy);
+        this.overlayRef.updatePositionStrategy(
+          this.overlay
+            .position()
+            .flexibleConnectedTo(origin.elementRef)
+            .withPositions([
+              {
+                originX: 'start',
+                originY: 'bottom',
+                overlayX: 'start',
+                overlayY: 'top',
+              },
+            ])
+            .withPush(false),
+        );
       }
     });
 
-    // Use overlayOpen instead of open to delay DOM removal until animation completes
     effect(() => {
-      if (this.provider.overlayOpen()) {
-        this.attachMenu();
-      } else {
-        this.detachMenu();
+      if (this.provider.open()) {
+        if (!this.overlayRef.hasAttached()) {
+          this.overlayRef.attach(
+            new TemplatePortal(this.templateRef, this.viewContainerRef),
+          );
+        }
+      } else if (this.overlayRef.hasAttached()) {
+        this.overlayRef.detach();
       }
     });
-  }
-
-  private attachMenu(): void {
-    if (!this.overlayRef.hasAttached()) {
-      const portal = new TemplatePortal(
-        this.mobileMenuTemplate,
-        this.viewContainerRef,
-      );
-      this.overlayRef.attach(portal);
-    }
-  }
-
-  private detachMenu(): void {
-    if (this.overlayRef.hasAttached()) {
-      this.overlayRef.detach();
-    }
   }
 }

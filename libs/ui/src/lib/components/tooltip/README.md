@@ -20,8 +20,7 @@ A directive-based tooltip for displaying text hints on hover or focus. For rich 
 ### Delay
 
 ```html
-<button [scTooltipTrigger]="'Delayed'" [tooltipDelay]="500">Show after 500ms</button>
-<button [scTooltipTrigger]="'Slow hide'" [tooltipHideDelay]="300">Hide after 300ms</button>
+<button [scTooltipTrigger]="'Delayed'" [tooltipDelay]="500">Show after 500ms</button> <button [scTooltipTrigger]="'Slow hide'" [tooltipHideDelay]="300">Hide after 300ms</button>
 ```
 
 ### Disabled

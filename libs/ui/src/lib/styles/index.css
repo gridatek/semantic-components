@@ -1,3 +1,14 @@
 @import url('@angular/cdk/overlay-prebuilt.css');
 
 @import './shadcn.css';
+
+/*
+ * Reduced motion: the enter / exit animations (animate-in, animate-out) take
+ * no visible time. Not 0s: Firefox fires no animationend for those, and some
+ * overlays close on it — 1ms still runs and ends everywhere (Firefox rounds 0.01ms down to 0s).
+ */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    --tw-animation-duration: 1ms !important;
+  }
+}

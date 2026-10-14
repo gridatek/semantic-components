@@ -72,7 +72,7 @@ import {
         </div>
       </nav>
 
-      <div scNavbarMobilePortal>
+      <ng-template scNavbarMobilePortal>
         <div scNavbarMobileMenu>
           @for (link of links; track link) {
             <a
@@ -85,7 +85,7 @@ import {
             </a>
           }
         </div>
-      </div>
+      </ng-template>
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,

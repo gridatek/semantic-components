@@ -100,12 +100,12 @@ import { SiMenuIcon, SiXIcon } from '@semantic-icons/lucide-icons';
       </nav>
 
       <!-- Mobile Menu -->
-      <div scNavbarMobilePortal>
+      <ng-template scNavbarMobilePortal>
         <div scNavbarMobileMenu>
           <a scNavbarMobileLink routerLink="/products">Products</a>
           <a scNavbarMobileLink routerLink="/docs">Docs</a>
         </div>
-      </div>
+      </ng-template>
     </div>
   `,
 })
@@ -176,11 +176,11 @@ All components accept a `class` input for custom styles:
 The mobile menu container can be styled directly using the `class` input:
 
 ```html
-<div scNavbarMobilePortal>
+<ng-template scNavbarMobilePortal>
   <div scNavbarMobileMenu class="bg-red-500 p-8">
     <!-- Custom background and padding -->
   </div>
-</div>
+</ng-template>
 ```
 
 ## Inputs
