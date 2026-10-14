@@ -1,5 +1,10 @@
 import { expect, test } from '@playwright/test';
-import { activeDescendantText, collectErrors, press } from '../../interaction';
+import {
+  activeDescendantText,
+  collectErrors,
+  focus,
+  press,
+} from '../../interaction';
 
 test.describe('Basic Multiselect Demo', () => {
   let errors: string[];
@@ -21,7 +26,7 @@ test.describe('Basic Multiselect Demo', () => {
     const form = page.locator('pre');
 
     await expect(trigger).toHaveAttribute('role', 'combobox');
-    await trigger.focus();
+    await focus(trigger);
     await press(page, 'ArrowDown');
     await expect(listbox).toHaveAttribute('aria-multiselectable', 'true');
 
@@ -64,7 +69,7 @@ test.describe('Basic Multiselect Demo', () => {
     page,
   }) => {
     const trigger = page.locator('[scMultiselectTrigger]');
-    await trigger.focus();
+    await focus(trigger);
     await press(page, 's');
     await expect(trigger).toHaveAttribute('aria-expanded', 'true');
     await expect.poll(() => activeDescendantText(trigger)).toBe('Starred');

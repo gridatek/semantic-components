@@ -1,4 +1,16 @@
-import type { Locator, Page } from '@playwright/test';
+import { type Locator, type Page, expect } from '@playwright/test';
+
+/**
+ * Focuses an element once it can take focus. A `<div>` made focusable by a
+ * `tabindex` host binding (an `@angular/aria` combobox trigger) may not be
+ * yet just after the page loads, and `focus()` on it then does nothing.
+ */
+export async function focus(locator: Locator): Promise<void> {
+  await expect(async () => {
+    await locator.focus();
+    await expect(locator).toBeFocused({ timeout: 100 });
+  }).toPass();
+}
 
 /**
  * Presses a key, holding it long enough for a render to happen before the

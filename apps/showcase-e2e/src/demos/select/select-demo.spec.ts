@@ -2,6 +2,7 @@ import { expect, test } from '@playwright/test';
 import {
   activeDescendantText,
   collectErrors,
+  focus,
   press,
   type,
 } from '../../interaction';
@@ -40,7 +41,7 @@ test.describe('Select Demo', () => {
   test('keyboard: open, move, select, close', async ({ page }) => {
     const trigger = page.locator('[scSelectTrigger]');
     const listbox = page.getByRole('listbox');
-    await trigger.focus();
+    await focus(trigger);
 
     await press(page, 'ArrowDown');
     await expect(listbox).toBeVisible();
@@ -83,7 +84,7 @@ test.describe('Select Demo', () => {
 
   test('type-ahead moves to the matching option', async ({ page }) => {
     const trigger = page.locator('[scSelectTrigger]');
-    await trigger.focus();
+    await focus(trigger);
     await press(page, 'Enter');
     await expect(page.getByRole('option').first()).toBeVisible();
     await type(page, 'tr');
@@ -96,7 +97,7 @@ test.describe('Select Demo', () => {
     page,
   }) => {
     const trigger = page.locator('[scSelectTrigger]');
-    await trigger.focus();
+    await focus(trigger);
     await press(page, 'w');
     await expect(trigger).toHaveAttribute('aria-expanded', 'true');
     await expect.poll(() => activeDescendantText(trigger)).toBe('Work');
