@@ -160,6 +160,25 @@ test.describe('Number field', () => {
     expect(errors).toEqual([]);
   });
 
+  test('disabled and read-only: the field and its class', async ({ page }) => {
+    const errors = collectErrors(page);
+    await page.goto('/demos/number-field/disabled-number-field-demo');
+    const fields = page.locator('[data-slot=number-field]');
+    const disabled = fields.nth(0);
+    const readonly = fields.nth(1);
+    await expect(disabled).toHaveAttribute('data-disabled', 'true');
+    // The consumer's width replaces the field's.
+    const classes = ((await disabled.getAttribute('class')) ?? '').split(' ');
+    expect(classes).toContain('w-40');
+    expect(classes).not.toContain('w-full');
+    await expect(
+      page.getByRole('spinbutton', { name: 'Disabled' }),
+    ).toBeDisabled();
+    await expect(readonly).toHaveAttribute('data-disabled', 'false');
+    await expect(readonly).toHaveAttribute('data-readonly', 'true');
+    expect(errors).toEqual([]);
+  });
+
   test('Signal Forms: schema bounds, required, touched', async ({ page }) => {
     const errors = collectErrors(page);
     await page.goto('/demos/number-field/signal-forms-number-field-demo');
@@ -171,11 +190,16 @@ test.describe('Number field', () => {
     await quantity.blur();
     await expect(page.getByRole('alert')).toHaveText('Enter a quantity.');
     await expect(quantity).toHaveAttribute('aria-invalid', 'true');
+    // The number field is a scField: its state follows the form.
+    const field = page.locator('[data-slot=number-field]');
+    await expect(field).toHaveAttribute('role', 'group');
+    await expect(field).toHaveAttribute('data-invalid', 'true');
 
     await quantity.fill('250');
     await quantity.blur();
     await expectValue(quantity, '100', '100');
     await expect(page.getByRole('alert')).toHaveCount(0);
+    await expect(field).toHaveAttribute('data-invalid', 'false');
     await expect(page.locator('pre')).toContainText('"value": 100');
     expect(errors).toEqual([]);
   });

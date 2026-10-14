@@ -20,7 +20,6 @@ import { ScrubbingNumberFieldDemo } from './scrubbing-number-field-demo';
 export default class ScrubbingNumberFieldDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScField,
   ScLabel,
   ScNumberField,
   ScNumberFieldDecrement,
@@ -41,7 +40,6 @@ import {
 @Component({
   selector: 'app-scrubbing-number-field-demo',
   imports: [
-    ScField,
     ScLabel,
     ScNumberField,
     ScNumberFieldScrubArea,
@@ -58,7 +56,6 @@ import {
   template: \`
     <div class="w-48 space-y-6">
       <div
-        scField
         scNumberField
         [(value)]="opacity"
         [min]="0"
@@ -70,7 +67,9 @@ import {
       >
         <div scNumberFieldScrubArea>
           <label scLabel>Opacity</label>
-          <span scNumberFieldScrubAreaCursor><svg siMoveHorizontalIcon></svg></span>
+          <span scNumberFieldScrubAreaCursor
+            ><svg siMoveHorizontalIcon></svg
+          ></span>
         </div>
         <div scNumberFieldGroup>
           <button scNumberFieldDecrement>
@@ -86,7 +85,6 @@ import {
       </div>
 
       <div
-        scField
         scNumberField
         [(value)]="rotation"
         [min]="-180"
@@ -95,7 +93,9 @@ import {
       >
         <div scNumberFieldScrubArea direction="vertical" [pixelSensitivity]="4">
           <label scLabel>Rotation (drag up or down)</label>
-          <span scNumberFieldScrubAreaCursor><svg siMoveVerticalIcon></svg></span>
+          <span scNumberFieldScrubAreaCursor
+            ><svg siMoveVerticalIcon></svg
+          ></span>
         </div>
         <div scNumberFieldGroup>
           <button scNumberFieldDecrement>

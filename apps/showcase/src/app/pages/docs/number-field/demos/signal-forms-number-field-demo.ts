@@ -1,7 +1,6 @@
 import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import { FormField, form, max, min, required } from '@angular/forms/signals';
 import {
-  ScField,
   ScLabel,
   ScNumberField,
   ScNumberFieldDecrement,
@@ -17,7 +16,6 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
   selector: 'app-signal-forms-number-field-demo',
   imports: [
     FormField,
-    ScField,
     ScLabel,
     ScNumberField,
     ScNumberFieldScrubArea,
@@ -30,7 +28,7 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
   ],
   template: `
     <div class="w-56 space-y-4">
-      <div scField scNumberField [formField]="orderForm.quantity">
+      <div scNumberField [formField]="orderForm.quantity">
         <div scNumberFieldScrubArea>
           <label scLabel>Quantity</label>
         </div>

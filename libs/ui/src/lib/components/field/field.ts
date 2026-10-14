@@ -75,7 +75,15 @@ export class ScField implements ScFieldContext {
   readonly invalidInput = input<boolean>(false, { alias: 'invalid' });
   readonly disabledInput = input<boolean>(false, { alias: 'disabled' });
 
-  readonly formField = contentChild(FormField);
+  /** `[formField]` on the field itself (a control composing it), or inside. */
+  private readonly ownFormField = inject(FormField, {
+    self: true,
+    optional: true,
+  });
+  private readonly childFormField = contentChild(FormField);
+  readonly formField = computed(
+    () => this.ownFormField ?? this.childFormField(),
+  );
 
   protected readonly role = computed(() => {
     // Only LABEL preserves native semantics, DIV gets role="group"

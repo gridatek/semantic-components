@@ -20,7 +20,6 @@ import { DisabledNumberFieldDemo } from './disabled-number-field-demo';
 export default class DisabledNumberFieldDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScField,
   ScLabel,
   ScNumberField,
   ScNumberFieldDecrement,
@@ -35,7 +34,6 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-disabled-number-field-demo',
   imports: [
-    ScField,
     ScLabel,
     ScNumberField,
     ScNumberFieldScrubArea,
@@ -48,7 +46,7 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
   ],
   template: \`
     <div class="flex flex-wrap gap-6">
-      <div scField scNumberField class="w-40" [value]="42" [disabled]="true">
+      <div scNumberField class="w-40" [value]="42" [disabled]="true">
         <div scNumberFieldScrubArea>
           <label scLabel>Disabled</label>
         </div>
@@ -64,7 +62,7 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
           </button>
         </div>
       </div>
-      <div scField scNumberField class="w-40" [value]="42" [readonly]="true">
+      <div scNumberField class="w-40" [value]="42" [readonly]="true">
         <div scNumberFieldScrubArea>
           <label scLabel>Read-only</label>
         </div>

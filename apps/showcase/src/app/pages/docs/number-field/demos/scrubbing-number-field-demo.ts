@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScField,
   ScLabel,
   ScNumberField,
   ScNumberFieldDecrement,
@@ -21,7 +20,6 @@ import {
 @Component({
   selector: 'app-scrubbing-number-field-demo',
   imports: [
-    ScField,
     ScLabel,
     ScNumberField,
     ScNumberFieldScrubArea,
@@ -38,7 +36,6 @@ import {
   template: `
     <div class="w-48 space-y-6">
       <div
-        scField
         scNumberField
         [(value)]="opacity"
         [min]="0"
@@ -68,7 +65,6 @@ import {
       </div>
 
       <div
-        scField
         scNumberField
         [(value)]="rotation"
         [min]="-180"

@@ -20,7 +20,6 @@ import { BasicNumberFieldDemo } from './basic-number-field-demo';
 export default class BasicNumberFieldDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScField,
   ScLabel,
   ScNumberField,
   ScNumberFieldDecrement,
@@ -35,7 +34,6 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-basic-number-field-demo',
   imports: [
-    ScField,
     ScLabel,
     ScNumberField,
     ScNumberFieldScrubArea,
@@ -49,7 +47,6 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
   template: \`
     <div class="w-48 space-y-4">
       <div
-        scField
         scNumberField
         [(value)]="count"
         [min]="0"

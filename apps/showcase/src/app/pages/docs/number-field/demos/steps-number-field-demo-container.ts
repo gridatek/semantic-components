@@ -20,7 +20,6 @@ import { StepsNumberFieldDemo } from './steps-number-field-demo';
 export default class StepsNumberFieldDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScField,
   ScLabel,
   ScNumberField,
   ScNumberFieldDecrement,
@@ -35,7 +34,6 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-steps-number-field-demo',
   imports: [
-    ScField,
     ScLabel,
     ScNumberField,
     ScNumberFieldScrubArea,
@@ -49,7 +47,6 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
   template: \`
     <div class="w-48 space-y-4">
       <div
-        scField
         scNumberField
         [(value)]="width"
         [min]="0"

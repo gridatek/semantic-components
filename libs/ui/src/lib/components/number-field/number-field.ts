@@ -3,13 +3,15 @@ import {
   InjectionToken,
   booleanAttribute,
   computed,
+  inject,
   input,
   model,
   output,
   signal,
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
-import { cn } from '../../utils';
+import { bindInput } from '../../utils';
+import { ScField } from '../field';
 import {
   decimalPlaces,
   numberFormatter,
@@ -29,22 +31,23 @@ export type ScNumberFieldStepSize = 'small' | 'normal' | 'large';
  * `scNumberFieldInput`, `scNumberFieldIncrement` / `scNumberFieldDecrement` (in a
  * `scNumberFieldGroup`), `scNumberFieldScrubArea`. A Signal Forms control: bind
  * `[formField]` here (`min` / `max` / `required` / `disabled` come from the
- * schema).
+ * schema). It is a `scField` too (label, description and errors are tied
+ * to the input), whose `id`, `orientation` and `class` it takes.
  */
 @Directive({
   selector: 'div[scNumberField]',
   exportAs: 'scNumberField',
+  hostDirectives: [
+    { directive: ScField, inputs: ['id', 'orientation', 'class'] },
+  ],
   providers: [{ provide: SC_NUMBER_FIELD, useExisting: ScNumberField }],
   host: {
     'data-slot': 'number-field',
-    '[class]': 'class()',
-    '[attr.data-disabled]': 'disabled() || null',
     '[attr.data-readonly]': 'readonly() || null',
-    '[attr.data-invalid]': '(invalid() && touched()) || null',
   },
 })
 export class ScNumberField implements FormValueControl<number | null> {
-  readonly classInput = input<string>('', { alias: 'class' });
+  private readonly field = inject(ScField);
 
   readonly value = model<number | null>(null);
   readonly min = input<number | undefined>(undefined);
@@ -75,8 +78,6 @@ export class ScNumberField implements FormValueControl<number | null> {
   readonly touch = output<void>();
   /** The value was committed: on blur, Enter, a step, the end of a scrub. */
   readonly valueCommitted = output<number | null>();
-
-  protected readonly class = computed(() => cn(this.classInput()));
 
   /** The input's id (the buttons control it), set by `scNumberFieldInput`. */
   readonly inputId = signal<string | null>(null);
@@ -200,5 +201,14 @@ export class ScNumberField implements FormValueControl<number | null> {
       decimalPlaces(this.min() ?? 0),
     );
     return Number(value.toFixed(Math.min(decimals, 20)));
+  }
+
+  constructor() {
+    // The field's state follows the number's (`data-disabled`, `data-invalid`).
+    bindInput(this.field.disabledInput, this.disabled);
+    bindInput(
+      this.field.invalidInput,
+      computed(() => this.invalid() && this.touched()),
+    );
   }
 }

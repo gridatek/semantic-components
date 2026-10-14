@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScField,
   ScLabel,
   ScNumberField,
   ScNumberFieldDecrement,
@@ -14,7 +13,6 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-number-field-usage-demo',
   imports: [
-    ScField,
     ScLabel,
     ScNumberField,
     ScNumberFieldScrubArea,
@@ -26,14 +24,7 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
     SiPlusIcon,
   ],
   template: `
-    <div
-      scField
-      scNumberField
-      class="w-40"
-      [(value)]="quantity"
-      [min]="1"
-      [max]="10"
-    >
+    <div scNumberField class="w-40" [(value)]="quantity" [min]="1" [max]="10">
       <div scNumberFieldScrubArea>
         <label scLabel>Quantity</label>
       </div>

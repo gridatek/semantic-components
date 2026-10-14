@@ -11,7 +11,7 @@ You write the markup and every piece of text — labels, the buttons' names, ico
 ## Usage
 
 ```html
-<div scField scNumberField [(value)]="quantity" [min]="1" [max]="10">
+<div scNumberField [(value)]="quantity" [min]="1" [max]="10">
   <div scNumberFieldScrubArea>
     <label scLabel>Quantity</label>
   </div>
@@ -29,13 +29,13 @@ You write the markup and every piece of text — labels, the buttons' names, ico
 </div>
 ```
 
-`scField` on the same element ties the label to the input. Without a visible label, give the input an `aria-label`.
+`scNumberField` is a `scField` too: the label, `scFieldDescription` and `scFieldErrors` are tied to the input. Without a visible label, give the input an `aria-label`.
 
 ## Parts
 
 | Part                           | Selector                         | Does                                                                                                                                                                                           |
 | ------------------------------ | -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ScNumberField`                | `div[scNumberField]`             | The value, bounds, steps and format (`exportAs: 'scNumberField'`). `data-disabled`, `data-readonly`, `data-invalid` (invalid and touched).                                                     |
+| `ScNumberField`                | `div[scNumberField]`             | The value, bounds, steps and format (`exportAs: 'scNumberField'`). Composes `scField` (`id`, `orientation`, `class`): `data-disabled`, `data-invalid` (invalid and touched); `data-readonly`.  |
 | `ScNumberFieldInput`           | `input[scNumberFieldInput]`      | The text field, a `spinbutton` with `aria-valuenow` / `-valuetext` (formatted) / `-valuemin` / `-valuemax`. Only what can be part of a number gets typed. Numeric or decimal keypad on phones. |
 | `ScNumberFieldGroup`           | `div[scNumberFieldGroup]`        | The input and its buttons, joined.                                                                                                                                                             |
 | `ScNumberFieldIncrement`       | `button[scNumberFieldIncrement]` | Steps up — repeatedly while held (after 400 ms, every 60 ms). Out of the Tab order (the arrow keys do it), keeps focus in the input; `aria-controls` the input. Name it.                       |
@@ -55,7 +55,7 @@ You write the markup and every piece of text — labels, the buttons' names, ico
 ## Signal Forms
 
 ```html
-<div scField scNumberField [formField]="orderForm.quantity">…</div>
+<div scNumberField [formField]="orderForm.quantity">…</div>
 ```
 
 ```ts
