@@ -18,18 +18,20 @@ import { DisabledOtpFieldDemo } from './disabled-otp-field-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class DisabledOtpFieldDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { FormField, disabled, form, minLength } from '@angular/forms/signals';
 import {
   ScOtpField,
   ScOtpFieldGroup,
   ScOtpFieldInput,
 } from '@semantic-components/ui';
 
+/** Disabled by the schema (\`disabled()\`), like any field. */
 @Component({
   selector: 'app-disabled-otp-field-demo',
-  imports: [ScOtpField, ScOtpFieldGroup, ScOtpFieldInput],
+  imports: [FormField, ScOtpField, ScOtpFieldGroup, ScOtpFieldInput],
   template: \`
-    <div scOtpField [disabled]="true" value="123456">
+    <div scOtpField [formField]="otpForm.code">
       <div scOtpFieldGroup>
         <input scOtpFieldInput aria-label="Digit 1 of 6" />
         <input scOtpFieldInput aria-label="Digit 2 of 6" />
@@ -43,5 +45,10 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class DisabledOtpFieldDemo {}`;
+export class DisabledOtpFieldDemo {
+  readonly otpForm = form(signal({ code: '123456' }), (path) => {
+    minLength(path.code, 6);
+    disabled(path.code);
+  });
+}`;
 }

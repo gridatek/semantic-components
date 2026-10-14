@@ -19,6 +19,7 @@ import { DotSeparatorOtpFieldDemo } from './dot-separator-otp-field-demo';
 })
 export class DotSeparatorOtpFieldDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { FormField, form, minLength } from '@angular/forms/signals';
 import {
   ScOtpField,
   ScOtpFieldGroup,
@@ -30,6 +31,7 @@ import { SiDotIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-dot-separator-otp-field-demo',
   imports: [
+    FormField,
     ScOtpField,
     ScOtpFieldGroup,
     ScOtpFieldSeparator,
@@ -38,7 +40,7 @@ import { SiDotIcon } from '@semantic-icons/lucide-icons';
   ],
   template: \`
     <div class="space-y-4">
-      <div scOtpField [(value)]="otp">
+      <div scOtpField [formField]="otpForm.code">
         <div scOtpFieldGroup>
           <input scOtpFieldInput aria-label="Digit 1 of 6" />
           <input scOtpFieldInput aria-label="Digit 2 of 6" />
@@ -54,13 +56,17 @@ import { SiDotIcon } from '@semantic-icons/lucide-icons';
           <input scOtpFieldInput aria-label="Digit 6 of 6" />
         </div>
       </div>
-      <p class="text-muted-foreground text-sm">Value: {{ otp() || 'empty' }}</p>
+      <p class="text-muted-foreground text-sm">
+        Value: {{ otpForm.code().value() || 'empty' }}
+      </p>
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
 export class DotSeparatorOtpFieldDemo {
-  readonly otp = signal('');
+  readonly otpForm = form(signal({ code: '' }), (path) => {
+    minLength(path.code, 6);
+  });
 }`;
 }

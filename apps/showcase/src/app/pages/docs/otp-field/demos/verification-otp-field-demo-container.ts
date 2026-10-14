@@ -19,6 +19,7 @@ import { VerificationOtpFieldDemo } from './verification-otp-field-demo';
 })
 export class VerificationOtpFieldDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { FormField, form, minLength, required } from '@angular/forms/signals';
 import {
   ScFieldDescription,
   ScLabel,
@@ -31,11 +32,13 @@ import { SiMinusIcon } from '@semantic-icons/lucide-icons';
 
 /**
  * The label names the first input (it takes the field's id), the others
- * name themselves; \`valueComplete\` fires once all six digits are in.
+ * name themselves; once the code is complete — valid for its schema — it
+ * can be checked.
  */
 @Component({
   selector: 'app-verification-otp-field-demo',
   imports: [
+    FormField,
     ScFieldDescription,
     ScLabel,
     ScOtpField,
@@ -46,7 +49,7 @@ import { SiMinusIcon } from '@semantic-icons/lucide-icons';
   ],
   template: \`
     <div class="max-w-sm rounded-lg border p-6">
-      <div scOtpField [(value)]="code" (valueComplete)="verified.set($event)">
+      <div scOtpField [formField]="otpForm.code">
         <label scLabel class="justify-center">Enter verification code</label>
         <p scFieldDescription class="text-center">
           We sent a code to your email address.
@@ -63,8 +66,8 @@ import { SiMinusIcon } from '@semantic-icons/lucide-icons';
           <input scOtpFieldInput aria-label="Digit 6 of 6" />
         </div>
         <p class="text-muted-foreground text-center text-sm" role="status">
-          @if (verified() && verified() === code()) {
-            Verifying {{ code() }}…
+          @if (otpForm.code().valid()) {
+            Verifying {{ otpForm.code().value() }}…
           } @else {
             Enter all 6 digits.
           }
@@ -76,8 +79,9 @@ import { SiMinusIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class VerificationOtpFieldDemo {
-  readonly code = signal('');
-  /** The last completed code. */
-  readonly verified = signal('');
+  readonly otpForm = form(signal({ code: '' }), (path) => {
+    required(path.code);
+    minLength(path.code, 6);
+  });
 }`;
 }

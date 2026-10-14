@@ -4,8 +4,10 @@ import {
   booleanAttribute,
   computed,
   contentChildren,
+  effect,
   inject,
   input,
+  isDevMode,
   model,
   output,
 } from '@angular/core';
@@ -44,9 +46,10 @@ const accepted: Record<ScOtpFieldValidationType, (char: string) => string> = {
  * A one-time password field, as Base UI's OTP Field: one character per
  * `scOtpFieldInput` (the code is as long as there are inputs), entered left
  * to right; a pasted or autofilled code is spread over them. A Signal Forms
- * control: bind `[formField]` here. It is a `scField` too (a label,
- * description and errors go inside it), whose `id`, `orientation` and
- * `class` it takes; the inputs sit in a `scOtpFieldGroup`.
+ * control: bind `[formField]` here — the value, its length (`minLength` in
+ * the schema), its state and its errors are the form's. It is a `scField`
+ * too (a label, description and errors go inside it), whose `id`,
+ * `orientation` and `class` it takes; the inputs sit in a `scOtpFieldGroup`.
  */
 @Directive({
   selector: 'div[scOtpField]',
@@ -55,8 +58,6 @@ const accepted: Record<ScOtpFieldValidationType, (char: string) => string> = {
   ],
   host: {
     'data-slot': 'otp-field',
-    '[attr.data-filled]': 'value() ? "" : null',
-    '[attr.data-complete]': 'complete() ? "" : null',
     '(paste)': 'onPaste($event)',
     '(focusout)': 'onFocusOut($event)',
   },
@@ -66,17 +67,20 @@ export class ScOtpField implements FormValueControl<string> {
   private readonly element =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
-  readonly value = model<string>('');
   /** Which characters are accepted (anything else is dropped); `numeric` brings up a numeric keypad. */
   readonly validationType = input<ScOtpFieldValidationType>('numeric');
+
+  // Set by [formField] — the field's value, state and length come from the form.
+  readonly value = model<string>('');
   readonly disabled = input(false, { transform: booleanAttribute });
   readonly invalid = input(false, { transform: booleanAttribute });
   readonly touched = input(false, { transform: booleanAttribute });
+  /** The schema's `minLength` / `maxLength`: checked against the number of inputs. */
+  readonly minLength = input<number | undefined>(undefined);
+  readonly maxLength = input<number | undefined>(undefined);
 
   /** Focus left the field — not just one input for the next (Signal Forms marks it touched). */
   readonly touch = output<void>();
-  /** The code was completed (typed, pasted or autofilled to its full length). */
-  readonly valueComplete = output<string>();
 
   private readonly inputs = contentChildren(ScOtpFieldInput, {
     descendants: true,
@@ -84,12 +88,9 @@ export class ScOtpField implements FormValueControl<string> {
 
   /** The code's length: the number of inputs. */
   readonly length = computed(() => this.inputs().length);
-  readonly complete = computed(
-    () => this.length() > 0 && this.value().length === this.length(),
-  );
-  /** The first input with no character (-1 when complete). */
+  /** The first input with no character (-1 when every input has one). */
   readonly firstEmptyIndex = computed(() =>
-    this.complete() ? -1 : this.value().length,
+    this.value().length >= this.length() ? -1 : this.value().length,
   );
   /** Invalid once touched: the inputs' `aria-invalid`, the field's `data-invalid`. */
   readonly showInvalid = computed(() => this.invalid() && this.touched());
@@ -102,6 +103,22 @@ export class ScOtpField implements FormValueControl<string> {
     // The field's state follows the code's (`data-disabled`, `data-invalid`).
     bindInput(this.field.disabledInput, this.disabled);
     bindInput(this.field.invalidInput, this.showInvalid);
+
+    // The schema's length and the inputs must agree: one says what's valid,
+    // the other what can be entered.
+    if (isDevMode()) {
+      effect(() => {
+        const inputs = this.length();
+        const lengths = [this.minLength(), this.maxLength()].filter(
+          (length) => length !== undefined,
+        );
+        if (inputs && lengths.some((length) => length !== inputs)) {
+          console.warn(
+            `scOtpField: ${inputs} inputs, but the schema's length is ${lengths.join(' to ')}. Make them agree: the code can only be as long as there are inputs.`,
+          );
+        }
+      });
+    }
   }
 
   /** An input's position in the code. */
@@ -136,7 +153,7 @@ export class ScOtpField implements FormValueControl<string> {
       chars +
       value.slice(index + chars.length)
     ).slice(0, this.length());
-    this.setValue(next);
+    this.value.set(next);
     this.focusInput(Math.min(index + chars.length, this.length() - 1));
   }
 
@@ -144,20 +161,11 @@ export class ScOtpField implements FormValueControl<string> {
   clear(index: number): void {
     if (this.disabled()) return;
     const value = this.value();
-    this.setValue(value.slice(0, index) + value.slice(index + 1));
+    this.value.set(value.slice(0, index) + value.slice(index + 1));
   }
 
   focusInput(index: number): void {
     this.inputs()[index]?.focus();
-  }
-
-  /** Sets the code; complete — and changed, or pasted — emits `valueComplete`. */
-  private setValue(next: string, pasted = false): void {
-    const previous = this.value();
-    this.value.set(next);
-    if (this.complete() && (next !== previous || pasted)) {
-      this.valueComplete.emit(next);
-    }
   }
 
   protected onFocusOut(event: FocusEvent): void {
@@ -171,7 +179,7 @@ export class ScOtpField implements FormValueControl<string> {
     if (this.disabled()) return;
     const chars = this.accept(event.clipboardData?.getData('text') ?? '');
     if (!chars) return;
-    this.setValue(chars.slice(0, this.length()), true);
+    this.value.set(chars.slice(0, this.length()));
     this.focusInput(Math.min(chars.length, this.length() - 1));
   }
 }

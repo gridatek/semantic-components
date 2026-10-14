@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { FormField, form, minLength } from '@angular/forms/signals';
 import {
   ScOtpField,
   ScOtpFieldGroup,
@@ -7,10 +8,10 @@ import {
 
 @Component({
   selector: 'app-pin-otp-field-demo',
-  imports: [ScOtpField, ScOtpFieldGroup, ScOtpFieldInput],
+  imports: [FormField, ScOtpField, ScOtpFieldGroup, ScOtpFieldInput],
   template: `
     <div class="space-y-4">
-      <div scOtpField [(value)]="otp">
+      <div scOtpField [formField]="otpForm.code">
         <div scOtpFieldGroup>
           <input scOtpFieldInput aria-label="Digit 1 of 4" />
           <input scOtpFieldInput aria-label="Digit 2 of 4" />
@@ -18,12 +19,16 @@ import {
           <input scOtpFieldInput aria-label="Digit 4 of 4" />
         </div>
       </div>
-      <p class="text-muted-foreground text-sm">Value: {{ otp() || 'empty' }}</p>
+      <p class="text-muted-foreground text-sm">
+        Value: {{ otpForm.code().value() || 'empty' }}
+      </p>
     </div>
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
 export class PinOtpFieldDemo {
-  readonly otp = signal('');
+  readonly otpForm = form(signal({ code: '' }), (path) => {
+    minLength(path.code, 4);
+  });
 }

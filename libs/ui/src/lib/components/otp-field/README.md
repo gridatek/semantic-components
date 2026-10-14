@@ -6,8 +6,10 @@ You write the markup and every piece of text — the inputs and their names, the
 
 ## Usage
 
+Used through Signal Forms: the code, its length, its state and its errors are the form's.
+
 ```html
-<div scOtpField [(value)]="code" (valueComplete)="verify($event)">
+<div scOtpField [formField]="otpForm.code">
   <label scLabel>Verification code</label>
   <div scOtpFieldGroup>
     <input scOtpFieldInput />
@@ -21,45 +23,37 @@ You write the markup and every piece of text — the inputs and their names, the
     <input scOtpFieldInput aria-label="Digit 6 of 6" />
   </div>
   <p scFieldDescription>We sent it to your phone.</p>
-</div>
-```
-
-- The code is as long as there are inputs.
-- `scOtpField` is a `scField` too: a label, `scFieldDescription` and `scFieldErrors` go inside it, around the `scOtpFieldGroup` row.
-- The first input takes the field's id, so the `scLabel` names it; name the others with `aria-label`. Without a visible label, give the first one an `aria-label` too.
-- Inputs next to each other are joined into one box; a separator splits them.
-
-## Parts
-
-| Part                  | Selector                 | Does                                                                                                                                                                                     |
-| --------------------- | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ScOtpField`          | `div[scOtpField]`        | The code, paste, Signal Forms. Composes `scField` (`id`, `orientation`, `class`): `role="group"`, `data-disabled`, `data-invalid` (invalid and touched). `data-filled`, `data-complete`. |
-| `ScOtpFieldGroup`     | `div[scOtpFieldGroup]`   | The row of inputs and separators; joins neighbouring inputs.                                                                                                                             |
-| `ScOtpFieldInput`     | `input[scOtpFieldInput]` | One character, on your `<input>`. `data-filled`; `aria-invalid` once the field is left invalid. The first: the field's `id`, `autocomplete="one-time-code"`.                             |
-| `ScOtpFieldSeparator` | `[scOtpFieldSeparator]`  | Between inputs (`role="separator"`); write its content (an icon, a dash, a dot).                                                                                                         |
-
-## `scOtpField`
-
-- **Value**: `value` (two-way, a string as long as the code once complete), `valueComplete` (the code reached its full length: typed, pasted or autofilled).
-- **Characters**: `validationType` — `numeric` (default, with a numeric keypad), `alpha`, `alphanumeric` or `none`; anything else is dropped, as is whitespace. Digits of any script are kept as ASCII digits ('٣', '३', '３' → '3'), so the code is always `0`–`9`.
-- **State**: `disabled`.
-- **Forms**: `invalid`, `touched`, `touch` — set by `[formField]`. `touch` fires when focus leaves the field, not when it moves from one input to the next.
-
-## Signal Forms
-
-```html
-<div scOtpField [formField]="otpForm.otp">
-  <div scOtpFieldGroup>…</div>
   <p scFieldErrors></p>
 </div>
 ```
 
 ```ts
-readonly otpForm = form(this.model, (path) => {
-  required(path.otp, { message: 'Enter the code.' });
-  minLength(path.otp, 6, { message: 'Enter all 6 digits.' });
+readonly otpForm = form(signal({ code: '' }), (path) => {
+  required(path.code, { message: 'Enter the code.' });
+  minLength(path.code, 6, { message: 'Enter all 6 digits.' });
 });
 ```
+
+- **The length** is the schema's (`minLength`); write as many inputs. In development, a warning says when they differ.
+- **Complete** is `otpForm.code().valid()` — with `required`: `minLength` lets an empty code through.
+- **Disabled** is the schema's too: `disabled(path.code)`.
+- `scOtpField` is a `scField`: a label, `scFieldDescription` and `scFieldErrors` go inside it, around the `scOtpFieldGroup` row.
+- The first input takes the field's id, so the `scLabel` names it; name the others with `aria-label`. Without a visible label, give the first one an `aria-label` too.
+- Inputs next to each other are joined into one box; a separator splits them.
+
+## Parts
+
+| Part                  | Selector                 | Does                                                                                                                                                                                              |
+| --------------------- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ScOtpField`          | `div[scOtpField]`        | The code, paste, Signal Forms. Composes `scField` (`id`, `orientation`, `class`): `role="group"`, `data-disabled`, `data-invalid` (invalid and touched), `data-pending` (a server check running). |
+| `ScOtpFieldGroup`     | `div[scOtpFieldGroup]`   | The row of inputs and separators; joins neighbouring inputs.                                                                                                                                      |
+| `ScOtpFieldInput`     | `input[scOtpFieldInput]` | One character, on your `<input>`. `data-filled`; `aria-invalid` once the field is left invalid. The first: the field's `id`, `autocomplete="one-time-code"`.                                      |
+| `ScOtpFieldSeparator` | `[scOtpFieldSeparator]`  | Between inputs (`role="separator"`); write its content (an icon, a dash, a dot).                                                                                                                  |
+
+## `scOtpField`
+
+- **Characters**: `validationType` — `numeric` (default, with a numeric keypad), `alpha`, `alphanumeric` or `none`; anything else is dropped, as is whitespace. Digits of any script are kept as ASCII digits ('٣', '३', '３' → '3'), so the code is always `0`–`9`.
+- **Set by `[formField]`**: `value`, `disabled`, `invalid`, `touched`, `minLength` / `maxLength` (checked against the inputs); `touch` fires when focus leaves the field, not when it moves from one input to the next.
 
 Once the field is left invalid, its inputs get `aria-invalid` and `scFieldErrors` shows the messages.
 

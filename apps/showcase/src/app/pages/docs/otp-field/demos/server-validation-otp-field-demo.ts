@@ -50,11 +50,7 @@ async function verifyOnServer(code: string): Promise<boolean> {
   ],
   template: `
     <div class="w-72 space-y-4">
-      <div
-        scOtpField
-        [formField]="otpForm.code"
-        (valueComplete)="otpForm.code().markAsTouched()"
-      >
+      <div scOtpField [formField]="otpForm.code">
         <label scLabel>Verification code</label>
         <div scOtpFieldGroup>
           <input scOtpFieldInput />

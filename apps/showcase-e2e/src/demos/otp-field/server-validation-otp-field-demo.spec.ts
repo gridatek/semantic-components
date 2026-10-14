@@ -3,9 +3,13 @@ import { collectErrors, type } from '../../interaction';
 
 /** Types a code from the start, over whatever was there. */
 async function enter(page: Page, code: string): Promise<void> {
-  const first = page.getByRole('textbox', { name: 'Verification code' });
-  await first.click();
+  await page.getByRole('textbox', { name: 'Verification code' }).click();
   await type(page, code);
+}
+
+/** Leaves the field: it is touched, its errors show. */
+async function leave(page: Page): Promise<void> {
+  await page.locator('body').click({ position: { x: 5, y: 5 } });
 }
 
 test.describe('OTP field — validation with a server call', () => {
@@ -29,16 +33,18 @@ test.describe('OTP field — validation with a server call', () => {
     await expect(status).toHaveText('Checking…');
     await expect(status).toHaveText('Verified.');
     await expect(field).not.toHaveAttribute('data-pending');
-    await expect(message).toHaveCount(0);
 
-    // A wrong code: the server's answer is the error.
+    // A wrong code: once the field is left, the server's answer is the error.
     await enter(page, '111111');
+    await expect(status).toHaveText('');
+    await leave(page);
     await expect(message).toHaveText('That code is wrong.');
     await expect(first).toHaveAttribute('aria-invalid', 'true');
     await expect(field).toHaveAttribute('data-invalid', 'true');
 
     // No answer: the error says so.
     await enter(page, '000000');
+    await leave(page);
     await expect(message).toHaveText(
       "The code couldn't be checked. Try again.",
     );
