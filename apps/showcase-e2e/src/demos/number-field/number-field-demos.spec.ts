@@ -160,7 +160,7 @@ test.describe('Number field', () => {
     expect(errors).toEqual([]);
   });
 
-  test('stacked: nested groups join; the buttons share the row', async ({
+  test('stacked variant: the buttons share the row, joined', async ({
     page,
   }) => {
     const errors = collectErrors(page);

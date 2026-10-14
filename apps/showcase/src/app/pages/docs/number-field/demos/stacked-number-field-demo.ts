@@ -12,7 +12,7 @@ import {
   SiChevronUpIcon,
 } from '@semantic-icons/lucide-icons';
 
-/** The input first, the buttons stacked after it — the parts in another layout. */
+/** The group's `stacked` variant: the input, then increment over decrement. */
 @Component({
   selector: 'app-stacked-number-field-demo',
   imports: [
@@ -28,18 +28,16 @@ import {
   template: `
     <div scNumberField class="w-64" [(value)]="quantity" [min]="0">
       <label scLabel>Enter quantity</label>
-      <div scNumberFieldGroup class="w-full">
-        <input scNumberFieldInput class="h-12 text-start text-lg" />
-        <div scNumberFieldGroup orientation="vertical">
-          <button scNumberFieldIncrement>
-            <svg siChevronUpIcon></svg>
-            <span class="sr-only">Increase quantity</span>
-          </button>
-          <button scNumberFieldDecrement>
-            <svg siChevronDownIcon></svg>
-            <span class="sr-only">Decrease quantity</span>
-          </button>
-        </div>
+      <div scNumberFieldGroup variant="stacked">
+        <input scNumberFieldInput />
+        <button scNumberFieldIncrement>
+          <svg siChevronUpIcon></svg>
+          <span class="sr-only">Increase quantity</span>
+        </button>
+        <button scNumberFieldDecrement>
+          <svg siChevronDownIcon></svg>
+          <span class="sr-only">Decrease quantity</span>
+        </button>
       </div>
     </div>
   `,
