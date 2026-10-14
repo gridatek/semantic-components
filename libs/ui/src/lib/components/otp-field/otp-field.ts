@@ -4,7 +4,6 @@ import {
   booleanAttribute,
   computed,
   contentChildren,
-  effect,
   inject,
   input,
   model,
@@ -13,14 +12,26 @@ import {
 import type { FormValueControl } from '@angular/forms/signals';
 import { bindInput } from '../../utils';
 import { ScField } from '../field';
-import { ScOtpFieldSlot } from './otp-field-slot';
+import { ScOtpFieldInput } from './otp-field-input';
+
+/** Which characters the code accepts. */
+export type ScOtpFieldValidationType =
+  'numeric' | 'alpha' | 'alphanumeric' | 'none';
+
+const accepted: Record<ScOtpFieldValidationType, RegExp> = {
+  numeric: /\p{N}/u,
+  alpha: /\p{L}/u,
+  alphanumeric: /[\p{L}\p{N}]/u,
+  none: /\S/u,
+};
 
 /**
- * A one-time password field, as Base UI's OTP Field: holds the code, one
- * character per `scOtpFieldSlot`, and spreads a pasted code over them. A
- * Signal Forms control: bind `[formField]` here. It is a `scField` too (a
- * label, description and errors go inside it), whose `id`, `orientation`
- * and `class` it takes; the slots sit in a `scOtpFieldGroup`.
+ * A one-time password field, as Base UI's OTP Field: one character per
+ * `scOtpFieldInput` (the code is as long as there are inputs), entered left
+ * to right; a pasted or autofilled code is spread over them. A Signal Forms
+ * control: bind `[formField]` here. It is a `scField` too (a label,
+ * description and errors go inside it), whose `id`, `orientation` and
+ * `class` it takes; the inputs sit in a `scOtpFieldGroup`.
  */
 @Directive({
   selector: 'div[scOtpField]',
@@ -29,6 +40,8 @@ import { ScOtpFieldSlot } from './otp-field-slot';
   ],
   host: {
     'data-slot': 'otp-field',
+    '[attr.data-filled]': 'value() ? "" : null',
+    '[attr.data-complete]': 'complete() ? "" : null',
     '(paste)': 'onPaste($event)',
     '(focusout)': 'onFocusOut($event)',
   },
@@ -39,72 +52,93 @@ export class ScOtpField implements FormValueControl<string> {
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
   readonly value = model<string>('');
+  /** Which characters are accepted (anything else is dropped); `numeric` brings up a numeric keypad. */
+  readonly validationType = input<ScOtpFieldValidationType>('numeric');
   readonly disabled = input(false, { transform: booleanAttribute });
-  readonly inputMode = input<'numeric' | 'text'>('numeric');
   readonly invalid = input(false, { transform: booleanAttribute });
   readonly touched = input(false, { transform: booleanAttribute });
 
-  /** Focus left the field — not just one slot for the next (Signal Forms marks it touched). */
+  /** Focus left the field — not just one input for the next (Signal Forms marks it touched). */
   readonly touch = output<void>();
+  /** The code was completed (typed, pasted or autofilled to its full length). */
+  readonly valueComplete = output<string>();
 
-  /** Invalid once touched: the slots' `aria-invalid`, the field's `data-invalid`. */
-  readonly showInvalid = computed(() => this.invalid() && this.touched());
-
-  private readonly slots = contentChildren(ScOtpFieldSlot, {
+  private readonly inputs = contentChildren(ScOtpFieldInput, {
     descendants: true,
   });
 
-  readonly slotCount = computed(() => this.slots().length);
+  /** The code's length: the number of inputs. */
+  readonly length = computed(() => this.inputs().length);
+  readonly complete = computed(
+    () => this.length() > 0 && this.value().length === this.length(),
+  );
+  /** The first input with no character (-1 when complete). */
+  readonly firstEmptyIndex = computed(() =>
+    this.complete() ? -1 : this.value().length,
+  );
+  /** Invalid once touched: the inputs' `aria-invalid`, the field's `data-invalid`. */
+  readonly showInvalid = computed(() => this.invalid() && this.touched());
 
-  readonly chars = computed(() => {
-    const val = this.value();
-    const max = this.slotCount();
-    const result: string[] = [];
-    for (let i = 0; i < max; i++) {
-      result.push(val[i] || '');
-    }
-    return result;
-  });
-
-  readonly firstEmptyIndex = computed(() => {
-    const c = this.chars();
-    const idx = c.indexOf('');
-    return idx === -1 ? -1 : idx;
-  });
+  readonly inputMode = computed(() =>
+    this.validationType() === 'numeric' ? 'numeric' : 'text',
+  );
 
   constructor() {
     // The field's state follows the code's (`data-disabled`, `data-invalid`).
     bindInput(this.field.disabledInput, this.disabled);
     bindInput(this.field.invalidInput, this.showInvalid);
-
-    effect(() => {
-      const allSlots = this.slots();
-      allSlots.forEach((slot, index) => {
-        slot.setIndex(index);
-      });
-    });
   }
 
-  getChar(index: number): string {
-    return this.chars()[index] || '';
+  /** An input's position in the code. */
+  indexOf(input: ScOtpFieldInput): number {
+    return this.inputs().indexOf(input);
   }
 
-  setChar(index: number, char: string): void {
-    const current = this.value();
-    const before = current.slice(0, index);
-    const after = current.slice(index + 1);
-
-    if (char) {
-      this.value.set((before + char + after).slice(0, this.slotCount()));
-    } else {
-      this.value.set(before + after);
-    }
+  charAt(index: number): string {
+    return this.value()[index] ?? '';
   }
 
-  focusSlot(index: number): void {
-    const allSlots = this.slots();
-    if (index >= 0 && index < allSlots.length) {
-      allSlots[index].focus();
+  /** The accepted characters of a text (whitespace and anything else dropped). */
+  accept(text: string): string {
+    const pattern = accepted[this.validationType()];
+    return [...text].filter((char) => pattern.test(char)).join('');
+  }
+
+  /**
+   * Writes text from an input on — one character overwrites it, several
+   * (pasted, autofilled) fill the next ones too — then focuses the input
+   * after the last one written.
+   */
+  write(index: number, text: string): void {
+    const chars = this.accept(text);
+    if (!chars || this.disabled()) return;
+    const value = this.value();
+    const next = (
+      value.slice(0, index) +
+      chars +
+      value.slice(index + chars.length)
+    ).slice(0, this.length());
+    this.setValue(next);
+    this.focusInput(Math.min(index + chars.length, this.length() - 1));
+  }
+
+  /** Clears an input's character (the ones after it move back one). */
+  clear(index: number): void {
+    if (this.disabled()) return;
+    const value = this.value();
+    this.setValue(value.slice(0, index) + value.slice(index + 1));
+  }
+
+  focusInput(index: number): void {
+    this.inputs()[index]?.focus();
+  }
+
+  /** Sets the code; complete — and changed, or pasted — emits `valueComplete`. */
+  private setValue(next: string, pasted = false): void {
+    const previous = this.value();
+    this.value.set(next);
+    if (this.complete() && (next !== previous || pasted)) {
+      this.valueComplete.emit(next);
     }
   }
 
@@ -113,21 +147,13 @@ export class ScOtpField implements FormValueControl<string> {
     if (!next || !this.element.contains(next)) this.touch.emit();
   }
 
-  protected onPaste(event: Event): void {
-    if (this.disabled()) return;
-    if (!(event instanceof ClipboardEvent)) return;
-
+  /** A pasted code replaces the whole value. */
+  protected onPaste(event: ClipboardEvent): void {
     event.preventDefault();
-    const pastedData = event.clipboardData?.getData('text') || '';
-    const cleanData = pastedData.replace(/\s/g, '').slice(0, this.slotCount());
-    const filteredData =
-      this.inputMode() === 'numeric' ? cleanData.replace(/\D/g, '') : cleanData;
-
-    if (filteredData) {
-      this.value.set(filteredData);
-      // Focus the slot after the last pasted character or the last slot
-      const focusIndex = Math.min(filteredData.length, this.slotCount() - 1);
-      this.focusSlot(focusIndex);
-    }
+    if (this.disabled()) return;
+    const chars = this.accept(event.clipboardData?.getData('text') ?? '');
+    if (!chars) return;
+    this.setValue(chars.slice(0, this.length()), true);
+    this.focusInput(Math.min(chars.length, this.length() - 1));
   }
 }

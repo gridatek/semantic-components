@@ -1,56 +1,52 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
+  ScFieldDescription,
+  ScLabel,
   ScOtpField,
   ScOtpFieldGroup,
+  ScOtpFieldInput,
   ScOtpFieldSeparator,
-  ScOtpFieldSlot,
-  ScOtpFieldSlotGroup,
 } from '@semantic-components/ui';
 import { SiMinusIcon } from '@semantic-icons/lucide-icons';
 
+/**
+ * The label names the first input (it takes the field's id), the others
+ * name themselves; `valueComplete` fires once all six digits are in.
+ */
 @Component({
   selector: 'app-verification-otp-field-demo',
   imports: [
+    ScFieldDescription,
+    ScLabel,
     ScOtpField,
     ScOtpFieldGroup,
-    ScOtpFieldSlotGroup,
+    ScOtpFieldInput,
     ScOtpFieldSeparator,
-    ScOtpFieldSlot,
     SiMinusIcon,
   ],
   template: `
     <div class="max-w-sm rounded-lg border p-6">
-      <div class="space-y-4">
-        <div class="space-y-2 text-center">
-          <h4 class="font-semibold">Enter verification code</h4>
-          <p class="text-muted-foreground text-sm">
-            We sent a code to your email address
-          </p>
-        </div>
-        <div class="flex justify-center">
-          <div scOtpField [(value)]="code">
-            <div scOtpFieldGroup>
-              <div scOtpFieldSlotGroup>
-                <div scOtpFieldSlot aria-label="Digit 1 of 6"></div>
-                <div scOtpFieldSlot aria-label="Digit 2 of 6"></div>
-                <div scOtpFieldSlot aria-label="Digit 3 of 6"></div>
-              </div>
-              <div scOtpFieldSeparator>
-                <svg siMinusIcon class="size-4"></svg>
-              </div>
-              <div scOtpFieldSlotGroup>
-                <div scOtpFieldSlot aria-label="Digit 4 of 6"></div>
-                <div scOtpFieldSlot aria-label="Digit 5 of 6"></div>
-                <div scOtpFieldSlot aria-label="Digit 6 of 6"></div>
-              </div>
-            </div>
+      <div scOtpField [(value)]="code" (valueComplete)="verified.set($event)">
+        <label scLabel class="justify-center">Enter verification code</label>
+        <p scFieldDescription class="text-center">
+          We sent a code to your email address.
+        </p>
+        <div scOtpFieldGroup class="justify-center">
+          <input scOtpFieldInput />
+          <input scOtpFieldInput aria-label="Digit 2 of 6" />
+          <input scOtpFieldInput aria-label="Digit 3 of 6" />
+          <div scOtpFieldSeparator>
+            <svg siMinusIcon class="size-4"></svg>
           </div>
+          <input scOtpFieldInput aria-label="Digit 4 of 6" />
+          <input scOtpFieldInput aria-label="Digit 5 of 6" />
+          <input scOtpFieldInput aria-label="Digit 6 of 6" />
         </div>
-        <p class="text-muted-foreground text-center text-sm">
-          @if (code().length === 6) {
-            Code entered: {{ code() }}
+        <p class="text-muted-foreground text-center text-sm" role="status">
+          @if (verified() && verified() === code()) {
+            Verifying {{ code() }}…
           } @else {
-            Enter all 6 digits
+            Enter all 6 digits.
           }
         </p>
       </div>
@@ -61,4 +57,6 @@ import { SiMinusIcon } from '@semantic-icons/lucide-icons';
 })
 export class VerificationOtpFieldDemo {
   readonly code = signal('');
+  /** The last completed code. */
+  readonly verified = signal('');
 }

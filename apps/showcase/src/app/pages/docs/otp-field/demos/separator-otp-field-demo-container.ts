@@ -22,9 +22,8 @@ export class SeparatorOtpFieldDemoContainer {
 import {
   ScOtpField,
   ScOtpFieldGroup,
+  ScOtpFieldInput,
   ScOtpFieldSeparator,
-  ScOtpFieldSlot,
-  ScOtpFieldSlotGroup,
 } from '@semantic-components/ui';
 import { SiMinusIcon } from '@semantic-icons/lucide-icons';
 
@@ -33,28 +32,23 @@ import { SiMinusIcon } from '@semantic-icons/lucide-icons';
   imports: [
     ScOtpField,
     ScOtpFieldGroup,
-    ScOtpFieldSlotGroup,
     ScOtpFieldSeparator,
-    ScOtpFieldSlot,
+    ScOtpFieldInput,
     SiMinusIcon,
   ],
   template: \`
     <div class="space-y-4">
       <div scOtpField [(value)]="otp">
         <div scOtpFieldGroup>
-          <div scOtpFieldSlotGroup>
-            <div scOtpFieldSlot aria-label="Digit 1 of 6"></div>
-            <div scOtpFieldSlot aria-label="Digit 2 of 6"></div>
-            <div scOtpFieldSlot aria-label="Digit 3 of 6"></div>
-          </div>
+          <input scOtpFieldInput aria-label="Digit 1 of 6" />
+          <input scOtpFieldInput aria-label="Digit 2 of 6" />
+          <input scOtpFieldInput aria-label="Digit 3 of 6" />
           <div scOtpFieldSeparator>
             <svg siMinusIcon class="size-4"></svg>
           </div>
-          <div scOtpFieldSlotGroup>
-            <div scOtpFieldSlot aria-label="Digit 4 of 6"></div>
-            <div scOtpFieldSlot aria-label="Digit 5 of 6"></div>
-            <div scOtpFieldSlot aria-label="Digit 6 of 6"></div>
-          </div>
+          <input scOtpFieldInput aria-label="Digit 4 of 6" />
+          <input scOtpFieldInput aria-label="Digit 5 of 6" />
+          <input scOtpFieldInput aria-label="Digit 6 of 6" />
         </div>
       </div>
       <p class="text-muted-foreground text-sm">Value: {{ otp() || 'empty' }}</p>
