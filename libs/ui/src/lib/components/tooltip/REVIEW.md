@@ -7,7 +7,7 @@ The architecture is solid: a directive (`ScTooltipTrigger`) handles user interac
 **1. No fallback timeout for close animation — tooltip can get stuck in DOM**
 `tooltip-manager.ts:182-189` — `hide()` triggers the close animation by calling `tooltipRef.instance.close()`, and the tooltip is only disposed when the `animationComplete` output fires (from the `animationend` DOM event). If the animation never completes — e.g. `prefers-reduced-motion: reduce` is active, the CSS animation classes are missing, or the browser skips the animation for any reason — `animationend` never fires and the tooltip remains in the DOM indefinitely as a ghost overlay.
 
-**Fix:** Add a fallback `setTimeout` (e.g., 200ms) in `hide()` that calls `disposeTooltip()` if the animation hasn't completed. Clear the timeout in `disposeTooltip()` to avoid double disposal.
+**Resolved:** `hide()` now detaches the overlay and the tooltip leaves with `animate.leave`: Angular removes it when its animation ends, or at once if there is none — no `animationend` to wait for.
 
 **2. Escape key dismissal leaves `aria-describedby` pointing to a removed element**
 `tooltip-manager.ts:109-116` — The global Escape listener calls `this.hide()` on the manager, which triggers the close animation and eventually disposes the tooltip. However, the trigger's `isVisible` signal is never set to `false`, because the manager has no back-channel to notify the trigger. This means `ariaDescribedBy()` (`tooltip-trigger.ts:51-52`) continues returning the tooltip ID even though the element no longer exists in the DOM. Screen readers following this reference will find nothing.

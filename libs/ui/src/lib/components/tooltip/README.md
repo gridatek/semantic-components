@@ -45,15 +45,7 @@ Selector: `[scTooltipTrigger]`
 
 ## Animation
 
-The tooltip uses `data-open` and `data-closed` boolean attributes for animations, and `data-side` for directional slide-in:
-
-| Attribute     | When                           | Animation                         |
-| ------------- | ------------------------------ | --------------------------------- |
-| `data-open`   | Tooltip is visible             | fade-in, zoom-in, slide-in (side) |
-| `data-closed` | Tooltip is closing             | fade-out, zoom-out                |
-| `data-side`   | Always (top/right/bottom/left) | Controls slide-in direction       |
-
-The tooltip includes an arrow element that positions itself based on `data-side`.
+`ScTooltip` animates with Angular's `animate.enter` / `animate.leave`: it fades and zooms in, sliding from its `data-side` (the side it opened on, after any flip), and back out when it goes. Hiding detaches its overlay, and Angular removes it once that animation ends.
 
 ## Accessibility
 

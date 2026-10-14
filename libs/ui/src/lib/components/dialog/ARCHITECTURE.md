@@ -104,7 +104,7 @@ The animation system preserves accessibility:
 3. **Screen Readers:** Announce dialog immediately (not after animation)
 4. **Keyboard:** Escape key closes the dialog (via CDK overlay keydown events)
 5. **Backdrop Click:** Click outside closes the dialog (via CDK overlay backdrop click)
-6. **Reduced Motion:** Could add `@media (prefers-reduced-motion)` support
+6. **Reduced Motion:** the library stylesheet keeps the fades and drops the movement (slide, zoom) under `prefers-reduced-motion: reduce`
 
 ## Consumer API
 

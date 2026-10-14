@@ -117,7 +117,7 @@ The animation system preserves accessibility:
 3. **Screen Readers:** Announce dialog immediately (not after animation)
 4. **No Escape Dismiss:** Escape key does NOT close the alert dialog — user must choose an action
 5. **No Backdrop Dismiss:** Clicking outside does NOT close the alert dialog — user must choose an action
-6. **Reduced Motion:** Could add `@media (prefers-reduced-motion)` support
+6. **Reduced Motion:** the library stylesheet keeps the fades and drops the movement (slide, zoom) under `prefers-reduced-motion: reduce`
 
 ## Consumer API
 

@@ -111,7 +111,9 @@ test.describe('Country Selector Phone Input Demo', () => {
     const input = page.getByLabel('Phone number');
     await input.click();
     await type(page, '123');
-    await press(page, 'Tab');
+    // Leaving the field (Tab from the page's last field doesn't blur in
+    // headless Firefox).
+    await input.blur();
     await expect(page.getByText('Enter a valid phone number')).toBeVisible();
     await expect(input).toHaveAttribute('aria-invalid', 'true');
   });

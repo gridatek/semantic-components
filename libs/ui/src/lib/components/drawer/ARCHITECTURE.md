@@ -148,7 +148,7 @@ The animation system preserves accessibility:
 3. **Screen Readers:** Announce drawer immediately (not after animation)
 4. **Keyboard:** Escape key closes the drawer (via CDK overlay keydown events)
 5. **Backdrop Click:** Click outside closes the drawer (via CDK overlay backdrop click)
-6. **Reduced Motion:** Could add `@media (prefers-reduced-motion)` support
+6. **Reduced Motion:** the library stylesheet keeps the fades and drops the movement (slide, zoom) under `prefers-reduced-motion: reduce`
 7. **Drawer Handle:** Optional visual indicator improves discoverability on mobile
 
 ## Consumer API

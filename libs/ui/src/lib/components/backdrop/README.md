@@ -35,5 +35,5 @@ It fades in when shown and out when it goes (`animate.enter` / `animate.leave`):
 ## Accessibility
 
 - The backdrop is non-interactive (`pointer-events-none`) — it does not trap focus or intercept clicks
-- Uses CSS animations with `prefers-reduced-motion` support via Tailwind's `animate-in`/`animate-out` utilities
+- Under `prefers-reduced-motion: reduce` it still fades (the library stylesheet drops movement, not fades)
 - Consumers should manage focus trapping and keyboard dismissal on the parent dialog or drawer

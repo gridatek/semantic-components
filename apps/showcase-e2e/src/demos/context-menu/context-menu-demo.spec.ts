@@ -23,11 +23,22 @@ test.describe('Context Menu Demo', () => {
 
   test('keyboard: focusable, Shift+F10 opens, Escape returns focus', async ({
     page,
+    browserName,
   }) => {
     const trigger = page.locator('[scContextMenuTrigger]');
     await press(page, 'Tab');
     await expect(trigger).toBeFocused();
-    await press(page, 'Shift+F10');
+    if (browserName === 'chromium') {
+      await press(page, 'Shift+F10');
+    } else {
+      // Playwright's Firefox and WebKit don't turn Shift+F10 into the
+      // browser's contextmenu event (Firefox itself does, on Windows and
+      // Linux): fire it as the browser would, on the focused trigger.
+      await trigger.dispatchEvent('contextmenu', {
+        bubbles: true,
+        cancelable: true,
+      });
+    }
     await expect.poll(() => openMenuCount(page)).toBe(1);
     await press(page, 'Escape');
     await expect.poll(() => openMenuCount(page)).toBe(0);

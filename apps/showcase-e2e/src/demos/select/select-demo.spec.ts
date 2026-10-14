@@ -24,10 +24,17 @@ test.describe('Select Demo', () => {
     await expect(trigger).toContainText('Select a category');
     await expect(page.locator('input')).toHaveCount(0);
 
+    // A button after the demo: Tab goes from the trigger straight to it
+    // (headless Firefox keeps focus on the page's last element otherwise).
+    await page.evaluate(() => {
+      const after = document.createElement('button');
+      after.textContent = 'After';
+      document.body.append(after);
+    });
     await press(page, 'Tab');
     await expect(trigger).toBeFocused();
     await press(page, 'Tab');
-    await expect(trigger).not.toBeFocused();
+    await expect(page.getByRole('button', { name: 'After' })).toBeFocused();
   });
 
   test('keyboard: open, move, select, close', async ({ page }) => {
