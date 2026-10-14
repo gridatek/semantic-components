@@ -2,16 +2,14 @@ import { Component, ViewEncapsulation, computed, input } from '@angular/core';
 import { cn } from '../../utils';
 
 @Component({
-  selector: 'div[scOtpSlotCaret]',
+  selector: 'div[scOtpFieldSlotCaret]',
   host: {
     '[class]': 'class()',
   },
-  template: `
-    <div class="animate-caret-blink bg-foreground h-4 w-px"></div>
-  `,
+  template: ` <div class="animate-caret-blink bg-foreground h-4 w-px"></div> `,
   encapsulation: ViewEncapsulation.None,
 })
-export class ScOtpSlotCaret {
+export class ScOtpFieldSlotCaret {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>

@@ -9,7 +9,7 @@ import {
 import { cn } from '../../utils';
 
 @Directive({
-  selector: 'input[scOtpSlotInput]',
+  selector: 'input[scOtpFieldSlotInput]',
   host: {
     type: 'text',
     '[attr.inputmode]': 'inputMode()',
@@ -26,7 +26,7 @@ import { cn } from '../../utils';
     '(blur)': 'focused.emit(false)',
   },
 })
-export class ScOtpSlotInput {
+export class ScOtpFieldSlotInput {
   private readonly elementRef = inject(ElementRef<HTMLInputElement>);
 
   readonly classInput = input<string>('', { alias: 'class' });

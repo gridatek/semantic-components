@@ -320,9 +320,9 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/intersection-observer/intersection-observer-page'),
       },
       {
-        path: 'otp',
-        title: 'OTP - Semantic Components',
-        loadComponent: () => import('../pages/docs/otp/otp-page'),
+        path: 'otp-field',
+        title: 'OTP Field - Semantic Components',
+        loadComponent: () => import('../pages/docs/otp-field/otp-field-page'),
       },
       {
         path: 'kanban-board',

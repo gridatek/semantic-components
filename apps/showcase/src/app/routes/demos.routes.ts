@@ -1825,48 +1825,48 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/otp',
+    path: 'demos/otp-field',
     children: [
       {
-        path: 'basic-otp-demo',
+        path: 'basic-otp-field-demo',
         loadComponent: () =>
-          import('../pages/docs/otp/demos/basic-otp-demo').then(
-            (m) => m.BasicOtpDemo,
+          import('../pages/docs/otp-field/demos/basic-otp-field-demo').then(
+            (m) => m.BasicOtpFieldDemo,
           ),
       },
       {
-        path: 'separator-otp-demo',
+        path: 'separator-otp-field-demo',
         loadComponent: () =>
-          import('../pages/docs/otp/demos/separator-otp-demo').then(
-            (m) => m.SeparatorOtpDemo,
+          import('../pages/docs/otp-field/demos/separator-otp-field-demo').then(
+            (m) => m.SeparatorOtpFieldDemo,
           ),
       },
       {
-        path: 'pin-otp-demo',
+        path: 'pin-otp-field-demo',
         loadComponent: () =>
-          import('../pages/docs/otp/demos/pin-otp-demo').then(
-            (m) => m.PinOtpDemo,
+          import('../pages/docs/otp-field/demos/pin-otp-field-demo').then(
+            (m) => m.PinOtpFieldDemo,
           ),
       },
       {
-        path: 'dot-separator-otp-demo',
+        path: 'dot-separator-otp-field-demo',
         loadComponent: () =>
-          import('../pages/docs/otp/demos/dot-separator-otp-demo').then(
-            (m) => m.DotSeparatorOtpDemo,
+          import('../pages/docs/otp-field/demos/dot-separator-otp-field-demo').then(
+            (m) => m.DotSeparatorOtpFieldDemo,
           ),
       },
       {
-        path: 'disabled-otp-demo',
+        path: 'disabled-otp-field-demo',
         loadComponent: () =>
-          import('../pages/docs/otp/demos/disabled-otp-demo').then(
-            (m) => m.DisabledOtpDemo,
+          import('../pages/docs/otp-field/demos/disabled-otp-field-demo').then(
+            (m) => m.DisabledOtpFieldDemo,
           ),
       },
       {
-        path: 'verification-otp-demo',
+        path: 'verification-otp-field-demo',
         loadComponent: () =>
-          import('../pages/docs/otp/demos/verification-otp-demo').then(
-            (m) => m.VerificationOtpDemo,
+          import('../pages/docs/otp-field/demos/verification-otp-field-demo').then(
+            (m) => m.VerificationOtpFieldDemo,
           ),
       },
     ],

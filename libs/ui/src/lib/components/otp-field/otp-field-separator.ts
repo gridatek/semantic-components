@@ -2,17 +2,16 @@ import { Directive, computed, input } from '@angular/core';
 import { cn } from '../../utils';
 
 @Directive({
-  selector: 'span[scOtpSlotChar]',
+  selector: '[scOtpFieldSeparator]',
   host: {
+    role: 'separator',
     '[class]': 'class()',
-    '[textContent]': 'char()',
   },
 })
-export class ScOtpSlotChar {
+export class ScOtpFieldSeparator {
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly char = input<string>('');
 
   protected readonly class = computed(() =>
-    cn('pointer-events-none', this.classInput()),
+    cn('flex items-center', this.classInput()),
   );
 }

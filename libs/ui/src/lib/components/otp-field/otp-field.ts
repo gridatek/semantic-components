@@ -1,37 +1,60 @@
 import {
   Directive,
+  ElementRef,
+  booleanAttribute,
   computed,
   contentChildren,
   effect,
+  inject,
   input,
   model,
+  output,
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
-import { cn } from '../../utils';
-import { ScOtpSlot } from './otp-slot';
+import { bindInput } from '../../utils';
+import { ScField } from '../field';
+import { ScOtpFieldSlot } from './otp-field-slot';
 
+/**
+ * A one-time password field, as Base UI's OTP Field: holds the code, one
+ * character per `scOtpFieldSlot`, and spreads a pasted code over them. A
+ * Signal Forms control: bind `[formField]` here. It is a `scField` too (a
+ * label, description and errors go inside it), whose `id`, `orientation`
+ * and `class` it takes; the slots sit in a `scOtpFieldGroup`.
+ */
 @Directive({
-  selector: 'div[scOtp]',
+  selector: 'div[scOtpField]',
+  hostDirectives: [
+    { directive: ScField, inputs: ['id', 'orientation', 'class'] },
+  ],
   host: {
-    '[class]': 'class()',
+    'data-slot': 'otp-field',
     '(paste)': 'onPaste($event)',
+    '(focusout)': 'onFocusOut($event)',
   },
 })
-export class ScOtp implements FormValueControl<string> {
-  readonly classInput = input<string>('', { alias: 'class' });
-  readonly value = model<string>('');
-  readonly disabled = input<boolean>(false);
-  readonly inputMode = input<'numeric' | 'text'>('numeric');
+export class ScOtpField implements FormValueControl<string> {
+  private readonly field = inject(ScField);
+  private readonly element =
+    inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
-  private readonly slots = contentChildren(ScOtpSlot, {
+  readonly value = model<string>('');
+  readonly disabled = input(false, { transform: booleanAttribute });
+  readonly inputMode = input<'numeric' | 'text'>('numeric');
+  readonly invalid = input(false, { transform: booleanAttribute });
+  readonly touched = input(false, { transform: booleanAttribute });
+
+  /** Focus left the field — not just one slot for the next (Signal Forms marks it touched). */
+  readonly touch = output<void>();
+
+  /** Invalid once touched: the slots' `aria-invalid`, the field's `data-invalid`. */
+  readonly showInvalid = computed(() => this.invalid() && this.touched());
+
+  private readonly slots = contentChildren(ScOtpFieldSlot, {
     descendants: true,
   });
 
   readonly slotCount = computed(() => this.slots().length);
-
-  protected readonly class = computed(() =>
-    cn('flex items-center gap-2 has-disabled:opacity-50', this.classInput()),
-  );
 
   readonly chars = computed(() => {
     const val = this.value();
@@ -50,6 +73,10 @@ export class ScOtp implements FormValueControl<string> {
   });
 
   constructor() {
+    // The field's state follows the code's (`data-disabled`, `data-invalid`).
+    bindInput(this.field.disabledInput, this.disabled);
+    bindInput(this.field.invalidInput, this.showInvalid);
+
     effect(() => {
       const allSlots = this.slots();
       allSlots.forEach((slot, index) => {
@@ -79,6 +106,11 @@ export class ScOtp implements FormValueControl<string> {
     if (index >= 0 && index < allSlots.length) {
       allSlots[index].focus();
     }
+  }
+
+  protected onFocusOut(event: FocusEvent): void {
+    const next = event.relatedTarget as Node | null;
+    if (!next || !this.element.contains(next)) this.touch.emit();
   }
 
   protected onPaste(event: Event): void {

@@ -9,43 +9,45 @@ import {
 } from '@angular/core';
 import { cn } from '../../utils';
 import { SC_FIELD } from '../field';
-import { ScOtp } from './otp';
-import { ScOtpSlotCaret } from './otp-slot-caret';
-import { ScOtpSlotChar } from './otp-slot-char';
-import { ScOtpSlotInput } from './otp-slot-input';
+import { ScOtpField } from './otp-field';
+import { ScOtpFieldSlotCaret } from './otp-field-slot-caret';
+import { ScOtpFieldSlotChar } from './otp-field-slot-char';
+import { ScOtpFieldSlotInput } from './otp-field-slot-input';
 
 @Component({
-  selector: 'div[scOtpSlot]',
-  imports: [ScOtpSlotInput, ScOtpSlotCaret, ScOtpSlotChar],
+  selector: 'div[scOtpFieldSlot]',
+  imports: [ScOtpFieldSlotInput, ScOtpFieldSlotCaret, ScOtpFieldSlotChar],
   host: {
     '[class]': 'class()',
     '[attr.data-active]': 'isActive() ? "" : null',
     '[attr.data-filled]': 'isFilled() ? "" : null',
+    '[attr.data-invalid]': 'otp.showInvalid() || null',
   },
   template: `
     <input
       #input
-      scOtpSlotInput
+      scOtpFieldSlotInput
       [value]="char()"
       [disabled]="otp.disabled()"
       [ariaLabel]="ariaLabel()"
       [ariaDescribedBy]="ariaDescribedBy()"
+      [attr.aria-invalid]="otp.showInvalid() || null"
       [inputMode]="otp.inputMode()"
       (inputChange)="onInputChange($event)"
       (keydownEvent)="onKeydown($event)"
       (focused)="onFocusChange($event)"
     />
     @if (isActive() && !isFilled()) {
-      <div scOtpSlotCaret></div>
+      <div scOtpFieldSlotCaret></div>
     }
-    <span scOtpSlotChar [char]="char()"></span>
+    <span scOtpFieldSlotChar [char]="char()"></span>
   `,
   encapsulation: ViewEncapsulation.None,
 })
-export class ScOtpSlot {
-  readonly otp = inject(ScOtp);
+export class ScOtpFieldSlot {
+  readonly otp = inject(ScOtpField);
   private readonly field = inject(SC_FIELD, { optional: true });
-  private readonly inputComponent = viewChild.required(ScOtpSlotInput);
+  private readonly inputComponent = viewChild.required(ScOtpFieldSlotInput);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
@@ -65,6 +67,7 @@ export class ScOtpSlot {
     cn(
       'relative flex h-10 w-10 items-center justify-center dark:bg-input/30 border-y border-e border-input text-sm transition-all outline-none first:rounded-s-md first:border-s last:rounded-e-md',
       this.isActive() && 'z-10 border-ring ring-ring/50 ring-3',
+      'data-invalid:border-destructive data-invalid:ring-destructive/20 dark:data-invalid:ring-destructive/40',
       this.classInput(),
     ),
   );
