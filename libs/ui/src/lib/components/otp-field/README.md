@@ -41,7 +41,7 @@ You write the markup and every piece of text — the inputs and their names, the
 ## `scOtpField`
 
 - **Value**: `value` (two-way, a string as long as the code once complete), `valueComplete` (the code reached its full length: typed, pasted or autofilled).
-- **Characters**: `validationType` — `numeric` (default, with a numeric keypad), `alpha`, `alphanumeric` or `none`; anything else is dropped, as is whitespace.
+- **Characters**: `validationType` — `numeric` (default, with a numeric keypad), `alpha`, `alphanumeric` or `none`; anything else is dropped, as is whitespace. Digits of any script are kept as ASCII digits ('٣', '३', '３' → '3'), so the code is always `0`–`9`.
 - **State**: `disabled`.
 - **Forms**: `invalid`, `touched`, `touch` — set by `[formField]`. `touch` fires when focus leaves the field, not when it moves from one input to the next.
 
@@ -67,7 +67,7 @@ Once the field is left invalid, its inputs get `aria-invalid` and `scFieldErrors
 
 - **A character**: fills the input — over what was there — and moves to the next. Focus always goes to the first empty input, so the code is entered in order.
 - **Backspace**: clears the input, or the previous one if it is already empty. **Delete**: clears the input (the characters after it move back one).
-- **← / →**: the previous / next input. **Home / End**: the first input / the first empty one (or the last).
+- **← / →**: the input on that side — right to left (`dir="rtl"`), → is the previous one. **Home / End**: the first input / the first empty one (or the last).
 - **Paste**: a code replaces the value, from the first input.
 - **The code from an SMS** (iOS, Android): offered on the first input (`autocomplete="one-time-code"`) and spread over all of them when picked.
 

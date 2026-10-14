@@ -18,11 +18,26 @@ import { ScOtpFieldInput } from './otp-field-input';
 export type ScOtpFieldValidationType =
   'numeric' | 'alpha' | 'alphanumeric' | 'none';
 
-const accepted: Record<ScOtpFieldValidationType, RegExp> = {
-  numeric: /\p{N}/u,
-  alpha: /\p{L}/u,
-  alphanumeric: /[\p{L}\p{N}]/u,
-  none: /\S/u,
+const digit = /\p{Nd}/u;
+
+/**
+ * A digit of any script as its ASCII digit ('٣', '३', '３' → '3'): its place
+ * in its run of ten. '' for anything else.
+ */
+function asciiDigit(char: string): string {
+  if (!digit.test(char)) return '';
+  const code = char.codePointAt(0) ?? 0;
+  let zero = code;
+  while (digit.test(String.fromCodePoint(zero - 1))) zero--;
+  return String((code - zero) % 10);
+}
+
+/** A character as the code keeps it: '' when not accepted. */
+const accepted: Record<ScOtpFieldValidationType, (char: string) => string> = {
+  numeric: asciiDigit,
+  alpha: (char) => (/\p{L}/u.test(char) ? char : ''),
+  alphanumeric: (char) => (/\p{L}/u.test(char) ? char : asciiDigit(char)),
+  none: (char) => (/\S/u.test(char) ? char : ''),
 };
 
 /**
@@ -98,10 +113,13 @@ export class ScOtpField implements FormValueControl<string> {
     return this.value()[index] ?? '';
   }
 
-  /** The accepted characters of a text (whitespace and anything else dropped). */
+  /**
+   * The accepted characters of a text, digits as ASCII digits (whitespace and
+   * anything else dropped).
+   */
   accept(text: string): string {
-    const pattern = accepted[this.validationType()];
-    return [...text].filter((char) => pattern.test(char)).join('');
+    const keep = accepted[this.validationType()];
+    return [...text].map(keep).join('');
   }
 
   /**

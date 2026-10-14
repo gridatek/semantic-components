@@ -1,3 +1,4 @@
+import { Directionality } from '@angular/cdk/bidi';
 import { Directive, ElementRef, computed, inject, input } from '@angular/core';
 import { cn } from '../../utils';
 import { SC_FIELD } from '../field';
@@ -7,8 +8,9 @@ import { ScOtpField } from './otp-field';
  * One character of the code, on your `<input>`. The first input takes the
  * field's id (a `scLabel` names it) and offers the code from an SMS
  * (`autocomplete="one-time-code"`); name the others with `aria-label`.
- * Typing overwrites, Backspace / Delete clear, ← → Home End move; focus
- * always goes to the first empty input, so the code is entered in order.
+ * Typing overwrites, Backspace / Delete clear, ← → Home End move (← → as
+ * they look: mirrored right to left); focus always goes to the first empty
+ * input, so the code is entered in order.
  */
 @Directive({
   selector: 'input[scOtpFieldInput]',
@@ -34,6 +36,7 @@ import { ScOtpField } from './otp-field';
 export class ScOtpFieldInput {
   protected readonly otp = inject(ScOtpField);
   private readonly field = inject(SC_FIELD, { optional: true });
+  private readonly dir = inject(Directionality);
   private readonly element =
     inject<ElementRef<HTMLInputElement>>(ElementRef).nativeElement;
 
@@ -107,11 +110,13 @@ export class ScOtpFieldInput {
         otp.clear(index);
         break;
       case 'ArrowLeft':
-        otp.focusInput(index - 1);
+      case 'ArrowRight': {
+        // The input on that side: right to left, the next one is on the left.
+        const forward =
+          (event.key === 'ArrowRight') !== (this.dir.value === 'rtl');
+        otp.focusInput(index + (forward ? 1 : -1));
         break;
-      case 'ArrowRight':
-        otp.focusInput(index + 1);
-        break;
+      }
       case 'Home':
         otp.focusInput(0);
         break;

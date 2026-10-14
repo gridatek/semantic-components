@@ -62,6 +62,45 @@ test.describe('OTP field', () => {
     expect(errors).toEqual([]);
   });
 
+  test('digits of any script are kept as ASCII digits', async ({ page }) => {
+    const errors = collectErrors(page);
+    await page.goto('/demos/otp-field/basic-otp-field-demo');
+    await page.getByRole('textbox', { name: 'Digit 1 of 6' }).click();
+    // Arabic-Indic, Devanagari, full-width.
+    await type(page, '٣३３');
+    await expect(page.getByText(/^Value:/)).toHaveText('Value: 333');
+    expect(errors).toEqual([]);
+  });
+
+  test('right to left, the arrows go the way they point', async ({ page }) => {
+    const errors = collectErrors(page);
+    // The page served right to left (where Directionality reads it).
+    await page.route(
+      '**/demos/otp-field/basic-otp-field-demo',
+      async (route) => {
+        const response = await route.fetch();
+        const body = (await response.text()).replace(
+          '<html lang="en">',
+          '<html lang="en" dir="rtl">',
+        );
+        await route.fulfill({ response, body });
+      },
+    );
+    await page.goto('/demos/otp-field/basic-otp-field-demo');
+    const input = (n: number) =>
+      page.getByRole('textbox', { name: `Digit ${n} of 6` });
+    await input(1).click();
+    await type(page, '123');
+    await press(page, 'Home');
+    await expect(input(1)).toBeFocused();
+    // The second input is on the left of the first: ← goes there.
+    await press(page, 'ArrowLeft');
+    await expect(input(2)).toBeFocused();
+    await press(page, 'ArrowRight');
+    await expect(input(1)).toBeFocused();
+    expect(errors).toEqual([]);
+  });
+
   test('a code autofilled into the first input fills them all', async ({
     page,
   }) => {
