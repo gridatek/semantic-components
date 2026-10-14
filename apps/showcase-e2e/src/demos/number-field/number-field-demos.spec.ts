@@ -212,6 +212,49 @@ test.describe('Number field', () => {
     expect(errors).toEqual([]);
   });
 
+  test('quantities (APG): bounds, announcements, one focus ring', async ({
+    page,
+  }) => {
+    const errors = collectErrors(page);
+    await page.goto('/demos/number-field/quantity-number-field-demo');
+    const adults = page.getByRole('spinbutton', { name: 'Adults' });
+    const remove = page.getByRole('button', { name: 'Remove adult' });
+    const add = page.getByRole('button', { name: 'Add adult' });
+    const status = page.getByRole('status').first();
+    await expect(adults).toHaveAccessibleDescription('Between 1 and 8.');
+
+    // At its bound a button is unavailable, yet still focusable (not disabled).
+    await expect(remove).toHaveAttribute('aria-disabled', 'true');
+    await expect(remove).not.toHaveAttribute('disabled');
+    await expect(add).not.toHaveAttribute('aria-disabled');
+
+    // A button's step is read out, then the live region is cleared.
+    await add.click();
+    await expectValue(adults, '2', '2');
+    await expect(status).toHaveText('2');
+    await expect(remove).not.toHaveAttribute('aria-disabled');
+    await expect(status).toHaveText('', { timeout: 4000 });
+
+    // Typing isn't announced.
+    await adults.fill('8');
+    await adults.press('Enter');
+    await expect(add).toHaveAttribute('aria-disabled', 'true');
+    await expect(status).toHaveText('');
+
+    // One focus ring round the input and its buttons, not the input's own.
+    // (Back from the next field, by keyboard: the buttons aren't in the way.)
+    await page.getByRole('spinbutton', { name: 'Kids' }).focus();
+    await page.keyboard.press('Shift+Tab');
+    await expect(adults).toBeFocused();
+    const shadow = (el: Locator) =>
+      el.evaluate((node) => getComputedStyle(node).boxShadow);
+    const group = page.locator('[data-slot=number-field-group]').first();
+    expect(await shadow(group)).not.toBe('none');
+    // The input's own ring is 0px wide (no length but 0px in its shadows).
+    expect(await shadow(adults)).not.toMatch(/[1-9][\d.]*px/);
+    expect(errors).toEqual([]);
+  });
+
   test('disabled and read-only: the field and its class', async ({ page }) => {
     const errors = collectErrors(page);
     await page.goto('/demos/number-field/disabled-number-field-demo');

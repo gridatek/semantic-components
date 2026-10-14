@@ -1,5 +1,6 @@
 import {
   Component,
+  DestroyRef,
   InjectionToken,
   ViewEncapsulation,
   booleanAttribute,
@@ -22,6 +23,9 @@ import {
 export const SC_NUMBER_FIELD = new InjectionToken<ScNumberField>(
   'SC_NUMBER_FIELD',
 );
+
+/** How long an announced value stays in the live region (as the APG's). */
+const ANNOUNCEMENT_DURATION = 2000;
 
 /** How big a step: Alt for `smallStep`, Shift (or Page Up / Down) for `largeStep`. */
 export type ScNumberFieldStepSize = 'small' | 'normal' | 'large';
@@ -50,6 +54,9 @@ export type ScNumberFieldStepSize = 'small' | 'normal' | 'large';
   },
   template: `
     <ng-content />
+    <span class="sr-only" role="status" data-slot="number-field-status">{{
+      announcement()
+    }}</span>
     @if (name()) {
       <input
         type="hidden"
@@ -104,6 +111,23 @@ export class ScNumberField implements FormValueControl<number | null> {
   /** Focuses the input — Signal Forms does, to show an invalid field. */
   focus(options?: FocusOptions): void {
     this.focusInput(options);
+  }
+
+  /**
+   * The value a button stepped to, read out (a live region: focus is on the
+   * button, not the input); cleared after a while.
+   */
+  protected readonly announcement = signal('');
+  private announcementTimeout: ReturnType<typeof setTimeout> | undefined;
+
+  /** Reads the value out (the buttons do, after a step). */
+  announce(): void {
+    this.announcement.set(this.formattedValue());
+    clearTimeout(this.announcementTimeout);
+    this.announcementTimeout = setTimeout(
+      () => this.announcement.set(''),
+      ANNOUNCEMENT_DURATION,
+    );
   }
 
   readonly formatter = computed(() =>
@@ -226,6 +250,7 @@ export class ScNumberField implements FormValueControl<number | null> {
   }
 
   constructor() {
+    inject(DestroyRef).onDestroy(() => clearTimeout(this.announcementTimeout));
     // The field's state follows the number's (`data-disabled`, `data-invalid`).
     bindInput(this.field.disabledInput, this.disabled);
     bindInput(

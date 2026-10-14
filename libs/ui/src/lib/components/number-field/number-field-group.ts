@@ -17,8 +17,16 @@ const stacked = cn(
   '*:data-[slot=number-field-decrement]:h-auto *:data-[slot=number-field-decrement]:rounded-s-none *:data-[slot=number-field-decrement]:rounded-t-none *:data-[slot=number-field-decrement]:border-s-0 *:data-[slot=number-field-decrement]:border-t-0',
 );
 
+/** One focus (or invalid) ring round the input and its buttons, not the input's own. */
+const ring = cn(
+  'rounded-lg',
+  'has-[[data-slot=number-field-input]:focus-visible]:ring-3 has-[[data-slot=number-field-input]:focus-visible]:ring-ring/50',
+  'has-[[data-slot=number-field-input][aria-invalid=true]]:ring-3 has-[[data-slot=number-field-input][aria-invalid=true]]:ring-destructive/20 dark:has-[[data-slot=number-field-input][aria-invalid=true]]:ring-destructive/40',
+  '*:data-[slot=number-field-input]:focus-visible:ring-0 *:data-[slot=number-field-input]:aria-invalid:ring-0',
+);
+
 /**
- * The input and its buttons, joined. `split` (the default): decrement,
+ * The input and its buttons, joined, with one focus ring round them. `split` (the default): decrement,
  * input, increment, in the order written. `stacked`: the input, then
  * increment over decrement — whatever the order written.
  */
@@ -40,6 +48,7 @@ export class ScNumberFieldGroup {
       this.variant() === 'stacked'
         ? stacked
         : buttonGroupVariants({ orientation: 'horizontal' }),
+      ring,
       this.classInput(),
     ),
   );
