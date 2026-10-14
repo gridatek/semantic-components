@@ -1890,6 +1890,13 @@ export const demosRoutes: Route[] = [
             (m) => m.SignalFormsOtpFieldDemo,
           ),
       },
+      {
+        path: 'server-validation-otp-field-demo',
+        loadComponent: () =>
+          import('../pages/docs/otp-field/demos/server-validation-otp-field-demo').then(
+            (m) => m.ServerValidationOtpFieldDemo,
+          ),
+      },
     ],
   },
   {

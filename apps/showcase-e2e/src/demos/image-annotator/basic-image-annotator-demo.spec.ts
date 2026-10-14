@@ -144,7 +144,11 @@ test.describe('Basic Image Annotator Demo', () => {
 });
 
 test.describe('Basic Image Annotator Demo — devices', () => {
-  test('touch draws', async ({ browser }) => {
+  test('touch draws', async ({ browser, browserName }) => {
+    test.skip(
+      browserName !== 'chromium',
+      'Touch moves are sent through a CDP session, which only Chromium has',
+    );
     const context = await browser.newContext({
       hasTouch: true,
       viewport: { width: 900, height: 900 },

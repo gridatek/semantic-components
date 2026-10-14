@@ -102,6 +102,9 @@ test.describe('Featured Data Table Demo', () => {
     await expect(
       page.getByText('Viewing John Doe (Admin, active)'),
     ).toBeVisible();
+    // The menu animates out before it goes: let it, or the next one is a
+    // second "Delete user".
+    await expect(page.getByRole('menu')).toHaveCount(0);
 
     await page.getByRole('button', { name: 'Actions for John Doe' }).click();
     await page.getByRole('menuitem', { name: 'Delete user' }).click();

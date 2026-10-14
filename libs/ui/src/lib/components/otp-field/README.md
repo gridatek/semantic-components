@@ -63,6 +63,8 @@ readonly otpForm = form(this.model, (path) => {
 
 Once the field is left invalid, its inputs get `aria-invalid` and `scFieldErrors` shows the messages.
 
+To check the code with a server, add `validateAsync` (or `validateHttp`) to the schema: it runs once the other validators pass; while it runs the field has `data-pending` and `pending()` is true; its errors show like the others. See the "Validation with a server call" example.
+
 ## Keyboard and input
 
 - **A character**: fills the input — over what was there — and moves to the next. Focus always goes to the first empty input, so the code is entered in order.

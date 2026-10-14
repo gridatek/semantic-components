@@ -265,6 +265,7 @@ Errors are automatically read from the parent `ScField`'s `FormField` directive 
 - Supports proper label associations via `for` attribute
 - Disabled state uses `data-disabled` attribute
 - Invalid state uses `data-invalid` attribute
+- Pending state (an async validator — a server call — is running) uses `data-pending` attribute
 - Error messages are announced to screen readers
 
 ## Styling

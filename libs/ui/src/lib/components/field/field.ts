@@ -51,6 +51,7 @@ export const SC_FIELD = new InjectionToken<ScFieldContext>('SC_FIELD');
     '[attr.data-orientation]': 'orientation()',
     '[attr.data-invalid]': 'invalid() || null',
     '[attr.data-disabled]': 'disabled() || null',
+    '[attr.data-pending]': 'pending() || null',
     '[class]': 'class()',
   },
   providers: [
@@ -104,6 +105,11 @@ export class ScField implements ScFieldContext {
     if (this.disabledInput()) return true;
     return this.formField()?.state().disabled() ?? false;
   });
+
+  /** An async validator (a server call) is running for the field. */
+  readonly pending = computed(
+    () => this.formField()?.state().pending() ?? false,
+  );
 
   protected readonly class = computed(() =>
     cn(fieldVariants({ orientation: this.orientation() }), this.classInput()),

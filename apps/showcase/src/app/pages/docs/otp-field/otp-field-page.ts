@@ -7,6 +7,7 @@ import { DisabledOtpFieldDemoContainer } from './demos/disabled-otp-field-demo-c
 import { DotSeparatorOtpFieldDemoContainer } from './demos/dot-separator-otp-field-demo-container';
 import { PinOtpFieldDemoContainer } from './demos/pin-otp-field-demo-container';
 import { SeparatorOtpFieldDemoContainer } from './demos/separator-otp-field-demo-container';
+import { ServerValidationOtpFieldDemoContainer } from './demos/server-validation-otp-field-demo-container';
 import { SignalFormsOtpFieldDemoContainer } from './demos/signal-forms-otp-field-demo-container';
 import { VerificationOtpFieldDemoContainer } from './demos/verification-otp-field-demo-container';
 
@@ -20,6 +21,7 @@ import { VerificationOtpFieldDemoContainer } from './demos/verification-otp-fiel
     DisabledOtpFieldDemoContainer,
     VerificationOtpFieldDemoContainer,
     SignalFormsOtpFieldDemoContainer,
+    ServerValidationOtpFieldDemoContainer,
     TocHeading,
     ComponentBadges,
     ScHeading,
@@ -43,6 +45,7 @@ import { VerificationOtpFieldDemoContainer } from './demos/verification-otp-fiel
         <app-disabled-otp-field-demo-container />
         <app-verification-otp-field-demo-container />
         <app-signal-forms-otp-field-demo-container />
+        <app-server-validation-otp-field-demo-container />
       </section>
     </div>
   `,

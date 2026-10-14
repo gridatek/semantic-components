@@ -32,12 +32,24 @@ test.describe('File Explorer Tree Demo', () => {
   });
 
   test('one tab stop; arrows follow the hierarchy', async ({ page }) => {
+    // One tab stop: only the active item is in the Tab order — once the tree
+    // has set it up (its tabindex binding), not before.
+    await expect(item(page, 'src')).toHaveAttribute('tabindex', '0');
+    await expect(page.locator('[role=treeitem][tabindex="0"]')).toHaveCount(1);
+    // A button after the tree: Tab leaves the tree for it (headless Firefox
+    // keeps focus on the page's last element otherwise).
+    await page.evaluate(() => {
+      const after = document.createElement('button');
+      after.textContent = 'After';
+      document.body.append(after);
+    });
     await press(page, 'Tab');
     await expect(item(page, 'src')).toBeFocused();
     await press(page, 'Tab');
-    await expect(page.locator('[role=tree] :focus')).toHaveCount(0);
+    await expect(page.getByRole('button', { name: 'After' })).toBeFocused();
 
     await press(page, 'Shift+Tab');
+    await expect(item(page, 'src')).toBeFocused();
     await press(page, 'ArrowDown'); // app
     await press(page, 'ArrowDown'); // components (collapsed)
     await expect(item(page, 'components')).toBeFocused();
