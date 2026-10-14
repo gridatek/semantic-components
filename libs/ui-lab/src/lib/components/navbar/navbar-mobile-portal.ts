@@ -1,4 +1,3 @@
-import { CdkTrapFocus } from '@angular/cdk/a11y';
 import { Overlay, OverlayModule, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 import {
@@ -13,15 +12,15 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { ScFocusTrap, cn } from '@semantic-components/ui';
 import { ScNavbarProvider } from './navbar-provider';
 
 @Component({
   selector: 'div[scNavbarMobilePortal]',
-  imports: [OverlayModule, CdkTrapFocus],
+  imports: [OverlayModule, ScFocusTrap],
   template: `
     <ng-template #mobileMenuTemplate>
-      <div cdkTrapFocus [cdkTrapFocusAutoCapture]="true">
+      <div scFocusTrap>
         <ng-content />
       </div>
     </ng-template>

@@ -17,4 +17,18 @@ test.describe('Popover', () => {
     }
     expect(errors).toEqual([]);
   });
+
+  test('gives focus back to its trigger when closed', async ({ page }) => {
+    const errors = collectErrors(page);
+    await page.goto('/demos/popover/basic-popover-demo');
+    const trigger = page.getByRole('button', { name: 'Open popover' });
+    // By keyboard (WebKit doesn't focus a clicked button).
+    await trigger.focus();
+    await press(page, 'Enter');
+    await expect(page.getByRole('dialog')).toBeVisible();
+    await press(page, 'Escape');
+    await expect(page.getByRole('dialog')).toHaveCount(0);
+    await expect(trigger).toBeFocused();
+    expect(errors).toEqual([]);
+  });
 });

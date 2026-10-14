@@ -171,7 +171,7 @@ All shortcuts are handled by `ScLightboxProvider` (CDK Overlay keydown events), 
 
 - `role="dialog"` with `aria-modal="true"` on container
 - Dynamic `aria-label`: "Image gallery, showing image X of Y"
-- `cdkTrapFocus` with auto-capture in overlay
+- `scFocusTrap` in the overlay: focuses it on open, gives focus back on close
 - Thumbnail buttons have `aria-label`: "Go to image X"
 - Escape key closes lightbox and focus returns to the element that opened it
 - Backdrop click closes lightbox
