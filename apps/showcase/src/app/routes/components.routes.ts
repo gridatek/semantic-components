@@ -40,6 +40,16 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/aspect-ratio/aspect-ratio-page'),
       },
       {
+        path: 'focus-trap',
+        title: 'Focus Trap - Semantic Components',
+        loadComponent: () => import('../pages/docs/focus-trap/focus-trap-page'),
+      },
+      {
+        path: 'hotkey',
+        title: 'Hotkey - Semantic Components',
+        loadComponent: () => import('../pages/docs/hotkey/hotkey-page'),
+      },
+      {
         path: 'select-on-focus',
         title: 'Select On Focus - Semantic Components',
         loadComponent: () =>

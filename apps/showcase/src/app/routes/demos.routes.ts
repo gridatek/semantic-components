@@ -2447,6 +2447,30 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/focus-trap',
+    children: [
+      {
+        path: 'basic-focus-trap-demo',
+        loadComponent: () =>
+          import('../pages/docs/focus-trap/demos/basic-focus-trap-demo').then(
+            (m) => m.BasicFocusTrapDemo,
+          ),
+      },
+    ],
+  },
+  {
+    path: 'demos/hotkey',
+    children: [
+      {
+        path: 'basic-hotkey-demo',
+        loadComponent: () =>
+          import('../pages/docs/hotkey/demos/basic-hotkey-demo').then(
+            (m) => m.BasicHotkeyDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/number-field',
     children: [
       {

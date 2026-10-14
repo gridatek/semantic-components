@@ -344,6 +344,22 @@
     "category": "Forms"
   },
   {
+    "name": "Focus Trap",
+    "path": "focus-trap",
+    "description": "A directive that keeps focus inside an element while it is shown, and gives it back when it goes.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Utilities"
+  },
+  {
+    "name": "Hotkey",
+    "path": "hotkey",
+    "description": "A directive that runs an action on a keyboard shortcut and writes the shortcut for the platform.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Utilities"
+  },
+  {
     "name": "Hover Card",
     "path": "hover-card",
     "description": "A card that appears when hovering over an element.",
