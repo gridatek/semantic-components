@@ -40,7 +40,7 @@ test.describe('OTP field', () => {
     await page.goto('/demos/otp-field/basic-otp-field-demo');
     const input = (n: number) =>
       page.getByRole('textbox', { name: `Digit ${n} of 6` });
-    const value = page.getByText(/^Value:/);
+    const value = page.getByText(/Value:/);
     await input(1).click();
     await type(page, '1234');
     await expect(value).toHaveText('Value: 1234');
@@ -68,7 +68,7 @@ test.describe('OTP field', () => {
     await page.getByRole('textbox', { name: 'Digit 1 of 6' }).click();
     // Arabic-Indic, Devanagari, full-width.
     await type(page, '٣३３');
-    await expect(page.getByText(/^Value:/)).toHaveText('Value: 333');
+    await expect(page.getByText(/Value:/)).toHaveText('Value: 333');
     expect(errors).toEqual([]);
   });
 
@@ -116,7 +116,7 @@ test.describe('OTP field', () => {
         }),
       );
     });
-    await expect(page.getByText(/^Value:/)).toHaveText('Value: 987654');
+    await expect(page.getByText(/Value:/)).toHaveText('Value: 987654');
     await expect(first).toHaveValue('9');
     await expect(
       page.getByRole('textbox', { name: 'Digit 6 of 6' }),
