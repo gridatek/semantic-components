@@ -8,7 +8,7 @@ import { VariantsThemeToggleDemo } from './variants-theme-toggle-demo';
   template: `
     <app-demo-container
       title="Variants"
-      demoUrl="/demos/theme-toggle/variants-theme-toggle-demo"
+      demoUrl="/demos/theme/variants-theme-toggle-demo"
       [code]="code"
     >
       <app-variants-theme-toggle-demo />

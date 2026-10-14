@@ -8,7 +8,7 @@ import { BasicThemeToggleDemo } from './basic-theme-toggle-demo';
   template: `
     <app-demo-container
       title="Basic"
-      demoUrl="/demos/theme-toggle/basic-theme-toggle-demo"
+      demoUrl="/demos/theme/basic-theme-toggle-demo"
       [code]="code"
     >
       <app-basic-theme-toggle-demo />

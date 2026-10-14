@@ -608,6 +608,20 @@ export const demosRoutes: Route[] = [
     path: 'demos/checkbox',
     children: [
       {
+        path: 'signal-forms-checkbox-demo',
+        loadComponent: () =>
+          import('../pages/docs/checkbox/demos/signal-forms-checkbox-demo').then(
+            (m) => m.SignalFormsCheckboxDemo,
+          ),
+      },
+      {
+        path: 'label-checkbox-demo',
+        loadComponent: () =>
+          import('../pages/docs/checkbox/demos/label-checkbox-demo').then(
+            (m) => m.LabelCheckboxDemo,
+          ),
+      },
+      {
         path: 'basic-checkbox-demo',
         loadComponent: () =>
           import('../pages/docs/checkbox/demos/basic-checkbox-demo').then(
@@ -1869,6 +1883,13 @@ export const demosRoutes: Route[] = [
             (m) => m.VerificationOtpFieldDemo,
           ),
       },
+      {
+        path: 'signal-forms-otp-field-demo',
+        loadComponent: () =>
+          import('../pages/docs/otp-field/demos/signal-forms-otp-field-demo').then(
+            (m) => m.SignalFormsOtpFieldDemo,
+          ),
+      },
     ],
   },
   {
@@ -2641,6 +2662,13 @@ export const demosRoutes: Route[] = [
     path: 'demos/pagination',
     children: [
       {
+        path: 'first-last-pagination-demo',
+        loadComponent: () =>
+          import('../pages/docs/pagination/demos/first-last-pagination-demo').then(
+            (m) => m.FirstLastPaginationDemo,
+          ),
+      },
+      {
         path: 'basic-pagination-demo',
         loadComponent: () =>
           import('../pages/docs/pagination/demos/basic-pagination-demo').then(
@@ -2807,6 +2835,13 @@ export const demosRoutes: Route[] = [
   {
     path: 'demos/progress',
     children: [
+      {
+        path: 'signal-forms-progress-demo',
+        loadComponent: () =>
+          import('../pages/docs/progress/demos/signal-forms-progress-demo').then(
+            (m) => m.SignalFormsProgressDemo,
+          ),
+      },
       {
         path: 'basic-progress-demo',
         loadComponent: () =>
@@ -3466,6 +3501,13 @@ export const demosRoutes: Route[] = [
   {
     path: 'demos/switch',
     children: [
+      {
+        path: 'signal-forms-switch-demo',
+        loadComponent: () =>
+          import('../pages/docs/switch/demos/signal-forms-switch-demo').then(
+            (m) => m.SignalFormsSwitchDemo,
+          ),
+      },
       {
         path: 'basic-switch-demo',
         loadComponent: () =>

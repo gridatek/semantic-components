@@ -56,7 +56,7 @@ import { SiMinusIcon } from '@semantic-icons/lucide-icons';
           <input scOtpFieldInput aria-label="Digit 2 of 6" />
           <input scOtpFieldInput aria-label="Digit 3 of 6" />
           <div scOtpFieldSeparator>
-            <svg siMinusIcon class="size-4"></svg>
+            <svg siMinusIcon></svg>
           </div>
           <input scOtpFieldInput aria-label="Digit 4 of 6" />
           <input scOtpFieldInput aria-label="Digit 5 of 6" />

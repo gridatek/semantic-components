@@ -14,6 +14,9 @@ export class ScOtpFieldSeparator {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('flex items-center px-2', this.classInput()),
+    cn(
+      "flex items-center px-2 [&_svg:not([class*='size-'])]:size-4",
+      this.classInput(),
+    ),
   );
 }

@@ -8,7 +8,7 @@ import { NavigationThemeToggleDemo } from './navigation-theme-toggle-demo';
   template: `
     <app-demo-container
       title="In Navigation Context"
-      demoUrl="/demos/theme-toggle/navigation-theme-toggle-demo"
+      demoUrl="/demos/theme/navigation-theme-toggle-demo"
       [code]="code"
     >
       <app-navigation-theme-toggle-demo />

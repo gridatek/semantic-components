@@ -8,7 +8,7 @@ import { SizesThemeToggleDemo } from './sizes-theme-toggle-demo';
   template: `
     <app-demo-container
       title="Sizes"
-      demoUrl="/demos/theme-toggle/sizes-theme-toggle-demo"
+      demoUrl="/demos/theme/sizes-theme-toggle-demo"
       [code]="code"
     >
       <app-sizes-theme-toggle-demo />

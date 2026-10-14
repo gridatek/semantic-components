@@ -8,7 +8,7 @@ import { ThemeSelectDemo } from './theme-select-demo';
   template: `
     <app-demo-container
       title="Theme Select"
-      demoUrl="/demos/theme-toggle/theme-select-demo"
+      demoUrl="/demos/theme/theme-select-demo"
       [code]="code"
     >
       <app-theme-select-demo />

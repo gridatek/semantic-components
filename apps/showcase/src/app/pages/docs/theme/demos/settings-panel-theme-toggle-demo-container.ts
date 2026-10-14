@@ -8,7 +8,7 @@ import { SettingsPanelThemeToggleDemo } from './settings-panel-theme-toggle-demo
   template: `
     <app-demo-container
       title="Settings Panel"
-      demoUrl="/demos/theme-toggle/settings-panel-theme-toggle-demo"
+      demoUrl="/demos/theme/settings-panel-theme-toggle-demo"
       [code]="code"
     >
       <app-settings-panel-theme-toggle-demo />
