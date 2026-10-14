@@ -15,7 +15,8 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
-import { ScFocusTrap, cn } from '../../utils';
+import { ScFocusTrap } from '../../utilities';
+import { cn } from '../../utils';
 import { ScBackdrop } from '../backdrop';
 import { ScDialogPortal } from './dialog-portal';
 

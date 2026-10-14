@@ -10,8 +10,8 @@ import {
   model,
   signal,
 } from '@angular/core';
+import { ScFocusTrap } from '../../utilities';
 import {
-  ScFocusTrap,
   type ScOverlayAlign,
   type ScOverlaySide,
   buildOverlayPositionsWithFallback,
