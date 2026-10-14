@@ -1,6 +1,7 @@
 import {
-  Directive,
+  Component,
   InjectionToken,
+  ViewEncapsulation,
   booleanAttribute,
   computed,
   inject,
@@ -32,9 +33,11 @@ export type ScNumberFieldStepSize = 'small' | 'normal' | 'large';
  * `scNumberFieldGroup`), `scNumberFieldScrubArea`. A Signal Forms control: bind
  * `[formField]` here (`min` / `max` / `required` / `disabled` come from the
  * schema). It is a `scField` too (label, description and errors are tied
- * to the input), whose `id`, `orientation` and `class` it takes.
+ * to the input), whose `id`, `orientation` and `class` it takes. With a
+ * `name`, a hidden input submits the value as a plain number ("1234.5", not
+ * the "1.234,50 €" shown).
  */
-@Directive({
+@Component({
   selector: 'div[scNumberField]',
   exportAs: 'scNumberField',
   hostDirectives: [
@@ -45,6 +48,18 @@ export type ScNumberFieldStepSize = 'small' | 'normal' | 'large';
     'data-slot': 'number-field',
     '[attr.data-readonly]': 'readonly() || null',
   },
+  template: `
+    <ng-content />
+    @if (name()) {
+      <input
+        type="hidden"
+        [name]="name()"
+        [value]="value() ?? ''"
+        [disabled]="disabled()"
+      />
+    }
+  `,
+  encapsulation: ViewEncapsulation.None,
 })
 export class ScNumberField implements FormValueControl<number | null> {
   private readonly field = inject(ScField);

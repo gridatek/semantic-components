@@ -49,7 +49,7 @@ You write the markup and every piece of text — labels, the buttons' names, ico
 - **Bounds and steps**: `min`, `max`, `step` (1), `smallStep` (0.1, with Alt), `largeStep` (10, with Shift and Page Up / Down), `snapOnStep` (steps land on multiples of `step` from `min` or 0). From empty, a step goes to `min` (or 0).
 - **Format**: `locale` (the browser's by default), `format` (`Intl.NumberFormatOptions`: `{ style: 'currency', currency: 'EUR' }`, `{ style: 'percent' }` — the value 0.5 is "50 %" —, `{ style: 'unit', unit: 'degree' }`, fraction digits…). Typing accepts the locale's separators, the other usual decimal separator ("1234.5" in German), the format's text in any of its forms ("45°", "45 deg"), and the locale's digits.
 - **Interaction**: `allowWheelScrub` (the wheel steps the value while the input has focus), `disabled`, `readonly`.
-- **Forms**: `required`, `invalid`, `touched`, `name`, `touch` — set by `[formField]`.
+- **Forms**: `required`, `invalid`, `touched`, `name`, `touch` — set by `[formField]`. With a `name`, a hidden input submits the value as a plain number (`1234.5`, not the "1.234,50 €" shown); a disabled field submits nothing.
 - **Methods**: `increment(amount?)`, `decrement(amount?)`, `setValue(value)`, `toMin()`, `toMax()`, `focus(options?)` (the input), `formatValue(value)`, `parse(text)`; `canIncrement()`, `canDecrement()`, `formattedValue()`.
 
 ## Signal Forms

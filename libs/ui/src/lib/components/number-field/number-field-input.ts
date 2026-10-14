@@ -37,7 +37,6 @@ import { isNumberCharacter } from './number-field-format';
     '[value]': 'text()',
     '[disabled]': 'number.disabled()',
     '[readOnly]': 'number.readonly()',
-    '[attr.name]': 'number.name() || null',
     '[attr.aria-valuenow]': 'number.value()',
     '[attr.aria-valuetext]': 'number.formattedValue() || null',
     '[attr.aria-valuemin]': 'number.min() ?? null',

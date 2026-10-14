@@ -27,7 +27,7 @@ import { ScSwitchVisual } from './switch-visual';
     '[attr.role]': 'role()',
     '[class]': 'class()',
     '[attr.data-state]': 'dataState()',
-    '[attr.data-disabled]': 'disabled() ? "" : null',
+    '[attr.data-disabled]': 'disabled() || null',
   },
   template: `
     <ng-content />

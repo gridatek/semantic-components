@@ -174,7 +174,7 @@ test.describe('Number field', () => {
     await expect(
       page.getByRole('spinbutton', { name: 'Disabled' }),
     ).toBeDisabled();
-    await expect(readonly).toHaveAttribute('data-disabled', 'false');
+    await expect(readonly).not.toHaveAttribute('data-disabled');
     await expect(readonly).toHaveAttribute('data-readonly', 'true');
     expect(errors).toEqual([]);
   });
@@ -199,7 +199,7 @@ test.describe('Number field', () => {
     await quantity.blur();
     await expectValue(quantity, '100', '100');
     await expect(page.getByRole('alert')).toHaveCount(0);
-    await expect(field).toHaveAttribute('data-invalid', 'false');
+    await expect(field).not.toHaveAttribute('data-invalid');
     await expect(page.locator('pre')).toContainText('"value": 100');
     expect(errors).toEqual([]);
   });
@@ -221,6 +221,12 @@ test.describe('Number field', () => {
     await quantity.fill('5');
     await page.getByRole('button', { name: 'Order' }).click();
     await expect(page.locator('pre')).toContainText('"ordered": 5');
+
+    // A native submit sends the number, not the text shown.
+    const submitted = await page
+      .locator('form')
+      .evaluate((form: HTMLFormElement) => [...new FormData(form).values()]);
+    expect(submitted).toEqual(['5']);
     expect(errors).toEqual([]);
   });
 });

@@ -49,8 +49,8 @@ export const SC_FIELD = new InjectionToken<ScFieldContext>('SC_FIELD');
     '[attr.role]': 'role()',
     'data-slot': 'field',
     '[attr.data-orientation]': 'orientation()',
-    '[attr.data-invalid]': 'invalid()',
-    '[attr.data-disabled]': 'disabled()',
+    '[attr.data-invalid]': 'invalid() || null',
+    '[attr.data-disabled]': 'disabled() || null',
     '[class]': 'class()',
   },
   providers: [
