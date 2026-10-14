@@ -50,7 +50,7 @@ You write the markup and every piece of text — labels, the buttons' names, ico
 - **Format**: `locale` (the browser's by default), `format` (`Intl.NumberFormatOptions`: `{ style: 'currency', currency: 'EUR' }`, `{ style: 'percent' }` — the value 0.5 is "50 %" —, `{ style: 'unit', unit: 'degree' }`, fraction digits…). Typing accepts the locale's separators, the other usual decimal separator ("1234.5" in German), the format's text in any of its forms ("45°", "45 deg"), and the locale's digits.
 - **Interaction**: `allowWheelScrub` (the wheel steps the value while the input has focus), `disabled`, `readonly`.
 - **Forms**: `required`, `invalid`, `touched`, `name`, `touch` — set by `[formField]`.
-- **Methods**: `increment(amount?)`, `decrement(amount?)`, `setValue(value)`, `toMin()`, `toMax()`, `formatValue(value)`, `parse(text)`; `canIncrement()`, `canDecrement()`, `formattedValue()`.
+- **Methods**: `increment(amount?)`, `decrement(amount?)`, `setValue(value)`, `toMin()`, `toMax()`, `focus(options?)` (the input), `formatValue(value)`, `parse(text)`; `canIncrement()`, `canDecrement()`, `formattedValue()`.
 
 ## Signal Forms
 
@@ -66,4 +66,4 @@ readonly orderForm = form(this.order, (path) => {
 });
 ```
 
-The input gets `aria-invalid` once the field is touched and invalid; write the messages.
+The input gets `aria-invalid` once the field is touched and invalid. Give the validators a `message` and put a `<p scFieldErrors></p>` inside: it describes the input. `focusBoundControl()` focuses the input.

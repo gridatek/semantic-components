@@ -83,6 +83,13 @@ export class ScNumberField implements FormValueControl<number | null> {
   readonly inputId = signal<string | null>(null);
   /** Commits what's being typed before a step (set by `scNumberFieldInput`). */
   flushInput: () => void = () => undefined;
+  /** Focuses the input (set by `scNumberFieldInput`). */
+  focusInput: (options?: FocusOptions) => void = () => undefined;
+
+  /** Focuses the input — Signal Forms does, to show an invalid field. */
+  focus(options?: FocusOptions): void {
+    this.focusInput(options);
+  }
 
   readonly formatter = computed(() =>
     numberFormatter(this.locale(), this.format()),

@@ -203,4 +203,24 @@ test.describe('Number field', () => {
     await expect(page.locator('pre')).toContainText('"value": 100');
     expect(errors).toEqual([]);
   });
+
+  test('Signal Forms: the error describes the input; ordering focuses it', async ({
+    page,
+  }) => {
+    const errors = collectErrors(page);
+    await page.goto('/demos/number-field/signal-forms-number-field-demo');
+    const quantity = page.getByRole('spinbutton', { name: 'Quantity' });
+    await quantity.fill('');
+    await page.getByRole('button', { name: 'Order' }).focus();
+
+    await page.getByRole('button', { name: 'Order' }).press('Enter');
+    await expect(quantity).toBeFocused();
+    await expect(page.getByRole('alert')).toHaveText('Enter a quantity.');
+    await expect(quantity).toHaveAccessibleDescription('Enter a quantity.');
+
+    await quantity.fill('5');
+    await page.getByRole('button', { name: 'Order' }).click();
+    await expect(page.locator('pre')).toContainText('"ordered": 5');
+    expect(errors).toEqual([]);
+  });
 });

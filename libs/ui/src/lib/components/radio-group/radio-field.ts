@@ -4,12 +4,14 @@ import {
   ElementRef,
   ViewEncapsulation,
   computed,
+  contentChild,
   inject,
   input,
   signal,
 } from '@angular/core';
+import { FormField } from '@angular/forms/signals';
 import { cn } from '../../utils';
-import { SC_FIELD } from '../field/field';
+import { SC_FIELD, type ScFieldContext } from '../field/field';
 
 @Component({
   selector: 'div[scRadioField], label[scRadioField]',
@@ -19,16 +21,16 @@ import { SC_FIELD } from '../field/field';
     '[attr.role]': 'role()',
     '[class]': 'class()',
   },
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
   encapsulation: ViewEncapsulation.None,
 })
-export class ScRadioField {
+export class ScRadioField implements ScFieldContext {
   private readonly elementRef = inject(ElementRef<HTMLElement>);
 
   readonly id = input(inject(_IdGenerator).getId('sc-radio-field-'));
   readonly descriptionIds = signal<string[]>([]);
+  /** The `[formField]` inside, for `scFieldErrors`. */
+  readonly formField = contentChild(FormField);
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly role = computed(() => {

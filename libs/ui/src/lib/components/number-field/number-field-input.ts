@@ -1,6 +1,7 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   Directive,
+  ElementRef,
   computed,
   effect,
   inject,
@@ -53,6 +54,7 @@ import { isNumberCharacter } from './number-field-format';
   },
 })
 export class ScNumberFieldInput {
+  private readonly element = inject<ElementRef<HTMLInputElement>>(ElementRef);
   protected readonly number = inject(SC_NUMBER_FIELD);
   protected readonly field = inject(SC_FIELD, { optional: true });
   private readonly fallbackId = inject(_IdGenerator).getId('sc-number-field-');
@@ -99,6 +101,8 @@ export class ScNumberFieldInput {
     });
     effect(() => this.number.inputId.set(this.id()));
     this.number.flushInput = () => this.commit(false);
+    this.number.focusInput = (options) =>
+      this.element.nativeElement.focus(options);
   }
 
   /** Only what can be part of a number gets typed or pasted. */
