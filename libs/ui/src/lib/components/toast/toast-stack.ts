@@ -228,11 +228,14 @@ export class ScToastStack {
           SC_TOAST_PEEK
       );
     }
-    return column.reduce(
-      (sum, toast, i) =>
-        sum + (heights.get(toast.id) ?? 0) + (i ? SC_TOAST_GAP : 0),
-      0,
-    );
+    // Spread out: the ones shown, the newest.
+    return column
+      .slice(-this.toaster.ɵconfig.visibleToasts)
+      .reduce(
+        (sum, toast, i) =>
+          sum + (heights.get(toast.id) ?? 0) + (i ? SC_TOAST_GAP : 0),
+        0,
+      );
   }
 
   private injectorFor(initial: ScToastData): Injector {

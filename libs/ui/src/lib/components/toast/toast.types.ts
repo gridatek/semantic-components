@@ -56,7 +56,7 @@ export interface ScToasterConfig {
   position?: ScToastPosition;
   /** How long a toast stays, in ms, when `show` gives no `duration`; 0 keeps it. Default 5000. */
   duration?: number;
-  /** How many show in a stack, stacked. Default 3. */
+  /** How many show at a position; the older ones wait, out of reach (inert). Default 3. */
   visibleToasts?: number;
   /** How many are kept; the oldest goes past it. Default 5. */
   maxToasts?: number;

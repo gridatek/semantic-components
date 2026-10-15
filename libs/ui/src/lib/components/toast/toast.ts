@@ -33,6 +33,7 @@ const VARIANTS: Partial<Record<ScToastVariant, string>> = {
     '[attr.data-front]': 'layout.index() === 0',
     '[attr.data-expanded]': 'layout.expanded()',
     '[attr.data-hidden]': 'hidden() || null',
+    '[attr.inert]': 'hidden() || null',
     '[style.transform]': 'transform()',
     '[style.height.px]': 'stackedHeight()',
     '[class]': 'class()',
@@ -64,9 +65,9 @@ export class ScToast {
     () => !this.layout.expanded() && this.layout.index() > 0,
   );
 
-  /** Too far back to show, stacked. */
+  /** Past the toaster's `visibleToasts`: not shown, and out of reach (inert). */
   protected readonly hidden = computed(
-    () => !this.layout.expanded() && this.layout.index() >= this.layout.visible,
+    () => this.layout.index() >= this.layout.visible,
   );
 
   protected readonly stackedHeight = computed(() =>
