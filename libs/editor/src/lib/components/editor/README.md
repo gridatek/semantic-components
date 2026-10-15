@@ -19,18 +19,47 @@ These are the packages of Tiptap's own [install](https://tiptap.dev/docs/editor/
 Each feature is an entry point of its own, with its own Tiptap package (an optional peer dependency): install it, import it and provide it only when you use it — a simple editor installs no table, search or Markdown code.
 
 ```bash
-npm install @tiptap/extension-table @tiptap/markdown
+npm install @tiptap/extension-superscript @tiptap/extension-subscript @tiptap/markdown
 ```
 
 ```ts
-import { provideEditor } from '@semantic-components/editor';
+import { Component, signal } from '@angular/core';
+import { FormField, form } from '@angular/forms/signals';
+import { ScEditor, ScEditorBold, ScEditorContent, ScEditorToolbar, ScEditorToolbarGroup, provideEditor } from '@semantic-components/editor';
 import { withMarkdown } from '@semantic-components/editor/markdown';
-import { ScEditorTable, withTables } from '@semantic-components/editor/tables';
+import { ScEditorSubscript, ScEditorSuperscript, withScripts } from '@semantic-components/editor/scripts';
+import { SiBoldIcon, SiSubscriptIcon, SiSuperscriptIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
-  imports: [ScEditorTable],
-  providers: [provideEditor(withTables(), withMarkdown())],
+  selector: 'app-note-editor',
+  imports: [FormField, ScEditor, ScEditorBold, ScEditorContent, ScEditorSubscript, ScEditorSuperscript, ScEditorToolbar, ScEditorToolbarGroup, SiBoldIcon, SiSubscriptIcon, SiSuperscriptIcon],
+  // The features of the editors in this component.
+  providers: [provideEditor(withScripts(), withMarkdown())],
+  template: `
+    <div scEditor [formField]="noteForm.body" format="markdown">
+      <div scEditorToolbar aria-label="Formatting">
+        <div scEditorToolbarGroup>
+          <button scEditorBold value="bold">
+            <svg siBoldIcon></svg>
+            <span class="sr-only">Bold</span>
+          </button>
+          <button scEditorSuperscript value="superscript">
+            <svg siSuperscriptIcon></svg>
+            <span class="sr-only">Superscript</span>
+          </button>
+          <button scEditorSubscript value="subscript">
+            <svg siSubscriptIcon></svg>
+            <span class="sr-only">Subscript</span>
+          </button>
+        </div>
+      </div>
+      <div scEditorContent ariaLabel="Note"></div>
+    </div>
+  `,
 })
+export class NoteEditor {
+  readonly noteForm = form(signal({ body: '' }));
+}
 ```
 
 | Entry point                               | Provide                                               | Parts                                                                                    | Package                                                        |
