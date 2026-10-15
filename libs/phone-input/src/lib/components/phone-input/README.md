@@ -45,7 +45,7 @@ readonly countries = phoneCountries('en');
 readonly model = signal({ phone: '' });
 readonly contactForm = form(this.model, (s) => {
   required(s.phone);
-  phoneNumber(s.phone);
+  phoneNumber(s.phone, { message: 'Enter a valid phone number' });
 });
 ```
 
@@ -113,7 +113,7 @@ Every country with a numbering plan, as `ScPhoneCountry` (`{ code, name, calling
 
 ### phoneNumber(path, { message? })
 
-Signal Forms rule: a non-empty value must be a valid phone number (error kind `phoneNumber`). Add `required()` to refuse an empty one.
+Signal Forms rule: a non-empty value must be a valid phone number (error kind `phoneNumber`). Write its `message` — the library has none. Add `required()` to refuse an empty one.
 
 ## Accessibility
 

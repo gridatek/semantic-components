@@ -160,7 +160,7 @@ export class CountrySelectorPhoneInputDemo {
   protected readonly model = signal({ phone: '' });
   protected readonly contactForm = form(this.model, (s) => {
     required(s.phone, { message: 'Enter your phone number' });
-    phoneNumber(s.phone);
+    phoneNumber(s.phone, { message: 'Enter a valid phone number' });
   });
 }`;
 }
