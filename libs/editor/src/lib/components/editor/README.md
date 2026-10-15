@@ -1,6 +1,6 @@
 # Editor
 
-A composable rich text editor built on [Tiptap](https://tiptap.dev/) (ProseMirror): the document is HTML, edited through Signal Forms; a toolbar of toggles, counts, and nothing you don't write.
+A composable rich text editor built on [Tiptap](https://tiptap.dev/) (ProseMirror): the document is HTML, edited through Signal Forms; a toolbar of command buttons, counts, and nothing you don't write.
 
 You write the markup and every piece of text — the toolbar, its icons and names, the editor's name and placeholder, the heading labels, the link form; the parts add the behaviour, ARIA and default styles.
 
@@ -16,11 +16,11 @@ npm install @semantic-components/editor @tiptap/core @tiptap/starter-kit @tiptap
 <div scEditor [formField]="postForm.body" class="overflow-hidden rounded-lg border">
   <div scEditorToolbar aria-label="Formatting">
     <div scEditorToolbarGroup>
-      <button scEditorBoldToggle value="bold">
+      <button scEditorBold value="bold">
         <svg siBoldIcon></svg>
         <span class="sr-only">Bold</span>
       </button>
-      <button scEditorItalicToggle value="italic">
+      <button scEditorItalic value="italic">
         <svg siItalicIcon></svg>
         <span class="sr-only">Italic</span>
       </button>
@@ -54,14 +54,29 @@ readonly postForm = form(signal({ body: '' }), (path) => {
 | `ScEditor`                                  | `[scEditor]`                                 | The document and its commands; a Signal Forms control (`exportAs: 'scEditor'`). `data-disabled`, `data-readonly`, `data-invalid`. |
 | `ScEditorContent`                           | `div[scEditorContent]`                       | Where it's written: a multi-line `textbox`. `ariaLabel` (name it — no default), `placeholder` (none by default).                  |
 | `ScEditorToolbar`, `ScEditorToolbarGroup`   | `div[scEditorToolbar]`, `div[…Group]`        | The toolbar: one tab stop, arrow keys between its buttons. Name it (`aria-label`).                                                |
-| `ScEditorBoldToggle` … (see below)          | `button[scEditor…Toggle]`                    | A command; `aria-pressed` when its format is on. Write its icon and name it.                                                      |
+| `ScEditorBold` … (see below)                | `button[scEditorBold]`…                      | A command; `aria-pressed` when it has a state. Write its icon and name it.                                                        |
 | `ScEditorHeading`                           | `button[scEditorHeading]`                    | The block type: `level()` (`'p'`, `'h1'`…`'h6'`), `select(level)` — the trigger of your menu, with your labels.                   |
-| `ScEditorLinkToggle`                        | `button[scEditorLinkToggle]`                 | Pressed inside a link; the trigger of your link form (a popover), which calls the editor's `setLink(href)` / `unsetLink()`.       |
+| `ScEditorLink`                              | `button[scEditorLink]`                       | Pressed inside a link; the trigger of your link form (a popover), which calls the editor's `setLink(href)` / `unsetLink()`.       |
 | `ScEditorSeparator`                         | `div[scEditorSeparator]`                     | Between toolbar groups.                                                                                                           |
 | `ScEditorHeader`, `ScEditorFooter`          | `div[scEditorHeader]`, `div[scEditorFooter]` | Above and below the document.                                                                                                     |
 | `ScEditorCount`, `…WordCount`, `…CharCount` | `div[scEditorCount]`, `span[…]`              | `wordCount()`, `charCount()` (`exportAs`) — write the text around them.                                                           |
 
-The toggles: `Bold`, `Italic`, `Underline`, `Strikethrough`, `Code`, `BulletList`, `NumberedList`, `Blockquote`, `AlignLeft`, `AlignCenter`, `AlignRight`, `AlignJustify`, `HorizontalRule`, `ClearFormatting`, `Undo`, `Redo` (disabled when there is nothing to undo / redo). All are disabled when the editor is disabled or read-only.
+The buttons, `scEditor` + the command:
+
+- **With a state** — `aria-pressed` follows the document: `Bold`, `Italic`, `Underline`, `Strikethrough`, `Code`, `BulletList`, `NumberedList`, `Blockquote`, `AlignLeft`, `AlignCenter`, `AlignRight`, `AlignJustify`, `Link`.
+- **Run once** — no `aria-pressed`: `HorizontalRule`, `ClearFormatting`, `Undo`, `Redo` (disabled when there is nothing to undo / redo).
+
+All are disabled when the editor is disabled or read-only.
+
+### Why no `Toggle` suffix
+
+These were `scEditorBoldToggle`, `scEditorUndoToggle`… But Undo, Redo, Horizontal rule and Clear formatting aren't toggles — they have no state — and a `Toggle` / `Button` split would be a second thing to remember for each one. So every button is named the same way, after its command:
+
+- The selector already says it's a button (`button[scEditorBold]`); a suffix adds nothing.
+- Whether it's a toggle is in its ARIA: `aria-pressed` on the ones with a state, none on the others.
+- It matches the other parts: `scEditorHeading`, `scEditorContent`, `scEditorWordCount`.
+
+For the same reason the editor's group is `scEditorToolbarGroup`, not a toggle group: it groups buttons for the toolbar's arrow keys; which are pressed — one alignment, any number of marks — is the document's to say, not the group's.
 
 ## `scEditor`
 
@@ -75,7 +90,7 @@ The toggles: `Bold`, `Italic`, `Underline`, `Strikethrough`, `Code`, `BulletList
 
 ```html
 <div scPopoverProvider [(open)]="linkOpen">
-  <button scEditorLinkToggle scPopoverTrigger value="link" (click)="editLink(editor.linkHref())">
+  <button scEditorLink scPopoverTrigger value="link" (click)="editLink(editor.linkHref())">
     <svg siLinkIcon></svg>
     <span class="sr-only">Link</span>
   </button>
@@ -104,5 +119,5 @@ The document has `block outline-none overflow-y-auto min-h-[150px] max-h-[400px]
 ## Accessibility
 
 - The document is a multi-line `textbox` named by `ariaLabel`; `aria-readonly` / `aria-disabled` / `aria-invalid` follow the form, and the field's description and errors describe it.
-- The toolbar is one tab stop (`@angular/aria` toolbar); toggles have `aria-pressed`.
+- The toolbar is one tab stop (`@angular/aria` toolbar); buttons with a state have `aria-pressed`.
 - The library adds no text: name everything you write.

@@ -3,19 +3,19 @@ import { Directive, computed, inject, input } from '@angular/core';
 import { bindInput, cn, toggleVariants } from '@semantic-components/ui';
 import { SC_EDITOR } from './editor';
 
-/** Centres the paragraph. Write its icon and name it (`aria-label` or visually hidden text). */
+/** Aligns the paragraph left. Write its icon and name it (`aria-label` or visually hidden text). */
 @Directive({
-  selector: 'button[scEditorAlignCenterToggle]',
+  selector: 'button[scEditorAlignLeft]',
   hostDirectives: [ToolbarWidget],
   host: {
     type: 'button',
     '[class]': 'class()',
     '[disabled]': 'disabled()',
-    '[attr.aria-pressed]': "editor.alignment() === 'center'",
+    '[attr.aria-pressed]': "editor.alignment() === 'left'",
     '(click)': 'onClick()',
   },
 })
-export class ScEditorAlignCenterToggle {
+export class ScEditorAlignLeft {
   protected readonly editor = inject(SC_EDITOR);
   readonly classInput = input<string>('', { alias: 'class' });
   readonly disabledInput = input(false, { alias: 'disabled' });
@@ -36,6 +36,6 @@ export class ScEditorAlignCenterToggle {
   }
 
   protected onClick(): void {
-    this.editor.run((chain) => chain.setTextAlign('center'));
+    this.editor.run((chain) => chain.setTextAlign('left'));
   }
 }

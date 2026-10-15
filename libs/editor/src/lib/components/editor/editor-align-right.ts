@@ -3,19 +3,19 @@ import { Directive, computed, inject, input } from '@angular/core';
 import { bindInput, cn, toggleVariants } from '@semantic-components/ui';
 import { SC_EDITOR } from './editor';
 
-/** Justifies the paragraph. Write its icon and name it (`aria-label` or visually hidden text). */
+/** Aligns the paragraph right. Write its icon and name it (`aria-label` or visually hidden text). */
 @Directive({
-  selector: 'button[scEditorAlignJustifyToggle]',
+  selector: 'button[scEditorAlignRight]',
   hostDirectives: [ToolbarWidget],
   host: {
     type: 'button',
     '[class]': 'class()',
     '[disabled]': 'disabled()',
-    '[attr.aria-pressed]': "editor.alignment() === 'justify'",
+    '[attr.aria-pressed]': "editor.alignment() === 'right'",
     '(click)': 'onClick()',
   },
 })
-export class ScEditorAlignJustifyToggle {
+export class ScEditorAlignRight {
   protected readonly editor = inject(SC_EDITOR);
   readonly classInput = input<string>('', { alias: 'class' });
   readonly disabledInput = input(false, { alias: 'disabled' });
@@ -36,6 +36,6 @@ export class ScEditorAlignJustifyToggle {
   }
 
   protected onClick(): void {
-    this.editor.run((chain) => chain.setTextAlign('justify'));
+    this.editor.run((chain) => chain.setTextAlign('right'));
   }
 }

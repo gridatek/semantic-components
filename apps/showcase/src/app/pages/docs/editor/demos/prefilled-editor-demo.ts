@@ -2,18 +2,18 @@ import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
   ScEditor,
-  ScEditorBoldToggle,
-  ScEditorBulletListToggle,
+  ScEditorBold,
+  ScEditorBulletList,
   ScEditorCharCount,
   ScEditorContent,
   ScEditorCount,
   ScEditorFooter,
-  ScEditorItalicToggle,
-  ScEditorNumberedListToggle,
+  ScEditorItalic,
+  ScEditorNumberedList,
   ScEditorSeparator,
   ScEditorToolbar,
   ScEditorToolbarGroup,
-  ScEditorUnderlineToggle,
+  ScEditorUnderline,
   ScEditorWordCount,
 } from '@semantic-components/editor';
 import {
@@ -32,12 +32,12 @@ import {
     ScEditorContent,
     ScEditorToolbar,
     ScEditorToolbarGroup,
-    ScEditorBoldToggle,
-    ScEditorItalicToggle,
-    ScEditorUnderlineToggle,
+    ScEditorBold,
+    ScEditorItalic,
+    ScEditorUnderline,
     ScEditorSeparator,
-    ScEditorBulletListToggle,
-    ScEditorNumberedListToggle,
+    ScEditorBulletList,
+    ScEditorNumberedList,
     ScEditorFooter,
     ScEditorCount,
     ScEditorWordCount,
@@ -57,15 +57,15 @@ import {
       >
         <div scEditorToolbar>
           <div scEditorToolbarGroup>
-            <button scEditorBoldToggle value="bold">
+            <button scEditorBold value="bold">
               <svg siBoldIcon></svg>
               <span class="sr-only">Bold</span>
             </button>
-            <button scEditorItalicToggle value="italic">
+            <button scEditorItalic value="italic">
               <svg siItalicIcon></svg>
               <span class="sr-only">Italic</span>
             </button>
-            <button scEditorUnderlineToggle value="underline">
+            <button scEditorUnderline value="underline">
               <svg siUnderlineIcon></svg>
               <span class="sr-only">Underline</span>
             </button>
@@ -74,11 +74,11 @@ import {
           <div scEditorSeparator></div>
 
           <div scEditorToolbarGroup>
-            <button scEditorBulletListToggle value="bullet-list">
+            <button scEditorBulletList value="bullet-list">
               <svg siListIcon></svg>
               <span class="sr-only">Bullet list</span>
             </button>
-            <button scEditorNumberedListToggle value="numbered-list">
+            <button scEditorNumberedList value="numbered-list">
               <svg siListOrderedIcon></svg>
               <span class="sr-only">Numbered list</span>
             </button>

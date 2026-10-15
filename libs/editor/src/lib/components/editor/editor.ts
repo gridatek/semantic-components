@@ -35,8 +35,8 @@ export interface ScEditorMountOptions {
  * A rich text editor (Tiptap): holds the document — its HTML is the value —
  * and runs its commands. A Signal Forms control: bind `[formField]` here
  * (`disabled`, `readonly` and errors come from the schema). Its parts:
- * `scEditorContent` (where it's written), the toolbar and its toggles, the
- * counts. The toggles run commands (`run`) and read state (`isActive`).
+ * `scEditorContent` (where it's written), the toolbar and its buttons, the
+ * counts. The buttons run commands (`run`) and read state (`isActive`).
  */
 @Directive({
   selector: '[scEditor]',

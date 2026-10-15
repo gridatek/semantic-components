@@ -2,32 +2,32 @@ import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
   ScEditor,
-  ScEditorAlignCenterToggle,
-  ScEditorAlignJustifyToggle,
-  ScEditorAlignLeftToggle,
-  ScEditorAlignRightToggle,
-  ScEditorBlockquoteToggle,
-  ScEditorBoldToggle,
-  ScEditorBulletListToggle,
+  ScEditorAlignCenter,
+  ScEditorAlignJustify,
+  ScEditorAlignLeft,
+  ScEditorAlignRight,
+  ScEditorBlockquote,
+  ScEditorBold,
+  ScEditorBulletList,
   ScEditorCharCount,
-  ScEditorClearFormattingToggle,
-  ScEditorCodeToggle,
+  ScEditorClearFormatting,
+  ScEditorCode,
   ScEditorContent,
   ScEditorCount,
   ScEditorFooter,
   ScEditorHeading,
   type ScEditorHeadingLevel,
-  ScEditorHorizontalRuleToggle,
-  ScEditorItalicToggle,
-  ScEditorLinkToggle,
-  ScEditorNumberedListToggle,
-  ScEditorRedoToggle,
+  ScEditorHorizontalRule,
+  ScEditorItalic,
+  ScEditorLink,
+  ScEditorNumberedList,
+  ScEditorRedo,
   ScEditorSeparator,
-  ScEditorStrikethroughToggle,
+  ScEditorStrikethrough,
   ScEditorToolbar,
   ScEditorToolbarGroup,
-  ScEditorUnderlineToggle,
-  ScEditorUndoToggle,
+  ScEditorUnderline,
+  ScEditorUndo,
   ScEditorWordCount,
 } from '@semantic-components/editor';
 import {
@@ -82,25 +82,25 @@ import {
     ScEditorContent,
     ScEditorToolbar,
     ScEditorToolbarGroup,
-    ScEditorBoldToggle,
-    ScEditorItalicToggle,
-    ScEditorUnderlineToggle,
-    ScEditorStrikethroughToggle,
+    ScEditorBold,
+    ScEditorItalic,
+    ScEditorUnderline,
+    ScEditorStrikethrough,
     ScEditorSeparator,
     ScEditorHeading,
-    ScEditorUndoToggle,
-    ScEditorRedoToggle,
-    ScEditorAlignLeftToggle,
-    ScEditorAlignCenterToggle,
-    ScEditorAlignRightToggle,
-    ScEditorAlignJustifyToggle,
-    ScEditorBulletListToggle,
-    ScEditorNumberedListToggle,
-    ScEditorLinkToggle,
-    ScEditorBlockquoteToggle,
-    ScEditorCodeToggle,
-    ScEditorHorizontalRuleToggle,
-    ScEditorClearFormattingToggle,
+    ScEditorUndo,
+    ScEditorRedo,
+    ScEditorAlignLeft,
+    ScEditorAlignCenter,
+    ScEditorAlignRight,
+    ScEditorAlignJustify,
+    ScEditorBulletList,
+    ScEditorNumberedList,
+    ScEditorLink,
+    ScEditorBlockquote,
+    ScEditorCode,
+    ScEditorHorizontalRule,
+    ScEditorClearFormatting,
     ScEditorFooter,
     ScEditorCount,
     ScEditorWordCount,
@@ -145,11 +145,11 @@ import {
       >
         <div scEditorToolbar aria-label="Text formatting">
           <div scEditorToolbarGroup>
-            <button scEditorUndoToggle value="undo">
+            <button scEditorUndo value="undo">
               <svg siUndoIcon></svg>
               <span class="sr-only">Undo</span>
             </button>
-            <button scEditorRedoToggle value="redo">
+            <button scEditorRedo value="redo">
               <svg siRedoIcon></svg>
               <span class="sr-only">Redo</span>
             </button>
@@ -184,19 +184,19 @@ import {
           <div scEditorSeparator></div>
 
           <div scEditorToolbarGroup>
-            <button scEditorBoldToggle value="bold">
+            <button scEditorBold value="bold">
               <svg siBoldIcon></svg>
               <span class="sr-only">Bold</span>
             </button>
-            <button scEditorItalicToggle value="italic">
+            <button scEditorItalic value="italic">
               <svg siItalicIcon></svg>
               <span class="sr-only">Italic</span>
             </button>
-            <button scEditorUnderlineToggle value="underline">
+            <button scEditorUnderline value="underline">
               <svg siUnderlineIcon></svg>
               <span class="sr-only">Underline</span>
             </button>
-            <button scEditorStrikethroughToggle value="strikethrough">
+            <button scEditorStrikethrough value="strikethrough">
               <svg siStrikethroughIcon></svg>
               <span class="sr-only">Strikethrough</span>
             </button>
@@ -205,19 +205,19 @@ import {
           <div scEditorSeparator></div>
 
           <div scEditorToolbarGroup>
-            <button scEditorAlignLeftToggle value="align-left">
+            <button scEditorAlignLeft value="align-left">
               <svg siTextAlignStartIcon></svg>
               <span class="sr-only">Align left</span>
             </button>
-            <button scEditorAlignCenterToggle value="align-center">
+            <button scEditorAlignCenter value="align-center">
               <svg siTextAlignCenterIcon></svg>
               <span class="sr-only">Align center</span>
             </button>
-            <button scEditorAlignRightToggle value="align-right">
+            <button scEditorAlignRight value="align-right">
               <svg siTextAlignEndIcon></svg>
               <span class="sr-only">Align right</span>
             </button>
-            <button scEditorAlignJustifyToggle value="align-justify">
+            <button scEditorAlignJustify value="align-justify">
               <svg siTextAlignJustifyIcon></svg>
               <span class="sr-only">Align justify</span>
             </button>
@@ -226,11 +226,11 @@ import {
           <div scEditorSeparator></div>
 
           <div scEditorToolbarGroup>
-            <button scEditorBulletListToggle value="bullet-list">
+            <button scEditorBulletList value="bullet-list">
               <svg siListIcon></svg>
               <span class="sr-only">Bullet list</span>
             </button>
-            <button scEditorNumberedListToggle value="numbered-list">
+            <button scEditorNumberedList value="numbered-list">
               <svg siListOrderedIcon></svg>
               <span class="sr-only">Numbered list</span>
             </button>
@@ -241,7 +241,7 @@ import {
           <div scEditorToolbarGroup>
             <div scPopoverProvider [(open)]="linkOpen">
               <button
-                scEditorLinkToggle
+                scEditorLink
                 scPopoverTrigger
                 value="link"
                 (click)="editLink(editor.linkHref())"
@@ -278,15 +278,15 @@ import {
                 </div>
               </ng-template>
             </div>
-            <button scEditorBlockquoteToggle value="blockquote">
+            <button scEditorBlockquote value="blockquote">
               <svg siQuoteIcon></svg>
               <span class="sr-only">Blockquote</span>
             </button>
-            <button scEditorCodeToggle value="code">
+            <button scEditorCode value="code">
               <svg siCodeIcon></svg>
               <span class="sr-only">Code</span>
             </button>
-            <button scEditorHorizontalRuleToggle value="horizontal-rule">
+            <button scEditorHorizontalRule value="horizontal-rule">
               <svg siMinusIcon></svg>
               <span class="sr-only">Horizontal rule</span>
             </button>
@@ -295,7 +295,7 @@ import {
           <div scEditorSeparator></div>
 
           <div scEditorToolbarGroup>
-            <button scEditorClearFormattingToggle value="clear-formatting">
+            <button scEditorClearFormatting value="clear-formatting">
               <svg siRemoveFormattingIcon></svg>
               <span class="sr-only">Clear formatting</span>
             </button>

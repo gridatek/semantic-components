@@ -3,19 +3,19 @@ import { Directive, computed, inject, input } from '@angular/core';
 import { bindInput, cn, toggleVariants } from '@semantic-components/ui';
 import { SC_EDITOR } from './editor';
 
-/** A numbered list, on and off. Write its icon and name it (`aria-label` or visually hidden text). */
+/** Inline code, on and off. Write its icon and name it (`aria-label` or visually hidden text). */
 @Directive({
-  selector: 'button[scEditorNumberedListToggle]',
+  selector: 'button[scEditorCode]',
   hostDirectives: [ToolbarWidget],
   host: {
     type: 'button',
     '[class]': 'class()',
     '[disabled]': 'disabled()',
-    '[attr.aria-pressed]': "editor.isActive('orderedList')",
+    '[attr.aria-pressed]': "editor.isActive('code')",
     '(click)': 'onClick()',
   },
 })
-export class ScEditorNumberedListToggle {
+export class ScEditorCode {
   protected readonly editor = inject(SC_EDITOR);
   readonly classInput = input<string>('', { alias: 'class' });
   readonly disabledInput = input(false, { alias: 'disabled' });
@@ -36,6 +36,6 @@ export class ScEditorNumberedListToggle {
   }
 
   protected onClick(): void {
-    this.editor.run((chain) => chain.toggleOrderedList());
+    this.editor.run((chain) => chain.toggleCode());
   }
 }

@@ -3,9 +3,9 @@ import { Directive, computed, inject, input } from '@angular/core';
 import { bindInput, cn, toggleVariants } from '@semantic-components/ui';
 import { SC_EDITOR } from './editor';
 
-/** Redoes the last undone change (disabled when there is none). Write its icon and name it (`aria-label` or visually hidden text). */
+/** Inserts a horizontal rule. Write its icon and name it (`aria-label` or visually hidden text). */
 @Directive({
-  selector: 'button[scEditorRedoToggle]',
+  selector: 'button[scEditorHorizontalRule]',
   hostDirectives: [ToolbarWidget],
   host: {
     type: 'button',
@@ -14,7 +14,7 @@ import { SC_EDITOR } from './editor';
     '(click)': 'onClick()',
   },
 })
-export class ScEditorRedoToggle {
+export class ScEditorHorizontalRule {
   protected readonly editor = inject(SC_EDITOR);
   readonly classInput = input<string>('', { alias: 'class' });
   readonly disabledInput = input(false, { alias: 'disabled' });
@@ -27,10 +27,7 @@ export class ScEditorRedoToggle {
   );
 
   protected readonly disabled = computed(
-    () =>
-      this.disabledInput() ||
-      !this.editor.editable() ||
-      !this.editor.can((chain) => chain.redo()),
+    () => this.disabledInput() || !this.editor.editable(),
   );
 
   constructor() {
@@ -38,6 +35,6 @@ export class ScEditorRedoToggle {
   }
 
   protected onClick(): void {
-    this.editor.run((chain) => chain.redo());
+    this.editor.run((chain) => chain.setHorizontalRule());
   }
 }

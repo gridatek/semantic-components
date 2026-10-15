@@ -3,19 +3,23 @@ import { Directive, computed, inject, input } from '@angular/core';
 import { bindInput, cn, toggleVariants } from '@semantic-components/ui';
 import { SC_EDITOR } from './editor';
 
-/** Bold, on and off. Write its icon and name it (`aria-label` or visually hidden text). */
+/**
+ * The link button: pressed inside a link. It runs no command itself — make
+ * it the trigger of your link form (a `scPopoverTrigger`, say), whose
+ * buttons call the editor's `setLink(href)` / `unsetLink()`; `linkHref()`
+ * is the address at the selection. Write its icon and name it.
+ */
 @Directive({
-  selector: 'button[scEditorBoldToggle]',
+  selector: 'button[scEditorLink]',
   hostDirectives: [ToolbarWidget],
   host: {
     type: 'button',
     '[class]': 'class()',
     '[disabled]': 'disabled()',
-    '[attr.aria-pressed]': "editor.isActive('bold')",
-    '(click)': 'onClick()',
+    '[attr.aria-pressed]': "editor.isActive('link')",
   },
 })
-export class ScEditorBoldToggle {
+export class ScEditorLink {
   protected readonly editor = inject(SC_EDITOR);
   readonly classInput = input<string>('', { alias: 'class' });
   readonly disabledInput = input(false, { alias: 'disabled' });
@@ -33,9 +37,5 @@ export class ScEditorBoldToggle {
 
   constructor() {
     bindInput(inject(ToolbarWidget).disabled, this.disabled);
-  }
-
-  protected onClick(): void {
-    this.editor.run((chain) => chain.toggleBold());
   }
 }

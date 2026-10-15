@@ -3,19 +3,18 @@ import { Directive, computed, inject, input } from '@angular/core';
 import { bindInput, cn, toggleVariants } from '@semantic-components/ui';
 import { SC_EDITOR } from './editor';
 
-/** Underline, on and off. Write its icon and name it (`aria-label` or visually hidden text). */
+/** Clears the selection’s formatting (marks and blocks). Write its icon and name it (`aria-label` or visually hidden text). */
 @Directive({
-  selector: 'button[scEditorUnderlineToggle]',
+  selector: 'button[scEditorClearFormatting]',
   hostDirectives: [ToolbarWidget],
   host: {
     type: 'button',
     '[class]': 'class()',
     '[disabled]': 'disabled()',
-    '[attr.aria-pressed]': "editor.isActive('underline')",
     '(click)': 'onClick()',
   },
 })
-export class ScEditorUnderlineToggle {
+export class ScEditorClearFormatting {
   protected readonly editor = inject(SC_EDITOR);
   readonly classInput = input<string>('', { alias: 'class' });
   readonly disabledInput = input(false, { alias: 'disabled' });
@@ -36,6 +35,6 @@ export class ScEditorUnderlineToggle {
   }
 
   protected onClick(): void {
-    this.editor.run((chain) => chain.toggleUnderline());
+    this.editor.run((chain) => chain.clearNodes().unsetAllMarks());
   }
 }

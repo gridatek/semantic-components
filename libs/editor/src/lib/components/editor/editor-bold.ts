@@ -3,19 +3,19 @@ import { Directive, computed, inject, input } from '@angular/core';
 import { bindInput, cn, toggleVariants } from '@semantic-components/ui';
 import { SC_EDITOR } from './editor';
 
-/** Strikethrough, on and off. Write its icon and name it (`aria-label` or visually hidden text). */
+/** Bold, on and off. Write its icon and name it (`aria-label` or visually hidden text). */
 @Directive({
-  selector: 'button[scEditorStrikethroughToggle]',
+  selector: 'button[scEditorBold]',
   hostDirectives: [ToolbarWidget],
   host: {
     type: 'button',
     '[class]': 'class()',
     '[disabled]': 'disabled()',
-    '[attr.aria-pressed]': "editor.isActive('strike')",
+    '[attr.aria-pressed]': "editor.isActive('bold')",
     '(click)': 'onClick()',
   },
 })
-export class ScEditorStrikethroughToggle {
+export class ScEditorBold {
   protected readonly editor = inject(SC_EDITOR);
   readonly classInput = input<string>('', { alias: 'class' });
   readonly disabledInput = input(false, { alias: 'disabled' });
@@ -36,6 +36,6 @@ export class ScEditorStrikethroughToggle {
   }
 
   protected onClick(): void {
-    this.editor.run((chain) => chain.toggleStrike());
+    this.editor.run((chain) => chain.toggleBold());
   }
 }

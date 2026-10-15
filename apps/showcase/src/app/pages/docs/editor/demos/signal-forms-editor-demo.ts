@@ -8,9 +8,9 @@ import {
 } from '@angular/forms/signals';
 import {
   ScEditor,
-  ScEditorBoldToggle,
+  ScEditorBold,
   ScEditorContent,
-  ScEditorItalicToggle,
+  ScEditorItalic,
   ScEditorToolbar,
   ScEditorToolbarGroup,
 } from '@semantic-components/editor';
@@ -47,9 +47,9 @@ interface PostModel {
     ScFieldErrors,
     ScLabel,
     ScEditor,
-    ScEditorBoldToggle,
+    ScEditorBold,
     ScEditorContent,
-    ScEditorItalicToggle,
+    ScEditorItalic,
     ScEditorToolbar,
     ScEditorToolbarGroup,
     SiBoldIcon,
@@ -65,11 +65,11 @@ interface PostModel {
         >
           <div scEditorToolbar aria-label="Formatting">
             <div scEditorToolbarGroup>
-              <button scEditorBoldToggle value="bold">
+              <button scEditorBold value="bold">
                 <svg siBoldIcon></svg>
                 <span class="sr-only">Bold</span>
               </button>
-              <button scEditorItalicToggle value="italic">
+              <button scEditorItalic value="italic">
                 <svg siItalicIcon></svg>
                 <span class="sr-only">Italic</span>
               </button>

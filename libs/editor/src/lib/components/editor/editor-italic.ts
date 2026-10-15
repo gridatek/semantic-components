@@ -3,19 +3,19 @@ import { Directive, computed, inject, input } from '@angular/core';
 import { bindInput, cn, toggleVariants } from '@semantic-components/ui';
 import { SC_EDITOR } from './editor';
 
-/** Aligns the paragraph left. Write its icon and name it (`aria-label` or visually hidden text). */
+/** Italic, on and off. Write its icon and name it (`aria-label` or visually hidden text). */
 @Directive({
-  selector: 'button[scEditorAlignLeftToggle]',
+  selector: 'button[scEditorItalic]',
   hostDirectives: [ToolbarWidget],
   host: {
     type: 'button',
     '[class]': 'class()',
     '[disabled]': 'disabled()',
-    '[attr.aria-pressed]': "editor.alignment() === 'left'",
+    '[attr.aria-pressed]': "editor.isActive('italic')",
     '(click)': 'onClick()',
   },
 })
-export class ScEditorAlignLeftToggle {
+export class ScEditorItalic {
   protected readonly editor = inject(SC_EDITOR);
   readonly classInput = input<string>('', { alias: 'class' });
   readonly disabledInput = input(false, { alias: 'disabled' });
@@ -36,6 +36,6 @@ export class ScEditorAlignLeftToggle {
   }
 
   protected onClick(): void {
-    this.editor.run((chain) => chain.setTextAlign('left'));
+    this.editor.run((chain) => chain.toggleItalic());
   }
 }

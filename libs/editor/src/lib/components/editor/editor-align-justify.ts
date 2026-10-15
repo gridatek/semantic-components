@@ -3,18 +3,19 @@ import { Directive, computed, inject, input } from '@angular/core';
 import { bindInput, cn, toggleVariants } from '@semantic-components/ui';
 import { SC_EDITOR } from './editor';
 
-/** Undoes the last change (disabled when there is none). Write its icon and name it (`aria-label` or visually hidden text). */
+/** Justifies the paragraph. Write its icon and name it (`aria-label` or visually hidden text). */
 @Directive({
-  selector: 'button[scEditorUndoToggle]',
+  selector: 'button[scEditorAlignJustify]',
   hostDirectives: [ToolbarWidget],
   host: {
     type: 'button',
     '[class]': 'class()',
     '[disabled]': 'disabled()',
+    '[attr.aria-pressed]': "editor.alignment() === 'justify'",
     '(click)': 'onClick()',
   },
 })
-export class ScEditorUndoToggle {
+export class ScEditorAlignJustify {
   protected readonly editor = inject(SC_EDITOR);
   readonly classInput = input<string>('', { alias: 'class' });
   readonly disabledInput = input(false, { alias: 'disabled' });
@@ -27,10 +28,7 @@ export class ScEditorUndoToggle {
   );
 
   protected readonly disabled = computed(
-    () =>
-      this.disabledInput() ||
-      !this.editor.editable() ||
-      !this.editor.can((chain) => chain.undo()),
+    () => this.disabledInput() || !this.editor.editable(),
   );
 
   constructor() {
@@ -38,6 +36,6 @@ export class ScEditorUndoToggle {
   }
 
   protected onClick(): void {
-    this.editor.run((chain) => chain.undo());
+    this.editor.run((chain) => chain.setTextAlign('justify'));
   }
 }

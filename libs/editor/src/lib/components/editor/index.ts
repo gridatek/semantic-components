@@ -11,32 +11,26 @@ export * from './editor-header';
 export * from './editor-footer';
 export * from './editor-separator';
 
-// Formatting toggles
-export * from './editor-bold-toggle';
-export * from './editor-italic-toggle';
-export * from './editor-underline-toggle';
-export * from './editor-strikethrough-toggle';
+// Buttons with a state (aria-pressed)
+export * from './editor-bold';
+export * from './editor-italic';
+export * from './editor-underline';
+export * from './editor-strikethrough';
+export * from './editor-code';
+export * from './editor-align-left';
+export * from './editor-align-center';
+export * from './editor-align-right';
+export * from './editor-align-justify';
+export * from './editor-bullet-list';
+export * from './editor-numbered-list';
+export * from './editor-blockquote';
+export * from './editor-link';
 
-// Alignment toggles
-export * from './editor-align-left-toggle';
-export * from './editor-align-center-toggle';
-export * from './editor-align-right-toggle';
-export * from './editor-align-justify-toggle';
-
-// List toggles
-export * from './editor-bullet-list-toggle';
-export * from './editor-numbered-list-toggle';
-
-// Block toggles
-export * from './editor-blockquote-toggle';
-
-// Action toggles
-export * from './editor-undo-toggle';
-export * from './editor-redo-toggle';
-export * from './editor-link-toggle';
-export * from './editor-code-toggle';
-export * from './editor-horizontal-rule-toggle';
-export * from './editor-clear-formatting-toggle';
+// Buttons that run once
+export * from './editor-horizontal-rule';
+export * from './editor-clear-formatting';
+export * from './editor-undo';
+export * from './editor-redo';
 
 // Utility components
 export * from './editor-heading';

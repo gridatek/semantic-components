@@ -3,9 +3,9 @@ import { Directive, computed, inject, input } from '@angular/core';
 import { bindInput, cn, toggleVariants } from '@semantic-components/ui';
 import { SC_EDITOR } from './editor';
 
-/** Clears the selection’s formatting (marks and blocks). Write its icon and name it (`aria-label` or visually hidden text). */
+/** Undoes the last change (disabled when there is none). Write its icon and name it (`aria-label` or visually hidden text). */
 @Directive({
-  selector: 'button[scEditorClearFormattingToggle]',
+  selector: 'button[scEditorUndo]',
   hostDirectives: [ToolbarWidget],
   host: {
     type: 'button',
@@ -14,7 +14,7 @@ import { SC_EDITOR } from './editor';
     '(click)': 'onClick()',
   },
 })
-export class ScEditorClearFormattingToggle {
+export class ScEditorUndo {
   protected readonly editor = inject(SC_EDITOR);
   readonly classInput = input<string>('', { alias: 'class' });
   readonly disabledInput = input(false, { alias: 'disabled' });
@@ -27,7 +27,10 @@ export class ScEditorClearFormattingToggle {
   );
 
   protected readonly disabled = computed(
-    () => this.disabledInput() || !this.editor.editable(),
+    () =>
+      this.disabledInput() ||
+      !this.editor.editable() ||
+      !this.editor.can((chain) => chain.undo()),
   );
 
   constructor() {
@@ -35,6 +38,6 @@ export class ScEditorClearFormattingToggle {
   }
 
   protected onClick(): void {
-    this.editor.run((chain) => chain.clearNodes().unsetAllMarks());
+    this.editor.run((chain) => chain.undo());
   }
 }

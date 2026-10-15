@@ -61,12 +61,12 @@ export class EditorUsageDemoContainer {
 import { FormField, form } from '@angular/forms/signals';
 import {
   ScEditor,
-  ScEditorBoldToggle,
+  ScEditorBold,
   ScEditorContent,
-  ScEditorItalicToggle,
+  ScEditorItalic,
   ScEditorToolbar,
   ScEditorToolbarGroup,
-  ScEditorUnderlineToggle,
+  ScEditorUnderline,
 } from '@semantic-components/editor';
 import {
   SiBoldIcon,
@@ -82,9 +82,9 @@ import {
     ScEditorContent,
     ScEditorToolbar,
     ScEditorToolbarGroup,
-    ScEditorBoldToggle,
-    ScEditorItalicToggle,
-    ScEditorUnderlineToggle,
+    ScEditorBold,
+    ScEditorItalic,
+    ScEditorUnderline,
     SiBoldIcon,
     SiItalicIcon,
     SiUnderlineIcon,
@@ -98,15 +98,15 @@ import {
       >
         <div scEditorToolbar>
           <div scEditorToolbarGroup>
-            <button scEditorBoldToggle value="bold">
+            <button scEditorBold value="bold">
               <svg siBoldIcon></svg>
               <span class="sr-only">Bold</span>
             </button>
-            <button scEditorItalicToggle value="italic">
+            <button scEditorItalic value="italic">
               <svg siItalicIcon></svg>
               <span class="sr-only">Italic</span>
             </button>
-            <button scEditorUnderlineToggle value="underline">
+            <button scEditorUnderline value="underline">
               <svg siUnderlineIcon></svg>
               <span class="sr-only">Underline</span>
             </button>
