@@ -80,3 +80,13 @@ test.describe('Buttons Pagination Demo', () => {
     await expect(firstLink).toHaveAttribute('aria-current', 'page');
   });
 });
+
+test.describe('Buttons Pagination Demo — status', () => {
+  test('the status says the page, and follows it', async ({ page }) => {
+    await page.goto('/demos/pagination/buttons-pagination-demo');
+    const status = page.getByRole('status');
+    await expect(status).toHaveText('Page 1 of 3');
+    await page.getByRole('button', { name: 'Go to next page' }).click();
+    await expect(status).toHaveText('Page 2 of 3');
+  });
+});

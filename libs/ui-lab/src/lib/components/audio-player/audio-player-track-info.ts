@@ -1,38 +1,15 @@
-import {
-  Component,
-  ViewEncapsulation,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
+import { Directive, computed, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { SC_AUDIO_PLAYER } from './audio-player';
 
-@Component({
+/** The track's title and artist: write them from `player.currentTrack()`. */
+@Directive({
   selector: 'div[scAudioPlayerTrackInfo]',
-  template: `
-    @if (player.currentTrack(); as track) {
-      <p class="truncate font-medium">
-        {{ track.title || unknownLabel() }}
-      </p>
-      @if (track.artist) {
-        <p class="text-muted-foreground truncate text-sm">
-          {{ track.artist }}
-        </p>
-      }
-    } @else {
-      <p class="truncate font-medium">{{ unknownLabel() }}</p>
-    }
-  `,
   host: {
+    'data-slot': 'audio-player-track-info',
     '[class]': 'class()',
   },
-  encapsulation: ViewEncapsulation.None,
 })
 export class ScAudioPlayerTrackInfo {
-  readonly player = inject(SC_AUDIO_PLAYER);
-  /** Shown for a track without a title, or no track — write it ("Unknown track"). */
-  readonly unknownLabel = input.required<string>();
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>

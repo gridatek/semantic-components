@@ -1,59 +1,18 @@
-import {
-  Component,
-  ViewEncapsulation,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
-import { ScSlider, cn } from '@semantic-components/ui';
-import { SC_AUDIO_PLAYER } from './audio-player';
+import { Directive, computed, input } from '@angular/core';
+import { cn } from '@semantic-components/ui';
 
-@Component({
+/** The progress row: the current time, the seek bar, the duration. */
+@Directive({
   selector: 'div[scAudioPlayerProgress]',
-  imports: [ScSlider],
-  template: `
-    <span class="text-muted-foreground w-10 text-end text-xs">
-      {{ player.formatTime(player.currentTime()) }}
-    </span>
-    <div class="group relative h-3 flex-1">
-      <!-- Buffered -->
-      <div
-        class="bg-primary/30 pointer-events-none absolute top-1/2 left-0 h-1 -translate-y-1/2 rounded-full transition-[height] group-hover:h-1.5"
-        [style.width.%]="player.bufferedPercent()"
-      ></div>
-      <!-- Seek slider -->
-      <input
-        scSlider
-        [attr.aria-label]="seekLabel()"
-        class="absolute inset-0 h-full [&::-moz-range-progress]:transition-[height] group-hover:[&::-moz-range-progress]:h-1.5 [&::-moz-range-track]:transition-[height] group-hover:[&::-moz-range-track]:h-1.5 [&::-webkit-slider-runnable-track]:transition-[height] group-hover:[&::-webkit-slider-runnable-track]:h-1.5"
-        style="--muted: oklch(0 0 0 / 0.1)"
-        [max]="100"
-        [step]="0.1"
-        [value]="player.progressPercent()"
-        (valueChange)="onSeek($event)"
-      />
-    </div>
-    <span class="text-muted-foreground w-10 text-xs">
-      {{ player.formatTime(player.duration()) }}
-    </span>
-  `,
   host: {
+    'data-slot': 'audio-player-progress',
     '[class]': 'class()',
   },
-  encapsulation: ViewEncapsulation.None,
 })
 export class ScAudioPlayerProgress {
-  readonly player = inject(SC_AUDIO_PLAYER);
-
-  /** The seek slider's name — write it ("Seek"). */
-  readonly seekLabel = input.required<string>();
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
     cn('flex items-center gap-2', this.classInput()),
   );
-
-  protected onSeek(percent: number): void {
-    this.player.seek((percent / 100) * this.player.duration());
-  }
 }

@@ -1,33 +1,15 @@
-import {
-  Component,
-  ViewEncapsulation,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
+import { Directive, computed, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { SC_AUDIO_PLAYER } from './audio-player';
 
-@Component({
+/** The cover's frame: put an `img[scAudioPlayerCoverImage]` in it. */
+@Directive({
   selector: 'div[scAudioPlayerCover]',
-  template: `
-    @if (player.currentTrack(); as track) {
-      @if (track.cover) {
-        <img
-          [src]="track.cover"
-          [alt]="track.title ?? ''"
-          class="size-full object-cover"
-        />
-      }
-    }
-  `,
   host: {
+    'data-slot': 'audio-player-cover',
     '[class]': 'class()',
   },
-  encapsulation: ViewEncapsulation.None,
 })
 export class ScAudioPlayerCover {
-  readonly player = inject(SC_AUDIO_PLAYER);
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>

@@ -8,6 +8,7 @@ import {
   ScPaginationList,
   ScPaginationNext,
   ScPaginationPrevious,
+  ScPaginationStatus,
 } from '@semantic-components/ui';
 import {
   SiChevronLeftIcon,
@@ -25,6 +26,7 @@ import {
     ScPaginationLink,
     ScPaginationNext,
     ScPaginationPrevious,
+    ScPaginationStatus,
     SiChevronLeftIcon,
     SiChevronRightIcon,
     SiEllipsisIcon,
@@ -67,6 +69,9 @@ import {
           </button>
         </li>
       </ul>
+      <p scPaginationStatus class="mt-2 text-center">
+        Page {{ pagination.currentPage() }} of {{ pagination.totalPages() }}
+      </p>
     </nav>
   `,
   host: { class: 'flex w-full justify-center' },

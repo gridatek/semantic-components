@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScButton } from '@semantic-components/ui';
+import { ScButton, ScSlider } from '@semantic-components/ui';
 import {
   ScImageCropper,
   ScImageCropperCanvas,
@@ -9,10 +9,11 @@ import {
   ScImageCropperImage,
   ScImageCropperOverlay,
   ScImageCropperPreview,
+  ScImageCropperPreviewImage,
   ScImageCropperSelection,
+  ScImageCropperZoom,
   ScImageCropperZoomIn,
   ScImageCropperZoomOut,
-  ScImageCropperZoomSlider,
 } from '@semantic-components/ui-lab';
 import { SiZoomInIcon, SiZoomOutIcon } from '@semantic-icons/lucide-icons';
 
@@ -29,8 +30,10 @@ import { SiZoomInIcon, SiZoomOutIcon } from '@semantic-icons/lucide-icons';
     ScImageCropperGrid,
     ScImageCropperZoomIn,
     ScImageCropperZoomOut,
-    ScImageCropperZoomSlider,
+    ScImageCropperZoom,
     ScImageCropperPreview,
+    ScImageCropperPreviewImage,
+    ScSlider,
     ScButton,
     SiZoomInIcon,
     SiZoomOutIcon,
@@ -72,7 +75,18 @@ import { SiZoomInIcon, SiZoomOutIcon } from '@semantic-icons/lucide-icons';
             <svg siZoomOutIcon class="size-4"></svg>
           </button>
 
-          <div scImageCropperZoomSlider zoomLabel="Zoom" class="flex-1"></div>
+          <div class="flex flex-1 items-center gap-2">
+            <input
+              scSlider
+              scImageCropperZoom
+              #zoom="scImageCropperZoom"
+              aria-label="Zoom"
+              class="flex-1"
+            />
+            <span class="text-muted-foreground min-w-[50px] text-center text-sm"
+              >{{ zoom.percent() }}%</span
+            >
+          </div>
 
           <button
             scButton
@@ -93,31 +107,34 @@ import { SiZoomInIcon, SiZoomOutIcon } from '@semantic-icons/lucide-icons';
             <div class="text-muted-foreground text-xs">Large (100x100)</div>
             <div
               scImageCropperPreview
-              alt="Crop preview"
               [width]="100"
               [height]="100"
               class="rounded-full"
-            ></div>
+            >
+              <img scImageCropperPreviewImage alt="Crop preview" />
+            </div>
           </div>
           <div>
             <div class="text-muted-foreground text-xs">Medium (64x64)</div>
             <div
               scImageCropperPreview
-              alt="Crop preview"
               [width]="64"
               [height]="64"
               class="rounded-full"
-            ></div>
+            >
+              <img scImageCropperPreviewImage alt="Crop preview" />
+            </div>
           </div>
           <div>
             <div class="text-muted-foreground text-xs">Small (40x40)</div>
             <div
               scImageCropperPreview
-              alt="Crop preview"
               [width]="40"
               [height]="40"
               class="rounded-full"
-            ></div>
+            >
+              <img scImageCropperPreviewImage alt="Crop preview" />
+            </div>
           </div>
         </div>
       </div>

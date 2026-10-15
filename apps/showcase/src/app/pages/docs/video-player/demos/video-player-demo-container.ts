@@ -20,20 +20,30 @@ import { VideoPlayerDemo } from './video-player-demo';
 export class VideoPlayerDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
+  ScButton,
+  ScPopover,
+  ScPopoverPortal,
+  ScPopoverProvider,
+  ScPopoverTrigger,
+} from '@semantic-components/ui';
+import {
   ScVideoPlayer,
   ScVideoPlayerBigPlay,
   ScVideoPlayerBufferingIndicator,
   ScVideoPlayerControls,
   ScVideoPlayerFullscreen,
+  ScVideoPlayerMute,
   ScVideoPlayerPip,
   ScVideoPlayerPlayPause,
   ScVideoPlayerProgress,
+  ScVideoPlayerSeek,
   ScVideoPlayerSkip,
   ScVideoPlayerSpacer,
-  ScVideoPlayerSpeed,
+  ScVideoPlayerSpeedOption,
   ScVideoPlayerTime,
   ScVideoPlayerToolbar,
   ScVideoPlayerVolume,
+  ScVideoPlayerVolumeSlider,
 } from '@semantic-components/ui-lab';
 import {
   SiLoaderIcon,
@@ -51,6 +61,15 @@ import {
 @Component({
   selector: 'app-video-player-demo',
   imports: [
+    ScButton,
+    ScPopover,
+    ScPopoverPortal,
+    ScPopoverProvider,
+    ScPopoverTrigger,
+    ScVideoPlayerSeek,
+    ScVideoPlayerMute,
+    ScVideoPlayerVolumeSlider,
+    ScVideoPlayerSpeedOption,
     ScVideoPlayer,
     ScVideoPlayerControls,
     ScVideoPlayerPlayPause,
@@ -58,7 +77,6 @@ import {
     ScVideoPlayerVolume,
     ScVideoPlayerTime,
     ScVideoPlayerSkip,
-    ScVideoPlayerSpeed,
     ScVideoPlayerFullscreen,
     ScVideoPlayerPip,
     ScVideoPlayerBigPlay,
@@ -92,7 +110,9 @@ import {
 
       <!-- Controls -->
       <div scVideoPlayerControls>
-        <div scVideoPlayerProgress progressLabel="Video progress"></div>
+        <div scVideoPlayerProgress>
+          <input scVideoPlayerSeek aria-label="Video progress" />
+        </div>
 
         <div scVideoPlayerToolbar>
           <!-- Play/Pause -->
@@ -126,17 +146,15 @@ import {
           </button>
 
           <!-- Volume -->
-          <div
-            scVideoPlayerVolume
-            muteLabel="Mute"
-            unmuteLabel="Unmute"
-            volumeLabel="Volume"
-          >
-            @if (player.isMuted() || player.volume() === 0) {
-              <svg volume-icon siVolumeXIcon></svg>
-            } @else {
-              <svg volume-icon siVolume2Icon></svg>
-            }
+          <div scVideoPlayerVolume>
+            <button scVideoPlayerMute aria-label="Mute">
+              @if (player.isMuted() || player.volume() === 0) {
+                <svg siVolumeXIcon></svg>
+              } @else {
+                <svg siVolume2Icon></svg>
+              }
+            </button>
+            <input scVideoPlayerVolumeSlider aria-label="Volume" />
           </div>
 
           <!-- Time -->
@@ -145,7 +163,33 @@ import {
           <div scVideoPlayerSpacer></div>
 
           <!-- Playback Speed -->
-          <div scVideoPlayerSpeed speedLabel="Playback speed"></div>
+          <div scPopoverProvider side="top" align="center">
+            <button
+              scButton
+              scPopoverTrigger
+              variant="ghost"
+              size="icon"
+              class="text-foreground"
+              aria-label="Playback speed"
+            >
+              <span class="text-xs font-medium"
+                >{{ player.playbackRate() }}×</span
+              >
+            </button>
+            <ng-template scPopoverPortal>
+              <div
+                scPopover
+                aria-label="Playback speed"
+                class="w-auto min-w-20 gap-0 p-1"
+              >
+                @for (speed of speeds; track speed) {
+                  <button [scVideoPlayerSpeedOption]="speed">
+                    {{ speed }}×
+                  </button>
+                }
+              </div>
+            </ng-template>
+          </div>
 
           <!-- Picture in Picture -->
           <button scVideoPlayerPip aria-label="Picture in picture">
@@ -173,6 +217,8 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class VideoPlayerDemo {
+  readonly speeds = [0.5, 0.75, 1, 1.25, 1.5, 2];
+
   readonly sampleVideo =
     'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';
   readonly samplePoster = 'https://picsum.photos/1280/720?random=1';

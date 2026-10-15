@@ -6,7 +6,7 @@ A composable date range picker built from directive primitives. Uses `ScPopoverP
 
 - `ScDateRangePicker` — Orchestrator directive (`div[scDateRangePicker]`)
 - `ScDateRangePickerTrigger` — Trigger button (`button[scDateRangePickerTrigger]`)
-- `ScDateRangePickerFooter` — Footer with cancel and apply buttons (`div[scDateRangePickerFooter]`; their texts: `cancelLabel`, `applyLabel`, required)
+- `ScDateRangePickerFooter` — The footer row (`div[scDateRangePickerFooter]`), holding your buttons with `ScDateRangePickerCancel` (`button[scDateRangePickerCancel]`, closes without the new range) and `ScDateRangePickerApply` (`button[scDateRangePickerApply]`, applies it; disabled until both ends are picked)
 - `ScDateRangePickerPresets` — Presets sidebar container (`div[scDateRangePickerPresets]`)
 - `ScDateRangePickerPreset` — Individual preset button (`button[scDateRangePickerPreset]`)
 
@@ -31,7 +31,10 @@ A composable date range picker built from directive primitives. Uses `ScPopoverP
               <button scCalendarNext>...</button>
             </div>
           </div>
-          <div scDateRangePickerFooter cancelLabel="Cancel" applyLabel="Apply"></div>
+          <div scDateRangePickerFooter>
+            <button scButton variant="outline" size="sm" scDateRangePickerCancel>Cancel</button>
+            <button scButton size="sm" scDateRangePickerApply>Apply</button>
+          </div>
         </div>
       </div>
     </ng-template>
@@ -51,7 +54,10 @@ A composable date range picker built from directive primitives. Uses `ScPopoverP
     </div>
     <div class="p-3">
       <div scCalendar aria-label="Calendar" mode="range" [numberOfMonths]="2" ...>...</div>
-      <div scDateRangePickerFooter cancelLabel="Cancel" applyLabel="Apply"></div>
+      <div scDateRangePickerFooter>
+        <button scButton variant="outline" size="sm" scDateRangePickerCancel>Cancel</button>
+        <button scButton size="sm" scDateRangePickerApply>Apply</button>
+      </div>
     </div>
   </div>
 </div>

@@ -22,14 +22,14 @@ ScToaster (Injectable)
 
 ## Components
 
-| Component            | Selector                | Description                                                  |
-| -------------------- | ----------------------- | ------------------------------------------------------------ |
-| `ScToastStack`       | `<sc-toast-stack>`      | Container that renders all active toasts. Place once in app. |
-| `ScToast`            | `div[scToast]`          | Individual toast wrapper with variant styling                |
-| `ScToastTitle`       | `[scToastTitle]`        | Toast title text                                             |
-| `ScToastDescription` | `[scToastDescription]`  | Toast description text                                       |
-| `ScToastAction`      | `button[scToastAction]` | Action button inside toast                                   |
-| `ScToastClose`       | `button[scToastClose]`  | Close button to dismiss toast                                |
+| Component            | Selector                | Description                                                                                                  |
+| -------------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `ScToastStack`       | `<sc-toast-stack>`      | Renders the active toasts. `ScToaster` creates it in an overlay on the first toast: don't place it yourself. |
+| `ScToast`            | `div[scToast]`          | Individual toast wrapper with variant styling                                                                |
+| `ScToastTitle`       | `[scToastTitle]`        | Toast title text                                                                                             |
+| `ScToastDescription` | `[scToastDescription]`  | Toast description text                                                                                       |
+| `ScToastAction`      | `button[scToastAction]` | Action button inside toast                                                                                   |
+| `ScToastClose`       | `button[scToastClose]`  | Close button to dismiss toast                                                                                |
 
 ## Service
 
@@ -69,14 +69,7 @@ interface ToastConfig {
 
 ## Usage
 
-### 1. Add ScToastStack to your app (once)
-
-```html
-<!-- In your app.component.html or layout -->
-<sc-toast-stack />
-```
-
-### 2. Name the close buttons (once)
+### 1. Name the close buttons (once)
 
 The library writes no text: give the toasts' close buttons their name once, at the app's start (development warns when a toast is shown without it).
 
@@ -88,7 +81,7 @@ export class App {
 }
 ```
 
-### 3. Inject ScToaster and show toasts
+### 2. Inject ScToaster and show toasts
 
 ```typescript
 import { Component, inject } from '@angular/core';

@@ -1,48 +1,27 @@
-import {
-  Component,
-  ViewEncapsulation,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
-import { ScSlider, cn } from '@semantic-components/ui';
+import { Directive, computed, inject, input } from '@angular/core';
+import { cn } from '@semantic-components/ui';
 import { SC_VIDEO_PLAYER } from './video-player';
 
-@Component({
+/** The seek bar, over the controls: what is buffered under it, and your `input[scVideoPlayerSeek]` in it. */
+@Directive({
   selector: 'div[scVideoPlayerProgress]',
-  imports: [ScSlider],
-  template: `
-    <!-- Buffered -->
-    <div
-      class="pointer-events-none absolute top-1/2 left-0 h-1 -translate-y-1/2 rounded-full bg-white/50 transition-[height] group-hover:h-1.5"
-      [style.width.%]="player.bufferedPercent()"
-    ></div>
-    <!-- Seek slider -->
-    <input
-      scSlider
-      class="absolute inset-0 h-full [&::-moz-range-progress]:transition-[height] group-hover:[&::-moz-range-progress]:h-1.5 [&::-moz-range-track]:transition-[height] group-hover:[&::-moz-range-track]:h-1.5 [&::-webkit-slider-runnable-track]:transition-[height] group-hover:[&::-webkit-slider-runnable-track]:h-1.5"
-      [attr.aria-label]="progressLabel()"
-      [max]="100"
-      [step]="0.1"
-      [value]="player.progressPercent()"
-      (valueChange)="player.seek($event)"
-    />
-  `,
   host: {
-    '[class]': 'class()',
+    'data-slot': 'video-player-progress',
+    '[style.--buffered]': 'player.bufferedPercent() + "%"',
     '[style.--primary]': '"oklch(1 0 0)"',
     '[style.--muted]': '"oklch(1 0 0 / 0.3)"',
     '[style.--ring]': '"oklch(1 0 0 / 0.5)"',
+    '[class]': 'class()',
   },
-  encapsulation: ViewEncapsulation.None,
 })
 export class ScVideoPlayerProgress {
   protected readonly player = inject(SC_VIDEO_PLAYER);
-  /** The progress slider's name — write it ("Video progress"). */
-  readonly progressLabel = input.required<string>();
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('group relative mb-2 block h-3', this.classInput()),
+    cn(
+      'relative mb-2 block h-3 before:bg-white/50 before:pointer-events-none before:absolute before:start-0 before:top-1/2 before:h-1 before:w-(--buffered) before:-translate-y-1/2 before:rounded-full before:transition-[height] hover:before:h-1.5 [&>input]:absolute [&>input]:inset-0 [&>input]:h-full',
+      this.classInput(),
+    ),
   );
 }

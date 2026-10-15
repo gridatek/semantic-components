@@ -20,6 +20,7 @@ import { BasicDateRangePickerDemo } from './basic-date-range-picker-demo';
 export class BasicDateRangePickerDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
+  ScButton,
   ScCalendar,
   ScCalendarHeader,
   ScCalendarHeading,
@@ -32,6 +33,8 @@ import {
 } from '@semantic-components/ui';
 import {
   ScDateRangePicker,
+  ScDateRangePickerApply,
+  ScDateRangePickerCancel,
   ScDateRangePickerFooter,
   ScDateRangePickerTrigger,
 } from '@semantic-components/ui-lab';
@@ -44,8 +47,11 @@ import {
 @Component({
   selector: 'app-basic-date-range-picker-demo',
   imports: [
+    ScButton,
     ScDateRangePicker,
     ScDateRangePickerTrigger,
+    ScDateRangePickerApply,
+    ScDateRangePickerCancel,
     ScDateRangePickerFooter,
     ScPopoverProvider,
     ScPopoverPortal,
@@ -122,11 +128,19 @@ import {
                     </button>
                   </div>
                 </div>
-                <div
-                  scDateRangePickerFooter
-                  cancelLabel="Cancel"
-                  applyLabel="Apply"
-                ></div>
+                <div scDateRangePickerFooter>
+                  <button
+                    scButton
+                    variant="outline"
+                    size="sm"
+                    scDateRangePickerCancel
+                  >
+                    Cancel
+                  </button>
+                  <button scButton size="sm" scDateRangePickerApply>
+                    Apply
+                  </button>
+                </div>
               </div>
             </div>
           </ng-template>

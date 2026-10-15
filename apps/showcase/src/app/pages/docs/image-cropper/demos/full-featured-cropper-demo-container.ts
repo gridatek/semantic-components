@@ -19,7 +19,7 @@ import { FullFeaturedCropperDemo } from './full-featured-cropper-demo';
 })
 export class FullFeaturedCropperDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScButton } from '@semantic-components/ui';
+import { ScButton, ScSlider } from '@semantic-components/ui';
 import {
   ScImageCropper,
   ScImageCropperAspectRatio,
@@ -33,14 +33,15 @@ import {
   ScImageCropperImage,
   ScImageCropperOverlay,
   ScImageCropperPreview,
+  ScImageCropperPreviewImage,
   ScImageCropperReset,
   ScImageCropperResult,
   ScImageCropperRotateLeft,
   ScImageCropperRotateRight,
   ScImageCropperSelection,
+  ScImageCropperZoom,
   ScImageCropperZoomIn,
   ScImageCropperZoomOut,
-  ScImageCropperZoomSlider,
 } from '@semantic-components/ui-lab';
 import {
   SiFlipHorizontal2Icon,
@@ -64,13 +65,15 @@ import {
     ScImageCropperGrid,
     ScImageCropperZoomIn,
     ScImageCropperZoomOut,
-    ScImageCropperZoomSlider,
+    ScImageCropperZoom,
     ScImageCropperRotateLeft,
     ScImageCropperRotateRight,
     ScImageCropperFlipH,
     ScImageCropperFlipV,
     ScImageCropperAspectRatio,
     ScImageCropperPreview,
+    ScImageCropperPreviewImage,
+    ScSlider,
     ScImageCropperReset,
     ScImageCropperFileInput,
     ScButton,
@@ -166,7 +169,18 @@ import {
             <svg siZoomOutIcon class="size-4"></svg>
           </button>
 
-          <div scImageCropperZoomSlider zoomLabel="Zoom"></div>
+          <div class="flex items-center gap-2">
+            <input
+              scSlider
+              scImageCropperZoom
+              #zoom="scImageCropperZoom"
+              aria-label="Zoom"
+              class="flex-1"
+            />
+            <span class="text-muted-foreground min-w-[50px] text-center text-sm"
+              >{{ zoom.percent() }}%</span
+            >
+          </div>
 
           <button
             scButton
@@ -232,11 +246,12 @@ import {
           <p class="text-sm font-medium">Preview:</p>
           <div
             scImageCropperPreview
-            alt="Crop preview"
             [width]="150"
             [height]="150"
             class="rounded-md border"
-          ></div>
+          >
+            <img scImageCropperPreviewImage alt="Crop preview" />
+          </div>
         </div>
       </div>
     </div>

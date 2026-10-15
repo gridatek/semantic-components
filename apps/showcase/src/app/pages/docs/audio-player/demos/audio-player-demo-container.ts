@@ -21,16 +21,26 @@ export class AudioPlayerDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScAudioPlayer,
+  ScAudioPlayerArtist,
   ScAudioPlayerControls,
   ScAudioPlayerCover,
+  ScAudioPlayerCoverImage,
+  ScAudioPlayerCurrentTime,
+  ScAudioPlayerDuration,
+  ScAudioPlayerMaxVolume,
+  ScAudioPlayerMute,
   ScAudioPlayerNext,
   ScAudioPlayerPlay,
   ScAudioPlayerPrevious,
   ScAudioPlayerProgress,
   ScAudioPlayerRepeat,
+  ScAudioPlayerSeek,
+  ScAudioPlayerSeekBar,
   ScAudioPlayerShuffle,
+  ScAudioPlayerTitle,
   ScAudioPlayerTrackInfo,
   ScAudioPlayerVolume,
+  ScAudioPlayerVolumeSlider,
   ScAudioTrack,
 } from '@semantic-components/ui-lab';
 import {
@@ -41,11 +51,27 @@ import {
   SiShuffleIcon,
   SiSkipBackIcon,
   SiSkipForwardIcon,
+  SiVolume1Icon,
+  SiVolume2Icon,
+  SiVolumeXIcon,
 } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-audio-player-demo',
   imports: [
+    SiVolumeXIcon,
+    SiVolume1Icon,
+    SiVolume2Icon,
+    ScAudioPlayerCoverImage,
+    ScAudioPlayerTitle,
+    ScAudioPlayerArtist,
+    ScAudioPlayerCurrentTime,
+    ScAudioPlayerSeekBar,
+    ScAudioPlayerSeek,
+    ScAudioPlayerDuration,
+    ScAudioPlayerMute,
+    ScAudioPlayerVolumeSlider,
+    ScAudioPlayerMaxVolume,
     ScAudioPlayer,
     ScAudioPlayerCover,
     ScAudioPlayerTrackInfo,
@@ -68,13 +94,28 @@ import {
   template: \`
     <div scAudioPlayer #player="scAudioPlayer" [tracks]="tracks">
       <!-- Cover -->
-      <div scAudioPlayerCover></div>
+      <div scAudioPlayerCover>
+        <img scAudioPlayerCoverImage alt="" />
+      </div>
 
       <!-- Track Info -->
-      <div scAudioPlayerTrackInfo unknownLabel="Unknown track"></div>
+      <div scAudioPlayerTrackInfo>
+        <p scAudioPlayerTitle>
+          {{ player.currentTrack()?.title || 'Unknown track' }}
+        </p>
+        @if (player.currentTrack()?.artist; as artist) {
+          <p scAudioPlayerArtist>{{ artist }}</p>
+        }
+      </div>
 
       <!-- Progress -->
-      <div scAudioPlayerProgress seekLabel="Seek"></div>
+      <div scAudioPlayerProgress>
+        <span scAudioPlayerCurrentTime class="text-end"></span>
+        <div scAudioPlayerSeekBar>
+          <input scAudioPlayerSeek aria-label="Seek" />
+        </div>
+        <span scAudioPlayerDuration></span>
+      </div>
 
       <!-- Controls -->
       <div scAudioPlayerControls>
@@ -110,13 +151,19 @@ import {
       </div>
 
       <!-- Volume -->
-      <div
-        scAudioPlayerVolume
-        muteLabel="Mute"
-        unmuteLabel="Unmute"
-        volumeLabel="Volume"
-        maxVolumeLabel="Max volume"
-      ></div>
+      <div scAudioPlayerVolume>
+        <button scAudioPlayerMute aria-label="Mute">
+          @if (player.isMuted() || player.volume() === 0) {
+            <svg siVolumeXIcon></svg>
+          } @else {
+            <svg siVolume1Icon></svg>
+          }
+        </button>
+        <input scAudioPlayerVolumeSlider aria-label="Volume" class="w-24" />
+        <button scAudioPlayerMaxVolume aria-label="Full volume">
+          <svg siVolume2Icon></svg>
+        </button>
+      </div>
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },

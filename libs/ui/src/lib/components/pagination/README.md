@@ -14,6 +14,7 @@ Pagination with page navigation, next and previous links. Supports both manual a
 - `ScPaginationLast` - Last page link/button
 - `ScPaginationEllipsis` - Ellipsis indicator
 - `ScPaginationPageSizeSelect` - Page size selector (select dropdown)
+- `ScPaginationStatus` - Says which page is shown and announces it on change (`role="status"`): write `Page {{ p.currentPage() }} of {{ p.totalPages() }}`, visible or `sr-only`
 
 ## Features
 
@@ -340,9 +341,10 @@ interface ScPaginationChange {
 
 ## Accessibility
 
-- Uses `role="navigation"` with `aria-label="pagination"`
+- A `nav`: name it (`aria-label`), uniquely when there are several on a page
 - Active page has `aria-current="page"`
-- Previous/Next/First/Last have `aria-label` for screen readers
+- Previous/Next/First/Last: name them (`aria-label`, "Go to next page") — the library writes no text
+- Page changes are announced with a `scPaginationStatus` you write
 - Disabled state uses `aria-disabled` attribute with automatic styling
 - Ellipsis is `aria-hidden` with `.sr-only` text
 - Focus ring for keyboard navigation

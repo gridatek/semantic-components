@@ -11,7 +11,7 @@ import { SC_FIELD } from '../field';
     '[attr.id]': 'id()',
     '[min]': 'resolvedMin()',
     '[max]': 'resolvedMax()',
-    '[attr.step]': 'step()',
+    '[step]': 'step()',
     '[attr.aria-describedby]': 'ariaDescribedBy()',
     '[class]': 'class()',
     '[value]': 'value()',

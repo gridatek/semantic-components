@@ -7,34 +7,43 @@ Feature-rich composable audio player with playlist support, shuffle, repeat, and
 The audio player follows the composable architecture pattern, allowing full customization of layout and controls.
 
 ```
-ScAudioPlayer (Root - State Management)
-    ├── ScAudioPlayerAudio (Hidden audio element)
-    ├── ScAudioPlayerCover (Album artwork)
-    ├── ScAudioPlayerInfo (Track title/artist)
-    ├── ScAudioPlayerProgress (Seekable progress bar)
-    ├── ScAudioPlayerPlayButton (Play/pause)
-    ├── ScAudioPlayerPrevious (Previous track)
-    ├── ScAudioPlayerNext (Next track)
-    ├── ScAudioPlayerShuffle (Shuffle toggle)
-    ├── ScAudioPlayerRepeat (Repeat mode)
-    └── ScAudioPlayerVolume (Volume slider + mute)
+ScAudioPlayer (state: tracks, playing, time, volume)
+    ├── ScAudioPlayerAudio (the audio element)
+    ├── ScAudioPlayerCover → ScAudioPlayerCoverImage (your img, your alt)
+    ├── ScAudioPlayerTrackInfo → ScAudioPlayerTitle, ScAudioPlayerArtist (your text)
+    ├── ScAudioPlayerProgress → ScAudioPlayerCurrentTime, ScAudioPlayerSeekBar → ScAudioPlayerSeek, ScAudioPlayerDuration
+    ├── ScAudioPlayerControls → ScAudioPlayerShuffle, …Previous, …Play, …Next, …Repeat
+    └── ScAudioPlayerVolume → ScAudioPlayerMute, ScAudioPlayerVolumeSlider, ScAudioPlayerMaxVolume
 ```
 
-## Components
+You write every element, icon and name; the parts add the behaviour and the styles. Buttons and sliders are named by you (`aria-label`) — in development, an unnamed one warns.
 
-| Component                 | Selector                          | Description                                                                        |
-| ------------------------- | --------------------------------- | ---------------------------------------------------------------------------------- |
-| `ScAudioPlayer`           | `[scAudioPlayer]`                 | Root directive (state manager)                                                     |
-| `ScAudioPlayerAudio`      | `audio[scAudioPlayerAudio]`       | Hidden audio element                                                               |
-| `ScAudioPlayerCover`      | `div[scAudioPlayerCover]`         | Album artwork display                                                              |
-| `ScAudioPlayerInfo`       | `div[scAudioPlayerInfo]`          | Track title and artist                                                             |
-| `ScAudioPlayerProgress`   | `div[scAudioPlayerProgress]`      | Progress bar with seek (`seekLabel`)                                               |
-| `ScAudioPlayerPlayButton` | `button[scAudioPlayerPlayButton]` | Play/pause button                                                                  |
-| `ScAudioPlayerPrevious`   | `button[scAudioPlayerPrevious]`   | Previous track button                                                              |
-| `ScAudioPlayerNext`       | `button[scAudioPlayerNext]`       | Next track button                                                                  |
-| `ScAudioPlayerShuffle`    | `button[scAudioPlayerShuffle]`    | Shuffle toggle                                                                     |
-| `ScAudioPlayerRepeat`     | `button[scAudioPlayerRepeat]`     | Repeat cycle button                                                                |
-| `ScAudioPlayerVolume`     | `div[scAudioPlayerVolume]`        | Volume slider + mute (`muteLabel`, `unmuteLabel`, `volumeLabel`, `maxVolumeLabel`) |
+## Parts
+
+| Part                        | Selector                           | Does                                                             |
+| --------------------------- | ---------------------------------- | ---------------------------------------------------------------- |
+| `ScAudioPlayer`             | `[scAudioPlayer]`                  | The state (`exportAs: 'scAudioPlayer'`)                          |
+| `ScAudioPlayerAudio`        | `audio[scAudioPlayerAudio]`        | The audio element                                                |
+| `ScAudioPlayerCover`        | `div[scAudioPlayerCover]`          | The cover's frame                                                |
+| `ScAudioPlayerCoverImage`   | `img[scAudioPlayerCoverImage]`     | The current track's cover (hidden without one): write its `alt`  |
+| `ScAudioPlayerTrackInfo`    | `div[scAudioPlayerTrackInfo]`      | The title and artist, from `player.currentTrack()`               |
+| `ScAudioPlayerTitle`        | `[scAudioPlayerTitle]`             | The title                                                        |
+| `ScAudioPlayerArtist`       | `[scAudioPlayerArtist]`            | The artist                                                       |
+| `ScAudioPlayerProgress`     | `div[scAudioPlayerProgress]`       | The progress row                                                 |
+| `ScAudioPlayerCurrentTime`  | `span[scAudioPlayerCurrentTime]`   | How far it has played                                            |
+| `ScAudioPlayerSeekBar`      | `div[scAudioPlayerSeekBar]`        | The bar: what is buffered, under the seek slider                 |
+| `ScAudioPlayerSeek`         | `input[scAudioPlayerSeek]`         | Seeks (a slider)                                                 |
+| `ScAudioPlayerDuration`     | `span[scAudioPlayerDuration]`      | How long the track is                                            |
+| `ScAudioPlayerControls`     | `div[scAudioPlayerControls]`       | The buttons' row                                                 |
+| `ScAudioPlayerPlay`         | `button[scAudioPlayerPlay]`        | Plays and pauses                                                 |
+| `ScAudioPlayerPrevious`     | `button[scAudioPlayerPrevious]`    | The previous track                                               |
+| `ScAudioPlayerNext`         | `button[scAudioPlayerNext]`        | The next track                                                   |
+| `ScAudioPlayerShuffle`      | `button[scAudioPlayerShuffle]`     | Shuffle on and off                                               |
+| `ScAudioPlayerRepeat`       | `button[scAudioPlayerRepeat]`      | Repeat: none, all, one                                           |
+| `ScAudioPlayerVolume`       | `div[scAudioPlayerVolume]`         | The volume row                                                   |
+| `ScAudioPlayerMute`         | `button[scAudioPlayerMute]`        | Mutes and unmutes: `aria-pressed` while muted, one name ("Mute") |
+| `ScAudioPlayerVolumeSlider` | `input[scAudioPlayerVolumeSlider]` | The volume, 0 to 1 (a slider; disabled while muted)              |
+| `ScAudioPlayerMaxVolume`    | `button[scAudioPlayerMaxVolume]`   | Full volume                                                      |
 
 ## API
 
@@ -90,13 +99,19 @@ readonly tracks: ScAudioTrack[] = [
 ```html
 <div scAudioPlayer #player="scAudioPlayer" [tracks]="tracks" class="bg-card flex flex-col gap-3 rounded-lg border p-4">
   <!-- Cover -->
-  <div scAudioPlayerCover class="mx-auto aspect-square w-full max-w-[200px]"></div>
+  <div scAudioPlayerCover class="mx-auto aspect-square w-full max-w-[200px]">
+    <img scAudioPlayerCoverImage alt="" />
+  </div>
 
   <!-- Track Info -->
   <div scAudioPlayerInfo class="text-center"></div>
 
   <!-- Progress -->
-  <div scAudioPlayerProgress seekLabel="Seek"></div>
+  <div scAudioPlayerProgress>
+    <span scAudioPlayerCurrentTime></span>
+    <div scAudioPlayerSeekBar><input scAudioPlayerSeek aria-label="Seek" /></div>
+    <span scAudioPlayerDuration></span>
+  </div>
 
   <!-- Controls -->
   <div class="flex items-center justify-center gap-2">
@@ -108,7 +123,11 @@ readonly tracks: ScAudioTrack[] = [
   </div>
 
   <!-- Volume -->
-  <div scAudioPlayerVolume muteLabel="Mute" unmuteLabel="Unmute" volumeLabel="Volume" maxVolumeLabel="Max volume" class="justify-center"></div>
+  <div scAudioPlayerVolume class="justify-center">
+    <button scAudioPlayerMute aria-label="Mute"><svg siVolume1Icon></svg></button>
+    <input scAudioPlayerVolumeSlider aria-label="Volume" class="w-24" />
+    <button scAudioPlayerMaxVolume aria-label="Full volume"><svg siVolume2Icon></svg></button>
+  </div>
 
   <!-- Hidden Audio Element -->
   <audio scAudioPlayerAudio></audio>
@@ -121,7 +140,9 @@ Horizontal layout for sidebars:
 
 ```html
 <div scAudioPlayer #player="scAudioPlayer" [tracks]="tracks" class="bg-card flex items-center gap-4 rounded-lg border p-4">
-  <div scAudioPlayerCover class="size-16"></div>
+  <div scAudioPlayerCover class="size-16">
+    <img scAudioPlayerCoverImage alt="" />
+  </div>
   <div scAudioPlayerInfo class="min-w-0 flex-1"></div>
   <div class="flex items-center gap-2">
     <button scAudioPlayerPrevious aria-label="Previous track"></button>
@@ -138,7 +159,9 @@ Simple player without extra controls:
 
 ```html
 <div scAudioPlayer #player="scAudioPlayer" [tracks]="tracks" class="bg-card flex items-center gap-2 rounded-lg border p-2">
-  <div scAudioPlayerCover class="size-10"></div>
+  <div scAudioPlayerCover class="size-10">
+    <img scAudioPlayerCoverImage alt="" />
+  </div>
   <div scAudioPlayerInfo class="min-w-0 flex-1"></div>
   <button scAudioPlayerPrevious aria-label="Previous track"></button>
   <button scAudioPlayerPlayButton></button>
@@ -151,7 +174,11 @@ Simple player without extra controls:
 
 ```html
 <div scAudioPlayer #player="scAudioPlayer" [tracks]="tracks" class="bg-card flex flex-col gap-3 rounded-lg border p-4">
-  <div scAudioPlayerProgress seekLabel="Seek"></div>
+  <div scAudioPlayerProgress>
+    <span scAudioPlayerCurrentTime></span>
+    <div scAudioPlayerSeekBar><input scAudioPlayerSeek aria-label="Seek" /></div>
+    <span scAudioPlayerDuration></span>
+  </div>
   <div class="flex items-center justify-center gap-2">
     <button scAudioPlayerPlayButton></button>
   </div>
@@ -168,16 +195,26 @@ Create any layout you want:
   <div class="bg-card grid grid-cols-2 gap-4 rounded-lg border p-6">
     <!-- Left Column -->
     <div class="space-y-4">
-      <div scAudioPlayerCover class="aspect-square w-full"></div>
+      <div scAudioPlayerCover class="aspect-square w-full">
+        <img scAudioPlayerCoverImage alt="" />
+      </div>
       <div scAudioPlayerInfo></div>
     </div>
 
     <!-- Right Column -->
     <div class="flex flex-col justify-between">
-      <div scAudioPlayerVolume muteLabel="Mute" unmuteLabel="Unmute" volumeLabel="Volume" maxVolumeLabel="Max volume"></div>
+      <div scAudioPlayerVolume>
+        <button scAudioPlayerMute aria-label="Mute"><svg siVolume1Icon></svg></button>
+        <input scAudioPlayerVolumeSlider aria-label="Volume" class="w-24" />
+        <button scAudioPlayerMaxVolume aria-label="Full volume"><svg siVolume2Icon></svg></button>
+      </div>
 
       <div class="space-y-4">
-        <div scAudioPlayerProgress seekLabel="Seek"></div>
+        <div scAudioPlayerProgress>
+          <span scAudioPlayerCurrentTime></span>
+          <div scAudioPlayerSeekBar><input scAudioPlayerSeek aria-label="Seek" /></div>
+          <span scAudioPlayerDuration></span>
+        </div>
         <div class="flex justify-center gap-2">
           <button scAudioPlayerShuffle aria-label="Shuffle"></button>
           <button scAudioPlayerPrevious aria-label="Previous track"></button>
@@ -199,8 +236,14 @@ Each component accepts a `class` input:
 
 ```html
 <button scAudioPlayerPlayButton class="size-16 bg-blue-500"></button>
-<div scAudioPlayerCover class="size-32 rounded-full"></div>
-<div scAudioPlayerProgress seekLabel="Seek" class="gap-4"></div>
+<div scAudioPlayerCover class="size-32 rounded-full">
+  <img scAudioPlayerCoverImage alt="" />
+</div>
+<div scAudioPlayerProgress class="gap-4">
+  <span scAudioPlayerCurrentTime></span>
+  <div scAudioPlayerSeekBar><input scAudioPlayerSeek aria-label="Seek" /></div>
+  <span scAudioPlayerDuration></span>
+</div>
 ```
 
 ### Controlled State

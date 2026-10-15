@@ -1,60 +1,24 @@
-import {
-  Component,
-  ViewEncapsulation,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
-import { ScSlider, buttonVariants, cn } from '@semantic-components/ui';
-import { SC_VIDEO_PLAYER } from './video-player';
+import { Directive, computed, input } from '@angular/core';
+import { cn } from '@semantic-components/ui';
 
-@Component({
+/** The volume: mute, and the volume slider shown on hover. */
+@Directive({
   selector: 'div[scVideoPlayerVolume]',
-  imports: [ScSlider],
-  template: `
-    <button
-      type="button"
-      (click)="player.toggleMute()"
-      [class]="buttonClass()"
-      [attr.aria-label]="player.isMuted() ? unmuteLabel() : muteLabel()"
-    >
-      <ng-content select="[volume-icon]" />
-    </button>
-    <input
-      scSlider
-      class="h-1 w-0 cursor-pointer opacity-0 transition-all duration-200 group-hover/volume:w-20 group-hover/volume:opacity-100"
-      [max]="1"
-      [step]="0.01"
-      [value]="player.volume()"
-      (valueChange)="player.setVolume($event)"
-      [attr.aria-label]="volumeLabel()"
-    />
-  `,
   host: {
-    '[class]': 'class()',
+    'data-slot': 'video-player-volume',
     '[style.--primary]': '"oklch(1 0 0)"',
     '[style.--muted]': '"oklch(1 0 0 / 0.3)"',
     '[style.--ring]': '"oklch(1 0 0 / 0.5)"',
+    '[class]': 'class()',
   },
-  encapsulation: ViewEncapsulation.None,
 })
 export class ScVideoPlayerVolume {
-  protected readonly player = inject(SC_VIDEO_PLAYER);
-  /** The names of its controls — write them ("Mute", "Unmute", "Volume"). */
-  readonly muteLabel = input.required<string>();
-  readonly unmuteLabel = input.required<string>();
-  readonly volumeLabel = input.required<string>();
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('group/volume flex items-center gap-1', this.classInput()),
-  );
-
-  protected readonly buttonClass = computed(() =>
     cn(
-      buttonVariants({ variant: 'ghost', size: 'icon' }),
-      'text-foreground',
-      '[&_svg]:size-5',
+      'group/volume flex items-center gap-1 [&_[data-slot=video-player-volume-slider]]:h-1 [&_[data-slot=video-player-volume-slider]]:w-0 [&_[data-slot=video-player-volume-slider]]:opacity-0 [&_[data-slot=video-player-volume-slider]]:transition-all hover:[&_[data-slot=video-player-volume-slider]]:w-20 hover:[&_[data-slot=video-player-volume-slider]]:opacity-100 focus-within:[&_[data-slot=video-player-volume-slider]]:w-20 focus-within:[&_[data-slot=video-player-volume-slider]]:opacity-100',
+      this.classInput(),
     ),
   );
 }

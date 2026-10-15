@@ -30,7 +30,9 @@ import {
   template: `
     <div scVideoPlayer aria-label="Video player" #player="scVideoPlayer" [src]="'video.mp4'" [poster]="'poster.jpg'">
       <div scVideoPlayerControls>
-        <div scVideoPlayerProgress progressLabel="Video progress"></div>
+        <div scVideoPlayerProgress>
+      <input scVideoPlayerSeek aria-label="Video progress" />
+    </div>
         <div scVideoPlayerToolbar>
           <button scVideoPlayerPlayPause [attr.aria-label]="player.isPlaying() ? 'Pause' : 'Play'">
             <!-- Play/pause icon -->
@@ -76,16 +78,14 @@ import {
 
 - Seek bar with buffering indicator
 - **Selector**: `div[scVideoPlayerProgress]`
-- Shows buffered ranges and current progress
-- **Inputs**: `progressLabel` (required) — the slider's name
+- Shows what is buffered, under your `input[scVideoPlayerSeek]` (the seek slider: name it)
 
-The other parts with built-in controls take their texts too: `scVideoPlayerVolume` (`muteLabel`, `unmuteLabel`, `volumeLabel`), `scVideoPlayerSpeed` (`speedLabel`). Buttons are named in your markup (`aria-label`, or `[attr.aria-label]` with the player's state).
+You write every control and name it (`aria-label`, or `[attr.aria-label]` from the player's state); the parts add the behaviour and styles.
 
 **`ScVideoPlayerVolume`**
 
-- Volume control with mute button and slider
+- The volume: holds `button[scVideoPlayerMute]` (mutes and unmutes, `aria-pressed` while muted — one name, "Mute") and `input[scVideoPlayerVolumeSlider]` (the volume, shown on hover or focus)
 - **Selector**: `div[scVideoPlayerVolume]`
-- Requires `[volume-icon]` selector for icon content
 
 **`ScVideoPlayerTime`**
 
@@ -99,11 +99,10 @@ The other parts with built-in controls take their texts too: `scVideoPlayerVolum
 - **Selector**: `button[scVideoPlayerSkip]`
 - **Inputs**: `seconds` (required) — name it with `aria-label`
 
-**`ScVideoPlayerSpeed`**
+**`ScVideoPlayerSpeedOption`**
 
-- Playback speed menu
-- **Selector**: `div[scVideoPlayerSpeed]`
-- **Inputs**: `speeds` (default: `[0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2]`)
+- A playback speed in your menu (a popover of yours): `[scVideoPlayerSpeedOption]="1.5"` sets it, `aria-pressed` when it is the player's
+- **Selector**: `button[scVideoPlayerSpeedOption]`
 
 **`ScVideoPlayerFullscreen`**
 
@@ -149,7 +148,9 @@ The other parts with built-in controls take their texts too: `scVideoPlayerVolum
 ```html
 <div scVideoPlayer aria-label="Video player" [src]="video">
   <div scVideoPlayerControls>
-    <div scVideoPlayerProgress progressLabel="Video progress"></div>
+    <div scVideoPlayerProgress>
+      <input scVideoPlayerSeek aria-label="Video progress" />
+    </div>
     <div scVideoPlayerToolbar>
       <button scVideoPlayerPlayPause [attr.aria-label]="player.isPlaying() ? 'Pause' : 'Play'">⏯</button>
       <span scVideoPlayerTime></span>
@@ -169,22 +170,34 @@ The other parts with built-in controls take their texts too: `scVideoPlayerVolum
   </button>
 
   <div scVideoPlayerControls>
-    <div scVideoPlayerProgress progressLabel="Video progress"></div>
+    <div scVideoPlayerProgress>
+      <input scVideoPlayerSeek aria-label="Video progress" />
+    </div>
 
     <div scVideoPlayerToolbar>
       <button scVideoPlayerPlayPause [attr.aria-label]="player.isPlaying() ? 'Pause' : 'Play'">⏯</button>
       <button scVideoPlayerSkip [seconds]="-10">⏪</button>
       <button scVideoPlayerSkip [seconds]="10">⏩</button>
 
-      <div scVideoPlayerVolume muteLabel="Mute" unmuteLabel="Unmute" volumeLabel="Volume">
-        <svg volume-icon><!-- Volume icon --></svg>
+      <div scVideoPlayerVolume>
+        <button scVideoPlayerMute aria-label="Mute"><!-- your icon, from player.isMuted() --></button>
+        <input scVideoPlayerVolumeSlider aria-label="Volume" />
       </div>
 
       <span scVideoPlayerTime class="ml-2"></span>
 
       <div scVideoPlayerSpacer></div>
 
-      <div scVideoPlayerSpeed speedLabel="Playback speed"></div>
+      <div scPopoverProvider side="top">
+        <button scButton scPopoverTrigger variant="ghost" size="icon" aria-label="Playback speed">{{ player.playbackRate() }}×</button>
+        <ng-template scPopoverPortal>
+          <div scPopover aria-label="Playback speed">
+            @for (speed of [0.5, 1, 1.5, 2]; track speed) {
+            <button [scVideoPlayerSpeedOption]="speed">{{ speed }}×</button>
+            }
+          </div>
+        </ng-template>
+      </div>
       <button scVideoPlayerPip aria-label="Picture in picture">PiP</button>
       <button scVideoPlayerFullscreen [attr.aria-label]="player.isFullscreen() ? 'Exit fullscreen' : 'Enter fullscreen'">⛶</button>
     </div>

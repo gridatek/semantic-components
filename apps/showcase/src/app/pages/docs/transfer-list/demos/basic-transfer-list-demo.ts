@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { ScButton } from '@semantic-components/ui';
 import {
   ScTransferList,
   ScTransferListActions,
@@ -6,12 +7,22 @@ import {
   ScTransferListHeader,
   ScTransferListItem,
   ScTransferListItems,
+  ScTransferListMoveAllToSource,
+  ScTransferListMoveAllToTarget,
+  ScTransferListMoveToSource,
+  ScTransferListMoveToTarget,
   ScTransferListSearch,
   ScTransferListSelectAll,
   ScTransferListSource,
   ScTransferListTarget,
 } from '@semantic-components/ui-lab';
 import type { ScTransferListItemData } from '@semantic-components/ui-lab';
+import {
+  SiChevronLeftIcon,
+  SiChevronRightIcon,
+  SiChevronsLeftIcon,
+  SiChevronsRightIcon,
+} from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-basic-transfer-list-demo',
@@ -26,6 +37,15 @@ import type { ScTransferListItemData } from '@semantic-components/ui-lab';
     ScTransferListItems,
     ScTransferListItem,
     ScTransferListActions,
+    ScTransferListMoveAllToSource,
+    ScTransferListMoveAllToTarget,
+    ScTransferListMoveToSource,
+    ScTransferListMoveToTarget,
+    ScButton,
+    SiChevronLeftIcon,
+    SiChevronRightIcon,
+    SiChevronsLeftIcon,
+    SiChevronsRightIcon,
   ],
   template: `
     <div class="flex flex-col gap-6">
@@ -63,13 +83,44 @@ import type { ScTransferListItemData } from '@semantic-components/ui-lab';
           </div>
         </div>
 
-        <div
-          scTransferListActions
-          moveSelectedLabel="Move selected to right"
-          returnSelectedLabel="Move selected to left"
-          moveAllLabel="Move all to right"
-          returnAllLabel="Move all to left"
-        ></div>
+        <div scTransferListActions>
+          <button
+            scButton
+            variant="outline"
+            size="icon"
+            scTransferListMoveToTarget
+            aria-label="Move selected to right"
+          >
+            <svg siChevronRightIcon class="rtl:rotate-180"></svg>
+          </button>
+          <button
+            scButton
+            variant="outline"
+            size="icon"
+            scTransferListMoveToSource
+            aria-label="Move selected to left"
+          >
+            <svg siChevronLeftIcon class="rtl:rotate-180"></svg>
+          </button>
+          <button
+            scButton
+            variant="outline"
+            size="icon"
+            scTransferListMoveAllToTarget
+            aria-label="Move all to right"
+          >
+            <svg siChevronsRightIcon class="rtl:rotate-180"></svg>
+          </button>
+          <button
+            scButton
+            variant="outline"
+            size="icon"
+            scTransferListMoveAllToSource
+            aria-label="Move all to left"
+          >
+            <svg siChevronsLeftIcon class="rtl:rotate-180"></svg>
+          </button>
+        </div>
 
         <div scTransferListTarget #target="scTransferListTarget">
           <div scTransferListHeader>

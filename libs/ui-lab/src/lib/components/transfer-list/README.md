@@ -5,7 +5,7 @@ A composable dual-list component for moving items between source and target list
 ## Installation
 
 ```typescript
-import { ScTransferList, ScTransferListActions, ScTransferListCount, ScTransferListHeader, ScTransferListItem, ScTransferListItems, ScTransferListSearch, ScTransferListSelectAll, ScTransferListSource, ScTransferListTarget } from '@semantic-components/ui-lab';
+import { ScTransferList, ScTransferListActions, ScTransferListCount, ScTransferListHeader, ScTransferListItem, ScTransferListItems, ScTransferListMoveAllToSource, ScTransferListMoveAllToTarget, ScTransferListMoveToSource, ScTransferListMoveToTarget, ScTransferListSearch, ScTransferListSelectAll, ScTransferListSource, ScTransferListTarget } from '@semantic-components/ui-lab';
 import type { ScTransferListChange, ScTransferListItemData } from '@semantic-components/ui-lab';
 ```
 
@@ -40,7 +40,20 @@ import type { ScTransferListChange, ScTransferListItemData } from '@semantic-com
     </div>
   </div>
 
-  <div scTransferListActions moveSelectedLabel="Move selected to right" returnSelectedLabel="Move selected to left" moveAllLabel="Move all to right" returnAllLabel="Move all to left"></div>
+  <div scTransferListActions>
+    <button scButton variant="outline" size="icon" scTransferListMoveToTarget aria-label="Move selected to right">
+      <svg siChevronRightIcon class="rtl:rotate-180"></svg>
+    </button>
+    <button scButton variant="outline" size="icon" scTransferListMoveToSource aria-label="Move selected to left">
+      <svg siChevronLeftIcon class="rtl:rotate-180"></svg>
+    </button>
+    <button scButton variant="outline" size="icon" scTransferListMoveAllToTarget aria-label="Move all to right">
+      <svg siChevronsRightIcon class="rtl:rotate-180"></svg>
+    </button>
+    <button scButton variant="outline" size="icon" scTransferListMoveAllToSource aria-label="Move all to left">
+      <svg siChevronsLeftIcon class="rtl:rotate-180"></svg>
+    </button>
+  </div>
 
   <div scTransferListTarget #target="scTransferListTarget">
     <div scTransferListHeader>
@@ -171,7 +184,14 @@ Component on `label`. Renders a checkbox and projects content. Handles selection
 
 ### ScTransferListActions
 
-Component rendering the four transfer action buttons (move selected, move all, in both directions). Write their names — the library has none: `moveSelectedLabel`, `returnSelectedLabel`, `moveAllLabel`, `returnAllLabel` (all required).
+The column for the move buttons, between the lists. The buttons are yours (a `scButton`, your icons and names), with a part each:
+
+| Part                            | Selector                                | Moves                                                          |
+| ------------------------------- | --------------------------------------- | -------------------------------------------------------------- |
+| `ScTransferListMoveToTarget`    | `button[scTransferListMoveToTarget]`    | The selected items to the target (disabled with none selected) |
+| `ScTransferListMoveToSource`    | `button[scTransferListMoveToSource]`    | The selected items back to the source                          |
+| `ScTransferListMoveAllToTarget` | `button[scTransferListMoveAllToTarget]` | Every item to the target (disabled when the source is empty)   |
+| `ScTransferListMoveAllToSource` | `button[scTransferListMoveAllToSource]` | Every item back to the source                                  |
 
 ## Type Definitions
 
