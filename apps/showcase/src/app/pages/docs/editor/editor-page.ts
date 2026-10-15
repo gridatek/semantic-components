@@ -42,11 +42,11 @@ import { SignalFormsEditorDemoContainer } from './demos/signal-forms-editor-demo
 
       <section class="space-y-8">
         <h2 scHeading appToc>Examples</h2>
-        <app-prefilled-editor-demo-container />
-        <app-no-count-editor-demo-container />
-        <app-readonly-editor-demo-container />
-        <app-signal-forms-editor-demo-container />
         <app-full-featured-editor-demo-container />
+        <app-signal-forms-editor-demo-container />
+        <app-prefilled-editor-demo-container />
+        <app-readonly-editor-demo-container />
+        <app-no-count-editor-demo-container />
       </section>
     </div>
   `,
