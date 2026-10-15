@@ -3,16 +3,11 @@ import { Directive, computed, inject, input } from '@angular/core';
 import { bindInput, cn, toggleVariants } from '@semantic-components/ui';
 import { SC_EDITOR, type ScEditorHeadingLevel } from './editor';
 
-const HEADING_OPTIONS: { value: ScEditorHeadingLevel; label: string }[] = [
-  { value: 'p', label: 'Paragraph' },
-  { value: 'h1', label: 'Heading 1' },
-  { value: 'h2', label: 'Heading 2' },
-  { value: 'h3', label: 'Heading 3' },
-  { value: 'h4', label: 'Heading 4' },
-  { value: 'h5', label: 'Heading 5' },
-  { value: 'h6', label: 'Heading 6' },
-];
-
+/**
+ * The block type button (paragraph, headings): make it the trigger of your
+ * menu, whose items call `select(level)`; `level()` is the current one
+ * ('p', 'h1'…'h6'). Write the labels — the library has none.
+ */
 @Directive({
   selector: 'button[scEditorHeading]',
   exportAs: 'scEditorHeading',
@@ -24,10 +19,13 @@ const HEADING_OPTIONS: { value: ScEditorHeadingLevel; label: string }[] = [
   },
 })
 export class ScEditorHeading {
-  readonly editor = inject(SC_EDITOR);
+  private readonly editor = inject(SC_EDITOR);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly disabledInput = input(false, { alias: 'disabled' });
+
+  /** The block type at the selection. */
+  readonly level = computed(() => this.editor.heading());
 
   protected readonly class = computed(() =>
     cn(
@@ -37,23 +35,21 @@ export class ScEditorHeading {
   );
 
   protected readonly disabled = computed(
-    () => this.disabledInput() || this.editor.disabled(),
+    () => this.disabledInput() || !this.editor.editable(),
   );
 
   constructor() {
     bindInput(inject(ToolbarWidget).disabled, this.disabled);
   }
 
-  readonly headingOptions = HEADING_OPTIONS;
-
-  readonly currentHeadingLabel = computed(() => {
-    const current = this.editor.currentHeading();
-    return (
-      HEADING_OPTIONS.find((o) => o.value === current)?.label ?? 'Paragraph'
+  /** Makes the selection's block a paragraph or a heading. */
+  select(level: ScEditorHeadingLevel): void {
+    this.editor.run((chain) =>
+      level === 'p'
+        ? chain.setParagraph()
+        : chain.setHeading({
+            level: Number(level.slice(1)) as 1 | 2 | 3 | 4 | 5 | 6,
+          }),
     );
-  });
-
-  onItemSelected(value: string): void {
-    this.editor.execCommand('formatBlock', value as ScEditorHeadingLevel);
   }
 }

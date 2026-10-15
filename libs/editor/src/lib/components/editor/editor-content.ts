@@ -7,13 +7,16 @@ import {
   effect,
   inject,
   input,
-  model,
-  output,
-  signal,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { SC_FIELD, cn } from '@semantic-components/ui';
 import { SC_EDITOR } from './editor';
 
+/**
+ * Where the document is written: the editor mounts here. Name it
+ * (`ariaLabel`) — the library adds no text; give a `placeholder` if you want
+ * one. The document is a multi-line `textbox`, described by the surrounding
+ * `scField`'s description and errors, `aria-invalid` once left invalid.
+ */
 @Directive({
   selector: 'div[scEditorContent]',
   host: {
@@ -21,20 +24,14 @@ import { SC_EDITOR } from './editor';
   },
 })
 export class ScEditorContent {
-  readonly editor = inject(SC_EDITOR);
-  private readonly elementRef = inject(ElementRef<HTMLElement>);
-  private readonly destroyRef = inject(DestroyRef);
+  protected readonly editor = inject(SC_EDITOR);
+  private readonly field = inject(SC_FIELD, { optional: true });
+  private readonly element =
+    inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
-  readonly value = model<string>('');
-  readonly placeholder = input<string>('Start typing...');
-  readonly ariaLabel = input<string>('Rich text editor');
+  readonly placeholder = input('');
+  readonly ariaLabel = input('');
   readonly classInput = input<string>('', { alias: 'class' });
-
-  readonly focus = output<void>();
-  readonly blur = output<void>();
-
-  private readonly isFocused = signal(false);
-  private isInitialized = false;
 
   protected readonly class = computed(() =>
     cn(
@@ -45,61 +42,40 @@ export class ScEditorContent {
     ),
   );
 
+  /** The document's ARIA: its name, description, state. */
+  private readonly attributes = computed(() => {
+    const attributes: Record<string, string> = {
+      role: 'textbox',
+      'aria-multiline': 'true',
+    };
+    const label = this.ariaLabel();
+    if (label) attributes['aria-label'] = label;
+    const describedBy = this.field?.descriptionIds().join(' ');
+    if (describedBy) attributes['aria-describedby'] = describedBy;
+    if (this.editor.readonly()) attributes['aria-readonly'] = 'true';
+    if (this.editor.disabled()) attributes['aria-disabled'] = 'true';
+    if (this.editor.showInvalid()) attributes['aria-invalid'] = 'true';
+    return attributes;
+  });
+
   constructor() {
-    // Watch for external value changes (must be in constructor for injection context)
+    afterNextRender(() =>
+      this.editor.mount(this.element, {
+        placeholder: () => this.placeholder(),
+      }),
+    );
+
+    // The document's attributes follow (and the placeholder, read as it
+    // changes, is redrawn).
     effect(() => {
-      const newValue = this.value();
-      const editorInstance = this.editor.editorInstance();
-      if (!editorInstance || !this.isInitialized) return;
-
-      const currentValue = editorInstance.getHTML();
-
-      if (newValue !== currentValue) {
-        editorInstance.commands.setContent(newValue);
-      }
+      const attributes = this.attributes();
+      this.placeholder();
+      const editor = this.editor.editorInstance();
+      if (!editor) return;
+      editor.setOptions({ editorProps: { attributes } });
+      editor.view.dispatch(editor.state.tr.setMeta('placeholder', true));
     });
 
-    afterNextRender(() => {
-      const element = this.elementRef.nativeElement;
-
-      // Initialize Tiptap editor through parent directive
-      this.editor.initializeEditor(
-        element,
-        this.value(),
-        this.placeholder(),
-        this.ariaLabel(),
-      );
-
-      // Watch for editor content changes
-      const editorInstance = this.editor.editorInstance();
-      if (editorInstance) {
-        editorInstance.on('update', ({ editor }) => {
-          const html = editor.getHTML();
-          // Clean up empty content
-          const cleaned = html === '<p></p>' ? '' : html;
-
-          if (cleaned !== this.value()) {
-            this.value.set(cleaned);
-          }
-        });
-
-        // Handle focus events
-        editorInstance.on('focus', () => {
-          this.isFocused.set(true);
-          this.focus.emit();
-        });
-
-        editorInstance.on('blur', () => {
-          this.isFocused.set(false);
-          this.blur.emit();
-        });
-      }
-
-      this.isInitialized = true;
-    });
-
-    this.destroyRef.onDestroy(() => {
-      this.editor.destroyEditor();
-    });
+    inject(DestroyRef).onDestroy(() => this.editor.unmount());
   }
 }

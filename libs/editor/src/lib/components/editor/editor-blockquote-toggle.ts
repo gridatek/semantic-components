@@ -3,6 +3,7 @@ import { Directive, computed, inject, input } from '@angular/core';
 import { bindInput, cn, toggleVariants } from '@semantic-components/ui';
 import { SC_EDITOR } from './editor';
 
+/** A blockquote, on and off. Write its icon and name it (`aria-label` or visually hidden text). */
 @Directive({
   selector: 'button[scEditorBlockquoteToggle]',
   hostDirectives: [ToolbarWidget],
@@ -10,12 +11,12 @@ import { SC_EDITOR } from './editor';
     type: 'button',
     '[class]': 'class()',
     '[disabled]': 'disabled()',
-    '[attr.aria-pressed]': 'editor.isBlockquote()',
+    '[attr.aria-pressed]': "editor.isActive('blockquote')",
     '(click)': 'onClick()',
   },
 })
 export class ScEditorBlockquoteToggle {
-  readonly editor = inject(SC_EDITOR);
+  protected readonly editor = inject(SC_EDITOR);
   readonly classInput = input<string>('', { alias: 'class' });
   readonly disabledInput = input(false, { alias: 'disabled' });
 
@@ -27,14 +28,14 @@ export class ScEditorBlockquoteToggle {
   );
 
   protected readonly disabled = computed(
-    () => this.disabledInput() || this.editor.disabled(),
+    () => this.disabledInput() || !this.editor.editable(),
   );
 
   constructor() {
     bindInput(inject(ToolbarWidget).disabled, this.disabled);
   }
 
-  onClick(): void {
-    this.editor.execCommand('formatBlock', 'blockquote');
+  protected onClick(): void {
+    this.editor.run((chain) => chain.toggleBlockquote());
   }
 }

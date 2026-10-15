@@ -7,6 +7,7 @@ import { FullFeaturedEditorDemoContainer } from './demos/full-featured-editor-de
 import { NoCountEditorDemoContainer } from './demos/no-count-editor-demo-container';
 import { PrefilledEditorDemoContainer } from './demos/prefilled-editor-demo-container';
 import { ReadonlyEditorDemoContainer } from './demos/readonly-editor-demo-container';
+import { SignalFormsEditorDemoContainer } from './demos/signal-forms-editor-demo-container';
 
 @Component({
   selector: 'app-editor-page',
@@ -16,6 +17,7 @@ import { ReadonlyEditorDemoContainer } from './demos/readonly-editor-demo-contai
     NoCountEditorDemoContainer,
     ReadonlyEditorDemoContainer,
     FullFeaturedEditorDemoContainer,
+    SignalFormsEditorDemoContainer,
     TocHeading,
     ComponentBadges,
     ScHeading,
@@ -41,6 +43,7 @@ import { ReadonlyEditorDemoContainer } from './demos/readonly-editor-demo-contai
         <app-prefilled-editor-demo-container />
         <app-no-count-editor-demo-container />
         <app-readonly-editor-demo-container />
+        <app-signal-forms-editor-demo-container />
         <app-full-featured-editor-demo-container />
       </section>
     </div>

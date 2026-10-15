@@ -19,6 +19,7 @@ import { PrefilledEditorDemo } from './prefilled-editor-demo';
 })
 export class PrefilledEditorDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { FormField, form } from '@angular/forms/signals';
 import {
   ScEditor,
   ScEditorBoldToggle,
@@ -46,6 +47,7 @@ import {
 @Component({
   selector: 'app-prefilled-editor-demo',
   imports: [
+    FormField,
     ScEditor,
     ScEditorContent,
     ScEditorToolbar,
@@ -68,7 +70,11 @@ import {
   ],
   template: \`
     <div class="w-full">
-      <div scEditor class="overflow-hidden rounded-lg border">
+      <div
+        scEditor
+        [formField]="editorForm.body"
+        class="overflow-hidden rounded-lg border"
+      >
         <div scEditorToolbar>
           <div scEditorToolbarGroup>
             <button scEditorBoldToggle value="bold">
@@ -99,7 +105,7 @@ import {
           </div>
         </div>
 
-        <div scEditorContent [(value)]="content"></div>
+        <div scEditorContent ariaLabel="Article"></div>
 
         <div scEditorFooter>
           <div scEditorCount>
@@ -118,7 +124,8 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class PrefilledEditorDemo {
-  readonly content = signal(\`
+  private readonly model = signal({
+    body: \`
     <h2>Welcome to the Rich Text Editor</h2>
     <p>This is a <strong>full-featured</strong> WYSIWYG editor with support for:</p>
     <ul>
@@ -132,6 +139,8 @@ export class PrefilledEditorDemo {
       This is a blockquote for highlighting important information.
     </blockquote>
     <p>You can also add <code>inline code</code> snippets.</p>
-  \`);
+  \`,
+  });
+  readonly editorForm = form(this.model);
 }`;
 }

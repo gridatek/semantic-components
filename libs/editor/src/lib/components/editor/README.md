@@ -1,354 +1,108 @@
-# Editor Component
+# Editor
 
-Composable WYSIWYG editor built with [Tiptap](https://tiptap.dev/), a headless rich-text editor framework powered by ProseMirror.
+A composable rich text editor built on [Tiptap](https://tiptap.dev/) (ProseMirror): the document is HTML, edited through Signal Forms; a toolbar of toggles, counts, and nothing you don't write.
+
+You write the markup and every piece of text — the toolbar, its icons and names, the editor's name and placeholder, the heading labels, the link form; the parts add the behaviour, ARIA and default styles.
 
 ## Installation
 
-The editor component requires Tiptap packages as peer dependencies. Install them alongside `@semantic-components/ui`:
-
 ```bash
-npm install @semantic-components/ui \
-  @tiptap/core \
-  @tiptap/starter-kit \
-  @tiptap/extension-text-align \
-  @tiptap/extension-placeholder
+npm install @semantic-components/editor @tiptap/core @tiptap/starter-kit @tiptap/extension-text-align @tiptap/extension-placeholder
 ```
 
-Or if you already have `@semantic-components/ui` installed:
+## Usage
 
-```bash
-npm install @tiptap/core @tiptap/starter-kit @tiptap/extension-text-align @tiptap/extension-placeholder
-```
-
-**Note**: Link and Underline extensions are included in `@tiptap/starter-kit` v3, so no need to install them separately.
-
-## Features
-
-- **Rich Text Editing**: Bold, italic, underline, strikethrough, headings, lists, blockquotes, code, links, and more
-- **Keyboard Shortcuts**: Built-in shortcuts for all formatting commands (Ctrl+B, Ctrl+I, Ctrl+U, Ctrl+Z, Ctrl+Y, etc.)
-- **Customizable Toolbar**: Composable architecture allows full control over toolbar layout
-- **Two-Way Binding**: Seamless synchronization with Angular signals
-- **Accessibility**: Full keyboard navigation and ARIA support
-- **Extensible**: Built on Tiptap, allowing custom extensions and commands
-
-## Implementation
-
-The editor is powered by [Tiptap](https://tiptap.dev/), a headless rich-text editor framework built on ProseMirror. This provides:
-
-- **Robust editing**: Industry-standard editing engine
-- **Extensibility**: Add custom extensions and commands
-- **Keyboard shortcuts**: Built-in shortcuts for all formatting
-- **Better browser support**: Works consistently across modern browsers
-- **Future-ready**: Foundation for collaboration, mentions, slash commands, etc.
-
-### Extensions Included
-
-The editor comes pre-configured with these Tiptap extensions:
-
-- **StarterKit**: Bold, Italic, Strike, Underline, Code, Heading, Lists, Blockquote, History, HardBreak, Paragraph, Text, Link
-  - Link configured with: `openOnClick: false`, `target="_blank"`, `rel="noopener noreferrer"`
-- **TextAlign**: Text alignment (left, center, right, justify)
-- **Placeholder**: Customizable placeholder text
-
-### Bundle Size
-
-- **Total**: ~30 KB (minified)
-- **Gzipped**: ~10 KB
-
-This is an acceptable trade-off for the significant improvements in reliability, extensibility, and developer experience.
-
-## Basic Usage
-
-```typescript
-import { Component, signal } from '@angular/core';
-import { ScEditor, ScEditorBoldButton, ScEditorCharCount, ScEditorContent, ScEditorCount, ScEditorFooter, ScEditorItalicButton, ScEditorToolbar, ScEditorToolbarGroup, ScEditorUnderlineButton, ScEditorWordCount } from '@semantic-components/ui-lab';
-
-@Component({
-  selector: 'app-example',
-  imports: [ScEditor, ScEditorContent, ScEditorToolbar, ScEditorToolbarGroup, ScEditorBoldButton, ScEditorItalicButton, ScEditorUnderlineButton, ScEditorFooter, ScEditorCount, ScEditorWordCount, ScEditorCharCount],
-  template: `
-    <div scEditor class="overflow-hidden rounded-lg border">
-      <div scEditorToolbar>
-        <div scEditorToolbarGroup>
-          <button scEditorBold>Bold</button>
-          <button scEditorItalic>Italic</button>
-          <button scEditorUnderline>Underline</button>
-        </div>
-      </div>
-
-      <div scEditorContent [(value)]="content" placeholder="Start typing..."></div>
-
-      <div scEditorFooter>
-        <div scEditorCount>
-          <span scEditorWordCount></span>
-          <span scEditorCharCount></span>
-        </div>
-      </div>
+```html
+<div scEditor [formField]="postForm.body" class="overflow-hidden rounded-lg border">
+  <div scEditorToolbar aria-label="Formatting">
+    <div scEditorToolbarGroup>
+      <button scEditorBoldToggle value="bold">
+        <svg siBoldIcon></svg>
+        <span class="sr-only">Bold</span>
+      </button>
+      <button scEditorItalicToggle value="italic">
+        <svg siItalicIcon></svg>
+        <span class="sr-only">Italic</span>
+      </button>
     </div>
-  `,
-})
-export class Example {
-  readonly content = signal('');
-}
+  </div>
+
+  <div scEditorContent ariaLabel="Post" placeholder="Write something…"></div>
+
+  <div scEditorFooter>
+    <div scEditorCount>
+      <span scEditorWordCount #words="scEditorWordCount">{{ words.wordCount() }} words</span>
+    </div>
+  </div>
+</div>
 ```
 
-## API
-
-### ScEditor (Directive)
-
-Root directive that manages editor state and provides context to child components.
-
-**Selector**: `[scEditor]`
-
-**Inputs**:
-
-- `disabled: boolean` - Disables the editor
-- `readonly: boolean` - Makes the editor read-only
-
-**Signals** (accessed via `inject(SC_EDITOR)`):
-
-- `isBold()` - Whether bold is active
-- `isItalic()` - Whether italic is active
-- `isUnderline()` - Whether underline is active
-- `isStrikethrough()` - Whether strikethrough is active
-- `isOrderedList()` - Whether ordered list is active
-- `isUnorderedList()` - Whether unordered list is active
-- `isBlockquote()` - Whether blockquote is active
-- `alignment()` - Current text alignment ('left' | 'center' | 'right' | 'justify')
-- `currentHeading()` - Current heading level ('p' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6')
-- `canUndo()` - Whether undo is available
-- `canRedo()` - Whether redo is available
-- `editorInstance()` - The Tiptap Editor instance (for advanced usage)
-
-**Methods**:
-
-- `execCommand(command: string, value?: string)` - Execute a formatting command
-- `updateToolbarState()` - Update toolbar button states (called automatically)
-- `initializeEditor(element: HTMLElement, content: string, placeholder: string)` - Initialize Tiptap (called automatically)
-- `destroyEditor()` - Cleanup Tiptap instance (called automatically)
-
-### ScEditorContent (Component)
-
-Content area where text editing happens.
-
-**Selector**: `div[scEditorContent]`
-
-**Inputs**:
-
-- `value: string` - Two-way bindable HTML content (use with `[(value)]`)
-- `placeholder: string` - Placeholder text (default: "Start typing...")
-- `ariaLabel: string` - ARIA label (default: "Rich text editor")
-- `class: string` - Additional CSS classes (use Tailwind utilities for sizing, e.g., `min-h-[300px] max-h-[500px]`)
-
-**Outputs**:
-
-- `focus` - Emitted when editor gains focus
-- `blur` - Emitted when editor loses focus
-
-### Toolbar Components
-
-All toolbar buttons inject `SC_EDITOR` and call the appropriate commands.
-
-**Available Buttons**:
-
-- `ScEditorBoldButton` - Toggle bold
-- `ScEditorItalicButton` - Toggle italic
-- `ScEditorUnderlineButton` - Toggle underline
-- `ScEditorStrikethroughButton` - Toggle strikethrough
-- `ScEditorCodeButton` - Toggle inline code
-- `ScEditorLinkButton` - Insert/edit link (prompts for URL)
-- `ScEditorBulletListButton` - Toggle bullet list
-- `ScEditorNumberedListButton` - Toggle numbered list
-- `ScEditorBlockquoteButton` - Toggle blockquote
-- `ScEditorAlignLeftButton` - Align left
-- `ScEditorAlignCenterButton` - Align center
-- `ScEditorAlignRightButton` - Align right
-- `ScEditorAlignJustifyButton` - Align justify
-- `ScEditorUndoButton` - Undo last action
-- `ScEditorRedoButton` - Redo last action
-- `ScEditorClearFormattingButton` - Remove all formatting
-
-**Containers**:
-
-- `ScEditorToolbar` - Toolbar container
-- `ScEditorToolbarGroup` - Group related buttons
-- `ScEditorSeparator` - Visual separator between groups
-- `ScEditorFooter` - Footer container
-- `ScEditorHeader` - Header container
-
-**Utilities**:
-
-- `ScEditorCount` - Container for count components (uses `<ng-content>`, allows custom layout)
-- `ScEditorWordCount` - Display word count (e.g., "42 words")
-- `ScEditorCharCount` - Display character count (e.g., "256 characters")
-- `ScEditorHeadingSelect` - Dropdown to select heading level
-
-## Keyboard Shortcuts
-
-All standard keyboard shortcuts are handled by Tiptap:
-
-- **Ctrl+B** / **Cmd+B** - Bold
-- **Ctrl+I** / **Cmd+I** - Italic
-- **Ctrl+U** / **Cmd+U** - Underline
-- **Ctrl+Z** / **Cmd+Z** - Undo
-- **Ctrl+Shift+Z** / **Cmd+Shift+Z** - Redo
-- **Ctrl+Y** / **Cmd+Y** - Redo
-- **Ctrl+E** / **Cmd+E** - Inline code
-
-## Advanced Usage
-
-### Accessing the Tiptap Editor Instance
-
-For advanced use cases, you can access the underlying Tiptap editor:
-
-```typescript
-import { effect, inject } from '@angular/core';
-import { SC_EDITOR } from '@semantic-components/ui-lab';
-
-export class MyComponent {
-  readonly editor = inject(SC_EDITOR);
-
-  constructor() {
-    effect(() => {
-      const instance = this.editor.editorInstance();
-      if (instance) {
-        // Access Tiptap API
-        console.log(instance.getJSON()); // Get content as JSON
-        console.log(instance.getHTML()); // Get content as HTML
-        console.log(instance.getText()); // Get plain text
-
-        // Execute custom commands
-        instance.chain().focus().toggleBold().run();
-      }
-    });
-  }
-}
+```ts
+readonly postForm = form(signal({ body: '' }), (path) => {
+  required(path.body, { message: 'Write something.' });
+});
 ```
 
-### Custom Commands
+- **The value** is the document's HTML (`''` when it's empty), in the form.
+- **Disabled and read-only** come from the schema (`disabled(path.body)`, `readonly(path.body)`), and can change at any time.
+- **Errors**: put the editor in a `scField` with `scFieldErrors` — once it's left invalid, the document gets `aria-invalid` and is described by the errors.
 
-You can execute any Tiptap command via the editor instance:
+## Parts
 
-```typescript
-this.editor.editorInstance()?.chain().focus().setHeading({ level: 2 }).insertContent('Hello world!').run();
+| Part                                        | Selector                                     | Does                                                                                                                              |
+| ------------------------------------------- | -------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `ScEditor`                                  | `[scEditor]`                                 | The document and its commands; a Signal Forms control (`exportAs: 'scEditor'`). `data-disabled`, `data-readonly`, `data-invalid`. |
+| `ScEditorContent`                           | `div[scEditorContent]`                       | Where it's written: a multi-line `textbox`. `ariaLabel` (name it — no default), `placeholder` (none by default).                  |
+| `ScEditorToolbar`, `ScEditorToolbarGroup`   | `div[scEditorToolbar]`, `div[…Group]`        | The toolbar: one tab stop, arrow keys between its buttons. Name it (`aria-label`).                                                |
+| `ScEditorBoldToggle` … (see below)          | `button[scEditor…Toggle]`                    | A command; `aria-pressed` when its format is on. Write its icon and name it.                                                      |
+| `ScEditorHeading`                           | `button[scEditorHeading]`                    | The block type: `level()` (`'p'`, `'h1'`…`'h6'`), `select(level)` — the trigger of your menu, with your labels.                   |
+| `ScEditorLinkToggle`                        | `button[scEditorLinkToggle]`                 | Pressed inside a link; the trigger of your link form (a popover), which calls the editor's `setLink(href)` / `unsetLink()`.       |
+| `ScEditorSeparator`                         | `div[scEditorSeparator]`                     | Between toolbar groups.                                                                                                           |
+| `ScEditorHeader`, `ScEditorFooter`          | `div[scEditorHeader]`, `div[scEditorFooter]` | Above and below the document.                                                                                                     |
+| `ScEditorCount`, `…WordCount`, `…CharCount` | `div[scEditorCount]`, `span[…]`              | `wordCount()`, `charCount()` (`exportAs`) — write the text around them.                                                           |
+
+The toggles: `Bold`, `Italic`, `Underline`, `Strikethrough`, `Code`, `BulletList`, `NumberedList`, `Blockquote`, `AlignLeft`, `AlignCenter`, `AlignRight`, `AlignJustify`, `HorizontalRule`, `ClearFormatting`, `Undo`, `Redo` (disabled when there is nothing to undo / redo). All are disabled when the editor is disabled or read-only.
+
+## `scEditor`
+
+- **Set by `[formField]`**: `value` (the HTML), `disabled`, `readonly`, `invalid`, `touched`; `touch` fires when the document loses focus.
+- **State**: `isActive(name, attributes?)` — a mark or node at the selection (`'bold'`, `'link'`, `'heading', { level: 2 }`…); `alignment()`, `heading()`, `linkHref()`; `editable()`.
+- **Commands**: `run((chain) => chain.toggleBold())` — any Tiptap command, on the focused document; `can((chain) => chain.undo())`.
+- **Links**: `setLink(href, text?)` — links the selection, or writes `text` (or the address) as a link where nothing is selected; `unsetLink()`. Addresses with unsafe protocols (`javascript:`…) aren't rendered as links.
+- **Tiptap**: `editorInstance()` for anything else.
+
+## A link form
+
+```html
+<div scPopoverProvider [(open)]="linkOpen">
+  <button scEditorLinkToggle scPopoverTrigger value="link" (click)="editLink(editor.linkHref())">
+    <svg siLinkIcon></svg>
+    <span class="sr-only">Link</span>
+  </button>
+  <ng-template scPopoverPortal>
+    <div scPopover>
+      <div scField>
+        <label scLabel>Address</label>
+        <input scInput type="url" [formField]="linkForm.href" />
+      </div>
+      <button scButton type="button" (click)="editor.setLink(linkForm.href().value()); linkOpen.set(false)">Apply</button>
+    </div>
+  </ng-template>
+</div>
 ```
 
-## Migration from execCommand
+`#editor="scEditor"` on the root. Opening the form keeps the selection: the link goes where it was.
 
-Previous versions used the deprecated `document.execCommand()` API. The current version uses Tiptap internally while maintaining the same external API for backwards compatibility.
+## Keyboard
 
-**Breaking Changes**: None! The external API remains identical.
-
-**Advanced Users**: If you directly accessed `contentElement()` for DOM manipulation, you should now use `editorInstance()` to interact with the editor via Tiptap's API.
-
-## Future Enhancements
-
-Built on Tiptap, these features can be easily added in the future:
-
-1. **Collaboration** - Real-time co-editing with `@tiptap/extension-collaboration`
-2. **Mentions** - @-mentions with autocomplete
-3. **Slash Commands** - `/` for quick formatting
-4. **Tables** - Rich table support
-5. **Images** - Drag-and-drop image upload
-6. **Custom Extensions** - Domain-specific formatting
-7. **Markdown Support** - Input/output markdown
-8. **Character Limits** - Built-in extension for content limits
+Tiptap's shortcuts: **Ctrl / ⌘ + B** bold, **I** italic, **U** underline, **E** inline code, **Z** undo, **Shift+Z** or **Y** redo. In the toolbar, **← / →** move between buttons and **Tab** leaves it.
 
 ## Styling
 
-The editor uses Tailwind CSS with CSS variables for theming. All styles respect the current theme (light/dark mode) and use OKLCH color format.
-
-**CSS Variables Used**:
-
-- `--border` - Border color (blockquote, hr)
-- `--muted` - Muted background (code, pre)
-- `--muted-foreground` - Muted text (placeholder, blockquote)
-- `--primary` - Primary color (links)
-
-Colors are defined in OKLCH format and automatically adapt to light/dark themes.
-
-**Customization**:
-
-```html
-<!-- Custom font and text size -->
-<div scEditorContent class="font-serif text-lg"></div>
-
-<!-- Custom height constraints -->
-<div scEditorContent class="max-h-[600px] min-h-[300px]"></div>
-
-<!-- Remove default padding -->
-<div scEditorContent class="p-0"></div>
-
-<!-- Default: Both counts with standard layout -->
-<div scEditorFooter>
-  <div scEditorCount>
-    <span scEditorWordCount></span>
-    <span scEditorCharCount></span>
-  </div>
-</div>
-
-<!-- Only word count -->
-<div scEditorFooter>
-  <div scEditorCount>
-    <span scEditorWordCount></span>
-  </div>
-</div>
-
-<!-- Only character count -->
-<div scEditorFooter>
-  <div scEditorCount>
-    <span scEditorCharCount></span>
-  </div>
-</div>
-
-<!-- Custom separator and styling -->
-<div scEditorFooter>
-  <div scEditorCount>
-    <span scEditorWordCount class="text-blue-600"></span>
-    <span class="text-muted-foreground">•</span>
-    <span scEditorCharCount class="text-green-600"></span>
-  </div>
-</div>
-
-<!-- Footer with additional content -->
-<div scEditorFooter>
-  <button class="text-primary text-sm hover:underline">Save draft</button>
-  <div scEditorCount>
-    <span scEditorWordCount></span>
-    <span scEditorCharCount></span>
-  </div>
-</div>
-
-<!-- Without using ScEditorCount container -->
-<div scEditorFooter class="justify-between">
-  <div class="flex gap-2">
-    <span scEditorWordCount class="text-xs"></span>
-    <span scEditorCharCount class="text-xs"></span>
-  </div>
-  <button>Submit</button>
-</div>
-```
-
-Default classes applied: `block outline-none overflow-y-auto min-h-[150px] max-h-[400px] p-4 prose prose-sm max-w-none dark:prose-invert`
+The document has `block outline-none overflow-y-auto min-h-[150px] max-h-[400px] p-4 prose prose-sm max-w-none dark:prose-invert`; a `class` on `scEditorContent` changes it (`min-h-[300px] max-h-[500px]`, `font-serif`…). The editor's theme uses `--border`, `--muted`, `--muted-foreground` and `--primary`.
 
 ## Accessibility
 
-The editor follows WCAG AA standards:
-
-- Full keyboard navigation
-- ARIA labels on all buttons
-- Focus management
-- Screen reader support
-- High contrast mode support
-
-## Browser Support
-
-Works in all modern browsers that support ES2015+ and ProseMirror:
-
-- Chrome/Edge 90+
-- Firefox 88+
-- Safari 14+
-
-## License
-
-MIT
+- The document is a multi-line `textbox` named by `ariaLabel`; `aria-readonly` / `aria-disabled` / `aria-invalid` follow the form, and the field's description and errors describe it.
+- The toolbar is one tab stop (`@angular/aria` toolbar); toggles have `aria-pressed`.
+- The library adds no text: name everything you write.

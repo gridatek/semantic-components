@@ -1386,6 +1386,13 @@ export const demosRoutes: Route[] = [
             (m) => m.FullFeaturedEditorDemo,
           ),
       },
+      {
+        path: 'signal-forms-editor-demo',
+        loadComponent: () =>
+          import('../pages/docs/editor/demos/signal-forms-editor-demo').then(
+            (m) => m.SignalFormsEditorDemo,
+          ),
+      },
     ],
   },
   {

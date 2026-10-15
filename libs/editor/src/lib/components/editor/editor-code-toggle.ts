@@ -3,6 +3,7 @@ import { Directive, computed, inject, input } from '@angular/core';
 import { bindInput, cn, toggleVariants } from '@semantic-components/ui';
 import { SC_EDITOR } from './editor';
 
+/** Inline code, on and off. Write its icon and name it (`aria-label` or visually hidden text). */
 @Directive({
   selector: 'button[scEditorCodeToggle]',
   hostDirectives: [ToolbarWidget],
@@ -10,11 +11,12 @@ import { SC_EDITOR } from './editor';
     type: 'button',
     '[class]': 'class()',
     '[disabled]': 'disabled()',
+    '[attr.aria-pressed]': "editor.isActive('code')",
     '(click)': 'onClick()',
   },
 })
 export class ScEditorCodeToggle {
-  readonly editor = inject(SC_EDITOR);
+  protected readonly editor = inject(SC_EDITOR);
   readonly classInput = input<string>('', { alias: 'class' });
   readonly disabledInput = input(false, { alias: 'disabled' });
 
@@ -26,24 +28,14 @@ export class ScEditorCodeToggle {
   );
 
   protected readonly disabled = computed(
-    () => this.disabledInput() || this.editor.disabled(),
+    () => this.disabledInput() || !this.editor.editable(),
   );
 
   constructor() {
     bindInput(inject(ToolbarWidget).disabled, this.disabled);
   }
 
-  onClick(): void {
-    if (this.editor.disabled() || this.editor.readonly()) return;
-
-    const selection = window.getSelection();
-    const selectedText = selection?.toString() || '';
-
-    if (selectedText) {
-      const code = `<code>${selectedText}</code>`;
-      this.editor.execCommand('insertHTML', code);
-    } else {
-      this.editor.execCommand('insertHTML', '<code>&nbsp;</code>');
-    }
+  protected onClick(): void {
+    this.editor.run((chain) => chain.toggleCode());
   }
 }

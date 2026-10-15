@@ -19,6 +19,7 @@ import { FullFeaturedEditorDemo } from './full-featured-editor-demo';
 })
 export class FullFeaturedEditorDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { FormField, form } from '@angular/forms/signals';
 import {
   ScEditor,
   ScEditorAlignCenterToggle,
@@ -35,6 +36,7 @@ import {
   ScEditorCount,
   ScEditorFooter,
   ScEditorHeading,
+  type ScEditorHeadingLevel,
   ScEditorHorizontalRuleToggle,
   ScEditorItalicToggle,
   ScEditorLinkToggle,
@@ -50,12 +52,19 @@ import {
 } from '@semantic-components/editor';
 import {
   ScButton,
+  ScField,
+  ScInput,
+  ScLabel,
   ScMenu,
   ScMenuContent,
   ScMenuItem,
   ScMenuPortal,
   ScMenuProvider,
   ScMenuTrigger,
+  ScPopover,
+  ScPopoverPortal,
+  ScPopoverProvider,
+  ScPopoverTrigger,
 } from '@semantic-components/ui';
 import {
   SiBoldIcon,
@@ -81,6 +90,14 @@ import {
 @Component({
   selector: 'app-full-featured-editor-demo',
   imports: [
+    FormField,
+    ScField,
+    ScInput,
+    ScLabel,
+    ScPopover,
+    ScPopoverPortal,
+    ScPopoverProvider,
+    ScPopoverTrigger,
     ScEditor,
     ScEditorContent,
     ScEditorToolbar,
@@ -140,7 +157,12 @@ import {
         Try all the formatting options: bold, italic, headings, lists, links,
         blockquotes, and more.
       </p>
-      <div scEditor class="overflow-hidden rounded-lg border">
+      <div
+        scEditor
+        #editor="scEditor"
+        [formField]="editorForm.body"
+        class="overflow-hidden rounded-lg border"
+      >
         <div scEditorToolbar aria-label="Text formatting">
           <div scEditorToolbarGroup>
             <button scEditorUndoToggle value="undo">
@@ -163,15 +185,15 @@ import {
               #heading="scEditorHeading"
               class="w-auto gap-1"
             >
-              {{ heading.currentHeadingLabel() }}
-              <svg siChevronDownIcon class="size-4"></svg>
+              {{ headingLabels[heading.level()] }}
+              <svg siChevronDownIcon></svg>
             </button>
             <ng-template scMenuPortal>
-              <div scMenu (itemSelected)="heading.onItemSelected($event)">
+              <div scMenu (itemSelected)="heading.select($event)">
                 <ng-template scMenuContent>
-                  @for (option of heading.headingOptions; track option.value) {
-                    <div scMenuItem [value]="option.value">
-                      {{ option.label }}
+                  @for (level of headingLevels; track level) {
+                    <div scMenuItem [value]="level">
+                      {{ headingLabels[level] }}
                     </div>
                   }
                 </ng-template>
@@ -237,10 +259,45 @@ import {
           <div scEditorSeparator></div>
 
           <div scEditorToolbarGroup>
-            <button scEditorLinkToggle value="link">
-              <svg siLinkIcon></svg>
-              <span class="sr-only">Insert link</span>
-            </button>
+            <div scPopoverProvider [(open)]="linkOpen">
+              <button
+                scEditorLinkToggle
+                scPopoverTrigger
+                value="link"
+                (click)="editLink(editor.linkHref())"
+              >
+                <svg siLinkIcon></svg>
+                <span class="sr-only">Link</span>
+              </button>
+              <ng-template scPopoverPortal>
+                <div scPopover class="w-72">
+                  <div scField>
+                    <label scLabel>Address</label>
+                    <input
+                      scInput
+                      type="url"
+                      [formField]="linkForm.href"
+                      (keydown.enter)="applyLink(editor)"
+                    />
+                  </div>
+                  <div class="flex justify-end gap-2">
+                    @if (editor.linkHref()) {
+                      <button
+                        scButton
+                        variant="outline"
+                        type="button"
+                        (click)="removeLink(editor)"
+                      >
+                        Remove
+                      </button>
+                    }
+                    <button scButton type="button" (click)="applyLink(editor)">
+                      Apply
+                    </button>
+                  </div>
+                </div>
+              </ng-template>
+            </div>
             <button scEditorBlockquoteToggle value="blockquote">
               <svg siQuoteIcon></svg>
               <span class="sr-only">Blockquote</span>
@@ -267,7 +324,7 @@ import {
 
         <div
           scEditorContent
-          [(value)]="content"
+          ariaLabel="Article"
           class="max-h-[500px] min-h-[300px]"
           placeholder="Start writing your content..."
         ></div>
@@ -295,7 +352,7 @@ import {
       <div class="mt-4">
         <h4 class="mb-2 text-sm font-medium">HTML Output:</h4>
         <pre class="bg-muted max-h-32 overflow-x-auto rounded-lg p-3 text-xs">{{
-          content()
+          editorForm.body().value()
         }}</pre>
       </div>
     </div>
@@ -304,14 +361,47 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class FullFeaturedEditorDemo {
-  readonly content = signal('');
+  private readonly model = signal({ body: '' });
+  readonly editorForm = form(this.model);
+
+  /** The link popover and its address. */
+  readonly linkOpen = signal(false);
+  private readonly linkModel = signal({ href: '' });
+  readonly linkForm = form(this.linkModel);
+
+  readonly headingLevels: ScEditorHeadingLevel[] = ['p', 'h1', 'h2', 'h3'];
+  readonly headingLabels: Record<ScEditorHeadingLevel, string> = {
+    p: 'Paragraph',
+    h1: 'Heading 1',
+    h2: 'Heading 2',
+    h3: 'Heading 3',
+    h4: 'Heading 4',
+    h5: 'Heading 5',
+    h6: 'Heading 6',
+  };
+
+  /** The link popover opens with the address at the selection. */
+  editLink(href: string): void {
+    this.linkModel.set({ href: href || 'https://' });
+  }
+
+  applyLink(editor: ScEditor): void {
+    editor.setLink(this.linkModel().href);
+    this.linkOpen.set(false);
+  }
+
+  removeLink(editor: ScEditor): void {
+    editor.unsetLink();
+    this.linkOpen.set(false);
+  }
 
   clearContent(): void {
-    this.content.set('');
+    this.model.set({ body: '' });
   }
 
   insertSampleContent(): void {
-    this.content.set(\`
+    this.model.set({
+      body: \`
       <h1>Article Title</h1>
       <p>This is the introduction paragraph of the article. It provides an overview of what will be discussed.</p>
 
@@ -346,7 +436,8 @@ export class FullFeaturedEditorDemo {
       <h2>Conclusion</h2>
       <p>In conclusion, this rich text editor provides all the tools you need for creating well-formatted content.</p>
       <p>For more information, visit our <a href="https://example.com">documentation</a>.</p>
-    \`);
+    \`,
+    });
   }
 }`;
 }

@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { FormField, form } from '@angular/forms/signals';
 import {
   ScEditor,
   ScEditorBoldToggle,
@@ -17,6 +18,7 @@ import {
 @Component({
   selector: 'app-editor-usage-demo',
   imports: [
+    FormField,
     ScEditor,
     ScEditorContent,
     ScEditorToolbar,
@@ -30,7 +32,11 @@ import {
   ],
   template: `
     <div class="w-full max-w-lg">
-      <div scEditor class="overflow-hidden rounded-lg border">
+      <div
+        scEditor
+        [formField]="editorForm.body"
+        class="overflow-hidden rounded-lg border"
+      >
         <div scEditorToolbar>
           <div scEditorToolbarGroup>
             <button scEditorBoldToggle value="bold">
@@ -50,7 +56,7 @@ import {
 
         <div
           scEditorContent
-          [(value)]="content"
+          ariaLabel="Message"
           placeholder="Start writing..."
         ></div>
       </div>
@@ -60,5 +66,6 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class EditorUsageDemo {
-  readonly content = signal('');
+  private readonly model = signal({ body: '' });
+  readonly editorForm = form(this.model);
 }

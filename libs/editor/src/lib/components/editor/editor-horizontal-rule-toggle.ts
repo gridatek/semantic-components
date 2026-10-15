@@ -3,6 +3,7 @@ import { Directive, computed, inject, input } from '@angular/core';
 import { bindInput, cn, toggleVariants } from '@semantic-components/ui';
 import { SC_EDITOR } from './editor';
 
+/** Inserts a horizontal rule. Write its icon and name it (`aria-label` or visually hidden text). */
 @Directive({
   selector: 'button[scEditorHorizontalRuleToggle]',
   hostDirectives: [ToolbarWidget],
@@ -14,7 +15,7 @@ import { SC_EDITOR } from './editor';
   },
 })
 export class ScEditorHorizontalRuleToggle {
-  readonly editor = inject(SC_EDITOR);
+  protected readonly editor = inject(SC_EDITOR);
   readonly classInput = input<string>('', { alias: 'class' });
   readonly disabledInput = input(false, { alias: 'disabled' });
 
@@ -26,14 +27,14 @@ export class ScEditorHorizontalRuleToggle {
   );
 
   protected readonly disabled = computed(
-    () => this.disabledInput() || this.editor.disabled(),
+    () => this.disabledInput() || !this.editor.editable(),
   );
 
   constructor() {
     bindInput(inject(ToolbarWidget).disabled, this.disabled);
   }
 
-  onClick(): void {
-    this.editor.execCommand('insertHorizontalRule');
+  protected onClick(): void {
+    this.editor.run((chain) => chain.setHorizontalRule());
   }
 }

@@ -23,10 +23,6 @@ export class ScEditorWordCount {
   });
 
   private getPlainText(): string {
-    const editorInstance = this.editor.editorInstance();
-    if (editorInstance) {
-      return editorInstance.getText();
-    }
-    return this.editor.contentElement()?.textContent || '';
+    return this.editor.editorInstance()?.getText() ?? '';
   }
 }

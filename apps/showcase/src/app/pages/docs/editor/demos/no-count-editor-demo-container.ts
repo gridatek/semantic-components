@@ -19,6 +19,7 @@ import { NoCountEditorDemo } from './no-count-editor-demo';
 })
 export class NoCountEditorDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { FormField, form } from '@angular/forms/signals';
 import {
   ScEditor,
   ScEditorBoldToggle,
@@ -42,6 +43,7 @@ import {
 @Component({
   selector: 'app-no-count-editor-demo',
   imports: [
+    FormField,
     ScEditor,
     ScEditorContent,
     ScEditorToolbar,
@@ -60,7 +62,11 @@ import {
   ],
   template: \`
     <div class="w-full">
-      <div scEditor class="overflow-hidden rounded-lg border">
+      <div
+        scEditor
+        [formField]="editorForm.body"
+        class="overflow-hidden rounded-lg border"
+      >
         <div scEditorToolbar>
           <div scEditorToolbarGroup>
             <button scEditorBoldToggle value="bold">
@@ -91,7 +97,7 @@ import {
           </div>
         </div>
 
-        <div scEditorContent [(value)]="content"></div>
+        <div scEditorContent ariaLabel="Notes"></div>
       </div>
     </div>
   \`,
@@ -99,6 +105,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class NoCountEditorDemo {
-  readonly content = signal('');
+  private readonly model = signal({ body: '' });
+  readonly editorForm = form(this.model);
 }`;
 }
