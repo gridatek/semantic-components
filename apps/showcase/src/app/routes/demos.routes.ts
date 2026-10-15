@@ -1407,6 +1407,41 @@ export const demosRoutes: Route[] = [
             (m) => m.FormatsEditorDemo,
           ),
       },
+      {
+        path: 'tables-editor-demo',
+        loadComponent: () =>
+          import('../pages/docs/editor/demos/tables-editor-demo').then(
+            (m) => m.TablesEditorDemo,
+          ),
+      },
+      {
+        path: 'images-editor-demo',
+        loadComponent: () =>
+          import('../pages/docs/editor/demos/images-editor-demo').then(
+            (m) => m.ImagesEditorDemo,
+          ),
+      },
+      {
+        path: 'search-editor-demo',
+        loadComponent: () =>
+          import('../pages/docs/editor/demos/search-editor-demo').then(
+            (m) => m.SearchEditorDemo,
+          ),
+      },
+      {
+        path: 'bubble-menu-editor-demo',
+        loadComponent: () =>
+          import('../pages/docs/editor/demos/bubble-menu-editor-demo').then(
+            (m) => m.BubbleMenuEditorDemo,
+          ),
+      },
+      {
+        path: 'layout-editor-demo',
+        loadComponent: () =>
+          import('../pages/docs/editor/demos/layout-editor-demo').then(
+            (m) => m.LayoutEditorDemo,
+          ),
+      },
     ],
   },
   {

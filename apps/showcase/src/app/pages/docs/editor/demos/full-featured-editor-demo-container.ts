@@ -748,9 +748,7 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
         <pre
           tabindex="0"
           class="bg-muted max-h-32 overflow-x-auto rounded-lg p-3 text-xs"
-        >{{
-          editorForm.body().value()
-        }}</pre>
+          >{{ editorForm.body().value() }}</pre>
       </div>
     </div>
   \`,

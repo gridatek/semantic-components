@@ -34,15 +34,21 @@ test.describe('Formats Editor Demo', () => {
 
     await write(page);
     await expect(page.getByText('JSON value (valid)')).toBeVisible();
-    const json = (await value(page)) as {
+    type Doc = {
       type: string;
-      content: { type: string; content: { text: string; marks?: unknown }[] }[];
+      content: {
+        type: string;
+        content?: { text: string; marks?: unknown }[];
+      }[];
     };
+    // The value follows the typing: wait for the last line to reach it.
+    await expect
+      .poll(async () =>
+        ((await value(page)) as Doc).content.map((block) => block.type),
+      )
+      .toEqual(['paragraph', 'paragraph']);
+    const json = (await value(page)) as Doc;
     expect(json.type).toBe('doc');
-    expect(json.content.map((block) => block.type)).toEqual([
-      'paragraph',
-      'paragraph',
-    ]);
     expect(json.content[0].content).toEqual([
       { type: 'text', text: 'Hello ' },
       { type: 'text', marks: [{ type: 'bold' }], text: 'world' },

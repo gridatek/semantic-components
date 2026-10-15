@@ -20,13 +20,18 @@ import {
 import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
+import { BubbleMenuEditorDemoContainer } from './demos/bubble-menu-editor-demo-container';
 import { EditorUsageDemoContainer } from './demos/editor-usage-demo-container';
 import { FormatsEditorDemoContainer } from './demos/formats-editor-demo-container';
 import { FullFeaturedEditorDemoContainer } from './demos/full-featured-editor-demo-container';
+import { ImagesEditorDemoContainer } from './demos/images-editor-demo-container';
+import { LayoutEditorDemoContainer } from './demos/layout-editor-demo-container';
 import { NoCountEditorDemoContainer } from './demos/no-count-editor-demo-container';
 import { PrefilledEditorDemoContainer } from './demos/prefilled-editor-demo-container';
 import { ReadonlyEditorDemoContainer } from './demos/readonly-editor-demo-container';
+import { SearchEditorDemoContainer } from './demos/search-editor-demo-container';
 import { SignalFormsEditorDemoContainer } from './demos/signal-forms-editor-demo-container';
+import { TablesEditorDemoContainer } from './demos/tables-editor-demo-container';
 import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
 
 @Component({
@@ -40,6 +45,11 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
     SignalFormsEditorDemoContainer,
     ViewEditorDemoContainer,
     FormatsEditorDemoContainer,
+    TablesEditorDemoContainer,
+    ImagesEditorDemoContainer,
+    SearchEditorDemoContainer,
+    BubbleMenuEditorDemoContainer,
+    LayoutEditorDemoContainer,
     TocHeading,
     ComponentBadges,
     ScHeading,
@@ -131,7 +141,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
             language="typescript"
           ></div>
         </div>
-        <div scTableContainer>
+        <div scTableContainer tabindex="0" role="region" aria-label="Features">
           <table scTable>
             <thead scTableHeader>
               <tr scTableRow>
@@ -184,49 +194,6 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Loading</h2>
-        <p class="text-muted-foreground">
-          The features are loaded with the editor, not on their own: a
-          feature&apos;s package is small next to what every editor needs (<code
-            class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >&#64;tiptap/core</code
-          >, ProseMirror,
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >&#64;tiptap/starter-kit</code
-          >), and loading it later would make the editor and
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >scEditorView</code
-          >
-          wait before showing a document. To keep the editor out of a
-          page&apos;s first load, load the component that holds it lazily —
-          everything, Tiptap&apos;s core too, is then split off. A lazy route
-          (<code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >loadComponent</code
-          >) does the same for a page with an editor.
-        </p>
-        <div scCodeViewer>
-          <div scCodeViewerHeader>
-            <span scCodeViewerLabel>html</span>
-            <button
-              scButton
-              variant="ghost"
-              size="icon"
-              [scCopyToClipboard]="loadingCode"
-              #copyLoading="scCopyToClipboard"
-              aria-label="Copy to clipboard"
-            >
-              @if (copyLoading.copied()) {
-                <svg siCheckIcon></svg>
-              } @else {
-                <svg siCopyIcon></svg>
-              }
-            </button>
-          </div>
-          <div scCodeViewerContent [code]="loadingCode" language="html"></div>
-        </div>
-      </section>
-
-      <section class="space-y-4">
         <h2 scHeading appToc>Examples</h2>
         <p class="text-muted-foreground">
           The complete editor, after Tiptap's Simple Editor: undo and redo, the
@@ -235,9 +202,64 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
           alignment, tables (from the table menu), images (pick, drop or paste
           one) and search and replace (Ctrl + F). Select some text for the
           floating toolbar. The page layout centres the text in a column of
-          readable width.
+          readable width. It uses every feature:
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >provideEditor(withAlign(), withHighlight(), withImages(),
+            withScripts(), withSearch(), withTables())</code
+          >.
         </p>
         <app-full-featured-editor-demo-container />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Tables</h2>
+        <p class="text-muted-foreground">
+          The core and one feature,
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >withTables()</code
+          >: the table menu inserts a table and edits the one at the selection,
+          its actions disabled where they don&apos;t apply. Tab moves between
+          cells; dragging a column&apos;s border resizes it.
+        </p>
+        <app-tables-editor-demo-container />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Images</h2>
+        <p class="text-muted-foreground">
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >withImages()</code
+          >
+          and the editor&apos;s
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">upload</code>
+          handler: pick an image, or drop or paste one. Each is uploaded with
+          its progress — cancel it there — and inserted when it resolves, named
+          after its file.
+        </p>
+        <app-images-editor-demo-container />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Search and replace</h2>
+        <p class="text-muted-foreground">
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >withSearch()</code
+          >: the search button, or Ctrl / ⌘ + F in the document, opens the bar.
+          Enter and Shift + Enter step through the matches, Escape closes it.
+        </p>
+        <app-search-editor-demo-container />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Floating toolbar</h2>
+        <p class="text-muted-foreground">
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >scEditorBubbleMenu</code
+          >
+          shows by the selected text, here instead of a toolbar. It needs no
+          provider: it adds itself to the editor.
+        </p>
+        <app-bubble-menu-editor-demo-container />
       </section>
 
       <section class="space-y-4">
@@ -302,6 +324,22 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
       </section>
 
       <section class="space-y-4">
+        <h2 scHeading appToc>Layout</h2>
+        <p class="text-muted-foreground">
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">layout</code> on
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >scEditorContent</code
+          >:
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">default</code>
+          pads the text edge to edge, for a field or a comment box;
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">page</code> sets
+          it in a centred column of readable width with page margins, for a
+          document. The toolbar follows.
+        </p>
+        <app-layout-editor-demo-container />
+      </section>
+
+      <section class="space-y-4">
         <h2 scHeading appToc>Initial content</h2>
         <p class="text-muted-foreground">
           The form's value is the document to start with: any HTML the editor
@@ -327,6 +365,104 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
           character counts.
         </p>
         <app-no-count-editor-demo-container />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Keyboard</h2>
+        <p class="text-muted-foreground">
+          Tiptap&apos;s shortcuts, and Markdown as you type:
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"># </code>
+          headings,
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">- </code> lists,
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">[ ] </code>
+          tasks,
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">&gt; </code>
+          quotes,
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >&#96;&#96;&#96;</code
+          >
+          code blocks. Some come with a feature.
+        </p>
+        <div
+          scTableContainer
+          tabindex="0"
+          role="region"
+          aria-label="Keyboard shortcuts"
+        >
+          <table scTable>
+            <thead scTableHeader>
+              <tr scTableRow>
+                <th scTableHeaderCell>Keys</th>
+                <th scTableHeaderCell>Does</th>
+                <th scTableHeaderCell>Needs</th>
+              </tr>
+            </thead>
+            <tbody scTableBody>
+              @for (shortcut of shortcuts; track shortcut.keys) {
+                <tr scTableRow>
+                  <td scTableCell>
+                    <kbd class="bg-muted rounded px-1.5 py-0.5 text-sm">{{
+                      shortcut.keys
+                    }}</kbd>
+                  </td>
+                  <td scTableCell>{{ shortcut.does }}</td>
+                  <td scTableCell>
+                    @if (shortcut.needs) {
+                      <code class="bg-muted rounded px-1.5 py-0.5 text-sm">{{
+                        shortcut.needs
+                      }}</code>
+                    } @else {
+                      The core
+                    }
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Loading</h2>
+        <p class="text-muted-foreground">
+          The features are loaded with the editor, not on their own: a
+          feature&apos;s package is small next to what every editor needs (<code
+            class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >&#64;tiptap/core</code
+          >, ProseMirror,
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >&#64;tiptap/starter-kit</code
+          >), and loading it later would make the editor and
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >scEditorView</code
+          >
+          wait before showing a document. To keep the editor out of a
+          page&apos;s first load, load the component that holds it lazily —
+          everything, Tiptap&apos;s core too, is then split off. A lazy route
+          (<code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >loadComponent</code
+          >) does the same for a page with an editor.
+        </p>
+        <div scCodeViewer>
+          <div scCodeViewerHeader>
+            <span scCodeViewerLabel>html</span>
+            <button
+              scButton
+              variant="ghost"
+              size="icon"
+              [scCopyToClipboard]="loadingCode"
+              #copyLoading="scCopyToClipboard"
+              aria-label="Copy to clipboard"
+            >
+              @if (copyLoading.copied()) {
+                <svg siCheckIcon></svg>
+              } @else {
+                <svg siCopyIcon></svg>
+              }
+            </button>
+          </div>
+          <div scCodeViewerContent [code]="loadingCode" language="html"></div>
+        </div>
       </section>
     </div>
   `,
@@ -397,6 +533,51 @@ import {
 export class NoteEditor {
   readonly noteForm = form(signal({ body: '' }));
 }`;
+
+  readonly shortcuts = [
+    { keys: 'Ctrl / ⌘ + B', does: 'Bold', needs: '' },
+    { keys: 'Ctrl / ⌘ + I', does: 'Italic', needs: '' },
+    { keys: 'Ctrl / ⌘ + U', does: 'Underline', needs: '' },
+    { keys: 'Ctrl / ⌘ + Shift + S', does: 'Strikethrough', needs: '' },
+    { keys: 'Ctrl / ⌘ + E', does: 'Inline code', needs: '' },
+    { keys: 'Ctrl / ⌘ + Alt + 1 … 6', does: 'Heading 1 to 6', needs: '' },
+    { keys: 'Ctrl / ⌘ + Shift + 7', does: 'Numbered list', needs: '' },
+    { keys: 'Ctrl / ⌘ + Shift + 8', does: 'Bullet list', needs: '' },
+    { keys: 'Ctrl / ⌘ + Shift + 9', does: 'Task list', needs: '' },
+    { keys: 'Ctrl / ⌘ + Shift + B', does: 'Blockquote', needs: '' },
+    { keys: 'Ctrl / ⌘ + Alt + C', does: 'Code block', needs: '' },
+    { keys: 'Ctrl / ⌘ + Z', does: 'Undo', needs: '' },
+    { keys: 'Ctrl / ⌘ + Shift + Z, Ctrl / ⌘ + Y', does: 'Redo', needs: '' },
+    {
+      keys: 'Ctrl / ⌘ + Shift + H',
+      does: 'Highlight',
+      needs: 'withHighlight()',
+    },
+    { keys: 'Ctrl / ⌘ + .', does: 'Superscript', needs: 'withScripts()' },
+    { keys: 'Ctrl / ⌘ + ,', does: 'Subscript', needs: 'withScripts()' },
+    {
+      keys: 'Ctrl / ⌘ + Shift + L, E, R, J',
+      does: 'Align left, centre, right, justify',
+      needs: 'withAlign()',
+    },
+    {
+      keys: 'Ctrl / ⌘ + F',
+      does: 'Open the search bar',
+      needs: 'withSearch()',
+    },
+    {
+      keys: 'Enter, Shift + Enter',
+      does: 'Next, previous match (in the search)',
+      needs: 'withSearch()',
+    },
+    { keys: 'Escape', does: 'Close the search bar', needs: 'withSearch()' },
+    { keys: '← / →', does: 'Move between the toolbar’s buttons', needs: '' },
+    {
+      keys: 'Tab',
+      does: 'Leave the toolbar; in a table, the next cell',
+      needs: '',
+    },
+  ];
 
   readonly loadingCode = `@defer (on viewport) {
   <app-note-editor />
