@@ -223,12 +223,12 @@ Tiptap's shortcuts: **Ctrl / ⌘ + B** bold, **I** italic, **U** underline, **E*
 
 ## Styling
 
-The document has `block outline-none overflow-y-auto min-h-[150px] max-h-[400px] prose prose-sm max-w-none dark:prose-invert`; a `class` on `scEditorContent` changes it (`min-h-[300px] max-h-[500px]`, `font-serif`…).
+The editor follows Tiptap's Simple Editor in its sizes and spacing — the toolbar (one 44px row of 32px buttons that scrolls sideways when it doesn't fit, 2px apart in a group, 1px separators), and the document's typography (paragraphs 1rem with 1.6 line height and 20px apart, headings, lists, task checkboxes, code, quotes, rules, images) — in this library's tokens and fonts. The document box has `block outline-none overflow-y-auto min-h-[150px] max-h-[400px]`; a `class` on `scEditorContent` changes it (`min-h-[300px] max-h-[500px]`, `font-serif`…).
 
 Its `layout` sets how it sits in the box (`data-layout`):
 
 - `default`: padded edge to edge (`p-4`), for a field or a comment box.
-- `page`: a centred column at most 648px wide with 3rem page margins (1rem and 1.5rem at 480px and under), as in Tiptap's Simple Editor, for an article or a document. The column is the inner `.ProseMirror` element, so the scrollbar stays at the box's edge.
+- `page`: the layout of Tiptap's Simple Editor, for an article or a document: a centred column at most 648px wide with 3rem page margins (1rem and 1.5rem at 480px and under). The column is the inner `.ProseMirror` element, so the scrollbar stays at the box's edge. The toolbar follows: its buttons centred over the column.
 
 ```html
 <div scEditorContent ariaLabel="Article" layout="page" class="max-h-[600px] min-h-[400px]"></div>

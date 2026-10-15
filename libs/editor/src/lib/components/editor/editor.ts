@@ -26,6 +26,12 @@ import type { FormValueControl } from '@angular/forms/signals';
 export type ScEditorAlignment = 'left' | 'center' | 'right' | 'justify';
 export type ScEditorHeadingLevel =
   'p' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+/**
+ * How the document sits in its box: `default`, padded edge to edge; `page`, a
+ * centred column of readable width with page margins (narrower on phones).
+ */
+export type ScEditorContentLayout = 'default' | 'page';
+
 export type ScEditorListType = 'bulletList' | 'orderedList' | 'taskList';
 export type ScEditorSearchFlag = 'caseSensitive' | 'wholeWord' | 'useRegex';
 
@@ -107,6 +113,9 @@ export class ScEditor implements FormValueControl<string> {
   readonly editorInstance = signal<Editor | null>(null);
   /** Moves on with every transaction (content or selection): state reads it. */
   readonly contentVersion = signal(0);
+
+  /** The content's layout (`scEditorContent` sets it): the toolbar follows. */
+  readonly layout = signal<ScEditorContentLayout>('default');
 
   readonly editable = computed(() => !this.disabled() && !this.readonly());
   /** Invalid once touched: the document's `aria-invalid`, `data-invalid`. */

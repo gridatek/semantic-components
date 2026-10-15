@@ -9,13 +9,7 @@ import {
   input,
 } from '@angular/core';
 import { SC_FIELD, cn } from '@semantic-components/ui';
-import { SC_EDITOR } from './editor';
-
-/**
- * How the document sits in its box: `default`, padded edge to edge; `page`, a
- * centred column of readable width with page margins (narrower on phones).
- */
-export type ScEditorContentLayout = 'default' | 'page';
+import { SC_EDITOR, type ScEditorContentLayout } from './editor';
 
 /**
  * Where the document is written: the editor mounts here. Name it
@@ -43,7 +37,7 @@ export class ScEditorContent {
 
   protected readonly class = computed(() =>
     cn(
-      'block outline-none overflow-y-auto min-h-[150px] max-h-[400px] prose prose-sm max-w-none dark:prose-invert',
+      'block outline-none overflow-y-auto min-h-[150px] max-h-[400px] text-foreground',
       this.layout() === 'page'
         ? // The column is the document's: the scrollbar stays at the box's edge.
           '[&>.ProseMirror]:mx-auto [&>.ProseMirror]:max-w-[648px] [&>.ProseMirror]:p-12 max-[480px]:[&>.ProseMirror]:px-6 max-[480px]:[&>.ProseMirror]:py-4'
@@ -71,6 +65,9 @@ export class ScEditorContent {
   });
 
   constructor() {
+    // The toolbar follows the layout.
+    effect(() => this.editor.layout.set(this.layout()));
+
     afterNextRender(() =>
       this.editor.mount(this.element, {
         placeholder: () => this.placeholder(),

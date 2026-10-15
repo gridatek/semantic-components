@@ -101,7 +101,9 @@ test.describe('Full Featured Editor Demo', () => {
     await expect(list).toHaveAttribute('data-state', 'on');
     const task = article(page).getByRole('checkbox', { name: 'Buy milk' });
     await expect(task).not.toBeChecked();
-    await task.check();
+    // The checkbox is hidden behind the box its label draws: click that.
+    await task.locator('xpath=..').click();
+    await expect(task).toBeChecked();
     await expect(output(page)).toContainText('data-checked="true"');
   });
 
