@@ -287,6 +287,7 @@ import type { User } from './user.service';
                       <div class="flex items-center gap-2">
                         <div
                           scProgress
+                          aria-label="Storage used"
                           [value]="asNumber(cell.getValue())"
                           [max]="10000"
                           class="h-2 w-16"

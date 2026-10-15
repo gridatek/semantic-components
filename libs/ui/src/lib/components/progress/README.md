@@ -11,20 +11,22 @@ Displays an indicator showing the completion progress of a task.
 
 ## Usage
 
+Name every progress bar — `aria-label` or `aria-labelledby`: the library adds no text.
+
 ```html
-<div scProgress [value]="33"></div>
+<div scProgress [value]="33" aria-label="Upload"></div>
 ```
 
 ### Custom Max
 
 ```html
-<div scProgress [value]="50" [max]="200"></div>
+<div scProgress [value]="50" [max]="200" aria-label="Steps done"></div>
 ```
 
 ### Custom Styling
 
 ```html
-<div scProgress [value]="66" class="h-4 w-[60%]"></div>
+<div scProgress [value]="66" class="h-4 w-[60%]" aria-label="Upload"></div>
 ```
 
 ### With Signal Forms
@@ -32,7 +34,7 @@ Displays an indicator showing the completion progress of a task.
 `ScProgress` implements `FormValueControl<number | null>` for form integration:
 
 ```html
-<div scProgress [value]="completionPercentage()"></div>
+<div scProgress [value]="completionPercentage()" aria-label="Form completion"></div>
 ```
 
 ## Data Attributes

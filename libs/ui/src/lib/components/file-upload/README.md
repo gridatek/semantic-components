@@ -181,7 +181,7 @@ Container directive for upload progress. Injects file from parent `ScFileUploadI
 
 ```html
 <div scFileUploadItemProgress>
-  <div scProgress [value]="file.progress ?? 0"></div>
+  <div scProgress [value]="file.progress ?? 0" [attr.aria-label]="'Uploading ' + file.file.name"></div>
 </div>
 ```
 
@@ -263,7 +263,7 @@ interface ScFileUploadFile {
       <div scFileUploadItemName>{{ file.file.name }}</div>
       @if (file.status === 'uploading') {
       <div scFileUploadItemProgress>
-        <div scProgress [value]="file.progress ?? 0"></div>
+        <div scProgress [value]="file.progress ?? 0" [attr.aria-label]="'Uploading ' + file.file.name"></div>
       </div>
       }
     </div>

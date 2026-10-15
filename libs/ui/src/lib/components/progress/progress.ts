@@ -1,7 +1,10 @@
 import {
   Component,
+  ElementRef,
   ViewEncapsulation,
+  afterNextRender,
   computed,
+  inject,
   input,
   model,
 } from '@angular/core';
@@ -14,21 +17,35 @@ import { ScProgressIndicator } from './progress-indicator';
   imports: [ScProgressIndicator],
   host: {
     role: 'progressbar',
-    '[attr.aria-label]': 'ariaLabel()',
     '[class]': 'class()',
     '[attr.aria-valuemin]': '0',
     '[attr.aria-valuemax]': 'max()',
     '[attr.aria-valuenow]': 'value()',
     '[attr.data-state]': 'state()',
   },
-  template: `
-    <div scProgressIndicator></div>
-  `,
+  template: ` <div scProgressIndicator></div> `,
   encapsulation: ViewEncapsulation.None,
 })
 export class ScProgress implements FormValueControl<number | null> {
+  constructor() {
+    // In development: a progress bar needs a name — the library gives none.
+    if (typeof ngDevMode !== 'undefined' && ngDevMode) {
+      const element = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
+      afterNextRender(() => {
+        if (
+          !element.hasAttribute('aria-label') &&
+          !element.hasAttribute('aria-labelledby')
+        ) {
+          console.warn(
+            'scProgress has no name: give it aria-label or aria-labelledby.',
+            element,
+          );
+        }
+      });
+    }
+  }
+
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly ariaLabel = input('Progress', { alias: 'aria-label' });
   readonly value = model<number | null>(null);
   readonly max = input<number | undefined>(100);
 

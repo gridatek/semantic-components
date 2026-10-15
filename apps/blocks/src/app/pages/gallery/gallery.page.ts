@@ -304,9 +304,9 @@ import {
             <h2 class="text-2xl font-semibold tracking-tight">Progress</h2>
             <div scSeparator></div>
             <div class="max-w-sm space-y-4">
-              <div scProgress [value]="25"></div>
-              <div scProgress [value]="50"></div>
-              <div scProgress [value]="75"></div>
+              <div scProgress [value]="25" aria-label="25% progress"></div>
+              <div scProgress [value]="50" aria-label="50% progress"></div>
+              <div scProgress [value]="75" aria-label="75% progress"></div>
             </div>
           </section>
 

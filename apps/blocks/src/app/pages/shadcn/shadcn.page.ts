@@ -1024,7 +1024,11 @@ import {
                         }
                       </span>
                     </div>
-                    <div scProgress [value]="budget.percent"></div>
+                    <div
+                      scProgress
+                      [value]="budget.percent"
+                      [attr.aria-label]="budget.name + ' budget'"
+                    ></div>
                   </div>
                 }
               </div>
