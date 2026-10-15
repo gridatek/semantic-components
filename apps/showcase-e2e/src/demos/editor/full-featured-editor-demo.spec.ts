@@ -83,7 +83,8 @@ test.describe('Full Featured Editor Demo', () => {
     await page.keyboard.type('Title');
     await toolbar(page).getByRole('button', { name: 'Paragraph' }).click();
     await page.getByRole('menuitem', { name: 'Heading 2' }).click();
-    await expect(output(page)).toHaveText('<h2>Title</h2>');
+    // Tiptap keeps a paragraph after a heading at the end, to write on.
+    await expect(output(page)).toHaveText('<h2>Title</h2><p></p>');
     await expect(
       toolbar(page).getByRole('button', { name: 'Heading 2' }),
     ).toBeVisible();

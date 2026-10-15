@@ -171,6 +171,7 @@ const SAMPLES: Record<ScEditorFormat, ScEditorValue> = {
           }})
         </p>
         <pre
+          tabindex="0"
           class="text-muted-foreground mt-2 max-h-64 overflow-auto text-xs whitespace-pre-wrap"
           >{{ shownValue() }}</pre>
       </div>

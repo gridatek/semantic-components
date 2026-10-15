@@ -34,8 +34,9 @@ const ELEMENTS = [
   'li p',
   'ul[data-type="taskList"]',
   'ul[data-type="taskList"] ul[data-type="taskList"]',
-  'li[data-type="taskItem"]',
-  'li[data-type="taskItem"] > label',
+  // The editor's task items are drawn by a node view, without a data-type.
+  'ul[data-type="taskList"] > li',
+  'ul[data-type="taskList"] > li > label',
   'li[data-checked="true"] > div > p',
   'li[data-checked="false"] > div > p',
   'p[style*="center"]',

@@ -91,6 +91,8 @@ export class ScEditorView {
         task.querySelector(':scope > div')?.textContent ?? '',
       );
     }
+    // Code blocks scroll sideways: the keyboard can reach and scroll them.
+    for (const code of fragment.querySelectorAll('pre')) code.tabIndex = 0;
     return fragment;
   }
 

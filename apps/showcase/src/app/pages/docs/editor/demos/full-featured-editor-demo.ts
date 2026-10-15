@@ -724,10 +724,11 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
       </div>
 
       <div class="mt-4">
-        <h4 class="mb-2 text-sm font-medium">HTML Output:</h4>
-        <pre class="bg-muted max-h-32 overflow-x-auto rounded-lg p-3 text-xs">{{
-          editorForm.body().value()
-        }}</pre>
+        <p class="mb-2 text-sm font-medium">HTML Output:</p>
+        <pre
+          tabindex="0"
+          class="bg-muted max-h-32 overflow-x-auto rounded-lg p-3 text-xs"
+          >{{ editorForm.body().value() }}</pre>
       </div>
     </div>
   `,

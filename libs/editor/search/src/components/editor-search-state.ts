@@ -12,10 +12,15 @@ export class ScEditorSearchState {
   /** Ctrl / ⌘ + F opens the search bar only when there is one to open. */
   private readonly controls = signal(0);
 
-  private readonly storage = computed(() => {
-    this.editor.contentVersion();
-    return this.editor.editorInstance()?.storage.findAndReplace ?? null;
-  });
+  // The same object, changed in place: never equal to itself, so what reads
+  // it reads it again.
+  private readonly storage = computed(
+    () => {
+      this.editor.contentVersion();
+      return this.editor.editorInstance()?.storage.findAndReplace ?? null;
+    },
+    { equal: () => false },
+  );
   readonly term = computed(() => this.storage()?.searchTerm ?? '');
   readonly replaceTerm = computed(() => this.storage()?.replaceTerm ?? '');
   readonly caseSensitive = computed(
