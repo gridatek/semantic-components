@@ -230,10 +230,13 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
             >withImages()</code
           >
-          and the editor&apos;s
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">upload</code>
-          handler: pick an image, or drop or paste one. Each is uploaded with
-          its progress — cancel it there — and inserted when it resolves, named
+          and an
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">[upload]</code>
+          handler on the editor (<code
+            class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >scEditorUploads</code
+          >): pick an image, or drop or paste one. Each is uploaded with its
+          progress — cancel it there — and inserted when it resolves, named
           after its file.
         </p>
         <app-images-editor-demo-container />
@@ -595,7 +598,7 @@ export class NoteEditor {
     {
       entry: '/images',
       provide: 'withImages()',
-      parts: ['scEditorImage', 'drop', 'paste'],
+      parts: ['scEditorUploads', 'scEditorImage', 'drop', 'paste'],
       packages: ['@tiptap/extension-image', '@tiptap/extension-file-handler'],
     },
     {
@@ -610,7 +613,7 @@ export class NoteEditor {
       parts: [
         'scEditorHighlight',
         'scEditorHighlightColor',
-        'scEditorUnsetHighlight',
+        'scEditorRemoveHighlight',
       ],
       packages: ['@tiptap/extension-highlight'],
     },

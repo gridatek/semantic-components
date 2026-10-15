@@ -65,9 +65,9 @@ export class NoteEditor {
 | Entry point                               | Provide                                               | Parts                                                                                    | Package                                                        |
 | ----------------------------------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
 | `@semantic-components/editor/tables`      | `withTables()`                                        | `scEditorTable`                                                                          | `@tiptap/extension-table`                                      |
-| `@semantic-components/editor/images`      | `withImages()`                                        | `scEditorImage`; dropping and pasting images                                             | `@tiptap/extension-image`, `@tiptap/extension-file-handler`    |
+| `@semantic-components/editor/images`      | `withImages()`                                        | `scEditorUploads`, `scEditorImage`; drop, paste                                          | `@tiptap/extension-image`, `@tiptap/extension-file-handler`    |
 | `@semantic-components/editor/search`      | `withSearch()`                                        | `scEditorSearch`, `scEditorSearchBar` and its parts; **Ctrl / ⌘ + F**                    | `@tiptap/extension-find-and-replace`                           |
-| `@semantic-components/editor/highlight`   | `withHighlight()`                                     | `scEditorHighlight`, `scEditorHighlightColor`, `scEditorUnsetHighlight`                  | `@tiptap/extension-highlight`                                  |
+| `@semantic-components/editor/highlight`   | `withHighlight()`                                     | `scEditorHighlight`, `scEditorHighlightColor`, `scEditorRemoveHighlight`                 | `@tiptap/extension-highlight`                                  |
 | `@semantic-components/editor/scripts`     | `withScripts()`                                       | `scEditorSuperscript`, `scEditorSubscript`                                               | `@tiptap/extension-superscript`, `@tiptap/extension-subscript` |
 | `@semantic-components/editor/align`       | `withAlign()`                                         | `scEditorAlignLeft`, `scEditorAlignCenter`, `scEditorAlignRight`, `scEditorAlignJustify` | `@tiptap/extension-text-align`                                 |
 | `@semantic-components/editor/markdown`    | `withMarkdown()`                                      | `format="markdown"`                                                                      | `@tiptap/markdown`                                             |
@@ -77,6 +77,18 @@ export class NoteEditor {
 - **The same features for the editor and the display**, so they hold the same documents.
 - **A part without its feature** warns in development: `scEditorTable needs withTables() in provideEditor(…)`. `format="markdown"` without `withMarkdown()` throws.
 - **The floating toolbar** needs no provider: `scEditorBubbleMenu` adds itself to the editor.
+
+### Your own extensions
+
+`withExtensions(...)` adds any Tiptap extension — a mention, an embed, your own node — to the document, for the editor and `scEditorView`; run its commands with the editor's `run`:
+
+```ts
+import Mention from '@tiptap/extension-mention';
+
+providers: [provideEditor(withTables(), withExtensions(Mention.configure({ suggestion })))];
+```
+
+A feature is an `ScEditorFeature` — `content` (what the document holds), `behaviour` (what only the editor does, given the `ScEditor`), `markdown` — so a feature of your own can be written as the library's are.
 
 ### Loading
 
@@ -141,11 +153,12 @@ readonly postForm = form(signal({ body: '' }), (path) => {
 | `ScEditorList`                              | `button[scEditorList]`                        | The list type: `type()` (`'bulletList'`, `'orderedList'`, `'taskList'`, or null; `data-state="on"` in one), `select(type)` — a menu trigger.                              |
 | `ScEditorTable` (`/tables`)                 | `button[scEditorTable]`                       | Tables: `select(action)`, `can(action)`, `inTable()` (`data-state="on"` in one) — a menu trigger (see [Tables](#tables)).                                                 |
 | `ScEditorBubbleMenu` (`/bubble-menu`)       | `div[scEditorBubbleMenu]`                     | A floating toolbar by the selected text (see [Floating toolbar](#floating-toolbar)).                                                                                      |
-| `ScEditorLink`                              | `button[scEditorLink]`                        | Pressed inside a link; the trigger of your link popover, which calls the editor's `setLink(href)` / `unsetLink()`.                                                        |
+| `ScEditorLink`                              | `button[scEditorLink]`                        | Pressed inside a link; the trigger of your link popover: `href()`, `set(href, text?)`, `remove()` (`exportAs`).                                                           |
 | `ScEditorHighlight` (`/highlight`)          | `button[scEditorHighlight]`                   | Pressed inside a highlight; the trigger of your highlight popover.                                                                                                        |
 | `ScEditorHighlightColor` (`/highlight`)     | `button[scEditorHighlightColor]`              | A swatch in that popover: `[scEditorHighlightColor]="color"` highlights in it, or removes it; pressed when it's the colour. Name it.                                      |
-| `ScEditorUnsetHighlight` (`/highlight`)     | `button[scEditorUnsetHighlight]`              | Removes the highlight (disabled when there is none).                                                                                                                      |
-| `ScEditorImage` (`/images`)                 | `button[scEditorImage]`                       | Picks images and uploads them with the editor's `upload` (disabled without one).                                                                                          |
+| `ScEditorRemoveHighlight` (`/highlight`)    | `button[scEditorRemoveHighlight]`             | Removes the highlight (disabled when there is none).                                                                                                                      |
+| `ScEditorUploads` (`/images`)               | `[scEditor][upload]`                          | The image uploads: `[upload]` on the editor, `imageTypes`, `uploads()`, `cancel(id)` (see [Images](#images)).                                                             |
+| `ScEditorImage` (`/images`)                 | `button[scEditorImage]`                       | Picks images and uploads them with the editor's `[upload]` (disabled without one).                                                                                        |
 | `ScEditorSearch` (`/search`)                | `button[scEditorSearch]`                      | Opens and closes the search bar (`open()`, `aria-pressed`); with it, **Ctrl / ⌘ + F** in the document opens it too.                                                       |
 | `ScEditorSearchBar` and its parts           | see [Search and replace](#search-and-replace) | The bar under the toolbar (`/search`).                                                                                                                                    |
 | `ScEditorView`                              | `[scEditorView]`                              | Displays the editor's HTML in its styles, without an editor (see [Displaying the document](#displaying-the-document)).                                                    |
@@ -155,7 +168,7 @@ readonly postForm = form(signal({ body: '' }), (path) => {
 
 The buttons, `scEditor` + the command:
 
-- **With a state** — `aria-pressed` follows the document: `Bold`, `Italic`, `Underline`, `Strikethrough`, `Code`, `Superscript`, `Subscript` (each turns the other off; `/scripts`), `BulletList`, `NumberedList`, `TaskList`, `Blockquote`, `CodeBlock`, `AlignLeft`, `AlignCenter`, `AlignRight`, `AlignJustify` (`/align`), `Link`, `Highlight`, `Search`.
+- **With a state** — `aria-pressed` follows the document: `Bold`, `Italic`, `Underline`, `Strikethrough`, `Code`, `Superscript`, `Subscript` (each turns the other off; `/scripts`), `BulletList`, `OrderedList`, `TaskList`, `Blockquote`, `CodeBlock`, `AlignLeft`, `AlignCenter`, `AlignRight`, `AlignJustify` (`/align`), `Link`, `Highlight`, `Search`.
 - **Run once** — no `aria-pressed`: `HorizontalRule`, `ClearFormatting`, `Image`, `Undo`, `Redo` (disabled when there is nothing to undo / redo).
 
 The parts of a feature come from its entry point and need it provided: see [Features](#features).
@@ -175,12 +188,14 @@ For the same reason the editor's group is `scEditorToolbarGroup`, not a toggle g
 ## `scEditor`
 
 - **Set by `[formField]`**: `value` (in its `format`), `disabled`, `readonly`, `invalid`, `touched`; `touch` fires when the document loses focus.
-- **Inputs**: `format` (see [Formats](#formats)); `characterLimit` (see [Character limit](#character-limit)); `upload` — the image upload handler (none: no images; with `withImages()`); `imageTypes` — the image types it takes (PNG, JPEG, GIF, WebP).
-- **State**: `isActive(name, attributes?)` — a mark or node at the selection (`'bold'`, `'link'`, `'heading', { level: 2 }`…); `heading()`, `list()`, `linkHref()`; `characters()`, `words()`; `editable()`.
-- **Commands**: `run((chain) => chain.toggleBold())` — any Tiptap command, on the focused document; `can((chain) => chain.undo())`; `toggleList(type)`.
-- **Links**: `setLink(href, text?)` — links the selection, or writes `text` (or the address) as a link where nothing is selected; `unsetLink()`. Addresses with unsafe protocols (`javascript:`…) aren't rendered as links.
-- **Images**: `insertImages(files, position?)`, `uploads()` (`{ id, file, progress }`, progress from 0 to 1), `cancelUpload(id)`.
-- **Tiptap**: `editorInstance()` for anything else.
+  `scEditor` holds what the whole document has; each part holds its own state and commands, read through its `exportAs` — the heading menu its `level()`, the list menu its `type()`, the link its `href()`, the counts theirs.
+
+- **Inputs**: `format` (see [Formats](#formats)); `characterLimit` (see [Character limit](#character-limit)).
+- **State**: `isActive(name, attributes?)` — a mark or node at the selection (`'bold'`, `'link'`, `'heading', { level: 2 }`…); `editable()`.
+- **Commands**: `run((chain) => chain.toggleBold())` — any Tiptap command, on the focused document; `can((chain) => chain.undo())`.
+- **For your own parts**: `editorInstance()`, the Tiptap editor; `contentVersion()`, which moves on with every change — read it in a `computed` that reads the document.
+
+`run`, `can` and `editorInstance()` hand you Tiptap's own objects: they are the way out to anything the parts don't do, not the editor's API — what they give follows Tiptap.
 
 ## Menus: block type and lists
 
@@ -209,7 +224,7 @@ For the same reason the editor's group is `scEditorToolbarGroup`, not a toggle g
 
 ```html
 <div scPopoverProvider [(open)]="linkOpen">
-  <button scEditorLink scPopoverTrigger value="link" (click)="editLink(editor.linkHref())">
+  <button scEditorLink scPopoverTrigger value="link" #link="scEditorLink" (click)="editLink(link.href())">
     <svg siLinkIcon></svg>
     <span class="sr-only">Link</span>
   </button>
@@ -219,7 +234,7 @@ For the same reason the editor's group is `scEditorToolbarGroup`, not a toggle g
         <label scLabel>Address</label>
         <input scInput type="url" [formField]="linkForm.href" />
       </div>
-      <button scButton type="button" (click)="editor.setLink(linkForm.href().value()); linkOpen.set(false)">Apply</button>
+      <button scButton type="button" (click)="link.set(linkForm.href().value()); linkOpen.set(false)">Apply</button>
     </div>
   </ng-template>
 </div>
@@ -233,7 +248,7 @@ For the same reason the editor's group is `scEditorToolbarGroup`, not a toggle g
     <div scPopover aria-label="Highlight colours" class="flex w-auto items-center gap-2 p-2">
       <button scEditorHighlightColor="var(--editor-highlight-yellow)" aria-label="Yellow"></button>
       <button scEditorHighlightColor="var(--editor-highlight-green)" aria-label="Green"></button>
-      <button scEditorUnsetHighlight>
+      <button scEditorRemoveHighlight>
         <svg siBanIcon></svg>
         <span class="sr-only">Remove highlight</span>
       </button>
@@ -242,11 +257,11 @@ For the same reason the editor's group is `scEditorToolbarGroup`, not a toggle g
 </div>
 ```
 
-`#editor="scEditor"` on the root. A popover keeps the selection — still shown while it has focus — so the link or colour goes where it was. The editor's styles have five highlight colours, for light and dark: `var(--editor-highlight-yellow)`, `-green`, `-blue`, `-purple`, `-red`; any CSS colour works.
+A popover keeps the selection — still shown while it has focus — so the link or colour goes where it was. The editor's styles have five highlight colours, for light and dark: `var(--editor-highlight-yellow)`, `-green`, `-blue`, `-purple`, `-red`; any CSS colour works.
 
 ## Images
 
-`withImages()`, from `@semantic-components/editor/images`.
+`withImages()`, `ScEditorUploads` and `ScEditorImage`, from `@semantic-components/editor/images`. `[upload]` on `scEditor` is `ScEditorUploads`: import it, and it uploads what is picked, dropped or pasted.
 
 ```ts
 readonly upload: ScEditorUploadHandler = async (file, { onProgress, signal }) => {
@@ -256,13 +271,13 @@ readonly upload: ScEditorUploadHandler = async (file, { onProgress, signal }) =>
 ```
 
 ```html
-<div scEditor [formField]="form.body" [upload]="upload" #editor="scEditor">
+<div scEditor [formField]="form.body" [upload]="upload" #images="scEditorUploads">
   …
   <button scEditorImage value="image">
     <svg siImagePlusIcon></svg>
     <span class="sr-only">Add image</span>
   </button>
-  … @for (upload of editor.uploads(); track upload.id) {
+  … @for (upload of images.uploads(); track upload.id) {
   <div scProgress [value]="upload.progress * 100" [attr.aria-label]="'Uploading ' + upload.file.name"></div>
   }
 </div>
