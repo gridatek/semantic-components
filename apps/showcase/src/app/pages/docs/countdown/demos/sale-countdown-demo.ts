@@ -31,5 +31,5 @@ import { SiClockIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class SaleCountdownDemo {
-  readonly shortFuture = new Date(Date.now() + 2 * 60 * 60 * 1000);
+  readonly shortFuture = Temporal.Now.instant().add({ hours: 2 });
 }

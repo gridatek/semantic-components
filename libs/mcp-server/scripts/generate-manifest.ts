@@ -207,7 +207,7 @@ function main() {
 
   const manifest: Manifest = {
     version: uiPkg.version,
-    generatedAt: new Date().toISOString(),
+    generatedAt: Temporal.Now.instant().toString(),
     libraries,
     guides,
   };

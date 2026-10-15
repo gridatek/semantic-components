@@ -170,8 +170,8 @@ export interface ScPdfDocumentProperties {
   author: string | null;
   subject: string | null;
   keywords: string | null;
-  creationDate: Date | null;
-  modificationDate: Date | null;
+  creationDate: Temporal.Instant | null;
+  modificationDate: Temporal.Instant | null;
   /** The application that created the original document. */
   creator: string | null;
   /** The application that made the PDF. */

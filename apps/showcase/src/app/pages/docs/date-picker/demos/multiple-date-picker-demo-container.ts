@@ -18,8 +18,7 @@ import { MultipleDatePickerDemo } from './multiple-date-picker-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class MultipleDatePickerDemoContainer {
-  readonly code = `import { Temporal } from '@js-temporal/polyfill';
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCalendar,
   ScCalendarHeader,

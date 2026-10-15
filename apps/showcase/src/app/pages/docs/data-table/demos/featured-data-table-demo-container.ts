@@ -97,7 +97,7 @@ interface User {
   email: string;
   role: string;
   status: 'active' | 'inactive' | 'pending';
-  createdAt: Date;
+  createdAt: Temporal.PlainDate;
 }
 
 /** Register the TanStack features the table uses. */
@@ -130,7 +130,11 @@ const columns = columnHelper.columns([
   columnHelper.accessor('email', { header: 'Email' }),
   columnHelper.accessor('role', { header: 'Role' }),
   columnHelper.accessor('status', { header: 'Status' }),
-  columnHelper.accessor('createdAt', { header: 'Created' }),
+  columnHelper.accessor('createdAt', {
+    header: 'Created',
+    sortFn: (a, b) =>
+      Temporal.PlainDate.compare(a.original.createdAt, b.original.createdAt),
+  }),
   columnHelper.display({
     id: 'actions',
     enableSorting: false,
@@ -145,7 +149,7 @@ const SAMPLE_DATA: User[] = [
     email: 'john@example.com',
     role: 'Admin',
     status: 'active',
-    createdAt: new Date('2024-01-15'),
+    createdAt: Temporal.PlainDate.from('2024-01-15'),
   },
   {
     id: 2,
@@ -153,7 +157,7 @@ const SAMPLE_DATA: User[] = [
     email: 'jane@example.com',
     role: 'Editor',
     status: 'active',
-    createdAt: new Date('2024-02-20'),
+    createdAt: Temporal.PlainDate.from('2024-02-20'),
   },
   {
     id: 3,
@@ -161,7 +165,7 @@ const SAMPLE_DATA: User[] = [
     email: 'bob@example.com',
     role: 'Viewer',
     status: 'inactive',
-    createdAt: new Date('2024-01-10'),
+    createdAt: Temporal.PlainDate.from('2024-01-10'),
   },
   {
     id: 4,
@@ -169,7 +173,7 @@ const SAMPLE_DATA: User[] = [
     email: 'alice@example.com',
     role: 'Editor',
     status: 'pending',
-    createdAt: new Date('2024-03-05'),
+    createdAt: Temporal.PlainDate.from('2024-03-05'),
   },
   {
     id: 5,
@@ -177,7 +181,7 @@ const SAMPLE_DATA: User[] = [
     email: 'charlie@example.com',
     role: 'Admin',
     status: 'active',
-    createdAt: new Date('2024-02-28'),
+    createdAt: Temporal.PlainDate.from('2024-02-28'),
   },
   {
     id: 6,
@@ -185,7 +189,7 @@ const SAMPLE_DATA: User[] = [
     email: 'diana@example.com',
     role: 'Viewer',
     status: 'active',
-    createdAt: new Date('2024-01-22'),
+    createdAt: Temporal.PlainDate.from('2024-01-22'),
   },
   {
     id: 7,
@@ -193,7 +197,7 @@ const SAMPLE_DATA: User[] = [
     email: 'edward@example.com',
     role: 'Editor',
     status: 'inactive',
-    createdAt: new Date('2024-03-12'),
+    createdAt: Temporal.PlainDate.from('2024-03-12'),
   },
   {
     id: 8,
@@ -201,7 +205,7 @@ const SAMPLE_DATA: User[] = [
     email: 'fiona@example.com',
     role: 'Viewer',
     status: 'pending',
-    createdAt: new Date('2024-02-14'),
+    createdAt: Temporal.PlainDate.from('2024-02-14'),
   },
   {
     id: 9,
@@ -209,7 +213,7 @@ const SAMPLE_DATA: User[] = [
     email: 'george@example.com',
     role: 'Admin',
     status: 'active',
-    createdAt: new Date('2024-01-30'),
+    createdAt: Temporal.PlainDate.from('2024-01-30'),
   },
   {
     id: 10,
@@ -217,7 +221,7 @@ const SAMPLE_DATA: User[] = [
     email: 'hannah@example.com',
     role: 'Editor',
     status: 'active',
-    createdAt: new Date('2024-03-01'),
+    createdAt: Temporal.PlainDate.from('2024-03-01'),
   },
   {
     id: 11,
@@ -225,7 +229,7 @@ const SAMPLE_DATA: User[] = [
     email: 'ivan@example.com',
     role: 'Viewer',
     status: 'inactive',
-    createdAt: new Date('2024-02-08'),
+    createdAt: Temporal.PlainDate.from('2024-02-08'),
   },
   {
     id: 12,
@@ -233,7 +237,7 @@ const SAMPLE_DATA: User[] = [
     email: 'julia@example.com',
     role: 'Editor',
     status: 'active',
-    createdAt: new Date('2024-03-18'),
+    createdAt: Temporal.PlainDate.from('2024-03-18'),
   },
 ];
 
@@ -613,8 +617,8 @@ export class FeaturedDataTableDemo {
         : 'outline';
   }
 
-  formatDate(date: Date): string {
-    return date.toLocaleDateString('en-US', {
+  formatDate(date: Temporal.PlainDate): string {
+    return date.toLocaleString('en-US', {
       month: 'short',
       day: 'numeric',
       year: 'numeric',

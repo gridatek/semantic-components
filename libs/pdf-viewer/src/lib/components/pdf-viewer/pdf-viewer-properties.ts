@@ -20,9 +20,15 @@ function text(value: unknown): string | null {
   return typeof value === 'string' && value.trim() ? value : null;
 }
 
-function date(value: unknown): Date | null {
-  return typeof value === 'string'
-    ? (PDFDateString.toDateObject(value) ?? null)
+/**
+ * A PDF date (`D:YYYYMMDDHHmmSSOHH'mm'`) as an instant. pdf.js parses it —
+ * into a `Date`, the one place one is used, made an instant at once.
+ */
+function date(value: unknown): Temporal.Instant | null {
+  const parsed =
+    typeof value === 'string' ? PDFDateString.toDateObject(value) : null;
+  return parsed
+    ? Temporal.Instant.fromEpochMilliseconds(parsed.getTime())
     : null;
 }
 

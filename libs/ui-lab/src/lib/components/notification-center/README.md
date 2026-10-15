@@ -11,7 +11,7 @@ interface Notice extends ScNotification {
 }
 
 readonly notifications = signal<Notice[]>([
-  { id: '1', title: 'New message from Alice', type: 'message', timestamp: new Date(), read: false },
+  { id: '1', title: 'New message from Alice', type: 'message', timestamp: Temporal.Now.instant(), read: false },
 ]);
 ```
 
@@ -66,7 +66,7 @@ readonly notifications = signal<Notice[]>([
 | `dismiss(id)`         | Removes one                                                                       |
 | `clear()`             | Removes all                                                                       |
 
-`ScNotification` is what the center needs — `id`, `read`, `timestamp`, and optionally `type` (`info`, `success`, `warning`, `error`, `message`: the icon's colour). Add your own fields and write them in the template: the center is generic, so `center.visible()` has your type.
+`ScNotification` is what the center needs — `id`, `read`, `timestamp` (a `Temporal.Instant`), and optionally `type` (`info`, `success`, `warning`, `error`, `message`: the icon's colour). Add your own fields and write them in the template: the center is generic, so `center.visible()` has your type.
 
 There are no outputs: everything the parts do is a change of `notifications` — save it from there (an `effect`, or your store).
 

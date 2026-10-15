@@ -1,4 +1,3 @@
-import { Temporal } from '@js-temporal/polyfill';
 import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import {
   ScCalendar,

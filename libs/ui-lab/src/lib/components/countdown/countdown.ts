@@ -39,7 +39,8 @@ export class ScCountdown {
     cn('inline-flex items-center', this.classInput()),
   );
 
-  readonly targetDate = input.required<Date>();
+  /** The instant it counts down to. */
+  readonly targetDate = input.required<Temporal.Instant>();
   readonly autoStart = input<boolean>(true);
 
   readonly tick = output<ScCountdownTime>();
@@ -110,9 +111,11 @@ export class ScCountdown {
   }
 
   private calculateTime(): ScCountdownTime {
-    const now = Date.now();
-    const target = this.targetDate().getTime();
-    const total = Math.max(0, target - now);
+    const total = Math.max(
+      0,
+      this.targetDate().epochMilliseconds -
+        Temporal.Now.instant().epochMilliseconds,
+    );
 
     const seconds = Math.floor((total / 1000) % 60);
     const minutes = Math.floor((total / 1000 / 60) % 60);

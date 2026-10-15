@@ -43,7 +43,7 @@ export class ScNotificationCenter<T extends ScNotification = ScNotification> {
   readonly classInput = input<string>('', { alias: 'class' });
 
   /** Now, moving on every minute: the times follow it. */
-  readonly now = signal(Date.now());
+  readonly now = signal(Temporal.Now.instant());
 
   /** The notifications the filter shows. */
   readonly visible = computed(() => {
@@ -65,7 +65,10 @@ export class ScNotificationCenter<T extends ScNotification = ScNotification> {
     // In the browser only: the server renders the time once.
     const destroyRef = inject(DestroyRef);
     afterNextRender(() => {
-      const timer = setInterval(() => this.now.set(Date.now()), 60_000);
+      const timer = setInterval(
+        () => this.now.set(Temporal.Now.instant()),
+        60_000,
+      );
       destroyRef.onDestroy(() => clearInterval(timer));
     });
   }

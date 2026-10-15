@@ -73,6 +73,6 @@ import { ScCountdown } from '@semantic-components/ui-lab';
   encapsulation: ViewEncapsulation.None,
 })
 export class CompletedCountdownDemo {
-  readonly pastDate = new Date(Date.now() - 1000);
+  readonly pastDate = Temporal.Now.instant().subtract({ seconds: 1 });
 }`;
 }

@@ -19,8 +19,7 @@ import { MinMaxCalendarDemo } from './min-max-calendar-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class MinMaxCalendarDemoContainer {
-  readonly code = `import { Temporal } from '@js-temporal/polyfill';
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCalendar,
   ScCalendarHeader,

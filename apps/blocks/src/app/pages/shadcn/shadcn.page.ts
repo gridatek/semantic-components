@@ -1,4 +1,3 @@
-import { Temporal } from '@js-temporal/polyfill';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScAvatar,

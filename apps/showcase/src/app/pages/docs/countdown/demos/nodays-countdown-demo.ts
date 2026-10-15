@@ -39,5 +39,5 @@ import { ScCountdown } from '@semantic-components/ui-lab';
   encapsulation: ViewEncapsulation.None,
 })
 export class NodaysCountdownDemo {
-  readonly shortFuture = new Date(Date.now() + 2 * 60 * 60 * 1000);
+  readonly shortFuture = Temporal.Now.instant().add({ hours: 2 });
 }

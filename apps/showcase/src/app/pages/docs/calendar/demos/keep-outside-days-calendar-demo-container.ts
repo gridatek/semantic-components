@@ -19,8 +19,7 @@ import { KeepOutsideDaysCalendarDemo } from './keep-outside-days-calendar-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class KeepOutsideDaysCalendarDemoContainer {
-  readonly code = `import { Temporal } from '@js-temporal/polyfill';
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCalendar,
   ScCalendarClear,

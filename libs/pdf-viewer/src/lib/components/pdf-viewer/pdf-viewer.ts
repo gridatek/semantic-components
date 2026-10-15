@@ -776,7 +776,6 @@ export class ScPdfViewer {
   readonly sidebarWidth = signal(200);
 
   private editorIdCounter = 0;
-  private signatureIdCounter = 0;
   private commentIdCounter = 0;
 
   // Container element ref for fullscreen
@@ -2135,7 +2134,7 @@ export class ScPdfViewer {
   }
 
   addSavedSignature(sig: Omit<ScPdfSignatureData, 'id'>): void {
-    const id = `sig-${Date.now()}-${++this.signatureIdCounter}`;
+    const id = `sig-${crypto.randomUUID()}`;
     this.savedSignatures.update((list) => [...list, { ...sig, id }]);
   }
 
@@ -2197,7 +2196,7 @@ export class ScPdfViewer {
       ...place,
       text,
       author,
-      date: new Date().toLocaleString(),
+      date: Temporal.Now.plainDateTimeISO().toLocaleString(),
       color: '#FFFF00',
     });
     this.pendingComment.set(null);

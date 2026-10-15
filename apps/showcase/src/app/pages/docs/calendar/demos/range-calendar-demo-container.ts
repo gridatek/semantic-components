@@ -18,8 +18,7 @@ import { RangeCalendarDemo } from './range-calendar-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RangeCalendarDemoContainer {
-  readonly code = `import { Temporal } from '@js-temporal/polyfill';
-import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import {
   ScCalendar,
   ScCalendarHeader,

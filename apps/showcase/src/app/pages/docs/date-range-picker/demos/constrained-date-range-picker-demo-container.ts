@@ -18,8 +18,7 @@ import { ConstrainedDateRangePickerDemo } from './constrained-date-range-picker-
   encapsulation: ViewEncapsulation.None,
 })
 export class ConstrainedDateRangePickerDemoContainer {
-  readonly code = `import { Temporal } from '@js-temporal/polyfill';
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCalendar,
   ScCalendarHeader,

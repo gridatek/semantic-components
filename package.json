@@ -23,7 +23,6 @@
     "@angular/platform-server": "22.2.3",
     "@angular/router": "22.2.3",
     "@angular/ssr": "22.2.2",
-    "@js-temporal/polyfill": "^0.5.1",
     "@semantic-icons/lucide-icons": "^0.60.0",
     "@tanstack/angular-table": "^9.3.1",
     "@tiptap/core": "^3.32.0",

@@ -198,7 +198,7 @@ export class ScToaster {
 
   private run(id: string, timer: ScToastTimer): void {
     if (timer.timeout) return;
-    timer.startedAt = Date.now();
+    timer.startedAt = performance.now();
     timer.timeout = setTimeout(() => this.dismiss(id), timer.remaining);
   }
 
@@ -208,7 +208,7 @@ export class ScToaster {
     timer.timeout = undefined;
     timer.remaining = Math.max(
       0,
-      timer.remaining - (Date.now() - timer.startedAt),
+      timer.remaining - (performance.now() - timer.startedAt),
     );
   }
 

@@ -36,39 +36,47 @@ export const parseAsBoolean = createParser<boolean>(
 );
 
 /**
- * Parses an ISO-8601 date-time string (e.g. 2024-03-01T12:00:00.000Z).
- * Serialises back with `.toISOString()`.
+ * Parses an ISO-8601 instant (e.g. 2024-03-01T12:00:00Z) into a
+ * `Temporal.Instant`; serialises back with `.toString()`.
  */
-export const parseAsIsoDateTime = createParser<Date>(
+export const parseAsIsoDateTime = createParser<Temporal.Instant>(
   (raw) => {
-    const d = new Date(raw);
-    return isNaN(d.getTime()) ? null : d;
+    try {
+      return Temporal.Instant.from(raw);
+    } catch {
+      return null;
+    }
   },
-  (v) => v.toISOString(),
+  (v) => v.toString(),
 );
 
 /**
- * Parses an ISO-8601 date string (e.g. 2024-03-01).
- * Time is set to 00:00:00 UTC.
+ * Parses an ISO-8601 date (e.g. 2024-03-01) into a `Temporal.PlainDate`.
  */
-export const parseAsIsoDate = createParser<Date>(
+export const parseAsIsoDate = createParser<Temporal.PlainDate>(
   (raw) => {
     if (!/^\d{4}-\d{2}-\d{2}$/.test(raw)) return null;
-    const d = new Date(`${raw}T00:00:00.000Z`);
-    return isNaN(d.getTime()) ? null : d;
+    try {
+      return Temporal.PlainDate.from(raw, { overflow: 'reject' });
+    } catch {
+      return null;
+    }
   },
-  (v) => v.toISOString().slice(0, 10),
+  (v) => v.toString(),
 );
 
-/** Parses milliseconds since Unix epoch. */
-export const parseAsTimestamp = createParser<Date>(
+/** Parses milliseconds since the Unix epoch into a `Temporal.Instant`. */
+export const parseAsTimestamp = createParser<Temporal.Instant>(
   (raw) => {
     const n = parseInt(raw, 10);
     if (isNaN(n)) return null;
-    const d = new Date(n);
-    return isNaN(d.getTime()) ? null : d;
+    try {
+      return Temporal.Instant.fromEpochMilliseconds(n);
+    } catch {
+      return null;
+    }
   },
-  (v) => String(v.getTime()),
+  (v) => String(v.epochMilliseconds),
 );
 
 /**

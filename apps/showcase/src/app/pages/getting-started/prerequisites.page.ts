@@ -142,26 +142,6 @@ import { TocHeading } from '../../components/toc/toc-heading';
           you can swap them for any library.
         </p>
       </section>
-
-      <div scSeparator></div>
-
-      <section class="space-y-4">
-        <h2 scHeading appToc>5. Install Temporal polyfill</h2>
-        <p class="text-muted-foreground">
-          Some components rely on the
-          <a
-            href="https://tc39.es/proposal-temporal/docs/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-foreground underline underline-offset-4"
-          >
-            Temporal API
-          </a>
-          for date and time handling. Until browsers fully support it natively,
-          install the polyfill as a temporary solution.
-        </p>
-        <app-package-manager-install packages="@js-temporal/polyfill" />
-      </section>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,

@@ -20,7 +20,6 @@
     "@angular/aria": ">=22.2.3",
     "@angular/common": ">=22.2.3",
     "@angular/cdk": ">=22.2.3",
-    "@js-temporal/polyfill": ">=0.5.1",
     "@angular/forms": ">=22.2.3",
     "rxjs": ">=7.8.2",
     "@angular/router": ">=22.2.3"

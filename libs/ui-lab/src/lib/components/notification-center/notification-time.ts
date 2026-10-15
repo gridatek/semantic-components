@@ -25,12 +25,14 @@ export class ScNotificationTime {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly iso = computed(() =>
-    this.item.notification().timestamp.toISOString(),
+    this.item.notification().timestamp.toString(),
   );
 
   protected readonly text = computed(() => {
     const then = this.item.notification().timestamp;
-    const minutes = Math.round((then.getTime() - this.center.now()) / 60000);
+    const minutes = Math.round(
+      (then.epochMilliseconds - this.center.now().epochMilliseconds) / 60000,
+    );
     const relative = new Intl.RelativeTimeFormat(this.locale, {
       numeric: 'auto',
     });
@@ -41,7 +43,7 @@ export class ScNotificationTime {
     if (minutes > -7 * 24 * 60) {
       return relative.format(Math.round(minutes / (24 * 60)), 'day');
     }
-    return then.toLocaleDateString(this.locale, {
+    return then.toLocaleString(this.locale, {
       month: 'short',
       day: 'numeric',
     });

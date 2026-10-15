@@ -395,7 +395,7 @@ export class BasicKanbanBoardDemo {
       ],
       assignee: { id: 'u1', name: 'Alice Johnson', initials: 'AJ' },
       priority: 'urgent',
-      dueDate: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
+      dueDate: Temporal.Now.plainDateISO().add({ days: 2 }),
     },
     {
       id: '4',
@@ -432,7 +432,7 @@ export class BasicKanbanBoardDemo {
       order: 1,
       labels: [{ id: 'l8', text: 'DevOps', color: '#ec4899' }],
       priority: 'medium',
-      dueDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+      dueDate: Temporal.Now.plainDateISO().add({ days: 7 }),
     },
     {
       id: '8',
@@ -498,7 +498,7 @@ export class BasicKanbanBoardDemo {
       // Access the board through template ref would be ideal,
       // but we can use the signal directly since we have two-way binding
       const newCard: ScKanbanCardData = {
-        id: \`\${Date.now()}-\${Math.random().toString(36).substr(2, 9)}\`,
+        id: crypto.randomUUID(),
         title,
         columnId,
         order: this.cards().filter((c) => c.columnId === columnId).length,
@@ -518,7 +518,7 @@ export class BasicKanbanBoardDemo {
 
     if (title) {
       const newCard: ScKanbanCardData = {
-        id: \`\${Date.now()}-\${Math.random().toString(36).substr(2, 9)}\`,
+        id: crypto.randomUUID(),
         title,
         columnId,
         order: this.cards().filter((c) => c.columnId === columnId).length,
@@ -558,7 +558,7 @@ export class BasicKanbanBoardDemo {
 
     if (title) {
       const newColumn: ScKanbanColumnData = {
-        id: \`\${Date.now()}-\${Math.random().toString(36).substr(2, 9)}\`,
+        id: crypto.randomUUID(),
         title,
         order: this.columns().length,
       };
@@ -577,7 +577,7 @@ export class BasicKanbanBoardDemo {
 
     if (title) {
       const newColumn: ScKanbanColumnData = {
-        id: \`\${Date.now()}-\${Math.random().toString(36).substr(2, 9)}\`,
+        id: crypto.randomUUID(),
         title,
         order: this.columns().length,
       };

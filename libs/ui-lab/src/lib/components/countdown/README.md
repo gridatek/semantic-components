@@ -73,7 +73,7 @@ A directive-based countdown timer. The directive provides timer logic and expose
   `,
 })
 export class EventTimer {
-  eventDate = new Date('2024-12-31T23:59:59');
+  eventDate = Temporal.Instant.from('2026-12-31T23:59:59Z');
 
   onComplete() {
     console.log('Happy New Year!');
@@ -85,11 +85,11 @@ export class EventTimer {
 
 ### ScCountdown
 
-| Input        | Type      | Default | Description            |
-| ------------ | --------- | ------- | ---------------------- |
-| `class`      | `string`  | `''`    | Additional CSS classes |
-| `targetDate` | `Date`    | -       | **Required.** End date |
-| `autoStart`  | `boolean` | `true`  | Start automatically    |
+| Input        | Type               | Default | Description                                 |
+| ------------ | ------------------ | ------- | ------------------------------------------- |
+| `class`      | `string`           | `''`    | Additional CSS classes                      |
+| `targetDate` | `Temporal.Instant` | -       | **Required.** The instant it counts down to |
+| `autoStart`  | `boolean`          | `true`  | Start automatically                         |
 
 | Output     | Type              | Description               |
 | ---------- | ----------------- | ------------------------- |

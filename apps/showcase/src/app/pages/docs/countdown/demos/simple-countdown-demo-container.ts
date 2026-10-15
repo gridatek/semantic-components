@@ -70,8 +70,8 @@ import { ScCountdown } from '@semantic-components/ui-lab';
   encapsulation: ViewEncapsulation.None,
 })
 export class SimpleCountdownDemo {
-  readonly futureDate = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
-  readonly shortFuture = new Date(Date.now() + 2 * 60 * 60 * 1000);
-  readonly veryShortFuture = new Date(Date.now() + 5 * 60 * 1000);
+  readonly futureDate = Temporal.Now.instant().add({ hours: 7 * 24 });
+  readonly shortFuture = Temporal.Now.instant().add({ hours: 2 });
+  readonly veryShortFuture = Temporal.Now.instant().add({ minutes: 5 });
 }`;
 }

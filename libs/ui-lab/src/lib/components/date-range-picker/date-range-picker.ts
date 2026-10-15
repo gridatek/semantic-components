@@ -1,4 +1,3 @@
-import { Temporal } from '@js-temporal/polyfill';
 import {
   Directive,
   LOCALE_ID,

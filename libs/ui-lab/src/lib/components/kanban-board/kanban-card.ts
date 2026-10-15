@@ -58,11 +58,7 @@ export class ScKanbanCard {
     const dueDate = this.card().dueDate;
     if (!dueDate) return 'text-muted-foreground';
 
-    const now = new Date();
-    const due = new Date(dueDate);
-    const diffDays = Math.ceil(
-      (due.getTime() - now.getTime()) / (1000 * 60 * 60 * 24),
-    );
+    const diffDays = Temporal.Now.plainDateISO().until(dueDate).days;
 
     if (diffDays < 0) {
       return 'text-red-700 dark:text-red-400';
@@ -78,11 +74,8 @@ export class ScKanbanCard {
     return priority ? priority[0].toUpperCase() + priority.slice(1) : '';
   }
 
-  formatDate(date: Date): string {
-    const d = new Date(date);
-    const month = d.toLocaleString('default', { month: 'short' });
-    const day = d.getDate();
-    return `${month} ${day}`;
+  formatDate(date: Temporal.PlainDate): string {
+    return date.toLocaleString(undefined, { month: 'short', day: 'numeric' });
   }
 
   onDragStart(event: DragEvent): void {

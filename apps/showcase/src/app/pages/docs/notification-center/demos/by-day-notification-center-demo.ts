@@ -42,7 +42,8 @@ interface Day {
   readonly notices: readonly Notice[];
 }
 
-const hoursAgo = (hours: number) => new Date(Date.now() - hours * 3600000);
+const hoursAgo = (hours: number) =>
+  Temporal.Now.instant().subtract({ minutes: Math.round(hours * 60) });
 
 /** Notifications in sections by day, as most apps show them. */
 @Component({
@@ -214,25 +215,22 @@ export class ByDayNotificationCenterDemo {
 
   /** The notifications in days: Today, Yesterday, Earlier (empty ones left out). */
   byDay(notices: readonly Notice[]): Day[] {
-    const startOfToday = new Date();
-    startOfToday.setHours(0, 0, 0, 0);
-    const today = startOfToday.getTime();
-    const yesterday = today - 24 * 3600000;
+    const today = Temporal.Now.zonedDateTimeISO().startOfDay();
+    const yesterday = today.subtract({ days: 1 });
+    const since = (n: Notice, day: Temporal.ZonedDateTime) =>
+      Temporal.Instant.compare(n.timestamp, day.toInstant()) >= 0;
     const days: Day[] = [
       {
         title: 'Today',
-        notices: notices.filter((n) => n.timestamp.getTime() >= today),
+        notices: notices.filter((n) => since(n, today)),
       },
       {
         title: 'Yesterday',
-        notices: notices.filter((n) => {
-          const t = n.timestamp.getTime();
-          return t >= yesterday && t < today;
-        }),
+        notices: notices.filter((n) => since(n, yesterday) && !since(n, today)),
       },
       {
         title: 'Earlier',
-        notices: notices.filter((n) => n.timestamp.getTime() < yesterday),
+        notices: notices.filter((n) => !since(n, yesterday)),
       },
     ];
     return days.filter((day) => day.notices.length);

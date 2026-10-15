@@ -1,4 +1,4 @@
-import { DatePipe, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
   Component,
   ViewEncapsulation,
@@ -240,7 +240,6 @@ const INK_COLORS = [
 @Component({
   selector: 'app-pdf-viewer-demo',
   imports: [
-    DatePipe,
     NgTemplateOutlet,
     ScPdfViewer,
     ScPdfViewerContainer,
@@ -1980,9 +1979,9 @@ const INK_COLORS = [
                 <dt class="text-muted-foreground">Keywords</dt>
                 <dd class="break-words">{{ props.keywords ?? '—' }}</dd>
                 <dt class="text-muted-foreground">Created</dt>
-                <dd>{{ (props.creationDate | date: 'medium') ?? '—' }}</dd>
+                <dd>{{ props.creationDate?.toLocaleString() ?? '—' }}</dd>
                 <dt class="text-muted-foreground">Modified</dt>
-                <dd>{{ (props.modificationDate | date: 'medium') ?? '—' }}</dd>
+                <dd>{{ props.modificationDate?.toLocaleString() ?? '—' }}</dd>
                 <dt class="text-muted-foreground">Creator</dt>
                 <dd class="break-words">{{ props.creator ?? '—' }}</dd>
                 <dt class="text-muted-foreground">PDF producer</dt>

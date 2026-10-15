@@ -67,7 +67,8 @@ interface Notice extends ScNotification {
   readonly action?: string;
 }
 
-const minutesAgo = (minutes: number) => new Date(Date.now() - minutes * 60000);
+const minutesAgo = (minutes: number) =>
+  Temporal.Now.instant().subtract({ minutes });
 
 /** An inbox behind a bell: the unread count, filters, actions. */
 @Component({

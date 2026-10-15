@@ -199,7 +199,7 @@ interface ScKanbanCardData {
   order: number;
   labels?: ScKanbanLabel[];
   assignee?: ScKanbanAssignee;
-  dueDate?: Date;
+  dueDate?: Temporal.PlainDate;
   priority?: 'low' | 'medium' | 'high' | 'urgent';
   metadata?: Record<string, unknown>;
 }

@@ -1,4 +1,3 @@
-import { Temporal } from '@js-temporal/polyfill';
 import { Grid, GridCell, GridCellWidget, GridRow } from '@angular/aria/grid';
 import {
   Component,

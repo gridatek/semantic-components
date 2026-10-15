@@ -1,4 +1,3 @@
-import { Temporal } from '@js-temporal/polyfill';
 import {
   Component,
   LOCALE_ID,

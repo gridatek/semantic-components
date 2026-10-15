@@ -10,7 +10,7 @@ export interface ScNotification {
   readonly id: string;
   readonly read: boolean;
   /** When it happened: `scNotificationTime` writes how long ago. */
-  readonly timestamp: Date;
+  readonly timestamp: Temporal.Instant;
   readonly type?: ScNotificationType;
 }
 
