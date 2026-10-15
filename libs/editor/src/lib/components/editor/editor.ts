@@ -21,6 +21,7 @@ import {
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
 import { editorContentExtensions } from './editor-extensions';
+import { textToDocument } from './editor-format';
 
 export type ScEditorAlignment = 'left' | 'center' | 'right' | 'justify';
 export type ScEditorHeadingLevel =
@@ -34,11 +35,12 @@ export type ScEditorContentLayout = 'default' | 'page';
 export type ScEditorListType = 'bulletList' | 'orderedList' | 'taskList';
 export type ScEditorSearchFlag = 'caseSensitive' | 'wholeWord' | 'useRegex';
 
+/** The format the editor writes its value in (`format`). */
+export type ScEditorFormat = 'html' | 'json' | 'text';
+
 /**
- * The document, as the form holds it: HTML (a string, '' when empty) or
- * Tiptap's JSON (an object, `null` when empty). The value's own type picks:
- * give the form a string and it gets HTML back; give it JSON (or `null`) and
- * it gets JSON.
+ * The document, as the form holds it: HTML or plain text (a string, '' when
+ * empty), or Tiptap's JSON (an object, `null` when empty).
  */
 export type ScEditorValue = string | JSONContent | null;
 
@@ -98,6 +100,12 @@ const LIST_TYPES: ScEditorListType[] = [
 export class ScEditor implements FormValueControl<ScEditorValue> {
   // Set by [formField] — the document's HTML, its state, its errors.
   readonly value = model<ScEditorValue>('');
+  /**
+   * The value's format: `html` (the default), `json` (Tiptap's JSON) or `text`
+   * (plain text, a line per paragraph — the formatting isn't kept). The
+   * editor reads any of them; changing it rewrites the value in the new one.
+   */
+  readonly format = input<ScEditorFormat>('html');
   readonly disabled = input(false, { transform: booleanAttribute });
   readonly readonly = input(false, { transform: booleanAttribute });
   readonly invalid = input(false, { transform: booleanAttribute });
@@ -218,13 +226,27 @@ export class ScEditor implements FormValueControl<ScEditorValue> {
     effect(() => {
       const value = this.value();
       const editor = this.editorInstance();
-      if (editor && !this.holds(editor, value)) {
-        editor
-          .chain()
-          .setMeta('addToHistory', false)
-          .setContent(value ?? '', { emitUpdate: false })
-          .run();
+      untracked(() => {
+        if (editor && !this.holds(editor, value)) {
+          editor
+            .chain()
+            .setMeta('addToHistory', false)
+            .setContent(this.toContent(value), { emitUpdate: false })
+            .run();
+        }
+      });
+    });
+
+    // A new format: the value, rewritten in it.
+    let previousFormat: ScEditorFormat | undefined;
+    effect(() => {
+      const format = this.format();
+      const editor = this.editorInstance();
+      if (!editor) return;
+      if (previousFormat && previousFormat !== format) {
+        untracked(() => this.value.set(this.serialize(editor)));
       }
+      previousFormat = format;
     });
   }
 
@@ -400,12 +422,12 @@ export class ScEditor implements FormValueControl<ScEditorValue> {
           }),
         }),
       ],
-      content: this.value() ?? '',
+      content: this.toContent(this.value()),
       editable: this.editable(),
       onTransaction: () => this.contentVersion.update((v) => v + 1),
       onUpdate: ({ editor }) => {
         if (!this.holds(editor, this.value())) {
-          this.value.set(this.serialize(editor, this.value()));
+          this.value.set(this.serialize(editor));
         }
       },
       onBlur: () => this.touch.emit(),
@@ -470,18 +492,31 @@ export class ScEditor implements FormValueControl<ScEditorValue> {
     this.uploads.update((uploads) => uploads.filter((u) => u.id !== id));
   }
 
+  /** The document in the editor's format; empty: '' (HTML, text) or null. */
+  private serialize(editor: Editor): ScEditorValue {
+    switch (this.format()) {
+      case 'json':
+        return editor.isEmpty ? null : editor.getJSON();
+      case 'text':
+        return editor.isEmpty ? '' : editor.getText({ blockSeparator: '\n' });
+      default:
+        return editor.isEmpty ? '' : editor.getHTML();
+    }
+  }
+
   /**
-   * The document in the value's format: HTML for a string ('' when empty),
-   * Tiptap's JSON otherwise (null when empty).
+   * A value as content for the editor: JSON as it is; a string as plain text
+   * in the text format, HTML otherwise (so HTML loads into a JSON editor).
    */
-  private serialize(editor: Editor, like: ScEditorValue): ScEditorValue {
-    if (typeof like === 'string') return editor.isEmpty ? '' : editor.getHTML();
-    return editor.isEmpty ? null : editor.getJSON();
+  private toContent(value: ScEditorValue): string | JSONContent {
+    if (value === null) return '';
+    if (typeof value !== 'string') return value;
+    return this.format() === 'text' ? textToDocument(value) : value;
   }
 
   /** Whether the document already is this value. */
   private holds(editor: Editor, value: ScEditorValue): boolean {
-    const current = this.serialize(editor, value);
+    const current = this.serialize(editor);
     return typeof value === 'string'
       ? value === current
       : JSON.stringify(value) === JSON.stringify(current);

@@ -3,8 +3,8 @@ import { ScHeading } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { EditorUsageDemoContainer } from './demos/editor-usage-demo-container';
+import { FormatsEditorDemoContainer } from './demos/formats-editor-demo-container';
 import { FullFeaturedEditorDemoContainer } from './demos/full-featured-editor-demo-container';
-import { JsonEditorDemoContainer } from './demos/json-editor-demo-container';
 import { NoCountEditorDemoContainer } from './demos/no-count-editor-demo-container';
 import { PrefilledEditorDemoContainer } from './demos/prefilled-editor-demo-container';
 import { ReadonlyEditorDemoContainer } from './demos/readonly-editor-demo-container';
@@ -21,7 +21,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
     FullFeaturedEditorDemoContainer,
     SignalFormsEditorDemoContainer,
     ViewEditorDemoContainer,
-    JsonEditorDemoContainer,
+    FormatsEditorDemoContainer,
     TocHeading,
     ComponentBadges,
     ScHeading,
@@ -93,20 +93,25 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>JSON</h2>
+        <h2 scHeading appToc>Formats</h2>
         <p class="text-muted-foreground">
-          The value can be Tiptap&apos;s JSON instead of HTML: start the form
-          with
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">null</code> (or a
-          JSON document) and the editor gives JSON back,
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">format</code>
+          picks what the form holds:
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">html</code> (the
+          default),
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">json</code>
+          (Tiptap&apos;s JSON,
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">null</code> when
-          it&apos;s empty. A string still means HTML.
+          empty) or
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">text</code>
+          (plain text, a line per paragraph). Switching it rewrites the value in
+          the new format, and
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
             >scEditorView</code
           >
-          displays either.
+          shows any of them, given the same format.
         </p>
-        <app-json-editor-demo-container />
+        <app-formats-editor-demo-container />
       </section>
 
       <section class="space-y-4">

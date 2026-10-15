@@ -15,15 +15,21 @@ import {
   input,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import type { ScEditorContentLayout, ScEditorValue } from './editor';
+import type {
+  ScEditorContentLayout,
+  ScEditorFormat,
+  ScEditorValue,
+} from './editor';
 import { editorContentExtensions } from './editor-extensions';
+import { textToDocument } from './editor-format';
 
 let schema: Schema | null = null;
 
 /**
  * Displays what the editor wrote — a saved post, a preview — as the editor
- * shows it: the same styles, without an editor. Takes either format the editor
- * gives: HTML (a string) or Tiptap's JSON (an object). Either is read through
+ * shows it: the same styles, without an editor. Give it the editor's `format`:
+ * HTML (the default) or plain text as a string, Tiptap's JSON as an object
+ * (an object is read as JSON whatever the format). Any is read through
  * the editor's schema, so only what the editor can hold is shown (no scripts,
  * no unsafe links). Task checkboxes are shown, not changed. `layout="page"`
  * centres it in a column of readable width, as `scEditorContent` does.
@@ -43,6 +49,8 @@ export class ScEditorView {
 
   /** The document to display: HTML or Tiptap's JSON. */
   readonly content = input.required<ScEditorValue>({ alias: 'scEditorView' });
+  /** The format the content is in, as the editor's. */
+  readonly format = input<ScEditorFormat>('html');
   readonly layout = input<ScEditorContentLayout>('default');
   readonly classInput = input<string>('', { alias: 'class' });
 
@@ -81,10 +89,12 @@ export class ScEditorView {
 
   /** The document, from HTML or JSON; what the schema can't hold is dropped. */
   private parse(schema: Schema, content: ScEditorValue): ProseMirrorNode {
-    if (content === null || typeof content === 'object') {
+    if (typeof content !== 'string' || this.format() === 'text') {
       try {
         const doc = schema.nodeFromJSON(
-          content ?? { type: 'doc', content: [] },
+          typeof content === 'string'
+            ? textToDocument(content)
+            : (content ?? { type: 'doc', content: [] }),
         );
         // Its structure too: a list item in a heading isn't shown half-built.
         doc.check();

@@ -45,7 +45,7 @@ readonly postForm = form(signal({ body: '' }), (path) => {
 });
 ```
 
-- **The value** is the document's HTML (`''` when it's empty) — or Tiptap's JSON, if the form starts with `null` or JSON (see [HTML or JSON](#html-or-json)). Setting it from outside (a reset, a load) isn't a change to undo.
+- **The value** is the document's HTML (`''` when it's empty) — or Tiptap's JSON or plain text, with `format` (see [Formats](#formats)). Setting it from outside (a reset, a load) isn't a change to undo.
 - **Disabled and read-only** come from the schema (`disabled(path.body)`, `readonly(path.body)`), and can change at any time.
 - **Errors**: put the editor in a `scField` with `scFieldErrors` — once it's left invalid, the document gets `aria-invalid` and is described by the errors.
 
@@ -90,7 +90,7 @@ For the same reason the editor's group is `scEditorToolbarGroup`, not a toggle g
 
 ## `scEditor`
 
-- **Set by `[formField]`**: `value` (HTML or JSON), `disabled`, `readonly`, `invalid`, `touched`; `touch` fires when the document loses focus.
+- **Set by `[formField]`**: `value` (in its `format`), `disabled`, `readonly`, `invalid`, `touched`; `touch` fires when the document loses focus.
 - **Inputs**: `upload` — the image upload handler (none: no images); `imageTypes` — the image types it takes (PNG, JPEG, GIF, WebP).
 - **State**: `isActive(name, attributes?)` — a mark or node at the selection (`'bold'`, `'link'`, `'heading', { level: 2 }`…); `alignment()`, `heading()`, `list()`, `linkHref()`, `highlightColor()`; `editable()`.
 - **Commands**: `run((chain) => chain.toggleBold())` — any Tiptap command, on the focused document; `can((chain) => chain.undo())`; `toggleList(type)`.
@@ -218,29 +218,38 @@ The button picks files; dropping or pasting images does the same. Each is insert
 
 The matches are highlighted in the document; the current one is selected and scrolled to. Read-only documents can be searched, not replaced.
 
-## HTML or JSON
+## Formats
 
-The value is HTML or Tiptap's JSON — the value's own type picks, no input to set:
+`format` picks what the form holds — as `output` in minimal-tiptap, `outputFormat` in ngx-tiptap, `format` in ngx-quill:
 
-| The form starts with       | The editor gives back                                        | Empty  |
-| -------------------------- | ------------------------------------------------------------ | ------ |
-| a string (`''`, or HTML)   | HTML: `'<p><strong>Hello</strong></p>'`                      | `''`   |
-| `null`, or a JSON document | JSON: `{ type: 'doc', content: [{ type: 'paragraph', … }] }` | `null` |
+| `format`         | The value                                                                          | Empty  |
+| ---------------- | ---------------------------------------------------------------------------------- | ------ |
+| `html` (default) | HTML: `'<p>Hello <strong>world</strong></p>'`                                      | `''`   |
+| `json`           | Tiptap's JSON: `{ type: 'doc', content: [{ type: 'paragraph', … }] }`              | `null` |
+| `text`           | Plain text, a line per paragraph: `'Hello world\nBye'` — the formatting isn't kept | `''`   |
+
+```html
+<div scEditor [formField]="noteForm.body" format="json">…</div>
+```
 
 ```ts
-readonly noteForm = form(signal<{ body: JSONContent | null }>({ body: null }), (path) => {
+readonly noteForm = form(signal<{ body: ScEditorValue }>({ body: null }), (path) => {
   required(path.body);
 });
 ```
 
-`required` sees both empties. The format holds: a string stays HTML, JSON stays JSON — set the other type to switch. JSON (`ScEditorValue` is `string | JSONContent | null`) needs no HTML parsing on a server, and keeps its shape as the editor's HTML output changes.
+- **Empty is empty**: `''` or `null`, never `'<p></p>'` — so `required` works in every format.
+- **Any format comes in**: JSON is read as JSON; a string as plain text in the `text` format, HTML otherwise — so HTML you saved before loads into a `json` editor, which writes JSON from the next change.
+- **Switching `format`** rewrites the value in the new one.
+- **Why JSON**: it needs no HTML parsing on a server and keeps its shape as the editor's HTML output changes (the format the newer editors — Lexical, Plate, BlockNote — store). `ScEditorValue` is `string | JSONContent | null`.
 
 ## Displaying the document
 
-`scEditorView` shows what the editor wrote — a published post, a preview — as the editor shows it: the same styles, without an editor. It takes either format: a string is read as HTML, an object (or `null`) as JSON.
+`scEditorView` shows what the editor wrote — a published post, a preview — as the editor shows it: the same styles, without an editor. Give it the editor's `format`: a string is read as HTML (or as plain text with `format="text"`), an object (or `null`) as JSON.
 
 ```html
 <article [scEditorView]="post.body" aria-label="Post"></article>
+<article [scEditorView]="note.body" format="text"></article>
 <article [scEditorView]="post.body" layout="page"></article>
 ```
 

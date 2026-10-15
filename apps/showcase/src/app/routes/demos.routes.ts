@@ -1401,10 +1401,10 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'json-editor-demo',
+        path: 'formats-editor-demo',
         loadComponent: () =>
-          import('../pages/docs/editor/demos/json-editor-demo').then(
-            (m) => m.JsonEditorDemo,
+          import('../pages/docs/editor/demos/formats-editor-demo').then(
+            (m) => m.FormatsEditorDemo,
           ),
       },
     ],
