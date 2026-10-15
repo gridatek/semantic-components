@@ -4,8 +4,8 @@ import { bindInput, cn, toggleVariants } from '@semantic-components/ui';
 import { SC_EDITOR } from './editor';
 
 /**
- * The link button: pressed inside a link. It runs no command itself — make
- * it the trigger of your link form (a `scPopoverTrigger`, say), whose
+ * The link button: pressed inside a link. It runs no command itself — make it the
+ * trigger of your popover (a `scPopoverTrigger`), whose
  * buttons call the editor's `setLink(href)` / `unsetLink()`; `linkHref()`
  * is the address at the selection. Write its icon and name it.
  */

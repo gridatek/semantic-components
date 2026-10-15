@@ -50,7 +50,7 @@ import { EditorUsageDemoContainer } from '../docs/editor/demos/editor-usage-demo
           Install the editor library and its Tiptap peer dependencies.
         </p>
         <app-package-manager-install
-          packages="@semantic-components/editor @tiptap/core @tiptap/starter-kit @tiptap/extension-placeholder @tiptap/extension-text-align"
+          packages="@semantic-components/editor @tiptap/core @tiptap/starter-kit @tiptap/extensions @tiptap/extension-list @tiptap/extension-text-align @tiptap/extension-highlight @tiptap/extension-superscript @tiptap/extension-subscript @tiptap/extension-image @tiptap/extension-file-handler @tiptap/extension-find-and-replace"
         />
       </section>
 

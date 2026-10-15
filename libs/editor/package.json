@@ -14,12 +14,19 @@
   },
   "peerDependencies": {
     "@angular/core": ">=21.1.0",
+    "@angular/aria": ">=21.2.2",
     "@semantic-components/ui": "0.81.0",
-    "@tiptap/core": ">=3.18.0",
-    "@tiptap/extension-placeholder": ">=3.18.0",
-    "@tiptap/extension-text-align": ">=3.18.0",
-    "@tiptap/starter-kit": ">=3.18.0",
-    "@angular/aria": ">=21.2.2"
+    "@tiptap/core": ">=3.32.0",
+    "@tiptap/extension-file-handler": ">=3.32.0",
+    "@tiptap/extension-find-and-replace": ">=3.32.0",
+    "@tiptap/extension-highlight": ">=3.32.0",
+    "@tiptap/extension-image": ">=3.32.0",
+    "@tiptap/extension-list": ">=3.32.0",
+    "@tiptap/extension-subscript": ">=3.32.0",
+    "@tiptap/extension-superscript": ">=3.32.0",
+    "@tiptap/extension-text-align": ">=3.32.0",
+    "@tiptap/extensions": ">=3.32.0",
+    "@tiptap/starter-kit": ">=3.32.0"
   },
   "exports": {
     "./styles": {

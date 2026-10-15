@@ -8,26 +8,45 @@ import {
   ScEditorAlignRight,
   ScEditorBlockquote,
   ScEditorBold,
-  ScEditorBulletList,
   ScEditorCharCount,
   ScEditorClearFormatting,
   ScEditorCode,
+  ScEditorCodeBlock,
   ScEditorContent,
   ScEditorCount,
   ScEditorFooter,
   ScEditorHeading,
   type ScEditorHeadingLevel,
+  ScEditorHighlight,
+  ScEditorHighlightColor,
   ScEditorHorizontalRule,
+  ScEditorImage,
   ScEditorItalic,
   ScEditorLink,
-  ScEditorNumberedList,
+  ScEditorList,
+  type ScEditorListType,
   ScEditorRedo,
+  ScEditorReplace,
+  ScEditorReplaceAll,
+  ScEditorReplaceInput,
+  ScEditorSearch,
+  ScEditorSearchBar,
+  ScEditorSearchClose,
+  ScEditorSearchInput,
+  ScEditorSearchNext,
+  ScEditorSearchOption,
+  ScEditorSearchPrevious,
+  ScEditorSearchResults,
   ScEditorSeparator,
   ScEditorStrikethrough,
+  ScEditorSubscript,
+  ScEditorSuperscript,
   ScEditorToolbar,
   ScEditorToolbarGroup,
   ScEditorUnderline,
   ScEditorUndo,
+  ScEditorUnsetHighlight,
+  type ScEditorUploadHandler,
   ScEditorWordCount,
 } from '@semantic-components/editor';
 import {
@@ -35,6 +54,7 @@ import {
   ScField,
   ScInput,
   ScLabel,
+  ScLink,
   ScMenu,
   ScMenuContent,
   ScMenuItem,
@@ -45,105 +65,184 @@ import {
   ScPopoverPortal,
   ScPopoverProvider,
   ScPopoverTrigger,
+  ScProgress,
+  ScSeparator,
 } from '@semantic-components/ui';
 import {
+  SiBanIcon,
   SiBoldIcon,
+  SiCaseSensitiveIcon,
   SiChevronDownIcon,
+  SiChevronUpIcon,
   SiCodeIcon,
+  SiCodeXmlIcon,
+  SiExternalLinkIcon,
+  SiHeading1Icon,
+  SiHeading2Icon,
+  SiHeading3Icon,
+  SiHeading4Icon,
+  SiHeadingIcon,
+  SiHighlighterIcon,
+  SiImagePlusIcon,
   SiItalicIcon,
   SiLinkIcon,
   SiListIcon,
   SiListOrderedIcon,
+  SiListTodoIcon,
   SiMinusIcon,
-  SiQuoteIcon,
   SiRedoIcon,
+  SiRegexIcon,
   SiRemoveFormattingIcon,
+  SiSearchIcon,
   SiStrikethroughIcon,
+  SiSubscriptIcon,
+  SiSuperscriptIcon,
   SiTextAlignCenterIcon,
   SiTextAlignEndIcon,
   SiTextAlignJustifyIcon,
   SiTextAlignStartIcon,
+  SiTextQuoteIcon,
   SiUnderlineIcon,
   SiUndoIcon,
+  SiUnlinkIcon,
+  SiWholeWordIcon,
+  SiXIcon,
 } from '@semantic-icons/lucide-icons';
 
+const SAMPLE = `<h1>Getting started</h1>
+<p>Welcome to the editor: a <strong>rich text editor</strong> built on <a href="https://tiptap.dev">Tiptap</a>, with every part written in your own template.</p>
+<p>Write in <strong>bold</strong>, <em>italic</em>, <u>underline</u>, <s>strike</s> or <code>code</code>, and <mark data-color="var(--editor-highlight-yellow)" style="background-color: var(--editor-highlight-yellow)">highlight</mark> what matters. Superscript and subscript: E = mc<sup>2</sup>, H<sub>2</sub>O.</p>
+<h2>Lists</h2>
+<ul data-type="taskList">
+  <li data-type="taskItem" data-checked="true"><p>Pick a block type from the heading menu</p></li>
+  <li data-type="taskItem" data-checked="false"><p>Try a bulleted, numbered or task list</p></li>
+  <li data-type="taskItem" data-checked="false"><p>Drop an image into the document</p></li>
+</ul>
+<h2>Code</h2>
+<pre><code>const editor = inject(SC_EDITOR);
+editor.run((chain) =&gt; chain.toggleBold());</code></pre>
+<blockquote><p>Search with Ctrl + F, and replace what you find.</p></blockquote>
+<p style="text-align: center">Centred, justified, or aligned to either side.</p>`;
+
+/**
+ * The editor with everything: the toolbar of Tiptap's Simple Editor (undo,
+ * block type, lists, marks, highlight, link, alignment, images) and search
+ * and replace, in the library's styles.
+ */
 @Component({
   selector: 'app-full-featured-editor-demo',
   imports: [
     FormField,
+    ScButton,
     ScField,
     ScInput,
     ScLabel,
-    ScPopover,
-    ScPopoverPortal,
-    ScPopoverProvider,
-    ScPopoverTrigger,
-    ScEditor,
-    ScEditorContent,
-    ScEditorToolbar,
-    ScEditorToolbarGroup,
-    ScEditorBold,
-    ScEditorItalic,
-    ScEditorUnderline,
-    ScEditorStrikethrough,
-    ScEditorSeparator,
-    ScEditorHeading,
-    ScEditorUndo,
-    ScEditorRedo,
-    ScEditorAlignLeft,
-    ScEditorAlignCenter,
-    ScEditorAlignRight,
-    ScEditorAlignJustify,
-    ScEditorBulletList,
-    ScEditorNumberedList,
-    ScEditorLink,
-    ScEditorBlockquote,
-    ScEditorCode,
-    ScEditorHorizontalRule,
-    ScEditorClearFormatting,
-    ScEditorFooter,
-    ScEditorCount,
-    ScEditorWordCount,
-    ScEditorCharCount,
+    ScLink,
     ScMenu,
     ScMenuContent,
     ScMenuItem,
     ScMenuPortal,
     ScMenuProvider,
     ScMenuTrigger,
+    ScPopover,
+    ScPopoverPortal,
+    ScPopoverProvider,
+    ScPopoverTrigger,
+    ScProgress,
+    ScSeparator,
+    ScEditor,
+    ScEditorAlignCenter,
+    ScEditorAlignJustify,
+    ScEditorAlignLeft,
+    ScEditorAlignRight,
+    ScEditorBlockquote,
+    ScEditorBold,
+    ScEditorCharCount,
+    ScEditorClearFormatting,
+    ScEditorCode,
+    ScEditorCodeBlock,
+    ScEditorContent,
+    ScEditorCount,
+    ScEditorFooter,
+    ScEditorHeading,
+    ScEditorHighlight,
+    ScEditorHighlightColor,
+    ScEditorHorizontalRule,
+    ScEditorImage,
+    ScEditorItalic,
+    ScEditorLink,
+    ScEditorList,
+    ScEditorRedo,
+    ScEditorReplace,
+    ScEditorReplaceAll,
+    ScEditorReplaceInput,
+    ScEditorSearch,
+    ScEditorSearchBar,
+    ScEditorSearchClose,
+    ScEditorSearchInput,
+    ScEditorSearchNext,
+    ScEditorSearchOption,
+    ScEditorSearchPrevious,
+    ScEditorSearchResults,
+    ScEditorSeparator,
+    ScEditorStrikethrough,
+    ScEditorSubscript,
+    ScEditorSuperscript,
+    ScEditorToolbar,
+    ScEditorToolbarGroup,
+    ScEditorUnderline,
+    ScEditorUndo,
+    ScEditorUnsetHighlight,
+    ScEditorWordCount,
+    SiBanIcon,
     SiBoldIcon,
+    SiCaseSensitiveIcon,
     SiChevronDownIcon,
+    SiChevronUpIcon,
+    SiCodeIcon,
+    SiCodeXmlIcon,
+    SiExternalLinkIcon,
+    SiHeading1Icon,
+    SiHeading2Icon,
+    SiHeading3Icon,
+    SiHeading4Icon,
+    SiHeadingIcon,
+    SiHighlighterIcon,
+    SiImagePlusIcon,
     SiItalicIcon,
-    SiUnderlineIcon,
-    SiStrikethroughIcon,
-    SiUndoIcon,
+    SiLinkIcon,
+    SiListIcon,
+    SiListOrderedIcon,
+    SiListTodoIcon,
+    SiMinusIcon,
     SiRedoIcon,
-    SiTextAlignStartIcon,
+    SiRegexIcon,
+    SiRemoveFormattingIcon,
+    SiSearchIcon,
+    SiStrikethroughIcon,
+    SiSubscriptIcon,
+    SiSuperscriptIcon,
     SiTextAlignCenterIcon,
     SiTextAlignEndIcon,
     SiTextAlignJustifyIcon,
-    SiListIcon,
-    SiListOrderedIcon,
-    SiLinkIcon,
-    SiQuoteIcon,
-    SiCodeIcon,
-    SiMinusIcon,
-    SiRemoveFormattingIcon,
-    ScButton,
+    SiTextAlignStartIcon,
+    SiTextQuoteIcon,
+    SiUnderlineIcon,
+    SiUndoIcon,
+    SiUnlinkIcon,
+    SiWholeWordIcon,
+    SiXIcon,
   ],
   template: `
     <div class="w-full">
-      <p class="text-muted-foreground mb-4 text-sm">
-        Try all the formatting options: bold, italic, headings, lists, links,
-        blockquotes, and more.
-      </p>
       <div
         scEditor
         #editor="scEditor"
         [formField]="editorForm.body"
+        [upload]="upload"
         class="overflow-hidden rounded-lg border"
       >
-        <div scEditorToolbar aria-label="Text formatting">
+        <div scEditorToolbar aria-label="Formatting">
           <div scEditorToolbarGroup>
             <button scEditorUndo value="undo">
               <svg siUndoIcon></svg>
@@ -157,28 +256,91 @@ import {
 
           <div scEditorSeparator></div>
 
-          <div scMenuProvider>
-            <button
-              scMenuTrigger
-              scEditorHeading
-              value="heading"
-              #heading="scEditorHeading"
-              class="w-auto gap-1"
-            >
-              {{ headingLabels[heading.level()] }}
-              <svg siChevronDownIcon></svg>
-            </button>
-            <ng-template scMenuPortal>
-              <div scMenu (itemSelected)="heading.select($event)">
-                <ng-template scMenuContent>
-                  @for (level of headingLevels; track level) {
-                    <div scMenuItem [value]="level">
-                      {{ headingLabels[level] }}
-                    </div>
+          <div scEditorToolbarGroup>
+            <div scMenuProvider>
+              <button
+                scMenuTrigger
+                scEditorHeading
+                value="heading"
+                #heading="scEditorHeading"
+              >
+                @switch (heading.level()) {
+                  @case ('h1') {
+                    <svg siHeading1Icon></svg>
                   }
-                </ng-template>
-              </div>
-            </ng-template>
+                  @case ('h2') {
+                    <svg siHeading2Icon></svg>
+                  }
+                  @case ('h3') {
+                    <svg siHeading3Icon></svg>
+                  }
+                  @case ('h4') {
+                    <svg siHeading4Icon></svg>
+                  }
+                  @default {
+                    <svg siHeadingIcon></svg>
+                  }
+                }
+                <span class="sr-only">{{
+                  headingLabels[heading.level()]
+                }}</span>
+                <svg siChevronDownIcon></svg>
+              </button>
+              <ng-template scMenuPortal>
+                <div scMenu (itemSelected)="heading.select($event)">
+                  <ng-template scMenuContent>
+                    @for (level of headingLevels; track level) {
+                      <div scMenuItem [value]="level">
+                        {{ headingLabels[level] }}
+                      </div>
+                    }
+                  </ng-template>
+                </div>
+              </ng-template>
+            </div>
+
+            <div scMenuProvider>
+              <button
+                scMenuTrigger
+                scEditorList
+                value="list"
+                #list="scEditorList"
+              >
+                @switch (list.type()) {
+                  @case ('orderedList') {
+                    <svg siListOrderedIcon></svg>
+                  }
+                  @case ('taskList') {
+                    <svg siListTodoIcon></svg>
+                  }
+                  @default {
+                    <svg siListIcon></svg>
+                  }
+                }
+                <span class="sr-only">List</span>
+                <svg siChevronDownIcon></svg>
+              </button>
+              <ng-template scMenuPortal>
+                <div scMenu (itemSelected)="list.select($event)">
+                  <ng-template scMenuContent>
+                    @for (type of listTypes; track type) {
+                      <div scMenuItem [value]="type">
+                        {{ listLabels[type] }}
+                      </div>
+                    }
+                  </ng-template>
+                </div>
+              </ng-template>
+            </div>
+
+            <button scEditorBlockquote value="blockquote">
+              <svg siTextQuoteIcon></svg>
+              <span class="sr-only">Blockquote</span>
+            </button>
+            <button scEditorCodeBlock value="code-block">
+              <svg siCodeXmlIcon></svg>
+              <span class="sr-only">Code block</span>
+            </button>
           </div>
 
           <div scEditorSeparator></div>
@@ -192,13 +354,110 @@ import {
               <svg siItalicIcon></svg>
               <span class="sr-only">Italic</span>
             </button>
+            <button scEditorStrikethrough value="strikethrough">
+              <svg siStrikethroughIcon></svg>
+              <span class="sr-only">Strikethrough</span>
+            </button>
+            <button scEditorCode value="code">
+              <svg siCodeIcon></svg>
+              <span class="sr-only">Code</span>
+            </button>
             <button scEditorUnderline value="underline">
               <svg siUnderlineIcon></svg>
               <span class="sr-only">Underline</span>
             </button>
-            <button scEditorStrikethrough value="strikethrough">
-              <svg siStrikethroughIcon></svg>
-              <span class="sr-only">Strikethrough</span>
+
+            <div scPopoverProvider>
+              <button scEditorHighlight scPopoverTrigger value="highlight">
+                <svg siHighlighterIcon></svg>
+                <span class="sr-only">Highlight</span>
+              </button>
+              <ng-template scPopoverPortal>
+                <div
+                  scPopover
+                  aria-label="Highlight colours"
+                  class="flex w-auto items-center gap-2 p-2"
+                >
+                  @for (color of highlightColors; track color.value) {
+                    <button
+                      [scEditorHighlightColor]="color.value"
+                      [attr.aria-label]="color.label"
+                    ></button>
+                  }
+                  <div scSeparator orientation="vertical"></div>
+                  <button scEditorUnsetHighlight>
+                    <svg siBanIcon></svg>
+                    <span class="sr-only">Remove highlight</span>
+                  </button>
+                </div>
+              </ng-template>
+            </div>
+
+            <div scPopoverProvider [(open)]="linkOpen">
+              <button
+                scEditorLink
+                scPopoverTrigger
+                value="link"
+                (click)="editLink(editor.linkHref())"
+              >
+                <svg siLinkIcon></svg>
+                <span class="sr-only">Link</span>
+              </button>
+              <ng-template scPopoverPortal>
+                <div scPopover aria-label="Link" class="w-80">
+                  <div class="flex items-end gap-2">
+                    <div scField class="flex-1">
+                      <label scLabel>Address</label>
+                      <input
+                        scInput
+                        type="url"
+                        [formField]="linkForm.href"
+                        (keydown.enter)="applyLink(editor)"
+                      />
+                    </div>
+                    <button scButton type="button" (click)="applyLink(editor)">
+                      Apply
+                    </button>
+                  </div>
+                  @if (editor.linkHref(); as href) {
+                    <div class="flex items-center justify-between gap-2">
+                      <a
+                        scLink
+                        [href]="href"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-flex items-center gap-1 truncate text-sm"
+                      >
+                        <svg siExternalLinkIcon></svg>
+                        Open link
+                      </a>
+                      <button
+                        scButton
+                        variant="ghost"
+                        size="sm"
+                        type="button"
+                        (click)="removeLink(editor)"
+                      >
+                        <svg siUnlinkIcon></svg>
+                        Remove
+                      </button>
+                    </div>
+                  }
+                </div>
+              </ng-template>
+            </div>
+          </div>
+
+          <div scEditorSeparator></div>
+
+          <div scEditorToolbarGroup>
+            <button scEditorSuperscript value="superscript">
+              <svg siSuperscriptIcon></svg>
+              <span class="sr-only">Superscript</span>
+            </button>
+            <button scEditorSubscript value="subscript">
+              <svg siSubscriptIcon></svg>
+              <span class="sr-only">Subscript</span>
             </button>
           </div>
 
@@ -226,90 +485,130 @@ import {
           <div scEditorSeparator></div>
 
           <div scEditorToolbarGroup>
-            <button scEditorBulletList value="bullet-list">
-              <svg siListIcon></svg>
-              <span class="sr-only">Bullet list</span>
-            </button>
-            <button scEditorNumberedList value="numbered-list">
-              <svg siListOrderedIcon></svg>
-              <span class="sr-only">Numbered list</span>
+            <button scEditorImage value="image">
+              <svg siImagePlusIcon></svg>
+              Add
+              <span class="sr-only">image</span>
             </button>
           </div>
 
           <div scEditorSeparator></div>
 
           <div scEditorToolbarGroup>
-            <div scPopoverProvider [(open)]="linkOpen">
-              <button
-                scEditorLink
-                scPopoverTrigger
-                value="link"
-                (click)="editLink(editor.linkHref())"
-              >
-                <svg siLinkIcon></svg>
-                <span class="sr-only">Link</span>
-              </button>
-              <ng-template scPopoverPortal>
-                <div scPopover class="w-72">
-                  <div scField>
-                    <label scLabel>Address</label>
-                    <input
-                      scInput
-                      type="url"
-                      [formField]="linkForm.href"
-                      (keydown.enter)="applyLink(editor)"
-                    />
-                  </div>
-                  <div class="flex justify-end gap-2">
-                    @if (editor.linkHref()) {
-                      <button
-                        scButton
-                        variant="outline"
-                        type="button"
-                        (click)="removeLink(editor)"
-                      >
-                        Remove
-                      </button>
-                    }
-                    <button scButton type="button" (click)="applyLink(editor)">
-                      Apply
-                    </button>
-                  </div>
-                </div>
-              </ng-template>
-            </div>
-            <button scEditorBlockquote value="blockquote">
-              <svg siQuoteIcon></svg>
-              <span class="sr-only">Blockquote</span>
-            </button>
-            <button scEditorCode value="code">
-              <svg siCodeIcon></svg>
-              <span class="sr-only">Code</span>
-            </button>
             <button scEditorHorizontalRule value="horizontal-rule">
               <svg siMinusIcon></svg>
               <span class="sr-only">Horizontal rule</span>
             </button>
-          </div>
-
-          <div scEditorSeparator></div>
-
-          <div scEditorToolbarGroup>
             <button scEditorClearFormatting value="clear-formatting">
               <svg siRemoveFormattingIcon></svg>
               <span class="sr-only">Clear formatting</span>
             </button>
+            <button scEditorSearch value="search">
+              <svg siSearchIcon></svg>
+              <span class="sr-only">Search and replace</span>
+            </button>
           </div>
         </div>
+
+        @if (editor.searchOpen()) {
+          <div scEditorSearchBar aria-label="Search and replace">
+            <input
+              scInput
+              scEditorSearchInput
+              aria-label="Search"
+              placeholder="Search…"
+              class="h-8 w-48"
+            />
+            <span scEditorSearchResults class="min-w-16">
+              @if (editor.searchTerm()) {
+                @if (editor.searchResults()) {
+                  {{ (editor.searchIndex() ?? 0) + 1 }} of
+                  {{ editor.searchResults() }}
+                } @else {
+                  No results
+                }
+              }
+            </span>
+            <button
+              scButton
+              variant="ghost"
+              size="icon-sm"
+              scEditorSearchPrevious
+            >
+              <svg siChevronUpIcon></svg>
+              <span class="sr-only">Previous match</span>
+            </button>
+            <button scButton variant="ghost" size="icon-sm" scEditorSearchNext>
+              <svg siChevronDownIcon></svg>
+              <span class="sr-only">Next match</span>
+            </button>
+            <button scEditorSearchOption="caseSensitive">
+              <svg siCaseSensitiveIcon></svg>
+              <span class="sr-only">Match case</span>
+            </button>
+            <button scEditorSearchOption="wholeWord">
+              <svg siWholeWordIcon></svg>
+              <span class="sr-only">Whole word</span>
+            </button>
+            <button scEditorSearchOption="useRegex">
+              <svg siRegexIcon></svg>
+              <span class="sr-only">Regular expression</span>
+            </button>
+            <input
+              scInput
+              scEditorReplaceInput
+              aria-label="Replace with"
+              placeholder="Replace with…"
+              class="h-8 w-48"
+            />
+            <button scButton variant="outline" size="sm" scEditorReplace>
+              Replace
+            </button>
+            <button scButton variant="outline" size="sm" scEditorReplaceAll>
+              Replace all
+            </button>
+            <button
+              scButton
+              variant="ghost"
+              size="icon-sm"
+              scEditorSearchClose
+              class="ms-auto"
+            >
+              <svg siXIcon></svg>
+              <span class="sr-only">Close search</span>
+            </button>
+          </div>
+        }
 
         <div
           scEditorContent
           ariaLabel="Article"
-          class="max-h-[500px] min-h-[300px]"
-          placeholder="Start writing your content..."
+          class="max-h-[600px] min-h-[400px]"
+          placeholder="Start writing…"
         ></div>
 
         <div scEditorFooter>
+          @for (upload of editor.uploads(); track upload.id) {
+            <div class="mb-1.5 flex items-center gap-2">
+              <span class="truncate">Uploading {{ upload.file.name }}</span>
+              <div
+                scProgress
+                [value]="upload.progress * 100"
+                [attr.aria-label]="'Uploading ' + upload.file.name"
+                class="w-32"
+              ></div>
+              <button
+                scButton
+                variant="ghost"
+                size="icon-xs"
+                type="button"
+                (click)="editor.cancelUpload(upload.id)"
+              >
+                <svg siXIcon></svg>
+                <span class="sr-only">Cancel upload</span>
+              </button>
+            </div>
+          }
           <div scEditorCount>
             <span scEditorWordCount #wc="scEditorWordCount">
               {{ wc.wordCount() }} words
@@ -320,6 +619,7 @@ import {
           </div>
         </div>
       </div>
+
       <div class="mt-4 flex gap-4">
         <button scButton variant="outline" (click)="clearContent()">
           Clear Content
@@ -341,7 +641,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class FullFeaturedEditorDemo {
-  private readonly model = signal({ body: '' });
+  private readonly model = signal({ body: SAMPLE });
   readonly editorForm = form(this.model);
 
   /** The link popover and its address. */
@@ -349,7 +649,13 @@ export class FullFeaturedEditorDemo {
   private readonly linkModel = signal({ href: '' });
   readonly linkForm = form(this.linkModel);
 
-  readonly headingLevels: ScEditorHeadingLevel[] = ['p', 'h1', 'h2', 'h3'];
+  readonly headingLevels: ScEditorHeadingLevel[] = [
+    'p',
+    'h1',
+    'h2',
+    'h3',
+    'h4',
+  ];
   readonly headingLabels: Record<ScEditorHeadingLevel, string> = {
     p: 'Paragraph',
     h1: 'Heading 1',
@@ -359,6 +665,46 @@ export class FullFeaturedEditorDemo {
     h5: 'Heading 5',
     h6: 'Heading 6',
   };
+
+  readonly listTypes: ScEditorListType[] = [
+    'bulletList',
+    'orderedList',
+    'taskList',
+  ];
+  readonly listLabels: Record<ScEditorListType, string> = {
+    bulletList: 'Bullet list',
+    orderedList: 'Numbered list',
+    taskList: 'Task list',
+  };
+
+  readonly highlightColors = [
+    { label: 'Yellow', value: 'var(--editor-highlight-yellow)' },
+    { label: 'Green', value: 'var(--editor-highlight-green)' },
+    { label: 'Blue', value: 'var(--editor-highlight-blue)' },
+    { label: 'Purple', value: 'var(--editor-highlight-purple)' },
+    { label: 'Red', value: 'var(--editor-highlight-red)' },
+  ];
+
+  /**
+   * A pretend upload: reports progress for a second, then gives the image a
+   * local address. A real one would send the file to your server.
+   */
+  readonly upload: ScEditorUploadHandler = (file, { onProgress, signal }) =>
+    new Promise((resolve, reject) => {
+      let progress = 0;
+      const timer = setInterval(() => {
+        progress += 0.2;
+        onProgress(progress);
+        if (progress >= 1) {
+          clearInterval(timer);
+          resolve(URL.createObjectURL(file));
+        }
+      }, 200);
+      signal.addEventListener('abort', () => {
+        clearInterval(timer);
+        reject(signal.reason);
+      });
+    });
 
   /** The link popover opens with the address at the selection. */
   editLink(href: string): void {
@@ -380,43 +726,6 @@ export class FullFeaturedEditorDemo {
   }
 
   insertSampleContent(): void {
-    this.model.set({
-      body: `
-      <h1>Article Title</h1>
-      <p>This is the introduction paragraph of the article. It provides an overview of what will be discussed.</p>
-
-      <h2>First Section</h2>
-      <p>Lorem ipsum dolor sit amet, <strong>consectetur adipiscing elit</strong>. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-
-      <h3>Subsection</h3>
-      <p>Here are some key points to consider:</p>
-      <ul>
-        <li>First important point</li>
-        <li>Second important point</li>
-        <li>Third important point</li>
-      </ul>
-
-      <h2>Second Section</h2>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
-
-      <blockquote>
-        "The only way to do great work is to love what you do." - Steve Jobs
-      </blockquote>
-
-      <p>Here's a numbered list of steps:</p>
-      <ol>
-        <li>Begin with the basics</li>
-        <li>Build upon your foundation</li>
-        <li>Practice regularly</li>
-        <li>Review and improve</li>
-      </ol>
-
-      <hr>
-
-      <h2>Conclusion</h2>
-      <p>In conclusion, this rich text editor provides all the tools you need for creating well-formatted content.</p>
-      <p>For more information, visit our <a href="https://example.com">documentation</a>.</p>
-    `,
-    });
+    this.model.set({ body: SAMPLE });
   }
 }
