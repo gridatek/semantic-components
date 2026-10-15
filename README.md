@@ -10,7 +10,7 @@ A collection of accessible, customizable UI components for Angular applications.
 
 ### Modern Angular Architecture
 
-- **Angular 21+** with standalone components (no NgModules)
+- **Angular** with standalone components (no NgModules)
 - **Signals** for reactive state management
 - **OnPush change detection** for optimal performance
 - **TypeScript-first** with strict type safety

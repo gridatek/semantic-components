@@ -5,7 +5,7 @@ import {
   readdirSync,
   writeFileSync,
 } from 'node:fs';
-import { join, resolve } from 'node:path';
+import { basename, join, resolve } from 'node:path';
 
 interface ComponentMeta {
   name: string;
@@ -141,6 +141,19 @@ function scanLibrary(
     ...scanDirectory(join(srcLib, 'components'), visiblePaths),
     ...scanDirectory(join(srcLib, 'utilities'), visiblePaths),
   ];
+
+  // Secondary entry points (`@semantic-components/editor/tables`): their
+  // exports belong to the library's component of the same name, whose README
+  // documents them.
+  const main = components.find((c) => c.name === basename(libDir));
+  if (main) {
+    for (const entry of readdirSync(libDir, { withFileTypes: true })) {
+      if (!entry.isDirectory()) continue;
+      const entryDir = join(libDir, entry.name);
+      if (!existsSync(join(entryDir, 'ng-package.json'))) continue;
+      main.exports.push(...resolveExportsRecursively(join(entryDir, 'src')));
+    }
+  }
 
   return { name: packageName, components };
 }
