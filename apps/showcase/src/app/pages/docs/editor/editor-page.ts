@@ -184,6 +184,49 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
       </section>
 
       <section class="space-y-4">
+        <h2 scHeading appToc>Loading</h2>
+        <p class="text-muted-foreground">
+          The features are loaded with the editor, not on their own: a
+          feature&apos;s package is small next to what every editor needs (<code
+            class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >&#64;tiptap/core</code
+          >, ProseMirror,
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >&#64;tiptap/starter-kit</code
+          >), and loading it later would make the editor and
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >scEditorView</code
+          >
+          wait before showing a document. To keep the editor out of a
+          page&apos;s first load, load the component that holds it lazily —
+          everything, Tiptap&apos;s core too, is then split off. A lazy route
+          (<code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >loadComponent</code
+          >) does the same for a page with an editor.
+        </p>
+        <div scCodeViewer>
+          <div scCodeViewerHeader>
+            <span scCodeViewerLabel>html</span>
+            <button
+              scButton
+              variant="ghost"
+              size="icon"
+              [scCopyToClipboard]="loadingCode"
+              #copyLoading="scCopyToClipboard"
+              aria-label="Copy to clipboard"
+            >
+              @if (copyLoading.copied()) {
+                <svg siCheckIcon></svg>
+              } @else {
+                <svg siCopyIcon></svg>
+              }
+            </button>
+          </div>
+          <div scCodeViewerContent [code]="loadingCode" language="html"></div>
+        </div>
+      </section>
+
+      <section class="space-y-4">
         <h2 scHeading appToc>Examples</h2>
         <p class="text-muted-foreground">
           The complete editor, after Tiptap's Simple Editor: undo and redo, the
@@ -353,6 +396,12 @@ import {
 })
 export class NoteEditor {
   readonly noteForm = form(signal({ body: '' }));
+}`;
+
+  readonly loadingCode = `@defer (on viewport) {
+  <app-note-editor />
+} @placeholder {
+  <div class="h-40 rounded-lg border"></div>
 }`;
 
   readonly features = [

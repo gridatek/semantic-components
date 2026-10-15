@@ -78,6 +78,20 @@ export class NoteEditor {
 - **A part without its feature** warns in development: `scEditorTable needs withTables() in provideEditor(…)`. `format="markdown"` without `withMarkdown()` throws.
 - **The floating toolbar** needs no provider: `scEditorBubbleMenu` adds itself to the editor.
 
+### Loading
+
+The features are loaded with the editor, not on their own: a feature's package is small next to what every editor needs (`@tiptap/core`, ProseMirror, `@tiptap/starter-kit`), and loading it later would make the editor and `scEditorView` wait before showing a document. To keep the editor out of a page's first load, load the component that holds it lazily — everything, Tiptap's core too, is then split off:
+
+```html
+@defer (on viewport) {
+<app-note-editor />
+} @placeholder {
+<div class="h-40 rounded-lg border"></div>
+}
+```
+
+A lazy route (`loadComponent`) does the same for a page with an editor.
+
 ## Usage
 
 ```html
