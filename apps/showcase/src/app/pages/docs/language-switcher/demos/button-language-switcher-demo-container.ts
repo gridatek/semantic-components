@@ -16,13 +16,17 @@ import { ButtonLanguageSwitcherDemo } from './button-language-switcher-demo';
 export class ButtonLanguageSwitcherDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScLanguageButton } from '@semantic-components/ui-lab';
+import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-button-language-switcher-demo',
-  imports: [ScLanguageButton],
+  imports: [ScLanguageButton, SiChevronDownIcon],
   template: \`
     <div class="flex items-center gap-4">
-      <button scLanguageButton variant="outline"></button>
+      <button scLanguageButton variant="outline" #language="scLanguageButton">
+        {{ language.current().nativeLabel }}
+        <svg siChevronDownIcon></svg>
+      </button>
       <span class="text-muted-foreground text-sm">
         Shows current language with dropdown icon
       </span>

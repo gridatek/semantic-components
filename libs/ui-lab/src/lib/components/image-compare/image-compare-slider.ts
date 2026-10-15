@@ -6,24 +6,14 @@ import {
   input,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
 import { SC_IMAGE_COMPARE } from './image-compare';
 
+/** The divider and its handle; write the handle's icons inside. */
 @Component({
   selector: '[scImageCompareSlider]',
-  imports: [SiChevronRightIcon],
   template: `
     <div [class]="handleClass()">
-      <ng-content>
-        <!-- Default handle icons -->
-        @if (imageCompare.orientation() === 'horizontal') {
-          <svg siChevronRightIcon class="size-5"></svg>
-          <svg siChevronRightIcon class="size-5 rotate-180"></svg>
-        } @else {
-          <svg siChevronRightIcon class="size-5 -rotate-90"></svg>
-          <svg siChevronRightIcon class="size-5 rotate-90"></svg>
-        }
-      </ng-content>
+      <ng-content />
     </div>
   `,
   host: {
@@ -57,7 +47,7 @@ export class ScImageCompareSlider {
   protected readonly handleClass = computed(() =>
     cn(
       'absolute bg-white rounded-full shadow-lg border-2 border-white',
-      'flex items-center justify-center',
+      'flex items-center justify-center text-black [&_svg]:size-5',
       this.imageCompare.orientation() === 'horizontal'
         ? 'top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10'
         : 'top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 flex-col',

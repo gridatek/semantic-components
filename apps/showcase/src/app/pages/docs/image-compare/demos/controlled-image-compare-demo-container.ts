@@ -28,6 +28,10 @@ import {
   ScImageCompareLabel,
   ScImageCompareSlider,
 } from '@semantic-components/ui-lab';
+import {
+  SiChevronLeftIcon,
+  SiChevronRightIcon,
+} from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-controlled-image-compare-demo',
@@ -39,6 +43,8 @@ import {
     ScImageCompareSlider,
     ScImageCompareLabel,
     ScSlider,
+    SiChevronLeftIcon,
+    SiChevronRightIcon,
   ],
   template: \`
     <div class="w-full max-w-2xl space-y-4">
@@ -47,7 +53,10 @@ import {
           @let img = 'https://picsum.photos/seed/compare-controlled/800/400';
           <img scImageCompareBefore [src]="img + '?grayscale'" alt="Before" />
           <img scImageCompareAfter [src]="img" alt="After" />
-          <div scImageCompareSlider></div>
+          <div scImageCompareSlider>
+            <svg siChevronLeftIcon></svg>
+            <svg siChevronRightIcon></svg>
+          </div>
           <div scImageCompareLabel class="top-2 left-2">Before</div>
           <div scImageCompareLabel class="top-2 right-2">After</div>
         </div>

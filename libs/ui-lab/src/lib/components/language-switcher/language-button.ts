@@ -1,85 +1,58 @@
+import { Directive, ElementRef, computed, inject, input } from '@angular/core';
 import {
-  Component,
-  ViewEncapsulation,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
-import { cn } from '@semantic-components/ui';
-import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
+  type ScButtonVariants,
+  buttonVariants,
+  cn,
+} from '@semantic-components/ui';
 import { ScLanguageService } from './language.service';
-import {
-  ScLanguageSwitcherSize,
-  ScLanguageSwitcherVariant,
-  sizeStyles,
-  variantStyles,
-} from './styles';
 
 /**
- * Language switcher with flag/label display - a more visual option.
- * Shows the current language with option to display as button or link style.
+ * Shows the current language; with two, a click switches to the other (with
+ * more, open your menu from it). Write its text and icon from `current()`:
  *
- * @example
  * ```html
- * <button scLanguageButton></button>
- * <a scLanguageButton href="#"></a>
+ * <button scLanguageButton #language="scLanguageButton">
+ *   {{ language.current().nativeLabel }}
+ *   <svg siChevronDownIcon></svg>
+ * </button>
  * ```
  */
-@Component({
+@Directive({
   selector: 'button[scLanguageButton], a[scLanguageButton]',
+  exportAs: 'scLanguageButton',
   host: {
+    'data-slot': 'language-button',
+    '[attr.type]': 'isButton ? "button" : null',
     '[class]': 'class()',
-    '[attr.aria-label]': 'ariaLabel()',
     '(click)': 'onClick($event)',
   },
-  imports: [SiChevronDownIcon],
-  template: `
-    <span class="font-medium">{{ displayLabel() }}</span>
-    <svg siChevronDownIcon class="size-4" aria-hidden="true"></svg>
-  `,
-  encapsulation: ViewEncapsulation.None,
 })
 export class ScLanguageButton {
   private readonly languageService = inject(ScLanguageService);
 
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly variant = input<ScLanguageSwitcherVariant>('ghost');
-  readonly size = input<ScLanguageSwitcherSize>('default');
-  readonly showNativeLabels = input<boolean>(true);
+  readonly variant = input<ScButtonVariants['variant']>('ghost');
+  readonly size = input<ScButtonVariants['size']>('default');
 
-  protected readonly currentLanguage = this.languageService.currentLanguage;
-  protected readonly languages = this.languageService.languages;
+  /** The language in use. */
+  readonly current = this.languageService.currentLanguage;
 
-  protected readonly displayLabel = computed(() => {
-    const lang = this.currentLanguage();
-    return this.showNativeLabels() ? lang.nativeLabel : lang.label;
-  });
+  protected readonly isButton =
+    inject<ElementRef<HTMLElement>>(ElementRef).nativeElement.tagName ===
+    'BUTTON';
 
   protected readonly class = computed(() =>
     cn(
-      'inline-flex items-center justify-center gap-1 whitespace-nowrap rounded-md text-sm font-medium',
-      'ring-offset-background transition-colors cursor-pointer',
-      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
-      'disabled:pointer-events-none disabled:opacity-50',
-      '[&_svg]:pointer-events-none [&_svg]:shrink-0',
-      variantStyles[this.variant()],
-      sizeStyles[this.size()],
+      buttonVariants({ variant: this.variant(), size: this.size() }),
       this.classInput(),
     ),
   );
 
-  protected readonly ariaLabel = computed(() => {
-    const current = this.currentLanguage();
-    return `Current language: ${current.label}. Click to change language.`;
-  });
-
   protected onClick(event: Event): void {
-    // For a 2-language setup, toggle directly
-    const langs = this.languages();
-    if (langs.length === 2) {
+    // Two languages: switch directly. More: your menu opens from it.
+    if (this.languageService.languages().length === 2) {
       event.preventDefault();
       this.languageService.toggleLanguage();
     }
-    // For more languages, this could open a menu (to be implemented by consumer)
   }
 }

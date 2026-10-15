@@ -19,13 +19,18 @@ import {
   ScLanguageService,
   ScLanguageToggle,
 } from '@semantic-components/ui-lab';
+import { SiGlobeIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-basic-toggle-language-switcher-demo',
-  imports: [ScLanguageToggle],
+  imports: [ScLanguageToggle, SiGlobeIcon],
   template: \`
     <div class="flex items-center gap-4">
-      <button scLanguageToggle></button>
+      <button scLanguageToggle #toggle="scLanguageToggle">
+        <svg siGlobeIcon></svg>
+        {{ toggle.current().code }}
+        <span class="sr-only">Switch to {{ toggle.next().label }}</span>
+      </button>
       <span class="text-muted-foreground text-sm">
         Current: {{ languageService.currentLanguage().label }}
       </span>

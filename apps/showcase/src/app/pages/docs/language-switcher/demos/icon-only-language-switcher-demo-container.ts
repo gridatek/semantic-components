@@ -16,13 +16,17 @@ import { IconOnlyLanguageSwitcherDemo } from './icon-only-language-switcher-demo
 export class IconOnlyLanguageSwitcherDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScLanguageToggle } from '@semantic-components/ui-lab';
+import { SiGlobeIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-icon-only-language-switcher-demo',
-  imports: [ScLanguageToggle],
+  imports: [ScLanguageToggle, SiGlobeIcon],
   template: \`
     <div class="flex items-center gap-4">
-      <button scLanguageToggle [iconOnly]="true" size="icon"></button>
+      <button scLanguageToggle size="icon" #toggle="scLanguageToggle">
+        <svg siGlobeIcon></svg>
+        <span class="sr-only">Switch to {{ toggle.next().label }}</span>
+      </button>
       <span class="text-muted-foreground text-sm">Globe icon only</span>
     </div>
   \`,

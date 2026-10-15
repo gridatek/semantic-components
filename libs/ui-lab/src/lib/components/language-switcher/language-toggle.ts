@@ -1,81 +1,64 @@
+import { Directive, computed, inject, input } from '@angular/core';
 import {
-  Component,
-  ViewEncapsulation,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
-import { cn } from '@semantic-components/ui';
-import { SiGlobeIcon } from '@semantic-icons/lucide-icons';
+  type ScButtonVariants,
+  buttonVariants,
+  cn,
+  ɵwarnIfUnnamed,
+} from '@semantic-components/ui';
 import { ScLanguageService } from './language.service';
-import { sizeStyles, variantStyles } from './styles';
-import { ScLanguageSwitcherSize, ScLanguageSwitcherVariant } from './styles';
 
 /**
- * Language toggle button - ideal for switching between 2 languages.
- * Displays a globe icon with the current language code.
+ * Switches to the next language (made for two). Write its icon, the current
+ * language's code if you show it, and its name — from `current()` and `next()`:
  *
- * @example
  * ```html
- * <button scLanguageToggle></button>
- * <button scLanguageToggle variant="outline" size="sm"></button>
+ * <button scLanguageToggle #toggle="scLanguageToggle">
+ *   <svg siGlobeIcon></svg>
+ *   {{ toggle.current().code }}
+ *   <span class="sr-only">Switch to {{ toggle.next().label }}</span>
+ * </button>
  * ```
  */
-@Component({
+@Directive({
   selector: 'button[scLanguageToggle]',
+  exportAs: 'scLanguageToggle',
   host: {
     type: 'button',
+    'data-slot': 'language-toggle',
     '[class]': 'class()',
-    '[attr.aria-label]': 'ariaLabel()',
     '(click)': 'toggle()',
   },
-  imports: [SiGlobeIcon],
-  template: `
-    <svg siGlobeIcon class="size-5" aria-hidden="true"></svg>
-    @if (!iconOnly()) {
-      <span class="text-xs font-semibold uppercase">
-        {{ currentLanguageCode() }}
-      </span>
-    }
-  `,
-  encapsulation: ViewEncapsulation.None,
 })
 export class ScLanguageToggle {
   private readonly languageService = inject(ScLanguageService);
 
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly variant = input<ScLanguageSwitcherVariant>('ghost');
-  readonly size = input<ScLanguageSwitcherSize>('default');
-  readonly iconOnly = input<boolean>(false);
+  readonly variant = input<ScButtonVariants['variant']>('ghost');
+  readonly size = input<ScButtonVariants['size']>('default');
 
-  protected readonly currentLanguageCode = computed(() =>
-    this.languageService.language(),
-  );
-  protected readonly currentLanguage = this.languageService.currentLanguage;
-  protected readonly languages = this.languageService.languages;
+  /** The language in use. */
+  readonly current = this.languageService.currentLanguage;
+
+  /** The language a click switches to. */
+  readonly next = computed(() => {
+    const languages = this.languageService.languages();
+    const index = languages.findIndex(
+      (language) => language.code === this.current().code,
+    );
+    return languages[(index + 1) % languages.length];
+  });
 
   protected readonly class = computed(() =>
     cn(
-      'inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-md text-sm font-medium',
-      'ring-offset-background transition-colors',
-      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
-      'disabled:pointer-events-none disabled:opacity-50',
-      '[&_svg]:pointer-events-none [&_svg]:shrink-0',
-      variantStyles[this.variant()],
-      sizeStyles[this.size()],
+      buttonVariants({ variant: this.variant(), size: this.size() }),
+      'uppercase',
       this.classInput(),
     ),
   );
 
-  protected readonly ariaLabel = computed(() => {
-    const current = this.currentLanguage();
-    const langs = this.languages();
-    if (langs.length === 2) {
-      const next = langs.find((lang) => lang.code !== current.code);
-      return `Switch language to ${next?.label ?? 'other language'}. Current language: ${current.label}`;
-    }
-    return `Current language: ${current.label}. Click to change language.`;
-  });
+  constructor() {
+    ɵwarnIfUnnamed('scLanguageToggle');
+  }
 
   protected toggle(): void {
     this.languageService.toggleLanguage();

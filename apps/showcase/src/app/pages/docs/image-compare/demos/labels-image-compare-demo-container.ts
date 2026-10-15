@@ -27,6 +27,10 @@ import {
   ScImageCompareLabel,
   ScImageCompareSlider,
 } from '@semantic-components/ui-lab';
+import {
+  SiChevronLeftIcon,
+  SiChevronRightIcon,
+} from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-labels-image-compare-demo',
@@ -37,6 +41,8 @@ import {
     ScImageCompareAfter,
     ScImageCompareSlider,
     ScImageCompareLabel,
+    SiChevronLeftIcon,
+    SiChevronRightIcon,
   ],
   template: \`
     @let img = 'https://picsum.photos/seed/compare-labels/800/400';
@@ -44,7 +50,10 @@ import {
       <div scImageCompareArea aria-label="Image comparison slider">
         <img scImageCompareBefore [src]="img + '?blur=5'" alt="Blurred" />
         <img scImageCompareAfter [src]="img" alt="Sharp" />
-        <div scImageCompareSlider></div>
+        <div scImageCompareSlider>
+          <svg siChevronLeftIcon></svg>
+          <svg siChevronRightIcon></svg>
+        </div>
         <div scImageCompareLabel class="top-2 left-2">Blurred</div>
         <div scImageCompareLabel class="top-2 right-2">Sharp</div>
       </div>

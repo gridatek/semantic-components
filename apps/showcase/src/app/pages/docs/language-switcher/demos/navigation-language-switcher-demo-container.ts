@@ -16,10 +16,11 @@ import { NavigationLanguageSwitcherDemo } from './navigation-language-switcher-d
 export class NavigationLanguageSwitcherDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScLanguageToggle } from '@semantic-components/ui-lab';
+import { SiGlobeIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-navigation-language-switcher-demo',
-  imports: [ScLanguageToggle],
+  imports: [ScLanguageToggle, SiGlobeIcon],
   template: \`
     <div class="flex items-center justify-between rounded-lg border p-4">
       <div class="space-y-0.5">
@@ -28,7 +29,11 @@ import { ScLanguageToggle } from '@semantic-components/ui-lab';
           Choose your preferred language
         </p>
       </div>
-      <button scLanguageToggle variant="outline"></button>
+      <button scLanguageToggle variant="outline" #toggle="scLanguageToggle">
+        <svg siGlobeIcon></svg>
+        {{ toggle.current().code }}
+        <span class="sr-only">Switch to {{ toggle.next().label }}</span>
+      </button>
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },

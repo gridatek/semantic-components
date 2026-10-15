@@ -6,6 +6,10 @@ import {
   ScImageCompareBefore,
   ScImageCompareSlider,
 } from '@semantic-components/ui-lab';
+import {
+  SiChevronLeftIcon,
+  SiChevronRightIcon,
+} from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-no-labels-image-compare-demo',
@@ -15,6 +19,8 @@ import {
     ScImageCompareBefore,
     ScImageCompareAfter,
     ScImageCompareSlider,
+    SiChevronLeftIcon,
+    SiChevronRightIcon,
   ],
   template: `
     @let img = 'https://picsum.photos/seed/compare-nolabels/800/400';
@@ -22,7 +28,10 @@ import {
       <div scImageCompareArea aria-label="Image comparison slider">
         <img scImageCompareBefore [src]="img + '?grayscale'" alt="Before" />
         <img scImageCompareAfter [src]="img" alt="After" />
-        <div scImageCompareSlider></div>
+        <div scImageCompareSlider>
+          <svg siChevronLeftIcon></svg>
+          <svg siChevronRightIcon></svg>
+        </div>
       </div>
     </div>
   `,
