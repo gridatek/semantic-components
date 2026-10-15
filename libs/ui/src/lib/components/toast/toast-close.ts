@@ -23,9 +23,7 @@ export class ScToastClose {
   protected readonly class = computed(() =>
     cn(
       'absolute end-1 top-1 rounded-md p-1 text-foreground/50 opacity-0 transition-opacity [&_svg]:size-4',
-      'hover:text-foreground focus:opacity-100 focus:outline-none focus:ring-1 group-hover:opacity-100',
-      'group-[.destructive]:text-red-800/50 group-[.destructive]:hover:text-red-800',
-      'group-[.destructive]:focus:ring-red-400',
+      'hover:text-foreground focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-ring/50 group-hover:opacity-100',
       this.classInput(),
     ),
   );

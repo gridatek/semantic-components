@@ -1,38 +1,53 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { Service, type TemplateRef, inject, signal } from '@angular/core';
+import { Service, inject, signal } from '@angular/core';
+import { SC_CONFIG } from '../../config/config';
 import { ScToastStack } from './toast-stack';
-import { ScToastConfig, ScToastData, ScToastPosition } from './toast.types';
+import type { ScToastTemplate } from './toast-template';
+import {
+  ScToastConfig,
+  ScToastData,
+  ScToastPosition,
+  ScToastPromiseConfig,
+  ScToasterConfig,
+} from './toast.types';
+
+interface ScToastTimer {
+  remaining: number;
+  startedAt: number;
+  timeout?: ReturnType<typeof setTimeout>;
+}
 
 @Service()
 export class ScToaster {
   private readonly toastsSignal = signal<ScToastData[]>([]);
   readonly toasts = this.toastsSignal.asReadonly();
 
-  private readonly positionSignal = signal<ScToastPosition>('bottom-end');
-  readonly position = this.positionSignal.asReadonly();
+  /** Its settings: `provideScConfig({ toaster })`, then the defaults. */
+  readonly ɵconfig: Required<ScToasterConfig> = {
+    position: 'bottom-end',
+    duration: 5000,
+    visibleToasts: 3,
+    maxToasts: 5,
+    expand: false,
+    hotkey: [],
+    ...inject(SC_CONFIG).toaster,
+  };
 
-  /** How a toast looks: set by your `scToastTemplate`. */
-  readonly ɵtemplate = signal<TemplateRef<{ $implicit: ScToastData }> | null>(
-    null,
-  );
+  /** How a toast looks: your `scToastTemplate`. */
+  readonly ɵtemplate = signal<ScToastTemplate | null>(null);
 
-  private readonly defaultDuration = 5000;
-  private readonly maxToasts = 5;
-  private readonly timeouts = new Map<string, ReturnType<typeof setTimeout>>();
-  private readonly timerStartTimes = new Map<string, number>();
-  private readonly timerRemaining = new Map<string, number>();
+  private readonly heldSignal = signal<ReadonlySet<ScToastPosition>>(new Set());
+  /** The positions whose toasts are hovered or focused: expanded, their timers paused. */
+  readonly ɵheld = this.heldSignal.asReadonly();
+
+  private readonly timers = new Map<string, ScToastTimer>();
 
   private readonly idGenerator = inject(_IdGenerator);
   private readonly overlay = inject(Overlay);
 
   private overlayRef: OverlayRef | null = null;
-
-  /** Where toasts show when `show` gives no `position`. */
-  setPosition(position: ScToastPosition): void {
-    this.positionSignal.set(position);
-  }
 
   /** Shows a toast — as your `scToastTemplate` writes it. */
   show(config: ScToastConfig): string {
@@ -43,67 +58,64 @@ export class ScToaster {
     }
     this.ensureOverlay();
 
-    const id = this.idGenerator.getId('sc-toast-');
-
-    const toast: ScToastData = {
-      id,
-      position: config.position ?? this.position(),
-      title: config.title,
-      description: config.description,
-      variant: config.variant ?? 'default',
-      action: config.action,
-      duration: config.duration ?? this.defaultDuration,
-    };
+    const toast = this.toastFrom(this.idGenerator.getId('sc-toast-'), config);
 
     // Dismiss the oldest toast if the limit is exceeded
     const current = this.toastsSignal();
-    if (current.length >= this.maxToasts) {
+    if (current.length >= this.ɵconfig.maxToasts) {
       this.dismiss(current[0].id);
     }
 
     this.toastsSignal.update((toasts) => [...toasts, toast]);
-
-    // Auto-dismiss after duration (if duration > 0)
-    if (toast.duration && toast.duration > 0) {
-      this.startTimer(id, toast.duration);
-    }
-
-    return id;
+    this.schedule(toast);
+    return toast.id;
   }
 
   /**
-   * Pause the auto-dismiss timer for a toast (e.g. on pointer hover).
+   * Changes a toast in place: the fields `config` gives replace its own, and
+   * its timer starts again, as if just shown. Nothing happens once it is gone.
    */
-  pause(id: string): void {
-    const timeout = this.timeouts.get(id);
-    if (!timeout) return;
+  update(id: string, config: ScToastConfig): void {
+    const current = this.toastsSignal().find((toast) => toast.id === id);
+    if (!current) return;
 
-    clearTimeout(timeout);
-    this.timeouts.delete(id);
-
-    const startTime = this.timerStartTimes.get(id);
-    if (startTime !== undefined) {
-      const elapsed = Date.now() - startTime;
-      const remaining = (this.timerRemaining.get(id) ?? 0) - elapsed;
-      this.timerRemaining.set(id, Math.max(0, remaining));
-    }
+    const toast = this.toastFrom(id, {
+      ...current,
+      ...config,
+      // A new variant without a duration takes that variant's own.
+      duration:
+        config.duration ??
+        (config.variant === undefined ? current.duration : undefined),
+    });
+    this.toastsSignal.update((toasts) =>
+      toasts.map((t) => (t.id === id ? toast : t)),
+    );
+    this.schedule(toast);
   }
 
   /**
-   * Resume the auto-dismiss timer for a toast (e.g. on pointer leave).
+   * A loading toast while `promise` runs, which becomes a success or an error
+   * toast when it settles. Returns `promise`.
    */
-  resume(id: string): void {
-    const remaining = this.timerRemaining.get(id);
-    if (remaining === undefined || remaining <= 0) return;
-
-    this.startTimer(id, remaining);
-  }
-
-  private startTimer(id: string, duration: number): void {
-    this.timerRemaining.set(id, duration);
-    this.timerStartTimes.set(id, Date.now());
-    const timeout = setTimeout(() => this.dismiss(id), duration);
-    this.timeouts.set(id, timeout);
+  promise<T>(promise: Promise<T>, config: ScToastPromiseConfig<T>): Promise<T> {
+    const id = this.loading(config.loading);
+    promise.then(
+      (value) => {
+        const success =
+          typeof config.success === 'function'
+            ? config.success(value)
+            : config.success;
+        this.update(id, { ...success, variant: 'success' });
+      },
+      (error: unknown) => {
+        const failure =
+          typeof config.error === 'function'
+            ? config.error(error)
+            : config.error;
+        this.update(id, { ...failure, variant: 'error' });
+      },
+    );
+    return promise;
   }
 
   success(config: Omit<ScToastConfig, 'variant'>): string {
@@ -122,36 +134,109 @@ export class ScToaster {
     return this.show({ ...config, variant: 'error' });
   }
 
+  /** A toast that stays until it is updated or dismissed (unless given a `duration`). */
   loading(config: Omit<ScToastConfig, 'variant'>): string {
     return this.show({ ...config, variant: 'loading' });
+  }
+
+  /**
+   * Holds a position's toasts while they are hovered or focused: their timers
+   * pause, and new ones there wait too.
+   */
+  ɵhold(position: ScToastPosition): void {
+    if (this.heldSignal().has(position)) return;
+    this.heldSignal.update((held) => new Set([...held, position]));
+    for (const toast of this.toastsAt(position)) {
+      const timer = this.timers.get(toast.id);
+      if (timer) this.stop(timer);
+    }
+  }
+
+  /** Lets a position's toasts go again: their timers resume. */
+  ɵrelease(position: ScToastPosition): void {
+    if (!this.heldSignal().has(position)) return;
+    this.heldSignal.update(
+      (held) => new Set([...held].filter((p) => p !== position)),
+    );
+    for (const toast of this.toastsAt(position)) {
+      const timer = this.timers.get(toast.id);
+      if (timer) this.run(toast.id, timer);
+    }
   }
 
   /**
    * Dismiss a specific toast by ID
    */
   dismiss(id: string): void {
-    // Clear auto-dismiss timeout and timer tracking
-    const timeout = this.timeouts.get(id);
-    if (timeout) {
-      clearTimeout(timeout);
-      this.timeouts.delete(id);
-    }
-    this.timerStartTimes.delete(id);
-    this.timerRemaining.delete(id);
+    this.clearTimer(id);
+    const toast = this.toastsSignal().find((t) => t.id === id);
 
     // Out of the list: Angular plays its exit animation, then removes it.
     this.toastsSignal.update((toasts) => toasts.filter((t) => t.id !== id));
+
+    // Its position is empty: nothing is hovered or focused there any more.
+    if (toast && !this.toastsAt(toast.position).length) {
+      this.ɵrelease(toast.position);
+    }
   }
 
   /**
    * Dismiss all toasts
    */
   dismissAll(): void {
-    this.timeouts.forEach((timeout) => clearTimeout(timeout));
-    this.timeouts.clear();
-    this.timerStartTimes.clear();
-    this.timerRemaining.clear();
+    for (const id of [...this.timers.keys()]) this.clearTimer(id);
     this.toastsSignal.set([]);
+    this.heldSignal.set(new Set());
+  }
+
+  private toastFrom(id: string, config: ScToastConfig): ScToastData {
+    const variant = config.variant ?? 'default';
+    return {
+      id,
+      position: config.position ?? this.ɵconfig.position,
+      title: config.title,
+      description: config.description,
+      variant,
+      action: config.action,
+      duration:
+        config.duration ?? (variant === 'loading' ? 0 : this.ɵconfig.duration),
+    };
+  }
+
+  private toastsAt(position: ScToastPosition): ScToastData[] {
+    return this.toastsSignal().filter((toast) => toast.position === position);
+  }
+
+  /** A new timer for the toast — waiting while its position is held. */
+  private schedule(toast: ScToastData): void {
+    this.clearTimer(toast.id);
+    if (!toast.duration || toast.duration <= 0) return;
+
+    const timer: ScToastTimer = { remaining: toast.duration, startedAt: 0 };
+    this.timers.set(toast.id, timer);
+    if (!this.heldSignal().has(toast.position)) this.run(toast.id, timer);
+  }
+
+  private run(id: string, timer: ScToastTimer): void {
+    if (timer.timeout) return;
+    timer.startedAt = Date.now();
+    timer.timeout = setTimeout(() => this.dismiss(id), timer.remaining);
+  }
+
+  private stop(timer: ScToastTimer): void {
+    if (!timer.timeout) return;
+    clearTimeout(timer.timeout);
+    timer.timeout = undefined;
+    timer.remaining = Math.max(
+      0,
+      timer.remaining - (Date.now() - timer.startedAt),
+    );
+  }
+
+  private clearTimer(id: string): void {
+    const timer = this.timers.get(id);
+    if (timer?.timeout) clearTimeout(timer.timeout);
+    this.timers.delete(id);
   }
 
   private ensureOverlay(): void {

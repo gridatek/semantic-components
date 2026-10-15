@@ -1,4 +1,10 @@
-import { DestroyRef, Directive, TemplateRef, inject } from '@angular/core';
+import {
+  DestroyRef,
+  Directive,
+  TemplateRef,
+  inject,
+  input,
+} from '@angular/core';
 import type { ScToastData } from './toast.types';
 import { ScToaster } from './toaster';
 
@@ -12,13 +18,20 @@ import { ScToaster } from './toaster';
   selector: 'ng-template[scToastTemplate]',
 })
 export class ScToastTemplate {
+  /**
+   * The toasts' region name — write the toaster's `hotkey` in it, so it can be found
+   * (e.g. "Notifications, Alt+T").
+   */
+  readonly label = input<string>();
+
+  readonly ɵtemplate =
+    inject<TemplateRef<{ $implicit: ScToastData }>>(TemplateRef);
+
   constructor() {
     const toaster = inject(ScToaster);
-    const template =
-      inject<TemplateRef<{ $implicit: ScToastData }>>(TemplateRef);
-    toaster.ɵtemplate.set(template);
+    toaster.ɵtemplate.set(this);
     inject(DestroyRef).onDestroy(() => {
-      if (toaster.ɵtemplate() === template) toaster.ɵtemplate.set(null);
+      if (toaster.ɵtemplate() === this) toaster.ɵtemplate.set(null);
     });
   }
 

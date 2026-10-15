@@ -1,9 +1,9 @@
-import { InjectionToken } from '@angular/core';
+import { InjectionToken, type Signal } from '@angular/core';
 import type { ScToastData } from './toast.types';
 
-/** What the parts of a toast act on: the toast, and dismissing it. */
+/** What the parts of a toast act on: the toast (as it is updated), and dismissing it. */
 export interface ScToastContext {
-  readonly toast: ScToastData;
+  readonly toast: Signal<ScToastData>;
   dismiss(): void;
 }
 

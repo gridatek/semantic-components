@@ -7,7 +7,10 @@ import { BasicToastDemoContainer } from './demos/basic-toast-demo-container';
 import { DestructiveToastDemoContainer } from './demos/destructive-toast-demo-container';
 import { DurationToastDemoContainer } from './demos/duration-toast-demo-container';
 import { PositionToastDemoContainer } from './demos/position-toast-demo-container';
+import { PromiseToastDemoContainer } from './demos/promise-toast-demo-container';
+import { StackedToastDemoContainer } from './demos/stacked-toast-demo-container';
 import { TitleToastDemoContainer } from './demos/title-toast-demo-container';
+import { UpdateToastDemoContainer } from './demos/update-toast-demo-container';
 import { VariantsToastDemoContainer } from './demos/variants-toast-demo-container';
 
 @Component({
@@ -20,6 +23,9 @@ import { VariantsToastDemoContainer } from './demos/variants-toast-demo-containe
     DurationToastDemoContainer,
     VariantsToastDemoContainer,
     PositionToastDemoContainer,
+    PromiseToastDemoContainer,
+    UpdateToastDemoContainer,
+    StackedToastDemoContainer,
     TocHeading,
     ComponentBadges,
     ScHeading,
@@ -43,6 +49,9 @@ import { VariantsToastDemoContainer } from './demos/variants-toast-demo-containe
         <app-duration-toast-demo-container />
         <app-variants-toast-demo-container />
         <app-position-toast-demo-container />
+        <app-promise-toast-demo-container />
+        <app-update-toast-demo-container />
+        <app-stacked-toast-demo-container />
       </section>
     </div>
   `,

@@ -4063,6 +4063,27 @@ export const demosRoutes: Route[] = [
             (m) => m.VariantsToastDemo,
           ),
       },
+      {
+        path: 'stacked-toast-demo',
+        loadComponent: () =>
+          import('../pages/docs/toast/demos/stacked-toast-demo').then(
+            (m) => m.StackedToastDemo,
+          ),
+      },
+      {
+        path: 'update-toast-demo',
+        loadComponent: () =>
+          import('../pages/docs/toast/demos/update-toast-demo').then(
+            (m) => m.UpdateToastDemo,
+          ),
+      },
+      {
+        path: 'promise-toast-demo',
+        loadComponent: () =>
+          import('../pages/docs/toast/demos/promise-toast-demo').then(
+            (m) => m.PromiseToastDemo,
+          ),
+      },
     ],
   },
   {

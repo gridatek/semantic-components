@@ -36,7 +36,7 @@ import {
     SiXIcon,
   ],
   template: `
-    <ng-template scToastTemplate let-toast>
+    <ng-template scToastTemplate let-toast label="Notifications, Alt+T">
       <div scToast>
         @switch (toast.variant) {
           @case ('success') {

@@ -2,11 +2,15 @@ import { type Locator, type Page, expect, test } from '@playwright/test';
 
 const toasts = (page: Page) => page.locator('[data-slot="toast"]');
 
-/** Waits for a toast to finish sliding in. */
+/** Waits for a toast to finish moving: its animations, then its transitions. */
 const settled = (toast: Locator) =>
-  toast.evaluate((el) =>
-    Promise.all(el.getAnimations().map((animation) => animation.finished)),
-  );
+  toast.evaluate(async (el) => {
+    while (el.getAnimations().length) {
+      await Promise.allSettled(
+        el.getAnimations().map((animation) => animation.finished),
+      );
+    }
+  });
 
 test.describe('Toast', () => {
   test('a toast is written by the app template, and closes', async ({
@@ -59,5 +63,76 @@ test.describe('Toast positions', () => {
     const bottom = await second.boundingBox();
     expect(after?.y).toBeCloseTo(before?.y ?? 0, 0);
     expect(bottom?.y ?? 0).toBeGreaterThan((after?.y ?? 0) + 100);
+  });
+});
+
+test.describe('Toast stack', () => {
+  test('stacks the toasts, and spreads them out while hovered', async ({
+    page,
+  }) => {
+    await page.goto('/demos/toast/stacked-toast-demo');
+    await page.getByRole('button', { name: 'Show three toasts' }).click();
+    await expect(toasts(page)).toHaveCount(3);
+    const list = page.locator('[data-slot="toast-list"]');
+    await expect(list).toHaveAttribute('data-expanded', 'false');
+    await expect(toasts(page).last()).toHaveAttribute('data-front', 'true');
+
+    await toasts(page).last().hover();
+    await expect(list).toHaveAttribute('data-expanded', 'true');
+    for (const toast of await toasts(page).all()) await settled(toast);
+    const [oldest, , newest] = await Promise.all(
+      (await toasts(page).all()).map((toast) => toast.boundingBox()),
+    );
+    // Spread out: the oldest sits fully above the newest.
+    expect((oldest?.y ?? 0) + (oldest?.height ?? 0)).toBeLessThanOrEqual(
+      newest?.y ?? 0,
+    );
+
+    await page.mouse.move(0, 0);
+    await expect(list).toHaveAttribute('data-expanded', 'false');
+  });
+
+  test('the hotkey moves focus to the toasts, and Escape back', async ({
+    page,
+  }) => {
+    await page.goto('/demos/toast/basic-toast-demo');
+    const button = page.getByRole('button', { name: 'Show Toast' });
+    await button.click();
+    await expect(toasts(page)).toHaveCount(1);
+    await expect(
+      page.getByRole('region', { name: 'Notifications, Alt+T' }),
+    ).toBeAttached();
+
+    await page.keyboard.press('Alt+KeyT');
+    const list = page.locator('[data-slot="toast-list"]');
+    await expect(list).toBeFocused();
+    await expect(list).toHaveAttribute('data-expanded', 'true');
+
+    await page.keyboard.press('Escape');
+    await expect(button).toBeFocused();
+  });
+});
+
+test.describe('Toast updates', () => {
+  test('a toast changes in place', async ({ page }) => {
+    await page.goto('/demos/toast/update-toast-demo');
+    await page.getByRole('button', { name: 'Start upload' }).click();
+    await expect(toasts(page)).toHaveText(/Uploading…/);
+    await page.getByRole('button', { name: 'Finish upload' }).click();
+    await expect(toasts(page)).toHaveCount(1);
+    await expect(toasts(page)).toHaveText(/Upload complete\./);
+    await expect(toasts(page)).toHaveAttribute('data-variant', 'success');
+  });
+
+  test('a promise shows loading, then its result', async ({ page }) => {
+    await page.goto('/demos/toast/promise-toast-demo');
+    await page.getByRole('button', { name: 'Save', exact: true }).click();
+    await expect(toasts(page)).toHaveText(/Saving…/);
+    await expect(toasts(page)).toHaveText(/Settings saved\./);
+
+    await page.getByRole('button', { name: 'Save (fails)' }).click();
+    await expect(
+      toasts(page).filter({ hasText: 'Network error' }),
+    ).toHaveAttribute('data-variant', 'error');
   });
 });
