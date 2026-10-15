@@ -33,6 +33,38 @@
     "@tiptap/pm": ">=3.32.0",
     "@tiptap/starter-kit": ">=3.32.0"
   },
+  "peerDependenciesMeta": {
+    "@tiptap/extension-bubble-menu": {
+      "optional": true
+    },
+    "@tiptap/extension-file-handler": {
+      "optional": true
+    },
+    "@tiptap/extension-find-and-replace": {
+      "optional": true
+    },
+    "@tiptap/extension-highlight": {
+      "optional": true
+    },
+    "@tiptap/extension-image": {
+      "optional": true
+    },
+    "@tiptap/extension-subscript": {
+      "optional": true
+    },
+    "@tiptap/extension-superscript": {
+      "optional": true
+    },
+    "@tiptap/extension-table": {
+      "optional": true
+    },
+    "@tiptap/extension-text-align": {
+      "optional": true
+    },
+    "@tiptap/markdown": {
+      "optional": true
+    }
+  },
   "exports": {
     "./styles": {
       "default": "./src/lib/styles/index.css"

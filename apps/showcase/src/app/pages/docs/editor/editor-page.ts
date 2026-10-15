@@ -1,5 +1,23 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScHeading } from '@semantic-components/ui';
+import {
+  ScCodeViewer,
+  ScCodeViewerContent,
+  ScCodeViewerHeader,
+  ScCodeViewerLabel,
+} from '@semantic-components/code';
+import {
+  ScButton,
+  ScCopyToClipboard,
+  ScHeading,
+  ScTable,
+  ScTableBody,
+  ScTableCell,
+  ScTableContainer,
+  ScTableHeader,
+  ScTableHeaderCell,
+  ScTableRow,
+} from '@semantic-components/ui';
+import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { EditorUsageDemoContainer } from './demos/editor-usage-demo-container';
@@ -25,6 +43,21 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
     TocHeading,
     ComponentBadges,
     ScHeading,
+    ScButton,
+    ScCopyToClipboard,
+    ScCodeViewer,
+    ScCodeViewerContent,
+    ScCodeViewerHeader,
+    ScCodeViewerLabel,
+    ScTable,
+    ScTableBody,
+    ScTableCell,
+    ScTableContainer,
+    ScTableHeader,
+    ScTableHeaderCell,
+    ScTableRow,
+    SiCheckIcon,
+    SiCopyIcon,
   ],
   template: `
     <div class="space-y-8">
@@ -32,8 +65,9 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
         <h1 scHeading>Editor</h1>
         <p class="text-muted-foreground">
           Composable WYSIWYG editor powered by Tiptap: block types, lists and
-          task lists, code blocks, highlights, links, images, and search and
-          replace, with a Signal Forms value in HTML. The full demo follows
+          task lists, code blocks and links in its core; tables, images, search
+          and replace, highlights and more as features you add. A Signal Forms
+          value in HTML, JSON, Markdown or text. The full demo follows
           Tiptap&apos;s Simple Editor template, in this library&apos;s styles.
         </p>
         <app-component-badges path="editor" />
@@ -42,6 +76,116 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
       <section class="space-y-4">
         <h2 scHeading appToc>Usage</h2>
         <app-editor-usage-demo-container />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc id="features">Features</h2>
+        <p class="text-muted-foreground">
+          The core,
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >&#64;semantic-components/editor</code
+          >, writes text, headings, lists and task lists, quotes, code blocks
+          and links, with undo and redo, the counts and
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >scEditorView</code
+          >, in HTML, JSON or text. It needs only
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >&#64;tiptap/core</code
+          >,
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >&#64;tiptap/starter-kit</code
+          >,
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >&#64;tiptap/extensions</code
+          >,
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >&#64;tiptap/extension-list</code
+          >
+          and
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >&#64;tiptap/pm</code
+          >. Everything else is a feature, in its own entry point with its own
+          package: install it and provide it only when you use it. Give the
+          editor and
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >scEditorView</code
+          >
+          the same features, so they hold the same documents.
+        </p>
+        <div scCodeViewer>
+          <div scCodeViewerHeader>
+            <span scCodeViewerLabel>ts</span>
+            <button
+              scButton
+              variant="ghost"
+              size="icon"
+              [scCopyToClipboard]="featuresCode"
+              #copy="scCopyToClipboard"
+              aria-label="Copy to clipboard"
+            >
+              @if (copy.copied()) {
+                <svg siCheckIcon></svg>
+              } @else {
+                <svg siCopyIcon></svg>
+              }
+            </button>
+          </div>
+          <div
+            scCodeViewerContent
+            [code]="featuresCode"
+            language="typescript"
+          ></div>
+        </div>
+        <div scTableContainer>
+          <table scTable>
+            <thead scTableHeader>
+              <tr scTableRow>
+                <th scTableHeaderCell>Entry point</th>
+                <th scTableHeaderCell>Provide</th>
+                <th scTableHeaderCell>Parts</th>
+                <th scTableHeaderCell>Package</th>
+              </tr>
+            </thead>
+            <tbody scTableBody>
+              @for (feature of features; track feature.entry) {
+                <tr scTableRow>
+                  <td scTableCell>
+                    <code class="bg-muted rounded px-1.5 py-0.5 text-sm">{{
+                      feature.entry
+                    }}</code>
+                  </td>
+                  <td scTableCell>
+                    @if (feature.provide) {
+                      <code class="bg-muted rounded px-1.5 py-0.5 text-sm">{{
+                        feature.provide
+                      }}</code>
+                    } @else {
+                      None
+                    }
+                  </td>
+                  <td scTableCell>
+                    <div class="flex flex-wrap gap-1">
+                      @for (part of feature.parts; track part) {
+                        <code class="bg-muted rounded px-1.5 py-0.5 text-sm">{{
+                          part
+                        }}</code>
+                      }
+                    </div>
+                  </td>
+                  <td scTableCell>
+                    <div class="flex flex-wrap gap-1">
+                      @for (pkg of feature.packages; track pkg) {
+                        <code class="bg-muted rounded px-1.5 py-0.5 text-sm">{{
+                          pkg
+                        }}</code>
+                      }
+                    </div>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
       </section>
 
       <section class="space-y-4">
@@ -150,4 +294,76 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
   `,
   encapsulation: ViewEncapsulation.None,
 })
-export default class EditorPage {}
+export default class EditorPage {
+  readonly featuresCode = `import { provideEditor } from '@semantic-components/editor';
+import { withMarkdown } from '@semantic-components/editor/markdown';
+import { ScEditorTable, withTables } from '@semantic-components/editor/tables';
+
+@Component({
+  imports: [ScEditorTable],
+  providers: [provideEditor(withTables(), withMarkdown())],
+})`;
+
+  readonly features = [
+    {
+      entry: '/tables',
+      provide: 'withTables()',
+      parts: ['scEditorTable'],
+      packages: ['@tiptap/extension-table'],
+    },
+    {
+      entry: '/images',
+      provide: 'withImages()',
+      parts: ['scEditorImage', 'drop', 'paste'],
+      packages: ['@tiptap/extension-image', '@tiptap/extension-file-handler'],
+    },
+    {
+      entry: '/search',
+      provide: 'withSearch()',
+      parts: ['scEditorSearch', 'scEditorSearchBar', 'Ctrl / ⌘ + F'],
+      packages: ['@tiptap/extension-find-and-replace'],
+    },
+    {
+      entry: '/highlight',
+      provide: 'withHighlight()',
+      parts: [
+        'scEditorHighlight',
+        'scEditorHighlightColor',
+        'scEditorUnsetHighlight',
+      ],
+      packages: ['@tiptap/extension-highlight'],
+    },
+    {
+      entry: '/scripts',
+      provide: 'withScripts()',
+      parts: ['scEditorSuperscript', 'scEditorSubscript'],
+      packages: [
+        '@tiptap/extension-superscript',
+        '@tiptap/extension-subscript',
+      ],
+    },
+    {
+      entry: '/align',
+      provide: 'withAlign()',
+      parts: [
+        'scEditorAlignLeft',
+        'scEditorAlignCenter',
+        'scEditorAlignRight',
+        'scEditorAlignJustify',
+      ],
+      packages: ['@tiptap/extension-text-align'],
+    },
+    {
+      entry: '/markdown',
+      provide: 'withMarkdown()',
+      parts: ['format="markdown"'],
+      packages: ['@tiptap/markdown'],
+    },
+    {
+      entry: '/bubble-menu',
+      provide: '',
+      parts: ['scEditorBubbleMenu'],
+      packages: ['@tiptap/extension-bubble-menu'],
+    },
+  ];
+}

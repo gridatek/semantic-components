@@ -2,13 +2,8 @@ import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
   ScEditor,
-  ScEditorAlignCenter,
-  ScEditorAlignJustify,
-  ScEditorAlignLeft,
-  ScEditorAlignRight,
   ScEditorBlockquote,
   ScEditorBold,
-  ScEditorBubbleMenu,
   ScEditorCharCount,
   ScEditorClearFormatting,
   ScEditorCode,
@@ -18,15 +13,43 @@ import {
   ScEditorFooter,
   ScEditorHeading,
   type ScEditorHeadingLevel,
-  ScEditorHighlight,
-  ScEditorHighlightColor,
   ScEditorHorizontalRule,
-  ScEditorImage,
   ScEditorItalic,
   ScEditorLink,
   ScEditorList,
   type ScEditorListType,
   ScEditorRedo,
+  ScEditorSeparator,
+  ScEditorStrikethrough,
+  ScEditorToolbar,
+  ScEditorToolbarGroup,
+  ScEditorUnderline,
+  ScEditorUndo,
+  type ScEditorUploadHandler,
+  ScEditorWordCount,
+  provideEditor,
+} from '@semantic-components/editor';
+import {
+  ScEditorAlignCenter,
+  ScEditorAlignJustify,
+  ScEditorAlignLeft,
+  ScEditorAlignRight,
+  withAlign,
+} from '@semantic-components/editor/align';
+import { ScEditorBubbleMenu } from '@semantic-components/editor/bubble-menu';
+import {
+  ScEditorHighlight,
+  ScEditorHighlightColor,
+  ScEditorUnsetHighlight,
+  withHighlight,
+} from '@semantic-components/editor/highlight';
+import { ScEditorImage, withImages } from '@semantic-components/editor/images';
+import {
+  ScEditorSubscript,
+  ScEditorSuperscript,
+  withScripts,
+} from '@semantic-components/editor/scripts';
+import {
   ScEditorReplace,
   ScEditorReplaceAll,
   ScEditorReplaceInput,
@@ -38,20 +61,13 @@ import {
   ScEditorSearchOption,
   ScEditorSearchPrevious,
   ScEditorSearchResults,
-  ScEditorSeparator,
-  ScEditorStrikethrough,
-  ScEditorSubscript,
-  ScEditorSuperscript,
+  withSearch,
+} from '@semantic-components/editor/search';
+import {
   ScEditorTable,
   type ScEditorTableAction,
-  ScEditorToolbar,
-  ScEditorToolbarGroup,
-  ScEditorUnderline,
-  ScEditorUndo,
-  ScEditorUnsetHighlight,
-  type ScEditorUploadHandler,
-  ScEditorWordCount,
-} from '@semantic-components/editor';
+  withTables,
+} from '@semantic-components/editor/tables';
 import {
   ScButton,
   ScField,
@@ -141,6 +157,16 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
  */
 @Component({
   selector: 'app-full-featured-editor-demo',
+  providers: [
+    provideEditor(
+      withAlign(),
+      withHighlight(),
+      withImages(),
+      withScripts(),
+      withSearch(),
+      withTables(),
+    ),
+  ],
   imports: [
     FormField,
     ScButton,
@@ -161,10 +187,6 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
     ScProgress,
     ScSeparator,
     ScEditor,
-    ScEditorAlignCenter,
-    ScEditorAlignJustify,
-    ScEditorAlignLeft,
-    ScEditorAlignRight,
     ScEditorBlockquote,
     ScEditorBold,
     ScEditorCharCount,
@@ -175,37 +197,41 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
     ScEditorCount,
     ScEditorFooter,
     ScEditorHeading,
-    ScEditorHighlight,
-    ScEditorHighlightColor,
     ScEditorHorizontalRule,
-    ScEditorImage,
     ScEditorItalic,
     ScEditorLink,
     ScEditorList,
-    ScEditorTable,
-    ScEditorBubbleMenu,
     ScEditorRedo,
-    ScEditorReplace,
-    ScEditorReplaceAll,
-    ScEditorReplaceInput,
-    ScEditorSearch,
-    ScEditorSearchBar,
-    ScEditorSearchClose,
-    ScEditorSearchInput,
-    ScEditorSearchNext,
-    ScEditorSearchOption,
-    ScEditorSearchPrevious,
-    ScEditorSearchResults,
     ScEditorSeparator,
     ScEditorStrikethrough,
-    ScEditorSubscript,
-    ScEditorSuperscript,
     ScEditorToolbar,
     ScEditorToolbarGroup,
     ScEditorUnderline,
     ScEditorUndo,
-    ScEditorUnsetHighlight,
     ScEditorWordCount,
+    ScEditorAlignLeft,
+    ScEditorAlignCenter,
+    ScEditorAlignRight,
+    ScEditorAlignJustify,
+    ScEditorBubbleMenu,
+    ScEditorHighlight,
+    ScEditorHighlightColor,
+    ScEditorUnsetHighlight,
+    ScEditorImage,
+    ScEditorSuperscript,
+    ScEditorSubscript,
+    ScEditorTable,
+    ScEditorSearch,
+    ScEditorSearchBar,
+    ScEditorSearchInput,
+    ScEditorSearchResults,
+    ScEditorSearchPrevious,
+    ScEditorSearchNext,
+    ScEditorSearchOption,
+    ScEditorReplaceInput,
+    ScEditorReplace,
+    ScEditorReplaceAll,
+    ScEditorSearchClose,
     SiBanIcon,
     SiBoldIcon,
     SiCaseSensitiveIcon,
@@ -544,7 +570,7 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
               <svg siRemoveFormattingIcon></svg>
               <span class="sr-only">Clear formatting</span>
             </button>
-            <button scEditorSearch value="search">
+            <button scEditorSearch #search="scEditorSearch" value="search">
               <svg siSearchIcon></svg>
               <span class="sr-only">Search and replace</span>
             </button>
@@ -576,7 +602,7 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
           </div>
         </div>
 
-        @if (editor.searchOpen()) {
+        @if (search.open()) {
           <div scEditorSearchBar aria-label="Search and replace">
             <input
               scInput
@@ -585,14 +611,15 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
               placeholder="Search…"
               class="h-8 w-48"
             />
-            <span scEditorSearchResults class="min-w-16">
-              @if (editor.searchTerm()) {
-                @if (editor.searchResults()) {
-                  {{ (editor.searchIndex() ?? 0) + 1 }} of
-                  {{ editor.searchResults() }}
-                } @else {
-                  No results
-                }
+            <span
+              scEditorSearchResults
+              #results="scEditorSearchResults"
+              class="min-w-16"
+            >
+              @if (results.state() === 'found') {
+                {{ (results.index() ?? 0) + 1 }} of {{ results.count() }}
+              } @else if (results.state() === 'none') {
+                No results
               }
             </span>
             <button

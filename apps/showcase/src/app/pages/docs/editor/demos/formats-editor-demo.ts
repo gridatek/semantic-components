@@ -12,7 +12,9 @@ import {
   ScEditorToolbarGroup,
   type ScEditorValue,
   ScEditorView,
+  provideEditor,
 } from '@semantic-components/editor';
+import { withMarkdown } from '@semantic-components/editor/markdown';
 import {
   ScButton,
   ScToggleGroup,
@@ -76,6 +78,7 @@ const SAMPLES: Record<ScEditorFormat, ScEditorValue> = {
  */
 @Component({
   selector: 'app-formats-editor-demo',
+  providers: [provideEditor(withMarkdown())],
   imports: [
     FormField,
     ScButton,

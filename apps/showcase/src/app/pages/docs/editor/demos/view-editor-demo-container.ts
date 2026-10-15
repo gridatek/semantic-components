@@ -32,7 +32,12 @@ import {
   ScEditorToolbar,
   ScEditorToolbarGroup,
   ScEditorView,
+  provideEditor,
 } from '@semantic-components/editor';
+import { withAlign } from '@semantic-components/editor/align';
+import { withHighlight } from '@semantic-components/editor/highlight';
+import { withImages } from '@semantic-components/editor/images';
+import { withScripts } from '@semantic-components/editor/scripts';
 import {
   SiBoldIcon,
   SiCodeXmlIcon,
@@ -48,6 +53,9 @@ import {
  */
 @Component({
   selector: 'app-view-editor-demo',
+  providers: [
+    provideEditor(withAlign(), withHighlight(), withImages(), withScripts()),
+  ],
   imports: [
     FormField,
     ScEditor,

@@ -1,6 +1,6 @@
 import type { JSONContent } from '@tiptap/core';
-import { MarkdownManager } from '@tiptap/markdown';
 import { editorContentExtensions } from './editor-extensions';
+import type { ScEditorFeature, ScEditorMarkdown } from './editor-features';
 
 /**
  * Plain text as a document: a paragraph per line (an empty line, an empty
@@ -16,20 +16,22 @@ export function textToDocument(text: string): JSONContent {
   };
 }
 
-let markdown: MarkdownManager | null = null;
+const markdowns = new WeakMap<readonly ScEditorFeature[], ScEditorMarkdown>();
 
-/** Reads and writes Markdown with the document's extensions (made once). */
-function markdownManager(): MarkdownManager {
-  markdown ??= new MarkdownManager({ extensions: editorContentExtensions() });
+/** Reads and writes Markdown with these features' document (made once). */
+export function editorMarkdown(
+  features: readonly ScEditorFeature[],
+): ScEditorMarkdown {
+  let markdown = markdowns.get(features);
+  if (!markdown) {
+    const make = features.find((feature) => feature.markdown)?.markdown;
+    if (!make) {
+      throw new Error(
+        'The markdown format needs withMarkdown() in provideEditor(…).',
+      );
+    }
+    markdown = make(editorContentExtensions(features));
+    markdowns.set(features, markdown);
+  }
   return markdown;
-}
-
-/** Markdown as a document. */
-export function markdownToDocument(source: string): JSONContent {
-  return markdownManager().parse(source);
-}
-
-/** A document as Markdown. */
-export function documentToMarkdown(doc: JSONContent): string {
-  return markdownManager().serialize(doc);
 }

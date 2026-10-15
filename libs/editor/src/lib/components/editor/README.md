@@ -7,10 +7,45 @@ You write the markup and every piece of text — the toolbar, its icons and name
 ## Installation
 
 ```bash
-npm install @semantic-components/editor @tiptap/core @tiptap/starter-kit @tiptap/extensions @tiptap/extension-list @tiptap/extension-text-align @tiptap/extension-highlight @tiptap/extension-superscript @tiptap/extension-subscript @tiptap/extension-image @tiptap/extension-file-handler @tiptap/extension-find-and-replace @tiptap/extension-table @tiptap/extension-bubble-menu @tiptap/markdown @tiptap/pm
+npm install @semantic-components/editor @tiptap/core @tiptap/starter-kit @tiptap/extensions @tiptap/extension-list @tiptap/pm
 ```
 
-The editor turns all of them on: there is no extension list to set up.
+That is the core: text, headings, lists and task lists, quotes, code blocks, links, undo and redo, the counts and `scEditorView`, in HTML, JSON or text. Everything else is a [feature](#features), with its own package.
+
+## Features
+
+Each feature is an entry point of its own, with its own Tiptap package (an optional peer dependency): install it, import it and provide it only when you use it — a simple editor installs no table, search or Markdown code.
+
+```bash
+npm install @tiptap/extension-table @tiptap/markdown
+```
+
+```ts
+import { provideEditor } from '@semantic-components/editor';
+import { withMarkdown } from '@semantic-components/editor/markdown';
+import { ScEditorTable, withTables } from '@semantic-components/editor/tables';
+
+@Component({
+  imports: [ScEditorTable],
+  providers: [provideEditor(withTables(), withMarkdown())],
+})
+```
+
+| Entry point                               | Provide           | Parts                                                                                    | Package                                                        |
+| ----------------------------------------- | ----------------- | ---------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| `@semantic-components/editor/tables`      | `withTables()`    | `scEditorTable`                                                                          | `@tiptap/extension-table`                                      |
+| `@semantic-components/editor/images`      | `withImages()`    | `scEditorImage`; dropping and pasting images                                             | `@tiptap/extension-image`, `@tiptap/extension-file-handler`    |
+| `@semantic-components/editor/search`      | `withSearch()`    | `scEditorSearch`, `scEditorSearchBar` and its parts; **Ctrl / ⌘ + F**                    | `@tiptap/extension-find-and-replace`                           |
+| `@semantic-components/editor/highlight`   | `withHighlight()` | `scEditorHighlight`, `scEditorHighlightColor`, `scEditorUnsetHighlight`                  | `@tiptap/extension-highlight`                                  |
+| `@semantic-components/editor/scripts`     | `withScripts()`   | `scEditorSuperscript`, `scEditorSubscript`                                               | `@tiptap/extension-superscript`, `@tiptap/extension-subscript` |
+| `@semantic-components/editor/align`       | `withAlign()`     | `scEditorAlignLeft`, `scEditorAlignCenter`, `scEditorAlignRight`, `scEditorAlignJustify` | `@tiptap/extension-text-align`                                 |
+| `@semantic-components/editor/markdown`    | `withMarkdown()`  | `format="markdown"`                                                                      | `@tiptap/markdown`                                             |
+| `@semantic-components/editor/bubble-menu` | none              | `scEditorBubbleMenu`                                                                     | `@tiptap/extension-bubble-menu`                                |
+
+- **Provided, not found from the buttons**: the document's schema is set when the editor starts, and a saved document can hold a table with no table button in sight — without `withTables()` it would be dropped. `provideEditor` goes in a component's `providers` (or the app's); the editors and `scEditorView`s below read it.
+- **The same features for the editor and the display**, so they hold the same documents.
+- **A part without its feature** warns in development: `scEditorTable needs withTables() in provideEditor(…)`. `format="markdown"` without `withMarkdown()` throws.
+- **The floating toolbar** needs no provider: `scEditorBubbleMenu` adds itself to the editor.
 
 ## Usage
 
@@ -59,15 +94,15 @@ readonly postForm = form(signal({ body: '' }), (path) => {
 | `ScEditorBold` … (see below)                | `button[scEditorBold]`…                       | A command; `aria-pressed` when it has a state. Write its icon and name it.                                                                                                |
 | `ScEditorHeading`                           | `button[scEditorHeading]`                     | The block type: `level()` (`'p'`, `'h1'`…`'h6'`), `select(level)` — the trigger of your menu, with your labels.                                                           |
 | `ScEditorList`                              | `button[scEditorList]`                        | The list type: `type()` (`'bulletList'`, `'orderedList'`, `'taskList'`, or null; `data-state="on"` in one), `select(type)` — a menu trigger.                              |
-| `ScEditorTable`                             | `button[scEditorTable]`                       | Tables: `select(action)`, `can(action)`, `inTable()` (`data-state="on"` in one) — a menu trigger (see [Tables](#tables)).                                                 |
-| `ScEditorBubbleMenu`                        | `div[scEditorBubbleMenu]`                     | A floating toolbar by the selected text (see [Floating toolbar](#floating-toolbar)).                                                                                      |
+| `ScEditorTable` (`/tables`)                 | `button[scEditorTable]`                       | Tables: `select(action)`, `can(action)`, `inTable()` (`data-state="on"` in one) — a menu trigger (see [Tables](#tables)).                                                 |
+| `ScEditorBubbleMenu` (`/bubble-menu`)       | `div[scEditorBubbleMenu]`                     | A floating toolbar by the selected text (see [Floating toolbar](#floating-toolbar)).                                                                                      |
 | `ScEditorLink`                              | `button[scEditorLink]`                        | Pressed inside a link; the trigger of your link popover, which calls the editor's `setLink(href)` / `unsetLink()`.                                                        |
-| `ScEditorHighlight`                         | `button[scEditorHighlight]`                   | Pressed inside a highlight; the trigger of your highlight popover.                                                                                                        |
-| `ScEditorHighlightColor`                    | `button[scEditorHighlightColor]`              | A swatch in that popover: `[scEditorHighlightColor]="color"` highlights in it, or removes it; pressed when it's the colour. Name it.                                      |
-| `ScEditorUnsetHighlight`                    | `button[scEditorUnsetHighlight]`              | Removes the highlight (disabled when there is none).                                                                                                                      |
-| `ScEditorImage`                             | `button[scEditorImage]`                       | Picks images and uploads them with the editor's `upload` (disabled without one).                                                                                          |
-| `ScEditorSearch`                            | `button[scEditorSearch]`                      | Opens and closes the search bar (`aria-pressed`); with it, **Ctrl / ⌘ + F** in the document opens it too.                                                                 |
-| `ScEditorSearchBar` and its parts           | see [Search and replace](#search-and-replace) | The bar under the toolbar.                                                                                                                                                |
+| `ScEditorHighlight` (`/highlight`)          | `button[scEditorHighlight]`                   | Pressed inside a highlight; the trigger of your highlight popover.                                                                                                        |
+| `ScEditorHighlightColor` (`/highlight`)     | `button[scEditorHighlightColor]`              | A swatch in that popover: `[scEditorHighlightColor]="color"` highlights in it, or removes it; pressed when it's the colour. Name it.                                      |
+| `ScEditorUnsetHighlight` (`/highlight`)     | `button[scEditorUnsetHighlight]`              | Removes the highlight (disabled when there is none).                                                                                                                      |
+| `ScEditorImage` (`/images`)                 | `button[scEditorImage]`                       | Picks images and uploads them with the editor's `upload` (disabled without one).                                                                                          |
+| `ScEditorSearch` (`/search`)                | `button[scEditorSearch]`                      | Opens and closes the search bar (`open()`, `aria-pressed`); with it, **Ctrl / ⌘ + F** in the document opens it too.                                                       |
+| `ScEditorSearchBar` and its parts           | see [Search and replace](#search-and-replace) | The bar under the toolbar (`/search`).                                                                                                                                    |
 | `ScEditorView`                              | `[scEditorView]`                              | Displays the editor's HTML in its styles, without an editor (see [Displaying the document](#displaying-the-document)).                                                    |
 | `ScEditorSeparator`                         | `div[scEditorSeparator]`                      | Between toolbar groups.                                                                                                                                                   |
 | `ScEditorHeader`, `ScEditorFooter`          | `div[scEditorHeader]`, `div[scEditorFooter]`  | Above and below the document.                                                                                                                                             |
@@ -75,8 +110,10 @@ readonly postForm = form(signal({ body: '' }), (path) => {
 
 The buttons, `scEditor` + the command:
 
-- **With a state** — `aria-pressed` follows the document: `Bold`, `Italic`, `Underline`, `Strikethrough`, `Code`, `Superscript`, `Subscript` (each turns the other off), `BulletList`, `NumberedList`, `TaskList`, `Blockquote`, `CodeBlock`, `AlignLeft`, `AlignCenter`, `AlignRight`, `AlignJustify`, `Link`, `Highlight`, `Search`.
+- **With a state** — `aria-pressed` follows the document: `Bold`, `Italic`, `Underline`, `Strikethrough`, `Code`, `Superscript`, `Subscript` (each turns the other off; `/scripts`), `BulletList`, `NumberedList`, `TaskList`, `Blockquote`, `CodeBlock`, `AlignLeft`, `AlignCenter`, `AlignRight`, `AlignJustify` (`/align`), `Link`, `Highlight`, `Search`.
 - **Run once** — no `aria-pressed`: `HorizontalRule`, `ClearFormatting`, `Image`, `Undo`, `Redo` (disabled when there is nothing to undo / redo).
+
+The parts of a feature come from its entry point and need it provided: see [Features](#features).
 
 All are disabled when the editor is disabled or read-only — except `Search`, which read-only documents keep.
 
@@ -93,12 +130,10 @@ For the same reason the editor's group is `scEditorToolbarGroup`, not a toggle g
 ## `scEditor`
 
 - **Set by `[formField]`**: `value` (in its `format`), `disabled`, `readonly`, `invalid`, `touched`; `touch` fires when the document loses focus.
-- **Inputs**: `format` (see [Formats](#formats)); `characterLimit` (see [Character limit](#character-limit)); `upload` — the image upload handler (none: no images); `imageTypes` — the image types it takes (PNG, JPEG, GIF, WebP).
-- **State**: `isActive(name, attributes?)` — a mark or node at the selection (`'bold'`, `'link'`, `'heading', { level: 2 }`…); `alignment()`, `heading()`, `list()`, `inTable()`, `linkHref()`, `highlightColor()`; `characters()`, `words()`; `editable()`.
+- **Inputs**: `format` (see [Formats](#formats)); `characterLimit` (see [Character limit](#character-limit)); `upload` — the image upload handler (none: no images; with `withImages()`); `imageTypes` — the image types it takes (PNG, JPEG, GIF, WebP).
+- **State**: `isActive(name, attributes?)` — a mark or node at the selection (`'bold'`, `'link'`, `'heading', { level: 2 }`…); `heading()`, `list()`, `linkHref()`; `characters()`, `words()`; `editable()`.
 - **Commands**: `run((chain) => chain.toggleBold())` — any Tiptap command, on the focused document; `can((chain) => chain.undo())`; `toggleList(type)`.
 - **Links**: `setLink(href, text?)` — links the selection, or writes `text` (or the address) as a link where nothing is selected; `unsetLink()`. Addresses with unsafe protocols (`javascript:`…) aren't rendered as links.
-- **Search**: `searchOpen()`, `openSearch()`, `closeSearch()`, `toggleSearch()`; `search(term)`, `setReplaceTerm(term)`, `setSearchOption(option, on)`; `searchTerm()`, `replaceTerm()`, `caseSensitive()`, `wholeWord()`, `useRegex()`, `searchResults()` (how many), `searchIndex()` (the current one, from 0); `searchNext()`, `searchPrevious()`, `replace()`, `replaceAll()`.
-- **Tables**: `runTable(action)`, `canTable(action)`.
 - **Images**: `insertImages(files, position?)`, `uploads()` (`{ id, file, progress }`, progress from 0 to 1), `cancelUpload(id)`.
 - **Tiptap**: `editorInstance()` for anything else.
 
@@ -166,6 +201,8 @@ For the same reason the editor's group is `scEditorToolbarGroup`, not a toggle g
 
 ## Images
 
+`withImages()`, from `@semantic-components/editor/images`.
+
 ```ts
 readonly upload: ScEditorUploadHandler = async (file, { onProgress, signal }) => {
   const { url } = await this.files.upload(file, { onProgress, signal });
@@ -190,6 +227,8 @@ The button picks files; dropping or pasting images does the same. Each is insert
 
 ## Tables
 
+`withTables()` and `ScEditorTable`, from `@semantic-components/editor/tables`.
+
 ```html
 <div scMenuProvider>
   <button scMenuTrigger scEditorTable value="table" #table="scEditorTable">
@@ -211,6 +250,8 @@ The button picks files; dropping or pasting images does the same. Each is insert
 The actions (`ScEditorTableAction`): `insertTable` (3 × 3, with a header row), `addRowBefore`, `addRowAfter`, `deleteRow`, `addColumnBefore`, `addColumnAfter`, `deleteColumn`, `mergeCells`, `splitCell`, `toggleHeaderRow`, `toggleHeaderColumn`, `deleteTable`. `can(action)` says which apply where the selection is — outside a table, only `insertTable`. Tab and Shift+Tab move between cells (Tab in the last cell adds a row); dragging a column's border resizes it; dragging across cells selects them, to merge.
 
 ## Floating toolbar
+
+`ScEditorBubbleMenu`, from `@semantic-components/editor/bubble-menu` (no provider).
 
 ```html
 <div scEditor …>
@@ -239,11 +280,15 @@ The actions (`ScEditorTableAction`): `insertTable` (3 × 3, with a header row), 
 
 ## Search and replace
 
+`withSearch()` and the parts, from `@semantic-components/editor/search`.
+
 ```html
-@if (editor.searchOpen()) {
+<button scEditorSearch #search="scEditorSearch" value="search">…</button>
+
+@if (search.open()) {
 <div scEditorSearchBar aria-label="Search and replace">
   <input scInput scEditorSearchInput aria-label="Search" />
-  <span scEditorSearchResults> @if (editor.searchTerm()) { @if (editor.searchResults()) { {{ (editor.searchIndex() ?? 0) + 1 }} of {{ editor.searchResults() }} } @else { No results } } </span>
+  <span scEditorSearchResults #results="scEditorSearchResults"> @if (results.state() === 'found') { {{ (results.index() ?? 0) + 1 }} of {{ results.count() }} } @else if (results.state() === 'none') { No results } </span>
   <button scButton variant="ghost" size="icon-sm" scEditorSearchPrevious>…</button>
   <button scButton variant="ghost" size="icon-sm" scEditorSearchNext>…</button>
   <button scEditorSearchOption="caseSensitive">…</button>
@@ -261,7 +306,7 @@ The actions (`ScEditorTableAction`): `insertTable` (3 × 3, with a header row), 
 | --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `scEditorSearchBar`               | A `search` landmark (name it); Escape closes it and goes back to the text.                                                                                  |
 | `scEditorSearchInput`             | Searches as you type (after a pause); Enter / Shift+Enter go to the next / previous match. `aria-invalid` when nothing matches. Focused when the bar opens. |
-| `scEditorSearchResults`           | `role="status"`: write "2 of 5", "No results"; `data-state` `none` is styled destructive.                                                                   |
+| `scEditorSearchResults`           | `role="status"`: write "2 of 5", "No results" from `index()`, `count()`, `state()` (`idle`, `found`, `none` — styled destructive).                          |
 | `scEditorSearchOption`            | `caseSensitive`, `wholeWord`, `useRegex` (RE2 syntax), on and off (`aria-pressed`).                                                                         |
 | `scEditorSearchPrevious`, `…Next` | Step through the matches, wrapping around.                                                                                                                  |
 | `scEditorReplaceInput`            | What matches become; Enter replaces the current one.                                                                                                        |
@@ -293,6 +338,7 @@ readonly noteForm = form(signal<{ body: ScEditorValue }>({ body: null }), (path)
 
 - **Empty is empty**: `''` or `null`, never `'<p></p>'` — so `required` works in every format.
 - **Any format comes in**: JSON is read as JSON; a string as Markdown or plain text in those formats, HTML otherwise — so HTML you saved before loads into a `json` editor, which writes JSON from the next change.
+- **Markdown is a feature**: `withMarkdown()`, from `@semantic-components/editor/markdown`, for the editor and `scEditorView`.
 - **Markdown keeps what Markdown can say**: what it has no syntax for — highlights, alignment, underline, superscript and subscript — is lost when written as Markdown.
 - **Switching `format`** rewrites the value in the new one.
 - **Why JSON**: it needs no HTML parsing on a server and keeps its shape as the editor's HTML output changes (the format the newer editors — Lexical, Plate, BlockNote — store). `ScEditorValue` is `string | JSONContent | null`.
@@ -307,16 +353,17 @@ readonly noteForm = form(signal<{ body: ScEditorValue }>({ body: null }), (path)
 <article [scEditorView]="post.body" layout="page"></article>
 ```
 
+- **The same features**: it reads the features of `provideEditor`, as the editor does — give them both the same, or a table the editor wrote isn't shown.
 - **Safe**: HTML is read through the editor's schema in a document of its own; JSON is checked against the schema (a document the editor couldn't have written shows nothing). Either is then built as elements — never set as `innerHTML`. Only what the editor can hold is shown: no scripts, no event attributes, no unsafe links (from HTML or JSON).
 - **The same styles**: the editor's document and the view both have `data-slot="editor-document"`, which the editor's styles are written for.
 - **Tasks** are shown, not changed: their checkboxes are disabled, named by their task.
 - **`layout`**: `page` centres it in the same column as `scEditorContent`'s page layout; `default` adds no space around it.
 
-`editorContentExtensions()` are the extensions the document is made of: use them with Tiptap's `generateHTML` / `generateJSON` to read or write the editor's HTML elsewhere (a server, a migration).
+`editorContentExtensions([withTables()])` are the extensions the document is made of, with these features: use them with Tiptap's `generateHTML` / `generateJSON` to read or write the editor's HTML elsewhere (a server, a migration).
 
 ## Keyboard
 
-Tiptap's shortcuts: **Ctrl / ⌘ + B** bold, **I** italic, **U** underline, **E** inline code, **Shift + H** highlight, **.** superscript, **,** subscript, **Alt + C** code block, **Shift + 7 / 8 / 9** numbered, bulleted and task list, **Z** undo, **Shift + Z** or **Y** redo; **Ctrl / ⌘ + F** search (with `scEditorSearch`). Markdown shortcuts as you type: `# ` headings, `- ` lists, `[ ] ` tasks, `> ` quotes, ` ``` ` code blocks. In the toolbar, **← / →** move between buttons and **Tab** leaves it.
+Tiptap's shortcuts: **Ctrl / ⌘ + B** bold, **I** italic, **U** underline, **E** inline code, **Shift + H** highlight (with `withHighlight()`), **.** superscript, **,** subscript (with `withScripts()`), **Alt + C** code block, **Shift + 7 / 8 / 9** numbered, bulleted and task list, **Z** undo, **Shift + Z** or **Y** redo; **Ctrl / ⌘ + F** search (with `scEditorSearch`). Markdown shortcuts as you type: `# ` headings, `- ` lists, `[ ] ` tasks, `> ` quotes, ` ``` ` code blocks. In the toolbar, **← / →** move between buttons and **Tab** leaves it.
 
 ## Styling
 

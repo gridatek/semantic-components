@@ -1,11 +1,12 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   ScCodeViewer,
   ScCodeViewerContent,
   ScCodeViewerHeader,
   ScCodeViewerLabel,
 } from '@semantic-components/code';
-import { ScButton, ScCopyToClipboard } from '@semantic-components/ui';
+import { ScButton, ScCopyToClipboard, ScLink } from '@semantic-components/ui';
 import { ScSeparator } from '@semantic-components/ui';
 import { ScHeading } from '@semantic-components/ui';
 import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
@@ -16,6 +17,8 @@ import { EditorUsageDemoContainer } from '../docs/editor/demos/editor-usage-demo
 @Component({
   selector: 'app-editor-page',
   imports: [
+    RouterLink,
+    ScLink,
     TocHeading,
     ScCodeViewer,
     ScCodeViewerContent,
@@ -47,11 +50,18 @@ import { EditorUsageDemoContainer } from '../docs/editor/demos/editor-usage-demo
       <section class="space-y-4">
         <h2 scHeading appToc>1. Install the package</h2>
         <p class="text-muted-foreground">
-          Install the editor library and its Tiptap peer dependencies.
+          Install the editor library and the Tiptap packages of its core.
         </p>
         <app-package-manager-install
-          packages="@semantic-components/editor @tiptap/core @tiptap/starter-kit @tiptap/extensions @tiptap/extension-list @tiptap/extension-text-align @tiptap/extension-highlight @tiptap/extension-superscript @tiptap/extension-subscript @tiptap/extension-image @tiptap/extension-file-handler @tiptap/extension-find-and-replace @tiptap/extension-table @tiptap/extension-bubble-menu @tiptap/markdown @tiptap/pm"
+          packages="@semantic-components/editor @tiptap/core @tiptap/starter-kit @tiptap/extensions @tiptap/extension-list @tiptap/pm"
         />
+        <p class="text-muted-foreground">
+          Tables, images, search, highlights, Markdown and the other features
+          each add their own package: install one only when you use it — see
+          <a scLink routerLink="/docs/components/editor" fragment="features"
+            >Features</a
+          >.
+        </p>
       </section>
 
       <div scSeparator></div>

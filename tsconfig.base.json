@@ -26,6 +26,22 @@
       "@semantic-components/qr-code": ["libs/qr-code/src/index.ts"],
       "@semantic-components/pdf-viewer": ["libs/pdf-viewer/src/index.ts"],
       "@semantic-components/editor": ["libs/editor/src/index.ts"],
+      "@semantic-components/editor/align": ["libs/editor/align/src/index.ts"],
+      "@semantic-components/editor/bubble-menu": [
+        "libs/editor/bubble-menu/src/index.ts"
+      ],
+      "@semantic-components/editor/highlight": [
+        "libs/editor/highlight/src/index.ts"
+      ],
+      "@semantic-components/editor/images": ["libs/editor/images/src/index.ts"],
+      "@semantic-components/editor/markdown": [
+        "libs/editor/markdown/src/index.ts"
+      ],
+      "@semantic-components/editor/scripts": [
+        "libs/editor/scripts/src/index.ts"
+      ],
+      "@semantic-components/editor/search": ["libs/editor/search/src/index.ts"],
+      "@semantic-components/editor/tables": ["libs/editor/tables/src/index.ts"],
       "@semantic-components/charts": ["libs/charts/src/index.ts"],
       "@semantic-components/mcp-server": ["libs/mcp-server/src/index.ts"]
     }

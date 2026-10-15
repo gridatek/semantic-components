@@ -1,11 +1,4 @@
-import {
-  type ChainedCommands,
-  Editor,
-  Extension,
-  type JSONContent,
-} from '@tiptap/core';
-import FileHandler from '@tiptap/extension-file-handler';
-import FindAndReplace from '@tiptap/extension-find-and-replace';
+import { type ChainedCommands, Editor, type JSONContent } from '@tiptap/core';
 import { CharacterCount, Placeholder, Selection } from '@tiptap/extensions';
 import {
   Directive,
@@ -13,6 +6,7 @@ import {
   booleanAttribute,
   computed,
   effect,
+  inject,
   input,
   model,
   output,
@@ -21,13 +15,9 @@ import {
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
 import { editorContentExtensions } from './editor-extensions';
-import {
-  documentToMarkdown,
-  markdownToDocument,
-  textToDocument,
-} from './editor-format';
+import { SC_EDITOR_FEATURES } from './editor-features';
+import { editorMarkdown, textToDocument } from './editor-format';
 
-export type ScEditorAlignment = 'left' | 'center' | 'right' | 'justify';
 export type ScEditorHeadingLevel =
   'p' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 /**
@@ -37,25 +27,9 @@ export type ScEditorHeadingLevel =
 export type ScEditorContentLayout = 'default' | 'page';
 
 export type ScEditorListType = 'bulletList' | 'orderedList' | 'taskList';
-export type ScEditorSearchFlag = 'caseSensitive' | 'wholeWord' | 'useRegex';
 
 /** The format the editor writes its value in (`format`). */
 export type ScEditorFormat = 'html' | 'json' | 'text' | 'markdown';
-
-/** What `runTable` / `canTable` do to a table. */
-export type ScEditorTableAction =
-  | 'insertTable'
-  | 'addRowBefore'
-  | 'addRowAfter'
-  | 'deleteRow'
-  | 'addColumnBefore'
-  | 'addColumnAfter'
-  | 'deleteColumn'
-  | 'mergeCells'
-  | 'splitCell'
-  | 'toggleHeaderRow'
-  | 'toggleHeaderColumn'
-  | 'deleteTable';
 
 /**
  * The document, as the form holds it: HTML or plain text (a string, '' when
@@ -103,8 +77,8 @@ const LIST_TYPES: ScEditorListType[] = [
  * and runs its commands. A Signal Forms control: bind `[formField]` here
  * (`disabled`, `readonly` and errors come from the schema). Its parts:
  * `scEditorContent` (where it's written), the toolbar and its buttons, the
- * search bar, the counts. The buttons run commands (`run`) and read state
- * (`isActive`).
+ * counts. The buttons run commands (`run`) and read state (`isActive`).
+ * Tables, images, search and more are features: `provideEditor(withTables())`.
  */
 @Directive({
   selector: '[scEditor]',
@@ -117,6 +91,8 @@ const LIST_TYPES: ScEditorListType[] = [
   },
 })
 export class ScEditor implements FormValueControl<ScEditorValue> {
+  private readonly features = inject(SC_EDITOR_FEATURES);
+
   // Set by [formField] — the document's HTML, its state, its errors.
   readonly value = model<ScEditorValue>('');
   /**
@@ -136,7 +112,10 @@ export class ScEditor implements FormValueControl<ScEditorValue> {
   readonly invalid = input(false, { transform: booleanAttribute });
   readonly touched = input(false, { transform: booleanAttribute });
 
-  /** Uploads images (the image button, a drop, a paste). None: no images. */
+  /**
+   * Uploads images (the image button, a drop, a paste — with `withImages()`).
+   * None: no images.
+   */
   readonly upload = input<ScEditorUploadHandler | null>(null);
   /** The image types the editor takes (picked, dropped or pasted). */
   readonly imageTypes = input<readonly string[]>([
@@ -161,13 +140,6 @@ export class ScEditor implements FormValueControl<ScEditorValue> {
   /** Invalid once touched: the document's `aria-invalid`, `data-invalid`. */
   readonly showInvalid = computed(() => this.invalid() && this.touched());
 
-  readonly alignment = computed<ScEditorAlignment>(() => {
-    for (const align of ['center', 'right', 'justify'] as const) {
-      if (this.isActive({ textAlign: align })) return align;
-    }
-    return 'left';
-  });
-
   readonly heading = computed<ScEditorHeadingLevel>(() => {
     for (let level = 1; level <= 6; level++) {
       if (this.isActive('heading', { level })) {
@@ -190,7 +162,6 @@ export class ScEditor implements FormValueControl<ScEditorValue> {
     return null;
   });
 
-  /** The link at the selection, or ''. */
   /** The document's characters (its text) and words. */
   readonly characters = computed(() => {
     this.contentVersion();
@@ -201,49 +172,12 @@ export class ScEditor implements FormValueControl<ScEditorValue> {
     return this.editorInstance()?.storage.characterCount.words() ?? 0;
   });
 
-  /** Whether the selection is in a table. */
-  readonly inTable = computed(() => this.isActive('table'));
-
+  /** The link at the selection, or ''. */
   readonly linkHref = computed(() => {
     this.contentVersion();
     const href = this.editorInstance()?.getAttributes('link')['href'];
     return typeof href === 'string' ? href : '';
   });
-
-  /** The highlight colour at the selection, or ''. */
-  readonly highlightColor = computed(() => {
-    this.contentVersion();
-    const color = this.editorInstance()?.getAttributes('highlight')['color'];
-    return typeof color === 'string' ? color : '';
-  });
-
-  // Search and replace.
-
-  /** Whether the search bar is open (`scEditorSearch`, Ctrl / ⌘ + F). */
-  readonly searchOpen = signal(false);
-  /** Asks the search input for focus (it moves on with each request). */
-  readonly searchFocusRequest = signal(0);
-  private readonly searchState = computed(() => {
-    this.contentVersion();
-    return this.editorInstance()?.storage.findAndReplace ?? null;
-  });
-  readonly searchTerm = computed(() => this.searchState()?.searchTerm ?? '');
-  readonly replaceTerm = computed(() => this.searchState()?.replaceTerm ?? '');
-  readonly caseSensitive = computed(
-    () => this.searchState()?.caseSensitive ?? false,
-  );
-  readonly wholeWord = computed(() => this.searchState()?.wholeWord ?? false);
-  readonly useRegex = computed(() => this.searchState()?.useRegex ?? false);
-  /** How many matches there are. */
-  readonly searchResults = computed(
-    () => this.searchState()?.results.length ?? 0,
-  );
-  /** The current match (from 0), or null. */
-  readonly searchIndex = computed(
-    () => this.searchState()?.currentIndex ?? null,
-  );
-  /** Ctrl / ⌘ + F opens the search bar only when there is one to open. */
-  private readonly searchControls = signal(0);
 
   // Images.
 
@@ -367,79 +301,6 @@ export class ScEditor implements FormValueControl<ScEditorValue> {
     });
   }
 
-  // Tables.
-
-  /** Runs a table action: `insertTable` makes a 3 × 3 table with a header row. */
-  runTable(action: ScEditorTableAction): void {
-    this.run((chain) => tableCommand(chain, action));
-  }
-
-  /** Whether a table action can run now (deleting a row needs a table…). */
-  canTable(action: ScEditorTableAction): boolean {
-    return this.can((chain) => tableCommand(chain, action));
-  }
-
-  // Search and replace.
-
-  openSearch(): void {
-    this.searchOpen.set(true);
-    this.searchFocusRequest.update((n) => n + 1);
-  }
-
-  /** Closes the search bar, clears its matches, and goes back to the text. */
-  closeSearch(): void {
-    if (!this.searchOpen()) return;
-    this.searchOpen.set(false);
-    const editor = this.editorInstance();
-    editor?.commands.clearSearch();
-    editor?.commands.focus();
-  }
-
-  toggleSearch(): void {
-    if (this.searchOpen()) this.closeSearch();
-    else this.openSearch();
-  }
-
-  /** Searches the document (as you type: it waits for a pause). */
-  search(term: string): void {
-    this.editorInstance()?.commands.setSearchTerm(term);
-  }
-
-  setReplaceTerm(term: string): void {
-    this.editorInstance()?.commands.setReplaceTerm(term);
-  }
-
-  setSearchOption(option: ScEditorSearchFlag, on: boolean): void {
-    const commands = this.editorInstance()?.commands;
-    if (!commands) return;
-    if (option === 'caseSensitive') commands.setCaseSensitive(on);
-    else if (option === 'wholeWord') commands.setWholeWord(on);
-    else commands.setUseRegex(on);
-  }
-
-  searchNext(): void {
-    this.editorInstance()?.commands.goToNextResult();
-  }
-
-  searchPrevious(): void {
-    this.editorInstance()?.commands.goToPreviousResult();
-  }
-
-  /** Replaces the current match and goes to the next one. */
-  replace(): void {
-    if (this.editable()) this.editorInstance()?.commands.replace();
-  }
-
-  replaceAll(): void {
-    if (this.editable()) this.editorInstance()?.commands.replaceAll();
-  }
-
-  /** Called by `scEditorSearch`: there is a search bar to open. */
-  registerSearch(): () => void {
-    this.searchControls.update((n) => n + 1);
-    return () => this.searchControls.update((n) => n - 1);
-  }
-
   // Images.
 
   /** Uploads images and inserts them at `position` (or the selection). */
@@ -461,28 +322,13 @@ export class ScEditor implements FormValueControl<ScEditorValue> {
     const editor = new Editor({
       element,
       extensions: [
-        ...editorContentExtensions(),
+        ...editorContentExtensions(this.features),
         Placeholder.configure({ placeholder: () => options.placeholder() }),
         // The selection stays visible while a popover or the search has focus.
         Selection,
         // Counts characters and words; holds the document to the limit.
         CharacterCount.configure({ limit: this.characterLimit() }),
-        FindAndReplace.configure({ injectCSS: false }),
-        FileHandler.configure({
-          onDrop: (_editor, files, position) =>
-            this.insertImages(files, position),
-          onPaste: (_editor, files) => this.insertImages(files),
-        }),
-        Extension.create({
-          name: 'scEditorSearchShortcut',
-          addKeyboardShortcuts: () => ({
-            'Mod-f': () => {
-              if (!this.searchControls()) return false;
-              this.openSearch();
-              return true;
-            },
-          }),
-        }),
+        ...this.features.flatMap((feature) => feature.behaviour?.(this) ?? []),
       ],
       content: this.toContent(this.value()),
       editable: this.editable(),
@@ -562,7 +408,9 @@ export class ScEditor implements FormValueControl<ScEditorValue> {
       case 'text':
         return editor.isEmpty ? '' : editor.getText({ blockSeparator: '\n' });
       case 'markdown':
-        return editor.isEmpty ? '' : documentToMarkdown(editor.getJSON());
+        return editor.isEmpty
+          ? ''
+          : editorMarkdown(this.features).serialize(editor.getJSON());
       default:
         return editor.isEmpty ? '' : editor.getHTML();
     }
@@ -580,7 +428,7 @@ export class ScEditor implements FormValueControl<ScEditorValue> {
       case 'text':
         return textToDocument(value);
       case 'markdown':
-        return markdownToDocument(value);
+        return editorMarkdown(this.features).parse(value);
       default:
         return value;
     }
@@ -593,15 +441,4 @@ export class ScEditor implements FormValueControl<ScEditorValue> {
       ? value === current
       : JSON.stringify(value) === JSON.stringify(current);
   }
-}
-
-/** A table action as a command. */
-function tableCommand(
-  chain: ChainedCommands,
-  action: ScEditorTableAction,
-): ChainedCommands {
-  if (action === 'insertTable') {
-    return chain.insertTable({ rows: 3, cols: 3, withHeaderRow: true });
-  }
-  return chain[action]();
 }

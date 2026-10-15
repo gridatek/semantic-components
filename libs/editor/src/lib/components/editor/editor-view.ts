@@ -21,17 +21,19 @@ import type {
   ScEditorValue,
 } from './editor';
 import { editorContentExtensions } from './editor-extensions';
-import { markdownToDocument, textToDocument } from './editor-format';
+import { SC_EDITOR_FEATURES } from './editor-features';
+import { editorMarkdown, textToDocument } from './editor-format';
 
-let schema: Schema | null = null;
+/** The schema of each set of features (made once). */
+const schemas = new WeakMap<object, Schema>();
 
 /**
  * Displays what the editor wrote — a saved post, a preview — as the editor
  * shows it: the same styles, without an editor. Give it the editor's `format`:
- * HTML (the default), Markdown or plain text as a string, Tiptap's JSON as an object
- * (an object is read as JSON whatever the format). Any is read through
- * the editor's schema, so only what the editor can hold is shown (no scripts,
- * no unsafe links). Task checkboxes are shown, not changed. `layout="page"`
+ * HTML (the default), Markdown or plain text as a string, Tiptap's JSON as an
+ * object (an object is read as JSON whatever the format). Any is read through
+ * the editor's schema — with the features of `provideEditor` — so only what
+ * the editor can hold is shown (no scripts, no unsafe links). Task checkboxes are shown, not changed. `layout="page"`
  * centres it in a column of readable width, as `scEditorContent` does.
  */
 @Directive({
@@ -44,6 +46,7 @@ let schema: Schema | null = null;
 })
 export class ScEditorView {
   private readonly document = inject(DOCUMENT);
+  private readonly features = inject(SC_EDITOR_FEATURES);
   private readonly element =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
@@ -68,7 +71,11 @@ export class ScEditorView {
   }
 
   private render(content: ScEditorValue): DocumentFragment | HTMLElement {
-    schema ??= getSchema(editorContentExtensions());
+    let schema = schemas.get(this.features);
+    if (!schema) {
+      schema = getSchema(editorContentExtensions(this.features));
+      schemas.set(this.features, schema);
+    }
     const doc = this.parse(schema, content);
     const fragment = DOMSerializer.fromSchema(schema).serializeFragment(
       doc.content,
@@ -101,7 +108,7 @@ export class ScEditorView {
             ? (content ?? { type: 'doc', content: [] })
             : format === 'text'
               ? textToDocument(content)
-              : markdownToDocument(content),
+              : editorMarkdown(this.features).parse(content),
         );
         // Its structure too: a list item in a heading isn't shown half-built.
         doc.check();
