@@ -9,6 +9,7 @@ export * from './editor-extensions';
 // Container components
 export * from './editor-toolbar';
 export * from './editor-toolbar-group';
+export * from './editor-bubble-menu';
 export * from './editor-header';
 export * from './editor-footer';
 export * from './editor-separator';
@@ -44,6 +45,7 @@ export * from './editor-redo';
 // Menu triggers
 export * from './editor-heading';
 export * from './editor-list';
+export * from './editor-table';
 
 // Highlight popover
 export * from './editor-highlight-color';

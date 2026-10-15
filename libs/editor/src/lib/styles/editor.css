@@ -241,6 +241,46 @@
   @apply bg-accent rounded-md;
 }
 
+/* Tables: as `scTable`, with cell borders to write in */
+[data-slot='editor-document'] .tableWrapper {
+  @apply my-6 overflow-x-auto;
+}
+
+[data-slot='editor-document'] table {
+  @apply my-6 w-full table-fixed caption-bottom border-collapse text-sm;
+}
+
+[data-slot='editor-document'] .tableWrapper table {
+  @apply my-0;
+}
+
+[data-slot='editor-document'] :is(th, td) {
+  @apply border-border relative border px-2 py-1.5 text-start align-top;
+}
+
+[data-slot='editor-document'] th {
+  @apply bg-muted/50 text-foreground font-medium;
+}
+
+[data-slot='editor-document'] :is(th, td) p {
+  @apply mt-0 leading-6;
+}
+
+/* Selected cells */
+[data-slot='editor-document'] .selectedCell::after {
+  @apply bg-primary/10 pointer-events-none absolute inset-0;
+  content: '';
+}
+
+/* Dragging a column's border resizes it */
+[data-slot='editor-document'] .column-resize-handle {
+  @apply bg-primary pointer-events-none absolute top-0 -right-0.5 -bottom-px w-1;
+}
+
+.ProseMirror.resize-cursor {
+  @apply cursor-col-resize;
+}
+
 /* Highlights */
 [data-slot='editor-document'] mark {
   @apply rounded-sm px-0.5 text-inherit;

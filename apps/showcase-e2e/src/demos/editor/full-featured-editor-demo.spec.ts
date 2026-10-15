@@ -240,4 +240,60 @@ test.describe('Full Featured Editor Demo', () => {
     await page.getByRole('button', { name: 'Insert Sample Content' }).click();
     await expect(article(page).locator('h1')).toHaveText('Getting started');
   });
+
+  test('the table menu inserts and edits a table', async ({ page }) => {
+    const table = toolbar(page).getByRole('button', {
+      name: 'Table',
+      exact: true,
+    });
+    await startEmpty(page);
+    await table.click();
+    // Outside a table, only inserting one applies.
+    await expect(
+      page.getByRole('menuitem', { name: 'Delete row' }),
+    ).toBeDisabled();
+    await page.getByRole('menuitem', { name: 'Insert table' }).click();
+
+    const inserted = article(page).locator('table');
+    await expect(inserted.locator('tr')).toHaveCount(3);
+    await expect(inserted.locator('th')).toHaveCount(3);
+    await expect(table).toHaveAttribute('data-state', 'on');
+
+    await page.keyboard.type('Name');
+    await table.click();
+    await page.getByRole('menuitem', { name: 'Add row below' }).click();
+    await expect(inserted.locator('tr')).toHaveCount(4);
+    await table.click();
+    await page.getByRole('menuitem', { name: 'Add column after' }).click();
+    await expect(inserted.locator('tr').first().locator('th')).toHaveCount(4);
+    await expect(output(page)).toContainText('<th');
+
+    await table.click();
+    await page.getByRole('menuitem', { name: 'Delete table' }).click();
+    await expect(article(page).locator('table')).toHaveCount(0);
+  });
+
+  test('the floating toolbar appears by selected text', async ({ page }) => {
+    const bubble = page.getByRole('toolbar', { name: 'Selection' });
+    await expect(bubble).toBeHidden();
+
+    await startEmpty(page);
+    await page.keyboard.type('Make this loud');
+    await expect(bubble).toBeHidden();
+    await page.keyboard.press('Shift+Home');
+    await expect(bubble).toBeVisible();
+
+    await bubble.getByRole('button', { name: 'Bold', exact: true }).click();
+    await expect(output(page)).toHaveText(
+      '<p><strong>Make this loud</strong></p>',
+    );
+    await expect(
+      bubble.getByRole('button', { name: 'Bold', exact: true }),
+    ).toHaveAttribute('aria-pressed', 'true');
+
+    // An empty selection hides it.
+    await article(page).click();
+    await page.keyboard.press('End');
+    await expect(bubble).toBeHidden();
+  });
 });

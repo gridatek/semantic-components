@@ -8,6 +8,7 @@ import {
   ScEditorAlignRight,
   ScEditorBlockquote,
   ScEditorBold,
+  ScEditorBubbleMenu,
   ScEditorCharCount,
   ScEditorClearFormatting,
   ScEditorCode,
@@ -41,6 +42,8 @@ import {
   ScEditorStrikethrough,
   ScEditorSubscript,
   ScEditorSuperscript,
+  ScEditorTable,
+  type ScEditorTableAction,
   ScEditorToolbar,
   ScEditorToolbarGroup,
   ScEditorUnderline,
@@ -97,6 +100,7 @@ import {
   SiStrikethroughIcon,
   SiSubscriptIcon,
   SiSuperscriptIcon,
+  SiTable2Icon,
   SiTextAlignCenterIcon,
   SiTextAlignEndIcon,
   SiTextAlignJustifyIcon,
@@ -121,6 +125,12 @@ const SAMPLE = `<h1>Getting started</h1>
 <h2>Code</h2>
 <pre><code>const editor = inject(SC_EDITOR);
 editor.run((chain) =&gt; chain.toggleBold());</code></pre>
+<h2>Tables</h2>
+<table>
+  <tr><th><p>Feature</p></th><th><p>Where</p></th></tr>
+  <tr><td><p>Tables</p></td><td><p>The table menu</p></td></tr>
+  <tr><td><p>Floating toolbar</p></td><td><p>Select some text</p></td></tr>
+</table>
 <blockquote><p>Search with Ctrl + F, and replace what you find.</p></blockquote>
 <p style="text-align: center">Centred, justified, or aligned to either side.</p>`;
 
@@ -172,6 +182,8 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
     ScEditorItalic,
     ScEditorLink,
     ScEditorList,
+    ScEditorTable,
+    ScEditorBubbleMenu,
     ScEditorRedo,
     ScEditorReplace,
     ScEditorReplaceAll,
@@ -226,6 +238,7 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
     SiTextAlignEndIcon,
     SiTextAlignJustifyIcon,
     SiTextAlignStartIcon,
+    SiTable2Icon,
     SiTextQuoteIcon,
     SiUnderlineIcon,
     SiUndoIcon,
@@ -341,6 +354,34 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
               <svg siCodeXmlIcon></svg>
               <span class="sr-only">Code block</span>
             </button>
+
+            <div scMenuProvider>
+              <button
+                scMenuTrigger
+                scEditorTable
+                value="table"
+                #table="scEditorTable"
+              >
+                <svg siTable2Icon></svg>
+                <span class="sr-only">Table</span>
+                <svg siChevronDownIcon></svg>
+              </button>
+              <ng-template scMenuPortal>
+                <div scMenu (itemSelected)="table.select($event)">
+                  <ng-template scMenuContent>
+                    @for (action of tableActions; track action) {
+                      <div
+                        scMenuItem
+                        [value]="action"
+                        [disabled]="!table.can(action)"
+                      >
+                        {{ tableLabels[action] }}
+                      </div>
+                    }
+                  </ng-template>
+                </div>
+              </ng-template>
+            </div>
           </div>
 
           <div scEditorSeparator></div>
@@ -506,6 +547,31 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
             <button scEditorSearch value="search">
               <svg siSearchIcon></svg>
               <span class="sr-only">Search and replace</span>
+            </button>
+          </div>
+        </div>
+
+        <div scEditorBubbleMenu aria-label="Selection">
+          <div scEditorToolbarGroup>
+            <button scEditorBold value="bold">
+              <svg siBoldIcon></svg>
+              <span class="sr-only">Bold</span>
+            </button>
+            <button scEditorItalic value="italic">
+              <svg siItalicIcon></svg>
+              <span class="sr-only">Italic</span>
+            </button>
+            <button scEditorStrikethrough value="strikethrough">
+              <svg siStrikethroughIcon></svg>
+              <span class="sr-only">Strikethrough</span>
+            </button>
+            <button scEditorCode value="code">
+              <svg siCodeIcon></svg>
+              <span class="sr-only">Code</span>
+            </button>
+            <button scEditorUnderline value="underline">
+              <svg siUnderlineIcon></svg>
+              <span class="sr-only">Underline</span>
             </button>
           </div>
         </div>
@@ -676,6 +742,35 @@ export class FullFeaturedEditorDemo {
     bulletList: 'Bullet list',
     orderedList: 'Numbered list',
     taskList: 'Task list',
+  };
+
+  readonly tableActions: ScEditorTableAction[] = [
+    'insertTable',
+    'addRowBefore',
+    'addRowAfter',
+    'deleteRow',
+    'addColumnBefore',
+    'addColumnAfter',
+    'deleteColumn',
+    'mergeCells',
+    'splitCell',
+    'toggleHeaderRow',
+    'toggleHeaderColumn',
+    'deleteTable',
+  ];
+  readonly tableLabels: Record<ScEditorTableAction, string> = {
+    insertTable: 'Insert table',
+    addRowBefore: 'Add row above',
+    addRowAfter: 'Add row below',
+    deleteRow: 'Delete row',
+    addColumnBefore: 'Add column before',
+    addColumnAfter: 'Add column after',
+    deleteColumn: 'Delete column',
+    mergeCells: 'Merge cells',
+    splitCell: 'Split cell',
+    toggleHeaderRow: 'Header row',
+    toggleHeaderColumn: 'Header column',
+    deleteTable: 'Delete table',
   };
 
   readonly highlightColors = [

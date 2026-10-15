@@ -21,14 +21,14 @@ import type {
   ScEditorValue,
 } from './editor';
 import { editorContentExtensions } from './editor-extensions';
-import { textToDocument } from './editor-format';
+import { markdownToDocument, textToDocument } from './editor-format';
 
 let schema: Schema | null = null;
 
 /**
  * Displays what the editor wrote — a saved post, a preview — as the editor
  * shows it: the same styles, without an editor. Give it the editor's `format`:
- * HTML (the default) or plain text as a string, Tiptap's JSON as an object
+ * HTML (the default), Markdown or plain text as a string, Tiptap's JSON as an object
  * (an object is read as JSON whatever the format). Any is read through
  * the editor's schema, so only what the editor can hold is shown (no scripts,
  * no unsafe links). Task checkboxes are shown, not changed. `layout="page"`
@@ -89,12 +89,19 @@ export class ScEditorView {
 
   /** The document, from HTML or JSON; what the schema can't hold is dropped. */
   private parse(schema: Schema, content: ScEditorValue): ProseMirrorNode {
-    if (typeof content !== 'string' || this.format() === 'text') {
+    const format = this.format();
+    if (
+      typeof content !== 'string' ||
+      format === 'text' ||
+      format === 'markdown'
+    ) {
       try {
         const doc = schema.nodeFromJSON(
-          typeof content === 'string'
-            ? textToDocument(content)
-            : (content ?? { type: 'doc', content: [] }),
+          typeof content !== 'string'
+            ? (content ?? { type: 'doc', content: [] })
+            : format === 'text'
+              ? textToDocument(content)
+              : markdownToDocument(content),
         );
         // Its structure too: a list item in a heading isn't shown half-built.
         doc.check();

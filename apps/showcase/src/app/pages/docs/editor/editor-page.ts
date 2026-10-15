@@ -50,9 +50,10 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
           The complete editor, after Tiptap's Simple Editor: undo and redo, the
           block type and list menus (with task lists), blockquotes and code
           blocks, marks, highlight colours, links, superscript and subscript,
-          alignment, images (pick, drop or paste one) and search and replace
-          (Ctrl + F). The page layout centres the text in a column of readable
-          width.
+          alignment, tables (from the table menu), images (pick, drop or paste
+          one) and search and replace (Ctrl + F). Select some text for the
+          floating toolbar. The page layout centres the text in a column of
+          readable width.
         </p>
         <app-full-featured-editor-demo-container />
       </section>
@@ -65,15 +66,17 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
           >
           on the editor: the value is the document's HTML.
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">required</code>
-          and
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">maxLength</code>
-          check it,
+          checks it,
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
             >scFieldErrors</code
           >
           shows the message once the document is left, and
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">disabled</code>
           from the schema follows the checkbox.
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >characterLimit</code
+          >
+          stops the text at 280 characters — its text, not its HTML.
         </p>
         <app-signal-forms-editor-demo-container />
       </section>
@@ -102,7 +105,9 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">json</code>
           (Tiptap&apos;s JSON,
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">null</code> when
-          empty) or
+          empty),
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">markdown</code>
+          or
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">text</code>
           (plain text, a line per paragraph). Switching it rewrites the value in
           the new format, and

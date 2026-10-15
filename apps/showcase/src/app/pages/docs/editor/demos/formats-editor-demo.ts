@@ -25,7 +25,7 @@ import {
   SiListTodoIcon,
 } from '@semantic-icons/lucide-icons';
 
-const FORMATS: ScEditorFormat[] = ['html', 'json', 'text'];
+const FORMATS: ScEditorFormat[] = ['html', 'json', 'markdown', 'text'];
 
 /** The same note in each format. */
 const SAMPLES: Record<ScEditorFormat, ScEditorValue> = {
@@ -63,11 +63,14 @@ const SAMPLES: Record<ScEditorFormat, ScEditorValue> = {
       },
     ],
   },
+  markdown:
+    '## Formats\n\nThe same note as **Markdown**.\n\n- [x] Pick a format',
   text: 'Formats\nThe same note as plain text.\nPick a format',
 };
 
 /**
- * `format` picks what the form holds: HTML, Tiptap's JSON or plain text.
+ * `format` picks what the form holds: HTML, Tiptap's JSON, Markdown or plain
+ * text.
  * Switching it rewrites the value in the new format; `scEditorView` shows
  * any of them, given the same format.
  */
@@ -178,6 +181,7 @@ export class FormatsEditorDemo {
   readonly formatLabels: Record<ScEditorFormat, string> = {
     html: 'HTML',
     json: 'JSON',
+    markdown: 'Markdown',
     text: 'Text',
   };
 

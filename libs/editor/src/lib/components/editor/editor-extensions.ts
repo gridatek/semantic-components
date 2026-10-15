@@ -4,6 +4,7 @@ import Image from '@tiptap/extension-image';
 import { TaskItem, TaskList } from '@tiptap/extension-list';
 import Subscript from '@tiptap/extension-subscript';
 import Superscript from '@tiptap/extension-superscript';
+import { TableKit } from '@tiptap/extension-table';
 import TextAlign from '@tiptap/extension-text-align';
 import StarterKit from '@tiptap/starter-kit';
 
@@ -35,5 +36,7 @@ export function editorContentExtensions(): Extensions {
     Subscript,
     Image,
     TextAlign.configure({ types: ['heading', 'paragraph'] }),
+    // Tables, their columns resized by dragging their borders.
+    TableKit.configure({ table: { resizable: true } }),
   ];
 }

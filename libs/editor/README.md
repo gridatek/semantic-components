@@ -4,7 +4,7 @@ Rich text editor components built on top of Tiptap for the Semantic Components l
 
 ## Contents
 
-- **Components**: Editor (a Signal Forms control), content, toolbar, command buttons (bold, italic, underline, strikethrough, code, lists, blockquote, alignment, horizontal rule, clear formatting, undo/redo, link), heading, word/char count
+- **Components**: Editor (a Signal Forms control; HTML, JSON, Markdown or text), content, toolbar and floating toolbar, command buttons (bold, italic, underline, strikethrough, code, lists, blockquote, alignment, horizontal rule, clear formatting, undo/redo, link), heading and table menus, search and replace, word/char count and character limit
 - **Styles**: ProseMirror editor styles
 
 ## Usage

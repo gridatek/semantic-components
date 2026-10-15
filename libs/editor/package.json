@@ -18,6 +18,7 @@
     "@angular/forms": ">=22.2.3",
     "@semantic-components/ui": "0.81.0",
     "@tiptap/core": ">=3.32.0",
+    "@tiptap/extension-bubble-menu": ">=3.32.0",
     "@tiptap/extension-file-handler": ">=3.32.0",
     "@tiptap/extension-find-and-replace": ">=3.32.0",
     "@tiptap/extension-highlight": ">=3.32.0",
@@ -25,8 +26,10 @@
     "@tiptap/extension-list": ">=3.32.0",
     "@tiptap/extension-subscript": ">=3.32.0",
     "@tiptap/extension-superscript": ">=3.32.0",
+    "@tiptap/extension-table": ">=3.32.0",
     "@tiptap/extension-text-align": ">=3.32.0",
     "@tiptap/extensions": ">=3.32.0",
+    "@tiptap/markdown": ">=3.32.0",
     "@tiptap/pm": ">=3.32.0",
     "@tiptap/starter-kit": ">=3.32.0"
   },

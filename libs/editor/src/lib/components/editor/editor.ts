@@ -6,7 +6,7 @@ import {
 } from '@tiptap/core';
 import FileHandler from '@tiptap/extension-file-handler';
 import FindAndReplace from '@tiptap/extension-find-and-replace';
-import { Placeholder, Selection } from '@tiptap/extensions';
+import { CharacterCount, Placeholder, Selection } from '@tiptap/extensions';
 import {
   Directive,
   InjectionToken,
@@ -21,7 +21,11 @@ import {
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
 import { editorContentExtensions } from './editor-extensions';
-import { textToDocument } from './editor-format';
+import {
+  documentToMarkdown,
+  markdownToDocument,
+  textToDocument,
+} from './editor-format';
 
 export type ScEditorAlignment = 'left' | 'center' | 'right' | 'justify';
 export type ScEditorHeadingLevel =
@@ -36,7 +40,22 @@ export type ScEditorListType = 'bulletList' | 'orderedList' | 'taskList';
 export type ScEditorSearchFlag = 'caseSensitive' | 'wholeWord' | 'useRegex';
 
 /** The format the editor writes its value in (`format`). */
-export type ScEditorFormat = 'html' | 'json' | 'text';
+export type ScEditorFormat = 'html' | 'json' | 'text' | 'markdown';
+
+/** What `runTable` / `canTable` do to a table. */
+export type ScEditorTableAction =
+  | 'insertTable'
+  | 'addRowBefore'
+  | 'addRowAfter'
+  | 'deleteRow'
+  | 'addColumnBefore'
+  | 'addColumnAfter'
+  | 'deleteColumn'
+  | 'mergeCells'
+  | 'splitCell'
+  | 'toggleHeaderRow'
+  | 'toggleHeaderColumn'
+  | 'deleteTable';
 
 /**
  * The document, as the form holds it: HTML or plain text (a string, '' when
@@ -101,11 +120,17 @@ export class ScEditor implements FormValueControl<ScEditorValue> {
   // Set by [formField] — the document's HTML, its state, its errors.
   readonly value = model<ScEditorValue>('');
   /**
-   * The value's format: `html` (the default), `json` (Tiptap's JSON) or `text`
-   * (plain text, a line per paragraph — the formatting isn't kept). The
-   * editor reads any of them; changing it rewrites the value in the new one.
+   * The value's format: `html` (the default), `json` (Tiptap's JSON),
+   * `markdown`, or `text` (plain text, a line per paragraph — the formatting
+   * isn't kept). The editor reads any of them; changing it rewrites the value
+   * in the new one.
    */
   readonly format = input<ScEditorFormat>('html');
+  /**
+   * The most characters the document takes (its text, not its HTML): typing
+   * or pasting stops there. None: no limit.
+   */
+  readonly characterLimit = input<number | null>(null);
   readonly disabled = input(false, { transform: booleanAttribute });
   readonly readonly = input(false, { transform: booleanAttribute });
   readonly invalid = input(false, { transform: booleanAttribute });
@@ -166,6 +191,19 @@ export class ScEditor implements FormValueControl<ScEditorValue> {
   });
 
   /** The link at the selection, or ''. */
+  /** The document's characters (its text) and words. */
+  readonly characters = computed(() => {
+    this.contentVersion();
+    return this.editorInstance()?.storage.characterCount.characters() ?? 0;
+  });
+  readonly words = computed(() => {
+    this.contentVersion();
+    return this.editorInstance()?.storage.characterCount.words() ?? 0;
+  });
+
+  /** Whether the selection is in a table. */
+  readonly inTable = computed(() => this.isActive('table'));
+
   readonly linkHref = computed(() => {
     this.contentVersion();
     const href = this.editorInstance()?.getAttributes('link')['href'];
@@ -235,6 +273,16 @@ export class ScEditor implements FormValueControl<ScEditorValue> {
             .run();
         }
       });
+    });
+
+    // The limit follows its input (the extension reads it at each change).
+    effect(() => {
+      const limit = this.characterLimit();
+      const characterCount =
+        this.editorInstance()?.extensionManager.extensions.find(
+          (extension) => extension.name === 'characterCount',
+        );
+      if (characterCount) characterCount.options.limit = limit;
     });
 
     // A new format: the value, rewritten in it.
@@ -317,6 +365,18 @@ export class ScEditor implements FormValueControl<ScEditorValue> {
           return chain.toggleTaskList();
       }
     });
+  }
+
+  // Tables.
+
+  /** Runs a table action: `insertTable` makes a 3 × 3 table with a header row. */
+  runTable(action: ScEditorTableAction): void {
+    this.run((chain) => tableCommand(chain, action));
+  }
+
+  /** Whether a table action can run now (deleting a row needs a table…). */
+  canTable(action: ScEditorTableAction): boolean {
+    return this.can((chain) => tableCommand(chain, action));
   }
 
   // Search and replace.
@@ -405,6 +465,8 @@ export class ScEditor implements FormValueControl<ScEditorValue> {
         Placeholder.configure({ placeholder: () => options.placeholder() }),
         // The selection stays visible while a popover or the search has focus.
         Selection,
+        // Counts characters and words; holds the document to the limit.
+        CharacterCount.configure({ limit: this.characterLimit() }),
         FindAndReplace.configure({ injectCSS: false }),
         FileHandler.configure({
           onDrop: (_editor, files, position) =>
@@ -499,6 +561,8 @@ export class ScEditor implements FormValueControl<ScEditorValue> {
         return editor.isEmpty ? null : editor.getJSON();
       case 'text':
         return editor.isEmpty ? '' : editor.getText({ blockSeparator: '\n' });
+      case 'markdown':
+        return editor.isEmpty ? '' : documentToMarkdown(editor.getJSON());
       default:
         return editor.isEmpty ? '' : editor.getHTML();
     }
@@ -506,12 +570,20 @@ export class ScEditor implements FormValueControl<ScEditorValue> {
 
   /**
    * A value as content for the editor: JSON as it is; a string as plain text
-   * in the text format, HTML otherwise (so HTML loads into a JSON editor).
+   * or Markdown in those formats, HTML otherwise (so HTML loads into a JSON
+   * editor).
    */
   private toContent(value: ScEditorValue): string | JSONContent {
     if (value === null) return '';
     if (typeof value !== 'string') return value;
-    return this.format() === 'text' ? textToDocument(value) : value;
+    switch (this.format()) {
+      case 'text':
+        return textToDocument(value);
+      case 'markdown':
+        return markdownToDocument(value);
+      default:
+        return value;
+    }
   }
 
   /** Whether the document already is this value. */
@@ -521,4 +593,15 @@ export class ScEditor implements FormValueControl<ScEditorValue> {
       ? value === current
       : JSON.stringify(value) === JSON.stringify(current);
   }
+}
+
+/** A table action as a command. */
+function tableCommand(
+  chain: ChainedCommands,
+  action: ScEditorTableAction,
+): ChainedCommands {
+  if (action === 'insertTable') {
+    return chain.insertTable({ rows: 3, cols: 3, withHeaderRow: true });
+  }
+  return chain[action]();
 }

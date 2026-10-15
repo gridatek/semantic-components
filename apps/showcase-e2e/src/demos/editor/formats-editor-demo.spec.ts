@@ -2,7 +2,7 @@ import { type Page, expect, test } from '@playwright/test';
 
 const editor = (page: Page) => page.getByRole('textbox', { name: 'Note' });
 const view = (page: Page) => page.getByRole('article', { name: 'Saved note' });
-const format = (page: Page, name: 'HTML' | 'JSON' | 'Text') =>
+const format = (page: Page, name: 'HTML' | 'JSON' | 'Markdown' | 'Text') =>
   page
     .getByRole('group', { name: 'Format' })
     .getByRole('button', { name, exact: true });
@@ -59,6 +59,13 @@ test.describe('Formats Editor Demo', () => {
       .toBe('<p>Hello <strong>world</strong></p><p>Bye</p>');
   });
 
+  test('Markdown gives Markdown back', async ({ page }) => {
+    await format(page, 'Markdown').click();
+    await write(page);
+    await expect.poll(() => value(page)).toBe('Hello **world**\n\nBye');
+    await expect(view(page).locator('strong')).toHaveText('world');
+  });
+
   test('text gives plain text back, a line per paragraph', async ({ page }) => {
     await format(page, 'Text').click();
     await write(page);
@@ -81,7 +88,7 @@ test.describe('Formats Editor Demo', () => {
   test('each format loads into the editor and the display', async ({
     page,
   }) => {
-    for (const name of ['HTML', 'Text', 'JSON'] as const) {
+    for (const name of ['HTML', 'Markdown', 'Text', 'JSON'] as const) {
       await format(page, name).click();
       await page.getByRole('button', { name: 'Load sample' }).click();
       await expect(editor(page)).toContainText('Formats');

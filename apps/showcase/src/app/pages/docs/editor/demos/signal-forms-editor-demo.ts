@@ -1,15 +1,12 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
-import {
-  FormField,
-  disabled,
-  form,
-  maxLength,
-  required,
-} from '@angular/forms/signals';
+import { FormField, disabled, form, required } from '@angular/forms/signals';
 import {
   ScEditor,
   ScEditorBold,
+  ScEditorCharCount,
   ScEditorContent,
+  ScEditorCount,
+  ScEditorFooter,
   ScEditorItalic,
   ScEditorToolbar,
   ScEditorToolbarGroup,
@@ -31,8 +28,9 @@ interface PostModel {
 }
 
 /**
- * `[formField]` on the editor: the value is its HTML, `required` and
- * `maxLength` check it, `disabled` follows the schema. Once left invalid,
+ * `[formField]` on the editor: the value is its HTML, `required` checks it,
+ * `disabled` follows the schema, and `characterLimit` stops the text at 280
+ * characters (counted in the footer). Once left invalid,
  * `scFieldErrors` (inside the field) describes the document.
  */
 @Component({
@@ -52,6 +50,9 @@ interface PostModel {
     ScEditorItalic,
     ScEditorToolbar,
     ScEditorToolbarGroup,
+    ScEditorCharCount,
+    ScEditorCount,
+    ScEditorFooter,
     SiBoldIcon,
     SiItalicIcon,
   ],
@@ -61,6 +62,7 @@ interface PostModel {
         <div
           scEditor
           [formField]="postForm.body"
+          [characterLimit]="280"
           class="overflow-hidden rounded-lg border"
         >
           <div scEditorToolbar aria-label="Formatting">
@@ -80,8 +82,15 @@ interface PostModel {
             ariaLabel="Post"
             placeholder="What's on your mind?"
           ></div>
+          <div scEditorFooter>
+            <div scEditorCount>
+              <span scEditorCharCount #count="scEditorCharCount">
+                {{ count.charCount() }} / {{ count.limit() }}
+              </span>
+            </div>
+          </div>
         </div>
-        <p scFieldDescription>A post of up to 200 characters of HTML.</p>
+        <p scFieldDescription>A post of up to 280 characters.</p>
         <p scFieldErrors></p>
       </div>
 
@@ -113,7 +122,6 @@ export class SignalFormsEditorDemo {
 
   readonly postForm = form(this.model, (path) => {
     required(path.body, { message: 'Write the post.' });
-    maxLength(path.body, 200, { message: 'Keep it under 200 characters.' });
     disabled(path.body, ({ valueOf }) => valueOf(path.locked));
   });
 

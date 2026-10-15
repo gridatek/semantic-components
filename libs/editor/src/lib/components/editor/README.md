@@ -7,7 +7,7 @@ You write the markup and every piece of text — the toolbar, its icons and name
 ## Installation
 
 ```bash
-npm install @semantic-components/editor @tiptap/core @tiptap/starter-kit @tiptap/extensions @tiptap/extension-list @tiptap/extension-text-align @tiptap/extension-highlight @tiptap/extension-superscript @tiptap/extension-subscript @tiptap/extension-image @tiptap/extension-file-handler @tiptap/extension-find-and-replace
+npm install @semantic-components/editor @tiptap/core @tiptap/starter-kit @tiptap/extensions @tiptap/extension-list @tiptap/extension-text-align @tiptap/extension-highlight @tiptap/extension-superscript @tiptap/extension-subscript @tiptap/extension-image @tiptap/extension-file-handler @tiptap/extension-find-and-replace @tiptap/extension-table @tiptap/extension-bubble-menu @tiptap/markdown @tiptap/pm
 ```
 
 The editor turns all of them on: there is no extension list to set up.
@@ -59,6 +59,8 @@ readonly postForm = form(signal({ body: '' }), (path) => {
 | `ScEditorBold` … (see below)                | `button[scEditorBold]`…                       | A command; `aria-pressed` when it has a state. Write its icon and name it.                                                                                                |
 | `ScEditorHeading`                           | `button[scEditorHeading]`                     | The block type: `level()` (`'p'`, `'h1'`…`'h6'`), `select(level)` — the trigger of your menu, with your labels.                                                           |
 | `ScEditorList`                              | `button[scEditorList]`                        | The list type: `type()` (`'bulletList'`, `'orderedList'`, `'taskList'`, or null; `data-state="on"` in one), `select(type)` — a menu trigger.                              |
+| `ScEditorTable`                             | `button[scEditorTable]`                       | Tables: `select(action)`, `can(action)`, `inTable()` (`data-state="on"` in one) — a menu trigger (see [Tables](#tables)).                                                 |
+| `ScEditorBubbleMenu`                        | `div[scEditorBubbleMenu]`                     | A floating toolbar by the selected text (see [Floating toolbar](#floating-toolbar)).                                                                                      |
 | `ScEditorLink`                              | `button[scEditorLink]`                        | Pressed inside a link; the trigger of your link popover, which calls the editor's `setLink(href)` / `unsetLink()`.                                                        |
 | `ScEditorHighlight`                         | `button[scEditorHighlight]`                   | Pressed inside a highlight; the trigger of your highlight popover.                                                                                                        |
 | `ScEditorHighlightColor`                    | `button[scEditorHighlightColor]`              | A swatch in that popover: `[scEditorHighlightColor]="color"` highlights in it, or removes it; pressed when it's the colour. Name it.                                      |
@@ -69,7 +71,7 @@ readonly postForm = form(signal({ body: '' }), (path) => {
 | `ScEditorView`                              | `[scEditorView]`                              | Displays the editor's HTML in its styles, without an editor (see [Displaying the document](#displaying-the-document)).                                                    |
 | `ScEditorSeparator`                         | `div[scEditorSeparator]`                      | Between toolbar groups.                                                                                                                                                   |
 | `ScEditorHeader`, `ScEditorFooter`          | `div[scEditorHeader]`, `div[scEditorFooter]`  | Above and below the document.                                                                                                                                             |
-| `ScEditorCount`, `…WordCount`, `…CharCount` | `div[scEditorCount]`, `span[…]`               | `wordCount()`, `charCount()` (`exportAs`) — write the text around them.                                                                                                   |
+| `ScEditorCount`, `…WordCount`, `…CharCount` | `div[scEditorCount]`, `span[…]`               | `wordCount()`, `charCount()`, `limit()`, `remaining()` (`exportAs`) — write the text around them. `data-limit-reached` at the limit.                                      |
 
 The buttons, `scEditor` + the command:
 
@@ -91,11 +93,12 @@ For the same reason the editor's group is `scEditorToolbarGroup`, not a toggle g
 ## `scEditor`
 
 - **Set by `[formField]`**: `value` (in its `format`), `disabled`, `readonly`, `invalid`, `touched`; `touch` fires when the document loses focus.
-- **Inputs**: `upload` — the image upload handler (none: no images); `imageTypes` — the image types it takes (PNG, JPEG, GIF, WebP).
-- **State**: `isActive(name, attributes?)` — a mark or node at the selection (`'bold'`, `'link'`, `'heading', { level: 2 }`…); `alignment()`, `heading()`, `list()`, `linkHref()`, `highlightColor()`; `editable()`.
+- **Inputs**: `format` (see [Formats](#formats)); `characterLimit` (see [Character limit](#character-limit)); `upload` — the image upload handler (none: no images); `imageTypes` — the image types it takes (PNG, JPEG, GIF, WebP).
+- **State**: `isActive(name, attributes?)` — a mark or node at the selection (`'bold'`, `'link'`, `'heading', { level: 2 }`…); `alignment()`, `heading()`, `list()`, `inTable()`, `linkHref()`, `highlightColor()`; `characters()`, `words()`; `editable()`.
 - **Commands**: `run((chain) => chain.toggleBold())` — any Tiptap command, on the focused document; `can((chain) => chain.undo())`; `toggleList(type)`.
 - **Links**: `setLink(href, text?)` — links the selection, or writes `text` (or the address) as a link where nothing is selected; `unsetLink()`. Addresses with unsafe protocols (`javascript:`…) aren't rendered as links.
 - **Search**: `searchOpen()`, `openSearch()`, `closeSearch()`, `toggleSearch()`; `search(term)`, `setReplaceTerm(term)`, `setSearchOption(option, on)`; `searchTerm()`, `replaceTerm()`, `caseSensitive()`, `wholeWord()`, `useRegex()`, `searchResults()` (how many), `searchIndex()` (the current one, from 0); `searchNext()`, `searchPrevious()`, `replace()`, `replaceAll()`.
+- **Tables**: `runTable(action)`, `canTable(action)`.
 - **Images**: `insertImages(files, position?)`, `uploads()` (`{ id, file, progress }`, progress from 0 to 1), `cancelUpload(id)`.
 - **Tiptap**: `editorInstance()` for anything else.
 
@@ -185,6 +188,55 @@ readonly upload: ScEditorUploadHandler = async (file, { onProgress, signal }) =>
 
 The button picks files; dropping or pasting images does the same. Each is inserted where it was picked or dropped once its upload resolves, with the file's name (less its extension) as its `alt`. A rejected upload is dropped — report your errors in the handler.
 
+## Tables
+
+```html
+<div scMenuProvider>
+  <button scMenuTrigger scEditorTable value="table" #table="scEditorTable">
+    <svg siTable2Icon></svg>
+    <span class="sr-only">Table</span>
+  </button>
+  <ng-template scMenuPortal>
+    <div scMenu (itemSelected)="table.select($event)">
+      <ng-template scMenuContent>
+        @for (action of actions; track action) {
+        <div scMenuItem [value]="action" [disabled]="!table.can(action)">{{ labels[action] }}</div>
+        }
+      </ng-template>
+    </div>
+  </ng-template>
+</div>
+```
+
+The actions (`ScEditorTableAction`): `insertTable` (3 × 3, with a header row), `addRowBefore`, `addRowAfter`, `deleteRow`, `addColumnBefore`, `addColumnAfter`, `deleteColumn`, `mergeCells`, `splitCell`, `toggleHeaderRow`, `toggleHeaderColumn`, `deleteTable`. `can(action)` says which apply where the selection is — outside a table, only `insertTable`. Tab and Shift+Tab move between cells (Tab in the last cell adds a row); dragging a column's border resizes it; dragging across cells selects them, to merge.
+
+## Floating toolbar
+
+```html
+<div scEditor …>
+  …
+  <div scEditorBubbleMenu aria-label="Selection">
+    <div scEditorToolbarGroup>
+      <button scEditorBold value="bold">…</button>
+      <button scEditorItalic value="italic">…</button>
+    </div>
+  </div>
+</div>
+```
+
+`scEditorBubbleMenu` shows by the selected text in an editable document, and hides when the selection is empty or focus leaves both — it stays while focus is in it. It is a toolbar like `scEditorToolbar` (one tab stop, arrow keys between its buttons, the same buttons in `scEditorToolbarGroup`s), styled as a popover, positioned above the selection and following it as the document scrolls. Put it anywhere inside `scEditor`.
+
+## Character limit
+
+```html
+<div scEditor [formField]="form.body" [characterLimit]="280">
+  …
+  <span scEditorCharCount #count="scEditorCharCount">{{ count.charCount() }} / {{ count.limit() }}</span>
+</div>
+```
+
+`characterLimit` counts the document's text, not its HTML, and holds it there: typing stops at the limit and a longer paste is cut to fit. `scEditorCharCount` gives `charCount()`, `limit()` and `remaining()`, and has `data-limit-reached` (styled destructive) at the limit. It isn't a Signal Forms validator: the value can't go over it, so there is nothing to report.
+
 ## Search and replace
 
 ```html
@@ -226,6 +278,7 @@ The matches are highlighted in the document; the current one is selected and scr
 | ---------------- | ---------------------------------------------------------------------------------- | ------ |
 | `html` (default) | HTML: `'<p>Hello <strong>world</strong></p>'`                                      | `''`   |
 | `json`           | Tiptap's JSON: `{ type: 'doc', content: [{ type: 'paragraph', … }] }`              | `null` |
+| `markdown`       | Markdown: `'Hello **world**\n\nBye'` (GitHub's: tables and task lists too)         | `''`   |
 | `text`           | Plain text, a line per paragraph: `'Hello world\nBye'` — the formatting isn't kept | `''`   |
 
 ```html
@@ -239,7 +292,8 @@ readonly noteForm = form(signal<{ body: ScEditorValue }>({ body: null }), (path)
 ```
 
 - **Empty is empty**: `''` or `null`, never `'<p></p>'` — so `required` works in every format.
-- **Any format comes in**: JSON is read as JSON; a string as plain text in the `text` format, HTML otherwise — so HTML you saved before loads into a `json` editor, which writes JSON from the next change.
+- **Any format comes in**: JSON is read as JSON; a string as Markdown or plain text in those formats, HTML otherwise — so HTML you saved before loads into a `json` editor, which writes JSON from the next change.
+- **Markdown keeps what Markdown can say**: what it has no syntax for — highlights, alignment, underline, superscript and subscript — is lost when written as Markdown.
 - **Switching `format`** rewrites the value in the new one.
 - **Why JSON**: it needs no HTML parsing on a server and keeps its shape as the editor's HTML output changes (the format the newer editors — Lexical, Plate, BlockNote — store). `ScEditorValue` is `string | JSONContent | null`.
 

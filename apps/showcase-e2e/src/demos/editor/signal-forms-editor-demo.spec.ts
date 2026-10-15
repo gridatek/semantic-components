@@ -50,4 +50,20 @@ test.describe('Signal Forms Editor Demo', () => {
     await expect(post).toHaveAttribute('contenteditable', 'true');
     await expect(bold).toBeEnabled();
   });
+
+  test('the text stops at the character limit', async ({ page }) => {
+    const post = page.getByRole('textbox', { name: 'Post' });
+    const count = page.getByText(/\d+ \/ 280/);
+    await expect(count).toHaveText('0 / 280');
+
+    await post.click();
+    await page.keyboard.type('x'.repeat(285));
+    await expect(count).toHaveText('280 / 280');
+    await expect(count).toHaveAttribute('data-limit-reached');
+    await expect(post).toHaveText('x'.repeat(280));
+
+    await page.keyboard.press('Backspace');
+    await expect(count).toHaveText('279 / 280');
+    await expect(count).not.toHaveAttribute('data-limit-reached');
+  });
 });
