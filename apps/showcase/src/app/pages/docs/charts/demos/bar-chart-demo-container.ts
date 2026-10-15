@@ -32,7 +32,12 @@ import {
   template: \`
     <div class="max-w-lg rounded-lg border p-6">
       <div scChartContainer>
-        <div scBarChart [data]="barData" [height]="250"></div>
+        <div
+          scBarChart
+          ariaLabel="Bar chart"
+          [data]="barData"
+          [height]="250"
+        ></div>
         <div scChartLegend [items]="barLegend"></div>
       </div>
     </div>

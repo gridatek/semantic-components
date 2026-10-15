@@ -51,7 +51,8 @@ import {
         ></button>
       </div>
       <div
-        scCodeEditorContent ariaLabel="Code editor"
+        scCodeEditorContent
+        ariaLabel="Code editor"
         [(value)]="javascriptCode"
         language="javascript"
         filename="example.js"

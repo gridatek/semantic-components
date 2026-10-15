@@ -51,7 +51,8 @@ import {
         ></button>
       </div>
       <div
-        scCodeEditorContent ariaLabel="Code editor"
+        scCodeEditorContent
+        ariaLabel="Code editor"
         [(value)]="longLineCode"
         language="markdown"
         filename="README.md"

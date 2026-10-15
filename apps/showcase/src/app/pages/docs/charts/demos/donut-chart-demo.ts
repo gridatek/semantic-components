@@ -14,6 +14,7 @@ import {
       <div scChartContainer>
         <div
           scDonutChart
+          ariaLabel="Donut chart"
           [data]="pieData"
           [size]="280"
           [innerRadius]="70"

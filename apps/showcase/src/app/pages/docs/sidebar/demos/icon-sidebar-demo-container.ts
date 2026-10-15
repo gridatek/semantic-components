@@ -109,7 +109,7 @@ import {
             </div>
           </div>
         </div>
-        <button scSidebarRail aria-label="Toggle sidebar"></button>
+        <button scSidebarRail aria-label="Toggle Sidebar"></button>
       </div>
 
       <main scSidebarInset aria-label="Icon example content">

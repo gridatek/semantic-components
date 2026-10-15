@@ -6,7 +6,7 @@ SVG-based chart components for data visualization.
 
 ```html
 <div scChartContainer>
-  <div scBarChart [data]="data" [height]="300"></div>
+  <div scBarChart ariaLabel="Bar chart" [data]="data" [height]="300"></div>
   <div scChartLegend [items]="legend"></div>
 </div>
 ```
@@ -145,7 +145,7 @@ interface ScChartConfig {
 
 ```html
 <div scChartContainer>
-  <div scBarChart [data]="salesData" [height]="250"></div>
+  <div scBarChart ariaLabel="Bar chart" [data]="salesData" [height]="250"></div>
 </div>
 ```
 
@@ -161,7 +161,7 @@ salesData = [
 
 ```html
 <div scChartContainer>
-  <div scLineChart [data]="data" [height]="250"></div>
+  <div scLineChart ariaLabel="Line chart" [data]="data" [height]="250"></div>
 </div>
 ```
 
@@ -169,7 +169,7 @@ salesData = [
 
 ```html
 <div scChartContainer>
-  <div scLineChart [data]="data" [height]="250" [showArea]="true"></div>
+  <div scLineChart ariaLabel="Line chart" [data]="data" [height]="250" [showArea]="true"></div>
 </div>
 ```
 
@@ -177,7 +177,7 @@ salesData = [
 
 ```html
 <div scChartContainer>
-  <div scPieChart [data]="data" [size]="280"></div>
+  <div scPieChart ariaLabel="Pie chart" [data]="data" [size]="280"></div>
   <div scChartLegend [items]="legend"></div>
 </div>
 ```
@@ -186,7 +186,7 @@ salesData = [
 
 ```html
 <div scChartContainer>
-  <div scDonutChart [data]="data" [size]="280" [innerRadius]="70"></div>
+  <div scDonutChart ariaLabel="Donut chart" [data]="data" [size]="280" [innerRadius]="70"></div>
 </div>
 ```
 

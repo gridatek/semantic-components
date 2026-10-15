@@ -27,7 +27,8 @@ import { ScCodeEditor, ScCodeEditorContent } from '@semantic-components/code';
   template: \`
     <div scCodeEditor>
       <div
-        scCodeEditorContent ariaLabel="Code editor"
+        scCodeEditorContent
+        ariaLabel="Code editor"
         [(value)]="minimalCode"
         language="javascript"
         class="max-h-[150px]"

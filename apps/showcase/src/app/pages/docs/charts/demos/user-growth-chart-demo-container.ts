@@ -33,6 +33,7 @@ import {
       <div scChartContainer>
         <div
           scLineChart
+          ariaLabel="Line chart"
           [data]="growthData"
           [height]="300"
           [showArea]="true"

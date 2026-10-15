@@ -11,7 +11,12 @@ import {
   template: `
     <div class="max-w-lg rounded-lg border p-6">
       <div scChartContainer>
-        <div scLineChart [data]="lineData" [height]="250"></div>
+        <div
+          scLineChart
+          ariaLabel="Line chart"
+          [data]="lineData"
+          [height]="250"
+        ></div>
       </div>
     </div>
   `,
