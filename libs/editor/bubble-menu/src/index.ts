@@ -1,1 +1,1 @@
-export * from './editor-bubble-menu';
+export * from './components';

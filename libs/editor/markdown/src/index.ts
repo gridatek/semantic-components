@@ -1,1 +1,1 @@
-export * from './with-markdown';
+export * from './components';
