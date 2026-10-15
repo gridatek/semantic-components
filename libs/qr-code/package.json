@@ -13,9 +13,9 @@
     "directory": "libs/qr-code"
   },
   "peerDependencies": {
-    "@angular/core": ">=21.1.0",
+    "@angular/core": ">=22.2.3",
     "@semantic-components/ui": "0.81.0",
-    "uqr": ">=0.1.2"
+    "uqr": ">=0.1.3"
   },
   "sideEffects": false
 }

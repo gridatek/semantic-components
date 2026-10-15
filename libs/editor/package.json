@@ -13,8 +13,8 @@
     "directory": "libs/editor"
   },
   "peerDependencies": {
-    "@angular/core": ">=21.1.0",
-    "@angular/aria": ">=21.2.2",
+    "@angular/core": ">=22.2.3",
+    "@angular/aria": ">=22.2.3",
     "@semantic-components/ui": "0.81.0",
     "@tiptap/core": ">=3.32.0",
     "@tiptap/extension-file-handler": ">=3.32.0",

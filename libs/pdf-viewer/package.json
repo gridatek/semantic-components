@@ -13,10 +13,10 @@
     "directory": "libs/pdf-viewer"
   },
   "peerDependencies": {
-    "@angular/common": ">=21.1.0",
-    "@angular/core": ">=21.1.0",
+    "@angular/common": ">=22.2.3",
+    "@angular/core": ">=22.2.3",
     "@semantic-components/ui": "0.81.0",
-    "pdfjs-dist": ">=6.0.0 <7.0.0"
+    "pdfjs-dist": ">=6.4.299"
   },
   "sideEffects": false
 }

@@ -13,7 +13,7 @@
     "directory": "libs/carousel"
   },
   "peerDependencies": {
-    "@angular/core": ">=21.1.0",
+    "@angular/core": ">=22.2.3",
     "@semantic-components/ui": "0.81.0",
     "embla-carousel": ">=8.6.0"
   },

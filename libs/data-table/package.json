@@ -13,7 +13,7 @@
     "directory": "libs/data-table"
   },
   "peerDependencies": {
-    "@angular/core": ">=21.1.0",
+    "@angular/core": ">=22.2.3",
     "@semantic-components/ui": "0.81.0"
   },
   "sideEffects": false

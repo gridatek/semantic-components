@@ -13,10 +13,10 @@
     "directory": "libs/charts"
   },
   "peerDependencies": {
-    "@angular/core": ">=21.1.0",
+    "@angular/core": ">=22.2.3",
     "@semantic-components/ui": "0.81.0",
-    "d3-scale": ">=4.0.0",
-    "d3-shape": ">=3.0.0"
+    "d3-scale": ">=4.0.2",
+    "d3-shape": ">=3.2.0"
   },
   "sideEffects": false
 }
