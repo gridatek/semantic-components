@@ -7,7 +7,7 @@ import { ReadonlyEditorDemo } from './readonly-editor-demo';
   imports: [DemoContainer, ReadonlyEditorDemo],
   template: `
     <app-demo-container
-      title="Readonly Mode"
+      title="An article to read"
       [code]="code"
       demoUrl="/demos/editor/readonly-editor-demo"
     >

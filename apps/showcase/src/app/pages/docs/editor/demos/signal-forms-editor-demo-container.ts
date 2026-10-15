@@ -7,7 +7,7 @@ import { SignalFormsEditorDemo } from './signal-forms-editor-demo';
   imports: [DemoContainer, SignalFormsEditorDemo],
   template: `
     <app-demo-container
-      title="Signal Forms"
+      title="A post with validation"
       demoUrl="/demos/editor/signal-forms-editor-demo"
       [code]="code"
     >

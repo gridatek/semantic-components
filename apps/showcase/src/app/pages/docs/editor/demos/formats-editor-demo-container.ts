@@ -7,7 +7,7 @@ import { FormatsEditorDemo } from './formats-editor-demo';
   imports: [DemoContainer, FormatsEditorDemo],
   template: `
     <app-demo-container
-      title="Formats"
+      title="A note in three formats"
       demoUrl="/demos/editor/formats-editor-demo"
       [code]="code"
     >

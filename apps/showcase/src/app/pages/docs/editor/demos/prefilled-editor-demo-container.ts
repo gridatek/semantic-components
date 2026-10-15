@@ -7,7 +7,7 @@ import { PrefilledEditorDemo } from './prefilled-editor-demo';
   imports: [DemoContainer, PrefilledEditorDemo],
   template: `
     <app-demo-container
-      title="With Initial Content"
+      title="An article to continue"
       [code]="code"
       demoUrl="/demos/editor/prefilled-editor-demo"
     >

@@ -7,7 +7,7 @@ import { FullFeaturedEditorDemo } from './full-featured-editor-demo';
   imports: [DemoContainer, FullFeaturedEditorDemo],
   template: `
     <app-demo-container
-      title="Full Featured Editor"
+      title="An article, with every tool"
       [code]="code"
       demoUrl="/demos/editor/full-featured-editor-demo"
     >

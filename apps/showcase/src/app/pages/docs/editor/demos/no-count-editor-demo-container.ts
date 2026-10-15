@@ -7,7 +7,7 @@ import { NoCountEditorDemo } from './no-count-editor-demo';
   imports: [DemoContainer, NoCountEditorDemo],
   template: `
     <app-demo-container
-      title="Without Word Count"
+      title="Notes without counts"
       [code]="code"
       demoUrl="/demos/editor/no-count-editor-demo"
     >

@@ -7,7 +7,7 @@ import { ViewEditorDemo } from './view-editor-demo';
   imports: [DemoContainer, ViewEditorDemo],
   template: `
     <app-demo-container
-      title="Displaying the Document"
+      title="Release notes, side by side"
       demoUrl="/demos/editor/view-editor-demo"
       [code]="code"
     >
