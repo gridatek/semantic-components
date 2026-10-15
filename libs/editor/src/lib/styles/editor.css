@@ -129,7 +129,11 @@
   @apply list-[square];
 }
 
-/* Task lists: the checkbox is hidden; the span after it is drawn as `scCheckbox` */
+/*
+ * Task lists: the box is drawn on the label, as `scCheckbox` (in the editor
+ * the span is the checkbox's hidden name; in `scEditorView` it is empty).
+ * The checkbox covers the box, invisible, to take the clicks.
+ */
 [data-slot='editor-document'] ul[data-type='taskList'] {
   @apply ml-0 list-none;
 }
@@ -151,19 +155,16 @@
 }
 
 [data-slot='editor-document'] ul[data-type='taskList'] li label {
-  @apply relative mt-1.5 flex shrink-0;
+  @apply relative mt-1.5 flex size-4 shrink-0;
 }
 
-[data-slot='editor-document'] ul[data-type='taskList'] li label input {
-  @apply absolute size-0 opacity-0;
+[data-slot='editor-document'] ul[data-type='taskList'] li label::before {
+  @apply border-input dark:bg-input/30 absolute inset-0 rounded-sm border transition-colors;
+  content: '';
 }
 
-[data-slot='editor-document'] ul[data-type='taskList'] li label span {
-  @apply border-input dark:bg-input/30 relative inline-flex size-4 shrink-0 cursor-pointer items-center justify-center rounded-sm border transition-colors;
-}
-
-[data-slot='editor-document'] ul[data-type='taskList'] li label span::before {
-  @apply bg-primary-foreground absolute inset-0 m-auto size-3.5 opacity-0;
+[data-slot='editor-document'] ul[data-type='taskList'] li label::after {
+  @apply bg-primary-foreground pointer-events-none absolute inset-0 m-auto size-3.5 opacity-0;
   content: '';
   mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E")
     center / contain no-repeat;
@@ -172,37 +173,30 @@
 [data-slot='editor-document']
   ul[data-type='taskList']
   li
-  label
-  input:checked
-  + span {
+  label:has(input:checked)::before {
   @apply border-primary bg-primary;
 }
 
 [data-slot='editor-document']
   ul[data-type='taskList']
   li
-  label
-  input:checked
-  + span::before {
+  label:has(input:checked)::after {
   @apply opacity-100;
 }
 
 [data-slot='editor-document']
   ul[data-type='taskList']
   li
-  label
-  input:focus-visible
-  + span {
+  label:has(input:focus-visible)::before {
   @apply border-ring ring-ring/50 ring-3;
 }
 
-[data-slot='editor-document']
-  ul[data-type='taskList']
-  li
-  label
-  input:disabled
-  + span {
-  @apply cursor-default;
+[data-slot='editor-document'] ul[data-type='taskList'] li label input {
+  @apply absolute inset-0 z-10 m-0 size-full cursor-pointer opacity-0 disabled:cursor-default;
+}
+
+[data-slot='editor-document'] ul[data-type='taskList'] li label > span:empty {
+  @apply hidden;
 }
 
 /* Inline code */
