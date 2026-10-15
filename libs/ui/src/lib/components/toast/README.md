@@ -87,7 +87,7 @@ providers: [
       duration: 5000, // ms, when show() gives no duration; 0 keeps them
       visibleToasts: 3, // how many show, stacked
       maxToasts: 5, // how many are kept; the oldest goes past it
-      expand: false, // always spread out, not stacked
+      layout: 'stacked', // or 'list': always spread out
       hotkey: ['altKey', 'KeyT'], // moves focus to the toasts (none by default)
     },
   }),
@@ -175,7 +175,7 @@ An update replaces the fields it gives and keeps the others; the timer starts ag
 
 ## The stack
 
-Toasts at one position stack, the newest in front and up to `visibleToasts` showing. Hovering or focusing them spreads them out (with `expand`, they always are), and pauses their timers — new ones there wait too — until the pointer and focus leave.
+Toasts at one position stack, the newest in front and up to `visibleToasts` showing. Hovering or focusing them spreads them out (with `layout: 'list'`, they always are), and pauses their timers — new ones there wait too — until the pointer and focus leave.
 
 ## Positions
 

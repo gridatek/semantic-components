@@ -53,6 +53,9 @@ export interface ScToastPromiseConfig<T> {
     | ((error: unknown) => Omit<ScToastConfig, 'variant'>);
 }
 
+/** How a position's toasts are laid out. */
+export type ScToasterLayout = 'stacked' | 'list';
+
 /** The toaster's settings, in `provideScConfig({ toaster })`. */
 export interface ScToasterConfig {
   /** Where toasts show when `show` gives no `position`. Default `bottom-end`. */
@@ -63,8 +66,11 @@ export interface ScToasterConfig {
   visibleToasts?: number;
   /** How many are kept; the oldest goes past it. Default 5. */
   maxToasts?: number;
-  /** Always spread out, not stacked. Default false. */
-  expand?: boolean;
+  /**
+   * `stacked`: the newest in front, the others behind it, spread out while
+   * hovered or focused. `list`: always spread out. Default `stacked`.
+   */
+  layout?: ScToasterLayout;
   /**
    * The keys that move focus to the toasts: `KeyboardEvent` codes and
    * modifiers, e.g. `['altKey', 'KeyT']`. Write them in your template's

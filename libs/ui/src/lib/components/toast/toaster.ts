@@ -30,7 +30,7 @@ export class ScToaster {
     duration: 5000,
     visibleToasts: 3,
     maxToasts: 5,
-    expand: false,
+    layout: 'stacked',
     hotkey: [],
     ...inject(SC_CONFIG).toaster,
   };

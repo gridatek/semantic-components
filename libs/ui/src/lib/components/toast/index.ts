@@ -14,4 +14,5 @@ export type {
   ScToastPromiseConfig,
   ScToastVariant,
   ScToasterConfig,
+  ScToasterLayout,
 } from './toast.types';

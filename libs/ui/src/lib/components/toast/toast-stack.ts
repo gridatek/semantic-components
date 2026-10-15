@@ -148,7 +148,8 @@ export class ScToastStack {
     const held = this.toaster.ɵheld();
     return POSITION_ORDER.map((position) => {
       const column = toasts.filter((toast) => toast.position === position);
-      const expanded = this.toaster.ɵconfig.expand || held.has(position);
+      const expanded =
+        this.toaster.ɵconfig.layout === 'list' || held.has(position);
       return {
         position,
         toasts: column,
@@ -258,7 +259,9 @@ export class ScToastStack {
     const layout: ScToastLayout = {
       index: lasting(place, 0),
       expanded: computed(
-        () => this.toaster.ɵconfig.expand || this.toaster.ɵheld().has(position),
+        () =>
+          this.toaster.ɵconfig.layout === 'list' ||
+          this.toaster.ɵheld().has(position),
       ),
       visible: this.toaster.ɵconfig.visibleToasts,
       offset: lasting(() => {
