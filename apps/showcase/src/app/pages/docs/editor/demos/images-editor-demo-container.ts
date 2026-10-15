@@ -116,7 +116,7 @@ import {
                 <div
                   scProgress
                   [value]="upload.progress * 100"
-                  [attr.aria-label]="'Uploading ' + upload.file.name"
+                  [aria-label]="'Uploading ' + upload.file.name"
                   class="w-32"
                 ></div>
                 <button

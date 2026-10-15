@@ -91,6 +91,8 @@ test.describe('Keyboard shortcuts (Full Featured Editor Demo)', () => {
     await page.keyboard.press('Backspace');
     await page.getByRole('button', { name: 'Table', exact: true }).click();
     await page.getByRole('menuitem', { name: 'Insert table' }).click();
+    // The menu closes first: the document has focus a moment later.
+    await expect(article(page)).toBeFocused();
     await page.keyboard.type('A');
     await page.keyboard.press('Tab');
     await page.keyboard.type('B');

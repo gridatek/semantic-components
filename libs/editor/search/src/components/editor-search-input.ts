@@ -26,6 +26,7 @@ import { editorSearch } from './editor-search-state';
     '[attr.aria-invalid]': '(search.term() && !search.count()) || null',
     '(input)': 'onInput($event)',
     '(keydown.enter)': 'onEnter($event)',
+    '(keydown.shift.enter)': 'onEnter($event)',
   },
 })
 export class ScEditorSearchInput {
