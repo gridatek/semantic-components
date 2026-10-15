@@ -426,6 +426,86 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
       </section>
 
       <section class="space-y-4">
+        <h2 scHeading appToc>API</h2>
+        <p class="text-muted-foreground">
+          Every part takes
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>, and
+          the buttons take
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">disabled</code>.
+          What a part holds is read through its
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">exportAs</code>,
+          which is its selector&apos;s name (<code
+            class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >#link="scEditorLink"</code
+          >).
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >[formField]</code
+          >
+          sets the editor&apos;s value,
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">disabled</code>,
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">readonly</code>,
+          errors and touched state.
+        </p>
+        @for (group of api; track group.entry) {
+          <div class="space-y-2">
+            <p class="text-sm font-medium">
+              <code class="bg-muted rounded px-1.5 py-0.5 text-sm">{{
+                group.entry
+              }}</code>
+            </p>
+            <div
+              scTableContainer
+              tabindex="0"
+              role="region"
+              [attr.aria-label]="group.entry"
+            >
+              <table scTable>
+                <thead scTableHeader>
+                  <tr scTableRow>
+                    <th scTableHeaderCell class="w-1/4">Name</th>
+                    <th scTableHeaderCell class="w-1/4">Inputs</th>
+                    <th scTableHeaderCell class="w-1/4">Read</th>
+                    <th scTableHeaderCell class="w-1/4">Do</th>
+                  </tr>
+                </thead>
+                <tbody scTableBody>
+                  @for (item of group.items; track item.name) {
+                    <tr scTableRow>
+                      <td scTableCell class="align-top">
+                        <div class="flex flex-wrap gap-1">
+                          @for (name of item.name.split(' '); track name) {
+                            <code
+                              class="bg-muted rounded px-1.5 py-0.5 text-sm"
+                              >{{ name }}</code
+                            >
+                          }
+                        </div>
+                      </td>
+                      @for (
+                        cell of [item.inputs, item.read, item.do];
+                        track $index
+                      ) {
+                        <td scTableCell class="align-top">
+                          <div class="flex flex-col items-start gap-1">
+                            @for (entry of cell; track entry) {
+                              <code
+                                class="bg-muted rounded px-1.5 py-0.5 text-sm whitespace-normal"
+                                >{{ entry }}</code
+                              >
+                            }
+                          </div>
+                        </td>
+                      }
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          </div>
+        }
+      </section>
+
+      <section class="space-y-4">
         <h2 scHeading appToc>Loading</h2>
         <p class="text-muted-foreground">
           The features are loaded with the editor, not on their own: a
@@ -536,6 +616,260 @@ import {
 export class NoteEditor {
   readonly noteForm = form(signal({ body: '' }));
 }`;
+
+  /** The parts and functions of each entry point. */
+  readonly api: {
+    entry: string;
+    items: { name: string; inputs: string[]; read: string[]; do: string[] }[];
+  }[] = [
+    {
+      entry: '@semantic-components/editor',
+      items: [
+        {
+          name: '[scEditor]',
+          inputs: [
+            "format: 'html' | 'json' | 'markdown' | 'text'",
+            'characterLimit: number | null',
+          ],
+          read: [
+            'editable()',
+            'isActive(name, attributes?)',
+            'can(command)',
+            'editorInstance()',
+            'contentVersion()',
+          ],
+          do: ['run(command)'],
+        },
+        {
+          name: 'div[scEditorContent]',
+          inputs: ['ariaLabel', 'placeholder', "layout: 'default' | 'page'"],
+          read: [],
+          do: [],
+        },
+        {
+          name: '[scEditorView]',
+          inputs: [
+            '[scEditorView]: the document',
+            'format',
+            "layout: 'default' | 'page'",
+          ],
+          read: [],
+          do: [],
+        },
+        {
+          name: 'div[scEditorToolbar]',
+          inputs: ['orientation', 'wrap', 'disabled'],
+          read: [],
+          do: [],
+        },
+        {
+          name: 'button[scEditorHeading]',
+          inputs: [],
+          read: ["level(): 'p' | 'h1' … 'h6'"],
+          do: ['select(level)'],
+        },
+        {
+          name: 'button[scEditorList]',
+          inputs: [],
+          read: ["type(): 'bulletList' | 'orderedList' | 'taskList' | null"],
+          do: ['select(type)'],
+        },
+        {
+          name: 'button[scEditorLink]',
+          inputs: [],
+          read: ['href()'],
+          do: ['set(href, text?)', 'remove()'],
+        },
+        {
+          name: 'span[scEditorWordCount]',
+          inputs: [],
+          read: ['wordCount()'],
+          do: [],
+        },
+        {
+          name: 'span[scEditorCharCount]',
+          inputs: [],
+          read: ['charCount()', 'limit()', 'remaining()', 'limitReached()'],
+          do: [],
+        },
+        {
+          name: 'scEditorBold scEditorItalic scEditorUnderline scEditorStrikethrough scEditorCode scEditorBulletList scEditorOrderedList scEditorTaskList scEditorBlockquote scEditorCodeBlock scEditorHorizontalRule scEditorClearFormatting scEditorUndo scEditorRedo',
+          inputs: ['disabled'],
+          read: [],
+          do: [],
+        },
+        {
+          name: 'scEditorToolbarGroup scEditorSeparator scEditorHeader scEditorFooter scEditorCount',
+          inputs: [],
+          read: [],
+          do: [],
+        },
+        {
+          name: 'provideEditor(...features)',
+          inputs: [],
+          read: [],
+          do: ['The features of the editors and displays below'],
+        },
+        {
+          name: 'withExtensions(...extensions)',
+          inputs: [],
+          read: [],
+          do: ['Your own Tiptap extensions, as a feature'],
+        },
+        {
+          name: 'editorContentExtensions(features?)',
+          inputs: [],
+          read: [],
+          do: ['The document’s extensions, for generateHTML / generateJSON'],
+        },
+      ],
+    },
+    {
+      entry: '@semantic-components/editor/tables',
+      items: [
+        {
+          name: 'button[scEditorTable]',
+          inputs: [],
+          read: ['inTable()', 'can(action)'],
+          do: ['select(action)'],
+        },
+        { name: 'withTables()', inputs: [], read: [], do: ['Tables'] },
+      ],
+    },
+    {
+      entry: '@semantic-components/editor/images',
+      items: [
+        {
+          name: '[scEditor][upload]',
+          inputs: ['upload: ScEditorUploadHandler', 'imageTypes: string[]'],
+          read: ['uploads(): { id, file, progress }[]'],
+          do: ['insert(files, position?)', 'cancel(id)'],
+        },
+        {
+          name: 'button[scEditorImage]',
+          inputs: ['disabled'],
+          read: [],
+          do: [],
+        },
+        {
+          name: 'withImages()',
+          inputs: [],
+          read: [],
+          do: ['Images, and dropping or pasting them'],
+        },
+      ],
+    },
+    {
+      entry: '@semantic-components/editor/search',
+      items: [
+        {
+          name: 'button[scEditorSearch]',
+          inputs: ['disabled'],
+          read: ['open()'],
+          do: [],
+        },
+        {
+          name: '[scEditorSearchResults]',
+          inputs: [],
+          read: [
+            'count()',
+            'index(): number | null',
+            "state(): 'idle' | 'found' | 'none'",
+          ],
+          do: [],
+        },
+        {
+          name: 'button[scEditorSearchOption]',
+          inputs: [
+            "[scEditorSearchOption]: 'caseSensitive' | 'wholeWord' | 'useRegex'",
+          ],
+          read: [],
+          do: [],
+        },
+        {
+          name: 'scEditorSearchBar scEditorSearchInput scEditorSearchPrevious scEditorSearchNext scEditorReplaceInput scEditorReplace scEditorReplaceAll scEditorSearchClose',
+          inputs: [],
+          read: [],
+          do: [],
+        },
+        {
+          name: 'withSearch()',
+          inputs: [],
+          read: [],
+          do: ['Search and replace, Ctrl / ⌘ + F'],
+        },
+      ],
+    },
+    {
+      entry: '@semantic-components/editor/highlight',
+      items: [
+        {
+          name: 'button[scEditorHighlightColor]',
+          inputs: ['[scEditorHighlightColor]: a CSS colour'],
+          read: [],
+          do: [],
+        },
+        {
+          name: 'scEditorHighlight scEditorRemoveHighlight',
+          inputs: ['disabled'],
+          read: [],
+          do: [],
+        },
+        { name: 'withHighlight()', inputs: [], read: [], do: ['Highlights'] },
+      ],
+    },
+    {
+      entry: '@semantic-components/editor/scripts',
+      items: [
+        {
+          name: 'scEditorSuperscript scEditorSubscript',
+          inputs: ['disabled'],
+          read: [],
+          do: [],
+        },
+        {
+          name: 'withScripts()',
+          inputs: [],
+          read: [],
+          do: ['Superscript and subscript'],
+        },
+      ],
+    },
+    {
+      entry: '@semantic-components/editor/align',
+      items: [
+        {
+          name: 'scEditorAlignLeft scEditorAlignCenter scEditorAlignRight scEditorAlignJustify',
+          inputs: ['disabled'],
+          read: [],
+          do: [],
+        },
+        { name: 'withAlign()', inputs: [], read: [], do: ['Alignment'] },
+      ],
+    },
+    {
+      entry: '@semantic-components/editor/markdown',
+      items: [
+        {
+          name: 'withMarkdown()',
+          inputs: [],
+          read: [],
+          do: ['format="markdown"'],
+        },
+      ],
+    },
+    {
+      entry: '@semantic-components/editor/bubble-menu',
+      items: [
+        {
+          name: 'div[scEditorBubbleMenu]',
+          inputs: ['orientation', 'wrap'],
+          read: [],
+          do: [],
+        },
+      ],
+    },
+  ];
 
   readonly shortcuts = [
     { keys: 'Ctrl / ⌘ + B', does: 'Bold', needs: '' },
