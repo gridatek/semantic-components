@@ -17,6 +17,7 @@ import {
   ScNavigationMenuList,
   ScNavigationMenuPortal,
   ScNavigationMenuTrigger,
+  ScNavigationMenuTriggerIcon,
   ScThemeModeToggle,
   cn,
 } from '@semantic-components/ui';
@@ -32,6 +33,7 @@ import {
   ScNavbarProvider,
 } from '@semantic-components/ui-lab';
 import {
+  SiChevronDownIcon,
   SiGithubIcon,
   SiMenuIcon,
   SiMoonIcon,
@@ -76,6 +78,8 @@ import { Logo } from '../logo/logo';
     SiMenuIcon,
     SiXIcon,
     Logo,
+    SiChevronDownIcon,
+    ScNavigationMenuTriggerIcon,
   ],
   template: `
     <div scNavbarProvider>
@@ -91,7 +95,10 @@ import { Logo } from '../logo/logo';
           <nav scNavigationMenu aria-label="Desktop" class="hidden md:flex">
             <ul scNavigationMenuList>
               <li scNavigationMenuItem>
-                <button scNavigationMenuTrigger>Components</button>
+                <button scNavigationMenuTrigger>
+                  Components
+                  <svg siChevronDownIcon scNavigationMenuTriggerIcon></svg>
+                </button>
                 <ng-template scNavigationMenuPortal>
                   <div scNavigationMenuContent>
                     <ul

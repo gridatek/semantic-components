@@ -54,7 +54,7 @@ import {
   ],
   template: `
     <div scSidebarProvider [storageKey]="null">
-      <div scSidebar closeLabel="Close" aria-label="Acme navigation">
+      <div scSidebar aria-label="Acme navigation">
         <div scSidebarHeader>
           <ul scSidebarMenu>
             <li scSidebarMenuItem>

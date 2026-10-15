@@ -66,7 +66,6 @@ import {
     <div scSidebarProvider [storageKey]="null">
       <div
         scSidebar
-        closeLabel="Close"
         variant="inset"
         collapsible="icon"
         aria-label="Workspace navigation"

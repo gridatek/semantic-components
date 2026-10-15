@@ -8,8 +8,12 @@ import {
   ScNavigationMenuList,
   ScNavigationMenuPortal,
   ScNavigationMenuTrigger,
+  ScNavigationMenuTriggerIcon,
 } from '@semantic-components/ui';
-import { SiSparklesIcon } from '@semantic-icons/lucide-icons';
+import {
+  SiChevronDownIcon,
+  SiSparklesIcon,
+} from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-navigation-menu-demo',
@@ -23,13 +27,18 @@ import { SiSparklesIcon } from '@semantic-icons/lucide-icons';
     ScNavigationMenuPortal,
     ScNavigationMenuTrigger,
     SiSparklesIcon,
+    SiChevronDownIcon,
+    ScNavigationMenuTriggerIcon,
   ],
   template: `
     <nav scNavigationMenu>
       <ul scNavigationMenuList>
         <!-- Getting Started -->
         <li scNavigationMenuItem>
-          <button scNavigationMenuTrigger>Getting Started</button>
+          <button scNavigationMenuTrigger>
+            Getting Started
+            <svg siChevronDownIcon scNavigationMenuTriggerIcon></svg>
+          </button>
           <ng-template scNavigationMenuPortal>
             <div scNavigationMenuContent>
               <ul
@@ -93,7 +102,10 @@ import { SiSparklesIcon } from '@semantic-icons/lucide-icons';
 
         <!-- Components -->
         <li scNavigationMenuItem>
-          <button scNavigationMenuTrigger>Components</button>
+          <button scNavigationMenuTrigger>
+            Components
+            <svg siChevronDownIcon scNavigationMenuTriggerIcon></svg>
+          </button>
           <ng-template scNavigationMenuPortal>
             <div scNavigationMenuContent>
               <ul scNavigationMenuGrid>

@@ -103,13 +103,7 @@ import {
   ],
   template: `
     <div scSidebarProvider class="min-h-svh">
-      <div
-        scSidebar
-        closeLabel="Close"
-        side="left"
-        variant="sidebar"
-        collapsible="icon"
-      >
+      <div scSidebar side="left" variant="sidebar" collapsible="icon">
         <div scSidebarHeader>
           <ul scSidebarMenu>
             <li scSidebarMenuItem>

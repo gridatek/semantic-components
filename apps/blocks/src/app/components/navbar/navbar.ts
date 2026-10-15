@@ -9,6 +9,7 @@ import {
   ScNavigationMenuList,
   ScNavigationMenuPortal,
   ScNavigationMenuTrigger,
+  ScNavigationMenuTriggerIcon,
   cn,
 } from '@semantic-components/ui';
 import {
@@ -23,6 +24,7 @@ import {
   ScNavbarProvider,
 } from '@semantic-components/ui-lab';
 import {
+  SiChevronDownIcon,
   SiMenuIcon,
   SiMountainIcon,
   SiXIcon,
@@ -53,6 +55,8 @@ import {
     SiMenuIcon,
     SiXIcon,
     SiMountainIcon,
+    SiChevronDownIcon,
+    ScNavigationMenuTriggerIcon,
   ],
   template: `
     <div scNavbarProvider>
@@ -66,7 +70,10 @@ import {
           <nav scNavigationMenu class="hidden md:flex">
             <ul scNavigationMenuList>
               <li scNavigationMenuItem>
-                <button scNavigationMenuTrigger>Pages</button>
+                <button scNavigationMenuTrigger>
+                  Pages
+                  <svg siChevronDownIcon scNavigationMenuTriggerIcon></svg>
+                </button>
                 <ng-template scNavigationMenuPortal>
                   <div scNavigationMenuContent>
                     <ul

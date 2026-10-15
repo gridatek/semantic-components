@@ -8,6 +8,7 @@ import {
   ScAccordionPanel,
   ScAccordionTrigger,
 } from '@semantic-components/ui';
+import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-multiple-accordion-demo',
@@ -19,6 +20,7 @@ import {
     ScAccordionPanel,
     ScAccordionContent,
     ScAccordionBody,
+    SiChevronDownIcon,
   ],
   host: { class: 'flex w-full justify-center' },
   template: `
@@ -27,6 +29,7 @@ import {
         <div scAccordionHeader>
           <button scAccordionTrigger [panel]="itemA.panel" [expanded]="true">
             Can I open multiple items?
+            <svg siChevronDownIcon></svg>
           </button>
         </div>
         <div scAccordionPanel #itemA="scAccordionPanel">
@@ -42,6 +45,7 @@ import {
         <div scAccordionHeader>
           <button scAccordionTrigger [panel]="itemB.panel" [expanded]="true">
             How does it work?
+            <svg siChevronDownIcon></svg>
           </button>
         </div>
         <div scAccordionPanel #itemB="scAccordionPanel">
@@ -57,6 +61,7 @@ import {
         <div scAccordionHeader>
           <button scAccordionTrigger [panel]="itemC.panel">
             What about accessibility?
+            <svg siChevronDownIcon></svg>
           </button>
         </div>
         <div scAccordionPanel #itemC="scAccordionPanel">

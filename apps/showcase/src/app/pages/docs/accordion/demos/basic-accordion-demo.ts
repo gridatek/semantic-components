@@ -8,6 +8,7 @@ import {
   ScAccordionPanel,
   ScAccordionTrigger,
 } from '@semantic-components/ui';
+import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-basic-accordion-demo',
@@ -19,6 +20,7 @@ import {
     ScAccordionPanel,
     ScAccordionContent,
     ScAccordionBody,
+    SiChevronDownIcon,
   ],
   host: { class: 'flex w-full justify-center' },
   template: `
@@ -27,6 +29,7 @@ import {
         <div scAccordionHeader>
           <button scAccordionTrigger [panel]="shipping.panel" [expanded]="true">
             What are your shipping options?
+            <svg siChevronDownIcon></svg>
           </button>
         </div>
         <div scAccordionPanel #shipping="scAccordionPanel">
@@ -42,6 +45,7 @@ import {
         <div scAccordionHeader>
           <button scAccordionTrigger [panel]="returns.panel">
             What is your return policy?
+            <svg siChevronDownIcon></svg>
           </button>
         </div>
         <div scAccordionPanel #returns="scAccordionPanel">
@@ -57,6 +61,7 @@ import {
         <div scAccordionHeader>
           <button scAccordionTrigger [panel]="support.panel">
             How can I contact customer support?
+            <svg siChevronDownIcon></svg>
           </button>
         </div>
         <div scAccordionPanel #support="scAccordionPanel">

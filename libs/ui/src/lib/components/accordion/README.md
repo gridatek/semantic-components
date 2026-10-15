@@ -19,7 +19,7 @@ Built on `@angular/aria/accordion` directives with shadcn styling.
 ```html
 <div scAccordionGroup>
   <div scAccordionItem>
-    <button scAccordionTrigger panelId="item-1">Is it accessible?</button>
+    <button scAccordionTrigger panelId="item-1">Is it accessible? <svg siChevronDownIcon></svg></button>
     <div scAccordionPanel panelId="item-1">
       <ng-template scAccordionContent>Yes. It adheres to the WAI-ARIA design pattern.</ng-template>
     </div>
@@ -36,5 +36,5 @@ Built on `@angular/aria/accordion` directives with shadcn styling.
 ### Expand a panel by default
 
 ```html
-<button scAccordionTrigger panelId="item-1" [expanded]="true">...</button>
+<button scAccordionTrigger panelId="item-1" [expanded]="true">... <svg siChevronDownIcon></svg></button>
 ```

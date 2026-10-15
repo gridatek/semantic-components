@@ -6,13 +6,7 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { SiXIcon } from '@semantic-icons/lucide-icons';
-import {
-  ScSheet,
-  ScSheetClose,
-  ScSheetPortal,
-  ScSheetProvider,
-} from '../sheet';
+import { ScSheet, ScSheetPortal, ScSheetProvider } from '../sheet';
 import { ScSidebarContainer } from './sidebar-container';
 import { ScSidebarGap } from './sidebar-gap';
 import { ScSidebarInner } from './sidebar-inner';
@@ -24,8 +18,6 @@ import { ScSidebarState } from './sidebar-state';
     ScSheetProvider,
     ScSheetPortal,
     ScSheet,
-    ScSheetClose,
-    SiXIcon,
     NgTemplateOutlet,
     ScSidebarContainer,
     ScSidebarGap,
@@ -36,7 +28,7 @@ import { ScSidebarState } from './sidebar-state';
       <ng-content />
     </ng-template>
 
-    <!-- Mobile sidebar uses default width from sheet component -->
+    <!-- Mobile: a sheet (default width), closed by Escape or a click outside, as shadcn's -->
     @if (isMobile()) {
       <div scSheetProvider [(open)]="state.openMobile" [side]="side()">
         <ng-template scSheetPortal>
@@ -44,10 +36,6 @@ import { ScSidebarState } from './sidebar-state';
             scSheet
             class="bg-sidebar text-sidebar-foreground flex h-full flex-col p-0"
           >
-            <button scSheetClose>
-              <svg siXIcon></svg>
-              <span class="sr-only">{{ closeLabel() }}</span>
-            </button>
             <ng-container *ngTemplateOutlet="content" />
           </div>
         </ng-template>
@@ -90,8 +78,6 @@ import { ScSidebarState } from './sidebar-state';
 export class ScSidebar {
   readonly state = inject(ScSidebarState);
 
-  /** The mobile sheet's close button's name — write it ("Close"). */
-  readonly closeLabel = input.required<string>();
   readonly side = input<'left' | 'right'>('left');
   readonly variant = input<'sidebar' | 'floating' | 'inset'>('sidebar');
   readonly collapsible = input<'offcanvas' | 'icon' | 'none'>('offcanvas');

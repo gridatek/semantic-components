@@ -40,6 +40,7 @@ import {
   ScToggle,
   ScToggleGroup,
 } from '@semantic-components/ui';
+import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-gallery',
@@ -83,6 +84,7 @@ import {
     ScTextarea,
     ScToggle,
     ScToggleGroup,
+    SiChevronDownIcon,
   ],
   template: `
     <div class="bg-background min-h-screen">
@@ -462,6 +464,7 @@ import {
                     [expanded]="true"
                   >
                     Is it accessible?
+                    <svg siChevronDownIcon></svg>
                   </button>
                 </div>
                 <div scAccordionPanel #faq1="scAccordionPanel">
@@ -476,6 +479,7 @@ import {
                 <div scAccordionHeader>
                   <button scAccordionTrigger [panel]="faq2.panel">
                     Is it styled?
+                    <svg siChevronDownIcon></svg>
                   </button>
                 </div>
                 <div scAccordionPanel #faq2="scAccordionPanel">
@@ -491,6 +495,7 @@ import {
                 <div scAccordionHeader>
                   <button scAccordionTrigger [panel]="faq3.panel">
                     Is it animated?
+                    <svg siChevronDownIcon></svg>
                   </button>
                 </div>
                 <div scAccordionPanel #faq3="scAccordionPanel">

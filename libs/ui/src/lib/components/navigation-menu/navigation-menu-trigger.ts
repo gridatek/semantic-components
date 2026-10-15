@@ -1,31 +1,18 @@
 import { CdkOverlayOrigin } from '@angular/cdk/overlay';
-import {
-  Component,
-  ViewEncapsulation,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
-import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
+import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '../../utils';
 import { ScNavigationMenuItem } from './navigation-menu-item';
-import { ScNavigationMenuTriggerIcon } from './navigation-menu-trigger-icon';
 
-@Component({
+/** Opens its item's content. Write its text, then its icon (`svg[scNavigationMenuTriggerIcon]`, a chevron down). */
+@Directive({
   selector: 'button[scNavigationMenuTrigger]',
-  imports: [SiChevronDownIcon, ScNavigationMenuTriggerIcon],
   hostDirectives: [CdkOverlayOrigin],
-  template: `
-    <ng-content />
-    <svg siChevronDownIcon scNavigationMenuTriggerIcon></svg>
-  `,
   host: {
     type: 'button',
     '[class]': 'class()',
     '[attr.aria-expanded]': 'menuItem.open()',
     '[attr.data-state]': 'menuItem.open() ? "open" : "closed"',
   },
-  encapsulation: ViewEncapsulation.None,
 })
 export class ScNavigationMenuTrigger {
   readonly menuItem = inject(ScNavigationMenuItem);

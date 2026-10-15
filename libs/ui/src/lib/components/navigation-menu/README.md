@@ -47,7 +47,10 @@ ScNavigationMenu (Root - nav element)
   <ul scNavigationMenuList>
     <!-- Item with dropdown -->
     <li scNavigationMenuItem>
-      <button scNavigationMenuTrigger>Products</button>
+      <button scNavigationMenuTrigger>
+        Products
+        <svg siChevronDownIcon scNavigationMenuTriggerIcon></svg>
+      </button>
       <ng-template scNavigationMenuPortal>
         <div scNavigationMenuContent>
           <ul class="grid w-[400px] gap-3 p-4">
@@ -74,7 +77,10 @@ ScNavigationMenu (Root - nav element)
 
 ```html
 <li scNavigationMenuItem>
-  <button scNavigationMenuTrigger>Components</button>
+  <button scNavigationMenuTrigger>
+    Components
+    <svg siChevronDownIcon scNavigationMenuTriggerIcon></svg>
+  </button>
   <ng-template scNavigationMenuPortal>
     <div scNavigationMenuContent>
       <ul class="grid w-[600px] gap-3 p-4 md:grid-cols-2">

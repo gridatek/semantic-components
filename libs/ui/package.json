@@ -18,7 +18,6 @@
     "clsx": ">=2.1.1",
     "tailwind-merge": ">=3.7.0",
     "@angular/aria": ">=22.2.3",
-    "@semantic-icons/lucide-icons": ">=0.60.0",
     "@angular/common": ">=22.2.3",
     "@angular/cdk": ">=22.2.3",
     "@js-temporal/polyfill": ">=0.5.1",

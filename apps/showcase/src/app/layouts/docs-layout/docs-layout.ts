@@ -105,7 +105,6 @@ import { ConfigService } from '../../services/config.service';
     <div scSidebarProvider class="min-h-svh">
       <div
         scSidebar
-        closeLabel="Close"
         side="left"
         variant="sidebar"
         collapsible="icon"

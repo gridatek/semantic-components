@@ -61,7 +61,10 @@ import { SiMenuIcon, SiXIcon } from '@semantic-icons/lucide-icons';
           <nav scNavigationMenu class="hidden md:flex">
             <ul scNavigationMenuList>
               <li scNavigationMenuItem>
-                <button scNavigationMenuTrigger>Products</button>
+                <button scNavigationMenuTrigger>
+  Products
+  <svg siChevronDownIcon scNavigationMenuTriggerIcon></svg>
+</button>
                 <div scNavigationMenuContent>
                   <ul class="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2">
                     <li>

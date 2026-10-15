@@ -1,15 +1,13 @@
 import { AccordionTrigger } from '@angular/aria/accordion';
-import { Component, ViewEncapsulation, computed, input } from '@angular/core';
-import {
-  SiChevronDownIcon,
-  SiChevronUpIcon,
-} from '@semantic-icons/lucide-icons';
+import { Directive, computed, input } from '@angular/core';
 import { cn } from '../../utils';
 
-@Component({
+/**
+ * Opens and closes its panel. Write its text, then its icon (a chevron down):
+ * it goes to the end, and turns over while open.
+ */
+@Directive({
   selector: '[scAccordionTrigger]',
-  imports: [SiChevronDownIcon, SiChevronUpIcon],
-  encapsulation: ViewEncapsulation.None,
   hostDirectives: [
     {
       directive: AccordionTrigger,
@@ -20,31 +18,19 @@ import { cn } from '../../utils';
   host: {
     '[class]': 'class()',
   },
-  template: `
-    <ng-content />
-    <svg
-      siChevronDownIcon
-      data-slot="accordion-trigger-icon"
-      class="pointer-events-none shrink-0 group-aria-expanded/accordion-trigger:hidden"
-    ></svg>
-    <svg
-      siChevronUpIcon
-      data-slot="accordion-trigger-icon"
-      class="pointer-events-none hidden shrink-0 group-aria-expanded/accordion-trigger:inline"
-    ></svg>
-  `,
 })
 export class ScAccordionTrigger {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly class = computed(() =>
     cn(
       'focus-visible:ring-ring/50 focus-visible:border-ring focus-visible:after:border-ring',
-      '**:data-[slot=accordion-trigger-icon]:text-muted-foreground',
       'rounded-lg py-2.5 text-start text-sm font-medium hover:underline focus-visible:ring-3',
-      '**:data-[slot=accordion-trigger-icon]:ms-auto **:data-[slot=accordion-trigger-icon]:size-4',
       'group/accordion-trigger relative flex flex-1 items-start justify-between',
       'border border-transparent transition-all outline-none',
       'aria-disabled:pointer-events-none aria-disabled:opacity-50',
+      // Its icon, last: at the end, turned over while open.
+      '[&>svg:last-child]:text-muted-foreground [&>svg:last-child]:pointer-events-none [&>svg:last-child]:ms-auto [&>svg:last-child]:size-4 [&>svg:last-child]:shrink-0 [&>svg:last-child]:transition-transform',
+      'aria-expanded:[&>svg:last-child]:rotate-180',
       this.classInput(),
     ),
   );

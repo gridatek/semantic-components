@@ -28,6 +28,7 @@ import {
   ScAccordionPanel,
   ScAccordionTrigger,
 } from '@semantic-components/ui';
+import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-disabled-accordion-demo',
@@ -39,6 +40,7 @@ import {
     ScAccordionPanel,
     ScAccordionContent,
     ScAccordionBody,
+    SiChevronDownIcon,
   ],
   host: { class: 'flex w-full justify-center' },
   template: \`
@@ -47,6 +49,7 @@ import {
         <div scAccordionHeader>
           <button scAccordionTrigger [panel]="enabled1.panel" [expanded]="true">
             Enabled Item
+            <svg siChevronDownIcon></svg>
           </button>
         </div>
         <div scAccordionPanel #enabled1="scAccordionPanel">
@@ -65,6 +68,7 @@ import {
             [disabled]="true"
           >
             Disabled Item
+            <svg siChevronDownIcon></svg>
           </button>
         </div>
         <div scAccordionPanel #disabled1="scAccordionPanel">
@@ -77,6 +81,7 @@ import {
         <div scAccordionHeader>
           <button scAccordionTrigger [panel]="enabled2.panel">
             Another Enabled Item
+            <svg siChevronDownIcon></svg>
           </button>
         </div>
         <div scAccordionPanel #enabled2="scAccordionPanel">

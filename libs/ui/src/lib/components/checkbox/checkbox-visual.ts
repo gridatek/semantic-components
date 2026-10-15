@@ -5,13 +5,11 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { SiCheckIcon, SiMinusIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '../../utils';
 import { SC_CHECKBOX_FIELD } from './checkbox-types';
 
 @Component({
   selector: 'span[scCheckboxVisual]',
-  imports: [SiCheckIcon, SiMinusIcon],
   host: {
     'data-slot': 'checkbox-visual',
     '[class]': 'class()',
@@ -19,10 +17,30 @@ import { SC_CHECKBOX_FIELD } from './checkbox-types';
     '[attr.aria-hidden]': 'true',
   },
   template: `
+    <!-- The control's own marks, not icons to swap: drawn here. -->
     @if (checkbox.dataState() === 'indeterminate') {
-      <svg siMinusIcon class="size-3.5"></svg>
+      <svg
+        viewBox="0 0 24 24"
+        class="size-3.5"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+      >
+        <path d="M5 12h14" />
+      </svg>
     } @else if (checkbox.dataState() === 'checked') {
-      <svg siCheckIcon class="size-3.5"></svg>
+      <svg
+        viewBox="0 0 24 24"
+        class="size-3.5"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M20 6 9 17l-5-5" />
+      </svg>
     }
   `,
   encapsulation: ViewEncapsulation.None,
