@@ -85,7 +85,7 @@ interface ToastConfig {
     @if (toast.action) {
     <button scToastAction>{{ toast.action.label }}</button>
     }
-    <button scToastClose aria-label="Close"><svg siXIcon></svg></button>
+    <button scToastClose><svg siXIcon></svg><span class="sr-only">Close</span></button>
   </div>
 </ng-template>
 ```
@@ -130,7 +130,7 @@ export class MyComponent {
 ## Accessibility
 
 - The stack is one stable polite live region (`aria-live="polite"`): each new toast is announced as it appears, without interrupting.
-- The close and action buttons are yours: name the icon-only close button (`aria-label`) — in development, an unnamed one warns.
+- The close and action buttons are yours: name the icon-only close button (`<span class="sr-only">Close</span>`) — in development, an unnamed one warns.
 - Hovering a toast pauses its timer; swiping it away dismisses it.
 
 ## Styling

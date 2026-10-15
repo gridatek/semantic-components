@@ -66,8 +66,9 @@ import {
         @if (toast.action) {
           <button scToastAction>{{ toast.action.label }}</button>
         }
-        <button scToastClose aria-label="Close">
+        <button scToastClose>
           <svg siXIcon></svg>
+          <span class="sr-only">Close</span>
         </button>
       </div>
     </ng-template>
