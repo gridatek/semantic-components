@@ -53,7 +53,7 @@ import { EditorUsageDemoContainer } from '../docs/editor/demos/editor-usage-demo
           Install the editor library and the Tiptap packages of its core.
         </p>
         <app-package-manager-install
-          packages="@semantic-components/editor @tiptap/core @tiptap/starter-kit @tiptap/extensions @tiptap/extension-list @tiptap/pm"
+          packages="@semantic-components/editor @tiptap/core @tiptap/pm @tiptap/starter-kit"
         />
         <p class="text-muted-foreground">
           Tables, images, search, highlights, Markdown and the other features

@@ -7,10 +7,12 @@ You write the markup and every piece of text — the toolbar, its icons and name
 ## Installation
 
 ```bash
-npm install @semantic-components/editor @tiptap/core @tiptap/starter-kit @tiptap/extensions @tiptap/extension-list @tiptap/pm
+npm install @semantic-components/editor @tiptap/core @tiptap/pm @tiptap/starter-kit
 ```
 
 That is the core: text, headings, lists and task lists, quotes, code blocks, links, undo and redo, the counts and `scEditorView`, in HTML, JSON or text. Everything else is a [feature](#features), with its own package.
+
+These are the packages of Tiptap's own [install](https://tiptap.dev/docs/editor/getting-started/install/vanilla-javascript). The core also uses `@tiptap/extensions` and `@tiptap/extension-list` (peer dependencies): `@tiptap/starter-kit` brings both.
 
 ## Features
 

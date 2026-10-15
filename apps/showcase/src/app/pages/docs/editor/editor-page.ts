@@ -88,22 +88,17 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
           and links, with undo and redo, the counts and
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
             >scEditorView</code
-          >, in HTML, JSON or text. It needs only
+          >, in HTML, JSON or text. It needs only what Tiptap&apos;s own install
+          asks for:
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
             >&#64;tiptap/core</code
           >,
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >&#64;tiptap/starter-kit</code
-          >,
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >&#64;tiptap/extensions</code
-          >,
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >&#64;tiptap/extension-list</code
+            >&#64;tiptap/pm</code
           >
           and
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >&#64;tiptap/pm</code
+            >&#64;tiptap/starter-kit</code
           >. Everything else is a feature, in its own entry point with its own
           package: install it and provide it only when you use it. Give the
           editor and
