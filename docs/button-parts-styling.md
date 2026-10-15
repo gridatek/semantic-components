@@ -1,51 +1,42 @@
-# Open question: should button parts style themselves?
+# Button parts style themselves
 
-Status: **undecided** — written down to come back to.
+Status: **decided** (2026-10-16) — option A: a part on a `button` gives it its look. The rule is in `CLAUDE.md` (Components).
 
-## The question
+## The rule
 
-A part that goes on a `button` (`scToastClose`, `scEditorBold`, `scNotificationDismiss`…) adds behaviour. Should it also give the button its look, or should the consumer put it on a `scButton` and choose the look there?
+A part on a `button` (`scToastClose`, `scPdfViewerZoomIn`, `scTransferListMoveToTarget`…):
+
+1. takes its look from `buttonVariants()` (or `toggleVariants()`), never from a class list of its own that copies a button;
+2. has `variant` and `size` inputs, with defaults that suit where it sits — the consumer writes nothing to get the right look, and picks another with the same words as `scButton` (`variant="outline" size="icon-sm"`);
+3. adds only the classes that are its own: position (`absolute end-1 top-1`), visibility, a colour in its context;
+4. sets its own `type="button"` and `[disabled]` — it doesn't need `scButton`.
 
 ```html
-<!-- A: the part styles the button -->
+<!-- The part styles the button -->
 <button scToastClose>
   <svg siXIcon></svg>
   <span class="sr-only">Close</span>
 </button>
 
-<!-- B: the consumer's scButton styles it; the part only adds behaviour -->
-<button scButton variant="ghost" size="icon-xs" scToastClose>
-  <svg siXIcon></svg>
-  <span class="sr-only">Close</span>
-</button>
+<!-- Another look: the same words as scButton -->
+<button scPdfViewerZoomIn variant="outline" size="icon-sm">…</button>
 ```
 
-## Where the libraries are today
+Model: `libs/ui/src/lib/components/pagination/pagination-last.ts`.
 
-The libraries do both, so there is no single answer for users yet. Counted over every `button[…]` part (2026-10-15):
+## Exceptions: behaviour only
 
-| How the part is styled                               | Parts | Examples                                                                                   |
-| ---------------------------------------------------- | ----- | ------------------------------------------------------------------------------------------ |
-| Applies `buttonVariants` / `toggleVariants` itself   | 68    | the editor's toolbar buttons, carousel previous/next, the video player's buttons           |
-| Its own class list (sometimes only merging `class`)  | 108   | `scToastClose`, `scToastAction`, the PDF viewer's parts, pagination                        |
-| Behaviour only — the consumer's `scButton` styles it | 18    | `scDrawerClose`, the notification center's buttons, the transfer list's moves, the cropper |
+These add behaviour to whatever button the consumer writes, `scButton` or another part:
 
-## Option A — the part styles itself
+- **Triggers and closes that go on any button** — `scDialogTrigger`, `scSheetTrigger`, `scDrawerTrigger`, `scDrawerClose`, `scPopoverTrigger`, `scAlertDialogTrigger`, `scNativeDialogTrigger`, `scThemeModeToggle` (on a `scButton`, a `scSidebarMenuButton`, a menu item…).
 
-- **For:** the shortest markup, and every editor toolbar button looks the same without the consumer thinking about it. "Components own their styles" (a project rule) reads most naturally this way.
-- **Against:** a second button look to maintain next to `scButton`; parts drift from it (sizes, focus rings, dark mode). Changing the look means a `class` override instead of picking a variant.
+And these keep a look of their own, as they are not buttons to the eye:
 
-## Option B — `scButton` styles it, the part adds behaviour
+- **Controls over media** — the lightbox's (white on a dark photo).
+- **Items in lists and grids** — emoji, swatches, suggestions, outline items, dock items, presets, the tag chip's delete.
+- **Parts with a design of their own** — the sidebar's, the navigation menu trigger, the date pickers' triggers, the stepper trigger, the speed dial.
 
-- **For:** one button look in the whole library (`scButton`'s variants and sizes); the consumer picks `ghost`, `outline`, `icon-xs`… with the same words everywhere. Parts become smaller.
-- **Against:** longer markup; a toolbar's buttons can be styled inconsistently by mistake; styles that depend on the part's state (`aria-pressed`, a destructive toast) need `scButton` variants for them, or classes on top.
+## Done (2026-10-16)
 
-## A middle way
-
-Parts that sit in a **designed context** keep their own look (the editor toolbar, the toast's close button in its corner, the video player over the video), and **free-standing actions** (dismiss, clear all, move, apply/cancel) are behaviour on a `scButton`. That is roughly what exists today — the note is to decide whether it is the rule, and write it down if so.
-
-## To decide
-
-1. A, B, or the middle way?
-2. If B or the middle way: which of the 108 "own classes" parts move to `scButton`?
-3. Write the answer in `CLAUDE.md` (Components section), so new parts follow it.
+- 62 parts that relied on the consumer's `scButton` style themselves: the PDF viewer's, the image cropper's, the transfer list's, the notification center's, the stepper's next / previous, the date range picker's apply / cancel, `scQrCodeDownload` (its image size input is now `imageSize`). Their consumers lost `scButton`, and `variant` / `size` equal to the new defaults.
+- 11 parts with their own class lists moved to `buttonVariants()`: toast close and action, popover close, spotlight close, the tour guide's close and actions, the autocomplete and combobox clears, the colour picker's eyedropper, the image annotator's actions, the navbar's mobile trigger.

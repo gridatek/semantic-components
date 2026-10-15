@@ -1,6 +1,12 @@
 import { ToolbarWidget } from '@angular/aria/toolbar';
 import { Directive, computed, inject, input } from '@angular/core';
-import { bindInput, cn, ɵwarnIfUnnamed } from '@semantic-components/ui';
+import {
+  type ScButtonVariants,
+  bindInput,
+  buttonVariants,
+  cn,
+  ɵwarnIfUnnamed,
+} from '@semantic-components/ui';
 import { ScImageAnnotatorState } from './image-annotator-state';
 
 export type ScImageAnnotatorActionType = 'undo' | 'redo' | 'clear' | 'download';
@@ -21,6 +27,8 @@ export type ScImageAnnotatorActionType = 'undo' | 'redo' | 'clear' | 'download';
 })
 export class ScImageAnnotatorAction {
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly variant = input<ScButtonVariants['variant']>('ghost');
+  readonly size = input<ScButtonVariants['size']>('icon');
   readonly action = input.required<ScImageAnnotatorActionType>();
 
   private readonly state = inject(ScImageAnnotatorState);
@@ -41,7 +49,7 @@ export class ScImageAnnotatorAction {
 
   protected readonly class = computed(() =>
     cn(
-      'hover:bg-muted rounded-md p-2 outline-none transition-colors focus-visible:ring-3 focus-visible:ring-ring/50 aria-disabled:pointer-events-none aria-disabled:opacity-50',
+      buttonVariants({ variant: this.variant(), size: this.size() }),
       this.classInput(),
     ),
   );

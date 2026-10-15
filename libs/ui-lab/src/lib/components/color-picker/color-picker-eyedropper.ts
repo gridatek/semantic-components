@@ -1,5 +1,9 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import {
+  type ScButtonVariants,
+  buttonVariants,
+  cn,
+} from '@semantic-components/ui';
 import { SC_COLOR_PICKER } from './color-picker';
 
 @Directive({
@@ -15,13 +19,12 @@ export class ScColorPickerEyeDropper {
   readonly colorPicker = inject(SC_COLOR_PICKER);
 
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly variant = input<ScButtonVariants['variant']>('outline');
+  readonly size = input<ScButtonVariants['size']>('icon-lg');
 
   protected readonly class = computed(() =>
     cn(
-      'inline-flex size-9 items-center justify-center rounded-md border border-input bg-background',
-      'hover:bg-accent hover:text-accent-foreground',
-      'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring',
-      'disabled:pointer-events-none disabled:opacity-50',
+      buttonVariants({ variant: this.variant(), size: this.size() }),
       this.classInput(),
     ),
   );

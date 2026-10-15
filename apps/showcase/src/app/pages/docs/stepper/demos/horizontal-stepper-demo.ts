@@ -1,7 +1,6 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
-  ScButton,
   ScField,
   ScFieldGroup,
   ScInput,
@@ -39,7 +38,6 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
     ScStepperPrevious,
     ScStepperNext,
     SiCheckIcon,
-    ScButton,
     ScField,
     ScFieldGroup,
     ScInput,
@@ -164,10 +162,8 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
         </div>
 
         <div class="mt-6 flex justify-between">
-          <button scButton scStepperPrevious variant="outline" size="lg">
-            Previous
-          </button>
-          <button scButton scStepperNext size="lg">
+          <button scStepperPrevious>Previous</button>
+          <button scStepperNext>
             {{ selectedIndex() === 2 ? 'Submit' : 'Next' }}
           </button>
         </div>

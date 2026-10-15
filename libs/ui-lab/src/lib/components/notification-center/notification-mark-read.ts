@@ -1,5 +1,10 @@
-import { Directive, computed, inject } from '@angular/core';
-import { ɵwarnIfUnnamed } from '@semantic-components/ui';
+import { Directive, computed, inject, input } from '@angular/core';
+import {
+  type ScButtonVariants,
+  buttonVariants,
+  cn,
+  ɵwarnIfUnnamed,
+} from '@semantic-components/ui';
 import { SC_NOTIFICATION } from './notification';
 import { SC_NOTIFICATION_CENTER } from './notification-center';
 
@@ -7,6 +12,7 @@ import { SC_NOTIFICATION_CENTER } from './notification-center';
 @Directive({
   selector: 'button[scNotificationMarkRead]',
   host: {
+    '[class]': 'class()',
     type: 'button',
     'data-slot': 'notification-mark-read',
     '[disabled]': 'disabled()',
@@ -15,6 +21,17 @@ import { SC_NOTIFICATION_CENTER } from './notification-center';
   },
 })
 export class ScNotificationMarkRead {
+  readonly classInput = input<string>('', { alias: 'class' });
+  readonly variant = input<ScButtonVariants['variant']>('ghost');
+  readonly size = input<ScButtonVariants['size']>('xs');
+
+  protected readonly class = computed(() =>
+    cn(
+      buttonVariants({ variant: this.variant(), size: this.size() }),
+      this.classInput(),
+    ),
+  );
+
   protected readonly center = inject(SC_NOTIFICATION_CENTER);
   protected readonly item = inject(SC_NOTIFICATION);
 

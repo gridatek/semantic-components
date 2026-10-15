@@ -349,15 +349,15 @@ The actions (`ScEditorTableAction`): `insertTable` (3 × 3, with a header row), 
 <div scEditorSearchBar aria-label="Search and replace">
   <input scInput scEditorSearchInput aria-label="Search" />
   <span scEditorSearchResults #results="scEditorSearchResults"> @if (results.state() === 'found') { {{ (results.index() ?? 0) + 1 }} of {{ results.count() }} } @else if (results.state() === 'none') { No results } </span>
-  <button scButton variant="ghost" size="icon-sm" scEditorSearchPrevious>…</button>
-  <button scButton variant="ghost" size="icon-sm" scEditorSearchNext>…</button>
+  <button scEditorSearchPrevious>…</button>
+  <button scEditorSearchNext>…</button>
   <button scEditorSearchOption="caseSensitive">…</button>
   <button scEditorSearchOption="wholeWord">…</button>
   <button scEditorSearchOption="useRegex">…</button>
   <input scInput scEditorReplaceInput aria-label="Replace with" />
-  <button scButton variant="outline" size="sm" scEditorReplace>Replace</button>
-  <button scButton variant="outline" size="sm" scEditorReplaceAll>Replace all</button>
-  <button scButton variant="ghost" size="icon-sm" scEditorSearchClose>…</button>
+  <button scEditorReplace>Replace</button>
+  <button scEditorReplaceAll>Replace all</button>
+  <button scEditorSearchClose>…</button>
 </div>
 }
 ```

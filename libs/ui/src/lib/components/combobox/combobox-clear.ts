@@ -1,5 +1,6 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '../../utils';
+import { type ScButtonVariants, buttonVariants } from '../button/button';
 import { SC_COMBOBOX } from './combobox-tokens';
 
 /**
@@ -24,6 +25,8 @@ import { SC_COMBOBOX } from './combobox-tokens';
 export class ScComboboxClear {
   protected readonly combobox = inject(SC_COMBOBOX);
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly variant = input<ScButtonVariants['variant']>('ghost');
+  readonly size = input<ScButtonVariants['size']>('icon-xs');
 
   readonly visible = computed(
     () =>
@@ -34,7 +37,8 @@ export class ScComboboxClear {
 
   protected readonly class = computed(() =>
     cn(
-      'text-muted-foreground hover:text-foreground focus-visible:ring-ring/50 absolute end-7 top-1/2 flex size-5 -translate-y-1/2 cursor-pointer items-center justify-center rounded-sm outline-none focus-visible:ring-3 [&_svg:not([class*=size-])]:size-3.5 [&_svg]:pointer-events-none',
+      buttonVariants({ variant: this.variant(), size: this.size() }),
+      'absolute end-7 top-1/2 size-5 -translate-y-1/2 text-muted-foreground',
       this.classInput(),
     ),
   );

@@ -40,7 +40,6 @@ import {
   ScPdfViewerToolbar,
 } from '@semantic-components/pdf-viewer';
 import {
-  ScButton,
   ScInput,
   ScSpinner,
   ScSwitch,
@@ -81,7 +80,6 @@ const READING_MODES: Record<string, ScPdfPageColors | null> = {
     ScPdfViewerContent,
     ScPdfViewerLoading,
     ScPdfViewerCanvas,
-    ScButton,
     ScInput,
     ScSpinner,
     ScSwitch,
@@ -110,23 +108,11 @@ const READING_MODES: Record<string, ScPdfPageColors | null> = {
           class="flex-wrap gap-y-1.5 py-1.5"
         >
           <div scPdfViewerNav aria-label="History">
-            <button
-              scButton
-              variant="ghost"
-              size="icon"
-              scPdfViewerBack
-              [scTooltipTrigger]="'Back'"
-            >
+            <button scPdfViewerBack [scTooltipTrigger]="'Back'">
               <svg siArrowLeftIcon></svg>
               <span class="sr-only">Back</span>
             </button>
-            <button
-              scButton
-              variant="ghost"
-              size="icon"
-              scPdfViewerForward
-              [scTooltipTrigger]="'Forward'"
-            >
+            <button scPdfViewerForward [scTooltipTrigger]="'Forward'">
               <svg siArrowRightIcon></svg>
               <span class="sr-only">Forward</span>
             </button>

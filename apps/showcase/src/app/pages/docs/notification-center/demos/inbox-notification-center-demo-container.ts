@@ -145,12 +145,7 @@ const minutesAgo = (minutes: number) => new Date(Date.now() - minutes * 60000);
           >
             <div scNotificationCenterHeader>
               <h2 scNotificationCenterTitle>Notifications</h2>
-              <button
-                scButton
-                variant="ghost"
-                size="sm"
-                scNotificationMarkAllRead
-              >
+              <button scNotificationMarkAllRead>
                 <svg siCheckCheckIcon></svg>
                 Mark all as read
               </button>
@@ -206,22 +201,12 @@ const minutesAgo = (minutes: number) => new Date(Date.now() - minutes * 60000);
                             {{ notice.action }}
                           </button>
                         }
-                        <button
-                          scButton
-                          variant="ghost"
-                          size="xs"
-                          scNotificationMarkRead
-                        >
+                        <button scNotificationMarkRead>
                           {{ notice.read ? 'Mark as unread' : 'Mark as read' }}
                         </button>
                       </div>
                     </div>
-                    <button
-                      scButton
-                      variant="ghost"
-                      size="icon-xs"
-                      scNotificationDismiss
-                    >
+                    <button scNotificationDismiss>
                       <svg siXIcon></svg>
                       <span class="sr-only">{{
                         'Dismiss ' + notice.title

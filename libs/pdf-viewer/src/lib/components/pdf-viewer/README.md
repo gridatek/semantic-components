@@ -11,11 +11,11 @@ A composable PDF viewer built on [PDF.js](https://mozilla.github.io/pdf.js/) (`p
   <div scPdfViewerContainer class="flex h-[800px] flex-col">
     <div scPdfViewerToolbar aria-label="Document">
       <div scPdfViewerNav aria-label="Page navigation">
-        <button scButton variant="ghost" size="icon" scPdfViewerPrevPage>
+        <button scPdfViewerPrevPage>
           <svg siChevronUpIcon></svg>
           <span class="sr-only">Previous page</span>
         </button>
-        <button scButton variant="ghost" size="icon" scPdfViewerNextPage>
+        <button scPdfViewerNextPage>
           <svg siChevronDownIcon></svg>
           <span class="sr-only">Next page</span>
         </button>
@@ -23,7 +23,7 @@ A composable PDF viewer built on [PDF.js](https://mozilla.github.io/pdf.js/) (`p
       <input scInput scPdfViewerPageInput aria-label="Page" />
       <span>/ {{ viewer.totalPages() }}</span>
       <div scPdfViewerSpacer></div>
-      <button scButton variant="ghost" size="icon" scPdfViewerDownload>
+      <button scPdfViewerDownload>
         <svg siDownloadIcon></svg>
         <span class="sr-only">Download</span>
       </button>
@@ -33,7 +33,7 @@ A composable PDF viewer built on [PDF.js](https://mozilla.github.io/pdf.js/) (`p
       <div scPdfViewerLoading><svg scSpinner siLoaderCircleIcon></svg> Loading…</div>
       <div scEmpty scPdfViewerError>
         <div scEmptyTitle>Couldn't open the document</div>
-        <button scButton scPdfViewerRetry>Try again</button>
+        <button scPdfViewerRetry>Try again</button>
       </div>
       <sc-pdf-viewer-canvas />
     </div>
@@ -80,7 +80,7 @@ providers: [{ provide: OverlayContainer, useClass: FullscreenOverlayContainer }]
 
 ### Buttons
 
-Behaviour on a `scButton`: choose its look, write its icon, text or `aria-label`.
+Each styles its button (`buttonVariants`, `ghost` by default): pick another look with `variant` and `size`, as on `scButton`. Write its icon and text, and name the icon-only ones.
 
 | Part                                    | Does                                     | Disabled when                                       |
 | --------------------------------------- | ---------------------------------------- | --------------------------------------------------- |
@@ -157,14 +157,14 @@ Write your list of `viewer.comments()`: `[scPdfViewerComment]` per comment (`dat
 | `ScPdfViewerGoToPage`                                         | `scButton`   | Goes to the page (`aria-current="page"`).                                                                    |
 | `ScPdfViewerThumbnail`                                        | `img`        | The page's thumbnail, rendered when near view.                                                               |
 | `ScPdfViewerOutlineItem`                                      | `scButton`   | A bookmark of `viewer.outline()` (`aria-current="location"`, `data-bold`, `data-italic`).                    |
-| `ScPdfViewerOutlineToggle`                                    | `scButton`   | Opens its children (`aria-expanded`; Shift: the branch). Show them while `viewer.outlineExpanded().has(id)`. |
-| `ScPdfViewerOutlineExpandAll` / `CollapseAll` / `FindCurrent` | `scButton`   | Open / close all, reveal the current bookmark.                                                               |
-| `ScPdfViewerAttachment`                                       | `scButton`   | Downloads an attached file of `viewer.attachments()`.                                                        |
+| `ScPdfViewerOutlineToggle`                                    | `button`     | Opens its children (`aria-expanded`; Shift: the branch). Show them while `viewer.outlineExpanded().has(id)`. |
+| `ScPdfViewerOutlineExpandAll` / `CollapseAll` / `FindCurrent` | `button`     | Open / close all, reveal the current bookmark.                                                               |
+| `ScPdfViewerAttachment`                                       | `button`     | Downloads an attached file of `viewer.attachments()`.                                                        |
 | `ScPdfViewerLayer`                                            | `scCheckbox` | Shows / hides a layer of `viewer.layers()`; the pages redraw.                                                |
 
 ### Page organisation
 
-Each change rebuilds the document with pdf.js's `extractPages` — form data comes along, annotations and comments follow their pages — and can be undone from the undo bar. Buttons (on `scButton`) act on `viewer.pageSelection()`: `scPdfViewerMovePagesEarlier`, `MovePagesLater`, `CopyPages`, `CutPages`, `PastePages` (after the current page), `DeletePages`, `ExportPages` (download just those), `InsertPages` (merge another PDF; `insertFailed` when it isn't one). The methods behind them are on the viewer: `movePages`, `deletePages`, `copyPages`, `cutPages`, `pastePages`, `insertFile`, `exportPages`.
+Each change rebuilds the document with pdf.js's `extractPages` — form data comes along, annotations and comments follow their pages — and can be undone from the undo bar. Buttons act on `viewer.pageSelection()`: `scPdfViewerMovePagesEarlier`, `MovePagesLater`, `CopyPages`, `CutPages`, `PastePages` (after the current page), `DeletePages`, `ExportPages` (download just those), `InsertPages` (merge another PDF; `insertFailed` when it isn't one). The methods behind them are on the viewer: `movePages`, `deletePages`, `copyPages`, `cutPages`, `pastePages`, `insertFile`, `exportPages`.
 
 ## Behaviour
 

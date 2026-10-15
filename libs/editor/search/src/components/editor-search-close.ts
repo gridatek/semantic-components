@@ -1,11 +1,15 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { SC_EDITOR } from '@semantic-components/editor';
-import { cn } from '@semantic-components/ui';
+import {
+  type ScButtonVariants,
+  buttonVariants,
+  cn,
+} from '@semantic-components/ui';
 import { editorSearch } from './editor-search-state';
 
 /**
  * Closes the search bar, clears its matches, and goes back to the text (as
- * Escape does). Use on a `scButton`; write its icon and name it.
+ * Escape does). Write its icon and name it.
  */
 @Directive({
   selector: 'button[scEditorSearchClose]',
@@ -18,6 +22,13 @@ import { editorSearch } from './editor-search-state';
 export class ScEditorSearchClose {
   protected readonly search = editorSearch(inject(SC_EDITOR));
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly variant = input<ScButtonVariants['variant']>('ghost');
+  readonly size = input<ScButtonVariants['size']>('icon-sm');
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  protected readonly class = computed(() =>
+    cn(
+      buttonVariants({ variant: this.variant(), size: this.size() }),
+      this.classInput(),
+    ),
+  );
 }

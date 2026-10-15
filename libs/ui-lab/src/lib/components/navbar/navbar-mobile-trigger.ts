@@ -6,7 +6,11 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import {
+  type ScButtonVariants,
+  buttonVariants,
+  cn,
+} from '@semantic-components/ui';
 import { ScNavbarProvider } from './navbar-provider';
 
 @Component({
@@ -25,6 +29,8 @@ import { ScNavbarProvider } from './navbar-provider';
 export class ScNavbarMobileTrigger {
   readonly provider = inject(ScNavbarProvider);
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly variant = input<ScButtonVariants['variant']>('ghost');
+  readonly size = input<ScButtonVariants['size']>('icon-lg');
 
   readonly isMobileMenuOpen = this.provider.open;
 
@@ -34,13 +40,8 @@ export class ScNavbarMobileTrigger {
 
   protected readonly class = computed(() =>
     cn(
-      'inline-flex items-center justify-center gap-2',
+      buttonVariants({ variant: this.variant(), size: this.size() }),
       'md:hidden',
-      'size-10 rounded-md',
-      'text-foreground',
-      'hover:bg-accent hover:text-accent-foreground',
-      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
-      '[&_svg]:pointer-events-none [&_svg]:size-6 [&_svg]:shrink-0',
       this.classInput(),
     ),
   );

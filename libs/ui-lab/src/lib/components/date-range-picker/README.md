@@ -32,8 +32,8 @@ A composable date range picker built from directive primitives. Uses `ScPopoverP
             </div>
           </div>
           <div scDateRangePickerFooter>
-            <button scButton variant="outline" size="sm" scDateRangePickerCancel>Cancel</button>
-            <button scButton size="sm" scDateRangePickerApply>Apply</button>
+            <button scDateRangePickerCancel>Cancel</button>
+            <button scDateRangePickerApply>Apply</button>
           </div>
         </div>
       </div>
@@ -55,8 +55,8 @@ A composable date range picker built from directive primitives. Uses `ScPopoverP
     <div class="p-3">
       <div scCalendar aria-label="Calendar" mode="range" [numberOfMonths]="2" ...>...</div>
       <div scDateRangePickerFooter>
-        <button scButton variant="outline" size="sm" scDateRangePickerCancel>Cancel</button>
-        <button scButton size="sm" scDateRangePickerApply>Apply</button>
+        <button scDateRangePickerCancel>Cancel</button>
+        <button scDateRangePickerApply>Apply</button>
       </div>
     </div>
   </div>

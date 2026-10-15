@@ -19,7 +19,7 @@ readonly notifications = signal<Notice[]>([
 <section scNotificationCenter #center="scNotificationCenter" [(notifications)]="notifications" aria-labelledby="inbox-title">
   <div scNotificationCenterHeader>
     <h2 scNotificationCenterTitle id="inbox-title">Notifications</h2>
-    <button scButton variant="ghost" size="sm" scNotificationMarkAllRead>Mark all as read</button>
+    <button scNotificationMarkAllRead>Mark all as read</button>
   </div>
 
   <div scNotificationFilters aria-label="Show">
@@ -37,10 +37,10 @@ readonly notifications = signal<Notice[]>([
         <p scNotificationTitle>{{ notice.title }}</p>
         <time scNotificationTime></time>
         <div scNotificationActions>
-          <button scButton variant="ghost" size="xs" scNotificationMarkRead>{{ notice.read ? 'Mark as unread' : 'Mark as read' }}</button>
+          <button scNotificationMarkRead>{{ notice.read ? 'Mark as unread' : 'Mark as read' }}</button>
         </div>
       </div>
-      <button scButton variant="ghost" size="icon-xs" scNotificationDismiss>
+      <button scNotificationDismiss>
         <svg siXIcon></svg>
         <span class="sr-only">{{ 'Dismiss ' + notice.title }}</span>
       </button>
@@ -95,7 +95,7 @@ There are no outputs: everything the parts do is a change of `notifications` —
 | `ScNotificationDismiss`      | `button[scNotificationDismiss]`     | Removes it                                                                                          |
 | `ScNotificationEmpty`        | `div[scNotificationEmpty]`          | The empty state (your icon and text)                                                                |
 
-The buttons add behaviour to buttons of yours (a `scButton`, any variant): write their icons and texts, and name the icon-only ones (`aria-label`) — in development, an unnamed one warns.
+The buttons style themselves (`ghost`; another look with `variant` and `size`, as on `scButton`): write their icons and texts, and name the icon-only ones (`aria-label`) — in development, an unnamed one warns.
 
 ## Sections
 

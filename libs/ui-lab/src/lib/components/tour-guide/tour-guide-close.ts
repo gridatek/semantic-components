@@ -1,5 +1,9 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import {
+  type ScButtonVariants,
+  buttonVariants,
+  cn,
+} from '@semantic-components/ui';
 import { ScTourGuideState } from './tour-guide-state';
 
 @Directive({
@@ -12,10 +16,16 @@ import { ScTourGuideState } from './tour-guide-state';
 })
 export class ScTourGuideClose {
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly variant = input<ScButtonVariants['variant']>('ghost');
+  readonly size = input<ScButtonVariants['size']>('icon-xs');
 
   protected readonly state = inject(ScTourGuideState);
 
   protected readonly class = computed(() =>
-    cn('hover:bg-accent absolute top-2 end-2 rounded p-1', this.classInput()),
+    cn(
+      buttonVariants({ variant: this.variant(), size: this.size() }),
+      'absolute top-2 end-2',
+      this.classInput(),
+    ),
   );
 }

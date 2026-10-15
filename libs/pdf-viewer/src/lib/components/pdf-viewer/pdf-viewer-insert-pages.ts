@@ -6,17 +6,23 @@ import {
   input,
   output,
 } from '@angular/core';
-import { ScButton, bindInput, cn } from '@semantic-components/ui';
+import {
+  type ScButtonVariants,
+  buttonVariants,
+  cn,
+} from '@semantic-components/ui';
 import { SC_PDF_VIEWER } from './pdf-viewer';
 
 /**
  * Asks for a PDF and inserts its pages after the current page (merging
  * files). `insertFailed` fires when the file isn't a readable PDF — say so.
- * Use on a `scButton`.
+ *
  */
 @Directive({
   selector: 'button[scPdfViewerInsertPages]',
   host: {
+    type: 'button',
+    '[disabled]': 'disabled()',
     '[class]': 'class()',
     '(click)': 'choose()',
   },
@@ -26,19 +32,21 @@ export class ScPdfViewerInsertPages {
   private readonly document = inject(DOCUMENT);
 
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly variant = input<ScButtonVariants['variant']>('ghost');
+  readonly size = input<ScButtonVariants['size']>('icon-sm');
+
+  protected readonly disabled = computed(
+    () => !this.pdfViewer.pdfDocument() || this.pdfViewer.organizing(),
+  );
   /** The chosen file couldn't be read as a PDF. */
   readonly insertFailed = output<File>();
 
-  protected readonly class = computed(() => cn(this.classInput()));
-
-  constructor() {
-    bindInput(
-      inject(ScButton).disabled,
-      computed(
-        () => !this.pdfViewer.pdfDocument() || this.pdfViewer.organizing(),
-      ),
-    );
-  }
+  protected readonly class = computed(() =>
+    cn(
+      buttonVariants({ variant: this.variant(), size: this.size() }),
+      this.classInput(),
+    ),
+  );
 
   protected choose(): void {
     const field = this.document.createElement('input');

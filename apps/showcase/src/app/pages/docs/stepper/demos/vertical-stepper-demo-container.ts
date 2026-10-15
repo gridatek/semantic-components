@@ -15,7 +15,6 @@ import { VerticalStepperDemo } from './vertical-stepper-demo';
 })
 export class VerticalStepperDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScButton } from '@semantic-components/ui';
 import {
   ScStepper,
   ScStepperDescription,
@@ -46,7 +45,6 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
     ScStepperPrevious,
     ScStepperNext,
     SiCheckIcon,
-    ScButton,
   ],
   template: \`
     <div class="w-full max-w-xl rounded-lg border p-6">
@@ -117,10 +115,8 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
           }
 
           <div class="mt-auto flex justify-between pt-6">
-            <button scButton scStepperPrevious variant="outline" size="lg">
-              Previous
-            </button>
-            <button scButton scStepperNext size="lg">Next</button>
+            <button scStepperPrevious>Previous</button>
+            <button scStepperNext>Next</button>
           </div>
         </div>
       </div>

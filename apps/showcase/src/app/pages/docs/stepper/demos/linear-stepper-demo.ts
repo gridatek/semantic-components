@@ -157,7 +157,7 @@ interface SignupModel {
         </div>
 
         <div class="mt-6 flex justify-between">
-          <button scButton scStepperPrevious variant="outline">Back</button>
+          <button scStepperPrevious>Back</button>
           @if (stepper.isLastStep()) {
             <button
               scButton
@@ -168,7 +168,7 @@ interface SignupModel {
               Create account
             </button>
           } @else {
-            <button scButton scStepperNext>Next</button>
+            <button scStepperNext>Next</button>
           }
         </div>
       </div>

@@ -1,16 +1,21 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import {
+  type ScButtonVariants,
+  buttonVariants,
+  cn,
+} from '@semantic-components/ui';
 import { SC_PDF_VIEWER } from './pdf-viewer';
 import type { ScPdfEditorAnnotation } from './pdf-viewer-types';
 
 /**
  * Opens the `altText` dialog for an image annotation (a stamp or a
- * signature). Use on a `scButton`; its `altText` / `isDecorative` tell what
+ * signature). Its `altText` / `isDecorative` tell what
  * it has.
  */
 @Directive({
   selector: 'button[scPdfViewerAnnotationAltText]',
   host: {
+    type: 'button',
     '[class]': 'class()',
     '(click)': 'pdfViewer.openAltText(annotation().id)',
   },
@@ -22,6 +27,13 @@ export class ScPdfViewerAnnotationAltText {
     alias: 'scPdfViewerAnnotationAltText',
   });
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly variant = input<ScButtonVariants['variant']>('outline');
+  readonly size = input<ScButtonVariants['size']>('xs');
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  protected readonly class = computed(() =>
+    cn(
+      buttonVariants({ variant: this.variant(), size: this.size() }),
+      this.classInput(),
+    ),
+  );
 }

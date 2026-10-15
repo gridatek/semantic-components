@@ -1,5 +1,9 @@
 import { DOCUMENT, Directive, computed, inject, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import {
+  type ScButtonVariants,
+  buttonVariants,
+  cn,
+} from '@semantic-components/ui';
 import { ScQrCode } from './qr-code';
 
 export type ScQrCodeDownloadFormat = 'png' | 'svg';
@@ -26,22 +30,29 @@ export class ScQrCodeDownload {
   private readonly document = inject(DOCUMENT);
 
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly variant = input<ScButtonVariants['variant']>('outline');
+  readonly size = input<ScButtonVariants['size']>('default');
   /** The QR code to download (`#qr="scQrCode"`). */
   readonly for = input.required<ScQrCode>();
   /** File name, without extension. */
   readonly filename = input('qrcode');
   readonly format = input<ScQrCodeDownloadFormat>('png');
   /** Image width in pixels, rounded down to whole pixels per module. */
-  readonly size = input(1024);
+  readonly imageSize = input(1024);
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  protected readonly class = computed(() =>
+    cn(
+      buttonVariants({ variant: this.variant(), size: this.size() }),
+      this.classInput(),
+    ),
+  );
 
   protected download(): void {
     const qr = this.for();
     const modules = qr.modules();
     if (!modules.length) return;
 
-    const scale = Math.max(1, Math.floor(this.size() / modules.length));
+    const scale = Math.max(1, Math.floor(this.imageSize() / modules.length));
     const width = modules.length * scale;
     const { color, background } = this.colors(qr.nativeElement);
 

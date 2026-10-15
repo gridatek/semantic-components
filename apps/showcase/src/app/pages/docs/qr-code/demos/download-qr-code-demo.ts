@@ -1,11 +1,10 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ScQrCode, ScQrCodeDownload } from '@semantic-components/qr-code';
-import { ScButton } from '@semantic-components/ui';
 import { SiDownloadIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-download-qr-code-demo',
-  imports: [ScQrCode, ScQrCodeDownload, ScButton, SiDownloadIcon],
+  imports: [ScQrCode, ScQrCodeDownload, SiDownloadIcon],
   template: `
     <div class="flex flex-col items-center gap-4">
       <svg
@@ -15,23 +14,15 @@ import { SiDownloadIcon } from '@semantic-icons/lucide-icons';
         aria-label="QR Code for angular.dev"
       ></svg>
       <div class="flex gap-2">
-        <button
-          scButton
-          scQrCodeDownload
-          [for]="qr"
-          [filename]="'angular-qr'"
-          variant="outline"
-        >
+        <button scQrCodeDownload [for]="qr" [filename]="'angular-qr'">
           <svg siDownloadIcon></svg>
           PNG
         </button>
         <button
-          scButton
           scQrCodeDownload
           [for]="qr"
           [filename]="'angular-qr'"
           format="svg"
-          variant="outline"
         >
           <svg siDownloadIcon></svg>
           SVG

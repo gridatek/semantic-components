@@ -1,5 +1,9 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import {
+  type ScButtonVariants,
+  buttonVariants,
+  cn,
+} from '@semantic-components/ui';
 import { ScTourGuideState } from './tour-guide-state';
 
 @Directive({
@@ -13,15 +17,19 @@ import { ScTourGuideState } from './tour-guide-state';
 export class ScTourGuideAction {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly action = input.required<'previous' | 'next' | 'finish'>();
+  /** Default: `default` for next and finish, `outline` for previous. */
+  readonly variant = input<ScButtonVariants['variant']>();
+  readonly size = input<ScButtonVariants['size']>('sm');
 
   private readonly state = inject(ScTourGuideState);
 
   protected readonly class = computed(() => {
     const isPrimary = this.action() === 'next' || this.action() === 'finish';
     return cn(
-      isPrimary
-        ? 'bg-primary text-primary-foreground hover:bg-primary/90 rounded-md px-3 py-1.5 text-sm'
-        : 'hover:bg-accent rounded-md border px-3 py-1.5 text-sm',
+      buttonVariants({
+        variant: this.variant() ?? (isPrimary ? 'default' : 'outline'),
+        size: this.size(),
+      }),
       this.classInput(),
     );
   });

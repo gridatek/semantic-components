@@ -1,5 +1,9 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import {
+  type ScButtonVariants,
+  buttonVariants,
+  cn,
+} from '@semantic-components/ui';
 import { SC_STEPPER } from './stepper-types';
 
 /**
@@ -19,6 +23,13 @@ export class ScStepperNext {
   readonly stepper = inject(SC_STEPPER);
 
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly variant = input<ScButtonVariants['variant']>('default');
+  readonly size = input<ScButtonVariants['size']>('lg');
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  protected readonly class = computed(() =>
+    cn(
+      buttonVariants({ variant: this.variant(), size: this.size() }),
+      this.classInput(),
+    ),
+  );
 }

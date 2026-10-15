@@ -20,7 +20,6 @@ import { DisabledDateRangePickerDemo } from './disabled-date-range-picker-demo';
 export class DisabledDateRangePickerDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScButton,
   ScCalendar,
   ScCalendarHeader,
   ScCalendarHeading,
@@ -46,7 +45,6 @@ import {
 @Component({
   selector: 'app-disabled-date-range-picker-demo',
   imports: [
-    ScButton,
     ScDateRangePicker,
     ScDateRangePickerTrigger,
     ScDateRangePickerApply,
@@ -125,15 +123,8 @@ import {
                 </div>
               </div>
               <div scDateRangePickerFooter>
-                <button
-                  scButton
-                  variant="outline"
-                  size="sm"
-                  scDateRangePickerCancel
-                >
-                  Cancel
-                </button>
-                <button scButton size="sm" scDateRangePickerApply>Apply</button>
+                <button scDateRangePickerCancel>Cancel</button>
+                <button scDateRangePickerApply>Apply</button>
               </div>
             </div>
           </div>

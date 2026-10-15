@@ -1,5 +1,6 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '../../utils';
+import { type ScButtonVariants, buttonVariants } from '../button/button';
 import { SC_AUTOCOMPLETE } from './autocomplete-tokens';
 
 /**
@@ -23,6 +24,8 @@ import { SC_AUTOCOMPLETE } from './autocomplete-tokens';
 export class ScAutocompleteClear {
   protected readonly autocomplete = inject(SC_AUTOCOMPLETE);
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly variant = input<ScButtonVariants['variant']>('ghost');
+  readonly size = input<ScButtonVariants['size']>('icon-xs');
 
   protected readonly visible = computed(
     () =>
@@ -33,7 +36,8 @@ export class ScAutocompleteClear {
 
   protected readonly class = computed(() =>
     cn(
-      'text-muted-foreground hover:text-foreground focus-visible:ring-ring/50 flex size-6 shrink-0 cursor-pointer items-center justify-center rounded-md outline-none focus-visible:ring-3 [&_svg:not([class*=size-])]:size-3.5 [&_svg]:pointer-events-none',
+      buttonVariants({ variant: this.variant(), size: this.size() }),
+      'text-muted-foreground',
       this.classInput(),
     ),
   );

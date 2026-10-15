@@ -80,20 +80,11 @@ import {
         <div scPdfViewerToolbar aria-label="Order form" class="py-1.5">
           <span class="text-sm font-medium">Order form</span>
           <div scPdfViewerSpacer></div>
-          <button
-            scButton
-            variant="ghost"
-            size="icon"
-            scPdfViewerPrint
-            [scTooltipTrigger]="'Print'"
-          >
+          <button scPdfViewerPrint [scTooltipTrigger]="'Print'">
             <svg siPrinterIcon></svg>
             <span class="sr-only">Print</span>
           </button>
           <button
-            scButton
-            variant="ghost"
-            size="icon"
             scPdfViewerDownload
             [scTooltipTrigger]="'Download with your answers'"
           >

@@ -474,9 +474,6 @@ const INK_COLORS = [
             <span class="sr-only">Sidebar</span>
           </button>
           <button
-            scButton
-            variant="ghost"
-            size="icon"
             scPdfViewerFindToggle
             [scTooltipTrigger]="'Find in document'"
             tooltipPosition="bottom"
@@ -489,9 +486,6 @@ const INK_COLORS = [
 
           <div scPdfViewerNav aria-label="Page navigation">
             <button
-              scButton
-              variant="ghost"
-              size="icon"
               scPdfViewerBack
               [scTooltipTrigger]="'Back'"
               tooltipPosition="bottom"
@@ -500,9 +494,6 @@ const INK_COLORS = [
               <span class="sr-only">Back</span>
             </button>
             <button
-              scButton
-              variant="ghost"
-              size="icon"
               scPdfViewerForward
               [scTooltipTrigger]="'Forward'"
               tooltipPosition="bottom"
@@ -511,9 +502,6 @@ const INK_COLORS = [
               <span class="sr-only">Forward</span>
             </button>
             <button
-              scButton
-              variant="ghost"
-              size="icon"
               scPdfViewerPrevPage
               [scTooltipTrigger]="'Previous page'"
               tooltipPosition="bottom"
@@ -522,9 +510,6 @@ const INK_COLORS = [
               <span class="sr-only">Previous page</span>
             </button>
             <button
-              scButton
-              variant="ghost"
-              size="icon"
               scPdfViewerNextPage
               [scTooltipTrigger]="'Next page'"
               tooltipPosition="bottom"
@@ -549,9 +534,6 @@ const INK_COLORS = [
 
           <div scPdfViewerZoom aria-label="Zoom controls">
             <button
-              scButton
-              variant="ghost"
-              size="icon"
               scPdfViewerZoomOut
               [scTooltipTrigger]="'Zoom out'"
               tooltipPosition="bottom"
@@ -560,9 +542,6 @@ const INK_COLORS = [
               <span class="sr-only">Zoom out</span>
             </button>
             <button
-              scButton
-              variant="ghost"
-              size="icon"
               scPdfViewerZoomIn
               [scTooltipTrigger]="'Zoom in'"
               tooltipPosition="bottom"
@@ -935,7 +914,6 @@ const INK_COLORS = [
                   </p>
                 }
                 <button
-                  scButton
                   scPdfViewerSignatureNew
                   class="w-full"
                   (click)="signaturesOpen.set(false)"
@@ -949,9 +927,6 @@ const INK_COLORS = [
           <div scSeparator orientation="vertical"></div>
 
           <button
-            scButton
-            variant="ghost"
-            size="icon"
             scPdfViewerPrint
             [scTooltipTrigger]="'Print'"
             tooltipPosition="bottom"
@@ -960,9 +935,6 @@ const INK_COLORS = [
             <span class="sr-only">Print</span>
           </button>
           <button
-            scButton
-            variant="ghost"
-            size="icon"
             scPdfViewerDownload
             [scTooltipTrigger]="'Download'"
             tooltipPosition="bottom"
@@ -1016,22 +988,13 @@ const INK_COLORS = [
               class="h-8 w-56"
             />
             <button
-              scButton
-              variant="ghost"
-              size="icon-sm"
               scPdfViewerFindPrevious
               [scTooltipTrigger]="'Previous match'"
             >
               <svg siChevronUpIcon></svg>
               <span class="sr-only">Previous match</span>
             </button>
-            <button
-              scButton
-              variant="ghost"
-              size="icon-sm"
-              scPdfViewerFindNext
-              [scTooltipTrigger]="'Next match'"
-            >
+            <button scPdfViewerFindNext [scTooltipTrigger]="'Next match'">
               <svg siChevronDownIcon></svg>
               <span class="sr-only">Next match</span>
             </button>
@@ -1163,9 +1126,6 @@ const INK_COLORS = [
                       class="bg-background sticky top-0 z-10 flex flex-wrap items-center gap-0.5 border-b px-2 py-1"
                     >
                       <button
-                        scButton
-                        variant="ghost"
-                        size="icon-sm"
                         scPdfViewerInsertPages
                         [scTooltipTrigger]="'Insert a file after this page'"
                         (insertFailed)="insertFailed.set($event.name)"
@@ -1174,9 +1134,6 @@ const INK_COLORS = [
                         <span class="sr-only">Insert file</span>
                       </button>
                       <button
-                        scButton
-                        variant="ghost"
-                        size="icon-sm"
                         scPdfViewerPastePages
                         [scTooltipTrigger]="'Paste after this page'"
                       >
@@ -1186,9 +1143,6 @@ const INK_COLORS = [
                       @if (viewer.pageSelection().length) {
                         <div scSeparator orientation="vertical"></div>
                         <button
-                          scButton
-                          variant="ghost"
-                          size="icon-sm"
                           scPdfViewerMovePagesEarlier
                           [scTooltipTrigger]="'Move earlier'"
                         >
@@ -1196,9 +1150,6 @@ const INK_COLORS = [
                           <span class="sr-only">Move earlier</span>
                         </button>
                         <button
-                          scButton
-                          variant="ghost"
-                          size="icon-sm"
                           scPdfViewerMovePagesLater
                           [scTooltipTrigger]="'Move later'"
                         >
@@ -1206,29 +1157,17 @@ const INK_COLORS = [
                           <span class="sr-only">Move later</span>
                         </button>
                         <button
-                          scButton
-                          variant="ghost"
-                          size="icon-sm"
                           scPdfViewerCopyPages
                           [scTooltipTrigger]="'Copy'"
                         >
                           <svg siCopyIcon></svg>
                           <span class="sr-only">Copy</span>
                         </button>
-                        <button
-                          scButton
-                          variant="ghost"
-                          size="icon-sm"
-                          scPdfViewerCutPages
-                          [scTooltipTrigger]="'Cut'"
-                        >
+                        <button scPdfViewerCutPages [scTooltipTrigger]="'Cut'">
                           <svg siScissorsIcon></svg>
                           <span class="sr-only">Cut</span>
                         </button>
                         <button
-                          scButton
-                          variant="ghost"
-                          size="icon-sm"
                           scPdfViewerDeletePages
                           [scTooltipTrigger]="'Delete'"
                         >
@@ -1236,9 +1175,6 @@ const INK_COLORS = [
                           <span class="sr-only">Delete</span>
                         </button>
                         <button
-                          scButton
-                          variant="ghost"
-                          size="icon-sm"
                           scPdfViewerExportPages
                           [scTooltipTrigger]="'Save selected pages as…'"
                         >
@@ -1304,9 +1240,6 @@ const INK_COLORS = [
                     } @else {
                       <div class="flex gap-1 border-b px-2 py-1">
                         <button
-                          scButton
-                          variant="ghost"
-                          size="icon-sm"
                           scPdfViewerOutlineExpandAll
                           [scTooltipTrigger]="'Expand all'"
                         >
@@ -1314,9 +1247,6 @@ const INK_COLORS = [
                           <span class="sr-only">Expand all</span>
                         </button>
                         <button
-                          scButton
-                          variant="ghost"
-                          size="icon-sm"
                           scPdfViewerOutlineCollapseAll
                           [scTooltipTrigger]="'Collapse all'"
                         >
@@ -1324,9 +1254,6 @@ const INK_COLORS = [
                           <span class="sr-only">Collapse all</span>
                         </button>
                         <button
-                          scButton
-                          variant="ghost"
-                          size="icon-sm"
                           scPdfViewerOutlineFindCurrent
                           [scTooltipTrigger]="'Find current outline item'"
                         >
@@ -1417,14 +1344,7 @@ const INK_COLORS = [
                           Comments ({{ viewer.comments().length }})
                         </h3>
                         @if (!viewer.pendingComment()) {
-                          <button
-                            scButton
-                            size="sm"
-                            variant="outline"
-                            scPdfViewerCommentAdd
-                          >
-                            Add
-                          </button>
+                          <button scPdfViewerCommentAdd>Add</button>
                         }
                       </div>
                       @if (viewer.editorMode() === 'comment') {
@@ -1451,13 +1371,7 @@ const INK_COLORS = [
                             "
                           ></textarea>
                           <div class="flex justify-end gap-2">
-                            <button
-                              scButton
-                              size="sm"
-                              variant="ghost"
-                              type="button"
-                              scPdfViewerCommentCancel
-                            >
+                            <button type="button" scPdfViewerCommentCancel>
                               Cancel
                             </button>
                             <button
@@ -1615,7 +1529,7 @@ const INK_COLORS = [
                 </div>
               </div>
               <div scEmptyBody>
-                <button scButton scPdfViewerRetry>Try again</button>
+                <button scPdfViewerRetry>Try again</button>
               </div>
             </div>
             <div scEmpty scPdfViewerEmpty>
@@ -1746,12 +1660,8 @@ const INK_COLORS = [
                   }
                 }
               </span>
-              <button scButton size="sm" variant="ghost" scPdfViewerUndo>
-                Undo
-              </button>
-              <button scButton size="sm" variant="ghost" scPdfViewerUndoDismiss>
-                Dismiss
-              </button>
+              <button scPdfViewerUndo>Undo</button>
+              <button scPdfViewerUndoDismiss>Dismiss</button>
             }
           </div>
         </div>
@@ -2011,14 +1921,12 @@ const INK_COLORS = [
               </label>
 
               <div scDialogFooter class="sm:justify-between">
-                <button scButton variant="ghost" scPdfViewerSignatureClear>
-                  Clear
-                </button>
+                <button scPdfViewerSignatureClear>Clear</button>
                 <div class="flex gap-2">
                   <button scButton scDialogClose variant="outline">
                     Cancel
                   </button>
-                  <button scButton scPdfViewerSignatureAdd>Add</button>
+                  <button scPdfViewerSignatureAdd>Add</button>
                 </div>
               </div>
             </div>

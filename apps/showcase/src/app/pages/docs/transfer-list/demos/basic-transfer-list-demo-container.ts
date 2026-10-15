@@ -19,7 +19,6 @@ import { BasicTransferListDemo } from './basic-transfer-list-demo';
 })
 export class BasicTransferListDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScButton } from '@semantic-components/ui';
 import {
   ScTransferList,
   ScTransferListActions,
@@ -61,7 +60,6 @@ import {
     ScTransferListMoveAllToTarget,
     ScTransferListMoveToSource,
     ScTransferListMoveToTarget,
-    ScButton,
     SiChevronLeftIcon,
     SiChevronRightIcon,
     SiChevronsLeftIcon,
@@ -104,39 +102,19 @@ import {
         </div>
 
         <div scTransferListActions>
-          <button
-            scButton
-            variant="outline"
-            size="icon"
-            scTransferListMoveToTarget
-          >
+          <button scTransferListMoveToTarget>
             <svg siChevronRightIcon class="rtl:rotate-180"></svg>
             <span class="sr-only">Move selected to right</span>
           </button>
-          <button
-            scButton
-            variant="outline"
-            size="icon"
-            scTransferListMoveToSource
-          >
+          <button scTransferListMoveToSource>
             <svg siChevronLeftIcon class="rtl:rotate-180"></svg>
             <span class="sr-only">Move selected to left</span>
           </button>
-          <button
-            scButton
-            variant="outline"
-            size="icon"
-            scTransferListMoveAllToTarget
-          >
+          <button scTransferListMoveAllToTarget>
             <svg siChevronsRightIcon class="rtl:rotate-180"></svg>
             <span class="sr-only">Move all to right</span>
           </button>
-          <button
-            scButton
-            variant="outline"
-            size="icon"
-            scTransferListMoveAllToSource
-          >
+          <button scTransferListMoveAllToSource>
             <svg siChevronsLeftIcon class="rtl:rotate-180"></svg>
             <span class="sr-only">Move all to left</span>
           </button>

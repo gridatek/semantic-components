@@ -38,6 +38,7 @@ You are an expert in TypeScript, Angular, and scalable web application developme
   - Import `cn` from `@semantic-components/ui`.
   - Simple demo components can use static `host: { class: 'block' }` instead.
 
+- A part on a `button` styles itself: `buttonVariants()` (or `toggleVariants()`), `variant` and `size` inputs whose defaults suit its place, plus only the classes that are its own (position, visibility). No class list that copies a button look, and consumers add no `scButton`. Model: `pagination-last.ts`. Exceptions, which only add behaviour: triggers and closes that go on any button (`scDialogTrigger`, `scDrawerClose`, `scThemeModeToggle`…), controls over media (the lightbox's), and items in lists or grids. See [docs/button-parts-styling.md](../docs/button-parts-styling.md)
 - Keep components small and focused on a single responsibility
 - Use `input()` and `output()` functions instead of decorators
 - Use `computed()` for derived state

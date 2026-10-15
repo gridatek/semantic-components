@@ -10,8 +10,8 @@ A QR code drawn as SVG, encoded with [`uqr`](https://github.com/unjs/uqr) (a pee
 
 ```html
 <svg scQrCode #qr="scQrCode" [value]="url()" aria-label="QR code for the event page"></svg>
-<button scButton scQrCodeDownload [for]="qr" filename="event">PNG</button>
-<button scButton scQrCodeDownload [for]="qr" filename="event" format="svg">SVG</button>
+<button scQrCodeDownload [for]="qr" filename="event">PNG</button>
+<button scQrCodeDownload [for]="qr" filename="event" format="svg">SVG</button>
 ```
 
 ## Parts
@@ -39,13 +39,15 @@ Signals: `valid()` (there's a code to show), `error()` (why the value can't be e
 
 Downloads the code, drawn from its modules — sharp at any size, in the colors shown on screen (white behind it when it has no background). Disabled while there's no code.
 
-| Input      | Type             | Default    | Description                                              |
-| ---------- | ---------------- | ---------- | -------------------------------------------------------- |
-| `for`      | `ScQrCode`       | required   | The code to download (`#qr="scQrCode"`)                  |
-| `filename` | `string`         | `'qrcode'` | File name, without extension                             |
-| `format`   | `'png' \| 'svg'` | `'png'`    | File format                                              |
-| `size`     | `number`         | `1024`     | Width in pixels, rounded down to whole pixels per module |
-| `class`    | `string`         | `''`       | Additional CSS classes                                   |
+| Input       | Type                          | Default     | Description                                              |
+| ----------- | ----------------------------- | ----------- | -------------------------------------------------------- |
+| `for`       | `ScQrCode`                    | required    | The code to download (`#qr="scQrCode"`)                  |
+| `filename`  | `string`                      | `'qrcode'`  | File name, without extension                             |
+| `format`    | `'png' \| 'svg'`              | `'png'`     | File format                                              |
+| `imageSize` | `number`                      | `1024`      | Width in pixels, rounded down to whole pixels per module |
+| `variant`   | `ScButtonVariants['variant']` | `'outline'` | The button's look, as `scButton`'s                       |
+| `size`      | `ScButtonVariants['size']`    | `'default'` | The button's size, as `scButton`'s                       |
+| `class`     | `string`                      | `''`        | Additional CSS classes                                   |
 
 ## Accessibility
 

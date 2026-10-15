@@ -1,14 +1,20 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { ScButton, bindInput, cn } from '@semantic-components/ui';
+import {
+  type ScButtonVariants,
+  buttonVariants,
+  cn,
+} from '@semantic-components/ui';
 import { SC_PDF_VIEWER } from './pdf-viewer';
 
 /**
  * Cuts the selected pages: copies, then deletes them — paste them elsewhere
- * to move them. Use on a `scButton`.
+ * to move them.
  */
 @Directive({
   selector: 'button[scPdfViewerCutPages]',
   host: {
+    type: 'button',
+    '[disabled]': 'disabled()',
     '[class]': 'class()',
     '(click)': 'pdfViewer.cutPages(pdfViewer.pageSelection())',
   },
@@ -16,16 +22,17 @@ import { SC_PDF_VIEWER } from './pdf-viewer';
 export class ScPdfViewerCutPages {
   protected readonly pdfViewer = inject(SC_PDF_VIEWER);
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly variant = input<ScButtonVariants['variant']>('ghost');
+  readonly size = input<ScButtonVariants['size']>('icon-sm');
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  protected readonly disabled = computed(
+    () => !this.pdfViewer.pageSelection().length || this.pdfViewer.organizing(),
+  );
 
-  constructor() {
-    bindInput(
-      inject(ScButton).disabled,
-      computed(
-        () =>
-          !this.pdfViewer.pageSelection().length || this.pdfViewer.organizing(),
-      ),
-    );
-  }
+  protected readonly class = computed(() =>
+    cn(
+      buttonVariants({ variant: this.variant(), size: this.size() }),
+      this.classInput(),
+    ),
+  );
 }

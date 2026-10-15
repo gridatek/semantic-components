@@ -43,7 +43,7 @@ import {
   ScEditorSearchResults,
   withSearch,
 } from '@semantic-components/editor/search';
-import { ScButton, ScInput } from '@semantic-components/ui';
+import { ScInput } from '@semantic-components/ui';
 import {
   SiBoldIcon,
   SiChevronDownIcon,
@@ -62,7 +62,6 @@ const DRAFT = \`<p>The colour of the sky changes with the hour: the colour of da
   providers: [provideEditor(withSearch())],
   imports: [
     FormField,
-    ScButton,
     ScEditor,
     ScEditorBold,
     ScEditorContent,
@@ -137,16 +136,11 @@ const DRAFT = \`<p>The colour of the sky changes with the hour: the colour of da
                 No results
               }
             </span>
-            <button
-              scButton
-              variant="ghost"
-              size="icon-sm"
-              scEditorSearchPrevious
-            >
+            <button scEditorSearchPrevious>
               <svg siChevronUpIcon></svg>
               <span class="sr-only">Previous match</span>
             </button>
-            <button scButton variant="ghost" size="icon-sm" scEditorSearchNext>
+            <button scEditorSearchNext>
               <svg siChevronDownIcon></svg>
               <span class="sr-only">Next match</span>
             </button>
@@ -157,19 +151,9 @@ const DRAFT = \`<p>The colour of the sky changes with the hour: the colour of da
               placeholder="Replace with…"
               class="h-8 w-40"
             />
-            <button scButton variant="outline" size="sm" scEditorReplace>
-              Replace
-            </button>
-            <button scButton variant="outline" size="sm" scEditorReplaceAll>
-              Replace all
-            </button>
-            <button
-              scButton
-              variant="ghost"
-              size="icon-sm"
-              scEditorSearchClose
-              class="ms-auto"
-            >
+            <button scEditorReplace>Replace</button>
+            <button scEditorReplaceAll>Replace all</button>
+            <button scEditorSearchClose class="ms-auto">
               <svg siXIcon></svg>
               <span class="sr-only">Close search</span>
             </button>

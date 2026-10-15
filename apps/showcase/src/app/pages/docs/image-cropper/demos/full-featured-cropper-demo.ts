@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScButton, ScSlider } from '@semantic-components/ui';
+import { ScSlider } from '@semantic-components/ui';
 import {
   ScImageCropper,
   ScImageCropperAspectRatio,
@@ -56,7 +56,6 @@ import {
     ScSlider,
     ScImageCropperReset,
     ScImageCropperFileInput,
-    ScButton,
     SiFlipHorizontal2Icon,
     SiFlipVertical2Icon,
     SiRotateCcwIcon,
@@ -99,29 +98,19 @@ import {
 
         <!-- Rotate & Flip -->
         <div class="flex items-center gap-1">
-          <button
-            scButton
-            scImageCropperRotateLeft
-            variant="outline"
-            size="icon"
-          >
+          <button scImageCropperRotateLeft>
             <svg siRotateCcwIcon class="size-4"></svg>
             <span class="sr-only">Rotate left</span>
           </button>
-          <button
-            scButton
-            scImageCropperRotateRight
-            variant="outline"
-            size="icon"
-          >
+          <button scImageCropperRotateRight>
             <svg siRotateCwIcon class="size-4"></svg>
             <span class="sr-only">Rotate right</span>
           </button>
-          <button scButton scImageCropperFlipH variant="outline" size="icon">
+          <button scImageCropperFlipH>
             <svg siFlipHorizontal2Icon class="size-4"></svg>
             <span class="sr-only">Flip horizontal</span>
           </button>
-          <button scButton scImageCropperFlipV variant="outline" size="icon">
+          <button scImageCropperFlipV>
             <svg siFlipVertical2Icon class="size-4"></svg>
             <span class="sr-only">Flip vertical</span>
           </button>
@@ -129,7 +118,7 @@ import {
 
         <!-- Zoom -->
         <div class="flex items-center gap-2">
-          <button scButton scImageCropperZoomOut variant="outline" size="icon">
+          <button scImageCropperZoomOut>
             <svg siZoomOutIcon class="size-4"></svg>
             <span class="sr-only">Zoom out</span>
           </button>
@@ -147,7 +136,7 @@ import {
             >
           </div>
 
-          <button scButton scImageCropperZoomIn variant="outline" size="icon">
+          <button scImageCropperZoomIn>
             <svg siZoomInIcon class="size-4"></svg>
             <span class="sr-only">Zoom in</span>
           </button>

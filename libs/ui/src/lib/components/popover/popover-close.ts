@@ -1,10 +1,12 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '../../utils';
+import { type ScButtonVariants, buttonVariants } from '../button/button';
 import { ScPopoverProvider } from './popover-provider';
 
 @Directive({
   selector: 'button[scPopoverClose]',
   host: {
+    type: 'button',
     '[class]': 'class()',
     '(click)': 'closePopover()',
   },
@@ -12,12 +14,13 @@ import { ScPopoverProvider } from './popover-provider';
 export class ScPopoverClose {
   private readonly popover = inject(ScPopoverProvider);
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly variant = input<ScButtonVariants['variant']>('ghost');
+  readonly size = input<ScButtonVariants['size']>('icon-xs');
 
   protected readonly class = computed(() =>
     cn(
-      'absolute end-2 top-2 rounded-sm opacity-70 ring-offset-background transition-opacity',
-      'hover:opacity-100',
-      'focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2',
+      buttonVariants({ variant: this.variant(), size: this.size() }),
+      'absolute end-2 top-2',
       this.classInput(),
     ),
   );

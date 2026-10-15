@@ -33,8 +33,8 @@ A multi-step wizard, built from directives on [`@angular/cdk/stepper`](https://m
   <div scStepperPanel [step]="0">Account content</div>
   <div scStepperPanel [step]="1">Profile content</div>
 
-  <button scButton scStepperPrevious variant="outline">Previous</button>
-  <button scButton scStepperNext>Next</button>
+  <button scStepperPrevious>Previous</button>
+  <button scStepperNext>Next</button>
 </div>
 ```
 
@@ -72,11 +72,11 @@ Give each step a `stepControl` (a Signal Forms field). In `linear` mode a step c
     </div>
     …
 
-    <button scButton scStepperPrevious variant="outline">Back</button>
+    <button scStepperPrevious>Back</button>
     @if (stepper.isLastStep()) {
     <button scButton type="button" (click)="submit()">Create account</button>
     } @else {
-    <button scButton scStepperNext>Next</button>
+    <button scStepperNext>Next</button>
     }
   </div>
 </form>
@@ -151,7 +151,7 @@ Text for a step.
 
 ### ScStepperPrevious / ScStepperNext — `button[scStepperPrevious]` / `button[scStepperNext]`
 
-Previous is disabled on the first step. Next respects linear mode and validation. Use with `scButton`.
+Previous is disabled on the first step. Next respects linear mode and validation. Each styles itself (Next `default`, Previous `outline`; change it with `variant` and `size`).
 
 ## Accessibility
 

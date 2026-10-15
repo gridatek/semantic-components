@@ -41,19 +41,19 @@ import type { ScTransferListChange, ScTransferListItemData } from '@semantic-com
   </div>
 
   <div scTransferListActions>
-    <button scButton variant="outline" size="icon" scTransferListMoveToTarget>
+    <button scTransferListMoveToTarget>
       <svg siChevronRightIcon class="rtl:rotate-180"></svg>
       <span class="sr-only">Move selected to right</span>
     </button>
-    <button scButton variant="outline" size="icon" scTransferListMoveToSource>
+    <button scTransferListMoveToSource>
       <svg siChevronLeftIcon class="rtl:rotate-180"></svg>
       <span class="sr-only">Move selected to left</span>
     </button>
-    <button scButton variant="outline" size="icon" scTransferListMoveAllToTarget>
+    <button scTransferListMoveAllToTarget>
       <svg siChevronsRightIcon class="rtl:rotate-180"></svg>
       <span class="sr-only">Move all to right</span>
     </button>
-    <button scButton variant="outline" size="icon" scTransferListMoveAllToSource>
+    <button scTransferListMoveAllToSource>
       <svg siChevronsLeftIcon class="rtl:rotate-180"></svg>
       <span class="sr-only">Move all to left</span>
     </button>
@@ -188,7 +188,7 @@ Component on `label`. Renders a checkbox and projects content. Handles selection
 
 ### ScTransferListActions
 
-The column for the move buttons, between the lists. The buttons are yours (a `scButton`, your icons and names), with a part each:
+The column for the move buttons, between the lists. The buttons are yours (your icons and names), with a part each; each styles itself (`outline`, `icon`; change it with `variant` and `size`, as on `scButton`):
 
 | Part                            | Selector                                | Moves                                                          |
 | ------------------------------- | --------------------------------------- | -------------------------------------------------------------- |

@@ -1,12 +1,17 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import {
+  type ScButtonVariants,
+  buttonVariants,
+  cn,
+} from '@semantic-components/ui';
 import { SC_PDF_VIEWER } from './pdf-viewer';
 import type { ScPdfEditorAnnotation } from './pdf-viewer-types';
 
-/** Deletes an annotation (undoable from the undo bar). Use on a `scButton`. */
+/** Deletes an annotation (undoable from the undo bar). */
 @Directive({
   selector: 'button[scPdfViewerAnnotationDelete]',
   host: {
+    type: 'button',
     '[class]': 'class()',
     '(click)': 'pdfViewer.removeEditorAnnotation(annotation().id)',
   },
@@ -18,6 +23,13 @@ export class ScPdfViewerAnnotationDelete {
     alias: 'scPdfViewerAnnotationDelete',
   });
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly variant = input<ScButtonVariants['variant']>('outline');
+  readonly size = input<ScButtonVariants['size']>('xs');
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  protected readonly class = computed(() =>
+    cn(
+      buttonVariants({ variant: this.variant(), size: this.size() }),
+      this.classInput(),
+    ),
+  );
 }

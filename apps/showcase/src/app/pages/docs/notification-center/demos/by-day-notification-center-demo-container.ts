@@ -19,7 +19,6 @@ import { ByDayNotificationCenterDemo } from './by-day-notification-center-demo';
 })
 export class ByDayNotificationCenterDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScButton } from '@semantic-components/ui';
 import {
   type ScNotification,
   ScNotificationCenter,
@@ -69,7 +68,6 @@ const hoursAgo = (hours: number) => new Date(Date.now() - hours * 3600000);
 @Component({
   selector: 'app-by-day-notification-center-demo',
   imports: [
-    ScButton,
     ScNotificationCenter,
     ScNotificationCenterHeader,
     ScNotificationCenterTitle,
@@ -111,21 +109,11 @@ const hoursAgo = (hours: number) => new Date(Date.now() - hours * 3600000);
           Activity
         </h2>
         <div class="flex items-center gap-1">
-          <button
-            scButton
-            variant="ghost"
-            size="icon-sm"
-            scNotificationMarkAllRead
-          >
+          <button size="icon-sm" scNotificationMarkAllRead>
             <svg siCheckCheckIcon></svg>
             <span class="sr-only">Mark all as read</span>
           </button>
-          <button
-            scButton
-            variant="ghost"
-            size="icon-sm"
-            scNotificationClearAll
-          >
+          <button scNotificationClearAll>
             <svg siTrash2Icon></svg>
             <span class="sr-only">Clear all</span>
           </button>
@@ -179,12 +167,7 @@ const hoursAgo = (hours: number) => new Date(Date.now() - hours * 3600000);
                         </p>
                       }
                     </div>
-                    <button
-                      scButton
-                      variant="ghost"
-                      size="icon-xs"
-                      scNotificationDismiss
-                    >
+                    <button scNotificationDismiss>
                       <svg siXIcon></svg>
                       <span class="sr-only">{{
                         'Dismiss ' + notice.title

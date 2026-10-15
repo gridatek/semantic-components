@@ -1,14 +1,19 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { ScButton, bindInput, cn } from '@semantic-components/ui';
+import {
+  type ScButtonVariants,
+  buttonVariants,
+  cn,
+} from '@semantic-components/ui';
 import { SC_PDF_VIEWER } from './pdf-viewer';
 
 /**
- * Moves the selected pages one place later; they stay selected. Use on a
- * `scButton`.
+ * Moves the selected pages one place later; they stay selected.
  */
 @Directive({
   selector: 'button[scPdfViewerMovePagesLater]',
   host: {
+    type: 'button',
+    '[disabled]': 'disabled()',
     '[class]': 'class()',
     '(click)': 'pdfViewer.moveSelectedPages(1)',
   },
@@ -16,20 +21,20 @@ import { SC_PDF_VIEWER } from './pdf-viewer';
 export class ScPdfViewerMovePagesLater {
   protected readonly pdfViewer = inject(SC_PDF_VIEWER);
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly variant = input<ScButtonVariants['variant']>('ghost');
+  readonly size = input<ScButtonVariants['size']>('icon-sm');
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  protected readonly disabled = computed(
+    () =>
+      !this.pdfViewer.pageSelection().length ||
+      this.pdfViewer.pageSelection().includes(this.pdfViewer.totalPages()) ||
+      this.pdfViewer.organizing(),
+  );
 
-  constructor() {
-    bindInput(
-      inject(ScButton).disabled,
-      computed(
-        () =>
-          !this.pdfViewer.pageSelection().length ||
-          this.pdfViewer
-            .pageSelection()
-            .includes(this.pdfViewer.totalPages()) ||
-          this.pdfViewer.organizing(),
-      ),
-    );
-  }
+  protected readonly class = computed(() =>
+    cn(
+      buttonVariants({ variant: this.variant(), size: this.size() }),
+      this.classInput(),
+    ),
+  );
 }
