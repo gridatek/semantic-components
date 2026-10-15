@@ -28,7 +28,7 @@ import {
   imports: [ScOrgChart, ScOrgChartCard, ScOrgChartNode, ScOrgChartNodeDef],
   template: \`
     <div class="max-w-full overflow-auto rounded-lg border">
-      <div scOrgChart [collapsible]="false">
+      <div scOrgChart aria-label="Organization chart" [collapsible]="false">
         <sc-org-chart-node [node]="orgData()" />
 
         <ng-template scOrgChartNodeDef let-node let-hasChildren="hasChildren">

@@ -9,7 +9,7 @@ A component for selecting time values with support for 12/24 hour formats.
   <input scTimePickerInput scTimePickerHoursInput aria-label="Hours" />
   <span scTimePickerSeparator>:</span>
   <input scTimePickerInput scTimePickerMinutesInput aria-label="Minutes" />
-  <div scTimePickerPeriod>
+  <div scTimePickerPeriod aria-label="AM or PM">
     <button scTimePickerPeriodAM>AM</button>
     <button scTimePickerPeriodPM>PM</button>
   </div>
@@ -165,7 +165,7 @@ interface ScTimeValue {
   <input scTimePickerInput scTimePickerHoursInput aria-label="Hours" />
   <span scTimePickerSeparator>:</span>
   <input scTimePickerInput scTimePickerMinutesInput aria-label="Minutes" />
-  <div scTimePickerPeriod>
+  <div scTimePickerPeriod aria-label="AM or PM">
     <button scTimePickerPeriodAM>AM</button>
     <button scTimePickerPeriodPM>PM</button>
   </div>

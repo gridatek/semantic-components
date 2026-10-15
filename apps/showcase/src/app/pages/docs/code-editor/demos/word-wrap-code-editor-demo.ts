@@ -32,6 +32,7 @@ import {
       </div>
       <div
         scCodeEditorContent
+        ariaLabel="Code editor"
         [(value)]="longLineCode"
         language="markdown"
         filename="README.md"

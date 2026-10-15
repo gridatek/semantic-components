@@ -20,7 +20,12 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   ],
   template: `
     <div class="max-w-full overflow-auto rounded-lg border">
-      <div scOrgChart [collapsible]="true" (nodeExpand)="onNodeExpand($event)">
+      <div
+        scOrgChart
+        aria-label="Organization chart"
+        [collapsible]="true"
+        (nodeExpand)="onNodeExpand($event)"
+      >
         <sc-org-chart-node [node]="orgData()" />
 
         <ng-template

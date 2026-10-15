@@ -51,7 +51,7 @@ import {
         ></button>
       </div>
       <div
-        scCodeEditorContent
+        scCodeEditorContent ariaLabel="Code editor"
         [value]="readonlyCode"
         language="typescript"
         [readonly]="true"

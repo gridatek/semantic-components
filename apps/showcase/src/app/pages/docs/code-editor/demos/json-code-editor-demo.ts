@@ -32,6 +32,7 @@ import {
       </div>
       <div
         scCodeEditorContent
+        ariaLabel="Code editor"
         [(value)]="jsonCode"
         language="json"
         filename="config.json"

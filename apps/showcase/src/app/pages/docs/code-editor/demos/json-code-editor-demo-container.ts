@@ -51,7 +51,7 @@ import {
         ></button>
       </div>
       <div
-        scCodeEditorContent
+        scCodeEditorContent ariaLabel="Code editor"
         [(value)]="jsonCode"
         language="json"
         filename="config.json"

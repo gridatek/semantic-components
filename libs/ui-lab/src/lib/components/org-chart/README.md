@@ -14,7 +14,7 @@ import type { ScOrgChartNodeData, ScOrgChartNodeExpandEvent } from '@semantic-co
 ### Basic Usage
 
 ```html
-<div scOrgChart [collapsible]="true" (nodeExpand)="onNodeExpand($event)">
+<div scOrgChart aria-label="Organization chart" [collapsible]="true" (nodeExpand)="onNodeExpand($event)">
   <sc-org-chart-node [node]="orgData()" />
 
   <ng-template scOrgChartNodeDef let-node let-expanded="expanded" let-hasChildren="hasChildren" let-toggle="toggle">

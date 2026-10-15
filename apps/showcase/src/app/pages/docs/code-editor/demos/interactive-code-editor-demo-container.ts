@@ -99,7 +99,7 @@ import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui';
         ></button>
       </div>
       <div
-        scCodeEditorContent
+        scCodeEditorContent ariaLabel="Code editor"
         [(value)]="interactiveCode"
         [language]="selectedLanguage()"
         [showLineNumbers]="showLineNumbers()"

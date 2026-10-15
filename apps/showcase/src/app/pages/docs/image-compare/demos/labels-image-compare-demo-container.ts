@@ -41,7 +41,7 @@ import {
   template: \`
     @let img = 'https://picsum.photos/seed/compare-labels/800/400';
     <div scImageCompare class="aspect-2/1 w-full max-w-2xl">
-      <div scImageCompareArea>
+      <div scImageCompareArea aria-label="Image comparison slider">
         <img scImageCompareBefore [src]="img + '?blur=5'" alt="Blurred" />
         <img scImageCompareAfter [src]="img" alt="Sharp" />
         <div scImageCompareSlider></div>

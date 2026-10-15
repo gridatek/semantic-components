@@ -137,7 +137,7 @@ The other parts with built-in controls take their texts too: `scVideoPlayerVolum
 #### Minimal Player
 
 ```html
-<div scVideoPlayer [src]="video">
+<div scVideoPlayer aria-label="Video player" [src]="video">
   <div scVideoPlayerControls>
     <button scVideoPlayerPlayPause [attr.aria-label]="player.isPlaying() ? 'Pause' : 'Play'">Play</button>
   </div>

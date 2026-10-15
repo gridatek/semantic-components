@@ -36,7 +36,7 @@ import {
     >
       <div class="text-center">
         <p class="text-muted-foreground mb-2 text-xs">Small</p>
-        <nav scDock ariaLabel="Small dock" size="sm">
+        <nav scDock aria-label="Small dock" size="sm">
           <div scDockItems>
             @for (item of items; track item.id) {
               <button scDockItem [item]="item">
@@ -52,7 +52,7 @@ import {
       </div>
       <div class="text-center">
         <p class="text-muted-foreground mb-2 text-xs">Medium (Default)</p>
-        <nav scDock ariaLabel="Medium dock" size="md">
+        <nav scDock aria-label="Medium dock" size="md">
           <div scDockItems>
             @for (item of items; track item.id) {
               <button scDockItem [item]="item">
@@ -68,7 +68,7 @@ import {
       </div>
       <div class="text-center">
         <p class="text-muted-foreground mb-2 text-xs">Large</p>
-        <nav scDock ariaLabel="Large dock" size="lg">
+        <nav scDock aria-label="Large dock" size="lg">
           <div scDockItems>
             @for (item of items; track item.id) {
               <button scDockItem [item]="item">

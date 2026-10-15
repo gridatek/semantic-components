@@ -117,7 +117,7 @@ Copy button that shows a checkmark on successful copy for 2 seconds. Name it, wi
 
 ```html
 <div scCodeEditor>
-  <div scCodeEditorContent [(value)]="code" language="typescript"></div>
+  <div scCodeEditorContent ariaLabel="Code editor" [(value)]="code" language="typescript"></div>
 </div>
 ```
 
@@ -133,7 +133,7 @@ Copy button that shows a checkmark on successful copy for 2 seconds. Name it, wi
     <button scCodeEditorCopyButton #copy="scCodeEditorCopyButton" [attr.aria-label]="copy.copied() ? 'Copied' : 'Copy code'" [code]="code"></button>
   </div>
 
-  <div scCodeEditorContent [(value)]="code" [language]="language" [filename]="filename" [showLineNumbers]="true" (cursorChange)="onCursorChange($event)"></div>
+  <div scCodeEditorContent ariaLabel="Code editor" [(value)]="code" [language]="language" [filename]="filename" [showLineNumbers]="true" (cursorChange)="onCursorChange($event)"></div>
 
   <div scCodeEditorFooter>
     <div class="flex items-center gap-3">
@@ -151,7 +151,7 @@ Copy button that shows a checkmark on successful copy for 2 seconds. Name it, wi
 
 ```html
 <div scCodeEditor>
-  <div scCodeEditorContent [(value)]="code" language="json" [showLineNumbers]="false"></div>
+  <div scCodeEditorContent ariaLabel="Code editor" [(value)]="code" language="json" [showLineNumbers]="false"></div>
 </div>
 ```
 
@@ -164,7 +164,7 @@ Copy button that shows a checkmark on successful copy for 2 seconds. Name it, wi
     <button scCodeEditorCopyButton #copy="scCodeEditorCopyButton" [attr.aria-label]="copy.copied() ? 'Copied' : 'Copy code'" [code]="code"></button>
   </div>
 
-  <div scCodeEditorContent [(value)]="code" [autoDetectLanguage]="true" (languageDetected)="detectedLanguage = $event"></div>
+  <div scCodeEditorContent ariaLabel="Code editor" [(value)]="code" [autoDetectLanguage]="true" (languageDetected)="detectedLanguage = $event"></div>
 </div>
 ```
 
@@ -172,7 +172,7 @@ Copy button that shows a checkmark on successful copy for 2 seconds. Name it, wi
 
 ```html
 <div scCodeEditor>
-  <div scCodeEditorContent [(value)]="code" language="typescript" [readonly]="true"></div>
+  <div scCodeEditorContent ariaLabel="Code editor" [(value)]="code" language="typescript" [readonly]="true"></div>
 </div>
 ```
 
@@ -180,7 +180,7 @@ Copy button that shows a checkmark on successful copy for 2 seconds. Name it, wi
 
 ```html
 <div scCodeEditor>
-  <div scCodeEditorContent [(value)]="longCode" language="markdown" [wordWrap]="true" class="max-h-[400px]"></div>
+  <div scCodeEditorContent ariaLabel="Code editor" [(value)]="longCode" language="markdown" [wordWrap]="true" class="max-h-[400px]"></div>
 </div>
 ```
 
@@ -188,7 +188,7 @@ Copy button that shows a checkmark on successful copy for 2 seconds. Name it, wi
 
 ```html
 <div scCodeEditor>
-  <div scCodeEditorContent [(value)]="code" language="python" [tabSize]="4" [insertSpaces]="true"></div>
+  <div scCodeEditorContent ariaLabel="Code editor" [(value)]="code" language="python" [tabSize]="4" [insertSpaces]="true"></div>
 </div>
 ```
 
@@ -207,7 +207,7 @@ export class MyComponent {
 
 ```html
 <div scCodeEditor>
-  <div scCodeEditorContent [(value)]="code" language="typescript" (cursorChange)="onCursorChange($event)"></div>
+  <div scCodeEditorContent ariaLabel="Code editor" [(value)]="code" language="typescript" (cursorChange)="onCursorChange($event)"></div>
 
   <div scCodeEditorFooter>
     <span>Ln {{ cursorPosition().line }}, Col {{ cursorPosition().column }}</span>
@@ -353,7 +353,7 @@ greet('World');`);
     <button scCodeEditorCopyButton #copy="scCodeEditorCopyButton" [attr.aria-label]="copy.copied() ? 'Copied' : 'Copy code'" [code]="code()"></button>
   </div>
 
-  <div scCodeEditorContent [(value)]="code" [language]="language()" [filename]="filename()" [showLineNumbers]="true" [tabSize]="2" [insertSpaces]="true" class="max-h-[600px] min-h-[300px]"></div>
+  <div scCodeEditorContent ariaLabel="Code editor" [(value)]="code" [language]="language()" [filename]="filename()" [showLineNumbers]="true" [tabSize]="2" [insertSpaces]="true" class="max-h-[600px] min-h-[300px]"></div>
 
   <div scCodeEditorFooter>
     <div class="flex items-center gap-3">

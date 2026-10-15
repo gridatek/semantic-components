@@ -36,7 +36,7 @@ import type { ScDockItemData, ScDockPosition, ScDockSize } from '@/ui/dock';
 ### Basic Usage
 
 ```html
-<nav scDock (itemClick)="onItemClick($event)">
+<nav scDock aria-label="Application dock" (itemClick)="onItemClick($event)">
   <div scDockItems>
     @for (item of items; track item.id) {
     <button scDockItem [item]="item"></button>
@@ -60,7 +60,7 @@ onItemClick(item: ScDockItemData): void {
 ### With Badges
 
 ```html
-<nav scDock>
+<nav scDock aria-label="Application dock">
   <div scDockItems>
     @for (item of items; track item.id) {
     <button scDockItem [item]="item">
@@ -83,7 +83,7 @@ items: ScDockItemData[] = [
 ### Without Magnification
 
 ```html
-<nav scDock [magnification]="false">
+<nav scDock aria-label="Application dock" [magnification]="false">
   <div scDockItems>
     @for (item of items; track item.id) {
     <button scDockItem [item]="item"></button>
@@ -95,7 +95,7 @@ items: ScDockItemData[] = [
 ### Custom Magnification Scale
 
 ```html
-<nav scDock [magnificationScale]="2">
+<nav scDock aria-label="Application dock" [magnificationScale]="2">
   <div scDockItems>
     @for (item of items; track item.id) {
     <button scDockItem [item]="item"></button>
@@ -107,7 +107,7 @@ items: ScDockItemData[] = [
 ### Size Variants
 
 ```html
-<nav scDock size="sm">
+<nav scDock aria-label="Application dock" size="sm">
   <div scDockItems>
     @for (item of items; track item.id) {
     <button scDockItem [item]="item"></button>

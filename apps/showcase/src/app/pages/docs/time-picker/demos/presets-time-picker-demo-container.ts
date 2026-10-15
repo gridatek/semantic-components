@@ -79,7 +79,7 @@ import {
           scTimePickerMinutesInput
           aria-label="Minutes"
         />
-        <div scTimePickerPeriod>
+        <div scTimePickerPeriod aria-label="AM or PM">
           <button scTimePickerPeriodAM>AM</button>
           <button scTimePickerPeriodPM>PM</button>
         </div>

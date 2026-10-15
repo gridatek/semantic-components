@@ -43,7 +43,7 @@ import {
   template: \`
     <div class="w-full max-w-2xl space-y-4">
       <div scImageCompare [(position)]="position" class="aspect-2/1 w-full">
-        <div scImageCompareArea>
+        <div scImageCompareArea aria-label="Image comparison slider">
           @let img = 'https://picsum.photos/seed/compare-controlled/800/400';
           <img scImageCompareBefore [src]="img + '?grayscale'" alt="Before" />
           <img scImageCompareAfter [src]="img" alt="After" />

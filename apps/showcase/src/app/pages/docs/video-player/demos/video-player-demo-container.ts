@@ -96,7 +96,10 @@ import {
 
         <div scVideoPlayerToolbar>
           <!-- Play/Pause -->
-          <button scVideoPlayerPlayPause>
+          <button
+            scVideoPlayerPlayPause
+            [attr.aria-label]="player.isPlaying() ? 'Pause' : 'Play'"
+          >
             @if (player.isPlaying()) {
               <svg siPauseIcon></svg>
             } @else {
@@ -108,7 +111,7 @@ import {
           <button
             scVideoPlayerSkip
             [seconds]="-10"
-            ariaLabel="Skip back 10 seconds"
+            aria-label="Skip back 10 seconds"
           >
             <svg siRotateCcwIcon></svg>
           </button>
@@ -117,7 +120,7 @@ import {
           <button
             scVideoPlayerSkip
             [seconds]="10"
-            ariaLabel="Skip forward 10 seconds"
+            aria-label="Skip forward 10 seconds"
           >
             <svg siRotateCwIcon></svg>
           </button>

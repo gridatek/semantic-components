@@ -51,7 +51,7 @@ import {
         ></button>
       </div>
       <div
-        scCodeEditorContent
+        scCodeEditorContent ariaLabel="Code editor"
         [(value)]="lightThemeCode"
         language="javascript"
         filename="light-example.js"

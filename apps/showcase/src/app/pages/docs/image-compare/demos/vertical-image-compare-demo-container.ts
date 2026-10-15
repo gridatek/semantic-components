@@ -44,7 +44,7 @@ import {
       [orientation]="'vertical'"
       class="aspect-2/3 w-full max-w-sm"
     >
-      <div scImageCompareArea>
+      <div scImageCompareArea aria-label="Image comparison slider">
         @let img = 'https://picsum.photos/seed/compare-vertical/400/600';
         <img scImageCompareBefore [src]="img + '?grayscale'" alt="Top" />
         <img scImageCompareAfter [src]="img" alt="Bottom" />

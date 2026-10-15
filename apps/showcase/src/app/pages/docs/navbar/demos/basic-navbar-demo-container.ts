@@ -103,7 +103,7 @@ import {
       </nav>
 
       <ng-template scNavbarMobilePortal>
-        <div scNavbarMobileMenu>
+        <div scNavbarMobileMenu aria-label="Mobile navigation">
           @for (link of links; track link) {
             <a scNavbarMobileLink href="#">{{ link }}</a>
           }

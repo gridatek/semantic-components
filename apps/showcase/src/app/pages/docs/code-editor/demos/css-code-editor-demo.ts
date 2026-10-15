@@ -32,6 +32,7 @@ import {
       </div>
       <div
         scCodeEditorContent
+        ariaLabel="Code editor"
         [(value)]="cssCode"
         language="css"
         filename="styles.css"

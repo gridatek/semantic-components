@@ -8,6 +8,7 @@ import { ScCodeEditor, ScCodeEditorContent } from '@semantic-components/code';
     <div scCodeEditor>
       <div
         scCodeEditorContent
+        ariaLabel="Code editor"
         [(value)]="minimalCode"
         language="javascript"
         class="max-h-[150px]"

@@ -32,6 +32,7 @@ import {
       </div>
       <div
         scCodeEditorContent
+        ariaLabel="Code editor"
         [value]="readonlyCode"
         language="typescript"
         [readonly]="true"

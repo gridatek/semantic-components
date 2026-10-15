@@ -46,7 +46,7 @@ import { ScTimePickerClock } from '@semantic-components/ui-lab';
           aria-label="Minutes"
           (focus)="clockMode.set('minutes')"
         />
-        <div scTimePickerPeriod>
+        <div scTimePickerPeriod aria-label="AM or PM">
           <button scTimePickerPeriodAM>AM</button>
           <button scTimePickerPeriodPM>PM</button>
         </div>

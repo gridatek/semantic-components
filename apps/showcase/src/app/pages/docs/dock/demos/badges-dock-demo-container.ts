@@ -37,7 +37,7 @@ import {
   imports: [NgComponentOutlet, ScDock, ScDockItems, ScDockItem, ScDockBadge],
   template: \`
     <div class="bg-muted/30 flex justify-center rounded-lg border p-8">
-      <nav scDock ariaLabel="Badges dock">
+      <nav scDock aria-label="Badges dock">
         <div scDockItems>
           @for (item of items; track item.id) {
             <button scDockItem [item]="item">

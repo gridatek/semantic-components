@@ -32,6 +32,7 @@ import {
       </div>
       <div
         scCodeEditorContent
+        ariaLabel="Code editor"
         [(value)]="lightThemeCode"
         language="javascript"
         filename="light-example.js"

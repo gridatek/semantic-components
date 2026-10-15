@@ -24,7 +24,7 @@ A composable date range picker built from directive primitives. Uses `ScPopoverP
     <ng-template scPopoverPortal>
       <div scPopover class="w-auto p-0">
         <div class="p-3">
-          <div scCalendar mode="range" [numberOfMonths]="2" [value]="drp.value()" (valueChange)="drp.onValueChange($event)" #cal="scCalendar">
+          <div scCalendar aria-label="Calendar" mode="range" [numberOfMonths]="2" [value]="drp.value()" (valueChange)="drp.onValueChange($event)" #cal="scCalendar">
             <div scCalendarHeader>
               <button scCalendarPrevious>...</button>
               <button scCalendarHeading>{{ cal.heading() }}</button>

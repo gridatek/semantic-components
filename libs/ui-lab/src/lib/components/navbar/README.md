@@ -101,7 +101,7 @@ import { SiMenuIcon, SiXIcon } from '@semantic-icons/lucide-icons';
 
       <!-- Mobile Menu -->
       <ng-template scNavbarMobilePortal>
-        <div scNavbarMobileMenu>
+        <div scNavbarMobileMenu aria-label="Mobile navigation">
           <a scNavbarMobileLink routerLink="/products">Products</a>
           <a scNavbarMobileLink routerLink="/docs">Docs</a>
         </div>
