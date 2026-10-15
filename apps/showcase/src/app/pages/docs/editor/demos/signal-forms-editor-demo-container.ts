@@ -157,7 +157,10 @@ export class SignalFormsEditorDemo {
   }
 
   fill(): void {
-    this.model.update((m) => ({ ...m, body: '<p>Hello, <strong>world</strong></p>' }));
+    this.model.update((m) => ({
+      ...m,
+      body: '<p>Hello, <strong>world</strong></p>',
+    }));
   }
 }`;
 }
