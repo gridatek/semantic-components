@@ -5,6 +5,8 @@ import {
   ViewEncapsulation,
   computed,
   inject,
+  input,
+  linkedSignal,
 } from '@angular/core';
 import { cn } from '../../utils';
 import { ScToast } from './toast';
@@ -12,33 +14,39 @@ import { SC_TOAST_CONTEXT } from './toast-context';
 import type { ScToastData, ScToastPosition } from './toast.types';
 import { ScToaster } from './toaster';
 
+/** Where the stack sits; start and end follow the text's direction. */
+const POSITIONS: Record<ScToastPosition, string> = {
+  'top-left': 'top-0 start-0 flex-col-reverse',
+  'top-center': 'top-0 left-1/2 -translate-x-1/2 flex-col-reverse',
+  'top-right': 'top-0 end-0 flex-col-reverse',
+  'bottom-left': 'bottom-0 start-0 flex-col',
+  'bottom-center': 'bottom-0 left-1/2 -translate-x-1/2 flex-col',
+  'bottom-right': 'bottom-0 end-0 flex-col',
+};
+
 /**
  * The toasts, in an overlay the toaster creates: each in its frame
- * (`scToast`: swipe, pause on hover), written by your `scToastTemplate`. One
- * polite live region, so each new toast is announced.
+ * (`scToast`), written by your `scToastTemplate`. One polite live region, so
+ * each new toast is announced.
  */
 @Component({
   selector: 'sc-toast-stack',
   imports: [NgTemplateOutlet, ScToast],
   template: `
-    @if (toastTemplate(); as template) {
-      @for (toast of toastService.toasts(); track toast.id) {
+    @if (template(); as template) {
+      @for (toast of toaster.toasts(); track toast.id) {
         <div
           scToast
           [variant]="toast.variant ?? 'default'"
-          [position]="toastService.position()"
-          (pointerEnter)="toastService.pause(toast.id)"
-          (pointerLeave)="toastService.resume(toast.id)"
-          (touchstart)="onTouchStart($event)"
-          (touchmove)="onTouchMove($event)"
-          (touchend)="onTouchEnd($event, toast.id)"
+          [position]="toaster.position()"
+          (pointerEnter)="toaster.pause(toast.id)"
+          (pointerLeave)="toaster.resume(toast.id)"
+          (swiped)="toaster.dismiss(toast.id)"
         >
           <ng-container
-            *ngTemplateOutlet="
-              template;
-              context: { $implicit: toast };
-              injector: injectorFor(toast)
-            "
+            [ngTemplateOutlet]="template"
+            [ngTemplateOutletContext]="{ $implicit: toast }"
+            [ngTemplateOutletInjector]="injectors().get(toast.id)"
           />
         </div>
       }
@@ -52,91 +60,50 @@ import { ScToaster } from './toaster';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScToastStack {
-  protected readonly toastService = inject(ScToaster);
-  /** How a toast looks: your `scToastTemplate`. */
-  protected readonly toastTemplate = computed(() =>
-    this.toastService.ɵtemplate(),
-  );
+  protected readonly toaster = inject(ScToaster);
   private readonly injector = inject(Injector);
-  private readonly injectors = new Map<string, Injector>();
 
-  private readonly swipeThreshold = 100;
+  readonly classInput = input<string>('', { alias: 'class' });
 
-  private readonly positionClasses: Record<ScToastPosition, string> = {
-    'top-left': 'fixed top-0 left-0 flex-col-reverse',
-    'top-center': 'fixed top-0 left-1/2 -translate-x-1/2 flex-col-reverse',
-    'top-right': 'fixed top-0 right-0 flex-col-reverse',
-    'bottom-left': 'fixed bottom-0 left-0 flex-col',
-    'bottom-center': 'fixed bottom-0 left-1/2 -translate-x-1/2 flex-col',
-    'bottom-right': 'fixed bottom-0 right-0 flex-col',
-  };
+  /** How a toast looks: your `scToastTemplate`. */
+  protected readonly template = computed(() => this.toaster.ɵtemplate());
+
+  /**
+   * Each toast's context, for its parts: the toast, and dismissing it. A
+   * toast keeps its injector while it is shown — a new one would render it
+   * again.
+   */
+  protected readonly injectors = linkedSignal<
+    readonly ScToastData[],
+    ReadonlyMap<string, Injector>
+  >({
+    source: () => this.toaster.toasts(),
+    computation: (toasts, previous) =>
+      new Map(
+        toasts.map((toast) => [
+          toast.id,
+          previous?.value.get(toast.id) ?? this.contextFor(toast),
+        ]),
+      ),
+  });
 
   protected readonly class = computed(() =>
     cn(
-      'z-100 flex max-h-screen w-full gap-2 p-4 md:max-w-[420px]',
-      this.positionClasses[this.toastService.position()],
+      'fixed z-100 flex max-h-screen w-full gap-2 p-4 md:max-w-[420px]',
+      POSITIONS[this.toaster.position()],
+      this.classInput(),
     ),
   );
 
-  /** The context of a toast's parts: the toast, and dismissing it. */
-  protected injectorFor(toast: ScToastData): Injector {
-    // Those of toasts gone (dismissed, timed out) are dropped.
-    const shown = new Set(this.toastService.toasts().map((t) => t.id));
-    for (const id of this.injectors.keys()) {
-      if (!shown.has(id)) this.injectors.delete(id);
-    }
-    let injector = this.injectors.get(toast.id);
-    if (!injector) {
-      injector = Injector.create({
-        parent: this.injector,
-        providers: [
-          {
-            provide: SC_TOAST_CONTEXT,
-            useValue: {
-              toast,
-              dismiss: () => {
-                this.injectors.delete(toast.id);
-                this.toastService.dismiss(toast.id);
-              },
-            },
-          },
-        ],
-      });
-      this.injectors.set(toast.id, injector);
-    }
-    return injector;
-  }
-
-  protected onTouchStart(event: TouchEvent): void {
-    const el = event.currentTarget as HTMLElement;
-    el.dataset['swipeStartX'] = String(event.touches[0].clientX);
-    el.style.transition = 'none';
-  }
-
-  protected onTouchMove(event: TouchEvent): void {
-    const el = event.currentTarget as HTMLElement;
-    const startX = Number(el.dataset['swipeStartX'] ?? 0);
-    const deltaX = event.touches[0].clientX - startX;
-
-    el.style.transform = `translateX(${deltaX}px)`;
-    el.style.opacity = String(
-      Math.max(0, 1 - Math.abs(deltaX) / this.swipeThreshold),
-    );
-  }
-
-  protected onTouchEnd(event: TouchEvent, id: string): void {
-    const el = event.currentTarget as HTMLElement;
-    const startX = Number(el.dataset['swipeStartX'] ?? 0);
-    const deltaX = event.changedTouches[0].clientX - startX;
-
-    if (Math.abs(deltaX) >= this.swipeThreshold) {
-      this.injectors.delete(id);
-      this.toastService.dismiss(id);
-    } else {
-      // Snap back
-      el.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
-      el.style.transform = '';
-      el.style.opacity = '';
-    }
+  private contextFor(toast: ScToastData): Injector {
+    return Injector.create({
+      parent: this.injector,
+      providers: [
+        {
+          provide: SC_TOAST_CONTEXT,
+          useValue: { toast, dismiss: () => this.toaster.dismiss(toast.id) },
+        },
+      ],
+    });
   }
 }

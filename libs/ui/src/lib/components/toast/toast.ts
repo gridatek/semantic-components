@@ -1,14 +1,20 @@
 import {
   Component,
+  ElementRef,
   ViewEncapsulation,
   computed,
+  inject,
   input,
   output,
 } from '@angular/core';
 import { cn } from '../../utils';
 import { ScToastPosition, ScToastVariant } from './toast.types';
 
-/** A toast: slides in when shown and out when dismissed (`animate.enter` / `animate.leave`). */
+/**
+ * A toast's frame: slides in when shown and out when dismissed
+ * (`animate.enter` / `animate.leave`); swiped sideways, it asks to go
+ * (`swiped`).
+ */
 @Component({
   selector: 'div[scToast]',
   template: ` <ng-content /> `,
@@ -20,6 +26,9 @@ import { ScToastPosition, ScToastVariant } from './toast.types';
     'animate.leave': 'animate-out',
     '(pointerenter)': 'onPointerEnter()',
     '(pointerleave)': 'onPointerLeave()',
+    '(touchstart)': 'onTouchStart($event)',
+    '(touchmove)': 'onTouchMove($event)',
+    '(touchend)': 'onTouchEnd($event)',
   },
   encapsulation: ViewEncapsulation.None,
 })
@@ -33,6 +42,13 @@ export class ScToast {
 
   /** Emitted when pointer leaves the toast (resume auto-dismiss) */
   readonly pointerLeave = output<void>();
+  /** Emitted when the toast is swiped far enough away (dismiss it). */
+  readonly swiped = output<void>();
+
+  private readonly element =
+    inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
+  private readonly swipeThreshold = 100;
+  private swipeStartX = 0;
 
   protected readonly class = computed(() =>
     cn(
@@ -70,5 +86,30 @@ export class ScToast {
 
   protected onPointerLeave(): void {
     this.pointerLeave.emit();
+  }
+
+  protected onTouchStart(event: TouchEvent): void {
+    this.swipeStartX = event.touches[0].clientX;
+    this.element.style.transition = 'none';
+  }
+
+  protected onTouchMove(event: TouchEvent): void {
+    const deltaX = event.touches[0].clientX - this.swipeStartX;
+    this.element.style.transform = `translateX(${deltaX}px)`;
+    this.element.style.opacity = String(
+      Math.max(0, 1 - Math.abs(deltaX) / this.swipeThreshold),
+    );
+  }
+
+  protected onTouchEnd(event: TouchEvent): void {
+    const deltaX = event.changedTouches[0].clientX - this.swipeStartX;
+    if (Math.abs(deltaX) >= this.swipeThreshold) {
+      this.swiped.emit();
+      return;
+    }
+    // Not far enough: back in place.
+    this.element.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+    this.element.style.transform = '';
+    this.element.style.opacity = '';
   }
 }
