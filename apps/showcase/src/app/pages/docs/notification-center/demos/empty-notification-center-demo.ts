@@ -2,45 +2,47 @@ import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   type ScNotification,
   ScNotificationCenter,
-  ScNotificationCenterContainer,
-  type ScNotificationCenterLabels,
+  ScNotificationCenterHeader,
+  ScNotificationCenterTitle,
+  ScNotificationEmpty,
 } from '@semantic-components/ui-lab';
+import { SiBellOffIcon } from '@semantic-icons/lucide-icons';
 
+/** No notifications: the empty state, written by you. */
 @Component({
   selector: 'app-empty-notification-center-demo',
-  imports: [ScNotificationCenter, ScNotificationCenterContainer],
+  imports: [
+    ScNotificationCenter,
+    ScNotificationCenterHeader,
+    ScNotificationCenterTitle,
+    ScNotificationEmpty,
+    SiBellOffIcon,
+  ],
   template: `
-    <div
+    <section
       scNotificationCenter
-      title="Notifications"
-      [labels]="notificationLabels"
-      aria-label="Empty notifications"
+      #center="scNotificationCenter"
       [(notifications)]="notifications"
-      emptyTitle="All caught up!"
-      emptyDescription="No new notifications to show."
-      class="h-[300px] max-w-md"
+      aria-labelledby="empty-notifications-title"
+      class="bg-card w-full max-w-md rounded-xl border"
     >
-      <div scNotificationCenterContainer class="h-full"></div>
-    </div>
+      <div scNotificationCenterHeader>
+        <h2 scNotificationCenterTitle id="empty-notifications-title">
+          Notifications
+        </h2>
+      </div>
+      @if (!center.visible().length) {
+        <div scNotificationEmpty>
+          <svg siBellOffIcon></svg>
+          <p class="text-foreground font-medium">All caught up</p>
+          <p>New notifications will show up here.</p>
+        </div>
+      }
+    </section>
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
 export class EmptyNotificationCenterDemo {
-  /** The notification center's texts. */
-  readonly notificationLabels: ScNotificationCenterLabels = {
-    all: 'All',
-    unread: 'Unread',
-    read: 'Read',
-    markAllRead: 'Mark all as read',
-    clearAll: 'Clear all notifications',
-    other: 'Other',
-    dismiss: 'Dismiss notification',
-    groupEmpty: 'No notifications',
-    newCount: (count) => `${count} new`,
-    markAllReadIn: (group) => `Mark all as read in ${group}`,
-    clearAllIn: (group) => `Clear all in ${group}`,
-  };
-
   readonly notifications = signal<ScNotification[]>([]);
 }

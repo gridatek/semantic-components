@@ -1,393 +1,138 @@
 # Notification Center
 
-A grouped notification management component with filtering, read states, and action buttons.
-
-## Installation
-
-Import the components from the notification-center module:
-
-```typescript
-import { type ScNotification, ScNotificationCenter, ScNotificationCenterContainer, type ScNotificationGroupData } from '@semantic-components/ui-lab';
-```
-
-## Components
-
-- **ScNotificationCenter** (Directive): State management and business logic
-- **ScNotificationCenterContainer**: UI rendering with header, filters, and notification list
-- **ScNotificationGroup**: Grouped notification section (used internally)
-- **ScNotificationItem**: Individual notification item (used internally)
+Notifications you put together from parts. `scNotificationCenter` holds them and their filter; the parts read and change it; you write everything else — the header, each notification's content, the icons, every text. A popover inbox, a page section or a sidebar are all the same parts.
 
 ## Usage
 
-### Basic Usage
-
-```html
-<!-- The texts are yours: see ScNotificationCenterLabels below. -->
-<div scNotificationCenter [labels]="notificationLabels" [(notifications)]="notifications" (markRead)="onMarkRead($event)" (dismiss)="onDismiss($event)">
-  <div scNotificationCenterContainer class="h-full"></div>
-</div>
-```
-
-```typescript
-import { signal } from '@angular/core';
-import type { ScNotification } from '@semantic-components/ui-lab';
-
-notifications = signal<ScNotification[]>([
-  {
-    id: '1',
-    title: 'New message',
-    description: 'You have a new message from Alice',
-    type: 'message',
-    timestamp: new Date(),
-    read: false,
-  },
-  {
-    id: '2',
-    title: 'Build completed',
-    type: 'success',
-    timestamp: new Date(Date.now() - 3600000),
-    read: true,
-  },
-]);
-```
-
-### With Groups
-
-```html
-<div scNotificationCenter [labels]="notificationLabels" [(notifications)]="notifications" [groups]="groups()">
-  <div scNotificationCenterContainer class="h-full"></div>
-</div>
-```
-
-```typescript
-import type { ScNotification, ScNotificationGroupData } from '@semantic-components/ui-lab';
-
-groups = signal<ScNotificationGroupData[]>([
-  { id: 'messages', title: 'Messages' },
-  { id: 'alerts', title: 'Alerts' },
-  { id: 'updates', title: 'Updates' },
-]);
-
-notifications = signal<ScNotification[]>([
-  {
-    id: '1',
-    title: 'New message from Alice',
-    type: 'message',
-    timestamp: new Date(),
-    read: false,
-    groupId: 'messages', // Links to group
-  },
-  {
-    id: '2',
-    title: 'Security alert',
-    type: 'warning',
-    timestamp: new Date(),
-    read: false,
-    groupId: 'alerts',
-  },
-]);
-```
-
-### With Actions
-
-```typescript
-notifications = signal<ScNotification[]>([
-  {
-    id: '1',
-    title: 'Payment failed',
-    description: 'Your payment method was declined.',
-    type: 'error',
-    timestamp: new Date(),
-    read: false,
-    action: {
-      label: 'Update payment',
-      handler: () => console.log('Navigate to payment settings'),
-    },
-  },
-]);
-```
-
-### With Avatars
-
-```typescript
-notifications = signal<ScNotification[]>([
-  {
-    id: '1',
-    title: 'New message from Alice',
-    description: 'Hey! Are you available for a call?',
-    type: 'message',
-    timestamp: new Date(),
-    read: false,
-    avatar: 'https://example.com/alice.jpg',
-  },
-]);
-```
-
-### Custom Empty State
-
-```html
-<div scNotificationCenter [labels]="notificationLabels" [(notifications)]="notifications" emptyTitle="All caught up!" emptyDescription="No new notifications to show.">
-  <div scNotificationCenterContainer class="h-full"></div>
-</div>
-```
-
-### Without Filters
-
-```html
-<div scNotificationCenter [labels]="notificationLabels" [(notifications)]="notifications" [showFilters]="false">
-  <div scNotificationCenterContainer class="h-full"></div>
-</div>
-```
-
-### Custom Container Styling
-
-```html
-<div scNotificationCenter [labels]="notificationLabels" [(notifications)]="notifications" class="h-[500px] max-w-md">
-  <div scNotificationCenterContainer class="h-full"></div>
-</div>
-```
-
-## API Reference
-
-### ScNotificationCenter (Directive)
-
-The root directive that manages notification state and business logic.
-
-#### Selector
-
-`[scNotificationCenter]`
-
-#### Inputs
-
-| Input              | Type                         | Default  | Description                                                |
-| ------------------ | ---------------------------- | -------- | ---------------------------------------------------------- |
-| `class`            | `string`                     | `''`     | Additional CSS classes                                     |
-| `notifications`    | `ScNotification[]`           | `[]`     | Array of notifications (two-way)                           |
-| `groups`           | `ScNotificationGroupData[]`  | `[]`     | Groups for categorizing                                    |
-| `title`            | `string`                     | `''`     | Header title — write it                                    |
-| `labels`           | `ScNotificationCenterLabels` | required | Its texts: filters, buttons, "Other", counts — write them  |
-| `aria-label`       | `string`                     | `''`     | Region name (defaults to `title`); make it unique per page |
-| `showFilters`      | `boolean`                    | `true`   | Show all/unread/read filter tabs                           |
-| `showClearAll`     | `boolean`                    | `true`   | Show clear all button                                      |
-| `showDismiss`      | `boolean`                    | `true`   | Show dismiss button on items                               |
-| `emptyTitle`       | `string`                     | `''`     | Empty state title — write it                               |
-| `emptyDescription` | `string`                     | `''`     | Empty state description — write it                         |
-
-The texts (`ScNotificationCenterLabels`), written by you — relative times ("5 minutes ago") follow the app's locale:
-
 ```ts
-readonly notificationLabels: ScNotificationCenterLabels = {
-  all: 'All',
-  unread: 'Unread',
-  read: 'Read',
-  markAllRead: 'Mark all as read',
-  clearAll: 'Clear all notifications',
-  other: 'Other',
-  dismiss: 'Dismiss notification',
-  groupEmpty: 'No notifications',
-  newCount: (count) => `${count} new`,
-  markAllReadIn: (group) => `Mark all as read in ${group}`,
-  clearAllIn: (group) => `Clear all in ${group}`,
-};
-```
-
-#### Outputs
-
-| Output         | Type                       | Description               |
-| -------------- | -------------------------- | ------------------------- |
-| `markRead`     | `{ notification, read }`   | Read state changed        |
-| `markAllRead`  | `void`                     | All marked as read        |
-| `dismiss`      | `ScNotification`           | Notification dismissed    |
-| `clearAll`     | `void`                     | All notifications cleared |
-| `actionClick`  | `{ notification, action }` | Action button clicked     |
-| `itemClick`    | `ScNotification`           | Notification clicked      |
-| `filterChange` | `ScNotificationFilter`     | Filter changed            |
-
-#### Exported As
-
-`scNotificationCenter` - Access directive instance via template reference variable
-
-```html
-<div scNotificationCenter [labels]="notificationLabels" #center="scNotificationCenter">
-  <!-- Access center.totalUnread(), center.filteredNotifications(), etc. -->
-</div>
-```
-
-### ScNotificationCenterContainer
-
-The container component that renders the notification center UI.
-
-#### Selector
-
-`div[scNotificationCenterContainer]`
-
-#### Inputs
-
-| Input   | Type     | Default | Description            |
-| ------- | -------- | ------- | ---------------------- |
-| `class` | `string` | `''`    | Additional CSS classes |
-
-### ScNotificationGroup
-
-Grouped notification section component.
-
-#### Selector
-
-`div[scNotificationGroup]`
-
-### ScNotificationItem
-
-Individual notification item component.
-
-#### Selector
-
-`div[scNotificationItem]`
-
-## Composable Architecture
-
-The notification center follows a composable architecture pattern that separates state management from UI rendering:
-
-### Pattern Overview
-
-1. **Root Directive** (`[scNotificationCenter]`): Manages all state, computed values, and business logic
-2. **Container Component** (`div[scNotificationCenterContainer]`): Renders the UI and delegates actions to the directive
-3. **Dependency Injection**: The container accesses the directive's state via the `SC_NOTIFICATION_CENTER` injection token
-
-### Benefits
-
-- **Separation of Concerns**: State management is isolated from UI rendering
-- **Flexibility**: You can access directive state via template references for custom implementations
-- **Reusability**: The directive can be used with custom containers or UI implementations
-- **Testability**: Business logic in the directive is easier to test in isolation
-
-### Example with Template Reference
-
-```html
-<div scNotificationCenter [labels]="notificationLabels" #center="scNotificationCenter" [(notifications)]="notifications">
-  <!-- Access state -->
-  <p>Total unread: {{ center.totalUnread() }}</p>
-  <p>Filtered: {{ center.filteredNotifications().length }}</p>
-
-  <!-- Use the standard container -->
-  <div scNotificationCenterContainer class="h-full"></div>
-</div>
-```
-
-### Custom Implementation
-
-You can build custom UIs by accessing the directive's state:
-
-```html
-<div scNotificationCenter [labels]="notificationLabels" #center="scNotificationCenter" [(notifications)]="notifications">
-  <!-- Custom UI using directive state -->
-  <div class="custom-header">
-    <h2>{{ center.title() }}</h2>
-    <span class="badge">{{ center.totalUnread() }}</span>
-  </div>
-
-  <!-- Custom notification list -->
-  @for (notification of center.filteredNotifications(); track notification.id) {
-  <div class="custom-notification">
-    {{ notification.title }}
-    <button (click)="center.onDismiss(notification)">Dismiss</button>
-  </div>
-  }
-</div>
-```
-
-## Type Definitions
-
-### Notification
-
-```typescript
-interface ScNotification {
-  id: string;
+interface Notice extends ScNotification {
   title: string;
   description?: string;
-  type: ScNotificationType;
-  timestamp: Date;
-  read: boolean;
-  groupId?: string; // Links to ScNotificationGroupData.id
-  avatar?: string; // URL for avatar image
-  icon?: string; // Custom SVG icon
-  action?: ScNotificationAction;
-  metadata?: Record<string, unknown>;
+}
+
+readonly notifications = signal<Notice[]>([
+  { id: '1', title: 'New message from Alice', type: 'message', timestamp: new Date(), read: false },
+]);
+```
+
+```html
+<section scNotificationCenter #center="scNotificationCenter" [(notifications)]="notifications" aria-labelledby="inbox-title">
+  <div scNotificationCenterHeader>
+    <h2 scNotificationCenterTitle id="inbox-title">Notifications</h2>
+    <button scButton variant="ghost" size="sm" scNotificationMarkAllRead>Mark all as read</button>
+  </div>
+
+  <div scNotificationFilters aria-label="Show">
+    <button scNotificationFilter="all">All</button>
+    <button scNotificationFilter="unread">Unread</button>
+  </div>
+
+  @if (center.visible().length) {
+  <ul scNotificationList>
+    @for (notice of center.visible(); track notice.id) {
+    <li [scNotification]="notice">
+      <span scNotificationUnread><span class="sr-only">Unread</span></span>
+      <span scNotificationIcon><svg siMessageSquareIcon></svg></span>
+      <div scNotificationContent>
+        <p scNotificationTitle>{{ notice.title }}</p>
+        <time scNotificationTime></time>
+        <div scNotificationActions>
+          <button scButton variant="ghost" size="xs" scNotificationMarkRead>{{ notice.read ? 'Mark as unread' : 'Mark as read' }}</button>
+        </div>
+      </div>
+      <button scButton variant="ghost" size="icon-xs" scNotificationDismiss [attr.aria-label]="'Dismiss ' + notice.title">
+        <svg siXIcon></svg>
+      </button>
+    </li>
+    }
+  </ul>
+  } @else {
+  <div scNotificationEmpty><p>You're all caught up.</p></div>
+  }
+</section>
+```
+
+## `scNotificationCenter`
+
+| Member                             | Does                                                                              |
+| ---------------------------------- | --------------------------------------------------------------------------------- |
+| `[(notifications)]`                | The notifications — your type, extending `ScNotification`. Every change goes here |
+| `[(filter)]`                       | `all` (default), `unread` or `read`                                               |
+| `visible()`                        | The notifications the filter shows                                                |
+| `visibleIn(group)`                 | Those of one group                                                                |
+| `unreadCount()`, `unreadIn(group)` | How many are unread                                                               |
+| `markRead(id, read?)`              | Marks one read (or unread with `false`)                                           |
+| `markAllRead(group?)`              | Marks all read — or those of a group                                              |
+| `dismiss(id)`                      | Removes one                                                                       |
+| `clear(group?)`                    | Removes all — or those of a group                                                 |
+
+`ScNotification` is what the center needs — `id`, `read`, `timestamp`, and optionally `type` (`info`, `success`, `warning`, `error`, `message`: the icon's colour) and `group` (your id). Add your own fields and write them in the template: the center is generic, so `center.visible()` has your type.
+
+There are no outputs: everything the parts do is a change of `notifications` — save it from there (an `effect`, or your store).
+
+## Parts
+
+| Part                         | Selector                            | Does                                                                                                |
+| ---------------------------- | ----------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `ScNotificationCenterHeader` | `div[scNotificationCenterHeader]`   | The header row                                                                                      |
+| `ScNotificationCenterTitle`  | `[scNotificationCenterTitle]`       | Its title (your heading)                                                                            |
+| `ScNotificationFilters`      | `div[scNotificationFilters]`        | The filter buttons, a segmented control (`role="group"`: name it)                                   |
+| `ScNotificationFilter`       | `button[scNotificationFilter]`      | `scNotificationFilter="unread"`: shows that filter, `aria-pressed` when on                          |
+| `ScNotificationMarkAllRead`  | `button[scNotificationMarkAllRead]` | Marks all read (in a group: the group's); disabled with none unread                                 |
+| `ScNotificationClearAll`     | `button[scNotificationClearAll]`    | Removes all (in a group: the group's); disabled with none                                           |
+| `ScNotificationGroup`        | `[scNotificationGroup]`             | `[scNotificationGroup]="'messages'"`: a `group` named by its title                                  |
+| `ScNotificationGroupTitle`   | `[scNotificationGroupTitle]`        | The group's title (your heading)                                                                    |
+| `ScNotificationList`         | `ul[scNotificationList]`            | A list of notifications                                                                             |
+| `ScNotificationItem`         | `li[scNotification]`                | `[scNotification]="notice"`: one notification, for its parts. `data-read`, `data-type`              |
+| `ScNotificationIcon`         | `[scNotificationIcon]`              | Its icon or avatar (yours inside), coloured by `type`                                               |
+| `ScNotificationUnread`       | `[scNotificationUnread]`            | A dot while unread — write what it says to screen readers inside                                    |
+| `ScNotificationContent`      | `div[scNotificationContent]`        | Its text, beside the icon                                                                           |
+| `ScNotificationTitle`        | `[scNotificationTitle]`             | Its title (bolder while unread)                                                                     |
+| `ScNotificationDescription`  | `[scNotificationDescription]`       | Its description, two lines at most                                                                  |
+| `ScNotificationTime`         | `time[scNotificationTime]`          | "5 minutes ago", in the app's language (`LOCALE_ID`), kept up to date; the exact time as `datetime` |
+| `ScNotificationActions`      | `div[scNotificationActions]`        | Its buttons and links                                                                               |
+| `ScNotificationMarkRead`     | `button[scNotificationMarkRead]`    | Marks it read, or unread again                                                                      |
+| `ScNotificationDismiss`      | `button[scNotificationDismiss]`     | Removes it                                                                                          |
+| `ScNotificationEmpty`        | `div[scNotificationEmpty]`          | The empty state (your icon and text)                                                                |
+
+The buttons add behaviour to buttons of yours (a `scButton`, any variant): write their icons and texts, and name the icon-only ones (`aria-label`) — in development, an unnamed one warns.
+
+## Groups
+
+```html
+@for (group of groups; track group.id) {
+<div [scNotificationGroup]="group.id">
+  <h3 scNotificationGroupTitle>{{ group.title }}</h3>
+  <button scButton variant="ghost" size="icon-xs" scNotificationMarkAllRead [attr.aria-label]="'Mark all as read in ' + group.title">…</button>
+  <ul scNotificationList>
+    @for (notice of center.visibleIn(group.id); track notice.id) {
+    <li [scNotification]="notice">…</li>
+    }
+  </ul>
+</div>
 }
 ```
 
-### NotificationType
+## In a popover
 
-```typescript
-type ScNotificationType = 'info' | 'success' | 'warning' | 'error' | 'message';
+Put `scNotificationCenter` around the popover, so the trigger can show the count:
+
+```html
+<div scNotificationCenter #center="scNotificationCenter" [(notifications)]="notifications">
+  <div scPopoverProvider align="end">
+    <button scButton variant="outline" size="icon" scPopoverTrigger [attr.aria-label]="'Notifications, ' + center.unreadCount() + ' unread'">
+      <svg siBellIcon></svg>
+    </button>
+    <ng-template scPopoverPortal>
+      <div scPopover aria-label="Notifications" class="w-96 p-0">…</div>
+    </ng-template>
+  </div>
+</div>
 ```
-
-Each type has a distinct icon and color:
-
-- `info`: Gray info circle
-- `success`: Green checkmark
-- `warning`: Yellow/orange triangle
-- `error`: Red X circle
-- `message`: Blue chat bubble
-
-### NotificationAction
-
-```typescript
-interface ScNotificationAction {
-  label: string; // Button text
-  url?: string; // Optional URL to navigate
-  handler?: () => void; // Optional click handler
-}
-```
-
-### NotificationGroup
-
-```typescript
-interface ScNotificationGroupData {
-  id: string;
-  title: string;
-  icon?: string; // Custom SVG icon
-  collapsed?: boolean; // Initial collapsed state
-}
-```
-
-### NotificationFilter
-
-```typescript
-type ScNotificationFilter = 'all' | 'unread' | 'read';
-```
-
-## Features
-
-- **Grouped Notifications**: Organize notifications by category
-- **Filtering**: Filter by all, unread, or read status
-- **Batch Actions**: Mark all as read, clear all, clear group
-- **Individual Actions**: Mark read, dismiss, custom action buttons
-- **Notification Types**: Visual indicators for info, success, warning, error, message
-- **Avatars**: Display user avatars for message-type notifications
-- **Timestamps**: Relative time display (5m ago, 2h ago, etc.)
-- **Collapsible Groups**: Expand/collapse notification groups
-- **Empty State**: Customizable empty state display
-- **Two-Way Binding**: Use `[(notifications)]` for automatic state sync
 
 ## Accessibility
 
-- The center is a `region` named by `aria-label` (defaults to `title`); give each one on a page a unique name. It is not a live region — changes come from the user's own actions.
-- Group headers: the collapse toggle (`aria-expanded`, `aria-controls`) and the "mark all read" / "clear all" buttons are separate buttons.
-- Items are focusable `article`s named by their title; unread items say "Unread" to screen readers (the dot is decorative). Enter / Space on an item marks it read and emits `itemClick`; keys on its own buttons stay with those buttons. The dismiss button is revealed on focus as well as hover.
-
-## Styling
-
-The component uses Tailwind CSS classes and supports theming through CSS variables:
-
-- `--background` / `--foreground`: Base colors
-- `--muted` / `--muted-foreground`: Secondary colors
-- `--primary` / `--primary-foreground`: Accent/unread colors
-- `--ring`: Focus ring color
-
-Notification types use semantic colors:
-
-- Success: Green (`green-500`, `green-600`)
-- Warning: Yellow/Orange (`yellow-500`, `yellow-600`)
-- Error: Red (`red-500`, `red-600`)
-- Message: Blue (`blue-500`, `blue-600`)
-- Info: Muted gray
+- Notifications are a list (`ul` / `li`); a group is a `group` named by its title.
+- The unread state is a dot for the eyes and your text for screen readers; the title is bolder too.
+- Times are `<time datetime>`, in the app's language.
+- The library writes no text: name the filters' group, the icon-only buttons and the popover.

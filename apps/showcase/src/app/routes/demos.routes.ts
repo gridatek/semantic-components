@@ -2515,10 +2515,10 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'flat-notification-center-demo',
+        path: 'inbox-notification-center-demo',
         loadComponent: () =>
-          import('../pages/docs/notification-center/demos/flat-notification-center-demo').then(
-            (m) => m.FlatNotificationCenterDemo,
+          import('../pages/docs/notification-center/demos/inbox-notification-center-demo').then(
+            (m) => m.InboxNotificationCenterDemo,
           ),
       },
       {

@@ -1,132 +1,248 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { ScButton } from '@semantic-components/ui';
 import {
   type ScNotification,
   ScNotificationCenter,
-  ScNotificationCenterContainer,
-  type ScNotificationCenterLabels,
-  type ScNotificationGroupData,
+  ScNotificationCenterHeader,
+  ScNotificationCenterTitle,
+  ScNotificationClearAll,
+  ScNotificationContent,
+  ScNotificationDescription,
+  ScNotificationDismiss,
+  ScNotificationEmpty,
+  ScNotificationFilter,
+  ScNotificationFilters,
+  ScNotificationGroup,
+  ScNotificationGroupTitle,
+  ScNotificationIcon,
+  ScNotificationItem,
+  ScNotificationList,
+  ScNotificationMarkAllRead,
+  ScNotificationTime,
+  ScNotificationTitle,
+  ScNotificationUnread,
 } from '@semantic-components/ui-lab';
+import {
+  SiBellOffIcon,
+  SiCheckCheckIcon,
+  SiCircleCheckIcon,
+  SiInfoIcon,
+  SiMessageSquareIcon,
+  SiTrash2Icon,
+  SiTriangleAlertIcon,
+  SiXIcon,
+} from '@semantic-icons/lucide-icons';
 
+interface Notice extends ScNotification {
+  readonly title: string;
+  readonly description?: string;
+}
+
+const minutesAgo = (minutes: number) => new Date(Date.now() - minutes * 60000);
+
+/** Notifications in groups, each with its own buttons. */
 @Component({
   selector: 'app-grouped-notification-center-demo',
-  imports: [ScNotificationCenter, ScNotificationCenterContainer],
+  imports: [
+    ScButton,
+    ScNotificationCenter,
+    ScNotificationCenterHeader,
+    ScNotificationCenterTitle,
+    ScNotificationClearAll,
+    ScNotificationContent,
+    ScNotificationDescription,
+    ScNotificationDismiss,
+    ScNotificationEmpty,
+    ScNotificationFilter,
+    ScNotificationFilters,
+    ScNotificationGroup,
+    ScNotificationGroupTitle,
+    ScNotificationIcon,
+    ScNotificationItem,
+    ScNotificationList,
+    ScNotificationMarkAllRead,
+    ScNotificationTime,
+    ScNotificationTitle,
+    ScNotificationUnread,
+    SiBellOffIcon,
+    SiCheckCheckIcon,
+    SiCircleCheckIcon,
+    SiInfoIcon,
+    SiMessageSquareIcon,
+    SiTrash2Icon,
+    SiTriangleAlertIcon,
+    SiXIcon,
+  ],
   template: `
-    <div
+    <section
       scNotificationCenter
-      title="Notifications"
-      emptyTitle="No notifications"
-      emptyDescription="You're all caught up!"
-      [labels]="notificationLabels"
-      aria-label="Grouped notifications"
+      #center="scNotificationCenter"
       [(notifications)]="notifications"
-      [groups]="groups()"
-      (markRead)="onMarkRead($event)"
-      (dismiss)="onDismiss($event)"
-      (clearAll)="onClearAll()"
-      class="h-[500px] max-w-md"
+      aria-labelledby="grouped-notifications-title"
+      class="bg-card w-full max-w-md rounded-xl border"
     >
-      <div scNotificationCenterContainer class="h-full"></div>
-    </div>
+      <div scNotificationCenterHeader>
+        <h2 scNotificationCenterTitle id="grouped-notifications-title">
+          Activity
+        </h2>
+        <div class="flex items-center gap-1">
+          <button
+            scButton
+            variant="ghost"
+            size="icon-sm"
+            scNotificationMarkAllRead
+            aria-label="Mark all as read"
+          >
+            <svg siCheckCheckIcon></svg>
+          </button>
+          <button
+            scButton
+            variant="ghost"
+            size="icon-sm"
+            scNotificationClearAll
+            aria-label="Clear all"
+          >
+            <svg siTrash2Icon></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="px-4 pt-3">
+        <div scNotificationFilters aria-label="Show">
+          <button scNotificationFilter="all">All</button>
+          <button scNotificationFilter="unread">
+            Unread ({{ center.unreadCount() }})
+          </button>
+        </div>
+      </div>
+
+      @if (center.visible().length) {
+        <div class="p-2">
+          @for (group of groups; track group.id) {
+            @if (center.visibleIn(group.id).length) {
+              <div [scNotificationGroup]="group.id">
+                <div class="flex items-center justify-between pe-1">
+                  <h3 scNotificationGroupTitle>{{ group.title }}</h3>
+                  <button
+                    scButton
+                    variant="ghost"
+                    size="icon-xs"
+                    scNotificationMarkAllRead
+                    [attr.aria-label]="'Mark all as read in ' + group.title"
+                  >
+                    <svg siCheckCheckIcon></svg>
+                  </button>
+                </div>
+                <ul scNotificationList>
+                  @for (notice of center.visibleIn(group.id); track notice.id) {
+                    <li [scNotification]="notice">
+                      <span scNotificationUnread>
+                        <span class="sr-only">Unread</span>
+                      </span>
+                      <span scNotificationIcon>
+                        @switch (notice.type) {
+                          @case ('message') {
+                            <svg siMessageSquareIcon></svg>
+                          }
+                          @case ('success') {
+                            <svg siCircleCheckIcon></svg>
+                          }
+                          @case ('warning') {
+                            <svg siTriangleAlertIcon></svg>
+                          }
+                          @default {
+                            <svg siInfoIcon></svg>
+                          }
+                        }
+                      </span>
+                      <div scNotificationContent>
+                        <div class="flex items-start justify-between gap-2">
+                          <p scNotificationTitle>{{ notice.title }}</p>
+                          <time scNotificationTime></time>
+                        </div>
+                        @if (notice.description) {
+                          <p scNotificationDescription>
+                            {{ notice.description }}
+                          </p>
+                        }
+                      </div>
+                      <button
+                        scButton
+                        variant="ghost"
+                        size="icon-xs"
+                        scNotificationDismiss
+                        [attr.aria-label]="'Dismiss ' + notice.title"
+                      >
+                        <svg siXIcon></svg>
+                      </button>
+                    </li>
+                  }
+                </ul>
+              </div>
+            }
+          }
+        </div>
+      } @else {
+        <div scNotificationEmpty>
+          <svg siBellOffIcon></svg>
+          <p>You're all caught up.</p>
+        </div>
+      }
+    </section>
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
 export class GroupedNotificationCenterDemo {
-  /** The notification center's texts. */
-  readonly notificationLabels: ScNotificationCenterLabels = {
-    all: 'All',
-    unread: 'Unread',
-    read: 'Read',
-    markAllRead: 'Mark all as read',
-    clearAll: 'Clear all notifications',
-    other: 'Other',
-    dismiss: 'Dismiss notification',
-    groupEmpty: 'No notifications',
-    newCount: (count) => `${count} new`,
-    markAllReadIn: (group) => `Mark all as read in ${group}`,
-    clearAllIn: (group) => `Clear all in ${group}`,
-  };
-
-  readonly groups = signal<ScNotificationGroupData[]>([
+  readonly groups = [
     { id: 'messages', title: 'Messages' },
     { id: 'updates', title: 'Updates' },
     { id: 'alerts', title: 'Alerts' },
-  ]);
+  ];
 
-  readonly notifications = signal<ScNotification[]>([
+  readonly notifications = signal<Notice[]>([
     {
       id: '1',
       title: 'New message from Alice',
-      description: 'Hey! Are you available for a quick call this afternoon?',
+      description: 'Are you free for a quick call this afternoon?',
       type: 'message',
-      timestamp: new Date(Date.now() - 5 * 60000),
+      timestamp: minutesAgo(5),
       read: false,
-      groupId: 'messages',
-      avatar: 'https://i.pravatar.cc/150?u=alice',
-      action: { label: 'Reply' },
+      group: 'messages',
     },
     {
       id: '2',
-      title: 'Bob mentioned you in a comment',
-      description: '@you Great work on the new feature!',
+      title: 'Bob mentioned you',
+      description: 'Great work on the new feature!',
       type: 'message',
-      timestamp: new Date(Date.now() - 30 * 60000),
+      timestamp: minutesAgo(30),
       read: false,
-      groupId: 'messages',
-      avatar: 'https://i.pravatar.cc/150?u=bob',
+      group: 'messages',
     },
     {
       id: '3',
-      title: 'New version available',
-      description:
-        'Version 2.5.0 is now available with new features and bug fixes.',
+      title: 'Version 2.5 is out',
       type: 'info',
-      timestamp: new Date(Date.now() - 2 * 3600000),
+      timestamp: minutesAgo(120),
       read: true,
-      groupId: 'updates',
-      action: { label: 'Update now' },
+      group: 'updates',
     },
     {
       id: '4',
-      title: 'Weekly report generated',
-      description: 'Your weekly activity report is ready to view.',
+      title: 'Weekly report ready',
       type: 'success',
-      timestamp: new Date(Date.now() - 24 * 3600000),
+      timestamp: minutesAgo(24 * 60),
       read: true,
-      groupId: 'updates',
+      group: 'updates',
     },
     {
       id: '5',
-      title: 'Payment failed',
-      description:
-        'Your payment method was declined. Please update your billing info.',
-      type: 'error',
-      timestamp: new Date(Date.now() - 10 * 60000),
-      read: false,
-      groupId: 'alerts',
-      action: { label: 'Update payment' },
-    },
-    {
-      id: '6',
-      title: 'Storage limit warning',
-      description: "You've used 90% of your storage quota.",
+      title: 'Storage almost full',
+      description: 'You have used 90% of your space.',
       type: 'warning',
-      timestamp: new Date(Date.now() - 3 * 3600000),
+      timestamp: minutesAgo(180),
       read: false,
-      groupId: 'alerts',
-      action: { label: 'Upgrade plan' },
+      group: 'alerts',
     },
   ]);
-
-  onMarkRead(event: { notification: ScNotification; read: boolean }): void {
-    console.log('Mark read:', event);
-  }
-
-  onDismiss(notification: ScNotification): void {
-    console.log('Dismissed:', notification);
-  }
-
-  onClearAll(): void {
-    console.log('Cleared all notifications');
-  }
 }

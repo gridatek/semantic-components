@@ -1,171 +1,110 @@
 import {
+  DestroyRef,
   Directive,
   InjectionToken,
+  afterNextRender,
   computed,
+  inject,
   input,
   model,
-  output,
+  signal,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import type {
   ScNotification,
-  ScNotificationAction,
-  ScNotificationCenterLabels,
-  ScNotificationGroupData,
+  ScNotificationFilterValue,
 } from './notification-types';
 
-export type ScNotificationFilter = 'all' | 'unread' | 'read';
+export const SC_NOTIFICATION_CENTER = new InjectionToken<
+  ScNotificationCenter<ScNotification>
+>('SC_NOTIFICATION_CENTER');
 
-export interface ScNotificationCenterApi {
-  readonly notifications: ReturnType<typeof model<ScNotification[]>>;
-  readonly groups: () => ScNotificationGroupData[];
-  readonly title: () => string;
-  readonly labels: () => ScNotificationCenterLabels;
-  readonly showFilters: () => boolean;
-  readonly showClearAll: () => boolean;
-  readonly showDismiss: () => boolean;
-  readonly emptyTitle: () => string;
-  readonly emptyDescription: () => string;
-  readonly filter: ReturnType<typeof model<ScNotificationFilter>>;
-  readonly totalUnread: () => number;
-  readonly filteredNotifications: () => ScNotification[];
-  readonly ungroupedNotifications: () => ScNotification[];
-  readonly itemClick: ReturnType<typeof output<ScNotification>>;
-  getGroupNotifications(groupId: string): ScNotification[];
-  setFilter(f: ScNotificationFilter): void;
-  onMarkRead(notification: ScNotification, read: boolean): void;
-  onMarkAllRead(): void;
-  onMarkAllReadInGroup(groupId: string): void;
-  onDismiss(notification: ScNotification): void;
-  onClearAll(): void;
-  onClearGroup(groupId: string): void;
-  onActionClick(
-    notification: ScNotification,
-    action: ScNotificationAction,
-  ): void;
-}
-
-export const SC_NOTIFICATION_CENTER =
-  new InjectionToken<ScNotificationCenterApi>('SC_NOTIFICATION_CENTER');
-
+/**
+ * The notifications and what is done with them: the list (`[(notifications)]`,
+ * your own type extending `ScNotification`), the filter, the counts. Its
+ * parts read and change it; write the rest — the header, the list, each
+ * notification's content — with them (`#center="scNotificationCenter"`).
+ */
 @Directive({
   selector: '[scNotificationCenter]',
   exportAs: 'scNotificationCenter',
   providers: [
-    {
-      provide: SC_NOTIFICATION_CENTER,
-      useExisting: ScNotificationCenter,
-    },
+    { provide: SC_NOTIFICATION_CENTER, useExisting: ScNotificationCenter },
   ],
   host: {
-    role: 'region',
+    'data-slot': 'notification-center',
     '[class]': 'class()',
-    '[attr.aria-label]': 'ariaLabel() || title()',
   },
 })
-export class ScNotificationCenter implements ScNotificationCenterApi {
+export class ScNotificationCenter<T extends ScNotification = ScNotification> {
+  readonly notifications = model<readonly T[]>([]);
+  /** Which are shown: `all`, `unread` or `read`. */
+  readonly filter = model<ScNotificationFilterValue>('all');
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly notifications = model<ScNotification[]>([]);
-  readonly groups = input<ScNotificationGroupData[]>([]);
-  readonly title = input<string>('');
-  /** Name of the region; defaults to `title`. Make it unique per page. */
-  readonly ariaLabel = input<string>('', { alias: 'aria-label' });
-  readonly showFilters = input(true);
-  readonly showClearAll = input(true);
-  readonly showDismiss = input(true);
-  readonly emptyTitle = input<string>('');
-  readonly emptyDescription = input<string>('');
-  /** Its texts: see `ScNotificationCenterLabels`. */
-  readonly labels = input.required<ScNotificationCenterLabels>();
 
-  readonly markRead = output<{ notification: ScNotification; read: boolean }>();
-  readonly markAllRead = output<void>();
-  readonly dismiss = output<ScNotification>();
-  readonly clearAll = output<void>();
-  readonly actionClick = output<{
-    notification: ScNotification;
-    action: ScNotificationAction;
-  }>();
-  readonly itemClick = output<ScNotification>();
+  /** Now, moving on every minute: the times follow it. */
+  readonly now = signal(Date.now());
 
-  readonly filter = model<ScNotificationFilter>('all');
+  /** The notifications the filter shows. */
+  readonly visible = computed(() => {
+    const filter = this.filter();
+    return this.notifications().filter(
+      (n) => filter === 'all' || n.read === (filter === 'read'),
+    );
+  });
 
-  protected readonly class = computed(() => cn(this.classInput()));
-
-  readonly totalUnread = computed(
+  readonly unreadCount = computed(
     () => this.notifications().filter((n) => !n.read).length,
   );
 
-  readonly filteredNotifications = computed(() => {
-    const f = this.filter();
-    const all = this.notifications();
-
-    switch (f) {
-      case 'unread':
-        return all.filter((n) => !n.read);
-      case 'read':
-        return all.filter((n) => n.read);
-      default:
-        return all;
-    }
-  });
-
-  readonly ungroupedNotifications = computed(() =>
-    this.filteredNotifications().filter((n) => !n.groupId),
+  protected readonly class = computed(() =>
+    cn('flex flex-col', this.classInput()),
   );
 
-  getGroupNotifications(groupId: string): ScNotification[] {
-    return this.filteredNotifications().filter((n) => n.groupId === groupId);
+  constructor() {
+    // In the browser only: the server renders the time once.
+    const destroyRef = inject(DestroyRef);
+    afterNextRender(() => {
+      const timer = setInterval(() => this.now.set(Date.now()), 60_000);
+      destroyRef.onDestroy(() => clearInterval(timer));
+    });
   }
 
-  setFilter(f: ScNotificationFilter): void {
-    this.filter.set(f);
+  /** The shown notifications of one group. */
+  visibleIn(group: string): readonly T[] {
+    return this.visible().filter((n) => n.group === group);
   }
 
-  onMarkRead(notification: ScNotification, read: boolean): void {
-    this.notifications.update((notifications) =>
-      notifications.map((n) => (n.id === notification.id ? { ...n, read } : n)),
+  /** The unread notifications of one group, or of all. */
+  unreadIn(group?: string): number {
+    return this.notifications().filter(
+      (n) => !n.read && (group === undefined || n.group === group),
+    ).length;
+  }
+
+  markRead(id: string, read = true): void {
+    this.notifications.update((list) =>
+      list.map((n) => (n.id === id ? { ...n, read } : n)),
     );
-    this.markRead.emit({ notification, read });
   }
 
-  onMarkAllRead(): void {
-    this.notifications.update((notifications) =>
-      notifications.map((n) => ({ ...n, read: true })),
-    );
-    this.markAllRead.emit();
-  }
-
-  onMarkAllReadInGroup(groupId: string): void {
-    this.notifications.update((notifications) =>
-      notifications.map((n) =>
-        n.groupId === groupId ? { ...n, read: true } : n,
+  /** Marks every notification read — or only those of a group. */
+  markAllRead(group?: string): void {
+    this.notifications.update((list) =>
+      list.map((n) =>
+        group === undefined || n.group === group ? { ...n, read: true } : n,
       ),
     );
   }
 
-  onDismiss(notification: ScNotification): void {
-    this.notifications.update((notifications) =>
-      notifications.filter((n) => n.id !== notification.id),
+  dismiss(id: string): void {
+    this.notifications.update((list) => list.filter((n) => n.id !== id));
+  }
+
+  /** Removes every notification — or only those of a group. */
+  clear(group?: string): void {
+    this.notifications.update((list) =>
+      group === undefined ? [] : list.filter((n) => n.group !== group),
     );
-    this.dismiss.emit(notification);
-  }
-
-  onClearAll(): void {
-    this.notifications.set([]);
-    this.clearAll.emit();
-  }
-
-  onClearGroup(groupId: string): void {
-    this.notifications.update((notifications) =>
-      notifications.filter((n) => n.groupId !== groupId),
-    );
-  }
-
-  onActionClick(
-    notification: ScNotification,
-    action: ScNotificationAction,
-  ): void {
-    this.actionClick.emit({ notification, action });
   }
 }
