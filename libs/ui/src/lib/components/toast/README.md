@@ -4,32 +4,27 @@ A succinct message that is displayed temporarily to provide feedback.
 
 ## Architecture
 
-Unlike other components that use template-based triggers, Toast uses a **service-based architecture**:
+You show toasts from code (`ScToaster.show(config)`) and write how a toast looks once, in your app: an `<ng-template scToastTemplate let-toast>` with the parts. The toaster puts each toast in its frame (`scToast`: variant styles, swipe to dismiss, pause on hover) in a stack it creates, and renders your template in it.
 
 ```
-ScToaster (Injectable)
-    │
-    └── show(config) ──► Creates ToastData ──► Updates signal ──► ScToastStack renders
-                                                                       │
-                                                                       ├── ScToast (container)
-                                                                       │     ├── ScToastTitle
-                                                                       │     ├── ScToastDescription
-                                                                       │     ├── ScToastAction
-                                                                       │     └── ScToastClose
-                                                                       │
-                                                                       └── [Multiple toasts stack]
+ScToaster.show({ title, description, variant, action })
+    └── ScToastStack (created by the toaster; one polite live region)
+          └── ScToast (each toast's frame)
+                └── your scToastTemplate: ScToastIcon, ScToastTitle, ScToastDescription, ScToastAction, ScToastClose
 ```
 
-## Components
+## Parts
 
-| Component            | Selector                | Description                                                                                                  |
-| -------------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------ |
-| `ScToastStack`       | `<sc-toast-stack>`      | Renders the active toasts. `ScToaster` creates it in an overlay on the first toast: don't place it yourself. |
-| `ScToast`            | `div[scToast]`          | Individual toast wrapper with variant styling                                                                |
-| `ScToastTitle`       | `[scToastTitle]`        | Toast title text                                                                                             |
-| `ScToastDescription` | `[scToastDescription]`  | Toast description text                                                                                       |
-| `ScToastAction`      | `button[scToastAction]` | Action button inside toast                                                                                   |
-| `ScToastClose`       | `button[scToastClose]`  | Close button to dismiss toast                                                                                |
+| Part                 | Selector                       | Does                                                                         |
+| -------------------- | ------------------------------ | ---------------------------------------------------------------------------- |
+| `ScToastTemplate`    | `ng-template[scToastTemplate]` | How a toast looks — once, in your app; `let-toast` is the toast's data       |
+| `ScToastIcon`        | `[scToastIcon]`                | Your icon, coloured by the toast's variant (a spinner turns while `loading`) |
+| `ScToastTitle`       | `[scToastTitle]`               | The title                                                                    |
+| `ScToastDescription` | `[scToastDescription]`         | The description                                                              |
+| `ScToastAction`      | `button[scToastAction]`        | Runs the toast's `action`, then dismisses it: write `toast.action.label`     |
+| `ScToastClose`       | `button[scToastClose]`         | Dismisses the toast: write its icon and name it                              |
+| `ScToast`            | `div[scToast]`                 | Each toast's frame (the stack renders it)                                    |
+| `ScToastStack`       | `sc-toast-stack`               | The stack — the toaster creates it in an overlay: don't place it yourself    |
 
 ## Service
 
@@ -69,53 +64,47 @@ interface ToastConfig {
 
 ## Usage
 
-### 1. Name the close buttons (once)
+### 1. Write how a toast looks (once, in your app)
 
-The library writes no text: give the toasts' close buttons their name once, at the app's start (development warns when a toast is shown without it).
+```html
+<!-- app.html -->
+<router-outlet />
 
-```typescript
-export class App {
-  constructor() {
-    inject(ScToaster).setCloseLabel('Close');
+<ng-template scToastTemplate let-toast>
+  @if (toast.variant === 'success') {
+  <span scToastIcon><svg siCircleCheckIcon></svg></span>
   }
-}
+  <div class="grid gap-1">
+    @if (toast.title) {
+    <div scToastTitle>{{ toast.title }}</div>
+    } @if (toast.description) {
+    <div scToastDescription>{{ toast.description }}</div>
+    }
+  </div>
+  @if (toast.action) {
+  <button scToastAction>{{ toast.action.label }}</button>
+  }
+  <button scToastClose aria-label="Close"><svg siXIcon></svg></button>
+</ng-template>
 ```
 
-### 2. Inject ScToaster and show toasts
+The library writes no text and no icon: they are yours, translated as you like. In development, showing a toast with no `scToastTemplate` warns.
+
+### 2. Show toasts
 
 ```typescript
-import { Component, inject } from '@angular/core';
-import { ScToaster } from './ui/toast';
-
-@Component({
-  // ...
-})
 export class MyComponent {
-  private readonly toast = inject(ScToaster);
+  private readonly toaster = inject(ScToaster);
 
-  showSuccess(): void {
-    this.toast.show({
-      title: 'Success',
-      description: 'Your changes have been saved.',
-    });
+  save(): void {
+    this.toaster.success({ description: 'Your changes have been saved.' });
   }
 
-  showError(): void {
-    this.toast.show({
-      variant: 'destructive',
-      title: 'Error',
-      description: 'Something went wrong.',
-    });
-  }
-
-  showWithAction(): void {
-    this.toast.show({
+  upload(): void {
+    this.toaster.show({
       title: 'File uploaded',
       description: 'photo.jpg has been uploaded.',
-      action: {
-        label: 'View',
-        onClick: () => this.router.navigate(['/files']),
-      },
+      action: { label: 'View', onClick: () => this.router.navigate(['/files']) },
     });
   }
 }
@@ -134,14 +123,13 @@ export class MyComponent {
 - **Custom duration**: Set `duration` in config (0 = no auto-dismiss)
 - **Stacking**: Multiple toasts stack from bottom on desktop, top on mobile
 - **Actions**: Add action buttons that execute callbacks
-- **Accessibility**: Uses `role="status"` and `aria-live="polite"`
+- **Accessibility**: one polite live region announces each toast
 
 ## Accessibility
 
-- Uses `role="status"` for screen reader announcements
-- `aria-live="polite"` ensures toasts are announced without interrupting
-- `aria-atomic="true"` ensures the entire toast is read
-- Close button has `aria-label="Close"`
+- The stack is one stable polite live region (`aria-live="polite"`): each new toast is announced as it appears, without interrupting.
+- The close and action buttons are yours: name the icon-only close button (`aria-label`) — in development, an unnamed one warns.
+- Hovering a toast pauses its timer; swiping it away dismisses it.
 
 ## Styling
 

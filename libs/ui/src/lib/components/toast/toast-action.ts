@@ -1,14 +1,19 @@
-import { Directive, computed, input } from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '../../utils';
+import { SC_TOAST_CONTEXT } from './toast-context';
 
+/** Runs its toast's action, then dismisses it. Write its text (`toast.action.label`). */
 @Directive({
   selector: 'button[scToastAction]',
   host: {
     type: 'button',
+    'data-slot': 'toast-action',
     '[class]': 'class()',
+    '(click)': 'run()',
   },
 })
 export class ScToastAction {
+  private readonly context = inject(SC_TOAST_CONTEXT);
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
@@ -23,4 +28,9 @@ export class ScToastAction {
       this.classInput(),
     ),
   );
+
+  protected run(): void {
+    this.context.toast.action?.onClick();
+    this.context.dismiss();
+  }
 }

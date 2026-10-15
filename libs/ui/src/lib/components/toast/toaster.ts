@@ -1,7 +1,7 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { Service, inject, signal } from '@angular/core';
+import { Service, type TemplateRef, inject, signal } from '@angular/core';
 import { ScToastStack } from './toast-stack';
 import { ScToastConfig, ScToastData, ScToastPosition } from './toast.types';
 
@@ -13,9 +13,10 @@ export class ScToaster {
   private readonly positionSignal = signal<ScToastPosition>('bottom-right');
   readonly position = this.positionSignal.asReadonly();
 
-  private readonly closeLabelSignal = signal('');
-  /** The close buttons' name: `setCloseLabel`. */
-  readonly closeLabel = this.closeLabelSignal.asReadonly();
+  /** How a toast looks: set by your `scToastTemplate`. */
+  readonly ɵtemplate = signal<TemplateRef<{ $implicit: ScToastData }> | null>(
+    null,
+  );
 
   private readonly defaultDuration = 5000;
   private readonly maxToasts = 5;
@@ -28,21 +29,16 @@ export class ScToaster {
 
   private overlayRef: OverlayRef | null = null;
 
-  /**
-   * Show a new toast notification
-   */
   setPosition(position: ScToastPosition): void {
     this.positionSignal.set(position);
   }
 
-  /** Names the toasts' close buttons — the library writes none ("Close"). */
-  setCloseLabel(label: string): void {
-    this.closeLabelSignal.set(label);
-  }
-
+  /** Shows a toast — as your `scToastTemplate` writes it. */
   show(config: ScToastConfig): string {
-    if (typeof ngDevMode !== 'undefined' && ngDevMode && !this.closeLabel()) {
-      console.warn('ScToaster: name the close buttons with setCloseLabel().');
+    if (typeof ngDevMode !== 'undefined' && ngDevMode && !this.ɵtemplate()) {
+      console.warn(
+        'ScToaster: write how a toast looks once, in your app: <ng-template scToastTemplate let-toast>.',
+      );
     }
     this.ensureOverlay();
 

@@ -1,107 +1,64 @@
-import { Component, ViewEncapsulation, computed, inject } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
 import {
-  SiCircleCheckIcon,
-  SiInfoIcon,
-  SiLoaderCircleIcon,
-  SiOctagonXIcon,
-  SiTriangleAlertIcon,
-  SiXIcon,
-} from '@semantic-icons/lucide-icons';
+  Component,
+  Injector,
+  ViewEncapsulation,
+  computed,
+  inject,
+} from '@angular/core';
 import { cn } from '../../utils';
 import { ScToast } from './toast';
-import { ScToastAction } from './toast-action';
-import { ScToastClose } from './toast-close';
-import { ScToastDescription } from './toast-description';
-import { ScToastTitle } from './toast-title';
-import { ScToastPosition } from './toast.types';
+import { SC_TOAST_CONTEXT } from './toast-context';
+import type { ScToastData, ScToastPosition } from './toast.types';
 import { ScToaster } from './toaster';
 
+/**
+ * The toasts, in an overlay the toaster creates: each in its frame
+ * (`scToast`: swipe, pause on hover), written by your `scToastTemplate`. One
+ * polite live region, so each new toast is announced.
+ */
 @Component({
   selector: 'sc-toast-stack',
-  imports: [
-    SiXIcon,
-    SiCircleCheckIcon,
-    SiInfoIcon,
-    SiLoaderCircleIcon,
-    SiOctagonXIcon,
-    SiTriangleAlertIcon,
-    ScToast,
-    ScToastTitle,
-    ScToastDescription,
-    ScToastClose,
-    ScToastAction,
-  ],
+  imports: [NgTemplateOutlet, ScToast],
   template: `
-    @for (toast of toastService.toasts(); track toast.id) {
-      <div
-        scToast
-        [variant]="toast.variant ?? 'default'"
-        [position]="toastService.position()"
-        (pointerEnter)="toastService.pause(toast.id)"
-        (pointerLeave)="toastService.resume(toast.id)"
-        (touchstart)="onTouchStart($event)"
-        (touchmove)="onTouchMove($event)"
-        (touchend)="onTouchEnd($event, toast.id)"
-      >
-        @switch (toast.variant) {
-          @case ('success') {
-            <svg
-              siCircleCheckIcon
-              class="size-4 shrink-0 text-green-600 dark:text-green-400"
-            ></svg>
-          }
-          @case ('info') {
-            <svg
-              siInfoIcon
-              class="size-4 shrink-0 text-blue-600 dark:text-blue-400"
-            ></svg>
-          }
-          @case ('warning') {
-            <svg
-              siTriangleAlertIcon
-              class="size-4 shrink-0 text-yellow-600 dark:text-yellow-400"
-            ></svg>
-          }
-          @case ('error') {
-            <svg siOctagonXIcon class="size-4 shrink-0"></svg>
-          }
-          @case ('loading') {
-            <svg siLoaderCircleIcon class="size-4 shrink-0 animate-spin"></svg>
-          }
-        }
-        <div class="grid gap-1">
-          @if (toast.title) {
-            <div scToastTitle>{{ toast.title }}</div>
-          }
-          @if (toast.description) {
-            <div scToastDescription>{{ toast.description }}</div>
-          }
-        </div>
-        @if (toast.action) {
-          <button
-            scToastAction
-            (click)="onAction(toast.id, toast.action.onClick)"
-          >
-            {{ toast.action.label }}
-          </button>
-        }
-        <button
-          scToastClose
-          [attr.aria-label]="toastService.closeLabel() || null"
-          (close)="dismiss(toast.id)"
+    @if (toastTemplate(); as template) {
+      @for (toast of toastService.toasts(); track toast.id) {
+        <div
+          scToast
+          [variant]="toast.variant ?? 'default'"
+          [position]="toastService.position()"
+          (pointerEnter)="toastService.pause(toast.id)"
+          (pointerLeave)="toastService.resume(toast.id)"
+          (touchstart)="onTouchStart($event)"
+          (touchmove)="onTouchMove($event)"
+          (touchend)="onTouchEnd($event, toast.id)"
         >
-          <svg siXIcon class="size-4"></svg>
-        </button>
-      </div>
+          <ng-container
+            *ngTemplateOutlet="
+              template;
+              context: { $implicit: toast };
+              injector: injectorFor(toast)
+            "
+          />
+        </div>
+      }
     }
   `,
   host: {
+    'aria-live': 'polite',
+    'aria-relevant': 'additions',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
 })
 export class ScToastStack {
   protected readonly toastService = inject(ScToaster);
+  /** How a toast looks: your `scToastTemplate`. */
+  protected readonly toastTemplate = computed(() =>
+    this.toastService.ɵtemplate(),
+  );
+  private readonly injector = inject(Injector);
+  private readonly injectors = new Map<string, Injector>();
 
   private readonly swipeThreshold = 100;
 
@@ -121,13 +78,33 @@ export class ScToastStack {
     ),
   );
 
-  protected dismiss(id: string): void {
-    this.toastService.dismiss(id);
-  }
-
-  protected onAction(id: string, onClick: () => void): void {
-    onClick();
-    this.toastService.dismiss(id);
+  /** The context of a toast's parts: the toast, and dismissing it. */
+  protected injectorFor(toast: ScToastData): Injector {
+    // Those of toasts gone (dismissed, timed out) are dropped.
+    const shown = new Set(this.toastService.toasts().map((t) => t.id));
+    for (const id of this.injectors.keys()) {
+      if (!shown.has(id)) this.injectors.delete(id);
+    }
+    let injector = this.injectors.get(toast.id);
+    if (!injector) {
+      injector = Injector.create({
+        parent: this.injector,
+        providers: [
+          {
+            provide: SC_TOAST_CONTEXT,
+            useValue: {
+              toast,
+              dismiss: () => {
+                this.injectors.delete(toast.id);
+                this.toastService.dismiss(toast.id);
+              },
+            },
+          },
+        ],
+      });
+      this.injectors.set(toast.id, injector);
+    }
+    return injector;
   }
 
   protected onTouchStart(event: TouchEvent): void {
@@ -153,6 +130,7 @@ export class ScToastStack {
     const deltaX = event.changedTouches[0].clientX - startX;
 
     if (Math.abs(deltaX) >= this.swipeThreshold) {
+      this.injectors.delete(id);
       this.toastService.dismiss(id);
     } else {
       // Snap back

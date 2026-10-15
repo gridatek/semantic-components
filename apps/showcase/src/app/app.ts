@@ -1,20 +1,16 @@
-import {
-  Component,
-  ViewEncapsulation,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
+import { Component, ViewEncapsulation, computed, input } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ScToaster, cn } from '@semantic-components/ui';
+import { cn } from '@semantic-components/ui';
 import { CommandPalette } from './components/command-palette/command-palette';
+import { Toaster } from './components/toaster/toaster';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, CommandPalette],
+  imports: [RouterOutlet, CommandPalette, Toaster],
   template: `
     <router-outlet />
     <app-command-palette />
+    <app-toaster />
   `,
   host: {
     '[class]': 'class()',
@@ -28,9 +24,4 @@ export class App {
   });
 
   protected readonly class = computed(() => cn('block', this.classInput()));
-
-  constructor() {
-    // The toasts' close buttons: the library writes no text.
-    inject(ScToaster).setCloseLabel('Close');
-  }
 }

@@ -13,9 +13,8 @@ import { ScToastPosition, ScToastVariant } from './toast.types';
   selector: 'div[scToast]',
   template: ` <ng-content /> `,
   host: {
-    role: 'status',
-    'aria-live': 'polite',
-    'aria-atomic': 'true',
+    'data-slot': 'toast',
+    '[attr.data-variant]': 'variant()',
     '[class]': 'class()',
     'animate.enter': 'animate-in',
     'animate.leave': 'animate-out',
