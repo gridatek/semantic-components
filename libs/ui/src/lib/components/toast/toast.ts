@@ -86,7 +86,7 @@ export class ScToast {
 
   protected readonly class = computed(() =>
     cn(
-      'group pointer-events-auto absolute inset-x-0 flex items-center justify-between gap-4 overflow-hidden rounded-2xl border p-4 pe-6 shadow-lg',
+      'group pointer-events-auto absolute inset-x-0 flex items-center gap-3 overflow-hidden rounded-2xl border p-4 pe-6 shadow-lg',
       'bg-popover text-popover-foreground',
       'transition-[transform,height,opacity,translate] duration-300 ease-out',
       this.layout.fromBottom ? 'bottom-0 origin-top' : 'top-0 origin-bottom',
