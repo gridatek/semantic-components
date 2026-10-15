@@ -10,7 +10,6 @@ import {
 } from '@semantic-components/ui';
 import {
   SiCircleCheckIcon,
-  SiInfoIcon,
   SiLoaderCircleIcon,
   SiOctagonXIcon,
   SiTriangleAlertIcon,
@@ -29,7 +28,6 @@ import {
     ScToastAction,
     ScToastClose,
     SiCircleCheckIcon,
-    SiInfoIcon,
     SiLoaderCircleIcon,
     SiOctagonXIcon,
     SiTriangleAlertIcon,
@@ -41,9 +39,6 @@ import {
         @switch (toast.variant) {
           @case ('success') {
             <span scToastIcon><svg siCircleCheckIcon></svg></span>
-          }
-          @case ('info') {
-            <span scToastIcon><svg siInfoIcon></svg></span>
           }
           @case ('warning') {
             <span scToastIcon><svg siTriangleAlertIcon></svg></span>

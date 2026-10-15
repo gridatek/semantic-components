@@ -7,7 +7,7 @@ export type ScToastPosition =
   | 'bottom-end';
 
 export type ScToastVariant =
-  'default' | 'success' | 'info' | 'warning' | 'error' | 'loading';
+  'default' | 'success' | 'warning' | 'error' | 'loading';
 
 export interface ScToastData {
   id: string;

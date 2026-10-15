@@ -10,7 +10,6 @@ import { ScToaster } from '@semantic-components/ui';
       <button scButton variant="outline" (click)="showSuccess()">
         Success
       </button>
-      <button scButton variant="outline" (click)="showInfo()">Info</button>
       <button scButton variant="outline" (click)="showWarning()">
         Warning
       </button>
@@ -30,13 +29,6 @@ export class VariantsToastDemo {
     this.toastService.show({
       variant: 'success',
       description: 'Changes saved successfully.',
-    });
-  }
-
-  showInfo(): void {
-    this.toastService.show({
-      variant: 'info',
-      description: 'A new version is available.',
     });
   }
 
