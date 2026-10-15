@@ -28,6 +28,7 @@ import {
   ScCodeEditorLanguage,
 } from '@semantic-components/code';
 import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui';
+import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-interactive-code-editor-demo',
@@ -40,6 +41,8 @@ import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui';
     ScCheckboxField,
     ScCheckbox,
     ScLabel,
+    SiCheckIcon,
+    SiCopyIcon,
   ],
   template: \`
     <div class="mb-4 flex flex-wrap gap-4">
@@ -96,6 +99,12 @@ import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui';
           #copy="scCodeEditorCopyButton"
           [code]="interactiveCode"
         >
+          @if (copy.copied()) {
+            <svg siCheckIcon></svg>
+          } @else {
+            <svg siCopyIcon></svg>
+          }
+
           <span class="sr-only">{{
             copy.copied() ? 'Copied' : 'Copy code'
           }}</span>

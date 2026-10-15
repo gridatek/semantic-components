@@ -26,6 +26,7 @@ import {
   ScCodeEditorHeader,
   ScCodeEditorLabel,
 } from '@semantic-components/code';
+import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-json-code-editor-demo',
@@ -35,6 +36,8 @@ import {
     ScCodeEditorLabel,
     ScCodeEditorContent,
     ScCodeEditorCopyButton,
+    SiCheckIcon,
+    SiCopyIcon,
   ],
   template: \`
     <div scCodeEditor>
@@ -48,6 +51,12 @@ import {
           #copy="scCodeEditorCopyButton"
           [code]="jsonCode"
         >
+          @if (copy.copied()) {
+            <svg siCheckIcon></svg>
+          } @else {
+            <svg siCopyIcon></svg>
+          }
+
           <span class="sr-only">{{
             copy.copied() ? 'Copied' : 'Copy code'
           }}</span>

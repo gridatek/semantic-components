@@ -1,34 +1,29 @@
+import { Directive, computed, input, signal } from '@angular/core';
 import {
-  Component,
-  ViewEncapsulation,
-  computed,
-  input,
-  signal,
-} from '@angular/core';
-import { buttonVariants, cn, ɵwarnIfUnnamed } from '@semantic-components/ui';
-import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
+  type ScButtonVariants,
+  buttonVariants,
+  cn,
+  ɵwarnIfUnnamed,
+} from '@semantic-components/ui';
 
-@Component({
+/**
+ * Copies `code` to the clipboard. Write its icon and name it — `copied()` is
+ * true for two seconds after a copy, to switch both.
+ */
+@Directive({
   selector: 'button[scCodeEditorCopyButton]',
   exportAs: 'scCodeEditorCopyButton',
-  imports: [SiCheckIcon, SiCopyIcon],
-  template: `
-    @if (copied()) {
-      <svg siCheckIcon class="size-4"></svg>
-    } @else {
-      <svg siCopyIcon class="size-4"></svg>
-    }
-  `,
   host: {
-    '[class]': 'class()',
     type: 'button',
+    '[class]': 'class()',
     '(click)': 'copyCode($event)',
   },
-  encapsulation: ViewEncapsulation.None,
 })
 export class ScCodeEditorCopyButton {
   readonly code = input.required<string>();
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly variant = input<ScButtonVariants['variant']>('ghost');
+  readonly size = input<ScButtonVariants['size']>('icon');
 
   /** Whether the code was just copied (for two seconds): name the button with it. */
   readonly copied = signal(false);
@@ -39,7 +34,7 @@ export class ScCodeEditorCopyButton {
 
   protected readonly class = computed(() =>
     cn(
-      buttonVariants({ variant: 'ghost', size: 'icon' }),
+      buttonVariants({ variant: this.variant(), size: this.size() }),
       'text-muted-foreground',
       this.classInput(),
     ),
