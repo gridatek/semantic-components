@@ -155,7 +155,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
                         feature.provide
                       }}</code>
                     } @else {
-                      None
+                      None (scEditorBubbleMenu adds itself to the editor)
                     }
                   </td>
                   <td scTableCell>

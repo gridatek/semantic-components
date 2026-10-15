@@ -33,16 +33,16 @@ import { ScEditorTable, withTables } from '@semantic-components/editor/tables';
 })
 ```
 
-| Entry point                               | Provide           | Parts                                                                                    | Package                                                        |
-| ----------------------------------------- | ----------------- | ---------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
-| `@semantic-components/editor/tables`      | `withTables()`    | `scEditorTable`                                                                          | `@tiptap/extension-table`                                      |
-| `@semantic-components/editor/images`      | `withImages()`    | `scEditorImage`; dropping and pasting images                                             | `@tiptap/extension-image`, `@tiptap/extension-file-handler`    |
-| `@semantic-components/editor/search`      | `withSearch()`    | `scEditorSearch`, `scEditorSearchBar` and its parts; **Ctrl / ⌘ + F**                    | `@tiptap/extension-find-and-replace`                           |
-| `@semantic-components/editor/highlight`   | `withHighlight()` | `scEditorHighlight`, `scEditorHighlightColor`, `scEditorUnsetHighlight`                  | `@tiptap/extension-highlight`                                  |
-| `@semantic-components/editor/scripts`     | `withScripts()`   | `scEditorSuperscript`, `scEditorSubscript`                                               | `@tiptap/extension-superscript`, `@tiptap/extension-subscript` |
-| `@semantic-components/editor/align`       | `withAlign()`     | `scEditorAlignLeft`, `scEditorAlignCenter`, `scEditorAlignRight`, `scEditorAlignJustify` | `@tiptap/extension-text-align`                                 |
-| `@semantic-components/editor/markdown`    | `withMarkdown()`  | `format="markdown"`                                                                      | `@tiptap/markdown`                                             |
-| `@semantic-components/editor/bubble-menu` | none              | `scEditorBubbleMenu`                                                                     | `@tiptap/extension-bubble-menu`                                |
+| Entry point                               | Provide                                               | Parts                                                                                    | Package                                                        |
+| ----------------------------------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| `@semantic-components/editor/tables`      | `withTables()`                                        | `scEditorTable`                                                                          | `@tiptap/extension-table`                                      |
+| `@semantic-components/editor/images`      | `withImages()`                                        | `scEditorImage`; dropping and pasting images                                             | `@tiptap/extension-image`, `@tiptap/extension-file-handler`    |
+| `@semantic-components/editor/search`      | `withSearch()`                                        | `scEditorSearch`, `scEditorSearchBar` and its parts; **Ctrl / ⌘ + F**                    | `@tiptap/extension-find-and-replace`                           |
+| `@semantic-components/editor/highlight`   | `withHighlight()`                                     | `scEditorHighlight`, `scEditorHighlightColor`, `scEditorUnsetHighlight`                  | `@tiptap/extension-highlight`                                  |
+| `@semantic-components/editor/scripts`     | `withScripts()`                                       | `scEditorSuperscript`, `scEditorSubscript`                                               | `@tiptap/extension-superscript`, `@tiptap/extension-subscript` |
+| `@semantic-components/editor/align`       | `withAlign()`                                         | `scEditorAlignLeft`, `scEditorAlignCenter`, `scEditorAlignRight`, `scEditorAlignJustify` | `@tiptap/extension-text-align`                                 |
+| `@semantic-components/editor/markdown`    | `withMarkdown()`                                      | `format="markdown"`                                                                      | `@tiptap/markdown`                                             |
+| `@semantic-components/editor/bubble-menu` | none (`scEditorBubbleMenu` adds itself to the editor) | `scEditorBubbleMenu`                                                                     | `@tiptap/extension-bubble-menu`                                |
 
 - **Provided, not found from the buttons**: the document's schema is set when the editor starts, and a saved document can hold a table with no table button in sight — without `withTables()` it would be dropped. `provideEditor` goes in a component's `providers` (or the app's); the editors and `scEditorView`s below read it.
 - **The same features for the editor and the display**, so they hold the same documents.
