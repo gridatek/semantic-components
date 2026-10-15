@@ -594,7 +594,7 @@
   {
     "name": "Notification Center",
     "path": "notification-center",
-    "description": "Notifications built from parts: filters, groups, read state and relative times.",
+    "description": "Notifications built from parts: an inbox, sections by day, read state and relative times.",
     "status": "Experimental",
     "library": "ui-lab",
     "category": "Advanced"

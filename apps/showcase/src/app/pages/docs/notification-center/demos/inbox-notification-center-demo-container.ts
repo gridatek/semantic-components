@@ -138,10 +138,19 @@ const minutesAgo = (minutes: number) => new Date(Date.now() - minutes * 60000);
         </button>
 
         <ng-template scPopoverPortal>
-          <div scPopover aria-label="Notifications" class="w-96 max-w-[calc(100vw-2rem)] p-0">
+          <div
+            scPopover
+            aria-label="Notifications"
+            class="w-96 max-w-[calc(100vw-2rem)] p-0"
+          >
             <div scNotificationCenterHeader>
               <h2 scNotificationCenterTitle>Notifications</h2>
-              <button scButton variant="ghost" size="sm" scNotificationMarkAllRead>
+              <button
+                scButton
+                variant="ghost"
+                size="sm"
+                scNotificationMarkAllRead
+              >
                 <svg siCheckCheckIcon></svg>
                 Mark all as read
               </button>
@@ -151,7 +160,6 @@ const minutesAgo = (minutes: number) => new Date(Date.now() - minutes * 60000);
               <div scNotificationFilters aria-label="Show">
                 <button scNotificationFilter="all">All</button>
                 <button scNotificationFilter="unread">Unread</button>
-                <button scNotificationFilter="read">Read</button>
               </div>
             </div>
 

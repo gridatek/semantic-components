@@ -25,14 +25,14 @@ test.describe('Inbox Notification Center Demo', () => {
     );
   });
 
-  test('filters show unread or read ones', async ({ page }) => {
+  test('the filter shows all or the unread ones', async ({ page }) => {
     await bell(page).click();
     const unread = page.getByRole('button', { name: 'Unread', exact: true });
     await unread.click();
     await expect(unread).toHaveAttribute('aria-pressed', 'true');
     await expect(items(page)).toHaveCount(3);
-    await page.getByRole('button', { name: 'Read', exact: true }).click();
-    await expect(items(page)).toHaveCount(2);
+    await page.getByRole('button', { name: 'All', exact: true }).click();
+    await expect(items(page)).toHaveCount(5);
   });
 
   test('marks one read, dismisses one, marks all read', async ({ page }) => {
@@ -53,27 +53,29 @@ test.describe('Inbox Notification Center Demo', () => {
   });
 });
 
-test.describe('Grouped Notification Center Demo', () => {
+test.describe('By Day Notification Center Demo', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto(
-      '/demos/notification-center/grouped-notification-center-demo',
+      '/demos/notification-center/by-day-notification-center-demo',
     );
   });
 
-  test('groups are named; their button acts on them alone', async ({
+  test('sections are named by their day', async ({ page }) => {
+    // Five days ago is always "Earlier", whatever the time of the run.
+    await expect(
+      page.getByRole('group', { name: 'Earlier' }).locator('li'),
+    ).toHaveCount(1);
+    await expect(items(page)).toHaveCount(5);
+  });
+
+  test('the unread filter leaves out the read ones, in every section', async ({
     page,
   }) => {
-    const messages = page.getByRole('group', { name: 'Messages' });
-    await expect(messages.locator('li')).toHaveCount(2);
-    await messages
-      .getByRole('button', { name: 'Mark all as read in Messages' })
-      .click();
-    await expect(messages.locator('li[data-read="false"]')).toHaveCount(0);
-    await expect(
-      page
-        .getByRole('group', { name: 'Alerts' })
-        .locator('li[data-read="false"]'),
-    ).toHaveCount(1);
+    await page.getByRole('button', { name: /^Unread/ }).click();
+    await expect(items(page)).toHaveCount(3);
+    await expect(page.getByRole('group', { name: 'Earlier' })).toHaveCount(0);
+    await page.getByRole('button', { name: 'Mark all as read' }).click();
+    await expect(page.getByText("You're all caught up.")).toBeVisible();
   });
 
   test('clear all leaves the empty state', async ({ page }) => {

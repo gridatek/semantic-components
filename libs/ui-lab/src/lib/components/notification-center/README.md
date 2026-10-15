@@ -54,19 +54,18 @@ readonly notifications = signal<Notice[]>([
 
 ## `scNotificationCenter`
 
-| Member                             | Does                                                                              |
-| ---------------------------------- | --------------------------------------------------------------------------------- |
-| `[(notifications)]`                | The notifications — your type, extending `ScNotification`. Every change goes here |
-| `[(filter)]`                       | `all` (default), `unread` or `read`                                               |
-| `visible()`                        | The notifications the filter shows                                                |
-| `visibleIn(group)`                 | Those of one group                                                                |
-| `unreadCount()`, `unreadIn(group)` | How many are unread                                                               |
-| `markRead(id, read?)`              | Marks one read (or unread with `false`)                                           |
-| `markAllRead(group?)`              | Marks all read — or those of a group                                              |
-| `dismiss(id)`                      | Removes one                                                                       |
-| `clear(group?)`                    | Removes all — or those of a group                                                 |
+| Member                | Does                                                                              |
+| --------------------- | --------------------------------------------------------------------------------- |
+| `[(notifications)]`   | The notifications — your type, extending `ScNotification`. Every change goes here |
+| `[(filter)]`          | `all` (default) or `unread`                                                       |
+| `visible()`           | The notifications the filter shows                                                |
+| `unreadCount()`       | How many are unread                                                               |
+| `markRead(id, read?)` | Marks one read (or unread with `false`)                                           |
+| `markAllRead()`       | Marks all read                                                                    |
+| `dismiss(id)`         | Removes one                                                                       |
+| `clear()`             | Removes all                                                                       |
 
-`ScNotification` is what the center needs — `id`, `read`, `timestamp`, and optionally `type` (`info`, `success`, `warning`, `error`, `message`: the icon's colour) and `group` (your id). Add your own fields and write them in the template: the center is generic, so `center.visible()` has your type.
+`ScNotification` is what the center needs — `id`, `read`, `timestamp`, and optionally `type` (`info`, `success`, `warning`, `error`, `message`: the icon's colour). Add your own fields and write them in the template: the center is generic, so `center.visible()` has your type.
 
 There are no outputs: everything the parts do is a change of `notifications` — save it from there (an `effect`, or your store).
 
@@ -78,10 +77,10 @@ There are no outputs: everything the parts do is a change of `notifications` —
 | `ScNotificationCenterTitle`  | `[scNotificationCenterTitle]`       | Its title (your heading)                                                                            |
 | `ScNotificationFilters`      | `div[scNotificationFilters]`        | The filter buttons, a segmented control (`role="group"`: name it)                                   |
 | `ScNotificationFilter`       | `button[scNotificationFilter]`      | `scNotificationFilter="unread"`: shows that filter, `aria-pressed` when on                          |
-| `ScNotificationMarkAllRead`  | `button[scNotificationMarkAllRead]` | Marks all read (in a group: the group's); disabled with none unread                                 |
-| `ScNotificationClearAll`     | `button[scNotificationClearAll]`    | Removes all (in a group: the group's); disabled with none                                           |
-| `ScNotificationGroup`        | `[scNotificationGroup]`             | `[scNotificationGroup]="'messages'"`: a `group` named by its title                                  |
-| `ScNotificationGroupTitle`   | `[scNotificationGroupTitle]`        | The group's title (your heading)                                                                    |
+| `ScNotificationMarkAllRead`  | `button[scNotificationMarkAllRead]` | Marks all read; disabled with none unread                                                           |
+| `ScNotificationClearAll`     | `button[scNotificationClearAll]`    | Removes all; disabled with none                                                                     |
+| `ScNotificationSection`      | `[scNotificationSection]`           | A section (Today, Earlier…): a `group` named by its title                                           |
+| `ScNotificationSectionTitle` | `[scNotificationSectionTitle]`      | The section's title (your heading)                                                                  |
 | `ScNotificationList`         | `ul[scNotificationList]`            | A list of notifications                                                                             |
 | `ScNotificationItem`         | `li[scNotification]`                | `[scNotification]="notice"`: one notification, for its parts. `data-read`, `data-type`              |
 | `ScNotificationIcon`         | `[scNotificationIcon]`              | Its icon or avatar (yours inside), coloured by `type`                                               |
@@ -97,15 +96,16 @@ There are no outputs: everything the parts do is a change of `notifications` —
 
 The buttons add behaviour to buttons of yours (a `scButton`, any variant): write their icons and texts, and name the icon-only ones (`aria-label`) — in development, an unnamed one warns.
 
-## Groups
+## Sections
+
+Most apps show one list, newest first, often in sections by day. Split `visible()` the way you want — by day, by source — and name each section by its title:
 
 ```html
-@for (group of groups; track group.id) {
-<div [scNotificationGroup]="group.id">
-  <h3 scNotificationGroupTitle>{{ group.title }}</h3>
-  <button scButton variant="ghost" size="icon-xs" scNotificationMarkAllRead [attr.aria-label]="'Mark all as read in ' + group.title">…</button>
+@for (day of byDay(center.visible()); track day.title) {
+<div scNotificationSection>
+  <h3 scNotificationSectionTitle>{{ day.title }}</h3>
   <ul scNotificationList>
-    @for (notice of center.visibleIn(group.id); track notice.id) {
+    @for (notice of day.notices; track notice.id) {
     <li [scNotification]="notice">…</li>
     }
   </ul>
@@ -132,7 +132,7 @@ Put `scNotificationCenter` around the popover, so the trigger can show the count
 
 ## Accessibility
 
-- Notifications are a list (`ul` / `li`); a group is a `group` named by its title.
+- Notifications are a list (`ul` / `li`); a section is a `group` named by its title.
 - The unread state is a dot for the eyes and your text for screen readers; the title is bolder too.
 - Times are `<time datetime>`, in the app's language.
 - The library writes no text: name the filters' group, the icon-only buttons and the popover.

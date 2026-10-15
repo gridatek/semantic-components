@@ -1,7 +1,7 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
-/** A list of notifications: write a `li[scNotification]` for each of `visible()` (or `visibleIn(group)`). */
+/** A list of notifications: write a `li[scNotification]` for each of `visible()` (or of a section). */
 @Directive({
   selector: 'ul[scNotificationList]',
   host: {
