@@ -130,9 +130,17 @@ import { TocHeading } from '../../components/toc/toc-heading';
       <section class="space-y-4">
         <h2 scHeading appToc>4. Install icons</h2>
         <p class="text-muted-foreground">
-          Install the icon library used by Semantic Components.
+          The examples use
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >&#64;semantic-icons/lucide-icons</code
+          >
+          — install it to copy them as they are.
         </p>
         <app-package-manager-install packages="@semantic-icons/lucide-icons" />
+        <p class="text-muted-foreground">
+          The components themselves draw no icons: they're in your templates, so
+          you can swap them for any library.
+        </p>
       </section>
 
       <div scSeparator></div>
