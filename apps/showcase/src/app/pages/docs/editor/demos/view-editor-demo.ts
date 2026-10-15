@@ -83,7 +83,8 @@ import {
             </button>
           </div>
         </div>
-        <div scEditorContent ariaLabel="Post" class="max-h-[480px]"></div>
+        <!-- Grows with its text, as the display does: no scrollbar to narrow it. -->
+        <div scEditorContent ariaLabel="Post" class="max-h-none"></div>
       </div>
 
       <article
@@ -98,18 +99,50 @@ import {
 })
 export class ViewEditorDemo {
   private readonly model = signal({
-    body: `<h2>Release notes</h2>
-<p>This week's update makes <strong>writing</strong> faster and <em>reading</em> easier.</p>
+    body: `<h1>Release notes</h1>
+<p>This week's update makes <strong>writing</strong> faster and <em>reading</em> easier, with <u>underline</u>, <s>strike</s>, <code>inline code</code>, a <a href="https://tiptap.dev">link</a>, <mark data-color="var(--editor-highlight-yellow)" style="background-color: var(--editor-highlight-yellow)">yellow</mark> and <mark data-color="var(--editor-highlight-green)" style="background-color: var(--editor-highlight-green)">green</mark> highlights, E = mc<sup>2</sup> and H<sub>2</sub>O.</p>
+<h2>What's new</h2>
+<p>Every block the editor can hold, so the two sides can be compared.</p>
+<h3>Lists</h3>
 <ul>
-  <li><p>Search and replace in the document</p></li>
-  <li><p>Task lists you can tick off</p></li>
+  <li><p>Search and replace</p>
+    <ul>
+      <li><p>Match case</p>
+        <ul><li><p>Whole word</p></li></ul>
+      </li>
+    </ul>
+  </li>
+  <li><p>Task lists</p></li>
 </ul>
+<ol>
+  <li><p>Write</p>
+    <ol>
+      <li><p>Review</p>
+        <ol><li><p>Ship</p></li></ol>
+      </li>
+    </ol>
+  </li>
+  <li><p>Read</p></li>
+</ol>
+<h4>Tasks</h4>
 <ul data-type="taskList">
   <li data-type="taskItem" data-checked="true"><p>Ship the editor</p></li>
-  <li data-type="taskItem" data-checked="false"><p>Write the docs</p></li>
+  <li data-type="taskItem" data-checked="false"><p>Write the docs</p>
+    <ul data-type="taskList">
+      <li data-type="taskItem" data-checked="false"><p>The editor page</p></li>
+    </ul>
+  </li>
 </ul>
+<h5>Alignment</h5>
+<p style="text-align: center">Centred.</p>
+<p style="text-align: right">Aligned right.</p>
+<p style="text-align: justify">Justified: the lines of this paragraph stretch from one side of the column to the other, so both edges are straight, as on a printed page.</p>
+<h6>Media and blocks</h6>
+<img src="https://picsum.photos/id/1015/800/400" alt="A river between mountains">
 <blockquote><p>The display is the editor's document, without the editor.</p></blockquote>
-<pre><code>&lt;article [scEditorView]="post.body"&gt;&lt;/article&gt;</code></pre>`,
+<pre><code>&lt;article [scEditorView]="post.body"&gt;&lt;/article&gt;</code></pre>
+<hr>
+<p>That's all for this week.</p>`,
   });
   readonly postForm = form(this.model);
 }
