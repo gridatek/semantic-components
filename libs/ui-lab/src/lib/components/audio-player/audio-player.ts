@@ -75,7 +75,7 @@ export class ScAudioPlayer {
   readonly duration = signal(0);
   readonly buffered = signal(0);
 
-  readonly currentTrack = computed(() => {
+  readonly currentTrack = computed<ScAudioTrack | null>(() => {
     const tracks = this.tracks();
     const index = this.currentIndex();
     return tracks[index] ?? null;
