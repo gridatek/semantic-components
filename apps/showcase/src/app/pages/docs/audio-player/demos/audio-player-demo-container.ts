@@ -78,13 +78,16 @@ import {
 
       <!-- Controls -->
       <div scAudioPlayerControls>
-        <button scAudioPlayerShuffle>
+        <button scAudioPlayerShuffle aria-label="Shuffle">
           <svg siShuffleIcon></svg>
         </button>
         <button scAudioPlayerPrevious aria-label="Previous track">
           <svg siSkipBackIcon></svg>
         </button>
-        <button scAudioPlayerPlay>
+        <button
+          scAudioPlayerPlay
+          [attr.aria-label]="player.isPlaying() ? 'Pause' : 'Play'"
+        >
           @if (player.isPlaying()) {
             <svg siPauseIcon></svg>
           } @else {
@@ -94,7 +97,10 @@ import {
         <button scAudioPlayerNext aria-label="Next track">
           <svg siSkipForwardIcon></svg>
         </button>
-        <button scAudioPlayerRepeat>
+        <button
+          scAudioPlayerRepeat
+          [attr.aria-label]="'Repeat: ' + player.repeat()"
+        >
           @if (player.repeat() === 'one') {
             <svg siRepeat1Icon></svg>
           } @else {

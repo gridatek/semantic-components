@@ -150,7 +150,12 @@ import {
           </button>
 
           <!-- Fullscreen -->
-          <button scVideoPlayerFullscreen>
+          <button
+            scVideoPlayerFullscreen
+            [attr.aria-label]="
+              player.isFullscreen() ? 'Exit fullscreen' : 'Enter fullscreen'
+            "
+          >
             @if (player.isFullscreen()) {
               <svg siMinimizeIcon></svg>
             } @else {
