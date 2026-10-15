@@ -55,6 +55,8 @@ test.describe('Inbox Notification Center Demo', () => {
 
 test.describe('By Day Notification Center Demo', () => {
   test.beforeEach(async ({ page }) => {
+    // Midday: early in the morning, "2 hours ago" would be yesterday.
+    await page.clock.setFixedTime(new Date('2026-01-15T12:00:00'));
     await page.goto(
       '/demos/notification-center/by-day-notification-center-demo',
     );

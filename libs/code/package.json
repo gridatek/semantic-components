@@ -16,8 +16,7 @@
     "@angular/core": ">=22.2.3",
     "@angular/platform-browser": ">=22.2.3",
     "shiki": ">=4.5.0",
-    "@semantic-components/ui": "0.81.0",
-    "@semantic-icons/lucide-icons": ">=0.60.0"
+    "@semantic-components/ui": "0.81.0"
   },
   "exports": {
     "./styles": {

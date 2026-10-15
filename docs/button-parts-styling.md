@@ -38,5 +38,6 @@ And these keep a look of their own, as they are not buttons to the eye:
 
 ## Done (2026-10-16)
 
-- 62 parts that relied on the consumer's `scButton` style themselves: the PDF viewer's, the image cropper's, the transfer list's, the notification center's, the stepper's next / previous, the date range picker's apply / cancel, `scQrCodeDownload` (its image size input is now `imageSize`). Their consumers lost `scButton`, and `variant` / `size` equal to the new defaults.
+- 67 parts that relied on the consumer's `scButton` style themselves: the PDF viewer's, the editor's search buttons, the image cropper's, the transfer list's, the notification center's, the stepper's next / previous, the date range picker's apply / cancel, `scQrCodeDownload` (its image size input is now `imageSize`). Their consumers lost `scButton`, and `variant` / `size` equal to the new defaults.
 - 11 parts with their own class lists moved to `buttonVariants()`: toast close and action, popover close, spotlight close, the tour guide's close and actions, the autocomplete and combobox clears, the colour picker's eyedropper, the image annotator's actions, the navbar's mobile trigger.
+- `scCodeEditorCopyButton` became a directive: its icons were drawn by the library (and dropped the consumer's name); the consumer writes them now, switched by `copied()`.
