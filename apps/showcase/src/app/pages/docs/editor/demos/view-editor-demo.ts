@@ -89,7 +89,7 @@ import {
       <article
         [scEditorView]="postForm.body().value()"
         aria-label="Published post"
-        class="rounded-lg border p-6 lg:mt-[49px]"
+        class="rounded-lg border p-4 lg:mt-[49px]"
       ></article>
     </div>
   `,
