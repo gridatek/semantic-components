@@ -26,7 +26,9 @@ export class UpdateToastDemo {
   protected readonly toastId = signal<string | null>(null);
 
   start(): void {
-    this.toastId.set(this.toaster.loading({ description: 'Uploading…' }));
+    this.toastId.set(
+      this.toaster.show({ variant: 'loading', description: 'Uploading…' }),
+    );
   }
 
   finish(): void {

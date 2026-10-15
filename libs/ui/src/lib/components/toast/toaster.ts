@@ -98,7 +98,7 @@ export class ScToaster {
    * toast when it settles. Returns `promise`.
    */
   promise<T>(promise: Promise<T>, config: ScToastPromiseConfig<T>): Promise<T> {
-    const id = this.loading(config.loading);
+    const id = this.show({ ...config.loading, variant: 'loading' });
     promise.then(
       (value) => {
         const success =
@@ -116,27 +116,6 @@ export class ScToaster {
       },
     );
     return promise;
-  }
-
-  success(config: Omit<ScToastConfig, 'variant'>): string {
-    return this.show({ ...config, variant: 'success' });
-  }
-
-  info(config: Omit<ScToastConfig, 'variant'>): string {
-    return this.show({ ...config, variant: 'info' });
-  }
-
-  warning(config: Omit<ScToastConfig, 'variant'>): string {
-    return this.show({ ...config, variant: 'warning' });
-  }
-
-  error(config: Omit<ScToastConfig, 'variant'>): string {
-    return this.show({ ...config, variant: 'error' });
-  }
-
-  /** A toast that stays until it is updated or dismissed (unless given a `duration`). */
-  loading(config: Omit<ScToastConfig, 'variant'>): string {
-    return this.show({ ...config, variant: 'loading' });
   }
 
   /**

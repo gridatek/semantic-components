@@ -28,7 +28,7 @@ describe('ScToaster', () => {
 
   it('keeps a toast without a duration, and a loading one', () => {
     toaster.show({ description: 'Stays', duration: 0 });
-    toaster.loading({ description: 'Loading' });
+    toaster.show({ variant: 'loading', description: 'Loading' });
     vi.advanceTimersByTime(60_000);
     expect(toaster.toasts()).toHaveLength(2);
   });
@@ -86,7 +86,7 @@ describe('ScToaster', () => {
   });
 
   it('updates a toast in place, and starts its timer again', () => {
-    const id = toaster.loading({ description: 'Uploading' });
+    const id = toaster.show({ variant: 'loading', description: 'Uploading' });
     vi.advanceTimersByTime(10_000);
     toaster.update(id, { variant: 'success', description: 'Uploaded' });
 

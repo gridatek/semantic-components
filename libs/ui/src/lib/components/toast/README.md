@@ -38,12 +38,6 @@ class ScToaster {
 
   // Show a new toast, returns its id
   show(config: ScToastConfig): string;
-  // The same, with their variant
-  success(config): string;
-  info(config): string;
-  warning(config): string;
-  error(config): string;
-  loading(config): string; // stays until updated or dismissed
 
   // Change a toast in place; its timer starts again
   update(id: string, config: ScToastConfig): void;
@@ -131,7 +125,7 @@ export class MyComponent {
   private readonly toaster = inject(ScToaster);
 
   save(): void {
-    this.toaster.success({ description: 'Your changes have been saved.' });
+    this.toaster.show({ variant: 'success', description: 'Your changes have been saved.' });
   }
 
   upload(): void {
@@ -147,7 +141,7 @@ export class MyComponent {
 ### 3. Update a toast, or follow a promise
 
 ```typescript
-const id = this.toaster.loading({ description: 'Uploading…' });
+const id = this.toaster.show({ variant: 'loading', description: 'Uploading…' });
 // later
 this.toaster.update(id, { variant: 'success', description: 'Uploaded.' });
 

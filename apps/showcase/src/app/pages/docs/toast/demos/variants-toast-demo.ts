@@ -27,26 +27,37 @@ export class VariantsToastDemo {
   private readonly toastService = inject(ScToaster);
 
   showSuccess(): void {
-    this.toastService.success({ description: 'Changes saved successfully.' });
+    this.toastService.show({
+      variant: 'success',
+      description: 'Changes saved successfully.',
+    });
   }
 
   showInfo(): void {
-    this.toastService.info({ description: 'A new version is available.' });
+    this.toastService.show({
+      variant: 'info',
+      description: 'A new version is available.',
+    });
   }
 
   showWarning(): void {
-    this.toastService.warning({
+    this.toastService.show({
+      variant: 'warning',
       description: 'Your session is about to expire.',
     });
   }
 
   showError(): void {
-    this.toastService.error({
+    this.toastService.show({
+      variant: 'error',
       description: 'Something went wrong. Please try again.',
     });
   }
 
   showLoading(): void {
-    this.toastService.loading({ description: 'Uploading file...' });
+    this.toastService.show({
+      variant: 'loading',
+      description: 'Uploading file...',
+    });
   }
 }
