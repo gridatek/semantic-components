@@ -8,6 +8,7 @@ import { NoCountEditorDemoContainer } from './demos/no-count-editor-demo-contain
 import { PrefilledEditorDemoContainer } from './demos/prefilled-editor-demo-container';
 import { ReadonlyEditorDemoContainer } from './demos/readonly-editor-demo-container';
 import { SignalFormsEditorDemoContainer } from './demos/signal-forms-editor-demo-container';
+import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
 
 @Component({
   selector: 'app-editor-page',
@@ -18,6 +19,7 @@ import { SignalFormsEditorDemoContainer } from './demos/signal-forms-editor-demo
     ReadonlyEditorDemoContainer,
     FullFeaturedEditorDemoContainer,
     SignalFormsEditorDemoContainer,
+    ViewEditorDemoContainer,
     TocHeading,
     ComponentBadges,
     ScHeading,
@@ -72,6 +74,20 @@ import { SignalFormsEditorDemoContainer } from './demos/signal-forms-editor-demo
           from the schema follows the checkbox.
         </p>
         <app-signal-forms-editor-demo-container />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Displaying the HTML</h2>
+        <p class="text-muted-foreground">
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >scEditorView</code
+          >
+          shows what the editor wrote — a published post, a preview — in the
+          editor's styles, without an editor. The HTML is read through the
+          editor's schema, so only what the editor can hold is shown: no
+          scripts, no unsafe links.
+        </p>
+        <app-view-editor-demo-container />
       </section>
 
       <section class="space-y-4">

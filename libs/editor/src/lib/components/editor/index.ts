@@ -1,8 +1,10 @@
 // Root directive
 export * from './editor';
 
-// Content component
+// Content and display
 export * from './editor-content';
+export * from './editor-view';
+export * from './editor-extensions';
 
 // Container components
 export * from './editor-toolbar';

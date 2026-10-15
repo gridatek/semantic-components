@@ -66,6 +66,7 @@ readonly postForm = form(signal({ body: '' }), (path) => {
 | `ScEditorImage`                             | `button[scEditorImage]`                       | Picks images and uploads them with the editor's `upload` (disabled without one).                                                                                          |
 | `ScEditorSearch`                            | `button[scEditorSearch]`                      | Opens and closes the search bar (`aria-pressed`); with it, **Ctrl / ⌘ + F** in the document opens it too.                                                                 |
 | `ScEditorSearchBar` and its parts           | see [Search and replace](#search-and-replace) | The bar under the toolbar.                                                                                                                                                |
+| `ScEditorView`                              | `[scEditorView]`                              | Displays the editor's HTML in its styles, without an editor (see [Displaying the HTML](#displaying-the-html)).                                                            |
 | `ScEditorSeparator`                         | `div[scEditorSeparator]`                      | Between toolbar groups.                                                                                                                                                   |
 | `ScEditorHeader`, `ScEditorFooter`          | `div[scEditorHeader]`, `div[scEditorFooter]`  | Above and below the document.                                                                                                                                             |
 | `ScEditorCount`, `…WordCount`, `…CharCount` | `div[scEditorCount]`, `span[…]`               | `wordCount()`, `charCount()` (`exportAs`) — write the text around them.                                                                                                   |
@@ -216,6 +217,22 @@ The button picks files; dropping or pasting images does the same. Each is insert
 | `scEditorSearchClose`             | Closes the bar, clears the matches, goes back to the text.                                                                                                  |
 
 The matches are highlighted in the document; the current one is selected and scrolled to. Read-only documents can be searched, not replaced.
+
+## Displaying the HTML
+
+`scEditorView` shows what the editor wrote — a published post, a preview — as the editor shows it: the same styles, without an editor.
+
+```html
+<article [scEditorView]="post.body" aria-label="Post"></article>
+<article [scEditorView]="post.body" layout="page"></article>
+```
+
+- **Safe**: the HTML is read through the editor's schema in a document of its own, then built as elements — never set as `innerHTML`. Only what the editor can hold is shown: no scripts, no event attributes, no unsafe links.
+- **The same styles**: the editor's document and the view both have `data-slot="editor-document"`, which the editor's styles are written for.
+- **Tasks** are shown, not changed: their checkboxes are disabled, named by their task.
+- **`layout`**: `page` centres it in the same column as `scEditorContent`'s page layout; `default` adds no space around it.
+
+`editorContentExtensions()` are the extensions the document is made of: use them with Tiptap's `generateHTML` / `generateJSON` to read or write the editor's HTML elsewhere (a server, a migration).
 
 ## Keyboard
 

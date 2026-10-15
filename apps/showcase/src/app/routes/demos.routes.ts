@@ -1393,6 +1393,13 @@ export const demosRoutes: Route[] = [
             (m) => m.SignalFormsEditorDemo,
           ),
       },
+      {
+        path: 'view-editor-demo',
+        loadComponent: () =>
+          import('../pages/docs/editor/demos/view-editor-demo').then(
+            (m) => m.ViewEditorDemo,
+          ),
+      },
     ],
   },
   {

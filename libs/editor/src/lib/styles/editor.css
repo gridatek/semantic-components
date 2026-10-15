@@ -1,5 +1,5 @@
 /*
- * The document's styles, after Tiptap's Simple Editor template (its node
+ * The document's styles — in the editor and in `scEditorView` — after Tiptap's Simple Editor template (its node
  * styles: sizes, spacing, lists, code, quotes, rules, images), in this
  * library's tokens and fonts.
  */
@@ -21,19 +21,18 @@
   --editor-highlight-red: oklch(0.42 0.1 20);
 }
 
-.ProseMirror {
+[data-slot='editor-document'] {
   outline: none;
-  min-height: inherit;
   white-space: pre-wrap;
   font-size: 1rem;
 }
 
-.ProseMirror > * {
+[data-slot='editor-document'] > * {
   position: relative;
 }
 
 /* Placeholder */
-.ProseMirror p.is-editor-empty:first-child::before {
+[data-slot='editor-document'] p.is-editor-empty:first-child::before {
   content: attr(data-placeholder);
   float: left;
   height: 0;
@@ -42,140 +41,148 @@
 }
 
 /* Paragraphs */
-.ProseMirror p {
+[data-slot='editor-document'] p {
   line-height: 1.6;
 }
 
-.ProseMirror p:not(:first-child) {
+[data-slot='editor-document'] p:not(:first-child) {
   margin-top: 20px;
 }
 
 /* Headings */
-.ProseMirror :is(h1, h2, h3, h4, h5, h6) {
+[data-slot='editor-document'] :is(h1, h2, h3, h4, h5, h6) {
   position: relative;
   color: inherit;
   font-style: inherit;
 }
 
-.ProseMirror h1 {
+[data-slot='editor-document'] h1 {
   font-size: 1.5em;
   font-weight: 700;
   margin-top: 3em;
 }
 
-.ProseMirror h2 {
+[data-slot='editor-document'] h2 {
   font-size: 1.25em;
   font-weight: 700;
   margin-top: 2.5em;
 }
 
-.ProseMirror h3 {
+[data-slot='editor-document'] h3 {
   font-size: 1.125em;
   font-weight: 600;
   margin-top: 2em;
 }
 
-.ProseMirror :is(h4, h5, h6) {
+[data-slot='editor-document'] :is(h4, h5, h6) {
   font-size: 1em;
   font-weight: 600;
   margin-top: 2em;
 }
 
-.ProseMirror :is(h1, h2, h3, h4, h5, h6):first-child {
+[data-slot='editor-document'] :is(h1, h2, h3, h4, h5, h6):first-child {
   margin-top: 0;
 }
 
 /* Links */
-.ProseMirror a {
+[data-slot='editor-document'] a {
   color: var(--primary);
   text-decoration: underline;
 }
 
 /* Lists */
-.ProseMirror :is(ol, ul) {
+[data-slot='editor-document'] :is(ol, ul) {
   margin-top: 1.5em;
   margin-bottom: 1.5em;
   padding-left: 1.5em;
 }
 
-.ProseMirror :is(ol, ul):first-child {
+[data-slot='editor-document'] :is(ol, ul):first-child {
   margin-top: 0;
 }
 
-.ProseMirror :is(ol, ul):last-child {
+[data-slot='editor-document'] :is(ol, ul):last-child {
   margin-bottom: 0;
 }
 
-.ProseMirror :is(ol, ul) :is(ol, ul) {
+[data-slot='editor-document'] :is(ol, ul) :is(ol, ul) {
   margin-top: 0;
   margin-bottom: 0;
 }
 
-.ProseMirror li p {
+[data-slot='editor-document'] li p {
   margin-top: 0;
   line-height: 1.6;
 }
 
-.ProseMirror ol {
+[data-slot='editor-document'] ol {
   list-style: decimal;
 }
 
-.ProseMirror ol ol {
+[data-slot='editor-document'] ol ol {
   list-style: lower-alpha;
 }
 
-.ProseMirror ol ol ol {
+[data-slot='editor-document'] ol ol ol {
   list-style: lower-roman;
 }
 
-.ProseMirror ul:not([data-type='taskList']) {
+[data-slot='editor-document'] ul:not([data-type='taskList']) {
   list-style: disc;
 }
 
-.ProseMirror ul:not([data-type='taskList']) ul {
+[data-slot='editor-document'] ul:not([data-type='taskList']) ul {
   list-style: circle;
 }
 
-.ProseMirror ul:not([data-type='taskList']) ul ul {
+[data-slot='editor-document'] ul:not([data-type='taskList']) ul ul {
   list-style: square;
 }
 
 /* Task lists: the checkbox is drawn by the span after it */
-.ProseMirror ul[data-type='taskList'] {
+[data-slot='editor-document'] ul[data-type='taskList'] {
   padding-left: 0.25em;
 }
 
-.ProseMirror ul[data-type='taskList'] li {
+[data-slot='editor-document'] ul[data-type='taskList'] li {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   list-style: none;
 }
 
-.ProseMirror ul[data-type='taskList'] li > div {
+[data-slot='editor-document'] ul[data-type='taskList'] li > div {
   flex: 1 1 0%;
   min-width: 0;
 }
 
-.ProseMirror ul[data-type='taskList'] li[data-checked='true'] > div > p {
+[data-slot='editor-document']
+  ul[data-type='taskList']
+  li[data-checked='true']
+  > div
+  > p {
   opacity: 0.5;
   text-decoration: line-through;
 }
 
-.ProseMirror ul[data-type='taskList'] li label {
+[data-slot='editor-document'] ul[data-type='taskList'] li label {
   position: relative;
   padding-top: 0.375rem;
   padding-right: 0.5rem;
 }
 
-.ProseMirror ul[data-type='taskList'] li label input[type='checkbox'] {
+[data-slot='editor-document']
+  ul[data-type='taskList']
+  li
+  label
+  input[type='checkbox'] {
   position: absolute;
   opacity: 0;
   width: 0;
   height: 0;
 }
 
-.ProseMirror ul[data-type='taskList'] li label span {
+[data-slot='editor-document'] ul[data-type='taskList'] li label span {
   display: block;
   position: relative;
   width: 1em;
@@ -189,7 +196,7 @@
     border-color 80ms ease-out;
 }
 
-.ProseMirror ul[data-type='taskList'] li label span::before {
+[data-slot='editor-document'] ul[data-type='taskList'] li label span::before {
   content: '';
   position: absolute;
   left: 50%;
@@ -203,23 +210,47 @@
     center / contain no-repeat;
 }
 
-.ProseMirror ul[data-type='taskList'] li label input:checked + span {
+[data-slot='editor-document']
+  ul[data-type='taskList']
+  li
+  label
+  input:disabled
+  + span {
+  cursor: default;
+}
+
+[data-slot='editor-document']
+  ul[data-type='taskList']
+  li
+  label
+  input:checked
+  + span {
   background-color: var(--primary);
   border-color: var(--primary);
 }
 
-.ProseMirror ul[data-type='taskList'] li label input:checked + span::before {
+[data-slot='editor-document']
+  ul[data-type='taskList']
+  li
+  label
+  input:checked
+  + span::before {
   opacity: 1;
 }
 
 /* The checkbox is hidden: its box shows the keyboard focus */
-.ProseMirror ul[data-type='taskList'] li label input:focus-visible + span {
+[data-slot='editor-document']
+  ul[data-type='taskList']
+  li
+  label
+  input:focus-visible
+  + span {
   outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
   outline-offset: 1px;
 }
 
 /* Inline code */
-.ProseMirror code {
+[data-slot='editor-document'] code {
   background-color: var(--muted);
   color: var(--foreground);
   border: 1px solid var(--border);
@@ -231,7 +262,7 @@
 }
 
 /* Code blocks */
-.ProseMirror pre {
+[data-slot='editor-document'] pre {
   background-color: color-mix(in oklch, var(--muted) 50%, transparent);
   color: var(--foreground);
   border: 1px solid var(--border);
@@ -243,7 +274,7 @@
   overflow-x: auto;
 }
 
-.ProseMirror pre code {
+[data-slot='editor-document'] pre code {
   background-color: transparent;
   border: none;
   border-radius: 0;
@@ -251,7 +282,7 @@
 }
 
 /* Blockquotes */
-.ProseMirror blockquote {
+[data-slot='editor-document'] blockquote {
   position: relative;
   margin: 1.5rem 0;
   padding-top: 0.375em;
@@ -259,11 +290,11 @@
   padding-left: 1em;
 }
 
-.ProseMirror blockquote p {
+[data-slot='editor-document'] blockquote p {
   margin-top: 0;
 }
 
-.ProseMirror blockquote::before {
+[data-slot='editor-document'] blockquote::before {
   content: '';
   position: absolute;
   top: 0;
@@ -274,7 +305,7 @@
 }
 
 /* Horizontal rules */
-.ProseMirror hr {
+[data-slot='editor-document'] hr {
   border: none;
   height: 1px;
   background-color: var(--border);
@@ -282,30 +313,35 @@
 }
 
 /* Images */
-.ProseMirror img {
+[data-slot='editor-document'] img {
   display: block;
   max-width: 100%;
   height: auto;
 }
 
-.ProseMirror > img {
+[data-slot='editor-document'] > img {
   margin: 2rem 0;
   outline: 0.125rem solid transparent;
   border-radius: 0.25rem;
 }
 
-.ProseMirror img.ProseMirror-selectednode {
+[data-slot='editor-document'] img.ProseMirror-selectednode {
   outline: 0.125rem solid var(--primary);
 }
 
+/* In the editor: it fills its box */
+.ProseMirror {
+  min-height: inherit;
+}
+
 /* Selected nodes other than images and code blocks */
-.ProseMirror .ProseMirror-selectednode:not(img):not(pre) {
+[data-slot='editor-document'] .ProseMirror-selectednode:not(img):not(pre) {
   border-radius: 0.5rem;
   background-color: color-mix(in oklch, var(--primary) 20%, transparent);
 }
 
 /* Highlights */
-.ProseMirror mark {
+[data-slot='editor-document'] mark {
   background-color: var(--editor-highlight-yellow);
   color: inherit;
   border-radius: 0.125rem;
@@ -314,18 +350,18 @@
 }
 
 /* Superscript and subscript keep the line height */
-.ProseMirror :is(sup, sub) {
+[data-slot='editor-document'] :is(sup, sub) {
   line-height: 0;
 }
 
 /* The selection, kept visible while focus is in a popover or the search */
-.ProseMirror .selection {
+[data-slot='editor-document'] .selection {
   display: inline;
   background-color: color-mix(in oklch, var(--primary) 20%, transparent);
 }
 
 /* Search matches; the current one stronger */
-.ProseMirror .find-and-replace-result {
+[data-slot='editor-document'] .find-and-replace-result {
   background-color: color-mix(
     in oklch,
     var(--editor-highlight-yellow) 60%,
@@ -334,7 +370,7 @@
   border-radius: 0.125rem;
 }
 
-.ProseMirror .find-and-replace-result-current {
+[data-slot='editor-document'] .find-and-replace-result-current {
   background-color: var(--editor-highlight-yellow);
   outline: 1px solid var(--foreground);
 }

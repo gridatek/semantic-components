@@ -1,14 +1,7 @@
 import { type ChainedCommands, Editor, Extension } from '@tiptap/core';
 import FileHandler from '@tiptap/extension-file-handler';
 import FindAndReplace from '@tiptap/extension-find-and-replace';
-import Highlight from '@tiptap/extension-highlight';
-import Image from '@tiptap/extension-image';
-import { TaskItem, TaskList } from '@tiptap/extension-list';
-import Subscript from '@tiptap/extension-subscript';
-import Superscript from '@tiptap/extension-superscript';
-import TextAlign from '@tiptap/extension-text-align';
 import { Placeholder, Selection } from '@tiptap/extensions';
-import StarterKit from '@tiptap/starter-kit';
 import {
   Directive,
   InjectionToken,
@@ -22,6 +15,7 @@ import {
   untracked,
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
+import { editorContentExtensions } from './editor-extensions';
 
 export type ScEditorAlignment = 'left' | 'center' | 'right' | 'justify';
 export type ScEditorHeadingLevel =
@@ -372,26 +366,7 @@ export class ScEditor implements FormValueControl<string> {
     const editor = new Editor({
       element,
       extensions: [
-        StarterKit.configure({
-          link: {
-            openOnClick: false,
-            HTMLAttributes: {
-              target: '_blank',
-              rel: 'noopener noreferrer',
-            },
-          },
-        }),
-        TaskList,
-        TaskItem.configure({
-          nested: true,
-          // The checkbox is named by its task.
-          a11y: { checkboxLabel: (node) => node.textContent },
-        }),
-        Highlight.configure({ multicolor: true }),
-        Superscript,
-        Subscript,
-        Image,
-        TextAlign.configure({ types: ['heading', 'paragraph'] }),
+        ...editorContentExtensions(),
         Placeholder.configure({ placeholder: () => options.placeholder() }),
         // The selection stays visible while a popover or the search has focus.
         Selection,

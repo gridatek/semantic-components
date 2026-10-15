@@ -51,6 +51,8 @@ export class ScEditorContent {
   /** The document's ARIA: its name, description, state. */
   private readonly attributes = computed(() => {
     const attributes: Record<string, string> = {
+      // Styled as the document, here and in scEditorView.
+      'data-slot': 'editor-document',
       role: 'textbox',
       'aria-multiline': 'true',
     };
