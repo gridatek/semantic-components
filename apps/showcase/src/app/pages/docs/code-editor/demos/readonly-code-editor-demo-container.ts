@@ -43,7 +43,12 @@ import {
           <span class="text-muted-foreground text-sm">readonly.ts</span>
           <span scCodeEditorLabel>typescript</span>
         </div>
-        <button scCodeEditorCopyButton [code]="readonlyCode"></button>
+        <button
+          scCodeEditorCopyButton
+          #copy="scCodeEditorCopyButton"
+          [attr.aria-label]="copy.copied() ? 'Copied' : 'Copy code'"
+          [code]="readonlyCode"
+        ></button>
       </div>
       <div
         scCodeEditorContent

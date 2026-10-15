@@ -34,14 +34,14 @@ Bar chart visualization.
 
 **Inputs:**
 
-| Input       | Type                 | Default       | Description              |
-| ----------- | -------------------- | ------------- | ------------------------ |
-| `data`      | `ScChartDataPoint[]` | `[]`          | Chart data               |
-| `height`    | `number`             | `300`         | Chart height in pixels   |
-| `barRadius` | `number`             | `4`           | Bar corner radius        |
-| `barGap`    | `number`             | `8`           | Gap between bars         |
-| `ariaLabel` | `string`             | `'Bar chart'` | Accessible label for SVG |
-| `class`     | `string`             | `''`          | Additional CSS classes   |
+| Input       | Type                 | Default | Description                 |
+| ----------- | -------------------- | ------- | --------------------------- |
+| `data`      | `ScChartDataPoint[]` | `[]`    | Chart data                  |
+| `height`    | `number`             | `300`   | Chart height in pixels      |
+| `barRadius` | `number`             | `4`     | Bar corner radius           |
+| `barGap`    | `number`             | `8`     | Gap between bars            |
+| `ariaLabel` | `string`             | `''`    | The chart's name — write it |
+| `class`     | `string`             | `''`    | Additional CSS classes      |
 
 ### ScLineChart
 
@@ -51,16 +51,16 @@ Line chart visualization with optional area fill.
 
 **Inputs:**
 
-| Input        | Type                 | Default        | Description              |
-| ------------ | -------------------- | -------------- | ------------------------ |
-| `data`       | `ScChartDataPoint[]` | `[]`           | Chart data               |
-| `height`     | `number`             | `300`          | Chart height in pixels   |
-| `showArea`   | `boolean`            | `false`        | Show area fill           |
-| `showPoints` | `boolean`            | `true`         | Show data points         |
-| `color`      | `string`             | `''`           | Line color               |
-| `labelStep`  | `number`             | `1`            | X-axis label interval    |
-| `ariaLabel`  | `string`             | `'Line chart'` | Accessible label for SVG |
-| `class`      | `string`             | `''`           | Additional CSS classes   |
+| Input        | Type                 | Default | Description                 |
+| ------------ | -------------------- | ------- | --------------------------- |
+| `data`       | `ScChartDataPoint[]` | `[]`    | Chart data                  |
+| `height`     | `number`             | `300`   | Chart height in pixels      |
+| `showArea`   | `boolean`            | `false` | Show area fill              |
+| `showPoints` | `boolean`            | `true`  | Show data points            |
+| `color`      | `string`             | `''`    | Line color                  |
+| `labelStep`  | `number`             | `1`     | X-axis label interval       |
+| `ariaLabel`  | `string`             | `''`    | The chart's name — write it |
+| `class`      | `string`             | `''`    | Additional CSS classes      |
 
 ### ScPieChart
 
@@ -70,14 +70,14 @@ Pie chart visualization.
 
 **Inputs:**
 
-| Input         | Type                 | Default       | Description              |
-| ------------- | -------------------- | ------------- | ------------------------ |
-| `data`        | `ScChartDataPoint[]` | `[]`          | Chart data               |
-| `size`        | `number`             | `300`         | Chart size in pixels     |
-| `innerRadius` | `number`             | `0`           | Inner radius (0 = pie)   |
-| `showLabels`  | `boolean`            | `true`        | Show percentage labels   |
-| `ariaLabel`   | `string`             | `'Pie chart'` | Accessible label for SVG |
-| `class`       | `string`             | `''`          | Additional CSS classes   |
+| Input         | Type                 | Default | Description                 |
+| ------------- | -------------------- | ------- | --------------------------- |
+| `data`        | `ScChartDataPoint[]` | `[]`    | Chart data                  |
+| `size`        | `number`             | `300`   | Chart size in pixels        |
+| `innerRadius` | `number`             | `0`     | Inner radius (0 = pie)      |
+| `showLabels`  | `boolean`            | `true`  | Show percentage labels      |
+| `ariaLabel`   | `string`             | `''`    | The chart's name — write it |
+| `class`       | `string`             | `''`    | Additional CSS classes      |
 
 ### ScDonutChart
 
@@ -87,14 +87,14 @@ Donut chart (pie chart with hole).
 
 **Inputs:**
 
-| Input         | Type                 | Default         | Description              |
-| ------------- | -------------------- | --------------- | ------------------------ |
-| `data`        | `ScChartDataPoint[]` | `[]`            | Chart data               |
-| `size`        | `number`             | `300`           | Chart size in pixels     |
-| `innerRadius` | `number`             | `60`            | Inner radius             |
-| `showLabels`  | `boolean`            | `false`         | Show percentage labels   |
-| `ariaLabel`   | `string`             | `'Donut chart'` | Accessible label for SVG |
-| `class`       | `string`             | `''`            | Additional CSS classes   |
+| Input         | Type                 | Default | Description                 |
+| ------------- | -------------------- | ------- | --------------------------- |
+| `data`        | `ScChartDataPoint[]` | `[]`    | Chart data                  |
+| `size`        | `number`             | `300`   | Chart size in pixels        |
+| `innerRadius` | `number`             | `60`    | Inner radius                |
+| `showLabels`  | `boolean`            | `false` | Show percentage labels      |
+| `ariaLabel`   | `string`             | `''`    | The chart's name — write it |
+| `class`       | `string`             | `''`    | Additional CSS classes      |
 
 ### ScChartLegend
 

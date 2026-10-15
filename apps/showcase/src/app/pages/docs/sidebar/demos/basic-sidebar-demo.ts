@@ -54,7 +54,7 @@ import {
   ],
   template: `
     <div scSidebarProvider [storageKey]="null">
-      <div scSidebar aria-label="Acme navigation">
+      <div scSidebar closeLabel="Close" aria-label="Acme navigation">
         <div scSidebarHeader>
           <ul scSidebarMenu>
             <li scSidebarMenuItem>
@@ -116,7 +116,7 @@ import {
         <div scSidebarFooter>
           <p class="text-sidebar-foreground/70 px-2 text-xs">v1.0.0</p>
         </div>
-        <button scSidebarRail></button>
+        <button scSidebarRail aria-label="Toggle sidebar"></button>
       </div>
 
       <main scSidebarInset aria-label="Basic example content">

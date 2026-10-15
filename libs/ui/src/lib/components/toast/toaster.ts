@@ -13,6 +13,10 @@ export class ScToaster {
   private readonly positionSignal = signal<ScToastPosition>('bottom-right');
   readonly position = this.positionSignal.asReadonly();
 
+  private readonly closeLabelSignal = signal('');
+  /** The close buttons' name: `setCloseLabel`. */
+  readonly closeLabel = this.closeLabelSignal.asReadonly();
+
   private readonly defaultDuration = 5000;
   private readonly maxToasts = 5;
   private readonly timeouts = new Map<string, ReturnType<typeof setTimeout>>();
@@ -31,7 +35,15 @@ export class ScToaster {
     this.positionSignal.set(position);
   }
 
+  /** Names the toasts' close buttons — the library writes none ("Close"). */
+  setCloseLabel(label: string): void {
+    this.closeLabelSignal.set(label);
+  }
+
   show(config: ScToastConfig): string {
+    if (typeof ngDevMode !== 'undefined' && ngDevMode && !this.closeLabel()) {
+      console.warn('ScToaster: name the close buttons with setCloseLabel().');
+    }
     this.ensureOverlay();
 
     const id = this.idGenerator.getId('sc-toast-');

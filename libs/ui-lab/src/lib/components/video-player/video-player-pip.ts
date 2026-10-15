@@ -5,7 +5,7 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { buttonVariants, cn } from '@semantic-components/ui';
+import { buttonVariants, cn, ɵwarnIfUnnamed } from '@semantic-components/ui';
 import { SC_VIDEO_PLAYER } from './video-player';
 
 @Component({
@@ -14,12 +14,15 @@ import { SC_VIDEO_PLAYER } from './video-player';
   host: {
     type: 'button',
     '[class]': 'class()',
-    'aria-label': 'Picture in picture',
     '(click)': 'player.togglePiP()',
   },
   encapsulation: ViewEncapsulation.None,
 })
 export class ScVideoPlayerPip {
+  constructor() {
+    ɵwarnIfUnnamed('scVideoPlayerPip');
+  }
+
   protected readonly player = inject(SC_VIDEO_PLAYER);
   readonly classInput = input<string>('', { alias: 'class' });
 

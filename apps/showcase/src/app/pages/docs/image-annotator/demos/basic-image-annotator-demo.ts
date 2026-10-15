@@ -1,6 +1,8 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   type ScAnnotation,
+  type ScAnnotatorColor,
+  type ScAnnotatorToolOption,
   ScImageAnnotator,
   ScImageAnnotatorAction,
   ScImageAnnotatorCanvas,
@@ -46,6 +48,8 @@ import {
   template: `
     <div
       scImageAnnotator
+      [colors]="annotatorColors"
+      [tools]="annotatorTools"
       [src]="imageSrc()"
       alt="Person standing by a lake"
       [width]="700"
@@ -101,7 +105,13 @@ import {
 
         <div class="flex items-center gap-2 border-r pr-2">
           <span class="text-muted-foreground text-xs">Width:</span>
-          <input type="range" scImageAnnotatorLineWidth min="1" max="20" />
+          <input
+            type="range"
+            scImageAnnotatorLineWidth
+            aria-label="Line width"
+            min="1"
+            max="20"
+          />
           <span class="w-4 text-xs">{{ toolbar.lineWidth() }}</span>
         </div>
 
@@ -131,6 +141,25 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicImageAnnotatorDemo {
+  readonly annotatorColors: ScAnnotatorColor[] = [
+    { value: '#ef4444', label: 'Red' },
+    { value: '#f97316', label: 'Orange' },
+    { value: '#eab308', label: 'Yellow' },
+    { value: '#22c55e', label: 'Green' },
+    { value: '#3b82f6', label: 'Blue' },
+    { value: '#8b5cf6', label: 'Purple' },
+    { value: '#000000', label: 'Black' },
+    { value: '#ffffff', label: 'White' },
+  ];
+  readonly annotatorTools: ScAnnotatorToolOption[] = [
+    { id: 'pen', label: 'Pen' },
+    { id: 'line', label: 'Line' },
+    { id: 'rectangle', label: 'Rectangle' },
+    { id: 'circle', label: 'Circle' },
+    { id: 'arrow', label: 'Arrow' },
+    { id: 'eraser', label: 'Eraser' },
+  ];
+
   readonly annotationCount = signal(0);
   readonly imageSrc = signal('https://picsum.photos/seed/annotate1/700/450');
 

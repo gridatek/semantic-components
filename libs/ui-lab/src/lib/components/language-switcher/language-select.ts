@@ -14,8 +14,8 @@ import { ScLanguageService } from './language.service';
  *
  * @example
  * ```html
- * <sc-language-select></sc-language-select>
- * <sc-language-select [showNativeLabels]="true"></sc-language-select>
+ * <sc-language-select label="Language"></sc-language-select>
+ * <sc-language-select label="Language" [showNativeLabels]="true"></sc-language-select>
  * ```
  */
 @Component({
@@ -24,7 +24,7 @@ import { ScLanguageService } from './language.service';
     '[class]': 'class()',
   },
   template: `
-    <label for="language-select" class="sr-only">Select language</label>
+    <label for="language-select" class="sr-only">{{ label() }}</label>
     <select
       id="language-select"
       [value]="currentLanguageCode()"
@@ -43,6 +43,8 @@ import { ScLanguageService } from './language.service';
 export class ScLanguageSelect {
   private readonly languageService = inject(ScLanguageService);
 
+  /** The select's name — write it ("Language"). */
+  readonly label = input.required<string>();
   readonly classInput = input<string>('', { alias: 'class' });
   readonly showNativeLabels = input<boolean>(true);
 

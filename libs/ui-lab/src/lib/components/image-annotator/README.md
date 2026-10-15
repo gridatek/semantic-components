@@ -21,7 +21,7 @@ import type { ScAnnotation, ScAnnotatorColor, ScAnnotatorToolOption } from '@sem
 ## Usage
 
 ```html
-<div scImageAnnotator [src]="imageSrc()" [width]="700" [height]="450" alt="Person standing by a lake" (annotationsChange)="onAnnotationsChange($event)" (save)="onSave($event)">
+<div scImageAnnotator [colors]="annotatorColors" [tools]="annotatorTools" [src]="imageSrc()" [width]="700" [height]="450" alt="Person standing by a lake" (annotationsChange)="onAnnotationsChange($event)" (save)="onSave($event)">
   <div scImageAnnotatorToolbar #toolbar="scImageAnnotatorToolbar">
     <div class="flex items-center gap-1 border-r pr-2">
       @for (tool of toolbar.tools(); track tool.id) {
@@ -39,15 +39,15 @@ import type { ScAnnotation, ScAnnotatorColor, ScAnnotatorToolOption } from '@sem
 
     <div class="flex items-center gap-2 border-r pr-2">
       <span class="text-muted-foreground text-xs">Width:</span>
-      <input type="range" scImageAnnotatorLineWidth min="1" max="20" />
+      <input type="range" scImageAnnotatorLineWidth aria-label="Line width" min="1" max="20" />
       <span class="w-4 text-xs">{{ toolbar.lineWidth() }}</span>
     </div>
 
     <div class="ml-auto flex items-center gap-1">
-      <button scImageAnnotatorAction action="undo"><svg siUndo2Icon></svg></button>
-      <button scImageAnnotatorAction action="redo"><svg siRedo2Icon></svg></button>
-      <button scImageAnnotatorAction action="clear"><svg siTrash2Icon></svg></button>
-      <button scImageAnnotatorAction action="download"><svg siDownloadIcon></svg></button>
+      <button scImageAnnotatorAction aria-label="Undo" action="undo"><svg siUndo2Icon></svg></button>
+      <button scImageAnnotatorAction aria-label="Redo" action="redo"><svg siRedo2Icon></svg></button>
+      <button scImageAnnotatorAction aria-label="Clear all" action="clear"><svg siTrash2Icon></svg></button>
+      <button scImageAnnotatorAction aria-label="Download" action="download"><svg siDownloadIcon></svg></button>
     </div>
   </div>
 
@@ -78,7 +78,7 @@ readonly tools: ScAnnotatorToolOption[] = [
 ### Programmatic control
 
 ```html
-<div scImageAnnotator #annotator="scImageAnnotator" [src]="src">…</div>
+<div scImageAnnotator [colors]="annotatorColors" [tools]="annotatorTools" #annotator="scImageAnnotator" [src]="src">…</div>
 ```
 
 ```typescript
@@ -93,15 +93,15 @@ load(saved: ScAnnotation[]) {
 
 ### ScImageAnnotator — `div[scImageAnnotator]`
 
-| Input    | Type                      | Default                    | Description                                      |
-| -------- | ------------------------- | -------------------------- | ------------------------------------------------ |
-| `src`    | `string` (required)       | —                          | Image URL (served with CORS headers to download) |
-| `width`  | `number`                  | `600`                      | Image coordinate width and export width (px)     |
-| `height` | `number`                  | `400`                      | Image coordinate height and export height (px)   |
-| `alt`    | `string`                  | `'Annotated image'`        | Accessible name of the canvas (`role="img"`)     |
-| `colors` | `ScAnnotatorColor[]`      | `DEFAULT_ANNOTATOR_COLORS` | Color palette (value + accessible label)         |
-| `tools`  | `ScAnnotatorToolOption[]` | `DEFAULT_ANNOTATOR_TOOLS`  | Available tools                                  |
-| `class`  | `string`                  | `''`                       | Additional CSS classes                           |
+| Input    | Type                      | Default             | Description                                      |
+| -------- | ------------------------- | ------------------- | ------------------------------------------------ |
+| `src`    | `string` (required)       | —                   | Image URL (served with CORS headers to download) |
+| `width`  | `number`                  | `600`               | Image coordinate width and export width (px)     |
+| `height` | `number`                  | `400`               | Image coordinate height and export height (px)   |
+| `alt`    | `string`                  | `'Annotated image'` | Accessible name of the canvas (`role="img"`)     |
+| `colors` | `ScAnnotatorColor[]`      | required            | Color palette — value and your name (`'Red'`)    |
+| `tools`  | `ScAnnotatorToolOption[]` | required            | Available tools — id and your name (`'Pen'`)     |
+| `class`  | `string`                  | `''`                | Additional CSS classes                           |
 
 | Output              | Type             | Description                                             |
 | ------------------- | ---------------- | ------------------------------------------------------- |

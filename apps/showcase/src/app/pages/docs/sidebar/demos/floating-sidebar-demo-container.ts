@@ -66,7 +66,13 @@ import { SiPanelRightIcon } from '@semantic-icons/lucide-icons';
         </div>
       </main>
 
-      <div scSidebar side="right" variant="floating" aria-label="On this page">
+      <div
+        scSidebar
+        closeLabel="Close"
+        side="right"
+        variant="floating"
+        aria-label="On this page"
+      >
         <div scSidebarBody>
           <div scSidebarGroup>
             <div scSidebarGroupLabel>On this page</div>

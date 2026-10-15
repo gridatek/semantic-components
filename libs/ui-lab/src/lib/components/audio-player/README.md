@@ -22,19 +22,19 @@ ScAudioPlayer (Root - State Management)
 
 ## Components
 
-| Component                 | Selector                          | Description                    |
-| ------------------------- | --------------------------------- | ------------------------------ |
-| `ScAudioPlayer`           | `[scAudioPlayer]`                 | Root directive (state manager) |
-| `ScAudioPlayerAudio`      | `audio[scAudioPlayerAudio]`       | Hidden audio element           |
-| `ScAudioPlayerCover`      | `div[scAudioPlayerCover]`         | Album artwork display          |
-| `ScAudioPlayerInfo`       | `div[scAudioPlayerInfo]`          | Track title and artist         |
-| `ScAudioPlayerProgress`   | `div[scAudioPlayerProgress]`      | Progress bar with seek         |
-| `ScAudioPlayerPlayButton` | `button[scAudioPlayerPlayButton]` | Play/pause button              |
-| `ScAudioPlayerPrevious`   | `button[scAudioPlayerPrevious]`   | Previous track button          |
-| `ScAudioPlayerNext`       | `button[scAudioPlayerNext]`       | Next track button              |
-| `ScAudioPlayerShuffle`    | `button[scAudioPlayerShuffle]`    | Shuffle toggle                 |
-| `ScAudioPlayerRepeat`     | `button[scAudioPlayerRepeat]`     | Repeat cycle button            |
-| `ScAudioPlayerVolume`     | `div[scAudioPlayerVolume]`        | Volume slider + mute           |
+| Component                 | Selector                          | Description                                                                        |
+| ------------------------- | --------------------------------- | ---------------------------------------------------------------------------------- |
+| `ScAudioPlayer`           | `[scAudioPlayer]`                 | Root directive (state manager)                                                     |
+| `ScAudioPlayerAudio`      | `audio[scAudioPlayerAudio]`       | Hidden audio element                                                               |
+| `ScAudioPlayerCover`      | `div[scAudioPlayerCover]`         | Album artwork display                                                              |
+| `ScAudioPlayerInfo`       | `div[scAudioPlayerInfo]`          | Track title and artist                                                             |
+| `ScAudioPlayerProgress`   | `div[scAudioPlayerProgress]`      | Progress bar with seek (`seekLabel`)                                               |
+| `ScAudioPlayerPlayButton` | `button[scAudioPlayerPlayButton]` | Play/pause button                                                                  |
+| `ScAudioPlayerPrevious`   | `button[scAudioPlayerPrevious]`   | Previous track button                                                              |
+| `ScAudioPlayerNext`       | `button[scAudioPlayerNext]`       | Next track button                                                                  |
+| `ScAudioPlayerShuffle`    | `button[scAudioPlayerShuffle]`    | Shuffle toggle                                                                     |
+| `ScAudioPlayerRepeat`     | `button[scAudioPlayerRepeat]`     | Repeat cycle button                                                                |
+| `ScAudioPlayerVolume`     | `div[scAudioPlayerVolume]`        | Volume slider + mute (`muteLabel`, `unmuteLabel`, `volumeLabel`, `maxVolumeLabel`) |
 
 ## API
 
@@ -88,7 +88,7 @@ readonly tracks: ScAudioTrack[] = [
 ```
 
 ```html
-<div scAudioPlayer [tracks]="tracks" class="bg-card flex flex-col gap-3 rounded-lg border p-4">
+<div scAudioPlayer #player="scAudioPlayer" [tracks]="tracks" class="bg-card flex flex-col gap-3 rounded-lg border p-4">
   <!-- Cover -->
   <div scAudioPlayerCover class="mx-auto aspect-square w-full max-w-[200px]"></div>
 
@@ -96,19 +96,19 @@ readonly tracks: ScAudioTrack[] = [
   <div scAudioPlayerInfo class="text-center"></div>
 
   <!-- Progress -->
-  <div scAudioPlayerProgress></div>
+  <div scAudioPlayerProgress seekLabel="Seek"></div>
 
   <!-- Controls -->
   <div class="flex items-center justify-center gap-2">
-    <button scAudioPlayerShuffle></button>
-    <button scAudioPlayerPrevious></button>
+    <button scAudioPlayerShuffle aria-label="Shuffle"></button>
+    <button scAudioPlayerPrevious aria-label="Previous track"></button>
     <button scAudioPlayerPlayButton></button>
-    <button scAudioPlayerNext></button>
-    <button scAudioPlayerRepeat></button>
+    <button scAudioPlayerNext aria-label="Next track"></button>
+    <button scAudioPlayerRepeat [attr.aria-label]="'Repeat: ' + player.repeat()"></button>
   </div>
 
   <!-- Volume -->
-  <div scAudioPlayerVolume class="justify-center"></div>
+  <div scAudioPlayerVolume muteLabel="Mute" unmuteLabel="Unmute" volumeLabel="Volume" maxVolumeLabel="Max volume" class="justify-center"></div>
 
   <!-- Hidden Audio Element -->
   <audio scAudioPlayerAudio></audio>
@@ -120,13 +120,13 @@ readonly tracks: ScAudioTrack[] = [
 Horizontal layout for sidebars:
 
 ```html
-<div scAudioPlayer [tracks]="tracks" class="bg-card flex items-center gap-4 rounded-lg border p-4">
+<div scAudioPlayer #player="scAudioPlayer" [tracks]="tracks" class="bg-card flex items-center gap-4 rounded-lg border p-4">
   <div scAudioPlayerCover class="size-16"></div>
   <div scAudioPlayerInfo class="min-w-0 flex-1"></div>
   <div class="flex items-center gap-2">
-    <button scAudioPlayerPrevious></button>
+    <button scAudioPlayerPrevious aria-label="Previous track"></button>
     <button scAudioPlayerPlayButton></button>
-    <button scAudioPlayerNext></button>
+    <button scAudioPlayerNext aria-label="Next track"></button>
   </div>
   <audio scAudioPlayerAudio></audio>
 </div>
@@ -137,12 +137,12 @@ Horizontal layout for sidebars:
 Simple player without extra controls:
 
 ```html
-<div scAudioPlayer [tracks]="tracks" class="bg-card flex items-center gap-2 rounded-lg border p-2">
+<div scAudioPlayer #player="scAudioPlayer" [tracks]="tracks" class="bg-card flex items-center gap-2 rounded-lg border p-2">
   <div scAudioPlayerCover class="size-10"></div>
   <div scAudioPlayerInfo class="min-w-0 flex-1"></div>
-  <button scAudioPlayerPrevious></button>
+  <button scAudioPlayerPrevious aria-label="Previous track"></button>
   <button scAudioPlayerPlayButton></button>
-  <button scAudioPlayerNext></button>
+  <button scAudioPlayerNext aria-label="Next track"></button>
   <audio scAudioPlayerAudio></audio>
 </div>
 ```
@@ -150,8 +150,8 @@ Simple player without extra controls:
 ### Only Essential Controls
 
 ```html
-<div scAudioPlayer [tracks]="tracks" class="bg-card flex flex-col gap-3 rounded-lg border p-4">
-  <div scAudioPlayerProgress></div>
+<div scAudioPlayer #player="scAudioPlayer" [tracks]="tracks" class="bg-card flex flex-col gap-3 rounded-lg border p-4">
+  <div scAudioPlayerProgress seekLabel="Seek"></div>
   <div class="flex items-center justify-center gap-2">
     <button scAudioPlayerPlayButton></button>
   </div>
@@ -164,7 +164,7 @@ Simple player without extra controls:
 Create any layout you want:
 
 ```html
-<div scAudioPlayer [tracks]="tracks" [(volume)]="volume">
+<div scAudioPlayer #player="scAudioPlayer" [tracks]="tracks" [(volume)]="volume">
   <div class="bg-card grid grid-cols-2 gap-4 rounded-lg border p-6">
     <!-- Left Column -->
     <div class="space-y-4">
@@ -174,16 +174,16 @@ Create any layout you want:
 
     <!-- Right Column -->
     <div class="flex flex-col justify-between">
-      <div scAudioPlayerVolume></div>
+      <div scAudioPlayerVolume muteLabel="Mute" unmuteLabel="Unmute" volumeLabel="Volume" maxVolumeLabel="Max volume"></div>
 
       <div class="space-y-4">
-        <div scAudioPlayerProgress></div>
+        <div scAudioPlayerProgress seekLabel="Seek"></div>
         <div class="flex justify-center gap-2">
-          <button scAudioPlayerShuffle></button>
-          <button scAudioPlayerPrevious></button>
+          <button scAudioPlayerShuffle aria-label="Shuffle"></button>
+          <button scAudioPlayerPrevious aria-label="Previous track"></button>
           <button scAudioPlayerPlayButton></button>
-          <button scAudioPlayerNext></button>
-          <button scAudioPlayerRepeat></button>
+          <button scAudioPlayerNext aria-label="Next track"></button>
+          <button scAudioPlayerRepeat [attr.aria-label]="'Repeat: ' + player.repeat()"></button>
         </div>
       </div>
     </div>
@@ -200,13 +200,13 @@ Each component accepts a `class` input:
 ```html
 <button scAudioPlayerPlayButton class="size-16 bg-blue-500"></button>
 <div scAudioPlayerCover class="size-32 rounded-full"></div>
-<div scAudioPlayerProgress class="gap-4"></div>
+<div scAudioPlayerProgress seekLabel="Seek" class="gap-4"></div>
 ```
 
 ### Controlled State
 
 ```html
-<div scAudioPlayer [tracks]="tracks" [(currentIndex)]="currentIndex" [(volume)]="volume" [(shuffle)]="shuffle" [(repeat)]="repeat" (trackChange)="onTrackChange($event)" (play)="onPlay()" (pause)="onPause()">
+<div scAudioPlayer #player="scAudioPlayer" [tracks]="tracks" [(currentIndex)]="currentIndex" [(volume)]="volume" [(shuffle)]="shuffle" [(repeat)]="repeat" (trackChange)="onTrackChange($event)" (play)="onPlay()" (pause)="onPause()">
   <!-- ... components ... -->
 </div>
 ```

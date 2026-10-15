@@ -10,6 +10,7 @@ import { cn } from '@semantic-components/ui';
 import type {
   ScNotification,
   ScNotificationAction,
+  ScNotificationCenterLabels,
   ScNotificationGroupData,
 } from './notification-types';
 
@@ -19,6 +20,7 @@ export interface ScNotificationCenterApi {
   readonly notifications: ReturnType<typeof model<ScNotification[]>>;
   readonly groups: () => ScNotificationGroupData[];
   readonly title: () => string;
+  readonly labels: () => ScNotificationCenterLabels;
   readonly showFilters: () => boolean;
   readonly showClearAll: () => boolean;
   readonly showDismiss: () => boolean;
@@ -65,14 +67,16 @@ export class ScNotificationCenter implements ScNotificationCenterApi {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly notifications = model<ScNotification[]>([]);
   readonly groups = input<ScNotificationGroupData[]>([]);
-  readonly title = input('Notifications');
+  readonly title = input<string>('');
   /** Name of the region; defaults to `title`. Make it unique per page. */
   readonly ariaLabel = input<string>('', { alias: 'aria-label' });
   readonly showFilters = input(true);
   readonly showClearAll = input(true);
   readonly showDismiss = input(true);
-  readonly emptyTitle = input('No notifications');
-  readonly emptyDescription = input("You're all caught up!");
+  readonly emptyTitle = input<string>('');
+  readonly emptyDescription = input<string>('');
+  /** Its texts: see `ScNotificationCenterLabels`. */
+  readonly labels = input.required<ScNotificationCenterLabels>();
 
   readonly markRead = output<{ notification: ScNotification; read: boolean }>();
   readonly markAllRead = output<void>();

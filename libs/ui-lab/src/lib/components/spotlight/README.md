@@ -20,21 +20,21 @@ Highlight specific UI elements with a spotlight overlay effect for feature disco
 
 ### ScSpotlight
 
-| Input                 | Type                | Default       | Description                                     |
-| --------------------- | ------------------- | ------------- | ----------------------------------------------- |
-| `target`              | `string \| Element` | `null`        | CSS selector or Element                         |
-| `aria-label`          | `string`            | `'Spotlight'` | Dialog name when there is no `scSpotlightTitle` |
-| `padding`             | `number`            | `8`           | Padding around highlighted area                 |
-| `borderRadius`        | `number`            | `8`           | Border radius of spotlight                      |
-| `overlayOpacity`      | `number`            | `0.75`        | Overlay darkness (0-1)                          |
-| `animationDuration`   | `number`            | `300`         | Animation duration in ms                        |
-| `showClose`           | `boolean`           | `true`        | Show close button                               |
-| `closeOnOverlayClick` | `boolean`           | `true`        | Close when clicking overlay                     |
-| `closeOnEscape`       | `boolean`           | `true`        | Close on Escape key                             |
-| `scrollIntoView`      | `boolean`           | `true`        | Scroll target into view                         |
-| `scrollBehavior`      | `ScrollBehavior`    | `'smooth'`    | Scroll animation type                           |
-| `contentPlacement`    | `string`            | `'auto'`      | Position of content panel                       |
-| `class`               | `string`            | `''`          | Additional CSS classes                          |
+| Input                 | Type                | Default    | Description                                     |
+| --------------------- | ------------------- | ---------- | ----------------------------------------------- |
+| `target`              | `string \| Element` | `null`     | CSS selector or Element                         |
+| `aria-label`          | attribute           | none       | Dialog name when there is no `scSpotlightTitle` |
+| `padding`             | `number`            | `8`        | Padding around highlighted area                 |
+| `borderRadius`        | `number`            | `8`        | Border radius of spotlight                      |
+| `overlayOpacity`      | `number`            | `0.75`     | Overlay darkness (0-1)                          |
+| `animationDuration`   | `number`            | `300`      | Animation duration in ms                        |
+| `showClose`           | `boolean`           | `true`     | Show close button                               |
+| `closeOnOverlayClick` | `boolean`           | `true`     | Close when clicking overlay                     |
+| `closeOnEscape`       | `boolean`           | `true`     | Close on Escape key                             |
+| `scrollIntoView`      | `boolean`           | `true`     | Scroll target into view                         |
+| `scrollBehavior`      | `ScrollBehavior`    | `'smooth'` | Scroll animation type                           |
+| `contentPlacement`    | `string`            | `'auto'`   | Position of content panel                       |
+| `class`               | `string`            | `''`       | Additional CSS classes                          |
 
 | Output   | Type   | Description                 |
 | -------- | ------ | --------------------------- |

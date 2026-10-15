@@ -13,7 +13,7 @@ Directive-based drag-and-drop task board. Directives provide behavior and stylin
 ### Basic Usage
 
 ```html
-<div scKanbanBoard aria-label="Board" #board="scKanbanBoard" [(columns)]="columns" [(cards)]="cards">
+<div scKanbanBoard [moveAnnouncement]="announceMove" aria-label="Board" #board="scKanbanBoard" [(columns)]="columns" [(cards)]="cards">
   @for (column of board.sortedColumns(); track column.id) {
   <div scKanbanColumn #col="scKanbanColumn" [column]="column">
     <h3>{{ column.title }} ({{ col.columnCards().length }})</h3>
@@ -81,7 +81,7 @@ Directive-based drag-and-drop task board. Directives provide behavior and stylin
 ### Disabled Board
 
 ```html
-<div scKanbanBoard aria-label="Board" [(columns)]="columns" [(cards)]="cards" [disabled]="true">
+<div scKanbanBoard [moveAnnouncement]="announceMove" aria-label="Board" [(columns)]="columns" [(cards)]="cards" [disabled]="true">
   <!-- dragging is blocked -->
 </div>
 ```
@@ -92,14 +92,15 @@ Directive-based drag-and-drop task board. Directives provide behavior and stylin
 
 #### Inputs
 
-| Input              | Type                   | Default          | Description                                       |
-| ------------------ | ---------------------- | ---------------- | ------------------------------------------------- |
-| `columns`          | `ScKanbanColumnData[]` | `[]`             | Array of columns (two-way binding with `model()`) |
-| `cards`            | `ScKanbanCardData[]`   | `[]`             | Array of cards (two-way binding with `model()`)   |
-| `disabled`         | `boolean`              | `false`          | Disable all drag and drop interactions            |
-| `aria-label`       | `string`               | `'Kanban board'` | Name of the board region                          |
-| `aria-describedby` | `string \| null`       | `null`           | Id of a hint for the keyboard moves               |
-| `class`            | `string`               | `''`             | Additional CSS classes                            |
+| Input              | Type                             | Default  | Description                                       |
+| ------------------ | -------------------------------- | -------- | ------------------------------------------------- |
+| `columns`          | `ScKanbanColumnData[]`           | `[]`     | Array of columns (two-way binding with `model()`) |
+| `cards`            | `ScKanbanCardData[]`             | `[]`     | Array of cards (two-way binding with `model()`)   |
+| `disabled`         | `boolean`                        | `false`  | Disable all drag and drop interactions            |
+| `aria-label`       | attribute                        | none     | Name of the board region — write it               |
+| `moveAnnouncement` | `(move: ScKanbanMove) => string` | required | What a keyboard move announces — write it         |
+| `aria-describedby` | `string \| null`                 | `null`   | Id of a hint for the keyboard moves               |
+| `class`            | `string`                         | `''`     | Additional CSS classes                            |
 
 #### Outputs
 
@@ -253,6 +254,6 @@ interface ScKanbanDragEvent {
 
 - The board is a `region` named by its `aria-label` input (default "Kanban board"); give each board on a page its own name. `aria-describedby` can point at a hint explaining the keyboard moves.
 - Columns render their cards in a `role="list"`; each card is a focusable `listitem` named by its title.
-- **Keyboard moves** (alternative to drag and drop): focus a card and press **Alt + ←/→** to move it to the previous/next column, **Alt + ↑/↓** to move it within its column. The new position is announced ("Fix login moved to Done, position 2 of 3") and focus stays on the card.
+- **Keyboard moves** (alternative to drag and drop): focus a card and press **Alt + ←/→** to move it to the previous/next column, **Alt + ↑/↓** to move it within its column. The new position is announced with your `moveAnnouncement` — `({ card, column, position, count }) => `${card.title} moved to ${column.title}, position ${position} of ${count}`` — and focus stays on the card.
 - Enter / Space on a card emits `cardClick`; keys on controls inside a card (e.g. its delete button) are left to those controls.
 - Show priority as text with `priorityLabel()` ("Urgent", "High"…), not symbols. Reveal hover-only controls on focus too (`group-focus-within:opacity-100`).

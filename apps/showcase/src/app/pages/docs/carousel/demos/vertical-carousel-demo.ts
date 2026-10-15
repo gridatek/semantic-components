@@ -31,6 +31,7 @@ import {
     <div class="py-12">
       <div
         scCarousel
+        aria-roledescription="carousel"
         aria-label="Vertical carousel"
         orientation="vertical"
         [options]="{ align: 'start' }"
@@ -39,7 +40,11 @@ import {
         <div scCarouselViewport>
           <div scCarouselTrack class="-mt-1 h-[270px]">
             @for (index of items; track index) {
-              <div scCarouselItem class="basis-1/2 pt-1">
+              <div
+                scCarouselItem
+                aria-roledescription="slide"
+                class="basis-1/2 pt-1"
+              >
                 <div class="p-1">
                   <div scCard>
                     <div

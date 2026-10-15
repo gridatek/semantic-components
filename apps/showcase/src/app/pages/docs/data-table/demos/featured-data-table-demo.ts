@@ -505,22 +505,42 @@ const SAMPLE_DATA: User[] = [
           </span>
           <ul scPaginationList>
             <li scPaginationItem>
-              <button scPaginationFirst variant="outline" size="icon-sm">
+              <button
+                scPaginationFirst
+                aria-label="Go to first page"
+                variant="outline"
+                size="icon-sm"
+              >
                 <svg siChevronsLeftIcon></svg>
               </button>
             </li>
             <li scPaginationItem>
-              <button scPaginationPrevious variant="outline" size="icon-sm">
+              <button
+                scPaginationPrevious
+                aria-label="Go to previous page"
+                variant="outline"
+                size="icon-sm"
+              >
                 <svg siChevronLeftIcon></svg>
               </button>
             </li>
             <li scPaginationItem>
-              <button scPaginationNext variant="outline" size="icon-sm">
+              <button
+                scPaginationNext
+                aria-label="Go to next page"
+                variant="outline"
+                size="icon-sm"
+              >
                 <svg siChevronRightIcon></svg>
               </button>
             </li>
             <li scPaginationItem>
-              <button scPaginationLast variant="outline" size="icon-sm">
+              <button
+                scPaginationLast
+                aria-label="Go to last page"
+                variant="outline"
+                size="icon-sm"
+              >
                 <svg siChevronsRightIcon></svg>
               </button>
             </li>

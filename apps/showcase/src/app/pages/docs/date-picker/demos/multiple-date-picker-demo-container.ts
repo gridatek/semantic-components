@@ -61,20 +61,20 @@ import {
         scDatePicker
         mode="multiple"
         [(value)]="selectedDates"
-        placeholder="Select dates"
         #dp="scDatePicker"
       >
         <div scPopoverProvider [origin]="trigger.overlayOrigin" align="start">
           <button scDatePickerTrigger #trigger="scDatePickerTrigger">
             <svg siCalendarIcon class="mr-2 size-4"></svg>
             <span [class]="dp.displayText() ? '' : 'text-muted-foreground'">
-              {{ dp.displayText() || dp.placeholder() }}
+              {{ dp.displayText() || 'Select dates' }}
             </span>
           </button>
           <ng-template scPopoverPortal>
             <div scPopover class="w-auto p-0">
               <div
                 scCalendar
+                aria-label="Calendar"
                 mode="multiple"
                 [value]="dp.value()"
                 (valueChange)="dp.onValueChange($event)"

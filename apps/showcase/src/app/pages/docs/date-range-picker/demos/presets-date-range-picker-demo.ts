@@ -51,7 +51,7 @@ import {
         <button scDateRangePickerTrigger #trigger="scDateRangePickerTrigger">
           <svg siCalendarIcon class="mr-2 size-4"></svg>
           <span [class]="drp.displayText() ? '' : 'text-muted-foreground'">
-            {{ drp.displayText() || drp.placeholder() }}
+            {{ drp.displayText() || 'Select date range' }}
           </span>
         </button>
         <ng-template scPopoverPortal>
@@ -67,6 +67,7 @@ import {
               <div class="p-3">
                 <div
                   scCalendar
+                  aria-label="Calendar"
                   mode="range"
                   [numberOfMonths]="2"
                   [value]="drp.value()"
@@ -109,7 +110,11 @@ import {
                     </button>
                   </div>
                 </div>
-                <div scDateRangePickerFooter></div>
+                <div
+                  scDateRangePickerFooter
+                  cancelLabel="Cancel"
+                  applyLabel="Apply"
+                ></div>
               </div>
             </div>
           </div>
@@ -122,5 +127,13 @@ import {
 })
 export class PresetsDateRangePickerDemo {
   readonly range = signal<ScDateRange>({ from: undefined, to: undefined });
-  readonly presets: ScDateRangePreset[] = createScDateRangePresets();
+  readonly presets: ScDateRangePreset[] = createScDateRangePresets({
+    today: 'Today',
+    yesterday: 'Yesterday',
+    last7Days: 'Last 7 days',
+    last14Days: 'Last 14 days',
+    last30Days: 'Last 30 days',
+    thisMonth: 'This month',
+    lastMonth: 'Last month',
+  });
 }

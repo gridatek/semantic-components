@@ -1,17 +1,10 @@
 import { ToolbarWidget } from '@angular/aria/toolbar';
-import {
-  Directive,
-  HostAttributeToken,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { Directive, computed, inject, input } from '@angular/core';
+import { cn, ɵwarnIfUnnamed } from '@semantic-components/ui';
 import { ScImageAnnotatorState } from './image-annotator-state';
 
 /**
- * Selects a stroke color. Named after the color's label in the annotator's
- * `colors` (e.g. "Red") unless given an `aria-label`.
+ * Selects a stroke color. Name it (`[attr.aria-label]="color.label"`).
  */
 @Directive({
   selector: 'button[scImageAnnotatorColorButton]',
@@ -20,28 +13,20 @@ import { ScImageAnnotatorState } from './image-annotator-state';
     type: 'button',
     'data-slot': 'image-annotator-color-button',
     '[style.background-color]': 'color()',
-    '[attr.aria-label]': 'label()',
     '[attr.aria-pressed]': 'isActive()',
     '[class]': 'class()',
     '(click)': 'select()',
   },
 })
 export class ScImageAnnotatorColorButton {
+  constructor() {
+    ɵwarnIfUnnamed('scImageAnnotatorColorButton');
+  }
+
   readonly classInput = input<string>('', { alias: 'class' });
   readonly color = input.required<string>();
 
   private readonly state = inject(ScImageAnnotatorState);
-  private readonly ariaLabel = inject(new HostAttributeToken('aria-label'), {
-    optional: true,
-  });
-
-  protected readonly label = computed(
-    () =>
-      this.ariaLabel ??
-      this.state.colors().find((c) => c.value === this.color())?.label ??
-      this.color(),
-  );
-
   protected readonly isActive = computed(
     () => this.state.currentColor() === this.color(),
   );

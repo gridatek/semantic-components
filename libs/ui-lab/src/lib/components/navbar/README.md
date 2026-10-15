@@ -177,7 +177,7 @@ The mobile menu container can be styled directly using the `class` input:
 
 ```html
 <ng-template scNavbarMobilePortal>
-  <div scNavbarMobileMenu class="bg-red-500 p-8">
+  <div scNavbarMobileMenu aria-label="Mobile navigation" class="bg-red-500 p-8">
     <!-- Custom background and padding -->
   </div>
 </ng-template>

@@ -35,7 +35,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   ],
   template: \`
     <div class="max-w-full overflow-auto rounded-lg border">
-      <div scOrgChart>
+      <div scOrgChart aria-label="Organization chart">
         <sc-org-chart-node [node]="orgData()" />
 
         <ng-template

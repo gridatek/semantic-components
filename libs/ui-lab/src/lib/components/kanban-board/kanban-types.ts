@@ -50,3 +50,13 @@ export interface ScKanbanCardDeleteEvent {
   card: ScKanbanCardData;
   columnId: string;
 }
+
+/** A card moved with the keyboard, for its announcement. */
+export interface ScKanbanMove {
+  readonly card: ScKanbanCardData;
+  readonly column: ScKanbanColumnData;
+  /** Its new place in the column, from 1. */
+  readonly position: number;
+  /** How many cards the column has now. */
+  readonly count: number;
+}

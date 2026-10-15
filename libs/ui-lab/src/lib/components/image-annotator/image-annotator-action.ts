@@ -1,27 +1,13 @@
 import { ToolbarWidget } from '@angular/aria/toolbar';
-import {
-  Directive,
-  HostAttributeToken,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
-import { bindInput, cn } from '@semantic-components/ui';
+import { Directive, computed, inject, input } from '@angular/core';
+import { bindInput, cn, ɵwarnIfUnnamed } from '@semantic-components/ui';
 import { ScImageAnnotatorState } from './image-annotator-state';
 
 export type ScImageAnnotatorActionType = 'undo' | 'redo' | 'clear' | 'download';
 
-const LABELS: Record<ScImageAnnotatorActionType, string> = {
-  undo: 'Undo',
-  redo: 'Redo',
-  clear: 'Clear all',
-  download: 'Download',
-};
-
 /**
  * Runs an annotator action. Disabled when there is nothing to do (it stays
- * focusable in the toolbar, `aria-disabled`). Named after the action unless
- * given an `aria-label`.
+ * focusable in the toolbar, `aria-disabled`). Write its icon and name it.
  */
 @Directive({
   selector: 'button[scImageAnnotatorAction]',
@@ -29,7 +15,6 @@ const LABELS: Record<ScImageAnnotatorActionType, string> = {
   host: {
     type: 'button',
     'data-slot': 'image-annotator-action',
-    '[attr.aria-label]': 'label()',
     '[class]': 'class()',
     '(click)': 'onClick()',
   },
@@ -40,13 +25,6 @@ export class ScImageAnnotatorAction {
 
   private readonly state = inject(ScImageAnnotatorState);
   private readonly widget = inject(ToolbarWidget);
-  private readonly ariaLabel = inject(new HostAttributeToken('aria-label'), {
-    optional: true,
-  });
-
-  protected readonly label = computed(
-    () => this.ariaLabel ?? LABELS[this.action()],
-  );
 
   protected readonly isDisabled = computed(() => {
     switch (this.action()) {
@@ -69,6 +47,7 @@ export class ScImageAnnotatorAction {
   );
 
   constructor() {
+    ɵwarnIfUnnamed('scImageAnnotatorAction');
     bindInput(this.widget.disabled, this.isDisabled);
   }
 

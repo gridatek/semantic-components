@@ -62,7 +62,15 @@ import {
       </div>
 
       <ng-template scLightboxPortal>
-        <div scLightbox>
+        <div
+          scLightbox
+          [attr.aria-label]="
+            'Image gallery, showing image ' +
+            (lightbox.currentIndex() + 1) +
+            ' of ' +
+            lightbox.images().length
+          "
+        >
           <button scLightboxClose>
             <svg siXIcon></svg>
             <span class="sr-only">Close lightbox</span>
@@ -70,6 +78,7 @@ import {
 
           <div
             scCarousel
+            aria-roledescription="carousel"
             aria-label="Images"
             [activeIndex]="lightbox.currentIndex()"
             (activeIndexChange)="lightbox.goTo($event)"
@@ -82,6 +91,7 @@ import {
                 @for (image of images; track image.src; let i = $index) {
                   <div
                     scCarouselItem
+                    aria-roledescription="slide"
                     class="flex items-center justify-center ps-0"
                   >
                     <img

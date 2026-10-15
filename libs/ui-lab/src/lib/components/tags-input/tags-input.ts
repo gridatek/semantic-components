@@ -26,7 +26,7 @@ export const SC_TAGS_INPUT = new InjectionToken<ScTagsInput>('ScTagsInput');
 export class ScTagsInput {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly tags = model<string[]>([]);
-  readonly placeholder = input<string>('Add tag...');
+  readonly placeholder = input<string>('');
   readonly disabled = input<boolean>(false);
   readonly maxTags = input<number | null>(null);
   readonly allowDuplicates = input<boolean>(false);

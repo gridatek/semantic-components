@@ -5,7 +5,7 @@ A fully accessible date picker component with **Angular ARIA Grid** integration,
 ## Usage
 
 ```html
-<div scCalendar [(value)]="date"></div>
+<div scCalendar aria-label="Calendar" [(value)]="date"></div>
 ```
 
 ## Component
@@ -26,10 +26,9 @@ Date picker component with month navigation and date selection.
 | `maxDate`        | `Temporal.PlainDate \| undefined`   | `undefined`           | Maximum selectable date                      |
 | `class`          | `string`                            | `''`                  | Additional CSS classes                       |
 | `viewMode`       | `'day' \| 'month' \| 'year'`        | `'day'`               | Initial view mode                            |
-| `ariaLabel`      | `string`                            | `'Calendar'`          | `aria-label` for the calendar container      |
-| `dayViewLabel`   | `string`                            | `'Select date'`       | `aria-label` for the day grid                |
-| `monthViewLabel` | `string`                            | `'Select month'`      | `aria-label` for the month grid              |
-| `yearViewLabel`  | `string`                            | `'Select year'`       | `aria-label` for the year grid               |
+| `dayViewLabel`   | `string`                            | `''`                  | The day grid's name — write it               |
+| `monthViewLabel` | `string`                            | `''`                  | The month grid's name — write it             |
+| `yearViewLabel`  | `string`                            | `''`                  | The year grid's name — write it              |
 | `startOfWeek`    | `number`                            | `0`                   | First day of week (0=Sun, 1=Mon, ..., 6=Sat) |
 | `weekDays`       | `string[]`                          | `['Su', 'Mo', ...]`   | Week day header labels                       |
 | `monthLabels`    | `string[]`                          | `['Jan', 'Feb', ...]` | Month labels for month view                  |
@@ -74,19 +73,19 @@ interface ScDateRange {
 ### Single Date Selection
 
 ```html
-<div scCalendar [(value)]="selectedDate" #cal="scCalendar"></div>
+<div scCalendar aria-label="Calendar" [(value)]="selectedDate" #cal="scCalendar"></div>
 ```
 
 ### Multiple Date Selection
 
 ```html
-<div scCalendar mode="multiple" [(value)]="selectedDates"></div>
+<div scCalendar aria-label="Calendar" mode="multiple" [(value)]="selectedDates"></div>
 ```
 
 ### Date Range Selection
 
 ```html
-<div scCalendar mode="range" [(value)]="selectedRange"></div>
+<div scCalendar aria-label="Calendar" mode="range" [(value)]="selectedRange"></div>
 ```
 
 ### With Disabled Dates
@@ -96,7 +95,7 @@ disabledDates = [Temporal.PlainDate.from('2026-01-01'), Temporal.PlainDate.from(
 ```
 
 ```html
-<div scCalendar [(value)]="date" [disabled]="disabledDates"></div>
+<div scCalendar aria-label="Calendar" [(value)]="date" [disabled]="disabledDates"></div>
 ```
 
 ### With Min/Max Date
@@ -107,7 +106,7 @@ maxDate = Temporal.Now.plainDateISO().add({ days: 30 });
 ```
 
 ```html
-<div scCalendar [(value)]="date" [minDate]="minDate" [maxDate]="maxDate"></div>
+<div scCalendar aria-label="Calendar" [(value)]="date" [minDate]="minDate" [maxDate]="maxDate"></div>
 ```
 
 ### i18n / Localization
@@ -115,7 +114,7 @@ maxDate = Temporal.Now.plainDateISO().add({ days: 30 });
 The calendar heading and day `aria-label`s use Angular's `LOCALE_ID` automatically. For custom labels:
 
 ```html
-<div scCalendar [startOfWeek]="1" [weekDays]="['Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa', 'Di']" [monthLabels]="['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sep', 'Oct', 'Nov', 'Déc']" [ariaLabel]="'Calendrier'" [dayViewLabel]="'Sélectionner la date'" [monthViewLabel]="'Sélectionner le mois'" [yearViewLabel]="'Sélectionner l\'année'"></div>
+<div scCalendar aria-label="Calendrier" [startOfWeek]="1" [weekDays]="['Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa', 'Di']" [monthLabels]="['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sep', 'Oct', 'Nov', 'Déc']" [dayViewLabel]="'Sélectionner la date'" [monthViewLabel]="'Sélectionner le mois'" [yearViewLabel]="'Sélectionner l\'année'"></div>
 ```
 
 > **Note:** `weekDays` and `startOfWeek` are independent — ensure the label order matches the start day.

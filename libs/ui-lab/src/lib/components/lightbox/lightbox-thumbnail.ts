@@ -1,6 +1,6 @@
 import { Option } from '@angular/aria/listbox';
 import { Directive, computed, inject, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn, ɵwarnIfUnnamed } from '@semantic-components/ui';
 import { SC_LIGHTBOX_PROVIDER } from './lightbox-provider';
 
 @Directive({
@@ -13,10 +13,13 @@ import { SC_LIGHTBOX_PROVIDER } from './lightbox-provider';
   ],
   host: {
     '[class]': 'class()',
-    '[attr.aria-label]': "'Go to image ' + (index() + 1)",
   },
 })
 export class ScLightboxThumbnail {
+  constructor() {
+    ɵwarnIfUnnamed('scLightboxThumbnail');
+  }
+
   private readonly provider = inject(SC_LIGHTBOX_PROVIDER);
 
   readonly index = input.required<number>();

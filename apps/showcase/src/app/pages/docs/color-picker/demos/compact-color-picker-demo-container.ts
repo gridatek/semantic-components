@@ -45,12 +45,17 @@ import {
         [(value)]="color"
         class="space-y-3 rounded-lg border p-3"
       >
-        <div scColorPickerArea class="h-32">
+        <div
+          scColorPickerArea
+          aria-label="Color"
+          [valueText]="colorValueText"
+          class="h-32"
+        >
           <div scColorPickerAreaSaturation></div>
           <div scColorPickerAreaBrightness></div>
           <div scColorPickerAreaCursor></div>
         </div>
-        <div scColorPickerHue>
+        <div scColorPickerHue aria-label="Hue">
           <div scColorPickerHueCursor></div>
         </div>
         <input scColorPickerInput aria-label="Color value" format="hex" />
@@ -61,6 +66,10 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class CompactColorPickerDemo {
+  /** The colour area's value, as read out. */
+  readonly colorValueText = (saturation: number, brightness: number) =>
+    \`Saturation \${saturation}%, Brightness \${brightness}%\`;
+
   readonly color = signal('#f97316');
 }`;
 }

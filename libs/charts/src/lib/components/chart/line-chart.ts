@@ -21,7 +21,7 @@ import { CHART_COLORS, ScChartDataPoint } from './chart-types';
       [style.height.px]="height()"
       preserveAspectRatio="xMidYMid meet"
       role="img"
-      [attr.aria-label]="ariaLabel()"
+      [attr.aria-label]="ariaLabel() || null"
     >
       <!-- Grid lines -->
       @for (line of gridLines(); track line) {
@@ -134,7 +134,7 @@ export class ScLineChart {
   readonly showPoints = input<boolean>(true);
   readonly color = input<string>('');
   readonly labelStep = input<number>(1);
-  readonly ariaLabel = input<string>('Line chart');
+  readonly ariaLabel = input<string>('');
 
   readonly hoveredPoint = signal<ScChartDataPoint | null>(null);
   readonly tooltipX = signal(0);

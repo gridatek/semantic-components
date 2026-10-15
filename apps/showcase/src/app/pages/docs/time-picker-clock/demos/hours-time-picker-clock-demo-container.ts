@@ -56,12 +56,14 @@ import { ScTimePickerClock } from '@semantic-components/ui-lab';
         <input
           scTimePickerInput
           scTimePickerHoursInput
+          aria-label="Hours"
           (focus)="clockMode.set('hours')"
         />
         <span scTimePickerSeparator>:</span>
         <input
           scTimePickerInput
           scTimePickerMinutesInput
+          aria-label="Minutes"
           (focus)="clockMode.set('minutes')"
         />
         <div scTimePickerPeriod>

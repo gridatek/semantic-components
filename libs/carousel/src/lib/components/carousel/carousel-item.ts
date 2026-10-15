@@ -6,7 +6,6 @@ import { ScCarousel } from './carousel';
   selector: 'div[scCarouselItem]',
   host: {
     role: 'group',
-    'aria-roledescription': 'slide',
     '[class]': 'class()',
   },
 })

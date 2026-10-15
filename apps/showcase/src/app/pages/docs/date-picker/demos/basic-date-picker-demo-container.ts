@@ -62,13 +62,14 @@ import {
           <button scDatePickerTrigger #trigger="scDatePickerTrigger">
             <svg siCalendarIcon class="mr-2 size-4"></svg>
             <span [class]="dp.displayText() ? '' : 'text-muted-foreground'">
-              {{ dp.displayText() || dp.placeholder() }}
+              {{ dp.displayText() || 'Pick a date' }}
             </span>
           </button>
           <ng-template scPopoverPortal>
             <div scPopover class="w-auto p-0">
               <div
                 scCalendar
+                aria-label="Calendar"
                 [value]="dp.value()"
                 (valueChange)="dp.onValueChange($event)"
                 #cal="scCalendar"

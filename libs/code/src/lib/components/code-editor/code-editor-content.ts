@@ -174,7 +174,7 @@ export function detectLanguage(
         [disabled]="disabled()"
         [readonly]="readonly()"
         [placeholder]="placeholder()"
-        [attr.aria-label]="ariaLabel() || 'Code editor'"
+        [attr.aria-label]="ariaLabel() || null"
         [attr.aria-describedby]="ariaDescribedby()"
         autocomplete="off"
         autocorrect="off"

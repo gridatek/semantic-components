@@ -1,9 +1,11 @@
 import { Temporal } from '@js-temporal/polyfill';
 import {
   Directive,
+  LOCALE_ID,
   computed,
   contentChild,
   effect,
+  inject,
   input,
   model,
   output,
@@ -29,8 +31,8 @@ export interface ScDateRangePreset {
   },
 })
 export class ScDateRangePicker {
+  private readonly locale = inject(LOCALE_ID);
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly placeholder = input('Select date range');
   readonly dateFormat = input('short');
 
   readonly value = model<ScDateRange>({ from: undefined, to: undefined });
@@ -66,14 +68,14 @@ export class ScDateRangePicker {
   formatDate(date: Temporal.PlainDate): string {
     const format = this.dateFormat();
     if (format === 'short') {
-      return date.toLocaleString('en-US', {
+      return date.toLocaleString(this.locale, {
         month: 'short',
         day: 'numeric',
         year: 'numeric',
       });
     }
     if (format === 'long') {
-      return date.toLocaleString('en-US', {
+      return date.toLocaleString(this.locale, {
         month: 'long',
         day: 'numeric',
         year: 'numeric',
@@ -104,8 +106,21 @@ export class ScDateRangePicker {
   }
 }
 
-// Helper function to create common presets
-export function createScDateRangePresets(): ScDateRangePreset[] {
+/** The names of the common presets — the library writes none. */
+export interface ScDateRangePresetLabels {
+  readonly today: string;
+  readonly yesterday: string;
+  readonly last7Days: string;
+  readonly last14Days: string;
+  readonly last30Days: string;
+  readonly thisMonth: string;
+  readonly lastMonth: string;
+}
+
+/** The common presets (today, the last 7 days, this month…), named by you. */
+export function createScDateRangePresets(
+  labels: ScDateRangePresetLabels,
+): ScDateRangePreset[] {
   const today = Temporal.Now.plainDateISO();
   const yesterday = today.subtract({ days: 1 });
 
@@ -121,12 +136,18 @@ export function createScDateRangePresets(): ScDateRangePreset[] {
   const lastMonthEnd = lastMonth.with({ day: lastMonth.daysInMonth });
 
   return [
-    { label: 'Today', value: { from: today, to: today } },
-    { label: 'Yesterday', value: { from: yesterday, to: yesterday } },
-    { label: 'Last 7 days', value: { from: last7Days, to: today } },
-    { label: 'Last 14 days', value: { from: last14Days, to: today } },
-    { label: 'Last 30 days', value: { from: last30Days, to: today } },
-    { label: 'This month', value: { from: thisMonthStart, to: thisMonthEnd } },
-    { label: 'Last month', value: { from: lastMonthStart, to: lastMonthEnd } },
+    { label: labels.today, value: { from: today, to: today } },
+    { label: labels.yesterday, value: { from: yesterday, to: yesterday } },
+    { label: labels.last7Days, value: { from: last7Days, to: today } },
+    { label: labels.last14Days, value: { from: last14Days, to: today } },
+    { label: labels.last30Days, value: { from: last30Days, to: today } },
+    {
+      label: labels.thisMonth,
+      value: { from: thisMonthStart, to: thisMonthEnd },
+    },
+    {
+      label: labels.lastMonth,
+      value: { from: lastMonthStart, to: lastMonthEnd },
+    },
   ];
 }

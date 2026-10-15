@@ -23,7 +23,7 @@ State flows through the `SC_LIGHTBOX` injection token. Child directives inject i
 
 Root component that owns all state and manages the CDK Overlay lifecycle (create/attach/detach), backdrop animation, focus trapping, and keyboard shortcuts (←, →, +, -, 0, Esc).
 
-**Selector:** `div[scLightboxProvider]` | **Export:** `scLightbox`
+**Selector:** `div[scLightboxProvider]` | **Export:** `scLightboxProvider`
 
 | Inputs          | Type                    | Default | Description                |
 | --------------- | ----------------------- | ------- | -------------------------- |
@@ -118,7 +118,7 @@ interface ScLightboxImageData {
 ### Basic
 
 ```html
-<div scLightboxProvider [images]="images">
+<div scLightboxProvider #lightbox="scLightboxProvider" [images]="images">
   <div class="flex gap-4">
     @for (image of images; track image.src; let i = $index) {
     <button scLightboxTrigger [index]="i" class="h-32 w-32 overflow-hidden rounded">
@@ -128,7 +128,7 @@ interface ScLightboxImageData {
   </div>
 
   <ng-template scLightboxPortal>
-    <div scLightbox>
+    <div scLightbox [attr.aria-label]="'Image gallery, showing image ' + (lightbox.currentIndex() + 1) + ' of ' + lightbox.images().length">
       <!-- your lightbox UI here: image, controls, thumbnails -->
     </div>
   </ng-template>

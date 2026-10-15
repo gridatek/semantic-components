@@ -19,10 +19,10 @@ import { SiTrash2Icon, SiUndoIcon } from '@semantic-icons/lucide-icons';
       <canvas scSignaturePadCanvas aria-label="Signature" [(value)]="signature" [width]="400" [height]="200"></canvas>
 
       <div scSignaturePadControls>
-        <button scSignaturePadUndo>
+        <button scSignaturePadUndo aria-label="Undo last stroke">
           <svg si-undo-icon class="size-4"></svg>
         </button>
-        <button scSignaturePadClear>
+        <button scSignaturePadClear aria-label="Clear signature">
           <svg si-trash-2-icon class="size-4"></svg>
         </button>
       </div>
@@ -47,7 +47,7 @@ export class MyComponent {
 
 - Canvas element for drawing
 - **Selector**: `canvas[scSignaturePadCanvas]`
-- **Inputs**: `width`, `height`, `ariaLabel`, `class`
+- **Inputs**: `width`, `height`, `class` — name it with `aria-label`
 - **Model**: `value` (two-way bindable data URL)
 - **Outputs**: `signatureChange`, `strokeEnd`
 
@@ -99,8 +99,8 @@ export class MyComponent {
 
   <!-- Controls at bottom instead of top-right -->
   <div scSignaturePadControls class="static mt-2 justify-center">
-    <button scSignaturePadUndo class="px-4 py-2">Undo</button>
-    <button scSignaturePadClear class="px-4 py-2">Clear</button>
+    <button scSignaturePadUndo aria-label="Undo last stroke" class="px-4 py-2">Undo</button>
+    <button scSignaturePadClear aria-label="Clear signature" class="px-4 py-2">Clear</button>
   </div>
 </div>
 ```
@@ -112,10 +112,10 @@ export class MyComponent {
   <canvas scSignaturePadCanvas aria-label="Signature" [(value)]="signature"></canvas>
 
   <div scSignaturePadControls>
-    <button scSignaturePadUndo>
+    <button scSignaturePadUndo aria-label="Undo last stroke">
       <svg si-undo-icon></svg>
     </button>
-    <button scSignaturePadClear>
+    <button scSignaturePadClear aria-label="Clear signature">
       <svg si-trash-icon></svg>
     </button>
     <!-- Add your own buttons -->
@@ -135,8 +135,8 @@ export class MyComponent {
 
 <!-- External controls -->
 <div class="mt-2 flex gap-2">
-  <button scSignaturePadUndo>Undo</button>
-  <button scSignaturePadClear>Clear</button>
+  <button scSignaturePadUndo aria-label="Undo last stroke">Undo</button>
+  <button scSignaturePadClear aria-label="Clear signature">Clear</button>
   <button (click)="save()">Save</button>
 </div>
 ```
@@ -162,8 +162,8 @@ export class MyComponent {
   <div class="relative inline-block">
     <canvas scSignaturePadCanvas aria-label="Signature"></canvas>
     <div scSignaturePadControls>
-      <button scSignaturePadUndo>Undo</button>
-      <button scSignaturePadClear>Clear</button>
+      <button scSignaturePadUndo aria-label="Undo last stroke">Undo</button>
+      <button scSignaturePadClear aria-label="Clear signature">Clear</button>
     </div>
   </div>
 </div>

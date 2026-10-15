@@ -48,6 +48,7 @@ import {
     <div scSidebarProvider [storageKey]="null">
       <div
         scSidebar
+        closeLabel="Close"
         variant="inset"
         collapsible="icon"
         aria-label="Workspace navigation"
@@ -90,7 +91,7 @@ import {
             </div>
           </div>
         </div>
-        <button scSidebarRail></button>
+        <button scSidebarRail aria-label="Toggle sidebar"></button>
       </div>
 
       <main scSidebarInset aria-label="Icon example content">

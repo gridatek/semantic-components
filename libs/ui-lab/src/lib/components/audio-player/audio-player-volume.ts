@@ -28,7 +28,7 @@ import { SC_AUDIO_PLAYER } from './audio-player';
       type="button"
       (click)="player.toggleMute()"
       [class]="iconButtonClass"
-      [attr.aria-label]="player.isMuted() ? 'Unmute' : 'Mute'"
+      [attr.aria-label]="player.isMuted() ? unmuteLabel() : muteLabel()"
     >
       @if (player.isMuted()) {
         <svg siVolumeOffIcon class="pointer-events-none size-3.5"></svg>
@@ -46,7 +46,7 @@ import { SC_AUDIO_PLAYER } from './audio-player';
       class="w-24"
       [max]="1"
       [step]="0.01"
-      aria-label="Volume"
+      [attr.aria-label]="volumeLabel()"
       [disabled]="player.isMuted()"
       [value]="player.volume()"
       (valueChange)="player.setVolume($event)"
@@ -56,7 +56,7 @@ import { SC_AUDIO_PLAYER } from './audio-player';
       type="button"
       (click)="onMaxVolume()"
       [class]="iconButtonClass"
-      aria-label="Max volume"
+      [attr.aria-label]="maxVolumeLabel()"
     >
       <svg siVolume2Icon class="pointer-events-none size-3.5"></svg>
     </button>
@@ -68,6 +68,12 @@ import { SC_AUDIO_PLAYER } from './audio-player';
 })
 export class ScAudioPlayerVolume {
   readonly player = inject(SC_AUDIO_PLAYER);
+
+  /** The names of its controls — write them ("Mute", "Unmute", "Volume", "Max volume"). */
+  readonly muteLabel = input.required<string>();
+  readonly unmuteLabel = input.required<string>();
+  readonly volumeLabel = input.required<string>();
+  readonly maxVolumeLabel = input.required<string>();
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly iconButtonClass = cn(

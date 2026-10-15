@@ -23,6 +23,7 @@ import {
   type ScNotification,
   ScNotificationCenter,
   ScNotificationCenterContainer,
+  type ScNotificationCenterLabels,
   type ScNotificationGroupData,
 } from '@semantic-components/ui-lab';
 
@@ -32,6 +33,10 @@ import {
   template: \`
     <div
       scNotificationCenter
+      title="Notifications"
+      emptyTitle="No notifications"
+      emptyDescription="You're all caught up!"
+      [labels]="notificationLabels"
       aria-label="Grouped notifications"
       [(notifications)]="notifications"
       [groups]="groups()"
@@ -47,6 +52,21 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class GroupedNotificationCenterDemo {
+  /** The notification center's texts. */
+  readonly notificationLabels: ScNotificationCenterLabels = {
+    all: 'All',
+    unread: 'Unread',
+    read: 'Read',
+    markAllRead: 'Mark all as read',
+    clearAll: 'Clear all notifications',
+    other: 'Other',
+    dismiss: 'Dismiss notification',
+    groupEmpty: 'No notifications',
+    newCount: (count) => \`\${count} new\`,
+    markAllReadIn: (group) => \`Mark all as read in \${group}\`,
+    clearAllIn: (group) => \`Clear all in \${group}\`,
+  };
+
   readonly groups = signal<ScNotificationGroupData[]>([
     { id: 'messages', title: 'Messages' },
     { id: 'updates', title: 'Updates' },

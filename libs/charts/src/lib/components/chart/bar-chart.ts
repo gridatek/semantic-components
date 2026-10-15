@@ -20,7 +20,7 @@ import { CHART_COLORS, ScChartDataPoint } from './chart-types';
       [style.height.px]="height()"
       preserveAspectRatio="xMidYMid meet"
       role="img"
-      [attr.aria-label]="ariaLabel()"
+      [attr.aria-label]="ariaLabel() || null"
     >
       <!-- Grid lines -->
       @for (line of gridLines(); track line) {
@@ -112,7 +112,7 @@ export class ScBarChart {
   readonly height = input<number>(300);
   readonly barRadius = input<number>(4);
   readonly barGap = input<number>(8);
-  readonly ariaLabel = input<string>('Bar chart');
+  readonly ariaLabel = input<string>('');
 
   readonly hoveredBar = signal<ScChartDataPoint | null>(null);
   readonly tooltipX = signal(0);

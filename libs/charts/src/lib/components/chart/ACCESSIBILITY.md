@@ -48,12 +48,12 @@ All interactive elements have visible `focus-visible` styles that match their ho
 
 ## Inputs Reference
 
-| Component      | Input       | Type     | Default         | Description                        |
-| -------------- | ----------- | -------- | --------------- | ---------------------------------- |
-| `ScBarChart`   | `ariaLabel` | `string` | `'Bar chart'`   | Accessible label for the chart SVG |
-| `ScLineChart`  | `ariaLabel` | `string` | `'Line chart'`  | Accessible label for the chart SVG |
-| `ScPieChart`   | `ariaLabel` | `string` | `'Pie chart'`   | Accessible label for the chart SVG |
-| `ScDonutChart` | `ariaLabel` | `string` | `'Donut chart'` | Accessible label for the chart SVG |
+| Component      | Input       | Type     | Default | Description                                           |
+| -------------- | ----------- | -------- | ------- | ----------------------------------------------------- |
+| `ScBarChart`   | `ariaLabel` | `string` | `''`    | The chart's name — write it (the library writes none) |
+| `ScLineChart`  | `ariaLabel` | `string` | `''`    | The chart's name — write it (the library writes none) |
+| `ScPieChart`   | `ariaLabel` | `string` | `''`    | The chart's name — write it (the library writes none) |
+| `ScDonutChart` | `ariaLabel` | `string` | `''`    | The chart's name — write it (the library writes none) |
 
 ## Best Practices
 

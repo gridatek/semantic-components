@@ -51,7 +51,7 @@ import { Component, signal } from '@angular/core';
     <nav scPagination #pagination="scPagination" [currentPage]="currentPage()" [pageSize]="10" [totalItems]="100" (pageChange)="currentPage.set($event)">
       <ul scPaginationList>
         <li scPaginationItem>
-          <button scPaginationPrevious [disabled]="currentPage() === 1">
+          <button scPaginationPrevious aria-label="Go to previous page" [disabled]="currentPage() === 1">
             <svg class="size-4"><!-- icon --></svg>
             <span>Previous</span>
           </button>
@@ -73,7 +73,7 @@ import { Component, signal } from '@angular/core';
         }
 
         <li scPaginationItem>
-          <button scPaginationNext [disabled]="currentPage() === pagination.totalPages()">
+          <button scPaginationNext aria-label="Go to next page" [disabled]="currentPage() === pagination.totalPages()">
             <span>Next</span>
             <svg class="size-4"><!-- icon --></svg>
           </button>
@@ -177,7 +177,7 @@ Current Page: 5, Total Pages: 10
 <nav scPagination>
   <ul scPaginationList>
     <li scPaginationItem>
-      <button scPaginationPrevious>...</button>
+      <button scPaginationPrevious aria-label="Go to previous page">...</button>
     </li>
     <li scPaginationItem>
       <button scPaginationLink>1</button>
@@ -193,7 +193,7 @@ Current Page: 5, Total Pages: 10
       <button scPaginationLink>10</button>
     </li>
     <li scPaginationItem>
-      <button scPaginationNext>...</button>
+      <button scPaginationNext aria-label="Go to next page">...</button>
     </li>
   </ul>
 </nav>
@@ -212,7 +212,7 @@ Current Page: 5, Total Pages: 10
 <nav scPagination #pagination="scPagination" [currentPage]="currentPage()" [pageSize]="10" [totalItems]="100" (pageChange)="currentPage.set($event)">
   <ul scPaginationList>
     <li scPaginationItem>
-      <button scPaginationPrevious [disabled]="currentPage() === 1">...</button>
+      <button scPaginationPrevious aria-label="Go to previous page" [disabled]="currentPage() === 1">...</button>
     </li>
 
     @for (page of pagination.pages(); track page.value) {
@@ -226,7 +226,7 @@ Current Page: 5, Total Pages: 10
     }
 
     <li scPaginationItem>
-      <button scPaginationNext [disabled]="currentPage() === pagination.totalPages()">...</button>
+      <button scPaginationNext aria-label="Go to next page" [disabled]="currentPage() === pagination.totalPages()">...</button>
     </li>
   </ul>
 </nav>

@@ -18,7 +18,6 @@ export const SC_DOCK = new InjectionToken<ScDock>('SC_DOCK');
   providers: [{ provide: SC_DOCK, useExisting: ScDock }],
   host: {
     role: 'navigation',
-    '[attr.aria-label]': 'ariaLabel()',
     '(mouseleave)': 'onMouseLeave()',
   },
 })
@@ -27,7 +26,6 @@ export class ScDock {
   readonly size = input<ScDockSize>(DEFAULT_DOCK_OPTIONS.size);
   readonly magnification = input(DEFAULT_DOCK_OPTIONS.magnification);
   readonly magnificationScale = input(DEFAULT_DOCK_OPTIONS.magnificationScale);
-  readonly ariaLabel = input('Application dock');
 
   readonly itemClick = output<ScDockItemData>();
 

@@ -6,6 +6,7 @@ import {
   ScKanbanColumn,
   type ScKanbanColumnData,
   type ScKanbanDragEvent,
+  type ScKanbanMove,
 } from '@semantic-components/ui-lab';
 import {
   SiChevronDownIcon,
@@ -30,6 +31,7 @@ import {
     <div class="bg-muted/10 h-[600px] overflow-hidden rounded-lg border">
       <div
         scKanbanBoard
+        [moveAnnouncement]="announceMove"
         aria-label="Project board"
         aria-describedby="basic-kanban-hint"
         #board="scKanbanBoard"
@@ -319,6 +321,10 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicKanbanBoardDemo {
+  /** What is announced when a card is moved with the keyboard. */
+  readonly announceMove = ({ card, column, position, count }: ScKanbanMove) =>
+    `${card.title} moved to ${column.title}, position ${position} of ${count}`;
+
   readonly addingCardInColumn = signal<string | null>(null);
   readonly isAddingColumn = signal(false);
 

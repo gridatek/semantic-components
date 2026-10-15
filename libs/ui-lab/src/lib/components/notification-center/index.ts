@@ -16,4 +16,5 @@ export type {
   ScNotificationDismissEvent,
   ScNotificationActionEvent,
   ScNotificationGroupCollapseEvent,
+  ScNotificationCenterLabels,
 } from './notification-types';

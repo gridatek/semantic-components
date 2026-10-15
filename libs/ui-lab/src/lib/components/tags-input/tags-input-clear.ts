@@ -1,5 +1,5 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { buttonVariants, cn } from '@semantic-components/ui';
+import { buttonVariants, cn, ɵwarnIfUnnamed } from '@semantic-components/ui';
 import { SC_TAGS_INPUT } from './tags-input';
 
 @Directive({
@@ -11,10 +11,13 @@ import { SC_TAGS_INPUT } from './tags-input';
     '[attr.aria-disabled]':
       'tagsInput.disabled() || tagsInput.tags().length === 0 || null',
     '(click)': 'onClick($event)',
-    '[attr.aria-label]': '"Clear all tags"',
   },
 })
 export class ScTagsInputClear {
+  constructor() {
+    ɵwarnIfUnnamed('scTagsInputClear');
+  }
+
   readonly tagsInput = inject(SC_TAGS_INPUT);
 
   readonly classInput = input<string>('', { alias: 'class' });

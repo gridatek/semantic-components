@@ -17,7 +17,7 @@ import { ScDateRangePicker } from './date-range-picker';
         class="border-input hover:bg-accent inline-flex h-8 items-center justify-center rounded-md border px-3 text-sm font-medium"
         (click)="picker.onCancel()"
       >
-        Cancel
+        {{ cancelLabel() }}
       </button>
       <button
         type="button"
@@ -25,7 +25,7 @@ import { ScDateRangePicker } from './date-range-picker';
         [disabled]="!picker.value().from || !picker.value().to"
         (click)="picker.onApply()"
       >
-        Apply
+        {{ applyLabel() }}
       </button>
     </div>
   `,
@@ -36,6 +36,9 @@ import { ScDateRangePicker } from './date-range-picker';
 })
 export class ScDateRangePickerFooter {
   readonly picker = inject(ScDateRangePicker);
+  /** Its buttons' texts — write them ("Cancel", "Apply"). */
+  readonly cancelLabel = input.required<string>();
+  readonly applyLabel = input.required<string>();
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>

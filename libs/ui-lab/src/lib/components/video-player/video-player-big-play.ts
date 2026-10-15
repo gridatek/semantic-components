@@ -5,7 +5,7 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn, ɵwarnIfUnnamed } from '@semantic-components/ui';
 import { SC_VIDEO_PLAYER } from './video-player';
 
 @Component({
@@ -20,12 +20,15 @@ import { SC_VIDEO_PLAYER } from './video-player';
   host: {
     type: 'button',
     '[class]': 'class()',
-    'aria-label': 'Play video',
     '(click)': 'player.play()',
   },
   encapsulation: ViewEncapsulation.None,
 })
 export class ScVideoPlayerBigPlay {
+  constructor() {
+    ɵwarnIfUnnamed('scVideoPlayerBigPlay');
+  }
+
   protected readonly player = inject(SC_VIDEO_PLAYER);
   readonly classInput = input<string>('', { alias: 'class' });
 

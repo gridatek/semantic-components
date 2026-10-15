@@ -105,6 +105,7 @@ import { ConfigService } from '../../services/config.service';
     <div scSidebarProvider class="min-h-svh">
       <div
         scSidebar
+        closeLabel="Close"
         side="left"
         variant="sidebar"
         collapsible="icon"
@@ -414,7 +415,7 @@ import { ConfigService } from '../../services/config.service';
           </ul>
         </div>
 
-        <button scSidebarRail></button>
+        <button scSidebarRail aria-label="Toggle sidebar"></button>
       </div>
 
       <main scSidebarInset class="min-w-0 overflow-x-clip">

@@ -26,7 +26,7 @@ interface YearInfo {
     <table
       ngGrid
       tabindex="0"
-      [attr.aria-label]="ariaLabel()"
+      [attr.aria-label]="ariaLabel() || null"
       class="w-full border-collapse"
       colWrap="continuous"
       rowWrap="continuous"
@@ -67,7 +67,7 @@ interface YearInfo {
 export class ScCalendarYearView {
   private readonly _yearButtons = viewChildren(GridCellWidget);
 
-  readonly ariaLabel = input('Select year');
+  readonly ariaLabel = input<string>('');
   readonly decadeStart = input.required<number>();
   readonly selectedYear = input.required<number>();
   readonly yearSelected = output<number>();

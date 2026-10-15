@@ -30,7 +30,15 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
       </button>
 
       <ng-template scLightboxPortal>
-        <div scLightbox>
+        <div
+          scLightbox
+          [attr.aria-label]="
+            'Image gallery, showing image ' +
+            (lightbox.currentIndex() + 1) +
+            ' of ' +
+            lightbox.images().length
+          "
+        >
           <button scLightboxClose>
             <svg siXIcon></svg>
             <span class="sr-only">Close lightbox</span>

@@ -5,7 +5,7 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { buttonVariants, cn } from '@semantic-components/ui';
+import { buttonVariants, cn, ɵwarnIfUnnamed } from '@semantic-components/ui';
 import { SC_AUDIO_PLAYER } from './audio-player';
 
 @Component({
@@ -14,12 +14,15 @@ import { SC_AUDIO_PLAYER } from './audio-player';
   host: {
     type: 'button',
     '[class]': 'class()',
-    '[attr.aria-label]': "'Repeat: ' + player.repeat()",
     '(click)': 'player.cycleRepeat()',
   },
   encapsulation: ViewEncapsulation.None,
 })
 export class ScAudioPlayerRepeat {
+  constructor() {
+    ɵwarnIfUnnamed('scAudioPlayerRepeat');
+  }
+
   readonly player = inject(SC_AUDIO_PLAYER);
   readonly classInput = input<string>('', { alias: 'class' });
 

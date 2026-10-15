@@ -36,9 +36,13 @@ import {
   template: \`
     <div class="flex flex-col gap-4">
       <div scTimePicker format="24h" [(value)]="time">
-        <input scTimePickerInput scTimePickerHoursInput />
+        <input scTimePickerInput scTimePickerHoursInput aria-label="Hours" />
         <span scTimePickerSeparator>:</span>
-        <input scTimePickerInput scTimePickerMinutesInput />
+        <input
+          scTimePickerInput
+          scTimePickerMinutesInput
+          aria-label="Minutes"
+        />
       </div>
       <p class="text-muted-foreground text-sm">
         Selected: {{ formatTime(time()) }}

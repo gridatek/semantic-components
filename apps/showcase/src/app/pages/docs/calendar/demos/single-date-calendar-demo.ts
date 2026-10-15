@@ -32,7 +32,12 @@ import {
   template: `
     <div class="space-y-4">
       <div class="w-fit rounded-md border">
-        <div scCalendar [(value)]="selectedDate" #cal="scCalendar">
+        <div
+          scCalendar
+          aria-label="Calendar"
+          [(value)]="selectedDate"
+          #cal="scCalendar"
+        >
           <div scCalendarHeader>
             <button scCalendarPrevious>
               <svg siChevronLeftIcon class="size-4"></svg>

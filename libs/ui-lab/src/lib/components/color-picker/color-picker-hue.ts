@@ -1,5 +1,5 @@
 import { Directive, ElementRef, computed, inject, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn, ɵwarnIfUnnamed } from '@semantic-components/ui';
 import { SC_COLOR_PICKER } from './color-picker';
 import {
   normalizePosition,
@@ -12,7 +12,6 @@ import {
   host: {
     role: 'slider',
     tabindex: '0',
-    'aria-label': 'Hue',
     'aria-valuemin': '0',
     'aria-valuemax': '360',
     '[attr.aria-valuenow]': 'colorPicker.hsv().h',
@@ -26,6 +25,10 @@ import {
   },
 })
 export class ScColorPickerHue {
+  constructor() {
+    ɵwarnIfUnnamed('scColorPickerHue');
+  }
+
   protected readonly colorPicker = inject(SC_COLOR_PICKER);
   private readonly elementRef = inject(ElementRef<HTMLElement>);
 

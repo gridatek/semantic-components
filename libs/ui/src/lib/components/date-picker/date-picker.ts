@@ -1,5 +1,13 @@
 import { Temporal } from '@js-temporal/polyfill';
-import { Directive, computed, contentChild, input, model } from '@angular/core';
+import {
+  Directive,
+  LOCALE_ID,
+  computed,
+  contentChild,
+  inject,
+  input,
+  model,
+} from '@angular/core';
 import { cn } from '../../utils';
 import { ScCalendarMode, ScCalendarValue, ScDateRange } from '../calendar';
 import { ScPopoverProvider } from '../popover';
@@ -12,9 +20,9 @@ import { ScPopoverProvider } from '../popover';
   },
 })
 export class ScDatePicker {
+  private readonly locale = inject(LOCALE_ID);
   readonly classInput = input<string>('', { alias: 'class' });
   readonly mode = input<ScCalendarMode>('single');
-  readonly placeholder = input<string>('Pick a date');
 
   readonly value = model<ScCalendarValue>(undefined);
 
@@ -54,7 +62,7 @@ export class ScDatePicker {
   });
 
   private formatDate(date: Temporal.PlainDate): string {
-    return date.toLocaleString('en-US', {
+    return date.toLocaleString(this.locale, {
       month: 'short',
       day: 'numeric',
       year: 'numeric',

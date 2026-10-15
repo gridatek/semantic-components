@@ -1,5 +1,5 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { cn } from '../../utils';
+import { cn, ɵwarnIfUnnamed } from '../../utils';
 import { SC_TIME_PICKER } from './time-picker';
 
 @Directive({
@@ -7,10 +7,13 @@ import { SC_TIME_PICKER } from './time-picker';
   host: {
     '[class]': 'class()',
     role: 'group',
-    '[attr.aria-label]': '"Select AM or PM"',
   },
 })
 export class ScTimePickerPeriod {
+  constructor() {
+    ɵwarnIfUnnamed('scTimePickerPeriod');
+  }
+
   readonly timePicker = inject(SC_TIME_PICKER);
 
   readonly classInput = input<string>('', { alias: 'class' });

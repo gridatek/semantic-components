@@ -43,7 +43,12 @@ import {
           <span class="text-muted-foreground text-sm">config.json</span>
           <span scCodeEditorLabel>json</span>
         </div>
-        <button scCodeEditorCopyButton [code]="jsonCode"></button>
+        <button
+          scCodeEditorCopyButton
+          #copy="scCodeEditorCopyButton"
+          [attr.aria-label]="copy.copied() ? 'Copied' : 'Copy code'"
+          [code]="jsonCode"
+        ></button>
       </div>
       <div
         scCodeEditorContent

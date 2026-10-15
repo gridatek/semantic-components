@@ -9,8 +9,6 @@ export { ScImageAnnotatorLineWidth } from './image-annotator-line-width';
 export { ScImageAnnotatorToolButton } from './image-annotator-tool-button';
 export { ScImageAnnotatorToolbar } from './image-annotator-toolbar';
 export {
-  DEFAULT_ANNOTATOR_COLORS,
-  DEFAULT_ANNOTATOR_TOOLS,
   type ScAnnotation,
   type ScAnnotationPoint,
   type ScAnnotationTool,

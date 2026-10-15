@@ -1124,7 +1124,12 @@ import {
               <div scCard>
                 <div scCardBody>
                   <div class="w-fit rounded-md">
-                    <div scCalendar [(value)]="selectedDate" #cal="scCalendar">
+                    <div
+                      scCalendar
+                      aria-label="Calendar"
+                      [(value)]="selectedDate"
+                      #cal="scCalendar"
+                    >
                       <div scCalendarHeader>
                         <button scCalendarPrevious>
                           <svg siChevronLeftIcon class="size-4"></svg>

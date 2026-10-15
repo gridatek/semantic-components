@@ -1,8 +1,6 @@
 import { Service, type Signal, computed, signal } from '@angular/core';
 import { Subject } from 'rxjs';
 import {
-  DEFAULT_ANNOTATOR_COLORS,
-  DEFAULT_ANNOTATOR_TOOLS,
   type ScAnnotation,
   type ScAnnotationPoint,
   type ScAnnotationTool,
@@ -22,16 +20,16 @@ export class ScImageAnnotatorState {
   width: Signal<number> = signal(600);
   height: Signal<number> = signal(400);
   alt: Signal<string> = signal('');
-  colors: Signal<readonly ScAnnotatorColor[]> = signal(
-    DEFAULT_ANNOTATOR_COLORS,
-  );
-  tools: Signal<readonly ScAnnotatorToolOption[]> = signal(
-    DEFAULT_ANNOTATOR_TOOLS,
-  );
+  colors: Signal<readonly ScAnnotatorColor[]> = signal([]);
+  tools: Signal<readonly ScAnnotatorToolOption[]> = signal([]);
 
   readonly annotations = signal<ScAnnotation[]>([]);
   readonly currentTool = signal<ScAnnotationTool>('pen');
-  readonly currentColor = signal(DEFAULT_ANNOTATOR_COLORS[0].value);
+  private readonly selectedColor = signal<string | null>(null);
+  /** The picked colour, or the first of `colors`. */
+  readonly currentColor = computed(
+    () => this.selectedColor() ?? this.colors()[0]?.value ?? '#000000',
+  );
   readonly lineWidth = signal(3);
   readonly imageLoaded = signal(false);
 
@@ -59,7 +57,7 @@ export class ScImageAnnotatorState {
   }
 
   selectColor(color: string): void {
-    this.currentColor.set(color);
+    this.selectedColor.set(color);
   }
 
   setLineWidth(width: number): void {

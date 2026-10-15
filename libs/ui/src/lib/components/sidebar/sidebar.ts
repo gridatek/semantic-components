@@ -46,7 +46,7 @@ import { ScSidebarState } from './sidebar-state';
           >
             <button scSheetClose>
               <svg siXIcon></svg>
-              <span class="sr-only">Close</span>
+              <span class="sr-only">{{ closeLabel() }}</span>
             </button>
             <ng-container *ngTemplateOutlet="content" />
           </div>
@@ -90,6 +90,8 @@ import { ScSidebarState } from './sidebar-state';
 export class ScSidebar {
   readonly state = inject(ScSidebarState);
 
+  /** The mobile sheet's close button's name — write it ("Close"). */
+  readonly closeLabel = input.required<string>();
   readonly side = input<'left' | 'right'>('left');
   readonly variant = input<'sidebar' | 'floating' | 'inset'>('sidebar');
   readonly collapsible = input<'offcanvas' | 'icon' | 'none'>('offcanvas');

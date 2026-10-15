@@ -1,11 +1,11 @@
 import { Directive, computed, inject } from '@angular/core';
+import { ɵwarnIfUnnamed } from '../../utils';
 import { ScTimePickerInput } from './time-picker-input';
 
 @Directive({
   selector: 'input[scTimePickerSecondsInput]',
   host: {
     '[value]': 'displayValue()',
-    '[attr.aria-label]': '"Seconds"',
     '(input)': 'onInput($event)',
     '(blur)': 'onBlur()',
     '(keydown)': 'onKeydown($event)',
@@ -13,6 +13,10 @@ import { ScTimePickerInput } from './time-picker-input';
   },
 })
 export class ScTimePickerSecondsInput {
+  constructor() {
+    ɵwarnIfUnnamed('scTimePickerSecondsInput');
+  }
+
   private readonly input = inject(ScTimePickerInput);
 
   private readonly timePicker = this.input.timePicker;

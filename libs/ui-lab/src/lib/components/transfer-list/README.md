@@ -40,7 +40,7 @@ import type { ScTransferListChange, ScTransferListItemData } from '@semantic-com
     </div>
   </div>
 
-  <div scTransferListActions></div>
+  <div scTransferListActions moveSelectedLabel="Move selected to right" returnSelectedLabel="Move selected to left" moveAllLabel="Move all to right" returnAllLabel="Move all to left"></div>
 
   <div scTransferListTarget #target="scTransferListTarget">
     <div scTransferListHeader>
@@ -171,7 +171,7 @@ Component on `label`. Renders a checkbox and projects content. Handles selection
 
 ### ScTransferListActions
 
-Component rendering the four transfer action buttons (move selected, move all, in both directions).
+Component rendering the four transfer action buttons (move selected, move all, in both directions). Write their names — the library has none: `moveSelectedLabel`, `returnSelectedLabel`, `moveAllLabel`, `returnAllLabel` (all required).
 
 ## Type Definitions
 

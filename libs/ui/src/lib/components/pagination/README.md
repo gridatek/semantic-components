@@ -33,7 +33,7 @@ Pagination with page navigation, next and previous links. Supports both manual a
 <nav scPagination>
   <ul scPaginationList>
     <li scPaginationItem>
-      <button scPaginationPrevious>
+      <button scPaginationPrevious aria-label="Go to previous page">
         <svg si-chevron-left-icon></svg>
         <span>Previous</span>
       </button>
@@ -48,7 +48,7 @@ Pagination with page navigation, next and previous links. Supports both manual a
       <button scPaginationLink [page]="3">3</button>
     </li>
     <li scPaginationItem>
-      <button scPaginationNext>
+      <button scPaginationNext aria-label="Go to next page">
         <span>Next</span>
         <svg si-chevron-right-icon></svg>
       </button>
@@ -83,14 +83,14 @@ import {
     <nav scPagination>
       <ul scPaginationList>
         <li scPaginationItem>
-          <button scPaginationPrevious>
+          <button scPaginationPrevious aria-label="Go to previous page">
             <svg si-chevron-left-icon></svg>
             <span>Previous</span>
           </button>
         </li>
         <!-- Page items here -->
         <li scPaginationItem>
-          <button scPaginationNext>
+          <button scPaginationNext aria-label="Go to next page">
             <span>Next</span>
             <svg si-chevron-right-icon></svg>
           </button>
@@ -116,7 +116,7 @@ import { ScPaginationChange } from '@semantic-components/ui-lab';
     <nav scPagination #pagination="scPagination" [currentPage]="currentPage()" [pageSize]="10" [totalItems]="100" (change)="onPaginationChange($event)">
       <ul scPaginationList>
         <li scPaginationItem>
-          <button scPaginationPrevious>
+          <button scPaginationPrevious aria-label="Go to previous page">
             <svg si-chevron-left-icon></svg>
             <span>Previous</span>
           </button>
@@ -138,7 +138,7 @@ import { ScPaginationChange } from '@semantic-components/ui-lab';
         }
 
         <li scPaginationItem>
-          <button scPaginationNext>
+          <button scPaginationNext aria-label="Go to next page">
             <span>Next</span>
             <svg si-chevron-right-icon></svg>
           </button>
@@ -177,7 +177,7 @@ You can also manually disable any button:
 
 ```html
 <!-- Manually disabled -->
-<button scPaginationPrevious [disabled]="true">
+<button scPaginationPrevious aria-label="Go to previous page" [disabled]="true">
   <!-- content -->
 </button>
 
@@ -193,13 +193,13 @@ Use `ScPaginationFirst` and `ScPaginationLast` for quick navigation to the first
 <nav scPagination #pagination="scPagination" [currentPage]="currentPage()" [pageSize]="10" [totalItems]="100" (change)="onPaginationChange($event)">
   <ul scPaginationList>
     <li scPaginationItem>
-      <button scPaginationFirst>
+      <button scPaginationFirst aria-label="Go to first page">
         <svg si-chevrons-left-icon></svg>
         <span>First</span>
       </button>
     </li>
     <li scPaginationItem>
-      <button scPaginationPrevious>
+      <button scPaginationPrevious aria-label="Go to previous page">
         <svg si-chevron-left-icon></svg>
         <span>Previous</span>
       </button>
@@ -208,13 +208,13 @@ Use `ScPaginationFirst` and `ScPaginationLast` for quick navigation to the first
     <!-- Page numbers here -->
 
     <li scPaginationItem>
-      <button scPaginationNext>
+      <button scPaginationNext aria-label="Go to next page">
         <span>Next</span>
         <svg si-chevron-right-icon></svg>
       </button>
     </li>
     <li scPaginationItem>
-      <button scPaginationLast>
+      <button scPaginationLast aria-label="Go to last page">
         <span>Last</span>
         <svg si-chevrons-right-icon></svg>
       </button>

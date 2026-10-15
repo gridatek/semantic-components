@@ -29,6 +29,7 @@ import {
       <div class="w-fit rounded-md border">
         <div
           scCalendar
+          aria-label="Calendar"
           mode="range"
           [(value)]="selectedRange"
           #cal="scCalendar"

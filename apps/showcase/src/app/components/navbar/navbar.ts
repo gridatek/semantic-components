@@ -217,7 +217,7 @@ import { Logo } from '../logo/logo';
 
       <!-- Mobile Menu -->
       <ng-template scNavbarMobilePortal>
-        <div scNavbarMobileMenu>
+        <div scNavbarMobileMenu aria-label="Mobile navigation">
           <a
             scNavbarMobileLink
             routerLink="/docs/components"

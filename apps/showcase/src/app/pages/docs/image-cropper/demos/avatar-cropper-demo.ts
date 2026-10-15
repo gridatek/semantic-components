@@ -46,7 +46,7 @@ import { SiZoomInIcon, SiZoomOutIcon } from '@semantic-icons/lucide-icons';
       <div scImageCropperCanvas class="overflow-hidden rounded-lg border">
         <img scImageCropperImage [src]="imageSrc()" alt="Image to crop" />
         <div scImageCropperOverlay></div>
-        <div scImageCropperSelection>
+        <div scImageCropperSelection aria-label="Crop selection">
           <div scImageCropperDragRegion></div>
           <div scImageCropperHandle position="top-left"></div>
           <div scImageCropperHandle position="top-right"></div>
@@ -72,7 +72,7 @@ import { SiZoomInIcon, SiZoomOutIcon } from '@semantic-icons/lucide-icons';
             <svg siZoomOutIcon class="size-4"></svg>
           </button>
 
-          <div scImageCropperZoomSlider class="flex-1"></div>
+          <div scImageCropperZoomSlider zoomLabel="Zoom" class="flex-1"></div>
 
           <button
             scButton
@@ -93,6 +93,7 @@ import { SiZoomInIcon, SiZoomOutIcon } from '@semantic-icons/lucide-icons';
             <div class="text-muted-foreground text-xs">Large (100x100)</div>
             <div
               scImageCropperPreview
+              alt="Crop preview"
               [width]="100"
               [height]="100"
               class="rounded-full"
@@ -102,6 +103,7 @@ import { SiZoomInIcon, SiZoomOutIcon } from '@semantic-icons/lucide-icons';
             <div class="text-muted-foreground text-xs">Medium (64x64)</div>
             <div
               scImageCropperPreview
+              alt="Crop preview"
               [width]="64"
               [height]="64"
               class="rounded-full"
@@ -111,6 +113,7 @@ import { SiZoomInIcon, SiZoomOutIcon } from '@semantic-icons/lucide-icons';
             <div class="text-muted-foreground text-xs">Small (40x40)</div>
             <div
               scImageCropperPreview
+              alt="Crop preview"
               [width]="40"
               [height]="40"
               class="rounded-full"

@@ -51,30 +51,36 @@ import {
       <div scAudioPlayerCover></div>
 
       <!-- Track Info -->
-      <div scAudioPlayerTrackInfo></div>
+      <div scAudioPlayerTrackInfo unknownLabel="Unknown track"></div>
 
       <!-- Progress -->
-      <div scAudioPlayerProgress></div>
+      <div scAudioPlayerProgress seekLabel="Seek"></div>
 
       <!-- Controls -->
       <div scAudioPlayerControls>
-        <button scAudioPlayerShuffle>
+        <button scAudioPlayerShuffle aria-label="Shuffle">
           <svg siShuffleIcon></svg>
         </button>
-        <button scAudioPlayerPrevious>
+        <button scAudioPlayerPrevious aria-label="Previous track">
           <svg siSkipBackIcon></svg>
         </button>
-        <button scAudioPlayerPlay>
+        <button
+          scAudioPlayerPlay
+          [attr.aria-label]="player.isPlaying() ? 'Pause' : 'Play'"
+        >
           @if (player.isPlaying()) {
             <svg siPauseIcon></svg>
           } @else {
             <svg siPlayIcon></svg>
           }
         </button>
-        <button scAudioPlayerNext>
+        <button scAudioPlayerNext aria-label="Next track">
           <svg siSkipForwardIcon></svg>
         </button>
-        <button scAudioPlayerRepeat>
+        <button
+          scAudioPlayerRepeat
+          [attr.aria-label]="'Repeat: ' + player.repeat()"
+        >
           @if (player.repeat() === 'one') {
             <svg siRepeat1Icon></svg>
           } @else {
@@ -84,7 +90,13 @@ import {
       </div>
 
       <!-- Volume -->
-      <div scAudioPlayerVolume></div>
+      <div
+        scAudioPlayerVolume
+        muteLabel="Mute"
+        unmuteLabel="Unmute"
+        volumeLabel="Volume"
+        maxVolumeLabel="Max volume"
+      ></div>
     </div>
   `,
   host: { class: 'flex w-full justify-center' },

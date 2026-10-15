@@ -1,5 +1,5 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn, ɵwarnIfUnnamed } from '@semantic-components/ui';
 import { SC_LIGHTBOX_PROVIDER } from './lightbox-provider';
 
 @Directive({
@@ -9,11 +9,13 @@ import { SC_LIGHTBOX_PROVIDER } from './lightbox-provider';
     '[class]': 'class()',
     role: 'dialog',
     'aria-modal': 'true',
-    '[attr.aria-label]':
-      "'Image gallery, showing image ' + (provider.currentIndex() + 1) + ' of ' + provider.images().length",
   },
 })
 export class ScLightbox {
+  constructor() {
+    ɵwarnIfUnnamed('scLightbox');
+  }
+
   readonly provider = inject(SC_LIGHTBOX_PROVIDER);
 
   readonly classInput = input<string>('', { alias: 'class' });

@@ -23,7 +23,12 @@ import {
           <span class="text-muted-foreground text-sm">example.js</span>
           <span scCodeEditorLabel>javascript</span>
         </div>
-        <button scCodeEditorCopyButton [code]="javascriptCode"></button>
+        <button
+          scCodeEditorCopyButton
+          #copy="scCodeEditorCopyButton"
+          [attr.aria-label]="copy.copied() ? 'Copied' : 'Copy code'"
+          [code]="javascriptCode"
+        ></button>
       </div>
       <div
         scCodeEditorContent

@@ -41,15 +41,14 @@ The component consists of four directives:
 
 ### ScRating
 
-| Input            | Type      | Default | Description                                 |
-| ---------------- | --------- | ------- | ------------------------------------------- |
-| `value`          | `number`  | `0`     | Current rating value (use with `[(value)]`) |
-| `allowHalf`      | `boolean` | `false` | Enable half-star ratings                    |
-| `allowClear`     | `boolean` | `true`  | Allow clearing by clicking same value       |
-| `readonly`       | `boolean` | `false` | Make the rating read-only                   |
-| `disabled`       | `boolean` | `false` | Disable the rating                          |
-| `label`          | `string`  | `''`    | Accessible label for the rating             |
-| `ariaLabelledby` | `string`  | `''`    | ID of element labeling the rating           |
+| Input        | Type      | Default | Description                                 |
+| ------------ | --------- | ------- | ------------------------------------------- |
+| `value`      | `number`  | `0`     | Current rating value (use with `[(value)]`) |
+| `allowHalf`  | `boolean` | `false` | Enable half-star ratings                    |
+| `allowClear` | `boolean` | `true`  | Allow clearing by clicking same value       |
+| `readonly`   | `boolean` | `false` | Make the rating read-only                   |
+| `disabled`   | `boolean` | `false` | Disable the rating                          |
+| `label`      | `string`  | `''`    | Accessible label for the rating             |
 
 **Note:** The `max` value is automatically calculated from the highest `value` among all rating items.
 

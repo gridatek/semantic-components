@@ -5,12 +5,12 @@ A carousel component built with Embla Carousel, featuring smooth animations, tou
 ## Usage
 
 ```html
-<div scCarousel aria-label="Images" class="w-full max-w-xs">
+<div scCarousel aria-roledescription="carousel" aria-label="Images" class="w-full max-w-xs">
   <div scCarouselViewport>
     <div scCarouselTrack>
-      <div scCarouselItem>Slide 1</div>
-      <div scCarouselItem>Slide 2</div>
-      <div scCarouselItem>Slide 3</div>
+      <div scCarouselItem aria-roledescription="slide">Slide 1</div>
+      <div scCarouselItem aria-roledescription="slide">Slide 2</div>
+      <div scCarouselItem aria-roledescription="slide">Slide 3</div>
     </div>
   </div>
   <button scCarouselPrevious>
@@ -144,11 +144,11 @@ Next slide navigation button. Content must be provided by the user (icon + scree
 ### Default
 
 ```html
-<div scCarousel aria-label="Images" class="w-full max-w-xs">
+<div scCarousel aria-roledescription="carousel" aria-label="Images" class="w-full max-w-xs">
   <div scCarouselViewport>
     <div scCarouselTrack>
       @for (i of [1, 2, 3, 4, 5]; track i) {
-      <div scCarouselItem>
+      <div scCarouselItem aria-roledescription="slide">
         <div class="p-1">
           <div class="flex aspect-square items-center justify-center rounded-lg border">{{ i }}</div>
         </div>
@@ -174,11 +174,11 @@ import { Component } from '@angular/core';
 
 @Component({
   template: `
-    <div scCarousel aria-label="Images" [options]="{ loop: true }" class="w-full max-w-xs">
+    <div scCarousel aria-roledescription="carousel" aria-label="Images" [options]="{ loop: true }" class="w-full max-w-xs">
       <div scCarouselViewport>
         <div scCarouselTrack>
           @for (i of [1, 2, 3, 4, 5]; track i) {
-            <div scCarouselItem>{{ i }}</div>
+            <div scCarouselItem aria-roledescription="slide">{{ i }}</div>
           }
         </div>
       </div>
@@ -204,11 +204,11 @@ import Autoplay from 'embla-carousel-autoplay';
 
 @Component({
   template: `
-    <div scCarousel aria-label="Images" [plugins]="plugins" class="w-full max-w-xs">
+    <div scCarousel aria-roledescription="carousel" aria-label="Images" [plugins]="plugins" class="w-full max-w-xs">
       <div scCarouselViewport>
         <div scCarouselTrack>
           @for (i of items; track i) {
-            <div scCarouselItem>{{ i }}</div>
+            <div scCarouselItem aria-roledescription="slide">{{ i }}</div>
           }
         </div>
       </div>
@@ -232,11 +232,11 @@ export class MyComponent {
 ### Partial Items (Multiple Visible)
 
 ```html
-<div scCarousel aria-label="Images" [options]="{ align: 'start' }" class="w-full max-w-lg">
+<div scCarousel aria-roledescription="carousel" aria-label="Images" [options]="{ align: 'start' }" class="w-full max-w-lg">
   <div scCarouselViewport>
     <div scCarouselTrack>
       @for (i of items; track i) {
-      <div scCarouselItem class="basis-1/3">
+      <div scCarouselItem aria-roledescription="slide" class="basis-1/3">
         <!-- Shows 3 items at a time -->
       </div>
       }
@@ -248,11 +248,11 @@ export class MyComponent {
 ### Vertical Orientation
 
 ```html
-<div scCarousel aria-label="Images" orientation="vertical" [options]="{ align: 'start' }" class="w-full max-w-xs">
+<div scCarousel aria-roledescription="carousel" aria-label="Images" orientation="vertical" [options]="{ align: 'start' }" class="w-full max-w-xs">
   <div scCarouselViewport>
     <div scCarouselTrack class="-mt-1 h-[270px]">
       @for (i of items; track i) {
-      <div scCarouselItem class="basis-1/2 pt-1">
+      <div scCarouselItem aria-roledescription="slide" class="basis-1/2 pt-1">
         <div class="p-1">
           <div class="bg-card flex items-center justify-center rounded-lg border p-6">
             <span class="text-3xl font-semibold">{{ i }}</span>

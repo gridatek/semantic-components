@@ -1,16 +1,19 @@
 import { Directive, computed, input, output } from '@angular/core';
-import { cn } from '../../utils';
+import { cn, ɵwarnIfUnnamed } from '../../utils';
 
 @Directive({
   selector: 'button[scToastClose]',
   host: {
     type: 'button',
     '[class]': 'class()',
-    'aria-label': 'Close',
     '(click)': 'close.emit()',
   },
 })
 export class ScToastClose {
+  constructor() {
+    ɵwarnIfUnnamed('scToastClose');
+  }
+
   readonly classInput = input<string>('', { alias: 'class' });
 
   /** Emitted when close button is clicked */

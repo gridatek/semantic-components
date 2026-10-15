@@ -27,12 +27,42 @@ import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
   imports: [ScSpinner, SiLoaderCircleIcon],
   template: \`
     <div class="flex items-center gap-6">
-      <svg scSpinner aria-label="Loading" siLoaderCircleIcon class="text-primary"></svg>
-      <svg scSpinner aria-label="Loading" siLoaderCircleIcon class="text-blue-500"></svg>
-      <svg scSpinner aria-label="Loading" siLoaderCircleIcon class="text-green-500"></svg>
-      <svg scSpinner aria-label="Loading" siLoaderCircleIcon class="text-yellow-500"></svg>
-      <svg scSpinner aria-label="Loading" siLoaderCircleIcon class="text-red-500"></svg>
-      <svg scSpinner aria-label="Loading" siLoaderCircleIcon class="text-purple-500"></svg>
+      <svg
+        scSpinner
+        aria-label="Loading"
+        siLoaderCircleIcon
+        class="text-primary"
+      ></svg>
+      <svg
+        scSpinner
+        aria-label="Loading"
+        siLoaderCircleIcon
+        class="text-blue-500"
+      ></svg>
+      <svg
+        scSpinner
+        aria-label="Loading"
+        siLoaderCircleIcon
+        class="text-green-500"
+      ></svg>
+      <svg
+        scSpinner
+        aria-label="Loading"
+        siLoaderCircleIcon
+        class="text-yellow-500"
+      ></svg>
+      <svg
+        scSpinner
+        aria-label="Loading"
+        siLoaderCircleIcon
+        class="text-red-500"
+      ></svg>
+      <svg
+        scSpinner
+        aria-label="Loading"
+        siLoaderCircleIcon
+        class="text-purple-500"
+      ></svg>
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },

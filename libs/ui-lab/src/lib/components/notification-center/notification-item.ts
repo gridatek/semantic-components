@@ -1,7 +1,9 @@
 import {
   Component,
+  LOCALE_ID,
   ViewEncapsulation,
   computed,
+  inject,
   input,
   output,
 } from '@angular/core';
@@ -14,6 +16,7 @@ import {
   SiTriangleAlertIcon,
   SiXIcon,
 } from '@semantic-icons/lucide-icons';
+import { SC_NOTIFICATION_CENTER } from './notification-center';
 import type {
   ScNotification,
   ScNotificationAction,
@@ -81,7 +84,7 @@ import type {
           [class.font-semibold]="!notification().read"
         >
           @if (!notification().read) {
-            <span class="sr-only">Unread:</span>
+            <span class="sr-only">{{ center.labels().unread }}</span>
           }
           {{ notification().title }}
         </p>
@@ -114,7 +117,7 @@ import type {
         type="button"
         class="hover:bg-muted text-muted-foreground hover:text-foreground ms-2 shrink-0 rounded-full p-1 opacity-0 transition-all group-focus-within:opacity-100 group-hover:opacity-100 focus-visible:opacity-100"
         (click)="onDismiss($event)"
-        aria-label="Dismiss notification"
+        [attr.aria-label]="center.labels().dismiss"
       >
         <svg siXIcon class="size-4"></svg>
       </button>
@@ -132,6 +135,7 @@ import type {
   encapsulation: ViewEncapsulation.None,
 })
 export class ScNotificationItem {
+  protected readonly center = inject(SC_NOTIFICATION_CENTER);
   readonly classInput = input<string>('', { alias: 'class' });
   readonly notification = input.required<ScNotification>();
   readonly showDismiss = input(true);
@@ -173,25 +177,26 @@ export class ScNotificationItem {
     }
   });
 
-  protected formatTime(date: Date): string {
-    const now = new Date();
-    const d = new Date(date);
-    const diffMs = now.getTime() - d.getTime();
-    const diffMins = Math.floor(diffMs / 60000);
-    const diffHours = Math.floor(diffMs / 3600000);
-    const diffDays = Math.floor(diffMs / 86400000);
+  private readonly locale = inject(LOCALE_ID);
 
-    if (diffMins < 1) {
-      return 'Just now';
-    } else if (diffMins < 60) {
-      return `${diffMins}m ago`;
-    } else if (diffHours < 24) {
-      return `${diffHours}h ago`;
-    } else if (diffDays < 7) {
-      return `${diffDays}d ago`;
-    } else {
-      return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  /** How long ago, in the app's language; a date after a week. */
+  protected formatTime(date: Date): string {
+    const then = new Date(date);
+    const minutes = Math.round((then.getTime() - Date.now()) / 60000);
+    const relative = new Intl.RelativeTimeFormat(this.locale, {
+      numeric: 'auto',
+    });
+    if (minutes > -60) return relative.format(minutes, 'minute');
+    if (minutes > -24 * 60) {
+      return relative.format(Math.round(minutes / 60), 'hour');
     }
+    if (minutes > -7 * 24 * 60) {
+      return relative.format(Math.round(minutes / (24 * 60)), 'day');
+    }
+    return then.toLocaleDateString(this.locale, {
+      month: 'short',
+      day: 'numeric',
+    });
   }
 
   /** Enter/Space on the item itself — not on its own buttons. */

@@ -23,7 +23,12 @@ import {
           <span class="text-muted-foreground text-sm">styles.css</span>
           <span scCodeEditorLabel>css</span>
         </div>
-        <button scCodeEditorCopyButton [code]="cssCode"></button>
+        <button
+          scCodeEditorCopyButton
+          #copy="scCodeEditorCopyButton"
+          [attr.aria-label]="copy.copied() ? 'Copied' : 'Copy code'"
+          [code]="cssCode"
+        ></button>
       </div>
       <div
         scCodeEditorContent

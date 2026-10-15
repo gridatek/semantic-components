@@ -25,5 +25,5 @@ export class ScDonutChart {
   readonly size = input<number>(300);
   readonly innerRadius = input<number>(60);
   readonly showLabels = input<boolean>(false);
-  readonly ariaLabel = input<string>('Donut chart');
+  readonly ariaLabel = input<string>('');
 }

@@ -43,7 +43,12 @@ import {
           <span class="text-muted-foreground text-sm">script.py</span>
           <span scCodeEditorLabel>python</span>
         </div>
-        <button scCodeEditorCopyButton [code]="pythonCode"></button>
+        <button
+          scCodeEditorCopyButton
+          #copy="scCodeEditorCopyButton"
+          [attr.aria-label]="copy.copied() ? 'Copied' : 'Copy code'"
+          [code]="pythonCode"
+        ></button>
       </div>
       <div
         scCodeEditorContent

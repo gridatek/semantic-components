@@ -48,7 +48,7 @@ A composable multi-tag input component for adding, removing, and navigating tags
     }
     <input scTagsInputControl />
     <span scTagsInputCount class="ml-auto text-xs"></span>
-    <button scTagsInputClear>
+    <button scTagsInputClear aria-label="Clear all tags">
       <svg siXIcon class="size-4"></svg>
     </button>
   </div>
@@ -63,7 +63,7 @@ A composable multi-tag input component for adding, removing, and navigating tags
 | ----------------- | ---------------- | ---------------- | ------------------------------ |
 | `class`           | `string`         | `''`             | Additional CSS classes         |
 | `tags`            | `string[]`       | `[]`             | Two-way binding for tag list   |
-| `placeholder`     | `string`         | `'Add tag...'`   | Input placeholder text         |
+| `placeholder`     | `string`         | `''`             | Input placeholder — write it   |
 | `disabled`        | `boolean`        | `false`          | Disable the entire component   |
 | `maxTags`         | `number \| null` | `null`           | Maximum number of tags         |
 | `allowDuplicates` | `boolean`        | `false`          | Allow duplicate tag values     |

@@ -79,13 +79,13 @@ import {
       >
         <ul scPaginationList>
           <li scPaginationItem>
-            <button scPaginationFirst>
+            <button scPaginationFirst aria-label="Go to first page">
               <svg siChevronsLeftIcon></svg>
               <span>First</span>
             </button>
           </li>
           <li scPaginationItem>
-            <button scPaginationPrevious>
+            <button scPaginationPrevious aria-label="Go to previous page">
               <svg siChevronLeftIcon></svg>
               <span>Previous</span>
             </button>
@@ -107,13 +107,13 @@ import {
           }
 
           <li scPaginationItem>
-            <button scPaginationNext>
+            <button scPaginationNext aria-label="Go to next page">
               <span>Next</span>
               <svg siChevronRightIcon></svg>
             </button>
           </li>
           <li scPaginationItem>
-            <button scPaginationLast>
+            <button scPaginationLast aria-label="Go to last page">
               <span>Last</span>
               <svg siChevronsRightIcon></svg>
             </button>

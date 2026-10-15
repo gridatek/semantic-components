@@ -30,7 +30,6 @@ export type ScCarouselPlugin = EmblaPluginType;
   template: ` <ng-content /> `,
   host: {
     role: 'region',
-    'aria-roledescription': 'carousel',
     '[class]': 'class()',
     '(keydown)': 'onKeyDown($event)',
   },

@@ -24,7 +24,7 @@ import { SC_AUDIO_PLAYER } from './audio-player';
       <!-- Seek slider -->
       <input
         scSlider
-        aria-label="Seek"
+        [attr.aria-label]="seekLabel()"
         class="absolute inset-0 h-full [&::-moz-range-progress]:transition-[height] group-hover:[&::-moz-range-progress]:h-1.5 [&::-moz-range-track]:transition-[height] group-hover:[&::-moz-range-track]:h-1.5 [&::-webkit-slider-runnable-track]:transition-[height] group-hover:[&::-webkit-slider-runnable-track]:h-1.5"
         style="--muted: oklch(0 0 0 / 0.1)"
         [max]="100"
@@ -44,6 +44,9 @@ import { SC_AUDIO_PLAYER } from './audio-player';
 })
 export class ScAudioPlayerProgress {
   readonly player = inject(SC_AUDIO_PLAYER);
+
+  /** The seek slider's name — write it ("Seek"). */
+  readonly seekLabel = input.required<string>();
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>

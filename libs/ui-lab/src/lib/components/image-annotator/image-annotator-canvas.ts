@@ -45,7 +45,7 @@ import type { ScAnnotation, ScAnnotationPoint } from './image-annotator-types';
       <div
         class="bg-muted text-muted-foreground absolute inset-0 flex items-center justify-center text-sm"
       >
-        Loading image…
+        <ng-content />
       </div>
     }
   `,
@@ -171,10 +171,6 @@ export class ScImageAnnotatorCanvas {
     if (!this.state.imageLoaded()) return;
     ctx.fillStyle = '#f3f4f6';
     ctx.fillRect(0, 0, width, height);
-    ctx.fillStyle = '#6b7280';
-    ctx.font = '14px sans-serif';
-    ctx.textAlign = 'center';
-    ctx.fillText('Failed to load image', width / 2, height / 2);
   }
 
   /** Pointer position in image coordinates. */

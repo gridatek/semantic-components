@@ -1,5 +1,5 @@
 import { Directive, ElementRef, computed, inject, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn, ɵwarnIfUnnamed } from '@semantic-components/ui';
 import { SC_COLOR_PICKER } from './color-picker';
 import {
   normalizePosition,
@@ -12,8 +12,6 @@ import {
   host: {
     role: 'slider',
     tabindex: '0',
-    'aria-roledescription': '2d color picker',
-    'aria-label': 'Color',
     '[attr.aria-valuetext]': 'valueText()',
     '[class]': 'class()',
     '[style.background]': 'background()',
@@ -23,6 +21,10 @@ import {
   },
 })
 export class ScColorPickerArea {
+  constructor() {
+    ɵwarnIfUnnamed('scColorPickerArea');
+  }
+
   protected readonly colorPicker = inject(SC_COLOR_PICKER);
   private readonly elementRef = inject(ElementRef<HTMLElement>);
 
@@ -39,9 +41,17 @@ export class ScColorPickerArea {
     () => `hsl(${this.colorPicker.hsv().h}, 100%, 50%)`,
   );
 
+  /**
+   * Its value, as read out — write it: `(saturation, brightness) =>
+   * `Saturation ${saturation}%, Brightness ${brightness}%`` (rounded percents).
+   */
+  readonly valueTextFn = input.required<
+    (saturation: number, brightness: number) => string
+  >({ alias: 'valueText' });
+
   protected readonly valueText = computed(() => {
     const { s, v } = this.colorPicker.hsv();
-    return `Saturation ${Math.round(s)}%, Brightness ${Math.round(v)}%`;
+    return this.valueTextFn()(Math.round(s), Math.round(v));
   });
 
   private updateColor(x: number, y: number): void {

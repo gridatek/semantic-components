@@ -5,11 +5,7 @@ import { CHART_COLORS } from './chart-types';
 @Component({
   selector: '[scChartLegend]',
   template: `
-    <div
-      class="flex flex-wrap items-center justify-center gap-4"
-      role="list"
-      aria-label="Chart legend"
-    >
+    <div class="flex flex-wrap items-center justify-center gap-4" role="list">
       @for (item of items(); track item.label; let i = $index) {
         <div class="flex items-center gap-2" role="listitem">
           <div

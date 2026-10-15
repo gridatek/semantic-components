@@ -28,7 +28,7 @@ import { ScTransferListState } from './transfer-list-state';
       [class]="buttonClass()"
       [disabled]="state.selectedSourceIds().size === 0"
       (click)="state.moveToTarget()"
-      aria-label="Move selected to right"
+      [attr.aria-label]="moveSelectedLabel()"
     >
       <svg siChevronRightIcon class="size-[18px] rtl:rotate-180"></svg>
     </button>
@@ -37,7 +37,7 @@ import { ScTransferListState } from './transfer-list-state';
       [class]="buttonClass()"
       [disabled]="state.selectedTargetIds().size === 0"
       (click)="state.moveToSource()"
-      aria-label="Move selected to left"
+      [attr.aria-label]="returnSelectedLabel()"
     >
       <svg siChevronLeftIcon class="size-[18px] rtl:rotate-180"></svg>
     </button>
@@ -46,7 +46,7 @@ import { ScTransferListState } from './transfer-list-state';
       [class]="buttonClass()"
       [disabled]="state.sourceItems().length === 0"
       (click)="state.moveAllToTarget()"
-      aria-label="Move all to right"
+      [attr.aria-label]="moveAllLabel()"
     >
       <svg siChevronsRightIcon class="size-[18px] rtl:rotate-180"></svg>
     </button>
@@ -55,7 +55,7 @@ import { ScTransferListState } from './transfer-list-state';
       [class]="buttonClass()"
       [disabled]="state.targetItems().length === 0"
       (click)="state.moveAllToSource()"
-      aria-label="Move all to left"
+      [attr.aria-label]="returnAllLabel()"
     >
       <svg siChevronsLeftIcon class="size-[18px] rtl:rotate-180"></svg>
     </button>
@@ -66,6 +66,15 @@ import { ScTransferListState } from './transfer-list-state';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScTransferListActions {
+  /**
+   * The names of its buttons — write them: move the selected items to the
+   * target ("Move selected to right"), back to the source, all of them to the
+   * target, all back.
+   */
+  readonly moveSelectedLabel = input.required<string>();
+  readonly returnSelectedLabel = input.required<string>();
+  readonly moveAllLabel = input.required<string>();
+  readonly returnAllLabel = input.required<string>();
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly state = inject(ScTransferListState);

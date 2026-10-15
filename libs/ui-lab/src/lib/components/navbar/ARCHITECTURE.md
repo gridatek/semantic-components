@@ -31,7 +31,7 @@ Plus: ScNavbarMobileTrigger (Hamburger menu button)
 
 ```html
 <ng-template scNavbarMobilePortal>
-  <div scNavbarMobileMenu>…</div>
+  <div scNavbarMobileMenu aria-label="Mobile navigation">…</div>
 </ng-template>
 ```
 

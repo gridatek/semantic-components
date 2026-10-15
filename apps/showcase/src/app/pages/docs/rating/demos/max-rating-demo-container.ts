@@ -31,7 +31,11 @@ import { SiStarIcon } from '@semantic-icons/lucide-icons';
       <div scRating [(value)]="rating">
         <div scRatingGroup aria-label="Rating">
           @for (i of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; track i) {
-            <span scRatingItem [attr.aria-label]="i === 1 ? '1 star' : i + ' stars'" [value]="i">
+            <span
+              scRatingItem
+              [attr.aria-label]="i === 1 ? '1 star' : i + ' stars'"
+              [value]="i"
+            >
               <svg siStarIcon scRatingIcon class="size-5"></svg>
             </span>
           }

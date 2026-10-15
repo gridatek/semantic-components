@@ -34,7 +34,7 @@ import { SC_VIDEO_PLAYER } from './video-player';
         size="icon"
         type="button"
         class="text-foreground"
-        aria-label="Playback speed"
+        [attr.aria-label]="speedLabel()"
       >
         <span class="text-xs font-medium">{{ player.playbackRate() }}x</span>
       </button>
@@ -61,6 +61,8 @@ import { SC_VIDEO_PLAYER } from './video-player';
 })
 export class ScVideoPlayerSpeed {
   protected readonly player = inject(SC_VIDEO_PLAYER);
+  /** The speed menu's name — write it ("Playback speed"). */
+  readonly speedLabel = input.required<string>();
   private readonly popoverProvider = viewChild(ScPopoverProvider);
   readonly speeds = input<number[]>([0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2]);
   readonly classInput = input<string>('', { alias: 'class' });

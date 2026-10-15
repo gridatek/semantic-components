@@ -45,17 +45,12 @@ import {
       <p class="text-muted-foreground text-sm">
         Only dates within the last 30 days can be selected.
       </p>
-      <div
-        scDateRangePicker
-        [(value)]="range"
-        placeholder="Select within last 30 days"
-        #drp="scDateRangePicker"
-      >
+      <div scDateRangePicker [(value)]="range" #drp="scDateRangePicker">
         <div scPopoverProvider [origin]="trigger.overlayOrigin" align="start">
           <button scDateRangePickerTrigger #trigger="scDateRangePickerTrigger">
             <svg siCalendarIcon class="mr-2 size-4"></svg>
             <span [class]="drp.displayText() ? '' : 'text-muted-foreground'">
-              {{ drp.displayText() || drp.placeholder() }}
+              {{ drp.displayText() || 'Select within last 30 days' }}
             </span>
           </button>
           <ng-template scPopoverPortal>
@@ -63,6 +58,7 @@ import {
               <div class="p-3">
                 <div
                   scCalendar
+                  aria-label="Calendar"
                   mode="range"
                   [value]="drp.value()"
                   (valueChange)="drp.onValueChange($event)"
@@ -106,7 +102,11 @@ import {
                     </button>
                   </div>
                 </div>
-                <div scDateRangePickerFooter></div>
+                <div
+                  scDateRangePickerFooter
+                  cancelLabel="Cancel"
+                  applyLabel="Apply"
+                ></div>
               </div>
             </div>
           </ng-template>

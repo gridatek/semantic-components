@@ -76,7 +76,19 @@ interface ToastConfig {
 <sc-toast-stack />
 ```
 
-### 2. Inject ScToaster and show toasts
+### 2. Name the close buttons (once)
+
+The library writes no text: give the toasts' close buttons their name once, at the app's start (development warns when a toast is shown without it).
+
+```typescript
+export class App {
+  constructor() {
+    inject(ScToaster).setCloseLabel('Close');
+  }
+}
+```
+
+### 3. Inject ScToaster and show toasts
 
 ```typescript
 import { Component, inject } from '@angular/core';

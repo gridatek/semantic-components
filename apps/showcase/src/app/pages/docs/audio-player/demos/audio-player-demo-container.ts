@@ -71,17 +71,17 @@ import {
       <div scAudioPlayerCover></div>
 
       <!-- Track Info -->
-      <div scAudioPlayerTrackInfo></div>
+      <div scAudioPlayerTrackInfo unknownLabel="Unknown track"></div>
 
       <!-- Progress -->
-      <div scAudioPlayerProgress></div>
+      <div scAudioPlayerProgress seekLabel="Seek"></div>
 
       <!-- Controls -->
       <div scAudioPlayerControls>
         <button scAudioPlayerShuffle>
           <svg siShuffleIcon></svg>
         </button>
-        <button scAudioPlayerPrevious>
+        <button scAudioPlayerPrevious aria-label="Previous track">
           <svg siSkipBackIcon></svg>
         </button>
         <button scAudioPlayerPlay>
@@ -91,7 +91,7 @@ import {
             <svg siPlayIcon></svg>
           }
         </button>
-        <button scAudioPlayerNext>
+        <button scAudioPlayerNext aria-label="Next track">
           <svg siSkipForwardIcon></svg>
         </button>
         <button scAudioPlayerRepeat>
@@ -104,7 +104,13 @@ import {
       </div>
 
       <!-- Volume -->
-      <div scAudioPlayerVolume></div>
+      <div
+        scAudioPlayerVolume
+        muteLabel="Mute"
+        unmuteLabel="Unmute"
+        volumeLabel="Volume"
+        maxVolumeLabel="Max volume"
+      ></div>
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },

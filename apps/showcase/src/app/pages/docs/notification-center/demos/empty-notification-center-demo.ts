@@ -3,6 +3,7 @@ import {
   type ScNotification,
   ScNotificationCenter,
   ScNotificationCenterContainer,
+  type ScNotificationCenterLabels,
 } from '@semantic-components/ui-lab';
 
 @Component({
@@ -11,6 +12,8 @@ import {
   template: `
     <div
       scNotificationCenter
+      title="Notifications"
+      [labels]="notificationLabels"
       aria-label="Empty notifications"
       [(notifications)]="notifications"
       emptyTitle="All caught up!"
@@ -24,5 +27,20 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class EmptyNotificationCenterDemo {
+  /** The notification center's texts. */
+  readonly notificationLabels: ScNotificationCenterLabels = {
+    all: 'All',
+    unread: 'Unread',
+    read: 'Read',
+    markAllRead: 'Mark all as read',
+    clearAll: 'Clear all notifications',
+    other: 'Other',
+    dismiss: 'Dismiss notification',
+    groupEmpty: 'No notifications',
+    newCount: (count) => `${count} new`,
+    markAllReadIn: (group) => `Mark all as read in ${group}`,
+    clearAllIn: (group) => `Clear all in ${group}`,
+  };
+
   readonly notifications = signal<ScNotification[]>([]);
 }

@@ -15,7 +15,7 @@ import { SC_AUDIO_PLAYER } from './audio-player';
       @if (track.cover) {
         <img
           [src]="track.cover"
-          [alt]="track.title || 'Album cover'"
+          [alt]="track.title ?? ''"
           class="size-full object-cover"
         />
       }

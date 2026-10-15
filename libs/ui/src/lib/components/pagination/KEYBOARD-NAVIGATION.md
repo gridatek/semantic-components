@@ -55,7 +55,7 @@ All pagination components support full keyboard navigation following WAI-ARIA be
 **Disabled state**: When disabled, element is focusable but activation does nothing
 
 ```html
-<button scPaginationPrevious [disabled]="currentPage() === 1">Previous</button>
+<button scPaginationPrevious aria-label="Go to previous page" [disabled]="currentPage() === 1">Previous</button>
 ```
 
 ### ScPaginationFirst / ScPaginationLast
@@ -71,7 +71,7 @@ All pagination components support full keyboard navigation following WAI-ARIA be
 **Disabled state**: When disabled, element is focusable but activation does nothing
 
 ```html
-<button scPaginationFirst [disabled]="currentPage() === 1">First</button>
+<button scPaginationFirst aria-label="Go to first page" [disabled]="currentPage() === 1">First</button>
 ```
 
 ### ScPaginationPageSizeSelect
@@ -158,7 +158,7 @@ Disabled controls remain in the tab order with `aria-disabled="true"` but do not
 ### Disabled Controls
 
 ```html
-<button scPaginationPrevious [disabled]="true" aria-disabled="true">Previous</button>
+<button scPaginationPrevious aria-label="Go to previous page" [disabled]="true" aria-disabled="true">Previous</button>
 ```
 
 - **aria-disabled="true"** - Announces disabled state to screen readers
@@ -196,13 +196,13 @@ Always provide text labels for navigation controls:
 
 ```html
 <!-- Good: Text label provided -->
-<button scPaginationPrevious>
+<button scPaginationPrevious aria-label="Go to previous page">
   <svg><!-- icon --></svg>
   <span>Previous</span>
 </button>
 
 <!-- Avoid: Icon only -->
-<button scPaginationPrevious>
+<button scPaginationPrevious aria-label="Go to previous page">
   <svg><!-- icon --></svg>
 </button>
 ```

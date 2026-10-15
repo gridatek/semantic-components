@@ -41,9 +41,9 @@ import {
   ],
   template: \`
     <div scTimePicker format="12h" [disabled]="true" [(value)]="time">
-      <input scTimePickerInput scTimePickerHoursInput />
+      <input scTimePickerInput scTimePickerHoursInput aria-label="Hours" />
       <span scTimePickerSeparator>:</span>
-      <input scTimePickerInput scTimePickerMinutesInput />
+      <input scTimePickerInput scTimePickerMinutesInput aria-label="Minutes" />
       <div scTimePickerPeriod>
         <button scTimePickerPeriodAM>AM</button>
         <button scTimePickerPeriodPM>PM</button>

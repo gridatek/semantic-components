@@ -7,7 +7,7 @@ A comprehensive sidebar component system for Angular applications with collapsib
 ### Core Components
 
 - `ScSidebarProvider` - Root provider component with state management
-- `ScSidebar` - Main sidebar container
+- `ScSidebar` - Main sidebar container (`closeLabel`, required: the name of the mobile sheet's close button)
 - `ScSidebarGap` - Invisible spacer that pushes content (used internally by ScSidebar)
 - `ScSidebarContainer` - Fixed-position container for sidebar content (used internally by ScSidebar)
 - `ScSidebarInner` - Inner wrapper with background and variant styles (used internally by ScSidebar)
@@ -144,7 +144,7 @@ import { ScSidebar, ScSidebarBody, ScSidebarFooter, ScSidebarHeader, ScSidebarIn
   ],
   template: `
     <div scSidebarProvider>
-      <div scSidebar>
+      <div scSidebar closeLabel="Close">
         <div scSidebarHeader>
           <h2>My App</h2>
         </div>
@@ -206,11 +206,11 @@ export class AppLayout {}
 
 ```html
 <!-- Default sidebar -->
-<div scSidebar variant="sidebar" collapsible="icon">
+<div scSidebar closeLabel="Close" variant="sidebar" collapsible="icon">
   <!-- Floating sidebar -->
-  <div scSidebar variant="floating" collapsible="icon">
+  <div scSidebar closeLabel="Close" variant="floating" collapsible="icon">
     <!-- Inset sidebar -->
-    <div scSidebar variant="inset" collapsible="icon"></div>
+    <div scSidebar closeLabel="Close" variant="inset" collapsible="icon"></div>
   </div>
 </div>
 ```

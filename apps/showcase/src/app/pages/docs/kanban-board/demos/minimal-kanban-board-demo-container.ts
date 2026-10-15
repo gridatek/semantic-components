@@ -25,6 +25,7 @@ import {
   type ScKanbanCardData,
   ScKanbanColumn,
   type ScKanbanColumnData,
+  type ScKanbanMove,
 } from '@semantic-components/ui-lab';
 
 @Component({
@@ -37,6 +38,7 @@ import {
     <div class="bg-muted/10 h-[400px] overflow-hidden rounded-lg border">
       <div
         scKanbanBoard
+        [moveAnnouncement]="announceMove"
         aria-label="Minimal board"
         aria-describedby="minimal-kanban-hint"
         #board="scKanbanBoard"
@@ -92,6 +94,10 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class MinimalKanbanBoardDemo {
+  /** What is announced when a card is moved with the keyboard. */
+  readonly announceMove = ({ card, column, position, count }: ScKanbanMove) =>
+    \`\${card.title} moved to \${column.title}, position \${position} of \${count}\`;
+
   readonly columns = signal<ScKanbanColumnData[]>([
     { id: 'pending', title: 'Pending', order: 0 },
     { id: 'approved', title: 'Approved', order: 1 },

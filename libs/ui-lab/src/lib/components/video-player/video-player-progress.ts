@@ -21,7 +21,7 @@ import { SC_VIDEO_PLAYER } from './video-player';
     <input
       scSlider
       class="absolute inset-0 h-full [&::-moz-range-progress]:transition-[height] group-hover:[&::-moz-range-progress]:h-1.5 [&::-moz-range-track]:transition-[height] group-hover:[&::-moz-range-track]:h-1.5 [&::-webkit-slider-runnable-track]:transition-[height] group-hover:[&::-webkit-slider-runnable-track]:h-1.5"
-      aria-label="Video progress"
+      [attr.aria-label]="progressLabel()"
       [max]="100"
       [step]="0.1"
       [value]="player.progressPercent()"
@@ -38,6 +38,8 @@ import { SC_VIDEO_PLAYER } from './video-player';
 })
 export class ScVideoPlayerProgress {
   protected readonly player = inject(SC_VIDEO_PLAYER);
+  /** The progress slider's name — write it ("Video progress"). */
+  readonly progressLabel = input.required<string>();
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>

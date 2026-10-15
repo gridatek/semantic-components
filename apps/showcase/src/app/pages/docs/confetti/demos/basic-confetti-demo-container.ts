@@ -21,9 +21,7 @@ import confetti from 'canvas-confetti';
 @Component({
   selector: 'app-basic-confetti-demo',
   imports: [ScButton],
-  template: \`
-    <button scButton (click)="fire()">Fire Confetti!</button>
-  \`,
+  template: \` <button scButton (click)="fire()">Fire Confetti!</button> \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })

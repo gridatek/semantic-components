@@ -20,7 +20,7 @@ import { CHART_COLORS, ScChartDataPoint } from './chart-types';
       [style.height.px]="size()"
       preserveAspectRatio="xMidYMid meet"
       role="img"
-      [attr.aria-label]="ariaLabel()"
+      [attr.aria-label]="ariaLabel() || null"
     >
       <g [attr.transform]="centerTransform()">
         @for (slice of slices(); track slice.label; let i = $index) {
@@ -94,7 +94,7 @@ export class ScPieChart {
   readonly size = input<number>(300);
   readonly innerRadius = input<number>(0); // 0 for pie, >0 for donut
   readonly showLabels = input<boolean>(true);
-  readonly ariaLabel = input<string>('Pie chart');
+  readonly ariaLabel = input<string>('');
 
   readonly hoveredSlice = signal<
     (ScChartDataPoint & { percentage: number; color: string }) | null

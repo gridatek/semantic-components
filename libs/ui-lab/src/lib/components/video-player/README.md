@@ -28,15 +28,15 @@ import {
     ScVideoPlayerFullscreen,
   ],
   template: `
-    <div scVideoPlayer [src]="'video.mp4'" [poster]="'poster.jpg'">
+    <div scVideoPlayer aria-label="Video player" #player="scVideoPlayer" [src]="'video.mp4'" [poster]="'poster.jpg'">
       <div scVideoPlayerControls>
-        <div scVideoPlayerProgress></div>
+        <div scVideoPlayerProgress progressLabel="Video progress"></div>
         <div scVideoPlayerToolbar>
-          <button scVideoPlayerPlayPause>
+          <button scVideoPlayerPlayPause [attr.aria-label]="player.isPlaying() ? 'Pause' : 'Play'">
             <!-- Play/pause icon -->
           </button>
           <span scVideoPlayerTime></span>
-          <button scVideoPlayerFullscreen>
+          <button scVideoPlayerFullscreen [attr.aria-label]="player.isFullscreen() ? 'Exit fullscreen' : 'Enter fullscreen'">
             <!-- Fullscreen icon -->
           </button>
         </div>
@@ -77,6 +77,9 @@ import {
 - Seek bar with buffering indicator
 - **Selector**: `div[scVideoPlayerProgress]`
 - Shows buffered ranges and current progress
+- **Inputs**: `progressLabel` (required) — the slider's name
+
+The other parts with built-in controls take their texts too: `scVideoPlayerVolume` (`muteLabel`, `unmuteLabel`, `volumeLabel`), `scVideoPlayerSpeed` (`speedLabel`). Buttons are named in your markup (`aria-label`, or `[attr.aria-label]` with the player's state).
 
 **`ScVideoPlayerVolume`**
 
@@ -94,7 +97,7 @@ import {
 
 - Skip forward/back button
 - **Selector**: `button[scVideoPlayerSkip]`
-- **Inputs**: `seconds` (required), `ariaLabel`
+- **Inputs**: `seconds` (required) — name it with `aria-label`
 
 **`ScVideoPlayerSpeed`**
 
@@ -136,7 +139,7 @@ import {
 ```html
 <div scVideoPlayer [src]="video">
   <div scVideoPlayerControls>
-    <button scVideoPlayerPlayPause>Play</button>
+    <button scVideoPlayerPlayPause [attr.aria-label]="player.isPlaying() ? 'Pause' : 'Play'">Play</button>
   </div>
 </div>
 ```
@@ -144,11 +147,11 @@ import {
 #### With Progress and Time
 
 ```html
-<div scVideoPlayer [src]="video">
+<div scVideoPlayer aria-label="Video player" [src]="video">
   <div scVideoPlayerControls>
-    <div scVideoPlayerProgress></div>
+    <div scVideoPlayerProgress progressLabel="Video progress"></div>
     <div scVideoPlayerToolbar>
-      <button scVideoPlayerPlayPause>⏯</button>
+      <button scVideoPlayerPlayPause [attr.aria-label]="player.isPlaying() ? 'Pause' : 'Play'">⏯</button>
       <span scVideoPlayerTime></span>
     </div>
   </div>
@@ -158,22 +161,22 @@ import {
 #### Full-Featured Player
 
 ```html
-<div scVideoPlayer #player="scVideoPlayer" [src]="video" [poster]="poster">
+<div scVideoPlayer aria-label="Video player" #player="scVideoPlayer" [src]="video" [poster]="poster">
   <svg scVideoPlayerBufferingIndicator siLoaderIcon></svg>
 
-  <button scVideoPlayerBigPlay>
+  <button scVideoPlayerBigPlay aria-label="Play video">
     <!-- Play icon -->
   </button>
 
   <div scVideoPlayerControls>
-    <div scVideoPlayerProgress></div>
+    <div scVideoPlayerProgress progressLabel="Video progress"></div>
 
     <div scVideoPlayerToolbar>
-      <button scVideoPlayerPlayPause>⏯</button>
+      <button scVideoPlayerPlayPause [attr.aria-label]="player.isPlaying() ? 'Pause' : 'Play'">⏯</button>
       <button scVideoPlayerSkip [seconds]="-10">⏪</button>
       <button scVideoPlayerSkip [seconds]="10">⏩</button>
 
-      <div scVideoPlayerVolume>
+      <div scVideoPlayerVolume muteLabel="Mute" unmuteLabel="Unmute" volumeLabel="Volume">
         <svg volume-icon><!-- Volume icon --></svg>
       </div>
 
@@ -181,9 +184,9 @@ import {
 
       <div scVideoPlayerSpacer></div>
 
-      <div scVideoPlayerSpeed></div>
-      <button scVideoPlayerPip>PiP</button>
-      <button scVideoPlayerFullscreen>⛶</button>
+      <div scVideoPlayerSpeed speedLabel="Playback speed"></div>
+      <button scVideoPlayerPip aria-label="Picture in picture">PiP</button>
+      <button scVideoPlayerFullscreen [attr.aria-label]="player.isFullscreen() ? 'Exit fullscreen' : 'Enter fullscreen'">⛶</button>
     </div>
   </div>
 </div>

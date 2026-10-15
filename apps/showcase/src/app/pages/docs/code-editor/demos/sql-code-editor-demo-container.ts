@@ -43,7 +43,12 @@ import {
           <span class="text-muted-foreground text-sm">query.sql</span>
           <span scCodeEditorLabel>sql</span>
         </div>
-        <button scCodeEditorCopyButton [code]="sqlCode"></button>
+        <button
+          scCodeEditorCopyButton
+          #copy="scCodeEditorCopyButton"
+          [attr.aria-label]="copy.copied() ? 'Copied' : 'Copy code'"
+          [code]="sqlCode"
+        ></button>
       </div>
       <div
         scCodeEditorContent

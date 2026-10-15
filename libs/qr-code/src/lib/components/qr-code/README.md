@@ -18,16 +18,16 @@ A QR code drawn as SVG, encoded with [`uqr`](https://github.com/unjs/uqr) (a pee
 
 ### ScQrCode — `svg[scQrCode]` (`exportAs: 'scQrCode'`)
 
-| Input        | Type                       | Default     | Description                                                     |
-| ------------ | -------------------------- | ----------- | --------------------------------------------------------------- |
-| `value`      | `string`                   | required    | The text to encode (a URL, `mailto:`, `WIFI:`…)                 |
-| `ecc`        | `'L' \| 'M' \| 'Q' \| 'H'` | `'M'`       | Error correction: 7 / 15 / 25 / 30 % of the code can be damaged |
-| `quietZone`  | `number`                   | `4`         | Light margin around the code, in modules (the spec asks for 4)  |
-| `minVersion` | `number`                   | `1`         | Smallest QR version (1–40): keeps the size stable while typing  |
-| `boostEcc`   | `boolean`                  | `false`     | Use a higher error correction when it fits                      |
-| `mask`       | `number`                   | automatic   | Mask pattern (0–7)                                              |
-| `aria-label` | `string`                   | `'QR code'` | Accessible name — say what the code leads to                    |
-| `class`      | `string`                   | `''`        | Additional CSS classes                                          |
+| Input        | Type                       | Default   | Description                                                     |
+| ------------ | -------------------------- | --------- | --------------------------------------------------------------- |
+| `value`      | `string`                   | required  | The text to encode (a URL, `mailto:`, `WIFI:`…)                 |
+| `ecc`        | `'L' \| 'M' \| 'Q' \| 'H'` | `'M'`     | Error correction: 7 / 15 / 25 / 30 % of the code can be damaged |
+| `quietZone`  | `number`                   | `4`       | Light margin around the code, in modules (the spec asks for 4)  |
+| `minVersion` | `number`                   | `1`       | Smallest QR version (1–40): keeps the size stable while typing  |
+| `boostEcc`   | `boolean`                  | `false`   | Use a higher error correction when it fits                      |
+| `mask`       | `number`                   | automatic | Mask pattern (0–7)                                              |
+| `aria-label` | attribute                  | none      | Its name — say what the code leads to (the library writes none) |
+| `class`      | `string`                   | `''`      | Additional CSS classes                                          |
 
 Signals: `valid()` (there's a code to show), `error()` (why the value can't be encoded, e.g. `'Data too long'`, or `null`), `modules()` (the module matrix, quiet zone included), `path()` (the dark modules as one SVG path).
 
@@ -49,5 +49,5 @@ Downloads the code, drawn from its modules — sharp at any size, in the colors 
 
 ## Accessibility
 
-- The code is `role="img"` with an accessible name (`'QR code'` unless you give one). Name what it opens, and put the same link or text next to it for people who can't scan.
+- The code is `role="img"` with an accessible name (the one you give it: `aria-label`). Name what it opens, and put the same link or text next to it for people who can't scan.
 - Keep dark modules on a light background with strong contrast.

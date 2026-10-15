@@ -166,7 +166,7 @@ import {
       </nav>
 
       <ng-template scNavbarMobilePortal>
-        <div scNavbarMobileMenu>
+        <div scNavbarMobileMenu aria-label="Mobile navigation">
           <a
             scNavbarMobileLink
             routerLink="/"

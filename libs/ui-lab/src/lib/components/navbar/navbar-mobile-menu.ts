@@ -20,7 +20,6 @@ import { ScNavbarProvider } from './navbar-provider';
   host: {
     '[id]': 'provider.menuId',
     role: 'navigation',
-    '[attr.aria-label]': '"Mobile navigation"',
     '[class]': 'class()',
     '[tabindex]': '-1',
     'animate.enter': 'animate-in fade-in-0',

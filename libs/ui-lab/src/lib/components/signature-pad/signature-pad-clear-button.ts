@@ -1,5 +1,5 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { buttonVariants, cn } from '@semantic-components/ui';
+import { buttonVariants, cn, ɵwarnIfUnnamed } from '@semantic-components/ui';
 import { SC_SIGNATURE_PAD } from './signature-pad';
 
 @Directive({
@@ -9,14 +9,16 @@ import { SC_SIGNATURE_PAD } from './signature-pad';
     '[class]': 'class()',
     '[disabled]': 'isDisabled()',
     '[attr.aria-disabled]': 'isDisabled() || null',
-    '[attr.aria-label]': 'ariaLabel()',
     '(click)': 'onClick()',
   },
 })
 export class ScSignaturePadClearButton {
+  constructor() {
+    ɵwarnIfUnnamed('scSignaturePadClear');
+  }
+
   readonly signaturePad = inject(SC_SIGNATURE_PAD);
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly ariaLabel = input<string>('Clear signature');
 
   protected readonly class = computed(() =>
     cn(buttonVariants({ variant: 'outline', size: 'icon' }), this.classInput()),

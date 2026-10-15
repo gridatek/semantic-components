@@ -43,7 +43,7 @@ import type { ScOrgChartNodeData, ScOrgChartNodeExpandEvent } from '@semantic-co
 ### Horizontal Layout
 
 ```html
-<div scOrgChart direction="horizontal">
+<div scOrgChart aria-label="Organization chart" direction="horizontal">
   <sc-org-chart-node [node]="orgData()" />
   <ng-template scOrgChartNodeDef let-node let-toggle="toggle">
     <!-- card template -->
@@ -54,7 +54,7 @@ import type { ScOrgChartNodeData, ScOrgChartNodeExpandEvent } from '@semantic-co
 ### Compact Mode
 
 ```html
-<div scOrgChart [compact]="true">
+<div scOrgChart aria-label="Organization chart" [compact]="true">
   <sc-org-chart-node [node]="orgData()" />
   <ng-template scOrgChartNodeDef let-node let-toggle="toggle">
     <!-- card template -->
@@ -65,7 +65,7 @@ import type { ScOrgChartNodeData, ScOrgChartNodeExpandEvent } from '@semantic-co
 ### Non-collapsible
 
 ```html
-<div scOrgChart [collapsible]="false">
+<div scOrgChart aria-label="Organization chart" [collapsible]="false">
   <sc-org-chart-node [node]="orgData()" />
   <ng-template scOrgChartNodeDef let-node>
     <!-- card template (no toggle needed) -->
@@ -81,13 +81,12 @@ Root directive. Provides configuration to all child nodes via `SC_ORG_CHART` inj
 
 #### Inputs
 
-| Input         | Type                         | Default                | Description                 |
-| ------------- | ---------------------------- | ---------------------- | --------------------------- |
-| `direction`   | `'vertical' \| 'horizontal'` | `'vertical'`           | Layout direction            |
-| `collapsible` | `boolean`                    | `true`                 | Allow nodes to be collapsed |
-| `compact`     | `boolean`                    | `false`                | Use smaller node cards      |
-| `ariaLabel`   | `string`                     | `'Organization chart'` | Accessible label            |
-| `class`       | `string`                     | `''`                   | Additional CSS classes      |
+| Input         | Type                         | Default      | Description                 |
+| ------------- | ---------------------------- | ------------ | --------------------------- |
+| `direction`   | `'vertical' \| 'horizontal'` | `'vertical'` | Layout direction            |
+| `collapsible` | `boolean`                    | `true`       | Allow nodes to be collapsed |
+| `compact`     | `boolean`                    | `false`      | Use smaller node cards      |
+| `class`       | `string`                     | `''`         | Additional CSS classes      |
 
 #### Outputs
 

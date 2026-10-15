@@ -1,6 +1,6 @@
 import { ToolbarWidget } from '@angular/aria/toolbar';
 import { Directive, computed, inject, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn, ɵwarnIfUnnamed } from '@semantic-components/ui';
 import { SC_LIGHTBOX_PROVIDER } from './lightbox-provider';
 
 @Directive({
@@ -11,10 +11,13 @@ import { SC_LIGHTBOX_PROVIDER } from './lightbox-provider';
     type: 'button',
     '(click)': 'provider.zoomOut()',
     '[disabled]': 'provider.zoomLevel() <= 0.5',
-    '[attr.aria-label]': "'Zoom out'",
   },
 })
 export class ScLightboxZoomOut {
+  constructor() {
+    ɵwarnIfUnnamed('scLightboxZoomOut');
+  }
+
   readonly provider = inject(SC_LIGHTBOX_PROVIDER);
 
   readonly classInput = input<string>('', { alias: 'class' });

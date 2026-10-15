@@ -29,7 +29,7 @@ interface DayInfo {
     <table
       ngGrid
       tabindex="0"
-      [attr.aria-label]="ariaLabel()"
+      [attr.aria-label]="ariaLabel() || null"
       class="w-full border-collapse"
       colWrap="continuous"
       rowWrap="nowrap"
@@ -119,7 +119,7 @@ export class ScCalendarDayView {
   readonly monthScrollUp = output<void>();
   readonly monthScrollDown = output<void>();
 
-  readonly ariaLabel = input('Select date');
+  readonly ariaLabel = input<string>('');
   readonly weekDays = input(['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']);
   readonly startOfWeek = input(0);
 

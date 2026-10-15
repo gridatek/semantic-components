@@ -5,7 +5,7 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { buttonVariants, cn } from '@semantic-components/ui';
+import { buttonVariants, cn, ɵwarnIfUnnamed } from '@semantic-components/ui';
 import { SC_AUDIO_PLAYER } from './audio-player';
 
 @Component({
@@ -15,12 +15,15 @@ import { SC_AUDIO_PLAYER } from './audio-player';
     type: 'button',
     '[class]': 'class()',
     '[attr.aria-pressed]': 'player.shuffle()',
-    '[attr.aria-label]': "'Shuffle'",
     '(click)': 'player.shuffle.set(!player.shuffle())',
   },
   encapsulation: ViewEncapsulation.None,
 })
 export class ScAudioPlayerShuffle {
+  constructor() {
+    ɵwarnIfUnnamed('scAudioPlayerShuffle');
+  }
+
   readonly player = inject(SC_AUDIO_PLAYER);
   readonly classInput = input<string>('', { alias: 'class' });
 

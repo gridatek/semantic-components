@@ -90,7 +90,7 @@ import {
       >
         <img scImageCropperImage [src]="imageSrc()" alt="Image to crop" />
         <div scImageCropperOverlay></div>
-        <div scImageCropperSelection>
+        <div scImageCropperSelection aria-label="Crop selection">
           <div scImageCropperDragRegion></div>
           <div scImageCropperHandle position="top-left"></div>
           <div scImageCropperHandle position="top-right"></div>
@@ -166,7 +166,7 @@ import {
             <svg siZoomOutIcon class="size-4"></svg>
           </button>
 
-          <div scImageCropperZoomSlider></div>
+          <div scImageCropperZoomSlider zoomLabel="Zoom"></div>
 
           <button
             scButton
@@ -232,6 +232,7 @@ import {
           <p class="text-sm font-medium">Preview:</p>
           <div
             scImageCropperPreview
+            alt="Crop preview"
             [width]="150"
             [height]="150"
             class="rounded-md border"

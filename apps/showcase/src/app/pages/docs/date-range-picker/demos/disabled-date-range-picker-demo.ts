@@ -39,7 +39,7 @@ import {
     SiChevronRightIcon,
   ],
   template: `
-    <div scDateRangePicker placeholder="Disabled" #drp="scDateRangePicker">
+    <div scDateRangePicker #drp="scDateRangePicker">
       <div scPopoverProvider [origin]="trigger.overlayOrigin" align="start">
         <button
           scDateRangePickerTrigger
@@ -48,7 +48,7 @@ import {
         >
           <svg siCalendarIcon class="mr-2 size-4"></svg>
           <span class="text-muted-foreground">
-            {{ drp.placeholder() }}
+            {{ 'Disabled' }}
           </span>
         </button>
         <ng-template scPopoverPortal>
@@ -56,6 +56,7 @@ import {
             <div class="p-3">
               <div
                 scCalendar
+                aria-label="Calendar"
                 mode="range"
                 [value]="drp.value()"
                 (valueChange)="drp.onValueChange($event)"
@@ -97,7 +98,11 @@ import {
                   </button>
                 </div>
               </div>
-              <div scDateRangePickerFooter></div>
+              <div
+                scDateRangePickerFooter
+                cancelLabel="Cancel"
+                applyLabel="Apply"
+              ></div>
             </div>
           </div>
         </ng-template>

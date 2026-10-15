@@ -18,6 +18,7 @@ import type {
   ScKanbanCardDeleteEvent,
   ScKanbanColumnData,
   ScKanbanDragEvent,
+  ScKanbanMove,
 } from './kanban-types';
 
 export const SC_KANBAN_BOARD = new InjectionToken<ScKanbanBoard>(
@@ -44,6 +45,12 @@ export class ScKanbanBoard {
   private readonly announcer = inject(LiveAnnouncer);
 
   readonly classInput = input<string>('', { alias: 'class' });
+  /**
+   * What is announced when a card is moved with the keyboard — write it:
+   * `({ card, column, position, count }) => `${card.title} moved to
+   * ${column.title}, position ${position} of ${count}``.
+   */
+  readonly moveAnnouncement = input.required<(move: ScKanbanMove) => string>();
   /** Id of an element explaining the keyboard moves (Alt + arrow keys). */
   readonly ariaDescribedby = input<string | null>(null, {
     alias: 'aria-describedby',
@@ -155,7 +162,12 @@ export class ScKanbanBoard {
 
     const count = this.getCardsForColumn(target.id).length;
     this.announcer.announce(
-      `${card.title} moved to ${target.title}, position ${targetIndex + 1} of ${count}`,
+      this.moveAnnouncement()({
+        card,
+        column: target,
+        position: targetIndex + 1,
+        count,
+      }),
     );
     // The card may be re-rendered in another column: focus it again.
     afterNextRender(

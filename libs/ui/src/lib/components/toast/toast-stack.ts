@@ -85,7 +85,11 @@ import { ScToaster } from './toaster';
             {{ toast.action.label }}
           </button>
         }
-        <button scToastClose (close)="dismiss(toast.id)">
+        <button
+          scToastClose
+          [attr.aria-label]="toastService.closeLabel() || null"
+          (close)="dismiss(toast.id)"
+        >
           <svg siXIcon class="size-4"></svg>
         </button>
       </div>

@@ -18,7 +18,7 @@ import { SC_IMAGE_CROPPER } from './image-cropper';
         [style.width.px]="imageWidth()"
         [style.height.px]="imageHeight()"
         [style.transform]="previewTransform()"
-        alt="Crop preview"
+        [alt]="alt()"
       />
     }
   `,
@@ -33,6 +33,8 @@ export class ScImageCropperPreview {
   private readonly cropper = inject(SC_IMAGE_CROPPER);
 
   readonly classInput = input<string>('', { alias: 'class' });
+  /** The preview's description — write it ("Crop preview"). */
+  readonly alt = input.required<string>();
   readonly width = input<number>(150);
   readonly height = input<number>(150);
 

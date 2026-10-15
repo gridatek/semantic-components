@@ -85,7 +85,9 @@ import {
           </button>
 
           <div
-            scCarousel aria-label="Images"
+            scCarousel
+            aria-roledescription="carousel"
+            aria-label="Images"
             [activeIndex]="lightbox.currentIndex()"
             (activeIndexChange)="lightbox.goTo($event)"
             [options]="{ loop: lightbox.loop() }"
@@ -97,6 +99,7 @@ import {
                 @for (image of images; track image.src; let i = $index) {
                   <div
                     scCarouselItem
+                    aria-roledescription="slide"
                     class="flex items-center justify-center ps-0"
                   >
                     <img

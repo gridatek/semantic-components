@@ -77,7 +77,15 @@ import {
         </div>
 
         <ng-template scLightboxPortal>
-          <div scLightbox>
+          <div
+            scLightbox
+            [attr.aria-label]="
+              'Image gallery, showing image ' +
+              (lightbox.currentIndex() + 1) +
+              ' of ' +
+              lightbox.images().length
+            "
+          >
             <button scLightboxClose>
               <svg siXIcon></svg>
               <span class="sr-only">Close lightbox</span>
@@ -85,6 +93,7 @@ import {
 
             <div
               scCarousel
+              aria-roledescription="carousel"
               aria-label="Images"
               [activeIndex]="lightbox.currentIndex()"
               (activeIndexChange)="lightbox.goTo($event)"
@@ -97,6 +106,7 @@ import {
                   @for (image of images; track image.src; let i = $index) {
                     <div
                       scCarouselItem
+                      aria-roledescription="slide"
                       class="flex items-center justify-center ps-0"
                     >
                       <img
@@ -130,16 +140,24 @@ import {
             <div scLightboxToolbar>
               <span scLightboxCounter></span>
               <div scLightboxZoomControls>
-                <button scLightboxZoomOut value="zoom-out">
+                <button
+                  scLightboxZoomOut
+                  aria-label="Zoom out"
+                  value="zoom-out"
+                >
                   <svg siZoomOutIcon></svg>
                 </button>
                 <span class="min-w-12 text-center text-sm text-white/80">
                   {{ Math.round(lightbox.zoomLevel() * 100) }}%
                 </span>
-                <button scLightboxZoomIn value="zoom-in">
+                <button scLightboxZoomIn aria-label="Zoom in" value="zoom-in">
                   <svg siZoomInIcon></svg>
                 </button>
-                <button scLightboxZoomReset value="zoom-reset">
+                <button
+                  scLightboxZoomReset
+                  aria-label="Reset zoom"
+                  value="zoom-reset"
+                >
                   <svg siMinimize2Icon></svg>
                 </button>
               </div>

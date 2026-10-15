@@ -6,9 +6,9 @@ A component for selecting time values with support for 12/24 hour formats.
 
 ```html
 <div scTimePicker format="12h" [(value)]="time">
-  <input scTimePickerInput scTimePickerHoursInput />
+  <input scTimePickerInput scTimePickerHoursInput aria-label="Hours" />
   <span scTimePickerSeparator>:</span>
-  <input scTimePickerInput scTimePickerMinutesInput />
+  <input scTimePickerInput scTimePickerMinutesInput aria-label="Minutes" />
   <div scTimePickerPeriod>
     <button scTimePickerPeriodAM>AM</button>
     <button scTimePickerPeriodPM>PM</button>
@@ -162,9 +162,9 @@ interface ScTimeValue {
 
 ```html
 <div scTimePicker format="12h" [(value)]="time">
-  <input scTimePickerInput scTimePickerHoursInput />
+  <input scTimePickerInput scTimePickerHoursInput aria-label="Hours" />
   <span scTimePickerSeparator>:</span>
-  <input scTimePickerInput scTimePickerMinutesInput />
+  <input scTimePickerInput scTimePickerMinutesInput aria-label="Minutes" />
   <div scTimePickerPeriod>
     <button scTimePickerPeriodAM>AM</button>
     <button scTimePickerPeriodPM>PM</button>
@@ -176,9 +176,9 @@ interface ScTimeValue {
 
 ```html
 <div scTimePicker format="24h" [(value)]="time">
-  <input scTimePickerInput scTimePickerHoursInput />
+  <input scTimePickerInput scTimePickerHoursInput aria-label="Hours" />
   <span scTimePickerSeparator>:</span>
-  <input scTimePickerInput scTimePickerMinutesInput />
+  <input scTimePickerInput scTimePickerMinutesInput aria-label="Minutes" />
 </div>
 ```
 
@@ -186,11 +186,11 @@ interface ScTimeValue {
 
 ```html
 <div scTimePicker format="24h" [showSeconds]="true" [(value)]="time">
-  <input scTimePickerInput scTimePickerHoursInput />
+  <input scTimePickerInput scTimePickerHoursInput aria-label="Hours" />
   <span scTimePickerSeparator>:</span>
-  <input scTimePickerInput scTimePickerMinutesInput />
+  <input scTimePickerInput scTimePickerMinutesInput aria-label="Minutes" />
   <span scTimePickerSeparator>:</span>
-  <input scTimePickerInput scTimePickerSecondsInput />
+  <input scTimePickerInput scTimePickerSecondsInput aria-label="Seconds" />
 </div>
 ```
 
@@ -206,9 +206,9 @@ interface ScTimeValue {
 
 ```html
 <div scTimePicker [disabled]="true" [(value)]="time">
-  <input scTimePickerInput scTimePickerHoursInput />
+  <input scTimePickerInput scTimePickerHoursInput aria-label="Hours" />
   <span scTimePickerSeparator>:</span>
-  <input scTimePickerInput scTimePickerMinutesInput />
+  <input scTimePickerInput scTimePickerMinutesInput aria-label="Minutes" />
 </div>
 ```
 

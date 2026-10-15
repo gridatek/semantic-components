@@ -65,12 +65,7 @@ import {
     <div scFieldGroup class="max-w-sm">
       <div scField>
         <label scLabel>Date of Birth</label>
-        <div
-          scDatePicker
-          [(value)]="dob"
-          placeholder="Select date of birth"
-          #dpDob="scDatePicker"
-        >
+        <div scDatePicker [(value)]="dob" #dpDob="scDatePicker">
           <div
             scPopoverProvider
             [origin]="triggerDob.overlayOrigin"
@@ -81,13 +76,14 @@ import {
               <span
                 [class]="dpDob.displayText() ? '' : 'text-muted-foreground'"
               >
-                {{ dpDob.displayText() || dpDob.placeholder() }}
+                {{ dpDob.displayText() || 'Select date of birth' }}
               </span>
             </button>
             <ng-template scPopoverPortal>
               <div scPopover class="w-auto p-0">
                 <div
                   scCalendar
+                  aria-label="Calendar"
                   [value]="dpDob.value()"
                   [maxDate]="today"
                   (valueChange)="dpDob.onValueChange($event)"
@@ -136,12 +132,7 @@ import {
       </div>
       <div scField>
         <label scLabel>Appointment Date</label>
-        <div
-          scDatePicker
-          [(value)]="appointment"
-          placeholder="Select appointment"
-          #dpAppt="scDatePicker"
-        >
+        <div scDatePicker [(value)]="appointment" #dpAppt="scDatePicker">
           <div
             scPopoverProvider
             [origin]="triggerAppt.overlayOrigin"
@@ -152,13 +143,14 @@ import {
               <span
                 [class]="dpAppt.displayText() ? '' : 'text-muted-foreground'"
               >
-                {{ dpAppt.displayText() || dpAppt.placeholder() }}
+                {{ dpAppt.displayText() || 'Select appointment' }}
               </span>
             </button>
             <ng-template scPopoverPortal>
               <div scPopover class="w-auto p-0">
                 <div
                   scCalendar
+                  aria-label="Calendar"
                   [value]="dpAppt.value()"
                   [minDate]="today"
                   (valueChange)="dpAppt.onValueChange($event)"

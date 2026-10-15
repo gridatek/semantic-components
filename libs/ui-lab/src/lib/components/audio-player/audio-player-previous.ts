@@ -5,7 +5,7 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { buttonVariants, cn } from '@semantic-components/ui';
+import { buttonVariants, cn, ɵwarnIfUnnamed } from '@semantic-components/ui';
 import { SC_AUDIO_PLAYER } from './audio-player';
 
 @Component({
@@ -16,12 +16,15 @@ import { SC_AUDIO_PLAYER } from './audio-player';
     '[class]': 'class()',
     '[disabled]': '!player.canGoPrevious()',
     '[attr.aria-disabled]': '!player.canGoPrevious() || null',
-    '[attr.aria-label]': "'Previous track'",
     '(click)': 'player.previous()',
   },
   encapsulation: ViewEncapsulation.None,
 })
 export class ScAudioPlayerPrevious {
+  constructor() {
+    ɵwarnIfUnnamed('scAudioPlayerPrevious');
+  }
+
   readonly player = inject(SC_AUDIO_PLAYER);
   readonly classInput = input<string>('', { alias: 'class' });
 

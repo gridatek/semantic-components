@@ -22,7 +22,7 @@ import { ScLanguageSelect } from '@semantic-components/ui-lab';
   imports: [ScLanguageSelect],
   template: \`
     <div class="max-w-xs">
-      <sc-language-select></sc-language-select>
+      <sc-language-select label="Language"></sc-language-select>
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },

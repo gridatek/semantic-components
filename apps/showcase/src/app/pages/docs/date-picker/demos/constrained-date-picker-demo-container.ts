@@ -60,23 +60,19 @@ import {
       <p class="text-muted-foreground text-xs">
         Only dates within the next 30 days
       </p>
-      <div
-        scDatePicker
-        [(value)]="selectedDate"
-        placeholder="Pick a date (next 30 days)"
-        #dp="scDatePicker"
-      >
+      <div scDatePicker [(value)]="selectedDate" #dp="scDatePicker">
         <div scPopoverProvider [origin]="trigger.overlayOrigin" align="start">
           <button scDatePickerTrigger #trigger="scDatePickerTrigger">
             <svg siCalendarIcon class="mr-2 size-4"></svg>
             <span [class]="dp.displayText() ? '' : 'text-muted-foreground'">
-              {{ dp.displayText() || dp.placeholder() }}
+              {{ dp.displayText() || 'Pick a date (next 30 days)' }}
             </span>
           </button>
           <ng-template scPopoverPortal>
             <div scPopover class="w-auto p-0">
               <div
                 scCalendar
+                aria-label="Calendar"
                 [value]="dp.value()"
                 [minDate]="minDate"
                 [maxDate]="maxDate"

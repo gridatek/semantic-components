@@ -43,10 +43,9 @@ The root directive that manages state.
 
 The interactive container that handles user input.
 
-| Input       | Type     | Default                     | Description          |
-| ----------- | -------- | --------------------------- | -------------------- |
-| `ariaLabel` | `string` | `'Image comparison slider'` | Accessibility label  |
-| `class`     | `string` | -                           | Additional CSS class |
+| Input   | Type     | Default | Description          |
+| ------- | -------- | ------- | -------------------- |
+| `class` | `string` | -       | Additional CSS class |
 
 ### ScImageCompareBefore / ScImageCompareAfter
 

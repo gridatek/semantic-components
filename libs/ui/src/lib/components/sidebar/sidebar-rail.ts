@@ -5,7 +5,7 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn, ɵwarnIfUnnamed } from '../../utils';
 import { ScSidebarState } from './sidebar-state';
 
 @Component({
@@ -14,13 +14,16 @@ import { ScSidebarState } from './sidebar-state';
   host: {
     '[class]': 'class()',
     '(click)': 'state.toggle()',
-    'aria-label': 'Toggle Sidebar',
     tabindex: '-1',
     title: 'Toggle Sidebar',
   },
   encapsulation: ViewEncapsulation.None,
 })
 export class ScSidebarRail {
+  constructor() {
+    ɵwarnIfUnnamed('scSidebarRail');
+  }
+
   readonly state = inject(ScSidebarState);
 
   readonly classInput = input<string>('', { alias: 'class' });

@@ -6,7 +6,7 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn, ɵwarnIfUnnamed } from '@semantic-components/ui';
 import { SC_IMAGE_COMPARE } from './image-compare';
 
 @Component({
@@ -16,7 +16,6 @@ import { SC_IMAGE_COMPARE } from './image-compare';
     '[class]': 'class()',
     tabindex: '0',
     role: 'slider',
-    '[attr.aria-label]': 'ariaLabel()',
     '[attr.aria-valuenow]': 'imageCompare.position()',
     'aria-valuemin': '0',
     'aria-valuemax': '100',
@@ -32,11 +31,14 @@ import { SC_IMAGE_COMPARE } from './image-compare';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScImageCompareArea {
+  constructor() {
+    ɵwarnIfUnnamed('scImageCompareArea');
+  }
+
   readonly imageCompare = inject(SC_IMAGE_COMPARE);
   private readonly elementRef = inject(ElementRef<HTMLElement>);
 
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly ariaLabel = input<string>('Image comparison slider');
 
   protected readonly class = computed(() =>
     cn(

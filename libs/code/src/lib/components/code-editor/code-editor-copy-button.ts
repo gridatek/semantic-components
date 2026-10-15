@@ -5,11 +5,12 @@ import {
   input,
   signal,
 } from '@angular/core';
-import { buttonVariants, cn } from '@semantic-components/ui';
+import { buttonVariants, cn, ɵwarnIfUnnamed } from '@semantic-components/ui';
 import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'button[scCodeEditorCopyButton]',
+  exportAs: 'scCodeEditorCopyButton',
   imports: [SiCheckIcon, SiCopyIcon],
   template: `
     @if (copied()) {
@@ -20,7 +21,6 @@ import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
   `,
   host: {
     '[class]': 'class()',
-    '[attr.aria-label]': 'ariaLabel()',
     type: 'button',
     '(click)': 'copyCode($event)',
   },
@@ -30,7 +30,12 @@ export class ScCodeEditorCopyButton {
   readonly code = input.required<string>();
   readonly classInput = input<string>('', { alias: 'class' });
 
+  /** Whether the code was just copied (for two seconds): name the button with it. */
   readonly copied = signal(false);
+
+  constructor() {
+    ɵwarnIfUnnamed('scCodeEditorCopyButton');
+  }
 
   protected readonly class = computed(() =>
     cn(
@@ -38,10 +43,6 @@ export class ScCodeEditorCopyButton {
       'text-muted-foreground',
       this.classInput(),
     ),
-  );
-
-  protected readonly ariaLabel = computed(() =>
-    this.copied() ? 'Copied!' : 'Copy code',
   );
 
   protected async copyCode(event: Event): Promise<void> {

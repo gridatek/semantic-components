@@ -76,7 +76,7 @@ Footer bar with top border for displaying cursor position and file statistics.
 | `code`  | `string` | **required** | The code to copy       |
 | `class` | `string` | `''`         | Additional CSS classes |
 
-Copy button that shows a checkmark on successful copy for 2 seconds.
+Copy button that shows a checkmark on successful copy for 2 seconds. Name it, with its state: `copied()` (`exportAs: 'scCodeEditorCopyButton'`) — `[attr.aria-label]="copy.copied() ? 'Copied' : 'Copy code'"`.
 
 ### ScCodeEditorContent
 
@@ -130,7 +130,7 @@ Copy button that shows a checkmark on successful copy for 2 seconds.
       <span class="text-muted-foreground text-sm">{{ filename }}</span>
       <span scCodeEditorLabel>{{ language }}</span>
     </div>
-    <button scCodeEditorCopyButton [code]="code"></button>
+    <button scCodeEditorCopyButton #copy="scCodeEditorCopyButton" [attr.aria-label]="copy.copied() ? 'Copied' : 'Copy code'" [code]="code"></button>
   </div>
 
   <div scCodeEditorContent [(value)]="code" [language]="language" [filename]="filename" [showLineNumbers]="true" (cursorChange)="onCursorChange($event)"></div>
@@ -161,7 +161,7 @@ Copy button that shows a checkmark on successful copy for 2 seconds.
 <div scCodeEditor>
   <div scCodeEditorHeader>
     <span scCodeEditorLabel>{{ detectedLanguage }}</span>
-    <button scCodeEditorCopyButton [code]="code"></button>
+    <button scCodeEditorCopyButton #copy="scCodeEditorCopyButton" [attr.aria-label]="copy.copied() ? 'Copied' : 'Copy code'" [code]="code"></button>
   </div>
 
   <div scCodeEditorContent [(value)]="code" [autoDetectLanguage]="true" (languageDetected)="detectedLanguage = $event"></div>
@@ -350,7 +350,7 @@ greet('World');`);
       <span class="text-muted-foreground text-sm">{{ filename() }}</span>
       <span scCodeEditorLabel>{{ language() }}</span>
     </div>
-    <button scCodeEditorCopyButton [code]="code()"></button>
+    <button scCodeEditorCopyButton #copy="scCodeEditorCopyButton" [attr.aria-label]="copy.copied() ? 'Copied' : 'Copy code'" [code]="code()"></button>
   </div>
 
   <div scCodeEditorContent [(value)]="code" [language]="language()" [filename]="filename()" [showLineNumbers]="true" [tabSize]="2" [insertSpaces]="true" class="max-h-[600px] min-h-[300px]"></div>

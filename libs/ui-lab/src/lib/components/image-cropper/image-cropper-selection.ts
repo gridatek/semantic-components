@@ -1,5 +1,5 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn, ɵwarnIfUnnamed } from '@semantic-components/ui';
 import { SC_IMAGE_CROPPER } from './image-cropper';
 
 @Directive({
@@ -12,12 +12,14 @@ import { SC_IMAGE_CROPPER } from './image-cropper';
     '[style.height.px]': 'cropper.cropArea().height',
     tabindex: '0',
     role: 'group',
-    'aria-label': 'Crop selection',
-    'aria-roledescription': 'crop region',
     '(keydown)': 'onKeyDown($event)',
   },
 })
 export class ScImageCropperSelection {
+  constructor() {
+    ɵwarnIfUnnamed('scImageCropperSelection');
+  }
+
   readonly cropper = inject(SC_IMAGE_CROPPER);
 
   readonly classInput = input<string>('', { alias: 'class' });

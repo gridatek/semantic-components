@@ -17,7 +17,9 @@ export function ɵwarnIfUnnamed(part: string): void {
       element.hasAttribute('aria-labelledby') ||
       !!labels?.length ||
       !!element.getAttribute('title')?.trim() ||
-      !!element.textContent?.trim();
+      !!element.textContent?.trim() ||
+      // A named image or element inside names it too.
+      !!element.querySelector('img[alt]:not([alt=""]), [aria-label]');
     if (!named) {
       console.warn(
         `${part} has no name: give it aria-label or aria-labelledby.`,

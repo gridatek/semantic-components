@@ -24,14 +24,14 @@ Text input with @mention support for users, channels, or custom entities.
 
 ### ScMentionInput
 
-| Input         | Type              | Default                          | Description              |
-| ------------- | ----------------- | -------------------------------- | ------------------------ |
-| `class`       | `string`          | `''`                             | Additional CSS classes   |
-| `placeholder` | `string`          | `'Type @ to mention someone...'` | Placeholder text         |
-| `disabled`    | `boolean`         | `false`                          | Disable the input        |
-| `rows`        | `number`          | `3`                              | Number of visible rows   |
-| `users`       | `ScMentionUser[]` | `[]`                             | Available users/entities |
-| `trigger`     | `string`          | `'@'`                            | Trigger character        |
+| Input         | Type              | Default | Description              |
+| ------------- | ----------------- | ------- | ------------------------ |
+| `class`       | `string`          | `''`    | Additional CSS classes   |
+| `placeholder` | `string`          | `''`    | Placeholder — write it   |
+| `disabled`    | `boolean`         | `false` | Disable the input        |
+| `rows`        | `number`          | `3`     | Number of visible rows   |
+| `users`       | `ScMentionUser[]` | `[]`    | Available users/entities |
+| `trigger`     | `string`          | `'@'`   | Trigger character        |
 
 | Output          | Type              | Description                      |
 | --------------- | ----------------- | -------------------------------- |

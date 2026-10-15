@@ -103,7 +103,13 @@ import {
   ],
   template: `
     <div scSidebarProvider class="min-h-svh">
-      <div scSidebar side="left" variant="sidebar" collapsible="icon">
+      <div
+        scSidebar
+        closeLabel="Close"
+        side="left"
+        variant="sidebar"
+        collapsible="icon"
+      >
         <div scSidebarHeader>
           <ul scSidebarMenu>
             <li scSidebarMenuItem>
@@ -412,7 +418,7 @@ import {
           </ul>
         </div>
 
-        <button scSidebarRail></button>
+        <button scSidebarRail aria-label="Toggle sidebar"></button>
       </div>
 
       <main scSidebarInset>

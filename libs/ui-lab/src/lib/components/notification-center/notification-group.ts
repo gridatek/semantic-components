@@ -2,6 +2,7 @@ import {
   Component,
   ViewEncapsulation,
   computed,
+  inject,
   input,
   output,
   signal,
@@ -12,6 +13,7 @@ import {
   SiCircleCheckIcon,
   SiTrash2Icon,
 } from '@semantic-icons/lucide-icons';
+import { SC_NOTIFICATION_CENTER } from './notification-center';
 import { ScNotificationItem } from './notification-item';
 import type {
   ScNotification,
@@ -58,7 +60,7 @@ import type {
           <span
             class="bg-primary text-primary-foreground rounded-full px-1.5 py-0.5 text-xs"
           >
-            {{ unreadCount() }} new
+            {{ center.labels().newCount(unreadCount()) }}
           </span>
         }
       </button>
@@ -69,7 +71,7 @@ import type {
             type="button"
             class="hover:bg-muted text-muted-foreground hover:text-foreground rounded p-1 transition-colors"
             (click)="onMarkAllRead($event)"
-            [attr.aria-label]="'Mark all as read in ' + group().title"
+            [attr.aria-label]="center.labels().markAllReadIn(group().title)"
           >
             <svg siCircleCheckIcon class="size-3.5"></svg>
           </button>
@@ -77,7 +79,7 @@ import type {
             type="button"
             class="hover:bg-muted text-muted-foreground hover:text-foreground rounded p-1 transition-colors"
             (click)="onClearAll($event)"
-            [attr.aria-label]="'Clear all in ' + group().title"
+            [attr.aria-label]="center.labels().clearAllIn(group().title)"
           >
             <svg siTrash2Icon class="size-3.5"></svg>
           </button>
@@ -91,7 +93,7 @@ import type {
         [id]="'group-' + group().id"
         class="mt-1 space-y-1"
         role="feed"
-        aria-label="Notifications"
+        [attr.aria-label]="group().title"
       >
         @for (notification of notifications(); track notification.id) {
           <div
@@ -107,7 +109,7 @@ import type {
 
         @if (notifications().length === 0) {
           <p class="text-muted-foreground px-3 py-4 text-center text-sm">
-            No notifications
+            {{ center.labels().groupEmpty }}
           </p>
         }
       </div>
@@ -119,6 +121,7 @@ import type {
   encapsulation: ViewEncapsulation.None,
 })
 export class ScNotificationGroup {
+  protected readonly center = inject(SC_NOTIFICATION_CENTER);
   readonly classInput = input<string>('', { alias: 'class' });
   readonly group = input.required<ScNotificationGroupData>();
   readonly notifications = input<ScNotification[]>([]);

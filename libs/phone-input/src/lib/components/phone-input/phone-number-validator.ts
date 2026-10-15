@@ -20,7 +20,7 @@ export function phoneNumber<TPathKind extends PathKind = PathKind.Root>(
     if (!number || isValidPhoneNumber(number)) return undefined;
     return {
       kind: 'phoneNumber',
-      message: config?.message ?? 'Enter a valid phone number',
+      message: config?.message,
     };
   });
 }

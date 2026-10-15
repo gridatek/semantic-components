@@ -31,7 +31,9 @@ import { ScNotificationItem } from './notification-item';
     <!-- Header -->
     <div class="flex items-center justify-between border-b px-4 py-3">
       <div class="flex items-center gap-2">
-        <h2 class="text-lg font-semibold">{{ center.title() }}</h2>
+        @if (center.title()) {
+          <h2 class="text-lg font-semibold">{{ center.title() }}</h2>
+        }
         @if (center.totalUnread() > 0) {
           <span
             class="bg-primary text-primary-foreground rounded-full px-2 py-0.5 text-xs font-medium"
@@ -45,18 +47,18 @@ import { ScNotificationItem } from './notification-item';
         <!-- Filter tabs -->
         @if (center.showFilters()) {
           <div class="bg-muted flex items-center rounded-lg p-0.5">
-            @for (f of filters; track f.value) {
+            @for (f of filters; track f) {
               <button
                 type="button"
                 class="rounded-md px-2.5 py-1 text-xs font-medium transition-colors"
-                [class.bg-background]="center.filter() === f.value"
-                [class.text-foreground]="center.filter() === f.value"
-                [class.shadow-sm]="center.filter() === f.value"
-                [class.text-muted-foreground]="center.filter() !== f.value"
-                [class.hover:text-foreground]="center.filter() !== f.value"
-                (click)="center.setFilter(f.value)"
+                [class.bg-background]="center.filter() === f"
+                [class.text-foreground]="center.filter() === f"
+                [class.shadow-sm]="center.filter() === f"
+                [class.text-muted-foreground]="center.filter() !== f"
+                [class.hover:text-foreground]="center.filter() !== f"
+                (click)="center.setFilter(f)"
               >
-                {{ f.label }}
+                {{ center.labels()[f] }}
               </button>
             }
           </div>
@@ -68,8 +70,8 @@ import { ScNotificationItem } from './notification-item';
             type="button"
             class="hover:bg-muted text-muted-foreground hover:text-foreground rounded-lg p-1.5 transition-colors"
             (click)="center.onMarkAllRead()"
-            aria-label="Mark all as read"
-            title="Mark all as read"
+            [attr.aria-label]="center.labels().markAllRead"
+            [title]="center.labels().markAllRead"
           >
             <svg siCircleCheckIcon class="size-4.5"></svg>
           </button>
@@ -81,8 +83,8 @@ import { ScNotificationItem } from './notification-item';
             type="button"
             class="hover:bg-muted text-muted-foreground hover:text-foreground rounded-lg p-1.5 transition-colors"
             (click)="center.onClearAll()"
-            aria-label="Clear all notifications"
-            title="Clear all"
+            [attr.aria-label]="center.labels().clearAll"
+            [title]="center.labels().clearAll"
           >
             <svg siTrash2Icon class="size-4.5"></svg>
           </button>
@@ -132,7 +134,7 @@ import { ScNotificationItem } from './notification-item';
           @if (center.ungroupedNotifications().length > 0) {
             <div>
               <p class="text-muted-foreground px-3 py-2 text-sm font-medium">
-                Other
+                {{ center.labels().other }}
               </p>
               <div class="space-y-1">
                 @for (
@@ -155,7 +157,11 @@ import { ScNotificationItem } from './notification-item';
         </div>
       } @else {
         <!-- Flat list -->
-        <div class="space-y-1 p-2" role="feed" aria-label="Notifications">
+        <div
+          class="space-y-1 p-2"
+          role="feed"
+          [attr.aria-label]="center.title() || null"
+        >
           @for (
             notification of center.filteredNotifications();
             track notification.id
@@ -183,12 +189,11 @@ export class ScNotificationCenterContainer {
   readonly center = inject(SC_NOTIFICATION_CENTER);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly filters: { value: ScNotificationFilter; label: string }[] =
-    [
-      { value: 'all', label: 'All' },
-      { value: 'unread', label: 'Unread' },
-      { value: 'read', label: 'Read' },
-    ];
+  protected readonly filters: ScNotificationFilter[] = [
+    'all',
+    'unread',
+    'read',
+  ];
 
   protected readonly class = computed(() =>
     cn(

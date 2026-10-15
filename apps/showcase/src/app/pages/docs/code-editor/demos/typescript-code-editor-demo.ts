@@ -23,7 +23,12 @@ import {
           <span class="text-muted-foreground text-sm">component.ts</span>
           <span scCodeEditorLabel>typescript</span>
         </div>
-        <button scCodeEditorCopyButton [code]="typescriptCode"></button>
+        <button
+          scCodeEditorCopyButton
+          #copy="scCodeEditorCopyButton"
+          [attr.aria-label]="copy.copied() ? 'Copied' : 'Copy code'"
+          [code]="typescriptCode"
+        ></button>
       </div>
       <div
         scCodeEditorContent

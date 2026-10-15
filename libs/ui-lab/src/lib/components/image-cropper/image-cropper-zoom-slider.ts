@@ -14,7 +14,7 @@ import { SC_IMAGE_CROPPER } from './image-cropper';
   template: `
     <input
       scSlider
-      aria-label="Zoom level"
+      [attr.aria-label]="zoomLabel()"
       [min]="0.1"
       [max]="3"
       [step]="0.1"
@@ -32,6 +32,8 @@ import { SC_IMAGE_CROPPER } from './image-cropper';
 })
 export class ScImageCropperZoomSlider {
   protected readonly cropper = inject(SC_IMAGE_CROPPER);
+  /** The zoom slider's name — write it ("Zoom"). */
+  readonly zoomLabel = input.required<string>();
 
   readonly classInput = input<string>('', { alias: 'class' });
 

@@ -46,3 +46,28 @@ export interface ScNotificationGroupCollapseEvent {
   group: ScNotificationGroupData;
   collapsed: boolean;
 }
+
+/**
+ * The notification center's texts — the library writes none. The functions
+ * get what the text is about: a group's title, a count.
+ */
+export interface ScNotificationCenterLabels {
+  /** The filters. */
+  readonly all: string;
+  readonly unread: string;
+  readonly read: string;
+  /** The header's buttons. */
+  readonly markAllRead: string;
+  readonly clearAll: string;
+  /** The heading of the notifications in no group. */
+  readonly other: string;
+  /** Each notification's dismiss button. */
+  readonly dismiss: string;
+  /** A group with no notifications. */
+  readonly groupEmpty: string;
+  /** A group's unread count ("3 new"). */
+  readonly newCount: (count: number) => string;
+  /** A group's buttons ("Mark all as read in Today"). */
+  readonly markAllReadIn: (group: string) => string;
+  readonly clearAllIn: (group: string) => string;
+}

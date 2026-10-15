@@ -16,7 +16,7 @@ import { SC_VIDEO_PLAYER } from './video-player';
       type="button"
       (click)="player.toggleMute()"
       [class]="buttonClass()"
-      [attr.aria-label]="player.isMuted() ? 'Unmute' : 'Mute'"
+      [attr.aria-label]="player.isMuted() ? unmuteLabel() : muteLabel()"
     >
       <ng-content select="[volume-icon]" />
     </button>
@@ -27,7 +27,7 @@ import { SC_VIDEO_PLAYER } from './video-player';
       [step]="0.01"
       [value]="player.volume()"
       (valueChange)="player.setVolume($event)"
-      aria-label="Volume"
+      [attr.aria-label]="volumeLabel()"
     />
   `,
   host: {
@@ -40,6 +40,10 @@ import { SC_VIDEO_PLAYER } from './video-player';
 })
 export class ScVideoPlayerVolume {
   protected readonly player = inject(SC_VIDEO_PLAYER);
+  /** The names of its controls — write them ("Mute", "Unmute", "Volume"). */
+  readonly muteLabel = input.required<string>();
+  readonly unmuteLabel = input.required<string>();
+  readonly volumeLabel = input.required<string>();
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>

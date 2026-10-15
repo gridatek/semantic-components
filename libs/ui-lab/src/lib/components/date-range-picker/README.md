@@ -6,7 +6,7 @@ A composable date range picker built from directive primitives. Uses `ScPopoverP
 
 - `ScDateRangePicker` — Orchestrator directive (`div[scDateRangePicker]`)
 - `ScDateRangePickerTrigger` — Trigger button (`button[scDateRangePickerTrigger]`)
-- `ScDateRangePickerFooter` — Footer with Cancel/Apply buttons (`div[scDateRangePickerFooter]`)
+- `ScDateRangePickerFooter` — Footer with cancel and apply buttons (`div[scDateRangePickerFooter]`; their texts: `cancelLabel`, `applyLabel`, required)
 - `ScDateRangePickerPresets` — Presets sidebar container (`div[scDateRangePickerPresets]`)
 - `ScDateRangePickerPreset` — Individual preset button (`button[scDateRangePickerPreset]`)
 
@@ -19,7 +19,7 @@ A composable date range picker built from directive primitives. Uses `ScPopoverP
   <div scPopoverProvider [origin]="trigger.overlayOrigin" align="start">
     <button scDateRangePickerTrigger #trigger="scDateRangePickerTrigger">
       <svg siCalendarIcon class="mr-2 size-4"></svg>
-      <span [class]="drp.displayText() ? '' : 'text-muted-foreground'">{{ drp.displayText() || drp.placeholder() }}</span>
+      <span [class]="drp.displayText() ? '' : 'text-muted-foreground'">{{ drp.displayText() || 'Select date range' }}</span>
     </button>
     <ng-template scPopoverPortal>
       <div scPopover class="w-auto p-0">
@@ -31,7 +31,7 @@ A composable date range picker built from directive primitives. Uses `ScPopoverP
               <button scCalendarNext>...</button>
             </div>
           </div>
-          <div scDateRangePickerFooter></div>
+          <div scDateRangePickerFooter cancelLabel="Cancel" applyLabel="Apply"></div>
         </div>
       </div>
     </ng-template>
@@ -50,8 +50,8 @@ A composable date range picker built from directive primitives. Uses `ScPopoverP
       }
     </div>
     <div class="p-3">
-      <div scCalendar mode="range" [numberOfMonths]="2" ...>...</div>
-      <div scDateRangePickerFooter></div>
+      <div scCalendar aria-label="Calendar" mode="range" [numberOfMonths]="2" ...>...</div>
+      <div scDateRangePickerFooter cancelLabel="Cancel" applyLabel="Apply"></div>
     </div>
   </div>
 </div>
@@ -60,18 +60,25 @@ A composable date range picker built from directive primitives. Uses `ScPopoverP
 ```typescript
 import { createScDateRangePresets } from '@semantic-components/ui-lab';
 
-presets = createScDateRangePresets();
+presets = createScDateRangePresets({
+  today: 'Today',
+  yesterday: 'Yesterday',
+  last7Days: 'Last 7 days',
+  last14Days: 'Last 14 days',
+  last30Days: 'Last 30 days',
+  thisMonth: 'This month',
+  lastMonth: 'Last month',
+});
 ```
 
 ## API
 
 ### ScDateRangePicker
 
-| Input         | Type     | Default               | Description            |
-| ------------- | -------- | --------------------- | ---------------------- |
-| `class`       | `string` | `''`                  | Additional CSS classes |
-| `placeholder` | `string` | `'Select date range'` | Placeholder text       |
-| `dateFormat`  | `string` | `'short'`             | Date display format    |
+| Input        | Type     | Default   | Description            |
+| ------------ | -------- | --------- | ---------------------- |
+| `class`      | `string` | `''`      | Additional CSS classes |
+| `dateFormat` | `string` | `'short'` | Date display format    |
 
 | Signal/Output | Type          | Description                 |
 | ------------- | ------------- | --------------------------- |
@@ -112,7 +119,7 @@ Auto-highlights when active (matches current picker value).
 Use `[numberOfMonths]="2"` on `ScCalendar` to render two month grids side by side:
 
 ```html
-<div scCalendar mode="range" [numberOfMonths]="2" ...></div>
+<div scCalendar aria-label="Calendar" mode="range" [numberOfMonths]="2" ...></div>
 ```
 
 The calendar header controls the first month; the second month automatically follows.

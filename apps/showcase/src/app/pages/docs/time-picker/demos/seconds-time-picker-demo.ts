@@ -22,11 +22,19 @@ import {
   template: `
     <div class="flex flex-col gap-4">
       <div scTimePicker format="24h" [showSeconds]="true" [(value)]="time">
-        <input scTimePickerInput scTimePickerHoursInput />
+        <input scTimePickerInput scTimePickerHoursInput aria-label="Hours" />
         <span scTimePickerSeparator>:</span>
-        <input scTimePickerInput scTimePickerMinutesInput />
+        <input
+          scTimePickerInput
+          scTimePickerMinutesInput
+          aria-label="Minutes"
+        />
         <span scTimePickerSeparator>:</span>
-        <input scTimePickerInput scTimePickerSecondsInput />
+        <input
+          scTimePickerInput
+          scTimePickerSecondsInput
+          aria-label="Seconds"
+        />
       </div>
       <p class="text-muted-foreground text-sm">
         Selected: {{ formatTime(time()) }}

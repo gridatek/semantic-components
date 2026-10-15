@@ -1,11 +1,5 @@
-import {
-  Directive,
-  HostAttributeToken,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { Directive, computed, inject, input } from '@angular/core';
+import { cn, ɵwarnIfUnnamed } from '@semantic-components/ui';
 import { ScImageAnnotatorState } from './image-annotator-state';
 
 const SLIDER_KEYS = new Set([
@@ -20,7 +14,7 @@ const SLIDER_KEYS = new Set([
 ]);
 
 /**
- * Stroke width slider. Named "Line width" unless given an `aria-label`. Inside
+ * Stroke width slider: name it (`aria-label`). Inside
  * the toolbar it is its own Tab stop, and its arrow keys change the value
  * instead of moving between toolbar buttons.
  */
@@ -28,7 +22,6 @@ const SLIDER_KEYS = new Set([
   selector: 'input[type="range"][scImageAnnotatorLineWidth]',
   host: {
     'data-slot': 'image-annotator-line-width',
-    '[attr.aria-label]': 'label',
     '[value]': 'state.lineWidth()',
     '[class]': 'class()',
     '(input)': 'onInput($event)',
@@ -36,12 +29,13 @@ const SLIDER_KEYS = new Set([
   },
 })
 export class ScImageAnnotatorLineWidth {
+  constructor() {
+    ɵwarnIfUnnamed('scImageAnnotatorLineWidth');
+  }
+
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly state = inject(ScImageAnnotatorState);
-  protected readonly label =
-    inject(new HostAttributeToken('aria-label'), { optional: true }) ??
-    'Line width';
 
   protected readonly class = computed(() =>
     cn(

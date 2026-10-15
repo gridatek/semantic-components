@@ -13,7 +13,7 @@ import { SC_AUDIO_PLAYER } from './audio-player';
   template: `
     @if (player.currentTrack(); as track) {
       <p class="truncate font-medium">
-        {{ track.title || 'Unknown Track' }}
+        {{ track.title || unknownLabel() }}
       </p>
       @if (track.artist) {
         <p class="text-muted-foreground truncate text-sm">
@@ -21,7 +21,7 @@ import { SC_AUDIO_PLAYER } from './audio-player';
         </p>
       }
     } @else {
-      <p class="truncate font-medium">Unknown Track</p>
+      <p class="truncate font-medium">{{ unknownLabel() }}</p>
     }
   `,
   host: {
@@ -31,6 +31,8 @@ import { SC_AUDIO_PLAYER } from './audio-player';
 })
 export class ScAudioPlayerTrackInfo {
   readonly player = inject(SC_AUDIO_PLAYER);
+  /** Shown for a track without a title, or no track — write it ("Unknown track"). */
+  readonly unknownLabel = input.required<string>();
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>

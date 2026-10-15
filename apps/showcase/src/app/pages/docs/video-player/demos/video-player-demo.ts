@@ -59,19 +59,20 @@ import {
   template: `
     <div
       scVideoPlayer
+      aria-label="Video player"
       #player="scVideoPlayer"
       [src]="sampleVideo"
       [poster]="samplePoster"
     >
       <svg scVideoPlayerBufferingIndicator siLoaderIcon></svg>
 
-      <button scVideoPlayerBigPlay>
+      <button scVideoPlayerBigPlay aria-label="Play video">
         <svg siPlayIcon></svg>
       </button>
 
       <!-- Controls -->
       <div scVideoPlayerControls>
-        <div scVideoPlayerProgress></div>
+        <div scVideoPlayerProgress progressLabel="Video progress"></div>
 
         <div scVideoPlayerToolbar>
           <!-- Play/Pause -->
@@ -102,7 +103,12 @@ import {
           </button>
 
           <!-- Volume -->
-          <div scVideoPlayerVolume>
+          <div
+            scVideoPlayerVolume
+            muteLabel="Mute"
+            unmuteLabel="Unmute"
+            volumeLabel="Volume"
+          >
             @if (player.isMuted() || player.volume() === 0) {
               <svg volume-icon siVolumeXIcon></svg>
             } @else {
@@ -116,15 +122,20 @@ import {
           <div scVideoPlayerSpacer></div>
 
           <!-- Playback Speed -->
-          <div scVideoPlayerSpeed></div>
+          <div scVideoPlayerSpeed speedLabel="Playback speed"></div>
 
           <!-- Picture in Picture -->
-          <button scVideoPlayerPip>
+          <button scVideoPlayerPip aria-label="Picture in picture">
             <svg siPictureInPicture2Icon></svg>
           </button>
 
           <!-- Fullscreen -->
-          <button scVideoPlayerFullscreen>
+          <button
+            scVideoPlayerFullscreen
+            [attr.aria-label]="
+              player.isFullscreen() ? 'Exit fullscreen' : 'Enter fullscreen'
+            "
+          >
             @if (player.isFullscreen()) {
               <svg siMinimizeIcon></svg>
             } @else {

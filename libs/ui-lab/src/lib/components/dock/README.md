@@ -124,13 +124,12 @@ items: ScDockItemData[] = [
 
 #### Inputs
 
-| Input                | Type                            | Default              | Description             |
-| -------------------- | ------------------------------- | -------------------- | ----------------------- |
-| `position`           | `'bottom' \| 'left' \| 'right'` | `'bottom'`           | Dock position           |
-| `size`               | `'sm' \| 'md' \| 'lg'`          | `'md'`               | Icon size               |
-| `magnification`      | `boolean`                       | `true`               | Enable magnification    |
-| `magnificationScale` | `number`                        | `1.5`                | Max magnification scale |
-| `ariaLabel`          | `string`                        | `'Application dock'` | Accessible label        |
+| Input                | Type                            | Default    | Description             |
+| -------------------- | ------------------------------- | ---------- | ----------------------- |
+| `position`           | `'bottom' \| 'left' \| 'right'` | `'bottom'` | Dock position           |
+| `size`               | `'sm' \| 'md' \| 'lg'`          | `'md'`     | Icon size               |
+| `magnification`      | `boolean`                       | `true`     | Enable magnification    |
+| `magnificationScale` | `number`                        | `1.5`      | Max magnification scale |
 
 #### Outputs
 

@@ -3,8 +3,6 @@ import { outputFromObservable } from '@angular/core/rxjs-interop';
 import { cn } from '@semantic-components/ui';
 import { ScImageAnnotatorState } from './image-annotator-state';
 import {
-  DEFAULT_ANNOTATOR_COLORS,
-  DEFAULT_ANNOTATOR_TOOLS,
   type ScAnnotation,
   type ScAnnotatorColor,
   type ScAnnotatorToolOption,
@@ -33,13 +31,11 @@ export class ScImageAnnotator {
   /** Image coordinate height and export height, in pixels. */
   readonly height = input(400);
   /** Accessible name of the image. */
-  readonly alt = input('Annotated image');
-  readonly colors = input<readonly ScAnnotatorColor[]>(
-    DEFAULT_ANNOTATOR_COLORS,
-  );
-  readonly tools = input<readonly ScAnnotatorToolOption[]>(
-    DEFAULT_ANNOTATOR_TOOLS,
-  );
+  readonly alt = input<string>('');
+  /** The stroke colours, with your names (`{ value: '#ef4444', label: 'Red' }`). */
+  readonly colors = input.required<readonly ScAnnotatorColor[]>();
+  /** The tools, with your names (`{ id: 'pen', label: 'Pen' }`). */
+  readonly tools = input.required<readonly ScAnnotatorToolOption[]>();
 
   private readonly state = inject(ScImageAnnotatorState);
 

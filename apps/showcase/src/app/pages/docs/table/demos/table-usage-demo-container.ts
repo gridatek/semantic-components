@@ -86,7 +86,9 @@ import {
   template: \`
     <div scTableContainer>
       <table scTable>
-        <caption scTableCaption>A list of your recent invoices.</caption>
+        <caption scTableCaption>
+          A list of your recent invoices.
+        </caption>
         <thead scTableHeader>
           <tr scTableRow>
             <th scTableHeaderCell>Invoice</th>

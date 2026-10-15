@@ -144,10 +144,10 @@ Scrollable content area.
 
 **Inputs:**
 
-| Input        | Type     | Default         | Description                  |
-| ------------ | -------- | --------------- | ---------------------------- |
-| `maxHeight`  | `string` | `'600px'`       | Maximum content height       |
-| `aria-label` | `string` | `'Differences'` | Name of the scrollable group |
+| Input        | Type      | Default   | Description                             |
+| ------------ | --------- | --------- | --------------------------------------- |
+| `maxHeight`  | `string`  | `'600px'` | Maximum content height                  |
+| `aria-label` | attribute | none      | Name of the scrollable group — write it |
 
 ### ScDiffViewerSplit
 

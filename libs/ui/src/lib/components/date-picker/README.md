@@ -9,11 +9,11 @@ A composable date picker built from directives. The consumer writes all markup a
   <div scPopoverProvider [origin]="trigger.overlayOrigin" align="start">
     <button scDatePickerTrigger #trigger="scDatePickerTrigger">
       <svg siCalendarIcon class="mr-2 size-4"></svg>
-      <span [class]="dp.displayText() ? '' : 'text-muted-foreground'">{{ dp.displayText() || dp.placeholder() }}</span>
+      <span [class]="dp.displayText() ? '' : 'text-muted-foreground'">{{ dp.displayText() || 'Pick a date' }}</span>
     </button>
     <ng-template scPopoverPortal>
       <div scPopover class="w-auto p-0">
-        <div scCalendar [value]="dp.value()" (valueChange)="dp.onValueChange($event)" #cal="scCalendar">
+        <div scCalendar aria-label="Calendar" [value]="dp.value()" (valueChange)="dp.onValueChange($event)" #cal="scCalendar">
           <div scCalendarHeader>
             <button scCalendarPrevious>
               <svg siChevronLeftIcon class="size-4"></svg>
@@ -43,11 +43,10 @@ Root directive that manages value, display text, and auto-close logic.
 
 **Inputs:**
 
-| Input         | Type                               | Default         | Description      |
-| ------------- | ---------------------------------- | --------------- | ---------------- |
-| `mode`        | `'single' \| 'multiple'\| 'range'` | `'single'`      | Selection mode   |
-| `placeholder` | `string`                           | `'Pick a date'` | Placeholder text |
-| `class`       | `string`                           | `''`            | CSS classes      |
+| Input   | Type                               | Default    | Description    |
+| ------- | ---------------------------------- | ---------- | -------------- |
+| `mode`  | `'single' \| 'multiple'\| 'range'` | `'single'` | Selection mode |
+| `class` | `string`                           | `''`       | CSS classes    |
 
 **Two-way Bindings:**
 
@@ -89,7 +88,7 @@ Trigger button with input-like styling and popover toggle behavior.
 ### Date Range Picker
 
 ```html
-<div scDatePicker mode="range" [(value)]="range" placeholder="Pick a date range" #dp="scDatePicker">...</div>
+<div scDatePicker mode="range" [(value)]="range" #dp="scDatePicker">...</div>
 ```
 
 ### Multiple Dates
@@ -103,7 +102,7 @@ Trigger button with input-like styling and popover toggle behavior.
 Pass `[minDate]` and `[maxDate]` directly on the `scCalendar` directive:
 
 ```html
-<div scCalendar [value]="dp.value()" [minDate]="minDate" [maxDate]="maxDate" (valueChange)="dp.onValueChange($event)">...</div>
+<div scCalendar aria-label="Calendar" [value]="dp.value()" [minDate]="minDate" [maxDate]="maxDate" (valueChange)="dp.onValueChange($event)">...</div>
 ```
 
 ## Features

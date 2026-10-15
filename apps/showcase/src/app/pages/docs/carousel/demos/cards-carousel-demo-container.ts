@@ -49,11 +49,16 @@ import {
   ],
   template: \`
     <div class="mx-auto w-full max-w-[12rem] sm:max-w-xs">
-      <div scCarousel aria-label="Cards carousel" class="w-full">
+      <div
+        scCarousel
+        aria-roledescription="carousel"
+        aria-label="Cards carousel"
+        class="w-full"
+      >
         <div scCarouselViewport>
           <div scCarouselTrack>
             @for (card of cards; track card.title) {
-              <div scCarouselItem>
+              <div scCarouselItem aria-roledescription="slide">
                 <div class="p-1">
                   <div scCard>
                     <div scCardBody class="p-6">

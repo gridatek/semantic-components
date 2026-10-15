@@ -22,7 +22,8 @@ import { type ScNotification, ScNotificationCenter, ScNotificationCenterContaine
 ### Basic Usage
 
 ```html
-<div scNotificationCenter [(notifications)]="notifications" (markRead)="onMarkRead($event)" (dismiss)="onDismiss($event)">
+<!-- The texts are yours: see ScNotificationCenterLabels below. -->
+<div scNotificationCenter [labels]="notificationLabels" [(notifications)]="notifications" (markRead)="onMarkRead($event)" (dismiss)="onDismiss($event)">
   <div scNotificationCenterContainer class="h-full"></div>
 </div>
 ```
@@ -53,7 +54,7 @@ notifications = signal<ScNotification[]>([
 ### With Groups
 
 ```html
-<div scNotificationCenter [(notifications)]="notifications" [groups]="groups()">
+<div scNotificationCenter [labels]="notificationLabels" [(notifications)]="notifications" [groups]="groups()">
   <div scNotificationCenterContainer class="h-full"></div>
 </div>
 ```
@@ -125,7 +126,7 @@ notifications = signal<ScNotification[]>([
 ### Custom Empty State
 
 ```html
-<div scNotificationCenter [(notifications)]="notifications" emptyTitle="All caught up!" emptyDescription="No new notifications to show.">
+<div scNotificationCenter [labels]="notificationLabels" [(notifications)]="notifications" emptyTitle="All caught up!" emptyDescription="No new notifications to show.">
   <div scNotificationCenterContainer class="h-full"></div>
 </div>
 ```
@@ -133,7 +134,7 @@ notifications = signal<ScNotification[]>([
 ### Without Filters
 
 ```html
-<div scNotificationCenter [(notifications)]="notifications" [showFilters]="false">
+<div scNotificationCenter [labels]="notificationLabels" [(notifications)]="notifications" [showFilters]="false">
   <div scNotificationCenterContainer class="h-full"></div>
 </div>
 ```
@@ -141,7 +142,7 @@ notifications = signal<ScNotification[]>([
 ### Custom Container Styling
 
 ```html
-<div scNotificationCenter [(notifications)]="notifications" class="h-[500px] max-w-md">
+<div scNotificationCenter [labels]="notificationLabels" [(notifications)]="notifications" class="h-[500px] max-w-md">
   <div scNotificationCenterContainer class="h-full"></div>
 </div>
 ```
@@ -158,18 +159,37 @@ The root directive that manages notification state and business logic.
 
 #### Inputs
 
-| Input              | Type                        | Default                   | Description                                                |
-| ------------------ | --------------------------- | ------------------------- | ---------------------------------------------------------- |
-| `class`            | `string`                    | `''`                      | Additional CSS classes                                     |
-| `notifications`    | `ScNotification[]`          | `[]`                      | Array of notifications (two-way)                           |
-| `groups`           | `ScNotificationGroupData[]` | `[]`                      | Groups for categorizing                                    |
-| `title`            | `string`                    | `'Notifications'`         | Header title                                               |
-| `aria-label`       | `string`                    | `''`                      | Region name (defaults to `title`); make it unique per page |
-| `showFilters`      | `boolean`                   | `true`                    | Show all/unread/read filter tabs                           |
-| `showClearAll`     | `boolean`                   | `true`                    | Show clear all button                                      |
-| `showDismiss`      | `boolean`                   | `true`                    | Show dismiss button on items                               |
-| `emptyTitle`       | `string`                    | `'No notifications'`      | Empty state title                                          |
-| `emptyDescription` | `string`                    | `"You're all caught up!"` | Empty state description                                    |
+| Input              | Type                         | Default  | Description                                                |
+| ------------------ | ---------------------------- | -------- | ---------------------------------------------------------- |
+| `class`            | `string`                     | `''`     | Additional CSS classes                                     |
+| `notifications`    | `ScNotification[]`           | `[]`     | Array of notifications (two-way)                           |
+| `groups`           | `ScNotificationGroupData[]`  | `[]`     | Groups for categorizing                                    |
+| `title`            | `string`                     | `''`     | Header title — write it                                    |
+| `labels`           | `ScNotificationCenterLabels` | required | Its texts: filters, buttons, "Other", counts — write them  |
+| `aria-label`       | `string`                     | `''`     | Region name (defaults to `title`); make it unique per page |
+| `showFilters`      | `boolean`                    | `true`   | Show all/unread/read filter tabs                           |
+| `showClearAll`     | `boolean`                    | `true`   | Show clear all button                                      |
+| `showDismiss`      | `boolean`                    | `true`   | Show dismiss button on items                               |
+| `emptyTitle`       | `string`                     | `''`     | Empty state title — write it                               |
+| `emptyDescription` | `string`                     | `''`     | Empty state description — write it                         |
+
+The texts (`ScNotificationCenterLabels`), written by you — relative times ("5 minutes ago") follow the app's locale:
+
+```ts
+readonly notificationLabels: ScNotificationCenterLabels = {
+  all: 'All',
+  unread: 'Unread',
+  read: 'Read',
+  markAllRead: 'Mark all as read',
+  clearAll: 'Clear all notifications',
+  other: 'Other',
+  dismiss: 'Dismiss notification',
+  groupEmpty: 'No notifications',
+  newCount: (count) => `${count} new`,
+  markAllReadIn: (group) => `Mark all as read in ${group}`,
+  clearAllIn: (group) => `Clear all in ${group}`,
+};
+```
 
 #### Outputs
 
@@ -188,7 +208,7 @@ The root directive that manages notification state and business logic.
 `scNotificationCenter` - Access directive instance via template reference variable
 
 ```html
-<div scNotificationCenter #center="scNotificationCenter">
+<div scNotificationCenter [labels]="notificationLabels" #center="scNotificationCenter">
   <!-- Access center.totalUnread(), center.filteredNotifications(), etc. -->
 </div>
 ```
@@ -243,7 +263,7 @@ The notification center follows a composable architecture pattern that separates
 ### Example with Template Reference
 
 ```html
-<div scNotificationCenter #center="scNotificationCenter" [(notifications)]="notifications">
+<div scNotificationCenter [labels]="notificationLabels" #center="scNotificationCenter" [(notifications)]="notifications">
   <!-- Access state -->
   <p>Total unread: {{ center.totalUnread() }}</p>
   <p>Filtered: {{ center.filteredNotifications().length }}</p>
@@ -258,7 +278,7 @@ The notification center follows a composable architecture pattern that separates
 You can build custom UIs by accessing the directive's state:
 
 ```html
-<div scNotificationCenter #center="scNotificationCenter" [(notifications)]="notifications">
+<div scNotificationCenter [labels]="notificationLabels" #center="scNotificationCenter" [(notifications)]="notifications">
   <!-- Custom UI using directive state -->
   <div class="custom-header">
     <h2>{{ center.title() }}</h2>

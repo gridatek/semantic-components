@@ -18,10 +18,9 @@ export class ScLightboxImage {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
+  /** The image's own `alt`: give each image one. */
   protected readonly alt = computed(
-    () =>
-      this.provider.currentImage().alt ||
-      'Image ' + (this.provider.currentIndex() + 1),
+    () => this.provider.currentImage().alt ?? '',
   );
 
   protected readonly class = computed(() =>

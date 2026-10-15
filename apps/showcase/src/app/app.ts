@@ -1,6 +1,12 @@
-import { Component, ViewEncapsulation, computed, input } from '@angular/core';
+import {
+  Component,
+  ViewEncapsulation,
+  computed,
+  inject,
+  input,
+} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { cn } from '@semantic-components/ui';
+import { ScToaster, cn } from '@semantic-components/ui';
 import { CommandPalette } from './components/command-palette/command-palette';
 
 @Component({
@@ -22,4 +28,9 @@ export class App {
   });
 
   protected readonly class = computed(() => cn('block', this.classInput()));
+
+  constructor() {
+    // The toasts' close buttons: the library writes no text.
+    inject(ScToaster).setCloseLabel('Close');
+  }
 }

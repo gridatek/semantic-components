@@ -47,7 +47,6 @@ import {
         <div
           scDateRangePicker
           dateFormat="short"
-          placeholder="Short format"
           [(value)]="shortRange"
           #drpShort="scDateRangePicker"
         >
@@ -64,7 +63,7 @@ import {
               <span
                 [class]="drpShort.displayText() ? '' : 'text-muted-foreground'"
               >
-                {{ drpShort.displayText() || drpShort.placeholder() }}
+                {{ drpShort.displayText() || 'Short format' }}
               </span>
             </button>
             <ng-template scPopoverPortal>
@@ -72,6 +71,7 @@ import {
                 <div class="p-3">
                   <div
                     scCalendar
+                    aria-label="Calendar"
                     mode="range"
                     [value]="drpShort.value()"
                     (valueChange)="drpShort.onValueChange($event)"
@@ -91,7 +91,11 @@ import {
                       </button>
                     </div>
                   </div>
-                  <div scDateRangePickerFooter></div>
+                  <div
+                    scDateRangePickerFooter
+                    cancelLabel="Cancel"
+                    applyLabel="Apply"
+                  ></div>
                 </div>
               </div>
             </ng-template>
@@ -103,7 +107,6 @@ import {
         <div
           scDateRangePicker
           dateFormat="long"
-          placeholder="Long format"
           [(value)]="longRange"
           #drpLong="scDateRangePicker"
         >
@@ -120,7 +123,7 @@ import {
               <span
                 [class]="drpLong.displayText() ? '' : 'text-muted-foreground'"
               >
-                {{ drpLong.displayText() || drpLong.placeholder() }}
+                {{ drpLong.displayText() || 'Long format' }}
               </span>
             </button>
             <ng-template scPopoverPortal>
@@ -128,6 +131,7 @@ import {
                 <div class="p-3">
                   <div
                     scCalendar
+                    aria-label="Calendar"
                     mode="range"
                     [value]="drpLong.value()"
                     (valueChange)="drpLong.onValueChange($event)"
@@ -147,7 +151,11 @@ import {
                       </button>
                     </div>
                   </div>
-                  <div scDateRangePickerFooter></div>
+                  <div
+                    scDateRangePickerFooter
+                    cancelLabel="Cancel"
+                    applyLabel="Apply"
+                  ></div>
                 </div>
               </div>
             </ng-template>
@@ -159,7 +167,6 @@ import {
         <div
           scDateRangePicker
           dateFormat="iso"
-          placeholder="ISO format"
           [(value)]="isoRange"
           #drpIso="scDateRangePicker"
         >
@@ -176,7 +183,7 @@ import {
               <span
                 [class]="drpIso.displayText() ? '' : 'text-muted-foreground'"
               >
-                {{ drpIso.displayText() || drpIso.placeholder() }}
+                {{ drpIso.displayText() || 'ISO format' }}
               </span>
             </button>
             <ng-template scPopoverPortal>
@@ -184,6 +191,7 @@ import {
                 <div class="p-3">
                   <div
                     scCalendar
+                    aria-label="Calendar"
                     mode="range"
                     [value]="drpIso.value()"
                     (valueChange)="drpIso.onValueChange($event)"
@@ -203,7 +211,11 @@ import {
                       </button>
                     </div>
                   </div>
-                  <div scDateRangePickerFooter></div>
+                  <div
+                    scDateRangePickerFooter
+                    cancelLabel="Cancel"
+                    applyLabel="Apply"
+                  ></div>
                 </div>
               </div>
             </ng-template>

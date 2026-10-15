@@ -34,6 +34,7 @@ import {
       <div class="w-fit rounded-md border">
         <div
           scCalendar
+          aria-label="Calendar"
           [(value)]="selectedDate"
           [showOutsideDays]="false"
           #cal="scCalendar"

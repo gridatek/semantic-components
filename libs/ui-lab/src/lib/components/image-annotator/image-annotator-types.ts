@@ -19,7 +19,7 @@ export interface ScAnnotation {
 
 export interface ScAnnotatorColor {
   value: string;
-  /** Accessible name, e.g. "Red". */
+  /** Its name — yours ("Red"): name the button with it. */
   label: string;
 }
 
@@ -34,23 +34,3 @@ export interface ScImageAnnotatorSnapshot {
   currentColor: string;
   lineWidth: number;
 }
-
-export const DEFAULT_ANNOTATOR_COLORS: readonly ScAnnotatorColor[] = [
-  { value: '#ef4444', label: 'Red' },
-  { value: '#f97316', label: 'Orange' },
-  { value: '#eab308', label: 'Yellow' },
-  { value: '#22c55e', label: 'Green' },
-  { value: '#3b82f6', label: 'Blue' },
-  { value: '#8b5cf6', label: 'Purple' },
-  { value: '#000000', label: 'Black' },
-  { value: '#ffffff', label: 'White' },
-];
-
-export const DEFAULT_ANNOTATOR_TOOLS: readonly ScAnnotatorToolOption[] = [
-  { id: 'pen', label: 'Pen' },
-  { id: 'line', label: 'Line' },
-  { id: 'rectangle', label: 'Rectangle' },
-  { id: 'circle', label: 'Circle' },
-  { id: 'arrow', label: 'Arrow' },
-  { id: 'eraser', label: 'Eraser' },
-];

@@ -26,7 +26,6 @@ import { SC_ORG_CHART } from './org-chart-types';
   providers: [{ provide: SC_ORG_CHART, useExisting: ScOrgChart }],
   host: {
     'data-slot': 'org-chart',
-    '[attr.aria-label]': 'ariaLabel()',
     '[class]': 'class()',
   },
 })
@@ -36,7 +35,6 @@ export class ScOrgChart {
   readonly direction = input<ScOrgChartDirection>('vertical');
   readonly collapsible = input(true);
   readonly compact = input(false);
-  readonly ariaLabel = input<string>('Organization chart');
 
   readonly classInput = input<string>('', { alias: 'class' });
 

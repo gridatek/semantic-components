@@ -83,7 +83,13 @@ import type { ScTransferListItemData } from '@semantic-components/ui-lab';
           </div>
         </div>
 
-        <div scTransferListActions></div>
+        <div
+          scTransferListActions
+          moveSelectedLabel="Move selected to right"
+          returnSelectedLabel="Move selected to left"
+          moveAllLabel="Move all to right"
+          returnAllLabel="Move all to left"
+        ></div>
 
         <div scTransferListTarget #target="scTransferListTarget">
           <div scTransferListHeader>
