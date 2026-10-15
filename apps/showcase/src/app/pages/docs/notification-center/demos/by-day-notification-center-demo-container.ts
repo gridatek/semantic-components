@@ -1,23 +1,23 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { GroupedNotificationCenterDemo } from './grouped-notification-center-demo';
+import { ByDayNotificationCenterDemo } from './by-day-notification-center-demo';
 
 @Component({
-  selector: 'app-grouped-notification-center-demo-container',
-  imports: [DemoContainer, GroupedNotificationCenterDemo],
+  selector: 'app-by-day-notification-center-demo-container',
+  imports: [DemoContainer, ByDayNotificationCenterDemo],
   template: `
     <app-demo-container
-      title="Activity, by group"
-      demoUrl="/demos/notification-center/grouped-notification-center-demo"
+      title="Activity, by day"
+      demoUrl="/demos/notification-center/by-day-notification-center-demo"
       [code]="code"
     >
-      <app-grouped-notification-center-demo />
+      <app-by-day-notification-center-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class GroupedNotificationCenterDemoContainer {
+export class ByDayNotificationCenterDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
 import {
@@ -62,7 +62,7 @@ const minutesAgo = (minutes: number) => new Date(Date.now() - minutes * 60000);
 
 /** Notifications in groups, each with its own buttons. */
 @Component({
-  selector: 'app-grouped-notification-center-demo',
+  selector: 'app-by-day-notification-center-demo',
   imports: [
     ScButton,
     ScNotificationCenter,
@@ -213,7 +213,7 @@ const minutesAgo = (minutes: number) => new Date(Date.now() - minutes * 60000);
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class GroupedNotificationCenterDemo {
+export class ByDayNotificationCenterDemo {
   readonly groups = [
     { id: 'messages', title: 'Messages' },
     { id: 'updates', title: 'Updates' },

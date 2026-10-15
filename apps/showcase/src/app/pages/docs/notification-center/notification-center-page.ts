@@ -2,15 +2,15 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { ScHeading } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
+import { ByDayNotificationCenterDemoContainer } from './demos/by-day-notification-center-demo-container';
 import { EmptyNotificationCenterDemoContainer } from './demos/empty-notification-center-demo-container';
-import { GroupedNotificationCenterDemoContainer } from './demos/grouped-notification-center-demo-container';
 import { InboxNotificationCenterDemoContainer } from './demos/inbox-notification-center-demo-container';
 
 @Component({
   selector: 'app-notification-center-page',
   imports: [
     InboxNotificationCenterDemoContainer,
-    GroupedNotificationCenterDemoContainer,
+    ByDayNotificationCenterDemoContainer,
     EmptyNotificationCenterDemoContainer,
     TocHeading,
     ComponentBadges,
@@ -32,27 +32,25 @@ import { InboxNotificationCenterDemoContainer } from './demos/inbox-notification
         <h2 scHeading appToc>Inbox</h2>
         <p class="text-muted-foreground">
           A bell with the unread count, opening the notifications in a popover:
-          filters, mark all as read, and on each notification its action, mark
-          as read and dismiss. Times are written in the app's language and kept
-          up to date.
+          all or unread, mark all as read, and on each notification its action,
+          mark as read and dismiss. Times are written in the app's language and
+          kept up to date.
         </p>
         <app-inbox-notification-center-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Groups</h2>
+        <h2 scHeading appToc>By day</h2>
         <p class="text-muted-foreground">
-          Each notification's
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">group</code>,
-          shown with
+          Sections, as most apps show them — Today, Yesterday, Earlier: split
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">visible()</code>
+          by the notifications' times, and name each
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >visibleIn(group)</code
-          >. In a
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >scNotificationGroup</code
-          >, mark all as read and clear all act on the group alone.
+            >scNotificationSection</code
+          >
+          by its title.
         </p>
-        <app-grouped-notification-center-demo-container />
+        <app-by-day-notification-center-demo-container />
       </section>
 
       <section class="space-y-4">

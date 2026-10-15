@@ -4,7 +4,7 @@ import { SC_NOTIFICATION_CENTER } from './notification-center';
 import type { ScNotificationFilterValue } from './notification-types';
 
 /**
- * Shows the notifications of one filter: `all`, `unread` or `read`
+ * Shows the notifications of one filter: `all` or `unread`
  * (`aria-pressed` when it is the center's). Write its text.
  */
 @Directive({

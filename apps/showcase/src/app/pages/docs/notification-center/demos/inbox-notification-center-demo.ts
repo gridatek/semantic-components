@@ -140,7 +140,6 @@ const minutesAgo = (minutes: number) => new Date(Date.now() - minutes * 60000);
               <div scNotificationFilters aria-label="Show">
                 <button scNotificationFilter="all">All</button>
                 <button scNotificationFilter="unread">Unread</button>
-                <button scNotificationFilter="read">Read</button>
               </div>
             </div>
 

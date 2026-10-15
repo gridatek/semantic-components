@@ -12,9 +12,7 @@ export interface ScNotification {
   /** When it happened: `scNotificationTime` writes how long ago. */
   readonly timestamp: Date;
   readonly type?: ScNotificationType;
-  /** The group it belongs to (your id), for `visibleIn(group)`. */
-  readonly group?: string;
 }
 
-/** Which notifications are shown. */
-export type ScNotificationFilterValue = 'all' | 'unread' | 'read';
+/** Which notifications are shown: all of them, or the unread ones. */
+export type ScNotificationFilterValue = 'all' | 'unread';

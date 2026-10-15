@@ -38,7 +38,7 @@ export const SC_NOTIFICATION_CENTER = new InjectionToken<
 })
 export class ScNotificationCenter<T extends ScNotification = ScNotification> {
   readonly notifications = model<readonly T[]>([]);
-  /** Which are shown: `all`, `unread` or `read`. */
+  /** Which are shown: `all` or `unread`. */
   readonly filter = model<ScNotificationFilterValue>('all');
   readonly classInput = input<string>('', { alias: 'class' });
 
@@ -48,9 +48,9 @@ export class ScNotificationCenter<T extends ScNotification = ScNotification> {
   /** The notifications the filter shows. */
   readonly visible = computed(() => {
     const filter = this.filter();
-    return this.notifications().filter(
-      (n) => filter === 'all' || n.read === (filter === 'read'),
-    );
+    return filter === 'all'
+      ? this.notifications()
+      : this.notifications().filter((n) => !n.read);
   });
 
   readonly unreadCount = computed(
@@ -70,30 +70,15 @@ export class ScNotificationCenter<T extends ScNotification = ScNotification> {
     });
   }
 
-  /** The shown notifications of one group. */
-  visibleIn(group: string): readonly T[] {
-    return this.visible().filter((n) => n.group === group);
-  }
-
-  /** The unread notifications of one group, or of all. */
-  unreadIn(group?: string): number {
-    return this.notifications().filter(
-      (n) => !n.read && (group === undefined || n.group === group),
-    ).length;
-  }
-
   markRead(id: string, read = true): void {
     this.notifications.update((list) =>
       list.map((n) => (n.id === id ? { ...n, read } : n)),
     );
   }
 
-  /** Marks every notification read — or only those of a group. */
-  markAllRead(group?: string): void {
+  markAllRead(): void {
     this.notifications.update((list) =>
-      list.map((n) =>
-        group === undefined || n.group === group ? { ...n, read: true } : n,
-      ),
+      list.map((n) => (n.read ? n : { ...n, read: true })),
     );
   }
 
@@ -101,10 +86,8 @@ export class ScNotificationCenter<T extends ScNotification = ScNotification> {
     this.notifications.update((list) => list.filter((n) => n.id !== id));
   }
 
-  /** Removes every notification — or only those of a group. */
-  clear(group?: string): void {
-    this.notifications.update((list) =>
-      group === undefined ? [] : list.filter((n) => n.group !== group),
-    );
+  /** Removes every notification. */
+  clear(): void {
+    this.notifications.set([]);
   }
 }

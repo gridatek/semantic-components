@@ -2508,10 +2508,10 @@ export const demosRoutes: Route[] = [
     path: 'demos/notification-center',
     children: [
       {
-        path: 'grouped-notification-center-demo',
+        path: 'by-day-notification-center-demo',
         loadComponent: () =>
-          import('../pages/docs/notification-center/demos/grouped-notification-center-demo').then(
-            (m) => m.GroupedNotificationCenterDemo,
+          import('../pages/docs/notification-center/demos/by-day-notification-center-demo').then(
+            (m) => m.ByDayNotificationCenterDemo,
           ),
       },
       {
