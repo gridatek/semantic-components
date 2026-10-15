@@ -1,7 +1,10 @@
 import { ToolbarWidget } from '@angular/aria/toolbar';
 import { Directive, computed, inject, input } from '@angular/core';
 import { bindInput, cn, toggleVariants } from '@semantic-components/ui';
-import { SC_EDITOR, type ScEditorHeadingLevel } from './editor';
+import { SC_EDITOR } from './editor';
+
+export type ScEditorHeadingLevel =
+  'p' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 
 /**
  * The block type button (paragraph, headings): make it the trigger of your
@@ -25,7 +28,14 @@ export class ScEditorHeading {
   readonly disabledInput = input(false, { alias: 'disabled' });
 
   /** The block type at the selection. */
-  readonly level = computed(() => this.editor.heading());
+  readonly level = computed<ScEditorHeadingLevel>(() => {
+    for (let level = 1; level <= 6; level++) {
+      if (this.editor.isActive('heading', { level })) {
+        return `h${level}` as ScEditorHeadingLevel;
+      }
+    }
+    return 'p';
+  });
 
   protected readonly class = computed(() =>
     cn(

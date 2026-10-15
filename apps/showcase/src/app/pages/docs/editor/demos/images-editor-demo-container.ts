@@ -29,10 +29,14 @@ import {
   ScEditorSeparator,
   ScEditorToolbar,
   ScEditorToolbarGroup,
-  type ScEditorUploadHandler,
   provideEditor,
 } from '@semantic-components/editor';
-import { ScEditorImage, withImages } from '@semantic-components/editor/images';
+import {
+  ScEditorImage,
+  type ScEditorUploadHandler,
+  ScEditorUploads,
+  withImages,
+} from '@semantic-components/editor/images';
 import { ScButton, ScProgress } from '@semantic-components/ui';
 import {
   SiBoldIcon,
@@ -56,6 +60,7 @@ import {
     ScEditorContent,
     ScEditorFooter,
     ScEditorImage,
+    ScEditorUploads,
     ScEditorItalic,
     ScEditorSeparator,
     ScEditorToolbar,
@@ -70,7 +75,7 @@ import {
     <div class="w-full">
       <div
         scEditor
-        #editor="scEditor"
+        #images="scEditorUploads"
         [formField]="editorForm.body"
         [upload]="upload"
         class="overflow-hidden rounded-lg border"
@@ -103,9 +108,9 @@ import {
           placeholder="Write, or drop an image here…"
         ></div>
 
-        @if (editor.uploads().length) {
+        @if (images.uploads().length) {
           <div scEditorFooter>
-            @for (upload of editor.uploads(); track upload.id) {
+            @for (upload of images.uploads(); track upload.id) {
               <div class="flex items-center gap-2">
                 <span class="truncate">Uploading {{ upload.file.name }}</span>
                 <div
@@ -119,7 +124,7 @@ import {
                   variant="ghost"
                   size="icon-xs"
                   type="button"
-                  (click)="editor.cancelUpload(upload.id)"
+                  (click)="images.cancel(upload.id)"
                 >
                   <svg siXIcon></svg>
                   <span class="sr-only">Cancel upload</span>

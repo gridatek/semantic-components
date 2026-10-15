@@ -1,6 +1,6 @@
 import { ToolbarWidget } from '@angular/aria/toolbar';
 import { Directive, computed, inject, input } from '@angular/core';
-import { SC_EDITOR, assertEditorFeature } from '@semantic-components/editor';
+import { SC_EDITOR, ɵassertEditorFeature } from '@semantic-components/editor';
 import { bindInput, cn, toggleVariants } from '@semantic-components/ui';
 
 /**
@@ -35,7 +35,7 @@ export class ScEditorSubscript {
   );
 
   constructor() {
-    assertEditorFeature('withScripts', 'scEditorSubscript');
+    ɵassertEditorFeature('withScripts', 'scEditorSubscript');
     bindInput(inject(ToolbarWidget).disabled, this.disabled);
   }
 

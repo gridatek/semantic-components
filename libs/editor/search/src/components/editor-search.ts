@@ -1,6 +1,6 @@
 import { ToolbarWidget } from '@angular/aria/toolbar';
 import { DestroyRef, Directive, computed, inject, input } from '@angular/core';
-import { SC_EDITOR, assertEditorFeature } from '@semantic-components/editor';
+import { SC_EDITOR, ɵassertEditorFeature } from '@semantic-components/editor';
 import { bindInput, cn, toggleVariants } from '@semantic-components/ui';
 import { editorSearch } from './editor-search-state';
 
@@ -46,7 +46,7 @@ export class ScEditorSearch {
 
   constructor() {
     bindInput(inject(ToolbarWidget).disabled, this.disabled);
-    assertEditorFeature('withSearch', 'scEditorSearch');
+    ɵassertEditorFeature('withSearch', 'scEditorSearch');
     inject(DestroyRef).onDestroy(this.search.register());
   }
 }

@@ -19,7 +19,12 @@ export class ScEditorCharCount {
   readonly editor = inject(SC_EDITOR);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  readonly charCount = computed(() => this.editor.characters());
+  readonly charCount = computed(() => {
+    this.editor.contentVersion();
+    return (
+      this.editor.editorInstance()?.storage.characterCount.characters() ?? 0
+    );
+  });
 
   /** The editor's limit, or null. */
   readonly limit = computed(() => this.editor.characterLimit());

@@ -1,7 +1,15 @@
 import { ToolbarWidget } from '@angular/aria/toolbar';
 import { Directive, computed, inject, input } from '@angular/core';
 import { bindInput, cn, toggleVariants } from '@semantic-components/ui';
-import { SC_EDITOR, type ScEditorListType } from './editor';
+import { SC_EDITOR } from './editor';
+
+export type ScEditorListType = 'bulletList' | 'orderedList' | 'taskList';
+
+const LIST_TYPES: ScEditorListType[] = [
+  'bulletList',
+  'orderedList',
+  'taskList',
+];
 
 /**
  * The list button: make it the trigger of your menu, whose items call
@@ -26,8 +34,18 @@ export class ScEditorList {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly disabledInput = input(false, { alias: 'disabled' });
 
-  /** The list at the selection, or null. */
-  readonly type = computed(() => this.editor.list());
+  /** The list at the selection (the innermost), or null. */
+  readonly type = computed<ScEditorListType | null>(() => {
+    this.editor.contentVersion();
+    const editor = this.editor.editorInstance();
+    if (!editor) return null;
+    const { $from } = editor.state.selection;
+    for (let depth = $from.depth; depth > 0; depth--) {
+      const name = $from.node(depth).type.name as ScEditorListType;
+      if (LIST_TYPES.includes(name)) return name;
+    }
+    return null;
+  });
 
   protected readonly class = computed(() =>
     cn(
@@ -46,6 +64,15 @@ export class ScEditorList {
 
   /** Makes the selection a list of this type, or back into paragraphs. */
   select(type: ScEditorListType): void {
-    this.editor.toggleList(type);
+    this.editor.run((chain) => {
+      switch (type) {
+        case 'bulletList':
+          return chain.toggleBulletList();
+        case 'orderedList':
+          return chain.toggleOrderedList();
+        case 'taskList':
+          return chain.toggleTaskList();
+      }
+    });
   }
 }

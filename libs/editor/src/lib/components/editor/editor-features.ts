@@ -42,14 +42,24 @@ export function provideEditor(...features: ScEditorFeature[]): Provider {
   return { provide: SC_EDITOR_FEATURES, useValue: features };
 }
 
+/**
+ * Your own Tiptap extensions — a mention, an embed —
+ * `provideEditor(withExtensions(Mention.configure({ … })))`: the document holds
+ * what they add, in the editor and `scEditorView`. Run their commands with
+ * the editor's `run`.
+ */
+export function withExtensions(...extensions: Extensions): ScEditorFeature {
+  return { name: 'withExtensions', content: extensions };
+}
+
 const warned = new Set<string>();
 
 /**
  * For a feature's parts: warns, in development, when the feature isn't
- * provided (`assertEditorFeature('withTables', 'scEditorTable')`). Call it in
- * the part's constructor.
+ * provided (`ɵassertEditorFeature('withTables', 'scEditorTable')`). Call it
+ * in the part's constructor. Internal: for the library's own parts.
  */
-export function assertEditorFeature(feature: string, part: string): void {
+export function ɵassertEditorFeature(feature: string, part: string): void {
   if (typeof ngDevMode === 'undefined' || !ngDevMode) return;
   if (inject(SC_EDITOR_FEATURES).some((f) => f.name === feature)) return;
   const message = `${part} needs ${feature}() in provideEditor(…).`;

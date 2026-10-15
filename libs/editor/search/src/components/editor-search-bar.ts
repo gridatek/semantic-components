@@ -1,5 +1,5 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { SC_EDITOR, assertEditorFeature } from '@semantic-components/editor';
+import { SC_EDITOR, ɵassertEditorFeature } from '@semantic-components/editor';
 import { cn } from '@semantic-components/ui';
 import { editorSearch } from './editor-search-state';
 
@@ -31,7 +31,7 @@ export class ScEditorSearchBar {
   );
 
   constructor() {
-    assertEditorFeature('withSearch', 'scEditorSearchBar');
+    ɵassertEditorFeature('withSearch', 'scEditorSearchBar');
   }
 
   protected onEscape(event: Event): void {

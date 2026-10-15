@@ -1,7 +1,7 @@
 import type { ChainedCommands } from '@tiptap/core';
 import { ToolbarWidget } from '@angular/aria/toolbar';
 import { Directive, computed, inject, input } from '@angular/core';
-import { SC_EDITOR, assertEditorFeature } from '@semantic-components/editor';
+import { SC_EDITOR, ɵassertEditorFeature } from '@semantic-components/editor';
 import { bindInput, cn, toggleVariants } from '@semantic-components/ui';
 
 /** What `select` / `can` do to a table. */
@@ -61,7 +61,7 @@ export class ScEditorTable {
   );
 
   constructor() {
-    assertEditorFeature('withTables', 'scEditorTable');
+    ɵassertEditorFeature('withTables', 'scEditorTable');
     bindInput(inject(ToolbarWidget).disabled, this.disabled);
   }
 

@@ -1,12 +1,12 @@
 import { ToolbarWidget } from '@angular/aria/toolbar';
 import { Directive, computed, inject, input } from '@angular/core';
-import { SC_EDITOR, assertEditorFeature } from '@semantic-components/editor';
+import { SC_EDITOR, ɵassertEditorFeature } from '@semantic-components/editor';
 import { bindInput, cn, toggleVariants } from '@semantic-components/ui';
 
 /**
  * The highlight button: pressed inside a highlight. It runs no command itself — make it the
  * trigger of your popover (a `scPopoverTrigger`), with
- * `scEditorHighlightColor` swatches and `scEditorUnsetHighlight`;
+ * `scEditorHighlightColor` swatches and `scEditorRemoveHighlight`;
  * write its icon and name it. Needs `withHighlight()`.
  */
 @Directive({
@@ -36,7 +36,7 @@ export class ScEditorHighlight {
   );
 
   constructor() {
-    assertEditorFeature('withHighlight', 'scEditorHighlight');
+    ɵassertEditorFeature('withHighlight', 'scEditorHighlight');
     bindInput(inject(ToolbarWidget).disabled, this.disabled);
   }
 }

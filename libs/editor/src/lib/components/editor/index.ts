@@ -21,7 +21,7 @@ export * from './editor-underline';
 export * from './editor-strikethrough';
 export * from './editor-code';
 export * from './editor-bullet-list';
-export * from './editor-numbered-list';
+export * from './editor-ordered-list';
 export * from './editor-task-list';
 export * from './editor-blockquote';
 export * from './editor-code-block';

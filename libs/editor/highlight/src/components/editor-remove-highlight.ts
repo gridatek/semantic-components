@@ -1,5 +1,5 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { SC_EDITOR, assertEditorFeature } from '@semantic-components/editor';
+import { SC_EDITOR, ɵassertEditorFeature } from '@semantic-components/editor';
 import { cn, toggleVariants } from '@semantic-components/ui';
 
 /**
@@ -7,7 +7,7 @@ import { cn, toggleVariants } from '@semantic-components/ui';
  * (disabled when there is none). Write its icon and name it.
  */
 @Directive({
-  selector: 'button[scEditorUnsetHighlight]',
+  selector: 'button[scEditorRemoveHighlight]',
   host: {
     type: 'button',
     '[class]': 'class()',
@@ -15,7 +15,7 @@ import { cn, toggleVariants } from '@semantic-components/ui';
     '(click)': 'onClick()',
   },
 })
-export class ScEditorUnsetHighlight {
+export class ScEditorRemoveHighlight {
   private readonly editor = inject(SC_EDITOR);
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -33,7 +33,7 @@ export class ScEditorUnsetHighlight {
   );
 
   constructor() {
-    assertEditorFeature('withHighlight', 'scEditorUnsetHighlight');
+    ɵassertEditorFeature('withHighlight', 'scEditorRemoveHighlight');
   }
 
   protected onClick(): void {

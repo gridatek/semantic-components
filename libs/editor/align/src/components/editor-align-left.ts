@@ -1,6 +1,6 @@
 import { ToolbarWidget } from '@angular/aria/toolbar';
 import { Directive, computed, inject, input } from '@angular/core';
-import { SC_EDITOR, assertEditorFeature } from '@semantic-components/editor';
+import { SC_EDITOR, ɵassertEditorFeature } from '@semantic-components/editor';
 import { bindInput, cn, toggleVariants } from '@semantic-components/ui';
 import { editorAlignment } from './editor-alignment';
 
@@ -38,7 +38,7 @@ export class ScEditorAlignLeft {
   );
 
   constructor() {
-    assertEditorFeature('withAlign', 'scEditorAlignLeft');
+    ɵassertEditorFeature('withAlign', 'scEditorAlignLeft');
     bindInput(inject(ToolbarWidget).disabled, this.disabled);
   }
 

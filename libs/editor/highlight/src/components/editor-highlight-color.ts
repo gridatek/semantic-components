@@ -1,5 +1,5 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { SC_EDITOR, assertEditorFeature } from '@semantic-components/editor';
+import { SC_EDITOR, ɵassertEditorFeature } from '@semantic-components/editor';
 import { cn } from '@semantic-components/ui';
 
 /**
@@ -50,7 +50,7 @@ export class ScEditorHighlightColor {
   );
 
   constructor() {
-    assertEditorFeature('withHighlight', 'scEditorHighlightColor');
+    ɵassertEditorFeature('withHighlight', 'scEditorHighlightColor');
   }
 
   protected onClick(): void {

@@ -5,7 +5,7 @@ import { SC_EDITOR } from './editor';
 
 /** A numbered list, on and off. Write its icon and name it (`aria-label` or visually hidden text). */
 @Directive({
-  selector: 'button[scEditorNumberedList]',
+  selector: 'button[scEditorOrderedList]',
   hostDirectives: [ToolbarWidget],
   host: {
     type: 'button',
@@ -15,7 +15,7 @@ import { SC_EDITOR } from './editor';
     '(click)': 'onClick()',
   },
 })
-export class ScEditorNumberedList {
+export class ScEditorOrderedList {
   protected readonly editor = inject(SC_EDITOR);
   readonly classInput = input<string>('', { alias: 'class' });
   readonly disabledInput = input(false, { alias: 'disabled' });

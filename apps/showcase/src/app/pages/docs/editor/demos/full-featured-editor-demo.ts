@@ -25,7 +25,6 @@ import {
   ScEditorToolbarGroup,
   ScEditorUnderline,
   ScEditorUndo,
-  type ScEditorUploadHandler,
   ScEditorWordCount,
   provideEditor,
 } from '@semantic-components/editor';
@@ -40,10 +39,15 @@ import { ScEditorBubbleMenu } from '@semantic-components/editor/bubble-menu';
 import {
   ScEditorHighlight,
   ScEditorHighlightColor,
-  ScEditorUnsetHighlight,
+  ScEditorRemoveHighlight,
   withHighlight,
 } from '@semantic-components/editor/highlight';
-import { ScEditorImage, withImages } from '@semantic-components/editor/images';
+import {
+  ScEditorImage,
+  type ScEditorUploadHandler,
+  ScEditorUploads,
+  withImages,
+} from '@semantic-components/editor/images';
 import {
   ScEditorSubscript,
   ScEditorSuperscript,
@@ -216,8 +220,9 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
     ScEditorBubbleMenu,
     ScEditorHighlight,
     ScEditorHighlightColor,
-    ScEditorUnsetHighlight,
+    ScEditorRemoveHighlight,
     ScEditorImage,
+    ScEditorUploads,
     ScEditorSuperscript,
     ScEditorSubscript,
     ScEditorTable,
@@ -276,7 +281,7 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
     <div class="w-full">
       <div
         scEditor
-        #editor="scEditor"
+        #images="scEditorUploads"
         [formField]="editorForm.body"
         [upload]="upload"
         class="overflow-hidden rounded-lg border"
@@ -452,7 +457,7 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
                     ></button>
                   }
                   <div scSeparator orientation="vertical"></div>
-                  <button scEditorUnsetHighlight>
+                  <button scEditorRemoveHighlight>
                     <svg siBanIcon></svg>
                     <span class="sr-only">Remove highlight</span>
                   </button>
@@ -463,9 +468,10 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
             <div scPopoverProvider [(open)]="linkOpen">
               <button
                 scEditorLink
+                #link="scEditorLink"
                 scPopoverTrigger
                 value="link"
-                (click)="editLink(editor.linkHref())"
+                (click)="editLink(link.href())"
               >
                 <svg siLinkIcon></svg>
                 <span class="sr-only">Link</span>
@@ -479,14 +485,14 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
                         scInput
                         type="url"
                         [formField]="linkForm.href"
-                        (keydown.enter)="applyLink(editor)"
+                        (keydown.enter)="applyLink(link)"
                       />
                     </div>
-                    <button scButton type="button" (click)="applyLink(editor)">
+                    <button scButton type="button" (click)="applyLink(link)">
                       Apply
                     </button>
                   </div>
-                  @if (editor.linkHref(); as href) {
+                  @if (link.href(); as href) {
                     <div class="flex items-center justify-between gap-2">
                       <a
                         scLink
@@ -503,7 +509,7 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
                         variant="ghost"
                         size="sm"
                         type="button"
-                        (click)="removeLink(editor)"
+                        (click)="removeLink(link)"
                       >
                         <svg siUnlinkIcon></svg>
                         Remove
@@ -682,7 +688,7 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
         ></div>
 
         <div scEditorFooter>
-          @for (upload of editor.uploads(); track upload.id) {
+          @for (upload of images.uploads(); track upload.id) {
             <div class="mb-1.5 flex items-center gap-2">
               <span class="truncate">Uploading {{ upload.file.name }}</span>
               <div
@@ -696,7 +702,7 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
                 variant="ghost"
                 size="icon-xs"
                 type="button"
-                (click)="editor.cancelUpload(upload.id)"
+                (click)="images.cancel(upload.id)"
               >
                 <svg siXIcon></svg>
                 <span class="sr-only">Cancel upload</span>
@@ -835,13 +841,13 @@ export class FullFeaturedEditorDemo {
     this.linkModel.set({ href: href || 'https://' });
   }
 
-  applyLink(editor: ScEditor): void {
-    editor.setLink(this.linkModel().href);
+  applyLink(link: ScEditorLink): void {
+    link.set(this.linkModel().href);
     this.linkOpen.set(false);
   }
 
-  removeLink(editor: ScEditor): void {
-    editor.unsetLink();
+  removeLink(link: ScEditorLink): void {
+    link.remove();
     this.linkOpen.set(false);
   }
 

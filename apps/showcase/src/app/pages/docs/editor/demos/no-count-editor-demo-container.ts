@@ -26,7 +26,7 @@ import {
   ScEditorBulletList,
   ScEditorContent,
   ScEditorItalic,
-  ScEditorNumberedList,
+  ScEditorOrderedList,
   ScEditorSeparator,
   ScEditorToolbar,
   ScEditorToolbarGroup,
@@ -53,7 +53,7 @@ import {
     ScEditorUnderline,
     ScEditorSeparator,
     ScEditorBulletList,
-    ScEditorNumberedList,
+    ScEditorOrderedList,
     SiBoldIcon,
     SiItalicIcon,
     SiUnderlineIcon,
@@ -90,7 +90,7 @@ import {
               <svg siListIcon></svg>
               <span class="sr-only">Bullet list</span>
             </button>
-            <button scEditorNumberedList value="numbered-list">
+            <button scEditorOrderedList value="numbered-list">
               <svg siListOrderedIcon></svg>
               <span class="sr-only">Numbered list</span>
             </button>
