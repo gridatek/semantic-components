@@ -384,7 +384,9 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
             >&#96;&#96;&#96;</code
           >
-          code blocks. Some come with a feature.
+          code blocks. Some come with a feature. A browser can take a few before
+          the editor: Ctrl + Shift + R reloads, Ctrl + Shift + J opens the
+          console; with AltGr layouts, Ctrl + Alt is AltGr.
         </p>
         <div
           scTableContainer
