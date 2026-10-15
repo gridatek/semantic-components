@@ -40,12 +40,65 @@ import { SignalFormsEditorDemoContainer } from './demos/signal-forms-editor-demo
         <app-editor-usage-demo-container />
       </section>
 
-      <section class="space-y-8">
+      <section class="space-y-4">
         <h2 scHeading appToc>Examples</h2>
+        <p class="text-muted-foreground">
+          The complete editor, after Tiptap's Simple Editor: undo and redo, the
+          block type and list menus (with task lists), blockquotes and code
+          blocks, marks, highlight colours, links, superscript and subscript,
+          alignment, images (pick, drop or paste one) and search and replace
+          (Ctrl + F). The page layout centres the text in a column of readable
+          width.
+        </p>
         <app-full-featured-editor-demo-container />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Signal Forms</h2>
+        <p class="text-muted-foreground">
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >[formField]</code
+          >
+          on the editor: the value is the document's HTML.
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">required</code>
+          and
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">maxLength</code>
+          check it,
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >scFieldErrors</code
+          >
+          shows the message once the document is left, and
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">disabled</code>
+          from the schema follows the checkbox.
+        </p>
         <app-signal-forms-editor-demo-container />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Initial content</h2>
+        <p class="text-muted-foreground">
+          The form's value is the document to start with: any HTML the editor
+          knows — headings, lists, quotes, marks.
+        </p>
         <app-prefilled-editor-demo-container />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Read-only</h2>
+        <p class="text-muted-foreground">
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">readonly</code>
+          from the schema: the document can be read, selected and searched, not
+          changed, and its buttons are disabled. Here it has no toolbar at all.
+        </p>
         <app-readonly-editor-demo-container />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Without counts</h2>
+        <p class="text-muted-foreground">
+          Every part is optional: leave out the footer and its word and
+          character counts.
+        </p>
         <app-no-count-editor-demo-container />
       </section>
     </div>

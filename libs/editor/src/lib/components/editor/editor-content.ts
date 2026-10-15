@@ -12,6 +12,12 @@ import { SC_FIELD, cn } from '@semantic-components/ui';
 import { SC_EDITOR } from './editor';
 
 /**
+ * How the document sits in its box: `default`, padded edge to edge; `page`, a
+ * centred column of readable width with page margins (narrower on phones).
+ */
+export type ScEditorContentLayout = 'default' | 'page';
+
+/**
  * Where the document is written: the editor mounts here. Name it
  * (`ariaLabel`) — the library adds no text; give a `placeholder` if you want
  * one. The document is a multi-line `textbox`, described by the surrounding
@@ -20,6 +26,7 @@ import { SC_EDITOR } from './editor';
 @Directive({
   selector: 'div[scEditorContent]',
   host: {
+    '[attr.data-layout]': 'layout()',
     '[class]': 'class()',
   },
 })
@@ -31,11 +38,16 @@ export class ScEditorContent {
 
   readonly placeholder = input('');
   readonly ariaLabel = input('');
+  readonly layout = input<ScEditorContentLayout>('default');
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
     cn(
-      'block outline-none overflow-y-auto min-h-[150px] max-h-[400px] p-4 prose prose-sm max-w-none dark:prose-invert',
+      'block outline-none overflow-y-auto min-h-[150px] max-h-[400px] prose prose-sm max-w-none dark:prose-invert',
+      this.layout() === 'page'
+        ? // The column is the document's: the scrollbar stays at the box's edge.
+          '[&>.ProseMirror]:mx-auto [&>.ProseMirror]:max-w-[648px] [&>.ProseMirror]:p-12 max-[480px]:[&>.ProseMirror]:px-6 max-[480px]:[&>.ProseMirror]:py-4'
+        : 'p-4',
       this.editor.disabled() && 'pointer-events-none opacity-50',
       this.editor.readonly() && 'cursor-default',
       this.classInput(),

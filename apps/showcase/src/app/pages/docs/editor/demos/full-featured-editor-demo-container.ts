@@ -603,6 +603,7 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
         <div
           scEditorContent
           ariaLabel="Article"
+          layout="page"
           class="max-h-[600px] min-h-[400px]"
           placeholder="Start writing…"
         ></div>

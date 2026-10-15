@@ -51,24 +51,24 @@ readonly postForm = form(signal({ body: '' }), (path) => {
 
 ## Parts
 
-| Part                                        | Selector                                      | Does                                                                                                                                         |
-| ------------------------------------------- | --------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ScEditor`                                  | `[scEditor]`                                  | The document and its commands; a Signal Forms control (`exportAs: 'scEditor'`). `data-disabled`, `data-readonly`, `data-invalid`.            |
-| `ScEditorContent`                           | `div[scEditorContent]`                        | Where it's written: a multi-line `textbox`. `ariaLabel` (name it — no default), `placeholder` (none by default).                             |
-| `ScEditorToolbar`, `ScEditorToolbarGroup`   | `div[scEditorToolbar]`, `div[…Group]`         | The toolbar: one tab stop, arrow keys between its buttons. Name it (`aria-label`).                                                           |
-| `ScEditorBold` … (see below)                | `button[scEditorBold]`…                       | A command; `aria-pressed` when it has a state. Write its icon and name it.                                                                   |
-| `ScEditorHeading`                           | `button[scEditorHeading]`                     | The block type: `level()` (`'p'`, `'h1'`…`'h6'`), `select(level)` — the trigger of your menu, with your labels.                              |
-| `ScEditorList`                              | `button[scEditorList]`                        | The list type: `type()` (`'bulletList'`, `'orderedList'`, `'taskList'`, or null; `data-state="on"` in one), `select(type)` — a menu trigger. |
-| `ScEditorLink`                              | `button[scEditorLink]`                        | Pressed inside a link; the trigger of your link popover, which calls the editor's `setLink(href)` / `unsetLink()`.                           |
-| `ScEditorHighlight`                         | `button[scEditorHighlight]`                   | Pressed inside a highlight; the trigger of your highlight popover.                                                                           |
-| `ScEditorHighlightColor`                    | `button[scEditorHighlightColor]`              | A swatch in that popover: `[scEditorHighlightColor]="color"` highlights in it, or removes it; pressed when it's the colour. Name it.         |
-| `ScEditorUnsetHighlight`                    | `button[scEditorUnsetHighlight]`              | Removes the highlight (disabled when there is none).                                                                                         |
-| `ScEditorImage`                             | `button[scEditorImage]`                       | Picks images and uploads them with the editor's `upload` (disabled without one).                                                             |
-| `ScEditorSearch`                            | `button[scEditorSearch]`                      | Opens and closes the search bar (`aria-pressed`); with it, **Ctrl / ⌘ + F** in the document opens it too.                                    |
-| `ScEditorSearchBar` and its parts           | see [Search and replace](#search-and-replace) | The bar under the toolbar.                                                                                                                   |
-| `ScEditorSeparator`                         | `div[scEditorSeparator]`                      | Between toolbar groups.                                                                                                                      |
-| `ScEditorHeader`, `ScEditorFooter`          | `div[scEditorHeader]`, `div[scEditorFooter]`  | Above and below the document.                                                                                                                |
-| `ScEditorCount`, `…WordCount`, `…CharCount` | `div[scEditorCount]`, `span[…]`               | `wordCount()`, `charCount()` (`exportAs`) — write the text around them.                                                                      |
+| Part                                        | Selector                                      | Does                                                                                                                                                                      |
+| ------------------------------------------- | --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ScEditor`                                  | `[scEditor]`                                  | The document and its commands; a Signal Forms control (`exportAs: 'scEditor'`). `data-disabled`, `data-readonly`, `data-invalid`.                                         |
+| `ScEditorContent`                           | `div[scEditorContent]`                        | Where it's written: a multi-line `textbox`. `ariaLabel` (name it — no default), `placeholder` (none by default), `layout` (`default` or `page`, see [Styling](#styling)). |
+| `ScEditorToolbar`, `ScEditorToolbarGroup`   | `div[scEditorToolbar]`, `div[…Group]`         | The toolbar: one tab stop, arrow keys between its buttons. Name it (`aria-label`).                                                                                        |
+| `ScEditorBold` … (see below)                | `button[scEditorBold]`…                       | A command; `aria-pressed` when it has a state. Write its icon and name it.                                                                                                |
+| `ScEditorHeading`                           | `button[scEditorHeading]`                     | The block type: `level()` (`'p'`, `'h1'`…`'h6'`), `select(level)` — the trigger of your menu, with your labels.                                                           |
+| `ScEditorList`                              | `button[scEditorList]`                        | The list type: `type()` (`'bulletList'`, `'orderedList'`, `'taskList'`, or null; `data-state="on"` in one), `select(type)` — a menu trigger.                              |
+| `ScEditorLink`                              | `button[scEditorLink]`                        | Pressed inside a link; the trigger of your link popover, which calls the editor's `setLink(href)` / `unsetLink()`.                                                        |
+| `ScEditorHighlight`                         | `button[scEditorHighlight]`                   | Pressed inside a highlight; the trigger of your highlight popover.                                                                                                        |
+| `ScEditorHighlightColor`                    | `button[scEditorHighlightColor]`              | A swatch in that popover: `[scEditorHighlightColor]="color"` highlights in it, or removes it; pressed when it's the colour. Name it.                                      |
+| `ScEditorUnsetHighlight`                    | `button[scEditorUnsetHighlight]`              | Removes the highlight (disabled when there is none).                                                                                                                      |
+| `ScEditorImage`                             | `button[scEditorImage]`                       | Picks images and uploads them with the editor's `upload` (disabled without one).                                                                                          |
+| `ScEditorSearch`                            | `button[scEditorSearch]`                      | Opens and closes the search bar (`aria-pressed`); with it, **Ctrl / ⌘ + F** in the document opens it too.                                                                 |
+| `ScEditorSearchBar` and its parts           | see [Search and replace](#search-and-replace) | The bar under the toolbar.                                                                                                                                                |
+| `ScEditorSeparator`                         | `div[scEditorSeparator]`                      | Between toolbar groups.                                                                                                                                                   |
+| `ScEditorHeader`, `ScEditorFooter`          | `div[scEditorHeader]`, `div[scEditorFooter]`  | Above and below the document.                                                                                                                                             |
+| `ScEditorCount`, `…WordCount`, `…CharCount` | `div[scEditorCount]`, `span[…]`               | `wordCount()`, `charCount()` (`exportAs`) — write the text around them.                                                                                                   |
 
 The buttons, `scEditor` + the command:
 
@@ -223,7 +223,18 @@ Tiptap's shortcuts: **Ctrl / ⌘ + B** bold, **I** italic, **U** underline, **E*
 
 ## Styling
 
-The document has `block outline-none overflow-y-auto min-h-[150px] max-h-[400px] p-4 prose prose-sm max-w-none dark:prose-invert`; a `class` on `scEditorContent` changes it (`min-h-[300px] max-h-[500px]`, `font-serif`…). The editor's styles (`@semantic-components/editor/styles`) cover task lists, code blocks, images, highlights, search matches and the kept selection, with `--border`, `--muted`, `--muted-foreground`, `--primary`, `--ring` and the `--editor-highlight-*` colours.
+The document has `block outline-none overflow-y-auto min-h-[150px] max-h-[400px] prose prose-sm max-w-none dark:prose-invert`; a `class` on `scEditorContent` changes it (`min-h-[300px] max-h-[500px]`, `font-serif`…).
+
+Its `layout` sets how it sits in the box (`data-layout`):
+
+- `default`: padded edge to edge (`p-4`), for a field or a comment box.
+- `page`: a centred column at most 648px wide with 3rem page margins (1rem and 1.5rem at 480px and under), as in Tiptap's Simple Editor, for an article or a document. The column is the inner `.ProseMirror` element, so the scrollbar stays at the box's edge.
+
+```html
+<div scEditorContent ariaLabel="Article" layout="page" class="max-h-[600px] min-h-[400px]"></div>
+```
+
+The editor's styles (`@semantic-components/editor/styles`) cover task lists, code blocks, images, highlights, search matches and the kept selection, with `--border`, `--muted`, `--muted-foreground`, `--primary`, `--ring` and the `--editor-highlight-*` colours.
 
 ## Accessibility
 
