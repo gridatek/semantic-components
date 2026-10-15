@@ -18,7 +18,10 @@ Before/after image comparison slider with keyboard and touch support. Built usin
   <div scImageCompareContainer>
     <img scImageCompareBefore src="before.jpg" alt="Before" />
     <img scImageCompareAfter src="after.jpg" alt="After" />
-    <div scImageCompareSlider></div>
+    <div scImageCompareSlider>
+      <svg siChevronLeftIcon></svg>
+      <svg siChevronRightIcon></svg>
+    </div>
     <div scImageCompareLabel class="top-2 left-2">Before</div>
     <div scImageCompareLabel class="top-2 right-2">After</div>
   </div>
@@ -63,7 +66,7 @@ The draggable slider line and handle.
 | ------- | -------- | ------- | -------------------- |
 | `class` | `string` | -       | Additional CSS class |
 
-**Content Projection:** Place custom handle icons inside the slider component.
+Write the handle's icons inside it (the library draws none): left / right chevrons, or up / down when vertical.
 
 ### ScImageCompareLabel
 
@@ -82,7 +85,10 @@ Label component with full positioning control.
   <div scImageCompareContainer>
     <img scImageCompareBefore src="/images/before.jpg" alt="Before" />
     <img scImageCompareAfter src="/images/after.jpg" alt="After" />
-    <div scImageCompareSlider></div>
+    <div scImageCompareSlider>
+      <svg siChevronLeftIcon></svg>
+      <svg siChevronRightIcon></svg>
+    </div>
     <div scImageCompareLabel class="top-2 left-2">Before</div>
     <div scImageCompareLabel class="top-2 right-2">After</div>
   </div>
@@ -98,7 +104,10 @@ Simply omit the label components:
   <div scImageCompareContainer>
     <img scImageCompareBefore src="before.jpg" alt="Before" />
     <img scImageCompareAfter src="after.jpg" alt="After" />
-    <div scImageCompareSlider></div>
+    <div scImageCompareSlider>
+      <svg siChevronLeftIcon></svg>
+      <svg siChevronRightIcon></svg>
+    </div>
   </div>
 </div>
 ```
@@ -110,7 +119,10 @@ Simply omit the label components:
   <div scImageCompareContainer>
     <img scImageCompareBefore src="before.jpg" alt="Top" />
     <img scImageCompareAfter src="after.jpg" alt="Bottom" />
-    <div scImageCompareSlider></div>
+    <div scImageCompareSlider>
+      <svg siChevronUpIcon></svg>
+      <svg siChevronDownIcon></svg>
+    </div>
     <div scImageCompareLabel class="top-2 left-2">Top</div>
     <div scImageCompareLabel class="bottom-2 left-2">Bottom</div>
   </div>
@@ -126,7 +138,10 @@ Labels have full positioning control:
   <div scImageCompareContainer>
     <img scImageCompareBefore src="before.jpg" alt="Before" />
     <img scImageCompareAfter src="after.jpg" alt="After" />
-    <div scImageCompareSlider></div>
+    <div scImageCompareSlider>
+      <svg siChevronLeftIcon></svg>
+      <svg siChevronRightIcon></svg>
+    </div>
     <div scImageCompareLabel class="bottom-4 left-4 rounded-full bg-blue-500 px-3 py-1 text-white">Original</div>
     <div scImageCompareLabel class="right-4 bottom-4 rounded-full bg-green-500 px-3 py-1 text-white">Enhanced</div>
   </div>
@@ -143,8 +158,7 @@ Use content projection to customize the slider handle:
     <img scImageCompareBefore src="before.jpg" alt="Before" />
     <img scImageCompareAfter src="after.jpg" alt="After" />
     <div scImageCompareSlider>
-      <!-- Custom handle content -->
-      <svg><!-- Your custom icon --></svg>
+      <svg siMoveHorizontalIcon></svg>
     </div>
   </div>
 </div>
@@ -159,7 +173,10 @@ Use content projection to customize the slider handle:
       <div scImageCompareContainer>
         <img scImageCompareBefore src="before.jpg" alt="Before" />
         <img scImageCompareAfter src="after.jpg" alt="After" />
-        <div scImageCompareSlider></div>
+        <div scImageCompareSlider>
+          <svg siChevronLeftIcon></svg>
+          <svg siChevronRightIcon></svg>
+        </div>
       </div>
     </div>
 
@@ -182,7 +199,10 @@ readonly position = signal(25); // Start at 25%
   <div scImageCompareContainer>
     <img scImageCompareBefore src="before.jpg" alt="Before" />
     <img scImageCompareAfter src="after.jpg" alt="After" />
-    <div scImageCompareSlider></div>
+    <div scImageCompareSlider>
+      <svg siChevronLeftIcon></svg>
+      <svg siChevronRightIcon></svg>
+    </div>
   </div>
 </div>
 ```
