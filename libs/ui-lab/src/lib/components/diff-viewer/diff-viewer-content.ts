@@ -1,5 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn, ɵwarnIfUnnamed } from '@semantic-components/ui';
 
 @Directive({
   selector: 'div[scDiffViewerContent]',
@@ -8,14 +8,15 @@ import { cn } from '@semantic-components/ui';
     '[style.max-height]': 'maxHeight()',
     role: 'group',
     tabindex: '0',
-    '[attr.aria-label]': 'ariaLabel()',
   },
 })
 export class ScDiffViewerContent {
+  constructor() {
+    ɵwarnIfUnnamed('scDiffViewerContent');
+  }
+
   readonly classInput = input<string>('', { alias: 'class' });
   readonly maxHeight = input<string>('600px');
-  /** Name of the scrollable region. */
-  readonly ariaLabel = input<string>('Differences', { alias: 'aria-label' });
 
   protected readonly class = computed(() =>
     cn(

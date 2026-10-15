@@ -92,7 +92,7 @@ import {
           </div>
         </div>
       </div>
-      <div scDiffViewerContent maxHeight="400px">
+      <div scDiffViewerContent aria-label="Differences" maxHeight="400px">
         @if (diff.viewMode() === 'split') {
           <div scDiffViewerSplit>
             <div scDiffViewerPane side="old">

@@ -48,7 +48,7 @@ import { SiTrash2Icon, SiUndoIcon } from '@semantic-icons/lucide-icons';
       <div>
         <label class="mb-1 block text-sm font-medium">Signature</label>
         <div scSignaturePad #pad="scSignaturePad" class="relative">
-          <canvas scSignaturePadCanvas class="h-[150px]"></canvas>
+          <canvas scSignaturePadCanvas aria-label="Signature" class="h-[150px]"></canvas>
 
           <div scSignaturePadControls>
             <button scSignaturePadUndo>

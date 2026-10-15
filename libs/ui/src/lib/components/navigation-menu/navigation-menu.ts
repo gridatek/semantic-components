@@ -9,9 +9,7 @@ import { cn } from '../../utils';
 
 @Component({
   selector: 'nav[scNavigationMenu]',
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
   host: {
     '[class]': 'class()',
   },

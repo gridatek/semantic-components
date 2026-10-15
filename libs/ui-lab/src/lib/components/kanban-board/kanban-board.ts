@@ -11,7 +11,7 @@ import {
   model,
   output,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn, ɵwarnIfUnnamed } from '@semantic-components/ui';
 import type {
   ScKanbanCardAddEvent,
   ScKanbanCardData,
@@ -31,18 +31,19 @@ export const SC_KANBAN_BOARD = new InjectionToken<ScKanbanBoard>(
   host: {
     '[class]': 'class()',
     role: 'region',
-    '[attr.aria-label]': 'ariaLabel()',
     '[attr.aria-describedby]': 'ariaDescribedby()',
   },
 })
 export class ScKanbanBoard {
+  constructor() {
+    ɵwarnIfUnnamed('scKanbanBoard');
+  }
+
   private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly injector = inject(Injector);
   private readonly announcer = inject(LiveAnnouncer);
 
   readonly classInput = input<string>('', { alias: 'class' });
-  /** Name of the board region; give each board on a page its own. */
-  readonly ariaLabel = input<string>('Kanban board', { alias: 'aria-label' });
   /** Id of an element explaining the keyboard moves (Alt + arrow keys). */
   readonly ariaDescribedby = input<string | null>(null, {
     alias: 'aria-describedby',

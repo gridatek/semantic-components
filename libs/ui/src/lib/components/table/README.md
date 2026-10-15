@@ -11,7 +11,9 @@ import { ScTable, ScTableBody, ScTableCaption, ScTableCell, ScTableContainer, Sc
 ```html
 <div scTableContainer>
   <table scTable>
-    <caption scTableCaption>A list of recent invoices.</caption>
+    <caption scTableCaption>
+      A list of recent invoices.
+    </caption>
     <thead scTableHeader>
       <tr scTableRow>
         <th scTableHeaderCell>Invoice</th>

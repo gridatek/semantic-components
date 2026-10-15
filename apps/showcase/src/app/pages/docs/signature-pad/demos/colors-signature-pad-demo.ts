@@ -27,26 +27,42 @@ import { SiTrash2Icon, SiUndoIcon } from '@semantic-icons/lucide-icons';
   template: `
     <div scSignaturePad class="w-full space-y-3">
       <div scSignaturePadToolbar>
-        <button scSignaturePadPenColor [color]="'#000000'">
+        <button
+          scSignaturePadPenColor
+          aria-label="Pen color Black"
+          [color]="'#000000'"
+        >
           <span
             class="border-border size-4 rounded-full border transition-transform data-active:scale-110"
             [attr.data-active]="'#000000'"
             style="background-color: #000000"
           ></span>
         </button>
-        <button scSignaturePadPenColor [color]="'#1d4ed8'">
+        <button
+          scSignaturePadPenColor
+          aria-label="Pen color Blue"
+          [color]="'#1d4ed8'"
+        >
           <span
             class="border-border size-4 rounded-full border transition-transform"
             style="background-color: #1d4ed8"
           ></span>
         </button>
-        <button scSignaturePadPenColor [color]="'#dc2626'">
+        <button
+          scSignaturePadPenColor
+          aria-label="Pen color Red"
+          [color]="'#dc2626'"
+        >
           <span
             class="border-border size-4 rounded-full border transition-transform"
             style="background-color: #dc2626"
           ></span>
         </button>
-        <button scSignaturePadPenColor [color]="'#16a34a'">
+        <button
+          scSignaturePadPenColor
+          aria-label="Pen color Green"
+          [color]="'#16a34a'"
+        >
           <span
             class="border-border size-4 rounded-full border transition-transform"
             style="background-color: #16a34a"
@@ -55,7 +71,11 @@ import { SiTrash2Icon, SiUndoIcon } from '@semantic-icons/lucide-icons';
       </div>
 
       <div class="relative">
-        <canvas scSignaturePadCanvas class="h-[200px]"></canvas>
+        <canvas
+          scSignaturePadCanvas
+          aria-label="Signature"
+          class="h-[200px]"
+        ></canvas>
 
         <div scSignaturePadControls>
           <button scSignaturePadUndo>

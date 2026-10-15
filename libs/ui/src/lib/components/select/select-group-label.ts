@@ -4,9 +4,7 @@ import { cn } from '../../utils';
 @Component({
   selector: 'div[scSelectGroupLabel]',
   imports: [],
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
   host: {
     '[class]': 'class()',
   },

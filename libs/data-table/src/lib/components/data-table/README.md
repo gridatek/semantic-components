@@ -61,7 +61,7 @@ export class UsersTable {
       <th scTableHeaderCell scDataTableHeaderCell [column]="header.column">
         @if (header.column.id === 'select') {
         <label scCheckboxField>
-          <input type="checkbox" scCheckbox scDataTableSelectAll [table]="table" />
+          <input type="checkbox" scCheckbox scDataTableSelectAll aria-label="Select all rows" [table]="table" />
         </label>
         } @else {
         <button scDataTableSortButton #sort="scDataTableSortButton" [column]="header.column">

@@ -5,7 +5,7 @@ A carousel component built with Embla Carousel, featuring smooth animations, tou
 ## Usage
 
 ```html
-<div scCarousel class="w-full max-w-xs">
+<div scCarousel aria-label="Images" class="w-full max-w-xs">
   <div scCarouselViewport>
     <div scCarouselTrack>
       <div scCarouselItem>Slide 1</div>
@@ -144,7 +144,7 @@ Next slide navigation button. Content must be provided by the user (icon + scree
 ### Default
 
 ```html
-<div scCarousel class="w-full max-w-xs">
+<div scCarousel aria-label="Images" class="w-full max-w-xs">
   <div scCarouselViewport>
     <div scCarouselTrack>
       @for (i of [1, 2, 3, 4, 5]; track i) {
@@ -174,7 +174,7 @@ import { Component } from '@angular/core';
 
 @Component({
   template: `
-    <div scCarousel [options]="{ loop: true }" class="w-full max-w-xs">
+    <div scCarousel aria-label="Images" [options]="{ loop: true }" class="w-full max-w-xs">
       <div scCarouselViewport>
         <div scCarouselTrack>
           @for (i of [1, 2, 3, 4, 5]; track i) {
@@ -204,7 +204,7 @@ import Autoplay from 'embla-carousel-autoplay';
 
 @Component({
   template: `
-    <div scCarousel [plugins]="plugins" class="w-full max-w-xs">
+    <div scCarousel aria-label="Images" [plugins]="plugins" class="w-full max-w-xs">
       <div scCarouselViewport>
         <div scCarouselTrack>
           @for (i of items; track i) {
@@ -232,7 +232,7 @@ export class MyComponent {
 ### Partial Items (Multiple Visible)
 
 ```html
-<div scCarousel [options]="{ align: 'start' }" class="w-full max-w-lg">
+<div scCarousel aria-label="Images" [options]="{ align: 'start' }" class="w-full max-w-lg">
   <div scCarouselViewport>
     <div scCarouselTrack>
       @for (i of items; track i) {
@@ -248,7 +248,7 @@ export class MyComponent {
 ### Vertical Orientation
 
 ```html
-<div scCarousel orientation="vertical" [options]="{ align: 'start' }" class="w-full max-w-xs">
+<div scCarousel aria-label="Images" orientation="vertical" [options]="{ align: 'start' }" class="w-full max-w-xs">
   <div scCarouselViewport>
     <div scCarouselTrack class="-mt-1 h-[270px]">
       @for (i of items; track i) {

@@ -9,9 +9,7 @@ import { ScThemeManager } from './theme-manager';
     '[class]': 'classInput()',
     '(click)': 'toggle()',
   },
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
   encapsulation: ViewEncapsulation.None,
 })
 export class ScThemeModeToggle {

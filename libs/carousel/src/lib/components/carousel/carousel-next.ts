@@ -10,9 +10,7 @@ import { ScCarousel } from './carousel';
 
 @Component({
   selector: 'button[scCarouselNext]',
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
   host: {
     type: 'button',
     '[class]': 'class()',

@@ -4,9 +4,7 @@ import Navbar from '../../components/navbar/navbar';
 @Component({
   selector: 'app-home-page',
   imports: [Navbar],
-  template: `
-    <app-navbar />
-  `,
+  template: ` <app-navbar /> `,
   encapsulation: ViewEncapsulation.None,
 })
 export default class HomePage {}

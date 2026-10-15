@@ -10,7 +10,12 @@ import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
       class="bg-muted/50 relative flex h-64 w-96 items-center justify-center rounded-lg border"
     >
       <div class="flex flex-col items-center">
-        <svg scSpinner siLoaderCircleIcon class="text-primary size-8"></svg>
+        <svg
+          scSpinner
+          aria-label="Loading"
+          siLoaderCircleIcon
+          class="text-primary size-8"
+        ></svg>
         <p class="text-muted-foreground mt-2 text-sm">Loading content...</p>
       </div>
     </div>

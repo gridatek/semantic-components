@@ -20,13 +20,11 @@ export interface ScPaginationChange {
   exportAs: 'scPagination',
   host: {
     role: 'navigation',
-    '[attr.aria-label]': 'ariaLabel()',
     '[class]': 'class()',
   },
 })
 export class ScPagination {
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly ariaLabel = input('pagination', { alias: 'aria-label' });
 
   // Smart pagination inputs
   readonly currentPageInput = input<number>(1, { alias: 'currentPage' });

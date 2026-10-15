@@ -26,7 +26,7 @@ import {
   template: \`
     <div class="w-full space-y-3">
       <div scSignaturePad #pad="scSignaturePad" class="relative">
-        <canvas scSignaturePadCanvas class="h-[150px]"></canvas>
+        <canvas scSignaturePadCanvas aria-label="Signature" class="h-[150px]"></canvas>
       </div>
 
       <div class="flex gap-2">

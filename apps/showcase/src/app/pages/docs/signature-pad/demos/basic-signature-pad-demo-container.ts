@@ -39,7 +39,7 @@ import { SiTrash2Icon, SiUndoIcon } from '@semantic-icons/lucide-icons';
     <div class="w-full space-y-3">
       <div scSignaturePad #pad="scSignaturePad" class="relative">
         <canvas
-          scSignaturePadCanvas
+          scSignaturePadCanvas aria-label="Signature"
           class="h-[200px]"
           [(value)]="signature"
           (signatureChange)="onSignatureChange($event)"

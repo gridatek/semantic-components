@@ -17,9 +17,7 @@ import { cn } from '../../utils';
       inputs: ['orientation', 'disabled', 'wrap', 'softDisabled'],
     },
   ],
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
   host: {
     '[attr.data-orientation]': 'toolbar.orientation()',
     '[class]': 'class()',

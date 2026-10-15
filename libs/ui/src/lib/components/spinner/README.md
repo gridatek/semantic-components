@@ -15,7 +15,7 @@ A loading indicator directive applied to an SVG icon.
 ## With Colors
 
 ```html
-<svg scSpinner si-loader-2-icon class="text-primary"></svg> <svg scSpinner si-loader-2-icon class="text-blue-500"></svg>
+<svg scSpinner aria-label="Loading" si-loader-2-icon class="text-primary"></svg> <svg scSpinner aria-label="Loading" si-loader-2-icon class="text-blue-500"></svg>
 ```
 
 ## Custom Size

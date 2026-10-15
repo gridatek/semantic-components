@@ -16,7 +16,7 @@ import { SiTrash2Icon, SiUndoIcon } from '@semantic-icons/lucide-icons';
   imports: [ScSignaturePad, ScSignaturePadCanvas, ScSignaturePadControls, ScSignaturePadUndoButton, ScSignaturePadClearButton, SiUndoIcon, SiTrash2Icon],
   template: `
     <div scSignaturePad class="relative inline-block">
-      <canvas scSignaturePadCanvas [(value)]="signature" [width]="400" [height]="200"></canvas>
+      <canvas scSignaturePadCanvas aria-label="Signature" [(value)]="signature" [width]="400" [height]="200"></canvas>
 
       <div scSignaturePadControls>
         <button scSignaturePadUndo>
@@ -95,7 +95,7 @@ export class MyComponent {
 
 ```html
 <div scSignaturePad>
-  <canvas scSignaturePadCanvas [width]="500" [height]="250"></canvas>
+  <canvas scSignaturePadCanvas aria-label="Signature" [width]="500" [height]="250"></canvas>
 
   <!-- Controls at bottom instead of top-right -->
   <div scSignaturePadControls class="static mt-2 justify-center">
@@ -109,7 +109,7 @@ export class MyComponent {
 
 ```html
 <div scSignaturePad #pad>
-  <canvas scSignaturePadCanvas [(value)]="signature"></canvas>
+  <canvas scSignaturePadCanvas aria-label="Signature" [(value)]="signature"></canvas>
 
   <div scSignaturePadControls>
     <button scSignaturePadUndo>
@@ -130,7 +130,7 @@ export class MyComponent {
 
 ```html
 <div scSignaturePad>
-  <canvas scSignaturePadCanvas></canvas>
+  <canvas scSignaturePadCanvas aria-label="Signature"></canvas>
 </div>
 
 <!-- External controls -->
@@ -147,20 +147,20 @@ export class MyComponent {
 <div scSignaturePad class="space-y-3">
   <!-- Color toolbar -->
   <div scSignaturePadToolbar>
-    <button scSignaturePadPenColor [color]="'#000000'">
+    <button scSignaturePadPenColor aria-label="Pen color Black" [color]="'#000000'">
       <span class="size-4 rounded-full border" style="background: #000000"></span>
     </button>
-    <button scSignaturePadPenColor [color]="'#1d4ed8'">
+    <button scSignaturePadPenColor aria-label="Pen color Blue" [color]="'#1d4ed8'">
       <span class="size-4 rounded-full border" style="background: #1d4ed8"></span>
     </button>
-    <button scSignaturePadPenColor [color]="'#dc2626'">
+    <button scSignaturePadPenColor aria-label="Pen color Red" [color]="'#dc2626'">
       <span class="size-4 rounded-full border" style="background: #dc2626"></span>
     </button>
   </div>
 
   <!-- Canvas -->
   <div class="relative inline-block">
-    <canvas scSignaturePadCanvas></canvas>
+    <canvas scSignaturePadCanvas aria-label="Signature"></canvas>
     <div scSignaturePadControls>
       <button scSignaturePadUndo>Undo</button>
       <button scSignaturePadClear>Clear</button>
@@ -174,19 +174,19 @@ export class MyComponent {
 ```html
 <div scSignaturePad class="space-y-3">
   <div scSignaturePadToolbar>
-    <button scSignaturePadPenWidth [width]="2">
+    <button scSignaturePadPenWidth aria-label="Pen width 2" [width]="2">
       <span class="bg-foreground w-4 rounded-full" style="height: 2px"></span>
     </button>
-    <button scSignaturePadPenWidth [width]="4">
+    <button scSignaturePadPenWidth aria-label="Pen width 4" [width]="4">
       <span class="bg-foreground w-4 rounded-full" style="height: 4px"></span>
     </button>
-    <button scSignaturePadPenWidth [width]="6">
+    <button scSignaturePadPenWidth aria-label="Pen width 6" [width]="6">
       <span class="bg-foreground w-4 rounded-full" style="height: 6px"></span>
     </button>
   </div>
 
   <div class="relative inline-block">
-    <canvas scSignaturePadCanvas></canvas>
+    <canvas scSignaturePadCanvas aria-label="Signature"></canvas>
   </div>
 </div>
 ```
@@ -196,10 +196,10 @@ export class MyComponent {
 ```html
 <div scSignaturePadToolbar>
   <!-- Colors -->
-  <button scSignaturePadPenColor [color]="'#000000'">
+  <button scSignaturePadPenColor aria-label="Pen color Black" [color]="'#000000'">
     <span class="size-4 rounded-full border" style="background: #000000"></span>
   </button>
-  <button scSignaturePadPenColor [color]="'#1d4ed8'">
+  <button scSignaturePadPenColor aria-label="Pen color Blue" [color]="'#1d4ed8'">
     <span class="size-4 rounded-full border" style="background: #1d4ed8"></span>
   </button>
 
@@ -207,10 +207,10 @@ export class MyComponent {
   <div class="bg-border h-6 w-px"></div>
 
   <!-- Widths -->
-  <button scSignaturePadPenWidth [width]="2">
+  <button scSignaturePadPenWidth aria-label="Pen width 2" [width]="2">
     <span class="bg-foreground w-4 rounded-full" style="height: 2px"></span>
   </button>
-  <button scSignaturePadPenWidth [width]="4">
+  <button scSignaturePadPenWidth aria-label="Pen width 4" [width]="4">
     <span class="bg-foreground w-4 rounded-full" style="height: 4px"></span>
   </button>
 </div>

@@ -20,7 +20,7 @@ You write the markup and every piece of text — placeholders, labels, empty and
     <input scEmojiPickerSearch placeholder="Search…" aria-label="Search emojis" />
   </div>
   <div scEmojiPickerViewport>
-    <span scEmojiPickerLoading><svg scSpinner siLoaderCircleIcon class="size-4"></svg></span>
+    <span scEmojiPickerLoading><svg scSpinner aria-label="Loading" siLoaderCircleIcon class="size-4"></svg></span>
     <span scEmojiPickerEmpty>No emoji found.</span>
     <span scEmojiPickerError>Couldn't load the emojis.</span>
     <span scEmojiPickerAnnouncer></span>

@@ -66,7 +66,7 @@ import {
       [width]="400"
       [height]="300"
     >
-      <div scImageAnnotatorToolbar #toolbar="scImageAnnotatorToolbar">
+      <div scImageAnnotatorToolbar aria-label="Annotation tools" #toolbar="scImageAnnotatorToolbar">
         <div class="flex items-center gap-1 border-r pr-2">
           @for (tool of toolbar.tools(); track tool.id) {
             <button

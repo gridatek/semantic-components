@@ -115,6 +115,7 @@ import type { User } from './user.service';
                           type="checkbox"
                           scCheckbox
                           scDataTableSelectAll
+                          aria-label="Select all rows"
                           [table]="table"
                         />
                       </label>

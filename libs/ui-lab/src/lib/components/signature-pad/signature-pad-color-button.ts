@@ -1,5 +1,5 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn, ɵwarnIfUnnamed } from '@semantic-components/ui';
 import { SC_SIGNATURE_PAD } from './signature-pad';
 
 @Directive({
@@ -7,22 +7,20 @@ import { SC_SIGNATURE_PAD } from './signature-pad';
   host: {
     type: 'button',
     '[class]': 'class()',
-    '[attr.aria-label]': 'ariaLabel()',
     '[attr.data-active]': 'isActive() || null',
     '[disabled]': 'signaturePad.disabled() || null',
     '(click)': 'onClick()',
   },
 })
 export class ScSignaturePadColorButton {
+  constructor() {
+    ɵwarnIfUnnamed('scSignaturePadPenColor');
+  }
+
   protected readonly signaturePad = inject(SC_SIGNATURE_PAD);
 
   readonly color = input.required<string>();
-  readonly ariaLabelInput = input<string>('', { alias: 'aria-label' });
   readonly classInput = input<string>('', { alias: 'class' });
-
-  protected readonly ariaLabel = computed(
-    () => this.ariaLabelInput() || `Pen color ${this.color()}`,
-  );
 
   protected readonly isActive = computed(
     () => this.signaturePad.penColor() === this.color(),

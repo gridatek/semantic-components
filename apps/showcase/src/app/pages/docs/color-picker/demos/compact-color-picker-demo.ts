@@ -37,7 +37,7 @@ import {
         <div scColorPickerHue>
           <div scColorPickerHueCursor></div>
         </div>
-        <input scColorPickerInput format="hex" />
+        <input scColorPickerInput aria-label="Color value" format="hex" />
       </div>
     </div>
   `,

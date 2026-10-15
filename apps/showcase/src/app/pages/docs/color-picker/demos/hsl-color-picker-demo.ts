@@ -41,7 +41,12 @@ import {
         </div>
         <div class="flex items-center gap-3">
           <div scColorPickerPreview></div>
-          <input scColorPickerInput format="hsl" class="flex-1" />
+          <input
+            scColorPickerInput
+            aria-label="Color value"
+            format="hsl"
+            class="flex-1"
+          />
         </div>
       </div>
     </div>

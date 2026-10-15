@@ -13,9 +13,7 @@ import { SC_SELECT } from './select-tokens';
 
 @Component({
   selector: 'div[scSelectItem]',
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
   hostDirectives: [
     {
       directive: Option,

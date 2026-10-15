@@ -12,9 +12,7 @@ import { cn } from '@semantic-components/ui';
 @Component({
   selector: 'nav[scNavbar]',
   hostDirectives: [CdkOverlayOrigin],
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
   host: {
     '[class]': 'class()',
   },

@@ -10,7 +10,7 @@ import {
   output,
   untracked,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn, ɵwarnIfUnnamed } from '@semantic-components/ui';
 import { ScSpotlightDescription } from './spotlight-description';
 import { ScSpotlightState } from './spotlight-state';
 import { ScSpotlightTitle } from './spotlight-title';
@@ -39,7 +39,6 @@ export interface ScSpotlightOptions {
     'aria-modal': 'true',
     '[attr.aria-labelledby]': 'title() ? state.titleId : null',
     '[attr.aria-describedby]': 'description() ? state.descriptionId : null',
-    '[attr.aria-label]': 'title() ? null : ariaLabel()',
     '(click)': 'onOverlayClick($event)',
     '(keydown)': 'onKeydown($event)',
     '(window:resize)': 'state.updateTargetRect()',
@@ -48,8 +47,6 @@ export interface ScSpotlightOptions {
 })
 export class ScSpotlight {
   readonly classInput = input<string>('', { alias: 'class' });
-  /** Name of the dialog when it has no `scSpotlightTitle`. */
-  readonly ariaLabel = input<string>('Spotlight', { alias: 'aria-label' });
 
   readonly target = input<string | Element | null>(null);
   readonly padding = input(8);
@@ -97,6 +94,7 @@ export class ScSpotlight {
   });
 
   constructor() {
+    ɵwarnIfUnnamed('scSpotlight');
     effect(() => this.state.padding.set(this.padding()));
     effect(() => this.state.borderRadius.set(this.borderRadius()));
     effect(() => this.state.overlayOpacity.set(this.overlayOpacity()));

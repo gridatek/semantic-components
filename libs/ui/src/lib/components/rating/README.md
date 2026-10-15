@@ -15,9 +15,9 @@ The component consists of four directives:
 
 ```html
 <div scRating [(value)]="rating">
-  <div scRatingGroup>
+  <div scRatingGroup aria-label="Rating">
     @for (i of [1, 2, 3, 4, 5]; track i) {
-    <span scRatingItem [value]="i">
+    <span scRatingItem [attr.aria-label]="i === 1 ? '1 star' : i + ' stars'" [value]="i">
       <svg siStarIcon scRatingIcon></svg>
     </span>
     }
@@ -80,9 +80,9 @@ Icon directive applied to SVGs inside `scRatingItem`. Automatically handles acti
 
 ```html
 <div scRating [(value)]="rating" [allowHalf]="true">
-  <div scRatingGroup>
+  <div scRatingGroup aria-label="Rating">
     @for (i of [1, 2, 3, 4, 5]; track i) {
-    <span scRatingItem [value]="i">
+    <span scRatingItem [attr.aria-label]="i === 1 ? '1 star' : i + ' stars'" [value]="i">
       <svg siStarIcon scRatingIcon></svg>
       <svg siStarIcon scRatingIcon></svg>
     </span>
@@ -95,9 +95,9 @@ Icon directive applied to SVGs inside `scRatingItem`. Automatically handles acti
 
 ```html
 <div scRating [(value)]="rating" [style.--sc-rating-active-color]="'var(--color-red-500)'">
-  <div scRatingGroup>
+  <div scRatingGroup aria-label="Rating">
     @for (i of [1, 2, 3, 4, 5]; track i) {
-    <span scRatingItem [value]="i">
+    <span scRatingItem [attr.aria-label]="i === 1 ? '1 star' : i + ' stars'" [value]="i">
       <svg siHeartIcon scRatingIcon></svg>
     </span>
     }
@@ -109,9 +109,9 @@ Icon directive applied to SVGs inside `scRatingItem`. Automatically handles acti
 
 ```html
 <div scRating [(value)]="rating">
-  <div scRatingGroup>
+  <div scRatingGroup aria-label="Rating">
     @for (i of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; track i) {
-    <span scRatingItem [value]="i">
+    <span scRatingItem [attr.aria-label]="i === 1 ? '1 star' : i + ' stars'" [value]="i">
       <svg siStarIcon scRatingIcon class="size-5"></svg>
     </span>
     }
@@ -123,9 +123,9 @@ Icon directive applied to SVGs inside `scRatingItem`. Automatically handles acti
 
 ```html
 <div scRating [value]="4.5" [readonly]="true">
-  <div scRatingGroup>
+  <div scRatingGroup aria-label="Rating">
     @for (i of [1, 2, 3, 4, 5]; track i) {
-    <span scRatingItem [value]="i">
+    <span scRatingItem [attr.aria-label]="i === 1 ? '1 star' : i + ' stars'" [value]="i">
       <svg siStarIcon scRatingIcon></svg>
     </span>
     }

@@ -3,9 +3,7 @@ import { cn } from '../../utils';
 
 @Component({
   selector: 'div[scCalendarHeader]',
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
   host: {
     '[class]': 'class()',
   },

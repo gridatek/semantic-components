@@ -9,9 +9,7 @@ import { ScHeading } from '@semantic-components/ui';
 
 @Component({
   imports: [ScHeading],
-  template: `
-    <h1 scHeading>Page Title</h1>
-  `,
+  template: ` <h1 scHeading>Page Title</h1> `,
 })
 export class MyComponent {}
 ```

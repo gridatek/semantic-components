@@ -20,9 +20,7 @@ import { SC_CONTEXT_MENU_PROVIDER } from './context-menu-types';
   providers: [
     { provide: SC_CONTEXT_MENU_PROVIDER, useExisting: ScContextMenuProvider },
   ],
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
   host: {
     'data-slot': 'context-menu-provider',
     '[class]': 'class()',

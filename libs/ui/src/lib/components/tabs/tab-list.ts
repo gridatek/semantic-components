@@ -49,9 +49,7 @@ type ScTabListVariant = VariantProps<typeof tabsListVariants>['variant'];
     '[class]': 'class()',
     '[attr.data-variant]': 'variant()',
   },
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
 })
 export class ScTabList {
   readonly classInput = input<string>('', { alias: 'class' });

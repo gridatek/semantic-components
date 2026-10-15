@@ -10,7 +10,7 @@ import {
   model,
   output,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn, ɵwarnIfUnnamed } from '@semantic-components/ui';
 import { SC_SIGNATURE_PAD, ScSignaturePoint } from './signature-pad';
 
 @Directive({
@@ -18,7 +18,6 @@ import { SC_SIGNATURE_PAD, ScSignaturePoint } from './signature-pad';
   host: {
     '[class]': 'class()',
     role: 'img',
-    '[attr.aria-label]': 'ariaLabel()',
     '(mousedown)': 'onPointerDown($event)',
     '(mousemove)': 'onPointerMove($event)',
     '(mouseup)': 'onPointerUp()',
@@ -33,7 +32,6 @@ export class ScSignaturePadCanvas {
   private readonly elementRef = inject(ElementRef<HTMLCanvasElement>);
   private readonly destroyRef = inject(DestroyRef);
 
-  readonly ariaLabel = input<string>('Signature pad', { alias: 'aria-label' });
   readonly classInput = input<string>('', { alias: 'class' });
 
   // Two-way binding
@@ -54,6 +52,7 @@ export class ScSignaturePadCanvas {
   private resizeObserver: ResizeObserver | null = null;
 
   constructor() {
+    ɵwarnIfUnnamed('scSignaturePadCanvas');
     afterNextRender(() => {
       const canvas = this.elementRef.nativeElement;
       this.signaturePad.canvasElement.set(canvas);

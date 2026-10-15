@@ -351,7 +351,7 @@ const SAMPLE_DATA: User[] = [
                           <input
                             type="checkbox"
                             scCheckbox
-                            scDataTableSelectAll
+                            scDataTableSelectAll aria-label="Select all rows"
                             [table]="table"
                           />
                         </label>

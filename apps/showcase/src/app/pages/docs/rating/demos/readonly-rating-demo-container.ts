@@ -30,9 +30,9 @@ import { SiStarIcon } from '@semantic-icons/lucide-icons';
     <div class="flex flex-col gap-4">
       <div class="flex flex-col gap-2">
         <div scRating [value]="4" [readonly]="true">
-          <div scRatingGroup>
+          <div scRatingGroup aria-label="Rating">
             @for (i of [1, 2, 3, 4, 5]; track i) {
-              <span scRatingItem [value]="i">
+              <span scRatingItem [attr.aria-label]="i === 1 ? '1 star' : i + ' stars'" [value]="i">
                 <svg siStarIcon scRatingIcon></svg>
               </span>
             }
@@ -43,9 +43,9 @@ import { SiStarIcon } from '@semantic-icons/lucide-icons';
 
       <div class="flex flex-col gap-2">
         <div scRating [value]="3.5" [readonly]="true" [allowHalf]="true">
-          <div scRatingGroup>
+          <div scRatingGroup aria-label="Rating">
             @for (i of [1, 2, 3, 4, 5]; track i) {
-              <span scRatingItem [value]="i">
+              <span scRatingItem [attr.aria-label]="i === 1 ? '1 star' : i + ' stars'" [value]="i">
                 <svg siStarIcon scRatingIcon></svg>
                 <svg siStarIcon scRatingIcon></svg>
               </span>

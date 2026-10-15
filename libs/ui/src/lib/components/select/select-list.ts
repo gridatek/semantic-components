@@ -14,9 +14,7 @@ import { SC_SELECT } from './select-tokens';
 
 @Component({
   selector: 'div[scSelectList]',
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
   hostDirectives: [Listbox, ComboboxWidget],
   host: {
     'data-slot': 'select-list',

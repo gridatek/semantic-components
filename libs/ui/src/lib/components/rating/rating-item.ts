@@ -7,7 +7,7 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn, ɵwarnIfUnnamed } from '../../utils';
 import { SC_RATING } from './rating';
 import { SC_RATING_GROUP } from './rating-group';
 import { ScRatingIcon } from './rating-icon';
@@ -19,7 +19,6 @@ import { ScRatingIcon } from './rating-icon';
     role: 'radio',
     '[class]': 'class()',
     '[attr.aria-checked]': 'isSelected()',
-    '[attr.aria-label]': '"Rate " + value()',
     '[attr.data-state]': 'state()',
     '[tabindex]': 'tabIndex()',
     '(click)': 'onClick($event)',
@@ -95,6 +94,7 @@ export class ScRatingItem {
   });
 
   constructor() {
+    ɵwarnIfUnnamed('scRatingItem');
     // Resolve icon roles and propagate state
     effect(() => {
       const allIcons = this.icons();

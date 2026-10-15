@@ -87,6 +87,7 @@ import {
 
           <div
             scCarousel
+            aria-label="Images"
             [activeIndex]="lightbox.currentIndex()"
             (activeIndexChange)="lightbox.goTo($event)"
             [options]="{ loop: lightbox.loop() }"

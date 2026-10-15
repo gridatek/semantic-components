@@ -3,9 +3,7 @@ import { cn } from '@semantic-components/ui';
 
 @Component({
   selector: 'div[scNavbarGroup]',
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
   host: {
     '[class]': 'class()',
   },

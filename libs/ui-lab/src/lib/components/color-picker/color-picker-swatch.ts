@@ -1,5 +1,5 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn, ɵwarnIfUnnamed } from '@semantic-components/ui';
 import { SC_COLOR_PICKER } from './color-picker';
 
 @Directive({
@@ -8,14 +8,16 @@ import { SC_COLOR_PICKER } from './color-picker';
     type: 'button',
     '[class]': 'class()',
     '[style.background-color]': 'color()',
-    '[attr.aria-label]': 'ariaLabel()',
     '(click)': 'selectColor()',
   },
 })
 export class ScColorPickerSwatch {
+  constructor() {
+    ɵwarnIfUnnamed('scColorPickerSwatch');
+  }
+
   readonly classInput = input<string>('', { alias: 'class' });
   readonly color = input.required<string>();
-  readonly ariaLabelInput = input('', { alias: 'aria-label' });
 
   private readonly colorPicker = inject(SC_COLOR_PICKER);
 
@@ -25,10 +27,6 @@ export class ScColorPickerSwatch {
       'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring',
       this.classInput(),
     ),
-  );
-
-  protected readonly ariaLabel = computed(
-    () => this.ariaLabelInput() || `Select color ${this.color()}`,
   );
 
   protected selectColor(): void {

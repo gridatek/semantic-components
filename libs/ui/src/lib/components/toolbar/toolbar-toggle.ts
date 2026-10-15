@@ -20,9 +20,7 @@ import { ScToolbarToggleGroup } from './toolbar-toggle-group';
       inputs: ['disabled'],
     },
   ],
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
   host: {
     type: 'button',
     '[attr.aria-pressed]': 'selected()',

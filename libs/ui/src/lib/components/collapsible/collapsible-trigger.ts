@@ -18,9 +18,7 @@ import { cn } from '../../utils';
       outputs: ['expandedChange'],
     },
   ],
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
   host: {
     type: 'button',
     '[attr.data-state]': 'trigger.expanded() ? "open" : "closed"',

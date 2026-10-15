@@ -4,9 +4,7 @@ import { cn } from '../../utils';
 @Component({
   selector: 'div[scSelectPopup]',
   imports: [],
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
   host: {
     '[class]': 'class()',
     'animate.enter': 'animate-in fade-in-0 zoom-in-95 duration-150',

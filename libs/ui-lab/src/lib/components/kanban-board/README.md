@@ -13,7 +13,7 @@ Directive-based drag-and-drop task board. Directives provide behavior and stylin
 ### Basic Usage
 
 ```html
-<div scKanbanBoard #board="scKanbanBoard" [(columns)]="columns" [(cards)]="cards">
+<div scKanbanBoard aria-label="Board" #board="scKanbanBoard" [(columns)]="columns" [(cards)]="cards">
   @for (column of board.sortedColumns(); track column.id) {
   <div scKanbanColumn #col="scKanbanColumn" [column]="column">
     <h3>{{ column.title }} ({{ col.columnCards().length }})</h3>
@@ -81,7 +81,7 @@ Directive-based drag-and-drop task board. Directives provide behavior and stylin
 ### Disabled Board
 
 ```html
-<div scKanbanBoard [(columns)]="columns" [(cards)]="cards" [disabled]="true">
+<div scKanbanBoard aria-label="Board" [(columns)]="columns" [(cards)]="cards" [disabled]="true">
   <!-- dragging is blocked -->
 </div>
 ```

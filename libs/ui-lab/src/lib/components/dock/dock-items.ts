@@ -10,9 +10,7 @@ import { SC_DOCK } from './dock';
 
 @Component({
   selector: 'div[scDockItems]',
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
   host: {
     '[class]': 'class()',
   },

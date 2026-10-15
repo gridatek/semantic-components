@@ -12,9 +12,7 @@ import { ScNavbarProvider } from './navbar-provider';
 @Component({
   selector: 'button[scNavbarMobileTrigger]',
   exportAs: 'scNavbarMobileTrigger',
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
   host: {
     type: 'button',
     '[class]': 'class()',

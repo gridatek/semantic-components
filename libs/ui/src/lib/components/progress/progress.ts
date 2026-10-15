@@ -1,15 +1,12 @@
 import {
   Component,
-  ElementRef,
   ViewEncapsulation,
-  afterNextRender,
   computed,
-  inject,
   input,
   model,
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
-import { cn } from '../../utils';
+import { cn, ɵwarnIfUnnamed } from '../../utils';
 import { ScProgressIndicator } from './progress-indicator';
 
 @Component({
@@ -28,21 +25,7 @@ import { ScProgressIndicator } from './progress-indicator';
 })
 export class ScProgress implements FormValueControl<number | null> {
   constructor() {
-    // In development: a progress bar needs a name — the library gives none.
-    if (typeof ngDevMode !== 'undefined' && ngDevMode) {
-      const element = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
-      afterNextRender(() => {
-        if (
-          !element.hasAttribute('aria-label') &&
-          !element.hasAttribute('aria-labelledby')
-        ) {
-          console.warn(
-            'scProgress has no name: give it aria-label or aria-labelledby.',
-            element,
-          );
-        }
-      });
-    }
+    ɵwarnIfUnnamed('scProgress');
   }
 
   readonly classInput = input<string>('', { alias: 'class' });

@@ -16,7 +16,7 @@ A composable set of directives for selecting colors with support for various for
   </div>
   <div class="flex items-center gap-3">
     <div scColorPickerPreview></div>
-    <input scColorPickerInput format="hex" />
+    <input scColorPickerInput aria-label="Color value" format="hex" />
   </div>
 </div>
 ```
@@ -194,7 +194,7 @@ interface ScHSL {
   </div>
   <div class="flex items-center gap-3">
     <div scColorPickerPreview></div>
-    <input scColorPickerInput format="hex" class="flex-1" />
+    <input scColorPickerInput aria-label="Color value" format="hex" class="flex-1" />
   </div>
 </div>
 ```
@@ -248,7 +248,7 @@ interface ScHSL {
     <div scColorPickerHueCursor></div>
   </div>
   <div class="flex gap-2">
-    <input scColorPickerInput format="hex" class="flex-1" />
+    <input scColorPickerInput aria-label="Color value" format="hex" class="flex-1" />
     <button scColorPickerEyedropper>
       <svg siPipetteIcon class="size-4"></svg>
       <span class="sr-only">Pick color from screen</span>
@@ -269,7 +269,7 @@ interface ScHSL {
   <div scColorPickerHue>
     <div scColorPickerHueCursor></div>
   </div>
-  <input scColorPickerInput format="hex" />
+  <input scColorPickerInput aria-label="Color value" format="hex" />
 </div>
 ```
 

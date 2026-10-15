@@ -315,9 +315,9 @@ import {
             <h2 class="text-2xl font-semibold tracking-tight">Spinner</h2>
             <div scSeparator></div>
             <div class="flex items-center gap-4">
-              <svg scSpinner class="size-6"></svg>
-              <svg scSpinner class="size-8"></svg>
-              <svg scSpinner class="size-10"></svg>
+              <svg scSpinner aria-label="Loading" class="size-6"></svg>
+              <svg scSpinner aria-label="Loading" class="size-8"></svg>
+              <svg scSpinner aria-label="Loading" class="size-10"></svg>
             </div>
           </section>
 

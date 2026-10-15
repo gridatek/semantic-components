@@ -11,7 +11,7 @@ import {
   output,
   viewChild,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn, ɵwarnIfUnnamed } from '@semantic-components/ui';
 import { ScInfiniteScrollSentinel } from './infinite-scroll-sentinel';
 
 export const SC_INFINITE_SCROLL = new InjectionToken<ScInfiniteScroll>(
@@ -30,7 +30,6 @@ export const SC_INFINITE_SCROLL = new InjectionToken<ScInfiniteScroll>(
   host: {
     tabindex: '0',
     role: 'region',
-    '[attr.aria-label]': 'ariaLabel()',
     '[class]': 'class()',
     '[attr.data-disabled]': 'disabled() || null',
     '[attr.data-loading]': 'loading() || null',
@@ -43,19 +42,12 @@ export class ScInfiniteScroll {
   private readonly sentinel = viewChild.required(ScInfiniteScrollSentinel);
 
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly ariaLabelInput = input('Scrollable content', {
-    alias: 'aria-label',
-  });
   readonly threshold = input<number>(100);
   readonly disabled = input<boolean>(false);
   readonly loading = input<boolean>(false);
   readonly hasReachedEnd = input<boolean>(false);
 
   readonly loadMore = output<void>();
-
-  protected readonly ariaLabel = computed(
-    () => this.ariaLabelInput() || 'Scrollable content',
-  );
 
   protected readonly class = computed(() =>
     cn('overflow-auto', this.classInput()),
@@ -64,6 +56,7 @@ export class ScInfiniteScroll {
   private observer: IntersectionObserver | null = null;
 
   constructor() {
+    ɵwarnIfUnnamed('scInfiniteScroll');
     afterNextRender(() => {
       const host = this.elementRef.nativeElement;
       const sentinelEl = this.sentinel().elementRef.nativeElement;

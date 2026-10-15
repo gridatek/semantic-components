@@ -9,9 +9,7 @@ import { cn } from '@semantic-components/ui';
 
 @Component({
   selector: 'div[scNativeDialogProvider]',
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
   host: {
     '[class]': 'class()',
   },

@@ -90,7 +90,7 @@ const y = 2;'"
           </div>
         </div>
       </div>
-      <div scDiffViewerContent>
+      <div scDiffViewerContent aria-label="Differences">
         @if (diff.viewMode() === 'split') {
           <div scDiffViewerSplit>
             <div scDiffViewerPane side="old">

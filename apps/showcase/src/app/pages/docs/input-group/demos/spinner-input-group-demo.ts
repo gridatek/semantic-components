@@ -19,7 +19,12 @@ import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
   template: `
     <div scInputGroup class="w-full max-w-sm">
       <div scInputGroupAddon>
-        <svg scSpinner siLoaderCircleIcon class="size-4"></svg>
+        <svg
+          scSpinner
+          aria-label="Loading"
+          siLoaderCircleIcon
+          class="size-4"
+        ></svg>
       </div>
       <input scInput placeholder="Loading..." disabled />
     </div>

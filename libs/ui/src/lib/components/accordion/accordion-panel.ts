@@ -21,9 +21,7 @@ import { cn } from '../../utils';
   host: {
     '[class]': 'class()',
   },
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
 })
 export class ScAccordionPanel {
   readonly panel = inject(AccordionPanel);

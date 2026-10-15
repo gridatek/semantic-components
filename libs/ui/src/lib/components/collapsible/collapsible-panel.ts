@@ -17,9 +17,7 @@ import { cn } from '../../utils';
       inputs: ['id'],
     },
   ],
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
   host: {
     '[class]': 'class()',
   },

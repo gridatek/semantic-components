@@ -14,9 +14,7 @@ import { cn } from '../../utils';
   host: {
     '[class]': 'class()',
   },
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
 })
 export class ScTabPanel {
   readonly classInput = input<string>('', { alias: 'class' });

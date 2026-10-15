@@ -11,9 +11,7 @@ import { SC_IMAGE_COMPARE } from './image-compare';
 
 @Component({
   selector: '[scImageCompareArea]',
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
   host: {
     '[class]': 'class()',
     tabindex: '0',

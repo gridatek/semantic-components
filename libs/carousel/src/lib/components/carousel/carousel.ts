@@ -11,7 +11,7 @@ import {
   model,
   signal,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn, ɵwarnIfUnnamed } from '@semantic-components/ui';
 import EmblaCarousel, {
   type EmblaCarouselType,
   EmblaOptionsType,
@@ -27,13 +27,10 @@ export type ScCarouselPlugin = EmblaPluginType;
 @Component({
   selector: 'div[scCarousel]',
   exportAs: 'scCarousel',
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
   host: {
     role: 'region',
     'aria-roledescription': 'carousel',
-    '[attr.aria-label]': 'ariaLabel()',
     '[class]': 'class()',
     '(keydown)': 'onKeyDown($event)',
   },
@@ -43,7 +40,6 @@ export class ScCarousel {
   private readonly destroyRef = inject(DestroyRef);
 
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly ariaLabel = input('carousel', { alias: 'aria-label' });
   readonly orientation = input<ScCarouselOrientation>('horizontal');
   readonly options = input<ScCarouselOptions>({});
   readonly plugins = input<ScCarouselPlugin[]>([]);
@@ -59,6 +55,7 @@ export class ScCarousel {
   protected readonly class = computed(() => cn('relative', this.classInput()));
 
   constructor() {
+    ɵwarnIfUnnamed('scCarousel');
     afterNextRender(() => {
       const viewportEl = this.viewport()?.viewportElement();
       if (!viewportEl) return;

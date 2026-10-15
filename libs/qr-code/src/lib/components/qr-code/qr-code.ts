@@ -7,7 +7,7 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn, ɵwarnIfUnnamed } from '@semantic-components/ui';
 import { encode } from 'uqr';
 
 /** Error correction: how much of the code can be damaged and still read. */
@@ -66,13 +66,16 @@ function modulesPath(modules: readonly (readonly boolean[])[]): string {
     role: 'img',
     xmlns: 'http://www.w3.org/2000/svg',
     '[attr.viewBox]': 'viewBox()',
-    '[attr.aria-label]': 'ariaLabel()',
     '[attr.data-invalid]': 'error() ? "" : null',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
 })
 export class ScQrCode {
+  constructor() {
+    ɵwarnIfUnnamed('scQrCode');
+  }
+
   readonly nativeElement =
     inject<ElementRef<SVGSVGElement>>(ElementRef).nativeElement;
 
@@ -91,8 +94,6 @@ export class ScQrCode {
   readonly boostEcc = input(false, { transform: booleanAttribute });
   /** Mask pattern (0–7); chosen automatically by default. */
   readonly mask = input<number | undefined>(undefined);
-  /** Accessible name. Describe what the code leads to when you can. */
-  readonly ariaLabel = input('QR code', { alias: 'aria-label' });
 
   private readonly encoded = computed((): Encoded => {
     const value = this.value();

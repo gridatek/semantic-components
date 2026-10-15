@@ -17,9 +17,9 @@ For half-star support, provide **two** `scRatingIcon` SVGs inside each `scRating
 
 ```html
 <div scRating [(value)]="rating" [allowHalf]="true">
-  <div scRatingGroup>
+  <div scRatingGroup aria-label="Rating">
     @for (i of [1, 2, 3, 4, 5]; track i) {
-    <span scRatingItem [value]="i">
+    <span scRatingItem [attr.aria-label]="i === 1 ? '1 star' : i + ' stars'" [value]="i">
       <svg siStarIcon scRatingIcon></svg>
       <svg siStarIcon scRatingIcon></svg>
     </span>

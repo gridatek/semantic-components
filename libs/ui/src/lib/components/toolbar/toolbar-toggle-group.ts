@@ -18,9 +18,7 @@ import { cn } from '../../utils';
       inputs: ['disabled'],
     },
   ],
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
   host: {
     '[class]': 'class()',
   },

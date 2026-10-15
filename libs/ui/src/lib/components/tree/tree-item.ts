@@ -31,9 +31,7 @@ export const SC_TREE_ITEM = new InjectionToken<ScTreeItem>('SC_TREE_ITEM');
     },
   ],
   providers: [{ provide: SC_TREE_ITEM, useExisting: ScTreeItem }],
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
   host: {
     'data-slot': 'tree-item',
     '[attr.data-state]': 'treeItem.expanded() ? "open" : "closed"',

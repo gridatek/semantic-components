@@ -25,7 +25,9 @@ import {
   template: `
     <div scTableContainer>
       <table scTable class="w-full max-w-2xl">
-        <caption scTableCaption>A list of your recent invoices.</caption>
+        <caption scTableCaption>
+          A list of your recent invoices.
+        </caption>
         <thead scTableHeader>
           <tr scTableRow>
             <th scTableHeaderCell class="w-[100px]">Invoice</th>

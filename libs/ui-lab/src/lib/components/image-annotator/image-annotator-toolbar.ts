@@ -13,13 +13,11 @@ import { ScImageAnnotatorState } from './image-annotator-state';
   hostDirectives: [{ directive: Toolbar, inputs: ['wrap'] }],
   host: {
     'data-slot': 'image-annotator-toolbar',
-    '[attr.aria-label]': 'label()',
     '[class]': 'class()',
   },
 })
 export class ScImageAnnotatorToolbar {
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly label = input('Annotation tools', { alias: 'aria-label' });
 
   private readonly state = inject(ScImageAnnotatorState);
 

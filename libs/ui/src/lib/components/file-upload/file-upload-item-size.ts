@@ -10,9 +10,7 @@ import { SC_FILE_UPLOAD_ITEM } from './file-upload-item';
 
 @Component({
   selector: '[scFileUploadItemSize]',
-  template: `
-    {{ formattedSize() }}
-  `,
+  template: ` {{ formattedSize() }} `,
   host: {
     '[class]': 'class()',
   },

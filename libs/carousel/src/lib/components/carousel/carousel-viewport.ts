@@ -10,9 +10,7 @@ import { cn } from '@semantic-components/ui';
 
 @Component({
   selector: 'div[scCarouselViewport]',
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
   host: {
     '[class]': 'class()',
   },

@@ -16,9 +16,7 @@ import { SC_AUTOCOMPLETE } from './autocomplete-tokens';
   hostDirectives: [
     { directive: Option, inputs: ['value', 'label', 'disabled'] },
   ],
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
   host: {
     'data-slot': 'autocomplete-item',
     '[class]': 'class()',

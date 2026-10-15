@@ -17,9 +17,7 @@ const sameValues = (a: readonly string[], b: readonly string[]) =>
 
 @Component({
   selector: 'div[scMultiselectList]',
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
   hostDirectives: [Listbox, ComboboxWidget],
   host: {
     'data-slot': 'multiselect-list',

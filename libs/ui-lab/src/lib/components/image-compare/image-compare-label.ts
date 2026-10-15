@@ -10,9 +10,7 @@ import { SC_IMAGE_COMPARE } from './image-compare';
 
 @Component({
   selector: '[scImageCompareLabel]',
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
   host: {
     '[class]': 'class()',
   },

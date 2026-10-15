@@ -20,8 +20,6 @@ export const SC_RATING = new InjectionToken<ScRating>('SC_RATING');
   host: {
     '[attr.role]': 'role()',
     '[class]': 'class()',
-    '[attr.aria-label]': 'ariaLabel() || null',
-    '[attr.aria-labelledby]': 'ariaLabelledby() || null',
     '[attr.data-disabled]': 'disabled() || null',
     '[attr.data-readonly]': 'readonly() || null',
     style:
@@ -41,8 +39,6 @@ export class ScRating {
   readonly disabled = input<boolean>(false);
   readonly allowHalf = input<boolean>(false);
   readonly allowClear = input<boolean>(true);
-  readonly ariaLabel = input<string>('', { alias: 'aria-label' });
-  readonly ariaLabelledby = input<string>('', { alias: 'aria-labelledby' });
 
   private readonly items = contentChildren(ScRatingItem, {
     descendants: true,

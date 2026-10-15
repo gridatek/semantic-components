@@ -37,7 +37,7 @@ import { SiTrash2Icon, SiUndoIcon } from '@semantic-icons/lucide-icons';
   ],
   template: \`
     <div scSignaturePad [disabled]="true" class="relative w-full">
-      <canvas scSignaturePadCanvas class="h-[150px]"></canvas>
+      <canvas scSignaturePadCanvas aria-label="Signature" class="h-[150px]"></canvas>
 
       <div scSignaturePadControls>
         <button scSignaturePadUndo>

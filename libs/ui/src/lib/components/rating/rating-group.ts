@@ -6,7 +6,7 @@ import {
   input,
   signal,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn, ɵwarnIfUnnamed } from '../../utils';
 import { SC_RATING } from './rating';
 
 // Token for rating item group context
@@ -19,7 +19,6 @@ export const SC_RATING_GROUP = new InjectionToken<ScRatingGroup>(
   providers: [{ provide: SC_RATING_GROUP, useExisting: ScRatingGroup }],
   host: {
     role: 'radiogroup',
-    'aria-label': 'Rating',
     '[class]': 'class()',
     '(mouseleave)': 'onMouseLeave()',
     '(keydown)': 'onKeydown($event)',
@@ -27,6 +26,10 @@ export const SC_RATING_GROUP = new InjectionToken<ScRatingGroup>(
 })
 export class ScRatingGroup {
   protected readonly field = inject(SC_RATING);
+
+  constructor() {
+    ɵwarnIfUnnamed('scRatingGroup');
+  }
 
   readonly classInput = input<string>('', { alias: 'class' });
 

@@ -25,7 +25,7 @@ A composable set of directives for comparing text and code changes in split or u
       </div>
     </div>
   </div>
-  <div scDiffViewerContent>
+  <div scDiffViewerContent aria-label="Differences">
     @if (diff.viewMode() === 'split') {
     <div scDiffViewerSplit>
       <div scDiffViewerPane side="old">
@@ -253,7 +253,7 @@ interface ScDiffLine {
 
 ```html
 <div scDiffViewer [oldText]="oldText" [newText]="newText" #diff="scDiffViewer">
-  <div scDiffViewerContent maxHeight="200px">
+  <div scDiffViewerContent aria-label="Differences" maxHeight="200px">
     <div scDiffViewerSplit>
       <div scDiffViewerPane side="old">
         <div class="font-mono text-sm">
@@ -290,7 +290,7 @@ interface ScDiffLine {
 
 ```html
 <div scDiffViewer [oldText]="oldText" [newText]="newText" #diff="scDiffViewer">
-  <div scDiffViewerContent>
+  <div scDiffViewerContent aria-label="Differences">
     <div class="font-mono text-sm">
       @for (line of diff.diffResult().lines; track $index) {
       <div scDiffViewerLine [type]="line.type">

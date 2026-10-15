@@ -5,9 +5,7 @@ import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-default-spinner-demo',
   imports: [ScSpinner, SiLoaderCircleIcon],
-  template: `
-    <svg scSpinner siLoaderCircleIcon></svg>
-  `,
+  template: ` <svg scSpinner siLoaderCircleIcon></svg> `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })

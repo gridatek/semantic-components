@@ -1,5 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn, ɵwarnIfUnnamed } from '@semantic-components/ui';
 import { syncDataTableCheckbox } from './data-table-checkbox';
 import type { ScDataTableSelectAllTable } from './data-table-types';
 
@@ -9,13 +9,12 @@ import type { ScDataTableSelectAllTable } from './data-table-types';
  * every row. Works alone or with `scCheckbox`.
  *
  * ```html
- * <input type="checkbox" scCheckbox scDataTableSelectAll [table]="table" />
+ * <input type="checkbox" scCheckbox scDataTableSelectAll aria-label="Select all rows" [table]="table" />
  * ```
  */
 @Directive({
   selector: 'input[type="checkbox"][scDataTableSelectAll]',
   host: {
-    '[attr.aria-label]': 'ariaLabel()',
     '(change)': 'toggle($event)',
     '[class]': 'class()',
   },
@@ -23,7 +22,6 @@ import type { ScDataTableSelectAllTable } from './data-table-types';
 export class ScDataTableSelectAll {
   readonly table = input.required<ScDataTableSelectAllTable>();
   readonly scope = input<'page' | 'all'>('page');
-  readonly ariaLabel = input('Select all rows', { alias: 'aria-label' });
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly allSelected = computed(() =>
@@ -44,6 +42,7 @@ export class ScDataTableSelectAll {
   protected readonly class = computed(() => cn(this.classInput()));
 
   constructor() {
+    ɵwarnIfUnnamed('scDataTableSelectAll');
     syncDataTableCheckbox(this.allSelected, this.indeterminate);
   }
 

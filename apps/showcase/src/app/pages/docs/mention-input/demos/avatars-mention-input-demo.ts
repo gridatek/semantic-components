@@ -35,7 +35,7 @@ import type { ScMentionUser } from '@semantic-components/ui-lab';
           @if (
             mention.showSuggestions() && mention.filteredUsers().length > 0
           ) {
-            <div scMentionInputSuggestions>
+            <div scMentionInputSuggestions aria-label="Suggestions">
               @for (
                 user of mention.filteredUsers();
                 track user.id;

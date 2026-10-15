@@ -16,9 +16,7 @@ import { SC_SWITCH_FIELD } from './switch-types';
     '[attr.data-state]': 'switchField.dataState()',
     '[attr.aria-hidden]': 'true',
   },
-  template: `
-    <span [class]="thumbClass()"></span>
-  `,
+  template: ` <span [class]="thumbClass()"></span> `,
   encapsulation: ViewEncapsulation.None,
 })
 export class ScSwitchVisual {

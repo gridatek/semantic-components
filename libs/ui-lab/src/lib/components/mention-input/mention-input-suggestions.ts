@@ -29,7 +29,7 @@ import { ScMentionInputState } from './mention-input-state';
         <div
           role="listbox"
           [id]="state.listboxId"
-          [attr.aria-label]="label()"
+          [attr.aria-label]="label() || null"
           [class]="listClass()"
         >
           <ng-content />
@@ -44,7 +44,8 @@ import { ScMentionInputState } from './mention-input-state';
 })
 export class ScMentionInputSuggestions {
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly label = input('Suggestions', { alias: 'aria-label' });
+  /** The list's name: none by default — name it. */
+  readonly label = input('', { alias: 'aria-label' });
 
   protected readonly state = inject(ScMentionInputState);
   protected readonly scrollStrategy: ScrollStrategy = inject(

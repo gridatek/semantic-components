@@ -5,8 +5,7 @@ A directive that styles and connects `<label>` elements to form controls, with a
 ## Usage
 
 ```html
-<label scLabel for="email">Email</label>
-<input id="email" type="email" />
+<label scLabel for="email">Email</label> <input id="email" type="email" />
 ```
 
 ## Components
@@ -53,8 +52,7 @@ A directive for label-like text that lives inside another `<label>` element, avo
 ### Basic label
 
 ```html
-<label scLabel for="name">Name</label>
-<input id="name" type="text" />
+<label scLabel for="name">Name</label> <input id="name" type="text" />
 ```
 
 ### With field context

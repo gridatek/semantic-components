@@ -45,7 +45,12 @@ import { SiPipetteIcon } from '@semantic-icons/lucide-icons';
         </div>
         <div class="flex items-center gap-3">
           <div scColorPickerPreview></div>
-          <input scColorPickerInput format="hex" class="flex-1" />
+          <input
+            scColorPickerInput
+            aria-label="Color value"
+            format="hex"
+            class="flex-1"
+          />
           <button scColorPickerEyedropper>
             <svg siPipetteIcon class="size-4"></svg>
             <span class="sr-only">Pick color from screen</span>

@@ -14,9 +14,7 @@ import { cn } from '../../utils';
     '[class]': 'class()',
     '[attr.data-orientation]': 'orientation()',
   },
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
 })
 export class ScTabs {
   readonly classInput = input<string>('', { alias: 'class' });

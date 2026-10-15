@@ -15,9 +15,7 @@ import { SC_TREE_ITEM } from './tree-item';
  */
 @Component({
   selector: 'div[scTreeItemTrigger], span[scTreeItemTrigger]',
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
   host: {
     'data-slot': 'tree-item-trigger',
     '[attr.data-selected]': 'item.treeItem.selected() || null',

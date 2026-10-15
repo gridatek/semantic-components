@@ -22,9 +22,7 @@ interface FormHost {
 
 @Component({
   imports: [ScInput, FormField],
-  template: `
-    <input scInput [formField]="f.name" />
-  `,
+  template: ` <input scInput [formField]="f.name" /> `,
 })
 class InputFormHost {
   readonly model = signal({ name: '' });
@@ -35,9 +33,7 @@ class InputFormHost {
 
 @Component({
   imports: [ScTextarea, FormField],
-  template: `
-    <textarea scTextarea [formField]="f.name"></textarea>
-  `,
+  template: ` <textarea scTextarea [formField]="f.name"></textarea> `,
 })
 class TextareaFormHost {
   readonly model = signal({ name: '' });
@@ -48,9 +44,7 @@ class TextareaFormHost {
 
 @Component({
   imports: [ScInput, FormField],
-  template: `
-    <input scInput [formField]="f.name" />
-  `,
+  template: ` <input scInput [formField]="f.name" /> `,
 })
 class InputDisabledFormHost {
   readonly model = signal({ name: '' });
@@ -61,9 +55,7 @@ class InputDisabledFormHost {
 
 @Component({
   imports: [ScTextarea, FormField],
-  template: `
-    <textarea scTextarea [formField]="f.name"></textarea>
-  `,
+  template: ` <textarea scTextarea [formField]="f.name"></textarea> `,
 })
 class TextareaDisabledFormHost {
   readonly model = signal({ name: '' });
@@ -74,9 +66,7 @@ class TextareaDisabledFormHost {
 
 @Component({
   imports: [ScInput],
-  template: `
-    <input scInput [disabled]="off()" />
-  `,
+  template: ` <input scInput [disabled]="off()" /> `,
 })
 class InputStandaloneHost {
   readonly off = signal(false);
@@ -84,9 +74,7 @@ class InputStandaloneHost {
 
 @Component({
   imports: [ScTextarea],
-  template: `
-    <textarea scTextarea [disabled]="off()"></textarea>
-  `,
+  template: ` <textarea scTextarea [disabled]="off()"></textarea> `,
 })
 class TextareaStandaloneHost {
   readonly off = signal(false);

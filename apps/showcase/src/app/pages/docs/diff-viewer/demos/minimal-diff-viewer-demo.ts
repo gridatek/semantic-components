@@ -31,7 +31,7 @@ import {
       [newText]="newText"
       #diff="scDiffViewer"
     >
-      <div scDiffViewerContent maxHeight="200px">
+      <div scDiffViewerContent aria-label="Differences" maxHeight="200px">
         <div scDiffViewerSplit>
           <div scDiffViewerPane side="old">
             <div class="font-mono text-sm">

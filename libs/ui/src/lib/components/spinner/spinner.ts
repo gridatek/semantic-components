@@ -1,17 +1,19 @@
 import { Directive, computed, input } from '@angular/core';
-import { cn } from '../../utils';
+import { cn, ɵwarnIfUnnamed } from '../../utils';
 
 @Directive({
   selector: 'svg[scSpinner]',
   host: {
     role: 'status',
-    '[attr.aria-label]': 'ariaLabel()',
     '[class]': 'class()',
   },
 })
 export class ScSpinner {
+  constructor() {
+    ɵwarnIfUnnamed('scSpinner');
+  }
+
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly ariaLabel = input<string>('Loading', { alias: 'aria-label' });
 
   protected readonly class = computed(() =>
     cn('size-4 animate-spin', this.classInput()),

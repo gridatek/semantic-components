@@ -13,9 +13,7 @@ import { ScInput } from '@semantic-components/ui';
 
 @Component({
   imports: [ScInput],
-  template: `
-    <input scInput type="text" placeholder="Name" />
-  `,
+  template: ` <input scInput type="text" placeholder="Name" /> `,
 })
 export class MyComponent {}
 ```
