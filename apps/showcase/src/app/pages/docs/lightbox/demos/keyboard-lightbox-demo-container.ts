@@ -177,25 +177,20 @@ import {
             <div scLightboxToolbar>
               <span scLightboxCounter></span>
               <div scLightboxZoomControls>
-                <button
-                  scLightboxZoomOut
-                  aria-label="Zoom out"
-                  value="zoom-out"
-                >
+                <button scLightboxZoomOut value="zoom-out">
                   <svg siZoomOutIcon></svg>
+                  <span class="sr-only">Zoom out</span>
                 </button>
                 <span class="min-w-12 text-center text-sm text-white/80">
                   {{ Math.round(lightbox.zoomLevel() * 100) }}%
                 </span>
-                <button scLightboxZoomIn aria-label="Zoom in" value="zoom-in">
+                <button scLightboxZoomIn value="zoom-in">
                   <svg siZoomInIcon></svg>
+                  <span class="sr-only">Zoom in</span>
                 </button>
-                <button
-                  scLightboxZoomReset
-                  aria-label="Reset zoom"
-                  value="zoom-reset"
-                >
+                <button scLightboxZoomReset value="zoom-reset">
                   <svg siMinimize2Icon></svg>
+                  <span class="sr-only">Reset zoom</span>
                 </button>
               </div>
             </div>

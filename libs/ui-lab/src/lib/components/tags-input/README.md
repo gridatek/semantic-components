@@ -48,8 +48,9 @@ A composable multi-tag input component for adding, removing, and navigating tags
     }
     <input scTagsInputControl />
     <span scTagsInputCount class="ml-auto text-xs"></span>
-    <button scTagsInputClear aria-label="Clear all tags">
+    <button scTagsInputClear>
       <svg siXIcon class="size-4"></svg>
+      <span class="sr-only">Clear all tags</span>
     </button>
   </div>
 </div>

@@ -56,9 +56,6 @@ import {
                   class="hover:bg-muted rounded p-0.5 transition-colors"
                   (click)="col.toggleCollapse()"
                   [attr.aria-expanded]="!col.collapsed()"
-                  [attr.aria-label]="
-                    col.collapsed() ? 'Expand column' : 'Collapse column'
-                  "
                 >
                   <svg
                     siChevronDownIcon
@@ -68,6 +65,9 @@ import {
                         : 'rotate-0 transition-transform'
                     "
                   ></svg>
+                  <span class="sr-only">{{
+                    col.collapsed() ? 'Expand column' : 'Collapse column'
+                  }}</span>
                 </button>
                 <h3 class="text-foreground text-sm font-semibold">
                   {{ column.title }}
@@ -86,9 +86,9 @@ import {
                 type="button"
                 class="hover:bg-muted text-muted-foreground hover:text-foreground rounded p-1 transition-colors"
                 (click)="startAddingCard(column.id)"
-                aria-label="Add card"
               >
                 <svg siPlusIcon class="size-4"></svg>
+                <span class="sr-only">Add card</span>
               </button>
             </div>
 
@@ -192,9 +192,9 @@ import {
                           $event.stopPropagation();
                           board.deleteCard(column.id, card)
                         "
-                        aria-label="Delete card"
                       >
                         <svg siXIcon class="size-3.5"></svg>
+                        <span class="sr-only">Delete card</span>
                       </button>
                     </div>
                   </div>

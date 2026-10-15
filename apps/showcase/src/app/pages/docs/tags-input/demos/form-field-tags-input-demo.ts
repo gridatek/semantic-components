@@ -69,8 +69,9 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
             </span>
           }
           <input scTagsInputControl />
-          <button scTagsInputClear aria-label="Clear all tags">
+          <button scTagsInputClear>
             <svg siXIcon class="size-4"></svg>
+            <span class="sr-only">Clear all tags</span>
           </button>
         </div>
       </div>

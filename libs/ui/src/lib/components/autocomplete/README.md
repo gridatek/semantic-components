@@ -39,7 +39,7 @@ The popup is anchored to the `scAutocomplete` element, so wrap the input in what
     </div>
     <input scInput scAutocompleteInput aria-label="Select a country" placeholder="Select a country" />
     <div scInputGroupAddon align="inline-end">
-      <button scAutocompleteClear aria-label="Clear"><svg siXIcon></svg></button>
+      <button scAutocompleteClear><svg siXIcon></svg><span class="sr-only">Clear</span></button>
     </div>
   </div>
   <ng-template scAutocompletePortal>

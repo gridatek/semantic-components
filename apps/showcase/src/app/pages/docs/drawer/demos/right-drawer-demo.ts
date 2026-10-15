@@ -45,9 +45,9 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
             size="icon"
             scDrawerClose
             class="absolute top-4 right-4"
-            aria-label="Close"
           >
             <svg siXIcon></svg>
+            <span class="sr-only">Close</span>
           </button>
           <div scDrawerHeader>
             <h2 scDrawerTitle>Settings</h2>

@@ -40,8 +40,9 @@ readonly notifications = signal<Notice[]>([
           <button scButton variant="ghost" size="xs" scNotificationMarkRead>{{ notice.read ? 'Mark as unread' : 'Mark as read' }}</button>
         </div>
       </div>
-      <button scButton variant="ghost" size="icon-xs" scNotificationDismiss [attr.aria-label]="'Dismiss ' + notice.title">
+      <button scButton variant="ghost" size="icon-xs" scNotificationDismiss>
         <svg siXIcon></svg>
+        <span class="sr-only">{{ 'Dismiss ' + notice.title }}</span>
       </button>
     </li>
     }
@@ -120,8 +121,9 @@ Put `scNotificationCenter` around the popover, so the trigger can show the count
 ```html
 <div scNotificationCenter #center="scNotificationCenter" [(notifications)]="notifications">
   <div scPopoverProvider align="end">
-    <button scButton variant="outline" size="icon" scPopoverTrigger [attr.aria-label]="'Notifications, ' + center.unreadCount() + ' unread'">
+    <button scButton variant="outline" size="icon" scPopoverTrigger>
       <svg siBellIcon></svg>
+      <span class="sr-only">{{ 'Notifications, ' + center.unreadCount() + ' unread' }}</span>
     </button>
     <ng-template scPopoverPortal>
       <div scPopover aria-label="Notifications" class="w-96 p-0">…</div>

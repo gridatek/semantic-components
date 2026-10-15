@@ -115,20 +115,20 @@ const READING_MODES: Record<string, ScPdfPageColors | null> = {
               variant="ghost"
               size="icon"
               scPdfViewerBack
-              aria-label="Back"
               [scTooltipTrigger]="'Back'"
             >
               <svg siArrowLeftIcon></svg>
+              <span class="sr-only">Back</span>
             </button>
             <button
               scButton
               variant="ghost"
               size="icon"
               scPdfViewerForward
-              aria-label="Forward"
               [scTooltipTrigger]="'Forward'"
             >
               <svg siArrowRightIcon></svg>
+              <span class="sr-only">Forward</span>
             </button>
           </div>
           <input scInput scPdfViewerPageInput aria-label="Page" />

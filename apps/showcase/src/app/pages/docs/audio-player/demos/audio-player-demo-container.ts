@@ -119,49 +119,52 @@ import {
 
       <!-- Controls -->
       <div scAudioPlayerControls>
-        <button scAudioPlayerShuffle aria-label="Shuffle">
+        <button scAudioPlayerShuffle>
           <svg siShuffleIcon></svg>
+          <span class="sr-only">Shuffle</span>
         </button>
-        <button scAudioPlayerPrevious aria-label="Previous track">
+        <button scAudioPlayerPrevious>
           <svg siSkipBackIcon></svg>
+          <span class="sr-only">Previous track</span>
         </button>
-        <button
-          scAudioPlayerPlay
-          [attr.aria-label]="player.isPlaying() ? 'Pause' : 'Play'"
-        >
+        <button scAudioPlayerPlay>
           @if (player.isPlaying()) {
             <svg siPauseIcon></svg>
           } @else {
             <svg siPlayIcon></svg>
           }
+          <span class="sr-only">{{
+            player.isPlaying() ? 'Pause' : 'Play'
+          }}</span>
         </button>
-        <button scAudioPlayerNext aria-label="Next track">
+        <button scAudioPlayerNext>
           <svg siSkipForwardIcon></svg>
+          <span class="sr-only">Next track</span>
         </button>
-        <button
-          scAudioPlayerRepeat
-          [attr.aria-label]="'Repeat: ' + player.repeat()"
-        >
+        <button scAudioPlayerRepeat>
           @if (player.repeat() === 'one') {
             <svg siRepeat1Icon></svg>
           } @else {
             <svg siRepeatIcon></svg>
           }
+          <span class="sr-only">{{ 'Repeat: ' + player.repeat() }}</span>
         </button>
       </div>
 
       <!-- Volume -->
       <div scAudioPlayerVolume>
-        <button scAudioPlayerMute aria-label="Mute">
+        <button scAudioPlayerMute>
           @if (player.isMuted() || player.volume() === 0) {
             <svg siVolumeXIcon></svg>
           } @else {
             <svg siVolume1Icon></svg>
           }
+          <span class="sr-only">Mute</span>
         </button>
         <input scAudioPlayerVolumeSlider aria-label="Volume" class="w-24" />
-        <button scAudioPlayerMaxVolume aria-label="Full volume">
+        <button scAudioPlayerMaxVolume>
           <svg siVolume2Icon></svg>
+          <span class="sr-only">Full volume</span>
         </button>
       </div>
     </div>

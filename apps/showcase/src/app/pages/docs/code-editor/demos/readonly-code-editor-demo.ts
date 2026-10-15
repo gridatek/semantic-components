@@ -26,9 +26,12 @@ import {
         <button
           scCodeEditorCopyButton
           #copy="scCodeEditorCopyButton"
-          [attr.aria-label]="copy.copied() ? 'Copied' : 'Copy code'"
           [code]="readonlyCode"
-        ></button>
+        >
+          <span class="sr-only">{{
+            copy.copied() ? 'Copied' : 'Copy code'
+          }}</span>
+        </button>
       </div>
       <div
         scCodeEditorContent

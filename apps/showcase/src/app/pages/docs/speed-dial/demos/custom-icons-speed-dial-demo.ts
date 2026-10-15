@@ -38,44 +38,49 @@ import {
         <div scSpeedDial #dial="scSpeedDial" direction="up">
           <div scSpeedDialActionList>
             <div scSpeedDialAction>
-              <button scSpeedDialActionButton aria-label="Facebook">
+              <button scSpeedDialActionButton>
                 <svg siFacebookIcon class="size-5" />
+                <span class="sr-only">Facebook</span>
               </button>
               @if (dial.open()) {
                 <span scSpeedDialActionLabel>Facebook</span>
               }
             </div>
             <div scSpeedDialAction>
-              <button scSpeedDialActionButton aria-label="Twitter">
+              <button scSpeedDialActionButton>
                 <svg siTwitterIcon class="size-5" />
+                <span class="sr-only">Twitter</span>
               </button>
               @if (dial.open()) {
                 <span scSpeedDialActionLabel>Twitter</span>
               }
             </div>
             <div scSpeedDialAction>
-              <button scSpeedDialActionButton aria-label="LinkedIn">
+              <button scSpeedDialActionButton>
                 <svg siLinkedinIcon class="size-5" />
+                <span class="sr-only">LinkedIn</span>
               </button>
               @if (dial.open()) {
                 <span scSpeedDialActionLabel>LinkedIn</span>
               }
             </div>
             <div scSpeedDialAction>
-              <button scSpeedDialActionButton aria-label="Email">
+              <button scSpeedDialActionButton>
                 <svg siMailIcon class="size-5" />
+                <span class="sr-only">Email</span>
               </button>
               @if (dial.open()) {
                 <span scSpeedDialActionLabel>Email</span>
               }
             </div>
           </div>
-          <button scSpeedDialTrigger aria-label="Share options">
+          <button scSpeedDialTrigger>
             @if (dial.open()) {
               <svg siXIcon class="size-6" />
             } @else {
               <svg siShare2Icon class="size-6" />
             }
+            <span class="sr-only">Share options</span>
           </button>
         </div>
       </div>

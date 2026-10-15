@@ -46,13 +46,13 @@ import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
           size="icon"
           [scCopyToClipboard]="sampleCode()"
           #copy="scCopyToClipboard"
-          aria-label="Copy to clipboard"
         >
           @if (copy.copied()) {
             <svg siCheckIcon></svg>
           } @else {
             <svg siCopyIcon></svg>
           }
+          <span class="sr-only">Copy to clipboard</span>
         </button>
       </div>
       <div

@@ -44,10 +44,10 @@ import type { ScAnnotation, ScAnnotatorColor, ScAnnotatorToolOption } from '@sem
     </div>
 
     <div class="ml-auto flex items-center gap-1">
-      <button scImageAnnotatorAction aria-label="Undo" action="undo"><svg siUndo2Icon></svg></button>
-      <button scImageAnnotatorAction aria-label="Redo" action="redo"><svg siRedo2Icon></svg></button>
-      <button scImageAnnotatorAction aria-label="Clear all" action="clear"><svg siTrash2Icon></svg></button>
-      <button scImageAnnotatorAction aria-label="Download" action="download"><svg siDownloadIcon></svg></button>
+      <button scImageAnnotatorAction action="undo"><svg siUndo2Icon></svg><span class="sr-only">Undo</span></button>
+      <button scImageAnnotatorAction action="redo"><svg siRedo2Icon></svg><span class="sr-only">Redo</span></button>
+      <button scImageAnnotatorAction action="clear"><svg siTrash2Icon></svg><span class="sr-only">Clear all</span></button>
+      <button scImageAnnotatorAction action="download"><svg siDownloadIcon></svg><span class="sr-only">Download</span></button>
     </div>
   </div>
 

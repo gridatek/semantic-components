@@ -104,8 +104,9 @@ import {
     >
       <svg scVideoPlayerBufferingIndicator siLoaderIcon></svg>
 
-      <button scVideoPlayerBigPlay aria-label="Play video">
+      <button scVideoPlayerBigPlay>
         <svg siPlayIcon></svg>
+        <span class="sr-only">Play video</span>
       </button>
 
       <!-- Controls -->
@@ -116,43 +117,38 @@ import {
 
         <div scVideoPlayerToolbar>
           <!-- Play/Pause -->
-          <button
-            scVideoPlayerPlayPause
-            [attr.aria-label]="player.isPlaying() ? 'Pause' : 'Play'"
-          >
+          <button scVideoPlayerPlayPause>
             @if (player.isPlaying()) {
               <svg siPauseIcon></svg>
             } @else {
               <svg siPlayIcon></svg>
             }
+            <span class="sr-only">{{
+              player.isPlaying() ? 'Pause' : 'Play'
+            }}</span>
           </button>
 
           <!-- Skip Back -->
-          <button
-            scVideoPlayerSkip
-            [seconds]="-10"
-            aria-label="Skip back 10 seconds"
-          >
+          <button scVideoPlayerSkip [seconds]="-10">
             <svg siRotateCcwIcon></svg>
+            <span class="sr-only">Skip back 10 seconds</span>
           </button>
 
           <!-- Skip Forward -->
-          <button
-            scVideoPlayerSkip
-            [seconds]="10"
-            aria-label="Skip forward 10 seconds"
-          >
+          <button scVideoPlayerSkip [seconds]="10">
             <svg siRotateCwIcon></svg>
+            <span class="sr-only">Skip forward 10 seconds</span>
           </button>
 
           <!-- Volume -->
           <div scVideoPlayerVolume>
-            <button scVideoPlayerMute aria-label="Mute">
+            <button scVideoPlayerMute>
               @if (player.isMuted() || player.volume() === 0) {
                 <svg siVolumeXIcon></svg>
               } @else {
                 <svg siVolume2Icon></svg>
               }
+              <span class="sr-only">Mute</span>
             </button>
             <input scVideoPlayerVolumeSlider aria-label="Volume" />
           </div>
@@ -192,22 +188,21 @@ import {
           </div>
 
           <!-- Picture in Picture -->
-          <button scVideoPlayerPip aria-label="Picture in picture">
+          <button scVideoPlayerPip>
             <svg siPictureInPicture2Icon></svg>
+            <span class="sr-only">Picture in picture</span>
           </button>
 
           <!-- Fullscreen -->
-          <button
-            scVideoPlayerFullscreen
-            [attr.aria-label]="
-              player.isFullscreen() ? 'Exit fullscreen' : 'Enter fullscreen'
-            "
-          >
+          <button scVideoPlayerFullscreen>
             @if (player.isFullscreen()) {
               <svg siMinimizeIcon></svg>
             } @else {
               <svg siMaximizeIcon></svg>
             }
+            <span class="sr-only">{{
+              player.isFullscreen() ? 'Exit fullscreen' : 'Enter fullscreen'
+            }}</span>
           </button>
         </div>
       </div>

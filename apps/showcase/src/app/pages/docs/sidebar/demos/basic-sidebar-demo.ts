@@ -116,13 +116,16 @@ import {
         <div scSidebarFooter>
           <p class="text-sidebar-foreground/70 px-2 text-xs">v1.0.0</p>
         </div>
-        <button scSidebarRail aria-label="Toggle Sidebar"></button>
+        <button scSidebarRail>
+          <span class="sr-only">Toggle Sidebar</span>
+        </button>
       </div>
 
       <main scSidebarInset aria-label="Basic example content">
         <header class="flex h-14 shrink-0 items-center gap-2 border-b px-4">
-          <button scSidebarTrigger aria-label="Toggle sidebar">
+          <button scSidebarTrigger>
             <svg siPanelLeftIcon></svg>
+            <span class="sr-only">Toggle sidebar</span>
           </button>
           <div
             scSeparator

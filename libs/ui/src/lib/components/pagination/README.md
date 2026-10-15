@@ -178,8 +178,9 @@ You can also manually disable any button:
 
 ```html
 <!-- Manually disabled -->
-<button scPaginationPrevious aria-label="Go to previous page" [disabled]="true">
+<button scPaginationPrevious [disabled]="true">
   <!-- content -->
+  <span class="sr-only">Go to previous page</span>
 </button>
 
 <!-- Disabled link -->

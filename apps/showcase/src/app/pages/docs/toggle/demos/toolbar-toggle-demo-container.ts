@@ -38,17 +38,21 @@ import {
   ],
   template: \`
     <div class="flex items-center gap-1 rounded-md border p-1">
-      <button scToggle [(pressed)]="bold" aria-label="Toggle bold">
+      <button scToggle [(pressed)]="bold">
         <svg siBoldIcon></svg>
+        <span class="sr-only">Toggle bold</span>
       </button>
-      <button scToggle [(pressed)]="italic" aria-label="Toggle italic">
+      <button scToggle [(pressed)]="italic">
         <svg siItalicIcon></svg>
+        <span class="sr-only">Toggle italic</span>
       </button>
-      <button scToggle [(pressed)]="underline" aria-label="Toggle underline">
+      <button scToggle [(pressed)]="underline">
         <svg siUnderlineIcon></svg>
+        <span class="sr-only">Toggle underline</span>
       </button>
-      <button scToggle [(pressed)]="strike" aria-label="Toggle strikethrough">
+      <button scToggle [(pressed)]="strike">
         <svg siStrikethroughIcon></svg>
+        <span class="sr-only">Toggle strikethrough</span>
       </button>
     </div>
   \`,

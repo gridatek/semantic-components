@@ -64,8 +64,9 @@ import {
         <span scComboboxValue></span>
         <svg scComboboxIcon siChevronsUpDownIcon></svg>
       </div>
-      <button scComboboxClear aria-label="Clear selection">
+      <button scComboboxClear>
         <svg siXIcon></svg>
+        <span class="sr-only">Clear selection</span>
       </button>
       <ng-template scComboboxPortal>
         <div scComboboxPopup>

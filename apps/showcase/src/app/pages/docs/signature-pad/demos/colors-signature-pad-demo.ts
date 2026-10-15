@@ -27,46 +27,34 @@ import { SiTrash2Icon, SiUndoIcon } from '@semantic-icons/lucide-icons';
   template: `
     <div scSignaturePad class="w-full space-y-3">
       <div scSignaturePadToolbar>
-        <button
-          scSignaturePadPenColor
-          aria-label="Pen color Black"
-          [color]="'#000000'"
-        >
+        <button scSignaturePadPenColor [color]="'#000000'">
           <span
             class="border-border size-4 rounded-full border transition-transform data-active:scale-110"
             [attr.data-active]="'#000000'"
             style="background-color: #000000"
           ></span>
+          <span class="sr-only">Pen color Black</span>
         </button>
-        <button
-          scSignaturePadPenColor
-          aria-label="Pen color Blue"
-          [color]="'#1d4ed8'"
-        >
+        <button scSignaturePadPenColor [color]="'#1d4ed8'">
           <span
             class="border-border size-4 rounded-full border transition-transform"
             style="background-color: #1d4ed8"
           ></span>
+          <span class="sr-only">Pen color Blue</span>
         </button>
-        <button
-          scSignaturePadPenColor
-          aria-label="Pen color Red"
-          [color]="'#dc2626'"
-        >
+        <button scSignaturePadPenColor [color]="'#dc2626'">
           <span
             class="border-border size-4 rounded-full border transition-transform"
             style="background-color: #dc2626"
           ></span>
+          <span class="sr-only">Pen color Red</span>
         </button>
-        <button
-          scSignaturePadPenColor
-          aria-label="Pen color Green"
-          [color]="'#16a34a'"
-        >
+        <button scSignaturePadPenColor [color]="'#16a34a'">
           <span
             class="border-border size-4 rounded-full border transition-transform"
             style="background-color: #16a34a"
           ></span>
+          <span class="sr-only">Pen color Green</span>
         </button>
       </div>
 
@@ -78,11 +66,13 @@ import { SiTrash2Icon, SiUndoIcon } from '@semantic-icons/lucide-icons';
         ></canvas>
 
         <div scSignaturePadControls>
-          <button scSignaturePadUndo aria-label="Undo last stroke">
+          <button scSignaturePadUndo>
             <svg siUndoIcon class="size-4"></svg>
+            <span class="sr-only">Undo last stroke</span>
           </button>
-          <button scSignaturePadClear aria-label="Clear signature">
+          <button scSignaturePadClear>
             <svg siTrash2Icon class="size-4"></svg>
+            <span class="sr-only">Clear signature</span>
           </button>
         </div>
       </div>

@@ -50,9 +50,9 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
                 variant="outline"
                 size="icon"
                 class="rounded-full"
-                aria-label="Decrease"
               >
                 <svg siMinusIcon></svg>
+                <span class="sr-only">Decrease</span>
               </button>
               <div class="flex-1 text-center">
                 <div class="text-7xl font-bold tracking-tighter">320</div>
@@ -65,9 +65,9 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
                 variant="outline"
                 size="icon"
                 class="rounded-full"
-                aria-label="Increase"
               >
                 <svg siPlusIcon></svg>
+                <span class="sr-only">Increase</span>
               </button>
             </div>
           </div>

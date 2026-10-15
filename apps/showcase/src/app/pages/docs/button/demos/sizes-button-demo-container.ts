@@ -30,8 +30,9 @@ import { SiArrowRightIcon } from '@semantic-icons/lucide-icons';
       <button scButton size="lg">Large</button>
       <button scButton size="default">Default</button>
       <button scButton size="sm">Small</button>
-      <button scButton size="icon" aria-label="Go forward">
+      <button scButton size="icon">
         <svg siArrowRightIcon></svg>
+        <span class="sr-only">Go forward</span>
       </button>
     </div>
   \`,

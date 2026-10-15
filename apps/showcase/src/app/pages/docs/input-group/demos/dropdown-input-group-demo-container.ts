@@ -60,14 +60,9 @@ import {
         <input scInput placeholder="Enter file name" />
         <div scInputGroupAddon align="inline-end">
           <div scMenuProvider align="end" [origin]="group1">
-            <button
-              scButton
-              scMenuTrigger
-              variant="ghost"
-              size="icon-xs"
-              aria-label="More"
-            >
+            <button scButton scMenuTrigger variant="ghost" size="icon-xs">
               <svg siEllipsisIcon></svg>
+              <span class="sr-only">More</span>
             </button>
             <ng-template scMenuPortal>
               <div scMenu>

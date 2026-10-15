@@ -23,14 +23,17 @@ import {
         [(value)]="alignment"
         aria-label="Text alignment"
       >
-        <button scToggleGroupItem value="left" aria-label="Align left">
+        <button scToggleGroupItem value="left">
           <svg siTextAlignStartIcon></svg>
+          <span class="sr-only">Align left</span>
         </button>
-        <button scToggleGroupItem value="center" aria-label="Align center">
+        <button scToggleGroupItem value="center">
           <svg siTextAlignCenterIcon></svg>
+          <span class="sr-only">Align center</span>
         </button>
-        <button scToggleGroupItem value="right" aria-label="Align right">
+        <button scToggleGroupItem value="right">
           <svg siTextAlignEndIcon></svg>
+          <span class="sr-only">Align right</span>
         </button>
       </div>
       <p class="text-muted-foreground text-sm">

@@ -68,13 +68,13 @@ import { PackageManagerService } from './package-manager.service';
             class="ml-auto"
             [scCopyToClipboard]="command()"
             #copy="scCopyToClipboard"
-            aria-label="Copy install command"
           >
             @if (copy.copied()) {
               <svg siCheckIcon></svg>
             } @else {
               <svg siCopyIcon></svg>
             }
+            <span class="sr-only">Copy install command</span>
           </button>
         </div>
         @for (entry of commands(); track entry.id) {

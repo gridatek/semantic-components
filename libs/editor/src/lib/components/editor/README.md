@@ -246,8 +246,8 @@ For the same reason the editor's group is `scEditorToolbarGroup`, not a toggle g
   </button>
   <ng-template scPopoverPortal>
     <div scPopover aria-label="Highlight colours" class="flex w-auto items-center gap-2 p-2">
-      <button scEditorHighlightColor="var(--editor-highlight-yellow)" aria-label="Yellow"></button>
-      <button scEditorHighlightColor="var(--editor-highlight-green)" aria-label="Green"></button>
+      <button scEditorHighlightColor="var(--editor-highlight-yellow)"><span class="sr-only">Yellow</span></button>
+      <button scEditorHighlightColor="var(--editor-highlight-green)"><span class="sr-only">Green</span></button>
       <button scEditorRemoveHighlight>
         <svg siBanIcon></svg>
         <span class="sr-only">Remove highlight</span>

@@ -116,18 +116,18 @@ const hoursAgo = (hours: number) => new Date(Date.now() - hours * 3600000);
             variant="ghost"
             size="icon-sm"
             scNotificationMarkAllRead
-            aria-label="Mark all as read"
           >
             <svg siCheckCheckIcon></svg>
+            <span class="sr-only">Mark all as read</span>
           </button>
           <button
             scButton
             variant="ghost"
             size="icon-sm"
             scNotificationClearAll
-            aria-label="Clear all"
           >
             <svg siTrash2Icon></svg>
+            <span class="sr-only">Clear all</span>
           </button>
         </div>
       </div>
@@ -184,9 +184,11 @@ const hoursAgo = (hours: number) => new Date(Date.now() - hours * 3600000);
                       variant="ghost"
                       size="icon-xs"
                       scNotificationDismiss
-                      [attr.aria-label]="'Dismiss ' + notice.title"
                     >
                       <svg siXIcon></svg>
+                      <span class="sr-only">{{
+                        'Dismiss ' + notice.title
+                      }}</span>
                     </button>
                   </li>
                 }

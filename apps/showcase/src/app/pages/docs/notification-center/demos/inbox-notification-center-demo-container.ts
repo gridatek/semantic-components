@@ -221,9 +221,11 @@ const minutesAgo = (minutes: number) => new Date(Date.now() - minutes * 60000);
                       variant="ghost"
                       size="icon-xs"
                       scNotificationDismiss
-                      [attr.aria-label]="'Dismiss ' + notice.title"
                     >
                       <svg siXIcon></svg>
+                      <span class="sr-only">{{
+                        'Dismiss ' + notice.title
+                      }}</span>
                     </button>
                   </li>
                 }

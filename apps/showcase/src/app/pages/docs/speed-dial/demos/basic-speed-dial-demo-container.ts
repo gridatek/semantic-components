@@ -58,60 +58,49 @@ import {
         <div scSpeedDial #dial="scSpeedDial" direction="up">
           <div scSpeedDialActionList>
             <div scSpeedDialAction>
-              <button
-                scSpeedDialActionButton
-                aria-label="Edit"
-                (click)="onAction('Edit')"
-              >
+              <button scSpeedDialActionButton (click)="onAction('Edit')">
                 <svg siPencilIcon class="size-5" />
+                <span class="sr-only">Edit</span>
               </button>
               @if (dial.open()) {
                 <span scSpeedDialActionLabel>Edit</span>
               }
             </div>
             <div scSpeedDialAction>
-              <button
-                scSpeedDialActionButton
-                aria-label="Copy"
-                (click)="onAction('Copy')"
-              >
+              <button scSpeedDialActionButton (click)="onAction('Copy')">
                 <svg siCopyIcon class="size-5" />
+                <span class="sr-only">Copy</span>
               </button>
               @if (dial.open()) {
                 <span scSpeedDialActionLabel>Copy</span>
               }
             </div>
             <div scSpeedDialAction>
-              <button
-                scSpeedDialActionButton
-                aria-label="Share"
-                (click)="onAction('Share')"
-              >
+              <button scSpeedDialActionButton (click)="onAction('Share')">
                 <svg siShare2Icon class="size-5" />
+                <span class="sr-only">Share</span>
               </button>
               @if (dial.open()) {
                 <span scSpeedDialActionLabel>Share</span>
               }
             </div>
             <div scSpeedDialAction>
-              <button
-                scSpeedDialActionButton
-                aria-label="Delete"
-                (click)="onAction('Delete')"
-              >
+              <button scSpeedDialActionButton (click)="onAction('Delete')">
                 <svg siTrash2Icon class="size-5" />
+                <span class="sr-only">Delete</span>
               </button>
               @if (dial.open()) {
                 <span scSpeedDialActionLabel>Delete</span>
               }
             </div>
           </div>
-          <button scSpeedDialTrigger aria-label="Speed dial">
+          <button scSpeedDialTrigger>
             @if (dial.open()) {
               <svg siXIcon class="size-6" />
             } @else {
               <svg siPlusIcon class="size-6" />
             }
+            <span class="sr-only">Speed dial</span>
           </button>
         </div>
       </div>

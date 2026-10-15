@@ -94,9 +94,12 @@ import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui';
         <button
           scCodeEditorCopyButton
           #copy="scCodeEditorCopyButton"
-          [attr.aria-label]="copy.copied() ? 'Copied' : 'Copy code'"
           [code]="interactiveCode"
-        ></button>
+        >
+          <span class="sr-only">{{
+            copy.copied() ? 'Copied' : 'Copy code'
+          }}</span>
+        </button>
       </div>
       <div
         scCodeEditorContent

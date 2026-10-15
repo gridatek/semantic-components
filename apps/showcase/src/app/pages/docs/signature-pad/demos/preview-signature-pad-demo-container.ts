@@ -46,11 +46,13 @@ import { SiTrash2Icon, SiUndoIcon } from '@semantic-icons/lucide-icons';
         ></canvas>
 
         <div scSignaturePadControls>
-          <button scSignaturePadUndo aria-label="Undo last stroke">
+          <button scSignaturePadUndo>
             <svg siUndoIcon class="size-4"></svg>
+            <span class="sr-only">Undo last stroke</span>
           </button>
-          <button scSignaturePadClear aria-label="Clear signature">
+          <button scSignaturePadClear>
             <svg siTrash2Icon class="size-4"></svg>
+            <span class="sr-only">Clear signature</span>
           </button>
         </div>
       </div>

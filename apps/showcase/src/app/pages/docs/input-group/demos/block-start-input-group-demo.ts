@@ -35,14 +35,9 @@ import { SiCopyIcon, SiFileCodeIcon } from '@semantic-icons/lucide-icons';
             <svg siFileCodeIcon></svg>
           </span>
           <span scInputGroupText class="font-mono">script.js</span>
-          <button
-            scButton
-            variant="ghost"
-            size="icon-xs"
-            class="ml-auto"
-            aria-label="Copy"
-          >
+          <button scButton variant="ghost" size="icon-xs" class="ml-auto">
             <svg siCopyIcon></svg>
+            <span class="sr-only">Copy</span>
           </button>
         </div>
         <textarea

@@ -115,18 +115,18 @@ readonly tracks: ScAudioTrack[] = [
 
   <!-- Controls -->
   <div class="flex items-center justify-center gap-2">
-    <button scAudioPlayerShuffle aria-label="Shuffle"></button>
-    <button scAudioPlayerPrevious aria-label="Previous track"></button>
+    <button scAudioPlayerShuffle><span class="sr-only">Shuffle</span></button>
+    <button scAudioPlayerPrevious><span class="sr-only">Previous track</span></button>
     <button scAudioPlayerPlayButton></button>
-    <button scAudioPlayerNext aria-label="Next track"></button>
-    <button scAudioPlayerRepeat [attr.aria-label]="'Repeat: ' + player.repeat()"></button>
+    <button scAudioPlayerNext><span class="sr-only">Next track</span></button>
+    <button scAudioPlayerRepeat><span class="sr-only">{{ 'Repeat: ' + player.repeat() }}</span></button>
   </div>
 
   <!-- Volume -->
   <div scAudioPlayerVolume class="justify-center">
-    <button scAudioPlayerMute aria-label="Mute"><svg siVolume1Icon></svg></button>
+    <button scAudioPlayerMute><svg siVolume1Icon></svg><span class="sr-only">Mute</span></button>
     <input scAudioPlayerVolumeSlider aria-label="Volume" class="w-24" />
-    <button scAudioPlayerMaxVolume aria-label="Full volume"><svg siVolume2Icon></svg></button>
+    <button scAudioPlayerMaxVolume><svg siVolume2Icon></svg><span class="sr-only">Full volume</span></button>
   </div>
 
   <!-- Hidden Audio Element -->
@@ -145,9 +145,9 @@ Horizontal layout for sidebars:
   </div>
   <div scAudioPlayerInfo class="min-w-0 flex-1"></div>
   <div class="flex items-center gap-2">
-    <button scAudioPlayerPrevious aria-label="Previous track"></button>
+    <button scAudioPlayerPrevious><span class="sr-only">Previous track</span></button>
     <button scAudioPlayerPlayButton></button>
-    <button scAudioPlayerNext aria-label="Next track"></button>
+    <button scAudioPlayerNext><span class="sr-only">Next track</span></button>
   </div>
   <audio scAudioPlayerAudio></audio>
 </div>
@@ -163,9 +163,9 @@ Simple player without extra controls:
     <img scAudioPlayerCoverImage alt="" />
   </div>
   <div scAudioPlayerInfo class="min-w-0 flex-1"></div>
-  <button scAudioPlayerPrevious aria-label="Previous track"></button>
+  <button scAudioPlayerPrevious><span class="sr-only">Previous track</span></button>
   <button scAudioPlayerPlayButton></button>
-  <button scAudioPlayerNext aria-label="Next track"></button>
+  <button scAudioPlayerNext><span class="sr-only">Next track</span></button>
   <audio scAudioPlayerAudio></audio>
 </div>
 ```
@@ -204,9 +204,9 @@ Create any layout you want:
     <!-- Right Column -->
     <div class="flex flex-col justify-between">
       <div scAudioPlayerVolume>
-        <button scAudioPlayerMute aria-label="Mute"><svg siVolume1Icon></svg></button>
+        <button scAudioPlayerMute><svg siVolume1Icon></svg><span class="sr-only">Mute</span></button>
         <input scAudioPlayerVolumeSlider aria-label="Volume" class="w-24" />
-        <button scAudioPlayerMaxVolume aria-label="Full volume"><svg siVolume2Icon></svg></button>
+        <button scAudioPlayerMaxVolume><svg siVolume2Icon></svg><span class="sr-only">Full volume</span></button>
       </div>
 
       <div class="space-y-4">
@@ -216,11 +216,11 @@ Create any layout you want:
           <span scAudioPlayerDuration></span>
         </div>
         <div class="flex justify-center gap-2">
-          <button scAudioPlayerShuffle aria-label="Shuffle"></button>
-          <button scAudioPlayerPrevious aria-label="Previous track"></button>
+          <button scAudioPlayerShuffle><span class="sr-only">Shuffle</span></button>
+          <button scAudioPlayerPrevious><span class="sr-only">Previous track</span></button>
           <button scAudioPlayerPlayButton></button>
-          <button scAudioPlayerNext aria-label="Next track"></button>
-          <button scAudioPlayerRepeat [attr.aria-label]="'Repeat: ' + player.repeat()"></button>
+          <button scAudioPlayerNext><span class="sr-only">Next track</span></button>
+          <button scAudioPlayerRepeat><span class="sr-only">{{ 'Repeat: ' + player.repeat() }}</span></button>
         </div>
       </div>
     </div>

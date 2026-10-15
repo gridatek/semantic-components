@@ -34,8 +34,9 @@ import { SiFileTextIcon, SiXIcon } from '@semantic-icons/lucide-icons';
           <div scAttachmentDescription>2.4 MB</div>
         </div>
         <div scAttachmentActions>
-          <button scButton variant="ghost" size="icon-sm" aria-label="Remove">
+          <button scButton variant="ghost" size="icon-sm">
             <svg siXIcon></svg>
+            <span class="sr-only">Remove</span>
           </button>
         </div>
       </div>

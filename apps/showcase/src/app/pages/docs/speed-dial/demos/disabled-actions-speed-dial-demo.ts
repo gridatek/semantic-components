@@ -38,44 +38,49 @@ import {
         <div scSpeedDial #dial="scSpeedDial" direction="up">
           <div scSpeedDialActionList>
             <div scSpeedDialAction>
-              <button scSpeedDialActionButton aria-label="Save">
+              <button scSpeedDialActionButton>
                 <svg siSaveIcon class="size-5" />
+                <span class="sr-only">Save</span>
               </button>
               @if (dial.open()) {
                 <span scSpeedDialActionLabel>Save</span>
               }
             </div>
             <div scSpeedDialAction>
-              <button scSpeedDialActionButton aria-label="Print" disabled>
+              <button scSpeedDialActionButton disabled>
                 <svg siPrinterIcon class="size-5" />
+                <span class="sr-only">Print</span>
               </button>
               @if (dial.open()) {
                 <span scSpeedDialActionLabel>Print</span>
               }
             </div>
             <div scSpeedDialAction>
-              <button scSpeedDialActionButton aria-label="Download">
+              <button scSpeedDialActionButton>
                 <svg siDownloadIcon class="size-5" />
+                <span class="sr-only">Download</span>
               </button>
               @if (dial.open()) {
                 <span scSpeedDialActionLabel>Download</span>
               }
             </div>
             <div scSpeedDialAction>
-              <button scSpeedDialActionButton aria-label="Archive" disabled>
+              <button scSpeedDialActionButton disabled>
                 <svg siArchiveIcon class="size-5" />
+                <span class="sr-only">Archive</span>
               </button>
               @if (dial.open()) {
                 <span scSpeedDialActionLabel>Archive</span>
               }
             </div>
           </div>
-          <button scSpeedDialTrigger aria-label="Actions with disabled items">
+          <button scSpeedDialTrigger>
             @if (dial.open()) {
               <svg siXIcon class="size-6" />
             } @else {
               <svg siPlusIcon class="size-6" />
             }
+            <span class="sr-only">Actions with disabled items</span>
           </button>
         </div>
       </div>

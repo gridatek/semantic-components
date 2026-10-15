@@ -124,49 +124,34 @@ import {
             scImageCropperRotateLeft
             variant="outline"
             size="icon"
-            aria-label="Rotate left"
           >
             <svg siRotateCcwIcon class="size-4"></svg>
+            <span class="sr-only">Rotate left</span>
           </button>
           <button
             scButton
             scImageCropperRotateRight
             variant="outline"
             size="icon"
-            aria-label="Rotate right"
           >
             <svg siRotateCwIcon class="size-4"></svg>
+            <span class="sr-only">Rotate right</span>
           </button>
-          <button
-            scButton
-            scImageCropperFlipH
-            variant="outline"
-            size="icon"
-            aria-label="Flip horizontal"
-          >
+          <button scButton scImageCropperFlipH variant="outline" size="icon">
             <svg siFlipHorizontal2Icon class="size-4"></svg>
+            <span class="sr-only">Flip horizontal</span>
           </button>
-          <button
-            scButton
-            scImageCropperFlipV
-            variant="outline"
-            size="icon"
-            aria-label="Flip vertical"
-          >
+          <button scButton scImageCropperFlipV variant="outline" size="icon">
             <svg siFlipVertical2Icon class="size-4"></svg>
+            <span class="sr-only">Flip vertical</span>
           </button>
         </div>
 
         <!-- Zoom -->
         <div class="flex items-center gap-2">
-          <button
-            scButton
-            scImageCropperZoomOut
-            variant="outline"
-            size="icon"
-            aria-label="Zoom out"
-          >
+          <button scButton scImageCropperZoomOut variant="outline" size="icon">
             <svg siZoomOutIcon class="size-4"></svg>
+            <span class="sr-only">Zoom out</span>
           </button>
 
           <div class="flex items-center gap-2">
@@ -182,14 +167,9 @@ import {
             >
           </div>
 
-          <button
-            scButton
-            scImageCropperZoomIn
-            variant="outline"
-            size="icon"
-            aria-label="Zoom in"
-          >
+          <button scButton scImageCropperZoomIn variant="outline" size="icon">
             <svg siZoomInIcon class="size-4"></svg>
+            <span class="sr-only">Zoom in</span>
           </button>
         </div>
       </div>

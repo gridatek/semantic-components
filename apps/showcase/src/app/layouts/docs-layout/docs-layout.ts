@@ -415,7 +415,9 @@ import { ConfigService } from '../../services/config.service';
           </ul>
         </div>
 
-        <button scSidebarRail aria-label="Toggle Sidebar"></button>
+        <button scSidebarRail>
+          <span class="sr-only">Toggle Sidebar</span>
+        </button>
       </div>
 
       <main scSidebarInset class="min-w-0 overflow-x-clip">

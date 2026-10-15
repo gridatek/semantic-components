@@ -416,11 +416,11 @@ const SAMPLE_DATA: User[] = [
                             scMenuTrigger
                             variant="ghost"
                             size="icon-sm"
-                            [attr.aria-label]="
-                              'Actions for ' + row.original.name
-                            "
                           >
                             <svg siEllipsisIcon></svg>
+                            <span class="sr-only">{{
+                              'Actions for ' + row.original.name
+                            }}</span>
                           </button>
                           <ng-template scMenuPortal>
                             <div
@@ -505,43 +505,27 @@ const SAMPLE_DATA: User[] = [
           </span>
           <ul scPaginationList>
             <li scPaginationItem>
-              <button
-                scPaginationFirst
-                aria-label="Go to first page"
-                variant="outline"
-                size="icon-sm"
-              >
+              <button scPaginationFirst variant="outline" size="icon-sm">
                 <svg siChevronsLeftIcon></svg>
+                <span class="sr-only">Go to first page</span>
               </button>
             </li>
             <li scPaginationItem>
-              <button
-                scPaginationPrevious
-                aria-label="Go to previous page"
-                variant="outline"
-                size="icon-sm"
-              >
+              <button scPaginationPrevious variant="outline" size="icon-sm">
                 <svg siChevronLeftIcon></svg>
+                <span class="sr-only">Go to previous page</span>
               </button>
             </li>
             <li scPaginationItem>
-              <button
-                scPaginationNext
-                aria-label="Go to next page"
-                variant="outline"
-                size="icon-sm"
-              >
+              <button scPaginationNext variant="outline" size="icon-sm">
                 <svg siChevronRightIcon></svg>
+                <span class="sr-only">Go to next page</span>
               </button>
             </li>
             <li scPaginationItem>
-              <button
-                scPaginationLast
-                aria-label="Go to last page"
-                variant="outline"
-                size="icon-sm"
-              >
+              <button scPaginationLast variant="outline" size="icon-sm">
                 <svg siChevronsRightIcon></svg>
+                <span class="sr-only">Go to last page</span>
               </button>
             </li>
           </ul>

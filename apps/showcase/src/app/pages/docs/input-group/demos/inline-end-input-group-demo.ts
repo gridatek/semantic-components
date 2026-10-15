@@ -14,13 +14,9 @@ import { SiEyeOffIcon } from '@semantic-icons/lucide-icons';
     <div scInputGroup class="w-full max-w-sm">
       <input scInput type="password" placeholder="Enter password" />
       <div scInputGroupAddon align="inline-end">
-        <button
-          scButton
-          variant="ghost"
-          size="icon-sm"
-          aria-label="Toggle password visibility"
-        >
+        <button scButton variant="ghost" size="icon-sm">
           <svg siEyeOffIcon></svg>
+          <span class="sr-only">Toggle password visibility</span>
         </button>
       </div>
     </div>

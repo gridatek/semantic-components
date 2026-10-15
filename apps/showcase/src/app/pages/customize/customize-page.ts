@@ -69,7 +69,6 @@ import { COLOR_SCHEMES, RADIUS_OPTIONS } from './color-schemes';
                 <button
                   type="button"
                   [attr.aria-pressed]="colorScheme() === scheme.id"
-                  [attr.aria-label]="scheme.label"
                   [title]="scheme.label"
                   [class]="swatchClass(colorScheme() === scheme.id)"
                   (click)="setScheme(scheme.id)"
@@ -78,6 +77,7 @@ import { COLOR_SCHEMES, RADIUS_OPTIONS } from './color-schemes';
                     class="ring-foreground/15 block size-5 rounded-full ring-1"
                     [style.background]="scheme.swatch"
                   ></span>
+                  <span class="sr-only">{{ scheme.label }}</span>
                 </button>
               }
             </div>

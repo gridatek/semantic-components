@@ -202,16 +202,18 @@ Always provide text labels for navigation controls:
 </button>
 
 <!-- Avoid: Icon only -->
-<button scPaginationPrevious aria-label="Go to previous page">
+<button scPaginationPrevious>
   <svg><!-- icon --></svg>
+  <span class="sr-only">Go to previous page</span>
 </button>
 ```
 
 If you must use icon-only, add `aria-label`:
 
 ```html
-<button scPaginationPrevious aria-label="Go to previous page">
+<button scPaginationPrevious>
   <svg><!-- icon --></svg>
+  <span class="sr-only">Go to previous page</span>
 </button>
 ```
 

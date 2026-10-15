@@ -6,13 +6,9 @@ import { SiItalicIcon } from '@semantic-icons/lucide-icons';
   selector: 'app-outline-toggle-demo',
   imports: [ScToggle, SiItalicIcon],
   template: `
-    <button
-      scToggle
-      variant="outline"
-      [(pressed)]="italic"
-      aria-label="Toggle italic"
-    >
+    <button scToggle variant="outline" [(pressed)]="italic">
       <svg siItalicIcon></svg>
+      <span class="sr-only">Toggle italic</span>
     </button>
   `,
   host: { class: 'flex w-full justify-center' },

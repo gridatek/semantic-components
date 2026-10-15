@@ -103,10 +103,10 @@ import {
               scPopoverTrigger
               variant="ghost"
               size="icon"
-              aria-label="View options"
               [scTooltipTrigger]="'View options'"
             >
               <svg siBookOpenIcon></svg>
+              <span class="sr-only">View options</span>
             </button>
             <ng-template scPopoverPortal>
               <div scPopover class="w-auto gap-4">

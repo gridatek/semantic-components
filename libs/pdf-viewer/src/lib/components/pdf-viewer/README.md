@@ -11,18 +11,21 @@ A composable PDF viewer built on [PDF.js](https://mozilla.github.io/pdf.js/) (`p
   <div scPdfViewerContainer class="flex h-[800px] flex-col">
     <div scPdfViewerToolbar aria-label="Document">
       <div scPdfViewerNav aria-label="Page navigation">
-        <button scButton variant="ghost" size="icon" scPdfViewerPrevPage aria-label="Previous page">
+        <button scButton variant="ghost" size="icon" scPdfViewerPrevPage>
           <svg siChevronUpIcon></svg>
+          <span class="sr-only">Previous page</span>
         </button>
-        <button scButton variant="ghost" size="icon" scPdfViewerNextPage aria-label="Next page">
+        <button scButton variant="ghost" size="icon" scPdfViewerNextPage>
           <svg siChevronDownIcon></svg>
+          <span class="sr-only">Next page</span>
         </button>
       </div>
       <input scInput scPdfViewerPageInput aria-label="Page" />
       <span>/ {{ viewer.totalPages() }}</span>
       <div scPdfViewerSpacer></div>
-      <button scButton variant="ghost" size="icon" scPdfViewerDownload aria-label="Download">
+      <button scButton variant="ghost" size="icon" scPdfViewerDownload>
         <svg siDownloadIcon></svg>
+        <span class="sr-only">Download</span>
       </button>
     </div>
 

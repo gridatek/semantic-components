@@ -63,8 +63,9 @@ import { SiSunIcon, SiXIcon } from '@semantic-icons/lucide-icons';
         }
 
         @if (spotlight.showClose()) {
-          <button scSpotlightClose aria-label="Close spotlight">
+          <button scSpotlightClose>
             <svg siXIcon class="size-5"></svg>
+            <span class="sr-only">Close spotlight</span>
           </button>
         }
 

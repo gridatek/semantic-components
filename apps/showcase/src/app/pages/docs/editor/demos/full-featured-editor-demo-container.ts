@@ -471,10 +471,9 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
                   class="flex w-auto items-center gap-2 p-2"
                 >
                   @for (color of highlightColors; track color.value) {
-                    <button
-                      [scEditorHighlightColor]="color.value"
-                      [attr.aria-label]="color.label"
-                    ></button>
+                    <button [scEditorHighlightColor]="color.value">
+                      <span class="sr-only">{{ color.label }}</span>
+                    </button>
                   }
                   <div scSeparator orientation="vertical"></div>
                   <button scEditorRemoveHighlight>

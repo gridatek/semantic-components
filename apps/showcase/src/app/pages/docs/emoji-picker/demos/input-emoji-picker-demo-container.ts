@@ -102,14 +102,9 @@ import {
             (input)="text.set(message.value)"
           />
           <div scInputGroupAddon align="inline-end">
-            <button
-              scButton
-              variant="ghost"
-              size="icon-xs"
-              scPopoverTrigger
-              aria-label="Insert an emoji"
-            >
+            <button scButton variant="ghost" size="icon-xs" scPopoverTrigger>
               <svg siSmileIcon></svg>
+              <span class="sr-only">Insert an emoji</span>
             </button>
           </div>
         </div>

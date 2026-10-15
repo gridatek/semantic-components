@@ -465,24 +465,24 @@ const INK_COLORS = [
             scButton
             variant="ghost"
             size="icon"
-            aria-label="Sidebar"
             [attr.aria-pressed]="sidebarOpen()"
             [scTooltipTrigger]="'Sidebar'"
             tooltipPosition="bottom"
             (click)="sidebarOpen.set(!sidebarOpen())"
           >
             <svg siPanelLeftIcon></svg>
+            <span class="sr-only">Sidebar</span>
           </button>
           <button
             scButton
             variant="ghost"
             size="icon"
             scPdfViewerFindToggle
-            aria-label="Find in document"
             [scTooltipTrigger]="'Find in document'"
             tooltipPosition="bottom"
           >
             <svg siSearchIcon></svg>
+            <span class="sr-only">Find in document</span>
           </button>
 
           <div scSeparator orientation="vertical"></div>
@@ -493,44 +493,44 @@ const INK_COLORS = [
               variant="ghost"
               size="icon"
               scPdfViewerBack
-              aria-label="Back"
               [scTooltipTrigger]="'Back'"
               tooltipPosition="bottom"
             >
               <svg siArrowLeftIcon></svg>
+              <span class="sr-only">Back</span>
             </button>
             <button
               scButton
               variant="ghost"
               size="icon"
               scPdfViewerForward
-              aria-label="Forward"
               [scTooltipTrigger]="'Forward'"
               tooltipPosition="bottom"
             >
               <svg siArrowRightIcon></svg>
+              <span class="sr-only">Forward</span>
             </button>
             <button
               scButton
               variant="ghost"
               size="icon"
               scPdfViewerPrevPage
-              aria-label="Previous page"
               [scTooltipTrigger]="'Previous page'"
               tooltipPosition="bottom"
             >
               <svg siChevronUpIcon></svg>
+              <span class="sr-only">Previous page</span>
             </button>
             <button
               scButton
               variant="ghost"
               size="icon"
               scPdfViewerNextPage
-              aria-label="Next page"
               [scTooltipTrigger]="'Next page'"
               tooltipPosition="bottom"
             >
               <svg siChevronDownIcon></svg>
+              <span class="sr-only">Next page</span>
             </button>
           </div>
           <input scInput scPdfViewerPageInput aria-label="Page" />
@@ -553,22 +553,22 @@ const INK_COLORS = [
               variant="ghost"
               size="icon"
               scPdfViewerZoomOut
-              aria-label="Zoom out"
               [scTooltipTrigger]="'Zoom out'"
               tooltipPosition="bottom"
             >
               <svg siZoomOutIcon></svg>
+              <span class="sr-only">Zoom out</span>
             </button>
             <button
               scButton
               variant="ghost"
               size="icon"
               scPdfViewerZoomIn
-              aria-label="Zoom in"
               [scTooltipTrigger]="'Zoom in'"
               tooltipPosition="bottom"
             >
               <svg siZoomInIcon></svg>
+              <span class="sr-only">Zoom in</span>
             </button>
           </div>
           <div scNativeSelectContainer>
@@ -598,11 +598,11 @@ const INK_COLORS = [
               scPopoverTrigger
               variant="ghost"
               size="icon"
-              aria-label="View options"
               [scTooltipTrigger]="'View options'"
               tooltipPosition="bottom"
             >
               <svg siBookOpenIcon></svg>
+              <span class="sr-only">View options</span>
             </button>
             <ng-template scPopoverPortal>
               <div scPopover class="w-auto gap-4">
@@ -686,38 +686,38 @@ const INK_COLORS = [
             <button
               scToggleGroupItem
               value="highlight"
-              aria-label="Highlight"
               [scTooltipTrigger]="'Highlight'"
               tooltipPosition="bottom"
             >
               <svg siHighlighterIcon></svg>
+              <span class="sr-only">Highlight</span>
             </button>
             <button
               scToggleGroupItem
               value="freetext"
-              aria-label="Text"
               [scTooltipTrigger]="'Text'"
               tooltipPosition="bottom"
             >
               <svg siTypeIcon></svg>
+              <span class="sr-only">Text</span>
             </button>
             <button
               scToggleGroupItem
               value="ink"
-              aria-label="Draw"
               [scTooltipTrigger]="'Draw'"
               tooltipPosition="bottom"
             >
               <svg siPenIcon></svg>
+              <span class="sr-only">Draw</span>
             </button>
             <button
               scToggleGroupItem
               value="comment"
-              aria-label="Comment"
               [scTooltipTrigger]="'Comment'"
               tooltipPosition="bottom"
             >
               <svg siMessageSquarePlusIcon></svg>
+              <span class="sr-only">Comment</span>
             </button>
           </div>
           <div scPopoverProvider side="bottom" align="end">
@@ -726,12 +726,12 @@ const INK_COLORS = [
               scPopoverTrigger
               variant="ghost"
               size="icon"
-              aria-label="Tool options"
               [disabled]="!activeTool()"
               [scTooltipTrigger]="'Tool options'"
               tooltipPosition="bottom"
             >
               <svg siSlidersHorizontalIcon></svg>
+              <span class="sr-only">Tool options</span>
             </button>
             <ng-template scPopoverPortal>
               <div scPopover class="w-60 gap-4">
@@ -745,15 +745,12 @@ const INK_COLORS = [
                       aria-label="Highlight colour"
                     >
                       @for (color of highlightColors; track color.value) {
-                        <button
-                          scToggleGroupItem
-                          [value]="color.value"
-                          [attr.aria-label]="color.name"
-                        >
+                        <button scToggleGroupItem [value]="color.value">
                           <span
                             class="ring-foreground/20 size-4 rounded-full ring-1"
                             [style.background-color]="color.value"
                           ></span>
+                          <span class="sr-only">{{ color.name }}</span>
                         </button>
                       }
                     </div>
@@ -787,15 +784,12 @@ const INK_COLORS = [
                       aria-label="Text colour"
                     >
                       @for (color of inkColors; track color.value) {
-                        <button
-                          scToggleGroupItem
-                          [value]="color.value"
-                          [attr.aria-label]="color.name"
-                        >
+                        <button scToggleGroupItem [value]="color.value">
                           <span
                             class="ring-foreground/20 size-4 rounded-full ring-1"
                             [style.background-color]="color.value"
                           ></span>
+                          <span class="sr-only">{{ color.name }}</span>
                         </button>
                       }
                     </div>
@@ -821,15 +815,12 @@ const INK_COLORS = [
                       aria-label="Drawing colour"
                     >
                       @for (color of inkColors; track color.value) {
-                        <button
-                          scToggleGroupItem
-                          [value]="color.value"
-                          [attr.aria-label]="color.name"
-                        >
+                        <button scToggleGroupItem [value]="color.value">
                           <span
                             class="ring-foreground/20 size-4 rounded-full ring-1"
                             [style.background-color]="color.value"
                           ></span>
+                          <span class="sr-only">{{ color.name }}</span>
                         </button>
                       }
                     </div>
@@ -867,12 +858,12 @@ const INK_COLORS = [
             scButton
             variant="ghost"
             size="icon"
-            aria-label="Add image"
             [scTooltipTrigger]="'Add image'"
             tooltipPosition="bottom"
             (click)="imageInput.click()"
           >
             <svg siImageIcon></svg>
+            <span class="sr-only">Add image</span>
           </button>
           <input #imageInput type="file" scPdfViewerAddImage class="hidden" />
           <div
@@ -886,11 +877,11 @@ const INK_COLORS = [
               scPopoverTrigger
               variant="ghost"
               size="icon"
-              aria-label="Signature"
               [scTooltipTrigger]="'Signature'"
               tooltipPosition="bottom"
             >
               <svg siSignatureIcon></svg>
+              <span class="sr-only">Signature</span>
             </button>
             <ng-template scPopoverPortal>
               <div scPopover class="w-60 gap-3">
@@ -906,9 +897,6 @@ const INK_COLORS = [
                           variant="outline"
                           class="h-16 w-full bg-white p-1 hover:bg-white dark:bg-white"
                           [scPdfViewerSignaturePlace]="signature"
-                          [attr.aria-label]="
-                            'Place signature ' + (signature.description || '')
-                          "
                           (click)="signaturesOpen.set(false)"
                         >
                           <img
@@ -916,6 +904,9 @@ const INK_COLORS = [
                             alt=""
                             class="max-h-full max-w-full object-contain"
                           />
+                          <span class="sr-only">{{
+                            'Place signature ' + (signature.description || '')
+                          }}</span>
                         </button>
                         <div class="flex items-center justify-between gap-1">
                           <span class="text-muted-foreground truncate text-xs">
@@ -962,22 +953,22 @@ const INK_COLORS = [
             variant="ghost"
             size="icon"
             scPdfViewerPrint
-            aria-label="Print"
             [scTooltipTrigger]="'Print'"
             tooltipPosition="bottom"
           >
             <svg siPrinterIcon></svg>
+            <span class="sr-only">Print</span>
           </button>
           <button
             scButton
             variant="ghost"
             size="icon"
             scPdfViewerDownload
-            aria-label="Download"
             [scTooltipTrigger]="'Download'"
             tooltipPosition="bottom"
           >
             <svg siDownloadIcon></svg>
+            <span class="sr-only">Download</span>
           </button>
 
           <div scMenuProvider side="bottom" align="end">
@@ -986,11 +977,11 @@ const INK_COLORS = [
               scMenuTrigger
               variant="ghost"
               size="icon"
-              aria-label="More"
               [scTooltipTrigger]="'More'"
               tooltipPosition="bottom"
             >
               <svg siEllipsisVerticalIcon></svg>
+              <span class="sr-only">More</span>
             </button>
             <ng-template scMenuPortal>
               <div scMenu (itemSelected)="onMenuItem($event)">
@@ -1029,20 +1020,20 @@ const INK_COLORS = [
               variant="ghost"
               size="icon-sm"
               scPdfViewerFindPrevious
-              aria-label="Previous match"
               [scTooltipTrigger]="'Previous match'"
             >
               <svg siChevronUpIcon></svg>
+              <span class="sr-only">Previous match</span>
             </button>
             <button
               scButton
               variant="ghost"
               size="icon-sm"
               scPdfViewerFindNext
-              aria-label="Next match"
               [scTooltipTrigger]="'Next match'"
             >
               <svg siChevronDownIcon></svg>
+              <span class="sr-only">Next match</span>
             </button>
             <label scCheckboxField class="ms-2 text-sm">
               <input
@@ -1129,45 +1120,33 @@ const INK_COLORS = [
                   [selectedTab]="sidebarTab()"
                   (selectedTabChange)="setSidebarTab($event)"
                 >
-                  <button
-                    scTab
-                    value="thumbnails"
-                    aria-label="Pages"
-                    [scTooltipTrigger]="'Pages'"
-                  >
+                  <button scTab value="thumbnails" [scTooltipTrigger]="'Pages'">
                     <svg siLayoutGridIcon></svg>
+                    <span class="sr-only">Pages</span>
                   </button>
-                  <button
-                    scTab
-                    value="outline"
-                    aria-label="Outline"
-                    [scTooltipTrigger]="'Outline'"
-                  >
+                  <button scTab value="outline" [scTooltipTrigger]="'Outline'">
                     <svg siListTreeIcon></svg>
+                    <span class="sr-only">Outline</span>
                   </button>
                   <button
                     scTab
                     value="attachments"
-                    aria-label="Attachments"
                     [scTooltipTrigger]="'Attachments'"
                   >
                     <svg siPaperclipIcon></svg>
+                    <span class="sr-only">Attachments</span>
                   </button>
-                  <button
-                    scTab
-                    value="layers"
-                    aria-label="Layers"
-                    [scTooltipTrigger]="'Layers'"
-                  >
+                  <button scTab value="layers" [scTooltipTrigger]="'Layers'">
                     <svg siLayersIcon></svg>
+                    <span class="sr-only">Layers</span>
                   </button>
                   <button
                     scTab
                     value="comments"
-                    aria-label="Comments"
                     [scTooltipTrigger]="'Comments'"
                   >
                     <svg siMessageSquareIcon></svg>
+                    <span class="sr-only">Comments</span>
                   </button>
                 </div>
 
@@ -1188,21 +1167,21 @@ const INK_COLORS = [
                         variant="ghost"
                         size="icon-sm"
                         scPdfViewerInsertPages
-                        aria-label="Insert file"
                         [scTooltipTrigger]="'Insert a file after this page'"
                         (insertFailed)="insertFailed.set($event.name)"
                       >
                         <svg siFilePlusIcon></svg>
+                        <span class="sr-only">Insert file</span>
                       </button>
                       <button
                         scButton
                         variant="ghost"
                         size="icon-sm"
                         scPdfViewerPastePages
-                        aria-label="Paste"
                         [scTooltipTrigger]="'Paste after this page'"
                       >
                         <svg siClipboardPasteIcon></svg>
+                        <span class="sr-only">Paste</span>
                       </button>
                       @if (viewer.pageSelection().length) {
                         <div scSeparator orientation="vertical"></div>
@@ -1211,60 +1190,60 @@ const INK_COLORS = [
                           variant="ghost"
                           size="icon-sm"
                           scPdfViewerMovePagesEarlier
-                          aria-label="Move earlier"
                           [scTooltipTrigger]="'Move earlier'"
                         >
                           <svg siArrowUpIcon></svg>
+                          <span class="sr-only">Move earlier</span>
                         </button>
                         <button
                           scButton
                           variant="ghost"
                           size="icon-sm"
                           scPdfViewerMovePagesLater
-                          aria-label="Move later"
                           [scTooltipTrigger]="'Move later'"
                         >
                           <svg siArrowDownIcon></svg>
+                          <span class="sr-only">Move later</span>
                         </button>
                         <button
                           scButton
                           variant="ghost"
                           size="icon-sm"
                           scPdfViewerCopyPages
-                          aria-label="Copy"
                           [scTooltipTrigger]="'Copy'"
                         >
                           <svg siCopyIcon></svg>
+                          <span class="sr-only">Copy</span>
                         </button>
                         <button
                           scButton
                           variant="ghost"
                           size="icon-sm"
                           scPdfViewerCutPages
-                          aria-label="Cut"
                           [scTooltipTrigger]="'Cut'"
                         >
                           <svg siScissorsIcon></svg>
+                          <span class="sr-only">Cut</span>
                         </button>
                         <button
                           scButton
                           variant="ghost"
                           size="icon-sm"
                           scPdfViewerDeletePages
-                          aria-label="Delete"
                           [scTooltipTrigger]="'Delete'"
                         >
                           <svg siTrash2Icon></svg>
+                          <span class="sr-only">Delete</span>
                         </button>
                         <button
                           scButton
                           variant="ghost"
                           size="icon-sm"
                           scPdfViewerExportPages
-                          aria-label="Save selected pages"
                           [scTooltipTrigger]="'Save selected pages as…'"
                         >
                           <svg siFileOutputIcon></svg>
+                          <span class="sr-only">Save selected pages</span>
                         </button>
                         <span
                           class="text-muted-foreground ms-auto text-xs"
@@ -1329,30 +1308,30 @@ const INK_COLORS = [
                           variant="ghost"
                           size="icon-sm"
                           scPdfViewerOutlineExpandAll
-                          aria-label="Expand all"
                           [scTooltipTrigger]="'Expand all'"
                         >
                           <svg siChevronsUpDownIcon></svg>
+                          <span class="sr-only">Expand all</span>
                         </button>
                         <button
                           scButton
                           variant="ghost"
                           size="icon-sm"
                           scPdfViewerOutlineCollapseAll
-                          aria-label="Collapse all"
                           [scTooltipTrigger]="'Collapse all'"
                         >
                           <svg siChevronsDownUpIcon></svg>
+                          <span class="sr-only">Collapse all</span>
                         </button>
                         <button
                           scButton
                           variant="ghost"
                           size="icon-sm"
                           scPdfViewerOutlineFindCurrent
-                          aria-label="Find current outline item"
                           [scTooltipTrigger]="'Find current outline item'"
                         >
                           <svg siLocateFixedIcon></svg>
+                          <span class="sr-only">Find current outline item</span>
                         </button>
                       </div>
                       <nav aria-label="Outline" class="p-2">
@@ -1666,12 +1645,12 @@ const INK_COLORS = [
                         size="icon-xs"
                         [scPdfViewerAnnotationColor]="annotation"
                         [color]="color.value"
-                        [attr.aria-label]="color.name"
                       >
                         <span
                           class="ring-foreground/20 size-3.5 rounded-full ring-1"
                           [style.background-color]="color.value"
                         ></span>
+                        <span class="sr-only">{{ color.name }}</span>
                       </button>
                     }
                   }
@@ -2061,9 +2040,9 @@ const INK_COLORS = [
                     size="icon-xs"
                     class="mt-0.5 shrink-0"
                     [scPdfViewerOutlineToggle]="item"
-                    [attr.aria-label]="item.title"
                   >
                     <svg siChevronRightIcon></svg>
+                    <span class="sr-only">{{ item.title }}</span>
                   </button>
                 } @else {
                   <span class="w-6 shrink-0"></span>

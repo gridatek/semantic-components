@@ -80,9 +80,9 @@ import {
           size="icon-xs"
           class="rounded-full"
           scPopoverTrigger
-          aria-label="Add a reaction"
         >
           <svg siSmilePlusIcon></svg>
+          <span class="sr-only">Add a reaction</span>
         </button>
         <ng-template scPopoverPortal>
           <div scPopover class="w-fit p-0">

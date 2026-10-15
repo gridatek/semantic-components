@@ -67,13 +67,13 @@ import { ButtonPatternUsageDemoContainer } from '../docs/button-pattern/demos/bu
               size="icon"
               [scCopyToClipboard]="sourceCode"
               #copy2="scCopyToClipboard"
-              aria-label="Copy to clipboard"
             >
               @if (copy2.copied()) {
                 <svg siCheckIcon></svg>
               } @else {
                 <svg siCopyIcon></svg>
               }
+              <span class="sr-only">Copy to clipboard</span>
             </button>
           </div>
           <div scCodeViewerContent [code]="sourceCode" language="css"></div>

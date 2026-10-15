@@ -29,11 +29,13 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
   template: \`
     <div scButtonGroup orientation="vertical">
-      <button scButton variant="outline" size="icon" aria-label="Increase">
+      <button scButton variant="outline" size="icon">
         <svg siPlusIcon></svg>
+        <span class="sr-only">Increase</span>
       </button>
-      <button scButton variant="outline" size="icon" aria-label="Decrease">
+      <button scButton variant="outline" size="icon">
         <svg siMinusIcon></svg>
+        <span class="sr-only">Decrease</span>
       </button>
     </div>
   \`,

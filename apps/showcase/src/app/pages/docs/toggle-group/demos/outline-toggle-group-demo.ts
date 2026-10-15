@@ -23,14 +23,17 @@ import {
       [(value)]="view"
       aria-label="View mode"
     >
-      <button scToggleGroupItem value="list" aria-label="List view">
+      <button scToggleGroupItem value="list">
         <svg siListIcon></svg>
+        <span class="sr-only">List view</span>
       </button>
-      <button scToggleGroupItem value="grid" aria-label="Grid view">
+      <button scToggleGroupItem value="grid">
         <svg siLayoutGridIcon></svg>
+        <span class="sr-only">Grid view</span>
       </button>
-      <button scToggleGroupItem value="kanban" aria-label="Kanban view">
+      <button scToggleGroupItem value="kanban">
         <svg siKanbanIcon></svg>
+        <span class="sr-only">Kanban view</span>
       </button>
     </div>
   `,

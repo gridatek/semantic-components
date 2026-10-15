@@ -79,13 +79,13 @@ import { TocHeading } from '../../components/toc/toc-heading';
               size="icon"
               [scCopyToClipboard]="stylesCode"
               #copyStyles="scCopyToClipboard"
-              aria-label="Copy to clipboard"
             >
               @if (copyStyles.copied()) {
                 <svg siCheckIcon></svg>
               } @else {
                 <svg siCopyIcon></svg>
               }
+              <span class="sr-only">Copy to clipboard</span>
             </button>
           </div>
           <div scCodeViewerContent [code]="stylesCode" language="css"></div>
@@ -124,13 +124,13 @@ import { TocHeading } from '../../components/toc/toc-heading';
               size="icon"
               [scCopyToClipboard]="overlayCode"
               #copyOverlay="scCopyToClipboard"
-              aria-label="Copy to clipboard"
             >
               @if (copyOverlay.copied()) {
                 <svg siCheckIcon></svg>
               } @else {
                 <svg siCopyIcon></svg>
               }
+              <span class="sr-only">Copy to clipboard</span>
             </button>
           </div>
           <div
@@ -164,13 +164,13 @@ import { TocHeading } from '../../components/toc/toc-heading';
               size="icon"
               [scCopyToClipboard]="assetsCode"
               #copyAssets="scCopyToClipboard"
-              aria-label="Copy to clipboard"
             >
               @if (copyAssets.copied()) {
                 <svg siCheckIcon></svg>
               } @else {
                 <svg siCopyIcon></svg>
               }
+              <span class="sr-only">Copy to clipboard</span>
             </button>
           </div>
           <div scCodeViewerContent [code]="assetsCode" language="json"></div>
@@ -185,13 +185,13 @@ import { TocHeading } from '../../components/toc/toc-heading';
               size="icon"
               [scCopyToClipboard]="assetsUrlCode"
               #copyAssetsUrl="scCopyToClipboard"
-              aria-label="Copy to clipboard"
             >
               @if (copyAssetsUrl.copied()) {
                 <svg siCheckIcon></svg>
               } @else {
                 <svg siCopyIcon></svg>
               }
+              <span class="sr-only">Copy to clipboard</span>
             </button>
           </div>
           <div scCodeViewerContent [code]="assetsUrlCode" language="html"></div>

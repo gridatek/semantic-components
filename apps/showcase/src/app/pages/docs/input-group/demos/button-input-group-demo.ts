@@ -28,8 +28,9 @@ import { SiSearchIcon, SiXIcon } from '@semantic-icons/lucide-icons';
       </div>
       <input scInput placeholder="Search..." />
       <div scInputGroupAddon align="inline-end">
-        <button scButton variant="ghost" size="icon-xs" aria-label="Clear">
+        <button scButton variant="ghost" size="icon-xs">
           <svg siXIcon></svg>
+          <span class="sr-only">Clear</span>
         </button>
       </div>
     </div>

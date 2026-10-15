@@ -6,8 +6,9 @@ import { SiBoldIcon } from '@semantic-icons/lucide-icons';
   selector: 'app-basic-toggle-demo',
   imports: [ScToggle, SiBoldIcon],
   template: `
-    <button scToggle [(pressed)]="bold" aria-label="Toggle bold">
+    <button scToggle [(pressed)]="bold">
       <svg siBoldIcon></svg>
+      <span class="sr-only">Toggle bold</span>
     </button>
   `,
   host: { class: 'flex w-full justify-center' },

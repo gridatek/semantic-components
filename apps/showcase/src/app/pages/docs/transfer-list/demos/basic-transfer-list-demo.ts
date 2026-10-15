@@ -89,36 +89,36 @@ import {
             variant="outline"
             size="icon"
             scTransferListMoveToTarget
-            aria-label="Move selected to right"
           >
             <svg siChevronRightIcon class="rtl:rotate-180"></svg>
+            <span class="sr-only">Move selected to right</span>
           </button>
           <button
             scButton
             variant="outline"
             size="icon"
             scTransferListMoveToSource
-            aria-label="Move selected to left"
           >
             <svg siChevronLeftIcon class="rtl:rotate-180"></svg>
+            <span class="sr-only">Move selected to left</span>
           </button>
           <button
             scButton
             variant="outline"
             size="icon"
             scTransferListMoveAllToTarget
-            aria-label="Move all to right"
           >
             <svg siChevronsRightIcon class="rtl:rotate-180"></svg>
+            <span class="sr-only">Move all to right</span>
           </button>
           <button
             scButton
             variant="outline"
             size="icon"
             scTransferListMoveAllToSource
-            aria-label="Move all to left"
           >
             <svg siChevronsLeftIcon class="rtl:rotate-180"></svg>
+            <span class="sr-only">Move all to left</span>
           </button>
         </div>
 

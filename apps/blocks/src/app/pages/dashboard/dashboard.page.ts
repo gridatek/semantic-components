@@ -418,7 +418,9 @@ import {
           </ul>
         </div>
 
-        <button scSidebarRail aria-label="Toggle Sidebar"></button>
+        <button scSidebarRail>
+          <span class="sr-only">Toggle Sidebar</span>
+        </button>
       </div>
 
       <main scSidebarInset>

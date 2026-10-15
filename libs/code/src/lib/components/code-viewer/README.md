@@ -80,12 +80,13 @@ The content component with Shiki syntax highlighting.
 <div scCodeViewer>
   <div scCodeViewerHeader>
     <span scCodeViewerLabel>TypeScript</span>
-    <button scButton variant="ghost" size="icon" [scCopyToClipboard]="code" #copy="scCopyToClipboard" aria-label="Copy to clipboard">
+    <button scButton variant="ghost" size="icon" [scCopyToClipboard]="code" #copy="scCopyToClipboard">
       @if (copy.copied()) {
       <svg siCheckIcon></svg>
       } @else {
       <svg siCopyIcon></svg>
       }
+      <span class="sr-only">Copy to clipboard</span>
     </button>
   </div>
   <div scCodeViewerContent [code]="code" language="typescript"></div>
@@ -98,12 +99,13 @@ The content component with Shiki syntax highlighting.
 <div scCodeViewer>
   <div scCodeViewerHeader>
     <span scCodeViewerLabel>app.component.ts</span>
-    <button scButton variant="ghost" size="icon" [scCopyToClipboard]="code" #copy="scCopyToClipboard" aria-label="Copy to clipboard">
+    <button scButton variant="ghost" size="icon" [scCopyToClipboard]="code" #copy="scCopyToClipboard">
       @if (copy.copied()) {
       <svg siCheckIcon></svg>
       } @else {
       <svg siCopyIcon></svg>
       }
+      <span class="sr-only">Copy to clipboard</span>
     </button>
   </div>
   <div scCodeViewerContent [code]="code" language="angular-ts"></div>
@@ -116,12 +118,13 @@ The content component with Shiki syntax highlighting.
 <div scCodeViewer>
   <div scCodeViewerHeader>
     <span scCodeViewerLabel>{{ filename }}</span>
-    <button scButton variant="ghost" size="icon" [scCopyToClipboard]="code" #copy="scCopyToClipboard" aria-label="Copy to clipboard">
+    <button scButton variant="ghost" size="icon" [scCopyToClipboard]="code" #copy="scCopyToClipboard">
       @if (copy.copied()) {
       <svg siCheckIcon></svg>
       } @else {
       <svg siCopyIcon></svg>
       }
+      <span class="sr-only">Copy to clipboard</span>
     </button>
   </div>
   <div scCodeViewerContent [code]="code" language="typescript" [showLineNumbers]="true"></div>
@@ -142,12 +145,13 @@ The content component with Shiki syntax highlighting.
 <div scCodeViewer>
   <div scCodeViewerHeader>
     <span scCodeViewerLabel>{{ language }}</span>
-    <button scButton variant="ghost" size="icon" [scCopyToClipboard]="code" #copy="scCopyToClipboard" aria-label="Copy to clipboard">
+    <button scButton variant="ghost" size="icon" [scCopyToClipboard]="code" #copy="scCopyToClipboard">
       @if (copy.copied()) {
       <svg siCheckIcon></svg>
       } @else {
       <svg siCopyIcon></svg>
       }
+      <span class="sr-only">Copy to clipboard</span>
     </button>
   </div>
   <div scCodeViewerContent [code]="longCode" language="typescript" maxHeight="300px"></div>
@@ -166,12 +170,13 @@ The content component with Shiki syntax highlighting.
     </div>
     <div class="flex gap-2">
       <button>Download</button>
-      <button scButton variant="ghost" size="icon" [scCopyToClipboard]="code" #copy="scCopyToClipboard" aria-label="Copy to clipboard">
+      <button scButton variant="ghost" size="icon" [scCopyToClipboard]="code" #copy="scCopyToClipboard">
         @if (copy.copied()) {
         <svg siCheckIcon></svg>
         } @else {
         <svg siCopyIcon></svg>
         }
+        <span class="sr-only">Copy to clipboard</span>
       </button>
     </div>
   </div>

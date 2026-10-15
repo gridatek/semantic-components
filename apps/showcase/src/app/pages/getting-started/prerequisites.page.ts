@@ -93,13 +93,13 @@ import { TocHeading } from '../../components/toc/toc-heading';
                   size="icon"
                   [scCopyToClipboard]="step3aCode"
                   #copy3="scCopyToClipboard"
-                  aria-label="Copy to clipboard"
                 >
                   @if (copy3.copied()) {
                     <svg siCheckIcon></svg>
                   } @else {
                     <svg siCopyIcon></svg>
                   }
+                  <span class="sr-only">Copy to clipboard</span>
                 </button>
               </div>
               <div

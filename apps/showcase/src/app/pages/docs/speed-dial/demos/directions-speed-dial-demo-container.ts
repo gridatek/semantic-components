@@ -58,36 +58,40 @@ import {
           <div scSpeedDial #dialUp="scSpeedDial" direction="up">
             <div scSpeedDialActionList>
               <div scSpeedDialAction>
-                <button scSpeedDialActionButton aria-label="Home">
+                <button scSpeedDialActionButton>
                   <svg siHouseIcon class="size-5" />
+                  <span class="sr-only">Home</span>
                 </button>
                 @if (dialUp.open()) {
                   <span scSpeedDialActionLabel>Home</span>
                 }
               </div>
               <div scSpeedDialAction>
-                <button scSpeedDialActionButton aria-label="Settings">
+                <button scSpeedDialActionButton>
                   <svg siSettingsIcon class="size-5" />
+                  <span class="sr-only">Settings</span>
                 </button>
                 @if (dialUp.open()) {
                   <span scSpeedDialActionLabel>Settings</span>
                 }
               </div>
               <div scSpeedDialAction>
-                <button scSpeedDialActionButton aria-label="Help">
+                <button scSpeedDialActionButton>
                   <svg siCircleQuestionMarkIcon class="size-5" />
+                  <span class="sr-only">Help</span>
                 </button>
                 @if (dialUp.open()) {
                   <span scSpeedDialActionLabel>Help</span>
                 }
               </div>
             </div>
-            <button scSpeedDialTrigger aria-label="Up direction">
+            <button scSpeedDialTrigger>
               @if (dialUp.open()) {
                 <svg siXIcon class="size-6" />
               } @else {
                 <svg siPlusIcon class="size-6" />
               }
+              <span class="sr-only">Up direction</span>
             </button>
           </div>
         </div>
@@ -102,36 +106,40 @@ import {
           <div scSpeedDial #dialDown="scSpeedDial" direction="down">
             <div scSpeedDialActionList>
               <div scSpeedDialAction>
-                <button scSpeedDialActionButton aria-label="Home">
+                <button scSpeedDialActionButton>
                   <svg siHouseIcon class="size-5" />
+                  <span class="sr-only">Home</span>
                 </button>
                 @if (dialDown.open()) {
                   <span scSpeedDialActionLabel>Home</span>
                 }
               </div>
               <div scSpeedDialAction>
-                <button scSpeedDialActionButton aria-label="Settings">
+                <button scSpeedDialActionButton>
                   <svg siSettingsIcon class="size-5" />
+                  <span class="sr-only">Settings</span>
                 </button>
                 @if (dialDown.open()) {
                   <span scSpeedDialActionLabel>Settings</span>
                 }
               </div>
               <div scSpeedDialAction>
-                <button scSpeedDialActionButton aria-label="Help">
+                <button scSpeedDialActionButton>
                   <svg siCircleQuestionMarkIcon class="size-5" />
+                  <span class="sr-only">Help</span>
                 </button>
                 @if (dialDown.open()) {
                   <span scSpeedDialActionLabel>Help</span>
                 }
               </div>
             </div>
-            <button scSpeedDialTrigger aria-label="Down direction">
+            <button scSpeedDialTrigger>
               @if (dialDown.open()) {
                 <svg siXIcon class="size-6" />
               } @else {
                 <svg siPlusIcon class="size-6" />
               }
+              <span class="sr-only">Down direction</span>
             </button>
           </div>
         </div>
@@ -146,36 +154,40 @@ import {
           <div scSpeedDial #dialLeft="scSpeedDial" direction="left">
             <div scSpeedDialActionList>
               <div scSpeedDialAction>
-                <button scSpeedDialActionButton aria-label="Home">
+                <button scSpeedDialActionButton>
                   <svg siHouseIcon class="size-5" />
+                  <span class="sr-only">Home</span>
                 </button>
                 @if (dialLeft.open()) {
                   <span scSpeedDialActionLabel>Home</span>
                 }
               </div>
               <div scSpeedDialAction>
-                <button scSpeedDialActionButton aria-label="Settings">
+                <button scSpeedDialActionButton>
                   <svg siSettingsIcon class="size-5" />
+                  <span class="sr-only">Settings</span>
                 </button>
                 @if (dialLeft.open()) {
                   <span scSpeedDialActionLabel>Settings</span>
                 }
               </div>
               <div scSpeedDialAction>
-                <button scSpeedDialActionButton aria-label="Help">
+                <button scSpeedDialActionButton>
                   <svg siCircleQuestionMarkIcon class="size-5" />
+                  <span class="sr-only">Help</span>
                 </button>
                 @if (dialLeft.open()) {
                   <span scSpeedDialActionLabel>Help</span>
                 }
               </div>
             </div>
-            <button scSpeedDialTrigger aria-label="Left direction">
+            <button scSpeedDialTrigger>
               @if (dialLeft.open()) {
                 <svg siXIcon class="size-6" />
               } @else {
                 <svg siPlusIcon class="size-6" />
               }
+              <span class="sr-only">Left direction</span>
             </button>
           </div>
         </div>
@@ -190,36 +202,40 @@ import {
           <div scSpeedDial #dialRight="scSpeedDial" direction="right">
             <div scSpeedDialActionList>
               <div scSpeedDialAction>
-                <button scSpeedDialActionButton aria-label="Home">
+                <button scSpeedDialActionButton>
                   <svg siHouseIcon class="size-5" />
+                  <span class="sr-only">Home</span>
                 </button>
                 @if (dialRight.open()) {
                   <span scSpeedDialActionLabel>Home</span>
                 }
               </div>
               <div scSpeedDialAction>
-                <button scSpeedDialActionButton aria-label="Settings">
+                <button scSpeedDialActionButton>
                   <svg siSettingsIcon class="size-5" />
+                  <span class="sr-only">Settings</span>
                 </button>
                 @if (dialRight.open()) {
                   <span scSpeedDialActionLabel>Settings</span>
                 }
               </div>
               <div scSpeedDialAction>
-                <button scSpeedDialActionButton aria-label="Help">
+                <button scSpeedDialActionButton>
                   <svg siCircleQuestionMarkIcon class="size-5" />
+                  <span class="sr-only">Help</span>
                 </button>
                 @if (dialRight.open()) {
                   <span scSpeedDialActionLabel>Help</span>
                 }
               </div>
             </div>
-            <button scSpeedDialTrigger aria-label="Right direction">
+            <button scSpeedDialTrigger>
               @if (dialRight.open()) {
                 <svg siXIcon class="size-6" />
               } @else {
                 <svg siPlusIcon class="size-6" />
               }
+              <span class="sr-only">Right direction</span>
             </button>
           </div>
         </div>

@@ -53,8 +53,9 @@ import {
           placeholder="Select a country"
         />
         <div scInputGroupAddon align="inline-end">
-          <button scAutocompleteClear aria-label="Clear">
+          <button scAutocompleteClear>
             <svg siXIcon></svg>
+            <span class="sr-only">Clear</span>
           </button>
         </div>
       </div>

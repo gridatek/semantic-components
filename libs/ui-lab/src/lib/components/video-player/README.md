@@ -34,12 +34,14 @@ import {
       <input scVideoPlayerSeek aria-label="Video progress" />
     </div>
         <div scVideoPlayerToolbar>
-          <button scVideoPlayerPlayPause [attr.aria-label]="player.isPlaying() ? 'Pause' : 'Play'">
+          <button scVideoPlayerPlayPause>
             <!-- Play/pause icon -->
+            <span class="sr-only">{{ player.isPlaying() ? 'Pause' : 'Play' }}</span>
           </button>
           <span scVideoPlayerTime></span>
-          <button scVideoPlayerFullscreen [attr.aria-label]="player.isFullscreen() ? 'Exit fullscreen' : 'Enter fullscreen'">
+          <button scVideoPlayerFullscreen>
             <!-- Fullscreen icon -->
+            <span class="sr-only">{{ player.isFullscreen() ? 'Exit fullscreen' : 'Enter fullscreen' }}</span>
           </button>
         </div>
       </div>
@@ -165,8 +167,9 @@ You write every control and name it (`aria-label`, or `[attr.aria-label]` from t
 <div scVideoPlayer aria-label="Video player" #player="scVideoPlayer" [src]="video" [poster]="poster">
   <svg scVideoPlayerBufferingIndicator siLoaderIcon></svg>
 
-  <button scVideoPlayerBigPlay aria-label="Play video">
+  <button scVideoPlayerBigPlay>
     <!-- Play icon -->
+    <span class="sr-only">Play video</span>
   </button>
 
   <div scVideoPlayerControls>
@@ -180,7 +183,7 @@ You write every control and name it (`aria-label`, or `[attr.aria-label]` from t
       <button scVideoPlayerSkip [seconds]="10">⏩</button>
 
       <div scVideoPlayerVolume>
-        <button scVideoPlayerMute aria-label="Mute"><!-- your icon, from player.isMuted() --></button>
+        <button scVideoPlayerMute><!-- your icon, from player.isMuted() --><span class="sr-only">Mute</span></button>
         <input scVideoPlayerVolumeSlider aria-label="Volume" />
       </div>
 

@@ -32,12 +32,13 @@ Use `#ref="scCopyToClipboard"` to access the directive instance and its `copied(
 ### With Icons
 
 ```html
-<button scButton variant="ghost" size="icon" [scCopyToClipboard]="code" #copy="scCopyToClipboard" aria-label="Copy to clipboard">
+<button scButton variant="ghost" size="icon" [scCopyToClipboard]="code" #copy="scCopyToClipboard">
   @if (copy.copied()) {
   <svg siCheckIcon></svg>
   } @else {
   <svg siCopyIcon></svg>
   }
+  <span class="sr-only">Copy to clipboard</span>
 </button>
 ```
 

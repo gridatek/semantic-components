@@ -136,8 +136,9 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
           @if (guide.currentStep()) {
             <div scTourGuideTooltip>
               @if (guide.allowClose()) {
-                <button scTourGuideClose aria-label="Close tour">
+                <button scTourGuideClose>
                   <svg siXIcon class="size-4"></svg>
+                  <span class="sr-only">Close tour</span>
                 </button>
               }
 

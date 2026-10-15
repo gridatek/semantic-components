@@ -27,16 +27,13 @@ import { SiBoldIcon } from '@semantic-icons/lucide-icons';
   imports: [ScToggle, SiBoldIcon],
   template: \`
     <div class="flex items-center gap-2">
-      <button scToggle [disabled]="true" aria-label="Toggle disabled">
+      <button scToggle [disabled]="true">
         <svg siBoldIcon></svg>
+        <span class="sr-only">Toggle disabled</span>
       </button>
-      <button
-        scToggle
-        [pressed]="true"
-        [disabled]="true"
-        aria-label="Toggle disabled pressed"
-      >
+      <button scToggle [pressed]="true" [disabled]="true">
         <svg siBoldIcon></svg>
+        <span class="sr-only">Toggle disabled pressed</span>
       </button>
     </div>
   \`,

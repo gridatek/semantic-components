@@ -31,28 +31,34 @@ import {
   template: `
     <div scToolbar [values]="['bold']" aria-label="Text formatting">
       <div scToolbarToggleGroup>
-        <button scToolbarToggle value="bold" aria-label="Bold">
+        <button scToolbarToggle value="bold">
           <svg siBoldIcon></svg>
+          <span class="sr-only">Bold</span>
         </button>
-        <button scToolbarToggle value="italic" aria-label="Italic">
+        <button scToolbarToggle value="italic">
           <svg siItalicIcon></svg>
+          <span class="sr-only">Italic</span>
         </button>
-        <button scToolbarToggle value="underline" aria-label="Underline">
+        <button scToolbarToggle value="underline">
           <svg siUnderlineIcon></svg>
+          <span class="sr-only">Underline</span>
         </button>
       </div>
 
       <div scToolbarSeparator></div>
 
       <div scToolbarToggleGroup>
-        <button scToolbarToggle value="align-left" aria-label="Align left">
+        <button scToolbarToggle value="align-left">
           <svg siTextAlignStartIcon></svg>
+          <span class="sr-only">Align left</span>
         </button>
-        <button scToolbarToggle value="align-center" aria-label="Align center">
+        <button scToolbarToggle value="align-center">
           <svg siTextAlignCenterIcon></svg>
+          <span class="sr-only">Align center</span>
         </button>
-        <button scToolbarToggle value="align-right" aria-label="Align right">
+        <button scToolbarToggle value="align-right">
           <svg siTextAlignEndIcon></svg>
+          <span class="sr-only">Align right</span>
         </button>
       </div>
     </div>

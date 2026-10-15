@@ -126,13 +126,13 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
               size="icon"
               [scCopyToClipboard]="featuresCode"
               #copy="scCopyToClipboard"
-              aria-label="Copy to clipboard"
             >
               @if (copy.copied()) {
                 <svg siCheckIcon></svg>
               } @else {
                 <svg siCopyIcon></svg>
               }
+              <span class="sr-only">Copy to clipboard</span>
             </button>
           </div>
           <div
@@ -537,13 +537,13 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
               size="icon"
               [scCopyToClipboard]="loadingCode"
               #copyLoading="scCopyToClipboard"
-              aria-label="Copy to clipboard"
             >
               @if (copyLoading.copied()) {
                 <svg siCheckIcon></svg>
               } @else {
                 <svg siCopyIcon></svg>
               }
+              <span class="sr-only">Copy to clipboard</span>
             </button>
           </div>
           <div scCodeViewerContent [code]="loadingCode" language="html"></div>

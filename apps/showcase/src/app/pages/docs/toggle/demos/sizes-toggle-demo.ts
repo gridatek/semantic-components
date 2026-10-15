@@ -7,14 +7,17 @@ import { SiBoldIcon } from '@semantic-icons/lucide-icons';
   imports: [ScToggle, SiBoldIcon],
   template: `
     <div class="flex items-center gap-2">
-      <button scToggle size="sm" aria-label="Toggle small">
+      <button scToggle size="sm">
         <svg siBoldIcon></svg>
+        <span class="sr-only">Toggle small</span>
       </button>
-      <button scToggle size="default" aria-label="Toggle default">
+      <button scToggle size="default">
         <svg siBoldIcon></svg>
+        <span class="sr-only">Toggle default</span>
       </button>
-      <button scToggle size="lg" aria-label="Toggle large">
+      <button scToggle size="lg">
         <svg siBoldIcon></svg>
+        <span class="sr-only">Toggle large</span>
       </button>
     </div>
   `,

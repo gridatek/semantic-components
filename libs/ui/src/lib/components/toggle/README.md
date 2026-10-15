@@ -9,8 +9,9 @@ A two-state button that can be either on or off.
 ## Usage
 
 ```html
-<button scToggle [(pressed)]="bold" aria-label="Toggle bold">
+<button scToggle [(pressed)]="bold">
   <svg><!-- icon --></svg>
+  <span class="sr-only">Toggle bold</span>
 </button>
 ```
 

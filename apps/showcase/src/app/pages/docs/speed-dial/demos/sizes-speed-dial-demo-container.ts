@@ -56,36 +56,40 @@ import {
         <div scSpeedDial #dialSm="scSpeedDial" size="sm" direction="up">
           <div scSpeedDialActionList>
             <div scSpeedDialAction>
-              <button scSpeedDialActionButton aria-label="Edit">
+              <button scSpeedDialActionButton>
                 <svg siPencilIcon class="size-4" />
+                <span class="sr-only">Edit</span>
               </button>
               @if (dialSm.open()) {
                 <span scSpeedDialActionLabel>Edit</span>
               }
             </div>
             <div scSpeedDialAction>
-              <button scSpeedDialActionButton aria-label="Copy">
+              <button scSpeedDialActionButton>
                 <svg siCopyIcon class="size-4" />
+                <span class="sr-only">Copy</span>
               </button>
               @if (dialSm.open()) {
                 <span scSpeedDialActionLabel>Copy</span>
               }
             </div>
             <div scSpeedDialAction>
-              <button scSpeedDialActionButton aria-label="Share">
+              <button scSpeedDialActionButton>
                 <svg siShare2Icon class="size-4" />
+                <span class="sr-only">Share</span>
               </button>
               @if (dialSm.open()) {
                 <span scSpeedDialActionLabel>Share</span>
               }
             </div>
           </div>
-          <button scSpeedDialTrigger aria-label="Small speed dial">
+          <button scSpeedDialTrigger>
             @if (dialSm.open()) {
               <svg siXIcon class="size-5" />
             } @else {
               <svg siPlusIcon class="size-5" />
             }
+            <span class="sr-only">Small speed dial</span>
           </button>
         </div>
         <p class="text-muted-foreground mt-2 text-xs">Small</p>
@@ -94,36 +98,40 @@ import {
         <div scSpeedDial #dialMd="scSpeedDial" size="md" direction="up">
           <div scSpeedDialActionList>
             <div scSpeedDialAction>
-              <button scSpeedDialActionButton aria-label="Edit">
+              <button scSpeedDialActionButton>
                 <svg siPencilIcon class="size-5" />
+                <span class="sr-only">Edit</span>
               </button>
               @if (dialMd.open()) {
                 <span scSpeedDialActionLabel>Edit</span>
               }
             </div>
             <div scSpeedDialAction>
-              <button scSpeedDialActionButton aria-label="Copy">
+              <button scSpeedDialActionButton>
                 <svg siCopyIcon class="size-5" />
+                <span class="sr-only">Copy</span>
               </button>
               @if (dialMd.open()) {
                 <span scSpeedDialActionLabel>Copy</span>
               }
             </div>
             <div scSpeedDialAction>
-              <button scSpeedDialActionButton aria-label="Share">
+              <button scSpeedDialActionButton>
                 <svg siShare2Icon class="size-5" />
+                <span class="sr-only">Share</span>
               </button>
               @if (dialMd.open()) {
                 <span scSpeedDialActionLabel>Share</span>
               }
             </div>
           </div>
-          <button scSpeedDialTrigger aria-label="Medium speed dial">
+          <button scSpeedDialTrigger>
             @if (dialMd.open()) {
               <svg siXIcon class="size-6" />
             } @else {
               <svg siPlusIcon class="size-6" />
             }
+            <span class="sr-only">Medium speed dial</span>
           </button>
         </div>
         <p class="text-muted-foreground mt-2 text-xs">Medium</p>
@@ -132,36 +140,40 @@ import {
         <div scSpeedDial #dialLg="scSpeedDial" size="lg" direction="up">
           <div scSpeedDialActionList>
             <div scSpeedDialAction>
-              <button scSpeedDialActionButton aria-label="Edit">
+              <button scSpeedDialActionButton>
                 <svg siPencilIcon class="size-6" />
+                <span class="sr-only">Edit</span>
               </button>
               @if (dialLg.open()) {
                 <span scSpeedDialActionLabel>Edit</span>
               }
             </div>
             <div scSpeedDialAction>
-              <button scSpeedDialActionButton aria-label="Copy">
+              <button scSpeedDialActionButton>
                 <svg siCopyIcon class="size-6" />
+                <span class="sr-only">Copy</span>
               </button>
               @if (dialLg.open()) {
                 <span scSpeedDialActionLabel>Copy</span>
               }
             </div>
             <div scSpeedDialAction>
-              <button scSpeedDialActionButton aria-label="Share">
+              <button scSpeedDialActionButton>
                 <svg siShare2Icon class="size-6" />
+                <span class="sr-only">Share</span>
               </button>
               @if (dialLg.open()) {
                 <span scSpeedDialActionLabel>Share</span>
               }
             </div>
           </div>
-          <button scSpeedDialTrigger aria-label="Large speed dial">
+          <button scSpeedDialTrigger>
             @if (dialLg.open()) {
               <svg siXIcon class="size-7" />
             } @else {
               <svg siPlusIcon class="size-7" />
             }
+            <span class="sr-only">Large speed dial</span>
           </button>
         </div>
         <p class="text-muted-foreground mt-2 text-xs">Large</p>

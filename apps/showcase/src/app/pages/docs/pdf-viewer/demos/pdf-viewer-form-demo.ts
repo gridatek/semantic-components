@@ -85,20 +85,20 @@ import {
             variant="ghost"
             size="icon"
             scPdfViewerPrint
-            aria-label="Print"
             [scTooltipTrigger]="'Print'"
           >
             <svg siPrinterIcon></svg>
+            <span class="sr-only">Print</span>
           </button>
           <button
             scButton
             variant="ghost"
             size="icon"
             scPdfViewerDownload
-            aria-label="Download with your answers"
             [scTooltipTrigger]="'Download with your answers'"
           >
             <svg siDownloadIcon></svg>
+            <span class="sr-only">Download with your answers</span>
           </button>
         </div>
         <div scPdfViewerContent>

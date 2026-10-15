@@ -109,13 +109,16 @@ import {
             </div>
           </div>
         </div>
-        <button scSidebarRail aria-label="Toggle Sidebar"></button>
+        <button scSidebarRail>
+          <span class="sr-only">Toggle Sidebar</span>
+        </button>
       </div>
 
       <main scSidebarInset aria-label="Icon example content">
         <header class="flex h-14 shrink-0 items-center gap-2 px-4">
-          <button scSidebarTrigger aria-label="Toggle sidebar">
+          <button scSidebarTrigger>
             <svg siPanelLeftIcon></svg>
+            <span class="sr-only">Toggle sidebar</span>
           </button>
           <h2 class="text-sm font-medium">Collapse to icons</h2>
         </header>

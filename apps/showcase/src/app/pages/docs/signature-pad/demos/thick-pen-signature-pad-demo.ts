@@ -26,29 +26,33 @@ import { SiTrash2Icon, SiUndoIcon } from '@semantic-icons/lucide-icons';
   template: `
     <div scSignaturePad class="w-full space-y-3">
       <div scSignaturePadToolbar>
-        <button scSignaturePadPenWidth aria-label="Pen width 2" [width]="2">
+        <button scSignaturePadPenWidth [width]="2">
           <span
             class="bg-foreground w-4 rounded-full transition-all"
             style="height: 2px"
           ></span>
+          <span class="sr-only">Pen width 2</span>
         </button>
-        <button scSignaturePadPenWidth aria-label="Pen width 4" [width]="4">
+        <button scSignaturePadPenWidth [width]="4">
           <span
             class="bg-foreground w-4 rounded-full transition-all"
             style="height: 4px"
           ></span>
+          <span class="sr-only">Pen width 4</span>
         </button>
-        <button scSignaturePadPenWidth aria-label="Pen width 6" [width]="6">
+        <button scSignaturePadPenWidth [width]="6">
           <span
             class="bg-foreground w-4 rounded-full transition-all"
             style="height: 6px"
           ></span>
+          <span class="sr-only">Pen width 6</span>
         </button>
-        <button scSignaturePadPenWidth aria-label="Pen width 8" [width]="8">
+        <button scSignaturePadPenWidth [width]="8">
           <span
             class="bg-foreground w-4 rounded-full transition-all"
             style="height: 8px"
           ></span>
+          <span class="sr-only">Pen width 8</span>
         </button>
       </div>
 
@@ -60,11 +64,13 @@ import { SiTrash2Icon, SiUndoIcon } from '@semantic-icons/lucide-icons';
         ></canvas>
 
         <div scSignaturePadControls>
-          <button scSignaturePadUndo aria-label="Undo last stroke">
+          <button scSignaturePadUndo>
             <svg siUndoIcon class="size-4"></svg>
+            <span class="sr-only">Undo last stroke</span>
           </button>
-          <button scSignaturePadClear aria-label="Clear signature">
+          <button scSignaturePadClear>
             <svg siTrash2Icon class="size-4"></svg>
+            <span class="sr-only">Clear signature</span>
           </button>
         </div>
       </div>

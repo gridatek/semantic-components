@@ -85,14 +85,9 @@ import { SiZoomInIcon, SiZoomOutIcon } from '@semantic-icons/lucide-icons';
 
       <div class="flex gap-8">
         <div class="flex flex-1 items-center gap-2">
-          <button
-            scButton
-            scImageCropperZoomOut
-            variant="outline"
-            size="icon"
-            aria-label="Zoom out"
-          >
+          <button scButton scImageCropperZoomOut variant="outline" size="icon">
             <svg siZoomOutIcon class="size-4"></svg>
+            <span class="sr-only">Zoom out</span>
           </button>
 
           <div class="flex flex-1 items-center gap-2">
@@ -108,14 +103,9 @@ import { SiZoomInIcon, SiZoomOutIcon } from '@semantic-icons/lucide-icons';
             >
           </div>
 
-          <button
-            scButton
-            scImageCropperZoomIn
-            variant="outline"
-            size="icon"
-            aria-label="Zoom in"
-          >
+          <button scButton scImageCropperZoomIn variant="outline" size="icon">
             <svg siZoomInIcon class="size-4"></svg>
+            <span class="sr-only">Zoom in</span>
           </button>
         </div>
       </div>

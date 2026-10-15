@@ -151,9 +151,9 @@ import {
                 type="button"
                 (click)="scanner.switchCamera()"
                 class="hover:bg-accent rounded-md border p-2"
-                aria-label="Switch camera"
               >
                 <svg siSwitchCameraIcon class="size-5"></svg>
+                <span class="sr-only">Switch camera</span>
               </button>
             }
           </div>
@@ -167,9 +167,9 @@ import {
                   ? 'rounded-md bg-yellow-500 p-2 text-white'
                   : 'hover:bg-accent rounded-md border p-2'
               "
-              aria-label="Toggle flashlight"
             >
               <svg siFlashlightIcon class="size-5"></svg>
+              <span class="sr-only">Toggle flashlight</span>
             </button>
           }
         </div>

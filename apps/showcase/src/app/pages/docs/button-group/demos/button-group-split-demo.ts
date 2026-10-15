@@ -33,14 +33,9 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
       <div scButtonGroup>
         <button scButton variant="outline">Save</button>
         <div scButtonGroupSeparator></div>
-        <button
-          scButton
-          scMenuTrigger
-          variant="outline"
-          size="icon"
-          aria-label="More save options"
-        >
+        <button scButton scMenuTrigger variant="outline" size="icon">
           <svg siChevronDownIcon></svg>
+          <span class="sr-only">More save options</span>
         </button>
       </div>
       <ng-template scMenuPortal>

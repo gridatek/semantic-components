@@ -35,12 +35,9 @@ import { SiPanelRightIcon } from '@semantic-icons/lucide-icons';
       <main scSidebarInset aria-label="Floating example content">
         <header class="flex h-14 shrink-0 items-center gap-2 border-b px-4">
           <h2 class="text-sm font-medium">Floating, on the right</h2>
-          <button
-            scSidebarTrigger
-            class="ms-auto"
-            aria-label="Toggle table of contents"
-          >
+          <button scSidebarTrigger class="ms-auto">
             <svg siPanelRightIcon></svg>
+            <span class="sr-only">Toggle table of contents</span>
           </button>
         </header>
         <div class="flex flex-1 flex-col gap-4 p-4">
