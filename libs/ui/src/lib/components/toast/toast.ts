@@ -12,6 +12,13 @@ import { SC_TOAST_CONTEXT } from './toast-context';
 import { SC_TOAST_LAYOUT, SC_TOAST_PEEK } from './toast-layout';
 import type { ScToastVariant } from './toast.types';
 
+/** Each variant's text colour; the others keep the popover's. */
+const VARIANTS: Partial<Record<ScToastVariant, string>> = {
+  success: 'text-success',
+  warning: 'text-warning',
+  error: 'text-destructive',
+};
+
 /**
  * A toast, the root of your `scToastTemplate`: its variant's styles and its
  * place in the stack. It slides in when shown and out when dismissed, and
@@ -93,7 +100,7 @@ export class ScToast {
         ? 'slide-in-from-bottom-full not-data-swipe:slide-out-to-bottom-full'
         : 'slide-in-from-top-full not-data-swipe:slide-out-to-top-full',
       'data-[swipe=left]:slide-out-to-left-full data-[swipe=right]:slide-out-to-right-full',
-      this.variant() === 'error' && 'text-destructive',
+      VARIANTS[this.variant()],
       this.classInput(),
     ),
   );

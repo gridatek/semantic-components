@@ -21,6 +21,8 @@
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
@@ -61,6 +63,9 @@
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.52 0.245 27.325);
   --destructive-foreground: oklch(0.97 0.01 17);
+  /* Not in shadcn: success and warning text (the toast's), 4.5:1 on the popover even at 90% opacity. */
+  --success: oklch(0.49 0.14 150);
+  --warning: oklch(0.52 0.15 49);
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
@@ -96,6 +101,8 @@
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.704 0.191 22.216);
   --destructive-foreground: oklch(0.58 0.22 27);
+  --success: oklch(0.792 0.209 151.711);
+  --warning: oklch(0.828 0.189 84.429);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.556 0 0);
