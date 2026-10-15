@@ -4,27 +4,27 @@ A succinct message that is displayed temporarily to provide feedback.
 
 ## Architecture
 
-You show toasts from code (`ScToaster.show(config)`) and write how a toast looks once, in your app: an `<ng-template scToastTemplate let-toast>` with the parts. The toaster puts each toast in its frame (`scToast`: variant styles, swipe to dismiss, pause on hover) in a stack it creates, and renders your template in it.
+You show toasts from code (`ScToaster.show(config)`) and write how a toast looks once, in your app: an `<ng-template scToastTemplate let-toast>` whose root is a `scToast` (variant styles, swipe to dismiss, pause on hover), with the parts inside. The toaster renders it for each toast, in a stack it creates.
 
 ```
 ScToaster.show({ title, description, variant, action })
     └── ScToastStack (created by the toaster; one polite live region)
-          └── ScToast (each toast's frame)
-                └── your scToastTemplate: ScToastIcon, ScToastTitle, ScToastDescription, ScToastAction, ScToastClose
+          └── your scToastTemplate, for each toast
+                └── ScToast → ScToastIcon, ScToastTitle, ScToastDescription, ScToastAction, ScToastClose
 ```
 
 ## Parts
 
-| Part                 | Selector                       | Does                                                                         |
-| -------------------- | ------------------------------ | ---------------------------------------------------------------------------- |
-| `ScToastTemplate`    | `ng-template[scToastTemplate]` | How a toast looks — once, in your app; `let-toast` is the toast's data       |
-| `ScToastIcon`        | `[scToastIcon]`                | Your icon, coloured by the toast's variant (a spinner turns while `loading`) |
-| `ScToastTitle`       | `[scToastTitle]`               | The title                                                                    |
-| `ScToastDescription` | `[scToastDescription]`         | The description                                                              |
-| `ScToastAction`      | `button[scToastAction]`        | Runs the toast's `action`, then dismisses it: write `toast.action.label`     |
-| `ScToastClose`       | `button[scToastClose]`         | Dismisses the toast: write its icon and name it                              |
-| `ScToast`            | `div[scToast]`                 | Each toast's frame (the stack renders it)                                    |
-| `ScToastStack`       | `sc-toast-stack`               | The stack — the toaster creates it in an overlay: don't place it yourself    |
+| Part                 | Selector                       | Does                                                                                                |
+| -------------------- | ------------------------------ | --------------------------------------------------------------------------------------------------- |
+| `ScToastTemplate`    | `ng-template[scToastTemplate]` | How a toast looks — once, in your app; `let-toast` is the toast's data                              |
+| `ScToastIcon`        | `[scToastIcon]`                | Your icon, coloured by the toast's variant (a spinner turns while `loading`)                        |
+| `ScToastTitle`       | `[scToastTitle]`               | The title                                                                                           |
+| `ScToastDescription` | `[scToastDescription]`         | The description                                                                                     |
+| `ScToastAction`      | `button[scToastAction]`        | Runs the toast's `action`, then dismisses it: write `toast.action.label`                            |
+| `ScToastClose`       | `button[scToastClose]`         | Dismisses the toast: write its icon and name it                                                     |
+| `ScToast`            | `div[scToast]`                 | The toast, your template's root: variant styles, slide in and out, pause on hover, swipe to dismiss |
+| `ScToastStack`       | `sc-toast-stack`               | The stack — the toaster creates it in an overlay: don't place it yourself                           |
 
 ## Service
 
@@ -71,20 +71,22 @@ interface ToastConfig {
 <router-outlet />
 
 <ng-template scToastTemplate let-toast>
-  @if (toast.variant === 'success') {
-  <span scToastIcon><svg siCircleCheckIcon></svg></span>
-  }
-  <div class="grid gap-1">
-    @if (toast.title) {
-    <div scToastTitle>{{ toast.title }}</div>
-    } @if (toast.description) {
-    <div scToastDescription>{{ toast.description }}</div>
+  <div scToast>
+    @if (toast.variant === 'success') {
+    <span scToastIcon><svg siCircleCheckIcon></svg></span>
     }
+    <div class="grid gap-1">
+      @if (toast.title) {
+      <div scToastTitle>{{ toast.title }}</div>
+      } @if (toast.description) {
+      <div scToastDescription>{{ toast.description }}</div>
+      }
+    </div>
+    @if (toast.action) {
+    <button scToastAction>{{ toast.action.label }}</button>
+    }
+    <button scToastClose aria-label="Close"><svg siXIcon></svg></button>
   </div>
-  @if (toast.action) {
-  <button scToastAction>{{ toast.action.label }}</button>
-  }
-  <button scToastClose aria-label="Close"><svg siXIcon></svg></button>
 </ng-template>
 ```
 

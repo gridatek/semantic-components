@@ -9,7 +9,6 @@ import {
   linkedSignal,
 } from '@angular/core';
 import { cn } from '../../utils';
-import { ScToast } from './toast';
 import { SC_TOAST_CONTEXT } from './toast-context';
 import type { ScToastData, ScToastPosition } from './toast.types';
 import { ScToaster } from './toaster';
@@ -25,30 +24,21 @@ const POSITIONS: Record<ScToastPosition, string> = {
 };
 
 /**
- * The toasts, in an overlay the toaster creates: each in its frame
- * (`scToast`), written by your `scToastTemplate`. One polite live region, so
- * each new toast is announced.
+ * The toasts, in an overlay the toaster creates: each written by your
+ * `scToastTemplate` (its root a `scToast`). One polite live region, so each
+ * new toast is announced.
  */
 @Component({
   selector: 'sc-toast-stack',
-  imports: [NgTemplateOutlet, ScToast],
+  imports: [NgTemplateOutlet],
   template: `
     @if (template(); as template) {
       @for (toast of toaster.toasts(); track toast.id) {
-        <div
-          scToast
-          [variant]="toast.variant ?? 'default'"
-          [position]="toaster.position()"
-          (pointerEnter)="toaster.pause(toast.id)"
-          (pointerLeave)="toaster.resume(toast.id)"
-          (swiped)="toaster.dismiss(toast.id)"
-        >
-          <ng-container
-            [ngTemplateOutlet]="template"
-            [ngTemplateOutletContext]="{ $implicit: toast }"
-            [ngTemplateOutletInjector]="injectors().get(toast.id)"
-          />
-        </div>
+        <ng-container
+          [ngTemplateOutlet]="template"
+          [ngTemplateOutletContext]="{ $implicit: toast }"
+          [ngTemplateOutletInjector]="injectors().get(toast.id)"
+        />
       }
     }
   `,

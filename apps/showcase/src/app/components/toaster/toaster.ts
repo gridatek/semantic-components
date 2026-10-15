@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
+  ScToast,
   ScToastAction,
   ScToastClose,
   ScToastDescription,
@@ -21,6 +22,7 @@ import {
   selector: 'app-toaster',
   imports: [
     ScToastTemplate,
+    ScToast,
     ScToastIcon,
     ScToastTitle,
     ScToastDescription,
@@ -35,37 +37,39 @@ import {
   ],
   template: `
     <ng-template scToastTemplate let-toast>
-      @switch (toast.variant) {
-        @case ('success') {
-          <span scToastIcon><svg siCircleCheckIcon></svg></span>
+      <div scToast>
+        @switch (toast.variant) {
+          @case ('success') {
+            <span scToastIcon><svg siCircleCheckIcon></svg></span>
+          }
+          @case ('info') {
+            <span scToastIcon><svg siInfoIcon></svg></span>
+          }
+          @case ('warning') {
+            <span scToastIcon><svg siTriangleAlertIcon></svg></span>
+          }
+          @case ('error') {
+            <span scToastIcon><svg siOctagonXIcon></svg></span>
+          }
+          @case ('loading') {
+            <span scToastIcon><svg siLoaderCircleIcon></svg></span>
+          }
         }
-        @case ('info') {
-          <span scToastIcon><svg siInfoIcon></svg></span>
+        <div class="grid gap-1">
+          @if (toast.title) {
+            <div scToastTitle>{{ toast.title }}</div>
+          }
+          @if (toast.description) {
+            <div scToastDescription>{{ toast.description }}</div>
+          }
+        </div>
+        @if (toast.action) {
+          <button scToastAction>{{ toast.action.label }}</button>
         }
-        @case ('warning') {
-          <span scToastIcon><svg siTriangleAlertIcon></svg></span>
-        }
-        @case ('error') {
-          <span scToastIcon><svg siOctagonXIcon></svg></span>
-        }
-        @case ('loading') {
-          <span scToastIcon><svg siLoaderCircleIcon></svg></span>
-        }
-      }
-      <div class="grid gap-1">
-        @if (toast.title) {
-          <div scToastTitle>{{ toast.title }}</div>
-        }
-        @if (toast.description) {
-          <div scToastDescription>{{ toast.description }}</div>
-        }
+        <button scToastClose aria-label="Close">
+          <svg siXIcon></svg>
+        </button>
       </div>
-      @if (toast.action) {
-        <button scToastAction>{{ toast.action.label }}</button>
-      }
-      <button scToastClose aria-label="Close">
-        <svg siXIcon></svg>
-      </button>
     </ng-template>
   `,
   encapsulation: ViewEncapsulation.None,

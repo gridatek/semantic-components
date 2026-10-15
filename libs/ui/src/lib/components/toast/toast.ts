@@ -5,15 +5,16 @@ import {
   computed,
   inject,
   input,
-  output,
 } from '@angular/core';
 import { cn } from '../../utils';
-import { ScToastPosition, ScToastVariant } from './toast.types';
+import { SC_TOAST_CONTEXT } from './toast-context';
+import type { ScToastVariant } from './toast.types';
+import { ScToaster } from './toaster';
 
 /**
- * A toast's frame: slides in when shown and out when dismissed
- * (`animate.enter` / `animate.leave`); swiped sideways, it asks to go
- * (`swiped`).
+ * A toast, the root of your `scToastTemplate`: its variant's styles; it slides
+ * in when shown and out when dismissed, pauses its timer while hovered, and
+ * goes when swiped sideways.
  */
 @Component({
   selector: 'div[scToast]',
@@ -24,8 +25,8 @@ import { ScToastPosition, ScToastVariant } from './toast.types';
     '[class]': 'class()',
     'animate.enter': 'animate-in',
     'animate.leave': 'animate-out',
-    '(pointerenter)': 'onPointerEnter()',
-    '(pointerleave)': 'onPointerLeave()',
+    '(pointerenter)': 'toaster.pause(context.toast.id)',
+    '(pointerleave)': 'toaster.resume(context.toast.id)',
     '(touchstart)': 'onTouchStart($event)',
     '(touchmove)': 'onTouchMove($event)',
     '(touchend)': 'onTouchEnd($event)',
@@ -33,17 +34,14 @@ import { ScToastPosition, ScToastVariant } from './toast.types';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScToast {
+  protected readonly context = inject(SC_TOAST_CONTEXT);
+  protected readonly toaster = inject(ScToaster);
+
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly variant = input<ScToastVariant>('default');
-  readonly position = input<ScToastPosition>('bottom-right');
 
-  /** Emitted when pointer enters the toast (pause auto-dismiss) */
-  readonly pointerEnter = output<void>();
-
-  /** Emitted when pointer leaves the toast (resume auto-dismiss) */
-  readonly pointerLeave = output<void>();
-  /** Emitted when the toast is swiped far enough away (dismiss it). */
-  readonly swiped = output<void>();
+  protected readonly variant = computed<ScToastVariant>(
+    () => this.context.toast.variant ?? 'default',
+  );
 
   private readonly element =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
@@ -55,7 +53,7 @@ export class ScToast {
       'group pointer-events-auto relative flex w-full items-center justify-between gap-4 overflow-hidden rounded-2xl border p-4 pe-6 shadow-lg transition-all',
       // Where it slides from and to (read by the enter / leave animations)
       'fade-out-80 slide-out-to-right-full',
-      this.position().startsWith('bottom')
+      this.toaster.position().startsWith('bottom')
         ? 'slide-in-from-bottom-full'
         : 'slide-in-from-top-full',
       this.variantClass(),
@@ -80,14 +78,6 @@ export class ScToast {
     return variantClasses[this.variant()];
   });
 
-  protected onPointerEnter(): void {
-    this.pointerEnter.emit();
-  }
-
-  protected onPointerLeave(): void {
-    this.pointerLeave.emit();
-  }
-
   protected onTouchStart(event: TouchEvent): void {
     this.swipeStartX = event.touches[0].clientX;
     this.element.style.transition = 'none';
@@ -104,7 +94,7 @@ export class ScToast {
   protected onTouchEnd(event: TouchEvent): void {
     const deltaX = event.changedTouches[0].clientX - this.swipeStartX;
     if (Math.abs(deltaX) >= this.swipeThreshold) {
-      this.swiped.emit();
+      this.context.dismiss();
       return;
     }
     // Not far enough: back in place.
