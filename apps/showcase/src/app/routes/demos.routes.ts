@@ -4049,6 +4049,20 @@ export const demosRoutes: Route[] = [
             (m) => m.DurationToastDemo,
           ),
       },
+      {
+        path: 'position-toast-demo',
+        loadComponent: () =>
+          import('../pages/docs/toast/demos/position-toast-demo').then(
+            (m) => m.PositionToastDemo,
+          ),
+      },
+      {
+        path: 'variants-toast-demo',
+        loadComponent: () =>
+          import('../pages/docs/toast/demos/variants-toast-demo').then(
+            (m) => m.VariantsToastDemo,
+          ),
+      },
     ],
   },
   {

@@ -6,7 +6,11 @@ import { ActionToastDemo } from './action-toast-demo';
   selector: 'app-action-toast-demo-container',
   imports: [DemoContainer, ActionToastDemo],
   template: `
-    <app-demo-container title="With Action" [code]="code">
+    <app-demo-container
+      title="With Action"
+      [code]="code"
+      demoUrl="/demos/toast/action-toast-demo"
+    >
       <app-action-toast-demo />
     </app-demo-container>
   `,

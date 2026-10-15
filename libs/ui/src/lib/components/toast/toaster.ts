@@ -10,7 +10,7 @@ export class ScToaster {
   private readonly toastsSignal = signal<ScToastData[]>([]);
   readonly toasts = this.toastsSignal.asReadonly();
 
-  private readonly positionSignal = signal<ScToastPosition>('bottom-right');
+  private readonly positionSignal = signal<ScToastPosition>('bottom-end');
   readonly position = this.positionSignal.asReadonly();
 
   /** How a toast looks: set by your `scToastTemplate`. */
@@ -29,6 +29,7 @@ export class ScToaster {
 
   private overlayRef: OverlayRef | null = null;
 
+  /** Where toasts show when `show` gives no `position`. */
   setPosition(position: ScToastPosition): void {
     this.positionSignal.set(position);
   }
@@ -46,6 +47,7 @@ export class ScToaster {
 
     const toast: ScToastData = {
       id,
+      position: config.position ?? this.position(),
       title: config.title,
       description: config.description,
       variant: config.variant ?? 'default',

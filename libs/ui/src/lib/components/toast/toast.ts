@@ -53,7 +53,7 @@ export class ScToast {
       'group pointer-events-auto relative flex w-full items-center justify-between gap-4 overflow-hidden rounded-2xl border p-4 pe-6 shadow-lg transition-all',
       // Where it slides from and to (read by the enter / leave animations)
       'fade-out-80 slide-out-to-right-full',
-      this.toaster.position().startsWith('bottom')
+      this.context.toast.position.startsWith('bottom')
         ? 'slide-in-from-bottom-full'
         : 'slide-in-from-top-full',
       this.variantClass(),

@@ -1,10 +1,10 @@
 export type ScToastPosition =
-  | 'top-left'
+  | 'top-start'
   | 'top-center'
-  | 'top-right'
-  | 'bottom-left'
+  | 'top-end'
+  | 'bottom-start'
   | 'bottom-center'
-  | 'bottom-right';
+  | 'bottom-end';
 
 export type ScToastVariant =
   | 'default'
@@ -17,6 +17,8 @@ export type ScToastVariant =
 
 export interface ScToastData {
   id: string;
+  /** Where it shows: its own, or the toaster's default. */
+  position: ScToastPosition;
   title?: string;
   description?: string;
   variant?: ScToastVariant;
@@ -28,6 +30,8 @@ export interface ScToastData {
 }
 
 export interface ScToastConfig {
+  /** Where it shows (the toaster's default when left out — `setPosition`). */
+  position?: ScToastPosition;
   title?: string;
   description?: string;
   variant?: ScToastVariant;

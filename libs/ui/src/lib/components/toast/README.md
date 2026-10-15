@@ -44,6 +44,9 @@ class ScToaster {
 
   // Dismiss all toasts
   dismissAll(): void;
+
+  // Where toasts show when show() gives no position (default: bottom-end)
+  setPosition(position: ScToastPosition): void;
 }
 ```
 
@@ -51,6 +54,8 @@ class ScToaster {
 
 ```typescript
 interface ToastConfig {
+  // Where it shows; the toaster's default when left out
+  position?: ScToastPosition;
   title?: string;
   description?: string;
   variant?: 'default' | 'destructive';
@@ -140,7 +145,10 @@ Toasts use Tailwind CSS classes with shadcn/ui design tokens:
 - Default variant: `border bg-background text-foreground`
 - Destructive variant: `border-destructive bg-destructive text-destructive-foreground`
 
-The toaster positions toasts:
+## Positions
 
-- Mobile: Top of screen, stacking downward
-- Desktop: Bottom-right, stacking upward
+`top-start`, `top-center`, `top-end`, `bottom-start`, `bottom-center`, `bottom-end` — start and end follow the text's direction (start is on the right in Arabic or Hebrew). Each toast shows at its own position, in a column with the others there: showing one somewhere else leaves the rest where they are.
+
+```ts
+this.toaster.show({ position: 'top-center', description: 'Copied.' });
+```

@@ -6,7 +6,11 @@ import { DurationToastDemo } from './duration-toast-demo';
   selector: 'app-duration-toast-demo-container',
   imports: [DemoContainer, DurationToastDemo],
   template: `
-    <app-demo-container title="Custom Duration" [code]="code">
+    <app-demo-container
+      title="Custom Duration"
+      [code]="code"
+      demoUrl="/demos/toast/duration-toast-demo"
+    >
       <app-duration-toast-demo />
     </app-demo-container>
   `,

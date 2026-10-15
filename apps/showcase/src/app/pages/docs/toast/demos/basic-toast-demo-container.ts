@@ -6,7 +6,11 @@ import { BasicToastDemo } from './basic-toast-demo';
   selector: 'app-basic-toast-demo-container',
   imports: [DemoContainer, BasicToastDemo],
   template: `
-    <app-demo-container title="Basic" [code]="code">
+    <app-demo-container
+      title="Basic"
+      [code]="code"
+      demoUrl="/demos/toast/basic-toast-demo"
+    >
       <app-basic-toast-demo />
     </app-demo-container>
   `,
