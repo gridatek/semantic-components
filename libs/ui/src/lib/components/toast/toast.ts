@@ -93,8 +93,7 @@ export class ScToast {
         ? 'slide-in-from-bottom-full not-data-swipe:slide-out-to-bottom-full'
         : 'slide-in-from-top-full not-data-swipe:slide-out-to-top-full',
       'data-[swipe=left]:slide-out-to-left-full data-[swipe=right]:slide-out-to-right-full',
-      (this.variant() === 'destructive' || this.variant() === 'error') &&
-        'text-destructive',
+      this.variant() === 'error' && 'text-destructive',
       this.classInput(),
     ),
   );

@@ -163,15 +163,14 @@ An update replaces the fields it gives and keeps the others; the timer starts ag
 
 ## Variants
 
-| Variant       | Looks                                     |
-| ------------- | ----------------------------------------- |
-| `default`     | The popover's colours                     |
-| `success`     | As `default` — your icon tells them apart |
-| `info`        | As `default`                              |
-| `warning`     | As `default`                              |
-| `error`       | Destructive text                          |
-| `destructive` | Destructive text                          |
-| `loading`     | As `default`; `scToastIcon` spins. Stays  |
+| Variant   | Looks                                     |
+| --------- | ----------------------------------------- |
+| `default` | The popover's colours                     |
+| `success` | As `default` — your icon tells them apart |
+| `info`    | As `default`                              |
+| `warning` | As `default`                              |
+| `error`   | Destructive text                          |
+| `loading` | As `default`; `scToastIcon` spins. Stays  |
 
 ## The stack
 
@@ -195,4 +194,4 @@ this.toaster.show({ position: 'top-center', description: 'Copied.' });
 
 ## Styling
 
-Toasts follow shadcn's Sonner: `bg-popover text-popover-foreground`, a border and `rounded-2xl`. `error` and `destructive` add `text-destructive`.
+Toasts follow shadcn's Sonner: `bg-popover text-popover-foreground`, a border and `rounded-2xl`. `error` adds `text-destructive`.

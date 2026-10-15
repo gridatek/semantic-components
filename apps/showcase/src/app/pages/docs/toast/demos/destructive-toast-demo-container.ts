@@ -38,7 +38,7 @@ export class DestructiveToastDemo {
 
   showToast(): void {
     this.toastService.show({
-      variant: 'destructive',
+      variant: 'error',
       title: 'Error',
       description: 'Something went wrong. Please try again.',
     });
