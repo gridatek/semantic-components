@@ -86,11 +86,13 @@ export class ScToast {
       // Behind the front one, stacked: only its edge shows.
       '*:transition-opacity data-[front=false]:data-[expanded=false]:*:opacity-0',
       'data-hidden:pointer-events-none data-hidden:opacity-0',
-      // Where it slides from and to (read by the enter / leave animations)
-      'fade-out-80 slide-out-to-right-full',
+      // In from its edge, and back out to it — or on the way it was swiped
+      // (read by the enter / leave animations).
+      'fade-out',
       this.layout.fromBottom
-        ? 'slide-in-from-bottom-full'
-        : 'slide-in-from-top-full',
+        ? 'slide-in-from-bottom-full not-data-swipe:slide-out-to-bottom-full'
+        : 'slide-in-from-top-full not-data-swipe:slide-out-to-top-full',
+      'data-[swipe=left]:slide-out-to-left-full data-[swipe=right]:slide-out-to-right-full',
       (this.variant() === 'destructive' || this.variant() === 'error') &&
         'text-destructive',
       this.classInput(),
@@ -123,6 +125,9 @@ export class ScToast {
   protected onTouchEnd(event: TouchEvent): void {
     const deltaX = event.changedTouches[0].clientX - this.swipeStartX;
     if (Math.abs(deltaX) >= this.swipeThreshold) {
+      // It leaves the way it was thrown.
+      this.element.dataset['swipe'] = deltaX < 0 ? 'left' : 'right';
+      this.element.style.transition = '';
       this.context.dismiss();
       return;
     }
