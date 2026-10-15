@@ -1,14 +1,16 @@
 # Editor
 
-A composable rich text editor built on [Tiptap](https://tiptap.dev/) (ProseMirror): the document is HTML, edited through Signal Forms; a toolbar of command buttons, counts, and nothing you don't write.
+A composable rich text editor built on [Tiptap](https://tiptap.dev/) (ProseMirror): the document is HTML, edited through Signal Forms. Its full demo follows Tiptap's [Simple Editor](https://tiptap.dev/docs/ui-components/templates/simple-editor) template — block types, lists with task lists, code blocks, marks, highlights, links, superscript and subscript, alignment, images, search and replace — in this library's styles.
 
-You write the markup and every piece of text — the toolbar, its icons and names, the editor's name and placeholder, the heading labels, the link form; the parts add the behaviour, ARIA and default styles.
+You write the markup and every piece of text — the toolbar, its icons and names, the editor's name and placeholder, the menu labels, the popovers, the search bar; the parts add the behaviour, ARIA and default styles.
 
 ## Installation
 
 ```bash
-npm install @semantic-components/editor @tiptap/core @tiptap/starter-kit @tiptap/extension-text-align @tiptap/extension-placeholder
+npm install @semantic-components/editor @tiptap/core @tiptap/starter-kit @tiptap/extensions @tiptap/extension-list @tiptap/extension-text-align @tiptap/extension-highlight @tiptap/extension-superscript @tiptap/extension-subscript @tiptap/extension-image @tiptap/extension-file-handler @tiptap/extension-find-and-replace
 ```
+
+The editor turns all of them on: there is no extension list to set up.
 
 ## Usage
 
@@ -43,30 +45,37 @@ readonly postForm = form(signal({ body: '' }), (path) => {
 });
 ```
 
-- **The value** is the document's HTML (`''` when it's empty), in the form.
+- **The value** is the document's HTML (`''` when it's empty), in the form. Setting it from outside (a reset, a load) isn't a change to undo.
 - **Disabled and read-only** come from the schema (`disabled(path.body)`, `readonly(path.body)`), and can change at any time.
 - **Errors**: put the editor in a `scField` with `scFieldErrors` — once it's left invalid, the document gets `aria-invalid` and is described by the errors.
 
 ## Parts
 
-| Part                                        | Selector                                     | Does                                                                                                                              |
-| ------------------------------------------- | -------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| `ScEditor`                                  | `[scEditor]`                                 | The document and its commands; a Signal Forms control (`exportAs: 'scEditor'`). `data-disabled`, `data-readonly`, `data-invalid`. |
-| `ScEditorContent`                           | `div[scEditorContent]`                       | Where it's written: a multi-line `textbox`. `ariaLabel` (name it — no default), `placeholder` (none by default).                  |
-| `ScEditorToolbar`, `ScEditorToolbarGroup`   | `div[scEditorToolbar]`, `div[…Group]`        | The toolbar: one tab stop, arrow keys between its buttons. Name it (`aria-label`).                                                |
-| `ScEditorBold` … (see below)                | `button[scEditorBold]`…                      | A command; `aria-pressed` when it has a state. Write its icon and name it.                                                        |
-| `ScEditorHeading`                           | `button[scEditorHeading]`                    | The block type: `level()` (`'p'`, `'h1'`…`'h6'`), `select(level)` — the trigger of your menu, with your labels.                   |
-| `ScEditorLink`                              | `button[scEditorLink]`                       | Pressed inside a link; the trigger of your link form (a popover), which calls the editor's `setLink(href)` / `unsetLink()`.       |
-| `ScEditorSeparator`                         | `div[scEditorSeparator]`                     | Between toolbar groups.                                                                                                           |
-| `ScEditorHeader`, `ScEditorFooter`          | `div[scEditorHeader]`, `div[scEditorFooter]` | Above and below the document.                                                                                                     |
-| `ScEditorCount`, `…WordCount`, `…CharCount` | `div[scEditorCount]`, `span[…]`              | `wordCount()`, `charCount()` (`exportAs`) — write the text around them.                                                           |
+| Part                                        | Selector                                      | Does                                                                                                                                         |
+| ------------------------------------------- | --------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ScEditor`                                  | `[scEditor]`                                  | The document and its commands; a Signal Forms control (`exportAs: 'scEditor'`). `data-disabled`, `data-readonly`, `data-invalid`.            |
+| `ScEditorContent`                           | `div[scEditorContent]`                        | Where it's written: a multi-line `textbox`. `ariaLabel` (name it — no default), `placeholder` (none by default).                             |
+| `ScEditorToolbar`, `ScEditorToolbarGroup`   | `div[scEditorToolbar]`, `div[…Group]`         | The toolbar: one tab stop, arrow keys between its buttons. Name it (`aria-label`).                                                           |
+| `ScEditorBold` … (see below)                | `button[scEditorBold]`…                       | A command; `aria-pressed` when it has a state. Write its icon and name it.                                                                   |
+| `ScEditorHeading`                           | `button[scEditorHeading]`                     | The block type: `level()` (`'p'`, `'h1'`…`'h6'`), `select(level)` — the trigger of your menu, with your labels.                              |
+| `ScEditorList`                              | `button[scEditorList]`                        | The list type: `type()` (`'bulletList'`, `'orderedList'`, `'taskList'`, or null; `data-state="on"` in one), `select(type)` — a menu trigger. |
+| `ScEditorLink`                              | `button[scEditorLink]`                        | Pressed inside a link; the trigger of your link popover, which calls the editor's `setLink(href)` / `unsetLink()`.                           |
+| `ScEditorHighlight`                         | `button[scEditorHighlight]`                   | Pressed inside a highlight; the trigger of your highlight popover.                                                                           |
+| `ScEditorHighlightColor`                    | `button[scEditorHighlightColor]`              | A swatch in that popover: `[scEditorHighlightColor]="color"` highlights in it, or removes it; pressed when it's the colour. Name it.         |
+| `ScEditorUnsetHighlight`                    | `button[scEditorUnsetHighlight]`              | Removes the highlight (disabled when there is none).                                                                                         |
+| `ScEditorImage`                             | `button[scEditorImage]`                       | Picks images and uploads them with the editor's `upload` (disabled without one).                                                             |
+| `ScEditorSearch`                            | `button[scEditorSearch]`                      | Opens and closes the search bar (`aria-pressed`); with it, **Ctrl / ⌘ + F** in the document opens it too.                                    |
+| `ScEditorSearchBar` and its parts           | see [Search and replace](#search-and-replace) | The bar under the toolbar.                                                                                                                   |
+| `ScEditorSeparator`                         | `div[scEditorSeparator]`                      | Between toolbar groups.                                                                                                                      |
+| `ScEditorHeader`, `ScEditorFooter`          | `div[scEditorHeader]`, `div[scEditorFooter]`  | Above and below the document.                                                                                                                |
+| `ScEditorCount`, `…WordCount`, `…CharCount` | `div[scEditorCount]`, `span[…]`               | `wordCount()`, `charCount()` (`exportAs`) — write the text around them.                                                                      |
 
 The buttons, `scEditor` + the command:
 
-- **With a state** — `aria-pressed` follows the document: `Bold`, `Italic`, `Underline`, `Strikethrough`, `Code`, `BulletList`, `NumberedList`, `Blockquote`, `AlignLeft`, `AlignCenter`, `AlignRight`, `AlignJustify`, `Link`.
-- **Run once** — no `aria-pressed`: `HorizontalRule`, `ClearFormatting`, `Undo`, `Redo` (disabled when there is nothing to undo / redo).
+- **With a state** — `aria-pressed` follows the document: `Bold`, `Italic`, `Underline`, `Strikethrough`, `Code`, `Superscript`, `Subscript` (each turns the other off), `BulletList`, `NumberedList`, `TaskList`, `Blockquote`, `CodeBlock`, `AlignLeft`, `AlignCenter`, `AlignRight`, `AlignJustify`, `Link`, `Highlight`, `Search`.
+- **Run once** — no `aria-pressed`: `HorizontalRule`, `ClearFormatting`, `Image`, `Undo`, `Redo` (disabled when there is nothing to undo / redo).
 
-All are disabled when the editor is disabled or read-only.
+All are disabled when the editor is disabled or read-only — except `Search`, which read-only documents keep.
 
 ### Why no `Toggle` suffix
 
@@ -81,12 +90,38 @@ For the same reason the editor's group is `scEditorToolbarGroup`, not a toggle g
 ## `scEditor`
 
 - **Set by `[formField]`**: `value` (the HTML), `disabled`, `readonly`, `invalid`, `touched`; `touch` fires when the document loses focus.
-- **State**: `isActive(name, attributes?)` — a mark or node at the selection (`'bold'`, `'link'`, `'heading', { level: 2 }`…); `alignment()`, `heading()`, `linkHref()`; `editable()`.
-- **Commands**: `run((chain) => chain.toggleBold())` — any Tiptap command, on the focused document; `can((chain) => chain.undo())`.
+- **Inputs**: `upload` — the image upload handler (none: no images); `imageTypes` — the image types it takes (PNG, JPEG, GIF, WebP).
+- **State**: `isActive(name, attributes?)` — a mark or node at the selection (`'bold'`, `'link'`, `'heading', { level: 2 }`…); `alignment()`, `heading()`, `list()`, `linkHref()`, `highlightColor()`; `editable()`.
+- **Commands**: `run((chain) => chain.toggleBold())` — any Tiptap command, on the focused document; `can((chain) => chain.undo())`; `toggleList(type)`.
 - **Links**: `setLink(href, text?)` — links the selection, or writes `text` (or the address) as a link where nothing is selected; `unsetLink()`. Addresses with unsafe protocols (`javascript:`…) aren't rendered as links.
+- **Search**: `searchOpen()`, `openSearch()`, `closeSearch()`, `toggleSearch()`; `search(term)`, `setReplaceTerm(term)`, `setSearchOption(option, on)`; `searchTerm()`, `replaceTerm()`, `caseSensitive()`, `wholeWord()`, `useRegex()`, `searchResults()` (how many), `searchIndex()` (the current one, from 0); `searchNext()`, `searchPrevious()`, `replace()`, `replaceAll()`.
+- **Images**: `insertImages(files, position?)`, `uploads()` (`{ id, file, progress }`, progress from 0 to 1), `cancelUpload(id)`.
 - **Tiptap**: `editorInstance()` for anything else.
 
-## A link form
+## Menus: block type and lists
+
+```html
+<div scMenuProvider>
+  <button scMenuTrigger scEditorHeading value="heading" #heading="scEditorHeading">
+    <svg siHeadingIcon></svg>
+    <span class="sr-only">{{ labels[heading.level()] }}</span>
+    <svg siChevronDownIcon></svg>
+  </button>
+  <ng-template scMenuPortal>
+    <div scMenu (itemSelected)="heading.select($event)">
+      <ng-template scMenuContent>
+        @for (level of levels; track level) {
+        <div scMenuItem [value]="level">{{ labels[level] }}</div>
+        }
+      </ng-template>
+    </div>
+  </ng-template>
+</div>
+```
+
+`scEditorList` is the same, with `list.type()` and `list.select($event)` (`'bulletList'`, `'orderedList'`, `'taskList'`). A task's checkbox is named by the task's text.
+
+## Popovers: link and highlight
 
 ```html
 <div scPopoverProvider [(open)]="linkOpen">
@@ -95,7 +130,7 @@ For the same reason the editor's group is `scEditorToolbarGroup`, not a toggle g
     <span class="sr-only">Link</span>
   </button>
   <ng-template scPopoverPortal>
-    <div scPopover>
+    <div scPopover aria-label="Link">
       <div scField>
         <label scLabel>Address</label>
         <input scInput type="url" [formField]="linkForm.href" />
@@ -104,20 +139,96 @@ For the same reason the editor's group is `scEditorToolbarGroup`, not a toggle g
     </div>
   </ng-template>
 </div>
+
+<div scPopoverProvider>
+  <button scEditorHighlight scPopoverTrigger value="highlight">
+    <svg siHighlighterIcon></svg>
+    <span class="sr-only">Highlight</span>
+  </button>
+  <ng-template scPopoverPortal>
+    <div scPopover aria-label="Highlight colours" class="flex w-auto items-center gap-2 p-2">
+      <button scEditorHighlightColor="var(--editor-highlight-yellow)" aria-label="Yellow"></button>
+      <button scEditorHighlightColor="var(--editor-highlight-green)" aria-label="Green"></button>
+      <button scEditorUnsetHighlight>
+        <svg siBanIcon></svg>
+        <span class="sr-only">Remove highlight</span>
+      </button>
+    </div>
+  </ng-template>
+</div>
 ```
 
-`#editor="scEditor"` on the root. Opening the form keeps the selection: the link goes where it was.
+`#editor="scEditor"` on the root. A popover keeps the selection — still shown while it has focus — so the link or colour goes where it was. The editor's styles have five highlight colours, for light and dark: `var(--editor-highlight-yellow)`, `-green`, `-blue`, `-purple`, `-red`; any CSS colour works.
+
+## Images
+
+```ts
+readonly upload: ScEditorUploadHandler = async (file, { onProgress, signal }) => {
+  const { url } = await this.files.upload(file, { onProgress, signal });
+  return url;
+};
+```
+
+```html
+<div scEditor [formField]="form.body" [upload]="upload" #editor="scEditor">
+  …
+  <button scEditorImage value="image">
+    <svg siImagePlusIcon></svg>
+    <span class="sr-only">Add image</span>
+  </button>
+  … @for (upload of editor.uploads(); track upload.id) {
+  <div scProgress [value]="upload.progress * 100" [attr.aria-label]="'Uploading ' + upload.file.name"></div>
+  }
+</div>
+```
+
+The button picks files; dropping or pasting images does the same. Each is inserted where it was picked or dropped once its upload resolves, with the file's name (less its extension) as its `alt`. A rejected upload is dropped — report your errors in the handler.
+
+## Search and replace
+
+```html
+@if (editor.searchOpen()) {
+<div scEditorSearchBar aria-label="Search and replace">
+  <input scInput scEditorSearchInput aria-label="Search" />
+  <span scEditorSearchResults> @if (editor.searchTerm()) { @if (editor.searchResults()) { {{ (editor.searchIndex() ?? 0) + 1 }} of {{ editor.searchResults() }} } @else { No results } } </span>
+  <button scButton variant="ghost" size="icon-sm" scEditorSearchPrevious>…</button>
+  <button scButton variant="ghost" size="icon-sm" scEditorSearchNext>…</button>
+  <button scEditorSearchOption="caseSensitive">…</button>
+  <button scEditorSearchOption="wholeWord">…</button>
+  <button scEditorSearchOption="useRegex">…</button>
+  <input scInput scEditorReplaceInput aria-label="Replace with" />
+  <button scButton variant="outline" size="sm" scEditorReplace>Replace</button>
+  <button scButton variant="outline" size="sm" scEditorReplaceAll>Replace all</button>
+  <button scButton variant="ghost" size="icon-sm" scEditorSearchClose>…</button>
+</div>
+}
+```
+
+| Part                              | Does                                                                                                                                                        |
+| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `scEditorSearchBar`               | A `search` landmark (name it); Escape closes it and goes back to the text.                                                                                  |
+| `scEditorSearchInput`             | Searches as you type (after a pause); Enter / Shift+Enter go to the next / previous match. `aria-invalid` when nothing matches. Focused when the bar opens. |
+| `scEditorSearchResults`           | `role="status"`: write "2 of 5", "No results"; `data-state` `none` is styled destructive.                                                                   |
+| `scEditorSearchOption`            | `caseSensitive`, `wholeWord`, `useRegex` (RE2 syntax), on and off (`aria-pressed`).                                                                         |
+| `scEditorSearchPrevious`, `…Next` | Step through the matches, wrapping around.                                                                                                                  |
+| `scEditorReplaceInput`            | What matches become; Enter replaces the current one.                                                                                                        |
+| `scEditorReplace`, `…ReplaceAll`  | Replace the current match (and go to the next) or every one, in one undoable step.                                                                          |
+| `scEditorSearchClose`             | Closes the bar, clears the matches, goes back to the text.                                                                                                  |
+
+The matches are highlighted in the document; the current one is selected and scrolled to. Read-only documents can be searched, not replaced.
 
 ## Keyboard
 
-Tiptap's shortcuts: **Ctrl / ⌘ + B** bold, **I** italic, **U** underline, **E** inline code, **Z** undo, **Shift+Z** or **Y** redo. In the toolbar, **← / →** move between buttons and **Tab** leaves it.
+Tiptap's shortcuts: **Ctrl / ⌘ + B** bold, **I** italic, **U** underline, **E** inline code, **Shift + H** highlight, **.** superscript, **,** subscript, **Alt + C** code block, **Shift + 7 / 8 / 9** numbered, bulleted and task list, **Z** undo, **Shift + Z** or **Y** redo; **Ctrl / ⌘ + F** search (with `scEditorSearch`). Markdown shortcuts as you type: `# ` headings, `- ` lists, `[ ] ` tasks, `> ` quotes, ` ``` ` code blocks. In the toolbar, **← / →** move between buttons and **Tab** leaves it.
 
 ## Styling
 
-The document has `block outline-none overflow-y-auto min-h-[150px] max-h-[400px] p-4 prose prose-sm max-w-none dark:prose-invert`; a `class` on `scEditorContent` changes it (`min-h-[300px] max-h-[500px]`, `font-serif`…). The editor's theme uses `--border`, `--muted`, `--muted-foreground` and `--primary`.
+The document has `block outline-none overflow-y-auto min-h-[150px] max-h-[400px] p-4 prose prose-sm max-w-none dark:prose-invert`; a `class` on `scEditorContent` changes it (`min-h-[300px] max-h-[500px]`, `font-serif`…). The editor's styles (`@semantic-components/editor/styles`) cover task lists, code blocks, images, highlights, search matches and the kept selection, with `--border`, `--muted`, `--muted-foreground`, `--primary`, `--ring` and the `--editor-highlight-*` colours.
 
 ## Accessibility
 
 - The document is a multi-line `textbox` named by `ariaLabel`; `aria-readonly` / `aria-disabled` / `aria-invalid` follow the form, and the field's description and errors describe it.
-- The toolbar is one tab stop (`@angular/aria` toolbar); buttons with a state have `aria-pressed`.
+- The toolbar is one tab stop (`@angular/aria` toolbar); buttons with a state have `aria-pressed`, menu triggers `data-state`.
+- Task checkboxes are named by their task; images by their file's name (change it in the HTML for a better one).
+- Search results are announced (`role="status"`); the search bar is a named `search` landmark.
 - The library adds no text: name everything you write.

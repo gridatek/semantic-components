@@ -27,8 +27,10 @@ import { SignalFormsEditorDemoContainer } from './demos/signal-forms-editor-demo
       <div class="space-y-2">
         <h1 scHeading>Editor</h1>
         <p class="text-muted-foreground">
-          Composable WYSIWYG editor powered by Tiptap, with customizable
-          toolbar, keyboard shortcuts, and HTML output.
+          Composable WYSIWYG editor powered by Tiptap: block types, lists and
+          task lists, code blocks, highlights, links, images, and search and
+          replace, with a Signal Forms value in HTML. The full demo follows
+          Tiptap&apos;s Simple Editor template, in this library&apos;s styles.
         </p>
         <app-component-badges path="editor" />
       </div>
