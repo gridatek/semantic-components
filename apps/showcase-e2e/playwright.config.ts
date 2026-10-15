@@ -24,7 +24,11 @@ export default defineConfig({
   },
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: 'npx nx run showcase:serve',
+    // On CI, the built app on a file server: the build step has made it, and
+    // the dev server's Node crashes under the whole suite (a V8 fast-API bug).
+    command: process.env['CI']
+      ? 'npx nx run showcase:serve-static'
+      : 'npx nx run showcase:serve',
     url: 'http://localhost:4200',
     reuseExistingServer: true,
     cwd: workspaceRoot,
