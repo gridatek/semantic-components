@@ -1,5 +1,10 @@
 import { getSchema } from '@tiptap/core';
-import { DOMParser, DOMSerializer, type Schema } from '@tiptap/pm/model';
+import {
+  DOMParser,
+  DOMSerializer,
+  type Node as ProseMirrorNode,
+  type Schema,
+} from '@tiptap/pm/model';
 import {
   DOCUMENT,
   Directive,
@@ -10,16 +15,17 @@ import {
   input,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import type { ScEditorContentLayout } from './editor';
+import type { ScEditorContentLayout, ScEditorValue } from './editor';
 import { editorContentExtensions } from './editor-extensions';
 
 let schema: Schema | null = null;
 
 /**
- * Displays the editor's HTML — a saved post, a preview — as the editor shows
- * it: the same styles, without an editor. The HTML is read through the
- * editor's schema, so only what the editor can hold is shown (no scripts, no
- * unsafe links). Task checkboxes are shown, not changed. `layout="page"`
+ * Displays what the editor wrote — a saved post, a preview — as the editor
+ * shows it: the same styles, without an editor. Takes either format the editor
+ * gives: HTML (a string) or Tiptap's JSON (an object). Either is read through
+ * the editor's schema, so only what the editor can hold is shown (no scripts,
+ * no unsafe links). Task checkboxes are shown, not changed. `layout="page"`
  * centres it in a column of readable width, as `scEditorContent` does.
  */
 @Directive({
@@ -35,8 +41,8 @@ export class ScEditorView {
   private readonly element =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
-  /** The HTML to display. */
-  readonly html = input.required<string>({ alias: 'scEditorView' });
+  /** The document to display: HTML or Tiptap's JSON. */
+  readonly content = input.required<ScEditorValue>({ alias: 'scEditorView' });
   readonly layout = input<ScEditorContentLayout>('default');
   readonly classInput = input<string>('', { alias: 'class' });
 
@@ -50,15 +56,12 @@ export class ScEditorView {
   );
 
   constructor() {
-    effect(() => this.element.replaceChildren(this.render(this.html())));
+    effect(() => this.element.replaceChildren(this.render(this.content())));
   }
 
-  private render(html: string): DocumentFragment | HTMLElement {
+  private render(content: ScEditorValue): DocumentFragment | HTMLElement {
     schema ??= getSchema(editorContentExtensions());
-    // Parsed in a document of its own: nothing in it runs or loads.
-    const inert = this.document.implementation.createHTMLDocument('');
-    inert.body.innerHTML = html;
-    const doc = DOMParser.fromSchema(schema).parse(inert.body);
+    const doc = this.parse(schema, content);
     const fragment = DOMSerializer.fromSchema(schema).serializeFragment(
       doc.content,
       { document: this.document },
@@ -74,5 +77,27 @@ export class ScEditorView {
       );
     }
     return fragment;
+  }
+
+  /** The document, from HTML or JSON; what the schema can't hold is dropped. */
+  private parse(schema: Schema, content: ScEditorValue): ProseMirrorNode {
+    if (content === null || typeof content === 'object') {
+      try {
+        const doc = schema.nodeFromJSON(
+          content ?? { type: 'doc', content: [] },
+        );
+        // Its structure too: a list item in a heading isn't shown half-built.
+        doc.check();
+        return doc;
+      } catch {
+        // Not a document the editor could have written: nothing to show.
+        // (Unsafe link addresses are emptied when rendered, from JSON or HTML.)
+        return schema.topNodeType.createAndFill() ?? schema.node('doc');
+      }
+    }
+    // Parsed in a document of its own: nothing in it runs or loads.
+    const inert = this.document.implementation.createHTMLDocument('');
+    inert.body.innerHTML = content;
+    return DOMParser.fromSchema(schema).parse(inert.body);
   }
 }

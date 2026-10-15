@@ -45,7 +45,7 @@ readonly postForm = form(signal({ body: '' }), (path) => {
 });
 ```
 
-- **The value** is the document's HTML (`''` when it's empty), in the form. Setting it from outside (a reset, a load) isn't a change to undo.
+- **The value** is the document's HTML (`''` when it's empty) — or Tiptap's JSON, if the form starts with `null` or JSON (see [HTML or JSON](#html-or-json)). Setting it from outside (a reset, a load) isn't a change to undo.
 - **Disabled and read-only** come from the schema (`disabled(path.body)`, `readonly(path.body)`), and can change at any time.
 - **Errors**: put the editor in a `scField` with `scFieldErrors` — once it's left invalid, the document gets `aria-invalid` and is described by the errors.
 
@@ -66,7 +66,7 @@ readonly postForm = form(signal({ body: '' }), (path) => {
 | `ScEditorImage`                             | `button[scEditorImage]`                       | Picks images and uploads them with the editor's `upload` (disabled without one).                                                                                          |
 | `ScEditorSearch`                            | `button[scEditorSearch]`                      | Opens and closes the search bar (`aria-pressed`); with it, **Ctrl / ⌘ + F** in the document opens it too.                                                                 |
 | `ScEditorSearchBar` and its parts           | see [Search and replace](#search-and-replace) | The bar under the toolbar.                                                                                                                                                |
-| `ScEditorView`                              | `[scEditorView]`                              | Displays the editor's HTML in its styles, without an editor (see [Displaying the HTML](#displaying-the-html)).                                                            |
+| `ScEditorView`                              | `[scEditorView]`                              | Displays the editor's HTML in its styles, without an editor (see [Displaying the document](#displaying-the-document)).                                                    |
 | `ScEditorSeparator`                         | `div[scEditorSeparator]`                      | Between toolbar groups.                                                                                                                                                   |
 | `ScEditorHeader`, `ScEditorFooter`          | `div[scEditorHeader]`, `div[scEditorFooter]`  | Above and below the document.                                                                                                                                             |
 | `ScEditorCount`, `…WordCount`, `…CharCount` | `div[scEditorCount]`, `span[…]`               | `wordCount()`, `charCount()` (`exportAs`) — write the text around them.                                                                                                   |
@@ -90,7 +90,7 @@ For the same reason the editor's group is `scEditorToolbarGroup`, not a toggle g
 
 ## `scEditor`
 
-- **Set by `[formField]`**: `value` (the HTML), `disabled`, `readonly`, `invalid`, `touched`; `touch` fires when the document loses focus.
+- **Set by `[formField]`**: `value` (HTML or JSON), `disabled`, `readonly`, `invalid`, `touched`; `touch` fires when the document loses focus.
 - **Inputs**: `upload` — the image upload handler (none: no images); `imageTypes` — the image types it takes (PNG, JPEG, GIF, WebP).
 - **State**: `isActive(name, attributes?)` — a mark or node at the selection (`'bold'`, `'link'`, `'heading', { level: 2 }`…); `alignment()`, `heading()`, `list()`, `linkHref()`, `highlightColor()`; `editable()`.
 - **Commands**: `run((chain) => chain.toggleBold())` — any Tiptap command, on the focused document; `can((chain) => chain.undo())`; `toggleList(type)`.
@@ -218,16 +218,33 @@ The button picks files; dropping or pasting images does the same. Each is insert
 
 The matches are highlighted in the document; the current one is selected and scrolled to. Read-only documents can be searched, not replaced.
 
-## Displaying the HTML
+## HTML or JSON
 
-`scEditorView` shows what the editor wrote — a published post, a preview — as the editor shows it: the same styles, without an editor.
+The value is HTML or Tiptap's JSON — the value's own type picks, no input to set:
+
+| The form starts with       | The editor gives back                                        | Empty  |
+| -------------------------- | ------------------------------------------------------------ | ------ |
+| a string (`''`, or HTML)   | HTML: `'<p><strong>Hello</strong></p>'`                      | `''`   |
+| `null`, or a JSON document | JSON: `{ type: 'doc', content: [{ type: 'paragraph', … }] }` | `null` |
+
+```ts
+readonly noteForm = form(signal<{ body: JSONContent | null }>({ body: null }), (path) => {
+  required(path.body);
+});
+```
+
+`required` sees both empties. The format holds: a string stays HTML, JSON stays JSON — set the other type to switch. JSON (`ScEditorValue` is `string | JSONContent | null`) needs no HTML parsing on a server, and keeps its shape as the editor's HTML output changes.
+
+## Displaying the document
+
+`scEditorView` shows what the editor wrote — a published post, a preview — as the editor shows it: the same styles, without an editor. It takes either format: a string is read as HTML, an object (or `null`) as JSON.
 
 ```html
 <article [scEditorView]="post.body" aria-label="Post"></article>
 <article [scEditorView]="post.body" layout="page"></article>
 ```
 
-- **Safe**: the HTML is read through the editor's schema in a document of its own, then built as elements — never set as `innerHTML`. Only what the editor can hold is shown: no scripts, no event attributes, no unsafe links.
+- **Safe**: HTML is read through the editor's schema in a document of its own; JSON is checked against the schema (a document the editor couldn't have written shows nothing). Either is then built as elements — never set as `innerHTML`. Only what the editor can hold is shown: no scripts, no event attributes, no unsafe links (from HTML or JSON).
 - **The same styles**: the editor's document and the view both have `data-slot="editor-document"`, which the editor's styles are written for.
 - **Tasks** are shown, not changed: their checkboxes are disabled, named by their task.
 - **`layout`**: `page` centres it in the same column as `scEditorContent`'s page layout; `default` adds no space around it.

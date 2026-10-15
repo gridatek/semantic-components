@@ -1,4 +1,9 @@
-import { type ChainedCommands, Editor, Extension } from '@tiptap/core';
+import {
+  type ChainedCommands,
+  Editor,
+  Extension,
+  type JSONContent,
+} from '@tiptap/core';
 import FileHandler from '@tiptap/extension-file-handler';
 import FindAndReplace from '@tiptap/extension-find-and-replace';
 import { Placeholder, Selection } from '@tiptap/extensions';
@@ -28,6 +33,14 @@ export type ScEditorContentLayout = 'default' | 'page';
 
 export type ScEditorListType = 'bulletList' | 'orderedList' | 'taskList';
 export type ScEditorSearchFlag = 'caseSensitive' | 'wholeWord' | 'useRegex';
+
+/**
+ * The document, as the form holds it: HTML (a string, '' when empty) or
+ * Tiptap's JSON (an object, `null` when empty). The value's own type picks:
+ * give the form a string and it gets HTML back; give it JSON (or `null`) and
+ * it gets JSON.
+ */
+export type ScEditorValue = string | JSONContent | null;
 
 /** A command, written on Tiptap's chain: `(chain) => chain.toggleBold()`. */
 export type ScEditorCommand = (chain: ChainedCommands) => ChainedCommands;
@@ -82,9 +95,9 @@ const LIST_TYPES: ScEditorListType[] = [
     '[attr.data-invalid]': 'showInvalid() || null',
   },
 })
-export class ScEditor implements FormValueControl<string> {
+export class ScEditor implements FormValueControl<ScEditorValue> {
   // Set by [formField] — the document's HTML, its state, its errors.
-  readonly value = model<string>('');
+  readonly value = model<ScEditorValue>('');
   readonly disabled = input(false, { transform: booleanAttribute });
   readonly readonly = input(false, { transform: booleanAttribute });
   readonly invalid = input(false, { transform: booleanAttribute });
@@ -205,11 +218,11 @@ export class ScEditor implements FormValueControl<string> {
     effect(() => {
       const value = this.value();
       const editor = this.editorInstance();
-      if (editor && value !== this.html(editor)) {
+      if (editor && !this.holds(editor, value)) {
         editor
           .chain()
           .setMeta('addToHistory', false)
-          .setContent(value, { emitUpdate: false })
+          .setContent(value ?? '', { emitUpdate: false })
           .run();
       }
     });
@@ -387,12 +400,13 @@ export class ScEditor implements FormValueControl<string> {
           }),
         }),
       ],
-      content: this.value(),
+      content: this.value() ?? '',
       editable: this.editable(),
       onTransaction: () => this.contentVersion.update((v) => v + 1),
       onUpdate: ({ editor }) => {
-        const html = this.html(editor);
-        if (html !== this.value()) this.value.set(html);
+        if (!this.holds(editor, this.value())) {
+          this.value.set(this.serialize(editor, this.value()));
+        }
       },
       onBlur: () => this.touch.emit(),
     });
@@ -456,8 +470,20 @@ export class ScEditor implements FormValueControl<string> {
     this.uploads.update((uploads) => uploads.filter((u) => u.id !== id));
   }
 
-  /** The document's HTML ('' when it's empty). */
-  private html(editor: Editor): string {
-    return editor.isEmpty ? '' : editor.getHTML();
+  /**
+   * The document in the value's format: HTML for a string ('' when empty),
+   * Tiptap's JSON otherwise (null when empty).
+   */
+  private serialize(editor: Editor, like: ScEditorValue): ScEditorValue {
+    if (typeof like === 'string') return editor.isEmpty ? '' : editor.getHTML();
+    return editor.isEmpty ? null : editor.getJSON();
+  }
+
+  /** Whether the document already is this value. */
+  private holds(editor: Editor, value: ScEditorValue): boolean {
+    const current = this.serialize(editor, value);
+    return typeof value === 'string'
+      ? value === current
+      : JSON.stringify(value) === JSON.stringify(current);
   }
 }

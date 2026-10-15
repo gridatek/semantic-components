@@ -1400,6 +1400,13 @@ export const demosRoutes: Route[] = [
             (m) => m.ViewEditorDemo,
           ),
       },
+      {
+        path: 'json-editor-demo',
+        loadComponent: () =>
+          import('../pages/docs/editor/demos/json-editor-demo').then(
+            (m) => m.JsonEditorDemo,
+          ),
+      },
     ],
   },
   {

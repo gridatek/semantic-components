@@ -4,6 +4,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { EditorUsageDemoContainer } from './demos/editor-usage-demo-container';
 import { FullFeaturedEditorDemoContainer } from './demos/full-featured-editor-demo-container';
+import { JsonEditorDemoContainer } from './demos/json-editor-demo-container';
 import { NoCountEditorDemoContainer } from './demos/no-count-editor-demo-container';
 import { PrefilledEditorDemoContainer } from './demos/prefilled-editor-demo-container';
 import { ReadonlyEditorDemoContainer } from './demos/readonly-editor-demo-container';
@@ -20,6 +21,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
     FullFeaturedEditorDemoContainer,
     SignalFormsEditorDemoContainer,
     ViewEditorDemoContainer,
+    JsonEditorDemoContainer,
     TocHeading,
     ComponentBadges,
     ScHeading,
@@ -77,7 +79,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Displaying the HTML</h2>
+        <h2 scHeading appToc>Displaying the document</h2>
         <p class="text-muted-foreground">
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
             >scEditorView</code
@@ -88,6 +90,23 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
           scripts, no unsafe links.
         </p>
         <app-view-editor-demo-container />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>JSON</h2>
+        <p class="text-muted-foreground">
+          The value can be Tiptap&apos;s JSON instead of HTML: start the form
+          with
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">null</code> (or a
+          JSON document) and the editor gives JSON back,
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">null</code> when
+          it&apos;s empty. A string still means HTML.
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >scEditorView</code
+          >
+          displays either.
+        </p>
+        <app-json-editor-demo-container />
       </section>
 
       <section class="space-y-4">
