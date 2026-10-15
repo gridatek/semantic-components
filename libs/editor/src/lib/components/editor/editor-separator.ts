@@ -12,6 +12,6 @@ import { cn } from '@semantic-components/ui';
 export class ScEditorSeparator {
   readonly classInput = input<string>('', { alias: 'class' });
   protected readonly class = computed(() =>
-    cn('h-6 w-px shrink-0 bg-border', this.classInput()),
+    cn('mx-1 h-6 w-px shrink-0 bg-border', this.classInput()),
   );
 }

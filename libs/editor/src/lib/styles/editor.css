@@ -1,7 +1,7 @@
 /*
- * The document's styles — in the editor and in `scEditorView` — after Tiptap's Simple Editor template (its node
- * styles: sizes, spacing, lists, code, quotes, rules, images), in this
- * library's tokens and fonts.
+ * The document's styles — in the editor and in `scEditorView` — in the
+ * library's own styles: the typography of `scHeading` and shadcn/ui's
+ * typography, the box of `scCheckbox`, the theme's tokens.
  */
 
 /* Highlight colours: use them as `scEditorHighlightColor` values */
@@ -22,138 +22,124 @@
 }
 
 [data-slot='editor-document'] {
-  outline: none;
+  @apply text-foreground text-base outline-none;
   white-space: pre-wrap;
-  font-size: 1rem;
 }
 
-[data-slot='editor-document'] > * {
-  position: relative;
+/* In the editor: it fills its box */
+.ProseMirror {
+  min-height: inherit;
 }
 
 /* Placeholder */
 [data-slot='editor-document'] p.is-editor-empty:first-child::before {
+  @apply text-muted-foreground pointer-events-none float-left h-0;
   content: attr(data-placeholder);
-  float: left;
-  height: 0;
-  color: var(--muted-foreground);
-  pointer-events: none;
 }
 
 /* Paragraphs */
 [data-slot='editor-document'] p {
-  line-height: 1.6;
+  @apply leading-7;
 }
 
 [data-slot='editor-document'] p:not(:first-child) {
-  margin-top: 20px;
+  @apply mt-6;
 }
 
-/* Headings */
+/* Headings: as `scHeading` */
 [data-slot='editor-document'] :is(h1, h2, h3, h4, h5, h6) {
-  position: relative;
-  color: inherit;
-  font-style: inherit;
+  @apply scroll-m-20 tracking-tight;
 }
 
 [data-slot='editor-document'] h1 {
-  font-size: 1.5em;
-  font-weight: 700;
-  margin-top: 3em;
+  @apply mt-10 text-4xl font-extrabold;
 }
 
 [data-slot='editor-document'] h2 {
-  font-size: 1.25em;
-  font-weight: 700;
-  margin-top: 2.5em;
+  @apply mt-10 text-3xl font-semibold;
 }
 
 [data-slot='editor-document'] h3 {
-  font-size: 1.125em;
-  font-weight: 600;
-  margin-top: 2em;
+  @apply mt-8 text-2xl font-semibold;
 }
 
-[data-slot='editor-document'] :is(h4, h5, h6) {
-  font-size: 1em;
-  font-weight: 600;
-  margin-top: 2em;
+[data-slot='editor-document'] h4 {
+  @apply mt-6 text-xl font-semibold;
+}
+
+[data-slot='editor-document'] :is(h5, h6) {
+  @apply mt-6 text-lg font-semibold;
 }
 
 [data-slot='editor-document'] :is(h1, h2, h3, h4, h5, h6):first-child {
-  margin-top: 0;
+  @apply mt-0;
 }
 
 /* Links */
 [data-slot='editor-document'] a {
-  color: var(--primary);
-  text-decoration: underline;
+  @apply text-primary font-medium underline underline-offset-4;
 }
 
 /* Lists */
-[data-slot='editor-document'] :is(ol, ul) {
-  margin-top: 1.5em;
-  margin-bottom: 1.5em;
-  padding-left: 1.5em;
+[data-slot='editor-document'] :is(ul, ol) {
+  @apply my-6 ml-6;
 }
 
-[data-slot='editor-document'] :is(ol, ul):first-child {
-  margin-top: 0;
+[data-slot='editor-document'] :is(ul, ol):first-child {
+  @apply mt-0;
 }
 
-[data-slot='editor-document'] :is(ol, ul):last-child {
-  margin-bottom: 0;
+[data-slot='editor-document'] :is(ul, ol):last-child {
+  @apply mb-0;
 }
 
-[data-slot='editor-document'] :is(ol, ul) :is(ol, ul) {
-  margin-top: 0;
-  margin-bottom: 0;
+[data-slot='editor-document'] :is(ul, ol) :is(ul, ol) {
+  @apply my-0;
+}
+
+[data-slot='editor-document'] li {
+  @apply mt-2;
 }
 
 [data-slot='editor-document'] li p {
-  margin-top: 0;
-  line-height: 1.6;
+  @apply mt-0;
 }
 
 [data-slot='editor-document'] ol {
-  list-style: decimal;
+  @apply list-decimal;
 }
 
 [data-slot='editor-document'] ol ol {
-  list-style: lower-alpha;
+  @apply list-[lower-alpha];
 }
 
 [data-slot='editor-document'] ol ol ol {
-  list-style: lower-roman;
+  @apply list-[lower-roman];
 }
 
 [data-slot='editor-document'] ul:not([data-type='taskList']) {
-  list-style: disc;
+  @apply list-disc;
 }
 
 [data-slot='editor-document'] ul:not([data-type='taskList']) ul {
-  list-style: circle;
+  @apply list-[circle];
 }
 
 [data-slot='editor-document'] ul:not([data-type='taskList']) ul ul {
-  list-style: square;
+  @apply list-[square];
 }
 
-/* Task lists: the checkbox is drawn by the span after it */
+/* Task lists: the checkbox is hidden; the span after it is drawn as `scCheckbox` */
 [data-slot='editor-document'] ul[data-type='taskList'] {
-  padding-left: 0.25em;
+  @apply ml-0 list-none;
 }
 
 [data-slot='editor-document'] ul[data-type='taskList'] li {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  list-style: none;
+  @apply flex items-start gap-2;
 }
 
 [data-slot='editor-document'] ul[data-type='taskList'] li > div {
-  flex: 1 1 0%;
-  min-width: 0;
+  @apply min-w-0 flex-1;
 }
 
 [data-slot='editor-document']
@@ -161,51 +147,24 @@
   li[data-checked='true']
   > div
   > p {
-  opacity: 0.5;
-  text-decoration: line-through;
+  @apply text-muted-foreground line-through;
 }
 
 [data-slot='editor-document'] ul[data-type='taskList'] li label {
-  position: relative;
-  padding-top: 0.375rem;
-  padding-right: 0.5rem;
+  @apply relative mt-1.5 flex shrink-0;
 }
 
-[data-slot='editor-document']
-  ul[data-type='taskList']
-  li
-  label
-  input[type='checkbox'] {
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
+[data-slot='editor-document'] ul[data-type='taskList'] li label input {
+  @apply absolute size-0 opacity-0;
 }
 
 [data-slot='editor-document'] ul[data-type='taskList'] li label span {
-  display: block;
-  position: relative;
-  width: 1em;
-  height: 1em;
-  border: 1px solid var(--input);
-  border-radius: 0.25rem;
-  background-color: var(--background);
-  cursor: pointer;
-  transition:
-    background-color 80ms ease-out,
-    border-color 80ms ease-out;
+  @apply border-input dark:bg-input/30 relative inline-flex size-4 shrink-0 cursor-pointer items-center justify-center rounded-sm border transition-colors;
 }
 
 [data-slot='editor-document'] ul[data-type='taskList'] li label span::before {
+  @apply bg-primary-foreground absolute inset-0 m-auto size-3.5 opacity-0;
   content: '';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 0.75em;
-  height: 0.75em;
-  transform: translate(-50%, -50%);
-  background-color: var(--primary-foreground);
-  opacity: 0;
   mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E")
     center / contain no-repeat;
 }
@@ -214,19 +173,9 @@
   ul[data-type='taskList']
   li
   label
-  input:disabled
-  + span {
-  cursor: default;
-}
-
-[data-slot='editor-document']
-  ul[data-type='taskList']
-  li
-  label
   input:checked
   + span {
-  background-color: var(--primary);
-  border-color: var(--primary);
+  @apply border-primary bg-primary;
 }
 
 [data-slot='editor-document']
@@ -235,142 +184,97 @@
   label
   input:checked
   + span::before {
-  opacity: 1;
+  @apply opacity-100;
 }
 
-/* The checkbox is hidden: its box shows the keyboard focus */
 [data-slot='editor-document']
   ul[data-type='taskList']
   li
   label
   input:focus-visible
   + span {
-  outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
-  outline-offset: 1px;
+  @apply border-ring ring-ring/50 ring-3;
+}
+
+[data-slot='editor-document']
+  ul[data-type='taskList']
+  li
+  label
+  input:disabled
+  + span {
+  @apply cursor-default;
 }
 
 /* Inline code */
 [data-slot='editor-document'] code {
-  background-color: var(--muted);
-  color: var(--foreground);
-  border: 1px solid var(--border);
-  border-radius: 0.375rem;
-  padding: 0.1em 0.2em;
-  font-family: var(--font-mono, ui-monospace, monospace);
-  font-size: 0.875em;
-  line-height: 1.4;
+  @apply bg-muted relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold;
 }
 
 /* Code blocks */
 [data-slot='editor-document'] pre {
-  background-color: color-mix(in oklch, var(--muted) 50%, transparent);
-  color: var(--foreground);
-  border: 1px solid var(--border);
-  border-radius: 0.375rem;
-  margin-top: 1.5em;
-  margin-bottom: 1.5em;
-  padding: 1em;
-  font-size: 1rem;
-  overflow-x: auto;
+  @apply bg-muted my-6 overflow-x-auto rounded-lg p-4 font-mono text-sm;
 }
 
 [data-slot='editor-document'] pre code {
-  background-color: transparent;
-  border: none;
-  border-radius: 0;
-  color: inherit;
+  @apply rounded-none bg-transparent p-0 font-normal;
 }
 
 /* Blockquotes */
 [data-slot='editor-document'] blockquote {
-  position: relative;
-  margin: 1.5rem 0;
-  padding-top: 0.375em;
-  padding-bottom: 0.375em;
-  padding-left: 1em;
+  @apply mt-6 border-l-2 pl-6 italic;
 }
 
 [data-slot='editor-document'] blockquote p {
-  margin-top: 0;
+  @apply mt-0;
 }
 
-[data-slot='editor-document'] blockquote::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 0.25em;
-  background-color: var(--foreground);
-}
-
-/* Horizontal rules */
+/* Horizontal rules: as `scSeparator` */
 [data-slot='editor-document'] hr {
-  border: none;
-  height: 1px;
-  background-color: var(--border);
-  margin: calc(2.25em + 0.75rem) 0;
+  @apply bg-border my-6 h-px border-0;
 }
 
 /* Images */
 [data-slot='editor-document'] img {
-  display: block;
-  max-width: 100%;
-  height: auto;
-}
-
-[data-slot='editor-document'] > img {
-  margin: 2rem 0;
-  outline: 0.125rem solid transparent;
-  border-radius: 0.25rem;
+  @apply my-6 block h-auto max-w-full rounded-lg;
 }
 
 [data-slot='editor-document'] img.ProseMirror-selectednode {
-  outline: 0.125rem solid var(--primary);
-}
-
-/* In the editor: it fills its box */
-.ProseMirror {
-  min-height: inherit;
+  @apply ring-ring/50 ring-3;
 }
 
 /* Selected nodes other than images and code blocks */
 [data-slot='editor-document'] .ProseMirror-selectednode:not(img):not(pre) {
-  border-radius: 0.5rem;
-  background-color: color-mix(in oklch, var(--primary) 20%, transparent);
+  @apply bg-accent rounded-md;
 }
 
 /* Highlights */
 [data-slot='editor-document'] mark {
+  @apply rounded-sm px-0.5 text-inherit;
   background-color: var(--editor-highlight-yellow);
-  color: inherit;
-  border-radius: 0.125rem;
-  padding: 0 0.125rem;
   box-decoration-break: clone;
 }
 
 /* Superscript and subscript keep the line height */
 [data-slot='editor-document'] :is(sup, sub) {
-  line-height: 0;
+  @apply leading-none;
 }
 
 /* The selection, kept visible while focus is in a popover or the search */
 [data-slot='editor-document'] .selection {
-  display: inline;
-  background-color: color-mix(in oklch, var(--primary) 20%, transparent);
+  @apply bg-primary/20 inline;
 }
 
 /* Search matches; the current one stronger */
 [data-slot='editor-document'] .find-and-replace-result {
+  @apply rounded-sm;
   background-color: color-mix(
     in oklch,
     var(--editor-highlight-yellow) 60%,
     transparent
   );
-  border-radius: 0.125rem;
 }
 
 [data-slot='editor-document'] .find-and-replace-result-current {
+  @apply outline-foreground outline;
   background-color: var(--editor-highlight-yellow);
-  outline: 1px solid var(--foreground);
 }

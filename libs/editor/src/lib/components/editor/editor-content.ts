@@ -37,7 +37,7 @@ export class ScEditorContent {
 
   protected readonly class = computed(() =>
     cn(
-      'block outline-none overflow-y-auto min-h-[150px] max-h-[400px] text-foreground',
+      'block outline-none overflow-y-auto min-h-[150px] max-h-[400px]',
       this.layout() === 'page'
         ? // The column is the document's: the scrollbar stays at the box's edge.
           '[&>.ProseMirror]:mx-auto [&>.ProseMirror]:max-w-[648px] [&>.ProseMirror]:p-12 max-[480px]:[&>.ProseMirror]:px-6 max-[480px]:[&>.ProseMirror]:py-4'

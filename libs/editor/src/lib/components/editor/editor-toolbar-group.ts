@@ -12,6 +12,6 @@ import { cn } from '@semantic-components/ui';
 export class ScEditorToolbarGroup {
   readonly classInput = input<string>('', { alias: 'class' });
   protected readonly class = computed(() =>
-    cn('flex shrink-0 items-center gap-0.5', this.classInput()),
+    cn('flex items-center gap-1', this.classInput()),
   );
 }

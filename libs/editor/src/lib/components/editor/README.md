@@ -240,7 +240,7 @@ Tiptap's shortcuts: **Ctrl / ⌘ + B** bold, **I** italic, **U** underline, **E*
 
 ## Styling
 
-The editor follows Tiptap's Simple Editor in its sizes and spacing — the toolbar (one 44px row of 32px buttons that scrolls sideways when it doesn't fit, 2px apart in a group, 1px separators), and the document's typography (paragraphs 1rem with 1.6 line height and 20px apart, headings, lists, task checkboxes, code, quotes, rules, images) — in this library's tokens and fonts. The document box has `block outline-none overflow-y-auto min-h-[150px] max-h-[400px]`; a `class` on `scEditorContent` changes it (`min-h-[300px] max-h-[500px]`, `font-serif`…).
+The editor is styled as the rest of the library: the toolbar's buttons are toggles (`toggleVariants`), and the document is written in the library's typography — headings as `scHeading`, paragraphs, lists, quotes and inline code as shadcn/ui's typography, task checkboxes as `scCheckbox`, rules as `scSeparator` — with `@apply` and the theme's tokens, so it follows your theme. Tiptap's Simple Editor is the model for what the editor does and how it is laid out, not for how it looks. The document box has `block outline-none overflow-y-auto min-h-[150px] max-h-[400px]`; a `class` on `scEditorContent` changes it (`min-h-[300px] max-h-[500px]`, `font-serif`…).
 
 Its `layout` sets how it sits in the box (`data-layout`):
 

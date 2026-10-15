@@ -22,10 +22,9 @@ export class ScEditorToolbar {
   readonly classInput = input<string>('', { alias: 'class' });
   protected readonly class = computed(() =>
     cn(
-      // One row that scrolls sideways when it doesn't fit, as in Tiptap's.
-      'flex min-h-11 items-center gap-1 overflow-x-auto overscroll-x-contain border-b bg-background px-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden',
-      // Over a page, centred on its column (the start stays reachable).
-      this.editor.layout() === 'page' && 'justify-center-safe',
+      'flex flex-wrap items-center gap-1 border-b bg-muted/30 p-2',
+      // Over a page, centred on its column.
+      this.editor.layout() === 'page' && 'justify-center',
       this.classInput(),
     ),
   );

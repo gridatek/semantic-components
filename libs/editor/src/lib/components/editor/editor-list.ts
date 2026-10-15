@@ -32,8 +32,6 @@ export class ScEditorList {
   protected readonly class = computed(() =>
     cn(
       toggleVariants({ variant: 'default', size: 'default' }),
-      // The icon, then the menu's arrow, smaller.
-      'gap-0.5 pe-1 [&>svg~svg]:size-3!',
       this.classInput(),
     ),
   );
