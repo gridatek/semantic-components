@@ -1,32 +1,39 @@
-import { Directive, effect, inject, untracked } from '@angular/core';
+import { Directive, computed, effect, inject, untracked } from '@angular/core';
 import { ScSlider, bindInput, ɵwarnIfUnnamed } from '@semantic-components/ui';
-import { SC_AUDIO_PLAYER } from './audio-player';
+import { ScAudioPlayer } from './audio-player';
 
-/** Seeks in the track, in a `scAudioPlayerSeekBar`. Name it (`aria-label`). */
+/**
+ * Seeks: your `input`, a slider over the track's seconds. Name it, and write
+ * its `aria-valuetext` (`player.formatTime()` writes a time).
+ */
 @Directive({
   selector: 'input[scAudioPlayerSeek]',
-  hostDirectives: [ScSlider],
+  hostDirectives: [{ directive: ScSlider, inputs: ['class'] }],
   host: {
     'data-slot': 'audio-player-seek',
   },
 })
 export class ScAudioPlayerSeek {
-  protected readonly player = inject(SC_AUDIO_PLAYER);
+  private readonly player = inject(ScAudioPlayer);
   private readonly slider = inject(ScSlider);
 
   constructor() {
     ɵwarnIfUnnamed('scAudioPlayerSeek');
     bindInput(this.slider.min, 0);
-    bindInput(this.slider.max, 100);
     bindInput(this.slider.step, 0.1);
-    // The player's value, into the slider; the slider's, back.
+    bindInput(
+      this.slider.max,
+      computed(() => this.player.duration() || 0),
+    );
+    // The player's time, into the slider; the slider's, back.
     effect(() => {
-      const value = this.player.progressPercent();
-      untracked(() => this.slider.value.set(value));
+      const time = this.player.currentTime();
+      untracked(() => this.slider.value.set(time));
     });
     this.slider.value.subscribe((value) => {
-      if (value !== this.player.progressPercent())
-        this.player.seek((value / 100) * this.player.duration());
+      if (Math.abs(value - this.player.currentTime()) > 0.2) {
+        this.player.seekTo(value);
+      }
     });
   }
 }

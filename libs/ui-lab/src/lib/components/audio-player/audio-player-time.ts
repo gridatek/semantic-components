@@ -1,24 +1,24 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { ScAudioPlayerNext } from './audio-player-next';
+import { ScAudioPlayer } from './audio-player';
 
 /**
- * A time, in the app's language: `scAudioPlayerNextTime="current"`,
+ * A time, in the app's language: `scAudioPlayerTime="current"`,
  * `"duration"` or `"remaining"`.
  */
 @Directive({
-  selector: 'time[scAudioPlayerNextTime]',
+  selector: 'time[scAudioPlayerTime]',
   host: {
     'data-slot': 'audio-player-time',
     '[textContent]': 'text()',
     '[class]': 'class()',
   },
 })
-export class ScAudioPlayerNextTime {
-  private readonly player = inject(ScAudioPlayerNext);
+export class ScAudioPlayerTime {
+  private readonly player = inject(ScAudioPlayer);
 
   readonly which = input<'current' | 'duration' | 'remaining'>('current', {
-    alias: 'scAudioPlayerNextTime',
+    alias: 'scAudioPlayerTime',
   });
   readonly classInput = input<string>('', { alias: 'class' });
 

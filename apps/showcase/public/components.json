@@ -50,15 +50,7 @@
   {
     "name": "Audio Player",
     "path": "audio-player",
-    "description": "A custom audio player with controls.",
-    "status": "Experimental",
-    "library": "ui-lab",
-    "category": "Media"
-  },
-  {
-    "name": "Audio Player Next",
-    "path": "audio-player-next",
-    "description": "The audio player, rebuilt: a playlist, a waveform, controls as parts, state two ways, keyboard shortcuts.",
+    "description": "An audio player: a playlist, a waveform, controls as parts, state two ways, keyboard shortcuts.",
     "status": "Experimental",
     "library": "ui-lab",
     "category": "Media"

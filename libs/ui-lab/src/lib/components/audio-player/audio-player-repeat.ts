@@ -1,36 +1,45 @@
+import { Directive, computed, inject, input } from '@angular/core';
 import {
-  Component,
-  ViewEncapsulation,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
-import { buttonVariants, cn, ɵwarnIfUnnamed } from '@semantic-components/ui';
-import { SC_AUDIO_PLAYER } from './audio-player';
+  type ScButtonVariants,
+  buttonVariants,
+  cn,
+  ɵwarnIfUnnamed,
+} from '@semantic-components/ui';
+import { ScAudioPlayer } from './audio-player';
 
-@Component({
+/** Repeat: off, all, one — in turn; pressed while on. Write its icon and its name from `player.repeat()` ("Repeat: all"). */
+@Directive({
   selector: 'button[scAudioPlayerRepeat]',
-  template: '<ng-content />',
   host: {
     type: 'button',
+    'data-slot': 'audio-player-repeat',
+    '[attr.aria-pressed]': "player.repeat() !== 'off'",
     '[class]': 'class()',
-    '(click)': 'player.cycleRepeat()',
+    '(click)': 'cycle()',
   },
-  encapsulation: ViewEncapsulation.None,
 })
 export class ScAudioPlayerRepeat {
+  protected readonly player = inject(ScAudioPlayer);
+
+  readonly classInput = input<string>('', { alias: 'class' });
+  readonly variant = input<ScButtonVariants['variant']>('ghost');
+  readonly size = input<ScButtonVariants['size']>('icon');
+
+  protected readonly class = computed(() =>
+    cn(
+      buttonVariants({ variant: this.variant(), size: this.size() }),
+      'aria-pressed:bg-accent aria-pressed:text-accent-foreground',
+      this.classInput(),
+    ),
+  );
+
   constructor() {
     ɵwarnIfUnnamed('scAudioPlayerRepeat');
   }
 
-  readonly player = inject(SC_AUDIO_PLAYER);
-  readonly classInput = input<string>('', { alias: 'class' });
-
-  protected readonly class = computed(() =>
-    cn(
-      buttonVariants({ variant: 'ghost', size: 'icon' }),
-      'rounded-full',
-      this.classInput(),
-    ),
-  );
+  protected cycle(): void {
+    const order = ['off', 'all', 'one'] as const;
+    const at = order.indexOf(this.player.repeat());
+    this.player.repeat.set(order[(at + 1) % order.length]);
+  }
 }

@@ -1,38 +1,38 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScAudioPlayerNext,
-  ScAudioPlayerNextMedia,
-  ScAudioPlayerNextPlay,
-  ScAudioPlayerNextTime,
-  ScAudioPlayerNextWaveform,
+  ScAudioPlayer,
+  ScAudioPlayerMedia,
+  ScAudioPlayerPlay,
+  ScAudioPlayerTime,
+  ScAudioPlayerWaveform,
 } from '@semantic-components/ui-lab';
 import { SiPauseIcon, SiPlayIcon } from '@semantic-icons/lucide-icons';
 
 /** One file, one line — like a voice message: play, the waveform, the time left. */
 @Component({
-  selector: 'app-minimal-audio-player-next-demo',
+  selector: 'app-minimal-audio-player-demo',
   imports: [
-    ScAudioPlayerNext,
-    ScAudioPlayerNextMedia,
-    ScAudioPlayerNextPlay,
-    ScAudioPlayerNextWaveform,
-    ScAudioPlayerNextTime,
+    ScAudioPlayer,
+    ScAudioPlayerMedia,
+    ScAudioPlayerPlay,
+    ScAudioPlayerWaveform,
+    ScAudioPlayerTime,
     SiPlayIcon,
     SiPauseIcon,
   ],
   template: `
     <div
-      scAudioPlayerNext
-      #player="scAudioPlayerNext"
+      scAudioPlayer
+      #player="scAudioPlayer"
       aria-label="Gymnopédie No. 1"
       class="bg-muted flex w-full max-w-sm items-center gap-3 rounded-full p-2 pe-4"
     >
       <audio
-        scAudioPlayerNextMedia
+        scAudioPlayerMedia
         src="/media/gymnopedie-no-1.mp3"
         preload="metadata"
       ></audio>
-      <button scAudioPlayerNextPlay class="shrink-0 rounded-full">
+      <button scAudioPlayerPlay class="shrink-0 rounded-full">
         @if (player.paused()) {
           <svg siPlayIcon></svg>
           <span class="sr-only">Play</span>
@@ -42,7 +42,7 @@ import { SiPauseIcon, SiPlayIcon } from '@semantic-icons/lucide-icons';
         }
       </button>
       <div
-        scAudioPlayerNextWaveform
+        scAudioPlayerWaveform
         [bars]="40"
         aria-label="Seek"
         [attr.aria-valuetext]="
@@ -52,10 +52,10 @@ import { SiPauseIcon, SiPlayIcon } from '@semantic-icons/lucide-icons';
         "
         class="h-8"
       ></div>
-      <time scAudioPlayerNextTime="remaining"></time>
+      <time scAudioPlayerTime="remaining"></time>
     </div>
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class MinimalAudioPlayerNextDemo {}
+export class MinimalAudioPlayerDemo {}

@@ -9,7 +9,7 @@ import {
   input,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { ScAudioPlayerNext } from './audio-player-next';
+import { ScAudioPlayer } from './audio-player';
 
 /**
  * Your `audio`, in the player. With a playlist, the player gives it each
@@ -17,7 +17,7 @@ import { ScAudioPlayerNext } from './audio-player-next';
  * player's parts.
  */
 @Directive({
-  selector: 'audio[scAudioPlayerNextMedia]',
+  selector: 'audio[scAudioPlayerMedia]',
   host: {
     'data-slot': 'audio-player-media',
     '[class]': 'class()',
@@ -30,14 +30,17 @@ import { ScAudioPlayerNext } from './audio-player-next';
     '(ratechange)': 'sync()',
     '(seeked)': 'sync()',
     '(loadedmetadata)': 'sync()',
+    // Loaded: a duration estimated from the first bytes is now right.
+    '(canplaythrough)': 'sync()',
+    '(suspend)': 'sync()',
     '(ended)': 'onEnded()',
     '(waiting)': 'player.waiting.set(true)',
     '(playing)': 'player.waiting.set(false); sync()',
     '(canplay)': 'player.waiting.set(false)',
   },
 })
-export class ScAudioPlayerNextMedia {
-  protected readonly player = inject(ScAudioPlayerNext);
+export class ScAudioPlayerMedia {
+  protected readonly player = inject(ScAudioPlayer);
   private readonly element =
     inject<ElementRef<HTMLAudioElement>>(ElementRef).nativeElement;
 

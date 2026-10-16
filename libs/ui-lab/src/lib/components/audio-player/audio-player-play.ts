@@ -1,36 +1,37 @@
+import { Directive, computed, inject, input } from '@angular/core';
 import {
-  Component,
-  ViewEncapsulation,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
-import { buttonVariants, cn, ɵwarnIfUnnamed } from '@semantic-components/ui';
-import { SC_AUDIO_PLAYER } from './audio-player';
+  type ScButtonVariants,
+  buttonVariants,
+  cn,
+  ɵwarnIfUnnamed,
+} from '@semantic-components/ui';
+import { ScAudioPlayer } from './audio-player';
 
-@Component({
+/** Plays or pauses. Write its icon and name from `player.paused()` ("Play" / "Pause"). */
+@Directive({
   selector: 'button[scAudioPlayerPlay]',
-  template: '<ng-content />',
   host: {
     type: 'button',
+    'data-slot': 'audio-player-play',
     '[class]': 'class()',
-    '(click)': 'player.togglePlay()',
+    '(click)': 'player.toggle()',
   },
-  encapsulation: ViewEncapsulation.None,
 })
 export class ScAudioPlayerPlay {
-  constructor() {
-    ɵwarnIfUnnamed('scAudioPlayerPlay');
-  }
+  protected readonly player = inject(ScAudioPlayer);
 
-  readonly player = inject(SC_AUDIO_PLAYER);
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly variant = input<ScButtonVariants['variant']>('default');
+  readonly size = input<ScButtonVariants['size']>('icon');
 
   protected readonly class = computed(() =>
     cn(
-      buttonVariants({ variant: 'default', size: 'icon-lg' }),
-      "rounded-full size-12 [&_svg:not([class*='size-'])]:size-6",
+      buttonVariants({ variant: this.variant(), size: this.size() }),
       this.classInput(),
     ),
   );
+
+  constructor() {
+    ɵwarnIfUnnamed('scAudioPlayerPlay');
+  }
 }

@@ -5,11 +5,11 @@ import {
   cn,
   ɵwarnIfUnnamed,
 } from '@semantic-components/ui';
-import { ScAudioPlayerNext } from './audio-player-next';
+import { ScAudioPlayer } from './audio-player';
 
 /** Back to the track's start, or — near it — the track before. Write its icon and name it ("Previous track"). */
 @Directive({
-  selector: 'button[scAudioPlayerNextPreviousTrack]',
+  selector: 'button[scAudioPlayerPreviousTrack]',
   host: {
     type: 'button',
     'data-slot': 'audio-player-previous-track',
@@ -17,8 +17,8 @@ import { ScAudioPlayerNext } from './audio-player-next';
     '(click)': 'player.previousTrack()',
   },
 })
-export class ScAudioPlayerNextPreviousTrack {
-  protected readonly player = inject(ScAudioPlayerNext);
+export class ScAudioPlayerPreviousTrack {
+  protected readonly player = inject(ScAudioPlayer);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('ghost');
@@ -32,6 +32,6 @@ export class ScAudioPlayerNextPreviousTrack {
   );
 
   constructor() {
-    ɵwarnIfUnnamed('scAudioPlayerNextPreviousTrack');
+    ɵwarnIfUnnamed('scAudioPlayerPreviousTrack');
   }
 }

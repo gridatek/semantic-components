@@ -1,6 +1,5 @@
 export * from './attachment';
 export * from './audio-player';
-export * from './audio-player-next';
 export * from './barcode-scanner';
 export * from './bubble';
 export * from './color-picker';

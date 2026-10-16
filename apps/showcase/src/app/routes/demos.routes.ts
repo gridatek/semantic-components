@@ -168,36 +168,24 @@ export const demosRoutes: Route[] = [
     path: 'demos/audio-player',
     children: [
       {
-        path: 'audio-player-demo',
+        path: 'player-audio-player-demo',
         loadComponent: () =>
-          import('../pages/docs/audio-player/demos/audio-player-demo').then(
-            (m) => m.AudioPlayerDemo,
-          ),
-      },
-    ],
-  },
-  {
-    path: 'demos/audio-player-next',
-    children: [
-      {
-        path: 'player-audio-player-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/audio-player-next/demos/player-audio-player-next-demo').then(
-            (m) => m.PlayerAudioPlayerNextDemo,
+          import('../pages/docs/audio-player/demos/player-audio-player-demo').then(
+            (m) => m.PlayerAudioPlayerDemo,
           ),
       },
       {
-        path: 'minimal-audio-player-next-demo',
+        path: 'minimal-audio-player-demo',
         loadComponent: () =>
-          import('../pages/docs/audio-player-next/demos/minimal-audio-player-next-demo').then(
-            (m) => m.MinimalAudioPlayerNextDemo,
+          import('../pages/docs/audio-player/demos/minimal-audio-player-demo').then(
+            (m) => m.MinimalAudioPlayerDemo,
           ),
       },
       {
-        path: 'controlled-audio-player-next-demo',
+        path: 'controlled-audio-player-demo',
         loadComponent: () =>
-          import('../pages/docs/audio-player-next/demos/controlled-audio-player-next-demo').then(
-            (m) => m.ControlledAudioPlayerNextDemo,
+          import('../pages/docs/audio-player/demos/controlled-audio-player-demo').then(
+            (m) => m.ControlledAudioPlayerDemo,
           ),
       },
     ],

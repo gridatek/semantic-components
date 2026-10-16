@@ -1,17 +1,37 @@
-import { NgOptimizedImage } from '@angular/common';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { PlayerAudioPlayerDemo } from './player-audio-player-demo';
+
+@Component({
+  selector: 'app-player-audio-player-demo-container',
+  imports: [DemoContainer, PlayerAudioPlayerDemo],
+  template: `
+    <app-demo-container
+      title="Player"
+      [code]="code"
+      demoUrl="/demos/audio-player/player-audio-player-demo"
+    >
+      <app-player-audio-player-demo />
+    </app-demo-container>
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class PlayerAudioPlayerDemoContainer {
+  readonly code = `import { NgOptimizedImage } from '@angular/common';
 import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import {
-  ScAudioPlayerNext,
-  ScAudioPlayerNextMedia,
-  ScAudioPlayerNextMute,
-  ScAudioPlayerNextNextTrack,
-  ScAudioPlayerNextPlay,
-  ScAudioPlayerNextPreviousTrack,
-  ScAudioPlayerNextRepeat,
-  ScAudioPlayerNextShuffle,
-  ScAudioPlayerNextTime,
-  ScAudioPlayerNextVolume,
-  ScAudioPlayerNextWaveform,
+  ScAudioPlayer,
+  ScAudioPlayerMedia,
+  ScAudioPlayerMute,
+  ScAudioPlayerNextTrack,
+  ScAudioPlayerPlay,
+  ScAudioPlayerPreviousTrack,
+  ScAudioPlayerRepeat,
+  ScAudioPlayerShuffle,
+  ScAudioPlayerTime,
+  ScAudioPlayerVolume,
+  ScAudioPlayerWaveform,
 } from '@semantic-components/ui-lab';
 import {
   SiPauseIcon,
@@ -34,20 +54,20 @@ interface Song {
 
 /** A playlist: its cover and names, the waveform, shuffle and repeat, the volume — and the keys, once focused. */
 @Component({
-  selector: 'app-player-audio-player-next-demo',
+  selector: 'app-player-audio-player-demo',
   imports: [
     NgOptimizedImage,
-    ScAudioPlayerNext,
-    ScAudioPlayerNextMedia,
-    ScAudioPlayerNextWaveform,
-    ScAudioPlayerNextTime,
-    ScAudioPlayerNextPlay,
-    ScAudioPlayerNextPreviousTrack,
-    ScAudioPlayerNextNextTrack,
-    ScAudioPlayerNextShuffle,
-    ScAudioPlayerNextRepeat,
-    ScAudioPlayerNextMute,
-    ScAudioPlayerNextVolume,
+    ScAudioPlayer,
+    ScAudioPlayerMedia,
+    ScAudioPlayerWaveform,
+    ScAudioPlayerTime,
+    ScAudioPlayerPlay,
+    ScAudioPlayerPreviousTrack,
+    ScAudioPlayerNextTrack,
+    ScAudioPlayerShuffle,
+    ScAudioPlayerRepeat,
+    ScAudioPlayerMute,
+    ScAudioPlayerVolume,
     SiPlayIcon,
     SiPauseIcon,
     SiSkipBackIcon,
@@ -58,17 +78,17 @@ interface Song {
     SiVolume2Icon,
     SiVolumeXIcon,
   ],
-  template: `
+  template: \`
     <div
-      scAudioPlayerNext
-      #player="scAudioPlayerNext"
+      scAudioPlayer
+      #player="scAudioPlayer"
       aria-label="Player"
       [tracks]="songs"
       [(track)]="track"
       [metadata]="metadata()"
       class="bg-card w-full max-w-sm space-y-4 rounded-xl border p-4"
     >
-      <audio scAudioPlayerNextMedia preload="metadata"></audio>
+      <audio scAudioPlayerMedia preload="metadata"></audio>
 
       <div class="flex items-center gap-3">
         <img
@@ -88,7 +108,7 @@ interface Song {
 
       <div class="space-y-1">
         <div
-          scAudioPlayerNextWaveform
+          scAudioPlayerWaveform
           aria-label="Seek"
           [attr.aria-valuetext]="
             player.formatTime(player.currentTime()) +
@@ -97,21 +117,21 @@ interface Song {
           "
         ></div>
         <div class="flex justify-between">
-          <time scAudioPlayerNextTime="current"></time>
-          <time scAudioPlayerNextTime="remaining"></time>
+          <time scAudioPlayerTime="current"></time>
+          <time scAudioPlayerTime="remaining"></time>
         </div>
       </div>
 
       <div class="flex items-center justify-center gap-2">
-        <button scAudioPlayerNextShuffle>
+        <button scAudioPlayerShuffle>
           <svg siShuffleIcon></svg>
           <span class="sr-only">Shuffle</span>
         </button>
-        <button scAudioPlayerNextPreviousTrack>
+        <button scAudioPlayerPreviousTrack>
           <svg siSkipBackIcon></svg>
           <span class="sr-only">Previous track</span>
         </button>
-        <button scAudioPlayerNextPlay class="rounded-full">
+        <button scAudioPlayerPlay class="rounded-full">
           @if (player.paused()) {
             <svg siPlayIcon></svg>
             <span class="sr-only">Play</span>
@@ -120,11 +140,11 @@ interface Song {
             <span class="sr-only">Pause</span>
           }
         </button>
-        <button scAudioPlayerNextNextTrack>
+        <button scAudioPlayerNextTrack>
           <svg siSkipForwardIcon></svg>
           <span class="sr-only">Next track</span>
         </button>
-        <button scAudioPlayerNextRepeat>
+        <button scAudioPlayerRepeat>
           @if (player.repeat() === 'one') {
             <svg siRepeat1Icon></svg>
           } @else {
@@ -135,7 +155,7 @@ interface Song {
       </div>
 
       <div class="flex items-center gap-2">
-        <button scAudioPlayerNextMute size="icon-sm">
+        <button scAudioPlayerMute size="icon-sm">
           @if (player.muted()) {
             <svg siVolumeXIcon></svg>
           } @else {
@@ -143,7 +163,7 @@ interface Song {
           }
           <span class="sr-only">Mute</span>
         </button>
-        <input scAudioPlayerNextVolume aria-label="Volume" />
+        <input scAudioPlayerVolume aria-label="Volume" />
       </div>
 
       <ol aria-label="Playlist" class="space-y-1 border-t pt-3">
@@ -171,11 +191,11 @@ interface Song {
         }
       </ol>
     </div>
-  `,
+  \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class PlayerAudioPlayerNextDemo {
+export class PlayerAudioPlayerDemo {
   readonly songs: readonly Song[] = [
     {
       src: '/media/carefree.mp3',
@@ -204,4 +224,5 @@ export class PlayerAudioPlayerNextDemo {
     artist: this.song().artist,
     artwork: [{ src: this.song().cover, sizes: '400x400', type: 'image/jpeg' }],
   }));
+}`;
 }

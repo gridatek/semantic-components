@@ -5,21 +5,21 @@ import {
   cn,
   ɵwarnIfUnnamed,
 } from '@semantic-components/ui';
-import { ScAudioPlayerNext } from './audio-player-next';
+import { ScAudioPlayer } from './audio-player';
 
-/** Mutes, pressed while muted. Write its icon and name it ("Mute"). */
+/** The next track; disabled after the last (unless repeating them all). Write its icon and name it ("Next track"). */
 @Directive({
-  selector: 'button[scAudioPlayerNextMute]',
+  selector: 'button[scAudioPlayerNextTrack]',
   host: {
     type: 'button',
-    'data-slot': 'audio-player-mute',
-    '[attr.aria-pressed]': 'player.muted()',
+    'data-slot': 'audio-player-track',
+    '[disabled]': 'player.upcoming() === null',
     '[class]': 'class()',
-    '(click)': 'player.muted.set(!player.muted())',
+    '(click)': 'player.nextTrack()',
   },
 })
-export class ScAudioPlayerNextMute {
-  protected readonly player = inject(ScAudioPlayerNext);
+export class ScAudioPlayerNextTrack {
+  protected readonly player = inject(ScAudioPlayer);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('ghost');
@@ -28,12 +28,11 @@ export class ScAudioPlayerNextMute {
   protected readonly class = computed(() =>
     cn(
       buttonVariants({ variant: this.variant(), size: this.size() }),
-      'aria-pressed:bg-accent aria-pressed:text-accent-foreground',
       this.classInput(),
     ),
   );
 
   constructor() {
-    ɵwarnIfUnnamed('scAudioPlayerNextMute');
+    ɵwarnIfUnnamed('scAudioPlayerNextTrack');
   }
 }

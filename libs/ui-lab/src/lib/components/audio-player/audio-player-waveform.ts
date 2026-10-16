@@ -8,7 +8,7 @@ import {
   signal,
 } from '@angular/core';
 import { cn, ɵwarnIfUnnamed } from '@semantic-components/ui';
-import { ScAudioPlayerNext } from './audio-player-next';
+import { ScAudioPlayer } from './audio-player';
 
 /** The lowest bar, in percent: silence still shows. */
 const FLOOR = 8;
@@ -19,7 +19,7 @@ const FLOOR = 8;
  * Home, End). Name it, and write its `aria-valuetext` (`player.formatTime()`).
  */
 @Component({
-  selector: 'div[scAudioPlayerNextWaveform]',
+  selector: 'div[scAudioPlayerWaveform]',
   template: `
     <div class="flex h-full items-center gap-0.5" aria-hidden="true">
       @for (height of heights(); track $index) {
@@ -57,8 +57,8 @@ const FLOOR = 8;
   },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScAudioPlayerNextWaveform {
-  private readonly player = inject(ScAudioPlayerNext);
+export class ScAudioPlayerWaveform {
+  private readonly player = inject(ScAudioPlayer);
 
   /** How many bars. */
   readonly bars = input(64);
@@ -94,7 +94,7 @@ export class ScAudioPlayerNextWaveform {
   );
 
   constructor() {
-    ɵwarnIfUnnamed('scAudioPlayerNextWaveform');
+    ɵwarnIfUnnamed('scAudioPlayerWaveform');
     // The file, read again for each track.
     effect((onCleanup) => {
       const src = this.player.current()?.src ?? this.player.ɵmedia()?.src;

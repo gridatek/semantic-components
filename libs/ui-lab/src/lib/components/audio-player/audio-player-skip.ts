@@ -5,23 +5,26 @@ import {
   cn,
   ɵwarnIfUnnamed,
 } from '@semantic-components/ui';
-import { ScAudioPlayerNext } from './audio-player-next';
+import { ScAudioPlayer } from './audio-player';
 
-/** Plays or pauses. Write its icon and name from `player.paused()` ("Play" / "Pause"). */
+/** Skips by its seconds (`[scAudioPlayerSkip]="-15"`). Write its icon and name it ("Back 15 seconds"). */
 @Directive({
-  selector: 'button[scAudioPlayerNextPlay]',
+  selector: 'button[scAudioPlayerSkip]',
   host: {
     type: 'button',
-    'data-slot': 'audio-player-play',
+    'data-slot': 'audio-player-skip',
     '[class]': 'class()',
-    '(click)': 'player.toggle()',
+    '(click)': 'player.seekBy(seconds())',
   },
 })
-export class ScAudioPlayerNextPlay {
-  protected readonly player = inject(ScAudioPlayerNext);
+export class ScAudioPlayerSkip {
+  protected readonly player = inject(ScAudioPlayer);
 
+  readonly seconds = input.required<number>({
+    alias: 'scAudioPlayerSkip',
+  });
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly variant = input<ScButtonVariants['variant']>('default');
+  readonly variant = input<ScButtonVariants['variant']>('ghost');
   readonly size = input<ScButtonVariants['size']>('icon');
 
   protected readonly class = computed(() =>
@@ -32,6 +35,6 @@ export class ScAudioPlayerNextPlay {
   );
 
   constructor() {
-    ɵwarnIfUnnamed('scAudioPlayerNextPlay');
+    ɵwarnIfUnnamed('scAudioPlayerSkip');
   }
 }

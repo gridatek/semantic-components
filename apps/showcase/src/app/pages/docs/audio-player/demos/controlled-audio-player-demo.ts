@@ -7,28 +7,28 @@ import {
   ScRadioGroup,
 } from '@semantic-components/ui';
 import {
-  ScAudioPlayerNext,
-  ScAudioPlayerNextMedia,
-  ScAudioPlayerNextSeek,
+  ScAudioPlayer,
+  ScAudioPlayerMedia,
+  ScAudioPlayerSeek,
 } from '@semantic-components/ui-lab';
 
 /** Its state is yours, two ways: the track, played, paused, timed and repeated from outside. */
 @Component({
-  selector: 'app-controlled-audio-player-next-demo',
+  selector: 'app-controlled-audio-player-demo',
   imports: [
     ScButton,
     ScRadioGroup,
     ScRadioField,
     ScRadio,
     FormField,
-    ScAudioPlayerNext,
-    ScAudioPlayerNextMedia,
-    ScAudioPlayerNextSeek,
+    ScAudioPlayer,
+    ScAudioPlayerMedia,
+    ScAudioPlayerSeek,
   ],
   template: `
     <div
-      scAudioPlayerNext
-      #player="scAudioPlayerNext"
+      scAudioPlayer
+      #player="scAudioPlayer"
       aria-label="Player"
       [tracks]="songs"
       [(track)]="track"
@@ -38,7 +38,7 @@ import {
       (repeatChange)="settings.set({ repeat: $event })"
       class="w-full max-w-sm space-y-4"
     >
-      <audio scAudioPlayerNextMedia preload="metadata"></audio>
+      <audio scAudioPlayerMedia preload="metadata"></audio>
 
       <div class="flex items-center gap-3">
         <button scButton class="w-20" (click)="paused.set(!paused())">
@@ -50,7 +50,7 @@ import {
       </div>
 
       <input
-        scAudioPlayerNextSeek
+        scAudioPlayerSeek
         aria-label="Seek"
         [attr.aria-valuetext]="
           player.formatTime(time()) +
@@ -101,7 +101,7 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ControlledAudioPlayerNextDemo {
+export class ControlledAudioPlayerDemo {
   readonly songs = [
     { src: '/media/carefree.mp3', title: 'Carefree' },
     { src: '/media/sneaky-snitch.mp3', title: 'Sneaky Snitch' },

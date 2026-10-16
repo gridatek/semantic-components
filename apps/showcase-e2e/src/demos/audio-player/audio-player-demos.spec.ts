@@ -10,7 +10,7 @@ const state = (page: Page) =>
 
 test.describe('Player', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/demos/audio-player-next/player-audio-player-next-demo');
+    await page.goto('/demos/audio-player/player-audio-player-demo');
     await expect
       .poll(() => audio(page).evaluate((a: HTMLAudioElement) => a.duration))
       .toBeGreaterThan(39);
@@ -64,7 +64,13 @@ test.describe('Player', () => {
       (box?.y ?? 0) + (box?.height ?? 0) / 2,
     );
     await expect.poll(async () => (await state(page)).time).toBeCloseTo(20, 0);
-    // Its bars, read from the file.
+  });
+
+  test('the waveform: its bars, read from the file', async ({ page }) => {
+    const webAudio = await page.evaluate(
+      () => typeof OfflineAudioContext !== 'undefined',
+    );
+    test.skip(!webAudio, 'No Web Audio in this browser build');
     await expect(
       page.locator('[data-slot="audio-player-waveform"]'),
     ).not.toHaveAttribute('data-loading');
@@ -87,7 +93,7 @@ test.describe('Player', () => {
 });
 
 test('Minimal: one file, its own src', async ({ page }) => {
-  await page.goto('/demos/audio-player-next/minimal-audio-player-next-demo');
+  await page.goto('/demos/audio-player/minimal-audio-player-demo');
   await page.getByRole('button', { name: 'Play' }).click();
   await expect.poll(async () => (await state(page)).time).toBeGreaterThan(0.3);
   await expect(page.locator('time')).toHaveText(/^-00:3\d$/);
@@ -96,7 +102,7 @@ test('Minimal: one file, its own src', async ({ page }) => {
 test('Controlled: the track and repeat, from outside, while it plays', async ({
   page,
 }) => {
-  await page.goto('/demos/audio-player-next/controlled-audio-player-next-demo');
+  await page.goto('/demos/audio-player/controlled-audio-player-demo');
   await page.getByRole('button', { name: 'Play', exact: true }).click();
   await expect.poll(async () => (await state(page)).paused).toBe(false);
   await page.getByRole('button', { name: /Sneaky Snitch/ }).click();

@@ -1,18 +1,36 @@
-import { Directive, computed, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { Directive, computed, effect, inject, untracked } from '@angular/core';
+import { ScSlider, bindInput, ɵwarnIfUnnamed } from '@semantic-components/ui';
+import { ScAudioPlayer } from './audio-player';
 
-/** The volume row: mute, the volume slider, full volume. */
+/** The volume: your `input`, a slider from 0 to 1 (0 while muted). Name it. */
 @Directive({
-  selector: 'div[scAudioPlayerVolume]',
+  selector: 'input[scAudioPlayerVolume]',
+  hostDirectives: [{ directive: ScSlider, inputs: ['class'] }],
   host: {
     'data-slot': 'audio-player-volume',
-    '[class]': 'class()',
   },
 })
 export class ScAudioPlayerVolume {
-  readonly classInput = input<string>('', { alias: 'class' });
+  private readonly player = inject(ScAudioPlayer);
+  private readonly slider = inject(ScSlider);
 
-  protected readonly class = computed(() =>
-    cn('flex items-center justify-center gap-2', this.classInput()),
+  private readonly shown = computed(() =>
+    this.player.muted() ? 0 : this.player.volume(),
   );
+
+  constructor() {
+    ɵwarnIfUnnamed('scAudioPlayerVolume');
+    bindInput(this.slider.min, 0);
+    bindInput(this.slider.max, 1);
+    bindInput(this.slider.step, 0.05);
+    effect(() => {
+      const value = this.shown();
+      untracked(() => this.slider.value.set(value));
+    });
+    this.slider.value.subscribe((value) => {
+      if (value === this.shown()) return;
+      this.player.volume.set(value);
+      this.player.muted.set(value === 0);
+    });
+  }
 }

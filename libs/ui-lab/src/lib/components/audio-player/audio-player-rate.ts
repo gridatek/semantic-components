@@ -5,25 +5,28 @@ import {
   cn,
   ɵwarnIfUnnamed,
 } from '@semantic-components/ui';
-import { ScAudioPlayerNext } from './audio-player-next';
+import { ScAudioPlayer } from './audio-player';
 
-/** Shuffles the playlist, pressed while shuffled. Write its icon and name it ("Shuffle"). */
+/** Plays at its speed (`[scAudioPlayerRate]="1.5"`), pressed while it is the one. Write its text ("1.5×"). */
 @Directive({
-  selector: 'button[scAudioPlayerNextShuffle]',
+  selector: 'button[scAudioPlayerRate]',
   host: {
     type: 'button',
-    'data-slot': 'audio-player-shuffle',
-    '[attr.aria-pressed]': 'player.shuffle()',
+    'data-slot': 'audio-player-rate',
+    '[attr.aria-pressed]': 'player.playbackRate() === rate()',
     '[class]': 'class()',
-    '(click)': 'player.shuffle.set(!player.shuffle())',
+    '(click)': 'player.playbackRate.set(rate())',
   },
 })
-export class ScAudioPlayerNextShuffle {
-  protected readonly player = inject(ScAudioPlayerNext);
+export class ScAudioPlayerRate {
+  protected readonly player = inject(ScAudioPlayer);
 
+  readonly rate = input.required<number>({
+    alias: 'scAudioPlayerRate',
+  });
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('ghost');
-  readonly size = input<ScButtonVariants['size']>('icon');
+  readonly size = input<ScButtonVariants['size']>('sm');
 
   protected readonly class = computed(() =>
     cn(
@@ -34,6 +37,6 @@ export class ScAudioPlayerNextShuffle {
   );
 
   constructor() {
-    ɵwarnIfUnnamed('scAudioPlayerNextShuffle');
+    ɵwarnIfUnnamed('scAudioPlayerRate');
   }
 }
