@@ -9,7 +9,7 @@ import { buttonVariants, cn, ɵwarnIfUnnamed } from '@semantic-components/ui';
 import { SC_AUDIO_PLAYER } from './audio-player';
 
 @Component({
-  selector: 'button[scAudioPlayerNext]',
+  selector: 'button[scAudioPlayerNextTrack]',
   template: '<ng-content />',
   host: {
     type: 'button',
@@ -20,9 +20,9 @@ import { SC_AUDIO_PLAYER } from './audio-player';
   },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScAudioPlayerNext {
+export class ScAudioPlayerNextTrack {
   constructor() {
-    ɵwarnIfUnnamed('scAudioPlayerNext');
+    ɵwarnIfUnnamed('scAudioPlayerNextTrack');
   }
 
   readonly player = inject(SC_AUDIO_PLAYER);

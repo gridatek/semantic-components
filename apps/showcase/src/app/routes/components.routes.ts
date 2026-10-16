@@ -79,6 +79,12 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/audio-player/audio-player-page'),
       },
       {
+        path: 'audio-player-next',
+        title: 'Audio Player Next - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/audio-player-next/audio-player-next-page'),
+      },
+      {
         path: 'avatar',
         title: 'Avatar - Semantic Components',
         loadComponent: () => import('../pages/docs/avatar/avatar-page'),

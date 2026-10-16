@@ -37,7 +37,7 @@ You write every element, icon and name; the parts add the behaviour and the styl
 | `ScAudioPlayerControls`     | `div[scAudioPlayerControls]`       | The buttons' row                                                 |
 | `ScAudioPlayerPlay`         | `button[scAudioPlayerPlay]`        | Plays and pauses                                                 |
 | `ScAudioPlayerPrevious`     | `button[scAudioPlayerPrevious]`    | The previous track                                               |
-| `ScAudioPlayerNext`         | `button[scAudioPlayerNext]`        | The next track                                                   |
+| `ScAudioPlayerNextTrack`    | `button[scAudioPlayerNextTrack]`   | The next track                                                   |
 | `ScAudioPlayerShuffle`      | `button[scAudioPlayerShuffle]`     | Shuffle on and off                                               |
 | `ScAudioPlayerRepeat`       | `button[scAudioPlayerRepeat]`      | Repeat: none, all, one                                           |
 | `ScAudioPlayerVolume`       | `div[scAudioPlayerVolume]`         | The volume row                                                   |
@@ -118,7 +118,7 @@ readonly tracks: ScAudioTrack[] = [
     <button scAudioPlayerShuffle><span class="sr-only">Shuffle</span></button>
     <button scAudioPlayerPrevious><span class="sr-only">Previous track</span></button>
     <button scAudioPlayerPlayButton></button>
-    <button scAudioPlayerNext><span class="sr-only">Next track</span></button>
+    <button scAudioPlayerNextTrack><span class="sr-only">Next track</span></button>
     <button scAudioPlayerRepeat><span class="sr-only">{{ 'Repeat: ' + player.repeat() }}</span></button>
   </div>
 
@@ -147,7 +147,7 @@ Horizontal layout for sidebars:
   <div class="flex items-center gap-2">
     <button scAudioPlayerPrevious><span class="sr-only">Previous track</span></button>
     <button scAudioPlayerPlayButton></button>
-    <button scAudioPlayerNext><span class="sr-only">Next track</span></button>
+    <button scAudioPlayerNextTrack><span class="sr-only">Next track</span></button>
   </div>
   <audio scAudioPlayerAudio></audio>
 </div>
@@ -165,7 +165,7 @@ Simple player without extra controls:
   <div scAudioPlayerInfo class="min-w-0 flex-1"></div>
   <button scAudioPlayerPrevious><span class="sr-only">Previous track</span></button>
   <button scAudioPlayerPlayButton></button>
-  <button scAudioPlayerNext><span class="sr-only">Next track</span></button>
+  <button scAudioPlayerNextTrack><span class="sr-only">Next track</span></button>
   <audio scAudioPlayerAudio></audio>
 </div>
 ```
@@ -219,7 +219,7 @@ Create any layout you want:
           <button scAudioPlayerShuffle><span class="sr-only">Shuffle</span></button>
           <button scAudioPlayerPrevious><span class="sr-only">Previous track</span></button>
           <button scAudioPlayerPlayButton></button>
-          <button scAudioPlayerNext><span class="sr-only">Next track</span></button>
+          <button scAudioPlayerNextTrack><span class="sr-only">Next track</span></button>
           <button scAudioPlayerRepeat><span class="sr-only">{{ 'Repeat: ' + player.repeat() }}</span></button>
         </div>
       </div>

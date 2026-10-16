@@ -20,10 +20,7 @@ import { ControlledVideoPlayerDemo } from './controlled-video-player-demo';
 export class ControlledVideoPlayerDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
-import {
-  ScVideoPlayer,
-  ScVideoPlayerMedia,
-} from '@semantic-components/ui-lab';
+import { ScVideoPlayer, ScVideoPlayerMedia } from '@semantic-components/ui-lab';
 
 /** Its state is yours, two ways: chapters as a list that jumps, and the player played, paused and timed from outside. */
 @Component({

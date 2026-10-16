@@ -13,7 +13,7 @@ export { ScAudioPlayerDuration } from './audio-player-duration';
 export { ScAudioPlayerControls } from './audio-player-controls';
 export { ScAudioPlayerPlay } from './audio-player-play';
 export { ScAudioPlayerPrevious } from './audio-player-previous';
-export { ScAudioPlayerNext } from './audio-player-next';
+export { ScAudioPlayerNextTrack } from './audio-player-next';
 export { ScAudioPlayerShuffle } from './audio-player-shuffle';
 export { ScAudioPlayerRepeat } from './audio-player-repeat';
 export { ScAudioPlayerVolume } from './audio-player-volume';

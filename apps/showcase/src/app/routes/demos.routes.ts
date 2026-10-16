@@ -177,6 +177,32 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/audio-player-next',
+    children: [
+      {
+        path: 'player-audio-player-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/audio-player-next/demos/player-audio-player-next-demo').then(
+            (m) => m.PlayerAudioPlayerNextDemo,
+          ),
+      },
+      {
+        path: 'minimal-audio-player-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/audio-player-next/demos/minimal-audio-player-next-demo').then(
+            (m) => m.MinimalAudioPlayerNextDemo,
+          ),
+      },
+      {
+        path: 'controlled-audio-player-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/audio-player-next/demos/controlled-audio-player-next-demo').then(
+            (m) => m.ControlledAudioPlayerNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/avatar',
     children: [
       {

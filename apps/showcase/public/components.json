@@ -56,6 +56,14 @@
     "category": "Media"
   },
   {
+    "name": "Audio Player Next",
+    "path": "audio-player-next",
+    "description": "The audio player, rebuilt: a playlist, a waveform, controls as parts, state two ways, keyboard shortcuts.",
+    "status": "Experimental",
+    "library": "ui-lab",
+    "category": "Media"
+  },
+  {
     "name": "Autocomplete",
     "path": "autocomplete",
     "description": "An input with autocomplete suggestions.",

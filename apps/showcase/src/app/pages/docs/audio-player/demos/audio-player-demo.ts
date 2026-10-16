@@ -9,7 +9,7 @@ import {
   ScAudioPlayerDuration,
   ScAudioPlayerMaxVolume,
   ScAudioPlayerMute,
-  ScAudioPlayerNext,
+  ScAudioPlayerNextTrack,
   ScAudioPlayerPlay,
   ScAudioPlayerPrevious,
   ScAudioPlayerProgress,
@@ -59,7 +59,7 @@ import {
     ScAudioPlayerControls,
     ScAudioPlayerPlay,
     ScAudioPlayerPrevious,
-    ScAudioPlayerNext,
+    ScAudioPlayerNextTrack,
     ScAudioPlayerShuffle,
     ScAudioPlayerRepeat,
     ScAudioPlayerVolume,
@@ -117,7 +117,7 @@ import {
             player.isPlaying() ? 'Pause' : 'Play'
           }}</span>
         </button>
-        <button scAudioPlayerNext>
+        <button scAudioPlayerNextTrack>
           <svg siSkipForwardIcon></svg>
           <span class="sr-only">Next track</span>
         </button>
