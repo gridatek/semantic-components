@@ -58,6 +58,9 @@ test.describe('File Explorer Tree Demo', () => {
       'aria-expanded',
       'true',
     );
+    // As a person would: into the children once they show (WebKit can't
+    // focus them in the frame they open).
+    await expect(item(page, 'button.ts')).toBeVisible();
     await press(page, 'ArrowRight'); // into first child
     await expect(item(page, 'button.ts')).toBeFocused();
     await press(page, 'ArrowLeft'); // back to parent
