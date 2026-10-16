@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
-export type ScBarcodeFormat =
+export type ScBarcodeScannerFormat =
   | 'aztec'
   | 'code_128'
   | 'code_39'
@@ -27,7 +27,7 @@ export type ScBarcodeFormat =
 
 export interface ScBarcodeResult {
   rawValue: string;
-  format: ScBarcodeFormat;
+  format: ScBarcodeScannerFormat;
   boundingBox?: DOMRectReadOnly;
   cornerPoints?: { x: number; y: number }[];
 }
@@ -66,7 +66,7 @@ export class ScBarcodeScanner {
     cn('bg-card border rounded-lg overflow-hidden block', this.classInput()),
   );
 
-  readonly formats = input<ScBarcodeFormat[]>([
+  readonly formats = input<ScBarcodeScannerFormat[]>([
     'qr_code',
     'ean_13',
     'ean_8',
@@ -219,7 +219,7 @@ export class ScBarcodeScanner {
         const barcode = barcodes[0];
         const result: ScBarcodeResult = {
           rawValue: barcode.rawValue,
-          format: barcode.format as ScBarcodeFormat,
+          format: barcode.format as ScBarcodeScannerFormat,
           boundingBox: barcode.boundingBox,
           cornerPoints: barcode.cornerPoints,
         };

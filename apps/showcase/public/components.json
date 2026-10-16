@@ -96,6 +96,14 @@
     "category": "Media"
   },
   {
+    "name": "Barcode Scanner Next",
+    "path": "barcode-scanner-next",
+    "description": "The barcode scanner, rebuilt: camera or picture, codes outlined, states, torch and cameras; the standard BarcodeDetector.",
+    "status": "Experimental",
+    "library": "ui-lab",
+    "category": "Media"
+  },
+  {
     "name": "Breadcrumb",
     "path": "breadcrumb",
     "description": "Displays the path to the current resource.",

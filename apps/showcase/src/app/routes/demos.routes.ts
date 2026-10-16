@@ -304,6 +304,46 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/barcode-scanner-next',
+    children: [
+      {
+        path: 'camera-barcode-scanner-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/barcode-scanner-next/demos/camera-barcode-scanner-next-demo').then(
+            (m) => m.CameraBarcodeScannerNextDemo,
+          ),
+      },
+      {
+        path: 'once-barcode-scanner-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/barcode-scanner-next/demos/once-barcode-scanner-next-demo').then(
+            (m) => m.OnceBarcodeScannerNextDemo,
+          ),
+      },
+      {
+        path: 'formats-barcode-scanner-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/barcode-scanner-next/demos/formats-barcode-scanner-next-demo').then(
+            (m) => m.FormatsBarcodeScannerNextDemo,
+          ),
+      },
+      {
+        path: 'picture-barcode-scanner-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/barcode-scanner-next/demos/picture-barcode-scanner-next-demo').then(
+            (m) => m.PictureBarcodeScannerNextDemo,
+          ),
+      },
+      {
+        path: 'controls-barcode-scanner-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/barcode-scanner-next/demos/controls-barcode-scanner-next-demo').then(
+            (m) => m.ControlsBarcodeScannerNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/breadcrumb',
     children: [
       {
