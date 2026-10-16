@@ -400,6 +400,14 @@
     "category": "Media"
   },
   {
+    "name": "Image Cropper Next",
+    "path": "image-cropper-next",
+    "description": "The image cropper, rebuilt: a box over the image or a frame it moves under, keyboard, pinch and wheel, the crop as a file.",
+    "status": "Experimental",
+    "library": "ui-lab",
+    "category": "Media"
+  },
+  {
     "name": "Infinite Scroll",
     "path": "infinite-scroll",
     "description": "Load more content as the user scrolls.",

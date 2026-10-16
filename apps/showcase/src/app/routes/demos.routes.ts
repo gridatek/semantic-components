@@ -1669,6 +1669,25 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/image-cropper-next',
+    children: [
+      {
+        path: 'box-image-cropper-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/image-cropper-next/demos/box-image-cropper-next-demo').then(
+            (m) => m.BoxImageCropperNextDemo,
+          ),
+      },
+      {
+        path: 'avatar-image-cropper-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/image-cropper-next/demos/avatar-image-cropper-next-demo').then(
+            (m) => m.AvatarImageCropperNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/infinite-scroll',
     children: [
       {

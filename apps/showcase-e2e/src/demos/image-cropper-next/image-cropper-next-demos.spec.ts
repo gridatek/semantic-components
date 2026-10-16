@@ -1,0 +1,94 @@
+import { type Page, expect, test } from '@playwright/test';
+
+const selection = (page: Page) =>
+  page.locator('[data-slot="image-cropper-selection"]');
+const size = (page: Page) => page.getByText(/\d+\s+×\s+\d+ px/);
+
+test.describe('Crop box', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/demos/image-cropper-next/box-image-cropper-next-demo');
+    await expect(size(page)).toHaveText('960 × 640 px');
+  });
+
+  test('a ratio shapes the crop, pressed while it is the one', async ({
+    page,
+  }) => {
+    const square = page.getByRole('button', { name: '1:1' });
+    await square.click();
+    await expect(square).toHaveAttribute('aria-pressed', 'true');
+    await expect(size(page)).toHaveText('640 × 640 px');
+  });
+
+  test('the keyboard moves and resizes the crop', async ({ page }) => {
+    await expect(selection(page)).toHaveAccessibleName('Crop area');
+    const before = await selection(page).boundingBox();
+    await selection(page).focus();
+    await page.keyboard.press('ArrowLeft');
+    await expect
+      .poll(async () => (await selection(page).boundingBox())?.x)
+      .toBeLessThan(before?.x ?? 0);
+
+    await page.keyboard.press('Alt+ArrowUp');
+    await expect(size(page)).toHaveText('960 × 628 px');
+  });
+
+  test('the zoom buttons and the slider share the zoom', async ({ page }) => {
+    const zoom = page.getByRole('slider', { name: 'Zoom' });
+    await expect(page.getByRole('button', { name: 'Zoom out' })).toBeDisabled();
+    await page.getByRole('button', { name: 'Zoom in' }).click();
+    await expect(zoom).toHaveValue('1.25');
+    await expect(page.getByText('125%')).toBeVisible();
+  });
+
+  test('a quarter turn turns the crop with the image', async ({ page }) => {
+    await page.getByRole('button', { name: 'Rotate right' }).click();
+    // The image is upright now: its crop is too.
+    await expect(size(page)).toHaveText('640 × 960 px');
+  });
+
+  test('the crop is a file, shown and downloadable', async ({ page }) => {
+    await page.getByRole('button', { name: 'Crop', exact: true }).click();
+    const result = page.getByRole('img', { name: 'The cropped image' });
+    await expect(result).toBeVisible();
+    await expect
+      .poll(() => result.evaluate((img: HTMLImageElement) => img.naturalWidth))
+      .toBe(960);
+    await expect(page.getByRole('link', { name: 'Download' })).toHaveAttribute(
+      'download',
+      'crop.png',
+    );
+  });
+});
+
+test.describe('Avatar', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/demos/image-cropper-next/avatar-image-cropper-next-demo');
+    await expect(selection(page)).toBeVisible();
+  });
+
+  test('the image zooms under the frame: wheel and keys', async ({ page }) => {
+    const zoom = page.getByRole('slider', { name: 'Zoom' });
+    const start = Number(await zoom.inputValue());
+    const frame = await selection(page).boundingBox();
+    await page.mouse.move(
+      (frame?.x ?? 0) + (frame?.width ?? 0) / 2,
+      (frame?.y ?? 0) + (frame?.height ?? 0) / 2,
+    );
+    await page.mouse.wheel(0, -200);
+    await expect
+      .poll(async () => Number(await zoom.inputValue()))
+      .toBeGreaterThan(start);
+
+    const zoomed = Number(await zoom.inputValue());
+    await selection(page).focus();
+    await page.keyboard.press('-');
+    await expect
+      .poll(async () => Number(await zoom.inputValue()))
+      .toBeLessThan(zoomed);
+  });
+
+  test('the crop is the size asked', async ({ page }) => {
+    await page.getByRole('button', { name: 'Use this picture' }).click();
+    await expect(page.getByText('Cropped to 256 × 256 px.')).toBeVisible();
+  });
+});
