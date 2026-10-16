@@ -720,6 +720,14 @@
     "category": "Layout"
   },
   {
+    "name": "Scheduler",
+    "path": "scheduler",
+    "description": "Events in month, week and day views, built from parts: overlapping events side by side, all-day events, now.",
+    "status": "Experimental",
+    "library": "ui-lab",
+    "category": "Advanced"
+  },
+  {
     "name": "Scroll Area",
     "path": "scroll-area",
     "description": "A scrollable area with thin, styled scrollbars that appear on hover.",

@@ -2441,6 +2441,32 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/scheduler',
+    children: [
+      {
+        path: 'basic-scheduler-demo',
+        loadComponent: () =>
+          import('../pages/docs/scheduler/demos/basic-scheduler-demo').then(
+            (m) => m.BasicSchedulerDemo,
+          ),
+      },
+      {
+        path: 'month-scheduler-demo',
+        loadComponent: () =>
+          import('../pages/docs/scheduler/demos/month-scheduler-demo').then(
+            (m) => m.MonthSchedulerDemo,
+          ),
+      },
+      {
+        path: 'working-hours-scheduler-demo',
+        loadComponent: () =>
+          import('../pages/docs/scheduler/demos/working-hours-scheduler-demo').then(
+            (m) => m.WorkingHoursSchedulerDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/slider',
     children: [
       {
