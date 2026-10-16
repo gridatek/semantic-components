@@ -40,6 +40,8 @@ type Move = 'next' | 'previous' | 'first' | 'last';
     'data-slot': 'speed-dial-action',
     role: 'menuitem',
     tabindex: '-1',
+    // Not natively disabled: a menu item stays reachable.
+    '[attr.disabled]': 'null',
     '[attr.aria-disabled]': 'disabled() || null',
     '[style.translate]': 'arcAt()',
     '[style.transition-delay.ms]': 'delay()',

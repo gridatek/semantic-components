@@ -106,7 +106,11 @@ test('Controlled: open from outside; a disabled action does nothing', async ({
   await expect(page.getByText('Open: true')).toBeVisible();
   const remove = page.getByRole('menuitem', { name: 'Delete' });
   await expect(remove).toHaveAttribute('aria-disabled', 'true');
-  await remove.click();
+  // Reachable, from the keyboard; and done, nothing happens.
+  await page.getByRole('menuitem', { name: 'Edit' }).focus();
+  await page.keyboard.press('End');
+  await expect(remove).toBeFocused();
+  await page.keyboard.press('Enter');
   await expect(page.getByText('No action yet')).toBeVisible();
   await page.mouse.click(10, 10);
   await expect(page.getByText('Open: false')).toBeVisible();
