@@ -875,6 +875,46 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/color-picker-next',
+    children: [
+      {
+        path: 'basic-color-picker-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/color-picker-next/demos/basic-color-picker-next-demo').then(
+            (m) => m.BasicColorPickerNextDemo,
+          ),
+      },
+      {
+        path: 'alpha-color-picker-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/color-picker-next/demos/alpha-color-picker-next-demo').then(
+            (m) => m.AlphaColorPickerNextDemo,
+          ),
+      },
+      {
+        path: 'formats-color-picker-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/color-picker-next/demos/formats-color-picker-next-demo').then(
+            (m) => m.FormatsColorPickerNextDemo,
+          ),
+      },
+      {
+        path: 'swatches-color-picker-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/color-picker-next/demos/swatches-color-picker-next-demo').then(
+            (m) => m.SwatchesColorPickerNextDemo,
+          ),
+      },
+      {
+        path: 'form-color-picker-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/color-picker-next/demos/form-color-picker-next-demo').then(
+            (m) => m.FormColorPickerNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/combobox',
     children: [
       {

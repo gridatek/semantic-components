@@ -208,6 +208,14 @@
     "category": "Forms"
   },
   {
+    "name": "Color Picker Next",
+    "path": "color-picker-next",
+    "description": "The color picker, rebuilt: area and channel sliders with alpha, any CSS colour in, swatches, hex/rgb/hsl/oklch out; a form field.",
+    "status": "Experimental",
+    "library": "ui-lab",
+    "category": "Forms"
+  },
+  {
     "name": "Combobox",
     "path": "combobox",
     "description": "An autocomplete input with filtering.",

@@ -1,0 +1,145 @@
+import { Component, ViewEncapsulation } from '@angular/core';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { FormColorPickerNextDemo } from './form-color-picker-next-demo';
+
+@Component({
+  selector: 'app-form-color-picker-next-demo-container',
+  imports: [DemoContainer, FormColorPickerNextDemo],
+  template: `
+    <app-demo-container
+      title="Popover in a form"
+      [code]="code"
+      demoUrl="/demos/color-picker-next/form-color-picker-next-demo"
+    >
+      <app-form-color-picker-next-demo />
+    </app-demo-container>
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class FormColorPickerNextDemoContainer {
+  readonly code = `import { DecimalPipe } from '@angular/common';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { FormField, FormRoot, form, required } from '@angular/forms/signals';
+import {
+  ScButton,
+  ScField,
+  ScFieldErrors,
+  ScLabel,
+  ScPopover,
+  ScPopoverPortal,
+  ScPopoverProvider,
+  ScPopoverTrigger,
+} from '@semantic-components/ui';
+import {
+  ScColorPickerNext,
+  ScColorPickerNextArea,
+  ScColorPickerNextField,
+  ScColorPickerNextOption,
+  ScColorPickerNextSlider,
+  ScColorPickerNextSwatch,
+  ScColorPickerNextSwatches,
+} from '@semantic-components/ui-lab';
+
+/** A [formField]: the trigger shows the colour, the picker opens in a popover; required in the schema. */
+@Component({
+  selector: 'app-form-color-picker-next-demo',
+  imports: [
+    DecimalPipe,
+    ScColorPickerNext,
+    ScColorPickerNextArea,
+    ScColorPickerNextSlider,
+    ScColorPickerNextSwatch,
+    ScColorPickerNextField,
+    ScColorPickerNextSwatches,
+    ScColorPickerNextOption,
+    ScButton,
+    ScField,
+    ScLabel,
+    ScFieldErrors,
+    ScPopoverProvider,
+    ScPopoverTrigger,
+    ScPopoverPortal,
+    ScPopover,
+    FormField,
+    FormRoot,
+  ],
+  template: \`
+    <form [formRoot]="themeForm" class="w-72 space-y-4">
+      <div scField>
+        <label scLabel for="brand-colour">Brand colour</label>
+        <div
+          scColorPickerNext
+          #picker="scColorPickerNext"
+          [formField]="themeForm.brand"
+        >
+          <div scPopoverProvider>
+            <button
+              id="brand-colour"
+              scButton
+              scPopoverTrigger
+              variant="outline"
+              class="w-full justify-start font-mono"
+            >
+              <span scColorPickerNextSwatch class="size-5 rounded-sm"></span>
+              {{ model().brand || 'Choose a colour' }}
+            </button>
+            <ng-template scPopoverPortal>
+              <div scPopover class="w-64 space-y-3">
+                <div
+                  scColorPickerNextArea
+                  aria-label="Saturation and brightness"
+                  [attr.aria-valuetext]="
+                    'Saturation ' +
+                    (picker.hsva().s | number: '1.0-0') +
+                    '%, brightness ' +
+                    (picker.hsva().v | number: '1.0-0') +
+                    '%'
+                  "
+                ></div>
+                <input scColorPickerNextSlider="hue" aria-label="Hue" />
+                <div scColorPickerNextSwatches aria-label="Presets">
+                  @for (preset of presets; track preset.color) {
+                    <button [scColorPickerNextOption]="preset.color">
+                      <span class="sr-only">{{ preset.name }}</span>
+                    </button>
+                  }
+                </div>
+                <input scColorPickerNextField aria-label="Colour" />
+              </div>
+            </ng-template>
+          </div>
+        </div>
+        <p scFieldErrors></p>
+      </div>
+      <button scButton type="submit">Save</button>
+      @if (saved()) {
+        <p class="text-muted-foreground text-sm" role="status">
+          Saved: {{ model().brand }}
+        </p>
+      }
+    </form>
+  \`,
+  host: { class: 'flex w-full flex-col items-center gap-4' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class FormColorPickerNextDemo {
+  readonly model = signal({ brand: '' });
+  readonly saved = signal(false);
+  readonly themeForm = form(
+    this.model,
+    (path) => required(path.brand, { message: 'Choose a colour.' }),
+    { submission: { action: async () => this.saved.set(true) } },
+  );
+  readonly presets = [
+    { color: '#e11d48', name: 'Rose' },
+    { color: '#f97316', name: 'Orange' },
+    { color: '#eab308', name: 'Yellow' },
+    { color: '#22c55e', name: 'Green' },
+    { color: '#06b6d4', name: 'Cyan' },
+    { color: '#3b82f6', name: 'Blue' },
+    { color: '#8b5cf6', name: 'Violet' },
+    { color: '#18181b', name: 'Black' },
+  ];
+}`;
+}
