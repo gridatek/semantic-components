@@ -9,7 +9,7 @@ const time = (page: Page) =>
 
 test.describe('Player', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/demos/video-player-next/player-video-player-next-demo');
+    await page.goto('/demos/video-player/player-video-player-demo');
     await expect
       .poll(() => video(page).evaluate((v: HTMLVideoElement) => v.duration))
       .toBeGreaterThan(50);
@@ -78,7 +78,7 @@ test.describe('Player', () => {
 });
 
 test('Controlled: chapters jump, from outside', async ({ page }) => {
-  await page.goto('/demos/video-player-next/controlled-video-player-next-demo');
+  await page.goto('/demos/video-player/controlled-video-player-demo');
   const desert = page.getByRole('button', { name: /The desert/ });
   await expect(desert).toBeVisible();
   await desert.click();

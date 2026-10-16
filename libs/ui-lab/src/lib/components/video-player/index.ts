@@ -1,19 +1,20 @@
-export { ScVideoPlayer } from './video-player';
-export { ScVideoPlayerVideo } from './video-player-video';
+export {
+  ScVideoPlayer,
+  type ScVideoPlayerChapter,
+  type ScVideoPlayerTrack,
+} from './video-player';
+export { ScVideoPlayerCaptions } from './video-player-captions';
+export { ScVideoPlayerCaptionsDisplay } from './video-player-captions-display';
 export { ScVideoPlayerControls } from './video-player-controls';
-export { ScVideoPlayerPlayPause } from './video-player-play-pause';
-export { ScVideoPlayerProgress } from './video-player-progress';
-export { ScVideoPlayerSeek } from './video-player-seek';
-export { ScVideoPlayerVolume } from './video-player-volume';
-export { ScVideoPlayerMute } from './video-player-mute';
-export { ScVideoPlayerVolumeSlider } from './video-player-volume-slider';
-export { ScVideoPlayerTime } from './video-player-time';
 export { ScVideoPlayerFullscreen } from './video-player-fullscreen';
+export { ScVideoPlayerMedia } from './video-player-media';
+export { ScVideoPlayerMute } from './video-player-mute';
+export { ScVideoPlayerPictureInPicture } from './video-player-picture-in-picture';
+export { ScVideoPlayerPlay } from './video-player-play';
+export { ScVideoPlayerPreview } from './video-player-preview';
+export { ScVideoPlayerProgress } from './video-player-progress';
+export { ScVideoPlayerRate } from './video-player-rate';
+export { ScVideoPlayerSeek } from './video-player-seek';
 export { ScVideoPlayerSkip } from './video-player-skip';
-export { ScVideoPlayerSpeedOption } from './video-player-speed-option';
-export { ScVideoPlayerPip } from './video-player-pip';
-export { ScVideoPlayerBigPlay } from './video-player-big-play';
-export { ScVideoPlayerBufferingIndicator } from './video-player-buffering-indicator';
-export { ScVideoPlayerToolbar } from './video-player-toolbar';
-export { ScVideoPlayerSpacer } from './video-player-spacer';
-export type { ScVideoSource, ScVideoTrack } from './video-player-types';
+export { ScVideoPlayerTime } from './video-player-time';
+export { ScVideoPlayerVolume } from './video-player-volume';

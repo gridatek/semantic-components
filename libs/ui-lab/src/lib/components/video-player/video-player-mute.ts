@@ -1,27 +1,35 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { buttonVariants, cn, ɵwarnIfUnnamed } from '@semantic-components/ui';
-import { SC_VIDEO_PLAYER } from './video-player';
+import {
+  type ScButtonVariants,
+  buttonVariants,
+  cn,
+  ɵwarnIfUnnamed,
+} from '@semantic-components/ui';
+import { ScVideoPlayer } from './video-player';
 
-/** Mutes and unmutes (`aria-pressed` while muted): one name ("Mute"); show your icon from `player.isMuted()`. Write its icon and name it. */
+/** Mutes, pressed while muted. Write its icon and name it ("Mute"). */
 @Directive({
   selector: 'button[scVideoPlayerMute]',
   host: {
     type: 'button',
     'data-slot': 'video-player-mute',
-    '[attr.aria-pressed]': 'player.isMuted()',
-    '(click)': 'player.toggleMute()',
+    '[attr.aria-pressed]': 'player.muted()',
     '[class]': 'class()',
+    '(click)': 'player.muted.set(!player.muted())',
   },
 })
 export class ScVideoPlayerMute {
-  protected readonly player = inject(SC_VIDEO_PLAYER);
+  protected readonly player = inject(ScVideoPlayer);
+
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly variant = input<ScButtonVariants['variant']>('ghost');
+  readonly size = input<ScButtonVariants['size']>('icon-sm');
 
   protected readonly class = computed(() =>
     cn(
-      buttonVariants({ variant: 'ghost', size: 'icon' }),
-      'text-foreground',
-      '[&_svg]:size-5',
+      buttonVariants({ variant: this.variant(), size: this.size() }),
+      // Over the video: white.
+      'text-white hover:bg-white/15 hover:text-white dark:hover:bg-white/15 aria-pressed:bg-white/20',
       this.classInput(),
     ),
   );

@@ -6,14 +6,14 @@ import {
   input,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { ScVideoPlayerNext } from './video-player-next';
+import { ScVideoPlayer } from './video-player';
 
 /**
  * Where the captions show, over the video: above the controls while they
  * show. A live region, so they are read as they come.
  */
 @Component({
-  selector: 'div[scVideoPlayerNextCaptionsDisplay]',
+  selector: 'div[scVideoPlayerCaptionsDisplay]',
   template: `
     @for (line of player.cues(); track $index) {
       <span
@@ -29,8 +29,8 @@ import { ScVideoPlayerNext } from './video-player-next';
   },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScVideoPlayerNextCaptionsDisplay {
-  protected readonly player = inject(ScVideoPlayerNext);
+export class ScVideoPlayerCaptionsDisplay {
+  protected readonly player = inject(ScVideoPlayer);
 
   readonly classInput = input<string>('', { alias: 'class' });
 

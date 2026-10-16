@@ -1,44 +1,44 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScVideoPlayerNext,
-  ScVideoPlayerNextControls,
-  ScVideoPlayerNextMedia,
-  ScVideoPlayerNextPlay,
-  ScVideoPlayerNextProgress,
-  ScVideoPlayerNextSeek,
-  ScVideoPlayerNextTime,
+  ScVideoPlayer,
+  ScVideoPlayerControls,
+  ScVideoPlayerMedia,
+  ScVideoPlayerPlay,
+  ScVideoPlayerProgress,
+  ScVideoPlayerSeek,
+  ScVideoPlayerTime,
 } from '@semantic-components/ui-lab';
 import { SiPauseIcon, SiPlayIcon } from '@semantic-icons/lucide-icons';
 
 /** Only what you put in: play, the seek bar, the time. */
 @Component({
-  selector: 'app-minimal-video-player-next-demo',
+  selector: 'app-minimal-video-player-demo',
   imports: [
-    ScVideoPlayerNext,
-    ScVideoPlayerNextMedia,
-    ScVideoPlayerNextControls,
-    ScVideoPlayerNextProgress,
-    ScVideoPlayerNextSeek,
-    ScVideoPlayerNextPlay,
-    ScVideoPlayerNextTime,
+    ScVideoPlayer,
+    ScVideoPlayerMedia,
+    ScVideoPlayerControls,
+    ScVideoPlayerProgress,
+    ScVideoPlayerSeek,
+    ScVideoPlayerPlay,
+    ScVideoPlayerTime,
     SiPlayIcon,
     SiPauseIcon,
   ],
   template: `
     <div
-      scVideoPlayerNext
-      #player="scVideoPlayerNext"
+      scVideoPlayer
+      #player="scVideoPlayer"
       aria-label="Video: Sintel, the trailer"
       class="aspect-video w-full max-w-xl"
     >
       <video
-        scVideoPlayerNextMedia
+        scVideoPlayerMedia
         src="/media/sintel-trailer.mp4"
         poster="/media/sintel-trailer.jpg"
         preload="metadata"
       ></video>
-      <div scVideoPlayerNextControls class="flex-row items-center gap-2">
-        <button scVideoPlayerNextPlay>
+      <div scVideoPlayerControls class="flex-row items-center gap-2">
+        <button scVideoPlayerPlay>
           @if (player.paused()) {
             <svg siPlayIcon></svg>
             <span class="sr-only">Play</span>
@@ -47,9 +47,9 @@ import { SiPauseIcon, SiPlayIcon } from '@semantic-icons/lucide-icons';
             <span class="sr-only">Pause</span>
           }
         </button>
-        <div scVideoPlayerNextProgress class="flex-1">
+        <div scVideoPlayerProgress class="flex-1">
           <input
-            scVideoPlayerNextSeek
+            scVideoPlayerSeek
             aria-label="Seek"
             [attr.aria-valuetext]="
               player.formatTime(player.currentTime()) +
@@ -58,11 +58,11 @@ import { SiPauseIcon, SiPlayIcon } from '@semantic-icons/lucide-icons';
             "
           />
         </div>
-        <time scVideoPlayerNextTime="remaining"></time>
+        <time scVideoPlayerTime="remaining"></time>
       </div>
     </div>
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class MinimalVideoPlayerNextDemo {}
+export class MinimalVideoPlayerDemo {}

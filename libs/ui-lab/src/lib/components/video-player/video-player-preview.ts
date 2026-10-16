@@ -1,6 +1,6 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { ScVideoPlayerNext } from './video-player-next';
+import { ScVideoPlayer } from './video-player';
 
 /**
  * Above the seek bar, where the pointer is: your content — the time
@@ -8,7 +8,7 @@ import { ScVideoPlayerNext } from './video-player-next';
  * hovering or dragging; hidden from screen readers (the slider says it).
  */
 @Directive({
-  selector: '[scVideoPlayerNextPreview]',
+  selector: '[scVideoPlayerPreview]',
   host: {
     'data-slot': 'video-player-preview',
     'aria-hidden': 'true',
@@ -17,8 +17,8 @@ import { ScVideoPlayerNext } from './video-player-next';
     '[class]': 'class()',
   },
 })
-export class ScVideoPlayerNextPreview {
-  protected readonly player = inject(ScVideoPlayerNext);
+export class ScVideoPlayerPreview {
+  protected readonly player = inject(ScVideoPlayer);
 
   readonly classInput = input<string>('', { alias: 'class' });
 

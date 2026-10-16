@@ -1002,15 +1002,7 @@
   {
     "name": "Video Player",
     "path": "video-player",
-    "description": "A custom video player with controls.",
-    "status": "Experimental",
-    "library": "ui-lab",
-    "category": "Media"
-  },
-  {
-    "name": "Video Player Next",
-    "path": "video-player-next",
-    "description": "The video player, rebuilt: controls as parts, state two ways, captions, chapters, seek preview, keyboard shortcuts.",
+    "description": "A video player: controls as parts, state two ways, captions, chapters, seek preview, keyboard shortcuts.",
     "status": "Experimental",
     "library": "ui-lab",
     "category": "Media"

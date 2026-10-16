@@ -1,250 +1,66 @@
 # Video Player
 
-Full-featured HTML5 video player with composable controls, keyboard shortcuts, and fullscreen support.
+Your `<video>` and its tracks, controls as parts, its state two ways — with captions shown by the player, chapters and a preview on the seek bar, keyboard shortcuts, and the system's media controls.
 
-## Composable Architecture
+## Architecture
 
-The video player uses a **composable architecture** that gives you full control over layout and functionality.
-
-### Basic Usage
-
-```typescript
-import {
-  ScVideoPlayer,
-  ScVideoPlayerControls,
-  ScVideoPlayerPlayPause,
-  ScVideoPlayerProgress,
-  ScVideoPlayerTime,
-  ScVideoPlayerFullscreen,
-} from '@semantic-components/ui-lab';
-
-@Component({
-  imports: [
-    ScVideoPlayer,
-    ScVideoPlayerControls,
-    ScVideoPlayerPlayPause,
-    ScVideoPlayerProgress,
-    ScVideoPlayerTime,
-    ScVideoPlayerFullscreen,
-  ],
-  template: `
-    <div scVideoPlayer aria-label="Video player" #player="scVideoPlayer" [src]="'video.mp4'" [poster]="'poster.jpg'">
-      <div scVideoPlayerControls>
-        <div scVideoPlayerProgress>
-      <input scVideoPlayerSeek aria-label="Video progress" />
-    </div>
-        <div scVideoPlayerToolbar>
-          <button scVideoPlayerPlayPause>
-            <!-- Play/pause icon -->
-            <span class="sr-only">{{ player.isPlaying() ? 'Pause' : 'Play' }}</span>
-          </button>
-          <span scVideoPlayerTime></span>
-          <button scVideoPlayerFullscreen>
-            <!-- Fullscreen icon -->
-            <span class="sr-only">{{ player.isFullscreen() ? 'Exit fullscreen' : 'Enter fullscreen' }}</span>
-          </button>
-        </div>
-      </div>
-    </div>
-  `,
-})
+```
+scVideoPlayer (paused, currentTime, volume, muted, playbackRate, captions — two-way;
+│                  duration, buffered, waiting, ended, fullscreen, pictureInPicture, tracks, chapters, chapter, cues, preview)
+├── video[scVideoPlayerMedia] — yours: src / <source>s, poster, <track>s
+├── scVideoPlayerCaptionsDisplay — the captions, above the controls
+└── scVideoPlayerControls — hides while playing untouched
+    ├── scVideoPlayerProgress → input[scVideoPlayerSeek], scVideoPlayerPreview
+    └── buttons: Play, Skip, Mute, Captions, Rate, PictureInPicture, Fullscreen;
+        input[scVideoPlayerVolume]; time[scVideoPlayerTime]
 ```
 
-### Composable Components
-
-**`ScVideoPlayer`**
-
-- Root component that renders the video and provides context
-- **Selector**: `[scVideoPlayer]`
-- **Inputs**: `src`, `poster`
-- Manages playback state, volume, fullscreen, etc.
-
-**`ScVideoPlayerControls`**
-
-- Container for control elements (uses `<ng-content>`)
-- **Selector**: `div[scVideoPlayerControls]`
-- **Default position**: Absolute bottom with gradient overlay
-
-**`ScVideoPlayerToolbar`**
-
-- Flex container for control buttons
-- **Selector**: `div[scVideoPlayerToolbar]`
-
-**`ScVideoPlayerPlayPause`**
-
-- Play/pause toggle button
-- **Selector**: `button[scVideoPlayerPlayPause]`
-- **Auto state**: Reflects playing/paused state
-
-**`ScVideoPlayerProgress`**
-
-- Seek bar with buffering indicator
-- **Selector**: `div[scVideoPlayerProgress]`
-- Shows what is buffered, under your `input[scVideoPlayerSeek]` (the seek slider: name it)
-
-You write every control and name it (`aria-label`, or `[attr.aria-label]` from the player's state); the parts add the behaviour and styles.
-
-**`ScVideoPlayerVolume`**
-
-- The volume: holds `button[scVideoPlayerMute]` (mutes and unmutes, `aria-pressed` while muted — one name, "Mute") and `input[scVideoPlayerVolumeSlider]` (the volume, shown on hover or focus)
-- **Selector**: `div[scVideoPlayerVolume]`
-
-**`ScVideoPlayerTime`**
-
-- Current time / duration display
-- **Selector**: `span[scVideoPlayerTime]`
-- Automatically formats time
-
-**`ScVideoPlayerSkip`**
-
-- Skip forward/back button
-- **Selector**: `button[scVideoPlayerSkip]`
-- **Inputs**: `seconds` (required) — name it with `aria-label`
-
-**`ScVideoPlayerSpeedOption`**
-
-- A playback speed in your menu (a popover of yours): `[scVideoPlayerSpeedOption]="1.5"` sets it, `aria-pressed` when it is the player's
-- **Selector**: `button[scVideoPlayerSpeedOption]`
-
-**`ScVideoPlayerFullscreen`**
-
-- Fullscreen toggle
-- **Selector**: `button[scVideoPlayerFullscreen]`
-
-**`ScVideoPlayerPip`**
-
-- Picture-in-picture toggle
-- **Selector**: `button[scVideoPlayerPip]`
-
-**`ScVideoPlayerBigPlay`**
-
-- Large centered play button overlay
-- **Selector**: `button[scVideoPlayerBigPlay]`
-- Auto-hides when playing or buffering
-
-**`ScVideoPlayerBufferingIndicator`**
-
-- Buffering indicator directive
-- **Selector**: `svg[scVideoPlayerBufferingIndicator]`
-- Auto-hides when not buffering
-
-**`ScVideoPlayerSpacer`**
-
-- Flexible spacer for toolbar layout
-- **Selector**: `div[scVideoPlayerSpacer]`
-
-### Flexible Examples
-
-#### Minimal Player
+## Usage
 
 ```html
-<div scVideoPlayer aria-label="Video player" [src]="video">
-  <div scVideoPlayerControls>
-    <button scVideoPlayerPlayPause [attr.aria-label]="player.isPlaying() ? 'Pause' : 'Play'">Play</button>
-  </div>
-</div>
-```
-
-#### With Progress and Time
-
-```html
-<div scVideoPlayer aria-label="Video player" [src]="video">
-  <div scVideoPlayerControls>
-    <div scVideoPlayerProgress>
-      <input scVideoPlayerSeek aria-label="Video progress" />
-    </div>
-    <div scVideoPlayerToolbar>
-      <button scVideoPlayerPlayPause [attr.aria-label]="player.isPlaying() ? 'Pause' : 'Play'">⏯</button>
-      <span scVideoPlayerTime></span>
-    </div>
-  </div>
-</div>
-```
-
-#### Full-Featured Player
-
-```html
-<div scVideoPlayer aria-label="Video player" #player="scVideoPlayer" [src]="video" [poster]="poster">
-  <svg scVideoPlayerBufferingIndicator siLoaderIcon></svg>
-
-  <button scVideoPlayerBigPlay>
-    <!-- Play icon -->
-    <span class="sr-only">Play video</span>
-  </button>
+<div scVideoPlayer #player="scVideoPlayer" aria-label="Video: Sintel, the trailer" class="aspect-video">
+  <video scVideoPlayerMedia src="/sintel-trailer.mp4" poster="/sintel-trailer.jpg">
+    <track kind="captions" src="/sintel-trailer.en.vtt" srclang="en" label="English" />
+    <track kind="chapters" src="/sintel-trailer.chapters.vtt" srclang="en" />
+  </video>
+  <div scVideoPlayerCaptionsDisplay></div>
 
   <div scVideoPlayerControls>
     <div scVideoPlayerProgress>
-      <input scVideoPlayerSeek aria-label="Video progress" />
+      <input scVideoPlayerSeek aria-label="Seek" [attr.aria-valuetext]="player.formatTime(player.currentTime()) + ' of ' + player.formatTime(player.duration())" />
+      @if (player.preview(); as preview) {
+      <div scVideoPlayerPreview>{{ player.chapterAt(preview.time)?.title }} {{ player.formatTime(preview.time) }}</div>
+      }
     </div>
-
-    <div scVideoPlayerToolbar>
-      <button scVideoPlayerPlayPause [attr.aria-label]="player.isPlaying() ? 'Pause' : 'Play'">⏯</button>
-      <button scVideoPlayerSkip [seconds]="-10">⏪</button>
-      <button scVideoPlayerSkip [seconds]="10">⏩</button>
-
-      <div scVideoPlayerVolume>
-        <button scVideoPlayerMute><!-- your icon, from player.isMuted() --><span class="sr-only">Mute</span></button>
-        <input scVideoPlayerVolumeSlider aria-label="Volume" />
-      </div>
-
-      <span scVideoPlayerTime class="ml-2"></span>
-
-      <div scVideoPlayerSpacer></div>
-
-      <div scPopoverProvider side="top">
-        <button scButton scPopoverTrigger variant="ghost" size="icon" aria-label="Playback speed">{{ player.playbackRate() }}×</button>
-        <ng-template scPopoverPortal>
-          <div scPopover aria-label="Playback speed">
-            @for (speed of [0.5, 1, 1.5, 2]; track speed) {
-            <button [scVideoPlayerSpeedOption]="speed">{{ speed }}×</button>
-            }
-          </div>
-        </ng-template>
-      </div>
-      <button scVideoPlayerPip aria-label="Picture in picture">PiP</button>
-      <button scVideoPlayerFullscreen [attr.aria-label]="player.isFullscreen() ? 'Exit fullscreen' : 'Enter fullscreen'">⛶</button>
+    <div class="flex items-center gap-1">
+      <button scVideoPlayerPlay><svg siPlayIcon></svg><span class="sr-only">{{ player.paused() ? 'Play' : 'Pause' }}</span></button>
+      <time scVideoPlayerTime="current"></time> / <time scVideoPlayerTime="duration"></time>
+      <button scVideoPlayerCaptions><svg siCaptionsIcon></svg><span class="sr-only">Captions</span></button>
+      <button scVideoPlayerFullscreen><svg siMaximizeIcon></svg><span class="sr-only">Fullscreen</span></button>
     </div>
   </div>
 </div>
 ```
 
-## Types
+## State
 
-```typescript
-interface ScVideoSource {
-  src: string;
-  type?: string;
-  label?: string;
-}
+Two-way: `paused`, `currentTime`, `volume`, `muted`, `playbackRate`, `captions` (a track's id, or `null`). Read: `duration`, `buffered`, `waiting`, `ended`, `fullscreen`, `pictureInPicture`, `idle`, `tracks()` (captions and subtitles), `chapters()`, `chapter()` (the one playing), `cues()`, `preview()`. Methods: `toggle()`, `seekTo()`, `seekBy()`, `volumeBy()`, `toggleCaptions()`, `toggleFullscreen()`, `togglePictureInPicture()`, `formatTime()` (a time in the app's language), `chapterAt()`. `metadata` (`MediaMetadataInit`) shows in the system's media controls, whose keys play, pause and seek.
 
-interface ScVideoTrack {
-  src: string;
-  kind: 'subtitles' | 'captions' | 'descriptions' | 'chapters' | 'metadata';
-  srclang: string;
-  label: string;
-  default?: boolean;
-}
-```
+## Keyboard
 
-## Features
-
-- Composable architecture for maximum flexibility
-- Progress bar with buffering indicator
-- Volume slider with mute toggle
-- Playback speed selection
-- Skip forward/back buttons
-- Picture-in-picture support
-- Fullscreen mode
-- Keyboard navigation
-- Multiple video sources
-- Subtitle/caption support
-- Buffering indicator
-- Customizable controls layout
+Focused in the player (never page-wide): Space or K play / pause, J / L ±10 s, ← / → ±5 s, ↑ / ↓ volume, M mute, F fullscreen, C captions, 0–9 jump to that tenth, Home / End. Fields keep their keys; buttons keep Space and Enter.
 
 ## Accessibility
 
-- ARIA labels on all controls
-- Keyboard navigable
-- Screen reader friendly
-- Focus indicators
-- Semantic HTML structure
+- Name the player (`aria-label`), every button (visually hidden text) and the sliders; write the seek slider's `aria-valuetext` with `formatTime()`.
+- Captions are shown by the player — a polite live region, above the controls, never hidden by them; the browser's own rendering is off.
+- Toggles (mute, captions, a speed, fullscreen, picture-in-picture) are `aria-pressed`.
+- The controls hide only while playing untouched — never while focused in them, or paused.
+
+## Styling
+
+Over the video, the parts are white: buttons from `buttonVariants()` (`ghost`, `icon-sm`), sliders recoloured. Restyle from their classes.
+
+## Not here
+
+Streaming (HLS, DASH: bring hls.js or shaka-player and attach it to the video), ads, quality switching, YouTube or Vimeo embeds.

@@ -1,43 +1,23 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { PlayerVideoPlayerNextDemo } from './player-video-player-next-demo';
-
-@Component({
-  selector: 'app-player-video-player-next-demo-container',
-  imports: [DemoContainer, PlayerVideoPlayerNextDemo],
-  template: `
-    <app-demo-container
-      title="Player"
-      [code]="code"
-      demoUrl="/demos/video-player-next/player-video-player-next-demo"
-    >
-      <app-player-video-player-next-demo />
-    </app-demo-container>
-  `,
-  host: { class: 'block w-full' },
-  encapsulation: ViewEncapsulation.None,
-})
-export class PlayerVideoPlayerNextDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
+import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import { ScRadio, ScRadioField, ScRadioGroup } from '@semantic-components/ui';
 import {
-  ScVideoPlayerNext,
-  ScVideoPlayerNextCaptions,
-  ScVideoPlayerNextCaptionsDisplay,
-  ScVideoPlayerNextControls,
-  ScVideoPlayerNextFullscreen,
-  ScVideoPlayerNextMedia,
-  ScVideoPlayerNextMute,
-  ScVideoPlayerNextPictureInPicture,
-  ScVideoPlayerNextPlay,
-  ScVideoPlayerNextPreview,
-  ScVideoPlayerNextProgress,
-  ScVideoPlayerNextRate,
-  ScVideoPlayerNextSeek,
-  ScVideoPlayerNextSkip,
-  ScVideoPlayerNextTime,
-  ScVideoPlayerNextVolume,
+  ScVideoPlayer,
+  ScVideoPlayerCaptions,
+  ScVideoPlayerCaptionsDisplay,
+  ScVideoPlayerControls,
+  ScVideoPlayerFullscreen,
+  ScVideoPlayerMedia,
+  ScVideoPlayerMute,
+  ScVideoPlayerPictureInPicture,
+  ScVideoPlayerPlay,
+  ScVideoPlayerPreview,
+  ScVideoPlayerProgress,
+  ScVideoPlayerRate,
+  ScVideoPlayerSeek,
+  ScVideoPlayerSkip,
+  ScVideoPlayerTime,
+  ScVideoPlayerVolume,
 } from '@semantic-components/ui-lab';
 import {
   SiCaptionsIcon,
@@ -55,24 +35,24 @@ import {
 
 /** Everything: captions in two languages, chapters and a preview on the seek bar, speeds, picture-in-picture, fullscreen — and the keys, once focused. */
 @Component({
-  selector: 'app-player-video-player-next-demo',
+  selector: 'app-player-video-player-demo',
   imports: [
-    ScVideoPlayerNext,
-    ScVideoPlayerNextMedia,
-    ScVideoPlayerNextCaptionsDisplay,
-    ScVideoPlayerNextControls,
-    ScVideoPlayerNextProgress,
-    ScVideoPlayerNextSeek,
-    ScVideoPlayerNextPreview,
-    ScVideoPlayerNextPlay,
-    ScVideoPlayerNextSkip,
-    ScVideoPlayerNextMute,
-    ScVideoPlayerNextVolume,
-    ScVideoPlayerNextTime,
-    ScVideoPlayerNextRate,
-    ScVideoPlayerNextCaptions,
-    ScVideoPlayerNextPictureInPicture,
-    ScVideoPlayerNextFullscreen,
+    ScVideoPlayer,
+    ScVideoPlayerMedia,
+    ScVideoPlayerCaptionsDisplay,
+    ScVideoPlayerControls,
+    ScVideoPlayerProgress,
+    ScVideoPlayerSeek,
+    ScVideoPlayerPreview,
+    ScVideoPlayerPlay,
+    ScVideoPlayerSkip,
+    ScVideoPlayerMute,
+    ScVideoPlayerVolume,
+    ScVideoPlayerTime,
+    ScVideoPlayerRate,
+    ScVideoPlayerCaptions,
+    ScVideoPlayerPictureInPicture,
+    ScVideoPlayerFullscreen,
     SiPlayIcon,
     SiPauseIcon,
     SiRotateCcwIcon,
@@ -89,10 +69,10 @@ import {
     ScRadio,
     FormField,
   ],
-  template: \`
+  template: `
     <div
-      scVideoPlayerNext
-      #player="scVideoPlayerNext"
+      scVideoPlayer
+      #player="scVideoPlayer"
       aria-label="Video: Sintel, the trailer"
       [captions]="captions()"
       (captionsChange)="setCaptions($event)"
@@ -100,7 +80,7 @@ import {
       class="aspect-video w-full max-w-2xl"
     >
       <video
-        scVideoPlayerNextMedia
+        scVideoPlayerMedia
         src="/media/sintel-trailer.mp4"
         poster="/media/sintel-trailer.jpg"
         preload="metadata"
@@ -123,7 +103,7 @@ import {
           srclang="en"
         />
       </video>
-      <div scVideoPlayerNextCaptionsDisplay></div>
+      <div scVideoPlayerCaptionsDisplay></div>
 
       @if (player.waiting()) {
         <svg
@@ -133,7 +113,7 @@ import {
       }
       @if (player.paused()) {
         <button
-          scVideoPlayerNextPlay
+          scVideoPlayerPlay
           size="icon-lg"
           class="absolute inset-0 m-auto size-16 rounded-full bg-black/50 [&_svg]:size-7"
         >
@@ -142,10 +122,10 @@ import {
         </button>
       }
 
-      <div scVideoPlayerNextControls>
-        <div scVideoPlayerNextProgress>
+      <div scVideoPlayerControls>
+        <div scVideoPlayerProgress>
           <input
-            scVideoPlayerNextSeek
+            scVideoPlayerSeek
             aria-label="Seek"
             [attr.aria-valuetext]="
               player.formatTime(player.currentTime()) +
@@ -154,7 +134,7 @@ import {
             "
           />
           @if (player.preview(); as preview) {
-            <div scVideoPlayerNextPreview>
+            <div scVideoPlayerPreview>
               {{ player.chapterAt(preview.time)?.title }}
               <div class="font-medium">
                 {{ player.formatTime(preview.time) }}
@@ -163,7 +143,7 @@ import {
           }
         </div>
         <div class="flex items-center gap-1">
-          <button scVideoPlayerNextPlay>
+          <button scVideoPlayerPlay>
             @if (player.paused()) {
               <svg siPlayIcon></svg>
               <span class="sr-only">Play</span>
@@ -172,15 +152,15 @@ import {
               <span class="sr-only">Pause</span>
             }
           </button>
-          <button [scVideoPlayerNextSkip]="-10">
+          <button [scVideoPlayerSkip]="-10">
             <svg siRotateCcwIcon></svg>
             <span class="sr-only">Back 10 seconds</span>
           </button>
-          <button [scVideoPlayerNextSkip]="10">
+          <button [scVideoPlayerSkip]="10">
             <svg siRotateCwIcon></svg>
             <span class="sr-only">Forward 10 seconds</span>
           </button>
-          <button scVideoPlayerNextMute>
+          <button scVideoPlayerMute>
             @if (player.muted()) {
               <svg siVolumeXIcon></svg>
             } @else {
@@ -189,11 +169,11 @@ import {
             <span class="sr-only">Mute</span>
           </button>
           <div class="flex w-20 shrink-0">
-            <input scVideoPlayerNextVolume aria-label="Volume" />
+            <input scVideoPlayerVolume aria-label="Volume" />
           </div>
           <span class="ms-1 shrink-0 text-xs whitespace-nowrap">
-            <time scVideoPlayerNextTime="current"></time> /
-            <time scVideoPlayerNextTime="duration"></time>
+            <time scVideoPlayerTime="current"></time> /
+            <time scVideoPlayerTime="duration"></time>
           </span>
           @if (player.chapter(); as chapter) {
             <span class="ms-2 truncate text-xs text-white/80"
@@ -203,7 +183,7 @@ import {
           <div role="group" aria-label="Speed" class="ms-auto flex">
             @for (rate of rates; track rate) {
               <button
-                [scVideoPlayerNextRate]="rate"
+                [scVideoPlayerRate]="rate"
                 size="sm"
                 class="px-1.5 text-xs"
               >
@@ -211,15 +191,15 @@ import {
               </button>
             }
           </div>
-          <button scVideoPlayerNextCaptions>
+          <button scVideoPlayerCaptions>
             <svg siCaptionsIcon></svg>
             <span class="sr-only">Captions</span>
           </button>
-          <button scVideoPlayerNextPictureInPicture>
+          <button scVideoPlayerPictureInPicture>
             <svg siPictureInPicture2Icon></svg>
             <span class="sr-only">Picture in picture</span>
           </button>
-          <button scVideoPlayerNextFullscreen>
+          <button scVideoPlayerFullscreen>
             @if (player.fullscreen()) {
               <svg siMinimizeIcon></svg>
             } @else {
@@ -260,11 +240,11 @@ import {
         }
       </div>
     </div>
-  \`,
+  `,
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class PlayerVideoPlayerNextDemo {
+export class PlayerVideoPlayerDemo {
   readonly settings = signal({ captions: 'off' });
   readonly settingsForm = form(this.settings);
   readonly captions = computed(() =>
@@ -275,5 +255,4 @@ export class PlayerVideoPlayerNextDemo {
   setCaptions(id: string | null) {
     this.settings.set({ captions: id ?? 'off' });
   }
-}`;
 }

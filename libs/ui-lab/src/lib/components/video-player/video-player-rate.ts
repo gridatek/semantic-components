@@ -5,22 +5,23 @@ import {
   cn,
   ɵwarnIfUnnamed,
 } from '@semantic-components/ui';
-import { ScVideoPlayerNext } from './video-player-next';
+import { ScVideoPlayer } from './video-player';
 
-/** Picture-in-picture, pressed while in it. Write its icon and name it ("Picture in picture"). */
+/** Plays at its speed (`[scVideoPlayerRate]="1.5"`), pressed while it is the one. Write its text ("1.5×"). */
 @Directive({
-  selector: 'button[scVideoPlayerNextPictureInPicture]',
+  selector: 'button[scVideoPlayerRate]',
   host: {
     type: 'button',
-    'data-slot': 'video-player-picture-in-picture',
-    '[attr.aria-pressed]': 'player.pictureInPicture()',
+    'data-slot': 'video-player-rate',
+    '[attr.aria-pressed]': 'player.playbackRate() === rate()',
     '[class]': 'class()',
-    '(click)': 'player.togglePictureInPicture()',
+    '(click)': 'player.playbackRate.set(rate())',
   },
 })
-export class ScVideoPlayerNextPictureInPicture {
-  protected readonly player = inject(ScVideoPlayerNext);
+export class ScVideoPlayerRate {
+  protected readonly player = inject(ScVideoPlayer);
 
+  readonly rate = input.required<number>({ alias: 'scVideoPlayerRate' });
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('ghost');
   readonly size = input<ScButtonVariants['size']>('icon-sm');
@@ -35,6 +36,6 @@ export class ScVideoPlayerNextPictureInPicture {
   );
 
   constructor() {
-    ɵwarnIfUnnamed('scVideoPlayerNextPictureInPicture');
+    ɵwarnIfUnnamed('scVideoPlayerRate');
   }
 }

@@ -5,22 +5,21 @@ import {
   cn,
   ɵwarnIfUnnamed,
 } from '@semantic-components/ui';
-import { ScVideoPlayerNext } from './video-player-next';
+import { ScVideoPlayer } from './video-player';
 
-/** Captions on or off, pressed while on; disabled without a track. Write its icon and name it ("Captions"). */
+/** Picture-in-picture, pressed while in it. Write its icon and name it ("Picture in picture"). */
 @Directive({
-  selector: 'button[scVideoPlayerNextCaptions]',
+  selector: 'button[scVideoPlayerPictureInPicture]',
   host: {
     type: 'button',
-    'data-slot': 'video-player-captions',
-    '[attr.aria-pressed]': 'player.captions() !== null',
-    '[disabled]': '!player.tracks().length',
+    'data-slot': 'video-player-picture-in-picture',
+    '[attr.aria-pressed]': 'player.pictureInPicture()',
     '[class]': 'class()',
-    '(click)': 'player.toggleCaptions()',
+    '(click)': 'player.togglePictureInPicture()',
   },
 })
-export class ScVideoPlayerNextCaptions {
-  protected readonly player = inject(ScVideoPlayerNext);
+export class ScVideoPlayerPictureInPicture {
+  protected readonly player = inject(ScVideoPlayer);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('ghost');
@@ -36,6 +35,6 @@ export class ScVideoPlayerNextCaptions {
   );
 
   constructor() {
-    ɵwarnIfUnnamed('scVideoPlayerNextCaptions');
+    ɵwarnIfUnnamed('scVideoPlayerPictureInPicture');
   }
 }

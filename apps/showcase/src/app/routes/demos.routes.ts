@@ -4324,36 +4324,24 @@ export const demosRoutes: Route[] = [
     path: 'demos/video-player',
     children: [
       {
-        path: 'basic-video-player-demo',
+        path: 'player-video-player-demo',
         loadComponent: () =>
-          import('../pages/docs/video-player/demos/video-player-demo').then(
-            (m) => m.VideoPlayerDemo,
-          ),
-      },
-    ],
-  },
-  {
-    path: 'demos/video-player-next',
-    children: [
-      {
-        path: 'player-video-player-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/video-player-next/demos/player-video-player-next-demo').then(
-            (m) => m.PlayerVideoPlayerNextDemo,
+          import('../pages/docs/video-player/demos/player-video-player-demo').then(
+            (m) => m.PlayerVideoPlayerDemo,
           ),
       },
       {
-        path: 'minimal-video-player-next-demo',
+        path: 'minimal-video-player-demo',
         loadComponent: () =>
-          import('../pages/docs/video-player-next/demos/minimal-video-player-next-demo').then(
-            (m) => m.MinimalVideoPlayerNextDemo,
+          import('../pages/docs/video-player/demos/minimal-video-player-demo').then(
+            (m) => m.MinimalVideoPlayerDemo,
           ),
       },
       {
-        path: 'controlled-video-player-next-demo',
+        path: 'controlled-video-player-demo',
         loadComponent: () =>
-          import('../pages/docs/video-player-next/demos/controlled-video-player-next-demo').then(
-            (m) => m.ControlledVideoPlayerNextDemo,
+          import('../pages/docs/video-player/demos/controlled-video-player-demo').then(
+            (m) => m.ControlledVideoPlayerDemo,
           ),
       },
     ],

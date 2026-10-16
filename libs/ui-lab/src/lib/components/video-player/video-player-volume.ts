@@ -1,24 +1,38 @@
-import { Directive, computed, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { Directive, computed, effect, inject, untracked } from '@angular/core';
+import { ScSlider, bindInput, ɵwarnIfUnnamed } from '@semantic-components/ui';
+import { ScVideoPlayer } from './video-player';
 
-/** The volume: mute, and the volume slider shown on hover. */
+/** The volume: your `input`, a slider from 0 to 1 (0 while muted). Name it. */
 @Directive({
-  selector: 'div[scVideoPlayerVolume]',
+  selector: 'input[scVideoPlayerVolume]',
+  hostDirectives: [ScSlider],
   host: {
     'data-slot': 'video-player-volume',
-    '[style.--primary]': '"oklch(1 0 0)"',
-    '[style.--muted]': '"oklch(1 0 0 / 0.3)"',
-    '[style.--ring]': '"oklch(1 0 0 / 0.5)"',
-    '[class]': 'class()',
+    // Over the video: white, on a faint track.
+    style: '--primary: white; --muted: rgb(255 255 255 / 0.3)',
   },
 })
 export class ScVideoPlayerVolume {
-  readonly classInput = input<string>('', { alias: 'class' });
+  private readonly player = inject(ScVideoPlayer);
+  private readonly slider = inject(ScSlider);
 
-  protected readonly class = computed(() =>
-    cn(
-      'group/volume flex items-center gap-1 [&_[data-slot=video-player-volume-slider]]:h-1 [&_[data-slot=video-player-volume-slider]]:w-0 [&_[data-slot=video-player-volume-slider]]:opacity-0 [&_[data-slot=video-player-volume-slider]]:transition-all hover:[&_[data-slot=video-player-volume-slider]]:w-20 hover:[&_[data-slot=video-player-volume-slider]]:opacity-100 focus-within:[&_[data-slot=video-player-volume-slider]]:w-20 focus-within:[&_[data-slot=video-player-volume-slider]]:opacity-100',
-      this.classInput(),
-    ),
+  private readonly shown = computed(() =>
+    this.player.muted() ? 0 : this.player.volume(),
   );
+
+  constructor() {
+    ɵwarnIfUnnamed('scVideoPlayerVolume');
+    bindInput(this.slider.min, 0);
+    bindInput(this.slider.max, 1);
+    bindInput(this.slider.step, 0.05);
+    effect(() => {
+      const value = this.shown();
+      untracked(() => this.slider.value.set(value));
+    });
+    this.slider.value.subscribe((value) => {
+      if (value === this.shown()) return;
+      this.player.volume.set(value);
+      this.player.muted.set(value === 0);
+    });
+  }
 }

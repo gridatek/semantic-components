@@ -5,11 +5,11 @@ import {
   cn,
   ɵwarnIfUnnamed,
 } from '@semantic-components/ui';
-import { ScVideoPlayerNext } from './video-player-next';
+import { ScVideoPlayer } from './video-player';
 
 /** Plays or pauses. Write its icon and name from `player.paused()` ("Play" / "Pause"). */
 @Directive({
-  selector: 'button[scVideoPlayerNextPlay]',
+  selector: 'button[scVideoPlayerPlay]',
   host: {
     type: 'button',
     'data-slot': 'video-player-play',
@@ -17,8 +17,8 @@ import { ScVideoPlayerNext } from './video-player-next';
     '(click)': 'player.toggle()',
   },
 })
-export class ScVideoPlayerNextPlay {
-  protected readonly player = inject(ScVideoPlayerNext);
+export class ScVideoPlayerPlay {
+  protected readonly player = inject(ScVideoPlayer);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('ghost');
@@ -34,6 +34,6 @@ export class ScVideoPlayerNextPlay {
   );
 
   constructor() {
-    ɵwarnIfUnnamed('scVideoPlayerNextPlay');
+    ɵwarnIfUnnamed('scVideoPlayerPlay');
   }
 }

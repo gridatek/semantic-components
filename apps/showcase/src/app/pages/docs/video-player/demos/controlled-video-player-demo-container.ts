@@ -1,25 +1,45 @@
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { ControlledVideoPlayerDemo } from './controlled-video-player-demo';
+
+@Component({
+  selector: 'app-controlled-video-player-demo-container',
+  imports: [DemoContainer, ControlledVideoPlayerDemo],
+  template: `
+    <app-demo-container
+      title="Controlled"
+      [code]="code"
+      demoUrl="/demos/video-player/controlled-video-player-demo"
+    >
+      <app-controlled-video-player-demo />
+    </app-demo-container>
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class ControlledVideoPlayerDemoContainer {
+  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
 import {
-  ScVideoPlayerNext,
-  ScVideoPlayerNextMedia,
+  ScVideoPlayer,
+  ScVideoPlayerMedia,
 } from '@semantic-components/ui-lab';
 
 /** Its state is yours, two ways: chapters as a list that jumps, and the player played, paused and timed from outside. */
 @Component({
-  selector: 'app-controlled-video-player-next-demo',
-  imports: [ScButton, ScVideoPlayerNext, ScVideoPlayerNextMedia],
-  template: `
+  selector: 'app-controlled-video-player-demo',
+  imports: [ScButton, ScVideoPlayer, ScVideoPlayerMedia],
+  template: \`
     <div
-      scVideoPlayerNext
-      #player="scVideoPlayerNext"
+      scVideoPlayer
+      #player="scVideoPlayer"
       aria-label="Video: Sintel, the trailer"
       [(paused)]="paused"
       [(currentTime)]="time"
       class="aspect-video w-full max-w-md"
     >
       <video
-        scVideoPlayerNextMedia
+        scVideoPlayerMedia
         src="/media/sintel-trailer.mp4"
         poster="/media/sintel-trailer.jpg"
         preload="metadata"
@@ -73,11 +93,12 @@ import {
         </ol>
       </nav>
     </div>
-  `,
+  \`,
   host: { class: 'flex w-full flex-wrap justify-center gap-6' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ControlledVideoPlayerNextDemo {
+export class ControlledVideoPlayerDemo {
   readonly paused = signal(true);
   readonly time = signal(0);
+}`;
 }

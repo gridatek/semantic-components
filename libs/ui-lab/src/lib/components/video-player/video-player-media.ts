@@ -7,7 +7,7 @@ import {
   input,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { ScVideoPlayerNext } from './video-player-next';
+import { ScVideoPlayer } from './video-player';
 
 /**
  * Your `video`, in the player: its `src` (or `<source>`s), `poster`, and
@@ -15,7 +15,7 @@ import { ScVideoPlayerNext } from './video-player-next';
  * player's parts. A click plays or pauses it.
  */
 @Directive({
-  selector: 'video[scVideoPlayerNextMedia]',
+  selector: 'video[scVideoPlayerMedia]',
   host: {
     'data-slot': 'video-player-media',
     playsinline: '',
@@ -38,8 +38,8 @@ import { ScVideoPlayerNext } from './video-player-next';
     '(leavepictureinpicture)': 'player.pictureInPicture.set(false)',
   },
 })
-export class ScVideoPlayerNextMedia {
-  protected readonly player = inject(ScVideoPlayerNext);
+export class ScVideoPlayerMedia {
+  protected readonly player = inject(ScVideoPlayer);
   private readonly element =
     inject<ElementRef<HTMLVideoElement>>(ElementRef).nativeElement;
 

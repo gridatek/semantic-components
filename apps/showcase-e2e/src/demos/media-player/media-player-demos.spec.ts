@@ -29,32 +29,3 @@ test.describe('Audio Player Demo', () => {
     await expect(page.getByText('0:00').first()).toBeVisible();
   });
 });
-
-test.describe('Video Player Demo', () => {
-  test.beforeEach(async ({ page }) => {
-    await page.goto('/demos/video-player/basic-video-player-demo');
-    // The controls show while the pointer is over the player.
-    await page.locator('[scVideoPlayer]').hover();
-  });
-
-  test('mute is a toggle', async ({ page }) => {
-    const mute = page.getByRole('button', { name: 'Mute' });
-    await expect(mute).toHaveAttribute('aria-pressed', 'false');
-    await mute.click();
-    await expect(mute).toHaveAttribute('aria-pressed', 'true');
-  });
-
-  test('the speed menu sets the playback speed', async ({ page }) => {
-    const trigger = page.getByRole('button', { name: 'Playback speed' });
-    await expect(trigger).toHaveText('1×');
-    await trigger.click();
-    const option = page.getByRole('button', { name: '1.5×' });
-    await option.click();
-    await expect(trigger).toHaveText('1.5×');
-    await trigger.click();
-    await expect(page.getByRole('button', { name: '1.5×' })).toHaveAttribute(
-      'aria-pressed',
-      'true',
-    );
-  });
-});

@@ -1,29 +1,44 @@
-import {
-  Component,
-  ViewEncapsulation,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { SC_VIDEO_PLAYER } from './video-player';
+import { ScVideoPlayer } from './video-player';
 
-@Component({
-  selector: 'span[scVideoPlayerTime]',
-  template: `
-    {{ player.formatTime(player.currentTime()) }} /
-    {{ player.formatTime(player.duration()) }}
-  `,
+/**
+ * A time, in the app's language: `scVideoPlayerTime="current"`,
+ * `"duration"` or `"remaining"`.
+ */
+@Directive({
+  selector: 'time[scVideoPlayerTime]',
   host: {
+    'data-slot': 'video-player-time',
+    '[textContent]': 'text()',
     '[class]': 'class()',
   },
-  encapsulation: ViewEncapsulation.None,
 })
 export class ScVideoPlayerTime {
-  protected readonly player = inject(SC_VIDEO_PLAYER);
+  private readonly player = inject(ScVideoPlayer);
+
+  readonly which = input<'current' | 'duration' | 'remaining'>('current', {
+    alias: 'scVideoPlayerTime',
+  });
   readonly classInput = input<string>('', { alias: 'class' });
 
+  protected readonly text = computed(() => {
+    const duration = this.player.duration();
+    const current = this.player.currentTime();
+    switch (this.which()) {
+      case 'duration':
+        return this.player.formatTime(duration);
+      case 'remaining':
+        return `-${this.player.formatTime(duration - current)}`;
+      default:
+        return this.player.formatTime(current);
+    }
+  });
+
   protected readonly class = computed(() =>
-    cn('text-sm text-white', this.classInput()),
+    cn(
+      'text-xs whitespace-nowrap text-white/90 tabular-nums',
+      this.classInput(),
+    ),
   );
 }
