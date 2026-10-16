@@ -224,6 +224,14 @@
     "category": "Overlay"
   },
   {
+    "name": "Compare",
+    "path": "compare",
+    "description": "Two things compared, split by a divider: photos before and after, two themes, any content.",
+    "status": "Experimental",
+    "library": "ui-lab",
+    "category": "Media"
+  },
+  {
     "name": "Confetti",
     "path": "confetti",
     "description": "Celebration animation effects using canvas-confetti.",

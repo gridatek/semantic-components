@@ -1596,6 +1596,46 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/compare',
+    children: [
+      {
+        path: 'basic-compare-demo',
+        loadComponent: () =>
+          import('../pages/docs/compare/demos/basic-compare-demo').then(
+            (m) => m.BasicCompareDemo,
+          ),
+      },
+      {
+        path: 'vertical-compare-demo',
+        loadComponent: () =>
+          import('../pages/docs/compare/demos/vertical-compare-demo').then(
+            (m) => m.VerticalCompareDemo,
+          ),
+      },
+      {
+        path: 'hover-compare-demo',
+        loadComponent: () =>
+          import('../pages/docs/compare/demos/hover-compare-demo').then(
+            (m) => m.HoverCompareDemo,
+          ),
+      },
+      {
+        path: 'handle-compare-demo',
+        loadComponent: () =>
+          import('../pages/docs/compare/demos/handle-compare-demo').then(
+            (m) => m.HandleCompareDemo,
+          ),
+      },
+      {
+        path: 'content-compare-demo',
+        loadComponent: () =>
+          import('../pages/docs/compare/demos/content-compare-demo').then(
+            (m) => m.ContentCompareDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/image-compare',
     children: [
       {
