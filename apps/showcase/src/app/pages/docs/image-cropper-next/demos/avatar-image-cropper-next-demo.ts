@@ -2,7 +2,6 @@ import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import { ScButton, ScSlider } from '@semantic-components/ui';
 import {
   ScImageCropperNext,
-  ScImageCropperNextGrid,
   ScImageCropperNextHandle,
   ScImageCropperNextImage,
   ScImageCropperNextPreview,
@@ -22,7 +21,6 @@ import {
     ScImageCropperNextStage,
     ScImageCropperNextImage,
     ScImageCropperNextSelection,
-    ScImageCropperNextGrid,
     ScImageCropperNextHandle,
     ScImageCropperNextPreview,
     ScImageCropperNextPreviewImage,
@@ -44,7 +42,6 @@ import {
           alt="Mountains at dawn"
         />
         <div scImageCropperNextSelection aria-label="Profile picture">
-          <div scImageCropperNextGrid></div>
           @for (handle of handles; track handle) {
             <div [scImageCropperNextHandle]="handle"></div>
           }
