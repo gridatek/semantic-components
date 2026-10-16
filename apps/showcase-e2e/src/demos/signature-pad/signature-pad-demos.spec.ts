@@ -22,7 +22,7 @@ async function draw(page: Page, from = 0.2, to = 0.7) {
 
 test.describe('Basic', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/demos/signature-pad-next/basic-signature-pad-next-demo');
+    await page.goto('/demos/signature-pad/basic-signature-pad-demo');
   });
 
   test('draws, undoes, redoes and clears', async ({ page }) => {
@@ -59,7 +59,7 @@ test.describe('Basic', () => {
 });
 
 test('Pens: the colour and width chosen', async ({ page }) => {
-  await page.goto('/demos/signature-pad-next/pens-signature-pad-next-demo');
+  await page.goto('/demos/signature-pad/pens-signature-pad-demo');
   const blue = page.getByRole('button', { name: 'Blue' });
   await blue.click();
   await expect(blue).toHaveAttribute('aria-pressed', 'true');
@@ -72,7 +72,7 @@ test('Pens: the colour and width chosen', async ({ page }) => {
 });
 
 test('Draw or type: a typed name signs', async ({ page }) => {
-  await page.goto('/demos/signature-pad-next/type-signature-pad-next-demo');
+  await page.goto('/demos/signature-pad/type-signature-pad-demo');
   await expect(page.getByText('Not signed')).toBeVisible();
   await page.getByRole('tab', { name: 'Type' }).click();
   await page.getByLabel('Type your name').fill('Ada Lovelace');
@@ -83,7 +83,7 @@ test('Draw or type: a typed name signs', async ({ page }) => {
 });
 
 test('Form: required, then signed', async ({ page }) => {
-  await page.goto('/demos/signature-pad-next/form-signature-pad-next-demo');
+  await page.goto('/demos/signature-pad/form-signature-pad-demo');
   await page.getByRole('button', { name: 'Sign', exact: true }).click();
   await expect(page.getByText('Sign above.')).toBeVisible();
   await expect(surface(page)).toHaveAttribute('data-invalid', 'true');
@@ -95,7 +95,7 @@ test('Form: required, then signed', async ({ page }) => {
 });
 
 test('Export: drawn again, and exported trimmed', async ({ page }) => {
-  await page.goto('/demos/signature-pad-next/export-signature-pad-next-demo');
+  await page.goto('/demos/signature-pad/export-signature-pad-demo');
   await draw(page);
   // The read-only copy draws the same value.
   await expect(

@@ -778,15 +778,7 @@
   {
     "name": "Signature Pad",
     "path": "signature-pad",
-    "description": "A canvas for capturing signatures.",
-    "status": "Experimental",
-    "library": "ui-lab",
-    "category": "Forms"
-  },
-  {
-    "name": "Signature Pad Next",
-    "path": "signature-pad-next",
-    "description": "The signature pad, rebuilt: pressure ink, drawn or typed, a value to store and redraw, trimmed PNG and SVG export.",
+    "description": "A signature pad: pressure ink, drawn or typed, a value to store and redraw, trimmed PNG and SVG export.",
     "status": "Experimental",
     "library": "ui-lab",
     "category": "Forms"

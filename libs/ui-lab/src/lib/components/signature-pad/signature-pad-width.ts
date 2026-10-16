@@ -5,25 +5,25 @@ import {
   cn,
   ɵwarnIfUnnamed,
 } from '@semantic-components/ui';
-import { ScSignaturePadNext } from './signature-pad-next';
+import { ScSignaturePad } from './signature-pad';
 
-/** Picks the pen's colour (`[scSignaturePadNextColor]="'#1d4ed8'"`), pressed while it is the one. Write its swatch and name it ("Blue"). */
+/** Picks the pen's width (`[scSignaturePadWidth]="5"`), pressed while it is the one. Write its sample and name it ("Thick"). */
 @Directive({
-  selector: 'button[scSignaturePadNextColor]',
+  selector: 'button[scSignaturePadWidth]',
   host: {
     type: 'button',
-    'data-slot': 'signature-pad-color',
+    'data-slot': 'signature-pad-width',
     '[disabled]': '!pad.editable()',
-    '[attr.aria-pressed]': 'pad.penColor() === color()',
+    '[attr.aria-pressed]': 'pad.penWidth() === width()',
     '[class]': 'class()',
-    '(click)': 'pad.penColor.set(color())',
+    '(click)': 'pad.penWidth.set(width())',
   },
 })
-export class ScSignaturePadNextColor {
-  protected readonly pad = inject(ScSignaturePadNext);
+export class ScSignaturePadWidth {
+  protected readonly pad = inject(ScSignaturePad);
 
-  readonly color = input.required<string>({
-    alias: 'scSignaturePadNextColor',
+  readonly width = input.required<number>({
+    alias: 'scSignaturePadWidth',
   });
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('ghost');
@@ -38,6 +38,6 @@ export class ScSignaturePadNextColor {
   );
 
   constructor() {
-    ɵwarnIfUnnamed('scSignaturePadNextColor');
+    ɵwarnIfUnnamed('scSignaturePadWidth');
   }
 }

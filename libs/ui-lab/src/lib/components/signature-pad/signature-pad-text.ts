@@ -1,7 +1,7 @@
 import { Directive, ElementRef, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { isTyped } from './ink';
-import { ScSignaturePadNext } from './signature-pad-next';
+import { ScSignaturePad } from './signature-pad';
 
 /**
  * Signs by typing — the way without a pointer: your `input`, its text the
@@ -9,7 +9,7 @@ import { ScSignaturePadNext } from './signature-pad-next';
  * Label it ("Type your name").
  */
 @Directive({
-  selector: 'input[scSignaturePadNextText]',
+  selector: 'input[scSignaturePadText]',
   host: {
     'data-slot': 'signature-pad-text',
     type: 'text',
@@ -22,8 +22,8 @@ import { ScSignaturePadNext } from './signature-pad-next';
     '(blur)': 'pad.touch.emit()',
   },
 })
-export class ScSignaturePadNextText {
-  protected readonly pad = inject(ScSignaturePadNext);
+export class ScSignaturePadText {
+  protected readonly pad = inject(ScSignaturePad);
   private readonly element =
     inject<ElementRef<HTMLInputElement>>(ElementRef).nativeElement;
 

@@ -3,25 +3,19 @@ import { ScHeading } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicSignaturePadDemoContainer } from './demos/basic-signature-pad-demo-container';
-import { ColorsSignaturePadDemoContainer } from './demos/colors-signature-pad-demo-container';
-import { DisabledSignaturePadDemoContainer } from './demos/disabled-signature-pad-demo-container';
+import { ExportSignaturePadDemoContainer } from './demos/export-signature-pad-demo-container';
 import { FormSignaturePadDemoContainer } from './demos/form-signature-pad-demo-container';
-import { NoControlsSignaturePadDemoContainer } from './demos/no-controls-signature-pad-demo-container';
-import { PreviewSignaturePadDemoContainer } from './demos/preview-signature-pad-demo-container';
-import { SmallSignaturePadDemoContainer } from './demos/small-signature-pad-demo-container';
-import { ThickPenSignaturePadDemoContainer } from './demos/thick-pen-signature-pad-demo-container';
+import { PensSignaturePadDemoContainer } from './demos/pens-signature-pad-demo-container';
+import { TypeSignaturePadDemoContainer } from './demos/type-signature-pad-demo-container';
 
 @Component({
   selector: 'app-signature-pad-page',
   imports: [
     BasicSignaturePadDemoContainer,
-    ColorsSignaturePadDemoContainer,
-    ThickPenSignaturePadDemoContainer,
-    NoControlsSignaturePadDemoContainer,
-    DisabledSignaturePadDemoContainer,
-    SmallSignaturePadDemoContainer,
-    PreviewSignaturePadDemoContainer,
+    PensSignaturePadDemoContainer,
+    TypeSignaturePadDemoContainer,
     FormSignaturePadDemoContainer,
+    ExportSignaturePadDemoContainer,
     TocHeading,
     ComponentBadges,
     ScHeading,
@@ -31,21 +25,55 @@ import { ThickPenSignaturePadDemoContainer } from './demos/thick-pen-signature-p
       <div class="space-y-2">
         <h1 scHeading>Signature Pad</h1>
         <p class="text-muted-foreground">
-          Canvas-based signature capture with touch and mouse support.
+          Ink that follows the pen, a signature drawn or typed, its value plain
+          data to store and draw again, and exports trimmed to the ink.
         </p>
         <app-component-badges path="signature-pad" />
       </div>
 
-      <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+      <section class="space-y-4">
+        <h2 scHeading appToc>Basic</h2>
+        <p class="text-muted-foreground">
+          Sign with a mouse, a finger or a pen: the ink follows its speed, or
+          the pen's pressure. Undo, redo, clear — or, focused, Ctrl+Z,
+          Ctrl+Shift+Z and Delete.
+        </p>
         <app-basic-signature-pad-demo-container />
-        <app-colors-signature-pad-demo-container />
-        <app-thick-pen-signature-pad-demo-container />
-        <app-no-controls-signature-pad-demo-container />
-        <app-disabled-signature-pad-demo-container />
-        <app-small-signature-pad-demo-container />
-        <app-preview-signature-pad-demo-container />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Pens</h2>
+        <p class="text-muted-foreground">
+          The pen's colour and width — two-way, here picked with buttons.
+        </p>
+        <app-pens-signature-pad-demo-container />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Draw or type</h2>
+        <p class="text-muted-foreground">
+          Without a pointer, type your name: the text is the signature, in the
+          input's font. One pad, two ways in.
+        </p>
+        <app-type-signature-pad-demo-container />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Form</h2>
+        <p class="text-muted-foreground">
+          A [formField]: required() in the schema; left unsigned, the field
+          shows its error.
+        </p>
         <app-form-signature-pad-demo-container />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Export</h2>
+        <p class="text-muted-foreground">
+          The value is data — drawn again here, read-only and smaller. Exported,
+          the image is trimmed to the ink: PNG or SVG.
+        </p>
+        <app-export-signature-pad-demo-container />
       </section>
     </div>
   `,

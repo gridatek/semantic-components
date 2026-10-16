@@ -1,77 +1,46 @@
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScSignaturePad,
-  ScSignaturePadCanvas,
-  ScSignaturePadClearButton,
-  ScSignaturePadControls,
-  ScSignaturePadUndoButton,
+  ScSignaturePadClear,
+  ScSignaturePadLine,
+  ScSignaturePadRedo,
+  ScSignaturePadSurface,
+  ScSignaturePadUndo,
 } from '@semantic-components/ui-lab';
-import { SiTrash2Icon, SiUndoIcon } from '@semantic-icons/lucide-icons';
+import { SiRedo2Icon, SiUndo2Icon } from '@semantic-icons/lucide-icons';
 
+/** Sign with a mouse, a finger or a pen: the ink follows its speed, or the pen's pressure. Undo, redo, clear — or, focused, Ctrl+Z, Ctrl+Shift+Z and Delete. */
 @Component({
   selector: 'app-basic-signature-pad-demo',
   imports: [
     ScSignaturePad,
-    ScSignaturePadCanvas,
-    ScSignaturePadControls,
-    ScSignaturePadUndoButton,
-    ScSignaturePadClearButton,
-    SiUndoIcon,
-    SiTrash2Icon,
+    ScSignaturePadSurface,
+    ScSignaturePadLine,
+    ScSignaturePadUndo,
+    ScSignaturePadRedo,
+    ScSignaturePadClear,
+    SiUndo2Icon,
+    SiRedo2Icon,
   ],
   template: `
-    <div class="w-full space-y-3">
-      <div scSignaturePad #pad="scSignaturePad" class="relative">
-        <canvas
-          scSignaturePadCanvas
-          aria-label="Signature"
-          class="h-[200px]"
-          [(value)]="signature"
-          (signatureChange)="onSignatureChange($event)"
-        ></canvas>
-
-        <div scSignaturePadControls>
-          <button scSignaturePadUndo>
-            <svg siUndoIcon class="size-4"></svg>
-            <span class="sr-only">Undo last stroke</span>
-          </button>
-          <button scSignaturePadClear>
-            <svg siTrash2Icon class="size-4"></svg>
-            <span class="sr-only">Clear signature</span>
-          </button>
-        </div>
+    <div scSignaturePad class="w-full max-w-md space-y-2">
+      <div scSignaturePadSurface aria-label="Signature">
+        <div scSignaturePadLine>× Sign here</div>
       </div>
-
-      <div class="flex gap-2">
-        <button
-          (click)="exportSignature(pad)"
-          class="hover:bg-accent rounded-md border px-4 py-2 text-sm"
-        >
-          Export as PNG
+      <div class="flex items-center gap-1">
+        <button scSignaturePadUndo>
+          <svg siUndo2Icon></svg>
+          <span class="sr-only">Undo</span>
         </button>
+        <button scSignaturePadRedo>
+          <svg siRedo2Icon></svg>
+          <span class="sr-only">Redo</span>
+        </button>
+        <button scSignaturePadClear size="sm" class="ms-auto">Clear</button>
       </div>
     </div>
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class BasicSignaturePadDemo {
-  readonly signature = signal('');
-
-  onSignatureChange(dataUrl: string): void {
-    console.log('Signature changed:', dataUrl ? 'Has signature' : 'Empty');
-  }
-
-  exportSignature(pad: ScSignaturePad): void {
-    const dataUrl = pad.toDataURL('image/png');
-    if (!dataUrl || dataUrl === 'data:,') {
-      alert('Please sign first!');
-      return;
-    }
-
-    const link = document.createElement('a');
-    link.download = 'signature.png';
-    link.href = dataUrl;
-    link.click();
-  }
-}
+export class BasicSignaturePadDemo {}

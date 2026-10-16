@@ -5,21 +5,21 @@ import {
   cn,
   ɵwarnIfUnnamed,
 } from '@semantic-components/ui';
-import { ScSignaturePadNext } from './signature-pad-next';
+import { ScSignaturePad } from './signature-pad';
 
-/** Clears the signature (undoable); disabled while empty. Write its icon or text, and name it ("Clear"). */
+/** Redoes what was undone; disabled with none. Write its icon and name it ("Redo"). */
 @Directive({
-  selector: 'button[scSignaturePadNextClear]',
+  selector: 'button[scSignaturePadRedo]',
   host: {
     type: 'button',
-    'data-slot': 'signature-pad-clear',
-    '[disabled]': '!pad.editable() || pad.empty()',
+    'data-slot': 'signature-pad-redo',
+    '[disabled]': '!pad.canRedo()',
     '[class]': 'class()',
-    '(click)': 'pad.clear()',
+    '(click)': 'pad.redo()',
   },
 })
-export class ScSignaturePadNextClear {
-  protected readonly pad = inject(ScSignaturePadNext);
+export class ScSignaturePadRedo {
+  protected readonly pad = inject(ScSignaturePad);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('ghost');
@@ -33,6 +33,6 @@ export class ScSignaturePadNextClear {
   );
 
   constructor() {
-    ɵwarnIfUnnamed('scSignaturePadNextClear');
+    ɵwarnIfUnnamed('scSignaturePadRedo');
   }
 }

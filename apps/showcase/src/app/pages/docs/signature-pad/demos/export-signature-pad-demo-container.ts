@@ -1,4 +1,24 @@
-import { DOCUMENT } from '@angular/common';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { ExportSignaturePadDemo } from './export-signature-pad-demo';
+
+@Component({
+  selector: 'app-export-signature-pad-demo-container',
+  imports: [DemoContainer, ExportSignaturePadDemo],
+  template: `
+    <app-demo-container
+      title="Export"
+      [code]="code"
+      demoUrl="/demos/signature-pad/export-signature-pad-demo"
+    >
+      <app-export-signature-pad-demo />
+    </app-demo-container>
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class ExportSignaturePadDemoContainer {
+  readonly code = `import { DOCUMENT } from '@angular/common';
 import {
   Component,
   ViewEncapsulation,
@@ -11,34 +31,34 @@ import {
 import { ScButton } from '@semantic-components/ui';
 import {
   type ScSignature,
-  ScSignaturePadNext,
-  ScSignaturePadNextClear,
-  ScSignaturePadNextLine,
-  ScSignaturePadNextSurface,
+  ScSignaturePad,
+  ScSignaturePadClear,
+  ScSignaturePadLine,
+  ScSignaturePadSurface,
 } from '@semantic-components/ui-lab';
 import { SiDownloadIcon } from '@semantic-icons/lucide-icons';
 
 /** The value is data — drawn again here, read-only and smaller. Exported, the image is trimmed to the ink: PNG or SVG. */
 @Component({
-  selector: 'app-export-signature-pad-next-demo',
+  selector: 'app-export-signature-pad-demo',
   imports: [
-    ScSignaturePadNext,
-    ScSignaturePadNextSurface,
-    ScSignaturePadNextLine,
-    ScSignaturePadNextClear,
+    ScSignaturePad,
+    ScSignaturePadSurface,
+    ScSignaturePadLine,
+    ScSignaturePadClear,
     ScButton,
     SiDownloadIcon,
   ],
-  template: `
+  template: \`
     <div class="w-full max-w-md space-y-4">
       <div
-        scSignaturePadNext
-        #pad="scSignaturePadNext"
+        scSignaturePad
+        #pad="scSignaturePad"
         [(value)]="signature"
         class="space-y-2"
       >
-        <div scSignaturePadNextSurface aria-label="Signature">
-          <div scSignaturePadNextLine>× Sign here</div>
+        <div scSignaturePadSurface aria-label="Signature">
+          <div scSignaturePadLine>× Sign here</div>
         </div>
         <div class="flex flex-wrap gap-2">
           <button
@@ -61,18 +81,16 @@ import { SiDownloadIcon } from '@semantic-icons/lucide-icons';
             <svg siDownloadIcon></svg>
             SVG
           </button>
-          <button scSignaturePadNextClear size="sm" class="ms-auto">
-            Clear
-          </button>
+          <button scSignaturePadClear size="sm" class="ms-auto">Clear</button>
         </div>
       </div>
 
       <div class="grid grid-cols-2 gap-4 text-sm">
         <div class="space-y-1">
           <p class="text-muted-foreground">Read-only, drawn again</p>
-          <div scSignaturePadNext readonly [value]="signature()">
+          <div scSignaturePad readonly [value]="signature()">
             <div
-              scSignaturePadNextSurface
+              scSignaturePadSurface
               aria-label="Signature, read-only"
               class="h-20"
             ></div>
@@ -94,13 +112,13 @@ import { SiDownloadIcon } from '@semantic-icons/lucide-icons';
         </div>
       </div>
     </div>
-  `,
+  \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ExportSignaturePadNextDemo {
+export class ExportSignaturePadDemo {
   private readonly document = inject(DOCUMENT);
-  private readonly pad = viewChild.required<ScSignaturePadNext>('pad');
+  private readonly pad = viewChild.required<ScSignaturePad>('pad');
   readonly signature = signal<ScSignature | null>(null);
   readonly preview = signal<string | null>(null);
 
@@ -141,4 +159,5 @@ export class ExportSignaturePadNextDemo {
     link.click();
     URL.revokeObjectURL(url);
   }
+}`;
 }

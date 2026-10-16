@@ -1,50 +1,50 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { PensSignaturePadNextDemo } from './pens-signature-pad-next-demo';
+import { PensSignaturePadDemo } from './pens-signature-pad-demo';
 
 @Component({
-  selector: 'app-pens-signature-pad-next-demo-container',
-  imports: [DemoContainer, PensSignaturePadNextDemo],
+  selector: 'app-pens-signature-pad-demo-container',
+  imports: [DemoContainer, PensSignaturePadDemo],
   template: `
     <app-demo-container
       title="Pens"
       [code]="code"
-      demoUrl="/demos/signature-pad-next/pens-signature-pad-next-demo"
+      demoUrl="/demos/signature-pad/pens-signature-pad-demo"
     >
-      <app-pens-signature-pad-next-demo />
+      <app-pens-signature-pad-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class PensSignaturePadNextDemoContainer {
+export class PensSignaturePadDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScSignaturePadNext,
-  ScSignaturePadNextClear,
-  ScSignaturePadNextColor,
-  ScSignaturePadNextLine,
-  ScSignaturePadNextSurface,
-  ScSignaturePadNextWidth,
+  ScSignaturePad,
+  ScSignaturePadClear,
+  ScSignaturePadColor,
+  ScSignaturePadLine,
+  ScSignaturePadSurface,
+  ScSignaturePadWidth,
 } from '@semantic-components/ui-lab';
 
 /** The pen's colour and width — two-way, here picked with buttons. */
 @Component({
-  selector: 'app-pens-signature-pad-next-demo',
+  selector: 'app-pens-signature-pad-demo',
   imports: [
-    ScSignaturePadNext,
-    ScSignaturePadNextSurface,
-    ScSignaturePadNextLine,
-    ScSignaturePadNextColor,
-    ScSignaturePadNextWidth,
-    ScSignaturePadNextClear,
+    ScSignaturePad,
+    ScSignaturePadSurface,
+    ScSignaturePadLine,
+    ScSignaturePadColor,
+    ScSignaturePadWidth,
+    ScSignaturePadClear,
   ],
   template: \`
-    <div scSignaturePadNext class="w-full max-w-md space-y-2">
+    <div scSignaturePad class="w-full max-w-md space-y-2">
       <div class="flex items-center gap-1">
         <div role="group" aria-label="Colour" class="flex">
           @for (pen of colors; track pen.color) {
-            <button [scSignaturePadNextColor]="pen.color">
+            <button [scSignaturePadColor]="pen.color">
               <span
                 class="size-4 rounded-full border"
                 [style.background]="pen.color"
@@ -55,7 +55,7 @@ import {
         </div>
         <div role="group" aria-label="Width" class="ms-2 flex">
           @for (pen of widths; track pen.width) {
-            <button [scSignaturePadNextWidth]="pen.width">
+            <button [scSignaturePadWidth]="pen.width">
               <span
                 class="w-4 rounded-full bg-current"
                 [style.height.px]="pen.width"
@@ -64,17 +64,17 @@ import {
             </button>
           }
         </div>
-        <button scSignaturePadNextClear size="sm" class="ms-auto">Clear</button>
+        <button scSignaturePadClear size="sm" class="ms-auto">Clear</button>
       </div>
-      <div scSignaturePadNextSurface aria-label="Signature">
-        <div scSignaturePadNextLine>× Sign here</div>
+      <div scSignaturePadSurface aria-label="Signature">
+        <div scSignaturePadLine>× Sign here</div>
       </div>
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class PensSignaturePadNextDemo {
+export class PensSignaturePadDemo {
   readonly colors = [
     { color: 'currentColor', name: 'Ink' },
     { color: '#1d4ed8', name: 'Blue' },

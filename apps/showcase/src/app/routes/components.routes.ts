@@ -535,12 +535,6 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/signature-pad/signature-pad-page'),
       },
       {
-        path: 'signature-pad-next',
-        title: 'Signature Pad Next - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/signature-pad-next/signature-pad-next-page'),
-      },
-      {
         path: 'skeleton',
         title: 'Skeleton - Semantic Components',
         loadComponent: () => import('../pages/docs/skeleton/skeleton-page'),

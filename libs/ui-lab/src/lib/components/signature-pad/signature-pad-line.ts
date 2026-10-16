@@ -3,14 +3,14 @@ import { cn } from '@semantic-components/ui';
 
 /** Your "Sign here" line, at the bottom of the surface: write its text (and a ×). */
 @Directive({
-  selector: '[scSignaturePadNextLine]',
+  selector: '[scSignaturePadLine]',
   host: {
     'data-slot': 'signature-pad-line',
     'aria-hidden': 'true',
     '[class]': 'class()',
   },
 })
-export class ScSignaturePadNextLine {
+export class ScSignaturePadLine {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>

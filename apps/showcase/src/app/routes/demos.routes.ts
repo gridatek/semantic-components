@@ -3271,45 +3271,17 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'colors-signature-pad-demo',
+        path: 'pens-signature-pad-demo',
         loadComponent: () =>
-          import('../pages/docs/signature-pad/demos/colors-signature-pad-demo').then(
-            (m) => m.ColorsSignaturePadDemo,
+          import('../pages/docs/signature-pad/demos/pens-signature-pad-demo').then(
+            (m) => m.PensSignaturePadDemo,
           ),
       },
       {
-        path: 'thick-pen-signature-pad-demo',
+        path: 'type-signature-pad-demo',
         loadComponent: () =>
-          import('../pages/docs/signature-pad/demos/thick-pen-signature-pad-demo').then(
-            (m) => m.ThickPenSignaturePadDemo,
-          ),
-      },
-      {
-        path: 'no-controls-signature-pad-demo',
-        loadComponent: () =>
-          import('../pages/docs/signature-pad/demos/no-controls-signature-pad-demo').then(
-            (m) => m.NoControlsSignaturePadDemo,
-          ),
-      },
-      {
-        path: 'disabled-signature-pad-demo',
-        loadComponent: () =>
-          import('../pages/docs/signature-pad/demos/disabled-signature-pad-demo').then(
-            (m) => m.DisabledSignaturePadDemo,
-          ),
-      },
-      {
-        path: 'small-signature-pad-demo',
-        loadComponent: () =>
-          import('../pages/docs/signature-pad/demos/small-signature-pad-demo').then(
-            (m) => m.SmallSignaturePadDemo,
-          ),
-      },
-      {
-        path: 'preview-signature-pad-demo',
-        loadComponent: () =>
-          import('../pages/docs/signature-pad/demos/preview-signature-pad-demo').then(
-            (m) => m.PreviewSignaturePadDemo,
+          import('../pages/docs/signature-pad/demos/type-signature-pad-demo').then(
+            (m) => m.TypeSignaturePadDemo,
           ),
       },
       {
@@ -3319,44 +3291,11 @@ export const demosRoutes: Route[] = [
             (m) => m.FormSignaturePadDemo,
           ),
       },
-    ],
-  },
-  {
-    path: 'demos/signature-pad-next',
-    children: [
       {
-        path: 'basic-signature-pad-next-demo',
+        path: 'export-signature-pad-demo',
         loadComponent: () =>
-          import('../pages/docs/signature-pad-next/demos/basic-signature-pad-next-demo').then(
-            (m) => m.BasicSignaturePadNextDemo,
-          ),
-      },
-      {
-        path: 'pens-signature-pad-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/signature-pad-next/demos/pens-signature-pad-next-demo').then(
-            (m) => m.PensSignaturePadNextDemo,
-          ),
-      },
-      {
-        path: 'type-signature-pad-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/signature-pad-next/demos/type-signature-pad-next-demo').then(
-            (m) => m.TypeSignaturePadNextDemo,
-          ),
-      },
-      {
-        path: 'form-signature-pad-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/signature-pad-next/demos/form-signature-pad-next-demo').then(
-            (m) => m.FormSignaturePadNextDemo,
-          ),
-      },
-      {
-        path: 'export-signature-pad-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/signature-pad-next/demos/export-signature-pad-next-demo').then(
-            (m) => m.ExportSignaturePadNextDemo,
+          import('../pages/docs/signature-pad/demos/export-signature-pad-demo').then(
+            (m) => m.ExportSignaturePadDemo,
           ),
       },
     ],

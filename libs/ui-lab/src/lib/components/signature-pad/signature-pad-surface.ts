@@ -16,16 +16,16 @@ import {
   outline,
   pathData,
 } from './ink';
-import { ScSignaturePadNext } from './signature-pad-next';
+import { ScSignaturePad } from './signature-pad';
 
 /**
  * Where you sign: the ink, drawn as you write — pressure from a pen, speed
  * from a mouse or a finger. Name it ("Signature"). Focused: Ctrl+Z undoes,
  * Ctrl+Shift+Z (or Ctrl+Y) redoes, Delete clears. Put your line in it
- * (`scSignaturePadNextLine`).
+ * (`scSignaturePadLine`).
  */
 @Component({
-  selector: 'div[scSignaturePadNextSurface]',
+  selector: 'div[scSignaturePadSurface]',
   template: `
     <ng-content />
     <svg
@@ -74,8 +74,8 @@ import { ScSignaturePadNext } from './signature-pad-next';
   },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScSignaturePadNextSurface {
-  protected readonly pad = inject(ScSignaturePadNext);
+export class ScSignaturePadSurface {
+  protected readonly pad = inject(ScSignaturePad);
   private readonly field = inject(SC_FIELD, { optional: true });
   private readonly element =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
@@ -135,7 +135,7 @@ export class ScSignaturePadNextSurface {
   );
 
   constructor() {
-    ɵwarnIfUnnamed('scSignaturePadNextSurface');
+    ɵwarnIfUnnamed('scSignaturePadSurface');
     const observer = new ResizeObserver(([entry]) =>
       this.size.set({
         width: entry.contentRect.width,

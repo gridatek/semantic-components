@@ -6,7 +6,11 @@ import { FormSignaturePadDemo } from './form-signature-pad-demo';
   selector: 'app-form-signature-pad-demo-container',
   imports: [DemoContainer, FormSignaturePadDemo],
   template: `
-    <app-demo-container title="Form Integration" [code]="code">
+    <app-demo-container
+      title="Form"
+      [code]="code"
+      demoUrl="/demos/signature-pad/form-signature-pad-demo"
+    >
       <app-form-signature-pad-demo />
     </app-demo-container>
   `,
@@ -14,68 +18,82 @@ import { FormSignaturePadDemo } from './form-signature-pad-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class FormSignaturePadDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { FormField, FormRoot, form, required } from '@angular/forms/signals';
 import {
+  ScButton,
+  ScField,
+  ScFieldErrors,
+  ScInput,
+  ScLabel,
+} from '@semantic-components/ui';
+import {
+  type ScSignature,
   ScSignaturePad,
-  ScSignaturePadCanvas,
-  ScSignaturePadClearButton,
-  ScSignaturePadControls,
-  ScSignaturePadUndoButton,
+  ScSignaturePadClear,
+  ScSignaturePadLine,
+  ScSignaturePadSurface,
 } from '@semantic-components/ui-lab';
-import { SiTrash2Icon, SiUndoIcon } from '@semantic-icons/lucide-icons';
 
+/** A \`[formField]\`: \`required()\` in the schema; left unsigned, the field shows its error. */
 @Component({
   selector: 'app-form-signature-pad-demo',
   imports: [
     ScSignaturePad,
-    ScSignaturePadCanvas,
-    ScSignaturePadControls,
-    ScSignaturePadUndoButton,
-    ScSignaturePadClearButton,
-    SiUndoIcon,
-    SiTrash2Icon,
+    ScSignaturePadSurface,
+    ScSignaturePadLine,
+    ScSignaturePadClear,
+    ScField,
+    ScLabel,
+    ScInput,
+    ScFieldErrors,
+    ScButton,
+    FormField,
+    FormRoot,
   ],
   template: \`
-    <div class="w-full space-y-4">
-      <div>
-        <label class="mb-1 block text-sm font-medium">Full Name</label>
-        <input
-          type="text"
-          class="w-full max-w-sm rounded-md border px-3 py-2"
-          placeholder="Enter your name"
-        />
+    <form [formRoot]="signForm" class="w-full max-w-md space-y-4">
+      <div scField>
+        <label scLabel for="signer-name">Full name</label>
+        <input id="signer-name" scInput [formField]="signForm.name" />
+        <p scFieldErrors></p>
       </div>
-      <div>
-        <label class="mb-1 block text-sm font-medium">Signature</label>
-        <div scSignaturePad #pad="scSignaturePad" class="relative">
-          <canvas
-            scSignaturePadCanvas
-            aria-label="Signature"
-            class="h-[150px]"
-          ></canvas>
-
-          <div scSignaturePadControls>
-            <button scSignaturePadUndo>
-              <svg siUndoIcon class="size-4"></svg>
-              <span class="sr-only">Undo last stroke</span>
-            </button>
-            <button scSignaturePadClear>
-              <svg siTrash2Icon class="size-4"></svg>
-              <span class="sr-only">Clear signature</span>
-            </button>
+      <div scField>
+        <p id="signature-label" class="text-sm font-medium">Signature</p>
+        <div scSignaturePad [formField]="signForm.signature" class="space-y-2">
+          <div scSignaturePadSurface aria-labelledby="signature-label">
+            <div scSignaturePadLine>× Sign here</div>
           </div>
+          <button scSignaturePadClear size="sm">Clear</button>
         </div>
-
-        @if (pad.isEmpty()) {
-          <p class="text-muted-foreground mt-1 text-sm">Please sign above</p>
-        } @else {
-          <p class="mt-1 text-sm text-green-600">Signature captured</p>
-        }
+        <p scFieldErrors></p>
       </div>
-    </div>
+      <div class="flex gap-2">
+        <button scButton type="submit">Sign</button>
+      </div>
+      @if (sent()) {
+        <p class="text-muted-foreground text-sm" role="status">
+          Signed by {{ model().name }}.
+        </p>
+      }
+    </form>
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class FormSignaturePadDemo {}`;
+export class FormSignaturePadDemo {
+  readonly model = signal<{ name: string; signature: ScSignature | null }>({
+    name: '',
+    signature: null,
+  });
+  readonly sent = signal(false);
+  readonly signForm = form(
+    this.model,
+    (path) => {
+      required(path.name, { message: 'Enter your name.' });
+      required(path.signature, { message: 'Sign above.' });
+    },
+    { submission: { action: async () => this.sent.set(true) } },
+  );
+}`;
 }

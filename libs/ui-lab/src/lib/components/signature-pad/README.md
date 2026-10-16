@@ -1,250 +1,61 @@
 # Signature Pad
 
-Canvas-based signature capture component with touch and mouse support.
+Ink that follows the pen, a signature drawn or typed, its value plain data to store and draw again, and exports trimmed to the ink.
 
-## Composable Architecture
+## Architecture
 
-The signature pad uses a **composable architecture** that gives you full control over layout and functionality.
-
-### Basic Usage
-
-```typescript
-import { ScSignaturePad, ScSignaturePadCanvas, ScSignaturePadClearButton, ScSignaturePadControls, ScSignaturePadUndoButton } from '@semantic-components/ui-lab';
-import { SiTrash2Icon, SiUndoIcon } from '@semantic-icons/lucide-icons';
-
-@Component({
-  imports: [ScSignaturePad, ScSignaturePadCanvas, ScSignaturePadControls, ScSignaturePadUndoButton, ScSignaturePadClearButton, SiUndoIcon, SiTrash2Icon],
-  template: `
-    <div scSignaturePad class="relative inline-block">
-      <canvas scSignaturePadCanvas aria-label="Signature" [(value)]="signature" [width]="400" [height]="200"></canvas>
-
-      <div scSignaturePadControls>
-        <button scSignaturePadUndo>
-          <svg si-undo-icon class="size-4"></svg>
-          <span class="sr-only">Undo last stroke</span>
-        </button>
-        <button scSignaturePadClear>
-          <svg si-trash-2-icon class="size-4"></svg>
-          <span class="sr-only">Clear signature</span>
-        </button>
-      </div>
-    </div>
-  `,
-})
-export class MyComponent {
-  readonly signature = signal('');
-}
+```
+scSignaturePad (value — two-way, a [formField]; penColor, penWidth — two-way; disabled, readonly)
+├── div[scSignaturePadSurface] — where you sign: SVG ink; name it
+│   └── [scSignaturePadLine]    — your "Sign here" line and text
+├── input[scSignaturePadText]   — the way without a pointer: a typed name is the signature
+└── buttons: Undo, Redo, Clear; [scSignaturePadColor], [scSignaturePadWidth] (pressed while chosen)
 ```
 
-### Composable Components
-
-**`ScSignaturePad` (Directive)**
-
-- Root directive that provides context
-- Manages signature state and drawing logic
-- **Selector**: `[scSignaturePad]`
-- **Inputs**: `disabled`, `penColor`, `penWidth`, `backgroundColor`
-
-**`ScSignaturePadCanvas` (Component)**
-
-- Canvas element for drawing
-- **Selector**: `canvas[scSignaturePadCanvas]`
-- **Inputs**: `width`, `height`, `class` — name it with `aria-label`
-- **Model**: `value` (two-way bindable data URL)
-- **Outputs**: `signatureChange`, `strokeEnd`
-
-**`ScSignaturePadControls` (Component)**
-
-- Container for control buttons (uses `<ng-content>`)
-- **Selector**: `div[scSignaturePadControls]`
-- **Default position**: `absolute top-2 right-2`
-
-**`ScSignaturePadUndoButton` (Component)**
-
-- Undo last stroke
-- **Selector**: `button[scSignaturePadUndo]`
-- **Auto-disabled**: When no strokes to undo
-
-**`ScSignaturePadClearButton` (Component)**
-
-- Clear entire signature
-- **Selector**: `button[scSignaturePadClear]`
-- **Auto-disabled**: When signature is empty
-
-**`ScSignaturePadToolbar` (Component)**
-
-- Optional container for toolbar items (uses `<ng-content>`)
-- **Selector**: `div[scSignaturePadToolbar]`
-- **Default styling**: Flex row with gap
-
-**`ScSignaturePadColorButton` (Component)**
-
-- Button to select pen color
-- **Selector**: `button[scSignaturePadPenColor]`
-- **Inputs**: `color` (required, hex color string)
-- **Auto-active**: When color matches current pen color
-
-**`ScSignaturePadWidthButton` (Component)**
-
-- Button to select pen width
-- **Selector**: `button[scSignaturePadPenWidth]`
-- **Inputs**: `width` (required, number in pixels)
-- **Auto-active**: When width matches current pen width
-
-### Flexible Examples
-
-#### Custom Button Layout
+## Usage
 
 ```html
-<div scSignaturePad>
-  <canvas scSignaturePadCanvas aria-label="Signature" [width]="500" [height]="250"></canvas>
-
-  <!-- Controls at bottom instead of top-right -->
-  <div scSignaturePadControls class="static mt-2 justify-center">
-    <button scSignaturePadUndo aria-label="Undo last stroke" class="px-4 py-2">Undo</button>
-    <button scSignaturePadClear aria-label="Clear signature" class="px-4 py-2">Clear</button>
+<div scSignaturePad #pad="scSignaturePad" [formField]="form.signature">
+  <div scSignaturePadSurface aria-label="Signature">
+    <div scSignaturePadLine>× Sign here</div>
   </div>
+  <button scSignaturePadUndo><svg siUndo2Icon></svg><span class="sr-only">Undo</span></button>
+  <button scSignaturePadRedo><svg siRedo2Icon></svg><span class="sr-only">Redo</span></button>
+  <button scSignaturePadClear size="sm">Clear</button>
 </div>
 ```
 
-#### With Custom Buttons
+## Value
 
-```html
-<div scSignaturePad #pad>
-  <canvas scSignaturePadCanvas aria-label="Signature" [(value)]="signature"></canvas>
+`ScSignature | null` — plain JSON, to store and give back (the pad draws it again):
 
-  <div scSignaturePadControls>
-    <button scSignaturePadUndo>
-      <svg si-undo-icon></svg>
-      <span class="sr-only">Undo last stroke</span>
-    </button>
-    <button scSignaturePadClear>
-      <svg si-trash-icon></svg>
-      <span class="sr-only">Clear signature</span>
-    </button>
-    <!-- Add your own buttons -->
-    <button (click)="downloadSignature(pad)">
-      <svg si-download-icon></svg>
-    </button>
-  </div>
-</div>
-```
+- drawn: `{ width, height, strokes: [{ points: [x, y, pressure][], color, width }] }` — `width` × `height` is the surface it was drawn on; given back, it fits any surface.
+- typed: `{ text, font }` — the input's `font-family`.
 
-#### Without Controls Container
+A `[formField]`: put `required()` in the schema; `disabled`, `readonly`, `invalid` and `touched` come from it. In a `scField`, its errors describe the surface.
 
-```html
-<div scSignaturePad>
-  <canvas scSignaturePadCanvas aria-label="Signature"></canvas>
-</div>
+## Ink
 
-<!-- External controls -->
-<div class="mt-2 flex gap-2">
-  <button scSignaturePadUndo aria-label="Undo last stroke">Undo</button>
-  <button scSignaturePadClear aria-label="Clear signature">Clear</button>
-  <button (click)="save()">Save</button>
-</div>
-```
+Each stroke is a filled outline, wide as the pen is pressed — a pen's pressure, or, for a mouse or a finger, its speed (faster, thinner) — and smoothed. A tap is a dot. `penColor` (`currentColor` by default — the text's colour; black when exported) and `penWidth` (3) are two-way.
 
-#### With Color Selection
+## Export
 
-```html
-<div scSignaturePad class="space-y-3">
-  <!-- Color toolbar -->
-  <div scSignaturePadToolbar>
-    <button scSignaturePadPenColor [color]="'#000000'">
-      <span class="size-4 rounded-full border" style="background: #000000"></span>
-      <span class="sr-only">Pen color Black</span>
-    </button>
-    <button scSignaturePadPenColor [color]="'#1d4ed8'">
-      <span class="size-4 rounded-full border" style="background: #1d4ed8"></span>
-      <span class="sr-only">Pen color Blue</span>
-    </button>
-    <button scSignaturePadPenColor [color]="'#dc2626'">
-      <span class="size-4 rounded-full border" style="background: #dc2626"></span>
-      <span class="sr-only">Pen color Red</span>
-    </button>
-  </div>
+- `toSvg(padding?)` — an SVG document, trimmed to the ink.
+- `toBlob(type?, { scale, padding }?)` — an image, PNG by default (transparent; others on white), trimmed, at `scale` (2).
 
-  <!-- Canvas -->
-  <div class="relative inline-block">
-    <canvas scSignaturePadCanvas aria-label="Signature"></canvas>
-    <div scSignaturePadControls>
-      <button scSignaturePadUndo aria-label="Undo last stroke">Undo</button>
-      <button scSignaturePadClear aria-label="Clear signature">Clear</button>
-    </div>
-  </div>
-</div>
-```
+A typed signature is exported in its font.
 
-#### With Width Selection
+## Keyboard
 
-```html
-<div scSignaturePad class="space-y-3">
-  <div scSignaturePadToolbar>
-    <button scSignaturePadPenWidth [width]="2">
-      <span class="bg-foreground w-4 rounded-full" style="height: 2px"></span>
-      <span class="sr-only">Pen width 2</span>
-    </button>
-    <button scSignaturePadPenWidth [width]="4">
-      <span class="bg-foreground w-4 rounded-full" style="height: 4px"></span>
-      <span class="sr-only">Pen width 4</span>
-    </button>
-    <button scSignaturePadPenWidth [width]="6">
-      <span class="bg-foreground w-4 rounded-full" style="height: 6px"></span>
-      <span class="sr-only">Pen width 6</span>
-    </button>
-  </div>
-
-  <div class="relative inline-block">
-    <canvas scSignaturePadCanvas aria-label="Signature"></canvas>
-  </div>
-</div>
-```
-
-#### Combined Toolbar
-
-```html
-<div scSignaturePadToolbar>
-  <!-- Colors -->
-  <button scSignaturePadPenColor [color]="'#000000'">
-    <span class="size-4 rounded-full border" style="background: #000000"></span>
-    <span class="sr-only">Pen color Black</span>
-  </button>
-  <button scSignaturePadPenColor [color]="'#1d4ed8'">
-    <span class="size-4 rounded-full border" style="background: #1d4ed8"></span>
-    <span class="sr-only">Pen color Blue</span>
-  </button>
-
-  <!-- Separator (optional) -->
-  <div class="bg-border h-6 w-px"></div>
-
-  <!-- Widths -->
-  <button scSignaturePadPenWidth [width]="2">
-    <span class="bg-foreground w-4 rounded-full" style="height: 2px"></span>
-    <span class="sr-only">Pen width 2</span>
-  </button>
-  <button scSignaturePadPenWidth [width]="4">
-    <span class="bg-foreground w-4 rounded-full" style="height: 4px"></span>
-    <span class="sr-only">Pen width 4</span>
-  </button>
-</div>
-```
-
-## Features
-
-- ✅ Touch and mouse support
-- ✅ Smooth drawing with line interpolation
-- ✅ Undo functionality (stroke by stroke)
-- ✅ Export to PNG, JPEG, or Blob
-- ✅ Customizable pen color and width
-- ✅ Responsive canvas sizing
-- ✅ **Composable architecture** for maximum flexibility
-- ✅ Use with `@semantic-icons` for consistent icons
+The surface, focused: Ctrl+Z undo, Ctrl+Shift+Z or Ctrl+Y redo, Delete or Backspace clear. Drawing needs a pointer: `scSignaturePadText` is the way to sign with a keyboard — offer it.
 
 ## Accessibility
 
-- Keyboard accessible controls
-- ARIA labels for screen readers
-- Focus indicators on buttons
-- Disabled state support
-- Touch-friendly button sizes
+- Name the surface (`aria-label`, or `aria-labelledby`); it is an image of the signature.
+- Offer the typed way (`scSignaturePadText`), labelled.
+- Say when it is signed if it matters (a polite live region from `pad.empty()`).
+- Colours and widths are `aria-pressed`; name them ("Blue", "Thick").
+
+## Not here
+
+An eraser, zoom, a background image, an uploaded image as the signature; legal e-signatures (a signature here is a picture, with no proof of who drew it).
