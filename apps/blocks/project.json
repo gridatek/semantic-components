@@ -69,11 +69,12 @@
     "serve-static": {
       "continuous": true,
       "executor": "@nx/web:file-server",
+      "dependsOn": ["build"],
       "options": {
-        "buildTarget": "blocks:build",
         "port": 4201,
         "staticFilePath": "dist/apps/blocks/browser",
-        "spa": true
+        "spa": true,
+        "watch": false
       }
     },
     "extract-i18n": {
