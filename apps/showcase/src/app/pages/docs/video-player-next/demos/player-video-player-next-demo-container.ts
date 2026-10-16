@@ -92,7 +92,12 @@ import {
       [metadata]="{ title: 'Sintel — trailer', artist: 'Blender Foundation' }"
       class="aspect-video w-full max-w-2xl"
     >
-      <video scVideoPlayerNextMedia src="/media/sintel-trailer.mp4" preload="metadata">
+      <video
+        scVideoPlayerNextMedia
+        src="/media/sintel-trailer.mp4"
+        poster="/media/sintel-trailer.jpg"
+        preload="metadata"
+      >
         <track
           kind="captions"
           src="/media/sintel-trailer.en.vtt"
@@ -105,7 +110,11 @@ import {
           srclang="fr"
           label="Français"
         />
-        <track kind="chapters" src="/media/sintel-trailer.chapters.vtt" srclang="en" />
+        <track
+          kind="chapters"
+          src="/media/sintel-trailer.chapters.vtt"
+          srclang="en"
+        />
       </video>
       <div scVideoPlayerNextCaptionsDisplay></div>
 

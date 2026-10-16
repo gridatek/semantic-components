@@ -34,6 +34,7 @@ import { SiPauseIcon, SiPlayIcon } from '@semantic-icons/lucide-icons';
       <video
         scVideoPlayerNextMedia
         src="/media/sintel-trailer.mp4"
+        poster="/media/sintel-trailer.jpg"
         preload="metadata"
       ></video>
       <div scVideoPlayerNextControls class="flex-row items-center gap-2">
