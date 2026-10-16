@@ -106,7 +106,7 @@ test('Controlled: open from outside; a disabled action does nothing', async ({
   await expect(page.getByText('Open: true')).toBeVisible();
   const remove = page.getByRole('menuitem', { name: 'Delete' });
   await expect(remove).toHaveAttribute('aria-disabled', 'true');
-  await remove.click({ force: true });
+  await remove.click();
   await expect(page.getByText('No action yet')).toBeVisible();
   await page.mouse.click(10, 10);
   await expect(page.getByText('Open: false')).toBeVisible();
