@@ -1,7 +1,9 @@
 import {
-  DestroyRef,
+  type AfterRenderRef,
   Directive,
   ElementRef,
+  Injector,
+  afterNextRender,
   computed,
   inject,
   input,
@@ -49,22 +51,30 @@ export class ScVideoPlayerMedia {
     cn('block size-full bg-black object-contain', this.classInput()),
   );
 
-  private frame = 0;
+  private readonly injector = inject(Injector);
+  private pending: AfterRenderRef | null = null;
 
   constructor() {
     this.player.ɵmedia.set(this.element);
     // Already loaded (from the cache): no event comes.
     if (this.element.readyState >= 1) this.onMetadata();
-    inject(DestroyRef).onDestroy(() => cancelAnimationFrame(this.frame));
   }
 
+  /**
+   * Reads the video into the player once rendered: a change made outside
+   * (a bound signal set) reaches the player first, and is not overwritten.
+   * Playing, it reads again every render — every frame.
+   */
   protected sync(): void {
-    this.player.ɵsync(this.element);
-    // Playing: the time follows every frame, not only on timeupdate.
-    cancelAnimationFrame(this.frame);
-    if (!this.element.paused) {
-      this.frame = requestAnimationFrame(() => this.sync());
-    }
+    if (this.pending) return;
+    this.pending = afterNextRender(
+      () => {
+        this.pending = null;
+        this.player.ɵsync(this.element);
+        if (!this.element.paused) this.sync();
+      },
+      { injector: this.injector },
+    );
   }
 
   protected onMetadata(): void {

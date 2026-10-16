@@ -85,3 +85,15 @@ test('Controlled: chapters jump, from outside', async ({ page }) => {
   await expect.poll(() => time(page)).toBeCloseTo(36, 0);
   await expect(desert).toHaveAttribute('aria-current', 'true');
 });
+
+test('Controlled: chapters jump while it plays', async ({ page }) => {
+  await page.goto('/demos/video-player/controlled-video-player-demo');
+  await page.getByRole('button', { name: 'Play', exact: true }).click();
+  await expect
+    .poll(() => video(page).evaluate((v: HTMLVideoElement) => v.paused))
+    .toBe(false);
+  await page.getByRole('button', { name: /The dragon/ }).click();
+  await expect.poll(() => time(page)).toBeGreaterThan(24);
+  await page.getByRole('button', { name: /The gatekeeper/ }).click();
+  await expect.poll(() => time(page)).toBeLessThan(15);
+});
