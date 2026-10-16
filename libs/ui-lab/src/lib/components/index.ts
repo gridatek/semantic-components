@@ -5,6 +5,7 @@ export * from './bubble';
 export * from './color-picker';
 export * from './compare';
 export * from './countdown';
+export * from './countdown-next';
 export * from './date-range-picker';
 export * from './diff-viewer';
 export * from './dock';

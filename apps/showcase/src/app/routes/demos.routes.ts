@@ -1010,6 +1010,46 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/countdown-next',
+    children: [
+      {
+        path: 'event-countdown-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/countdown-next/demos/event-countdown-next-demo').then(
+            (m) => m.EventCountdownNextDemo,
+          ),
+      },
+      {
+        path: 'inline-countdown-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/countdown-next/demos/inline-countdown-next-demo').then(
+            (m) => m.InlineCountdownNextDemo,
+          ),
+      },
+      {
+        path: 'timer-countdown-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/countdown-next/demos/timer-countdown-next-demo').then(
+            (m) => m.TimerCountdownNextDemo,
+          ),
+      },
+      {
+        path: 'roll-countdown-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/countdown-next/demos/roll-countdown-next-demo').then(
+            (m) => m.RollCountdownNextDemo,
+          ),
+      },
+      {
+        path: 'done-countdown-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/countdown-next/demos/done-countdown-next-demo').then(
+            (m) => m.DoneCountdownNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/data-table',
     children: [
       {
