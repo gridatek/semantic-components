@@ -27,7 +27,8 @@ import { schedulerEventInjector } from './scheduler-types';
   selector: 'div[scSchedulerTimeGrid]',
   imports: [NgTemplateOutlet],
   template: `
-    <div class="flex border-b">
+    <!-- The same scrollbar gutter as the hours below, so the columns line up. -->
+    <div class="flex [scrollbar-gutter:stable] overflow-y-hidden border-b">
       <div class="w-14 shrink-0" aria-hidden="true"></div>
       <div
         class="grid flex-1"
@@ -64,7 +65,10 @@ import { schedulerEventInjector } from './scheduler-types';
     </div>
 
     @if (hasAllDay()) {
-      <div class="flex border-b" data-slot="scheduler-all-day">
+      <div
+        class="flex [scrollbar-gutter:stable] overflow-y-hidden border-b"
+        data-slot="scheduler-all-day"
+      >
         <div class="w-14 shrink-0" aria-hidden="true"></div>
         <div
           class="grid flex-1"
@@ -90,7 +94,11 @@ import { schedulerEventInjector } from './scheduler-types';
       </div>
     }
 
-    <div #body class="relative min-h-0 flex-1 overflow-y-auto" tabindex="0">
+    <div
+      #body
+      class="relative min-h-0 flex-1 [scrollbar-gutter:stable] overflow-y-auto"
+      tabindex="0"
+    >
       <div
         class="flex"
         [style.height]="
