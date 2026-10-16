@@ -13,6 +13,7 @@
       "options": {
         "outputPath": "dist/apps/blocks",
         "browser": "apps/blocks/src/main.ts",
+        "polyfills": ["temporal-polyfill/global"],
         "tsConfig": "apps/blocks/tsconfig.app.json",
         "assets": [
           {

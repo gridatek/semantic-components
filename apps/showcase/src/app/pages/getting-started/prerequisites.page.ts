@@ -142,6 +142,36 @@ import { TocHeading } from '../../components/toc/toc-heading';
           you can swap them for any library.
         </p>
       </section>
+
+      <div scSeparator></div>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>5. Polyfill Temporal</h2>
+        <p class="text-muted-foreground">
+          The date components use the browser's
+          <a
+            href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Temporal"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-foreground underline underline-offset-4"
+          >
+            Temporal API</a
+          >. Until every browser has it (Safari doesn't yet), add a polyfill to
+          your app: it fills in the global only where it's missing.
+        </p>
+        <app-package-manager-install packages="temporal-polyfill" />
+        <p class="text-muted-foreground">
+          Then list it in your build's
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">polyfills</code>
+          (<code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >angular.json</code
+          >):
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >"polyfills": ["temporal-polyfill/global"]</code
+          >. Once all browsers ship Temporal, remove both — your code stays as
+          it is.
+        </p>
+      </section>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,
