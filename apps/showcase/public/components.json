@@ -384,6 +384,14 @@
     "category": "Media"
   },
   {
+    "name": "Image Annotator Next",
+    "path": "image-annotator-next",
+    "description": "The image annotator, rebuilt: shapes over the image — selected, moved, resized, restyled — with keyboard, kept as data, exported as an image.",
+    "status": "Experimental",
+    "library": "ui-lab",
+    "category": "Media"
+  },
+  {
     "name": "Image Compare",
     "path": "image-compare",
     "description": "Compare two images with a slider.",

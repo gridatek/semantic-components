@@ -1589,6 +1589,32 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/image-annotator-next',
+    children: [
+      {
+        path: 'editor-image-annotator-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/image-annotator-next/demos/editor-image-annotator-next-demo').then(
+            (m) => m.EditorImageAnnotatorNextDemo,
+          ),
+      },
+      {
+        path: 'review-image-annotator-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/image-annotator-next/demos/review-image-annotator-next-demo').then(
+            (m) => m.ReviewImageAnnotatorNextDemo,
+          ),
+      },
+      {
+        path: 'read-only-image-annotator-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/image-annotator-next/demos/read-only-image-annotator-next-demo').then(
+            (m) => m.ReadOnlyImageAnnotatorNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/image-compare',
     children: [
       {
