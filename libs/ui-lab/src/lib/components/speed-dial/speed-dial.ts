@@ -1,94 +1,128 @@
-import type { Menu } from '@angular/aria/menu';
+import { _IdGenerator } from '@angular/cdk/a11y';
+import { DOCUMENT } from '@angular/common';
 import {
   DestroyRef,
   Directive,
   ElementRef,
+  Injector,
   afterNextRender,
   computed,
-  contentChildren,
   inject,
   input,
   model,
   signal,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { ScSpeedDialAction } from './speed-dial-action';
-import {
-  SC_SPEED_DIAL,
-  ScSpeedDialDirection,
-  ScSpeedDialSize,
-} from './speed-dial-types';
 
+/**
+ * Where the actions open: in a line (`up`, `down`, `left`, `right`), or on a
+ * quarter circle toward a corner (`up-left`… — for a button in the opposite
+ * one).
+ */
+export type ScSpeedDialDirection =
+  | 'up'
+  | 'down'
+  | 'left'
+  | 'right'
+  | 'up-left'
+  | 'up-right'
+  | 'down-left'
+  | 'down-right';
+
+/**
+ * A floating button that opens a few actions — a menu. Put in it your
+ * `scSpeedDialTrigger`, your `scSpeedDialList` of actions and, if you
+ * like, a `scSpeedDialBackdrop`. Place it yourself (`fixed bottom-6
+ * end-6`…).
+ */
 @Directive({
   selector: '[scSpeedDial]',
   exportAs: 'scSpeedDial',
-  providers: [{ provide: SC_SPEED_DIAL, useExisting: ScSpeedDial }],
   host: {
+    'data-slot': 'speed-dial',
+    '[attr.data-open]': 'open() || null',
+    '[attr.data-direction]': 'direction()',
     '[class]': 'class()',
-    '(document:keydown.escape)': 'onEscape()',
   },
 })
 export class ScSpeedDial {
-  private readonly elementRef = inject(ElementRef<HTMLElement>);
-  private readonly destroyRef = inject(DestroyRef);
+  private readonly element =
+    inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
+
+  private readonly injector = inject(Injector);
 
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly direction = input<ScSpeedDialDirection>('up');
-  readonly size = input<ScSpeedDialSize>('md');
 
   readonly open = model(false);
+  readonly direction = input<ScSpeedDialDirection>('up');
 
-  readonly actions = contentChildren(ScSpeedDialAction);
+  /** On a quarter circle (a corner's direction), not in a line. */
+  readonly arc = computed(() => this.direction().includes('-'));
 
-  /** The aria menu of the action list (registered by ScSpeedDialActionList). */
-  readonly menu = signal<Menu<unknown> | undefined>(undefined);
+  readonly triggerId = inject(_IdGenerator).getId('sc-speed-dial-trigger-');
+  readonly listId = inject(_IdGenerator).getId('sc-speed-dial-list-');
+  /** The actions, in order: registered by `scSpeedDialAction`. */
+  readonly ɵactions = signal<readonly HTMLElement[]>([]);
+  readonly ɵtrigger = signal<HTMLElement | null>(null);
 
-  protected readonly class = computed(() => {
-    const dir = this.direction();
-    return cn(
-      'relative inline-flex',
-      dir === 'up' && 'flex-col-reverse items-center',
-      dir === 'down' && 'flex-col items-center',
-      dir === 'left' && 'flex-row-reverse items-center',
-      dir === 'right' && 'flex-row items-center',
-      this.classInput(),
-    );
-  });
+  protected readonly class = computed(() =>
+    cn('relative isolate z-10 inline-flex', this.classInput()),
+  );
 
   constructor() {
-    afterNextRender(() => {
-      this.setupOutsideClickHandler();
-    });
-  }
-
-  toggle(): void {
-    this.open.update((v) => !v);
-  }
-
-  close(): void {
-    if (this.open()) {
-      this.open.set(false);
-    }
-  }
-
-  onEscape(): void {
-    this.close();
-  }
-
-  private setupOutsideClickHandler(): void {
-    const handler = (event: MouseEvent) => {
-      if (!this.open()) return;
-
-      const target = event.target as HTMLElement;
-      if (!this.elementRef.nativeElement.contains(target)) {
-        this.close();
+    const document = inject(DOCUMENT);
+    // A press outside closes it.
+    const onPointerDown = (event: PointerEvent) => {
+      if (this.open() && !this.element.contains(event.target as Node)) {
+        this.open.set(false);
       }
     };
+    document.addEventListener('pointerdown', onPointerDown);
+    inject(DestroyRef).onDestroy(() =>
+      document.removeEventListener('pointerdown', onPointerDown),
+    );
+  }
 
-    document.addEventListener('click', handler);
-
-    this.destroyRef.onDestroy(() => {
-      document.removeEventListener('click', handler);
+  /** Opens it, on its first action. */
+  openOnFirst(): void {
+    this.open.set(true);
+    // The actions turn reachable once rendered open.
+    afterNextRender(() => this.focusAction(this.enabledFirst()), {
+      injector: this.injector,
     });
+  }
+
+  /** Closes it; back on the trigger, if focus was in it. */
+  close(refocus = true): void {
+    if (!this.open()) return;
+    this.open.set(false);
+    if (refocus) this.ɵtrigger()?.focus();
+  }
+
+  /** Moves focus `step` actions on (round), or to the first / last. */
+  ɵmove(from: HTMLElement, to: 'next' | 'previous' | 'first' | 'last'): void {
+    const actions = this.ɵactions();
+    if (!actions.length) return;
+    const at = actions.indexOf(from);
+    const index =
+      to === 'first'
+        ? 0
+        : to === 'last'
+          ? actions.length - 1
+          : (at + (to === 'next' ? 1 : -1) + actions.length) % actions.length;
+    this.focusAction(index);
+  }
+
+  private enabledFirst(): number {
+    return Math.max(
+      0,
+      this.ɵactions().findIndex(
+        (action) => action.getAttribute('aria-disabled') !== 'true',
+      ),
+    );
+  }
+
+  private focusAction(index: number): void {
+    this.ɵactions()[index]?.focus();
   }
 }

@@ -1,30 +1,30 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { ArcSpeedDialNextDemo } from './arc-speed-dial-next-demo';
+import { ArcSpeedDialDemo } from './arc-speed-dial-demo';
 
 @Component({
-  selector: 'app-arc-speed-dial-next-demo-container',
-  imports: [DemoContainer, ArcSpeedDialNextDemo],
+  selector: 'app-arc-speed-dial-demo-container',
+  imports: [DemoContainer, ArcSpeedDialDemo],
   template: `
     <app-demo-container
       title="Arc"
       [code]="code"
-      demoUrl="/demos/speed-dial-next/arc-speed-dial-next-demo"
+      demoUrl="/demos/speed-dial/arc-speed-dial-demo"
     >
-      <app-arc-speed-dial-next-demo />
+      <app-arc-speed-dial-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ArcSpeedDialNextDemoContainer {
+export class ArcSpeedDialDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScSpeedDialNext,
-  ScSpeedDialNextAction,
-  ScSpeedDialNextLabel,
-  ScSpeedDialNextList,
-  ScSpeedDialNextTrigger,
+  ScSpeedDial,
+  ScSpeedDialAction,
+  ScSpeedDialLabel,
+  ScSpeedDialList,
+  ScSpeedDialTrigger,
 } from '@semantic-components/ui-lab';
 import {
   SiCopyIcon,
@@ -36,13 +36,13 @@ import {
 
 /** Toward a corner — up-left for a button at the bottom right — the actions fan out on a quarter circle. Their labels are read, not shown. */
 @Component({
-  selector: 'app-arc-speed-dial-next-demo',
+  selector: 'app-arc-speed-dial-demo',
   imports: [
-    ScSpeedDialNext,
-    ScSpeedDialNextTrigger,
-    ScSpeedDialNextList,
-    ScSpeedDialNextAction,
-    ScSpeedDialNextLabel,
+    ScSpeedDial,
+    ScSpeedDialTrigger,
+    ScSpeedDialList,
+    ScSpeedDialAction,
+    ScSpeedDialLabel,
     SiPlusIcon,
     SiPencilIcon,
     SiCopyIcon,
@@ -51,26 +51,26 @@ import {
   ],
   template: \`
     <div class="bg-muted/30 relative h-80 w-full rounded-lg border">
-      <div scSpeedDialNext direction="up-left" class="absolute end-6 bottom-6">
-        <div scSpeedDialNextList>
-          <button scSpeedDialNextAction (click)="last.set('Edit')">
+      <div scSpeedDial direction="up-left" class="absolute end-6 bottom-6">
+        <div scSpeedDialList>
+          <button scSpeedDialAction (click)="last.set('Edit')">
             <svg siPencilIcon></svg>
-            <span scSpeedDialNextLabel>Edit</span>
+            <span scSpeedDialLabel>Edit</span>
           </button>
-          <button scSpeedDialNextAction (click)="last.set('Copy')">
+          <button scSpeedDialAction (click)="last.set('Copy')">
             <svg siCopyIcon></svg>
-            <span scSpeedDialNextLabel>Copy</span>
+            <span scSpeedDialLabel>Copy</span>
           </button>
-          <button scSpeedDialNextAction (click)="last.set('Share')">
+          <button scSpeedDialAction (click)="last.set('Share')">
             <svg siShare2Icon></svg>
-            <span scSpeedDialNextLabel>Share</span>
+            <span scSpeedDialLabel>Share</span>
           </button>
-          <button scSpeedDialNextAction (click)="last.set('Delete')">
+          <button scSpeedDialAction (click)="last.set('Delete')">
             <svg siTrash2Icon></svg>
-            <span scSpeedDialNextLabel>Delete</span>
+            <span scSpeedDialLabel>Delete</span>
           </button>
         </div>
-        <button scSpeedDialNextTrigger>
+        <button scSpeedDialTrigger>
           <svg
             siPlusIcon
             class="transition-transform in-data-open:rotate-45"
@@ -86,7 +86,7 @@ import {
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ArcSpeedDialNextDemo {
+export class ArcSpeedDialDemo {
   readonly last = signal('');
 }`;
 }

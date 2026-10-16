@@ -1,69 +1,60 @@
-import { MenuTrigger } from '@angular/aria/menu';
+import { Directive, ElementRef, computed, inject, input } from '@angular/core';
 import {
-  Directive,
-  computed,
-  effect,
-  inject,
-  input,
-  untracked,
-} from '@angular/core';
-import { bindInput, cn } from '@semantic-components/ui';
-import { SC_SPEED_DIAL } from './speed-dial-types';
+  type ScButtonVariants,
+  buttonVariants,
+  cn,
+  ɵwarnIfUnnamed,
+} from '@semantic-components/ui';
+import { ScSpeedDial } from './speed-dial';
 
+/**
+ * Opens and closes the actions — on its first, from a click, Enter, Space or
+ * an arrow. Write its icon (`data-open` on the dial turns it) and name it.
+ */
 @Directive({
   selector: 'button[scSpeedDialTrigger]',
-  // aria MenuTrigger: toggles on click/Enter/Space/ArrowDown, sets
-  // aria-expanded/aria-haspopup, focuses the first action on open.
-  hostDirectives: [MenuTrigger],
   host: {
     type: 'button',
+    'data-slot': 'speed-dial-trigger',
+    'aria-haspopup': 'menu',
+    '[id]': 'dial.triggerId',
+    '[attr.aria-expanded]': 'dial.open()',
+    '[attr.aria-controls]': 'dial.listId',
     '[class]': 'class()',
+    '(click)': 'toggle()',
+    '(keydown)': 'onKeydown($event)',
   },
 })
 export class ScSpeedDialTrigger {
-  readonly speedDial = inject(SC_SPEED_DIAL);
-
-  private readonly trigger = inject(MenuTrigger);
+  protected readonly dial = inject(ScSpeedDial);
 
   readonly classInput = input<string>('', { alias: 'class' });
-
-  constructor() {
-    bindInput(this.trigger.menu, this.speedDial.menu);
-
-    // trigger → speed dial
-    effect(() => {
-      const expanded = this.trigger.expanded();
-      untracked(() => this.speedDial.open.set(expanded));
-    });
-    // speed dial → trigger (programmatic open/close, outside click)
-    effect(() => {
-      const open = this.speedDial.open();
-      untracked(() => {
-        if (open === this.trigger.expanded()) return;
-        if (open) this.trigger.open();
-        else this.trigger.close();
-      });
-    });
-  }
+  readonly variant = input<ScButtonVariants['variant']>('default');
+  readonly size = input<ScButtonVariants['size']>('icon-lg');
 
   protected readonly class = computed(() =>
     cn(
-      'inline-flex items-center justify-center rounded-full',
-      'bg-primary text-primary-foreground',
-      'shadow-lg hover:shadow-xl',
-      'transition-all duration-300',
-      'focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
-      this.sizeClasses(),
+      buttonVariants({ variant: this.variant(), size: this.size() }),
+      'rounded-full shadow-lg',
       this.classInput(),
     ),
   );
 
-  private sizeClasses(): string {
-    const sizes = {
-      sm: 'h-12 w-12',
-      md: 'h-14 w-14',
-      lg: 'h-16 w-16',
-    };
-    return sizes[this.speedDial.size()];
+  constructor() {
+    ɵwarnIfUnnamed('scSpeedDialTrigger');
+    this.dial.ɵtrigger.set(
+      inject<ElementRef<HTMLElement>>(ElementRef).nativeElement,
+    );
+  }
+
+  protected toggle(): void {
+    if (this.dial.open()) this.dial.close();
+    else this.dial.openOnFirst();
+  }
+
+  protected onKeydown(event: KeyboardEvent): void {
+    if (!event.key.startsWith('Arrow')) return;
+    event.preventDefault();
+    this.dial.openOnFirst();
   }
 }

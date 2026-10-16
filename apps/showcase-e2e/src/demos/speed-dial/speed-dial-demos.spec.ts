@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 
 test.describe('Basic', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/demos/speed-dial-next/basic-speed-dial-next-demo');
+    await page.goto('/demos/speed-dial/basic-speed-dial-demo');
   });
 
   test('opens on its first action; an action closes it', async ({ page }) => {
@@ -50,7 +50,7 @@ test.describe('Basic', () => {
 });
 
 test('Directions: left, its arrows sideways', async ({ page }) => {
-  await page.goto('/demos/speed-dial-next/directions-speed-dial-next-demo');
+  await page.goto('/demos/speed-dial/directions-speed-dial-demo');
   await page.getByRole('button', { name: 'Actions, left' }).click();
   const menu = page.getByRole('menu', { name: 'Actions, left' });
   await expect(menu).toHaveAttribute('aria-orientation', 'horizontal');
@@ -60,7 +60,7 @@ test('Directions: left, its arrows sideways', async ({ page }) => {
 });
 
 test('Arc: on a quarter circle', async ({ page }) => {
-  await page.goto('/demos/speed-dial-next/arc-speed-dial-next-demo');
+  await page.goto('/demos/speed-dial/arc-speed-dial-demo');
   const trigger = page.getByRole('button', { name: 'Actions' });
   await trigger.click();
   const center = await trigger.boundingBox();
@@ -88,7 +88,7 @@ test('Arc: on a quarter circle', async ({ page }) => {
 });
 
 test('Backdrop: a tap on it closes', async ({ page }) => {
-  await page.goto('/demos/speed-dial-next/backdrop-speed-dial-next-demo');
+  await page.goto('/demos/speed-dial/backdrop-speed-dial-demo');
   const trigger = page.getByRole('button', { name: 'Compose' });
   await trigger.click();
   const backdrop = page.locator('[data-slot="speed-dial-backdrop"]');
@@ -101,7 +101,7 @@ test('Backdrop: a tap on it closes', async ({ page }) => {
 test('Controlled: open from outside; a disabled action does nothing', async ({
   page,
 }) => {
-  await page.goto('/demos/speed-dial-next/controlled-speed-dial-next-demo');
+  await page.goto('/demos/speed-dial/controlled-speed-dial-demo');
   await page.getByRole('button', { name: 'Open', exact: true }).click();
   await expect(page.getByText('Open: true')).toBeVisible();
   const remove = page.getByRole('menuitem', { name: 'Delete' });

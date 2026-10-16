@@ -1,10 +1,10 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { ScSpeedDialNext } from './speed-dial-next';
+import { ScSpeedDial } from './speed-dial';
 
 /** The actions: a menu, placed by the dial's direction; unreachable while closed. */
 @Directive({
-  selector: '[scSpeedDialNextList]',
+  selector: '[scSpeedDialList]',
   host: {
     'data-slot': 'speed-dial-list',
     role: 'menu',
@@ -16,8 +16,8 @@ import { ScSpeedDialNext } from './speed-dial-next';
     '[class]': 'class()',
   },
 })
-export class ScSpeedDialNextList {
-  protected readonly dial = inject(ScSpeedDialNext);
+export class ScSpeedDialList {
+  protected readonly dial = inject(ScSpeedDial);
 
   readonly classInput = input<string>('', { alias: 'class' });
 

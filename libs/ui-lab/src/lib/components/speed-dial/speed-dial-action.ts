@@ -1,45 +1,155 @@
-import { Directive, computed, inject, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
-import { SC_SPEED_DIAL } from './speed-dial-types';
+import {
+  DestroyRef,
+  Directive,
+  ElementRef,
+  booleanAttribute,
+  computed,
+  inject,
+  input,
+} from '@angular/core';
+import {
+  type ScButtonVariants,
+  buttonVariants,
+  cn,
+} from '@semantic-components/ui';
+import { ScSpeedDial } from './speed-dial';
 
+/** How far the actions are from the button on a quarter circle: per action, and at least. */
+const ARC_STEP = 24;
+const ARC_MIN = 84;
+
+/** Where each corner's quarter circle starts and ends, in degrees. */
+const ARCS: Record<string, [number, number]> = {
+  'up-left': [-90, -180],
+  'up-right': [-90, 0],
+  'down-left': [90, 180],
+  'down-right': [90, 0],
+};
+
+type Move = 'next' | 'previous' | 'first' | 'last';
+
+/**
+ * An action — a menu item: done, the dial closes. Write its icon and its
+ * label (`scSpeedDialLabel`) inside it — the label is its name. Disabled,
+ * it stays reachable, and does nothing.
+ */
 @Directive({
-  selector: '[scSpeedDialAction]',
+  selector: 'button[scSpeedDialAction]',
   host: {
-    // The menu item is the button inside; this wrapper only lays it out.
-    role: 'none',
+    type: 'button',
+    'data-slot': 'speed-dial-action',
+    role: 'menuitem',
+    tabindex: '-1',
+    // Not natively disabled: a menu item stays reachable.
+    '[attr.disabled]': 'null',
+    '[attr.aria-disabled]': 'disabled() || null',
+    '[style.translate]': 'arcAt()',
+    '[style.transition-delay.ms]': 'delay()',
     '[class]': 'class()',
-    '[style.transition-delay]': 'transitionDelay()',
+    '(click)': 'dial.close()',
+    '(keydown)': 'onKeydown($event)',
   },
 })
 export class ScSpeedDialAction {
-  readonly speedDial = inject(SC_SPEED_DIAL);
+  protected readonly dial = inject(ScSpeedDial);
+  private readonly element =
+    inject<ElementRef<HTMLButtonElement>>(ElementRef).nativeElement;
 
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly disabled = input(false, { transform: booleanAttribute });
+  readonly variant = input<ScButtonVariants['variant']>('secondary');
+  readonly size = input<ScButtonVariants['size']>('icon');
 
-  protected readonly index = computed(() =>
-    this.speedDial.actions().indexOf(this),
+  private readonly index = computed(() =>
+    this.dial.ɵactions().indexOf(this.element),
   );
 
-  protected readonly transitionDelay = computed(() => {
-    const i = this.index();
-    const total = this.speedDial.actions().length;
-    return this.speedDial.open() ? `${i * 50}ms` : `${(total - 1 - i) * 30}ms`;
+  /** One after the other, opening. */
+  protected readonly delay = computed(() =>
+    this.dial.open() ? this.index() * 30 : 0,
+  );
+
+  /** On a quarter circle: its place on it. */
+  protected readonly arcAt = computed(() => {
+    const arc = ARCS[this.dial.direction()];
+    if (!arc) return null;
+    const count = this.dial.ɵactions().length;
+    const at = count > 1 ? this.index() / (count - 1) : 0.5;
+    const angle = ((arc[0] + (arc[1] - arc[0]) * at) * Math.PI) / 180;
+    const radius = Math.max(ARC_MIN, count * ARC_STEP);
+    const x = Math.round(Math.cos(angle) * radius);
+    const y = Math.round(Math.sin(angle) * radius);
+    return `calc(-50% + ${x}px) calc(-50% + ${y}px)`;
   });
 
-  protected readonly class = computed(() => {
-    const isOpen = this.speedDial.open();
-    const dir = this.speedDial.direction();
-    return cn(
-      'flex items-center gap-3 transition-all duration-200 ease-out',
-      dir === 'left' ? 'flex-row-reverse' : 'flex-row',
-      isOpen
-        ? 'opacity-100 scale-100 translate-y-0 translate-x-0'
-        : 'opacity-0 scale-75 pointer-events-none',
-      !isOpen && dir === 'up' && 'translate-y-4',
-      !isOpen && dir === 'down' && '-translate-y-4',
-      !isOpen && dir === 'left' && 'translate-x-4',
-      !isOpen && dir === 'right' && '-translate-x-4',
+  protected readonly class = computed(() =>
+    cn(
+      buttonVariants({ variant: this.variant(), size: this.size() }),
+      'relative rounded-full shadow-md transition-[scale,opacity] duration-200 ease-out',
+      'aria-disabled:cursor-not-allowed aria-disabled:opacity-50',
+      this.dial.arc() && 'absolute top-0 left-0',
+      !this.dial.open() && 'scale-50 opacity-0',
       this.classInput(),
+    ),
+  );
+
+  constructor() {
+    // In document order.
+    this.dial.ɵactions.update((actions) =>
+      [...actions, this.element].sort((a, b) =>
+        a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING
+          ? -1
+          : 1,
+      ),
     );
-  });
+    // Disabled: no click reaches your handlers.
+    const block = (event: Event) => {
+      if (!this.disabled()) return;
+      event.preventDefault();
+      event.stopImmediatePropagation();
+    };
+    this.element.addEventListener('click', block, { capture: true });
+    inject(DestroyRef).onDestroy(() => {
+      this.element.removeEventListener('click', block, { capture: true });
+      this.dial.ɵactions.update((actions) =>
+        actions.filter((action) => action !== this.element),
+      );
+    });
+  }
+
+  protected onKeydown(event: KeyboardEvent): void {
+    const move = this.moves()[event.key];
+    if (move) {
+      this.dial.ɵmove(this.element, move);
+    } else if (event.key === 'Escape') {
+      this.dial.close();
+    } else if (event.key === 'Tab') {
+      // Focus goes on, out of the dial.
+      this.dial.close(false);
+      return;
+    } else {
+      return;
+    }
+    event.preventDefault();
+  }
+
+  /** The keys, by the way the actions open: away from the button is next. */
+  private moves(): Record<string, Move> {
+    const lines: Record<string, [string, string]> = {
+      up: ['ArrowUp', 'ArrowDown'],
+      down: ['ArrowDown', 'ArrowUp'],
+      left: ['ArrowLeft', 'ArrowRight'],
+      right: ['ArrowRight', 'ArrowLeft'],
+    };
+    const ends: Record<string, Move> = { Home: 'first', End: 'last' };
+    const line = lines[this.dial.direction()];
+    if (line) return { [line[0]]: 'next', [line[1]]: 'previous', ...ends };
+    return {
+      ArrowDown: 'next',
+      ArrowRight: 'next',
+      ArrowUp: 'previous',
+      ArrowLeft: 'previous',
+      ...ends,
+    };
+  }
 }

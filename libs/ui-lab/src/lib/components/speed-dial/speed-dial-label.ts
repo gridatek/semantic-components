@@ -1,20 +1,20 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { ScSpeedDialNext } from './speed-dial-next';
+import { ScSpeedDial } from './speed-dial';
 
 /**
  * An action's label — inside the action, so its name — shown beside it as a
  * chip; on a quarter circle, only read.
  */
 @Directive({
-  selector: '[scSpeedDialNextLabel]',
+  selector: '[scSpeedDialLabel]',
   host: {
     'data-slot': 'speed-dial-label',
     '[class]': 'class()',
   },
 })
-export class ScSpeedDialNextLabel {
-  private readonly dial = inject(ScSpeedDialNext);
+export class ScSpeedDialLabel {
+  private readonly dial = inject(ScSpeedDial);
 
   readonly classInput = input<string>('', { alias: 'class' });
 

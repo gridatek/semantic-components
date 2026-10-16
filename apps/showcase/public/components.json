@@ -810,15 +810,7 @@
   {
     "name": "Speed Dial",
     "path": "speed-dial",
-    "description": "Floating action button with expandable menu.",
-    "status": "Experimental",
-    "library": "ui-lab",
-    "category": "Buttons & Actions"
-  },
-  {
-    "name": "Speed Dial Next",
-    "path": "speed-dial-next",
-    "description": "The speed dial, rebuilt: a floating button opening a menu of actions, in a line or on an arc, with a backdrop.",
+    "description": "A floating button opening a menu of actions, in a line or on an arc, with a backdrop.",
     "status": "Experimental",
     "library": "ui-lab",
     "category": "Buttons & Actions"

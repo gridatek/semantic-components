@@ -1,31 +1,31 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { BackdropSpeedDialNextDemo } from './backdrop-speed-dial-next-demo';
+import { BackdropSpeedDialDemo } from './backdrop-speed-dial-demo';
 
 @Component({
-  selector: 'app-backdrop-speed-dial-next-demo-container',
-  imports: [DemoContainer, BackdropSpeedDialNextDemo],
+  selector: 'app-backdrop-speed-dial-demo-container',
+  imports: [DemoContainer, BackdropSpeedDialDemo],
   template: `
     <app-demo-container
       title="Backdrop"
       [code]="code"
-      demoUrl="/demos/speed-dial-next/backdrop-speed-dial-next-demo"
+      demoUrl="/demos/speed-dial/backdrop-speed-dial-demo"
     >
-      <app-backdrop-speed-dial-next-demo />
+      <app-backdrop-speed-dial-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class BackdropSpeedDialNextDemoContainer {
+export class BackdropSpeedDialDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScSpeedDialNext,
-  ScSpeedDialNextAction,
-  ScSpeedDialNextBackdrop,
-  ScSpeedDialNextLabel,
-  ScSpeedDialNextList,
-  ScSpeedDialNextTrigger,
+  ScSpeedDial,
+  ScSpeedDialAction,
+  ScSpeedDialBackdrop,
+  ScSpeedDialLabel,
+  ScSpeedDialList,
+  ScSpeedDialTrigger,
 } from '@semantic-components/ui-lab';
 import {
   SiCopyIcon,
@@ -36,14 +36,14 @@ import {
 
 /** On a phone: the page dims behind the actions; a tap on it closes them. */
 @Component({
-  selector: 'app-backdrop-speed-dial-next-demo',
+  selector: 'app-backdrop-speed-dial-demo',
   imports: [
-    ScSpeedDialNext,
-    ScSpeedDialNextTrigger,
-    ScSpeedDialNextList,
-    ScSpeedDialNextAction,
-    ScSpeedDialNextLabel,
-    ScSpeedDialNextBackdrop,
+    ScSpeedDial,
+    ScSpeedDialTrigger,
+    ScSpeedDialList,
+    ScSpeedDialAction,
+    ScSpeedDialLabel,
+    ScSpeedDialBackdrop,
     SiPlusIcon,
     SiPencilIcon,
     SiCopyIcon,
@@ -59,23 +59,23 @@ import {
           <div class="bg-muted h-12 rounded-md"></div>
         }
       </div>
-      <div scSpeedDialNext class="absolute end-4 bottom-4">
-        <div scSpeedDialNextBackdrop></div>
-        <div scSpeedDialNextList>
-          <button scSpeedDialNextAction (click)="last.set('Edit')">
+      <div scSpeedDial class="absolute end-4 bottom-4">
+        <div scSpeedDialBackdrop></div>
+        <div scSpeedDialList>
+          <button scSpeedDialAction (click)="last.set('Edit')">
             <svg siPencilIcon></svg>
-            <span scSpeedDialNextLabel>Edit</span>
+            <span scSpeedDialLabel>Edit</span>
           </button>
-          <button scSpeedDialNextAction (click)="last.set('Copy')">
+          <button scSpeedDialAction (click)="last.set('Copy')">
             <svg siCopyIcon></svg>
-            <span scSpeedDialNextLabel>Copy</span>
+            <span scSpeedDialLabel>Copy</span>
           </button>
-          <button scSpeedDialNextAction (click)="last.set('Share')">
+          <button scSpeedDialAction (click)="last.set('Share')">
             <svg siShare2Icon></svg>
-            <span scSpeedDialNextLabel>Share</span>
+            <span scSpeedDialLabel>Share</span>
           </button>
         </div>
-        <button scSpeedDialNextTrigger>
+        <button scSpeedDialTrigger>
           <svg
             siPlusIcon
             class="transition-transform in-data-open:rotate-45"
@@ -91,7 +91,7 @@ import {
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class BackdropSpeedDialNextDemo {
+export class BackdropSpeedDialDemo {
   readonly last = signal('');
   readonly lines = [1, 2, 3, 4, 5];
 }`;

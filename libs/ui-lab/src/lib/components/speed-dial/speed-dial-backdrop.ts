@@ -1,10 +1,10 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { ScSpeedDialNext } from './speed-dial-next';
+import { ScSpeedDial } from './speed-dial';
 
 /** Dims what is behind while open; a click on it closes the dial. */
 @Directive({
-  selector: 'div[scSpeedDialNextBackdrop]',
+  selector: 'div[scSpeedDialBackdrop]',
   host: {
     'data-slot': 'speed-dial-backdrop',
     'aria-hidden': 'true',
@@ -13,8 +13,8 @@ import { ScSpeedDialNext } from './speed-dial-next';
     '(click)': 'dial.close()',
   },
 })
-export class ScSpeedDialNextBackdrop {
-  protected readonly dial = inject(ScSpeedDialNext);
+export class ScSpeedDialBackdrop {
+  protected readonly dial = inject(ScSpeedDial);
 
   readonly classInput = input<string>('', { alias: 'class' });
 

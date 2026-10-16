@@ -18,235 +18,79 @@ import { DirectionsSpeedDialDemo } from './directions-speed-dial-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class DirectionsSpeedDialDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScSpeedDial,
   ScSpeedDialAction,
-  ScSpeedDialActionButton,
-  ScSpeedDialActionLabel,
-  ScSpeedDialActionList,
+  ScSpeedDialLabel,
+  ScSpeedDialList,
   ScSpeedDialTrigger,
 } from '@semantic-components/ui-lab';
 import {
-  SiCircleQuestionMarkIcon,
-  SiHouseIcon,
+  SiCopyIcon,
+  SiPencilIcon,
   SiPlusIcon,
-  SiSettingsIcon,
-  SiXIcon,
+  SiShare2Icon,
 } from '@semantic-icons/lucide-icons';
 
+/** Up, down, left or right — the arrow keys follow: away from the button is the next action. */
 @Component({
   selector: 'app-directions-speed-dial-demo',
   imports: [
     ScSpeedDial,
-    ScSpeedDialAction,
-    ScSpeedDialActionButton,
-    ScSpeedDialActionLabel,
-    ScSpeedDialActionList,
     ScSpeedDialTrigger,
-    SiHouseIcon,
-    SiSettingsIcon,
-    SiCircleQuestionMarkIcon,
+    ScSpeedDialList,
+    ScSpeedDialAction,
+    ScSpeedDialLabel,
     SiPlusIcon,
-    SiXIcon,
+    SiPencilIcon,
+    SiCopyIcon,
+    SiShare2Icon,
   ],
   template: \`
-    <div class="grid w-full grid-cols-2 gap-4">
-      <!-- Up Direction -->
-      <div class="bg-muted/20 relative h-72 rounded-lg border">
-        <div class="absolute bottom-4 left-1/2 -translate-x-1/2">
-          <div scSpeedDial #dialUp="scSpeedDial" direction="up">
-            <div scSpeedDialActionList>
-              <div scSpeedDialAction>
-                <button scSpeedDialActionButton>
-                  <svg siHouseIcon class="size-5" />
-                  <span class="sr-only">Home</span>
-                </button>
-                @if (dialUp.open()) {
-                  <span scSpeedDialActionLabel>Home</span>
-                }
-              </div>
-              <div scSpeedDialAction>
-                <button scSpeedDialActionButton>
-                  <svg siSettingsIcon class="size-5" />
-                  <span class="sr-only">Settings</span>
-                </button>
-                @if (dialUp.open()) {
-                  <span scSpeedDialActionLabel>Settings</span>
-                }
-              </div>
-              <div scSpeedDialAction>
-                <button scSpeedDialActionButton>
-                  <svg siCircleQuestionMarkIcon class="size-5" />
-                  <span class="sr-only">Help</span>
-                </button>
-                @if (dialUp.open()) {
-                  <span scSpeedDialActionLabel>Help</span>
-                }
-              </div>
+    <div class="grid w-full gap-4 sm:grid-cols-2">
+      @for (way of ways; track way.direction) {
+        <div class="bg-muted/30 relative h-56 rounded-lg border">
+          <div scSpeedDial [direction]="way.direction" [class]="way.place">
+            <div scSpeedDialList>
+              <button scSpeedDialAction (click)="last.set('Edit')">
+                <svg siPencilIcon></svg>
+                <span scSpeedDialLabel>Edit</span>
+              </button>
+              <button scSpeedDialAction (click)="last.set('Copy')">
+                <svg siCopyIcon></svg>
+                <span scSpeedDialLabel>Copy</span>
+              </button>
+              <button scSpeedDialAction (click)="last.set('Share')">
+                <svg siShare2Icon></svg>
+                <span scSpeedDialLabel>Share</span>
+              </button>
             </div>
             <button scSpeedDialTrigger>
-              @if (dialUp.open()) {
-                <svg siXIcon class="size-6" />
-              } @else {
-                <svg siPlusIcon class="size-6" />
-              }
-              <span class="sr-only">Up direction</span>
+              <svg
+                siPlusIcon
+                class="transition-transform in-data-open:rotate-45"
+              ></svg>
+              <span class="sr-only">Actions, {{ way.direction }}</span>
             </button>
           </div>
         </div>
-        <span class="text-muted-foreground absolute top-2 left-2 text-xs">
-          Up (default)
-        </span>
-      </div>
-
-      <!-- Down Direction -->
-      <div class="bg-muted/20 relative h-72 rounded-lg border">
-        <div class="absolute top-4 left-1/2 -translate-x-1/2">
-          <div scSpeedDial #dialDown="scSpeedDial" direction="down">
-            <div scSpeedDialActionList>
-              <div scSpeedDialAction>
-                <button scSpeedDialActionButton>
-                  <svg siHouseIcon class="size-5" />
-                  <span class="sr-only">Home</span>
-                </button>
-                @if (dialDown.open()) {
-                  <span scSpeedDialActionLabel>Home</span>
-                }
-              </div>
-              <div scSpeedDialAction>
-                <button scSpeedDialActionButton>
-                  <svg siSettingsIcon class="size-5" />
-                  <span class="sr-only">Settings</span>
-                </button>
-                @if (dialDown.open()) {
-                  <span scSpeedDialActionLabel>Settings</span>
-                }
-              </div>
-              <div scSpeedDialAction>
-                <button scSpeedDialActionButton>
-                  <svg siCircleQuestionMarkIcon class="size-5" />
-                  <span class="sr-only">Help</span>
-                </button>
-                @if (dialDown.open()) {
-                  <span scSpeedDialActionLabel>Help</span>
-                }
-              </div>
-            </div>
-            <button scSpeedDialTrigger>
-              @if (dialDown.open()) {
-                <svg siXIcon class="size-6" />
-              } @else {
-                <svg siPlusIcon class="size-6" />
-              }
-              <span class="sr-only">Down direction</span>
-            </button>
-          </div>
-        </div>
-        <span class="text-muted-foreground absolute top-2 left-2 text-xs">
-          Down
-        </span>
-      </div>
-
-      <!-- Left Direction -->
-      <div class="bg-muted/20 relative h-72 rounded-lg border">
-        <div class="absolute top-1/2 left-4 -translate-y-1/2">
-          <div scSpeedDial #dialLeft="scSpeedDial" direction="left">
-            <div scSpeedDialActionList>
-              <div scSpeedDialAction>
-                <button scSpeedDialActionButton>
-                  <svg siHouseIcon class="size-5" />
-                  <span class="sr-only">Home</span>
-                </button>
-                @if (dialLeft.open()) {
-                  <span scSpeedDialActionLabel>Home</span>
-                }
-              </div>
-              <div scSpeedDialAction>
-                <button scSpeedDialActionButton>
-                  <svg siSettingsIcon class="size-5" />
-                  <span class="sr-only">Settings</span>
-                </button>
-                @if (dialLeft.open()) {
-                  <span scSpeedDialActionLabel>Settings</span>
-                }
-              </div>
-              <div scSpeedDialAction>
-                <button scSpeedDialActionButton>
-                  <svg siCircleQuestionMarkIcon class="size-5" />
-                  <span class="sr-only">Help</span>
-                </button>
-                @if (dialLeft.open()) {
-                  <span scSpeedDialActionLabel>Help</span>
-                }
-              </div>
-            </div>
-            <button scSpeedDialTrigger>
-              @if (dialLeft.open()) {
-                <svg siXIcon class="size-6" />
-              } @else {
-                <svg siPlusIcon class="size-6" />
-              }
-              <span class="sr-only">Left direction</span>
-            </button>
-          </div>
-        </div>
-        <span class="text-muted-foreground absolute top-2 left-2 text-xs">
-          Left
-        </span>
-      </div>
-
-      <!-- Right Direction -->
-      <div class="bg-muted/20 relative h-72 rounded-lg border">
-        <div class="absolute top-1/2 right-4 -translate-y-1/2">
-          <div scSpeedDial #dialRight="scSpeedDial" direction="right">
-            <div scSpeedDialActionList>
-              <div scSpeedDialAction>
-                <button scSpeedDialActionButton>
-                  <svg siHouseIcon class="size-5" />
-                  <span class="sr-only">Home</span>
-                </button>
-                @if (dialRight.open()) {
-                  <span scSpeedDialActionLabel>Home</span>
-                }
-              </div>
-              <div scSpeedDialAction>
-                <button scSpeedDialActionButton>
-                  <svg siSettingsIcon class="size-5" />
-                  <span class="sr-only">Settings</span>
-                </button>
-                @if (dialRight.open()) {
-                  <span scSpeedDialActionLabel>Settings</span>
-                }
-              </div>
-              <div scSpeedDialAction>
-                <button scSpeedDialActionButton>
-                  <svg siCircleQuestionMarkIcon class="size-5" />
-                  <span class="sr-only">Help</span>
-                </button>
-                @if (dialRight.open()) {
-                  <span scSpeedDialActionLabel>Help</span>
-                }
-              </div>
-            </div>
-            <button scSpeedDialTrigger>
-              @if (dialRight.open()) {
-                <svg siXIcon class="size-6" />
-              } @else {
-                <svg siPlusIcon class="size-6" />
-              }
-              <span class="sr-only">Right direction</span>
-            </button>
-          </div>
-        </div>
-        <span class="text-muted-foreground absolute top-2 left-2 text-xs">
-          Right
-        </span>
-      </div>
+      }
     </div>
+    <p class="text-muted-foreground text-sm" aria-live="polite">
+      {{ last() ? 'Last action: ' + last() : 'No action yet' }}
+    </p>
   \`,
-  host: { class: 'flex w-full justify-center' },
+  host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class DirectionsSpeedDialDemo {}`;
+export class DirectionsSpeedDialDemo {
+  readonly last = signal('');
+  readonly ways = [
+    { direction: 'up', place: 'absolute start-1/2 bottom-4 -translate-x-1/2' },
+    { direction: 'down', place: 'absolute start-1/2 top-4 -translate-x-1/2' },
+    { direction: 'left', place: 'absolute end-4 top-1/2 -translate-y-1/2' },
+    { direction: 'right', place: 'absolute start-4 top-1/2 -translate-y-1/2' },
+  ] as const;
+}`;
 }

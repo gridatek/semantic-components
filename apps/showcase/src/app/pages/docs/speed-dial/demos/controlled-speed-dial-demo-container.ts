@@ -1,31 +1,31 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { ControlledSpeedDialNextDemo } from './controlled-speed-dial-next-demo';
+import { ControlledSpeedDialDemo } from './controlled-speed-dial-demo';
 
 @Component({
-  selector: 'app-controlled-speed-dial-next-demo-container',
-  imports: [DemoContainer, ControlledSpeedDialNextDemo],
+  selector: 'app-controlled-speed-dial-demo-container',
+  imports: [DemoContainer, ControlledSpeedDialDemo],
   template: `
     <app-demo-container
       title="Controlled"
       [code]="code"
-      demoUrl="/demos/speed-dial-next/controlled-speed-dial-next-demo"
+      demoUrl="/demos/speed-dial/controlled-speed-dial-demo"
     >
-      <app-controlled-speed-dial-next-demo />
+      <app-controlled-speed-dial-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ControlledSpeedDialNextDemoContainer {
+export class ControlledSpeedDialDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
 import {
-  ScSpeedDialNext,
-  ScSpeedDialNextAction,
-  ScSpeedDialNextLabel,
-  ScSpeedDialNextList,
-  ScSpeedDialNextTrigger,
+  ScSpeedDial,
+  ScSpeedDialAction,
+  ScSpeedDialLabel,
+  ScSpeedDialList,
+  ScSpeedDialTrigger,
 } from '@semantic-components/ui-lab';
 import {
   SiCopyIcon,
@@ -37,13 +37,13 @@ import {
 
 /** Open is two-way — here opened from outside too (a press outside closes it). A disabled action stays reachable, and does nothing. */
 @Component({
-  selector: 'app-controlled-speed-dial-next-demo',
+  selector: 'app-controlled-speed-dial-demo',
   imports: [
-    ScSpeedDialNext,
-    ScSpeedDialNextTrigger,
-    ScSpeedDialNextList,
-    ScSpeedDialNextAction,
-    ScSpeedDialNextLabel,
+    ScSpeedDial,
+    ScSpeedDialTrigger,
+    ScSpeedDialList,
+    ScSpeedDialAction,
+    ScSpeedDialLabel,
     ScButton,
     SiPlusIcon,
     SiPencilIcon,
@@ -53,26 +53,26 @@ import {
   ],
   template: \`
     <div class="bg-muted/30 relative h-80 w-full rounded-lg border">
-      <div scSpeedDialNext [(open)]="open" class="absolute end-4 bottom-4">
-        <div scSpeedDialNextList>
-          <button scSpeedDialNextAction (click)="last.set('Edit')">
+      <div scSpeedDial [(open)]="open" class="absolute end-4 bottom-4">
+        <div scSpeedDialList>
+          <button scSpeedDialAction (click)="last.set('Edit')">
             <svg siPencilIcon></svg>
-            <span scSpeedDialNextLabel>Edit</span>
+            <span scSpeedDialLabel>Edit</span>
           </button>
-          <button scSpeedDialNextAction (click)="last.set('Copy')">
+          <button scSpeedDialAction (click)="last.set('Copy')">
             <svg siCopyIcon></svg>
-            <span scSpeedDialNextLabel>Copy</span>
+            <span scSpeedDialLabel>Copy</span>
           </button>
-          <button scSpeedDialNextAction (click)="last.set('Share')">
+          <button scSpeedDialAction (click)="last.set('Share')">
             <svg siShare2Icon></svg>
-            <span scSpeedDialNextLabel>Share</span>
+            <span scSpeedDialLabel>Share</span>
           </button>
-          <button scSpeedDialNextAction disabled (click)="last.set('Delete')">
+          <button scSpeedDialAction disabled (click)="last.set('Delete')">
             <svg siTrash2Icon></svg>
-            <span scSpeedDialNextLabel>Delete</span>
+            <span scSpeedDialLabel>Delete</span>
           </button>
         </div>
-        <button scSpeedDialNextTrigger>
+        <button scSpeedDialTrigger>
           <svg
             siPlusIcon
             class="transition-transform in-data-open:rotate-45"
@@ -82,9 +82,7 @@ import {
       </div>
     </div>
     <div class="flex items-center gap-3">
-      <button scButton variant="outline" (click)="open.set(true)">
-        Open
-      </button>
+      <button scButton variant="outline" (click)="open.set(true)">Open</button>
       <span class="text-muted-foreground text-sm">Open: {{ open() }}</span>
     </div>
     <p class="text-muted-foreground text-sm" aria-live="polite">
@@ -94,7 +92,7 @@ import {
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ControlledSpeedDialNextDemo {
+export class ControlledSpeedDialDemo {
   readonly last = signal('');
   readonly open = signal(false);
 }`;

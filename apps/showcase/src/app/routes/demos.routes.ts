@@ -3412,71 +3412,24 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'custom-icons-speed-dial-demo',
+        path: 'arc-speed-dial-demo',
         loadComponent: () =>
-          import('../pages/docs/speed-dial/demos/custom-icons-speed-dial-demo').then(
-            (m) => m.CustomIconsSpeedDialDemo,
+          import('../pages/docs/speed-dial/demos/arc-speed-dial-demo').then(
+            (m) => m.ArcSpeedDialDemo,
           ),
       },
       {
-        path: 'sizes-speed-dial-demo',
+        path: 'backdrop-speed-dial-demo',
         loadComponent: () =>
-          import('../pages/docs/speed-dial/demos/sizes-speed-dial-demo').then(
-            (m) => m.SizesSpeedDialDemo,
+          import('../pages/docs/speed-dial/demos/backdrop-speed-dial-demo').then(
+            (m) => m.BackdropSpeedDialDemo,
           ),
       },
       {
-        path: 'without-labels-speed-dial-demo',
+        path: 'controlled-speed-dial-demo',
         loadComponent: () =>
-          import('../pages/docs/speed-dial/demos/without-labels-speed-dial-demo').then(
-            (m) => m.WithoutLabelsSpeedDialDemo,
-          ),
-      },
-      {
-        path: 'disabled-actions-speed-dial-demo',
-        loadComponent: () =>
-          import('../pages/docs/speed-dial/demos/disabled-actions-speed-dial-demo').then(
-            (m) => m.DisabledActionsSpeedDialDemo,
-          ),
-      },
-    ],
-  },
-  {
-    path: 'demos/speed-dial-next',
-    children: [
-      {
-        path: 'basic-speed-dial-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/speed-dial-next/demos/basic-speed-dial-next-demo').then(
-            (m) => m.BasicSpeedDialNextDemo,
-          ),
-      },
-      {
-        path: 'directions-speed-dial-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/speed-dial-next/demos/directions-speed-dial-next-demo').then(
-            (m) => m.DirectionsSpeedDialNextDemo,
-          ),
-      },
-      {
-        path: 'arc-speed-dial-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/speed-dial-next/demos/arc-speed-dial-next-demo').then(
-            (m) => m.ArcSpeedDialNextDemo,
-          ),
-      },
-      {
-        path: 'backdrop-speed-dial-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/speed-dial-next/demos/backdrop-speed-dial-next-demo').then(
-            (m) => m.BackdropSpeedDialNextDemo,
-          ),
-      },
-      {
-        path: 'controlled-speed-dial-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/speed-dial-next/demos/controlled-speed-dial-next-demo').then(
-            (m) => m.ControlledSpeedDialNextDemo,
+          import('../pages/docs/speed-dial/demos/controlled-speed-dial-demo').then(
+            (m) => m.ControlledSpeedDialDemo,
           ),
       },
     ],
