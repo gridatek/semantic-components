@@ -18,7 +18,9 @@ import { PlayerVideoPlayerNextDemo } from './player-video-player-next-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class PlayerVideoPlayerNextDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
+import { FormField, form } from '@angular/forms/signals';
+import { ScRadio, ScRadioField, ScRadioGroup } from '@semantic-components/ui';
 import {
   ScVideoPlayerNext,
   ScVideoPlayerNextCaptions,
@@ -82,13 +84,18 @@ import {
     SiMaximizeIcon,
     SiMinimizeIcon,
     SiLoaderCircleIcon,
+    ScRadioGroup,
+    ScRadioField,
+    ScRadio,
+    FormField,
   ],
   template: \`
     <div
       scVideoPlayerNext
       #player="scVideoPlayerNext"
       aria-label="Video: Sintel, the trailer"
-      [(captions)]="captions"
+      [captions]="captions()"
+      (captionsChange)="setCaptions($event)"
       [metadata]="{ title: 'Sintel — trailer', artist: 'Blender Foundation' }"
       class="aspect-video w-full max-w-2xl"
     >
@@ -224,39 +231,49 @@ import {
       </div>
     </div>
 
-    <div
-      role="radiogroup"
-      aria-label="Captions"
-      class="flex items-center gap-2 text-sm"
-    >
-      <span class="text-muted-foreground">Captions:</span>
-      <label class="flex items-center gap-1">
-        <input
-          type="radio"
-          name="captions"
-          [checked]="captions() === null"
-          (change)="captions.set(null)"
-        />
-        Off
-      </label>
-      @for (track of player.tracks(); track track.id) {
-        <label class="flex items-center gap-1">
+    <div class="flex items-center gap-4 text-sm">
+      <span id="captions-label" class="text-muted-foreground">Captions:</span>
+      <div
+        scRadioGroup
+        orientation="horizontal"
+        aria-labelledby="captions-label"
+      >
+        <label scRadioField>
           <input
             type="radio"
-            name="captions"
-            [checked]="captions() === track.id"
-            (change)="captions.set(track.id)"
+            scRadio
+            value="off"
+            [formField]="settingsForm.captions"
           />
-          {{ track.label }}
+          Off
         </label>
-      }
+        @for (track of player.tracks(); track track.id) {
+          <label scRadioField>
+            <input
+              type="radio"
+              scRadio
+              [value]="track.id"
+              [formField]="settingsForm.captions"
+            />
+            {{ track.label }}
+          </label>
+        }
+      </div>
     </div>
   \`,
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
 export class PlayerVideoPlayerNextDemo {
-  readonly captions = signal<string | null>(null);
+  readonly settings = signal({ captions: 'off' });
+  readonly settingsForm = form(this.settings);
+  readonly captions = computed(() =>
+    this.settings().captions === 'off' ? null : this.settings().captions,
+  );
   readonly rates = [1, 1.5, 2];
+
+  setCaptions(id: string | null) {
+    this.settings.set({ captions: id ?? 'off' });
+  }
 }`;
 }

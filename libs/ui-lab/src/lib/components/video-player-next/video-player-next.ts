@@ -37,7 +37,7 @@ const IDLE_AFTER = 2500;
  * ways — paused, time, volume, muted, rate, captions — and what it reads
  * (duration, buffered, waiting…). Put your controls in it. Focused inside,
  * keys control it: Space or K play, J / L ±10 s, ← / → ±5 s, ↑ / ↓ volume, M
- * mute, F fullscreen, C captions, 0–9 jump. Name it ("Video: A day").
+ * mute, F fullscreen, C captions, 0–9 jump. Name it ("Video: Sintel").
  */
 @Directive({
   selector: '[scVideoPlayerNext]',
