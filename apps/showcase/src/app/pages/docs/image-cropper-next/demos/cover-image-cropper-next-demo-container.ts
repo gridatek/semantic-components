@@ -56,7 +56,12 @@ import {
           alt="Mountains at dawn"
         />
         <div scImageCropperNextSelection aria-label="Cover">
-          <div scImageCropperNextGrid></div>
+          <div
+            scImageCropperNextGrid
+            [columns]="4"
+            [rows]="2"
+            class="*:border-amber-400"
+          ></div>
         </div>
       </div>
 

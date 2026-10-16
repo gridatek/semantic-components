@@ -12,7 +12,7 @@ scImageCropperNext (zoom, rotation, flipX, flipY, aspectRatio — area(), crop()
 ├── scImageCropperNextStage — give it a height
 │   ├── img[scImageCropperNextImage] — your image, its src and alt
 │   └── scImageCropperNextSelection — name it
-│       ├── scImageCropperNextGrid — thirds, while moving
+│       ├── scImageCropperNextGrid — guide lines: columns, rows (3), restyled from its class
 │       └── scImageCropperNextHandle × 8 — with any: a box
 ├── scImageCropperNextPreview → img[scImageCropperNextPreviewImage]
 └── buttons: ZoomIn, ZoomOut, RotateLeft, RotateRight, FlipHorizontal, FlipVertical, Reset, AspectRatio
@@ -59,6 +59,10 @@ A frame instead of a box: leave the handles out, and set a ratio and a shape —
 | `shape`                 | `'rect' \| 'circle'`              | `'rect'` | A circle crops to an ellipse, transparent around in a PNG     |
 
 `area()` is the crop in the (turned) image's pixels; `crop({ type, quality, width })` makes it a `Blob`. Moving it yourself: `move()`, `resizeBy()`, `zoomBy()`, `pan()`, `rotate()`, `reset()`.
+
+## The grid
+
+`scImageCropperNextGrid` draws the lines between its `columns` and `rows` (3 each: thirds; 1: none that way). Faint at rest, clearer while the crop moves. Its lines are styled from its class — `class="*:border-amber-400"`, and `opacity-100` to keep them clear. Leave it out for no grid.
 
 ## The parts' buttons
 
