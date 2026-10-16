@@ -37,7 +37,7 @@ export class ScImageCropperNextSelection {
     cn(
       'absolute outline-none',
       // The shade around: one shadow, as large as any stage.
-      'shadow-[0_0_0_9999px_rgb(0_0_0/0.55)] ring-1 ring-white/80',
+      'shadow-[0_0_0_9999px_rgb(0_0_0/0.55)] ring-2 ring-white',
       'focus-visible:ring-3 focus-visible:ring-ring',
       this.cropper.shape() === 'circle' && 'rounded-full',
       this.cropper.resizable() && 'cursor-move',

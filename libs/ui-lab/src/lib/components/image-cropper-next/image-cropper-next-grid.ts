@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation, computed, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
-/** Thirds, in the selection: shown while the crop is moved or resized. */
+/** Thirds, in the selection: faint, clearer while the crop is moved or resized. */
 @Component({
   selector: 'div[scImageCropperNextGrid]',
   template: `
@@ -22,7 +22,7 @@ export class ScImageCropperNextGrid {
 
   protected readonly class = computed(() =>
     cn(
-      'pointer-events-none absolute inset-0 overflow-hidden rounded-[inherit] opacity-0 transition-opacity',
+      'pointer-events-none absolute inset-0 overflow-hidden rounded-[inherit] opacity-80 transition-opacity',
       'in-data-active:opacity-100',
       this.classInput(),
     ),

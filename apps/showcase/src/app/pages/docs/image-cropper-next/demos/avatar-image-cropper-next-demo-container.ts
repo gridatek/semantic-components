@@ -22,6 +22,7 @@ export class AvatarImageCropperNextDemoContainer {
 import { ScButton, ScSlider } from '@semantic-components/ui';
 import {
   ScImageCropperNext,
+  ScImageCropperNextGrid,
   ScImageCropperNextHandle,
   ScImageCropperNextImage,
   ScImageCropperNextPreview,
@@ -31,7 +32,7 @@ import {
 } from '@semantic-components/ui-lab';
 
 /**
- * A circle: its corner handles resize it; the wheel, a pinch or the slider
+ * A circle: its handles resize it; the wheel, a pinch or the slider
  * zoom, and dragging around it moves the image.
  */
 @Component({
@@ -41,6 +42,7 @@ import {
     ScImageCropperNextStage,
     ScImageCropperNextImage,
     ScImageCropperNextSelection,
+    ScImageCropperNextGrid,
     ScImageCropperNextHandle,
     ScImageCropperNextPreview,
     ScImageCropperNextPreviewImage,
@@ -62,6 +64,7 @@ import {
           alt="Mountains at dawn"
         />
         <div scImageCropperNextSelection aria-label="Profile picture">
+          <div scImageCropperNextGrid></div>
           @for (handle of handles; track handle) {
             <div [scImageCropperNextHandle]="handle"></div>
           }
@@ -109,9 +112,13 @@ export class AvatarImageCropperNextDemo {
 
   readonly handles = [
     'top-left',
+    'top',
     'top-right',
+    'right',
     'bottom-right',
+    'bottom',
     'bottom-left',
+    'left',
   ] as const;
 
   readonly sizes = [

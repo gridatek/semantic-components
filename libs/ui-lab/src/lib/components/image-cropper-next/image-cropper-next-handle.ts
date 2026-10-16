@@ -3,15 +3,16 @@ import { cn } from '@semantic-components/ui';
 import { ScImageCropperNext } from './image-cropper-next';
 import type { ScImageCropperNextHandlePosition } from './image-cropper-next-geometry';
 
+/** Squares at the corners, bars on the edges, centred on the outline. */
 const PLACES: Record<ScImageCropperNextHandlePosition, string> = {
-  'top-left': 'top-0 left-0 cursor-nwse-resize',
-  top: 'top-0 left-1/2 cursor-ns-resize',
-  'top-right': 'top-0 left-full cursor-nesw-resize',
-  right: 'top-1/2 left-full cursor-ew-resize',
-  'bottom-right': 'top-full left-full cursor-nwse-resize',
-  bottom: 'top-full left-1/2 cursor-ns-resize',
-  'bottom-left': 'top-full left-0 cursor-nesw-resize',
-  left: 'top-1/2 left-0 cursor-ew-resize',
+  'top-left': '-top-1.5 -left-1.5 size-3 cursor-nwse-resize',
+  top: '-top-1.5 left-1/2 h-3 w-6 -translate-x-1/2 cursor-ns-resize',
+  'top-right': '-top-1.5 -right-1.5 size-3 cursor-nesw-resize',
+  right: 'top-1/2 -right-1.5 h-6 w-3 -translate-y-1/2 cursor-ew-resize',
+  'bottom-right': '-right-1.5 -bottom-1.5 size-3 cursor-nwse-resize',
+  bottom: '-bottom-1.5 left-1/2 h-3 w-6 -translate-x-1/2 cursor-ns-resize',
+  'bottom-left': '-bottom-1.5 -left-1.5 size-3 cursor-nesw-resize',
+  left: 'top-1/2 -left-1.5 h-6 w-3 -translate-y-1/2 cursor-ew-resize',
 };
 
 /**
@@ -38,7 +39,7 @@ export class ScImageCropperNextHandle {
 
   protected readonly class = computed(() =>
     cn(
-      'absolute size-3 -translate-x-1/2 -translate-y-1/2 rounded-sm border border-black/30 bg-white shadow-sm',
+      'absolute z-10 border border-gray-400 bg-white',
       // A larger target than it looks, for fingers.
       'before:absolute before:-inset-2',
       PLACES[this.position()],
