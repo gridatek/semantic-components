@@ -1,32 +1,32 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { ControlsBarcodeScannerNextDemo } from './controls-barcode-scanner-next-demo';
+import { ControlsBarcodeScannerDemo } from './controls-barcode-scanner-demo';
 
 @Component({
-  selector: 'app-controls-barcode-scanner-next-demo-container',
-  imports: [DemoContainer, ControlsBarcodeScannerNextDemo],
+  selector: 'app-controls-barcode-scanner-demo-container',
+  imports: [DemoContainer, ControlsBarcodeScannerDemo],
   template: `
     <app-demo-container
       title="Controls"
       [code]="code"
-      demoUrl="/demos/barcode-scanner-next/controls-barcode-scanner-next-demo"
+      demoUrl="/demos/barcode-scanner/controls-barcode-scanner-demo"
     >
-      <app-controls-barcode-scanner-next-demo />
+      <app-controls-barcode-scanner-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ControlsBarcodeScannerNextDemoContainer {
+export class ControlsBarcodeScannerDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScBarcodeScannerNext,
-  ScBarcodeScannerNextFinder,
-  ScBarcodeScannerNextOverlay,
-  ScBarcodeScannerNextSwitchCamera,
-  ScBarcodeScannerNextToggle,
-  ScBarcodeScannerNextTorch,
-  ScBarcodeScannerNextVideo,
+  ScBarcodeScanner,
+  ScBarcodeScannerFinder,
+  ScBarcodeScannerOverlay,
+  ScBarcodeScannerSwitchCamera,
+  ScBarcodeScannerToggle,
+  ScBarcodeScannerTorch,
+  ScBarcodeScannerVideo,
 } from '@semantic-components/ui-lab';
 import {
   SiCameraIcon,
@@ -37,15 +37,15 @@ import {
 
 /** The light and the other camera, where the device has them; the state, to say why it does not scan. */
 @Component({
-  selector: 'app-controls-barcode-scanner-next-demo',
+  selector: 'app-controls-barcode-scanner-demo',
   imports: [
-    ScBarcodeScannerNext,
-    ScBarcodeScannerNextVideo,
-    ScBarcodeScannerNextOverlay,
-    ScBarcodeScannerNextFinder,
-    ScBarcodeScannerNextToggle,
-    ScBarcodeScannerNextTorch,
-    ScBarcodeScannerNextSwitchCamera,
+    ScBarcodeScanner,
+    ScBarcodeScannerVideo,
+    ScBarcodeScannerOverlay,
+    ScBarcodeScannerFinder,
+    ScBarcodeScannerToggle,
+    ScBarcodeScannerTorch,
+    ScBarcodeScannerSwitchCamera,
     SiCameraIcon,
     SiCameraOffIcon,
     SiFlashlightIcon,
@@ -53,14 +53,14 @@ import {
   ],
   template: \`
     <div
-      scBarcodeScannerNext
-      #scanner="scBarcodeScannerNext"
+      scBarcodeScanner
+      #scanner="scBarcodeScanner"
       class="w-full max-w-md space-y-3"
     >
       <div class="relative aspect-[4/3] overflow-hidden rounded-lg bg-black">
-        <video scBarcodeScannerNextVideo></video>
-        <svg scBarcodeScannerNextOverlay></svg>
-        <div scBarcodeScannerNextFinder></div>
+        <video scBarcodeScannerVideo></video>
+        <svg scBarcodeScannerOverlay></svg>
+        <div scBarcodeScannerFinder></div>
         @switch (scanner.state()) {
           @case ('idle') {
             <p
@@ -93,7 +93,7 @@ import {
         }
       </div>
       <div class="flex items-center gap-2">
-        <button scBarcodeScannerNextToggle>
+        <button scBarcodeScannerToggle>
           @if (scanner.active()) {
             <svg siCameraOffIcon></svg>
             Stop
@@ -102,11 +102,11 @@ import {
             Scan
           }
         </button>
-        <button scBarcodeScannerNextTorch>
+        <button scBarcodeScannerTorch>
           <svg siFlashlightIcon></svg>
           <span class="sr-only">Light</span>
         </button>
-        <button scBarcodeScannerNextSwitchCamera>
+        <button scBarcodeScannerSwitchCamera>
           <svg siSwitchCameraIcon></svg>
           <span class="sr-only">Switch camera</span>
         </button>
@@ -119,5 +119,5 @@ import {
   host: { class: 'flex w-full flex-col items-center gap-4' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ControlsBarcodeScannerNextDemo {}`;
+export class ControlsBarcodeScannerDemo {}`;
 }

@@ -253,38 +253,17 @@ export const demosRoutes: Route[] = [
     path: 'demos/barcode-scanner',
     children: [
       {
-        path: 'basic-barcode-scanner-demo',
+        path: 'camera-barcode-scanner-demo',
         loadComponent: () =>
-          import('../pages/docs/barcode-scanner/demos/basic-barcode-scanner-demo').then(
-            (m) => m.BasicBarcodeScannerDemo,
+          import('../pages/docs/barcode-scanner/demos/camera-barcode-scanner-demo').then(
+            (m) => m.CameraBarcodeScannerDemo,
           ),
       },
       {
-        path: 'qr-code-barcode-scanner-demo',
+        path: 'once-barcode-scanner-demo',
         loadComponent: () =>
-          import('../pages/docs/barcode-scanner/demos/qr-code-barcode-scanner-demo').then(
-            (m) => m.QrCodeBarcodeScannerDemo,
-          ),
-      },
-      {
-        path: 'product-barcode-scanner-demo',
-        loadComponent: () =>
-          import('../pages/docs/barcode-scanner/demos/product-barcode-scanner-demo').then(
-            (m) => m.ProductBarcodeScannerDemo,
-          ),
-      },
-      {
-        path: 'single-scan-barcode-scanner-demo',
-        loadComponent: () =>
-          import('../pages/docs/barcode-scanner/demos/single-scan-barcode-scanner-demo').then(
-            (m) => m.SingleScanBarcodeScannerDemo,
-          ),
-      },
-      {
-        path: 'history-barcode-scanner-demo',
-        loadComponent: () =>
-          import('../pages/docs/barcode-scanner/demos/history-barcode-scanner-demo').then(
-            (m) => m.HistoryBarcodeScannerDemo,
+          import('../pages/docs/barcode-scanner/demos/once-barcode-scanner-demo').then(
+            (m) => m.OnceBarcodeScannerDemo,
           ),
       },
       {
@@ -295,50 +274,17 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'browser-support-barcode-scanner-demo',
+        path: 'picture-barcode-scanner-demo',
         loadComponent: () =>
-          import('../pages/docs/barcode-scanner/demos/browser-support-barcode-scanner-demo').then(
-            (m) => m.BrowserSupportBarcodeScannerDemo,
-          ),
-      },
-    ],
-  },
-  {
-    path: 'demos/barcode-scanner-next',
-    children: [
-      {
-        path: 'camera-barcode-scanner-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/barcode-scanner-next/demos/camera-barcode-scanner-next-demo').then(
-            (m) => m.CameraBarcodeScannerNextDemo,
+          import('../pages/docs/barcode-scanner/demos/picture-barcode-scanner-demo').then(
+            (m) => m.PictureBarcodeScannerDemo,
           ),
       },
       {
-        path: 'once-barcode-scanner-next-demo',
+        path: 'controls-barcode-scanner-demo',
         loadComponent: () =>
-          import('../pages/docs/barcode-scanner-next/demos/once-barcode-scanner-next-demo').then(
-            (m) => m.OnceBarcodeScannerNextDemo,
-          ),
-      },
-      {
-        path: 'formats-barcode-scanner-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/barcode-scanner-next/demos/formats-barcode-scanner-next-demo').then(
-            (m) => m.FormatsBarcodeScannerNextDemo,
-          ),
-      },
-      {
-        path: 'picture-barcode-scanner-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/barcode-scanner-next/demos/picture-barcode-scanner-next-demo').then(
-            (m) => m.PictureBarcodeScannerNextDemo,
-          ),
-      },
-      {
-        path: 'controls-barcode-scanner-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/barcode-scanner-next/demos/controls-barcode-scanner-next-demo').then(
-            (m) => m.ControlsBarcodeScannerNextDemo,
+          import('../pages/docs/barcode-scanner/demos/controls-barcode-scanner-demo').then(
+            (m) => m.ControlsBarcodeScannerDemo,
           ),
       },
     ],

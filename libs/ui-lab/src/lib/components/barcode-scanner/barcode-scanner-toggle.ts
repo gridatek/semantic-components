@@ -5,11 +5,11 @@ import {
   cn,
   ɵwarnIfUnnamed,
 } from '@semantic-components/ui';
-import { ScBarcodeScannerNext } from './barcode-scanner-next';
+import { ScBarcodeScanner } from './barcode-scanner';
 
 /** Turns the camera on and off; pressed while on. Write its icon and name it ("Camera"). */
 @Directive({
-  selector: 'button[scBarcodeScannerNextToggle]',
+  selector: 'button[scBarcodeScannerToggle]',
   host: {
     type: 'button',
     'data-slot': 'barcode-scanner-toggle',
@@ -19,8 +19,8 @@ import { ScBarcodeScannerNext } from './barcode-scanner-next';
     '(click)': 'scanner.active.set(!scanner.active())',
   },
 })
-export class ScBarcodeScannerNextToggle {
-  protected readonly scanner = inject(ScBarcodeScannerNext);
+export class ScBarcodeScannerToggle {
+  protected readonly scanner = inject(ScBarcodeScanner);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('default');
@@ -34,6 +34,6 @@ export class ScBarcodeScannerNextToggle {
   );
 
   constructor() {
-    ɵwarnIfUnnamed('scBarcodeScannerNextToggle');
+    ɵwarnIfUnnamed('scBarcodeScannerToggle');
   }
 }

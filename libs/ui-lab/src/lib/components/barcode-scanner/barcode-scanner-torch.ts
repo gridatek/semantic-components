@@ -5,21 +5,22 @@ import {
   cn,
   ɵwarnIfUnnamed,
 } from '@semantic-components/ui';
-import { ScBarcodeScannerNext } from './barcode-scanner-next';
+import { ScBarcodeScanner } from './barcode-scanner';
 
-/** The other camera (front, back) — disabled with only one. Write its icon and name it ("Switch camera"). */
+/** The camera's light, on and off; pressed while on — disabled where it has none. Write its icon and name it ("Light"). */
 @Directive({
-  selector: 'button[scBarcodeScannerNextSwitchCamera]',
+  selector: 'button[scBarcodeScannerTorch]',
   host: {
     type: 'button',
-    'data-slot': 'barcode-scanner-switch-camera',
-    '[disabled]': '!scanner.canSwitchCamera()',
+    'data-slot': 'barcode-scanner-torch',
+    '[attr.aria-pressed]': 'scanner.torch()',
+    '[disabled]': '!scanner.hasTorch()',
     '[class]': 'class()',
-    '(click)': 'scanner.switchCamera()',
+    '(click)': 'scanner.torch.set(!scanner.torch())',
   },
 })
-export class ScBarcodeScannerNextSwitchCamera {
-  protected readonly scanner = inject(ScBarcodeScannerNext);
+export class ScBarcodeScannerTorch {
+  protected readonly scanner = inject(ScBarcodeScanner);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('outline');
@@ -28,11 +29,12 @@ export class ScBarcodeScannerNextSwitchCamera {
   protected readonly class = computed(() =>
     cn(
       buttonVariants({ variant: this.variant(), size: this.size() }),
+      'aria-pressed:bg-accent aria-pressed:text-accent-foreground',
       this.classInput(),
     ),
   );
 
   constructor() {
-    ɵwarnIfUnnamed('scBarcodeScannerNextSwitchCamera');
+    ɵwarnIfUnnamed('scBarcodeScannerTorch');
   }
 }

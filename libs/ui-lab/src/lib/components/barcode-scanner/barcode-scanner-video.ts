@@ -1,10 +1,10 @@
 import { Directive, ElementRef, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { ScBarcodeScannerNext } from './barcode-scanner-next';
+import { ScBarcodeScanner } from './barcode-scanner';
 
 /** Your `video`: the camera, filling the scanner (the front one, mirrored). */
 @Directive({
-  selector: 'video[scBarcodeScannerNextVideo]',
+  selector: 'video[scBarcodeScannerVideo]',
   host: {
     'data-slot': 'barcode-scanner-video',
     playsinline: '',
@@ -13,8 +13,8 @@ import { ScBarcodeScannerNext } from './barcode-scanner-next';
     '[class]': 'class()',
   },
 })
-export class ScBarcodeScannerNextVideo {
-  private readonly scanner = inject(ScBarcodeScannerNext);
+export class ScBarcodeScannerVideo {
+  private readonly scanner = inject(ScBarcodeScanner);
 
   readonly classInput = input<string>('', { alias: 'class' });
 

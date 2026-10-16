@@ -3,21 +3,21 @@ import { FormField, form } from '@angular/forms/signals';
 import { ScButton, ScField, ScInput, ScLabel } from '@semantic-components/ui';
 import {
   type ScBarcode,
-  ScBarcodeScannerNext,
-  ScBarcodeScannerNextFinder,
-  ScBarcodeScannerNextOverlay,
-  ScBarcodeScannerNextVideo,
+  ScBarcodeScanner,
+  ScBarcodeScannerFinder,
+  ScBarcodeScannerOverlay,
+  ScBarcodeScannerVideo,
 } from '@semantic-components/ui-lab';
 import { SiScanLineIcon } from '@semantic-icons/lucide-icons';
 
 /** Into a form: the first code fills the field, and the camera stops — turned off in (detected). */
 @Component({
-  selector: 'app-once-barcode-scanner-next-demo',
+  selector: 'app-once-barcode-scanner-demo',
   imports: [
-    ScBarcodeScannerNext,
-    ScBarcodeScannerNextVideo,
-    ScBarcodeScannerNextOverlay,
-    ScBarcodeScannerNextFinder,
+    ScBarcodeScanner,
+    ScBarcodeScannerVideo,
+    ScBarcodeScannerOverlay,
+    ScBarcodeScannerFinder,
     ScButton,
     ScField,
     ScLabel,
@@ -27,8 +27,8 @@ import { SiScanLineIcon } from '@semantic-icons/lucide-icons';
   ],
   template: `
     <div
-      scBarcodeScannerNext
-      #scanner="scBarcodeScannerNext"
+      scBarcodeScanner
+      #scanner="scBarcodeScanner"
       [(active)]="scanning"
       (detected)="fill($event)"
       class="w-full max-w-md space-y-3"
@@ -50,9 +50,9 @@ import { SiScanLineIcon } from '@semantic-icons/lucide-icons';
       </div>
       @if (scanning()) {
         <div class="relative aspect-[4/3] overflow-hidden rounded-lg bg-black">
-          <video scBarcodeScannerNextVideo></video>
-          <svg scBarcodeScannerNextOverlay></svg>
-          <div scBarcodeScannerNextFinder></div>
+          <video scBarcodeScannerVideo></video>
+          <svg scBarcodeScannerOverlay></svg>
+          <div scBarcodeScannerFinder></div>
           @switch (scanner.state()) {
             @case ('idle') {
               <p
@@ -90,7 +90,7 @@ import { SiScanLineIcon } from '@semantic-icons/lucide-icons';
   host: { class: 'flex w-full flex-col items-center gap-4' },
   encapsulation: ViewEncapsulation.None,
 })
-export class OnceBarcodeScannerNextDemo {
+export class OnceBarcodeScannerDemo {
   readonly scanning = signal(false);
   readonly model = signal({ code: '' });
   readonly productForm = form(this.model);

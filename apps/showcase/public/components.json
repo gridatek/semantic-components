@@ -90,15 +90,7 @@
   {
     "name": "Barcode Scanner",
     "path": "barcode-scanner",
-    "description": "Scan barcodes using the camera.",
-    "status": "Experimental",
-    "library": "ui-lab",
-    "category": "Media"
-  },
-  {
-    "name": "Barcode Scanner Next",
-    "path": "barcode-scanner-next",
-    "description": "The barcode scanner, rebuilt: camera or picture, codes outlined, states, torch and cameras; the standard BarcodeDetector.",
+    "description": "Camera or picture, codes outlined, states, torch and cameras; the standard BarcodeDetector.",
     "status": "Experimental",
     "library": "ui-lab",
     "category": "Media"

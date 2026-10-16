@@ -95,12 +95,6 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/barcode-scanner/barcode-scanner-page'),
       },
       {
-        path: 'barcode-scanner-next',
-        title: 'Barcode Scanner Next - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/barcode-scanner-next/barcode-scanner-next-page'),
-      },
-      {
         path: 'breadcrumb',
         title: 'Breadcrumb - Semantic Components',
         loadComponent: () => import('../pages/docs/breadcrumb/breadcrumb-page'),

@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 import { resolve } from 'node:path';
 
 const demo = (name: string) =>
-  `/demos/barcode-scanner-next/${name}-barcode-scanner-next-demo`;
+  `/demos/barcode-scanner/${name}-barcode-scanner-demo`;
 
 test.use({
   permissions: ['camera'],

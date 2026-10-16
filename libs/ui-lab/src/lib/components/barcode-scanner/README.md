@@ -1,134 +1,71 @@
 # Barcode Scanner
 
-Directive-based barcode/QR code scanner using the Barcode Detection API. Directives provide camera and detection logic — consumers own the templates.
+The camera or a picture, each code outlined where it is, its states to explain — written against the standard `BarcodeDetector`.
 
-## Directives
+## Architecture
 
-- `ScBarcodeScanner` — root directive (`[scBarcodeScanner]`) managing camera, detection, and state
-- `ScBarcodeVideo` — video directive (`video[scBarcodeVideo]`) that registers the video element with the scanner
+```
+scBarcodeScanner (active, camera, torch — two-way; formats; (detected) — each new code)
+│  state() · codes() (in the frame now) · hasTorch() · canSwitchCamera() · scan(picture)
+├── video[scBarcodeScannerVideo]         — the camera
+├── svg[scBarcodeScannerOverlay]          — the codes, outlined where they are
+├── div[scBarcodeScannerFinder]           — the viewfinder's corners
+├── button[scBarcodeScannerToggle]        — camera on / off
+├── button[scBarcodeScannerTorch]         — the light, where there is one
+├── button[scBarcodeScannerSwitchCamera]  — front / back, where there are two
+└── input[type=file][scBarcodeScannerFile] — scan a picture
+```
 
 ## Usage
 
-### Basic Usage
-
 ```html
-<div scBarcodeScanner #scanner="scBarcodeScanner" (detected)="onDetected($event)">
-  @if (!scanner.isSupported()) {
-  <p>Barcode Scanner Not Supported</p>
-  } @else {
-  <video scBarcodeVideo class="aspect-video w-full object-cover"></video>
-
-  <div>
-    @if (!scanner.isScanning()) {
-    <button (click)="scanner.startScanning()">Start Scanning</button>
-    } @else {
-    <button (click)="scanner.stopScanning()">Stop</button>
-    }
+<div scBarcodeScanner #scanner="scBarcodeScanner" (detected)="read($event)">
+  <div class="relative aspect-[4/3] overflow-hidden rounded-lg">
+    <video scBarcodeScannerVideo></video>
+    <svg scBarcodeScannerOverlay></svg>
+    <div scBarcodeScannerFinder></div>
   </div>
-  }
+  <button scBarcodeScannerToggle>{{ scanner.active() ? 'Stop' : 'Scan' }}</button>
+  <label for="picture">A picture of a code</label>
+  <input id="picture" type="file" scBarcodeScannerFile />
 </div>
 ```
 
-### QR Code Only
+The frame (`relative`, its size, `overflow-hidden`) is yours; the video fills it, the overlay follows the video.
 
-```html
-<div scBarcodeScanner #scanner="scBarcodeScanner" [formats]="['qr_code']" (detected)="onQRDetected($event)">
-  <!-- template -->
-</div>
+## Reading
+
+- `(detected)` gives each new code: `{ rawValue, format, cornerPoints }`. The same code, still in view (or back within 1.5 s), is not new.
+- To scan once, turn it off there: `scanner.active.set(false)` — or bind `[(active)]`.
+- `formats`: the ones to read (`['qr_code']`, `['ean_13', 'upc_a']`…); none, all the browser reads.
+- `scan(picture)` reads a `Blob` (a file) or an image; its codes come out of `(detected)` too, and it returns them. `scBarcodeScannerFile` does it for a file input.
+- Frames are read as the video gives them (`requestVideoFrameCallback`), one at a time.
+
+## States
+
+`state()`: `idle` (off), `starting` (asking for the camera), `scanning`, `denied` (refused — the camera turns off), `unavailable` (no camera, or it could not start), `unsupported` (no `BarcodeDetector`). Say what each means, and offer a picture when there is no camera. `data-state` on the scanner.
+
+## Browsers
+
+The scanner uses the global `BarcodeDetector` — the standard; Chromium on Android and macOS has it. Elsewhere the app adds it, as a polyfill — not the library: `barcode-detector/polyfill` (on zxing-wasm) in the app's `polyfills`, its decoder served with the app's assets:
+
+```ts
+// polyfills.ts
+import { prepareZXingModule } from 'barcode-detector/polyfill';
+
+prepareZXingModule({ overrides: { locateFile: (path, prefix) => (path.endsWith('.wasm') ? `/zxing/${path}` : prefix + path) } });
 ```
 
-### Single Scan Mode
-
-```html
-<div scBarcodeScanner #scanner="scBarcodeScanner" [continuous]="false" (detected)="onSingleScan($event)">
-  <!-- stops scanning after first detection -->
-</div>
+```json
+{ "glob": "zxing_reader.wasm", "input": "node_modules/zxing-wasm/dist/reader", "output": "zxing" }
 ```
-
-### With Camera Controls
-
-```html
-@if (scanner.hasMultipleCameras() && scanner.isScanning()) {
-<button (click)="scanner.switchCamera()" aria-label="Switch camera">Switch</button>
-} @if (scanner.hasTorch() && scanner.isScanning()) {
-<button (click)="scanner.toggleTorch()" aria-label="Toggle flashlight">Torch</button>
-}
-```
-
-## API
-
-### ScBarcodeScanner (`[scBarcodeScanner]`)
-
-#### Inputs
-
-| Input          | Type                | Default                      | Description                   |
-| -------------- | ------------------- | ---------------------------- | ----------------------------- |
-| `formats`      | `ScBarcodeFormat[]` | `['qr_code', 'ean_13', ...]` | Formats to detect             |
-| `continuous`   | `boolean`           | `true`                       | Keep scanning after detection |
-| `scanInterval` | `number`            | `100`                        | Detection interval (ms)       |
-| `class`        | `string`            | `''`                         | Additional CSS classes        |
-
-#### Outputs
-
-| Output      | Type              | Description                 |
-| ----------- | ----------------- | --------------------------- |
-| `detected`  | `ScBarcodeResult` | Emits when barcode detected |
-| `scanError` | `string`          | Emits on error              |
-
-#### Public API
-
-| Property/Method        | Type                              | Description                        |
-| ---------------------- | --------------------------------- | ---------------------------------- |
-| `isSupported()`        | `Signal<boolean>`                 | Whether Barcode API is available   |
-| `isScanning()`         | `Signal<boolean>`                 | Whether actively scanning          |
-| `error()`              | `Signal<string \| null>`          | Current error message              |
-| `lastResult()`         | `Signal<ScBarcodeResult \| null>` | Last detected barcode              |
-| `hasMultipleCameras()` | `Signal<boolean>`                 | Whether multiple cameras available |
-| `hasTorch()`           | `Signal<boolean>`                 | Whether torch/flashlight available |
-| `torchOn()`            | `Signal<boolean>`                 | Whether torch is on                |
-| `startScanning()`      | `Promise<void>`                   | Start camera and detection         |
-| `stopScanning()`       | `void`                            | Stop camera and detection          |
-| `switchCamera()`       | `Promise<void>`                   | Toggle front/back camera           |
-| `toggleTorch()`        | `Promise<void>`                   | Toggle flashlight                  |
-
-### ScBarcodeVideo (`video[scBarcodeVideo]`)
-
-Apply to a `<video>` element inside a `[scBarcodeScanner]` host. Automatically registers the video element with the scanner and sets `autoplay`, `playsinline`, `muted` attributes.
-
-## Type Definitions
-
-### BarcodeFormat
-
-```typescript
-type ScBarcodeFormat = 'aztec' | 'code_128' | 'code_39' | 'code_93' | 'codabar' | 'data_matrix' | 'ean_13' | 'ean_8' | 'itf' | 'pdf417' | 'qr_code' | 'upc_a' | 'upc_e';
-```
-
-### BarcodeResult
-
-```typescript
-interface ScBarcodeResult {
-  rawValue: string;
-  format: ScBarcodeFormat;
-  boundingBox?: DOMRectReadOnly;
-  cornerPoints?: { x: number; y: number }[];
-}
-```
-
-## Browser Support
-
-| Browser          | Support           |
-| ---------------- | ----------------- |
-| Chrome 83+       | Desktop & Android |
-| Edge 83+         | Desktop           |
-| Opera 69+        | Desktop & Android |
-| Samsung Internet | Android           |
-| Firefox          | Not supported     |
-| Safari           | Not supported     |
-
-For unsupported browsers, `scanner.isSupported()` returns `false` — consumers render their own fallback UI.
 
 ## Accessibility
 
-- Keyboard accessible controls (consumer-provided)
-- All interactive elements should have `aria-label` attributes
-- `isSupported()` and `error()` signals enable accessible error states
+- A camera view is not for everyone: offer the picture (`scBarcodeScannerFile`, labelled) — and a field to type the code.
+- Say each code read in a live region (`aria-live="polite"`); the overlay and the finder are decorative.
+- Name the buttons; Toggle and Torch are `aria-pressed`.
+
+## Not here
+
+Zoom, beeps and vibration (yours, in `(detected)`), scanning in a worker.

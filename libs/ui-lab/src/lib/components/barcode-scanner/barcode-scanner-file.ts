@@ -1,13 +1,13 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { ScBarcodeScannerNext } from './barcode-scanner-next';
+import { ScBarcodeScanner } from './barcode-scanner';
 
 /**
  * Scans a picture: your `input type=file` — no camera needed, and the way for
  * anyone who cannot aim one. The codes come out of `(detected)`. Label it.
  */
 @Directive({
-  selector: 'input[type=file][scBarcodeScannerNextFile]',
+  selector: 'input[type=file][scBarcodeScannerFile]',
   host: {
     'data-slot': 'barcode-scanner-file',
     accept: 'image/*',
@@ -16,8 +16,8 @@ import { ScBarcodeScannerNext } from './barcode-scanner-next';
     '(change)': 'onChange($event)',
   },
 })
-export class ScBarcodeScannerNextFile {
-  protected readonly scanner = inject(ScBarcodeScannerNext);
+export class ScBarcodeScannerFile {
+  protected readonly scanner = inject(ScBarcodeScanner);
 
   readonly classInput = input<string>('', { alias: 'class' });
 

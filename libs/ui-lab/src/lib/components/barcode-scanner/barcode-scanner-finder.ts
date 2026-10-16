@@ -3,7 +3,7 @@ import { cn } from '@semantic-components/ui';
 
 /** The viewfinder: four corners, where to hold the code. Decorative; size and place it with classes. */
 @Component({
-  selector: 'div[scBarcodeScannerNextFinder]',
+  selector: 'div[scBarcodeScannerFinder]',
   template: `
     <span
       class="absolute start-0 top-0 size-6 rounded-ss-md border-s-4 border-t-4"
@@ -25,7 +25,7 @@ import { cn } from '@semantic-components/ui';
   },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScBarcodeScannerNextFinder {
+export class ScBarcodeScannerFinder {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>

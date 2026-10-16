@@ -1,238 +1,228 @@
+import { DOCUMENT } from '@angular/common';
 import {
   DestroyRef,
   Directive,
-  InjectionToken,
   computed,
+  effect,
   inject,
   input,
+  model,
   output,
   signal,
+  untracked,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
+import {
+  type ScBarcode,
+  type ScBarcodeDetector,
+  type ScBarcodeFormat,
+  type ScBarcodeScannerState,
+  barcodeDetector,
+} from './barcode';
 
-export type ScBarcodeScannerFormat =
-  | 'aztec'
-  | 'code_128'
-  | 'code_39'
-  | 'code_93'
-  | 'codabar'
-  | 'data_matrix'
-  | 'ean_13'
-  | 'ean_8'
-  | 'itf'
-  | 'pdf417'
-  | 'qr_code'
-  | 'upc_a'
-  | 'upc_e';
+/** The same code, seen again within this time, is the same reading. */
+const SEEN_FOR = 1500;
 
-export interface ScBarcodeResult {
-  rawValue: string;
-  format: ScBarcodeScannerFormat;
-  boundingBox?: DOMRectReadOnly;
-  cornerPoints?: { x: number; y: number }[];
-}
-
-// BarcodeDetector type declaration for browsers that support it
-declare class BarcodeDetector {
-  constructor(options?: { formats: string[] });
-  detect(image: ImageBitmapSource): Promise<DetectedBarcode[]>;
-  static getSupportedFormats(): Promise<string[]>;
-}
-
-interface DetectedBarcode {
-  rawValue: string;
-  format: string;
-  boundingBox: DOMRectReadOnly;
-  cornerPoints: { x: number; y: number }[];
-}
-
-export const SC_BARCODE_SCANNER = new InjectionToken<ScBarcodeScanner>(
-  'SC_BARCODE_SCANNER',
-);
-
+/**
+ * Reads barcodes — from the camera (`active`), or a picture (`scan()`,
+ * `scBarcodeScannerFile`). Each new code comes out of `(detected)`; to
+ * scan once, turn it off there. Written against the standard BarcodeDetector:
+ * where the browser has none, the app adds it (a polyfill).
+ */
 @Directive({
   selector: '[scBarcodeScanner]',
   exportAs: 'scBarcodeScanner',
-  providers: [{ provide: SC_BARCODE_SCANNER, useExisting: ScBarcodeScanner }],
   host: {
+    'data-slot': 'barcode-scanner',
+    '[attr.data-state]': 'state()',
     '[class]': 'class()',
   },
 })
 export class ScBarcodeScanner {
-  private readonly destroyRef = inject(DestroyRef);
+  private readonly document = inject(DOCUMENT);
 
   readonly classInput = input<string>('', { alias: 'class' });
-  protected readonly class = computed(() =>
-    cn('bg-card border rounded-lg overflow-hidden block', this.classInput()),
+
+  /** The camera on, scanning. */
+  readonly active = model(false);
+  /** The formats to read; none, all the browser can. */
+  readonly formats = input<readonly ScBarcodeFormat[]>([]);
+  /** The camera: the one at the back (`environment`) or the front (`user`). */
+  readonly camera = model<'environment' | 'user'>('environment');
+  /** The camera's light, where it has one. */
+  readonly torch = model(false);
+
+  /** Each new code read. */
+  readonly detected = output<ScBarcode>();
+
+  readonly state = signal<ScBarcodeScannerState>(
+    barcodeDetector() ? 'idle' : 'unsupported',
   );
-
-  readonly formats = input<ScBarcodeScannerFormat[]>([
-    'qr_code',
-    'ean_13',
-    'ean_8',
-    'code_128',
-    'code_39',
-    'upc_a',
-    'upc_e',
-  ]);
-  readonly continuous = input<boolean>(true);
-  readonly scanInterval = input<number>(100);
-
-  readonly detected = output<ScBarcodeResult>();
-  readonly scanError = output<string>();
-
-  readonly isSupported = signal(false);
-  readonly isScanning = signal(false);
-  readonly error = signal<string | null>(null);
-  readonly lastResult = signal<ScBarcodeResult | null>(null);
-  readonly hasMultipleCameras = signal(false);
+  /** The codes in the camera's frame now. */
+  readonly codes = signal<readonly ScBarcode[]>([]);
+  /** The camera has a light. */
   readonly hasTorch = signal(false);
-  readonly torchOn = signal(false);
+  /** More than one camera: one to switch to. */
+  readonly canSwitchCamera = signal(false);
 
-  private videoElement: HTMLVideoElement | null = null;
+  /** The video: set by `video[scBarcodeScannerVideo]`. */
+  readonly ɵvideo = signal<HTMLVideoElement | null>(null);
+  /** The camera's picture size. */
+  readonly ɵsize = signal({ width: 0, height: 0 });
+
+  protected readonly class = computed(() => cn('block', this.classInput()));
+
   private stream: MediaStream | null = null;
-  private detector: BarcodeDetector | null = null;
-  private scanIntervalId: ReturnType<typeof setInterval> | null = null;
-  private currentFacingMode: 'user' | 'environment' = 'environment';
-  private videoTrack: MediaStreamTrack | null = null;
+  private detector: ScBarcodeDetector | null = null;
+  private readonly seen = new Map<string, number>();
+  /** Each start; a stale one stops itself. */
+  private run = 0;
 
   constructor() {
-    this.isSupported.set('BarcodeDetector' in window);
-
-    this.destroyRef.onDestroy(() => {
-      this.stopScanning();
+    // The detector, for the formats.
+    effect(() => {
+      const formats = this.formats();
+      const Detector = barcodeDetector();
+      this.detector = Detector
+        ? new Detector(formats.length ? { formats } : undefined)
+        : null;
     });
+    // The camera, on and off (and again for the other one).
+    effect(() => {
+      const active = this.active();
+      const video = this.ɵvideo();
+      const camera = this.camera();
+      untracked(() => {
+        this.stop();
+        if (active && video) void this.start(video, camera);
+      });
+    });
+    effect(() => {
+      const torch = this.torch();
+      const track = this.stream?.getVideoTracks()[0];
+      if (!track || !this.hasTorch()) return;
+      void track
+        .applyConstraints({
+          advanced: [{ torch } as MediaTrackConstraintSet],
+        })
+        .catch(() => undefined);
+    });
+    inject(DestroyRef).onDestroy(() => this.stop());
   }
 
-  setVideoElement(el: HTMLVideoElement): void {
-    this.videoElement = el;
+  /** The other camera. */
+  switchCamera(): void {
+    this.camera.update((camera) =>
+      camera === 'environment' ? 'user' : 'environment',
+    );
   }
 
-  async startScanning(): Promise<void> {
-    if (!this.isSupported()) return;
-
-    this.error.set(null);
-
+  /** Reads the codes in a picture (a file, a blob, an image…); each comes out of `(detected)` too. */
+  async scan(source: Blob | ImageBitmapSource): Promise<ScBarcode[]> {
+    if (!this.detector) return [];
+    const image =
+      source instanceof Blob ? await createImageBitmap(source) : source;
     try {
-      this.detector = new BarcodeDetector({
-        formats: this.formats() as string[],
-      });
-
-      const devices = await navigator.mediaDevices.enumerateDevices();
-      const cameras = devices.filter((d) => d.kind === 'videoinput');
-      this.hasMultipleCameras.set(cameras.length > 1);
-
-      this.stream = await navigator.mediaDevices.getUserMedia({
-        video: {
-          facingMode: this.currentFacingMode,
-          width: { ideal: 1280 },
-          height: { ideal: 720 },
-        },
-      });
-
-      if (this.videoElement) {
-        this.videoElement.srcObject = this.stream;
-        await this.videoElement.play();
-      }
-
-      this.videoTrack = this.stream.getVideoTracks()[0];
-      const capabilities =
-        this.videoTrack?.getCapabilities?.() as MediaTrackCapabilities & {
-          torch?: boolean;
-        };
-      this.hasTorch.set(!!capabilities?.torch);
-
-      this.isScanning.set(true);
-      this.startDetection();
-    } catch (err) {
-      const message =
-        err instanceof Error ? err.message : 'Failed to access camera';
-      this.error.set(message);
-      this.scanError.emit(message);
-    }
-  }
-
-  stopScanning(): void {
-    this.isScanning.set(false);
-
-    if (this.scanIntervalId) {
-      clearInterval(this.scanIntervalId);
-      this.scanIntervalId = null;
-    }
-
-    if (this.stream) {
-      this.stream.getTracks().forEach((track) => track.stop());
-      this.stream = null;
-    }
-
-    if (this.videoElement) {
-      this.videoElement.srcObject = null;
-    }
-
-    this.torchOn.set(false);
-    this.videoTrack = null;
-  }
-
-  async switchCamera(): Promise<void> {
-    this.currentFacingMode =
-      this.currentFacingMode === 'environment' ? 'user' : 'environment';
-    this.stopScanning();
-    await this.startScanning();
-  }
-
-  async toggleTorch(): Promise<void> {
-    if (!this.videoTrack) return;
-
-    try {
-      const newState = !this.torchOn();
-      await this.videoTrack.applyConstraints({
-        advanced: [{ torch: newState } as MediaTrackConstraintSet],
-      });
-      this.torchOn.set(newState);
+      const codes = await this.detector.detect(image);
+      codes.forEach((code) => this.detected.emit(code));
+      return codes;
     } catch {
-      // Torch not supported or failed
+      return [];
+    } finally {
+      if (image instanceof ImageBitmap && source instanceof Blob) {
+        image.close();
+      }
     }
   }
 
-  private startDetection(): void {
-    if (this.scanIntervalId) {
-      clearInterval(this.scanIntervalId);
-    }
-
-    this.scanIntervalId = setInterval(async () => {
-      await this.detectBarcode();
-    }, this.scanInterval());
-  }
-
-  private async detectBarcode(): Promise<void> {
-    if (
-      !this.videoElement ||
-      !this.detector ||
-      this.videoElement.readyState !== this.videoElement.HAVE_ENOUGH_DATA
-    )
+  private async start(
+    video: HTMLVideoElement,
+    camera: 'environment' | 'user',
+  ): Promise<void> {
+    if (!this.detector) return;
+    const run = ++this.run;
+    const media = this.document.defaultView?.navigator.mediaDevices;
+    if (!media?.getUserMedia) {
+      this.state.set('unavailable');
       return;
-
-    try {
-      const barcodes = await this.detector.detect(this.videoElement);
-
-      if (barcodes.length > 0) {
-        const barcode = barcodes[0];
-        const result: ScBarcodeResult = {
-          rawValue: barcode.rawValue,
-          format: barcode.format as ScBarcodeScannerFormat,
-          boundingBox: barcode.boundingBox,
-          cornerPoints: barcode.cornerPoints,
-        };
-
-        this.lastResult.set(result);
-        this.detected.emit(result);
-
-        if (!this.continuous()) {
-          this.stopScanning();
-        }
-      }
-    } catch {
-      // Detection failed, continue scanning
     }
+    this.state.set('starting');
+    try {
+      const stream = await media.getUserMedia({
+        video: { facingMode: camera },
+        audio: false,
+      });
+      if (run !== this.run) {
+        stream.getTracks().forEach((track) => track.stop());
+        return;
+      }
+      this.stream = stream;
+      video.srcObject = stream;
+      await video.play();
+      const track = stream.getVideoTracks()[0];
+      const capabilities = track?.getCapabilities?.() as
+        (MediaTrackCapabilities & { torch?: boolean }) | undefined;
+      this.hasTorch.set(!!capabilities?.torch);
+      const devices = await media.enumerateDevices();
+      this.canSwitchCamera.set(
+        devices.filter((device) => device.kind === 'videoinput').length > 1,
+      );
+      this.state.set('scanning');
+      this.watch(video, run);
+    } catch (error) {
+      if (run !== this.run) return;
+      this.state.set(
+        (error as DOMException).name === 'NotAllowedError'
+          ? 'denied'
+          : 'unavailable',
+      );
+      this.active.set(false);
+    }
+  }
+
+  /** Reads the video's frames, one at a time. */
+  private watch(video: HTMLVideoElement, run: number): void {
+    const next = () => {
+      if (run !== this.run) return;
+      video.requestVideoFrameCallback(() => void read());
+    };
+    const read = async () => {
+      if (run !== this.run || !this.detector) return;
+      this.ɵsize.set({ width: video.videoWidth, height: video.videoHeight });
+      try {
+        const codes = await this.detector.detect(video);
+        if (run !== this.run) return;
+        this.codes.set(codes);
+        this.report(codes);
+      } catch {
+        // A frame not ready: the next one.
+      }
+      next();
+    };
+    next();
+  }
+
+  /** New codes out; a code seen again (within a moment) is not new. */
+  private report(codes: readonly ScBarcode[]): void {
+    const now = performance.now();
+    for (const code of codes) {
+      const key = `${code.format}:${code.rawValue}`;
+      const last = this.seen.get(key);
+      this.seen.set(key, now);
+      if (last === undefined || now - last > SEEN_FOR) this.detected.emit(code);
+    }
+  }
+
+  private stop(): void {
+    this.run++;
+    this.stream?.getTracks().forEach((track) => track.stop());
+    this.stream = null;
+    const video = this.ɵvideo();
+    if (video) video.srcObject = null;
+    this.codes.set([]);
+    this.seen.clear();
+    this.hasTorch.set(false);
+    const state = this.state();
+    if (state === 'starting' || state === 'scanning') this.state.set('idle');
   }
 }

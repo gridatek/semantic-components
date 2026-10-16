@@ -1,34 +1,128 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { ScBarcodeScannerFormat } from '@semantic-components/ui-lab';
+import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
+import { FormField, form } from '@angular/forms/signals';
+import { ScRadio, ScRadioField, ScRadioGroup } from '@semantic-components/ui';
+import {
+  type ScBarcodeFormat,
+  ScBarcodeScanner,
+  ScBarcodeScannerFinder,
+  ScBarcodeScannerOverlay,
+  ScBarcodeScannerToggle,
+  ScBarcodeScannerVideo,
+} from '@semantic-components/ui-lab';
+import { SiCameraIcon, SiCameraOffIcon } from '@semantic-icons/lucide-icons';
 
+/** Only the formats you ask for — QR codes, or products (EAN, UPC); none asked, all the browser reads. */
 @Component({
   selector: 'app-formats-barcode-scanner-demo',
+  imports: [
+    ScBarcodeScanner,
+    ScBarcodeScannerVideo,
+    ScBarcodeScannerOverlay,
+    ScBarcodeScannerFinder,
+    ScBarcodeScannerToggle,
+    ScRadioGroup,
+    ScRadioField,
+    ScRadio,
+    FormField,
+    SiCameraIcon,
+    SiCameraOffIcon,
+  ],
   template: `
-    <div class="grid max-w-2xl grid-cols-2 gap-2 md:grid-cols-4">
-      @for (format of allFormats; track format) {
-        <div class="bg-muted rounded px-3 py-2 font-mono text-sm">
-          {{ format }}
-        </div>
-      }
+    <div class="flex items-center gap-4 text-sm">
+      <span id="formats-label" class="text-muted-foreground">Read:</span>
+      <div
+        scRadioGroup
+        orientation="horizontal"
+        aria-labelledby="formats-label"
+      >
+        @for (kind of kinds; track kind.id) {
+          <label scRadioField>
+            <input
+              type="radio"
+              scRadio
+              [value]="kind.id"
+              [formField]="settingsForm.kind"
+            />
+            {{ kind.label }}
+          </label>
+        }
+      </div>
+    </div>
+    <div
+      scBarcodeScanner
+      #scanner="scBarcodeScanner"
+      [formats]="formats()"
+      (detected)="last.set($event.format + ': ' + $event.rawValue)"
+      class="w-full max-w-md space-y-3"
+    >
+      <div class="relative aspect-[4/3] overflow-hidden rounded-lg bg-black">
+        <video scBarcodeScannerVideo></video>
+        <svg scBarcodeScannerOverlay></svg>
+        <div scBarcodeScannerFinder></div>
+        @switch (scanner.state()) {
+          @case ('idle') {
+            <p
+              class="absolute inset-0 grid place-items-center p-6 text-center text-sm text-white/80"
+            >
+              The camera is off.
+            </p>
+          }
+          @case ('denied') {
+            <p
+              class="absolute inset-0 grid place-items-center p-6 text-center text-sm text-white"
+            >
+              The camera was refused: allow it in your browser to scan.
+            </p>
+          }
+          @case ('unavailable') {
+            <p
+              class="absolute inset-0 grid place-items-center p-6 text-center text-sm text-white"
+            >
+              No camera to use: scan a picture instead.
+            </p>
+          }
+          @case ('unsupported') {
+            <p
+              class="absolute inset-0 grid place-items-center p-6 text-center text-sm text-white"
+            >
+              This browser cannot read barcodes.
+            </p>
+          }
+        }
+      </div>
+      <div class="flex items-center gap-3">
+        <button scBarcodeScannerToggle>
+          @if (scanner.active()) {
+            <svg siCameraOffIcon></svg>
+            Stop
+          } @else {
+            <svg siCameraIcon></svg>
+            Scan
+          }
+        </button>
+        <p
+          class="text-muted-foreground min-w-0 truncate text-sm"
+          aria-live="polite"
+        >
+          {{ last() || 'Nothing read yet.' }}
+        </p>
+      </div>
     </div>
   `,
-  host: { class: 'flex w-full justify-center' },
+  host: { class: 'flex w-full flex-col items-center gap-4' },
   encapsulation: ViewEncapsulation.None,
 })
 export class FormatsBarcodeScannerDemo {
-  readonly allFormats: ScBarcodeScannerFormat[] = [
-    'qr_code',
-    'ean_13',
-    'ean_8',
-    'upc_a',
-    'upc_e',
-    'code_128',
-    'code_39',
-    'code_93',
-    'codabar',
-    'itf',
-    'pdf417',
-    'aztec',
-    'data_matrix',
-  ];
+  readonly kinds = [
+    { id: 'qr', label: 'QR codes' },
+    { id: 'products', label: 'Products' },
+  ] as const;
+  readonly settings = signal<{ kind: 'qr' | 'products' }>({ kind: 'qr' });
+  readonly settingsForm = form(this.settings);
+  readonly formats = computed<ScBarcodeFormat[]>(() =>
+    this.settings().kind === 'qr'
+      ? ['qr_code']
+      : ['ean_13', 'ean_8', 'upc_a', 'upc_e'],
+  );
+  readonly last = signal('');
 }

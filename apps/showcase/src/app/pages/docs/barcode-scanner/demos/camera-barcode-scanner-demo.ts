@@ -1,46 +1,36 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScBarcodeScannerNext,
-  ScBarcodeScannerNextFinder,
-  ScBarcodeScannerNextOverlay,
-  ScBarcodeScannerNextSwitchCamera,
-  ScBarcodeScannerNextToggle,
-  ScBarcodeScannerNextTorch,
-  ScBarcodeScannerNextVideo,
+  ScBarcodeScanner,
+  ScBarcodeScannerFinder,
+  ScBarcodeScannerOverlay,
+  ScBarcodeScannerToggle,
+  ScBarcodeScannerVideo,
 } from '@semantic-components/ui-lab';
-import {
-  SiCameraIcon,
-  SiCameraOffIcon,
-  SiFlashlightIcon,
-  SiSwitchCameraIcon,
-} from '@semantic-icons/lucide-icons';
+import { SiCameraIcon, SiCameraOffIcon } from '@semantic-icons/lucide-icons';
 
-/** The light and the other camera, where the device has them; the state, to say why it does not scan. */
+/** The camera, each code outlined where it is; each new one comes out of (detected) — here, said in a live region. */
 @Component({
-  selector: 'app-controls-barcode-scanner-next-demo',
+  selector: 'app-camera-barcode-scanner-demo',
   imports: [
-    ScBarcodeScannerNext,
-    ScBarcodeScannerNextVideo,
-    ScBarcodeScannerNextOverlay,
-    ScBarcodeScannerNextFinder,
-    ScBarcodeScannerNextToggle,
-    ScBarcodeScannerNextTorch,
-    ScBarcodeScannerNextSwitchCamera,
+    ScBarcodeScanner,
+    ScBarcodeScannerVideo,
+    ScBarcodeScannerOverlay,
+    ScBarcodeScannerFinder,
+    ScBarcodeScannerToggle,
     SiCameraIcon,
     SiCameraOffIcon,
-    SiFlashlightIcon,
-    SiSwitchCameraIcon,
   ],
   template: `
     <div
-      scBarcodeScannerNext
-      #scanner="scBarcodeScannerNext"
+      scBarcodeScanner
+      #scanner="scBarcodeScanner"
+      (detected)="last.set($event.rawValue)"
       class="w-full max-w-md space-y-3"
     >
       <div class="relative aspect-[4/3] overflow-hidden rounded-lg bg-black">
-        <video scBarcodeScannerNextVideo></video>
-        <svg scBarcodeScannerNextOverlay></svg>
-        <div scBarcodeScannerNextFinder></div>
+        <video scBarcodeScannerVideo></video>
+        <svg scBarcodeScannerOverlay></svg>
+        <div scBarcodeScannerFinder></div>
         @switch (scanner.state()) {
           @case ('idle') {
             <p
@@ -72,8 +62,8 @@ import {
           }
         }
       </div>
-      <div class="flex items-center gap-2">
-        <button scBarcodeScannerNextToggle>
+      <div class="flex items-center gap-3">
+        <button scBarcodeScannerToggle>
           @if (scanner.active()) {
             <svg siCameraOffIcon></svg>
             Stop
@@ -82,21 +72,18 @@ import {
             Scan
           }
         </button>
-        <button scBarcodeScannerNextTorch>
-          <svg siFlashlightIcon></svg>
-          <span class="sr-only">Light</span>
-        </button>
-        <button scBarcodeScannerNextSwitchCamera>
-          <svg siSwitchCameraIcon></svg>
-          <span class="sr-only">Switch camera</span>
-        </button>
-        <span class="text-muted-foreground ms-auto text-sm"
-          >State: {{ scanner.state() }}</span
+        <p
+          class="text-muted-foreground min-w-0 truncate text-sm"
+          aria-live="polite"
         >
+          {{ last() ? 'Read: ' + last() : 'Point the camera at a code.' }}
+        </p>
       </div>
     </div>
   `,
   host: { class: 'flex w-full flex-col items-center gap-4' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ControlsBarcodeScannerNextDemo {}
+export class CameraBarcodeScannerDemo {
+  readonly last = signal('');
+}

@@ -1,43 +1,43 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { OnceBarcodeScannerNextDemo } from './once-barcode-scanner-next-demo';
+import { OnceBarcodeScannerDemo } from './once-barcode-scanner-demo';
 
 @Component({
-  selector: 'app-once-barcode-scanner-next-demo-container',
-  imports: [DemoContainer, OnceBarcodeScannerNextDemo],
+  selector: 'app-once-barcode-scanner-demo-container',
+  imports: [DemoContainer, OnceBarcodeScannerDemo],
   template: `
     <app-demo-container
       title="Scan once"
       [code]="code"
-      demoUrl="/demos/barcode-scanner-next/once-barcode-scanner-next-demo"
+      demoUrl="/demos/barcode-scanner/once-barcode-scanner-demo"
     >
-      <app-once-barcode-scanner-next-demo />
+      <app-once-barcode-scanner-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class OnceBarcodeScannerNextDemoContainer {
+export class OnceBarcodeScannerDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import { ScButton, ScField, ScInput, ScLabel } from '@semantic-components/ui';
 import {
   type ScBarcode,
-  ScBarcodeScannerNext,
-  ScBarcodeScannerNextFinder,
-  ScBarcodeScannerNextOverlay,
-  ScBarcodeScannerNextVideo,
+  ScBarcodeScanner,
+  ScBarcodeScannerFinder,
+  ScBarcodeScannerOverlay,
+  ScBarcodeScannerVideo,
 } from '@semantic-components/ui-lab';
 import { SiScanLineIcon } from '@semantic-icons/lucide-icons';
 
 /** Into a form: the first code fills the field, and the camera stops — turned off in (detected). */
 @Component({
-  selector: 'app-once-barcode-scanner-next-demo',
+  selector: 'app-once-barcode-scanner-demo',
   imports: [
-    ScBarcodeScannerNext,
-    ScBarcodeScannerNextVideo,
-    ScBarcodeScannerNextOverlay,
-    ScBarcodeScannerNextFinder,
+    ScBarcodeScanner,
+    ScBarcodeScannerVideo,
+    ScBarcodeScannerOverlay,
+    ScBarcodeScannerFinder,
     ScButton,
     ScField,
     ScLabel,
@@ -47,8 +47,8 @@ import { SiScanLineIcon } from '@semantic-icons/lucide-icons';
   ],
   template: \`
     <div
-      scBarcodeScannerNext
-      #scanner="scBarcodeScannerNext"
+      scBarcodeScanner
+      #scanner="scBarcodeScanner"
       [(active)]="scanning"
       (detected)="fill($event)"
       class="w-full max-w-md space-y-3"
@@ -70,9 +70,9 @@ import { SiScanLineIcon } from '@semantic-icons/lucide-icons';
       </div>
       @if (scanning()) {
         <div class="relative aspect-[4/3] overflow-hidden rounded-lg bg-black">
-          <video scBarcodeScannerNextVideo></video>
-          <svg scBarcodeScannerNextOverlay></svg>
-          <div scBarcodeScannerNextFinder></div>
+          <video scBarcodeScannerVideo></video>
+          <svg scBarcodeScannerOverlay></svg>
+          <div scBarcodeScannerFinder></div>
           @switch (scanner.state()) {
             @case ('idle') {
               <p
@@ -110,7 +110,7 @@ import { SiScanLineIcon } from '@semantic-icons/lucide-icons';
   host: { class: 'flex w-full flex-col items-center gap-4' },
   encapsulation: ViewEncapsulation.None,
 })
-export class OnceBarcodeScannerNextDemo {
+export class OnceBarcodeScannerDemo {
   readonly scanning = signal(false);
   readonly model = signal({ code: '' });
   readonly productForm = form(this.model);

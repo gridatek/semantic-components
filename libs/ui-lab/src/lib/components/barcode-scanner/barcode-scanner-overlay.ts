@@ -6,14 +6,14 @@ import {
   input,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { ScBarcodeScannerNext } from './barcode-scanner-next';
+import { ScBarcodeScanner } from './barcode-scanner';
 
 /**
  * Each code in the camera's frame, outlined where it is — over a video that
  * fills the scanner (`object-cover`). Decorative.
  */
 @Component({
-  selector: 'svg[scBarcodeScannerNextOverlay]',
+  selector: 'svg[scBarcodeScannerOverlay]',
   template: `
     @for (shape of shapes(); track $index) {
       <svg:polygon
@@ -37,8 +37,8 @@ import { ScBarcodeScannerNext } from './barcode-scanner-next';
   },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScBarcodeScannerNextOverlay {
-  private readonly scanner = inject(ScBarcodeScannerNext);
+export class ScBarcodeScannerOverlay {
+  private readonly scanner = inject(ScBarcodeScanner);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
