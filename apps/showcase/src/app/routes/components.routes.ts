@@ -286,12 +286,6 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/image-cropper/image-cropper-page'),
       },
       {
-        path: 'image-cropper-next',
-        title: 'Image Cropper Next - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/image-cropper-next/image-cropper-next-page'),
-      },
-      {
         path: 'infinite-scroll',
         title: 'Infinite Scroll - Semantic Components',
         loadComponent: () =>

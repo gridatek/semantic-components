@@ -6,7 +6,7 @@ const size = (page: Page) => page.getByText(/\d+\s+×\s+\d+ px/);
 
 test.describe('Crop box', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/demos/image-cropper-next/box-image-cropper-next-demo');
+    await page.goto('/demos/image-cropper/box-image-cropper-demo');
     await expect(size(page)).toHaveText('960 × 640 px');
   });
 
@@ -62,7 +62,7 @@ test.describe('Crop box', () => {
 
 test.describe('Avatar', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/demos/image-cropper-next/avatar-image-cropper-next-demo');
+    await page.goto('/demos/image-cropper/avatar-image-cropper-demo');
     await expect(selection(page)).toBeVisible();
   });
 
@@ -96,7 +96,7 @@ test.describe('Avatar', () => {
 
 test.describe('Cover', () => {
   test('the image zooms under the frame: wheel and keys', async ({ page }) => {
-    await page.goto('/demos/image-cropper-next/cover-image-cropper-next-demo');
+    await page.goto('/demos/image-cropper/cover-image-cropper-demo');
     await expect(selection(page)).toBeVisible();
     const zoom = page.getByRole('slider', { name: 'Zoom' });
     const start = Number(await zoom.inputValue());

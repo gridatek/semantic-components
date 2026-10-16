@@ -8,13 +8,13 @@ import {
   input,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { ScImageCropperNext } from './image-cropper-next';
-import type { ScImageCropperNextHandlePosition } from './image-cropper-next-geometry';
+import { ScImageCropper } from './image-cropper';
+import type { ScImageCropperHandlePosition } from './image-cropper-geometry';
 
 type Drag =
   | { kind: 'pan' }
   | { kind: 'move' }
-  | { kind: 'resize'; handle: ScImageCropperNextHandlePosition };
+  | { kind: 'resize'; handle: ScImageCropperHandlePosition };
 
 /**
  * Where the image is shown and cropped: give it a height. Dragging pans the
@@ -22,7 +22,7 @@ type Drag =
  * pinch zoom.
  */
 @Directive({
-  selector: '[scImageCropperNextStage]',
+  selector: '[scImageCropperStage]',
   host: {
     'data-slot': 'image-cropper-stage',
     '[class]': 'class()',
@@ -33,8 +33,8 @@ type Drag =
     '(wheel)': 'onWheel($event)',
   },
 })
-export class ScImageCropperNextStage {
-  private readonly cropper = inject(ScImageCropperNext);
+export class ScImageCropperStage {
+  private readonly cropper = inject(ScImageCropper);
   private readonly element =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
@@ -83,7 +83,7 @@ export class ScImageCropperNextStage {
     );
     this.drag =
       handle && this.cropper.resizable()
-        ? { kind: 'resize', handle: handle as ScImageCropperNextHandlePosition }
+        ? { kind: 'resize', handle: handle as ScImageCropperHandlePosition }
         : onSelection && this.cropper.resizable()
           ? { kind: 'move' }
           : { kind: 'pan' };

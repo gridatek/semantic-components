@@ -1,527 +1,370 @@
+import { DOCUMENT } from '@angular/common';
 import {
   Directive,
-  InjectionToken,
   computed,
+  effect,
+  inject,
   input,
+  linkedSignal,
   model,
-  output,
   signal,
+  untracked,
 } from '@angular/core';
+import { cn } from '@semantic-components/ui';
+import {
+  type ScImageCropperHandlePosition,
+  type ScImageCropperRect,
+  type ScImageCropperRotation,
+  type ScImageCropperSize,
+  centredRect,
+  clamp,
+  fitScale,
+  oriented,
+  resize,
+  withRatio,
+  within,
+} from './image-cropper-geometry';
 
-export interface ScImageCropperArea {
-  x: number;
-  y: number;
-  width: number;
-  height: number;
+/** What `crop()` makes. */
+export interface ScImageCropperCropOptions {
+  /** `image/png` (the default), `image/jpeg` or `image/webp`. */
+  readonly type?: string;
+  /** For JPEG and WebP: 0 to 1. */
+  readonly quality?: number;
+  /** The width in pixels (the height follows); the crop's own by default. */
+  readonly width?: number;
 }
 
-export interface ScImageCropperResult {
-  dataUrl: string;
-  blob: Blob | null;
-  width: number;
-  height: number;
-}
+/** The smallest crop, in the image's pixels. */
+const MIN_SIZE = 20;
 
-export const SC_IMAGE_CROPPER = new InjectionToken<ScImageCropper>(
-  'SC_IMAGE_CROPPER',
-);
-
+/**
+ * An image cropper: the image's place and the crop. Put its parts inside — a
+ * `scImageCropperStage` with your `img[scImageCropperImage]` and a
+ * `scImageCropperSelection`, and the buttons you want. With handles in
+ * the selection, it is a box you resize over the image; without, a frame
+ * the image moves under.
+ */
 @Directive({
   selector: '[scImageCropper]',
   exportAs: 'scImageCropper',
-  providers: [{ provide: SC_IMAGE_CROPPER, useExisting: ScImageCropper }],
   host: {
-    '[attr.data-disabled]': 'disabled() || null',
-    '[attr.data-crop-shape]': 'cropShape()',
-    '(document:mousemove)': 'onMouseMove($event)',
-    '(document:mouseup)': 'onMouseUp()',
-    '(document:touchmove)': 'onTouchMove($event)',
-    '(document:touchend)': 'onTouchEnd()',
+    'data-slot': 'image-cropper',
+    '[attr.data-active]': 'active() || null',
+    '[attr.data-shape]': 'shape()',
+    '[class]': 'class()',
   },
 })
 export class ScImageCropper {
-  // Configuration inputs
+  private readonly document = inject(DOCUMENT);
+
+  readonly classInput = input<string>('', { alias: 'class' });
+
+  /** 1: the image fits the stage. */
+  readonly zoom = model(1);
+  readonly maxZoom = input(4);
+  /** In quarter turns, clockwise. */
+  readonly rotation = model<ScImageCropperRotation>(0);
+  readonly flipX = model(false);
+  readonly flipY = model(false);
+  /** Width / height, or free. */
   readonly aspectRatio = model<number | null>(null);
-  readonly minWidth = input<number>(50);
-  readonly minHeight = input<number>(50);
-  readonly containerHeight = input<number>(400);
-  readonly disabled = input<boolean>(false);
-  readonly outputType = input<'image/png' | 'image/jpeg' | 'image/webp'>(
-    'image/png',
+  /** A circle crops to an ellipse (transparent around, in a PNG). */
+  readonly shape = input<'rect' | 'circle'>('rect');
+
+  /** The image: set by `scImageCropperImage`. */
+  readonly ɵimage = signal<HTMLImageElement | null>(null);
+  readonly ɵnatural = signal<ScImageCropperSize>({ width: 0, height: 0 });
+  /** The stage's size: set by `scImageCropperStage`. */
+  readonly ɵstage = signal<ScImageCropperSize>({ width: 0, height: 0 });
+  /** How many handles the selection has: with some, it is resized. */
+  readonly ɵhandles = signal(0);
+  /** Being dragged, zoomed or moved with keys. */
+  readonly active = signal(false);
+
+  /** A box resized over the image (handles), or a frame it moves under. */
+  readonly resizable = computed(() => this.ɵhandles() > 0);
+  readonly ready = computed(
+    () => this.ɵnatural().width > 0 && this.ɵstage().width > 0,
   );
-  readonly outputQuality = input<number>(0.92);
-  readonly cropShape = input<'rect' | 'circle'>('rect');
 
-  // Two-way models
-  readonly cropArea = model<ScImageCropperArea>({
-    x: 50,
-    y: 50,
-    width: 200,
-    height: 200,
+  /** The image as shown (turned): its size in pixels. */
+  readonly orientedSize = computed(() =>
+    oriented(this.ɵnatural(), this.rotation()),
+  );
+
+  private readonly fit = computed(() =>
+    fitScale(this.orientedSize(), this.ɵstage()),
+  );
+
+  private readonly ratio = computed(() => {
+    const size = this.orientedSize();
+    return this.aspectRatio() ?? (size.width / size.height || 1);
   });
-  readonly zoom = model<number>(1);
-  readonly rotation = model<number>(0);
 
-  // Outputs
-  readonly cropChange = output<ScImageCropperArea>();
-  readonly imageLoaded = output<{ width: number; height: number }>();
+  /** The frame, in the stage, when the image moves under it. */
+  readonly frame = computed(() => centredRect(this.ɵstage(), this.ratio()));
 
-  // Internal state signals
-  readonly imageSrc = signal('');
-  readonly imageNaturalWidth = signal(0);
-  readonly imageNaturalHeight = signal(0);
-  readonly imageLoaded$ = signal(false);
-  readonly containerWidth = signal(400);
-  readonly flipH = signal(false);
-  readonly flipV = signal(false);
-
-  // Computed
-  // Base scale fits the natural image within the container (contain mode)
-  readonly baseScale = computed(() => {
-    const nw = this.imageNaturalWidth();
-    const nh = this.imageNaturalHeight();
-    if (nw === 0 || nh === 0) return 1;
-    return Math.min(
-      this.containerWidth() / nw,
-      this.containerHeight() / nh,
-      1, // never upscale beyond natural size
+  /** The lowest zoom: the image fits — or, under a frame, covers it. */
+  readonly minZoom = computed(() => {
+    if (this.resizable()) return 1;
+    const size = this.orientedSize();
+    const frame = this.frame();
+    const fit = this.fit();
+    if (!size.width || !fit) return 1;
+    return Math.max(
+      frame.width / (size.width * fit),
+      frame.height / (size.height * fit),
+      0.01,
     );
   });
 
-  readonly scaledImageWidth = computed(
-    () => this.imageNaturalWidth() * this.baseScale() * this.zoom(),
-  );
-  readonly scaledImageHeight = computed(
-    () => this.imageNaturalHeight() * this.baseScale() * this.zoom(),
+  /** Stage pixels per image pixel. */
+  readonly scale = computed(
+    () => this.fit() * clamp(this.zoom(), this.minZoom(), this.maxZoom()),
   );
 
-  // Image bounds within the container (image is flex-centered)
-  readonly imageBoundsX = computed(() =>
-    Math.max(0, (this.containerWidth() - this.scaledImageWidth()) / 2),
-  );
-  readonly imageBoundsY = computed(() =>
-    Math.max(0, (this.containerHeight() - this.scaledImageHeight()) / 2),
-  );
-  readonly imageBoundsW = computed(() =>
-    Math.min(this.scaledImageWidth(), this.containerWidth()),
-  );
-  readonly imageBoundsH = computed(() =>
-    Math.min(this.scaledImageHeight(), this.containerHeight()),
-  );
-
-  readonly imageTransform = computed(() => {
-    const rot = this.rotation();
-    const fH = this.flipH();
-    const fV = this.flipV();
-
-    const parts: string[] = [];
-    if (rot !== 0) {
-      parts.push(`rotate(${rot}deg)`);
-    }
-    if (fH) {
-      parts.push('scaleX(-1)');
-    }
-    if (fV) {
-      parts.push('scaleY(-1)');
-    }
-    return parts.length > 0 ? parts.join(' ') : 'none';
+  /** The image's point at the stage's centre. */
+  private readonly focus = linkedSignal(() => {
+    const size = this.orientedSize();
+    return { x: size.width / 2, y: size.height / 2 };
   });
 
-  // Drag/resize state
-  isDragging = false;
-  isResizing = false;
-  resizeHandle = '';
-  startX = 0;
-  startY = 0;
-  startCropArea: ScImageCropperArea = { x: 0, y: 0, width: 0, height: 0 };
-
-  onImageLoad(width: number, height: number): void {
-    this.imageNaturalWidth.set(width);
-    this.imageNaturalHeight.set(height);
-    this.imageLoaded$.set(true);
-    this.imageLoaded.emit({ width, height });
-  }
-
-  setImageSrc(src: string): void {
-    this.imageSrc.set(src);
-  }
-
-  initializeCropArea(): void {
-    const bx = this.imageBoundsX();
-    const by = this.imageBoundsY();
-    const bw = this.imageBoundsW();
-    const bh = this.imageBoundsH();
-
-    const aspectRatio = this.aspectRatio();
-    let cropW = bw * 0.8;
-    let cropH = bh * 0.8;
-
-    if (aspectRatio !== null) {
-      if (cropW / aspectRatio <= bh) {
-        cropH = cropW / aspectRatio;
-      } else {
-        cropW = cropH * aspectRatio;
+  /** Where the (turned) image's top-left is, in the stage. */
+  readonly offset = computed(() => {
+    const stage = this.ɵstage();
+    const size = this.orientedSize();
+    const s = this.scale();
+    const focus = this.focus();
+    const axis = (
+      stageSize: number,
+      imageSize: number,
+      point: number,
+      frameStart: number,
+      frameSize: number,
+    ) => {
+      const shown = imageSize * s;
+      const raw = stageSize / 2 - point * s;
+      if (!this.resizable()) {
+        return clamp(raw, frameStart + frameSize - shown, frameStart);
       }
-    }
+      return shown <= stageSize
+        ? (stageSize - shown) / 2
+        : clamp(raw, stageSize - shown, 0);
+    };
+    const frame = this.frame();
+    return {
+      x: axis(stage.width, size.width, focus.x, frame.x, frame.width),
+      y: axis(stage.height, size.height, focus.y, frame.y, frame.height),
+    };
+  });
 
-    if (this.cropShape() === 'circle') {
-      const size = Math.min(cropW, cropH);
-      cropW = size;
-      cropH = size;
-    }
+  /** The box, in image pixels, when it is resized. */
+  private readonly box = linkedSignal<
+    { size: ScImageCropperSize; ratio: number | null },
+    ScImageCropperRect
+  >({
+    source: () => ({
+      size: this.orientedSize(),
+      ratio: this.aspectRatio(),
+    }),
+    computation: (source, previous) =>
+      previous &&
+      previous.source.size.width === source.size.width &&
+      previous.source.size.height === source.size.height
+        ? source.ratio
+          ? withRatio(previous.value, source.ratio, source.size)
+          : previous.value
+        : centredRect(source.size, this.ratio()),
+  });
 
-    const x = bx + (bw - cropW) / 2;
-    const y = by + (bh - cropH) / 2;
+  /** The crop, in the (turned) image's pixels. */
+  readonly area = computed<ScImageCropperRect>(() => {
+    if (this.resizable()) return within(this.box(), this.orientedSize());
+    const frame = this.frame();
+    const offset = this.offset();
+    const s = this.scale() || 1;
+    return {
+      x: (frame.x - offset.x) / s,
+      y: (frame.y - offset.y) / s,
+      width: frame.width / s,
+      height: frame.height / s,
+    };
+  });
 
-    this.cropArea.set({
-      x,
-      y,
-      width: cropW,
-      height: cropH,
+  /** The crop, in the stage. */
+  readonly selection = computed<ScImageCropperRect>(() => {
+    if (!this.resizable()) return this.frame();
+    const area = this.area();
+    const offset = this.offset();
+    const s = this.scale();
+    return {
+      x: offset.x + area.x * s,
+      y: offset.y + area.y * s,
+      width: area.width * s,
+      height: area.height * s,
+    };
+  });
+
+  /** The image element's place in the stage (turned and flipped around its centre). */
+  readonly imageStyle = computed(() => {
+    const natural = this.ɵnatural();
+    const size = this.orientedSize();
+    const s = this.scale();
+    const offset = this.offset();
+    return {
+      width: natural.width * s,
+      height: natural.height * s,
+      left: offset.x + ((size.width - natural.width) * s) / 2,
+      top: offset.y + ((size.height - natural.height) * s) / 2,
+      transform: `rotate(${this.rotation()}deg) scale(${this.flipX() ? -1 : 1}, ${this.flipY() ? -1 : 1})`,
+    };
+  });
+
+  protected readonly class = computed(() =>
+    cn('flex flex-col gap-4', this.classInput()),
+  );
+
+  constructor() {
+    // A zoom below the lowest (a frame the image no longer covers) moves up.
+    effect(() => {
+      const min = this.minZoom();
+      untracked(() => {
+        if (this.zoom() < min) this.zoom.set(min);
+      });
     });
   }
 
-  startDragging(clientX: number, clientY: number): void {
-    if (this.disabled()) return;
-    this.isDragging = true;
-    this.startX = clientX;
-    this.startY = clientY;
-    this.startCropArea = { ...this.cropArea() };
+  /** Moves the image by `dx`, `dy` stage pixels. */
+  pan(dx: number, dy: number): void {
+    const s = this.scale() || 1;
+    this.focus.update((f) => ({ x: f.x - dx / s, y: f.y - dy / s }));
+    this.settle();
   }
 
-  startResizing(clientX: number, clientY: number, handle: string): void {
-    if (this.disabled()) return;
-    this.isResizing = true;
-    this.resizeHandle = handle;
-    this.startX = clientX;
-    this.startY = clientY;
-    this.startCropArea = { ...this.cropArea() };
-  }
-
-  handleDrag(clientX: number, clientY: number): void {
-    const deltaX = clientX - this.startX;
-    const deltaY = clientY - this.startY;
-
-    const bx = this.imageBoundsX();
-    const by = this.imageBoundsY();
-    const bw = this.imageBoundsW();
-    const bh = this.imageBoundsH();
-    const crop = this.startCropArea;
-
-    let newX = crop.x + deltaX;
-    let newY = crop.y + deltaY;
-
-    newX = Math.max(bx, Math.min(newX, bx + bw - crop.width));
-    newY = Math.max(by, Math.min(newY, by + bh - crop.height));
-
-    this.cropArea.set({
-      ...this.cropArea(),
-      x: newX,
-      y: newY,
+  /** Zooms by `factor`, keeping `around` (a stage point; its centre by default) still. */
+  zoomBy(factor: number, around?: { x: number; y: number }): void {
+    const stage = this.ɵstage();
+    const point = around ?? { x: stage.width / 2, y: stage.height / 2 };
+    const before = this.scale() || 1;
+    const offset = this.offset();
+    const at = {
+      x: (point.x - offset.x) / before,
+      y: (point.y - offset.y) / before,
+    };
+    this.zoom.set(clamp(this.zoom() * factor, this.minZoom(), this.maxZoom()));
+    const after = this.scale() || 1;
+    this.focus.set({
+      x: at.x + (stage.width / 2 - point.x) / after,
+      y: at.y + (stage.height / 2 - point.y) / after,
     });
-
-    this.cropChange.emit(this.cropArea());
+    this.settle();
   }
 
-  handleResize(clientX: number, clientY: number): void {
-    const deltaX = clientX - this.startX;
-    const deltaY = clientY - this.startY;
-    const crop = this.startCropArea;
-    const aspectRatio = this.aspectRatio();
-    const minW = this.minWidth();
-    const minH = this.minHeight();
-    const bx = this.imageBoundsX();
-    const by = this.imageBoundsY();
-    const bw = this.imageBoundsW();
-    const bh = this.imageBoundsH();
-
-    let newX = crop.x;
-    let newY = crop.y;
-    let newW = crop.width;
-    let newH = crop.height;
-
-    switch (this.resizeHandle) {
-      case 'se':
-      case 'bottom-right':
-        newW = Math.max(minW, crop.width + deltaX);
-        newH =
-          aspectRatio !== null
-            ? newW / aspectRatio
-            : Math.max(minH, crop.height + deltaY);
-        break;
-      case 'sw':
-      case 'bottom-left':
-        newW = Math.max(minW, crop.width - deltaX);
-        newH =
-          aspectRatio !== null
-            ? newW / aspectRatio
-            : Math.max(minH, crop.height + deltaY);
-        newX = crop.x + crop.width - newW;
-        break;
-      case 'ne':
-      case 'top-right':
-        newW = Math.max(minW, crop.width + deltaX);
-        newH =
-          aspectRatio !== null
-            ? newW / aspectRatio
-            : Math.max(minH, crop.height - deltaY);
-        newY = crop.y + crop.height - newH;
-        break;
-      case 'nw':
-      case 'top-left':
-        newW = Math.max(minW, crop.width - deltaX);
-        newH =
-          aspectRatio !== null
-            ? newW / aspectRatio
-            : Math.max(minH, crop.height - deltaY);
-        newX = crop.x + crop.width - newW;
-        newY = crop.y + crop.height - newH;
-        break;
-      case 'n':
-      case 'top':
-        newH = Math.max(minH, crop.height - deltaY);
-        if (aspectRatio !== null) newW = newH * aspectRatio;
-        newY = crop.y + crop.height - newH;
-        break;
-      case 's':
-      case 'bottom':
-        newH = Math.max(minH, crop.height + deltaY);
-        if (aspectRatio !== null) newW = newH * aspectRatio;
-        break;
-      case 'w':
-      case 'left':
-        newW = Math.max(minW, crop.width - deltaX);
-        if (aspectRatio !== null) newH = newW / aspectRatio;
-        newX = crop.x + crop.width - newW;
-        break;
-      case 'e':
-      case 'right':
-        newW = Math.max(minW, crop.width + deltaX);
-        if (aspectRatio !== null) newH = newW / aspectRatio;
-        break;
+  /** Moves the crop by `dx`, `dy` image pixels (the image, under a frame). */
+  move(dx: number, dy: number): void {
+    if (!this.resizable()) {
+      const s = this.scale();
+      this.pan(-dx * s, -dy * s);
+      return;
     }
-
-    // Constrain to image bounds
-    if (newX < bx) {
-      newW += newX - bx;
-      newX = bx;
-    }
-    if (newY < by) {
-      newH += newY - by;
-      newY = by;
-    }
-    if (newX + newW > bx + bw) {
-      newW = bx + bw - newX;
-    }
-    if (newY + newH > by + bh) {
-      newH = by + bh - newY;
-    }
-
-    // Maintain aspect ratio after constraints
-    if (aspectRatio !== null) {
-      if (newW / aspectRatio > newH) {
-        newW = newH * aspectRatio;
-      } else {
-        newH = newW / aspectRatio;
-      }
-    }
-
-    this.cropArea.set({
-      x: newX,
-      y: newY,
-      width: Math.max(minW, newW),
-      height: Math.max(minH, newH),
-    });
-
-    this.cropChange.emit(this.cropArea());
-  }
-
-  stopInteraction(): void {
-    this.isDragging = false;
-    this.isResizing = false;
-  }
-
-  async crop(
-    imageElement: HTMLImageElement,
-    canvasElement: HTMLCanvasElement,
-  ): Promise<ScImageCropperResult> {
-    const crop = this.cropArea();
-    const cw = this.containerWidth();
-    const containerH = this.containerHeight();
-
-    // The image is rendered at scaledImageWidth/Height pixels,
-    // centered in the container via flex centering
-    const displayedW = this.scaledImageWidth();
-    const displayedH = this.scaledImageHeight();
-
-    const offsetX = (cw - displayedW) / 2;
-    const offsetY = (containerH - displayedH) / 2;
-
-    // Convert from displayed pixels to natural image pixels
-    const naturalScale = this.imageNaturalWidth() / displayedW;
-    const srcX = (crop.x - offsetX) * naturalScale;
-    const srcY = (crop.y - offsetY) * naturalScale;
-    const srcW = crop.width * naturalScale;
-    const srcH = crop.height * naturalScale;
-
-    canvasElement.width = srcW;
-    canvasElement.height = srcH;
-
-    const ctx = canvasElement.getContext('2d');
-    if (!ctx) {
-      throw new Error('Could not get canvas context');
-    }
-
-    // Apply rotation and flip transforms
-    const rot = this.rotation();
-    const fH = this.flipH();
-    const fV = this.flipV();
-
-    if (rot !== 0 || fH || fV) {
-      ctx.save();
-      ctx.translate(srcW / 2, srcH / 2);
-      if (rot !== 0) {
-        ctx.rotate((rot * Math.PI) / 180);
-      }
-      if (fH) {
-        ctx.scale(-1, 1);
-      }
-      if (fV) {
-        ctx.scale(1, -1);
-      }
-      ctx.translate(-srcW / 2, -srcH / 2);
-    }
-
-    ctx.drawImage(imageElement, srcX, srcY, srcW, srcH, 0, 0, srcW, srcH);
-
-    if (rot !== 0 || fH || fV) {
-      ctx.restore();
-    }
-
-    const dataUrl = canvasElement.toDataURL(
-      this.outputType(),
-      this.outputQuality(),
+    this.box.update((box) =>
+      within({ ...box, x: box.x + dx, y: box.y + dy }, this.orientedSize()),
     );
-
-    return new Promise((resolve) => {
-      canvasElement.toBlob(
-        (blob) => {
-          resolve({
-            dataUrl,
-            blob,
-            width: srcW,
-            height: srcH,
-          });
-        },
-        this.outputType(),
-        this.outputQuality(),
-      );
-    });
   }
 
-  setZoom(value: number): void {
-    this.zoom.set(Math.max(0.1, Math.min(3, value)));
+  /** Resizes the crop by moving `handle`'s edges by `dx`, `dy` image pixels. */
+  resizeBy(handle: ScImageCropperHandlePosition, dx: number, dy: number): void {
+    if (!this.resizable()) return;
+    this.box.update((box) =>
+      resize(
+        within(box, this.orientedSize()),
+        handle,
+        dx,
+        dy,
+        this.orientedSize(),
+        MIN_SIZE,
+        this.aspectRatio(),
+      ),
+    );
   }
 
-  zoomIn(): void {
-    this.setZoom(this.zoom() + 0.1);
+  /** A quarter turn: clockwise (1) or anticlockwise (-1). */
+  rotate(direction: 1 | -1): void {
+    this.rotation.update(
+      (r) => ((r + direction * 90 + 360) % 360) as ScImageCropperRotation,
+    );
   }
 
-  zoomOut(): void {
-    this.setZoom(this.zoom() - 0.1);
-  }
-
-  rotateLeft(): void {
-    this.rotation.set((this.rotation() - 90 + 360) % 360);
-  }
-
-  rotateRight(): void {
-    this.rotation.set((this.rotation() + 90) % 360);
-  }
-
-  toggleFlipH(): void {
-    this.flipH.update((v) => !v);
-  }
-
-  toggleFlipV(): void {
-    this.flipV.update((v) => !v);
-  }
-
-  setAspectRatio(ratio: number | null): void {
-    this.aspectRatio.set(ratio);
-
-    if (ratio === null) return;
-
-    const crop = this.cropArea();
-    const bx = this.imageBoundsX();
-    const by = this.imageBoundsY();
-    const bw = this.imageBoundsW();
-    const bh = this.imageBoundsH();
-    const currentRatio = crop.width / crop.height;
-
-    let newW = crop.width;
-    let newH = crop.height;
-
-    if (currentRatio > ratio) {
-      newW = crop.height * ratio;
-    } else {
-      newH = crop.width / ratio;
-    }
-
-    if (newW < this.minWidth()) {
-      newW = this.minWidth();
-      newH = newW / ratio;
-    }
-    if (newH < this.minHeight()) {
-      newH = this.minHeight();
-      newW = newH * ratio;
-    }
-
-    const centerX = crop.x + crop.width / 2;
-    const centerY = crop.y + crop.height / 2;
-    let newX = centerX - newW / 2;
-    let newY = centerY - newH / 2;
-
-    newX = Math.max(bx, Math.min(newX, bx + bw - newW));
-    newY = Math.max(by, Math.min(newY, by + bh - newH));
-
-    this.cropArea.set({ x: newX, y: newY, width: newW, height: newH });
-    this.cropChange.emit(this.cropArea());
-  }
-
+  /** Back to the start: no zoom, turn or flip, the crop centred. */
   reset(): void {
-    this.zoom.set(1);
     this.rotation.set(0);
-    this.flipH.set(false);
-    this.flipV.set(false);
-    this.initializeCropArea();
+    this.flipX.set(false);
+    this.flipY.set(false);
+    this.zoom.set(this.minZoom());
+    const size = this.orientedSize();
+    this.focus.set({ x: size.width / 2, y: size.height / 2 });
+    this.box.set(centredRect(size, this.ratio()));
   }
 
-  protected onMouseMove(event: MouseEvent): void {
-    if (this.isDragging) {
-      this.handleDrag(event.clientX, event.clientY);
-    } else if (this.isResizing) {
-      this.handleResize(event.clientX, event.clientY);
+  /** The crop as an image file (`Blob`): turned, flipped, in its shape. */
+  crop(options: ScImageCropperCropOptions = {}): Promise<Blob> {
+    const image = this.ɵimage();
+    if (!image || !this.ready()) {
+      return Promise.reject(new Error('ScImageCropper: no image yet.'));
     }
-  }
+    const area = this.area();
+    const size = this.orientedSize();
+    const natural = this.ɵnatural();
+    const out = options.width ? options.width / area.width : 1;
 
-  protected onTouchMove(event: TouchEvent): void {
-    if (this.isDragging || this.isResizing) {
-      event.preventDefault();
-      const touch = event.touches[0];
-      if (this.isDragging) {
-        this.handleDrag(touch.clientX, touch.clientY);
-      } else if (this.isResizing) {
-        this.handleResize(touch.clientX, touch.clientY);
-      }
+    const canvas = this.document.createElement('canvas');
+    canvas.width = Math.max(1, Math.round(area.width * out));
+    canvas.height = Math.max(1, Math.round(area.height * out));
+    const context = canvas.getContext('2d');
+    if (!context) {
+      return Promise.reject(new Error('ScImageCropper: no 2D canvas.'));
     }
+    context.scale(out, out);
+    if (this.shape() === 'circle') {
+      context.beginPath();
+      context.ellipse(
+        area.width / 2,
+        area.height / 2,
+        area.width / 2,
+        area.height / 2,
+        0,
+        0,
+        Math.PI * 2,
+      );
+      context.clip();
+    }
+    context.translate(-area.x, -area.y);
+    context.translate(size.width / 2, size.height / 2);
+    context.rotate((this.rotation() * Math.PI) / 180);
+    context.scale(this.flipX() ? -1 : 1, this.flipY() ? -1 : 1);
+    context.drawImage(image, -natural.width / 2, -natural.height / 2);
+
+    return new Promise((resolve, reject) =>
+      canvas.toBlob(
+        (blob) =>
+          blob
+            ? resolve(blob)
+            : reject(new Error('ScImageCropper: the crop failed.')),
+        options.type ?? 'image/png',
+        options.quality,
+      ),
+    );
   }
 
-  protected onMouseUp(): void {
-    this.stopInteraction();
-  }
-
-  protected onTouchEnd(): void {
-    this.stopInteraction();
+  /** The image's offset written back as where it is centred (after a clamp). */
+  private settle(): void {
+    const stage = this.ɵstage();
+    const offset = this.offset();
+    const s = this.scale() || 1;
+    this.focus.set({
+      x: (stage.width / 2 - offset.x) / s,
+      y: (stage.height / 2 - offset.y) / s,
+    });
   }
 }

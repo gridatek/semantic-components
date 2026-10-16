@@ -1,11 +1,11 @@
 import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import { ScSlider } from '@semantic-components/ui';
 import {
-  ScImageCropperNext,
-  ScImageCropperNextGrid,
-  ScImageCropperNextImage,
-  ScImageCropperNextSelection,
-  ScImageCropperNextStage,
+  ScImageCropper,
+  ScImageCropperGrid,
+  ScImageCropperImage,
+  ScImageCropperSelection,
+  ScImageCropperStage,
 } from '@semantic-components/ui-lab';
 
 /**
@@ -13,31 +13,31 @@ import {
  * drag, wheel, pinch, or the keys — as a cover is placed.
  */
 @Component({
-  selector: 'app-cover-image-cropper-next-demo',
+  selector: 'app-cover-image-cropper-demo',
   imports: [
-    ScImageCropperNext,
-    ScImageCropperNextStage,
-    ScImageCropperNextImage,
-    ScImageCropperNextSelection,
-    ScImageCropperNextGrid,
+    ScImageCropper,
+    ScImageCropperStage,
+    ScImageCropperImage,
+    ScImageCropperSelection,
+    ScImageCropperGrid,
     ScSlider,
   ],
   template: `
     <div
-      scImageCropperNext
-      #cropper="scImageCropperNext"
+      scImageCropper
+      #cropper="scImageCropper"
       [aspectRatio]="16 / 9"
       [(zoom)]="zoom"
     >
-      <div scImageCropperNextStage class="h-72 rounded-lg border">
+      <div scImageCropperStage class="h-72 rounded-lg border">
         <img
-          scImageCropperNextImage
+          scImageCropperImage
           src="/images/cropper-mountains.jpg"
           alt="Mountains at dawn"
         />
-        <div scImageCropperNextSelection aria-label="Cover">
+        <div scImageCropperSelection aria-label="Cover">
           <div
-            scImageCropperNextGrid
+            scImageCropperGrid
             [columns]="4"
             [rows]="2"
             class="*:border-amber-400"
@@ -64,7 +64,7 @@ import {
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class CoverImageCropperNextDemo {
+export class CoverImageCropperDemo {
   readonly zoom = signal(1);
   readonly percent = computed(() => Math.round(this.zoom() * 100));
 }

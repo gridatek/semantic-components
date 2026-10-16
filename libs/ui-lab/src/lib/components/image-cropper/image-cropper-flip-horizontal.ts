@@ -5,21 +5,21 @@ import {
   cn,
   ɵwarnIfUnnamed,
 } from '@semantic-components/ui';
-import { ScImageCropperNext } from './image-cropper-next';
+import { ScImageCropper } from './image-cropper';
 
-/** Turns the image a quarter, anticlockwise. Write its icon and name it. */
+/** Flips the image left to right. Write its icon and name it. */
 @Directive({
-  selector: 'button[scImageCropperNextRotateLeft]',
+  selector: 'button[scImageCropperFlipHorizontal]',
   host: {
     type: 'button',
-    'data-slot': 'image-cropper-next-rotate-left',
+    'data-slot': 'image-cropper-flip-horizontal',
     '[disabled]': '!cropper.ready()',
     '[class]': 'class()',
-    '(click)': 'cropper.rotate(-1)',
+    '(click)': 'cropper.flipX.set(!cropper.flipX())',
   },
 })
-export class ScImageCropperNextRotateLeft {
-  protected readonly cropper = inject(ScImageCropperNext);
+export class ScImageCropperFlipHorizontal {
+  protected readonly cropper = inject(ScImageCropper);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('outline');
@@ -33,6 +33,6 @@ export class ScImageCropperNextRotateLeft {
   );
 
   constructor() {
-    ɵwarnIfUnnamed('scImageCropperNextRotateLeft');
+    ɵwarnIfUnnamed('scImageCropperFlipHorizontal');
   }
 }

@@ -1,56 +1,61 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { SC_IMAGE_CROPPER } from './image-cropper';
-import { SC_IMAGE_CROPPER_PREVIEW } from './image-cropper-preview';
+import { ScImageCropper } from './image-cropper';
+import { ScImageCropperPreview } from './image-cropper-preview';
 
-/**
- * The cropped image in a `scImageCropperPreview`: the cropper's image, moved,
- * scaled, rotated and flipped to show the crop. Write its `alt`.
- */
+/** The crop, in its preview: the cropper's image, placed so the crop covers it. Write its `alt`. */
 @Directive({
   selector: 'img[scImageCropperPreviewImage]',
   host: {
     'data-slot': 'image-cropper-preview-image',
-    '[src]': 'cropper.imageSrc()',
-    '[hidden]': '!cropper.imageSrc()',
-    '[style.width.px]': 'width()',
-    '[style.height.px]': 'height()',
-    '[style.transform]': 'transform()',
+    draggable: 'false',
+    '[attr.src]': 'src()',
+    '[style.width.px]': 'place().width',
+    '[style.height.px]': 'place().height',
+    '[style.left.px]': 'place().left',
+    '[style.top.px]': 'place().top',
+    '[style.transform]': 'place().transform',
     '[class]': 'class()',
   },
 })
 export class ScImageCropperPreviewImage {
-  protected readonly cropper = inject(SC_IMAGE_CROPPER);
-  private readonly preview = inject(SC_IMAGE_CROPPER_PREVIEW);
+  protected readonly cropper = inject(ScImageCropper);
+  private readonly preview = inject(ScImageCropperPreview);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
-    cn('max-w-none', this.classInput()),
-  );
-
-  protected readonly width = computed(
-    () => this.cropper.scaledImageWidth() * this.preview.scale(),
-  );
-  protected readonly height = computed(
-    () => this.cropper.scaledImageHeight() * this.preview.scale(),
-  );
-
-  protected readonly transform = computed(() => {
-    const crop = this.cropper.cropArea();
-    const scale = this.preview.scale();
-    // The image is centred in the container; the crop is relative to it.
-    const offsetX =
-      (this.cropper.containerWidth() - this.cropper.scaledImageWidth()) / 2;
-    const offsetY =
-      (this.cropper.containerHeight() - this.cropper.scaledImageHeight()) / 2;
-    const parts = [
-      `translate(${-(crop.x - offsetX) * scale}px, ${-(crop.y - offsetY) * scale}px)`,
-    ];
-    const rotation = this.cropper.rotation();
-    if (rotation !== 0) parts.push(`rotate(${rotation}deg)`);
-    if (this.cropper.flipH()) parts.push('scaleX(-1)');
-    if (this.cropper.flipV()) parts.push('scaleY(-1)');
-    return parts.join(' ');
+  /** The cropper's image (again when another loads). */
+  protected readonly src = computed(() => {
+    this.cropper.ɵnatural();
+    return this.cropper.ɵimage()?.currentSrc || null;
   });
+
+  protected readonly place = computed(() => {
+    const area = this.cropper.area();
+    const box = this.preview.size();
+    const natural = this.cropper.ɵnatural();
+    const size = this.cropper.orientedSize();
+    // The crop covers the preview: preview pixels per image pixel.
+    const k =
+      area.width && area.height
+        ? Math.max(box.width / area.width, box.height / area.height)
+        : 0;
+    const left = (box.width - area.width * k) / 2 - area.x * k;
+    const top = (box.height - area.height * k) / 2 - area.y * k;
+    return {
+      width: natural.width * k,
+      height: natural.height * k,
+      left: left + ((size.width - natural.width) * k) / 2,
+      top: top + ((size.height - natural.height) * k) / 2,
+      transform: `rotate(${this.cropper.rotation()}deg) scale(${this.cropper.flipX() ? -1 : 1}, ${this.cropper.flipY() ? -1 : 1})`,
+    };
+  });
+
+  protected readonly class = computed(() =>
+    cn(
+      'pointer-events-none absolute max-w-none origin-center select-none',
+      !this.cropper.ready() && 'invisible',
+      this.classInput(),
+    ),
+  );
 }

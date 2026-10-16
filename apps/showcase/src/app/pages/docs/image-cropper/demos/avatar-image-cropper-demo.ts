@@ -1,33 +1,13 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { AvatarImageCropperNextDemo } from './avatar-image-cropper-next-demo';
-
-@Component({
-  selector: 'app-avatar-image-cropper-next-demo-container',
-  imports: [DemoContainer, AvatarImageCropperNextDemo],
-  template: `
-    <app-demo-container
-      title="Avatar"
-      [code]="code"
-      demoUrl="/demos/image-cropper-next/avatar-image-cropper-next-demo"
-    >
-      <app-avatar-image-cropper-next-demo />
-    </app-demo-container>
-  `,
-  host: { class: 'block w-full' },
-  encapsulation: ViewEncapsulation.None,
-})
-export class AvatarImageCropperNextDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
+import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import { ScButton, ScSlider } from '@semantic-components/ui';
 import {
-  ScImageCropperNext,
-  ScImageCropperNextHandle,
-  ScImageCropperNextImage,
-  ScImageCropperNextPreview,
-  ScImageCropperNextPreviewImage,
-  ScImageCropperNextSelection,
-  ScImageCropperNextStage,
+  ScImageCropper,
+  ScImageCropperHandle,
+  ScImageCropperImage,
+  ScImageCropperPreview,
+  ScImageCropperPreviewImage,
+  ScImageCropperSelection,
+  ScImageCropperStage,
 } from '@semantic-components/ui-lab';
 
 /**
@@ -35,35 +15,35 @@ import {
  * zoom, and dragging around it moves the image.
  */
 @Component({
-  selector: 'app-avatar-image-cropper-next-demo',
+  selector: 'app-avatar-image-cropper-demo',
   imports: [
-    ScImageCropperNext,
-    ScImageCropperNextStage,
-    ScImageCropperNextImage,
-    ScImageCropperNextSelection,
-    ScImageCropperNextHandle,
-    ScImageCropperNextPreview,
-    ScImageCropperNextPreviewImage,
+    ScImageCropper,
+    ScImageCropperStage,
+    ScImageCropperImage,
+    ScImageCropperSelection,
+    ScImageCropperHandle,
+    ScImageCropperPreview,
+    ScImageCropperPreviewImage,
     ScButton,
     ScSlider,
   ],
-  template: \`
+  template: `
     <div
-      scImageCropperNext
-      #cropper="scImageCropperNext"
+      scImageCropper
+      #cropper="scImageCropper"
       shape="circle"
       [aspectRatio]="1"
       [(zoom)]="zoom"
     >
-      <div scImageCropperNextStage class="h-72 rounded-lg border">
+      <div scImageCropperStage class="h-72 rounded-lg border">
         <img
-          scImageCropperNextImage
+          scImageCropperImage
           src="/images/cropper-mountains.jpg"
           alt="Mountains at dawn"
         />
-        <div scImageCropperNextSelection aria-label="Profile picture">
+        <div scImageCropperSelection aria-label="Profile picture">
           @for (handle of handles; track handle) {
-            <div [scImageCropperNextHandle]="handle"></div>
+            <div [scImageCropperHandle]="handle"></div>
           }
         </div>
       </div>
@@ -85,8 +65,8 @@ import {
 
       <div class="flex flex-wrap items-end gap-4">
         @for (size of sizes; track size.class) {
-          <div scImageCropperNextPreview [class]="size.class + ' rounded-full'">
-            <img scImageCropperNextPreviewImage [alt]="size.alt" />
+          <div scImageCropperPreview [class]="size.class + ' rounded-full'">
+            <img scImageCropperPreviewImage [alt]="size.alt" />
           </div>
         }
         <button scButton (click)="crop(cropper)">Use this picture</button>
@@ -98,11 +78,11 @@ import {
         </p>
       }
     </div>
-  \`,
+  `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class AvatarImageCropperNextDemo {
+export class AvatarImageCropperDemo {
   readonly zoom = signal(1);
   readonly result = signal<{ width: number; height: number } | null>(null);
   readonly percent = computed(() => Math.round(this.zoom() * 100));
@@ -124,12 +104,11 @@ export class AvatarImageCropperNextDemo {
     { class: 'size-10', alt: 'Small preview' },
   ];
 
-  async crop(cropper: ScImageCropperNext): Promise<void> {
+  async crop(cropper: ScImageCropper): Promise<void> {
     // A 256 px avatar, its corners transparent.
     const blob = await cropper.crop({ type: 'image/png', width: 256 });
     const bitmap = await createImageBitmap(blob);
     this.result.set({ width: bitmap.width, height: bitmap.height });
     bitmap.close();
   }
-}`;
 }

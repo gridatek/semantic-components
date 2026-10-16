@@ -1,22 +1,24 @@
-export { SC_IMAGE_CROPPER, ScImageCropper } from './image-cropper';
-export type { ScImageCropperArea, ScImageCropperResult } from './image-cropper';
-export { ScImageCropperCanvas } from './image-cropper-canvas';
-export { ScImageCropperImage } from './image-cropper-image';
-export { ScImageCropperOverlay } from './image-cropper-overlay';
-export { ScImageCropperSelection } from './image-cropper-selection';
-export { ScImageCropperDragRegion } from './image-cropper-drag-region';
-export { ScImageCropperHandle } from './image-cropper-handle';
-export type { ScImageCropperHandlePosition } from './image-cropper-handle';
+export {
+  ScImageCropper,
+  type ScImageCropperCropOptions,
+} from './image-cropper';
+export { ScImageCropperAspectRatio } from './image-cropper-aspect-ratio';
+export { ScImageCropperFlipHorizontal } from './image-cropper-flip-horizontal';
+export { ScImageCropperFlipVertical } from './image-cropper-flip-vertical';
+export type {
+  ScImageCropperHandlePosition,
+  ScImageCropperRect,
+  ScImageCropperRotation,
+} from './image-cropper-geometry';
 export { ScImageCropperGrid } from './image-cropper-grid';
-export { ScImageCropperZoom } from './image-cropper-zoom';
-export { ScImageCropperZoomIn } from './image-cropper-zoom-in';
-export { ScImageCropperZoomOut } from './image-cropper-zoom-out';
-export { ScImageCropperRotateLeft } from './image-cropper-rotate-left';
-export { ScImageCropperRotateRight } from './image-cropper-rotate-right';
-export { ScImageCropperFlipH } from './image-cropper-flip-h';
-export { ScImageCropperFlipV } from './image-cropper-flip-v';
+export { ScImageCropperHandle } from './image-cropper-handle';
+export { ScImageCropperImage } from './image-cropper-image';
 export { ScImageCropperPreview } from './image-cropper-preview';
 export { ScImageCropperPreviewImage } from './image-cropper-preview-image';
-export { ScImageCropperAspectRatio } from './image-cropper-aspect-ratio';
 export { ScImageCropperReset } from './image-cropper-reset';
-export { ScImageCropperFileInput } from './image-cropper-file-input';
+export { ScImageCropperRotateLeft } from './image-cropper-rotate-left';
+export { ScImageCropperRotateRight } from './image-cropper-rotate-right';
+export { ScImageCropperSelection } from './image-cropper-selection';
+export { ScImageCropperStage } from './image-cropper-stage';
+export { ScImageCropperZoomIn } from './image-cropper-zoom-in';
+export { ScImageCropperZoomOut } from './image-cropper-zoom-out';

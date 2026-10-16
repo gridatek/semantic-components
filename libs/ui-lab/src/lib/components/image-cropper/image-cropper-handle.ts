@@ -1,70 +1,56 @@
-import { Directive, computed, inject, input } from '@angular/core';
-import { SC_IMAGE_CROPPER } from './image-cropper';
+import { DestroyRef, Directive, computed, inject, input } from '@angular/core';
+import { cn } from '@semantic-components/ui';
+import { ScImageCropper } from './image-cropper';
+import type { ScImageCropperHandlePosition } from './image-cropper-geometry';
 
-export type ScImageCropperHandlePosition =
-  | 'top-left'
-  | 'top'
-  | 'top-right'
-  | 'right'
-  | 'bottom-right'
-  | 'bottom'
-  | 'bottom-left'
-  | 'left';
-
-const CURSOR_MAP: Record<ScImageCropperHandlePosition, string> = {
-  'top-left': 'nw-resize',
-  top: 'n-resize',
-  'top-right': 'ne-resize',
-  right: 'e-resize',
-  'bottom-right': 'se-resize',
-  bottom: 's-resize',
-  'bottom-left': 'sw-resize',
-  left: 'w-resize',
+/** Squares at the corners, bars on the edges, centred on the outline. */
+const PLACES: Record<ScImageCropperHandlePosition, string> = {
+  'top-left': '-top-1.5 -left-1.5 size-3 cursor-nwse-resize',
+  top: '-top-1.5 left-1/2 h-3 w-6 -translate-x-1/2 cursor-ns-resize',
+  'top-right': '-top-1.5 -right-1.5 size-3 cursor-nesw-resize',
+  right: 'top-1/2 -right-1.5 h-6 w-3 -translate-y-1/2 cursor-ew-resize',
+  'bottom-right': '-right-1.5 -bottom-1.5 size-3 cursor-nwse-resize',
+  bottom: '-bottom-1.5 left-1/2 h-3 w-6 -translate-x-1/2 cursor-ns-resize',
+  'bottom-left': '-bottom-1.5 -left-1.5 size-3 cursor-nesw-resize',
+  left: 'top-1/2 -left-1.5 h-6 w-3 -translate-y-1/2 cursor-ew-resize',
 };
 
-const POSITION_CLASSES: Record<ScImageCropperHandlePosition, string> = {
-  'top-left': 'absolute -top-1.5 -left-1.5 z-10 size-3',
-  top: 'absolute -top-1.5 left-1/2 z-10 h-3 w-6 -translate-x-1/2',
-  'top-right': 'absolute -top-1.5 -right-1.5 z-10 size-3',
-  right: 'absolute top-1/2 -right-1.5 z-10 h-6 w-3 -translate-y-1/2',
-  'bottom-right': 'absolute -right-1.5 -bottom-1.5 z-10 size-3',
-  bottom: 'absolute -bottom-1.5 left-1/2 z-10 h-3 w-6 -translate-x-1/2',
-  'bottom-left': 'absolute -bottom-1.5 -left-1.5 z-10 size-3',
-  left: 'absolute top-1/2 -left-1.5 z-10 h-6 w-3 -translate-y-1/2',
-};
-
+/**
+ * A handle to resize the crop by (`scImageCropperHandle="top-left"`), in
+ * the selection: with any, the crop is a box resized over the image. For
+ * the pointer: the keyboard resizes with Alt + arrows on the selection.
+ */
 @Directive({
   selector: '[scImageCropperHandle]',
   host: {
-    '[class]': 'hostClass()',
-    '[style.cursor]': 'cursor()',
-    '[attr.data-position]': 'position()',
-    '(mousedown)': 'onMouseDown($event)',
-    '(touchstart)': 'onTouchStart($event)',
+    'data-slot': 'image-cropper-handle',
+    'aria-hidden': 'true',
+    '[attr.data-handle]': 'position()',
+    '[class]': 'class()',
   },
 })
 export class ScImageCropperHandle {
-  private readonly cropper = inject(SC_IMAGE_CROPPER);
+  private readonly cropper = inject(ScImageCropper);
 
-  readonly position = input.required<ScImageCropperHandlePosition>();
+  readonly position = input.required<ScImageCropperHandlePosition>({
+    alias: 'scImageCropperHandle',
+  });
+  readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly cursor = computed(() => CURSOR_MAP[this.position()]);
-
-  protected readonly hostClass = computed(
-    () =>
-      `${POSITION_CLASSES[this.position()]} border border-gray-400 bg-white`,
+  protected readonly class = computed(() =>
+    cn(
+      'absolute z-10 border border-gray-400 bg-white',
+      // A larger target than it looks, for fingers.
+      'before:absolute before:-inset-2',
+      PLACES[this.position()],
+      this.classInput(),
+    ),
   );
 
-  protected onMouseDown(event: MouseEvent): void {
-    event.preventDefault();
-    event.stopPropagation();
-    this.cropper.startResizing(event.clientX, event.clientY, this.position());
-  }
-
-  protected onTouchStart(event: TouchEvent): void {
-    event.preventDefault();
-    event.stopPropagation();
-    const touch = event.touches[0];
-    this.cropper.startResizing(touch.clientX, touch.clientY, this.position());
+  constructor() {
+    this.cropper.ɵhandles.update((n) => n + 1);
+    inject(DestroyRef).onDestroy(() =>
+      this.cropper.ɵhandles.update((n) => n - 1),
+    );
   }
 }

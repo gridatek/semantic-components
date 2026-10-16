@@ -1,56 +1,50 @@
-import {
-  Directive,
-  ElementRef,
-  Injector,
-  afterNextRender,
-  computed,
-  inject,
-  input,
-  runInInjectionContext,
-} from '@angular/core';
-import { SC_IMAGE_CROPPER } from './image-cropper';
+import { Directive, ElementRef, computed, inject, input } from '@angular/core';
+import { cn } from '@semantic-components/ui';
+import { ScImageCropper } from './image-cropper';
 
+/**
+ * The image to crop, in the stage: your `img` with its `src` and `alt`. From
+ * another site, it needs CORS (`crossorigin="anonymous"`) to be cropped.
+ */
 @Directive({
   selector: 'img[scImageCropperImage]',
   host: {
-    class: 'max-w-none',
-    '[style.width.px]': 'scaledWidth()',
-    '[style.height.px]': 'scaledHeight()',
-    '[style.transform]': 'transform()',
-    '[src]': 'src()',
-    '[attr.draggable]': '"false"',
-    crossorigin: 'anonymous',
+    'data-slot': 'image-cropper-image',
+    draggable: 'false',
+    '[class]': 'class()',
+    '[style.width.px]': 'cropper.imageStyle().width',
+    '[style.height.px]': 'cropper.imageStyle().height',
+    '[style.left.px]': 'cropper.imageStyle().left',
+    '[style.top.px]': 'cropper.imageStyle().top',
+    '[style.transform]': 'cropper.imageStyle().transform',
     '(load)': 'onLoad()',
   },
 })
 export class ScImageCropperImage {
-  private readonly cropper = inject(SC_IMAGE_CROPPER);
-  private readonly elementRef = inject(ElementRef<HTMLImageElement>);
-  private readonly injector = inject(Injector);
+  protected readonly cropper = inject(ScImageCropper);
+  private readonly element =
+    inject<ElementRef<HTMLImageElement>>(ElementRef).nativeElement;
 
-  readonly initialSrc = input<string>('', { alias: 'src' });
+  readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly src = computed(
-    () => this.cropper.imageSrc() || this.initialSrc(),
+  protected readonly class = computed(() =>
+    cn(
+      'pointer-events-none absolute max-w-none origin-center select-none',
+      !this.cropper.ready() && 'invisible',
+      this.classInput(),
+    ),
   );
 
-  protected readonly scaledWidth = computed(() =>
-    this.cropper.scaledImageWidth(),
-  );
-  protected readonly scaledHeight = computed(() =>
-    this.cropper.scaledImageHeight(),
-  );
-  protected readonly transform = computed(() => this.cropper.imageTransform());
+  constructor() {
+    this.cropper.ɵimage.set(this.element);
+    // Already loaded (from the cache): no load event comes.
+    if (this.element.complete && this.element.naturalWidth) this.onLoad();
+  }
 
   protected onLoad(): void {
-    const img = this.elementRef.nativeElement;
-    this.cropper.onImageLoad(img.naturalWidth, img.naturalHeight);
-    this.cropper.setImageSrc(img.src);
-
-    runInInjectionContext(this.injector, () => {
-      afterNextRender(() => {
-        this.cropper.initializeCropArea();
-      });
+    this.cropper.ɵnatural.set({
+      width: this.element.naturalWidth,
+      height: this.element.naturalHeight,
     });
   }
 }

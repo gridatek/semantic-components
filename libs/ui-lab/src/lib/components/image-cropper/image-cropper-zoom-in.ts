@@ -3,19 +3,24 @@ import {
   type ScButtonVariants,
   buttonVariants,
   cn,
+  ɵwarnIfUnnamed,
 } from '@semantic-components/ui';
-import { SC_IMAGE_CROPPER } from './image-cropper';
+import { ScImageCropper } from './image-cropper';
 
+/** Zooms in. Write its icon and name it. */
 @Directive({
   selector: 'button[scImageCropperZoomIn]',
   host: {
-    '[class]': 'class()',
     type: 'button',
-    '(click)': 'cropper.zoomIn()',
-    '[disabled]': 'cropper.zoom() >= 3',
+    'data-slot': 'image-cropper-zoom-in',
+    '[disabled]': '!cropper.ready() || cropper.zoom() >= cropper.maxZoom()',
+    '[class]': 'class()',
+    '(click)': 'cropper.zoomBy(1.25)',
   },
 })
 export class ScImageCropperZoomIn {
+  protected readonly cropper = inject(ScImageCropper);
+
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('outline');
   readonly size = input<ScButtonVariants['size']>('icon');
@@ -27,5 +32,7 @@ export class ScImageCropperZoomIn {
     ),
   );
 
-  protected readonly cropper = inject(SC_IMAGE_CROPPER);
+  constructor() {
+    ɵwarnIfUnnamed('scImageCropperZoomIn');
+  }
 }

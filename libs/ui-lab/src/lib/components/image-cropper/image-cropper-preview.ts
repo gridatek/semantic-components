@@ -1,53 +1,53 @@
 import {
+  DestroyRef,
   Directive,
-  InjectionToken,
+  ElementRef,
+  afterNextRender,
   computed,
   inject,
   input,
+  signal,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { SC_IMAGE_CROPPER } from './image-cropper';
-
-export const SC_IMAGE_CROPPER_PREVIEW =
-  new InjectionToken<ScImageCropperPreview>('SC_IMAGE_CROPPER_PREVIEW');
+import type { ScImageCropperSize } from './image-cropper-geometry';
 
 /**
- * A live preview of the crop, at most `width` × `height` (keeping the crop's
- * shape): put an `img[scImageCropperPreviewImage]` in it, with your `alt`.
+ * A live preview of the crop: size it (`size-24`, `rounded-full`…) and put
+ * a `img[scImageCropperPreviewImage]` inside, with its `alt`. The crop
+ * covers it.
  */
 @Directive({
-  selector: 'div[scImageCropperPreview]',
-  providers: [
-    { provide: SC_IMAGE_CROPPER_PREVIEW, useExisting: ScImageCropperPreview },
-  ],
+  selector: '[scImageCropperPreview]',
+  exportAs: 'scImageCropperPreview',
   host: {
     'data-slot': 'image-cropper-preview',
     '[class]': 'class()',
-    '[style.width.px]': 'previewWidth()',
-    '[style.height.px]': 'previewHeight()',
   },
 })
 export class ScImageCropperPreview {
-  private readonly cropper = inject(SC_IMAGE_CROPPER);
+  private readonly element =
+    inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly width = input<number>(150);
-  readonly height = input<number>(150);
+
+  /** Its size, for its image to cover it. */
+  readonly size = signal<ScImageCropperSize>({ width: 0, height: 0 });
 
   protected readonly class = computed(() =>
-    cn('inline-block overflow-hidden', this.classInput()),
+    cn('bg-muted relative overflow-hidden', this.classInput()),
   );
 
-  /** The crop fitted into the preview, keeping its shape. */
-  readonly scale = computed(() => {
-    const crop = this.cropper.cropArea();
-    return Math.min(this.width() / crop.width, this.height() / crop.height);
-  });
-
-  protected readonly previewWidth = computed(
-    () => this.cropper.cropArea().width * this.scale(),
-  );
-  protected readonly previewHeight = computed(
-    () => this.cropper.cropArea().height * this.scale(),
-  );
+  constructor() {
+    const destroyRef = inject(DestroyRef);
+    afterNextRender(() => {
+      const observer = new ResizeObserver(([entry]) =>
+        this.size.set({
+          width: entry.contentRect.width,
+          height: entry.contentRect.height,
+        }),
+      );
+      observer.observe(this.element);
+      destroyRef.onDestroy(() => observer.disconnect());
+    });
+  }
 }

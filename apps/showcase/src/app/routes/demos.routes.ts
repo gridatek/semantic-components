@@ -1653,43 +1653,24 @@ export const demosRoutes: Route[] = [
     path: 'demos/image-cropper',
     children: [
       {
-        path: 'full-featured-cropper-demo',
+        path: 'box-image-cropper-demo',
         loadComponent: () =>
-          import('../pages/docs/image-cropper/demos/full-featured-cropper-demo').then(
-            (m) => m.FullFeaturedCropperDemo,
+          import('../pages/docs/image-cropper/demos/box-image-cropper-demo').then(
+            (m) => m.BoxImageCropperDemo,
           ),
       },
       {
-        path: 'avatar-cropper-demo',
+        path: 'avatar-image-cropper-demo',
         loadComponent: () =>
-          import('../pages/docs/image-cropper/demos/avatar-cropper-demo').then(
-            (m) => m.AvatarCropperDemo,
-          ),
-      },
-    ],
-  },
-  {
-    path: 'demos/image-cropper-next',
-    children: [
-      {
-        path: 'box-image-cropper-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/image-cropper-next/demos/box-image-cropper-next-demo').then(
-            (m) => m.BoxImageCropperNextDemo,
+          import('../pages/docs/image-cropper/demos/avatar-image-cropper-demo').then(
+            (m) => m.AvatarImageCropperDemo,
           ),
       },
       {
-        path: 'avatar-image-cropper-next-demo',
+        path: 'cover-image-cropper-demo',
         loadComponent: () =>
-          import('../pages/docs/image-cropper-next/demos/avatar-image-cropper-next-demo').then(
-            (m) => m.AvatarImageCropperNextDemo,
-          ),
-      },
-      {
-        path: 'cover-image-cropper-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/image-cropper-next/demos/cover-image-cropper-next-demo').then(
-            (m) => m.CoverImageCropperNextDemo,
+          import('../pages/docs/image-cropper/demos/cover-image-cropper-demo').then(
+            (m) => m.CoverImageCropperDemo,
           ),
       },
     ],

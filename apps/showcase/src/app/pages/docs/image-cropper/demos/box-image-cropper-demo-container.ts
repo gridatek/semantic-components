@@ -1,22 +1,42 @@
-import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { BoxImageCropperDemo } from './box-image-cropper-demo';
+
+@Component({
+  selector: 'app-box-image-cropper-demo-container',
+  imports: [DemoContainer, BoxImageCropperDemo],
+  template: `
+    <app-demo-container
+      title="Crop box"
+      [code]="code"
+      demoUrl="/demos/image-cropper/box-image-cropper-demo"
+    >
+      <app-box-image-cropper-demo />
+    </app-demo-container>
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class BoxImageCropperDemoContainer {
+  readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import { ScButton, ScSlider } from '@semantic-components/ui';
 import {
-  ScImageCropperNext,
-  ScImageCropperNextAspectRatio,
-  ScImageCropperNextFlipHorizontal,
-  ScImageCropperNextFlipVertical,
-  ScImageCropperNextGrid,
-  ScImageCropperNextHandle,
-  ScImageCropperNextImage,
-  ScImageCropperNextPreview,
-  ScImageCropperNextPreviewImage,
-  ScImageCropperNextReset,
-  ScImageCropperNextRotateLeft,
-  ScImageCropperNextRotateRight,
-  ScImageCropperNextSelection,
-  ScImageCropperNextStage,
-  ScImageCropperNextZoomIn,
-  ScImageCropperNextZoomOut,
+  ScImageCropper,
+  ScImageCropperAspectRatio,
+  ScImageCropperFlipHorizontal,
+  ScImageCropperFlipVertical,
+  ScImageCropperGrid,
+  ScImageCropperHandle,
+  ScImageCropperImage,
+  ScImageCropperPreview,
+  ScImageCropperPreviewImage,
+  ScImageCropperReset,
+  ScImageCropperRotateLeft,
+  ScImageCropperRotateRight,
+  ScImageCropperSelection,
+  ScImageCropperStage,
+  ScImageCropperZoomIn,
+  ScImageCropperZoomOut,
 } from '@semantic-components/ui-lab';
 import {
   SiFlipHorizontal2Icon,
@@ -32,24 +52,24 @@ import {
  * a live preview, your own file, and the crop as a file to download.
  */
 @Component({
-  selector: 'app-box-image-cropper-next-demo',
+  selector: 'app-box-image-cropper-demo',
   imports: [
-    ScImageCropperNext,
-    ScImageCropperNextStage,
-    ScImageCropperNextImage,
-    ScImageCropperNextSelection,
-    ScImageCropperNextHandle,
-    ScImageCropperNextGrid,
-    ScImageCropperNextAspectRatio,
-    ScImageCropperNextRotateLeft,
-    ScImageCropperNextRotateRight,
-    ScImageCropperNextFlipHorizontal,
-    ScImageCropperNextFlipVertical,
-    ScImageCropperNextZoomIn,
-    ScImageCropperNextZoomOut,
-    ScImageCropperNextReset,
-    ScImageCropperNextPreview,
-    ScImageCropperNextPreviewImage,
+    ScImageCropper,
+    ScImageCropperStage,
+    ScImageCropperImage,
+    ScImageCropperSelection,
+    ScImageCropperHandle,
+    ScImageCropperGrid,
+    ScImageCropperAspectRatio,
+    ScImageCropperRotateLeft,
+    ScImageCropperRotateRight,
+    ScImageCropperFlipHorizontal,
+    ScImageCropperFlipVertical,
+    ScImageCropperZoomIn,
+    ScImageCropperZoomOut,
+    ScImageCropperReset,
+    ScImageCropperPreview,
+    ScImageCropperPreviewImage,
     ScButton,
     ScSlider,
     SiRotateCcwIcon,
@@ -59,25 +79,22 @@ import {
     SiZoomInIcon,
     SiZoomOutIcon,
   ],
-  template: `
-    <div scImageCropperNext #cropper="scImageCropperNext" [(zoom)]="zoom">
+  template: \`
+    <div scImageCropper #cropper="scImageCropper" [(zoom)]="zoom">
       <div class="flex flex-wrap gap-6">
-        <div
-          scImageCropperNextStage
-          class="h-80 min-w-0 flex-1 rounded-lg border"
-        >
-          <img scImageCropperNextImage [src]="src()" alt="Mountains at dawn" />
-          <div scImageCropperNextSelection aria-label="Crop area">
-            <div scImageCropperNextGrid></div>
+        <div scImageCropperStage class="h-80 min-w-0 flex-1 rounded-lg border">
+          <img scImageCropperImage [src]="src()" alt="Mountains at dawn" />
+          <div scImageCropperSelection aria-label="Crop area">
+            <div scImageCropperGrid></div>
             @for (handle of handles; track handle) {
-              <div [scImageCropperNextHandle]="handle"></div>
+              <div [scImageCropperHandle]="handle"></div>
             }
           </div>
         </div>
         <div class="space-y-2">
           <p class="text-sm font-medium">Preview</p>
-          <div scImageCropperNextPreview class="h-28 w-40 rounded-md border">
-            <img scImageCropperNextPreviewImage alt="The crop" />
+          <div scImageCropperPreview class="h-28 w-40 rounded-md border">
+            <img scImageCropperPreviewImage alt="The crop" />
           </div>
           <p class="text-muted-foreground text-xs tabular-nums">
             {{ round(cropper.area().width) }} ×
@@ -89,28 +106,28 @@ import {
       <div class="flex flex-wrap items-center gap-2">
         <div role="group" aria-label="Aspect ratio" class="flex gap-1">
           @for (ratio of ratios; track ratio.label) {
-            <button [scImageCropperNextAspectRatio]="ratio.value">
+            <button [scImageCropperAspectRatio]="ratio.value">
               {{ ratio.label }}
             </button>
           }
         </div>
-        <button scImageCropperNextRotateLeft>
+        <button scImageCropperRotateLeft>
           <svg siRotateCcwIcon></svg>
           <span class="sr-only">Rotate left</span>
         </button>
-        <button scImageCropperNextRotateRight>
+        <button scImageCropperRotateRight>
           <svg siRotateCwIcon></svg>
           <span class="sr-only">Rotate right</span>
         </button>
-        <button scImageCropperNextFlipHorizontal>
+        <button scImageCropperFlipHorizontal>
           <svg siFlipHorizontal2Icon></svg>
           <span class="sr-only">Flip horizontally</span>
         </button>
-        <button scImageCropperNextFlipVertical>
+        <button scImageCropperFlipVertical>
           <svg siFlipVertical2Icon></svg>
           <span class="sr-only">Flip vertically</span>
         </button>
-        <button scImageCropperNextZoomOut>
+        <button scImageCropperZoomOut>
           <svg siZoomOutIcon></svg>
           <span class="sr-only">Zoom out</span>
         </button>
@@ -126,11 +143,11 @@ import {
         <span class="text-muted-foreground w-12 text-sm tabular-nums"
           >{{ percent() }}%</span
         >
-        <button scImageCropperNextZoomIn>
+        <button scImageCropperZoomIn>
           <svg siZoomInIcon></svg>
           <span class="sr-only">Zoom in</span>
         </button>
-        <button scImageCropperNextReset size="default">Reset</button>
+        <button scImageCropperReset size="default">Reset</button>
       </div>
 
       <div class="flex flex-wrap items-center gap-2">
@@ -162,11 +179,11 @@ import {
         </div>
       }
     </div>
-  `,
+  \`,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class BoxImageCropperNextDemo {
+export class BoxImageCropperDemo {
   readonly src = signal('/images/cropper-mountains.jpg');
   readonly zoom = signal(1);
   readonly result = signal<string | null>(null);
@@ -198,10 +215,11 @@ export class BoxImageCropperNextDemo {
     if (file) this.src.set(URL.createObjectURL(file));
   }
 
-  async crop(cropper: ScImageCropperNext): Promise<void> {
+  async crop(cropper: ScImageCropper): Promise<void> {
     const blob = await cropper.crop({ type: 'image/png' });
     const previous = this.result();
     if (previous) URL.revokeObjectURL(previous);
     this.result.set(URL.createObjectURL(blob));
   }
+}`;
 }

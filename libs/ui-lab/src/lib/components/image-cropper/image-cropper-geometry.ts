@@ -1,24 +1,24 @@
 /** A rectangle: in the image's pixels, or the stage's. */
-export interface ScImageCropperNextRect {
+export interface ScImageCropperRect {
   readonly x: number;
   readonly y: number;
   readonly width: number;
   readonly height: number;
 }
 
-export interface ScImageCropperNextSize {
+export interface ScImageCropperSize {
   readonly width: number;
   readonly height: number;
 }
 
 /** A quarter turn: rotation is in steps of 90°. */
-export type ScImageCropperNextRotation = 0 | 90 | 180 | 270;
+export type ScImageCropperRotation = 0 | 90 | 180 | 270;
 
 /** The image as shown: turned a quarter, its width and height swap. */
 export function oriented(
-  natural: ScImageCropperNextSize,
-  rotation: ScImageCropperNextRotation,
-): ScImageCropperNextSize {
+  natural: ScImageCropperSize,
+  rotation: ScImageCropperRotation,
+): ScImageCropperSize {
   return rotation % 180 === 0
     ? natural
     : { width: natural.height, height: natural.width };
@@ -26,8 +26,8 @@ export function oriented(
 
 /** The scale at which `size` fits in `box` (contain). */
 export function fitScale(
-  size: ScImageCropperNextSize,
-  box: ScImageCropperNextSize,
+  size: ScImageCropperSize,
+  box: ScImageCropperSize,
 ): number {
   if (!size.width || !size.height) return 1;
   return Math.min(box.width / size.width, box.height / size.height);
@@ -41,10 +41,10 @@ export const clamp = (value: number, min: number, max: number) =>
  * with `margin` (a fraction of it) around, centred.
  */
 export function centredRect(
-  box: ScImageCropperNextSize,
+  box: ScImageCropperSize,
   ratio: number,
   margin = 0.1,
-): ScImageCropperNextRect {
+): ScImageCropperRect {
   const maxWidth = box.width * (1 - margin * 2);
   const maxHeight = box.height * (1 - margin * 2);
   const width = Math.min(maxWidth, maxHeight * ratio);
@@ -59,9 +59,9 @@ export function centredRect(
 
 /** `rect` kept inside `bounds` (moved first, shrunk only if it must). */
 export function within(
-  rect: ScImageCropperNextRect,
-  bounds: ScImageCropperNextSize,
-): ScImageCropperNextRect {
+  rect: ScImageCropperRect,
+  bounds: ScImageCropperSize,
+): ScImageCropperRect {
   const width = Math.min(rect.width, bounds.width);
   const height = Math.min(rect.height, bounds.height);
   return {
@@ -73,7 +73,7 @@ export function within(
 }
 
 /** A resize handle: the edges it moves. */
-export type ScImageCropperNextHandlePosition =
+export type ScImageCropperHandlePosition =
   | 'top-left'
   | 'top'
   | 'top-right'
@@ -89,14 +89,14 @@ export type ScImageCropperNextHandlePosition =
  * (the opposite edge or corner stays put).
  */
 export function resize(
-  rect: ScImageCropperNextRect,
-  handle: ScImageCropperNextHandlePosition,
+  rect: ScImageCropperRect,
+  handle: ScImageCropperHandlePosition,
   dx: number,
   dy: number,
-  bounds: ScImageCropperNextSize,
+  bounds: ScImageCropperSize,
   min: number,
   ratio: number | null,
-): ScImageCropperNextRect {
+): ScImageCropperRect {
   const left = handle.includes('left');
   const right = handle.includes('right');
   const top = handle.startsWith('top');
@@ -149,10 +149,10 @@ export function resize(
 
 /** `rect` given `ratio`, around the same centre, as large as fits in it. */
 export function withRatio(
-  rect: ScImageCropperNextRect,
+  rect: ScImageCropperRect,
   ratio: number,
-  bounds: ScImageCropperNextSize,
-): ScImageCropperNextRect {
+  bounds: ScImageCropperSize,
+): ScImageCropperRect {
   const cx = rect.x + rect.width / 2;
   const cy = rect.y + rect.height / 2;
   const width = Math.min(rect.width, rect.height * ratio);

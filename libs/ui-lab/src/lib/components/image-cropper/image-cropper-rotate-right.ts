@@ -3,18 +3,24 @@ import {
   type ScButtonVariants,
   buttonVariants,
   cn,
+  ɵwarnIfUnnamed,
 } from '@semantic-components/ui';
-import { SC_IMAGE_CROPPER } from './image-cropper';
+import { ScImageCropper } from './image-cropper';
 
+/** Turns the image a quarter, clockwise. Write its icon and name it. */
 @Directive({
   selector: 'button[scImageCropperRotateRight]',
   host: {
-    '[class]': 'class()',
     type: 'button',
-    '(click)': 'cropper.rotateRight()',
+    'data-slot': 'image-cropper-rotate-right',
+    '[disabled]': '!cropper.ready()',
+    '[class]': 'class()',
+    '(click)': 'cropper.rotate(1)',
   },
 })
 export class ScImageCropperRotateRight {
+  protected readonly cropper = inject(ScImageCropper);
+
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('outline');
   readonly size = input<ScButtonVariants['size']>('icon');
@@ -26,5 +32,7 @@ export class ScImageCropperRotateRight {
     ),
   );
 
-  protected readonly cropper = inject(SC_IMAGE_CROPPER);
+  constructor() {
+    ɵwarnIfUnnamed('scImageCropperRotateRight');
+  }
 }

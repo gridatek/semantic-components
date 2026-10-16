@@ -3,19 +3,24 @@ import {
   type ScButtonVariants,
   buttonVariants,
   cn,
+  ɵwarnIfUnnamed,
 } from '@semantic-components/ui';
-import { SC_IMAGE_CROPPER } from './image-cropper';
+import { ScImageCropper } from './image-cropper';
 
+/** Flips the image top to bottom. Write its icon and name it. */
 @Directive({
-  selector: 'button[scImageCropperFlipH]',
+  selector: 'button[scImageCropperFlipVertical]',
   host: {
-    '[class]': 'class()',
     type: 'button',
-    '(click)': 'cropper.toggleFlipH()',
-    '[attr.data-active]': 'cropper.flipH() || null',
+    'data-slot': 'image-cropper-flip-vertical',
+    '[disabled]': '!cropper.ready()',
+    '[class]': 'class()',
+    '(click)': 'cropper.flipY.set(!cropper.flipY())',
   },
 })
-export class ScImageCropperFlipH {
+export class ScImageCropperFlipVertical {
+  protected readonly cropper = inject(ScImageCropper);
+
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('outline');
   readonly size = input<ScButtonVariants['size']>('icon');
@@ -27,5 +32,7 @@ export class ScImageCropperFlipH {
     ),
   );
 
-  protected readonly cropper = inject(SC_IMAGE_CROPPER);
+  constructor() {
+    ɵwarnIfUnnamed('scImageCropperFlipVertical');
+  }
 }
