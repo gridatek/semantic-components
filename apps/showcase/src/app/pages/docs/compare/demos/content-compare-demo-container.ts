@@ -77,7 +77,7 @@ import { SiChevronsLeftRightIcon } from '@semantic-icons/lucide-icons';
       </div>
     </ng-template>
   \`,
-  host: { class: 'block w-full' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
 export class ContentCompareDemo {}`;

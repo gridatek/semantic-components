@@ -42,7 +42,7 @@ import { SiChevronsUpDownIcon } from '@semantic-icons/lucide-icons';
       </div>
     </div>
   `,
-  host: { class: 'block w-full' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
 export class VerticalCompareDemo {}

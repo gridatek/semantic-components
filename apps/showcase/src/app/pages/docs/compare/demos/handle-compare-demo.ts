@@ -54,7 +54,7 @@ import { SiGripVerticalIcon } from '@semantic-icons/lucide-icons';
       </p>
     </div>
   `,
-  host: { class: 'block w-full' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
 export class HandleCompareDemo {

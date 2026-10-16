@@ -54,7 +54,8 @@ export class ScCompare {
 
   protected readonly class = computed(() =>
     cn(
-      'relative block overflow-hidden select-none',
+      // Its own stacking context: the handle stays under what covers it (a sticky header).
+      'relative isolate block overflow-hidden select-none',
       this.hover() || !this.handleOnly()
         ? this.orientation() === 'vertical'
           ? 'cursor-ns-resize'
