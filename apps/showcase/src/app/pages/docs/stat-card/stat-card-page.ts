@@ -21,7 +21,7 @@ import { VariantsStatCardDemoContainer } from './demos/variants-stat-card-demo-c
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>StatCard</h1>
+        <h1 scHeading>Stat Card</h1>
         <p class="text-muted-foreground">A stat card component.</p>
         <app-component-badges path="stat-card" />
       </div>
