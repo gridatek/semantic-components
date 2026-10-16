@@ -13,25 +13,33 @@ import {
     <div
       scVideoPlayerNext
       #player="scVideoPlayerNext"
-      aria-label="Video: a day"
+      aria-label="Video: Sintel, the trailer"
       [(paused)]="paused"
       [(currentTime)]="time"
       class="aspect-video w-full max-w-md"
     >
-      <video scVideoPlayerNextMedia src="/media/day.webm" preload="metadata">
+      <video
+        scVideoPlayerNextMedia
+        src="/media/sintel-trailer.mp4"
+        preload="metadata"
+      >
         <track
           kind="captions"
-          src="/media/day.en.vtt"
+          src="/media/sintel-trailer.en.vtt"
           srclang="en"
           label="English"
         />
         <track
           kind="captions"
-          src="/media/day.fr.vtt"
+          src="/media/sintel-trailer.fr.vtt"
           srclang="fr"
           label="Français"
         />
-        <track kind="chapters" src="/media/day.chapters.vtt" srclang="en" />
+        <track
+          kind="chapters"
+          src="/media/sintel-trailer.chapters.vtt"
+          srclang="en"
+        />
       </video>
     </div>
 

@@ -26,6 +26,19 @@ import { PlayerVideoPlayerNextDemoContainer } from './demos/player-video-player-
           keyboard shortcuts and the system's media controls.
         </p>
         <app-component-badges path="video-player-next" />
+        <p class="text-muted-foreground text-xs">
+          Video: the Sintel trailer, © Blender Foundation,
+          <a
+            href="https://creativecommons.org/licenses/by/3.0/"
+            class="underline underline-offset-4"
+            >CC BY 3.0</a
+          >,
+          <a
+            href="https://durian.blender.org"
+            class="underline underline-offset-4"
+            >durian.blender.org</a
+          >. Captions and chapters are ours.
+        </p>
       </div>
 
       <section class="space-y-4">

@@ -12,7 +12,7 @@ test.describe('Player', () => {
     await page.goto('/demos/video-player-next/player-video-player-next-demo');
     await expect
       .poll(() => video(page).evaluate((v: HTMLVideoElement) => v.duration))
-      .toBeGreaterThan(14);
+      .toBeGreaterThan(50);
   });
 
   test('plays and pauses', async ({ page }) => {
@@ -29,9 +29,9 @@ test.describe('Player', () => {
   test('the keys, focused in the player', async ({ page }) => {
     await player(page).focus();
     await page.keyboard.press('5');
-    await expect.poll(() => time(page)).toBeGreaterThan(7);
+    await expect.poll(() => time(page)).toBeGreaterThan(25);
     await page.keyboard.press('ArrowLeft');
-    await expect.poll(() => time(page)).toBeLessThan(3);
+    await expect.poll(() => time(page)).toBeLessThan(22);
     await page.keyboard.press('m');
     await expect(page.getByRole('button', { name: 'Mute' })).toHaveAttribute(
       'aria-pressed',
@@ -47,13 +47,11 @@ test.describe('Player', () => {
     await expect(
       page.getByRole('button', { name: 'Captions' }),
     ).toHaveAttribute('aria-pressed', 'true');
-    await page.keyboard.press('1');
-    await expect(captions(page)).toHaveText('The sun rises over the hills.');
+    await page.keyboard.press('3');
+    await expect(captions(page)).toHaveText("I'm searching for someone.");
 
     await page.getByRole('radio', { name: 'Français' }).check();
-    await expect(captions(page)).toHaveText(
-      'Le soleil se lève sur les collines.',
-    );
+    await expect(captions(page)).toHaveText("Je cherche quelqu'un.");
   });
 
   test('the seek bar: its time, chapters and preview', async ({ page }) => {
@@ -61,12 +59,12 @@ test.describe('Player', () => {
     await expect(seek).toHaveAttribute('aria-valuetext', /of/);
     const box = await seek.boundingBox();
     await page.mouse.move(
-      (box?.x ?? 0) + (box?.width ?? 0) * 0.8,
+      (box?.x ?? 0) + (box?.width ?? 0) * 0.5,
       (box?.y ?? 0) + (box?.height ?? 0) / 2,
     );
     await expect(
       page.locator('[data-slot="video-player-preview"]'),
-    ).toContainText('Night');
+    ).toContainText('The dragon');
   });
 
   test('a speed is pressed while it plays at it', async ({ page }) => {
@@ -81,9 +79,9 @@ test.describe('Player', () => {
 
 test('Controlled: chapters jump, from outside', async ({ page }) => {
   await page.goto('/demos/video-player-next/controlled-video-player-next-demo');
-  const night = page.getByRole('button', { name: /Night/ });
-  await expect(night).toBeVisible();
-  await night.click();
-  await expect.poll(() => time(page)).toBeCloseTo(10, 0);
-  await expect(night).toHaveAttribute('aria-current', 'true');
+  const desert = page.getByRole('button', { name: /The desert/ });
+  await expect(desert).toBeVisible();
+  await desert.click();
+  await expect.poll(() => time(page)).toBeCloseTo(36, 0);
+  await expect(desert).toHaveAttribute('aria-current', 'true');
 });

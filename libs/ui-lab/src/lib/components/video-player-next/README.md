@@ -18,10 +18,10 @@ scVideoPlayerNext (paused, currentTime, volume, muted, playbackRate, captions â€
 ## Usage
 
 ```html
-<div scVideoPlayerNext #player="scVideoPlayerNext" aria-label="Video: a day" class="aspect-video">
-  <video scVideoPlayerNextMedia src="/day.webm">
-    <track kind="captions" src="/day.en.vtt" srclang="en" label="English" />
-    <track kind="chapters" src="/day.chapters.vtt" srclang="en" />
+<div scVideoPlayerNext #player="scVideoPlayerNext" aria-label="Video: Sintel, the trailer" class="aspect-video">
+  <video scVideoPlayerNextMedia src="/sintel-trailer.mp4">
+    <track kind="captions" src="/sintel-trailer.en.vtt" srclang="en" label="English" />
+    <track kind="chapters" src="/sintel-trailer.chapters.vtt" srclang="en" />
   </video>
   <div scVideoPlayerNextCaptionsDisplay></div>
 

@@ -48,12 +48,12 @@ import { SiPauseIcon, SiPlayIcon } from '@semantic-icons/lucide-icons';
     <div
       scVideoPlayerNext
       #player="scVideoPlayerNext"
-      aria-label="Video: a day"
+      aria-label="Video: Sintel, the trailer"
       class="aspect-video w-full max-w-xl"
     >
       <video
         scVideoPlayerNextMedia
-        src="/media/day.webm"
+        src="/media/sintel-trailer.mp4"
         preload="metadata"
       ></video>
       <div scVideoPlayerNextControls class="flex-row items-center gap-2">
