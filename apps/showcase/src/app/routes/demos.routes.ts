@@ -4333,6 +4333,32 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/video-player-next',
+    children: [
+      {
+        path: 'player-video-player-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/video-player-next/demos/player-video-player-next-demo').then(
+            (m) => m.PlayerVideoPlayerNextDemo,
+          ),
+      },
+      {
+        path: 'minimal-video-player-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/video-player-next/demos/minimal-video-player-next-demo').then(
+            (m) => m.MinimalVideoPlayerNextDemo,
+          ),
+      },
+      {
+        path: 'controlled-video-player-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/video-player-next/demos/controlled-video-player-next-demo').then(
+            (m) => m.ControlledVideoPlayerNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/virtual-list',
     children: [
       {

@@ -36,3 +36,4 @@ export * from './timeline';
 export * from './tour-guide';
 export * from './transfer-list';
 export * from './video-player';
+export * from './video-player-next';

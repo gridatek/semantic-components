@@ -686,6 +686,12 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/video-player/video-player-page'),
       },
       {
+        path: 'video-player-next',
+        title: 'Video Player Next - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/video-player-next/video-player-next-page'),
+      },
+      {
         path: 'virtual-list',
         title: 'Virtual List - Semantic Components',
         loadComponent: () =>
