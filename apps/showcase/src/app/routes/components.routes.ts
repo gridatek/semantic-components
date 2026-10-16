@@ -279,12 +279,6 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/compare/compare-page'),
       },
       {
-        path: 'image-compare',
-        title: 'Image Compare - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/image-compare/image-compare-page'),
-      },
-      {
         path: 'image-cropper',
         title: 'Image Cropper - Semantic Components',
         loadComponent: () =>

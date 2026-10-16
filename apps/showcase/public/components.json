@@ -392,14 +392,6 @@
     "category": "Media"
   },
   {
-    "name": "Image Compare",
-    "path": "image-compare",
-    "description": "Compare two images with a slider.",
-    "status": "Experimental",
-    "library": "ui-lab",
-    "category": "Media"
-  },
-  {
     "name": "Image Cropper",
     "path": "image-cropper",
     "description": "Crop an image: a box over it or a frame it moves under, with keyboard, pinch and wheel, the crop as a file.",

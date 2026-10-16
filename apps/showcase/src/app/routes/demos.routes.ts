@@ -1636,67 +1636,6 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/image-compare',
-    children: [
-      {
-        path: 'basic-image-compare-demo',
-        loadComponent: () =>
-          import('../pages/docs/image-compare/demos/basic-image-compare-demo').then(
-            (m) => m.BasicImageCompareDemo,
-          ),
-      },
-      {
-        path: 'labels-image-compare-demo',
-        loadComponent: () =>
-          import('../pages/docs/image-compare/demos/labels-image-compare-demo').then(
-            (m) => m.LabelsImageCompareDemo,
-          ),
-      },
-      {
-        path: 'no-labels-image-compare-demo',
-        loadComponent: () =>
-          import('../pages/docs/image-compare/demos/no-labels-image-compare-demo').then(
-            (m) => m.NoLabelsImageCompareDemo,
-          ),
-      },
-      {
-        path: 'vertical-image-compare-demo',
-        loadComponent: () =>
-          import('../pages/docs/image-compare/demos/vertical-image-compare-demo').then(
-            (m) => m.VerticalImageCompareDemo,
-          ),
-      },
-      {
-        path: 'position-image-compare-demo',
-        loadComponent: () =>
-          import('../pages/docs/image-compare/demos/position-image-compare-demo').then(
-            (m) => m.PositionImageCompareDemo,
-          ),
-      },
-      {
-        path: 'controlled-image-compare-demo',
-        loadComponent: () =>
-          import('../pages/docs/image-compare/demos/controlled-image-compare-demo').then(
-            (m) => m.ControlledImageCompareDemo,
-          ),
-      },
-      {
-        path: 'square-image-compare-demo',
-        loadComponent: () =>
-          import('../pages/docs/image-compare/demos/square-image-compare-demo').then(
-            (m) => m.SquareImageCompareDemo,
-          ),
-      },
-      {
-        path: 'keyboard-image-compare-demo',
-        loadComponent: () =>
-          import('../pages/docs/image-compare/demos/keyboard-image-compare-demo').then(
-            (m) => m.KeyboardImageCompareDemo,
-          ),
-      },
-    ],
-  },
-  {
     path: 'demos/image-cropper',
     children: [
       {
