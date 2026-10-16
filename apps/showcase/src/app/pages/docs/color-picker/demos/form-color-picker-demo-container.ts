@@ -1,4 +1,24 @@
-import { DecimalPipe } from '@angular/common';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { FormColorPickerDemo } from './form-color-picker-demo';
+
+@Component({
+  selector: 'app-form-color-picker-demo-container',
+  imports: [DemoContainer, FormColorPickerDemo],
+  template: `
+    <app-demo-container
+      title="Popover in a form"
+      [code]="code"
+      demoUrl="/demos/color-picker/form-color-picker-demo"
+    >
+      <app-form-color-picker-demo />
+    </app-demo-container>
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class FormColorPickerDemoContainer {
+  readonly code = `import { DecimalPipe } from '@angular/common';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, FormRoot, form, required } from '@angular/forms/signals';
 import {
@@ -12,27 +32,27 @@ import {
   ScPopoverTrigger,
 } from '@semantic-components/ui';
 import {
-  ScColorPickerNext,
-  ScColorPickerNextArea,
-  ScColorPickerNextField,
-  ScColorPickerNextOption,
-  ScColorPickerNextSlider,
-  ScColorPickerNextSwatch,
-  ScColorPickerNextSwatches,
+  ScColorPicker,
+  ScColorPickerArea,
+  ScColorPickerField,
+  ScColorPickerOption,
+  ScColorPickerSlider,
+  ScColorPickerSwatch,
+  ScColorPickerSwatches,
 } from '@semantic-components/ui-lab';
 
 /** A [formField]: the trigger shows the colour, the picker opens in a popover; required in the schema. */
 @Component({
-  selector: 'app-form-color-picker-next-demo',
+  selector: 'app-form-color-picker-demo',
   imports: [
     DecimalPipe,
-    ScColorPickerNext,
-    ScColorPickerNextArea,
-    ScColorPickerNextSlider,
-    ScColorPickerNextSwatch,
-    ScColorPickerNextField,
-    ScColorPickerNextSwatches,
-    ScColorPickerNextOption,
+    ScColorPicker,
+    ScColorPickerArea,
+    ScColorPickerSlider,
+    ScColorPickerSwatch,
+    ScColorPickerField,
+    ScColorPickerSwatches,
+    ScColorPickerOption,
     ScButton,
     ScField,
     ScLabel,
@@ -44,13 +64,13 @@ import {
     FormField,
     FormRoot,
   ],
-  template: `
+  template: \`
     <form [formRoot]="themeForm" class="w-72 space-y-4">
       <div scField>
         <label scLabel for="brand-colour">Brand colour</label>
         <div
-          scColorPickerNext
-          #picker="scColorPickerNext"
+          scColorPicker
+          #picker="scColorPicker"
           [formField]="themeForm.brand"
         >
           <div scPopoverProvider>
@@ -61,13 +81,13 @@ import {
               variant="outline"
               class="w-full justify-start font-mono"
             >
-              <span scColorPickerNextSwatch class="size-5 rounded-sm"></span>
+              <span scColorPickerSwatch class="size-5 rounded-sm"></span>
               {{ model().brand || 'Choose a colour' }}
             </button>
             <ng-template scPopoverPortal>
               <div scPopover class="w-64 space-y-3">
                 <div
-                  scColorPickerNextArea
+                  scColorPickerArea
                   aria-label="Saturation and brightness"
                   [attr.aria-valuetext]="
                     'Saturation ' +
@@ -77,15 +97,15 @@ import {
                     '%'
                   "
                 ></div>
-                <input scColorPickerNextSlider="hue" aria-label="Hue" />
-                <div scColorPickerNextSwatches aria-label="Presets">
+                <input scColorPickerSlider="hue" aria-label="Hue" />
+                <div scColorPickerSwatches aria-label="Presets">
                   @for (preset of presets; track preset.color) {
-                    <button [scColorPickerNextOption]="preset.color">
+                    <button [scColorPickerOption]="preset.color">
                       <span class="sr-only">{{ preset.name }}</span>
                     </button>
                   }
                 </div>
-                <input scColorPickerNextField aria-label="Colour" />
+                <input scColorPickerField aria-label="Colour" />
               </div>
             </ng-template>
           </div>
@@ -99,11 +119,11 @@ import {
         </p>
       }
     </form>
-  `,
+  \`,
   host: { class: 'flex w-full flex-col items-center gap-4' },
   encapsulation: ViewEncapsulation.None,
 })
-export class FormColorPickerNextDemo {
+export class FormColorPickerDemo {
   readonly model = signal({ brand: '' });
   readonly saved = signal(false);
   readonly themeForm = form(
@@ -121,4 +141,5 @@ export class FormColorPickerNextDemo {
     { color: '#8b5cf6', name: 'Violet' },
     { color: '#18181b', name: 'Black' },
   ];
+}`;
 }

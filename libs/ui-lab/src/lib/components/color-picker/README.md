@@ -1,292 +1,62 @@
 # Color Picker
 
-A composable set of directives for selecting colors with support for various formats and input methods.
+An area and channel sliders, with alpha; a field that takes any CSS colour; swatches as a radio group; the value in the format you choose — a form field.
+
+## Architecture
+
+```
+scColorPicker (value — two-way, a [formField]: a CSS colour; format; disabled)
+├── div[scColorPickerArea]                 — saturation × brightness: one thumb, a slider
+├── input[scColorPickerSlider]="'hue' | 'alpha'" — a native range on a painted track
+├── input[scColorPickerField]              — type any CSS colour
+├── [scColorPickerSwatch]                  — the colour, on a checkerboard
+├── [scColorPickerSwatches]                — a radio group of…
+│   └── button[scColorPickerOption]="'#e11d48'"
+└── button[scColorPickerEyeDropper]        — from the screen (where the browser can)
+```
 
 ## Usage
 
 ```html
-<!-- colorValueText = (saturation: number, brightness: number) => `Saturation ${saturation}%, Brightness ${brightness}%` -->
-<div scColorPicker [(value)]="color" class="space-y-4">
-  <div scColorPickerArea aria-label="Color" [valueText]="colorValueText">
-    <div scColorPickerAreaSaturation></div>
-    <div scColorPickerAreaBrightness></div>
-    <div scColorPickerAreaCursor></div>
-  </div>
-  <div scColorPickerHue aria-label="Hue">
-    <div scColorPickerHueCursor></div>
-  </div>
-  <div class="flex items-center gap-3">
-    <div scColorPickerPreview></div>
-    <input scColorPickerInput aria-label="Color value" format="hex" />
-  </div>
+<div scColorPicker #picker="scColorPicker" [(value)]="color">
+  <div scColorPickerArea aria-label="Saturation and brightness" [attr.aria-valuetext]="'Saturation ' + (picker.hsva().s | number: '1.0-0') + '%, brightness ' + (picker.hsva().v | number: '1.0-0') + '%'"></div>
+  <input scColorPickerSlider="hue" aria-label="Hue" />
+  <input scColorPickerSlider="alpha" aria-label="Opacity" />
+  <span scColorPickerSwatch></span>
+  <input scColorPickerField aria-label="Colour" />
 </div>
 ```
 
-## Directives
+## Value
 
-### ScColorPicker
+A CSS colour string, written in `format`:
 
-Root container that manages color state. Provides `SC_COLOR_PICKER` injection token for child directives.
+| `format` | Opaque                     | Transparent              |
+| -------- | -------------------------- | ------------------------ |
+| `hex`    | `#3b82f6`                  | `#3b82f680`              |
+| `rgb`    | `rgb(59 130 246)`          | `rgb(59 130 246 / 0.5)`  |
+| `hsl`    | `hsl(217 91% 60%)`         | `hsl(217 91% 60% / 0.5)` |
+| `oklch`  | `oklch(62.3% 0.188 259.8)` | `oklch(… / 0.5)`         |
 
-**Selector:** `[scColorPicker]`
+Any CSS colour goes in — from outside, or typed in the field: hex, `rgb()`, `hsl()`, `oklch()`, `lab()`, `color()`, names. The browser reads it (into sRGB). Empty is no colour. Changing `format` writes the value again.
 
-**Inputs:**
+A `[formField]`: `required()` in your schema; `disabled` from it. The picker keeps its hue (and saturation) through greys and black, where the colour has none.
 
-| Input      | Type      | Default | Description            |
-| ---------- | --------- | ------- | ---------------------- |
-| `disabled` | `boolean` | `false` | Disable picker         |
-| `class`    | `string`  | `''`    | Additional CSS classes |
+Read: `hsva()` (hue 0–360, saturation and value 0–100, alpha 0–1), `rgba()`, `css()` (also `--color` on the picker). Methods: `set({ h, s, v, a })`, `setColor(css)`, `parse(css)`, `pickFromScreen()`; `canPickFromScreen()`.
 
-**Two-way Bindings:**
+## Keyboard
 
-| Binding | Type     | Default     | Description     |
-| ------- | -------- | ----------- | --------------- |
-| `value` | `string` | `'#000000'` | Hex color value |
-
-**Computed Properties:**
-
-| Property | Type     | Description        |
-| -------- | -------- | ------------------ |
-| `hsv`    | `ScHSV`  | Current HSV values |
-| `rgb`    | `ScRGB`  | Current RGB values |
-| `hsl`    | `ScHSL`  | Current HSL values |
-| `hex`    | `string` | Current hex value  |
-
-**Methods:**
-
-| Method             | Description            |
-| ------------------ | ---------------------- |
-| `setHsv(hsv)`      | Set HSV values         |
-| `setRgb(rgb)`      | Set RGB values         |
-| `setHex(hex)`      | Set hex value          |
-| `setHue(h)`        | Set hue (0-360)        |
-| `setSaturation(s)` | Set saturation (0-100) |
-| `setValue(v)`      | Set value (0-100)      |
-
-### ScColorPickerArea
-
-Interactive surface for saturation/brightness selection. Handles mouse and touch drag.
-
-**Selector:** `div[scColorPickerArea]`
-
-Sets hue-based background color automatically. Compose with `ScColorPickerAreaSaturation`, `ScColorPickerAreaBrightness`, and `ScColorPickerAreaCursor` children.
-
-### ScColorPickerAreaSaturation
-
-White-to-transparent gradient overlay (left to right).
-
-**Selector:** `div[scColorPickerAreaSaturation]`
-
-### ScColorPickerAreaBrightness
-
-Black-to-transparent gradient overlay (bottom to top).
-
-**Selector:** `div[scColorPickerAreaBrightness]`
-
-### ScColorPickerAreaCursor
-
-Position cursor that tracks the current saturation/brightness values.
-
-**Selector:** `div[scColorPickerAreaCursor]`
-
-### ScColorPickerHue
-
-Hue slider track with rainbow gradient. Handles mouse and touch drag.
-
-**Selector:** `div[scColorPickerHue]`
-
-Compose with `ScColorPickerHueCursor` child.
-
-### ScColorPickerHueCursor
-
-Position cursor that tracks the current hue value.
-
-**Selector:** `div[scColorPickerHueCursor]`
-
-### ScColorPickerPreview
-
-Color preview swatch.
-
-**Selector:** `[scColorPickerPreview]`
-
-### ScColorPickerInput
-
-Text input for color values.
-
-**Selector:** `input[scColorPickerInput]`
-
-**Inputs:**
-
-| Input    | Type                      | Default | Description    |
-| -------- | ------------------------- | ------- | -------------- |
-| `format` | `'hex' \| 'rgb' \| 'hsl'` | `'hex'` | Display format |
-| `class`  | `string`                  | `''`    | Additional CSS |
-
-### ScColorPickerSwatches
-
-Container for preset color swatches. Use with `exportAs` to access the `colors` signal in templates.
-
-**Selector:** `[scColorPickerSwatches]`
-**Export As:** `scColorPickerSwatches`
-
-**Inputs:**
-
-| Input    | Type       | Default            | Description    |
-| -------- | ---------- | ------------------ | -------------- |
-| `colors` | `string[]` | (12 preset colors) | Swatch colors  |
-| `class`  | `string`   | `''`               | Additional CSS |
-
-### ScColorPickerSwatch
-
-Individual swatch button. Injects `SC_COLOR_PICKER` to set color on click.
-
-**Selector:** `button[scColorPickerSwatch]`
-
-**Inputs:**
-
-| Input   | Type     | Description              |
-| ------- | -------- | ------------------------ |
-| `color` | `string` | **(required)** Hex color |
-| `class` | `string` | Additional CSS           |
-
-### ScColorPickerEyeDropper
-
-Eye dropper button (Chrome/Edge only).
-
-**Selector:** `button[scColorPickerEyedropper]`
-
-Uses the EyeDropper API to pick colors from the screen.
-
-## Types
-
-```typescript
-interface ScHSV {
-  h: number; // 0-360
-  s: number; // 0-100
-  v: number; // 0-100
-}
-
-interface ScRGB {
-  r: number; // 0-255
-  g: number; // 0-255
-  b: number; // 0-255
-}
-
-interface ScHSL {
-  h: number; // 0-360
-  s: number; // 0-100
-  l: number; // 0-100
-}
-```
-
-## Examples
-
-### Full Picker
-
-```html
-<div scColorPicker [(value)]="color" class="space-y-4 rounded-lg border p-4">
-  <div scColorPickerArea aria-label="Color" [valueText]="colorValueText">
-    <div scColorPickerAreaSaturation></div>
-    <div scColorPickerAreaBrightness></div>
-    <div scColorPickerAreaCursor></div>
-  </div>
-  <div scColorPickerHue aria-label="Hue">
-    <div scColorPickerHueCursor></div>
-  </div>
-  <div class="flex items-center gap-3">
-    <div scColorPickerPreview></div>
-    <input scColorPickerInput aria-label="Color value" format="hex" class="flex-1" />
-  </div>
-</div>
-```
-
-### With Swatches
-
-```html
-<div scColorPicker [(value)]="color" class="space-y-4">
-  <div scColorPickerArea aria-label="Color" [valueText]="colorValueText">
-    <div scColorPickerAreaSaturation></div>
-    <div scColorPickerAreaBrightness></div>
-    <div scColorPickerAreaCursor></div>
-  </div>
-  <div scColorPickerHue aria-label="Hue">
-    <div scColorPickerHueCursor></div>
-  </div>
-  <div scColorPickerSwatches #swatches="scColorPickerSwatches">
-    @for (c of swatches.colors(); track c) {
-    <button scColorPickerSwatch [color]="c">
-      <span class="sr-only">Select color {{ c }}</span>
-    </button>
-    }
-  </div>
-</div>
-```
-
-### Custom Swatches
-
-```html
-<div scColorPicker [(value)]="color">
-  <div scColorPickerSwatches [colors]="customColors" #swatches="scColorPickerSwatches">
-    @for (c of swatches.colors(); track c) {
-    <button scColorPickerSwatch [color]="c">
-      <span class="sr-only">Select color {{ c }}</span>
-    </button>
-    }
-  </div>
-</div>
-```
-
-### With Eye Dropper
-
-```html
-<div scColorPicker [(value)]="color" class="space-y-4">
-  <div scColorPickerArea aria-label="Color" [valueText]="colorValueText">
-    <div scColorPickerAreaSaturation></div>
-    <div scColorPickerAreaBrightness></div>
-    <div scColorPickerAreaCursor></div>
-  </div>
-  <div scColorPickerHue aria-label="Hue">
-    <div scColorPickerHueCursor></div>
-  </div>
-  <div class="flex gap-2">
-    <input scColorPickerInput aria-label="Color value" format="hex" class="flex-1" />
-    <button scColorPickerEyedropper>
-      <svg siPipetteIcon class="size-4"></svg>
-      <span class="sr-only">Pick color from screen</span>
-    </button>
-  </div>
-</div>
-```
-
-### Compact
-
-```html
-<div scColorPicker [(value)]="color" class="w-[200px] space-y-3">
-  <div scColorPickerArea aria-label="Color" [valueText]="colorValueText" class="h-32">
-    <div scColorPickerAreaSaturation></div>
-    <div scColorPickerAreaBrightness></div>
-    <div scColorPickerAreaCursor></div>
-  </div>
-  <div scColorPickerHue aria-label="Hue">
-    <div scColorPickerHueCursor></div>
-  </div>
-  <input scColorPickerInput aria-label="Color value" format="hex" />
-</div>
-```
-
-## Features
-
-- **Saturation/Brightness Area**: 2D picker for saturation and brightness
-- **Hue Slider**: Full spectrum hue selection
-- **Multiple Formats**: Hex, RGB, HSL display
-- **Composable Swatches**: Container + individual swatch buttons for full template control
-- **Eye Dropper**: Pick colors from screen (Chrome/Edge)
-- **Touch Support**: Works on mobile devices
-- **Two-way Binding**: Sync color state with `[(value)]`
+- Area: ← → saturation, ↑ ↓ brightness (Shift: 10), Page Up / Down brightness 10, Home / End saturation 0 / 100.
+- Sliders: native ranges.
+- Swatches: one stop in the tab order; the arrows (Home, End) move and choose.
 
 ## Accessibility
 
-- Keyboard accessible input field
-- ARIA labels on swatch buttons (`"Select color #hex"`)
-- Screen reader text for eye dropper
-- Focus indicators on interactive elements
+- Name the area, the sliders, the field, the swatches' group and each option (visually hidden text: "Rose").
+- Write the area's `aria-valuetext` from `picker.hsva()`; the texts are yours.
+- An invalid colour typed is `aria-invalid`; left, the field shows the colour again.
+- The swatch is decorative (`aria-hidden`): say the colour in text where it matters.
+
+## Not here
+
+A colour wheel, colour names announced for you (yours to write), wide-gamut (P3) editing — OKLCH is a format, the area is sRGB — and a history of recent colours.

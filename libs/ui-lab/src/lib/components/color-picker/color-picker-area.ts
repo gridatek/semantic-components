@@ -1,111 +1,120 @@
-import { Directive, ElementRef, computed, inject, input } from '@angular/core';
-import { cn, ɵwarnIfUnnamed } from '@semantic-components/ui';
-import { SC_COLOR_PICKER } from './color-picker';
 import {
-  normalizePosition,
-  startDrag,
-  startTouchDrag,
-} from './color-picker-drag';
+  Component,
+  ViewEncapsulation,
+  computed,
+  inject,
+  input,
+} from '@angular/core';
+import { cn, ɵwarnIfUnnamed } from '@semantic-components/ui';
+import { ScColorPicker } from './color-picker';
 
-@Directive({
+/**
+ * Saturation (across) and brightness (up), at the picker's hue: one thumb, a
+ * slider. Drag, or the keys: ← → saturation, ↑ ↓ brightness, Shift ×10, Page
+ * Up / Down brightness ±10, Home / End saturation 0 / 100. Name it, and
+ * write its `aria-valuetext` (from `picker.hsva()`).
+ */
+@Component({
   selector: 'div[scColorPickerArea]',
+  template: `
+    <span
+      class="pointer-events-none absolute size-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white shadow-[0_0_0_1px_rgb(0_0_0/0.4),0_1px_3px_rgb(0_0_0/0.4)]"
+      [style.left.%]="picker.hsva().s"
+      [style.top.%]="100 - picker.hsva().v"
+      [style.background]="opaque()"
+      aria-hidden="true"
+    ></span>
+  `,
   host: {
+    'data-slot': 'color-picker-area',
     role: 'slider',
-    tabindex: '0',
-    '[attr.aria-valuetext]': 'valueText()',
-    '[class]': 'class()',
+    '[attr.tabindex]': 'picker.disabled() ? null : 0',
+    'aria-valuemin': '0',
+    'aria-valuemax': '100',
+    '[attr.aria-valuenow]': 'saturation()',
+    '[attr.aria-disabled]': 'picker.disabled() || null',
     '[style.background]': 'background()',
-    '(mousedown)': 'onMouseDown($event)',
-    '(touchstart)': 'onTouchStart($event)',
-    '(keydown)': 'onKeyDown($event)',
+    '[class]': 'class()',
+    '(pointerdown)': 'onPointerDown($event)',
+    '(pointermove)': 'onPointerMove($event)',
+    '(keydown)': 'onKeydown($event)',
+    '(blur)': 'picker.touch.emit()',
   },
+  encapsulation: ViewEncapsulation.None,
 })
 export class ScColorPickerArea {
-  constructor() {
-    ɵwarnIfUnnamed('scColorPickerArea');
-  }
-
-  protected readonly colorPicker = inject(SC_COLOR_PICKER);
-  private readonly elementRef = inject(ElementRef<HTMLElement>);
+  protected readonly picker = inject(ScColorPicker);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
+  protected readonly saturation = computed(() =>
+    Math.round(this.picker.hsva().s),
+  );
+
+  /** The thumb: the colour, without its transparency. */
+  protected readonly opaque = computed(() => {
+    const { r, g, b } = this.picker.rgba();
+    return `rgb(${r} ${g} ${b})`;
+  });
+
+  protected readonly background = computed(
+    () =>
+      `linear-gradient(to top, #000, transparent), linear-gradient(to right, #fff, transparent), hsl(${this.picker.hsva().h} 100% 50%)`,
+  );
+
   protected readonly class = computed(() =>
     cn(
-      'relative block h-40 w-full cursor-crosshair rounded-md focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring',
+      'relative block aspect-[4/3] w-full cursor-crosshair touch-none rounded-md outline-none',
+      'focus-visible:ring-3 focus-visible:ring-ring/50',
+      'aria-disabled:pointer-events-none aria-disabled:opacity-50',
       this.classInput(),
     ),
   );
 
-  protected readonly background = computed(
-    () => `hsl(${this.colorPicker.hsv().h}, 100%, 50%)`,
-  );
-
-  /**
-   * Its value, as read out — write it: `(saturation, brightness) =>
-   * `Saturation ${saturation}%, Brightness ${brightness}%`` (rounded percents).
-   */
-  readonly valueTextFn = input.required<
-    (saturation: number, brightness: number) => string
-  >({ alias: 'valueText' });
-
-  protected readonly valueText = computed(() => {
-    const { s, v } = this.colorPicker.hsv();
-    return this.valueTextFn()(Math.round(s), Math.round(v));
-  });
-
-  private updateColor(x: number, y: number): void {
-    this.colorPicker.setHsv({ s: x * 100, v: (1 - y) * 100 });
+  constructor() {
+    ɵwarnIfUnnamed('scColorPickerArea');
   }
 
-  onMouseDown(event: MouseEvent): void {
-    if (this.colorPicker.disabled()) return;
-    const el = this.elementRef.nativeElement;
-    const pos = normalizePosition(el, event.clientX, event.clientY);
-    this.updateColor(pos.x, pos.y);
-    startDrag(el, (x, y) => this.updateColor(x, y));
-  }
-
-  onTouchStart(event: TouchEvent): void {
-    if (this.colorPicker.disabled()) return;
+  protected onPointerDown(event: PointerEvent): void {
+    if (event.button !== 0 || this.picker.disabled()) return;
+    const target = event.currentTarget as HTMLElement;
+    target.setPointerCapture(event.pointerId);
+    target.focus({ focusVisible: false });
     event.preventDefault();
-    const el = this.elementRef.nativeElement;
-    const touch = event.touches[0];
-    const pos = normalizePosition(el, touch.clientX, touch.clientY);
-    this.updateColor(pos.x, pos.y);
-    startTouchDrag(el, (x, y) => this.updateColor(x, y));
+    this.pick(event);
   }
 
-  onKeyDown(event: KeyboardEvent): void {
-    if (this.colorPicker.disabled()) return;
-    const step = event.shiftKey ? 10 : 1;
-    const { s, v } = this.colorPicker.hsv();
+  protected onPointerMove(event: PointerEvent): void {
+    const target = event.currentTarget as HTMLElement;
+    if (target.hasPointerCapture(event.pointerId)) this.pick(event);
+  }
 
-    switch (event.key) {
-      case 'ArrowRight':
-        event.preventDefault();
-        this.colorPicker.setSaturation(Math.min(100, s + step));
-        break;
-      case 'ArrowLeft':
-        event.preventDefault();
-        this.colorPicker.setSaturation(Math.max(0, s - step));
-        break;
-      case 'ArrowUp':
-        event.preventDefault();
-        this.colorPicker.setValue(Math.min(100, v + step));
-        break;
-      case 'ArrowDown':
-        event.preventDefault();
-        this.colorPicker.setValue(Math.max(0, v - step));
-        break;
-      case 'Home':
-        event.preventDefault();
-        this.colorPicker.setSaturation(0);
-        break;
-      case 'End':
-        event.preventDefault();
-        this.colorPicker.setSaturation(100);
-        break;
-    }
+  protected onKeydown(event: KeyboardEvent): void {
+    const { s, v } = this.picker.hsva();
+    const step = event.shiftKey ? 10 : 1;
+    const moves: Record<string, [number, number]> = {
+      ArrowLeft: [s - step, v],
+      ArrowRight: [s + step, v],
+      ArrowUp: [s, v + step],
+      ArrowDown: [s, v - step],
+      PageUp: [s, v + 10],
+      PageDown: [s, v - 10],
+      Home: [0, v],
+      End: [100, v],
+    };
+    const move = moves[event.key];
+    if (!move) return;
+    event.preventDefault();
+    this.picker.set({ s: clamp(move[0]), v: clamp(move[1]) });
+  }
+
+  private pick(event: PointerEvent): void {
+    const rect = (event.currentTarget as HTMLElement).getBoundingClientRect();
+    this.picker.set({
+      s: clamp(((event.clientX - rect.left) / rect.width) * 100),
+      v: clamp(100 - ((event.clientY - rect.top) / rect.height) * 100),
+    });
   }
 }
+
+const clamp = (n: number) => Math.min(100, Math.max(0, n));

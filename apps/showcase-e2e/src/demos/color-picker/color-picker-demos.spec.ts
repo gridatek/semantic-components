@@ -4,7 +4,7 @@ const value = (page: Page) => page.locator('pre').first();
 
 test.describe('Basic', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/demos/color-picker-next/basic-color-picker-next-demo');
+    await page.goto('/demos/color-picker/basic-color-picker-demo');
   });
 
   test('the area: a click, and the keys', async ({ page }) => {
@@ -51,13 +51,13 @@ test.describe('Basic', () => {
 });
 
 test('Alpha: in the value', async ({ page }) => {
-  await page.goto('/demos/color-picker-next/alpha-color-picker-next-demo');
+  await page.goto('/demos/color-picker/alpha-color-picker-demo');
   await page.getByRole('slider', { name: 'Opacity' }).fill('0.25');
   await expect(value(page)).toHaveText('#8b5cf640');
 });
 
 test('Formats: the value written again', async ({ page }) => {
-  await page.goto('/demos/color-picker-next/formats-color-picker-next-demo');
+  await page.goto('/demos/color-picker/formats-color-picker-demo');
   await page.getByRole('radio', { name: 'hex' }).check();
   await expect(value(page)).toHaveText('#2b7fff');
   await page.getByRole('radio', { name: 'rgb' }).check();
@@ -67,7 +67,7 @@ test('Formats: the value written again', async ({ page }) => {
 });
 
 test('Swatches: a radio group', async ({ page }) => {
-  await page.goto('/demos/color-picker-next/swatches-color-picker-next-demo');
+  await page.goto('/demos/color-picker/swatches-color-picker-demo');
   const green = page.getByRole('radio', { name: 'Green' });
   await expect(green).toHaveAttribute('aria-checked', 'true');
   // Only the checked one is in the tab order.
@@ -84,7 +84,7 @@ test('Swatches: a radio group', async ({ page }) => {
 });
 
 test('Popover in a form: required, then chosen', async ({ page }) => {
-  await page.goto('/demos/color-picker-next/form-color-picker-next-demo');
+  await page.goto('/demos/color-picker/form-color-picker-demo');
   await page.getByRole('button', { name: 'Save' }).click();
   await expect(page.getByText('Choose a colour.')).toBeVisible();
   // No colour: no preset is checked, not even black.

@@ -1,6 +1,6 @@
 import { Directive, computed, inject, input, signal } from '@angular/core';
 import { cn, ɵwarnIfUnnamed } from '@semantic-components/ui';
-import { ScColorPickerNext } from './color-picker-next';
+import { ScColorPicker } from './color-picker';
 
 /**
  * The colour as text: type any CSS colour — hex, `rgb()`, `hsl()`,
@@ -8,7 +8,7 @@ import { ScColorPickerNext } from './color-picker-next';
  * `aria-invalid`, and left, the field shows the colour again. Label it.
  */
 @Directive({
-  selector: 'input[scColorPickerNextField]',
+  selector: 'input[scColorPickerField]',
   host: {
     'data-slot': 'color-picker-field',
     type: 'text',
@@ -23,8 +23,8 @@ import { ScColorPickerNext } from './color-picker-next';
     '(keydown.enter)': 'onBlur()',
   },
 })
-export class ScColorPickerNextField {
-  protected readonly picker = inject(ScColorPickerNext);
+export class ScColorPickerField {
+  protected readonly picker = inject(ScColorPicker);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
@@ -43,7 +43,7 @@ export class ScColorPickerNextField {
   );
 
   constructor() {
-    ɵwarnIfUnnamed('scColorPickerNextField');
+    ɵwarnIfUnnamed('scColorPickerField');
   }
 
   protected onInput(event: Event): void {

@@ -1,53 +1,53 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { AlphaColorPickerNextDemo } from './alpha-color-picker-next-demo';
+import { AlphaColorPickerDemo } from './alpha-color-picker-demo';
 
 @Component({
-  selector: 'app-alpha-color-picker-next-demo-container',
-  imports: [DemoContainer, AlphaColorPickerNextDemo],
+  selector: 'app-alpha-color-picker-demo-container',
+  imports: [DemoContainer, AlphaColorPickerDemo],
   template: `
     <app-demo-container
       title="Alpha"
       [code]="code"
-      demoUrl="/demos/color-picker-next/alpha-color-picker-next-demo"
+      demoUrl="/demos/color-picker/alpha-color-picker-demo"
     >
-      <app-alpha-color-picker-next-demo />
+      <app-alpha-color-picker-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class AlphaColorPickerNextDemoContainer {
+export class AlphaColorPickerDemoContainer {
   readonly code = `import { DecimalPipe } from '@angular/common';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScColorPickerNext,
-  ScColorPickerNextArea,
-  ScColorPickerNextField,
-  ScColorPickerNextSlider,
-  ScColorPickerNextSwatch,
+  ScColorPicker,
+  ScColorPickerArea,
+  ScColorPickerField,
+  ScColorPickerSlider,
+  ScColorPickerSwatch,
 } from '@semantic-components/ui-lab';
 
 /** An opacity slider, on a checkerboard; the value carries it — #rrggbbaa, or rgb(… / a). */
 @Component({
-  selector: 'app-alpha-color-picker-next-demo',
+  selector: 'app-alpha-color-picker-demo',
   imports: [
     DecimalPipe,
-    ScColorPickerNext,
-    ScColorPickerNextArea,
-    ScColorPickerNextSlider,
-    ScColorPickerNextSwatch,
-    ScColorPickerNextField,
+    ScColorPicker,
+    ScColorPickerArea,
+    ScColorPickerSlider,
+    ScColorPickerSwatch,
+    ScColorPickerField,
   ],
   template: \`
     <div
-      scColorPickerNext
-      #picker="scColorPickerNext"
+      scColorPicker
+      #picker="scColorPicker"
       [(value)]="color"
       class="w-64 space-y-3"
     >
       <div
-        scColorPickerNextArea
+        scColorPickerArea
         aria-label="Saturation and brightness"
         [attr.aria-valuetext]="
           'Saturation ' +
@@ -57,11 +57,11 @@ import {
           '%'
         "
       ></div>
-      <input scColorPickerNextSlider="hue" aria-label="Hue" />
-      <input scColorPickerNextSlider="alpha" aria-label="Opacity" />
+      <input scColorPickerSlider="hue" aria-label="Hue" />
+      <input scColorPickerSlider="alpha" aria-label="Opacity" />
       <div class="flex items-center gap-2">
-        <span scColorPickerNextSwatch></span>
-        <input scColorPickerNextField aria-label="Colour" />
+        <span scColorPickerSwatch></span>
+        <input scColorPickerField aria-label="Colour" />
       </div>
     </div>
     <pre class="bg-muted w-64 rounded-md p-3 text-xs">{{ color() }}</pre>
@@ -69,7 +69,7 @@ import {
   host: { class: 'flex w-full flex-col items-center gap-4' },
   encapsulation: ViewEncapsulation.None,
 })
-export class AlphaColorPickerNextDemo {
+export class AlphaColorPickerDemo {
   readonly color = signal('#8b5cf680');
 }`;
 }

@@ -1,134 +1,166 @@
+import { DOCUMENT } from '@angular/common';
 import {
   Directive,
-  InjectionToken,
+  booleanAttribute,
   computed,
   effect,
+  inject,
   input,
   model,
+  output,
   signal,
+  untracked,
 } from '@angular/core';
+import type { FormValueControl } from '@angular/forms/signals';
 import { cn } from '@semantic-components/ui';
 import {
-  type ScHSL,
-  type ScHSV,
-  type ScOKLCH,
-  type ScRGB,
-  hexToRgb,
-  hsvToRgb,
-  oklchToRgb,
-  rgbToHex,
-  rgbToHsl,
-  rgbToHsv,
-  rgbToOklch,
-} from './color-utils';
+  type ScColorFormat,
+  type ScHsva,
+  type ScRgba,
+  formatColor,
+  hsvaToRgba,
+  rgbaToHsva,
+} from './color';
 
-export {
-  type ScHSV,
-  type ScRGB,
-  type ScHSL,
-  type ScOKLCH,
-} from './color-utils';
+/** The EyeDropper API, where the browser has it. */
+interface EyeDropperApi {
+  open(): Promise<{ sRGBHex: string }>;
+}
 
-export const SC_COLOR_PICKER = new InjectionToken<ScColorPicker>(
-  'SC_COLOR_PICKER',
-);
-
+/**
+ * A colour, picked: on an area, sliders, a field, swatches, the screen. Its
+ * value is a CSS colour, written in `format`; a `[formField]`. Any CSS
+ * colour goes in.
+ */
 @Directive({
   selector: '[scColorPicker]',
   exportAs: 'scColorPicker',
-  providers: [{ provide: SC_COLOR_PICKER, useExisting: ScColorPicker }],
   host: {
+    'data-slot': 'color-picker',
+    '[attr.data-disabled]': 'disabled() || null',
+    '[style.--color]': 'css()',
     '[class]': 'class()',
   },
 })
-export class ScColorPicker {
+export class ScColorPicker implements FormValueControl<string> {
+  private readonly document = inject(DOCUMENT);
+
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly value = model<string>('#000000');
-  readonly disabled = input<boolean>(false);
 
-  private readonly _hsv = signal<ScHSV>({ h: 0, s: 0, v: 0 });
-  private _lastInternalHex = '';
+  readonly value = model('');
+  /** How the value is written: `#rrggbb(aa)`, `rgb()`, `hsl()` or `oklch()`. */
+  readonly format = input<ScColorFormat>('hex');
+  readonly disabled = input(false, { transform: booleanAttribute });
+  readonly invalid = input(false, { transform: booleanAttribute });
+  readonly touched = input(false, { transform: booleanAttribute });
+  /** Left (Signal Forms marks it touched). */
+  readonly touch = output<void>();
 
-  protected readonly class = computed(() =>
-    cn('inline-block', this.classInput()),
+  /** The colour: hue, saturation, value, alpha. */
+  readonly hsva = signal<ScHsva>({ h: 0, s: 0, v: 0, a: 1 });
+  readonly rgba = computed(() => hsvaToRgba(this.hsva()));
+  /** The colour, as CSS (also `--color` on the picker). */
+  readonly css = computed(() => formatColor(this.hsva(), 'rgb'));
+
+  /** The browser can pick a colour from the screen. */
+  readonly canPickFromScreen = signal(
+    'EyeDropper' in (this.document.defaultView ?? {}),
   );
 
-  readonly hsv = computed(() => this._hsv());
-  readonly rgb = computed(() => {
-    const { h, s, v } = this._hsv();
-    return hsvToRgb(h, s, v);
-  });
-  readonly hsl = computed(() => {
-    const { r, g, b } = this.rgb();
-    return rgbToHsl(r, g, b);
-  });
-  readonly hex = computed(() => {
-    const { r, g, b } = this.rgb();
-    return rgbToHex(r, g, b);
-  });
-  readonly oklch = computed(() => {
-    const { r, g, b } = this.rgb();
-    return rgbToOklch(r, g, b);
-  });
+  protected readonly class = computed(() => cn('block', this.classInput()));
+
+  /** The value last written: one from outside differs. */
+  private written: string | null = null;
+  private context: CanvasRenderingContext2D | null = null;
 
   constructor() {
-    const rgb = hexToRgb(this.value());
-    if (rgb) {
-      this._hsv.set(rgbToHsv(rgb.r, rgb.g, rgb.b));
-    }
-    this._lastInternalHex = this.value();
-
+    // From outside: read in.
     effect(() => {
-      const hex = this.value();
-      if (hex.toLowerCase() === this._lastInternalHex.toLowerCase()) return;
-      const rgb = hexToRgb(hex);
-      if (rgb) {
-        this._hsv.set(rgbToHsv(rgb.r, rgb.g, rgb.b));
-        this._lastInternalHex = hex;
-      }
+      const value = this.value();
+      if (value === this.written) return;
+      untracked(() => {
+        const rgba = this.parse(value);
+        if (rgba) this.hsva.set(rgbaToHsva(rgba, this.hsva()));
+      });
+    });
+    // A new format: the value, written again.
+    effect(() => {
+      const format = this.format();
+      untracked(() => {
+        if (this.value()) this.write(this.hsva(), format);
+      });
     });
   }
 
-  setHsv(hsv: Partial<ScHSV>): void {
-    const current = this._hsv();
-    const newHsv = { ...current, ...hsv };
-    this._hsv.set(newHsv);
-    const { r, g, b } = hsvToRgb(newHsv.h, newHsv.s, newHsv.v);
-    const hex = rgbToHex(r, g, b);
-    this._lastInternalHex = hex;
-    this.value.set(hex);
+  /** Changes part of the colour. */
+  set(change: Partial<ScHsva>): void {
+    if (this.disabled()) return;
+    const next = { ...this.hsva(), ...change };
+    this.hsva.set(next);
+    this.write(next, this.format());
   }
 
-  setRgb(rgb: Partial<ScRGB>): void {
-    const current = this.rgb();
-    const newRgb = { ...current, ...rgb };
-    const hsv = rgbToHsv(newRgb.r, newRgb.g, newRgb.b);
-    this.setHsv(hsv);
+  /** Takes any CSS colour; false (and nothing changes) if it is none. */
+  setColor(css: string): boolean {
+    const rgba = this.parse(css);
+    if (!rgba) return false;
+    this.set(rgbaToHsva(rgba, this.hsva()));
+    return true;
   }
 
-  setHex(hex: string): void {
-    const rgb = hexToRgb(hex);
-    if (rgb) {
-      const hsv = rgbToHsv(rgb.r, rgb.g, rgb.b);
-      this.setHsv(hsv);
+  /** Any CSS colour, in sRGB — or null if it is not one. */
+  parse(css: string): ScRgba | null {
+    const text = css.trim();
+    if (!text || !CSS.supports('color', text)) return null;
+    const context = this.canvas();
+    if (!context) return null;
+    // The browser reads it: an sRGB colour comes back as #rrggbb or rgba().
+    context.fillStyle = '#000';
+    context.fillStyle = text;
+    const read = String(context.fillStyle);
+    const hex = /^#([\da-f]{2})([\da-f]{2})([\da-f]{2})$/i.exec(read);
+    if (hex) {
+      const [r, g, b] = hex.slice(1).map((part) => parseInt(part, 16));
+      return { r, g, b, a: 1 };
+    }
+    const rgba = /^rgba?\(([\d.]+), ([\d.]+), ([\d.]+)(?:, ([\d.]+))?\)$/.exec(
+      read,
+    );
+    if (rgba) {
+      const [r, g, b, a = '1'] = rgba.slice(1);
+      return { r: +r, g: +g, b: +b, a: Math.round(+a * 100) / 100 };
+    }
+    // Another space (oklch(), lab()…): drawn, one pixel read back.
+    context.clearRect(0, 0, 1, 1);
+    context.fillRect(0, 0, 1, 1);
+    const [r, g, b, a] = context.getImageData(0, 0, 1, 1).data;
+    return { r, g, b, a: Math.round((a / 255) * 100) / 100 };
+  }
+
+  /** Picks a colour from the screen (where the browser can). */
+  async pickFromScreen(): Promise<void> {
+    const view = this.document.defaultView as
+      (Window & { EyeDropper?: new () => EyeDropperApi }) | null;
+    if (!view?.EyeDropper || this.disabled()) return;
+    try {
+      const { sRGBHex } = await new view.EyeDropper().open();
+      this.setColor(sRGBHex);
+    } catch {
+      // Cancelled (Escape).
     }
   }
 
-  setOklch(oklch: ScOKLCH): void {
-    const rgb = oklchToRgb(oklch.l, oklch.c, oklch.h);
-    const hsv = rgbToHsv(rgb.r, rgb.g, rgb.b);
-    this.setHsv(hsv);
+  private write(hsva: ScHsva, format: ScColorFormat): void {
+    this.written = formatColor(hsva, format);
+    this.value.set(this.written);
   }
 
-  setHue(h: number): void {
-    this.setHsv({ h: Math.max(0, Math.min(360, h)) });
-  }
-
-  setSaturation(s: number): void {
-    this.setHsv({ s: Math.max(0, Math.min(100, s)) });
-  }
-
-  setValue(v: number): void {
-    this.setHsv({ v: Math.max(0, Math.min(100, v)) });
+  private canvas(): CanvasRenderingContext2D | null {
+    if (!this.context) {
+      const canvas = this.document.createElement('canvas');
+      canvas.width = canvas.height = 1;
+      this.context = canvas.getContext('2d', { willReadFrequently: true });
+    }
+    return this.context;
   }
 }

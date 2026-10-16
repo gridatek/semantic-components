@@ -5,14 +5,14 @@ import {
   cn,
   ɵwarnIfUnnamed,
 } from '@semantic-components/ui';
-import { ScColorPickerNext } from './color-picker-next';
+import { ScColorPicker } from './color-picker';
 
 /**
  * Picks a colour from the screen. Only some browsers can: show it while
  * `picker.canPickFromScreen()`. Write its icon and name it ("Pick from screen").
  */
 @Directive({
-  selector: 'button[scColorPickerNextEyeDropper]',
+  selector: 'button[scColorPickerEyeDropper]',
   host: {
     type: 'button',
     'data-slot': 'color-picker-eye-dropper',
@@ -21,8 +21,8 @@ import { ScColorPickerNext } from './color-picker-next';
     '(click)': 'picker.pickFromScreen()',
   },
 })
-export class ScColorPickerNextEyeDropper {
-  protected readonly picker = inject(ScColorPickerNext);
+export class ScColorPickerEyeDropper {
+  protected readonly picker = inject(ScColorPicker);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('outline');
@@ -36,6 +36,6 @@ export class ScColorPickerNextEyeDropper {
   );
 
   constructor() {
-    ɵwarnIfUnnamed('scColorPickerNextEyeDropper');
+    ɵwarnIfUnnamed('scColorPickerEyeDropper');
   }
 }

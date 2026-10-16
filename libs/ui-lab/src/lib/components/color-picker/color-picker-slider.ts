@@ -1,18 +1,18 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn, ɵwarnIfUnnamed } from '@semantic-components/ui';
-import { ScColorPickerNext } from './color-picker-next';
+import { ScColorPicker } from './color-picker';
 
 /** A checkerboard: what shows through a transparent colour. */
 export const CHECKERBOARD =
   'repeating-conic-gradient(#d4d4d8 0% 25%, #fff 0% 50%) 0 0 / 10px 10px';
 
 /**
- * One channel of the colour — `scColorPickerNextSlider="hue"` (0–360) or
+ * One channel of the colour — `scColorPickerSlider="hue"` (0–360) or
  * `"alpha"` (0–1) — on your `input`, a native range on its track: the hue's
  * rainbow, or the colour fading out. Name it.
  */
 @Directive({
-  selector: 'input[scColorPickerNextSlider]',
+  selector: 'input[scColorPickerSlider]',
   host: {
     'data-slot': 'color-picker-slider',
     type: 'range',
@@ -28,11 +28,11 @@ export const CHECKERBOARD =
     '(blur)': 'picker.touch.emit()',
   },
 })
-export class ScColorPickerNextSlider {
-  protected readonly picker = inject(ScColorPickerNext);
+export class ScColorPickerSlider {
+  protected readonly picker = inject(ScColorPicker);
 
   readonly channel = input.required<'hue' | 'alpha'>({
-    alias: 'scColorPickerNextSlider',
+    alias: 'scColorPickerSlider',
   });
   readonly classInput = input<string>('', { alias: 'class' });
 
@@ -67,7 +67,7 @@ export class ScColorPickerNextSlider {
   );
 
   constructor() {
-    ɵwarnIfUnnamed('scColorPickerNextSlider');
+    ɵwarnIfUnnamed('scColorPickerSlider');
   }
 
   protected onInput(event: Event): void {

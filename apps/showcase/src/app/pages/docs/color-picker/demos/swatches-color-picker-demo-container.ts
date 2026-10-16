@@ -6,7 +6,11 @@ import { SwatchesColorPickerDemo } from './swatches-color-picker-demo';
   selector: 'app-swatches-color-picker-demo-container',
   imports: [DemoContainer, SwatchesColorPickerDemo],
   template: `
-    <app-demo-container title="With Swatches" [code]="code">
+    <app-demo-container
+      title="Swatches"
+      [code]="code"
+      demoUrl="/demos/color-picker/swatches-color-picker-demo"
+    >
       <app-swatches-color-picker-demo />
     </app-demo-container>
   `,
@@ -17,75 +21,67 @@ export class SwatchesColorPickerDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScColorPicker,
-  ScColorPickerArea,
-  ScColorPickerAreaBrightness,
-  ScColorPickerAreaCursor,
-  ScColorPickerAreaSaturation,
-  ScColorPickerHue,
-  ScColorPickerHueCursor,
-  ScColorPickerInput,
-  ScColorPickerPreview,
+  ScColorPickerEyeDropper,
+  ScColorPickerField,
+  ScColorPickerOption,
   ScColorPickerSwatch,
   ScColorPickerSwatches,
 } from '@semantic-components/ui-lab';
+import { SiPipetteIcon } from '@semantic-icons/lucide-icons';
 
+/** Preset colours, a radio group — the arrows move and choose; the one that is the colour is checked. Where the browser can, pick from the screen. */
 @Component({
   selector: 'app-swatches-color-picker-demo',
   imports: [
     ScColorPicker,
-    ScColorPickerArea,
-    ScColorPickerAreaSaturation,
-    ScColorPickerAreaBrightness,
-    ScColorPickerAreaCursor,
-    ScColorPickerHue,
-    ScColorPickerHueCursor,
-    ScColorPickerPreview,
-    ScColorPickerInput,
     ScColorPickerSwatches,
+    ScColorPickerOption,
     ScColorPickerSwatch,
+    ScColorPickerField,
+    ScColorPickerEyeDropper,
+    SiPipetteIcon,
   ],
   template: \`
-    <div class="max-w-xs">
-      <div
-        scColorPicker
-        [(value)]="color"
-        class="space-y-4 rounded-lg border p-4"
-      >
-        <div scColorPickerArea aria-label="Color" [valueText]="colorValueText">
-          <div scColorPickerAreaSaturation></div>
-          <div scColorPickerAreaBrightness></div>
-          <div scColorPickerAreaCursor></div>
-        </div>
-        <div scColorPickerHue aria-label="Hue">
-          <div scColorPickerHueCursor></div>
-        </div>
-        <div scColorPickerSwatches #swatches="scColorPickerSwatches">
-          @for (c of swatches.colors(); track c) {
-            <button scColorPickerSwatch [color]="c">
-              <span class="sr-only">Select color {{ c }}</span>
-            </button>
-          }
-        </div>
-        <div class="flex items-center gap-3">
-          <div scColorPickerPreview></div>
-          <input
-            scColorPickerInput
-            aria-label="Color value"
-            format="hex"
-            class="flex-1"
-          />
-        </div>
+    <div
+      scColorPicker
+      #picker="scColorPicker"
+      [(value)]="color"
+      class="w-64 space-y-3"
+    >
+      <div scColorPickerSwatches aria-label="Presets">
+        @for (preset of presets; track preset.color) {
+          <button [scColorPickerOption]="preset.color">
+            <span class="sr-only">{{ preset.name }}</span>
+          </button>
+        }
+      </div>
+      <div class="flex items-center gap-2">
+        <span scColorPickerSwatch></span>
+        <input scColorPickerField aria-label="Colour" />
+        @if (picker.canPickFromScreen()) {
+          <button scColorPickerEyeDropper>
+            <svg siPipetteIcon></svg>
+            <span class="sr-only">Pick from screen</span>
+          </button>
+        }
       </div>
     </div>
+    <pre class="bg-muted w-64 rounded-md p-3 text-xs">{{ color() }}</pre>
   \`,
-  host: { class: 'flex w-full justify-center' },
+  host: { class: 'flex w-full flex-col items-center gap-4' },
   encapsulation: ViewEncapsulation.None,
 })
 export class SwatchesColorPickerDemo {
-  /** The colour area's value, as read out. */
-  readonly colorValueText = (saturation: number, brightness: number) =>
-    \`Saturation \${saturation}%, Brightness \${brightness}%\`;
-
   readonly color = signal('#22c55e');
+  readonly presets = [
+    { color: '#e11d48', name: 'Rose' },
+    { color: '#f97316', name: 'Orange' },
+    { color: '#eab308', name: 'Yellow' },
+    { color: '#22c55e', name: 'Green' },
+    { color: '#06b6d4', name: 'Cyan' },
+    { color: '#3b82f6', name: 'Blue' },
+    { color: '#8b5cf6', name: 'Violet' },
+    { color: '#18181b', name: 'Black' },
+  ];
 }`;
 }

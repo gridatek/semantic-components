@@ -8,17 +8,17 @@ import {
 } from '@angular/core';
 import { cn, ɵwarnIfUnnamed } from '@semantic-components/ui';
 import { sameRgba } from './color';
-import { ScColorPickerNext } from './color-picker-next';
-import { CHECKERBOARD } from './color-picker-next-slider';
-import { ScColorPickerNextSwatches } from './color-picker-next-swatches';
+import { ScColorPicker } from './color-picker';
+import { CHECKERBOARD } from './color-picker-slider';
+import { ScColorPickerSwatches } from './color-picker-swatches';
 
 /**
- * A preset colour (`[scColorPickerNextOption]="'#e11d48'"`, any CSS colour)
- * in `scColorPickerNextSwatches`: a radio, checked while it is the colour.
+ * A preset colour (`[scColorPickerOption]="'#e11d48'"`, any CSS colour)
+ * in `scColorPickerSwatches`: a radio, checked while it is the colour.
  * Name it ("Rose").
  */
 @Directive({
-  selector: 'button[scColorPickerNextOption]',
+  selector: 'button[scColorPickerOption]',
   host: {
     type: 'button',
     'data-slot': 'color-picker-option',
@@ -32,14 +32,14 @@ import { ScColorPickerNextSwatches } from './color-picker-next-swatches';
     '(keydown)': 'onKeydown($event)',
   },
 })
-export class ScColorPickerNextOption {
-  protected readonly picker = inject(ScColorPickerNext);
-  private readonly group = inject(ScColorPickerNextSwatches);
+export class ScColorPickerOption {
+  protected readonly picker = inject(ScColorPicker);
+  private readonly group = inject(ScColorPickerSwatches);
   private readonly element =
     inject<ElementRef<HTMLButtonElement>>(ElementRef).nativeElement;
 
   /** Its colour (the group may ask before it is set: none, until then). */
-  readonly color = input('', { alias: 'scColorPickerNextOption' });
+  readonly color = input('', { alias: 'scColorPickerOption' });
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly rgba = computed(() => this.picker.parse(this.color()));
@@ -67,7 +67,7 @@ export class ScColorPickerNextOption {
   );
 
   constructor() {
-    ɵwarnIfUnnamed('scColorPickerNextOption');
+    ɵwarnIfUnnamed('scColorPickerOption');
     const self = { element: this.element, checked: this.checked };
     // In document order.
     this.group.ɵoptions.update((options) =>

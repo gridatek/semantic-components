@@ -4,23 +4,23 @@ import { FormField, form } from '@angular/forms/signals';
 import { ScRadio, ScRadioField, ScRadioGroup } from '@semantic-components/ui';
 import {
   type ScColorFormat,
-  ScColorPickerNext,
-  ScColorPickerNextArea,
-  ScColorPickerNextField,
-  ScColorPickerNextSlider,
-  ScColorPickerNextSwatch,
+  ScColorPicker,
+  ScColorPickerArea,
+  ScColorPickerField,
+  ScColorPickerSlider,
+  ScColorPickerSwatch,
 } from '@semantic-components/ui-lab';
 
 /** The value in hex, rgb(), hsl() or oklch() — the format is an input; changed, the value is written again. */
 @Component({
-  selector: 'app-formats-color-picker-next-demo',
+  selector: 'app-formats-color-picker-demo',
   imports: [
     DecimalPipe,
-    ScColorPickerNext,
-    ScColorPickerNextArea,
-    ScColorPickerNextSlider,
-    ScColorPickerNextSwatch,
-    ScColorPickerNextField,
+    ScColorPicker,
+    ScColorPickerArea,
+    ScColorPickerSlider,
+    ScColorPickerSwatch,
+    ScColorPickerField,
     ScRadioGroup,
     ScRadioField,
     ScRadio,
@@ -44,14 +44,14 @@ import {
       </div>
     </div>
     <div
-      scColorPickerNext
-      #picker="scColorPickerNext"
+      scColorPicker
+      #picker="scColorPicker"
       [(value)]="color"
       [format]="settings().format"
       class="w-64 space-y-3"
     >
       <div
-        scColorPickerNextArea
+        scColorPickerArea
         aria-label="Saturation and brightness"
         [attr.aria-valuetext]="
           'Saturation ' +
@@ -61,11 +61,11 @@ import {
           '%'
         "
       ></div>
-      <input scColorPickerNextSlider="hue" aria-label="Hue" />
-      <input scColorPickerNextSlider="alpha" aria-label="Opacity" />
+      <input scColorPickerSlider="hue" aria-label="Hue" />
+      <input scColorPickerSlider="alpha" aria-label="Opacity" />
       <div class="flex items-center gap-2">
-        <span scColorPickerNextSwatch></span>
-        <input scColorPickerNextField aria-label="Colour" />
+        <span scColorPickerSwatch></span>
+        <input scColorPickerField aria-label="Colour" />
       </div>
     </div>
     <pre class="bg-muted w-64 rounded-md p-3 text-xs">{{ color() }}</pre>
@@ -73,7 +73,7 @@ import {
   host: { class: 'flex w-full flex-col items-center gap-4' },
   encapsulation: ViewEncapsulation.None,
 })
-export class FormatsColorPickerNextDemo {
+export class FormatsColorPickerDemo {
   readonly formats = ['hex', 'rgb', 'hsl', 'oklch'] as const;
   readonly settings = signal<{ format: ScColorFormat }>({ format: 'oklch' });
   readonly settingsForm = form(this.settings);

@@ -166,12 +166,6 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/color-picker/color-picker-page'),
       },
       {
-        path: 'color-picker-next',
-        title: 'Color Picker Next - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/color-picker-next/color-picker-next-page'),
-      },
-      {
         path: 'combobox',
         title: 'Combobox - Semantic Components',
         loadComponent: () => import('../pages/docs/combobox/combobox-page'),

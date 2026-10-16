@@ -1,37 +1,31 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { cn, ɵwarnIfUnnamed } from '@semantic-components/ui';
-import { SC_COLOR_PICKER } from './color-picker';
+import { cn } from '@semantic-components/ui';
+import { ScColorPicker } from './color-picker';
+import { CHECKERBOARD } from './color-picker-slider';
 
+/** The colour, shown — on a checkerboard, for its transparency. Decorative: say the colour in text if it matters. */
 @Directive({
-  selector: 'button[scColorPickerSwatch]',
+  selector: '[scColorPickerSwatch]',
   host: {
-    type: 'button',
+    'data-slot': 'color-picker-swatch',
+    'aria-hidden': 'true',
+    '[style.background]': 'background()',
     '[class]': 'class()',
-    '[style.background-color]': 'color()',
-    '(click)': 'selectColor()',
   },
 })
 export class ScColorPickerSwatch {
-  constructor() {
-    ɵwarnIfUnnamed('scColorPickerSwatch');
-  }
+  private readonly picker = inject(ScColorPicker);
 
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly color = input.required<string>();
 
-  private readonly colorPicker = inject(SC_COLOR_PICKER);
-
-  protected readonly class = computed(() =>
-    cn(
-      'size-6 rounded-md border shadow-sm transition-transform hover:scale-110',
-      'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring',
-      this.classInput(),
-    ),
+  /** No colour (an empty value): the checkerboard alone. */
+  protected readonly background = computed(() =>
+    this.picker.value()
+      ? `linear-gradient(${this.picker.css()}, ${this.picker.css()}), ${CHECKERBOARD}`
+      : CHECKERBOARD,
   );
 
-  protected selectColor(): void {
-    if (!this.colorPicker.disabled()) {
-      this.colorPicker.setHex(this.color());
-    }
-  }
+  protected readonly class = computed(() =>
+    cn('inline-block size-9 shrink-0 rounded-md border', this.classInput()),
+  );
 }

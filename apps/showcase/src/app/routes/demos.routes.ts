@@ -810,10 +810,24 @@ export const demosRoutes: Route[] = [
     path: 'demos/color-picker',
     children: [
       {
-        path: 'full-color-picker-demo',
+        path: 'basic-color-picker-demo',
         loadComponent: () =>
-          import('../pages/docs/color-picker/demos/full-color-picker-demo').then(
-            (m) => m.FullColorPickerDemo,
+          import('../pages/docs/color-picker/demos/basic-color-picker-demo').then(
+            (m) => m.BasicColorPickerDemo,
+          ),
+      },
+      {
+        path: 'alpha-color-picker-demo',
+        loadComponent: () =>
+          import('../pages/docs/color-picker/demos/alpha-color-picker-demo').then(
+            (m) => m.AlphaColorPickerDemo,
+          ),
+      },
+      {
+        path: 'formats-color-picker-demo',
+        loadComponent: () =>
+          import('../pages/docs/color-picker/demos/formats-color-picker-demo').then(
+            (m) => m.FormatsColorPickerDemo,
           ),
       },
       {
@@ -824,92 +838,10 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'eyedropper-color-picker-demo',
+        path: 'form-color-picker-demo',
         loadComponent: () =>
-          import('../pages/docs/color-picker/demos/eyedropper-color-picker-demo').then(
-            (m) => m.EyedropperColorPickerDemo,
-          ),
-      },
-      {
-        path: 'simple-color-picker-demo',
-        loadComponent: () =>
-          import('../pages/docs/color-picker/demos/simple-color-picker-demo').then(
-            (m) => m.SimpleColorPickerDemo,
-          ),
-      },
-      {
-        path: 'compact-color-picker-demo',
-        loadComponent: () =>
-          import('../pages/docs/color-picker/demos/compact-color-picker-demo').then(
-            (m) => m.CompactColorPickerDemo,
-          ),
-      },
-      {
-        path: 'rgb-color-picker-demo',
-        loadComponent: () =>
-          import('../pages/docs/color-picker/demos/rgb-color-picker-demo').then(
-            (m) => m.RgbColorPickerDemo,
-          ),
-      },
-      {
-        path: 'hsl-color-picker-demo',
-        loadComponent: () =>
-          import('../pages/docs/color-picker/demos/hsl-color-picker-demo').then(
-            (m) => m.HslColorPickerDemo,
-          ),
-      },
-      {
-        path: 'oklch-color-picker-demo',
-        loadComponent: () =>
-          import('../pages/docs/color-picker/demos/oklch-color-picker-demo').then(
-            (m) => m.default,
-          ),
-      },
-      {
-        path: 'preview-color-picker-demo',
-        loadComponent: () =>
-          import('../pages/docs/color-picker/demos/preview-color-picker-demo').then(
-            (m) => m.PreviewColorPickerDemo,
-          ),
-      },
-    ],
-  },
-  {
-    path: 'demos/color-picker-next',
-    children: [
-      {
-        path: 'basic-color-picker-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/color-picker-next/demos/basic-color-picker-next-demo').then(
-            (m) => m.BasicColorPickerNextDemo,
-          ),
-      },
-      {
-        path: 'alpha-color-picker-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/color-picker-next/demos/alpha-color-picker-next-demo').then(
-            (m) => m.AlphaColorPickerNextDemo,
-          ),
-      },
-      {
-        path: 'formats-color-picker-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/color-picker-next/demos/formats-color-picker-next-demo').then(
-            (m) => m.FormatsColorPickerNextDemo,
-          ),
-      },
-      {
-        path: 'swatches-color-picker-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/color-picker-next/demos/swatches-color-picker-next-demo').then(
-            (m) => m.SwatchesColorPickerNextDemo,
-          ),
-      },
-      {
-        path: 'form-color-picker-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/color-picker-next/demos/form-color-picker-next-demo').then(
-            (m) => m.FormColorPickerNextDemo,
+          import('../pages/docs/color-picker/demos/form-color-picker-demo').then(
+            (m) => m.FormColorPickerDemo,
           ),
       },
     ],

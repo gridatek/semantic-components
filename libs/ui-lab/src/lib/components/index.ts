@@ -3,7 +3,6 @@ export * from './audio-player';
 export * from './barcode-scanner';
 export * from './bubble';
 export * from './color-picker';
-export * from './color-picker-next';
 export * from './compare';
 export * from './countdown';
 export * from './date-range-picker';
