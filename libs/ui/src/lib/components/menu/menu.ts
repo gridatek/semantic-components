@@ -1,7 +1,13 @@
 import { Menu, MenuBar, MenuItem, MenuTrigger } from '@angular/aria/menu';
 import { InteractivityChecker } from '@angular/cdk/a11y';
 import { DOCUMENT } from '@angular/common';
-import { Directive, computed, inject, input } from '@angular/core';
+import {
+  type AnimationCallbackEvent,
+  Directive,
+  computed,
+  inject,
+  input,
+} from '@angular/core';
 import { cn } from '../../utils';
 import { SC_CONTEXT_MENU_PROVIDER } from '../context-menu/context-menu-types';
 import { ScMenuPortal } from './menu-portal';
@@ -20,7 +26,7 @@ import { ScMenuPortal } from './menu-portal';
     'data-slot': 'menu',
     '[class]': 'class()',
     'animate.enter': 'animate-in fade-in-0 zoom-in-95 duration-150',
-    '[animate.leave]': 'leaveAnimation()',
+    '(animate.leave)': 'leave($event)',
     '(keydown.tab)': 'onTab($event)',
   },
 })
@@ -38,9 +44,31 @@ export class ScMenu<V = string> {
     optional: true,
   });
 
-  protected readonly leaveAnimation = computed(() =>
-    this.contextMenu ? '' : 'animate-out fade-out-0 zoom-out-95 duration-150',
-  );
+  /**
+   * Closing: out of reach at once (`inert`, `aria-hidden`) — a menu fading
+   * out is gone for the user, its items no longer to be found or clicked
+   * while the next menu may already be open — then fades out.
+   */
+  protected leave(event: AnimationCallbackEvent): void {
+    const element = event.target as HTMLElement;
+    element.inert = true;
+    element.setAttribute('aria-hidden', 'true');
+    if (this.contextMenu) {
+      event.animationComplete();
+      return;
+    }
+    element.classList.add(
+      'animate-out',
+      'fade-out-0',
+      'zoom-out-95',
+      'duration-150',
+    );
+    // Done when its animations are (none, with reduced motion: at once).
+    Promise.allSettled(
+      element.getAnimations().map((animation) => animation.finished),
+    ).then(() => event.animationComplete());
+  }
+
   readonly visible = this.menu.visible;
 
   protected readonly class = computed(() =>
