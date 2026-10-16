@@ -22,6 +22,7 @@ export class AvatarImageCropperNextDemoContainer {
 import { ScButton, ScSlider } from '@semantic-components/ui';
 import {
   ScImageCropperNext,
+  ScImageCropperNextHandle,
   ScImageCropperNextImage,
   ScImageCropperNextPreview,
   ScImageCropperNextPreviewImage,
@@ -30,8 +31,8 @@ import {
 } from '@semantic-components/ui-lab';
 
 /**
- * A round frame the image moves under — drag it, zoom with the wheel, a
- * pinch or the slider — as profile pictures are chosen.
+ * A circle: its corner handles resize it; the wheel, a pinch or the slider
+ * zoom, and dragging around it moves the image.
  */
 @Component({
   selector: 'app-avatar-image-cropper-next-demo',
@@ -40,6 +41,7 @@ import {
     ScImageCropperNextStage,
     ScImageCropperNextImage,
     ScImageCropperNextSelection,
+    ScImageCropperNextHandle,
     ScImageCropperNextPreview,
     ScImageCropperNextPreviewImage,
     ScButton,
@@ -59,7 +61,11 @@ import {
           src="/images/cropper-mountains.jpg"
           alt="Mountains at dawn"
         />
-        <div scImageCropperNextSelection aria-label="Profile picture"></div>
+        <div scImageCropperNextSelection aria-label="Profile picture">
+          @for (handle of handles; track handle) {
+            <div [scImageCropperNextHandle]="handle"></div>
+          }
+        </div>
       </div>
 
       <div class="flex items-center gap-2">
@@ -100,6 +106,13 @@ export class AvatarImageCropperNextDemo {
   readonly zoom = signal(1);
   readonly result = signal<{ width: number; height: number } | null>(null);
   readonly percent = computed(() => Math.round(this.zoom() * 100));
+
+  readonly handles = [
+    'top-left',
+    'top-right',
+    'bottom-right',
+    'bottom-left',
+  ] as const;
 
   readonly sizes = [
     { class: 'size-24', alt: 'Large preview' },

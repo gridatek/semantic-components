@@ -4,12 +4,14 @@ import { ComponentBadges } from '../../../components/component-badges/component-
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { AvatarImageCropperNextDemoContainer } from './demos/avatar-image-cropper-next-demo-container';
 import { BoxImageCropperNextDemoContainer } from './demos/box-image-cropper-next-demo-container';
+import { CoverImageCropperNextDemoContainer } from './demos/cover-image-cropper-next-demo-container';
 
 @Component({
   selector: 'app-image-cropper-next-page',
   imports: [
     BoxImageCropperNextDemoContainer,
     AvatarImageCropperNextDemoContainer,
+    CoverImageCropperNextDemoContainer,
     TocHeading,
     ComponentBadges,
     ScHeading,
@@ -40,10 +42,22 @@ import { BoxImageCropperNextDemoContainer } from './demos/box-image-cropper-next
       <section class="space-y-4">
         <h2 scHeading appToc>Avatar</h2>
         <p class="text-muted-foreground">
-          Without handles, the selection is a frame and the image moves under
-          it: drag, wheel or pinch — or, focused, the arrows and + / −.
+          A circle with corner handles: resize it, zoom with the wheel, a pinch
+          or the slider, and drag around it to move the image.
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">crop()</code>
+          makes it a 256 px PNG, its corners transparent.
         </p>
         <app-avatar-image-cropper-next-demo-container />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Cover</h2>
+        <p class="text-muted-foreground">
+          Without handles, the selection is a frame that stays put and the image
+          moves under it: drag, wheel or pinch — or, focused, the arrows and + /
+          −.
+        </p>
+        <app-cover-image-cropper-next-demo-container />
       </section>
     </div>
   `,

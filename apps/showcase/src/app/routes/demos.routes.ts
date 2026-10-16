@@ -1685,6 +1685,13 @@ export const demosRoutes: Route[] = [
             (m) => m.AvatarImageCropperNextDemo,
           ),
       },
+      {
+        path: 'cover-image-cropper-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/image-cropper-next/demos/cover-image-cropper-next-demo').then(
+            (m) => m.CoverImageCropperNextDemo,
+          ),
+      },
     ],
   },
   {

@@ -66,7 +66,38 @@ test.describe('Avatar', () => {
     await expect(selection(page)).toBeVisible();
   });
 
+  test('a corner handle resizes the circle, which stays round', async ({
+    page,
+  }) => {
+    const before = await selection(page).boundingBox();
+    const handle = await page
+      .locator('[data-handle="bottom-right"]')
+      .boundingBox();
+    await page.mouse.move(
+      (handle?.x ?? 0) + (handle?.width ?? 0) / 2,
+      (handle?.y ?? 0) + (handle?.height ?? 0) / 2,
+    );
+    await page.mouse.down();
+    await page.mouse.move((handle?.x ?? 0) - 40, (handle?.y ?? 0) - 40, {
+      steps: 5,
+    });
+    await page.mouse.up();
+
+    const after = await selection(page).boundingBox();
+    expect(after?.width).toBeLessThan((before?.width ?? 0) - 20);
+    expect(after?.width).toBeCloseTo(after?.height ?? 0, 0);
+  });
+
+  test('the crop is the size asked', async ({ page }) => {
+    await page.getByRole('button', { name: 'Use this picture' }).click();
+    await expect(page.getByText('Cropped to 256 × 256 px.')).toBeVisible();
+  });
+});
+
+test.describe('Cover', () => {
   test('the image zooms under the frame: wheel and keys', async ({ page }) => {
+    await page.goto('/demos/image-cropper-next/cover-image-cropper-next-demo');
+    await expect(selection(page)).toBeVisible();
     const zoom = page.getByRole('slider', { name: 'Zoom' });
     const start = Number(await zoom.inputValue());
     const frame = await selection(page).boundingBox();
@@ -85,10 +116,5 @@ test.describe('Avatar', () => {
     await expect
       .poll(async () => Number(await zoom.inputValue()))
       .toBeLessThan(zoomed);
-  });
-
-  test('the crop is the size asked', async ({ page }) => {
-    await page.getByRole('button', { name: 'Use this picture' }).click();
-    await expect(page.getByText('Cropped to 256 × 256 px.')).toBeVisible();
   });
 });
