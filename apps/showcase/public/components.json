@@ -784,6 +784,14 @@
     "category": "Forms"
   },
   {
+    "name": "Signature Pad Next",
+    "path": "signature-pad-next",
+    "description": "The signature pad, rebuilt: pressure ink, drawn or typed, a value to store and redraw, trimmed PNG and SVG export.",
+    "status": "Experimental",
+    "library": "ui-lab",
+    "category": "Forms"
+  },
+  {
     "name": "Skeleton",
     "path": "skeleton",
     "description": "A placeholder to show while content is loading.",

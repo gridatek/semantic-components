@@ -3322,6 +3322,46 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/signature-pad-next',
+    children: [
+      {
+        path: 'basic-signature-pad-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/signature-pad-next/demos/basic-signature-pad-next-demo').then(
+            (m) => m.BasicSignaturePadNextDemo,
+          ),
+      },
+      {
+        path: 'pens-signature-pad-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/signature-pad-next/demos/pens-signature-pad-next-demo').then(
+            (m) => m.PensSignaturePadNextDemo,
+          ),
+      },
+      {
+        path: 'type-signature-pad-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/signature-pad-next/demos/type-signature-pad-next-demo').then(
+            (m) => m.TypeSignaturePadNextDemo,
+          ),
+      },
+      {
+        path: 'form-signature-pad-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/signature-pad-next/demos/form-signature-pad-next-demo').then(
+            (m) => m.FormSignaturePadNextDemo,
+          ),
+      },
+      {
+        path: 'export-signature-pad-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/signature-pad-next/demos/export-signature-pad-next-demo').then(
+            (m) => m.ExportSignaturePadNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/skeleton',
     children: [
       {
