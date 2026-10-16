@@ -6,13 +6,9 @@ We converted 157 raw inline SVGs from `xmlns="http://www.w3.org/2000/svg"` to `@
 
 ## Remaining Files
 
-### 1. `libs/ui-lab/src/lib/components/image-annotator/image-annotator.ts` (9 SVGs)
+### 1. ~~Image annotator~~ — done (2026-10-16)
 
-- **Pattern**: SVG strings passed to `this.trustHtml()` and rendered via `[innerHTML]="tool.icon"` and `[innerHTML]="undoIcon"` etc.
-- **Icons used**: Pen (Pencil), Line, Rectangle (Square), Circle, Arrow (ArrowRight), Eraser, Undo, Trash2, Download
-- **Fix approach**: Refactor the `tools` array and action icons to use Angular content projection or template refs instead of `[innerHTML]`. For example:
-  - Change `icon: SafeHtml` to use `ng-template` or a component-based approach
-  - Or create a mapping from tool ID to icon directive and use `@switch` in the template
+Rewritten: its icons are the consumer's, written in the template, no SVG strings left.
 
 ### 2. Dock demos (10 files, 60 SVGs)
 
@@ -46,6 +42,6 @@ We converted 157 raw inline SVGs from `xmlns="http://www.w3.org/2000/svg"` to `@
 
 1. **For dock and speed-dial**: Change the `icon` property type from `string` to `Type<unknown>` and use `NgComponentOutlet` to render icons dynamically. Update demos to pass icon component classes instead of SVG strings.
 
-2. **For image-annotator**: Replace the `tools` array `icon: SafeHtml` with an `@switch` block in the template that renders the correct `Si*Icon` based on `tool.id`.
+2. ~~**For image-annotator**~~: done — rewritten, its icons are in the consumer's template.
 
 3. **Remember**: Each demo file has a corresponding `-container.ts` file that duplicates the source code as a string — both must be updated together.

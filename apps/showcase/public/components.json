@@ -378,15 +378,7 @@
   {
     "name": "Image Annotator",
     "path": "image-annotator",
-    "description": "Draw and markup on images.",
-    "status": "Experimental",
-    "library": "ui-lab",
-    "category": "Media"
-  },
-  {
-    "name": "Image Annotator Next",
-    "path": "image-annotator-next",
-    "description": "The image annotator, rebuilt: shapes over the image — selected, moved, resized, restyled — with keyboard, kept as data, exported as an image.",
+    "description": "Annotate an image: shapes over it — selected, moved, resized, restyled — with keyboard, kept as data, exported as an image.",
     "status": "Experimental",
     "library": "ui-lab",
     "category": "Media"

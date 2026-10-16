@@ -1,34 +1,34 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { ReadOnlyImageAnnotatorNextDemo } from './read-only-image-annotator-next-demo';
+import { ReadOnlyImageAnnotatorDemo } from './read-only-image-annotator-demo';
 
 @Component({
-  selector: 'app-read-only-image-annotator-next-demo-container',
-  imports: [DemoContainer, ReadOnlyImageAnnotatorNextDemo],
+  selector: 'app-read-only-image-annotator-demo-container',
+  imports: [DemoContainer, ReadOnlyImageAnnotatorDemo],
   template: `
     <app-demo-container
       title="Read only"
       [code]="code"
-      demoUrl="/demos/image-annotator-next/read-only-image-annotator-next-demo"
+      demoUrl="/demos/image-annotator/read-only-image-annotator-demo"
     >
-      <app-read-only-image-annotator-next-demo />
+      <app-read-only-image-annotator-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ReadOnlyImageAnnotatorNextDemoContainer {
+export class ReadOnlyImageAnnotatorDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScImageAnnotatorNext,
-  type ScImageAnnotatorNextAnnotation,
-  ScImageAnnotatorNextImage,
-  type ScImageAnnotatorNextKind,
-  ScImageAnnotatorNextStage,
+  ScImageAnnotator,
+  type ScImageAnnotatorAnnotation,
+  ScImageAnnotatorImage,
+  type ScImageAnnotatorKind,
+  ScImageAnnotatorStage,
 } from '@semantic-components/ui-lab';
 
 /** Each annotation's name, for screen readers. */
-const NAMES: Record<ScImageAnnotatorNextKind, string> = {
+const NAMES: Record<ScImageAnnotatorKind, string> = {
   pen: 'Drawing',
   highlighter: 'Highlight',
   line: 'Line',
@@ -38,13 +38,13 @@ const NAMES: Record<ScImageAnnotatorNextKind, string> = {
   text: 'Note',
 };
 
-const labelOf = (annotation: ScImageAnnotatorNextAnnotation) =>
+const labelOf = (annotation: ScImageAnnotatorAnnotation) =>
   annotation.kind === 'text'
     ? \`Note: \${annotation.text}\`
     : NAMES[annotation.kind];
 
 /** A review of the screenshot: what is to change. */
-const REVIEW: ScImageAnnotatorNextAnnotation[] = [
+const REVIEW: ScImageAnnotatorAnnotation[] = [
   {
     id: 'box',
     kind: 'rectangle',
@@ -87,22 +87,18 @@ const REVIEW: ScImageAnnotatorNextAnnotation[] = [
 
 /** Annotations shown over their image, not edited — each one still named. */
 @Component({
-  selector: 'app-read-only-image-annotator-next-demo',
-  imports: [
-    ScImageAnnotatorNext,
-    ScImageAnnotatorNextStage,
-    ScImageAnnotatorNextImage,
-  ],
+  selector: 'app-read-only-image-annotator-demo',
+  imports: [ScImageAnnotator, ScImageAnnotatorStage, ScImageAnnotatorImage],
   template: \`
     <div
-      scImageAnnotatorNext
+      scImageAnnotator
       [annotations]="annotations"
       [label]="labelOf"
       [readonly]="true"
     >
-      <div scImageAnnotatorNextStage aria-label="Reviewed screenshot">
+      <div scImageAnnotatorStage aria-label="Reviewed screenshot">
         <img
-          scImageAnnotatorNextImage
+          scImageAnnotatorImage
           src="/images/annotator-screenshot.png"
           alt="The Button page of these docs"
         />
@@ -112,7 +108,7 @@ const REVIEW: ScImageAnnotatorNextAnnotation[] = [
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ReadOnlyImageAnnotatorNextDemo {
+export class ReadOnlyImageAnnotatorDemo {
   readonly annotations = REVIEW;
   readonly labelOf = labelOf;
 }`;

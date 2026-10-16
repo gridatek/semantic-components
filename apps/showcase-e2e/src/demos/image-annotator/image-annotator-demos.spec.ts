@@ -27,9 +27,7 @@ async function drag(
 
 test.describe('Editor', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto(
-      '/demos/image-annotator-next/editor-image-annotator-next-demo',
-    );
+    await page.goto('/demos/image-annotator/editor-image-annotator-demo');
     await expect(stage(page).locator('svg')).toBeVisible();
   });
 
@@ -107,9 +105,7 @@ test.describe('Editor', () => {
 
 test.describe('Review a screenshot', () => {
   test('the annotations given as data are shown, named', async ({ page }) => {
-    await page.goto(
-      '/demos/image-annotator-next/review-image-annotator-next-demo',
-    );
+    await page.goto('/demos/image-annotator/review-image-annotator-demo');
     await expect(
       page.getByRole('img', { name: 'Note: Make it larger' }),
     ).toHaveCount(1);
@@ -120,9 +116,7 @@ test.describe('Review a screenshot', () => {
 
 test.describe('Read only', () => {
   test('shown and reached with Tab, not edited', async ({ page }) => {
-    await page.goto(
-      '/demos/image-annotator-next/read-only-image-annotator-next-demo',
-    );
+    await page.goto('/demos/image-annotator/read-only-image-annotator-demo');
     await expect(annotations(page)).toHaveCount(4);
     const box = page.getByRole('img', { name: 'Box' });
     // On its outline: a box is only its edges.

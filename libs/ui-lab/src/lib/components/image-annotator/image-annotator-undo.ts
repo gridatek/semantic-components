@@ -5,11 +5,11 @@ import {
   cn,
   ɵwarnIfUnnamed,
 } from '@semantic-components/ui';
-import { ScImageAnnotatorNext } from './image-annotator-next';
+import { ScImageAnnotator } from './image-annotator';
 
 /** Undoes the last change (Ctrl+Z). Write its icon and name it. */
 @Directive({
-  selector: 'button[scImageAnnotatorNextUndo]',
+  selector: 'button[scImageAnnotatorUndo]',
   host: {
     type: 'button',
     'data-slot': 'image-annotator-undo',
@@ -18,8 +18,8 @@ import { ScImageAnnotatorNext } from './image-annotator-next';
     '(click)': 'annotator.undo()',
   },
 })
-export class ScImageAnnotatorNextUndo {
-  protected readonly annotator = inject(ScImageAnnotatorNext);
+export class ScImageAnnotatorUndo {
+  protected readonly annotator = inject(ScImageAnnotator);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('ghost');
@@ -33,6 +33,6 @@ export class ScImageAnnotatorNextUndo {
   );
 
   constructor() {
-    ɵwarnIfUnnamed('scImageAnnotatorNextUndo');
+    ɵwarnIfUnnamed('scImageAnnotatorUndo');
   }
 }

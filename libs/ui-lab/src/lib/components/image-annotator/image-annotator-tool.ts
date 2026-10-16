@@ -5,15 +5,15 @@ import {
   cn,
   ɵwarnIfUnnamed,
 } from '@semantic-components/ui';
-import { ScImageAnnotatorNext } from './image-annotator-next';
-import type { ScImageAnnotatorNextToolName } from './image-annotator-next-types';
+import { ScImageAnnotator } from './image-annotator';
+import type { ScImageAnnotatorToolName } from './image-annotator-types';
 
 /**
- * Picks a tool (`scImageAnnotatorNextTool="arrow"`), pressed while it is the
+ * Picks a tool (`scImageAnnotatorTool="arrow"`), pressed while it is the
  * one. Write its icon and name it; put the tools in a group you name.
  */
 @Directive({
-  selector: 'button[scImageAnnotatorNextTool]',
+  selector: 'button[scImageAnnotatorTool]',
   host: {
     type: 'button',
     'data-slot': 'image-annotator-tool',
@@ -23,11 +23,11 @@ import type { ScImageAnnotatorNextToolName } from './image-annotator-next-types'
     '(click)': 'pick()',
   },
 })
-export class ScImageAnnotatorNextTool {
-  protected readonly annotator = inject(ScImageAnnotatorNext);
+export class ScImageAnnotatorTool {
+  protected readonly annotator = inject(ScImageAnnotator);
 
-  readonly value = input.required<ScImageAnnotatorNextToolName>({
-    alias: 'scImageAnnotatorNextTool',
+  readonly value = input.required<ScImageAnnotatorToolName>({
+    alias: 'scImageAnnotatorTool',
   });
   readonly classInput = input<string>('', { alias: 'class' });
   readonly size = input<ScButtonVariants['size']>('icon');
@@ -47,7 +47,7 @@ export class ScImageAnnotatorNextTool {
   );
 
   constructor() {
-    ɵwarnIfUnnamed('scImageAnnotatorNextTool');
+    ɵwarnIfUnnamed('scImageAnnotatorTool');
   }
 
   protected pick(): void {

@@ -1,14 +1,14 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn, ɵwarnIfUnnamed } from '@semantic-components/ui';
-import { ScImageAnnotatorNext } from './image-annotator-next';
+import { ScImageAnnotator } from './image-annotator';
 
 /**
  * A colour to draw with — and for the selected annotation
- * (`scImageAnnotatorNextColor="#e11d48"`): a swatch, pressed while it is the
+ * (`scImageAnnotatorColor="#e11d48"`): a swatch, pressed while it is the
  * one. Name it ("Red"); put the colours in a group you name.
  */
 @Directive({
-  selector: 'button[scImageAnnotatorNextColor]',
+  selector: 'button[scImageAnnotatorColor]',
   host: {
     type: 'button',
     'data-slot': 'image-annotator-color',
@@ -19,11 +19,11 @@ import { ScImageAnnotatorNext } from './image-annotator-next';
     '(click)': 'annotator.color.set(value())',
   },
 })
-export class ScImageAnnotatorNextColor {
-  protected readonly annotator = inject(ScImageAnnotatorNext);
+export class ScImageAnnotatorColor {
+  protected readonly annotator = inject(ScImageAnnotator);
 
   readonly value = input.required<string>({
-    alias: 'scImageAnnotatorNextColor',
+    alias: 'scImageAnnotatorColor',
   });
   readonly classInput = input<string>('', { alias: 'class' });
 
@@ -42,6 +42,6 @@ export class ScImageAnnotatorNextColor {
   );
 
   constructor() {
-    ɵwarnIfUnnamed('scImageAnnotatorNextColor');
+    ɵwarnIfUnnamed('scImageAnnotatorColor');
   }
 }

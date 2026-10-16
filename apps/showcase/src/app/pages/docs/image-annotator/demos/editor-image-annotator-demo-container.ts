@@ -1,38 +1,38 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { EditorImageAnnotatorNextDemo } from './editor-image-annotator-next-demo';
+import { EditorImageAnnotatorDemo } from './editor-image-annotator-demo';
 
 @Component({
-  selector: 'app-editor-image-annotator-next-demo-container',
-  imports: [DemoContainer, EditorImageAnnotatorNextDemo],
+  selector: 'app-editor-image-annotator-demo-container',
+  imports: [DemoContainer, EditorImageAnnotatorDemo],
   template: `
     <app-demo-container
       title="Editor"
       [code]="code"
-      demoUrl="/demos/image-annotator-next/editor-image-annotator-next-demo"
+      demoUrl="/demos/image-annotator/editor-image-annotator-demo"
     >
-      <app-editor-image-annotator-next-demo />
+      <app-editor-image-annotator-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class EditorImageAnnotatorNextDemoContainer {
+export class EditorImageAnnotatorDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScButton, ScSlider } from '@semantic-components/ui';
 import {
-  ScImageAnnotatorNext,
-  type ScImageAnnotatorNextAnnotation,
-  ScImageAnnotatorNextClear,
-  ScImageAnnotatorNextColor,
-  ScImageAnnotatorNextDelete,
-  ScImageAnnotatorNextImage,
-  type ScImageAnnotatorNextKind,
-  ScImageAnnotatorNextRedo,
-  ScImageAnnotatorNextStage,
-  ScImageAnnotatorNextTextInput,
-  ScImageAnnotatorNextTool,
-  ScImageAnnotatorNextUndo,
+  ScImageAnnotator,
+  type ScImageAnnotatorAnnotation,
+  ScImageAnnotatorClear,
+  ScImageAnnotatorColor,
+  ScImageAnnotatorDelete,
+  ScImageAnnotatorImage,
+  type ScImageAnnotatorKind,
+  ScImageAnnotatorRedo,
+  ScImageAnnotatorStage,
+  ScImageAnnotatorTextInput,
+  ScImageAnnotatorTool,
+  ScImageAnnotatorUndo,
 } from '@semantic-components/ui-lab';
 import {
   SiCircleIcon,
@@ -51,7 +51,7 @@ import {
 } from '@semantic-icons/lucide-icons';
 
 /** Each annotation's name, for screen readers. */
-const NAMES: Record<ScImageAnnotatorNextKind, string> = {
+const NAMES: Record<ScImageAnnotatorKind, string> = {
   pen: 'Drawing',
   highlighter: 'Highlight',
   line: 'Line',
@@ -61,7 +61,7 @@ const NAMES: Record<ScImageAnnotatorNextKind, string> = {
   text: 'Note',
 };
 
-const labelOf = (annotation: ScImageAnnotatorNextAnnotation) =>
+const labelOf = (annotation: ScImageAnnotatorAnnotation) =>
   annotation.kind === 'text'
     ? \`Note: \${annotation.text}\`
     : NAMES[annotation.kind];
@@ -72,18 +72,18 @@ const labelOf = (annotation: ScImageAnnotatorNextAnnotation) =>
  * result as an image file.
  */
 @Component({
-  selector: 'app-editor-image-annotator-next-demo',
+  selector: 'app-editor-image-annotator-demo',
   imports: [
-    ScImageAnnotatorNext,
-    ScImageAnnotatorNextStage,
-    ScImageAnnotatorNextImage,
-    ScImageAnnotatorNextTextInput,
-    ScImageAnnotatorNextTool,
-    ScImageAnnotatorNextColor,
-    ScImageAnnotatorNextUndo,
-    ScImageAnnotatorNextRedo,
-    ScImageAnnotatorNextDelete,
-    ScImageAnnotatorNextClear,
+    ScImageAnnotator,
+    ScImageAnnotatorStage,
+    ScImageAnnotatorImage,
+    ScImageAnnotatorTextInput,
+    ScImageAnnotatorTool,
+    ScImageAnnotatorColor,
+    ScImageAnnotatorUndo,
+    ScImageAnnotatorRedo,
+    ScImageAnnotatorDelete,
+    ScImageAnnotatorClear,
     ScButton,
     ScSlider,
     SiMousePointer2Icon,
@@ -102,8 +102,8 @@ const labelOf = (annotation: ScImageAnnotatorNextAnnotation) =>
   ],
   template: \`
     <div
-      scImageAnnotatorNext
-      #annotator="scImageAnnotatorNext"
+      scImageAnnotator
+      #annotator="scImageAnnotator"
       [(annotations)]="annotations"
       [(width)]="width"
       [label]="labelOf"
@@ -111,7 +111,7 @@ const labelOf = (annotation: ScImageAnnotatorNextAnnotation) =>
       <div class="flex flex-wrap items-center gap-2">
         <div role="group" aria-label="Tools" class="flex gap-0.5">
           @for (tool of tools; track tool.value) {
-            <button [scImageAnnotatorNextTool]="tool.value">
+            <button [scImageAnnotatorTool]="tool.value">
               @switch (tool.value) {
                 @case ('select') {
                   <svg siMousePointer2Icon></svg>
@@ -147,7 +147,7 @@ const labelOf = (annotation: ScImageAnnotatorNextAnnotation) =>
         </div>
         <div role="group" aria-label="Colour" class="flex items-center gap-1.5">
           @for (color of colors; track color.value) {
-            <button [scImageAnnotatorNextColor]="color.value">
+            <button [scImageAnnotatorColor]="color.value">
               <span class="sr-only">{{ color.label }}</span>
             </button>
           }
@@ -161,32 +161,32 @@ const labelOf = (annotation: ScImageAnnotatorNextAnnotation) =>
           class="w-24"
         />
         <div class="ms-auto flex gap-0.5">
-          <button scImageAnnotatorNextUndo>
+          <button scImageAnnotatorUndo>
             <svg siUndo2Icon></svg>
             <span class="sr-only">Undo</span>
           </button>
-          <button scImageAnnotatorNextRedo>
+          <button scImageAnnotatorRedo>
             <svg siRedo2Icon></svg>
             <span class="sr-only">Redo</span>
           </button>
-          <button scImageAnnotatorNextDelete>
+          <button scImageAnnotatorDelete>
             <svg siXIcon></svg>
             <span class="sr-only">Delete the selected annotation</span>
           </button>
-          <button scImageAnnotatorNextClear>
+          <button scImageAnnotatorClear>
             <svg siTrash2Icon></svg>
             <span class="sr-only">Clear all</span>
           </button>
         </div>
       </div>
 
-      <div scImageAnnotatorNextStage aria-label="Photo to annotate">
+      <div scImageAnnotatorStage aria-label="Photo to annotate">
         <img
-          scImageAnnotatorNextImage
+          scImageAnnotatorImage
           src="/images/cropper-mountains.jpg"
           alt="Mountains at dawn above a sea of clouds"
         />
-        <input scImageAnnotatorNextTextInput aria-label="Note" />
+        <input scImageAnnotatorTextInput aria-label="Note" />
       </div>
 
       <div class="flex flex-wrap items-center gap-2">
@@ -202,8 +202,8 @@ const labelOf = (annotation: ScImageAnnotatorNextAnnotation) =>
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class EditorImageAnnotatorNextDemo {
-  readonly annotations = signal<readonly ScImageAnnotatorNextAnnotation[]>([]);
+export class EditorImageAnnotatorDemo {
+  readonly annotations = signal<readonly ScImageAnnotatorAnnotation[]>([]);
   readonly width = signal(4);
   readonly labelOf = labelOf;
 
@@ -228,7 +228,7 @@ export class EditorImageAnnotatorNextDemo {
     { value: '#171717', label: 'Black' },
   ];
 
-  async download(annotator: ScImageAnnotatorNext): Promise<void> {
+  async download(annotator: ScImageAnnotator): Promise<void> {
     const blob = await annotator.toBlob({ type: 'image/png' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');

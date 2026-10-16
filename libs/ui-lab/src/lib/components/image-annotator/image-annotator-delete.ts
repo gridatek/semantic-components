@@ -5,21 +5,21 @@ import {
   cn,
   ɵwarnIfUnnamed,
 } from '@semantic-components/ui';
-import { ScImageAnnotatorNext } from './image-annotator-next';
+import { ScImageAnnotator } from './image-annotator';
 
-/** Redoes it (Ctrl+Shift+Z). Write its icon and name it. */
+/** Removes the selected annotation (Delete, on it). Write its icon and name it. */
 @Directive({
-  selector: 'button[scImageAnnotatorNextRedo]',
+  selector: 'button[scImageAnnotatorDelete]',
   host: {
     type: 'button',
-    'data-slot': 'image-annotator-redo',
-    '[disabled]': 'annotator.readonly() || !annotator.canRedo()',
+    'data-slot': 'image-annotator-delete',
+    '[disabled]': 'annotator.readonly() || !annotator.selected()',
     '[class]': 'class()',
-    '(click)': 'annotator.redo()',
+    '(click)': 'annotator.removeSelected()',
   },
 })
-export class ScImageAnnotatorNextRedo {
-  protected readonly annotator = inject(ScImageAnnotatorNext);
+export class ScImageAnnotatorDelete {
+  protected readonly annotator = inject(ScImageAnnotator);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('ghost');
@@ -33,6 +33,6 @@ export class ScImageAnnotatorNextRedo {
   );
 
   constructor() {
-    ɵwarnIfUnnamed('scImageAnnotatorNextRedo');
+    ɵwarnIfUnnamed('scImageAnnotatorDelete');
   }
 }

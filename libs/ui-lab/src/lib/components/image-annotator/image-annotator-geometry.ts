@@ -1,8 +1,8 @@
 import type {
-  ScImageAnnotatorNextAnnotation as Annotation,
-  ScImageAnnotatorNextBounds as Bounds,
-  ScImageAnnotatorNextPoint as Point,
-} from './image-annotator-next-types';
+  ScImageAnnotatorAnnotation as Annotation,
+  ScImageAnnotatorBounds as Bounds,
+  ScImageAnnotatorPoint as Point,
+} from './image-annotator-types';
 
 /** A text's font size, from its width. */
 export const fontSize = (annotation: Annotation) =>

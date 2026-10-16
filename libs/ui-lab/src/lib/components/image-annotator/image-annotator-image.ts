@@ -1,13 +1,13 @@
 import { Directive, ElementRef, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { ScImageAnnotatorNext } from './image-annotator-next';
+import { ScImageAnnotator } from './image-annotator';
 
 /**
  * The image to annotate, in the stage: your `img` with its `src` and `alt`.
  * From another site, it needs CORS (`crossorigin="anonymous"`) to be exported.
  */
 @Directive({
-  selector: 'img[scImageAnnotatorNextImage]',
+  selector: 'img[scImageAnnotatorImage]',
   host: {
     'data-slot': 'image-annotator-image',
     draggable: 'false',
@@ -15,8 +15,8 @@ import { ScImageAnnotatorNext } from './image-annotator-next';
     '(load)': 'onLoad()',
   },
 })
-export class ScImageAnnotatorNextImage {
-  private readonly annotator = inject(ScImageAnnotatorNext);
+export class ScImageAnnotatorImage {
+  private readonly annotator = inject(ScImageAnnotator);
   private readonly element =
     inject<ElementRef<HTMLImageElement>>(ElementRef).nativeElement;
 

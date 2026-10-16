@@ -1,14 +1,34 @@
-import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { ReviewImageAnnotatorDemo } from './review-image-annotator-demo';
+
+@Component({
+  selector: 'app-review-image-annotator-demo-container',
+  imports: [DemoContainer, ReviewImageAnnotatorDemo],
+  template: `
+    <app-demo-container
+      title="Review a screenshot"
+      [code]="code"
+      demoUrl="/demos/image-annotator/review-image-annotator-demo"
+    >
+      <app-review-image-annotator-demo />
+    </app-demo-container>
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class ReviewImageAnnotatorDemoContainer {
+  readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import {
-  ScImageAnnotatorNext,
-  type ScImageAnnotatorNextAnnotation,
-  ScImageAnnotatorNextDelete,
-  ScImageAnnotatorNextImage,
-  type ScImageAnnotatorNextKind,
-  ScImageAnnotatorNextStage,
-  ScImageAnnotatorNextTextInput,
-  ScImageAnnotatorNextTool,
-  ScImageAnnotatorNextUndo,
+  ScImageAnnotator,
+  type ScImageAnnotatorAnnotation,
+  ScImageAnnotatorDelete,
+  ScImageAnnotatorImage,
+  type ScImageAnnotatorKind,
+  ScImageAnnotatorStage,
+  ScImageAnnotatorTextInput,
+  ScImageAnnotatorTool,
+  ScImageAnnotatorUndo,
 } from '@semantic-components/ui-lab';
 import {
   SiMousePointer2Icon,
@@ -20,7 +40,7 @@ import {
 } from '@semantic-icons/lucide-icons';
 
 /** Each annotation's name, for screen readers. */
-const NAMES: Record<ScImageAnnotatorNextKind, string> = {
+const NAMES: Record<ScImageAnnotatorKind, string> = {
   pen: 'Drawing',
   highlighter: 'Highlight',
   line: 'Line',
@@ -30,13 +50,13 @@ const NAMES: Record<ScImageAnnotatorNextKind, string> = {
   text: 'Note',
 };
 
-const labelOf = (annotation: ScImageAnnotatorNextAnnotation) =>
+const labelOf = (annotation: ScImageAnnotatorAnnotation) =>
   annotation.kind === 'text'
-    ? `Note: ${annotation.text}`
+    ? \`Note: \${annotation.text}\`
     : NAMES[annotation.kind];
 
 /** A review of the screenshot: what is to change. */
-const REVIEW: ScImageAnnotatorNextAnnotation[] = [
+const REVIEW: ScImageAnnotatorAnnotation[] = [
   {
     id: 'box',
     kind: 'rectangle',
@@ -82,15 +102,15 @@ const REVIEW: ScImageAnnotatorNextAnnotation[] = [
  * the annotations kept as data (saved, sent, shown again).
  */
 @Component({
-  selector: 'app-review-image-annotator-next-demo',
+  selector: 'app-review-image-annotator-demo',
   imports: [
-    ScImageAnnotatorNext,
-    ScImageAnnotatorNextStage,
-    ScImageAnnotatorNextImage,
-    ScImageAnnotatorNextTextInput,
-    ScImageAnnotatorNextTool,
-    ScImageAnnotatorNextUndo,
-    ScImageAnnotatorNextDelete,
+    ScImageAnnotator,
+    ScImageAnnotatorStage,
+    ScImageAnnotatorImage,
+    ScImageAnnotatorTextInput,
+    ScImageAnnotatorTool,
+    ScImageAnnotatorUndo,
+    ScImageAnnotatorDelete,
     SiMousePointer2Icon,
     SiSquareIcon,
     SiMoveUpRightIcon,
@@ -98,49 +118,49 @@ const REVIEW: ScImageAnnotatorNextAnnotation[] = [
     SiUndo2Icon,
     SiXIcon,
   ],
-  template: `
+  template: \`
     <div
-      scImageAnnotatorNext
+      scImageAnnotator
       [(annotations)]="annotations"
       [label]="labelOf"
       tool="arrow"
     >
       <div class="flex items-center gap-2">
         <div role="group" aria-label="Tools" class="flex gap-0.5">
-          <button scImageAnnotatorNextTool="select">
+          <button scImageAnnotatorTool="select">
             <svg siMousePointer2Icon></svg>
             <span class="sr-only">Select</span>
           </button>
-          <button scImageAnnotatorNextTool="rectangle">
+          <button scImageAnnotatorTool="rectangle">
             <svg siSquareIcon></svg>
             <span class="sr-only">Box</span>
           </button>
-          <button scImageAnnotatorNextTool="arrow">
+          <button scImageAnnotatorTool="arrow">
             <svg siMoveUpRightIcon></svg>
             <span class="sr-only">Arrow</span>
           </button>
-          <button scImageAnnotatorNextTool="text">
+          <button scImageAnnotatorTool="text">
             <svg siTypeIcon></svg>
             <span class="sr-only">Note</span>
           </button>
         </div>
-        <button scImageAnnotatorNextUndo>
+        <button scImageAnnotatorUndo>
           <svg siUndo2Icon></svg>
           <span class="sr-only">Undo</span>
         </button>
-        <button scImageAnnotatorNextDelete>
+        <button scImageAnnotatorDelete>
           <svg siXIcon></svg>
           <span class="sr-only">Delete the selected annotation</span>
         </button>
       </div>
 
-      <div scImageAnnotatorNextStage aria-label="Screenshot to review">
+      <div scImageAnnotatorStage aria-label="Screenshot to review">
         <img
-          scImageAnnotatorNextImage
+          scImageAnnotatorImage
           src="/images/annotator-screenshot.png"
           alt="The Button page of these docs"
         />
-        <input scImageAnnotatorNextTextInput aria-label="Note" />
+        <input scImageAnnotatorTextInput aria-label="Note" />
       </div>
 
       <details class="text-sm">
@@ -152,13 +172,13 @@ const REVIEW: ScImageAnnotatorNextAnnotation[] = [
           >{{ json() }}</pre>
       </details>
     </div>
-  `,
+  \`,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ReviewImageAnnotatorNextDemo {
-  readonly annotations =
-    signal<readonly ScImageAnnotatorNextAnnotation[]>(REVIEW);
+export class ReviewImageAnnotatorDemo {
+  readonly annotations = signal<readonly ScImageAnnotatorAnnotation[]>(REVIEW);
   readonly labelOf = labelOf;
   readonly json = computed(() => JSON.stringify(this.annotations(), null, 2));
+}`;
 }

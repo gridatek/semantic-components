@@ -2,14 +2,16 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { ScHeading } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { BasicImageAnnotatorDemoContainer } from './demos/basic-image-annotator-demo-container';
-import { CustomSizeImageAnnotatorDemoContainer } from './demos/custom-size-image-annotator-demo-container';
+import { EditorImageAnnotatorDemoContainer } from './demos/editor-image-annotator-demo-container';
+import { ReadOnlyImageAnnotatorDemoContainer } from './demos/read-only-image-annotator-demo-container';
+import { ReviewImageAnnotatorDemoContainer } from './demos/review-image-annotator-demo-container';
 
 @Component({
   selector: 'app-image-annotator-page',
   imports: [
-    BasicImageAnnotatorDemoContainer,
-    CustomSizeImageAnnotatorDemoContainer,
+    EditorImageAnnotatorDemoContainer,
+    ReviewImageAnnotatorDemoContainer,
+    ReadOnlyImageAnnotatorDemoContainer,
     TocHeading,
     ComponentBadges,
     ScHeading,
@@ -19,15 +21,40 @@ import { CustomSizeImageAnnotatorDemoContainer } from './demos/custom-size-image
       <div class="space-y-2">
         <h1 scHeading>Image Annotator</h1>
         <p class="text-muted-foreground">
-          Draw, mark up, and annotate images with various tools.
+          Annotate an image: annotations are shapes over it, not pixels —
+          selected, moved, resized, restyled and deleted, with the pointer or
+          the keyboard — kept as data, and exported as an image.
         </p>
         <app-component-badges path="image-annotator" />
       </div>
 
-      <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
-        <app-basic-image-annotator-demo-container />
-        <app-custom-size-image-annotator-demo-container />
+      <section class="space-y-4">
+        <h2 scHeading appToc>Editor</h2>
+        <p class="text-muted-foreground">
+          Every tool. Select an annotation to move it, resize it by its handles,
+          or restyle it with a colour or the width. From the keyboard: Enter on
+          the image places a shape; on an annotation, the arrows move it, Alt +
+          arrows resize it, Delete removes it. Ctrl+Z undoes.
+        </p>
+        <app-editor-image-annotator-demo-container />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Review a screenshot</h2>
+        <p class="text-muted-foreground">
+          A few tools, and annotations given as data — to save, send and show
+          again.
+        </p>
+        <app-review-image-annotator-demo-container />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Read only</h2>
+        <p class="text-muted-foreground">
+          The same annotations, shown: each one is still named and reached with
+          Tab.
+        </p>
+        <app-read-only-image-annotator-demo-container />
       </section>
     </div>
   `,

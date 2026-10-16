@@ -12,7 +12,7 @@ import {
   signal,
 } from '@angular/core';
 import { cn, ɵwarnIfUnnamed } from '@semantic-components/ui';
-import { ScImageAnnotatorNext } from './image-annotator-next';
+import { ScImageAnnotator } from './image-annotator';
 import {
   HIGHLIGHTER_OPACITY,
   HIGHLIGHTER_WIDTH,
@@ -24,12 +24,12 @@ import {
   fontSize,
   smoothPath,
   translate,
-} from './image-annotator-next-geometry';
+} from './image-annotator-geometry';
 import type {
-  ScImageAnnotatorNextAnnotation as Annotation,
-  ScImageAnnotatorNextPoint as Point,
-  ScImageAnnotatorNextKind,
-} from './image-annotator-next-types';
+  ScImageAnnotatorAnnotation as Annotation,
+  ScImageAnnotatorPoint as Point,
+  ScImageAnnotatorKind,
+} from './image-annotator-types';
 
 type Handle = 'nw' | 'ne' | 'sw' | 'se' | 'start' | 'end';
 
@@ -40,14 +40,14 @@ type Gesture =
   | { kind: 'erase' };
 
 /**
- * Where the image is annotated: your `img[scImageAnnotatorNextImage]` inside,
+ * Where the image is annotated: your `img[scImageAnnotatorImage]` inside,
  * and the annotations drawn over it. Name it ("Screenshot to review").
  * Focused, Enter places a shape of the current tool; each annotation is
  * focusable — arrows move it (Shift: more), Alt + arrows resize it, Delete
  * removes it, Enter edits a text, Escape leaves it.
  */
 @Component({
-  selector: 'div[scImageAnnotatorNextStage]',
+  selector: 'div[scImageAnnotatorStage]',
   imports: [NgTemplateOutlet],
   template: `
     <ng-content />
@@ -228,8 +228,8 @@ type Gesture =
   },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScImageAnnotatorNextStage {
-  protected readonly annotator = inject(ScImageAnnotatorNext);
+export class ScImageAnnotatorStage {
+  protected readonly annotator = inject(ScImageAnnotator);
   private readonly element =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
   private readonly injector = inject(Injector);
@@ -318,7 +318,7 @@ export class ScImageAnnotatorNextStage {
   );
 
   constructor() {
-    ɵwarnIfUnnamed('scImageAnnotatorNextStage');
+    ɵwarnIfUnnamed('scImageAnnotatorStage');
     const destroyRef = inject(DestroyRef);
     afterNextRender(() => {
       const observer = new ResizeObserver(([entry]) => {
@@ -472,7 +472,7 @@ export class ScImageAnnotatorNextStage {
         this.gesture = { kind: 'draw' };
         this.draft.set(
           this.annotator.create(
-            tool as ScImageAnnotatorNextKind,
+            tool as ScImageAnnotatorKind,
             tool === 'pen' || tool === 'highlighter' ? [point] : [point, point],
           ),
         );

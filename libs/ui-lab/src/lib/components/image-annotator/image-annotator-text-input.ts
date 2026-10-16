@@ -10,8 +10,8 @@ import {
   untracked,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { ScImageAnnotatorNext } from './image-annotator-next';
-import { fontSize } from './image-annotator-next-geometry';
+import { ScImageAnnotator } from './image-annotator';
+import { fontSize } from './image-annotator-geometry';
 
 /**
  * Where a text annotation is written: your `input`, in the stage — shown
@@ -19,7 +19,7 @@ import { fontSize } from './image-annotator-next-geometry';
  * leaving it ends the text (an empty one goes); one undo step.
  */
 @Directive({
-  selector: 'input[scImageAnnotatorNextTextInput]',
+  selector: 'input[scImageAnnotatorTextInput]',
   host: {
     'data-slot': 'image-annotator-text-input',
     type: 'text',
@@ -36,8 +36,8 @@ import { fontSize } from './image-annotator-next-geometry';
     '(blur)': 'finish()',
   },
 })
-export class ScImageAnnotatorNextTextInput {
-  private readonly annotator = inject(ScImageAnnotatorNext);
+export class ScImageAnnotatorTextInput {
+  private readonly annotator = inject(ScImageAnnotator);
   private readonly element =
     inject<ElementRef<HTMLInputElement>>(ElementRef).nativeElement;
   private readonly injector = inject(Injector);

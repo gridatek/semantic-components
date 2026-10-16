@@ -1573,43 +1573,24 @@ export const demosRoutes: Route[] = [
     path: 'demos/image-annotator',
     children: [
       {
-        path: 'basic-image-annotator-demo',
+        path: 'editor-image-annotator-demo',
         loadComponent: () =>
-          import('../pages/docs/image-annotator/demos/basic-image-annotator-demo').then(
-            (m) => m.BasicImageAnnotatorDemo,
+          import('../pages/docs/image-annotator/demos/editor-image-annotator-demo').then(
+            (m) => m.EditorImageAnnotatorDemo,
           ),
       },
       {
-        path: 'custom-size-image-annotator-demo',
+        path: 'review-image-annotator-demo',
         loadComponent: () =>
-          import('../pages/docs/image-annotator/demos/custom-size-image-annotator-demo').then(
-            (m) => m.CustomSizeImageAnnotatorDemo,
-          ),
-      },
-    ],
-  },
-  {
-    path: 'demos/image-annotator-next',
-    children: [
-      {
-        path: 'editor-image-annotator-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/image-annotator-next/demos/editor-image-annotator-next-demo').then(
-            (m) => m.EditorImageAnnotatorNextDemo,
+          import('../pages/docs/image-annotator/demos/review-image-annotator-demo').then(
+            (m) => m.ReviewImageAnnotatorDemo,
           ),
       },
       {
-        path: 'review-image-annotator-next-demo',
+        path: 'read-only-image-annotator-demo',
         loadComponent: () =>
-          import('../pages/docs/image-annotator-next/demos/review-image-annotator-next-demo').then(
-            (m) => m.ReviewImageAnnotatorNextDemo,
-          ),
-      },
-      {
-        path: 'read-only-image-annotator-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/image-annotator-next/demos/read-only-image-annotator-next-demo').then(
-            (m) => m.ReadOnlyImageAnnotatorNextDemo,
+          import('../pages/docs/image-annotator/demos/read-only-image-annotator-demo').then(
+            (m) => m.ReadOnlyImageAnnotatorDemo,
           ),
       },
     ],

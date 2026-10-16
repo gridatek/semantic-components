@@ -1,194 +1,78 @@
 # Image Annotator
 
-A composable, canvas-based image annotator: pen, line, rectangle, circle, arrow and eraser tools, colors, stroke width, undo/redo, clear and download.
+Annotate an image. Annotations are shapes over your image — SVG, in the image's own pixels — not pixels painted on it: each one is selected, moved, resized, restyled and deleted, with the pointer or the keyboard. They are plain data, to store and show again, and the image with them is exported as a file.
 
-## Features
+## Architecture
 
-- **Mouse, touch and pen** (pointer events); the page doesn't scroll while drawing
-- **Responsive** — scales to its container, keeping the `width`/`height` ratio; annotations are stored in image coordinates, so they survive resizing
-- **Sharp on high-DPI screens** — both layers render at the device pixel ratio; downloads are exported at full `width` × `height`
-- **Undo / redo** for every change, including erasing (one step per eraser gesture)
-- **Accessible toolbar** — `role="toolbar"` (one Tab stop, arrow keys), named tools/colors/actions, a labelled width slider; the canvas is `role="img"` named by `alt`
-- **Configurable** colors and tools; icons are yours (projected `<svg>`s)
-
-## Installation
-
-```typescript
-import { ScImageAnnotator, ScImageAnnotatorAction, ScImageAnnotatorCanvas, ScImageAnnotatorColorButton, ScImageAnnotatorLineWidth, ScImageAnnotatorToolButton, ScImageAnnotatorToolbar } from '@semantic-components/ui-lab';
-import type { ScAnnotation, ScAnnotatorColor, ScAnnotatorToolOption } from '@semantic-components/ui-lab';
+```
+scImageAnnotator (annotations, tool, color, width, selected, readonly, label — undo(), redo(), toBlob())
+├── your toolbar: scImageAnnotatorTool, scImageAnnotatorColor, your input[scSlider] on width,
+│                 scImageAnnotatorUndo / Redo / Delete / Clear
+└── scImageAnnotatorStage — name it
+    ├── img[scImageAnnotatorImage] — your image, its src and alt
+    └── input[scImageAnnotatorTextInput] — where a note is written; name it
 ```
 
 ## Usage
 
 ```html
-<div scImageAnnotator [colors]="annotatorColors" [tools]="annotatorTools" [src]="imageSrc()" [width]="700" [height]="450" alt="Person standing by a lake" (annotationsChange)="onAnnotationsChange($event)" (save)="onSave($event)">
-  <div scImageAnnotatorToolbar #toolbar="scImageAnnotatorToolbar">
-    <div class="flex items-center gap-1 border-r pr-2">
-      @for (tool of toolbar.tools(); track tool.id) {
-      <button scImageAnnotatorToolButton [tool]="tool.id" [title]="tool.label">
-        <!-- your icon for tool.id -->
-      </button>
-      }
-    </div>
-
-    <div class="flex items-center gap-1 border-r pr-2">
-      @for (color of toolbar.colors(); track color.value) {
-      <button scImageAnnotatorColorButton [color]="color.value" [title]="color.label"></button>
-      }
-    </div>
-
-    <div class="flex items-center gap-2 border-r pr-2">
-      <span class="text-muted-foreground text-xs">Width:</span>
-      <input type="range" scImageAnnotatorLineWidth aria-label="Line width" min="1" max="20" />
-      <span class="w-4 text-xs">{{ toolbar.lineWidth() }}</span>
-    </div>
-
-    <div class="ml-auto flex items-center gap-1">
-      <button scImageAnnotatorAction action="undo"><svg siUndo2Icon></svg><span class="sr-only">Undo</span></button>
-      <button scImageAnnotatorAction action="redo"><svg siRedo2Icon></svg><span class="sr-only">Redo</span></button>
-      <button scImageAnnotatorAction action="clear"><svg siTrash2Icon></svg><span class="sr-only">Clear all</span></button>
-      <button scImageAnnotatorAction action="download"><svg siDownloadIcon></svg><span class="sr-only">Download</span></button>
-    </div>
+<div scImageAnnotator [(annotations)]="annotations" [(width)]="width" [label]="labelOf">
+  <div role="group" aria-label="Tools">
+    <button scImageAnnotatorTool="select"><svg siMousePointer2Icon></svg><span class="sr-only">Select</span></button>
+    <button scImageAnnotatorTool="arrow"><svg siMoveUpRightIcon></svg><span class="sr-only">Arrow</span></button>
+    <button scImageAnnotatorTool="text"><svg siTypeIcon></svg><span class="sr-only">Note</span></button>
   </div>
+  <div role="group" aria-label="Colour">
+    <button scImageAnnotatorColor="#e11d48"><span class="sr-only">Red</span></button>
+  </div>
+  <input scSlider aria-label="Width" [min]="1" [max]="16" [(value)]="width" />
+  <button scImageAnnotatorUndo><svg siUndo2Icon></svg><span class="sr-only">Undo</span></button>
 
-  <div scImageAnnotatorCanvas></div>
+  <div scImageAnnotatorStage aria-label="Screenshot to review">
+    <img scImageAnnotatorImage src="/screenshot.png" alt="The settings page" />
+    <input scImageAnnotatorTextInput aria-label="Note" />
+  </div>
 </div>
 ```
 
-Tool, color and action buttons get their accessible name automatically (the tool's label, the color's label, "Undo"…). Write a static `aria-label` to override it. Keep extra content (like a counter) **outside** the `scImageAnnotator` element or below it in a column layout — the annotator is `w-full` up to `width` px.
+```ts
+readonly labelOf = (annotation: ScImageAnnotatorAnnotation) =>
+  annotation.kind === 'text' ? `Note: ${annotation.text}` : NAMES[annotation.kind];
 
-### Custom colors and tools
-
-```html
-<div scImageAnnotator [src]="src" [colors]="brandColors" [tools]="tools">…</div>
-```
-
-```typescript
-readonly brandColors: ScAnnotatorColor[] = [
-  { value: '#e11d48', label: 'Rose' },
-  { value: '#0ea5e9', label: 'Sky' },
-];
-readonly tools: ScAnnotatorToolOption[] = [
-  { id: 'pen', label: 'Pen' },
-  { id: 'arrow', label: 'Arrow' },
-  { id: 'eraser', label: 'Eraser' },
-];
-```
-
-### Programmatic control
-
-```html
-<div scImageAnnotator [colors]="annotatorColors" [tools]="annotatorTools" #annotator="scImageAnnotator" [src]="src">…</div>
-```
-
-```typescript
-readonly annotator = viewChild.required(ScImageAnnotator);
-
-load(saved: ScAnnotation[]) {
-  this.annotator().setAnnotations(saved); // resets undo history, emits nothing
-}
-```
-
-## API Reference
-
-### ScImageAnnotator — `div[scImageAnnotator]`
-
-| Input    | Type                      | Default             | Description                                      |
-| -------- | ------------------------- | ------------------- | ------------------------------------------------ |
-| `src`    | `string` (required)       | —                   | Image URL (served with CORS headers to download) |
-| `width`  | `number`                  | `600`               | Image coordinate width and export width (px)     |
-| `height` | `number`                  | `400`               | Image coordinate height and export height (px)   |
-| `alt`    | `string`                  | `'Annotated image'` | Accessible name of the canvas (`role="img"`)     |
-| `colors` | `ScAnnotatorColor[]`      | required            | Color palette — value and your name (`'Red'`)    |
-| `tools`  | `ScAnnotatorToolOption[]` | required            | Available tools — id and your name (`'Pen'`)     |
-| `class`  | `string`                  | `''`                | Additional CSS classes                           |
-
-| Output              | Type             | Description                                             |
-| ------------------- | ---------------- | ------------------------------------------------------- |
-| `annotationsChange` | `ScAnnotation[]` | After every user change: draw, erase, undo, redo, clear |
-| `save`              | `string`         | PNG data URL, when the image is downloaded              |
-
-Methods: `getAnnotations()`, `setAnnotations(annotations)`.
-
-### ScImageAnnotatorToolbar — `div[scImageAnnotatorToolbar]`
-
-`role="toolbar"` (aria `Toolbar`), named "Annotation tools" unless given an `aria-label`. Exposes `tools()`, `colors()`, `lineWidth()`, `hasAnnotations()` for the template (`exportAs: 'scImageAnnotatorToolbar'`).
-
-### ScImageAnnotatorToolButton — `button[scImageAnnotatorToolButton]`
-
-| Input  | Type               | Description      |
-| ------ | ------------------ | ---------------- |
-| `tool` | `ScAnnotationTool` | Tool to activate |
-
-`aria-pressed` reflects the active tool.
-
-### ScImageAnnotatorColorButton — `button[scImageAnnotatorColorButton]`
-
-| Input   | Type     | Description        |
-| ------- | -------- | ------------------ |
-| `color` | `string` | Color value to use |
-
-`aria-pressed` reflects the active color.
-
-### ScImageAnnotatorLineWidth — `input[type="range"][scImageAnnotatorLineWidth]`
-
-Stroke width. Named "Line width" unless given an `aria-label`. Its own Tab stop; its arrow keys change the value.
-
-### ScImageAnnotatorAction — `button[scImageAnnotatorAction]`
-
-| Input    | Type                                        | Description   |
-| -------- | ------------------------------------------- | ------------- |
-| `action` | `'undo' \| 'redo' \| 'clear' \| 'download'` | Action to run |
-
-`aria-disabled` (still focusable) when there is nothing to undo, redo or clear, or before the image has loaded.
-
-### ScImageAnnotatorCanvas — `div[scImageAnnotatorCanvas]`
-
-The drawing surface. `role="img"` named by `alt`; `data-state="loading" | "ready"`; aspect ratio from `width`/`height`.
-
-## Types
-
-```typescript
-type ScAnnotationTool = 'pen' | 'line' | 'rectangle' | 'circle' | 'arrow' | 'eraser';
-
-interface ScAnnotation {
-  id: string;
-  tool: Exclude<ScAnnotationTool, 'eraser'>;
-  points: ScAnnotationPoint[]; // image coordinates
-  color: string;
-  lineWidth: number; // image units
-}
-
-interface ScAnnotatorColor {
-  value: string;
-  label: string;
-}
-
-interface ScAnnotatorToolOption {
-  id: ScAnnotationTool;
-  label: string;
+async export(annotator: ScImageAnnotator) {
+  const blob = await annotator.toBlob({ type: 'image/webp', quality: 0.9 });
 }
 ```
 
 ## Tools
 
-| Tool        | How to draw                                               |
-| ----------- | --------------------------------------------------------- |
-| `pen`       | Freehand; a click draws a dot                             |
-| `line`      | Drag from start to end                                    |
-| `rectangle` | Drag from one corner to the opposite one                  |
-| `circle`    | Drag from the center outwards                             |
-| `arrow`     | Drag from start to tip                                    |
-| `eraser`    | Click or drag over strokes to remove them (one undo step) |
+`select` · `pen` (smoothed) · `highlighter` (wide, see-through) · `line` · `arrow` · `rectangle` · `ellipse` · `text` · `eraser` (removes whole annotations).
 
-## Accessibility
+## State
 
-- Toolbar: one Tab stop, ←/→ between buttons, Home/End; the width slider is a separate Tab stop.
-- Every control has an accessible name; pressed/disabled states are exposed with `aria-pressed` / `aria-disabled`.
-- The canvas is `role="img"` with `alt` as its name.
-- Freehand drawing is path-dependent input, so it has no keyboard equivalent (WCAG 2.1.1 exception).
+| On `scImageAnnotator` | Type                                     | Default    |                                                                       |
+| --------------------- | ---------------------------------------- | ---------- | --------------------------------------------------------------------- |
+| `annotations`         | `ScImageAnnotatorAnnotation[]` (two-way) | `[]`       | Plain data: `{ id, kind, points, color, width, text? }`, image pixels |
+| `tool`                | `ScImageAnnotatorToolName` (two-way)     | `'select'` |                                                                       |
+| `color`, `width`      | two-way                                  | red, `4`   | Drawn with — and the selected annotation's                            |
+| `selected`            | `string \| null` (two-way)               | `null`     | The selected annotation's id                                          |
+| `readonly`            | `boolean`                                | `false`    | Shown, named, reached with Tab — not edited                           |
+| `label`               | `(annotation) => string`                 | —          | Each annotation's name, yours to write                                |
 
-## Notes
+`undo()`, `redo()`, `canUndo()`, `canRedo()` — one step per gesture (a drawing, a move, a resize, a note written, an eraser stroke). `toBlob({ type, quality })` renders the image with its annotations at its own size.
 
-- Downloading needs the image served with CORS headers (`crossorigin="anonymous"` is used); otherwise the browser blocks reading the canvas and `save` doesn't fire.
-- `width`/`height` define the coordinate space: changing them does not rescale existing annotations.
+## Keyboard and screen readers
+
+- Each annotation is focusable and named by your `label`; focused, it is selected.
+- On an annotation: arrows move it (Shift: by 10%), Alt + arrows resize it, Delete removes it, Enter edits a note, Escape leaves it.
+- On the stage (named by you): Enter places a shape of the current tool in the middle, focused — to move and size with the keys.
+- Ctrl+Z / Ctrl+Shift+Z (or Ctrl+Y) anywhere in the annotator.
+- Tools and colours are buttons you name, `aria-pressed` while picked; put them in groups you name.
+
+## Styling
+
+The stage is the image's size (`w-full`, its height follows). The parts' buttons style themselves with `buttonVariants()` (`ghost`, `icon`; `variant` and `size` as on `scButton`); colours are swatches, their colour from their value.
+
+## Not here
+
+Polygons, rotating shapes, layers, filters and other photo editing.
