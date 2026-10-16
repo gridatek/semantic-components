@@ -4,4 +4,4 @@ export { ScSpeedDialActionButton } from './speed-dial-action-button';
 export { ScSpeedDialActionLabel } from './speed-dial-action-label';
 export { ScSpeedDialActionList } from './speed-dial-action-list';
 export { ScSpeedDialTrigger } from './speed-dial-trigger';
-export type { ScSpeedDialDirection, ScSpeedDialSize } from './speed-dial-types';
+export type { ScSpeedDialSize } from './speed-dial-types';

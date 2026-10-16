@@ -551,6 +551,12 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/speed-dial/speed-dial-page'),
       },
       {
+        path: 'speed-dial-next',
+        title: 'Speed Dial Next - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/speed-dial-next/speed-dial-next-page'),
+      },
+      {
         path: 'spinner',
         title: 'Spinner - Semantic Components',
         loadComponent: () => import('../pages/docs/spinner/spinner-page'),

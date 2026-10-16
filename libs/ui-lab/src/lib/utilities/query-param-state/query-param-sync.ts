@@ -79,7 +79,6 @@ export class QueryParamSyncService {
     }
 
     if (raw === null) {
-      // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
       delete this.pendingParams[key];
     } else {
       this.pendingParams[key] = raw;

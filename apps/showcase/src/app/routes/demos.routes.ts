@@ -3442,6 +3442,46 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/speed-dial-next',
+    children: [
+      {
+        path: 'basic-speed-dial-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/speed-dial-next/demos/basic-speed-dial-next-demo').then(
+            (m) => m.BasicSpeedDialNextDemo,
+          ),
+      },
+      {
+        path: 'directions-speed-dial-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/speed-dial-next/demos/directions-speed-dial-next-demo').then(
+            (m) => m.DirectionsSpeedDialNextDemo,
+          ),
+      },
+      {
+        path: 'arc-speed-dial-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/speed-dial-next/demos/arc-speed-dial-next-demo').then(
+            (m) => m.ArcSpeedDialNextDemo,
+          ),
+      },
+      {
+        path: 'backdrop-speed-dial-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/speed-dial-next/demos/backdrop-speed-dial-next-demo').then(
+            (m) => m.BackdropSpeedDialNextDemo,
+          ),
+      },
+      {
+        path: 'controlled-speed-dial-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/speed-dial-next/demos/controlled-speed-dial-next-demo').then(
+            (m) => m.ControlledSpeedDialNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/spinner',
     children: [
       {
