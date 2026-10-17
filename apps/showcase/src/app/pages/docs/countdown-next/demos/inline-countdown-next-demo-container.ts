@@ -19,7 +19,11 @@ import { InlineCountdownNextDemo } from './inline-countdown-next-demo';
 })
 export class InlineCountdownNextDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScCountdownNext, ScCountdownNextUnit, ScCountdownNextText } from '@semantic-components/ui-lab';
+import {
+  ScCountdownNext,
+  ScCountdownNextText,
+  ScCountdownNextUnit,
+} from '@semantic-components/ui-lab';
 
 /** In a sentence: hours, minutes and seconds, with your separators. */
 @Component({
@@ -46,6 +50,10 @@ import { ScCountdownNext, ScCountdownNextUnit, ScCountdownNextText } from '@sema
   encapsulation: ViewEncapsulation.None,
 })
 export class InlineCountdownNextDemo {
-  readonly end = Temporal.Now.instant().add({ hours: 2, minutes: 14, seconds: 5 });
+  readonly end = Temporal.Now.instant().add({
+    hours: 2,
+    minutes: 14,
+    seconds: 5,
+  });
 }`;
 }
