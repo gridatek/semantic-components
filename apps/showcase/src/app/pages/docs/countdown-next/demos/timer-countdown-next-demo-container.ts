@@ -19,13 +19,34 @@ import { TimerCountdownNextDemo } from './timer-countdown-next-demo';
 })
 export class TimerCountdownNextDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScCountdownNext, ScCountdownNextUnit, ScCountdownNextText, ScCountdownNextRing, ScCountdownNextToggle, ScCountdownNextReset } from '@semantic-components/ui-lab';
-import { SiPlayIcon, SiPauseIcon, SiRotateCcwIcon } from '@semantic-icons/lucide-icons';
+import {
+  ScCountdownNext,
+  ScCountdownNextReset,
+  ScCountdownNextRing,
+  ScCountdownNextText,
+  ScCountdownNextToggle,
+  ScCountdownNextUnit,
+} from '@semantic-components/ui-lab';
+import {
+  SiPauseIcon,
+  SiPlayIcon,
+  SiRotateCcwIcon,
+} from '@semantic-icons/lucide-icons';
 
 /** A duration: it starts, pauses and resets; the ring empties as it runs. */
 @Component({
   selector: 'app-timer-countdown-next-demo',
-  imports: [ScCountdownNext, ScCountdownNextUnit, ScCountdownNextText, ScCountdownNextRing, ScCountdownNextToggle, ScCountdownNextReset, SiPlayIcon, SiPauseIcon, SiRotateCcwIcon],
+  imports: [
+    ScCountdownNext,
+    ScCountdownNextUnit,
+    ScCountdownNextText,
+    ScCountdownNextRing,
+    ScCountdownNextToggle,
+    ScCountdownNextReset,
+    SiPlayIcon,
+    SiPauseIcon,
+    SiRotateCcwIcon,
+  ],
   template: \`
     <div
       scCountdownNext
