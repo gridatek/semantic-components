@@ -34,8 +34,8 @@ export class ScCarouselPrevious {
       buttonVariants({ variant: this.variant(), size: this.size() }),
       'rounded-full absolute touch-manipulation',
       isHorizontal
-        ? '-start-12 top-1/2 -translate-y-1/2 rtl:[&>svg]:rotate-180'
-        : 'start-1/2 -top-12 -translate-x-1/2 rotate-90 rtl:translate-x-1/2',
+        ? 'inset-y-0 -start-12 my-auto'
+        : '-top-12 start-1/2 -translate-x-1/2 rtl:translate-x-1/2 rotate-90',
       this.classInput(),
     );
   });
