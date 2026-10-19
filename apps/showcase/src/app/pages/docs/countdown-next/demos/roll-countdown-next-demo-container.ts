@@ -19,7 +19,11 @@ import { RollCountdownNextDemo } from './roll-countdown-next-demo';
 })
 export class RollCountdownNextDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScCountdownNext, ScCountdownNextUnit, ScCountdownNextText } from '@semantic-components/ui-lab';
+import {
+  ScCountdownNext,
+  ScCountdownNextText,
+  ScCountdownNextUnit,
+} from '@semantic-components/ui-lab';
 
 /** Each digit slides to the next — still, for anyone who asks for less motion. */
 @Component({

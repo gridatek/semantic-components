@@ -20,12 +20,21 @@ import { DoneCountdownNextDemo } from './done-countdown-next-demo';
 export class DoneCountdownNextDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
-import { ScCountdownNext, ScCountdownNextUnit, ScCountdownNextText } from '@semantic-components/ui-lab';
+import {
+  ScCountdownNext,
+  ScCountdownNextText,
+  ScCountdownNextUnit,
+} from '@semantic-components/ui-lab';
 
 /** Ten seconds; at zero, (completed) — once — and data-done to style what is over. */
 @Component({
   selector: 'app-done-countdown-next-demo',
-  imports: [ScCountdownNext, ScCountdownNextUnit, ScCountdownNextText, ScButton],
+  imports: [
+    ScCountdownNext,
+    ScCountdownNextUnit,
+    ScCountdownNextText,
+    ScButton,
+  ],
   template: \`
     <div class="flex flex-col items-center gap-3">
       @if (run(); as at) {
