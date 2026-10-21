@@ -3361,6 +3361,39 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/spotlight-next',
+    children: [
+      {
+        path: 'basic-spotlight-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/spotlight-next/demos/basic-spotlight-next-demo').then(
+            (m) => m.BasicSpotlightNextDemo,
+          ),
+      },
+      {
+        path: 'interactive-spotlight-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/spotlight-next/demos/interactive-spotlight-next-demo').then(
+            (m) => m.InteractiveSpotlightNextDemo,
+          ),
+      },
+      {
+        path: 'sides-spotlight-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/spotlight-next/demos/sides-spotlight-next-demo').then(
+            (m) => m.SidesSpotlightNextDemo,
+          ),
+      },
+      {
+        path: 'custom-spotlight-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/spotlight-next/demos/custom-spotlight-next-demo').then(
+            (m) => m.CustomSpotlightNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/stat-card',
     children: [
       {

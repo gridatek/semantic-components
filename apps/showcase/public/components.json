@@ -832,6 +832,14 @@
     "category": "Overlay"
   },
   {
+    "name": "Spotlight Next",
+    "path": "spotlight-next",
+    "description": "The spotlight, rebuilt: one element lit, your content in a native dialog; modal, or interactive through the cutout.",
+    "status": "Experimental",
+    "library": "ui-lab",
+    "category": "Overlay"
+  },
+  {
     "name": "Stacked Layout",
     "path": "stacked-layout",
     "description": "A page frame: a sticky navbar, the routed page and a footer.",

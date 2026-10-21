@@ -17,18 +17,12 @@ import {
   viewChild,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { ScTourGuideStep, type ScTourSide } from './tour-guide-step';
-
-/** Room kept between the card, its target and the screen's edges. */
-const GAP = 12;
-const EDGE = 8;
-
-interface Box {
-  top: number;
-  left: number;
-  width: number;
-  height: number;
-}
+import {
+  type ScPlacementBox,
+  type ScPlacementSide,
+  spotlightPlacement,
+} from '../../utilities/spotlight-placement';
+import { ScTourGuideStep } from './tour-guide-step';
 
 /**
  * A guided tour: your steps (`scTourGuideStep`), shown one at a time in
@@ -53,7 +47,7 @@ interface Box {
       <div
         data-slot="tour-guide-spotlight"
         aria-hidden="true"
-        class="pointer-events-none fixed rounded-lg shadow-[0_0_0_200vmax_rgb(0_0_0/0.5)] transition-[top,left,width,height] duration-300 ease-out motion-reduce:transition-none"
+        [class]="spotlightClass()"
         [style.top.px]="spotlight().top"
         [style.left.px]="spotlight().left"
         [style.width.px]="spotlight().width"
@@ -114,20 +108,31 @@ export class ScTourGuide {
     viewChild.required<ElementRef<HTMLElement>>('card');
 
   /** Where the spotlight and the card are, and the side the card took. */
-  protected readonly spotlight = signal<Box>({
+  protected readonly spotlight = signal<ScPlacementBox>({
     top: 0,
     left: 0,
     width: 0,
     height: 0,
   });
   protected readonly cardAt = signal({ top: 0, left: 0 });
-  protected readonly placed = signal<ScTourSide | 'center'>('center');
+  protected readonly placed = signal<ScPlacementSide | 'center'>('center');
+
+  /** Placed once since opening: from then on, its moves are animated. */
+  protected readonly settled = signal(false);
 
   protected readonly class = computed(() => cn('contents', this.classInput()));
+  protected readonly spotlightClass = computed(() =>
+    cn(
+      'pointer-events-none fixed rounded-lg shadow-[0_0_0_200vmax_rgb(0_0_0/0.5)]',
+      this.settled() &&
+        'transition-[top,left,width,height] duration-300 ease-out motion-reduce:transition-none',
+    ),
+  );
   protected readonly cardClass = computed(() =>
     cn(
       'bg-popover text-popover-foreground fixed w-80 max-w-[calc(100vw-1rem)] space-y-3 rounded-lg border p-4 shadow-lg outline-none',
-      'transition-[top,left] duration-300 ease-out motion-reduce:transition-none',
+      this.settled() &&
+        'transition-[top,left] duration-300 ease-out motion-reduce:transition-none',
       this.cardClassInput(),
     ),
   );
@@ -144,7 +149,10 @@ export class ScTourGuide {
       const dialog = this.dialog().nativeElement;
       untracked(() => {
         if (open && !dialog.open) dialog.showModal();
-        if (!open && dialog.open) dialog.close();
+        if (!open && dialog.open) {
+          dialog.close();
+          this.settled.set(false);
+        }
       });
     });
     // A step shown: its target in view, everything placed, focus on the card.
@@ -243,101 +251,20 @@ export class ScTourGuide {
     const step = this.current();
     const card = this.cardElement().nativeElement;
     const view = this.document.documentElement;
-    const width = view.clientWidth;
-    const height = view.clientHeight;
-    const size = { width: card.offsetWidth, height: card.offsetHeight };
-    const target = step?.for()?.getBoundingClientRect();
-
-    if (!step || !target) {
-      // No target: centred, all dimmed.
-      this.spotlight.set({
-        top: height / 2,
-        left: width / 2,
-        width: 0,
-        height: 0,
-      });
-      this.cardAt.set({
-        top: (height - size.height) / 2,
-        left: (width - size.width) / 2,
-      });
-      this.placed.set('center');
-      return;
-    }
-
-    const pad = step.padding();
-    const lit = {
-      top: target.top - pad,
-      left: target.left - pad,
-      width: target.width + pad * 2,
-      height: target.height + pad * 2,
-    };
-    this.spotlight.set(lit);
-
-    // The side asked, then its opposite, then the others: the first that fits.
-    const rtl = this.direction() === 'rtl';
-    const physical = (side: ScTourSide) =>
-      side === 'start'
-        ? rtl
-          ? 'right'
-          : 'left'
-        : side === 'end'
-          ? rtl
-            ? 'left'
-            : 'right'
-          : side;
-    const opposite: Record<ScTourSide, ScTourSide> = {
-      top: 'bottom',
-      bottom: 'top',
-      start: 'end',
-      end: 'start',
-    };
-    const wanted = step.side();
-    const order: ScTourSide[] = [
-      wanted,
-      opposite[wanted],
-      ...(['bottom', 'top', 'end', 'start'] as const).filter(
-        (side) => side !== wanted && side !== opposite[wanted],
-      ),
-    ];
-    const at = (side: ScTourSide) => {
-      switch (physical(side)) {
-        case 'top':
-          return {
-            top: lit.top - GAP - size.height,
-            left: lit.left + lit.width / 2 - size.width / 2,
-          };
-        case 'bottom':
-          return {
-            top: lit.top + lit.height + GAP,
-            left: lit.left + lit.width / 2 - size.width / 2,
-          };
-        case 'left':
-          return {
-            top: lit.top + lit.height / 2 - size.height / 2,
-            left: lit.left - GAP - size.width,
-          };
-        default:
-          return {
-            top: lit.top + lit.height / 2 - size.height / 2,
-            left: lit.left + lit.width + GAP,
-          };
-      }
-    };
-    const fits = (side: ScTourSide) => {
-      const { top, left } = at(side);
-      const across = physical(side) === 'top' || physical(side) === 'bottom';
-      return across
-        ? top >= EDGE && top + size.height <= height - EDGE
-        : left >= EDGE && left + size.width <= width - EDGE;
-    };
-    const side = order.find(fits) ?? wanted;
-    const { top, left } = at(side);
-    // Shifted to stay on screen.
-    this.cardAt.set({
-      top: Math.min(Math.max(EDGE, top), height - size.height - EDGE),
-      left: Math.min(Math.max(EDGE, left), width - size.width - EDGE),
+    const placed = spotlightPlacement({
+      target: step?.for()?.getBoundingClientRect() ?? null,
+      card: { width: card.offsetWidth, height: card.offsetHeight },
+      viewport: { width: view.clientWidth, height: view.clientHeight },
+      side: step?.side() ?? 'bottom',
+      padding: step?.padding() ?? 0,
+      rtl: this.direction() === 'rtl',
     });
-    this.placed.set(side);
+    this.spotlight.set(placed.spotlight);
+    this.cardAt.set(placed.card);
+    this.placed.set(placed.side);
+    // Animated from the next move on, not into this first place.
+    if (!this.settled())
+      requestAnimationFrame(() => this.settled.set(this.open()));
   }
 
   private direction(): string {

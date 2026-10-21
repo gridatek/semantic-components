@@ -1,7 +1,5 @@
 import { Directive, TemplateRef, inject, input } from '@angular/core';
-
-/** Where a step's card goes, around its target. */
-export type ScTourSide = 'top' | 'bottom' | 'start' | 'end';
+import type { ScPlacementSide } from '../../utilities/spotlight-placement';
 
 /**
  * A step: your markup — `<ng-template scTourGuideStep [for]="target">` —
@@ -17,7 +15,7 @@ export class ScTourGuideStep {
   /** The element it shows; none, the card is centred. */
   readonly for = input<Element | null>(null);
   /** Where the card goes; it flips when there is no room. */
-  readonly side = input<ScTourSide>('bottom');
+  readonly side = input<ScPlacementSide>('bottom');
   /** The room around the target, in the spotlight, in pixels. */
   readonly padding = input(8);
 }
