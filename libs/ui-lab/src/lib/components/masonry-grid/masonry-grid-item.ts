@@ -8,7 +8,7 @@ import {
   numberAttribute,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { ScMasonryGridNext } from './masonry-grid-next';
+import { ScMasonryGrid } from './masonry-grid';
 
 /**
  * An item of the grid: your element (an `li` in a `ul`), any height —
@@ -16,15 +16,15 @@ import { ScMasonryGridNext } from './masonry-grid-next';
  * reduced motion).
  */
 @Directive({
-  selector: '[scMasonryGridNextItem]',
+  selector: '[scMasonryGridItem]',
   host: {
     'data-slot': 'masonry-grid-item',
     '[style.grid-column]': 'grid.native() ? "span " + span() : null',
     '[class]': 'class()',
   },
 })
-export class ScMasonryGridNextItem {
-  protected readonly grid = inject(ScMasonryGridNext);
+export class ScMasonryGridItem {
+  protected readonly grid = inject(ScMasonryGrid);
 
   readonly classInput = input<string>('', { alias: 'class' });
   /** How many columns it spans. */

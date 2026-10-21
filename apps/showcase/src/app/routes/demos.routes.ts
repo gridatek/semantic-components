@@ -2162,24 +2162,10 @@ export const demosRoutes: Route[] = [
     path: 'demos/masonry-grid',
     children: [
       {
-        path: 'basic-masonry-grid-demo',
+        path: 'photos-masonry-grid-demo',
         loadComponent: () =>
-          import('../pages/docs/masonry-grid/demos/basic-masonry-grid-demo').then(
-            (m) => m.BasicMasonryGridDemo,
-          ),
-      },
-      {
-        path: 'image-gallery-masonry-grid-demo',
-        loadComponent: () =>
-          import('../pages/docs/masonry-grid/demos/image-gallery-masonry-grid-demo').then(
-            (m) => m.ImageGalleryMasonryGridDemo,
-          ),
-      },
-      {
-        path: 'breakpoints-masonry-grid-demo',
-        loadComponent: () =>
-          import('../pages/docs/masonry-grid/demos/breakpoints-masonry-grid-demo').then(
-            (m) => m.BreakpointsMasonryGridDemo,
+          import('../pages/docs/masonry-grid/demos/photos-masonry-grid-demo').then(
+            (m) => m.PhotosMasonryGridDemo,
           ),
       },
       {
@@ -2189,37 +2175,18 @@ export const demosRoutes: Route[] = [
             (m) => m.CardsMasonryGridDemo,
           ),
       },
-    ],
-  },
-  {
-    path: 'demos/masonry-grid-next',
-    children: [
       {
-        path: 'photos-masonry-grid-next-demo',
+        path: 'more-masonry-grid-demo',
         loadComponent: () =>
-          import('../pages/docs/masonry-grid-next/demos/photos-masonry-grid-next-demo').then(
-            (m) => m.PhotosMasonryGridNextDemo,
+          import('../pages/docs/masonry-grid/demos/more-masonry-grid-demo').then(
+            (m) => m.MoreMasonryGridDemo,
           ),
       },
       {
-        path: 'cards-masonry-grid-next-demo',
+        path: 'order-masonry-grid-demo',
         loadComponent: () =>
-          import('../pages/docs/masonry-grid-next/demos/cards-masonry-grid-next-demo').then(
-            (m) => m.CardsMasonryGridNextDemo,
-          ),
-      },
-      {
-        path: 'more-masonry-grid-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/masonry-grid-next/demos/more-masonry-grid-next-demo').then(
-            (m) => m.MoreMasonryGridNextDemo,
-          ),
-      },
-      {
-        path: 'order-masonry-grid-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/masonry-grid-next/demos/order-masonry-grid-next-demo').then(
-            (m) => m.OrderMasonryGridNextDemo,
+          import('../pages/docs/masonry-grid/demos/order-masonry-grid-demo').then(
+            (m) => m.OrderMasonryGridDemo,
           ),
       },
     ],

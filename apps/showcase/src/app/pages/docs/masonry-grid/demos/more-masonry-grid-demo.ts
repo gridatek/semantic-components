@@ -1,20 +1,17 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
-import {
-  ScMasonryGridNext,
-  ScMasonryGridNextItem,
-} from '@semantic-components/ui-lab';
+import { ScMasonryGrid, ScMasonryGridItem } from '@semantic-components/ui-lab';
 
 /** Items added, or removed: the grid lays out again, and the others move into place (not under reduced motion). */
 @Component({
-  selector: 'app-more-masonry-grid-next-demo',
-  imports: [ScMasonryGridNext, ScMasonryGridNextItem, ScButton],
+  selector: 'app-more-masonry-grid-demo',
+  imports: [ScMasonryGrid, ScMasonryGridItem, ScButton],
   template: `
     <div class="w-full space-y-4">
-      <ul scMasonryGridNext [columnWidth]="140" class="w-full">
+      <ul scMasonryGrid [columnWidth]="140" class="w-full">
         @for (tile of tiles(); track tile.id) {
           <li
-            scMasonryGridNextItem
+            scMasonryGridItem
             class="bg-muted grid place-items-center rounded-md text-sm font-medium"
             [style.height.px]="tile.height"
           >
@@ -33,7 +30,7 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class MoreMasonryGridNextDemo {
+export class MoreMasonryGridDemo {
   private next = 1;
   readonly tiles = signal(this.make(6));
 

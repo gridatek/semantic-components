@@ -1,17 +1,14 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import {
-  ScMasonryGridNext,
-  ScMasonryGridNextItem,
-} from '@semantic-components/ui-lab';
+import { ScMasonryGrid, ScMasonryGridItem } from '@semantic-components/ui-lab';
 
 /** Photos of different heights, each into the shortest column — as many columns of at least 200 px as fit. In a list: the order is the source's, row by row. */
 @Component({
-  selector: 'app-photos-masonry-grid-next-demo',
-  imports: [ScMasonryGridNext, ScMasonryGridNextItem],
+  selector: 'app-photos-masonry-grid-demo',
+  imports: [ScMasonryGrid, ScMasonryGridItem],
   template: `
-    <ul scMasonryGridNext [columnWidth]="200" [gap]="12" class="w-full">
+    <ul scMasonryGrid [columnWidth]="200" [gap]="12" class="w-full">
       @for (photo of photos; track photo.name) {
-        <li scMasonryGridNextItem>
+        <li scMasonryGridItem>
           <img
             [src]="'/images/gallery/' + photo.name + '-thumb.jpg'"
             [alt]="photo.alt"
@@ -27,7 +24,7 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class PhotosMasonryGridNextDemo {
+export class PhotosMasonryGridDemo {
   readonly photos = [
     {
       name: 'forest',

@@ -1,7 +1,6 @@
 import { type Locator, type Page, expect, test } from '@playwright/test';
 
-const demo = (name: string) =>
-  `/demos/masonry-grid-next/${name}-masonry-grid-next-demo`;
+const demo = (name: string) => `/demos/masonry-grid/${name}-masonry-grid-demo`;
 
 // The widths the column counts below are worked out for.
 test.use({ viewport: { width: 760, height: 900 } });

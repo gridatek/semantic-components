@@ -6,7 +6,11 @@ import { CardsMasonryGridDemo } from './cards-masonry-grid-demo';
   selector: 'app-cards-masonry-grid-demo-container',
   imports: [DemoContainer, CardsMasonryGridDemo],
   template: `
-    <app-demo-container title="Cards" [code]="code">
+    <app-demo-container
+      title="Cards"
+      [code]="code"
+      demoUrl="/demos/masonry-grid/cards-masonry-grid-demo"
+    >
       <app-cards-masonry-grid-demo />
     </app-demo-container>
   `,
@@ -14,97 +18,49 @@ import { CardsMasonryGridDemo } from './cards-masonry-grid-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class CardsMasonryGridDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScMasonryGrid, ScMasonryItem } from '@semantic-components/ui-lab';
+  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+import { ScMasonryGrid, ScMasonryGridItem } from '@semantic-components/ui-lab';
 
+/** Text of any length — measured, never guessed; resize the window and it lays out again. The first card spans two columns. */
 @Component({
   selector: 'app-cards-masonry-grid-demo',
-  imports: [ScMasonryGrid, ScMasonryItem],
+  imports: [ScMasonryGrid, ScMasonryGridItem],
   template: \`
-    <div scMasonryGrid [columns]="3" [gap]="16">
-      @for (card of cards(); track card.id) {
-        <div scMasonryItem>
-          <div class="bg-card overflow-hidden rounded-lg border">
-            @if (card.image) {
-              <img
-                [src]="card.image"
-                [alt]="card.title"
-                class="h-32 w-full object-cover"
-              />
-            }
-            <div class="p-4">
-              <h4 class="font-semibold">{{ card.title }}</h4>
-              <p class="text-muted-foreground mt-2 text-sm">
-                {{ card.description }}
-              </p>
-              @if (card.tags.length > 0) {
-                <div class="mt-3 flex flex-wrap gap-1">
-                  @for (tag of card.tags; track tag) {
-                    <span class="bg-muted rounded-full px-2 py-0.5 text-xs">
-                      {{ tag }}
-                    </span>
-                  }
-                </div>
-              }
-            </div>
-          </div>
-        </div>
+    <ul scMasonryGrid [columnWidth]="180" class="w-full">
+      @for (note of notes; track note.title; let first = $first) {
+        <li
+          scMasonryGridItem
+          [span]="first ? 2 : 1"
+          class="bg-card rounded-lg border p-4 shadow-xs"
+        >
+          <p class="font-medium">{{ note.title }}</p>
+          <p class="text-muted-foreground mt-1 text-sm">{{ note.text }}</p>
+        </li>
       }
-    </div>
+    </ul>
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
 export class CardsMasonryGridDemo {
-  readonly cards = signal([
+  readonly notes = [
+    { title: 'Groceries', text: 'Milk, eggs, bread, and the good coffee.' },
     {
-      id: 1,
-      title: 'Getting Started with Angular',
-      description:
-        'Learn the basics of Angular framework and build your first application.',
-      image: 'https://picsum.photos/seed/c1/400/200',
-      tags: ['Angular', 'Tutorial'],
+      title: 'Ideas',
+      text: 'A timeline that draws its own line. A dock that grows near the pointer. A marquee written once.',
     },
+    { title: 'Call', text: 'Ada, about Friday.' },
     {
-      id: 2,
-      title: 'Design Systems',
-      description:
-        'How to create and maintain a design system for your organization.',
-      image: null,
-      tags: ['Design', 'UI/UX'],
+      title: 'Reading',
+      text: 'Finish the chapter on layout; then the one on type, which everyone says is the best part of the book, and probably is.',
     },
+    { title: 'Garden', text: 'Water the roses.' },
     {
-      id: 3,
-      title: 'TypeScript Tips',
-      description:
-        'Advanced TypeScript patterns and best practices for better code quality and maintainability.',
-      image: 'https://picsum.photos/seed/c3/400/150',
-      tags: ['TypeScript', 'JavaScript'],
+      title: 'Trip',
+      text: 'Book the train for the coast. Pack light: two shirts, the grey jumper, a book.',
     },
-    {
-      id: 4,
-      title: 'CSS Grid vs Flexbox',
-      description:
-        'Understanding when to use CSS Grid and when to use Flexbox.',
-      image: null,
-      tags: ['CSS', 'Layout'],
-    },
-    {
-      id: 5,
-      title: 'Performance Optimization',
-      description:
-        'Tips and tricks for optimizing web application performance.',
-      image: 'https://picsum.photos/seed/c5/400/180',
-      tags: ['Performance', 'Web'],
-    },
-    {
-      id: 6,
-      title: 'Accessibility Best Practices',
-      description:
-        'Building inclusive web applications that work for everyone.',
-      image: null,
-      tags: ['A11y', 'Web'],
-    },
-  ]);
+    { title: 'Code', text: 'Rename Next away after the merge.' },
+    { title: 'Music', text: 'The Satie, again.' },
+  ];
 }`;
 }

@@ -367,12 +367,6 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/masonry-grid/masonry-grid-page'),
       },
       {
-        path: 'masonry-grid-next',
-        title: 'Masonry Grid Next - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/masonry-grid-next/masonry-grid-next-page'),
-      },
-      {
         path: 'mention-input',
         title: 'Mention Input - Semantic Components',
         loadComponent: () =>

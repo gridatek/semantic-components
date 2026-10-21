@@ -514,15 +514,7 @@
   {
     "name": "Masonry Grid",
     "path": "masonry-grid",
-    "description": "Pinterest-style layout with varying item heights.",
-    "status": "Experimental",
-    "library": "ui-lab",
-    "category": "Layout"
-  },
-  {
-    "name": "Masonry Grid Next",
-    "path": "masonry-grid-next",
-    "description": "The masonry grid, rebuilt: columns by width, the source order kept, re-laid out on any size change, spans, animated moves; native where possible.",
+    "description": "Columns by width, the source order kept, re-laid out on any size change, spans, animated moves; native where possible.",
     "status": "Experimental",
     "library": "ui-lab",
     "category": "Layout"
