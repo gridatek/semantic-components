@@ -24,11 +24,17 @@ export class ScCountdownNextText {
   private readonly format = new Intl.DurationFormat(this.countdown.ɵlocale, {
     style: 'long',
   });
+  /** Zero units are left out — all of them, at zero: then seconds show. */
+  private readonly zero = new Intl.DurationFormat(this.countdown.ɵlocale, {
+    style: 'long',
+    secondsDisplay: 'always',
+  });
 
   protected readonly text = computed(() => {
     const left = this.countdown.left();
-    // Zero left is still a time: "0 seconds".
-    return this.format.format(this.countdown.done() ? { seconds: 0 } : left);
+    return this.countdown.done()
+      ? this.zero.format({ seconds: 0 })
+      : this.format.format(left);
   });
 
   protected readonly class = computed(() => cn('sr-only', this.classInput()));

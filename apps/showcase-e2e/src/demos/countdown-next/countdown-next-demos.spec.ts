@@ -3,10 +3,22 @@ import { type Page, expect, test } from '@playwright/test';
 const demo = (name: string) =>
   `/demos/countdown-next/${name}-countdown-next-demo`;
 const timer = (page: Page) => page.getByRole('timer');
+/** The digits shown, as read: "02:14:05". */
+const shown = (page: Page) =>
+  page
+    .locator('[data-slot="countdown-unit"]')
+    .allTextContents()
+    .then((units) => units.map((unit) => unit.trim()).join(':'));
 
-// The clock is the test's: times are exact, the end comes at once.
+// The time is the test's: fixed — Angular's timers still run — and moved on
+// by the test, so times are exact and the end comes at once.
+const start = new Date('2026-10-16T12:00:00Z').getTime();
+let at = start;
+const advance = (page: Page, ms: number) => page.clock.setFixedTime((at += ms));
+
 test.beforeEach(async ({ page }) => {
-  await page.clock.install({ time: new Date('2026-10-16T12:00:00Z') });
+  at = start;
+  await page.clock.setFixedTime(at);
 });
 
 test('Event: units, and words for screen readers', async ({ page }) => {
@@ -17,28 +29,31 @@ test('Event: units, and words for screen readers', async ({ page }) => {
   await expect(page.locator('[data-slot="countdown-text"]')).toHaveText(
     '2 days, 3 hours, 4 minutes, 5 seconds',
   );
-  await page.clock.runFor(6000);
+  await advance(page, 6000);
   await expect(units).toHaveText(['02', '03', '03', '59']);
 });
 
 test('Inline: on the second', async ({ page }) => {
   await page.goto(demo('inline'));
-  await expect(timer(page)).toContainText('02:14:05');
-  await page.clock.runFor(1000);
-  await expect(timer(page)).toContainText('02:14:04');
+  await expect.poll(() => shown(page)).toBe('02:14:05');
+  await advance(page, 1000);
+  await expect.poll(() => shown(page)).toBe('02:14:04');
 });
 
 test('Timer: start, pause, reset', async ({ page }) => {
   await page.goto(demo('timer'));
-  await expect(timer(page)).toContainText('05:00');
+  await expect.poll(() => shown(page)).toBe('05:00');
+  // Started (rendered) before the time moves on.
   await page.getByRole('button', { name: 'Start' }).click();
-  await page.clock.runFor(3000);
-  await expect(timer(page)).toContainText('04:57');
+  await expect(page.getByRole('button', { name: 'Pause' })).toBeVisible();
+  await advance(page, 3000);
+  await expect.poll(() => shown(page)).toBe('04:57');
   await page.getByRole('button', { name: 'Pause' }).click();
-  await page.clock.runFor(5000);
-  await expect(timer(page)).toContainText('04:57');
+  await expect(page.getByRole('button', { name: 'Start' })).toBeVisible();
+  await advance(page, 5000);
+  await expect.poll(() => shown(page)).toBe('04:57');
   await page.getByRole('button', { name: 'Reset' }).click();
-  await expect(timer(page)).toContainText('05:00');
+  await expect.poll(() => shown(page)).toBe('05:00');
 });
 
 test('Rolling digits: each digit at its place', async ({ page }) => {
@@ -57,7 +72,7 @@ test('Rolling digits: each digit at its place', async ({ page }) => {
 test('Done: completed, once', async ({ page }) => {
   await page.goto(demo('done'));
   await expect(page.getByRole('status')).toHaveText('Not yet.');
-  await page.clock.runFor(10_000);
+  await advance(page, 10_000);
   await expect(page.getByRole('status')).toHaveText('The doors are open.');
   await expect(timer(page)).toHaveAttribute('data-done', 'true');
   await expect(page.locator('[data-slot="countdown-text"]')).toHaveText(
