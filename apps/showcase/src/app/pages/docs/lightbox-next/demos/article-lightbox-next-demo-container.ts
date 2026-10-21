@@ -74,7 +74,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
           </button>
         </div>
         <div class="grid min-h-0 flex-1 place-items-center overflow-hidden p-4">
-          <img scLightboxNextImage />
+          <img scLightboxNextImage alt="A wooden table in a quiet café" />
         </div>
       </dialog>
     </article>

@@ -6,9 +6,10 @@ import { ScLightboxNext } from './lightbox-next';
 const SWIPE = 60;
 
 /**
- * The current image, fitted: its `src` and `alt` are the item's. Zoom with
- * the wheel, a double-click or a pinch; drag to pan, zoomed; swipe sideways
- * to change, down to close.
+ * The current image, fitted: its `src` is the item's; write its `alt` (the
+ * thumbnail's: `lightbox.current()?.alt`). Zoom with the wheel, a
+ * double-click or a pinch; drag to pan, zoomed; swipe sideways to change,
+ * down to close.
  */
 @Directive({
   selector: 'img[scLightboxNextImage]',
@@ -16,7 +17,6 @@ const SWIPE = 60;
     'data-slot': 'lightbox-image',
     draggable: 'false',
     '[src]': 'lightbox.current()?.src ?? ""',
-    '[alt]': 'lightbox.current()?.alt ?? ""',
     '[attr.data-loading]': 'lightbox.loading() || null',
     '[attr.data-zoomed]': 'lightbox.zoom() > 1 || null',
     '[style.transform]': 'transform()',

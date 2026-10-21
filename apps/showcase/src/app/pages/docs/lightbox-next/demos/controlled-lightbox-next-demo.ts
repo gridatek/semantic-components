@@ -91,7 +91,7 @@ interface Photo {
         <div
           class="relative grid min-h-0 flex-1 place-items-center overflow-hidden px-14"
         >
-          <img scLightboxNextImage />
+          <img scLightboxNextImage [alt]="lightbox.current()?.alt ?? ''" />
           <button
             scLightboxNextPrevious
             class="absolute start-2 top-1/2 -translate-y-1/2"

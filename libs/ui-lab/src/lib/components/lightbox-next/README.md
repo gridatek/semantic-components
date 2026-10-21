@@ -27,7 +27,7 @@ The lightbox, rebuilt: your gallery of links, opened in the native dialog — th
   <dialog scLightboxNextDialog aria-label="Photo viewer">
     <p aria-live="polite">{{ lightbox.index() + 1 }} of {{ lightbox.items().length }}</p>
     <button scLightboxNextClose><svg siXIcon></svg><span class="sr-only">Close</span></button>
-    <img scLightboxNextImage />
+    <img scLightboxNextImage [alt]="lightbox.current()?.alt" />
     <button scLightboxNextPrevious><svg siChevronLeftIcon></svg><span class="sr-only">Previous image</span></button>
     <button scLightboxNextNext><svg siChevronRightIcon></svg><span class="sr-only">Next image</span></button>
     <p>{{ photos[lightbox.index()].caption }}</p>
@@ -49,7 +49,7 @@ Each trigger is an item: its `href` is the full image, its `img` gives the `alt`
 
 ## Accessibility
 
-- Name the dialog; the image's alt is the thumbnail's.
+- Name the dialog; write the image's alt — the thumbnail's is `lightbox.current()?.alt`.
 - Say where it is in a polite live region ("3 of 8"), from `index()`.
 - Name every button; the thumbnails are named by their image's alt.
 
