@@ -1162,71 +1162,31 @@ export const demosRoutes: Route[] = [
     path: 'demos/dock',
     children: [
       {
-        path: 'basic-dock-demo',
+        path: 'apps-dock-demo',
         loadComponent: () =>
-          import('../pages/docs/dock/demos/basic-dock-demo').then(
-            (m) => m.BasicDockDemo,
+          import('../pages/docs/dock/demos/apps-dock-demo').then(
+            (m) => m.AppsDockDemo,
           ),
       },
       {
-        path: 'no-magnification-dock-demo',
+        path: 'navigation-dock-demo',
         loadComponent: () =>
-          import('../pages/docs/dock/demos/no-magnification-dock-demo').then(
-            (m) => m.NoMagnificationDockDemo,
+          import('../pages/docs/dock/demos/navigation-dock-demo').then(
+            (m) => m.NavigationDockDemo,
           ),
       },
       {
-        path: 'badges-dock-demo',
+        path: 'vertical-dock-demo',
         loadComponent: () =>
-          import('../pages/docs/dock/demos/badges-dock-demo').then(
-            (m) => m.BadgesDockDemo,
+          import('../pages/docs/dock/demos/vertical-dock-demo').then(
+            (m) => m.VerticalDockDemo,
           ),
       },
       {
-        path: 'sizes-dock-demo',
+        path: 'plain-dock-demo',
         loadComponent: () =>
-          import('../pages/docs/dock/demos/sizes-dock-demo').then(
-            (m) => m.SizesDockDemo,
-          ),
-      },
-      {
-        path: 'magnification-scale-dock-demo',
-        loadComponent: () =>
-          import('../pages/docs/dock/demos/magnification-scale-dock-demo').then(
-            (m) => m.MagnificationScaleDockDemo,
-          ),
-      },
-    ],
-  },
-  {
-    path: 'demos/dock-next',
-    children: [
-      {
-        path: 'apps-dock-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/dock-next/demos/apps-dock-next-demo').then(
-            (m) => m.AppsDockNextDemo,
-          ),
-      },
-      {
-        path: 'navigation-dock-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/dock-next/demos/navigation-dock-next-demo').then(
-            (m) => m.NavigationDockNextDemo,
-          ),
-      },
-      {
-        path: 'vertical-dock-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/dock-next/demos/vertical-dock-next-demo').then(
-            (m) => m.VerticalDockNextDemo,
-          ),
-      },
-      {
-        path: 'plain-dock-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/dock-next/demos/plain-dock-next-demo').then(
-            (m) => m.PlainDockNextDemo,
+          import('../pages/docs/dock/demos/plain-dock-demo').then(
+            (m) => m.PlainDockDemo,
           ),
       },
     ],

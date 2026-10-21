@@ -1,9 +1,11 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
+/** A count on an item's corner ("3"). Read as part of the item's name: add words if needed ("3 unread"). */
 @Directive({
-  selector: 'span[scDockBadge]',
+  selector: '[scDockBadge]',
   host: {
+    'data-slot': 'dock-badge',
     '[class]': 'class()',
   },
 })
@@ -12,12 +14,7 @@ export class ScDockBadge {
 
   protected readonly class = computed(() =>
     cn(
-      'absolute -top-1 -end-1',
-      'min-w-[18px] h-[18px] px-1',
-      'flex items-center justify-center',
-      'text-[10px] font-medium',
-      'bg-destructive text-destructive-foreground',
-      'rounded-full',
+      'bg-destructive absolute -end-1 -top-1 grid h-5 min-w-5 place-items-center rounded-full px-1 text-[0.625rem] font-semibold text-white tabular-nums',
       this.classInput(),
     ),
   );

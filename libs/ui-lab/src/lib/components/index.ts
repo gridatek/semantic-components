@@ -8,7 +8,6 @@ export * from './countdown';
 export * from './date-range-picker';
 export * from './diff-viewer';
 export * from './dock';
-export * from './dock-next';
 export * from './emoji-picker';
 export * from './image-annotator';
 export * from './image-cropper';

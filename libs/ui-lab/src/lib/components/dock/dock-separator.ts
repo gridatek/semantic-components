@@ -1,10 +1,10 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { ScDockNext } from './dock-next';
+import { ScDock } from './dock';
 
 /** Between groups of items. */
 @Directive({
-  selector: '[scDockNextSeparator]',
+  selector: '[scDockSeparator]',
   host: {
     'data-slot': 'dock-separator',
     role: 'separator',
@@ -12,8 +12,8 @@ import { ScDockNext } from './dock-next';
     '[class]': 'class()',
   },
 })
-export class ScDockNextSeparator {
-  private readonly dock = inject(ScDockNext);
+export class ScDockSeparator {
+  private readonly dock = inject(ScDock);
 
   readonly classInput = input<string>('', { alias: 'class' });
 

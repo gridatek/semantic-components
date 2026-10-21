@@ -1,11 +1,10 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScDockNext,
-  ScDockNextBadge,
-  ScDockNextIndicator,
-  ScDockNextItem,
-  ScDockNextLabel,
-  ScDockNextSeparator,
+  ScDock,
+  ScDockBadge,
+  ScDockIndicator,
+  ScDockItem,
+  ScDockLabel,
 } from '@semantic-components/ui-lab';
 import {
   SiCompassIcon,
@@ -14,34 +13,31 @@ import {
   SiMailIcon,
   SiMusicIcon,
   SiTerminalIcon,
-  SiTrash2Icon,
 } from '@semantic-icons/lucide-icons';
 
-/** A launcher: the items near the pointer grow, their neighbours move aside. Dots for open apps, a count on Mail, a separator before the bin. From the keyboard, Tab: the focused item grows and shows its name. */
+/** On a side: items grow outward, their labels beside them. */
 @Component({
-  selector: 'app-apps-dock-next-demo',
+  selector: 'app-vertical-dock-demo',
   imports: [
-    ScDockNext,
-    ScDockNextItem,
-    ScDockNextLabel,
-    ScDockNextBadge,
-    ScDockNextIndicator,
-    ScDockNextSeparator,
+    ScDock,
+    ScDockItem,
+    ScDockLabel,
+    ScDockBadge,
+    ScDockIndicator,
     SiFolderIcon,
     SiCompassIcon,
     SiMailIcon,
     SiImageIcon,
     SiMusicIcon,
     SiTerminalIcon,
-    SiTrash2Icon,
   ],
   template: `
     <div
-      class="flex h-48 w-full items-end justify-center rounded-lg border bg-gradient-to-b from-sky-100 to-indigo-200 p-4 dark:from-sky-950 dark:to-indigo-950"
+      class="flex h-[28rem] w-full items-center rounded-lg border bg-gradient-to-r from-emerald-100 to-teal-200 p-4 dark:from-emerald-950 dark:to-teal-950"
     >
-      <div scDockNext role="toolbar" aria-label="Apps">
+      <div scDock orientation="vertical" role="toolbar" aria-label="Apps">
         @for (app of apps; track app.name) {
-          <button scDockNextItem (click)="launched.set(app.name)">
+          <button scDockItem (click)="launched.set(app.name)">
             @switch (app.icon) {
               @case ('folder') {
                 <svg siFolderIcon></svg>
@@ -62,22 +58,17 @@ import {
                 <svg siTerminalIcon></svg>
               }
             }
-            <span scDockNextLabel>{{ app.name }}</span>
+            <span scDockLabel>{{ app.name }}</span>
             @if (app.badge) {
-              <span scDockNextBadge
+              <span scDockBadge
                 >{{ app.badge }}<span class="sr-only"> unread</span></span
               >
             }
             @if (app.open) {
-              <span scDockNextIndicator></span>
+              <span scDockIndicator></span>
             }
           </button>
         }
-        <div scDockNextSeparator></div>
-        <button scDockNextItem (click)="launched.set('Bin')">
-          <svg siTrash2Icon></svg>
-          <span scDockNextLabel>Bin</span>
-        </button>
       </div>
     </div>
     <p class="text-muted-foreground text-sm" aria-live="polite">
@@ -87,7 +78,7 @@ import {
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class AppsDockNextDemo {
+export class VerticalDockDemo {
   readonly apps = [
     { name: 'Finder', icon: 'folder', open: true },
     { name: 'Safari', icon: 'compass', open: true },

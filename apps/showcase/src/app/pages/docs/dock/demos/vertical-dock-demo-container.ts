@@ -1,10 +1,30 @@
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { VerticalDockDemo } from './vertical-dock-demo';
+
+@Component({
+  selector: 'app-vertical-dock-demo-container',
+  imports: [DemoContainer, VerticalDockDemo],
+  template: `
+    <app-demo-container
+      title="Vertical"
+      [code]="code"
+      demoUrl="/demos/dock/vertical-dock-demo"
+    >
+      <app-vertical-dock-demo />
+    </app-demo-container>
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class VerticalDockDemoContainer {
+  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScDockNext,
-  ScDockNextBadge,
-  ScDockNextIndicator,
-  ScDockNextItem,
-  ScDockNextLabel,
+  ScDock,
+  ScDockBadge,
+  ScDockIndicator,
+  ScDockItem,
+  ScDockLabel,
 } from '@semantic-components/ui-lab';
 import {
   SiCompassIcon,
@@ -17,13 +37,13 @@ import {
 
 /** On a side: items grow outward, their labels beside them. */
 @Component({
-  selector: 'app-vertical-dock-next-demo',
+  selector: 'app-vertical-dock-demo',
   imports: [
-    ScDockNext,
-    ScDockNextItem,
-    ScDockNextLabel,
-    ScDockNextBadge,
-    ScDockNextIndicator,
+    ScDock,
+    ScDockItem,
+    ScDockLabel,
+    ScDockBadge,
+    ScDockIndicator,
     SiFolderIcon,
     SiCompassIcon,
     SiMailIcon,
@@ -31,13 +51,13 @@ import {
     SiMusicIcon,
     SiTerminalIcon,
   ],
-  template: `
+  template: \`
     <div
       class="flex h-[28rem] w-full items-center rounded-lg border bg-gradient-to-r from-emerald-100 to-teal-200 p-4 dark:from-emerald-950 dark:to-teal-950"
     >
-      <div scDockNext orientation="vertical" role="toolbar" aria-label="Apps">
+      <div scDock orientation="vertical" role="toolbar" aria-label="Apps">
         @for (app of apps; track app.name) {
-          <button scDockNextItem (click)="launched.set(app.name)">
+          <button scDockItem (click)="launched.set(app.name)">
             @switch (app.icon) {
               @case ('folder') {
                 <svg siFolderIcon></svg>
@@ -58,14 +78,14 @@ import {
                 <svg siTerminalIcon></svg>
               }
             }
-            <span scDockNextLabel>{{ app.name }}</span>
+            <span scDockLabel>{{ app.name }}</span>
             @if (app.badge) {
-              <span scDockNextBadge
+              <span scDockBadge
                 >{{ app.badge }}<span class="sr-only"> unread</span></span
               >
             }
             @if (app.open) {
-              <span scDockNextIndicator></span>
+              <span scDockIndicator></span>
             }
           </button>
         }
@@ -74,11 +94,11 @@ import {
     <p class="text-muted-foreground text-sm" aria-live="polite">
       {{ launched() ? launched() + ' opened.' : 'Nothing opened yet.' }}
     </p>
-  `,
+  \`,
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class VerticalDockNextDemo {
+export class VerticalDockDemo {
   readonly apps = [
     { name: 'Finder', icon: 'folder', open: true },
     { name: 'Safari', icon: 'compass', open: true },
@@ -88,4 +108,5 @@ export class VerticalDockNextDemo {
     { name: 'Terminal', icon: 'terminal', open: false },
   ];
   readonly launched = signal('');
+}`;
 }

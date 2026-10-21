@@ -1,11 +1,6 @@
 export { ScDock } from './dock';
-export { ScDockItems } from './dock-items';
-export { ScDockItem } from './dock-item';
 export { ScDockBadge } from './dock-badge';
-export type {
-  ScDockItemData,
-  ScDockOptions,
-  ScDockPosition,
-  ScDockSize,
-} from './dock-types';
-export { DEFAULT_DOCK_OPTIONS } from './dock-types';
+export { ScDockIndicator } from './dock-indicator';
+export { ScDockItem } from './dock-item';
+export { ScDockLabel } from './dock-label';
+export { ScDockSeparator } from './dock-separator';

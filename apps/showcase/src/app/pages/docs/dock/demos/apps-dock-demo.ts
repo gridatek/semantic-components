@@ -1,31 +1,11 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { AppsDockNextDemo } from './apps-dock-next-demo';
-
-@Component({
-  selector: 'app-apps-dock-next-demo-container',
-  imports: [DemoContainer, AppsDockNextDemo],
-  template: `
-    <app-demo-container
-      title="Apps"
-      [code]="code"
-      demoUrl="/demos/dock-next/apps-dock-next-demo"
-    >
-      <app-apps-dock-next-demo />
-    </app-demo-container>
-  `,
-  host: { class: 'block w-full' },
-  encapsulation: ViewEncapsulation.None,
-})
-export class AppsDockNextDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScDockNext,
-  ScDockNextBadge,
-  ScDockNextIndicator,
-  ScDockNextItem,
-  ScDockNextLabel,
-  ScDockNextSeparator,
+  ScDock,
+  ScDockBadge,
+  ScDockIndicator,
+  ScDockItem,
+  ScDockLabel,
+  ScDockSeparator,
 } from '@semantic-components/ui-lab';
 import {
   SiCompassIcon,
@@ -39,14 +19,14 @@ import {
 
 /** A launcher: the items near the pointer grow, their neighbours move aside. Dots for open apps, a count on Mail, a separator before the bin. From the keyboard, Tab: the focused item grows and shows its name. */
 @Component({
-  selector: 'app-apps-dock-next-demo',
+  selector: 'app-apps-dock-demo',
   imports: [
-    ScDockNext,
-    ScDockNextItem,
-    ScDockNextLabel,
-    ScDockNextBadge,
-    ScDockNextIndicator,
-    ScDockNextSeparator,
+    ScDock,
+    ScDockItem,
+    ScDockLabel,
+    ScDockBadge,
+    ScDockIndicator,
+    ScDockSeparator,
     SiFolderIcon,
     SiCompassIcon,
     SiMailIcon,
@@ -55,13 +35,13 @@ import {
     SiTerminalIcon,
     SiTrash2Icon,
   ],
-  template: \`
+  template: `
     <div
       class="flex h-48 w-full items-end justify-center rounded-lg border bg-gradient-to-b from-sky-100 to-indigo-200 p-4 dark:from-sky-950 dark:to-indigo-950"
     >
-      <div scDockNext role="toolbar" aria-label="Apps">
+      <div scDock role="toolbar" aria-label="Apps">
         @for (app of apps; track app.name) {
-          <button scDockNextItem (click)="launched.set(app.name)">
+          <button scDockItem (click)="launched.set(app.name)">
             @switch (app.icon) {
               @case ('folder') {
                 <svg siFolderIcon></svg>
@@ -82,32 +62,32 @@ import {
                 <svg siTerminalIcon></svg>
               }
             }
-            <span scDockNextLabel>{{ app.name }}</span>
+            <span scDockLabel>{{ app.name }}</span>
             @if (app.badge) {
-              <span scDockNextBadge
+              <span scDockBadge
                 >{{ app.badge }}<span class="sr-only"> unread</span></span
               >
             }
             @if (app.open) {
-              <span scDockNextIndicator></span>
+              <span scDockIndicator></span>
             }
           </button>
         }
-        <div scDockNextSeparator></div>
-        <button scDockNextItem (click)="launched.set('Bin')">
+        <div scDockSeparator></div>
+        <button scDockItem (click)="launched.set('Bin')">
           <svg siTrash2Icon></svg>
-          <span scDockNextLabel>Bin</span>
+          <span scDockLabel>Bin</span>
         </button>
       </div>
     </div>
     <p class="text-muted-foreground text-sm" aria-live="polite">
       {{ launched() ? launched() + ' opened.' : 'Nothing opened yet.' }}
     </p>
-  \`,
+  `,
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class AppsDockNextDemo {
+export class AppsDockDemo {
   readonly apps = [
     { name: 'Finder', icon: 'folder', open: true },
     { name: 'Safari', icon: 'compass', open: true },
@@ -117,5 +97,4 @@ export class AppsDockNextDemo {
     { name: 'Terminal', icon: 'terminal', open: false },
   ];
   readonly launched = signal('');
-}`;
 }

@@ -1,18 +1,18 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { ScDockNext } from './dock-next';
+import { ScDock } from './dock';
 
 /** The dot by an item: open, or the current page. Decorative — say it in words if it matters. */
 @Directive({
-  selector: '[scDockNextIndicator]',
+  selector: '[scDockIndicator]',
   host: {
     'data-slot': 'dock-indicator',
     'aria-hidden': 'true',
     '[class]': 'class()',
   },
 })
-export class ScDockNextIndicator {
-  private readonly dock = inject(ScDockNext);
+export class ScDockIndicator {
+  private readonly dock = inject(ScDock);
 
   readonly classInput = input<string>('', { alias: 'class' });
 

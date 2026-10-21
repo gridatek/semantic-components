@@ -1,10 +1,30 @@
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { PlainDockDemo } from './plain-dock-demo';
+
+@Component({
+  selector: 'app-plain-dock-demo-container',
+  imports: [DemoContainer, PlainDockDemo],
+  template: `
+    <app-demo-container
+      title="Plain"
+      [code]="code"
+      demoUrl="/demos/dock/plain-dock-demo"
+    >
+      <app-plain-dock-demo />
+    </app-demo-container>
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class PlainDockDemoContainer {
+  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScDockNext,
-  ScDockNextBadge,
-  ScDockNextIndicator,
-  ScDockNextItem,
-  ScDockNextLabel,
+  ScDock,
+  ScDockBadge,
+  ScDockIndicator,
+  ScDockItem,
+  ScDockLabel,
 } from '@semantic-components/ui-lab';
 import {
   SiCompassIcon,
@@ -17,13 +37,13 @@ import {
 
 /** Without magnification: magnification set to 1. Under reduced motion, the dock is always so. */
 @Component({
-  selector: 'app-plain-dock-next-demo',
+  selector: 'app-plain-dock-demo',
   imports: [
-    ScDockNext,
-    ScDockNextItem,
-    ScDockNextLabel,
-    ScDockNextBadge,
-    ScDockNextIndicator,
+    ScDock,
+    ScDockItem,
+    ScDockLabel,
+    ScDockBadge,
+    ScDockIndicator,
     SiFolderIcon,
     SiCompassIcon,
     SiMailIcon,
@@ -31,10 +51,10 @@ import {
     SiMusicIcon,
     SiTerminalIcon,
   ],
-  template: `
-    <div scDockNext [magnification]="1" role="toolbar" aria-label="Apps">
+  template: \`
+    <div scDock [magnification]="1" role="toolbar" aria-label="Apps">
       @for (app of apps; track app.name) {
-        <button scDockNextItem (click)="launched.set(app.name)">
+        <button scDockItem (click)="launched.set(app.name)">
           @switch (app.icon) {
             @case ('folder') {
               <svg siFolderIcon></svg>
@@ -55,14 +75,14 @@ import {
               <svg siTerminalIcon></svg>
             }
           }
-          <span scDockNextLabel>{{ app.name }}</span>
+          <span scDockLabel>{{ app.name }}</span>
           @if (app.badge) {
-            <span scDockNextBadge
+            <span scDockBadge
               >{{ app.badge }}<span class="sr-only"> unread</span></span
             >
           }
           @if (app.open) {
-            <span scDockNextIndicator></span>
+            <span scDockIndicator></span>
           }
         </button>
       }
@@ -70,11 +90,11 @@ import {
     <p class="text-muted-foreground text-sm" aria-live="polite">
       {{ launched() ? launched() + ' opened.' : 'Nothing opened yet.' }}
     </p>
-  `,
+  \`,
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class PlainDockNextDemo {
+export class PlainDockDemo {
   readonly apps = [
     { name: 'Finder', icon: 'folder', open: true },
     { name: 'Safari', icon: 'compass', open: true },
@@ -84,4 +104,5 @@ export class PlainDockNextDemo {
     { name: 'Terminal', icon: 'terminal', open: false },
   ];
   readonly launched = signal('');
+}`;
 }

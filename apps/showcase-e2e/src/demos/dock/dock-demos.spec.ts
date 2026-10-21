@@ -1,6 +1,6 @@
 import { type Locator, type Page, expect, test } from '@playwright/test';
 
-const demo = (name: string) => `/demos/dock-next/${name}-dock-next-demo`;
+const demo = (name: string) => `/demos/dock/${name}-dock-demo`;
 const widths = (page: Page) =>
   page
     .locator('[data-slot="dock-item"]')

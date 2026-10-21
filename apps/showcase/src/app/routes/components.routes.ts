@@ -231,11 +231,6 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/dock/dock-page'),
       },
       {
-        path: 'dock-next',
-        title: 'Dock Next - Semantic Components',
-        loadComponent: () => import('../pages/docs/dock-next/dock-next-page'),
-      },
-      {
         path: 'drawer',
         title: 'Drawer - Semantic Components',
         loadComponent: () => import('../pages/docs/drawer/drawer-page'),

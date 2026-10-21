@@ -1,203 +1,51 @@
 # Dock
 
-A macOS-style icon dock with magnification effect on hover, perfect for application launchers or navigation.
+Your links and buttons in a bar, magnified by their distance to the pointer — and when focused — with labels, counts, dots and separators.
 
-## Composable Architecture
+## Architecture
 
-The dock component follows a composable architecture pattern, where functionality is split across multiple components that work together through dependency injection.
-
-### Components
-
-- **ScDock**: Root directive that manages dock state (hover effects, magnification)
-- **ScDockItems**: Wrapper component for dock items
-- **ScDockItem**: Individual dock item button
-- **ScDockBadge**: Optional badge indicator for items
-
-### State Management
-
-The `ScDock` directive provides state through an `InjectionToken`:
-
-- Manages hover state for magnification effects
-- Handles item registration and indexing
-- Computes transformations for magnification
-- Emits click events
-
-Child components inject `SC_DOCK` to access parent state and methods.
-
-## Installation
-
-```typescript
-import { ScDock, ScDockBadge, ScDockItem, ScDockItems } from '@/ui/dock';
-import type { ScDockItemData, ScDockPosition, ScDockSize } from '@/ui/dock';
+```
+[scDock] (orientation; magnification — 1.6, 1 off; distance — 140 px)
+├── a | button [scDockItem] — yours: href, routerLink, (click); grows near the pointer, and focused
+│   ├── your icon
+│   ├── [scDockLabel]     — its name, shown beside it on hover and focus
+│   ├── [scDockBadge]     — a count, in its corner
+│   └── [scDockIndicator] — the dot: open, current
+└── [scDockSeparator]     — between groups
 ```
 
 ## Usage
 
-### Basic Usage
-
 ```html
-<nav scDock aria-label="Application dock" (itemClick)="onItemClick($event)">
-  <div scDockItems>
-    @for (item of items; track item.id) {
-    <button scDockItem [item]="item"></button>
-    }
-  </div>
+<nav scDock aria-label="Sections">
+  <a scDockItem routerLink="/inbox" ariaCurrentWhenActive="page">
+    <svg siInboxIcon></svg>
+    <span scDockLabel>Inbox</span>
+    <span scDockBadge>3<span class="sr-only"> unread</span></span>
+  </a>
+  <div scDockSeparator></div>
+  <button scDockItem (click)="trash()">
+    <svg siTrash2Icon></svg>
+    <span scDockLabel>Bin</span>
+  </button>
 </nav>
 ```
 
-```typescript
-items: ScDockItemData[] = [
-  { id: 'home', label: 'Home', icon: '<svg>...</svg>' },
-  { id: 'mail', label: 'Mail', icon: '<svg>...</svg>' },
-  { id: 'settings', label: 'Settings', icon: '<svg>...</svg>' },
-];
+Place the dock yourself (`fixed bottom-4 left-1/2 -translate-x-1/2`…).
 
-onItemClick(item: ScDockItemData): void {
-  console.log('Clicked:', item.label);
-}
-```
+## Magnification
 
-### With Badges
+Each item grows by its distance to the pointer along the dock — a smooth bell, `magnification` times at the pointer, none past `distance` — and really grows: its neighbours move aside, the dock grows from its base edge (`items-end`; vertical: `items-start`). Items are measured at rest, before any grows, so nothing shifts under the pointer. Focused from the keyboard, an item grows as if the pointer were on it. Touch does not magnify; nor does `prefers-reduced-motion`.
 
-```html
-<nav scDock aria-label="Application dock">
-  <div scDockItems>
-    @for (item of items; track item.id) {
-    <button scDockItem [item]="item">
-      @if (item.badge !== undefined) {
-      <span scDockBadge>{{ item.badge }}</span>
-      }
-    </button>
-    }
-  </div>
-</nav>
-```
+The items' size is `--dock-item` (`2.75rem`); set it with a class (`[--dock-item:3.5rem]`). Icons take half of an item.
 
-```typescript
-items: ScDockItemData[] = [
-  { id: 'mail', label: 'Mail', icon: '...', badge: 5 },
-  { id: 'notifications', label: 'Notifications', icon: '...', badge: '!' },
-];
-```
+## Accessibility
 
-### Without Magnification
+- Put it on a `nav` (named) for links, or `role="toolbar"` (named) for actions. Items are reached with Tab, as anywhere.
+- The label is inside the item: its name, read once — shown beside it on hover and focus.
+- A count is part of the name ("Mail 3"): add words if they help (`<span class="sr-only"> unread</span>`).
+- The dot is decorative: mark the current link with `aria-current`.
 
-```html
-<nav scDock aria-label="Application dock" [magnification]="false">
-  <div scDockItems>
-    @for (item of items; track item.id) {
-    <button scDockItem [item]="item"></button>
-    }
-  </div>
-</nav>
-```
+## Not here
 
-### Custom Magnification Scale
-
-```html
-<nav scDock aria-label="Application dock" [magnificationScale]="2">
-  <div scDockItems>
-    @for (item of items; track item.id) {
-    <button scDockItem [item]="item"></button>
-    }
-  </div>
-</nav>
-```
-
-### Size Variants
-
-```html
-<nav scDock aria-label="Application dock" size="sm">
-  <div scDockItems>
-    @for (item of items; track item.id) {
-    <button scDockItem [item]="item"></button>
-    }
-  </div>
-</nav>
-```
-
-## API Reference
-
-### ScDock (Directive)
-
-**Selector**: `[scDock]`
-
-#### Inputs
-
-| Input                | Type                            | Default    | Description             |
-| -------------------- | ------------------------------- | ---------- | ----------------------- |
-| `position`           | `'bottom' \| 'left' \| 'right'` | `'bottom'` | Dock position           |
-| `size`               | `'sm' \| 'md' \| 'lg'`          | `'md'`     | Icon size               |
-| `magnification`      | `boolean`                       | `true`     | Enable magnification    |
-| `magnificationScale` | `number`                        | `1.5`      | Max magnification scale |
-
-#### Outputs
-
-| Output      | Type             | Description                  |
-| ----------- | ---------------- | ---------------------------- |
-| `itemClick` | `ScDockItemData` | Emitted when item is clicked |
-
-### ScDockItems (Component)
-
-**Selector**: `div[scDockItems]`
-
-Container for dock items. Automatically styled based on parent dock configuration.
-
-#### Inputs
-
-| Input   | Type     | Default | Description            |
-| ------- | -------- | ------- | ---------------------- |
-| `class` | `string` | `''`    | Additional CSS classes |
-
-### ScDockItem (Component)
-
-**Selector**: `button[scDockItem]`
-
-Individual dock item button.
-
-#### Inputs
-
-| Input   | Type             | Default | Description            |
-| ------- | ---------------- | ------- | ---------------------- |
-| `item`  | `ScDockItemData` | -       | Required. Item data    |
-| `class` | `string`         | `''`    | Additional CSS classes |
-
-### ScDockBadge (Component)
-
-**Selector**: `span[scDockBadge]`
-
-Badge indicator for dock items.
-
-#### Inputs
-
-| Input   | Type     | Default | Description            |
-| ------- | -------- | ------- | ---------------------- |
-| `class` | `string` | `''`    | Additional CSS classes |
-
-## Type Definitions
-
-```typescript
-interface ScDockItemData {
-  id: string;
-  label: string;
-  icon: string;
-  href?: string;
-  badge?: number | string;
-  disabled?: boolean;
-}
-
-type ScDockPosition = 'bottom' | 'left' | 'right';
-type ScDockSize = 'sm' | 'md' | 'lg';
-```
-
-## Features
-
-- macOS-style magnification effect on hover
-- Smooth scale transitions
-- Badge support for notifications
-- Multiple size variants
-- Disabled state support
-- Glassmorphism styling
-- Keyboard accessible
-- Touch-friendly
-- Customizable magnification scale
+The launch bounce, dragging to reorder, a collapsed menu on small screens.

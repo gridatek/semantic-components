@@ -1,17 +1,17 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { ScDockNext } from './dock-next';
+import { ScDock } from './dock';
 
 /** An item's label — inside it, so its name — shown beside it on hover and focus, as a chip. */
 @Directive({
-  selector: '[scDockNextLabel]',
+  selector: '[scDockLabel]',
   host: {
     'data-slot': 'dock-label',
     '[class]': 'class()',
   },
 })
-export class ScDockNextLabel {
-  private readonly dock = inject(ScDockNext);
+export class ScDockLabel {
+  private readonly dock = inject(ScDock);
 
   readonly classInput = input<string>('', { alias: 'class' });
 

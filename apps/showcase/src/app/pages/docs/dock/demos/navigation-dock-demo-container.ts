@@ -1,9 +1,29 @@
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { NavigationDockDemo } from './navigation-dock-demo';
+
+@Component({
+  selector: 'app-navigation-dock-demo-container',
+  imports: [DemoContainer, NavigationDockDemo],
+  template: `
+    <app-demo-container
+      title="Navigation"
+      [code]="code"
+      demoUrl="/demos/dock/navigation-dock-demo"
+    >
+      <app-navigation-dock-demo />
+    </app-demo-container>
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class NavigationDockDemoContainer {
+  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScDockNext,
-  ScDockNextIndicator,
-  ScDockNextItem,
-  ScDockNextLabel,
+  ScDock,
+  ScDockIndicator,
+  ScDockItem,
+  ScDockLabel,
 } from '@semantic-components/ui-lab';
 import {
   SiCalendarIcon,
@@ -14,22 +34,22 @@ import {
 
 /** Links in a nav: the current page marked (aria-current), its dot shown. */
 @Component({
-  selector: 'app-navigation-dock-next-demo',
+  selector: 'app-navigation-dock-demo',
   imports: [
-    ScDockNext,
-    ScDockNextItem,
-    ScDockNextLabel,
-    ScDockNextIndicator,
+    ScDock,
+    ScDockItem,
+    ScDockLabel,
+    ScDockIndicator,
     SiHouseIcon,
     SiInboxIcon,
     SiCalendarIcon,
     SiSettingsIcon,
   ],
-  template: `
-    <nav scDockNext aria-label="Sections">
+  template: \`
+    <nav scDock aria-label="Sections">
       @for (page of pages; track page.id) {
         <a
-          scDockNextItem
+          scDockItem
           [href]="'#' + page.id"
           [attr.aria-current]="page.id === current() ? 'page' : null"
           (click)="go($event, page.id)"
@@ -48,19 +68,19 @@ import {
               <svg siSettingsIcon></svg>
             }
           }
-          <span scDockNextLabel>{{ page.name }}</span>
+          <span scDockLabel>{{ page.name }}</span>
           @if (page.id === current()) {
-            <span scDockNextIndicator></span>
+            <span scDockIndicator></span>
           }
         </a>
       }
     </nav>
     <p class="text-muted-foreground text-sm">Current: {{ current() }}</p>
-  `,
+  \`,
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class NavigationDockNextDemo {
+export class NavigationDockDemo {
   readonly pages = [
     { id: 'home', name: 'Home' },
     { id: 'inbox', name: 'Inbox' },
@@ -73,4 +93,5 @@ export class NavigationDockNextDemo {
     event.preventDefault();
     this.current.set(id);
   }
+}`;
 }

@@ -1,53 +1,79 @@
-import { Directive, computed, inject, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
-import { SC_DOCK } from './dock';
-import type { ScDockItemData } from './dock-types';
+import {
+  DestroyRef,
+  Directive,
+  ElementRef,
+  computed,
+  inject,
+  input,
+  signal,
+} from '@angular/core';
+import { cn, ɵwarnIfUnnamed } from '@semantic-components/ui';
+import { ScDock } from './dock';
 
+/**
+ * An item: your `a` (`routerLink`, `href`) or `button`, with your icon and
+ * its `scDockLabel` — its name. It grows near the pointer, and when
+ * focused from the keyboard.
+ */
 @Directive({
-  selector: 'button[scDockItem]',
+  selector: 'a[scDockItem], button[scDockItem]',
   host: {
-    type: 'button',
+    'data-slot': 'dock-item',
+    '[style.width]': 'size()',
+    '[style.height]': 'size()',
     '[class]': 'class()',
-    '[style.transform]': 'transform()',
-    '[disabled]': 'item().disabled',
-    '[attr.aria-label]': 'item().label',
-    '[title]': 'item().label',
-    '(click)': 'onClick()',
-    '(mouseenter)': 'onMouseEnter()',
+    '(focusin)': 'onFocus()',
+    '(focusout)': 'onBlur()',
   },
 })
 export class ScDockItem {
-  readonly dock = inject(SC_DOCK);
-  readonly item = input.required<ScDockItemData>();
+  protected readonly dock = inject(ScDock);
+  private readonly element =
+    inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
+
   readonly classInput = input<string>('', { alias: 'class' });
 
-  private readonly itemIndex = this.dock.registerItem();
+  /** Its centre along the dock, at rest. */
+  private readonly center = signal<number | null>(null);
 
-  protected readonly class = computed(() => {
-    const size = this.dock.size();
-
-    return cn(
-      'relative flex items-center justify-center',
-      'rounded-xl transition-all duration-150 ease-out',
-      'bg-muted/50 hover:bg-muted',
-      'focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
-      'disabled:opacity-50 disabled:cursor-not-allowed',
-      size === 'sm' && 'w-10 h-10 p-2',
-      size === 'md' && 'w-12 h-12 p-2.5',
-      size === 'lg' && 'w-14 h-14 p-3',
-      this.classInput(),
-    );
-  });
-
-  protected readonly transform = computed(() =>
-    this.dock.getItemTransform(this.itemIndex),
+  protected readonly size = computed(
+    () => `calc(var(--dock-item) * ${this.dock.ɵscale(this.center())})`,
   );
 
-  protected onClick(): void {
-    this.dock.onItemClick(this.item());
+  protected readonly class = computed(() =>
+    cn(
+      'group/dock-item bg-muted/60 hover:bg-muted relative grid shrink-0 place-items-center rounded-xl outline-none',
+      'transition-[width,height,background-color] duration-150 ease-out motion-reduce:transition-none',
+      'focus-visible:ring-3 focus-visible:ring-ring/50',
+      'aria-disabled:pointer-events-none aria-disabled:opacity-50 disabled:pointer-events-none disabled:opacity-50',
+      '[&_svg:not([class*=size-])]:size-1/2',
+      this.classInput(),
+    ),
+  );
+
+  constructor() {
+    ɵwarnIfUnnamed('scDockItem');
+    const unregister = this.dock.ɵregister(this);
+    inject(DestroyRef).onDestroy(unregister);
   }
 
-  protected onMouseEnter(): void {
-    this.dock.onMouseEnter(this.itemIndex);
+  /** Where it rests: measured by the dock before anything grows. */
+  ɵmeasure(): void {
+    const rect = this.element.getBoundingClientRect();
+    this.center.set(
+      this.dock.ɵalong(rect.left + rect.width / 2, rect.top + rect.height / 2),
+    );
+  }
+
+  protected onBlur(): void {
+    this.dock.ɵfocusAt.set(null);
+  }
+
+  protected onFocus(): void {
+    // From the keyboard only: a click is the pointer's.
+    if (!this.element.matches(':focus-visible')) return;
+    // Measured once at rest: moving on from a grown item, the places hold.
+    if (this.center() === null) this.dock.ɵmeasure();
+    this.dock.ɵfocusAt.set(this.center());
   }
 }
