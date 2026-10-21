@@ -5,11 +5,11 @@ import {
   cn,
   ɵwarnIfUnnamed,
 } from '@semantic-components/ui';
-import { ScCountdownNext } from './countdown-next';
+import { ScCountdown } from './countdown';
 
 /** A timer, back to its full time. Write its icon and name it ("Reset"). */
 @Directive({
-  selector: 'button[scCountdownNextReset]',
+  selector: 'button[scCountdownReset]',
   host: {
     type: 'button',
     'data-slot': 'countdown-reset',
@@ -17,8 +17,8 @@ import { ScCountdownNext } from './countdown-next';
     '(click)': 'countdown.reset()',
   },
 })
-export class ScCountdownNextReset {
-  protected readonly countdown = inject(ScCountdownNext);
+export class ScCountdownReset {
+  protected readonly countdown = inject(ScCountdown);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('outline');
@@ -32,6 +32,6 @@ export class ScCountdownNextReset {
   );
 
   constructor() {
-    ɵwarnIfUnnamed('scCountdownNextReset');
+    ɵwarnIfUnnamed('scCountdownReset');
   }
 }

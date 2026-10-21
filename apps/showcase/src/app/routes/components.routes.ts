@@ -198,12 +198,6 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/countdown/countdown-page'),
       },
       {
-        path: 'countdown-next',
-        title: 'Countdown Next - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/countdown-next/countdown-next-page'),
-      },
-      {
         path: 'data-table',
         title: 'Data Table - Semantic Components',
         loadComponent: () => import('../pages/docs/data-table/data-table-page'),

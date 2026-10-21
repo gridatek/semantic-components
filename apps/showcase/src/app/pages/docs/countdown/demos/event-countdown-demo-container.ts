@@ -6,7 +6,11 @@ import { EventCountdownDemo } from './event-countdown-demo';
   selector: 'app-event-countdown-demo-container',
   imports: [DemoContainer, EventCountdownDemo],
   template: `
-    <app-demo-container title="Event" [code]="code">
+    <app-demo-container
+      title="Event"
+      [code]="code"
+      demoUrl="/demos/countdown/event-countdown-demo"
+    >
       <app-event-countdown-demo />
     </app-demo-container>
   `,
@@ -15,82 +19,54 @@ import { EventCountdownDemo } from './event-countdown-demo';
 })
 export class EventCountdownDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScCountdown } from '@semantic-components/ui-lab';
+import {
+  ScCountdown,
+  ScCountdownText,
+  ScCountdownUnit,
+} from '@semantic-components/ui-lab';
 
+/** To a moment: the days, hours, minutes and seconds left — each a unit, your labels. Screen readers hear it in words, in the app's language. */
 @Component({
   selector: 'app-event-countdown-demo',
-  imports: [ScCountdown],
+  imports: [ScCountdown, ScCountdownUnit, ScCountdownText],
   template: \`
-    <div
-      class="from-primary/10 to-primary/5 max-w-md rounded-lg border bg-linear-to-br p-8 text-center"
-    >
-      <h4 class="mb-2 text-lg font-semibold">Product Launch</h4>
-      <p class="text-muted-foreground mb-6">Get ready for something amazing!</p>
+    <div scCountdown [until]="launch" aria-label="Launch in" class="gap-3">
       <div
-        scCountdown
-        #cd="scCountdown"
-        [targetDate]="futureDate"
-        class="justify-center gap-3"
+        class="bg-card flex w-20 flex-col items-center rounded-lg border p-3 shadow-xs"
       >
-        @if (cd.time().days > 0) {
-          <div
-            class="bg-muted flex min-w-[70px] flex-col items-center rounded-lg p-3"
-          >
-            <span class="font-mono text-3xl font-bold tabular-nums">
-              {{ cd.padNumber(cd.time().days) }}
-            </span>
-            <span
-              class="text-muted-foreground text-xs tracking-wider uppercase"
-            >
-              DAYS
-            </span>
-          </div>
-          <span class="text-muted-foreground -mt-5 text-3xl font-bold">:</span>
-        }
-        <div
-          class="bg-muted flex min-w-[70px] flex-col items-center rounded-lg p-3"
-        >
-          <span class="font-mono text-3xl font-bold tabular-nums">
-            {{ cd.padNumber(cd.time().hours) }}
-          </span>
-          <span class="text-muted-foreground text-xs tracking-wider uppercase">
-            HRS
-          </span>
-        </div>
-        <span class="text-muted-foreground -mt-5 text-3xl font-bold">:</span>
-        <div
-          class="bg-muted flex min-w-[70px] flex-col items-center rounded-lg p-3"
-        >
-          <span class="font-mono text-3xl font-bold tabular-nums">
-            {{ cd.padNumber(cd.time().minutes) }}
-          </span>
-          <span class="text-muted-foreground text-xs tracking-wider uppercase">
-            MIN
-          </span>
-        </div>
-        <span class="text-muted-foreground -mt-5 text-3xl font-bold">:</span>
-        <div
-          class="bg-muted flex min-w-[70px] flex-col items-center rounded-lg p-3"
-        >
-          <span class="font-mono text-3xl font-bold tabular-nums">
-            {{ cd.padNumber(cd.time().seconds) }}
-          </span>
-          <span class="text-muted-foreground text-xs tracking-wider uppercase">
-            SEC
-          </span>
-        </div>
+        <span scCountdownUnit="days" class="text-3xl font-semibold"></span>
+        <span class="text-muted-foreground text-xs">Days</span>
       </div>
-      <button
-        class="bg-primary text-primary-foreground hover:bg-primary/90 mt-6 inline-flex h-10 items-center justify-center rounded-md px-6 text-sm font-medium"
+      <div
+        class="bg-card flex w-20 flex-col items-center rounded-lg border p-3 shadow-xs"
       >
-        Notify Me
-      </button>
+        <span scCountdownUnit="hours" class="text-3xl font-semibold"></span>
+        <span class="text-muted-foreground text-xs">Hours</span>
+      </div>
+      <div
+        class="bg-card flex w-20 flex-col items-center rounded-lg border p-3 shadow-xs"
+      >
+        <span scCountdownUnit="minutes" class="text-3xl font-semibold"></span>
+        <span class="text-muted-foreground text-xs">Minutes</span>
+      </div>
+      <div
+        class="bg-card flex w-20 flex-col items-center rounded-lg border p-3 shadow-xs"
+      >
+        <span scCountdownUnit="seconds" class="text-3xl font-semibold"></span>
+        <span class="text-muted-foreground text-xs">Seconds</span>
+      </div>
+      <span scCountdownText></span>
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
 export class EventCountdownDemo {
-  readonly futureDate = Temporal.Now.instant().add({ hours: 7 * 24 });
+  /** In 2 days, 3 hours, 4 minutes and 5 seconds from now. */
+  readonly launch = Temporal.Now.instant().add({
+    hours: 51,
+    minutes: 4,
+    seconds: 5,
+  });
 }`;
 }

@@ -1,139 +1,167 @@
+import { DOCUMENT } from '@angular/common';
 import {
   DestroyRef,
   Directive,
-  InjectionToken,
+  LOCALE_ID,
   computed,
   effect,
   inject,
   input,
+  model,
   output,
   signal,
+  untracked,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
-export interface ScCountdownTime {
-  days: number;
-  hours: number;
-  minutes: number;
-  seconds: number;
-  total: number;
+/** The time left, in whole units. */
+export interface ScCountdownLeft {
+  readonly days: number;
+  readonly hours: number;
+  readonly minutes: number;
+  readonly seconds: number;
 }
 
-export const SC_COUNTDOWN = new InjectionToken<ScCountdown>('SC_COUNTDOWN');
+const SECOND = 1000;
 
+/**
+ * Counts down — to a moment (`until`), or a timer (`duration`, which pauses,
+ * resumes and resets). A `timer`: name it ("Sale ends in"). Its time left,
+ * in parts: `scCountdownUnit`; in words, for screen readers:
+ * `scCountdownText`.
+ */
 @Directive({
   selector: '[scCountdown]',
   exportAs: 'scCountdown',
-  providers: [{ provide: SC_COUNTDOWN, useExisting: ScCountdown }],
   host: {
-    '[class]': 'class()',
+    'data-slot': 'countdown',
     role: 'timer',
-    '[attr.aria-label]': 'ariaLabel()',
+    '[attr.data-done]': 'done() || null',
+    '[attr.data-paused]': 'paused() || null',
+    '[class]': 'class()',
   },
 })
 export class ScCountdown {
-  private readonly destroyRef = inject(DestroyRef);
+  private readonly document = inject(DOCUMENT);
+  readonly ɵlocale = inject(LOCALE_ID);
 
   readonly classInput = input<string>('', { alias: 'class' });
+
+  /** The moment it counts down to. */
+  readonly until = input<Temporal.Instant>();
+  /** Or: a timer, this long. */
+  readonly duration = input<Temporal.Duration>();
+  /** A timer, paused. */
+  readonly paused = model(false);
+
+  /** Reached zero (once a run). */
+  readonly completed = output<void>();
+
+  /** The clock, as last read. */
+  private readonly now = signal(Temporal.Now.instant());
+  /** A timer's time run before its last start, and that start. */
+  private readonly ran = signal(0);
+  private readonly startedAt = signal<Temporal.Instant | null>(null);
+
+  /** What is left, in milliseconds. */
+  readonly remaining = computed(() => {
+    const until = this.until();
+    const now = this.now();
+    if (until)
+      return Math.max(0, until.epochMilliseconds - now.epochMilliseconds);
+    const total = this.total();
+    const startedAt = this.startedAt();
+    const running = startedAt
+      ? now.epochMilliseconds - startedAt.epochMilliseconds
+      : 0;
+    return Math.max(0, total - this.ran() - running);
+  });
+
+  /** The time left, in units — whole seconds, rounded up (10 s left shows 10). */
+  readonly left = computed<ScCountdownLeft>(() => {
+    let seconds = Math.ceil(this.remaining() / SECOND);
+    const days = Math.floor(seconds / 86400);
+    seconds -= days * 86400;
+    const hours = Math.floor(seconds / 3600);
+    seconds -= hours * 3600;
+    const minutes = Math.floor(seconds / 60);
+    return { days, hours, minutes, seconds: seconds - minutes * 60 };
+  });
+
+  readonly done = computed(() => this.remaining() <= 0);
+
+  /** A timer's share left, 1 → 0; a countdown to a moment has none. */
+  readonly progress = computed(() => {
+    const total = this.total();
+    return this.until() || !total ? null : this.remaining() / total;
+  });
+
   protected readonly class = computed(() =>
     cn('inline-flex items-center', this.classInput()),
   );
 
-  /** The instant it counts down to. */
-  readonly targetDate = input.required<Temporal.Instant>();
-  readonly autoStart = input<boolean>(true);
+  private readonly total = computed(
+    () => this.duration()?.total({ unit: 'milliseconds' }) ?? 0,
+  );
 
-  readonly tick = output<ScCountdownTime>();
-  readonly complete = output<void>();
-
-  readonly time = signal<ScCountdownTime>({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-    total: 0,
-  });
-
-  private intervalId: ReturnType<typeof setInterval> | null = null;
-  private isCompleteState = false;
+  private timeout: ReturnType<typeof setTimeout> | undefined;
 
   constructor() {
+    // A timer: started, paused.
     effect(() => {
-      if (this.autoStart()) {
-        this.start();
+      const paused = this.paused();
+      this.duration();
+      untracked(() => {
+        const now = Temporal.Now.instant();
+        const startedAt = this.startedAt();
+        if (paused && startedAt) {
+          this.ran.update(
+            (ran) => ran + now.epochMilliseconds - startedAt.epochMilliseconds,
+          );
+          this.startedAt.set(null);
+        } else if (!paused && !startedAt) {
+          this.startedAt.set(now);
+        }
+        this.tick();
+      });
+    });
+    // Reached zero: once a run.
+    let armed = false;
+    effect(() => {
+      const done = this.done();
+      if (!done) armed = true;
+      else if (armed) {
+        armed = false;
+        untracked(() => this.completed.emit());
       }
     });
-
-    this.destroyRef.onDestroy(() => {
-      this.stop();
+    // Back in view: right again at once.
+    const onVisible = () => this.tick();
+    this.document.addEventListener('visibilitychange', onVisible);
+    inject(DestroyRef).onDestroy(() => {
+      clearTimeout(this.timeout);
+      this.document.removeEventListener('visibilitychange', onVisible);
+    });
+    effect(() => {
+      this.until();
+      untracked(() => this.tick());
     });
   }
 
-  readonly ariaLabel = computed(() => {
-    const t = this.time();
-    const parts: string[] = [];
-    if (t.days > 0) parts.push(`${t.days} days`);
-    if (t.hours > 0) parts.push(`${t.hours} hours`);
-    if (t.minutes > 0) parts.push(`${t.minutes} minutes`);
-    parts.push(`${t.seconds} seconds`);
-    return `Time remaining: ${parts.join(', ')}`;
-  });
-
-  padNumber(n: number): string {
-    return n.toString().padStart(2, '0');
-  }
-
-  start(): void {
-    this.stop();
-    this.isCompleteState = false;
-    this.updateTime();
-    this.intervalId = setInterval(() => this.updateTime(), 1000);
-  }
-
-  stop(): void {
-    if (this.intervalId) {
-      clearInterval(this.intervalId);
-      this.intervalId = null;
-    }
-  }
-
+  /** A timer, back to its full time (and running, unless paused). */
   reset(): void {
-    this.isCompleteState = false;
-    this.updateTime();
+    this.ran.set(0);
+    this.startedAt.set(this.paused() ? null : Temporal.Now.instant());
+    this.tick();
   }
 
-  getTime(): ScCountdownTime {
-    return this.time();
-  }
-
-  isRunning(): boolean {
-    return this.intervalId !== null;
-  }
-
-  private calculateTime(): ScCountdownTime {
-    const total = Math.max(
-      0,
-      this.targetDate().epochMilliseconds -
-        Temporal.Now.instant().epochMilliseconds,
-    );
-
-    const seconds = Math.floor((total / 1000) % 60);
-    const minutes = Math.floor((total / 1000 / 60) % 60);
-    const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
-    const days = Math.floor(total / (1000 * 60 * 60 * 24));
-
-    return { days, hours, minutes, seconds, total };
-  }
-
-  private updateTime(): void {
-    const newTime = this.calculateTime();
-    this.time.set(newTime);
-    this.tick.emit(newTime);
-
-    if (newTime.total <= 0 && !this.isCompleteState) {
-      this.isCompleteState = true;
-      this.complete.emit();
-      this.stop();
-    }
+  /** Reads the clock; the next reading, on the next whole second left. */
+  private tick(): void {
+    clearTimeout(this.timeout);
+    this.now.set(Temporal.Now.instant());
+    const remaining = this.remaining();
+    const counting = this.until() || this.startedAt();
+    if (remaining <= 0 || !counting) return;
+    this.timeout = setTimeout(() => this.tick(), remaining % SECOND || SECOND);
   }
 }

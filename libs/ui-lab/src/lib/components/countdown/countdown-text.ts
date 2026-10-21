@@ -1,6 +1,6 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { ScCountdownNext } from './countdown-next';
+import { ScCountdown } from './countdown';
 
 /**
  * The time left in words, in the app's language ("2 days, 3 hours, 4
@@ -9,15 +9,15 @@ import { ScCountdownNext } from './countdown-next';
  * changes.
  */
 @Directive({
-  selector: '[scCountdownNextText]',
+  selector: '[scCountdownText]',
   host: {
     'data-slot': 'countdown-text',
     '[textContent]': 'text()',
     '[class]': 'class()',
   },
 })
-export class ScCountdownNextText {
-  private readonly countdown = inject(ScCountdownNext);
+export class ScCountdownText {
+  private readonly countdown = inject(ScCountdown);
 
   readonly classInput = input<string>('', { alias: 'class' });
 

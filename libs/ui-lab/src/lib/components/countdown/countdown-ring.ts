@@ -6,11 +6,11 @@ import {
   input,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { ScCountdownNext } from './countdown-next';
+import { ScCountdown } from './countdown';
 
 /** A timer's time left as a ring that empties. Decorative; size it with classes, put the digits in it. */
 @Component({
-  selector: '[scCountdownNextRing]',
+  selector: '[scCountdownRing]',
   template: `
     <svg
       viewBox="0 0 100 100"
@@ -46,8 +46,8 @@ import { ScCountdownNext } from './countdown-next';
   },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScCountdownNextRing {
-  private readonly countdown = inject(ScCountdownNext);
+export class ScCountdownRing {
+  private readonly countdown = inject(ScCountdown);
 
   readonly classInput = input<string>('', { alias: 'class' });
 

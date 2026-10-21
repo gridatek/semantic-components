@@ -1,125 +1,54 @@
 # Countdown
 
-A directive-based countdown timer. The directive provides timer logic and exposes time values — consumers own the template.
+To a moment, or a timer that pauses; on the second, from the clock; its units in the app's language, in words for screen readers; rolling digits and a ring.
 
-## Directive
+## Architecture
 
-- `ScCountdown` — attribute directive (`[scCountdown]`) providing countdown behavior
+```
+scCountdown (until — a Temporal.Instant; or duration — a Temporal.Duration, paused — two-way; (completed))
+│  role="timer" · left() · remaining() · done() · progress() · reset()
+├── [scCountdownUnit]="'days' | 'hours' | 'minutes' | 'seconds'" — its digits; roll: they slide
+├── [scCountdownText]   — the time left in words, for screen readers
+├── [scCountdownRing]   — a timer's time left as a ring (put the digits in it)
+├── button[scCountdownToggle] — start / pause (done: again)
+└── button[scCountdownReset]  — back to the full time
+```
 
 ## Usage
 
-### Basic Countdown
-
 ```html
-<div scCountdown #cd="scCountdown" [targetDate]="futureDate" class="gap-4">
-  <div class="flex flex-col items-center">
-    <span class="text-4xl font-bold">{{ cd.padNumber(cd.time().hours) }}</span>
-    <span class="text-sm">Hours</span>
-  </div>
-  <span class="text-4xl font-bold">:</span>
-  <div class="flex flex-col items-center">
-    <span class="text-4xl font-bold">{{ cd.padNumber(cd.time().minutes) }}</span>
-    <span class="text-sm">Minutes</span>
-  </div>
-  <span class="text-4xl font-bold">:</span>
-  <div class="flex flex-col items-center">
-    <span class="text-4xl font-bold">{{ cd.padNumber(cd.time().seconds) }}</span>
-    <span class="text-sm">Seconds</span>
-  </div>
+<div scCountdown [until]="launch" aria-label="Launch in">
+  <span scCountdownUnit="days"></span> days <span scCountdownUnit="hours"></span>:<span scCountdownUnit="minutes"></span>:<span scCountdownUnit="seconds"></span>
+  <span scCountdownText></span>
 </div>
 ```
 
-### Inline Format
-
-```html
-<span scCountdown #cd="scCountdown" [targetDate]="futureDate" class="font-mono text-lg">{{ cd.padNumber(cd.time().hours) }}:{{ cd.padNumber(cd.time().minutes) }}:{{ cd.padNumber(cd.time().seconds) }}</span>
+```ts
+readonly launch = Temporal.Instant.from('2026-12-31T23:00:00Z');
 ```
 
-### With Days
+## Two needs
 
-```html
-<div scCountdown #cd="scCountdown" [targetDate]="futureDate" class="gap-4">
-  @if (cd.time().days > 0) {
-  <div class="flex flex-col items-center">
-    <span class="text-4xl font-bold">{{ cd.padNumber(cd.time().days) }}</span>
-    <span class="text-sm">Days</span>
-  </div>
-  <span class="text-4xl font-bold">:</span>
-  }
-  <!-- hours, minutes, seconds... -->
-</div>
-```
+- `until`: to a moment — an event, a sale's end. It runs as time does.
+- `duration`: a timer — `paused` (two-way; `false` to start), `reset()`; the toggle and reset buttons do both. `progress()` is its share left, 1 → 0 (the ring's).
 
-### Cards Variant
+## State
 
-```html
-<div scCountdown #cd="scCountdown" [targetDate]="futureDate" class="gap-3">
-  <div class="bg-muted flex min-w-[70px] flex-col items-center rounded-lg p-3">
-    <span class="text-3xl font-bold">{{ cd.padNumber(cd.time().hours) }}</span>
-    <span class="text-xs tracking-wider uppercase">HRS</span>
-  </div>
-  <!-- more units... -->
-</div>
-```
+- `left()`: `{ days, hours, minutes, seconds }` — whole seconds, rounded up: 10 s left shows 10, then 9… then 0.
+- `remaining()`: milliseconds left. `done()`: at zero — `data-done` on it too; `(completed)` once a run.
+- The time comes from the clock, read on each whole second left — no drift — and again when the tab is shown.
 
-### Event Timer with Controls
+## Units
 
-```typescript
-@Component({
-  template: `
-    <div scCountdown #cd="scCountdown" [targetDate]="eventDate" [autoStart]="false" (complete)="onComplete()">{{ cd.padNumber(cd.time().hours) }}:{{ cd.padNumber(cd.time().minutes) }}:{{ cd.padNumber(cd.time().seconds) }}</div>
-    <button (click)="cd.start()">Start</button>
-    <button (click)="cd.stop()">Pause</button>
-  `,
-})
-export class EventTimer {
-  eventDate = Temporal.Instant.from('2026-12-31T23:59:59Z');
-
-  onComplete() {
-    console.log('Happy New Year!');
-  }
-}
-```
-
-## API
-
-### ScCountdown
-
-| Input        | Type               | Default | Description                                 |
-| ------------ | ------------------ | ------- | ------------------------------------------- |
-| `class`      | `string`           | `''`    | Additional CSS classes                      |
-| `targetDate` | `Temporal.Instant` | -       | **Required.** The instant it counts down to |
-| `autoStart`  | `boolean`          | `true`  | Start automatically                         |
-
-| Output     | Type              | Description               |
-| ---------- | ----------------- | ------------------------- |
-| `tick`     | `ScCountdownTime` | Emits every second        |
-| `complete` | `void`            | Emits when countdown ends |
-
-| Property/Method | Type                      | Description                          |
-| --------------- | ------------------------- | ------------------------------------ |
-| `time()`        | `Signal<ScCountdownTime>` | Current time values                  |
-| `padNumber(n)`  | `string`                  | Zero-pad a number to 2 digits        |
-| `ariaLabel()`   | `Signal<string>`          | Human-readable time remaining string |
-| `start()`       | `void`                    | Start the countdown                  |
-| `stop()`        | `void`                    | Stop the countdown                   |
-| `reset()`       | `void`                    | Reset to initial time                |
-| `getTime()`     | `ScCountdownTime`         | Get current time values              |
-| `isRunning()`   | `boolean`                 | Check if running                     |
-
-## CountdownTime Interface
-
-```typescript
-interface ScCountdownTime {
-  days: number;
-  hours: number;
-  minutes: number;
-  seconds: number;
-  total: number; // Total milliseconds remaining
-}
-```
+`scCountdownUnit` shows a unit with at least `minDigits` (2) digits, in the app's language (`LOCALE_ID`). With `roll`, each digit slides to the next — still under `prefers-reduced-motion`. Units are visual (`aria-hidden`): the text says it.
 
 ## Accessibility
 
-- Host has `role="timer"` for screen readers
-- Dynamic `aria-label` with human-readable time remaining
+- The countdown is a `timer` (not announced as it changes): name it — "Launch in", "Tea timer".
+- `scCountdownText`: the time left in words, by `Intl.DurationFormat` in the app's language ("2 days, 3 hours, 4 minutes, 5 seconds") — visually hidden; shown with `class="not-sr-only"`.
+- To announce the end, say it in your live region from `(completed)`.
+- Toggle: write its name from `paused()` ("Start" / "Pause").
+
+## Not here
+
+Counting up (a stopwatch), overtime past zero, flip cards (`roll` instead), notices at given times (yours, from `left()`).

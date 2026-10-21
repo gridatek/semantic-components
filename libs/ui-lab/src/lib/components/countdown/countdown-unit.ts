@@ -7,15 +7,15 @@ import {
   input,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { ScCountdownNext } from './countdown-next';
+import { ScCountdown } from './countdown';
 
 /**
- * One unit of the time left — `scCountdownNextUnit="hours"` — as digits in
+ * One unit of the time left — `scCountdownUnit="hours"` — as digits in
  * the app's language (two at least). `roll`: each digit slides to the next
- * (still, for reduced motion). Visual only: `scCountdownNextText` says it.
+ * (still, for reduced motion). Visual only: `scCountdownText` says it.
  */
 @Component({
-  selector: '[scCountdownNextUnit]',
+  selector: '[scCountdownUnit]',
   template: `
     @if (roll()) {
       @for (digit of digits(); track $index) {
@@ -41,11 +41,11 @@ import { ScCountdownNext } from './countdown-next';
   },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScCountdownNextUnit {
-  private readonly countdown = inject(ScCountdownNext);
+export class ScCountdownUnit {
+  private readonly countdown = inject(ScCountdown);
 
   readonly unit = input.required<'days' | 'hours' | 'minutes' | 'seconds'>({
-    alias: 'scCountdownNextUnit',
+    alias: 'scCountdownUnit',
   });
   /** The least digits shown. */
   readonly minDigits = input(2);

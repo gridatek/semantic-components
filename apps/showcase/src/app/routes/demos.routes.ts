@@ -938,55 +938,6 @@ export const demosRoutes: Route[] = [
     path: 'demos/countdown',
     children: [
       {
-        path: 'basic-countdown-demo',
-        loadComponent: () =>
-          import('../pages/docs/countdown/demos/basic-countdown-demo').then(
-            (m) => m.BasicCountdownDemo,
-          ),
-      },
-      {
-        path: 'compact-countdown-demo',
-        loadComponent: () =>
-          import('../pages/docs/countdown/demos/compact-countdown-demo').then(
-            (m) => m.CompactCountdownDemo,
-          ),
-      },
-      {
-        path: 'cards-countdown-demo',
-        loadComponent: () =>
-          import('../pages/docs/countdown/demos/cards-countdown-demo').then(
-            (m) => m.CardsCountdownDemo,
-          ),
-      },
-      {
-        path: 'separator-countdown-demo',
-        loadComponent: () =>
-          import('../pages/docs/countdown/demos/separator-countdown-demo').then(
-            (m) => m.SeparatorCountdownDemo,
-          ),
-      },
-      {
-        path: 'labels-countdown-demo',
-        loadComponent: () =>
-          import('../pages/docs/countdown/demos/labels-countdown-demo').then(
-            (m) => m.LabelsCountdownDemo,
-          ),
-      },
-      {
-        path: 'nodays-countdown-demo',
-        loadComponent: () =>
-          import('../pages/docs/countdown/demos/nodays-countdown-demo').then(
-            (m) => m.NodaysCountdownDemo,
-          ),
-      },
-      {
-        path: 'simple-countdown-demo',
-        loadComponent: () =>
-          import('../pages/docs/countdown/demos/simple-countdown-demo').then(
-            (m) => m.SimpleCountdownDemo,
-          ),
-      },
-      {
         path: 'event-countdown-demo',
         loadComponent: () =>
           import('../pages/docs/countdown/demos/event-countdown-demo').then(
@@ -994,57 +945,31 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'sale-countdown-demo',
+        path: 'inline-countdown-demo',
         loadComponent: () =>
-          import('../pages/docs/countdown/demos/sale-countdown-demo').then(
-            (m) => m.SaleCountdownDemo,
+          import('../pages/docs/countdown/demos/inline-countdown-demo').then(
+            (m) => m.InlineCountdownDemo,
           ),
       },
       {
-        path: 'completed-countdown-demo',
+        path: 'timer-countdown-demo',
         loadComponent: () =>
-          import('../pages/docs/countdown/demos/completed-countdown-demo').then(
-            (m) => m.CompletedCountdownDemo,
-          ),
-      },
-    ],
-  },
-  {
-    path: 'demos/countdown-next',
-    children: [
-      {
-        path: 'event-countdown-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/countdown-next/demos/event-countdown-next-demo').then(
-            (m) => m.EventCountdownNextDemo,
+          import('../pages/docs/countdown/demos/timer-countdown-demo').then(
+            (m) => m.TimerCountdownDemo,
           ),
       },
       {
-        path: 'inline-countdown-next-demo',
+        path: 'roll-countdown-demo',
         loadComponent: () =>
-          import('../pages/docs/countdown-next/demos/inline-countdown-next-demo').then(
-            (m) => m.InlineCountdownNextDemo,
+          import('../pages/docs/countdown/demos/roll-countdown-demo').then(
+            (m) => m.RollCountdownDemo,
           ),
       },
       {
-        path: 'timer-countdown-next-demo',
+        path: 'done-countdown-demo',
         loadComponent: () =>
-          import('../pages/docs/countdown-next/demos/timer-countdown-next-demo').then(
-            (m) => m.TimerCountdownNextDemo,
-          ),
-      },
-      {
-        path: 'roll-countdown-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/countdown-next/demos/roll-countdown-next-demo').then(
-            (m) => m.RollCountdownNextDemo,
-          ),
-      },
-      {
-        path: 'done-countdown-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/countdown-next/demos/done-countdown-next-demo').then(
-            (m) => m.DoneCountdownNextDemo,
+          import('../pages/docs/countdown/demos/done-countdown-demo').then(
+            (m) => m.DoneCountdownDemo,
           ),
       },
     ],

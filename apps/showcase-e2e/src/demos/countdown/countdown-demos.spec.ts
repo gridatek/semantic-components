@@ -1,7 +1,6 @@
 import { type Page, expect, test } from '@playwright/test';
 
-const demo = (name: string) =>
-  `/demos/countdown-next/${name}-countdown-next-demo`;
+const demo = (name: string) => `/demos/countdown/${name}-countdown-demo`;
 const timer = (page: Page) => page.getByRole('timer');
 /** The digits shown, as read: "02:14:05". */
 const shown = (page: Page) =>

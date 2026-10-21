@@ -258,15 +258,7 @@
   {
     "name": "Countdown",
     "path": "countdown",
-    "description": "A countdown timer display.",
-    "status": "Experimental",
-    "library": "ui-lab",
-    "category": "Data Display"
-  },
-  {
-    "name": "Countdown Next",
-    "path": "countdown-next",
-    "description": "The countdown, rebuilt: to a moment or a pausable timer, on the second, units in the app's language, rolling digits and a ring.",
+    "description": "To a moment or a pausable timer, on the second, units in the app's language, rolling digits and a ring.",
     "status": "Experimental",
     "library": "ui-lab",
     "category": "Data Display"

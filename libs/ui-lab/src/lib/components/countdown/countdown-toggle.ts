@@ -5,11 +5,11 @@ import {
   cn,
   ɵwarnIfUnnamed,
 } from '@semantic-components/ui';
-import { ScCountdownNext } from './countdown-next';
+import { ScCountdown } from './countdown';
 
 /** A timer: starts and pauses it — done, starts it again. Write its icon and its name from `countdown.paused()` ("Start" / "Pause"). */
 @Directive({
-  selector: 'button[scCountdownNextToggle]',
+  selector: 'button[scCountdownToggle]',
   host: {
     type: 'button',
     'data-slot': 'countdown-toggle',
@@ -17,8 +17,8 @@ import { ScCountdownNext } from './countdown-next';
     '(click)': 'toggle()',
   },
 })
-export class ScCountdownNextToggle {
-  protected readonly countdown = inject(ScCountdownNext);
+export class ScCountdownToggle {
+  protected readonly countdown = inject(ScCountdown);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('default');
@@ -32,7 +32,7 @@ export class ScCountdownNextToggle {
   );
 
   constructor() {
-    ɵwarnIfUnnamed('scCountdownNextToggle');
+    ɵwarnIfUnnamed('scCountdownToggle');
   }
 
   protected toggle(): void {

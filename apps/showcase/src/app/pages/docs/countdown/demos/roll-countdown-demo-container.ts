@@ -1,53 +1,53 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { RollCountdownNextDemo } from './roll-countdown-next-demo';
+import { RollCountdownDemo } from './roll-countdown-demo';
 
 @Component({
-  selector: 'app-roll-countdown-next-demo-container',
-  imports: [DemoContainer, RollCountdownNextDemo],
+  selector: 'app-roll-countdown-demo-container',
+  imports: [DemoContainer, RollCountdownDemo],
   template: `
     <app-demo-container
       title="Rolling digits"
       [code]="code"
-      demoUrl="/demos/countdown-next/roll-countdown-next-demo"
+      demoUrl="/demos/countdown/roll-countdown-demo"
     >
-      <app-roll-countdown-next-demo />
+      <app-roll-countdown-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class RollCountdownNextDemoContainer {
+export class RollCountdownDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScCountdownNext,
-  ScCountdownNextText,
-  ScCountdownNextUnit,
+  ScCountdown,
+  ScCountdownText,
+  ScCountdownUnit,
 } from '@semantic-components/ui-lab';
 
 /** Each digit slides to the next — still, for anyone who asks for less motion. */
 @Component({
-  selector: 'app-roll-countdown-next-demo',
-  imports: [ScCountdownNext, ScCountdownNextUnit, ScCountdownNextText],
+  selector: 'app-roll-countdown-demo',
+  imports: [ScCountdown, ScCountdownUnit, ScCountdownText],
   template: \`
     <div
-      scCountdownNext
+      scCountdown
       [until]="end"
       aria-label="Ends in"
       class="gap-1 text-5xl font-semibold"
     >
-      <span scCountdownNextUnit="hours" roll></span>
+      <span scCountdownUnit="hours" roll></span>
       <span class="text-muted-foreground">:</span>
-      <span scCountdownNextUnit="minutes" roll></span>
+      <span scCountdownUnit="minutes" roll></span>
       <span class="text-muted-foreground">:</span>
-      <span scCountdownNextUnit="seconds" roll></span>
-      <span scCountdownNextText></span>
+      <span scCountdownUnit="seconds" roll></span>
+      <span scCountdownText></span>
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class RollCountdownNextDemo {
+export class RollCountdownDemo {
   readonly end = Temporal.Now.instant().add({ hours: 5, minutes: 30 });
 }`;
 }

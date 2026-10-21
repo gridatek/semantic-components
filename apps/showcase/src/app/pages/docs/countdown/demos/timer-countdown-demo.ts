@@ -1,11 +1,11 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScCountdownNext,
-  ScCountdownNextReset,
-  ScCountdownNextRing,
-  ScCountdownNextText,
-  ScCountdownNextToggle,
-  ScCountdownNextUnit,
+  ScCountdown,
+  ScCountdownReset,
+  ScCountdownRing,
+  ScCountdownText,
+  ScCountdownToggle,
+  ScCountdownUnit,
 } from '@semantic-components/ui-lab';
 import {
   SiPauseIcon,
@@ -15,37 +15,37 @@ import {
 
 /** A duration: it starts, pauses and resets; the ring empties as it runs. */
 @Component({
-  selector: 'app-timer-countdown-next-demo',
+  selector: 'app-timer-countdown-demo',
   imports: [
-    ScCountdownNext,
-    ScCountdownNextUnit,
-    ScCountdownNextText,
-    ScCountdownNextRing,
-    ScCountdownNextToggle,
-    ScCountdownNextReset,
+    ScCountdown,
+    ScCountdownUnit,
+    ScCountdownText,
+    ScCountdownRing,
+    ScCountdownToggle,
+    ScCountdownReset,
     SiPlayIcon,
     SiPauseIcon,
     SiRotateCcwIcon,
   ],
   template: `
     <div
-      scCountdownNext
-      #timer="scCountdownNext"
+      scCountdown
+      #timer="scCountdown"
       [duration]="fiveMinutes"
       [(paused)]="paused"
       aria-label="Tea timer"
       class="flex-col gap-4"
     >
-      <div scCountdownNextRing>
+      <div scCountdownRing>
         <span class="text-3xl font-semibold">
-          <span scCountdownNextUnit="minutes"></span>:<span
-            scCountdownNextUnit="seconds"
+          <span scCountdownUnit="minutes"></span>:<span
+            scCountdownUnit="seconds"
           ></span>
         </span>
       </div>
-      <span scCountdownNextText></span>
+      <span scCountdownText></span>
       <div class="flex gap-2">
-        <button scCountdownNextToggle class="w-28">
+        <button scCountdownToggle class="w-28">
           @if (timer.paused() || timer.done()) {
             <svg siPlayIcon></svg>
             Start
@@ -54,7 +54,7 @@ import {
             Pause
           }
         </button>
-        <button scCountdownNextReset>
+        <button scCountdownReset>
           <svg siRotateCcwIcon></svg>
           Reset
         </button>
@@ -64,7 +64,7 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class TimerCountdownNextDemo {
+export class TimerCountdownDemo {
   readonly fiveMinutes = Temporal.Duration.from({ minutes: 5 });
   readonly paused = signal(true);
 }

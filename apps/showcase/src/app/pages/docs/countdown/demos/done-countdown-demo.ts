@@ -1,32 +1,27 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
 import {
-  ScCountdownNext,
-  ScCountdownNextText,
-  ScCountdownNextUnit,
+  ScCountdown,
+  ScCountdownText,
+  ScCountdownUnit,
 } from '@semantic-components/ui-lab';
 
 /** Ten seconds; at zero, (completed) — once — and data-done to style what is over. */
 @Component({
-  selector: 'app-done-countdown-next-demo',
-  imports: [
-    ScCountdownNext,
-    ScCountdownNextUnit,
-    ScCountdownNextText,
-    ScButton,
-  ],
+  selector: 'app-done-countdown-demo',
+  imports: [ScCountdown, ScCountdownUnit, ScCountdownText, ScButton],
   template: `
     <div class="flex flex-col items-center gap-3">
       @if (run(); as at) {
         <div
-          scCountdownNext
+          scCountdown
           [until]="at"
           (completed)="over.set(true)"
           aria-label="Doors open in"
           class="data-done:text-muted-foreground gap-1 text-4xl font-semibold"
         >
-          <span scCountdownNextUnit="seconds"></span>
-          <span scCountdownNextText></span>
+          <span scCountdownUnit="seconds"></span>
+          <span scCountdownText></span>
         </div>
       }
       <p class="text-sm" role="status">
@@ -38,7 +33,7 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class DoneCountdownNextDemo {
+export class DoneCountdownDemo {
   readonly run = signal(Temporal.Now.instant().add({ seconds: 10 }));
   readonly over = signal(false);
 
