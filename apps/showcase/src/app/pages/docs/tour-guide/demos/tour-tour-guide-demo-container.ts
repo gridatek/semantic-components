@@ -1,47 +1,47 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { TourTourGuideNextDemo } from './tour-tour-guide-next-demo';
+import { TourTourGuideDemo } from './tour-tour-guide-demo';
 
 @Component({
-  selector: 'app-tour-tour-guide-next-demo-container',
-  imports: [DemoContainer, TourTourGuideNextDemo],
+  selector: 'app-tour-tour-guide-demo-container',
+  imports: [DemoContainer, TourTourGuideDemo],
   template: `
     <app-demo-container
       title="Tour"
       [code]="code"
-      demoUrl="/demos/tour-guide-next/tour-tour-guide-next-demo"
+      demoUrl="/demos/tour-guide/tour-tour-guide-demo"
     >
-      <app-tour-tour-guide-next-demo />
+      <app-tour-tour-guide-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class TourTourGuideNextDemoContainer {
+export class TourTourGuideDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScButton, ScInput } from '@semantic-components/ui';
 import {
+  ScTourGuide,
+  ScTourGuideClose,
+  ScTourGuideDescription,
   ScTourGuideNext,
-  ScTourGuideNextClose,
-  ScTourGuideNextDescription,
-  ScTourGuideNextNext,
-  ScTourGuideNextPrevious,
-  ScTourGuideNextStep,
-  ScTourGuideNextTitle,
+  ScTourGuidePrevious,
+  ScTourGuideStep,
+  ScTourGuideTitle,
 } from '@semantic-components/ui-lab';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 /** A welcome (centred, no target), three steps on their targets — the page dimmed but for each — and a farewell. ← → step; Escape, or the ×, ends it. */
 @Component({
-  selector: 'app-tour-tour-guide-next-demo',
+  selector: 'app-tour-tour-guide-demo',
   imports: [
+    ScTourGuide,
+    ScTourGuideStep,
+    ScTourGuideTitle,
+    ScTourGuideDescription,
     ScTourGuideNext,
-    ScTourGuideNextStep,
-    ScTourGuideNextTitle,
-    ScTourGuideNextDescription,
-    ScTourGuideNextNext,
-    ScTourGuideNextPrevious,
-    ScTourGuideNextClose,
+    ScTourGuidePrevious,
+    ScTourGuideClose,
     ScButton,
     ScInput,
     SiXIcon,
@@ -77,34 +77,34 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
       Take the tour
     </button>
 
-    <div scTourGuideNext #tour="scTourGuideNext">
-      <ng-template scTourGuideNextStep>
-        <h2 scTourGuideNextTitle>Welcome to Acme</h2>
-        <p scTourGuideNextDescription>
+    <div scTourGuide #tour="scTourGuide">
+      <ng-template scTourGuideStep>
+        <h2 scTourGuideTitle>Welcome to Acme</h2>
+        <p scTourGuideDescription>
           A minute to see around — or close it, and find your own way.
         </p>
       </ng-template>
-      <ng-template scTourGuideNextStep [for]="search">
-        <h2 scTourGuideNextTitle>Search everything</h2>
-        <p scTourGuideNextDescription>Projects, people and files, from here.</p>
+      <ng-template scTourGuideStep [for]="search">
+        <h2 scTourGuideTitle>Search everything</h2>
+        <p scTourGuideDescription>Projects, people and files, from here.</p>
       </ng-template>
-      <ng-template scTourGuideNextStep [for]="menu" side="end">
-        <h2 scTourGuideNextTitle>Your sections</h2>
-        <p scTourGuideNextDescription>
+      <ng-template scTourGuideStep [for]="menu" side="end">
+        <h2 scTourGuideTitle>Your sections</h2>
+        <p scTourGuideDescription>
           Inbox, projects and reports are always on the side.
         </p>
       </ng-template>
-      <ng-template scTourGuideNextStep [for]="create" side="top">
-        <h2 scTourGuideNextTitle>Start a project</h2>
-        <p scTourGuideNextDescription>Everything begins here.</p>
+      <ng-template scTourGuideStep [for]="create" side="top">
+        <h2 scTourGuideTitle>Start a project</h2>
+        <p scTourGuideDescription>Everything begins here.</p>
       </ng-template>
-      <ng-template scTourGuideNextStep>
-        <h2 scTourGuideNextTitle>That is all</h2>
-        <p scTourGuideNextDescription>
+      <ng-template scTourGuideStep>
+        <h2 scTourGuideTitle>That is all</h2>
+        <p scTourGuideDescription>
           Take the tour again any time, from the help menu.
         </p>
       </ng-template>
-      <button scTourGuideNextClose>
+      <button scTourGuideClose>
         <svg siXIcon></svg>
         <span class="sr-only">Close tour</span>
       </button>
@@ -112,13 +112,13 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
         <span class="text-muted-foreground text-xs tabular-nums">
           {{ tour.step() + 1 }} of {{ tour.count() }}
         </span>
-        <button scTourGuideNextPrevious class="ms-auto">Back</button>
-        <button scTourGuideNextNext>{{ tour.last() ? 'Done' : 'Next' }}</button>
+        <button scTourGuidePrevious class="ms-auto">Back</button>
+        <button scTourGuideNext>{{ tour.last() ? 'Done' : 'Next' }}</button>
       </div>
     </div>
   \`,
   host: { class: 'flex w-full flex-col items-center gap-4' },
   encapsulation: ViewEncapsulation.None,
 })
-export class TourTourGuideNextDemo {}`;
+export class TourTourGuideDemo {}`;
 }

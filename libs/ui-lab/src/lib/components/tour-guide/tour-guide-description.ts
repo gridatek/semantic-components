@@ -1,20 +1,31 @@
-import { Directive, computed, inject, input } from '@angular/core';
+import { _IdGenerator } from '@angular/cdk/a11y';
+import { DestroyRef, Directive, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { ScTourGuideState } from './tour-guide-state';
+import { ScTourGuide } from './tour-guide';
 
+/** A step's text: the tour describes its dialog with it. */
 @Directive({
-  selector: 'p[scTourGuideDescription]',
+  selector: '[scTourGuideDescription]',
   host: {
+    'data-slot': 'tour-guide-description',
+    '[id]': 'id',
     '[class]': 'class()',
-    '[textContent]': 'state.currentStep()?.content',
   },
 })
 export class ScTourGuideDescription {
-  readonly classInput = input<string>('', { alias: 'class' });
+  protected readonly id = inject(_IdGenerator).getId('sc-tour-description-');
 
-  protected readonly state = inject(ScTourGuideState);
+  readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
     cn('text-muted-foreground text-sm', this.classInput()),
   );
+
+  constructor() {
+    const tour = inject(ScTourGuide);
+    tour.ɵdescriptionId.set(this.id);
+    inject(DestroyRef).onDestroy(() => {
+      if (tour.ɵdescriptionId() === this.id) tour.ɵdescriptionId.set(null);
+    });
+  }
 }

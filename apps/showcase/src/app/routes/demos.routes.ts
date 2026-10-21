@@ -4087,10 +4087,10 @@ export const demosRoutes: Route[] = [
     path: 'demos/tour-guide',
     children: [
       {
-        path: 'full-tour-guide-demo',
+        path: 'tour-tour-guide-demo',
         loadComponent: () =>
-          import('../pages/docs/tour-guide/demos/full-tour-guide-demo').then(
-            (m) => m.FullTourGuideDemo,
+          import('../pages/docs/tour-guide/demos/tour-tour-guide-demo').then(
+            (m) => m.TourTourGuideDemo,
           ),
       },
       {
@@ -4100,37 +4100,18 @@ export const demosRoutes: Route[] = [
             (m) => m.MinimalTourGuideDemo,
           ),
       },
-    ],
-  },
-  {
-    path: 'demos/tour-guide-next',
-    children: [
       {
-        path: 'tour-tour-guide-next-demo',
+        path: 'scrolling-tour-guide-demo',
         loadComponent: () =>
-          import('../pages/docs/tour-guide-next/demos/tour-tour-guide-next-demo').then(
-            (m) => m.TourTourGuideNextDemo,
+          import('../pages/docs/tour-guide/demos/scrolling-tour-guide-demo').then(
+            (m) => m.ScrollingTourGuideDemo,
           ),
       },
       {
-        path: 'minimal-tour-guide-next-demo',
+        path: 'controlled-tour-guide-demo',
         loadComponent: () =>
-          import('../pages/docs/tour-guide-next/demos/minimal-tour-guide-next-demo').then(
-            (m) => m.MinimalTourGuideNextDemo,
-          ),
-      },
-      {
-        path: 'scrolling-tour-guide-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/tour-guide-next/demos/scrolling-tour-guide-next-demo').then(
-            (m) => m.ScrollingTourGuideNextDemo,
-          ),
-      },
-      {
-        path: 'controlled-tour-guide-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/tour-guide-next/demos/controlled-tour-guide-next-demo').then(
-            (m) => m.ControlledTourGuideNextDemo,
+          import('../pages/docs/tour-guide/demos/controlled-tour-guide-demo').then(
+            (m) => m.ControlledTourGuideDemo,
           ),
       },
     ],

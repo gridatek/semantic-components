@@ -1,123 +1,81 @@
-import { Component, ViewEncapsulation, inject } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { ScButton, ScInput } from '@semantic-components/ui';
 import {
   ScTourGuide,
-  ScTourGuideAction,
-  ScTourGuideCounter,
+  ScTourGuideClose,
   ScTourGuideDescription,
-  ScTourGuideHighlight,
-  ScTourGuideMask,
-  ScTourGuideNavigation,
+  ScTourGuideNext,
+  ScTourGuideStep,
   ScTourGuideTitle,
-  ScTourGuideTooltip,
-  TourService,
 } from '@semantic-components/ui-lab';
-import type { ScTourOptions } from '@semantic-components/ui-lab';
+import { SiXIcon } from '@semantic-icons/lucide-icons';
 
+/** Three steps, Next and Done — no progress, no Back. */
 @Component({
   selector: 'app-minimal-tour-guide-demo',
   imports: [
     ScTourGuide,
-    ScTourGuideMask,
-    ScTourGuideHighlight,
-    ScTourGuideTooltip,
+    ScTourGuideStep,
     ScTourGuideTitle,
     ScTourGuideDescription,
-    ScTourGuideNavigation,
-    ScTourGuideCounter,
-    ScTourGuideAction,
+    ScTourGuideNext,
+    ScTourGuideClose,
+    ScButton,
+    ScInput,
+    SiXIcon,
   ],
-  providers: [TourService],
   template: `
-    <div class="space-y-8">
-      <!-- Demo UI elements -->
-      <div class="grid gap-6 md:grid-cols-2">
-        <div id="tour-minimal-card-1" class="bg-card rounded-lg border p-6">
-          <h3 class="mb-2 font-semibold">Dashboard</h3>
-          <p class="text-muted-foreground text-sm">
-            View your analytics and key metrics at a glance.
-          </p>
+    <div class="w-full max-w-2xl overflow-hidden rounded-lg border">
+      <header class="flex items-center gap-3 border-b p-3">
+        <span class="font-semibold">Acme</span>
+        <input
+          #search
+          scInput
+          type="search"
+          aria-label="Search"
+          placeholder="Search"
+          class="ms-auto h-8 w-48"
+        />
+      </header>
+      <div class="grid gap-3 p-3 sm:grid-cols-[10rem_1fr]">
+        <div #menu class="bg-muted/50 space-y-1 rounded-md p-2 text-sm">
+          <p>Inbox</p>
+          <p>Projects</p>
+          <p>Reports</p>
         </div>
-
-        <div id="tour-minimal-card-2" class="bg-card rounded-lg border p-6">
-          <h3 class="mb-2 font-semibold">Reports</h3>
-          <p class="text-muted-foreground text-sm">
-            Generate and export detailed reports.
-          </p>
+        <div class="space-y-3">
+          <div class="bg-card rounded-md border p-4 text-sm">
+            Your week, at a glance.
+          </div>
+          <button #create scButton>New project</button>
         </div>
       </div>
+    </div>
+    <button scButton variant="outline" (click)="tour.start()">Show me</button>
 
-      <!-- Action button -->
-      <div>
-        <button
-          id="tour-minimal-button"
-          type="button"
-          (click)="startTour()"
-          class="hover:bg-accent rounded-md border px-4 py-2"
-        >
-          Start Minimal Tour
-        </button>
+    <div scTourGuide #tour="scTourGuide">
+      <ng-template scTourGuideStep [for]="search">
+        <h2 scTourGuideTitle>Search</h2>
+        <p scTourGuideDescription>Find anything.</p>
+      </ng-template>
+      <ng-template scTourGuideStep [for]="menu" side="end">
+        <h2 scTourGuideTitle>Sections</h2>
+        <p scTourGuideDescription>Move around.</p>
+      </ng-template>
+      <ng-template scTourGuideStep [for]="create" side="top">
+        <h2 scTourGuideTitle>Create</h2>
+        <p scTourGuideDescription>Make something new.</p>
+      </ng-template>
+      <button scTourGuideClose>
+        <svg siXIcon></svg>
+        <span class="sr-only">Close tour</span>
+      </button>
+      <div class="flex justify-end">
+        <button scTourGuideNext>{{ tour.last() ? 'Done' : 'Next' }}</button>
       </div>
-
-      <!-- Tour Guide (no close, no step numbers, no progress) -->
-      @if (tourService.isActive()) {
-        <div scTourGuide #guide="scTourGuide">
-          <svg scTourGuideMask></svg>
-
-          @if (guide.targetRect()) {
-            <div scTourGuideHighlight></div>
-          }
-
-          @if (guide.currentStep()) {
-            <div scTourGuideTooltip>
-              <h3 scTourGuideTitle></h3>
-              <p scTourGuideDescription></p>
-
-              <div scTourGuideNavigation>
-                <span scTourGuideCounter></span>
-                <div class="flex gap-2">
-                  @if (!guide.isFirstStep()) {
-                    <button scTourGuideAction action="previous">
-                      Previous
-                    </button>
-                  }
-                  @if (guide.isLastStep()) {
-                    <button scTourGuideAction action="finish">Finish</button>
-                  } @else {
-                    <button scTourGuideAction action="next">Next</button>
-                  }
-                </div>
-              </div>
-            </div>
-          }
-        </div>
-      }
     </div>
   `,
-  host: { class: 'flex w-full justify-center' },
+  host: { class: 'flex w-full flex-col items-center gap-4' },
   encapsulation: ViewEncapsulation.None,
 })
-export class MinimalTourGuideDemo {
-  protected readonly tourService = inject(TourService);
-
-  startTour(): void {
-    const options: ScTourOptions = {
-      steps: [
-        {
-          target: '#tour-minimal-card-1',
-          title: 'Dashboard Overview',
-          content: 'Your central hub for all information.',
-        },
-        {
-          target: '#tour-minimal-card-2',
-          title: 'Reports Section',
-          content: 'Generate and export detailed reports.',
-        },
-      ],
-      showProgress: false,
-      showStepNumbers: false,
-      overlayOpacity: 0.6,
-    };
-
-    this.tourService.start(options);
-  }
-}
+export class MinimalTourGuideDemo {}

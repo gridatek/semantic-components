@@ -1,220 +1,59 @@
 # Tour Guide
 
-Step-by-step UI tour component for user onboarding and feature discovery. Fully composable — pick only the pieces you need.
+Your steps as markup on their targets, one at a time in a native modal dialog — a spotlight on the target, the card beside it, flipping to stay on screen; scrolled into view, named and described, with the keys.
 
-## Parts
+## Architecture
 
-| Part                     | Selector                     | Type      | Description                           |
-| ------------------------ | ---------------------------- | --------- | ------------------------------------- |
-| `ScTourGuide`            | `div[scTourGuide]`           | Directive | Root overlay — provides state context |
-| `ScTourGuideMask`        | `svg[scTourGuideMask]`       | Component | SVG overlay with spotlight cutout     |
-| `ScTourGuideHighlight`   | `div[scTourGuideHighlight]`  | Component | Animated highlight border             |
-| `ScTourGuideTooltip`     | `div[scTourGuideTooltip]`    | Directive | Positioned tooltip container          |
-| `ScTourGuideClose`       | `button[scTourGuideClose]`   | Directive | Close button                          |
-| `ScTourGuideStepNumber`  | `[scTourGuideStepNumber]`    | Directive | Step number badge                     |
-| `ScTourGuideTitle`       | `h3[scTourGuideTitle]`       | Directive | Step title                            |
-| `ScTourGuideDescription` | `p[scTourGuideDescription]`  | Directive | Step description                      |
-| `ScTourGuideProgress`    | `div[scTourGuideProgress]`   | Component | Progress bar                          |
-| `ScTourGuideNavigation`  | `div[scTourGuideNavigation]` | Directive | Navigation footer                     |
-| `ScTourGuideCounter`     | `[scTourGuideCounter]`       | Directive | "X of Y" counter text                 |
-| `ScTourGuideAction`      | `button[scTourGuideAction]`  | Directive | Navigation button (prev/next/finish)  |
-| `TourService`            | —                            | Service   | Singleton service for tour control    |
+```
+[scTourGuide] #tour (open, step — two-way · (finished))  start() · next() · previous() · close() · count() · first() · last()
+├── <ng-template scTourGuideStep [for]="target" side="bottom" [padding]="8"> — a step, your markup
+│   ├── [scTourGuideTitle]       — names the step
+│   └── [scTourGuideDescription] — describes it
+└── your footer, once: buttons [scTourGuideNext], [scTourGuidePrevious], [scTourGuideClose]; your progress
+```
 
 ## Usage
 
-```typescript
-import { ScTourGuide, ScTourGuideAction, ScTourGuideClose, ScTourGuideCounter, ScTourGuideDescription, ScTourGuideHighlight, ScTourGuideMask, ScTourGuideNavigation, ScTourGuideProgress, ScTourGuideStepNumber, ScTourGuideTitle, ScTourGuideTooltip, TourService } from '@semantic-components/ui-lab';
-import type { ScTourOptions } from '@semantic-components/ui-lab';
-```
-
-### Full Example
-
 ```html
-@if (tourService.isActive()) {
-<div scTourGuide (stepChange)="onStepChange($event)" (tourComplete)="onTourComplete()" (tourClosed)="onTourClosed()" #guide="scTourGuide">
-  <svg scTourGuideMask></svg>
+<input #search type="search" aria-label="Search" />
+<button (click)="tour.start()">Take the tour</button>
 
-  @if (guide.targetRect()) {
-  <div scTourGuideHighlight></div>
-  } @if (guide.currentStep()) {
-  <div scTourGuideTooltip>
-    @if (guide.allowClose()) {
-    <button scTourGuideClose>
-      <svg siXIcon class="size-4"></svg>
-      <span class="sr-only">Close tour</span>
-    </button>
-    } @if (guide.showStepNumbers()) {
-    <span scTourGuideStepNumber></span>
-    }
+<div scTourGuide #tour="scTourGuide" (finished)="seen()">
+  <ng-template scTourGuideStep>
+    <h2 scTourGuideTitle>Welcome</h2>
+    <p scTourGuideDescription>A minute to see around.</p>
+  </ng-template>
+  <ng-template scTourGuideStep [for]="search">
+    <h2 scTourGuideTitle>Search everything</h2>
+    <p scTourGuideDescription>Projects, people and files.</p>
+  </ng-template>
 
-    <div class="pr-6">
-      <h3 scTourGuideTitle></h3>
-      <p scTourGuideDescription></p>
-    </div>
-
-    @if (guide.showProgress()) {
-    <div scTourGuideProgress></div>
-    }
-
-    <div scTourGuideNavigation>
-      <span scTourGuideCounter></span>
-      <div class="flex gap-2">
-        @if (!guide.isFirstStep()) {
-        <button scTourGuideAction action="previous">Previous</button>
-        } @if (guide.isLastStep()) {
-        <button scTourGuideAction action="finish">Finish</button>
-        } @else {
-        <button scTourGuideAction action="next">Next</button>
-        }
-      </div>
-    </div>
-  </div>
-  }
+  <button scTourGuideClose><svg siXIcon></svg><span class="sr-only">Close tour</span></button>
+  <span>{{ tour.step() + 1 }} of {{ tour.count() }}</span>
+  <button scTourGuidePrevious>Back</button>
+  <button scTourGuideNext>{{ tour.last() ? 'Done' : 'Next' }}</button>
 </div>
-}
 ```
 
-### Starting a Tour
+Put only the steps and the footer in the tour; the targets are anywhere (template references).
 
-```typescript
-const tourService = inject(TourService);
+## Steps
 
-tourService.start({
-  steps: [
-    {
-      target: '#dashboard',
-      title: 'Dashboard',
-      content: 'Your main overview.',
-      placement: 'bottom',
-    },
-    {
-      target: '#settings',
-      title: 'Settings',
-      content: 'Configure your preferences.',
-    },
-  ],
-  showProgress: true,
-  showStepNumbers: true,
-});
-```
+- `[for]`: the target element; none, the card is centred and all is dimmed (a welcome, a farewell).
+- `side`: `top`, `bottom` (default), `start`, `end` — logical; if there is no room, the opposite, then the others; then shifted to stay on screen. `data-side` on the card says which.
+- `padding`: the room around the target in the spotlight.
+- Each step: its target scrolled into view (smoothly; at once for reduced motion), the spotlight and the card placed — again when the page scrolls, resizes or the target changes size — and focus on the card.
 
-### Minimal (No Progress / Step Numbers / Close)
+## The dialog
 
-Simply omit the parts you don't need from the template:
+A native `dialog`, opened modal: the page behind is inert. Named by the step's title, described by its text. ← → step (reversed right to left), Escape closes; focus goes back to what had it when the tour started.
 
-```html
-@if (tourService.isActive()) {
-<div scTourGuide #guide="scTourGuide">
-  <svg scTourGuideMask></svg>
-  @if (guide.targetRect()) {
-  <div scTourGuideHighlight></div>
-  } @if (guide.currentStep()) {
-  <div scTourGuideTooltip>
-    <h3 scTourGuideTitle></h3>
-    <p scTourGuideDescription></p>
-    <div scTourGuideNavigation>
-      <span scTourGuideCounter></span>
-      <div class="flex gap-2">
-        @if (!guide.isFirstStep()) {
-        <button scTourGuideAction action="previous">Previous</button>
-        } @if (guide.isLastStep()) {
-        <button scTourGuideAction action="finish">Finish</button>
-        } @else {
-        <button scTourGuideAction action="next">Next</button>
-        }
-      </div>
-    </div>
-  </div>
-  }
-</div>
-}
-```
+## Ending
 
-## API
+- `next()` at the last step ends the tour, `(finished)`.
+- `close()`, Escape, the close button: ended, not finished.
+- What to remember (seen, not seen) is yours.
 
-### TourService
+## Not here
 
-| Member        | Type                       | Description            |
-| ------------- | -------------------------- | ---------------------- |
-| `start`       | `(options: ScTourOptions)` | Start a new tour       |
-| `stop`        | `() => void`               | Stop the current tour  |
-| `next`        | `() => void`               | Go to next step        |
-| `previous`    | `() => void`               | Go to previous step    |
-| `goTo`        | `(index: number) => void`  | Jump to specific step  |
-| `isActive`    | `Signal<boolean>`          | Whether tour is active |
-| `currentStep` | `Signal<number>`           | Current step index     |
-| `steps`       | `Signal<ScTourStep[]>`     | All tour steps         |
-| `progress`    | `Signal<number>`           | Progress percentage    |
-
-### ScTourGuide (root)
-
-| Output         | Type     | Description                     |
-| -------------- | -------- | ------------------------------- |
-| `stepChange`   | `number` | Emits when step changes         |
-| `tourComplete` | `void`   | Emits when tour finishes        |
-| `tourClosed`   | `void`   | Emits when tour is closed early |
-
-Exposed via `exportAs: 'scTourGuide'`:
-
-| Signal            | Type                            | Description                    |
-| ----------------- | ------------------------------- | ------------------------------ |
-| `targetRect`      | `Signal<ScTourGuideTargetRect>` | Current target element rect    |
-| `currentStep`     | `Signal<ScTourStep>`            | Current step data              |
-| `allowClose`      | `Signal<boolean>`               | Whether closing is allowed     |
-| `showStepNumbers` | `Signal<boolean>`               | Whether step numbers are shown |
-| `showProgress`    | `Signal<boolean>`               | Whether progress bar is shown  |
-| `isFirstStep`     | `Signal<boolean>`               | Whether on first step          |
-| `isLastStep`      | `Signal<boolean>`               | Whether on last step           |
-
-### ScTourGuideAction
-
-| Input    | Type                               | Description       |
-| -------- | ---------------------------------- | ----------------- |
-| `action` | `'previous' \| 'next' \| 'finish'` | Action to perform |
-
-### TourStep
-
-```typescript
-interface ScTourStep {
-  target: string;
-  title: string;
-  content: string;
-  placement?: 'top' | 'bottom' | 'left' | 'right' | 'auto';
-  highlightPadding?: number;
-  disableInteraction?: boolean;
-  beforeShow?: () => void | Promise<void>;
-  afterHide?: () => void | Promise<void>;
-}
-```
-
-### TourOptions
-
-```typescript
-interface ScTourOptions {
-  steps: ScTourStep[];
-  overlayOpacity?: number; // Default: 0.5
-  animationDuration?: number; // Default: 300
-  showProgress?: boolean; // Default: true
-  showStepNumbers?: boolean; // Default: true
-  allowClose?: boolean; // Default: true
-  allowKeyboardNavigation?: boolean; // Default: true
-  scrollBehavior?: ScrollBehavior; // Default: 'smooth'
-  scrollPadding?: number; // Default: 100
-}
-```
-
-## Keyboard Shortcuts
-
-| Key     | Action                                              |
-| ------- | --------------------------------------------------- |
-| `→`     | Next step                                           |
-| `←`     | Previous step                                       |
-| `Enter` | Next step / Finish (when the step dialog has focus) |
-| `Esc`   | Close tour                                          |
-
-## Accessibility
-
-- Each step is a `role="dialog"` (`aria-modal`) named by the step title.
-- When the tour starts, focus moves to the step dialog and Tab is trapped inside the tour; on every step change focus moves to the new step so it is announced. When the tour ends, focus returns to the element that started it.
-- Escape closes the tour (when `allowClose`); ← / → go to the previous / next step; Enter goes to the next step only when the dialog itself has focus — on a button, Enter activates that button.
-- `TourService` is a root singleton. If a page has more than one independent tour, provide it per component (`providers: [TourService]`), otherwise every tour opens at once.
+Hint beacons, advancing when the target is clicked (the page is inert), tours across routes.

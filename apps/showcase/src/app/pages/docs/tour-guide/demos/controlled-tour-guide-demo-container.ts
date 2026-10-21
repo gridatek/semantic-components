@@ -1,4 +1,24 @@
-import {
+import { Component, ViewEncapsulation } from '@angular/core';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { ControlledTourGuideDemo } from './controlled-tour-guide-demo';
+
+@Component({
+  selector: 'app-controlled-tour-guide-demo-container',
+  imports: [DemoContainer, ControlledTourGuideDemo],
+  template: `
+    <app-demo-container
+      title="Controlled"
+      [code]="code"
+      demoUrl="/demos/tour-guide/controlled-tour-guide-demo"
+    >
+      <app-controlled-tour-guide-demo />
+    </app-demo-container>
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class ControlledTourGuideDemoContainer {
+  readonly code = `import {
   Component,
   ViewEncapsulation,
   effect,
@@ -7,32 +27,32 @@ import {
 } from '@angular/core';
 import { ScButton, ScInput } from '@semantic-components/ui';
 import {
+  ScTourGuide,
+  ScTourGuideClose,
+  ScTourGuideDescription,
   ScTourGuideNext,
-  ScTourGuideNextClose,
-  ScTourGuideNextDescription,
-  ScTourGuideNextNext,
-  ScTourGuideNextPrevious,
-  ScTourGuideNextStep,
-  ScTourGuideNextTitle,
+  ScTourGuidePrevious,
+  ScTourGuideStep,
+  ScTourGuideTitle,
 } from '@semantic-components/ui-lab';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 /** Open and step are two-way: start at any step from outside; (finished) at Done — closed is not finished. */
 @Component({
-  selector: 'app-controlled-tour-guide-next-demo',
+  selector: 'app-controlled-tour-guide-demo',
   imports: [
+    ScTourGuide,
+    ScTourGuideStep,
+    ScTourGuideTitle,
+    ScTourGuideDescription,
     ScTourGuideNext,
-    ScTourGuideNextStep,
-    ScTourGuideNextTitle,
-    ScTourGuideNextDescription,
-    ScTourGuideNextNext,
-    ScTourGuideNextPrevious,
-    ScTourGuideNextClose,
+    ScTourGuidePrevious,
+    ScTourGuideClose,
     ScButton,
     ScInput,
     SiXIcon,
   ],
-  template: `
+  template: \`
     <div class="w-full max-w-2xl overflow-hidden rounded-lg border">
       <header class="flex items-center gap-3 border-b p-3">
         <span class="font-semibold">Acme</span>
@@ -74,25 +94,25 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
     <p class="text-muted-foreground text-sm" role="status">{{ outcome() }}</p>
 
     <div
-      scTourGuideNext
-      #tour="scTourGuideNext"
+      scTourGuide
+      #tour="scTourGuide"
       [(open)]="open"
       [(step)]="step"
       (finished)="outcome.set('Finished.')"
     >
-      <ng-template scTourGuideNextStep [for]="search">
-        <h2 scTourGuideNextTitle>Search</h2>
-        <p scTourGuideNextDescription>Find anything.</p>
+      <ng-template scTourGuideStep [for]="search">
+        <h2 scTourGuideTitle>Search</h2>
+        <p scTourGuideDescription>Find anything.</p>
       </ng-template>
-      <ng-template scTourGuideNextStep [for]="menu" side="end">
-        <h2 scTourGuideNextTitle>Sections</h2>
-        <p scTourGuideNextDescription>Move around.</p>
+      <ng-template scTourGuideStep [for]="menu" side="end">
+        <h2 scTourGuideTitle>Sections</h2>
+        <p scTourGuideDescription>Move around.</p>
       </ng-template>
-      <ng-template scTourGuideNextStep [for]="create" side="top">
-        <h2 scTourGuideNextTitle>Create</h2>
-        <p scTourGuideNextDescription>Make something new.</p>
+      <ng-template scTourGuideStep [for]="create" side="top">
+        <h2 scTourGuideTitle>Create</h2>
+        <p scTourGuideDescription>Make something new.</p>
       </ng-template>
-      <button scTourGuideNextClose>
+      <button scTourGuideClose>
         <svg siXIcon></svg>
         <span class="sr-only">Close tour</span>
       </button>
@@ -100,15 +120,15 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
         <span class="text-muted-foreground text-xs tabular-nums">
           {{ tour.step() + 1 }} of {{ tour.count() }}
         </span>
-        <button scTourGuideNextPrevious class="ms-auto">Back</button>
-        <button scTourGuideNextNext>{{ tour.last() ? 'Done' : 'Next' }}</button>
+        <button scTourGuidePrevious class="ms-auto">Back</button>
+        <button scTourGuideNext>{{ tour.last() ? 'Done' : 'Next' }}</button>
       </div>
     </div>
-  `,
+  \`,
   host: { class: 'flex w-full flex-col items-center gap-4' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ControlledTourGuideNextDemo {
+export class ControlledTourGuideDemo {
   readonly labels = ['Search', 'Sections', 'Create'];
   readonly open = signal(false);
   readonly step = signal(0);
@@ -123,4 +143,5 @@ export class ControlledTourGuideNextDemo {
       if (this.open()) untracked(() => this.outcome.set('Started.'));
     });
   }
+}`;
 }

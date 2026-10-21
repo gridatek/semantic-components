@@ -970,15 +970,7 @@
   {
     "name": "Tour Guide",
     "path": "tour-guide",
-    "description": "Create interactive product tours.",
-    "status": "Experimental",
-    "library": "ui-lab",
-    "category": "Advanced"
-  },
-  {
-    "name": "Tour Guide Next",
-    "path": "tour-guide-next",
-    "description": "The tour guide, rebuilt: steps as markup on their targets, a native modal dialog with a spotlight, flipping cards, scrolling, keys.",
+    "description": "Steps as markup on their targets, a native modal dialog with a spotlight, flipping cards, scrolling, keys.",
     "status": "Experimental",
     "library": "ui-lab",
     "category": "Advanced"

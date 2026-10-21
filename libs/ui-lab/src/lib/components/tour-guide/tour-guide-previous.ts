@@ -5,11 +5,11 @@ import {
   cn,
   ɵwarnIfUnnamed,
 } from '@semantic-components/ui';
-import { ScTourGuideNext } from './tour-guide-next';
+import { ScTourGuide } from './tour-guide';
 
 /** The step before; disabled at the first. Write its text ("Back"). */
 @Directive({
-  selector: 'button[scTourGuideNextPrevious]',
+  selector: 'button[scTourGuidePrevious]',
   host: {
     type: 'button',
     'data-slot': 'tour-guide-previous',
@@ -18,8 +18,8 @@ import { ScTourGuideNext } from './tour-guide-next';
     '(click)': 'tour.previous()',
   },
 })
-export class ScTourGuideNextPrevious {
-  protected readonly tour = inject(ScTourGuideNext);
+export class ScTourGuidePrevious {
+  protected readonly tour = inject(ScTourGuide);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('outline');
@@ -33,6 +33,6 @@ export class ScTourGuideNextPrevious {
   );
 
   constructor() {
-    ɵwarnIfUnnamed('scTourGuideNextPrevious');
+    ɵwarnIfUnnamed('scTourGuidePrevious');
   }
 }

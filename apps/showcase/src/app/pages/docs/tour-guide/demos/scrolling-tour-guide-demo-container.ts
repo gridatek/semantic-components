@@ -1,47 +1,47 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { ScrollingTourGuideNextDemo } from './scrolling-tour-guide-next-demo';
+import { ScrollingTourGuideDemo } from './scrolling-tour-guide-demo';
 
 @Component({
-  selector: 'app-scrolling-tour-guide-next-demo-container',
-  imports: [DemoContainer, ScrollingTourGuideNextDemo],
+  selector: 'app-scrolling-tour-guide-demo-container',
+  imports: [DemoContainer, ScrollingTourGuideDemo],
   template: `
     <app-demo-container
       title="Scrolling"
       [code]="code"
-      demoUrl="/demos/tour-guide-next/scrolling-tour-guide-next-demo"
+      demoUrl="/demos/tour-guide/scrolling-tour-guide-demo"
     >
-      <app-scrolling-tour-guide-next-demo />
+      <app-scrolling-tour-guide-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScrollingTourGuideNextDemoContainer {
+export class ScrollingTourGuideDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
 import {
+  ScTourGuide,
+  ScTourGuideClose,
+  ScTourGuideDescription,
   ScTourGuideNext,
-  ScTourGuideNextClose,
-  ScTourGuideNextDescription,
-  ScTourGuideNextNext,
-  ScTourGuideNextPrevious,
-  ScTourGuideNextStep,
-  ScTourGuideNextTitle,
+  ScTourGuidePrevious,
+  ScTourGuideStep,
+  ScTourGuideTitle,
 } from '@semantic-components/ui-lab';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 /** Targets far apart in a long page: each is scrolled into view (smoothly — at once for reduced motion), and the card follows. */
 @Component({
-  selector: 'app-scrolling-tour-guide-next-demo',
+  selector: 'app-scrolling-tour-guide-demo',
   imports: [
+    ScTourGuide,
+    ScTourGuideStep,
+    ScTourGuideTitle,
+    ScTourGuideDescription,
     ScTourGuideNext,
-    ScTourGuideNextStep,
-    ScTourGuideNextTitle,
-    ScTourGuideNextDescription,
-    ScTourGuideNextNext,
-    ScTourGuideNextPrevious,
-    ScTourGuideNextClose,
+    ScTourGuidePrevious,
+    ScTourGuideClose,
     ScButton,
     SiXIcon,
   ],
@@ -66,20 +66,20 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
       </section>
     </div>
 
-    <div scTourGuideNext #tour="scTourGuideNext">
-      <ng-template scTourGuideNextStep [for]="first">
-        <h2 scTourGuideNextTitle>The plans</h2>
-        <p scTourGuideNextDescription>Start here: which plan fits.</p>
+    <div scTourGuide #tour="scTourGuide">
+      <ng-template scTourGuideStep [for]="first">
+        <h2 scTourGuideTitle>The plans</h2>
+        <p scTourGuideDescription>Start here: which plan fits.</p>
       </ng-template>
-      <ng-template scTourGuideNextStep [for]="second" side="top">
-        <h2 scTourGuideNextTitle>The questions</h2>
-        <p scTourGuideNextDescription>Most answers are already here.</p>
+      <ng-template scTourGuideStep [for]="second" side="top">
+        <h2 scTourGuideTitle>The questions</h2>
+        <p scTourGuideDescription>Most answers are already here.</p>
       </ng-template>
-      <ng-template scTourGuideNextStep [for]="third" side="top">
-        <h2 scTourGuideNextTitle>Contact</h2>
-        <p scTourGuideNextDescription>And if not, write to us.</p>
+      <ng-template scTourGuideStep [for]="third" side="top">
+        <h2 scTourGuideTitle>Contact</h2>
+        <p scTourGuideDescription>And if not, write to us.</p>
       </ng-template>
-      <button scTourGuideNextClose>
+      <button scTourGuideClose>
         <svg siXIcon></svg>
         <span class="sr-only">Close tour</span>
       </button>
@@ -87,13 +87,13 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
         <span class="text-muted-foreground text-xs tabular-nums">
           {{ tour.step() + 1 }} of {{ tour.count() }}
         </span>
-        <button scTourGuideNextPrevious class="ms-auto">Back</button>
-        <button scTourGuideNextNext>{{ tour.last() ? 'Done' : 'Next' }}</button>
+        <button scTourGuidePrevious class="ms-auto">Back</button>
+        <button scTourGuideNext>{{ tour.last() ? 'Done' : 'Next' }}</button>
       </div>
     </div>
   \`,
   host: { class: 'flex w-full flex-col items-center gap-4' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScrollingTourGuideNextDemo {}`;
+export class ScrollingTourGuideDemo {}`;
 }

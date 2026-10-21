@@ -4,14 +4,14 @@ import { Directive, TemplateRef, inject, input } from '@angular/core';
 export type ScTourSide = 'top' | 'bottom' | 'start' | 'end';
 
 /**
- * A step: your markup — `<ng-template scTourGuideNextStep [for]="target">` —
- * its title (`scTourGuideNextTitle`) and text. On its target (an element:
+ * A step: your markup — `<ng-template scTourGuideStep [for]="target">` —
+ * its title (`scTourGuideTitle`) and text. On its target (an element:
  * a template reference), on its `side`; without one, centred.
  */
 @Directive({
-  selector: 'ng-template[scTourGuideNextStep]',
+  selector: 'ng-template[scTourGuideStep]',
 })
-export class ScTourGuideNextStep {
+export class ScTourGuideStep {
   readonly template = inject(TemplateRef);
 
   /** The element it shows; none, the card is centred. */

@@ -1,7 +1,6 @@
 import { type Page, expect, test } from '@playwright/test';
 
-const demo = (name: string) =>
-  `/demos/tour-guide-next/${name}-tour-guide-next-demo`;
+const demo = (name: string) => `/demos/tour-guide/${name}-tour-guide-demo`;
 const dialog = (page: Page) => page.getByRole('dialog');
 const card = (page: Page) => page.locator('[data-slot="tour-guide-card"]');
 
