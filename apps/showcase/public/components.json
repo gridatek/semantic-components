@@ -978,15 +978,7 @@
   {
     "name": "Transfer List",
     "path": "transfer-list",
-    "description": "Move items between two lists.",
-    "status": "Experimental",
-    "library": "ui-lab",
-    "category": "Advanced"
-  },
-  {
-    "name": "Transfer List Next",
-    "path": "transfer-list-next",
-    "description": "The transfer list, rebuilt: one value (the chosen ids, a form field), two listbox sides, keyboard moves, search, reorder.",
+    "description": "One value (the chosen ids, a form field), two listbox sides, keyboard moves, search, reorder.",
     "status": "Experimental",
     "library": "ui-lab",
     "category": "Advanced"

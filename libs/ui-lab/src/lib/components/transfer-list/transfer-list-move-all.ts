@@ -5,18 +5,15 @@ import {
   cn,
   ɵwarnIfUnnamed,
 } from '@semantic-components/ui';
-import {
-  ScTransferListNext,
-  type ScTransferListSide,
-} from './transfer-list-next';
+import { ScTransferList, type ScTransferListSide } from './transfer-list';
 
 /**
  * Moves all the other side shows (searched, not disabled) to its side —
- * `[scTransferListNextMoveAll]="'target'"`. Write its icon and name it
+ * `[scTransferListMoveAll]="'target'"`. Write its icon and name it
  * ("Add all").
  */
 @Directive({
-  selector: 'button[scTransferListNextMoveAll]',
+  selector: 'button[scTransferListMoveAll]',
   host: {
     type: 'button',
     'data-slot': 'transfer-list-move-all',
@@ -25,11 +22,11 @@ import {
     '(click)': 'list.move(ids(), to())',
   },
 })
-export class ScTransferListNextMoveAll {
-  protected readonly list = inject(ScTransferListNext);
+export class ScTransferListMoveAll {
+  protected readonly list = inject(ScTransferList);
 
   readonly to = input.required<ScTransferListSide>({
-    alias: 'scTransferListNextMoveAll',
+    alias: 'scTransferListMoveAll',
   });
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('outline');
@@ -52,6 +49,6 @@ export class ScTransferListNextMoveAll {
   );
 
   constructor() {
-    ɵwarnIfUnnamed('scTransferListNextMoveAll');
+    ɵwarnIfUnnamed('scTransferListMoveAll');
   }
 }

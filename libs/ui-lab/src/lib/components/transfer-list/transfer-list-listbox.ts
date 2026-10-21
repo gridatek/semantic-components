@@ -8,7 +8,7 @@ import {
   untracked,
 } from '@angular/core';
 import { bindInput, cn, ɵwarnIfUnnamed } from '@semantic-components/ui';
-import { ScTransferListNextPane } from './transfer-list-next-pane';
+import { ScTransferListPane } from './transfer-list-pane';
 
 /**
  * A side's items: a listbox, many selectable — ↑ ↓ Home End and typeahead,
@@ -16,7 +16,7 @@ import { ScTransferListNextPane } from './transfer-list-next-pane';
  * the other side. One Tab stop. Name it (`aria-labelledby` its title).
  */
 @Directive({
-  selector: '[scTransferListNextListbox]',
+  selector: '[scTransferListListbox]',
   hostDirectives: [Listbox],
   host: {
     'data-slot': 'transfer-list-listbox',
@@ -25,8 +25,8 @@ import { ScTransferListNextPane } from './transfer-list-next-pane';
     '(focusout)': 'pane.list.touch.emit()',
   },
 })
-export class ScTransferListNextListbox {
-  protected readonly pane = inject(ScTransferListNextPane);
+export class ScTransferListListbox {
+  protected readonly pane = inject(ScTransferListPane);
   private readonly listbox = inject<Listbox<string>>(Listbox);
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -40,7 +40,7 @@ export class ScTransferListNextListbox {
   );
 
   constructor() {
-    ɵwarnIfUnnamed('scTransferListNextListbox');
+    ɵwarnIfUnnamed('scTransferListListbox');
     bindInput(this.listbox.multi, true);
     bindInput(this.listbox.selectionMode, 'explicit');
     bindInput(

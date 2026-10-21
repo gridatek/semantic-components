@@ -11,30 +11,30 @@ import {
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import {
+  ScTransferList,
   type ScTransferListItem,
-  ScTransferListNext,
   type ScTransferListSide,
-} from './transfer-list-next';
+} from './transfer-list';
 
 /**
- * One side — `scTransferListNextPane="source"` or `"target"`: its items
+ * One side — `scTransferListPane="source"` or `"target"`: its items
  * (searched), its selection. Put in it your title, a search, a select-all,
  * and its listbox.
  */
 @Directive({
-  selector: '[scTransferListNextPane]',
-  exportAs: 'scTransferListNextPane',
+  selector: '[scTransferListPane]',
+  exportAs: 'scTransferListPane',
   host: {
     'data-slot': 'transfer-list-pane',
     '[attr.data-side]': 'side()',
     '[class]': 'class()',
   },
 })
-export class ScTransferListNextPane {
-  readonly list = inject(ScTransferListNext);
+export class ScTransferListPane {
+  readonly list = inject(ScTransferList);
 
   readonly side = input.required<ScTransferListSide>({
-    alias: 'scTransferListNextPane',
+    alias: 'scTransferListPane',
   });
   readonly classInput = input<string>('', { alias: 'class' });
 

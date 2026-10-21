@@ -7,18 +7,18 @@ import {
   input,
 } from '@angular/core';
 import { cn, useActiveOption } from '@semantic-components/ui';
-import { ScTransferListNextPane } from './transfer-list-next-pane';
+import { ScTransferListPane } from './transfer-list-pane';
 
 /**
- * An item in a side's listbox — `[scTransferListNextOption]="item.id"`,
+ * An item in a side's listbox — `[scTransferListOption]="item.id"`,
  * `[label]` for typeahead, `[disabled]`. A double-click moves it across.
  */
 @Component({
-  selector: '[scTransferListNextOption]',
+  selector: '[scTransferListOption]',
   hostDirectives: [
     {
       directive: Option,
-      inputs: ['value: scTransferListNextOption', 'label', 'disabled'],
+      inputs: ['value: scTransferListOption', 'label', 'disabled'],
     },
   ],
   template: `
@@ -46,8 +46,8 @@ import { ScTransferListNextPane } from './transfer-list-next-pane';
   },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScTransferListNextOption {
-  private readonly pane = inject(ScTransferListNextPane);
+export class ScTransferListOption {
+  private readonly pane = inject(ScTransferListPane);
   private readonly option = inject<Option<string>>(Option);
   protected readonly onPointerMove = useActiveOption(this.option);
 

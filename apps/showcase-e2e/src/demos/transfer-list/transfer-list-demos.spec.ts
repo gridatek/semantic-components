@@ -1,7 +1,7 @@
 import { type Page, expect, test } from '@playwright/test';
 
 const demo = (name: string) =>
-  `/demos/transfer-list-next/${name}-transfer-list-next-demo`;
+  `/demos/transfer-list/${name}-transfer-list-demo`;
 const side = (page: Page, name: string) => page.getByRole('listbox', { name });
 const value = (page: Page) => page.locator('pre').first();
 

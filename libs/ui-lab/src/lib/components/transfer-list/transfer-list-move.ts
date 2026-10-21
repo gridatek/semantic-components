@@ -5,18 +5,15 @@ import {
   cn,
   ɵwarnIfUnnamed,
 } from '@semantic-components/ui';
-import {
-  ScTransferListNext,
-  type ScTransferListSide,
-} from './transfer-list-next';
+import { ScTransferList, type ScTransferListSide } from './transfer-list';
 
 /**
  * Moves the other side's selection to its side —
- * `[scTransferListNextMove]="'target'"`; disabled with none selected. Write
+ * `[scTransferListMove]="'target'"`; disabled with none selected. Write
  * its icon and name it ("Add selected").
  */
 @Directive({
-  selector: 'button[scTransferListNextMove]',
+  selector: 'button[scTransferListMove]',
   host: {
     type: 'button',
     'data-slot': 'transfer-list-move',
@@ -25,11 +22,11 @@ import {
     '(click)': 'list.move(selected(), to())',
   },
 })
-export class ScTransferListNextMove {
-  protected readonly list = inject(ScTransferListNext);
+export class ScTransferListMove {
+  protected readonly list = inject(ScTransferList);
 
   readonly to = input.required<ScTransferListSide>({
-    alias: 'scTransferListNextMove',
+    alias: 'scTransferListMove',
   });
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('outline');
@@ -51,6 +48,6 @@ export class ScTransferListNextMove {
   );
 
   constructor() {
-    ɵwarnIfUnnamed('scTransferListNextMove');
+    ɵwarnIfUnnamed('scTransferListMove');
   }
 }

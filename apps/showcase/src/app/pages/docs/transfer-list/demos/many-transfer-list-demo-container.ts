@@ -1,34 +1,33 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { BasicTransferListNextDemo } from './basic-transfer-list-next-demo';
+import { ManyTransferListDemo } from './many-transfer-list-demo';
 
 @Component({
-  selector: 'app-basic-transfer-list-next-demo-container',
-  imports: [DemoContainer, BasicTransferListNextDemo],
+  selector: 'app-many-transfer-list-demo-container',
+  imports: [DemoContainer, ManyTransferListDemo],
   template: `
     <app-demo-container
-      title="Basic"
+      title="Many"
       [code]="code"
-      demoUrl="/demos/transfer-list-next/basic-transfer-list-next-demo"
+      demoUrl="/demos/transfer-list/many-transfer-list-demo"
     >
-      <app-basic-transfer-list-next-demo />
+      <app-many-transfer-list-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class BasicTransferListNextDemoContainer {
-  readonly code = `import { JsonPipe } from '@angular/common';
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+export class ManyTransferListDemoContainer {
+  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScTransferListNext,
-  ScTransferListNextListbox,
-  ScTransferListNextMove,
-  ScTransferListNextMoveAll,
-  ScTransferListNextOption,
-  ScTransferListNextPane,
-  ScTransferListNextSearch,
-  ScTransferListNextSelectAll,
+  ScTransferList,
+  ScTransferListListbox,
+  ScTransferListMove,
+  ScTransferListMoveAll,
+  ScTransferListOption,
+  ScTransferListPane,
+  ScTransferListSearch,
+  ScTransferListSelectAll,
 } from '@semantic-components/ui-lab';
 import {
   SiChevronLeftIcon,
@@ -37,19 +36,18 @@ import {
   SiChevronsRightIcon,
 } from '@semantic-icons/lucide-icons';
 
-/** Two sides, one value: the chosen ids. Each side a listbox — ↑ ↓, Space selects, Shift extends, Ctrl+A all, Enter (or a double-click) moves across; one Tab stop each. Billing is disabled. */
+/** Two hundred items: search to narrow a side; Add all moves what the search shows. */
 @Component({
-  selector: 'app-basic-transfer-list-next-demo',
+  selector: 'app-many-transfer-list-demo',
   imports: [
-    JsonPipe,
-    ScTransferListNext,
-    ScTransferListNextPane,
-    ScTransferListNextListbox,
-    ScTransferListNextOption,
-    ScTransferListNextSelectAll,
-    ScTransferListNextSearch,
-    ScTransferListNextMove,
-    ScTransferListNextMoveAll,
+    ScTransferList,
+    ScTransferListPane,
+    ScTransferListListbox,
+    ScTransferListOption,
+    ScTransferListSelectAll,
+    ScTransferListSearch,
+    ScTransferListMove,
+    ScTransferListMoveAll,
     SiChevronRightIcon,
     SiChevronsRightIcon,
     SiChevronLeftIcon,
@@ -57,20 +55,20 @@ import {
   ],
   template: \`
     <div
-      scTransferListNext
-      [items]="permissions"
+      scTransferList
+      [items]="countries"
       [(value)]="chosen"
       class="w-full max-w-2xl"
     >
-      <div scTransferListNextPane="source" #source="scTransferListNextPane">
+      <div scTransferListPane="source" #source="scTransferListPane">
         <div class="flex items-center gap-2 border-b px-3 py-2">
           <input
             type="checkbox"
-            scTransferListNextSelectAll
-            aria-label="Select all available"
+            scTransferListSelectAll
+            aria-label="Select all countries"
           />
-          <span id="basic-source-title" class="text-sm font-medium"
-            >Available</span
+          <span id="many-source-title" class="text-sm font-medium"
+            >Countries</span
           >
           <span class="text-muted-foreground ms-auto text-xs tabular-nums">
             {{ source.selected().length }} / {{ source.items().length }}
@@ -78,15 +76,15 @@ import {
         </div>
         <div class="border-b p-2">
           <input
-            scTransferListNextSearch
+            scTransferListSearch
             placeholder="Search"
-            aria-label="Search available"
+            aria-label="Search countries"
           />
         </div>
-        <div scTransferListNextListbox aria-labelledby="basic-source-title">
+        <div scTransferListListbox aria-labelledby="many-source-title">
           @for (item of source.items(); track item.id) {
             <div
-              [scTransferListNextOption]="item.id"
+              [scTransferListOption]="item.id"
               [label]="item.label"
               [disabled]="item.disabled ?? false"
             >
@@ -101,32 +99,32 @@ import {
         }
       </div>
       <div class="flex flex-col justify-center gap-2">
-        <button scTransferListNextMove="target">
+        <button scTransferListMove="target">
           <svg siChevronRightIcon class="rtl:rotate-180"></svg>
           <span class="sr-only">Add selected</span>
         </button>
-        <button scTransferListNextMoveAll="target">
+        <button scTransferListMoveAll="target">
           <svg siChevronsRightIcon class="rtl:rotate-180"></svg>
           <span class="sr-only">Add all</span>
         </button>
-        <button scTransferListNextMove="source">
+        <button scTransferListMove="source">
           <svg siChevronLeftIcon class="rtl:rotate-180"></svg>
           <span class="sr-only">Remove selected</span>
         </button>
-        <button scTransferListNextMoveAll="source">
+        <button scTransferListMoveAll="source">
           <svg siChevronsLeftIcon class="rtl:rotate-180"></svg>
           <span class="sr-only">Remove all</span>
         </button>
       </div>
-      <div scTransferListNextPane="target" #target="scTransferListNextPane">
+      <div scTransferListPane="target" #target="scTransferListPane">
         <div class="flex items-center gap-2 border-b px-3 py-2">
           <input
             type="checkbox"
-            scTransferListNextSelectAll
-            aria-label="Select all granted"
+            scTransferListSelectAll
+            aria-label="Select all shipping to"
           />
-          <span id="basic-target-title" class="text-sm font-medium"
-            >Granted</span
+          <span id="many-target-title" class="text-sm font-medium"
+            >Shipping to</span
           >
           <span class="text-muted-foreground ms-auto text-xs tabular-nums">
             {{ target.selected().length }} / {{ target.items().length }}
@@ -134,15 +132,15 @@ import {
         </div>
         <div class="border-b p-2">
           <input
-            scTransferListNextSearch
+            scTransferListSearch
             placeholder="Search"
-            aria-label="Search granted"
+            aria-label="Search shipping to"
           />
         </div>
-        <div scTransferListNextListbox aria-labelledby="basic-target-title">
+        <div scTransferListListbox aria-labelledby="many-target-title">
           @for (item of target.items(); track item.id) {
             <div
-              [scTransferListNextOption]="item.id"
+              [scTransferListOption]="item.id"
               [label]="item.label"
               [disabled]="item.disabled ?? false"
             >
@@ -157,24 +155,15 @@ import {
         }
       </div>
     </div>
-    <pre
-      class="bg-muted w-full max-w-2xl overflow-x-auto rounded-md p-3 text-xs"
-      >{{ chosen() | json }}</pre>
   \`,
   host: { class: 'flex w-full flex-col items-center gap-4' },
   encapsulation: ViewEncapsulation.None,
 })
-export class BasicTransferListNextDemo {
-  readonly permissions = [
-    { id: 'read', label: 'Read' },
-    { id: 'write', label: 'Write' },
-    { id: 'delete', label: 'Delete' },
-    { id: 'share', label: 'Share' },
-    { id: 'export', label: 'Export' },
-    { id: 'invite', label: 'Invite members' },
-    { id: 'billing', label: 'Billing', disabled: true },
-    { id: 'admin', label: 'Administer' },
-  ];
-  readonly chosen = signal(['read']);
+export class ManyTransferListDemo {
+  readonly countries = Array.from({ length: 200 }, (_, i) => ({
+    id: 'c' + i,
+    label: 'Region ' + String(i + 1).padStart(3, '0'),
+  }));
+  readonly chosen = signal<string[]>([]);
 }`;
 }

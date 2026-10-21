@@ -5,15 +5,15 @@ import {
   cn,
   ɵwarnIfUnnamed,
 } from '@semantic-components/ui';
-import { ScTransferListNext } from './transfer-list-next';
+import { ScTransferList } from './transfer-list';
 
 /**
- * Moves the chosen side's selection up (`[scTransferListNextReorder]="-1"`)
+ * Moves the chosen side's selection up (`[scTransferListReorder]="-1"`)
  * or down (`1`), together; disabled at the end. Write its icon and name it
  * ("Move up").
  */
 @Directive({
-  selector: 'button[scTransferListNextReorder]',
+  selector: 'button[scTransferListReorder]',
   host: {
     type: 'button',
     'data-slot': 'transfer-list-reorder',
@@ -22,11 +22,11 @@ import { ScTransferListNext } from './transfer-list-next';
     '(click)': 'list.reorder(selected(), step())',
   },
 })
-export class ScTransferListNextReorder {
-  protected readonly list = inject(ScTransferListNext);
+export class ScTransferListReorder {
+  protected readonly list = inject(ScTransferList);
 
   readonly step = input.required<-1 | 1>({
-    alias: 'scTransferListNextReorder',
+    alias: 'scTransferListReorder',
   });
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('outline');
@@ -45,6 +45,6 @@ export class ScTransferListNextReorder {
   );
 
   constructor() {
-    ɵwarnIfUnnamed('scTransferListNextReorder');
+    ɵwarnIfUnnamed('scTransferListReorder');
   }
 }

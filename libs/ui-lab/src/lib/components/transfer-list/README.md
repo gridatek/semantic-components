@@ -1,227 +1,66 @@
 # Transfer List
 
-A composable dual-list component for moving items between source and target lists with selection and search support.
+One value — the chosen ids, in order, a form field — and two sides that are listboxes: select with the keys, move with Enter or a double-click, search, reorder.
 
-## Installation
+## Architecture
 
-```typescript
-import { ScTransferList, ScTransferListActions, ScTransferListCount, ScTransferListEntry, ScTransferListHeader, ScTransferListItems, ScTransferListMoveAllToSource, ScTransferListMoveAllToTarget, ScTransferListMoveToSource, ScTransferListMoveToTarget, ScTransferListSearch, ScTransferListSelectAll, ScTransferListSource, ScTransferListTarget } from '@semantic-components/ui-lab';
-import type { ScTransferListChange, ScTransferListItemData } from '@semantic-components/ui-lab';
+```
+[scTransferList] (items — yours: { id, label, disabled? } · value — two-way, a [formField]: the chosen ids)
+├── [scTransferListPane]="'source' | 'target'" — a side: items() (searched), selected(), query
+│   ├── input[type=checkbox][scTransferListSelectAll]
+│   ├── input[scTransferListSearch]
+│   └── [scTransferListListbox] — many selectable
+│       └── [scTransferListOption]="item.id" [label] [disabled]
+└── buttons: [scTransferListMove]="'target' | 'source'", [scTransferListMoveAll]=…, [scTransferListReorder]="-1 | 1"
 ```
 
 ## Usage
 
-### Basic Usage
-
 ```html
-<div scTransferList [(sourceItems)]="sourceItems" [(targetItems)]="targetItems" (transferChange)="onChange($event)">
-  <div scTransferListSource #source="scTransferListSource">
-    <div scTransferListHeader>
-      <label class="flex items-center gap-2">
-        <input type="checkbox" scTransferListSelectAll />
-        <span class="font-medium">Available</span>
-      </label>
-      <span scTransferListCount></span>
-    </div>
-    <div class="border-b p-2">
-      <input scTransferListSearch placeholder="Search..." />
-    </div>
-    <div scTransferListItems>
-      @for (item of source.filteredItems(); track item.id) {
-      <label scTransferListItem [item]="item">
-        <div class="truncate">{{ item.label }}</div>
-        @if (item.description) {
-        <div class="text-muted-foreground truncate text-xs">{{ item.description }}</div>
-        }
-      </label>
-      } @empty {
-      <div class="text-muted-foreground p-4 text-center text-sm">No items</div>
+<div scTransferList [items]="permissions" [formField]="form.permissions">
+  <div scTransferListPane="source" #source="scTransferListPane">
+    <input type="checkbox" scTransferListSelectAll aria-label="Select all available" />
+    <span id="available">Available</span> {{ source.selected().length }} / {{ source.items().length }}
+    <input scTransferListSearch aria-label="Search available" />
+    <div scTransferListListbox aria-labelledby="available">
+      @for (item of source.items(); track item.id) {
+      <div [scTransferListOption]="item.id" [label]="item.label" [disabled]="item.disabled ?? false">{{ item.label }}</div>
       }
     </div>
-  </div>
-
-  <div scTransferListActions>
-    <button scTransferListMoveToTarget>
-      <svg siChevronRightIcon class="rtl:rotate-180"></svg>
-      <span class="sr-only">Move selected to right</span>
-    </button>
-    <button scTransferListMoveToSource>
-      <svg siChevronLeftIcon class="rtl:rotate-180"></svg>
-      <span class="sr-only">Move selected to left</span>
-    </button>
-    <button scTransferListMoveAllToTarget>
-      <svg siChevronsRightIcon class="rtl:rotate-180"></svg>
-      <span class="sr-only">Move all to right</span>
-    </button>
-    <button scTransferListMoveAllToSource>
-      <svg siChevronsLeftIcon class="rtl:rotate-180"></svg>
-      <span class="sr-only">Move all to left</span>
-    </button>
-  </div>
-
-  <div scTransferListTarget #target="scTransferListTarget">
-    <div scTransferListHeader>
-      <label class="flex items-center gap-2">
-        <input type="checkbox" scTransferListSelectAll />
-        <span class="font-medium">Selected</span>
-      </label>
-      <span scTransferListCount></span>
-    </div>
-    <div class="border-b p-2">
-      <input scTransferListSearch placeholder="Search..." />
-    </div>
-    <div scTransferListItems>
-      @for (item of target.filteredItems(); track item.id) {
-      <label scTransferListItem [item]="item">
-        <div class="truncate">{{ item.label }}</div>
-        @if (item.description) {
-        <div class="text-muted-foreground truncate text-xs">{{ item.description }}</div>
-        }
-      </label>
-      } @empty {
-      <div class="text-muted-foreground p-4 text-center text-sm">No items</div>
-      }
-    </div>
-  </div>
-</div>
-```
-
-```typescript
-sourceItems = signal<ScTransferListItemData[]>([
-  { id: '1', label: 'Item 1', description: 'Description' },
-  { id: '2', label: 'Item 2' },
-  { id: '3', label: 'Item 3' },
-]);
-
-targetItems = signal<ScTransferListItemData[]>([]);
-```
-
-### Without Search
-
-Omit the `scTransferListSearch` element from the panel to disable search:
-
-```html
-<div scTransferListSource #source="scTransferListSource">
-  <div scTransferListHeader>
-    <label class="flex items-center gap-2">
-      <input type="checkbox" scTransferListSelectAll />
-      <span class="font-medium">Options</span>
-    </label>
-    <span scTransferListCount></span>
-  </div>
-  <div scTransferListItems>
-    @for (item of source.filteredItems(); track item.id) {
-    <label scTransferListItem [item]="item">
-      <div class="truncate">{{ item.label }}</div>
-    </label>
+    @if (!source.items().length) {
+    <p>Nothing here</p>
     }
   </div>
+
+  <div>
+    <button scTransferListMove="target"><svg siChevronRightIcon></svg><span class="sr-only">Add selected</span></button>
+    <button scTransferListMove="source"><svg siChevronLeftIcon></svg><span class="sr-only">Remove selected</span></button>
+  </div>
+
+  <div scTransferListPane="target" #target="scTransferListPane">…</div>
 </div>
 ```
 
-### With Disabled Items
+## Value
 
-```typescript
-sourceItems = signal<ScTransferListItemData[]>([
-  { id: '1', label: 'Movable Item' },
-  { id: '2', label: 'Locked Item', disabled: true },
-]);
-```
+The chosen ids, in order — the source side is the rest of `items`, in theirs. A `[formField]`: `required`, `minLength`… in your schema; `disabled` from it. Moved items stay selected on their new side, so a move back is one key away.
 
-## API Reference
+## Keyboard
 
-### ScTransferList
+Each side is one Tab stop, a listbox (Angular Aria): ↑ ↓ Home End and typeahead (by `label`), Space selects, Shift extends, Ctrl+A all — and Enter moves the selection to the other side. A double-click moves one item.
 
-Root directive. Provides shared state to all children.
+## Buttons
 
-| Input         | Type                       | Default | Description                 |
-| ------------- | -------------------------- | ------- | --------------------------- |
-| `sourceItems` | `ScTransferListItemData[]` | `[]`    | Source list items (two-way) |
-| `targetItems` | `ScTransferListItemData[]` | `[]`    | Target list items (two-way) |
-| `class`       | `string`                   | `''`    | Additional CSS classes      |
+- `Move`: the other side's selection, to its side; disabled with none.
+- `MoveAll`: all the other side shows — searched, not disabled.
+- `Reorder`: the chosen side's selection, up (−1) or down (1), together; disabled at the end.
 
-| Output           | Type                   | Description               |
-| ---------------- | ---------------------- | ------------------------- |
-| `transferChange` | `ScTransferListChange` | Emitted when lists change |
+## Accessibility
 
-### ScTransferListSource / ScTransferListTarget
+- Name each listbox (`aria-labelledby` its title), the search, the select-all, every button.
+- A listbox holds options only: put an empty message after it, not in it.
+- Disabled items are `aria-disabled`: reachable, never moved.
 
-Panel container directives. Expose `filteredItems()`, `selectedIds()`, `allSelected()`, `someSelected()`, `selectedCount()`, `totalCount()`, and `searchValue()` via `exportAs`.
+## Not here
 
-| Input   | Type     | Default | Description            |
-| ------- | -------- | ------- | ---------------------- |
-| `class` | `string` | `''`    | Additional CSS classes |
-
-### ScTransferListHeader
-
-Styled header directive for the top of each panel.
-
-### ScTransferListSelectAll
-
-Directive on `input[type="checkbox"]`. Auto-binds `checked`, `indeterminate`, and `change` based on the parent panel's selection state.
-
-### ScTransferListCount
-
-Directive on any element. Renders `selected/total` count text via `textContent`.
-
-### ScTransferListSearch
-
-Directive on `input`. Auto-binds `value` and `input` events for filtering items.
-
-### ScTransferListItems
-
-Scrollable container directive for the item list.
-
-| Input    | Type     | Default | Description            |
-| -------- | -------- | ------- | ---------------------- |
-| `height` | `string` | `300px` | Max height of list     |
-| `class`  | `string` | `''`    | Additional CSS classes |
-
-### ScTransferListEntry
-
-Component on `label`. Renders a checkbox and projects content. Handles selection toggle on click.
-
-| Input   | Type                     | Description            |
-| ------- | ------------------------ | ---------------------- |
-| `item`  | `ScTransferListItemData` | Required               |
-| `class` | `string`                 | Additional CSS classes |
-
-### ScTransferListActions
-
-The column for the move buttons, between the lists. The buttons are yours (your icons and names), with a part each; each styles itself (`outline`, `icon`; change it with `variant` and `size`, as on `scButton`):
-
-| Part                            | Selector                                | Moves                                                          |
-| ------------------------------- | --------------------------------------- | -------------------------------------------------------------- |
-| `ScTransferListMoveToTarget`    | `button[scTransferListMoveToTarget]`    | The selected items to the target (disabled with none selected) |
-| `ScTransferListMoveToSource`    | `button[scTransferListMoveToSource]`    | The selected items back to the source                          |
-| `ScTransferListMoveAllToTarget` | `button[scTransferListMoveAllToTarget]` | Every item to the target (disabled when the source is empty)   |
-| `ScTransferListMoveAllToSource` | `button[scTransferListMoveAllToSource]` | Every item back to the source                                  |
-
-## Type Definitions
-
-```typescript
-interface ScTransferListItemData {
-  id: string;
-  label: string;
-  description?: string;
-  disabled?: boolean;
-}
-
-interface ScTransferListChange {
-  source: ScTransferListItemData[];
-  target: ScTransferListItemData[];
-}
-```
-
-## Features
-
-- Fully composable directive-based architecture
-- Two-way binding for both lists
-- Move selected items between lists
-- Move all items at once
-- Select/deselect all in each list
-- Search filtering in both lists
-- Disabled items support
-- Item descriptions with content projection
-- Checkbox selection with indeterminate state
-- Keyboard accessible
+Dragging between the sides, pagination, trees in a side.

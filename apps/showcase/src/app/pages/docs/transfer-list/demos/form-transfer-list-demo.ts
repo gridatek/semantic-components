@@ -1,34 +1,14 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { FormTransferListNextDemo } from './form-transfer-list-next-demo';
-
-@Component({
-  selector: 'app-form-transfer-list-next-demo-container',
-  imports: [DemoContainer, FormTransferListNextDemo],
-  template: `
-    <app-demo-container
-      title="Form"
-      [code]="code"
-      demoUrl="/demos/transfer-list-next/form-transfer-list-next-demo"
-    >
-      <app-form-transfer-list-next-demo />
-    </app-demo-container>
-  `,
-  host: { class: 'block w-full' },
-  encapsulation: ViewEncapsulation.None,
-})
-export class FormTransferListNextDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, FormRoot, form, minLength } from '@angular/forms/signals';
 import { ScButton, ScField, ScFieldErrors } from '@semantic-components/ui';
 import {
-  ScTransferListNext,
-  ScTransferListNextListbox,
-  ScTransferListNextMove,
-  ScTransferListNextMoveAll,
-  ScTransferListNextOption,
-  ScTransferListNextPane,
-  ScTransferListNextSelectAll,
+  ScTransferList,
+  ScTransferListListbox,
+  ScTransferListMove,
+  ScTransferListMoveAll,
+  ScTransferListOption,
+  ScTransferListPane,
+  ScTransferListSelectAll,
 } from '@semantic-components/ui-lab';
 import {
   SiChevronLeftIcon,
@@ -39,15 +19,15 @@ import {
 
 /** A [formField]: the chosen ids; at least two, in the schema — left short, the error shows. */
 @Component({
-  selector: 'app-form-transfer-list-next-demo',
+  selector: 'app-form-transfer-list-demo',
   imports: [
-    ScTransferListNext,
-    ScTransferListNextPane,
-    ScTransferListNextListbox,
-    ScTransferListNextOption,
-    ScTransferListNextSelectAll,
-    ScTransferListNextMove,
-    ScTransferListNextMoveAll,
+    ScTransferList,
+    ScTransferListPane,
+    ScTransferListListbox,
+    ScTransferListOption,
+    ScTransferListSelectAll,
+    ScTransferListMove,
+    ScTransferListMoveAll,
     ScButton,
     ScField,
     ScFieldErrors,
@@ -58,23 +38,23 @@ import {
     SiChevronLeftIcon,
     SiChevronsLeftIcon,
   ],
-  template: \`
+  template: `
     <form [formRoot]="roleForm" class="w-full max-w-2xl space-y-4">
       <div scField>
         <p id="role-label" class="text-sm font-medium">
           Permissions for the role
         </p>
         <div
-          scTransferListNext
+          scTransferList
           [items]="permissions"
           [formField]="roleForm.permissions"
           aria-labelledby="role-label"
         >
-          <div scTransferListNextPane="source" #source="scTransferListNextPane">
+          <div scTransferListPane="source" #source="scTransferListPane">
             <div class="flex items-center gap-2 border-b px-3 py-2">
               <input
                 type="checkbox"
-                scTransferListNextSelectAll
+                scTransferListSelectAll
                 aria-label="Select all available"
               />
               <span id="form-source-title" class="text-sm font-medium"
@@ -84,10 +64,10 @@ import {
                 {{ source.selected().length }} / {{ source.items().length }}
               </span>
             </div>
-            <div scTransferListNextListbox aria-labelledby="form-source-title">
+            <div scTransferListListbox aria-labelledby="form-source-title">
               @for (item of source.items(); track item.id) {
                 <div
-                  [scTransferListNextOption]="item.id"
+                  [scTransferListOption]="item.id"
                   [label]="item.label"
                   [disabled]="item.disabled ?? false"
                 >
@@ -102,28 +82,28 @@ import {
             }
           </div>
           <div class="flex flex-col justify-center gap-2">
-            <button scTransferListNextMove="target">
+            <button scTransferListMove="target">
               <svg siChevronRightIcon class="rtl:rotate-180"></svg>
               <span class="sr-only">Add selected</span>
             </button>
-            <button scTransferListNextMoveAll="target">
+            <button scTransferListMoveAll="target">
               <svg siChevronsRightIcon class="rtl:rotate-180"></svg>
               <span class="sr-only">Add all</span>
             </button>
-            <button scTransferListNextMove="source">
+            <button scTransferListMove="source">
               <svg siChevronLeftIcon class="rtl:rotate-180"></svg>
               <span class="sr-only">Remove selected</span>
             </button>
-            <button scTransferListNextMoveAll="source">
+            <button scTransferListMoveAll="source">
               <svg siChevronsLeftIcon class="rtl:rotate-180"></svg>
               <span class="sr-only">Remove all</span>
             </button>
           </div>
-          <div scTransferListNextPane="target" #target="scTransferListNextPane">
+          <div scTransferListPane="target" #target="scTransferListPane">
             <div class="flex items-center gap-2 border-b px-3 py-2">
               <input
                 type="checkbox"
-                scTransferListNextSelectAll
+                scTransferListSelectAll
                 aria-label="Select all granted"
               />
               <span id="form-target-title" class="text-sm font-medium"
@@ -133,10 +113,10 @@ import {
                 {{ target.selected().length }} / {{ target.items().length }}
               </span>
             </div>
-            <div scTransferListNextListbox aria-labelledby="form-target-title">
+            <div scTransferListListbox aria-labelledby="form-target-title">
               @for (item of target.items(); track item.id) {
                 <div
-                  [scTransferListNextOption]="item.id"
+                  [scTransferListOption]="item.id"
                   [label]="item.label"
                   [disabled]="item.disabled ?? false"
                 >
@@ -160,11 +140,11 @@ import {
         </p>
       }
     </form>
-  \`,
+  `,
   host: { class: 'flex w-full flex-col items-center gap-4' },
   encapsulation: ViewEncapsulation.None,
 })
-export class FormTransferListNextDemo {
+export class FormTransferListDemo {
   readonly permissions = [
     { id: 'read', label: 'Read' },
     { id: 'write', label: 'Write' },
@@ -185,5 +165,4 @@ export class FormTransferListNextDemo {
       }),
     { submission: { action: async () => this.saved.set(true) } },
   );
-}`;
 }

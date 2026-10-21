@@ -4113,43 +4113,24 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'no-search-transfer-list-demo',
+        path: 'form-transfer-list-demo',
         loadComponent: () =>
-          import('../pages/docs/transfer-list/demos/no-search-transfer-list-demo').then(
-            (m) => m.NoSearchTransferListDemo,
-          ),
-      },
-    ],
-  },
-  {
-    path: 'demos/transfer-list-next',
-    children: [
-      {
-        path: 'basic-transfer-list-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/transfer-list-next/demos/basic-transfer-list-next-demo').then(
-            (m) => m.BasicTransferListNextDemo,
+          import('../pages/docs/transfer-list/demos/form-transfer-list-demo').then(
+            (m) => m.FormTransferListDemo,
           ),
       },
       {
-        path: 'form-transfer-list-next-demo',
+        path: 'ordered-transfer-list-demo',
         loadComponent: () =>
-          import('../pages/docs/transfer-list-next/demos/form-transfer-list-next-demo').then(
-            (m) => m.FormTransferListNextDemo,
+          import('../pages/docs/transfer-list/demos/ordered-transfer-list-demo').then(
+            (m) => m.OrderedTransferListDemo,
           ),
       },
       {
-        path: 'ordered-transfer-list-next-demo',
+        path: 'many-transfer-list-demo',
         loadComponent: () =>
-          import('../pages/docs/transfer-list-next/demos/ordered-transfer-list-next-demo').then(
-            (m) => m.OrderedTransferListNextDemo,
-          ),
-      },
-      {
-        path: 'many-transfer-list-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/transfer-list-next/demos/many-transfer-list-next-demo').then(
-            (m) => m.ManyTransferListNextDemo,
+          import('../pages/docs/transfer-list/demos/many-transfer-list-demo').then(
+            (m) => m.ManyTransferListDemo,
           ),
       },
     ],
