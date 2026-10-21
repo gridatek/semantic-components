@@ -976,6 +976,14 @@
     "category": "Advanced"
   },
   {
+    "name": "Tour Guide Next",
+    "path": "tour-guide-next",
+    "description": "The tour guide, rebuilt: steps as markup on their targets, a native modal dialog with a spotlight, flipping cards, scrolling, keys.",
+    "status": "Experimental",
+    "library": "ui-lab",
+    "category": "Advanced"
+  },
+  {
     "name": "Transfer List",
     "path": "transfer-list",
     "description": "One value (the chosen ids, a form field), two listbox sides, keyboard moves, search, reorder.",

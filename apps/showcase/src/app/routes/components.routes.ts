@@ -664,6 +664,12 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/tour-guide/tour-guide-page'),
       },
       {
+        path: 'tour-guide-next',
+        title: 'Tour Guide Next - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/tour-guide-next/tour-guide-next-page'),
+      },
+      {
         path: 'transfer-list',
         title: 'Transfer List - Semantic Components',
         loadComponent: () =>

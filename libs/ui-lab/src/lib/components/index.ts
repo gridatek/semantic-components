@@ -34,5 +34,6 @@ export * from './tags-input';
 export * from './time-picker-clock';
 export * from './timeline';
 export * from './tour-guide';
+export * from './tour-guide-next';
 export * from './transfer-list';
 export * from './video-player';

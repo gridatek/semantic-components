@@ -4103,6 +4103,39 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/tour-guide-next',
+    children: [
+      {
+        path: 'tour-tour-guide-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/tour-guide-next/demos/tour-tour-guide-next-demo').then(
+            (m) => m.TourTourGuideNextDemo,
+          ),
+      },
+      {
+        path: 'minimal-tour-guide-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/tour-guide-next/demos/minimal-tour-guide-next-demo').then(
+            (m) => m.MinimalTourGuideNextDemo,
+          ),
+      },
+      {
+        path: 'scrolling-tour-guide-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/tour-guide-next/demos/scrolling-tour-guide-next-demo').then(
+            (m) => m.ScrollingTourGuideNextDemo,
+          ),
+      },
+      {
+        path: 'controlled-tour-guide-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/tour-guide-next/demos/controlled-tour-guide-next-demo').then(
+            (m) => m.ControlledTourGuideNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/transfer-list',
     children: [
       {
