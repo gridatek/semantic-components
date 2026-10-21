@@ -6,7 +6,7 @@ export { ScTransferListMoveAllToTarget } from './transfer-list-move-all-to-targe
 export { ScTransferListMoveAllToSource } from './transfer-list-move-all-to-source';
 export { ScTransferListCount } from './transfer-list-count';
 export { ScTransferListHeader } from './transfer-list-header';
-export { ScTransferListItem } from './transfer-list-item';
+export { ScTransferListEntry } from './transfer-list-item';
 export { ScTransferListItems } from './transfer-list-items';
 export { ScTransferListSearch } from './transfer-list-search';
 export { ScTransferListSelectAll } from './transfer-list-select-all';

@@ -670,6 +670,12 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/transfer-list/transfer-list-page'),
       },
       {
+        path: 'transfer-list-next',
+        title: 'Transfer List Next - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/transfer-list-next/transfer-list-next-page'),
+      },
+      {
         path: 'tree',
         title: 'Tree - Semantic Components',
         loadComponent: () => import('../pages/docs/tree/tree-page'),

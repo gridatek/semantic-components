@@ -31,7 +31,7 @@ import type { ScTransferListItemData } from './transfer-list-types';
   },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScTransferListItem {
+export class ScTransferListEntry {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly item = input.required<ScTransferListItemData>();
 

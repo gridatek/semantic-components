@@ -5,7 +5,7 @@ A composable dual-list component for moving items between source and target list
 ## Installation
 
 ```typescript
-import { ScTransferList, ScTransferListActions, ScTransferListCount, ScTransferListHeader, ScTransferListItem, ScTransferListItems, ScTransferListMoveAllToSource, ScTransferListMoveAllToTarget, ScTransferListMoveToSource, ScTransferListMoveToTarget, ScTransferListSearch, ScTransferListSelectAll, ScTransferListSource, ScTransferListTarget } from '@semantic-components/ui-lab';
+import { ScTransferList, ScTransferListActions, ScTransferListCount, ScTransferListEntry, ScTransferListHeader, ScTransferListItems, ScTransferListMoveAllToSource, ScTransferListMoveAllToTarget, ScTransferListMoveToSource, ScTransferListMoveToTarget, ScTransferListSearch, ScTransferListSelectAll, ScTransferListSource, ScTransferListTarget } from '@semantic-components/ui-lab';
 import type { ScTransferListChange, ScTransferListItemData } from '@semantic-components/ui-lab';
 ```
 
@@ -177,7 +177,7 @@ Scrollable container directive for the item list.
 | `height` | `string` | `300px` | Max height of list     |
 | `class`  | `string` | `''`    | Additional CSS classes |
 
-### ScTransferListItem
+### ScTransferListEntry
 
 Component on `label`. Renders a checkbox and projects content. Handles selection toggle on click.
 

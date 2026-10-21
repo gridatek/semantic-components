@@ -984,6 +984,14 @@
     "category": "Advanced"
   },
   {
+    "name": "Transfer List Next",
+    "path": "transfer-list-next",
+    "description": "The transfer list, rebuilt: one value (the chosen ids, a form field), two listbox sides, keyboard moves, search, reorder.",
+    "status": "Experimental",
+    "library": "ui-lab",
+    "category": "Advanced"
+  },
+  {
     "name": "Tree",
     "path": "tree",
     "description": "A hierarchical view of nested items.",

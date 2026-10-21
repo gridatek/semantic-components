@@ -4122,6 +4122,39 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/transfer-list-next',
+    children: [
+      {
+        path: 'basic-transfer-list-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/transfer-list-next/demos/basic-transfer-list-next-demo').then(
+            (m) => m.BasicTransferListNextDemo,
+          ),
+      },
+      {
+        path: 'form-transfer-list-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/transfer-list-next/demos/form-transfer-list-next-demo').then(
+            (m) => m.FormTransferListNextDemo,
+          ),
+      },
+      {
+        path: 'ordered-transfer-list-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/transfer-list-next/demos/ordered-transfer-list-next-demo').then(
+            (m) => m.OrderedTransferListNextDemo,
+          ),
+      },
+      {
+        path: 'many-transfer-list-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/transfer-list-next/demos/many-transfer-list-next-demo').then(
+            (m) => m.ManyTransferListNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/typography',
     children: [
       {
