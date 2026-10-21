@@ -4,23 +4,17 @@ const demo = (name: string) =>
   `/demos/lightbox-next/${name}-lightbox-next-demo`;
 const dialog = (page: Page) => page.getByRole('dialog');
 const image = (page: Page) => page.locator('[data-slot="lightbox-image"]');
-/** The opening morph, over: until then, the page is a picture of itself. */
+/** The opening morph, over (the lightbox says so: data-morphing). */
 const settled = (page: Page) =>
-  page.waitForFunction(
-    () =>
-      !document
-        .getAnimations()
-        .some((animation) =>
-          (
-            animation.effect as KeyframeEffect | null
-          )?.pseudoElement?.startsWith('::view-transition'),
-        ),
+  expect(page.locator('[data-slot="lightbox"]').first()).not.toHaveAttribute(
+    'data-morphing',
   );
 
 /** Opens a photo by its link, and waits for the viewer to have settled. */
 const open = async (page: Page, name: string) => {
   await page.getByRole('link', { name }).click();
   await expect(dialog(page)).toBeVisible();
+  // Begun at once (set before the transition starts), then over.
   await settled(page);
 };
 

@@ -35,6 +35,7 @@ const MORPH = 'sc-lightbox-morph';
   exportAs: 'scLightboxNext',
   host: {
     'data-slot': 'lightbox',
+    '[attr.data-morphing]': 'morphing() || null',
     '[class]': 'class()',
   },
 })
@@ -64,6 +65,8 @@ export class ScLightboxNext {
   readonly pan = signal({ x: 0, y: 0 });
   /** The current image, loading. */
   readonly loading = signal(false);
+  /** The thumbnail and the image morphing, one into the other: wait for it to settle. */
+  readonly morphing = signal(false);
 
   readonly ɵdialog = signal<HTMLDialogElement | null>(null);
   readonly ɵimage = signal<HTMLImageElement | null>(null);
@@ -204,12 +207,13 @@ export class ScLightboxNext {
       dialog.showModal();
       this.preload(this.items());
     };
-    const transition = this.morphing() && thumbnail && image;
+    const transition = this.canMorph() && thumbnail && image;
     if (!transition) {
       reveal();
       return;
     }
     thumbnail.style.viewTransitionName = MORPH;
+    this.morphing.set(true);
     void this.document
       .startViewTransition(async () => {
         thumbnail.style.viewTransitionName = '';
@@ -217,7 +221,10 @@ export class ScLightboxNext {
         reveal();
         await image.decode().catch(() => undefined);
       })
-      .finished.finally(() => (image.style.viewTransitionName = ''));
+      .finished.finally(() => {
+        image.style.viewTransitionName = '';
+        this.morphing.set(false);
+      });
   }
 
   /** And back into its thumbnail — focus too. */
@@ -231,18 +238,22 @@ export class ScLightboxNext {
       this.current()?.element.focus();
       this.resetZoom();
     };
-    if (!this.morphing() || !thumbnail || !image || this.zoom() !== 1) {
+    if (!this.canMorph() || !thumbnail || !image || this.zoom() !== 1) {
       restore();
       return;
     }
     image.style.viewTransitionName = MORPH;
+    this.morphing.set(true);
     void this.document
       .startViewTransition(() => {
         image.style.viewTransitionName = '';
         thumbnail.style.viewTransitionName = MORPH;
         restore();
       })
-      .finished.finally(() => (thumbnail.style.viewTransitionName = ''));
+      .finished.finally(() => {
+        thumbnail.style.viewTransitionName = '';
+        this.morphing.set(false);
+      });
   }
 
   /** The current item's thumbnail image. */
@@ -251,7 +262,7 @@ export class ScLightboxNext {
     return element?.querySelector('img') ?? element ?? null;
   }
 
-  private morphing(): boolean {
+  private canMorph(): boolean {
     const view = this.document.defaultView;
     return (
       typeof this.document.startViewTransition === 'function' &&
