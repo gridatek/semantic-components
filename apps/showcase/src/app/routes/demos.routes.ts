@@ -2192,6 +2192,39 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/masonry-grid-next',
+    children: [
+      {
+        path: 'photos-masonry-grid-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/masonry-grid-next/demos/photos-masonry-grid-next-demo').then(
+            (m) => m.PhotosMasonryGridNextDemo,
+          ),
+      },
+      {
+        path: 'cards-masonry-grid-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/masonry-grid-next/demos/cards-masonry-grid-next-demo').then(
+            (m) => m.CardsMasonryGridNextDemo,
+          ),
+      },
+      {
+        path: 'more-masonry-grid-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/masonry-grid-next/demos/more-masonry-grid-next-demo').then(
+            (m) => m.MoreMasonryGridNextDemo,
+          ),
+      },
+      {
+        path: 'order-masonry-grid-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/masonry-grid-next/demos/order-masonry-grid-next-demo').then(
+            (m) => m.OrderMasonryGridNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/mention-input',
     children: [
       {
