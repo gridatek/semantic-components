@@ -356,12 +356,6 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/lightbox/lightbox-page'),
       },
       {
-        path: 'lightbox-next',
-        title: 'Lightbox Next - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/lightbox-next/lightbox-next-page'),
-      },
-      {
         path: 'marquee',
         title: 'Marquee - Semantic Components',
         loadComponent: () => import('../pages/docs/marquee/marquee-page'),

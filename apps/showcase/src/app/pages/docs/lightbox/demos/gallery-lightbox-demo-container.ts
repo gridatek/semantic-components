@@ -6,7 +6,11 @@ import { GalleryLightboxDemo } from './gallery-lightbox-demo';
   selector: 'app-gallery-lightbox-demo-container',
   imports: [DemoContainer, GalleryLightboxDemo],
   template: `
-    <app-demo-container title="Gallery Component" [code]="code">
+    <app-demo-container
+      title="Gallery"
+      [code]="code"
+      demoUrl="/demos/lightbox/gallery-lightbox-demo"
+    >
       <app-gallery-lightbox-demo />
     </app-demo-container>
   `,
@@ -16,26 +20,14 @@ import { GalleryLightboxDemo } from './gallery-lightbox-demo';
 export class GalleryLightboxDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScCarousel,
-  ScCarouselItem,
-  ScCarouselTrack,
-  ScCarouselViewport,
-} from '@semantic-components/carousel';
-import {
   ScLightbox,
   ScLightboxClose,
-  ScLightboxCounter,
-  ScLightboxGallery,
-  ScLightboxGalleryItem,
-  ScLightboxImageData,
-  ScLightboxNextButton,
-  ScLightboxPortal,
-  ScLightboxPrev,
-  ScLightboxProvider,
+  ScLightboxDialog,
+  ScLightboxImage,
+  ScLightboxNext,
+  ScLightboxPrevious,
   ScLightboxThumbnail,
-  ScLightboxThumbnailBar,
-  ScLightboxToolbar,
-  ScLightboxZoomControls,
+  ScLightboxTrigger,
   ScLightboxZoomIn,
   ScLightboxZoomOut,
   ScLightboxZoomReset,
@@ -43,173 +35,164 @@ import {
 import {
   SiChevronLeftIcon,
   SiChevronRightIcon,
-  SiMinimize2Icon,
+  SiScanIcon,
   SiXIcon,
   SiZoomInIcon,
   SiZoomOutIcon,
 } from '@semantic-icons/lucide-icons';
 
+interface Photo {
+  readonly name: string;
+  readonly alt: string;
+  readonly author: string;
+}
+
+/** A grid of links to the full photos — links still, without the lightbox. Opened, the thumbnail grows into the photo; ← → or a swipe to change, + − 0 to zoom, Escape or a swipe down to close. */
 @Component({
   selector: 'app-gallery-lightbox-demo',
   imports: [
-    ScLightboxProvider,
     ScLightbox,
+    ScLightboxTrigger,
+    ScLightboxDialog,
+    ScLightboxImage,
     ScLightboxClose,
-    ScLightboxCounter,
-    ScLightboxGallery,
-    ScLightboxGalleryItem,
-    ScLightboxNextButton,
-    ScLightboxPortal,
-    ScLightboxPrev,
-    ScLightboxThumbnail,
-    ScLightboxThumbnailBar,
-    ScLightboxToolbar,
-    ScLightboxZoomControls,
+    ScLightboxPrevious,
+    ScLightboxNext,
     ScLightboxZoomIn,
     ScLightboxZoomOut,
     ScLightboxZoomReset,
-    ScCarousel,
-    ScCarouselViewport,
-    ScCarouselTrack,
-    ScCarouselItem,
+    ScLightboxThumbnail,
+    SiZoomInIcon,
+    SiZoomOutIcon,
+    SiScanIcon,
     SiXIcon,
     SiChevronLeftIcon,
     SiChevronRightIcon,
-    SiZoomInIcon,
-    SiZoomOutIcon,
-    SiMinimize2Icon,
   ],
   template: \`
-    <div
-      scLightboxProvider
-      [images]="images"
-      #lightbox="scLightboxProvider"
-      class="max-w-xl"
-    >
-      <div scLightboxGallery class="grid-cols-4 gap-2">
-        @for (image of images; track image.src; let i = $index) {
-          <button type="button" scLightboxGalleryItem [index]="i">
+    <div scLightbox #lightbox="scLightbox" class="w-full">
+      <div class="grid grid-cols-2 gap-2 sm:grid-cols-4">
+        @for (photo of photos; track photo.name) {
+          <a
+            scLightboxTrigger
+            [href]="'/images/gallery/' + photo.name + '.jpg'"
+          >
             <img
-              [src]="image.src"
-              [alt]="image.alt || 'Gallery image ' + (i + 1)"
-              class="size-full object-cover"
+              [src]="'/images/gallery/' + photo.name + '-thumb.jpg'"
+              [alt]="photo.alt"
+              width="400"
+              height="267"
+              class="aspect-[3/2] w-full object-cover"
             />
-          </button>
+          </a>
         }
       </div>
-
-      <ng-template scLightboxPortal>
-        <div
-          scLightbox
-          [attr.aria-label]="
-            'Image gallery, showing image ' +
-            (lightbox.currentIndex() + 1) +
-            ' of ' +
-            lightbox.images().length
-          "
-        >
-          <button scLightboxClose>
-            <svg siXIcon></svg>
-            <span class="sr-only">Close lightbox</span>
-          </button>
-
-          <div
-            scCarousel
-            aria-roledescription="carousel"
-            aria-label="Images"
-            [activeIndex]="lightbox.currentIndex()"
-            (activeIndexChange)="lightbox.goTo($event)"
-            [options]="{ loop: lightbox.loop() }"
-            class="flex-1"
-            #carousel="scCarousel"
-          >
-            <div scCarouselViewport class="h-full">
-              <div scCarouselTrack class="h-full">
-                @for (image of images; track image.src; let i = $index) {
-                  <div
-                    scCarouselItem
-                    aria-roledescription="slide"
-                    class="flex items-center justify-center ps-0"
-                  >
-                    <img
-                      [src]="image.src"
-                      [alt]="image.alt || 'Image ' + (i + 1)"
-                      [style.transform]="
-                        i === lightbox.currentIndex()
-                          ? 'scale(' + lightbox.zoomLevel() + ')'
-                          : 'scale(1)'
-                      "
-                      class="max-h-[calc(100vh-200px)] max-w-[calc(100vw-100px)] object-contain transition-transform duration-200"
-                      draggable="false"
-                    />
-                  </div>
-                }
-              </div>
-            </div>
-
-            @if (images.length > 1) {
-              <button scLightboxPrev>
-                <svg siChevronLeftIcon></svg>
-                <span class="sr-only">Previous image</span>
-              </button>
-              <button scLightboxNextButton>
-                <svg siChevronRightIcon></svg>
-                <span class="sr-only">Next image</span>
-              </button>
-            }
-          </div>
-
-          <div scLightboxToolbar>
-            <span scLightboxCounter></span>
-            <div scLightboxZoomControls>
-              <button scLightboxZoomOut value="zoom-out">
-                <svg siZoomOutIcon></svg>
-                <span class="sr-only">Zoom out</span>
-              </button>
-              <span class="min-w-12 text-center text-sm text-white/80">
-                {{ Math.round(lightbox.zoomLevel() * 100) }}%
-              </span>
-              <button scLightboxZoomIn value="zoom-in">
-                <svg siZoomInIcon></svg>
-                <span class="sr-only">Zoom in</span>
-              </button>
-              <button scLightboxZoomReset value="zoom-reset">
-                <svg siMinimize2Icon></svg>
-                <span class="sr-only">Reset zoom</span>
-              </button>
-            </div>
-          </div>
-
-          <div scLightboxThumbnailBar>
-            @for (image of lightbox.images(); track image.src; let i = $index) {
-              <button type="button" scLightboxThumbnail [index]="i" [value]="i">
-                <img
-                  [src]="image.thumbnail || image.src"
-                  [alt]="image.alt || 'Thumbnail ' + (i + 1)"
-                  class="size-full object-cover"
-                />
-              </button>
-            }
+      <dialog scLightboxDialog aria-label="Photo viewer">
+        <div class="flex items-center gap-1 p-2">
+          <p class="ms-2 text-sm tabular-nums" aria-live="polite">
+            {{ lightbox.index() + 1 }} of {{ lightbox.items().length }}
+          </p>
+          <div class="ms-auto flex gap-1">
+            <button scLightboxZoomOut>
+              <svg siZoomOutIcon></svg>
+              <span class="sr-only">Zoom out</span>
+            </button>
+            <button scLightboxZoomReset>
+              <svg siScanIcon></svg>
+              <span class="sr-only">Fit</span>
+            </button>
+            <button scLightboxZoomIn>
+              <svg siZoomInIcon></svg>
+              <span class="sr-only">Zoom in</span>
+            </button>
+            <button scLightboxClose>
+              <svg siXIcon></svg>
+              <span class="sr-only">Close</span>
+            </button>
           </div>
         </div>
-      </ng-template>
+        <div
+          class="relative grid min-h-0 flex-1 place-items-center overflow-hidden px-14"
+        >
+          <img scLightboxImage [alt]="lightbox.current()?.alt ?? ''" />
+          <button
+            scLightboxPrevious
+            class="absolute start-2 top-1/2 -translate-y-1/2"
+          >
+            <svg siChevronLeftIcon></svg>
+            <span class="sr-only">Previous image</span>
+          </button>
+          <button
+            scLightboxNext
+            class="absolute end-2 top-1/2 -translate-y-1/2"
+          >
+            <svg siChevronRightIcon></svg>
+            <span class="sr-only">Next image</span>
+          </button>
+        </div>
+        @if (lightbox.current(); as current) {
+          <p class="p-3 text-center text-sm">
+            {{ current.alt }}
+            <span class="text-white/60"
+              >— {{ photos[lightbox.index()].author }}</span
+            >
+          </p>
+        }
+        <div class="flex justify-center gap-2 overflow-x-auto p-3">
+          @for (item of lightbox.items(); track item.src; let i = $index) {
+            <button [scLightboxThumbnail]="i">
+              <img [src]="item.thumbnail" [alt]="item.alt" />
+            </button>
+          }
+        </div>
+      </dialog>
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
 export class GalleryLightboxDemo {
-  protected readonly Math = Math;
-
-  readonly images: ScLightboxImageData[] = [
-    { src: 'https://picsum.photos/800/600?random=20', alt: 'Gallery 1' },
-    { src: 'https://picsum.photos/800/600?random=21', alt: 'Gallery 2' },
-    { src: 'https://picsum.photos/800/600?random=22', alt: 'Gallery 3' },
-    { src: 'https://picsum.photos/800/600?random=23', alt: 'Gallery 4' },
-    { src: 'https://picsum.photos/800/600?random=24', alt: 'Gallery 5' },
-    { src: 'https://picsum.photos/800/600?random=25', alt: 'Gallery 6' },
-    { src: 'https://picsum.photos/800/600?random=26', alt: 'Gallery 7' },
-    { src: 'https://picsum.photos/800/600?random=27', alt: 'Gallery 8' },
+  readonly photos: readonly Photo[] = [
+    {
+      name: 'forest',
+      alt: 'A pine forest above the sea',
+      author: 'Paul Jarvis',
+    },
+    {
+      name: 'waterfall',
+      alt: 'A waterfall in a rocky gorge',
+      author: 'Paul Jarvis',
+    },
+    {
+      name: 'gorge',
+      alt: 'A river through a green forest',
+      author: 'Jerry Adney',
+    },
+    {
+      name: 'mountains',
+      alt: 'Snowy mountains under clouds',
+      author: 'Go Wild',
+    },
+    {
+      name: 'coast',
+      alt: 'Wild roses above a misty sea',
+      author: 'Austin Neill',
+    },
+    {
+      name: 'cafe',
+      alt: 'A wooden table in a quiet café',
+      author: 'Luke Chesser',
+    },
+    {
+      name: 'summit',
+      alt: 'A wooded summit under white clouds',
+      author: 'Nicholas Swanson',
+    },
+    {
+      name: 'shed',
+      alt: 'A green bicycle against a wooden shed',
+      author: 'Alexander Shustov',
+    },
   ];
 }`;
 }

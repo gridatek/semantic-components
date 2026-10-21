@@ -5,20 +5,21 @@ import {
   cn,
   ɵwarnIfUnnamed,
 } from '@semantic-components/ui';
-import { ScLightboxNext } from './lightbox-next';
+import { ScLightbox } from './lightbox';
 
-/** Closes the lightbox. Write its icon and name it ("Close"). */
+/** The item before; disabled at the first, unless it loops. Write its icon and name it ("Previous image"). */
 @Directive({
-  selector: 'button[scLightboxNextClose]',
+  selector: 'button[scLightboxPrevious]',
   host: {
     type: 'button',
-    'data-slot': 'lightbox-close',
+    'data-slot': 'lightbox-previous',
+    '[disabled]': '!lightbox.hasPrevious()',
     '[class]': 'class()',
-    '(click)': 'lightbox.close()',
+    '(click)': 'lightbox.previous()',
   },
 })
-export class ScLightboxNextClose {
-  protected readonly lightbox = inject(ScLightboxNext);
+export class ScLightboxPrevious {
+  protected readonly lightbox = inject(ScLightbox);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('ghost');
@@ -34,6 +35,6 @@ export class ScLightboxNextClose {
   );
 
   constructor() {
-    ɵwarnIfUnnamed('scLightboxNextClose');
+    ɵwarnIfUnnamed('scLightboxPrevious');
   }
 }

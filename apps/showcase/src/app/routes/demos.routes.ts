@@ -2089,20 +2089,6 @@ export const demosRoutes: Route[] = [
     path: 'demos/lightbox',
     children: [
       {
-        path: 'basic-lightbox-demo',
-        loadComponent: () =>
-          import('../pages/docs/lightbox/demos/basic-lightbox-demo').then(
-            (m) => m.BasicLightboxDemo,
-          ),
-      },
-      {
-        path: 'info-lightbox-demo',
-        loadComponent: () =>
-          import('../pages/docs/lightbox/demos/info-lightbox-demo').then(
-            (m) => m.InfoLightboxDemo,
-          ),
-      },
-      {
         path: 'gallery-lightbox-demo',
         loadComponent: () =>
           import('../pages/docs/lightbox/demos/gallery-lightbox-demo').then(
@@ -2110,71 +2096,24 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'no-thumbnails-lightbox-demo',
+        path: 'zoom-lightbox-demo',
         loadComponent: () =>
-          import('../pages/docs/lightbox/demos/no-thumbnails-lightbox-demo').then(
-            (m) => m.NoThumbnailsLightboxDemo,
+          import('../pages/docs/lightbox/demos/zoom-lightbox-demo').then(
+            (m) => m.ZoomLightboxDemo,
           ),
       },
       {
-        path: 'no-zoom-lightbox-demo',
+        path: 'article-lightbox-demo',
         loadComponent: () =>
-          import('../pages/docs/lightbox/demos/no-zoom-lightbox-demo').then(
-            (m) => m.NoZoomLightboxDemo,
+          import('../pages/docs/lightbox/demos/article-lightbox-demo').then(
+            (m) => m.ArticleLightboxDemo,
           ),
       },
       {
-        path: 'no-loop-lightbox-demo',
+        path: 'controlled-lightbox-demo',
         loadComponent: () =>
-          import('../pages/docs/lightbox/demos/no-loop-lightbox-demo').then(
-            (m) => m.NoLoopLightboxDemo,
-          ),
-      },
-      {
-        path: 'single-lightbox-demo',
-        loadComponent: () =>
-          import('../pages/docs/lightbox/demos/single-lightbox-demo').then(
-            (m) => m.SingleLightboxDemo,
-          ),
-      },
-      {
-        path: 'keyboard-lightbox-demo',
-        loadComponent: () =>
-          import('../pages/docs/lightbox/demos/keyboard-lightbox-demo').then(
-            (m) => m.KeyboardLightboxDemo,
-          ),
-      },
-    ],
-  },
-  {
-    path: 'demos/lightbox-next',
-    children: [
-      {
-        path: 'gallery-lightbox-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/lightbox-next/demos/gallery-lightbox-next-demo').then(
-            (m) => m.GalleryLightboxNextDemo,
-          ),
-      },
-      {
-        path: 'zoom-lightbox-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/lightbox-next/demos/zoom-lightbox-next-demo').then(
-            (m) => m.ZoomLightboxNextDemo,
-          ),
-      },
-      {
-        path: 'article-lightbox-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/lightbox-next/demos/article-lightbox-next-demo').then(
-            (m) => m.ArticleLightboxNextDemo,
-          ),
-      },
-      {
-        path: 'controlled-lightbox-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/lightbox-next/demos/controlled-lightbox-next-demo').then(
-            (m) => m.ControlledLightboxNextDemo,
+          import('../pages/docs/lightbox/demos/controlled-lightbox-demo').then(
+            (m) => m.ControlledLightboxDemo,
           ),
       },
     ],

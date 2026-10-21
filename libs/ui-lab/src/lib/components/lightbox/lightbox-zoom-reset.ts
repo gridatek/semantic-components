@@ -1,30 +1,40 @@
-import { ToolbarWidget } from '@angular/aria/toolbar';
 import { Directive, computed, inject, input } from '@angular/core';
-import { cn, ɵwarnIfUnnamed } from '@semantic-components/ui';
-import { SC_LIGHTBOX_PROVIDER } from './lightbox-provider';
+import {
+  type ScButtonVariants,
+  buttonVariants,
+  cn,
+  ɵwarnIfUnnamed,
+} from '@semantic-components/ui';
+import { ScLightbox } from './lightbox';
 
+/** Back to the whole image. Write its icon and name it ("Fit"). */
 @Directive({
   selector: 'button[scLightboxZoomReset]',
-  hostDirectives: [ToolbarWidget],
   host: {
-    '[class]': 'class()',
     type: 'button',
-    '(click)': 'provider.resetZoom()',
+    'data-slot': 'lightbox-zoom-reset',
+    '[disabled]': 'lightbox.zoom() === 1',
+    '[class]': 'class()',
+    '(click)': 'lightbox.resetZoom()',
   },
 })
 export class ScLightboxZoomReset {
-  constructor() {
-    ɵwarnIfUnnamed('scLightboxZoomReset');
-  }
-
-  readonly provider = inject(SC_LIGHTBOX_PROVIDER);
+  protected readonly lightbox = inject(ScLightbox);
 
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly variant = input<ScButtonVariants['variant']>('ghost');
+  readonly size = input<ScButtonVariants['size']>('icon');
 
   protected readonly class = computed(() =>
     cn(
-      "p-2 text-white/80 transition-colors hover:text-white [&_svg:not([class*='size-'])]:size-5",
+      buttonVariants({ variant: this.variant(), size: this.size() }),
+      // On the dark viewer: white.
+      'text-white hover:bg-white/15 hover:text-white dark:hover:bg-white/15',
       this.classInput(),
     ),
   );
+
+  constructor() {
+    ɵwarnIfUnnamed('scLightboxZoomReset');
+  }
 }

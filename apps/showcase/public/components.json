@@ -482,15 +482,7 @@
   {
     "name": "Lightbox",
     "path": "lightbox",
-    "description": "A full-screen image viewer.",
-    "status": "Experimental",
-    "library": "ui-lab",
-    "category": "Media"
-  },
-  {
-    "name": "Lightbox Next",
-    "path": "lightbox-next",
-    "description": "The lightbox, rebuilt: a gallery of links opened in the native dialog, the thumbnail morphing in; zoom, pan, swipes, keys.",
+    "description": "A gallery of links opened in the native dialog, the thumbnail morphing in; zoom, pan, swipes, keys.",
     "status": "Experimental",
     "library": "ui-lab",
     "category": "Media"

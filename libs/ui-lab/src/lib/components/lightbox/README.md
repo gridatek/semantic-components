@@ -1,177 +1,58 @@
 # Lightbox
 
-Full-screen image viewer with zoom, navigation, and keyboard support. Built with CDK Overlay, composable directives, and Carousel for image navigation.
+Your gallery of links, opened in the native dialog — the thumbnail growing into the photo — with zoom, pan, swipes and the keys.
 
 ## Architecture
 
 ```
-ScLightboxProvider (div[scLightboxProvider])  ← State + CDK Overlay + backdrop + focus trap + keyboard
-├── ScLightboxTrigger                  ← Opens lightbox at a given index
-├── ScLightboxGallery                  ← Grid layout for thumbnails
-│   └── ScLightboxGalleryItem          ← Individual grid item (click to open)
-└── ScLightboxPortal (ng-template)     ← Content projected into the overlay
-    ├── ScLightbox            ← Dialog wrapper (role="dialog", aria-modal)
-    ├── ScScLightboxImageData                ← Displays current image with zoom transform
-    └── ScLightboxThumbnail            ← Thumbnail strip item with active ring
-```
-
-State flows through the `SC_LIGHTBOX` injection token. Child directives inject it to read/write shared state (e.g., `lightbox.currentIndex()`, `lightbox.close()`).
-
-## Components
-
-### ScLightboxProvider
-
-Root component that owns all state and manages the CDK Overlay lifecycle (create/attach/detach), backdrop animation, focus trapping, and keyboard shortcuts (←, →, +, -, 0, Esc).
-
-**Selector:** `div[scLightboxProvider]` | **Export:** `scLightboxProvider`
-
-| Inputs          | Type                    | Default | Description                |
-| --------------- | ----------------------- | ------- | -------------------------- |
-| `images`        | `ScLightboxImageData[]` | `[]`    | Array of images to display |
-| `loop`          | `boolean`               | `true`  | Loop navigation at ends    |
-| `closeOnEscape` | `boolean`               | `true`  | Close on Escape key        |
-
-| Models         | Type      | Default | Description              |
-| -------------- | --------- | ------- | ------------------------ |
-| `isOpen`       | `boolean` | `false` | Whether lightbox is open |
-| `currentIndex` | `number`  | `0`     | Current image index      |
-
-| Outputs  | Type     | Description         |
-| -------- | -------- | ------------------- |
-| `opened` | `number` | Emitted when opened |
-| `closed` | `void`   | Emitted when closed |
-
-| Methods         | Description            |
-| --------------- | ---------------------- |
-| `open(index?)`  | Open at specific index |
-| `close()`       | Close lightbox         |
-| `goTo(index)`   | Navigate to image      |
-| `zoomIn()`      | Increase zoom (+0.25)  |
-| `zoomOut()`     | Decrease zoom (-0.25)  |
-| `resetZoom()`   | Reset zoom to 1        |
-| `onImageLoad()` | Mark image as loaded   |
-
-| Signals        | Type       | Description                 |
-| -------------- | ---------- | --------------------------- |
-| `zoomLevel`    | `number`   | Current zoom (0.5-3)        |
-| `imageLoading` | `boolean`  | Image loading state         |
-| `currentImage` | `computed` | Current ScLightboxImageData |
-
-### ScLightboxPortal
-
-Marks an `ng-template` whose content gets projected into the overlay.
-
-**Selector:** `ng-template[scLightboxPortal]`
-
-### ScLightbox
-
-Dialog wrapper with `role="dialog"` and dynamic `aria-label`.
-
-**Selector:** `[scLightbox]`
-
-### ScLightboxTrigger
-
-Opens the lightbox on click.
-
-**Selector:** `[scLightboxTrigger]`
-
-| Input   | Type     | Default | Description   |
-| ------- | -------- | ------- | ------------- |
-| `index` | `number` | `0`     | Image to open |
-
-### ScScLightboxImageData
-
-Displays the current image with zoom transform. Binds `src`, `alt`, `transform: scale()`, and emits `onImageLoad()`.
-
-**Selector:** `img[scScLightboxImageData]`
-
-### ScLightboxThumbnail
-
-Thumbnail button with active ring indicator. Calls `lightbox.goTo(index)` on click.
-
-**Selector:** `[scLightboxThumbnail]`
-
-| Input   | Type     | Required | Description |
-| ------- | -------- | -------- | ----------- |
-| `index` | `number` | yes      | Image index |
-
-### ScLightboxGallery / ScLightboxGalleryItem
-
-Grid layout directives for building thumbnail galleries.
-
-**Selectors:** `[scLightboxGallery]`, `[scLightboxGalleryItem]`
-
-## ScLightboxImageData
-
-```typescript
-interface ScLightboxImageData {
-  src: string;
-  alt?: string;
-  title?: string;
-  description?: string;
-  thumbnail?: string;
-}
+[scLightbox] (open, index — two-way; loop)
+│  items() · current() · zoom() · pan() · loading() · morphing()
+├── a[scLightboxTrigger]        — your link to the full image, around its thumbnail img
+└── dialog[scLightboxDialog]    — your native dialog, opened modal; name it
+    ├── img[scLightboxImage]    — the current image: zoom, pan, swipe
+    ├── buttons: Close, Previous, Next, ZoomIn, ZoomOut, ZoomReset
+    └── button[scLightboxThumbnail]="i" — your strip, from items()
 ```
 
 ## Usage
 
-### Basic
-
 ```html
-<div scLightboxProvider #lightbox="scLightboxProvider" [images]="images">
-  <div class="flex gap-4">
-    @for (image of images; track image.src; let i = $index) {
-    <button scLightboxTrigger [index]="i" class="h-32 w-32 overflow-hidden rounded">
-      <img [src]="image.src" [alt]="image.alt" class="size-full object-cover" />
-    </button>
-    }
-  </div>
+<div scLightbox #lightbox="scLightbox">
+  @for (photo of photos; track photo.name) {
+  <a scLightboxTrigger [href]="photo.full">
+    <img [src]="photo.thumbnail" [alt]="photo.alt" />
+  </a>
+  }
 
-  <ng-template scLightboxPortal>
-    <div scLightbox [attr.aria-label]="'Image gallery, showing image ' + (lightbox.currentIndex() + 1) + ' of ' + lightbox.images().length">
-      <!-- your lightbox UI here: image, controls, thumbnails -->
-    </div>
-  </ng-template>
+  <dialog scLightboxDialog aria-label="Photo viewer">
+    <p aria-live="polite">{{ lightbox.index() + 1 }} of {{ lightbox.items().length }}</p>
+    <button scLightboxClose><svg siXIcon></svg><span class="sr-only">Close</span></button>
+    <img scLightboxImage [alt]="lightbox.current()?.alt" />
+    <button scLightboxPrevious><svg siChevronLeftIcon></svg><span class="sr-only">Previous image</span></button>
+    <button scLightboxNext><svg siChevronRightIcon></svg><span class="sr-only">Next image</span></button>
+    <p>{{ photos[lightbox.index()].caption }}</p>
+  </dialog>
 </div>
 ```
 
-### Controlled
+## Items
 
-```html
-<div scLightboxProvider [images]="images" [(isOpen)]="isOpen" [(currentIndex)]="currentIndex">...</div>
-```
+Each trigger is an item: its `href` is the full image, its `img` gives the `alt` and the thumbnail. Without the lightbox — or with Ctrl, ⌘ or Shift — it is a link still. Your data for an item is yours, at `lightbox.index()` (captions, credits).
 
-### Programmatic
+## The viewer
 
-```html
-<div scLightboxProvider #lightbox="scLightboxProvider" [images]="images">
-  <button (click)="lightbox.open(2)">Open at Image 3</button>
-  ...
-</div>
-```
-
-## Keyboard Shortcuts
-
-| Key     | Action                       |
-| ------- | ---------------------------- |
-| `←`     | Previous image (next in RTL) |
-| `→`     | Next image (previous in RTL) |
-| `Esc`   | Close                        |
-| `+`/`=` | Zoom in                      |
-| `-`     | Zoom out                     |
-| `0`     | Reset zoom                   |
-
-All shortcuts are handled by `ScLightboxProvider` (CDK Overlay keydown events), so they work wherever focus is in the dialog — except ←/→ inside a `role="toolbar"`, where they move between the toolbar's buttons. With `loop`, ←/→ wrap around at the ends.
-
-## Notes
-
-- `ScLightboxProvider` was created by merging the former `ScLightboxDirective` (state) and `ScLightboxProvider` (overlay) into a single component, eliminating the extra `<div scLightboxProvider>` wrapper in templates.
+- A native `dialog`, opened modal: the page behind is inert, Escape closes it.
+- Opening, the thumbnail morphs into the image (View Transitions) — not under reduced motion; closing, back into the thumbnail of the photo shown, which gets the focus. `data-morphing` while it does.
+- The image: zoom with the wheel, a double-click or a pinch — where you point; drag to pan, zoomed; swipe sideways to change, down to close. The neighbours are fetched before they are asked for; `data-loading` while one loads.
+- Keys: ← → Home End, + − 0, Escape.
+- `loop` (on): past the last, the first — off, Previous and Next are disabled at the ends.
 
 ## Accessibility
 
-- `role="dialog"` with `aria-modal="true"` on container
-- Dynamic `aria-label`: "Image gallery, showing image X of Y"
-- `scFocusTrap` in the overlay: focuses it on open, gives focus back on close
-- Thumbnail buttons have `aria-label`: "Go to image X"
-- Escape key closes lightbox and focus returns to the element that opened it
-- Backdrop click closes lightbox
+- Name the dialog; write the image's alt — the thumbnail's is `lightbox.current()?.alt`.
+- Say where it is in a polite live region ("3 of 8"), from `index()`.
+- Name every button; the thumbnails are named by their image's alt.
+
+## Not here
+
+Video, a slideshow, fullscreen, the URL following the photo.

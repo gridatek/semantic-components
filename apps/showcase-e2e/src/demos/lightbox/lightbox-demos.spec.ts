@@ -1,7 +1,6 @@
 import { type Page, expect, test } from '@playwright/test';
 
-const demo = (name: string) =>
-  `/demos/lightbox-next/${name}-lightbox-next-demo`;
+const demo = (name: string) => `/demos/lightbox/${name}-lightbox-demo`;
 const dialog = (page: Page) => page.getByRole('dialog');
 const image = (page: Page) => page.locator('[data-slot="lightbox-image"]');
 /** The opening morph, over (the lightbox says so: data-morphing). */

@@ -2,26 +2,18 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { ScHeading } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { BasicLightboxDemoContainer } from './demos/basic-lightbox-demo-container';
+import { ArticleLightboxDemoContainer } from './demos/article-lightbox-demo-container';
+import { ControlledLightboxDemoContainer } from './demos/controlled-lightbox-demo-container';
 import { GalleryLightboxDemoContainer } from './demos/gallery-lightbox-demo-container';
-import { InfoLightboxDemoContainer } from './demos/info-lightbox-demo-container';
-import { KeyboardLightboxDemoContainer } from './demos/keyboard-lightbox-demo-container';
-import { NoLoopLightboxDemoContainer } from './demos/no-loop-lightbox-demo-container';
-import { NoThumbnailsLightboxDemoContainer } from './demos/no-thumbnails-lightbox-demo-container';
-import { NoZoomLightboxDemoContainer } from './demos/no-zoom-lightbox-demo-container';
-import { SingleLightboxDemoContainer } from './demos/single-lightbox-demo-container';
+import { ZoomLightboxDemoContainer } from './demos/zoom-lightbox-demo-container';
 
 @Component({
   selector: 'app-lightbox-page',
   imports: [
-    BasicLightboxDemoContainer,
-    InfoLightboxDemoContainer,
     GalleryLightboxDemoContainer,
-    NoThumbnailsLightboxDemoContainer,
-    NoZoomLightboxDemoContainer,
-    NoLoopLightboxDemoContainer,
-    SingleLightboxDemoContainer,
-    KeyboardLightboxDemoContainer,
+    ZoomLightboxDemoContainer,
+    ArticleLightboxDemoContainer,
+    ControlledLightboxDemoContainer,
     TocHeading,
     ComponentBadges,
     ScHeading,
@@ -31,21 +23,55 @@ import { SingleLightboxDemoContainer } from './demos/single-lightbox-demo-contai
       <div class="space-y-2">
         <h1 scHeading>Lightbox</h1>
         <p class="text-muted-foreground">
-          Full-screen image viewer with zoom, navigation, and keyboard support.
+          Your gallery of links, opened in the native dialog — the thumbnail
+          growing into the photo — with zoom, pan, swipes and the keys.
         </p>
         <app-component-badges path="lightbox" />
+        <p class="text-muted-foreground text-xs">
+          Photos from
+          <a href="https://unsplash.com" class="underline underline-offset-4"
+            >Unsplash</a
+          >
+          by Paul Jarvis, Jerry Adney, Go Wild, Austin Neill, Luke Chesser,
+          Nicholas Swanson and Alexander Shustov.
+        </p>
       </div>
 
-      <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
-        <app-basic-lightbox-demo-container />
-        <app-info-lightbox-demo-container />
+      <section class="space-y-4">
+        <h2 scHeading appToc>Gallery</h2>
+        <p class="text-muted-foreground">
+          A grid of links to the full photos — links still, without the
+          lightbox. Opened, the thumbnail grows into the photo; ← → or a swipe
+          to change, + − 0 to zoom, Escape or a swipe down to close.
+        </p>
         <app-gallery-lightbox-demo-container />
-        <app-no-thumbnails-lightbox-demo-container />
-        <app-no-zoom-lightbox-demo-container />
-        <app-no-loop-lightbox-demo-container />
-        <app-single-lightbox-demo-container />
-        <app-keyboard-lightbox-demo-container />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Zoom</h2>
+        <p class="text-muted-foreground">
+          One photo: the wheel, a double-click or a pinch zooms where you point;
+          drag to pan.
+        </p>
+        <app-zoom-lightbox-demo-container />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>In an article</h2>
+        <p class="text-muted-foreground">
+          One image in the text, opened in place — no thumbnails, no counter
+          needed.
+        </p>
+        <app-article-lightbox-demo-container />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Controlled</h2>
+        <p class="text-muted-foreground">
+          Open and the index are two-way — here from outside; it stops at the
+          ends (no loop).
+        </p>
+        <app-controlled-lightbox-demo-container />
       </section>
     </div>
   `,

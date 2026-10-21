@@ -1,6 +1,6 @@
 import { Directive, ElementRef, computed, inject, input } from '@angular/core';
 import { cn, ɵwarnIfUnnamed } from '@semantic-components/ui';
-import { ScLightboxNext } from './lightbox-next';
+import { ScLightbox } from './lightbox';
 
 /**
  * The viewer: your native `dialog`, opened modal — the page behind inert,
@@ -8,7 +8,7 @@ import { ScLightboxNext } from './lightbox-next';
  * it. The keys: ← → Home End, + − 0.
  */
 @Directive({
-  selector: 'dialog[scLightboxNextDialog]',
+  selector: 'dialog[scLightboxDialog]',
   host: {
     'data-slot': 'lightbox-dialog',
     '[class]': 'class()',
@@ -17,8 +17,8 @@ import { ScLightboxNext } from './lightbox-next';
     '(cancel)': 'onCancel($event)',
   },
 })
-export class ScLightboxNextDialog {
-  protected readonly lightbox = inject(ScLightboxNext);
+export class ScLightboxDialog {
+  protected readonly lightbox = inject(ScLightbox);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
@@ -31,7 +31,7 @@ export class ScLightboxNextDialog {
   );
 
   constructor() {
-    ɵwarnIfUnnamed('scLightboxNextDialog');
+    ɵwarnIfUnnamed('scLightboxDialog');
     this.lightbox.ɵdialog.set(
       inject<ElementRef<HTMLDialogElement>>(ElementRef).nativeElement,
     );

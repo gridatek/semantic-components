@@ -1,35 +1,35 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { ZoomLightboxNextDemo } from './zoom-lightbox-next-demo';
+import { ZoomLightboxDemo } from './zoom-lightbox-demo';
 
 @Component({
-  selector: 'app-zoom-lightbox-next-demo-container',
-  imports: [DemoContainer, ZoomLightboxNextDemo],
+  selector: 'app-zoom-lightbox-demo-container',
+  imports: [DemoContainer, ZoomLightboxDemo],
   template: `
     <app-demo-container
       title="Zoom"
       [code]="code"
-      demoUrl="/demos/lightbox-next/zoom-lightbox-next-demo"
+      demoUrl="/demos/lightbox/zoom-lightbox-demo"
     >
-      <app-zoom-lightbox-next-demo />
+      <app-zoom-lightbox-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ZoomLightboxNextDemoContainer {
+export class ZoomLightboxDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
+  ScLightbox,
+  ScLightboxClose,
+  ScLightboxDialog,
+  ScLightboxImage,
   ScLightboxNext,
-  ScLightboxNextClose,
-  ScLightboxNextDialog,
-  ScLightboxNextImage,
-  ScLightboxNextNext,
-  ScLightboxNextPrevious,
-  ScLightboxNextTrigger,
-  ScLightboxNextZoomIn,
-  ScLightboxNextZoomOut,
-  ScLightboxNextZoomReset,
+  ScLightboxPrevious,
+  ScLightboxTrigger,
+  ScLightboxZoomIn,
+  ScLightboxZoomOut,
+  ScLightboxZoomReset,
 } from '@semantic-components/ui-lab';
 import {
   SiChevronLeftIcon,
@@ -42,18 +42,18 @@ import {
 
 /** One photo: the wheel, a double-click or a pinch zooms where you point; drag to pan. */
 @Component({
-  selector: 'app-zoom-lightbox-next-demo',
+  selector: 'app-zoom-lightbox-demo',
   imports: [
+    ScLightbox,
+    ScLightboxTrigger,
+    ScLightboxDialog,
+    ScLightboxImage,
+    ScLightboxClose,
+    ScLightboxPrevious,
     ScLightboxNext,
-    ScLightboxNextTrigger,
-    ScLightboxNextDialog,
-    ScLightboxNextImage,
-    ScLightboxNextClose,
-    ScLightboxNextPrevious,
-    ScLightboxNextNext,
-    ScLightboxNextZoomIn,
-    ScLightboxNextZoomOut,
-    ScLightboxNextZoomReset,
+    ScLightboxZoomIn,
+    ScLightboxZoomOut,
+    ScLightboxZoomReset,
     SiZoomInIcon,
     SiZoomOutIcon,
     SiScanIcon,
@@ -62,8 +62,8 @@ import {
     SiChevronRightIcon,
   ],
   template: \`
-    <div scLightboxNext #lightbox="scLightboxNext" class="w-full max-w-md">
-      <a scLightboxNextTrigger href="/images/gallery/mountains.jpg">
+    <div scLightbox #lightbox="scLightbox" class="w-full max-w-md">
+      <a scLightboxTrigger href="/images/gallery/mountains.jpg">
         <img
           src="/images/gallery/mountains-thumb.jpg"
           alt="Snowy mountains under clouds"
@@ -72,25 +72,25 @@ import {
           class="aspect-[3/2] w-full object-cover"
         />
       </a>
-      <dialog scLightboxNextDialog aria-label="Mountains">
+      <dialog scLightboxDialog aria-label="Mountains">
         <div class="flex items-center gap-1 p-2">
           <p class="ms-2 text-sm tabular-nums" aria-live="polite">
             {{ lightbox.index() + 1 }} of {{ lightbox.items().length }}
           </p>
           <div class="ms-auto flex gap-1">
-            <button scLightboxNextZoomOut>
+            <button scLightboxZoomOut>
               <svg siZoomOutIcon></svg>
               <span class="sr-only">Zoom out</span>
             </button>
-            <button scLightboxNextZoomReset>
+            <button scLightboxZoomReset>
               <svg siScanIcon></svg>
               <span class="sr-only">Fit</span>
             </button>
-            <button scLightboxNextZoomIn>
+            <button scLightboxZoomIn>
               <svg siZoomInIcon></svg>
               <span class="sr-only">Zoom in</span>
             </button>
-            <button scLightboxNextClose>
+            <button scLightboxClose>
               <svg siXIcon></svg>
               <span class="sr-only">Close</span>
             </button>
@@ -99,16 +99,16 @@ import {
         <div
           class="relative grid min-h-0 flex-1 place-items-center overflow-hidden px-14"
         >
-          <img scLightboxNextImage alt="Snowy mountains under clouds" />
+          <img scLightboxImage alt="Snowy mountains under clouds" />
           <button
-            scLightboxNextPrevious
+            scLightboxPrevious
             class="absolute start-2 top-1/2 -translate-y-1/2"
           >
             <svg siChevronLeftIcon></svg>
             <span class="sr-only">Previous image</span>
           </button>
           <button
-            scLightboxNextNext
+            scLightboxNext
             class="absolute end-2 top-1/2 -translate-y-1/2"
           >
             <svg siChevronRightIcon></svg>
@@ -121,5 +121,5 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ZoomLightboxNextDemo {}`;
+export class ZoomLightboxDemo {}`;
 }

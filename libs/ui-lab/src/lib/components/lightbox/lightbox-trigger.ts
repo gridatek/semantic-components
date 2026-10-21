@@ -1,28 +1,66 @@
-import { Directive, computed, inject, input } from '@angular/core';
+import {
+  DestroyRef,
+  Directive,
+  ElementRef,
+  afterNextRender,
+  computed,
+  inject,
+  input,
+} from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { SC_LIGHTBOX_PROVIDER } from './lightbox-provider';
+import { ScLightbox } from './lightbox';
 
+/**
+ * An item: your link to the full image (`href`) around its thumbnail (`img`,
+ * whose `alt` it takes). Without the lightbox, a link still. Your data for
+ * it is yours, at `lightbox.index()`.
+ */
 @Directive({
-  selector: '[scLightboxTrigger]',
+  selector: 'a[scLightboxTrigger]',
   host: {
+    'data-slot': 'lightbox-trigger',
     '[class]': 'class()',
-    '(click)': 'onClick()',
+    '(click)': 'onClick($event)',
   },
 })
 export class ScLightboxTrigger {
-  private readonly provider = inject(SC_LIGHTBOX_PROVIDER);
-  readonly index = input<number>(0);
+  private readonly lightbox = inject(ScLightbox);
+  private readonly element =
+    inject<ElementRef<HTMLAnchorElement>>(ElementRef).nativeElement;
 
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
     cn(
-      'cursor-pointer overflow-hidden rounded-lg focus:ring-ring focus:ring-2 focus:outline-none',
+      'block cursor-zoom-in overflow-hidden rounded-md outline-none focus-visible:ring-3 focus-visible:ring-ring/50',
       this.classInput(),
     ),
   );
 
-  onClick(): void {
-    this.provider.open(this.index());
+  constructor() {
+    const destroy = inject(DestroyRef);
+    // Read once rendered: its href, its image.
+    afterNextRender(() => {
+      const image = this.element.querySelector('img');
+      const unregister = this.lightbox.ɵregister({
+        src: this.element.href,
+        alt: image?.alt ?? '',
+        thumbnail: image?.currentSrc || image?.src || this.element.href,
+        element: this.element,
+      });
+      destroy.onDestroy(unregister);
+    });
+  }
+
+  protected onClick(event: MouseEvent): void {
+    // A new tab, a download: the link's.
+    if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) {
+      return;
+    }
+    event.preventDefault();
+    const index = this.lightbox
+      .items()
+      .findIndex((item) => item.element === this.element);
+    if (index >= 0) this.lightbox.show(index);
   }
 }

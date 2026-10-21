@@ -1,24 +1,39 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
-import { SC_LIGHTBOX_PROVIDER } from './lightbox-provider';
+import {
+  type ScButtonVariants,
+  buttonVariants,
+  cn,
+  ɵwarnIfUnnamed,
+} from '@semantic-components/ui';
+import { ScLightbox } from './lightbox';
 
+/** Closes the lightbox. Write its icon and name it ("Close"). */
 @Directive({
   selector: 'button[scLightboxClose]',
   host: {
-    '[class]': 'class()',
     type: 'button',
-    '(click)': 'provider.close()',
+    'data-slot': 'lightbox-close',
+    '[class]': 'class()',
+    '(click)': 'lightbox.close()',
   },
 })
 export class ScLightboxClose {
-  readonly provider = inject(SC_LIGHTBOX_PROVIDER);
+  protected readonly lightbox = inject(ScLightbox);
 
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly variant = input<ScButtonVariants['variant']>('ghost');
+  readonly size = input<ScButtonVariants['size']>('icon');
 
   protected readonly class = computed(() =>
     cn(
-      "absolute top-4 end-4 z-10 inline-flex size-10 items-center justify-center rounded-full text-white/80 hover:bg-white/10 hover:text-white [&_svg:not([class*='size-'])]:size-6",
+      buttonVariants({ variant: this.variant(), size: this.size() }),
+      // On the dark viewer: white.
+      'text-white hover:bg-white/15 hover:text-white dark:hover:bg-white/15',
       this.classInput(),
     ),
   );
+
+  constructor() {
+    ɵwarnIfUnnamed('scLightboxClose');
+  }
 }

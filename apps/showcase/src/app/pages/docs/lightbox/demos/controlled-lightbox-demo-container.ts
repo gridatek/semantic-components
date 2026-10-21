@@ -1,14 +1,34 @@
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { ControlledLightboxDemo } from './controlled-lightbox-demo';
+
+@Component({
+  selector: 'app-controlled-lightbox-demo-container',
+  imports: [DemoContainer, ControlledLightboxDemo],
+  template: `
+    <app-demo-container
+      title="Controlled"
+      [code]="code"
+      demoUrl="/demos/lightbox/controlled-lightbox-demo"
+    >
+      <app-controlled-lightbox-demo />
+    </app-demo-container>
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class ControlledLightboxDemoContainer {
+  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
 import {
+  ScLightbox,
+  ScLightboxClose,
+  ScLightboxDialog,
+  ScLightboxImage,
   ScLightboxNext,
-  ScLightboxNextClose,
-  ScLightboxNextDialog,
-  ScLightboxNextImage,
-  ScLightboxNextNext,
-  ScLightboxNextPrevious,
-  ScLightboxNextThumbnail,
-  ScLightboxNextTrigger,
+  ScLightboxPrevious,
+  ScLightboxThumbnail,
+  ScLightboxTrigger,
 } from '@semantic-components/ui-lab';
 import {
   SiChevronLeftIcon,
@@ -24,25 +44,25 @@ interface Photo {
 
 /** Open and the index are two-way — here from outside; it stops at the ends (no loop). */
 @Component({
-  selector: 'app-controlled-lightbox-next-demo',
+  selector: 'app-controlled-lightbox-demo',
   imports: [
+    ScLightbox,
+    ScLightboxTrigger,
+    ScLightboxDialog,
+    ScLightboxImage,
+    ScLightboxClose,
+    ScLightboxPrevious,
     ScLightboxNext,
-    ScLightboxNextTrigger,
-    ScLightboxNextDialog,
-    ScLightboxNextImage,
-    ScLightboxNextClose,
-    ScLightboxNextPrevious,
-    ScLightboxNextNext,
-    ScLightboxNextThumbnail,
+    ScLightboxThumbnail,
     ScButton,
     SiXIcon,
     SiChevronLeftIcon,
     SiChevronRightIcon,
   ],
-  template: `
+  template: \`
     <div
-      scLightboxNext
-      #lightbox="scLightboxNext"
+      scLightbox
+      #lightbox="scLightbox"
       [(open)]="open"
       [(index)]="index"
       [loop]="false"
@@ -63,7 +83,7 @@ interface Photo {
       <div class="grid grid-cols-2 gap-2 sm:grid-cols-4">
         @for (photo of photos; track photo.name) {
           <a
-            scLightboxNextTrigger
+            scLightboxTrigger
             [href]="'/images/gallery/' + photo.name + '.jpg'"
           >
             <img
@@ -76,13 +96,13 @@ interface Photo {
           </a>
         }
       </div>
-      <dialog scLightboxNextDialog aria-label="Photo viewer, controlled">
+      <dialog scLightboxDialog aria-label="Photo viewer, controlled">
         <div class="flex items-center gap-1 p-2">
           <p class="ms-2 text-sm tabular-nums" aria-live="polite">
             {{ lightbox.index() + 1 }} of {{ lightbox.items().length }}
           </p>
           <div class="ms-auto flex gap-1">
-            <button scLightboxNextClose>
+            <button scLightboxClose>
               <svg siXIcon></svg>
               <span class="sr-only">Close</span>
             </button>
@@ -91,16 +111,16 @@ interface Photo {
         <div
           class="relative grid min-h-0 flex-1 place-items-center overflow-hidden px-14"
         >
-          <img scLightboxNextImage [alt]="lightbox.current()?.alt ?? ''" />
+          <img scLightboxImage [alt]="lightbox.current()?.alt ?? ''" />
           <button
-            scLightboxNextPrevious
+            scLightboxPrevious
             class="absolute start-2 top-1/2 -translate-y-1/2"
           >
             <svg siChevronLeftIcon></svg>
             <span class="sr-only">Previous image</span>
           </button>
           <button
-            scLightboxNextNext
+            scLightboxNext
             class="absolute end-2 top-1/2 -translate-y-1/2"
           >
             <svg siChevronRightIcon></svg>
@@ -117,18 +137,18 @@ interface Photo {
         }
         <div class="flex justify-center gap-2 overflow-x-auto p-3">
           @for (item of lightbox.items(); track item.src; let i = $index) {
-            <button [scLightboxNextThumbnail]="i">
+            <button [scLightboxThumbnail]="i">
               <img [src]="item.thumbnail" [alt]="item.alt" />
             </button>
           }
         </div>
       </dialog>
     </div>
-  `,
+  \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ControlledLightboxNextDemo {
+export class ControlledLightboxDemo {
   readonly photos: readonly Photo[] = [
     {
       name: 'forest',
@@ -173,4 +193,5 @@ export class ControlledLightboxNextDemo {
   ];
   readonly open = signal(false);
   readonly index = signal(0);
+}`;
 }

@@ -1,35 +1,32 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScLightboxNext,
-  ScLightboxNextClose,
-  ScLightboxNextDialog,
-  ScLightboxNextImage,
-  ScLightboxNextTrigger,
+  ScLightbox,
+  ScLightboxClose,
+  ScLightboxDialog,
+  ScLightboxImage,
+  ScLightboxTrigger,
 } from '@semantic-components/ui-lab';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 /** One image in the text, opened in place — no thumbnails, no counter needed. */
 @Component({
-  selector: 'app-article-lightbox-next-demo',
+  selector: 'app-article-lightbox-demo',
   imports: [
-    ScLightboxNext,
-    ScLightboxNextTrigger,
-    ScLightboxNextDialog,
-    ScLightboxNextImage,
-    ScLightboxNextClose,
+    ScLightbox,
+    ScLightboxTrigger,
+    ScLightboxDialog,
+    ScLightboxImage,
+    ScLightboxClose,
     SiXIcon,
   ],
   template: `
-    <article
-      scLightboxNext
-      class="max-w-prose space-y-3 text-sm leading-relaxed"
-    >
+    <article scLightbox class="max-w-prose space-y-3 text-sm leading-relaxed">
       <p>
         The café opens at eight. By nine the long table fills with people who
         came for one coffee and stay for three.
       </p>
       <a
-        scLightboxNextTrigger
+        scLightboxTrigger
         href="/images/gallery/cafe.jpg"
         class="float-end ms-4 mb-2 w-48"
       >
@@ -46,15 +43,15 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
         window, where the wood is warm by noon. Nobody hurries; the owner knows
         most people by their order.
       </p>
-      <dialog scLightboxNextDialog aria-label="The café">
+      <dialog scLightboxDialog aria-label="The café">
         <div class="flex justify-end p-2">
-          <button scLightboxNextClose>
+          <button scLightboxClose>
             <svg siXIcon></svg>
             <span class="sr-only">Close</span>
           </button>
         </div>
         <div class="grid min-h-0 flex-1 place-items-center overflow-hidden p-4">
-          <img scLightboxNextImage alt="A wooden table in a quiet café" />
+          <img scLightboxImage alt="A wooden table in a quiet café" />
         </div>
       </dialog>
     </article>
@@ -62,4 +59,4 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ArticleLightboxNextDemo {}
+export class ArticleLightboxDemo {}

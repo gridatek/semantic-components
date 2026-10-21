@@ -1,28 +1,40 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { ScCarousel } from '@semantic-components/carousel';
-import { cn } from '@semantic-components/ui';
-import { SC_LIGHTBOX_PROVIDER } from './lightbox-provider';
+import {
+  type ScButtonVariants,
+  buttonVariants,
+  cn,
+  ɵwarnIfUnnamed,
+} from '@semantic-components/ui';
+import { ScLightbox } from './lightbox';
 
+/** The item after; disabled at the last, unless it loops. Write its icon and name it ("Next image"). */
 @Directive({
-  selector: 'button[scLightboxNextButton]',
+  selector: 'button[scLightboxNext]',
   host: {
-    '[class]': 'class()',
     type: 'button',
-    '[disabled]': '!carousel.canScrollNext()',
-    '[attr.aria-disabled]': '!carousel.canScrollNext() || null',
-    '(click)': 'carousel.scrollNext()',
+    'data-slot': 'lightbox-next',
+    '[disabled]': '!lightbox.hasNext()',
+    '[class]': 'class()',
+    '(click)': 'lightbox.next()',
   },
 })
-export class ScLightboxNextButton {
-  readonly provider = inject(SC_LIGHTBOX_PROVIDER);
-  readonly carousel = inject(ScCarousel);
+export class ScLightboxNext {
+  protected readonly lightbox = inject(ScLightbox);
 
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly variant = input<ScButtonVariants['variant']>('ghost');
+  readonly size = input<ScButtonVariants['size']>('icon');
 
   protected readonly class = computed(() =>
     cn(
-      "absolute top-1/2 end-4 z-10 inline-flex size-10 -translate-y-1/2 items-center justify-center rounded-full text-white/80 hover:bg-white/10 hover:text-white disabled:cursor-not-allowed disabled:opacity-30 [&_svg:not([class*='size-'])]:size-6",
+      buttonVariants({ variant: this.variant(), size: this.size() }),
+      // On the dark viewer: white.
+      'text-white hover:bg-white/15 hover:text-white dark:hover:bg-white/15',
       this.classInput(),
     ),
   );
+
+  constructor() {
+    ɵwarnIfUnnamed('scLightboxNext');
+  }
 }
