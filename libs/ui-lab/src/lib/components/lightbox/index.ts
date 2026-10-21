@@ -9,7 +9,7 @@ export { SC_LIGHTBOX_PROVIDER, ScLightboxProvider } from './lightbox-provider';
 export { ScLightbox } from './lightbox';
 export { ScLightboxClose } from './lightbox-close';
 export { ScLightboxCounter } from './lightbox-counter';
-export { ScLightboxNext } from './lightbox-next';
+export { ScLightboxNextButton } from './lightbox-next';
 export { ScLightboxPrev } from './lightbox-prev';
 export { ScLightboxThumbnailBar } from './lightbox-thumbnail-bar';
 export { ScLightboxToolbar } from './lightbox-toolbar';

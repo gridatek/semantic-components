@@ -4,7 +4,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_LIGHTBOX_PROVIDER } from './lightbox-provider';
 
 @Directive({
-  selector: 'button[scLightboxNext]',
+  selector: 'button[scLightboxNextButton]',
   host: {
     '[class]': 'class()',
     type: 'button',
@@ -13,7 +13,7 @@ import { SC_LIGHTBOX_PROVIDER } from './lightbox-provider';
     '(click)': 'carousel.scrollNext()',
   },
 })
-export class ScLightboxNext {
+export class ScLightboxNextButton {
   readonly provider = inject(SC_LIGHTBOX_PROVIDER);
   readonly carousel = inject(ScCarousel);
 

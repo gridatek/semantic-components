@@ -488,6 +488,14 @@
     "category": "Media"
   },
   {
+    "name": "Lightbox Next",
+    "path": "lightbox-next",
+    "description": "The lightbox, rebuilt: a gallery of links opened in the native dialog, the thumbnail morphing in; zoom, pan, swipes, keys.",
+    "status": "Experimental",
+    "library": "ui-lab",
+    "category": "Media"
+  },
+  {
     "name": "Link",
     "path": "link",
     "description": "A styled anchor element with button variants.",

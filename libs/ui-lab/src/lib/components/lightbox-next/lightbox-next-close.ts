@@ -1,0 +1,39 @@
+import { Directive, computed, inject, input } from '@angular/core';
+import {
+  type ScButtonVariants,
+  buttonVariants,
+  cn,
+  ɵwarnIfUnnamed,
+} from '@semantic-components/ui';
+import { ScLightboxNext } from './lightbox-next';
+
+/** Closes the lightbox. Write its icon and name it ("Close"). */
+@Directive({
+  selector: 'button[scLightboxNextClose]',
+  host: {
+    type: 'button',
+    'data-slot': 'lightbox-close',
+    '[class]': 'class()',
+    '(click)': 'lightbox.close()',
+  },
+})
+export class ScLightboxNextClose {
+  protected readonly lightbox = inject(ScLightboxNext);
+
+  readonly classInput = input<string>('', { alias: 'class' });
+  readonly variant = input<ScButtonVariants['variant']>('ghost');
+  readonly size = input<ScButtonVariants['size']>('icon');
+
+  protected readonly class = computed(() =>
+    cn(
+      buttonVariants({ variant: this.variant(), size: this.size() }),
+      // On the dark viewer: white.
+      'text-white hover:bg-white/15 hover:text-white dark:hover:bg-white/15',
+      this.classInput(),
+    ),
+  );
+
+  constructor() {
+    ɵwarnIfUnnamed('scLightboxNextClose');
+  }
+}

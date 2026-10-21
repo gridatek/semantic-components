@@ -12,7 +12,7 @@ import {
   ScLightboxGallery,
   ScLightboxGalleryItem,
   ScLightboxImageData,
-  ScLightboxNext,
+  ScLightboxNextButton,
   ScLightboxPortal,
   ScLightboxPrev,
   ScLightboxProvider,
@@ -42,7 +42,7 @@ import {
     ScLightboxCounter,
     ScLightboxGallery,
     ScLightboxGalleryItem,
-    ScLightboxNext,
+    ScLightboxNextButton,
     ScLightboxPortal,
     ScLightboxPrev,
     ScLightboxThumbnail,
@@ -136,7 +136,7 @@ import {
                 <svg siChevronLeftIcon></svg>
                 <span class="sr-only">Previous image</span>
               </button>
-              <button scLightboxNext>
+              <button scLightboxNextButton>
                 <svg siChevronRightIcon></svg>
                 <span class="sr-only">Next image</span>
               </button>

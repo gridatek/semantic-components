@@ -2147,6 +2147,39 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/lightbox-next',
+    children: [
+      {
+        path: 'gallery-lightbox-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/lightbox-next/demos/gallery-lightbox-next-demo').then(
+            (m) => m.GalleryLightboxNextDemo,
+          ),
+      },
+      {
+        path: 'zoom-lightbox-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/lightbox-next/demos/zoom-lightbox-next-demo').then(
+            (m) => m.ZoomLightboxNextDemo,
+          ),
+      },
+      {
+        path: 'article-lightbox-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/lightbox-next/demos/article-lightbox-next-demo').then(
+            (m) => m.ArticleLightboxNextDemo,
+          ),
+      },
+      {
+        path: 'controlled-lightbox-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/lightbox-next/demos/controlled-lightbox-next-demo').then(
+            (m) => m.ControlledLightboxNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/marquee',
     children: [
       {
