@@ -1199,6 +1199,39 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/dock-next',
+    children: [
+      {
+        path: 'apps-dock-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/dock-next/demos/apps-dock-next-demo').then(
+            (m) => m.AppsDockNextDemo,
+          ),
+      },
+      {
+        path: 'navigation-dock-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/dock-next/demos/navigation-dock-next-demo').then(
+            (m) => m.NavigationDockNextDemo,
+          ),
+      },
+      {
+        path: 'vertical-dock-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/dock-next/demos/vertical-dock-next-demo').then(
+            (m) => m.VerticalDockNextDemo,
+          ),
+      },
+      {
+        path: 'plain-dock-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/dock-next/demos/plain-dock-next-demo').then(
+            (m) => m.PlainDockNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/drawer',
     children: [
       {

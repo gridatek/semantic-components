@@ -312,6 +312,14 @@
     "category": "Advanced"
   },
   {
+    "name": "Dock Next",
+    "path": "dock-next",
+    "description": "The dock, rebuilt: your links and buttons, magnified by distance to the pointer and on focus; labels, counts, dots.",
+    "status": "Experimental",
+    "library": "ui-lab",
+    "category": "Advanced"
+  },
+  {
     "name": "Drawer",
     "path": "drawer",
     "description": "A touch-friendly drawer that slides from the bottom.",
