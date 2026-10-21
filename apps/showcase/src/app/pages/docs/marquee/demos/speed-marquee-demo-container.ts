@@ -6,7 +6,11 @@ import { SpeedMarqueeDemo } from './speed-marquee-demo';
   selector: 'app-speed-marquee-demo-container',
   imports: [DemoContainer, SpeedMarqueeDemo],
   template: `
-    <app-demo-container title="Speed Variations" [code]="code">
+    <app-demo-container
+      title="Speed"
+      [code]="code"
+      demoUrl="/demos/marquee/speed-marquee-demo"
+    >
       <app-speed-marquee-demo />
     </app-demo-container>
   `,
@@ -15,44 +19,50 @@ import { SpeedMarqueeDemo } from './speed-marquee-demo';
 })
 export class SpeedMarqueeDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScMarqueeText } from '@semantic-components/ui-lab';
+import { ScMarquee, ScMarqueeContent } from '@semantic-components/ui-lab';
 
+/** In pixels a second: short and long content move at the same pace. */
 @Component({
   selector: 'app-speed-marquee-demo',
-  imports: [ScMarqueeText],
+  imports: [ScMarquee, ScMarqueeContent],
   template: \`
-    <div class="w-full space-y-4">
-      <div>
-        <p class="text-muted-foreground mb-1 text-sm">Fast (10s)</p>
-        <div
-          scMarqueeText
-          text="Fast scrolling text"
-          [duration]="10"
-          separator="→"
-        ></div>
+    <div class="w-full space-y-3">
+      <div scMarquee [speed]="40" class="rounded-md border py-2">
+        <ng-template scMarqueeContent>
+          @for (word of short; track word) {
+            <span class="text-sm whitespace-nowrap">{{ word }}</span>
+          }
+        </ng-template>
       </div>
-      <div>
-        <p class="text-muted-foreground mb-1 text-sm">Normal (20s)</p>
-        <div
-          scMarqueeText
-          text="Normal scrolling text"
-          [duration]="20"
-          separator="→"
-        ></div>
-      </div>
-      <div>
-        <p class="text-muted-foreground mb-1 text-sm">Slow (40s)</p>
-        <div
-          scMarqueeText
-          text="Slow scrolling text"
-          [duration]="40"
-          separator="→"
-        ></div>
+      <div scMarquee [speed]="40" class="rounded-md border py-2">
+        <ng-template scMarqueeContent>
+          @for (word of long; track word) {
+            <span class="text-sm whitespace-nowrap">{{ word }}</span>
+          }
+        </ng-template>
       </div>
     </div>
   \`,
-  host: { class: 'block w-full' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class SpeedMarqueeDemo {}`;
+export class SpeedMarqueeDemo {
+  readonly short = ['One', 'Two', 'Three'];
+  readonly long = [
+    'Alpha',
+    'Bravo',
+    'Charlie',
+    'Delta',
+    'Echo',
+    'Foxtrot',
+    'Golf',
+    'Hotel',
+    'India',
+    'Juliett',
+    'Kilo',
+    'Lima',
+    'Mike',
+    'November',
+  ];
+}`;
 }

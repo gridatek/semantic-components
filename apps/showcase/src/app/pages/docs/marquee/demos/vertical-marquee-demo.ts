@@ -1,66 +1,37 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import {
-  ScMarquee,
-  ScMarqueeContent,
-  ScMarqueeItem,
-} from '@semantic-components/ui-lab';
+import { ScMarquee, ScMarqueeContent } from '@semantic-components/ui-lab';
 
+/** A column, going up: give it a height. */
 @Component({
   selector: 'app-vertical-marquee-demo',
-  imports: [ScMarquee, ScMarqueeContent, ScMarqueeItem],
+  imports: [ScMarquee, ScMarqueeContent],
   template: `
-    <div class="h-48 overflow-hidden rounded-lg border">
-      <div scMarquee direction="vertical" [duration]="20" [gap]="12">
-        <div scMarqueeContent>
-          @for (notification of notifications; track notification.id) {
-            <div
-              scMarqueeItem
-              class="bg-background mx-2 rounded-lg border p-3 shadow-sm"
+    <section aria-label="Reviews" class="h-80">
+      <div scMarquee direction="up" fade class="h-full">
+        <ng-template scMarqueeContent>
+          @for (quote of quotes; track quote.name) {
+            <figure
+              class="bg-card w-64 rounded-lg border p-4 text-sm shadow-xs"
             >
-              <div class="flex items-start gap-2">
-                <span class="text-lg">{{ notification.icon }}</span>
-                <div>
-                  <p class="text-sm font-medium">{{ notification.title }}</p>
-                  <p class="text-muted-foreground text-xs">
-                    {{ notification.time }}
-                  </p>
-                </div>
-              </div>
-            </div>
+              <blockquote>“{{ quote.text }}”</blockquote>
+              <figcaption class="text-muted-foreground mt-2">
+                — {{ quote.name }}
+              </figcaption>
+            </figure>
           }
-        </div>
-        <div scMarqueeContent aria-hidden="true">
-          @for (notification of notifications; track notification.id) {
-            <div
-              scMarqueeItem
-              class="bg-background mx-2 rounded-lg border p-3 shadow-sm"
-            >
-              <div class="flex items-start gap-2">
-                <span class="text-lg">{{ notification.icon }}</span>
-                <div>
-                  <p class="text-sm font-medium">
-                    {{ notification.title }}
-                  </p>
-                  <p class="text-muted-foreground text-xs">
-                    {{ notification.time }}
-                  </p>
-                </div>
-              </div>
-            </div>
-          }
-        </div>
+        </ng-template>
       </div>
-    </div>
+    </section>
   `,
-  host: { class: 'block w-full' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
 export class VerticalMarqueeDemo {
-  readonly notifications = [
-    { id: 1, icon: '📧', title: 'New message from John', time: '2 min ago' },
-    { id: 2, icon: '🎉', title: 'Project completed!', time: '5 min ago' },
-    { id: 3, icon: '📦', title: 'Package delivered', time: '10 min ago' },
-    { id: 4, icon: '🔔', title: 'Meeting reminder', time: '15 min ago' },
-    { id: 5, icon: '⭐', title: 'New review received', time: '20 min ago' },
+  readonly quotes = [
+    { text: 'It just works, and it reads well.', name: 'Ada' },
+    { text: 'Our forms finally feel finished.', name: 'Grace' },
+    { text: 'Accessible without trying hard.', name: 'Alan' },
+    { text: 'The docs answered every question.', name: 'Katherine' },
+    { text: 'Small parts, composed: exactly right.', name: 'Edsger' },
   ];
 }

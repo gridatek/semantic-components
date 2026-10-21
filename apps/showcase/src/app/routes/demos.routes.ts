@@ -2150,24 +2150,10 @@ export const demosRoutes: Route[] = [
     path: 'demos/marquee',
     children: [
       {
-        path: 'text-marquee-demo',
+        path: 'logos-marquee-demo',
         loadComponent: () =>
-          import('../pages/docs/marquee/demos/text-marquee-demo').then(
-            (m) => m.TextMarqueeDemo,
-          ),
-      },
-      {
-        path: 'reversed-marquee-demo',
-        loadComponent: () =>
-          import('../pages/docs/marquee/demos/reversed-marquee-demo').then(
-            (m) => m.ReversedMarqueeDemo,
-          ),
-      },
-      {
-        path: 'logo-marquee-demo',
-        loadComponent: () =>
-          import('../pages/docs/marquee/demos/logo-marquee-demo').then(
-            (m) => m.LogoMarqueeDemo,
+          import('../pages/docs/marquee/demos/logos-marquee-demo').then(
+            (m) => m.LogosMarqueeDemo,
           ),
       },
       {
@@ -2185,31 +2171,17 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
+        path: 'ticker-marquee-demo',
+        loadComponent: () =>
+          import('../pages/docs/marquee/demos/ticker-marquee-demo').then(
+            (m) => m.TickerMarqueeDemo,
+          ),
+      },
+      {
         path: 'speed-marquee-demo',
         loadComponent: () =>
           import('../pages/docs/marquee/demos/speed-marquee-demo').then(
             (m) => m.SpeedMarqueeDemo,
-          ),
-      },
-      {
-        path: 'pause-on-hover-marquee-demo',
-        loadComponent: () =>
-          import('../pages/docs/marquee/demos/pause-on-hover-marquee-demo').then(
-            (m) => m.PauseOnHoverMarqueeDemo,
-          ),
-      },
-      {
-        path: 'gallery-marquee-demo',
-        loadComponent: () =>
-          import('../pages/docs/marquee/demos/gallery-marquee-demo').then(
-            (m) => m.GalleryMarqueeDemo,
-          ),
-      },
-      {
-        path: 'stacked-marquee-demo',
-        loadComponent: () =>
-          import('../pages/docs/marquee/demos/stacked-marquee-demo').then(
-            (m) => m.StackedMarqueeDemo,
           ),
       },
     ],

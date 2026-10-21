@@ -1,92 +1,51 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import {
-  ScMarquee,
-  ScMarqueeContent,
-  ScMarqueeItem,
-} from '@semantic-components/ui-lab';
+import { ScMarquee, ScMarqueeContent } from '@semantic-components/ui-lab';
 
+/** Two rows, going opposite ways. */
 @Component({
   selector: 'app-testimonials-marquee-demo',
-  imports: [ScMarquee, ScMarqueeContent, ScMarqueeItem],
+  imports: [ScMarquee, ScMarqueeContent],
   template: `
-    <div scMarquee [duration]="40" [gap]="24">
-      <div scMarqueeContent>
-        @for (testimonial of testimonials; track testimonial.name) {
-          <div
-            scMarqueeItem
-            class="bg-background w-80 rounded-lg border p-4 shadow-sm"
-          >
-            <p class="text-muted-foreground mb-3 text-sm">
-              "{{ testimonial.quote }}"
-            </p>
-            <div class="flex items-center gap-2">
-              <div
-                class="bg-primary/10 flex size-8 items-center justify-center rounded-full text-sm font-medium"
-              >
-                {{ testimonial.name.charAt(0) }}
-              </div>
-              <div>
-                <p class="text-sm font-medium">{{ testimonial.name }}</p>
-                <p class="text-muted-foreground text-xs">
-                  {{ testimonial.role }}
-                </p>
-              </div>
-            </div>
-          </div>
-        }
+    <section aria-label="What people say" class="w-full space-y-4">
+      <div scMarquee fade>
+        <ng-template scMarqueeContent>
+          @for (quote of quotes; track quote.name) {
+            <figure
+              class="bg-card w-64 rounded-lg border p-4 text-sm shadow-xs"
+            >
+              <blockquote>“{{ quote.text }}”</blockquote>
+              <figcaption class="text-muted-foreground mt-2">
+                — {{ quote.name }}
+              </figcaption>
+            </figure>
+          }
+        </ng-template>
       </div>
-      <div scMarqueeContent aria-hidden="true">
-        @for (testimonial of testimonials; track testimonial.name) {
-          <div
-            scMarqueeItem
-            class="bg-background w-80 rounded-lg border p-4 shadow-sm"
-          >
-            <p class="text-muted-foreground mb-3 text-sm">
-              "{{ testimonial.quote }}"
-            </p>
-            <div class="flex items-center gap-2">
-              <div
-                class="bg-primary/10 flex size-8 items-center justify-center rounded-full text-sm font-medium"
-              >
-                {{ testimonial.name.charAt(0) }}
-              </div>
-              <div>
-                <p class="text-sm font-medium">{{ testimonial.name }}</p>
-                <p class="text-muted-foreground text-xs">
-                  {{ testimonial.role }}
-                </p>
-              </div>
-            </div>
-          </div>
-        }
+      <div scMarquee direction="right" fade>
+        <ng-template scMarqueeContent>
+          @for (quote of quotes; track quote.name) {
+            <figure
+              class="bg-card w-64 rounded-lg border p-4 text-sm shadow-xs"
+            >
+              <blockquote>“{{ quote.text }}”</blockquote>
+              <figcaption class="text-muted-foreground mt-2">
+                — {{ quote.name }}
+              </figcaption>
+            </figure>
+          }
+        </ng-template>
       </div>
-    </div>
+    </section>
   `,
-  host: { class: 'block w-full' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
 export class TestimonialsMarqueeDemo {
-  readonly testimonials = [
-    {
-      name: 'Alice Johnson',
-      role: 'CEO at TechCorp',
-      quote: 'This component library has transformed our development workflow.',
-    },
-    {
-      name: 'Bob Smith',
-      role: 'Lead Developer',
-      quote:
-        'The best Angular components I have ever used. Highly recommended!',
-    },
-    {
-      name: 'Carol Williams',
-      role: 'Product Manager',
-      quote: 'Clean, accessible, and beautifully designed components.',
-    },
-    {
-      name: 'David Brown',
-      role: 'UX Designer',
-      quote: 'Perfect balance of functionality and aesthetics.',
-    },
+  readonly quotes = [
+    { text: 'It just works, and it reads well.', name: 'Ada' },
+    { text: 'Our forms finally feel finished.', name: 'Grace' },
+    { text: 'Accessible without trying hard.', name: 'Alan' },
+    { text: 'The docs answered every question.', name: 'Katherine' },
+    { text: 'Small parts, composed: exactly right.', name: 'Edsger' },
   ];
 }

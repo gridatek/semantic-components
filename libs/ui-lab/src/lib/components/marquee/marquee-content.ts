@@ -1,17 +1,13 @@
-import { Directive, computed, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { Directive, TemplateRef, inject } from '@angular/core';
 
+/**
+ * Your content, written once — `<ng-template scMarqueeContent>`: the
+ * marquee repeats it as often as it takes to fill, the copies hidden from
+ * screen readers and the keyboard.
+ */
 @Directive({
-  selector: '[scMarqueeContent]',
-  host: {
-    'data-slot': 'marquee-content',
-    '[class]': 'class()',
-  },
+  selector: 'ng-template[scMarqueeContent]',
 })
 export class ScMarqueeContent {
-  readonly classInput = input<string>('', { alias: 'class' });
-
-  protected readonly class = computed(() =>
-    cn('flex shrink-0 items-center justify-around', this.classInput()),
-  );
+  readonly template = inject(TemplateRef);
 }

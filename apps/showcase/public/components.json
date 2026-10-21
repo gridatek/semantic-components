@@ -506,7 +506,7 @@
   {
     "name": "Marquee",
     "path": "marquee",
-    "description": "A scrolling text or content animation.",
+    "description": "Content written once and repeated to fill, speed in px/s, four directions, pauses for hover, focus and a button; still for reduced motion.",
     "status": "Experimental",
     "library": "ui-lab",
     "category": "Advanced"
