@@ -3877,6 +3877,46 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/timeline-next',
+    children: [
+      {
+        path: 'activity-timeline-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/timeline-next/demos/activity-timeline-next-demo').then(
+            (m) => m.ActivityTimelineNextDemo,
+          ),
+      },
+      {
+        path: 'tracking-timeline-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/timeline-next/demos/tracking-timeline-next-demo').then(
+            (m) => m.TrackingTimelineNextDemo,
+          ),
+      },
+      {
+        path: 'alternate-timeline-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/timeline-next/demos/alternate-timeline-next-demo').then(
+            (m) => m.AlternateTimelineNextDemo,
+          ),
+      },
+      {
+        path: 'horizontal-timeline-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/timeline-next/demos/horizontal-timeline-next-demo').then(
+            (m) => m.HorizontalTimelineNextDemo,
+          ),
+      },
+      {
+        path: 'pending-timeline-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/timeline-next/demos/pending-timeline-next-demo').then(
+            (m) => m.PendingTimelineNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/toast',
     children: [
       {

@@ -928,6 +928,14 @@
     "category": "Data Display"
   },
   {
+    "name": "Timeline Next",
+    "path": "timeline-next",
+    "description": "The timeline, rebuilt: an ordered list, the line drawn for you, progress by status, Temporal times, alternate and horizontal.",
+    "status": "Experimental",
+    "library": "ui-lab",
+    "category": "Data Display"
+  },
+  {
     "name": "Toast",
     "path": "toast",
     "description": "A brief notification that appears temporarily.",

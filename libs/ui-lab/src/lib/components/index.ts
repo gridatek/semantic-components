@@ -33,6 +33,7 @@ export * from './stepper';
 export * from './tags-input';
 export * from './time-picker-clock';
 export * from './timeline';
+export * from './timeline-next';
 export * from './tour-guide';
 export * from './transfer-list';
 export * from './video-player';
