@@ -1,7 +1,6 @@
 import { type Page, expect, test } from '@playwright/test';
 
-const demo = (name: string) =>
-  `/demos/timeline-next/${name}-timeline-next-demo`;
+const demo = (name: string) => `/demos/timeline/${name}-timeline-demo`;
 
 test('Activity: an ordered list; times from Temporal values', async ({
   page,

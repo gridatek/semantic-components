@@ -3840,27 +3840,6 @@ export const demosRoutes: Route[] = [
     path: 'demos/timeline',
     children: [
       {
-        path: 'basic-timeline-demo',
-        loadComponent: () =>
-          import('../pages/docs/timeline/demos/basic-timeline-demo').then(
-            (m) => m.BasicTimelineDemo,
-          ),
-      },
-      {
-        path: 'status-timeline-demo',
-        loadComponent: () =>
-          import('../pages/docs/timeline/demos/status-timeline-demo').then(
-            (m) => m.StatusTimelineDemo,
-          ),
-      },
-      {
-        path: 'sizes-timeline-demo',
-        loadComponent: () =>
-          import('../pages/docs/timeline/demos/sizes-timeline-demo').then(
-            (m) => m.SizesTimelineDemo,
-          ),
-      },
-      {
         path: 'activity-timeline-demo',
         loadComponent: () =>
           import('../pages/docs/timeline/demos/activity-timeline-demo').then(
@@ -3874,44 +3853,25 @@ export const demosRoutes: Route[] = [
             (m) => m.TrackingTimelineDemo,
           ),
       },
-    ],
-  },
-  {
-    path: 'demos/timeline-next',
-    children: [
       {
-        path: 'activity-timeline-next-demo',
+        path: 'alternate-timeline-demo',
         loadComponent: () =>
-          import('../pages/docs/timeline-next/demos/activity-timeline-next-demo').then(
-            (m) => m.ActivityTimelineNextDemo,
+          import('../pages/docs/timeline/demos/alternate-timeline-demo').then(
+            (m) => m.AlternateTimelineDemo,
           ),
       },
       {
-        path: 'tracking-timeline-next-demo',
+        path: 'horizontal-timeline-demo',
         loadComponent: () =>
-          import('../pages/docs/timeline-next/demos/tracking-timeline-next-demo').then(
-            (m) => m.TrackingTimelineNextDemo,
+          import('../pages/docs/timeline/demos/horizontal-timeline-demo').then(
+            (m) => m.HorizontalTimelineDemo,
           ),
       },
       {
-        path: 'alternate-timeline-next-demo',
+        path: 'pending-timeline-demo',
         loadComponent: () =>
-          import('../pages/docs/timeline-next/demos/alternate-timeline-next-demo').then(
-            (m) => m.AlternateTimelineNextDemo,
-          ),
-      },
-      {
-        path: 'horizontal-timeline-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/timeline-next/demos/horizontal-timeline-next-demo').then(
-            (m) => m.HorizontalTimelineNextDemo,
-          ),
-      },
-      {
-        path: 'pending-timeline-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/timeline-next/demos/pending-timeline-next-demo').then(
-            (m) => m.PendingTimelineNextDemo,
+          import('../pages/docs/timeline/demos/pending-timeline-demo').then(
+            (m) => m.PendingTimelineDemo,
           ),
       },
     ],

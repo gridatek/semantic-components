@@ -6,7 +6,11 @@ import { TrackingTimelineDemo } from './tracking-timeline-demo';
   selector: 'app-tracking-timeline-demo-container',
   imports: [DemoContainer, TrackingTimelineDemo],
   template: `
-    <app-demo-container title="Order Tracking" [code]="code">
+    <app-demo-container
+      title="Tracking"
+      [code]="code"
+      demoUrl="/demos/timeline/tracking-timeline-demo"
+    >
       <app-tracking-timeline-demo />
     </app-demo-container>
   `,
@@ -17,90 +21,98 @@ export class TrackingTimelineDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScTimeline,
-  ScTimelineConnector,
   ScTimelineContent,
-  ScTimelineDescription,
-  ScTimelineDot,
   ScTimelineItem,
+  ScTimelineMarker,
+  type ScTimelineStatus,
   ScTimelineTime,
   ScTimelineTitle,
 } from '@semantic-components/ui-lab';
 import {
   SiCheckIcon,
   SiHouseIcon,
-  SiPackageIcon,
   SiTruckIcon,
 } from '@semantic-icons/lucide-icons';
 
+/** Progress: done (filled, solid line), current (a ring — aria-current="step"), to come (outlined, dashed). The status is said in words too. */
 @Component({
   selector: 'app-tracking-timeline-demo',
   imports: [
     ScTimeline,
     ScTimelineItem,
-    ScTimelineConnector,
-    ScTimelineDot,
+    ScTimelineMarker,
     ScTimelineContent,
     ScTimelineTitle,
-    ScTimelineDescription,
     ScTimelineTime,
     SiCheckIcon,
-    SiPackageIcon,
     SiTruckIcon,
     SiHouseIcon,
   ],
   template: \`
-    <div class="w-full max-w-2xl rounded-lg border p-4">
-      <div scTimeline class="ml-4">
-        <div scTimelineItem>
-          <div scTimelineConnector></div>
-          <div scTimelineDot variant="success" size="lg">
-            <svg siCheckIcon class="size-4"></svg>
+    <ol scTimeline aria-label="Order 4815" class="w-full max-w-md">
+      @for (step of steps; track step.title) {
+        <li scTimelineItem [status]="step.status">
+          <div scTimelineMarker>
+            @switch (step.status) {
+              @case ('done') {
+                <svg siCheckIcon></svg>
+              }
+              @case ('current') {
+                <svg siTruckIcon></svg>
+              }
+              @default {
+                <svg siHouseIcon></svg>
+              }
+            }
           </div>
           <div scTimelineContent>
-            <h4 scTimelineTitle>Order Placed</h4>
-            <p scTimelineDescription>Your order has been confirmed.</p>
-            <span scTimelineTime>Jan 15, 2024 at 10:30 AM</span>
+            <p scTimelineTitle>
+              {{ step.title }}
+              <span class="sr-only">— {{ said[step.status] }}</span>
+            </p>
+            @if (step.at; as at) {
+              <time scTimelineTime [value]="at"></time>
+            }
           </div>
-        </div>
-
-        <div scTimelineItem>
-          <div scTimelineConnector></div>
-          <div scTimelineDot variant="success" size="lg">
-            <svg siPackageIcon class="size-4"></svg>
-          </div>
-          <div scTimelineContent>
-            <h4 scTimelineTitle>Shipped</h4>
-            <p scTimelineDescription>Your package is on its way.</p>
-            <span scTimelineTime>Jan 16, 2024 at 2:15 PM</span>
-          </div>
-        </div>
-
-        <div scTimelineItem>
-          <div scTimelineConnector></div>
-          <div scTimelineDot variant="warning" size="lg">
-            <svg siTruckIcon class="size-4"></svg>
-          </div>
-          <div scTimelineContent>
-            <h4 scTimelineTitle>Out for Delivery</h4>
-            <p scTimelineDescription>Your package is out for delivery today.</p>
-            <span scTimelineTime>Jan 18, 2024 at 8:00 AM</span>
-          </div>
-        </div>
-
-        <div scTimelineItem>
-          <div scTimelineDot variant="outline" size="lg">
-            <svg siHouseIcon class="size-4"></svg>
-          </div>
-          <div scTimelineContent>
-            <h4 scTimelineTitle class="text-muted-foreground">Delivered</h4>
-            <p scTimelineDescription>Estimated delivery by end of day.</p>
-          </div>
-        </div>
-      </div>
-    </div>
+        </li>
+      }
+    </ol>
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class TrackingTimelineDemo {}`;
+export class TrackingTimelineDemo {
+  readonly steps: readonly {
+    title: string;
+    status: ScTimelineStatus;
+    at?: Temporal.PlainDateTime;
+  }[] = [
+    {
+      title: 'Ordered',
+      status: 'done',
+      at: Temporal.PlainDateTime.from('2026-10-18T10:12'),
+    },
+    {
+      title: 'Packed',
+      status: 'done',
+      at: Temporal.PlainDateTime.from('2026-10-19T08:40'),
+    },
+    {
+      title: 'Shipped',
+      status: 'done',
+      at: Temporal.PlainDateTime.from('2026-10-19T17:05'),
+    },
+    {
+      title: 'Out for delivery',
+      status: 'current',
+      at: Temporal.PlainDateTime.from('2026-10-21T07:55'),
+    },
+    { title: 'Delivered', status: 'upcoming' },
+  ];
+  readonly said: Record<ScTimelineStatus, string> = {
+    done: 'done',
+    current: 'in progress',
+    upcoming: 'to come',
+  };
+}`;
 }

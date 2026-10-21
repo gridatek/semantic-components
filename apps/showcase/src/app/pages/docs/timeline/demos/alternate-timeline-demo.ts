@@ -1,43 +1,43 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScTimelineNext,
-  ScTimelineNextContent,
-  ScTimelineNextDescription,
-  ScTimelineNextItem,
-  ScTimelineNextMarker,
-  ScTimelineNextOpposite,
-  ScTimelineNextTime,
-  ScTimelineNextTitle,
+  ScTimeline,
+  ScTimelineContent,
+  ScTimelineDescription,
+  ScTimelineItem,
+  ScTimelineMarker,
+  ScTimelineOpposite,
+  ScTimelineTime,
+  ScTimelineTitle,
 } from '@semantic-components/ui-lab';
 
 /** A history down a centred line, the events in turn on each side, their dates facing them. */
 @Component({
-  selector: 'app-alternate-timeline-next-demo',
+  selector: 'app-alternate-timeline-demo',
   imports: [
-    ScTimelineNext,
-    ScTimelineNextItem,
-    ScTimelineNextMarker,
-    ScTimelineNextContent,
-    ScTimelineNextTitle,
-    ScTimelineNextDescription,
-    ScTimelineNextOpposite,
-    ScTimelineNextTime,
+    ScTimeline,
+    ScTimelineItem,
+    ScTimelineMarker,
+    ScTimelineContent,
+    ScTimelineTitle,
+    ScTimelineDescription,
+    ScTimelineOpposite,
+    ScTimelineTime,
   ],
   template: `
-    <ol scTimelineNext align="alternate" class="w-full max-w-2xl">
+    <ol scTimeline align="alternate" class="w-full max-w-2xl">
       @for (event of history; track event.title) {
-        <li scTimelineNextItem>
-          <div scTimelineNextOpposite>
+        <li scTimelineItem>
+          <div scTimelineOpposite>
             <time
-              scTimelineNextTime
+              scTimelineTime
               [value]="event.on"
               [options]="{ year: 'numeric', month: 'long' }"
             ></time>
           </div>
-          <div scTimelineNextMarker></div>
-          <div scTimelineNextContent>
-            <p scTimelineNextTitle>{{ event.title }}</p>
-            <p scTimelineNextDescription>{{ event.text }}</p>
+          <div scTimelineMarker></div>
+          <div scTimelineContent>
+            <p scTimelineTitle>{{ event.title }}</p>
+            <p scTimelineDescription>{{ event.text }}</p>
           </div>
         </li>
       }
@@ -46,7 +46,7 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class AlternateTimelineNextDemo {
+export class AlternateTimelineDemo {
   readonly history = [
     {
       title: 'The idea',

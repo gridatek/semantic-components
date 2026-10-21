@@ -6,15 +6,15 @@ import {
   input,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { ScTimelineNext } from './timeline-next';
-import { ScTimelineNextItem } from './timeline-next-item';
+import { ScTimeline } from './timeline';
+import { ScTimelineItem } from './timeline-item';
 
 /**
  * An event's marker — a dot, or your icon in it — and the line from it to
  * the next: solid after what is done, dashed after the rest. Decorative.
  */
 @Component({
-  selector: '[scTimelineNextMarker]',
+  selector: '[scTimelineMarker]',
   template: `
     <span [class]="dot()" data-slot="timeline-dot"><ng-content /></span>
   `,
@@ -25,9 +25,9 @@ import { ScTimelineNextItem } from './timeline-next-item';
   },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScTimelineNextMarker {
-  private readonly timeline = inject(ScTimelineNext);
-  private readonly item = inject(ScTimelineNextItem);
+export class ScTimelineMarker {
+  private readonly timeline = inject(ScTimeline);
+  private readonly item = inject(ScTimelineItem);
 
   readonly classInput = input<string>('', { alias: 'class' });
   /** An error, a failure: in the destructive colour. */

@@ -1,48 +1,43 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScTimelineNext,
-  ScTimelineNextContent,
-  ScTimelineNextDescription,
-  ScTimelineNextItem,
-  ScTimelineNextMarker,
-  ScTimelineNextOpposite,
-  ScTimelineNextTime,
-  ScTimelineNextTitle,
+  ScTimeline,
+  ScTimelineContent,
+  ScTimelineDescription,
+  ScTimelineItem,
+  ScTimelineMarker,
+  ScTimelineOpposite,
+  ScTimelineTime,
+  ScTimelineTitle,
 } from '@semantic-components/ui-lab';
 
 /** Across, for a roadmap: the date above each marker, the content below; it scrolls sideways when narrow. */
 @Component({
-  selector: 'app-horizontal-timeline-next-demo',
+  selector: 'app-horizontal-timeline-demo',
   imports: [
-    ScTimelineNext,
-    ScTimelineNextItem,
-    ScTimelineNextMarker,
-    ScTimelineNextContent,
-    ScTimelineNextTitle,
-    ScTimelineNextDescription,
-    ScTimelineNextOpposite,
-    ScTimelineNextTime,
+    ScTimeline,
+    ScTimelineItem,
+    ScTimelineMarker,
+    ScTimelineContent,
+    ScTimelineTitle,
+    ScTimelineDescription,
+    ScTimelineOpposite,
+    ScTimelineTime,
   ],
   template: `
-    <ol
-      scTimelineNext
-      orientation="horizontal"
-      aria-label="Roadmap"
-      class="w-full"
-    >
+    <ol scTimeline orientation="horizontal" aria-label="Roadmap" class="w-full">
       @for (stage of roadmap; track stage.title) {
-        <li scTimelineNextItem [status]="stage.status">
-          <div scTimelineNextOpposite>
+        <li scTimelineItem [status]="stage.status">
+          <div scTimelineOpposite>
             <time
-              scTimelineNextTime
+              scTimelineTime
               [value]="stage.on"
               [options]="{ year: 'numeric', month: 'short' }"
             ></time>
           </div>
-          <div scTimelineNextMarker></div>
-          <div scTimelineNextContent>
-            <p scTimelineNextTitle>{{ stage.title }}</p>
-            <p scTimelineNextDescription>{{ stage.text }}</p>
+          <div scTimelineMarker></div>
+          <div scTimelineContent>
+            <p scTimelineTitle>{{ stage.title }}</p>
+            <p scTimelineDescription>{{ stage.text }}</p>
           </div>
         </li>
       }
@@ -51,7 +46,7 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class HorizontalTimelineNextDemo {
+export class HorizontalTimelineDemo {
   readonly roadmap = [
     {
       title: 'Research',

@@ -1,17 +1,17 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { ScTimelineNext } from './timeline-next';
+import { ScTimeline } from './timeline';
 
 /** Across the line from the content — a date facing its event. Optional. */
 @Directive({
-  selector: '[scTimelineNextOpposite]',
+  selector: '[scTimelineOpposite]',
   host: {
     'data-slot': 'timeline-opposite',
     '[class]': 'class()',
   },
 })
-export class ScTimelineNextOpposite {
-  private readonly timeline = inject(ScTimelineNext);
+export class ScTimelineOpposite {
+  private readonly timeline = inject(ScTimeline);
 
   readonly classInput = input<string>('', { alias: 'class' });
 

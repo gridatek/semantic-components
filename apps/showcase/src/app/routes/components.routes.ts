@@ -633,12 +633,6 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/timeline/timeline-page'),
       },
       {
-        path: 'timeline-next',
-        title: 'Timeline Next - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/timeline-next/timeline-next-page'),
-      },
-      {
         path: 'toast',
         title: 'Toast - Semantic Components',
         loadComponent: () => import('../pages/docs/toast/toast-page'),
