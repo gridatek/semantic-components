@@ -25,9 +25,9 @@ test.describe('Basic (modal)', () => {
       .getByRole('button', { name: 'Export' })
       .boundingBox();
     const lit = await page.locator('[data-slot="spotlight-dim"]').boundingBox();
-    expect(lit!.x).toBeLessThanOrEqual(target!.x);
-    expect(lit!.x + lit!.width).toBeGreaterThanOrEqual(
-      target!.x + target!.width,
+    expect(lit?.x ?? 0).toBeLessThanOrEqual(target?.x ?? 0);
+    expect((lit?.x ?? 0) + (lit?.width ?? 0)).toBeGreaterThanOrEqual(
+      (target?.x ?? 0) + (target?.width ?? 0),
     );
     await expect(card(page)).toHaveAttribute('data-side', 'bottom');
   });
@@ -62,7 +62,7 @@ test.describe('Interactive', () => {
     const start = page.getByRole('button', { name: 'Try the search' });
     const box = await start.boundingBox();
     // Under the dim, the button is not reached: the spotlight closes instead.
-    await page.mouse.click(box!.x + 2, box!.y + 2);
+    await page.mouse.click((box?.x ?? 0) + 2, (box?.y ?? 0) + 2);
     await expect.poll(() => isOpen(page)).toBe(false);
   });
 
