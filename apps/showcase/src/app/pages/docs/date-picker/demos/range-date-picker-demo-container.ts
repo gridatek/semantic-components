@@ -77,7 +77,7 @@ import {
               initialFocus
               aria-label="Choose your dates"
               [mode]="dp.mode()"
-              [value]="dp.value()"
+              [value]="dp.draft()"
               (valueChange)="dp.pick($event)"
               [numberOfMonths]="2"
             >

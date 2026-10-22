@@ -1130,6 +1130,53 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/date-range-picker-next',
+    children: [
+      {
+        path: 'basic-date-range-picker-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-range-picker-next/demos/basic-date-range-picker-next-demo').then(
+            (m) => m.BasicDateRangePickerNextDemo,
+          ),
+      },
+      {
+        path: 'presets-date-range-picker-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-range-picker-next/demos/presets-date-range-picker-next-demo').then(
+            (m) => m.PresetsDateRangePickerNextDemo,
+          ),
+      },
+      {
+        path: 'typed-date-range-picker-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-range-picker-next/demos/typed-date-range-picker-next-demo').then(
+            (m) => m.TypedDateRangePickerNextDemo,
+          ),
+      },
+      {
+        path: 'confirm-date-range-picker-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-range-picker-next/demos/confirm-date-range-picker-next-demo').then(
+            (m) => m.ConfirmDateRangePickerNextDemo,
+          ),
+      },
+      {
+        path: 'constraints-date-range-picker-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-range-picker-next/demos/constraints-date-range-picker-next-demo').then(
+            (m) => m.ConstraintsDateRangePickerNextDemo,
+          ),
+      },
+      {
+        path: 'form-date-range-picker-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-range-picker-next/demos/form-date-range-picker-next-demo').then(
+            (m) => m.FormDateRangePickerNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/dialog',
     children: [
       {

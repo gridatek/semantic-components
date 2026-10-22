@@ -288,6 +288,14 @@
     "category": "Forms"
   },
   {
+    "name": "Date Range Picker Next",
+    "path": "date-range-picker-next",
+    "description": "The date range picker, rebuilt: the date picker in range mode, with presets, typed ends and Apply.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Forms"
+  },
+  {
     "name": "Dialog",
     "path": "dialog",
     "description": "A modal dialog that interrupts the user with important content.",

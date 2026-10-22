@@ -10,9 +10,9 @@ import {
   forwardRef,
   inject,
   input,
+  linkedSignal,
   model,
   output,
-  signal,
   untracked,
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
@@ -27,9 +27,11 @@ import { ScDatePickerTrigger } from './date-picker-trigger';
 
 /**
  * A date, picked in a calendar in a popover — or typed
- * (`scDatePickerInput`). Its value is the calendar's; `text()` is it as
- * written in the app's language. A `[formField]`. It closes on a pick (on a
- * whole range), focus back on its trigger.
+ * (`scDatePickerInput`; a range's ends: `part="start"` / `"end"`), or a
+ * preset (`scDatePickerPreset`). Its value is the calendar's; `text()` is it
+ * as written in the app's language. A `[formField]`. It closes on a pick (on
+ * a whole range), focus back on its trigger — or, `confirm`, picks are a
+ * draft until `scDatePickerApply`.
  */
 @Directive({
   selector: 'div[scDatePicker]',
@@ -57,10 +59,12 @@ export class ScDatePicker implements FormValueControl<ScCalendarValue> {
   readonly unavailable = input<(date: Temporal.PlainDate) => boolean>(
     () => false,
   );
+  /** Picks are a draft, kept by `scDatePickerApply` — dropped on close. */
+  readonly confirm = input(false, { transform: booleanAttribute });
   readonly disabled = input(false, { transform: booleanAttribute });
   readonly invalid = input(false, { transform: booleanAttribute });
   readonly touched = input(false, { transform: booleanAttribute });
-  /** Left: the calendar closed, or the typed date read (Signal Forms marks it touched). */
+  /** Left: the calendar closed, or a typed date read (Signal Forms marks it touched). */
   readonly touch = output<void>();
 
   private readonly popover = contentChild(ScPopoverProvider, {
@@ -72,12 +76,13 @@ export class ScDatePicker implements FormValueControl<ScCalendarValue> {
     { descendants: true, read: ElementRef<HTMLElement> },
   );
 
-  /** Typed text that could not be read as a day, until it is edited. */
-  readonly rejected = signal(false);
-  /** Invalid, once touched — or text that could not be read. */
-  readonly showInvalid = computed(
-    () => this.rejected() || (this.invalid() && this.touched()),
-  );
+  /** Invalid, once touched. */
+  readonly showInvalid = computed(() => this.invalid() && this.touched());
+
+  /** What the calendar shows (`[value]="dp.draft()"`): the value — or, `confirm`, the picks not yet applied. */
+  readonly draft = linkedSignal(() => this.value());
+  /** The draft can be applied: a day, a whole range, or days. */
+  readonly canApply = computed(() => this.isDone(this.draft(), true));
 
   private readonly formatter = computed(
     () => new Intl.DateTimeFormat(this.locale(), this.format()),
@@ -109,15 +114,17 @@ export class ScDatePicker implements FormValueControl<ScCalendarValue> {
   );
 
   constructor() {
-    // The calendar closed: touched — and focus back on the trigger if it was
-    // in the panel, which leaves after its animation (Safari does not focus a
-    // clicked button: there is nothing for the panel to restore).
+    // The calendar closed: the draft dropped, touched — and focus back on the
+    // trigger if it was in the panel, which leaves after its animation (Safari
+    // does not focus a clicked button: there is nothing for the panel to
+    // restore).
     const document = inject(DOCUMENT);
     let wasOpen = false;
     effect(() => {
       const open = this.popover()?.open() ?? false;
       untracked(() => {
         if (wasOpen && !open) {
+          this.draft.set(this.value());
           this.touch.emit();
           const active = document.activeElement;
           if (
@@ -132,18 +139,29 @@ export class ScDatePicker implements FormValueControl<ScCalendarValue> {
     });
   }
 
-  /** The calendar's pick (`(valueChange)`): kept — and, done, closed. */
+  /**
+   * The calendar's pick (`(valueChange)`) or a preset's: kept — and, done,
+   * closed. `confirm`: the draft, until applied.
+   */
   pick(value: ScCalendarValue): void {
+    if (this.confirm()) {
+      this.draft.set(value);
+      return;
+    }
     this.value.set(value);
-    this.rejected.set(false);
-    const mode = this.mode();
-    const done =
-      mode === 'single'
-        ? !!value
-        : mode === 'range'
-          ? !!(value as ScCalendarRange | null)?.to
-          : false;
-    if (done) this.popover()?.open.set(false);
+    if (this.isDone(value)) this.close();
+  }
+
+  /** The draft, kept — and closed. */
+  apply(): void {
+    if (!this.canApply()) return;
+    this.value.set(this.draft());
+    this.close();
+  }
+
+  /** Closed, the draft dropped. */
+  cancel(): void {
+    this.close();
   }
 
   /** A day that can be picked: within min and max, not unavailable. */
@@ -155,5 +173,17 @@ export class ScDatePicker implements FormValueControl<ScCalendarValue> {
       (!max || Temporal.PlainDate.compare(date, max) <= 0) &&
       !this.unavailable()(date)
     );
+  }
+
+  private close(): void {
+    this.popover()?.open.set(false);
+  }
+
+  /** A day, a whole range — or, `days`, at least one of several days. */
+  private isDone(value: ScCalendarValue, days = false): boolean {
+    const mode = this.mode();
+    if (mode === 'single') return !!value;
+    if (mode === 'range') return !!(value as ScCalendarRange | null)?.to;
+    return days && !!(value as readonly Temporal.PlainDate[] | null)?.length;
   }
 }

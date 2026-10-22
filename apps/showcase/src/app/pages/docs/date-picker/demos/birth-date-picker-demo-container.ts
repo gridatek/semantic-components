@@ -96,7 +96,7 @@ import {
                 [maxDate]="adult"
                 aria-label="Choose your date of birth"
                 [mode]="dp.mode()"
-                [value]="dp.value()"
+                [value]="dp.draft()"
                 (valueChange)="dp.pick($event)"
               >
                 <div scCalendarHeader>

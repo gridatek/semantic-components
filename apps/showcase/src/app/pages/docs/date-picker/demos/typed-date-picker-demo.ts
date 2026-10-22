@@ -70,7 +70,7 @@ import {
                 initialFocus
                 aria-label="Choose a date"
                 [mode]="dp.mode()"
-                [value]="dp.value()"
+                [value]="dp.draft()"
                 (valueChange)="dp.pick($event)"
               >
                 <div scCalendarHeader>

@@ -6,18 +6,21 @@ import {
   effect,
   inject,
   input,
+  signal,
   untracked,
 } from '@angular/core';
 import { cn } from '../../utils';
+import type { ScCalendarRange } from '../calendar';
 import { SC_FIELD } from '../field';
 import { inputStyles } from '../input/input';
 import { ScDatePicker } from './date-picker';
 
 /**
- * A day, typed — single mode: in the locale's numeric order (14/10/2026,
- * 10/14/2026, 14.10.2026…) or ISO (2026-10-14); read on Enter or leaving.
- * Text that is not a day that can be picked stays, marked, to be fixed.
- * Shows the value in the same numeric form.
+ * A day, typed — in the locale's numeric order (14/10/2026, 10/14/2026,
+ * 14.10.2026…) or ISO (2026-10-14); read on Enter or leaving. Single mode, or
+ * a range's end: `part="start"` / `part="end"` (an end before the start is
+ * not one). Text that is not a day that can be picked stays, marked, to be
+ * fixed. Shows the value in the same numeric form.
  */
 @Directive({
   selector: 'input[scDatePickerInput]',
@@ -26,11 +29,12 @@ import { ScDatePicker } from './date-picker';
     type: 'text',
     autocomplete: 'off',
     '[attr.id]': 'id()',
+    '[attr.data-part]': 'part()',
     '[attr.aria-describedby]': 'describedBy()',
-    '[attr.aria-invalid]': 'picker.showInvalid() || null',
+    '[attr.aria-invalid]': '(rejected() || picker.showInvalid()) || null',
     '[disabled]': 'picker.disabled()',
     '[class]': 'class()',
-    '(input)': 'picker.rejected.set(false)',
+    '(input)': 'rejected.set(false)',
     '(keydown.enter)': 'read()',
     '(blur)': 'read(); picker.touch.emit()',
   },
@@ -46,9 +50,17 @@ export class ScDatePickerInput {
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly idInput = input('', { alias: 'id' });
+  /** In range mode: the end it is. */
+  readonly part = input<'start' | 'end' | undefined>(undefined);
+
+  /** The typed text could not be read as a day, until it is edited. */
+  protected readonly rejected = signal(false);
 
   protected readonly id = computed(
-    () => this.idInput() || this.field?.id() || this.fallbackId,
+    () =>
+      this.idInput() ||
+      (this.part() === 'end' ? '' : this.field?.id()) ||
+      this.fallbackId,
   );
   protected readonly describedBy = computed(
     () => this.field?.descriptionIds().join(' ') || null,
@@ -75,17 +87,26 @@ export class ScDatePickerInput {
       ),
   );
 
+  /** Its day in the value: the value, or the range's end. */
+  private readonly day = computed(() => {
+    const value = this.picker.value();
+    const part = this.part();
+    if (!part) return value instanceof Temporal.PlainDate ? value : undefined;
+    const range = value as ScCalendarRange | null;
+    return part === 'start' ? range?.from : range?.to;
+  });
+
   protected readonly class = computed(() => cn(inputStyles, this.classInput()));
 
   constructor() {
     // The value, shown — unless it is being typed.
     effect(() => {
-      const value = this.picker.value();
+      const day = this.day();
       const numeric = this.numeric();
       untracked(() => {
         if (this.element.ownerDocument.activeElement === this.element) return;
-        this.element.value =
-          value instanceof Temporal.PlainDate ? numeric.format(value) : '';
+        this.rejected.set(false);
+        this.element.value = day ? numeric.format(day) : '';
       });
     });
   }
@@ -93,19 +114,36 @@ export class ScDatePickerInput {
   /** The typed text, read: a day that can be picked, or marked. */
   read(): void {
     const text = this.element.value.trim();
-    if (!text) {
-      this.picker.value.set(null);
-      this.picker.rejected.set(false);
+    const date = text ? this.parse(text) : null;
+    if (text && (!date || !this.picker.canPick(date) || !this.fits(date))) {
+      this.rejected.set(true);
       return;
     }
-    const date = this.parse(text);
-    if (!date || !this.picker.canPick(date)) {
-      this.picker.rejected.set(true);
-      return;
+    this.rejected.set(false);
+    this.picker.value.set(this.next(date ?? undefined));
+    this.element.value = date ? this.numeric().format(date) : '';
+  }
+
+  /** A range's end, typed: not before the start, not after the end. */
+  private fits(date: Temporal.PlainDate): boolean {
+    const part = this.part();
+    const range = this.picker.value() as ScCalendarRange | null;
+    if (part === 'start' && range?.to)
+      return Temporal.PlainDate.compare(date, range.to) <= 0;
+    if (part === 'end') {
+      if (!range?.from) return false;
+      return Temporal.PlainDate.compare(date, range.from) >= 0;
     }
-    this.picker.rejected.set(false);
-    this.picker.value.set(date);
-    this.element.value = this.numeric().format(date);
+    return true;
+  }
+
+  /** The value with this day — none: no start, no range. */
+  private next(date: Temporal.PlainDate | undefined) {
+    const part = this.part();
+    if (!part) return date ?? null;
+    const range = this.picker.value() as ScCalendarRange | null;
+    if (part === 'start') return date ? { from: date, to: range?.to } : null;
+    return range?.from ? { from: range.from, to: date } : null;
   }
 
   private parse(text: string): Temporal.PlainDate | null {

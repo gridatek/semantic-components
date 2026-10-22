@@ -93,7 +93,7 @@ import {
               initialFocus
               aria-label="Choisir une date"
               [mode]="dp.mode()"
-              [value]="dp.value()"
+              [value]="dp.draft()"
               (valueChange)="dp.pick($event)"
               locale="fr-FR"
             >
