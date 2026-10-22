@@ -1,100 +1,91 @@
 import {
   Directive,
   ElementRef,
-  InjectionToken,
   computed,
-  effect,
+  forwardRef,
   inject,
   input,
 } from '@angular/core';
 import { badgeVariants, cn } from '@semantic-components/ui';
-import { SC_TAGS_INPUT } from './tags-input';
+import { ScTagsInput } from './tags-input';
 
-export const SC_TAGS_INPUT_ITEM = new InjectionToken<ScTagsInputItem>(
-  'ScTagsInputItem',
-);
-
+/**
+ * A tag: reached from the field by the keyboard, not by Tab. ← → between
+ * tags (past the last, the field), Home, End; Delete or Backspace removes
+ * it; Escape goes back to the field.
+ */
 @Directive({
   selector: '[scTagsInputItem]',
   exportAs: 'scTagsInputItem',
-  providers: [{ provide: SC_TAGS_INPUT_ITEM, useExisting: ScTagsInputItem }],
   host: {
+    'data-slot': 'tags-input-item',
+    '[attr.tabindex]': 'tags.disabled() ? null : -1',
     '[class]': 'class()',
-    '[tabindex]': 'tabIndex()',
-    '[attr.data-focused]': 'isFocused() || null',
     '(keydown)': 'onKeydown($event)',
-    '(focus)': 'onFocus()',
   },
 })
 export class ScTagsInputItem {
-  private readonly elementRef = inject(ElementRef<HTMLElement>);
-  private readonly tagsInput = inject(SC_TAGS_INPUT);
+  private readonly tags = inject(forwardRef(() => ScTagsInput));
+  private readonly element =
+    inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly tag = input.required<string>();
-  readonly index = input.required<number>();
-  readonly variant = input<'default' | 'secondary' | 'outline'>('default');
 
-  protected readonly isFocused = computed(
-    () => this.tagsInput.focusedTagIndex() === this.index(),
-  );
-
-  protected readonly tabIndex = computed(() => (this.isFocused() ? 0 : -1));
+  /** Its place among the tags. */
+  readonly index = computed(() => this.tags.items().indexOf(this));
 
   protected readonly class = computed(() =>
     cn(
-      badgeVariants({ variant: this.variant() }),
-      'max-w-[150px]',
+      badgeVariants({ variant: 'secondary' }),
+      'max-w-48 gap-0.5 pe-0.5 outline-none [&>span]:truncate',
+      // Focused: inverted — the field's own ring is around it already.
+      'focus-visible:bg-primary focus-visible:text-primary-foreground focus-visible:ring-0',
       this.classInput(),
     ),
   );
 
-  constructor() {
-    effect(() => {
-      if (this.tagsInput.focusedTagIndex() === this.index()) {
-        this.elementRef.nativeElement.focus();
-      }
-    });
+  focus(): void {
+    this.element.focus();
   }
 
-  protected onFocus(): void {
-    this.tagsInput.focusedTagIndex.set(this.index());
+  /** Removes it. */
+  remove(): void {
+    this.tags.removeAt(this.index());
   }
 
   protected onKeydown(event: KeyboardEvent): void {
+    if (event.target !== this.element) return;
     const index = this.index();
-    const tags = this.tagsInput.tags();
-
-    switch (event.key) {
+    const last = this.tags.items().length - 1;
+    const rtl = getComputedStyle(this.element).direction === 'rtl';
+    const key =
+      rtl && event.key === 'ArrowLeft'
+        ? 'ArrowRight'
+        : rtl && event.key === 'ArrowRight'
+          ? 'ArrowLeft'
+          : event.key;
+    switch (key) {
       case 'ArrowLeft':
-        event.preventDefault();
-        if (index > 0) {
-          this.tagsInput.focusTag(index - 1);
-        }
+        this.tags.focusItem(Math.max(0, index - 1));
         break;
       case 'ArrowRight':
-        event.preventDefault();
-        if (index < tags.length - 1) {
-          this.tagsInput.focusTag(index + 1);
-        } else {
-          this.tagsInput.focusedTagIndex.set(-1);
-          this.tagsInput.focusInput();
-        }
+        if (index < last) this.tags.focusItem(index + 1);
+        else this.tags.focusControl();
         break;
       case 'Home':
-        event.preventDefault();
-        this.tagsInput.focusTag(0);
+        this.tags.focusItem(0);
         break;
       case 'End':
-        event.preventDefault();
-        this.tagsInput.focusedTagIndex.set(-1);
-        this.tagsInput.focusInput();
+      case 'Escape':
+        this.tags.focusControl();
         break;
       case 'Delete':
       case 'Backspace':
-        event.preventDefault();
-        this.tagsInput.removeTagAtIndex(index);
+        this.remove();
         break;
+      default:
+        return;
     }
+    event.preventDefault();
   }
 }

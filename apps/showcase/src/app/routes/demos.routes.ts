@@ -3564,113 +3564,24 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'clearable-tags-input-demo',
+        path: 'emails-tags-input-demo',
         loadComponent: () =>
-          import('../pages/docs/tags-input/demos/clearable-tags-input-demo').then(
-            (m) => m.ClearableTagsInputDemo,
+          import('../pages/docs/tags-input/demos/emails-tags-input-demo').then(
+            (m) => m.EmailsTagsInputDemo,
           ),
       },
       {
-        path: 'max-tags-tags-input-demo',
+        path: 'limit-tags-input-demo',
         loadComponent: () =>
-          import('../pages/docs/tags-input/demos/max-tags-tags-input-demo').then(
-            (m) => m.MaxTagsTagsInputDemo,
+          import('../pages/docs/tags-input/demos/limit-tags-input-demo').then(
+            (m) => m.LimitTagsInputDemo,
           ),
       },
       {
-        path: 'variants-tags-input-demo',
+        path: 'form-tags-input-demo',
         loadComponent: () =>
-          import('../pages/docs/tags-input/demos/variants-tags-input-demo').then(
-            (m) => m.VariantsTagsInputDemo,
-          ),
-      },
-      {
-        path: 'duplicates-tags-input-demo',
-        loadComponent: () =>
-          import('../pages/docs/tags-input/demos/duplicates-tags-input-demo').then(
-            (m) => m.DuplicatesTagsInputDemo,
-          ),
-      },
-      {
-        path: 'delimiters-tags-input-demo',
-        loadComponent: () =>
-          import('../pages/docs/tags-input/demos/delimiters-tags-input-demo').then(
-            (m) => m.DelimitersTagsInputDemo,
-          ),
-      },
-      {
-        path: 'blur-tags-input-demo',
-        loadComponent: () =>
-          import('../pages/docs/tags-input/demos/blur-tags-input-demo').then(
-            (m) => m.BlurTagsInputDemo,
-          ),
-      },
-      {
-        path: 'disabled-tags-input-demo',
-        loadComponent: () =>
-          import('../pages/docs/tags-input/demos/disabled-tags-input-demo').then(
-            (m) => m.DisabledTagsInputDemo,
-          ),
-      },
-      {
-        path: 'validation-tags-input-demo',
-        loadComponent: () =>
-          import('../pages/docs/tags-input/demos/validation-tags-input-demo').then(
-            (m) => m.ValidationTagsInputDemo,
-          ),
-      },
-      {
-        path: 'form-field-tags-input-demo',
-        loadComponent: () =>
-          import('../pages/docs/tags-input/demos/form-field-tags-input-demo').then(
-            (m) => m.FormFieldTagsInputDemo,
-          ),
-      },
-      {
-        path: 'email-tags-input-demo',
-        loadComponent: () =>
-          import('../pages/docs/tags-input/demos/email-tags-input-demo').then(
-            (m) => m.EmailTagsInputDemo,
-          ),
-      },
-      {
-        path: 'output-tags-input-demo',
-        loadComponent: () =>
-          import('../pages/docs/tags-input/demos/output-tags-input-demo').then(
-            (m) => m.OutputTagsInputDemo,
-          ),
-      },
-    ],
-  },
-  {
-    path: 'demos/tags-input-next',
-    children: [
-      {
-        path: 'basic-tags-input-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/tags-input-next/demos/basic-tags-input-next-demo').then(
-            (m) => m.BasicTagsInputNextDemo,
-          ),
-      },
-      {
-        path: 'emails-tags-input-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/tags-input-next/demos/emails-tags-input-next-demo').then(
-            (m) => m.EmailsTagsInputNextDemo,
-          ),
-      },
-      {
-        path: 'limit-tags-input-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/tags-input-next/demos/limit-tags-input-next-demo').then(
-            (m) => m.LimitTagsInputNextDemo,
-          ),
-      },
-      {
-        path: 'form-tags-input-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/tags-input-next/demos/form-tags-input-next-demo').then(
-            (m) => m.FormTagsInputNextDemo,
+          import('../pages/docs/tags-input/demos/form-tags-input-demo').then(
+            (m) => m.FormTagsInputDemo,
           ),
       },
     ],

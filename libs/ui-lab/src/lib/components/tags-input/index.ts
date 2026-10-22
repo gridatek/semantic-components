@@ -1,6 +1,5 @@
-export { SC_TAGS_INPUT, ScTagsInput } from './tags-input';
+export { ScTagsInput, type ScTagsInputAccept } from './tags-input';
 export { ScTagsInputControl } from './tags-input-control';
-export { SC_TAGS_INPUT_ITEM, ScTagsInputItem } from './tags-input-item';
-export { ScTagsInputItemDelete } from './tags-input-item-delete';
+export { ScTagsInputItem } from './tags-input-item';
+export { ScTagsInputItemRemove } from './tags-input-item-remove';
 export { ScTagsInputClear } from './tags-input-clear';
-export { ScTagsInputCount } from './tags-input-count';

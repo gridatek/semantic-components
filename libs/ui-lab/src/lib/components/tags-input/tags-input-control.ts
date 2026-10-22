@@ -1,133 +1,117 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
-import { Directive, ElementRef, computed, inject, input } from '@angular/core';
+import {
+  DestroyRef,
+  Directive,
+  ElementRef,
+  computed,
+  inject,
+  input,
+} from '@angular/core';
 import { SC_FIELD, cn } from '@semantic-components/ui';
-import { SC_TAGS_INPUT } from './tags-input';
+import { ScTagsInput } from './tags-input';
 
+/**
+ * Where tags are typed: Enter or the delimiter adds one, a paste splits into
+ * several, leaving adds what is left. In an empty field, Backspace or ←
+ * (→ right to left) goes to the last tag.
+ */
 @Directive({
   selector: 'input[scTagsInputControl]',
   host: {
-    'data-slot': 'control',
+    'data-slot': 'tags-input-control',
     type: 'text',
     '[attr.id]': 'id()',
-    '[attr.aria-describedby]': 'ariaDescribedBy()',
+    '[attr.aria-describedby]': 'describedBy()',
+    '[attr.aria-invalid]': 'invalid() || null',
+    '[disabled]': 'tags.disabled()',
     '[class]': 'class()',
-    '[placeholder]': 'tagsInput.canAddMore() ? tagsInput.placeholder() : ""',
-    '[disabled]': 'tagsInput.disabled() || !tagsInput.canAddMore()',
-    '[value]': 'displayValue()',
-    '(input)': 'onInput($event)',
     '(keydown)': 'onKeydown($event)',
-    '(focus)': 'onFocus()',
-    '(blur)': 'onBlur()',
+    '(input)': 'tags.rejected.set(false)',
     '(paste)': 'onPaste($event)',
+    '(blur)': 'commit()',
   },
 })
 export class ScTagsInputControl {
-  readonly tagsInput = inject(SC_TAGS_INPUT);
+  protected readonly tags = inject(ScTagsInput);
   private readonly field = inject(SC_FIELD, { optional: true });
-  private readonly elementRef = inject(ElementRef<HTMLInputElement>);
-  private readonly fallbackId = inject(_IdGenerator).getId('sc-tags-input-');
+  private readonly element =
+    inject<ElementRef<HTMLInputElement>>(ElementRef).nativeElement;
+  private readonly fallbackId = inject(_IdGenerator).getId(
+    'sc-tags-input-control-',
+  );
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly idInput = input('', { alias: 'id' });
-  readonly addOnBlur = input<boolean>(false);
 
-  readonly id = computed(
+  protected readonly id = computed(
     () => this.idInput() || this.field?.id() || this.fallbackId,
   );
-
-  readonly ariaDescribedBy = computed(
+  protected readonly describedBy = computed(
     () => this.field?.descriptionIds().join(' ') || null,
   );
-
-  protected readonly displayValue = computed(() => this.tagsInput.inputValue());
+  /** Its text refused, or the tags invalid once touched. */
+  protected readonly invalid = computed(
+    () => this.tags.rejected() || (this.tags.invalid() && this.tags.touched()),
+  );
 
   protected readonly class = computed(() =>
     cn(
-      'flex-1 min-w-[120px] bg-transparent text-base outline-none placeholder:text-muted-foreground md:text-sm',
-      'file:text-foreground file:border-0 file:bg-transparent file:text-sm file:font-medium',
-      'disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50',
+      'placeholder:text-muted-foreground aria-invalid:text-destructive min-w-24 flex-1 bg-transparent px-1 outline-none disabled:cursor-not-allowed',
       this.classInput(),
     ),
   );
 
   constructor() {
-    this.tagsInput.setInputRef(this.elementRef);
+    this.tags.ɵregister(this.element);
+    inject(DestroyRef).onDestroy(() => this.tags.ɵregister(null));
   }
 
-  onInput(event: Event): void {
-    const value = (event.target as HTMLInputElement).value;
-    this.tagsInput.inputValue.set(value);
+  /** Adds what is typed; refused, it stays — marked — to be edited. */
+  commit(): void {
+    const text = this.element.value;
+    if (!text.trim()) return;
+    const refused = this.tags.add(text);
+    if (refused.length) {
+      this.tags.rejected.set(true);
+    } else {
+      this.element.value = '';
+    }
   }
 
-  onFocus(): void {
-    this.tagsInput.isFocused.set(true);
-    this.tagsInput.focusedTagIndex.set(-1);
-  }
-
-  onKeydown(event: KeyboardEvent): void {
-    const value = this.tagsInput.inputValue();
-    const delimiters = this.tagsInput.delimiters();
-
-    if (delimiters.includes(event.key)) {
+  protected onKeydown(event: KeyboardEvent): void {
+    const empty = !this.element.value;
+    const rtl = getComputedStyle(this.element).direction === 'rtl';
+    const back = rtl ? 'ArrowRight' : 'ArrowLeft';
+    if (event.key === 'Enter' || event.key === this.tags.delimiter()) {
+      // An empty Enter is the form's (submit); a typed one is ours.
+      if (event.key === 'Enter' && empty) return;
       event.preventDefault();
-      if (value.trim()) {
-        if (this.tagsInput.addTag(value)) {
-          this.tagsInput.inputValue.set('');
-        }
-      }
-      return;
-    }
-
-    if (event.key === 'ArrowLeft' && !value) {
-      const tags = this.tagsInput.tags();
-      if (tags.length > 0) {
-        event.preventDefault();
-        this.tagsInput.focusTag(tags.length - 1);
-      }
-      return;
-    }
-
-    if (event.key === 'Backspace' && !value) {
+      this.commit();
+    } else if ((event.key === 'Backspace' || event.key === back) && empty) {
+      const last = this.tags.items().length - 1;
+      if (last < 0) return;
       event.preventDefault();
-      this.tagsInput.removeLastTag();
+      this.tags.focusItem(last);
     }
   }
 
-  onBlur(): void {
-    this.tagsInput.isFocused.set(false);
-
-    if (this.addOnBlur()) {
-      const value = this.tagsInput.inputValue();
-      if (value.trim()) {
-        if (this.tagsInput.addTag(value)) {
-          this.tagsInput.inputValue.set('');
-        }
-      }
-    }
+  protected onPaste(event: ClipboardEvent): void {
+    const text = event.clipboardData?.getData('text/plain') ?? '';
+    const parts = text.split(
+      new RegExp(`[\\n\\r${escape(this.tags.delimiter())}]`),
+    );
+    if (parts.length < 2) return;
+    event.preventDefault();
+    const refused = this.tags.add(
+      this.element.value + parts[0],
+      ...parts.slice(1),
+    );
+    // The refused stay, to be edited.
+    this.element.value = refused.join(`${this.tags.delimiter()} `);
+    this.tags.rejected.set(refused.length > 0);
   }
+}
 
-  onPaste(event: ClipboardEvent): void {
-    const delimiters = this.tagsInput.delimiters();
-    const pastedText = event.clipboardData?.getData('text') ?? '';
-
-    const textDelimiters = delimiters.filter((d) => d !== 'Enter');
-    const hasDelimiters = textDelimiters.some((d) => pastedText.includes(d));
-
-    if (hasDelimiters) {
-      event.preventDefault();
-
-      let tags = [pastedText];
-      textDelimiters.forEach((delimiter) => {
-        tags = tags.flatMap((t) => t.split(delimiter));
-      });
-
-      tags.forEach((tag) => {
-        if (tag.trim()) {
-          this.tagsInput.addTag(tag);
-        }
-      });
-
-      this.tagsInput.inputValue.set('');
-    }
-  }
+function escape(text: string): string {
+  return text.replace(/[\\\]^-]/g, '\\$&');
 }

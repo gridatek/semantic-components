@@ -1,122 +1,60 @@
 # Tags Input
 
-A composable multi-tag input component for adding, removing, and navigating tags with keyboard support.
+Tags typed into one field — a `string[]` for Signal Forms — checked before they go in, and reached by the keyboard without a Tab stop each.
 
-## Components
+## Architecture
 
-- `ScTagsInput` - Root container directive (use inside `ScField` for label association)
-- `ScTagsInputItem` - Individual tag chip with keyboard navigation
-- `ScTagsInputItemDelete` - Remove button inside a tag
-- `ScTagsInputControl` - Text input for typing new tags
-- `ScTagsInputClear` - Clear all tags button
-- `ScTagsInputCount` - Live tag count display
-
-## Usage
-
-### Basic Usage
-
-```html
-<div scField>
-  <label scLabel>Tags</label>
-  <div scTagsInput [(tags)]="tags">
-    @for (tag of tags(); track $index) {
-    <span scTagsInputItem [tag]="tag" [index]="$index">
-      {{ tag }}
-      <button scTagsInputItemDelete>
-        <svg siXIcon class="size-3"></svg>
-      </button>
-    </span>
-    }
-    <input scTagsInputControl />
-  </div>
-</div>
+```
+[scTagsInput] (value: string[] — a [formField]; maxLength, delimiter, accept, disabled)
+│  add(...tags) · removeAt(i) · clear() · rejected() · full()
+├── [scTagsInputItem]                 — a tag; reached by keys from the field
+│   └── button[scTagsInputItemRemove] — removes it; not a Tab stop; name it
+├── input[scTagsInputControl]         — where tags are typed; the Tab stop
+└── button[scTagsInputClear]          — removes them all; name it
 ```
 
-### With Clear Button and Count
+## Usage
 
 ```html
 <div scField>
   <label scLabel>Skills</label>
-  <div scTagsInput [(tags)]="tags" [maxTags]="5">
-    @for (tag of tags(); track $index) {
-    <span scTagsInputItem [tag]="tag" [index]="$index">
-      {{ tag }}
-      <button scTagsInputItemDelete>
-        <svg siXIcon class="size-3"></svg>
+  <div scTagsInput [(value)]="skills">
+    @for (skill of skills(); track $index) {
+    <span scTagsInputItem>
+      <span>{{ skill }}</span>
+      <button scTagsInputItemRemove>
+        <svg siXIcon></svg>
+        <span class="sr-only">Remove {{ skill }}</span>
       </button>
     </span>
     }
-    <input scTagsInputControl />
-    <span scTagsInputCount class="ml-auto text-xs"></span>
-    <button scTagsInputClear>
-      <svg siXIcon class="size-4"></svg>
-      <span class="sr-only">Clear all tags</span>
-    </button>
+    <input scTagsInputControl placeholder="Add a skill" />
   </div>
 </div>
 ```
 
-## API
+## Adding
 
-### ScTagsInput (root)
+- Enter, or the `delimiter` (`,` by default), adds what is typed; so does leaving the field. An empty Enter is left to the form (submit).
+- A paste with the delimiter or new lines in it is split into tags.
+- Tags are trimmed; blanks are skipped.
+- `accept(tag, tags)` decides first — by default, no duplicates. Refused text stays in the field, `aria-invalid`, until it is edited (`rejected()`).
+- `maxLength`: at it (`data-full`), nothing more goes in. With a `[formField]`, the schema's `maxLength` sets it.
 
-| Input             | Type             | Default          | Description                    |
-| ----------------- | ---------------- | ---------------- | ------------------------------ |
-| `class`           | `string`         | `''`             | Additional CSS classes         |
-| `tags`            | `string[]`       | `[]`             | Two-way binding for tag list   |
-| `placeholder`     | `string`         | `''`             | Input placeholder — write it   |
-| `disabled`        | `boolean`        | `false`          | Disable the entire component   |
-| `maxTags`         | `number \| null` | `null`           | Maximum number of tags         |
-| `allowDuplicates` | `boolean`        | `false`          | Allow duplicate tag values     |
-| `delimiters`      | `string[]`       | `['Enter', ',']` | Keys that trigger tag creation |
-| `minLength`       | `number`         | `1`              | Minimum tag text length        |
-| `maxLength`       | `number \| null` | `null`           | Maximum tag text length        |
+## Keyboard
 
-| Output      | Type     | Description                 |
-| ----------- | -------- | --------------------------- |
-| `tagAdd`    | `string` | Emits when a tag is added   |
-| `tagRemove` | `string` | Emits when a tag is removed |
+| Where            | Key                            | Does                                                        |
+| ---------------- | ------------------------------ | ----------------------------------------------------------- |
+| The field, empty | Backspace, ← (→ right to left) | the last tag                                                |
+| A tag            | ← →                            | the tag before, after — past the last, the field            |
+| A tag            | Home, End                      | the first tag, the field                                    |
+| A tag            | Delete, Backspace              | removes it; focus to the tag now in its place, or the field |
+| A tag            | Escape                         | the field                                                   |
 
-### ScTagsInputItem
+## Signal Forms
 
-| Input     | Type                                    | Default     | Description       |
-| --------- | --------------------------------------- | ----------- | ----------------- |
-| `class`   | `string`                                | `''`        | Additional CSS    |
-| `tag`     | `string` (required)                     | —           | Tag text value    |
-| `index`   | `number` (required)                     | —           | Index from `@for` |
-| `variant` | `'default' \| 'secondary' \| 'outline'` | `'default'` | Visual style      |
+`[formField]` on the root. `minLength(path, 1)` for at least one — `required` does not count an empty list as empty — and `maxLength(path, n)` for at most n, which also stops more going in. Touched when focus leaves it; invalid and touched, it and its field are marked.
 
-### ScTagsInputControl
+## Not here
 
-| Input       | Type      | Default | Description              |
-| ----------- | --------- | ------- | ------------------------ |
-| `class`     | `string`  | `''`    | Additional CSS           |
-| `addOnBlur` | `boolean` | `false` | Add tag when input blurs |
-
-### ScTagsInputCount
-
-| Input     | Type      | Default | Description               |
-| --------- | --------- | ------- | ------------------------- |
-| `class`   | `string`  | `''`    | Additional CSS            |
-| `showMax` | `boolean` | `true`  | Show "count / max" format |
-
-## Keyboard Navigation
-
-| Key                    | Context | Action                       |
-| ---------------------- | ------- | ---------------------------- |
-| `Enter` / `,`          | Input   | Add current text as tag      |
-| `Backspace`            | Input   | Remove last tag (when empty) |
-| `ArrowLeft`            | Input   | Focus last tag (when empty)  |
-| `ArrowLeft` / `Right`  | Tag     | Navigate between tags        |
-| `Home`                 | Tag     | Focus first tag              |
-| `End`                  | Tag     | Return focus to input        |
-| `Delete` / `Backspace` | Tag     | Remove focused tag           |
-
-## Accessibility
-
-- Use inside `<div scField>` with `<label scLabel>` for label association
-- Roving `tabindex` on tags for keyboard navigation
-- Count element has `role="status"` with `aria-live="polite"` for screen reader announcements
-- Remove buttons have computed `aria-label` (e.g. "Remove Angular")
-- Clear button has `aria-label="Clear all tags"`
-- Focus management: focus moves to input after clearing or removing last tag
+Suggestions (a combobox or multiselect), editing a tag in place, reordering by drag, counts and announcements (yours to write).

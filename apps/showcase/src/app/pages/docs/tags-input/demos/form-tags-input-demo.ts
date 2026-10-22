@@ -1,24 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { FormTagsInputNextDemo } from './form-tags-input-next-demo';
-
-@Component({
-  selector: 'app-form-tags-input-next-demo-container',
-  imports: [DemoContainer, FormTagsInputNextDemo],
-  template: `
-    <app-demo-container
-      title="Form"
-      [code]="code"
-      demoUrl="/demos/tags-input-next/form-tags-input-next-demo"
-    >
-      <app-form-tags-input-next-demo />
-    </app-demo-container>
-  `,
-  host: { class: 'block w-full' },
-  encapsulation: ViewEncapsulation.None,
-})
-export class FormTagsInputNextDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   FormField,
   FormRoot,
@@ -33,44 +13,44 @@ import {
   ScLabel,
 } from '@semantic-components/ui';
 import {
-  ScTagsInputNext,
-  ScTagsInputNextControl,
-  ScTagsInputNextItem,
-  ScTagsInputNextItemRemove,
+  ScTagsInput,
+  ScTagsInputControl,
+  ScTagsInputItem,
+  ScTagsInputItemRemove,
 } from '@semantic-components/ui-lab';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 /** A [formField]: one to five keywords, from the schema — its maxLength also stops a sixth going in; its errors once it is touched. */
 @Component({
-  selector: 'app-form-tags-input-next-demo',
+  selector: 'app-form-tags-input-demo',
   imports: [
     FormField,
     FormRoot,
-    ScTagsInputNext,
-    ScTagsInputNextControl,
-    ScTagsInputNextItem,
-    ScTagsInputNextItemRemove,
+    ScTagsInput,
+    ScTagsInputControl,
+    ScTagsInputItem,
+    ScTagsInputItemRemove,
     ScButton,
     ScField,
     ScFieldErrors,
     ScLabel,
     SiXIcon,
   ],
-  template: \`
+  template: `
     <form [formRoot]="articleForm" class="grid w-full max-w-md gap-4">
       <div scField>
         <label scLabel>Keywords</label>
-        <div scTagsInputNext [formField]="articleForm.keywords">
+        <div scTagsInput [formField]="articleForm.keywords">
           @for (keyword of model().keywords; track $index) {
-            <span scTagsInputNextItem>
+            <span scTagsInputItem>
               <span>{{ keyword }}</span>
-              <button scTagsInputNextItemRemove>
+              <button scTagsInputItemRemove>
                 <svg siXIcon></svg>
                 <span class="sr-only">Remove {{ keyword }}</span>
               </button>
             </span>
           }
-          <input scTagsInputNextControl placeholder="Add a keyword" />
+          <input scTagsInputControl placeholder="Add a keyword" />
         </div>
         <div scFieldErrors></div>
       </div>
@@ -81,11 +61,11 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
         </p>
       }
     </form>
-  \`,
+  `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class FormTagsInputNextDemo {
+export class FormTagsInputDemo {
   readonly model = signal({ keywords: [] as string[] });
   readonly published = signal('');
   readonly articleForm = form(
@@ -101,5 +81,4 @@ export class FormTagsInputNextDemo {
       },
     },
   );
-}`;
 }

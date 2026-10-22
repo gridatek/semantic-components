@@ -1,43 +1,43 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { LimitTagsInputNextDemo } from './limit-tags-input-next-demo';
+import { LimitTagsInputDemo } from './limit-tags-input-demo';
 
 @Component({
-  selector: 'app-limit-tags-input-next-demo-container',
-  imports: [DemoContainer, LimitTagsInputNextDemo],
+  selector: 'app-limit-tags-input-demo-container',
+  imports: [DemoContainer, LimitTagsInputDemo],
   template: `
     <app-demo-container
       title="Limit and clear"
       [code]="code"
-      demoUrl="/demos/tags-input-next/limit-tags-input-next-demo"
+      demoUrl="/demos/tags-input/limit-tags-input-demo"
     >
-      <app-limit-tags-input-next-demo />
+      <app-limit-tags-input-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class LimitTagsInputNextDemoContainer {
+export class LimitTagsInputDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScField, ScFieldDescription, ScLabel } from '@semantic-components/ui';
 import {
-  ScTagsInputNext,
-  ScTagsInputNextClear,
-  ScTagsInputNextControl,
-  ScTagsInputNextItem,
-  ScTagsInputNextItemRemove,
+  ScTagsInput,
+  ScTagsInputClear,
+  ScTagsInputControl,
+  ScTagsInputItem,
+  ScTagsInputItemRemove,
 } from '@semantic-components/ui-lab';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 /** maxLength: at five, nothing more goes in (data-full on it). The count is yours to write; Clear removes them all. */
 @Component({
-  selector: 'app-limit-tags-input-next-demo',
+  selector: 'app-limit-tags-input-demo',
   imports: [
-    ScTagsInputNext,
-    ScTagsInputNextControl,
-    ScTagsInputNextItem,
-    ScTagsInputNextItemRemove,
-    ScTagsInputNextClear,
+    ScTagsInput,
+    ScTagsInputControl,
+    ScTagsInputItem,
+    ScTagsInputItemRemove,
+    ScTagsInputClear,
     ScField,
     ScFieldDescription,
     ScLabel,
@@ -46,18 +46,18 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
   template: \`
     <div scField class="w-full max-w-md">
       <label scLabel>Topics</label>
-      <div scTagsInputNext [(value)]="topics" [maxLength]="5">
+      <div scTagsInput [(value)]="topics" [maxLength]="5">
         @for (topic of topics(); track $index) {
-          <span scTagsInputNextItem>
+          <span scTagsInputItem>
             <span>{{ topic }}</span>
-            <button scTagsInputNextItemRemove>
+            <button scTagsInputItemRemove>
               <svg siXIcon></svg>
               <span class="sr-only">Remove {{ topic }}</span>
             </button>
           </span>
         }
-        <input scTagsInputNextControl placeholder="Add a topic" />
-        <button scTagsInputNextClear>
+        <input scTagsInputControl placeholder="Add a topic" />
+        <button scTagsInputClear>
           <svg siXIcon></svg>
           <span class="sr-only">Clear topics</span>
         </button>
@@ -68,7 +68,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class LimitTagsInputNextDemo {
+export class LimitTagsInputDemo {
   readonly topics = signal(['Design', 'Research', 'Testing']);
 }`;
 }

@@ -1,8 +1,7 @@
 import { type Locator, type Page, expect, test } from '@playwright/test';
 import { collectErrors, press, type } from '../../interaction';
 
-const demo = (name: string) =>
-  `/demos/tags-input-next/${name}-tags-input-next-demo`;
+const demo = (name: string) => `/demos/tags-input/${name}-tags-input-demo`;
 const tags = (page: Page) => page.locator('[data-slot="tags-input-item"]');
 /** The tags' labels (not their remove buttons' names). */
 const labels = (page: Page) =>

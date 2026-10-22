@@ -1,134 +1,157 @@
 import {
   Directive,
   ElementRef,
-  InjectionToken,
+  Injector,
+  afterNextRender,
+  booleanAttribute,
   computed,
+  contentChildren,
+  forwardRef,
+  inject,
   input,
   model,
   output,
   signal,
 } from '@angular/core';
+import type { FormValueControl } from '@angular/forms/signals';
 import { cn } from '@semantic-components/ui';
+import { ScTagsInputItem } from './tags-input-item';
 
-export const SC_TAGS_INPUT = new InjectionToken<ScTagsInput>('ScTagsInput');
+/** Whether a tag goes in: it, and the tags already there. */
+export type ScTagsInputAccept = (tag: string, tags: string[]) => boolean;
 
+/** No duplicates. */
+const unique: ScTagsInputAccept = (tag, tags) => !tags.includes(tag);
+
+/**
+ * Tags, typed: a `string[]`, a `[formField]`. Enter or the delimiter adds
+ * what is typed, and so do pasting and leaving; `accept` decides first.
+ * One Tab stop, the field: from it, ← (→ right to left) goes into the tags.
+ */
 @Directive({
   selector: '[scTagsInput]',
   exportAs: 'scTagsInput',
-  providers: [{ provide: SC_TAGS_INPUT, useExisting: ScTagsInput }],
   host: {
-    '[class]': 'class()',
+    'data-slot': 'tags-input',
     '[attr.data-disabled]': 'disabled() || null',
-    '[attr.data-focused]': 'isFocused() || null',
-    '(click)': 'focusInput()',
+    '[attr.data-full]': 'full() || null',
+    '[attr.data-invalid]': '(invalid() && touched()) || null',
+    '[class]': 'class()',
+    '(click)': 'onClick($event)',
+    '(focusout)': 'onFocusOut($event)',
   },
 })
-export class ScTagsInput {
+export class ScTagsInput implements FormValueControl<string[]> {
+  private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly injector = inject(Injector);
+
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly tags = model<string[]>([]);
-  readonly placeholder = input<string>('');
-  readonly disabled = input<boolean>(false);
-  readonly maxTags = input<number | null>(null);
-  readonly allowDuplicates = input<boolean>(false);
-  readonly delimiters = input<string[]>(['Enter', ',']);
-  readonly minLength = input<number>(1);
-  readonly maxLength = input<number | null>(null);
 
-  readonly tagAdd = output<string>();
-  readonly tagRemove = output<string>();
+  readonly value = model<string[]>([]);
+  /**
+   * The most tags; at it, nothing more is added. Set by the schema's
+   * `maxLength` with a `[formField]`.
+   */
+  readonly maxLength = input<number | undefined>(undefined);
+  /** The character that ends a tag, as Enter does. */
+  readonly delimiter = input(',');
+  /** Whether a tag goes in; by default, one not there already. */
+  readonly accept = input<ScTagsInputAccept>(unique);
+  readonly disabled = input(false, { transform: booleanAttribute });
+  readonly invalid = input(false, { transform: booleanAttribute });
+  readonly touched = input(false, { transform: booleanAttribute });
+  /** Focus left it (Signal Forms marks it touched). */
+  readonly touch = output<void>();
 
-  readonly isFocused = signal(false);
-  readonly inputValue = signal('');
-  readonly focusedTagIndex = signal(-1);
+  readonly full = computed(() => {
+    const max = this.maxLength();
+    return max !== undefined && this.value().length >= max;
+  });
+  /** The text last refused by `accept`, until it is edited. */
+  readonly rejected = signal(false);
 
-  private readonly inputRef = signal<ElementRef<HTMLInputElement> | null>(null);
+  readonly items = contentChildren(
+    forwardRef(() => ScTagsInputItem),
+    {
+      descendants: true,
+    },
+  );
 
   protected readonly class = computed(() =>
     cn(
-      'flex flex-wrap items-center gap-1.5 min-h-8 w-full rounded-lg border border-input bg-transparent px-2.5 py-1 transition-colors',
-      'dark:bg-input/30',
+      'border-input dark:bg-input/30 flex min-h-8 w-full cursor-text flex-wrap items-center gap-1 rounded-lg border bg-transparent px-1.5 py-1 text-base transition-colors md:text-sm',
       'focus-within:border-ring focus-within:ring-ring/50 focus-within:ring-3',
+      'data-invalid:border-destructive data-invalid:ring-destructive/20 dark:data-invalid:ring-destructive/40',
       'data-disabled:pointer-events-none data-disabled:cursor-not-allowed data-disabled:opacity-50',
-      'disabled:bg-input/50 dark:disabled:bg-input/80',
       this.classInput(),
     ),
   );
 
-  readonly canAddMore = computed(() => {
-    const max = this.maxTags();
-    if (max === null) return true;
-    return this.tags().length < max;
-  });
+  private control: HTMLInputElement | null = null;
 
-  setInputRef(ref: ElementRef<HTMLInputElement>): void {
-    this.inputRef.set(ref);
+  /** The text field (`scTagsInputControl`). */
+  ɵregister(control: HTMLInputElement | null): void {
+    this.control = control;
   }
 
-  focusInput(): void {
-    if (!this.disabled()) {
-      this.inputRef()?.nativeElement.focus();
-    }
-  }
-
-  focusTag(index: number): void {
-    if (this.disabled()) return;
-    const tags = this.tags();
-    if (index >= 0 && index < tags.length) {
-      this.focusedTagIndex.set(index);
-    }
-  }
-
-  addTag(value: string): boolean {
-    const trimmed = value.trim();
-
-    if (trimmed.length < this.minLength()) return false;
-    if (this.maxLength() !== null && trimmed.length > this.maxLength()!)
-      return false;
-    if (!this.canAddMore()) return false;
-    if (!this.allowDuplicates() && this.tags().includes(trimmed)) return false;
-
-    this.tags.update((tags) => [...tags, trimmed]);
-    this.tagAdd.emit(trimmed);
-    return true;
-  }
-
-  removeTag(tag: string): void {
-    if (this.disabled()) return;
-    const index = this.tags().indexOf(tag);
-    if (index !== -1) {
-      this.removeTagAtIndex(index);
-    }
-  }
-
-  removeTagAtIndex(index: number): void {
-    if (this.disabled()) return;
-    const tag = this.tags()[index];
-    if (tag !== undefined) {
-      this.tags.update((tags) => tags.filter((_, i) => i !== index));
-      this.tagRemove.emit(tag);
-
-      const remaining = this.tags().length;
-      if (remaining === 0) {
-        this.focusedTagIndex.set(-1);
-        this.focusInput();
-      } else if (this.focusedTagIndex() >= remaining) {
-        this.focusedTagIndex.set(remaining - 1);
+  /**
+   * Adds tags — trimmed, blanks skipped — while there is room and `accept`
+   * takes them. Returns those refused.
+   */
+  add(...tags: string[]): string[] {
+    const refused: string[] = [];
+    let value = this.value();
+    for (const tag of tags.map((t) => t.trim()).filter(Boolean)) {
+      const max = this.maxLength();
+      if (
+        (max !== undefined && value.length >= max) ||
+        !this.accept()(tag, value)
+      ) {
+        refused.push(tag);
+      } else {
+        value = [...value, tag];
       }
     }
+    if (value !== this.value()) this.value.set(value);
+    return refused;
   }
 
-  removeLastTag(): void {
-    const tags = this.tags();
-    if (tags.length > 0) {
-      this.removeTagAtIndex(tags.length - 1);
-    }
-  }
-
-  clearAll(): void {
+  /** Removes the tag at `index`; focus goes to the one now there, or the field. */
+  removeAt(index: number): void {
     if (this.disabled()) return;
-    const removed = [...this.tags()];
-    this.tags.set([]);
-    this.focusedTagIndex.set(-1);
-    removed.forEach((tag) => this.tagRemove.emit(tag));
+    this.value.update((value) => value.filter((_, i) => i !== index));
+    afterNextRender(
+      () => {
+        const items = this.items();
+        if (items.length) items[Math.min(index, items.length - 1)].focus();
+        else this.focusControl();
+      },
+      { injector: this.injector },
+    );
+  }
+
+  clear(): void {
+    if (this.disabled()) return;
+    this.value.set([]);
+    this.focusControl();
+  }
+
+  focusControl(): void {
+    this.control?.focus();
+  }
+
+  /** Focuses the tag at `index`. */
+  focusItem(index: number): void {
+    this.items()[index]?.focus();
+  }
+
+  protected onClick(event: MouseEvent): void {
+    // Its empty space: the field.
+    if (event.target === this.host.nativeElement) this.focusControl();
+  }
+
+  protected onFocusOut(event: FocusEvent): void {
+    const to = event.relatedTarget as Node | null;
+    if (!to || !this.host.nativeElement.contains(to)) this.touch.emit();
   }
 }

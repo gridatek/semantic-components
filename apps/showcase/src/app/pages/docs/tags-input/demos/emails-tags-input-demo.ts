@@ -1,22 +1,22 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScField, ScFieldDescription, ScLabel } from '@semantic-components/ui';
 import {
-  ScTagsInputNext,
-  type ScTagsInputNextAccept,
-  ScTagsInputNextControl,
-  ScTagsInputNextItem,
-  ScTagsInputNextItemRemove,
+  ScTagsInput,
+  type ScTagsInputAccept,
+  ScTagsInputControl,
+  ScTagsInputItem,
+  ScTagsInputItemRemove,
 } from '@semantic-components/ui-lab';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 /** accept decides what goes in — here an address, once. Refused text stays, marked, to be corrected; a pasted list is split on commas and new lines. */
 @Component({
-  selector: 'app-emails-tags-input-next-demo',
+  selector: 'app-emails-tags-input-demo',
   imports: [
-    ScTagsInputNext,
-    ScTagsInputNextControl,
-    ScTagsInputNextItem,
-    ScTagsInputNextItemRemove,
+    ScTagsInput,
+    ScTagsInputControl,
+    ScTagsInputItem,
+    ScTagsInputItemRemove,
     ScField,
     ScFieldDescription,
     ScLabel,
@@ -26,25 +26,21 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
     <div scField class="w-full max-w-md">
       <label scLabel>Invite</label>
       <div
-        scTagsInputNext
-        #invite="scTagsInputNext"
+        scTagsInput
+        #invite="scTagsInput"
         [(value)]="emails"
         [accept]="isEmail"
       >
         @for (email of emails(); track $index) {
-          <span scTagsInputNextItem>
+          <span scTagsInputItem>
             <span>{{ email }}</span>
-            <button scTagsInputNextItemRemove>
+            <button scTagsInputItemRemove>
               <svg siXIcon></svg>
               <span class="sr-only">Remove {{ email }}</span>
             </button>
           </span>
         }
-        <input
-          scTagsInputNextControl
-          type="email"
-          placeholder="name@example.com"
-        />
+        <input scTagsInputControl type="email" placeholder="name@example.com" />
       </div>
       @if (invite.rejected()) {
         <p class="text-destructive text-sm">
@@ -58,10 +54,10 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class EmailsTagsInputNextDemo {
+export class EmailsTagsInputDemo {
   readonly emails = signal<string[]>(['ada@example.com']);
 
   /** An address, not invited yet. */
-  readonly isEmail: ScTagsInputNextAccept = (tag, tags) =>
+  readonly isEmail: ScTagsInputAccept = (tag, tags) =>
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(tag) && !tags.includes(tag);
 }

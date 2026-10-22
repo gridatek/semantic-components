@@ -5,15 +5,15 @@ import {
   cn,
   ɵwarnIfUnnamed,
 } from '@semantic-components/ui';
-import { ScTagsInputNext } from './tags-input-next';
-import { ScTagsInputNextItem } from './tags-input-next-item';
+import { ScTagsInput } from './tags-input';
+import { ScTagsInputItem } from './tags-input-item';
 
 /**
  * Removes its tag. Not a Tab stop — the keyboard removes with Delete on the
  * tag — but named all the same ("Remove design").
  */
 @Directive({
-  selector: 'button[scTagsInputNextItemRemove]',
+  selector: 'button[scTagsInputItemRemove]',
   host: {
     'data-slot': 'tags-input-item-remove',
     type: 'button',
@@ -23,9 +23,9 @@ import { ScTagsInputNextItem } from './tags-input-next-item';
     '(click)': 'item.remove()',
   },
 })
-export class ScTagsInputNextItemRemove {
-  protected readonly tags = inject(ScTagsInputNext);
-  protected readonly item = inject(ScTagsInputNextItem);
+export class ScTagsInputItemRemove {
+  protected readonly tags = inject(ScTagsInput);
+  protected readonly item = inject(ScTagsInputItem);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('ghost');
@@ -40,6 +40,6 @@ export class ScTagsInputNextItemRemove {
   );
 
   constructor() {
-    ɵwarnIfUnnamed('scTagsInputNextItemRemove');
+    ɵwarnIfUnnamed('scTagsInputItemRemove');
   }
 }
