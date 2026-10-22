@@ -3,7 +3,6 @@ import {
   ScCalendar,
   ScCalendarFooter,
   ScCalendarHeader,
-  ScCalendarHeading,
   ScCalendarNext,
   ScCalendarPrevious,
   type ScCalendarValue,
@@ -35,7 +34,6 @@ import {
     ScPopover,
     ScCalendar,
     ScCalendarHeader,
-    ScCalendarHeading,
     ScCalendarPrevious,
     ScCalendarNext,
     ScDatePickerPreset,
@@ -76,7 +74,6 @@ import {
             </div>
             <div
               scCalendar
-              #cal="scCalendar"
               initialFocus
               aria-label="Choose dates"
               [mode]="dp.mode()"
@@ -89,7 +86,6 @@ import {
                   <svg siChevronLeftIcon></svg>
                   <span class="sr-only">Previous month</span>
                 </button>
-                <button scCalendarHeading>{{ cal.heading() }}</button>
                 <button scCalendarNext>
                   <svg siChevronRightIcon></svg>
                   <span class="sr-only">Next month</span>

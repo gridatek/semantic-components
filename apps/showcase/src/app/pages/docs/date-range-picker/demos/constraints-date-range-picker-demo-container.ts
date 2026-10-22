@@ -22,7 +22,6 @@ export class ConstraintsDateRangePickerDemoContainer {
 import {
   ScCalendar,
   ScCalendarHeader,
-  ScCalendarHeading,
   ScCalendarNext,
   ScCalendarPrevious,
   type ScCalendarValue,
@@ -49,7 +48,6 @@ import {
     ScPopover,
     ScCalendar,
     ScCalendarHeader,
-    ScCalendarHeading,
     ScCalendarPrevious,
     ScCalendarNext,
     SiCalendarIcon,
@@ -75,7 +73,6 @@ import {
           <div scPopover class="w-auto p-0" aria-label="Choose dates">
             <div
               scCalendar
-              #cal="scCalendar"
               initialFocus
               aria-label="Choose dates"
               [mode]="dp.mode()"
@@ -90,7 +87,6 @@ import {
                   <svg siChevronLeftIcon></svg>
                   <span class="sr-only">Previous month</span>
                 </button>
-                <button scCalendarHeading>{{ cal.heading() }}</button>
                 <button scCalendarNext>
                   <svg siChevronRightIcon></svg>
                   <span class="sr-only">Next month</span>

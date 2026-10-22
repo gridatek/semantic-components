@@ -4,7 +4,6 @@ import {
   ScCalendarClear,
   ScCalendarFooter,
   ScCalendarHeader,
-  ScCalendarHeading,
   ScCalendarNext,
   ScCalendarPrevious,
   ScCalendarToday,
@@ -21,7 +20,6 @@ import {
   imports: [
     ScCalendar,
     ScCalendarHeader,
-    ScCalendarHeading,
     ScCalendarPrevious,
     ScCalendarNext,
     ScCalendarFooter,
@@ -43,7 +41,6 @@ import {
           <svg siChevronLeftIcon></svg>
           <span class="sr-only">{{ previousLabel[cal.view()] }}</span>
         </button>
-        <button scCalendarHeading>{{ cal.heading() }}</button>
         <button scCalendarNext>
           <svg siChevronRightIcon></svg>
           <span class="sr-only">{{ nextLabel[cal.view()] }}</span>

@@ -3,6 +3,11 @@ import { cn } from '../../utils';
 import { ScButtonVariants, buttonVariants } from '../button/button';
 import { ScCalendar } from './calendar';
 
+/**
+ * The view's heading as a button that zooms out (days → months → years).
+ * The header has one, showing `heading()`; write your own in the header to
+ * replace it.
+ */
 @Directive({
   selector: 'button[scCalendarHeading]',
   host: {

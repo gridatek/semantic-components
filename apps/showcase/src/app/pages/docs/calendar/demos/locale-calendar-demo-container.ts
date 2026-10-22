@@ -22,7 +22,6 @@ export class LocaleCalendarDemoContainer {
 import {
   ScCalendar,
   ScCalendarHeader,
-  ScCalendarHeading,
   ScCalendarNext,
   ScCalendarPrevious,
   type ScCalendarValue,
@@ -38,7 +37,6 @@ import {
   imports: [
     ScCalendar,
     ScCalendarHeader,
-    ScCalendarHeading,
     ScCalendarPrevious,
     ScCalendarNext,
     SiChevronLeftIcon,
@@ -59,7 +57,6 @@ import {
           <svg siChevronLeftIcon></svg>
           <span class="sr-only">{{ previousLabel[cal.view()] }}</span>
         </button>
-        <button scCalendarHeading>{{ cal.heading() }}</button>
         <button scCalendarNext>
           <svg siChevronRightIcon></svg>
           <span class="sr-only">{{ nextLabel[cal.view()] }}</span>

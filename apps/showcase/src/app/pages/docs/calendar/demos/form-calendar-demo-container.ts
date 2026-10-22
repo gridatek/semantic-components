@@ -24,7 +24,6 @@ import {
   ScButton,
   ScCalendar,
   ScCalendarHeader,
-  ScCalendarHeading,
   ScCalendarNext,
   ScCalendarPrevious,
   type ScCalendarValue,
@@ -44,7 +43,6 @@ import {
     FormRoot,
     ScCalendar,
     ScCalendarHeader,
-    ScCalendarHeading,
     ScCalendarPrevious,
     ScCalendarNext,
     ScButton,
@@ -69,7 +67,6 @@ import {
               <svg siChevronLeftIcon></svg>
               <span class="sr-only">{{ previousLabel[cal.view()] }}</span>
             </button>
-            <button scCalendarHeading>{{ cal.heading() }}</button>
             <button scCalendarNext>
               <svg siChevronRightIcon></svg>
               <span class="sr-only">{{ nextLabel[cal.view()] }}</span>

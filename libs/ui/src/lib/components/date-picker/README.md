@@ -34,10 +34,9 @@ The calendar is the [calendar](../calendar/README.md), written in full: its head
     </button>
     <ng-template scPopoverPortal>
       <div scPopover class="w-auto p-0" aria-label="Choose a date">
-        <div scCalendar #cal="scCalendar" initialFocus aria-label="Choose a date" [mode]="dp.mode()" [value]="dp.draft()" (valueChange)="dp.pick($event)">
+        <div scCalendar initialFocus aria-label="Choose a date" [mode]="dp.mode()" [value]="dp.draft()" (valueChange)="dp.pick($event)">
           <div scCalendarHeader>
             <button scCalendarPrevious><svg siChevronLeftIcon></svg><span class="sr-only">Previous month</span></button>
-            <button scCalendarHeading>{{ cal.heading() }}</button>
             <button scCalendarNext><svg siChevronRightIcon></svg><span class="sr-only">Next month</span></button>
           </div>
         </div>

@@ -11,7 +11,8 @@ div[scCalendar] (mode, [(value)] / [formField], minDate, maxDate, unavailable, l
 │  heading() · view() · focused() · previous() · next() · zoomOut() · goToToday() · clear()
 ├── div[scCalendarHeader]
 │   ├── button[scCalendarPrevious]   — your icon and words
-│   ├── button[scCalendarHeading]    — {{ cal.heading() }}: days → months → years
+│   ├── (heading)                    — built in: heading(), days → months → years;
+│   │                                  your button[scCalendarHeading] replaces it
 │   └── button[scCalendarNext]
 ├── ng-template[scCalendarDay] let-day — your content under a day's number (optional)
 └── div[scCalendarFooter]
@@ -25,13 +26,21 @@ div[scCalendar] (mode, [(value)] / [formField], minDate, maxDate, unavailable, l
 <div scCalendar #cal="scCalendar" aria-label="Appointment" [(value)]="date">
   <div scCalendarHeader>
     <button scCalendarPrevious><svg siChevronLeftIcon></svg><span class="sr-only">Previous month</span></button>
-    <button scCalendarHeading>{{ cal.heading() }}</button>
     <button scCalendarNext><svg siChevronRightIcon></svg><span class="sr-only">Next month</span></button>
   </div>
 </div>
 ```
 
 Name the previous and next buttons by `cal.view()` — month, year, or years.
+
+The header shows the heading itself — a button that zooms out. Write your own `button[scCalendarHeading]` in the header to replace it:
+
+```html
+<button scCalendarHeading>
+  {{ cal.heading() }}
+  <svg siChevronDownIcon></svg>
+</button>
+```
 
 ## Value
 

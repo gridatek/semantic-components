@@ -6,7 +6,6 @@ import {
   ScButton,
   ScCalendar,
   ScCalendarHeader,
-  ScCalendarHeading,
   ScCalendarNext,
   ScCalendarPrevious,
   ScCard,
@@ -55,7 +54,6 @@ import {
     ScButton,
     ScCalendar,
     ScCalendarHeader,
-    ScCalendarHeading,
     ScCalendarNext,
     ScCalendarPrevious,
     ScCard,
@@ -1127,14 +1125,12 @@ import {
                       scCalendar
                       aria-label="Calendar"
                       [(value)]="selectedDate"
-                      #cal="scCalendar"
                     >
                       <div scCalendarHeader>
                         <button scCalendarPrevious>
                           <svg siChevronLeftIcon class="size-4"></svg>
                           <span class="sr-only">Go to previous month</span>
                         </button>
-                        <button scCalendarHeading>{{ cal.heading() }}</button>
                         <button scCalendarNext>
                           <svg siChevronRightIcon class="size-4"></svg>
                           <span class="sr-only">Go to next month</span>

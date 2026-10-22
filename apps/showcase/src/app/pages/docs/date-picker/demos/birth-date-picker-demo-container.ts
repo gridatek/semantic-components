@@ -22,7 +22,6 @@ export class BirthDatePickerDemoContainer {
 import {
   ScCalendar,
   ScCalendarHeader,
-  ScCalendarHeading,
   ScCalendarNext,
   ScCalendarPrevious,
   type ScCalendarValue,
@@ -57,7 +56,6 @@ import {
     ScPopover,
     ScCalendar,
     ScCalendarHeader,
-    ScCalendarHeading,
     ScCalendarPrevious,
     ScCalendarNext,
     ScDatePickerInput,
@@ -116,7 +114,6 @@ import {
                       }
                     </span>
                   </button>
-                  <button scCalendarHeading>{{ cal.heading() }}</button>
                   <button scCalendarNext>
                     <svg siChevronRightIcon></svg>
                     <span class="sr-only">

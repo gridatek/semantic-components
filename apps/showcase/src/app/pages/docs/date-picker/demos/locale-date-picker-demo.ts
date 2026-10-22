@@ -2,7 +2,6 @@ import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCalendar,
   ScCalendarHeader,
-  ScCalendarHeading,
   ScCalendarNext,
   ScCalendarPrevious,
   type ScCalendarValue,
@@ -34,7 +33,6 @@ import {
     ScPopover,
     ScCalendar,
     ScCalendarHeader,
-    ScCalendarHeading,
     ScCalendarPrevious,
     ScCalendarNext,
     ScDatePickerInput,
@@ -69,7 +67,6 @@ import {
           <div scPopover class="w-auto p-0" aria-label="Choisir une date">
             <div
               scCalendar
-              #cal="scCalendar"
               initialFocus
               aria-label="Choisir une date"
               [mode]="dp.mode()"
@@ -82,7 +79,6 @@ import {
                   <svg siChevronLeftIcon></svg>
                   <span class="sr-only">Mois précédent</span>
                 </button>
-                <button scCalendarHeading>{{ cal.heading() }}</button>
                 <button scCalendarNext>
                   <svg siChevronRightIcon></svg>
                   <span class="sr-only">Mois suivant</span>

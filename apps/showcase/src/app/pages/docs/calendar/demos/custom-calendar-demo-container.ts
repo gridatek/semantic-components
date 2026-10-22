@@ -23,7 +23,6 @@ import {
   ScCalendar,
   ScCalendarDay,
   ScCalendarHeader,
-  ScCalendarHeading,
   ScCalendarNext,
   ScCalendarPrevious,
   type ScCalendarValue,
@@ -39,7 +38,6 @@ import {
   imports: [
     ScCalendar,
     ScCalendarHeader,
-    ScCalendarHeading,
     ScCalendarPrevious,
     ScCalendarNext,
     ScCalendarDay,
@@ -59,7 +57,6 @@ import {
           <svg siChevronLeftIcon></svg>
           <span class="sr-only">{{ previousLabel[cal.view()] }}</span>
         </button>
-        <button scCalendarHeading>{{ cal.heading() }}</button>
         <button scCalendarNext>
           <svg siChevronRightIcon></svg>
           <span class="sr-only">{{ nextLabel[cal.view()] }}</span>
