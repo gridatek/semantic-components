@@ -1,17 +1,37 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { VariableVirtualListDemo } from './variable-virtual-list-demo';
+
+@Component({
+  selector: 'app-variable-virtual-list-demo-container',
+  imports: [DemoContainer, VariableVirtualListDemo],
+  template: `
+    <app-demo-container
+      title="Variable heights"
+      [code]="code"
+      demoUrl="/demos/virtual-list/variable-virtual-list-demo"
+    >
+      <app-variable-virtual-list-demo />
+    </app-demo-container>
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class VariableVirtualListDemoContainer {
+  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScVirtualListNext,
-  ScVirtualListNextRow,
+  ScVirtualList,
+  ScVirtualListRow,
 } from '@semantic-components/ui-lab';
 
 /** Rows of any height — messages, long and short: estimated first, then measured; the list and its scrollbar follow, and the reader keeps their place as rows above settle. */
 @Component({
-  selector: 'app-variable-virtual-list-next-demo',
-  imports: [ScVirtualListNext, ScVirtualListNextRow],
-  template: `
+  selector: 'app-variable-virtual-list-demo',
+  imports: [ScVirtualList, ScVirtualListRow],
+  template: \`
     <ol
-      scVirtualListNext
-      #list="scVirtualListNext"
+      scVirtualList
+      #list="scVirtualList"
       tabindex="0"
       [count]="messages.length"
       [estimate]="72"
@@ -21,7 +41,7 @@ import {
       class="h-96 w-full max-w-md overflow-y-auto rounded-lg border p-0"
     >
       @for (row of list.rows(); track row.key) {
-        <li [scVirtualListNextRow]="row" class="px-3">
+        <li [scVirtualListRow]="row" class="px-3">
           <div class="bg-muted rounded-lg p-3 text-sm">
             <p class="font-medium">{{ messages[row.index].from }}</p>
             <p>{{ messages[row.index].text }}</p>
@@ -35,11 +55,11 @@ import {
         {{ list.count() }}
       }
     </p>
-  `,
+  \`,
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class VariableVirtualListNextDemo {
+export class VariableVirtualListDemo {
   private readonly words =
     'the plan for the release is ready and the team would like your thoughts before friday when we meet to decide'.split(
       ' ',
@@ -64,4 +84,5 @@ export class VariableVirtualListNextDemo {
       (i % 5 === 0 ? ' ' + this.words.join(' ') + '.' : ''),
   }));
   readonly keyOf = (index: number) => this.messages[index].id;
+}`;
 }

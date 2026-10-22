@@ -1,21 +1,21 @@
-# Virtual List Next
+# Virtual List
 
-The virtual list, rebuilt: a long list rendered only where it is seen — rows measured as they render, in a scrolling box or the page, down, along or in lanes.
+A long list rendered only where it is seen — rows measured as they render, in a scrolling box or the page, down, along or in lanes.
 
 ## Architecture
 
 ```
-[scVirtualListNext] (count, estimate, key, overscan, orientation, lanes, gap)
+[scVirtualList] (count, estimate, key, overscan, orientation, lanes, gap)
 │  rows() · size() · range() · scrollToIndex(index, { align })
-└── [scVirtualListNextRow]="row"   — a row: placed, measured, aria-posinset / aria-setsize
+└── [scVirtualListRow]="row"   — a row: placed, measured, aria-posinset / aria-setsize
 ```
 
 ## Usage
 
 ```html
-<ul scVirtualListNext #list="scVirtualListNext" [count]="contacts.length" [estimate]="56" aria-label="Contacts" class="h-96 overflow-y-auto">
+<ul scVirtualList #list="scVirtualList" [count]="contacts.length" [estimate]="56" aria-label="Contacts" class="h-96 overflow-y-auto">
   @for (row of list.rows(); track row.key) {
-  <li [scVirtualListNextRow]="row">{{ contacts[row.index].name }}</li>
+  <li [scVirtualListRow]="row">{{ contacts[row.index].name }}</li>
   }
 </ul>
 ```

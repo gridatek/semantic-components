@@ -1,17 +1,14 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import {
-  ScVirtualListNext,
-  ScVirtualListNextRow,
-} from '@semantic-components/ui-lab';
+import { ScVirtualList, ScVirtualListRow } from '@semantic-components/ui-lab';
 
 /** In lanes: photos in three columns, each placed in the lane that ends first. */
 @Component({
-  selector: 'app-grid-virtual-list-next-demo',
-  imports: [ScVirtualListNext, ScVirtualListNextRow],
+  selector: 'app-grid-virtual-list-demo',
+  imports: [ScVirtualList, ScVirtualListRow],
   template: `
     <ul
-      scVirtualListNext
-      #list="scVirtualListNext"
+      scVirtualList
+      #list="scVirtualList"
       tabindex="0"
       [count]="photos.length"
       [estimate]="160"
@@ -21,7 +18,7 @@ import {
       class="h-96 w-full max-w-lg overflow-y-auto"
     >
       @for (row of list.rows(); track row.key) {
-        <li [scVirtualListNextRow]="row">
+        <li [scVirtualListRow]="row">
           <img
             [src]="'/images/gallery/' + photos[row.index] + '-thumb.jpg'"
             [alt]="photos[row.index] + ' ' + (row.index + 1)"
@@ -40,7 +37,7 @@ import {
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class GridVirtualListNextDemo {
+export class GridVirtualListDemo {
   private readonly names = [
     'cafe',
     'coast',

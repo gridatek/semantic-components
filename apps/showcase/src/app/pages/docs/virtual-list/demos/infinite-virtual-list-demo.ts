@@ -1,41 +1,21 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { InfiniteVirtualListNextDemo } from './infinite-virtual-list-next-demo';
-
-@Component({
-  selector: 'app-infinite-virtual-list-next-demo-container',
-  imports: [DemoContainer, InfiniteVirtualListNextDemo],
-  template: `
-    <app-demo-container
-      title="With the infinite scroll"
-      [code]="code"
-      demoUrl="/demos/virtual-list-next/infinite-virtual-list-next-demo"
-    >
-      <app-infinite-virtual-list-next-demo />
-    </app-demo-container>
-  `,
-  host: { class: 'block w-full' },
-  encapsulation: ViewEncapsulation.None,
-})
-export class InfiniteVirtualListNextDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScInfiniteScroll,
   ScInfiniteScrollStatus,
-  ScVirtualListNext,
-  ScVirtualListNextRow,
+  ScVirtualList,
+  ScVirtualListRow,
 } from '@semantic-components/ui-lab';
 
 /** Long, and longer: the infinite scroll asks for 100 more near the end; the virtual list renders only what is seen. */
 @Component({
-  selector: 'app-infinite-virtual-list-next-demo',
+  selector: 'app-infinite-virtual-list-demo',
   imports: [
-    ScVirtualListNext,
-    ScVirtualListNextRow,
+    ScVirtualList,
+    ScVirtualListRow,
     ScInfiniteScroll,
     ScInfiniteScrollStatus,
   ],
-  template: \`
+  template: `
     <div
       class="h-96 w-full max-w-md overflow-y-auto rounded-lg border"
       tabindex="0"
@@ -49,14 +29,14 @@ import {
         (more)="load()"
       >
         <ul
-          scVirtualListNext
-          #list="scVirtualListNext"
+          scVirtualList
+          #list="scVirtualList"
           [count]="items().length"
           [estimate]="40"
           aria-label="Items"
         >
           @for (row of list.rows(); track row.key) {
-            <li [scVirtualListNextRow]="row" class="border-b px-4 py-2 text-sm">
+            <li [scVirtualListRow]="row" class="border-b px-4 py-2 text-sm">
               {{ items()[row.index] }}
             </li>
           }
@@ -76,11 +56,11 @@ import {
         {{ list.count() }}
       }
     </p>
-  \`,
+  `,
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class InfiniteVirtualListNextDemo {
+export class InfiniteVirtualListDemo {
   readonly items = signal<string[]>([]);
   readonly loading = signal(false);
 
@@ -94,5 +74,4 @@ export class InfiniteVirtualListNextDemo {
     ]);
     this.loading.set(false);
   }
-}`;
 }

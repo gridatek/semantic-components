@@ -1,37 +1,37 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { HorizontalVirtualListNextDemo } from './horizontal-virtual-list-next-demo';
+import { HorizontalVirtualListDemo } from './horizontal-virtual-list-demo';
 
 @Component({
-  selector: 'app-horizontal-virtual-list-next-demo-container',
-  imports: [DemoContainer, HorizontalVirtualListNextDemo],
+  selector: 'app-horizontal-virtual-list-demo-container',
+  imports: [DemoContainer, HorizontalVirtualListDemo],
   template: `
     <app-demo-container
       title="Horizontal"
       [code]="code"
-      demoUrl="/demos/virtual-list-next/horizontal-virtual-list-next-demo"
+      demoUrl="/demos/virtual-list/horizontal-virtual-list-demo"
     >
-      <app-horizontal-virtual-list-next-demo />
+      <app-horizontal-virtual-list-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class HorizontalVirtualListNextDemoContainer {
+export class HorizontalVirtualListDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScVirtualListNext,
-  ScVirtualListNextRow,
+  ScVirtualList,
+  ScVirtualListRow,
 } from '@semantic-components/ui-lab';
 
 /** Along a row: days of a year, as a strip. Right to left, it starts at the right. */
 @Component({
-  selector: 'app-horizontal-virtual-list-next-demo',
-  imports: [ScVirtualListNext, ScVirtualListNextRow],
+  selector: 'app-horizontal-virtual-list-demo',
+  imports: [ScVirtualList, ScVirtualListRow],
   template: \`
     <ul
-      scVirtualListNext
-      #list="scVirtualListNext"
+      scVirtualList
+      #list="scVirtualList"
       tabindex="0"
       orientation="horizontal"
       [count]="days.length"
@@ -41,7 +41,7 @@ import {
       class="h-28 w-full max-w-2xl overflow-x-auto rounded-lg border"
     >
       @for (row of list.rows(); track row.key) {
-        <li [scVirtualListNextRow]="row" class="py-2">
+        <li [scVirtualListRow]="row" class="py-2">
           <div
             class="bg-muted grid h-full w-24 place-content-center rounded-lg text-center text-sm"
           >
@@ -61,7 +61,7 @@ import {
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class HorizontalVirtualListNextDemo {
+export class HorizontalVirtualListDemo {
   readonly days = Array.from({ length: 365 }, (_, i) => i + 1);
 }`;
 }

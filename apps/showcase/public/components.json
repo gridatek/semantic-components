@@ -1010,15 +1010,7 @@
   {
     "name": "Virtual List",
     "path": "virtual-list",
-    "description": "Virtualized scrolling for large lists using Angular CDK.",
-    "status": "Experimental",
-    "library": "third-party",
-    "category": "Recipes"
-  },
-  {
-    "name": "Virtual List Next",
-    "path": "virtual-list-next",
-    "description": "The virtual list, rebuilt: only what is seen rendered, rows measured as they render; a box or the page; down, along or in lanes.",
+    "description": "Only what is seen rendered, rows measured as they render; a box or the page; down, along or in lanes.",
     "status": "Experimental",
     "library": "ui-lab",
     "category": "Advanced"

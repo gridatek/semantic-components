@@ -1,8 +1,7 @@
 import { type Page, expect, test } from '@playwright/test';
 import { collectErrors } from '../../interaction';
 
-const demo = (name: string) =>
-  `/demos/virtual-list-next/${name}-virtual-list-next-demo`;
+const demo = (name: string) => `/demos/virtual-list/${name}-virtual-list-demo`;
 const list = (page: Page) => page.locator('[data-slot="virtual-list"]');
 const rows = (page: Page) => page.locator('[data-slot="virtual-list-row"]');
 const row = (page: Page, index: number) =>

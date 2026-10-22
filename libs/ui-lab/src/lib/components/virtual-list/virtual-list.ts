@@ -13,7 +13,7 @@ import {
 import { cn } from '@semantic-components/ui';
 
 /** A row to render: which, where, how big. */
-export interface ScVirtualListNextItem {
+export interface ScVirtualListItem {
   readonly index: number;
   readonly key: unknown;
   /** From the list's start, in pixels, along its flow. */
@@ -23,17 +23,17 @@ export interface ScVirtualListNextItem {
   readonly lane: number;
 }
 
-export type ScVirtualListNextAlign = 'start' | 'center' | 'end' | 'auto';
+export type ScVirtualListAlign = 'start' | 'center' | 'end' | 'auto';
 
 /**
  * A long list, rendered only where it is seen: your rows
- * (`scVirtualListNextRow`) for `rows()`, placed and measured as they render.
+ * (`scVirtualListRow`) for `rows()`, placed and measured as they render.
  * It scrolls with what scrolls — itself (give it a size and an overflow),
  * the box it is in, or the page. Down or along; in lanes for a grid.
  */
 @Component({
-  selector: '[scVirtualListNext]',
-  exportAs: 'scVirtualListNext',
+  selector: '[scVirtualList]',
+  exportAs: 'scVirtualList',
   template: `
     <ng-content />
     @if (spacerTag() === 'li') {
@@ -61,7 +61,7 @@ export type ScVirtualListNextAlign = 'start' | 'center' | 'end' | 'auto';
   },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScVirtualListNext {
+export class ScVirtualList {
   private readonly host =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
   private readonly document = inject(DOCUMENT);
@@ -106,7 +106,7 @@ export class ScVirtualListNext {
     const key = this.key();
     const sizes = this.sizes();
     const ends = new Array<number>(lanes).fill(0);
-    const rows: ScVirtualListNextItem[] = new Array(count);
+    const rows: ScVirtualListItem[] = new Array(count);
     for (let index = 0; index < count; index++) {
       let lane = 0;
       for (let l = 1; l < lanes; l++) if (ends[l] < ends[lane]) lane = l;
@@ -123,7 +123,7 @@ export class ScVirtualListNext {
   readonly size = computed(() => this.layout().size);
 
   /** The rows to render: those in view, `overscan` more each way, the focused one. */
-  readonly rows = computed<ScVirtualListNextItem[]>(() => {
+  readonly rows = computed<ScVirtualListItem[]>(() => {
     const { rows } = this.layout();
     const { from, to } = this.view();
     let first = -1;
@@ -209,7 +209,7 @@ export class ScVirtualListNext {
    */
   scrollToIndex(
     index: number,
-    { align = 'auto' }: { align?: ScVirtualListNextAlign } = {},
+    { align = 'auto' }: { align?: ScVirtualListAlign } = {},
   ): void {
     /** How far to scroll, as the row and the view are now. */
     const distance = (): number => {
@@ -250,7 +250,7 @@ export class ScVirtualListNext {
     step();
   }
 
-  /** A row element, measured while it is rendered (`scVirtualListNextRow`). */
+  /** A row element, measured while it is rendered (`scVirtualListRow`). */
   ɵobserve(element: Element, key: () => unknown): void {
     this.measured.set(element, key);
     this.resize.observe(element);

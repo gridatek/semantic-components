@@ -1,15 +1,35 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { ScrollVirtualListDemo } from './scroll-virtual-list-demo';
+
+@Component({
+  selector: 'app-scroll-virtual-list-demo-container',
+  imports: [DemoContainer, ScrollVirtualListDemo],
+  template: `
+    <app-demo-container
+      title="Scroll to"
+      [code]="code"
+      demoUrl="/demos/virtual-list/scroll-virtual-list-demo"
+    >
+      <app-scroll-virtual-list-demo />
+    </app-demo-container>
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class ScrollVirtualListDemoContainer {
+  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
 import {
-  ScVirtualListNext,
-  ScVirtualListNextRow,
+  ScVirtualList,
+  ScVirtualListRow,
 } from '@semantic-components/ui-lab';
 
 /** scrollToIndex(index, with an alignment): row 5,000 at the start, the centre, the end — or, auto, only as far as needed. */
 @Component({
-  selector: 'app-scroll-virtual-list-next-demo',
-  imports: [ScVirtualListNext, ScVirtualListNextRow, ScButton],
-  template: `
+  selector: 'app-scroll-virtual-list-demo',
+  imports: [ScVirtualList, ScVirtualListRow, ScButton],
+  template: \`
     <div class="flex flex-wrap justify-center gap-2">
       @for (align of aligns; track align) {
         <button
@@ -31,8 +51,8 @@ import {
       </button>
     </div>
     <ul
-      scVirtualListNext
-      #list="scVirtualListNext"
+      scVirtualList
+      #list="scVirtualList"
       tabindex="0"
       [count]="10_000"
       [estimate]="40"
@@ -41,7 +61,7 @@ import {
     >
       @for (row of list.rows(); track row.key) {
         <li
-          [scVirtualListNextRow]="row"
+          [scVirtualListRow]="row"
           class="border-b px-4 py-2 text-sm"
           [class.bg-accent]="row.index === 4999"
         >
@@ -55,10 +75,11 @@ import {
         {{ list.count() }}
       }
     </p>
-  `,
+  \`,
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScrollVirtualListNextDemo {
+export class ScrollVirtualListDemo {
   readonly aligns = ['start', 'center', 'end', 'auto'] as const;
+}`;
 }
