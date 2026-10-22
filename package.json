@@ -91,6 +91,7 @@
     "@swc/helpers": "0.5.23",
     "@tailwindcss/postcss": "^4.3.3",
     "@trivago/prettier-plugin-sort-imports": "^6.0.2",
+    "@types/canvas-confetti": "^1.9.0",
     "@types/d3-array": "^3.2.2",
     "@types/d3-scale": "^4.0.9",
     "@types/d3-shape": "^3.2.0",

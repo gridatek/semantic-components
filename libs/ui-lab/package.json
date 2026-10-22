@@ -22,10 +22,14 @@
     "rxjs": ">=7.8.2",
     "@semantic-components/ui": "0.81.0",
     "@angular/forms": ">=22.2.3",
-    "motion": ">=14.2.0"
+    "motion": ">=14.2.0",
+    "canvas-confetti": ">=1.9.4"
   },
   "peerDependenciesMeta": {
     "motion": {
+      "optional": true
+    },
+    "canvas-confetti": {
       "optional": true
     }
   },
