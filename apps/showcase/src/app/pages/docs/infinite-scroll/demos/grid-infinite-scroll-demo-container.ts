@@ -7,9 +7,9 @@ import { GridInfiniteScrollDemo } from './grid-infinite-scroll-demo';
   imports: [DemoContainer, GridInfiniteScrollDemo],
   template: `
     <app-demo-container
-      title="Card Grid Layout"
-      demoUrl="/demos/infinite-scroll/grid-infinite-scroll-demo"
+      title="Grid"
       [code]="code"
+      demoUrl="/demos/infinite-scroll/grid-infinite-scroll-demo"
     >
       <app-grid-infinite-scroll-demo />
     </app-demo-container>
@@ -21,101 +21,80 @@ export class GridInfiniteScrollDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScInfiniteScroll,
-  ScInfiniteScrollEnd,
-  ScInfiniteScrollLoader,
+  ScInfiniteScrollStatus,
 } from '@semantic-components/ui-lab';
-import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
 
 interface Item {
-  id: number;
-  title: string;
-  description: string;
+  readonly id: number;
+  readonly name: string;
 }
 
+/** Any layout: here a grid of products. The first page does not fill the box — it asks again, until the box is full or there is no more. */
 @Component({
   selector: 'app-grid-infinite-scroll-demo',
-  imports: [
-    ScInfiniteScroll,
-    ScInfiniteScrollLoader,
-    ScInfiniteScrollEnd,
-    SiLoaderCircleIcon,
-  ],
+  imports: [ScInfiniteScroll, ScInfiniteScrollStatus],
   template: \`
     <div
-      scInfiniteScroll
-      aria-label="Grid infinite scroll demo"
-      class="h-[400px] rounded-lg border"
-      [loading]="loading()"
-      [hasReachedEnd]="reachedEnd()"
-      (loadMore)="loadMore()"
+      class="h-96 w-full max-w-2xl overflow-y-auto rounded-lg border"
+      tabindex="0"
+      role="region"
+      aria-label="Products"
     >
-      <div class="grid grid-cols-2 gap-4 p-4">
+      <ul
+        scInfiniteScroll
+        class="grid grid-cols-2 gap-3 p-3 sm:grid-cols-3"
+        [loading]="loading()"
+        [done]="done()"
+        (more)="load()"
+      >
         @for (item of items(); track item.id) {
-          <div class="bg-muted/50 rounded-lg border p-4">
-            <div class="bg-muted mb-2 aspect-video rounded"></div>
-            <h4 class="text-sm font-medium">{{ item.title }}</h4>
-            <p class="text-muted-foreground text-xs">
-              {{ item.description }}
-            </p>
-          </div>
+          <li
+            class="bg-muted/50 grid aspect-square place-items-center rounded-lg text-sm font-medium"
+          >
+            {{ item.name }}
+          </li>
         }
-      </div>
-
-      @if (loading()) {
-        <div
-          scInfiniteScrollLoader
-          class="flex items-center justify-center gap-2 py-4"
-        >
-          <svg
-            siLoaderCircleIcon
-            class="text-muted-foreground size-5 animate-spin"
-          ></svg>
-          <span class="text-muted-foreground text-sm">Loading more...</span>
-        </div>
-      }
-
-      @if (reachedEnd() && !loading()) {
-        <div
-          scInfiniteScrollEnd
-          class="text-muted-foreground py-4 text-center text-sm"
-        >
-          No more items to load
-        </div>
-      }
+      </ul>
+      <p scInfiniteScrollStatus class="pb-3">
+        @if (loading()) {
+          Loading…
+        } @else if (done()) {
+          All {{ items().length }} products.
+        }
+      </p>
     </div>
   \`,
-  host: { class: 'block w-full' },
+  host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
 export class GridInfiniteScrollDemo {
-  readonly items = signal<Item[]>(this.generateItems(0, 8));
+  readonly items = signal<Item[]>([]);
   readonly loading = signal(false);
-  readonly reachedEnd = signal(false);
+  readonly done = signal(false);
 
-  private generateItems(start: number, count: number): Item[] {
-    return Array.from({ length: count }, (_, i) => ({
-      id: start + i + 1,
-      title: \`Item \${start + i + 1}\`,
-      description: \`This is the description for item \${start + i + 1}\`,
-    }));
+  async load(): Promise<void> {
+    this.loading.set(true);
+    const more = await this.fetch();
+    this.items.update((items) => [...items, ...more]);
+    this.done.set(this.items().length >= 36);
+    this.loading.set(false);
   }
 
-  loadMore(): void {
-    if (this.loading() || this.reachedEnd()) return;
-    this.loading.set(true);
-
-    setTimeout(() => {
-      const currentLength = this.items().length;
-      if (currentLength >= 24) {
-        this.reachedEnd.set(true);
-      } else {
-        this.items.update((items) => [
-          ...items,
-          ...this.generateItems(currentLength, 4),
-        ]);
-      }
-      this.loading.set(false);
-    }, 1000);
+  /** A pretend server: 3 more after a moment, 36 in all. */
+  private fetch(): Promise<Item[]> {
+    const from = this.items().length;
+    return new Promise((resolve) =>
+      setTimeout(
+        () =>
+          resolve(
+            Array.from({ length: Math.min(3, 36 - from) }, (_, i) => ({
+              id: from + i + 1,
+              name: 'Product ' + (from + i + 1),
+            })),
+          ),
+        600,
+      ),
+    );
   }
 }`;
 }

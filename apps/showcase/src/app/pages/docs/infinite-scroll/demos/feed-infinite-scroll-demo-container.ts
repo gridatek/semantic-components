@@ -1,7 +1,27 @@
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { FeedInfiniteScrollDemo } from './feed-infinite-scroll-demo';
+
+@Component({
+  selector: 'app-feed-infinite-scroll-demo-container',
+  imports: [DemoContainer, FeedInfiniteScrollDemo],
+  template: `
+    <app-demo-container
+      title="Feed"
+      [code]="code"
+      demoUrl="/demos/infinite-scroll/feed-infinite-scroll-demo"
+    >
+      <app-feed-infinite-scroll-demo />
+    </app-demo-container>
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class FeedInfiniteScrollDemoContainer {
+  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScInfiniteScrollNext,
-  ScInfiniteScrollNextStatus,
+  ScInfiniteScroll,
+  ScInfiniteScrollStatus,
 } from '@semantic-components/ui-lab';
 import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
 
@@ -13,16 +33,16 @@ interface Item {
 
 /** Articles in a feed (role="feed"), more as the reader nears the end of the box: aria-busy while loading, and your words in the status — then “That’s all”. */
 @Component({
-  selector: 'app-feed-infinite-scroll-next-demo',
+  selector: 'app-feed-infinite-scroll-demo',
   imports: [
-    ScInfiniteScrollNext,
-    ScInfiniteScrollNextStatus,
+    ScInfiniteScroll,
+    ScInfiniteScrollStatus,
     SiLoaderCircleIcon,
   ],
-  template: `
+  template: \`
     <div class="h-96 w-full max-w-lg overflow-y-auto rounded-lg border">
       <div
-        scInfiniteScrollNext
+        scInfiniteScroll
         role="feed"
         aria-label="News"
         class="grid gap-2 p-3"
@@ -46,7 +66,7 @@ interface Item {
         }
       </div>
     </div>
-    <p scInfiniteScrollNextStatus>
+    <p scInfiniteScrollStatus>
       @if (loading()) {
         <svg siLoaderCircleIcon class="size-4 animate-spin"></svg> Loading more
         articles…
@@ -54,11 +74,11 @@ interface Item {
         That’s all: {{ items().length }} articles.
       }
     </p>
-  `,
+  \`,
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class FeedInfiniteScrollNextDemo {
+export class FeedInfiniteScrollDemo {
   readonly items = signal<Item[]>([]);
   readonly loading = signal(false);
   readonly done = signal(false);
@@ -88,4 +108,5 @@ export class FeedInfiniteScrollNextDemo {
       ),
     );
   }
+}`;
 }

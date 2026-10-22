@@ -1595,31 +1595,10 @@ export const demosRoutes: Route[] = [
     path: 'demos/infinite-scroll',
     children: [
       {
-        path: 'basic-infinite-scroll-demo',
+        path: 'feed-infinite-scroll-demo',
         loadComponent: () =>
-          import('../pages/docs/infinite-scroll/demos/basic-infinite-scroll-demo').then(
-            (m) => m.BasicInfiniteScrollDemo,
-          ),
-      },
-      {
-        path: 'custom-loader-infinite-scroll-demo',
-        loadComponent: () =>
-          import('../pages/docs/infinite-scroll/demos/custom-loader-infinite-scroll-demo').then(
-            (m) => m.CustomLoaderInfiniteScrollDemo,
-          ),
-      },
-      {
-        path: 'end-message-infinite-scroll-demo',
-        loadComponent: () =>
-          import('../pages/docs/infinite-scroll/demos/end-message-infinite-scroll-demo').then(
-            (m) => m.EndMessageInfiniteScrollDemo,
-          ),
-      },
-      {
-        path: 'threshold-infinite-scroll-demo',
-        loadComponent: () =>
-          import('../pages/docs/infinite-scroll/demos/threshold-infinite-scroll-demo').then(
-            (m) => m.ThresholdInfiniteScrollDemo,
+          import('../pages/docs/infinite-scroll/demos/feed-infinite-scroll-demo').then(
+            (m) => m.FeedInfiniteScrollDemo,
           ),
       },
       {
@@ -1629,44 +1608,25 @@ export const demosRoutes: Route[] = [
             (m) => m.GridInfiniteScrollDemo,
           ),
       },
-    ],
-  },
-  {
-    path: 'demos/infinite-scroll-next',
-    children: [
       {
-        path: 'feed-infinite-scroll-next-demo',
+        path: 'button-infinite-scroll-demo',
         loadComponent: () =>
-          import('../pages/docs/infinite-scroll-next/demos/feed-infinite-scroll-next-demo').then(
-            (m) => m.FeedInfiniteScrollNextDemo,
+          import('../pages/docs/infinite-scroll/demos/button-infinite-scroll-demo').then(
+            (m) => m.ButtonInfiniteScrollDemo,
           ),
       },
       {
-        path: 'grid-infinite-scroll-next-demo',
+        path: 'error-infinite-scroll-demo',
         loadComponent: () =>
-          import('../pages/docs/infinite-scroll-next/demos/grid-infinite-scroll-next-demo').then(
-            (m) => m.GridInfiniteScrollNextDemo,
+          import('../pages/docs/infinite-scroll/demos/error-infinite-scroll-demo').then(
+            (m) => m.ErrorInfiniteScrollDemo,
           ),
       },
       {
-        path: 'button-infinite-scroll-next-demo',
+        path: 'chat-infinite-scroll-demo',
         loadComponent: () =>
-          import('../pages/docs/infinite-scroll-next/demos/button-infinite-scroll-next-demo').then(
-            (m) => m.ButtonInfiniteScrollNextDemo,
-          ),
-      },
-      {
-        path: 'error-infinite-scroll-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/infinite-scroll-next/demos/error-infinite-scroll-next-demo').then(
-            (m) => m.ErrorInfiniteScrollNextDemo,
-          ),
-      },
-      {
-        path: 'chat-infinite-scroll-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/infinite-scroll-next/demos/chat-infinite-scroll-next-demo').then(
-            (m) => m.ChatInfiniteScrollNextDemo,
+          import('../pages/docs/infinite-scroll/demos/chat-infinite-scroll-demo').then(
+            (m) => m.ChatInfiniteScrollDemo,
           ),
       },
     ],

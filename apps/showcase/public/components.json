@@ -402,15 +402,7 @@
   {
     "name": "Infinite Scroll",
     "path": "infinite-scroll",
-    "description": "Load more content as the user scrolls.",
-    "status": "Experimental",
-    "library": "ui-lab",
-    "category": "Advanced"
-  },
-  {
-    "name": "Infinite Scroll Next",
-    "path": "infinite-scroll-next",
-    "description": "The infinite scroll, rebuilt: more near the end or the start, with whatever scrolls; a Load more button and a status.",
+    "description": "More near the end or the start, with whatever scrolls; a Load more button and a status.",
     "status": "Experimental",
     "library": "ui-lab",
     "category": "Advanced"

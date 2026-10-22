@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScInfiniteScrollNext,
-  ScInfiniteScrollNextStatus,
+  ScInfiniteScroll,
+  ScInfiniteScrollStatus,
 } from '@semantic-components/ui-lab';
 
 interface Message {
@@ -12,8 +12,8 @@ interface Message {
 
 /** direction="start": it opens at the end, and older messages come in above as the reader scrolls up — the one they were reading stays where it was. */
 @Component({
-  selector: 'app-chat-infinite-scroll-next-demo',
-  imports: [ScInfiniteScrollNext, ScInfiniteScrollNextStatus],
+  selector: 'app-chat-infinite-scroll-demo',
+  imports: [ScInfiniteScroll, ScInfiniteScrollStatus],
   template: `
     <div
       class="h-80 w-full max-w-md overflow-y-auto rounded-lg border"
@@ -21,7 +21,7 @@ interface Message {
       role="log"
       aria-label="Messages"
     >
-      <p scInfiniteScrollNextStatus class="pt-2">
+      <p scInfiniteScrollStatus class="pt-2">
         @if (loading()) {
           Loading older messages…
         } @else if (done()) {
@@ -29,7 +29,7 @@ interface Message {
         }
       </p>
       <ol
-        scInfiniteScrollNext
+        scInfiniteScroll
         direction="start"
         class="grid gap-2 p-3"
         [loading]="loading()"
@@ -54,7 +54,7 @@ interface Message {
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ChatInfiniteScrollNextDemo {
+export class ChatInfiniteScrollDemo {
   /** The newest 15, oldest first. */
   readonly messages = signal<Message[]>(this.page(60, 15));
   readonly loading = signal(false);

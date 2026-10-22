@@ -2,7 +2,7 @@ import { type Locator, type Page, expect, test } from '@playwright/test';
 import { collectErrors } from '../../interaction';
 
 const demo = (name: string) =>
-  `/demos/infinite-scroll-next/${name}-infinite-scroll-next-demo`;
+  `/demos/infinite-scroll/${name}-infinite-scroll-demo`;
 const scroller = (page: Page) => page.locator('.overflow-y-auto').first();
 const status = (page: Page) => page.getByRole('status');
 

@@ -4,16 +4,16 @@ import {
   buttonVariants,
   cn,
 } from '@semantic-components/ui';
-import { ScInfiniteScrollNext } from './infinite-scroll-next';
+import { ScInfiniteScroll } from './infinite-scroll';
 
 /**
  * "Load more", for those who would rather ask — and the keyboard's way past
- * the list: `[scInfiniteScrollNextMore]="feed"`, the infinite scroll it asks
- * (`#feed="scInfiniteScrollNext"`), wherever it is. Disabled while loading,
+ * the list: `[scInfiniteScrollMore]="feed"`, the infinite scroll it asks
+ * (`#feed="scInfiniteScroll"`), wherever it is. Disabled while loading,
  * hidden when done. Write its text.
  */
 @Directive({
-  selector: 'button[scInfiniteScrollNextMore]',
+  selector: 'button[scInfiniteScrollMore]',
   host: {
     'data-slot': 'infinite-scroll-more',
     type: 'button',
@@ -23,10 +23,10 @@ import { ScInfiniteScrollNext } from './infinite-scroll-next';
     '(click)': 'scroll().loadMore()',
   },
 })
-export class ScInfiniteScrollNextMore {
+export class ScInfiniteScrollMore {
   /** The infinite scroll it asks for more. */
-  readonly scroll = input.required<ScInfiniteScrollNext>({
-    alias: 'scInfiniteScrollNextMore',
+  readonly scroll = input.required<ScInfiniteScroll>({
+    alias: 'scInfiniteScrollMore',
   });
 
   readonly classInput = input<string>('', { alias: 'class' });

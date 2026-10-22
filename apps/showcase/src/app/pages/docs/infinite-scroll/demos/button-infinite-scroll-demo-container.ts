@@ -1,8 +1,28 @@
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { ButtonInfiniteScrollDemo } from './button-infinite-scroll-demo';
+
+@Component({
+  selector: 'app-button-infinite-scroll-demo-container',
+  imports: [DemoContainer, ButtonInfiniteScrollDemo],
+  template: `
+    <app-demo-container
+      title="Load more"
+      [code]="code"
+      demoUrl="/demos/infinite-scroll/button-infinite-scroll-demo"
+    >
+      <app-button-infinite-scroll-demo />
+    </app-demo-container>
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class ButtonInfiniteScrollDemoContainer {
+  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScInfiniteScrollNext,
-  ScInfiniteScrollNextMore,
-  ScInfiniteScrollNextStatus,
+  ScInfiniteScroll,
+  ScInfiniteScrollMore,
+  ScInfiniteScrollStatus,
 } from '@semantic-components/ui-lab';
 
 interface Item {
@@ -12,17 +32,17 @@ interface Item {
 
 /** auto off: only the button asks — the footer stays within reach, and the reader decides. */
 @Component({
-  selector: 'app-button-infinite-scroll-next-demo',
+  selector: 'app-button-infinite-scroll-demo',
   imports: [
-    ScInfiniteScrollNext,
-    ScInfiniteScrollNextMore,
-    ScInfiniteScrollNextStatus,
+    ScInfiniteScroll,
+    ScInfiniteScrollMore,
+    ScInfiniteScrollStatus,
   ],
-  template: `
+  template: \`
     <div class="grid w-full max-w-lg gap-3">
       <ul
-        scInfiniteScrollNext
-        #results="scInfiniteScrollNext"
+        scInfiniteScroll
+        #results="scInfiniteScroll"
         [auto]="false"
         class="divide-y rounded-lg border"
         [loading]="loading()"
@@ -33,7 +53,7 @@ interface Item {
           <li class="p-3 text-sm">{{ item.title }}</li>
         }
       </ul>
-      <p scInfiniteScrollNextStatus>
+      <p scInfiniteScrollStatus>
         @if (loading()) {
           Loading…
         } @else if (done()) {
@@ -42,15 +62,15 @@ interface Item {
           {{ items().length }} results shown.
         }
       </p>
-      <button [scInfiniteScrollNextMore]="results" class="justify-self-center">
+      <button [scInfiniteScrollMore]="results" class="justify-self-center">
         Load more
       </button>
     </div>
-  `,
+  \`,
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ButtonInfiniteScrollNextDemo {
+export class ButtonInfiniteScrollDemo {
   readonly items = signal<Item[]>(
     Array.from({ length: 5 }, (_, i) => ({
       id: i + 1,
@@ -84,4 +104,5 @@ export class ButtonInfiniteScrollNextDemo {
       ),
     );
   }
+}`;
 }

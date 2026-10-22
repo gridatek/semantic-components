@@ -1,8 +1,8 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScInfiniteScrollNext,
-  ScInfiniteScrollNextMore,
-  ScInfiniteScrollNextStatus,
+  ScInfiniteScroll,
+  ScInfiniteScrollMore,
+  ScInfiniteScrollStatus,
 } from '@semantic-components/ui-lab';
 
 interface Item {
@@ -12,12 +12,8 @@ interface Item {
 
 /** A load fails: auto off, so it does not ask again by itself; the status says so and the button tries again. */
 @Component({
-  selector: 'app-error-infinite-scroll-next-demo',
-  imports: [
-    ScInfiniteScrollNext,
-    ScInfiniteScrollNextMore,
-    ScInfiniteScrollNextStatus,
-  ],
+  selector: 'app-error-infinite-scroll-demo',
+  imports: [ScInfiniteScroll, ScInfiniteScrollMore, ScInfiniteScrollStatus],
   template: `
     <div
       class="h-80 w-full max-w-lg overflow-y-auto rounded-lg border"
@@ -26,8 +22,8 @@ interface Item {
       aria-label="Orders"
     >
       <ul
-        scInfiniteScrollNext
-        #orders="scInfiniteScrollNext"
+        scInfiniteScroll
+        #orders="scInfiniteScroll"
         class="divide-y"
         [auto]="!failed()"
         [loading]="loading()"
@@ -39,7 +35,7 @@ interface Item {
         }
       </ul>
       <div class="grid justify-items-center gap-2 p-3">
-        <p scInfiniteScrollNextStatus [class.text-destructive]="failed()">
+        <p scInfiniteScrollStatus [class.text-destructive]="failed()">
           @if (loading()) {
             Loading…
           } @else if (failed()) {
@@ -49,7 +45,7 @@ interface Item {
           }
         </p>
         @if (failed()) {
-          <button [scInfiniteScrollNextMore]="orders">Try again</button>
+          <button [scInfiniteScrollMore]="orders">Try again</button>
         }
       </div>
     </div>
@@ -57,7 +53,7 @@ interface Item {
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ErrorInfiniteScrollNextDemo {
+export class ErrorInfiniteScrollDemo {
   readonly items = signal<Item[]>([]);
   readonly loading = signal(false);
   readonly done = signal(false);

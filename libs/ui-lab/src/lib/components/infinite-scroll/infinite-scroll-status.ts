@@ -7,14 +7,14 @@ import { cn } from '@semantic-components/ui';
  * change its text: a region added with its text is not announced.
  */
 @Directive({
-  selector: '[scInfiniteScrollNextStatus]',
+  selector: '[scInfiniteScrollStatus]',
   host: {
     'data-slot': 'infinite-scroll-status',
     role: 'status',
     '[class]': 'class()',
   },
 })
-export class ScInfiniteScrollNextStatus {
+export class ScInfiniteScrollStatus {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>

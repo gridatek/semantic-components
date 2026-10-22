@@ -1,28 +1,28 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { ErrorInfiniteScrollNextDemo } from './error-infinite-scroll-next-demo';
+import { ErrorInfiniteScrollDemo } from './error-infinite-scroll-demo';
 
 @Component({
-  selector: 'app-error-infinite-scroll-next-demo-container',
-  imports: [DemoContainer, ErrorInfiniteScrollNextDemo],
+  selector: 'app-error-infinite-scroll-demo-container',
+  imports: [DemoContainer, ErrorInfiniteScrollDemo],
   template: `
     <app-demo-container
       title="Error and retry"
       [code]="code"
-      demoUrl="/demos/infinite-scroll-next/error-infinite-scroll-next-demo"
+      demoUrl="/demos/infinite-scroll/error-infinite-scroll-demo"
     >
-      <app-error-infinite-scroll-next-demo />
+      <app-error-infinite-scroll-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ErrorInfiniteScrollNextDemoContainer {
+export class ErrorInfiniteScrollDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScInfiniteScrollNext,
-  ScInfiniteScrollNextMore,
-  ScInfiniteScrollNextStatus,
+  ScInfiniteScroll,
+  ScInfiniteScrollMore,
+  ScInfiniteScrollStatus,
 } from '@semantic-components/ui-lab';
 
 interface Item {
@@ -32,11 +32,11 @@ interface Item {
 
 /** A load fails: auto off, so it does not ask again by itself; the status says so and the button tries again. */
 @Component({
-  selector: 'app-error-infinite-scroll-next-demo',
+  selector: 'app-error-infinite-scroll-demo',
   imports: [
-    ScInfiniteScrollNext,
-    ScInfiniteScrollNextMore,
-    ScInfiniteScrollNextStatus,
+    ScInfiniteScroll,
+    ScInfiniteScrollMore,
+    ScInfiniteScrollStatus,
   ],
   template: \`
     <div
@@ -46,8 +46,8 @@ interface Item {
       aria-label="Orders"
     >
       <ul
-        scInfiniteScrollNext
-        #orders="scInfiniteScrollNext"
+        scInfiniteScroll
+        #orders="scInfiniteScroll"
         class="divide-y"
         [auto]="!failed()"
         [loading]="loading()"
@@ -59,10 +59,7 @@ interface Item {
         }
       </ul>
       <div class="grid justify-items-center gap-2 p-3">
-        <p
-          scInfiniteScrollNextStatus
-          [class.text-destructive]="failed()"
-        >
+        <p scInfiniteScrollStatus [class.text-destructive]="failed()">
           @if (loading()) {
             Loading…
           } @else if (failed()) {
@@ -72,7 +69,7 @@ interface Item {
           }
         </p>
         @if (failed()) {
-          <button [scInfiniteScrollNextMore]="orders">Try again</button>
+          <button [scInfiniteScrollMore]="orders">Try again</button>
         }
       </div>
     </div>
@@ -80,7 +77,7 @@ interface Item {
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ErrorInfiniteScrollNextDemo {
+export class ErrorInfiniteScrollDemo {
   readonly items = signal<Item[]>([]);
   readonly loading = signal(false);
   readonly done = signal(false);
