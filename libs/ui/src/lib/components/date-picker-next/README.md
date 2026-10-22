@@ -42,18 +42,22 @@ The calendar is the [calendar](../calendar/README.md), written in full: its head
 </div>
 ```
 
-Typed, in a field — the trigger becomes an icon button beside the input:
+Typed, in a field — the input and the trigger in an input group; there the trigger is an icon button (`variant` ghost, `buttonSize` icon-xs):
 
 ```html
 <div scField>
   <label scLabel>Start date</label>
   <div scDatePickerNext #dp="scDatePickerNext" [formField]="form.start">
-    <input scDatePickerNextInput placeholder="MM/DD/YYYY" />
     <div scPopoverProvider [origin]="trigger.overlayOrigin" align="end">
-      <button scDatePickerNextTrigger #trigger="scDatePickerNextTrigger" class="w-auto">
-        <svg siCalendarIcon></svg>
-        <span class="sr-only">Choose a date</span>
-      </button>
+      <div scInputGroup>
+        <input scDatePickerNextInput placeholder="MM/DD/YYYY" />
+        <div scInputGroupAddon align="inline-end">
+          <button scDatePickerNextTrigger #trigger="scDatePickerNextTrigger">
+            <svg siCalendarIcon></svg>
+            <span class="sr-only">Choose a date</span>
+          </button>
+        </div>
+      </div>
       <ng-template scPopoverPortal>…the calendar…</ng-template>
     </div>
   </div>
@@ -90,7 +94,7 @@ Typed, in a field — the trigger becomes an icon button beside the input:
 
 ### ScDatePickerNextTrigger — `button[scDatePickerNextTrigger]`
 
-Looks like a select trigger; opens and closes the popover. `aria-haspopup="dialog"`, `aria-expanded`, `aria-invalid`; `data-placeholder` while there is no value.
+Looks like a select trigger (`size`: default, sm) — in an input group, an icon button (`variant`, `buttonSize`). Opens and closes the popover. `aria-haspopup="dialog"`, `aria-expanded`, `aria-invalid`; `data-placeholder` while there is no value.
 
 ### ScDatePickerNextInput — `input[scDatePickerNextInput]`
 

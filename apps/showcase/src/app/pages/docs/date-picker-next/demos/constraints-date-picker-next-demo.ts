@@ -9,6 +9,8 @@ import {
   ScDatePickerNext,
   ScDatePickerNextInput,
   ScDatePickerNextTrigger,
+  ScInputGroup,
+  ScInputGroupAddon,
   ScPopover,
   ScPopoverPortal,
   ScPopoverProvider,
@@ -23,6 +25,8 @@ import {
 @Component({
   selector: 'app-constraints-date-picker-next-demo',
   imports: [
+    ScInputGroup,
+    ScInputGroupAddon,
     ScDatePickerNext,
     ScDatePickerNextTrigger,
     ScPopoverProvider,
@@ -48,20 +52,20 @@ import {
       [(value)]="date"
       class="w-64"
     >
-      <input
-        scDatePickerNextInput
-        aria-label="Delivery date"
-        placeholder="MM/DD/YYYY"
-      />
       <div scPopoverProvider [origin]="trigger.overlayOrigin" align="end">
-        <button
-          scDatePickerNextTrigger
-          #trigger="scDatePickerNextTrigger"
-          class="w-auto"
-        >
-          <svg siCalendarIcon></svg>
-          <span class="sr-only">Choose a delivery date</span>
-        </button>
+        <div scInputGroup>
+          <input
+            scDatePickerNextInput
+            aria-label="Delivery date"
+            placeholder="MM/DD/YYYY"
+          />
+          <div scInputGroupAddon align="inline-end">
+            <button scDatePickerNextTrigger #trigger="scDatePickerNextTrigger">
+              <svg siCalendarIcon></svg>
+              <span class="sr-only">Choose a delivery date</span>
+            </button>
+          </div>
+        </div>
         <ng-template scPopoverPortal>
           <div scPopover class="w-auto p-0" aria-label="Choose a date">
             <div

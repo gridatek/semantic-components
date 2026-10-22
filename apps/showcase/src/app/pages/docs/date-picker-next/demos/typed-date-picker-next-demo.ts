@@ -11,6 +11,8 @@ import {
   ScDatePickerNextTrigger,
   ScField,
   ScFieldDescription,
+  ScInputGroup,
+  ScInputGroupAddon,
   ScLabel,
   ScPopover,
   ScPopoverPortal,
@@ -22,10 +24,12 @@ import {
   SiChevronRightIcon,
 } from '@semantic-icons/lucide-icons';
 
-/** Typed, or picked: the locale’s numeric order (here 10/14/2026) or ISO, read on Enter or leaving; text that is not a day stays, marked. The button beside opens the calendar. */
+/** Typed, or picked: the locale’s numeric order (here 10/14/2026) or ISO, read on Enter or leaving; text that is not a day stays, marked. The button in the field opens the calendar. */
 @Component({
   selector: 'app-typed-date-picker-next-demo',
   imports: [
+    ScInputGroup,
+    ScInputGroupAddon,
     ScDatePickerNext,
     ScDatePickerNextTrigger,
     ScPopoverProvider,
@@ -48,16 +52,19 @@ import {
     <div scField class="w-64">
       <label scLabel>Start date</label>
       <div scDatePickerNext #dp="scDatePickerNext" [(value)]="date">
-        <input scDatePickerNextInput placeholder="MM/DD/YYYY" />
         <div scPopoverProvider [origin]="trigger.overlayOrigin" align="end">
-          <button
-            scDatePickerNextTrigger
-            #trigger="scDatePickerNextTrigger"
-            class="w-auto"
-          >
-            <svg siCalendarIcon></svg>
-            <span class="sr-only">Choose a date</span>
-          </button>
+          <div scInputGroup>
+            <input scDatePickerNextInput placeholder="MM/DD/YYYY" />
+            <div scInputGroupAddon align="inline-end">
+              <button
+                scDatePickerNextTrigger
+                #trigger="scDatePickerNextTrigger"
+              >
+                <svg siCalendarIcon></svg>
+                <span class="sr-only">Choose a date</span>
+              </button>
+            </div>
+          </div>
           <ng-template scPopoverPortal>
             <div scPopover class="w-auto p-0" aria-label="Choose a date">
               <div

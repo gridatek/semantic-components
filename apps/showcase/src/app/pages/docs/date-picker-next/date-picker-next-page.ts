@@ -49,7 +49,7 @@ import { TypedDatePickerNextDemoContainer } from './demos/typed-date-picker-next
         <p class="text-muted-foreground">
           Typed, or picked: the locale’s numeric order (here 10/14/2026) or ISO,
           read on Enter or leaving; text that is not a day stays, marked. The
-          button beside opens the calendar.
+          button in the field opens the calendar.
         </p>
         <app-typed-date-picker-next-demo-container />
       </section>

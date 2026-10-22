@@ -22,7 +22,7 @@ import { ScDatePickerNext } from './date-picker-next';
 @Directive({
   selector: 'input[scDatePickerNextInput]',
   host: {
-    'data-slot': 'date-picker-input',
+    'data-slot': 'control',
     type: 'text',
     autocomplete: 'off',
     '[attr.id]': 'id()',
