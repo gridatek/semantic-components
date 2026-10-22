@@ -848,6 +848,14 @@
     "category": "Data Display"
   },
   {
+    "name": "Stat Card Next",
+    "path": "stat-card-next",
+    "description": "The stat card, rebuilt: a figure on a description list, formatted by Intl, its change coloured by good news.",
+    "status": "Experimental",
+    "library": "ui-lab",
+    "category": "Data Display"
+  },
+  {
     "name": "Stepper",
     "path": "stepper",
     "description": "Guides users through a multi-step process.",

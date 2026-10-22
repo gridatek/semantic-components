@@ -3394,6 +3394,46 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/stat-card-next',
+    children: [
+      {
+        path: 'basic-stat-card-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/stat-card-next/demos/basic-stat-card-next-demo').then(
+            (m) => m.BasicStatCardNextDemo,
+          ),
+      },
+      {
+        path: 'dashboard-stat-card-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/stat-card-next/demos/dashboard-stat-card-next-demo').then(
+            (m) => m.DashboardStatCardNextDemo,
+          ),
+      },
+      {
+        path: 'formats-stat-card-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/stat-card-next/demos/formats-stat-card-next-demo').then(
+            (m) => m.FormatsStatCardNextDemo,
+          ),
+      },
+      {
+        path: 'good-stat-card-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/stat-card-next/demos/good-stat-card-next-demo').then(
+            (m) => m.GoodStatCardNextDemo,
+          ),
+      },
+      {
+        path: 'text-stat-card-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/stat-card-next/demos/text-stat-card-next-demo').then(
+            (m) => m.TextStatCardNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/stepper',
     children: [
       {
