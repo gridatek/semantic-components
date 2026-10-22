@@ -1,319 +1,49 @@
 # Stat Card
 
-A composable set of directives for displaying statistics and metrics with optional trends, icons, and descriptions.
+One figure on a description list — its label, its value written by `Intl.NumberFormat`, and how it changed, coloured by whether that is good news.
 
-## Components
+## Architecture
 
-- `ScStatCard` - Main container with border, background, and padding
-- `ScStatCardLabel` - Label/title text styling
-- `ScStatCardValue` - Large value/metric display styling
-- `ScStatCardIcon` - Icon container styling
-- `ScStatCardChange` - Trend/change indicator styling with color variants
-- `ScStatCardDescription` - Additional description text styling
-
-## Installation
-
-```typescript
-import { ScStatCard, ScStatCardChange, ScStatCardDescription, ScStatCardIcon, ScStatCardLabel, ScStatCardValue } from '@semantic-components/ui-lab';
+```
+dl[scStatCard] (locale — the app's)
+├── dt[scStatCardLabel]          — what the figure is
+│   └── svg[scStatCardIcon]      — your icon, at the label's end
+├── dd[scStatCardValue]          — value + format (Intl.NumberFormatOptions); or your text
+├── dd[scStatCardChange]         — value (signed) + format; good: 'up' | 'down'
+└── dd[scStatCardDescription]    — "from last month"
 ```
 
 ## Usage
 
-### Basic Stat Card
-
 ```html
-<div scStatCard>
-  <div class="space-y-1">
-    <p scStatCardLabel>Total Revenue</p>
-    <p scStatCardValue>$45,231.89</p>
-  </div>
-  <p scStatCardDescription>Revenue for the current period</p>
-</div>
+<dl scStatCard>
+  <dt scStatCardLabel>Revenue <svg siDollarSignIcon scStatCardIcon></svg></dt>
+  <dd scStatCardValue [value]="45231.89" [format]="{ style: 'currency', currency: 'USD' }"></dd>
+  <dd scStatCardChange [value]="0.201" [format]="{ style: 'percent', maximumFractionDigits: 1 }">
+    <svg siTrendingUpIcon></svg>
+  </dd>
+  <dd scStatCardDescription>from last month</dd>
+</dl>
 ```
 
-### With Icon
+## Numbers
 
-```html
-<div scStatCard>
-  <div class="flex items-start justify-between">
-    <div class="space-y-1">
-      <p scStatCardLabel>Active Users</p>
-      <p scStatCardValue>2,350</p>
-    </div>
-    <div scStatCardIcon>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-        <circle cx="9" cy="7" r="4" />
-        <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-      </svg>
-    </div>
-  </div>
-</div>
-```
+- The value and the change are written by `Intl.NumberFormat` in the card's `locale` (`LOCALE_ID` by default), with your `format`: currency, percent, a unit, compact notation…
+- Without a `value`, the value part shows your text ("All systems normal").
+- The change always shows its sign (`+20.1%`, `−4.3%`, `0`).
 
-### With Trend Indicator
+## Good news
 
-```html
-<div scStatCard>
-  <div class="space-y-1">
-    <p scStatCardLabel>Sales</p>
-    <p scStatCardValue>12,234</p>
-  </div>
-
-  <div class="mt-3 flex items-center gap-2">
-    <span scStatCardChange trend="up">
-      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="m18 15-6-6-6 6" />
-      </svg>
-      <span>+20.1%</span>
-    </span>
-    <span class="text-muted-foreground text-xs">from last month</span>
-  </div>
-</div>
-```
-
-### Complete Example
-
-```html
-<div scStatCard variant="default" size="md">
-  <div class="flex items-start justify-between">
-    <div class="space-y-1">
-      <p scStatCardLabel size="md">Total Revenue</p>
-      <p scStatCardValue size="md">$45,231.89</p>
-    </div>
-    <div scStatCardIcon size="md">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-      </svg>
-    </div>
-  </div>
-
-  <div class="mt-3 flex items-center gap-2">
-    <span scStatCardChange trend="up">
-      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="m18 15-6-6-6 6" />
-      </svg>
-      <span>+20.1%</span>
-    </span>
-    <span class="text-muted-foreground text-xs">from last month</span>
-  </div>
-
-  <p scStatCardDescription class="mt-2">Your revenue increased significantly this month</p>
-</div>
-```
-
-## Variants
-
-### Default (with border)
-
-```html
-<div scStatCard variant="default">
-  <!-- content -->
-</div>
-```
-
-### Outline (thick border)
-
-```html
-<div scStatCard variant="outline">
-  <!-- content -->
-</div>
-```
-
-### Filled (colored background)
-
-```html
-<div scStatCard variant="filled">
-  <!-- content -->
-</div>
-```
-
-## Sizes
-
-### Small
-
-```html
-<div scStatCard size="sm">
-  <p scStatCardLabel size="sm">Label</p>
-  <p scStatCardValue size="sm">1,234</p>
-</div>
-```
-
-### Medium (default)
-
-```html
-<div scStatCard size="md">
-  <p scStatCardLabel size="md">Label</p>
-  <p scStatCardValue size="md">5,678</p>
-</div>
-```
-
-### Large
-
-```html
-<div scStatCard size="lg">
-  <p scStatCardLabel size="lg">Label</p>
-  <p scStatCardValue size="lg">9,012</p>
-</div>
-```
-
-## Trend Colors
-
-The `sc-stat-card-change` directive automatically applies colors based on the `trend` input:
-
-- `trend="up"` - Green text (positive)
-- `trend="down"` - Red text (negative)
-- `trend="neutral"` - Muted text (neutral)
-
-```html
-<span scStatCardChange trend="up">
-  <svg><!-- up arrow --></svg>
-  <span>+12.5%</span>
-</span>
-
-<span scStatCardChange trend="down">
-  <svg><!-- down arrow --></svg>
-  <span>-5.2%</span>
-</span>
-
-<span scStatCardChange trend="neutral">
-  <span>No change</span>
-</span>
-```
-
-## API Reference
-
-### ScStatCard Inputs
-
-| Input     | Type                                 | Default     | Description            |
-| --------- | ------------------------------------ | ----------- | ---------------------- |
-| `variant` | `'default' \| 'outline' \| 'filled'` | `'default'` | Card style variant     |
-| `size`    | `'sm' \| 'md' \| 'lg'`               | `'md'`      | Card padding size      |
-| `class`   | `string`                             | `''`        | Additional CSS classes |
-
-### ScStatCardLabel Inputs
-
-| Input   | Type                   | Default | Description            |
-| ------- | ---------------------- | ------- | ---------------------- |
-| `size`  | `'sm' \| 'md' \| 'lg'` | `'md'`  | Label text size        |
-| `class` | `string`               | `''`    | Additional CSS classes |
-
-### ScStatCardValue Inputs
-
-| Input   | Type                   | Default | Description            |
-| ------- | ---------------------- | ------- | ---------------------- |
-| `size`  | `'sm' \| 'md' \| 'lg'` | `'md'`  | Value text size        |
-| `class` | `string`               | `''`    | Additional CSS classes |
-
-### ScStatCardIcon Inputs
-
-| Input   | Type                   | Default | Description            |
-| ------- | ---------------------- | ------- | ---------------------- |
-| `size`  | `'sm' \| 'md' \| 'lg'` | `'md'`  | Icon container size    |
-| `class` | `string`               | `''`    | Additional CSS classes |
-
-### ScStatCardChange Inputs
-
-| Input   | Type                          | Default     | Description            |
-| ------- | ----------------------------- | ----------- | ---------------------- |
-| `trend` | `'up' \| 'down' \| 'neutral'` | `'neutral'` | Trend direction/color  |
-| `class` | `string`                      | `''`        | Additional CSS classes |
-
-### ScStatCardDescription Inputs
-
-| Input   | Type     | Default | Description            |
-| ------- | -------- | ------- | ---------------------- |
-| `class` | `string` | `''`    | Additional CSS classes |
-
-## Type Definitions
-
-```typescript
-type ScStatCardTrend = 'up' | 'down' | 'neutral';
-type ScStatCardVariant = 'default' | 'outline' | 'filled';
-type ScStatCardSize = 'sm' | 'md' | 'lg';
-```
-
-## Styling Reference
-
-| Component               | Default Styling                                                              |
-| ----------------------- | ---------------------------------------------------------------------------- |
-| `ScStatCard`            | `rounded-lg transition-colors` + variant/size classes                        |
-| `ScStatCardLabel`       | `font-medium text-muted-foreground` + size-specific font size                |
-| `ScStatCardValue`       | `font-bold tracking-tight` + size-specific font size                         |
-| `ScStatCardIcon`        | `rounded-md bg-muted p-2 inline-flex items-center justify-center` + SVG size |
-| `ScStatCardChange`      | `inline-flex items-center gap-1 text-xs font-medium` + trend color           |
-| `ScStatCardDescription` | `text-xs text-muted-foreground`                                              |
-
-## Features
-
-- Fully composable - use only what you need
-- Content projection for maximum flexibility
-- Multiple style variants (default, outline, filled)
-- Multiple size options (sm, md, lg)
-- Automatic trend-based coloring
-- Support for custom icons from any library
-- Responsive design
-- Custom class support on all directives
+- `good` on the change is the way that is good news: `up` (the default — revenue, users) or `down` (costs, errors, wait times).
+- `data-trend`: `up`, `down` or `none`; `data-good`: `true`, `false`, or absent when unchanged.
+- Good is the theme's `success` colour, bad its `destructive` one, unchanged muted.
 
 ## Accessibility
 
-- Uses semantic HTML structure
-- All directives accept standard HTML attributes
-- Ensure proper heading hierarchy for labels
-- Use appropriate ARIA labels for trend indicators
-- Icons should have descriptive text for screen readers
+- A description list: the label (`dt`) names the value and the change (`dd`s).
+- The sign is read ("plus 20.1 percent"). Colour alone says good or bad: say it too, in a `sr-only` span in the change, if it matters.
+- Your icon goes first in the change, your other text after the number.
 
-## Example Layouts
+## Not here
 
-### Grid of Stats
-
-```html
-<div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-  <div scStatCard>
-    <p scStatCardLabel>Total Revenue</p>
-    <p scStatCardValue>$45,231.89</p>
-  </div>
-
-  <div scStatCard>
-    <p scStatCardLabel>Active Users</p>
-    <p scStatCardValue>2,350</p>
-  </div>
-
-  <div scStatCard>
-    <p scStatCardLabel>Sales</p>
-    <p scStatCardValue>12,234</p>
-  </div>
-
-  <div scStatCard>
-    <p scStatCardLabel>Conversions</p>
-    <p scStatCardValue>573</p>
-  </div>
-</div>
-```
-
-### Custom Layout
-
-Since all components use content projection, you can create any layout you need:
-
-```html
-<div scStatCard>
-  <!-- Custom header with icon on left -->
-  <div class="mb-4 flex items-center gap-3">
-    <div scStatCardIcon>
-      <svg><!-- icon --></svg>
-    </div>
-    <p scStatCardLabel>Revenue</p>
-  </div>
-
-  <!-- Centered value -->
-  <p scStatCardValue class="text-center">$45,231.89</p>
-
-  <!-- Bottom trend -->
-  <div class="mt-4 flex justify-center">
-    <span scStatCardChange trend="up">
-      <span>↑ 20.1%</span>
-    </span>
-  </div>
-</div>
-```
+Sparklines and charts (put yours in the card), numbers animated as they change, loading skeletons (`scSkeleton`), variants and sizes (`class`).

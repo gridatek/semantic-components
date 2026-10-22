@@ -1,7 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-const demo = (name: string) =>
-  `/demos/stat-card-next/${name}-stat-card-next-demo`;
+const demo = (name: string) => `/demos/stat-card/${name}-stat-card-demo`;
 
 test('Basic: a description list, its value and signed change', async ({
   page,

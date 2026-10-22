@@ -29,7 +29,6 @@ export * from './signature-pad';
 export * from './speed-dial';
 export * from './spotlight';
 export * from './stat-card';
-export * from './stat-card-next';
 export * from './stepper';
 export * from './tags-input';
 export * from './time-picker-clock';

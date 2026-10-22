@@ -1,10 +1,10 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScStatCardNext,
-  ScStatCardNextChange,
-  ScStatCardNextDescription,
-  ScStatCardNextLabel,
-  ScStatCardNextValue,
+  ScStatCard,
+  ScStatCardChange,
+  ScStatCardDescription,
+  ScStatCardLabel,
+  ScStatCardValue,
 } from '@semantic-components/ui-lab';
 import {
   SiTrendingDownIcon,
@@ -13,21 +13,21 @@ import {
 
 /** When down is good news — costs, errors, wait times — say so with good="down": the colour follows the meaning, the sign the number. Unchanged is neither. */
 @Component({
-  selector: 'app-good-stat-card-next-demo',
+  selector: 'app-good-stat-card-demo',
   imports: [
-    ScStatCardNext,
-    ScStatCardNextLabel,
-    ScStatCardNextValue,
-    ScStatCardNextChange,
-    ScStatCardNextDescription,
+    ScStatCard,
+    ScStatCardLabel,
+    ScStatCardValue,
+    ScStatCardChange,
+    ScStatCardDescription,
     SiTrendingUpIcon,
     SiTrendingDownIcon,
   ],
   template: `
-    <dl scStatCardNext class="w-56">
-      <dt scStatCardNextLabel>Cloud costs</dt>
+    <dl scStatCard class="w-56">
+      <dt scStatCardLabel>Cloud costs</dt>
       <dd
-        scStatCardNextValue
+        scStatCardValue
         [value]="8420"
         [format]="{
           style: 'currency',
@@ -36,7 +36,7 @@ import {
         }"
       ></dd>
       <dd
-        scStatCardNextChange
+        scStatCardChange
         [value]="-0.12"
         [format]="{ style: 'percent', maximumFractionDigits: 1 }"
         good="down"
@@ -44,17 +44,17 @@ import {
         <svg siTrendingDownIcon></svg>
         <span class="sr-only">, good</span>
       </dd>
-      <dd scStatCardNextDescription>from last month</dd>
+      <dd scStatCardDescription>from last month</dd>
     </dl>
-    <dl scStatCardNext class="w-56">
-      <dt scStatCardNextLabel>Error rate</dt>
+    <dl scStatCard class="w-56">
+      <dt scStatCardLabel>Error rate</dt>
       <dd
-        scStatCardNextValue
+        scStatCardValue
         [value]="0.031"
         [format]="{ style: 'percent', maximumFractionDigits: 1 }"
       ></dd>
       <dd
-        scStatCardNextChange
+        scStatCardChange
         [value]="0.008"
         [format]="{ style: 'percent', maximumFractionDigits: 1 }"
         good="down"
@@ -62,16 +62,16 @@ import {
         <svg siTrendingUpIcon></svg>
         <span class="sr-only">, bad</span>
       </dd>
-      <dd scStatCardNextDescription>from last week</dd>
+      <dd scStatCardDescription>from last week</dd>
     </dl>
-    <dl scStatCardNext class="w-56">
-      <dt scStatCardNextLabel>Open tickets</dt>
-      <dd scStatCardNextValue [value]="42"></dd>
-      <dd scStatCardNextChange [value]="0"></dd>
-      <dd scStatCardNextDescription>from yesterday</dd>
+    <dl scStatCard class="w-56">
+      <dt scStatCardLabel>Open tickets</dt>
+      <dd scStatCardValue [value]="42"></dd>
+      <dd scStatCardChange [value]="0"></dd>
+      <dd scStatCardDescription>from yesterday</dd>
     </dl>
   `,
   host: { class: 'flex w-full flex-wrap justify-center gap-4' },
   encapsulation: ViewEncapsulation.None,
 })
-export class GoodStatCardNextDemo {}
+export class GoodStatCardDemo {}

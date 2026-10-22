@@ -1,27 +1,18 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import type { ScStatCardSize } from './stat-card-types';
 
+/** Your icon, in the label: at its end. */
 @Directive({
   selector: '[scStatCardIcon]',
   host: {
+    'data-slot': 'stat-card-icon',
     '[class]': 'class()',
   },
 })
 export class ScStatCardIcon {
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly size = input<ScStatCardSize>('md');
 
-  protected readonly class = computed(() => {
-    const size = this.size();
-
-    return cn(
-      'rounded-md bg-muted p-2',
-      'inline-flex items-center justify-center',
-      size === 'sm' && '[&>svg]:w-4 [&>svg]:h-4',
-      size === 'md' && '[&>svg]:w-5 [&>svg]:h-5',
-      size === 'lg' && '[&>svg]:w-6 [&>svg]:h-6',
-      this.classInput(),
-    );
-  });
+  protected readonly class = computed(() =>
+    cn('text-muted-foreground ms-auto size-4 shrink-0', this.classInput()),
+  );
 }

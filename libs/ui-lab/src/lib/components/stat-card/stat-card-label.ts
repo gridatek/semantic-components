@@ -1,27 +1,21 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import type { ScStatCardSize } from './stat-card-types';
 
+/** What the figure is: on a `<dt>` — an icon (`scStatCardIcon`) in it, at its end. */
 @Directive({
   selector: '[scStatCardLabel]',
   host: {
+    'data-slot': 'stat-card-label',
     '[class]': 'class()',
   },
 })
 export class ScStatCardLabel {
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly size = input<ScStatCardSize>('md');
 
-  protected readonly class = computed(() => {
-    const size = this.size();
-
-    return cn(
-      'font-medium text-muted-foreground',
-      'group-data-[variant=filled]/stat-card:text-primary-foreground/80',
-      size === 'sm' && 'text-xs',
-      size === 'md' && 'text-sm',
-      size === 'lg' && 'text-base',
+  protected readonly class = computed(() =>
+    cn(
+      'text-muted-foreground flex basis-full items-center gap-2 font-medium',
       this.classInput(),
-    );
-  });
+    ),
+  );
 }

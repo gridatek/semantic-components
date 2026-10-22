@@ -1,26 +1,44 @@
-import { Directive, computed, input } from '@angular/core';
+import {
+  Component,
+  ViewEncapsulation,
+  computed,
+  inject,
+  input,
+} from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import type { ScStatCardSize } from './stat-card-types';
+import { ScStatCard } from './stat-card';
 
-@Directive({
+/**
+ * The figure, on a `<dd>`: `value` written by `Intl.NumberFormat` with
+ * `format` (currency, percent, compact…) — or, without one, your text.
+ */
+@Component({
   selector: '[scStatCardValue]',
+  template: `{{ text() }}<ng-content />`,
   host: {
+    'data-slot': 'stat-card-value',
     '[class]': 'class()',
   },
+  encapsulation: ViewEncapsulation.None,
 })
 export class ScStatCardValue {
+  private readonly card = inject(ScStatCard);
+
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly size = input<ScStatCardSize>('md');
+  readonly value = input<number | null>(null);
+  readonly format = input<Intl.NumberFormatOptions>({});
 
-  protected readonly class = computed(() => {
-    const size = this.size();
-
-    return cn(
-      'font-bold tracking-tight',
-      size === 'sm' && 'text-xl',
-      size === 'md' && 'text-2xl',
-      size === 'lg' && 'text-4xl',
-      this.classInput(),
-    );
+  protected readonly text = computed(() => {
+    const value = this.value();
+    return value === null
+      ? ''
+      : new Intl.NumberFormat(this.card.locale(), this.format()).format(value);
   });
+
+  protected readonly class = computed(() =>
+    cn(
+      'basis-full text-2xl font-semibold tracking-tight tabular-nums',
+      this.classInput(),
+    ),
+  );
 }

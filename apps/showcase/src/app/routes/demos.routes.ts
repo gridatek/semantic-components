@@ -3371,64 +3371,31 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'sizes-stat-card-demo',
+        path: 'dashboard-stat-card-demo',
         loadComponent: () =>
-          import('../pages/docs/stat-card/demos/sizes-stat-card-demo').then(
-            (m) => m.SizesStatCardDemo,
+          import('../pages/docs/stat-card/demos/dashboard-stat-card-demo').then(
+            (m) => m.DashboardStatCardDemo,
           ),
       },
       {
-        path: 'variants-stat-card-demo',
+        path: 'formats-stat-card-demo',
         loadComponent: () =>
-          import('../pages/docs/stat-card/demos/variants-stat-card-demo').then(
-            (m) => m.VariantsStatCardDemo,
+          import('../pages/docs/stat-card/demos/formats-stat-card-demo').then(
+            (m) => m.FormatsStatCardDemo,
           ),
       },
       {
-        path: 'description-stat-card-demo',
+        path: 'good-stat-card-demo',
         loadComponent: () =>
-          import('../pages/docs/stat-card/demos/description-stat-card-demo').then(
-            (m) => m.DescriptionStatCardDemo,
-          ),
-      },
-    ],
-  },
-  {
-    path: 'demos/stat-card-next',
-    children: [
-      {
-        path: 'basic-stat-card-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/stat-card-next/demos/basic-stat-card-next-demo').then(
-            (m) => m.BasicStatCardNextDemo,
+          import('../pages/docs/stat-card/demos/good-stat-card-demo').then(
+            (m) => m.GoodStatCardDemo,
           ),
       },
       {
-        path: 'dashboard-stat-card-next-demo',
+        path: 'text-stat-card-demo',
         loadComponent: () =>
-          import('../pages/docs/stat-card-next/demos/dashboard-stat-card-next-demo').then(
-            (m) => m.DashboardStatCardNextDemo,
-          ),
-      },
-      {
-        path: 'formats-stat-card-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/stat-card-next/demos/formats-stat-card-next-demo').then(
-            (m) => m.FormatsStatCardNextDemo,
-          ),
-      },
-      {
-        path: 'good-stat-card-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/stat-card-next/demos/good-stat-card-next-demo').then(
-            (m) => m.GoodStatCardNextDemo,
-          ),
-      },
-      {
-        path: 'text-stat-card-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/stat-card-next/demos/text-stat-card-next-demo').then(
-            (m) => m.TextStatCardNextDemo,
+          import('../pages/docs/stat-card/demos/text-stat-card-demo').then(
+            (m) => m.TextStatCardDemo,
           ),
       },
     ],

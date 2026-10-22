@@ -566,12 +566,6 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/stat-card/stat-card-page'),
       },
       {
-        path: 'stat-card-next',
-        title: 'Stat Card Next - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/stat-card-next/stat-card-next-page'),
-      },
-      {
         path: 'stepper',
         title: 'Stepper - Semantic Components',
         loadComponent: () => import('../pages/docs/stepper/stepper-page'),

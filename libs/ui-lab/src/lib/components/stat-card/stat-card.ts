@@ -1,34 +1,27 @@
-import { Directive, computed, input } from '@angular/core';
+import { Directive, LOCALE_ID, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import type { ScStatCardSize, ScStatCardVariant } from './stat-card-types';
 
+/**
+ * A stat card: one figure, its label, and how it changed — on your `<dl>`:
+ * the label a `<dt>`, the value, change and description `<dd>`s. Numbers
+ * are written in `locale` (the app's).
+ */
 @Directive({
   selector: '[scStatCard]',
   host: {
+    'data-slot': 'stat-card',
     '[class]': 'class()',
-    '[attr.data-variant]': 'variant()',
   },
 })
 export class ScStatCard {
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly variant = input<ScStatCardVariant>('default');
-  readonly size = input<ScStatCardSize>('md');
+  /** The language its numbers are written in. */
+  readonly locale = input(inject(LOCALE_ID));
 
-  protected readonly class = computed(() => {
-    const variant = this.variant();
-    const size = this.size();
-
-    return cn(
-      'group/stat-card rounded-lg transition-colors',
-      // Variants
-      variant === 'default' && 'border bg-card text-card-foreground',
-      variant === 'outline' && 'border-2 bg-transparent',
-      variant === 'filled' && 'bg-primary text-primary-foreground',
-      // Sizes
-      size === 'sm' && 'p-4',
-      size === 'md' && 'p-6',
-      size === 'lg' && 'p-8',
+  protected readonly class = computed(() =>
+    cn(
+      'ring-foreground/10 bg-card text-card-foreground flex flex-wrap items-baseline gap-x-2 gap-y-1 rounded-xl p-4 text-sm ring-1',
       this.classInput(),
-    );
-  });
+    ),
+  );
 }
