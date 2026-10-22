@@ -25,8 +25,8 @@ import {
   ScCalendarNext,
   ScCalendarPrevious,
   type ScCalendarValue,
+  ScDateInput,
   ScDatePicker,
-  ScDatePickerInput,
   ScDatePickerTrigger,
   ScInputGroup,
   ScInputGroupAddon,
@@ -55,7 +55,7 @@ import {
     ScCalendarHeader,
     ScCalendarPrevious,
     ScCalendarNext,
-    ScDatePickerInput,
+    ScDateInput,
     SiCalendarIcon,
     SiChevronLeftIcon,
     SiChevronRightIcon,
@@ -72,7 +72,7 @@ import {
       <div scPopoverProvider [origin]="trigger.overlayOrigin" align="end">
         <div scInputGroup>
           <input
-            scDatePickerInput
+            scDateInput
             aria-label="Date d’arrivée"
             placeholder="jj/mm/aaaa"
           />

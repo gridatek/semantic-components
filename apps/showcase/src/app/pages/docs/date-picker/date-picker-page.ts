@@ -9,6 +9,7 @@ import { FormDatePickerDemoContainer } from './demos/form-date-picker-demo-conta
 import { LocaleDatePickerDemoContainer } from './demos/locale-date-picker-demo-container';
 import { MultipleDatePickerDemoContainer } from './demos/multiple-date-picker-demo-container';
 import { RangeDatePickerDemoContainer } from './demos/range-date-picker-demo-container';
+import { SegmentedDatePickerDemoContainer } from './demos/segmented-date-picker-demo-container';
 import { TypedDatePickerDemoContainer } from './demos/typed-date-picker-demo-container';
 
 @Component({
@@ -17,6 +18,7 @@ import { TypedDatePickerDemoContainer } from './demos/typed-date-picker-demo-con
     BasicDatePickerDemoContainer,
     BirthDatePickerDemoContainer,
     TypedDatePickerDemoContainer,
+    SegmentedDatePickerDemoContainer,
     RangeDatePickerDemoContainer,
     MultipleDatePickerDemoContainer,
     ConstraintsDatePickerDemoContainer,
@@ -54,6 +56,15 @@ import { TypedDatePickerDemoContainer } from './demos/typed-date-picker-demo-con
           button in the field opens the calendar.
         </p>
         <app-typed-date-picker-demo-container />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Segmented</h2>
+        <p class="text-muted-foreground">
+          scSegmentedDateInput in the picker: typed part by part, the picker’s
+          value — or picked. The button in the field opens the calendar.
+        </p>
+        <app-segmented-date-picker-demo-container />
       </section>
 
       <section class="space-y-4">

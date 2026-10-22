@@ -1015,6 +1015,60 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/date-input',
+    children: [
+      {
+        path: 'basic-date-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-input/demos/basic-date-input-demo').then(
+            (m) => m.BasicDateInputDemo,
+          ),
+      },
+      {
+        path: 'locale-date-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-input/demos/locale-date-input-demo').then(
+            (m) => m.LocaleDateInputDemo,
+          ),
+      },
+      {
+        path: 'limits-date-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-input/demos/limits-date-input-demo').then(
+            (m) => m.LimitsDateInputDemo,
+          ),
+      },
+      {
+        path: 'form-date-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-input/demos/form-date-input-demo').then(
+            (m) => m.FormDateInputDemo,
+          ),
+      },
+      {
+        path: 'disabled-date-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-input/demos/disabled-date-input-demo').then(
+            (m) => m.DisabledDateInputDemo,
+          ),
+      },
+      {
+        path: 'segmented-date-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-input/demos/segmented-date-input-demo').then(
+            (m) => m.SegmentedDateInputDemo,
+          ),
+      },
+      {
+        path: 'segmented-locale-date-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-input/demos/segmented-locale-date-input-demo').then(
+            (m) => m.SegmentedLocaleDateInputDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/date-picker',
     children: [
       {
@@ -1029,6 +1083,13 @@ export const demosRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/date-picker/demos/typed-date-picker-demo').then(
             (m) => m.TypedDatePickerDemo,
+          ),
+      },
+      {
+        path: 'segmented-date-picker-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-picker/demos/segmented-date-picker-demo').then(
+            (m) => m.SegmentedDatePickerDemo,
           ),
       },
       {

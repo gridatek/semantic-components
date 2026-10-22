@@ -272,6 +272,14 @@
     "category": "Data Display"
   },
   {
+    "name": "Date Input",
+    "path": "date-input",
+    "description": "A date typed as text, or part by part, in your language; a form field.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Forms"
+  },
+  {
     "name": "Date Picker",
     "path": "date-picker",
     "description": "A date picked in the calendar or typed, written in your language; a form field.",

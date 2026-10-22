@@ -27,7 +27,7 @@ import { ScDatePickerTrigger } from './date-picker-trigger';
 
 /**
  * A date, picked in a calendar in a popover — or typed
- * (`scDatePickerInput`; a range's ends: `part="start"` / `"end"`), or a
+ * (`scDateInput`; a range's ends: `part="start"` / `"end"`), or a
  * preset (`scDatePickerPreset`). Its value is the calendar's; `text()` is it
  * as written in the app's language. A `[formField]`. It closes on a pick (on
  * a whole range), focus back on its trigger — or, `confirm`, picks are a
@@ -104,7 +104,11 @@ export class ScDatePicker implements FormValueControl<ScCalendarValue> {
     }
     const { from, to } = value as ScCalendarRange;
     if (!from) return '';
-    return to ? formatter.formatRange(from, to) : formatter.format(from);
+    if (!to) return formatter.format(from);
+    // Typed ends can be out of order (marked by the input): the earlier first.
+    return Temporal.PlainDate.compare(from, to) <= 0
+      ? formatter.formatRange(from, to)
+      : formatter.formatRange(to, from);
   });
 
   readonly hasValue = computed(() => this.text() !== '');

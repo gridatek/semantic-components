@@ -25,8 +25,8 @@ import {
   ScCalendarNext,
   ScCalendarPrevious,
   type ScCalendarValue,
+  ScDateInput,
   ScDatePicker,
-  ScDatePickerInput,
   ScDatePickerTrigger,
   ScInputGroup,
   ScInputGroupAddon,
@@ -54,7 +54,7 @@ import {
     ScCalendarHeader,
     ScCalendarPrevious,
     ScCalendarNext,
-    ScDatePickerInput,
+    ScDateInput,
     ScInputGroup,
     ScInputGroupAddon,
     ScLabelText,
@@ -69,14 +69,14 @@ import {
         <div scPopoverProvider [origin]="trigger.overlayOrigin" align="end">
           <div scInputGroup aria-labelledby="stay-label">
             <input
-              scDatePickerInput
+              scDateInput
               part="start"
               aria-label="Check-in"
               placeholder="MM/DD/YYYY"
             />
             <span aria-hidden="true" class="text-muted-foreground">–</span>
             <input
-              scDatePickerInput
+              scDateInput
               part="end"
               aria-label="Check-out"
               placeholder="MM/DD/YYYY"

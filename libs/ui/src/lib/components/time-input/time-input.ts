@@ -1,6 +1,7 @@
 import {
   Component,
   ElementRef,
+  HostAttributeToken,
   LOCALE_ID,
   ViewEncapsulation,
   booleanAttribute,
@@ -91,6 +92,9 @@ const PLACEHOLDER = '––';
 })
 export class ScTimeInput implements FormValueControl<Temporal.PlainTime | null> {
   private readonly field = inject(SC_FIELD, { optional: true });
+  private readonly ariaLabel = inject(new HostAttributeToken('aria-label'), {
+    optional: true,
+  });
   private readonly host =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
@@ -123,7 +127,7 @@ export class ScTimeInput implements FormValueControl<Temporal.PlainTime | null> 
   protected readonly labelledBy = computed(
     () =>
       this.labelledByInput() ||
-      (this.field ? `${this.field.id()}-label` : null),
+      (this.field && !this.ariaLabel ? `${this.field.id()}-label` : null),
   );
   protected readonly describedBy = computed(
     () => this.field?.descriptionIds().join(' ') || null,
@@ -221,7 +225,7 @@ export class ScTimeInput implements FormValueControl<Temporal.PlainTime | null> 
       'has-[:focus-visible]:border-ring has-[:focus-visible]:ring-3 has-[:focus-visible]:ring-ring/50',
       'has-[[aria-invalid=true]]:border-destructive has-[[aria-invalid=true]]:ring-3 has-[[aria-invalid=true]]:ring-destructive/20 dark:has-[[aria-invalid=true]]:ring-destructive/40',
       'data-disabled:bg-input/50 data-disabled:cursor-not-allowed data-disabled:opacity-50',
-      'in-data-[slot=input-group]:h-full in-data-[slot=input-group]:flex-1 in-data-[slot=input-group]:rounded-none in-data-[slot=input-group]:border-0 in-data-[slot=input-group]:bg-transparent in-data-[slot=input-group]:ring-0 dark:in-data-[slot=input-group]:bg-transparent',
+      'in-data-[slot=input-group]:h-full in-data-[slot=input-group]:flex-1 in-data-[slot=input-group]:rounded-none in-data-[slot=input-group]:border-0 in-data-[slot=input-group]:bg-transparent in-data-[slot=input-group]:ring-0 in-data-[slot=input-group]:has-[:focus-visible]:ring-0 in-data-[slot=input-group]:has-[[aria-invalid=true]]:ring-0 dark:in-data-[slot=input-group]:bg-transparent',
       this.classInput(),
     ),
   );

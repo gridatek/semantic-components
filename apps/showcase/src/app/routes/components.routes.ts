@@ -203,6 +203,11 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/data-table/data-table-page'),
       },
       {
+        path: 'date-input',
+        title: 'Date Input - Semantic Components',
+        loadComponent: () => import('../pages/docs/date-input/date-input-page'),
+      },
+      {
         path: 'date-picker',
         title: 'Date Picker - Semantic Components',
         loadComponent: () =>

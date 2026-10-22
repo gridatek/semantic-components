@@ -5,8 +5,8 @@ import {
   ScCalendarNext,
   ScCalendarPrevious,
   type ScCalendarValue,
+  ScDateInput,
   ScDatePicker,
-  ScDatePickerInput,
   ScDatePickerTrigger,
   ScField,
   ScFieldDescription,
@@ -38,7 +38,7 @@ import {
     ScCalendarHeader,
     ScCalendarPrevious,
     ScCalendarNext,
-    ScDatePickerInput,
+    ScDateInput,
     ScField,
     ScFieldDescription,
     ScLabel,
@@ -52,7 +52,7 @@ import {
       <div scDatePicker #dp="scDatePicker" [maxDate]="adult" [(value)]="date">
         <div scPopoverProvider [origin]="trigger.overlayOrigin" align="end">
           <div scInputGroup>
-            <input scDatePickerInput placeholder="MM/DD/YYYY" />
+            <input scDateInput placeholder="MM/DD/YYYY" />
             <div scInputGroupAddon align="inline-end">
               <button scDatePickerTrigger #trigger="scDatePickerTrigger">
                 <svg siCalendarIcon></svg>

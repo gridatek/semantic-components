@@ -68,6 +68,21 @@ test('Typed: the locale’s order or ISO; unreadable text marked', async ({
   await expect(day(page, '2026-11-02')).toBeFocused();
 });
 
+test('Segmented: part by part, the picker’s value', async ({ page }) => {
+  await page.goto(demo('segmented'));
+  const input = page.getByRole('group', { name: 'Start date', exact: true });
+  const part = (name: string) =>
+    input.getByRole('spinbutton', { name, exact: true });
+  await expect(part('day')).toHaveText('14');
+  await part('month').focus();
+  for (const digit of '11022026') await press(page, digit);
+  await expect(picked(page)).toHaveText('Nov 2, 2026');
+  await page.getByRole('button', { name: 'Choose a date' }).click();
+  await expect(day(page, '2026-11-02')).toBeFocused();
+  await day(page, '2026-11-20').click();
+  await expect(part('day')).toHaveText('20');
+});
+
 test('Date of birth: opens on the years; 18 or older', async ({ page }) => {
   await page.goto(demo('birth'));
   await page.getByRole('button', { name: 'Choose your date of birth' }).click();

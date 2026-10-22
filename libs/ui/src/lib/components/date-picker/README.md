@@ -8,7 +8,8 @@ A day, a range or several days, picked in a calendar in a popover — or typed, 
 div[scDatePicker] (mode, [(value)] / [formField], format, locale,
 │                  minDate, maxDate, unavailable, confirm, disabled)
 │  text() · hasValue() · draft() · canApply() · pick(value) · apply() · cancel() · canPick(date)
-├── input[scDatePickerInput] (part)  — typed: the locale's numeric order, or ISO; a range: part="start" / "end"
+├── input[scDateInput] (part)  — typed: the locale's numeric order, or ISO; a range: part="start" / "end"
+│   (or div[scSegmentedDateInput] — typed part by part)
 └── div[scPopoverProvider]
     ├── button[scDatePickerTrigger]  — your icon and words
     └── ng-template[scPopoverPortal]
@@ -54,7 +55,7 @@ Typed, in a field — the input and the trigger in an input group; there the tri
   <div scDatePicker #dp="scDatePicker" [formField]="form.start">
     <div scPopoverProvider [origin]="trigger.overlayOrigin" align="end">
       <div scInputGroup>
-        <input scDatePickerInput placeholder="MM/DD/YYYY" />
+        <input scDateInput placeholder="MM/DD/YYYY" />
         <div scInputGroupAddon align="inline-end">
           <button scDatePickerTrigger #trigger="scDatePickerTrigger">
             <svg siCalendarIcon></svg>
@@ -105,7 +106,9 @@ Typed, in a field — the input and the trigger in an input group; there the tri
 
 Looks like a select trigger (`size`: default, sm) — in an input group, an icon button (`variant`, `buttonSize`). Opens and closes the popover. `aria-haspopup="dialog"`, `aria-expanded`, `aria-invalid`; `data-placeholder` while there is no value.
 
-### ScDatePickerInput — `input[scDatePickerInput]`
+### Typed — `input[scDateInput]` or `div[scSegmentedDateInput]`
+
+A [date input](../date-input/README.md) in the picker is the picker's value; put `[formField]` on the picker. The text one — the segmented one works the same way, part by part (a day it can't pick is written and marked):
 
 Single mode — or, in range mode, one end: `part="start"` / `part="end"` (an end before the start, or a start after the end, is not one; an empty start clears the range). Read on Enter and on leaving: the locale's numeric order (`10/14/2026`, `14/10/2026`, `14.10.2026`) or ISO (`2026-10-14`); a two-digit year is 20xx. Text that is not a day that can be picked stays, marked `aria-invalid`, until it is edited. Shows the value in the locale's numeric form. Takes its id and description from `scField`.
 
