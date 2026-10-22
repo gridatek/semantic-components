@@ -260,9 +260,7 @@ is a bug, not a style choice — the repo is RTL-first by policy.
 
 Known deliberate divergences — do **not** "fix" these to match upstream:
 
-- **`--destructive`** is darkened to `oklch(0.52 0.245 27.325)` (shadcn ships
-  `0.577`) so that the `bg-destructive/10 text-destructive` pairing clears the
-  4.5:1 WCAG AA contrast minimum.
+- **The theme is each app's** (`apps/*/src/styles.css`), not the library's: shadcn's colors exactly — from the generated reference app (`shadcn-reference`) — plus our `--success` / `--warning` (the toast's).
 - **Decomposition** — upstream ships one file per component; we split into
   composable directives, so one shadcn class often maps to several of our
   directives.

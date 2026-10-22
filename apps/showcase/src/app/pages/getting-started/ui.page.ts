@@ -56,15 +56,10 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
       <section class="space-y-4">
         <h2 scHeading appToc>2. Configure styles</h2>
         <p class="text-muted-foreground">
-          Set up the theme styles for your project. Pick one of the two options
-          below.
-        </p>
-
-        <h3 class="text-lg font-medium">Option A: Default theme</h3>
-        <p class="text-muted-foreground">
-          Import the pre-built styles in your
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code
-          >. This includes the default shadcn theme and Angular CDK styles.
+          As in shadcn/ui, the theme is your app's: its
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code>
+          imports Tailwind, tw-animate-css and shadcn's utilities — then the
+          library's styles (the Angular CDK overlay, reduced motion):
         </p>
         <div scCodeViewer>
           <div scCodeViewerHeader>
@@ -73,7 +68,7 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
               scButton
               variant="ghost"
               size="icon"
-              [scCopyToClipboard]="stylesDefaultCode"
+              [scCopyToClipboard]="stylesImportsCode"
               #copy2="scCopyToClipboard"
             >
               @if (copy2.copied()) {
@@ -86,18 +81,15 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
           </div>
           <div
             scCodeViewerContent
-            [code]="stylesDefaultCode"
+            [code]="stylesImportsCode"
             language="css"
           ></div>
         </div>
 
-        <h3 class="text-lg font-medium">Option B: Custom theme</h3>
         <p class="text-muted-foreground">
-          For full control over colors, border radius, and other design tokens,
-          copy the CSS variables from the shadcn/ui manual installation guide
-          into your
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code
-          >:
+          Below them, add a shadcn theme — its design tokens: colors, radius,
+          fonts. Take it from the manual installation guide, or from any shadcn
+          theme:
         </p>
         <a
           scLink
@@ -109,7 +101,12 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
           shadcn/ui - Manual Installation (Configure styles)
         </a>
         <p class="text-muted-foreground">
-          You also need to import the Angular CDK overlay styles manually:
+          Then add what shadcn's theme does not have: the toast's success and
+          warning colors, and
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >interpolate-size</code
+          >
+          so collapsibles can animate their height:
         </p>
         <div scCodeViewer>
           <div scCodeViewerHeader>
@@ -118,7 +115,7 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
               scButton
               variant="ghost"
               size="icon"
-              [scCopyToClipboard]="stylesCustomCdkCode"
+              [scCopyToClipboard]="stylesTokensCode"
               #copy3="scCopyToClipboard"
             >
               @if (copy3.copied()) {
@@ -131,7 +128,7 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
           </div>
           <div
             scCodeViewerContent
-            [code]="stylesCustomCdkCode"
+            [code]="stylesTokensCode"
             language="css"
           ></div>
         </div>
@@ -266,10 +263,31 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
   encapsulation: ViewEncapsulation.None,
 })
 export default class UiPage {
-  readonly stylesDefaultCode = '@import "@semantic-components/ui/styles";';
+  readonly stylesImportsCode = `@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@semantic-components/ui/styles";`;
 
-  readonly stylesCustomCdkCode =
-    "@import url('@angular/cdk/overlay-prebuilt.css');";
+  readonly stylesTokensCode = `@theme inline {
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+}
+
+:root {
+  --success: oklch(0.49 0.14 150);
+  --warning: oklch(0.52 0.15 49);
+}
+
+.dark {
+  --success: oklch(0.792 0.209 151.711);
+  --warning: oklch(0.828 0.189 84.429);
+}
+
+@layer base {
+  * {
+    interpolate-size: allow-keywords;
+  }
+}`;
 
   readonly sourceCode = '@source "../node_modules/@semantic-components/ui";';
 
