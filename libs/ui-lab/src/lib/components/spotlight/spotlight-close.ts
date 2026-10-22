@@ -3,29 +3,36 @@ import {
   type ScButtonVariants,
   buttonVariants,
   cn,
+  ɵwarnIfUnnamed,
 } from '@semantic-components/ui';
-import { ScSpotlightState } from './spotlight-state';
+import { ScSpotlight } from './spotlight';
 
+/** Closes the spotlight. Write its icon and name it ("Close"); placed in the card's corner. */
 @Directive({
   selector: 'button[scSpotlightClose]',
   host: {
     type: 'button',
+    'data-slot': 'spotlight-close',
     '[class]': 'class()',
-    '(click)': 'state.close()',
+    '(click)': 'spotlight.close()',
   },
 })
 export class ScSpotlightClose {
-  readonly classInput = input<string>('', { alias: 'class' });
-  readonly variant = input<ScButtonVariants['variant']>('outline');
-  readonly size = input<ScButtonVariants['size']>('icon');
+  protected readonly spotlight = inject(ScSpotlight);
 
-  protected readonly state = inject(ScSpotlightState);
+  readonly classInput = input<string>('', { alias: 'class' });
+  readonly variant = input<ScButtonVariants['variant']>('ghost');
+  readonly size = input<ScButtonVariants['size']>('icon-sm');
 
   protected readonly class = computed(() =>
     cn(
       buttonVariants({ variant: this.variant(), size: this.size() }),
-      'absolute top-4 end-4 z-10 rounded-full shadow-lg',
+      'absolute end-2 top-2',
       this.classInput(),
     ),
   );
+
+  constructor() {
+    ɵwarnIfUnnamed('scSpotlightClose');
+  }
 }

@@ -28,7 +28,6 @@ export * from './scheduler';
 export * from './signature-pad';
 export * from './speed-dial';
 export * from './spotlight';
-export * from './spotlight-next';
 export * from './stat-card';
 export * from './stepper';
 export * from './tags-input';

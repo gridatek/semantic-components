@@ -1,7 +1,6 @@
 import { type Page, expect, test } from '@playwright/test';
 
-const demo = (name: string) =>
-  `/demos/spotlight-next/${name}-spotlight-next-demo`;
+const demo = (name: string) => `/demos/spotlight/${name}-spotlight-demo`;
 const dialog = (page: Page) => page.getByRole('dialog');
 const card = (page: Page) => page.locator('[data-slot="spotlight-card"]');
 const isOpen = (page: Page) =>

@@ -826,15 +826,7 @@
   {
     "name": "Spotlight",
     "path": "spotlight",
-    "description": "A spotlight search interface.",
-    "status": "Experimental",
-    "library": "ui-lab",
-    "category": "Overlay"
-  },
-  {
-    "name": "Spotlight Next",
-    "path": "spotlight-next",
-    "description": "The spotlight, rebuilt: one element lit, your content in a native dialog; modal, or interactive through the cutout.",
+    "description": "One element lit, your content in a native dialog; modal, or interactive through the cutout.",
     "status": "Experimental",
     "library": "ui-lab",
     "category": "Overlay"

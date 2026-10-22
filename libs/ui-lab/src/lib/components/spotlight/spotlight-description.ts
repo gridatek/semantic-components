@@ -1,19 +1,34 @@
-import { Directive, computed, inject, input } from '@angular/core';
+import { _IdGenerator } from '@angular/cdk/a11y';
+import { DestroyRef, Directive, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { ScSpotlightState } from './spotlight-state';
+import { ScSpotlight } from './spotlight';
 
+/** Its text: the spotlight describes its dialog with it. */
 @Directive({
   selector: '[scSpotlightDescription]',
   host: {
+    'data-slot': 'spotlight-description',
+    '[id]': 'id',
     '[class]': 'class()',
-    '[id]': 'state.descriptionId',
   },
 })
 export class ScSpotlightDescription {
-  protected readonly state = inject(ScSpotlightState);
+  protected readonly id = inject(_IdGenerator).getId(
+    'sc-spotlight-description-',
+  );
+
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('text-sm text-muted-foreground', this.classInput()),
+    cn('text-muted-foreground text-sm', this.classInput()),
   );
+
+  constructor() {
+    const spotlight = inject(ScSpotlight);
+    spotlight.ɵdescriptionId.set(this.id);
+    inject(DestroyRef).onDestroy(() => {
+      if (spotlight.ɵdescriptionId() === this.id)
+        spotlight.ɵdescriptionId.set(null);
+    });
+  }
 }

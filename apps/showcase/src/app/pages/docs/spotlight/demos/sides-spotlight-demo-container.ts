@@ -1,47 +1,49 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { SidesSpotlightNextDemo } from './sides-spotlight-next-demo';
+import { SidesSpotlightDemo } from './sides-spotlight-demo';
 
 @Component({
-  selector: 'app-sides-spotlight-next-demo-container',
-  imports: [DemoContainer, SidesSpotlightNextDemo],
+  selector: 'app-sides-spotlight-demo-container',
+  imports: [DemoContainer, SidesSpotlightDemo],
   template: `
     <app-demo-container
       title="Sides"
       [code]="code"
-      demoUrl="/demos/spotlight-next/sides-spotlight-next-demo"
+      demoUrl="/demos/spotlight/sides-spotlight-demo"
     >
-      <app-sides-spotlight-next-demo />
+      <app-sides-spotlight-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class SidesSpotlightNextDemoContainer {
+export class SidesSpotlightDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
 import {
   type ScPlacementSide,
-  ScSpotlightNext,
-  ScSpotlightNextClose,
-  ScSpotlightNextDescription,
-  ScSpotlightNextTitle,
+  ScSpotlight,
+  ScSpotlightClose,
+  ScSpotlightDescription,
+  ScSpotlightTitle,
 } from '@semantic-components/ui-lab';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 /** The card on the side you ask — logical, start and end follow the direction — flipping when there is no room. */
 @Component({
-  selector: 'app-sides-spotlight-next-demo',
+  selector: 'app-sides-spotlight-demo',
   imports: [
-    ScSpotlightNext,
-    ScSpotlightNextTitle,
-    ScSpotlightNextDescription,
-    ScSpotlightNextClose,
+    ScSpotlight,
+    ScSpotlightTitle,
+    ScSpotlightDescription,
+    ScSpotlightClose,
     ScButton,
     SiXIcon,
   ],
   template: \`
-    <div class="grid w-full max-w-xl place-items-center rounded-lg border py-48">
+    <div
+      class="grid w-full max-w-xl place-items-center rounded-lg border py-48"
+    >
       <div #target class="bg-muted rounded-md px-6 py-3 text-sm font-medium">
         The target
       </div>
@@ -59,20 +61,13 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
       }
     </div>
 
-    <div
-      scSpotlightNext
-      #spot="scSpotlightNext"
-      [for]="target"
-      [side]="side$()"
-    >
-      <button scSpotlightNextClose>
+    <div scSpotlight #spot="scSpotlight" [for]="target" [side]="side$()">
+      <button scSpotlightClose>
         <svg siXIcon></svg>
         <span class="sr-only">Close</span>
       </button>
-      <h2 scSpotlightNextTitle class="pe-6 font-semibold">
-        On the {{ side$() }}
-      </h2>
-      <p scSpotlightNextDescription class="text-muted-foreground text-sm">
+      <h2 scSpotlightTitle class="pe-6 font-semibold">On the {{ side$() }}</h2>
+      <p scSpotlightDescription class="text-muted-foreground text-sm">
         Asked: {{ side$() }}.
       </p>
     </div>
@@ -80,7 +75,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
   host: { class: 'flex w-full flex-col items-center gap-4' },
   encapsulation: ViewEncapsulation.None,
 })
-export class SidesSpotlightNextDemo {
+export class SidesSpotlightDemo {
   readonly sides = ['top', 'bottom', 'start', 'end'] as const;
   readonly side$ = signal<ScPlacementSide>('bottom');
 }`;

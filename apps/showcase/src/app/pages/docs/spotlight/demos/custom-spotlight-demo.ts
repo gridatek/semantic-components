@@ -1,21 +1,21 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
 import {
-  ScSpotlightNext,
-  ScSpotlightNextClose,
-  ScSpotlightNextDescription,
-  ScSpotlightNextTitle,
+  ScSpotlight,
+  ScSpotlightClose,
+  ScSpotlightDescription,
+  ScSpotlightTitle,
 } from '@semantic-components/ui-lab';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 /** The dim and the cutout are classes: here a round cutout around an avatar, and a deeper dim. */
 @Component({
-  selector: 'app-custom-spotlight-next-demo',
+  selector: 'app-custom-spotlight-demo',
   imports: [
-    ScSpotlightNext,
-    ScSpotlightNextTitle,
-    ScSpotlightNextDescription,
-    ScSpotlightNextClose,
+    ScSpotlight,
+    ScSpotlightTitle,
+    ScSpotlightDescription,
+    ScSpotlightClose,
     ScButton,
     SiXIcon,
   ],
@@ -31,19 +31,19 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
     <button scButton (click)="spot.show()">Meet your profile</button>
 
     <div
-      scSpotlightNext
-      #spot="scSpotlightNext"
+      scSpotlight
+      #spot="scSpotlight"
       [for]="avatar"
       [padding]="6"
       side="end"
       dimClass="rounded-full shadow-[0_0_0_200vmax_rgb(0_0_0/0.75)]"
     >
-      <button scSpotlightNextClose>
+      <button scSpotlightClose>
         <svg siXIcon></svg>
         <span class="sr-only">Close</span>
       </button>
-      <h2 scSpotlightNextTitle class="pe-6 font-semibold">Your profile</h2>
-      <p scSpotlightNextDescription class="text-muted-foreground text-sm">
+      <h2 scSpotlightTitle class="pe-6 font-semibold">Your profile</h2>
+      <p scSpotlightDescription class="text-muted-foreground text-sm">
         Your picture, your name, and how others see you.
       </p>
     </div>
@@ -51,4 +51,4 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
   host: { class: 'flex w-full flex-col items-center gap-4' },
   encapsulation: ViewEncapsulation.None,
 })
-export class CustomSpotlightNextDemo {}
+export class CustomSpotlightDemo {}

@@ -1,10 +1,4 @@
 export { ScSpotlight } from './spotlight';
-export type { ScSpotlightOptions } from './spotlight';
-export { ScSpotlightState } from './spotlight-state';
-export { ScSpotlightMask } from './spotlight-mask';
-export { ScSpotlightHighlight } from './spotlight-highlight';
 export { ScSpotlightClose } from './spotlight-close';
-export { ScSpotlightTooltip } from './spotlight-tooltip';
-export { ScSpotlightTitle } from './spotlight-title';
 export { ScSpotlightDescription } from './spotlight-description';
-export { ScSpotlightActions } from './spotlight-actions';
+export { ScSpotlightTitle } from './spotlight-title';

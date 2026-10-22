@@ -1,136 +1,49 @@
 # Spotlight
 
-Highlight specific UI elements with a spotlight overlay effect for feature discovery and user guidance.
+One element lit, the page dimmed, your content beside it in a native dialog — modal, or interactive: the element still usable through the cutout.
+
+## Architecture
+
+```
+[scSpotlight] #spot (for · open — two-way · side · padding · interactive · dimClass · cardClass)   show() · close()
+├── your content: [scSpotlightTitle], [scSpotlightDescription], your buttons
+└── button[scSpotlightClose]
+```
 
 ## Usage
 
 ```html
-<button (click)="spotlight.show('#my-element')">Show Spotlight</button>
+<button #export>Export</button>
+<button (click)="spot.show()">What's new</button>
 
-<sc-spotlight #spotlight [padding]="12">
-  <sc-spotlight-title>Feature Title</sc-spotlight-title>
-  <sc-spotlight-description>Description of the highlighted feature.</sc-spotlight-description>
-  <sc-spotlight-actions>
-    <button (click)="spotlight.close()">Got it</button>
-  </sc-spotlight-actions>
-</sc-spotlight>
+<div scSpotlight #spot="scSpotlight" [for]="export">
+  <button scSpotlightClose><svg siXIcon></svg><span class="sr-only">Close</span></button>
+  <h2 scSpotlightTitle>Export, now as PDF</h2>
+  <p scSpotlightDescription>Your reports, ready to send.</p>
+  <button (click)="spot.close()">Got it</button>
+</div>
 ```
 
-## API
+## Modal, or interactive
 
-### ScSpotlight
+- Modal (default): a native modal dialog — the page inert, Escape or a click on the dim closes, focus goes back.
+- `interactive`: the element stays usable through the cutout — click it, type in it; the rest is blocked by the dim, whose click closes. A non-modal dialog: focus goes to the card and can go to the element; Escape closes wherever focus is.
 
-| Input                 | Type                | Default    | Description                                     |
-| --------------------- | ------------------- | ---------- | ----------------------------------------------- |
-| `target`              | `string \| Element` | `null`     | CSS selector or Element                         |
-| `aria-label`          | attribute           | none       | Dialog name when there is no `scSpotlightTitle` |
-| `padding`             | `number`            | `8`        | Padding around highlighted area                 |
-| `borderRadius`        | `number`            | `8`        | Border radius of spotlight                      |
-| `overlayOpacity`      | `number`            | `0.75`     | Overlay darkness (0-1)                          |
-| `animationDuration`   | `number`            | `300`      | Animation duration in ms                        |
-| `showClose`           | `boolean`           | `true`     | Show close button                               |
-| `closeOnOverlayClick` | `boolean`           | `true`     | Close when clicking overlay                     |
-| `closeOnEscape`       | `boolean`           | `true`     | Close on Escape key                             |
-| `scrollIntoView`      | `boolean`           | `true`     | Scroll target into view                         |
-| `scrollBehavior`      | `ScrollBehavior`    | `'smooth'` | Scroll animation type                           |
-| `contentPlacement`    | `string`            | `'auto'`   | Position of content panel                       |
-| `class`               | `string`            | `''`       | Additional CSS classes                          |
+## Placement
 
-| Output   | Type   | Description                 |
-| -------- | ------ | --------------------------- |
-| `opened` | `void` | Emits when spotlight opens  |
-| `closed` | `void` | Emits when spotlight closes |
+The card goes on `side` (`top`, `bottom`, `start`, `end` — logical), flips when there is no room, then shifts to stay on screen; `data-side` says where. The element is scrolled into view (smoothly; at once for reduced motion); everything follows scrolling, resizing and the element changing size. It appears in place, then moves smoothly. Without `for`, the card is centred.
 
-| Method   | Type                          | Description               |
-| -------- | ----------------------------- | ------------------------- |
-| `show`   | `(target: string \| Element)` | Show spotlight on element |
-| `hide`   | `() => void`                  | Hide the spotlight        |
-| `toggle` | `(target: string \| Element)` | Toggle visibility         |
-| `close`  | `() => void`                  | Close the spotlight       |
+Shared with Tour Guide: `spotlightPlacement()` (`@semantic-components/ui-lab`).
 
-### ScSpotlightTitle
+## Look
 
-Styled title for the spotlight content.
-
-### ScSpotlightDescription
-
-Styled description text for the spotlight content.
-
-### ScSpotlightActions
-
-Container for action buttons with proper spacing.
-
-## Examples
-
-### Basic Spotlight
-
-```html
-<button (click)="spotlight.show('#feature-card')">Highlight Feature</button>
-
-<sc-spotlight #spotlight>
-  <sc-spotlight-title>New Feature!</sc-spotlight-title>
-  <sc-spotlight-description>Check out this exciting new capability.</sc-spotlight-description>
-</sc-spotlight>
-```
-
-### With Custom Styling
-
-```html
-<sc-spotlight #spotlight [padding]="16" [borderRadius]="12" [overlayOpacity]="0.85">
-  <sc-spotlight-title>Premium Feature</sc-spotlight-title>
-  <sc-spotlight-description>Upgrade to access this feature.</sc-spotlight-description>
-  <sc-spotlight-actions>
-    <button (click)="spotlight.close()">Maybe Later</button>
-    <button (click)="upgrade()">Upgrade Now</button>
-  </sc-spotlight-actions>
-</sc-spotlight>
-```
-
-### Programmatic Target
-
-```typescript
-// Using CSS selector
-spotlight.show('#my-element');
-
-// Using Element reference
-const element = document.querySelector('.my-class');
-spotlight.show(element);
-```
-
-### Input-Driven
-
-```html
-<sc-spotlight [target]="activeTarget()">
-  <!-- Content automatically updates when target changes -->
-</sc-spotlight>
-```
-
-```typescript
-activeTarget = signal<string | null>(null);
-
-highlightElement(selector: string) {
-  this.activeTarget.set(selector);
-}
-
-clearHighlight() {
-  this.activeTarget.set(null);
-}
-```
-
-## Features
-
-- SVG mask-based overlay with spotlight cutout
-- Animated pulse effect on highlighted element
-- Auto-positioning content panel
-- Customizable padding, border radius, and opacity
-- Close on overlay click or Escape key
-- Scroll target into view automatically
-- ResizeObserver for dynamic element tracking
-- Content slot for custom tooltips and actions
-- Smooth enter/exit animations
+`dimClass`: the dim and the cutout (`rounded-full`, a deeper `shadow-[0_0_0_200vmax_rgb(0_0_0/0.75)]`). `cardClass`: the card.
 
 ## Accessibility
 
-- `role="dialog"` with `aria-modal="true"`, named by `scSpotlightTitle` (`aria-labelledby`) and described by `scSpotlightDescription`; without a title, by the `aria-label` input (default "Spotlight").
-- On open, focus moves into the spotlight and Tab is trapped inside it; on close (Escape, overlay click, close button) focus returns to the element that opened it.
-- Escape closes it unless `closeOnEscape` is `false`.
+- The dialog is named by `scSpotlightTitle`, described by `scSpotlightDescription`.
+- Name the close button.
+
+## Not here
+
+Several elements at once, beacons. A sequence of spotlights is a tour (Tour Guide).

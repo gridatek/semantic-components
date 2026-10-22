@@ -3338,57 +3338,24 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'custom-overlay-spotlight-demo',
-        loadComponent: () =>
-          import('../pages/docs/spotlight/demos/custom-overlay-spotlight-demo').then(
-            (m) => m.CustomOverlaySpotlightDemo,
-          ),
-      },
-      {
-        path: 'placement-spotlight-demo',
-        loadComponent: () =>
-          import('../pages/docs/spotlight/demos/placement-spotlight-demo').then(
-            (m) => m.PlacementSpotlightDemo,
-          ),
-      },
-      {
         path: 'interactive-spotlight-demo',
         loadComponent: () =>
           import('../pages/docs/spotlight/demos/interactive-spotlight-demo').then(
             (m) => m.InteractiveSpotlightDemo,
           ),
       },
-    ],
-  },
-  {
-    path: 'demos/spotlight-next',
-    children: [
       {
-        path: 'basic-spotlight-next-demo',
+        path: 'sides-spotlight-demo',
         loadComponent: () =>
-          import('../pages/docs/spotlight-next/demos/basic-spotlight-next-demo').then(
-            (m) => m.BasicSpotlightNextDemo,
+          import('../pages/docs/spotlight/demos/sides-spotlight-demo').then(
+            (m) => m.SidesSpotlightDemo,
           ),
       },
       {
-        path: 'interactive-spotlight-next-demo',
+        path: 'custom-spotlight-demo',
         loadComponent: () =>
-          import('../pages/docs/spotlight-next/demos/interactive-spotlight-next-demo').then(
-            (m) => m.InteractiveSpotlightNextDemo,
-          ),
-      },
-      {
-        path: 'sides-spotlight-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/spotlight-next/demos/sides-spotlight-next-demo').then(
-            (m) => m.SidesSpotlightNextDemo,
-          ),
-      },
-      {
-        path: 'custom-spotlight-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/spotlight-next/demos/custom-spotlight-next-demo').then(
-            (m) => m.CustomSpotlightNextDemo,
+          import('../pages/docs/spotlight/demos/custom-spotlight-demo').then(
+            (m) => m.CustomSpotlightDemo,
           ),
       },
     ],

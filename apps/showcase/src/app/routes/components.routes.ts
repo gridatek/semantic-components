@@ -561,12 +561,6 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/spotlight/spotlight-page'),
       },
       {
-        path: 'spotlight-next',
-        title: 'Spotlight Next - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/spotlight-next/spotlight-next-page'),
-      },
-      {
         path: 'stat-card',
         title: 'Stat Card - Semantic Components',
         loadComponent: () => import('../pages/docs/stat-card/stat-card-page'),
