@@ -10,7 +10,7 @@ import { ScConfettiTrigger } from '@semantic-components/ui-lab/confetti';
     <button
       scButton
       confettiEffect="fireworks"
-      [scConfetti]="{ duration: 3000 }"
+      [scConfettiTrigger]="{ duration: 3000 }"
     >
       Fireworks
     </button>

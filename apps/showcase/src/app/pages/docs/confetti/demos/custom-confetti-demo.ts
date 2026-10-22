@@ -10,7 +10,7 @@ import { ScConfettiTrigger } from '@semantic-components/ui-lab/confetti';
     <button
       scButton
       variant="outline"
-      [scConfetti]="{
+      [scConfettiTrigger]="{
         colors: ['#f43f5e', '#f59e0b', '#10b981', 'oklch(0.6 0.2 260)'],
         shapes: ['circle', 'square'],
         size: 1.4,

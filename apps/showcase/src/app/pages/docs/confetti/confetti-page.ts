@@ -66,7 +66,7 @@ import { SidesConfettiDemoContainer } from './demos/sides-confetti-demo-containe
       <section class="space-y-4">
         <h2 scHeading appToc>Burst</h2>
         <p class="text-muted-foreground">
-          scConfetti on a button: a click bursts from it, in the theme’s
+          scConfettiTrigger on a button: a click bursts from it, in the theme’s
           colours. Decorative — hidden from screen readers, never in the way,
           and none for reduced motion.
         </p>

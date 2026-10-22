@@ -27,7 +27,7 @@ import { ScConfettiTrigger } from '@semantic-components/ui-lab/confetti';
   selector: 'app-sides-confetti-demo',
   imports: [ScConfettiTrigger, ScButton],
   template: \`
-    <button scButton scConfetti confettiEffect="sides">Launch</button>
+    <button scButton scConfettiTrigger confettiEffect="sides">Launch</button>
   \`,
   host: { class: 'flex min-h-72 w-full items-center justify-center' },
   encapsulation: ViewEncapsulation.None,

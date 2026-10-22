@@ -19,9 +19,9 @@ import { ScConfetti, ScConfettiTrigger } from '@semantic-components/ui-lab/confe
 On a click — a burst from the element:
 
 ```html
-<button scButton scConfetti>Celebrate</button>
-<button scButton scConfetti confettiEffect="sides">Launch</button>
-<button scButton confettiEffect="fireworks" [scConfetti]="{ duration: 3000 }">Fireworks</button>
+<button scButton scConfettiTrigger>Celebrate</button>
+<button scButton scConfettiTrigger confettiEffect="sides">Launch</button>
+<button scButton confettiEffect="fireworks" [scConfettiTrigger]="{ duration: 3000 }">Fireworks</button>
 ```
 
 From code:
@@ -61,7 +61,7 @@ Each settles when the confetti has fallen.
 | `gravity`  | 1 is the usual.                                                                                    |
 | `duration` | Fireworks only, in milliseconds.                                                                   |
 
-## `[scConfetti]`
+## `[scConfettiTrigger]`
 
 On any element: a click sets it off. Its value is the options; `confettiEffect` is `burst` (default — from the element), `sides` or `fireworks`. Behaviour only: the element keeps its own look.
 

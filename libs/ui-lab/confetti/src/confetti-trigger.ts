@@ -5,13 +5,13 @@ import { ScConfetti, type ScConfettiFireworksOptions } from './confetti';
 export type ScConfettiEffect = 'burst' | 'sides' | 'fireworks';
 
 /**
- * Confetti on a click: `[scConfetti]` on a button (or any element) — a
+ * Confetti on a click: `[scConfettiTrigger]` on a button (or any element) — a
  * burst from its centre by default, its value the options. Behaviour only:
  * the element keeps its own look.
  */
 @Directive({
-  selector: '[scConfetti]',
-  exportAs: 'scConfetti',
+  selector: '[scConfettiTrigger]',
+  exportAs: 'scConfettiTrigger',
   host: {
     '(click)': 'fire()',
   },
@@ -21,7 +21,7 @@ export class ScConfettiTrigger {
   private readonly element = inject(ElementRef).nativeElement as Element;
 
   readonly options = input<ScConfettiFireworksOptions | ''>('', {
-    alias: 'scConfetti',
+    alias: 'scConfettiTrigger',
   });
   readonly effect = input<ScConfettiEffect>('burst', {
     alias: 'confettiEffect',
