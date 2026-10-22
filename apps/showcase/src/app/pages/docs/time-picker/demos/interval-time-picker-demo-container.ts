@@ -1,4 +1,24 @@
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { IntervalTimePickerDemo } from './interval-time-picker-demo';
+
+@Component({
+  selector: 'app-interval-time-picker-demo-container',
+  imports: [DemoContainer, IntervalTimePickerDemo],
+  template: `
+    <app-demo-container
+      title="Interval and limits"
+      [code]="code"
+      demoUrl="/demos/time-picker/interval-time-picker-demo"
+    >
+      <app-interval-time-picker-demo />
+    </app-demo-container>
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class IntervalTimePickerDemoContainer {
+  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScField,
   ScInputGroup,
@@ -8,19 +28,19 @@ import {
   ScPopoverPortal,
   ScPopoverProvider,
   ScTimeInput,
-  ScTimePickerNext,
-  ScTimePickerNextList,
-  ScTimePickerNextTrigger,
+  ScTimePicker,
+  ScTimePickerList,
+  ScTimePickerTrigger,
 } from '@semantic-components/ui';
 import { SiClockIcon } from '@semantic-icons/lucide-icons';
 
 /** interval: 15 minutes between the times; the input’s minTime and maxTime bound the list too. */
 @Component({
-  selector: 'app-interval-time-picker-next-demo',
+  selector: 'app-interval-time-picker-demo',
   imports: [
-    ScTimePickerNext,
-    ScTimePickerNextTrigger,
-    ScTimePickerNextList,
+    ScTimePicker,
+    ScTimePickerTrigger,
+    ScTimePickerList,
     ScTimeInput,
     ScInputGroup,
     ScInputGroupAddon,
@@ -31,10 +51,10 @@ import { SiClockIcon } from '@semantic-icons/lucide-icons';
     ScLabel,
     SiClockIcon,
   ],
-  template: `
+  template: \`
     <div scField class="w-44">
       <label scLabel>Pickup</label>
-      <div scTimePickerNext [interval]="15">
+      <div scTimePicker [interval]="15">
         <div scPopoverProvider [origin]="trigger.overlayOrigin" align="end">
           <div scInputGroup>
             <div
@@ -45,10 +65,7 @@ import { SiClockIcon } from '@semantic-icons/lucide-icons';
               [(value)]="time"
             ></div>
             <div scInputGroupAddon align="inline-end">
-              <button
-                scTimePickerNextTrigger
-                #trigger="scTimePickerNextTrigger"
-              >
+              <button scTimePickerTrigger #trigger="scTimePickerTrigger">
                 <svg siClockIcon></svg>
                 <span class="sr-only">Choose a time</span>
               </button>
@@ -56,7 +73,7 @@ import { SiClockIcon } from '@semantic-icons/lucide-icons';
           </div>
           <ng-template scPopoverPortal>
             <div scPopover class="w-auto p-0" aria-label="Choose a time">
-              <div scTimePickerNextList aria-label="Times"></div>
+              <div scTimePickerList aria-label="Times"></div>
             </div>
           </ng-template>
         </div>
@@ -65,12 +82,13 @@ import { SiClockIcon } from '@semantic-icons/lucide-icons';
     <p class="text-muted-foreground text-sm" data-testid="picked">
       {{ time()?.toString() ?? 'No time.' }}
     </p>
-  `,
+  \`,
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class IntervalTimePickerNextDemo {
+export class IntervalTimePickerDemo {
   readonly open = Temporal.PlainTime.from('08:00');
   readonly close = Temporal.PlainTime.from('12:00');
   readonly time = signal<Temporal.PlainTime | null>(null);
+}`;
 }

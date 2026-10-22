@@ -1,82 +1,128 @@
+import { DOCUMENT } from '@angular/common';
 import {
   Directive,
-  InjectionToken,
+  ElementRef,
   computed,
+  contentChild,
+  effect,
+  forwardRef,
+  inject,
   input,
-  model,
+  untracked,
 } from '@angular/core';
 import { cn } from '../../utils';
+import { ScPopoverProvider } from '../popover';
+import { ScTimeInput } from '../time-input';
+import { ScTimePickerTrigger } from './time-picker-trigger';
 
-export type ScTimeFormat = '12h' | '24h';
-export type ScTimePeriod = 'AM' | 'PM';
-
-export interface ScTimeValue {
-  hours: number;
-  minutes: number;
-  seconds?: number;
-  period?: ScTimePeriod;
-}
-
-export const SC_TIME_PICKER = new InjectionToken<ScTimePicker>(
-  'SC_TIME_PICKER',
-);
-
+/**
+ * A time — typed in its `scTimeInput`, or picked from a list of times
+ * (`scTimePickerList`, every `interval` minutes, within the input's
+ * `minTime` / `maxTime`) in a popover. The value, the locale and the limits
+ * are the input's: put `[formField]` on it. A pick closes the list, focus back
+ * on the trigger.
+ */
 @Directive({
-  selector: '[scTimePicker]',
-  providers: [{ provide: SC_TIME_PICKER, useExisting: ScTimePicker }],
+  selector: 'div[scTimePicker]',
+  exportAs: 'scTimePicker',
   host: {
+    'data-slot': 'time-picker',
     '[class]': 'class()',
   },
 })
 export class ScTimePicker {
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly format = input<ScTimeFormat>('12h');
-  readonly showSeconds = input<boolean>(false);
-  readonly disabled = input<boolean>(false);
-  readonly value = model<ScTimeValue | null>(null);
+  /** Minutes between the times in the list. */
+  readonly interval = input(30);
 
-  protected readonly class = computed(() =>
-    cn('inline-flex items-center gap-1', this.classInput()),
+  /** The time input: the value, the locale, the limits. */
+  readonly timeInput = contentChild.required(ScTimeInput, {
+    descendants: true,
+  });
+  private readonly popover = contentChild(ScPopoverProvider, {
+    descendants: true,
+  });
+  private readonly trigger = contentChild(
+    forwardRef(() => ScTimePickerTrigger),
+    { descendants: true, read: ElementRef<HTMLElement> },
   );
 
-  readonly formattedTime = computed(() => {
-    const val = this.value();
-    if (!val) return '';
-
-    const hours = this.format() === '12h' ? val.hours % 12 || 12 : val.hours;
-    const hoursStr = hours.toString().padStart(2, '0');
-    const minutesStr = val.minutes.toString().padStart(2, '0');
-
-    let time = `${hoursStr}:${minutesStr}`;
-
-    if (this.showSeconds() && val.seconds !== undefined) {
-      time += `:${val.seconds.toString().padStart(2, '0')}`;
+  /** The times in the list: every `interval` minutes, within the limits. */
+  readonly times = computed(() => {
+    const input = this.timeInput();
+    const minutes = Math.max(1, this.interval());
+    const last = input.maxTime() ?? Temporal.PlainTime.from('23:59:59');
+    const times: Temporal.PlainTime[] = [];
+    let time = input.minTime() ?? Temporal.PlainTime.from('00:00');
+    while (Temporal.PlainTime.compare(time, last) <= 0) {
+      times.push(time);
+      const next = time.add({ minutes });
+      if (Temporal.PlainTime.compare(next, time) <= 0) break; // past midnight
+      time = next;
     }
-
-    if (this.format() === '12h' && val.period) {
-      time += ` ${val.period}`;
-    }
-
-    return time;
+    return times;
   });
 
-  setHours(hours: number): void {
-    const current = this.value() || { hours: 0, minutes: 0 };
-    this.value.set({ ...current, hours });
+  private readonly formatter = computed(() => {
+    const input = this.timeInput();
+    return new Intl.DateTimeFormat(input.locale(), {
+      hour: 'numeric',
+      minute: '2-digit',
+      hourCycle: input.twelveHours() ? 'h12' : 'h23',
+    });
+  });
+
+  /** A time as the input's locale writes it. */
+  label(time: Temporal.PlainTime): string {
+    return this.formatter().format(time);
   }
 
-  setMinutes(minutes: number): void {
-    const current = this.value() || { hours: 0, minutes: 0 };
-    this.value.set({ ...current, minutes });
+  /** Where the list opens: the value, or the time before it — or the next time from now. */
+  readonly startIndex = computed(() => {
+    const times = this.times();
+    const value = this.timeInput().value();
+    const at = (time: Temporal.PlainTime) =>
+      times.findIndex((t) => Temporal.PlainTime.compare(t, time) > 0);
+    if (value) {
+      const after = at(value);
+      return Math.max(0, (after < 0 ? times.length : after) - 1);
+    }
+    const now = Temporal.Now.plainTimeISO();
+    const next = times.findIndex(
+      (t) => Temporal.PlainTime.compare(t, now) >= 0,
+    );
+    return Math.max(0, next);
+  });
+
+  protected readonly class = computed(() => cn('block', this.classInput()));
+
+  constructor() {
+    // The list closed: touched — and focus back on the trigger if it was in
+    // the panel, which leaves after its animation (Safari does not focus a
+    // clicked button: there is nothing for the panel to restore).
+    const document = inject(DOCUMENT);
+    let wasOpen = false;
+    effect(() => {
+      const open = this.popover()?.open() ?? false;
+      untracked(() => {
+        if (wasOpen && !open) {
+          this.timeInput().touch.emit();
+          const active = document.activeElement;
+          if (
+            !active ||
+            active === document.body ||
+            active.closest('.cdk-overlay-container')
+          )
+            this.trigger()?.nativeElement.focus();
+        }
+        wasOpen = open;
+      });
+    });
   }
 
-  setSeconds(seconds: number): void {
-    const current = this.value() || { hours: 0, minutes: 0 };
-    this.value.set({ ...current, seconds });
-  }
-
-  setPeriod(period: ScTimePeriod): void {
-    const current = this.value() || { hours: 0, minutes: 0 };
-    this.value.set({ ...current, period });
+  /** A time picked from the list: the value — and closed. */
+  pick(time: Temporal.PlainTime): void {
+    this.timeInput().value.set(time);
+    this.popover()?.open.set(false);
   }
 }

@@ -1,241 +1,76 @@
 # Time Picker
 
-A component for selecting time values with support for 12/24 hour formats.
+A time — typed in a [time input](../time-input/README.md), or picked from a list of times in a popover: every `interval` minutes, within the input's `minTime` / `maxTime`, written in its locale and hour cycle.
+
+## Architecture
+
+```
+div[scTimePicker] (interval)
+│  times() · label(time) · pick(time)
+└── div[scPopoverProvider]
+    ├── div[scInputGroup]
+    │   ├── div[scTimeInput] ([formField], locale, hourCycle, minTime, maxTime…)
+    │   └── div[scInputGroupAddon]
+    │       └── button[scTimePickerTrigger] — your icon and its name
+    └── ng-template[scPopoverPortal]
+        └── div[scPopover]
+            └── div[scTimePickerList] — the times (a listbox): name it
+```
+
+The value, the locale and the limits are the time input's: put `[formField]` on it; the picker reads them from there.
 
 ## Usage
 
 ```html
-<div scTimePicker format="12h" [(value)]="time">
-  <input scTimePickerInput scTimePickerHoursInput aria-label="Hours" />
-  <span scTimePickerSeparator>:</span>
-  <input scTimePickerInput scTimePickerMinutesInput aria-label="Minutes" />
-  <div scTimePickerPeriod aria-label="AM or PM">
-    <button scTimePickerPeriodAM>AM</button>
-    <button scTimePickerPeriodPM>PM</button>
+<div scField>
+  <label scLabel>Meeting</label>
+  <div scTimePicker>
+    <div scPopoverProvider [origin]="trigger.overlayOrigin" align="end">
+      <div scInputGroup>
+        <div scTimeInput [formField]="form.meeting"></div>
+        <div scInputGroupAddon align="inline-end">
+          <button scTimePickerTrigger #trigger="scTimePickerTrigger">
+            <svg siClockIcon></svg>
+            <span class="sr-only">Choose a time</span>
+          </button>
+        </div>
+      </div>
+      <ng-template scPopoverPortal>
+        <div scPopover class="w-auto p-0" aria-label="Choose a time">
+          <div scTimePickerList aria-label="Times"></div>
+        </div>
+      </ng-template>
+    </div>
   </div>
 </div>
 ```
 
-## Components
+## API
 
-### ScTimePicker
+### ScTimePicker — `div[scTimePicker]`, `#tp="scTimePicker"`
 
-Root container that manages time state.
+| Input      | Type     | Default |
+| ---------- | -------- | ------- |
+| `interval` | `number` | `30`    |
+| `class`    | `string` | `''`    |
 
-**Selector:** `[scTimePicker]`
+| Member         | Description                                                               |
+| -------------- | ------------------------------------------------------------------------- |
+| `timeInput()`  | Its time input                                                            |
+| `times()`      | The times in the list: from `minTime` (or midnight) to `maxTime`          |
+| `label(time)`  | A time as the input's locale writes it                                    |
+| `startIndex()` | Where the list opens: the value, the time before it, or the next from now |
+| `pick(time)`   | The value — and closed                                                    |
 
-**Inputs:**
+### ScTimePickerTrigger — `button[scTimePickerTrigger]`
 
-| Input         | Type             | Default | Description        |
-| ------------- | ---------------- | ------- | ------------------ |
-| `format`      | `'12h' \| '24h'` | `'12h'` | Time format        |
-| `showSeconds` | `boolean`        | `false` | Show seconds input |
-| `disabled`    | `boolean`        | `false` | Disable inputs     |
-| `class`       | `string`         | `''`    | Additional CSS     |
+An icon button that opens and closes the list: ghost in an input group (`buttonSize`, the group's corners), outline alone (`variant`). `aria-haspopup="dialog"`, `aria-expanded`; disabled with the input.
 
-**Two-way Bindings:**
+### ScTimePickerList — `div[scTimePickerList]`
 
-| Binding | Type                  | Description   |
-| ------- | --------------------- | ------------- |
-| `value` | `ScTimeValue \| null` | Selected time |
-
-**Computed:**
-
-| Signal          | Type     | Description           |
-| --------------- | -------- | --------------------- |
-| `formattedTime` | `string` | Formatted time string |
-
-**Methods:**
-
-| Method                | Description     |
-| --------------------- | --------------- |
-| `setHours(hours)`     | Set hours value |
-| `setMinutes(minutes)` | Set minutes     |
-| `setSeconds(seconds)` | Set seconds     |
-| `setPeriod(period)`   | Set AM/PM       |
-
-### ScTimePickerInput
-
-Base input directive that provides shared styling and disabled state.
-
-**Selector:** `input[scTimePickerInput]`
-
-**Inputs:**
-
-| Input   | Type     | Required | Description    |
-| ------- | -------- | -------- | -------------- |
-| `class` | `string` | No       | Additional CSS |
-
-### ScTimePickerHoursInput
-
-Hours input directive. Must be combined with `scTimePickerInput`.
-
-**Selector:** `input[scTimePickerHoursInput]`
-
-**Features:**
-
-- Arrow up/down to increment/decrement hours
-- Auto-selects on focus
-- Numeric input only
-- Value clamping (1–12 for 12h, 0–23 for 24h)
-
-### ScTimePickerMinutesInput
-
-Minutes input directive. Must be combined with `scTimePickerInput`.
-
-**Selector:** `input[scTimePickerMinutesInput]`
-
-**Features:**
-
-- Arrow up/down to increment/decrement minutes
-- Auto-selects on focus
-- Numeric input only
-- Value clamping (0–59)
-
-### ScTimePickerSecondsInput
-
-Seconds input directive. Must be combined with `scTimePickerInput`.
-
-**Selector:** `input[scTimePickerSecondsInput]`
-
-**Features:**
-
-- Arrow up/down to increment/decrement seconds
-- Auto-selects on focus
-- Numeric input only
-- Value clamping (0–59)
-
-### ScTimePickerSeparator
-
-Visual separator (colon) between inputs.
-
-**Selector:** `[scTimePickerSeparator]`
-
-### ScTimePickerPeriod
-
-AM/PM toggle container. Consumers provide buttons via content projection.
-
-**Selector:** `[scTimePickerPeriod]`
-
-### ScTimePickerPeriodAM
-
-AM toggle button directive. Must be a child of `ScTimePickerPeriod`.
-
-**Selector:** `button[scTimePickerPeriodAM]`
-
-### ScTimePickerPeriodPM
-
-PM toggle button directive. Must be a child of `ScTimePickerPeriod`.
-
-**Selector:** `button[scTimePickerPeriodPM]`
-
-### ScTimePickerClock
-
-Visual clock interface for selection.
-
-**Selector:** `[scTimePickerClock]`
-
-**Inputs:**
-
-| Input   | Type                   | Default   | Description    |
-| ------- | ---------------------- | --------- | -------------- |
-| `mode`  | `'hours' \| 'minutes'` | `'hours'` | Selection mode |
-| `class` | `string`               | `''`      | Additional CSS |
-
-## Types
-
-```typescript
-type ScTimeFormat = '12h' | '24h';
-type ScTimePeriod = 'AM' | 'PM';
-
-interface ScTimeValue {
-  hours: number;
-  minutes: number;
-  seconds?: number;
-  period?: ScTimePeriod;
-}
-```
-
-## Examples
-
-### 12 Hour Format
-
-```html
-<div scTimePicker format="12h" [(value)]="time">
-  <input scTimePickerInput scTimePickerHoursInput aria-label="Hours" />
-  <span scTimePickerSeparator>:</span>
-  <input scTimePickerInput scTimePickerMinutesInput aria-label="Minutes" />
-  <div scTimePickerPeriod aria-label="AM or PM">
-    <button scTimePickerPeriodAM>AM</button>
-    <button scTimePickerPeriodPM>PM</button>
-  </div>
-</div>
-```
-
-### 24 Hour Format
-
-```html
-<div scTimePicker format="24h" [(value)]="time">
-  <input scTimePickerInput scTimePickerHoursInput aria-label="Hours" />
-  <span scTimePickerSeparator>:</span>
-  <input scTimePickerInput scTimePickerMinutesInput aria-label="Minutes" />
-</div>
-```
-
-### With Seconds
-
-```html
-<div scTimePicker format="24h" [showSeconds]="true" [(value)]="time">
-  <input scTimePickerInput scTimePickerHoursInput aria-label="Hours" />
-  <span scTimePickerSeparator>:</span>
-  <input scTimePickerInput scTimePickerMinutesInput aria-label="Minutes" />
-  <span scTimePickerSeparator>:</span>
-  <input scTimePickerInput scTimePickerSecondsInput aria-label="Seconds" />
-</div>
-```
-
-### Clock Interface
-
-```html
-<div scTimePicker format="12h" [(value)]="time">
-  <div scTimePickerClock mode="hours"></div>
-</div>
-```
-
-### Disabled
-
-```html
-<div scTimePicker [disabled]="true" [(value)]="time">
-  <input scTimePickerInput scTimePickerHoursInput aria-label="Hours" />
-  <span scTimePickerSeparator>:</span>
-  <input scTimePickerInput scTimePickerMinutesInput aria-label="Minutes" />
-</div>
-```
-
-### Setting Initial Value
-
-```typescript
-time = signal<ScTimeValue>({
-  hours: 9,
-  minutes: 30,
-  period: 'AM',
-});
-```
-
-## Features
-
-- **12/24 Hour Formats**: Support for both time formats
-- **Seconds Support**: Optional seconds input
-- **AM/PM Toggle**: Built-in period selector
-- **Clock Interface**: Visual clock for selection
-- **Keyboard Navigation**: Arrow keys to adjust values
-- **Input Validation**: Numeric-only, auto-clamping
-- **Two-way Binding**: Sync time state with `[(value)]`
+The times, as a listbox (Angular Aria): the value selected. It opens focused on the value — or the time before it, or the next time from now — scrolled into view. Arrows, Home / End and typing move; Enter, Space or a click picks.
 
 ## Accessibility
 
-- Proper ARIA labels on inputs
-- Keyboard navigation (arrows to increment/decrement)
-- Numeric inputmode for mobile keyboards
-- Focus management with auto-select
-- Group role on period toggle
+- The list closes on a pick, Escape or a click outside; focus goes back to the trigger, and the input is marked touched.
+- Name the popover, the list and the icon-only trigger (`sr-only`).

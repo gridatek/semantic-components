@@ -906,15 +906,7 @@
   {
     "name": "Time Picker",
     "path": "time-picker",
-    "description": "A component for selecting time values.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Forms"
-  },
-  {
-    "name": "Time Picker Next",
-    "path": "time-picker-next",
-    "description": "The time picker, rebuilt: a time input with a list of times.",
+    "description": "A time input with a list of times to pick from.",
     "status": "Experimental",
     "library": "ui",
     "category": "Forms"

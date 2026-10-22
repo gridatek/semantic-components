@@ -11,7 +11,7 @@ import {
   untracked,
 } from '@angular/core';
 import { bindInput, cn } from '../../utils';
-import { ScTimePickerNext } from './time-picker-next';
+import { ScTimePicker } from './time-picker';
 
 /**
  * The list of times (a listbox) in the popover: the picker's `times()`,
@@ -19,7 +19,7 @@ import { ScTimePickerNext } from './time-picker-next';
  * it), focused; Enter or a click picks. Name it (`aria-label`).
  */
 @Component({
-  selector: 'div[scTimePickerNextList]',
+  selector: 'div[scTimePickerList]',
   imports: [Option],
   hostDirectives: [Listbox],
   template: `
@@ -44,8 +44,8 @@ import { ScTimePickerNext } from './time-picker-next';
   },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScTimePickerNextList {
-  protected readonly picker = inject(ScTimePickerNext);
+export class ScTimePickerList {
+  protected readonly picker = inject(ScTimePicker);
   private readonly listbox = inject<Listbox<string>>(Listbox);
   private readonly host =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;

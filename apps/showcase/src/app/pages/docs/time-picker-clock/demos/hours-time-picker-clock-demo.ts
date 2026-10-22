@@ -1,69 +1,41 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
-import {
-  ScTimePicker,
-  ScTimePickerHoursInput,
-  ScTimePickerInput,
-  ScTimePickerMinutesInput,
-  ScTimePickerPeriod,
-  ScTimePickerPeriodAM,
-  ScTimePickerPeriodPM,
-  ScTimePickerSeparator,
-  ScTimeValue,
-} from '@semantic-components/ui';
+import { ScTimeInput } from '@semantic-components/ui';
 import { ScTimePickerClock } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-hours-time-picker-clock-demo',
-  imports: [
-    ScTimePicker,
-    ScTimePickerClock,
-    ScTimePickerInput,
-    ScTimePickerHoursInput,
-    ScTimePickerMinutesInput,
-    ScTimePickerSeparator,
-    ScTimePickerPeriod,
-    ScTimePickerPeriodAM,
-    ScTimePickerPeriodPM,
-  ],
+  imports: [ScTimeInput, ScTimePickerClock],
   template: `
-    <div
-      scTimePicker
-      format="12h"
-      [(value)]="time"
-      class="flex flex-col items-center gap-4"
-    >
-      <div class="flex items-center gap-2">
-        <input
-          scTimePickerInput
-          scTimePickerHoursInput
-          aria-label="Hours"
-          (focus)="clockMode.set('hours')"
-        />
-        <span scTimePickerSeparator>:</span>
-        <input
-          scTimePickerInput
-          scTimePickerMinutesInput
-          aria-label="Minutes"
-          (focus)="clockMode.set('minutes')"
-        />
-        <div scTimePickerPeriod aria-label="AM or PM">
-          <button scTimePickerPeriodAM>AM</button>
-          <button scTimePickerPeriodPM>PM</button>
-        </div>
-      </div>
+    <div class="flex flex-col items-center gap-4">
+      <div
+        scTimeInput
+        aria-label="Time"
+        class="w-32"
+        [(value)]="time"
+        (focusin)="onFocus($event)"
+      ></div>
       <div
         scTimePickerClock
         [mode]="clockMode()"
+        [(value)]="time"
         (valueSelected)="onValueSelected()"
       ></div>
     </div>
   `,
-  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
 export class HoursTimePickerClockDemo {
-  readonly time = signal<ScTimeValue | null>({ hours: 10, minutes: 0 });
+  readonly time = signal<Temporal.PlainTime | null>(
+    Temporal.PlainTime.from('10:00'),
+  );
   readonly clockMode = signal<'hours' | 'minutes'>('hours');
+
+  /** The dial follows the part being typed: the hour, or the minute. */
+  onFocus(event: FocusEvent): void {
+    const type = (event.target as HTMLElement).dataset['type'];
+    if (type === 'hour') this.clockMode.set('hours');
+    if (type === 'minute') this.clockMode.set('minutes');
+  }
 
   onValueSelected(): void {
     if (this.clockMode() === 'hours') {

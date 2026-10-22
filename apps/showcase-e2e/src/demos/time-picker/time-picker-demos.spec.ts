@@ -1,8 +1,7 @@
 import { type Page, expect, test } from '@playwright/test';
 import { collectErrors, press } from '../../interaction';
 
-const demo = (name: string) =>
-  `/demos/time-picker-next/${name}-time-picker-next-demo`;
+const demo = (name: string) => `/demos/time-picker/${name}-time-picker-demo`;
 const trigger = (page: Page) =>
   page.locator('[data-slot="time-picker-trigger"]');
 const list = (page: Page) => page.getByRole('listbox');

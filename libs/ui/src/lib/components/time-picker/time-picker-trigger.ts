@@ -8,15 +8,15 @@ import {
   inputGroupButtonVariants,
 } from '../input-group';
 import { ScPopoverProvider } from '../popover';
-import { ScTimePickerNext } from './time-picker-next';
+import { ScTimePicker } from './time-picker';
 
 /**
  * Opens the list of times: an icon button — in an input group, beside the
  * time input, its corners the group's. Write its icon and name it.
  */
 @Directive({
-  selector: 'button[scTimePickerNextTrigger]',
-  exportAs: 'scTimePickerNextTrigger',
+  selector: 'button[scTimePickerTrigger]',
+  exportAs: 'scTimePickerTrigger',
   hostDirectives: [CdkOverlayOrigin],
   host: {
     'data-slot': 'time-picker-trigger',
@@ -28,9 +28,9 @@ import { ScTimePickerNext } from './time-picker-next';
     '(click)': 'popover.open.update((open) => !open)',
   },
 })
-export class ScTimePickerNextTrigger {
+export class ScTimePickerTrigger {
   protected readonly popover = inject(ScPopoverProvider);
-  protected readonly picker = inject(ScTimePickerNext);
+  protected readonly picker = inject(ScTimePicker);
   private readonly group = inject(ScInputGroup, { optional: true });
   readonly overlayOrigin = inject(CdkOverlayOrigin);
 

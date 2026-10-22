@@ -3,14 +3,13 @@ import {
   ElementRef,
   ViewEncapsulation,
   computed,
-  inject,
   input,
+  model,
   output,
   signal,
   viewChild,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { SC_TIME_PICKER } from '@semantic-components/ui';
 
 @Component({
   selector: '[scTimePickerClock]',
@@ -107,9 +106,9 @@ import { SC_TIME_PICKER } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScTimePickerClock {
-  readonly timePicker = inject(SC_TIME_PICKER);
-
   readonly classInput = input<string>('', { alias: 'class' });
+  /** The time on the dial; an hour picked keeps its AM or PM. */
+  readonly value = model<Temporal.PlainTime | null>(null);
   readonly mode = input<'hours' | 'minutes'>('hours');
   readonly valueSelected = output<number>();
 
@@ -149,33 +148,17 @@ export class ScTimePickerClock {
   });
 
   protected readonly selectedValue = computed(() => {
-    const val = this.timePicker.value();
+    const val = this.value();
     if (!val) return null;
-
-    if (this.mode() === 'hours') {
-      const hours =
-        this.timePicker.format() === '12h'
-          ? val.hours % 12 || 12
-          : val.hours % 12;
-      return hours;
-    }
-
-    return val.minutes;
+    return this.mode() === 'hours' ? val.hour % 12 || 12 : val.minute;
   });
 
   protected readonly selectedAngle = computed(() => {
-    const val = this.timePicker.value();
+    const val = this.value();
     if (!val) return null;
-
-    if (this.mode() === 'hours') {
-      const hours =
-        this.timePicker.format() === '12h'
-          ? val.hours % 12 || 12
-          : val.hours % 12;
-      return (hours * 30 - 90) * (Math.PI / 180);
-    }
-
-    return (val.minutes * 6 - 90) * (Math.PI / 180);
+    const degrees =
+      this.mode() === 'hours' ? (val.hour % 12) * 30 : val.minute * 6;
+    return (degrees - 90) * (Math.PI / 180);
   });
 
   protected readonly handX = computed(() => {
@@ -191,19 +174,12 @@ export class ScTimePickerClock {
   });
 
   selectValue(value: number): void {
+    const val = this.value() ?? Temporal.PlainTime.from('00:00');
     if (this.mode() === 'hours') {
-      const val = this.timePicker.value();
-      let hours = value;
-      if (this.timePicker.format() === '12h') {
-        if (val?.period === 'PM' && value !== 12) {
-          hours = value + 12;
-        } else if (val?.period === 'AM' && value === 12) {
-          hours = 0;
-        }
-      }
-      this.timePicker.setHours(hours);
+      const pm = val.hour >= 12;
+      this.value.set(val.with({ hour: (value % 12) + (pm ? 12 : 0) }));
     } else {
-      this.timePicker.setMinutes(value);
+      this.value.set(val.with({ minute: value }));
     }
   }
 
@@ -255,13 +231,7 @@ export class ScTimePickerClock {
     if (this.mode() === 'hours') {
       // 12 sectors of 30° each
       const sector = Math.round(angle / 30) % 12;
-      const value =
-        this.timePicker.format() === '12h'
-          ? sector === 0
-            ? 12
-            : sector
-          : sector;
-      this.selectValue(value);
+      this.selectValue(sector === 0 ? 12 : sector);
     } else {
       // Snap to nearest 5-minute mark (12 sectors of 30° each)
       const minute = (Math.round(angle / 30) % 12) * 5;

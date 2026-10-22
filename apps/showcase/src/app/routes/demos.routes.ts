@@ -3740,71 +3740,31 @@ export const demosRoutes: Route[] = [
     path: 'demos/time-picker',
     children: [
       {
-        path: 'format-12h-time-picker-demo',
+        path: 'basic-time-picker-demo',
         loadComponent: () =>
-          import('../pages/docs/time-picker/demos/format-12h-time-picker-demo').then(
-            (m) => m.Format12hTimePickerDemo,
+          import('../pages/docs/time-picker/demos/basic-time-picker-demo').then(
+            (m) => m.BasicTimePickerDemo,
           ),
       },
       {
-        path: 'format-24h-time-picker-demo',
+        path: 'interval-time-picker-demo',
         loadComponent: () =>
-          import('../pages/docs/time-picker/demos/format-24h-time-picker-demo').then(
-            (m) => m.Format24hTimePickerDemo,
+          import('../pages/docs/time-picker/demos/interval-time-picker-demo').then(
+            (m) => m.IntervalTimePickerDemo,
           ),
       },
       {
-        path: 'seconds-time-picker-demo',
+        path: 'locale-time-picker-demo',
         loadComponent: () =>
-          import('../pages/docs/time-picker/demos/seconds-time-picker-demo').then(
-            (m) => m.SecondsTimePickerDemo,
+          import('../pages/docs/time-picker/demos/locale-time-picker-demo').then(
+            (m) => m.LocaleTimePickerDemo,
           ),
       },
       {
-        path: 'disabled-time-picker-demo',
+        path: 'form-time-picker-demo',
         loadComponent: () =>
-          import('../pages/docs/time-picker/demos/disabled-time-picker-demo').then(
-            (m) => m.DisabledTimePickerDemo,
-          ),
-      },
-      {
-        path: 'presets-time-picker-demo',
-        loadComponent: () =>
-          import('../pages/docs/time-picker/demos/presets-time-picker-demo').then(
-            (m) => m.PresetsTimePickerDemo,
-          ),
-      },
-    ],
-  },
-  {
-    path: 'demos/time-picker-next',
-    children: [
-      {
-        path: 'basic-time-picker-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/time-picker-next/demos/basic-time-picker-next-demo').then(
-            (m) => m.BasicTimePickerNextDemo,
-          ),
-      },
-      {
-        path: 'interval-time-picker-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/time-picker-next/demos/interval-time-picker-next-demo').then(
-            (m) => m.IntervalTimePickerNextDemo,
-          ),
-      },
-      {
-        path: 'locale-time-picker-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/time-picker-next/demos/locale-time-picker-next-demo').then(
-            (m) => m.LocaleTimePickerNextDemo,
-          ),
-      },
-      {
-        path: 'form-time-picker-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/time-picker-next/demos/form-time-picker-next-demo').then(
-            (m) => m.FormTimePickerNextDemo,
+          import('../pages/docs/time-picker/demos/form-time-picker-demo').then(
+            (m) => m.FormTimePickerDemo,
           ),
       },
     ],

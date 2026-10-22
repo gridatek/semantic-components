@@ -11,21 +11,21 @@ import {
   ScPopoverPortal,
   ScPopoverProvider,
   ScTimeInput,
-  ScTimePickerNext,
-  ScTimePickerNextList,
-  ScTimePickerNextTrigger,
+  ScTimePicker,
+  ScTimePickerList,
+  ScTimePickerTrigger,
 } from '@semantic-components/ui';
 import { SiClockIcon } from '@semantic-icons/lucide-icons';
 
 /** The [formField] is on the time input; the list fills it. Required — marked once the list closes or the input is left. */
 @Component({
-  selector: 'app-form-time-picker-next-demo',
+  selector: 'app-form-time-picker-demo',
   imports: [
     FormField,
     FormRoot,
-    ScTimePickerNext,
-    ScTimePickerNextTrigger,
-    ScTimePickerNextList,
+    ScTimePicker,
+    ScTimePickerTrigger,
+    ScTimePickerList,
     ScTimeInput,
     ScInputGroup,
     ScInputGroupAddon,
@@ -42,15 +42,12 @@ import { SiClockIcon } from '@semantic-icons/lucide-icons';
     <form [formRoot]="tableForm" class="grid w-48 gap-3">
       <div scField>
         <label scLabel>Table at</label>
-        <div scTimePickerNext>
+        <div scTimePicker>
           <div scPopoverProvider [origin]="trigger.overlayOrigin" align="end">
             <div scInputGroup>
               <div scTimeInput [formField]="tableForm.at"></div>
               <div scInputGroupAddon align="inline-end">
-                <button
-                  scTimePickerNextTrigger
-                  #trigger="scTimePickerNextTrigger"
-                >
+                <button scTimePickerTrigger #trigger="scTimePickerTrigger">
                   <svg siClockIcon></svg>
                   <span class="sr-only">Choose a time</span>
                 </button>
@@ -58,7 +55,7 @@ import { SiClockIcon } from '@semantic-icons/lucide-icons';
             </div>
             <ng-template scPopoverPortal>
               <div scPopover class="w-auto p-0" aria-label="Choose a time">
-                <div scTimePickerNextList aria-label="Times"></div>
+                <div scTimePickerList aria-label="Times"></div>
               </div>
             </ng-template>
           </div>
@@ -74,7 +71,7 @@ import { SiClockIcon } from '@semantic-icons/lucide-icons';
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class FormTimePickerNextDemo {
+export class FormTimePickerDemo {
   readonly model = signal<{ at: Temporal.PlainTime | null }>({ at: null });
   readonly booked = signal('');
   readonly tableForm = form(

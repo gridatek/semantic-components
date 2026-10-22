@@ -61,7 +61,6 @@ export * from './textarea';
 export * from './theme';
 export * from './time-input';
 export * from './time-picker';
-export * from './time-picker-next';
 export * from './toast';
 export * from './toggle';
 export * from './toggle-group';
