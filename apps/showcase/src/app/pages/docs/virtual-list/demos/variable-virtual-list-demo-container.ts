@@ -19,10 +19,7 @@ import { VariableVirtualListDemo } from './variable-virtual-list-demo';
 })
 export class VariableVirtualListDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import {
-  ScVirtualList,
-  ScVirtualListRow,
-} from '@semantic-components/ui-lab';
+import { ScVirtualList, ScVirtualListRow } from '@semantic-components/ui-lab';
 
 /** Rows of any height — messages, long and short: estimated first, then measured; the list and its scrollbar follow, and the reader keeps their place as rows above settle. */
 @Component({

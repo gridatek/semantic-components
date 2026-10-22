@@ -92,6 +92,46 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/animated-counter-next',
+    children: [
+      {
+        path: 'count-animated-counter-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/animated-counter-next/demos/count-animated-counter-next-demo').then(
+            (m) => m.CountAnimatedCounterNextDemo,
+          ),
+      },
+      {
+        path: 'roll-animated-counter-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/animated-counter-next/demos/roll-animated-counter-next-demo').then(
+            (m) => m.RollAnimatedCounterNextDemo,
+          ),
+      },
+      {
+        path: 'formats-animated-counter-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/animated-counter-next/demos/formats-animated-counter-next-demo').then(
+            (m) => m.FormatsAnimatedCounterNextDemo,
+          ),
+      },
+      {
+        path: 'visible-animated-counter-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/animated-counter-next/demos/visible-animated-counter-next-demo').then(
+            (m) => m.VisibleAnimatedCounterNextDemo,
+          ),
+      },
+      {
+        path: 'card-animated-counter-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/animated-counter-next/demos/card-animated-counter-next-demo').then(
+            (m) => m.CardAnimatedCounterNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/aspect-ratio',
     children: [
       {

@@ -34,6 +34,12 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/animated-counter/animated-counter-page'),
       },
       {
+        path: 'animated-counter-next',
+        title: 'Animated Counter Next - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/animated-counter-next/animated-counter-next-page'),
+      },
+      {
         path: 'aspect-ratio',
         title: 'Aspect Ratio - Semantic Components',
         loadComponent: () =>

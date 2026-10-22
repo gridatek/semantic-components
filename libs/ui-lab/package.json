@@ -21,7 +21,13 @@
     "@angular/aria": ">=22.2.3",
     "rxjs": ">=7.8.2",
     "@semantic-components/ui": "0.81.0",
-    "@angular/forms": ">=22.2.3"
+    "@angular/forms": ">=22.2.3",
+    "motion": ">=14.2.0"
+  },
+  "peerDependenciesMeta": {
+    "motion": {
+      "optional": true
+    }
   },
   "sideEffects": false
 }

@@ -32,6 +32,14 @@
     "category": "Recipes"
   },
   {
+    "name": "Animated Counter Next",
+    "path": "animated-counter-next",
+    "description": "The animated counter, rebuilt: counting or rolling to a new value, in the reader’s language; motion only where it is used.",
+    "status": "Experimental",
+    "library": "ui-lab",
+    "category": "Data Display"
+  },
+  {
     "name": "Aspect Ratio",
     "path": "aspect-ratio",
     "description": "Displays content within a fixed aspect ratio.",

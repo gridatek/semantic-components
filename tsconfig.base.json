@@ -18,6 +18,9 @@
     "baseUrl": ".",
     "paths": {
       "@semantic-components/ui-lab": ["libs/ui-lab/src/index.ts"],
+      "@semantic-components/ui-lab/animated-counter": [
+        "libs/ui-lab/animated-counter/src/index.ts"
+      ],
       "@semantic-components/ui": ["libs/ui/src/index.ts"],
       "@semantic-components/code": ["libs/code/src/index.ts"],
       "@semantic-components/carousel": ["libs/carousel/src/index.ts"],
