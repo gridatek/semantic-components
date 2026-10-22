@@ -1246,10 +1246,10 @@ export const demosRoutes: Route[] = [
     path: 'demos/diff-viewer',
     children: [
       {
-        path: 'basic-diff-viewer-demo',
+        path: 'split-diff-viewer-demo',
         loadComponent: () =>
-          import('../pages/docs/diff-viewer/demos/basic-diff-viewer-demo').then(
-            (m) => m.BasicDiffViewerDemo,
+          import('../pages/docs/diff-viewer/demos/split-diff-viewer-demo').then(
+            (m) => m.SplitDiffViewerDemo,
           ),
       },
       {
@@ -1260,17 +1260,10 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'json-diff-viewer-demo',
+        path: 'folded-diff-viewer-demo',
         loadComponent: () =>
-          import('../pages/docs/diff-viewer/demos/json-diff-viewer-demo').then(
-            (m) => m.JsonDiffViewerDemo,
-          ),
-      },
-      {
-        path: 'minimal-diff-viewer-demo',
-        loadComponent: () =>
-          import('../pages/docs/diff-viewer/demos/minimal-diff-viewer-demo').then(
-            (m) => m.MinimalDiffViewerDemo,
+          import('../pages/docs/diff-viewer/demos/folded-diff-viewer-demo').then(
+            (m) => m.FoldedDiffViewerDemo,
           ),
       },
       {
@@ -1281,57 +1274,10 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'large-diff-viewer-demo',
-        loadComponent: () =>
-          import('../pages/docs/diff-viewer/demos/large-diff-viewer-demo').then(
-            (m) => m.LargeDiffViewerDemo,
-          ),
-      },
-      {
         path: 'identical-diff-viewer-demo',
         loadComponent: () =>
           import('../pages/docs/diff-viewer/demos/identical-diff-viewer-demo').then(
             (m) => m.IdenticalDiffViewerDemo,
-          ),
-      },
-    ],
-  },
-  {
-    path: 'demos/diff-viewer-next',
-    children: [
-      {
-        path: 'split-diff-viewer-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/diff-viewer-next/demos/split-diff-viewer-next-demo').then(
-            (m) => m.SplitDiffViewerNextDemo,
-          ),
-      },
-      {
-        path: 'unified-diff-viewer-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/diff-viewer-next/demos/unified-diff-viewer-next-demo').then(
-            (m) => m.UnifiedDiffViewerNextDemo,
-          ),
-      },
-      {
-        path: 'folded-diff-viewer-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/diff-viewer-next/demos/folded-diff-viewer-next-demo').then(
-            (m) => m.FoldedDiffViewerNextDemo,
-          ),
-      },
-      {
-        path: 'whitespace-diff-viewer-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/diff-viewer-next/demos/whitespace-diff-viewer-next-demo').then(
-            (m) => m.WhitespaceDiffViewerNextDemo,
-          ),
-      },
-      {
-        path: 'identical-diff-viewer-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/diff-viewer-next/demos/identical-diff-viewer-next-demo').then(
-            (m) => m.IdenticalDiffViewerNextDemo,
           ),
       },
     ],

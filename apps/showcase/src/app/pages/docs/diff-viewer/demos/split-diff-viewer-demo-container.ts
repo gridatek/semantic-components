@@ -1,39 +1,39 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { SplitDiffViewerNextDemo } from './split-diff-viewer-next-demo';
+import { SplitDiffViewerDemo } from './split-diff-viewer-demo';
 
 @Component({
-  selector: 'app-split-diff-viewer-next-demo-container',
-  imports: [DemoContainer, SplitDiffViewerNextDemo],
+  selector: 'app-split-diff-viewer-demo-container',
+  imports: [DemoContainer, SplitDiffViewerDemo],
   template: `
     <app-demo-container
       title="Split"
       [code]="code"
-      demoUrl="/demos/diff-viewer-next/split-diff-viewer-next-demo"
+      demoUrl="/demos/diff-viewer/split-diff-viewer-demo"
     >
-      <app-split-diff-viewer-next-demo />
+      <app-split-diff-viewer-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class SplitDiffViewerNextDemoContainer {
+export class SplitDiffViewerDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCodeBlock,
   ScCodeBlockHeader,
   ScCodeBlockTitle,
   type ScDiffView,
-  ScDiffViewerNext,
+  ScDiffViewer,
 } from '@semantic-components/code';
 import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
 
 /** Side by side: the old text facing the new, rows aligned, long lines wrapped. Your header holds the title, the counts and a switch for the view ([(view)]). */
 @Component({
-  selector: 'app-split-diff-viewer-next-demo',
+  selector: 'app-split-diff-viewer-demo',
   imports: [
     ScCodeBlock,
-    ScDiffViewerNext,
+    ScDiffViewer,
     ScCodeBlockHeader,
     ScCodeBlockTitle,
     ScToggleGroup,
@@ -59,8 +59,8 @@ import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
         </div>
       </div>
       <div
-        scDiffViewerNext
-        #diff="scDiffViewerNext"
+        scDiffViewer
+        #diff="scDiffViewer"
         language="angular-ts"
         [oldText]="before"
         [newText]="after"
@@ -71,7 +71,7 @@ import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
   host: { class: 'block w-full max-w-3xl' },
   encapsulation: ViewEncapsulation.None,
 })
-export class SplitDiffViewerNextDemo {
+export class SplitDiffViewerDemo {
   readonly before = \`import { Component, signal } from '@angular/core';
 
 @Component({

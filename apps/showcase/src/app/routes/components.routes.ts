@@ -230,12 +230,6 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/diff-viewer/diff-viewer-page'),
       },
       {
-        path: 'diff-viewer-next',
-        title: 'Diff Viewer Next - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/diff-viewer-next/diff-viewer-next-page'),
-      },
-      {
         path: 'dock',
         title: 'Dock - Semantic Components',
         loadComponent: () => import('../pages/docs/dock/dock-page'),

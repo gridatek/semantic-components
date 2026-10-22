@@ -7,9 +7,9 @@ import { WhitespaceDiffViewerDemo } from './whitespace-diff-viewer-demo';
   imports: [DemoContainer, WhitespaceDiffViewerDemo],
   template: `
     <app-demo-container
-      title="Ignore Whitespace"
-      demoUrl="/demos/diff-viewer/whitespace-diff-viewer-demo"
+      title="Ignore whitespace"
       [code]="code"
+      demoUrl="/demos/diff-viewer/whitespace-diff-viewer-demo"
     >
       <app-whitespace-diff-viewer-demo />
     </app-demo-container>
@@ -18,163 +18,48 @@ import { WhitespaceDiffViewerDemo } from './whitespace-diff-viewer-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class WhitespaceDiffViewerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import {
-  ScToolbar,
-  ScToolbarToggle,
-  ScToolbarToggleGroup,
-} from '@semantic-components/ui';
-import {
-  ScDiffViewer,
-  ScDiffViewerContent,
-  ScDiffViewerEmpty,
-  ScDiffViewerHeader,
-  ScDiffViewerLine,
-  ScDiffViewerLineContent,
-  ScDiffViewerLineNumber,
-  ScDiffViewerLinePlaceholder,
-  ScDiffViewerLineSign,
-  ScDiffViewerModeSwitch,
-  ScDiffViewerPane,
-  ScDiffViewerSplit,
-} from '@semantic-components/ui-lab';
+  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { ScCodeBlock, ScDiffViewer } from '@semantic-components/code';
+import { ScSwitch, ScSwitchField } from '@semantic-components/ui';
 
+/** ignoreWhitespace: lines that differ only in spaces and tabs count as unchanged (ignoreCase, the same for letter case). */
 @Component({
   selector: 'app-whitespace-diff-viewer-demo',
-  imports: [
-    ScDiffViewer,
-    ScDiffViewerHeader,
-    ScDiffViewerModeSwitch,
-    ScToolbar,
-    ScToolbarToggle,
-    ScToolbarToggleGroup,
-    ScDiffViewerContent,
-    ScDiffViewerSplit,
-    ScDiffViewerPane,
-    ScDiffViewerLine,
-    ScDiffViewerLineNumber,
-    ScDiffViewerLineSign,
-    ScDiffViewerLineContent,
-    ScDiffViewerLinePlaceholder,
-    ScDiffViewerEmpty,
-  ],
+  imports: [ScCodeBlock, ScDiffViewer, ScSwitch, ScSwitchField],
   template: \`
-    <p class="text-muted-foreground mb-4 text-sm">
-      The following texts differ only in whitespace but are shown as identical.
-    </p>
-    <div
-      scDiffViewer
-      [oldText]="'hello   world'"
-      [newText]="'hello world'"
-      [ignoreWhitespace]="true"
-      #diff="scDiffViewer"
-    >
-      <div scDiffViewerHeader>
-        <div class="flex items-center gap-3 text-sm">
-          <span class="text-green-700 dark:text-green-400">
-            +{{ diff.diffResult().additions }}
-          </span>
-          <span class="text-red-700 dark:text-red-400">
-            -{{ diff.diffResult().deletions }}
-          </span>
-        </div>
-        <div scToolbar scDiffViewerModeSwitch>
-          <div scToolbarToggleGroup>
-            <button scToolbarToggle value="split">Split</button>
-            <button scToolbarToggle value="unified">Unified</button>
-          </div>
-        </div>
-      </div>
-      <div scDiffViewerContent aria-label="Differences">
-        @if (diff.viewMode() === 'split') {
-          <div scDiffViewerSplit>
-            <div scDiffViewerPane side="old">
-              <div class="font-mono text-sm">
-                @for (line of diff.diffResult().lines; track $index) {
-                  @if (line.type !== 'added') {
-                    <div scDiffViewerLine [type]="line.type">
-                      <span scDiffViewerLineNumber>
-                        {{ line.oldLineNumber || '' }}
-                      </span>
-                      <span scDiffViewerLineSign>
-                        {{ line.type === 'removed' ? '-' : '' }}
-                      </span>
-                      <span
-                        scDiffViewerLineContent
-                        [innerHTML]="diff.highlightLine(line, 'old')"
-                      ></span>
-                    </div>
-                  } @else {
-                    <div scDiffViewerLinePlaceholder></div>
-                  }
-                }
-              </div>
-            </div>
-            <div scDiffViewerPane side="new">
-              <div class="font-mono text-sm">
-                @for (line of diff.diffResult().lines; track $index) {
-                  @if (line.type !== 'removed') {
-                    <div scDiffViewerLine [type]="line.type">
-                      <span scDiffViewerLineNumber>
-                        {{ line.newLineNumber || '' }}
-                      </span>
-                      <span scDiffViewerLineSign>
-                        {{ line.type === 'added' ? '+' : '' }}
-                      </span>
-                      <span
-                        scDiffViewerLineContent
-                        [innerHTML]="diff.highlightLine(line, 'new')"
-                      ></span>
-                    </div>
-                  } @else {
-                    <div scDiffViewerLinePlaceholder></div>
-                  }
-                }
-              </div>
-            </div>
-          </div>
-        } @else {
-          <div class="font-mono text-sm">
-            @for (line of diff.diffResult().lines; track $index) {
-              <div scDiffViewerLine [type]="line.type">
-                <span scDiffViewerLineNumber>
-                  {{ line.oldLineNumber || '' }}
-                </span>
-                <span scDiffViewerLineNumber>
-                  {{ line.newLineNumber || '' }}
-                </span>
-                <span scDiffViewerLineSign class="font-bold">
-                  @switch (line.type) {
-                    @case ('added') {
-                      <span class="text-green-700 dark:text-green-400">+</span>
-                    }
-                    @case ('removed') {
-                      <span class="text-red-700 dark:text-red-400">-</span>
-                    }
-                    @default {}
-                  }
-                </span>
-                <span
-                  scDiffViewerLineContent
-                  [innerHTML]="
-                    diff.highlightLine(
-                      line,
-                      line.type === 'removed' ? 'old' : 'new'
-                    )
-                  "
-                ></span>
-              </div>
-            }
-          </div>
-        }
-        @if (diff.diffResult().lines.length === 0) {
-          <div scDiffViewerEmpty>No differences found</div>
-        }
-      </div>
+    <label scSwitchField class="mb-3">
+      <input
+        type="checkbox"
+        scSwitch
+        [checked]="ignore()"
+        (change)="ignore.set(!ignore())"
+      />
+      Ignore whitespace
+    </label>
+    <div scCodeBlock>
+      <div
+        scDiffViewer
+        #diff="scDiffViewer"
+        language="typescript"
+        [ignoreWhitespace]="ignore()"
+        [oldText]="before"
+        [newText]="after"
+      ></div>
     </div>
+    <p class="text-muted-foreground mt-2 text-sm" data-testid="counts">
+      +{{ diff.additions() }} −{{ diff.deletions() }}
+    </p>
   \`,
-  host: { class: 'flex w-full justify-center' },
+  host: { class: 'block w-full max-w-3xl' },
   encapsulation: ViewEncapsulation.None,
 })
-export class WhitespaceDiffViewerDemo {}`;
+export class WhitespaceDiffViewerDemo {
+  readonly ignore = signal(false);
+  readonly before = \`function sum(a, b) {
+  return a + b;
+}\`;
+  readonly after = \`function sum(a, b) {
+    return a+b;
+}\`;
+}`;
 }

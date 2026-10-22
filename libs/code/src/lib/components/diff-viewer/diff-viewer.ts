@@ -22,7 +22,7 @@ import {
   splitRows,
   textLines,
 } from './diff-model';
-import { ScDiffViewerNextFold } from './diff-viewer-next-fold';
+import { ScDiffViewerFold } from './diff-viewer-fold';
 
 export type ScDiffView = 'split' | 'unified';
 
@@ -55,11 +55,11 @@ type SplitRow =
  * column, both line numbers) or split (side by side, rows aligned): `[(view)]`.
  * Highlighted in its `language` by the app's highlighter, like a code block;
  * put it in one (`scCodeBlock`) for its frame and header. Long unchanged runs
- * folded with `context` and a `scDiffViewerNextFold` template.
+ * folded with `context` and a `scDiffViewerFold` template.
  */
 @Component({
-  selector: 'div[scDiffViewerNext]',
-  exportAs: 'scDiffViewerNext',
+  selector: 'div[scDiffViewer]',
+  exportAs: 'scDiffViewer',
   imports: [NgTemplateOutlet],
   template: `
     @if (view() === 'unified') {
@@ -184,7 +184,7 @@ type SplitRow =
   },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScDiffViewerNext {
+export class ScDiffViewer {
   private readonly highlighter = inject(SC_CODE_HIGHLIGHTER, {
     optional: true,
   });
@@ -199,10 +199,10 @@ export class ScDiffViewerNext {
   /** All whitespace ignored when comparing lines. */
   readonly ignoreWhitespace = input(false, { transform: booleanAttribute });
   readonly ignoreCase = input(false, { transform: booleanAttribute });
-  /** Unchanged lines kept next to each change; the rest folded (with a `scDiffViewerNextFold` template). `null`: none folded. */
+  /** Unchanged lines kept next to each change; the rest folded (with a `scDiffViewerFold` template). `null`: none folded. */
   readonly context = input<number | null>(null);
 
-  protected readonly foldTemplate = contentChild(ScDiffViewerNextFold);
+  protected readonly foldTemplate = contentChild(ScDiffViewerFold);
 
   private readonly expanded = signal<ReadonlySet<number>>(new Set());
 

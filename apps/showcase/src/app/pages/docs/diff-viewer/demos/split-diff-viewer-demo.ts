@@ -4,16 +4,16 @@ import {
   ScCodeBlockHeader,
   ScCodeBlockTitle,
   type ScDiffView,
-  ScDiffViewerNext,
+  ScDiffViewer,
 } from '@semantic-components/code';
 import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
 
 /** Side by side: the old text facing the new, rows aligned, long lines wrapped. Your header holds the title, the counts and a switch for the view ([(view)]). */
 @Component({
-  selector: 'app-split-diff-viewer-next-demo',
+  selector: 'app-split-diff-viewer-demo',
   imports: [
     ScCodeBlock,
-    ScDiffViewerNext,
+    ScDiffViewer,
     ScCodeBlockHeader,
     ScCodeBlockTitle,
     ScToggleGroup,
@@ -39,8 +39,8 @@ import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
         </div>
       </div>
       <div
-        scDiffViewerNext
-        #diff="scDiffViewerNext"
+        scDiffViewer
+        #diff="scDiffViewer"
         language="angular-ts"
         [oldText]="before"
         [newText]="after"
@@ -51,7 +51,7 @@ import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
   host: { class: 'block w-full max-w-3xl' },
   encapsulation: ViewEncapsulation.None,
 })
-export class SplitDiffViewerNextDemo {
+export class SplitDiffViewerDemo {
   readonly before = `import { Component, signal } from '@angular/core';
 
 @Component({

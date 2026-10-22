@@ -7,9 +7,9 @@ import { IdenticalDiffViewerDemo } from './identical-diff-viewer-demo';
   imports: [DemoContainer, IdenticalDiffViewerDemo],
   template: `
     <app-demo-container
-      title="Identical Files"
-      demoUrl="/demos/diff-viewer/identical-diff-viewer-demo"
+      title="Identical"
       [code]="code"
+      demoUrl="/demos/diff-viewer/identical-diff-viewer-demo"
     >
       <app-identical-diff-viewer-demo />
     </app-demo-container>
@@ -20,166 +20,32 @@ import { IdenticalDiffViewerDemo } from './identical-diff-viewer-demo';
 export class IdenticalDiffViewerDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScToolbar,
-  ScToolbarToggle,
-  ScToolbarToggleGroup,
-} from '@semantic-components/ui';
-import {
+  ScCodeBlock,
+  ScCodeBlockFooter,
   ScDiffViewer,
-  ScDiffViewerContent,
-  ScDiffViewerEmpty,
-  ScDiffViewerHeader,
-  ScDiffViewerLine,
-  ScDiffViewerLineContent,
-  ScDiffViewerLineNumber,
-  ScDiffViewerLinePlaceholder,
-  ScDiffViewerLineSign,
-  ScDiffViewerModeSwitch,
-  ScDiffViewerPane,
-  ScDiffViewerSplit,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/code';
 
+/** identical(): nothing changed — show your own words. */
 @Component({
   selector: 'app-identical-diff-viewer-demo',
-  imports: [
-    ScDiffViewer,
-    ScDiffViewerHeader,
-    ScDiffViewerModeSwitch,
-    ScToolbar,
-    ScToolbarToggle,
-    ScToolbarToggleGroup,
-    ScDiffViewerContent,
-    ScDiffViewerSplit,
-    ScDiffViewerPane,
-    ScDiffViewerLine,
-    ScDiffViewerLineNumber,
-    ScDiffViewerLineSign,
-    ScDiffViewerLineContent,
-    ScDiffViewerLinePlaceholder,
-    ScDiffViewerEmpty,
-  ],
+  imports: [ScCodeBlock, ScDiffViewer, ScCodeBlockFooter],
   template: \`
-    <div
-      scDiffViewer
-      [oldText]="'const x = 1;
-const y = 2;'"
-      [newText]="'const x = 1;
-const y = 2;'"
-      #diff="scDiffViewer"
-    >
-      <div scDiffViewerHeader>
-        <div class="flex items-center gap-2 text-sm">
-          <span class="text-muted-foreground">file.ts</span>
-          <span class="text-muted-foreground">→</span>
-          <span class="text-muted-foreground">file.ts</span>
-        </div>
-        <div class="flex items-center gap-4">
-          <div class="flex items-center gap-3 text-sm">
-            <span class="text-green-700 dark:text-green-400">
-              +{{ diff.diffResult().additions }}
-            </span>
-            <span class="text-red-700 dark:text-red-400">
-              -{{ diff.diffResult().deletions }}
-            </span>
-          </div>
-          <div scToolbar scDiffViewerModeSwitch>
-            <div scToolbarToggleGroup>
-              <button scToolbarToggle value="split">Split</button>
-              <button scToolbarToggle value="unified">Unified</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div scDiffViewerContent aria-label="Differences">
-        @if (diff.viewMode() === 'split') {
-          <div scDiffViewerSplit>
-            <div scDiffViewerPane side="old">
-              <div class="font-mono text-sm">
-                @for (line of diff.diffResult().lines; track $index) {
-                  @if (line.type !== 'added') {
-                    <div scDiffViewerLine [type]="line.type">
-                      <span scDiffViewerLineNumber>
-                        {{ line.oldLineNumber || '' }}
-                      </span>
-                      <span scDiffViewerLineSign>
-                        {{ line.type === 'removed' ? '-' : '' }}
-                      </span>
-                      <span
-                        scDiffViewerLineContent
-                        [innerHTML]="diff.highlightLine(line, 'old')"
-                      ></span>
-                    </div>
-                  } @else {
-                    <div scDiffViewerLinePlaceholder></div>
-                  }
-                }
-              </div>
-            </div>
-            <div scDiffViewerPane side="new">
-              <div class="font-mono text-sm">
-                @for (line of diff.diffResult().lines; track $index) {
-                  @if (line.type !== 'removed') {
-                    <div scDiffViewerLine [type]="line.type">
-                      <span scDiffViewerLineNumber>
-                        {{ line.newLineNumber || '' }}
-                      </span>
-                      <span scDiffViewerLineSign>
-                        {{ line.type === 'added' ? '+' : '' }}
-                      </span>
-                      <span
-                        scDiffViewerLineContent
-                        [innerHTML]="diff.highlightLine(line, 'new')"
-                      ></span>
-                    </div>
-                  } @else {
-                    <div scDiffViewerLinePlaceholder></div>
-                  }
-                }
-              </div>
-            </div>
-          </div>
-        } @else {
-          <div class="font-mono text-sm">
-            @for (line of diff.diffResult().lines; track $index) {
-              <div scDiffViewerLine [type]="line.type">
-                <span scDiffViewerLineNumber>
-                  {{ line.oldLineNumber || '' }}
-                </span>
-                <span scDiffViewerLineNumber>
-                  {{ line.newLineNumber || '' }}
-                </span>
-                <span scDiffViewerLineSign class="font-bold">
-                  @switch (line.type) {
-                    @case ('added') {
-                      <span class="text-green-700 dark:text-green-400">+</span>
-                    }
-                    @case ('removed') {
-                      <span class="text-red-700 dark:text-red-400">-</span>
-                    }
-                    @default {}
-                  }
-                </span>
-                <span
-                  scDiffViewerLineContent
-                  [innerHTML]="
-                    diff.highlightLine(
-                      line,
-                      line.type === 'removed' ? 'old' : 'new'
-                    )
-                  "
-                ></span>
-              </div>
-            }
-          </div>
-        }
-        @if (diff.diffResult().lines.length === 0) {
-          <div scDiffViewerEmpty>No differences found</div>
-        }
-      </div>
+    <div scCodeBlock>
+      <div
+        scDiffViewer
+        #diff="scDiffViewer"
+        [oldText]="text"
+        [newText]="text"
+      ></div>
+      @if (diff.identical()) {
+        <div scCodeBlockFooter>No differences.</div>
+      }
     </div>
   \`,
-  host: { class: 'flex w-full justify-center' },
+  host: { class: 'block w-full max-w-3xl' },
   encapsulation: ViewEncapsulation.None,
 })
-export class IdenticalDiffViewerDemo {}`;
+export class IdenticalDiffViewerDemo {
+  readonly text = \`ng add @semantic-components/ui\`;
+}`;
 }

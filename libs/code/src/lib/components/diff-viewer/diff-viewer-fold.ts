@@ -11,13 +11,13 @@ export interface ScDiffViewerFoldContext {
  * shows them.
  */
 @Directive({
-  selector: 'ng-template[scDiffViewerNextFold]',
+  selector: 'ng-template[scDiffViewerFold]',
 })
-export class ScDiffViewerNextFold {
+export class ScDiffViewerFold {
   readonly template = inject<TemplateRef<ScDiffViewerFoldContext>>(TemplateRef);
 
   static ngTemplateContextGuard(
-    _dir: ScDiffViewerNextFold,
+    _dir: ScDiffViewerFold,
     context: unknown,
   ): context is ScDiffViewerFoldContext {
     return !!context;

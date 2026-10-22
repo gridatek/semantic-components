@@ -1,8 +1,7 @@
 import { type Page, expect, test } from '@playwright/test';
 import { collectErrors } from '../../interaction';
 
-const demo = (name: string) =>
-  `/demos/diff-viewer-next/${name}-diff-viewer-next-demo`;
+const demo = (name: string) => `/demos/diff-viewer/${name}-diff-viewer-demo`;
 const viewer = (page: Page) => page.locator('[data-slot="diff-viewer"]');
 const lines = (page: Page, variant?: string) =>
   page.locator(

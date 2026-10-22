@@ -12,8 +12,8 @@ Put it in a code block for its frame and header — your title, counts and view 
     <div scCodeBlockTitle>counter.ts</div>
     <span>+{{ diff.additions() }} −{{ diff.deletions() }}</span>
   </div>
-  <div scDiffViewerNext #diff="scDiffViewerNext" language="typescript" [oldText]="before" [newText]="after" [(view)]="view" [context]="3">
-    <ng-template scDiffViewerNextFold let-count>Show {{ count }} unchanged lines</ng-template>
+  <div scDiffViewer #diff="scDiffViewer" language="typescript" [oldText]="before" [newText]="after" [(view)]="view" [context]="3">
+    <ng-template scDiffViewerFold let-count>Show {{ count }} unchanged lines</ng-template>
   </div>
 </div>
 ```
@@ -22,7 +22,7 @@ It renders the lines itself; the only thing inside it is the optional fold templ
 
 ## API
 
-### ScDiffViewerNext — `div[scDiffViewerNext]`, `#diff="scDiffViewerNext"`
+### ScDiffViewer — `div[scDiffViewer]`, `#diff="scDiffViewer"`
 
 | Input                             | Type                           | Default       |
 | --------------------------------- | ------------------------------ | ------------- |
@@ -40,7 +40,7 @@ It renders the lines itself; the only thing inside it is the optional fold templ
 
 - **Highlighting**: by the app's highlighter (`provideCodeHighlighter()`), each text whole, so multi-line strings and comments stay right; plain without one.
 - **Changed words**: within a removed line facing an added one, the words that differ are tinted.
-- **Folding**: with `context` and a `ng-template[scDiffViewerNextFold]` (`let-count`: the hidden lines), unchanged runs beyond `context` lines of a change fold into a button — its text yours; a click shows them. Without the template, nothing folds.
+- **Folding**: with `context` and a `ng-template[scDiffViewerFold]` (`let-count`: the hidden lines), unchanged runs beyond `context` lines of a change fold into a button — its text yours; a click shows them. Without the template, nothing folds.
 - **Split view**: long lines wrap; an added line faces an empty cell, and so does a removed one.
 
 ### Pure functions

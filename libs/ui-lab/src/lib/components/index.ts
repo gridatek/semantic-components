@@ -5,7 +5,6 @@ export * from './bubble';
 export * from './color-picker';
 export * from './compare';
 export * from './countdown';
-export * from './diff-viewer';
 export * from './dock';
 export * from './emoji-picker';
 export * from './image-annotator';

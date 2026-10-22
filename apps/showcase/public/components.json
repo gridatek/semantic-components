@@ -306,15 +306,7 @@
   {
     "name": "Diff Viewer",
     "path": "diff-viewer",
-    "description": "Compare and display text differences.",
-    "status": "Experimental",
-    "library": "ui-lab",
-    "category": "Editor"
-  },
-  {
-    "name": "Diff Viewer Next",
-    "path": "diff-viewer-next",
-    "description": "The diff viewer, rebuilt: two texts compared, split or unified, highlighted.",
+    "description": "Two texts compared, line by line and word by word: split or unified, highlighted.",
     "status": "Experimental",
     "library": "code",
     "category": "Editor"

@@ -1,30 +1,30 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { FoldedDiffViewerNextDemo } from './folded-diff-viewer-next-demo';
+import { FoldedDiffViewerDemo } from './folded-diff-viewer-demo';
 
 @Component({
-  selector: 'app-folded-diff-viewer-next-demo-container',
-  imports: [DemoContainer, FoldedDiffViewerNextDemo],
+  selector: 'app-folded-diff-viewer-demo-container',
+  imports: [DemoContainer, FoldedDiffViewerDemo],
   template: `
     <app-demo-container
       title="Folded"
       [code]="code"
-      demoUrl="/demos/diff-viewer-next/folded-diff-viewer-next-demo"
+      demoUrl="/demos/diff-viewer/folded-diff-viewer-demo"
     >
-      <app-folded-diff-viewer-next-demo />
+      <app-folded-diff-viewer-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class FoldedDiffViewerNextDemoContainer {
+export class FoldedDiffViewerDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCodeBlock,
   ScCodeBlockHeader,
   ScCodeBlockTitle,
-  ScDiffViewerNext,
-  ScDiffViewerNextFold,
+  ScDiffViewer,
+  ScDiffViewerFold,
 } from '@semantic-components/code';
 
 /** Settings with \`count\` keys. */
@@ -34,15 +34,15 @@ function settings(count: number): Record<string, string> {
   );
 }
 
-/** context: unchanged lines kept around each change; the rest folded — your scDiffViewerNextFold template writes the button, a click shows them. */
+/** context: unchanged lines kept around each change; the rest folded — your scDiffViewerFold template writes the button, a click shows them. */
 @Component({
-  selector: 'app-folded-diff-viewer-next-demo',
+  selector: 'app-folded-diff-viewer-demo',
   imports: [
     ScCodeBlock,
-    ScDiffViewerNext,
+    ScDiffViewer,
     ScCodeBlockHeader,
     ScCodeBlockTitle,
-    ScDiffViewerNextFold,
+    ScDiffViewerFold,
   ],
   template: \`
     <div scCodeBlock>
@@ -50,13 +50,13 @@ function settings(count: number): Record<string, string> {
         <div scCodeBlockTitle>settings.json</div>
       </div>
       <div
-        scDiffViewerNext
+        scDiffViewer
         language="json"
         [context]="2"
         [oldText]="before"
         [newText]="after"
       >
-        <ng-template scDiffViewerNextFold let-count>
+        <ng-template scDiffViewerFold let-count>
           Show {{ count }} unchanged lines
         </ng-template>
       </div>
@@ -65,7 +65,7 @@ function settings(count: number): Record<string, string> {
   host: { class: 'block w-full max-w-3xl' },
   encapsulation: ViewEncapsulation.None,
 })
-export class FoldedDiffViewerNextDemo {
+export class FoldedDiffViewerDemo {
   readonly before = JSON.stringify(settings(14), null, 2);
   readonly after = JSON.stringify(
     { ...settings(14), key7: 'changed' },
