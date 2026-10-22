@@ -56,12 +56,7 @@ import {
     SiXIcon,
   ],
   template: \`
-    <div
-      scFileUpload
-      #upload="scFileUpload"
-      multiple
-      class="w-full max-w-md"
-    >
+    <div scFileUpload #upload="scFileUpload" multiple class="w-full max-w-md">
       <input scFileUploadInput />
       <div scFileUploadDropzone>
         <svg siUploadIcon class="size-6"></svg>

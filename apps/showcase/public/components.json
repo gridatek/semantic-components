@@ -888,6 +888,14 @@
     "category": "Forms"
   },
   {
+    "name": "Tags Input Next",
+    "path": "tags-input-next",
+    "description": "The tags input, rebuilt: tags typed into one field, a string[] for Signal Forms, checked before they go in.",
+    "status": "Experimental",
+    "library": "ui-lab",
+    "category": "Forms"
+  },
+  {
     "name": "Textarea",
     "path": "textarea",
     "description": "A multi-line text input field.",

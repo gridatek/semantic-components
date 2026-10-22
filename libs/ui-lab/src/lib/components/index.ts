@@ -31,6 +31,7 @@ export * from './spotlight';
 export * from './stat-card';
 export * from './stepper';
 export * from './tags-input';
+export * from './tags-input-next';
 export * from './time-picker-clock';
 export * from './timeline';
 export * from './tour-guide';

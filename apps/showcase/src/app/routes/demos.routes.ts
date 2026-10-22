@@ -3643,6 +3643,39 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/tags-input-next',
+    children: [
+      {
+        path: 'basic-tags-input-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/tags-input-next/demos/basic-tags-input-next-demo').then(
+            (m) => m.BasicTagsInputNextDemo,
+          ),
+      },
+      {
+        path: 'emails-tags-input-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/tags-input-next/demos/emails-tags-input-next-demo').then(
+            (m) => m.EmailsTagsInputNextDemo,
+          ),
+      },
+      {
+        path: 'limit-tags-input-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/tags-input-next/demos/limit-tags-input-next-demo').then(
+            (m) => m.LimitTagsInputNextDemo,
+          ),
+      },
+      {
+        path: 'form-tags-input-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/tags-input-next/demos/form-tags-input-next-demo').then(
+            (m) => m.FormTagsInputNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/textarea',
     children: [
       {
