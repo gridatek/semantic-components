@@ -6,8 +6,11 @@ import {
   ScCalendarNext,
   ScCalendarPrevious,
   type ScCalendarValue,
-  ScDatePickerNext,
-  ScDatePickerNextTrigger,
+  ScDatePicker,
+  ScDatePickerInput,
+  ScDatePickerTrigger,
+  ScInputGroup,
+  ScInputGroupAddon,
   ScPopover,
   ScPopoverPortal,
   ScPopoverProvider,
@@ -18,12 +21,14 @@ import {
   SiChevronRightIcon,
 } from '@semantic-icons/lucide-icons';
 
-/** A button showing the day, opening the calendar — focus on its day. A pick closes it, focus back on the button; Escape closes it too. */
+/** locale="fr-FR" and a long format: the value, the calendar and the typed order (jj/mm/aaaa) in French. */
 @Component({
-  selector: 'app-basic-date-picker-next-demo',
+  selector: 'app-locale-date-picker-demo',
   imports: [
-    ScDatePickerNext,
-    ScDatePickerNextTrigger,
+    ScInputGroup,
+    ScInputGroupAddon,
+    ScDatePicker,
+    ScDatePickerTrigger,
     ScPopoverProvider,
     ScPopoverPortal,
     ScPopover,
@@ -32,41 +37,55 @@ import {
     ScCalendarHeading,
     ScCalendarPrevious,
     ScCalendarNext,
+    ScDatePickerInput,
     SiCalendarIcon,
     SiChevronLeftIcon,
     SiChevronRightIcon,
   ],
   template: `
-    <div scDatePickerNext #dp="scDatePickerNext" [(value)]="date" class="w-fit">
-      <div scPopoverProvider [origin]="trigger.overlayOrigin" align="start">
-        <button
-          scDatePickerNextTrigger
-          #trigger="scDatePickerNextTrigger"
-          class="w-64"
-        >
-          <svg siCalendarIcon></svg>
-          <span>{{ dp.text() || 'Pick a date' }}</span>
-        </button>
+    <div
+      scDatePicker
+      #dp="scDatePicker"
+      locale="fr-FR"
+      [format]="{ dateStyle: 'long' }"
+      [(value)]="date"
+      class="w-64"
+    >
+      <div scPopoverProvider [origin]="trigger.overlayOrigin" align="end">
+        <div scInputGroup>
+          <input
+            scDatePickerInput
+            aria-label="Date d’arrivée"
+            placeholder="jj/mm/aaaa"
+          />
+          <div scInputGroupAddon align="inline-end">
+            <button scDatePickerTrigger #trigger="scDatePickerTrigger">
+              <svg siCalendarIcon></svg>
+              <span class="sr-only">Choisir une date</span>
+            </button>
+          </div>
+        </div>
         <ng-template scPopoverPortal>
-          <div scPopover class="w-auto p-0" aria-label="Choose a date">
+          <div scPopover class="w-auto p-0" aria-label="Choisir une date">
             <div
               scCalendar
               #cal="scCalendar"
               initialFocus
-              aria-label="Choose a date"
+              aria-label="Choisir une date"
               [mode]="dp.mode()"
               [value]="dp.value()"
               (valueChange)="dp.pick($event)"
+              locale="fr-FR"
             >
               <div scCalendarHeader>
                 <button scCalendarPrevious>
                   <svg siChevronLeftIcon></svg>
-                  <span class="sr-only">Previous month</span>
+                  <span class="sr-only">Mois précédent</span>
                 </button>
                 <button scCalendarHeading>{{ cal.heading() }}</button>
                 <button scCalendarNext>
                   <svg siChevronRightIcon></svg>
-                  <span class="sr-only">Next month</span>
+                  <span class="sr-only">Mois suivant</span>
                 </button>
               </div>
             </div>
@@ -81,6 +100,8 @@ import {
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class BasicDatePickerNextDemo {
-  readonly date = signal<ScCalendarValue>(null);
+export class LocaleDatePickerDemo {
+  readonly date = signal<ScCalendarValue>(
+    Temporal.PlainDate.from('2026-10-14'),
+  );
 }

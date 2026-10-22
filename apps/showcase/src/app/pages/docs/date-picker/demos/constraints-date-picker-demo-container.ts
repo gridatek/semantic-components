@@ -1,23 +1,23 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { LocaleDatePickerNextDemo } from './locale-date-picker-next-demo';
+import { ConstraintsDatePickerDemo } from './constraints-date-picker-demo';
 
 @Component({
-  selector: 'app-locale-date-picker-next-demo-container',
-  imports: [DemoContainer, LocaleDatePickerNextDemo],
+  selector: 'app-constraints-date-picker-demo-container',
+  imports: [DemoContainer, ConstraintsDatePickerDemo],
   template: `
     <app-demo-container
-      title="Locale"
+      title="Constraints"
       [code]="code"
-      demoUrl="/demos/date-picker-next/locale-date-picker-next-demo"
+      demoUrl="/demos/date-picker/constraints-date-picker-demo"
     >
-      <app-locale-date-picker-next-demo />
+      <app-constraints-date-picker-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class LocaleDatePickerNextDemoContainer {
+export class ConstraintsDatePickerDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCalendar,
@@ -26,9 +26,9 @@ import {
   ScCalendarNext,
   ScCalendarPrevious,
   type ScCalendarValue,
-  ScDatePickerNext,
-  ScDatePickerNextInput,
-  ScDatePickerNextTrigger,
+  ScDatePicker,
+  ScDatePickerInput,
+  ScDatePickerTrigger,
   ScInputGroup,
   ScInputGroupAddon,
   ScPopover,
@@ -41,14 +41,14 @@ import {
   SiChevronRightIcon,
 } from '@semantic-icons/lucide-icons';
 
-/** locale="fr-FR" and a long format: the value, the calendar and the typed order (jj/mm/aaaa) in French. */
+/** minDate, maxDate and unavailable days on the picker — given to its calendar, and kept for typed days too: weekends cannot be picked. */
 @Component({
-  selector: 'app-locale-date-picker-next-demo',
+  selector: 'app-constraints-date-picker-demo',
   imports: [
     ScInputGroup,
     ScInputGroupAddon,
-    ScDatePickerNext,
-    ScDatePickerNextTrigger,
+    ScDatePicker,
+    ScDatePickerTrigger,
     ScPopoverProvider,
     ScPopoverPortal,
     ScPopover,
@@ -57,55 +57,58 @@ import {
     ScCalendarHeading,
     ScCalendarPrevious,
     ScCalendarNext,
-    ScDatePickerNextInput,
+    ScDatePickerInput,
     SiCalendarIcon,
     SiChevronLeftIcon,
     SiChevronRightIcon,
   ],
   template: \`
     <div
-      scDatePickerNext
-      #dp="scDatePickerNext"
-      locale="fr-FR"
-      [format]="{ dateStyle: 'long' }"
+      scDatePicker
+      #dp="scDatePicker"
+      [minDate]="min"
+      [maxDate]="max"
+      [unavailable]="weekend"
       [(value)]="date"
       class="w-64"
     >
       <div scPopoverProvider [origin]="trigger.overlayOrigin" align="end">
         <div scInputGroup>
           <input
-            scDatePickerNextInput
-            aria-label="Date d’arrivée"
-            placeholder="jj/mm/aaaa"
+            scDatePickerInput
+            aria-label="Delivery date"
+            placeholder="MM/DD/YYYY"
           />
           <div scInputGroupAddon align="inline-end">
-            <button scDatePickerNextTrigger #trigger="scDatePickerNextTrigger">
+            <button scDatePickerTrigger #trigger="scDatePickerTrigger">
               <svg siCalendarIcon></svg>
-              <span class="sr-only">Choisir une date</span>
+              <span class="sr-only">Choose a delivery date</span>
             </button>
           </div>
         </div>
         <ng-template scPopoverPortal>
-          <div scPopover class="w-auto p-0" aria-label="Choisir une date">
+          <div scPopover class="w-auto p-0" aria-label="Choose a date">
             <div
               scCalendar
               #cal="scCalendar"
               initialFocus
-              aria-label="Choisir une date"
+              aria-label="Choose a date"
               [mode]="dp.mode()"
               [value]="dp.value()"
               (valueChange)="dp.pick($event)"
-              locale="fr-FR"
+              [minDate]="dp.minDate()"
+              [maxDate]="dp.maxDate()"
+              [unavailable]="dp.unavailable()"
             >
               <div scCalendarHeader>
                 <button scCalendarPrevious>
                   <svg siChevronLeftIcon></svg>
-                  <span class="sr-only">Mois précédent</span>
+                  <span class="sr-only">Previous month</span>
                 </button>
                 <button scCalendarHeading>{{ cal.heading() }}</button>
                 <button scCalendarNext>
                   <svg siChevronRightIcon></svg>
-                  <span class="sr-only">Mois suivant</span>
+                  <span class="sr-only">Next month</span>
                 </button>
               </div>
             </div>
@@ -120,9 +123,11 @@ import {
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class LocaleDatePickerNextDemo {
-  readonly date = signal<ScCalendarValue>(
-    Temporal.PlainDate.from('2026-10-14'),
-  );
+export class ConstraintsDatePickerDemo {
+  readonly min = Temporal.PlainDate.from('2026-10-08');
+  readonly max = Temporal.PlainDate.from('2026-11-20');
+  readonly date = signal<ScCalendarValue>(null);
+  /** Saturdays and Sundays. */
+  readonly weekend = (date: Temporal.PlainDate) => date.dayOfWeek > 5;
 }`;
 }

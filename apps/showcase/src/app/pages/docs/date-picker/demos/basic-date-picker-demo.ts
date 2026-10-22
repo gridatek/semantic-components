@@ -5,6 +5,7 @@ import {
   ScCalendarHeading,
   ScCalendarNext,
   ScCalendarPrevious,
+  type ScCalendarValue,
   ScDatePicker,
   ScDatePickerTrigger,
   ScPopover,
@@ -17,6 +18,7 @@ import {
   SiChevronRightIcon,
 } from '@semantic-icons/lucide-icons';
 
+/** A button showing the day, opening the calendar — focus on its day. A pick closes it, focus back on the button; Escape closes it too. */
 @Component({
   selector: 'app-basic-date-picker-demo',
   imports: [
@@ -35,106 +37,46 @@ import {
     SiChevronRightIcon,
   ],
   template: `
-    <div class="space-y-4">
-      <div scDatePicker [(value)]="selectedDate" #dp="scDatePicker">
-        <div scPopoverProvider [origin]="trigger.overlayOrigin" align="start">
-          <button scDatePickerTrigger #trigger="scDatePickerTrigger">
-            <svg siCalendarIcon class="mr-2 size-4"></svg>
-            <span [class]="dp.displayText() ? '' : 'text-muted-foreground'">
-              {{ dp.displayText() || 'Pick a date' }}
-            </span>
-          </button>
-          <ng-template scPopoverPortal>
-            <div scPopover class="w-auto p-0">
-              <div
-                scCalendar
-                aria-label="Calendar"
-                [value]="dp.value()"
-                (valueChange)="dp.onValueChange($event)"
-                #cal="scCalendar"
-              >
-                <div scCalendarHeader>
-                  <button scCalendarPrevious>
-                    <svg siChevronLeftIcon class="size-4"></svg>
-                    <span class="sr-only">
-                      @switch (cal.view()) {
-                        @case ('day') {
-                          Go to previous month
-                        }
-                        @case ('month') {
-                          Go to previous year
-                        }
-                        @case ('year') {
-                          Go to previous decade
-                        }
-                      }
-                    </span>
-                  </button>
-                  <button scCalendarHeading>{{ cal.heading() }}</button>
-                  <button scCalendarNext>
-                    <svg siChevronRightIcon class="size-4"></svg>
-                    <span class="sr-only">
-                      @switch (cal.view()) {
-                        @case ('day') {
-                          Go to next month
-                        }
-                        @case ('month') {
-                          Go to next year
-                        }
-                        @case ('year') {
-                          Go to next decade
-                        }
-                      }
-                    </span>
-                  </button>
-                </div>
+    <div scDatePicker #dp="scDatePicker" [(value)]="date" class="w-fit">
+      <div scPopoverProvider [origin]="trigger.overlayOrigin" align="start">
+        <button scDatePickerTrigger #trigger="scDatePickerTrigger" class="w-64">
+          <svg siCalendarIcon></svg>
+          <span>{{ dp.text() || 'Pick a date' }}</span>
+        </button>
+        <ng-template scPopoverPortal>
+          <div scPopover class="w-auto p-0" aria-label="Choose a date">
+            <div
+              scCalendar
+              #cal="scCalendar"
+              initialFocus
+              aria-label="Choose a date"
+              [mode]="dp.mode()"
+              [value]="dp.value()"
+              (valueChange)="dp.pick($event)"
+            >
+              <div scCalendarHeader>
+                <button scCalendarPrevious>
+                  <svg siChevronLeftIcon></svg>
+                  <span class="sr-only">Previous month</span>
+                </button>
+                <button scCalendarHeading>{{ cal.heading() }}</button>
+                <button scCalendarNext>
+                  <svg siChevronRightIcon></svg>
+                  <span class="sr-only">Next month</span>
+                </button>
               </div>
             </div>
-          </ng-template>
-        </div>
-      </div>
-
-      @if (selectedDate(); as date) {
-        <div
-          class="bg-muted/50 flex items-center justify-between rounded-md border p-4"
-        >
-          <div>
-            <p class="text-sm font-medium">Selected Date</p>
-            <p class="text-muted-foreground text-sm">
-              {{
-                date.toLocaleString('en-US', {
-                  weekday: 'long',
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                })
-              }}
-            </p>
           </div>
-          <button
-            type="button"
-            class="hover:bg-accent rounded-md border px-3 py-1 text-sm"
-            (click)="clearSelection()"
-          >
-            Clear
-          </button>
-        </div>
-      } @else {
-        <p
-          class="text-muted-foreground rounded-md border p-4 text-center text-sm"
-        >
-          No date selected
-        </p>
-      }
+        </ng-template>
+      </div>
     </div>
+    <p class="text-muted-foreground text-sm" data-testid="picked">
+      {{ dp.text() || 'Nothing picked.' }}
+    </p>
   `,
-  host: { class: 'flex w-full justify-center' },
+  host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicDatePickerDemo {
-  readonly selectedDate = signal<Temporal.PlainDate | null>(null);
-
-  clearSelection(): void {
-    this.selectedDate.set(null);
-  }
+  readonly date = signal<ScCalendarValue>(null);
 }

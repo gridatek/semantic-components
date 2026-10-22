@@ -1,23 +1,23 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { RangeDatePickerNextDemo } from './range-date-picker-next-demo';
+import { LocaleDatePickerDemo } from './locale-date-picker-demo';
 
 @Component({
-  selector: 'app-range-date-picker-next-demo-container',
-  imports: [DemoContainer, RangeDatePickerNextDemo],
+  selector: 'app-locale-date-picker-demo-container',
+  imports: [DemoContainer, LocaleDatePickerDemo],
   template: `
     <app-demo-container
-      title="Range"
+      title="Locale"
       [code]="code"
-      demoUrl="/demos/date-picker-next/range-date-picker-next-demo"
+      demoUrl="/demos/date-picker/locale-date-picker-demo"
     >
-      <app-range-date-picker-next-demo />
+      <app-locale-date-picker-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class RangeDatePickerNextDemoContainer {
+export class LocaleDatePickerDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCalendar,
@@ -26,8 +26,11 @@ import {
   ScCalendarNext,
   ScCalendarPrevious,
   type ScCalendarValue,
-  ScDatePickerNext,
-  ScDatePickerNextTrigger,
+  ScDatePicker,
+  ScDatePickerInput,
+  ScDatePickerTrigger,
+  ScInputGroup,
+  ScInputGroupAddon,
   ScPopover,
   ScPopoverPortal,
   ScPopoverProvider,
@@ -38,12 +41,14 @@ import {
   SiChevronRightIcon,
 } from '@semantic-icons/lucide-icons';
 
-/** A range over two months: written as one span ("Oct 12 – 18, 2026"), closed once both ends are picked. */
+/** locale="fr-FR" and a long format: the value, the calendar and the typed order (jj/mm/aaaa) in French. */
 @Component({
-  selector: 'app-range-date-picker-next-demo',
+  selector: 'app-locale-date-picker-demo',
   imports: [
-    ScDatePickerNext,
-    ScDatePickerNextTrigger,
+    ScInputGroup,
+    ScInputGroupAddon,
+    ScDatePicker,
+    ScDatePickerTrigger,
     ScPopoverProvider,
     ScPopoverPortal,
     ScPopover,
@@ -52,48 +57,55 @@ import {
     ScCalendarHeading,
     ScCalendarPrevious,
     ScCalendarNext,
+    ScDatePickerInput,
     SiCalendarIcon,
     SiChevronLeftIcon,
     SiChevronRightIcon,
   ],
   template: \`
     <div
-      scDatePickerNext
-      #dp="scDatePickerNext"
-      mode="range"
-      [(value)]="stay"
-      class="w-fit"
+      scDatePicker
+      #dp="scDatePicker"
+      locale="fr-FR"
+      [format]="{ dateStyle: 'long' }"
+      [(value)]="date"
+      class="w-64"
     >
-      <div scPopoverProvider [origin]="trigger.overlayOrigin" align="start">
-        <button
-          scDatePickerNextTrigger
-          #trigger="scDatePickerNextTrigger"
-          class="w-72"
-        >
-          <svg siCalendarIcon></svg>
-          <span>{{ dp.text() || 'Pick your dates' }}</span>
-        </button>
+      <div scPopoverProvider [origin]="trigger.overlayOrigin" align="end">
+        <div scInputGroup>
+          <input
+            scDatePickerInput
+            aria-label="Date d’arrivée"
+            placeholder="jj/mm/aaaa"
+          />
+          <div scInputGroupAddon align="inline-end">
+            <button scDatePickerTrigger #trigger="scDatePickerTrigger">
+              <svg siCalendarIcon></svg>
+              <span class="sr-only">Choisir une date</span>
+            </button>
+          </div>
+        </div>
         <ng-template scPopoverPortal>
-          <div scPopover class="w-auto p-0" aria-label="Choose your dates">
+          <div scPopover class="w-auto p-0" aria-label="Choisir une date">
             <div
               scCalendar
               #cal="scCalendar"
               initialFocus
-              aria-label="Choose your dates"
+              aria-label="Choisir une date"
               [mode]="dp.mode()"
               [value]="dp.value()"
               (valueChange)="dp.pick($event)"
-              [numberOfMonths]="2"
+              locale="fr-FR"
             >
               <div scCalendarHeader>
                 <button scCalendarPrevious>
                   <svg siChevronLeftIcon></svg>
-                  <span class="sr-only">Previous month</span>
+                  <span class="sr-only">Mois précédent</span>
                 </button>
                 <button scCalendarHeading>{{ cal.heading() }}</button>
                 <button scCalendarNext>
                   <svg siChevronRightIcon></svg>
-                  <span class="sr-only">Next month</span>
+                  <span class="sr-only">Mois suivant</span>
                 </button>
               </div>
             </div>
@@ -108,7 +120,9 @@ import {
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class RangeDatePickerNextDemo {
-  readonly stay = signal<ScCalendarValue>(null);
+export class LocaleDatePickerDemo {
+  readonly date = signal<ScCalendarValue>(
+    Temporal.PlainDate.from('2026-10-14'),
+  );
 }`;
 }

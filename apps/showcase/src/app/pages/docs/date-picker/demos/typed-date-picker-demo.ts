@@ -6,9 +6,9 @@ import {
   ScCalendarNext,
   ScCalendarPrevious,
   type ScCalendarValue,
-  ScDatePickerNext,
-  ScDatePickerNextInput,
-  ScDatePickerNextTrigger,
+  ScDatePicker,
+  ScDatePickerInput,
+  ScDatePickerTrigger,
   ScField,
   ScFieldDescription,
   ScInputGroup,
@@ -24,14 +24,14 @@ import {
   SiChevronRightIcon,
 } from '@semantic-icons/lucide-icons';
 
-/** A date of birth: the calendar opens on the years — a year, its month, its day; 18 or older: nothing after this day 18 years ago. Typed too. */
+/** Typed, or picked: the locale’s numeric order (here 10/14/2026) or ISO, read on Enter or leaving; text that is not a day stays, marked. The button in the field opens the calendar. */
 @Component({
-  selector: 'app-birth-date-picker-next-demo',
+  selector: 'app-typed-date-picker-demo',
   imports: [
     ScInputGroup,
     ScInputGroupAddon,
-    ScDatePickerNext,
-    ScDatePickerNextTrigger,
+    ScDatePicker,
+    ScDatePickerTrigger,
     ScPopoverProvider,
     ScPopoverPortal,
     ScPopover,
@@ -40,7 +40,7 @@ import {
     ScCalendarHeading,
     ScCalendarPrevious,
     ScCalendarNext,
-    ScDatePickerNextInput,
+    ScDatePickerInput,
     ScField,
     ScFieldDescription,
     ScLabel,
@@ -50,39 +50,25 @@ import {
   ],
   template: `
     <div scField class="w-64">
-      <label scLabel>Date of birth</label>
-      <div
-        scDatePickerNext
-        #dp="scDatePickerNext"
-        [maxDate]="adult"
-        [(value)]="date"
-      >
+      <label scLabel>Start date</label>
+      <div scDatePicker #dp="scDatePicker" [(value)]="date">
         <div scPopoverProvider [origin]="trigger.overlayOrigin" align="end">
           <div scInputGroup>
-            <input scDatePickerNextInput placeholder="MM/DD/YYYY" />
+            <input scDatePickerInput placeholder="MM/DD/YYYY" />
             <div scInputGroupAddon align="inline-end">
-              <button
-                scDatePickerNextTrigger
-                #trigger="scDatePickerNextTrigger"
-              >
+              <button scDatePickerTrigger #trigger="scDatePickerTrigger">
                 <svg siCalendarIcon></svg>
-                <span class="sr-only">Choose your date of birth</span>
+                <span class="sr-only">Choose a date</span>
               </button>
             </div>
           </div>
           <ng-template scPopoverPortal>
-            <div
-              scPopover
-              class="w-auto p-0"
-              aria-label="Choose your date of birth"
-            >
+            <div scPopover class="w-auto p-0" aria-label="Choose a date">
               <div
                 scCalendar
                 #cal="scCalendar"
                 initialFocus
-                startView="year"
-                [maxDate]="adult"
-                aria-label="Choose your date of birth"
+                aria-label="Choose a date"
                 [mode]="dp.mode()"
                 [value]="dp.value()"
                 (valueChange)="dp.pick($event)"
@@ -90,36 +76,12 @@ import {
                 <div scCalendarHeader>
                   <button scCalendarPrevious>
                     <svg siChevronLeftIcon></svg>
-                    <span class="sr-only">
-                      @switch (cal.view()) {
-                        @case ('year') {
-                          Previous years
-                        }
-                        @case ('month') {
-                          Previous year
-                        }
-                        @default {
-                          Previous month
-                        }
-                      }
-                    </span>
+                    <span class="sr-only">Previous month</span>
                   </button>
                   <button scCalendarHeading>{{ cal.heading() }}</button>
                   <button scCalendarNext>
                     <svg siChevronRightIcon></svg>
-                    <span class="sr-only">
-                      @switch (cal.view()) {
-                        @case ('year') {
-                          Next years
-                        }
-                        @case ('month') {
-                          Next year
-                        }
-                        @default {
-                          Next month
-                        }
-                      }
-                    </span>
+                    <span class="sr-only">Next month</span>
                   </button>
                 </div>
               </div>
@@ -127,7 +89,7 @@ import {
           </ng-template>
         </div>
       </div>
-      <p scFieldDescription>You must be 18 or older.</p>
+      <p scFieldDescription>Month, day, year.</p>
     </div>
     <p class="text-muted-foreground text-sm" data-testid="picked">
       {{ dp.text() || 'Nothing picked.' }}
@@ -136,8 +98,6 @@ import {
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class BirthDatePickerNextDemo {
-  /** 18 years old today, at the latest. */
-  readonly adult = Temporal.Now.plainDateISO().subtract({ years: 18 });
+export class TypedDatePickerDemo {
   readonly date = signal<ScCalendarValue>(null);
 }

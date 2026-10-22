@@ -1,29 +1,39 @@
 # Date Picker
 
-A composable date picker built from directives. The consumer writes all markup and composes existing popover + calendar directives directly.
+A day, a range or several days, picked in a calendar in a popover — or typed. Its value is the calendar's; `text()` is that value written in the app's language with `Intl` (a range as one span, several days as a list). A `[formField]`. It closes when a pick is done, and focus goes back to its trigger.
+
+## Architecture
+
+```
+div[scDatePicker] (mode, [(value)] / [formField], format, locale,
+│                      minDate, maxDate, unavailable, disabled)
+│  text() · hasValue() · showInvalid() · pick(value) · canPick(date)
+├── input[scDatePickerInput]        — typed: the locale's numeric order, or ISO (single mode)
+└── div[scPopoverProvider]
+    ├── button[scDatePickerTrigger] — your icon and words
+    └── ng-template[scPopoverPortal]
+        └── div[scPopover]
+            └── div[scCalendar] initialFocus [mode]="dp.mode()" [value]="dp.value()" (valueChange)="dp.pick($event)"
+```
+
+The calendar is the [calendar](../calendar/README.md), written in full: its header, footer, months and constraints are yours. Give `minDate`, `maxDate` and `unavailable` to both: the picker uses them to check typed days.
 
 ## Usage
 
 ```html
-<div scDatePicker [(value)]="selectedDate" #dp="scDatePicker">
+<div scDatePicker #dp="scDatePicker" [(value)]="date">
   <div scPopoverProvider [origin]="trigger.overlayOrigin" align="start">
     <button scDatePickerTrigger #trigger="scDatePickerTrigger">
-      <svg siCalendarIcon class="mr-2 size-4"></svg>
-      <span [class]="dp.displayText() ? '' : 'text-muted-foreground'">{{ dp.displayText() || 'Pick a date' }}</span>
+      <svg siCalendarIcon></svg>
+      <span>{{ dp.text() || 'Pick a date' }}</span>
     </button>
     <ng-template scPopoverPortal>
-      <div scPopover class="w-auto p-0">
-        <div scCalendar aria-label="Calendar" [value]="dp.value()" (valueChange)="dp.onValueChange($event)" #cal="scCalendar">
+      <div scPopover class="w-auto p-0" aria-label="Choose a date">
+        <div scCalendar #cal="scCalendar" initialFocus aria-label="Choose a date" [mode]="dp.mode()" [value]="dp.value()" (valueChange)="dp.pick($event)">
           <div scCalendarHeader>
-            <button scCalendarPrevious>
-              <svg siChevronLeftIcon class="size-4"></svg>
-              <span class="sr-only">@switch (cal.view()) { @case ('day') { Go to previous month } @case ('month') { Go to previous year } @case ('year') { Go to previous decade } }</span>
-            </button>
+            <button scCalendarPrevious><svg siChevronLeftIcon></svg><span class="sr-only">Previous month</span></button>
             <button scCalendarHeading>{{ cal.heading() }}</button>
-            <button scCalendarNext>
-              <svg siChevronRightIcon class="size-4"></svg>
-              <span class="sr-only">@switch (cal.view()) { @case ('day') { Go to next month } @case ('month') { Go to next year } @case ('year') { Go to next decade } }</span>
-            </button>
+            <button scCalendarNext><svg siChevronRightIcon></svg><span class="sr-only">Next month</span></button>
           </div>
         </div>
       </div>
@@ -32,91 +42,67 @@ A composable date picker built from directives. The consumer writes all markup a
 </div>
 ```
 
-## Directives
-
-### ScDatePicker
-
-Root directive that manages value, display text, and auto-close logic.
-
-**Selector:** `div[scDatePicker]`
-**Export:** `scDatePicker`
-
-**Inputs:**
-
-| Input   | Type                               | Default    | Description    |
-| ------- | ---------------------------------- | ---------- | -------------- |
-| `mode`  | `'single' \| 'multiple'\| 'range'` | `'single'` | Selection mode |
-| `class` | `string`                           | `''`       | CSS classes    |
-
-**Two-way Bindings:**
-
-| Binding | Type              | Description    |
-| ------- | ----------------- | -------------- |
-| `value` | `ScCalendarValue` | Selected value |
-
-**Public API:**
-
-| Member                    | Type                           | Description                                         |
-| ------------------------- | ------------------------------ | --------------------------------------------------- |
-| `displayText()`           | `Signal<string>`               | Formatted display text based on mode and value      |
-| `placeholder()`           | `InputSignal<string>`          | The placeholder input                               |
-| `value()`                 | `ModelSignal<ScCalendarValue>` | The current value                                   |
-| `mode()`                  | `InputSignal<ScCalendarMode>`  | The current mode                                    |
-| `onValueChange(newValue)` | `(v: ScCalendarValue) => void` | Sets value and auto-closes popover when appropriate |
-
-### ScDatePickerTrigger
-
-Trigger button with input-like styling and popover toggle behavior.
-
-**Selector:** `button[scDatePickerTrigger]`
-**Export:** `scDatePickerTrigger`
-
-**Inputs:**
-
-| Input   | Type     | Default | Description |
-| ------- | -------- | ------- | ----------- |
-| `class` | `string` | `''`    | CSS classes |
-
-**Public API:**
-
-| Member          | Type               | Description                                    |
-| --------------- | ------------------ | ---------------------------------------------- |
-| `overlayOrigin` | `CdkOverlayOrigin` | Pass to `ScPopoverProvider`'s `[origin]` input |
-
-## Examples
-
-### Date Range Picker
+Typed, in a field — the input and the trigger in an input group; there the trigger is an icon button (`variant` ghost, `buttonSize` icon-xs):
 
 ```html
-<div scDatePicker mode="range" [(value)]="range" #dp="scDatePicker">...</div>
+<div scField>
+  <label scLabel>Start date</label>
+  <div scDatePicker #dp="scDatePicker" [formField]="form.start">
+    <div scPopoverProvider [origin]="trigger.overlayOrigin" align="end">
+      <div scInputGroup>
+        <input scDatePickerInput placeholder="MM/DD/YYYY" />
+        <div scInputGroupAddon align="inline-end">
+          <button scDatePickerTrigger #trigger="scDatePickerTrigger">
+            <svg siCalendarIcon></svg>
+            <span class="sr-only">Choose a date</span>
+          </button>
+        </div>
+      </div>
+      <ng-template scPopoverPortal>…the calendar…</ng-template>
+    </div>
+  </div>
+  <p scFieldDescription>Month, day, year.</p>
+</div>
 ```
 
-### Multiple Dates
+## API
 
-```html
-<div scDatePicker mode="multiple" [(value)]="dates" placeholder="Select dates" #dp="scDatePicker">...</div>
-```
+### ScDatePicker — `div[scDatePicker]`, `#dp="scDatePicker"`
 
-### With Date Constraints
+| Input                              | Type                                    | Default                   |
+| ---------------------------------- | --------------------------------------- | ------------------------- |
+| `value`                            | `ScCalendarValue` (model)               | `null`                    |
+| `mode`                             | `'single' \| 'multiple' \| 'range'`     | `'single'`                |
+| `format`                           | `Intl.DateTimeFormatOptions`            | `{ dateStyle: 'medium' }` |
+| `locale`                           | `string`                                | `LOCALE_ID`               |
+| `minDate` / `maxDate`              | `Temporal.PlainDate \| undefined`       | —                         |
+| `unavailable`                      | `(date: Temporal.PlainDate) => boolean` | `() => false`             |
+| `disabled` / `invalid` / `touched` | `boolean`                               | `false`                   |
+| `class`                            | `string`                                | `''`                      |
 
-Pass `[minDate]` and `[maxDate]` directly on the `scCalendar` directive:
+| Output  | When                                                                              |
+| ------- | --------------------------------------------------------------------------------- |
+| `touch` | The calendar closed, or the input was left (Signal Forms marks the field touched) |
 
-```html
-<div scCalendar aria-label="Calendar" [value]="dp.value()" [minDate]="minDate" [maxDate]="maxDate" (valueChange)="dp.onValueChange($event)">...</div>
-```
+| Member          | Description                                                                                |
+| --------------- | ------------------------------------------------------------------------------------------ |
+| `text()`        | The value as written: a day, a range (`formatRange`), a list (`Intl.ListFormat`) — or `''` |
+| `hasValue()`    | `text()` is not empty                                                                      |
+| `showInvalid()` | Typed text that is not a day, or invalid once touched                                      |
+| `pick(value)`   | The calendar's `(valueChange)`: kept; closed for a day or a whole range                    |
+| `canPick(date)` | Within `minDate` / `maxDate`, not `unavailable`                                            |
 
-## Features
+### ScDatePickerTrigger — `button[scDatePickerTrigger]`
 
-- **Fully composable**: Consumer writes all markup and can customize any part
-- **Popover integration**: Uses existing ScPopoverProvider + ScPopoverPortal
-- **Calendar integration**: Uses existing ScCalendar directives
-- **Auto-close**: Closes on date selection (single/range complete)
-- **Display format**: Shows selected date(s) via `displayText()` computed
-- **Selection modes**: Single, multiple, and range selection
+Looks like a select trigger (`size`: default, sm) — in an input group, an icon button (`variant`, `buttonSize`). Opens and closes the popover. `aria-haspopup="dialog"`, `aria-expanded`, `aria-invalid`; `data-placeholder` while there is no value.
+
+### ScDatePickerInput — `input[scDatePickerInput]`
+
+Single mode. Read on Enter and on leaving: the locale's numeric order (`10/14/2026`, `14/10/2026`, `14.10.2026`) or ISO (`2026-10-14`); a two-digit year is 20xx. Text that is not a day that can be picked stays, marked `aria-invalid`, until it is edited. Shows the value in the locale's numeric form. Takes its id and description from `scField`.
 
 ## Accessibility
 
-- `aria-haspopup="dialog"` and `aria-expanded` on trigger button
-- Inherits accessibility features from Popover and Calendar
-- Keyboard navigation within calendar
-- Focus management between trigger and calendar
+- The trigger says it opens a dialog and whether it is open; the popover and the calendar are named by you.
+- `initialFocus` on the calendar puts focus on the selected day (or today) when it opens.
+- Closing with a pick or Escape puts focus back on the trigger; a click outside leaves focus where it landed (on the trigger, if it landed on nothing focusable).
+- An icon-only trigger needs an `sr-only` name.

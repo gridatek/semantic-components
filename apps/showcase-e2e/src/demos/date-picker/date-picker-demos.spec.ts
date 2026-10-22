@@ -1,8 +1,7 @@
 import { type Page, expect, test } from '@playwright/test';
 import { collectErrors, press } from '../../interaction';
 
-const demo = (name: string) =>
-  `/demos/date-picker-next/${name}-date-picker-next-demo`;
+const demo = (name: string) => `/demos/date-picker/${name}-date-picker-demo`;
 const trigger = (page: Page) =>
   page.locator('[data-slot="date-picker-trigger"]');
 const calendar = (page: Page) => page.locator('[data-slot="calendar"]');

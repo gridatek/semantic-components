@@ -1,4 +1,24 @@
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { TypedDatePickerDemo } from './typed-date-picker-demo';
+
+@Component({
+  selector: 'app-typed-date-picker-demo-container',
+  imports: [DemoContainer, TypedDatePickerDemo],
+  template: `
+    <app-demo-container
+      title="Typed"
+      [code]="code"
+      demoUrl="/demos/date-picker/typed-date-picker-demo"
+    >
+      <app-typed-date-picker-demo />
+    </app-demo-container>
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class TypedDatePickerDemoContainer {
+  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCalendar,
   ScCalendarHeader,
@@ -6,9 +26,9 @@ import {
   ScCalendarNext,
   ScCalendarPrevious,
   type ScCalendarValue,
-  ScDatePickerNext,
-  ScDatePickerNextInput,
-  ScDatePickerNextTrigger,
+  ScDatePicker,
+  ScDatePickerInput,
+  ScDatePickerTrigger,
   ScField,
   ScFieldDescription,
   ScInputGroup,
@@ -26,12 +46,12 @@ import {
 
 /** Typed, or picked: the locale’s numeric order (here 10/14/2026) or ISO, read on Enter or leaving; text that is not a day stays, marked. The button in the field opens the calendar. */
 @Component({
-  selector: 'app-typed-date-picker-next-demo',
+  selector: 'app-typed-date-picker-demo',
   imports: [
     ScInputGroup,
     ScInputGroupAddon,
-    ScDatePickerNext,
-    ScDatePickerNextTrigger,
+    ScDatePicker,
+    ScDatePickerTrigger,
     ScPopoverProvider,
     ScPopoverPortal,
     ScPopover,
@@ -40,7 +60,7 @@ import {
     ScCalendarHeading,
     ScCalendarPrevious,
     ScCalendarNext,
-    ScDatePickerNextInput,
+    ScDatePickerInput,
     ScField,
     ScFieldDescription,
     ScLabel,
@@ -48,18 +68,15 @@ import {
     SiChevronLeftIcon,
     SiChevronRightIcon,
   ],
-  template: `
+  template: \`
     <div scField class="w-64">
       <label scLabel>Start date</label>
-      <div scDatePickerNext #dp="scDatePickerNext" [(value)]="date">
+      <div scDatePicker #dp="scDatePicker" [(value)]="date">
         <div scPopoverProvider [origin]="trigger.overlayOrigin" align="end">
           <div scInputGroup>
-            <input scDatePickerNextInput placeholder="MM/DD/YYYY" />
+            <input scDatePickerInput placeholder="MM/DD/YYYY" />
             <div scInputGroupAddon align="inline-end">
-              <button
-                scDatePickerNextTrigger
-                #trigger="scDatePickerNextTrigger"
-              >
+              <button scDatePickerTrigger #trigger="scDatePickerTrigger">
                 <svg siCalendarIcon></svg>
                 <span class="sr-only">Choose a date</span>
               </button>
@@ -97,10 +114,11 @@ import {
     <p class="text-muted-foreground text-sm" data-testid="picked">
       {{ dp.text() || 'Nothing picked.' }}
     </p>
-  `,
+  \`,
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class TypedDatePickerNextDemo {
+export class TypedDatePickerDemo {
   readonly date = signal<ScCalendarValue>(null);
+}`;
 }

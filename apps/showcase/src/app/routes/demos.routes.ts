@@ -1025,6 +1025,20 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
+        path: 'typed-date-picker-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-picker/demos/typed-date-picker-demo').then(
+            (m) => m.TypedDatePickerDemo,
+          ),
+      },
+      {
+        path: 'birth-date-picker-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-picker/demos/birth-date-picker-demo').then(
+            (m) => m.BirthDatePickerDemo,
+          ),
+      },
+      {
         path: 'range-date-picker-demo',
         loadComponent: () =>
           import('../pages/docs/date-picker/demos/range-date-picker-demo').then(
@@ -1039,10 +1053,10 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'constrained-date-picker-demo',
+        path: 'constraints-date-picker-demo',
         loadComponent: () =>
-          import('../pages/docs/date-picker/demos/constrained-date-picker-demo').then(
-            (m) => m.ConstrainedDatePickerDemo,
+          import('../pages/docs/date-picker/demos/constraints-date-picker-demo').then(
+            (m) => m.ConstraintsDatePickerDemo,
           ),
       },
       {
@@ -1052,65 +1066,11 @@ export const demosRoutes: Route[] = [
             (m) => m.FormDatePickerDemo,
           ),
       },
-    ],
-  },
-  {
-    path: 'demos/date-picker-next',
-    children: [
       {
-        path: 'basic-date-picker-next-demo',
+        path: 'locale-date-picker-demo',
         loadComponent: () =>
-          import('../pages/docs/date-picker-next/demos/basic-date-picker-next-demo').then(
-            (m) => m.BasicDatePickerNextDemo,
-          ),
-      },
-      {
-        path: 'typed-date-picker-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/date-picker-next/demos/typed-date-picker-next-demo').then(
-            (m) => m.TypedDatePickerNextDemo,
-          ),
-      },
-      {
-        path: 'birth-date-picker-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/date-picker-next/demos/birth-date-picker-next-demo').then(
-            (m) => m.BirthDatePickerNextDemo,
-          ),
-      },
-      {
-        path: 'range-date-picker-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/date-picker-next/demos/range-date-picker-next-demo').then(
-            (m) => m.RangeDatePickerNextDemo,
-          ),
-      },
-      {
-        path: 'multiple-date-picker-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/date-picker-next/demos/multiple-date-picker-next-demo').then(
-            (m) => m.MultipleDatePickerNextDemo,
-          ),
-      },
-      {
-        path: 'constraints-date-picker-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/date-picker-next/demos/constraints-date-picker-next-demo').then(
-            (m) => m.ConstraintsDatePickerNextDemo,
-          ),
-      },
-      {
-        path: 'form-date-picker-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/date-picker-next/demos/form-date-picker-next-demo').then(
-            (m) => m.FormDatePickerNextDemo,
-          ),
-      },
-      {
-        path: 'locale-date-picker-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/date-picker-next/demos/locale-date-picker-next-demo').then(
-            (m) => m.LocaleDatePickerNextDemo,
+          import('../pages/docs/date-picker/demos/locale-date-picker-demo').then(
+            (m) => m.LocaleDatePickerDemo,
           ),
       },
     ],

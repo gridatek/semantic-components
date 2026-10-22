@@ -6,9 +6,9 @@ import {
   ScCalendarNext,
   ScCalendarPrevious,
   type ScCalendarValue,
-  ScDatePickerNext,
-  ScDatePickerNextInput,
-  ScDatePickerNextTrigger,
+  ScDatePicker,
+  ScDatePickerInput,
+  ScDatePickerTrigger,
   ScInputGroup,
   ScInputGroupAddon,
   ScPopover,
@@ -23,12 +23,12 @@ import {
 
 /** minDate, maxDate and unavailable days on the picker — given to its calendar, and kept for typed days too: weekends cannot be picked. */
 @Component({
-  selector: 'app-constraints-date-picker-next-demo',
+  selector: 'app-constraints-date-picker-demo',
   imports: [
     ScInputGroup,
     ScInputGroupAddon,
-    ScDatePickerNext,
-    ScDatePickerNextTrigger,
+    ScDatePicker,
+    ScDatePickerTrigger,
     ScPopoverProvider,
     ScPopoverPortal,
     ScPopover,
@@ -37,15 +37,15 @@ import {
     ScCalendarHeading,
     ScCalendarPrevious,
     ScCalendarNext,
-    ScDatePickerNextInput,
+    ScDatePickerInput,
     SiCalendarIcon,
     SiChevronLeftIcon,
     SiChevronRightIcon,
   ],
   template: `
     <div
-      scDatePickerNext
-      #dp="scDatePickerNext"
+      scDatePicker
+      #dp="scDatePicker"
       [minDate]="min"
       [maxDate]="max"
       [unavailable]="weekend"
@@ -55,12 +55,12 @@ import {
       <div scPopoverProvider [origin]="trigger.overlayOrigin" align="end">
         <div scInputGroup>
           <input
-            scDatePickerNextInput
+            scDatePickerInput
             aria-label="Delivery date"
             placeholder="MM/DD/YYYY"
           />
           <div scInputGroupAddon align="inline-end">
-            <button scDatePickerNextTrigger #trigger="scDatePickerNextTrigger">
+            <button scDatePickerTrigger #trigger="scDatePickerTrigger">
               <svg siCalendarIcon></svg>
               <span class="sr-only">Choose a delivery date</span>
             </button>
@@ -103,7 +103,7 @@ import {
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ConstraintsDatePickerNextDemo {
+export class ConstraintsDatePickerDemo {
   readonly min = Temporal.PlainDate.from('2026-10-08');
   readonly max = Temporal.PlainDate.from('2026-11-20');
   readonly date = signal<ScCalendarValue>(null);

@@ -274,15 +274,7 @@
   {
     "name": "Date Picker",
     "path": "date-picker",
-    "description": "A popover-based date selection component.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Forms"
-  },
-  {
-    "name": "Date Picker Next",
-    "path": "date-picker-next",
-    "description": "The date picker, rebuilt: picked in the calendar or typed, written in your language; a form field.",
+    "description": "A date picked in the calendar or typed, written in your language; a form field.",
     "status": "Experimental",
     "library": "ui",
     "category": "Forms"

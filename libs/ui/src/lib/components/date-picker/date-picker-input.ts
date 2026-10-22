@@ -11,7 +11,7 @@ import {
 import { cn } from '../../utils';
 import { SC_FIELD } from '../field';
 import { inputStyles } from '../input/input';
-import { ScDatePickerNext } from './date-picker-next';
+import { ScDatePicker } from './date-picker';
 
 /**
  * A day, typed — single mode: in the locale's numeric order (14/10/2026,
@@ -20,7 +20,7 @@ import { ScDatePickerNext } from './date-picker-next';
  * Shows the value in the same numeric form.
  */
 @Directive({
-  selector: 'input[scDatePickerNextInput]',
+  selector: 'input[scDatePickerInput]',
   host: {
     'data-slot': 'control',
     type: 'text',
@@ -35,8 +35,8 @@ import { ScDatePickerNext } from './date-picker-next';
     '(blur)': 'read(); picker.touch.emit()',
   },
 })
-export class ScDatePickerNextInput {
-  protected readonly picker = inject(ScDatePickerNext);
+export class ScDatePickerInput {
+  protected readonly picker = inject(ScDatePicker);
   private readonly field = inject(SC_FIELD, { optional: true });
   private readonly element =
     inject<ElementRef<HTMLInputElement>>(ElementRef).nativeElement;

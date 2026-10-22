@@ -17,7 +17,6 @@ export * from './combobox';
 export * from './command';
 export * from './context-menu';
 export * from './date-picker';
-export * from './date-picker-next';
 export * from './dialog';
 export * from './drawer';
 export * from './empty';

@@ -209,12 +209,6 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/date-picker/date-picker-page'),
       },
       {
-        path: 'date-picker-next',
-        title: 'Date Picker Next - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/date-picker-next/date-picker-next-page'),
-      },
-      {
         path: 'date-range-picker',
         title: 'Date Range Picker - Semantic Components',
         loadComponent: () =>

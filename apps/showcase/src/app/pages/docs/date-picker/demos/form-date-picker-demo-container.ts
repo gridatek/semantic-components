@@ -7,9 +7,9 @@ import { FormDatePickerDemo } from './form-date-picker-demo';
   imports: [DemoContainer, FormDatePickerDemo],
   template: `
     <app-demo-container
-      title="Form Example"
-      demoUrl="/demos/date-picker/form-date-picker-demo"
+      title="In a form"
       [code]="code"
+      demoUrl="/demos/date-picker/form-date-picker-demo"
     >
       <app-form-date-picker-demo />
     </app-demo-container>
@@ -19,16 +19,19 @@ import { FormDatePickerDemo } from './form-date-picker-demo';
 })
 export class FormDatePickerDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { FormField, FormRoot, form, required } from '@angular/forms/signals';
 import {
+  ScButton,
   ScCalendar,
   ScCalendarHeader,
   ScCalendarHeading,
   ScCalendarNext,
   ScCalendarPrevious,
+  type ScCalendarValue,
   ScDatePicker,
   ScDatePickerTrigger,
   ScField,
-  ScFieldGroup,
+  ScFieldErrors,
   ScLabel,
   ScPopover,
   ScPopoverPortal,
@@ -40,9 +43,12 @@ import {
   SiChevronRightIcon,
 } from '@semantic-icons/lucide-icons';
 
+/** A [formField]: required, from the schema; marked once the calendar has closed — the trigger, then its field. */
 @Component({
   selector: 'app-form-date-picker-demo',
   imports: [
+    FormField,
+    FormRoot,
     ScDatePicker,
     ScDatePickerTrigger,
     ScPopoverProvider,
@@ -53,74 +59,48 @@ import {
     ScCalendarHeading,
     ScCalendarPrevious,
     ScCalendarNext,
+    ScButton,
     ScField,
-    ScFieldGroup,
+    ScFieldErrors,
     ScLabel,
     SiCalendarIcon,
     SiChevronLeftIcon,
     SiChevronRightIcon,
   ],
   template: \`
-    <div scFieldGroup class="max-w-sm">
+    <form [formRoot]="bookingForm" class="grid w-64 gap-3">
       <div scField>
-        <label scLabel>Date of Birth</label>
-        <div scDatePicker [(value)]="dob" #dpDob="scDatePicker">
-          <div
-            scPopoverProvider
-            [origin]="triggerDob.overlayOrigin"
-            align="start"
-          >
-            <button scDatePickerTrigger #triggerDob="scDatePickerTrigger">
-              <svg siCalendarIcon class="mr-2 size-4"></svg>
-              <span
-                [class]="dpDob.displayText() ? '' : 'text-muted-foreground'"
-              >
-                {{ dpDob.displayText() || 'Select date of birth' }}
-              </span>
+        <label scLabel for="arrival">Arrival</label>
+        <div scDatePicker #dp="scDatePicker" [formField]="bookingForm.arrival">
+          <div scPopoverProvider [origin]="trigger.overlayOrigin" align="start">
+            <button
+              id="arrival"
+              scDatePickerTrigger
+              #trigger="scDatePickerTrigger"
+            >
+              <svg siCalendarIcon></svg>
+              <span>{{ dp.text() || 'Pick a date' }}</span>
             </button>
             <ng-template scPopoverPortal>
-              <div scPopover class="w-auto p-0">
+              <div scPopover class="w-auto p-0" aria-label="Choose a date">
                 <div
                   scCalendar
-                  aria-label="Calendar"
-                  [value]="dpDob.value()"
-                  [maxDate]="today"
-                  (valueChange)="dpDob.onValueChange($event)"
-                  #calDob="scCalendar"
+                  #cal="scCalendar"
+                  initialFocus
+                  aria-label="Choose a date"
+                  [mode]="dp.mode()"
+                  [value]="dp.value()"
+                  (valueChange)="dp.pick($event)"
                 >
                   <div scCalendarHeader>
                     <button scCalendarPrevious>
-                      <svg siChevronLeftIcon class="size-4"></svg>
-                      <span class="sr-only">
-                        @switch (calDob.view()) {
-                          @case ('day') {
-                            Go to previous month
-                          }
-                          @case ('month') {
-                            Go to previous year
-                          }
-                          @case ('year') {
-                            Go to previous decade
-                          }
-                        }
-                      </span>
+                      <svg siChevronLeftIcon></svg>
+                      <span class="sr-only">Previous month</span>
                     </button>
-                    <button scCalendarHeading>{{ calDob.heading() }}</button>
+                    <button scCalendarHeading>{{ cal.heading() }}</button>
                     <button scCalendarNext>
-                      <svg siChevronRightIcon class="size-4"></svg>
-                      <span class="sr-only">
-                        @switch (calDob.view()) {
-                          @case ('day') {
-                            Go to next month
-                          }
-                          @case ('month') {
-                            Go to next year
-                          }
-                          @case ('year') {
-                            Go to next decade
-                          }
-                        }
-                      </span>
+                      <svg siChevronRightIcon></svg>
+                      <span class="sr-only">Next month</span>
                     </button>
                   </div>
                 </div>
@@ -128,82 +108,33 @@ import {
             </ng-template>
           </div>
         </div>
+        <div scFieldErrors></div>
       </div>
-      <div scField>
-        <label scLabel>Appointment Date</label>
-        <div scDatePicker [(value)]="appointment" #dpAppt="scDatePicker">
-          <div
-            scPopoverProvider
-            [origin]="triggerAppt.overlayOrigin"
-            align="start"
-          >
-            <button scDatePickerTrigger #triggerAppt="scDatePickerTrigger">
-              <svg siCalendarIcon class="mr-2 size-4"></svg>
-              <span
-                [class]="dpAppt.displayText() ? '' : 'text-muted-foreground'"
-              >
-                {{ dpAppt.displayText() || 'Select appointment' }}
-              </span>
-            </button>
-            <ng-template scPopoverPortal>
-              <div scPopover class="w-auto p-0">
-                <div
-                  scCalendar
-                  aria-label="Calendar"
-                  [value]="dpAppt.value()"
-                  [minDate]="today"
-                  (valueChange)="dpAppt.onValueChange($event)"
-                  #calAppt="scCalendar"
-                >
-                  <div scCalendarHeader>
-                    <button scCalendarPrevious>
-                      <svg siChevronLeftIcon class="size-4"></svg>
-                      <span class="sr-only">
-                        @switch (calAppt.view()) {
-                          @case ('day') {
-                            Go to previous month
-                          }
-                          @case ('month') {
-                            Go to previous year
-                          }
-                          @case ('year') {
-                            Go to previous decade
-                          }
-                        }
-                      </span>
-                    </button>
-                    <button scCalendarHeading>{{ calAppt.heading() }}</button>
-                    <button scCalendarNext>
-                      <svg siChevronRightIcon class="size-4"></svg>
-                      <span class="sr-only">
-                        @switch (calAppt.view()) {
-                          @case ('day') {
-                            Go to next month
-                          }
-                          @case ('month') {
-                            Go to next year
-                          }
-                          @case ('year') {
-                            Go to next decade
-                          }
-                        }
-                      </span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </ng-template>
-          </div>
-        </div>
-      </div>
-    </div>
+      <button scButton type="submit" class="justify-self-start">Book</button>
+      @if (booked()) {
+        <p class="text-sm" role="status">Booked from {{ booked() }}.</p>
+      }
+    </form>
   \`,
-  host: { class: 'flex w-full justify-center' },
+  host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
 export class FormDatePickerDemo {
-  readonly dob = signal<Temporal.PlainDate | null>(null);
-  readonly appointment = signal<Temporal.PlainDate | null>(null);
-  readonly today = Temporal.Now.plainDateISO();
+  readonly model = signal<{ arrival: ScCalendarValue }>({ arrival: null });
+  readonly booked = signal('');
+  readonly bookingForm = form(
+    this.model,
+    (s) => required(s.arrival, { message: 'Pick your arrival.' }),
+    {
+      submission: {
+        action: async () => {
+          const day = this.model().arrival;
+          if (day instanceof Temporal.PlainDate) {
+            this.booked.set(day.toLocaleString('en-US', { dateStyle: 'long' }));
+          }
+        },
+      },
+    },
+  );
 }`;
 }
