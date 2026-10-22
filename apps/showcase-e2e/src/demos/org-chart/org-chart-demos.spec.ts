@@ -1,8 +1,7 @@
 import { type Locator, type Page, expect, test } from '@playwright/test';
 import { collectErrors, focus, press, type } from '../../interaction';
 
-const demo = (name: string) =>
-  `/demos/org-chart-next/${name}-org-chart-next-demo`;
+const demo = (name: string) => `/demos/org-chart/${name}-org-chart-demo`;
 const person = (page: Page, name: string) =>
   page.getByRole('treeitem', { name: new RegExp(`^${name}`) });
 const card = (item: Locator) => item.locator('> [data-slot="org-chart-card"]');

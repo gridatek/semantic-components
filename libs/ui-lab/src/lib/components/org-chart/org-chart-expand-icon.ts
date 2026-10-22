@@ -1,17 +1,17 @@
 import { Directive, computed, forwardRef, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { ScOrgChartNextItem } from './org-chart-next-item';
+import { ScOrgChartItem } from './org-chart-item';
 
 /** Your chevron, in a card: turned while the person's reports are shown. */
 @Directive({
-  selector: 'svg[scOrgChartNextExpandIcon]',
+  selector: 'svg[scOrgChartExpandIcon]',
   host: {
     'data-slot': 'org-chart-expand-icon',
     '[class]': 'class()',
   },
 })
-export class ScOrgChartNextExpandIcon {
-  private readonly item = inject(forwardRef(() => ScOrgChartNextItem));
+export class ScOrgChartExpandIcon {
+  private readonly item = inject(forwardRef(() => ScOrgChartItem));
 
   readonly classInput = input<string>('', { alias: 'class' });
 

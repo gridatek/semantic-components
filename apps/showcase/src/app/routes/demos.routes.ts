@@ -2538,13 +2538,6 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'horizontal-org-chart-demo',
-        loadComponent: () =>
-          import('../pages/docs/org-chart/demos/horizontal-org-chart-demo').then(
-            (m) => m.HorizontalOrgChartDemo,
-          ),
-      },
-      {
         path: 'avatars-org-chart-demo',
         loadComponent: () =>
           import('../pages/docs/org-chart/demos/avatars-org-chart-demo').then(
@@ -2552,71 +2545,31 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'compact-org-chart-demo',
+        path: 'across-org-chart-demo',
         loadComponent: () =>
-          import('../pages/docs/org-chart/demos/compact-org-chart-demo').then(
-            (m) => m.CompactOrgChartDemo,
+          import('../pages/docs/org-chart/demos/across-org-chart-demo').then(
+            (m) => m.AcrossOrgChartDemo,
           ),
       },
       {
-        path: 'non-collapsible-org-chart-demo',
+        path: 'collapsible-org-chart-demo',
         loadComponent: () =>
-          import('../pages/docs/org-chart/demos/non-collapsible-org-chart-demo').then(
-            (m) => m.NonCollapsibleOrgChartDemo,
+          import('../pages/docs/org-chart/demos/collapsible-org-chart-demo').then(
+            (m) => m.CollapsibleOrgChartDemo,
           ),
       },
       {
-        path: 'large-org-chart-demo',
+        path: 'selection-org-chart-demo',
         loadComponent: () =>
-          import('../pages/docs/org-chart/demos/large-org-chart-demo').then(
-            (m) => m.LargeOrgChartDemo,
-          ),
-      },
-    ],
-  },
-  {
-    path: 'demos/org-chart-next',
-    children: [
-      {
-        path: 'basic-org-chart-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/org-chart-next/demos/basic-org-chart-next-demo').then(
-            (m) => m.BasicOrgChartNextDemo,
+          import('../pages/docs/org-chart/demos/selection-org-chart-demo').then(
+            (m) => m.SelectionOrgChartDemo,
           ),
       },
       {
-        path: 'avatars-org-chart-next-demo',
+        path: 'data-org-chart-demo',
         loadComponent: () =>
-          import('../pages/docs/org-chart-next/demos/avatars-org-chart-next-demo').then(
-            (m) => m.AvatarsOrgChartNextDemo,
-          ),
-      },
-      {
-        path: 'across-org-chart-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/org-chart-next/demos/across-org-chart-next-demo').then(
-            (m) => m.AcrossOrgChartNextDemo,
-          ),
-      },
-      {
-        path: 'collapsible-org-chart-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/org-chart-next/demos/collapsible-org-chart-next-demo').then(
-            (m) => m.CollapsibleOrgChartNextDemo,
-          ),
-      },
-      {
-        path: 'selection-org-chart-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/org-chart-next/demos/selection-org-chart-next-demo').then(
-            (m) => m.SelectionOrgChartNextDemo,
-          ),
-      },
-      {
-        path: 'data-org-chart-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/org-chart-next/demos/data-org-chart-next-demo').then(
-            (m) => m.DataOrgChartNextDemo,
+          import('../pages/docs/org-chart/demos/data-org-chart-demo').then(
+            (m) => m.DataOrgChartDemo,
           ),
       },
     ],

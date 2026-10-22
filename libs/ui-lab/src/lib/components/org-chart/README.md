@@ -1,190 +1,79 @@
 # Org Chart
 
-A hierarchical organization chart built from composable directives. The consumer controls card content via `ng-template`.
+Your people as nested lists, laid out as a chart and joined by lines — a tree for the keyboard and screen readers, collapsible and selectable.
 
-## Installation
+## Architecture
 
-```typescript
-import { ScOrgChart, ScOrgChartCard, ScOrgChartNode, ScOrgChartNodeDef } from '@semantic-components/ui-lab';
-import type { ScOrgChartNodeData, ScOrgChartNodeExpandEvent } from '@semantic-components/ui-lab';
+```
+ul[scOrgChart] (direction: 'down' | 'across'; [(value)] — the selected)
+│  role="tree" — @angular/aria's Tree
+└── li[scOrgChartItem] (value; [(expanded)] — open by default; label)
+    │  role="treeitem", named by its card
+    ├── div[scOrgChartCard]                  — what is seen; not focusable
+    │   └── svg[scOrgChartExpandIcon]        — your chevron, turned while open
+    └── ul[scOrgChartGroup]                  — the reports (role="group"), joined by lines
+        └── li[scOrgChartItem] …
 ```
 
 ## Usage
 
-### Basic Usage
-
 ```html
-<div scOrgChart aria-label="Organization chart" [collapsible]="true" (nodeExpand)="onNodeExpand($event)">
-  <sc-org-chart-node [node]="orgData()" />
-
-  <ng-template scOrgChartNodeDef let-node let-expanded="expanded" let-hasChildren="hasChildren" let-toggle="toggle">
+<ul scOrgChart aria-label="Leadership">
+  <li scOrgChartItem value="ada">
     <div scOrgChartCard>
-      <div class="bg-primary/10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full">
-        <span class="text-primary text-lg font-semibold">{{ getInitials(node.name) }}</span>
+      <div class="grid">
+        <span class="font-medium">Ada Lovelace</span>
+        <span class="text-muted-foreground text-xs">Chief Executive</span>
       </div>
-      <div class="min-w-0 flex-1 text-left">
-        <p class="truncate text-sm font-semibold">{{ node.name }}</p>
-        @if (node.title) {
-        <p class="text-muted-foreground truncate text-xs">{{ node.title }}</p>
-        }
-      </div>
-      @if (hasChildren) {
-      <svg
-        siChevronDownIcon
-        [class]="expanded ? 'rotate-180 text-muted-foreground transition-transform duration-200'
-            : 'text-muted-foreground transition-transform duration-200'"
-      ></svg>
-      }
     </div>
-  </ng-template>
-</div>
+    <ul scOrgChartGroup>
+      <li scOrgChartItem value="grace">
+        <div scOrgChartCard>…</div>
+      </li>
+    </ul>
+  </li>
+</ul>
 ```
 
-### Horizontal Layout
+## From data
+
+Write a person in a template, and — for each report — the template again. Pass the outlet's injector, so each report finds its group:
 
 ```html
-<div scOrgChart aria-label="Organization chart" direction="horizontal">
-  <sc-org-chart-node [node]="orgData()" />
-  <ng-template scOrgChartNodeDef let-node let-toggle="toggle">
-    <!-- card template -->
-  </ng-template>
-</div>
-```
+<ul scOrgChart aria-label="Leadership">
+  <ng-container *ngTemplateOutlet="node; context: { $implicit: team }; injector: 'outlet'" />
+</ul>
 
-### Compact Mode
-
-```html
-<div scOrgChart aria-label="Organization chart" [compact]="true">
-  <sc-org-chart-node [node]="orgData()" />
-  <ng-template scOrgChartNodeDef let-node let-toggle="toggle">
-    <!-- card template -->
-  </ng-template>
-</div>
-```
-
-### Non-collapsible
-
-```html
-<div scOrgChart aria-label="Organization chart" [collapsible]="false">
-  <sc-org-chart-node [node]="orgData()" />
-  <ng-template scOrgChartNodeDef let-node>
-    <!-- card template (no toggle needed) -->
-  </ng-template>
-</div>
-```
-
-## API Reference
-
-### ScOrgChart (`div[scOrgChart]`)
-
-Root directive. Provides configuration to all child nodes via `SC_ORG_CHART` injection token.
-
-#### Inputs
-
-| Input         | Type                         | Default      | Description                 |
-| ------------- | ---------------------------- | ------------ | --------------------------- |
-| `direction`   | `'vertical' \| 'horizontal'` | `'vertical'` | Layout direction            |
-| `collapsible` | `boolean`                    | `true`       | Allow nodes to be collapsed |
-| `compact`     | `boolean`                    | `false`      | Use smaller node cards      |
-| `class`       | `string`                     | `''`         | Additional CSS classes      |
-
-#### Outputs
-
-| Output       | Type                        | Description                               |
-| ------------ | --------------------------- | ----------------------------------------- |
-| `nodeExpand` | `ScOrgChartNodeExpandEvent` | Emitted when a node is expanded/collapsed |
-
-### ScOrgChartNodeDef (`ng-template[scOrgChartNodeDef]`)
-
-Captures the card template. Template context provides:
-
-| Variable      | Type                 | Description                        |
-| ------------- | -------------------- | ---------------------------------- |
-| `$implicit`   | `ScOrgChartNodeData` | The node data (use `let-node`)     |
-| `expanded`    | `boolean`            | Whether the node is expanded       |
-| `hasChildren` | `boolean`            | Whether the node has children      |
-| `toggle`      | `() => void`         | Function to toggle expand/collapse |
-
-### ScOrgChartNode (`sc-org-chart-node`)
-
-Handles recursion and connector lines. Reads config from the root `ScOrgChart` directive.
-
-#### Inputs
-
-| Input  | Type                 | Description          |
-| ------ | -------------------- | -------------------- |
-| `node` | `ScOrgChartNodeData` | Node data (required) |
-
-### ScOrgChartCard (`[scOrgChartCard]`)
-
-Card styling directive. Reads `compact` from root to toggle min-width. Use a `div`: the surrounding node (`role="treeitem"`) takes focus and handles clicks and keys, and is named from `node.name` and `node.title`.
-
-## Type Definitions
-
-### OrgChartNode
-
-```typescript
-interface ScOrgChartNodeData {
-  id: string;
-  name: string;
-  title?: string;
-  avatar?: string;
-  department?: string;
-  children?: ScOrgChartNodeData[];
-  expanded?: boolean;
-  data?: Record<string, unknown>;
-}
-```
-
-### ScOrgChartNodeExpandEvent
-
-```typescript
-interface ScOrgChartNodeExpandEvent {
-  node: ScOrgChartNodeData;
-  expanded: boolean;
-}
-```
-
-### ScOrgChartNodeDefContext
-
-```typescript
-interface ScOrgChartNodeDefContext {
-  $implicit: ScOrgChartNodeData;
-  expanded: boolean;
-  hasChildren: boolean;
-  toggle: () => void;
-}
-```
-
-### ScOrgChartDirection
-
-```typescript
-type ScOrgChartDirection = 'vertical' | 'horizontal';
+<ng-template #node let-person>
+  <li scOrgChartItem [value]="person.id">
+    <div scOrgChartCard>{{ person.name }}</div>
+    @if (person.children?.length) {
+    <ul scOrgChartGroup>
+      @for (report of person.children; track report.id) {
+      <ng-container *ngTemplateOutlet="node; context: { $implicit: report }; injector: 'outlet'" />
+      }
+    </ul>
+    }
+  </li>
+</ng-template>
 ```
 
 ## Layout
 
-- A chart wider than its box is centered only while it fits; otherwise it starts at the left (start) edge and scrolls. Wrap it in an `overflow-auto` container with `max-w-full` if the page should not scroll.
-- In horizontal charts, connectors meet each card at `--sc-org-chart-anchor` from its top (default `2.25rem`, half the default card height). Set it on the chart if your cards are taller or shorter, e.g. `class="[--sc-org-chart-anchor:1.75rem]"`.
+- `direction="down"`: reports below; `across`: at the inline end — the left in a right-to-left page.
+- A chart larger than its box scrolls; a smaller one is centred.
+- The lines are CSS (`bg-border`), drawn by the groups and their items.
+
+## Keyboard
+
+One Tab stop. ↑ ↓ between the people shown, in reading order; → opens, or goes to the first report; ← closes, or goes to the manager; Home, End; typing a name jumps to it; Enter, Space select. A click selects and opens or closes.
 
 ## Accessibility
 
-Built on `@angular/aria`'s `Tree`:
+- Name the chart (`aria-label`).
+- Each person is named by their card (`aria-labelledby`), not by their reports' text; type-ahead uses the card's text too, or `label`.
+- The card is not a button: the `li` takes focus. Hide decorative avatars (`aria-hidden`), and name counts ("2<span class="sr-only"> reports</span>").
 
-- The chart is `role="tree"` (named "Organization chart" unless given an `aria-label`); each person is a `role="treeitem"` with `aria-level`, `aria-expanded` (when it has reports) and a name from `node.name` + `node.title`.
-- Reports are rendered in a `role="group"`.
-- One Tab stop: focus moves between people with the arrow keys.
-- Avatar images include alt text; initials are the fallback.
+## Not here
 
-## Keyboard Navigation
-
-| Key               | Action                                        |
-| ----------------- | --------------------------------------------- |
-| `Tab`             | Into / out of the chart (one Tab stop)        |
-| `↓` / `↑`         | Next / previous visible person                |
-| `→`               | Expand; if expanded, move to the first report |
-| `←`               | Collapse; if collapsed, move to the manager   |
-| `Home` / `End`    | First / last visible person                   |
-| `Enter` / `Space` | Select the person                             |
-
-Clicking a person toggles their reports. With `[collapsible]="false"` everyone stays expanded.
+Pan and zoom (it scrolls), export as an image, drag to reorganise, dotted-line reports (a tree has one manager), d3's compact layout.

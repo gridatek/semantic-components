@@ -16,19 +16,17 @@ import {
   cn,
   setInput,
 } from '@semantic-components/ui';
-import { ScOrgChartNext } from './org-chart-next';
-import { ScOrgChartNextItem } from './org-chart-next-item';
+import { ScOrgChart } from './org-chart';
+import { ScOrgChartItem } from './org-chart-item';
 
 /**
  * A person's reports (`role="group"`), in the `li` after their card: a line
  * from the card to the line joining them. Shown while the person is open.
  */
 @Component({
-  selector: 'ul[scOrgChartNextGroup]',
+  selector: 'ul[scOrgChartGroup]',
   imports: [TreeItemGroup, ScTreeItemGroupRef],
-  providers: [
-    { provide: SC_TREE_ITEM_GROUP, useExisting: ScOrgChartNextGroup },
-  ],
+  providers: [{ provide: SC_TREE_ITEM_GROUP, useExisting: ScOrgChartGroup }],
   template: `
     <ng-template ngTreeItemGroup scTreeItemGroupRef [ownedBy]="item.treeItem">
       <ng-content />
@@ -41,9 +39,9 @@ import { ScOrgChartNextItem } from './org-chart-next-item';
   },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScOrgChartNextGroup implements ScTreeItemGroupContext {
-  protected readonly item = inject(forwardRef(() => ScOrgChartNextItem));
-  private readonly chart = inject(ScOrgChartNext);
+export class ScOrgChartGroup implements ScTreeItemGroupContext {
+  protected readonly item = inject(forwardRef(() => ScOrgChartItem));
+  private readonly chart = inject(ScOrgChart);
 
   readonly classInput = input<string>('', { alias: 'class' });
 

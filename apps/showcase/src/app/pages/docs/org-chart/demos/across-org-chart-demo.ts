@@ -1,52 +1,27 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { BasicOrgChartNextDemo } from './basic-org-chart-next-demo';
-
-@Component({
-  selector: 'app-basic-org-chart-next-demo-container',
-  imports: [DemoContainer, BasicOrgChartNextDemo],
-  template: `
-    <app-demo-container
-      title="Basic"
-      [code]="code"
-      demoUrl="/demos/org-chart-next/basic-org-chart-next-demo"
-    >
-      <app-basic-org-chart-next-demo />
-    </app-demo-container>
-  `,
-  host: { class: 'block w-full' },
-  encapsulation: ViewEncapsulation.None,
-})
-export class BasicOrgChartNextDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScOrgChartNext,
-  ScOrgChartNextCard,
-  ScOrgChartNextGroup,
-  ScOrgChartNextItem,
+  ScOrgChart,
+  ScOrgChartCard,
+  ScOrgChartGroup,
+  ScOrgChartItem,
 } from '@semantic-components/ui-lab';
 
-/** People and their reports, as nested lists — one Tab stop, then ↑ ↓ between people, → ← to open and close, Home and End, or type a name. */
+/** direction="across": reports at the inline end — on the right, or on the left in a right-to-left page. */
 @Component({
-  selector: 'app-basic-org-chart-next-demo',
-  imports: [
-    ScOrgChartNext,
-    ScOrgChartNextItem,
-    ScOrgChartNextCard,
-    ScOrgChartNextGroup,
-  ],
-  template: \`
-    <ul scOrgChartNext aria-label="Leadership">
-      <li scOrgChartNextItem value="ada">
-        <div scOrgChartNextCard>
+  selector: 'app-across-org-chart-demo',
+  imports: [ScOrgChart, ScOrgChartItem, ScOrgChartCard, ScOrgChartGroup],
+  template: `
+    <ul scOrgChart aria-label="Leadership" direction="across">
+      <li scOrgChartItem value="ada">
+        <div scOrgChartCard>
           <div class="grid">
             <span class="font-medium">Ada Lovelace</span>
             <span class="text-muted-foreground text-xs">Chief Executive</span>
           </div>
         </div>
-        <ul scOrgChartNextGroup>
-          <li scOrgChartNextItem value="grace">
-            <div scOrgChartNextCard>
+        <ul scOrgChartGroup>
+          <li scOrgChartItem value="grace">
+            <div scOrgChartCard>
               <div class="grid">
                 <span class="font-medium">Grace Hopper</span>
                 <span class="text-muted-foreground text-xs"
@@ -54,9 +29,9 @@ import {
                 >
               </div>
             </div>
-            <ul scOrgChartNextGroup>
-              <li scOrgChartNextItem value="alan">
-                <div scOrgChartNextCard>
+            <ul scOrgChartGroup>
+              <li scOrgChartItem value="alan">
+                <div scOrgChartCard>
                   <div class="grid">
                     <span class="font-medium">Alan Turing</span>
                     <span class="text-muted-foreground text-xs"
@@ -65,8 +40,8 @@ import {
                   </div>
                 </div>
               </li>
-              <li scOrgChartNextItem value="katherine">
-                <div scOrgChartNextCard>
+              <li scOrgChartItem value="katherine">
+                <div scOrgChartCard>
                   <div class="grid">
                     <span class="font-medium">Katherine Johnson</span>
                     <span class="text-muted-foreground text-xs">Data Lead</span>
@@ -75,8 +50,8 @@ import {
               </li>
             </ul>
           </li>
-          <li scOrgChartNextItem value="margaret">
-            <div scOrgChartNextCard>
+          <li scOrgChartItem value="margaret">
+            <div scOrgChartCard>
               <div class="grid">
                 <span class="font-medium">Margaret Hamilton</span>
                 <span class="text-muted-foreground text-xs"
@@ -85,8 +60,8 @@ import {
               </div>
             </div>
           </li>
-          <li scOrgChartNextItem value="hedy">
-            <div scOrgChartNextCard>
+          <li scOrgChartItem value="hedy">
+            <div scOrgChartCard>
               <div class="grid">
                 <span class="font-medium">Hedy Lamarr</span>
                 <span class="text-muted-foreground text-xs"
@@ -94,9 +69,9 @@ import {
                 >
               </div>
             </div>
-            <ul scOrgChartNextGroup>
-              <li scOrgChartNextItem value="linus">
-                <div scOrgChartNextCard>
+            <ul scOrgChartGroup>
+              <li scOrgChartItem value="linus">
+                <div scOrgChartCard>
                   <div class="grid">
                     <span class="font-medium">Linus Torvalds</span>
                     <span class="text-muted-foreground text-xs"
@@ -110,9 +85,8 @@ import {
         </ul>
       </li>
     </ul>
-  \`,
+  `,
   host: { class: 'flex w-full flex-col items-center gap-4' },
   encapsulation: ViewEncapsulation.None,
 })
-export class BasicOrgChartNextDemo {}`;
-}
+export class AcrossOrgChartDemo {}

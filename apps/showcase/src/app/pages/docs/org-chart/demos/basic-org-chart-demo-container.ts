@@ -6,7 +6,11 @@ import { BasicOrgChartDemo } from './basic-org-chart-demo';
   selector: 'app-basic-org-chart-demo-container',
   imports: [DemoContainer, BasicOrgChartDemo],
   template: `
-    <app-demo-container title="Basic" [code]="code">
+    <app-demo-container
+      title="Basic"
+      [code]="code"
+      demoUrl="/demos/org-chart/basic-org-chart-demo"
+    >
       <app-basic-org-chart-demo />
     </app-demo-container>
   `,
@@ -14,167 +18,101 @@ import { BasicOrgChartDemo } from './basic-org-chart-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicOrgChartDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScOrgChart,
   ScOrgChartCard,
-  ScOrgChartNode,
-  type ScOrgChartNodeData,
-  ScOrgChartNodeDef,
-  type ScOrgChartNodeExpandEvent,
+  ScOrgChartGroup,
+  ScOrgChartItem,
 } from '@semantic-components/ui-lab';
-import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
+/** People and their reports, as nested lists — one Tab stop, then ↑ ↓ between people, → ← to open and close, Home and End, or type a name. */
 @Component({
   selector: 'app-basic-org-chart-demo',
   imports: [
     ScOrgChart,
+    ScOrgChartItem,
     ScOrgChartCard,
-    ScOrgChartNode,
-    ScOrgChartNodeDef,
-    SiChevronDownIcon,
+    ScOrgChartGroup,
   ],
   template: \`
-    <div class="max-w-full overflow-auto rounded-lg border">
-      <div
-        scOrgChart
-        aria-label="Organization chart"
-        [collapsible]="true"
-        (nodeExpand)="onNodeExpand($event)"
-      >
-        <sc-org-chart-node [node]="orgData()" />
-
-        <ng-template
-          scOrgChartNodeDef
-          let-node
-          let-expanded="expanded"
-          let-hasChildren="hasChildren"
-          let-toggle="toggle"
-        >
-          <div scOrgChartCard>
-            <div
-              class="bg-primary/10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full"
-            >
-              <span class="text-primary text-lg font-semibold">
-                {{ getInitials(node.name) }}
-              </span>
-            </div>
-            <div class="min-w-0 flex-1 text-left">
-              <p class="truncate text-sm font-semibold">{{ node.name }}</p>
-              @if (node.title) {
-                <p class="text-muted-foreground truncate text-xs">
-                  {{ node.title }}
-                </p>
-              }
-            </div>
-            @if (hasChildren) {
-              <svg
-                siChevronDownIcon
-                [class]="
-                  expanded
-                    ? 'text-muted-foreground rotate-180 transition-transform duration-200'
-                    : 'text-muted-foreground transition-transform duration-200'
-                "
-              ></svg>
-            }
+    <ul scOrgChart aria-label="Leadership">
+      <li scOrgChartItem value="ada">
+        <div scOrgChartCard>
+          <div class="grid">
+            <span class="font-medium">Ada Lovelace</span>
+            <span class="text-muted-foreground text-xs">Chief Executive</span>
           </div>
-        </ng-template>
-      </div>
-    </div>
-    @if (selectedNode()) {
-      <p class="text-muted-foreground text-sm">
-        Selected: {{ selectedNode()?.name }} - {{ selectedNode()?.title }}
-      </p>
-    }
+        </div>
+        <ul scOrgChartGroup>
+          <li scOrgChartItem value="grace">
+            <div scOrgChartCard>
+              <div class="grid">
+                <span class="font-medium">Grace Hopper</span>
+                <span class="text-muted-foreground text-xs"
+                  >Chief Technology Officer</span
+                >
+              </div>
+            </div>
+            <ul scOrgChartGroup>
+              <li scOrgChartItem value="alan">
+                <div scOrgChartCard>
+                  <div class="grid">
+                    <span class="font-medium">Alan Turing</span>
+                    <span class="text-muted-foreground text-xs"
+                      >Platform Lead</span
+                    >
+                  </div>
+                </div>
+              </li>
+              <li scOrgChartItem value="katherine">
+                <div scOrgChartCard>
+                  <div class="grid">
+                    <span class="font-medium">Katherine Johnson</span>
+                    <span class="text-muted-foreground text-xs">Data Lead</span>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li scOrgChartItem value="margaret">
+            <div scOrgChartCard>
+              <div class="grid">
+                <span class="font-medium">Margaret Hamilton</span>
+                <span class="text-muted-foreground text-xs"
+                  >Chief Financial Officer</span
+                >
+              </div>
+            </div>
+          </li>
+          <li scOrgChartItem value="hedy">
+            <div scOrgChartCard>
+              <div class="grid">
+                <span class="font-medium">Hedy Lamarr</span>
+                <span class="text-muted-foreground text-xs"
+                  >Chief Operating Officer</span
+                >
+              </div>
+            </div>
+            <ul scOrgChartGroup>
+              <li scOrgChartItem value="linus">
+                <div scOrgChartCard>
+                  <div class="grid">
+                    <span class="font-medium">Linus Torvalds</span>
+                    <span class="text-muted-foreground text-xs"
+                      >Operations Lead</span
+                    >
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
   \`,
-  host: { class: 'flex w-full flex-col items-center-safe gap-2' },
+  host: { class: 'flex w-full flex-col items-center gap-4' },
   encapsulation: ViewEncapsulation.None,
 })
-export class BasicOrgChartDemo {
-  readonly selectedNode = signal<ScOrgChartNodeData | null>(null);
-
-  readonly orgData = signal<ScOrgChartNodeData>({
-    id: '1',
-    name: 'Sarah Johnson',
-    title: 'CEO',
-    department: 'Executive',
-    children: [
-      {
-        id: '2',
-        name: 'Michael Chen',
-        title: 'CTO',
-        department: 'Technology',
-        children: [
-          {
-            id: '5',
-            name: 'Emily Davis',
-            title: 'Engineering Manager',
-            department: 'Engineering',
-            children: [
-              {
-                id: '9',
-                name: 'Alex Kim',
-                title: 'Senior Developer',
-                department: 'Engineering',
-              },
-              {
-                id: '10',
-                name: 'Lisa Wang',
-                title: 'Developer',
-                department: 'Engineering',
-              },
-            ],
-          },
-          {
-            id: '6',
-            name: 'James Wilson',
-            title: 'DevOps Lead',
-            department: 'Infrastructure',
-          },
-        ],
-      },
-      {
-        id: '3',
-        name: 'Amanda Rodriguez',
-        title: 'CFO',
-        department: 'Finance',
-        children: [
-          {
-            id: '7',
-            name: 'David Brown',
-            title: 'Finance Manager',
-            department: 'Finance',
-          },
-        ],
-      },
-      {
-        id: '4',
-        name: 'Robert Taylor',
-        title: 'CMO',
-        department: 'Marketing',
-        children: [
-          {
-            id: '8',
-            name: 'Jennifer Lee',
-            title: 'Marketing Lead',
-            department: 'Marketing',
-          },
-        ],
-      },
-    ],
-  });
-
-  onNodeExpand(event: ScOrgChartNodeExpandEvent): void {
-    this.selectedNode.set(event.node);
-  }
-
-  getInitials(name: string): string {
-    return name
-      .split(' ')
-      .map((part) => part[0])
-      .join('')
-      .toUpperCase()
-      .slice(0, 2);
-  }
-}`;
+export class BasicOrgChartDemo {}`;
 }

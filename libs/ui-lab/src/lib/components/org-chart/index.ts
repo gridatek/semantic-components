@@ -1,12 +1,5 @@
-export { ScAriaOrgChartItem } from './aria-org-chart-item';
-export { ScOrgChart } from './org-chart';
+export { ScOrgChart, type ScOrgChartDirection } from './org-chart';
+export { ScOrgChartItem } from './org-chart-item';
 export { ScOrgChartCard } from './org-chart-card';
-export { ScOrgChartNode } from './org-chart-node';
-export { ScOrgChartNodeDef } from './org-chart-node-def';
-export { SC_ORG_CHART } from './org-chart-types';
-export type {
-  ScOrgChartNodeData,
-  ScOrgChartDirection,
-  ScOrgChartNodeDefContext,
-  ScOrgChartNodeExpandEvent,
-} from './org-chart-types';
+export { ScOrgChartGroup } from './org-chart-group';
+export { ScOrgChartExpandIcon } from './org-chart-expand-icon';

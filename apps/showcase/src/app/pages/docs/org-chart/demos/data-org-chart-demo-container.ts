@@ -1,31 +1,31 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { DataOrgChartNextDemo } from './data-org-chart-next-demo';
+import { DataOrgChartDemo } from './data-org-chart-demo';
 
 @Component({
-  selector: 'app-data-org-chart-next-demo-container',
-  imports: [DemoContainer, DataOrgChartNextDemo],
+  selector: 'app-data-org-chart-demo-container',
+  imports: [DemoContainer, DataOrgChartDemo],
   template: `
     <app-demo-container
       title="From data"
       [code]="code"
-      demoUrl="/demos/org-chart-next/data-org-chart-next-demo"
+      demoUrl="/demos/org-chart/data-org-chart-demo"
     >
-      <app-data-org-chart-next-demo />
+      <app-data-org-chart-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class DataOrgChartNextDemoContainer {
+export class DataOrgChartDemoContainer {
   readonly code = `import { NgTemplateOutlet } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScOrgChartNext,
-  ScOrgChartNextCard,
-  ScOrgChartNextExpandIcon,
-  ScOrgChartNextGroup,
-  ScOrgChartNextItem,
+  ScOrgChart,
+  ScOrgChartCard,
+  ScOrgChartExpandIcon,
+  ScOrgChartGroup,
+  ScOrgChartItem,
 } from '@semantic-components/ui-lab';
 import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
@@ -38,18 +38,18 @@ interface Person {
 
 /** From your own data: a template that writes a person, then — for each report — itself, with the outlet’s injector (so each report finds its group). Any shape; here, those below the second level start closed. */
 @Component({
-  selector: 'app-data-org-chart-next-demo',
+  selector: 'app-data-org-chart-demo',
   imports: [
     NgTemplateOutlet,
-    ScOrgChartNext,
-    ScOrgChartNextItem,
-    ScOrgChartNextCard,
-    ScOrgChartNextGroup,
-    ScOrgChartNextExpandIcon,
+    ScOrgChart,
+    ScOrgChartItem,
+    ScOrgChartCard,
+    ScOrgChartGroup,
+    ScOrgChartExpandIcon,
     SiChevronDownIcon,
   ],
   template: \`
-    <ul scOrgChartNext aria-label="Leadership">
+    <ul scOrgChart aria-label="Leadership">
       <ng-container
         *ngTemplateOutlet="
           node;
@@ -60,8 +60,8 @@ interface Person {
     </ul>
 
     <ng-template #node let-person let-level="level">
-      <li scOrgChartNextItem [value]="person.id" [expanded]="level < 2">
-        <div scOrgChartNextCard>
+      <li scOrgChartItem [value]="person.id" [expanded]="level < 2">
+        <div scOrgChartCard>
           <div class="grid">
             <span class="font-medium">{{ person.name }}</span>
             <span class="text-muted-foreground text-xs">{{
@@ -69,11 +69,11 @@ interface Person {
             }}</span>
           </div>
           @if (person.children?.length) {
-            <svg siChevronDownIcon scOrgChartNextExpandIcon></svg>
+            <svg siChevronDownIcon scOrgChartExpandIcon></svg>
           }
         </div>
         @if (person.children?.length) {
-          <ul scOrgChartNextGroup>
+          <ul scOrgChartGroup>
             @for (report of person.children; track report.id) {
               <ng-container
                 *ngTemplateOutlet="
@@ -91,7 +91,7 @@ interface Person {
   host: { class: 'flex w-full flex-col items-center gap-4' },
   encapsulation: ViewEncapsulation.None,
 })
-export class DataOrgChartNextDemo {
+export class DataOrgChartDemo {
   readonly team: Person = {
     id: 'ada',
     name: 'Ada Lovelace',

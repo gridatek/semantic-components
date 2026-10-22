@@ -1,57 +1,45 @@
 import { Tree } from '@angular/aria/tree';
-import {
-  Directive,
-  computed,
-  contentChild,
-  inject,
-  input,
-  output,
-} from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { ScOrgChartNodeDef } from './org-chart-node-def';
-import type {
-  ScOrgChartDirection,
-  ScOrgChartNodeExpandEvent,
-} from './org-chart-types';
-import { SC_ORG_CHART } from './org-chart-types';
+
+/** Which way the chart grows: `down` (reports below), `across` (reports at the inline end). */
+export type ScOrgChartDirection = 'down' | 'across';
 
 /**
- * An organization chart. Built on `@angular/aria`'s `Tree` (`role="tree"`):
- * one Tab stop, arrow keys between visible people, ArrowRight/Left and click
- * to expand/collapse, Enter/Space to select.
+ * An organization chart: your people (`scOrgChartItem`), their reports
+ * nested in groups (`scOrgChartGroup`), joined by lines. A tree
+ * (`@angular/aria`'s): one Tab stop, ↑ ↓ between people in reading order,
+ * → ← to open, close, or go in and out; `[(value)]` the selected.
  */
 @Directive({
-  selector: 'div[scOrgChart]',
-  hostDirectives: [Tree],
-  providers: [{ provide: SC_ORG_CHART, useExisting: ScOrgChart }],
+  selector: 'ul[scOrgChart]',
+  exportAs: 'scOrgChart',
+  hostDirectives: [
+    {
+      directive: Tree,
+      inputs: ['value', 'multi', 'selectionMode', 'disabled'],
+      outputs: ['valueChange'],
+    },
+  ],
   host: {
     'data-slot': 'org-chart',
+    '[attr.data-direction]': 'direction()',
     '[class]': 'class()',
   },
 })
 export class ScOrgChart {
   readonly tree = inject(Tree);
 
-  readonly direction = input<ScOrgChartDirection>('vertical');
-  readonly collapsible = input(true);
-  readonly compact = input(false);
-
   readonly classInput = input<string>('', { alias: 'class' });
-
-  readonly nodeExpand = output<ScOrgChartNodeExpandEvent>();
-
-  readonly nodeDef = contentChild.required(ScOrgChartNodeDef);
+  readonly direction = input<ScOrgChartDirection>('down');
 
   protected readonly class = computed(() =>
     cn(
-      'inline-flex overflow-auto p-4',
-      // Where horizontal connectors meet a card: half the card's height.
-      '[--sc-org-chart-anchor:2.25rem]',
-      // Safe centering: a chart wider than the box overflows to the end only,
-      // so all of it can be scrolled to.
-      this.direction() === 'vertical'
-        ? 'flex-col items-center-safe'
-        : 'flex-row items-start',
+      // A chart larger than its box scrolls; smaller, it is centred.
+      'flex max-w-full overflow-auto p-4',
+      this.direction() === 'down'
+        ? 'justify-center-safe'
+        : 'flex-col items-start',
       this.classInput(),
     ),
   );

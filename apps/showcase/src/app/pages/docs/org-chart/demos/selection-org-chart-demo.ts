@@ -1,32 +1,27 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScOrgChartNext,
-  ScOrgChartNextCard,
-  ScOrgChartNextGroup,
-  ScOrgChartNextItem,
+  ScOrgChart,
+  ScOrgChartCard,
+  ScOrgChartGroup,
+  ScOrgChartItem,
 } from '@semantic-components/ui-lab';
 
-/** People and their reports, as nested lists — one Tab stop, then ↑ ↓ between people, → ← to open and close, Home and End, or type a name. */
+/** The selected person, two-way through [(value)] — Enter, Space or a click — and their details beside the chart. */
 @Component({
-  selector: 'app-basic-org-chart-next-demo',
-  imports: [
-    ScOrgChartNext,
-    ScOrgChartNextItem,
-    ScOrgChartNextCard,
-    ScOrgChartNextGroup,
-  ],
+  selector: 'app-selection-org-chart-demo',
+  imports: [ScOrgChart, ScOrgChartItem, ScOrgChartCard, ScOrgChartGroup],
   template: `
-    <ul scOrgChartNext aria-label="Leadership">
-      <li scOrgChartNextItem value="ada">
-        <div scOrgChartNextCard>
+    <ul scOrgChart aria-label="Leadership" [(value)]="selected">
+      <li scOrgChartItem value="ada">
+        <div scOrgChartCard>
           <div class="grid">
             <span class="font-medium">Ada Lovelace</span>
             <span class="text-muted-foreground text-xs">Chief Executive</span>
           </div>
         </div>
-        <ul scOrgChartNextGroup>
-          <li scOrgChartNextItem value="grace">
-            <div scOrgChartNextCard>
+        <ul scOrgChartGroup>
+          <li scOrgChartItem value="grace">
+            <div scOrgChartCard>
               <div class="grid">
                 <span class="font-medium">Grace Hopper</span>
                 <span class="text-muted-foreground text-xs"
@@ -34,9 +29,9 @@ import {
                 >
               </div>
             </div>
-            <ul scOrgChartNextGroup>
-              <li scOrgChartNextItem value="alan">
-                <div scOrgChartNextCard>
+            <ul scOrgChartGroup>
+              <li scOrgChartItem value="alan">
+                <div scOrgChartCard>
                   <div class="grid">
                     <span class="font-medium">Alan Turing</span>
                     <span class="text-muted-foreground text-xs"
@@ -45,8 +40,8 @@ import {
                   </div>
                 </div>
               </li>
-              <li scOrgChartNextItem value="katherine">
-                <div scOrgChartNextCard>
+              <li scOrgChartItem value="katherine">
+                <div scOrgChartCard>
                   <div class="grid">
                     <span class="font-medium">Katherine Johnson</span>
                     <span class="text-muted-foreground text-xs">Data Lead</span>
@@ -55,8 +50,8 @@ import {
               </li>
             </ul>
           </li>
-          <li scOrgChartNextItem value="margaret">
-            <div scOrgChartNextCard>
+          <li scOrgChartItem value="margaret">
+            <div scOrgChartCard>
               <div class="grid">
                 <span class="font-medium">Margaret Hamilton</span>
                 <span class="text-muted-foreground text-xs"
@@ -65,8 +60,8 @@ import {
               </div>
             </div>
           </li>
-          <li scOrgChartNextItem value="hedy">
-            <div scOrgChartNextCard>
+          <li scOrgChartItem value="hedy">
+            <div scOrgChartCard>
               <div class="grid">
                 <span class="font-medium">Hedy Lamarr</span>
                 <span class="text-muted-foreground text-xs"
@@ -74,9 +69,9 @@ import {
                 >
               </div>
             </div>
-            <ul scOrgChartNextGroup>
-              <li scOrgChartNextItem value="linus">
-                <div scOrgChartNextCard>
+            <ul scOrgChartGroup>
+              <li scOrgChartItem value="linus">
+                <div scOrgChartCard>
                   <div class="grid">
                     <span class="font-medium">Linus Torvalds</span>
                     <span class="text-muted-foreground text-xs"
@@ -90,8 +85,22 @@ import {
         </ul>
       </li>
     </ul>
+    <p class="bg-muted w-80 rounded-md p-4 text-sm" aria-live="polite">
+      {{ people[selected()[0]] ?? 'No one selected.' }}
+    </p>
   `,
   host: { class: 'flex w-full flex-col items-center gap-4' },
   encapsulation: ViewEncapsulation.None,
 })
-export class BasicOrgChartNextDemo {}
+export class SelectionOrgChartDemo {
+  readonly selected = signal<string[]>(['grace']);
+  readonly people: Record<string, string> = {
+    ada: 'Ada Lovelace, Chief Executive — since 2019.',
+    grace: 'Grace Hopper, Chief Technology Officer — 42 engineers.',
+    alan: 'Alan Turing, Platform Lead — 12 engineers.',
+    katherine: 'Katherine Johnson, Data Lead — 9 analysts.',
+    margaret: 'Margaret Hamilton, Chief Financial Officer — 6 people.',
+    hedy: 'Hedy Lamarr, Chief Operating Officer — 18 people.',
+    linus: 'Linus Torvalds, Operations Lead — 7 people.',
+  };
+}

@@ -610,15 +610,7 @@
   {
     "name": "Org Chart",
     "path": "org-chart",
-    "description": "Hierarchical organization visualization.",
-    "status": "Experimental",
-    "library": "ui-lab",
-    "category": "Data Display"
-  },
-  {
-    "name": "Org Chart Next",
-    "path": "org-chart-next",
-    "description": "The org chart, rebuilt: your people as nested lists, laid out as a chart and joined by lines; a tree for the keyboard.",
+    "description": "Your people as nested lists, laid out as a chart and joined by lines; a tree for the keyboard.",
     "status": "Experimental",
     "library": "ui-lab",
     "category": "Data Display"

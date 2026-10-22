@@ -1,62 +1,56 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { AcrossOrgChartNextDemo } from './across-org-chart-next-demo';
-
-@Component({
-  selector: 'app-across-org-chart-next-demo-container',
-  imports: [DemoContainer, AcrossOrgChartNextDemo],
-  template: `
-    <app-demo-container
-      title="Across"
-      [code]="code"
-      demoUrl="/demos/org-chart-next/across-org-chart-next-demo"
-    >
-      <app-across-org-chart-next-demo />
-    </app-demo-container>
-  `,
-  host: { class: 'block w-full' },
-  encapsulation: ViewEncapsulation.None,
-})
-export class AcrossOrgChartNextDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+import { ScBadge } from '@semantic-components/ui';
 import {
-  ScOrgChartNext,
-  ScOrgChartNextCard,
-  ScOrgChartNextGroup,
-  ScOrgChartNextItem,
+  ScOrgChart,
+  ScOrgChartCard,
+  ScOrgChartExpandIcon,
+  ScOrgChartGroup,
+  ScOrgChartItem,
 } from '@semantic-components/ui-lab';
+import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
-/** direction="across": reports at the inline end — on the right, or on the left in a right-to-left page. */
+/** A click, or → and ←, opens and closes a person. Your chevron (scOrgChartExpandIcon) turns; [expanded]="false" starts closed. */
 @Component({
-  selector: 'app-across-org-chart-next-demo',
+  selector: 'app-collapsible-org-chart-demo',
   imports: [
-    ScOrgChartNext,
-    ScOrgChartNextItem,
-    ScOrgChartNextCard,
-    ScOrgChartNextGroup,
+    ScOrgChart,
+    ScOrgChartItem,
+    ScOrgChartCard,
+    ScOrgChartGroup,
+    ScOrgChartExpandIcon,
+    ScBadge,
+    SiChevronDownIcon,
   ],
-  template: \`
-    <ul scOrgChartNext aria-label="Leadership" direction="across">
-      <li scOrgChartNextItem value="ada">
-        <div scOrgChartNextCard>
+  template: `
+    <ul scOrgChart aria-label="Leadership">
+      <li scOrgChartItem value="ada">
+        <div scOrgChartCard>
           <div class="grid">
             <span class="font-medium">Ada Lovelace</span>
             <span class="text-muted-foreground text-xs">Chief Executive</span>
           </div>
+          <span scBadge variant="secondary"
+            >3<span class="sr-only"> reports</span></span
+          >
+          <svg siChevronDownIcon scOrgChartExpandIcon></svg>
         </div>
-        <ul scOrgChartNextGroup>
-          <li scOrgChartNextItem value="grace">
-            <div scOrgChartNextCard>
+        <ul scOrgChartGroup>
+          <li scOrgChartItem value="grace" [expanded]="false">
+            <div scOrgChartCard>
               <div class="grid">
                 <span class="font-medium">Grace Hopper</span>
                 <span class="text-muted-foreground text-xs"
                   >Chief Technology Officer</span
                 >
               </div>
+              <span scBadge variant="secondary"
+                >2<span class="sr-only"> reports</span></span
+              >
+              <svg siChevronDownIcon scOrgChartExpandIcon></svg>
             </div>
-            <ul scOrgChartNextGroup>
-              <li scOrgChartNextItem value="alan">
-                <div scOrgChartNextCard>
+            <ul scOrgChartGroup>
+              <li scOrgChartItem value="alan">
+                <div scOrgChartCard>
                   <div class="grid">
                     <span class="font-medium">Alan Turing</span>
                     <span class="text-muted-foreground text-xs"
@@ -65,8 +59,8 @@ import {
                   </div>
                 </div>
               </li>
-              <li scOrgChartNextItem value="katherine">
-                <div scOrgChartNextCard>
+              <li scOrgChartItem value="katherine">
+                <div scOrgChartCard>
                   <div class="grid">
                     <span class="font-medium">Katherine Johnson</span>
                     <span class="text-muted-foreground text-xs">Data Lead</span>
@@ -75,8 +69,8 @@ import {
               </li>
             </ul>
           </li>
-          <li scOrgChartNextItem value="margaret">
-            <div scOrgChartNextCard>
+          <li scOrgChartItem value="margaret">
+            <div scOrgChartCard>
               <div class="grid">
                 <span class="font-medium">Margaret Hamilton</span>
                 <span class="text-muted-foreground text-xs"
@@ -85,18 +79,22 @@ import {
               </div>
             </div>
           </li>
-          <li scOrgChartNextItem value="hedy">
-            <div scOrgChartNextCard>
+          <li scOrgChartItem value="hedy" [expanded]="false">
+            <div scOrgChartCard>
               <div class="grid">
                 <span class="font-medium">Hedy Lamarr</span>
                 <span class="text-muted-foreground text-xs"
                   >Chief Operating Officer</span
                 >
               </div>
+              <span scBadge variant="secondary"
+                >1<span class="sr-only"> reports</span></span
+              >
+              <svg siChevronDownIcon scOrgChartExpandIcon></svg>
             </div>
-            <ul scOrgChartNextGroup>
-              <li scOrgChartNextItem value="linus">
-                <div scOrgChartNextCard>
+            <ul scOrgChartGroup>
+              <li scOrgChartItem value="linus">
+                <div scOrgChartCard>
                   <div class="grid">
                     <span class="font-medium">Linus Torvalds</span>
                     <span class="text-muted-foreground text-xs"
@@ -110,9 +108,8 @@ import {
         </ul>
       </li>
     </ul>
-  \`,
+  `,
   host: { class: 'flex w-full flex-col items-center gap-4' },
   encapsulation: ViewEncapsulation.None,
 })
-export class AcrossOrgChartNextDemo {}`;
-}
+export class CollapsibleOrgChartDemo {}

@@ -12,9 +12,9 @@ import {
   signal,
 } from '@angular/core';
 import { ScAriaTreeItem, cn, setInput } from '@semantic-components/ui';
-import { ScOrgChartNext } from './org-chart-next';
-import { ScOrgChartNextCard } from './org-chart-next-card';
-import { ScOrgChartNextGroup } from './org-chart-next-group';
+import { ScOrgChart } from './org-chart';
+import { ScOrgChartCard } from './org-chart-card';
+import { ScOrgChartGroup } from './org-chart-group';
 
 /**
  * A person (`role="treeitem"`): their card, then — if they have reports —
@@ -22,8 +22,8 @@ import { ScOrgChartNextGroup } from './org-chart-next-group';
  * default; `[(expanded)]` two-way.
  */
 @Component({
-  selector: 'li[scOrgChartNextItem]',
-  exportAs: 'scOrgChartNextItem',
+  selector: 'li[scOrgChartItem]',
+  exportAs: 'scOrgChartItem',
   hostDirectives: [
     {
       directive: ScAriaTreeItem,
@@ -40,11 +40,11 @@ import { ScOrgChartNextGroup } from './org-chart-next-group';
   },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScOrgChartNextItem {
+export class ScOrgChartItem {
   readonly treeItem = inject(ScAriaTreeItem);
-  private readonly chart = inject(ScOrgChartNext);
+  private readonly chart = inject(ScOrgChart);
   private readonly group = inject(
-    forwardRef(() => ScOrgChartNextGroup),
+    forwardRef(() => ScOrgChartGroup),
     {
       optional: true,
     },
@@ -54,8 +54,8 @@ export class ScOrgChartNextItem {
   /** Typed to jump to this person; their card's text by default. */
   readonly label = input<string>();
 
-  readonly card = contentChild(ScOrgChartNextCard, { descendants: false });
-  private readonly reports = contentChild(ScOrgChartNextGroup, {
+  readonly card = contentChild(ScOrgChartCard, { descendants: false });
+  private readonly reports = contentChild(ScOrgChartGroup, {
     descendants: false,
   });
   readonly hasReports = computed(() => !!this.reports());

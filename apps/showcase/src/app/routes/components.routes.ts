@@ -440,12 +440,6 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/org-chart/org-chart-page'),
       },
       {
-        path: 'org-chart-next',
-        title: 'Org Chart Next - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/org-chart-next/org-chart-next-page'),
-      },
-      {
         path: 'pagination',
         title: 'Pagination - Semantic Components',
         loadComponent: () => import('../pages/docs/pagination/pagination-page'),
