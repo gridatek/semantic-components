@@ -1,31 +1,31 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { LanguagesCodeEditorNextDemo } from './languages-code-editor-next-demo';
+import { LanguagesCodeEditorDemo } from './languages-code-editor-demo';
 
 @Component({
-  selector: 'app-languages-code-editor-next-demo-container',
-  imports: [DemoContainer, LanguagesCodeEditorNextDemo],
+  selector: 'app-languages-code-editor-demo-container',
+  imports: [DemoContainer, LanguagesCodeEditorDemo],
   template: `
     <app-demo-container
       title="Languages"
       [code]="code"
-      demoUrl="/demos/code-editor-next/languages-code-editor-next-demo"
+      demoUrl="/demos/code-editor/languages-code-editor-demo"
     >
-      <app-languages-code-editor-next-demo />
+      <app-languages-code-editor-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class LanguagesCodeEditorNextDemoContainer {
+export class LanguagesCodeEditorDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScCodeBlock, ScCodeEditorNext } from '@semantic-components/code';
+import { ScCodeBlock, ScCodeEditor } from '@semantic-components/code';
 import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
 
 /** language: each one loaded the first time it is shown. A language’s CodeMirror package (its structure: indentation, brackets) can join through extensions. */
 @Component({
-  selector: 'app-languages-code-editor-next-demo',
-  imports: [ScCodeBlock, ScCodeEditorNext, ScToggleGroup, ScToggleGroupItem],
+  selector: 'app-languages-code-editor-demo',
+  imports: [ScCodeBlock, ScCodeEditor, ScToggleGroup, ScToggleGroupItem],
   template: \`
     <div
       scToggleGroup
@@ -42,7 +42,7 @@ import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
     </div>
     <div scCodeBlock>
       <div
-        scCodeEditorNext
+        scCodeEditor
         aria-label="Code"
         [language]="language()"
         [(value)]="code"
@@ -52,7 +52,7 @@ import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
   host: { class: 'block w-full max-w-2xl' },
   encapsulation: ViewEncapsulation.None,
 })
-export class LanguagesCodeEditorNextDemo {
+export class LanguagesCodeEditorDemo {
   private readonly samples: Record<string, string> = {
     css: '.card {\\n  display: grid;\\n  gap: 1rem;\\n  padding: 1.5rem;\\n}',
     html: '<nav aria-label="Main">\\n  <a href="/">Home</a>\\n  <a href="/docs">Docs</a>\\n</nav>',

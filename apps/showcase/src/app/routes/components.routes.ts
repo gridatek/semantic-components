@@ -148,12 +148,6 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/code-editor/code-editor-page'),
       },
       {
-        path: 'code-editor-next',
-        title: 'Code Editor Next - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/code-editor-next/code-editor-next-page'),
-      },
-      {
         path: 'code-block',
         title: 'Code Block - Semantic Components',
         loadComponent: () => import('../pages/docs/code-block/code-block-page'),

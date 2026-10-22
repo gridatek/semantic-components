@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, FormRoot, form, required } from '@angular/forms/signals';
-import { ScCodeBlock, ScCodeEditorNext } from '@semantic-components/code';
+import { ScCodeBlock, ScCodeEditor } from '@semantic-components/code';
 import {
   ScButton,
   ScField,
@@ -11,12 +11,12 @@ import {
 
 /** A [formField] (a string): named by the field’s label, required from the schema, marked once left. */
 @Component({
-  selector: 'app-form-code-editor-next-demo',
+  selector: 'app-form-code-editor-demo',
   imports: [
     FormField,
     FormRoot,
     ScCodeBlock,
-    ScCodeEditorNext,
+    ScCodeEditor,
     ScField,
     ScLabel,
     ScFieldDescription,
@@ -29,7 +29,7 @@ import {
         <label scLabel>Query</label>
         <div scCodeBlock>
           <div
-            scCodeEditorNext
+            scCodeEditor
             language="sql"
             placeholder="SELECT …"
             class="h-32"
@@ -48,7 +48,7 @@ import {
   host: { class: 'block w-full max-w-2xl' },
   encapsulation: ViewEncapsulation.None,
 })
-export class FormCodeEditorNextDemo {
+export class FormCodeEditorDemo {
   readonly model = signal({ sql: '' });
   readonly ran = signal(0);
   readonly queryForm = form(

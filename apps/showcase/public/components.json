@@ -178,15 +178,7 @@
   {
     "name": "Code Editor",
     "path": "code-editor",
-    "description": "A syntax-highlighted code editor.",
-    "status": "Experimental",
-    "library": "code",
-    "category": "Editor"
-  },
-  {
-    "name": "Code Editor Next",
-    "path": "code-editor-next",
-    "description": "The code editor, rebuilt: CodeMirror, colored by Shiki; a form field.",
+    "description": "Code to edit: CodeMirror, colored by Shiki; a form field.",
     "status": "Experimental",
     "library": "code",
     "category": "Editor"

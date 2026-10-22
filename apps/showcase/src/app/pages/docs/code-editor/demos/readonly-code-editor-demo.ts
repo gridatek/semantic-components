@@ -1,66 +1,38 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import {
-  ScCodeEditor,
-  ScCodeEditorContent,
-  ScCodeEditorCopyButton,
-  ScCodeEditorHeader,
-  ScCodeEditorLabel,
-} from '@semantic-components/code';
-import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { ScCodeBlock, ScCodeEditor } from '@semantic-components/code';
 
+/** readonly: selectable and copyable, not edited. disabled: out of the way. */
 @Component({
   selector: 'app-readonly-code-editor-demo',
-  imports: [
-    ScCodeEditor,
-    ScCodeEditorHeader,
-    ScCodeEditorLabel,
-    ScCodeEditorContent,
-    ScCodeEditorCopyButton,
-    SiCheckIcon,
-    SiCopyIcon,
-  ],
+  imports: [ScCodeBlock, ScCodeEditor],
   template: `
-    <div scCodeEditor>
-      <div scCodeEditorHeader>
-        <div class="flex items-center gap-2">
-          <span class="text-muted-foreground text-sm">readonly.ts</span>
-          <span scCodeEditorLabel>typescript</span>
-        </div>
-        <button
-          scCodeEditorCopyButton
-          #copy="scCodeEditorCopyButton"
-          [code]="readonlyCode"
-        >
-          @if (copy.copied()) {
-            <svg siCheckIcon></svg>
-          } @else {
-            <svg siCopyIcon></svg>
-          }
-
-          <span class="sr-only">{{
-            copy.copied() ? 'Copied' : 'Copy code'
-          }}</span>
-        </button>
+    <div class="grid gap-3">
+      <div scCodeBlock>
+        <div
+          scCodeEditor
+          readonly
+          aria-label="Read-only"
+          language="json"
+          [(value)]="code"
+        ></div>
       </div>
-      <div
-        scCodeEditorContent
-        ariaLabel="Code editor"
-        [value]="readonlyCode"
-        language="typescript"
-        [readonly]="true"
-        filename="readonly.ts"
-        class="max-h-[200px]"
-      ></div>
+      <div scCodeBlock>
+        <div
+          scCodeEditor
+          disabled
+          aria-label="Disabled"
+          language="json"
+          [(value)]="code"
+        ></div>
+      </div>
     </div>
   `,
-  host: { class: 'flex w-full justify-center' },
+  host: { class: 'block w-full max-w-2xl' },
   encapsulation: ViewEncapsulation.None,
 })
 export class ReadonlyCodeEditorDemo {
-  readonlyCode = `// This code is readonly
-export const CONFIG = {
-  apiUrl: 'https://api.example.com',
-  timeout: 5000,
-  retries: 3,
-} as const;`;
+  readonly code = signal(`{
+  "name": "semantic-components",
+  "private": true
+}`);
 }

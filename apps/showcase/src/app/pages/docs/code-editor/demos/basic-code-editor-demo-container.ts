@@ -7,9 +7,9 @@ import { BasicCodeEditorDemo } from './basic-code-editor-demo';
   imports: [DemoContainer, BasicCodeEditorDemo],
   template: `
     <app-demo-container
-      title="Basic Editor"
-      demoUrl="/demos/code-editor/basic-code-editor-demo"
+      title="Basic"
       [code]="code"
+      demoUrl="/demos/code-editor/basic-code-editor-demo"
     >
       <app-basic-code-editor-demo />
     </app-demo-container>
@@ -18,82 +18,70 @@ import { BasicCodeEditorDemo } from './basic-code-editor-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicCodeEditorDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
+  ScCodeBlock,
+  ScCodeBlockActions,
+  ScCodeBlockCopy,
+  ScCodeBlockHeader,
+  ScCodeBlockTitle,
   ScCodeEditor,
-  ScCodeEditorContent,
-  ScCodeEditorCopyButton,
-  ScCodeEditorHeader,
-  ScCodeEditorLabel,
 } from '@semantic-components/code';
 import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 
+/** CodeMirror, colored by the app’s highlighter (Shiki, like a code block), in a code block for its frame, title and copy button. Tab indents; Escape then Tab moves on. */
 @Component({
   selector: 'app-basic-code-editor-demo',
   imports: [
+    ScCodeBlock,
     ScCodeEditor,
-    ScCodeEditorHeader,
-    ScCodeEditorLabel,
-    ScCodeEditorContent,
-    ScCodeEditorCopyButton,
+    ScCodeBlockHeader,
+    ScCodeBlockTitle,
+    ScCodeBlockActions,
+    ScCodeBlockCopy,
     SiCheckIcon,
     SiCopyIcon,
   ],
   template: \`
-    <div scCodeEditor>
-      <div scCodeEditorHeader>
-        <div class="flex items-center gap-2">
-          <span class="text-muted-foreground text-sm">example.js</span>
-          <span scCodeEditorLabel>javascript</span>
+    <div scCodeBlock>
+      <div scCodeBlockHeader>
+        <div scCodeBlockTitle>counter.ts</div>
+        <div scCodeBlockActions>
+          <button [scCodeBlockCopy]="code()" #copy="scCodeBlockCopy">
+            @if (copy.copied()) {
+              <svg siCheckIcon></svg>
+            } @else {
+              <svg siCopyIcon></svg>
+            }
+            <span class="sr-only">Copy code</span>
+          </button>
         </div>
-        <button
-          scCodeEditorCopyButton
-          #copy="scCodeEditorCopyButton"
-          [code]="javascriptCode"
-        >
-          @if (copy.copied()) {
-            <svg siCheckIcon></svg>
-          } @else {
-            <svg siCopyIcon></svg>
-          }
-
-          <span class="sr-only">{{
-            copy.copied() ? 'Copied' : 'Copy code'
-          }}</span>
-        </button>
       </div>
       <div
-        scCodeEditorContent
-        ariaLabel="Code editor"
-        [(value)]="javascriptCode"
-        language="javascript"
-        filename="example.js"
+        scCodeEditor
+        aria-label="counter.ts"
+        language="angular-ts"
+        class="max-h-80"
+        [(value)]="code"
       ></div>
     </div>
   \`,
-  host: { class: 'flex w-full justify-center' },
+  host: { class: 'block w-full max-w-2xl' },
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicCodeEditorDemo {
-  javascriptCode = \`// JavaScript Example
-function greet(name) {
-  const greeting = \\\`Hello, \\\${name}!\\\`;
-  console.log(greeting);
-  return greeting;
-}
+  readonly code = signal(\`import { Component, signal } from '@angular/core';
 
-const users = ['Alice', 'Bob', 'Charlie'];
-users.forEach(user => greet(user));
+@Component({
+  selector: 'app-counter',
+  template: '<button (click)="increment()">{{ count() }}</button>',
+})
+export class Counter {
+  readonly count = signal(0);
 
-// Arrow function with async/await
-const fetchData = async (url) => {
-  try {
-    const response = await fetch(url);
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error('Error:', error);
+  increment(): void {
+    this.count.update((count) => count + 1);
   }
-};\`;
+}\`);
 }`;
 }

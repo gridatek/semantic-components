@@ -1,34 +1,34 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { WrapCodeEditorNextDemo } from './wrap-code-editor-next-demo';
+import { WrapCodeEditorDemo } from './wrap-code-editor-demo';
 
 @Component({
-  selector: 'app-wrap-code-editor-next-demo-container',
-  imports: [DemoContainer, WrapCodeEditorNextDemo],
+  selector: 'app-wrap-code-editor-demo-container',
+  imports: [DemoContainer, WrapCodeEditorDemo],
   template: `
     <app-demo-container
       title="Wrap"
       [code]="code"
-      demoUrl="/demos/code-editor-next/wrap-code-editor-next-demo"
+      demoUrl="/demos/code-editor/wrap-code-editor-demo"
     >
-      <app-wrap-code-editor-next-demo />
+      <app-wrap-code-editor-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class WrapCodeEditorNextDemoContainer {
+export class WrapCodeEditorDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScCodeBlock, ScCodeEditorNext } from '@semantic-components/code';
+import { ScCodeBlock, ScCodeEditor } from '@semantic-components/code';
 
 /** wrap: long lines break instead of scrolling; lineNumbers off. */
 @Component({
-  selector: 'app-wrap-code-editor-next-demo',
-  imports: [ScCodeBlock, ScCodeEditorNext],
+  selector: 'app-wrap-code-editor-demo',
+  imports: [ScCodeBlock, ScCodeEditor],
   template: \`
     <div scCodeBlock>
       <div
-        scCodeEditorNext
+        scCodeEditor
         wrap
         aria-label="Notes"
         [lineNumbers]="false"
@@ -39,7 +39,7 @@ import { ScCodeBlock, ScCodeEditorNext } from '@semantic-components/code';
   host: { class: 'block w-full max-w-2xl' },
   encapsulation: ViewEncapsulation.None,
 })
-export class WrapCodeEditorNextDemo {
+export class WrapCodeEditorDemo {
   readonly code = signal(
     'A long line of prose that wraps inside the editor instead of scrolling sideways, because wrap is on. A second sentence keeps it going, well past the edge.',
   );

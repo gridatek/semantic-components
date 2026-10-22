@@ -17,7 +17,6 @@
     "@angular/common": ">=22.2.3",
     "@angular/cdk": ">=22.2.3",
     "@angular/forms": ">=22.2.3",
-    "@angular/platform-browser": ">=22.2.3",
     "@codemirror/commands": ">=6.11.1",
     "@codemirror/language": ">=6.13.1",
     "@codemirror/state": ">=6.7.6",
@@ -27,11 +26,6 @@
     "rxjs": ">=7.8.2",
     "shiki": ">=4.5.0",
     "@semantic-components/ui": "0.81.0"
-  },
-  "exports": {
-    "./styles": {
-      "default": "./src/lib/styles/index.css"
-    }
   },
   "sideEffects": false
 }

@@ -8,7 +8,6 @@
 @import '../../../libs/ui/src/lib/styles/index.css';
 @import '../../../libs/ui/src/lib/styles/color-schemes.css';
 @import '../../../libs/editor/src/lib/styles/index.css';
-@import '../../../libs/code/src/lib/styles/index.css';
 
 /* Playwright selectors such as `[role=treeitem]:visible` look like arbitrary
    variants and would be compiled into invalid CSS. */

@@ -690,52 +690,24 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'typescript-code-editor-demo',
+        path: 'form-code-editor-demo',
         loadComponent: () =>
-          import('../pages/docs/code-editor/demos/typescript-code-editor-demo').then(
-            (m) => m.TypescriptCodeEditorDemo,
+          import('../pages/docs/code-editor/demos/form-code-editor-demo').then(
+            (m) => m.FormCodeEditorDemo,
           ),
       },
       {
-        path: 'html-code-editor-demo',
+        path: 'languages-code-editor-demo',
         loadComponent: () =>
-          import('../pages/docs/code-editor/demos/html-code-editor-demo').then(
-            (m) => m.HtmlCodeEditorDemo,
+          import('../pages/docs/code-editor/demos/languages-code-editor-demo').then(
+            (m) => m.LanguagesCodeEditorDemo,
           ),
       },
       {
-        path: 'css-code-editor-demo',
+        path: 'wrap-code-editor-demo',
         loadComponent: () =>
-          import('../pages/docs/code-editor/demos/css-code-editor-demo').then(
-            (m) => m.CssCodeEditorDemo,
-          ),
-      },
-      {
-        path: 'json-code-editor-demo',
-        loadComponent: () =>
-          import('../pages/docs/code-editor/demos/json-code-editor-demo').then(
-            (m) => m.JsonCodeEditorDemo,
-          ),
-      },
-      {
-        path: 'python-code-editor-demo',
-        loadComponent: () =>
-          import('../pages/docs/code-editor/demos/python-code-editor-demo').then(
-            (m) => m.PythonCodeEditorDemo,
-          ),
-      },
-      {
-        path: 'sql-code-editor-demo',
-        loadComponent: () =>
-          import('../pages/docs/code-editor/demos/sql-code-editor-demo').then(
-            (m) => m.SqlCodeEditorDemo,
-          ),
-      },
-      {
-        path: 'light-theme-code-editor-demo',
-        loadComponent: () =>
-          import('../pages/docs/code-editor/demos/light-theme-code-editor-demo').then(
-            (m) => m.LightThemeCodeEditorDemo,
+          import('../pages/docs/code-editor/demos/wrap-code-editor-demo').then(
+            (m) => m.WrapCodeEditorDemo,
           ),
       },
       {
@@ -743,67 +715,6 @@ export const demosRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/code-editor/demos/readonly-code-editor-demo').then(
             (m) => m.ReadonlyCodeEditorDemo,
-          ),
-      },
-      {
-        path: 'minimal-code-editor-demo',
-        loadComponent: () =>
-          import('../pages/docs/code-editor/demos/minimal-code-editor-demo').then(
-            (m) => m.MinimalCodeEditorDemo,
-          ),
-      },
-      {
-        path: 'word-wrap-code-editor-demo',
-        loadComponent: () =>
-          import('../pages/docs/code-editor/demos/word-wrap-code-editor-demo').then(
-            (m) => m.WordWrapCodeEditorDemo,
-          ),
-      },
-      {
-        path: 'interactive-code-editor-demo',
-        loadComponent: () =>
-          import('../pages/docs/code-editor/demos/interactive-code-editor-demo').then(
-            (m) => m.InteractiveCodeEditorDemo,
-          ),
-      },
-    ],
-  },
-  {
-    path: 'demos/code-editor-next',
-    children: [
-      {
-        path: 'basic-code-editor-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/code-editor-next/demos/basic-code-editor-next-demo').then(
-            (m) => m.BasicCodeEditorNextDemo,
-          ),
-      },
-      {
-        path: 'form-code-editor-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/code-editor-next/demos/form-code-editor-next-demo').then(
-            (m) => m.FormCodeEditorNextDemo,
-          ),
-      },
-      {
-        path: 'languages-code-editor-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/code-editor-next/demos/languages-code-editor-next-demo').then(
-            (m) => m.LanguagesCodeEditorNextDemo,
-          ),
-      },
-      {
-        path: 'wrap-code-editor-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/code-editor-next/demos/wrap-code-editor-next-demo').then(
-            (m) => m.WrapCodeEditorNextDemo,
-          ),
-      },
-      {
-        path: 'readonly-code-editor-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/code-editor-next/demos/readonly-code-editor-next-demo').then(
-            (m) => m.ReadonlyCodeEditorNextDemo,
           ),
       },
     ],

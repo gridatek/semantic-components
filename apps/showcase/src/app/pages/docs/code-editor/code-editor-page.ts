@@ -3,33 +3,19 @@ import { ScHeading } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicCodeEditorDemoContainer } from './demos/basic-code-editor-demo-container';
-import { CssCodeEditorDemoContainer } from './demos/css-code-editor-demo-container';
-import { HtmlCodeEditorDemoContainer } from './demos/html-code-editor-demo-container';
-import { InteractiveCodeEditorDemoContainer } from './demos/interactive-code-editor-demo-container';
-import { JsonCodeEditorDemoContainer } from './demos/json-code-editor-demo-container';
-import { LightThemeCodeEditorDemoContainer } from './demos/light-theme-code-editor-demo-container';
-import { MinimalCodeEditorDemoContainer } from './demos/minimal-code-editor-demo-container';
-import { PythonCodeEditorDemoContainer } from './demos/python-code-editor-demo-container';
+import { FormCodeEditorDemoContainer } from './demos/form-code-editor-demo-container';
+import { LanguagesCodeEditorDemoContainer } from './demos/languages-code-editor-demo-container';
 import { ReadonlyCodeEditorDemoContainer } from './demos/readonly-code-editor-demo-container';
-import { SqlCodeEditorDemoContainer } from './demos/sql-code-editor-demo-container';
-import { TypescriptCodeEditorDemoContainer } from './demos/typescript-code-editor-demo-container';
-import { WordWrapCodeEditorDemoContainer } from './demos/word-wrap-code-editor-demo-container';
+import { WrapCodeEditorDemoContainer } from './demos/wrap-code-editor-demo-container';
 
 @Component({
   selector: 'app-code-editor-page',
   imports: [
     BasicCodeEditorDemoContainer,
-    TypescriptCodeEditorDemoContainer,
-    HtmlCodeEditorDemoContainer,
-    CssCodeEditorDemoContainer,
-    JsonCodeEditorDemoContainer,
-    PythonCodeEditorDemoContainer,
-    SqlCodeEditorDemoContainer,
-    LightThemeCodeEditorDemoContainer,
+    FormCodeEditorDemoContainer,
+    LanguagesCodeEditorDemoContainer,
+    WrapCodeEditorDemoContainer,
     ReadonlyCodeEditorDemoContainer,
-    MinimalCodeEditorDemoContainer,
-    WordWrapCodeEditorDemoContainer,
-    InteractiveCodeEditorDemoContainer,
     TocHeading,
     ComponentBadges,
     ScHeading,
@@ -39,26 +25,57 @@ import { WordWrapCodeEditorDemoContainer } from './demos/word-wrap-code-editor-d
       <div class="space-y-2">
         <h1 scHeading>Code Editor</h1>
         <p class="text-muted-foreground">
-          Syntax-highlighted code editor with line numbers, auto-indent, and
-          multiple language support.
+          CodeMirror, colored by Shiki through the app’s highlighter — the code
+          block’s colors and frame. Undo, indentation from the keyboard (Escape
+          then Tab moves on), line numbers, a form field.
         </p>
         <app-component-badges path="code-editor" />
       </div>
 
-      <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+      <section class="space-y-4">
+        <h2 scHeading appToc>Basic</h2>
+        <p class="text-muted-foreground">
+          CodeMirror, colored by the app’s highlighter (Shiki, like a code
+          block), in a code block for its frame, title and copy button. Tab
+          indents; Escape then Tab moves on.
+        </p>
         <app-basic-code-editor-demo-container />
-        <app-typescript-code-editor-demo-container />
-        <app-html-code-editor-demo-container />
-        <app-css-code-editor-demo-container />
-        <app-json-code-editor-demo-container />
-        <app-python-code-editor-demo-container />
-        <app-sql-code-editor-demo-container />
-        <app-light-theme-code-editor-demo-container />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>In a form</h2>
+        <p class="text-muted-foreground">
+          A [formField] (a string): named by the field’s label, required from
+          the schema, marked once left.
+        </p>
+        <app-form-code-editor-demo-container />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Languages</h2>
+        <p class="text-muted-foreground">
+          language: each one loaded the first time it is shown. A language’s
+          CodeMirror package (its structure: indentation, brackets) can join
+          through extensions.
+        </p>
+        <app-languages-code-editor-demo-container />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Wrap</h2>
+        <p class="text-muted-foreground">
+          wrap: long lines break instead of scrolling; lineNumbers off.
+        </p>
+        <app-wrap-code-editor-demo-container />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Read-only and disabled</h2>
+        <p class="text-muted-foreground">
+          readonly: selectable and copyable, not edited. disabled: out of the
+          way.
+        </p>
         <app-readonly-code-editor-demo-container />
-        <app-minimal-code-editor-demo-container />
-        <app-word-wrap-code-editor-demo-container />
-        <app-interactive-code-editor-demo-container />
       </section>
     </div>
   `,

@@ -58,34 +58,7 @@ import { BasicCodeBlockDemoContainer } from '../docs/code-block/demos/basic-code
       <div scSeparator></div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>2. Configure styles</h2>
-        <p class="text-muted-foreground">
-          Import the code library styles in your
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code
-          >:
-        </p>
-        <div scCodeBlock>
-          <div scCodeBlockHeader>
-            <div scCodeBlockTitle>css</div>
-            <div scCodeBlockActions>
-              <button [scCodeBlockCopy]="stylesCode" #copy2="scCodeBlockCopy">
-                @if (copy2.copied()) {
-                  <svg siCheckIcon></svg>
-                } @else {
-                  <svg siCopyIcon></svg>
-                }
-                <span class="sr-only">Copy to clipboard</span>
-              </button>
-            </div>
-          </div>
-          <pre scCodeBlockContent [code]="stylesCode" language="css"></pre>
-        </div>
-      </section>
-
-      <div scSeparator></div>
-
-      <section class="space-y-4">
-        <h2 scHeading appToc>3. Configure Tailwind source</h2>
+        <h2 scHeading appToc>2. Configure Tailwind source</h2>
         <p class="text-muted-foreground">
           Add the library as a Tailwind source in your
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code
@@ -119,7 +92,7 @@ import { BasicCodeBlockDemoContainer } from '../docs/code-block/demos/basic-code
       <div scSeparator></div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>4. Provide the highlighter</h2>
+        <h2 scHeading appToc>3. Provide the highlighter</h2>
         <p class="text-muted-foreground">
           Code blocks are highlighted with Shiki once the app provides it — each
           language loaded the first time it is shown. Without it, they show
@@ -164,8 +137,6 @@ import { BasicCodeBlockDemoContainer } from '../docs/code-block/demos/basic-code
   encapsulation: ViewEncapsulation.None,
 })
 export default class CodeInstallPage {
-  readonly stylesCode = '@import "@semantic-components/code/styles";';
-
   readonly sourceCode = '@source "../node_modules/@semantic-components/code";';
 
   readonly highlighterCode = `import { provideCodeHighlighter } from '@semantic-components/code';

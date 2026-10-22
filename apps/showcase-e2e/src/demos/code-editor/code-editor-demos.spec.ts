@@ -1,8 +1,7 @@
 import { type Page, expect, test } from '@playwright/test';
 import { collectErrors, press } from '../../interaction';
 
-const demo = (name: string) =>
-  `/demos/code-editor-next/${name}-code-editor-next-demo`;
+const demo = (name: string) => `/demos/code-editor/${name}-code-editor-demo`;
 const editor = (page: Page, name?: string) =>
   name
     ? page.getByRole('textbox', { name, exact: true })

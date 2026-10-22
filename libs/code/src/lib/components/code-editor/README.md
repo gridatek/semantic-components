@@ -1,389 +1,77 @@
-# Code Editor Components
+# Code Editor
 
-An interactive code editor component with syntax highlighting powered by [Shiki](https://shiki.style/) and shadcn/ui styling. Features line numbers, auto-indent, tab handling, and cursor position tracking. Automatically follows the app's light/dark theme.
-
-## Import
-
-```typescript
-import { ScCodeEditor, ScCodeEditorContent, ScCodeEditorCopyButton, ScCodeEditorFooter, ScCodeEditorHeader, ScCodeEditorLabel, ScCodeEditorLanguage, detectLanguage } from '@semantic-components/ui-lab';
-```
-
-## Architecture
-
-The component uses Shiki's dual-theme feature (`github-light` + `github-dark`) with `defaultColor: false` to generate CSS variable-based output. The CSS switches between `--shiki-light` and `--shiki-dark` variables based on the `.dark` class on the document root.
-
-```
-ScCodeEditor (Root - div[scCodeEditor])
-├── ScCodeEditorHeader (Header - div[scCodeEditorHeader])
-│   ├── ScCodeEditorLabel (Label - span[scCodeEditorLabel])
-│   └── ScCodeEditorCopyButton (Copy button)
-├── ScCodeEditorContent (Content - div[scCodeEditorContent])
-│   ├── Line numbers (optional)
-│   └── Editable textarea with syntax highlighting
-└── ScCodeEditorFooter (Footer - div[scCodeEditorFooter])
-    └── Cursor position and stats
-```
-
-## Components
-
-| Component                | Selector                         | Description                           |
-| ------------------------ | -------------------------------- | ------------------------------------- |
-| `ScCodeEditor`           | `div[scCodeEditor]`              | Root container with border and focus  |
-| `ScCodeEditorHeader`     | `div[scCodeEditorHeader]`        | Header bar with border                |
-| `ScCodeEditorLabel`      | `span[scCodeEditorLabel]`        | Label for filename or language        |
-| `ScCodeEditorContent`    | `div[scCodeEditorContent]`       | Editable code area with highlighting  |
-| `ScCodeEditorCopyButton` | `button[scCodeEditorCopyButton]` | Copy button with visual feedback      |
-| `ScCodeEditorFooter`     | `div[scCodeEditorFooter]`        | Footer with cursor position and stats |
-
-## Inputs
-
-### ScCodeEditor (Root)
-
-| Input   | Type     | Default | Description            |
-| ------- | -------- | ------- | ---------------------- |
-| `class` | `string` | `''`    | Additional CSS classes |
-
-The root container with border, rounded corners, and focus-within ring.
-
-### ScCodeEditorHeader
-
-| Input   | Type     | Default | Description            |
-| ------- | -------- | ------- | ---------------------- |
-| `class` | `string` | `''`    | Additional CSS classes |
-
-Header bar with bottom border for filename/language label and copy button.
-
-### ScCodeEditorLabel
-
-| Input   | Type     | Default | Description            |
-| ------- | -------- | ------- | ---------------------- |
-| `class` | `string` | `''`    | Additional CSS classes |
-
-Label for displaying filename or language with muted foreground styling.
-
-### ScCodeEditorFooter
-
-| Input   | Type     | Default | Description            |
-| ------- | -------- | ------- | ---------------------- |
-| `class` | `string` | `''`    | Additional CSS classes |
-
-Footer bar with top border for displaying cursor position and file statistics.
-
-### ScCodeEditorCopyButton
-
-| Input   | Type     | Default      | Description            |
-| ------- | -------- | ------------ | ---------------------- |
-| `code`  | `string` | **required** | The code to copy       |
-| `class` | `string` | `''`         | Additional CSS classes |
-
-Copies `code`, styled as a `ghost` icon button (`variant` and `size` as on `scButton`). Write its icon and name it; `copied()` (`exportAs: 'scCodeEditorCopyButton'`) is true for two seconds after a copy, to switch both — a check icon and `<span class="sr-only">{{ copy.copied() ? 'Copied' : 'Copy code' }}</span>`.
-
-### ScCodeEditorContent
-
-| Input                | Type                   | Default       | Description                       |
-| -------------------- | ---------------------- | ------------- | --------------------------------- |
-| `value`              | `string`               | `''`          | Two-way bound editor value        |
-| `language`           | `ScCodeEditorLanguage` | `'plaintext'` | Language for syntax highlighting  |
-| `filename`           | `string`               | `''`          | Filename for language detection   |
-| `placeholder`        | `string`               | `''`          | Placeholder text when empty       |
-| `disabled`           | `boolean`              | `false`       | Whether the editor is disabled    |
-| `readonly`           | `boolean`              | `false`       | Whether the editor is read-only   |
-| `showLineNumbers`    | `boolean`              | `true`        | Whether to show line numbers      |
-| `tabSize`            | `number`               | `2`           | Number of spaces per tab          |
-| `insertSpaces`       | `boolean`              | `true`        | Insert spaces instead of tabs     |
-| `wordWrap`           | `boolean`              | `false`       | Enable word wrapping              |
-| `autoDetectLanguage` | `boolean`              | `false`       | Auto-detect language from content |
-| `ariaLabel`          | `string`               | `''`          | Accessibility label               |
-| `ariaDescribedby`    | `string`               | `''`          | Accessibility description ID      |
-| `class`              | `string`               | `''`          | Additional CSS classes            |
-
-## Outputs
-
-### ScCodeEditorContent
-
-| Output             | Type                               | Description                       |
-| ------------------ | ---------------------------------- | --------------------------------- |
-| `valueChange`      | `string`                           | Emitted when editor value changes |
-| `languageDetected` | `ScCodeEditorLanguage`             | Emitted when language is detected |
-| `cursorChange`     | `{ line: number; column: number }` | Emitted when cursor moves         |
-
-## Supported Languages
-
-`angular-ts` | `typescript` | `javascript` | `html` | `css` | `json` | `python` | `bash` | `shell` | `markdown` | `yaml` | `sql` | `go` | `rust` | `java` | `plaintext`
+Code to edit: [CodeMirror 6](https://codemirror.net), colored by the app's highlighter — Shiki, through `provideCodeHighlighter()` — so it has the same colors as the [code block](../code-block/README.md) and the diff viewer. Undo, indentation from the keyboard, line numbers, the current line; a `[formField]` (`string`). `@codemirror/view`, `state`, `commands` and `language` are peers of this library.
 
 ## Usage
 
-### Basic Usage
+Put it in a code block for its frame, title and copy button:
 
 ```html
-<div scCodeEditor>
-  <div scCodeEditorContent ariaLabel="Code editor" [(value)]="code" language="typescript"></div>
-</div>
-```
-
-### Full Featured Editor
-
-```html
-<div scCodeEditor>
-  <div scCodeEditorHeader>
-    <div class="flex items-center gap-2">
-      <span class="text-muted-foreground text-sm">{{ filename }}</span>
-      <span scCodeEditorLabel>{{ language }}</span>
-    </div>
-    <button scCodeEditorCopyButton #copy="scCodeEditorCopyButton" [code]="code">
-      @if (copy.copied()) {
-      <svg siCheckIcon></svg>
-      } @else {
-      <svg siCopyIcon></svg>
-      }
-      <span class="sr-only">{{ copy.copied() ? 'Copied' : 'Copy code' }}</span>
-    </button>
+<div scCodeBlock>
+  <div scCodeBlockHeader>
+    <div scCodeBlockTitle>counter.ts</div>
   </div>
+  <div scCodeEditor aria-label="counter.ts" language="typescript" class="max-h-80" [(value)]="code"></div>
+</div>
+```
 
-  <div scCodeEditorContent ariaLabel="Code editor" [(value)]="code" [language]="language" [filename]="filename" [showLineNumbers]="true" (cursorChange)="onCursorChange($event)"></div>
+In a field, its label names it:
 
-  <div scCodeEditorFooter>
-    <div class="flex items-center gap-3">
-      <span>Ln {{ line }}, Col {{ column }}</span>
-    </div>
-    <div class="flex items-center gap-3">
-      <span>{{ lineCount }} lines</span>
-      <span>{{ charCount }} chars</span>
-    </div>
+```html
+<div scField>
+  <label scLabel>Query</label>
+  <div scCodeBlock>
+    <div scCodeEditor language="sql" class="h-32" [formField]="form.sql"></div>
   </div>
+  <p scFieldDescription>Escape, then Tab, moves on.</p>
 </div>
 ```
 
-### Minimal Editor (No Header/Footer)
+The code block's frame shows the editor's focus ring, and its invalid state once touched. Size it with a height (`h-32`) or a maximum (`max-h-80`, it then scrolls).
 
-```html
-<div scCodeEditor>
-  <div scCodeEditorContent ariaLabel="Code editor" [(value)]="code" language="json" [showLineNumbers]="false"></div>
-</div>
-```
+## Keyboard
 
-### With Auto-Detect Language
+| Key                   | Does                                              |
+| --------------------- | ------------------------------------------------- |
+| Tab / Shift+Tab       | Indent / outdent the line, or every selected line |
+| Enter                 | A new line, keeping the indentation               |
+| Ctrl/⌘+Z, Ctrl/⌘+Y    | Undo, redo                                        |
+| Escape, then Tab      | Moves focus on (Tab otherwise indents)            |
+| Ctrl+M (⇧⌥M on macOS) | Tab moves focus until pressed again               |
 
-```html
-<div scCodeEditor>
-  <div scCodeEditorHeader>
-    <span scCodeEditorLabel>{{ detectedLanguage }}</span>
-    <button scCodeEditorCopyButton #copy="scCodeEditorCopyButton" [code]="code">
-      @if (copy.copied()) {
-      <svg siCheckIcon></svg>
-      } @else {
-      <svg siCopyIcon></svg>
-      }
-      <span class="sr-only">{{ copy.copied() ? 'Copied' : 'Copy code' }}</span>
-    </button>
-  </div>
+## The Shiki bridge
 
-  <div scCodeEditorContent ariaLabel="Code editor" [(value)]="code" [autoDetectLanguage]="true" (languageDetected)="detectedLanguage = $event"></div>
-</div>
-```
+`shikiHighlighting(highlighter, language)` is a CodeMirror extension: after each pause in typing, the whole text is highlighted by the highlighter, its tokens painted as decorations — moved along with the edits until the next answer. The editor adds it when the app provides a highlighter; it can also be used in any CodeMirror editor.
 
-### Read-Only Mode
+Shiki only colors. CodeMirror's syntax-aware features — indentation by syntax, bracket matching, folding — come from its own language packages: add them through `extensions` (`[javascript()]` from `@codemirror/lang-javascript`), with search, autocompletion and the rest.
 
-```html
-<div scCodeEditor>
-  <div scCodeEditorContent ariaLabel="Code editor" [(value)]="code" language="typescript" [readonly]="true"></div>
-</div>
-```
+## API
 
-### With Word Wrap
+### ScCodeEditor — `div[scCodeEditor]`, `#editor="scCodeEditor"`
 
-```html
-<div scCodeEditor>
-  <div scCodeEditorContent ariaLabel="Code editor" [(value)]="longCode" language="markdown" [wordWrap]="true" class="max-h-[400px]"></div>
-</div>
-```
+| Input                   | Type             | Default           |
+| ----------------------- | ---------------- | ----------------- |
+| `value`                 | `string` (model) | `''`              |
+| `language`              | `string`         | `'plaintext'`     |
+| `lineNumbers`           | `boolean`        | `true`            |
+| `wrap`                  | `boolean`        | `false`           |
+| `tabSize`               | `number`         | `2`               |
+| `placeholder`           | `string`         | `''`              |
+| `readonly` / `disabled` | `boolean`        | `false`           |
+| `invalid` / `touched`   | `boolean`        | `false`           |
+| `aria-label`            | `string`         | the field's label |
+| `extensions`            | `Extension[]`    | `[]`              |
 
-### Custom Tab Size
+| Output  | When                                          |
+| ------- | --------------------------------------------- |
+| `touch` | Focus left it (Signal Forms marks it touched) |
 
-```html
-<div scCodeEditor>
-  <div scCodeEditorContent ariaLabel="Code editor" [(value)]="code" language="python" [tabSize]="4" [insertSpaces]="true"></div>
-</div>
-```
+| Member    | Description                 |
+| --------- | --------------------------- |
+| `view`    | The CodeMirror `EditorView` |
+| `focus()` | Focus in the editor         |
 
-### Tracking Cursor Position
+## Accessibility
 
-```typescript
-export class MyComponent {
-  code = signal('');
-  cursorPosition = signal({ line: 1, column: 1 });
-
-  onCursorChange(position: { line: number; column: number }) {
-    this.cursorPosition.set(position);
-  }
-}
-```
-
-```html
-<div scCodeEditor>
-  <div scCodeEditorContent ariaLabel="Code editor" [(value)]="code" language="typescript" (cursorChange)="onCursorChange($event)"></div>
-
-  <div scCodeEditorFooter>
-    <span>Ln {{ cursorPosition().line }}, Col {{ cursorPosition().column }}</span>
-  </div>
-</div>
-```
-
-## Features
-
-### Composable Architecture
-
-Build custom layouts with separate header, content, and footer components.
-
-### Syntax Highlighting
-
-Powered by Shiki with 30+ languages supported. Real-time highlighting as you type.
-
-### Smart Indentation
-
-- **Tab key**: Insert spaces or tabs (configurable)
-- **Shift+Tab**: Outdent current line
-- **Enter**: Auto-indent based on previous line
-- **Auto-indent**: Extra indent after `{`, `[`, or `:`
-- **Smart brackets**: Auto-outdent when typing `}`, `]`, or `)`
-
-### Line Numbers
-
-Optional line numbers with active line highlighting.
-
-### Language Detection
-
-Automatic language detection from file extension or content patterns using the `detectLanguage()` function.
-
-### Cursor Tracking
-
-Real-time cursor position (line and column) tracking with change events.
-
-### Copy Button
-
-Built-in copy-to-clipboard functionality with visual feedback.
-
-### Accessibility
-
-- Proper ARIA labels and descriptions
-- Keyboard navigation support
-- Screen reader friendly
-- Focus management
-
-### Customizable
-
-All components accept custom classes for styling flexibility.
-
-## Theming
-
-The component automatically follows the app's theme:
-
-- **Light mode**: Uses `github-light` Shiki theme
-- **Dark mode**: Uses `github-dark` Shiki theme (activated by `.dark` class on `<html>`)
-
-No manual theme configuration is needed. The component renders both theme colors as CSS variables and switches between them with CSS.
-
-## Keyboard Shortcuts
-
-| Key           | Action                                    |
-| ------------- | ----------------------------------------- |
-| `Tab`         | Insert indent (spaces or tab)             |
-| `Shift+Tab`   | Remove indent                             |
-| `Enter`       | New line with auto-indent                 |
-| `{`, `[`, `:` | Extra indent on next line after Enter     |
-| `}`, `]`, `)` | Auto-outdent when line is only whitespace |
-
-## Utility Functions
-
-### detectLanguage(code, filename?)
-
-Automatically detects the programming language from code content or filename.
-
-```typescript
-import { detectLanguage } from '@semantic-components/ui-lab';
-
-const language = detectLanguage(code, 'app.component.ts');
-// Returns: 'typescript'
-
-const detectedFromContent = detectLanguage('function hello() {}');
-// Returns: 'javascript'
-```
-
-**Detection logic:**
-
-1. If filename provided, detect from extension
-2. If no filename, analyze code patterns:
-   - HTML tags → `html`
-   - JSON structure → `json`
-   - TypeScript types → `typescript`
-   - JavaScript keywords → `javascript`
-   - Python syntax → `python`
-   - SQL keywords → `sql`
-   - Markdown headers → `markdown`
-   - Shebang → `bash`
-
-## Styling
-
-The components use Tailwind CSS with shadcn/ui design tokens:
-
-- **Container** (`ScCodeEditor`): Focus-within ring, rounded border
-- **Header** (`ScCodeEditorHeader`): Flex layout with bottom border
-- **Label** (`ScCodeEditorLabel`): Small muted text
-- **Footer** (`ScCodeEditorFooter`): Flex layout with top border
-- **Content** (`ScCodeEditorContent`): Relative positioning with overlay layers
-- **Line numbers**: Muted at 50% opacity, active line at 100%
-- **Code font**: System monospace stack (`ui-monospace, SFMono-Regular, ...`)
-- **Textarea**: Transparent with colored caret for overlay effect
-
-## Advanced Example
-
-```typescript
-export class CodeEditorExample {
-  code = signal(`function greet(name: string) {
-  console.log(\`Hello, \${name}!\`);
-}
-
-greet('World');`);
-
-  filename = signal('example.ts');
-  language = signal<ScCodeEditorLanguage>('typescript');
-  stats = computed(() => {
-    const value = this.code();
-    return {
-      lines: value.split('\n').length,
-      chars: value.length,
-    };
-  });
-}
-```
-
-```html
-<div scCodeEditor>
-  <div scCodeEditorHeader>
-    <div class="flex items-center gap-2">
-      <span class="text-muted-foreground text-sm">{{ filename() }}</span>
-      <span scCodeEditorLabel>{{ language() }}</span>
-    </div>
-    <button scCodeEditorCopyButton #copy="scCodeEditorCopyButton" [code]="code()">
-      @if (copy.copied()) {
-      <svg siCheckIcon></svg>
-      } @else {
-      <svg siCopyIcon></svg>
-      }
-      <span class="sr-only">{{ copy.copied() ? 'Copied' : 'Copy code' }}</span>
-    </button>
-  </div>
-
-  <div scCodeEditorContent ariaLabel="Code editor" [(value)]="code" [language]="language()" [filename]="filename()" [showLineNumbers]="true" [tabSize]="2" [insertSpaces]="true" class="max-h-[600px] min-h-[300px]"></div>
-
-  <div scCodeEditorFooter>
-    <div class="flex items-center gap-3">
-      <span>Ln {{ stats().line }}, Col {{ stats().column }}</span>
-    </div>
-    <div class="flex items-center gap-3">
-      <span>{{ stats().lines }} lines</span>
-      <span>{{ stats().chars }} chars</span>
-    </div>
-  </div>
-</div>
-```
+- The content is a `textbox` (`aria-multiline`), named by its field's label or `aria-label`, described by the field's description; `aria-invalid`, `aria-readonly`, `aria-disabled`.
+- Tab indents — Escape then Tab leaves, so the keyboard is never trapped; say so in a description.
