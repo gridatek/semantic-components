@@ -7,7 +7,6 @@ import {
   ScCodeBlockHeader,
   ScCodeBlockTitle,
 } from '@semantic-components/code';
-import { ScButton } from '@semantic-components/ui';
 import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 import { ConfigService } from '../../../../services/config.service';
 import { BackdropUsageDemo } from './backdrop-usage-demo';

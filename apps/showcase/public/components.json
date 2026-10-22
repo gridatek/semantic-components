@@ -192,14 +192,6 @@
     "category": "Editor"
   },
   {
-    "name": "Code Viewer",
-    "path": "code-viewer",
-    "description": "Display syntax-highlighted code with copy functionality.",
-    "status": "Experimental",
-    "library": "code",
-    "category": "Editor"
-  },
-  {
     "name": "Collapsible",
     "path": "collapsible",
     "description": "An interactive component that expands and collapses.",

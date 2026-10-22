@@ -153,12 +153,6 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/code-block/code-block-page'),
       },
       {
-        path: 'code-viewer',
-        title: 'Code Viewer - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/code-viewer/code-viewer-page'),
-      },
-      {
         path: 'collapsible',
         title: 'Collapsible - Semantic Components',
         loadComponent: () =>

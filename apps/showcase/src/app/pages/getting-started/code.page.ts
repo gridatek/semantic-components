@@ -11,7 +11,7 @@ import { ScHeading, ScSeparator } from '@semantic-components/ui';
 import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 import { PackageManagerInstall } from '../../components/package-manager-install/package-manager-install';
 import { TocHeading } from '../../components/toc/toc-heading';
-import { CodeViewerUsageDemoContainer } from '../docs/code-viewer/demos/code-viewer-usage-demo-container';
+import { BasicCodeBlockDemoContainer } from '../docs/code-block/demos/basic-code-block-demo-container';
 
 @Component({
   selector: 'app-code-page',
@@ -28,7 +28,7 @@ import { CodeViewerUsageDemoContainer } from '../docs/code-viewer/demos/code-vie
     ScSeparator,
     ScHeading,
     PackageManagerInstall,
-    CodeViewerUsageDemoContainer,
+    BasicCodeBlockDemoContainer,
   ],
   template: `
     <div class="space-y-8">
@@ -119,11 +119,45 @@ import { CodeViewerUsageDemoContainer } from '../docs/code-viewer/demos/code-vie
       <div scSeparator></div>
 
       <section class="space-y-4">
+        <h2 scHeading appToc>4. Provide the highlighter</h2>
+        <p class="text-muted-foreground">
+          Code blocks are highlighted with Shiki once the app provides it — each
+          language loaded the first time it is shown. Without it, they show
+          plain code:
+        </p>
+        <div scCodeBlock>
+          <div scCodeBlockHeader>
+            <div scCodeBlockTitle>app.config.ts</div>
+            <div scCodeBlockActions>
+              <button
+                [scCodeBlockCopy]="highlighterCode"
+                #copy4="scCodeBlockCopy"
+              >
+                @if (copy4.copied()) {
+                  <svg siCheckIcon></svg>
+                } @else {
+                  <svg siCopyIcon></svg>
+                }
+                <span class="sr-only">Copy to clipboard</span>
+              </button>
+            </div>
+          </div>
+          <pre
+            scCodeBlockContent
+            [code]="highlighterCode"
+            language="typescript"
+          ></pre>
+        </div>
+      </section>
+
+      <div scSeparator></div>
+
+      <section class="space-y-4">
         <h2 scHeading appToc>Usage</h2>
         <p class="text-muted-foreground">
-          Import and use the code viewer in your Angular templates:
+          Import and use the code block in your Angular templates:
         </p>
-        <app-code-viewer-usage-demo-container />
+        <app-basic-code-block-demo-container />
       </section>
     </div>
   `,
@@ -133,4 +167,10 @@ export default class CodeInstallPage {
   readonly stylesCode = '@import "@semantic-components/code/styles";';
 
   readonly sourceCode = '@source "../node_modules/@semantic-components/code";';
+
+  readonly highlighterCode = `import { provideCodeHighlighter } from '@semantic-components/code';
+
+export const appConfig: ApplicationConfig = {
+  providers: [provideCodeHighlighter()],
+};`;
 }

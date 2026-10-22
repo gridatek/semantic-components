@@ -7,7 +7,6 @@ import {
   ScCodeBlockHeader,
   ScCodeBlockTitle,
 } from '@semantic-components/code';
-import { ScButton, ScCopyToClipboard } from '@semantic-components/ui';
 import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 import { ConfigService } from '../../../../services/config.service';
 import { CopyToClipboardUsageDemo } from './copy-to-clipboard-usage-demo';
