@@ -41,9 +41,7 @@ import { SiServerIcon } from '@semantic-icons/lucide-icons';
   ],
   template: \`
     <dl scStatCard class="w-64">
-      <dt scStatCardLabel>
-        Status <svg siServerIcon scStatCardIcon></svg>
-      </dt>
+      <dt scStatCardLabel>Status <svg siServerIcon scStatCardIcon></svg></dt>
       <dd scStatCardValue>All systems normal</dd>
       <dd scStatCardDescription>checked a minute ago</dd>
     </dl>

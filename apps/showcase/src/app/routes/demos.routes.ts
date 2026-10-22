@@ -2575,6 +2575,53 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/org-chart-next',
+    children: [
+      {
+        path: 'basic-org-chart-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/org-chart-next/demos/basic-org-chart-next-demo').then(
+            (m) => m.BasicOrgChartNextDemo,
+          ),
+      },
+      {
+        path: 'avatars-org-chart-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/org-chart-next/demos/avatars-org-chart-next-demo').then(
+            (m) => m.AvatarsOrgChartNextDemo,
+          ),
+      },
+      {
+        path: 'across-org-chart-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/org-chart-next/demos/across-org-chart-next-demo').then(
+            (m) => m.AcrossOrgChartNextDemo,
+          ),
+      },
+      {
+        path: 'collapsible-org-chart-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/org-chart-next/demos/collapsible-org-chart-next-demo').then(
+            (m) => m.CollapsibleOrgChartNextDemo,
+          ),
+      },
+      {
+        path: 'selection-org-chart-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/org-chart-next/demos/selection-org-chart-next-demo').then(
+            (m) => m.SelectionOrgChartNextDemo,
+          ),
+      },
+      {
+        path: 'data-org-chart-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/org-chart-next/demos/data-org-chart-next-demo').then(
+            (m) => m.DataOrgChartNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/password',
     children: [
       {
