@@ -1,42 +1,62 @@
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScFileUpload,
-  ScFileUploadDropzone,
-  ScFileUploadFile,
   ScFileUploadInput,
+  ScFileUploadItem,
+  ScFileUploadItemName,
+  ScFileUploadItemPreview,
+  ScFileUploadItemRemove,
+  ScFileUploadItemSize,
+  ScFileUploadList,
+  ScFileUploadTrigger,
 } from '@semantic-components/ui';
-import { SiFileUpIcon } from '@semantic-icons/lucide-icons';
+import { SiFileIcon, SiImageIcon, SiXIcon } from '@semantic-icons/lucide-icons';
 
+/** One image, from a button: without multiple, a new one replaces it. Images get a thumbnail. */
 @Component({
   selector: 'app-single-file-upload-demo',
   imports: [
     ScFileUpload,
-    ScFileUploadDropzone,
     ScFileUploadInput,
-    SiFileUpIcon,
+    ScFileUploadTrigger,
+    ScFileUploadList,
+    ScFileUploadItem,
+    ScFileUploadItemPreview,
+    ScFileUploadItemName,
+    ScFileUploadItemSize,
+    ScFileUploadItemRemove,
+    SiImageIcon,
+    SiFileIcon,
+    SiXIcon,
   ],
   template: `
-    <div class="max-w-lg">
-      <div scFileUpload [(files)]="file">
-        <div scFileUploadDropzone class="p-6">
-          <input scFileUploadInput aria-label="Upload file" />
-          <div class="flex flex-col items-center gap-2 text-center">
-            <svg siFileUpIcon class="text-muted-foreground size-8"></svg>
-            <p class="text-muted-foreground text-sm">
-              {{
-                file().length > 0
-                  ? file()[0].file.name
-                  : 'Click or drag to upload'
-              }}
-            </p>
-          </div>
-        </div>
-      </div>
+    <div
+      scFileUpload
+      #upload="scFileUpload"
+      accept="image/*"
+      class="w-full max-w-sm"
+    >
+      <input scFileUploadInput />
+      <button scFileUploadTrigger class="self-start">
+        <svg siImageIcon></svg>
+        Choose a photo
+      </button>
+      <ul scFileUploadList aria-label="Chosen photo">
+        @for (file of upload.value(); track file) {
+          <li scFileUploadItem [file]="file">
+            <span scFileUploadItemPreview><svg siFileIcon></svg></span>
+            <span scFileUploadItemName>{{ file.name }}</span>
+            <span scFileUploadItemSize></span>
+            <button scFileUploadItemRemove>
+              <svg siXIcon></svg>
+              <span class="sr-only">Remove {{ file.name }}</span>
+            </button>
+          </li>
+        }
+      </ul>
     </div>
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class SingleFileUploadDemo {
-  readonly file = signal<ScFileUploadFile[]>([]);
-}
+export class SingleFileUploadDemo {}

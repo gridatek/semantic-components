@@ -1,39 +1,52 @@
-import { Directive, computed, inject, input } from '@angular/core';
+import {
+  DestroyRef,
+  Directive,
+  ElementRef,
+  computed,
+  inject,
+  input,
+} from '@angular/core';
 import { cn } from '../../utils';
-import { SC_FILE_UPLOAD } from './file-upload';
+import { ScFileUpload } from './file-upload';
 
+/**
+ * The native file picker, written once in `scFileUpload`: hidden, and
+ * not a Tab stop — the trigger and the dropzone open it.
+ */
 @Directive({
   selector: 'input[scFileUploadInput]',
   host: {
+    'data-slot': 'file-upload-input',
     type: 'file',
+    hidden: '',
+    tabindex: '-1',
+    'aria-hidden': 'true',
+    '[multiple]': 'upload.multiple()',
+    '[attr.accept]': 'upload.accept() || null',
+    '[disabled]': 'upload.disabled()',
     '[class]': 'class()',
-    '[multiple]': 'fileUpload.multiple()',
-    '[attr.accept]': 'fileUpload.accept() || null',
-    '[disabled]': 'fileUpload.disabled()',
-    '[attr.aria-disabled]': 'fileUpload.disabled() || null',
-    '(change)': 'onChange($event)',
+    '(change)': 'onChange()',
+    '(cancel)': 'upload.touch.emit()',
   },
 })
 export class ScFileUploadInput {
-  readonly fileUpload = inject(SC_FILE_UPLOAD);
+  protected readonly upload = inject(ScFileUpload);
+  private readonly element =
+    inject<ElementRef<HTMLInputElement>>(ElementRef).nativeElement;
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
-    cn(
-      'absolute inset-0 h-full w-full cursor-pointer opacity-0',
-      this.classInput(),
-    ),
-  );
+  protected readonly class = computed(() => cn(this.classInput()));
 
-  onChange(event: Event): void {
-    const input = event.target as HTMLInputElement;
+  constructor() {
+    this.upload.ɵregister(this.element);
+    inject(DestroyRef).onDestroy(() => this.upload.ɵregister(null));
+  }
 
-    if (input.files && input.files.length > 0) {
-      this.fileUpload.addFiles(input.files);
-    }
-
-    // Reset so the same file can be selected again
-    input.value = '';
+  protected onChange(): void {
+    this.upload.add(this.element.files ?? []);
+    // Cleared: the same file can be picked again.
+    this.element.value = '';
+    this.upload.touch.emit();
   }
 }

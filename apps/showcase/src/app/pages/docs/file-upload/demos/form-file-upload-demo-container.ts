@@ -1,23 +1,23 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { FormFileUploadNextDemo } from './form-file-upload-next-demo';
+import { FormFileUploadDemo } from './form-file-upload-demo';
 
 @Component({
-  selector: 'app-form-file-upload-next-demo-container',
-  imports: [DemoContainer, FormFileUploadNextDemo],
+  selector: 'app-form-file-upload-demo-container',
+  imports: [DemoContainer, FormFileUploadDemo],
   template: `
     <app-demo-container
       title="Form"
       [code]="code"
-      demoUrl="/demos/file-upload-next/form-file-upload-next-demo"
+      demoUrl="/demos/file-upload/form-file-upload-demo"
     >
-      <app-form-file-upload-next-demo />
+      <app-form-file-upload-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class FormFileUploadNextDemoContainer {
+export class FormFileUploadDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   FormField,
@@ -30,16 +30,16 @@ import {
   ScButton,
   ScField,
   ScFieldErrors,
-  ScFileUploadNext,
-  ScFileUploadNextDropzone,
-  ScFileUploadNextInput,
-  ScFileUploadNextItem,
-  ScFileUploadNextItemName,
-  ScFileUploadNextItemPreview,
-  ScFileUploadNextItemRemove,
-  ScFileUploadNextItemSize,
-  ScFileUploadNextList,
-  ScFileUploadNextTrigger,
+  ScFileUpload,
+  ScFileUploadDropzone,
+  ScFileUploadInput,
+  ScFileUploadItem,
+  ScFileUploadItemName,
+  ScFileUploadItemPreview,
+  ScFileUploadItemRemove,
+  ScFileUploadItemSize,
+  ScFileUploadList,
+  ScFileUploadTrigger,
 } from '@semantic-components/ui';
 import {
   SiFileIcon,
@@ -49,20 +49,20 @@ import {
 
 /** A [formField]: at least one file, and 5 MB in all, checked by the form’s schema; the errors shown once it is touched. */
 @Component({
-  selector: 'app-form-file-upload-next-demo',
+  selector: 'app-form-file-upload-demo',
   imports: [
     FormField,
     FormRoot,
-    ScFileUploadNext,
-    ScFileUploadNextInput,
-    ScFileUploadNextTrigger,
-    ScFileUploadNextDropzone,
-    ScFileUploadNextList,
-    ScFileUploadNextItem,
-    ScFileUploadNextItemPreview,
-    ScFileUploadNextItemName,
-    ScFileUploadNextItemSize,
-    ScFileUploadNextItemRemove,
+    ScFileUpload,
+    ScFileUploadInput,
+    ScFileUploadTrigger,
+    ScFileUploadDropzone,
+    ScFileUploadList,
+    ScFileUploadItem,
+    ScFileUploadItemPreview,
+    ScFileUploadItemName,
+    ScFileUploadItemSize,
+    ScFileUploadItemRemove,
     ScButton,
     ScField,
     ScFieldErrors,
@@ -74,24 +74,24 @@ import {
     <form [formRoot]="applicationForm" class="grid w-full max-w-md gap-4">
       <div scField>
         <div
-          scFileUploadNext
-          #upload="scFileUploadNext"
+          scFileUpload
+          #upload="scFileUpload"
           multiple
           [formField]="applicationForm.documents"
         >
-          <input scFileUploadNextInput />
-          <div scFileUploadNextDropzone>
+          <input scFileUploadInput />
+          <div scFileUploadDropzone>
             <svg siUploadIcon class="size-6"></svg>
             <p>Your CV and cover letter</p>
-            <button scFileUploadNextTrigger size="sm">Browse files</button>
+            <button scFileUploadTrigger size="sm">Browse files</button>
           </div>
-          <ul scFileUploadNextList aria-label="Chosen documents">
+          <ul scFileUploadList aria-label="Chosen documents">
             @for (file of upload.value(); track file) {
-              <li scFileUploadNextItem [file]="file">
-                <span scFileUploadNextItemPreview><svg siFileIcon></svg></span>
-                <span scFileUploadNextItemName>{{ file.name }}</span>
-                <span scFileUploadNextItemSize></span>
-                <button scFileUploadNextItemRemove>
+              <li scFileUploadItem [file]="file">
+                <span scFileUploadItemPreview><svg siFileIcon></svg></span>
+                <span scFileUploadItemName>{{ file.name }}</span>
+                <span scFileUploadItemSize></span>
+                <button scFileUploadItemRemove>
                   <svg siXIcon></svg>
                   <span class="sr-only">Remove {{ file.name }}</span>
                 </button>
@@ -114,7 +114,7 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class FormFileUploadNextDemo {
+export class FormFileUploadDemo {
   readonly model = signal({ documents: [] as File[] });
   readonly sent = signal('');
   readonly applicationForm = form(

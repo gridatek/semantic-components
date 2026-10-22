@@ -7,9 +7,9 @@ import { ProgressFileUploadDemo } from './progress-file-upload-demo';
   imports: [DemoContainer, ProgressFileUploadDemo],
   template: `
     <app-demo-container
-      title="With Progress"
-      demoUrl="/demos/file-upload/progress-file-upload-demo"
+      title="Upload progress"
       [code]="code"
+      demoUrl="/demos/file-upload/progress-file-upload-demo"
     >
       <app-progress-file-upload-demo />
     </app-demo-container>
@@ -20,17 +20,17 @@ import { ProgressFileUploadDemo } from './progress-file-upload-demo';
 export class ProgressFileUploadDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
+  ScButton,
   ScFileUpload,
   ScFileUploadDropzone,
-  ScFileUploadFile,
   ScFileUploadInput,
   ScFileUploadItem,
-  ScFileUploadItemDelete,
   ScFileUploadItemName,
   ScFileUploadItemPreview,
-  ScFileUploadItemProgress,
+  ScFileUploadItemRemove,
   ScFileUploadItemSize,
   ScFileUploadList,
+  ScFileUploadTrigger,
   ScProgress,
 } from '@semantic-components/ui';
 import {
@@ -39,116 +39,87 @@ import {
   SiXIcon,
 } from '@semantic-icons/lucide-icons';
 
+/** Uploading is yours, and so is its progress — here, kept per File and shown with the lib’s progress bar. */
 @Component({
   selector: 'app-progress-file-upload-demo',
   imports: [
     ScFileUpload,
+    ScFileUploadInput,
+    ScFileUploadTrigger,
     ScFileUploadDropzone,
     ScFileUploadList,
     ScFileUploadItem,
     ScFileUploadItemPreview,
     ScFileUploadItemName,
     ScFileUploadItemSize,
-    ScFileUploadItemDelete,
-    ScFileUploadInput,
-    ScFileUploadItemProgress,
+    ScFileUploadItemRemove,
+    ScButton,
     ScProgress,
-    SiFileIcon,
     SiUploadIcon,
+    SiFileIcon,
     SiXIcon,
   ],
   template: \`
-    <div class="max-w-lg">
-      <div
-        scFileUpload
-        [multiple]="true"
-        [(files)]="files"
-        (filesSelected)="simulateUpload($event)"
-      >
-        <div scFileUploadDropzone class="p-8">
-          <input scFileUploadInput aria-label="Upload files" />
-          <div class="flex flex-col items-center gap-2 text-center">
-            <svg siUploadIcon class="text-muted-foreground size-10"></svg>
-            <div class="space-y-1">
-              <p class="text-sm font-medium">Upload with progress</p>
-              <p class="text-muted-foreground text-xs">
-                Files will show upload progress
-              </p>
-            </div>
-          </div>
-        </div>
-
-        @if (files().length > 0) {
-          <div scFileUploadList>
-            @for (file of files(); track file.id) {
-              <div scFileUploadItem [file]="file">
-                <div scFileUploadItemPreview>
-                  <svg siFileIcon class="text-muted-foreground size-5"></svg>
-                </div>
-                <div class="min-w-0 flex-1 space-y-1">
-                  <div class="flex items-center justify-between">
-                    <div scFileUploadItemName>{{ file.file.name }}</div>
-                    <div scFileUploadItemSize></div>
-                  </div>
-                  @if (file.status === 'uploading') {
-                    <div scFileUploadItemProgress>
-                      <div
-                        scProgress
-                        [value]="file.progress ?? 0"
-                        aria-label="Upload progress"
-                      ></div>
-                    </div>
-                  }
-                  @if (file.status === 'complete') {
-                    <p class="text-xs text-green-600">Upload complete</p>
-                  }
-                </div>
-                <button scFileUploadItemDelete>
-                  <svg siXIcon></svg>
-                  <span class="sr-only">Remove file</span>
-                </button>
-              </div>
-            }
-          </div>
-        }
+    <div
+      scFileUpload
+      #upload="scFileUpload"
+      multiple
+      class="w-full max-w-md"
+    >
+      <input scFileUploadInput />
+      <div scFileUploadDropzone>
+        <svg siUploadIcon class="size-6"></svg>
+        <p>Drop files here</p>
+        <button scFileUploadTrigger size="sm">Browse files</button>
       </div>
+      <ul scFileUploadList aria-label="Chosen files">
+        @for (file of upload.value(); track file) {
+          <li scFileUploadItem [file]="file">
+            <span scFileUploadItemPreview><svg siFileIcon></svg></span>
+            <div class="grid min-w-0 flex-1 gap-1.5">
+              <span scFileUploadItemName>{{ file.name }}</span>
+              @if (progress().get(file); as done) {
+                <div
+                  scProgress
+                  [value]="done"
+                  [attr.aria-label]="'Uploading ' + file.name"
+                ></div>
+              }
+            </div>
+            <span scFileUploadItemSize></span>
+            <button scFileUploadItemRemove>
+              <svg siXIcon></svg>
+              <span class="sr-only">Remove {{ file.name }}</span>
+            </button>
+          </li>
+        }
+      </ul>
+      <button
+        scButton
+        class="self-end"
+        [disabled]="!upload.value().length"
+        (click)="send(upload.value())"
+      >
+        Upload
+      </button>
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
 export class ProgressFileUploadDemo {
-  readonly files = signal<ScFileUploadFile[]>([]);
+  /** Each file's share sent, 0–100: yours, not the lib's. */
+  readonly progress = signal(new Map<File, number>());
 
-  simulateUpload(_selectedFiles: File[]): void {
-    const currentFiles = this.files();
-    const pendingFiles = currentFiles.filter((f) => f.status === 'pending');
-
-    for (const file of pendingFiles) {
-      let progress = 0;
-      const interval = setInterval(() => {
-        progress += Math.random() * 20;
-        if (progress >= 100) {
-          progress = 100;
-          clearInterval(interval);
-          this.files.update((files) =>
-            files.map((f) =>
-              f.id === file.id
-                ? { ...f, progress: 100, status: 'complete' as const }
-                : f,
-            ),
-          );
-        } else {
-          this.files.update((files) =>
-            files.map((f) =>
-              f.id === file.id
-                ? { ...f, progress, status: 'uploading' as const }
-                : f,
-            ),
-          );
-        }
-      }, 200);
-    }
+  /** A pretend upload: every file, a tenth more each 200 ms. */
+  send(files: File[]): void {
+    const timer = setInterval(() => {
+      const next = new Map(this.progress());
+      for (const file of files)
+        next.set(file, Math.min(100, (next.get(file) ?? 0) + 10));
+      this.progress.set(next);
+      if (files.every((file) => next.get(file) === 100)) clearInterval(timer);
+    }, 200);
   }
 }`;
 }

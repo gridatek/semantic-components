@@ -1,12 +1,14 @@
-export { SC_FILE_UPLOAD, ScFileUpload } from './file-upload';
-export type { ScFileUploadFile } from './file-upload';
-export { ScFileUploadDropzone } from './file-upload-dropzone';
+export {
+  ScFileUpload,
+  type ScFileUploadRejection,
+  type ScFileUploadRejectionReason,
+} from './file-upload';
 export { ScFileUploadInput } from './file-upload-input';
 export { ScFileUploadTrigger } from './file-upload-trigger';
+export { ScFileUploadDropzone } from './file-upload-dropzone';
 export { ScFileUploadList } from './file-upload-list';
-export { SC_FILE_UPLOAD_ITEM, ScFileUploadItem } from './file-upload-item';
+export { ScFileUploadItem } from './file-upload-item';
 export { ScFileUploadItemPreview } from './file-upload-item-preview';
 export { ScFileUploadItemName } from './file-upload-item-name';
 export { ScFileUploadItemSize } from './file-upload-item-size';
-export { ScFileUploadItemDelete } from './file-upload-item-delete';
-export { ScFileUploadItemProgress } from './file-upload-item-progress';
+export { ScFileUploadItemRemove } from './file-upload-item-remove';

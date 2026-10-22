@@ -1,12 +1,12 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn, ɵwarnIfUnnamed } from '../../utils';
 import { type ScButtonVariants, buttonVariants } from '../button/button';
-import { ScFileUploadNext } from './file-upload-next';
-import { ScFileUploadNextItem } from './file-upload-next-item';
+import { ScFileUpload } from './file-upload';
+import { ScFileUploadItem } from './file-upload-item';
 
 /** Takes its file out of the value. Name it ("Remove photo.jpg"). */
 @Directive({
-  selector: 'button[scFileUploadNextItemRemove]',
+  selector: 'button[scFileUploadItemRemove]',
   host: {
     'data-slot': 'file-upload-item-remove',
     type: 'button',
@@ -15,9 +15,9 @@ import { ScFileUploadNextItem } from './file-upload-next-item';
     '(click)': 'upload.remove(item.file())',
   },
 })
-export class ScFileUploadNextItemRemove {
-  protected readonly upload = inject(ScFileUploadNext);
-  protected readonly item = inject(ScFileUploadNextItem);
+export class ScFileUploadItemRemove {
+  protected readonly upload = inject(ScFileUpload);
+  protected readonly item = inject(ScFileUploadItem);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('ghost');
@@ -32,6 +32,6 @@ export class ScFileUploadNextItemRemove {
   );
 
   constructor() {
-    ɵwarnIfUnnamed('scFileUploadNextItemRemove');
+    ɵwarnIfUnnamed('scFileUploadItemRemove');
   }
 }

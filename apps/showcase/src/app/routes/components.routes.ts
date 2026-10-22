@@ -263,12 +263,6 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/file-upload/file-upload-page'),
       },
       {
-        path: 'file-upload-next',
-        title: 'File Upload Next - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/file-upload-next/file-upload-next-page'),
-      },
-      {
         path: 'hover-card',
         title: 'Hover Card - Semantic Components',
         loadComponent: () => import('../pages/docs/hover-card/hover-card-page'),

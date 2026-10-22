@@ -1,8 +1,7 @@
 import { type Locator, type Page, expect, test } from '@playwright/test';
 import { collectErrors } from '../../interaction';
 
-const demo = (name: string) =>
-  `/demos/file-upload-next/${name}-file-upload-next-demo`;
+const demo = (name: string) => `/demos/file-upload/${name}-file-upload-demo`;
 
 /** A 1×1 PNG. */
 const PNG = Buffer.from(

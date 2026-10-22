@@ -1,292 +1,70 @@
 # File Upload
 
-A drag and drop file upload zone with preview and progress support.
+Files picked or dropped — only chosen, never uploaded — as a `File[]` for Signal Forms; those that break a rule kept out, with the reason.
+
+## Architecture
+
+```
+[scFileUpload] (value: File[] — a [formField]; multiple, accept, maxSize, maxFiles, disabled)
+│  rejections() · browse() · add(files) · remove(file)
+├── input[scFileUploadInput]        — the native picker: hidden, not a Tab stop
+├── [scFileUploadDropzone]          — drop here, or click; data-dragging, data-invalid
+│   └── button[scFileUploadTrigger] — opens the picker (the keyboard's way)
+└── ul[scFileUploadList]
+    └── li[scFileUploadItem] [file]
+        ├── [scFileUploadItemPreview]     — an image's thumbnail, or your icon
+        ├── [scFileUploadItemName]        — your {{ file.name }}
+        ├── [scFileUploadItemSize]        — "1.5 MB", in the app's language
+        └── button[scFileUploadItemRemove] — takes it out; name it
+```
 
 ## Usage
 
 ```html
-<div scFileUpload [multiple]="true" [(files)]="files">
+<div scFileUpload #upload="scFileUpload" multiple [formField]="form.documents">
+  <input scFileUploadInput />
   <div scFileUploadDropzone>
-    <input scFileUploadInput aria-label="Upload files" />
-    <p>Drag and drop files here or click to browse</p>
+    <p>Drop files here</p>
+    <button scFileUploadTrigger size="sm">Browse files</button>
   </div>
-
-  <div scFileUploadList>
-    @for (file of files(); track file.id) {
-    <div scFileUploadItem [file]="file">
-      <div scFileUploadItemPreview></div>
-      <div scFileUploadItemName>{{ file.file.name }}</div>
-      <div scFileUploadItemSize></div>
-      <button scFileUploadItemDelete>
+  <ul scFileUploadList aria-label="Chosen files">
+    @for (file of upload.value(); track file) {
+    <li scFileUploadItem [file]="file">
+      <span scFileUploadItemPreview><svg siFileIcon></svg></span>
+      <span scFileUploadItemName>{{ file.name }}</span>
+      <span scFileUploadItemSize></span>
+      <button scFileUploadItemRemove>
         <svg siXIcon></svg>
-        <span class="sr-only">Remove file</span>
+        <span class="sr-only">Remove {{ file.name }}</span>
       </button>
-    </div>
+    </li>
     }
-  </div>
+  </ul>
 </div>
 ```
 
-## Components
+## Value
 
-### ScFileUpload
+- A `File[]`: two-way `[(value)]`, or a `[formField]`.
+- With `multiple`, picks and drops add; without, a new file replaces the one there.
+- Chosen, not uploaded: upload them yourself (`HttpClient`, tus…), and keep any progress in your own state, per `File`.
 
-Root container that manages file state.
+## Rules
 
-**Selector:** `[scFileUpload]`
+- `accept` (as `<input accept>`: `image/*`, `.pdf`, `text/csv`), `maxSize` (bytes), `maxFiles` (in all, with `multiple`).
+- Files that break one are kept out; `rejections()` lists them — `{ file, reason: 'type' | 'size' | 'count' }` — until the next pick or drop. The messages are yours.
 
-**Inputs:**
+## Signal Forms
 
-| Input      | Type      | Default | Description                           |
-| ---------- | --------- | ------- | ------------------------------------- |
-| `multiple` | `boolean` | `false` | Allow multiple file selection         |
-| `accept`   | `string`  | `''`    | Accepted file types (e.g. `image/*`)  |
-| `maxSize`  | `number`  | `0`     | Max file size in bytes (0 = no limit) |
-| `maxFiles` | `number`  | `0`     | Max number of files (0 = no limit)    |
-| `disabled` | `boolean` | `false` | Disable file upload                   |
-| `class`    | `string`  | `''`    | Additional CSS classes                |
-
-**Two-way Bindings:**
-
-| Binding | Type                 | Description    |
-| ------- | -------------------- | -------------- |
-| `files` | `ScFileUploadFile[]` | Selected files |
-
-**Outputs:**
-
-| Output          | Type               | Description                 |
-| --------------- | ------------------ | --------------------------- |
-| `filesSelected` | `File[]`           | Emitted when files added    |
-| `fileRemoved`   | `ScFileUploadFile` | Emitted when file removed   |
-| `error`         | `string`           | Emitted on validation error |
-
-**Methods:**
-
-| Method                                    | Description                |
-| ----------------------------------------- | -------------------------- |
-| `addFiles(files: FileList \| File[])`     | Add files programmatically |
-| `removeFile(fileId: string)`              | Remove a file by ID        |
-| `updateFileProgress(fileId, progress)`    | Update upload progress     |
-| `updateFileStatus(fileId, status, error)` | Update file status         |
-| `clearFiles()`                            | Remove all files           |
-
-### ScFileUploadDropzone
-
-Drag and drop zone directive. Place an `<input scFileUploadInput>` inside for click-to-browse support.
-
-**Selector:** `[scFileUploadDropzone]`
-
-**Data Attributes:**
-
-| Attribute       | Values            |
-| --------------- | ----------------- |
-| `data-dragging` | `true` \| `false` |
-| `data-disabled` | `true` \| `null`  |
-
-### ScFileUploadInput
-
-Native file input overlay. Place inside a dropzone or trigger to handle file selection. Absolutely positioned with `opacity: 0` to cover the parent area. Consumers can add accessibility attributes directly (e.g. `aria-label`, `aria-describedby`).
-
-**Selector:** `input[scFileUploadInput]`
-
-Auto-syncs `multiple`, `accept`, and `disabled` from the parent `ScFileUpload` context. Resets after selection so the same file can be re-selected.
-
-### ScFileUploadTrigger
-
-Label that visually acts as a button to open the file picker. Uses `<label>` to avoid nested-interactive a11y violations when wrapping an `<input scFileUploadInput>`.
-
-**Selector:** `label[scFileUploadTrigger]`
-
-**Data Attributes:**
-
-| Attribute       | Values           |
-| --------------- | ---------------- |
-| `data-disabled` | `true` \| `null` |
-
-**Example:**
-
-```html
-<label scFileUploadTrigger>
-  <input scFileUploadInput aria-label="Upload files" />
-  <svg siUploadIcon class="size-4"></svg>
-  Upload Files
-</label>
-```
-
-### ScFileUploadList
-
-Container for file items.
-
-**Selector:** `[scFileUploadList]`
-
-### ScFileUploadItem
-
-Individual file item container.
-
-**Selector:** `[scFileUploadItem]`
-
-**Inputs:**
-
-| Input   | Type               | Required | Description     |
-| ------- | ------------------ | -------- | --------------- |
-| `file`  | `ScFileUploadFile` | Yes      | The file object |
-| `class` | `string`           | No       | Additional CSS  |
-
-**Data Attributes:**
-
-| Attribute     | Values                                              |
-| ------------- | --------------------------------------------------- |
-| `data-status` | `'pending' \| 'uploading' \| 'complete' \| 'error'` |
-
-### ScFileUploadItemPreview
-
-File preview (shows image thumbnail for images). Injects file from parent `ScFileUploadItem`.
-
-**Selector:** `[scFileUploadItemPreview]`
-
-### ScFileUploadItemName
-
-File name display.
-
-**Selector:** `[scFileUploadItemName]`
-
-### ScFileUploadItemSize
-
-Formatted file size display. Injects file from parent `ScFileUploadItem`.
-
-**Selector:** `[scFileUploadItemSize]`
-
-### ScFileUploadItemDelete
-
-Directive for a delete button that removes a file. Injects file ID from parent `ScFileUploadItem`. Consumers provide their own icon and accessible label as projected content.
-
-**Selector:** `button[scFileUploadItemDelete]`
-
-**Example:**
-
-```html
-<button scFileUploadItemDelete>
-  <svg siXIcon></svg>
-  <span class="sr-only">Remove file</span>
-</button>
-```
-
-### ScFileUploadItemProgress
-
-Container directive for upload progress. Injects file from parent `ScFileUploadItem`. Place a `<div scProgress>` inside to display the progress bar.
-
-**Selector:** `[scFileUploadItemProgress]`
-
-**Example:**
-
-```html
-<div scFileUploadItemProgress>
-  <div scProgress [value]="file.progress ?? 0" [attr.aria-label]="'Uploading ' + file.file.name"></div>
-</div>
-```
-
-## Types
-
-```typescript
-interface ScFileUploadFile {
-  file: File;
-  id: string;
-  progress?: number;
-  status: 'pending' | 'uploading' | 'complete' | 'error';
-  error?: string;
-}
-```
-
-## Examples
-
-### Basic Dropzone
-
-```html
-<div scFileUpload [multiple]="true" [(files)]="files">
-  <div scFileUploadDropzone class="p-8">
-    <input scFileUploadInput aria-label="Upload files" />
-    <div class="flex flex-col items-center gap-2">
-      <p>Drag and drop files here</p>
-      <p class="text-muted-foreground text-sm">or click to browse</p>
-    </div>
-  </div>
-</div>
-```
-
-### Image Upload
-
-```html
-<div scFileUpload [multiple]="true" accept="image/*" [maxSize]="5242880" [(files)]="images">
-  <div scFileUploadDropzone>
-    <input scFileUploadInput aria-label="Upload images" />
-    <p>Upload images (PNG, JPG up to 5MB)</p>
-  </div>
-
-  <div scFileUploadList>
-    @for (file of images(); track file.id) {
-    <div scFileUploadItem [file]="file">
-      <div scFileUploadItemPreview></div>
-      <div scFileUploadItemName>{{ file.file.name }}</div>
-      <button scFileUploadItemDelete>
-        <svg siXIcon></svg>
-        <span class="sr-only">Remove file</span>
-      </button>
-    </div>
-    }
-  </div>
-</div>
-```
-
-### Button Trigger
-
-```html
-<div scFileUpload [(files)]="files">
-  <label scFileUploadTrigger>
-    <input scFileUploadInput aria-label="Upload files" />
-    Upload Files
-  </label>
-</div>
-```
-
-### With Progress
-
-```html
-<div scFileUpload [(files)]="files" (filesSelected)="handleUpload($event)">
-  <div scFileUploadDropzone>
-    <input scFileUploadInput aria-label="Upload files" />
-    Upload files
-  </div>
-
-  <div scFileUploadList>
-    @for (file of files(); track file.id) {
-    <div scFileUploadItem [file]="file">
-      <div scFileUploadItemName>{{ file.file.name }}</div>
-      @if (file.status === 'uploading') {
-      <div scFileUploadItemProgress>
-        <div scProgress [value]="file.progress ?? 0" [attr.aria-label]="'Uploading ' + file.file.name"></div>
-      </div>
-      }
-    </div>
-    }
-  </div>
-</div>
-```
-
-## Features
-
-- **Drag and Drop**: Drop files directly onto the dropzone
-- **Click to Browse**: Click dropzone or trigger label to open file picker
-- **File Validation**: Accept types, max size, max file count
-- **Image Preview**: Automatic thumbnail for image files
-- **Progress Tracking**: Built-in progress bar component
-- **File Management**: Add, remove, clear files programmatically
-- **Multiple/Single**: Support for single or multiple file selection
+- Rules on the files (at least one, a total size) go in the schema: `minLength(path, 1)` — `required` does not count an empty list as empty — and `validate()`.
+- Touched when the picker closes, or after a drop; once touched and invalid, `data-invalid` on the dropzone and `aria-invalid` on the trigger.
 
 ## Accessibility
 
-- `ScFileUploadInput` is a native `<input type="file">` overlay — consumers add `aria-label` or `aria-describedby` directly
-- `ScFileUploadTrigger` uses `<label>` instead of `<button>` to avoid nested-interactive violations with the file input
-- Visual feedback for drag state via `data-dragging` attribute
-- Keyboard accessible file input
-- Delete button supports custom icon and screen reader text via content projection
-- Disabled state uses `data-disabled` on non-interactive elements (labels, dropzone) since `aria-disabled` is not valid on them
+- The trigger is the way in by keyboard; the dropzone's click is a mouse shortcut, and dropping a pointer one.
+- Name the list, and each remove button ("Remove report.pdf"); say rejections in a live region.
+- Thumbnails are decorative (`alt=""`): the name is beside them.
+
+## Not here
+
+Uploading, pasting, folders, keeping a missed drop from opening the file in the page, cropping (the image cropper).

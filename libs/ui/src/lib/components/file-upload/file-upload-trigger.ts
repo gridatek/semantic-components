@@ -1,28 +1,30 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '../../utils';
-import { buttonVariants } from '../button';
-import { SC_FILE_UPLOAD } from './file-upload';
+import { type ScButtonVariants, buttonVariants } from '../button/button';
+import { ScFileUpload } from './file-upload';
 
+/** Opens the file picker: the way in by keyboard. */
 @Directive({
-  selector: 'label[scFileUploadTrigger]',
+  selector: 'button[scFileUploadTrigger]',
   host: {
+    'data-slot': 'file-upload-trigger',
+    type: 'button',
+    '[disabled]': 'upload.disabled()',
+    '[attr.aria-invalid]': 'upload.showInvalid() || null',
     '[class]': 'class()',
-    '[attr.data-disabled]': 'fileUpload.disabled() || null',
+    '(click)': 'upload.browse()',
   },
 })
 export class ScFileUploadTrigger {
-  readonly fileUpload = inject(SC_FILE_UPLOAD);
+  protected readonly upload = inject(ScFileUpload);
 
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly variant = input<ScButtonVariants['variant']>('outline');
+  readonly size = input<ScButtonVariants['size']>('default');
 
   protected readonly class = computed(() =>
     cn(
-      'relative',
-      // <label> is not interactive, so we add cursor-pointer manually
-      'cursor-pointer',
-      buttonVariants({ variant: 'default', size: 'lg' }),
-      // aria-disabled is not valid on <label>, use data-disabled for styling
-      'data-disabled:pointer-events-none data-disabled:opacity-50',
+      buttonVariants({ variant: this.variant(), size: this.size() }),
       this.classInput(),
     ),
   );

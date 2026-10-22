@@ -1,36 +1,52 @@
 import {
   Component,
+  LOCALE_ID,
   ViewEncapsulation,
   computed,
   inject,
   input,
 } from '@angular/core';
 import { cn } from '../../utils';
-import { SC_FILE_UPLOAD_ITEM } from './file-upload-item';
+import { ScFileUploadItem } from './file-upload-item';
 
+const UNITS = ['byte', 'kilobyte', 'megabyte', 'gigabyte'] as const;
+
+/** The file's size, in the app's language: "1.5 MB". */
 @Component({
   selector: '[scFileUploadItemSize]',
-  template: ` {{ formattedSize() }} `,
+  template: `{{ text() }}`,
   host: {
+    'data-slot': 'file-upload-item-size',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
 })
 export class ScFileUploadItemSize {
-  private readonly item = inject(SC_FILE_UPLOAD_ITEM);
+  private readonly item = inject(ScFileUploadItem);
+  private readonly locale = inject(LOCALE_ID);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly formattedSize = computed(() => {
-    const bytes = this.item.file().file.size;
-    if (bytes === 0) return '0 B';
-    const k = 1024;
-    const sizes = ['B', 'KB', 'MB', 'GB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
+  protected readonly text = computed(() => {
+    let size = this.item.file().size;
+    let unit = 0;
+    while (size >= 1000 && unit < UNITS.length - 1) {
+      size /= 1000;
+      unit++;
+    }
+    return new Intl.NumberFormat(this.locale, {
+      style: 'unit',
+      unit: UNITS[unit],
+      // "68 bytes" (the short form is "68 byte"), then "2 kB", "1.5 MB".
+      unitDisplay: unit ? 'short' : 'long',
+      maximumFractionDigits: 1,
+    }).format(size);
   });
 
   protected readonly class = computed(() =>
-    cn('text-xs text-muted-foreground', this.classInput()),
+    cn(
+      'text-muted-foreground shrink-0 text-xs tabular-nums',
+      this.classInput(),
+    ),
   );
 }

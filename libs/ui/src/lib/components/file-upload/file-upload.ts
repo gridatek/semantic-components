@@ -1,171 +1,122 @@
 import {
   Directive,
-  InjectionToken,
+  booleanAttribute,
   computed,
   input,
   model,
   output,
+  signal,
 } from '@angular/core';
+import type { FormValueControl } from '@angular/forms/signals';
 import { cn } from '../../utils';
 
-// Token for file upload context
-export const SC_FILE_UPLOAD = new InjectionToken<ScFileUpload>(
-  'SC_FILE_UPLOAD',
-);
+/** Why a file was kept out: not an accepted type, too large, one too many. */
+export type ScFileUploadRejectionReason = 'type' | 'size' | 'count';
 
-export interface ScFileUploadFile {
+export interface ScFileUploadRejection {
   file: File;
-  id: string;
-  progress?: number;
-  status: 'pending' | 'uploading' | 'complete' | 'error';
-  error?: string;
+  reason: ScFileUploadRejectionReason;
 }
 
+/**
+ * Files, chosen — picked or dropped — never uploaded: its value is a
+ * `File[]`, a `[formField]`. Those that break `accept`, `maxSize` or
+ * `maxFiles` are kept out, and said in `rejections()` until the next pick.
+ */
 @Directive({
   selector: '[scFileUpload]',
-  providers: [{ provide: SC_FILE_UPLOAD, useExisting: ScFileUpload }],
+  exportAs: 'scFileUpload',
   host: {
+    'data-slot': 'file-upload',
+    '[attr.data-disabled]': 'disabled() || null',
     '[class]': 'class()',
   },
 })
-export class ScFileUpload {
+export class ScFileUpload implements FormValueControl<File[]> {
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly multiple = input<boolean>(false);
-  readonly accept = input<string>('');
-  readonly maxSize = input<number>(0); // in bytes, 0 = no limit
-  readonly maxFiles = input<number>(0); // 0 = no limit
-  readonly disabled = input<boolean>(false);
 
-  readonly files = model<ScFileUploadFile[]>([]);
-  readonly filesSelected = output<File[]>();
-  readonly fileRemoved = output<ScFileUploadFile>();
-  readonly error = output<string>();
+  readonly value = model<File[]>([]);
+  /** Several files; without it, a new file replaces the one there. */
+  readonly multiple = input(false, { transform: booleanAttribute });
+  /** The types taken, as for `<input accept>`: `image/*`, `.pdf`, `text/csv`. */
+  readonly accept = input('');
+  /** The largest file taken, in bytes. */
+  readonly maxSize = input<number | null>(null);
+  /** The most files, in all (with `multiple`). */
+  readonly maxFiles = input<number | null>(null);
+  readonly disabled = input(false, { transform: booleanAttribute });
+  readonly invalid = input(false, { transform: booleanAttribute });
+  readonly touched = input(false, { transform: booleanAttribute });
+  /** The picker closed (Signal Forms marks it touched). */
+  readonly touch = output<void>();
 
-  protected readonly class = computed(() => cn('block', this.classInput()));
+  /** The files kept out of the last pick or drop, and why. */
+  readonly rejections = signal<ScFileUploadRejection[]>([]);
+  /** Invalid, once touched: shown. */
+  readonly showInvalid = computed(() => this.invalid() && this.touched());
 
-  private generateId(): string {
-    return crypto.randomUUID();
+  protected readonly class = computed(() =>
+    cn('flex flex-col gap-3', this.classInput()),
+  );
+
+  private picker: HTMLInputElement | null = null;
+
+  /** The native picker (`scFileUploadInput`): opened by `browse()`. */
+  ɵregister(picker: HTMLInputElement | null): void {
+    this.picker = picker;
   }
 
-  addFiles(fileList: FileList | File[]): void {
+  /** Opens the file picker. */
+  browse(): void {
+    if (!this.disabled()) this.picker?.click();
+  }
+
+  /** Adds files, as picked or dropped: those that break a rule are kept out. */
+  add(files: Iterable<File>): void {
     if (this.disabled()) return;
-
-    const newFiles = Array.from(fileList);
-    const currentFiles = this.files();
-    const maxFiles = this.maxFiles();
-    const maxSize = this.maxSize();
-    const accept = this.accept();
-
-    const validFiles: File[] = [];
-
-    for (const file of newFiles) {
-      // Check max files limit
-      if (maxFiles > 0 && currentFiles.length + validFiles.length >= maxFiles) {
-        this.error.emit(`Maximum ${maxFiles} files allowed`);
-        break;
-      }
-
-      // Check file size
-      if (maxSize > 0 && file.size > maxSize) {
-        this.error.emit(`File "${file.name}" exceeds maximum size`);
-        continue;
-      }
-
-      // Check file type
-      if (accept && !this.isAcceptedType(file, accept)) {
-        this.error.emit(`File "${file.name}" is not an accepted type`);
-        continue;
-      }
-
-      validFiles.push(file);
+    const room = this.multiple()
+      ? (this.maxFiles() ?? Infinity) - this.value().length
+      : 1;
+    const accepted: File[] = [];
+    const rejected: ScFileUploadRejection[] = [];
+    for (const file of files) {
+      const reason = this.check(file, accepted.length < room);
+      if (reason) rejected.push({ file, reason });
+      else accepted.push(file);
     }
-
-    if (validFiles.length > 0) {
-      const uploadFiles: ScFileUploadFile[] = validFiles.map((file) => ({
-        file,
-        id: this.generateId(),
-        status: 'pending' as const,
-      }));
-
-      if (this.multiple()) {
-        this.files.update((files) => [...files, ...uploadFiles]);
-      } else {
-        this.files.set(uploadFiles.slice(0, 1));
-      }
-
-      this.filesSelected.emit(validFiles);
-    }
-  }
-
-  removeFile(fileId: string): void {
-    const file = this.files().find((f) => f.id === fileId);
-    if (!file) {
-      console.warn(
-        `ScFileUpload: removeFile called with unknown fileId "${fileId}"`,
-      );
-      return;
-    }
-    this.files.update((files) => files.filter((f) => f.id !== fileId));
-    this.fileRemoved.emit(file);
-  }
-
-  updateFileProgress(fileId: string, progress: number): void {
-    if (!this.files().some((f) => f.id === fileId)) {
-      console.warn(
-        `ScFileUpload: updateFileProgress called with unknown fileId "${fileId}"`,
-      );
-      return;
-    }
-    this.files.update((files) =>
-      files.map((f) =>
-        f.id === fileId ? { ...f, progress, status: 'uploading' as const } : f,
-      ),
+    this.rejections.set(rejected);
+    if (!accepted.length) return;
+    this.value.update((value) =>
+      this.multiple() ? [...value, ...accepted] : accepted,
     );
   }
 
-  updateFileStatus(
-    fileId: string,
-    status: ScFileUploadFile['status'],
-    error?: string,
-  ): void {
-    if (!this.files().some((f) => f.id === fileId)) {
-      console.warn(
-        `ScFileUpload: updateFileStatus called with unknown fileId "${fileId}"`,
+  remove(file: File): void {
+    this.value.update((value) => value.filter((f) => f !== file));
+  }
+
+  private check(file: File, room: boolean): ScFileUploadRejectionReason | null {
+    if (!this.takes(file)) return 'type';
+    const max = this.maxSize();
+    if (max !== null && file.size > max) return 'size';
+    return room ? null : 'count';
+  }
+
+  /** Of a type in `accept`: an extension, `type/*`, or a type. */
+  private takes(file: File): boolean {
+    const accept = this.accept().trim();
+    if (!accept) return true;
+    const name = file.name.toLowerCase();
+    const type = file.type.toLowerCase();
+    return accept
+      .split(',')
+      .map((entry) => entry.trim().toLowerCase())
+      .some((entry) =>
+        entry.startsWith('.')
+          ? name.endsWith(entry)
+          : entry.endsWith('/*')
+            ? type.startsWith(entry.slice(0, -1))
+            : type === entry,
       );
-      return;
-    }
-    this.files.update((files) =>
-      files.map((f) => (f.id === fileId ? { ...f, status, error } : f)),
-    );
-  }
-
-  clearFiles(): void {
-    this.files.set([]);
-  }
-
-  private isAcceptedType(file: File, accept: string): boolean {
-    const acceptTypes = accept.split(',').map((t) => t.trim().toLowerCase());
-
-    for (const acceptType of acceptTypes) {
-      if (acceptType.startsWith('.')) {
-        // Extension check
-        if (file.name.toLowerCase().endsWith(acceptType)) {
-          return true;
-        }
-      } else if (acceptType.endsWith('/*')) {
-        // MIME type wildcard (e.g., image/*)
-        const mimePrefix = acceptType.slice(0, -2);
-        if (file.type.toLowerCase().startsWith(mimePrefix)) {
-          return true;
-        }
-      } else {
-        // Exact MIME type match
-        if (file.type.toLowerCase() === acceptType) {
-          return true;
-        }
-      }
-    }
-
-    return false;
   }
 }

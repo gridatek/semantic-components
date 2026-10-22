@@ -1,15 +1,15 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScFileUploadNext,
-  ScFileUploadNextDropzone,
-  ScFileUploadNextInput,
-  ScFileUploadNextItem,
-  ScFileUploadNextItemName,
-  ScFileUploadNextItemPreview,
-  ScFileUploadNextItemRemove,
-  ScFileUploadNextItemSize,
-  ScFileUploadNextList,
-  ScFileUploadNextTrigger,
+  ScFileUpload,
+  ScFileUploadDropzone,
+  ScFileUploadInput,
+  ScFileUploadItem,
+  ScFileUploadItemName,
+  ScFileUploadItemPreview,
+  ScFileUploadItemRemove,
+  ScFileUploadItemSize,
+  ScFileUploadList,
+  ScFileUploadTrigger,
 } from '@semantic-components/ui';
 import {
   SiFileIcon,
@@ -19,37 +19,37 @@ import {
 
 /** Images only, 1 MB at most, three at most: those that break a rule are kept out, and said — in your words — from rejections(). */
 @Component({
-  selector: 'app-rejections-file-upload-next-demo',
+  selector: 'app-rejections-file-upload-demo',
   imports: [
-    ScFileUploadNext,
-    ScFileUploadNextInput,
-    ScFileUploadNextTrigger,
-    ScFileUploadNextDropzone,
-    ScFileUploadNextList,
-    ScFileUploadNextItem,
-    ScFileUploadNextItemPreview,
-    ScFileUploadNextItemName,
-    ScFileUploadNextItemSize,
-    ScFileUploadNextItemRemove,
+    ScFileUpload,
+    ScFileUploadInput,
+    ScFileUploadTrigger,
+    ScFileUploadDropzone,
+    ScFileUploadList,
+    ScFileUploadItem,
+    ScFileUploadItemPreview,
+    ScFileUploadItemName,
+    ScFileUploadItemSize,
+    ScFileUploadItemRemove,
     SiUploadIcon,
     SiFileIcon,
     SiXIcon,
   ],
   template: `
     <div
-      scFileUploadNext
-      #upload="scFileUploadNext"
+      scFileUpload
+      #upload="scFileUpload"
       multiple
       accept="image/*"
       [maxSize]="1000000"
       [maxFiles]="3"
       class="w-full max-w-md"
     >
-      <input scFileUploadNextInput />
-      <div scFileUploadNextDropzone>
+      <input scFileUploadInput />
+      <div scFileUploadDropzone>
         <svg siUploadIcon class="size-6"></svg>
         <p>Up to 3 images, 1 MB each</p>
-        <button scFileUploadNextTrigger size="sm">Browse images</button>
+        <button scFileUploadTrigger size="sm">Browse images</button>
       </div>
       <ul class="text-destructive grid gap-1 text-sm" aria-live="polite">
         @for (rejection of upload.rejections(); track rejection.file) {
@@ -69,13 +69,13 @@ import {
           </li>
         }
       </ul>
-      <ul scFileUploadNextList aria-label="Chosen images">
+      <ul scFileUploadList aria-label="Chosen images">
         @for (file of upload.value(); track file) {
-          <li scFileUploadNextItem [file]="file">
-            <span scFileUploadNextItemPreview><svg siFileIcon></svg></span>
-            <span scFileUploadNextItemName>{{ file.name }}</span>
-            <span scFileUploadNextItemSize></span>
-            <button scFileUploadNextItemRemove>
+          <li scFileUploadItem [file]="file">
+            <span scFileUploadItemPreview><svg siFileIcon></svg></span>
+            <span scFileUploadItemName>{{ file.name }}</span>
+            <span scFileUploadItemSize></span>
+            <button scFileUploadItemRemove>
               <svg siXIcon></svg>
               <span class="sr-only">Remove {{ file.name }}</span>
             </button>
@@ -87,4 +87,4 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class RejectionsFileUploadNextDemo {}
+export class RejectionsFileUploadDemo {}

@@ -354,15 +354,7 @@
   {
     "name": "File Upload",
     "path": "file-upload",
-    "description": "A drag-and-drop file upload component.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Forms"
-  },
-  {
-    "name": "File Upload Next",
-    "path": "file-upload-next",
-    "description": "The file upload, rebuilt: files picked or dropped, as a File[] for Signal Forms; rejections with their reason.",
+    "description": "Files picked or dropped, as a File[] for Signal Forms; rejections with their reason.",
     "status": "Experimental",
     "library": "ui",
     "category": "Forms"
