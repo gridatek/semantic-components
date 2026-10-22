@@ -110,6 +110,8 @@ export class ScCalendar implements FormValueControl<ScCalendarValue> {
   readonly showWeekNumbers = input(false, { transform: booleanAttribute });
   /** The view it opens on. */
   readonly startView = input<ScCalendarView>('day');
+  /** Focus on its focused day as it appears — as when its popover opens. */
+  readonly initialFocus = input(false, { transform: booleanAttribute });
   readonly disabled = input(false, { transform: booleanAttribute });
   readonly invalid = input(false, { transform: booleanAttribute });
   readonly touched = input(false, { transform: booleanAttribute });
@@ -270,6 +272,12 @@ export class ScCalendar implements FormValueControl<ScCalendarValue> {
   }
 
   // ── Doing ────────────────────────────────────────────────────────────
+
+  constructor() {
+    afterNextRender(() => {
+      if (this.initialFocus()) this.focusCell();
+    });
+  }
 
   /** Picks a day, as the mode has it. */
   select(date: Temporal.PlainDate): void {

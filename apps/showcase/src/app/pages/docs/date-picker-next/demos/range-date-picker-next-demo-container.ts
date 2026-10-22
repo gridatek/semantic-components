@@ -1,0 +1,114 @@
+import { Component, ViewEncapsulation } from '@angular/core';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { RangeDatePickerNextDemo } from './range-date-picker-next-demo';
+
+@Component({
+  selector: 'app-range-date-picker-next-demo-container',
+  imports: [DemoContainer, RangeDatePickerNextDemo],
+  template: `
+    <app-demo-container
+      title="Range"
+      [code]="code"
+      demoUrl="/demos/date-picker-next/range-date-picker-next-demo"
+    >
+      <app-range-date-picker-next-demo />
+    </app-demo-container>
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class RangeDatePickerNextDemoContainer {
+  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+import {
+  ScCalendar,
+  ScCalendarHeader,
+  ScCalendarHeading,
+  ScCalendarNext,
+  ScCalendarPrevious,
+  type ScCalendarValue,
+  ScDatePickerNext,
+  ScDatePickerNextTrigger,
+  ScPopover,
+  ScPopoverPortal,
+  ScPopoverProvider,
+} from '@semantic-components/ui';
+import {
+  SiCalendarIcon,
+  SiChevronLeftIcon,
+  SiChevronRightIcon,
+} from '@semantic-icons/lucide-icons';
+
+/** A range over two months: written as one span ("Oct 12 – 18, 2026"), closed once both ends are picked. */
+@Component({
+  selector: 'app-range-date-picker-next-demo',
+  imports: [
+    ScDatePickerNext,
+    ScDatePickerNextTrigger,
+    ScPopoverProvider,
+    ScPopoverPortal,
+    ScPopover,
+    ScCalendar,
+    ScCalendarHeader,
+    ScCalendarHeading,
+    ScCalendarPrevious,
+    ScCalendarNext,
+    SiCalendarIcon,
+    SiChevronLeftIcon,
+    SiChevronRightIcon,
+  ],
+  template: \`
+    <div
+      scDatePickerNext
+      #dp="scDatePickerNext"
+      mode="range"
+      [(value)]="stay"
+      class="w-fit"
+    >
+      <div scPopoverProvider [origin]="trigger.overlayOrigin" align="start">
+        <button
+          scDatePickerNextTrigger
+          #trigger="scDatePickerNextTrigger"
+          class="w-72"
+        >
+          <svg siCalendarIcon></svg>
+          <span>{{ dp.text() || 'Pick your dates' }}</span>
+        </button>
+        <ng-template scPopoverPortal>
+          <div scPopover class="w-auto p-0" aria-label="Choose your dates">
+            <div
+              scCalendar
+              #cal="scCalendar"
+              initialFocus
+              aria-label="Choose your dates"
+              [mode]="dp.mode()"
+              [value]="dp.value()"
+              (valueChange)="dp.pick($event)"
+              [numberOfMonths]="2"
+            >
+              <div scCalendarHeader>
+                <button scCalendarPrevious>
+                  <svg siChevronLeftIcon></svg>
+                  <span class="sr-only">Previous month</span>
+                </button>
+                <button scCalendarHeading>{{ cal.heading() }}</button>
+                <button scCalendarNext>
+                  <svg siChevronRightIcon></svg>
+                  <span class="sr-only">Next month</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+    <p class="text-muted-foreground text-sm" data-testid="picked">
+      {{ dp.text() || 'Nothing picked.' }}
+    </p>
+  \`,
+  host: { class: 'flex w-full flex-col items-center gap-3' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class RangeDatePickerNextDemo {
+  readonly stay = signal<ScCalendarValue>(null);
+}`;
+}

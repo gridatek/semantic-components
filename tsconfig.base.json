@@ -10,7 +10,7 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": ["es2020", "dom", "esnext.temporal", "esnext.intl"],
+    "lib": ["es2020", "es2021.intl", "dom", "esnext.temporal", "esnext.intl"],
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,

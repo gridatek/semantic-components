@@ -73,6 +73,9 @@ const MONDAY = Temporal.PlainDate.from('2024-01-01');
                   data-slot="calendar-cell"
                   [attr.data-date]="day.key"
                   [attr.tabindex]="tabIndex(day)"
+                  [attr.cdkFocusInitial]="
+                    calendar.initialFocus() && tabIndex(day) === 0 ? '' : null
+                  "
                   [attr.aria-selected]="
                     day.outside ? null : calendar.isSelected(day.date)
                   "

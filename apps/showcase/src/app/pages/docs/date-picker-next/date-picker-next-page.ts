@@ -1,0 +1,105 @@
+import { Component, ViewEncapsulation } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
+import { BasicDatePickerNextDemoContainer } from './demos/basic-date-picker-next-demo-container';
+import { ConstraintsDatePickerNextDemoContainer } from './demos/constraints-date-picker-next-demo-container';
+import { FormDatePickerNextDemoContainer } from './demos/form-date-picker-next-demo-container';
+import { LocaleDatePickerNextDemoContainer } from './demos/locale-date-picker-next-demo-container';
+import { MultipleDatePickerNextDemoContainer } from './demos/multiple-date-picker-next-demo-container';
+import { RangeDatePickerNextDemoContainer } from './demos/range-date-picker-next-demo-container';
+import { TypedDatePickerNextDemoContainer } from './demos/typed-date-picker-next-demo-container';
+
+@Component({
+  selector: 'app-date-picker-next-page',
+  imports: [
+    BasicDatePickerNextDemoContainer,
+    TypedDatePickerNextDemoContainer,
+    RangeDatePickerNextDemoContainer,
+    MultipleDatePickerNextDemoContainer,
+    ConstraintsDatePickerNextDemoContainer,
+    FormDatePickerNextDemoContainer,
+    LocaleDatePickerNextDemoContainer,
+    TocHeading,
+    ComponentBadges,
+    ScHeading,
+  ],
+  template: `
+    <div class="space-y-8">
+      <div class="space-y-2">
+        <h1 scHeading>Date Picker Next</h1>
+        <p class="text-muted-foreground">
+          The date picker, rebuilt: a day — or days, or a range — picked in the
+          calendar, or typed; written in the app’s language; a [formField].
+        </p>
+        <app-component-badges path="date-picker-next" />
+      </div>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Basic</h2>
+        <p class="text-muted-foreground">
+          A button showing the day, opening the calendar — focus on its day. A
+          pick closes it, focus back on the button; Escape closes it too.
+        </p>
+        <app-basic-date-picker-next-demo-container />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Typed</h2>
+        <p class="text-muted-foreground">
+          Typed, or picked: the locale’s numeric order (here 10/14/2026) or ISO,
+          read on Enter or leaving; text that is not a day stays, marked. The
+          button beside opens the calendar.
+        </p>
+        <app-typed-date-picker-next-demo-container />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Range</h2>
+        <p class="text-muted-foreground">
+          A range over two months: written as one span ("Oct 12 – 18, 2026"),
+          closed once both ends are picked.
+        </p>
+        <app-range-date-picker-next-demo-container />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Multiple</h2>
+        <p class="text-muted-foreground">
+          Several days, written as a list in the app’s language; it stays open
+          while you pick.
+        </p>
+        <app-multiple-date-picker-next-demo-container />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Constraints</h2>
+        <p class="text-muted-foreground">
+          minDate, maxDate and unavailable days on the picker — given to its
+          calendar, and kept for typed days too: weekends cannot be picked.
+        </p>
+        <app-constraints-date-picker-next-demo-container />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>In a form</h2>
+        <p class="text-muted-foreground">
+          A [formField]: required, from the schema; marked once the calendar has
+          closed — the trigger, then its field.
+        </p>
+        <app-form-date-picker-next-demo-container />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Locale</h2>
+        <p class="text-muted-foreground">
+          locale="fr-FR" and a long format: the value, the calendar and the
+          typed order (jj/mm/aaaa) in French.
+        </p>
+        <app-locale-date-picker-next-demo-container />
+      </section>
+    </div>
+  `,
+  encapsulation: ViewEncapsulation.None,
+})
+export default class DatePickerNextPage {}

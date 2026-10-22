@@ -25,8 +25,8 @@ import {
   ScCalendarHeading,
   ScCalendarNext,
   ScCalendarPrevious,
-  type ScCalendarValue,
   type ScCalendarRange,
+  type ScCalendarValue,
 } from '@semantic-components/ui';
 import {
   SiChevronLeftIcon,

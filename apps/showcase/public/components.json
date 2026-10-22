@@ -280,6 +280,14 @@
     "category": "Forms"
   },
   {
+    "name": "Date Picker Next",
+    "path": "date-picker-next",
+    "description": "The date picker, rebuilt: picked in the calendar or typed, written in your language; a form field.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Forms"
+  },
+  {
     "name": "Date Range Picker",
     "path": "date-range-picker",
     "description": "Select a range of dates with a calendar.",
