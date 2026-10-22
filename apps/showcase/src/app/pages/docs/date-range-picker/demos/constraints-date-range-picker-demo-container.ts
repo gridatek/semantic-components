@@ -62,7 +62,7 @@ import {
       [minDate]="today"
       [maxDate]="latest"
       [(value)]="range"
-      class="w-fit"
+      class="w-72"
     >
       <div scPopoverProvider [origin]="trigger.overlayOrigin" align="start">
         <button scDatePickerTrigger #trigger="scDatePickerTrigger">
