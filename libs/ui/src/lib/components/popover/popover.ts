@@ -16,6 +16,7 @@ import { ScPopoverProvider } from './popover-provider';
   selector: 'div[scPopover]',
   template: ` <ng-content /> `,
   host: {
+    'data-slot': 'popover',
     role: 'dialog',
     '[class]': 'class()',
     '[attr.data-side]': 'popover.side()',

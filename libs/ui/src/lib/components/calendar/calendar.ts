@@ -206,7 +206,7 @@ export class ScCalendar implements FormValueControl<ScCalendarValue> {
 
   protected readonly class = computed(() =>
     cn(
-      'bg-background flex w-fit flex-col gap-4 p-3',
+      'bg-background in-data-[slot=popover]:bg-transparent flex w-fit flex-col gap-4 p-3',
       this.disabled() && 'pointer-events-none opacity-50',
       this.classInput(),
     ),
