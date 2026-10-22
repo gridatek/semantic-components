@@ -166,17 +166,27 @@ test('Colours: the ones given', async ({ page }) => {
 test('Reduced motion: no confetti at all', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto(demo('sides'));
-  const view = page.viewportSize() ?? { width: 1280, height: 720 };
-  const screen = { x: 0, y: 0, width: view.width, height: view.height };
-  const button = page.getByRole('button', { name: 'Launch' });
-  await button.focus();
-  const [before] = await colored(page, [screen]);
-  await button.click();
-  // A while: none falls — the screen as it was.
-  await new Promise((resolve) => setTimeout(resolve, 800));
-  const [after] = await colored(page, [screen]);
-  // (A button's hover may shift a few pixels; a burst, hundreds.)
-  expect(Math.abs(after - before)).toBeLessThan(40);
+  await page.getByRole('button', { name: 'Launch' }).click();
+  // A while: nothing drawn on the confetti's canvas — read from the canvas
+  // itself, so the page around it (the button's hover, fonts) can't count.
+  await expect(canvas(page)).toHaveCount(1);
+  for (let i = 0; i < 4; i++) {
+    await new Promise((resolve) => setTimeout(resolve, 200));
+    const drawn = await canvas(page).evaluate((element: HTMLCanvasElement) => {
+      const context = element.getContext('2d');
+      if (!context || !element.width || !element.height) return 0;
+      const { data } = context.getImageData(
+        0,
+        0,
+        element.width,
+        element.height,
+      );
+      let count = 0;
+      for (let p = 3; p < data.length; p += 4) if (data[p] > 0) count++;
+      return count;
+    });
+    expect(drawn).toBe(0);
+  }
   await expect(canvas(page)).not.toHaveAttribute('data-active');
 });
 
