@@ -2,7 +2,7 @@ import { type Page, expect, test } from '@playwright/test';
 import { collectErrors } from '../../interaction';
 
 const demo = (name: string) =>
-  `/demos/animated-counter-next/${name}-animated-counter-next-demo`;
+  `/demos/animated-counter/${name}-animated-counter-demo`;
 const counters = (page: Page) => page.locator('[data-slot="animated-counter"]');
 /** What is seen: the moving number. */
 const seen = (page: Page, n = 0) =>

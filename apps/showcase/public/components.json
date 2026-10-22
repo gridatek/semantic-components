@@ -26,15 +26,7 @@
   {
     "name": "Animated Counter",
     "path": "animated-counter",
-    "description": "Numbers that animate up/down using the motion library.",
-    "status": "Experimental",
-    "library": "third-party",
-    "category": "Recipes"
-  },
-  {
-    "name": "Animated Counter Next",
-    "path": "animated-counter-next",
-    "description": "The animated counter, rebuilt: counting or rolling to a new value, in the reader’s language; motion only where it is used.",
+    "description": "Counting or rolling to a new value, in the reader’s language; motion only where it is used.",
     "status": "Experimental",
     "library": "ui-lab",
     "category": "Data Display"

@@ -1,11 +1,31 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { VisibleAnimatedCounterDemo } from './visible-animated-counter-demo';
+
+@Component({
+  selector: 'app-visible-animated-counter-demo-container',
+  imports: [DemoContainer, VisibleAnimatedCounterDemo],
+  template: `
+    <app-demo-container
+      title="When seen"
+      [code]="code"
+      demoUrl="/demos/animated-counter/visible-animated-counter-demo"
+    >
+      <app-visible-animated-counter-demo />
+    </app-demo-container>
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class VisibleAnimatedCounterDemoContainer {
+  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScAnimatedCounter } from '@semantic-components/ui-lab/animated-counter';
 
 /** start="visible": landing-page figures that count up from zero when they are first scrolled into view. */
 @Component({
-  selector: 'app-visible-animated-counter-next-demo',
+  selector: 'app-visible-animated-counter-demo',
   imports: [ScAnimatedCounter],
-  template: `
+  template: \`
     <div
       class="h-64 w-full max-w-lg overflow-y-auto rounded-xl border"
       tabindex="0"
@@ -57,8 +77,9 @@ import { ScAnimatedCounter } from '@semantic-components/ui-lab/animated-counter'
         </div>
       </dl>
     </div>
-  `,
+  \`,
   host: { class: 'flex w-full flex-col items-center gap-4' },
   encapsulation: ViewEncapsulation.None,
 })
-export class VisibleAnimatedCounterNextDemo {}
+export class VisibleAnimatedCounterDemo {}`;
+}

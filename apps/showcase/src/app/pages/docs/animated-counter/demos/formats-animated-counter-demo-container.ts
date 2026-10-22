@@ -1,43 +1,61 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { FormatsAnimatedCounterNextDemo } from './formats-animated-counter-next-demo';
+import { FormatsAnimatedCounterDemo } from './formats-animated-counter-demo';
 
 @Component({
-  selector: 'app-formats-animated-counter-next-demo-container',
-  imports: [DemoContainer, FormatsAnimatedCounterNextDemo],
+  selector: 'app-formats-animated-counter-demo-container',
+  imports: [DemoContainer, FormatsAnimatedCounterDemo],
   template: `
     <app-demo-container
       title="Formats"
       [code]="code"
-      demoUrl="/demos/animated-counter-next/formats-animated-counter-next-demo"
+      demoUrl="/demos/animated-counter/formats-animated-counter-demo"
     >
-      <app-formats-animated-counter-next-demo />
+      <app-formats-animated-counter-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class FormatsAnimatedCounterNextDemoContainer {
+export class FormatsAnimatedCounterDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
 import { ScAnimatedCounter } from '@semantic-components/ui-lab/animated-counter';
 
 /** Any Intl.NumberFormat options, in the counter’s locale — here, German: euros, a percent, compact. */
 @Component({
-  selector: 'app-formats-animated-counter-next-demo',
+  selector: 'app-formats-animated-counter-demo',
   imports: [ScAnimatedCounter, ScButton],
   template: \`
     <div class="grid w-full max-w-lg grid-cols-3 gap-3 text-center">
       <div class="rounded-xl border p-4">
-        <span scAnimatedCounter locale="de-DE" [value]="sales()" [format]="{ style: 'currency', currency: 'EUR' }" class="text-xl font-semibold"></span>
+        <span
+          scAnimatedCounter
+          locale="de-DE"
+          [value]="sales()"
+          [format]="{ style: 'currency', currency: 'EUR' }"
+          class="text-xl font-semibold"
+        ></span>
         <p class="text-muted-foreground text-xs">Umsatz</p>
       </div>
       <div class="rounded-xl border p-4">
-        <span scAnimatedCounter locale="de-DE" [value]="share()" [format]="{ style: 'percent', maximumFractionDigits: 1 }" class="text-xl font-semibold"></span>
+        <span
+          scAnimatedCounter
+          locale="de-DE"
+          [value]="share()"
+          [format]="{ style: 'percent', maximumFractionDigits: 1 }"
+          class="text-xl font-semibold"
+        ></span>
         <p class="text-muted-foreground text-xs">Anteil</p>
       </div>
       <div class="rounded-xl border p-4">
-        <span scAnimatedCounter locale="de-DE" [value]="views()" [format]="{ notation: 'compact' }" class="text-xl font-semibold"></span>
+        <span
+          scAnimatedCounter
+          locale="de-DE"
+          [value]="views()"
+          [format]="{ notation: 'compact' }"
+          class="text-xl font-semibold"
+        ></span>
         <p class="text-muted-foreground text-xs">Aufrufe</p>
       </div>
     </div>
@@ -46,7 +64,7 @@ import { ScAnimatedCounter } from '@semantic-components/ui-lab/animated-counter'
   host: { class: 'flex w-full flex-col items-center gap-4' },
   encapsulation: ViewEncapsulation.None,
 })
-export class FormatsAnimatedCounterNextDemo {
+export class FormatsAnimatedCounterDemo {
   readonly sales = signal(18_450.5);
   readonly share = signal(0.124);
   readonly views = signal(1_200_000);

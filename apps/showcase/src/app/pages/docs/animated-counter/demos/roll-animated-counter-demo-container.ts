@@ -1,33 +1,35 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { RollAnimatedCounterNextDemo } from './roll-animated-counter-next-demo';
+import { RollAnimatedCounterDemo } from './roll-animated-counter-demo';
 
 @Component({
-  selector: 'app-roll-animated-counter-next-demo-container',
-  imports: [DemoContainer, RollAnimatedCounterNextDemo],
+  selector: 'app-roll-animated-counter-demo-container',
+  imports: [DemoContainer, RollAnimatedCounterDemo],
   template: `
     <app-demo-container
       title="Roll"
       [code]="code"
-      demoUrl="/demos/animated-counter-next/roll-animated-counter-next-demo"
+      demoUrl="/demos/animated-counter/roll-animated-counter-demo"
     >
-      <app-roll-animated-counter-next-demo />
+      <app-roll-animated-counter-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class RollAnimatedCounterNextDemoContainer {
+export class RollAnimatedCounterDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
 import { ScAnimatedCounter } from '@semantic-components/ui-lab/animated-counter';
 
 /** effect="roll": each digit rolls to its new place, like an odometer — the separators and the currency stay still. */
 @Component({
-  selector: 'app-roll-animated-counter-next-demo',
+  selector: 'app-roll-animated-counter-demo',
   imports: [ScAnimatedCounter, ScButton],
   template: \`
-    <div class="bg-muted/30 grid h-32 w-72 place-items-center rounded-xl border">
+    <div
+      class="bg-muted/30 grid h-32 w-72 place-items-center rounded-xl border"
+    >
       <span
         scAnimatedCounter
         effect="roll"
@@ -38,13 +40,15 @@ import { ScAnimatedCounter } from '@semantic-components/ui-lab/animated-counter'
     </div>
     <div class="flex gap-2">
       <button scButton (click)="price.set(price() + 12.5)">+$12.50</button>
-      <button scButton variant="secondary" (click)="price.set(price() - 7.25)">−$7.25</button>
+      <button scButton variant="secondary" (click)="price.set(price() - 7.25)">
+        −$7.25
+      </button>
     </div>
   \`,
   host: { class: 'flex w-full flex-col items-center gap-4' },
   encapsulation: ViewEncapsulation.None,
 })
-export class RollAnimatedCounterNextDemo {
+export class RollAnimatedCounterDemo {
   readonly price = signal(1249.99);
 }`;
 }

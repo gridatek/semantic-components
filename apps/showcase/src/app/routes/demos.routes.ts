@@ -69,64 +69,38 @@ export const demosRoutes: Route[] = [
     path: 'demos/animated-counter',
     children: [
       {
-        path: 'basic-animated-counter-demo',
+        path: 'count-animated-counter-demo',
         loadComponent: () =>
-          import('../pages/docs/animated-counter/demos/basic-animated-counter-demo').then(
-            (m) => m.BasicAnimatedCounterDemo,
+          import('../pages/docs/animated-counter/demos/count-animated-counter-demo').then(
+            (m) => m.CountAnimatedCounterDemo,
           ),
       },
       {
-        path: 'easing-animated-counter-demo',
+        path: 'roll-animated-counter-demo',
         loadComponent: () =>
-          import('../pages/docs/animated-counter/demos/easing-animated-counter-demo').then(
-            (m) => m.EasingAnimatedCounterDemo,
+          import('../pages/docs/animated-counter/demos/roll-animated-counter-demo').then(
+            (m) => m.RollAnimatedCounterDemo,
           ),
       },
       {
-        path: 'prefix-animated-counter-demo',
+        path: 'formats-animated-counter-demo',
         loadComponent: () =>
-          import('../pages/docs/animated-counter/demos/prefix-animated-counter-demo').then(
-            (m) => m.PrefixAnimatedCounterDemo,
-          ),
-      },
-    ],
-  },
-  {
-    path: 'demos/animated-counter-next',
-    children: [
-      {
-        path: 'count-animated-counter-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/animated-counter-next/demos/count-animated-counter-next-demo').then(
-            (m) => m.CountAnimatedCounterNextDemo,
+          import('../pages/docs/animated-counter/demos/formats-animated-counter-demo').then(
+            (m) => m.FormatsAnimatedCounterDemo,
           ),
       },
       {
-        path: 'roll-animated-counter-next-demo',
+        path: 'visible-animated-counter-demo',
         loadComponent: () =>
-          import('../pages/docs/animated-counter-next/demos/roll-animated-counter-next-demo').then(
-            (m) => m.RollAnimatedCounterNextDemo,
+          import('../pages/docs/animated-counter/demos/visible-animated-counter-demo').then(
+            (m) => m.VisibleAnimatedCounterDemo,
           ),
       },
       {
-        path: 'formats-animated-counter-next-demo',
+        path: 'card-animated-counter-demo',
         loadComponent: () =>
-          import('../pages/docs/animated-counter-next/demos/formats-animated-counter-next-demo').then(
-            (m) => m.FormatsAnimatedCounterNextDemo,
-          ),
-      },
-      {
-        path: 'visible-animated-counter-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/animated-counter-next/demos/visible-animated-counter-next-demo').then(
-            (m) => m.VisibleAnimatedCounterNextDemo,
-          ),
-      },
-      {
-        path: 'card-animated-counter-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/animated-counter-next/demos/card-animated-counter-next-demo').then(
-            (m) => m.CardAnimatedCounterNextDemo,
+          import('../pages/docs/animated-counter/demos/card-animated-counter-demo').then(
+            (m) => m.CardAnimatedCounterDemo,
           ),
       },
     ],

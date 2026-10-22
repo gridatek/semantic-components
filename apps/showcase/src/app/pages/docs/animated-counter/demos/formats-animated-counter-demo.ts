@@ -4,7 +4,7 @@ import { ScAnimatedCounter } from '@semantic-components/ui-lab/animated-counter'
 
 /** Any Intl.NumberFormat options, in the counter’s locale — here, German: euros, a percent, compact. */
 @Component({
-  selector: 'app-formats-animated-counter-next-demo',
+  selector: 'app-formats-animated-counter-demo',
   imports: [ScAnimatedCounter, ScButton],
   template: `
     <div class="grid w-full max-w-lg grid-cols-3 gap-3 text-center">
@@ -44,7 +44,7 @@ import { ScAnimatedCounter } from '@semantic-components/ui-lab/animated-counter'
   host: { class: 'flex w-full flex-col items-center gap-4' },
   encapsulation: ViewEncapsulation.None,
 })
-export class FormatsAnimatedCounterNextDemo {
+export class FormatsAnimatedCounterDemo {
   readonly sales = signal(18_450.5);
   readonly share = signal(0.124);
   readonly views = signal(1_200_000);

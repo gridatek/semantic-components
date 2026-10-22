@@ -10,7 +10,7 @@ import { ScAnimatedCounter } from '@semantic-components/ui-lab/animated-counter'
 
 /** In the stat card’s value: the figure moves to its new value as the data comes in. */
 @Component({
-  selector: 'app-card-animated-counter-next-demo',
+  selector: 'app-card-animated-counter-demo',
   imports: [
     ScAnimatedCounter,
     ScStatCard,
@@ -32,7 +32,7 @@ import { ScAnimatedCounter } from '@semantic-components/ui-lab/animated-counter'
   host: { class: 'flex w-full flex-col items-center gap-4' },
   encapsulation: ViewEncapsulation.None,
 })
-export class CardAnimatedCounterNextDemo {
+export class CardAnimatedCounterDemo {
   readonly users = signal(1_284);
   private turn = 0;
 

@@ -1,32 +1,44 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { CardAnimatedCounterNextDemo } from './card-animated-counter-next-demo';
+import { CardAnimatedCounterDemo } from './card-animated-counter-demo';
 
 @Component({
-  selector: 'app-card-animated-counter-next-demo-container',
-  imports: [DemoContainer, CardAnimatedCounterNextDemo],
+  selector: 'app-card-animated-counter-demo-container',
+  imports: [DemoContainer, CardAnimatedCounterDemo],
   template: `
     <app-demo-container
       title="In a stat card"
       [code]="code"
-      demoUrl="/demos/animated-counter-next/card-animated-counter-next-demo"
+      demoUrl="/demos/animated-counter/card-animated-counter-demo"
     >
-      <app-card-animated-counter-next-demo />
+      <app-card-animated-counter-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class CardAnimatedCounterNextDemoContainer {
+export class CardAnimatedCounterDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
-import { ScStatCard, ScStatCardLabel, ScStatCardValue, ScStatCardDescription } from '@semantic-components/ui-lab';
+import {
+  ScStatCard,
+  ScStatCardDescription,
+  ScStatCardLabel,
+  ScStatCardValue,
+} from '@semantic-components/ui-lab';
 import { ScAnimatedCounter } from '@semantic-components/ui-lab/animated-counter';
 
 /** In the stat card’s value: the figure moves to its new value as the data comes in. */
 @Component({
-  selector: 'app-card-animated-counter-next-demo',
-  imports: [ScAnimatedCounter, ScStatCard, ScStatCardLabel, ScStatCardValue, ScStatCardDescription, ScButton],
+  selector: 'app-card-animated-counter-demo',
+  imports: [
+    ScAnimatedCounter,
+    ScStatCard,
+    ScStatCardLabel,
+    ScStatCardValue,
+    ScStatCardDescription,
+    ScButton,
+  ],
   template: \`
     <dl scStatCard class="w-64">
       <dt scStatCardLabel>Active users</dt>
@@ -40,7 +52,7 @@ import { ScAnimatedCounter } from '@semantic-components/ui-lab/animated-counter'
   host: { class: 'flex w-full flex-col items-center gap-4' },
   encapsulation: ViewEncapsulation.None,
 })
-export class CardAnimatedCounterNextDemo {
+export class CardAnimatedCounterDemo {
   readonly users = signal(1_284);
   private turn = 0;
 

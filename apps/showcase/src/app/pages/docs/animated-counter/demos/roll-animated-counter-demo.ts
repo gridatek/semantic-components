@@ -4,7 +4,7 @@ import { ScAnimatedCounter } from '@semantic-components/ui-lab/animated-counter'
 
 /** effect="roll": each digit rolls to its new place, like an odometer — the separators and the currency stay still. */
 @Component({
-  selector: 'app-roll-animated-counter-next-demo',
+  selector: 'app-roll-animated-counter-demo',
   imports: [ScAnimatedCounter, ScButton],
   template: `
     <div
@@ -28,6 +28,6 @@ import { ScAnimatedCounter } from '@semantic-components/ui-lab/animated-counter'
   host: { class: 'flex w-full flex-col items-center gap-4' },
   encapsulation: ViewEncapsulation.None,
 })
-export class RollAnimatedCounterNextDemo {
+export class RollAnimatedCounterDemo {
   readonly price = signal(1249.99);
 }
