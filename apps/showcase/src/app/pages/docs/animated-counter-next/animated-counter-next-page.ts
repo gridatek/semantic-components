@@ -36,7 +36,7 @@ import { VisibleAnimatedCounterNextDemoContainer } from './demos/visible-animate
       <section class="space-y-4">
         <h2 scHeading appToc>Installation</h2>
         <p class="text-muted-foreground">
-          It has its own entry point, and counts with the
+          It counts with the
           <a
             href="https://motion.dev"
             target="_blank"
@@ -49,9 +49,17 @@ import { VisibleAnimatedCounterNextDemoContainer } from './demos/visible-animate
         </p>
         <pre
           class="bg-muted overflow-x-auto rounded-md p-4 text-sm"
-        ><code>npm install motion
+        ><code>npm install motion</code></pre>
+      </section>
 
-import {{ '{' }} ScAnimatedCounter {{ '}' }} from '&#64;semantic-components/ui-lab/animated-counter';</code></pre>
+      <section class="space-y-4">
+        <h2 scHeading appToc>Usage</h2>
+        <p class="text-muted-foreground">
+          It has its own entry point, so motion is only loaded where it is used:
+        </p>
+        <pre
+          class="bg-muted overflow-x-auto rounded-md p-4 text-sm"
+        ><code>import {{ '{' }} ScAnimatedCounter {{ '}' }} from '&#64;semantic-components/ui-lab/animated-counter';</code></pre>
       </section>
 
       <section class="space-y-4">

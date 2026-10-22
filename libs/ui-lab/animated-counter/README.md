@@ -8,11 +8,13 @@ A number that moves to its new value â€” counting there, or each digit rolling â
 npm install motion
 ```
 
+## Usage
+
+From its own entry point, so motion is only loaded where it is used:
+
 ```ts
 import { ScAnimatedCounter } from '@semantic-components/ui-lab/animated-counter';
 ```
-
-## Usage
 
 ```html
 <span scAnimatedCounter [value]="revenue()" [format]="{ style: 'currency', currency: 'EUR' }"></span>
