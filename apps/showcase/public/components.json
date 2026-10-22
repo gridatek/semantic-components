@@ -184,6 +184,14 @@
     "category": "Editor"
   },
   {
+    "name": "Code Editor Next",
+    "path": "code-editor-next",
+    "description": "The code editor, rebuilt: CodeMirror, colored by Shiki; a form field.",
+    "status": "Experimental",
+    "library": "code",
+    "category": "Editor"
+  },
+  {
     "name": "Code Block",
     "path": "code-block",
     "description": "Code to read and copy: highlighted, numbered, its lines marked.",

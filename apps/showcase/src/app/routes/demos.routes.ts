@@ -769,6 +769,46 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/code-editor-next',
+    children: [
+      {
+        path: 'basic-code-editor-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/code-editor-next/demos/basic-code-editor-next-demo').then(
+            (m) => m.BasicCodeEditorNextDemo,
+          ),
+      },
+      {
+        path: 'form-code-editor-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/code-editor-next/demos/form-code-editor-next-demo').then(
+            (m) => m.FormCodeEditorNextDemo,
+          ),
+      },
+      {
+        path: 'languages-code-editor-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/code-editor-next/demos/languages-code-editor-next-demo').then(
+            (m) => m.LanguagesCodeEditorNextDemo,
+          ),
+      },
+      {
+        path: 'wrap-code-editor-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/code-editor-next/demos/wrap-code-editor-next-demo').then(
+            (m) => m.WrapCodeEditorNextDemo,
+          ),
+      },
+      {
+        path: 'readonly-code-editor-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/code-editor-next/demos/readonly-code-editor-next-demo').then(
+            (m) => m.ReadonlyCodeEditorNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/code-block',
     children: [
       {
