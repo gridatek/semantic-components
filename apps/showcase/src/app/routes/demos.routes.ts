@@ -1072,6 +1072,13 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
+        path: 'birth-date-picker-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-picker-next/demos/birth-date-picker-next-demo').then(
+            (m) => m.BirthDatePickerNextDemo,
+          ),
+      },
+      {
         path: 'range-date-picker-next-demo',
         loadComponent: () =>
           import('../pages/docs/date-picker-next/demos/range-date-picker-next-demo').then(

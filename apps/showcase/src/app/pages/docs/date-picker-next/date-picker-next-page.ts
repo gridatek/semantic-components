@@ -3,6 +3,7 @@ import { ScHeading } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicDatePickerNextDemoContainer } from './demos/basic-date-picker-next-demo-container';
+import { BirthDatePickerNextDemoContainer } from './demos/birth-date-picker-next-demo-container';
 import { ConstraintsDatePickerNextDemoContainer } from './demos/constraints-date-picker-next-demo-container';
 import { FormDatePickerNextDemoContainer } from './demos/form-date-picker-next-demo-container';
 import { LocaleDatePickerNextDemoContainer } from './demos/locale-date-picker-next-demo-container';
@@ -14,6 +15,7 @@ import { TypedDatePickerNextDemoContainer } from './demos/typed-date-picker-next
   selector: 'app-date-picker-next-page',
   imports: [
     BasicDatePickerNextDemoContainer,
+    BirthDatePickerNextDemoContainer,
     TypedDatePickerNextDemoContainer,
     RangeDatePickerNextDemoContainer,
     MultipleDatePickerNextDemoContainer,
@@ -52,6 +54,15 @@ import { TypedDatePickerNextDemoContainer } from './demos/typed-date-picker-next
           button in the field opens the calendar.
         </p>
         <app-typed-date-picker-next-demo-container />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Date of birth</h2>
+        <p class="text-muted-foreground">
+          startView="year" on the calendar: it opens on the years — a year, then
+          its month, then its day. maxDate is today.
+        </p>
+        <app-birth-date-picker-next-demo-container />
       </section>
 
       <section class="space-y-4">
