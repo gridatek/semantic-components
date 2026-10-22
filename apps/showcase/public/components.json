@@ -802,15 +802,7 @@
   {
     "name": "Sortable List",
     "path": "sortable-list",
-    "description": "A drag-and-drop sortable list using Angular CDK.",
-    "status": "Experimental",
-    "library": "third-party",
-    "category": "Recipes"
-  },
-  {
-    "name": "Sortable List Next",
-    "path": "sortable-list-next",
-    "description": "The sortable list, rebuilt: your array reordered by any pointer or the keyboard, announced in your words; down, along, or as a grid.",
+    "description": "Your array reordered by any pointer or the keyboard, announced in your words; down, along, or as a grid.",
     "status": "Experimental",
     "library": "ui-lab",
     "category": "Advanced"

@@ -27,7 +27,7 @@ export * from './org-chart';
 export * from './scheduler';
 export * from './signature-pad';
 export * from './speed-dial';
-export * from './sortable-list-next';
+export * from './sortable-list';
 export * from './spotlight';
 export * from './stat-card';
 export * from './stepper';

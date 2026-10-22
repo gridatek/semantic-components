@@ -1,8 +1,8 @@
 import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import {
-  ScSortableListNext,
-  type ScSortableListNextAnnouncement,
-  ScSortableListNextItem,
+  ScSortableList,
+  type ScSortableListAnnouncement,
+  ScSortableListItem,
 } from '@semantic-components/ui-lab';
 
 interface Item {
@@ -12,15 +12,15 @@ interface Item {
 
 /** As a grid — photos: the place follows the reading order; ← → move a lifted item by one, ↑ ↓ by a row. */
 @Component({
-  selector: 'app-grid-sortable-list-next-demo',
-  imports: [ScSortableListNext, ScSortableListNextItem],
+  selector: 'app-grid-sortable-list-demo',
+  imports: [ScSortableList, ScSortableListItem],
   template: `
     <p id="grid-sortable-help" class="sr-only">
       Space lifts an item, ← → ↑ ↓ move it, Space drops it, Escape puts it back.
     </p>
     <ul
-      scSortableListNext
-      #list="scSortableListNext"
+      scSortableList
+      #list="scSortableList"
       orientation="grid"
       [(value)]="items"
       [announce]="announce"
@@ -29,7 +29,7 @@ interface Item {
     >
       @for (item of list.items(); track item.id) {
         <li
-          [scSortableListNextItem]="item"
+          [scSortableListItem]="item"
           aria-describedby="grid-sortable-help"
           class="overflow-hidden"
         >
@@ -49,7 +49,7 @@ interface Item {
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class GridSortableListNextDemo {
+export class GridSortableListDemo {
   readonly items = signal<Item[]>([
     { id: 'cafe', label: 'Café' },
     { id: 'coast', label: 'Coast' },
@@ -71,7 +71,7 @@ export class GridSortableListNextDemo {
     item,
     position,
     count,
-  }: ScSortableListNextAnnouncement<Item>) =>
+  }: ScSortableListAnnouncement<Item>) =>
     ({
       lift: `Lifted ${item.label}, ${position} of ${count}.`,
       move: `${item.label}: ${position} of ${count}.`,

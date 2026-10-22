@@ -14,13 +14,13 @@ import {
   ScSortable,
   type ScSortableOrientation,
 } from '../../utilities/sortable';
-import { ScSortableListNextItem } from './sortable-list-next-item';
+import { ScSortableListItem } from './sortable-list-item';
 
 /** How a list is laid out: down, along, or as a grid. */
-export type ScSortableListNextOrientation = ScSortableOrientation;
+export type ScSortableListOrientation = ScSortableOrientation;
 
 /** A step of a keyboard move, for you to put into words. */
-export interface ScSortableListNextAnnouncement<T> {
+export interface ScSortableListAnnouncement<T> {
   readonly type: 'lift' | 'move' | 'drop' | 'cancel';
   readonly item: T;
   /** Its place, from 1. */
@@ -33,14 +33,14 @@ export interface ScSortableListNextAnnouncement<T> {
 const LIST = 'list';
 
 /**
- * A list you reorder: your items (`scSortableListNextItem`), its value your
+ * A list you reorder: your items (`scSortableListItem`), its value your
  * array — replaced on each move, never changed. Dragged by the pointer
  * (mouse, touch, pen), or lifted by the keyboard: Space, arrows, Space —
  * each step announced in your words. Down, along, or as a grid.
  */
 @Directive({
-  selector: '[scSortableListNext]',
-  exportAs: 'scSortableListNext',
+  selector: '[scSortableList]',
+  exportAs: 'scSortableList',
   host: {
     'data-slot': 'sortable-list',
     '[attr.data-orientation]': 'orientation()',
@@ -48,21 +48,21 @@ const LIST = 'list';
     '[class]': 'class()',
   },
 })
-export class ScSortableListNext<T = unknown> {
+export class ScSortableList<T = unknown> {
   readonly element = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
   readonly classInput = input<string>('', { alias: 'class' });
   /** Your items, in order. */
   readonly value = model<readonly T[]>([]);
   /** How it is laid out, and so which arrows move: ↑↓, ←→, or both. */
-  readonly orientation = input<ScSortableListNextOrientation>('vertical');
+  readonly orientation = input<ScSortableListOrientation>('vertical');
   /** What a keyboard move says, step by step: yours to write. */
   readonly announce =
-    input.required<(event: ScSortableListNextAnnouncement<T>) => string>();
+    input.required<(event: ScSortableListAnnouncement<T>) => string>();
   readonly disabled = input(false, { transform: booleanAttribute });
 
   readonly itemRefs = contentChildren(
-    forwardRef(() => ScSortableListNextItem),
+    forwardRef(() => ScSortableListItem),
     { descendants: true },
   );
 

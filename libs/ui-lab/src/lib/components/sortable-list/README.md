@@ -1,14 +1,14 @@
-# Sortable List Next
+# Sortable List
 
-The sortable list, rebuilt: your array, reordered — dragged by mouse, touch or pen, or lifted and moved by the keyboard, each step announced in your words; down, along, or as a grid.
+Your array, reordered — dragged by mouse, touch or pen, or lifted and moved by the keyboard, each step announced in your words; down, along, or as a grid.
 
 ## Architecture
 
 ```
-[scSortableListNext] ([(value)]: T[], orientation: 'vertical' | 'horizontal' | 'grid', announce, disabled)
+[scSortableList] ([(value)]: T[], orientation: 'vertical' | 'horizontal' | 'grid', announce, disabled)
 │  items() · move(item, index) · active() · dragging() · lifted()
-└── [scSortableListNextItem]="item"   — an item: dragged, or lifted (data-dragging, data-lifted)
-    └── [scSortableListNextHandle]    — optional: only it starts a drag
+└── [scSortableListItem]="item"   — an item: dragged, or lifted (data-dragging, data-lifted)
+    └── [scSortableListHandle]    — optional: only it starts a drag
 ```
 
 It shares its engine with the kanban board (`utilities/sortable`): a kanban is sortable lists, linked.
@@ -18,9 +18,9 @@ It shares its engine with the kanban board (`utilities/sortable`): a kanban is s
 ```html
 <p id="help" class="sr-only">Space lifts an item, the arrow keys move it, Space drops it, Escape puts it back.</p>
 
-<ul scSortableListNext #list="scSortableListNext" [(value)]="items" [announce]="announce" aria-label="Priorities">
+<ul scSortableList #list="scSortableList" [(value)]="items" [announce]="announce" aria-label="Priorities">
   @for (item of list.items(); track item.id) {
-  <li [scSortableListNextItem]="item" aria-describedby="help" class="px-3 py-2">{{ item.label }}</li>
+  <li [scSortableListItem]="item" aria-describedby="help" class="px-3 py-2">{{ item.label }}</li>
   }
 </ul>
 ```
@@ -28,7 +28,7 @@ It shares its engine with the kanban board (`utilities/sortable`): a kanban is s
 ```ts
 readonly items = signal<Item[]>([...]);
 
-readonly announce = ({ type, item, position, count }: ScSortableListNextAnnouncement<Item>) =>
+readonly announce = ({ type, item, position, count }: ScSortableListAnnouncement<Item>) =>
   ({
     lift: `Lifted ${item.label}, ${position} of ${count}.`,
     move: `${item.label}: ${position} of ${count}.`,

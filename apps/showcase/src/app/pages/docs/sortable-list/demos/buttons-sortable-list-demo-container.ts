@@ -1,29 +1,29 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { ButtonsSortableListNextDemo } from './buttons-sortable-list-next-demo';
+import { ButtonsSortableListDemo } from './buttons-sortable-list-demo';
 
 @Component({
-  selector: 'app-buttons-sortable-list-next-demo-container',
-  imports: [DemoContainer, ButtonsSortableListNextDemo],
+  selector: 'app-buttons-sortable-list-demo-container',
+  imports: [DemoContainer, ButtonsSortableListDemo],
   template: `
     <app-demo-container
       title="Move buttons"
       [code]="code"
-      demoUrl="/demos/sortable-list-next/buttons-sortable-list-next-demo"
+      demoUrl="/demos/sortable-list/buttons-sortable-list-demo"
     >
-      <app-buttons-sortable-list-next-demo />
+      <app-buttons-sortable-list-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ButtonsSortableListNextDemoContainer {
+export class ButtonsSortableListDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
 import {
-  ScSortableListNext,
-  type ScSortableListNextAnnouncement,
-  ScSortableListNextItem,
+  ScSortableList,
+  type ScSortableListAnnouncement,
+  ScSortableListItem,
 } from '@semantic-components/ui-lab';
 import { SiArrowDownIcon, SiArrowUpIcon } from '@semantic-icons/lucide-icons';
 
@@ -34,10 +34,10 @@ interface Item {
 
 /** move(item, index) — for Move up and Move down buttons, the simplest way for those who neither drag nor lift. */
 @Component({
-  selector: 'app-buttons-sortable-list-next-demo',
+  selector: 'app-buttons-sortable-list-demo',
   imports: [
-    ScSortableListNext,
-    ScSortableListNextItem,
+    ScSortableList,
+    ScSortableListItem,
     ScButton,
     SiArrowUpIcon,
     SiArrowDownIcon,
@@ -48,8 +48,8 @@ interface Item {
       it back.
     </p>
     <ol
-      scSortableListNext
-      #list="scSortableListNext"
+      scSortableList
+      #list="scSortableList"
       [(value)]="items"
       [announce]="announce"
       aria-label="Playlist"
@@ -57,7 +57,7 @@ interface Item {
     >
       @for (item of list.items(); track item.id; let i = $index, last = $last) {
         <li
-          [scSortableListNextItem]="item"
+          [scSortableListItem]="item"
           aria-describedby="buttons-sortable-help"
           class="flex items-center gap-2 py-1 ps-3 pe-1"
         >
@@ -92,7 +92,7 @@ interface Item {
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ButtonsSortableListNextDemo {
+export class ButtonsSortableListDemo {
   readonly items = signal<Item[]>([
     { id: 'p1', label: 'Opening theme' },
     { id: 'p2', label: 'Night drive' },
@@ -110,7 +110,7 @@ export class ButtonsSortableListNextDemo {
     item,
     position,
     count,
-  }: ScSortableListNextAnnouncement<Item>) =>
+  }: ScSortableListAnnouncement<Item>) =>
     ({
       lift: \`Lifted \${item.label}, \${position} of \${count}.\`,
       move: \`\${item.label}: \${position} of \${count}.\`,

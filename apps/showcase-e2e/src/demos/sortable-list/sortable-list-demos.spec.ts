@@ -2,7 +2,7 @@ import { type Locator, type Page, expect, test } from '@playwright/test';
 import { collectErrors, press } from '../../interaction';
 
 const demo = (name: string) =>
-  `/demos/sortable-list-next/${name}-sortable-list-next-demo`;
+  `/demos/sortable-list/${name}-sortable-list-demo`;
 const item = (page: Page, text: string) =>
   page.locator('[data-slot="sortable-list-item"]', { hasText: text });
 const order = (page: Page, name: string) => page.getByTestId(`${name}-order`);

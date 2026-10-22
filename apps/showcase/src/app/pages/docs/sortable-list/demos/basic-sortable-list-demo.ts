@@ -1,75 +1,73 @@
+import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import {
-  CdkDrag,
-  CdkDragDrop,
-  CdkDropList,
-  moveItemInArray,
-} from '@angular/cdk/drag-drop';
-import { JsonPipe } from '@angular/common';
-import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { SiGripVerticalIcon } from '@semantic-icons/lucide-icons';
+  ScSortableList,
+  type ScSortableListAnnouncement,
+  ScSortableListItem,
+} from '@semantic-components/ui-lab';
 
+interface Item {
+  readonly id: string;
+  readonly label: string;
+}
+
+/** Your array, reordered: drag an item with the mouse, a finger (hold, then move) or a pen — or lift it with Space, move it with ↑ ↓, drop it with Space; Escape puts it back. Each keyboard step is announced in your words. */
 @Component({
   selector: 'app-basic-sortable-list-demo',
-  imports: [CdkDropList, CdkDrag, JsonPipe, SiGripVerticalIcon],
+  imports: [ScSortableList, ScSortableListItem],
   template: `
-    <div class="space-y-4">
-      <div
-        cdkDropList
-        [cdkDropListData]="items()"
-        (cdkDropListDropped)="drop($event)"
-        class="max-w-md space-y-2"
-      >
-        @for (item of items(); track item) {
-          <div
-            cdkDrag
-            class="bg-background flex cursor-grab items-center gap-3 rounded-md border p-3 active:cursor-grabbing"
-          >
-            <svg
-              siGripVerticalIcon
-              class="text-muted-foreground size-4 shrink-0"
-            ></svg>
-            <span class="text-sm">{{ item }}</span>
-          </div>
-        }
-      </div>
-      <div class="bg-muted/50 max-w-md rounded-md border p-4">
-        <pre class="text-sm">{{ items() | json }}</pre>
-      </div>
-    </div>
+    <p id="basic-sortable-help" class="sr-only">
+      Space lifts an item, the arrow keys move it, Space drops it, Escape puts
+      it back.
+    </p>
+    <ul
+      scSortableList
+      #list="scSortableList"
+      [(value)]="items"
+      [announce]="announce"
+      aria-label="Priorities"
+      class="w-full max-w-sm"
+    >
+      @for (item of list.items(); track item.id) {
+        <li
+          [scSortableListItem]="item"
+          aria-describedby="basic-sortable-help"
+          class="px-3 py-2"
+        >
+          {{ item.label }}
+        </li>
+      }
+    </ul>
+    <p class="text-muted-foreground text-sm" data-testid="basic-order">
+      {{ joined() }}
+    </p>
   `,
-  styles: `
-    .cdk-drag-preview {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      border-radius: 0.375rem;
-      border: 1px solid var(--border);
-      padding: 0.75rem;
-      background: var(--background);
-      box-shadow:
-        0 10px 15px -3px rgb(0 0 0 / 0.1),
-        0 4px 6px -4px rgb(0 0 0 / 0.1);
-    }
-    .cdk-drag-placeholder {
-      border-radius: 0.375rem;
-      border: 1px dashed var(--border);
-      opacity: 0.5;
-    }
-    .cdk-drag-animating {
-      transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-    }
-  `,
-  host: { class: 'flex w-full justify-center' },
+  host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicSortableListDemo {
-  readonly items = signal(['Apple', 'Banana', 'Cherry', 'Date', 'Elderberry']);
-
-  drop(event: CdkDragDrop<string[]>): void {
-    this.items.update((items) => {
-      const updated = [...items];
-      moveItemInArray(updated, event.previousIndex, event.currentIndex);
-      return updated;
-    });
-  }
+  readonly items = signal<Item[]>([
+    { id: 'a', label: 'Customer support' },
+    { id: 'b', label: 'Performance' },
+    { id: 'c', label: 'Accessibility' },
+    { id: 'd', label: 'New features' },
+    { id: 'e', label: 'Documentation' },
+  ]);
+  readonly joined = computed(() =>
+    this.items()
+      .map((item) => item.label)
+      .join(', '),
+  );
+  /** What a keyboard move says, step by step. */
+  readonly announce = ({
+    type,
+    item,
+    position,
+    count,
+  }: ScSortableListAnnouncement<Item>) =>
+    ({
+      lift: `Lifted ${item.label}, ${position} of ${count}.`,
+      move: `${item.label}: ${position} of ${count}.`,
+      drop: `Dropped ${item.label} at ${position} of ${count}.`,
+      cancel: `${item.label} back at ${position} of ${count}.`,
+    })[type];
 }

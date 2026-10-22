@@ -7,14 +7,14 @@ import { cn } from '@semantic-components/ui';
  * Not a button: the item is the Tab stop, and the keyboard lifts it.
  */
 @Directive({
-  selector: '[scSortableListNextHandle]',
+  selector: '[scSortableListHandle]',
   host: {
     'data-slot': 'sortable-list-handle',
     'aria-hidden': 'true',
     '[class]': 'class()',
   },
 })
-export class ScSortableListNextHandle {
+export class ScSortableListHandle {
   readonly element = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
   readonly classInput = input<string>('', { alias: 'class' });

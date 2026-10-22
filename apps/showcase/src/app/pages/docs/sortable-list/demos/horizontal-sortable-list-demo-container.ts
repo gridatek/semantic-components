@@ -6,7 +6,11 @@ import { HorizontalSortableListDemo } from './horizontal-sortable-list-demo';
   selector: 'app-horizontal-sortable-list-demo-container',
   imports: [DemoContainer, HorizontalSortableListDemo],
   template: `
-    <app-demo-container title="Horizontal" [code]="code">
+    <app-demo-container
+      title="Horizontal"
+      [code]="code"
+      demoUrl="/demos/sortable-list/horizontal-sortable-list-demo"
+    >
       <app-horizontal-sortable-list-demo />
     </app-demo-container>
   `,
@@ -14,77 +18,77 @@ import { HorizontalSortableListDemo } from './horizontal-sortable-list-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class HorizontalSortableListDemoContainer {
-  readonly code = `import {
-  CdkDrag,
-  CdkDragDrop,
-  CdkDropList,
-  moveItemInArray,
-} from '@angular/cdk/drag-drop';
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
+import {
+  ScSortableList,
+  type ScSortableListAnnouncement,
+  ScSortableListItem,
+} from '@semantic-components/ui-lab';
 
+interface Item {
+  readonly id: string;
+  readonly label: string;
+}
+
+/** Along a row — tags, tabs, steps: ← → move a lifted item, in the reading direction (reversed right to left). */
 @Component({
   selector: 'app-horizontal-sortable-list-demo',
-  imports: [CdkDropList, CdkDrag],
+  imports: [ScSortableList, ScSortableListItem],
   template: \`
-    <div class="max-w-lg">
-      <div
-        cdkDropList
-        [cdkDropListData]="items()"
-        [cdkDropListOrientation]="'horizontal'"
-        (cdkDropListDropped)="drop($event)"
-        class="flex flex-wrap gap-3"
-      >
-        @for (item of items(); track item) {
-          <div
-            cdkDrag
-            class="bg-background flex size-16 cursor-move items-center justify-center rounded-md border text-sm font-medium"
-          >
-            {{ item }}
-          </div>
-        }
-      </div>
-      <p class="text-muted-foreground mt-2 text-sm">
-        Drag items horizontally to reorder.
-      </p>
-    </div>
+    <p id="horizontal-sortable-help" class="sr-only">
+      Space lifts an item, ← → move it, Space drops it, Escape puts it back.
+    </p>
+    <ul
+      scSortableList
+      #list="scSortableList"
+      orientation="horizontal"
+      [(value)]="items"
+      [announce]="announce"
+      aria-label="Steps"
+      class="w-full max-w-xl"
+    >
+      @for (item of list.items(); track item.id) {
+        <li
+          [scSortableListItem]="item"
+          aria-describedby="horizontal-sortable-help"
+          class="shrink-0 rounded-full px-3 py-1.5"
+        >
+          {{ item.label }}
+        </li>
+      }
+    </ul>
+    <p class="text-muted-foreground text-sm" data-testid="horizontal-order">
+      {{ joined() }}
+    </p>
   \`,
-  styles: \`
-    .cdk-drag-preview {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 4rem;
-      height: 4rem;
-      border-radius: 0.375rem;
-      border: 1px solid var(--border);
-      background: var(--background);
-      font-size: 0.875rem;
-      font-weight: 500;
-      box-shadow:
-        0 10px 15px -3px rgb(0 0 0 / 0.1),
-        0 4px 6px -4px rgb(0 0 0 / 0.1);
-    }
-    .cdk-drag-placeholder {
-      border-radius: 0.375rem;
-      border: 1px dashed var(--border);
-      opacity: 0.5;
-    }
-    .cdk-drag-animating {
-      transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-    }
-  \`,
-  host: { class: 'flex w-full justify-center' },
+  host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
 export class HorizontalSortableListDemo {
-  readonly items = signal(['A', 'B', 'C', 'D', 'E', 'F']);
-
-  drop(event: CdkDragDrop<string[]>): void {
-    this.items.update((items) => {
-      const updated = [...items];
-      moveItemInArray(updated, event.previousIndex, event.currentIndex);
-      return updated;
-    });
-  }
+  readonly items = signal<Item[]>([
+    { id: 's1', label: 'Plan' },
+    { id: 's2', label: 'Design' },
+    { id: 's3', label: 'Build' },
+    { id: 's4', label: 'Test' },
+    { id: 's5', label: 'Ship' },
+  ]);
+  readonly joined = computed(() =>
+    this.items()
+      .map((item) => item.label)
+      .join(', '),
+  );
+  /** What a keyboard move says, step by step. */
+  readonly announce = ({
+    type,
+    item,
+    position,
+    count,
+  }: ScSortableListAnnouncement<Item>) =>
+    ({
+      lift: \`Lifted \${item.label}, \${position} of \${count}.\`,
+      move: \`\${item.label}: \${position} of \${count}.\`,
+      drop: \`Dropped \${item.label} at \${position} of \${count}.\`,
+      cancel: \`\${item.label} back at \${position} of \${count}.\`,
+    })[type];
 }`;
 }

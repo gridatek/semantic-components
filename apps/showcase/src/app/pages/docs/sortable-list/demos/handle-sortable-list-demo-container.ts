@@ -6,7 +6,11 @@ import { HandleSortableListDemo } from './handle-sortable-list-demo';
   selector: 'app-handle-sortable-list-demo-container',
   imports: [DemoContainer, HandleSortableListDemo],
   template: `
-    <app-demo-container title="With Handle" [code]="code">
+    <app-demo-container
+      title="Handle"
+      [code]="code"
+      demoUrl="/demos/sortable-list/handle-sortable-list-demo"
+    >
       <app-handle-sortable-list-demo />
     </app-demo-container>
   `,
@@ -14,81 +18,106 @@ import { HandleSortableListDemo } from './handle-sortable-list-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class HandleSortableListDemoContainer {
-  readonly code = `import {
-  CdkDrag,
-  CdkDragDrop,
-  CdkDragHandle,
-  CdkDropList,
-  moveItemInArray,
-} from '@angular/cdk/drag-drop';
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
+import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui';
+import {
+  ScSortableList,
+  type ScSortableListAnnouncement,
+  ScSortableListHandle,
+  ScSortableListItem,
+} from '@semantic-components/ui-lab';
 import { SiGripVerticalIcon } from '@semantic-icons/lucide-icons';
 
+interface Item {
+  readonly id: string;
+  readonly label: string;
+}
+
+/** With a handle, only the grip drags — the rest of the item is free for a checkbox and its label. The keyboard still lifts the whole item. */
 @Component({
   selector: 'app-handle-sortable-list-demo',
-  imports: [CdkDropList, CdkDrag, CdkDragHandle, SiGripVerticalIcon],
+  imports: [
+    ScSortableList,
+    ScSortableListItem,
+    ScSortableListHandle,
+    ScCheckbox,
+    ScCheckboxField,
+    ScLabel,
+    SiGripVerticalIcon,
+  ],
   template: \`
-    <div class="max-w-md">
-      <div
-        cdkDropList
-        [cdkDropListData]="items()"
-        (cdkDropListDropped)="drop($event)"
-        class="space-y-2"
-      >
-        @for (item of items(); track item) {
-          <div
-            cdkDrag
-            class="bg-background flex items-center gap-3 rounded-md border p-3"
-          >
-            <svg
-              cdkDragHandle
-              siGripVerticalIcon
-              class="text-muted-foreground size-4 shrink-0 cursor-grab"
-            ></svg>
-            <span class="text-sm">{{ item }}</span>
+    <p id="handle-sortable-help" class="sr-only">
+      Space lifts an item, the arrow keys move it, Space drops it, Escape puts
+      it back.
+    </p>
+    <ul
+      scSortableList
+      #list="scSortableList"
+      [(value)]="items"
+      [announce]="announce"
+      aria-label="Tasks"
+      class="w-full max-w-sm"
+    >
+      @for (item of list.items(); track item.id) {
+        <li
+          [scSortableListItem]="item"
+          aria-describedby="handle-sortable-help"
+          class="flex items-center gap-3 px-3 py-2"
+        >
+          <span scSortableListHandle><svg siGripVerticalIcon></svg></span>
+          <div scCheckboxField>
+            <input
+              type="checkbox"
+              scCheckbox
+              [checked]="done().has(item.id)"
+              (checkedChange)="toggle(item.id)"
+            />
+            <label scLabel>{{ item.label }}</label>
           </div>
-        }
-      </div>
-    </div>
+        </li>
+      }
+    </ul>
+    <p class="text-muted-foreground text-sm" data-testid="handle-order">
+      {{ joined() }}
+    </p>
   \`,
-  styles: \`
-    .cdk-drag-preview {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      border-radius: 0.375rem;
-      border: 1px solid var(--border);
-      padding: 0.75rem;
-      background: var(--background);
-      box-shadow:
-        0 10px 15px -3px rgb(0 0 0 / 0.1),
-        0 4px 6px -4px rgb(0 0 0 / 0.1);
-    }
-    .cdk-drag-placeholder {
-      border-radius: 0.375rem;
-      border: 1px dashed var(--border);
-      opacity: 0.5;
-    }
-    .cdk-drag-animating {
-      transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-    }
-  \`,
-  host: { class: 'flex w-full justify-center' },
+  host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
 export class HandleSortableListDemo {
-  readonly items = signal([
-    'Drag me by handle',
-    'Reorder with grip',
-    'Move up or down',
+  readonly items = signal<Item[]>([
+    { id: 't1', label: 'Write the outline' },
+    { id: 't2', label: 'Draft the introduction' },
+    { id: 't3', label: 'Collect the figures' },
+    { id: 't4', label: 'Ask for a review' },
   ]);
+  readonly done = signal(new Set<string>(['t1']));
+  readonly joined = computed(() =>
+    this.items()
+      .map((item) => item.label)
+      .join(', '),
+  );
 
-  drop(event: CdkDragDrop<string[]>): void {
-    this.items.update((items) => {
-      const updated = [...items];
-      moveItemInArray(updated, event.previousIndex, event.currentIndex);
-      return updated;
+  toggle(id: string): void {
+    this.done.update((done) => {
+      const next = new Set(done);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
     });
   }
+  /** What a keyboard move says, step by step. */
+  readonly announce = ({
+    type,
+    item,
+    position,
+    count,
+  }: ScSortableListAnnouncement<Item>) =>
+    ({
+      lift: \`Lifted \${item.label}, \${position} of \${count}.\`,
+      move: \`\${item.label}: \${position} of \${count}.\`,
+      drop: \`Dropped \${item.label} at \${position} of \${count}.\`,
+      cancel: \`\${item.label} back at \${position} of \${count}.\`,
+    })[type];
 }`;
 }

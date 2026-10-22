@@ -6,7 +6,11 @@ import { DisabledSortableListDemo } from './disabled-sortable-list-demo';
   selector: 'app-disabled-sortable-list-demo-container',
   imports: [DemoContainer, DisabledSortableListDemo],
   template: `
-    <app-demo-container title="Disabled" [code]="code">
+    <app-demo-container
+      title="Disabled"
+      [code]="code"
+      demoUrl="/demos/sortable-list/disabled-sortable-list-demo"
+    >
       <app-disabled-sortable-list-demo />
     </app-demo-container>
   `,
@@ -14,35 +18,87 @@ import { DisabledSortableListDemo } from './disabled-sortable-list-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class DisabledSortableListDemoContainer {
-  readonly code = `import { CdkDrag, CdkDropList } from '@angular/cdk/drag-drop';
-import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
+import { ScSwitch, ScSwitchField } from '@semantic-components/ui';
+import {
+  ScSortableList,
+  type ScSortableListAnnouncement,
+  ScSortableListItem,
+} from '@semantic-components/ui-lab';
 
+interface Item {
+  readonly id: string;
+  readonly label: string;
+}
+
+/** disabled: shown in order, but not moved — the items are not Tab stops then. */
 @Component({
   selector: 'app-disabled-sortable-list-demo',
-  imports: [CdkDropList, CdkDrag],
+  imports: [
+    ScSortableList,
+    ScSortableListItem,
+    ScSwitch,
+    ScSwitchField,
+  ],
   template: \`
-    <div class="max-w-md">
-      <div
-        cdkDropList
-        [cdkDropListData]="items"
-        [cdkDropListDisabled]="true"
-        class="space-y-2"
-      >
-        @for (item of items; track item) {
-          <div
-            cdkDrag
-            class="bg-muted/50 flex items-center gap-3 rounded-md border p-3 opacity-60"
-          >
-            <span class="text-sm">{{ item }}</span>
-          </div>
-        }
-      </div>
-    </div>
+    <label scSwitchField>
+      <input type="checkbox" scSwitch [(checked)]="locked" />
+      Locked
+    </label>
+    <p id="disabled-sortable-help" class="sr-only">
+      Space lifts an item, the arrow keys move it, Space drops it, Escape puts
+      it back.
+    </p>
+    <ul
+      scSortableList
+      #list="scSortableList"
+      [(value)]="items"
+      [announce]="announce"
+      [disabled]="locked()"
+      aria-label="Ranking"
+      class="w-full max-w-sm"
+    >
+      @for (item of list.items(); track item.id) {
+        <li
+          [scSortableListItem]="item"
+          aria-describedby="disabled-sortable-help"
+          class="px-3 py-2"
+        >
+          {{ item.label }}
+        </li>
+      }
+    </ul>
+    <p class="text-muted-foreground text-sm" data-testid="disabled-order">
+      {{ joined() }}
+    </p>
   \`,
-  host: { class: 'flex w-full justify-center' },
+  host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
 export class DisabledSortableListDemo {
-  readonly items = ['Item 1', 'Item 2', 'Item 3'];
+  readonly locked = signal(true);
+  readonly items = signal<Item[]>([
+    { id: 'r1', label: 'First' },
+    { id: 'r2', label: 'Second' },
+    { id: 'r3', label: 'Third' },
+  ]);
+  readonly joined = computed(() =>
+    this.items()
+      .map((item) => item.label)
+      .join(', '),
+  );
+  /** What a keyboard move says, step by step. */
+  readonly announce = ({
+    type,
+    item,
+    position,
+    count,
+  }: ScSortableListAnnouncement<Item>) =>
+    ({
+      lift: \`Lifted \${item.label}, \${position} of \${count}.\`,
+      move: \`\${item.label}: \${position} of \${count}.\`,
+      drop: \`Dropped \${item.label} at \${position} of \${count}.\`,
+      cancel: \`\${item.label} back at \${position} of \${count}.\`,
+    })[type];
 }`;
 }

@@ -8,17 +8,17 @@ import {
   input,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { ScSortableListNext } from './sortable-list-next';
-import { ScSortableListNextHandle } from './sortable-list-next-handle';
+import { ScSortableList } from './sortable-list';
+import { ScSortableListHandle } from './sortable-list-handle';
 
 /**
- * An item — `[scSortableListNextItem]="item"`: a Tab stop, dragged by the
+ * An item — `[scSortableListItem]="item"`: a Tab stop, dragged by the
  * pointer (by its handle, if it has one; a press on its buttons and links is
  * theirs), lifted by Space or Enter. `data-dragging`, `data-lifted`.
  */
 @Directive({
-  selector: '[scSortableListNextItem]',
-  exportAs: 'scSortableListNextItem',
+  selector: '[scSortableListItem]',
+  exportAs: 'scSortableListItem',
   host: {
     'data-slot': 'sortable-list-item',
     '[attr.tabindex]': 'list.disabled() ? null : 0',
@@ -31,16 +31,16 @@ import { ScSortableListNextHandle } from './sortable-list-next-handle';
     '(dragstart)': '$event.preventDefault()',
   },
 })
-export class ScSortableListNextItem<T = unknown> {
-  protected readonly list = inject<ScSortableListNext<T>>(
-    forwardRef(() => ScSortableListNext),
+export class ScSortableListItem<T = unknown> {
+  protected readonly list = inject<ScSortableList<T>>(
+    forwardRef(() => ScSortableList),
   );
   readonly element = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
-  readonly item = input.required<T>({ alias: 'scSortableListNextItem' });
+  readonly item = input.required<T>({ alias: 'scSortableListItem' });
   readonly classInput = input<string>('', { alias: 'class' });
 
-  private readonly handle = contentChild(ScSortableListNextHandle, {
+  private readonly handle = contentChild(ScSortableListHandle, {
     descendants: true,
   });
 
