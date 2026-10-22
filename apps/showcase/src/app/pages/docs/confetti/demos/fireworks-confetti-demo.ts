@@ -4,7 +4,7 @@ import { ScConfettiTrigger } from '@semantic-components/ui-lab/confetti';
 
 /** confettiEffect="fireworks": bursts here and there, for three seconds — or the duration you give. */
 @Component({
-  selector: 'app-fireworks-confetti-next-demo',
+  selector: 'app-fireworks-confetti-demo',
   imports: [ScConfettiTrigger, ScButton],
   template: `
     <button
@@ -18,4 +18,4 @@ import { ScConfettiTrigger } from '@semantic-components/ui-lab/confetti';
   host: { class: 'flex min-h-72 w-full items-center justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class FireworksConfettiNextDemo {}
+export class FireworksConfettiDemo {}

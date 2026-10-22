@@ -4,7 +4,7 @@ import { ScConfettiTrigger } from '@semantic-components/ui-lab/confetti';
 
 /** Any CSS colours, circles and squares, bigger pieces, a wider spread. */
 @Component({
-  selector: 'app-custom-confetti-next-demo',
+  selector: 'app-custom-confetti-demo',
   imports: [ScConfettiTrigger, ScButton],
   template: `
     <button
@@ -24,4 +24,4 @@ import { ScConfettiTrigger } from '@semantic-components/ui-lab/confetti';
   host: { class: 'flex min-h-72 w-full items-center justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class CustomConfettiNextDemo {}
+export class CustomConfettiDemo {}

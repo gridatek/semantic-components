@@ -1,8 +1,7 @@
 import { type Page, expect, test } from '@playwright/test';
 import { collectErrors } from '../../interaction';
 
-const demo = (name: string) =>
-  `/demos/confetti-next/${name}-confetti-next-demo`;
+const demo = (name: string) => `/demos/confetti/${name}-confetti-demo`;
 const canvas = (page: Page) => page.locator('canvas[data-slot="confetti"]');
 
 interface Area {

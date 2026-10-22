@@ -2,14 +2,12 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
 import { ScConfettiTrigger } from '@semantic-components/ui-lab/confetti';
 
-/** confettiEffect="sides": two cannons, from the edges of the screen. */
+/** scConfetti on a button: a click bursts from it, in the theme’s colours. Decorative — hidden from screen readers, never in the way, and none for reduced motion. */
 @Component({
-  selector: 'app-sides-confetti-next-demo',
+  selector: 'app-burst-confetti-demo',
   imports: [ScConfettiTrigger, ScButton],
-  template: `
-    <button scButton scConfetti confettiEffect="sides">Launch</button>
-  `,
+  template: ` <button scButton scConfetti>Celebrate</button> `,
   host: { class: 'flex min-h-72 w-full items-center justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class SidesConfettiNextDemo {}
+export class BurstConfettiDemo {}

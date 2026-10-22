@@ -11,7 +11,7 @@ import { ScConfetti } from '@semantic-components/ui-lab/confetti';
 
 /** The service, from code: when the form is sent, sides() — and your words for screen readers. */
 @Component({
-  selector: 'app-form-confetti-next-demo',
+  selector: 'app-form-confetti-demo',
   imports: [
     FormField,
     FormRoot,
@@ -39,7 +39,7 @@ import { ScConfetti } from '@semantic-components/ui-lab/confetti';
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class FormConfettiNextDemo {
+export class FormConfettiDemo {
   private readonly confetti = inject(ScConfetti);
   readonly model = signal({ name: '' });
   readonly joined = signal('');

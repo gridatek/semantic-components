@@ -4,7 +4,7 @@ import { ScConfettiTrigger } from '@semantic-components/ui-lab/confetti';
 
 /** Each burst starts at the centre of what was clicked — wherever it is. */
 @Component({
-  selector: 'app-element-confetti-next-demo',
+  selector: 'app-element-confetti-demo',
   imports: [ScConfettiTrigger, ScButton],
   template: `
     <div class="flex w-full max-w-md justify-between">
@@ -16,4 +16,4 @@ import { ScConfettiTrigger } from '@semantic-components/ui-lab/confetti';
   host: { class: 'flex min-h-72 w-full items-center justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ElementConfettiNextDemo {}
+export class ElementConfettiDemo {}

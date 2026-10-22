@@ -234,15 +234,7 @@
   {
     "name": "Confetti",
     "path": "confetti",
-    "description": "Celebration animation effects using canvas-confetti.",
-    "status": "Experimental",
-    "library": "third-party",
-    "category": "Recipes"
-  },
-  {
-    "name": "Confetti Next",
-    "path": "confetti-next",
-    "description": "Confetti, rebuilt: a burst, two cannons or fireworks in the theme’s colours; canvas-confetti only where it is used.",
+    "description": "A burst, two cannons or fireworks in the theme’s colours; canvas-confetti only where it is used.",
     "status": "Experimental",
     "library": "ui-lab",
     "category": "Advanced"

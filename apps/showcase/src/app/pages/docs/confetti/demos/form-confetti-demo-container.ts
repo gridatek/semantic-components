@@ -1,23 +1,23 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { FormConfettiNextDemo } from './form-confetti-next-demo';
+import { FormConfettiDemo } from './form-confetti-demo';
 
 @Component({
-  selector: 'app-form-confetti-next-demo-container',
-  imports: [DemoContainer, FormConfettiNextDemo],
+  selector: 'app-form-confetti-demo-container',
+  imports: [DemoContainer, FormConfettiDemo],
   template: `
     <app-demo-container
       title="After a form"
       [code]="code"
-      demoUrl="/demos/confetti-next/form-confetti-next-demo"
+      demoUrl="/demos/confetti/form-confetti-demo"
     >
-      <app-form-confetti-next-demo />
+      <app-form-confetti-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class FormConfettiNextDemoContainer {
+export class FormConfettiDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, inject, signal } from '@angular/core';
 import { FormField, FormRoot, form, required } from '@angular/forms/signals';
 import {
@@ -31,7 +31,7 @@ import { ScConfetti } from '@semantic-components/ui-lab/confetti';
 
 /** The service, from code: when the form is sent, sides() — and your words for screen readers. */
 @Component({
-  selector: 'app-form-confetti-next-demo',
+  selector: 'app-form-confetti-demo',
   imports: [
     FormField,
     FormRoot,
@@ -59,7 +59,7 @@ import { ScConfetti } from '@semantic-components/ui-lab/confetti';
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class FormConfettiNextDemo {
+export class FormConfettiDemo {
   private readonly confetti = inject(ScConfetti);
   readonly model = signal({ name: '' });
   readonly joined = signal('');

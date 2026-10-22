@@ -881,85 +881,45 @@ export const demosRoutes: Route[] = [
     path: 'demos/confetti',
     children: [
       {
-        path: 'basic-confetti-demo',
+        path: 'burst-confetti-demo',
         loadComponent: () =>
-          import('../pages/docs/confetti/demos/basic-confetti-demo').then(
-            (m) => m.BasicConfettiDemo,
+          import('../pages/docs/confetti/demos/burst-confetti-demo').then(
+            (m) => m.BurstConfettiDemo,
           ),
       },
       {
-        path: 'from-element-confetti-demo',
+        path: 'element-confetti-demo',
         loadComponent: () =>
-          import('../pages/docs/confetti/demos/from-element-confetti-demo').then(
-            (m) => m.FromElementConfettiDemo,
+          import('../pages/docs/confetti/demos/element-confetti-demo').then(
+            (m) => m.ElementConfettiDemo,
           ),
       },
       {
-        path: 'custom-colors-confetti-demo',
+        path: 'sides-confetti-demo',
         loadComponent: () =>
-          import('../pages/docs/confetti/demos/custom-colors-confetti-demo').then(
-            (m) => m.CustomColorsConfettiDemo,
+          import('../pages/docs/confetti/demos/sides-confetti-demo').then(
+            (m) => m.SidesConfettiDemo,
           ),
       },
       {
-        path: 'multiple-bursts-confetti-demo',
+        path: 'fireworks-confetti-demo',
         loadComponent: () =>
-          import('../pages/docs/confetti/demos/multiple-bursts-confetti-demo').then(
-            (m) => m.MultipleBurstsConfettiDemo,
+          import('../pages/docs/confetti/demos/fireworks-confetti-demo').then(
+            (m) => m.FireworksConfettiDemo,
           ),
       },
       {
-        path: 'corner-bursts-confetti-demo',
+        path: 'custom-confetti-demo',
         loadComponent: () =>
-          import('../pages/docs/confetti/demos/corner-bursts-confetti-demo').then(
-            (m) => m.CornerBurstsConfettiDemo,
-          ),
-      },
-    ],
-  },
-  {
-    path: 'demos/confetti-next',
-    children: [
-      {
-        path: 'burst-confetti-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/confetti-next/demos/burst-confetti-next-demo').then(
-            (m) => m.BurstConfettiNextDemo,
+          import('../pages/docs/confetti/demos/custom-confetti-demo').then(
+            (m) => m.CustomConfettiDemo,
           ),
       },
       {
-        path: 'element-confetti-next-demo',
+        path: 'form-confetti-demo',
         loadComponent: () =>
-          import('../pages/docs/confetti-next/demos/element-confetti-next-demo').then(
-            (m) => m.ElementConfettiNextDemo,
-          ),
-      },
-      {
-        path: 'sides-confetti-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/confetti-next/demos/sides-confetti-next-demo').then(
-            (m) => m.SidesConfettiNextDemo,
-          ),
-      },
-      {
-        path: 'fireworks-confetti-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/confetti-next/demos/fireworks-confetti-next-demo').then(
-            (m) => m.FireworksConfettiNextDemo,
-          ),
-      },
-      {
-        path: 'custom-confetti-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/confetti-next/demos/custom-confetti-next-demo').then(
-            (m) => m.CustomConfettiNextDemo,
-          ),
-      },
-      {
-        path: 'form-confetti-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/confetti-next/demos/form-confetti-next-demo').then(
-            (m) => m.FormConfettiNextDemo,
+          import('../pages/docs/confetti/demos/form-confetti-demo').then(
+            (m) => m.FormConfettiDemo,
           ),
       },
     ],

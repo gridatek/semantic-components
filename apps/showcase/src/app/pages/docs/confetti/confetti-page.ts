@@ -2,20 +2,22 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { ScHeading } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { BasicConfettiDemoContainer } from './demos/basic-confetti-demo-container';
-import { CornerBurstsConfettiDemoContainer } from './demos/corner-bursts-confetti-demo-container';
-import { CustomColorsConfettiDemoContainer } from './demos/custom-colors-confetti-demo-container';
-import { FromElementConfettiDemoContainer } from './demos/from-element-confetti-demo-container';
-import { MultipleBurstsConfettiDemoContainer } from './demos/multiple-bursts-confetti-demo-container';
+import { BurstConfettiDemoContainer } from './demos/burst-confetti-demo-container';
+import { CustomConfettiDemoContainer } from './demos/custom-confetti-demo-container';
+import { ElementConfettiDemoContainer } from './demos/element-confetti-demo-container';
+import { FireworksConfettiDemoContainer } from './demos/fireworks-confetti-demo-container';
+import { FormConfettiDemoContainer } from './demos/form-confetti-demo-container';
+import { SidesConfettiDemoContainer } from './demos/sides-confetti-demo-container';
 
 @Component({
   selector: 'app-confetti-page',
   imports: [
-    BasicConfettiDemoContainer,
-    FromElementConfettiDemoContainer,
-    CustomColorsConfettiDemoContainer,
-    MultipleBurstsConfettiDemoContainer,
-    CornerBurstsConfettiDemoContainer,
+    BurstConfettiDemoContainer,
+    ElementConfettiDemoContainer,
+    SidesConfettiDemoContainer,
+    FireworksConfettiDemoContainer,
+    CustomConfettiDemoContainer,
+    FormConfettiDemoContainer,
     TocHeading,
     ComponentBadges,
     ScHeading,
@@ -25,18 +27,92 @@ import { MultipleBurstsConfettiDemoContainer } from './demos/multiple-bursts-con
       <div class="space-y-2">
         <h1 scHeading>Confetti</h1>
         <p class="text-muted-foreground">
-          Celebration animation effects powered by canvas-confetti.
+          A burst, two cannons or fireworks, in the theme’s colours — on a
+          click, or from code. Decorative only, and none for reduced motion.
         </p>
         <app-component-badges path="confetti" />
       </div>
 
-      <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
-        <app-basic-confetti-demo-container />
-        <app-from-element-confetti-demo-container />
-        <app-custom-colors-confetti-demo-container />
-        <app-multiple-bursts-confetti-demo-container />
-        <app-corner-bursts-confetti-demo-container />
+      <section class="space-y-4">
+        <h2 scHeading appToc>Installation</h2>
+        <p class="text-muted-foreground">
+          It draws with the
+          <a
+            href="https://github.com/catdad/canvas-confetti"
+            target="_blank"
+            rel="noopener"
+            class="text-foreground underline underline-offset-4"
+            >canvas-confetti</a
+          >
+          library — an optional peer of the lab: install it where you use
+          confetti.
+        </p>
+        <pre
+          class="bg-muted overflow-x-auto rounded-md p-4 text-sm"
+        ><code>npm install canvas-confetti</code></pre>
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Usage</h2>
+        <p class="text-muted-foreground">
+          It has its own entry point, and loads canvas-confetti on the first
+          burst only:
+        </p>
+        <pre
+          class="bg-muted overflow-x-auto rounded-md p-4 text-sm"
+        ><code>import {{ '{' }} ScConfetti, ScConfettiTrigger {{ '}' }} from '&#64;semantic-components/ui-lab/confetti';</code></pre>
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Burst</h2>
+        <p class="text-muted-foreground">
+          scConfetti on a button: a click bursts from it, in the theme’s
+          colours. Decorative — hidden from screen readers, never in the way,
+          and none for reduced motion.
+        </p>
+        <app-burst-confetti-demo-container />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>From the element</h2>
+        <p class="text-muted-foreground">
+          Each burst starts at the centre of what was clicked — wherever it is.
+        </p>
+        <app-element-confetti-demo-container />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Sides</h2>
+        <p class="text-muted-foreground">
+          confettiEffect="sides": two cannons, from the edges of the screen.
+        </p>
+        <app-sides-confetti-demo-container />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Fireworks</h2>
+        <p class="text-muted-foreground">
+          confettiEffect="fireworks": bursts here and there, for three seconds —
+          or the duration you give.
+        </p>
+        <app-fireworks-confetti-demo-container />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Colours and shapes</h2>
+        <p class="text-muted-foreground">
+          Any CSS colours, circles and squares, bigger pieces, a wider spread.
+        </p>
+        <app-custom-confetti-demo-container />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>After a form</h2>
+        <p class="text-muted-foreground">
+          The service, from code: when the form is sent, sides() — and your
+          words for screen readers.
+        </p>
+        <app-form-confetti-demo-container />
       </section>
     </div>
   `,
