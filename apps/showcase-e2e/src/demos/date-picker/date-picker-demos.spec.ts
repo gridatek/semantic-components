@@ -46,9 +46,11 @@ test('Typed: the locale’s order or ISO; unreadable text marked', async ({
 }) => {
   await page.goto(demo('typed'));
   const field = page.getByLabel('Start date');
-  await field.fill('10/14/2026');
-  await field.press('Enter');
+  await expect(field).toHaveValue('10/14/2026');
   await expect(picked(page)).toHaveText('Oct 14, 2026');
+  await field.fill('10/15/2026');
+  await field.press('Enter');
+  await expect(picked(page)).toHaveText('Oct 15, 2026');
   await field.fill('2026-11-02');
   await field.blur();
   await expect(picked(page)).toHaveText('Nov 2, 2026');
