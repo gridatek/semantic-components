@@ -4212,6 +4212,60 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/virtual-list-next',
+    children: [
+      {
+        path: 'basic-virtual-list-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/virtual-list-next/demos/basic-virtual-list-next-demo').then(
+            (m) => m.BasicVirtualListNextDemo,
+          ),
+      },
+      {
+        path: 'variable-virtual-list-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/virtual-list-next/demos/variable-virtual-list-next-demo').then(
+            (m) => m.VariableVirtualListNextDemo,
+          ),
+      },
+      {
+        path: 'horizontal-virtual-list-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/virtual-list-next/demos/horizontal-virtual-list-next-demo').then(
+            (m) => m.HorizontalVirtualListNextDemo,
+          ),
+      },
+      {
+        path: 'grid-virtual-list-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/virtual-list-next/demos/grid-virtual-list-next-demo').then(
+            (m) => m.GridVirtualListNextDemo,
+          ),
+      },
+      {
+        path: 'page-virtual-list-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/virtual-list-next/demos/page-virtual-list-next-demo').then(
+            (m) => m.PageVirtualListNextDemo,
+          ),
+      },
+      {
+        path: 'scroll-virtual-list-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/virtual-list-next/demos/scroll-virtual-list-next-demo').then(
+            (m) => m.ScrollVirtualListNextDemo,
+          ),
+      },
+      {
+        path: 'infinite-virtual-list-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/virtual-list-next/demos/infinite-virtual-list-next-demo').then(
+            (m) => m.InfiniteVirtualListNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/sidebar',
     children: [
       {

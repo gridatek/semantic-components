@@ -34,12 +34,7 @@ interface Item {
 /** disabled: shown in order, but not moved — the items are not Tab stops then. */
 @Component({
   selector: 'app-disabled-sortable-list-demo',
-  imports: [
-    ScSortableList,
-    ScSortableListItem,
-    ScSwitch,
-    ScSwitchField,
-  ],
+  imports: [ScSortableList, ScSortableListItem, ScSwitch, ScSwitchField],
   template: \`
     <label scSwitchField>
       <input type="checkbox" scSwitch [(checked)]="locked" />

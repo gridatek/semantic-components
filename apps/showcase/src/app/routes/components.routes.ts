@@ -692,6 +692,12 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/virtual-list/virtual-list-page'),
       },
       {
+        path: 'virtual-list-next',
+        title: 'Virtual List Next - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/virtual-list-next/virtual-list-next-page'),
+      },
+      {
         path: 'table',
         title: 'Table - Semantic Components',
         loadComponent: () => import('../pages/docs/table/table-page'),
