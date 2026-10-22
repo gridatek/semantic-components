@@ -3,7 +3,7 @@ import {
   ScCalendar,
   ScCalendarHeader,
   ScCalendarHeading,
-  ScCalendarNextButton,
+  ScCalendarNext,
   ScCalendarPrevious,
   ScDatePicker,
   ScDatePickerTrigger,
@@ -32,7 +32,7 @@ import {
     ScCalendarHeader,
     ScCalendarHeading,
     ScCalendarPrevious,
-    ScCalendarNextButton,
+    ScCalendarNext,
     ScField,
     ScFieldGroup,
     ScLabel,
@@ -72,7 +72,7 @@ import {
                     <button scCalendarPrevious>
                       <svg siChevronLeftIcon class="size-4"></svg>
                       <span class="sr-only">
-                        @switch (calDob.viewMode()) {
+                        @switch (calDob.view()) {
                           @case ('day') {
                             Go to previous month
                           }
@@ -89,7 +89,7 @@ import {
                     <button scCalendarNext>
                       <svg siChevronRightIcon class="size-4"></svg>
                       <span class="sr-only">
-                        @switch (calDob.viewMode()) {
+                        @switch (calDob.view()) {
                           @case ('day') {
                             Go to next month
                           }
@@ -139,7 +139,7 @@ import {
                     <button scCalendarPrevious>
                       <svg siChevronLeftIcon class="size-4"></svg>
                       <span class="sr-only">
-                        @switch (calAppt.viewMode()) {
+                        @switch (calAppt.view()) {
                           @case ('day') {
                             Go to previous month
                           }
@@ -156,7 +156,7 @@ import {
                     <button scCalendarNext>
                       <svg siChevronRightIcon class="size-4"></svg>
                       <span class="sr-only">
-                        @switch (calAppt.viewMode()) {
+                        @switch (calAppt.view()) {
                           @case ('day') {
                             Go to next month
                           }
@@ -182,7 +182,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class FormDatePickerDemo {
-  readonly dob = signal<Temporal.PlainDate | undefined>(undefined);
-  readonly appointment = signal<Temporal.PlainDate | undefined>(undefined);
+  readonly dob = signal<Temporal.PlainDate | null>(null);
+  readonly appointment = signal<Temporal.PlainDate | null>(null);
   readonly today = Temporal.Now.plainDateISO();
 }

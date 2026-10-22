@@ -138,15 +138,7 @@
   {
     "name": "Calendar",
     "path": "calendar",
-    "description": "A date picker calendar component.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Forms"
-  },
-  {
-    "name": "Calendar Next",
-    "path": "calendar-next",
-    "description": "The calendar, rebuilt: days, months and years in your language; one, several or a range; the keyboard across months; a form field.",
+    "description": "Days, months and years in your language; one, several or a range; the keyboard across months; a form field.",
     "status": "Experimental",
     "library": "ui",
     "category": "Forms"

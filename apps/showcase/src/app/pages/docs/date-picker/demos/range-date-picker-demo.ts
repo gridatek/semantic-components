@@ -3,11 +3,11 @@ import {
   ScCalendar,
   ScCalendarHeader,
   ScCalendarHeading,
-  ScCalendarNextButton,
+  ScCalendarNext,
   ScCalendarPrevious,
+  ScCalendarRange,
   ScDatePicker,
   ScDatePickerTrigger,
-  ScDateRange,
   ScPopover,
   ScPopoverPortal,
   ScPopoverProvider,
@@ -30,7 +30,7 @@ import {
     ScCalendarHeader,
     ScCalendarHeading,
     ScCalendarPrevious,
-    ScCalendarNextButton,
+    ScCalendarNext,
     SiCalendarIcon,
     SiChevronLeftIcon,
     SiChevronRightIcon,
@@ -64,7 +64,7 @@ import {
                   <button scCalendarPrevious>
                     <svg siChevronLeftIcon class="size-4"></svg>
                     <span class="sr-only">
-                      @switch (cal.viewMode()) {
+                      @switch (cal.view()) {
                         @case ('day') {
                           Go to previous month
                         }
@@ -81,7 +81,7 @@ import {
                   <button scCalendarNext>
                     <svg siChevronRightIcon class="size-4"></svg>
                     <span class="sr-only">
-                      @switch (cal.viewMode()) {
+                      @switch (cal.view()) {
                         @case ('day') {
                           Go to next month
                         }
@@ -137,7 +137,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class RangeDatePickerDemo {
-  readonly selectedRange = signal<ScDateRange>({
+  readonly selectedRange = signal<ScCalendarRange>({
     from: undefined,
     to: undefined,
   });

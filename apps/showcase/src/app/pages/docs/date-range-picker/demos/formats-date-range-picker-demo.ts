@@ -3,9 +3,9 @@ import {
   ScCalendar,
   ScCalendarHeader,
   ScCalendarHeading,
-  ScCalendarNextButton,
+  ScCalendarNext,
   ScCalendarPrevious,
-  ScDateRange,
+  ScCalendarRange,
   ScPopover,
   ScPopoverPortal,
   ScPopoverProvider,
@@ -38,7 +38,7 @@ import {
     ScCalendarHeader,
     ScCalendarHeading,
     ScCalendarPrevious,
-    ScCalendarNextButton,
+    ScCalendarNext,
     SiCalendarIcon,
     SiChevronLeftIcon,
     SiChevronRightIcon,
@@ -231,15 +231,15 @@ export class FormatsDateRangePickerDemo {
   private readonly today = Temporal.Now.plainDateISO();
   private readonly weekAgo = this.today.subtract({ days: 6 });
 
-  readonly shortRange = signal<ScDateRange>({
+  readonly shortRange = signal<ScCalendarRange>({
     from: this.weekAgo,
     to: this.today,
   });
-  readonly longRange = signal<ScDateRange>({
+  readonly longRange = signal<ScCalendarRange>({
     from: this.weekAgo,
     to: this.today,
   });
-  readonly isoRange = signal<ScDateRange>({
+  readonly isoRange = signal<ScCalendarRange>({
     from: this.weekAgo,
     to: this.today,
   });

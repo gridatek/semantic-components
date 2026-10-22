@@ -27,6 +27,6 @@ export class ScCalendarPrevious {
   );
 
   onClick(): void {
-    this.calendar.handlePrevious();
+    this.calendar.previous();
   }
 }

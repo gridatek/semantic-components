@@ -8,7 +8,7 @@ import { ScCalendar } from './calendar';
   host: {
     type: 'button',
     '[class]': 'class()',
-    '[attr.aria-expanded]': 'calendar.viewMode() !== "day"',
+    '[disabled]': 'calendar.view() === "year"',
     '(click)': 'onClick()',
   },
 })
@@ -27,6 +27,6 @@ export class ScCalendarHeading {
   );
 
   onClick(): void {
-    this.calendar.handleHeaderClick();
+    this.calendar.zoomOut();
   }
 }

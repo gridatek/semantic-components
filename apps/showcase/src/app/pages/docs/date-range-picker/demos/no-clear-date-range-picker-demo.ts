@@ -3,10 +3,10 @@ import {
   ScCalendar,
   ScCalendarHeader,
   ScCalendarHeading,
-  ScCalendarNextButton,
+  ScCalendarNext,
   ScCalendarPrevious,
+  ScCalendarRange,
   ScCalendarValue,
-  ScDateRange,
   ScPopover,
   ScPopoverPortal,
   ScPopoverProvider,
@@ -33,7 +33,7 @@ import {
     ScCalendarHeader,
     ScCalendarHeading,
     ScCalendarPrevious,
-    ScCalendarNextButton,
+    ScCalendarNext,
     SiCalendarIcon,
     SiChevronLeftIcon,
     SiChevronRightIcon,
@@ -71,7 +71,7 @@ import {
                     <button scCalendarPrevious>
                       <svg siChevronLeftIcon class="size-4"></svg>
                       <span class="sr-only">
-                        @switch (cal.viewMode()) {
+                        @switch (cal.view()) {
                           @case ('day') {
                             Go to previous month
                           }
@@ -88,7 +88,7 @@ import {
                     <button scCalendarNext>
                       <svg siChevronRightIcon class="size-4"></svg>
                       <span class="sr-only">
-                        @switch (cal.viewMode()) {
+                        @switch (cal.view()) {
                           @case ('day') {
                             Go to next month
                           }
@@ -114,11 +114,11 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class NoClearDateRangePickerDemo {
-  readonly range = signal<ScDateRange>({ from: undefined, to: undefined });
+  readonly range = signal<ScCalendarRange>({ from: undefined, to: undefined });
 
   onValueChange(value: ScCalendarValue, pop: ScPopoverProvider): void {
-    this.range.set(value as ScDateRange);
-    const range = value as ScDateRange;
+    this.range.set(value as ScCalendarRange);
+    const range = value as ScCalendarRange;
     if (range?.from && range?.to) {
       pop.open.set(false);
     }

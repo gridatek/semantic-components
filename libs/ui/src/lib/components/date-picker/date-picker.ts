@@ -8,7 +8,7 @@ import {
   model,
 } from '@angular/core';
 import { cn } from '../../utils';
-import { ScCalendarMode, ScCalendarValue, ScDateRange } from '../calendar';
+import { ScCalendarMode, ScCalendarRange, ScCalendarValue } from '../calendar';
 import { ScPopoverProvider } from '../popover';
 
 @Directive({
@@ -23,7 +23,7 @@ export class ScDatePicker {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly mode = input<ScCalendarMode>('single');
 
-  readonly value = model<ScCalendarValue>(undefined);
+  readonly value = model<ScCalendarValue>(null);
 
   private readonly popoverProvider = contentChild(ScPopoverProvider, {
     descendants: true,
@@ -36,19 +36,19 @@ export class ScDatePicker {
     const val = this.value();
 
     if (mode === 'single') {
-      const date = val as Temporal.PlainDate | undefined;
+      const date = val as Temporal.PlainDate | null;
       return date ? this.formatDate(date) : '';
     }
 
     if (mode === 'multiple') {
-      const dates = (val as Temporal.PlainDate[] | undefined) ?? [];
+      const dates = (val as readonly Temporal.PlainDate[] | null) ?? [];
       if (dates.length === 0) return '';
       if (dates.length === 1) return this.formatDate(dates[0]);
       return `${dates.length} dates selected`;
     }
 
     if (mode === 'range') {
-      const range = (val as ScDateRange | undefined) ?? {
+      const range = (val as ScCalendarRange | null) ?? {
         from: undefined,
         to: undefined,
       };
@@ -78,7 +78,7 @@ export class ScDatePicker {
     }
 
     if (mode === 'range') {
-      const range = newValue as ScDateRange | undefined;
+      const range = newValue as ScCalendarRange | null;
       if (range?.from && range?.to) {
         this.popoverProvider()?.open.set(false);
       }

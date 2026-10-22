@@ -3,7 +3,7 @@ import {
   ScCalendar,
   ScCalendarHeader,
   ScCalendarHeading,
-  ScCalendarNextButton,
+  ScCalendarNext,
   ScCalendarPrevious,
   ScDatePicker,
   ScDatePickerTrigger,
@@ -29,7 +29,7 @@ import {
     ScCalendarHeader,
     ScCalendarHeading,
     ScCalendarPrevious,
-    ScCalendarNextButton,
+    ScCalendarNext,
     SiCalendarIcon,
     SiChevronLeftIcon,
     SiChevronRightIcon,
@@ -57,7 +57,7 @@ import {
                   <button scCalendarPrevious>
                     <svg siChevronLeftIcon class="size-4"></svg>
                     <span class="sr-only">
-                      @switch (cal.viewMode()) {
+                      @switch (cal.view()) {
                         @case ('day') {
                           Go to previous month
                         }
@@ -74,7 +74,7 @@ import {
                   <button scCalendarNext>
                     <svg siChevronRightIcon class="size-4"></svg>
                     <span class="sr-only">
-                      @switch (cal.viewMode()) {
+                      @switch (cal.view()) {
                         @case ('day') {
                           Go to next month
                         }
@@ -132,9 +132,9 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicDatePickerDemo {
-  readonly selectedDate = signal<Temporal.PlainDate | undefined>(undefined);
+  readonly selectedDate = signal<Temporal.PlainDate | null>(null);
 
   clearSelection(): void {
-    this.selectedDate.set(undefined);
+    this.selectedDate.set(null);
   }
 }

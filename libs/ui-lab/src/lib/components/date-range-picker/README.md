@@ -86,10 +86,10 @@ presets = createScDateRangePresets({
 | `class`      | `string` | `''`      | Additional CSS classes |
 | `dateFormat` | `string` | `'short'` | Date display format    |
 
-| Signal/Output | Type          | Description                 |
-| ------------- | ------------- | --------------------------- |
-| `value`       | `ScDateRange` | Two-way model binding       |
-| `apply`       | `ScDateRange` | Emits when Apply is clicked |
+| Signal/Output | Type              | Description                 |
+| ------------- | ----------------- | --------------------------- |
+| `value`       | `ScCalendarRange` | Two-way model binding       |
+| `apply`       | `ScCalendarRange` | Emits when Apply is clicked |
 
 | Property        | Type                  | Description                     |
 | --------------- | --------------------- | ------------------------------- |
@@ -113,10 +113,10 @@ Exposes `overlayOrigin` for popover positioning. Host directive: `CdkOverlayOrig
 
 ### ScDateRangePickerPreset
 
-| Input   | Type          | Required | Description            |
-| ------- | ------------- | -------- | ---------------------- |
-| `value` | `ScDateRange` | Yes      | Preset range value     |
-| `class` | `string`      | No       | Additional CSS classes |
+| Input   | Type              | Required | Description            |
+| ------- | ----------------- | -------- | ---------------------- |
+| `value` | `ScCalendarRange` | Yes      | Preset range value     |
+| `class` | `string`          | No       | Additional CSS classes |
 
 Auto-highlights when active (matches current picker value).
 
@@ -144,4 +144,4 @@ The calendar header controls the first month; the second month automatically fol
 - Popover: `role="dialog"`, focus trap via `scFocusTrap` (the popover's)
 - Escape key closes the popover
 - Focus restored to trigger on close
-- Calendar: full keyboard navigation via Angular ARIA Grid
+- Calendar: full keyboard navigation (the calendar's)

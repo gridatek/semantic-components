@@ -7,7 +7,7 @@ import {
   ScCalendar,
   ScCalendarHeader,
   ScCalendarHeading,
-  ScCalendarNextButton,
+  ScCalendarNext,
   ScCalendarPrevious,
   ScCard,
   ScCardBody,
@@ -56,7 +56,7 @@ import {
     ScCalendar,
     ScCalendarHeader,
     ScCalendarHeading,
-    ScCalendarNextButton,
+    ScCalendarNext,
     ScCalendarPrevious,
     ScCard,
     ScCardBody,
@@ -1157,7 +1157,7 @@ export default class ShadcnPage {
   readonly basicDialogOpen = signal(false);
   readonly confirmDialogOpen = signal(false);
   readonly formDialogOpen = signal(false);
-  readonly selectedDate = signal<Temporal.PlainDate | undefined>(undefined);
+  readonly selectedDate = signal<Temporal.PlainDate | null>(null);
 
   readonly userGrowthData = [15, 22, 28, 35, 40, 48, 55, 60, 68, 75, 85, 100];
 

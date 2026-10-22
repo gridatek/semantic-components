@@ -122,12 +122,6 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/calendar/calendar-page'),
       },
       {
-        path: 'calendar-next',
-        title: 'Calendar Next - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/calendar-next/calendar-next-page'),
-      },
-      {
         path: 'card',
         title: 'Card - Semantic Components',
         loadComponent: () => import('../pages/docs/card/card-page'),

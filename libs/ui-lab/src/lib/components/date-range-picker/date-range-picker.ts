@@ -11,15 +11,15 @@ import {
   signal,
 } from '@angular/core';
 import {
+  ScCalendarRange,
   ScCalendarValue,
-  ScDateRange,
   ScPopoverProvider,
   cn,
 } from '@semantic-components/ui';
 
 export interface ScDateRangePreset {
   label: string;
-  value: ScDateRange;
+  value: ScCalendarRange;
 }
 
 @Directive({
@@ -34,8 +34,8 @@ export class ScDateRangePicker {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly dateFormat = input('short');
 
-  readonly value = model<ScDateRange>({ from: undefined, to: undefined });
-  readonly apply = output<ScDateRange>();
+  readonly value = model<ScCalendarRange>({ from: undefined, to: undefined });
+  readonly apply = output<ScCalendarRange>();
 
   private readonly popoverProvider = contentChild(ScPopoverProvider, {
     descendants: true,
@@ -43,7 +43,7 @@ export class ScDateRangePicker {
 
   protected readonly class = computed(() => cn('block', this.classInput()));
 
-  private readonly pendingValue = signal<ScDateRange>({
+  private readonly pendingValue = signal<ScCalendarRange>({
     from: undefined,
     to: undefined,
   });
@@ -87,7 +87,13 @@ export class ScDateRangePicker {
   }
 
   onValueChange(newValue: ScCalendarValue): void {
-    this.value.set(newValue as ScDateRange);
+    // Cleared in the calendar (null): no days.
+    this.value.set(
+      (newValue as ScCalendarRange | null) ?? {
+        from: undefined,
+        to: undefined,
+      },
+    );
   }
 
   onCancel(): void {

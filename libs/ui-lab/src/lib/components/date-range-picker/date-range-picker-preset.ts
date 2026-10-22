@@ -1,5 +1,5 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { ScDateRange, cn } from '@semantic-components/ui';
+import { ScCalendarRange, cn } from '@semantic-components/ui';
 import { ScDateRangePicker } from './date-range-picker';
 
 @Directive({
@@ -14,7 +14,7 @@ export class ScDateRangePickerPreset {
   private readonly picker = inject(ScDateRangePicker);
 
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly value = input.required<ScDateRange>();
+  readonly value = input.required<ScCalendarRange>();
 
   private readonly isActive = computed(() => {
     const current = this.picker.value();

@@ -427,17 +427,10 @@ export const demosRoutes: Route[] = [
     path: 'demos/calendar',
     children: [
       {
-        path: 'single-date-calendar-demo',
+        path: 'single-calendar-demo',
         loadComponent: () =>
-          import('../pages/docs/calendar/demos/single-date-calendar-demo').then(
-            (m) => m.SingleDateCalendarDemo,
-          ),
-      },
-      {
-        path: 'multiple-date-calendar-demo',
-        loadComponent: () =>
-          import('../pages/docs/calendar/demos/multiple-date-calendar-demo').then(
-            (m) => m.MultipleDateCalendarDemo,
+          import('../pages/docs/calendar/demos/single-calendar-demo').then(
+            (m) => m.SingleCalendarDemo,
           ),
       },
       {
@@ -448,99 +441,45 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'disabled-dates-calendar-demo',
+        path: 'multiple-calendar-demo',
         loadComponent: () =>
-          import('../pages/docs/calendar/demos/disabled-dates-calendar-demo').then(
-            (m) => m.DisabledDatesCalendarDemo,
+          import('../pages/docs/calendar/demos/multiple-calendar-demo').then(
+            (m) => m.MultipleCalendarDemo,
           ),
       },
       {
-        path: 'min-max-calendar-demo',
+        path: 'constraints-calendar-demo',
         loadComponent: () =>
-          import('../pages/docs/calendar/demos/min-max-calendar-demo').then(
-            (m) => m.MinMaxCalendarDemo,
+          import('../pages/docs/calendar/demos/constraints-calendar-demo').then(
+            (m) => m.ConstraintsCalendarDemo,
           ),
       },
       {
-        path: 'keep-outside-days-calendar-demo',
+        path: 'form-calendar-demo',
         loadComponent: () =>
-          import('../pages/docs/calendar/demos/keep-outside-days-calendar-demo').then(
-            (m) => m.KeepOutsideDaysCalendarDemo,
+          import('../pages/docs/calendar/demos/form-calendar-demo').then(
+            (m) => m.FormCalendarDemo,
           ),
       },
       {
-        path: 'hide-outside-days-calendar-demo',
+        path: 'custom-calendar-demo',
         loadComponent: () =>
-          import('../pages/docs/calendar/demos/hide-outside-days-calendar-demo').then(
-            (m) => m.HideOutsideDaysCalendarDemo,
+          import('../pages/docs/calendar/demos/custom-calendar-demo').then(
+            (m) => m.CustomCalendarDemo,
           ),
       },
       {
-        path: 'birthday-calendar-demo',
+        path: 'locale-calendar-demo',
         loadComponent: () =>
-          import('../pages/docs/calendar/demos/birthday-calendar-demo').then(
-            (m) => m.BirthdayCalendarDemo,
-          ),
-      },
-    ],
-  },
-  {
-    path: 'demos/calendar-next',
-    children: [
-      {
-        path: 'single-calendar-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/calendar-next/demos/single-calendar-next-demo').then(
-            (m) => m.SingleCalendarNextDemo,
+          import('../pages/docs/calendar/demos/locale-calendar-demo').then(
+            (m) => m.LocaleCalendarDemo,
           ),
       },
       {
-        path: 'range-calendar-next-demo',
+        path: 'outside-calendar-demo',
         loadComponent: () =>
-          import('../pages/docs/calendar-next/demos/range-calendar-next-demo').then(
-            (m) => m.RangeCalendarNextDemo,
-          ),
-      },
-      {
-        path: 'multiple-calendar-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/calendar-next/demos/multiple-calendar-next-demo').then(
-            (m) => m.MultipleCalendarNextDemo,
-          ),
-      },
-      {
-        path: 'constraints-calendar-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/calendar-next/demos/constraints-calendar-next-demo').then(
-            (m) => m.ConstraintsCalendarNextDemo,
-          ),
-      },
-      {
-        path: 'form-calendar-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/calendar-next/demos/form-calendar-next-demo').then(
-            (m) => m.FormCalendarNextDemo,
-          ),
-      },
-      {
-        path: 'custom-calendar-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/calendar-next/demos/custom-calendar-next-demo').then(
-            (m) => m.CustomCalendarNextDemo,
-          ),
-      },
-      {
-        path: 'locale-calendar-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/calendar-next/demos/locale-calendar-next-demo').then(
-            (m) => m.LocaleCalendarNextDemo,
-          ),
-      },
-      {
-        path: 'outside-calendar-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/calendar-next/demos/outside-calendar-next-demo').then(
-            (m) => m.OutsideCalendarNextDemo,
+          import('../pages/docs/calendar/demos/outside-calendar-demo').then(
+            (m) => m.OutsideCalendarDemo,
           ),
       },
     ],
