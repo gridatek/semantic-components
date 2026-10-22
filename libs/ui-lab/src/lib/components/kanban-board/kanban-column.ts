@@ -1,110 +1,42 @@
-import { Directive, computed, inject, input, signal } from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  computed,
+  forwardRef,
+  inject,
+  input,
+} from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { SC_KANBAN_BOARD } from './kanban-board';
-import type { ScKanbanCardData, ScKanbanColumnData } from './kanban-types';
+import { ScKanbanBoard } from './kanban-board';
 
+/**
+ * A column's cards — on your list (`ul`), named by you: where cards are
+ * dropped, across its whole width. `data-over` while a card is dragged over.
+ */
 @Directive({
   selector: '[scKanbanColumn]',
   exportAs: 'scKanbanColumn',
   host: {
+    'data-slot': 'kanban-column',
+    '[attr.data-over]': 'isOver() || null',
     '[class]': 'class()',
-    '(dragover)': 'onDragOver($event)',
-    '(dragleave)': 'onDragLeave($event)',
-    '(drop)': 'onDrop($event)',
   },
 })
 export class ScKanbanColumn {
-  readonly board = inject(SC_KANBAN_BOARD);
+  private readonly board = inject(forwardRef(() => ScKanbanBoard));
+  readonly element = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
+  /** Its id: a key of the board's value. */
+  readonly id = input.required<string>({ alias: 'scKanbanColumn' });
   readonly classInput = input<string>('', { alias: 'class' });
+
+  protected readonly isOver = computed(() => this.board.over() === this.id());
+
   protected readonly class = computed(() =>
     cn(
-      'flex flex-col bg-muted/30 border rounded-lg min-w-[280px] max-w-[320px] max-h-full',
+      'flex min-h-24 flex-col gap-2 overflow-y-auto rounded-lg p-1 transition-colors',
+      'data-over:bg-accent/60',
       this.classInput(),
     ),
   );
-
-  readonly column = input.required<ScKanbanColumnData>();
-
-  readonly columnCards = computed(() =>
-    this.board.getCardsForColumn(this.column().id),
-  );
-
-  readonly collapsed = signal(false);
-  readonly isDragOver = signal(false);
-  readonly dropIndex = signal<number | null>(null);
-
-  readonly isOverLimit = computed(() => {
-    const limit = this.column().limit;
-    return limit !== undefined && this.columnCards().length > limit;
-  });
-
-  toggleCollapse(): void {
-    const newValue = !this.collapsed();
-    this.collapsed.set(newValue);
-    this.board.collapseColumn(this.column().id, newValue);
-  }
-
-  onDragOver(event: DragEvent): void {
-    if (this.board.disabled()) return;
-
-    event.preventDefault();
-    event.dataTransfer!.dropEffect = 'move';
-    this.isDragOver.set(true);
-
-    const container = event.currentTarget as HTMLElement;
-    const cards = container.querySelectorAll('[data-slot="kanban-card"]');
-    const mouseY = event.clientY;
-
-    let newDropIndex = this.columnCards().length;
-
-    cards.forEach((card, index) => {
-      const rect = card.getBoundingClientRect();
-      const cardMiddle = rect.top + rect.height / 2;
-
-      if (mouseY < cardMiddle) {
-        newDropIndex = Math.min(newDropIndex, index);
-      }
-    });
-
-    this.dropIndex.set(newDropIndex);
-  }
-
-  onDragLeave(event: DragEvent): void {
-    const relatedTarget = event.relatedTarget as HTMLElement;
-    const container = event.currentTarget as HTMLElement;
-
-    if (!container.contains(relatedTarget)) {
-      this.isDragOver.set(false);
-      this.dropIndex.set(null);
-    }
-  }
-
-  onDrop(event: DragEvent): void {
-    event.preventDefault();
-    this.isDragOver.set(false);
-
-    const data = event.dataTransfer?.getData('application/json');
-    if (!data) return;
-
-    try {
-      const card = JSON.parse(data) as ScKanbanCardData;
-      const sourceColumnId = card.columnId;
-      const targetColumnId = this.column().id;
-      const sourceIndex = card.order;
-      const targetIndex = this.dropIndex() ?? this.columnCards().length;
-
-      this.board.moveCard({
-        card,
-        sourceColumnId,
-        targetColumnId,
-        sourceIndex,
-        targetIndex,
-      });
-    } catch {
-      // Invalid JSON, ignore
-    }
-
-    this.dropIndex.set(null);
-  }
 }

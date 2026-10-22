@@ -12,11 +12,11 @@ import {
   ScMenuTrigger,
 } from '@semantic-components/ui';
 import {
-  ScKanbanBoardNext,
-  type ScKanbanBoardNextAnnouncement,
-  type ScKanbanBoardNextValue,
-  ScKanbanCardNext,
-  ScKanbanColumnNext,
+  ScKanbanBoard,
+  type ScKanbanBoardAnnouncement,
+  type ScKanbanBoardValue,
+  ScKanbanCard,
+  ScKanbanColumn,
 } from '@semantic-components/ui-lab';
 import { SiEllipsisIcon } from '@semantic-icons/lucide-icons';
 
@@ -31,11 +31,11 @@ interface Task {
 
 /** A card is yours: labels, a priority in words and the theme’s colours, a due date, an avatar — and a “Move to…” menu, through move(), for those who neither drag nor lift. */
 @Component({
-  selector: 'app-rich-kanban-board-next-demo',
+  selector: 'app-rich-kanban-board-demo',
   imports: [
-    ScKanbanBoardNext,
-    ScKanbanColumnNext,
-    ScKanbanCardNext,
+    ScKanbanBoard,
+    ScKanbanColumn,
+    ScKanbanCard,
     ScAvatar,
     ScAvatarFallback,
     ScBadge,
@@ -54,8 +54,8 @@ interface Task {
       back.
     </p>
     <div
-      scKanbanBoardNext
-      #kanban="scKanbanBoardNext"
+      scKanbanBoard
+      #kanban="scKanbanBoard"
       [(value)]="board"
       [announce]="announce"
       class="w-full"
@@ -74,12 +74,12 @@ interface Task {
             }}</span>
           </h3>
           <ul
-            [scKanbanColumnNext]="column.id"
+            [scKanbanColumn]="column.id"
             [attr.aria-labelledby]="'rich-' + column.id"
           >
             @for (task of kanban.items(column.id); track task.id) {
               <li
-                [scKanbanCardNext]="task"
+                [scKanbanCard]="task"
                 aria-describedby="rich-kanban-help"
                 class="grid gap-2"
               >
@@ -151,7 +151,7 @@ interface Task {
   host: { class: 'flex w-full flex-col gap-4' },
   encapsulation: ViewEncapsulation.None,
 })
-export class RichKanbanBoardNextDemo {
+export class RichKanbanBoardDemo {
   readonly columns = [
     { id: 'todo', title: 'To do' },
     { id: 'doing', title: 'In progress' },
@@ -168,7 +168,7 @@ export class RichKanbanBoardNextDemo {
     medium: 'text-warning font-medium',
     low: 'text-muted-foreground',
   };
-  readonly board = signal<ScKanbanBoardNextValue<Task>>({
+  readonly board = signal<ScKanbanBoardValue<Task>>({
     todo: [
       {
         id: 'r1',
@@ -215,7 +215,7 @@ export class RichKanbanBoardNextDemo {
     column,
     position,
     count,
-  }: ScKanbanBoardNextAnnouncement<Task>) => {
+  }: ScKanbanBoardAnnouncement<Task>) => {
     const where = `${this.titles[column]}, ${position} of ${count}`;
     return {
       lift: `Lifted ${item.title}, in ${where}.`,

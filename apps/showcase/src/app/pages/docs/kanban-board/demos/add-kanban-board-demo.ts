@@ -1,11 +1,11 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScButton, ScInput } from '@semantic-components/ui';
 import {
-  ScKanbanBoardNext,
-  type ScKanbanBoardNextAnnouncement,
-  type ScKanbanBoardNextValue,
-  ScKanbanCardNext,
-  ScKanbanColumnNext,
+  ScKanbanBoard,
+  type ScKanbanBoardAnnouncement,
+  type ScKanbanBoardValue,
+  ScKanbanCard,
+  ScKanbanColumn,
 } from '@semantic-components/ui-lab';
 
 interface Task {
@@ -15,22 +15,16 @@ interface Task {
 
 /** Adding a card, and a work-in-progress limit, are yours: here a field under each column, and In progress said to be over three. */
 @Component({
-  selector: 'app-add-kanban-board-next-demo',
-  imports: [
-    ScKanbanBoardNext,
-    ScKanbanColumnNext,
-    ScKanbanCardNext,
-    ScButton,
-    ScInput,
-  ],
+  selector: 'app-add-kanban-board-demo',
+  imports: [ScKanbanBoard, ScKanbanColumn, ScKanbanCard, ScButton, ScInput],
   template: `
     <p id="add-kanban-help" class="sr-only">
       Space lifts a card, the arrow keys move it, Space drops it, Escape puts it
       back.
     </p>
     <div
-      scKanbanBoardNext
-      #kanban="scKanbanBoardNext"
+      scKanbanBoard
+      #kanban="scKanbanBoard"
       [(value)]="board"
       [announce]="announce"
       class="w-full"
@@ -60,11 +54,11 @@ interface Task {
             </p>
           }
           <ul
-            [scKanbanColumnNext]="column.id"
+            [scKanbanColumn]="column.id"
             [attr.aria-labelledby]="'add-' + column.id"
           >
             @for (task of kanban.items(column.id); track task.id) {
-              <li [scKanbanCardNext]="task" aria-describedby="add-kanban-help">
+              <li [scKanbanCard]="task" aria-describedby="add-kanban-help">
                 {{ task.title }}
               </li>
             }
@@ -91,7 +85,7 @@ interface Task {
   host: { class: 'flex w-full flex-col gap-4' },
   encapsulation: ViewEncapsulation.None,
 })
-export class AddKanbanBoardNextDemo {
+export class AddKanbanBoardDemo {
   readonly columns: { id: string; title: string; limit?: number }[] = [
     { id: 'todo', title: 'To do' },
     { id: 'doing', title: 'In progress', limit: 3 },
@@ -102,7 +96,7 @@ export class AddKanbanBoardNextDemo {
     doing: 'In progress',
     done: 'Done',
   };
-  readonly board = signal<ScKanbanBoardNextValue<Task>>({
+  readonly board = signal<ScKanbanBoardValue<Task>>({
     todo: [
       { id: 'a1', title: 'Draft the agenda' },
       { id: 'a2', title: 'Book the room' },
@@ -142,7 +136,7 @@ export class AddKanbanBoardNextDemo {
     column,
     position,
     count,
-  }: ScKanbanBoardNextAnnouncement<Task>) => {
+  }: ScKanbanBoardAnnouncement<Task>) => {
     const where = `${this.titles[column]}, ${position} of ${count}`;
     return {
       lift: `Lifted ${item.title}, in ${where}.`,

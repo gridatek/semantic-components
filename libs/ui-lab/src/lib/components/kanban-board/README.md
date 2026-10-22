@@ -1,259 +1,77 @@
 # Kanban Board
 
-Directive-based drag-and-drop task board. Directives provide behavior and styling — consumers own the templates.
+Your columns and cards, your items by column as its value — dragged by mouse, touch or pen, or lifted and moved by the keyboard, each step announced in your words.
 
-## Directives
+## Architecture
 
-- `ScKanbanBoard` — root directive (`[scKanbanBoard]`) managing columns and cards state
-- `ScKanbanColumn` — column directive (`[scKanbanColumn]`) with drag-and-drop zones
-- `ScKanbanCard` — card directive (`[scKanbanCard]`) with drag behavior and keyboard support
+```
+[scKanbanBoard] ([(value)]: Record<columnId, T[]>, announce, disabled)
+│  items(column) · move(item, column, index) · active() · dragging() · lifted()
+└── [scKanbanColumn]="columnId"   — a column's list: where cards drop (data-over)
+    └── [scKanbanCard]="item"     — a card: dragged, or lifted (data-dragging, data-lifted)
+```
 
 ## Usage
 
-### Basic Usage
-
 ```html
-<div scKanbanBoard [moveAnnouncement]="announceMove" aria-label="Board" #board="scKanbanBoard" [(columns)]="columns" [(cards)]="cards">
-  @for (column of board.sortedColumns(); track column.id) {
-  <div scKanbanColumn #col="scKanbanColumn" [column]="column">
-    <h3>{{ column.title }} ({{ col.columnCards().length }})</h3>
+<p id="kanban-help" class="sr-only">Space lifts a card, the arrow keys move it, Space drops it, Escape puts it back.</p>
 
-    <div role="list">
-      @for (card of col.columnCards(); track card.id) {
-      <div scKanbanCard [card]="card">
-        <h4>{{ card.title }}</h4>
-      </div>
+<div scKanbanBoard #kanban="scKanbanBoard" [(value)]="board" [announce]="announce">
+  @for (column of columns; track column.id) {
+  <div class="bg-muted/50 w-64 rounded-xl p-2">
+    <h3 [id]="column.id">{{ column.title }}</h3>
+    <ul [scKanbanColumn]="column.id" [attr.aria-labelledby]="column.id">
+      @for (task of kanban.items(column.id); track task.id) {
+      <li [scKanbanCard]="task" aria-describedby="kanban-help">{{ task.title }}</li>
       }
-    </div>
+    </ul>
   </div>
   }
 </div>
 ```
 
-### With Full Card Details
+```ts
+readonly board = signal<ScKanbanBoardValue<Task>>({ todo: [...], doing: [...], done: [] });
 
-```html
-<div scKanbanCard #c="scKanbanCard" [card]="card">
-  @if (card.labels?.length) {
-  <div class="flex gap-1">
-    @for (label of card.labels; track label.id) {
-    <span [style.color]="label.color">{{ label.text }}</span>
-    }
-  </div>
-  }
-
-  <h4>{{ card.title }}</h4>
-
-  @if (card.priority) {
-  <span [class]="c.priorityClass()">{{ c.priorityLabel() }}</span>
-  } @if (card.dueDate) {
-  <span [class]="c.dueDateClass()">{{ c.formatDate(card.dueDate) }}</span>
-  }
-</div>
+readonly announce = ({ type, item, column, position, count }: ScKanbanBoardAnnouncement<Task>) =>
+  ({
+    lift: `Lifted ${item.title}, in ${this.titles[column]}, ${position} of ${count}.`,
+    move: `${item.title}: ${this.titles[column]}, ${position} of ${count}.`,
+    drop: `Dropped ${item.title} in ${this.titles[column]}, ${position} of ${count}.`,
+    cancel: `${item.title} back in ${this.titles[column]}, ${position} of ${count}.`,
+  })[type];
 ```
 
-### Column Collapse
+## Value
 
-```html
-<div scKanbanColumn #col="scKanbanColumn" [column]="column">
-  <button (click)="col.toggleCollapse()" [attr.aria-expanded]="!col.collapsed()">Toggle</button>
+- Your items, by column id, in order — any type. A move replaces the value (new arrays), never changes your items.
+- Render each column from `items(column)`: while a card is moved, it is the moving arrangement; the value changes on the drop.
+- Stored flat (each item with a status)? Make the value with a `computed`, and write moves back from `(valueChange)`.
+- `move(item, column, index)` moves one directly — for a "Move to…" menu of yours.
 
-  @if (!col.collapsed()) {
-  <!-- cards -->
-  }
-</div>
-```
+## Pointer
 
-### Adding/Deleting Cards
+- Mouse and pen: a press that moves a few pixels drags. Touch: a press held a moment, then moved (a quick swipe scrolls).
+- The card follows the pointer; the others make room. It drops in the column across from the pointer — anywhere down it — at the place it is over. Near the board's or a column's edge, they scroll.
+- Escape cancels. A press on the card's buttons, links or fields is theirs, not a drag.
 
-```html
-<!-- Consumer manages add-card UI state -->
-<button (click)="board.addCard(column.id, 'New Card')">Add</button>
-<button (click)="board.deleteCard(column.id, card)">Delete</button>
-```
+## Keyboard
 
-### Adding Columns
-
-```html
-<button (click)="board.addColumn('New Column')">Add Column</button>
-```
-
-### Disabled Board
-
-```html
-<div scKanbanBoard [moveAnnouncement]="announceMove" aria-label="Board" [(columns)]="columns" [(cards)]="cards" [disabled]="true">
-  <!-- dragging is blocked -->
-</div>
-```
-
-## API Reference
-
-### ScKanbanBoard (`[scKanbanBoard]`)
-
-#### Inputs
-
-| Input              | Type                             | Default  | Description                                       |
-| ------------------ | -------------------------------- | -------- | ------------------------------------------------- |
-| `columns`          | `ScKanbanColumnData[]`           | `[]`     | Array of columns (two-way binding with `model()`) |
-| `cards`            | `ScKanbanCardData[]`             | `[]`     | Array of cards (two-way binding with `model()`)   |
-| `disabled`         | `boolean`                        | `false`  | Disable all drag and drop interactions            |
-| `aria-label`       | attribute                        | none     | Name of the board region — write it               |
-| `moveAnnouncement` | `(move: ScKanbanMove) => string` | required | What a keyboard move announces — write it         |
-| `aria-describedby` | `string \| null`                 | `null`   | Id of a hint for the keyboard moves               |
-| `class`            | `string`                         | `''`     | Additional CSS classes                            |
-
-#### Outputs
-
-| Output            | Type                                       | Description                                 |
-| ----------------- | ------------------------------------------ | ------------------------------------------- |
-| `cardMoved`       | `ScKanbanDragEvent`                        | Emitted when a card is moved                |
-| `cardAdded`       | `ScKanbanCardAddEvent`                     | Emitted when a card is added                |
-| `cardDeleted`     | `ScKanbanCardDeleteEvent`                  | Emitted when a card is deleted              |
-| `cardClick`       | `ScKanbanCardData`                         | Emitted when a card is clicked              |
-| `columnAdded`     | `string`                                   | Emitted when a column is added (title)      |
-| `columnCollapsed` | `{ columnId: string; collapsed: boolean }` | Emitted when a column is collapsed/expanded |
-
-#### Public API
-
-| Property/Method                       | Returns                | Description                    |
-| ------------------------------------- | ---------------------- | ------------------------------ |
-| `sortedColumns()`                     | `ScKanbanColumnData[]` | Columns sorted by order        |
-| `getCardsForColumn(columnId)`         | `ScKanbanCardData[]`   | Cards for a column, sorted     |
-| `moveCard(event)`                     | `void`                 | Move a card (called by column) |
-| `addCard(columnId, title)`            | `void`                 | Add a new card                 |
-| `deleteCard(columnId, card)`          | `void`                 | Delete a card                  |
-| `addColumn(title)`                    | `void`                 | Add a new column               |
-| `collapseColumn(columnId, collapsed)` | `void`                 | Collapse/expand a column       |
-
-Keyboard: `moveCardByKeyboard(card, 'left' | 'right' | 'up' | 'down')` moves a card, announces it and keeps focus on it (cards call it on Alt + arrow keys).
-
-### ScKanbanColumn (`[scKanbanColumn]`)
-
-#### Inputs
-
-| Input    | Type                 | Default | Description            |
-| -------- | -------------------- | ------- | ---------------------- |
-| `column` | `ScKanbanColumnData` | -       | **Required.** Column   |
-| `class`  | `string`             | `''`    | Additional CSS classes |
-
-#### Public API
-
-| Property/Method    | Returns              | Description                          |
-| ------------------ | -------------------- | ------------------------------------ |
-| `board`            | `ScKanbanBoard`      | Reference to parent board            |
-| `columnCards()`    | `ScKanbanCardData[]` | Cards in this column                 |
-| `collapsed()`      | `boolean`            | Whether column is collapsed          |
-| `isDragOver()`     | `boolean`            | Whether a card is being dragged over |
-| `dropIndex()`      | `number \| null`     | Current drop position index          |
-| `isOverLimit()`    | `boolean`            | Whether WIP limit is exceeded        |
-| `toggleCollapse()` | `void`               | Toggle collapsed state               |
-
-### ScKanbanCard (`[scKanbanCard]`)
-
-#### Inputs
-
-| Input   | Type               | Default | Description            |
-| ------- | ------------------ | ------- | ---------------------- |
-| `card`  | `ScKanbanCardData` | -       | **Required.** Card     |
-| `class` | `string`           | `''`    | Additional CSS classes |
-
-#### Outputs
-
-| Output      | Type               | Description                |
-| ----------- | ------------------ | -------------------------- |
-| `cardClick` | `ScKanbanCardData` | Emitted on Enter/Space key |
-
-#### Public API
-
-| Property/Method    | Returns         | Description                          |
-| ------------------ | --------------- | ------------------------------------ |
-| `board`            | `ScKanbanBoard` | Reference to parent board            |
-| `priorityClass()`  | `string`        | CSS class for priority display       |
-| `dueDateClass()`   | `string`        | CSS class for due date display       |
-| `priorityLabel()`  | `string`        | Priority as text ("Urgent", "High"…) |
-| `formatDate(date)` | `string`        | Format date as "Mon DD"              |
-
-## Type Definitions
-
-### KanbanColumn
-
-```typescript
-interface ScKanbanColumnData {
-  id: string;
-  title: string;
-  order: number;
-  color?: string;
-  limit?: number;
-  collapsed?: boolean;
-}
-```
-
-### KanbanCard
-
-```typescript
-interface ScKanbanCardData {
-  id: string;
-  title: string;
-  description?: string;
-  columnId: string;
-  order: number;
-  labels?: ScKanbanLabel[];
-  assignee?: ScKanbanAssignee;
-  dueDate?: Temporal.PlainDate;
-  priority?: 'low' | 'medium' | 'high' | 'urgent';
-  metadata?: Record<string, unknown>;
-}
-```
-
-### KanbanLabel
-
-```typescript
-interface ScKanbanLabel {
-  id: string;
-  text: string;
-  color: string;
-}
-```
-
-### KanbanAssignee
-
-```typescript
-interface ScKanbanAssignee {
-  id: string;
-  name: string;
-  avatar?: string;
-  initials?: string;
-}
-```
-
-### KanbanDragEvent
-
-```typescript
-interface ScKanbanDragEvent {
-  card: ScKanbanCardData;
-  sourceColumnId: string;
-  targetColumnId: string;
-  sourceIndex: number;
-  targetIndex: number;
-}
-```
-
-## Features
-
-- **Drag and Drop**: Native HTML5 drag and drop between columns
-- **Visual Feedback**: Drop zones highlight, insertion indicators shown
-- **Column Management**: Add columns, collapse/expand via `toggleCollapse()`
-- **Card Management**: Add/delete cards via board methods
-- **Priority & Due Dates**: Computed CSS classes via card directive
-- **WIP Limits**: `isOverLimit()` computed on column directive
-- **Keyboard Accessible**: Cards focusable, activated with Enter/Space
-- **Two-Way Binding**: `[(columns)]` and `[(cards)]` for state sync
-- **Consumer-Owned Templates**: Full control over rendering
+| Key          | Does                                                                       |
+| ------------ | -------------------------------------------------------------------------- |
+| Space, Enter | lifts the focused card; again, drops it                                    |
+| ← →          | lifted: to the column before, after — in reading order (right to left too) |
+| ↑ ↓          | lifted: one place up, down                                                 |
+| Escape       | lifted: back where it was                                                  |
+| Tab          | lifted: stays — drop or cancel first                                       |
 
 ## Accessibility
 
-- The board is a `region` named by its `aria-label` input (default "Kanban board"); give each board on a page its own name. `aria-describedby` can point at a hint explaining the keyboard moves.
-- Columns render their cards in a `role="list"`; each card is a focusable `listitem` named by its title.
-- **Keyboard moves** (alternative to drag and drop): focus a card and press **Alt + ←/→** to move it to the previous/next column, **Alt + ↑/↓** to move it within its column. The new position is announced with your `moveAnnouncement` — `({ card, column, position, count }) => `${card.title} moved to ${column.title}, position ${position} of ${count}`` — and focus stays on the card.
-- Enter / Space on a card emits `cardClick`; keys on controls inside a card (e.g. its delete button) are left to those controls.
-- Show priority as text with `priorityLabel()` ("Urgent", "High"…), not symbols. Reveal hover-only controls on focus too (`group-focus-within:opacity-100`).
+- Each card is a Tab stop; describe the keys once (`aria-describedby`).
+- `announce` puts each keyboard step into words — the library writes none: lift, move, drop, cancel, with the column, the place and the count.
+- Name each column's list (`aria-labelledby` its heading).
+- Offer `move()` in a menu too: some can neither drag nor lift.
+
+## Not here
+
+Animated shifting, dragging columns, dragging between boards, several cards at once, virtual scrolling.

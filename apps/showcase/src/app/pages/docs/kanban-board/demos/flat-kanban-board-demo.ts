@@ -1,10 +1,10 @@
 import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import {
-  ScKanbanBoardNext,
-  type ScKanbanBoardNextAnnouncement,
-  type ScKanbanBoardNextValue,
-  ScKanbanCardNext,
-  ScKanbanColumnNext,
+  ScKanbanBoard,
+  type ScKanbanBoardAnnouncement,
+  type ScKanbanBoardValue,
+  ScKanbanCard,
+  ScKanbanColumn,
 } from '@semantic-components/ui-lab';
 
 interface Task {
@@ -15,16 +15,16 @@ interface Task {
 
 /** Your data as it is stored — issues, each with a status: the board’s value made from it, and each move written back. */
 @Component({
-  selector: 'app-flat-kanban-board-next-demo',
-  imports: [ScKanbanBoardNext, ScKanbanColumnNext, ScKanbanCardNext],
+  selector: 'app-flat-kanban-board-demo',
+  imports: [ScKanbanBoard, ScKanbanColumn, ScKanbanCard],
   template: `
     <p id="flat-kanban-help" class="sr-only">
       Space lifts a card, the arrow keys move it, Space drops it, Escape puts it
       back.
     </p>
     <div
-      scKanbanBoardNext
-      #kanban="scKanbanBoardNext"
+      scKanbanBoard
+      #kanban="scKanbanBoard"
       [value]="byStatus()"
       (valueChange)="save($event)"
       [announce]="announce"
@@ -44,11 +44,11 @@ interface Task {
             }}</span>
           </h3>
           <ul
-            [scKanbanColumnNext]="column.id"
+            [scKanbanColumn]="column.id"
             [attr.aria-labelledby]="'flat-' + column.id"
           >
             @for (task of kanban.items(column.id); track task.id) {
-              <li [scKanbanCardNext]="task" aria-describedby="flat-kanban-help">
+              <li [scKanbanCard]="task" aria-describedby="flat-kanban-help">
                 <span class="text-muted-foreground font-mono text-xs">{{
                   task.id
                 }}</span>
@@ -67,7 +67,7 @@ interface Task {
   host: { class: 'flex w-full flex-col gap-4' },
   encapsulation: ViewEncapsulation.None,
 })
-export class FlatKanbanBoardNextDemo {
+export class FlatKanbanBoardDemo {
   readonly columns = [
     { id: 'todo', title: 'To do' },
     { id: 'doing', title: 'In progress' },
@@ -100,7 +100,7 @@ export class FlatKanbanBoardNextDemo {
   );
 
   /** A move, written back: each issue's status is its column. */
-  save(value: ScKanbanBoardNextValue<Task>): void {
+  save(value: ScKanbanBoardValue<Task>): void {
     this.issues.set(
       Object.entries(value).flatMap(([status, tasks]) =>
         tasks.map((task) =>
@@ -116,7 +116,7 @@ export class FlatKanbanBoardNextDemo {
     column,
     position,
     count,
-  }: ScKanbanBoardNextAnnouncement<Task>) => {
+  }: ScKanbanBoardAnnouncement<Task>) => {
     const where = `${this.titles[column]}, ${position} of ${count}`;
     return {
       lift: `Lifted ${item.title}, in ${where}.`,

@@ -1,8 +1,7 @@
 import { type Locator, type Page, expect, test } from '@playwright/test';
 import { collectErrors, press } from '../../interaction';
 
-const demo = (name: string) =>
-  `/demos/kanban-board-next/${name}-kanban-board-next-demo`;
+const demo = (name: string) => `/demos/kanban-board/${name}-kanban-board-demo`;
 const column = (page: Page, name: string) =>
   page.getByRole('list', { name: new RegExp(`^${name}`) });
 const card = (page: Page, title: string) =>

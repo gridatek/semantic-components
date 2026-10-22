@@ -13,7 +13,6 @@ export * from './image-annotator';
 export * from './image-cropper';
 export * from './infinite-scroll';
 export * from './kanban-board';
-export * from './kanban-board-next';
 export * from './language-switcher';
 export * from './lightbox';
 export * from './marker';

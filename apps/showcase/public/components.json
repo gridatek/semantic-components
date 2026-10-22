@@ -450,15 +450,7 @@
   {
     "name": "Kanban Board",
     "path": "kanban-board",
-    "description": "A drag-and-drop task board.",
-    "status": "Experimental",
-    "library": "ui-lab",
-    "category": "Advanced"
-  },
-  {
-    "name": "Kanban Board Next",
-    "path": "kanban-board-next",
-    "description": "The kanban board, rebuilt: your items by column, dragged by any pointer or moved by the keyboard, announced in your words.",
+    "description": "Your items by column, dragged by any pointer or moved by the keyboard, announced in your words.",
     "status": "Experimental",
     "library": "ui-lab",
     "category": "Advanced"
