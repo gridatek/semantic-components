@@ -485,6 +485,67 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/calendar-next',
+    children: [
+      {
+        path: 'single-calendar-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/calendar-next/demos/single-calendar-next-demo').then(
+            (m) => m.SingleCalendarNextDemo,
+          ),
+      },
+      {
+        path: 'range-calendar-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/calendar-next/demos/range-calendar-next-demo').then(
+            (m) => m.RangeCalendarNextDemo,
+          ),
+      },
+      {
+        path: 'multiple-calendar-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/calendar-next/demos/multiple-calendar-next-demo').then(
+            (m) => m.MultipleCalendarNextDemo,
+          ),
+      },
+      {
+        path: 'constraints-calendar-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/calendar-next/demos/constraints-calendar-next-demo').then(
+            (m) => m.ConstraintsCalendarNextDemo,
+          ),
+      },
+      {
+        path: 'form-calendar-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/calendar-next/demos/form-calendar-next-demo').then(
+            (m) => m.FormCalendarNextDemo,
+          ),
+      },
+      {
+        path: 'custom-calendar-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/calendar-next/demos/custom-calendar-next-demo').then(
+            (m) => m.CustomCalendarNextDemo,
+          ),
+      },
+      {
+        path: 'locale-calendar-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/calendar-next/demos/locale-calendar-next-demo').then(
+            (m) => m.LocaleCalendarNextDemo,
+          ),
+      },
+      {
+        path: 'outside-calendar-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/calendar-next/demos/outside-calendar-next-demo').then(
+            (m) => m.OutsideCalendarNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/card',
     children: [
       {

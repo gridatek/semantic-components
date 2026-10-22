@@ -144,6 +144,14 @@
     "category": "Forms"
   },
   {
+    "name": "Calendar Next",
+    "path": "calendar-next",
+    "description": "The calendar, rebuilt: days, months and years in your language; one, several or a range; the keyboard across months; a form field.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Forms"
+  },
+  {
     "name": "Card",
     "path": "card",
     "description": "A container for grouping related content.",

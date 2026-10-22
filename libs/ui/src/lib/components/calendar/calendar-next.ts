@@ -11,7 +11,7 @@ import { ScCalendar } from './calendar';
     '(click)': 'onClick()',
   },
 })
-export class ScCalendarNext {
+export class ScCalendarNextButton {
   private readonly calendar = inject(ScCalendar);
 
   readonly classInput = input<string>('', { alias: 'class' });

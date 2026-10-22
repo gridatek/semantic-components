@@ -23,7 +23,7 @@ import {
   ScCalendar,
   ScCalendarHeader,
   ScCalendarHeading,
-  ScCalendarNext,
+  ScCalendarNextButton,
   ScCalendarPrevious,
   ScDateRange,
 } from '@semantic-components/ui';
@@ -38,7 +38,7 @@ import {
     ScCalendar,
     ScCalendarHeader,
     ScCalendarHeading,
-    ScCalendarNext,
+    ScCalendarNextButton,
     ScCalendarPrevious,
     SiChevronLeftIcon,
     SiChevronRightIcon,

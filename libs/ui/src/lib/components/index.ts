@@ -10,6 +10,7 @@ export * from './breadcrumb';
 export * from './button';
 export * from './button-group';
 export * from './calendar';
+export * from './calendar-next';
 export * from './card';
 export * from './checkbox';
 export * from './collapsible';
