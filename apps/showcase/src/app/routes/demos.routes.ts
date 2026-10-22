@@ -2424,32 +2424,6 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/notification-center-next',
-    children: [
-      {
-        path: 'by-day-notification-center-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/notification-center-next/demos/by-day-notification-center-next-demo').then(
-            (m) => m.ByDayNotificationCenterNextDemo,
-          ),
-      },
-      {
-        path: 'inbox-notification-center-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/notification-center-next/demos/inbox-notification-center-next-demo').then(
-            (m) => m.InboxNotificationCenterNextDemo,
-          ),
-      },
-      {
-        path: 'empty-notification-center-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/notification-center-next/demos/empty-notification-center-next-demo').then(
-            (m) => m.EmptyNotificationCenterNextDemo,
-          ),
-      },
-    ],
-  },
-  {
     path: 'demos/backdrop',
     children: [
       {

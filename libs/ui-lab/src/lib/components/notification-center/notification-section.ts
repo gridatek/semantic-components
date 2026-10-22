@@ -19,7 +19,10 @@ export const SC_NOTIFICATION_SECTION =
 @Directive({
   selector: '[scNotificationSection]',
   providers: [
-    { provide: SC_NOTIFICATION_SECTION, useExisting: ScNotificationSection },
+    {
+      provide: SC_NOTIFICATION_SECTION,
+      useExisting: ScNotificationSection,
+    },
   ],
   host: {
     role: 'group',

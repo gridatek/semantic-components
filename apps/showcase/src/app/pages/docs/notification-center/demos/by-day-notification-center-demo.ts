@@ -6,6 +6,7 @@ import {
   ScNotificationCenterTitle,
   ScNotificationClearAll,
   ScNotificationContent,
+  ScNotificationDay,
   ScNotificationDescription,
   ScNotificationDismiss,
   ScNotificationEmpty,
@@ -37,15 +38,10 @@ interface Notice extends ScNotification {
   readonly description?: string;
 }
 
-interface Day {
-  readonly title: string;
-  readonly notices: readonly Notice[];
-}
-
 const hoursAgo = (hours: number) =>
   Temporal.Now.instant().subtract({ minutes: Math.round(hours * 60) });
 
-/** Notifications in sections by day, as most apps show them. */
+/** Notifications in sections by day, as most apps show them: days(), each titled by scNotificationDay. */
 @Component({
   selector: 'app-by-day-notification-center-demo',
   imports: [
@@ -54,6 +50,7 @@ const hoursAgo = (hours: number) =>
     ScNotificationCenterTitle,
     ScNotificationClearAll,
     ScNotificationContent,
+    ScNotificationDay,
     ScNotificationDescription,
     ScNotificationDismiss,
     ScNotificationEmpty,
@@ -112,11 +109,13 @@ const hoursAgo = (hours: number) =>
 
       @if (center.visible().length) {
         <div class="p-2">
-          @for (day of byDay(center.visible()); track day.title) {
+          @for (group of center.days(); track group.day.toString()) {
             <div scNotificationSection>
-              <h3 scNotificationSectionTitle>{{ day.title }}</h3>
+              <h3 scNotificationSectionTitle>
+                <time [scNotificationDay]="group.day"></time>
+              </h3>
               <ul scNotificationList>
-                @for (notice of day.notices; track notice.id) {
+                @for (notice of group.notifications; track notice.id) {
                   <li [scNotification]="notice">
                     <span scNotificationUnread>
                       <span class="sr-only">Unread</span>
@@ -211,28 +210,12 @@ export class ByDayNotificationCenterDemo {
       timestamp: hoursAgo(24 * 5),
       read: true,
     },
+    {
+      id: '6',
+      title: 'Welcome to the team',
+      type: 'info',
+      timestamp: hoursAgo(24 * 12),
+      read: true,
+    },
   ]);
-
-  /** The notifications in days: Today, Yesterday, Earlier (empty ones left out). */
-  byDay(notices: readonly Notice[]): Day[] {
-    const today = Temporal.Now.zonedDateTimeISO().startOfDay();
-    const yesterday = today.subtract({ days: 1 });
-    const since = (n: Notice, day: Temporal.ZonedDateTime) =>
-      Temporal.Instant.compare(n.timestamp, day.toInstant()) >= 0;
-    const days: Day[] = [
-      {
-        title: 'Today',
-        notices: notices.filter((n) => since(n, today)),
-      },
-      {
-        title: 'Yesterday',
-        notices: notices.filter((n) => since(n, yesterday) && !since(n, today)),
-      },
-      {
-        title: 'Earlier',
-        notices: notices.filter((n) => !since(n, yesterday)),
-      },
-    ];
-    return days.filter((day) => day.notices.length);
-  }
 }

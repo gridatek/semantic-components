@@ -15,7 +15,6 @@ import { SC_NOTIFICATION_CENTER } from './notification-center';
     '[class]': 'class()',
     type: 'button',
     'data-slot': 'notification-dismiss',
-    '[disabled]': 'disabled()',
     '(click)': 'center.dismiss(item.notification().id)',
   },
 })
@@ -33,8 +32,6 @@ export class ScNotificationDismiss {
 
   protected readonly center = inject(SC_NOTIFICATION_CENTER);
   protected readonly item = inject(SC_NOTIFICATION);
-
-  protected readonly disabled = computed(() => false);
 
   constructor() {
     ɵwarnIfUnnamed('scNotificationDismiss');

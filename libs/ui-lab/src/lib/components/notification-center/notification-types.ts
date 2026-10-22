@@ -16,3 +16,9 @@ export interface ScNotification {
 
 /** Which notifications are shown: all of them, or the unread ones. */
 export type ScNotificationFilterValue = 'all' | 'unread';
+
+/** A day of notifications (`days()`): the day, and those of it. */
+export interface ScNotificationDayGroup<T extends ScNotification> {
+  readonly day: Temporal.PlainDate;
+  readonly notifications: T[];
+}

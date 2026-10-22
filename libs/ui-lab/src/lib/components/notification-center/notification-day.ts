@@ -1,6 +1,6 @@
 import { Directive, LOCALE_ID, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { SC_NOTIFICATION_NEXT_CENTER } from './notification-next-center';
+import { SC_NOTIFICATION_CENTER } from './notification-center';
 
 /**
  * A day, as a section's title, in the app's language: "Today", "Yesterday",
@@ -8,7 +8,7 @@ import { SC_NOTIFICATION_NEXT_CENTER } from './notification-next-center';
  * one's). Follows midnight; the day itself is its `datetime`.
  */
 @Directive({
-  selector: 'time[scNotificationNextDay]',
+  selector: 'time[scNotificationDay]',
   host: {
     'data-slot': 'notification-day',
     '[attr.datetime]': 'day().toString()',
@@ -16,12 +16,12 @@ import { SC_NOTIFICATION_NEXT_CENTER } from './notification-next-center';
     '[class]': 'class()',
   },
 })
-export class ScNotificationNextDay {
-  private readonly center = inject(SC_NOTIFICATION_NEXT_CENTER);
+export class ScNotificationDay {
+  private readonly center = inject(SC_NOTIFICATION_CENTER);
   private readonly locale = inject(LOCALE_ID);
 
   readonly day = input.required<Temporal.PlainDate>({
-    alias: 'scNotificationNextDay',
+    alias: 'scNotificationDay',
   });
   readonly classInput = input<string>('', { alias: 'class' });
 

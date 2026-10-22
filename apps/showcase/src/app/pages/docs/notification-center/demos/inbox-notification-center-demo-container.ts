@@ -20,7 +20,6 @@ import { InboxNotificationCenterDemo } from './inbox-notification-center-demo';
 export class InboxNotificationCenterDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScBadge,
   ScButton,
   ScPopover,
   ScPopoverPortal,
@@ -34,6 +33,7 @@ import {
   ScNotificationCenterHeader,
   ScNotificationCenterTitle,
   ScNotificationContent,
+  ScNotificationCount,
   ScNotificationDescription,
   ScNotificationDismiss,
   ScNotificationEmpty,
@@ -74,7 +74,6 @@ const minutesAgo = (minutes: number) =>
 @Component({
   selector: 'app-inbox-notification-center-demo',
   imports: [
-    ScBadge,
     ScButton,
     ScPopover,
     ScPopoverPortal,
@@ -85,6 +84,7 @@ const minutesAgo = (minutes: number) =>
     ScNotificationCenterHeader,
     ScNotificationCenterTitle,
     ScNotificationContent,
+    ScNotificationCount,
     ScNotificationDescription,
     ScNotificationDismiss,
     ScNotificationEmpty,
@@ -112,7 +112,11 @@ const minutesAgo = (minutes: number) =>
       scNotificationCenter
       #center="scNotificationCenter"
       [(notifications)]="notifications"
+      class="flex-row items-center gap-2"
     >
+      <button scButton variant="ghost" size="sm" (click)="receive()">
+        Send a test notification
+      </button>
       <div scPopoverProvider align="end">
         <button
           scButton
@@ -120,22 +124,16 @@ const minutesAgo = (minutes: number) =>
           size="icon"
           scPopoverTrigger
           class="relative"
-          [attr.aria-label]="
-            center.unreadCount()
-              ? 'Notifications, ' + center.unreadCount() + ' unread'
-              : 'Notifications'
-          "
         >
           <svg siBellIcon></svg>
-          @if (center.unreadCount()) {
-            <span
-              scBadge
-              aria-hidden="true"
-              class="absolute -end-1.5 -top-1.5 h-4 min-w-4 px-1 tabular-nums"
-            >
-              {{ center.unreadCount() }}
-            </span>
-          }
+          <span scNotificationCount [max]="9"></span>
+          <span class="sr-only">
+            Notifications{{
+              center.unreadCount()
+                ? ', ' + center.unreadCount() + ' unread'
+                : ''
+            }}
+          </span>
         </button>
 
         <ng-template scPopoverPortal>
@@ -275,5 +273,22 @@ export class InboxNotificationCenterDemo {
       read: true,
     },
   ]);
+
+  private sent = 0;
+
+  /** A notification arrives: new, unread, at the top. */
+  receive(): void {
+    this.sent++;
+    this.notifications.update((list) => [
+      {
+        id: 'test-' + this.sent,
+        title: 'Test notification ' + this.sent,
+        type: 'message',
+        timestamp: Temporal.Now.instant(),
+        read: false,
+      },
+      ...list,
+    ]);
+  }
 }`;
 }

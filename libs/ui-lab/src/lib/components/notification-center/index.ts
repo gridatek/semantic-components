@@ -20,3 +20,5 @@ export * from './notification-actions';
 export * from './notification-mark-read';
 export * from './notification-dismiss';
 export * from './notification-empty';
+export * from './notification-day';
+export * from './notification-count';

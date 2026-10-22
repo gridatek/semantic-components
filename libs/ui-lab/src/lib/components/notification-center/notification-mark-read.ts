@@ -15,7 +15,6 @@ import { SC_NOTIFICATION_CENTER } from './notification-center';
     '[class]': 'class()',
     type: 'button',
     'data-slot': 'notification-mark-read',
-    '[disabled]': 'disabled()',
     '(click)':
       'center.markRead(item.notification().id, !item.notification().read)',
   },
@@ -34,8 +33,6 @@ export class ScNotificationMarkRead {
 
   protected readonly center = inject(SC_NOTIFICATION_CENTER);
   protected readonly item = inject(SC_NOTIFICATION);
-
-  protected readonly disabled = computed(() => false);
 
   constructor() {
     ɵwarnIfUnnamed('scNotificationMarkRead');

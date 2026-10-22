@@ -12,6 +12,7 @@ import {
 import { cn } from '@semantic-components/ui';
 import type {
   ScNotification,
+  ScNotificationDayGroup,
   ScNotificationFilterValue,
 } from './notification-types';
 
@@ -29,7 +30,10 @@ export const SC_NOTIFICATION_CENTER = new InjectionToken<
   selector: '[scNotificationCenter]',
   exportAs: 'scNotificationCenter',
   providers: [
-    { provide: SC_NOTIFICATION_CENTER, useExisting: ScNotificationCenter },
+    {
+      provide: SC_NOTIFICATION_CENTER,
+      useExisting: ScNotificationCenter,
+    },
   ],
   host: {
     'data-slot': 'notification-center',
@@ -56,6 +60,25 @@ export class ScNotificationCenter<T extends ScNotification = ScNotification> {
   readonly unreadCount = computed(
     () => this.notifications().filter((n) => !n.read).length,
   );
+
+  /**
+   * The shown notifications by day, in the user's time zone — the latest day
+   * first, each day's in their order. Title each with `scNotificationDay`.
+   */
+  readonly days = computed<ScNotificationDayGroup<T>[]>(() => {
+    const zone = Temporal.Now.timeZoneId();
+    const days = new Map<string, ScNotificationDayGroup<T>>();
+    for (const notification of this.visible()) {
+      const day = notification.timestamp.toZonedDateTimeISO(zone).toPlainDate();
+      const key = day.toString();
+      const found = days.get(key);
+      if (found) found.notifications.push(notification);
+      else days.set(key, { day, notifications: [notification] });
+    }
+    return [...days.values()].sort((a, b) =>
+      Temporal.PlainDate.compare(b.day, a.day),
+    );
+  });
 
   protected readonly class = computed(() =>
     cn('flex flex-col', this.classInput()),

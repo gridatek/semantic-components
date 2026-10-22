@@ -429,12 +429,6 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/notification-center/notification-center-page'),
       },
       {
-        path: 'notification-center-next',
-        title: 'Notification Center Next - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/notification-center-next/notification-center-next-page'),
-      },
-      {
         path: 'number-field',
         title: 'Number Field - Semantic Components',
         loadComponent: () =>

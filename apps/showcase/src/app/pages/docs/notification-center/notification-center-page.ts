@@ -31,10 +31,13 @@ import { InboxNotificationCenterDemoContainer } from './demos/inbox-notification
       <section class="space-y-4">
         <h2 scHeading appToc>Inbox</h2>
         <p class="text-muted-foreground">
-          A bell with the unread count, opening the notifications in a popover:
-          all or unread, mark all as read, and on each notification its action,
-          mark as read and dismiss. Times are written in the app's language and
-          kept up to date.
+          A bell with the unread count (<code
+            class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >scNotificationCount</code
+          >, 9+ beyond nine), opening the notifications in a popover: all or
+          unread, mark all as read, and on each notification its action, mark as
+          read and dismiss. Times are written in the app's language and kept up
+          to date.
         </p>
         <app-inbox-notification-center-demo-container />
       </section>
@@ -42,13 +45,14 @@ import { InboxNotificationCenterDemoContainer } from './demos/inbox-notification
       <section class="space-y-4">
         <h2 scHeading appToc>By day</h2>
         <p class="text-muted-foreground">
-          Sections, as most apps show them — Today, Yesterday, Earlier: split
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">visible()</code>
-          by the notifications' times, and name each
+          Sections by day, as most apps show them:
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">days()</code>
+          groups what is shown by the user's calendar day, and
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >scNotificationSection</code
+            >scNotificationDay</code
           >
-          by its title.
+          titles each in the app's language — today, yesterday, the weekday,
+          then the date.
         </p>
         <app-by-day-notification-center-demo-container />
       </section>

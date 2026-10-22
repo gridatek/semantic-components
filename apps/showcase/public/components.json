@@ -594,15 +594,7 @@
   {
     "name": "Notification Center",
     "path": "notification-center",
-    "description": "Notifications built from parts: an inbox, sections by day, read state and relative times.",
-    "status": "Experimental",
-    "library": "ui-lab",
-    "category": "Advanced"
-  },
-  {
-    "name": "Notification Center Next",
-    "path": "notification-center-next",
-    "description": "The notification center, rebuilt: theme colours, notifications by day titled in your language, an unread count for the bell.",
+    "description": "Notifications you put together from parts: by day, titled in your language, with an unread count for the bell.",
     "status": "Experimental",
     "library": "ui-lab",
     "category": "Advanced"
