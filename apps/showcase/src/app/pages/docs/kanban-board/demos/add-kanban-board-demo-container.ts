@@ -36,13 +36,7 @@ interface Task {
 /** Adding a card, and a work-in-progress limit, are yours: here a field under each column, and In progress said to be over three. */
 @Component({
   selector: 'app-add-kanban-board-demo',
-  imports: [
-    ScKanbanBoard,
-    ScKanbanColumn,
-    ScKanbanCard,
-    ScButton,
-    ScInput,
-  ],
+  imports: [ScKanbanBoard, ScKanbanColumn, ScKanbanCard, ScButton, ScInput],
   template: \`
     <p id="add-kanban-help" class="sr-only">
       Space lifts a card, the arrow keys move it, Space drops it, Escape puts it

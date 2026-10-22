@@ -408,6 +408,14 @@
     "category": "Advanced"
   },
   {
+    "name": "Infinite Scroll Next",
+    "path": "infinite-scroll-next",
+    "description": "The infinite scroll, rebuilt: more near the end or the start, with whatever scrolls; a Load more button and a status.",
+    "status": "Experimental",
+    "library": "ui-lab",
+    "category": "Advanced"
+  },
+  {
     "name": "Input",
     "path": "input",
     "description": "A text input field for user data entry.",

@@ -66,10 +66,7 @@ interface Task {
             [attr.aria-labelledby]="'basic-' + column.id"
           >
             @for (task of kanban.items(column.id); track task.id) {
-              <li
-                [scKanbanCard]="task"
-                aria-describedby="basic-kanban-help"
-              >
+              <li [scKanbanCard]="task" aria-describedby="basic-kanban-help">
                 {{ task.title }}
               </li>
             }

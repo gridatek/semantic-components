@@ -291,6 +291,12 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/infinite-scroll/infinite-scroll-page'),
       },
       {
+        path: 'infinite-scroll-next',
+        title: 'Infinite Scroll Next - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/infinite-scroll-next/infinite-scroll-next-page'),
+      },
+      {
         path: 'item',
         title: 'Item - Semantic Components',
         loadComponent: () => import('../pages/docs/item/item-page'),
