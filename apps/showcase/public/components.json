@@ -312,6 +312,14 @@
     "category": "Editor"
   },
   {
+    "name": "Diff Viewer Next",
+    "path": "diff-viewer-next",
+    "description": "The diff viewer, rebuilt: two texts compared, split or unified, highlighted.",
+    "status": "Experimental",
+    "library": "code",
+    "category": "Editor"
+  },
+  {
     "name": "Dock",
     "path": "dock",
     "description": "Your links and buttons, magnified by distance to the pointer and on focus; labels, counts, dots.",

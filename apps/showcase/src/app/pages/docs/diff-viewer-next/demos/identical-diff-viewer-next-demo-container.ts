@@ -1,0 +1,51 @@
+import { Component, ViewEncapsulation } from '@angular/core';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { IdenticalDiffViewerNextDemo } from './identical-diff-viewer-next-demo';
+
+@Component({
+  selector: 'app-identical-diff-viewer-next-demo-container',
+  imports: [DemoContainer, IdenticalDiffViewerNextDemo],
+  template: `
+    <app-demo-container
+      title="Identical"
+      [code]="code"
+      demoUrl="/demos/diff-viewer-next/identical-diff-viewer-next-demo"
+    >
+      <app-identical-diff-viewer-next-demo />
+    </app-demo-container>
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class IdenticalDiffViewerNextDemoContainer {
+  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+import {
+  ScCodeBlock,
+  ScCodeBlockFooter,
+  ScDiffViewerNext,
+} from '@semantic-components/code';
+
+/** identical(): nothing changed — show your own words. */
+@Component({
+  selector: 'app-identical-diff-viewer-next-demo',
+  imports: [ScCodeBlock, ScDiffViewerNext, ScCodeBlockFooter],
+  template: \`
+    <div scCodeBlock>
+      <div
+        scDiffViewerNext
+        #diff="scDiffViewerNext"
+        [oldText]="text"
+        [newText]="text"
+      ></div>
+      @if (diff.identical()) {
+        <div scCodeBlockFooter>No differences.</div>
+      }
+    </div>
+  \`,
+  host: { class: 'block w-full max-w-3xl' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class IdenticalDiffViewerNextDemo {
+  readonly text = \`ng add @semantic-components/ui\`;
+}`;
+}

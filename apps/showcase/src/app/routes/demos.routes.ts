@@ -1297,6 +1297,46 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/diff-viewer-next',
+    children: [
+      {
+        path: 'split-diff-viewer-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/diff-viewer-next/demos/split-diff-viewer-next-demo').then(
+            (m) => m.SplitDiffViewerNextDemo,
+          ),
+      },
+      {
+        path: 'unified-diff-viewer-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/diff-viewer-next/demos/unified-diff-viewer-next-demo').then(
+            (m) => m.UnifiedDiffViewerNextDemo,
+          ),
+      },
+      {
+        path: 'folded-diff-viewer-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/diff-viewer-next/demos/folded-diff-viewer-next-demo').then(
+            (m) => m.FoldedDiffViewerNextDemo,
+          ),
+      },
+      {
+        path: 'whitespace-diff-viewer-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/diff-viewer-next/demos/whitespace-diff-viewer-next-demo').then(
+            (m) => m.WhitespaceDiffViewerNextDemo,
+          ),
+      },
+      {
+        path: 'identical-diff-viewer-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/diff-viewer-next/demos/identical-diff-viewer-next-demo').then(
+            (m) => m.IdenticalDiffViewerNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/dock',
     children: [
       {
