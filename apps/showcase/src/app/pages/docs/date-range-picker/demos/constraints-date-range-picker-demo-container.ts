@@ -1,4 +1,24 @@
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { ConstraintsDateRangePickerDemo } from './constraints-date-range-picker-demo';
+
+@Component({
+  selector: 'app-constraints-date-range-picker-demo-container',
+  imports: [DemoContainer, ConstraintsDateRangePickerDemo],
+  template: `
+    <app-demo-container
+      title="Constraints"
+      [code]="code"
+      demoUrl="/demos/date-range-picker/constraints-date-range-picker-demo"
+    >
+      <app-constraints-date-range-picker-demo />
+    </app-demo-container>
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class ConstraintsDateRangePickerDemoContainer {
+  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCalendar,
   ScCalendarHeader,
@@ -18,9 +38,9 @@ import {
   SiChevronRightIcon,
 } from '@semantic-icons/lucide-icons';
 
-/** mode="range" on the date picker, two months: written as one span ("Oct 12 – 18, 2026"); it closes once both ends are picked. */
+/** minDate and maxDate on the picker and its calendar: from today, up to 90 days ahead. */
 @Component({
-  selector: 'app-basic-date-range-picker-next-demo',
+  selector: 'app-constraints-date-range-picker-demo',
   imports: [
     ScDatePicker,
     ScDatePickerTrigger,
@@ -36,11 +56,13 @@ import {
     SiChevronLeftIcon,
     SiChevronRightIcon,
   ],
-  template: `
+  template: \`
     <div
       scDatePicker
       #dp="scDatePicker"
       mode="range"
+      [minDate]="today"
+      [maxDate]="latest"
       [(value)]="range"
       class="w-fit"
     >
@@ -60,6 +82,8 @@ import {
               [numberOfMonths]="2"
               [value]="dp.draft()"
               (valueChange)="dp.pick($event)"
+              [minDate]="today"
+              [maxDate]="latest"
             >
               <div scCalendarHeader>
                 <button scCalendarPrevious>
@@ -80,10 +104,13 @@ import {
     <p class="text-muted-foreground text-sm" data-testid="picked">
       {{ dp.text() || 'Nothing picked.' }}
     </p>
-  `,
+  \`,
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class BasicDateRangePickerNextDemo {
+export class ConstraintsDateRangePickerDemo {
   readonly range = signal<ScCalendarValue>(null);
+  readonly today = Temporal.Now.plainDateISO();
+  readonly latest = this.today.add({ days: 90 });
+}`;
 }

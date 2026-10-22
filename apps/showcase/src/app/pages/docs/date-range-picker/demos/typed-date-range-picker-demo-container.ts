@@ -1,23 +1,23 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { TypedDateRangePickerNextDemo } from './typed-date-range-picker-next-demo';
+import { TypedDateRangePickerDemo } from './typed-date-range-picker-demo';
 
 @Component({
-  selector: 'app-typed-date-range-picker-next-demo-container',
-  imports: [DemoContainer, TypedDateRangePickerNextDemo],
+  selector: 'app-typed-date-range-picker-demo-container',
+  imports: [DemoContainer, TypedDateRangePickerDemo],
   template: `
     <app-demo-container
       title="Typed"
       [code]="code"
-      demoUrl="/demos/date-range-picker-next/typed-date-range-picker-next-demo"
+      demoUrl="/demos/date-range-picker/typed-date-range-picker-demo"
     >
-      <app-typed-date-range-picker-next-demo />
+      <app-typed-date-range-picker-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class TypedDateRangePickerNextDemoContainer {
+export class TypedDateRangePickerDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCalendar,
@@ -44,7 +44,7 @@ import {
 
 /** Each end typed — part="start" and part="end" in one input group: the locale’s numeric order or ISO; an end before the start is marked. The button in the field opens the calendar. */
 @Component({
-  selector: 'app-typed-date-range-picker-next-demo',
+  selector: 'app-typed-date-range-picker-demo',
   imports: [
     ScDatePicker,
     ScDatePickerTrigger,
@@ -126,7 +126,7 @@ import {
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class TypedDateRangePickerNextDemo {
+export class TypedDateRangePickerDemo {
   readonly range = signal<ScCalendarValue>({
     from: Temporal.PlainDate.from('2026-10-14'),
     to: Temporal.PlainDate.from('2026-10-18'),

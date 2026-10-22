@@ -282,15 +282,7 @@
   {
     "name": "Date Range Picker",
     "path": "date-range-picker",
-    "description": "Select a range of dates with a calendar.",
-    "status": "Experimental",
-    "library": "ui-lab",
-    "category": "Forms"
-  },
-  {
-    "name": "Date Range Picker Next",
-    "path": "date-range-picker-next",
-    "description": "The date range picker, rebuilt: the date picker in range mode, with presets, typed ends and Apply.",
+    "description": "The date picker in range mode, with presets, typed ends and Apply.",
     "status": "Experimental",
     "library": "ui",
     "category": "Forms"

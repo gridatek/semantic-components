@@ -215,12 +215,6 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/date-range-picker/date-range-picker-page'),
       },
       {
-        path: 'date-range-picker-next',
-        title: 'Date Range Picker Next - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/date-range-picker-next/date-range-picker-next-page'),
-      },
-      {
         path: 'dialog',
         title: 'Dialog - Semantic Components',
         loadComponent: () => import('../pages/docs/dialog/dialog-page'),

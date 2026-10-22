@@ -1,16 +1,22 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCalendar,
+  ScCalendarFooter,
   ScCalendarHeader,
   ScCalendarHeading,
   ScCalendarNext,
   ScCalendarPrevious,
   type ScCalendarValue,
   ScDatePicker,
+  ScDatePickerApply,
+  ScDatePickerCancel,
+  ScDatePickerPreset,
+  ScDatePickerPresets,
   ScDatePickerTrigger,
   ScPopover,
   ScPopoverPortal,
   ScPopoverProvider,
+  scDateRangePresets,
 } from '@semantic-components/ui';
 import {
   SiCalendarIcon,
@@ -18,9 +24,9 @@ import {
   SiChevronRightIcon,
 } from '@semantic-icons/lucide-icons';
 
-/** minDate and maxDate on the picker and its calendar: from today, up to 90 days ahead. */
+/** confirm: picks and presets are a draft, kept by scDatePickerApply — Cancel, Escape or a click outside drop it. Two months and presets, as on an analytics page. */
 @Component({
-  selector: 'app-constraints-date-range-picker-next-demo',
+  selector: 'app-confirm-date-range-picker-demo',
   imports: [
     ScDatePicker,
     ScDatePickerTrigger,
@@ -32,6 +38,11 @@ import {
     ScCalendarHeading,
     ScCalendarPrevious,
     ScCalendarNext,
+    ScDatePickerPreset,
+    ScDatePickerPresets,
+    ScDatePickerApply,
+    ScDatePickerCancel,
+    ScCalendarFooter,
     SiCalendarIcon,
     SiChevronLeftIcon,
     SiChevronRightIcon,
@@ -41,8 +52,7 @@ import {
       scDatePicker
       #dp="scDatePicker"
       mode="range"
-      [minDate]="today"
-      [maxDate]="latest"
+      confirm
       [(value)]="range"
       class="w-fit"
     >
@@ -52,7 +62,18 @@ import {
           <span>{{ dp.text() || 'Pick dates' }}</span>
         </button>
         <ng-template scPopoverPortal>
-          <div scPopover class="w-auto p-0" aria-label="Choose dates">
+          <div
+            scPopover
+            class="w-auto flex-row gap-0 p-0"
+            aria-label="Choose dates"
+          >
+            <div scDatePickerPresets aria-label="Presets">
+              @for (preset of presets; track preset.label) {
+                <button scDatePickerPreset [value]="preset.value">
+                  {{ preset.label }}
+                </button>
+              }
+            </div>
             <div
               scCalendar
               #cal="scCalendar"
@@ -62,8 +83,6 @@ import {
               [numberOfMonths]="2"
               [value]="dp.draft()"
               (valueChange)="dp.pick($event)"
-              [minDate]="today"
-              [maxDate]="latest"
             >
               <div scCalendarHeader>
                 <button scCalendarPrevious>
@@ -75,6 +94,10 @@ import {
                   <svg siChevronRightIcon></svg>
                   <span class="sr-only">Next month</span>
                 </button>
+              </div>
+              <div scCalendarFooter class="justify-end">
+                <button scDatePickerCancel>Cancel</button>
+                <button scDatePickerApply>Apply</button>
               </div>
             </div>
           </div>
@@ -88,8 +111,14 @@ import {
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ConstraintsDateRangePickerNextDemo {
-  readonly range = signal<ScCalendarValue>(null);
-  readonly today = Temporal.Now.plainDateISO();
-  readonly latest = this.today.add({ days: 90 });
+export class ConfirmDateRangePickerDemo {
+  readonly presets = scDateRangePresets({
+    today: 'Today',
+    yesterday: 'Yesterday',
+    last7Days: 'Last 7 days',
+    last30Days: 'Last 30 days',
+    thisMonth: 'This month',
+    lastMonth: 'Last month',
+  });
+  readonly range = signal<ScCalendarValue>(this.presets[2].value);
 }

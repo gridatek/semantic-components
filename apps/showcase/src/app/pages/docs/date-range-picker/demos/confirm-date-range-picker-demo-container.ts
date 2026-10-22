@@ -1,4 +1,24 @@
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { ConfirmDateRangePickerDemo } from './confirm-date-range-picker-demo';
+
+@Component({
+  selector: 'app-confirm-date-range-picker-demo-container',
+  imports: [DemoContainer, ConfirmDateRangePickerDemo],
+  template: `
+    <app-demo-container
+      title="Apply"
+      [code]="code"
+      demoUrl="/demos/date-range-picker/confirm-date-range-picker-demo"
+    >
+      <app-confirm-date-range-picker-demo />
+    </app-demo-container>
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class ConfirmDateRangePickerDemoContainer {
+  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCalendar,
   ScCalendarFooter,
@@ -26,7 +46,7 @@ import {
 
 /** confirm: picks and presets are a draft, kept by scDatePickerApply — Cancel, Escape or a click outside drop it. Two months and presets, as on an analytics page. */
 @Component({
-  selector: 'app-confirm-date-range-picker-next-demo',
+  selector: 'app-confirm-date-range-picker-demo',
   imports: [
     ScDatePicker,
     ScDatePickerTrigger,
@@ -47,7 +67,7 @@ import {
     SiChevronLeftIcon,
     SiChevronRightIcon,
   ],
-  template: `
+  template: \`
     <div
       scDatePicker
       #dp="scDatePicker"
@@ -107,11 +127,11 @@ import {
     <p class="text-muted-foreground text-sm" data-testid="picked">
       {{ dp.text() || 'Nothing picked.' }}
     </p>
-  `,
+  \`,
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ConfirmDateRangePickerNextDemo {
+export class ConfirmDateRangePickerDemo {
   readonly presets = scDateRangePresets({
     today: 'Today',
     yesterday: 'Yesterday',
@@ -121,4 +141,5 @@ export class ConfirmDateRangePickerNextDemo {
     lastMonth: 'Last month',
   });
   readonly range = signal<ScCalendarValue>(this.presets[2].value);
+}`;
 }

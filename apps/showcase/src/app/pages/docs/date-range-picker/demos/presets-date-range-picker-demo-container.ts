@@ -7,9 +7,9 @@ import { PresetsDateRangePickerDemo } from './presets-date-range-picker-demo';
   imports: [DemoContainer, PresetsDateRangePickerDemo],
   template: `
     <app-demo-container
-      title="With Presets"
-      demoUrl="/demos/date-range-picker/presets-date-range-picker-demo"
+      title="Presets"
       [code]="code"
+      demoUrl="/demos/date-range-picker/presets-date-range-picker-demo"
     >
       <app-presets-date-range-picker-demo />
     </app-demo-container>
@@ -25,38 +25,28 @@ import {
   ScCalendarHeading,
   ScCalendarNext,
   ScCalendarPrevious,
-  ScCalendarRange,
+  type ScCalendarValue,
+  ScDatePicker,
+  ScDatePickerPreset,
+  ScDatePickerPresets,
+  ScDatePickerTrigger,
   ScPopover,
   ScPopoverPortal,
   ScPopoverProvider,
+  scDateRangePresets,
 } from '@semantic-components/ui';
-import {
-  ScDateRangePicker,
-  ScDateRangePickerApply,
-  ScDateRangePickerCancel,
-  ScDateRangePickerFooter,
-  ScDateRangePickerPreset,
-  ScDateRangePickerPresets,
-  ScDateRangePickerTrigger,
-  ScDateRangePreset,
-  createScDateRangePresets,
-} from '@semantic-components/ui-lab';
 import {
   SiCalendarIcon,
   SiChevronLeftIcon,
   SiChevronRightIcon,
 } from '@semantic-icons/lucide-icons';
 
+/** scDatePickerPreset buttons beside the calendar: a preset is picked as the calendar’s pick would be — and pressed while it is the value. scDateRangePresets gives the common ones, named by you. */
 @Component({
   selector: 'app-presets-date-range-picker-demo',
   imports: [
-    ScDateRangePicker,
-    ScDateRangePickerTrigger,
-    ScDateRangePickerApply,
-    ScDateRangePickerCancel,
-    ScDateRangePickerFooter,
-    ScDateRangePickerPresets,
-    ScDateRangePickerPreset,
+    ScDatePicker,
+    ScDatePickerTrigger,
     ScPopoverProvider,
     ScPopoverPortal,
     ScPopover,
@@ -65,96 +55,77 @@ import {
     ScCalendarHeading,
     ScCalendarPrevious,
     ScCalendarNext,
+    ScDatePickerPreset,
+    ScDatePickerPresets,
     SiCalendarIcon,
     SiChevronLeftIcon,
     SiChevronRightIcon,
   ],
   template: \`
-    <div scDateRangePicker [(value)]="range" #drp="scDateRangePicker">
+    <div
+      scDatePicker
+      #dp="scDatePicker"
+      mode="range"
+      [(value)]="range"
+      class="w-fit"
+    >
       <div scPopoverProvider [origin]="trigger.overlayOrigin" align="start">
-        <button scDateRangePickerTrigger #trigger="scDateRangePickerTrigger">
-          <svg siCalendarIcon class="mr-2 size-4"></svg>
-          <span [class]="drp.displayText() ? '' : 'text-muted-foreground'">
-            {{ drp.displayText() || 'Select date range' }}
-          </span>
+        <button scDatePickerTrigger #trigger="scDatePickerTrigger">
+          <svg siCalendarIcon></svg>
+          <span>{{ dp.text() || 'Pick dates' }}</span>
         </button>
         <ng-template scPopoverPortal>
-          <div scPopover class="w-auto p-0">
-            <div class="flex">
-              <div scDateRangePickerPresets>
-                @for (preset of presets; track preset.label) {
-                  <button scDateRangePickerPreset [value]="preset.value">
-                    {{ preset.label }}
-                  </button>
-                }
-              </div>
-              <div class="p-3">
-                <div
-                  scCalendar
-                  aria-label="Calendar"
-                  mode="range"
-                  [numberOfMonths]="2"
-                  [value]="drp.value()"
-                  (valueChange)="drp.onValueChange($event)"
-                  #cal="scCalendar"
-                >
-                  <div scCalendarHeader>
-                    <button scCalendarPrevious>
-                      <svg siChevronLeftIcon class="size-4"></svg>
-                      <span class="sr-only">
-                        @switch (cal.view()) {
-                          @case ('day') {
-                            Go to previous month
-                          }
-                          @case ('month') {
-                            Go to previous year
-                          }
-                          @case ('year') {
-                            Go to previous decade
-                          }
-                        }
-                      </span>
-                    </button>
-                    <button scCalendarHeading>{{ cal.heading() }}</button>
-                    <button scCalendarNext>
-                      <svg siChevronRightIcon class="size-4"></svg>
-                      <span class="sr-only">
-                        @switch (cal.view()) {
-                          @case ('day') {
-                            Go to next month
-                          }
-                          @case ('month') {
-                            Go to next year
-                          }
-                          @case ('year') {
-                            Go to next decade
-                          }
-                        }
-                      </span>
-                    </button>
-                  </div>
-                </div>
-                <div scDateRangePickerFooter>
-                  <button scDateRangePickerCancel>Cancel</button>
-                  <button scDateRangePickerApply>Apply</button>
-                </div>
+          <div
+            scPopover
+            class="w-auto flex-row gap-0 p-0"
+            aria-label="Choose dates"
+          >
+            <div scDatePickerPresets aria-label="Presets">
+              @for (preset of presets; track preset.label) {
+                <button scDatePickerPreset [value]="preset.value">
+                  {{ preset.label }}
+                </button>
+              }
+            </div>
+            <div
+              scCalendar
+              #cal="scCalendar"
+              initialFocus
+              aria-label="Choose dates"
+              [mode]="dp.mode()"
+              [numberOfMonths]="1"
+              [value]="dp.draft()"
+              (valueChange)="dp.pick($event)"
+            >
+              <div scCalendarHeader>
+                <button scCalendarPrevious>
+                  <svg siChevronLeftIcon></svg>
+                  <span class="sr-only">Previous month</span>
+                </button>
+                <button scCalendarHeading>{{ cal.heading() }}</button>
+                <button scCalendarNext>
+                  <svg siChevronRightIcon></svg>
+                  <span class="sr-only">Next month</span>
+                </button>
               </div>
             </div>
           </div>
         </ng-template>
       </div>
     </div>
+    <p class="text-muted-foreground text-sm" data-testid="picked">
+      {{ dp.text() || 'Nothing picked.' }}
+    </p>
   \`,
-  host: { class: 'flex w-full justify-center' },
+  host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
 export class PresetsDateRangePickerDemo {
-  readonly range = signal<ScCalendarRange>({ from: undefined, to: undefined });
-  readonly presets: ScDateRangePreset[] = createScDateRangePresets({
+  readonly range = signal<ScCalendarValue>(null);
+  readonly presets = scDateRangePresets({
     today: 'Today',
     yesterday: 'Yesterday',
     last7Days: 'Last 7 days',
-    last14Days: 'Last 14 days',
     last30Days: 'Last 30 days',
     thisMonth: 'This month',
     lastMonth: 'Last month',

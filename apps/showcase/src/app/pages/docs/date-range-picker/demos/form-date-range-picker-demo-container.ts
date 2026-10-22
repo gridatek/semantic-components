@@ -1,4 +1,24 @@
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { FormDateRangePickerDemo } from './form-date-range-picker-demo';
+
+@Component({
+  selector: 'app-form-date-range-picker-demo-container',
+  imports: [DemoContainer, FormDateRangePickerDemo],
+  template: `
+    <app-demo-container
+      title="In a form"
+      [code]="code"
+      demoUrl="/demos/date-range-picker/form-date-range-picker-demo"
+    >
+      <app-form-date-range-picker-demo />
+    </app-demo-container>
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class FormDateRangePickerDemoContainer {
+  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, FormRoot, form, validate } from '@angular/forms/signals';
 import {
   ScButton,
@@ -26,7 +46,7 @@ import {
 
 /** A [formField]: a whole range required, by a validator in the schema; marked once the calendar has closed. */
 @Component({
-  selector: 'app-form-date-range-picker-next-demo',
+  selector: 'app-form-date-range-picker-demo',
   imports: [
     FormField,
     FormRoot,
@@ -48,7 +68,7 @@ import {
     SiChevronLeftIcon,
     SiChevronRightIcon,
   ],
-  template: `
+  template: \`
     <form [formRoot]="bookingForm" class="grid w-72 gap-3">
       <div scField>
         <label scLabel for="stay">Stay</label>
@@ -102,11 +122,11 @@ import {
         <p class="text-sm" role="status">Booked: {{ booked() }}.</p>
       }
     </form>
-  `,
+  \`,
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class FormDateRangePickerNextDemo {
+export class FormDateRangePickerDemo {
   readonly model = signal<{ stay: ScCalendarValue }>({ stay: null });
   readonly booked = signal('');
   readonly bookingForm = form(
@@ -132,4 +152,5 @@ export class FormDateRangePickerNextDemo {
       },
     },
   );
+}`;
 }

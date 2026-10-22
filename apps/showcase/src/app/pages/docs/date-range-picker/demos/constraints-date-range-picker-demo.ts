@@ -1,24 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { PresetsDateRangePickerNextDemo } from './presets-date-range-picker-next-demo';
-
-@Component({
-  selector: 'app-presets-date-range-picker-next-demo-container',
-  imports: [DemoContainer, PresetsDateRangePickerNextDemo],
-  template: `
-    <app-demo-container
-      title="Presets"
-      [code]="code"
-      demoUrl="/demos/date-range-picker-next/presets-date-range-picker-next-demo"
-    >
-      <app-presets-date-range-picker-next-demo />
-    </app-demo-container>
-  `,
-  host: { class: 'block w-full' },
-  encapsulation: ViewEncapsulation.None,
-})
-export class PresetsDateRangePickerNextDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCalendar,
   ScCalendarHeader,
@@ -27,13 +7,10 @@ import {
   ScCalendarPrevious,
   type ScCalendarValue,
   ScDatePicker,
-  ScDatePickerPreset,
-  ScDatePickerPresets,
   ScDatePickerTrigger,
   ScPopover,
   ScPopoverPortal,
   ScPopoverProvider,
-  scDateRangePresets,
 } from '@semantic-components/ui';
 import {
   SiCalendarIcon,
@@ -41,9 +18,9 @@ import {
   SiChevronRightIcon,
 } from '@semantic-icons/lucide-icons';
 
-/** scDatePickerPreset buttons beside the calendar: a preset is picked as the calendar’s pick would be — and pressed while it is the value. scDateRangePresets gives the common ones, named by you. */
+/** minDate and maxDate on the picker and its calendar: from today, up to 90 days ahead. */
 @Component({
-  selector: 'app-presets-date-range-picker-next-demo',
+  selector: 'app-constraints-date-range-picker-demo',
   imports: [
     ScDatePicker,
     ScDatePickerTrigger,
@@ -55,17 +32,17 @@ import {
     ScCalendarHeading,
     ScCalendarPrevious,
     ScCalendarNext,
-    ScDatePickerPreset,
-    ScDatePickerPresets,
     SiCalendarIcon,
     SiChevronLeftIcon,
     SiChevronRightIcon,
   ],
-  template: \`
+  template: `
     <div
       scDatePicker
       #dp="scDatePicker"
       mode="range"
+      [minDate]="today"
+      [maxDate]="latest"
       [(value)]="range"
       class="w-fit"
     >
@@ -75,23 +52,18 @@ import {
           <span>{{ dp.text() || 'Pick dates' }}</span>
         </button>
         <ng-template scPopoverPortal>
-          <div scPopover class="w-auto flex-row gap-0 p-0" aria-label="Choose dates">
-            <div scDatePickerPresets aria-label="Presets">
-              @for (preset of presets; track preset.label) {
-                <button scDatePickerPreset [value]="preset.value">
-                  {{ preset.label }}
-                </button>
-              }
-            </div>
+          <div scPopover class="w-auto p-0" aria-label="Choose dates">
             <div
               scCalendar
               #cal="scCalendar"
               initialFocus
               aria-label="Choose dates"
               [mode]="dp.mode()"
-              [numberOfMonths]="1"
+              [numberOfMonths]="2"
               [value]="dp.draft()"
               (valueChange)="dp.pick($event)"
+              [minDate]="today"
+              [maxDate]="latest"
             >
               <div scCalendarHeader>
                 <button scCalendarPrevious>
@@ -112,19 +84,12 @@ import {
     <p class="text-muted-foreground text-sm" data-testid="picked">
       {{ dp.text() || 'Nothing picked.' }}
     </p>
-  \`,
+  `,
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class PresetsDateRangePickerNextDemo {
+export class ConstraintsDateRangePickerDemo {
   readonly range = signal<ScCalendarValue>(null);
-  readonly presets = scDateRangePresets({
-    today: 'Today',
-    yesterday: 'Yesterday',
-    last7Days: 'Last 7 days',
-    last30Days: 'Last 30 days',
-    thisMonth: 'This month',
-    lastMonth: 'Last month',
-  });
-}`;
+  readonly today = Temporal.Now.plainDateISO();
+  readonly latest = this.today.add({ days: 90 });
 }

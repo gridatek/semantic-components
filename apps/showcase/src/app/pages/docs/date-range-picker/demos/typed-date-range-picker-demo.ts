@@ -24,7 +24,7 @@ import {
 
 /** Each end typed — part="start" and part="end" in one input group: the locale’s numeric order or ISO; an end before the start is marked. The button in the field opens the calendar. */
 @Component({
-  selector: 'app-typed-date-range-picker-next-demo',
+  selector: 'app-typed-date-range-picker-demo',
   imports: [
     ScDatePicker,
     ScDatePickerTrigger,
@@ -106,7 +106,7 @@ import {
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class TypedDateRangePickerNextDemo {
+export class TypedDateRangePickerDemo {
   readonly range = signal<ScCalendarValue>({
     from: Temporal.PlainDate.from('2026-10-14'),
     to: Temporal.PlainDate.from('2026-10-18'),

@@ -1093,85 +1093,31 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'constrained-date-range-picker-demo',
+        path: 'typed-date-range-picker-demo',
         loadComponent: () =>
-          import('../pages/docs/date-range-picker/demos/constrained-date-range-picker-demo').then(
-            (m) => m.ConstrainedDateRangePickerDemo,
+          import('../pages/docs/date-range-picker/demos/typed-date-range-picker-demo').then(
+            (m) => m.TypedDateRangePickerDemo,
           ),
       },
       {
-        path: 'formats-date-range-picker-demo',
+        path: 'confirm-date-range-picker-demo',
         loadComponent: () =>
-          import('../pages/docs/date-range-picker/demos/formats-date-range-picker-demo').then(
-            (m) => m.FormatsDateRangePickerDemo,
+          import('../pages/docs/date-range-picker/demos/confirm-date-range-picker-demo').then(
+            (m) => m.ConfirmDateRangePickerDemo,
           ),
       },
       {
-        path: 'no-clear-date-range-picker-demo',
+        path: 'constraints-date-range-picker-demo',
         loadComponent: () =>
-          import('../pages/docs/date-range-picker/demos/no-clear-date-range-picker-demo').then(
-            (m) => m.NoClearDateRangePickerDemo,
+          import('../pages/docs/date-range-picker/demos/constraints-date-range-picker-demo').then(
+            (m) => m.ConstraintsDateRangePickerDemo,
           ),
       },
       {
-        path: 'disabled-date-range-picker-demo',
+        path: 'form-date-range-picker-demo',
         loadComponent: () =>
-          import('../pages/docs/date-range-picker/demos/disabled-date-range-picker-demo').then(
-            (m) => m.DisabledDateRangePickerDemo,
-          ),
-      },
-      {
-        path: 'analytics-date-range-picker-demo',
-        loadComponent: () =>
-          import('../pages/docs/date-range-picker/demos/analytics-date-range-picker-demo').then(
-            (m) => m.AnalyticsDateRangePickerDemo,
-          ),
-      },
-    ],
-  },
-  {
-    path: 'demos/date-range-picker-next',
-    children: [
-      {
-        path: 'basic-date-range-picker-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/date-range-picker-next/demos/basic-date-range-picker-next-demo').then(
-            (m) => m.BasicDateRangePickerNextDemo,
-          ),
-      },
-      {
-        path: 'presets-date-range-picker-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/date-range-picker-next/demos/presets-date-range-picker-next-demo').then(
-            (m) => m.PresetsDateRangePickerNextDemo,
-          ),
-      },
-      {
-        path: 'typed-date-range-picker-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/date-range-picker-next/demos/typed-date-range-picker-next-demo').then(
-            (m) => m.TypedDateRangePickerNextDemo,
-          ),
-      },
-      {
-        path: 'confirm-date-range-picker-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/date-range-picker-next/demos/confirm-date-range-picker-next-demo').then(
-            (m) => m.ConfirmDateRangePickerNextDemo,
-          ),
-      },
-      {
-        path: 'constraints-date-range-picker-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/date-range-picker-next/demos/constraints-date-range-picker-next-demo').then(
-            (m) => m.ConstraintsDateRangePickerNextDemo,
-          ),
-      },
-      {
-        path: 'form-date-range-picker-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/date-range-picker-next/demos/form-date-range-picker-next-demo').then(
-            (m) => m.FormDateRangePickerNextDemo,
+          import('../pages/docs/date-range-picker/demos/form-date-range-picker-demo').then(
+            (m) => m.FormDateRangePickerDemo,
           ),
       },
     ],

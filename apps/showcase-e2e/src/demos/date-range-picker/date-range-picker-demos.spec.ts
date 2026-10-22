@@ -2,7 +2,7 @@ import { type Page, expect, test } from '@playwright/test';
 import { collectErrors } from '../../interaction';
 
 const demo = (name: string) =>
-  `/demos/date-range-picker-next/${name}-date-range-picker-next-demo`;
+  `/demos/date-range-picker/${name}-date-range-picker-demo`;
 const trigger = (page: Page) =>
   page.locator('[data-slot="date-picker-trigger"]');
 const calendar = (page: Page) => page.locator('[data-slot="calendar"]');
