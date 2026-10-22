@@ -936,6 +936,14 @@
     "category": "Forms"
   },
   {
+    "name": "Time Clock",
+    "path": "time-clock",
+    "description": "The time picker clock, rebuilt: a time picked on a clock face, by pointer or keyboard.",
+    "status": "Experimental",
+    "library": "ui-lab",
+    "category": "Forms"
+  },
+  {
     "name": "Timeline",
     "path": "timeline",
     "description": "An ordered list, the line drawn for you, progress by status, Temporal times, alternate and horizontal.",

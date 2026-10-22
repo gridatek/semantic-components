@@ -3890,6 +3890,53 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/time-clock',
+    children: [
+      {
+        path: 'basic-time-clock-demo',
+        loadComponent: () =>
+          import('../pages/docs/time-clock/demos/basic-time-clock-demo').then(
+            (m) => m.BasicTimeClockDemo,
+          ),
+      },
+      {
+        path: 'locale-time-clock-demo',
+        loadComponent: () =>
+          import('../pages/docs/time-clock/demos/locale-time-clock-demo').then(
+            (m) => m.LocaleTimeClockDemo,
+          ),
+      },
+      {
+        path: 'step-time-clock-demo',
+        loadComponent: () =>
+          import('../pages/docs/time-clock/demos/step-time-clock-demo').then(
+            (m) => m.StepTimeClockDemo,
+          ),
+      },
+      {
+        path: 'limits-time-clock-demo',
+        loadComponent: () =>
+          import('../pages/docs/time-clock/demos/limits-time-clock-demo').then(
+            (m) => m.LimitsTimeClockDemo,
+          ),
+      },
+      {
+        path: 'input-time-clock-demo',
+        loadComponent: () =>
+          import('../pages/docs/time-clock/demos/input-time-clock-demo').then(
+            (m) => m.InputTimeClockDemo,
+          ),
+      },
+      {
+        path: 'form-time-clock-demo',
+        loadComponent: () =>
+          import('../pages/docs/time-clock/demos/form-time-clock-demo').then(
+            (m) => m.FormTimeClockDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/attachment',
     children: [
       {
