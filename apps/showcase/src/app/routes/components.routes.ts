@@ -330,6 +330,12 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/kanban-board/kanban-board-page'),
       },
       {
+        path: 'kanban-board-next',
+        title: 'Kanban Board Next - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/kanban-board-next/kanban-board-next-page'),
+      },
+      {
         path: 'kbd',
         title: 'Kbd - Semantic Components',
         loadComponent: () => import('../pages/docs/kbd/kbd-page'),

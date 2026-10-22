@@ -1898,6 +1898,39 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/kanban-board-next',
+    children: [
+      {
+        path: 'basic-kanban-board-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/kanban-board-next/demos/basic-kanban-board-next-demo').then(
+            (m) => m.BasicKanbanBoardNextDemo,
+          ),
+      },
+      {
+        path: 'rich-kanban-board-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/kanban-board-next/demos/rich-kanban-board-next-demo').then(
+            (m) => m.RichKanbanBoardNextDemo,
+          ),
+      },
+      {
+        path: 'flat-kanban-board-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/kanban-board-next/demos/flat-kanban-board-next-demo').then(
+            (m) => m.FlatKanbanBoardNextDemo,
+          ),
+      },
+      {
+        path: 'add-kanban-board-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/kanban-board-next/demos/add-kanban-board-next-demo').then(
+            (m) => m.AddKanbanBoardNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/kbd',
     children: [
       {
