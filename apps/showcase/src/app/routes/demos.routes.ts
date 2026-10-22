@@ -769,6 +769,53 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/code-block',
+    children: [
+      {
+        path: 'basic-code-block-demo',
+        loadComponent: () =>
+          import('../pages/docs/code-block/demos/basic-code-block-demo').then(
+            (m) => m.BasicCodeBlockDemo,
+          ),
+      },
+      {
+        path: 'numbers-code-block-demo',
+        loadComponent: () =>
+          import('../pages/docs/code-block/demos/numbers-code-block-demo').then(
+            (m) => m.NumbersCodeBlockDemo,
+          ),
+      },
+      {
+        path: 'changes-code-block-demo',
+        loadComponent: () =>
+          import('../pages/docs/code-block/demos/changes-code-block-demo').then(
+            (m) => m.ChangesCodeBlockDemo,
+          ),
+      },
+      {
+        path: 'wrap-code-block-demo',
+        loadComponent: () =>
+          import('../pages/docs/code-block/demos/wrap-code-block-demo').then(
+            (m) => m.WrapCodeBlockDemo,
+          ),
+      },
+      {
+        path: 'floating-code-block-demo',
+        loadComponent: () =>
+          import('../pages/docs/code-block/demos/floating-code-block-demo').then(
+            (m) => m.FloatingCodeBlockDemo,
+          ),
+      },
+      {
+        path: 'error-code-block-demo',
+        loadComponent: () =>
+          import('../pages/docs/code-block/demos/error-code-block-demo').then(
+            (m) => m.ErrorCodeBlockDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/code-viewer',
     children: [
       {

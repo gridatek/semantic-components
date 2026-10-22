@@ -184,6 +184,14 @@
     "category": "Editor"
   },
   {
+    "name": "Code Block",
+    "path": "code-block",
+    "description": "Code to read and copy: highlighted, numbered, its lines marked.",
+    "status": "Experimental",
+    "library": "code",
+    "category": "Editor"
+  },
+  {
     "name": "Code Viewer",
     "path": "code-viewer",
     "description": "Display syntax-highlighted code with copy functionality.",
