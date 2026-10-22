@@ -3878,18 +3878,6 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/time-picker-clock',
-    children: [
-      {
-        path: 'hours-time-picker-clock-demo',
-        loadComponent: () =>
-          import('../pages/docs/time-picker-clock/demos/hours-time-picker-clock-demo').then(
-            (m) => m.HoursTimePickerClockDemo,
-          ),
-      },
-    ],
-  },
-  {
     path: 'demos/time-clock',
     children: [
       {

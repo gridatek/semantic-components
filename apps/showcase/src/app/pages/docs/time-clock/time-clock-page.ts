@@ -27,9 +27,8 @@ import { StepTimeClockDemoContainer } from './demos/step-time-clock-demo-contain
       <div class="space-y-2">
         <h1 scHeading>Time Clock</h1>
         <p class="text-muted-foreground">
-          The time picker clock, rebuilt: a time picked on a clock face — the
-          hour, then the minute — by pointer or keyboard, in the app’s language,
-          12 or 24 hours. A [formField].
+          A time picked on a clock face — the hour, then the minute — by pointer
+          or keyboard, in the app’s language, 12 or 24 hours. A [formField].
         </p>
         <app-component-badges path="time-clock" />
       </div>

@@ -32,7 +32,6 @@ export * from './stat-card';
 export * from './stepper';
 export * from './tags-input';
 export * from './time-clock';
-export * from './time-picker-clock';
 export * from './timeline';
 export * from './tour-guide';
 export * from './transfer-list';
