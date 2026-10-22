@@ -922,6 +922,13 @@ export const demosRoutes: Route[] = [
             (m) => m.FormConfettiDemo,
           ),
       },
+      {
+        path: 'event-confetti-demo',
+        loadComponent: () =>
+          import('../pages/docs/confetti/demos/event-confetti-demo').then(
+            (m) => m.EventConfettiDemo,
+          ),
+      },
     ],
   },
   {

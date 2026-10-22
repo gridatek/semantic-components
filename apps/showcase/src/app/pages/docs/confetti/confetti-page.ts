@@ -5,6 +5,7 @@ import { TocHeading } from '../../../components/toc/toc-heading';
 import { BurstConfettiDemoContainer } from './demos/burst-confetti-demo-container';
 import { CustomConfettiDemoContainer } from './demos/custom-confetti-demo-container';
 import { ElementConfettiDemoContainer } from './demos/element-confetti-demo-container';
+import { EventConfettiDemoContainer } from './demos/event-confetti-demo-container';
 import { FireworksConfettiDemoContainer } from './demos/fireworks-confetti-demo-container';
 import { FormConfettiDemoContainer } from './demos/form-confetti-demo-container';
 import { SidesConfettiDemoContainer } from './demos/sides-confetti-demo-container';
@@ -18,6 +19,7 @@ import { SidesConfettiDemoContainer } from './demos/sides-confetti-demo-containe
     FireworksConfettiDemoContainer,
     CustomConfettiDemoContainer,
     FormConfettiDemoContainer,
+    EventConfettiDemoContainer,
     TocHeading,
     ComponentBadges,
     ScHeading,
@@ -113,6 +115,15 @@ import { SidesConfettiDemoContainer } from './demos/sides-confetti-demo-containe
           words for screen readers.
         </p>
         <app-form-confetti-demo-container />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>On an event</h2>
+        <p class="text-muted-foreground">
+          The service, on an event — no button: when the last task is ticked, an
+          effect calls burst() from the list.
+        </p>
+        <app-event-confetti-demo-container />
       </section>
     </div>
   `,

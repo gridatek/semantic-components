@@ -190,3 +190,15 @@ test('After a form: sent, then confetti — and words', async ({ page }) => {
   await expect(page.getByRole('status')).toHaveText('Welcome aboard, Ada!');
   await expect(canvas(page)).toHaveAttribute('data-active');
 });
+
+test('On an event: the last task ticked, confetti — no button', async ({
+  page,
+}) => {
+  await page.goto(demo('event'));
+  await expect(page.getByRole('status')).toHaveText('2 to go.');
+  await page.getByLabel('Book the venue').check();
+  await expect(canvas(page)).toHaveCount(0);
+  await page.getByLabel('Send the invites').check();
+  await expect(page.getByRole('status')).toHaveText('All done — well done!');
+  await expect(canvas(page)).toHaveAttribute('data-active');
+});
