@@ -13,6 +13,6 @@ export class ScCalendarFooter {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('border-t pt-3', this.classInput()),
+    cn('flex gap-2 border-t pt-3', this.classInput()),
   );
 }
