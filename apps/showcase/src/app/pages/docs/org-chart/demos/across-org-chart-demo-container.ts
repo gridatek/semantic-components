@@ -29,12 +29,7 @@ import {
 /** direction="across": reports at the inline end — on the right, or on the left in a right-to-left page. */
 @Component({
   selector: 'app-across-org-chart-demo',
-  imports: [
-    ScOrgChart,
-    ScOrgChartItem,
-    ScOrgChartCard,
-    ScOrgChartGroup,
-  ],
+  imports: [ScOrgChart, ScOrgChartItem, ScOrgChartCard, ScOrgChartGroup],
   template: \`
     <ul scOrgChart aria-label="Leadership" direction="across">
       <li scOrgChartItem value="ada">

@@ -1474,6 +1474,46 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/file-upload-next',
+    children: [
+      {
+        path: 'basic-file-upload-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/file-upload-next/demos/basic-file-upload-next-demo').then(
+            (m) => m.BasicFileUploadNextDemo,
+          ),
+      },
+      {
+        path: 'single-file-upload-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/file-upload-next/demos/single-file-upload-next-demo').then(
+            (m) => m.SingleFileUploadNextDemo,
+          ),
+      },
+      {
+        path: 'rejections-file-upload-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/file-upload-next/demos/rejections-file-upload-next-demo').then(
+            (m) => m.RejectionsFileUploadNextDemo,
+          ),
+      },
+      {
+        path: 'progress-file-upload-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/file-upload-next/demos/progress-file-upload-next-demo').then(
+            (m) => m.ProgressFileUploadNextDemo,
+          ),
+      },
+      {
+        path: 'form-file-upload-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/file-upload-next/demos/form-file-upload-next-demo').then(
+            (m) => m.FormFileUploadNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/hover-card',
     children: [
       {

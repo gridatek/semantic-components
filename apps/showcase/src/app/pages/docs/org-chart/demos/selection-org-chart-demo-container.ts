@@ -29,12 +29,7 @@ import {
 /** The selected person, two-way through [(value)] — Enter, Space or a click — and their details beside the chart. */
 @Component({
   selector: 'app-selection-org-chart-demo',
-  imports: [
-    ScOrgChart,
-    ScOrgChartItem,
-    ScOrgChartCard,
-    ScOrgChartGroup,
-  ],
+  imports: [ScOrgChart, ScOrgChartItem, ScOrgChartCard, ScOrgChartGroup],
   template: \`
     <ul scOrgChart aria-label="Leadership" [(value)]="selected">
       <li scOrgChartItem value="ada">

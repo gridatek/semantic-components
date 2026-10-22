@@ -360,6 +360,14 @@
     "category": "Forms"
   },
   {
+    "name": "File Upload Next",
+    "path": "file-upload-next",
+    "description": "The file upload, rebuilt: files picked or dropped, as a File[] for Signal Forms; rejections with their reason.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Forms"
+  },
+  {
     "name": "Focus Trap",
     "path": "focus-trap",
     "description": "A directive that keeps focus inside an element while it is shown, and gives it back when it goes.",
