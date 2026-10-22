@@ -2,7 +2,11 @@ import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '../../utils';
 import { type ScButtonVariants, buttonVariants } from '../button';
-import { ScInputGroup } from '../input-group';
+import {
+  ScInputGroup,
+  type ScInputGroupButtonVariants,
+  inputGroupButtonVariants,
+} from '../input-group';
 import { ScPopoverProvider } from '../popover';
 import { selectTriggerStyles } from '../select/select-trigger';
 import { ScDatePickerNext } from './date-picker-next';
@@ -42,12 +46,13 @@ export class ScDatePickerNextTrigger {
   readonly size = input<'default' | 'sm'>('default');
   /** In an input group: the icon button's look. */
   readonly variant = input<ScButtonVariants['variant']>('ghost');
-  readonly buttonSize = input<ScButtonVariants['size']>('icon-xs');
+  readonly buttonSize = input<ScInputGroupButtonVariants['size']>('icon-xs');
 
   protected readonly class = computed(() =>
     this.group
       ? cn(
-          buttonVariants({ variant: this.variant(), size: this.buttonSize() }),
+          buttonVariants({ variant: this.variant() }),
+          inputGroupButtonVariants({ size: this.buttonSize() }),
           this.classInput(),
         )
       : cn(
