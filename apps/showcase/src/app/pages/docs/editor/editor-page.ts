@@ -1,13 +1,13 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScCodeViewer,
-  ScCodeViewerContent,
-  ScCodeViewerHeader,
-  ScCodeViewerLabel,
+  ScCodeBlock,
+  ScCodeBlockActions,
+  ScCodeBlockContent,
+  ScCodeBlockCopy,
+  ScCodeBlockHeader,
+  ScCodeBlockTitle,
 } from '@semantic-components/code';
 import {
-  ScButton,
-  ScCopyToClipboard,
   ScHeading,
   ScTable,
   ScTableBody,
@@ -37,6 +37,12 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
 @Component({
   selector: 'app-editor-page',
   imports: [
+    ScCodeBlock,
+    ScCodeBlockHeader,
+    ScCodeBlockTitle,
+    ScCodeBlockActions,
+    ScCodeBlockCopy,
+    ScCodeBlockContent,
     EditorUsageDemoContainer,
     PrefilledEditorDemoContainer,
     NoCountEditorDemoContainer,
@@ -53,12 +59,6 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
     TocHeading,
     ComponentBadges,
     ScHeading,
-    ScButton,
-    ScCopyToClipboard,
-    ScCodeViewer,
-    ScCodeViewerContent,
-    ScCodeViewerHeader,
-    ScCodeViewerLabel,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -117,29 +117,25 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
           >
           the same features, so they hold the same documents.
         </p>
-        <div scCodeViewer>
-          <div scCodeViewerHeader>
-            <span scCodeViewerLabel>ts</span>
-            <button
-              scButton
-              variant="ghost"
-              size="icon"
-              [scCopyToClipboard]="featuresCode"
-              #copy="scCopyToClipboard"
-            >
-              @if (copy.copied()) {
-                <svg siCheckIcon></svg>
-              } @else {
-                <svg siCopyIcon></svg>
-              }
-              <span class="sr-only">Copy to clipboard</span>
-            </button>
+        <div scCodeBlock>
+          <div scCodeBlockHeader>
+            <div scCodeBlockTitle>ts</div>
+            <div scCodeBlockActions>
+              <button [scCodeBlockCopy]="featuresCode" #copy="scCodeBlockCopy">
+                @if (copy.copied()) {
+                  <svg siCheckIcon></svg>
+                } @else {
+                  <svg siCopyIcon></svg>
+                }
+                <span class="sr-only">Copy to clipboard</span>
+              </button>
+            </div>
           </div>
-          <div
-            scCodeViewerContent
+          <pre
+            scCodeBlockContent
             [code]="featuresCode"
             language="typescript"
-          ></div>
+          ></pre>
         </div>
         <div scTableContainer tabindex="0" role="region" aria-label="Features">
           <table scTable>
@@ -528,25 +524,24 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
             >loadComponent</code
           >) does the same for a page with an editor.
         </p>
-        <div scCodeViewer>
-          <div scCodeViewerHeader>
-            <span scCodeViewerLabel>html</span>
-            <button
-              scButton
-              variant="ghost"
-              size="icon"
-              [scCopyToClipboard]="loadingCode"
-              #copyLoading="scCopyToClipboard"
-            >
-              @if (copyLoading.copied()) {
-                <svg siCheckIcon></svg>
-              } @else {
-                <svg siCopyIcon></svg>
-              }
-              <span class="sr-only">Copy to clipboard</span>
-            </button>
+        <div scCodeBlock>
+          <div scCodeBlockHeader>
+            <div scCodeBlockTitle>html</div>
+            <div scCodeBlockActions>
+              <button
+                [scCodeBlockCopy]="loadingCode"
+                #copyLoading="scCodeBlockCopy"
+              >
+                @if (copyLoading.copied()) {
+                  <svg siCheckIcon></svg>
+                } @else {
+                  <svg siCopyIcon></svg>
+                }
+                <span class="sr-only">Copy to clipboard</span>
+              </button>
+            </div>
           </div>
-          <div scCodeViewerContent [code]="loadingCode" language="html"></div>
+          <pre scCodeBlockContent [code]="loadingCode" language="html"></pre>
         </div>
       </section>
     </div>
@@ -575,6 +570,8 @@ import {
   SiSubscriptIcon,
   SiSuperscriptIcon,
 } from '@semantic-icons/lucide-icons';
+import { ScCodeBlock, ScCodeBlockHeader, ScCodeBlockTitle, ScCodeBlockActions, ScCodeBlockCopy, ScCodeBlockContent } from '@semantic-components/code';
+import { ScHeading, ScTable, ScTableBody, ScTableCell, ScTableContainer, ScTableHeader, ScTableHeaderCell, ScTableRow } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-note-editor',

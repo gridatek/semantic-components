@@ -1,11 +1,12 @@
 import { Component, ViewEncapsulation, inject } from '@angular/core';
 import {
-  ScCodeViewer,
-  ScCodeViewerContent,
-  ScCodeViewerHeader,
-  ScCodeViewerLabel,
+  ScCodeBlock,
+  ScCodeBlockActions,
+  ScCodeBlockContent,
+  ScCodeBlockCopy,
+  ScCodeBlockHeader,
+  ScCodeBlockTitle,
 } from '@semantic-components/code';
-import { ScButton, ScCopyToClipboard } from '@semantic-components/ui';
 import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 import { ConfigService } from '../../../../services/config.service';
 import { HotkeyUsageDemo } from './hotkey-usage-demo';
@@ -13,36 +14,32 @@ import { HotkeyUsageDemo } from './hotkey-usage-demo';
 @Component({
   selector: 'app-hotkey-usage-demo-container',
   imports: [
-    ScCodeViewer,
-    ScCodeViewerHeader,
-    ScCodeViewerLabel,
-    ScCodeViewerContent,
-    ScButton,
-    ScCopyToClipboard,
+    ScCodeBlock,
+    ScCodeBlockHeader,
+    ScCodeBlockTitle,
+    ScCodeBlockActions,
+    ScCodeBlockCopy,
+    ScCodeBlockContent,
     SiCheckIcon,
     SiCopyIcon,
     HotkeyUsageDemo,
   ],
   template: `
-    <div scCodeViewer>
-      <div scCodeViewerHeader>
-        <span scCodeViewerLabel>angular-ts</span>
-        <button
-          scButton
-          variant="ghost"
-          size="icon"
-          [scCopyToClipboard]="code"
-          #copy="scCopyToClipboard"
-          aria-label="Copy to clipboard"
-        >
-          @if (copy.copied()) {
-            <svg siCheckIcon></svg>
-          } @else {
-            <svg siCopyIcon></svg>
-          }
-        </button>
+    <div scCodeBlock>
+      <div scCodeBlockHeader>
+        <div scCodeBlockTitle>angular-ts</div>
+        <div scCodeBlockActions>
+          <button [scCodeBlockCopy]="code" #copy="scCodeBlockCopy">
+            @if (copy.copied()) {
+              <svg siCheckIcon></svg>
+            } @else {
+              <svg siCopyIcon></svg>
+            }
+            <span class="sr-only">Copy to clipboard</span>
+          </button>
+        </div>
       </div>
-      <div scCodeViewerContent [code]="code" language="angular-ts"></div>
+      <pre scCodeBlockContent [code]="code" language="angular-ts"></pre>
     </div>
 
     @if (devMode()) {

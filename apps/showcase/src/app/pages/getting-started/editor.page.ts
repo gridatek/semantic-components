@@ -1,14 +1,14 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
-  ScCodeViewer,
-  ScCodeViewerContent,
-  ScCodeViewerHeader,
-  ScCodeViewerLabel,
+  ScCodeBlock,
+  ScCodeBlockActions,
+  ScCodeBlockContent,
+  ScCodeBlockCopy,
+  ScCodeBlockHeader,
+  ScCodeBlockTitle,
 } from '@semantic-components/code';
-import { ScButton, ScCopyToClipboard, ScLink } from '@semantic-components/ui';
-import { ScSeparator } from '@semantic-components/ui';
-import { ScHeading } from '@semantic-components/ui';
+import { ScHeading, ScLink, ScSeparator } from '@semantic-components/ui';
 import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 import { PackageManagerInstall } from '../../components/package-manager-install/package-manager-install';
 import { TocHeading } from '../../components/toc/toc-heading';
@@ -17,15 +17,15 @@ import { EditorUsageDemoContainer } from '../docs/editor/demos/editor-usage-demo
 @Component({
   selector: 'app-editor-page',
   imports: [
+    ScCodeBlock,
+    ScCodeBlockHeader,
+    ScCodeBlockTitle,
+    ScCodeBlockActions,
+    ScCodeBlockCopy,
+    ScCodeBlockContent,
     RouterLink,
     ScLink,
     TocHeading,
-    ScCodeViewer,
-    ScCodeViewerContent,
-    ScCodeViewerHeader,
-    ScCodeViewerLabel,
-    ScButton,
-    ScCopyToClipboard,
     SiCheckIcon,
     SiCopyIcon,
     ScSeparator,
@@ -73,25 +73,21 @@ import { EditorUsageDemoContainer } from '../docs/editor/demos/editor-usage-demo
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code
           >:
         </p>
-        <div scCodeViewer>
-          <div scCodeViewerHeader>
-            <span scCodeViewerLabel>css</span>
-            <button
-              scButton
-              variant="ghost"
-              size="icon"
-              [scCopyToClipboard]="stylesCode"
-              #copy2="scCopyToClipboard"
-            >
-              @if (copy2.copied()) {
-                <svg siCheckIcon></svg>
-              } @else {
-                <svg siCopyIcon></svg>
-              }
-              <span class="sr-only">Copy to clipboard</span>
-            </button>
+        <div scCodeBlock>
+          <div scCodeBlockHeader>
+            <div scCodeBlockTitle>css</div>
+            <div scCodeBlockActions>
+              <button [scCodeBlockCopy]="stylesCode" #copy2="scCodeBlockCopy">
+                @if (copy2.copied()) {
+                  <svg siCheckIcon></svg>
+                } @else {
+                  <svg siCopyIcon></svg>
+                }
+                <span class="sr-only">Copy to clipboard</span>
+              </button>
+            </div>
           </div>
-          <div scCodeViewerContent [code]="stylesCode" language="css"></div>
+          <pre scCodeBlockContent [code]="stylesCode" language="css"></pre>
         </div>
       </section>
 
@@ -104,25 +100,21 @@ import { EditorUsageDemoContainer } from '../docs/editor/demos/editor-usage-demo
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code
           >:
         </p>
-        <div scCodeViewer>
-          <div scCodeViewerHeader>
-            <span scCodeViewerLabel>css</span>
-            <button
-              scButton
-              variant="ghost"
-              size="icon"
-              [scCopyToClipboard]="sourceCode"
-              #copy3="scCopyToClipboard"
-            >
-              @if (copy3.copied()) {
-                <svg siCheckIcon></svg>
-              } @else {
-                <svg siCopyIcon></svg>
-              }
-              <span class="sr-only">Copy to clipboard</span>
-            </button>
+        <div scCodeBlock>
+          <div scCodeBlockHeader>
+            <div scCodeBlockTitle>css</div>
+            <div scCodeBlockActions>
+              <button [scCodeBlockCopy]="sourceCode" #copy3="scCodeBlockCopy">
+                @if (copy3.copied()) {
+                  <svg siCheckIcon></svg>
+                } @else {
+                  <svg siCopyIcon></svg>
+                }
+                <span class="sr-only">Copy to clipboard</span>
+              </button>
+            </div>
           </div>
-          <div scCodeViewerContent [code]="sourceCode" language="css"></div>
+          <pre scCodeBlockContent [code]="sourceCode" language="css"></pre>
         </div>
         <p class="text-muted-foreground text-sm">
           Adjust the path to

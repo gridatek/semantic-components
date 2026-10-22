@@ -12,15 +12,14 @@ import {
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import {
-  ScCodeViewer,
-  ScCodeViewerContent,
-  ScCodeViewerHeader,
-  ScCodeViewerLabel,
-  ScCodeViewerLanguage,
+  ScCodeBlock,
+  ScCodeBlockActions,
+  ScCodeBlockContent,
+  ScCodeBlockCopy,
+  ScCodeBlockHeader,
+  ScCodeBlockTitle,
 } from '@semantic-components/code';
 import {
-  ScButton,
-  ScCopyToClipboard,
   ScTab,
   ScTabContent,
   ScTabList,
@@ -38,17 +37,17 @@ import { TocHeading } from '../toc/toc-heading';
 @Component({
   selector: 'app-demo-container',
   imports: [
+    ScCodeBlock,
+    ScCodeBlockHeader,
+    ScCodeBlockTitle,
+    ScCodeBlockActions,
+    ScCodeBlockCopy,
+    ScCodeBlockContent,
     ScTabs,
     ScTabList,
     ScTab,
     ScTabPanel,
     ScTabContent,
-    ScCodeViewer,
-    ScCodeViewerHeader,
-    ScCodeViewerLabel,
-    ScCodeViewerContent,
-    ScButton,
-    ScCopyToClipboard,
     SiCheckIcon,
     SiCopyIcon,
     SiExternalLinkIcon,
@@ -114,30 +113,26 @@ import { TocHeading } from '../toc/toc-heading';
 
         <div scTabPanel value="code">
           <ng-template scTabContent>
-            <div scCodeViewer>
-              <div scCodeViewerHeader>
-                <span scCodeViewerLabel>{{ language() }}</span>
-                <button
-                  scButton
-                  variant="ghost"
-                  size="icon"
-                  [scCopyToClipboard]="code()"
-                  #copy="scCopyToClipboard"
-                  aria-label="Copy to clipboard"
-                >
-                  @if (copy.copied()) {
-                    <svg siCheckIcon></svg>
-                  } @else {
-                    <svg siCopyIcon></svg>
-                  }
-                </button>
+            <div scCodeBlock>
+              <div scCodeBlockHeader>
+                <div scCodeBlockTitle>{{ language() }}</div>
+                <div scCodeBlockActions>
+                  <button [scCodeBlockCopy]="code()" #copy="scCodeBlockCopy">
+                    @if (copy.copied()) {
+                      <svg siCheckIcon></svg>
+                    } @else {
+                      <svg siCopyIcon></svg>
+                    }
+                    <span class="sr-only">Copy to clipboard</span>
+                  </button>
+                </div>
               </div>
-              <div
-                scCodeViewerContent
+              <pre
+                scCodeBlockContent
                 [code]="code()"
                 [language]="language()"
-                [showLineNumbers]="true"
-              ></div>
+                lineNumbers
+              ></pre>
             </div>
           </ng-template>
         </div>
@@ -156,7 +151,7 @@ export class DemoContainer {
   readonly description = input<string>('');
   readonly demoUrl = input<string>('');
   readonly code = input.required<string>();
-  readonly language = input<ScCodeViewerLanguage>('angular-ts');
+  readonly language = input<string>('angular-ts');
   /**
    * Render the preview as an iframe of `demoUrl` instead of projected
    * content. For demos that take over the viewport (fixed positioning, global

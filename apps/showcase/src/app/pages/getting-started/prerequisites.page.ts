@@ -1,13 +1,13 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScCodeViewer,
-  ScCodeViewerContent,
-  ScCodeViewerHeader,
-  ScCodeViewerLabel,
+  ScCodeBlock,
+  ScCodeBlockActions,
+  ScCodeBlockContent,
+  ScCodeBlockCopy,
+  ScCodeBlockHeader,
+  ScCodeBlockTitle,
 } from '@semantic-components/code';
-import { ScButton, ScCopyToClipboard } from '@semantic-components/ui';
-import { ScSeparator } from '@semantic-components/ui';
-import { ScHeading } from '@semantic-components/ui';
+import { ScHeading, ScSeparator } from '@semantic-components/ui';
 import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 import { PackageManagerInstall } from '../../components/package-manager-install/package-manager-install';
 import { TocHeading } from '../../components/toc/toc-heading';
@@ -15,13 +15,13 @@ import { TocHeading } from '../../components/toc/toc-heading';
 @Component({
   selector: 'app-prerequisites-page',
   imports: [
+    ScCodeBlock,
+    ScCodeBlockHeader,
+    ScCodeBlockTitle,
+    ScCodeBlockActions,
+    ScCodeBlockCopy,
+    ScCodeBlockContent,
     TocHeading,
-    ScCodeViewer,
-    ScCodeViewerContent,
-    ScCodeViewerHeader,
-    ScCodeViewerLabel,
-    ScButton,
-    ScCopyToClipboard,
     SiCheckIcon,
     SiCopyIcon,
     ScSeparator,
@@ -84,29 +84,24 @@ import { TocHeading } from '../../components/toc/toc-heading';
               >
               plugin into your PostCSS configuration.
             </p>
-            <div scCodeViewer>
-              <div scCodeViewerHeader>
-                <span scCodeViewerLabel>.postcssrc.json</span>
-                <button
-                  scButton
-                  variant="ghost"
-                  size="icon"
-                  [scCopyToClipboard]="step3aCode"
-                  #copy3="scCopyToClipboard"
-                >
-                  @if (copy3.copied()) {
-                    <svg siCheckIcon></svg>
-                  } @else {
-                    <svg siCopyIcon></svg>
-                  }
-                  <span class="sr-only">Copy to clipboard</span>
-                </button>
+            <div scCodeBlock>
+              <div scCodeBlockHeader>
+                <div scCodeBlockTitle>.postcssrc.json</div>
+                <div scCodeBlockActions>
+                  <button
+                    [scCodeBlockCopy]="step3aCode"
+                    #copy3="scCodeBlockCopy"
+                  >
+                    @if (copy3.copied()) {
+                      <svg siCheckIcon></svg>
+                    } @else {
+                      <svg siCopyIcon></svg>
+                    }
+                    <span class="sr-only">Copy to clipboard</span>
+                  </button>
+                </div>
               </div>
-              <div
-                scCodeViewerContent
-                [code]="step3aCode"
-                language="json"
-              ></div>
+              <pre scCodeBlockContent [code]="step3aCode" language="json"></pre>
             </div>
           </div>
         </div>

@@ -1,14 +1,14 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
-  ScCodeViewer,
-  ScCodeViewerContent,
-  ScCodeViewerHeader,
-  ScCodeViewerLabel,
+  ScCodeBlock,
+  ScCodeBlockActions,
+  ScCodeBlockContent,
+  ScCodeBlockCopy,
+  ScCodeBlockHeader,
+  ScCodeBlockTitle,
 } from '@semantic-components/code';
-import { ScButton, ScCopyToClipboard } from '@semantic-components/ui';
-import { ScLink, ScSeparator } from '@semantic-components/ui';
-import { ScHeading } from '@semantic-components/ui';
+import { ScHeading, ScLink, ScSeparator } from '@semantic-components/ui';
 import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 import { PackageManagerInstall } from '../../components/package-manager-install/package-manager-install';
 import { TocHeading } from '../../components/toc/toc-heading';
@@ -17,14 +17,14 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
 @Component({
   selector: 'app-ui-page',
   imports: [
+    ScCodeBlock,
+    ScCodeBlockHeader,
+    ScCodeBlockTitle,
+    ScCodeBlockActions,
+    ScCodeBlockCopy,
+    ScCodeBlockContent,
     RouterLink,
     TocHeading,
-    ScCodeViewer,
-    ScCodeViewerContent,
-    ScCodeViewerHeader,
-    ScCodeViewerLabel,
-    ScButton,
-    ScCopyToClipboard,
     SiCheckIcon,
     SiCopyIcon,
     ScSeparator,
@@ -63,29 +63,28 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
           import), Tailwind, tw-animate-css and shadcn's utilities, then the
           library's styles:
         </p>
-        <div scCodeViewer>
-          <div scCodeViewerHeader>
-            <span scCodeViewerLabel>css</span>
-            <button
-              scButton
-              variant="ghost"
-              size="icon"
-              [scCopyToClipboard]="stylesImportsCode"
-              #copy2="scCopyToClipboard"
-            >
-              @if (copy2.copied()) {
-                <svg siCheckIcon></svg>
-              } @else {
-                <svg siCopyIcon></svg>
-              }
-              <span class="sr-only">Copy to clipboard</span>
-            </button>
+        <div scCodeBlock>
+          <div scCodeBlockHeader>
+            <div scCodeBlockTitle>css</div>
+            <div scCodeBlockActions>
+              <button
+                [scCodeBlockCopy]="stylesImportsCode"
+                #copy2="scCodeBlockCopy"
+              >
+                @if (copy2.copied()) {
+                  <svg siCheckIcon></svg>
+                } @else {
+                  <svg siCopyIcon></svg>
+                }
+                <span class="sr-only">Copy to clipboard</span>
+              </button>
+            </div>
           </div>
-          <div
-            scCodeViewerContent
+          <pre
+            scCodeBlockContent
             [code]="stylesImportsCode"
             language="css"
-          ></div>
+          ></pre>
         </div>
 
         <p class="text-muted-foreground">
@@ -110,29 +109,28 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
           >
           so collapsibles can animate their height:
         </p>
-        <div scCodeViewer>
-          <div scCodeViewerHeader>
-            <span scCodeViewerLabel>css</span>
-            <button
-              scButton
-              variant="ghost"
-              size="icon"
-              [scCopyToClipboard]="stylesTokensCode"
-              #copy3="scCopyToClipboard"
-            >
-              @if (copy3.copied()) {
-                <svg siCheckIcon></svg>
-              } @else {
-                <svg siCopyIcon></svg>
-              }
-              <span class="sr-only">Copy to clipboard</span>
-            </button>
+        <div scCodeBlock>
+          <div scCodeBlockHeader>
+            <div scCodeBlockTitle>css</div>
+            <div scCodeBlockActions>
+              <button
+                [scCodeBlockCopy]="stylesTokensCode"
+                #copy3="scCodeBlockCopy"
+              >
+                @if (copy3.copied()) {
+                  <svg siCheckIcon></svg>
+                } @else {
+                  <svg siCopyIcon></svg>
+                }
+                <span class="sr-only">Copy to clipboard</span>
+              </button>
+            </div>
           </div>
-          <div
-            scCodeViewerContent
+          <pre
+            scCodeBlockContent
             [code]="stylesTokensCode"
             language="css"
-          ></div>
+          ></pre>
         </div>
       </section>
 
@@ -154,29 +152,28 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">--primary</code>
           and related tokens. Import them in addition to the default styles:
         </p>
-        <div scCodeViewer>
-          <div scCodeViewerHeader>
-            <span scCodeViewerLabel>css</span>
-            <button
-              scButton
-              variant="ghost"
-              size="icon"
-              [scCopyToClipboard]="colorSchemesCode"
-              #copyColorSchemes="scCopyToClipboard"
-            >
-              @if (copyColorSchemes.copied()) {
-                <svg siCheckIcon></svg>
-              } @else {
-                <svg siCopyIcon></svg>
-              }
-              <span class="sr-only">Copy to clipboard</span>
-            </button>
+        <div scCodeBlock>
+          <div scCodeBlockHeader>
+            <div scCodeBlockTitle>css</div>
+            <div scCodeBlockActions>
+              <button
+                [scCodeBlockCopy]="colorSchemesCode"
+                #copyColorSchemes="scCodeBlockCopy"
+              >
+                @if (copyColorSchemes.copied()) {
+                  <svg siCheckIcon></svg>
+                } @else {
+                  <svg siCopyIcon></svg>
+                }
+                <span class="sr-only">Copy to clipboard</span>
+              </button>
+            </div>
           </div>
-          <div
-            scCodeViewerContent
+          <pre
+            scCodeBlockContent
             [code]="colorSchemesCode"
             language="css"
-          ></div>
+          ></pre>
         </div>
         <p class="text-muted-foreground">
           Activate a scheme at runtime via
@@ -222,25 +219,21 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code
           >:
         </p>
-        <div scCodeViewer>
-          <div scCodeViewerHeader>
-            <span scCodeViewerLabel>css</span>
-            <button
-              scButton
-              variant="ghost"
-              size="icon"
-              [scCopyToClipboard]="sourceCode"
-              #copy4="scCopyToClipboard"
-            >
-              @if (copy4.copied()) {
-                <svg siCheckIcon></svg>
-              } @else {
-                <svg siCopyIcon></svg>
-              }
-              <span class="sr-only">Copy to clipboard</span>
-            </button>
+        <div scCodeBlock>
+          <div scCodeBlockHeader>
+            <div scCodeBlockTitle>css</div>
+            <div scCodeBlockActions>
+              <button [scCodeBlockCopy]="sourceCode" #copy4="scCodeBlockCopy">
+                @if (copy4.copied()) {
+                  <svg siCheckIcon></svg>
+                } @else {
+                  <svg siCopyIcon></svg>
+                }
+                <span class="sr-only">Copy to clipboard</span>
+              </button>
+            </div>
           </div>
-          <div scCodeViewerContent [code]="sourceCode" language="css"></div>
+          <pre scCodeBlockContent [code]="sourceCode" language="css"></pre>
         </div>
         <p class="text-muted-foreground text-sm">
           Adjust the path to

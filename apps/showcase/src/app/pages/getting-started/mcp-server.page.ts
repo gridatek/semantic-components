@@ -1,26 +1,26 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScCodeViewer,
-  ScCodeViewerContent,
-  ScCodeViewerHeader,
-  ScCodeViewerLabel,
+  ScCodeBlock,
+  ScCodeBlockActions,
+  ScCodeBlockContent,
+  ScCodeBlockCopy,
+  ScCodeBlockHeader,
+  ScCodeBlockTitle,
 } from '@semantic-components/code';
-import { ScButton, ScCopyToClipboard } from '@semantic-components/ui';
-import { ScSeparator } from '@semantic-components/ui';
-import { ScHeading } from '@semantic-components/ui';
+import { ScHeading, ScSeparator } from '@semantic-components/ui';
 import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 import { TocHeading } from '../../components/toc/toc-heading';
 
 @Component({
   selector: 'app-mcp-server-page',
   imports: [
+    ScCodeBlock,
+    ScCodeBlockHeader,
+    ScCodeBlockTitle,
+    ScCodeBlockActions,
+    ScCodeBlockCopy,
+    ScCodeBlockContent,
     TocHeading,
-    ScCodeViewer,
-    ScCodeViewerContent,
-    ScCodeViewerHeader,
-    ScCodeViewerLabel,
-    ScButton,
-    ScCopyToClipboard,
     SiCheckIcon,
     SiCopyIcon,
     ScSeparator,
@@ -47,25 +47,21 @@ import { TocHeading } from '../../components/toc/toc-heading';
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">.mcp.json</code>
           at the project root:
         </p>
-        <div scCodeViewer>
-          <div scCodeViewerHeader>
-            <span scCodeViewerLabel>.mcp.json</span>
-            <button
-              scButton
-              variant="ghost"
-              size="icon"
-              [scCopyToClipboard]="setupCode"
-              #copy="scCopyToClipboard"
-            >
-              @if (copy.copied()) {
-                <svg siCheckIcon></svg>
-              } @else {
-                <svg siCopyIcon></svg>
-              }
-              <span class="sr-only">Copy to clipboard</span>
-            </button>
+        <div scCodeBlock>
+          <div scCodeBlockHeader>
+            <div scCodeBlockTitle>.mcp.json</div>
+            <div scCodeBlockActions>
+              <button [scCodeBlockCopy]="setupCode" #copy="scCodeBlockCopy">
+                @if (copy.copied()) {
+                  <svg siCheckIcon></svg>
+                } @else {
+                  <svg siCopyIcon></svg>
+                }
+                <span class="sr-only">Copy to clipboard</span>
+              </button>
+            </div>
           </div>
-          <div scCodeViewerContent [code]="setupCode" language="json"></div>
+          <pre scCodeBlockContent [code]="setupCode" language="json"></pre>
         </div>
         <p class="text-muted-foreground">
           No installation is required.

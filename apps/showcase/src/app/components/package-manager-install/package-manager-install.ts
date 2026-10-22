@@ -6,20 +6,20 @@ import {
   input,
 } from '@angular/core';
 import {
-  ScCodeViewer,
-  ScCodeViewerContent,
-  ScCodeViewerHeader,
+  ScCodeBlock,
+  ScCodeBlockActions,
+  ScCodeBlockContent,
+  ScCodeBlockCopy,
+  ScCodeBlockHeader,
 } from '@semantic-components/code';
 import {
-  ScButton,
-  ScCopyToClipboard,
   ScTab,
   ScTabContent,
   ScTabList,
   ScTabPanel,
   ScTabs,
+  cn,
 } from '@semantic-components/ui';
-import { cn } from '@semantic-components/ui';
 import {
   SiCheckIcon,
   SiCopyIcon,
@@ -30,11 +30,11 @@ import { PackageManagerService } from './package-manager.service';
 @Component({
   selector: 'app-package-manager-install',
   imports: [
-    ScCodeViewer,
-    ScCodeViewerHeader,
-    ScCodeViewerContent,
-    ScButton,
-    ScCopyToClipboard,
+    ScCodeBlock,
+    ScCodeBlockHeader,
+    ScCodeBlockActions,
+    ScCodeBlockCopy,
+    ScCodeBlockContent,
     SiCheckIcon,
     SiCopyIcon,
     SiTerminalIcon,
@@ -46,8 +46,8 @@ import { PackageManagerService } from './package-manager.service';
   ],
   template: `
     <div scTabs>
-      <div scCodeViewer>
-        <div scCodeViewerHeader>
+      <div scCodeBlock>
+        <div scCodeBlockHeader>
           <svg siTerminalIcon class="text-muted-foreground size-4"></svg>
           <div
             scTabList
@@ -61,30 +61,25 @@ import { PackageManagerService } from './package-manager.service';
             <button scTab value="yarn">yarn</button>
             <button scTab value="bun">bun</button>
           </div>
-          <button
-            scButton
-            variant="ghost"
-            size="icon"
-            class="ml-auto"
-            [scCopyToClipboard]="command()"
-            #copy="scCopyToClipboard"
-          >
-            @if (copy.copied()) {
-              <svg siCheckIcon></svg>
-            } @else {
-              <svg siCopyIcon></svg>
-            }
-            <span class="sr-only">Copy install command</span>
-          </button>
+          <div scCodeBlockActions>
+            <button [scCodeBlockCopy]="command()" #copy="scCodeBlockCopy">
+              @if (copy.copied()) {
+                <svg siCheckIcon></svg>
+              } @else {
+                <svg siCopyIcon></svg>
+              }
+              <span class="sr-only">Copy install command</span>
+            </button>
+          </div>
         </div>
         @for (entry of commands(); track entry.id) {
           <div scTabPanel [value]="entry.id">
             <ng-template scTabContent>
-              <div
-                scCodeViewerContent
+              <pre
+                scCodeBlockContent
                 [code]="entry.command"
                 language="bash"
-              ></div>
+              ></pre>
             </ng-template>
           </div>
         }

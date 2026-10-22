@@ -1,13 +1,13 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScCodeViewer,
-  ScCodeViewerContent,
-  ScCodeViewerHeader,
-  ScCodeViewerLabel,
+  ScCodeBlock,
+  ScCodeBlockActions,
+  ScCodeBlockContent,
+  ScCodeBlockCopy,
+  ScCodeBlockHeader,
+  ScCodeBlockTitle,
 } from '@semantic-components/code';
-import { ScButton, ScCopyToClipboard } from '@semantic-components/ui';
-import { ScSeparator } from '@semantic-components/ui';
-import { ScHeading } from '@semantic-components/ui';
+import { ScHeading, ScSeparator } from '@semantic-components/ui';
 import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 import { PackageManagerInstall } from '../../components/package-manager-install/package-manager-install';
 import { TocHeading } from '../../components/toc/toc-heading';
@@ -16,13 +16,13 @@ import { CountrySelectorPhoneInputDemoContainer } from '../docs/phone-input/demo
 @Component({
   selector: 'app-phone-input-install-page',
   imports: [
+    ScCodeBlock,
+    ScCodeBlockHeader,
+    ScCodeBlockTitle,
+    ScCodeBlockActions,
+    ScCodeBlockCopy,
+    ScCodeBlockContent,
     TocHeading,
-    ScCodeViewer,
-    ScCodeViewerContent,
-    ScCodeViewerHeader,
-    ScCodeViewerLabel,
-    ScButton,
-    ScCopyToClipboard,
     SiCheckIcon,
     SiCopyIcon,
     ScSeparator,
@@ -65,25 +65,21 @@ import { CountrySelectorPhoneInputDemoContainer } from '../docs/phone-input/demo
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code
           >:
         </p>
-        <div scCodeViewer>
-          <div scCodeViewerHeader>
-            <span scCodeViewerLabel>css</span>
-            <button
-              scButton
-              variant="ghost"
-              size="icon"
-              [scCopyToClipboard]="sourceCode"
-              #copy="scCopyToClipboard"
-            >
-              @if (copy.copied()) {
-                <svg siCheckIcon></svg>
-              } @else {
-                <svg siCopyIcon></svg>
-              }
-              <span class="sr-only">Copy to clipboard</span>
-            </button>
+        <div scCodeBlock>
+          <div scCodeBlockHeader>
+            <div scCodeBlockTitle>css</div>
+            <div scCodeBlockActions>
+              <button [scCodeBlockCopy]="sourceCode" #copy="scCodeBlockCopy">
+                @if (copy.copied()) {
+                  <svg siCheckIcon></svg>
+                } @else {
+                  <svg siCopyIcon></svg>
+                }
+                <span class="sr-only">Copy to clipboard</span>
+              </button>
+            </div>
           </div>
-          <div scCodeViewerContent [code]="sourceCode" language="css"></div>
+          <pre scCodeBlockContent [code]="sourceCode" language="css"></pre>
         </div>
         <p class="text-muted-foreground text-sm">
           Adjust the path to

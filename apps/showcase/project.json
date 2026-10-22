@@ -62,6 +62,11 @@
         "development": {
           "buildTarget": "showcase:build:development"
         }
+      },
+      "options": {
+        "prebundle": {
+          "exclude": ["shiki", "@shikijs/langs", "@shikijs/themes"]
+        }
       }
     },
     "test": {

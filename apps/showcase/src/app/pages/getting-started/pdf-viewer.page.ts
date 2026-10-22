@@ -1,18 +1,14 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
-  ScCodeViewer,
-  ScCodeViewerContent,
-  ScCodeViewerHeader,
-  ScCodeViewerLabel,
+  ScCodeBlock,
+  ScCodeBlockActions,
+  ScCodeBlockContent,
+  ScCodeBlockCopy,
+  ScCodeBlockHeader,
+  ScCodeBlockTitle,
 } from '@semantic-components/code';
-import {
-  ScButton,
-  ScCopyToClipboard,
-  ScHeading,
-  ScLink,
-  ScSeparator,
-} from '@semantic-components/ui';
+import { ScHeading, ScLink, ScSeparator } from '@semantic-components/ui';
 import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 import { PackageManagerInstall } from '../../components/package-manager-install/package-manager-install';
 import { TocHeading } from '../../components/toc/toc-heading';
@@ -20,14 +16,14 @@ import { TocHeading } from '../../components/toc/toc-heading';
 @Component({
   selector: 'app-pdf-viewer-install-page',
   imports: [
+    ScCodeBlock,
+    ScCodeBlockHeader,
+    ScCodeBlockTitle,
+    ScCodeBlockActions,
+    ScCodeBlockCopy,
+    ScCodeBlockContent,
     RouterLink,
     TocHeading,
-    ScCodeViewer,
-    ScCodeViewerContent,
-    ScCodeViewerHeader,
-    ScCodeViewerLabel,
-    ScButton,
-    ScCopyToClipboard,
     ScLink,
     SiCheckIcon,
     SiCopyIcon,
@@ -70,25 +66,24 @@ import { TocHeading } from '../../components/toc/toc-heading';
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code
           >:
         </p>
-        <div scCodeViewer>
-          <div scCodeViewerHeader>
-            <span scCodeViewerLabel>css</span>
-            <button
-              scButton
-              variant="ghost"
-              size="icon"
-              [scCopyToClipboard]="stylesCode"
-              #copyStyles="scCopyToClipboard"
-            >
-              @if (copyStyles.copied()) {
-                <svg siCheckIcon></svg>
-              } @else {
-                <svg siCopyIcon></svg>
-              }
-              <span class="sr-only">Copy to clipboard</span>
-            </button>
+        <div scCodeBlock>
+          <div scCodeBlockHeader>
+            <div scCodeBlockTitle>css</div>
+            <div scCodeBlockActions>
+              <button
+                [scCodeBlockCopy]="stylesCode"
+                #copyStyles="scCodeBlockCopy"
+              >
+                @if (copyStyles.copied()) {
+                  <svg siCheckIcon></svg>
+                } @else {
+                  <svg siCopyIcon></svg>
+                }
+                <span class="sr-only">Copy to clipboard</span>
+              </button>
+            </div>
           </div>
-          <div scCodeViewerContent [code]="stylesCode" language="css"></div>
+          <pre scCodeBlockContent [code]="stylesCode" language="css"></pre>
         </div>
         <p class="text-muted-foreground text-sm">
           Adjust the path to
@@ -115,29 +110,28 @@ import { TocHeading } from '../../components/toc/toc-heading';
           >
           so they follow it:
         </p>
-        <div scCodeViewer>
-          <div scCodeViewerHeader>
-            <span scCodeViewerLabel>typescript</span>
-            <button
-              scButton
-              variant="ghost"
-              size="icon"
-              [scCopyToClipboard]="overlayCode"
-              #copyOverlay="scCopyToClipboard"
-            >
-              @if (copyOverlay.copied()) {
-                <svg siCheckIcon></svg>
-              } @else {
-                <svg siCopyIcon></svg>
-              }
-              <span class="sr-only">Copy to clipboard</span>
-            </button>
+        <div scCodeBlock>
+          <div scCodeBlockHeader>
+            <div scCodeBlockTitle>typescript</div>
+            <div scCodeBlockActions>
+              <button
+                [scCodeBlockCopy]="overlayCode"
+                #copyOverlay="scCodeBlockCopy"
+              >
+                @if (copyOverlay.copied()) {
+                  <svg siCheckIcon></svg>
+                } @else {
+                  <svg siCopyIcon></svg>
+                }
+                <span class="sr-only">Copy to clipboard</span>
+              </button>
+            </div>
           </div>
-          <div
-            scCodeViewerContent
+          <pre
+            scCodeBlockContent
             [code]="overlayCode"
             language="typescript"
-          ></div>
+          ></pre>
         </div>
       </section>
 
@@ -155,46 +149,44 @@ import { TocHeading } from '../../components/toc/toc-heading';
           (the build target's
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">assets</code>):
         </p>
-        <div scCodeViewer>
-          <div scCodeViewerHeader>
-            <span scCodeViewerLabel>json</span>
-            <button
-              scButton
-              variant="ghost"
-              size="icon"
-              [scCopyToClipboard]="assetsCode"
-              #copyAssets="scCopyToClipboard"
-            >
-              @if (copyAssets.copied()) {
-                <svg siCheckIcon></svg>
-              } @else {
-                <svg siCopyIcon></svg>
-              }
-              <span class="sr-only">Copy to clipboard</span>
-            </button>
+        <div scCodeBlock>
+          <div scCodeBlockHeader>
+            <div scCodeBlockTitle>json</div>
+            <div scCodeBlockActions>
+              <button
+                [scCodeBlockCopy]="assetsCode"
+                #copyAssets="scCodeBlockCopy"
+              >
+                @if (copyAssets.copied()) {
+                  <svg siCheckIcon></svg>
+                } @else {
+                  <svg siCopyIcon></svg>
+                }
+                <span class="sr-only">Copy to clipboard</span>
+              </button>
+            </div>
           </div>
-          <div scCodeViewerContent [code]="assetsCode" language="json"></div>
+          <pre scCodeBlockContent [code]="assetsCode" language="json"></pre>
         </div>
         <p class="text-muted-foreground">and point the viewer at them:</p>
-        <div scCodeViewer>
-          <div scCodeViewerHeader>
-            <span scCodeViewerLabel>html</span>
-            <button
-              scButton
-              variant="ghost"
-              size="icon"
-              [scCopyToClipboard]="assetsUrlCode"
-              #copyAssetsUrl="scCopyToClipboard"
-            >
-              @if (copyAssetsUrl.copied()) {
-                <svg siCheckIcon></svg>
-              } @else {
-                <svg siCopyIcon></svg>
-              }
-              <span class="sr-only">Copy to clipboard</span>
-            </button>
+        <div scCodeBlock>
+          <div scCodeBlockHeader>
+            <div scCodeBlockTitle>html</div>
+            <div scCodeBlockActions>
+              <button
+                [scCodeBlockCopy]="assetsUrlCode"
+                #copyAssetsUrl="scCodeBlockCopy"
+              >
+                @if (copyAssetsUrl.copied()) {
+                  <svg siCheckIcon></svg>
+                } @else {
+                  <svg siCopyIcon></svg>
+                }
+                <span class="sr-only">Copy to clipboard</span>
+              </button>
+            </div>
           </div>
-          <div scCodeViewerContent [code]="assetsUrlCode" language="html"></div>
+          <pre scCodeBlockContent [code]="assetsUrlCode" language="html"></pre>
         </div>
       </section>
 
@@ -231,6 +223,8 @@ export default class PdfViewerInstallPage {
   FullscreenOverlayContainer,
   OverlayContainer,
 } from '@angular/cdk/overlay';
+import { ScCodeBlock, ScCodeBlockHeader, ScCodeBlockTitle, ScCodeBlockActions, ScCodeBlockCopy, ScCodeBlockContent } from '@semantic-components/code';
+import { ScHeading, ScLink, ScSeparator } from '@semantic-components/ui';
 
 export const appConfig: ApplicationConfig = {
   providers: [
