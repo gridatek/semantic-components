@@ -95,7 +95,7 @@ import { SingleCalendarNextDemoContainer } from './demos/single-calendar-next-de
       <section class="space-y-4">
         <h2 scHeading appToc>Locale and week numbers</h2>
         <p class="text-muted-foreground">
-          locale="de-DE": the days, months and heading in German, the week from
+          locale="fr-FR": the days, months and heading in French, the week from
           Monday — as the locale has it — and showWeekNumbers.
         </p>
         <app-locale-calendar-next-demo-container />

@@ -12,7 +12,7 @@ import {
   SiChevronRightIcon,
 } from '@semantic-icons/lucide-icons';
 
-/** locale="de-DE": the days, months and heading in German, the week from Monday — as the locale has it — and showWeekNumbers. */
+/** locale="fr-FR": the days, months and heading in French, the week from Monday — as the locale has it — and showWeekNumbers. */
 @Component({
   selector: 'app-locale-calendar-next-demo',
   imports: [
@@ -28,8 +28,8 @@ import {
     <div
       scCalendarNext
       #cal="scCalendarNext"
-      aria-label="Kalender"
-      locale="de-DE"
+      aria-label="Calendrier"
+      locale="fr-FR"
       showWeekNumbers
       [(value)]="date"
       class="rounded-lg border"
@@ -55,13 +55,13 @@ export class LocaleCalendarNextDemo {
     Temporal.PlainDate.from('2026-10-14'),
   );
   readonly previousLabel = {
-    day: 'Vorheriger Monat',
-    month: 'Vorheriges Jahr',
-    year: 'Vorherige Jahre',
+    day: 'Mois précédent',
+    month: 'Année précédente',
+    year: 'Années précédentes',
   };
   readonly nextLabel = {
-    day: 'Nächster Monat',
-    month: 'Nächstes Jahr',
-    year: 'Nächste Jahre',
+    day: 'Mois suivant',
+    month: 'Année suivante',
+    year: 'Années suivantes',
   };
 }

@@ -205,10 +205,10 @@ test('Custom days: your content, said too', async ({ page }) => {
   await expect(day(page, '2026-10-07')).not.toContainText('events');
 });
 
-test('Locale: German, Monday first, week numbers', async ({ page }) => {
+test('Locale: French, Monday first, week numbers', async ({ page }) => {
   await page.goto(demo('locale'));
-  const grid = page.getByRole('grid', { name: 'Oktober 2026' });
-  await expect(grid.getByRole('columnheader').first()).toHaveText(/Montag/);
+  const grid = page.getByRole('grid', { name: 'octobre 2026' });
+  await expect(grid.getByRole('columnheader').first()).toHaveText(/lundi/);
   await expect(grid.getByRole('rowheader')).toHaveText([
     '40',
     '41',
@@ -217,7 +217,7 @@ test('Locale: German, Monday first, week numbers', async ({ page }) => {
     '44',
   ]);
   await expect(
-    page.getByRole('button', { name: 'Nächster Monat' }),
+    page.getByRole('button', { name: 'Mois suivant' }),
   ).toBeVisible();
 });
 
