@@ -3777,6 +3777,86 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/time-picker-next',
+    children: [
+      {
+        path: 'basic-time-picker-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/time-picker-next/demos/basic-time-picker-next-demo').then(
+            (m) => m.BasicTimePickerNextDemo,
+          ),
+      },
+      {
+        path: 'interval-time-picker-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/time-picker-next/demos/interval-time-picker-next-demo').then(
+            (m) => m.IntervalTimePickerNextDemo,
+          ),
+      },
+      {
+        path: 'locale-time-picker-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/time-picker-next/demos/locale-time-picker-next-demo').then(
+            (m) => m.LocaleTimePickerNextDemo,
+          ),
+      },
+      {
+        path: 'form-time-picker-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/time-picker-next/demos/form-time-picker-next-demo').then(
+            (m) => m.FormTimePickerNextDemo,
+          ),
+      },
+    ],
+  },
+  {
+    path: 'demos/time-input',
+    children: [
+      {
+        path: 'basic-time-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/time-input/demos/basic-time-input-demo').then(
+            (m) => m.BasicTimeInputDemo,
+          ),
+      },
+      {
+        path: 'locale-time-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/time-input/demos/locale-time-input-demo').then(
+            (m) => m.LocaleTimeInputDemo,
+          ),
+      },
+      {
+        path: 'seconds-time-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/time-input/demos/seconds-time-input-demo').then(
+            (m) => m.SecondsTimeInputDemo,
+          ),
+      },
+      {
+        path: 'limits-time-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/time-input/demos/limits-time-input-demo').then(
+            (m) => m.LimitsTimeInputDemo,
+          ),
+      },
+      {
+        path: 'form-time-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/time-input/demos/form-time-input-demo').then(
+            (m) => m.FormTimeInputDemo,
+          ),
+      },
+      {
+        path: 'disabled-time-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/time-input/demos/disabled-time-input-demo').then(
+            (m) => m.DisabledTimeInputDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/time-picker-clock',
     children: [
       {

@@ -6,6 +6,7 @@ import { SC_FIELD } from '../field';
   selector: 'label[scLabel]',
   host: {
     'data-slot': 'label',
+    '[attr.id]': 'id()',
     '[attr.for]': 'for()',
     '[class]': 'class()',
   },
@@ -13,8 +14,16 @@ import { SC_FIELD } from '../field';
 export class ScLabel {
   private readonly field = inject(SC_FIELD, { optional: true });
 
+  readonly idInput = input<string>('', { alias: 'id' });
   readonly forInput = input<string>('', { alias: 'for' });
   readonly classInput = input<string>('', { alias: 'class' });
+
+  /** In a field, `<field id>-label`: what names a control that is not an input (a group). */
+  protected readonly id = computed(
+    () =>
+      this.idInput() ||
+      (this.field && !this.forInput() ? `${this.field.id()}-label` : null),
+  );
 
   protected readonly for = computed(() => {
     // Priority: explicit for input > field context

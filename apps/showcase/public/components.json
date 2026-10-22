@@ -912,6 +912,22 @@
     "category": "Forms"
   },
   {
+    "name": "Time Picker Next",
+    "path": "time-picker-next",
+    "description": "The time picker, rebuilt: a time input with a list of times.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Forms"
+  },
+  {
+    "name": "Time Input",
+    "path": "time-input",
+    "description": "A time typed part by part, in your language; a form field.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Forms"
+  },
+  {
     "name": "Time Picker Clock",
     "path": "time-picker-clock",
     "description": "A visual clock interface for selecting hours or minutes.",
