@@ -1,6 +1,10 @@
 @import url('@angular/cdk/overlay-prebuilt.css');
 
-@import './shadcn.css';
+/*
+ * What the components need, whatever the theme. The theme itself — Tailwind,
+ * tw-animate-css, shadcn/tailwind.css and the design tokens — is the app's own
+ * styles.css, as in shadcn.
+ */
 
 /*
  * Reduced motion: the enter / exit animations (animate-in, animate-out) keep
