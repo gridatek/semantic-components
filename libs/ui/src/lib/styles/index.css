@@ -1,9 +1,7 @@
-@import url('@angular/cdk/overlay-prebuilt.css');
-
 /*
  * What the components need, whatever the theme. The theme itself — Tailwind,
  * tw-animate-css, shadcn/tailwind.css and the design tokens — is the app's own
- * styles.css, as in shadcn.
+ * styles.css, as in shadcn; so is the Angular CDK overlay's CSS (its first line).
  */
 
 /*

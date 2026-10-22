@@ -1,3 +1,4 @@
+@import url('@angular/cdk/overlay-prebuilt.css');
 @import 'tailwindcss';
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';

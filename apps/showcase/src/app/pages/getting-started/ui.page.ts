@@ -58,8 +58,10 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
         <p class="text-muted-foreground">
           As in shadcn/ui, the theme is your app's: its
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code>
-          imports Tailwind, tw-animate-css and shadcn's utilities — then the
-          library's styles (the Angular CDK overlay, reduced motion):
+          imports the Angular CDK overlay's styles (first: a
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">url()</code>
+          import), Tailwind, tw-animate-css and shadcn's utilities, then the
+          library's styles:
         </p>
         <div scCodeViewer>
           <div scCodeViewerHeader>
@@ -263,7 +265,8 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
   encapsulation: ViewEncapsulation.None,
 })
 export default class UiPage {
-  readonly stylesImportsCode = `@import "tailwindcss";
+  readonly stylesImportsCode = `@import url("@angular/cdk/overlay-prebuilt.css");
+@import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import "@semantic-components/ui/styles";`;
