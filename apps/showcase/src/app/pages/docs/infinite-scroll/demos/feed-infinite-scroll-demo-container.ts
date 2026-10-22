@@ -34,11 +34,7 @@ interface Item {
 /** Articles in a feed (role="feed"), more as the reader nears the end of the box: aria-busy while loading, and your words in the status — then “That’s all”. */
 @Component({
   selector: 'app-feed-infinite-scroll-demo',
-  imports: [
-    ScInfiniteScroll,
-    ScInfiniteScrollStatus,
-    SiLoaderCircleIcon,
-  ],
+  imports: [ScInfiniteScroll, ScInfiniteScrollStatus, SiLoaderCircleIcon],
   template: \`
     <div class="h-96 w-full max-w-lg overflow-y-auto rounded-lg border">
       <div

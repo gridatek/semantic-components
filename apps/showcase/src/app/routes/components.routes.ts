@@ -546,6 +546,12 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/sortable-list/sortable-list-page'),
       },
       {
+        path: 'sortable-list-next',
+        title: 'Sortable List Next - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/sortable-list-next/sortable-list-next-page'),
+      },
+      {
         path: 'speed-dial',
         title: 'Speed Dial - Semantic Components',
         loadComponent: () => import('../pages/docs/speed-dial/speed-dial-page'),

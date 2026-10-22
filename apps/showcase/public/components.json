@@ -808,6 +808,14 @@
     "category": "Recipes"
   },
   {
+    "name": "Sortable List Next",
+    "path": "sortable-list-next",
+    "description": "The sortable list, rebuilt: your array reordered by any pointer or the keyboard, announced in your words; down, along, or as a grid.",
+    "status": "Experimental",
+    "library": "ui-lab",
+    "category": "Advanced"
+  },
+  {
     "name": "Speed Dial",
     "path": "speed-dial",
     "description": "A floating button opening a menu of actions, in a line or on an arc, with a backdrop.",

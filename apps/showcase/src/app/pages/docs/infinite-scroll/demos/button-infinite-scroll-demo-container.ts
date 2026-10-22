@@ -33,11 +33,7 @@ interface Item {
 /** auto off: only the button asks — the footer stays within reach, and the reader decides. */
 @Component({
   selector: 'app-button-infinite-scroll-demo',
-  imports: [
-    ScInfiniteScroll,
-    ScInfiniteScrollMore,
-    ScInfiniteScrollStatus,
-  ],
+  imports: [ScInfiniteScroll, ScInfiniteScrollMore, ScInfiniteScrollStatus],
   template: \`
     <div class="grid w-full max-w-lg gap-3">
       <ul

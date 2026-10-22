@@ -3269,6 +3269,53 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/sortable-list-next',
+    children: [
+      {
+        path: 'basic-sortable-list-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/sortable-list-next/demos/basic-sortable-list-next-demo').then(
+            (m) => m.BasicSortableListNextDemo,
+          ),
+      },
+      {
+        path: 'handle-sortable-list-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/sortable-list-next/demos/handle-sortable-list-next-demo').then(
+            (m) => m.HandleSortableListNextDemo,
+          ),
+      },
+      {
+        path: 'horizontal-sortable-list-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/sortable-list-next/demos/horizontal-sortable-list-next-demo').then(
+            (m) => m.HorizontalSortableListNextDemo,
+          ),
+      },
+      {
+        path: 'grid-sortable-list-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/sortable-list-next/demos/grid-sortable-list-next-demo').then(
+            (m) => m.GridSortableListNextDemo,
+          ),
+      },
+      {
+        path: 'buttons-sortable-list-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/sortable-list-next/demos/buttons-sortable-list-next-demo').then(
+            (m) => m.ButtonsSortableListNextDemo,
+          ),
+      },
+      {
+        path: 'disabled-sortable-list-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/sortable-list-next/demos/disabled-sortable-list-next-demo').then(
+            (m) => m.DisabledSortableListNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/speed-dial',
     children: [
       {

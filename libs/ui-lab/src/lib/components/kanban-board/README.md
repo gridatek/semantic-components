@@ -62,6 +62,7 @@ readonly announce = ({ type, item, column, position, count }: ScKanbanBoardAnnou
 | Space, Enter | lifts the focused card; again, drops it                                    |
 | ← →          | lifted: to the column before, after — in reading order (right to left too) |
 | ↑ ↓          | lifted: one place up, down                                                 |
+| Home, End    | lifted: to the top, the bottom of its column                               |
 | Escape       | lifted: back where it was                                                  |
 | Tab          | lifted: stays — drop or cancel first                                       |
 
