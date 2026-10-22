@@ -60,11 +60,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
             </button>
           </span>
         }
-        <input
-          scTagsInputControl
-          type="email"
-          placeholder="name@example.com"
-        />
+        <input scTagsInputControl type="email" placeholder="name@example.com" />
       </div>
       @if (invite.rejected()) {
         <p class="text-destructive text-sm">

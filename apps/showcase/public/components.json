@@ -600,6 +600,14 @@
     "category": "Advanced"
   },
   {
+    "name": "Notification Center Next",
+    "path": "notification-center-next",
+    "description": "The notification center, rebuilt: theme colours, notifications by day titled in your language, an unread count for the bell.",
+    "status": "Experimental",
+    "library": "ui-lab",
+    "category": "Advanced"
+  },
+  {
     "name": "Number Field",
     "path": "number-field",
     "description": "A number input: typed and read in the locale, stepped with the keyboard, buttons, the wheel or by dragging its label.",
