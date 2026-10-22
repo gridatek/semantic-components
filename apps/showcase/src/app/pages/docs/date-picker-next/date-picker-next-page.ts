@@ -60,7 +60,7 @@ import { TypedDatePickerNextDemoContainer } from './demos/typed-date-picker-next
         <h2 scHeading appToc>Date of birth</h2>
         <p class="text-muted-foreground">
           startView="year" on the calendar: it opens on the years — a year, then
-          its month, then its day. maxDate is today.
+          its month, then its day. 18 or older: maxDate is today minus 18 years.
         </p>
         <app-birth-date-picker-next-demo-container />
       </section>

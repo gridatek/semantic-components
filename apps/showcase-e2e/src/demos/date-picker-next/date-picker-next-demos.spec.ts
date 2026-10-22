@@ -67,15 +67,13 @@ test('Typed: the locale’s order or ISO; unreadable text marked', async ({
   await expect(day(page, '2026-11-02')).toBeFocused();
 });
 
-test('Date of birth: opens on the years; nothing after today', async ({
-  page,
-}) => {
+test('Date of birth: opens on the years; 18 or older', async ({ page }) => {
   await page.goto(demo('birth'));
   await page.getByRole('button', { name: 'Choose your date of birth' }).click();
   const year = (y: number) =>
     page.locator('[data-slot="calendar-cell-year"]', { hasText: String(y) });
-  await expect(year(2026)).toBeFocused();
-  await expect(year(2027)).toHaveAttribute('aria-disabled', 'true');
+  await expect(year(2008)).toBeFocused();
+  await expect(year(2009)).toHaveAttribute('aria-disabled', 'true');
   const years = page.locator('[data-slot="calendar-years"] [role="grid"]');
   while ((await year(2001).count()) === 0) {
     const shown = await years.getAttribute('aria-label');
@@ -90,6 +88,14 @@ test('Date of birth: opens on the years; nothing after today', async ({
   await expect(calendar(page)).toHaveCount(0);
   await expect(picked(page)).toHaveText('May 14, 2001');
   await expect(page.getByLabel('Date of birth')).toHaveValue('05/14/2001');
+  // Typed: not 18 yet — marked.
+  await page.getByLabel('Date of birth').fill('10/23/2008');
+  await page.getByLabel('Date of birth').press('Enter');
+  await expect(page.getByLabel('Date of birth')).toHaveAttribute(
+    'aria-invalid',
+    'true',
+  );
+  await expect(picked(page)).toHaveText('May 14, 2001');
 });
 
 test('Range: written as one span; closed once whole', async ({ page }) => {

@@ -24,7 +24,7 @@ import {
   SiChevronRightIcon,
 } from '@semantic-icons/lucide-icons';
 
-/** A date of birth: the calendar opens on the years — a year, its month, its day; nothing after today. Typed too. */
+/** A date of birth: the calendar opens on the years — a year, its month, its day; 18 or older: nothing after this day 18 years ago. Typed too. */
 @Component({
   selector: 'app-birth-date-picker-next-demo',
   imports: [
@@ -54,7 +54,7 @@ import {
       <div
         scDatePickerNext
         #dp="scDatePickerNext"
-        [maxDate]="today"
+        [maxDate]="adult"
         [(value)]="date"
       >
         <div scPopoverProvider [origin]="trigger.overlayOrigin" align="end">
@@ -81,7 +81,7 @@ import {
                 #cal="scCalendar"
                 initialFocus
                 startView="year"
-                [maxDate]="today"
+                [maxDate]="adult"
                 aria-label="Choose your date of birth"
                 [mode]="dp.mode()"
                 [value]="dp.value()"
@@ -127,7 +127,7 @@ import {
           </ng-template>
         </div>
       </div>
-      <p scFieldDescription>Month, day, year.</p>
+      <p scFieldDescription>You must be 18 or older.</p>
     </div>
     <p class="text-muted-foreground text-sm" data-testid="picked">
       {{ dp.text() || 'Nothing picked.' }}
@@ -137,6 +137,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class BirthDatePickerNextDemo {
-  readonly today = Temporal.Now.plainDateISO();
+  /** 18 years old today, at the latest. */
+  readonly adult = Temporal.Now.plainDateISO().subtract({ years: 18 });
   readonly date = signal<ScCalendarValue>(null);
 }
