@@ -30,6 +30,7 @@ Across all components, also:
 - **Accessibility** — WCAG AA: axe green, keyboard complete (a WAI-ARIA pattern followed where one exists), names and descriptions from the consumer, focus visible and never trapped.
 - **Attribute selectors only** — every part in the libs is an attribute on the consumer's element (`div[scCard]`, `button[scCodeBlockCopy]`), never a custom element (`<sc-…>`); also for parts the library creates itself (a toast stack, a tooltip), on a `div` host.
 - **Directive first** — a part is a `@Directive` unless it has a reason to be a `@Component` (a template of its own, encapsulation, a CDK base class); a component whose template is only `<ng-content />` becomes a directive.
+- **Icons bare** — the consumer writes `<svg siCopyIcon></svg>` and nothing else: a part that holds icons sizes them (`[&_svg:not([class*='size-'])]:size-4`, `shrink-0`), so no `size-*` in the template unless the design wants another size, and never `aria-hidden` (semantic-icons sets it). A button look is `scButton`, never its classes copied.
 - **No default strings** — every word is the consumer's (translation is theirs); `Intl` for dates, numbers, lists and units.
 - **Forms** — inputs are a `[formField]` (`FormValueControl`), with `invalid` / `touched` / `disabled`.
 - **Reduced motion** — animations keep their fades, lose their movement.
@@ -43,6 +44,8 @@ Across all components, also:
 - [x] **Style diff helper**: `node scripts/shadcn-diff.mjs <shadcn name> [our name]` — per part (`data-slot`) and per variant, the classes only shadcn has and only we have, from `shadcn-reference`. An aid: reading both still decides ([shadcn-style-reference.md](shadcn-style-reference.md)).
 - [x] **Inventory refresh**: `node scripts/roadmap.mjs`, then prettier — rewrites the inventory line and the phase tables (level, size, library, built on, shadcn, e2e, RTL); the ticks already set are kept.
 - [x] **Attribute selectors everywhere**: the custom-element selectors left — `sc-accordion-body`, `sc-collapsible-body`, `sc-toast-stack`, `sc-tooltip` (ui), `sc-language-select`, `sc-stacked-layout`, `sc-sidebar-layout`, `sc-auth-layout`, `sc-pdf-viewer-canvas` (ui-lab) — made attributes (`div[scAccordionBody]`…; they render templates, so they stay components); Angular ESLint's `component-selector` / `directive-selector` (`type: 'attribute'`, prefix `sc`, camelCase) are errors in every lib, so none comes back.
+
+- [x] **Icons bare**: `aria-hidden` removed from every semantic-icons `<svg>`, and the sizes the parts already give; the parts that didn't size their icons now do (command input group, file-upload dropzone, navbar brand, code-block header, infinite-scroll status, PDF loading); collapsible and hover-card triggers in the demos are `scButton` instead of a copied class list.
 
 ## Phase 1 — Atoms (59)
 

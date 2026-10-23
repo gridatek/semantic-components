@@ -11,7 +11,7 @@ A styled wrapper around the native HTML `<select>` element, providing consistent
     <option value="one">Option 1</option>
     <option value="two">Option 2</option>
   </select>
-  <svg siChevronDownIcon scNativeSelectIcon aria-hidden="true"></svg>
+  <svg siChevronDownIcon scNativeSelectIcon></svg>
 </div>
 ```
 
@@ -84,7 +84,7 @@ Optional directive for styling `<optgroup>` elements.
       <option value="vue">Vue</option>
       <option value="svelte">Svelte</option>
     </select>
-    <svg siChevronDownIcon scNativeSelectIcon aria-hidden="true"></svg>
+    <svg siChevronDownIcon scNativeSelectIcon></svg>
   </div>
 </div>
 ```
@@ -97,7 +97,7 @@ Optional directive for styling `<optgroup>` elements.
     <option value="us">US</option>
     <option value="uk">UK</option>
   </select>
-  <svg siChevronDownIcon scNativeSelectIcon aria-hidden="true"></svg>
+  <svg siChevronDownIcon scNativeSelectIcon></svg>
 </div>
 ```
 
@@ -115,7 +115,7 @@ Optional directive for styling `<optgroup>` elements.
       <option scNativeSelectOption value="express">Express</option>
     </optgroup>
   </select>
-  <svg siChevronDownIcon scNativeSelectIcon aria-hidden="true"></svg>
+  <svg siChevronDownIcon scNativeSelectIcon></svg>
 </div>
 ```
 

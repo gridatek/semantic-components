@@ -114,10 +114,10 @@ import {
         </div>
         <div scPdfViewerContent>
           <div scPdfViewerLoading>
-            <svg scSpinner siLoaderCircleIcon class="size-6"></svg>
+            <svg scSpinner siLoaderCircleIcon></svg>
             Loading the form…
           </div>
-          <div scPdfViewerCanvas ></div>
+          <div scPdfViewerCanvas></div>
         </div>
         <div scDialogProvider scPdfViewerDialog="print">
           <ng-template scDialogPortal>

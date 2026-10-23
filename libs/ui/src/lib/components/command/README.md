@@ -53,7 +53,7 @@ The input is the combobox: focus stays in it while arrows move the active item (
 ```html
 <div scCommand class="rounded-lg border shadow-md">
   <div scCommandInputGroup>
-    <svg siSearchIcon class="mr-2 size-4 shrink-0 opacity-50" aria-hidden="true"></svg>
+    <svg siSearchIcon></svg>
     <input scCommandInput placeholder="Type a command..." [(value)]="searchString" />
   </div>
   <ng-template scCommandListContainer>
@@ -80,7 +80,7 @@ The input is the combobox: focus stays in it while arrows move the active item (
     <div scDialog class="w-lg gap-0 p-0">
       <div scCommand>
         <div scCommandInputGroup>
-          <svg siSearchIcon class="mr-2 size-4 shrink-0 opacity-50" aria-hidden="true"></svg>
+          <svg siSearchIcon></svg>
           <input scCommandInput placeholder="Type a command or search..." [(value)]="searchString" />
         </div>
         <ng-template scCommandListContainer>
@@ -149,7 +149,7 @@ The input is the combobox: focus stays in it while arrows move the active item (
 ```html
 <div scCommand class="rounded-lg border shadow-md">
   <div scCommandInputGroup>
-    <svg siSearchIcon class="mr-2 size-4 shrink-0 opacity-50" aria-hidden="true"></svg>
+    <svg siSearchIcon></svg>
     <input scCommandInput placeholder="Type a command..." [(value)]="searchString" />
   </div>
   <ng-template scCommandListContainer>
@@ -176,7 +176,7 @@ The input is the combobox: focus stays in it while arrows move the active item (
     <div scDialog class="w-lg gap-0 p-0">
       <div scCommand>
         <div scCommandInputGroup>
-          <svg siSearchIcon class="mr-2 size-4 shrink-0 opacity-50" aria-hidden="true"></svg>
+          <svg siSearchIcon></svg>
           <input scCommandInput placeholder="Type a command or search..." [(value)]="searchString" />
         </div>
         <ng-template scCommandListContainer>

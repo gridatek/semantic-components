@@ -1478,7 +1478,7 @@ const INK_COLORS = [
               aria-label="Loading document"
             ></div>
             <div scPdfViewerLoading>
-              <svg scSpinner siLoaderCircleIcon class="size-6"></svg>
+              <svg scSpinner siLoaderCircleIcon></svg>
               Loading document…
             </div>
             <div scEmpty scPdfViewerError>

@@ -68,7 +68,7 @@ import {
       <nav scNavbar aria-label="Acme site">
         <div scNavbarGroup>
           <a scNavbarBrand href="#">
-            <svg siGalleryVerticalEndIcon class="size-6"></svg>
+            <svg siGalleryVerticalEndIcon></svg>
             <span>Acme</span>
           </a>
 

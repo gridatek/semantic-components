@@ -96,7 +96,7 @@ import {
               <h3 class="mb-4 font-medium">Follow Us</h3>
               <div class="flex gap-3">
                 <button scButton variant="outline" size="icon">
-                  <svg siGithubIcon class="size-4"></svg>
+                  <svg siGithubIcon></svg>
                 </button>
                 <button scButton variant="outline" size="icon">X</button>
               </div>

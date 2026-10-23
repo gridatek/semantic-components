@@ -9,7 +9,7 @@ import { SiCommandIcon } from '@semantic-icons/lucide-icons';
     <div
       class="bg-primary text-primary-foreground flex size-8 items-center justify-center rounded-lg"
     >
-      <svg siCommandIcon class="size-4" aria-hidden="true"></svg>
+      <svg siCommandIcon class="size-4"></svg>
     </div>
     <span class="text-lg tracking-tight">Acme Inc</span>
   `,

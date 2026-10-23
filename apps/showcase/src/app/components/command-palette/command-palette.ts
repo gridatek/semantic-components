@@ -66,11 +66,7 @@ import { ComponentsService } from '../../services/components.service';
         <div scDialog class="w-lg gap-0 p-0">
           <div scCommand>
             <div scCommandInputGroup>
-              <svg
-                siSearchIcon
-                class="mr-2 size-4 shrink-0 opacity-50"
-                aria-hidden="true"
-              ></svg>
+              <svg siSearchIcon></svg>
               <input
                 scCommandInput
                 placeholder="Search components..."
@@ -96,11 +92,7 @@ import { ComponentsService } from '../../services/components.service';
                         [label]="page.name"
                         (select)="navigate(page.path)"
                       >
-                        <svg
-                          siFileTextIcon
-                          class="size-4 shrink-0"
-                          aria-hidden="true"
-                        ></svg>
+                        <svg siFileTextIcon></svg>
                         <span>{{ page.name }}</span>
                       </div>
                     }
@@ -126,11 +118,7 @@ import { ComponentsService } from '../../services/components.service';
                           navigate('/docs/components/' + component.path)
                         "
                       >
-                        <svg
-                          siBoxIcon
-                          class="size-4 shrink-0"
-                          aria-hidden="true"
-                        ></svg>
+                        <svg siBoxIcon></svg>
                         <span>{{ component.name }}</span>
                       </div>
                     }
@@ -153,11 +141,7 @@ import { ComponentsService } from '../../services/components.service';
                         [label]="utility.name"
                         (select)="navigate('/docs/components/' + utility.path)"
                       >
-                        <svg
-                          siWrenchIcon
-                          class="size-4 shrink-0"
-                          aria-hidden="true"
-                        ></svg>
+                        <svg siWrenchIcon></svg>
                         <span>{{ utility.name }}</span>
                       </div>
                     }

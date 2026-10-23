@@ -39,7 +39,7 @@ import {
     <div scFileUpload #upload="scFileUpload" multiple class="w-full max-w-md">
       <input scFileUploadInput />
       <div scFileUploadDropzone>
-        <svg siUploadIcon class="size-6"></svg>
+        <svg siUploadIcon></svg>
         <p>Drop files here</p>
         <button scFileUploadTrigger size="sm">Browse files</button>
       </div>

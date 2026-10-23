@@ -146,7 +146,7 @@ import { Logo } from '../../components/logo/logo';
 
               <div class="grid grid-cols-2 gap-4">
                 <button scButton variant="outline" type="button">
-                  <svg siGithubIcon class="size-4"></svg>
+                  <svg siGithubIcon></svg>
                   GitHub
                 </button>
                 <button scButton variant="outline" type="button">Google</button>

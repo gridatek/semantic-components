@@ -19,6 +19,7 @@ import { FeedInfiniteScrollDemo } from './feed-infinite-scroll-demo';
 })
 export class FeedInfiniteScrollDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { ScSpinner } from '@semantic-components/ui';
 import {
   ScInfiniteScroll,
   ScInfiniteScrollStatus,
@@ -34,7 +35,12 @@ interface Item {
 /** Articles in a feed (role="feed"), more as the reader nears the end of the box: aria-busy while loading, and your words in the status — then “That’s all”. */
 @Component({
   selector: 'app-feed-infinite-scroll-demo',
-  imports: [ScInfiniteScroll, ScInfiniteScrollStatus, SiLoaderCircleIcon],
+  imports: [
+    ScInfiniteScroll,
+    ScInfiniteScrollStatus,
+    ScSpinner,
+    SiLoaderCircleIcon,
+  ],
   template: \`
     <div class="h-96 w-full max-w-lg overflow-y-auto rounded-lg border">
       <div
@@ -64,8 +70,7 @@ interface Item {
     </div>
     <p scInfiniteScrollStatus>
       @if (loading()) {
-        <svg siLoaderCircleIcon class="size-4 animate-spin"></svg> Loading more
-        articles…
+        <svg scSpinner siLoaderCircleIcon></svg> Loading more articles…
       } @else if (done()) {
         That’s all: {{ items().length }} articles.
       }

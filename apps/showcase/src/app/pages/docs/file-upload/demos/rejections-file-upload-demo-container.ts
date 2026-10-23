@@ -67,7 +67,7 @@ import {
     >
       <input scFileUploadInput />
       <div scFileUploadDropzone>
-        <svg siUploadIcon class="size-6"></svg>
+        <svg siUploadIcon></svg>
         <p>Up to 3 images, 1 MB each</p>
         <button scFileUploadTrigger size="sm">Browse images</button>
       </div>

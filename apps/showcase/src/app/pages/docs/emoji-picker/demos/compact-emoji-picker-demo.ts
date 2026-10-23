@@ -39,7 +39,7 @@ import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
     >
       <div scEmojiPickerViewport aria-label="Emojis">
         <span scEmojiPickerLoading>
-          <svg scSpinner siLoaderCircleIcon class="size-4"></svg>
+          <svg scSpinner siLoaderCircleIcon></svg>
           <span class="sr-only">Loading emojis…</span>
         </span>
         <span scEmojiPickerError>Couldn't load the emojis.</span>

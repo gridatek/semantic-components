@@ -22,6 +22,7 @@ export class ScPdfViewerLoading {
   protected readonly class = computed(() =>
     cn(
       'bg-background text-muted-foreground absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 text-sm',
+      '[&>svg]:size-6',
       this.classInput(),
     ),
   );

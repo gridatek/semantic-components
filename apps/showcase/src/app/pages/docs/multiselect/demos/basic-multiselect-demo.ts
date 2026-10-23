@@ -100,11 +100,7 @@ interface FormModel {
                         "
                       ></ng-container>
                       <span scMultiselectItemLabel>{{ option.label }}</span>
-                      <svg
-                        scMultiselectItemIndicator
-                        siCheckIcon
-                        aria-hidden="true"
-                      ></svg>
+                      <svg scMultiselectItemIndicator siCheckIcon></svg>
                     </div>
                   }
                 </div>

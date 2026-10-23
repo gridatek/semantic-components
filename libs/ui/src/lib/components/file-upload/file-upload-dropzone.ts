@@ -33,6 +33,7 @@ export class ScFileUploadDropzone {
       'border-input text-muted-foreground flex cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed p-6 text-center text-sm transition-colors',
       'hover:bg-accent/50 data-dragging:border-primary data-dragging:bg-accent',
       'data-invalid:border-destructive',
+      "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-6",
       'data-disabled:pointer-events-none data-disabled:opacity-50',
       this.classInput(),
     ),

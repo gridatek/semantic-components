@@ -20,6 +20,7 @@ export class ScInfiniteScrollStatus {
   protected readonly class = computed(() =>
     cn(
       'text-muted-foreground flex min-h-6 items-center justify-center gap-2 text-sm',
+      '[&>svg]:shrink-0 [&>svg]:size-4',
       this.classInput(),
     ),
   );

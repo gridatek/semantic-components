@@ -132,7 +132,7 @@ import { ConfigService } from '../../services/config.service';
             class="w-full group-data-[collapsible=icon]:size-8 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:p-0"
             (click)="openCommandPalette()"
           >
-            <svg siSearchIcon class="size-4 shrink-0"></svg>
+            <svg siSearchIcon></svg>
             <span
               class="flex-1 text-start group-data-[collapsible=icon]:hidden"
             >

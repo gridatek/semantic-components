@@ -82,7 +82,7 @@ Use `ScMenuPortal` inside a menu item to nest a submenu.
 ```html
 <div scMenuItem value="More Tools">
   <span class="flex-1">More Tools</span>
-  <svg siChevronRightIcon class="ml-auto size-4"></svg>
+  <svg siChevronRightIcon class="ml-auto"></svg>
   <ng-template scMenuPortal>
     <div scMenu>
       <ng-template scMenuContent>

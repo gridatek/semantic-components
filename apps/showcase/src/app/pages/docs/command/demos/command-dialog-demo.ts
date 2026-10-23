@@ -71,7 +71,7 @@ interface CommandItem {
   template: `
     <div scDialogProvider [(open)]="open">
       <button scDialogTrigger scInputButton class="max-w-sm">
-        <svg siSearchIcon class="size-4 shrink-0"></svg>
+        <svg siSearchIcon></svg>
         <span class="flex-1 text-start">Search...</span>
         <kbd
           scKbd
@@ -86,11 +86,7 @@ interface CommandItem {
         <div scDialog class="w-lg gap-0 p-0">
           <div scCommand>
             <div scCommandInputGroup>
-              <svg
-                siSearchIcon
-                class="mr-2 size-4 shrink-0 opacity-50"
-                aria-hidden="true"
-              ></svg>
+              <svg siSearchIcon></svg>
               <input
                 scCommandInput
                 placeholder="Type a command or search..."
@@ -166,30 +162,22 @@ interface CommandItem {
     <ng-template #iconTmpl let-icon="icon">
       @switch (icon) {
         @case ('calendar') {
-          <svg siCalendarIcon class="size-4 shrink-0" aria-hidden="true"></svg>
+          <svg siCalendarIcon></svg>
         }
         @case ('smile') {
-          <svg siSmileIcon class="size-4 shrink-0" aria-hidden="true"></svg>
+          <svg siSmileIcon></svg>
         }
         @case ('calculator') {
-          <svg
-            siCalculatorIcon
-            class="size-4 shrink-0"
-            aria-hidden="true"
-          ></svg>
+          <svg siCalculatorIcon></svg>
         }
         @case ('user') {
-          <svg siUserIcon class="size-4 shrink-0" aria-hidden="true"></svg>
+          <svg siUserIcon></svg>
         }
         @case ('credit-card') {
-          <svg
-            siCreditCardIcon
-            class="size-4 shrink-0"
-            aria-hidden="true"
-          ></svg>
+          <svg siCreditCardIcon></svg>
         }
         @case ('settings') {
-          <svg siSettingsIcon class="size-4 shrink-0" aria-hidden="true"></svg>
+          <svg siSettingsIcon></svg>
         }
       }
     </ng-template>

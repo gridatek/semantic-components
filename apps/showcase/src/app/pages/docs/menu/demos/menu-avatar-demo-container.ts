@@ -91,11 +91,7 @@ import {
             </div>
             <div scMenuSeparator></div>
             <div scMenuItem value="Profile">
-              <svg
-                siUserIcon
-                class="text-muted-foreground size-4"
-                aria-hidden="true"
-              ></svg>
+              <svg siUserIcon class="text-muted-foreground"></svg>
               <span class="flex-1">Profile</span>
               <span
                 class="text-muted-foreground ml-auto text-xs tracking-widest"
@@ -104,11 +100,7 @@ import {
               </span>
             </div>
             <div scMenuItem value="Billing">
-              <svg
-                siCreditCardIcon
-                class="text-muted-foreground size-4"
-                aria-hidden="true"
-              ></svg>
+              <svg siCreditCardIcon class="text-muted-foreground"></svg>
               <span class="flex-1">Billing</span>
               <span
                 class="text-muted-foreground ml-auto text-xs tracking-widest"
@@ -117,11 +109,7 @@ import {
               </span>
             </div>
             <div scMenuItem value="Settings">
-              <svg
-                siSettingsIcon
-                class="text-muted-foreground size-4"
-                aria-hidden="true"
-              ></svg>
+              <svg siSettingsIcon class="text-muted-foreground"></svg>
               <span class="flex-1">Settings</span>
               <span
                 class="text-muted-foreground ml-auto text-xs tracking-widest"
@@ -131,19 +119,11 @@ import {
             </div>
             <div scMenuSeparator></div>
             <div scMenuItem value="Team">
-              <svg
-                siUsersIcon
-                class="text-muted-foreground size-4"
-                aria-hidden="true"
-              ></svg>
+              <svg siUsersIcon class="text-muted-foreground"></svg>
               <span class="flex-1">Team</span>
             </div>
             <div scMenuItem value="New Team">
-              <svg
-                siCirclePlusIcon
-                class="text-muted-foreground size-4"
-                aria-hidden="true"
-              ></svg>
+              <svg siCirclePlusIcon class="text-muted-foreground"></svg>
               <span class="flex-1">New Team</span>
               <span
                 class="text-muted-foreground ml-auto text-xs tracking-widest"
@@ -157,7 +137,7 @@ import {
               value="Log out"
               class="text-destructive hover:bg-destructive/10 data-[active=true]:bg-destructive/10"
             >
-              <svg siLogOutIcon class="size-4" aria-hidden="true"></svg>
+              <svg siLogOutIcon></svg>
               <span class="flex-1">Log out</span>
               <span
                 class="text-muted-foreground ml-auto text-xs tracking-widest"

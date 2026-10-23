@@ -76,7 +76,7 @@ Submenus are declared by placing an `<ng-template scMenuPortal>` inside the item
     <div scMenu>
       <ng-template scMenuContent>
         <div scMenuItem value="New">
-          <svg siFileTextIcon class="size-4 shrink-0" aria-hidden="true"></svg>
+          <svg siFileTextIcon></svg>
           <span class="flex-1">New</span>
           <span class="text-muted-foreground ml-auto text-xs tracking-widest">&#8984;N</span>
         </div>
@@ -93,7 +93,7 @@ Nest another `scMenuPortal` inside a `scMenuItem` to create multi-level menus:
 ```html
 <div scMenuItem value="Share">
   <span class="flex-1">Share</span>
-  <svg siChevronRightIcon class="ml-auto size-4 shrink-0" aria-hidden="true"></svg>
+  <svg siChevronRightIcon class="ml-auto"></svg>
   <ng-template scMenuPortal>
     <div scMenu>
       <ng-template scMenuContent>

@@ -35,7 +35,7 @@ Unlike `ScDialog` (which uses CDK Overlay), `ScNativeDialog` leverages the brows
   <dialog scNativeDialog class="sm:max-w-sm">
     <ng-template scNativeDialogContent>
       <button scNativeDialogClose>
-        <svg siXIcon class="size-4"></svg>
+        <svg siXIcon></svg>
         <span class="sr-only">Close</span>
       </button>
       <div scNativeDialogHeader>

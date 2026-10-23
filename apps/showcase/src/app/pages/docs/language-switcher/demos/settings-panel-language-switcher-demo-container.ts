@@ -30,10 +30,7 @@ import { ScLanguageSelect } from '@semantic-components/ui-lab';
               Select your preferred language
             </p>
           </div>
-          <div scLanguageSelect
-            label="Language"
-            class="w-32"
-          ></div>
+          <div scLanguageSelect label="Language" class="w-32"></div>
         </div>
       </div>
     </div>

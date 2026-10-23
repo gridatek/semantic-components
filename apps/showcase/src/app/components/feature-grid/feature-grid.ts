@@ -45,11 +45,7 @@ import {
             <div
               class="bg-primary/10 flex size-12 items-center justify-center rounded-lg"
             >
-              <svg
-                siCodeXmlIcon
-                class="text-primary size-6"
-                aria-hidden="true"
-              ></svg>
+              <svg siCodeXmlIcon class="text-primary size-6"></svg>
             </div>
             <h3 class="text-lg font-semibold">Semantic</h3>
             <p class="text-muted-foreground leading-relaxed">
@@ -63,11 +59,7 @@ import {
             <div
               class="bg-primary/10 flex size-12 items-center justify-center rounded-lg"
             >
-              <svg
-                siNotebookIcon
-                class="text-primary size-6"
-                aria-hidden="true"
-              ></svg>
+              <svg siNotebookIcon class="text-primary size-6"></svg>
             </div>
             <h3 class="text-lg font-semibold">Declarative</h3>
             <p class="text-muted-foreground leading-relaxed">
@@ -81,11 +73,7 @@ import {
             <div
               class="bg-primary/10 flex size-12 items-center justify-center rounded-lg"
             >
-              <svg
-                siGrid2x2Icon
-                class="text-primary size-6"
-                aria-hidden="true"
-              ></svg>
+              <svg siGrid2x2Icon class="text-primary size-6"></svg>
             </div>
             <h3 class="text-lg font-semibold">Composable</h3>
             <p class="text-muted-foreground leading-relaxed">
@@ -99,11 +87,7 @@ import {
             <div
               class="bg-primary/10 flex size-12 items-center justify-center rounded-lg"
             >
-              <svg
-                siSparklesIcon
-                class="text-primary size-6"
-                aria-hidden="true"
-              ></svg>
+              <svg siSparklesIcon class="text-primary size-6"></svg>
             </div>
             <h3 class="text-lg font-semibold">Modern</h3>
             <p class="text-muted-foreground leading-relaxed">
@@ -117,11 +101,7 @@ import {
             <div
               class="bg-primary/10 flex size-12 items-center justify-center rounded-lg"
             >
-              <svg
-                siTerminalIcon
-                class="text-primary size-6"
-                aria-hidden="true"
-              ></svg>
+              <svg siTerminalIcon class="text-primary size-6"></svg>
             </div>
             <h3 class="text-lg font-semibold">Type Safe</h3>
             <p class="text-muted-foreground leading-relaxed">
@@ -135,11 +115,7 @@ import {
             <div
               class="bg-primary/10 flex size-12 items-center justify-center rounded-lg"
             >
-              <svg
-                siAccessibilityIcon
-                class="text-primary size-6"
-                aria-hidden="true"
-              ></svg>
+              <svg siAccessibilityIcon class="text-primary size-6"></svg>
             </div>
             <h3 class="text-lg font-semibold">Accessible</h3>
             <p class="text-muted-foreground leading-relaxed">
@@ -153,11 +129,7 @@ import {
             <div
               class="bg-primary/10 flex size-12 items-center justify-center rounded-lg"
             >
-              <svg
-                siTagIcon
-                class="text-primary size-6"
-                aria-hidden="true"
-              ></svg>
+              <svg siTagIcon class="text-primary size-6"></svg>
             </div>
             <h3 class="text-lg font-semibold">Tailwind CSS & CVA</h3>
             <p class="text-muted-foreground leading-relaxed">
@@ -171,11 +143,7 @@ import {
             <div
               class="bg-primary/10 flex size-12 items-center justify-center rounded-lg"
             >
-              <svg
-                siLayoutGridIcon
-                class="text-primary size-6"
-                aria-hidden="true"
-              ></svg>
+              <svg siLayoutGridIcon class="text-primary size-6"></svg>
             </div>
             <h3 class="text-lg font-semibold">Responsive Design</h3>
             <p class="text-muted-foreground leading-relaxed">
@@ -189,11 +157,7 @@ import {
             <div
               class="bg-primary/10 flex size-12 items-center justify-center rounded-lg"
             >
-              <svg
-                siMoonIcon
-                class="text-primary size-6"
-                aria-hidden="true"
-              ></svg>
+              <svg siMoonIcon class="text-primary size-6"></svg>
             </div>
             <h3 class="text-lg font-semibold">Dark Mode Ready</h3>
             <p class="text-muted-foreground leading-relaxed">

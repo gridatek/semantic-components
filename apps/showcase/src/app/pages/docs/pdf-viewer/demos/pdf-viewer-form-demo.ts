@@ -94,7 +94,7 @@ import {
         </div>
         <div scPdfViewerContent>
           <div scPdfViewerLoading>
-            <svg scSpinner siLoaderCircleIcon class="size-6"></svg>
+            <svg scSpinner siLoaderCircleIcon></svg>
             Loading the form…
           </div>
           <div scPdfViewerCanvas></div>

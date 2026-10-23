@@ -34,7 +34,7 @@ import {
     <div scNavbarProvider [(open)]="menuOpen">
       <nav scNavbar aria-label="Acme mobile site">
         <a scNavbarBrand href="#">
-          <svg siGalleryVerticalEndIcon class="size-6"></svg>
+          <svg siGalleryVerticalEndIcon></svg>
           <span>Acme</span>
         </a>
 

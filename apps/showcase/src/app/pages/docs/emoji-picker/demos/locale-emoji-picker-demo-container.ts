@@ -81,7 +81,7 @@ import { SiLoaderCircleIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
       </div>
       <div scEmojiPickerViewport>
         <span scEmojiPickerLoading>
-          <svg scSpinner siLoaderCircleIcon class="size-4"></svg>
+          <svg scSpinner siLoaderCircleIcon></svg>
           <span class="sr-only">Chargement…</span>
         </span>
         <span scEmojiPickerEmpty>Aucun emoji trouvé.</span>

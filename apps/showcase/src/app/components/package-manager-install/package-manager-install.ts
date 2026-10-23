@@ -48,7 +48,7 @@ import { PackageManagerService } from './package-manager.service';
     <div scTabs>
       <div scCodeBlock>
         <div scCodeBlockHeader>
-          <svg siTerminalIcon class="text-muted-foreground size-4"></svg>
+          <svg siTerminalIcon></svg>
           <div
             scTabList
             [selectedTab]="selected()"

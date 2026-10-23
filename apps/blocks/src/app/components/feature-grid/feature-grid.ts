@@ -20,11 +20,7 @@ import {
             <div
               class="bg-primary/10 mb-4 flex h-12 w-12 items-center justify-center rounded-lg"
             >
-              <svg
-                siLayoutDashboardIcon
-                class="text-primary"
-                aria-hidden="true"
-              ></svg>
+              <svg siLayoutDashboardIcon class="text-primary"></svg>
             </div>
             <h3 class="mb-2 text-lg font-semibold">Responsive Design</h3>
             <p class="text-muted-foreground">
@@ -36,11 +32,7 @@ import {
             <div
               class="bg-primary/10 mb-4 flex h-12 w-12 items-center justify-center rounded-lg"
             >
-              <svg
-                siCircleChevronDownIcon
-                class="text-primary"
-                aria-hidden="true"
-              ></svg>
+              <svg siCircleChevronDownIcon class="text-primary"></svg>
             </div>
             <h3 class="mb-2 text-lg font-semibold">Accessible</h3>
             <p class="text-muted-foreground">
@@ -52,7 +44,7 @@ import {
             <div
               class="bg-primary/10 mb-4 flex h-12 w-12 items-center justify-center rounded-lg"
             >
-              <svg siMoonIcon class="text-primary" aria-hidden="true"></svg>
+              <svg siMoonIcon class="text-primary"></svg>
             </div>
             <h3 class="mb-2 text-lg font-semibold">Dark Mode Ready</h3>
             <p class="text-muted-foreground">

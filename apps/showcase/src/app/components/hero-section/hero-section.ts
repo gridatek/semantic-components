@@ -42,9 +42,9 @@ import { SiGithubIcon, SiStarIcon } from '@semantic-icons/lucide-icons';
             target="_blank"
             rel="noopener noreferrer"
           >
-            <svg siGithubIcon class="size-4"></svg>
+            <svg siGithubIcon></svg>
             Star on GitHub
-            <svg siStarIcon class="size-4"></svg>
+            <svg siStarIcon></svg>
           </a>
         </div>
       </div>

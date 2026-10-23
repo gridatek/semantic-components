@@ -138,7 +138,7 @@ import {
                     #dashboardRla="routerLinkActive"
                     [isActive]="dashboardRla.isActive"
                   >
-                    <svg siLayoutDashboardIcon class="size-4"></svg>
+                    <svg siLayoutDashboardIcon></svg>
                     <span>Dashboard</span>
                   </a>
                 </li>
@@ -150,7 +150,7 @@ import {
                     #usersRla="routerLinkActive"
                     [isActive]="usersRla.isActive"
                   >
-                    <svg siUsersIcon class="size-4"></svg>
+                    <svg siUsersIcon></svg>
                     <span>Users</span>
                   </a>
                   <div scSidebarMenuBadge>12</div>
@@ -163,11 +163,11 @@ import {
                     #settingsRla="routerLinkActive"
                     [isActive]="settingsRla.isActive"
                   >
-                    <svg siSettingsIcon class="size-4"></svg>
+                    <svg siSettingsIcon></svg>
                     <span>Settings</span>
                   </a>
                   <button scSidebarMenuAction [showOnHover]="true">
-                    <svg siEllipsisVerticalIcon class="size-4"></svg>
+                    <svg siEllipsisVerticalIcon></svg>
                   </button>
                 </li>
               </ul>
@@ -179,13 +179,13 @@ import {
           <div scSidebarGroup>
             <div scSidebarGroupLabel>Projects</div>
             <button scSidebarGroupAction>
-              <svg siPlusIcon class="size-4"></svg>
+              <svg siPlusIcon></svg>
             </button>
             <div scSidebarGroupContent>
               <ul scSidebarMenu>
                 <li scSidebarMenuItem>
                   <a scSidebarMenuButton>
-                    <svg siFileIcon class="size-4"></svg>
+                    <svg siFileIcon></svg>
                     <span>Design Engineering</span>
                   </a>
                   <ul scSidebarMenuSub>
@@ -232,7 +232,7 @@ import {
                     #salesRla="routerLinkActive"
                     [isActive]="salesRla.isActive"
                   >
-                    <svg siFileIcon class="size-4"></svg>
+                    <svg siFileIcon></svg>
                     <span>Sales & Marketing</span>
                   </a>
                 </li>
@@ -244,7 +244,7 @@ import {
                     #travelRla="routerLinkActive"
                     [isActive]="travelRla.isActive"
                   >
-                    <svg siFileIcon class="size-4"></svg>
+                    <svg siFileIcon></svg>
                     <span>Travel</span>
                   </a>
                 </li>
@@ -279,25 +279,25 @@ import {
               <ul scSidebarMenu>
                 <li scSidebarMenuItem>
                   <a scSidebarMenuButton>
-                    <svg siBookIcon class="size-4"></svg>
+                    <svg siBookIcon></svg>
                     <span>Documentation</span>
                   </a>
                 </li>
                 <li scSidebarMenuItem>
                   <a scSidebarMenuButton>
-                    <svg siCircleQuestionMarkIcon class="size-4"></svg>
+                    <svg siCircleQuestionMarkIcon></svg>
                     <span>Help Center</span>
                   </a>
                 </li>
                 <li scSidebarMenuItem>
                   <a scSidebarMenuButton>
-                    <svg siMessageSquareIcon class="size-4"></svg>
+                    <svg siMessageSquareIcon></svg>
                     <span>Feedback</span>
                   </a>
                 </li>
                 <li scSidebarMenuItem>
                   <a scSidebarMenuButton>
-                    <svg siSquarePenIcon class="size-4"></svg>
+                    <svg siSquarePenIcon></svg>
                     <span>Changelog</span>
                   </a>
                 </li>
@@ -313,37 +313,37 @@ import {
               <ul scSidebarMenu>
                 <li scSidebarMenuItem>
                   <a scSidebarMenuButton>
-                    <svg siGithubIcon class="size-4"></svg>
+                    <svg siGithubIcon></svg>
                     <span>GitHub</span>
                   </a>
                 </li>
                 <li scSidebarMenuItem>
                   <a scSidebarMenuButton>
-                    <svg siMailIcon class="size-4"></svg>
+                    <svg siMailIcon></svg>
                     <span>Email</span>
                   </a>
                 </li>
                 <li scSidebarMenuItem>
                   <a scSidebarMenuButton>
-                    <svg siPhoneIcon class="size-4"></svg>
+                    <svg siPhoneIcon></svg>
                     <span>Slack</span>
                   </a>
                 </li>
                 <li scSidebarMenuItem>
                   <a scSidebarMenuButton>
-                    <svg siGlobeIcon class="size-4"></svg>
+                    <svg siGlobeIcon></svg>
                     <span>Website</span>
                   </a>
                 </li>
                 <li scSidebarMenuItem>
                   <a scSidebarMenuButton>
-                    <svg siPlusIcon class="size-4"></svg>
+                    <svg siPlusIcon></svg>
                     <span>Jira</span>
                   </a>
                 </li>
                 <li scSidebarMenuItem>
                   <a scSidebarMenuButton>
-                    <svg siCloudIcon class="size-4"></svg>
+                    <svg siCloudIcon></svg>
                     <span>Cloud Storage</span>
                   </a>
                 </li>
@@ -359,31 +359,31 @@ import {
               <ul scSidebarMenu>
                 <li scSidebarMenuItem>
                   <a scSidebarMenuButton>
-                    <svg siUserIcon class="size-4"></svg>
+                    <svg siUserIcon></svg>
                     <span>Profile</span>
                   </a>
                 </li>
                 <li scSidebarMenuItem>
                   <a scSidebarMenuButton>
-                    <svg siLockIcon class="size-4"></svg>
+                    <svg siLockIcon></svg>
                     <span>Security</span>
                   </a>
                 </li>
                 <li scSidebarMenuItem>
                   <a scSidebarMenuButton>
-                    <svg siBellIcon class="size-4"></svg>
+                    <svg siBellIcon></svg>
                     <span>Notifications</span>
                   </a>
                 </li>
                 <li scSidebarMenuItem>
                   <a scSidebarMenuButton>
-                    <svg siCreditCardIcon class="size-4"></svg>
+                    <svg siCreditCardIcon></svg>
                     <span>Billing</span>
                   </a>
                 </li>
                 <li scSidebarMenuItem>
                   <a scSidebarMenuButton>
-                    <svg siWalletIcon class="size-4"></svg>
+                    <svg siWalletIcon></svg>
                     <span>Subscription</span>
                   </a>
                 </li>
@@ -422,7 +422,7 @@ import {
           class="bg-background sticky top-0 z-10 flex h-16 shrink-0 items-center gap-2 border-b px-4"
         >
           <button scSidebarTrigger>
-            <svg siPanelLeftIcon class="size-4"></svg>
+            <svg siPanelLeftIcon></svg>
             <span class="sr-only">Toggle Sidebar</span>
           </button>
           <div class="flex-1">

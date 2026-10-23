@@ -20,6 +20,7 @@ import { RightHoverCardDemo } from './right-hover-card-demo';
 export class RightHoverCardDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
+  ScButton,
   ScHoverCard,
   ScHoverCardPortal,
   ScHoverCardProvider,
@@ -30,6 +31,7 @@ import { SiInfoIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-right-hover-card-demo',
   imports: [
+    ScButton,
     ScHoverCardProvider,
     ScHoverCardPortal,
     ScHoverCard,
@@ -38,11 +40,8 @@ import { SiInfoIcon } from '@semantic-icons/lucide-icons';
   ],
   template: \`
     <div scHoverCardProvider side="right">
-      <button
-        scHoverCardTrigger
-        class="border-input bg-background hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring inline-flex h-9 items-center justify-center gap-2 rounded-md border px-4 py-2 text-sm font-medium shadow-xs transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
-      >
-        <svg siInfoIcon class="size-4"></svg>
+      <button scButton scHoverCardTrigger variant="outline">
+        <svg siInfoIcon></svg>
         More Info
       </button>
       <ng-template scHoverCardPortal>

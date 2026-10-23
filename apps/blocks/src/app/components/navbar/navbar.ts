@@ -63,7 +63,7 @@ import {
       <nav scNavbar>
         <div scNavbarGroup>
           <a scNavbarBrand routerLink="/">
-            <svg siMountainIcon aria-hidden="true"></svg>
+            <svg siMountainIcon></svg>
             <span>Brand</span>
           </a>
 

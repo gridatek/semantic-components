@@ -565,11 +565,11 @@ import {
                     </p>
                     <div class="flex gap-2">
                       <button scButton>
-                        <svg siPlayIcon class="size-4"></svg>
+                        <svg siPlayIcon></svg>
                         Play
                       </button>
                       <button scButton variant="outline">
-                        <svg siShuffleIcon class="size-4"></svg>
+                        <svg siShuffleIcon></svg>
                         Shuffle
                       </button>
                     </div>
@@ -1128,11 +1128,11 @@ import {
                     >
                       <div scCalendarHeader>
                         <button scCalendarPrevious>
-                          <svg siChevronLeftIcon class="size-4"></svg>
+                          <svg siChevronLeftIcon></svg>
                           <span class="sr-only">Go to previous month</span>
                         </button>
                         <button scCalendarNext>
-                          <svg siChevronRightIcon class="size-4"></svg>
+                          <svg siChevronRightIcon></svg>
                           <span class="sr-only">Go to next month</span>
                         </button>
                       </div>

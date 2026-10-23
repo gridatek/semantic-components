@@ -16,6 +16,7 @@ import { DisabledCollapsibleDemo } from './disabled-collapsible-demo';
 export class DisabledCollapsibleDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
+  ScButton,
   ScCollapsible,
   ScCollapsibleBody,
   ScCollapsibleContent,
@@ -27,6 +28,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-disabled-collapsible-demo',
   imports: [
+    ScButton,
     ScCollapsible,
     ScCollapsibleBody,
     ScCollapsibleContent,
@@ -41,12 +43,14 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
           Disabled Collapsible
         </h4>
         <button
+          scButton
           scCollapsibleTrigger
           [panel]="colPanel.panel"
           [disabled]="true"
-          class="border-input bg-background hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-md border text-sm font-medium shadow-xs transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
+          variant="outline"
+          size="icon"
         >
-          <svg siChevronDownIcon class="size-4"></svg>
+          <svg siChevronDownIcon></svg>
           <span class="sr-only">Toggle</span>
         </button>
       </div>

@@ -32,15 +32,15 @@ import {
   template: \`
     <div class="flex flex-wrap items-center gap-2">
       <div scBadge class="gap-1">
-        <svg siCheckIcon class="size-3"></svg>
+        <svg siCheckIcon></svg>
         Completed
       </div>
       <div scBadge variant="secondary" class="gap-1">
-        <svg siClockIcon class="size-3"></svg>
+        <svg siClockIcon></svg>
         Pending
       </div>
       <div scBadge variant="destructive" class="gap-1">
-        <svg siCircleXIcon class="size-3"></svg>
+        <svg siCircleXIcon></svg>
         Error
       </div>
     </div>

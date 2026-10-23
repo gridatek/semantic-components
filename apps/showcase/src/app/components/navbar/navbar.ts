@@ -161,7 +161,7 @@ import { Logo } from '../logo/logo';
             class="hidden w-48 md:flex lg:w-64"
             (click)="openCommandPalette()"
           >
-            <svg siSearchIcon class="size-4 shrink-0"></svg>
+            <svg siSearchIcon></svg>
             <span class="flex-1 text-start">Search...</span>
             <kbd scKbd>&#8984;K</kbd>
           </button>

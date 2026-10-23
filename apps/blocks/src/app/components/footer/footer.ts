@@ -11,7 +11,7 @@ import { SiMountainIcon } from '@semantic-icons/lucide-icons';
         class="mx-auto flex w-full max-w-7xl flex-col items-center justify-between gap-4 px-4 md:flex-row md:px-6 lg:px-8"
       >
         <div class="flex items-center gap-2">
-          <svg siMountainIcon class="size-5" aria-hidden="true"></svg>
+          <svg siMountainIcon class="size-5"></svg>
           <span class="font-semibold">Acme Inc</span>
         </div>
         <p class="text-muted-foreground text-sm">

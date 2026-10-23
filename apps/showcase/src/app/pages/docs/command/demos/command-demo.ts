@@ -59,11 +59,7 @@ interface CommandItem {
       <div class="w-full max-w-md">
         <div scCommand class="rounded-lg border shadow-md">
           <div scCommandInputGroup>
-            <svg
-              siSearchIcon
-              class="mr-2 size-4 shrink-0 opacity-50"
-              aria-hidden="true"
-            ></svg>
+            <svg siSearchIcon></svg>
             <input
               scCommandInput
               placeholder="Type a command or search..."
@@ -138,30 +134,22 @@ interface CommandItem {
     <ng-template #iconTmpl let-icon="icon">
       @switch (icon) {
         @case ('calendar') {
-          <svg siCalendarIcon class="size-4 shrink-0" aria-hidden="true"></svg>
+          <svg siCalendarIcon></svg>
         }
         @case ('smile') {
-          <svg siSmileIcon class="size-4 shrink-0" aria-hidden="true"></svg>
+          <svg siSmileIcon></svg>
         }
         @case ('calculator') {
-          <svg
-            siCalculatorIcon
-            class="size-4 shrink-0"
-            aria-hidden="true"
-          ></svg>
+          <svg siCalculatorIcon></svg>
         }
         @case ('user') {
-          <svg siUserIcon class="size-4 shrink-0" aria-hidden="true"></svg>
+          <svg siUserIcon></svg>
         }
         @case ('credit-card') {
-          <svg
-            siCreditCardIcon
-            class="size-4 shrink-0"
-            aria-hidden="true"
-          ></svg>
+          <svg siCreditCardIcon></svg>
         }
         @case ('settings') {
-          <svg siSettingsIcon class="size-4 shrink-0" aria-hidden="true"></svg>
+          <svg siSettingsIcon></svg>
         }
       }
     </ng-template>

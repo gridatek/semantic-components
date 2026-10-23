@@ -59,11 +59,7 @@ import {
             </div>
             <div scMenuSeparator></div>
             <div scMenuItem value="Profile">
-              <svg
-                siUserIcon
-                class="text-muted-foreground size-4"
-                aria-hidden="true"
-              ></svg>
+              <svg siUserIcon class="text-muted-foreground"></svg>
               <span class="flex-1">Profile</span>
               <span
                 class="text-muted-foreground ml-auto text-xs tracking-widest"
@@ -72,11 +68,7 @@ import {
               </span>
             </div>
             <div scMenuItem value="Billing">
-              <svg
-                siCreditCardIcon
-                class="text-muted-foreground size-4"
-                aria-hidden="true"
-              ></svg>
+              <svg siCreditCardIcon class="text-muted-foreground"></svg>
               <span class="flex-1">Billing</span>
               <span
                 class="text-muted-foreground ml-auto text-xs tracking-widest"
@@ -85,11 +77,7 @@ import {
               </span>
             </div>
             <div scMenuItem value="Settings">
-              <svg
-                siSettingsIcon
-                class="text-muted-foreground size-4"
-                aria-hidden="true"
-              ></svg>
+              <svg siSettingsIcon class="text-muted-foreground"></svg>
               <span class="flex-1">Settings</span>
               <span
                 class="text-muted-foreground ml-auto text-xs tracking-widest"
@@ -98,11 +86,7 @@ import {
               </span>
             </div>
             <div scMenuItem value="Keyboard shortcuts">
-              <svg
-                siKeyboardIcon
-                class="text-muted-foreground size-4"
-                aria-hidden="true"
-              ></svg>
+              <svg siKeyboardIcon class="text-muted-foreground"></svg>
               <span class="flex-1">Keyboard shortcuts</span>
               <span
                 class="text-muted-foreground ml-auto text-xs tracking-widest"
@@ -112,43 +96,26 @@ import {
             </div>
             <div scMenuSeparator></div>
             <div scMenuItem value="Invite users">
-              <svg
-                siUserPlusIcon
-                class="text-muted-foreground size-4"
-                aria-hidden="true"
-              ></svg>
+              <svg siUserPlusIcon class="text-muted-foreground"></svg>
               <span class="flex-1">Invite users</span>
-              <svg
-                siChevronRightIcon
-                class="ml-auto size-4"
-                aria-hidden="true"
-              ></svg>
+              <svg siChevronRightIcon class="ml-auto"></svg>
               <ng-template scMenuPortal>
                 <div scMenu>
                   <ng-template scMenuContent>
                     <div scMenuItem value="Email">
-                      <svg
-                        siMailIcon
-                        class="text-muted-foreground size-4"
-                        aria-hidden="true"
-                      ></svg>
+                      <svg siMailIcon class="text-muted-foreground"></svg>
                       <span class="flex-1">Email</span>
                     </div>
                     <div scMenuItem value="Message">
                       <svg
                         siMessageSquareIcon
-                        class="text-muted-foreground size-4"
-                        aria-hidden="true"
+                        class="text-muted-foreground"
                       ></svg>
                       <span class="flex-1">Message</span>
                     </div>
                     <div scMenuSeparator></div>
                     <div scMenuItem value="More...">
-                      <svg
-                        siCirclePlusIcon
-                        class="text-muted-foreground size-4"
-                        aria-hidden="true"
-                      ></svg>
+                      <svg siCirclePlusIcon class="text-muted-foreground"></svg>
                       <span class="flex-1">More...</span>
                     </div>
                   </ng-template>
@@ -157,28 +124,16 @@ import {
             </div>
             <div scMenuSeparator></div>
             <div scMenuItem value="GitHub">
-              <svg
-                siGithubIcon
-                class="text-muted-foreground size-4"
-                aria-hidden="true"
-              ></svg>
+              <svg siGithubIcon class="text-muted-foreground"></svg>
               <span class="flex-1">GitHub</span>
             </div>
             <div scMenuItem value="Support">
-              <svg
-                siLifeBuoyIcon
-                class="text-muted-foreground size-4"
-                aria-hidden="true"
-              ></svg>
+              <svg siLifeBuoyIcon class="text-muted-foreground"></svg>
               <span class="flex-1">Support</span>
             </div>
             <div scMenuSeparator></div>
             <div scMenuItem value="Log out">
-              <svg
-                siLogOutIcon
-                class="text-muted-foreground size-4"
-                aria-hidden="true"
-              ></svg>
+              <svg siLogOutIcon class="text-muted-foreground"></svg>
               <span class="flex-1">Log out</span>
               <span
                 class="text-muted-foreground ml-auto text-xs tracking-widest"

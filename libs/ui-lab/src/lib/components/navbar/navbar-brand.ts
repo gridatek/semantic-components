@@ -16,6 +16,7 @@ export class ScNavbarBrand {
       'flex items-center gap-2',
       'text-lg font-semibold',
       'text-foreground',
+      "[&>svg]:shrink-0 [&>svg:not([class*='size-'])]:size-6",
       'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
       this.classInput(),
     ),

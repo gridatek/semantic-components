@@ -61,7 +61,7 @@ import {
         >
           <input scFileUploadInput />
           <div scFileUploadDropzone>
-            <svg siUploadIcon class="size-6"></svg>
+            <svg siUploadIcon></svg>
             <p>Your CV and cover letter</p>
             <button scFileUploadTrigger size="sm">Browse files</button>
           </div>

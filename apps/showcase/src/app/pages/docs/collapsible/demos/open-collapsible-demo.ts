@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
+  ScButton,
   ScCollapsible,
   ScCollapsibleBody,
   ScCollapsibleContent,
@@ -11,6 +12,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-open-collapsible-demo',
   imports: [
+    ScButton,
     ScCollapsible,
     ScCollapsibleBody,
     ScCollapsibleContent,
@@ -23,15 +25,17 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
       <div class="flex items-center justify-between space-x-4 px-4">
         <h4 class="text-sm font-semibold">Initially Open</h4>
         <button
+          scButton
           scCollapsibleTrigger
           [panel]="colPanel.panel"
           [expanded]="true"
           #trigger="scCollapsibleTrigger"
-          class="border-input bg-background hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-md border text-sm font-medium shadow-xs transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
+          variant="outline"
+          size="icon"
         >
           <svg
             siChevronDownIcon
-            class="size-4 transition-transform duration-200"
+            class="transition-transform duration-200"
             [class.rotate-180]="trigger.expanded()"
           ></svg>
           <span class="sr-only">Toggle</span>
