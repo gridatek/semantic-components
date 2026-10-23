@@ -46,6 +46,24 @@ scVideoPlayer (paused, currentTime, volume, muted, playbackRate, captions — tw
 
 Two-way: `paused`, `currentTime`, `volume`, `muted`, `playbackRate`, `captions` (a track's id, or `null`). Read: `duration`, `buffered`, `waiting`, `ended`, `fullscreen`, `pictureInPicture`, `idle`, `tracks()` (captions and subtitles), `chapters()`, `chapter()` (the one playing), `cues()`, `preview()`. Methods: `toggle()`, `seekTo()`, `seekBy()`, `volumeBy()`, `toggleCaptions()`, `toggleFullscreen()`, `togglePictureInPicture()`, `formatTime()` (a time in the app's language), `chapterAt()`. `metadata` (`MediaMetadataInit`) shows in the system's media controls, whose keys play, pause and seek.
 
+## Small players
+
+A small player gets its own layout, as in Vidstack's and Media Chrome's players: put `scResizeObserver` on the player and build the controls by its width. The demo's, below 576px (Vidstack's breakpoint): captions and mute at the top, back, play and forward in the middle, time and fullscreen at the bottom with the seek bar under them; the volume slider, the speeds and picture-in-picture stay out. From 576px, one bar with every control.
+
+```html
+<div scVideoPlayer scResizeObserver #size="scResizeObserver">
+  … @if (size.width() < 576) {
+  <div scVideoPlayerControls class="top-0 justify-between">…</div>
+  } @else {
+  <div scVideoPlayerControls>…</div>
+  }
+</div>
+```
+
+The width is 0 until the first render in the browser (and on the server), so the player starts with its small layout.
+
+**Volume on iPhone and iPad:** Safari doesn't let a page set the volume — the device's buttons do. There the volume slider (and ↑ / ↓) has no effect; mute works.
+
 ## Keyboard
 
 Focused in the player (never page-wide): Space or K play / pause, J / L ±10 s, ← / → ±5 s, ↑ / ↓ volume, M mute, F fullscreen, C captions, 0–9 jump to that tenth, Home / End. Fields keep their keys; buttons keep Space and Enter.

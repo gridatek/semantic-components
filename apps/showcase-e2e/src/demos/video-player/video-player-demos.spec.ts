@@ -15,23 +15,47 @@ test.describe('Player', () => {
       .toBeGreaterThan(50);
   });
 
-  test('the 10-second skips, where the player has room', async ({ page }) => {
-    await expect(
-      page.getByRole('button', { name: 'Back 10 seconds' }),
-    ).toBeVisible();
-    await expect(
-      page.getByRole('button', { name: 'Forward 10 seconds' }),
-    ).toBeVisible();
+  test('a wide player: one bar with every control', async ({ page }) => {
+    for (const name of [
+      'Back 10 seconds',
+      'Forward 10 seconds',
+      'Picture in picture',
+      'Fullscreen',
+    ]) {
+      await expect(page.getByRole('button', { name })).toBeVisible();
+    }
+    await expect(page.getByRole('slider', { name: 'Volume' })).toBeVisible();
+    await expect(page.getByRole('group', { name: 'Speed' })).toBeVisible();
   });
 
-  test('no 10-second skips on a phone @mobile', async ({ page }) => {
-    // Measured after the first render: wait for the player's own controls.
+  test('a small player: the small layout, nothing cut off @mobile', async ({
+    page,
+  }) => {
+    const box = await player(page).boundingBox();
+    if (!box) throw new Error('no player');
+    // Captions and mute at the top, play and the skips in the middle,
+    // time, fullscreen and the seek bar at the bottom — all inside the player.
+    for (const name of [
+      'Captions',
+      'Mute',
+      'Back 10 seconds',
+      'Forward 10 seconds',
+      'Fullscreen',
+    ]) {
+      const button = page.getByRole('button', { name });
+      await expect(button).toBeVisible();
+      const b = await button.boundingBox();
+      expect(b && b.x >= box.x && b.x + b.width <= box.x + box.width).toBe(
+        true,
+      );
+    }
+    // Out of a small player (as Vidstack's): the volume slider, the speeds,
+    // picture-in-picture.
+    await expect(page.getByRole('slider', { name: 'Volume' })).toHaveCount(0);
+    await expect(page.getByRole('group', { name: 'Speed' })).toHaveCount(0);
     await expect(
-      page.getByRole('button', { name: 'Fullscreen' }),
-    ).toBeAttached();
-    await expect(page.getByRole('button', { name: /10 seconds/ })).toHaveCount(
-      0,
-    );
+      page.getByRole('button', { name: 'Picture in picture' }),
+    ).toHaveCount(0);
   });
 
   test('plays and pauses', async ({ page }) => {
