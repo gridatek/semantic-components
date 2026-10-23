@@ -170,9 +170,11 @@ export class ScVirtualList {
   private scroller: HTMLElement | null = null;
   private frame = 0;
   private readonly measured = new Map<Element, () => unknown>();
-  private readonly resize = new ResizeObserver((entries) =>
-    this.onResize(entries),
-  );
+  private readonly resize =
+    // None on the server: nothing to observe there.
+    typeof ResizeObserver === 'undefined'
+      ? null
+      : new ResizeObserver((entries) => this.onResize(entries));
 
   constructor() {
     const destroyRef = inject(DestroyRef);
@@ -197,7 +199,7 @@ export class ScVirtualList {
         target?.removeEventListener('scroll', onScroll);
         this.document.defaultView?.removeEventListener('resize', onScroll);
         box.disconnect();
-        this.resize.disconnect();
+        this.resize?.disconnect();
         cancelAnimationFrame(this.frame);
       });
     });
@@ -253,12 +255,12 @@ export class ScVirtualList {
   /** A row element, measured while it is rendered (`scVirtualListRow`). */
   ɵobserve(element: Element, key: () => unknown): void {
     this.measured.set(element, key);
-    this.resize.observe(element);
+    this.resize?.observe(element);
   }
 
   ɵunobserve(element: Element): void {
     this.measured.delete(element);
-    this.resize.unobserve(element);
+    this.resize?.unobserve(element);
   }
 
   protected onFocusIn(event: FocusEvent): void {
@@ -304,6 +306,7 @@ export class ScVirtualList {
   }
 
   private schedule(): void {
+    if (!this.resize) return;
     cancelAnimationFrame(this.frame);
     this.frame = requestAnimationFrame(() => this.measureView());
   }

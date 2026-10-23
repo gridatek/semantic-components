@@ -149,7 +149,8 @@ export class ScMarquee {
   private animation: Animation | null = null;
 
   constructor() {
-    const media = inject(DOCUMENT).defaultView?.matchMedia(
+    // No media queries on the server (its window has none).
+    const media = inject(DOCUMENT).defaultView?.matchMedia?.(
       '(prefers-reduced-motion: reduce)',
     );
     const destroy = inject(DestroyRef);
@@ -161,15 +162,19 @@ export class ScMarquee {
     }
 
     // The sizes, as they change.
-    const observer = new ResizeObserver(() => this.measure());
+    // None on the server: nothing to measure there.
+    const observer =
+      typeof ResizeObserver === 'undefined'
+        ? null
+        : new ResizeObserver(() => this.measure());
     afterRenderEffect(() => {
       const copy = this.firstCopy()?.nativeElement;
-      observer.disconnect();
-      observer.observe(this.viewport().nativeElement);
-      if (copy) observer.observe(copy);
+      observer?.disconnect();
+      observer?.observe(this.viewport().nativeElement);
+      if (copy) observer?.observe(copy);
     });
     destroy.onDestroy(() => {
-      observer.disconnect();
+      observer?.disconnect();
       this.animation?.cancel();
     });
 

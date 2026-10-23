@@ -98,6 +98,8 @@ export class ScScrollBar {
         }
       };
 
+      // Nothing to measure on the server.
+      if (typeof ResizeObserver === 'undefined') return;
       viewport.addEventListener('scroll', update, { passive: true });
       const ro = new ResizeObserver(update);
       ro.observe(viewport);

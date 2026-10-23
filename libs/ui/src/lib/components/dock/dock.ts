@@ -59,7 +59,8 @@ export class ScDock {
   private readonly reducedMotion = signal(false);
 
   constructor() {
-    const media = inject(DOCUMENT).defaultView?.matchMedia(
+    // No media queries on the server (its window has none).
+    const media = inject(DOCUMENT).defaultView?.matchMedia?.(
       '(prefers-reduced-motion: reduce)',
     );
     if (media) {

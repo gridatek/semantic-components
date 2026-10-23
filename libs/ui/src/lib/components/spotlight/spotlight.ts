@@ -175,7 +175,11 @@ export class ScSpotlight {
   private frame = 0;
   private observed: Element | null = null;
   private opener: HTMLElement | null = null;
-  private readonly resize = new ResizeObserver(() => this.schedule());
+  private readonly resize =
+    // None on the server: nothing to observe there.
+    typeof ResizeObserver === 'undefined'
+      ? null
+      : new ResizeObserver(() => this.schedule());
 
   constructor() {
     const view = this.document.defaultView;
@@ -215,8 +219,8 @@ export class ScSpotlight {
       view?.removeEventListener('scroll', onMove, { capture: true });
       view?.removeEventListener('resize', onMove);
       this.document.removeEventListener('keydown', onKey);
-      this.resize.disconnect();
-      view?.cancelAnimationFrame(this.frame);
+      this.resize?.disconnect();
+      view?.cancelAnimationFrame?.(this.frame);
     });
   }
 
@@ -240,11 +244,11 @@ export class ScSpotlight {
 
   /** The element in view, everything placed, focus on the card. */
   private reveal(target: Element | null): void {
-    if (this.observed) this.resize.unobserve(this.observed);
+    if (this.observed) this.resize?.unobserve(this.observed);
     this.observed = target;
     if (target) {
-      this.resize.observe(target);
-      const still = this.document.defaultView?.matchMedia(
+      this.resize?.observe(target);
+      const still = this.document.defaultView?.matchMedia?.(
         '(prefers-reduced-motion: reduce)',
       ).matches;
       target.scrollIntoView({
@@ -253,12 +257,13 @@ export class ScSpotlight {
         behavior: still ? 'instant' : 'smooth',
       });
     }
-    this.resize.observe(this.cardElement().nativeElement);
+    this.resize?.observe(this.cardElement().nativeElement);
     this.place();
     this.cardElement().nativeElement.focus({ preventScroll: true });
   }
 
   private schedule(): void {
+    if (!this.resize) return;
     if (!this.open()) return;
     cancelAnimationFrame(this.frame);
     this.frame = requestAnimationFrame(() => this.place());

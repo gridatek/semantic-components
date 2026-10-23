@@ -66,9 +66,13 @@ export class ScVideoPlayerMedia {
     inject(DestroyRef).onDestroy(() => {
       if (this.frame !== null) this.window?.cancelAnimationFrame(this.frame);
     });
-    this.player.ɵmedia.set(this.element);
-    // Already loaded (from the cache): no event comes.
-    if (this.element.readyState >= 1) this.onMetadata();
+    // The video, to the player once rendered in the browser — on the server
+    // there is no real one to play, pause or read tracks from.
+    afterNextRender(() => {
+      this.player.ɵmedia.set(this.element);
+      // Already loaded (from the cache): no event comes.
+      if (this.element.readyState >= 1) this.onMetadata();
+    });
   }
 
   /**

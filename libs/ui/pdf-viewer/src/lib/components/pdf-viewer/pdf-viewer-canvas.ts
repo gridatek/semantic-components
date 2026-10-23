@@ -344,11 +344,14 @@ export class ScPdfViewerCanvas {
     effect(() => {
       this.pdfViewer.presenting();
       untracked(() =>
-        this.scrollContainer()
-          ?.nativeElement.querySelectorAll<HTMLElement>('.annotationLayer')
-          .forEach((layer) =>
-            setPresentationState(layer, this.pdfViewer.presenting()),
-          ),
+        // Array.from: the server's NodeList has no forEach.
+        Array.from(
+          this.scrollContainer()?.nativeElement.querySelectorAll<HTMLElement>(
+            '.annotationLayer',
+          ) ?? [],
+        ).forEach((layer) =>
+          setPresentationState(layer, this.pdfViewer.presenting()),
+        ),
       );
     });
 
@@ -366,7 +369,8 @@ export class ScPdfViewerCanvas {
         this.textLayerData.clear();
         this.pageLayouts.set([]);
         // Start at the top, not where the previous document was scrolled.
-        this.scrollContainer()?.nativeElement.scrollTo({ top: 0, left: 0 });
+        // (Not on the server: no scrolling there.)
+        this.scrollContainer()?.nativeElement.scrollTo?.({ top: 0, left: 0 });
         if (doc) this.computePageLayouts(doc);
       });
     });

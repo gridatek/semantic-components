@@ -52,9 +52,13 @@ export class ScAudioPlayerMedia {
   private pending: AfterRenderRef | null = null;
 
   constructor() {
-    this.player.ɵmedia.set(this.element);
-    // Already loaded (from the cache): no event comes.
-    if (this.element.readyState >= 1) this.sync();
+    // The audio, to the player once rendered in the browser — on the server
+    // there is no real one to play, pause or read.
+    afterNextRender(() => {
+      this.player.ɵmedia.set(this.element);
+      // Already loaded (from the cache): no event comes.
+      if (this.element.readyState >= 1) this.sync();
+    });
   }
 
   protected onEnded(): void {

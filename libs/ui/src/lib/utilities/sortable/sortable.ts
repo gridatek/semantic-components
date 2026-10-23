@@ -323,7 +323,9 @@ export class ScSortable<T> {
   private stopPointer(): void {
     if (this.press?.timer) clearTimeout(this.press.timer);
     this.press = null;
-    cancelAnimationFrame(this.frame);
+    // A frame only if one was asked for — never on the server, which has none.
+    if (this.frame) cancelAnimationFrame(this.frame);
+    this.frame = 0;
     const view = this.document.defaultView;
     view?.removeEventListener('pointermove', this.onPointerMove);
     view?.removeEventListener('pointerup', this.onPointerUp);

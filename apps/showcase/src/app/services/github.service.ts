@@ -7,7 +7,11 @@ export class GithubService {
     () => 'https://api.github.com/repos/gridatek/semantic-components',
   );
 
-  readonly starCount = computed(
-    () => this.repoResource.value()?.stargazers_count ?? 0,
+  // A failed request (GitHub's rate limit: 403) has no value — reading it
+  // would throw: no count, then.
+  readonly starCount = computed(() =>
+    this.repoResource.hasValue()
+      ? this.repoResource.value().stargazers_count
+      : 0,
   );
 }

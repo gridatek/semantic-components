@@ -138,6 +138,8 @@ export class ScSignaturePadSurface {
 
   constructor() {
     ɵwarnIfUnnamed('scSignaturePadSurface');
+    // No observer on the server: nothing to size there.
+    if (typeof ResizeObserver === 'undefined') return;
     const observer = new ResizeObserver(([entry]) =>
       this.size.set({
         width: entry.contentRect.width,

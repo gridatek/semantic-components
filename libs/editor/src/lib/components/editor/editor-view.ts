@@ -9,8 +9,8 @@ import {
   DOCUMENT,
   Directive,
   ElementRef,
+  afterRenderEffect,
   computed,
-  effect,
   inject,
   input,
 } from '@angular/core';
@@ -67,7 +67,11 @@ export class ScEditorView {
   );
 
   constructor() {
-    effect(() => this.element.replaceChildren(this.render(this.content())));
+    // In the browser, after each render: the server's DOM can neither parse
+    // the content nor replace the children.
+    afterRenderEffect(() =>
+      this.element.replaceChildren(this.render(this.content())),
+    );
   }
 
   private render(content: ScEditorValue): DocumentFragment | HTMLElement {

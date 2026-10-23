@@ -58,7 +58,7 @@ export class ScMasonryGrid {
     () =>
       this.order() === 'shortest' &&
       typeof CSS !== 'undefined' &&
-      CSS.supports('display', 'grid-lanes'),
+      globalThis.CSS?.supports('display', 'grid-lanes'),
   );
 
   /** The columns, as laid out. */
@@ -73,16 +73,20 @@ export class ScMasonryGrid {
   );
 
   private readonly entries = signal<readonly ScMasonryGridEntry[]>([]);
-  private readonly observer = new ResizeObserver(() => this.schedule());
+  private readonly observer =
+    // None on the server: nothing to observe there.
+    typeof ResizeObserver === 'undefined'
+      ? null
+      : new ResizeObserver(() => this.schedule());
   private frame = 0;
 
   constructor() {
     const view = inject(DOCUMENT).defaultView;
     // Any size changing — the grid's, an item's — lays it out again, once a frame.
-    this.observer.observe(this.element);
+    this.observer?.observe(this.element);
     inject(DestroyRef).onDestroy(() => {
-      this.observer.disconnect();
-      view?.cancelAnimationFrame(this.frame);
+      this.observer?.disconnect();
+      view?.cancelAnimationFrame?.(this.frame);
     });
     // Its settings, or its items, changed.
     afterRenderEffect(() => {
@@ -97,14 +101,15 @@ export class ScMasonryGrid {
 
   ɵregister(entry: ScMasonryGridEntry): () => void {
     this.entries.update((entries) => [...entries, entry]);
-    this.observer.observe(entry.element);
+    this.observer?.observe(entry.element);
     return () => {
-      this.observer.unobserve(entry.element);
+      this.observer?.unobserve(entry.element);
       this.entries.update((entries) => entries.filter((e) => e !== entry));
     };
   }
 
   private schedule(): void {
+    if (!this.observer) return;
     cancelAnimationFrame(this.frame);
     this.frame = requestAnimationFrame(() => this.layout());
   }

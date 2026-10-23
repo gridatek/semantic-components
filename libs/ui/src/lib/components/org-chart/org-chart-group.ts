@@ -57,6 +57,8 @@ export class ScOrgChartGroup implements ScTreeItemGroupContext {
     // Aria sorts the reports by their place in the page as they register —
     // at times (WebKit) before they are in it, and → then went to the wrong
     // first report. Put in place, they are sorted again: one registered anew.
+    // (Not on the server: no page to sort by there.)
+    if (typeof MutationObserver === 'undefined') return;
     const observer = new MutationObserver(() => {
       const any = this.live.values().next().value;
       if (any) this.ariaGroup?._register(any);

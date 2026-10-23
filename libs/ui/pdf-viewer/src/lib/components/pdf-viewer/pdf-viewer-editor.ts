@@ -1,3 +1,4 @@
+import { DOCUMENT } from '@angular/common';
 import { DestroyRef, Service, computed, inject, signal } from '@angular/core';
 import { SC_PDF_VIEWER } from './pdf-viewer';
 import type { ScPdfComment, ScPdfEditorAnnotation } from './pdf-viewer-types';
@@ -10,6 +11,8 @@ import type { ScPdfComment, ScPdfEditorAnnotation } from './pdf-viewer-types';
 @Service({ autoProvided: false })
 export class ScPdfEditor {
   private readonly pdfViewer = inject(SC_PDF_VIEWER);
+  // Angular's document: the global one doesn't exist on the server.
+  private readonly document = inject(DOCUMENT);
 
   private readonly editorMode = this.pdfViewer.editorMode;
 
@@ -115,17 +118,17 @@ export class ScPdfEditor {
    */
   listen(root: HTMLElement | null): void {
     this.root = root;
-    document.removeEventListener('mouseup', this.onHighlightMouseUp);
-    document.removeEventListener('pointermove', this.onGlobalPointerMove);
-    document.removeEventListener('pointerup', this.onGlobalPointerUp);
-    document.removeEventListener('pointerdown', this.onGlobalPointerDown);
-    document.removeEventListener('keydown', this.onAnnotationKeyDown);
+    this.document.removeEventListener('mouseup', this.onHighlightMouseUp);
+    this.document.removeEventListener('pointermove', this.onGlobalPointerMove);
+    this.document.removeEventListener('pointerup', this.onGlobalPointerUp);
+    this.document.removeEventListener('pointerdown', this.onGlobalPointerDown);
+    this.document.removeEventListener('keydown', this.onAnnotationKeyDown);
     if (!root) return;
-    document.addEventListener('mouseup', this.onHighlightMouseUp);
-    document.addEventListener('pointermove', this.onGlobalPointerMove);
-    document.addEventListener('pointerup', this.onGlobalPointerUp);
-    document.addEventListener('pointerdown', this.onGlobalPointerDown);
-    document.addEventListener('keydown', this.onAnnotationKeyDown);
+    this.document.addEventListener('mouseup', this.onHighlightMouseUp);
+    this.document.addEventListener('pointermove', this.onGlobalPointerMove);
+    this.document.addEventListener('pointerup', this.onGlobalPointerUp);
+    this.document.addEventListener('pointerdown', this.onGlobalPointerDown);
+    this.document.addEventListener('keydown', this.onAnnotationKeyDown);
   }
 
   annotationsOn(page: number): ScPdfEditorAnnotation[] {
