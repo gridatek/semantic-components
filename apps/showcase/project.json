@@ -59,7 +59,10 @@
           },
           "optimization": false,
           "sourceMap": true,
-          "extractLicenses": false
+          "extractLicenses": false,
+          "security": {
+            "allowedHosts": ["localhost"]
+          }
         }
       }
     },
