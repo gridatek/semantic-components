@@ -47,8 +47,13 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>1. Install the package</h2>
-        <app-package-manager-install packages="@semantic-components/ui" />
+        <h2 scHeading appToc>1. Install the packages</h2>
+        <p class="text-muted-foreground">
+          The components, and their classes in shadcn's styles (the presets):
+        </p>
+        <app-package-manager-install
+          packages="@semantic-components/ui @semantic-components/preset-styles"
+        />
       </section>
 
       <div scSeparator></div>
@@ -214,8 +219,9 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
       <section class="space-y-4">
         <h2 scHeading appToc>3. Configure Tailwind source</h2>
         <p class="text-muted-foreground">
-          Add the library as a Tailwind source so its classes are included in
-          the build. Add this to your
+          Add the library and your preset as Tailwind sources so their classes
+          are included in the build — the preset's file only, so Tailwind scans
+          that one preset. Add this to your
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code
           >:
         </p>
@@ -242,6 +248,36 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
           >
           based on your project structure.
         </p>
+        <p class="text-muted-foreground">
+          The components use nova. For another preset, give it when the app
+          starts, and point the second
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >&#64;source</code
+          >
+          at its file (<code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >…-preset-styles-lyra.mjs</code
+          >):
+        </p>
+        <div scCodeBlock>
+          <div scCodeBlockHeader>
+            <div scCodeBlockTitle>ts</div>
+            <div scCodeBlockActions>
+              <button [scCodeBlockCopy]="presetCode" #copy5="scCodeBlockCopy">
+                @if (copy5.copied()) {
+                  <svg siCheckIcon></svg>
+                } @else {
+                  <svg siCopyIcon></svg>
+                }
+                <span class="sr-only">Copy to clipboard</span>
+              </button>
+            </div>
+          </div>
+          <pre
+            scCodeBlockContent
+            [code]="presetCode"
+            language="typescript"
+          ></pre>
+        </div>
       </section>
 
       <div scSeparator></div>
@@ -285,7 +321,15 @@ export default class UiPage {
   }
 }`;
 
-  readonly sourceCode = '@source "../node_modules/@semantic-components/ui";';
+  readonly sourceCode = `@source "../node_modules/@semantic-components/ui";
+@source "../node_modules/@semantic-components/preset-styles/fesm2022/semantic-components-preset-styles-nova.mjs";`;
+
+  readonly presetCode = `import { lyra } from '@semantic-components/preset-styles/lyra';
+import { provideScConfig } from '@semantic-components/ui';
+
+export const appConfig: ApplicationConfig = {
+  providers: [provideScConfig({ preset: lyra })],
+};`;
 
   readonly colorSchemesCode =
     '@import "@semantic-components/ui/styles/color-schemes.css";';

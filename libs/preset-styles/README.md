@@ -27,6 +27,13 @@ export const appConfig: ApplicationConfig = {
 };
 ```
 
+Tailwind skips `node_modules`: add your preset's file as a source in
+`styles.css` — that one file only, so Tailwind scans one preset:
+
+```css
+@source '../node_modules/@semantic-components/preset-styles/fesm2022/semantic-components-preset-styles-lyra.mjs';
+```
+
 The parts that follow the preset (for now `button[scButton]`) take their
 classes from it. A class the consumer writes still merges over them.
 
