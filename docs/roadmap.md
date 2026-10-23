@@ -4,6 +4,14 @@ Every component brought to the same bar: shadcn's look, tested, mobile first, ri
 
 Inventory (129 components): 58 with a shadcn counterpart · 75 with e2e demo tests · 129 with a page axe test · 0 with an RTL demo.
 
+## Why this order
+
+Design systems are built from the bottom up — **atomic design**: atoms first (buttons, links, labels, inputs), then molecules that combine them (a search field: label, input, button), then organisms (headers, forms). A change to an atom flows into everything built on it, so the atoms are settled first ([UX Collective](https://bootcamp.uxdesign.cc/building-design-systems-with-atomic-design-fd21e86f34c5), [designsystems.surf](https://designsystems.surf/guides/atomic-design), [atomic design principles](https://mohammadshehadeh.com/react/atomic-design-principles)).
+
+Design-system roadmaps follow the same line: foundations (color, type, spacing), then buttons, links and inputs — the core interactions — then form controls (checkbox, radio, select, switch), then overlays and complex widgets (dialogs, toasts, date pickers) ([Netguru](https://www.netguru.com/blog/design-system-roadmap), [okoone](https://www.okoone.com/spark/product-design-research/how-to-build-a-design-system-roadmap-that-teams-actually-use/), [zeroheight](https://zeroheight.com/help/guides/how-to-prioritize-your-components/), [Design Systems Collective](https://www.designsystemscollective.com/how-to-actually-create-a-design-system-step-by-step-ae0ce26af79e)). Our foundations — the theme, from shadcn — are in place.
+
+Here the levels are not judged but **computed from the code**: a component's level is one more than the highest level among the components it imports (**Built on**). Atoms import none; Link and Input Button are molecules because they reuse the button's styles, Input and Label because they use the field. Within a phase, the smallest first.
+
 ## Definition of done
 
 A component is done when every column of its row is ticked:
