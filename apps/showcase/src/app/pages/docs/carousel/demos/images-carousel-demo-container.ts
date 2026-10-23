@@ -19,6 +19,7 @@ import { ImagesCarouselDemo } from './images-carousel-demo';
 })
 export class ImagesCarouselDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+import { ScCard, ScCardBody } from '@semantic-components/ui';
 import {
   ScCarousel,
   ScCarouselItem,
@@ -27,7 +28,6 @@ import {
   ScCarouselTrack,
   ScCarouselViewport,
 } from '@semantic-components/ui-lab/carousel';
-import { ScCard, ScCardBody } from '@semantic-components/ui';
 import {
   SiChevronLeftIcon,
   SiChevronRightIcon,

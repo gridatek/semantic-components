@@ -19,6 +19,7 @@ import { ThirdWidthCarouselDemo } from './third-width-carousel-demo';
 })
 export class ThirdWidthCarouselDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+import { ScCard, ScCardBody } from '@semantic-components/ui';
 import {
   ScCarousel,
   ScCarouselItem,
@@ -27,7 +28,6 @@ import {
   ScCarouselTrack,
   ScCarouselViewport,
 } from '@semantic-components/ui-lab/carousel';
-import { ScCard, ScCardBody } from '@semantic-components/ui';
 import {
   SiChevronLeftIcon,
   SiChevronRightIcon,
