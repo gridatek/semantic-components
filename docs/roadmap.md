@@ -1,6 +1,6 @@
 # Roadmap
 
-Every component brought to the same bar: shadcn's look, tested, mobile first, right to left, in light and dark. One component at a time — in each phase from the simplest to the most complex (**Size**: lines of its own TypeScript) — each row ticked when it meets the definition of done.
+Every component brought to the same bar: shadcn's look, tested, mobile first, right to left, in light and dark. One component at a time, from the building blocks up — atomic design: a component comes after the ones it is built on (its imports, **Built on**), as design-system roadmaps do (foundations, then buttons and inputs, then form controls, then overlays and complex widgets). In a phase: ui, then ui-lab, then code / charts / editor, each from the smallest (**Size**: lines of its own TypeScript). Each row ticked when it meets the definition of done.
 
 Inventory (129 components): 58 with a shadcn counterpart · 75 with e2e demo tests · 129 with a page axe test · 0 with an RTL demo.
 
@@ -33,156 +33,155 @@ Across all components, also:
 - [ ] **Style diff helper**: a script listing a shadcn component's classes next to ours, part by part, for the Styles column (by hand still decides — see [project notes on the parity method](shadcn-style-reference.md)).
 - [ ] **Inventory refresh**: a script regenerating this table's facts (counterpart, e2e, RTL) so the roadmap stays true.
 
-## Phase 1 — ui, with a shadcn counterpart (51)
+## Phase 1 — Atoms (60)
 
-Their look is the library's look; the simple ones first set the patterns (RTL, mobile, tests) the complex ones reuse.
+Components built on no other: the building blocks — what the rest reuse, so what they set (look, RTL, mobile, tests) the rest inherit.
 
-|   # | Component                                                              | Size | shadcn                 | Styles | E2E | Mobile | RTL | Dark | Docs |
-| --: | ---------------------------------------------------------------------- | ---: | ---------------------- | :----: | :-: | :----: | :-: | :--: | :--: |
-|   1 | [Skeleton](../apps/showcase/src/app/pages/docs/skeleton)               |   19 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|   2 | [Aspect Ratio](../apps/showcase/src/app/pages/docs/aspect-ratio)       |   21 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|   3 | [Spinner](../apps/showcase/src/app/pages/docs/spinner)                 |   24 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|   4 | [Separator](../apps/showcase/src/app/pages/docs/separator)             |   31 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|   5 | [Kbd](../apps/showcase/src/app/pages/docs/kbd)                         |   42 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|   6 | [Badge](../apps/showcase/src/app/pages/docs/badge)                     |   48 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|   7 | [Input](../apps/showcase/src/app/pages/docs/input)                     |   60 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|   8 | [Toggle](../apps/showcase/src/app/pages/docs/toggle)                   |   61 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|   9 | [Textarea](../apps/showcase/src/app/pages/docs/textarea)               |   62 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  10 | [Label](../apps/showcase/src/app/pages/docs/label)                     |   63 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  11 | [Button](../apps/showcase/src/app/pages/docs/button)                   |   71 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  12 | [Slider](../apps/showcase/src/app/pages/docs/slider)                   |   80 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  13 | [Progress](../apps/showcase/src/app/pages/docs/progress)               |   88 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  14 | [Button Group](../apps/showcase/src/app/pages/docs/button-group)       |  101 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  15 | [Alert](../apps/showcase/src/app/pages/docs/alert)                     |  102 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  16 | [Native Select](../apps/showcase/src/app/pages/docs/native-select)     |  118 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  17 | [Toggle Group](../apps/showcase/src/app/pages/docs/toggle-group)       |  119 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  18 | [Breadcrumb](../apps/showcase/src/app/pages/docs/breadcrumb)           |  131 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  19 | [Empty](../apps/showcase/src/app/pages/docs/empty)                     |  138 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  20 | [Collapsible](../apps/showcase/src/app/pages/docs/collapsible)         |  140 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  21 | [Input Group](../apps/showcase/src/app/pages/docs/input-group)         |  145 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  22 | [Card](../apps/showcase/src/app/pages/docs/card)                       |  147 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  23 | [Avatar](../apps/showcase/src/app/pages/docs/avatar)                   |  166 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  24 | [Accordion](../apps/showcase/src/app/pages/docs/accordion)             |  167 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  25 | [Radio Group](../apps/showcase/src/app/pages/docs/radio-group)         |  167 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  26 | [Table](../apps/showcase/src/app/pages/docs/table)                     |  182 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  27 | [Tabs](../apps/showcase/src/app/pages/docs/tabs)                       |  188 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  28 | [Context Menu](../apps/showcase/src/app/pages/docs/context-menu)       |  224 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  29 | [Switch](../apps/showcase/src/app/pages/docs/switch)                   |  227 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  30 | [Item](../apps/showcase/src/app/pages/docs/item)                       |  252 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  31 | [Hover Card](../apps/showcase/src/app/pages/docs/hover-card)           |  256 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  32 | [Checkbox](../apps/showcase/src/app/pages/docs/checkbox)               |  263 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  33 | [Resizable](../apps/showcase/src/app/pages/docs/resizable)             |  267 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  34 | [Popover](../apps/showcase/src/app/pages/docs/popover)                 |  269 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  35 | [Scroll Area](../apps/showcase/src/app/pages/docs/scroll-area)         |  271 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  36 | [Drawer](../apps/showcase/src/app/pages/docs/drawer)                   |  304 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  37 | [Dialog](../apps/showcase/src/app/pages/docs/dialog)                   |  311 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  38 | [Sheet](../apps/showcase/src/app/pages/docs/sheet)                     |  321 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  39 | [Navigation Menu](../apps/showcase/src/app/pages/docs/navigation-menu) |  354 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  40 | [Alert Dialog](../apps/showcase/src/app/pages/docs/alert-dialog)       |  377 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  41 | [OTP Field](../apps/showcase/src/app/pages/docs/otp-field)             |  379 | input-otp              |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  42 | [Field](../apps/showcase/src/app/pages/docs/field)                     |  394 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  43 | [Tooltip](../apps/showcase/src/app/pages/docs/tooltip)                 |  401 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  44 | [Command](../apps/showcase/src/app/pages/docs/command)                 |  412 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  45 | [Menu](../apps/showcase/src/app/pages/docs/menu)                       |  426 | dropdown-menu, menubar |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  46 | [Select](../apps/showcase/src/app/pages/docs/select)                   |  617 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  47 | [Pagination](../apps/showcase/src/app/pages/docs/pagination)           |  667 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  48 | [Combobox](../apps/showcase/src/app/pages/docs/combobox)               |  713 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  49 | [Sidebar](../apps/showcase/src/app/pages/docs/sidebar)                 |  897 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  50 | [Toast](../apps/showcase/src/app/pages/docs/toast)                     | 1003 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  51 | [Calendar](../apps/showcase/src/app/pages/docs/calendar)               | 1204 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|   # | Component                                                                          | Library | Built on | Size | shadcn | Styles | E2E | Mobile | RTL | Dark | Docs |
+| --: | ---------------------------------------------------------------------------------- | ------- | -------- | ---: | ------ | :----: | :-: | :----: | :-: | :--: | :--: |
+|   1 | [Skeleton](../apps/showcase/src/app/pages/docs/skeleton)                           | ui      | —        |   19 | yes    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|   2 | [Aspect Ratio](../apps/showcase/src/app/pages/docs/aspect-ratio)                   | ui      | —        |   21 | yes    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|   3 | [Spinner](../apps/showcase/src/app/pages/docs/spinner)                             | ui      | —        |   24 | yes    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|   4 | [Backdrop](../apps/showcase/src/app/pages/docs/backdrop)                           | ui      | —        |   30 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|   5 | [Copy to Clipboard](../apps/showcase/src/app/pages/docs/copy-to-clipboard)         | ui      | —        |   31 | —      |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|   6 | [Separator](../apps/showcase/src/app/pages/docs/separator)                         | ui      | —        |   31 | yes    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|   7 | [Kbd](../apps/showcase/src/app/pages/docs/kbd)                                     | ui      | —        |   42 | yes    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|   8 | [Badge](../apps/showcase/src/app/pages/docs/badge)                                 | ui      | —        |   48 | yes    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|   9 | [Focus Trap](../apps/showcase/src/app/pages/docs/focus-trap)                       | ui      | —        |   48 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  10 | [Typography](../apps/showcase/src/app/pages/docs/typography)                       | ui      | —        |   48 | —      |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  11 | [Select On Focus](../apps/showcase/src/app/pages/docs/select-on-focus)             | ui      | —        |   52 | —      |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  12 | [Toggle](../apps/showcase/src/app/pages/docs/toggle)                               | ui      | —        |   61 | yes    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  13 | [Button](../apps/showcase/src/app/pages/docs/button)                               | ui      | —        |   71 | yes    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  14 | [Hotkey](../apps/showcase/src/app/pages/docs/hotkey)                               | ui      | —        |   87 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  15 | [Progress](../apps/showcase/src/app/pages/docs/progress)                           | ui      | —        |   88 | yes    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  16 | [Button Group](../apps/showcase/src/app/pages/docs/button-group)                   | ui      | —        |  101 | yes    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  17 | [Alert](../apps/showcase/src/app/pages/docs/alert)                                 | ui      | —        |  102 | yes    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  18 | [Breadcrumb](../apps/showcase/src/app/pages/docs/breadcrumb)                       | ui      | —        |  131 | yes    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  19 | [Empty](../apps/showcase/src/app/pages/docs/empty)                                 | ui      | —        |  138 | yes    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  20 | [Collapsible](../apps/showcase/src/app/pages/docs/collapsible)                     | ui      | —        |  140 | yes    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  21 | [Input Group](../apps/showcase/src/app/pages/docs/input-group)                     | ui      | —        |  145 | yes    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  22 | [Card](../apps/showcase/src/app/pages/docs/card)                                   | ui      | —        |  147 | yes    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  23 | [Avatar](../apps/showcase/src/app/pages/docs/avatar)                               | ui      | —        |  166 | yes    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  24 | [Accordion](../apps/showcase/src/app/pages/docs/accordion)                         | ui      | —        |  167 | yes    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  25 | [Table](../apps/showcase/src/app/pages/docs/table)                                 | ui      | —        |  182 | yes    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  26 | [Theme](../apps/showcase/src/app/pages/docs/theme)                                 | ui      | —        |  183 | —      |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  27 | [Tabs](../apps/showcase/src/app/pages/docs/tabs)                                   | ui      | —        |  188 | yes    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  28 | [Range Slider](../apps/showcase/src/app/pages/docs/range-slider)                   | ui      | —        |  232 | —      |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  29 | [Item](../apps/showcase/src/app/pages/docs/item)                                   | ui      | —        |  252 | yes    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  30 | [Hover Card](../apps/showcase/src/app/pages/docs/hover-card)                       | ui      | —        |  256 | yes    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  31 | [Resizable](../apps/showcase/src/app/pages/docs/resizable)                         | ui      | —        |  267 | yes    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  32 | [Scroll Area](../apps/showcase/src/app/pages/docs/scroll-area)                     | ui      | —        |  271 | yes    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  33 | [Navigation Menu](../apps/showcase/src/app/pages/docs/navigation-menu)             | ui      | —        |  354 | yes    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  34 | [Tree](../apps/showcase/src/app/pages/docs/tree)                                   | ui      | —        |  357 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  35 | [Rating](../apps/showcase/src/app/pages/docs/rating)                               | ui      | —        |  383 | —      |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  36 | [Field](../apps/showcase/src/app/pages/docs/field)                                 | ui      | —        |  394 | yes    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  37 | [Tooltip](../apps/showcase/src/app/pages/docs/tooltip)                             | ui      | —        |  401 | yes    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  38 | [Command](../apps/showcase/src/app/pages/docs/command)                             | ui      | —        |  412 | yes    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  39 | [Date Range Picker](../apps/showcase/src/app/pages/docs/date-range-picker)         | ui      | —        |  461 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  40 | [Select](../apps/showcase/src/app/pages/docs/select)                               | ui      | —        |  617 | yes    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  41 | [Button Pattern](../apps/showcase/src/app/pages/docs/button-pattern)               | ui-lab  | —        |   28 | —      |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  42 | [Stacked Layout](../apps/showcase/src/app/pages/docs/stacked-layout)               | ui-lab  | —        |   36 | —      |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  43 | [Marker](../apps/showcase/src/app/pages/docs/marker)                               | ui-lab  | —        |   89 | yes    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  44 | [Intersection Observer](../apps/showcase/src/app/pages/docs/intersection-observer) | ui-lab  | —        |  109 | —      |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  45 | [Message](../apps/showcase/src/app/pages/docs/message)                             | ui-lab  | —        |  137 | yes    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  46 | [Bubble](../apps/showcase/src/app/pages/docs/bubble)                               | ui-lab  | —        |  148 | yes    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  47 | [Animated Counter](../apps/showcase/src/app/pages/docs/animated-counter)           | ui-lab  | —        |  186 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  48 | [Stat Card](../apps/showcase/src/app/pages/docs/stat-card)                         | ui-lab  | —        |  204 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  49 | [Masonry Grid](../apps/showcase/src/app/pages/docs/masonry-grid)                   | ui-lab  | —        |  234 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  50 | [Attachment](../apps/showcase/src/app/pages/docs/attachment)                       | ui-lab  | —        |  235 | yes    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  51 | [Kanban Board](../apps/showcase/src/app/pages/docs/kanban-board)                   | ui-lab  | —        |  237 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  52 | [Sortable List](../apps/showcase/src/app/pages/docs/sortable-list)                 | ui-lab  | —        |  237 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  53 | [Confetti](../apps/showcase/src/app/pages/docs/confetti)                           | ui-lab  | —        |  239 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  54 | [Compare](../apps/showcase/src/app/pages/docs/compare)                             | ui-lab  | —        |  309 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  55 | [Dock](../apps/showcase/src/app/pages/docs/dock)                                   | ui-lab  | —        |  315 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  56 | [Timeline](../apps/showcase/src/app/pages/docs/timeline)                           | ui-lab  | —        |  332 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  57 | [Virtual List](../apps/showcase/src/app/pages/docs/virtual-list)                   | ui-lab  | —        |  451 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  58 | [Query Param State](../apps/showcase/src/app/pages/docs/query-param-state)         | ui-lab  | —        |  611 | —      |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  59 | [Emoji Picker](../apps/showcase/src/app/pages/docs/emoji-picker)                   | ui-lab  | —        | 1679 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  60 | [Charts](../apps/showcase/src/app/pages/docs/charts)                               | charts  | —        |  884 | chart  |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
 
-## Phase 2 — ui, our own (24)
+## Phase 2 — Molecules (54)
 
-|   # | Component                                                                  | Size | shadcn | Styles | E2E | Mobile | RTL | Dark | Docs |
-| --: | -------------------------------------------------------------------------- | ---: | ------ | :----: | :-: | :----: | :-: | :--: | :--: |
-|   1 | [Input Button](../apps/showcase/src/app/pages/docs/input-button)           |   25 | —      |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|   2 | [Backdrop](../apps/showcase/src/app/pages/docs/backdrop)                   |   30 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|   3 | [Copy to Clipboard](../apps/showcase/src/app/pages/docs/copy-to-clipboard) |   31 | —      |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|   4 | [Link](../apps/showcase/src/app/pages/docs/link)                           |   32 | —      |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|   5 | [Focus Trap](../apps/showcase/src/app/pages/docs/focus-trap)               |   48 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|   6 | [Typography](../apps/showcase/src/app/pages/docs/typography)               |   48 | —      |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|   7 | [Select On Focus](../apps/showcase/src/app/pages/docs/select-on-focus)     |   52 | —      |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|   8 | [Hotkey](../apps/showcase/src/app/pages/docs/hotkey)                       |   87 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|   9 | [Menu Bar](../apps/showcase/src/app/pages/docs/menu-bar)                   |  143 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  10 | [Password](../apps/showcase/src/app/pages/docs/password)                   |  158 | —      |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  11 | [Theme](../apps/showcase/src/app/pages/docs/theme)                         |  183 | —      |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  12 | [Toolbar](../apps/showcase/src/app/pages/docs/toolbar)                     |  209 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  13 | [Range Slider](../apps/showcase/src/app/pages/docs/range-slider)           |  232 | —      |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  14 | [Time Picker](../apps/showcase/src/app/pages/docs/time-picker)             |  292 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  15 | [Tree](../apps/showcase/src/app/pages/docs/tree)                           |  357 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  16 | [Rating](../apps/showcase/src/app/pages/docs/rating)                       |  383 | —      |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  17 | [Time Input](../apps/showcase/src/app/pages/docs/time-input)               |  432 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  18 | [Date Picker](../apps/showcase/src/app/pages/docs/date-picker)             |  461 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  19 | [Date Range Picker](../apps/showcase/src/app/pages/docs/date-range-picker) |  461 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  20 | [Multiselect](../apps/showcase/src/app/pages/docs/multiselect)             |  484 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  21 | [Autocomplete](../apps/showcase/src/app/pages/docs/autocomplete)           |  485 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  22 | [File Upload](../apps/showcase/src/app/pages/docs/file-upload)             |  508 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  23 | [Date Input](../apps/showcase/src/app/pages/docs/date-input)               |  671 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  24 | [Number Field](../apps/showcase/src/app/pages/docs/number-field)           | 1072 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+Built on atoms (**Built on**): fields and form controls, overlays, menus, the calendar.
 
-## Phase 3 — ui-lab (49)
+|   # | Component                                                                      | Library | Built on                     | Size | shadcn                 | Styles | E2E | Mobile | RTL | Dark | Docs |
+| --: | ------------------------------------------------------------------------------ | ------- | ---------------------------- | ---: | ---------------------- | :----: | :-: | :----: | :-: | :--: | :--: |
+|   1 | [Input Button](../apps/showcase/src/app/pages/docs/input-button)               | ui      | button                       |   25 | —                      |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|   2 | [Link](../apps/showcase/src/app/pages/docs/link)                               | ui      | button                       |   32 | —                      |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|   3 | [Input](../apps/showcase/src/app/pages/docs/input)                             | ui      | field                        |   60 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|   4 | [Textarea](../apps/showcase/src/app/pages/docs/textarea)                       | ui      | field                        |   62 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|   5 | [Label](../apps/showcase/src/app/pages/docs/label)                             | ui      | field                        |   63 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|   6 | [Slider](../apps/showcase/src/app/pages/docs/slider)                           | ui      | field                        |   80 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|   7 | [Native Select](../apps/showcase/src/app/pages/docs/native-select)             | ui      | field                        |  118 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|   8 | [Toggle Group](../apps/showcase/src/app/pages/docs/toggle-group)               | ui      | toggle                       |  119 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|   9 | [Radio Group](../apps/showcase/src/app/pages/docs/radio-group)                 | ui      | field                        |  167 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  10 | [Toolbar](../apps/showcase/src/app/pages/docs/toolbar)                         | ui      | toggle                       |  209 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  11 | [Switch](../apps/showcase/src/app/pages/docs/switch)                           | ui      | field                        |  227 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  12 | [Checkbox](../apps/showcase/src/app/pages/docs/checkbox)                       | ui      | field                        |  263 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  13 | [Popover](../apps/showcase/src/app/pages/docs/popover)                         | ui      | button, focus-trap           |  269 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  14 | [Drawer](../apps/showcase/src/app/pages/docs/drawer)                           | ui      | backdrop, focus-trap         |  304 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  15 | [Dialog](../apps/showcase/src/app/pages/docs/dialog)                           | ui      | backdrop, button, focus-trap |  311 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  16 | [Sheet](../apps/showcase/src/app/pages/docs/sheet)                             | ui      | backdrop, button, focus-trap |  321 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  17 | [Alert Dialog](../apps/showcase/src/app/pages/docs/alert-dialog)               | ui      | backdrop, button, focus-trap |  377 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  18 | [OTP Field](../apps/showcase/src/app/pages/docs/otp-field)                     | ui      | field                        |  379 | input-otp              |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  19 | [Menu](../apps/showcase/src/app/pages/docs/menu)                               | ui      | context-menu                 |  426 | dropdown-menu, menubar |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  20 | [Time Input](../apps/showcase/src/app/pages/docs/time-input)                   | ui      | field                        |  432 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  21 | [Multiselect](../apps/showcase/src/app/pages/docs/multiselect)                 | ui      | select                       |  484 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  22 | [Autocomplete](../apps/showcase/src/app/pages/docs/autocomplete)               | ui      | button                       |  485 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  23 | [File Upload](../apps/showcase/src/app/pages/docs/file-upload)                 | ui      | button                       |  508 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  24 | [Pagination](../apps/showcase/src/app/pages/docs/pagination)                   | ui      | button, field                |  667 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  25 | [Combobox](../apps/showcase/src/app/pages/docs/combobox)                       | ui      | button, select               |  713 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  26 | [Toast](../apps/showcase/src/app/pages/docs/toast)                             | ui      | button                       | 1003 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  27 | [Calendar](../apps/showcase/src/app/pages/docs/calendar)                       | ui      | button                       | 1204 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  28 | [QR Code](../apps/showcase/src/app/pages/docs/qr-code)                         | ui-lab  | button                       |  251 | —                      |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  29 | [Infinite Scroll](../apps/showcase/src/app/pages/docs/infinite-scroll)         | ui-lab  | button                       |  259 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  30 | [Native Dialog](../apps/showcase/src/app/pages/docs/native-dialog)             | ui-lab  | button                       |  276 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  31 | [Marquee](../apps/showcase/src/app/pages/docs/marquee)                         | ui-lab  | button                       |  292 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  32 | [Carousel](../apps/showcase/src/app/pages/docs/carousel)                       | ui-lab  | button                       |  303 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  33 | [Org Chart](../apps/showcase/src/app/pages/docs/org-chart)                     | ui-lab  | tree                         |  324 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  34 | [Navbar](../apps/showcase/src/app/pages/docs/navbar)                           | ui-lab  | button, focus-trap           |  372 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  35 | [Spotlight](../apps/showcase/src/app/pages/docs/spotlight)                     | ui-lab  | button                       |  399 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  36 | [Language Switcher](../apps/showcase/src/app/pages/docs/language-switcher)     | ui-lab  | button                       |  436 | —                      |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  37 | [Countdown](../apps/showcase/src/app/pages/docs/countdown)                     | ui-lab  | button                       |  447 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  38 | [Tags Input](../apps/showcase/src/app/pages/docs/tags-input)                   | ui-lab  | badge, button, field         |  460 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  39 | [Speed Dial](../apps/showcase/src/app/pages/docs/speed-dial)                   | ui-lab  | button                       |  468 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  40 | [Tour Guide](../apps/showcase/src/app/pages/docs/tour-guide)                   | ui-lab  | button                       |  484 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  41 | [Mention Input](../apps/showcase/src/app/pages/docs/mention-input)             | ui-lab  | field                        |  534 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  42 | [Stepper](../apps/showcase/src/app/pages/docs/stepper)                         | ui-lab  | button                       |  561 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  43 | [Barcode Scanner](../apps/showcase/src/app/pages/docs/barcode-scanner)         | ui-lab  | button                       |  595 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  44 | [Time Clock](../apps/showcase/src/app/pages/docs/time-clock)                   | ui-lab  | button                       |  605 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  45 | [Transfer List](../apps/showcase/src/app/pages/docs/transfer-list)             | ui-lab  | button                       |  654 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  46 | [Color Picker](../apps/showcase/src/app/pages/docs/color-picker)               | ui-lab  | button                       |  782 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  47 | [Lightbox](../apps/showcase/src/app/pages/docs/lightbox)                       | ui-lab  | button                       |  851 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  48 | [Notification Center](../apps/showcase/src/app/pages/docs/notification-center) | ui-lab  | badge, button                |  883 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  49 | [Signature Pad](../apps/showcase/src/app/pages/docs/signature-pad)             | ui-lab  | button, field                |  905 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  50 | [Scheduler](../apps/showcase/src/app/pages/docs/scheduler)                     | ui-lab  | button                       | 1172 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  51 | [Image Cropper](../apps/showcase/src/app/pages/docs/image-cropper)             | ui-lab  | button                       | 1395 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  52 | [Image Annotator](../apps/showcase/src/app/pages/docs/image-annotator)         | ui-lab  | button                       | 1539 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  53 | [Code Block](../apps/showcase/src/app/pages/docs/code-block)                   | code    | button                       |  454 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  54 | [Editor](../apps/showcase/src/app/pages/docs/editor)                           | editor  | field, toggle                | 1665 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
 
-|   # | Component                                                                          |  Size | shadcn | Styles | E2E | Mobile | RTL | Dark | Docs |
-| --: | ---------------------------------------------------------------------------------- | ----: | ------ | :----: | :-: | :----: | :-: | :--: | :--: |
-|   1 | [Button Pattern](../apps/showcase/src/app/pages/docs/button-pattern)               |    28 | —      |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|   2 | [Stacked Layout](../apps/showcase/src/app/pages/docs/stacked-layout)               |    36 | —      |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|   3 | [Marker](../apps/showcase/src/app/pages/docs/marker)                               |    89 | yes    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|   4 | [Intersection Observer](../apps/showcase/src/app/pages/docs/intersection-observer) |   109 | —      |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|   5 | [Message](../apps/showcase/src/app/pages/docs/message)                             |   137 | yes    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|   6 | [Bubble](../apps/showcase/src/app/pages/docs/bubble)                               |   148 | yes    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|   7 | [Animated Counter](../apps/showcase/src/app/pages/docs/animated-counter)           |   186 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|   8 | [Stat Card](../apps/showcase/src/app/pages/docs/stat-card)                         |   204 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|   9 | [Masonry Grid](../apps/showcase/src/app/pages/docs/masonry-grid)                   |   234 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  10 | [Attachment](../apps/showcase/src/app/pages/docs/attachment)                       |   235 | yes    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  11 | [Kanban Board](../apps/showcase/src/app/pages/docs/kanban-board)                   |   237 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  12 | [Sortable List](../apps/showcase/src/app/pages/docs/sortable-list)                 |   237 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  13 | [Confetti](../apps/showcase/src/app/pages/docs/confetti)                           |   239 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  14 | [QR Code](../apps/showcase/src/app/pages/docs/qr-code)                             |   251 | —      |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  15 | [Infinite Scroll](../apps/showcase/src/app/pages/docs/infinite-scroll)             |   259 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  16 | [Native Dialog](../apps/showcase/src/app/pages/docs/native-dialog)                 |   276 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  17 | [Marquee](../apps/showcase/src/app/pages/docs/marquee)                             |   292 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  18 | [Carousel](../apps/showcase/src/app/pages/docs/carousel)                           |   303 | yes    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  19 | [Compare](../apps/showcase/src/app/pages/docs/compare)                             |   309 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  20 | [Dock](../apps/showcase/src/app/pages/docs/dock)                                   |   315 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  21 | [Org Chart](../apps/showcase/src/app/pages/docs/org-chart)                         |   324 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  22 | [Timeline](../apps/showcase/src/app/pages/docs/timeline)                           |   332 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  23 | [Navbar](../apps/showcase/src/app/pages/docs/navbar)                               |   372 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  24 | [Spotlight](../apps/showcase/src/app/pages/docs/spotlight)                         |   399 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  25 | [Language Switcher](../apps/showcase/src/app/pages/docs/language-switcher)         |   436 | —      |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  26 | [Countdown](../apps/showcase/src/app/pages/docs/countdown)                         |   447 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  27 | [Virtual List](../apps/showcase/src/app/pages/docs/virtual-list)                   |   451 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  28 | [Tags Input](../apps/showcase/src/app/pages/docs/tags-input)                       |   460 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  29 | [Speed Dial](../apps/showcase/src/app/pages/docs/speed-dial)                       |   468 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  30 | [Tour Guide](../apps/showcase/src/app/pages/docs/tour-guide)                       |   484 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  31 | [Phone Input](../apps/showcase/src/app/pages/docs/phone-input)                     |   512 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  32 | [Mention Input](../apps/showcase/src/app/pages/docs/mention-input)                 |   534 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  33 | [Data Table](../apps/showcase/src/app/pages/docs/data-table)                       |   553 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  34 | [Stepper](../apps/showcase/src/app/pages/docs/stepper)                             |   561 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  35 | [Barcode Scanner](../apps/showcase/src/app/pages/docs/barcode-scanner)             |   595 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  36 | [Time Clock](../apps/showcase/src/app/pages/docs/time-clock)                       |   605 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  37 | [Query Param State](../apps/showcase/src/app/pages/docs/query-param-state)         |   611 | —      |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  38 | [Transfer List](../apps/showcase/src/app/pages/docs/transfer-list)                 |   654 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  39 | [Color Picker](../apps/showcase/src/app/pages/docs/color-picker)                   |   782 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  40 | [Lightbox](../apps/showcase/src/app/pages/docs/lightbox)                           |   851 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  41 | [Notification Center](../apps/showcase/src/app/pages/docs/notification-center)     |   883 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  42 | [Signature Pad](../apps/showcase/src/app/pages/docs/signature-pad)                 |   905 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  43 | [Audio Player](../apps/showcase/src/app/pages/docs/audio-player)                   |  1083 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  44 | [Video Player](../apps/showcase/src/app/pages/docs/video-player)                   |  1112 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  45 | [Scheduler](../apps/showcase/src/app/pages/docs/scheduler)                         |  1172 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  46 | [Image Cropper](../apps/showcase/src/app/pages/docs/image-cropper)                 |  1395 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  47 | [Image Annotator](../apps/showcase/src/app/pages/docs/image-annotator)             |  1539 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  48 | [Emoji Picker](../apps/showcase/src/app/pages/docs/emoji-picker)                   |  1679 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  49 | [PDF Viewer](../apps/showcase/src/app/pages/docs/pdf-viewer)                       | 12018 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+## Phase 3 — Organisms (15)
 
-## Phase 4 — code, charts, editor (5)
+Built on molecules: pickers, menus in context, the sidebar, the data table, the editors and players.
 
-|   # | Component                                                      | Size | shadcn | Styles | E2E | Mobile | RTL | Dark | Docs |
-| --: | -------------------------------------------------------------- | ---: | ------ | :----: | :-: | :----: | :-: | :--: | :--: |
-|   1 | [Code Editor](../apps/showcase/src/app/pages/docs/code-editor) |  390 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|   2 | [Code Block](../apps/showcase/src/app/pages/docs/code-block)   |  454 | yes    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|   3 | [Diff Viewer](../apps/showcase/src/app/pages/docs/diff-viewer) |  629 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|   4 | [Charts](../apps/showcase/src/app/pages/docs/charts)           |  884 | chart  |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|   5 | [Editor](../apps/showcase/src/app/pages/docs/editor)           | 1665 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|   # | Component                                                        | Library | Built on                                                                |  Size | shadcn | Styles | E2E | Mobile | RTL | Dark | Docs |
+| --: | ---------------------------------------------------------------- | ------- | ----------------------------------------------------------------------- | ----: | ------ | :----: | :-: | :----: | :-: | :--: | :--: |
+|   1 | [Menu Bar](../apps/showcase/src/app/pages/docs/menu-bar)         | ui      | menu                                                                    |   143 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|   2 | [Password](../apps/showcase/src/app/pages/docs/password)         | ui      | button, field, input                                                    |   158 | —      |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|   3 | [Context Menu](../apps/showcase/src/app/pages/docs/context-menu) | ui      | menu                                                                    |   224 | yes    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|   4 | [Time Picker](../apps/showcase/src/app/pages/docs/time-picker)   | ui      | button, input-group, popover, time-input                                |   292 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|   5 | [Date Picker](../apps/showcase/src/app/pages/docs/date-picker)   | ui      | button, input-group, popover, select                                    |   461 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|   6 | [Date Input](../apps/showcase/src/app/pages/docs/date-input)     | ui      | date-picker, field, input                                               |   671 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|   7 | [Sidebar](../apps/showcase/src/app/pages/docs/sidebar)           | ui      | button, sheet, skeleton                                                 |   897 | yes    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|   8 | [Number Field](../apps/showcase/src/app/pages/docs/number-field) | ui      | button, button-group, field, input                                      |  1072 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|   9 | [Phone Input](../apps/showcase/src/app/pages/docs/phone-input)   | ui-lab  | combobox, field, input, input-group                                     |   512 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  10 | [Data Table](../apps/showcase/src/app/pages/docs/data-table)     | ui-lab  | checkbox, pagination                                                    |   553 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  11 | [Audio Player](../apps/showcase/src/app/pages/docs/audio-player) | ui-lab  | button, slider                                                          |  1083 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  12 | [Video Player](../apps/showcase/src/app/pages/docs/video-player) | ui-lab  | button, slider                                                          |  1112 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  13 | [PDF Viewer](../apps/showcase/src/app/pages/docs/pdf-viewer)     | ui-lab  | button, checkbox, dialog, input, progress, slider, switch, toggle-group | 12018 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  14 | [Code Editor](../apps/showcase/src/app/pages/docs/code-editor)   | code    | code-block, field                                                       |   390 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  15 | [Diff Viewer](../apps/showcase/src/app/pages/docs/diff-viewer)   | code    | code-block                                                              |   629 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
 
 ## Later
 
