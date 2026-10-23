@@ -135,19 +135,22 @@ for (const line of roadmap.split('\n')) {
     /\(\.\.\/apps\/showcase\/src\/app\/pages\/docs\/([\w-]+)\)/,
   )?.[1];
   if (!path) continue;
-  const cells = line.split('|').map((cell) => cell.trim());
-  ticks.set(
-    path,
-    cells.slice(-7, -1).map((cell) => cell === '[x]'),
-  );
+  const boxes = line
+    .split('|')
+    .map((cell) => cell.trim())
+    .filter((cell) => /^\[[ x]\]$/.test(cell))
+    .map((cell) => cell === '[x]');
+  // A table from before the SSR column: SSR not ticked.
+  if (boxes.length === 6) boxes.splice(5, 0, false);
+  ticks.set(path, boxes);
 }
 
 const box = (done) => (done ? '[x]' : '[ ]');
 const libOrder = (lib) => LIBRARIES.indexOf(lib);
 const table = (list) =>
   [
-    '| # | Component | Library | Built on | Size | shadcn | Styles | E2E | Mobile | RTL | Dark | Docs |',
-    '| -: | --- | --- | --- | -: | --- | :-: | :-: | :-: | :-: | :-: | :-: |',
+    '| # | Component | Library | Built on | Size | shadcn | Styles | E2E | Mobile | RTL | Dark | SSR | Docs |',
+    '| -: | --- | --- | --- | -: | --- | :-: | :-: | :-: | :-: | :-: | :-: | :-: |',
     ...list
       .sort(
         (a, b) =>
@@ -156,12 +159,13 @@ const table = (list) =>
           a.name.localeCompare(b.name),
       )
       .map((row, i) => {
-        // [Styles, E2E, Mobile, RTL, Dark, Docs]: kept, or from the facts.
+        // [Styles, E2E, Mobile, RTL, Dark, SSR, Docs]: kept, or from the facts.
         const set = ticks.get(row.path) ?? [
           false,
           row.e2e,
           false,
           row.rtl,
+          false,
           false,
           false,
         ];
