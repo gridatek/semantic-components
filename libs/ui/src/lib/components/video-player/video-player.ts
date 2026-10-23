@@ -54,7 +54,7 @@ const IDLE_AFTER = 2500;
     '[class]': 'class()',
     '(keydown)': 'onKeydown($event)',
     '(pointermove)': 'wake()',
-    '(pointerdown)': 'wake()',
+    '(pointerdown)': 'onPointerDown($event)',
     '(focusin)': 'wake()',
   },
 })
@@ -180,6 +180,21 @@ export class ScVideoPlayer {
     });
   }
 
+  /**
+   * Playing: shows the controls if hidden, hides them if shown — what a tap
+   * on the video does on a touch screen. Paused, they stay. `hidden`: whether
+   * they were hidden when the tap began (its focus has woken them since).
+   */
+  toggleControls(hidden = this.idle()): void {
+    if (this.paused()) return;
+    if (hidden) {
+      this.wake();
+      return;
+    }
+    clearTimeout(this.idleTimer);
+    this.idle.set(true);
+  }
+
   toggle(): void {
     this.paused.update((paused) => !paused);
   }
@@ -239,6 +254,14 @@ export class ScVideoPlayer {
     return (
       this.chapters().find((c) => seconds >= c.start && seconds < c.end) ?? null
     );
+  }
+
+  /**
+   * A mouse or a pen wakes the controls; a touch leaves it to what it lands
+   * on — a tap on the video toggles them, a button takes focus (and wakes).
+   */
+  protected onPointerDown(event: PointerEvent): void {
+    if (event.pointerType !== 'touch') this.wake();
   }
 
   /** Shows the controls again, and hides them after a rest (while playing). */

@@ -63,7 +63,7 @@ scVideoPlayer (paused, currentTime, volume, muted, playbackRate, captions — tw
 
 ## State
 
-Two-way: `paused`, `currentTime`, `volume`, `muted`, `playbackRate`, `captions` (a track's id, or `null`). Read: `duration`, `buffered`, `waiting`, `ended`, `started` (played at least once), `fullscreen`, `pictureInPicture`, `idle`, `tracks()` (captions and subtitles), `chapters()`, `chapter()` (the one playing), `cues()`, `preview()`. Methods: `toggle()`, `seekTo()`, `seekBy()`, `volumeBy()`, `toggleCaptions()`, `toggleFullscreen()`, `togglePictureInPicture()`, `formatTime()` (a time in the app's language), `chapterAt()`. `metadata` (`MediaMetadataInit`) shows in the system's media controls, whose keys play, pause and seek.
+Two-way: `paused`, `currentTime`, `volume`, `muted`, `playbackRate`, `captions` (a track's id, or `null`). Read: `duration`, `buffered`, `waiting`, `ended`, `started` (played at least once), `fullscreen`, `pictureInPicture`, `idle`, `tracks()` (captions and subtitles), `chapters()`, `chapter()` (the one playing), `cues()`, `preview()`. Methods: `toggle()`, `toggleControls()` (playing: shows or hides the controls), `seekTo()`, `seekBy()`, `volumeBy()`, `toggleCaptions()`, `toggleFullscreen()`, `togglePictureInPicture()`, `formatTime()` (a time in the app's language), `chapterAt()`. `metadata` (`MediaMetadataInit`) shows in the system's media controls, whose keys play, pause and seek.
 
 ## Before the first play
 
@@ -91,6 +91,7 @@ Focused in the player (never page-wide): Space or K play / pause, J / L ±10 s, 
 - Captions are shown by the player — a polite live region, above the controls, never hidden by them; the browser's own rendering is off.
 - Toggles (mute, captions, a speed, fullscreen, picture-in-picture) are `aria-pressed`.
 - The controls hide only while playing untouched — never while focused in them, or paused.
+- On a touch screen, once played, a tap on the video shows or hides the controls — it doesn't pause, as phone players do; the play button pauses. A mouse click on the video plays or pauses.
 
 ## Styling
 

@@ -137,6 +137,33 @@ test.describe('Player', () => {
       .toBe(false);
   });
 
+  test('playing, a tap shows the controls — it does not pause @mobile', async ({
+    page,
+  }) => {
+    await page.getByRole('button', { name: 'Play' }).tap();
+    await expect.poll(() => paused(page)).toBe(false);
+    // Left alone, the controls hide.
+    await expect(player(page)).toHaveAttribute('data-idle', 'true', {
+      timeout: 5000,
+    });
+    const box = await player(page).boundingBox();
+    if (!box) throw new Error('no player');
+    const tap = () =>
+      page.touchscreen.tap(box.x + box.width * 0.2, box.y + box.height * 0.4);
+
+    await tap();
+    await expect(player(page)).not.toHaveAttribute('data-idle');
+    await expect(
+      page.getByRole('button', { name: 'Fullscreen' }),
+    ).toBeVisible();
+    expect(await paused(page)).toBe(false);
+
+    // A second tap hides them again, still playing.
+    await tap();
+    await expect(player(page)).toHaveAttribute('data-idle', 'true');
+    expect(await paused(page)).toBe(false);
+  });
+
   test('the keys, focused in the player', async ({ page }) => {
     await start(page);
     await player(page).focus();

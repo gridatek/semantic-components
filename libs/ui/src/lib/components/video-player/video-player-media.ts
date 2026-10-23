@@ -17,7 +17,8 @@ import { ScVideoPlayer } from './video-player';
 /**
  * Your `video`, in the player: its `src` (or `<source>`s), `poster`, and
  * `<track>`s — captions, subtitles, chapters. No `controls`: yours are the
- * player's parts. A click plays or pauses it.
+ * player's parts. A click plays or pauses it; on a touch screen, once played,
+ * a tap shows or hides the controls instead, as phone players do.
  */
 @Directive({
   selector: 'video[scVideoPlayerMedia]',
@@ -25,7 +26,8 @@ import { ScVideoPlayer } from './video-player';
     'data-slot': 'video-player-media',
     playsinline: '',
     '[class]': 'class()',
-    '(click)': 'player.toggle()',
+    '(pointerdown)': 'onPointerDown($event)',
+    '(click)': 'onClick()',
     '(play)': 'sync()',
     '(pause)': 'sync()',
     '(timeupdate)': 'sync()',
@@ -96,6 +98,24 @@ export class ScVideoPlayerMedia {
       this.changes.markForCheck();
       this.sync();
     });
+  }
+
+  /** The kind of pointer of the last press: a tap is `touch`. */
+  private pointerType = '';
+  /** Whether the controls were hidden when it began: its focus wakes them. */
+  private hiddenAtPress = false;
+
+  protected onPointerDown(event: PointerEvent): void {
+    this.pointerType = event.pointerType;
+    this.hiddenAtPress = this.player.idle();
+  }
+
+  protected onClick(): void {
+    if (this.pointerType === 'touch' && this.player.started()) {
+      this.player.toggleControls(this.hiddenAtPress);
+    } else {
+      this.player.toggle();
+    }
   }
 
   protected onMetadata(): void {
