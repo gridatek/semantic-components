@@ -19,7 +19,13 @@ import { CardAnimatedCounterDemo } from './card-animated-counter-demo';
 })
 export class CardAnimatedCounterDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScButton, ScStatCard, ScStatCardDescription, ScStatCardLabel, ScStatCardValue } from '@semantic-components/ui';
+import {
+  ScButton,
+  ScStatCard,
+  ScStatCardDescription,
+  ScStatCardLabel,
+  ScStatCardValue,
+} from '@semantic-components/ui';
 import { ScAnimatedCounter } from '@semantic-components/ui/animated-counter';
 
 /** In the stat card’s value: the figure moves to its new value as the data comes in. */

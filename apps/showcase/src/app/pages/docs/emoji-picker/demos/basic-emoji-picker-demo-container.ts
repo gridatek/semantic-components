@@ -19,7 +19,25 @@ import { BasicEmojiPickerDemo } from './basic-emoji-picker-demo';
 })
 export class BasicEmojiPickerDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScSpinner, type ScEmoji, ScEmojiPicker, ScEmojiPickerAnnouncer, ScEmojiPickerCategory, ScEmojiPickerCategoryHeader, ScEmojiPickerEmoji, ScEmojiPickerEmpty, ScEmojiPickerError, ScEmojiPickerFooter, ScEmojiPickerList, ScEmojiPickerLoading, ScEmojiPickerRow, ScEmojiPickerSearch, ScEmojiPickerSearchField, ScEmojiPickerSkinTone, ScEmojiPickerViewport } from '@semantic-components/ui';
+import {
+  type ScEmoji,
+  ScEmojiPicker,
+  ScEmojiPickerAnnouncer,
+  ScEmojiPickerCategory,
+  ScEmojiPickerCategoryHeader,
+  ScEmojiPickerEmoji,
+  ScEmojiPickerEmpty,
+  ScEmojiPickerError,
+  ScEmojiPickerFooter,
+  ScEmojiPickerList,
+  ScEmojiPickerLoading,
+  ScEmojiPickerRow,
+  ScEmojiPickerSearch,
+  ScEmojiPickerSearchField,
+  ScEmojiPickerSkinTone,
+  ScEmojiPickerViewport,
+  ScSpinner,
+} from '@semantic-components/ui';
 import { SiLoaderCircleIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
 
 @Component({

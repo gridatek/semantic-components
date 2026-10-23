@@ -19,7 +19,15 @@ import { AddKanbanBoardDemo } from './add-kanban-board-demo';
 })
 export class AddKanbanBoardDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScButton, ScInput, ScKanbanBoard, type ScKanbanBoardAnnouncement, type ScKanbanBoardValue, ScKanbanCard, ScKanbanColumn } from '@semantic-components/ui';
+import {
+  ScButton,
+  ScInput,
+  ScKanbanBoard,
+  type ScKanbanBoardAnnouncement,
+  type ScKanbanBoardValue,
+  ScKanbanCard,
+  ScKanbanColumn,
+} from '@semantic-components/ui';
 
 interface Task {
   readonly id: string;

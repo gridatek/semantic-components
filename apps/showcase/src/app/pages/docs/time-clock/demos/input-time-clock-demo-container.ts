@@ -19,7 +19,14 @@ import { InputTimeClockDemo } from './input-time-clock-demo';
 })
 export class InputTimeClockDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScField, ScLabel, ScTimeInput, ScTimeClock, ScTimeClockDial, ScTimeClockHeader } from '@semantic-components/ui';
+import {
+  ScField,
+  ScLabel,
+  ScTimeClock,
+  ScTimeClockDial,
+  ScTimeClockHeader,
+  ScTimeInput,
+} from '@semantic-components/ui';
 
 /** One value for a time input and the clock: type it, or pick it. */
 @Component({

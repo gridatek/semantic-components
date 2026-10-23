@@ -19,7 +19,14 @@ import { CollapsibleOrgChartDemo } from './collapsible-org-chart-demo';
 })
 export class CollapsibleOrgChartDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScBadge, ScOrgChart, ScOrgChartCard, ScOrgChartExpandIcon, ScOrgChartGroup, ScOrgChartItem } from '@semantic-components/ui';
+import {
+  ScBadge,
+  ScOrgChart,
+  ScOrgChartCard,
+  ScOrgChartExpandIcon,
+  ScOrgChartGroup,
+  ScOrgChartItem,
+} from '@semantic-components/ui';
 import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
 /** A click, or → and ←, opens and closes a person. Your chevron (scOrgChartExpandIcon) turns; [expanded]="false" starts closed. */

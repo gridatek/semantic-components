@@ -19,7 +19,15 @@ import { HandleSortableListDemo } from './handle-sortable-list-demo';
 })
 export class HandleSortableListDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
-import { ScCheckbox, ScCheckboxField, ScLabel, ScSortableList, type ScSortableListAnnouncement, ScSortableListHandle, ScSortableListItem } from '@semantic-components/ui';
+import {
+  ScCheckbox,
+  ScCheckboxField,
+  ScLabel,
+  ScSortableList,
+  type ScSortableListAnnouncement,
+  ScSortableListHandle,
+  ScSortableListItem,
+} from '@semantic-components/ui';
 import { SiGripVerticalIcon } from '@semantic-icons/lucide-icons';
 
 interface Item {

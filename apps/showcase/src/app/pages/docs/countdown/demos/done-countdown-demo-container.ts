@@ -19,7 +19,12 @@ import { DoneCountdownDemo } from './done-countdown-demo';
 })
 export class DoneCountdownDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScButton, ScCountdown, ScCountdownText, ScCountdownUnit } from '@semantic-components/ui';
+import {
+  ScButton,
+  ScCountdown,
+  ScCountdownText,
+  ScCountdownUnit,
+} from '@semantic-components/ui';
 
 /** Ten seconds; at zero, (completed) — once — and data-done to style what is over. */
 @Component({

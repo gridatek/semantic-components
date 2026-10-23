@@ -26,7 +26,16 @@ import {
   maxLength,
   minLength,
 } from '@angular/forms/signals';
-import { ScButton, ScField, ScFieldErrors, ScLabel, ScTagsInput, ScTagsInputControl, ScTagsInputItem, ScTagsInputItemRemove } from '@semantic-components/ui';
+import {
+  ScButton,
+  ScField,
+  ScFieldErrors,
+  ScLabel,
+  ScTagsInput,
+  ScTagsInputControl,
+  ScTagsInputItem,
+  ScTagsInputItemRemove,
+} from '@semantic-components/ui';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 /** A [formField]: one to five keywords, from the schema — its maxLength also stops a sixth going in; its errors once it is touched. */

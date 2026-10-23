@@ -19,7 +19,15 @@ import { BasicTagsInputDemo } from './basic-tags-input-demo';
 })
 export class BasicTagsInputDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScField, ScFieldDescription, ScLabel, ScTagsInput, ScTagsInputControl, ScTagsInputItem, ScTagsInputItemRemove } from '@semantic-components/ui';
+import {
+  ScField,
+  ScFieldDescription,
+  ScLabel,
+  ScTagsInput,
+  ScTagsInputControl,
+  ScTagsInputItem,
+  ScTagsInputItemRemove,
+} from '@semantic-components/ui';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 /** Enter or a comma adds a tag, and so does leaving the field; a duplicate is refused. Backspace or ← in the empty field goes to the last tag — ← → between tags, Delete removes one. */

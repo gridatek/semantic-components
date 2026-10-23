@@ -26,7 +26,23 @@ import {
   form,
   required,
 } from '@angular/forms/signals';
-import { ScButton, ScField, ScFieldErrors, ScInput, ScLabel, ScStepper, ScStepperIndicator, ScStepperItem, ScStepperList, ScStepperNext, ScStepperPanel, ScStepperPrevious, ScStepperSeparator, ScStepperTitle, ScStepperTrigger } from '@semantic-components/ui';
+import {
+  ScButton,
+  ScField,
+  ScFieldErrors,
+  ScInput,
+  ScLabel,
+  ScStepper,
+  ScStepperIndicator,
+  ScStepperItem,
+  ScStepperList,
+  ScStepperNext,
+  ScStepperPanel,
+  ScStepperPrevious,
+  ScStepperSeparator,
+  ScStepperTitle,
+  ScStepperTrigger,
+} from '@semantic-components/ui';
 import { SiCheckIcon, SiXIcon } from '@semantic-icons/lucide-icons';
 
 interface SignupModel {

@@ -15,7 +15,14 @@ import { BasicMentionInputDemo } from './basic-mention-input-demo';
 })
 export class BasicMentionInputDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScField, ScLabel, ScMentionInput, ScMentionInputControl, ScMentionInputSuggestionItem, ScMentionInputSuggestions } from '@semantic-components/ui';
+import {
+  ScField,
+  ScLabel,
+  ScMentionInput,
+  ScMentionInputControl,
+  ScMentionInputSuggestionItem,
+  ScMentionInputSuggestions,
+} from '@semantic-components/ui';
 import type { ScMentionUser } from '@semantic-components/ui';
 
 @Component({

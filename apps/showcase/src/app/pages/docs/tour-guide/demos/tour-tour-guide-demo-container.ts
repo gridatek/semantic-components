@@ -19,7 +19,17 @@ import { TourTourGuideDemo } from './tour-tour-guide-demo';
 })
 export class TourTourGuideDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScButton, ScInput, ScTourGuide, ScTourGuideClose, ScTourGuideDescription, ScTourGuideNext, ScTourGuidePrevious, ScTourGuideStep, ScTourGuideTitle } from '@semantic-components/ui';
+import {
+  ScButton,
+  ScInput,
+  ScTourGuide,
+  ScTourGuideClose,
+  ScTourGuideDescription,
+  ScTourGuideNext,
+  ScTourGuidePrevious,
+  ScTourGuideStep,
+  ScTourGuideTitle,
+} from '@semantic-components/ui';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 /** A welcome (centred, no target), three steps on their targets — the page dimmed but for each — and a farewell. ← → step; Escape, or the ×, ends it. */

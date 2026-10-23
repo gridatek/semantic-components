@@ -45,6 +45,18 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/backdrop/backdrop-page'),
       },
       {
+        path: 'auth-layout',
+        title: 'Auth Layout - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/auth-layout/auth-layout-page'),
+      },
+      {
+        path: 'sidebar-layout',
+        title: 'Sidebar Layout - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/sidebar-layout/sidebar-layout-page'),
+      },
+      {
         path: 'stacked-layout',
         title: 'Stacked Layout - Semantic Components',
         loadComponent: () =>

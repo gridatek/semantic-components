@@ -15,10 +15,7 @@ import { BasicToggleLanguageSwitcherDemo } from './basic-toggle-language-switche
 })
 export class BasicToggleLanguageSwitcherDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, inject } from '@angular/core';
-import {
-  ScLanguageService,
-  ScLanguageToggle,
-} from '@semantic-components/ui';
+import { ScLanguageService, ScLanguageToggle } from '@semantic-components/ui';
 import { SiGlobeIcon } from '@semantic-icons/lucide-icons';
 
 @Component({

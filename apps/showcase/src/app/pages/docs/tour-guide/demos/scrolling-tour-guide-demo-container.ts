@@ -19,7 +19,16 @@ import { ScrollingTourGuideDemo } from './scrolling-tour-guide-demo';
 })
 export class ScrollingTourGuideDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScButton, ScTourGuide, ScTourGuideClose, ScTourGuideDescription, ScTourGuideNext, ScTourGuidePrevious, ScTourGuideStep, ScTourGuideTitle } from '@semantic-components/ui';
+import {
+  ScButton,
+  ScTourGuide,
+  ScTourGuideClose,
+  ScTourGuideDescription,
+  ScTourGuideNext,
+  ScTourGuidePrevious,
+  ScTourGuideStep,
+  ScTourGuideTitle,
+} from '@semantic-components/ui';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 /** Targets far apart in a long page: each is scrolled into view (smoothly — at once for reduced motion), and the card follows. */

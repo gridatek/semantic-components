@@ -19,7 +19,11 @@ import { FeedInfiniteScrollDemo } from './feed-infinite-scroll-demo';
 })
 export class FeedInfiniteScrollDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScSpinner, ScInfiniteScroll, ScInfiniteScrollStatus } from '@semantic-components/ui';
+import {
+  ScInfiniteScroll,
+  ScInfiniteScrollStatus,
+  ScSpinner,
+} from '@semantic-components/ui';
 import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
 
 interface Item {

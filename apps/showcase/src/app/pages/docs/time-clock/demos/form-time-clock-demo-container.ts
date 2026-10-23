@@ -20,7 +20,14 @@ import { FormTimeClockDemo } from './form-time-clock-demo';
 export class FormTimeClockDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, FormRoot, form, required } from '@angular/forms/signals';
-import { ScButton, ScField, ScFieldErrors, ScTimeClock, ScTimeClockDial, ScTimeClockHeader } from '@semantic-components/ui';
+import {
+  ScButton,
+  ScField,
+  ScFieldErrors,
+  ScTimeClock,
+  ScTimeClockDial,
+  ScTimeClockHeader,
+} from '@semantic-components/ui';
 
 /** A [formField]: required, from the schema; marked once left. */
 @Component({

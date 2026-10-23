@@ -19,7 +19,19 @@ import { TypeSignaturePadDemo } from './type-signature-pad-demo';
 })
 export class TypeSignaturePadDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScLabel, ScTab, ScTabContent, ScTabList, ScTabPanel, ScTabs, ScSignaturePad, ScSignaturePadClear, ScSignaturePadLine, ScSignaturePadSurface, ScSignaturePadText } from '@semantic-components/ui';
+import {
+  ScLabel,
+  ScSignaturePad,
+  ScSignaturePadClear,
+  ScSignaturePadLine,
+  ScSignaturePadSurface,
+  ScSignaturePadText,
+  ScTab,
+  ScTabContent,
+  ScTabList,
+  ScTabPanel,
+  ScTabs,
+} from '@semantic-components/ui';
 
 /** Without a pointer, type your name: the text is the signature, in the input's font. One pad, two ways in. */
 @Component({

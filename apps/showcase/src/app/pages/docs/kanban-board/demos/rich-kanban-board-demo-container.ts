@@ -19,7 +19,23 @@ import { RichKanbanBoardDemo } from './rich-kanban-board-demo';
 })
 export class RichKanbanBoardDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScAvatar, ScAvatarFallback, ScBadge, ScButton, ScMenu, ScMenuContent, ScMenuItem, ScMenuPortal, ScMenuProvider, ScMenuTrigger, ScKanbanBoard, type ScKanbanBoardAnnouncement, type ScKanbanBoardValue, ScKanbanCard, ScKanbanColumn } from '@semantic-components/ui';
+import {
+  ScAvatar,
+  ScAvatarFallback,
+  ScBadge,
+  ScButton,
+  ScKanbanBoard,
+  type ScKanbanBoardAnnouncement,
+  type ScKanbanBoardValue,
+  ScKanbanCard,
+  ScKanbanColumn,
+  ScMenu,
+  ScMenuContent,
+  ScMenuItem,
+  ScMenuPortal,
+  ScMenuProvider,
+  ScMenuTrigger,
+} from '@semantic-components/ui';
 import { SiEllipsisIcon } from '@semantic-icons/lucide-icons';
 
 interface Task {

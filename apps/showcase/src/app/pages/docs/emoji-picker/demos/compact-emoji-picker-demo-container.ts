@@ -19,7 +19,19 @@ import { CompactEmojiPickerDemo } from './compact-emoji-picker-demo';
 })
 export class CompactEmojiPickerDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScSpinner, type ScEmoji, ScEmojiPicker, ScEmojiPickerCategory, ScEmojiPickerCategoryHeader, ScEmojiPickerEmoji, ScEmojiPickerError, ScEmojiPickerList, ScEmojiPickerLoading, ScEmojiPickerRow, ScEmojiPickerViewport } from '@semantic-components/ui';
+import {
+  type ScEmoji,
+  ScEmojiPicker,
+  ScEmojiPickerCategory,
+  ScEmojiPickerCategoryHeader,
+  ScEmojiPickerEmoji,
+  ScEmojiPickerError,
+  ScEmojiPickerList,
+  ScEmojiPickerLoading,
+  ScEmojiPickerRow,
+  ScEmojiPickerViewport,
+  ScSpinner,
+} from '@semantic-components/ui';
 import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
 
 /** Just the list: fewer columns, no search, no footer. */

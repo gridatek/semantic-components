@@ -21,7 +21,17 @@ export class FormatsColorPickerDemoContainer {
   readonly code = `import { DecimalPipe } from '@angular/common';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
-import { ScRadio, ScRadioField, ScRadioGroup, type ScColorFormat, ScColorPicker, ScColorPickerArea, ScColorPickerField, ScColorPickerSlider, ScColorPickerSwatch } from '@semantic-components/ui';
+import {
+  type ScColorFormat,
+  ScColorPicker,
+  ScColorPickerArea,
+  ScColorPickerField,
+  ScColorPickerSlider,
+  ScColorPickerSwatch,
+  ScRadio,
+  ScRadioField,
+  ScRadioGroup,
+} from '@semantic-components/ui';
 
 /** The value in hex, rgb(), hsl() or oklch() — the format is an input; changed, the value is written again. */
 @Component({

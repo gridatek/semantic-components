@@ -19,7 +19,26 @@ import { BoxImageCropperDemo } from './box-image-cropper-demo';
 })
 export class BoxImageCropperDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
-import { ScButton, ScSlider, ScImageCropper, ScImageCropperAspectRatio, ScImageCropperFlipHorizontal, ScImageCropperFlipVertical, ScImageCropperGrid, ScImageCropperHandle, ScImageCropperImage, ScImageCropperPreview, ScImageCropperPreviewImage, ScImageCropperReset, ScImageCropperRotateLeft, ScImageCropperRotateRight, ScImageCropperSelection, ScImageCropperStage, ScImageCropperZoomIn, ScImageCropperZoomOut } from '@semantic-components/ui';
+import {
+  ScButton,
+  ScImageCropper,
+  ScImageCropperAspectRatio,
+  ScImageCropperFlipHorizontal,
+  ScImageCropperFlipVertical,
+  ScImageCropperGrid,
+  ScImageCropperHandle,
+  ScImageCropperImage,
+  ScImageCropperPreview,
+  ScImageCropperPreviewImage,
+  ScImageCropperReset,
+  ScImageCropperRotateLeft,
+  ScImageCropperRotateRight,
+  ScImageCropperSelection,
+  ScImageCropperStage,
+  ScImageCropperZoomIn,
+  ScImageCropperZoomOut,
+  ScSlider,
+} from '@semantic-components/ui';
 import {
   SiFlipHorizontal2Icon,
   SiFlipVertical2Icon,

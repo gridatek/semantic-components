@@ -19,7 +19,14 @@ import { SidesSpotlightDemo } from './sides-spotlight-demo';
 })
 export class SidesSpotlightDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScButton, type ScPlacementSide, ScSpotlight, ScSpotlightClose, ScSpotlightDescription, ScSpotlightTitle } from '@semantic-components/ui';
+import {
+  ScButton,
+  type ScPlacementSide,
+  ScSpotlight,
+  ScSpotlightClose,
+  ScSpotlightDescription,
+  ScSpotlightTitle,
+} from '@semantic-components/ui';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 /** The card on the side you ask — logical, start and end follow the direction — flipping when there is no room. */

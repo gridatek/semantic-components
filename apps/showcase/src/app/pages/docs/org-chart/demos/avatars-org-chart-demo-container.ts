@@ -19,7 +19,14 @@ import { AvatarsOrgChartDemo } from './avatars-org-chart-demo';
 })
 export class AvatarsOrgChartDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScAvatar, ScAvatarFallback, ScOrgChart, ScOrgChartCard, ScOrgChartGroup, ScOrgChartItem } from '@semantic-components/ui';
+import {
+  ScAvatar,
+  ScAvatarFallback,
+  ScOrgChart,
+  ScOrgChartCard,
+  ScOrgChartGroup,
+  ScOrgChartItem,
+} from '@semantic-components/ui';
 
 /** A card is yours to fill: here, the lib’s avatar beside the name. */
 @Component({

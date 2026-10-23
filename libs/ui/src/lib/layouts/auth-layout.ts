@@ -12,7 +12,7 @@ import { cn } from '../utils/cn/cn';
   styles: ``,
   encapsulation: ViewEncapsulation.None,
 })
-export class AuthLayout {
+export class ScAuthLayout {
   readonly classInput = input<string>('', {
     alias: 'class',
   });

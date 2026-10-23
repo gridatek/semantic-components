@@ -19,7 +19,16 @@ import { BasicAttachmentDemo } from './basic-attachment-demo';
 })
 export class BasicAttachmentDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScButton, ScAttachment, ScAttachmentActions, ScAttachmentContent, ScAttachmentDescription, ScAttachmentGroup, ScAttachmentMedia, ScAttachmentTitle } from '@semantic-components/ui';
+import {
+  ScAttachment,
+  ScAttachmentActions,
+  ScAttachmentContent,
+  ScAttachmentDescription,
+  ScAttachmentGroup,
+  ScAttachmentMedia,
+  ScAttachmentTitle,
+  ScButton,
+} from '@semantic-components/ui';
 import { SiFileTextIcon, SiXIcon } from '@semantic-icons/lucide-icons';
 
 @Component({

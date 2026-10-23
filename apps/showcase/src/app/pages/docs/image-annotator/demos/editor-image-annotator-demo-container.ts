@@ -19,7 +19,22 @@ import { EditorImageAnnotatorDemo } from './editor-image-annotator-demo';
 })
 export class EditorImageAnnotatorDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScButton, ScSlider, ScImageAnnotator, type ScImageAnnotatorAnnotation, ScImageAnnotatorClear, ScImageAnnotatorColor, ScImageAnnotatorDelete, ScImageAnnotatorImage, type ScImageAnnotatorKind, ScImageAnnotatorRedo, ScImageAnnotatorStage, ScImageAnnotatorTextInput, ScImageAnnotatorTool, ScImageAnnotatorUndo } from '@semantic-components/ui';
+import {
+  ScButton,
+  ScImageAnnotator,
+  type ScImageAnnotatorAnnotation,
+  ScImageAnnotatorClear,
+  ScImageAnnotatorColor,
+  ScImageAnnotatorDelete,
+  ScImageAnnotatorImage,
+  type ScImageAnnotatorKind,
+  ScImageAnnotatorRedo,
+  ScImageAnnotatorStage,
+  ScImageAnnotatorTextInput,
+  ScImageAnnotatorTool,
+  ScImageAnnotatorUndo,
+  ScSlider,
+} from '@semantic-components/ui';
 import {
   SiCircleIcon,
   SiEraserIcon,

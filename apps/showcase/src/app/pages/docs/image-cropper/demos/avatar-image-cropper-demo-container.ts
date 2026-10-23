@@ -19,7 +19,17 @@ import { AvatarImageCropperDemo } from './avatar-image-cropper-demo';
 })
 export class AvatarImageCropperDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
-import { ScButton, ScSlider, ScImageCropper, ScImageCropperHandle, ScImageCropperImage, ScImageCropperPreview, ScImageCropperPreviewImage, ScImageCropperSelection, ScImageCropperStage } from '@semantic-components/ui';
+import {
+  ScButton,
+  ScImageCropper,
+  ScImageCropperHandle,
+  ScImageCropperImage,
+  ScImageCropperPreview,
+  ScImageCropperPreviewImage,
+  ScImageCropperSelection,
+  ScImageCropperStage,
+  ScSlider,
+} from '@semantic-components/ui';
 
 /**
  * A circle: its handles resize it; the wheel, a pinch or the slider

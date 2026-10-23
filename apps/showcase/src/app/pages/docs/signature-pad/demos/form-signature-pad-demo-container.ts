@@ -20,7 +20,18 @@ import { FormSignaturePadDemo } from './form-signature-pad-demo';
 export class FormSignaturePadDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, FormRoot, form, required } from '@angular/forms/signals';
-import { ScButton, ScField, ScFieldErrors, ScInput, ScLabel, type ScSignature, ScSignaturePad, ScSignaturePadClear, ScSignaturePadLine, ScSignaturePadSurface } from '@semantic-components/ui';
+import {
+  ScButton,
+  ScField,
+  ScFieldErrors,
+  ScInput,
+  ScLabel,
+  type ScSignature,
+  ScSignaturePad,
+  ScSignaturePadClear,
+  ScSignaturePadLine,
+  ScSignaturePadSurface,
+} from '@semantic-components/ui';
 
 /** A \`[formField]\`: \`required()\` in the schema; left unsigned, the field shows its error. */
 @Component({

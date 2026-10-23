@@ -5,8 +5,6 @@ export * from './select-on-focus';
 export * from './button-pattern';
 export * from './intersection-observer';
 export * from './query-param-state';
-export * from './spotlight-placement';
-export * from './button-pattern';
-export * from './intersection-observer';
-export * from './query-param-state';
-export * from './spotlight-placement';
+// Internal helpers: only the types public inputs use.
+export type { ScPlacementSide } from './spotlight-placement';
+export type { ScSortableOrientation } from './sortable';

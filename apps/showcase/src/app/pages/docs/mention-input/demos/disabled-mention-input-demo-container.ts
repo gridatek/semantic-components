@@ -15,7 +15,14 @@ import { DisabledMentionInputDemo } from './disabled-mention-input-demo';
 })
 export class DisabledMentionInputDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScField, ScLabel, ScMentionInput, ScMentionInputControl, ScMentionInputSuggestionItem, ScMentionInputSuggestions } from '@semantic-components/ui';
+import {
+  ScField,
+  ScLabel,
+  ScMentionInput,
+  ScMentionInputControl,
+  ScMentionInputSuggestionItem,
+  ScMentionInputSuggestions,
+} from '@semantic-components/ui';
 import type { ScMentionUser } from '@semantic-components/ui';
 
 @Component({

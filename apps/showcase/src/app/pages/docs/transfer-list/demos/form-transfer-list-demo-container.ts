@@ -20,7 +20,18 @@ import { FormTransferListDemo } from './form-transfer-list-demo';
 export class FormTransferListDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, FormRoot, form, minLength } from '@angular/forms/signals';
-import { ScButton, ScField, ScFieldErrors, ScTransferList, ScTransferListListbox, ScTransferListMove, ScTransferListMoveAll, ScTransferListOption, ScTransferListPane, ScTransferListSelectAll } from '@semantic-components/ui';
+import {
+  ScButton,
+  ScField,
+  ScFieldErrors,
+  ScTransferList,
+  ScTransferListListbox,
+  ScTransferListMove,
+  ScTransferListMoveAll,
+  ScTransferListOption,
+  ScTransferListPane,
+  ScTransferListSelectAll,
+} from '@semantic-components/ui';
 import {
   SiChevronLeftIcon,
   SiChevronRightIcon,

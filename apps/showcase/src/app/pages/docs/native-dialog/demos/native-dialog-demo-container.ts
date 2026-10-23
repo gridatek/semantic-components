@@ -19,7 +19,21 @@ import { NativeDialogDemo } from './native-dialog-demo';
 })
 export class NativeDialogDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScButton, ScInput, ScLabel, ScNativeDialog, ScNativeDialogBody, ScNativeDialogClose, ScNativeDialogContent, ScNativeDialogDescription, ScNativeDialogFooter, ScNativeDialogHeader, ScNativeDialogProvider, ScNativeDialogTitle, ScNativeDialogTrigger } from '@semantic-components/ui';
+import {
+  ScButton,
+  ScInput,
+  ScLabel,
+  ScNativeDialog,
+  ScNativeDialogBody,
+  ScNativeDialogClose,
+  ScNativeDialogContent,
+  ScNativeDialogDescription,
+  ScNativeDialogFooter,
+  ScNativeDialogHeader,
+  ScNativeDialogProvider,
+  ScNativeDialogTitle,
+  ScNativeDialogTrigger,
+} from '@semantic-components/ui';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
