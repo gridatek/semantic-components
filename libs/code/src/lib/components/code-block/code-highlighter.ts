@@ -51,7 +51,7 @@ const aliases: Record<string, string> = {
   zsh: 'bash',
 };
 
-/** Shiki (core, its JavaScript engine), GitHub light and dark — loaded on the first block. */
+/** Shiki (core, its JavaScript engine), GitHub light (high contrast: its tokens are 4.5:1 on the code's tints) and dark — loaded on the first block. */
 function shikiHighlighter(): ScCodeHighlighter {
   let shiki: Promise<HighlighterCore> | undefined;
   const load = () =>
@@ -61,7 +61,7 @@ function shikiHighlighter(): ScCodeHighlighter {
     ]).then(([{ createHighlighterCore }, { createJavaScriptRegexEngine }]) =>
       createHighlighterCore({
         themes: [
-          import('shiki/themes/github-light.mjs'),
+          import('shiki/themes/github-light-high-contrast.mjs'),
           import('shiki/themes/github-dark.mjs'),
         ],
         langs: [],
@@ -80,7 +80,7 @@ function shikiHighlighter(): ScCodeHighlighter {
       return highlighter
         .codeToTokens(code, {
           lang,
-          themes: { light: 'github-light', dark: 'github-dark' },
+          themes: { light: 'github-light-high-contrast', dark: 'github-dark' },
           defaultColor: false,
         })
         .tokens.map((line) =>

@@ -29,7 +29,7 @@ export const appConfig: ApplicationConfig = {
 };
 ```
 
-`provideCodeHighlighter()` uses Shiki's core with its JavaScript engine and the GitHub light / dark themes; each language loads the first time it is shown: `angular-html`, `angular-ts`, `bash` (`sh`, `shell`, `zsh`), `css`, `diff`, `html`, `javascript` (`js`), `json`, `markdown` (`md`), `python` (`py`), `scss`, `sql`, `typescript` (`ts`), `yaml` (`yml`). Another highlighter can be provided as `SC_CODE_HIGHLIGHTER` (`ScCodeHighlighter`: code and language in, lines of tokens out).
+`provideCodeHighlighter()` uses Shiki's core with its JavaScript engine and the GitHub light (high contrast) / dark themes; each language loads the first time it is shown: `angular-html`, `angular-ts`, `bash` (`sh`, `shell`, `zsh`), `css`, `diff`, `html`, `javascript` (`js`), `json`, `markdown` (`md`), `python` (`py`), `scss`, `sql`, `typescript` (`ts`), `yaml` (`yml`). Another highlighter can be provided as `SC_CODE_HIGHLIGHTER` (`ScCodeHighlighter`: code and language in, lines of tokens out).
 
 ## Usage
 

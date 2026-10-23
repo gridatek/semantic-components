@@ -272,7 +272,7 @@ export class ScDiffViewer {
   protected readonly splitLineClass =
     'grid min-h-lh min-w-0 data-[variant=added]:bg-muted data-[variant=removed]:bg-destructive/10';
   protected readonly numberClass =
-    'select-none pe-2 text-end text-muted-foreground';
+    'select-none pe-2 text-end text-muted-foreground in-data-[variant=removed]:text-destructive';
   protected readonly signClass =
     'select-none text-muted-foreground in-data-[variant=removed]:text-destructive';
   protected readonly contentClass = 'min-w-0 no-underline';
