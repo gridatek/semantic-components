@@ -48,7 +48,7 @@ Across all components, also:
 
 - [x] **Icons bare**: `aria-hidden` removed from every semantic-icons `<svg>`, and the sizes the parts already give; the parts that didn't size their icons now do (command input group, file-upload dropzone, navbar brand, code-block header, infinite-scroll status, PDF loading); collapsible and hover-card triggers in the demos are `scButton` instead of a copied class list.
 
-- [ ] **SSR checks**: SSR on in the showcase (`@angular/ssr`, `outputMode: "server"`, as in blocks; the dev server then renders on the server too) and an e2e helper `expectServerRendered(page, url)`: the demo route fetched without JavaScript returns 200 with the demo's `data-slot` parts in its HTML, then loaded in the browser with no hydration error or warning (`NG0500`–`NG0507`) and no console error. The SSR column is ticked by a test using it.
+- [ ] **SSR checks**: both apps (showcase, blocks) are static by default — client-only, the build and the dev server as today; blocks drops its `outputMode: "server"` default. SSR is a build configuration, `ssr` (`main.server.ts`, `server.ts`, `outputMode: "server"`), used only on GitHub CI: a second job, beside `main`, builds both apps with it, starts their Node servers (ports 4200 and 4201; `SSR=1` makes each `playwright.config.ts` start them instead of `serve-static`) and runs the same e2e suites again, in Chromium. A shared fixture fails a test on a hydration error or warning (`NG0500`–`NG0507`), a console error or a server error, in both passes. A component's SSR column is ticked when its tests pass in that job.
 
 ## Phase 1 — Atoms (59)
 
