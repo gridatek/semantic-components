@@ -19,8 +19,8 @@ export class ScVideoPlayerTop {
   protected readonly class = computed(() =>
     cn(
       'absolute inset-x-0 top-0 z-20 hidden items-center justify-end gap-1 bg-linear-to-b from-black/60 to-transparent px-3 pt-2 pb-6 transition-opacity duration-300',
-      // Small only.
-      '@max-xl/video:flex',
+      // Small only, once played.
+      '@max-xl/video:group-data-started/video:flex',
       // Playing untouched: away, as the controls.
       'group-data-idle/video:pointer-events-none group-data-idle/video:opacity-0',
       this.classInput(),

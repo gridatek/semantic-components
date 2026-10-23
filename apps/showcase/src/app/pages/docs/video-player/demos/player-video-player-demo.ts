@@ -20,6 +20,7 @@ import {
   ScVideoPlayerRate,
   ScVideoPlayerSeek,
   ScVideoPlayerSkip,
+  ScVideoPlayerStartDuration,
   ScVideoPlayerTime,
   ScVideoPlayerTimeSeparator,
   ScVideoPlayerTop,
@@ -54,6 +55,7 @@ import {
     ScVideoPlayerPreview,
     ScVideoPlayerPlay,
     ScVideoPlayerSkip,
+    ScVideoPlayerStartDuration,
     ScVideoPlayerMute,
     ScVideoPlayerVolume,
     ScVideoPlayerTime,
@@ -130,7 +132,10 @@ import {
 
       <div scVideoPlayerCenter>
         <button scVideoPlayerPlay>
-          @if (player.paused()) {
+          @if (player.ended()) {
+            <svg siRotateCcwIcon></svg>
+            <span class="sr-only">Replay</span>
+          } @else if (player.paused()) {
             <svg siPlayIcon></svg>
             <span class="sr-only">Play</span>
           } @else {
@@ -138,6 +143,11 @@ import {
             <span class="sr-only">Pause</span>
           }
         </button>
+      </div>
+
+      <!-- Before the first play: the length, in a badge. -->
+      <div scVideoPlayerStartDuration>
+        <time scVideoPlayerTime="duration"></time>
       </div>
 
       <div scVideoPlayerControls>
@@ -162,7 +172,10 @@ import {
         </div>
         <div scVideoPlayerBar>
           <button scVideoPlayerPlay>
-            @if (player.paused()) {
+            @if (player.ended()) {
+              <svg siRotateCcwIcon></svg>
+              <span class="sr-only">Replay</span>
+            } @else if (player.paused()) {
               <svg siPlayIcon></svg>
               <span class="sr-only">Play</span>
             } @else {

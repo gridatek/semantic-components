@@ -49,6 +49,7 @@ const IDLE_AFTER = 2500;
     tabindex: '0',
     '[attr.data-idle]': 'idle() || null',
     '[attr.data-paused]': 'paused() || null',
+    '[attr.data-started]': 'started() || null',
     '[attr.data-fullscreen]': 'fullscreen() || null',
     '[class]': 'class()',
     '(keydown)': 'onKeydown($event)',
@@ -83,6 +84,11 @@ export class ScVideoPlayer {
   readonly buffered = signal(0);
   readonly waiting = signal(false);
   readonly ended = signal(false);
+  /**
+   * Played at least once. Before, a player with a `scVideoPlayerCenter`
+   * shows only its play and the length (`scVideoPlayerStartDuration`).
+   */
+  readonly started = signal(false);
   readonly fullscreen = signal(false);
   readonly pictureInPicture = signal(false);
   /** Playing, untouched for a while: the controls hide. */
@@ -298,6 +304,7 @@ export class ScVideoPlayer {
     this.take('playbackRate', this.playbackRate, media.playbackRate);
     this.duration.set(Number.isFinite(media.duration) ? media.duration : 0);
     this.ended.set(media.ended);
+    if (!media.paused) this.started.set(true);
     const ranges = media.buffered;
     this.buffered.set(ranges.length ? ranges.end(ranges.length - 1) : 0);
   }

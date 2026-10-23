@@ -18,6 +18,7 @@ export { ScVideoPlayerProgress } from './video-player-progress';
 export { ScVideoPlayerRate } from './video-player-rate';
 export { ScVideoPlayerSeek } from './video-player-seek';
 export { ScVideoPlayerSkip } from './video-player-skip';
+export { ScVideoPlayerStartDuration } from './video-player-start-duration';
 export { ScVideoPlayerTime } from './video-player-time';
 export { ScVideoPlayerTimeSeparator } from './video-player-time-separator';
 export { ScVideoPlayerTop } from './video-player-top';

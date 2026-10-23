@@ -5,7 +5,10 @@ import { cn } from '../../utils/cn/cn';
 import { type ScButtonVariants } from '../button/button';
 import { ScVideoPlayer } from './video-player';
 
-/** Plays or pauses. Write its icon and name from `player.paused()` ("Play" / "Pause"). */
+/**
+ * Plays or pauses; ended, plays again from the start. Write its icon and name
+ * from `player.ended()` and `player.paused()` ("Replay" / "Play" / "Pause").
+ */
 @Directive({
   selector: 'button[scVideoPlayerPlay]',
   host: {

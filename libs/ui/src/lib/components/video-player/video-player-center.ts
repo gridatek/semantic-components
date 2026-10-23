@@ -4,8 +4,9 @@ import { cn } from '../../utils/cn/cn';
 /**
  * Over the middle of the video: play, large. Shown on a small player (below
  * 576px wide), as in Vidstack's small layout; on a wide one, only while
- * paused. Hidden, as the controls, while playing untouched. Clicks around its
- * button reach the video.
+ * paused. Hidden, as the controls, while playing untouched. Above the controls
+ * (their padding reaches over the middle of a small player); clicks around its
+ * button go through.
  */
 @Directive({
   selector: 'div[scVideoPlayerCenter]',
@@ -19,8 +20,8 @@ export class ScVideoPlayerCenter {
 
   protected readonly class = computed(() =>
     cn(
-      'pointer-events-none absolute inset-0 z-10 hidden items-center justify-center gap-6 transition-opacity duration-300 *:pointer-events-auto',
-      // Small: always; wide: while paused.
+      'pointer-events-none absolute inset-0 z-30 hidden items-center justify-center gap-6 transition-opacity duration-300 *:pointer-events-auto',
+      // Small: always; wide: while paused (so before the first play too).
       '@max-xl/video:flex group-data-paused/video:flex',
       // Playing untouched: away, as the controls.
       'group-data-idle/video:opacity-0 group-data-idle/video:*:pointer-events-none',

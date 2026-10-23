@@ -1,5 +1,8 @@
+import { DOCUMENT } from '@angular/common';
 import {
   type AfterRenderRef,
+  ChangeDetectorRef,
+  DestroyRef,
   Directive,
   ElementRef,
   Injector,
@@ -52,9 +55,15 @@ export class ScVideoPlayerMedia {
   );
 
   private readonly injector = inject(Injector);
+  private readonly window = inject(DOCUMENT).defaultView;
+  private readonly changes = inject(ChangeDetectorRef);
   private pending: AfterRenderRef | null = null;
+  private frame: number | null = null;
 
   constructor() {
+    inject(DestroyRef).onDestroy(() => {
+      if (this.frame !== null) this.window?.cancelAnimationFrame(this.frame);
+    });
     this.player.ɵmedia.set(this.element);
     // Already loaded (from the cache): no event comes.
     if (this.element.readyState >= 1) this.onMetadata();
@@ -63,7 +72,9 @@ export class ScVideoPlayerMedia {
   /**
    * Reads the video into the player once rendered: a change made outside
    * (a bound signal set) reaches the player first, and is not overwritten.
-   * Playing, it reads again every render — every frame.
+   * Playing, it reads again every animation frame — still after a render,
+   * but not after every render: a read changes the time, which renders,
+   * which would read again in the same pass (NG0103).
    */
   protected sync(): void {
     if (this.pending) return;
@@ -71,10 +82,20 @@ export class ScVideoPlayerMedia {
       () => {
         this.pending = null;
         this.player.ɵsync(this.element);
-        if (!this.element.paused) this.sync();
+        this.playing();
       },
       { injector: this.injector },
     );
+  }
+
+  /** While it plays: next frame, a render, then a read. */
+  private playing(): void {
+    if (this.frame !== null || this.element.paused || !this.window) return;
+    this.frame = this.window.requestAnimationFrame(() => {
+      this.frame = null;
+      this.changes.markForCheck();
+      this.sync();
+    });
   }
 
   protected onMetadata(): void {

@@ -6,11 +6,12 @@ Your `<video>` and its tracks, controls as parts, its state two ways — with ca
 
 ```
 scVideoPlayer (paused, currentTime, volume, muted, playbackRate, captions — two-way;
-│                  duration, buffered, waiting, ended, fullscreen, pictureInPicture, tracks, chapters, chapter, cues, preview)
+│                  duration, buffered, waiting, ended, started, fullscreen, pictureInPicture, tracks, chapters, chapter, cues, preview)
 ├── video[scVideoPlayerMedia] — yours: src / <source>s, poster, <track>s
 ├── scVideoPlayerCaptionsDisplay — the captions, above the controls
 ├── scVideoPlayerTop — the top bar of a small player: captions
-├── scVideoPlayerCenter — play over the video (small player; paused)
+├── scVideoPlayerCenter — play over the video (small player; paused; before the first play)
+├── scVideoPlayerStartDuration → time[scVideoPlayerTime="duration"] — the length, before the first play
 └── scVideoPlayerControls — hides while playing untouched
     ├── scVideoPlayerProgress → input[scVideoPlayerSeek], scVideoPlayerPreview
     └── scVideoPlayerBar → buttons: Play, Skip, Mute, Captions, Rate,
@@ -33,6 +34,10 @@ scVideoPlayer (paused, currentTime, volume, muted, playbackRate, captions — tw
   </div>
   <div scVideoPlayerCenter>
     <button scVideoPlayerPlay><svg siPlayIcon></svg><span class="sr-only">{{ player.paused() ? 'Play' : 'Pause' }}</span></button>
+  </div>
+
+  <div scVideoPlayerStartDuration>
+    <time scVideoPlayerTime="duration"></time>
   </div>
 
   <div scVideoPlayerControls>
@@ -58,7 +63,11 @@ scVideoPlayer (paused, currentTime, volume, muted, playbackRate, captions — tw
 
 ## State
 
-Two-way: `paused`, `currentTime`, `volume`, `muted`, `playbackRate`, `captions` (a track's id, or `null`). Read: `duration`, `buffered`, `waiting`, `ended`, `fullscreen`, `pictureInPicture`, `idle`, `tracks()` (captions and subtitles), `chapters()`, `chapter()` (the one playing), `cues()`, `preview()`. Methods: `toggle()`, `seekTo()`, `seekBy()`, `volumeBy()`, `toggleCaptions()`, `toggleFullscreen()`, `togglePictureInPicture()`, `formatTime()` (a time in the app's language), `chapterAt()`. `metadata` (`MediaMetadataInit`) shows in the system's media controls, whose keys play, pause and seek.
+Two-way: `paused`, `currentTime`, `volume`, `muted`, `playbackRate`, `captions` (a track's id, or `null`). Read: `duration`, `buffered`, `waiting`, `ended`, `started` (played at least once), `fullscreen`, `pictureInPicture`, `idle`, `tracks()` (captions and subtitles), `chapters()`, `chapter()` (the one playing), `cues()`, `preview()`. Methods: `toggle()`, `seekTo()`, `seekBy()`, `volumeBy()`, `toggleCaptions()`, `toggleFullscreen()`, `togglePictureInPicture()`, `formatTime()` (a time in the app's language), `chapterAt()`. `metadata` (`MediaMetadataInit`) shows in the system's media controls, whose keys play, pause and seek.
+
+## Before the first play
+
+As other players do (Vidstack's start duration), a player with a `scVideoPlayerCenter` shows, until it is first played, only the poster, its play and the length (`scVideoPlayerStartDuration`, with your `time[scVideoPlayerTime="duration"]` in it). The controls and the top bar come with the first play, and stay — paused, they show; ended, play says Replay (`player.ended()`). A player without a center shows its controls from the start: there is nothing else to press.
 
 ## Small players
 
