@@ -72,7 +72,8 @@
           "buildTarget": "showcase:build:development"
         },
         "ssr": {
-          "buildTarget": "showcase:build:development,ssr"
+          "buildTarget": "showcase:build:development,ssr",
+          "prebundle": false
         }
       },
       "options": {

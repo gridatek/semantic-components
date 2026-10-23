@@ -1,13 +1,15 @@
+import { DOCUMENT } from '@angular/common';
 import {
   Component,
-  OnDestroy,
-  OnInit,
+  DestroyRef,
   ViewEncapsulation,
+  afterNextRender,
   computed,
   effect,
   inject,
   input,
   model,
+  signal,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router } from '@angular/router';
@@ -17,7 +19,7 @@ import { ScSidebarState } from './sidebar-state';
 
 const SIDEBAR_STORAGE_KEY = 'sc-sidebar-state';
 const SIDEBAR_KEYBOARD_SHORTCUT = 'b';
-const MOBILE_BREAKPOINT = 768;
+const MOBILE_QUERY = '(max-width: 767.98px)';
 
 @Component({
   selector: 'div[scSidebarProvider]',
@@ -28,10 +30,11 @@ const MOBILE_BREAKPOINT = 768;
     '[style.--sidebar-width]': '"16rem"',
     '[style.--sidebar-width-mobile]': '"18rem"',
     '[style.--sidebar-width-icon]': '"3rem"',
+    '(window:keydown)': 'onKeydown($event)',
   },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScSidebarProvider implements OnInit, OnDestroy {
+export class ScSidebarProvider {
   readonly state = inject(ScSidebarState);
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -52,10 +55,10 @@ export class ScSidebarProvider implements OnInit, OnDestroy {
     ),
   );
 
-  private keydownHandler?: (event: KeyboardEvent) => void;
-  private resizeHandler?: () => void;
-
   private readonly router = inject(Router);
+  private readonly window = inject(DOCUMENT).defaultView;
+  /** Saved only once the saved state is read: not over it. */
+  private readonly restored = signal(false);
 
   constructor() {
     // Sync model with state
@@ -64,7 +67,7 @@ export class ScSidebarProvider implements OnInit, OnDestroy {
 
     // Save to localStorage when state changes
     effect(() => {
-      this.saveToStorage(this.state.open());
+      if (this.restored()) this.saveToStorage(this.state.open());
     });
 
     // Close mobile sidebar on navigation
@@ -75,42 +78,32 @@ export class ScSidebarProvider implements OnInit, OnDestroy {
         takeUntilDestroyed(),
       )
       .subscribe(() => this.state.setOpenMobile(false));
+
+    // The saved state and the screen size: the browser's, so after the
+    // first render (the server renders the sidebar open, on a wide screen).
+    const destroyRef = inject(DestroyRef);
+    afterNextRender(() => {
+      const savedState = this.loadFromStorage();
+      if (savedState !== null) this.open.set(savedState);
+      this.restored.set(true);
+
+      const mobile = this.window?.matchMedia(MOBILE_QUERY);
+      if (!mobile) return;
+      const update = () => this.state.setIsMobile(mobile.matches);
+      update();
+      mobile.addEventListener('change', update);
+      destroyRef.onDestroy(() => mobile.removeEventListener('change', update));
+    });
   }
 
-  ngOnInit(): void {
-    // Load initial state from localStorage
-    const savedState = this.loadFromStorage();
-    if (savedState !== null) {
-      this.open.set(savedState);
-    }
-
-    // Setup keyboard shortcut (Cmd/Ctrl + B)
-    this.keydownHandler = (event: KeyboardEvent) => {
-      if (
-        (event.metaKey || event.ctrlKey) &&
-        event.key === SIDEBAR_KEYBOARD_SHORTCUT
-      ) {
-        event.preventDefault();
-        this.state.toggle();
-      }
-    };
-    window.addEventListener('keydown', this.keydownHandler);
-
-    // Setup mobile detection
-    this.resizeHandler = () => {
-      const isMobile = window.innerWidth < MOBILE_BREAKPOINT;
-      this.state.setIsMobile(isMobile);
-    };
-    this.resizeHandler(); // Initial check
-    window.addEventListener('resize', this.resizeHandler);
-  }
-
-  ngOnDestroy(): void {
-    if (this.keydownHandler) {
-      window.removeEventListener('keydown', this.keydownHandler);
-    }
-    if (this.resizeHandler) {
-      window.removeEventListener('resize', this.resizeHandler);
+  // Cmd/Ctrl + B
+  protected onKeydown(event: KeyboardEvent): void {
+    if (
+      (event.metaKey || event.ctrlKey) &&
+      event.key === SIDEBAR_KEYBOARD_SHORTCUT
+    ) {
+      event.preventDefault();
+      this.state.toggle();
     }
   }
 
@@ -118,7 +111,7 @@ export class ScSidebarProvider implements OnInit, OnDestroy {
     const key = this.storageKey();
     if (!key) return;
     try {
-      localStorage.setItem(key, String(open));
+      this.window?.localStorage.setItem(key, String(open));
     } catch (error) {
       // localStorage unavailable
       console.warn('Unable to save sidebar state to localStorage:', error);
@@ -129,7 +122,7 @@ export class ScSidebarProvider implements OnInit, OnDestroy {
     const key = this.storageKey();
     if (!key) return null;
     try {
-      const value = localStorage.getItem(key);
+      const value = this.window?.localStorage.getItem(key) ?? null;
       return value !== null ? value === 'true' : null;
     } catch (error) {
       console.warn('Unable to load sidebar state from localStorage:', error);
