@@ -1,8 +1,8 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import {
   type ScButtonVariants,
-  buttonVariants,
   cn,
+  injectPreset,
   ɵwarnIfUnnamed,
 } from '@semantic-components/ui';
 import { ScTransferList, type ScTransferListSide } from './transfer-list';
@@ -23,6 +23,8 @@ import { ScTransferList, type ScTransferListSide } from './transfer-list';
   },
 })
 export class ScTransferListMove {
+  private readonly buttonStyles = injectPreset().button;
+
   protected readonly list = inject(ScTransferList);
 
   readonly to = input.required<ScTransferListSide>({
@@ -42,7 +44,7 @@ export class ScTransferListMove {
 
   protected readonly class = computed(() =>
     cn(
-      buttonVariants({ variant: this.variant(), size: this.size() }),
+      this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),
     ),
   );

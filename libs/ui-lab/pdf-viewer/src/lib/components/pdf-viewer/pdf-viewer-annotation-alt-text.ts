@@ -1,8 +1,8 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import {
   type ScButtonVariants,
-  buttonVariants,
   cn,
+  injectPreset,
 } from '@semantic-components/ui';
 import { SC_PDF_VIEWER } from './pdf-viewer';
 import type { ScPdfEditorAnnotation } from './pdf-viewer-types';
@@ -21,6 +21,8 @@ import type { ScPdfEditorAnnotation } from './pdf-viewer-types';
   },
 })
 export class ScPdfViewerAnnotationAltText {
+  private readonly buttonStyles = injectPreset().button;
+
   protected readonly pdfViewer = inject(SC_PDF_VIEWER);
 
   readonly annotation = input.required<ScPdfEditorAnnotation>({
@@ -32,7 +34,7 @@ export class ScPdfViewerAnnotationAltText {
 
   protected readonly class = computed(() =>
     cn(
-      buttonVariants({ variant: this.variant(), size: this.size() }),
+      this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),
     ),
   );

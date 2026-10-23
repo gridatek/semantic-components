@@ -1,6 +1,7 @@
 import { Directive, computed, inject, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
-import { type ScButtonVariants, buttonVariants } from '../button/button';
+import { type ScButtonVariants } from '../button/button';
 import { SC_COMBOBOX } from './combobox-tokens';
 
 /**
@@ -23,6 +24,8 @@ import { SC_COMBOBOX } from './combobox-tokens';
   },
 })
 export class ScComboboxClear {
+  private readonly buttonStyles = injectPreset().button;
+
   protected readonly combobox = inject(SC_COMBOBOX);
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('ghost');
@@ -37,7 +40,7 @@ export class ScComboboxClear {
 
   protected readonly class = computed(() =>
     cn(
-      buttonVariants({ variant: this.variant(), size: this.size() }),
+      this.buttonStyles({ variant: this.variant(), size: this.size() }),
       'absolute end-7 top-1/2 size-5 -translate-y-1/2 text-muted-foreground',
       this.classInput(),
     ),

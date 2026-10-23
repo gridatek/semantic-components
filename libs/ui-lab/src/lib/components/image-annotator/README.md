@@ -71,7 +71,7 @@ async export(annotator: ScImageAnnotator) {
 
 ## Styling
 
-The stage is the image's size (`w-full`, its height follows). The parts' buttons style themselves with `buttonVariants()` (`ghost`, `icon`; `variant` and `size` as on `scButton`); colours are swatches, their colour from their value.
+The stage is the image's size (`w-full`, its height follows). The parts' buttons style themselves as the preset's button (`ghost`, `icon`; `variant` and `size` as on `scButton`); colours are swatches, their colour from their value.
 
 ## Not here
 

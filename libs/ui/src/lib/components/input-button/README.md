@@ -22,7 +22,7 @@ import { ScInputButton } from '@semantic-components/ui';
 
 ### ScInputButton
 
-A directive applied to `<button>` elements to style them as input-like triggers. Builds on `buttonVariants` with the `outline` variant.
+A directive applied to `<button>` elements to style them as input-like triggers. Builds on the preset's button with the `outline` variant.
 
 | Property | Type     | Default | Description                                          |
 | -------- | -------- | ------- | ---------------------------------------------------- |

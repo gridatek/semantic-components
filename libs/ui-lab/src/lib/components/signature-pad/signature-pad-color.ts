@@ -1,8 +1,8 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import {
   type ScButtonVariants,
-  buttonVariants,
   cn,
+  injectPreset,
   ɵwarnIfUnnamed,
 } from '@semantic-components/ui';
 import { ScSignaturePad } from './signature-pad';
@@ -20,6 +20,8 @@ import { ScSignaturePad } from './signature-pad';
   },
 })
 export class ScSignaturePadColor {
+  private readonly buttonStyles = injectPreset().button;
+
   protected readonly pad = inject(ScSignaturePad);
 
   readonly color = input.required<string>({
@@ -31,7 +33,7 @@ export class ScSignaturePadColor {
 
   protected readonly class = computed(() =>
     cn(
-      buttonVariants({ variant: this.variant(), size: this.size() }),
+      this.buttonStyles({ variant: this.variant(), size: this.size() }),
       'aria-pressed:bg-accent aria-pressed:text-accent-foreground',
       this.classInput(),
     ),

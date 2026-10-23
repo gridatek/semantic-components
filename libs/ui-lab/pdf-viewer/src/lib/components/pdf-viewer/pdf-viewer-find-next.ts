@@ -1,8 +1,8 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import {
   type ScButtonVariants,
-  buttonVariants,
   cn,
+  injectPreset,
 } from '@semantic-components/ui';
 import { SC_PDF_VIEWER } from './pdf-viewer';
 
@@ -19,6 +19,8 @@ import { SC_PDF_VIEWER } from './pdf-viewer';
   },
 })
 export class ScPdfViewerFindNext {
+  private readonly buttonStyles = injectPreset().button;
+
   readonly pdfViewer = inject(SC_PDF_VIEWER);
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -31,7 +33,7 @@ export class ScPdfViewerFindNext {
 
   protected readonly class = computed(() =>
     cn(
-      buttonVariants({ variant: this.variant(), size: this.size() }),
+      this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),
     ),
   );

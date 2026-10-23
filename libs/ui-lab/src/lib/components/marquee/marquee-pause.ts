@@ -1,8 +1,8 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import {
   type ScButtonVariants,
-  buttonVariants,
   cn,
+  injectPreset,
   ɵwarnIfUnnamed,
 } from '@semantic-components/ui';
 import { ScMarquee } from './marquee';
@@ -22,6 +22,8 @@ import { ScMarquee } from './marquee';
   },
 })
 export class ScMarqueePause {
+  private readonly buttonStyles = injectPreset().button;
+
   protected readonly marquee = inject(ScMarquee);
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -30,7 +32,7 @@ export class ScMarqueePause {
 
   protected readonly class = computed(() =>
     cn(
-      buttonVariants({ variant: this.variant(), size: this.size() }),
+      this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),
     ),
   );

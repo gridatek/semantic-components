@@ -1,8 +1,8 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import {
   type ScButtonVariants,
-  buttonVariants,
   cn,
+  injectPreset,
   ɵwarnIfUnnamed,
 } from '@semantic-components/ui';
 import { ScBarcodeScanner } from './barcode-scanner';
@@ -20,6 +20,8 @@ import { ScBarcodeScanner } from './barcode-scanner';
   },
 })
 export class ScBarcodeScannerTorch {
+  private readonly buttonStyles = injectPreset().button;
+
   protected readonly scanner = inject(ScBarcodeScanner);
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -28,7 +30,7 @@ export class ScBarcodeScannerTorch {
 
   protected readonly class = computed(() =>
     cn(
-      buttonVariants({ variant: this.variant(), size: this.size() }),
+      this.buttonStyles({ variant: this.variant(), size: this.size() }),
       'aria-pressed:bg-accent aria-pressed:text-accent-foreground',
       this.classInput(),
     ),

@@ -5,7 +5,7 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { ScButtonVariants, buttonVariants, cn } from '@semantic-components/ui';
+import { ScButtonVariants, cn, injectPreset } from '@semantic-components/ui';
 import { ScCarousel } from './carousel';
 
 @Component({
@@ -21,6 +21,8 @@ import { ScCarousel } from './carousel';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScCarouselNext {
+  private readonly buttonStyles = injectPreset().button;
+
   readonly carousel = inject(ScCarousel);
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -31,7 +33,7 @@ export class ScCarouselNext {
   protected readonly class = computed(() => {
     const isHorizontal = this.carousel.orientation() === 'horizontal';
     return cn(
-      buttonVariants({ variant: this.variant(), size: this.size() }),
+      this.buttonStyles({ variant: this.variant(), size: this.size() }),
       'rounded-full absolute touch-manipulation',
       isHorizontal
         ? 'inset-y-0 -end-12 my-auto'

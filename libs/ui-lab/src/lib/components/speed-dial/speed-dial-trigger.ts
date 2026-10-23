@@ -1,8 +1,8 @@
 import { Directive, ElementRef, computed, inject, input } from '@angular/core';
 import {
   type ScButtonVariants,
-  buttonVariants,
   cn,
+  injectPreset,
   ɵwarnIfUnnamed,
 } from '@semantic-components/ui';
 import { ScSpeedDial } from './speed-dial';
@@ -26,6 +26,8 @@ import { ScSpeedDial } from './speed-dial';
   },
 })
 export class ScSpeedDialTrigger {
+  private readonly buttonStyles = injectPreset().button;
+
   protected readonly dial = inject(ScSpeedDial);
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -34,7 +36,7 @@ export class ScSpeedDialTrigger {
 
   protected readonly class = computed(() =>
     cn(
-      buttonVariants({ variant: this.variant(), size: this.size() }),
+      this.buttonStyles({ variant: this.variant(), size: this.size() }),
       'rounded-full shadow-lg',
       this.classInput(),
     ),

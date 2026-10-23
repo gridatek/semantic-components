@@ -1,8 +1,8 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import {
   type ScButtonVariants,
-  buttonVariants,
   cn,
+  injectPreset,
   ɵwarnIfUnnamed,
 } from '@semantic-components/ui';
 import { ScSpotlight } from './spotlight';
@@ -18,6 +18,8 @@ import { ScSpotlight } from './spotlight';
   },
 })
 export class ScSpotlightClose {
+  private readonly buttonStyles = injectPreset().button;
+
   protected readonly spotlight = inject(ScSpotlight);
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -26,7 +28,7 @@ export class ScSpotlightClose {
 
   protected readonly class = computed(() =>
     cn(
-      buttonVariants({ variant: this.variant(), size: this.size() }),
+      this.buttonStyles({ variant: this.variant(), size: this.size() }),
       'absolute end-2 top-2',
       this.classInput(),
     ),

@@ -1,8 +1,8 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import {
   type ScButtonVariants,
-  buttonVariants,
   cn,
+  injectPreset,
   ɵwarnIfUnnamed,
 } from '@semantic-components/ui';
 import { ScLightbox } from './lightbox';
@@ -19,6 +19,8 @@ import { ScLightbox } from './lightbox';
   },
 })
 export class ScLightboxPrevious {
+  private readonly buttonStyles = injectPreset().button;
+
   protected readonly lightbox = inject(ScLightbox);
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -27,7 +29,7 @@ export class ScLightboxPrevious {
 
   protected readonly class = computed(() =>
     cn(
-      buttonVariants({ variant: this.variant(), size: this.size() }),
+      this.buttonStyles({ variant: this.variant(), size: this.size() }),
       // On the dark viewer: white.
       'text-white hover:bg-white/15 hover:text-white dark:hover:bg-white/15',
       this.classInput(),

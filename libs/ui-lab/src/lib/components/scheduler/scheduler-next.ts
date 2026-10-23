@@ -1,8 +1,8 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import {
   type ScButtonVariants,
-  buttonVariants,
   cn,
+  injectPreset,
   ɵwarnIfUnnamed,
 } from '@semantic-components/ui';
 import { ScScheduler } from './scheduler';
@@ -18,6 +18,8 @@ import { ScScheduler } from './scheduler';
   },
 })
 export class ScSchedulerNext {
+  private readonly buttonStyles = injectPreset().button;
+
   protected readonly scheduler = inject(ScScheduler);
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -26,7 +28,7 @@ export class ScSchedulerNext {
 
   protected readonly class = computed(() =>
     cn(
-      buttonVariants({ variant: this.variant(), size: this.size() }),
+      this.buttonStyles({ variant: this.variant(), size: this.size() }),
       'rtl:[&_svg]:rotate-180',
       this.classInput(),
     ),

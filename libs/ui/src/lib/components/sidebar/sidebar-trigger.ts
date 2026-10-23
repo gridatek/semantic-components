@@ -1,6 +1,7 @@
 import { Directive, computed, inject, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
-import { ScButtonVariants, buttonVariants } from '../button';
+import { ScButtonVariants } from '../button';
 import { ScSidebarState } from './sidebar-state';
 
 @Directive({
@@ -14,6 +15,8 @@ import { ScSidebarState } from './sidebar-state';
   },
 })
 export class ScSidebarTrigger {
+  private readonly buttonStyles = injectPreset().button;
+
   readonly state = inject(ScSidebarState);
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -23,7 +26,7 @@ export class ScSidebarTrigger {
 
   protected readonly class = computed(() =>
     cn(
-      buttonVariants({ variant: this.variant(), size: this.size() }),
+      this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),
     ),
   );

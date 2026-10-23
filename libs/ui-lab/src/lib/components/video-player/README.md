@@ -59,7 +59,7 @@ Focused in the player (never page-wide): Space or K play / pause, J / L ±10 s, 
 
 ## Styling
 
-Over the video, the parts are white: buttons from `buttonVariants()` (`ghost`, `icon-sm`), sliders recoloured. Restyle from their classes.
+Over the video, the parts are white: the preset's buttons (`ghost`, `icon-sm`), sliders recoloured. Restyle from their classes.
 
 ## Not here
 

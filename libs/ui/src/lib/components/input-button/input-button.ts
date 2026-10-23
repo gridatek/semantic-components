@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
-import { buttonVariants } from '../button/button';
 
 @Directive({
   selector: 'button[scInputButton]',
@@ -10,11 +10,13 @@ import { buttonVariants } from '../button/button';
   },
 })
 export class ScInputButton {
+  private readonly buttonStyles = injectPreset().button;
+
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
     cn(
-      buttonVariants({ variant: 'outline', size: 'default' }),
+      this.buttonStyles({ variant: 'outline', size: 'default' }),
       'w-full justify-start gap-2 text-muted-foreground',
       this.classInput(),
     ),

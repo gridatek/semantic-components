@@ -1,8 +1,8 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import {
   type ScButtonVariants,
-  buttonVariants,
   cn,
+  injectPreset,
   ɵwarnIfUnnamed,
 } from '@semantic-components/ui';
 import { ScImageCropper } from './image-cropper';
@@ -19,6 +19,8 @@ import { ScImageCropper } from './image-cropper';
   },
 })
 export class ScImageCropperRotateRight {
+  private readonly buttonStyles = injectPreset().button;
+
   protected readonly cropper = inject(ScImageCropper);
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -27,7 +29,7 @@ export class ScImageCropperRotateRight {
 
   protected readonly class = computed(() =>
     cn(
-      buttonVariants({ variant: this.variant(), size: this.size() }),
+      this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),
     ),
   );

@@ -1,6 +1,7 @@
 import { Directive, computed, inject, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
-import { type ScButtonVariants, buttonVariants } from '../button/button';
+import { type ScButtonVariants } from '../button/button';
 import { ScFileUpload } from './file-upload';
 
 /** Opens the file picker: the way in by keyboard. */
@@ -16,6 +17,8 @@ import { ScFileUpload } from './file-upload';
   },
 })
 export class ScFileUploadTrigger {
+  private readonly buttonStyles = injectPreset().button;
+
   protected readonly upload = inject(ScFileUpload);
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -24,7 +27,7 @@ export class ScFileUploadTrigger {
 
   protected readonly class = computed(() =>
     cn(
-      buttonVariants({ variant: this.variant(), size: this.size() }),
+      this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),
     ),
   );

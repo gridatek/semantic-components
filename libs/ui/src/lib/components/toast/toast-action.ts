@@ -1,6 +1,7 @@
 import { Directive, computed, inject, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
-import { type ScButtonVariants, buttonVariants } from '../button/button';
+import { type ScButtonVariants } from '../button/button';
 import { SC_TOAST_CONTEXT } from './toast-context';
 
 /** Runs its toast's action, then dismisses it. Write its text (`toast.action.label`). */
@@ -14,6 +15,8 @@ import { SC_TOAST_CONTEXT } from './toast-context';
   },
 })
 export class ScToastAction {
+  private readonly buttonStyles = injectPreset().button;
+
   private readonly context = inject(SC_TOAST_CONTEXT);
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('outline');
@@ -21,7 +24,7 @@ export class ScToastAction {
 
   protected readonly class = computed(() =>
     cn(
-      buttonVariants({ variant: this.variant(), size: this.size() }),
+      this.buttonStyles({ variant: this.variant(), size: this.size() }),
       'ms-auto',
       this.classInput(),
     ),

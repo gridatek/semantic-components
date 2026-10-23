@@ -6,7 +6,7 @@ Status: **decided** (2026-10-16) — option A: a part on a `button` gives it its
 
 A part on a `button` (`scToastClose`, `scPdfViewerZoomIn`, `scTransferListMoveToTarget`…):
 
-1. takes its look from `buttonVariants()` (or `toggleVariants()`), never from a class list of its own that copies a button;
+1. takes its look from the preset's button (`injectPreset().button(…)`, in a field) (or `toggleVariants()`), never from a class list of its own that copies a button;
 2. has `variant` and `size` inputs, with defaults that suit where it sits — the consumer writes nothing to get the right look, and picks another with the same words as `scButton` (`variant="outline" size="icon-sm"`);
 3. adds only the classes that are its own: position (`absolute end-1 top-1`), visibility, a colour in its context;
 4. sets its own `type="button"` and `[disabled]` — it doesn't need `scButton`.

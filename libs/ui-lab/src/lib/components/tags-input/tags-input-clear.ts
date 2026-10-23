@@ -1,8 +1,8 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import {
   type ScButtonVariants,
-  buttonVariants,
   cn,
+  injectPreset,
   ɵwarnIfUnnamed,
 } from '@semantic-components/ui';
 import { ScTagsInput } from './tags-input';
@@ -19,6 +19,8 @@ import { ScTagsInput } from './tags-input';
   },
 })
 export class ScTagsInputClear {
+  private readonly buttonStyles = injectPreset().button;
+
   protected readonly tags = inject(ScTagsInput);
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -27,7 +29,7 @@ export class ScTagsInputClear {
 
   protected readonly class = computed(() =>
     cn(
-      buttonVariants({ variant: this.variant(), size: this.size() }),
+      this.buttonStyles({ variant: this.variant(), size: this.size() }),
       'text-muted-foreground ms-auto',
       this.classInput(),
     ),

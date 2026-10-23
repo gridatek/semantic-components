@@ -27,9 +27,9 @@ const LIBRARIES = ['ui', 'ui-lab', 'code', 'charts', 'editor'];
 const registry = JSON.parse(
   readFileSync(at('apps/showcase/public/components.json'), 'utf8'),
 );
-const shadcn = existsSync(join(reference, 'src/components/ui'))
+const shadcn = existsSync(join(reference, 'presets/nova/src/components/ui'))
   ? new Set(
-      readdirSync(join(reference, 'src/components/ui')).map((f) =>
+      readdirSync(join(reference, 'presets/nova/src/components/ui')).map((f) =>
         f.replace(/\.tsx$/, ''),
       ),
     )

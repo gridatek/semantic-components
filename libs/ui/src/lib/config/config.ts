@@ -5,6 +5,7 @@ import {
   inject,
   makeEnvironmentProviders,
 } from '@angular/core';
+import type { ScPresetStyles } from '@semantic-components/preset-styles';
 import type { ScToasterConfig } from '../components/toast/toast.types';
 
 /**
@@ -20,6 +21,8 @@ import type { ScToasterConfig } from '../components/toast/toast.types';
  * ```
  */
 export interface ScConfig {
+  /** The components' classes: a preset from preset-styles; nova by default. */
+  preset?: ScPresetStyles;
   toaster?: ScToasterConfig;
 }
 
@@ -39,7 +42,10 @@ export function provideScConfig(config: ScConfig): EnvironmentProviders {
       const parent = inject(SC_CONFIG, { skipSelf: true, optional: true });
       const merged: Record<string, unknown> = { ...parent };
       for (const [key, part] of Object.entries(config)) {
-        merged[key] = { ...(merged[key] as object | undefined), ...part };
+        merged[key] =
+          typeof part === 'object'
+            ? { ...(merged[key] as object | undefined), ...part }
+            : part;
       }
       return merged as ScConfig;
     },

@@ -12,7 +12,7 @@ A styled anchor element that shares button variants for consistent styling.
 
 ### ScLink
 
-Link directive applied to `a` elements. Reuses `buttonVariants` from the Button component for consistent styling.
+Link directive applied to `a` elements. Styled as the preset's button (`injectPreset().button`), like `scButton`.
 
 **Selector:** `a[scLink]`
 

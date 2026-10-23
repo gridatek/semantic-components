@@ -1,8 +1,8 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import {
   type ScButtonVariants,
-  buttonVariants,
   cn,
+  injectPreset,
   ɵwarnIfUnnamed,
 } from '@semantic-components/ui';
 import { ScColorPicker } from './color-picker';
@@ -22,6 +22,8 @@ import { ScColorPicker } from './color-picker';
   },
 })
 export class ScColorPickerEyeDropper {
+  private readonly buttonStyles = injectPreset().button;
+
   protected readonly picker = inject(ScColorPicker);
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -30,7 +32,7 @@ export class ScColorPickerEyeDropper {
 
   protected readonly class = computed(() =>
     cn(
-      buttonVariants({ variant: this.variant(), size: this.size() }),
+      this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),
     ),
   );

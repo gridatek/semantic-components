@@ -1,6 +1,7 @@
 import { Directive, computed, inject, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
-import { ScButtonVariants, buttonVariants } from '../button/button';
+import { ScButtonVariants } from '../button/button';
 import { ScCalendar } from './calendar';
 
 @Directive({
@@ -12,6 +13,8 @@ import { ScCalendar } from './calendar';
   },
 })
 export class ScCalendarPrevious {
+  private readonly buttonStyles = injectPreset().button;
+
   private readonly calendar = inject(ScCalendar);
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -20,7 +23,7 @@ export class ScCalendarPrevious {
 
   protected readonly class = computed(() =>
     cn(
-      buttonVariants({ variant: this.variant(), size: this.size() }),
+      this.buttonStyles({ variant: this.variant(), size: this.size() }),
       'absolute start-1',
       this.classInput(),
     ),

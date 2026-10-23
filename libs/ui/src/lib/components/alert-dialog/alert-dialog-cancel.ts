@@ -1,6 +1,7 @@
 import { Directive, computed, inject, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
-import { ScButtonVariants, buttonVariants } from '../button';
+import { ScButtonVariants } from '../button';
 import { ScAlertDialogProvider } from './alert-dialog-provider';
 
 @Directive({
@@ -12,6 +13,8 @@ import { ScAlertDialogProvider } from './alert-dialog-provider';
   },
 })
 export class ScAlertDialogCancel {
+  private readonly buttonStyles = injectPreset().button;
+
   private readonly alertDialogProvider = inject(ScAlertDialogProvider);
   readonly classInput = input<string>('', { alias: 'class' });
 
@@ -20,7 +23,7 @@ export class ScAlertDialogCancel {
 
   protected readonly class = computed(() =>
     cn(
-      buttonVariants({ variant: this.variant(), size: this.size() }),
+      this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),
     ),
   );

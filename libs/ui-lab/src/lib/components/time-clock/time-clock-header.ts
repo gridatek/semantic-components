@@ -5,7 +5,7 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { buttonVariants, cn } from '@semantic-components/ui';
+import { cn, injectPreset } from '@semantic-components/ui';
 import { ScTimeClock } from './time-clock';
 
 /**
@@ -65,6 +65,8 @@ import { ScTimeClock } from './time-clock';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScTimeClockHeader {
+  private readonly buttonStyles = injectPreset().button;
+
   protected readonly clock = inject(ScTimeClock);
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -72,11 +74,11 @@ export class ScTimeClockHeader {
   protected readonly periods = ['am', 'pm'] as const;
 
   protected readonly viewClass = cn(
-    buttonVariants({ variant: 'ghost', size: 'lg' }),
+    this.buttonStyles({ variant: 'ghost', size: 'lg' }),
     'h-12 px-2 text-3xl font-medium tabular-nums aria-pressed:bg-accent aria-pressed:text-accent-foreground',
   );
   protected readonly periodClass = cn(
-    buttonVariants({ variant: 'outline', size: 'xs' }),
+    this.buttonStyles({ variant: 'outline', size: 'xs' }),
     'aria-pressed:bg-primary aria-pressed:text-primary-foreground aria-pressed:border-primary',
   );
 

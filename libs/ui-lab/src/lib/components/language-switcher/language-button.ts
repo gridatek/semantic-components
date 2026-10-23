@@ -1,8 +1,8 @@
 import { Directive, ElementRef, computed, inject, input } from '@angular/core';
 import {
   type ScButtonVariants,
-  buttonVariants,
   cn,
+  injectPreset,
 } from '@semantic-components/ui';
 import { ScLanguageService } from './language.service';
 
@@ -28,6 +28,8 @@ import { ScLanguageService } from './language.service';
   },
 })
 export class ScLanguageButton {
+  private readonly buttonStyles = injectPreset().button;
+
   private readonly languageService = inject(ScLanguageService);
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -43,7 +45,7 @@ export class ScLanguageButton {
 
   protected readonly class = computed(() =>
     cn(
-      buttonVariants({ variant: this.variant(), size: this.size() }),
+      this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),
     ),
   );

@@ -1,8 +1,8 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import {
   type ScButtonVariants,
-  buttonVariants,
   cn,
+  injectPreset,
 } from '@semantic-components/ui';
 import { ScScheduler } from './scheduler';
 import type { ScSchedulerView } from './scheduler-types';
@@ -22,6 +22,8 @@ import type { ScSchedulerView } from './scheduler-types';
   },
 })
 export class ScSchedulerViewButton {
+  private readonly buttonStyles = injectPreset().button;
+
   protected readonly scheduler = inject(ScScheduler);
 
   readonly viewName = input.required<ScSchedulerView>({
@@ -36,7 +38,7 @@ export class ScSchedulerViewButton {
 
   protected readonly class = computed(() =>
     cn(
-      buttonVariants({
+      this.buttonStyles({
         variant: this.pressed() ? 'secondary' : 'ghost',
         size: this.size(),
       }),

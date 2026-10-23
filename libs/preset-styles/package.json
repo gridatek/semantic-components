@@ -1,0 +1,19 @@
+{
+  "name": "@semantic-components/preset-styles",
+  "version": "0.81.0",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "Khalil LAGRIDA",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gridatek/semantic-components",
+    "directory": "libs/preset-styles"
+  },
+  "peerDependencies": {
+    "class-variance-authority": ">=0.7.1"
+  },
+  "sideEffects": false
+}

@@ -80,7 +80,7 @@ providers: [{ provide: OverlayContainer, useClass: FullscreenOverlayContainer }]
 
 ### Buttons
 
-Each styles its button (`buttonVariants`, `ghost` by default): pick another look with `variant` and `size`, as on `scButton`. Write its icon and text, and name the icon-only ones.
+Each styles its button (the preset's button, `ghost` by default): pick another look with `variant` and `size`, as on `scButton`. Write its icon and text, and name the icon-only ones.
 
 | Part                                    | Does                                     | Disabled when                                       |
 | --------------------------------------- | ---------------------------------------- | --------------------------------------------------- |

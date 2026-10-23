@@ -1,6 +1,7 @@
 import { Directive, booleanAttribute, computed, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
-import { type ScButtonVariants, buttonVariants } from '../button';
+import { type ScButtonVariants } from '../button';
 
 @Directive({
   selector: 'a[scLink]',
@@ -12,6 +13,8 @@ import { type ScButtonVariants, buttonVariants } from '../button';
   },
 })
 export class ScLink {
+  private readonly buttonStyles = injectPreset().button;
+
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('default');
   readonly size = input<ScButtonVariants['size']>('default');
@@ -22,7 +25,7 @@ export class ScLink {
 
   protected readonly class = computed(() =>
     cn(
-      buttonVariants({ variant: this.variant(), size: this.size() }),
+      this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),
     ),
   );

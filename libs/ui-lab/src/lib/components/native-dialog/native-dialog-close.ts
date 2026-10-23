@@ -1,5 +1,5 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { ScButtonVariants, buttonVariants, cn } from '@semantic-components/ui';
+import { ScButtonVariants, cn, injectPreset } from '@semantic-components/ui';
 import { ScNativeDialogProvider } from './native-dialog-provider';
 
 @Directive({
@@ -11,6 +11,8 @@ import { ScNativeDialogProvider } from './native-dialog-provider';
   },
 })
 export class ScNativeDialogClose {
+  private readonly buttonStyles = injectPreset().button;
+
   private readonly dialogProvider = inject(ScNativeDialogProvider);
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -19,7 +21,7 @@ export class ScNativeDialogClose {
 
   protected readonly class = computed(() =>
     cn(
-      buttonVariants({ variant: this.variant(), size: this.size() }),
+      this.buttonStyles({ variant: this.variant(), size: this.size() }),
       'absolute top-2 end-2',
       this.classInput(),
     ),

@@ -66,7 +66,7 @@ A frame instead of a box: leave the handles out, and set a ratio and a shape —
 
 ## The parts' buttons
 
-Each styles itself with `buttonVariants()` (`outline`, `icon`; `variant` and `size` as on `scButton`) and is disabled until an image is in, and where it can't go further (zoom). Write each one's icon and name; `scImageCropperAspectRatio` (`[scImageCropperAspectRatio]="16 / 9"`, `null` for free) is pressed while its ratio is the one — put them in a group you name.
+Each styles itself as the preset's button (`outline`, `icon`; `variant` and `size` as on `scButton`) and is disabled until an image is in, and where it can't go further (zoom). Write each one's icon and name; `scImageCropperAspectRatio` (`[scImageCropperAspectRatio]="16 / 9"`, `null` for free) is pressed while its ratio is the one — put them in a group you name.
 
 ## Accessibility
 

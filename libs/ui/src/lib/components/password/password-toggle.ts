@@ -5,8 +5,8 @@ import {
   inject,
   input,
 } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
-import { buttonVariants } from '../button/button';
 import { SC_PASSWORD_PROVIDER } from './password-provider';
 
 @Directive({
@@ -20,6 +20,8 @@ import { SC_PASSWORD_PROVIDER } from './password-provider';
   },
 })
 export class ScPasswordToggle {
+  private readonly buttonStyles = injectPreset().button;
+
   readonly password = inject(SC_PASSWORD_PROVIDER);
   readonly classInput = input<string>('', { alias: 'class' });
 
@@ -35,7 +37,7 @@ export class ScPasswordToggle {
 
   protected readonly class = computed(() =>
     cn(
-      buttonVariants({ variant: 'ghost', size: 'icon-sm' }),
+      this.buttonStyles({ variant: 'ghost', size: 'icon-sm' }),
       this.classInput(),
     ),
   );

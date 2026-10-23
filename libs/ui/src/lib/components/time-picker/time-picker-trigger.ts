@@ -1,7 +1,8 @@
 import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { Directive, computed, inject, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
-import { type ScButtonVariants, buttonVariants } from '../button';
+import { type ScButtonVariants } from '../button';
 import {
   ScInputGroup,
   type ScInputGroupButtonVariants,
@@ -29,6 +30,8 @@ import { ScTimePicker } from './time-picker';
   },
 })
 export class ScTimePickerTrigger {
+  private readonly buttonStyles = injectPreset().button;
+
   protected readonly popover = inject(ScPopoverProvider);
   protected readonly picker = inject(ScTimePicker);
   private readonly group = inject(ScInputGroup, { optional: true });
@@ -43,12 +46,12 @@ export class ScTimePickerTrigger {
   protected readonly class = computed(() =>
     this.group
       ? cn(
-          buttonVariants({ variant: this.variant() ?? 'ghost' }),
+          this.buttonStyles({ variant: this.variant() ?? 'ghost' }),
           inputGroupButtonVariants({ size: this.buttonSize() }),
           this.classInput(),
         )
       : cn(
-          buttonVariants({
+          this.buttonStyles({
             variant: this.variant() ?? 'outline',
             size: 'icon',
           }),

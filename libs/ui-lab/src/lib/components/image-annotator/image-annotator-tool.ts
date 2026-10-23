@@ -1,8 +1,8 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import {
   type ScButtonVariants,
-  buttonVariants,
   cn,
+  injectPreset,
   ɵwarnIfUnnamed,
 } from '@semantic-components/ui';
 import { ScImageAnnotator } from './image-annotator';
@@ -24,6 +24,8 @@ import type { ScImageAnnotatorToolName } from './image-annotator-types';
   },
 })
 export class ScImageAnnotatorTool {
+  private readonly buttonStyles = injectPreset().button;
+
   protected readonly annotator = inject(ScImageAnnotator);
 
   readonly value = input.required<ScImageAnnotatorToolName>({
@@ -38,7 +40,7 @@ export class ScImageAnnotatorTool {
 
   protected readonly class = computed(() =>
     cn(
-      buttonVariants({
+      this.buttonStyles({
         variant: this.pressed() ? 'secondary' : 'ghost',
         size: this.size(),
       }),

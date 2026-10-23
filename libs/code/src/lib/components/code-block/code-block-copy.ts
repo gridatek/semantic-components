@@ -3,8 +3,8 @@ import { Directive, computed, inject, input } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import {
   type ScButtonVariants,
-  buttonVariants,
   cn,
+  injectPreset,
 } from '@semantic-components/ui';
 import { concat, delay, filter, of, switchMap } from 'rxjs';
 
@@ -30,6 +30,8 @@ import { concat, delay, filter, of, switchMap } from 'rxjs';
   },
 })
 export class ScCodeBlockCopy {
+  private readonly buttonStyles = injectPreset().button;
+
   private readonly clipboard = inject(CdkCopyToClipboard);
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -48,7 +50,7 @@ export class ScCodeBlockCopy {
 
   protected readonly class = computed(() =>
     cn(
-      buttonVariants({ variant: this.variant(), size: this.size() }),
+      this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),
     ),
   );

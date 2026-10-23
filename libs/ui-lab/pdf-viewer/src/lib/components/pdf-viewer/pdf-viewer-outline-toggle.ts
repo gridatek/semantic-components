@@ -1,8 +1,8 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import {
   type ScButtonVariants,
-  buttonVariants,
   cn,
+  injectPreset,
 } from '@semantic-components/ui';
 import { SC_PDF_VIEWER } from './pdf-viewer';
 import type { ScPdfOutlineItem } from './pdf-viewer-types';
@@ -25,6 +25,8 @@ import type { ScPdfOutlineItem } from './pdf-viewer-types';
   },
 })
 export class ScPdfViewerOutlineToggle {
+  private readonly buttonStyles = injectPreset().button;
+
   protected readonly pdfViewer = inject(SC_PDF_VIEWER);
 
   readonly item = input.required<ScPdfOutlineItem>({
@@ -39,7 +41,7 @@ export class ScPdfViewerOutlineToggle {
   );
   protected readonly class = computed(() =>
     cn(
-      buttonVariants({ variant: this.variant(), size: this.size() }),
+      this.buttonStyles({ variant: this.variant(), size: this.size() }),
       '[&_svg]:transition-transform data-[state=open]:[&_svg]:rotate-90 rtl:[&_svg]:-scale-x-100',
       this.classInput(),
     ),

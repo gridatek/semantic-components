@@ -1,8 +1,8 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import {
   type ScButtonVariants,
-  buttonVariants,
   cn,
+  injectPreset,
   ɵwarnIfUnnamed,
 } from '@semantic-components/ui';
 import { ScTagsInput } from './tags-input';
@@ -24,6 +24,8 @@ import { ScTagsInputItem } from './tags-input-item';
   },
 })
 export class ScTagsInputItemRemove {
+  private readonly buttonStyles = injectPreset().button;
+
   protected readonly tags = inject(ScTagsInput);
   protected readonly item = inject(ScTagsInputItem);
 
@@ -33,7 +35,7 @@ export class ScTagsInputItemRemove {
 
   protected readonly class = computed(() =>
     cn(
-      buttonVariants({ variant: this.variant(), size: this.size() }),
+      this.buttonStyles({ variant: this.variant(), size: this.size() }),
       'size-4 rounded-full hover:bg-foreground/10 [&_svg:not([class*=size-])]:size-3',
       this.classInput(),
     ),

@@ -1,6 +1,7 @@
 import { Directive, computed, inject, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
-import { ScButtonVariants, buttonVariants } from '../button';
+import { ScButtonVariants } from '../button';
 import { ScSheetProvider } from './sheet-provider';
 
 @Directive({
@@ -11,6 +12,8 @@ import { ScSheetProvider } from './sheet-provider';
   },
 })
 export class ScSheetClose {
+  private readonly buttonStyles = injectPreset().button;
+
   private readonly sheetProvider = inject(ScSheetProvider);
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -19,7 +22,7 @@ export class ScSheetClose {
 
   protected readonly class = computed(() =>
     cn(
-      buttonVariants({ variant: this.variant(), size: this.size() }),
+      this.buttonStyles({ variant: this.variant(), size: this.size() }),
       'absolute top-3 end-3 z-10',
       this.classInput(),
     ),

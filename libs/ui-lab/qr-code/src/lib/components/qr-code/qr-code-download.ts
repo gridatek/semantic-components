@@ -1,8 +1,8 @@
 import { DOCUMENT, Directive, computed, inject, input } from '@angular/core';
 import {
   type ScButtonVariants,
-  buttonVariants,
   cn,
+  injectPreset,
 } from '@semantic-components/ui';
 import { ScQrCode } from './qr-code';
 
@@ -27,6 +27,8 @@ const isTransparent = (color: string): boolean =>
   },
 })
 export class ScQrCodeDownload {
+  private readonly buttonStyles = injectPreset().button;
+
   private readonly document = inject(DOCUMENT);
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -42,7 +44,7 @@ export class ScQrCodeDownload {
 
   protected readonly class = computed(() =>
     cn(
-      buttonVariants({ variant: this.variant(), size: this.size() }),
+      this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),
     ),
   );

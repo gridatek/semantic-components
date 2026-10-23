@@ -8,8 +8,8 @@ import {
 } from '@angular/core';
 import {
   type ScButtonVariants,
-  buttonVariants,
   cn,
+  injectPreset,
 } from '@semantic-components/ui';
 import { ScNavbarProvider } from './navbar-provider';
 
@@ -27,6 +27,8 @@ import { ScNavbarProvider } from './navbar-provider';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScNavbarMobileTrigger {
+  private readonly buttonStyles = injectPreset().button;
+
   readonly provider = inject(ScNavbarProvider);
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('ghost');
@@ -40,7 +42,7 @@ export class ScNavbarMobileTrigger {
 
   protected readonly class = computed(() =>
     cn(
-      buttonVariants({ variant: this.variant(), size: this.size() }),
+      this.buttonStyles({ variant: this.variant(), size: this.size() }),
       'md:hidden',
       this.classInput(),
     ),

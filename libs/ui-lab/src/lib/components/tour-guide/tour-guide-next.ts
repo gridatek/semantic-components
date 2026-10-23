@@ -1,8 +1,8 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import {
   type ScButtonVariants,
-  buttonVariants,
   cn,
+  injectPreset,
   ɵwarnIfUnnamed,
 } from '@semantic-components/ui';
 import { ScTourGuide } from './tour-guide';
@@ -18,6 +18,8 @@ import { ScTourGuide } from './tour-guide';
   },
 })
 export class ScTourGuideNext {
+  private readonly buttonStyles = injectPreset().button;
+
   protected readonly tour = inject(ScTourGuide);
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -26,7 +28,7 @@ export class ScTourGuideNext {
 
   protected readonly class = computed(() =>
     cn(
-      buttonVariants({ variant: this.variant(), size: this.size() }),
+      this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),
     ),
   );

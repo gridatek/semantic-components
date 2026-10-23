@@ -1,8 +1,8 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import {
   type ScButtonVariants,
-  buttonVariants,
   cn,
+  injectPreset,
 } from '@semantic-components/ui';
 import { ScImageCropper } from './image-cropper';
 
@@ -22,6 +22,8 @@ import { ScImageCropper } from './image-cropper';
   },
 })
 export class ScImageCropperAspectRatio {
+  private readonly buttonStyles = injectPreset().button;
+
   protected readonly cropper = inject(ScImageCropper);
 
   readonly ratio = input.required<number | null>({
@@ -36,7 +38,7 @@ export class ScImageCropperAspectRatio {
 
   protected readonly class = computed(() =>
     cn(
-      buttonVariants({
+      this.buttonStyles({
         variant: this.pressed() ? 'secondary' : 'ghost',
         size: this.size(),
       }),

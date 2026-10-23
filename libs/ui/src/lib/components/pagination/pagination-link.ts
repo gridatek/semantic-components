@@ -6,8 +6,9 @@ import {
   inject,
   input,
 } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
-import { ScButtonVariants, buttonVariants } from '../button/button';
+import { ScButtonVariants } from '../button/button';
 import { ScPagination } from './pagination';
 
 @Directive({
@@ -22,6 +23,8 @@ import { ScPagination } from './pagination';
   },
 })
 export class ScPaginationLink {
+  private readonly buttonStyles = injectPreset().button;
+
   private readonly pagination = inject(ScPagination, { optional: true });
   private readonly elementRef = inject(ElementRef<HTMLElement>);
 
@@ -48,7 +51,7 @@ export class ScPaginationLink {
 
   protected readonly class = computed(() =>
     cn(
-      buttonVariants({ variant: this.variant(), size: this.size() }),
+      this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),
     ),
   );

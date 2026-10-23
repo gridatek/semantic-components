@@ -8,8 +8,8 @@ import {
 } from '@angular/core';
 import {
   type ScButtonVariants,
-  buttonVariants,
   cn,
+  injectPreset,
 } from '@semantic-components/ui';
 import { SC_PDF_VIEWER } from './pdf-viewer';
 
@@ -28,6 +28,8 @@ import { SC_PDF_VIEWER } from './pdf-viewer';
   },
 })
 export class ScPdfViewerInsertPages {
+  private readonly buttonStyles = injectPreset().button;
+
   private readonly pdfViewer = inject(SC_PDF_VIEWER);
   private readonly document = inject(DOCUMENT);
 
@@ -43,7 +45,7 @@ export class ScPdfViewerInsertPages {
 
   protected readonly class = computed(() =>
     cn(
-      buttonVariants({ variant: this.variant(), size: this.size() }),
+      this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),
     ),
   );

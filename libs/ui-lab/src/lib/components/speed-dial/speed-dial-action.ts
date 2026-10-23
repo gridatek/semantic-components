@@ -9,8 +9,8 @@ import {
 } from '@angular/core';
 import {
   type ScButtonVariants,
-  buttonVariants,
   cn,
+  injectPreset,
 } from '@semantic-components/ui';
 import { ScSpeedDial } from './speed-dial';
 
@@ -51,6 +51,8 @@ type Move = 'next' | 'previous' | 'first' | 'last';
   },
 })
 export class ScSpeedDialAction {
+  private readonly buttonStyles = injectPreset().button;
+
   protected readonly dial = inject(ScSpeedDial);
   private readonly element =
     inject<ElementRef<HTMLButtonElement>>(ElementRef).nativeElement;
@@ -84,7 +86,7 @@ export class ScSpeedDialAction {
 
   protected readonly class = computed(() =>
     cn(
-      buttonVariants({ variant: this.variant(), size: this.size() }),
+      this.buttonStyles({ variant: this.variant(), size: this.size() }),
       'relative rounded-full shadow-md transition-[scale,opacity] duration-200 ease-out',
       'aria-disabled:cursor-not-allowed aria-disabled:opacity-50',
       this.dial.arc() && 'absolute top-0 left-0',

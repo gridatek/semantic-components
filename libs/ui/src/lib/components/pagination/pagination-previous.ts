@@ -6,8 +6,9 @@ import {
   inject,
   input,
 } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn, ɵwarnIfUnnamed } from '../../utils';
-import { ScButtonVariants, buttonVariants } from '../button/button';
+import { ScButtonVariants } from '../button/button';
 import { ScPagination } from './pagination';
 
 @Directive({
@@ -21,6 +22,8 @@ import { ScPagination } from './pagination';
   },
 })
 export class ScPaginationPrevious {
+  private readonly buttonStyles = injectPreset().button;
+
   constructor() {
     ɵwarnIfUnnamed('scPaginationPrevious');
   }
@@ -51,7 +54,7 @@ export class ScPaginationPrevious {
 
   protected readonly class = computed(() =>
     cn(
-      buttonVariants({ variant: this.variant(), size: this.size() }),
+      this.buttonStyles({ variant: this.variant(), size: this.size() }),
       // Balances a text button ("‹ Previous"); icon-only buttons stay centred.
       !this.size()?.startsWith('icon') && 'ps-1.5',
       'rtl:[&>svg]:rotate-180',

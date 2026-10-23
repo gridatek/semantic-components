@@ -1,6 +1,6 @@
 import { type VariantProps, cva } from 'class-variance-authority';
 
-/** A button's size in an input group: its corners follow the group's. With `buttonVariants({ variant })`. */
+/** A button's size in an input group: its corners follow the group's. With the preset's button (`injectPreset().button({ variant })`). */
 export const inputGroupButtonVariants = cva(
   'flex items-center gap-2 text-sm shadow-none',
   {

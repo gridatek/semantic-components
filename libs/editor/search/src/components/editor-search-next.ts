@@ -2,8 +2,8 @@ import { Directive, computed, inject, input } from '@angular/core';
 import { SC_EDITOR } from '@semantic-components/editor';
 import {
   type ScButtonVariants,
-  buttonVariants,
   cn,
+  injectPreset,
 } from '@semantic-components/ui';
 import { editorSearch } from './editor-search-state';
 
@@ -21,6 +21,8 @@ import { editorSearch } from './editor-search-state';
   },
 })
 export class ScEditorSearchNext {
+  private readonly buttonStyles = injectPreset().button;
+
   protected readonly search = editorSearch(inject(SC_EDITOR));
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('ghost');
@@ -28,7 +30,7 @@ export class ScEditorSearchNext {
 
   protected readonly class = computed(() =>
     cn(
-      buttonVariants({ variant: this.variant(), size: this.size() }),
+      this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),
     ),
   );

@@ -1,8 +1,8 @@
 import { Directive, computed, input } from '@angular/core';
 import {
   type ScButtonVariants,
-  buttonVariants,
   cn,
+  injectPreset,
 } from '@semantic-components/ui';
 import { ScInfiniteScroll } from './infinite-scroll';
 
@@ -24,6 +24,8 @@ import { ScInfiniteScroll } from './infinite-scroll';
   },
 })
 export class ScInfiniteScrollMore {
+  private readonly buttonStyles = injectPreset().button;
+
   /** The infinite scroll it asks for more. */
   readonly scroll = input.required<ScInfiniteScroll>({
     alias: 'scInfiniteScrollMore',
@@ -35,7 +37,7 @@ export class ScInfiniteScrollMore {
 
   protected readonly class = computed(() =>
     cn(
-      buttonVariants({ variant: this.variant(), size: this.size() }),
+      this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),
     ),
   );

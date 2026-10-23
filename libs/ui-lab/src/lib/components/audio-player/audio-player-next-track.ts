@@ -1,8 +1,8 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import {
   type ScButtonVariants,
-  buttonVariants,
   cn,
+  injectPreset,
   ɵwarnIfUnnamed,
 } from '@semantic-components/ui';
 import { ScAudioPlayer } from './audio-player';
@@ -19,6 +19,8 @@ import { ScAudioPlayer } from './audio-player';
   },
 })
 export class ScAudioPlayerNextTrack {
+  private readonly buttonStyles = injectPreset().button;
+
   protected readonly player = inject(ScAudioPlayer);
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -27,7 +29,7 @@ export class ScAudioPlayerNextTrack {
 
   protected readonly class = computed(() =>
     cn(
-      buttonVariants({ variant: this.variant(), size: this.size() }),
+      this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),
     ),
   );

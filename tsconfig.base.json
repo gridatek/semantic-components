@@ -59,7 +59,32 @@
       "@semantic-components/editor/search": ["libs/editor/search/src/index.ts"],
       "@semantic-components/editor/tables": ["libs/editor/tables/src/index.ts"],
       "@semantic-components/charts": ["libs/charts/src/index.ts"],
-      "@semantic-components/mcp-server": ["libs/mcp-server/src/index.ts"]
+      "@semantic-components/preset-styles": ["libs/preset-styles/src/index.ts"],
+      "@semantic-components/preset-styles/lyra": [
+        "libs/preset-styles/lyra/src/index.ts"
+      ],
+      "@semantic-components/preset-styles/nova": [
+        "libs/preset-styles/nova/src/index.ts"
+      ],
+      "@semantic-components/mcp-server": ["libs/mcp-server/src/index.ts"],
+      "@semantic-components/preset-styles/vega": [
+        "libs/preset-styles/vega/src/index.ts"
+      ],
+      "@semantic-components/preset-styles/maia": [
+        "libs/preset-styles/maia/src/index.ts"
+      ],
+      "@semantic-components/preset-styles/mira": [
+        "libs/preset-styles/mira/src/index.ts"
+      ],
+      "@semantic-components/preset-styles/luma": [
+        "libs/preset-styles/luma/src/index.ts"
+      ],
+      "@semantic-components/preset-styles/sera": [
+        "libs/preset-styles/sera/src/index.ts"
+      ],
+      "@semantic-components/preset-styles/rhea": [
+        "libs/preset-styles/rhea/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

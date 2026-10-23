@@ -3,9 +3,13 @@
 //
 //   node scripts/shadcn-diff.mjs button            # ours: libs/*/…/components/button
 //   node scripts/shadcn-diff.mjs dropdown-menu menu # shadcn's name, then ours
+//   node scripts/shadcn-diff.mjs button --preset=vega  # against another style
+//   node scripts/shadcn-diff.mjs button --presets  # shadcn's, style by style
 //
-// shadcn's come from the generated reference app (nova, RTL): the folder
-// SHADCN_REFERENCE, or ../shadcn-reference next to this repo. An aid for the
+// shadcn's come from the generated reference (RTL), one app per style in
+// presets/<style> (nova by default): the folder SHADCN_REFERENCE, or
+// ../shadcn-reference next to this repo. With --presets, ours aren't read:
+// per part, the classes every style shares, then what each style changes. An aid for the
 // roadmap's Styles column — reading both still decides (logical properties,
 // decomposition and deliberate divergences: docs/shadcn-style-reference.md).
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
@@ -13,7 +17,14 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const [shadcnName, ourName = shadcnName] = process.argv.slice(2);
+const args = process.argv.slice(2);
+const flags = args.filter((arg) => arg.startsWith('--'));
+const [shadcnName, ourName = shadcnName] = args.filter(
+  (arg) => !arg.startsWith('--'),
+);
+const preset =
+  flags.find((flag) => flag.startsWith('--preset='))?.slice(9) ?? 'nova';
+const across = flags.includes('--presets');
 if (!shadcnName) {
   console.error('Usage: node scripts/shadcn-diff.mjs <shadcn name> [our name]');
   process.exit(1);
@@ -21,13 +32,10 @@ if (!shadcnName) {
 
 const reference =
   process.env.SHADCN_REFERENCE ?? resolve(root, '..', 'shadcn-reference');
-const shadcnFile = join(
-  reference,
-  'src',
-  'components',
-  'ui',
-  `${shadcnName}.tsx`,
-);
+const presets = join(reference, 'presets');
+const shadcnFileOf = (style) =>
+  join(presets, style, 'src', 'components', 'ui', `${shadcnName}.tsx`);
+const shadcnFile = shadcnFileOf(preset);
 if (!existsSync(shadcnFile)) {
   console.error(`Not found: ${shadcnFile}`);
   process.exit(1);
@@ -42,7 +50,7 @@ const ourDir = [
 ]
   .map((dir) => join(root, dir))
   .find(existsSync);
-if (!ourDir) {
+if (!ourDir && !across) {
   console.error(`Not found: our ${ourName}`);
   process.exit(1);
 }
@@ -129,6 +137,11 @@ function add(parts, key, list) {
   for (const token of list) parts.get(key).add(token);
 }
 
+if (across) {
+  compareStyles();
+  process.exit(0);
+}
+
 const theirs = shadcnParts(readFileSync(shadcnFile, 'utf8'));
 const ours = ourParts(ourDir);
 const keys = [...new Set([...theirs.keys(), ...ours.keys()])].sort();
@@ -157,3 +170,33 @@ for (const key of keys) {
 console.log(
   `\n${same} part(s) identical · shadcn: ${shadcnFile} · ours: ${ourDir}`,
 );
+
+/** shadcn's component in every style: what they share, what each changes. */
+function compareStyles() {
+  const styles = readdirSync(presets).filter((style) =>
+    existsSync(shadcnFileOf(style)),
+  );
+  const parts = new Map(
+    styles.map((style) => [
+      style,
+      shadcnParts(readFileSync(shadcnFileOf(style), 'utf8')),
+    ]),
+  );
+  const keys = [
+    ...new Set([...parts.values()].flatMap((p) => [...p.keys()])),
+  ].sort();
+  for (const key of keys) {
+    const sets = styles.map((style) => parts.get(style).get(key) ?? new Set());
+    const shared = [...sets[0]].filter((t) => sets.every((set) => set.has(t)));
+    console.log(`
+${key}`);
+    console.log(`  every style: ${shared.join(' ') || '—'}`);
+    styles.forEach((style, i) => {
+      const own = [...sets[i]].filter((t) => !shared.includes(t));
+      if (!parts.get(style).has(key)) console.log(`  ${style}: (no such part)`);
+      else if (own.length) console.log(`  ${style}: ${own.join(' ')}`);
+    });
+  }
+  console.log(`
+${styles.length} styles: ${styles.join(', ')} · ${presets}`);
+}
