@@ -1,5 +1,5 @@
-import { type Page, expect, test } from '@playwright/test';
 import { collectErrors } from '../../interaction';
+import { type Page, expect, test } from '../../test';
 
 const demo = (name: string) => `/demos/virtual-list/${name}-virtual-list-demo`;
 const list = (page: Page) => page.locator('[data-slot="virtual-list"]');

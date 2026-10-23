@@ -1,5 +1,5 @@
-import { expect, test } from '@playwright/test';
 import { collectErrors, press } from '../../interaction';
+import { expect, test } from '../../test';
 
 test.describe('Focus trap', () => {
   test('focuses the panel, keeps Tab inside, gives focus back', async ({

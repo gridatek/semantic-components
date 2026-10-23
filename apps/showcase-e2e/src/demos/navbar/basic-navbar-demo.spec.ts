@@ -1,5 +1,5 @@
-import { expect, test } from '@playwright/test';
 import { collectErrors, press } from '../../interaction';
+import { expect, test } from '../../test';
 
 test.describe('Basic Navbar Demo', () => {
   test.use({ viewport: { width: 390, height: 700 } });

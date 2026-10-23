@@ -1,4 +1,4 @@
-import { type Page, expect, test } from '@playwright/test';
+import { type Page, expect, test } from '../../test';
 
 // Every shortcut of the editor page's Keyboard table, in the full demo (it
 // has every feature): each is pressed, and the HTML it makes is checked.

@@ -1,5 +1,5 @@
-import { expect, test } from '@playwright/test';
 import { expectLooksDisabled } from '../../interaction';
+import { expect, test } from '../../test';
 
 test.describe('Disabled Link Pagination Demo', () => {
   test.beforeEach(async ({ page }) => {

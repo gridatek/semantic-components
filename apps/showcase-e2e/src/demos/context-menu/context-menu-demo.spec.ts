@@ -1,5 +1,5 @@
-import { expect, test } from '@playwright/test';
 import { collectErrors, openMenuCount, press } from '../../interaction';
+import { expect, test } from '../../test';
 
 test.describe('Context Menu Demo', () => {
   let errors: string[];

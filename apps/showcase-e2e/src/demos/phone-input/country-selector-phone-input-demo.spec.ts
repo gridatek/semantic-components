@@ -1,5 +1,5 @@
-import { expect, test } from '@playwright/test';
 import { collectErrors, press, type } from '../../interaction';
+import { expect, test } from '../../test';
 
 test.describe('Country Selector Phone Input Demo', () => {
   let errors: string[];

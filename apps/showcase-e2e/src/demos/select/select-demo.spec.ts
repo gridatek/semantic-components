@@ -1,4 +1,3 @@
-import { expect, test } from '@playwright/test';
 import {
   activeDescendantText,
   collectErrors,
@@ -6,6 +5,7 @@ import {
   press,
   type,
 } from '../../interaction';
+import { expect, test } from '../../test';
 
 test.describe('Select Demo', () => {
   let errors: string[];

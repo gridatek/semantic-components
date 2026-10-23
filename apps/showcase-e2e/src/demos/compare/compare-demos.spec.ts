@@ -1,4 +1,4 @@
-import { type Page, expect, test } from '@playwright/test';
+import { type Page, expect, test } from '../../test';
 
 const handle = (page: Page) => page.getByRole('slider');
 const compare = (page: Page) => page.locator('[data-slot="compare"]');
@@ -51,13 +51,16 @@ test.describe('Basic', () => {
   test('right to left: from the right, and the arrows follow', async ({
     page,
   }) => {
-    await page.evaluate(() =>
-      document.documentElement.setAttribute('dir', 'rtl'),
-    );
+    // Right to left before the app starts: the direction is read once, as it
+    // starts (and with SSR, the page is drawn before the test could set it).
+    await page.addInitScript(() => {
+      new MutationObserver((_, observer) => {
+        if (!document.documentElement) return;
+        document.documentElement.setAttribute('dir', 'rtl');
+        observer.disconnect();
+      }).observe(document, { childList: true });
+    });
     await page.goto('/demos/compare/basic-compare-demo');
-    await page.evaluate(() =>
-      document.documentElement.setAttribute('dir', 'rtl'),
-    );
     const point = await at(page, 0.75);
     await page.mouse.click(point.x, point.y);
     await expect(handle(page)).toHaveAttribute('aria-valuenow', '25');

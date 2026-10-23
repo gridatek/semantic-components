@@ -1,4 +1,4 @@
-import { type Page, expect, test } from '@playwright/test';
+import { type Page, expect, test } from '../../test';
 
 const draft = (page: Page) => page.getByRole('textbox', { name: 'Draft' });
 const bar = (page: Page) =>

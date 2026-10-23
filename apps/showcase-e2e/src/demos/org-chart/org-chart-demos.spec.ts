@@ -1,5 +1,5 @@
-import { type Locator, type Page, expect, test } from '@playwright/test';
 import { collectErrors, focus, press, type } from '../../interaction';
+import { type Locator, type Page, expect, test } from '../../test';
 
 const demo = (name: string) => `/demos/org-chart/${name}-org-chart-demo`;
 const person = (page: Page, name: string) =>

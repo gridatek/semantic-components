@@ -1,5 +1,5 @@
-import { expect, test } from '@playwright/test';
 import { collectErrors } from '../../interaction';
+import { expect, test } from '../../test';
 
 // handbook.pdf: 6 pages labelled i, ii, 1, 2, 3, 4; "chapter-2" is page 5.
 test.describe('PDF Viewer open parameters', () => {

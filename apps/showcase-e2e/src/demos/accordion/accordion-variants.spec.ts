@@ -1,5 +1,5 @@
-import { expect, test } from '@playwright/test';
 import { collectErrors, press } from '../../interaction';
+import { expect, test } from '../../test';
 
 test.describe('Multiple Accordion Demo', () => {
   test('several items can be open; panels are labelled regions', async ({

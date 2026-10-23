@@ -1,5 +1,5 @@
-import { expect, test } from '@playwright/test';
 import { collectErrors } from '../../interaction';
+import { expect, test } from '../../test';
 
 test.describe('Backdrop', () => {
   test('fades in when shown, out when it goes, then is removed', async ({

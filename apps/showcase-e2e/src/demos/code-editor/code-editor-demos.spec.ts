@@ -1,5 +1,5 @@
-import { type Page, expect, test } from '@playwright/test';
 import { collectErrors, press } from '../../interaction';
+import { type Page, expect, test } from '../../test';
 
 const demo = (name: string) => `/demos/code-editor/${name}-code-editor-demo`;
 const editor = (page: Page, name?: string) =>

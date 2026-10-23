@@ -1,5 +1,5 @@
-import { expect, test } from '@playwright/test';
 import { collectErrors, press } from '../../interaction';
+import { expect, test } from '../../test';
 
 test.describe('PDF Viewer Signature Dialog', () => {
   test('tabs: one tab stop, arrows, linked panels', async ({ page }) => {

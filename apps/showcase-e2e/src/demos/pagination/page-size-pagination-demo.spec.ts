@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, test } from '../../test';
 
 test.describe('Page Size Pagination Demo', () => {
   test.beforeEach(async ({ page }) => {

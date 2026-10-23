@@ -1,5 +1,5 @@
-import { type Page, expect, test } from '@playwright/test';
 import { collectErrors } from '../../interaction';
+import { type Page, expect, test } from '../../test';
 
 const demo = (name: string) =>
   `/demos/animated-counter/${name}-animated-counter-demo`;

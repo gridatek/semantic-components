@@ -1,5 +1,5 @@
-import { expect, test } from '@playwright/test';
 import { collectErrors } from '../../interaction';
+import { expect, test } from '../../test';
 
 // handbook.pdf: page 1 "Preface", page 2 "Contents", page 3 "Chapter 1…".
 test.describe('PDF Viewer presentation mode', () => {

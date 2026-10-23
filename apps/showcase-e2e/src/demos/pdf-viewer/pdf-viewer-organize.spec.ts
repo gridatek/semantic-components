@@ -1,7 +1,7 @@
 import { workspaceRoot } from '@nx/devkit';
-import { type Page, expect, test } from '@playwright/test';
 import { join } from 'node:path';
 import { collectErrors } from '../../interaction';
+import { type Page, expect, test } from '../../test';
 
 const HANDBOOK = join(workspaceRoot, 'apps/showcase/public/pdf/handbook.pdf');
 

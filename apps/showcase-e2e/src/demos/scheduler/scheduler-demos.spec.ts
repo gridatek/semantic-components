@@ -1,4 +1,4 @@
-import { type Page, expect, test } from '@playwright/test';
+import { type Page, expect, test } from '../../test';
 
 const title = (page: Page) => page.locator('[data-slot="scheduler-title"]');
 const event = (page: Page, name: string) =>

@@ -1,5 +1,5 @@
-import { expect, test } from '@playwright/test';
 import { collectErrors } from '../../interaction';
+import { expect, test } from '../../test';
 import { serveEmojibase } from './emojibase';
 
 test.describe('Emoji picker', () => {

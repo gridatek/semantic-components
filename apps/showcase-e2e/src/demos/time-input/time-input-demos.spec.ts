@@ -1,5 +1,5 @@
-import { type Page, expect, test } from '@playwright/test';
 import { collectErrors, press } from '../../interaction';
+import { type Page, expect, test } from '../../test';
 
 const demo = (name: string) => `/demos/time-input/${name}-time-input-demo`;
 const part = (page: Page, name: string) =>

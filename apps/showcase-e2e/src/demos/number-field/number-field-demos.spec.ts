@@ -1,5 +1,5 @@
-import { type Locator, expect, test } from '@playwright/test';
 import { collectErrors } from '../../interaction';
+import { type Locator, expect, test } from '../../test';
 
 /** The value, as written and as a number. */
 async function expectValue(input: Locator, text: string, now: string) {

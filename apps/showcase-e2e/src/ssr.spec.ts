@@ -1,5 +1,5 @@
-import { test } from '@playwright/test';
 import { expectHydrated, routesOf } from './ssr';
+import { test } from './test';
 
 /**
  * Every page, rendered on the server, hydrates: Angular's hydration ran, with

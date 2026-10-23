@@ -1,5 +1,5 @@
-import { type Locator, type Page, expect, test } from '@playwright/test';
 import { collectErrors, press, type } from '../../interaction';
+import { type Locator, type Page, expect, test } from '../../test';
 
 const demo = (name: string) => `/demos/tags-input/${name}-tags-input-demo`;
 const tags = (page: Page) => page.locator('[data-slot="tags-input-item"]');

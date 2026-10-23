@@ -1,5 +1,5 @@
-import { expect, test } from '@playwright/test';
 import { collectErrors, press, type } from '../../interaction';
+import { expect, test } from '../../test';
 
 test.describe('Command Demo', () => {
   test('filter, run with Enter (twice) and click', async ({ page }) => {

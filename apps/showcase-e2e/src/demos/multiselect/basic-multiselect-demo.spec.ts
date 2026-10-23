@@ -1,10 +1,10 @@
-import { expect, test } from '@playwright/test';
 import {
   activeDescendantText,
   collectErrors,
   focus,
   press,
 } from '../../interaction';
+import { expect, test } from '../../test';
 
 test.describe('Basic Multiselect Demo', () => {
   let errors: string[];

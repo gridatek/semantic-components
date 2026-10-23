@@ -1,5 +1,5 @@
-import { type Page, expect, test } from '@playwright/test';
 import { collectErrors } from '../../interaction';
+import { type Page, expect, test } from '../../test';
 
 const demo = (name: string) => `/demos/date-input/${name}-date-input-demo`;
 const picked = (page: Page) => page.getByTestId('picked');

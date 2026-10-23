@@ -1,5 +1,5 @@
-import { type Locator, type Page, expect, test } from '@playwright/test';
 import { collectErrors } from '../../interaction';
+import { type Locator, type Page, expect, test } from '../../test';
 
 const demo = (name: string) => `/demos/file-upload/${name}-file-upload-demo`;
 

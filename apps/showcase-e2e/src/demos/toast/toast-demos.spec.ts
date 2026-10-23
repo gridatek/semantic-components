@@ -1,4 +1,4 @@
-import { type Locator, type Page, expect, test } from '@playwright/test';
+import { type Locator, type Page, expect, test } from '../../test';
 
 const toasts = (page: Page) => page.locator('[data-slot="toast"]');
 

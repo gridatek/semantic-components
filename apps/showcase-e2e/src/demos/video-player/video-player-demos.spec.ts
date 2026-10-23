@@ -1,5 +1,5 @@
-import { type Page, expect, test } from '@playwright/test';
 import { collectErrors } from '../../interaction';
+import { type Page, expect, test } from '../../test';
 
 const video = (page: Page) => page.locator('video');
 const player = (page: Page) => page.locator('[data-slot="video-player"]');

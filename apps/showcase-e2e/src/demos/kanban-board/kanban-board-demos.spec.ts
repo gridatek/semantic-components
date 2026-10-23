@@ -1,5 +1,5 @@
-import { type Locator, type Page, expect, test } from '@playwright/test';
 import { collectErrors, press } from '../../interaction';
+import { type Locator, type Page, expect, test } from '../../test';
 
 const demo = (name: string) => `/demos/kanban-board/${name}-kanban-board-demo`;
 const column = (page: Page, name: string) =>

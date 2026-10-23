@@ -60,7 +60,9 @@ interface Item {
   encapsulation: ViewEncapsulation.None,
 })
 export class FeedInfiniteScrollDemo {
-  readonly items = signal<Item[]>([]);
+  // The first page comes with the page (rendered on the server too): a feed
+  // is never empty — the rest as you scroll.
+  readonly items = signal<Item[]>(page(0));
   readonly loading = signal(false);
   readonly done = signal(false);
 
@@ -75,18 +77,15 @@ export class FeedInfiniteScrollDemo {
   /** A pretend server: 8 more after a moment, 40 in all. */
   private fetch(): Promise<Item[]> {
     const from = this.items().length;
-    return new Promise((resolve) =>
-      setTimeout(
-        () =>
-          resolve(
-            Array.from({ length: Math.min(8, 40 - from) }, (_, i) => ({
-              id: from + i + 1,
-              title: 'Article ' + (from + i + 1),
-              text: 'What happened today, in a few words.',
-            })),
-          ),
-        600,
-      ),
-    );
+    return new Promise((resolve) => setTimeout(() => resolve(page(from)), 600));
   }
+}
+
+/** Up to 8 articles from `from`, 40 in all. */
+function page(from: number): Item[] {
+  return Array.from({ length: Math.min(8, 40 - from) }, (_, i) => ({
+    id: from + i + 1,
+    title: 'Article ' + (from + i + 1),
+    text: 'What happened today, in a few words.',
+  }));
 }

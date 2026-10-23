@@ -1,5 +1,5 @@
-import { test } from '@playwright/test';
 import { expectNoA11yViolations } from '../axe';
+import { test } from '../test';
 
 test.describe('Org Chart Page', () => {
   test('should have no accessibility violations', async ({ page }) => {

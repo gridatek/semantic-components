@@ -1,5 +1,5 @@
-import { type Page, expect, test } from '@playwright/test';
 import { collectErrors, press } from '../../interaction';
+import { type Page, expect, test } from '../../test';
 
 const demo = (name: string) => `/demos/time-clock/${name}-time-clock-demo`;
 const dial = (page: Page) => page.locator('[data-slot="time-clock-dial"]');

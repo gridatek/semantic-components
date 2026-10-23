@@ -13,7 +13,9 @@ permissions:
   actions: read
 
 jobs:
-  main:
+  # The apps as built by default (static, client-only): lint, unit tests,
+  # build, then each app's e2e tests — only what the change affects.
+  static:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -44,8 +46,12 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps chromium
 
-      - name: E2E tests
-        run: npx nx affected -t e2e
+      - name: E2E tests (showcase)
+        run: npx nx affected -t e2e --exclude=blocks-e2e
+
+      - name: E2E tests (blocks)
+        if: ${{ !cancelled() }}
+        run: npx nx affected -t e2e --exclude=showcase-e2e
 
       - name: Upload Playwright report
         if: failure()

@@ -1,5 +1,5 @@
-import { expect, test } from '@playwright/test';
 import { collectErrors } from '../../interaction';
+import { expect, test } from '../../test';
 
 test.describe('Navigation Tree Demo', () => {
   test('nav mode marks the current page with aria-current', async ({

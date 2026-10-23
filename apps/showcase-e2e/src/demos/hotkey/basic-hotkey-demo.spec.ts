@@ -1,5 +1,5 @@
-import { expect, test } from '@playwright/test';
 import { collectErrors } from '../../interaction';
+import { expect, test } from '../../test';
 
 test.describe('Hotkey', () => {
   test('the shortcut does what the button does, written for the platform', async ({

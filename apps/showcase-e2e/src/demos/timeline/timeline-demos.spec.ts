@@ -1,4 +1,4 @@
-import { type Page, expect, test } from '@playwright/test';
+import { type Page, expect, test } from '../../test';
 
 const demo = (name: string) => `/demos/timeline/${name}-timeline-demo`;
 

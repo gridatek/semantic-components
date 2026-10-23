@@ -1,4 +1,4 @@
-import { type Page, expect, test } from '@playwright/test';
+import { type Page, expect, test } from '../../test';
 
 const stage = (page: Page) =>
   page.locator('[data-slot="image-annotator-stage"]');

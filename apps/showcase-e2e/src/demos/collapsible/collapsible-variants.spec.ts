@@ -1,5 +1,5 @@
-import { expect, test } from '@playwright/test';
 import { collectErrors, press } from '../../interaction';
+import { expect, test } from '../../test';
 
 test.describe('Collapsible Demos', () => {
   test('open demo toggles with Space', async ({ page }) => {

@@ -1,10 +1,10 @@
-import { expect, test } from '@playwright/test';
 import {
   activeDescendantText,
   collectErrors,
   press,
   type,
 } from '../../interaction';
+import { expect, test } from '../../test';
 
 test.describe('Basic Autocomplete Demo', () => {
   let errors: string[];

@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, test } from '../../test';
 
 const demo = (name: string) => `/demos/stat-card/${name}-stat-card-demo`;
 

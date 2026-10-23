@@ -1,4 +1,4 @@
-import { type Page, expect, test } from '@playwright/test';
+import { type Page, expect, test } from '../../test';
 
 const letter = (page: Page) => page.getByRole('textbox', { name: 'Letter' });
 const content = (page: Page) => page.locator('[data-layout]');

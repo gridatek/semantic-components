@@ -1,5 +1,5 @@
-import { expect, test } from '@playwright/test';
 import { collectErrors, press } from '../../interaction';
+import { expect, test } from '../../test';
 
 test.describe('Select Signal Forms Demo', () => {
   test('required, invalid once touched, valid after picking', async ({

@@ -1,5 +1,5 @@
-import { expect, test } from '@playwright/test';
 import { collectErrors } from '../../interaction';
+import { expect, test } from '../../test';
 
 test.describe('Icon Sidebar Demo', () => {
   test('trigger reports state; collapsed items keep a tooltip; no persistence', async ({

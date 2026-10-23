@@ -1,5 +1,5 @@
-import { expect, test } from '@playwright/test';
 import { collectErrors, press } from '../../interaction';
+import { expect, test } from '../../test';
 
 test.describe('Basic Toolbar Demo', () => {
   test('named, one tab stop, Home/End, toggles', async ({ page }) => {

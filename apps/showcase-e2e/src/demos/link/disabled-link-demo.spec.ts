@@ -1,5 +1,5 @@
-import { expect, test } from '@playwright/test';
 import { expectLooksDisabled } from '../../interaction';
+import { expect, test } from '../../test';
 
 test.describe('Disabled Link Demo', () => {
   test('a disabled link looks disabled and is out of the tab order', async ({

@@ -1,5 +1,5 @@
-import { expect, test } from '@playwright/test';
 import { collectErrors } from '../../interaction';
+import { expect, test } from '../../test';
 import { findPdf, lockedPdf, openPdf, taggedPdf } from './pdf-fixtures';
 
 test.describe('PDF Viewer reading', () => {

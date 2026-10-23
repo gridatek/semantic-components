@@ -1,5 +1,5 @@
-import { expect, test } from '@playwright/test';
 import { collectErrors, press } from '../../interaction';
+import { expect, test } from '../../test';
 
 test.describe('Vertical Tabs Demo', () => {
   test('vertical tab list uses up/down arrows', async ({ page }) => {

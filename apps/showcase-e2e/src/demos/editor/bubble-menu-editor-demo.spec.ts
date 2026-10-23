@@ -1,4 +1,4 @@
-import { type Page, expect, test } from '@playwright/test';
+import { type Page, expect, test } from '../../test';
 
 const comment = (page: Page) => page.getByRole('textbox', { name: 'Comment' });
 const bubble = (page: Page) => page.getByRole('toolbar', { name: 'Selection' });

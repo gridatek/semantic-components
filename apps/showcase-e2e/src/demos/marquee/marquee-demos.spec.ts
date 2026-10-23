@@ -1,4 +1,4 @@
-import { type Page, expect, test } from '@playwright/test';
+import { type Page, expect, test } from '../../test';
 
 const demo = (name: string) => `/demos/marquee/${name}-marquee-demo`;
 /** Where a track is along its way, in pixels (x, y). */

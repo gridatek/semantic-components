@@ -1,4 +1,4 @@
-import { type Page, expect, test } from '@playwright/test';
+import { type Page, expect, test } from '../../test';
 
 const demo = (name: string) => `/demos/tour-guide/${name}-tour-guide-demo`;
 const dialog = (page: Page) => page.getByRole('dialog');

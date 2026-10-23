@@ -1,5 +1,5 @@
-import { type Locator, type Page, expect, test } from '@playwright/test';
 import { collectErrors } from '../../interaction';
+import { type Locator, type Page, expect, test } from '../../test';
 
 const demo = (name: string) =>
   `/demos/infinite-scroll/${name}-infinite-scroll-demo`;
@@ -28,7 +28,7 @@ test('Feed: fills the box, more near the end, then all said', async ({
   await page.goto(demo('feed'));
   const feed = page.getByRole('feed', { name: 'News' });
   const articles = feed.getByRole('article');
-  // Empty at first: it asks until the box is full (and a little more).
+  // The first page with the page; more until the box is full.
   await expect(articles).toHaveCount(8);
   await expect(feed).not.toHaveAttribute('aria-busy');
 

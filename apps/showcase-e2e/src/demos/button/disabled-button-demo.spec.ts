@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, test } from '../../test';
 
 test.describe('Disabled Button Demo', () => {
   test.beforeEach(async ({ page }) => {

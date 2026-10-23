@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, test } from '../../test';
 
 test.describe('Readonly Editor Demo', () => {
   test('the document is read-only and keeps its content', async ({ page }) => {

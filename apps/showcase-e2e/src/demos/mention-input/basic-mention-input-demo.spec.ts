@@ -1,10 +1,10 @@
-import { expect, test } from '@playwright/test';
 import {
   activeDescendantText,
   collectErrors,
   press,
   type,
 } from '../../interaction';
+import { expect, test } from '../../test';
 
 test.describe('Basic Mention Input Demo', () => {
   test('suggestions are wired to the textarea; keyboard picks one', async ({

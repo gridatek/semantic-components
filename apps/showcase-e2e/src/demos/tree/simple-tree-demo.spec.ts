@@ -1,5 +1,5 @@
-import { expect, test } from '@playwright/test';
 import { collectErrors, press } from '../../interaction';
+import { expect, test } from '../../test';
 
 test.describe('Simple Tree Demo', () => {
   test('multi-select with keyboard and mouse', async ({ page }) => {

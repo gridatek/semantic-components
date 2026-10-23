@@ -1,6 +1,6 @@
-import { expect, test } from '@playwright/test';
 import { readFileSync } from 'node:fs';
 import { collectErrors } from '../../interaction';
+import { expect, test } from '../../test';
 
 // order-form.pdf: Quantity × Unit price = Total, computed by the PDF's own
 // JavaScript; a Gift wrap checkbox.

@@ -1,5 +1,5 @@
-import { expect, test } from '@playwright/test';
 import { collectErrors, type } from '../../interaction';
+import { expect, test } from '../../test';
 
 test.describe('OTP field', () => {
   test('Signal Forms: left incomplete, it is touched and shows its error', async ({

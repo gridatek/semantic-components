@@ -1,5 +1,5 @@
-import { type Page, expect, test } from '@playwright/test';
 import { collectErrors, type } from '../../interaction';
+import { type Page, expect, test } from '../../test';
 
 /** Types a code from the start, over whatever was there. */
 async function enter(page: Page, code: string): Promise<void> {

@@ -1,5 +1,5 @@
-import { expect, test } from '@playwright/test';
 import { collectErrors } from '../../interaction';
+import { expect, test } from '../../test';
 
 test.describe('Select Group Demo', () => {
   test('disabled option looks disabled and cannot be picked', async ({

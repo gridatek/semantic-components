@@ -1,5 +1,5 @@
-import { type Page, expect, test } from '@playwright/test';
 import { collectErrors } from '../../interaction';
+import { type Page, expect, test } from '../../test';
 
 const toolbar = (page: Page) =>
   page.getByRole('toolbar', { name: 'Formatting' });
