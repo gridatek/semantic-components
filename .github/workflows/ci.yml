@@ -56,3 +56,61 @@ jobs:
             dist/.playwright/apps/showcase-e2e/
             dist/.playwright/apps/blocks-e2e/
           retention-days: 7
+
+  # The apps rendered on the server (the `ssr` build, on its Node server), then
+  # hydrated: every e2e test again, plus `ssr.spec.ts` (every page hydrates),
+  # in Chromium. Not required: the apps stay static by default.
+  ssr:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      SSR: true
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 26
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm i
+
+      - name: Build (SSR)
+        run: npx nx run-many -t build -p showcase blocks -c ssr
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: E2E tests (showcase, SSR)
+        run: npx playwright test -c apps/showcase-e2e/playwright.config.ts --project=chromium
+
+      - name: E2E tests (blocks, SSR)
+        if: ${{ !cancelled() }}
+        run: npx playwright test -c apps/blocks-e2e/playwright.config.ts --project=chromium
+
+      # What failed on the server: Angular logs it, the page still answers 200.
+      - name: Server errors
+        if: ${{ !cancelled() }}
+        run: |
+          status=0
+          for log in dist/ssr-showcase.log dist/ssr-blocks.log; do
+            [ -f "$log" ] || continue
+            if grep -qE '^(ERROR|uncaughtException)' "$log"; then
+              echo "::error::Server errors in $log"
+              grep -E -A6 '^(ERROR|uncaughtException)' "$log" | head -400
+              status=1
+            fi
+          done
+          exit $status
+
+      - name: Upload Playwright report
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: playwright-report-ssr
+          path: |
+            dist/.playwright/apps/showcase-e2e/
+            dist/.playwright/apps/blocks-e2e/
+            dist/ssr-*.log
+          retention-days: 7

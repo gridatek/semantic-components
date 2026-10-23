@@ -10,7 +10,13 @@ export default [
     rules: {
       'playwright/expect-expect': [
         'error',
-        { assertFunctionNames: ['expect', 'expectNoA11yViolations'] },
+        {
+          assertFunctionNames: [
+            'expect',
+            'expectNoA11yViolations',
+            'expectHydrated',
+          ],
+        },
       ],
       'playwright/no-skipped-test': 'off',
       'playwright/no-networkidle': 'off',

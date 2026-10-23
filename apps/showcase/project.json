@@ -56,7 +56,10 @@
           "outputMode": "server",
           "ssr": {
             "entry": "apps/showcase/src/server.ts"
-          }
+          },
+          "optimization": false,
+          "sourceMap": true,
+          "extractLicenses": false
         }
       }
     },
@@ -95,6 +98,16 @@
         "staticFilePath": "dist/apps/showcase/browser",
         "spa": true,
         "watch": false
+      }
+    },
+    "serve-ssr": {
+      "continuous": true,
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node dist/apps/showcase/server/server.mjs > dist/ssr-showcase.log 2>&1",
+        "env": {
+          "PORT": "4200"
+        }
       }
     },
     "lint": {
