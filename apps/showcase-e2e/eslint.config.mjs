@@ -15,6 +15,7 @@ export default [
             'expect',
             'expectNoA11yViolations',
             'expectHydrated',
+            'expectLooksDisabled',
           ],
         },
       ],

@@ -58,3 +58,13 @@ export function openMenuCount(page: Page): Promise<number> {
       ).length,
   );
 }
+
+/**
+ * A part disabled without native `disabled` (a link, a pagination link: only
+ * `aria-disabled`) still looks it: faded, and no pointer.
+ */
+export async function expectLooksDisabled(locator: Locator): Promise<void> {
+  await expect(locator).toHaveAttribute('aria-disabled', 'true');
+  await expect(locator).toHaveCSS('opacity', '0.5');
+  await expect(locator).toHaveCSS('pointer-events', 'none');
+}

@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { expectLooksDisabled } from '../../interaction';
 
 test.describe('Disabled Link Pagination Demo', () => {
   test.beforeEach(async ({ page }) => {
@@ -43,6 +44,10 @@ test.describe('Disabled Link Pagination Demo', () => {
   }) => {
     const previousLink = page.locator('a[scPaginationPrevious]');
     await expect(previousLink).toHaveAttribute('aria-disabled', 'true');
+  });
+
+  test('the disabled Previous looks disabled', async ({ page }) => {
+    await expectLooksDisabled(page.locator('a[scPaginationPrevious]'));
   });
 
   test('should have href on Previous link even when disabled', async ({
