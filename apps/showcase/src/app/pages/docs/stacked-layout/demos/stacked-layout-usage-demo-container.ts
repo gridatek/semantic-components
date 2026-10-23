@@ -51,10 +51,10 @@ import { ScStackedLayout } from '@semantic-components/ui-lab';
   selector: 'app-stacked-layout-usage-demo',
   imports: [ScStackedLayout],
   template: \`
-    <sc-stacked-layout>
+    <div scStackedLayout>
       <nav scNavbar aria-label="Main">…</nav>
       <footer scFooter>…</footer>
-    </sc-stacked-layout>
+    </div>
   \`,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,

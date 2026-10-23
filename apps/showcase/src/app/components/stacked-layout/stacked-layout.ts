@@ -8,10 +8,10 @@ import Navbar from '../navbar/navbar';
   selector: 'app-stacked-layout',
   imports: [ScStackedLayout, Navbar, Footer],
   template: `
-    <sc-stacked-layout>
+    <div scStackedLayout>
       <app-navbar scNavbar />
       <app-footer scFooter />
-    </sc-stacked-layout>
+    </div>
   `,
   host: {
     '[class]': 'class()',

@@ -21,7 +21,7 @@ test.describe('Toast', () => {
     const toast = toasts(page).first();
     await expect(toast).toContainText('Your message has been sent.');
     // The stack is the one live region: each toast is announced in it.
-    await expect(page.locator('sc-toast-stack')).toHaveAttribute(
+    await expect(page.locator('[scToastStack]')).toHaveAttribute(
       'aria-live',
       'polite',
     );

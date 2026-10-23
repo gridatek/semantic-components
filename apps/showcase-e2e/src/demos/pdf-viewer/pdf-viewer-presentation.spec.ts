@@ -18,7 +18,7 @@ test.describe('PDF Viewer presentation mode', () => {
     await expect(shown).toContainText('Preface');
 
     // Click: next page. Shift+click: previous. Keys too.
-    const canvas = page.locator('sc-pdf-viewer-canvas');
+    const canvas = page.locator('[scPdfViewerCanvas]');
     await canvas.click();
     await expect(shown).toContainText('Contents');
     await canvas.click({ modifiers: ['Shift'] });

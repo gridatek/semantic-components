@@ -21,7 +21,7 @@ type ScTooltipSide = 'top' | 'right' | 'bottom' | 'left';
 
 /** The tooltip: animates in when shown and out when it goes (`animate.enter` / `animate.leave`). */
 @Component({
-  selector: 'sc-tooltip',
+  selector: 'div[scTooltip]',
   template: `
     {{ data.content }}
     <span

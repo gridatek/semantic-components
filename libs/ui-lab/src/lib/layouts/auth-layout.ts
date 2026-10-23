@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'sc-auth-layout',
+  selector: 'div[scAuthLayout]',
   imports: [RouterOutlet],
   template: ` <router-outlet /> `,
   host: {

@@ -34,10 +34,10 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
         </div>
         <div scAccordionPanel #shipping="scAccordionPanel">
           <ng-template scAccordionContent>
-            <sc-accordion-body>
+            <div scAccordionBody>
               We offer standard (5-7 days), express (2-3 days), and overnight
               shipping. Free shipping on international orders.
-            </sc-accordion-body>
+            </div>
           </ng-template>
         </div>
       </div>
@@ -50,10 +50,10 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
         </div>
         <div scAccordionPanel #returns="scAccordionPanel">
           <ng-template scAccordionContent>
-            <sc-accordion-body>
+            <div scAccordionBody>
               Returns accepted within 30 days. Items must be unused and in
               original packaging. Refunds processed within 5-7 business days.
-            </sc-accordion-body>
+            </div>
           </ng-template>
         </div>
       </div>
@@ -66,10 +66,10 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
         </div>
         <div scAccordionPanel #support="scAccordionPanel">
           <ng-template scAccordionContent>
-            <sc-accordion-body>
+            <div scAccordionBody>
               Reach us via email, live chat, or phone. We respond within 24
               hours during business days.
-            </sc-accordion-body>
+            </div>
           </ng-template>
         </div>
       </div>

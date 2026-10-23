@@ -58,7 +58,7 @@ interface PageLayout {
 }
 
 @Component({
-  selector: 'sc-pdf-viewer-canvas',
+  selector: 'div[scPdfViewerCanvas]',
   imports: [ScPdfViewerEditorLayer, ScPdfViewerPan],
   providers: [ScPdfEditor],
   template: `

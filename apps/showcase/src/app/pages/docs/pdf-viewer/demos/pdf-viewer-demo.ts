@@ -1524,7 +1524,7 @@ const INK_COLORS = [
               </div>
             </div>
 
-            <sc-pdf-viewer-canvas>
+            <div scPdfViewerCanvas>
               <!-- The selected annotation's toolbar -->
               <ng-template scPdfViewerAnnotationToolbar let-annotation>
                 <div
@@ -1607,7 +1607,7 @@ const INK_COLORS = [
                   </button>
                 }
               </ng-template>
-            </sc-pdf-viewer-canvas>
+            </div>
           </div>
 
           <!-- Undo bar -->

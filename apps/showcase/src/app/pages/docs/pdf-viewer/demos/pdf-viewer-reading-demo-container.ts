@@ -26,6 +26,16 @@ export class PdfViewerReadingDemoContainer {
   signal,
 } from '@angular/core';
 import {
+  ScInput,
+  ScSpinner,
+  ScSwitch,
+  ScSwitchField,
+  ScToggleGroup,
+  ScToggleGroupItem,
+  ScTooltipTrigger,
+  cn,
+} from '@semantic-components/ui';
+import {
   type ScPdfPageColors,
   ScPdfViewer,
   ScPdfViewerBack,
@@ -39,16 +49,6 @@ import {
   ScPdfViewerSpacer,
   ScPdfViewerToolbar,
 } from '@semantic-components/ui-lab/pdf-viewer';
-import {
-  ScInput,
-  ScSpinner,
-  ScSwitch,
-  ScSwitchField,
-  ScToggleGroup,
-  ScToggleGroupItem,
-  ScTooltipTrigger,
-  cn,
-} from '@semantic-components/ui';
 import {
   SiArrowLeftIcon,
   SiArrowRightIcon,
@@ -150,7 +150,7 @@ const READING_MODES: Record<string, ScPdfPageColors | null> = {
             <svg scSpinner siLoaderCircleIcon class="size-6"></svg>
             Loading the handbook…
           </div>
-          <sc-pdf-viewer-canvas />
+          <div scPdfViewerCanvas ></div>
         </div>
       </div>
     </div>

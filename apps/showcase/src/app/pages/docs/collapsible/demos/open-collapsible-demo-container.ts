@@ -55,12 +55,12 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
       </div>
       <div scCollapsiblePanel #colPanel="scCollapsiblePanel">
         <ng-template scCollapsibleContent>
-          <sc-collapsible-body>
+          <div scCollapsibleBody>
             <div class="rounded-md border px-4 py-3 text-sm">
               This collapsible is open by default. You can toggle it closed by
               clicking the button.
             </div>
-          </sc-collapsible-body>
+          </div>
         </ng-template>
       </div>
     </div>

@@ -22,8 +22,15 @@ export default [
   {
     files: ['**/*.ts'],
     rules: {
-      '@angular-eslint/directive-selector': 'off',
-      '@angular-eslint/component-selector': 'off',
+      // Attribute selectors only: every part sits on the consumer's element.
+      '@angular-eslint/directive-selector': [
+        'error',
+        { type: 'attribute', prefix: 'sc', style: 'camelCase' },
+      ],
+      '@angular-eslint/component-selector': [
+        'error',
+        { type: 'attribute', prefix: 'sc', style: 'camelCase' },
+      ],
       '@angular-eslint/no-input-rename': 'off',
       '@angular-eslint/no-output-native': 'off',
       '@angular-eslint/template/click-events-have-key-events': 'off',

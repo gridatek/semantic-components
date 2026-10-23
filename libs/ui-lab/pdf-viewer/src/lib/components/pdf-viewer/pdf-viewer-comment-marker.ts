@@ -15,7 +15,7 @@ export interface ScPdfCommentMarkerContext {
 
 /**
  * A comment's marker on its page, written by you inside
- * `sc-pdf-viewer-canvas`; the canvas places it where the comment was put:
+ * `div[scPdfViewerCanvas]`; the canvas places it where the comment was put:
  * `<ng-template scPdfViewerCommentMarker let-comment let-index="index"
  * let-active="active" let-pending="pending">`. Pick the comment with a
  * `scPdfViewerCommentShow` button.

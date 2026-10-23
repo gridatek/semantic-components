@@ -35,7 +35,7 @@ A composable PDF viewer built on [PDF.js](https://mozilla.github.io/pdf.js/) (`p
         <div scEmptyTitle>Couldn't open the document</div>
         <button scPdfViewerRetry>Try again</button>
       </div>
-      <sc-pdf-viewer-canvas />
+      <div scPdfViewerCanvas></div>
     </div>
   </div>
 </div>
@@ -76,7 +76,7 @@ providers: [{ provide: OverlayContainer, useClass: FullscreenOverlayContainer }]
 | `ScPdfViewerZoom`      | `[scPdfViewerZoom]`      | Groups zoom controls (`role="group"`) — name it.                                                            |
 | `ScPdfViewerSpacer`    | `[scPdfViewerSpacer]`    | Pushes what follows to the end.                                                                             |
 | `ScPdfViewerContent`   | `[scPdfViewerContent]`   | The page area. Opens a file dropped on it (`data-dragging`; `[dropFiles]="false"` turns it off).            |
-| `ScPdfViewerCanvas`    | `sc-pdf-viewer-canvas`   | The pages, with text, link, form and annotation layers. `pageName`: a function naming each page (a region). |
+| `ScPdfViewerCanvas`    | `div[scPdfViewerCanvas]` | The pages, with text, link, form and annotation layers. `pageName`: a function naming each page (a region). |
 
 ### Buttons
 
@@ -133,7 +133,7 @@ Saved signatures: write your list of `viewer.savedSignatures()` with `button[scP
 
 ### Annotations
 
-Set the tool with `viewer.setEditorMode('highlight' | 'freetext' | 'ink' | 'comment' | 'none')`; write the tools (e.g. a `scToggleGroup`) and their options (`scPdfViewerSetting`). The canvas draws the annotations with your theme; what you place on the pages is yours, as templates inside `sc-pdf-viewer-canvas`:
+Set the tool with `viewer.setEditorMode('highlight' | 'freetext' | 'ink' | 'comment' | 'none')`; write the tools (e.g. a `scToggleGroup`) and their options (`scPdfViewerSetting`). The canvas draws the annotations with your theme; what you place on the pages is yours, as templates inside `div[scPdfViewerCanvas]`:
 
 | Template                                    | Context                                                        | Use in it                                                                                                                       |
 | ------------------------------------------- | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |

@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'sc-stacked-layout',
+  selector: 'div[scStackedLayout]',
   imports: [RouterOutlet],
   template: `
     <header class="sticky top-0 z-50">

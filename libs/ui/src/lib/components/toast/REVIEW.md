@@ -20,10 +20,10 @@ The CSS classes reference `data-[state=closed]:animate-out`, `data-[state=closed
 
 **Fix:** In `ScToastStack`, bind `(pointerEnter)` and `(pointerLeave)` on the `scToast` element and call `ScToaster` methods that pause/resume the timeout for that toast ID.
 
-**3. Duplicate toast rendering from multiple `<sc-toast-stack />` instances**
-Every demo component includes its own `<sc-toast-stack />`. Since `ScToaster` is `providedIn: 'root'`, all stack instances share the same signal. When a toast is shown, **every** `ScToastStack` on the page renders it simultaneously. The README correctly states "Place once in app" but the demos violate this.
+**3. Duplicate toast rendering from multiple `<div scToastStack ></div>` instances**
+Every demo component includes its own `<div scToastStack ></div>`. Since `ScToaster` is `providedIn: 'root'`, all stack instances share the same signal. When a toast is shown, **every** `ScToastStack` on the page renders it simultaneously. The README correctly states "Place once in app" but the demos violate this.
 
-**Fix:** Either move `<sc-toast-stack />` to the app shell only, or make `ScToastStack` guard against multiple instances (e.g. log a warning if more than one exists).
+**Fix:** Either move `<div scToastStack ></div>` to the app shell only, or make `ScToastStack` guard against multiple instances (e.g. log a warning if more than one exists).
 
 ### Accessibility Issues
 

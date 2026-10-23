@@ -24,7 +24,7 @@ ScToaster.show({ title, description, variant, action })
 | `ScToastAction`      | `button[scToastAction]`        | Runs the toast's `action`, then dismisses it: write `toast.action.label`                                 |
 | `ScToastClose`       | `button[scToastClose]`         | Dismisses the toast: write its icon and name it                                                          |
 | `ScToast`            | `div[scToast]`                 | The toast, your template's root: variant styles, its place in the stack, swipe to dismiss                |
-| `ScToastStack`       | `sc-toast-stack`               | The stack — the toaster creates it in an overlay: don't place it yourself                                |
+| `ScToastStack`       | `div[scToastStack]`            | The stack — the toaster creates it in an overlay: don't place it yourself                                |
 
 ## Service
 

@@ -54,9 +54,9 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
         </div>
         <div scAccordionPanel #enabled1="scAccordionPanel">
           <ng-template scAccordionContent>
-            <sc-accordion-body>
+            <div scAccordionBody>
               This item can be toggled normally.
-            </sc-accordion-body>
+            </div>
           </ng-template>
         </div>
       </div>
@@ -73,7 +73,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
         </div>
         <div scAccordionPanel #disabled1="scAccordionPanel">
           <ng-template scAccordionContent>
-            <sc-accordion-body>This content won't be shown.</sc-accordion-body>
+            <div scAccordionBody>This content won't be shown.</div>
           </ng-template>
         </div>
       </div>
@@ -86,9 +86,9 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
         </div>
         <div scAccordionPanel #enabled2="scAccordionPanel">
           <ng-template scAccordionContent>
-            <sc-accordion-body>
+            <div scAccordionBody>
               This item also works normally.
-            </sc-accordion-body>
+            </div>
           </ng-template>
         </div>
       </div>

@@ -57,7 +57,7 @@ function lasting<T>(value: () => T | undefined, initial: T) {
  * announced; your `hotkey` moves focus to it.
  */
 @Component({
-  selector: 'sc-toast-stack',
+  selector: 'div[scToastStack]',
   imports: [NgTemplateOutlet],
   template: `
     @if (templateRef(); as templateRef) {

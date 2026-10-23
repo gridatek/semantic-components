@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation, computed, input } from '@angular/core';
 import { cn } from '../../utils';
 
 @Component({
-  selector: 'sc-accordion-body',
+  selector: 'div[scAccordionBody]',
   encapsulation: ViewEncapsulation.None,
   host: {
     '[class]': 'class()',

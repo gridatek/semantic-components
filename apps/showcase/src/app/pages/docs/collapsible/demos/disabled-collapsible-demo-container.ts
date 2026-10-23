@@ -52,11 +52,11 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
       </div>
       <div scCollapsiblePanel #colPanel="scCollapsiblePanel">
         <ng-template scCollapsibleContent>
-          <sc-collapsible-body>
+          <div scCollapsibleBody>
             <div class="rounded-md border px-4 py-3 text-sm">
               This content is hidden.
             </div>
-          </sc-collapsible-body>
+          </div>
         </ng-template>
       </div>
     </div>

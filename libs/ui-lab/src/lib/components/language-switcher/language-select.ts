@@ -14,12 +14,12 @@ import { ScLanguageService } from './language.service';
  *
  * @example
  * ```html
- * <sc-language-select label="Language"></sc-language-select>
- * <sc-language-select label="Language" [showNativeLabels]="true"></sc-language-select>
+ * <div scLanguageSelect label="Language"></div>
+ * <div scLanguageSelect label="Language" [showNativeLabels]="true"></div>
  * ```
  */
 @Component({
-  selector: 'sc-language-select',
+  selector: 'div[scLanguageSelect]',
   host: {
     '[class]': 'class()',
   },

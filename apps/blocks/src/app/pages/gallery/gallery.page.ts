@@ -469,9 +469,9 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
                 </div>
                 <div scAccordionPanel #faq1="scAccordionPanel">
                   <ng-template scAccordionContent>
-                    <sc-accordion-body>
+                    <div scAccordionBody>
                       Yes. It adheres to the WAI-ARIA design pattern.
-                    </sc-accordion-body>
+                    </div>
                   </ng-template>
                 </div>
               </div>
@@ -484,10 +484,10 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
                 </div>
                 <div scAccordionPanel #faq2="scAccordionPanel">
                   <ng-template scAccordionContent>
-                    <sc-accordion-body>
+                    <div scAccordionBody>
                       Yes. It comes with default styles that match the other
                       components' aesthetic.
-                    </sc-accordion-body>
+                    </div>
                   </ng-template>
                 </div>
               </div>
@@ -500,10 +500,10 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
                 </div>
                 <div scAccordionPanel #faq3="scAccordionPanel">
                   <ng-template scAccordionContent>
-                    <sc-accordion-body>
+                    <div scAccordionBody>
                       Yes. It's animated by default, but you can disable it if
                       you prefer.
-                    </sc-accordion-body>
+                    </div>
                   </ng-template>
                 </div>
               </div>

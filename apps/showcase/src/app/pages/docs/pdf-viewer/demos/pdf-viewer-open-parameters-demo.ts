@@ -99,7 +99,7 @@ import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
             <svg scSpinner siLoaderCircleIcon class="size-6"></svg>
             Loading the handbook…
           </div>
-          <sc-pdf-viewer-canvas />
+          <div scPdfViewerCanvas></div>
         </div>
       </div>
     </div>

@@ -19,6 +19,7 @@ import { PdfViewerOpenParametersDemo } from './pdf-viewer-open-parameters-demo';
 })
 export class PdfViewerOpenParametersDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, computed, input } from '@angular/core';
+import { ScButton, ScInput, ScSpinner, cn } from '@semantic-components/ui';
 import {
   ScPdfViewer,
   ScPdfViewerCanvas,
@@ -30,7 +31,6 @@ import {
   ScPdfViewerSpacer,
   ScPdfViewerToolbar,
 } from '@semantic-components/ui-lab/pdf-viewer';
-import { ScButton, ScInput, ScSpinner, cn } from '@semantic-components/ui';
 import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
 
 /**
@@ -119,7 +119,7 @@ import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
             <svg scSpinner siLoaderCircleIcon class="size-6"></svg>
             Loading the handbook…
           </div>
-          <sc-pdf-viewer-canvas />
+          <div scPdfViewerCanvas ></div>
         </div>
       </div>
     </div>

@@ -54,10 +54,10 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
         </div>
         <div scAccordionPanel #itemA="scAccordionPanel">
           <ng-template scAccordionContent>
-            <sc-accordion-body>
+            <div scAccordionBody>
               Yes! When using multiExpandable, you can have multiple accordion
               items open at the same time.
-            </sc-accordion-body>
+            </div>
           </ng-template>
         </div>
       </div>
@@ -70,10 +70,10 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
         </div>
         <div scAccordionPanel #itemB="scAccordionPanel">
           <ng-template scAccordionContent>
-            <sc-accordion-body>
+            <div scAccordionBody>
               Each trigger has an expanded input that you can bind to with
               [(expanded)] for two-way binding.
-            </sc-accordion-body>
+            </div>
           </ng-template>
         </div>
       </div>
@@ -86,10 +86,10 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
         </div>
         <div scAccordionPanel #itemC="scAccordionPanel">
           <ng-template scAccordionContent>
-            <sc-accordion-body>
+            <div scAccordionBody>
               Each item uses proper ARIA attributes including aria-expanded and
               role="region" for the content.
-            </sc-accordion-body>
+            </div>
           </ng-template>
         </div>
       </div>

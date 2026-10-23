@@ -41,14 +41,14 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
       </div>
       <div scCollapsiblePanel #colPanel="scCollapsiblePanel">
         <ng-template scCollapsibleContent>
-          <sc-collapsible-body class="space-y-2">
+          <div scCollapsibleBody class="space-y-2">
             <div class="rounded-md border px-4 py-3 font-mono text-sm">
               &#64;angular/common
             </div>
             <div class="rounded-md border px-4 py-3 font-mono text-sm">
               &#64;angular/forms
             </div>
-          </sc-collapsible-body>
+          </div>
         </ng-template>
       </div>
     </div>

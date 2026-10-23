@@ -20,19 +20,6 @@ import { PdfViewerFormDemo } from './pdf-viewer-form-demo';
 export class PdfViewerFormDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, computed, input } from '@angular/core';
 import {
-  ScPdfViewer,
-  ScPdfViewerCanvas,
-  ScPdfViewerContainer,
-  ScPdfViewerContent,
-  ScPdfViewerDialog,
-  ScPdfViewerDownload,
-  ScPdfViewerLoading,
-  ScPdfViewerPrint,
-  ScPdfViewerPrintProgress,
-  ScPdfViewerSpacer,
-  ScPdfViewerToolbar,
-} from '@semantic-components/ui-lab/pdf-viewer';
-import {
   ScButton,
   ScDialog,
   ScDialogClose,
@@ -47,6 +34,19 @@ import {
   ScTooltipTrigger,
   cn,
 } from '@semantic-components/ui';
+import {
+  ScPdfViewer,
+  ScPdfViewerCanvas,
+  ScPdfViewerContainer,
+  ScPdfViewerContent,
+  ScPdfViewerDialog,
+  ScPdfViewerDownload,
+  ScPdfViewerLoading,
+  ScPdfViewerPrint,
+  ScPdfViewerPrintProgress,
+  ScPdfViewerSpacer,
+  ScPdfViewerToolbar,
+} from '@semantic-components/ui-lab/pdf-viewer';
 import {
   SiDownloadIcon,
   SiLoaderCircleIcon,
@@ -117,7 +117,7 @@ import {
             <svg scSpinner siLoaderCircleIcon class="size-6"></svg>
             Loading the form…
           </div>
-          <sc-pdf-viewer-canvas />
+          <div scPdfViewerCanvas ></div>
         </div>
         <div scDialogProvider scPdfViewerDialog="print">
           <ng-template scDialogPortal>

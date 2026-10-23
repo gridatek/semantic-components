@@ -17,7 +17,7 @@ ScCollapsible (Root - uses AccordionGroup)
           ├── panelId: string (links to trigger)
           │
           └── ng-template[scCollapsibleContent] (lazy content directive)
-                └── sc-collapsible-body (animation wrapper)
+                └── div[scCollapsibleBody] (animation wrapper)
                       └── [your content here]
 ```
 
@@ -29,7 +29,7 @@ ScCollapsible (Root - uses AccordionGroup)
 | `ScCollapsibleTrigger` | `[scCollapsibleTrigger]`            | Button to toggle panel using `AccordionTrigger`    |
 | `ScCollapsiblePanel`   | `[scCollapsiblePanel]`              | Panel wrapper using `AccordionPanel`               |
 | `ScCollapsibleContent` | `ng-template[scCollapsibleContent]` | Lazy content directive using `AccordionContent`    |
-| `ScCollapsibleBody`    | `sc-collapsible-body`               | Animation wrapper with expand/collapse transitions |
+| `ScCollapsibleBody`    | `div[scCollapsibleBody]`            | Animation wrapper with expand/collapse transitions |
 
 ## Inputs
 
@@ -57,7 +57,7 @@ ScCollapsible (Root - uses AccordionGroup)
 
 ### Basic Collapsible
 
-Use `panelId` to link the trigger to its corresponding panel. Wrap content in `ng-template[scCollapsibleContent]` with `sc-collapsible-body` for smooth animations.
+Use `panelId` to link the trigger to its corresponding panel. Wrap content in `ng-template[scCollapsibleContent]` with `div[scCollapsibleBody]` for smooth animations.
 
 ```html
 <div scCollapsible class="w-[350px] space-y-2">
@@ -69,9 +69,9 @@ Use `panelId` to link the trigger to its corresponding panel. Wrap content in `n
   </div>
   <div scCollapsiblePanel panelId="faq-1">
     <ng-template scCollapsibleContent>
-      <sc-collapsible-body>
+      <div scCollapsibleBody>
         <p>Yes. It's free and open source.</p>
-      </sc-collapsible-body>
+      </div>
     </ng-template>
   </div>
 </div>
@@ -84,7 +84,7 @@ Use `panelId` to link the trigger to its corresponding panel. Wrap content in `n
   <button scCollapsibleTrigger panelId="open-demo" [expanded]="true">Toggle</button>
   <div scCollapsiblePanel panelId="open-demo">
     <ng-template scCollapsibleContent>
-      <sc-collapsible-body>This content is visible by default.</sc-collapsible-body>
+      <div scCollapsibleBody>This content is visible by default.</div>
     </ng-template>
   </div>
 </div>
@@ -97,7 +97,7 @@ Use `panelId` to link the trigger to its corresponding panel. Wrap content in `n
   <button scCollapsibleTrigger panelId="disabled-demo">Toggle (disabled)</button>
   <div scCollapsiblePanel panelId="disabled-demo">
     <ng-template scCollapsibleContent>
-      <sc-collapsible-body>This cannot be toggled.</sc-collapsible-body>
+      <div scCollapsibleBody>This cannot be toggled.</div>
     </ng-template>
   </div>
 </div>
@@ -114,7 +114,7 @@ Bind to the `expanded` state of the trigger.
       <button scCollapsibleTrigger panelId="controlled" [(expanded)]="isOpen">Toggle</button>
       <div scCollapsiblePanel panelId="controlled">
         <ng-template scCollapsibleContent>
-          <sc-collapsible-body>Content</sc-collapsible-body>
+          <div scCollapsibleBody>Content</div>
         </ng-template>
       </div>
     </div>
@@ -138,7 +138,7 @@ export class MyComponent {
   </button>
   <div scCollapsiblePanel panelId="chevron-demo">
     <ng-template scCollapsibleContent>
-      <sc-collapsible-body>Content here</sc-collapsible-body>
+      <div scCollapsibleBody>Content here</div>
     </ng-template>
   </div>
 </div>
@@ -194,9 +194,9 @@ All components accept a `class` input for custom styling:
 
 <div scCollapsiblePanel panelId="styled">
   <ng-template scCollapsibleContent>
-    <sc-collapsible-body class="px-4">
+    <div scCollapsibleBody class="px-4">
       <!-- content with custom padding -->
-    </sc-collapsible-body>
+    </div>
   </ng-template>
 </div>
 ```

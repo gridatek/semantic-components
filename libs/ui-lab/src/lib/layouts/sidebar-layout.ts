@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'sc-sidebar-layout',
+  selector: 'div[scSidebarLayout]',
   imports: [RouterOutlet],
   template: `
     <ng-content select="[scSidebar]" />

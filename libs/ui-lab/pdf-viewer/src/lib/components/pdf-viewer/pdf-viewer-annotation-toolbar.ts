@@ -9,7 +9,7 @@ export interface ScPdfAnnotationToolbarContext {
 
 /**
  * The toolbar of the selected annotation, written by you inside
- * `sc-pdf-viewer-canvas`; the canvas places it next to the annotation:
+ * `div[scPdfViewerCanvas]`; the canvas places it next to the annotation:
  * `<ng-template scPdfViewerAnnotationToolbar let-annotation>`. Use
  * `scPdfViewerAnnotationDelete`, `scPdfViewerAnnotationAltText` and
  * `scPdfViewerAnnotationColor` buttons in it.
