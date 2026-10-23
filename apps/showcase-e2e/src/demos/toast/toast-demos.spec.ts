@@ -97,7 +97,10 @@ test.describe('Toast stack', () => {
   }) => {
     await page.goto('/demos/toast/basic-toast-demo');
     const button = page.getByRole('button', { name: 'Show Toast' });
-    await button.click();
+    // From the keyboard, so the button has focus to return to (Safari doesn't
+    // focus a clicked button).
+    await button.focus();
+    await page.keyboard.press('Enter');
     await expect(toasts(page)).toHaveCount(1);
     await expect(
       page.getByRole('region', { name: 'Notifications, Alt+T' }),

@@ -42,7 +42,7 @@ Across all components, also:
 - [x] **Dark-mode axe**: `expectNoA11yViolations(page, { dark: true })` — the browser's color scheme dark, the `.dark` class awaited. A component's page test adds it when its Dark column is ticked.
 - [x] **Style diff helper**: `node scripts/shadcn-diff.mjs <shadcn name> [our name]` — per part (`data-slot`) and per variant, the classes only shadcn has and only we have, from `shadcn-reference`. An aid: reading both still decides ([shadcn-style-reference.md](shadcn-style-reference.md)).
 - [x] **Inventory refresh**: `node scripts/roadmap.mjs`, then prettier — rewrites the inventory line and the phase tables (level, size, library, built on, shadcn, e2e, RTL); the ticks already set are kept.
-- [ ] **Attribute selectors everywhere**: the custom-element selectors left — `sc-accordion-body`, `sc-collapsible-body`, `sc-toast-stack`, `sc-tooltip` (ui), `sc-language-select`, `sc-stacked-layout`, `sc-sidebar-layout`, `sc-auth-layout`, `sc-pdf-viewer-canvas` (ui-lab) — made attributes; then Angular ESLint's `component-selector` / `directive-selector` (`type: 'attribute'`, prefix `sc`) on in every lib, so none comes back.
+- [x] **Attribute selectors everywhere**: the custom-element selectors left — `sc-accordion-body`, `sc-collapsible-body`, `sc-toast-stack`, `sc-tooltip` (ui), `sc-language-select`, `sc-stacked-layout`, `sc-sidebar-layout`, `sc-auth-layout`, `sc-pdf-viewer-canvas` (ui-lab) — made attributes (`div[scAccordionBody]`…; they render templates, so they stay components); Angular ESLint's `component-selector` / `directive-selector` (`type: 'attribute'`, prefix `sc`, camelCase) are errors in every lib, so none comes back.
 
 ## Phase 1 — Atoms (59)
 
