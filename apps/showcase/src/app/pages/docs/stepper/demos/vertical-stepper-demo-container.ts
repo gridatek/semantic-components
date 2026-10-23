@@ -27,7 +27,7 @@ import {
   ScStepperSeparator,
   ScStepperTitle,
   ScStepperTrigger,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { SiCheckIcon } from '@semantic-icons/lucide-icons';
 
 @Component({

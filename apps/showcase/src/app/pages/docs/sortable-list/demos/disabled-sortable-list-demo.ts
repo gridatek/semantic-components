@@ -1,10 +1,11 @@
 import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
-import { ScSwitch, ScSwitchField } from '@semantic-components/ui';
 import {
   ScSortableList,
   type ScSortableListAnnouncement,
   ScSortableListItem,
-} from '@semantic-components/ui-lab';
+  ScSwitch,
+  ScSwitchField,
+} from '@semantic-components/ui';
 
 interface Item {
   readonly id: string;

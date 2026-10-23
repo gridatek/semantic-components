@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScVirtualList, ScVirtualListRow } from '@semantic-components/ui-lab';
+import { ScVirtualList, ScVirtualListRow } from '@semantic-components/ui';
 
 /** In lanes: photos in three columns, each placed in the lane that ends first. */
 @Component({

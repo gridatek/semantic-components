@@ -6,7 +6,7 @@ import {
   ScColorPickerField,
   ScColorPickerSlider,
   ScColorPickerSwatch,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 /** The area (saturation and brightness), the hue, the colour and its field. The field takes any CSS colour — try a name, or oklch(). */
 @Component({

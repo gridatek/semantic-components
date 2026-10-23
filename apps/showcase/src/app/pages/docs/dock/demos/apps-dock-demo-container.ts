@@ -26,7 +26,7 @@ import {
   ScDockItem,
   ScDockLabel,
   ScDockSeparator,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import {
   SiCompassIcon,
   SiFolderIcon,

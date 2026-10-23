@@ -5,8 +5,9 @@ import {
   signal,
   untracked,
 } from '@angular/core';
-import { ScButton, ScInput } from '@semantic-components/ui';
 import {
+  ScButton,
+  ScInput,
   ScTourGuide,
   ScTourGuideClose,
   ScTourGuideDescription,
@@ -14,7 +15,7 @@ import {
   ScTourGuidePrevious,
   ScTourGuideStep,
   ScTourGuideTitle,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 /** Open and step are two-way: start at any step from outside; (finished) at Done — closed is not finished. */

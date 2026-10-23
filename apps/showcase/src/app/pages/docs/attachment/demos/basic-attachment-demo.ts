@@ -1,5 +1,4 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScButton } from '@semantic-components/ui';
 import {
   ScAttachment,
   ScAttachmentActions,
@@ -8,7 +7,8 @@ import {
   ScAttachmentGroup,
   ScAttachmentMedia,
   ScAttachmentTitle,
-} from '@semantic-components/ui-lab';
+  ScButton,
+} from '@semantic-components/ui';
 import { SiFileTextIcon, SiXIcon } from '@semantic-icons/lucide-icons';
 
 @Component({

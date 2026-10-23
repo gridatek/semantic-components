@@ -19,8 +19,7 @@ import { MoreMasonryGridDemo } from './more-masonry-grid-demo';
 })
 export class MoreMasonryGridDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScButton } from '@semantic-components/ui';
-import { ScMasonryGrid, ScMasonryGridItem } from '@semantic-components/ui-lab';
+import { ScButton, ScMasonryGrid, ScMasonryGridItem } from '@semantic-components/ui';
 
 /** Items added, or removed: the grid lays out again, and the others move into place (not under reduced motion). */
 @Component({

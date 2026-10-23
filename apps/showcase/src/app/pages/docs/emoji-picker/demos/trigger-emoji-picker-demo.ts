@@ -1,13 +1,6 @@
 import { Component, ViewEncapsulation, signal, viewChild } from '@angular/core';
 import {
   ScButton,
-  ScPopover,
-  ScPopoverPortal,
-  ScPopoverProvider,
-  ScPopoverTrigger,
-  ScSpinner,
-} from '@semantic-components/ui';
-import {
   type ScEmoji,
   ScEmojiPicker,
   ScEmojiPickerAnnouncer,
@@ -24,7 +17,12 @@ import {
   ScEmojiPickerSearchField,
   ScEmojiPickerSkinTone,
   ScEmojiPickerViewport,
-} from '@semantic-components/ui-lab';
+  ScPopover,
+  ScPopoverPortal,
+  ScPopoverProvider,
+  ScPopoverTrigger,
+  ScSpinner,
+} from '@semantic-components/ui';
 import {
   SiLoaderCircleIcon,
   SiSearchIcon,

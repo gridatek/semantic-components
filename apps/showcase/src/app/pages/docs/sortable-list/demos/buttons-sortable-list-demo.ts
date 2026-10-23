@@ -1,10 +1,10 @@
 import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
-import { ScButton } from '@semantic-components/ui';
 import {
+  ScButton,
   ScSortableList,
   type ScSortableListAnnouncement,
   ScSortableListItem,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { SiArrowDownIcon, SiArrowUpIcon } from '@semantic-icons/lucide-icons';
 
 interface Item {

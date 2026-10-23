@@ -5,7 +5,7 @@ import {
   injectQueryParam,
   parseAsInteger,
   parseAsString,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 @Component({ template: '' })
 class TwoCallSites {

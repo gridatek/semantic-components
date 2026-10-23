@@ -28,7 +28,7 @@ import {
   ScNavbarMobilePortal,
   ScNavbarMobileTrigger,
   ScNavbarProvider,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import {
   SiGalleryVerticalEndIcon,
   SiMenuIcon,

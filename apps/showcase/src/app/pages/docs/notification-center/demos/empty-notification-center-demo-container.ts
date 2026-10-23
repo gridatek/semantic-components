@@ -25,7 +25,7 @@ import {
   ScNotificationCenterHeader,
   ScNotificationCenterTitle,
   ScNotificationEmpty,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { SiBellOffIcon } from '@semantic-icons/lucide-icons';
 
 /** No notifications: the empty state, written by you. */

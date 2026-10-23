@@ -27,7 +27,7 @@ import {
   ScPhoneInputNumber,
   phoneCountries,
   phoneNumber,
-} from '@semantic-components/ui-lab/phone-input';
+} from '@semantic-components/ui/phone-input';
 import { SiChevronDownIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
 
 @Component({

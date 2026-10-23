@@ -25,7 +25,7 @@ import {
   ScCompareBefore,
   ScCompareHandle,
   ScCompareLabel,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { SiChevronsLeftRightIcon } from '@semantic-icons/lucide-icons';
 
 /** Two photos, before and after an edit: drag the divider, click anywhere, or use the keys on it. */

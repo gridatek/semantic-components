@@ -3,7 +3,7 @@ import {
   ScTimeClock,
   ScTimeClockDial,
   ScTimeClockHeader,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 /** The hour, then the minute: drag or click the hand, or the keyboard on the dial (arrows, Page Up/Down, Home/End, Enter). The header shows the time and switches the view; AM and PM in 12 hours. */
 @Component({

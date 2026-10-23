@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
-import { ScAnimatedCounter } from '@semantic-components/ui-lab/animated-counter';
+import { ScAnimatedCounter } from '@semantic-components/ui/animated-counter';
 
 /** The number counts to its new value, easing out. Screen readers get only the value; with reduced motion, it is there at once. */
 @Component({

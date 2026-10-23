@@ -1,0 +1,28 @@
+import { Directive, computed, input } from '@angular/core';
+import { cn } from '../../utils/cn/cn';
+
+@Directive({
+  selector: 'a[scNavbarMobileLink], button[scNavbarMobileLink]',
+  host: {
+    '[class]': 'class()',
+    '[attr.aria-current]': 'active() ? "page" : null',
+  },
+})
+export class ScNavbarMobileLink {
+  readonly classInput = input<string>('', { alias: 'class' });
+  readonly active = input<boolean>(false);
+
+  protected readonly class = computed(() =>
+    cn(
+      'flex items-center',
+      'w-full px-4 py-3 rounded-md',
+      'text-base font-medium',
+      'transition-colors',
+      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
+      this.active()
+        ? 'bg-accent text-accent-foreground'
+        : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground',
+      this.classInput(),
+    ),
+  );
+}

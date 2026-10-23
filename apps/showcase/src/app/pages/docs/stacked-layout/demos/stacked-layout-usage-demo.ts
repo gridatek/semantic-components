@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScStackedLayout } from '@semantic-components/ui-lab';
+import { ScStackedLayout } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-stacked-layout-usage-demo',

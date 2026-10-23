@@ -15,7 +15,7 @@ import { EnglishLabelsLanguageSwitcherDemo } from './english-labels-language-swi
 })
 export class EnglishLabelsLanguageSwitcherDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScLanguageSelect } from '@semantic-components/ui-lab';
+import { ScLanguageSelect } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-english-labels-language-switcher-demo',

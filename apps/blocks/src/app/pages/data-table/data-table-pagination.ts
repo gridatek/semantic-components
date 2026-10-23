@@ -12,7 +12,7 @@ import {
   ScPaginationPageSizeSelect,
   ScPaginationPrevious,
 } from '@semantic-components/ui';
-import { ScDataTablePagination } from '@semantic-components/ui-lab/data-table';
+import { ScDataTablePagination } from '@semantic-components/ui/data-table';
 import {
   SiChevronLeftIcon,
   SiChevronRightIcon,

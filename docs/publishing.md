@@ -7,7 +7,7 @@ This guide describes how to publish a new version of the Semantic Components wor
 All libraries are versioned together:
 
 - `@semantic-components/ui`
-- `@semantic-components/ui-lab`
+- `@semantic-components/ui`
 - `@semantic-components/editor`
 - `@semantic-components/charts`
 - `@semantic-components/code`

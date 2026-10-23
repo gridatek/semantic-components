@@ -19,7 +19,7 @@ import { BasicQrCodeDemo } from './basic-qr-code-demo';
 })
 export class BasicQrCodeDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScQrCode } from '@semantic-components/ui-lab/qr-code';
+import { ScQrCode } from '@semantic-components/ui/qr-code';
 
 @Component({
   selector: 'app-basic-qr-code-demo',

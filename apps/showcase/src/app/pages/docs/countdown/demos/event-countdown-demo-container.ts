@@ -23,7 +23,7 @@ import {
   ScCountdown,
   ScCountdownText,
   ScCountdownUnit,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 /** To a moment: the days, hours, minutes and seconds left — each a unit, your labels. Screen readers hear it in words, in the app's language. */
 @Component({

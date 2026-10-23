@@ -7,7 +7,7 @@ import {
   ScTimelineMarker,
   ScTimelineTime,
   ScTimelineTitle,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import {
   SiGitCommitHorizontalIcon,
   SiMessageSquareIcon,

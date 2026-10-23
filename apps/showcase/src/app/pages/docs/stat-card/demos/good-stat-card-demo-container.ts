@@ -25,7 +25,7 @@ import {
   ScStatCardDescription,
   ScStatCardLabel,
   ScStatCardValue,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import {
   SiTrendingDownIcon,
   SiTrendingUpIcon,

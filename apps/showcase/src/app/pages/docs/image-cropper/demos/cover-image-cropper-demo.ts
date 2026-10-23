@@ -1,12 +1,12 @@
 import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
-import { ScSlider } from '@semantic-components/ui';
 import {
   ScImageCropper,
   ScImageCropperGrid,
   ScImageCropperImage,
   ScImageCropperSelection,
   ScImageCropperStage,
-} from '@semantic-components/ui-lab';
+  ScSlider,
+} from '@semantic-components/ui';
 
 /**
  * No handles: a 16:9 frame that stays put, and the image moves under it —

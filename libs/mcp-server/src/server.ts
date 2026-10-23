@@ -19,7 +19,7 @@ export function createServer(): McpServer {
       library: z
         .string()
         .optional()
-        .describe('Filter by library, e.g. "ui", "ui-lab", "carousel"'),
+        .describe('Filter by library, e.g. "ui", "carousel"'),
     },
     async ({ library }) => {
       let libs = manifest.libraries;

@@ -19,25 +19,7 @@ import { LocaleEmojiPickerDemo } from './locale-emoji-picker-demo';
 })
 export class LocaleEmojiPickerDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScSpinner } from '@semantic-components/ui';
-import {
-  ScEmojiPicker,
-  ScEmojiPickerAnnouncer,
-  ScEmojiPickerCategory,
-  ScEmojiPickerCategoryHeader,
-  ScEmojiPickerEmoji,
-  ScEmojiPickerEmpty,
-  ScEmojiPickerError,
-  ScEmojiPickerFooter,
-  ScEmojiPickerList,
-  ScEmojiPickerLoading,
-  ScEmojiPickerRow,
-  ScEmojiPickerSearch,
-  ScEmojiPickerSearchField,
-  ScEmojiPickerSkinTone,
-  ScEmojiPickerViewport,
-  type ScEmojiSkinTone,
-} from '@semantic-components/ui-lab';
+import { ScSpinner, ScEmojiPicker, ScEmojiPickerAnnouncer, ScEmojiPickerCategory, ScEmojiPickerCategoryHeader, ScEmojiPickerEmoji, ScEmojiPickerEmpty, ScEmojiPickerError, ScEmojiPickerFooter, ScEmojiPickerList, ScEmojiPickerLoading, ScEmojiPickerRow, ScEmojiPickerSearch, ScEmojiPickerSearchField, ScEmojiPickerSkinTone, ScEmojiPickerViewport, type ScEmojiSkinTone } from '@semantic-components/ui';
 import { SiLoaderCircleIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
 
 /** In French: the emojis' names, the search and your text; a skin tone. */

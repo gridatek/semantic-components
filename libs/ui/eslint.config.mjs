@@ -10,6 +10,9 @@ export default [
         'error',
         {
           ignoredFiles: ['{projectRoot}/eslint.config.{js,cjs,mjs,ts,cts,mts}'],
+          // The data table's parts take the app's TanStack table without
+          // importing TanStack: a peer for what they need, not for an import.
+          ignoredDependencies: ['@tanstack/angular-table'],
         },
       ],
     },

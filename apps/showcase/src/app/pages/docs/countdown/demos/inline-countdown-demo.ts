@@ -3,7 +3,7 @@ import {
   ScCountdown,
   ScCountdownText,
   ScCountdownUnit,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 /** In a sentence: hours, minutes and seconds, with your separators. */
 @Component({

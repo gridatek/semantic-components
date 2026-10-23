@@ -1,6 +1,8 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScButton, ScInput, ScLabel } from '@semantic-components/ui';
 import {
+  ScButton,
+  ScInput,
+  ScLabel,
   ScNativeDialog,
   ScNativeDialogBody,
   ScNativeDialogClose,
@@ -11,7 +13,7 @@ import {
   ScNativeDialogProvider,
   ScNativeDialogTitle,
   ScNativeDialogTrigger,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 @Component({

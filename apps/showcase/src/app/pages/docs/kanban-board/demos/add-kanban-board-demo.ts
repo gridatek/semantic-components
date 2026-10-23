@@ -1,12 +1,13 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScButton, ScInput } from '@semantic-components/ui';
 import {
+  ScButton,
+  ScInput,
   ScKanbanBoard,
   type ScKanbanBoardAnnouncement,
   type ScKanbanBoardValue,
   ScKanbanCard,
   ScKanbanColumn,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 interface Task {
   readonly id: string;

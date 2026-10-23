@@ -4,7 +4,7 @@ import {
   ScOrgChartCard,
   ScOrgChartGroup,
   ScOrgChartItem,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 /** People and their reports, as nested lists — one Tab stop, then ↑ ↓ between people, → ← to open and close, Home and End, or type a name. */
 @Component({

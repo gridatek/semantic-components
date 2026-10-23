@@ -4,7 +4,7 @@ import {
   ScDockIndicator,
   ScDockItem,
   ScDockLabel,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import {
   SiCalendarIcon,
   SiHouseIcon,

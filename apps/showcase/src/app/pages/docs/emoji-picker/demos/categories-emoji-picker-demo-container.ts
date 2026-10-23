@@ -19,25 +19,7 @@ import { CategoriesEmojiPickerDemo } from './categories-emoji-picker-demo';
 })
 export class CategoriesEmojiPickerDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScSpinner } from '@semantic-components/ui';
-import {
-  type ScEmoji,
-  ScEmojiPicker,
-  ScEmojiPickerAnnouncer,
-  ScEmojiPickerCategory,
-  ScEmojiPickerCategoryButton,
-  ScEmojiPickerCategoryHeader,
-  ScEmojiPickerCategoryNav,
-  ScEmojiPickerEmoji,
-  ScEmojiPickerEmpty,
-  ScEmojiPickerError,
-  ScEmojiPickerList,
-  ScEmojiPickerLoading,
-  ScEmojiPickerRow,
-  ScEmojiPickerSearch,
-  ScEmojiPickerSearchField,
-  ScEmojiPickerViewport,
-} from '@semantic-components/ui-lab';
+import { ScSpinner, type ScEmoji, ScEmojiPicker, ScEmojiPickerAnnouncer, ScEmojiPickerCategory, ScEmojiPickerCategoryButton, ScEmojiPickerCategoryHeader, ScEmojiPickerCategoryNav, ScEmojiPickerEmoji, ScEmojiPickerEmpty, ScEmojiPickerError, ScEmojiPickerList, ScEmojiPickerLoading, ScEmojiPickerRow, ScEmojiPickerSearch, ScEmojiPickerSearchField, ScEmojiPickerViewport } from '@semantic-components/ui';
 import {
   SiClockIcon,
   SiFlagIcon,

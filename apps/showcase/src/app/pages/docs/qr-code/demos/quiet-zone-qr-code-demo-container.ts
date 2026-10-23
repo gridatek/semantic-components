@@ -19,7 +19,7 @@ import { QuietZoneQrCodeDemo } from './quiet-zone-qr-code-demo';
 })
 export class QuietZoneQrCodeDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScQrCode } from '@semantic-components/ui-lab/qr-code';
+import { ScQrCode } from '@semantic-components/ui/qr-code';
 
 @Component({
   selector: 'app-quiet-zone-qr-code-demo',

@@ -24,7 +24,7 @@ import {
   ScCompareAfter,
   ScCompareBefore,
   ScCompareHandle,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { SiChevronsLeftRightIcon } from '@semantic-icons/lucide-icons';
 
 /** The divider follows the pointer, without a press (the keys still work on it). */

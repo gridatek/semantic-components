@@ -26,7 +26,7 @@ import {
   ScColorPickerOption,
   ScColorPickerSwatch,
   ScColorPickerSwatches,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { SiPipetteIcon } from '@semantic-icons/lucide-icons';
 
 /** Preset colours, a radio group — the arrows move and choose; the one that is the colour is checked. Where the browser can, pick from the screen. */

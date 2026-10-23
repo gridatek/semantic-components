@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScLanguageSelect } from '@semantic-components/ui-lab';
+import { ScLanguageSelect } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-settings-panel-language-switcher-demo',

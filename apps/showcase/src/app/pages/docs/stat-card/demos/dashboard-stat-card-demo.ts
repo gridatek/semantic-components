@@ -6,7 +6,7 @@ import {
   ScStatCardIcon,
   ScStatCardLabel,
   ScStatCardValue,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import {
   SiActivityIcon,
   SiCreditCardIcon,

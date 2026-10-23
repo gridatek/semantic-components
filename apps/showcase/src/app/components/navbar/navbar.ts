@@ -10,6 +10,15 @@ import {
   ScInputButton,
   ScKbd,
   ScLink,
+  ScNavbar,
+  ScNavbarActions,
+  ScNavbarBrand,
+  ScNavbarGroup,
+  ScNavbarMobileLink,
+  ScNavbarMobileMenu,
+  ScNavbarMobilePortal,
+  ScNavbarMobileTrigger,
+  ScNavbarProvider,
   ScNavigationMenu,
   ScNavigationMenuContent,
   ScNavigationMenuItem,
@@ -21,17 +30,6 @@ import {
   ScThemeModeToggle,
   cn,
 } from '@semantic-components/ui';
-import {
-  ScNavbar,
-  ScNavbarActions,
-  ScNavbarBrand,
-  ScNavbarGroup,
-  ScNavbarMobileLink,
-  ScNavbarMobileMenu,
-  ScNavbarMobilePortal,
-  ScNavbarMobileTrigger,
-  ScNavbarProvider,
-} from '@semantic-components/ui-lab';
 import {
   SiChevronDownIcon,
   SiGithubIcon,

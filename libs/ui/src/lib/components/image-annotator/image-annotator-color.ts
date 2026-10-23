@@ -1,0 +1,48 @@
+import { Directive, computed, inject, input } from '@angular/core';
+import { ɵwarnIfUnnamed } from '../../utils/accessible-name/accessible-name';
+import { cn } from '../../utils/cn/cn';
+import { ScImageAnnotator } from './image-annotator';
+
+/**
+ * A colour to draw with — and for the selected annotation
+ * (`scImageAnnotatorColor="#e11d48"`): a swatch, pressed while it is the
+ * one. Name it ("Red"); put the colours in a group you name.
+ */
+@Directive({
+  selector: 'button[scImageAnnotatorColor]',
+  host: {
+    type: 'button',
+    'data-slot': 'image-annotator-color',
+    '[attr.aria-pressed]': 'pressed()',
+    '[disabled]': 'annotator.readonly()',
+    '[style.background-color]': 'value()',
+    '[class]': 'class()',
+    '(click)': 'annotator.color.set(value())',
+  },
+})
+export class ScImageAnnotatorColor {
+  protected readonly annotator = inject(ScImageAnnotator);
+
+  readonly value = input.required<string>({
+    alias: 'scImageAnnotatorColor',
+  });
+  readonly classInput = input<string>('', { alias: 'class' });
+
+  protected readonly pressed = computed(
+    () => this.annotator.color().toLowerCase() === this.value().toLowerCase(),
+  );
+
+  protected readonly class = computed(() =>
+    cn(
+      'size-6 shrink-0 rounded-full border-2 border-white shadow-[0_0_0_1px_var(--border)] outline-none transition-transform',
+      'hover:scale-110 focus-visible:ring-3 focus-visible:ring-ring/50',
+      'aria-pressed:shadow-[0_0_0_2px_var(--foreground)]',
+      'disabled:pointer-events-none disabled:opacity-50',
+      this.classInput(),
+    ),
+  );
+
+  constructor() {
+    ɵwarnIfUnnamed('scImageAnnotatorColor');
+  }
+}

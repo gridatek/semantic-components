@@ -37,7 +37,7 @@ import { BasicQrCodeDemoContainer } from '../docs/qr-code/demos/basic-qr-code-de
         <p class="text-muted-foreground">
           Install and configure the
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >&#64;semantic-components/ui-lab/qr-code</code
+            >&#64;semantic-components/ui/qr-code</code
           >
           package. Requires the ui library to be installed first.
         </p>
@@ -49,9 +49,7 @@ import { BasicQrCodeDemoContainer } from '../docs/qr-code/demos/basic-qr-code-de
           Install the QR code library and its peer dependency
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">uqr</code>.
         </p>
-        <app-package-manager-install
-          packages="@semantic-components/ui-lab uqr"
-        />
+        <app-package-manager-install packages="@semantic-components/ui uqr" />
       </section>
 
       <div scSeparator></div>
@@ -102,6 +100,5 @@ import { BasicQrCodeDemoContainer } from '../docs/qr-code/demos/basic-qr-code-de
   encapsulation: ViewEncapsulation.None,
 })
 export default class QrCodeInstallPage {
-  readonly sourceCode =
-    '@source "../node_modules/@semantic-components/ui-lab";';
+  readonly sourceCode = '@source "../node_modules/@semantic-components/ui";';
 }

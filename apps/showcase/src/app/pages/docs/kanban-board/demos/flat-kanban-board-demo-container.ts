@@ -25,7 +25,7 @@ import {
   type ScKanbanBoardValue,
   ScKanbanCard,
   ScKanbanColumn,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 interface Task {
   readonly id: string;

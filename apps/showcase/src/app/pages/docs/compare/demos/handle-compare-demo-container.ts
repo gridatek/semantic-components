@@ -25,7 +25,7 @@ import {
   ScCompareBefore,
   ScCompareHandle,
   ScCompareLabel,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { SiGripVerticalIcon } from '@semantic-icons/lucide-icons';
 
 /** Only the handle drags (a page can scroll over the rest); the handle restyled, its position shown. */

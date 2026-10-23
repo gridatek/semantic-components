@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScButton } from '@semantic-components/ui';
 import {
+  ScButton,
   ScTourGuide,
   ScTourGuideClose,
   ScTourGuideDescription,
@@ -8,7 +8,7 @@ import {
   ScTourGuidePrevious,
   ScTourGuideStep,
   ScTourGuideTitle,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 /** Targets far apart in a long page: each is scrolled into view (smoothly — at once for reduced motion), and the card follows. */

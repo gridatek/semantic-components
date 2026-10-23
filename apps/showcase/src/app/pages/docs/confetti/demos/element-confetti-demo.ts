@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
-import { ScConfettiTrigger } from '@semantic-components/ui-lab/confetti';
+import { ScConfettiTrigger } from '@semantic-components/ui/confetti';
 
 /** Each burst starts at the centre of what was clicked — wherever it is. */
 @Component({

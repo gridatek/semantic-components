@@ -19,7 +19,7 @@ import { SpeedMarqueeDemo } from './speed-marquee-demo';
 })
 export class SpeedMarqueeDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScMarquee, ScMarqueeContent } from '@semantic-components/ui-lab';
+import { ScMarquee, ScMarqueeContent } from '@semantic-components/ui';
 
 /** In pixels a second: short and long content move at the same pace. */
 @Component({

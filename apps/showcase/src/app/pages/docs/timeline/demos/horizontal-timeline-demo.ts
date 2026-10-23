@@ -8,7 +8,7 @@ import {
   ScTimelineOpposite,
   ScTimelineTime,
   ScTimelineTitle,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 /** Across, for a roadmap: the date above each marker, the content below; it scrolls sideways when narrow. */
 @Component({

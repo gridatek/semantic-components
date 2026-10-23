@@ -3,6 +3,13 @@ import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, FormRoot, form, required } from '@angular/forms/signals';
 import {
   ScButton,
+  ScColorPicker,
+  ScColorPickerArea,
+  ScColorPickerField,
+  ScColorPickerOption,
+  ScColorPickerSlider,
+  ScColorPickerSwatch,
+  ScColorPickerSwatches,
   ScField,
   ScFieldErrors,
   ScLabel,
@@ -11,15 +18,6 @@ import {
   ScPopoverProvider,
   ScPopoverTrigger,
 } from '@semantic-components/ui';
-import {
-  ScColorPicker,
-  ScColorPickerArea,
-  ScColorPickerField,
-  ScColorPickerOption,
-  ScColorPickerSlider,
-  ScColorPickerSwatch,
-  ScColorPickerSwatches,
-} from '@semantic-components/ui-lab';
 
 /** A [formField]: the trigger shows the colour, the picker opens in a popover; required in the schema. */
 @Component({

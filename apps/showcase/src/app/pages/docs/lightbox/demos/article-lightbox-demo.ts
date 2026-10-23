@@ -5,7 +5,7 @@ import {
   ScLightboxDialog,
   ScLightboxImage,
   ScLightboxTrigger,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 /** One image in the text, opened in place — no thumbnails, no counter needed. */

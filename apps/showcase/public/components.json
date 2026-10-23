@@ -28,7 +28,7 @@
     "path": "animated-counter",
     "description": "Counting or rolling to a new value, in the reader’s language; motion only where it is used.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Data Display"
   },
   {
@@ -44,7 +44,7 @@
     "path": "attachment",
     "description": "Show a file alongside its upload state, on its own or in a scrollable row.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Data Display"
   },
   {
@@ -52,7 +52,7 @@
     "path": "audio-player",
     "description": "An audio player: a playlist, a waveform, controls as parts, state two ways, keyboard shortcuts.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Media"
   },
   {
@@ -92,7 +92,7 @@
     "path": "barcode-scanner",
     "description": "Camera or picture, codes outlined, states, torch and cameras; the standard BarcodeDetector.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Media"
   },
   {
@@ -108,7 +108,7 @@
     "path": "bubble",
     "description": "A single message in a conversation, aligned to either side and optionally carrying reactions.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Data Display"
   },
   {
@@ -132,7 +132,7 @@
     "path": "button-pattern",
     "description": "A directive that adds button behavior to non-button elements.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Utilities"
   },
   {
@@ -156,7 +156,7 @@
     "path": "carousel",
     "description": "A slideshow for cycling through elements.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Media"
   },
   {
@@ -204,7 +204,7 @@
     "path": "color-picker",
     "description": "A color picker: area and channel sliders with alpha, any CSS colour in, swatches, hex/rgb/hsl/oklch out; a form field.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Forms"
   },
   {
@@ -228,7 +228,7 @@
     "path": "compare",
     "description": "Two things compared, split by a divider: photos before and after, two themes, any content.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Media"
   },
   {
@@ -236,7 +236,7 @@
     "path": "confetti",
     "description": "A burst, two cannons or fireworks in the theme’s colours; canvas-confetti only where it is used.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Advanced"
   },
   {
@@ -260,7 +260,7 @@
     "path": "countdown",
     "description": "To a moment or a pausable timer, on the second, units in the app's language, rolling digits and a ring.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Data Display"
   },
   {
@@ -268,7 +268,7 @@
     "path": "data-table",
     "description": "Styled, accessible parts for TanStack Table data tables.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Data Display"
   },
   {
@@ -316,7 +316,7 @@
     "path": "dock",
     "description": "Your links and buttons, magnified by distance to the pointer and on focus; labels, counts, dots.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Advanced"
   },
   {
@@ -340,7 +340,7 @@
     "path": "emoji-picker",
     "description": "A picker for selecting emojis.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Media"
   },
   {
@@ -396,7 +396,7 @@
     "path": "image-annotator",
     "description": "Annotate an image: shapes over it — selected, moved, resized, restyled — with keyboard, kept as data, exported as an image.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Media"
   },
   {
@@ -404,7 +404,7 @@
     "path": "image-cropper",
     "description": "Crop an image: a box over it or a frame it moves under, with keyboard, pinch and wheel, the crop as a file.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Media"
   },
   {
@@ -412,7 +412,7 @@
     "path": "infinite-scroll",
     "description": "More near the end or the start, with whatever scrolls; a Load more button and a status.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Advanced"
   },
   {
@@ -444,7 +444,7 @@
     "path": "intersection-observer",
     "description": "A signal-based directive that tracks when an element enters or leaves the viewport or a scroll container.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Utilities"
   },
   {
@@ -460,7 +460,7 @@
     "path": "kanban-board",
     "description": "Your items by column, dragged by any pointer or moved by the keyboard, announced in your words.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Advanced"
   },
   {
@@ -484,7 +484,7 @@
     "path": "language-switcher",
     "description": "Switch between different languages.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Advanced"
   },
   {
@@ -492,7 +492,7 @@
     "path": "lightbox",
     "description": "A gallery of links opened in the native dialog, the thumbnail morphing in; zoom, pan, swipes, keys.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Media"
   },
   {
@@ -508,7 +508,7 @@
     "path": "marker",
     "description": "Label a point in a list or feed: a date divider, an unread boundary, or a short inline note.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Data Display"
   },
   {
@@ -516,7 +516,7 @@
     "path": "marquee",
     "description": "Content written once and repeated to fill, speed in px/s, four directions, pauses for hover, focus and a button; still for reduced motion.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Advanced"
   },
   {
@@ -524,7 +524,7 @@
     "path": "masonry-grid",
     "description": "Columns by width, the source order kept, re-laid out on any size change, spans, animated moves; native where possible.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Layout"
   },
   {
@@ -532,7 +532,7 @@
     "path": "mention-input",
     "description": "A textarea with inline mention suggestions triggered by a configurable character.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Forms"
   },
   {
@@ -556,7 +556,7 @@
     "path": "message",
     "description": "A row in a conversation: an avatar beside a column of bubbles, with an optional header and footer.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Data Display"
   },
   {
@@ -572,7 +572,7 @@
     "path": "native-dialog",
     "description": "A modal dialog built on the native HTML dialog element.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Feedback"
   },
   {
@@ -588,7 +588,7 @@
     "path": "navbar",
     "description": "A responsive navigation bar with mobile menu support.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Navigation"
   },
   {
@@ -604,7 +604,7 @@
     "path": "notification-center",
     "description": "Notifications you put together from parts: by day, titled in your language, with an unread count for the bell.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Advanced"
   },
   {
@@ -620,7 +620,7 @@
     "path": "org-chart",
     "description": "Your people as nested lists, laid out as a chart and joined by lines; a tree for the keyboard.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Data Display"
   },
   {
@@ -652,7 +652,7 @@
     "path": "pdf-viewer",
     "description": "Document viewer with navigation and zoom controls.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Media"
   },
   {
@@ -660,7 +660,7 @@
     "path": "phone-input",
     "description": "An input for international phone numbers.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Forms"
   },
   {
@@ -684,7 +684,7 @@
     "path": "qr-code",
     "description": "Generate and display QR codes.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Media"
   },
   {
@@ -692,7 +692,7 @@
     "path": "query-param-state",
     "description": "Type-safe, signal-based URL query parameter state management inspired by nuqs.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Utilities"
   },
   {
@@ -732,7 +732,7 @@
     "path": "scheduler",
     "description": "Events in month, week and day views, built from parts: overlapping events side by side, all-day events, now.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Advanced"
   },
   {
@@ -788,7 +788,7 @@
     "path": "signature-pad",
     "description": "A signature pad: pressure ink, drawn or typed, a value to store and redraw, trimmed PNG and SVG export.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Forms"
   },
   {
@@ -812,7 +812,7 @@
     "path": "sortable-list",
     "description": "Your array reordered by any pointer or the keyboard, announced in your words; down, along, or as a grid.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Advanced"
   },
   {
@@ -820,7 +820,7 @@
     "path": "speed-dial",
     "description": "A floating button opening a menu of actions, in a line or on an arc, with a backdrop.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Buttons & Actions"
   },
   {
@@ -836,7 +836,7 @@
     "path": "spotlight",
     "description": "One element lit, your content in a native dialog; modal, or interactive through the cutout.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Overlay"
   },
   {
@@ -844,7 +844,7 @@
     "path": "stacked-layout",
     "description": "A page frame: a sticky navbar, the routed page and a footer.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Layout"
   },
   {
@@ -852,7 +852,7 @@
     "path": "stat-card",
     "description": "A figure on a description list, formatted by Intl, its change coloured by good news.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Data Display"
   },
   {
@@ -860,7 +860,7 @@
     "path": "stepper",
     "description": "Guides users through a multi-step process.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Navigation"
   },
   {
@@ -892,7 +892,7 @@
     "path": "tags-input",
     "description": "Tags typed into one field, a string[] for Signal Forms, checked before they go in.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Forms"
   },
   {
@@ -932,7 +932,7 @@
     "path": "time-clock",
     "description": "A time picked on a clock face, by pointer or keyboard.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Forms"
   },
   {
@@ -940,7 +940,7 @@
     "path": "timeline",
     "description": "An ordered list, the line drawn for you, progress by status, Temporal times, alternate and horizontal.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Data Display"
   },
   {
@@ -988,7 +988,7 @@
     "path": "tour-guide",
     "description": "Steps as markup on their targets, a native modal dialog with a spotlight, flipping cards, scrolling, keys.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Advanced"
   },
   {
@@ -996,7 +996,7 @@
     "path": "transfer-list",
     "description": "One value (the chosen ids, a form field), two listbox sides, keyboard moves, search, reorder.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Advanced"
   },
   {
@@ -1020,7 +1020,7 @@
     "path": "video-player",
     "description": "A video player: controls as parts, state two ways, captions, chapters, seek preview, keyboard shortcuts.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Media"
   },
   {
@@ -1028,7 +1028,7 @@
     "path": "virtual-list",
     "description": "Only what is seen rendered, rows measured as they render; a box or the page; down, along or in lanes.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Advanced"
   }
 ]

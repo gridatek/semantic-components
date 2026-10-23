@@ -15,14 +15,8 @@ import { FormMentionInputDemo } from './form-mention-input-demo';
 })
 export class FormMentionInputDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScButton, ScField, ScLabel } from '@semantic-components/ui';
-import {
-  ScMentionInput,
-  ScMentionInputControl,
-  ScMentionInputSuggestionItem,
-  ScMentionInputSuggestions,
-} from '@semantic-components/ui-lab';
-import type { ScMentionUser } from '@semantic-components/ui-lab';
+import { ScButton, ScField, ScLabel, ScMentionInput, ScMentionInputControl, ScMentionInputSuggestionItem, ScMentionInputSuggestions } from '@semantic-components/ui';
+import type { ScMentionUser } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-form-mention-input-demo',

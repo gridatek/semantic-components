@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScAvatar, ScAvatarFallback } from '@semantic-components/ui';
 import {
+  ScAvatar,
+  ScAvatarFallback,
   ScBubble,
   ScBubbleContent,
   ScMessage,
@@ -9,7 +10,7 @@ import {
   ScMessageFooter,
   ScMessageGroup,
   ScMessageHeader,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 @Component({
   selector: 'app-basic-message-demo',

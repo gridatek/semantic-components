@@ -15,14 +15,8 @@ import { CustomTriggerMentionInputDemo } from './custom-trigger-mention-input-de
 })
 export class CustomTriggerMentionInputDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScField, ScLabel } from '@semantic-components/ui';
-import {
-  ScMentionInput,
-  ScMentionInputControl,
-  ScMentionInputSuggestionItem,
-  ScMentionInputSuggestions,
-} from '@semantic-components/ui-lab';
-import type { ScMentionUser } from '@semantic-components/ui-lab';
+import { ScField, ScLabel, ScMentionInput, ScMentionInputControl, ScMentionInputSuggestionItem, ScMentionInputSuggestions } from '@semantic-components/ui';
+import type { ScMentionUser } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-custom-trigger-mention-input-demo',

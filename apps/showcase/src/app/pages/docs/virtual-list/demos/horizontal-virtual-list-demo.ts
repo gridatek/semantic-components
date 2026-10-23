@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScVirtualList, ScVirtualListRow } from '@semantic-components/ui-lab';
+import { ScVirtualList, ScVirtualListRow } from '@semantic-components/ui';
 
 /** Along a row: days of a year, as a strip. Right to left, it starts at the right. */
 @Component({

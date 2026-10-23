@@ -19,12 +19,7 @@ import { PictureBarcodeScannerDemo } from './picture-barcode-scanner-demo';
 })
 export class PictureBarcodeScannerDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScButton, ScLabel } from '@semantic-components/ui';
-import {
-  type ScBarcode,
-  ScBarcodeScanner,
-  ScBarcodeScannerFile,
-} from '@semantic-components/ui-lab';
+import { ScButton, ScLabel, type ScBarcode, ScBarcodeScanner, ScBarcodeScannerFile } from '@semantic-components/ui';
 
 /** No camera needed: a picture — your file, or one of these — is read the same way. The way for anyone who cannot aim a camera. */
 @Component({

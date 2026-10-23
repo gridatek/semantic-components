@@ -6,14 +6,12 @@ import {
   ScFieldErrors,
   ScInput,
   ScLabel,
-} from '@semantic-components/ui';
-import {
   type ScSignature,
   ScSignaturePad,
   ScSignaturePadClear,
   ScSignaturePadLine,
   ScSignaturePadSurface,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 /** A `[formField]`: `required()` in the schema; left unsigned, the field shows its error. */
 @Component({

@@ -20,7 +20,7 @@ import { FireworksConfettiDemo } from './fireworks-confetti-demo';
 export class FireworksConfettiDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
-import { ScConfettiTrigger } from '@semantic-components/ui-lab/confetti';
+import { ScConfettiTrigger } from '@semantic-components/ui/confetti';
 
 /** confettiEffect="fireworks": bursts here and there, for three seconds — or the duration you give. */
 @Component({

@@ -1,0 +1,105 @@
+# Confetti
+
+A burst, two cannons or fireworks, in the theme's colours — on a click, or from code. Decorative only, and none for reduced motion. Its own entry point: it draws with [canvas-confetti](https://github.com/catdad/canvas-confetti), an optional peer of the lab, loaded on the first burst only.
+
+## Installation
+
+```sh
+npm install canvas-confetti
+```
+
+## Usage
+
+From its own entry point:
+
+```ts
+import { ScConfetti, ScConfettiTrigger } from '@semantic-components/ui/confetti';
+```
+
+On a click — a burst from the element:
+
+```html
+<button scButton scConfettiTrigger>Celebrate</button>
+<button scButton scConfettiTrigger confettiEffect="sides">Launch</button>
+<button scButton confettiEffect="fireworks" [scConfettiTrigger]="{ duration: 3000 }">Fireworks</button>
+```
+
+From code:
+
+```ts
+private readonly confetti = inject(ScConfetti);
+
+async save() {
+  await this.api.save();
+  await this.confetti.sides();
+}
+```
+
+## `ScConfetti`
+
+| Method                | Does                                             |
+| --------------------- | ------------------------------------------------ |
+| `burst(options?)`     | A burst — from the bottom middle, or `origin`.   |
+| `sides(options?)`     | Two cannons, from the edges of the screen.       |
+| `fireworks(options?)` | Bursts here and there, for `duration` (3000 ms). |
+| `reset()`             | Clears what is falling.                          |
+
+Each settles when the confetti has fallen.
+
+## Options
+
+| Option     | Does                                                                                        |
+| ---------- | ------------------------------------------------------------------------------------------- |
+| `count`    | How many pieces.                                                                            |
+| `spread`   | How wide, in degrees.                                                                       |
+| `angle`    | Which way, in degrees: 90 is up.                                                            |
+| `velocity` | How fast they start.                                                                        |
+| `origin`   | Where from: `{ x, y }` (0–1 of the screen), or an element — its centre.                     |
+| `colors`   | Any CSS colours; the theme's by default — `--confetti-1` … `--confetti-5`, read when fired. |
+| `shapes`   | `square`, `circle`, `star`.                                                                 |
+| `size`     | 1 is the usual.                                                                             |
+| `gravity`  | 1 is the usual.                                                                             |
+| `duration` | Fireworks only, in milliseconds.                                                            |
+
+## Colors
+
+Like shadcn's `--chart-1` … `--chart-5`, five theme tokens — add them to your `styles.css` (as the charts, a color of the theme each):
+
+```css
+@theme inline {
+  --color-confetti-1: var(--confetti-1);
+  /* … to --color-confetti-5 */
+}
+
+:root {
+  --confetti-1: oklch(0.646 0.222 41.116);
+  --confetti-2: oklch(0.6 0.118 184.704);
+  --confetti-3: oklch(0.488 0.243 264.376);
+  --confetti-4: oklch(0.828 0.189 84.429);
+  --confetti-5: oklch(0.645 0.246 16.439);
+}
+
+.dark {
+  --confetti-1: oklch(0.705 0.213 47.604);
+  --confetti-2: oklch(0.696 0.17 162.48);
+  --confetti-3: oklch(0.627 0.265 303.9);
+  --confetti-4: oklch(0.852 0.199 91.936);
+  --confetti-5: oklch(0.645 0.246 16.439);
+}
+```
+
+Without them (and no `colors`), the confetti logs an error in dev mode and uses canvas-confetti's own colors. `colors` overrides them.
+
+## `[scConfettiTrigger]`
+
+On any element: a click sets it off. Its value is the options; `confettiEffect` is `burst` (default — from the element), `sides` or `fireworks`. Behaviour only: the element keeps its own look.
+
+## Accessibility
+
+- One full-screen canvas, `aria-hidden`, `pointer-events: none` — never read, never in the way.
+- None at all under `prefers-reduced-motion`.
+- Decorative: say what is celebrated in words too ("Welcome aboard!"), in a status of yours.
+
+## Not here
+
+Emoji and text shapes, confetti inside a container, a continuous rain, sound.

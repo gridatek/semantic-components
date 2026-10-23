@@ -12,8 +12,6 @@ import {
   ScFieldErrors,
   ScInput,
   ScLabel,
-} from '@semantic-components/ui';
-import {
   ScStepper,
   ScStepperIndicator,
   ScStepperItem,
@@ -24,7 +22,7 @@ import {
   ScStepperSeparator,
   ScStepperTitle,
   ScStepperTrigger,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { SiCheckIcon, SiXIcon } from '@semantic-icons/lucide-icons';
 
 interface SignupModel {

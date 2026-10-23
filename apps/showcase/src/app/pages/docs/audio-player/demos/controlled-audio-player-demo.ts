@@ -1,16 +1,14 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
+  ScAudioPlayer,
+  ScAudioPlayerMedia,
+  ScAudioPlayerSeek,
   ScButton,
   ScRadio,
   ScRadioField,
   ScRadioGroup,
 } from '@semantic-components/ui';
-import {
-  ScAudioPlayer,
-  ScAudioPlayerMedia,
-  ScAudioPlayerSeek,
-} from '@semantic-components/ui-lab';
 
 /** Its state is yours, two ways: the track, played, paused, timed and repeated from outside. */
 @Component({

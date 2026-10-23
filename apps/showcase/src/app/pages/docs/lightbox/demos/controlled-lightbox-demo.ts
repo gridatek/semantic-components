@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScButton } from '@semantic-components/ui';
 import {
+  ScButton,
   ScLightbox,
   ScLightboxClose,
   ScLightboxDialog,
@@ -9,7 +9,7 @@ import {
   ScLightboxPrevious,
   ScLightboxThumbnail,
   ScLightboxTrigger,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import {
   SiChevronLeftIcon,
   SiChevronRightIcon,

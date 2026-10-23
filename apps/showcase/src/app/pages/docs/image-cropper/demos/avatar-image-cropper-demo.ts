@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
-import { ScButton, ScSlider } from '@semantic-components/ui';
 import {
+  ScButton,
   ScImageCropper,
   ScImageCropperHandle,
   ScImageCropperImage,
@@ -8,7 +8,8 @@ import {
   ScImageCropperPreviewImage,
   ScImageCropperSelection,
   ScImageCropperStage,
-} from '@semantic-components/ui-lab';
+  ScSlider,
+} from '@semantic-components/ui';
 
 /**
  * A circle: its handles resize it; the wheel, a pinch or the slider

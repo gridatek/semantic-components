@@ -43,8 +43,7 @@ if (!existsSync(shadcnFile)) {
 
 const ourDir = [
   `libs/ui/src/lib/components/${ourName}`,
-  `libs/ui-lab/src/lib/components/${ourName}`,
-  `libs/ui-lab/${ourName}/src`,
+  `libs/ui/${ourName}/src`,
   `libs/code/src/lib/components/${ourName}`,
   `libs/${ourName}/src`,
 ]

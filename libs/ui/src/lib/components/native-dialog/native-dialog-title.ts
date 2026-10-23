@@ -1,0 +1,19 @@
+import { Directive, computed, inject, input } from '@angular/core';
+import { cn } from '../../utils/cn/cn';
+import { ScNativeDialog } from './native-dialog';
+
+@Directive({
+  selector: 'h2[scNativeDialogTitle]',
+  host: {
+    '[id]': 'dialog.titleId',
+    '[class]': 'class()',
+  },
+})
+export class ScNativeDialogTitle {
+  readonly dialog = inject(ScNativeDialog);
+  readonly classInput = input<string>('', { alias: 'class' });
+
+  protected readonly class = computed(() =>
+    cn('text-base leading-none font-medium', this.classInput()),
+  );
+}

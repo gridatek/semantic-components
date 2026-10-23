@@ -15,7 +15,7 @@ import { ButtonLanguageSwitcherDemo } from './button-language-switcher-demo';
 })
 export class ButtonLanguageSwitcherDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScLanguageButton } from '@semantic-components/ui-lab';
+import { ScLanguageButton } from '@semantic-components/ui';
 import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
 @Component({

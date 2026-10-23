@@ -1,0 +1,38 @@
+import { Directive, computed, inject, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
+import { ɵwarnIfUnnamed } from '../../utils/accessible-name/accessible-name';
+import { cn } from '../../utils/cn/cn';
+import { type ScButtonVariants } from '../button/button';
+import { ScImageCropper } from './image-cropper';
+
+/** Back to the start: no zoom, turn or flip, the crop centred. Write its text or icon and name. */
+@Directive({
+  selector: 'button[scImageCropperReset]',
+  host: {
+    type: 'button',
+    'data-slot': 'image-cropper-reset',
+    '[disabled]': '!cropper.ready()',
+    '[class]': 'class()',
+    '(click)': 'cropper.reset()',
+  },
+})
+export class ScImageCropperReset {
+  private readonly buttonStyles = injectPreset().button;
+
+  protected readonly cropper = inject(ScImageCropper);
+
+  readonly classInput = input<string>('', { alias: 'class' });
+  readonly variant = input<ScButtonVariants['variant']>('outline');
+  readonly size = input<ScButtonVariants['size']>('icon');
+
+  protected readonly class = computed(() =>
+    cn(
+      this.buttonStyles({ variant: this.variant(), size: this.size() }),
+      this.classInput(),
+    ),
+  );
+
+  constructor() {
+    ɵwarnIfUnnamed('scImageCropperReset');
+  }
+}

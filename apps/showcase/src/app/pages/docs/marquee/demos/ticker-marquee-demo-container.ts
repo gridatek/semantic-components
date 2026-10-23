@@ -19,7 +19,7 @@ import { TickerMarqueeDemo } from './ticker-marquee-demo';
 })
 export class TickerMarqueeDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScMarquee, ScMarqueeContent } from '@semantic-components/ui-lab';
+import { ScMarquee, ScMarqueeContent } from '@semantic-components/ui';
 
 /** Headlines, with your separators — text is content like any other. */
 @Component({

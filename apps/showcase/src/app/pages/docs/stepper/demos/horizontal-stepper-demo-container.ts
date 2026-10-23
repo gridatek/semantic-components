@@ -16,26 +16,7 @@ import { HorizontalStepperDemo } from './horizontal-stepper-demo';
 export class HorizontalStepperDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
-import {
-  ScField,
-  ScFieldGroup,
-  ScInput,
-  ScLabel,
-  ScTextarea,
-} from '@semantic-components/ui';
-import {
-  ScStepper,
-  ScStepperDescription,
-  ScStepperIndicator,
-  ScStepperItem,
-  ScStepperList,
-  ScStepperNext,
-  ScStepperPanel,
-  ScStepperPrevious,
-  ScStepperSeparator,
-  ScStepperTitle,
-  ScStepperTrigger,
-} from '@semantic-components/ui-lab';
+import { ScField, ScFieldGroup, ScInput, ScLabel, ScTextarea, ScStepper, ScStepperDescription, ScStepperIndicator, ScStepperItem, ScStepperList, ScStepperNext, ScStepperPanel, ScStepperPrevious, ScStepperSeparator, ScStepperTitle, ScStepperTrigger } from '@semantic-components/ui';
 import { SiCheckIcon } from '@semantic-icons/lucide-icons';
 
 @Component({

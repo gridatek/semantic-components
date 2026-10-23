@@ -1,10 +1,10 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScButton } from '@semantic-components/ui';
 import {
+  ScButton,
   ScCountdown,
   ScCountdownText,
   ScCountdownUnit,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 /** Ten seconds; at zero, (completed) — once — and data-done to style what is over. */
 @Component({

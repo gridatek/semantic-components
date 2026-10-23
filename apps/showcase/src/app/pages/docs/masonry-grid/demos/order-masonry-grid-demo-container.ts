@@ -19,7 +19,7 @@ import { OrderMasonryGridDemo } from './order-masonry-grid-demo';
 })
 export class OrderMasonryGridDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScMasonryGrid, ScMasonryGridItem } from '@semantic-components/ui-lab';
+import { ScMasonryGrid, ScMasonryGridItem } from '@semantic-components/ui';
 
 /** Into the shortest column (balanced) — or in turn, column after column (predictable): the same tiles, both ways. */
 @Component({

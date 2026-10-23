@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScVirtualList, ScVirtualListRow } from '@semantic-components/ui-lab';
+import { ScVirtualList, ScVirtualListRow } from '@semantic-components/ui';
 
 /** Without a size of its own, it takes its full height, and the page — or the box around it — scrolls. */
 @Component({

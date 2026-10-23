@@ -20,17 +20,7 @@ import { ControlledAudioPlayerDemo } from './controlled-audio-player-demo';
 export class ControlledAudioPlayerDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
-import {
-  ScButton,
-  ScRadio,
-  ScRadioField,
-  ScRadioGroup,
-} from '@semantic-components/ui';
-import {
-  ScAudioPlayer,
-  ScAudioPlayerMedia,
-  ScAudioPlayerSeek,
-} from '@semantic-components/ui-lab';
+import { ScButton, ScRadio, ScRadioField, ScRadioGroup, ScAudioPlayer, ScAudioPlayerMedia, ScAudioPlayerSeek } from '@semantic-components/ui';
 
 /** Its state is yours, two ways: the track, played, paused, timed and repeated from outside. */
 @Component({

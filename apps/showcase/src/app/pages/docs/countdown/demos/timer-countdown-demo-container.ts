@@ -26,7 +26,7 @@ import {
   ScCountdownText,
   ScCountdownToggle,
   ScCountdownUnit,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import {
   SiPauseIcon,
   SiPlayIcon,

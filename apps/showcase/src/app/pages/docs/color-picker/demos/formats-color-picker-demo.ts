@@ -1,7 +1,6 @@
 import { DecimalPipe } from '@angular/common';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
-import { ScRadio, ScRadioField, ScRadioGroup } from '@semantic-components/ui';
 import {
   type ScColorFormat,
   ScColorPicker,
@@ -9,7 +8,10 @@ import {
   ScColorPickerField,
   ScColorPickerSlider,
   ScColorPickerSwatch,
-} from '@semantic-components/ui-lab';
+  ScRadio,
+  ScRadioField,
+  ScRadioGroup,
+} from '@semantic-components/ui';
 
 /** The value in hex, rgb(), hsl() or oklch() — the format is an input; changed, the value is written again. */
 @Component({

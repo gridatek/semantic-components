@@ -37,7 +37,7 @@ import { CarouselUsageDemoContainer } from '../docs/carousel/demos/carousel-usag
         <p class="text-muted-foreground">
           Install and configure the
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >&#64;semantic-components/ui-lab/carousel</code
+            >&#64;semantic-components/ui/carousel</code
           >
           package. Requires the ui library to be installed first.
         </p>
@@ -52,7 +52,7 @@ import { CarouselUsageDemoContainer } from '../docs/carousel/demos/carousel-usag
           >.
         </p>
         <app-package-manager-install
-          packages="@semantic-components/ui-lab embla-carousel"
+          packages="@semantic-components/ui embla-carousel"
         />
       </section>
 
@@ -104,6 +104,5 @@ import { CarouselUsageDemoContainer } from '../docs/carousel/demos/carousel-usag
   encapsulation: ViewEncapsulation.None,
 })
 export default class CarouselInstallPage {
-  readonly sourceCode =
-    '@source "../node_modules/@semantic-components/ui-lab";';
+  readonly sourceCode = '@source "../node_modules/@semantic-components/ui";';
 }

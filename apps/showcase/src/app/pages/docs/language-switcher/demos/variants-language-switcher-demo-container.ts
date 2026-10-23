@@ -15,7 +15,7 @@ import { VariantsLanguageSwitcherDemo } from './variants-language-switcher-demo'
 })
 export class VariantsLanguageSwitcherDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScLanguageToggle } from '@semantic-components/ui-lab';
+import { ScLanguageToggle } from '@semantic-components/ui';
 import { SiGlobeIcon } from '@semantic-icons/lucide-icons';
 
 @Component({

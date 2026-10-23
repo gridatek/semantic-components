@@ -6,7 +6,7 @@ import {
   ScSignaturePadLine,
   ScSignaturePadSurface,
   ScSignaturePadWidth,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 /** The pen's colour and width — two-way, here picked with buttons. */
 @Component({

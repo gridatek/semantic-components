@@ -127,10 +127,6 @@ export default class ComponentsPage {
       bg: 'color-mix(in oklch, var(--chart-1) 15%, transparent)',
       text: 'var(--chart-1)',
     },
-    'ui-lab': {
-      bg: 'color-mix(in oklch, var(--chart-2) 15%, transparent)',
-      text: 'var(--chart-2)',
-    },
     code: {
       bg: 'color-mix(in oklch, var(--chart-4) 15%, transparent)',
       text: 'var(--chart-4)',

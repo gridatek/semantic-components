@@ -1,11 +1,11 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScButton } from '@semantic-components/ui';
 import {
+  ScButton,
   ScSpotlight,
   ScSpotlightClose,
   ScSpotlightDescription,
   ScSpotlightTitle,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 /** The dim and the cutout are classes: here a round cutout around an avatar, and a deeper dim. */

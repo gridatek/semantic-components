@@ -41,7 +41,7 @@ import {
   ScNotificationTime,
   ScNotificationTitle,
   ScNotificationUnread,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import {
   SiBellOffIcon,
   SiCheckCheckIcon,

@@ -25,7 +25,7 @@ import {
   ScStatCardDescription,
   ScStatCardLabel,
   ScStatCardValue,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 /** Any Intl.NumberFormat options — compact, a unit, a currency — in the card’s locale: here, German. */
 @Component({

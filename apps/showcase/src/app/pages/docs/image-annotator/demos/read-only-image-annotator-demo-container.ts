@@ -25,7 +25,7 @@ import {
   ScImageAnnotatorImage,
   type ScImageAnnotatorKind,
   ScImageAnnotatorStage,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 /** Each annotation's name, for screen readers. */
 const NAMES: Record<ScImageAnnotatorKind, string> = {

@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScButtonPattern } from '@semantic-components/ui-lab';
+import { ScButtonPattern } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-button-pattern-usage-demo',

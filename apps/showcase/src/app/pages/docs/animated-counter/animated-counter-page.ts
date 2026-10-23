@@ -58,7 +58,7 @@ import { VisibleAnimatedCounterDemoContainer } from './demos/visible-animated-co
         </p>
         <pre
           class="bg-muted overflow-x-auto rounded-md p-4 text-sm"
-        ><code>import {{ '{' }} ScAnimatedCounter {{ '}' }} from '&#64;semantic-components/ui-lab/animated-counter';</code></pre>
+        ><code>import {{ '{' }} ScAnimatedCounter {{ '}' }} from '&#64;semantic-components/ui/animated-counter';</code></pre>
       </section>
 
       <section class="space-y-4">

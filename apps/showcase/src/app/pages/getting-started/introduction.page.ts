@@ -78,14 +78,10 @@ import { ConfigService } from '../../services/config.service';
         <ul class="text-muted-foreground list-disc space-y-2 pl-6">
           <li>
             <strong>&#64;semantic-components/ui</strong>
-            — UI components
-          </li>
-          <li>
-            <strong>&#64;semantic-components/ui-lab</strong>
-            — Extended and experimental components, with entry points for the
-            ones that need a library: carousel (Embla), data table (TanStack
-            Table), PDF viewer (PDF.js), phone input (libphonenumber-js), QR
-            code (uqr), animated counter (Motion), confetti
+            — UI components, with entry points for the ones that need a library:
+            carousel (Embla), data table (TanStack Table), PDF viewer (PDF.js),
+            phone input (libphonenumber-js), QR code (uqr), animated counter
+            (Motion), confetti
           </li>
           <li>
             <strong>&#64;semantic-components/charts</strong>

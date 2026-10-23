@@ -28,7 +28,7 @@ import {
   ScTimelineOpposite,
   ScTimelineTime,
   ScTimelineTitle,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 /** A history down a centred line, the events in turn on each side, their dates facing them. */
 @Component({

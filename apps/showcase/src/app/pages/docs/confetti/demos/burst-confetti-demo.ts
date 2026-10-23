@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
-import { ScConfettiTrigger } from '@semantic-components/ui-lab/confetti';
+import { ScConfettiTrigger } from '@semantic-components/ui/confetti';
 
 /** scConfettiTrigger on a button: a click bursts from it, in the theme’s colours. Decorative — hidden from screen readers, never in the way, and none for reduced motion. */
 @Component({

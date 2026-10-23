@@ -22,6 +22,7 @@ import {
 import {
   ScBadge,
   ScButton,
+  ScButtonPattern,
   ScCheckbox,
   ScCheckboxField,
   ScInput,
@@ -33,7 +34,6 @@ import {
   ScTableHeaderCell,
   ScTableRow,
 } from '@semantic-components/ui';
-import { ScButtonPattern } from '@semantic-components/ui-lab';
 import {
   ScDataTableCell,
   ScDataTableColumnFilter,
@@ -42,7 +42,7 @@ import {
   ScDataTableSelectAll,
   ScDataTableSelectRow,
   ScDataTableSortButton,
-} from '@semantic-components/ui-lab/data-table';
+} from '@semantic-components/ui/data-table';
 import {
   SiArrowDownIcon,
   SiArrowUpIcon,

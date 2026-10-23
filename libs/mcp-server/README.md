@@ -29,7 +29,7 @@ The server exposes 4 tools:
 
 Lists all available components across libraries. Optionally filter by library name.
 
-**Input:** `library?` — e.g. `"ui"`, `"ui-lab"`, `"carousel"`
+**Input:** `library?` — e.g. `"ui"`, `"carousel"`
 
 **Example output:**
 

@@ -1,13 +1,14 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScButton, ScInput } from '@semantic-components/ui';
 import {
+  ScButton,
+  ScInput,
   ScTourGuide,
   ScTourGuideClose,
   ScTourGuideDescription,
   ScTourGuideNext,
   ScTourGuideStep,
   ScTourGuideTitle,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 /** Three steps, Next and Done — no progress, no Back. */

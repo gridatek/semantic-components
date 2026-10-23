@@ -35,7 +35,7 @@ import {
   ScSchedulerToday,
   type ScSchedulerView,
   ScSchedulerViewButton,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import {
   SiChevronLeftIcon,
   SiChevronRightIcon,

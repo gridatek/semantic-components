@@ -1,12 +1,14 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScField, ScFieldDescription, ScLabel } from '@semantic-components/ui';
 import {
+  ScField,
+  ScFieldDescription,
+  ScLabel,
   ScTagsInput,
   ScTagsInputClear,
   ScTagsInputControl,
   ScTagsInputItem,
   ScTagsInputItemRemove,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 /** maxLength: at five, nothing more goes in (data-full on it). The count is yours to write; Clear removes them all. */

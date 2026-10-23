@@ -24,7 +24,7 @@ import {
   ScInfiniteScrollStatus,
   ScVirtualList,
   ScVirtualListRow,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 /** Long, and longer: the infinite scroll asks for 100 more near the end; the virtual list renders only what is seen. */
 @Component({

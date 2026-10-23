@@ -1,11 +1,12 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScAvatar, ScAvatarFallback } from '@semantic-components/ui';
 import {
+  ScAvatar,
+  ScAvatarFallback,
   ScOrgChart,
   ScOrgChartCard,
   ScOrgChartGroup,
   ScOrgChartItem,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 /** A card is yours to fill: here, the lib’s avatar beside the name. */
 @Component({

@@ -25,7 +25,7 @@ import {
   ScStatCardDescription,
   ScStatCardLabel,
   ScStatCardValue,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { SiTrendingUpIcon } from '@semantic-icons/lucide-icons';
 
 /** One figure on a description list: its label, its value in the app’s language, how it changed — signed, green for good news — and from when. */

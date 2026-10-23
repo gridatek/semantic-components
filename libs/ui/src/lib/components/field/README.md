@@ -31,7 +31,7 @@ A flexible field composition system for building accessible forms with labels, d
 
 ```typescript
 import { Component } from '@angular/core';
-import { ScField, ScFieldLabel, ScFieldDescription } from '@semantic-components/ui-lab';
+import { ScField, ScFieldLabel, ScFieldDescription } from '@semantic-components/ui';
 
 @Component({
   template: `

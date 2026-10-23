@@ -1,0 +1,20 @@
+import { Directive, computed, input } from '@angular/core';
+import { cn } from '../../utils/cn/cn';
+
+@Directive({
+  selector: 'div[scAttachmentTitle]',
+  host: {
+    'data-slot': 'attachment-title',
+    '[class]': 'class()',
+  },
+})
+export class ScAttachmentTitle {
+  readonly classInput = input<string>('', { alias: 'class' });
+
+  protected readonly class = computed(() =>
+    cn(
+      'block max-w-full min-w-0 truncate font-medium group-data-[state=processing]/attachment:shimmer group-data-[state=uploading]/attachment:shimmer',
+      this.classInput(),
+    ),
+  );
+}

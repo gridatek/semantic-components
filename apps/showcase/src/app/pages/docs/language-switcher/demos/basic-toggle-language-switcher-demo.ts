@@ -1,8 +1,5 @@
 import { Component, ViewEncapsulation, inject } from '@angular/core';
-import {
-  ScLanguageService,
-  ScLanguageToggle,
-} from '@semantic-components/ui-lab';
+import { ScLanguageService, ScLanguageToggle } from '@semantic-components/ui';
 import { SiGlobeIcon } from '@semantic-icons/lucide-icons';
 
 @Component({

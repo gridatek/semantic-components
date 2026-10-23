@@ -2,6 +2,15 @@ import { Component, ViewEncapsulation, computed, input } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import {
   ScLink,
+  ScNavbar,
+  ScNavbarActions,
+  ScNavbarBrand,
+  ScNavbarGroup,
+  ScNavbarMobileLink,
+  ScNavbarMobileMenu,
+  ScNavbarMobilePortal,
+  ScNavbarMobileTrigger,
+  ScNavbarProvider,
   ScNavigationMenu,
   ScNavigationMenuContent,
   ScNavigationMenuItem,
@@ -12,17 +21,6 @@ import {
   ScNavigationMenuTriggerIcon,
   cn,
 } from '@semantic-components/ui';
-import {
-  ScNavbar,
-  ScNavbarActions,
-  ScNavbarBrand,
-  ScNavbarGroup,
-  ScNavbarMobileLink,
-  ScNavbarMobileMenu,
-  ScNavbarMobilePortal,
-  ScNavbarMobileTrigger,
-  ScNavbarProvider,
-} from '@semantic-components/ui-lab';
 import {
   SiChevronDownIcon,
   SiMenuIcon,

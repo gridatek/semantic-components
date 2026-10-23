@@ -19,14 +19,7 @@ import { ControlledSpeedDialDemo } from './controlled-speed-dial-demo';
 })
 export class ControlledSpeedDialDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScButton } from '@semantic-components/ui';
-import {
-  ScSpeedDial,
-  ScSpeedDialAction,
-  ScSpeedDialLabel,
-  ScSpeedDialList,
-  ScSpeedDialTrigger,
-} from '@semantic-components/ui-lab';
+import { ScButton, ScSpeedDial, ScSpeedDialAction, ScSpeedDialLabel, ScSpeedDialList, ScSpeedDialTrigger } from '@semantic-components/ui';
 import {
   SiCopyIcon,
   SiPencilIcon,

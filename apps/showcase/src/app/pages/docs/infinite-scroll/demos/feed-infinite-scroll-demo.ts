@@ -1,9 +1,9 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScSpinner } from '@semantic-components/ui';
 import {
   ScInfiniteScroll,
   ScInfiniteScrollStatus,
-} from '@semantic-components/ui-lab';
+  ScSpinner,
+} from '@semantic-components/ui';
 import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
 
 interface Item {

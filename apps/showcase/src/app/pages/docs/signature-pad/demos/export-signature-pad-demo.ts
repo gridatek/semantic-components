@@ -8,14 +8,14 @@ import {
   untracked,
   viewChild,
 } from '@angular/core';
-import { ScButton } from '@semantic-components/ui';
 import {
+  ScButton,
   type ScSignature,
   ScSignaturePad,
   ScSignaturePadClear,
   ScSignaturePadLine,
   ScSignaturePadSurface,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { SiDownloadIcon } from '@semantic-icons/lucide-icons';
 
 /** The value is data — drawn again here, read-only and smaller. Exported, the image is trimmed to the ink: PNG or SVG. */

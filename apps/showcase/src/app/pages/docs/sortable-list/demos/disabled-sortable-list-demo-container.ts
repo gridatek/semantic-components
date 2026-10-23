@@ -19,12 +19,7 @@ import { DisabledSortableListDemo } from './disabled-sortable-list-demo';
 })
 export class DisabledSortableListDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
-import { ScSwitch, ScSwitchField } from '@semantic-components/ui';
-import {
-  ScSortableList,
-  type ScSortableListAnnouncement,
-  ScSortableListItem,
-} from '@semantic-components/ui-lab';
+import { ScSwitch, ScSwitchField, ScSortableList, type ScSortableListAnnouncement, ScSortableListItem } from '@semantic-components/ui';
 
 interface Item {
   readonly id: string;

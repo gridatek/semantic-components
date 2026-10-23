@@ -160,7 +160,7 @@ function scanLibrary(
 }
 
 /**
- * Entry points that are libraries of their own (`@semantic-components/ui-lab/editor`,
+ * Entry points that are libraries of their own (`@semantic-components/ui/editor`,
  * with a `src/lib` of components): scanned as such, under their import path.
  */
 function scanEntryLibraries(
@@ -208,7 +208,6 @@ function scanGuides(): GuideEntry[] {
 function main() {
   const libs: [string, string][] = [
     ['ui', '@semantic-components/ui'],
-    ['ui-lab', '@semantic-components/ui-lab'],
     ['code', '@semantic-components/code'],
     ['editor', '@semantic-components/editor'],
   ];

@@ -1,7 +1,9 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, FormRoot, form, minLength } from '@angular/forms/signals';
-import { ScButton, ScField, ScFieldErrors } from '@semantic-components/ui';
 import {
+  ScButton,
+  ScField,
+  ScFieldErrors,
   ScTransferList,
   ScTransferListListbox,
   ScTransferListMove,
@@ -9,7 +11,7 @@ import {
   ScTransferListOption,
   ScTransferListPane,
   ScTransferListSelectAll,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import {
   SiChevronLeftIcon,
   SiChevronRightIcon,

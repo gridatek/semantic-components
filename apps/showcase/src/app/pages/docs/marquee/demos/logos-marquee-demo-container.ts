@@ -23,7 +23,7 @@ import {
   ScMarquee,
   ScMarqueeContent,
   ScMarqueePause,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { SiPauseIcon, SiPlayIcon } from '@semantic-icons/lucide-icons';
 
 /** Links, written once: the copies are out of reach. It waits under the pointer and with focus inside — Tab into it — and the button pauses it. */

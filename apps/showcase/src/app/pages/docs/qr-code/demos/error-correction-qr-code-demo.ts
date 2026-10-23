@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScQrCode, ScQrCodeEcc } from '@semantic-components/ui-lab/qr-code';
+import { ScQrCode, ScQrCodeEcc } from '@semantic-components/ui/qr-code';
 
 @Component({
   selector: 'app-error-correction-qr-code-demo',

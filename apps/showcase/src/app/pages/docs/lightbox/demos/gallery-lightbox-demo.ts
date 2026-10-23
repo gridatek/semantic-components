@@ -11,7 +11,7 @@ import {
   ScLightboxZoomIn,
   ScLightboxZoomOut,
   ScLightboxZoomReset,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import {
   SiChevronLeftIcon,
   SiChevronRightIcon,

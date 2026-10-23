@@ -26,7 +26,7 @@ import {
   ScPdfViewerPrintProgress,
   ScPdfViewerSpacer,
   ScPdfViewerToolbar,
-} from '@semantic-components/ui-lab/pdf-viewer';
+} from '@semantic-components/ui/pdf-viewer';
 import {
   SiDownloadIcon,
   SiLoaderCircleIcon,

@@ -37,7 +37,7 @@ import { CountrySelectorPhoneInputDemoContainer } from '../docs/phone-input/demo
         <p class="text-muted-foreground">
           Install and configure the
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >&#64;semantic-components/ui-lab/phone-input</code
+            >&#64;semantic-components/ui/phone-input</code
           >
           package. Requires the ui library to be installed first.
         </p>
@@ -52,7 +52,7 @@ import { CountrySelectorPhoneInputDemoContainer } from '../docs/phone-input/demo
           >.
         </p>
         <app-package-manager-install
-          packages="@semantic-components/ui-lab libphonenumber-js"
+          packages="@semantic-components/ui libphonenumber-js"
         />
       </section>
 
@@ -104,6 +104,5 @@ import { CountrySelectorPhoneInputDemoContainer } from '../docs/phone-input/demo
   encapsulation: ViewEncapsulation.None,
 })
 export default class PhoneInputInstallPage {
-  readonly sourceCode =
-    '@source "../node_modules/@semantic-components/ui-lab";';
+  readonly sourceCode = '@source "../node_modules/@semantic-components/ui";';
 }

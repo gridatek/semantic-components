@@ -5,9 +5,6 @@ import {
   ScFieldGroup,
   ScInput,
   ScLabel,
-  ScTextarea,
-} from '@semantic-components/ui';
-import {
   ScStepper,
   ScStepperDescription,
   ScStepperIndicator,
@@ -19,7 +16,8 @@ import {
   ScStepperSeparator,
   ScStepperTitle,
   ScStepperTrigger,
-} from '@semantic-components/ui-lab';
+  ScTextarea,
+} from '@semantic-components/ui';
 import { SiCheckIcon } from '@semantic-icons/lucide-icons';
 
 @Component({

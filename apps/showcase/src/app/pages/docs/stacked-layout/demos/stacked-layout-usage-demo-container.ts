@@ -45,7 +45,7 @@ import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 })
 export class StackedLayoutUsageDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScStackedLayout } from '@semantic-components/ui-lab';
+import { ScStackedLayout } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-stacked-layout-usage-demo',

@@ -1,12 +1,14 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScField, ScFieldDescription, ScLabel } from '@semantic-components/ui';
 import {
+  ScField,
+  ScFieldDescription,
+  ScLabel,
   ScTagsInput,
   type ScTagsInputAccept,
   ScTagsInputControl,
   ScTagsInputItem,
   ScTagsInputItemRemove,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 /** accept decides what goes in — here an address, once. Refused text stays, marked, to be corrected; a pasted list is split on commas and new lines. */

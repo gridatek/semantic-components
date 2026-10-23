@@ -24,7 +24,7 @@ import {
   ScBubbleContent,
   ScBubbleGroup,
   ScBubbleReactions,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 @Component({
   selector: 'app-basic-bubble-demo',

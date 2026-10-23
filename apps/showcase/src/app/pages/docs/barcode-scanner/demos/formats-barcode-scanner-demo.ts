@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
-import { ScRadio, ScRadioField, ScRadioGroup } from '@semantic-components/ui';
 import {
   type ScBarcodeFormat,
   ScBarcodeScanner,
@@ -8,7 +7,10 @@ import {
   ScBarcodeScannerOverlay,
   ScBarcodeScannerToggle,
   ScBarcodeScannerVideo,
-} from '@semantic-components/ui-lab';
+  ScRadio,
+  ScRadioField,
+  ScRadioGroup,
+} from '@semantic-components/ui';
 import { SiCameraIcon, SiCameraOffIcon } from '@semantic-icons/lucide-icons';
 
 /** Only the formats you ask for — QR codes, or products (EAN, UPC); none asked, all the browser reads. */

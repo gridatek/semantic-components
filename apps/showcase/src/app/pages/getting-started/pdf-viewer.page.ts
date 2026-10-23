@@ -38,7 +38,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
         <p class="text-muted-foreground">
           Install and configure the
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >&#64;semantic-components/ui-lab/pdf-viewer</code
+            >&#64;semantic-components/ui/pdf-viewer</code
           >
           package. Requires the ui library to be installed first.
         </p>
@@ -52,7 +52,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
           >.
         </p>
         <app-package-manager-install
-          packages="@semantic-components/ui-lab pdfjs-dist"
+          packages="@semantic-components/ui pdfjs-dist"
         />
       </section>
 
@@ -206,7 +206,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
 })
 export default class PdfViewerInstallPage {
   readonly stylesCode = `@import 'pdfjs-dist/web/pdf_viewer.css';
-@source "../node_modules/@semantic-components/ui-lab";`;
+@source "../node_modules/@semantic-components/ui";`;
 
   readonly assetsCode = `"assets": [
   {
@@ -224,7 +224,6 @@ export default class PdfViewerInstallPage {
   OverlayContainer,
 } from '@angular/cdk/overlay';
 import { ScCodeBlock, ScCodeBlockHeader, ScCodeBlockTitle, ScCodeBlockActions, ScCodeBlockCopy, ScCodeBlockContent } from '@semantic-components/code';
-import { ScHeading, ScLink, ScSeparator } from '@semantic-components/ui';
 
 export const appConfig: ApplicationConfig = {
   providers: [

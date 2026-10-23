@@ -1,8 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import {
-  ScQrCode,
-  ScQrCodeDownload,
-} from '@semantic-components/ui-lab/qr-code';
+import { ScQrCode, ScQrCodeDownload } from '@semantic-components/ui/qr-code';
 import { SiDownloadIcon } from '@semantic-icons/lucide-icons';
 
 @Component({

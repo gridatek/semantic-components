@@ -7,7 +7,7 @@ import {
   ScBarcodeScannerToggle,
   ScBarcodeScannerTorch,
   ScBarcodeScannerVideo,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import {
   SiCameraIcon,
   SiCameraOffIcon,

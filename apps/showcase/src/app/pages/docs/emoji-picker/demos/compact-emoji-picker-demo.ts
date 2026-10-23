@@ -1,5 +1,4 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScSpinner } from '@semantic-components/ui';
 import {
   type ScEmoji,
   ScEmojiPicker,
@@ -11,7 +10,8 @@ import {
   ScEmojiPickerLoading,
   ScEmojiPickerRow,
   ScEmojiPickerViewport,
-} from '@semantic-components/ui-lab';
+  ScSpinner,
+} from '@semantic-components/ui';
 import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
 
 /** Just the list: fewer columns, no search, no footer. */

@@ -20,7 +20,7 @@ import { SidesConfettiDemo } from './sides-confetti-demo';
 export class SidesConfettiDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
-import { ScConfettiTrigger } from '@semantic-components/ui-lab/confetti';
+import { ScConfettiTrigger } from '@semantic-components/ui/confetti';
 
 /** confettiEffect="sides": two cannons, from the edges of the screen. */
 @Component({

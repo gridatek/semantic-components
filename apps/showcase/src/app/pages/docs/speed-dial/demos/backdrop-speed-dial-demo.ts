@@ -6,7 +6,7 @@ import {
   ScSpeedDialLabel,
   ScSpeedDialList,
   ScSpeedDialTrigger,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import {
   SiCopyIcon,
   SiPencilIcon,

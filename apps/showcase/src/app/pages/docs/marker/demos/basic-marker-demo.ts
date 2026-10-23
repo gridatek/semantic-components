@@ -3,7 +3,7 @@ import {
   ScMarker,
   ScMarkerContent,
   ScMarkerIcon,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { SiInfoIcon } from '@semantic-icons/lucide-icons';
 
 @Component({

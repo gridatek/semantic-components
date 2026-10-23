@@ -63,7 +63,7 @@ import {
   ScCarouselPrevious,
   ScCarouselTrack,
   ScCarouselViewport,
-} from '@semantic-components/ui-lab/carousel';
+} from '@semantic-components/ui/carousel';
 import {
   SiChevronLeftIcon,
   SiChevronRightIcon,

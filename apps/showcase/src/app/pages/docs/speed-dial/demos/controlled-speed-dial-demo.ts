@@ -1,12 +1,12 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScButton } from '@semantic-components/ui';
 import {
+  ScButton,
   ScSpeedDial,
   ScSpeedDialAction,
   ScSpeedDialLabel,
   ScSpeedDialList,
   ScSpeedDialTrigger,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import {
   SiCopyIcon,
   SiPencilIcon,

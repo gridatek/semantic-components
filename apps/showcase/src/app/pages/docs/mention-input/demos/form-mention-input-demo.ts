@@ -1,12 +1,14 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScButton, ScField, ScLabel } from '@semantic-components/ui';
 import {
+  ScButton,
+  ScField,
+  ScLabel,
   ScMentionInput,
   ScMentionInputControl,
   ScMentionInputSuggestionItem,
   ScMentionInputSuggestions,
-} from '@semantic-components/ui-lab';
-import type { ScMentionUser } from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
+import type { ScMentionUser } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-form-mention-input-demo',

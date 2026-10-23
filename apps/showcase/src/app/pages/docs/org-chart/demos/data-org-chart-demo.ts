@@ -6,7 +6,7 @@ import {
   ScOrgChartExpandIcon,
   ScOrgChartGroup,
   ScOrgChartItem,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
 interface Person {

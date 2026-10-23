@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScButton, ScSlider } from '@semantic-components/ui';
 import {
+  ScButton,
   ScImageAnnotator,
   type ScImageAnnotatorAnnotation,
   ScImageAnnotatorClear,
@@ -13,7 +13,8 @@ import {
   ScImageAnnotatorTextInput,
   ScImageAnnotatorTool,
   ScImageAnnotatorUndo,
-} from '@semantic-components/ui-lab';
+  ScSlider,
+} from '@semantic-components/ui';
 import {
   SiCircleIcon,
   SiEraserIcon,

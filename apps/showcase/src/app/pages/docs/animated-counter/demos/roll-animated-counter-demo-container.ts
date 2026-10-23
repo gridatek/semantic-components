@@ -20,7 +20,7 @@ import { RollAnimatedCounterDemo } from './roll-animated-counter-demo';
 export class RollAnimatedCounterDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
-import { ScAnimatedCounter } from '@semantic-components/ui-lab/animated-counter';
+import { ScAnimatedCounter } from '@semantic-components/ui/animated-counter';
 
 /** effect="roll": each digit rolls to its new place, like an odometer — the separators and the currency stay still. */
 @Component({

@@ -13,7 +13,7 @@ Rewritten: its icons are the consumer's, written in the template, no SVG strings
 ### 2. Dock demos (10 files, 60 SVGs)
 
 - **Pattern**: `ScDockItemData.icon: string` — SVG strings in data objects
-- **Type definition**: `libs/ui-lab/src/lib/components/dock/dock-types.ts` → `icon: string`
+- **Type definition**: `libs/ui/src/lib/components/dock/dock-types.ts` → `icon: string`
 - **Component**: `ScDockItem` renders the icon via innerHTML
 - **Files**:
   - `apps/showcase/src/app/pages/docs/dock/demos/basic-dock-demo.ts` + container
@@ -27,7 +27,7 @@ Rewritten: its icons are the consumer's, written in the template, no SVG strings
 ### 3. Speed-dial demos (12 files, 48 SVGs)
 
 - **Pattern**: `SpeedDialAction.icon: string` — SVG strings in data objects
-- **Type definition**: Check `libs/ui-lab/src/lib/components/speed-dial/` for the type
+- **Type definition**: Check `libs/ui/src/lib/components/speed-dial/` for the type
 - **Files**:
   - `apps/showcase/src/app/pages/docs/speed-dial/demos/basic-speed-dial-demo.ts` + container
   - `apps/showcase/src/app/pages/docs/speed-dial/demos/sizes-speed-dial-demo.ts` + container

@@ -25,7 +25,7 @@ import {
   ScCompareBefore,
   ScCompareHandle,
   ScCompareLabel,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { SiChevronsUpDownIcon } from '@semantic-icons/lucide-icons';
 
 /** Top and bottom: the divider moves up and down. */

@@ -1,5 +1,4 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScSpinner } from '@semantic-components/ui';
 import {
   ScEmojiPicker,
   ScEmojiPickerAnnouncer,
@@ -17,7 +16,8 @@ import {
   ScEmojiPickerSkinTone,
   ScEmojiPickerViewport,
   type ScEmojiSkinTone,
-} from '@semantic-components/ui-lab';
+  ScSpinner,
+} from '@semantic-components/ui';
 import { SiLoaderCircleIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
 
 /** In French: the emojis' names, the search and your text; a skin tone. */

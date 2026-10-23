@@ -1,6 +1,9 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScButton } from '@semantic-components/ui';
-import { ScVideoPlayer, ScVideoPlayerMedia } from '@semantic-components/ui-lab';
+import {
+  ScButton,
+  ScVideoPlayer,
+  ScVideoPlayerMedia,
+} from '@semantic-components/ui';
 
 /** Its state is yours, two ways: chapters as a list that jumps, and the player played, paused and timed from outside. */
 @Component({

@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScMasonryGrid, ScMasonryGridItem } from '@semantic-components/ui-lab';
+import { ScMasonryGrid, ScMasonryGridItem } from '@semantic-components/ui';
 
 /** Photos of different heights, each into the shortest column — as many columns of at least 200 px as fit. In a list: the order is the source's, row by row. */
 @Component({

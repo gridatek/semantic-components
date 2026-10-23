@@ -22,7 +22,7 @@ const ALIAS = {
 };
 // Components without a folder of their own: measured as another.
 const SAME_AS = { 'date-range-picker': 'date-picker' };
-const LIBRARIES = ['ui', 'ui-lab', 'code', 'charts', 'editor'];
+const LIBRARIES = ['ui', 'code', 'charts', 'editor'];
 
 const registry = JSON.parse(
   readFileSync(at('apps/showcase/public/components.json'), 'utf8'),
@@ -107,6 +107,14 @@ for (const row of rows) {
         )
           deps.add(owner.get(name));
     }
+  // The preset's button (`injectPreset().button`): built on the button.
+  if (
+    row.path !== 'button' &&
+    row.files.some((file) =>
+      readFileSync(file, 'utf8').includes('injectPreset().button'),
+    )
+  )
+    deps.add('button');
   row.deps = [...deps].sort();
 }
 const level = new Map();

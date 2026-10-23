@@ -62,7 +62,7 @@ import { SidesConfettiDemoContainer } from './demos/sides-confetti-demo-containe
         </p>
         <pre
           class="bg-muted overflow-x-auto rounded-md p-4 text-sm"
-        ><code>import {{ '{' }} ScConfetti, ScConfettiTrigger {{ '}' }} from '&#64;semantic-components/ui-lab/confetti';</code></pre>
+        ><code>import {{ '{' }} ScConfetti, ScConfettiTrigger {{ '}' }} from '&#64;semantic-components/ui/confetti';</code></pre>
       </section>
 
       <section class="space-y-4">

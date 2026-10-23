@@ -23,7 +23,14 @@
     "@angular/forms": ">=22.2.3",
     "rxjs": ">=7.8.2",
     "@angular/router": ">=22.2.3",
-    "@semantic-components/preset-styles": "0.81.0"
+    "@semantic-components/preset-styles": "0.81.0",
+    "motion": ">=14.2.0",
+    "canvas-confetti": ">=1.9.4",
+    "uqr": ">=0.1.3",
+    "libphonenumber-js": ">=1.13.15",
+    "embla-carousel": ">=8.6.0",
+    "pdfjs-dist": ">=6.4.299",
+    "@tanstack/angular-table": ">=9.3.1"
   },
   "exports": {
     "./styles": {
@@ -33,5 +40,28 @@
       "default": "./src/lib/styles/color-schemes.css"
     }
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "peerDependenciesMeta": {
+    "motion": {
+      "optional": true
+    },
+    "canvas-confetti": {
+      "optional": true
+    },
+    "uqr": {
+      "optional": true
+    },
+    "libphonenumber-js": {
+      "optional": true
+    },
+    "embla-carousel": {
+      "optional": true
+    },
+    "pdfjs-dist": {
+      "optional": true
+    },
+    "@tanstack/angular-table": {
+      "optional": true
+    }
+  }
 }

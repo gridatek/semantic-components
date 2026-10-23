@@ -8,7 +8,7 @@ import {
   ScTransferListPane,
   ScTransferListReorder,
   ScTransferListSelectAll,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import {
   SiChevronDownIcon,
   SiChevronLeftIcon,

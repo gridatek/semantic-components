@@ -5,7 +5,7 @@ import {
   parseAsInteger,
   parseAsString,
   parseAsStringEnum,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 @Component({
   selector: 'app-demo-query-param-state-demo',

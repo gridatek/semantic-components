@@ -19,35 +19,7 @@ import { InboxNotificationCenterDemo } from './inbox-notification-center-demo';
 })
 export class InboxNotificationCenterDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import {
-  ScButton,
-  ScPopover,
-  ScPopoverPortal,
-  ScPopoverProvider,
-  ScPopoverTrigger,
-} from '@semantic-components/ui';
-import {
-  type ScNotification,
-  ScNotificationActions,
-  ScNotificationCenter,
-  ScNotificationCenterHeader,
-  ScNotificationCenterTitle,
-  ScNotificationContent,
-  ScNotificationCount,
-  ScNotificationDescription,
-  ScNotificationDismiss,
-  ScNotificationEmpty,
-  ScNotificationFilter,
-  ScNotificationFilters,
-  ScNotificationIcon,
-  ScNotificationItem,
-  ScNotificationList,
-  ScNotificationMarkAllRead,
-  ScNotificationMarkRead,
-  ScNotificationTime,
-  ScNotificationTitle,
-  ScNotificationUnread,
-} from '@semantic-components/ui-lab';
+import { ScButton, ScPopover, ScPopoverPortal, ScPopoverProvider, ScPopoverTrigger, type ScNotification, ScNotificationActions, ScNotificationCenter, ScNotificationCenterHeader, ScNotificationCenterTitle, ScNotificationContent, ScNotificationCount, ScNotificationDescription, ScNotificationDismiss, ScNotificationEmpty, ScNotificationFilter, ScNotificationFilters, ScNotificationIcon, ScNotificationItem, ScNotificationList, ScNotificationMarkAllRead, ScNotificationMarkRead, ScNotificationTime, ScNotificationTitle, ScNotificationUnread } from '@semantic-components/ui';
 import {
   SiBellIcon,
   SiBellOffIcon,

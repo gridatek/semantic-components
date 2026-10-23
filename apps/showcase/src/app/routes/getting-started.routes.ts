@@ -29,11 +29,6 @@ export const gettingStartedRoutes: Route[] = [
         loadComponent: () => import('../pages/getting-started/ui.page'),
       },
       {
-        path: 'ui-lab',
-        title: 'UI Lab - Semantic Components',
-        loadComponent: () => import('../pages/getting-started/ui-lab.page'),
-      },
-      {
         path: 'carousel',
         title: 'Carousel - Semantic Components',
         loadComponent: () => import('../pages/getting-started/carousel.page'),

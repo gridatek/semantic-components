@@ -1,12 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
-  ScNavigationMenu,
-  ScNavigationMenuItem,
-  ScNavigationMenuLink,
-  ScNavigationMenuList,
-} from '@semantic-components/ui';
-import {
   ScNavbar,
   ScNavbarActions,
   ScNavbarBrand,
@@ -16,7 +10,11 @@ import {
   ScNavbarMobilePortal,
   ScNavbarMobileTrigger,
   ScNavbarProvider,
-} from '@semantic-components/ui-lab';
+  ScNavigationMenu,
+  ScNavigationMenuItem,
+  ScNavigationMenuLink,
+  ScNavigationMenuList,
+} from '@semantic-components/ui';
 import {
   SiGalleryVerticalEndIcon,
   SiMenuIcon,

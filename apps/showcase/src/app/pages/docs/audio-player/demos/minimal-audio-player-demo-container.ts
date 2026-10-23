@@ -25,7 +25,7 @@ import {
   ScAudioPlayerPlay,
   ScAudioPlayerTime,
   ScAudioPlayerWaveform,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { SiPauseIcon, SiPlayIcon } from '@semantic-icons/lucide-icons';
 
 /** One file, one line — like a voice message: play, the waveform, the time left. */

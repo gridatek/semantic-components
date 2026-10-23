@@ -1,5 +1,4 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScSpinner } from '@semantic-components/ui';
 import {
   type ScEmoji,
   ScEmojiPicker,
@@ -17,7 +16,8 @@ import {
   ScEmojiPickerSearch,
   ScEmojiPickerSearchField,
   ScEmojiPickerViewport,
-} from '@semantic-components/ui-lab';
+  ScSpinner,
+} from '@semantic-components/ui';
 import {
   SiClockIcon,
   SiFlagIcon,

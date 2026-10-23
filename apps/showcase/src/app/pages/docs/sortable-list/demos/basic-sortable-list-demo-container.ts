@@ -23,7 +23,7 @@ import {
   ScSortableList,
   type ScSortableListAnnouncement,
   ScSortableListItem,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 interface Item {
   readonly id: string;

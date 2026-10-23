@@ -26,7 +26,7 @@ import {
   ScCompareBefore,
   ScCompareHandle,
   ScCompareLabel,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { SiChevronsLeftRightIcon } from '@semantic-icons/lucide-icons';
 
 /** Not only images: the same card, in the light and the dark theme. */

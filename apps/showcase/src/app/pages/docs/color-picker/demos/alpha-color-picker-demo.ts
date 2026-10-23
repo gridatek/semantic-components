@@ -6,7 +6,7 @@ import {
   ScColorPickerField,
   ScColorPickerSlider,
   ScColorPickerSwatch,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 /** An opacity slider, on a checkerboard; the value carries it — #rrggbbaa, or rgb(… / a). */
 @Component({

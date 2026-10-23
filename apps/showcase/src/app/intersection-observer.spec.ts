@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { ScIntersectionObserver } from '@semantic-components/ui-lab';
+import { ScIntersectionObserver } from '@semantic-components/ui';
 
 /** Minimal stand-in, since jsdom has no IntersectionObserver. */
 class FakeIntersectionObserver {

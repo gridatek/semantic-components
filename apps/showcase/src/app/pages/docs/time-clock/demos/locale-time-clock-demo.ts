@@ -3,7 +3,7 @@ import {
   ScTimeClock,
   ScTimeClockDial,
   ScTimeClockHeader,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 /** locale="fr-FR": 24 hours — 13 to 00 on an inner ring. hourCycle overrides the locale’s 12 or 24. */
 @Component({

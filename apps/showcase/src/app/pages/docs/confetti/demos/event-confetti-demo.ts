@@ -10,7 +10,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui';
-import { ScConfetti } from '@semantic-components/ui-lab/confetti';
+import { ScConfetti } from '@semantic-components/ui/confetti';
 
 /** The service, on an event — no button: when the last task is ticked, a burst from the list. */
 @Component({

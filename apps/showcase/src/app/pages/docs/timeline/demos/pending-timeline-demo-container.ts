@@ -26,7 +26,7 @@ import {
   ScTimelineItem,
   ScTimelineMarker,
   ScTimelineTitle,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import {
   SiCheckIcon,
   SiLoaderCircleIcon,

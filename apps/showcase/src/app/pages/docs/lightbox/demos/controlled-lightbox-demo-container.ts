@@ -19,17 +19,7 @@ import { ControlledLightboxDemo } from './controlled-lightbox-demo';
 })
 export class ControlledLightboxDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScButton } from '@semantic-components/ui';
-import {
-  ScLightbox,
-  ScLightboxClose,
-  ScLightboxDialog,
-  ScLightboxImage,
-  ScLightboxNext,
-  ScLightboxPrevious,
-  ScLightboxThumbnail,
-  ScLightboxTrigger,
-} from '@semantic-components/ui-lab';
+import { ScButton, ScLightbox, ScLightboxClose, ScLightboxDialog, ScLightboxImage, ScLightboxNext, ScLightboxPrevious, ScLightboxThumbnail, ScLightboxTrigger } from '@semantic-components/ui';
 import {
   SiChevronLeftIcon,
   SiChevronRightIcon,

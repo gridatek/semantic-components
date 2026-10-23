@@ -19,7 +19,7 @@ import { CardsMasonryGridDemo } from './cards-masonry-grid-demo';
 })
 export class CardsMasonryGridDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScMasonryGrid, ScMasonryGridItem } from '@semantic-components/ui-lab';
+import { ScMasonryGrid, ScMasonryGridItem } from '@semantic-components/ui';
 
 /** Text of any length — measured, never guessed; resize the window and it lays out again. The first card spans two columns. */
 @Component({

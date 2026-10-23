@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
-import { ScAnimatedCounter } from '@semantic-components/ui-lab/animated-counter';
+import { ScAnimatedCounter } from '@semantic-components/ui/animated-counter';
 
 /** Any Intl.NumberFormat options, in the counter’s locale — here, German: euros, a percent, compact. */
 @Component({

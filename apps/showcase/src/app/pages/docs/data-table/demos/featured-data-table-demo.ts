@@ -59,7 +59,7 @@ import {
   ScDataTableSelectRow,
   ScDataTableSortButton,
   dataTableColumnLabel,
-} from '@semantic-components/ui-lab/data-table';
+} from '@semantic-components/ui/data-table';
 import {
   SiArrowDownIcon,
   SiArrowUpIcon,

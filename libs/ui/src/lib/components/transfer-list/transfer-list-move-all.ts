@@ -1,0 +1,54 @@
+import { Directive, computed, inject, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
+import { ɵwarnIfUnnamed } from '../../utils/accessible-name/accessible-name';
+import { cn } from '../../utils/cn/cn';
+import { type ScButtonVariants } from '../button/button';
+import { ScTransferList, type ScTransferListSide } from './transfer-list';
+
+/**
+ * Moves all the other side shows (searched, not disabled) to its side —
+ * `[scTransferListMoveAll]="'target'"`. Write its icon and name it
+ * ("Add all").
+ */
+@Directive({
+  selector: 'button[scTransferListMoveAll]',
+  host: {
+    type: 'button',
+    'data-slot': 'transfer-list-move-all',
+    '[disabled]': 'list.disabled() || !ids().length',
+    '[class]': 'class()',
+    '(click)': 'list.move(ids(), to())',
+  },
+})
+export class ScTransferListMoveAll {
+  private readonly buttonStyles = injectPreset().button;
+
+  protected readonly list = inject(ScTransferList);
+
+  readonly to = input.required<ScTransferListSide>({
+    alias: 'scTransferListMoveAll',
+  });
+  readonly classInput = input<string>('', { alias: 'class' });
+  readonly variant = input<ScButtonVariants['variant']>('outline');
+  readonly size = input<ScButtonVariants['size']>('icon-sm');
+
+  /** What the other side shows, movable. */
+  protected readonly ids = computed(
+    () =>
+      this.list
+        .pane(this.to() === 'target' ? 'source' : 'target')
+        ?.selectable()
+        .map((item) => item.id) ?? [],
+  );
+
+  protected readonly class = computed(() =>
+    cn(
+      this.buttonStyles({ variant: this.variant(), size: this.size() }),
+      this.classInput(),
+    ),
+  );
+
+  constructor() {
+    ɵwarnIfUnnamed('scTransferListMoveAll');
+  }
+}

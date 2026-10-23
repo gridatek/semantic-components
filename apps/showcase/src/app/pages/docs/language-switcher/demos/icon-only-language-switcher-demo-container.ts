@@ -15,7 +15,7 @@ import { IconOnlyLanguageSwitcherDemo } from './icon-only-language-switcher-demo
 })
 export class IconOnlyLanguageSwitcherDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScLanguageToggle } from '@semantic-components/ui-lab';
+import { ScLanguageToggle } from '@semantic-components/ui';
 import { SiGlobeIcon } from '@semantic-icons/lucide-icons';
 
 @Component({

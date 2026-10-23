@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScIntersectionObserver } from '@semantic-components/ui-lab';
+import { ScIntersectionObserver } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-once-intersection-observer-demo',

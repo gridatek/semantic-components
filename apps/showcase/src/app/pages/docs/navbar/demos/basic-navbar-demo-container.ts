@@ -18,24 +18,7 @@ import { DemoContainer } from '../../../../components/demo-container/demo-contai
 })
 export class BasicNavbarDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import {
-  ScButton,
-  ScNavigationMenu,
-  ScNavigationMenuItem,
-  ScNavigationMenuLink,
-  ScNavigationMenuList,
-} from '@semantic-components/ui';
-import {
-  ScNavbar,
-  ScNavbarActions,
-  ScNavbarBrand,
-  ScNavbarGroup,
-  ScNavbarMobileLink,
-  ScNavbarMobileMenu,
-  ScNavbarMobilePortal,
-  ScNavbarMobileTrigger,
-  ScNavbarProvider,
-} from '@semantic-components/ui-lab';
+import { ScButton, ScNavigationMenu, ScNavigationMenuItem, ScNavigationMenuLink, ScNavigationMenuList, ScNavbar, ScNavbarActions, ScNavbarBrand, ScNavbarGroup, ScNavbarMobileLink, ScNavbarMobileMenu, ScNavbarMobilePortal, ScNavbarMobileTrigger, ScNavbarProvider } from '@semantic-components/ui';
 import {
   SiGalleryVerticalEndIcon,
   SiMenuIcon,

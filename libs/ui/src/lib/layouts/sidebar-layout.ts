@@ -1,0 +1,29 @@
+import { Component, ViewEncapsulation, computed, input } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { cn } from '../utils/cn/cn';
+
+@Component({
+  selector: 'div[scSidebarLayout]',
+  imports: [RouterOutlet],
+  template: `
+    <ng-content select="[scSidebar]" />
+
+    <main class="flex-1 overflow-auto">
+      <router-outlet />
+    </main>
+  `,
+  host: {
+    '[class]': 'class()',
+  },
+  styles: ``,
+  encapsulation: ViewEncapsulation.None,
+})
+export class ScSidebarLayout {
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
+
+  protected readonly class = computed(() =>
+    cn('flex min-h-screen', this.classInput()),
+  );
+}

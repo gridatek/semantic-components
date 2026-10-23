@@ -3,7 +3,7 @@ import {
   ScTimeClock,
   ScTimeClockDial,
   ScTimeClockHeader,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 /** step: 5 minutes — the hand snaps to them, the arrows move by them. */
 @Component({

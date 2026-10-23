@@ -1,7 +1,9 @@
 import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
-import { ScRadio, ScRadioField, ScRadioGroup } from '@semantic-components/ui';
 import {
+  ScRadio,
+  ScRadioField,
+  ScRadioGroup,
   ScVideoPlayer,
   ScVideoPlayerCaptions,
   ScVideoPlayerCaptionsDisplay,
@@ -18,7 +20,7 @@ import {
   ScVideoPlayerSkip,
   ScVideoPlayerTime,
   ScVideoPlayerVolume,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import {
   SiCaptionsIcon,
   SiLoaderCircleIcon,

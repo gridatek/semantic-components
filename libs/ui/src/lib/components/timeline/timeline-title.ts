@@ -1,0 +1,18 @@
+import { Directive, computed, input } from '@angular/core';
+import { cn } from '../../utils/cn/cn';
+
+/** An event's title: your heading, or text. */
+@Directive({
+  selector: '[scTimelineTitle]',
+  host: {
+    'data-slot': 'timeline-title',
+    '[class]': 'class()',
+  },
+})
+export class ScTimelineTitle {
+  readonly classInput = input<string>('', { alias: 'class' });
+
+  protected readonly class = computed(() =>
+    cn('text-sm leading-6 font-medium', this.classInput()),
+  );
+}

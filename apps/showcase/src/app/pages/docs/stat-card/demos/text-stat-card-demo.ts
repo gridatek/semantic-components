@@ -5,7 +5,7 @@ import {
   ScStatCardIcon,
   ScStatCardLabel,
   ScStatCardValue,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { SiServerIcon } from '@semantic-icons/lucide-icons';
 
 /** Not every figure is a number: without a value, the card shows your text. */

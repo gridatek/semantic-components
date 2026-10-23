@@ -11,7 +11,7 @@ import {
   ScSchedulerNext,
   ScSchedulerPrevious,
   ScSchedulerTitle,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import {
   SiChevronLeftIcon,
   SiChevronRightIcon,

@@ -19,30 +19,7 @@ import { MessageReactionsEmojiPickerDemo } from './message-reactions-emoji-picke
 })
 export class MessageReactionsEmojiPickerDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal, viewChild } from '@angular/core';
-import {
-  ScButton,
-  ScPopover,
-  ScPopoverPortal,
-  ScPopoverProvider,
-  ScPopoverTrigger,
-  ScSpinner,
-} from '@semantic-components/ui';
-import {
-  type ScEmoji,
-  ScEmojiPicker,
-  ScEmojiPickerAnnouncer,
-  ScEmojiPickerCategory,
-  ScEmojiPickerCategoryHeader,
-  ScEmojiPickerEmoji,
-  ScEmojiPickerEmpty,
-  ScEmojiPickerError,
-  ScEmojiPickerList,
-  ScEmojiPickerLoading,
-  ScEmojiPickerRow,
-  ScEmojiPickerSearch,
-  ScEmojiPickerSearchField,
-  ScEmojiPickerViewport,
-} from '@semantic-components/ui-lab';
+import { ScButton, ScPopover, ScPopoverPortal, ScPopoverProvider, ScPopoverTrigger, ScSpinner, type ScEmoji, ScEmojiPicker, ScEmojiPickerAnnouncer, ScEmojiPickerCategory, ScEmojiPickerCategoryHeader, ScEmojiPickerEmoji, ScEmojiPickerEmpty, ScEmojiPickerError, ScEmojiPickerList, ScEmojiPickerLoading, ScEmojiPickerRow, ScEmojiPickerSearch, ScEmojiPickerSearchField, ScEmojiPickerViewport } from '@semantic-components/ui';
 import {
   SiLoaderCircleIcon,
   SiSearchIcon,

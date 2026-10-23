@@ -9,7 +9,7 @@ import {
   ScTransferListPane,
   ScTransferListSearch,
   ScTransferListSelectAll,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import {
   SiChevronLeftIcon,
   SiChevronRightIcon,

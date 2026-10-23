@@ -1,19 +1,17 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScLabel,
+  ScSignaturePad,
+  ScSignaturePadClear,
+  ScSignaturePadLine,
+  ScSignaturePadSurface,
+  ScSignaturePadText,
   ScTab,
   ScTabContent,
   ScTabList,
   ScTabPanel,
   ScTabs,
 } from '@semantic-components/ui';
-import {
-  ScSignaturePad,
-  ScSignaturePadClear,
-  ScSignaturePadLine,
-  ScSignaturePadSurface,
-  ScSignaturePadText,
-} from '@semantic-components/ui-lab';
 
 /** Without a pointer, type your name: the text is the signature, in the input's font. One pad, two ways in. */
 @Component({

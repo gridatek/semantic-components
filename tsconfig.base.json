@@ -17,30 +17,19 @@
     "ignoreDeprecations": "6.0",
     "baseUrl": ".",
     "paths": {
-      "@semantic-components/ui-lab": ["libs/ui-lab/src/index.ts"],
-      "@semantic-components/ui-lab/animated-counter": [
-        "libs/ui-lab/animated-counter/src/index.ts"
+      "@semantic-components/ui/animated-counter": [
+        "libs/ui/animated-counter/src/index.ts"
       ],
-      "@semantic-components/ui-lab/confetti": [
-        "libs/ui-lab/confetti/src/index.ts"
-      ],
+      "@semantic-components/ui/confetti": ["libs/ui/confetti/src/index.ts"],
       "@semantic-components/ui": ["libs/ui/src/index.ts"],
       "@semantic-components/code": ["libs/code/src/index.ts"],
-      "@semantic-components/ui-lab/carousel": [
-        "libs/ui-lab/carousel/src/index.ts"
+      "@semantic-components/ui/carousel": ["libs/ui/carousel/src/index.ts"],
+      "@semantic-components/ui/phone-input": [
+        "libs/ui/phone-input/src/index.ts"
       ],
-      "@semantic-components/ui-lab/phone-input": [
-        "libs/ui-lab/phone-input/src/index.ts"
-      ],
-      "@semantic-components/ui-lab/data-table": [
-        "libs/ui-lab/data-table/src/index.ts"
-      ],
-      "@semantic-components/ui-lab/qr-code": [
-        "libs/ui-lab/qr-code/src/index.ts"
-      ],
-      "@semantic-components/ui-lab/pdf-viewer": [
-        "libs/ui-lab/pdf-viewer/src/index.ts"
-      ],
+      "@semantic-components/ui/data-table": ["libs/ui/data-table/src/index.ts"],
+      "@semantic-components/ui/qr-code": ["libs/ui/qr-code/src/index.ts"],
+      "@semantic-components/ui/pdf-viewer": ["libs/ui/pdf-viewer/src/index.ts"],
       "@semantic-components/editor": ["libs/editor/src/index.ts"],
       "@semantic-components/editor/align": ["libs/editor/align/src/index.ts"],
       "@semantic-components/editor/bubble-menu": [

@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
-import { ScConfettiTrigger } from '@semantic-components/ui-lab/confetti';
+import { ScConfettiTrigger } from '@semantic-components/ui/confetti';
 
 /** Any CSS colours, circles and squares, bigger pieces, a wider spread. */
 @Component({

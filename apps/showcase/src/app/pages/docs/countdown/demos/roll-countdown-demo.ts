@@ -3,7 +3,7 @@ import {
   ScCountdown,
   ScCountdownText,
   ScCountdownUnit,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 /** Each digit slides to the next — still, for anyone who asks for less motion. */
 @Component({

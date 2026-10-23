@@ -19,17 +19,7 @@ import { BasicMessageDemo } from './basic-message-demo';
 })
 export class BasicMessageDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScAvatar, ScAvatarFallback } from '@semantic-components/ui';
-import {
-  ScBubble,
-  ScBubbleContent,
-  ScMessage,
-  ScMessageAvatar,
-  ScMessageContent,
-  ScMessageFooter,
-  ScMessageGroup,
-  ScMessageHeader,
-} from '@semantic-components/ui-lab';
+import { ScAvatar, ScAvatarFallback, ScBubble, ScBubbleContent, ScMessage, ScMessageAvatar, ScMessageContent, ScMessageFooter, ScMessageGroup, ScMessageHeader } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-basic-message-demo',

@@ -26,7 +26,7 @@ import {
   ScSignaturePadRedo,
   ScSignaturePadSurface,
   ScSignaturePadUndo,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { SiRedo2Icon, SiUndo2Icon } from '@semantic-icons/lucide-icons';
 
 /** Sign with a mouse, a finger or a pen: the ink follows its speed, or the pen's pressure. Undo, redo, clear — or, focused, Ctrl+Z, Ctrl+Shift+Z and Delete. */

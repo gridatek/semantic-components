@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScAnimatedCounter } from '@semantic-components/ui-lab/animated-counter';
+import { ScAnimatedCounter } from '@semantic-components/ui/animated-counter';
 
 /** start="visible": landing-page figures that count up from zero when they are first scrolled into view. */
 @Component({

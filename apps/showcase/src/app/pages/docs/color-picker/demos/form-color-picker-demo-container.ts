@@ -21,25 +21,7 @@ export class FormColorPickerDemoContainer {
   readonly code = `import { DecimalPipe } from '@angular/common';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, FormRoot, form, required } from '@angular/forms/signals';
-import {
-  ScButton,
-  ScField,
-  ScFieldErrors,
-  ScLabel,
-  ScPopover,
-  ScPopoverPortal,
-  ScPopoverProvider,
-  ScPopoverTrigger,
-} from '@semantic-components/ui';
-import {
-  ScColorPicker,
-  ScColorPickerArea,
-  ScColorPickerField,
-  ScColorPickerOption,
-  ScColorPickerSlider,
-  ScColorPickerSwatch,
-  ScColorPickerSwatches,
-} from '@semantic-components/ui-lab';
+import { ScButton, ScField, ScFieldErrors, ScLabel, ScPopover, ScPopoverPortal, ScPopoverProvider, ScPopoverTrigger, ScColorPicker, ScColorPickerArea, ScColorPickerField, ScColorPickerOption, ScColorPickerSlider, ScColorPickerSwatch, ScColorPickerSwatches } from '@semantic-components/ui';
 
 /** A [formField]: the trigger shows the colour, the picker opens in a popover; required in the schema. */
 @Component({

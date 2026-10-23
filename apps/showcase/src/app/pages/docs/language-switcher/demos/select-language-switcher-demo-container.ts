@@ -15,7 +15,7 @@ import { SelectLanguageSwitcherDemo } from './select-language-switcher-demo';
 })
 export class SelectLanguageSwitcherDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScLanguageSelect } from '@semantic-components/ui-lab';
+import { ScLanguageSelect } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-select-language-switcher-demo',

@@ -9,7 +9,7 @@ import {
   ScImageAnnotatorTextInput,
   ScImageAnnotatorTool,
   ScImageAnnotatorUndo,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import {
   SiMousePointer2Icon,
   SiMoveUpRightIcon,

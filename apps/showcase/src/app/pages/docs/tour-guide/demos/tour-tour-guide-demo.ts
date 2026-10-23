@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScButton, ScInput } from '@semantic-components/ui';
 import {
+  ScButton,
+  ScInput,
   ScTourGuide,
   ScTourGuideClose,
   ScTourGuideDescription,
@@ -8,7 +9,7 @@ import {
   ScTourGuidePrevious,
   ScTourGuideStep,
   ScTourGuideTitle,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 /** A welcome (centred, no target), three steps on their targets — the page dimmed but for each — and a farewell. ← → step; Escape, or the ×, ends it. */

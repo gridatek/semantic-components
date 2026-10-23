@@ -22,7 +22,7 @@ export class ChatInfiniteScrollDemoContainer {
 import {
   ScInfiniteScroll,
   ScInfiniteScrollStatus,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 interface Message {
   readonly id: number;

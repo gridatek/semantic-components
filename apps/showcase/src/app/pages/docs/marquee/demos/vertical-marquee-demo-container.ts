@@ -19,7 +19,7 @@ import { VerticalMarqueeDemo } from './vertical-marquee-demo';
 })
 export class VerticalMarqueeDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScMarquee, ScMarqueeContent } from '@semantic-components/ui-lab';
+import { ScMarquee, ScMarqueeContent } from '@semantic-components/ui';
 
 /** A column, going up: give it a height. */
 @Component({

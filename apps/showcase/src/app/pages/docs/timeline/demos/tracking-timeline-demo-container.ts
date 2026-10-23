@@ -27,7 +27,7 @@ import {
   type ScTimelineStatus,
   ScTimelineTime,
   ScTimelineTitle,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import {
   SiCheckIcon,
   SiHouseIcon,

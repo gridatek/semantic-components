@@ -1,0 +1,21 @@
+import { Component, ViewEncapsulation, computed, input } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { cn } from '../utils/cn/cn';
+
+@Component({
+  selector: 'div[scAuthLayout]',
+  imports: [RouterOutlet],
+  template: ` <router-outlet /> `,
+  host: {
+    '[class]': 'class()',
+  },
+  styles: ``,
+  encapsulation: ViewEncapsulation.None,
+})
+export class AuthLayout {
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
+
+  protected readonly class = computed(() => cn('block', this.classInput()));
+}

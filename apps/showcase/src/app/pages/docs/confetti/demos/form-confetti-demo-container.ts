@@ -27,7 +27,7 @@ import {
   ScInput,
   ScLabel,
 } from '@semantic-components/ui';
-import { ScConfetti } from '@semantic-components/ui-lab/confetti';
+import { ScConfetti } from '@semantic-components/ui/confetti';
 
 /** The service, from code: when the form is sent, sides() — and your words for screen readers. */
 @Component({

@@ -174,7 +174,7 @@ import {
   ScPdfViewerZoomIn,
   ScPdfViewerZoomOut,
   ScPdfViewerZoomSelect,
-} from '@semantic-components/ui-lab/pdf-viewer';
+} from '@semantic-components/ui/pdf-viewer';
 import {
   SiArrowDownIcon,
   SiArrowLeftIcon,

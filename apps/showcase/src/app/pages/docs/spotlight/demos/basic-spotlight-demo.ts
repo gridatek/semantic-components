@@ -1,11 +1,11 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScButton } from '@semantic-components/ui';
 import {
+  ScButton,
   ScSpotlight,
   ScSpotlightClose,
   ScSpotlightDescription,
   ScSpotlightTitle,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { SiDownloadIcon, SiXIcon } from '@semantic-icons/lucide-icons';
 
 /** A new feature, in the spotlight: the page dimmed and inert but for it, a card beside it, named by its title. Escape, a click on the dim, or Got it. */

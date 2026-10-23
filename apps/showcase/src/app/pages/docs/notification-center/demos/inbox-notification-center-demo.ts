@@ -1,12 +1,6 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
-  ScPopover,
-  ScPopoverPortal,
-  ScPopoverProvider,
-  ScPopoverTrigger,
-} from '@semantic-components/ui';
-import {
   type ScNotification,
   ScNotificationActions,
   ScNotificationCenter,
@@ -27,7 +21,11 @@ import {
   ScNotificationTime,
   ScNotificationTitle,
   ScNotificationUnread,
-} from '@semantic-components/ui-lab';
+  ScPopover,
+  ScPopoverPortal,
+  ScPopoverProvider,
+  ScPopoverTrigger,
+} from '@semantic-components/ui';
 import {
   SiBellIcon,
   SiBellOffIcon,

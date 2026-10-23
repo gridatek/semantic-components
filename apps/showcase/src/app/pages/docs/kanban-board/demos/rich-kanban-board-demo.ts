@@ -4,6 +4,11 @@ import {
   ScAvatarFallback,
   ScBadge,
   ScButton,
+  ScKanbanBoard,
+  type ScKanbanBoardAnnouncement,
+  type ScKanbanBoardValue,
+  ScKanbanCard,
+  ScKanbanColumn,
   ScMenu,
   ScMenuContent,
   ScMenuItem,
@@ -11,13 +16,6 @@ import {
   ScMenuProvider,
   ScMenuTrigger,
 } from '@semantic-components/ui';
-import {
-  ScKanbanBoard,
-  type ScKanbanBoardAnnouncement,
-  type ScKanbanBoardValue,
-  ScKanbanCard,
-  ScKanbanColumn,
-} from '@semantic-components/ui-lab';
 import { SiEllipsisIcon } from '@semantic-icons/lucide-icons';
 
 interface Task {

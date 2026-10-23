@@ -1,12 +1,12 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScButton } from '@semantic-components/ui';
 import {
+  ScButton,
   ScStatCard,
   ScStatCardDescription,
   ScStatCardLabel,
   ScStatCardValue,
-} from '@semantic-components/ui-lab';
-import { ScAnimatedCounter } from '@semantic-components/ui-lab/animated-counter';
+} from '@semantic-components/ui';
+import { ScAnimatedCounter } from '@semantic-components/ui/animated-counter';
 
 /** In the stat card’s value: the figure moves to its new value as the data comes in. */
 @Component({

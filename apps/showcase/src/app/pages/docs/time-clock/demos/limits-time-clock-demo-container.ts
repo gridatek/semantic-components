@@ -23,7 +23,7 @@ import {
   ScTimeClock,
   ScTimeClockDial,
   ScTimeClockHeader,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 /** minTime and maxTime: the hours and minutes outside them are dimmed and cannot be picked. Here, 9:00 to 17:30, every quarter hour. */
 @Component({

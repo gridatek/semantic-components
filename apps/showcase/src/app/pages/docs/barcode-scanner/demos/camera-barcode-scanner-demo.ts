@@ -5,7 +5,7 @@ import {
   ScBarcodeScannerOverlay,
   ScBarcodeScannerToggle,
   ScBarcodeScannerVideo,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { SiCameraIcon, SiCameraOffIcon } from '@semantic-icons/lucide-icons';
 
 /** The camera, each code outlined where it is; each new one comes out of (detected) — here, said in a live region. */

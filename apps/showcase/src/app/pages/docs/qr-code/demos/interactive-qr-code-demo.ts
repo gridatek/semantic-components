@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import { ScButton, ScInput } from '@semantic-components/ui';
-import { ScQrCode } from '@semantic-components/ui-lab/qr-code';
+import { ScQrCode } from '@semantic-components/ui/qr-code';
 
 @Component({
   selector: 'app-interactive-qr-code-demo',

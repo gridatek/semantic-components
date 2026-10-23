@@ -22,7 +22,7 @@ export class DownloadQrCodeDemoContainer {
 import {
   ScQrCode,
   ScQrCodeDownload,
-} from '@semantic-components/ui-lab/qr-code';
+} from '@semantic-components/ui/qr-code';
 import { SiDownloadIcon } from '@semantic-icons/lucide-icons';
 
 @Component({

@@ -7,7 +7,7 @@ import {
   ScVideoPlayerProgress,
   ScVideoPlayerSeek,
   ScVideoPlayerTime,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { SiPauseIcon, SiPlayIcon } from '@semantic-icons/lucide-icons';
 
 /** Only what you put in: play, the seek bar, the time. */

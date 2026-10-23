@@ -1,11 +1,12 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScButton, ScInput } from '@semantic-components/ui';
 import {
+  ScButton,
+  ScInput,
   ScSpotlight,
   ScSpotlightClose,
   ScSpotlightDescription,
   ScSpotlightTitle,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 /** The element stays usable through the cutout — type in the search while it is lit; the rest of the page stays dimmed and blocked. Escape still closes. */

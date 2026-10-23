@@ -110,7 +110,7 @@ The pagination component can automatically calculate and generate page numbers w
 
 ```typescript
 import { Component, signal } from '@angular/core';
-import { ScPaginationChange } from '@semantic-components/ui-lab';
+import { ScPaginationChange } from '@semantic-components/ui';
 
 @Component({
   template: `
@@ -231,7 +231,7 @@ Use `ScPaginationPageSizeSelect` to allow users to change the number of items di
 
 ```typescript
 import { Component, signal } from '@angular/core';
-import { ScPaginationChange } from '@semantic-components/ui-lab';
+import { ScPaginationChange } from '@semantic-components/ui';
 
 @Component({
   template: `

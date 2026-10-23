@@ -24,7 +24,7 @@ import {
   ScOrgChartCard,
   ScOrgChartGroup,
   ScOrgChartItem,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 /** The selected person, two-way through [(value)] — Enter, Space or a click — and their details beside the chart. */
 @Component({

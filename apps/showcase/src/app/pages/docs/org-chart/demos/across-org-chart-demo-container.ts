@@ -24,7 +24,7 @@ import {
   ScOrgChartCard,
   ScOrgChartGroup,
   ScOrgChartItem,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 /** direction="across": reports at the inline end — on the right, or on the left in a right-to-left page. */
 @Component({

@@ -1,10 +1,12 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScField, ScLabel, ScTimeInput } from '@semantic-components/ui';
 import {
+  ScField,
+  ScLabel,
   ScTimeClock,
   ScTimeClockDial,
   ScTimeClockHeader,
-} from '@semantic-components/ui-lab';
+  ScTimeInput,
+} from '@semantic-components/ui';
 
 /** One value for a time input and the clock: type it, or pick it. */
 @Component({

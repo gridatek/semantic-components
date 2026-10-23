@@ -18,7 +18,7 @@ export class BasicToggleLanguageSwitcherDemoContainer {
 import {
   ScLanguageService,
   ScLanguageToggle,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { SiGlobeIcon } from '@semantic-icons/lucide-icons';
 
 @Component({

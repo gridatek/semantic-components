@@ -20,7 +20,7 @@ import { OnceIntersectionObserverDemo } from './once-intersection-observer-demo'
 })
 export class OnceIntersectionObserverDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScIntersectionObserver } from '@semantic-components/ui-lab';
+import { ScIntersectionObserver } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-once-intersection-observer-demo',
