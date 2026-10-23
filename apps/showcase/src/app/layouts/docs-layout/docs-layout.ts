@@ -213,6 +213,17 @@ import { ConfigService } from '../../services/config.service';
                     <li scSidebarMenuSubItem>
                       <a
                         scSidebarMenuSubButton
+                        routerLink="/docs/getting-started/presets"
+                        routerLinkActive
+                        #presetsRla="routerLinkActive"
+                        [isActive]="presetsRla.isActive"
+                      >
+                        <span>Presets</span>
+                      </a>
+                    </li>
+                    <li scSidebarMenuSubItem>
+                      <a
+                        scSidebarMenuSubButton
                         routerLink="/docs/getting-started/charts"
                         routerLinkActive
                         #chartsRla="routerLinkActive"
