@@ -123,7 +123,25 @@ import { TocHeading } from '../../components/toc/toc-heading';
       <div scSeparator></div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>4. Install icons</h2>
+        <h2 scHeading appToc>4. Install the font</h2>
+        <p class="text-muted-foreground">
+          The theme's font is Geist, as in shadcn/ui:
+        </p>
+        <app-package-manager-install packages="@fontsource-variable/geist" />
+        <p class="text-muted-foreground">
+          Your
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code>
+          imports it (it's in the file to copy, UI › Configure styles):
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >&#64;import '&#64;fontsource-variable/geist';</code
+          >
+        </p>
+      </section>
+
+      <div scSeparator></div>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>5. Install icons</h2>
         <p class="text-muted-foreground">
           The examples use
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
@@ -141,7 +159,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
       <div scSeparator></div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>5. Polyfill Temporal</h2>
+        <h2 scHeading appToc>6. Polyfill Temporal</h2>
         <p class="text-muted-foreground">
           The date components use the browser's
           <a

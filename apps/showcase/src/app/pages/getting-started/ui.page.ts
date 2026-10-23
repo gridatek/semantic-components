@@ -61,21 +61,16 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
       <section class="space-y-4">
         <h2 scHeading appToc>2. Configure styles</h2>
         <p class="text-muted-foreground">
-          As in shadcn/ui, the theme is your app's: its
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code>
-          imports the Angular CDK overlay's styles (first: a
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">url()</code>
-          import), Tailwind, tw-animate-css and shadcn's utilities, then the
-          library's styles:
+          As in shadcn/ui, the theme is your app's. Copy this into your
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code
+          >: shadcn's nova theme (colors, radius, font) with our additions
+          marked "Not shadcn's", the library's styles, and the Tailwind sources.
         </p>
         <div scCodeBlock>
           <div scCodeBlockHeader>
-            <div scCodeBlockTitle>css</div>
+            <div scCodeBlockTitle>styles.css</div>
             <div scCodeBlockActions>
-              <button
-                [scCodeBlockCopy]="stylesImportsCode"
-                #copy2="scCodeBlockCopy"
-              >
+              <button [scCodeBlockCopy]="stylesCode" #copy2="scCodeBlockCopy">
                 @if (copy2.copied()) {
                   <svg siCheckIcon></svg>
                 } @else {
@@ -85,44 +80,24 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
               </button>
             </div>
           </div>
-          <pre
-            scCodeBlockContent
-            [code]="stylesImportsCode"
-            language="css"
-          ></pre>
+          <pre scCodeBlockContent [code]="stylesCode" language="css"></pre>
         </div>
-
         <p class="text-muted-foreground">
-          Below them, add a shadcn theme — its design tokens: colors, radius,
-          fonts. Take it from the manual installation guide, or from any shadcn
-          theme:
-        </p>
-        <a
-          scLink
-          variant="outline"
-          href="https://ui.shadcn.com/docs/installation/manual#configure-styles"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          shadcn/ui - Manual Installation (Configure styles)
-        </a>
-        <p class="text-muted-foreground">
-          Then add what shadcn's theme does not have: the toast's success and
-          warning colors, and
+          The components use nova. For another preset, give it when the app
+          starts, and point the second
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >interpolate-size</code
+            >&#64;source</code
           >
-          so collapsibles can animate their height:
+          at its file (<code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >…-preset-styles-lyra.mjs</code
+          >):
         </p>
         <div scCodeBlock>
           <div scCodeBlockHeader>
-            <div scCodeBlockTitle>css</div>
+            <div scCodeBlockTitle>ts</div>
             <div scCodeBlockActions>
-              <button
-                [scCodeBlockCopy]="stylesTokensCode"
-                #copy3="scCodeBlockCopy"
-              >
-                @if (copy3.copied()) {
+              <button [scCodeBlockCopy]="presetCode" #copy5="scCodeBlockCopy">
+                @if (copy5.copied()) {
                   <svg siCheckIcon></svg>
                 } @else {
                   <svg siCopyIcon></svg>
@@ -133,8 +108,8 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
           </div>
           <pre
             scCodeBlockContent
-            [code]="stylesTokensCode"
-            language="css"
+            [code]="presetCode"
+            language="typescript"
           ></pre>
         </div>
       </section>
@@ -217,72 +192,6 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
       <div scSeparator></div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>3. Configure Tailwind source</h2>
-        <p class="text-muted-foreground">
-          Add the library and your preset as Tailwind sources so their classes
-          are included in the build — the preset's file only, so Tailwind scans
-          that one preset. Add this to your
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code
-          >:
-        </p>
-        <div scCodeBlock>
-          <div scCodeBlockHeader>
-            <div scCodeBlockTitle>css</div>
-            <div scCodeBlockActions>
-              <button [scCodeBlockCopy]="sourceCode" #copy4="scCodeBlockCopy">
-                @if (copy4.copied()) {
-                  <svg siCheckIcon></svg>
-                } @else {
-                  <svg siCopyIcon></svg>
-                }
-                <span class="sr-only">Copy to clipboard</span>
-              </button>
-            </div>
-          </div>
-          <pre scCodeBlockContent [code]="sourceCode" language="css"></pre>
-        </div>
-        <p class="text-muted-foreground text-sm">
-          Adjust the path to
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >node_modules</code
-          >
-          based on your project structure.
-        </p>
-        <p class="text-muted-foreground">
-          The components use nova. For another preset, give it when the app
-          starts, and point the second
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >&#64;source</code
-          >
-          at its file (<code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >…-preset-styles-lyra.mjs</code
-          >):
-        </p>
-        <div scCodeBlock>
-          <div scCodeBlockHeader>
-            <div scCodeBlockTitle>ts</div>
-            <div scCodeBlockActions>
-              <button [scCodeBlockCopy]="presetCode" #copy5="scCodeBlockCopy">
-                @if (copy5.copied()) {
-                  <svg siCheckIcon></svg>
-                } @else {
-                  <svg siCopyIcon></svg>
-                }
-                <span class="sr-only">Copy to clipboard</span>
-              </button>
-            </div>
-          </div>
-          <pre
-            scCodeBlockContent
-            [code]="presetCode"
-            language="typescript"
-          ></pre>
-        </div>
-      </section>
-
-      <div scSeparator></div>
-
-      <section class="space-y-4">
         <h2 scHeading appToc>Usage</h2>
         <p class="text-muted-foreground">
           Import and use components in your Angular templates:
@@ -294,35 +203,179 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
   encapsulation: ViewEncapsulation.None,
 })
 export default class UiPage {
-  readonly stylesImportsCode = `@import url("@angular/cdk/overlay-prebuilt.css");
-@import "tailwindcss";
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
-@import "@semantic-components/ui/styles";`;
+  readonly stylesCode = `@import url('@angular/cdk/overlay-prebuilt.css');
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+@import '@fontsource-variable/geist';
+@import '@semantic-components/ui/styles';
 
-  readonly stylesTokensCode = `@theme inline {
+/* The library and your preset (its file only): Tailwind skips node_modules.
+   Adjust the path to node_modules to your project. */
+@source '../node_modules/@semantic-components/ui';
+@source '../node_modules/@semantic-components/preset-styles/fesm2022/semantic-components-preset-styles-nova.mjs';
+
+/*
+ * The theme: shadcn's nova, with our differences marked "Not shadcn's":
+ * tokens of ours, two colors darkened for contrast (WCAG AA).
+ */
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-heading: var(--font-sans);
+  --font-sans: 'Geist Variable', sans-serif;
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  /* Not shadcn's: the confetti's colors, as the charts' (bright: the charts' are grey). */
+  --color-confetti-1: var(--confetti-1);
+  --color-confetti-2: var(--confetti-2);
+  --color-confetti-3: var(--confetti-3);
+  --color-confetti-4: var(--confetti-4);
+  --color-confetti-5: var(--confetti-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  /* Not shadcn's: the toast's success and warning. */
   --color-success: var(--success);
   --color-warning: var(--warning);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
 :root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  /* Not shadcn's (0.556): 4.5:1 on the muted background (inactive tabs…). */
+  --muted-foreground: oklch(0.54 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  /* Not shadcn's (0.577): 4.5:1 for text-destructive on bg-destructive/10. */
+  --destructive: oklch(0.52 0.245 27.325);
+  /* Not shadcn's: the toast's success and warning text, 4.5:1 on the popover
+     even at 90% opacity. */
   --success: oklch(0.49 0.14 150);
   --warning: oklch(0.52 0.15 49);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  /* Not shadcn's: the confetti's colors. */
+  --confetti-1: oklch(0.646 0.222 41.116);
+  --confetti-2: oklch(0.6 0.118 184.704);
+  --confetti-3: oklch(0.488 0.243 264.376);
+  --confetti-4: oklch(0.828 0.189 84.429);
+  --confetti-5: oklch(0.645 0.246 16.439);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
 }
 
 .dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
   --success: oklch(0.792 0.209 151.711);
   --warning: oklch(0.828 0.189 84.429);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --confetti-1: oklch(0.705 0.213 47.604);
+  --confetti-2: oklch(0.696 0.17 162.48);
+  --confetti-3: oklch(0.627 0.265 303.9);
+  --confetti-4: oklch(0.852 0.199 91.936);
+  --confetti-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
 }
 
 @layer base {
   * {
+    @apply border-border outline-ring/50;
+    /* Not shadcn's: lets heights animate to and from auto (collapsible, accordion). */
     interpolate-size: allow-keywords;
   }
-}`;
-
-  readonly sourceCode = `@source "../node_modules/@semantic-components/ui";
-@source "../node_modules/@semantic-components/preset-styles/fesm2022/semantic-components-preset-styles-nova.mjs";`;
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+`;
 
   readonly presetCode = `import { lyra } from '@semantic-components/preset-styles/lyra';
 import { provideScConfig } from '@semantic-components/ui';
