@@ -38,6 +38,8 @@ export async function expectHydrated(page: Page, url: string): Promise<void> {
   // Dev mode logs it once the app has hydrated.
   const hydrated = page.waitForEvent('console', {
     predicate: (m) => m.text().startsWith('Angular hydrated'),
+    // A page that breaks never hydrates: say so soon, not at the test's end.
+    timeout: 10_000,
   });
   await page.goto(url);
   await hydrated;

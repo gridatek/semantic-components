@@ -59,7 +59,9 @@ jobs:
 
   # The apps rendered on the server (the `ssr` build, on its Node server), then
   # hydrated: every e2e test again, plus `ssr.spec.ts` (every page hydrates),
-  # in Chromium. Not required: the apps stay static by default.
+  # in Chromium. Not required: the apps stay static by default. Its own
+  # Playwright flags: the preset's CI defaults (1 worker, 2 retries, a silent
+  # reporter) made it run for hours — a failure here is a result, not a flake.
   ssr:
     runs-on: ubuntu-latest
     timeout-minutes: 45
@@ -83,11 +85,11 @@ jobs:
         run: npx playwright install --with-deps chromium
 
       - name: E2E tests (showcase, SSR)
-        run: npx playwright test -c apps/showcase-e2e/playwright.config.ts --project=chromium
+        run: npx playwright test -c apps/showcase-e2e/playwright.config.ts --project=chromium --workers=4 --retries=0 --reporter=line
 
       - name: E2E tests (blocks, SSR)
         if: ${{ !cancelled() }}
-        run: npx playwright test -c apps/blocks-e2e/playwright.config.ts --project=chromium
+        run: npx playwright test -c apps/blocks-e2e/playwright.config.ts --project=chromium --workers=4 --retries=0 --reporter=line
 
       # What failed on the server: Angular logs it, the page still answers 200.
       - name: Server errors
