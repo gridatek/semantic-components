@@ -174,7 +174,8 @@ export class ScPdfScripting {
     this.pendingOpen.clear();
     this.printFinished?.();
     this.printFinished = null;
-    window.removeEventListener('updatefromsandbox', this.onUpdate);
+    // No window on the server (where no document was ever opened).
+    globalThis.window?.removeEventListener('updatefromsandbox', this.onUpdate);
     if (!sandbox) return;
     try {
       const instance = await sandbox;

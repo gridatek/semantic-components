@@ -436,7 +436,8 @@ export class ScPdfViewerCanvas {
         'scroll',
         this.onScroll,
       );
-      cancelAnimationFrame(this.detailFrame);
+      // A frame only if one was asked for — never on the server, which has none.
+      if (this.detailFrame) cancelAnimationFrame(this.detailFrame);
       this.cancelAllRenderTasks();
       if (this.renderTimeout) {
         clearTimeout(this.renderTimeout);
