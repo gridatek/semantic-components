@@ -1,4 +1,4 @@
-# @semantic-components/pdf-viewer
+# @semantic-components/ui-lab/pdf-viewer
 
 A composable PDF viewer for the Semantic Components library, built on PDF.js (`pdfjs-dist`): navigation, zoom, find, forms, annotations, saving, printing, presentation mode and page organisation.
 
@@ -17,7 +17,7 @@ You write the markup — usually `@semantic-components/ui` components — and al
 ## Usage
 
 ```ts
-import { ScPdfViewer, ScPdfViewerCanvas, ScPdfViewerContainer, ScPdfViewerContent, ScPdfViewerToolbar } from '@semantic-components/pdf-viewer';
+import { ScPdfViewer, ScPdfViewerCanvas, ScPdfViewerContainer, ScPdfViewerContent, ScPdfViewerToolbar } from '@semantic-components/ui-lab/pdf-viewer';
 ```
 
 Also import PDF.js's viewer styles in your `styles.css`: `@import 'pdfjs-dist/web/pdf_viewer.css';`

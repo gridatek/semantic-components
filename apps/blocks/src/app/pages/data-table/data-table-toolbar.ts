@@ -7,15 +7,15 @@ import {
   output,
 } from '@angular/core';
 import {
-  ScDataTableColumnVisibility,
-  ScDataTableGlobalFilter,
-} from '@semantic-components/data-table';
-import {
   ScButton,
   ScCheckbox,
   ScCheckboxField,
   ScInput,
 } from '@semantic-components/ui';
+import {
+  ScDataTableColumnVisibility,
+  ScDataTableGlobalFilter,
+} from '@semantic-components/ui-lab/data-table';
 import type { DataTableFeatures } from './data-table-features';
 import type { User } from './user.service';
 

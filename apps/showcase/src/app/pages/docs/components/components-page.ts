@@ -131,10 +131,6 @@ export default class ComponentsPage {
       bg: 'color-mix(in oklch, var(--chart-2) 15%, transparent)',
       text: 'var(--chart-2)',
     },
-    carousel: {
-      bg: 'color-mix(in oklch, var(--chart-3) 15%, transparent)',
-      text: 'var(--chart-3)',
-    },
     code: {
       bg: 'color-mix(in oklch, var(--chart-4) 15%, transparent)',
       text: 'var(--chart-4)',
@@ -146,22 +142,6 @@ export default class ComponentsPage {
     charts: {
       bg: 'color-mix(in oklch, var(--chart-3) 15%, transparent)',
       text: 'var(--chart-3)',
-    },
-    'phone-input': {
-      bg: 'color-mix(in oklch, var(--chart-5) 15%, transparent)',
-      text: 'var(--chart-5)',
-    },
-    'data-table': {
-      bg: 'color-mix(in oklch, var(--chart-1) 15%, transparent)',
-      text: 'var(--chart-1)',
-    },
-    'qr-code': {
-      bg: 'color-mix(in oklch, var(--chart-2) 15%, transparent)',
-      text: 'var(--chart-2)',
-    },
-    'pdf-viewer': {
-      bg: 'color-mix(in oklch, var(--chart-4) 15%, transparent)',
-      text: 'var(--chart-4)',
     },
     'third-party': {
       bg: 'color-mix(in oklch, var(--chart-4) 15%, transparent)',

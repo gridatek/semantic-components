@@ -29,7 +29,7 @@ import {
   ScPdfViewerPageInput,
   ScPdfViewerSpacer,
   ScPdfViewerToolbar,
-} from '@semantic-components/pdf-viewer';
+} from '@semantic-components/ui-lab/pdf-viewer';
 import { ScButton, ScInput, ScSpinner, cn } from '@semantic-components/ui';
 import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
 

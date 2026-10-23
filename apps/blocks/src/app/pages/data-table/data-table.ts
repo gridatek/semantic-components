@@ -20,15 +20,6 @@ import {
   signal,
 } from '@angular/core';
 import {
-  ScDataTableCell,
-  ScDataTableColumnFilter,
-  ScDataTableHeaderCell,
-  ScDataTableRow,
-  ScDataTableSelectAll,
-  ScDataTableSelectRow,
-  ScDataTableSortButton,
-} from '@semantic-components/data-table';
-import {
   ScBadge,
   ScButton,
   ScCheckbox,
@@ -43,6 +34,15 @@ import {
   ScTableRow,
 } from '@semantic-components/ui';
 import { ScButtonPattern } from '@semantic-components/ui-lab';
+import {
+  ScDataTableCell,
+  ScDataTableColumnFilter,
+  ScDataTableHeaderCell,
+  ScDataTableRow,
+  ScDataTableSelectAll,
+  ScDataTableSelectRow,
+  ScDataTableSortButton,
+} from '@semantic-components/ui-lab/data-table';
 import {
   SiArrowDownIcon,
   SiArrowUpIcon,

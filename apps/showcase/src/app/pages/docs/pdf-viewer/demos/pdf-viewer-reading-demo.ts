@@ -6,6 +6,16 @@ import {
   signal,
 } from '@angular/core';
 import {
+  ScInput,
+  ScSpinner,
+  ScSwitch,
+  ScSwitchField,
+  ScToggleGroup,
+  ScToggleGroupItem,
+  ScTooltipTrigger,
+  cn,
+} from '@semantic-components/ui';
+import {
   type ScPdfPageColors,
   ScPdfViewer,
   ScPdfViewerBack,
@@ -18,17 +28,7 @@ import {
   ScPdfViewerPageInput,
   ScPdfViewerSpacer,
   ScPdfViewerToolbar,
-} from '@semantic-components/pdf-viewer';
-import {
-  ScInput,
-  ScSpinner,
-  ScSwitch,
-  ScSwitchField,
-  ScToggleGroup,
-  ScToggleGroupItem,
-  ScTooltipTrigger,
-  cn,
-} from '@semantic-components/ui';
+} from '@semantic-components/ui-lab/pdf-viewer';
 import {
   SiArrowLeftIcon,
   SiArrowRightIcon,

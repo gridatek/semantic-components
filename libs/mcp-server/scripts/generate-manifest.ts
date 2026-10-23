@@ -151,11 +151,37 @@ function scanLibrary(
       if (!entry.isDirectory()) continue;
       const entryDir = join(libDir, entry.name);
       if (!existsSync(join(entryDir, 'ng-package.json'))) continue;
+      if (existsSync(join(entryDir, 'src', 'lib'))) continue;
       main.exports.push(...resolveExportsRecursively(join(entryDir, 'src')));
     }
   }
 
   return { name: packageName, components };
+}
+
+/**
+ * Entry points that are libraries of their own (`@semantic-components/ui-lab/editor`,
+ * with a `src/lib` of components): scanned as such, under their import path.
+ */
+function scanEntryLibraries(
+  libDir: string,
+  packageName: string,
+  visiblePaths: Set<string>,
+): LibraryEntry[] {
+  return readdirSync(libDir, { withFileTypes: true })
+    .filter(
+      (entry) =>
+        entry.isDirectory() &&
+        existsSync(join(libDir, entry.name, 'ng-package.json')) &&
+        existsSync(join(libDir, entry.name, 'src', 'lib')),
+    )
+    .map((entry) =>
+      scanLibrary(
+        join(libDir, entry.name),
+        `${packageName}/${entry.name}`,
+        visiblePaths,
+      ),
+    );
 }
 
 function scanGuides(): GuideEntry[] {
@@ -183,20 +209,16 @@ function main() {
   const libs: [string, string][] = [
     ['ui', '@semantic-components/ui'],
     ['ui-lab', '@semantic-components/ui-lab'],
-    ['carousel', '@semantic-components/carousel'],
     ['code', '@semantic-components/code'],
     ['editor', '@semantic-components/editor'],
-    ['phone-input', '@semantic-components/phone-input'],
-    ['data-table', '@semantic-components/data-table'],
-    ['qr-code', '@semantic-components/qr-code'],
-    ['pdf-viewer', '@semantic-components/pdf-viewer'],
   ];
 
   const visiblePaths = loadVisibleComponentPaths();
 
-  const libraries = libs.map(([dir, pkg]) =>
+  const libraries = libs.flatMap(([dir, pkg]) => [
     scanLibrary(join(ROOT, 'libs', dir), pkg, visiblePaths),
-  );
+    ...scanEntryLibraries(join(ROOT, 'libs', dir), pkg, visiblePaths),
+  ]);
 
   const guides = scanGuides();
 

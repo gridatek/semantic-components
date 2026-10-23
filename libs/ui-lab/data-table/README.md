@@ -1,4 +1,4 @@
-# @semantic-components/data-table
+# @semantic-components/ui-lab/data-table
 
 Styled, accessible data table parts for the Semantic Components library, to use with [TanStack Table](https://tanstack.com/table). TanStack owns the logic and state; these parts render and wire it. They're typed structurally, so this package doesn't depend on TanStack or pin its version.
 
@@ -10,5 +10,5 @@ Styled, accessible data table parts for the Semantic Components library, to use 
 ## Usage
 
 ```ts
-import { ScDataTableCell, ScDataTableHeaderCell, ScDataTablePagination, ScDataTableRow, ScDataTableSortButton } from '@semantic-components/data-table';
+import { ScDataTableCell, ScDataTableHeaderCell, ScDataTablePagination, ScDataTableRow, ScDataTableSortButton } from '@semantic-components/ui-lab/data-table';
 ```

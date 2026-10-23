@@ -38,7 +38,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
         <p class="text-muted-foreground">
           Install and configure the
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >&#64;semantic-components/pdf-viewer</code
+            >&#64;semantic-components/ui-lab/pdf-viewer</code
           >
           package. Requires the ui library to be installed first.
         </p>
@@ -52,7 +52,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
           >.
         </p>
         <app-package-manager-install
-          packages="@semantic-components/pdf-viewer pdfjs-dist"
+          packages="@semantic-components/ui-lab pdfjs-dist"
         />
       </section>
 
@@ -206,7 +206,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
 })
 export default class PdfViewerInstallPage {
   readonly stylesCode = `@import 'pdfjs-dist/web/pdf_viewer.css';
-@source "../node_modules/@semantic-components/pdf-viewer";`;
+@source "../node_modules/@semantic-components/ui-lab";`;
 
   readonly assetsCode = `"assets": [
   {

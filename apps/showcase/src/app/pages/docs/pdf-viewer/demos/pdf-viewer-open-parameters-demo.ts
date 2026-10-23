@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation, computed, input } from '@angular/core';
+import { ScButton, ScInput, ScSpinner, cn } from '@semantic-components/ui';
 import {
   ScPdfViewer,
   ScPdfViewerCanvas,
@@ -9,8 +10,7 @@ import {
   ScPdfViewerPageInput,
   ScPdfViewerSpacer,
   ScPdfViewerToolbar,
-} from '@semantic-components/pdf-viewer';
-import { ScButton, ScInput, ScSpinner, cn } from '@semantic-components/ui';
+} from '@semantic-components/ui-lab/pdf-viewer';
 import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
 
 /**

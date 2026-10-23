@@ -9,11 +9,7 @@ All libraries are versioned together:
 - `@semantic-components/ui`
 - `@semantic-components/ui-lab`
 - `@semantic-components/editor`
-- `@semantic-components/carousel`
-- `@semantic-components/phone-input`
-- `@semantic-components/data-table`
-- `@semantic-components/qr-code`
-- `@semantic-components/pdf-viewer`
+- `@semantic-components/charts`
 - `@semantic-components/code`
 
 ## Automated Release (CI)

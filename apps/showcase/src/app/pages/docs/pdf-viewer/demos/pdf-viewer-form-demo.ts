@@ -1,18 +1,5 @@
 import { Component, ViewEncapsulation, computed, input } from '@angular/core';
 import {
-  ScPdfViewer,
-  ScPdfViewerCanvas,
-  ScPdfViewerContainer,
-  ScPdfViewerContent,
-  ScPdfViewerDialog,
-  ScPdfViewerDownload,
-  ScPdfViewerLoading,
-  ScPdfViewerPrint,
-  ScPdfViewerPrintProgress,
-  ScPdfViewerSpacer,
-  ScPdfViewerToolbar,
-} from '@semantic-components/pdf-viewer';
-import {
   ScButton,
   ScDialog,
   ScDialogClose,
@@ -27,6 +14,19 @@ import {
   ScTooltipTrigger,
   cn,
 } from '@semantic-components/ui';
+import {
+  ScPdfViewer,
+  ScPdfViewerCanvas,
+  ScPdfViewerContainer,
+  ScPdfViewerContent,
+  ScPdfViewerDialog,
+  ScPdfViewerDownload,
+  ScPdfViewerLoading,
+  ScPdfViewerPrint,
+  ScPdfViewerPrintProgress,
+  ScPdfViewerSpacer,
+  ScPdfViewerToolbar,
+} from '@semantic-components/ui-lab/pdf-viewer';
 import {
   SiDownloadIcon,
   SiLoaderCircleIcon,

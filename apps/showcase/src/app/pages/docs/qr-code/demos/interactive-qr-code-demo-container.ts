@@ -20,7 +20,7 @@ import { InteractiveQrCodeDemo } from './interactive-qr-code-demo';
 export class InteractiveQrCodeDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
-import { ScQrCode } from '@semantic-components/qr-code';
+import { ScQrCode } from '@semantic-components/ui-lab/qr-code';
 import { ScButton, ScInput } from '@semantic-components/ui';
 
 @Component({

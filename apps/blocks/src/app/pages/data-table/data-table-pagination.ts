@@ -1,6 +1,5 @@
 import type { Table } from '@tanstack/angular-table';
 import { Component, ViewEncapsulation, input } from '@angular/core';
-import { ScDataTablePagination } from '@semantic-components/data-table';
 import {
   ScPagination,
   ScPaginationEllipsis,
@@ -13,6 +12,7 @@ import {
   ScPaginationPageSizeSelect,
   ScPaginationPrevious,
 } from '@semantic-components/ui';
+import { ScDataTablePagination } from '@semantic-components/ui-lab/data-table';
 import {
   SiChevronLeftIcon,
   SiChevronRightIcon,

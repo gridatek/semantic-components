@@ -156,7 +156,7 @@
     "path": "carousel",
     "description": "A slideshow for cycling through elements.",
     "status": "Experimental",
-    "library": "carousel",
+    "library": "ui-lab",
     "category": "Media"
   },
   {
@@ -268,7 +268,7 @@
     "path": "data-table",
     "description": "Styled, accessible parts for TanStack Table data tables.",
     "status": "Experimental",
-    "library": "data-table",
+    "library": "ui-lab",
     "category": "Data Display"
   },
   {
@@ -652,7 +652,7 @@
     "path": "pdf-viewer",
     "description": "Document viewer with navigation and zoom controls.",
     "status": "Experimental",
-    "library": "pdf-viewer",
+    "library": "ui-lab",
     "category": "Media"
   },
   {
@@ -660,7 +660,7 @@
     "path": "phone-input",
     "description": "An input for international phone numbers.",
     "status": "Experimental",
-    "library": "phone-input",
+    "library": "ui-lab",
     "category": "Forms"
   },
   {
@@ -684,7 +684,7 @@
     "path": "qr-code",
     "description": "Generate and display QR codes.",
     "status": "Experimental",
-    "library": "qr-code",
+    "library": "ui-lab",
     "category": "Media"
   },
   {

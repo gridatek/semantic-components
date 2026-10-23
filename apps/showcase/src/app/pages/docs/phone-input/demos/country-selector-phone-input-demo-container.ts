@@ -23,7 +23,7 @@ import {
   ScPhoneInputNumber,
   phoneCountries,
   phoneNumber,
-} from '@semantic-components/phone-input';
+} from '@semantic-components/ui-lab/phone-input';
 import {
   ScCombobox,
   ScComboboxEmpty,

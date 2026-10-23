@@ -4,7 +4,7 @@ import {
   ScQrCode,
   ScQrCodeDownload,
   type ScQrCodeDownloadFormat,
-} from '@semantic-components/qr-code';
+} from '@semantic-components/ui-lab/qr-code';
 
 @Component({
   imports: [ScQrCode, ScQrCodeDownload],

@@ -1,17 +1,7 @@
 export type ComponentStatus = 'Experimental' | 'Developer Preview' | 'Stable';
 
 export type ComponentLibrary =
-  | 'ui'
-  | 'ui-lab'
-  | 'carousel'
-  | 'code'
-  | 'editor'
-  | 'charts'
-  | 'phone-input'
-  | 'data-table'
-  | 'qr-code'
-  | 'pdf-viewer'
-  | 'third-party';
+  'ui' | 'ui-lab' | 'code' | 'editor' | 'charts' | 'third-party';
 
 export type ComponentCategory =
   | 'Forms'

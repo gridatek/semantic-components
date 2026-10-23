@@ -17,18 +17,6 @@ import {
 } from '@tanstack/angular-table';
 import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import {
-  ScDataTableCell,
-  ScDataTableColumnVisibility,
-  ScDataTableGlobalFilter,
-  ScDataTableHeaderCell,
-  ScDataTablePagination,
-  ScDataTableRow,
-  ScDataTableSelectAll,
-  ScDataTableSelectRow,
-  ScDataTableSortButton,
-  dataTableColumnLabel,
-} from '@semantic-components/data-table';
-import {
   ScBadge,
   ScButton,
   ScCheckbox,
@@ -60,6 +48,18 @@ import {
   ScTableHeaderCell,
   ScTableRow,
 } from '@semantic-components/ui';
+import {
+  ScDataTableCell,
+  ScDataTableColumnVisibility,
+  ScDataTableGlobalFilter,
+  ScDataTableHeaderCell,
+  ScDataTablePagination,
+  ScDataTableRow,
+  ScDataTableSelectAll,
+  ScDataTableSelectRow,
+  ScDataTableSortButton,
+  dataTableColumnLabel,
+} from '@semantic-components/ui-lab/data-table';
 import {
   SiArrowDownIcon,
   SiArrowUpIcon,

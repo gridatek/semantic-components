@@ -1,4 +1,4 @@
-# @semantic-components/carousel
+# @semantic-components/ui-lab/carousel
 
 Carousel components built on top of Embla Carousel for the Semantic Components library.
 
@@ -9,5 +9,5 @@ Carousel components built on top of Embla Carousel for the Semantic Components l
 ## Usage
 
 ```ts
-import { ScCarousel, ScCarouselItem, ScCarouselNext, ScCarouselPrevious, ScCarouselTrack, ScCarouselViewport } from '@semantic-components/carousel';
+import { ScCarousel, ScCarouselItem, ScCarouselNext, ScCarouselPrevious, ScCarouselTrack, ScCarouselViewport } from '@semantic-components/ui-lab/carousel';
 ```

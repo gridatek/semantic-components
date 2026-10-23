@@ -1,4 +1,4 @@
-# @semantic-components/phone-input
+# @semantic-components/ui-lab/phone-input
 
 An international phone number input for the Semantic Components library: a country picker and a number field that formats as you type, built on `libphonenumber-js`.
 
@@ -10,5 +10,5 @@ An international phone number input for the Semantic Components library: a count
 ## Usage
 
 ```ts
-import { ScPhoneInput, ScPhoneInputCountry, ScPhoneInputFlag, ScPhoneInputNumber, phoneCountries, phoneNumber } from '@semantic-components/phone-input';
+import { ScPhoneInput, ScPhoneInputCountry, ScPhoneInputFlag, ScPhoneInputNumber, phoneCountries, phoneNumber } from '@semantic-components/ui-lab/phone-input';
 ```

@@ -82,39 +82,23 @@ import { ConfigService } from '../../services/config.service';
           </li>
           <li>
             <strong>&#64;semantic-components/ui-lab</strong>
-            — Extended and experimental components
+            — Extended and experimental components, with entry points for the
+            ones that need a library: carousel (Embla), data table (TanStack
+            Table), PDF viewer (PDF.js), phone input (libphonenumber-js), QR
+            code (uqr), animated counter (Motion), confetti
           </li>
           <li>
             <strong>&#64;semantic-components/charts</strong>
             — Charts powered by SVG
           </li>
           <li>
-            <strong>&#64;semantic-components/carousel</strong>
-            — Carousel powered by Embla Carousel
-          </li>
-          <li>
             <strong>&#64;semantic-components/editor</strong>
             — Rich text editor powered by Tiptap
           </li>
           <li>
-            <strong>&#64;semantic-components/phone-input</strong>
-            — Phone number input powered by libphonenumber-js
-          </li>
-          <li>
-            <strong>&#64;semantic-components/data-table</strong>
-            — Data table parts for TanStack Table
-          </li>
-          <li>
-            <strong>&#64;semantic-components/qr-code</strong>
-            — QR codes generated with uqr
-          </li>
-          <li>
-            <strong>&#64;semantic-components/pdf-viewer</strong>
-            — PDF viewer powered by PDF.js
-          </li>
-          <li>
             <strong>&#64;semantic-components/code</strong>
-            — Code viewer and editor powered by Shiki
+            — Code block, diff viewer and code editor (CodeMirror), highlighted
+            by Shiki
           </li>
           <li>
             <strong>&#64;semantic-components/mcp-server</strong>

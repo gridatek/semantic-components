@@ -26,11 +26,21 @@
       ],
       "@semantic-components/ui": ["libs/ui/src/index.ts"],
       "@semantic-components/code": ["libs/code/src/index.ts"],
-      "@semantic-components/carousel": ["libs/carousel/src/index.ts"],
-      "@semantic-components/phone-input": ["libs/phone-input/src/index.ts"],
-      "@semantic-components/data-table": ["libs/data-table/src/index.ts"],
-      "@semantic-components/qr-code": ["libs/qr-code/src/index.ts"],
-      "@semantic-components/pdf-viewer": ["libs/pdf-viewer/src/index.ts"],
+      "@semantic-components/ui-lab/carousel": [
+        "libs/ui-lab/carousel/src/index.ts"
+      ],
+      "@semantic-components/ui-lab/phone-input": [
+        "libs/ui-lab/phone-input/src/index.ts"
+      ],
+      "@semantic-components/ui-lab/data-table": [
+        "libs/ui-lab/data-table/src/index.ts"
+      ],
+      "@semantic-components/ui-lab/qr-code": [
+        "libs/ui-lab/qr-code/src/index.ts"
+      ],
+      "@semantic-components/ui-lab/pdf-viewer": [
+        "libs/ui-lab/pdf-viewer/src/index.ts"
+      ],
       "@semantic-components/editor": ["libs/editor/src/index.ts"],
       "@semantic-components/editor/align": ["libs/editor/align/src/index.ts"],
       "@semantic-components/editor/bubble-menu": [

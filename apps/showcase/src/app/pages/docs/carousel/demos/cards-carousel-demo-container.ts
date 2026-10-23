@@ -26,7 +26,7 @@ import {
   ScCarouselPrevious,
   ScCarouselTrack,
   ScCarouselViewport,
-} from '@semantic-components/carousel';
+} from '@semantic-components/ui-lab/carousel';
 import { ScCard, ScCardBody } from '@semantic-components/ui';
 import {
   SiChevronLeftIcon,

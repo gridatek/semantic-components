@@ -1,4 +1,4 @@
-# @semantic-components/qr-code
+# @semantic-components/ui-lab/qr-code
 
 QR code components for the Semantic Components library, generated with `uqr`.
 
@@ -9,5 +9,5 @@ QR code components for the Semantic Components library, generated with `uqr`.
 ## Usage
 
 ```ts
-import { ScQrCode, ScQrCodeDownload } from '@semantic-components/qr-code';
+import { ScQrCode, ScQrCodeDownload } from '@semantic-components/ui-lab/qr-code';
 ```

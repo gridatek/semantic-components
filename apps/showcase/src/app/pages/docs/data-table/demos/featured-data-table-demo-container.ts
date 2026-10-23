@@ -43,7 +43,7 @@ import {
   ScDataTableSelectRow,
   ScDataTableSortButton,
   dataTableColumnLabel,
-} from '@semantic-components/data-table';
+} from '@semantic-components/ui-lab/data-table';
 import {
   ScBadge,
   ScButton,

@@ -37,7 +37,7 @@ import { FeaturedDataTableDemoContainer } from '../docs/data-table/demos/feature
         <p class="text-muted-foreground">
           Install and configure the
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >&#64;semantic-components/data-table</code
+            >&#64;semantic-components/ui-lab/data-table</code
           >
           package. Requires the ui library to be installed first.
         </p>
@@ -52,7 +52,7 @@ import { FeaturedDataTableDemoContainer } from '../docs/data-table/demos/feature
           >, which owns the table's logic and state.
         </p>
         <app-package-manager-install
-          packages="@semantic-components/data-table @tanstack/angular-table"
+          packages="@semantic-components/ui-lab @tanstack/angular-table"
         />
       </section>
 
@@ -105,5 +105,5 @@ import { FeaturedDataTableDemoContainer } from '../docs/data-table/demos/feature
 })
 export default class DataTableInstallPage {
   readonly sourceCode =
-    '@source "../node_modules/@semantic-components/data-table";';
+    '@source "../node_modules/@semantic-components/ui-lab";';
 }

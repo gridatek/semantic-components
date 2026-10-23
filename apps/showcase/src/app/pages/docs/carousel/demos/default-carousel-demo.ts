@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { ScCard, ScCardBody } from '@semantic-components/ui';
 import {
   ScCarousel,
   ScCarouselItem,
@@ -6,8 +7,7 @@ import {
   ScCarouselPrevious,
   ScCarouselTrack,
   ScCarouselViewport,
-} from '@semantic-components/carousel';
-import { ScCard, ScCardBody } from '@semantic-components/ui';
+} from '@semantic-components/ui-lab/carousel';
 import {
   SiChevronLeftIcon,
   SiChevronRightIcon,
