@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { Service, inject } from '@angular/core';
+import { Service, inject, isDevMode } from '@angular/core';
 import type { CreateTypes, Options } from 'canvas-confetti';
 
 export type ScConfettiShape = 'square' | 'circle' | 'star';
@@ -30,14 +30,13 @@ export interface ScConfettiFireworksOptions extends ScConfettiOptions {
   readonly duration?: number;
 }
 
-/** The theme's colours, the defaults. */
-const THEME = [
-  '--primary',
-  '--chart-1',
-  '--chart-2',
-  '--chart-3',
-  '--chart-4',
-  '--chart-5',
+/** The theme's confetti colours, the defaults (as shadcn's `--chart-*`). */
+const CONFETTI = [
+  '--confetti-1',
+  '--confetti-2',
+  '--confetti-3',
+  '--confetti-4',
+  '--confetti-5',
 ];
 
 /**
@@ -52,6 +51,8 @@ export class ScConfetti {
   private readonly document = inject(DOCUMENT);
   private fire: Promise<CreateTypes | null> | null = null;
   private canvas: HTMLCanvasElement | null = null;
+  /** The missing colors said once. */
+  private warned = false;
   private running = 0;
 
   /** A burst — from the bottom middle, or `origin`. */
@@ -167,9 +168,16 @@ export class ScConfetti {
 
   private themeColors(): string[] {
     const style = getComputedStyle(this.document.documentElement);
-    return THEME.map((name) => style.getPropertyValue(name).trim()).filter(
-      Boolean,
-    );
+    const colors = CONFETTI.map((name) =>
+      style.getPropertyValue(name).trim(),
+    ).filter(Boolean);
+    if (!colors.length && isDevMode() && !this.warned) {
+      this.warned = true;
+      console.error(
+        'ScConfetti: no theme colors — define --confetti-1 … --confetti-5 in your styles.css (see the confetti README), or pass colors. Using the colors of canvas-confetti.',
+      );
+    }
+    return colors;
   }
 
   /** Any CSS colour, as the library takes it: #rrggbb. */

@@ -34,6 +34,12 @@
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar: var(--sidebar);
   --color-chart-5: var(--chart-5);
+  /* Not shadcn's: the confetti's colors, as the charts' (bright: the charts' are grey). */
+  --color-confetti-1: var(--confetti-1);
+  --color-confetti-2: var(--confetti-2);
+  --color-confetti-3: var(--confetti-3);
+  --color-confetti-4: var(--confetti-4);
+  --color-confetti-5: var(--confetti-5);
   --color-chart-4: var(--chart-4);
   --color-chart-3: var(--chart-3);
   --color-chart-2: var(--chart-2);
@@ -98,6 +104,12 @@
   --chart-3: oklch(0.439 0 0);
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
+  /* Not shadcn's: the confetti's colors. */
+  --confetti-1: oklch(0.646 0.222 41.116);
+  --confetti-2: oklch(0.6 0.118 184.704);
+  --confetti-3: oklch(0.488 0.243 264.376);
+  --confetti-4: oklch(0.828 0.189 84.429);
+  --confetti-5: oklch(0.645 0.246 16.439);
   --radius: 0.625rem;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
@@ -135,6 +147,11 @@
   --chart-3: oklch(0.439 0 0);
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
+  --confetti-1: oklch(0.705 0.213 47.604);
+  --confetti-2: oklch(0.696 0.17 162.48);
+  --confetti-3: oklch(0.627 0.265 303.9);
+  --confetti-4: oklch(0.852 0.199 91.936);
+  --confetti-5: oklch(0.645 0.246 16.439);
   --sidebar: oklch(0.205 0 0);
   --sidebar-foreground: oklch(0.985 0 0);
   --sidebar-primary: oklch(0.488 0.243 264.376);
