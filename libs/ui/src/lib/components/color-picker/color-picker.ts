@@ -111,7 +111,9 @@ export class ScColorPicker implements FormValueControl<string> {
   /** Any CSS colour, in sRGB — or null if it is not one. */
   parse(css: string): ScRgba | null {
     const text = css.trim();
-    if (!text || !CSS.supports('color', text)) return null;
+    // On the server there is no CSS (nor canvas) to read it with: the
+    // browser reads it once it takes over.
+    if (!text || !globalThis.CSS?.supports('color', text)) return null;
     const context = this.canvas();
     if (!context) return null;
     // The browser reads it: an sRGB colour comes back as #rrggbb or rgba().
