@@ -4,6 +4,7 @@ import {
   DestroyRef,
   Directive,
   ElementRef,
+  afterNextRender,
   computed,
   effect,
   inject,
@@ -47,7 +48,9 @@ export class ScEditorBubbleMenu {
   constructor() {
     // Hidden until there is a selection: the plugin shows it, by the text.
     this.element.style.visibility = 'hidden';
-    this.element.remove();
+    // Out of the page once rendered in the browser — not before: the server's
+    // HTML keeps it, so hydration finds it where it was rendered.
+    afterNextRender(() => this.element.remove());
 
     effect((onCleanup) => {
       const editor = this.editor.editorInstance();
