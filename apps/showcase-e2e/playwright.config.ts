@@ -33,11 +33,23 @@ export default defineConfig({
     reuseExistingServer: true,
     cwd: workspaceRoot,
   },
-  projects: process.env['ALL_BROWSERS']
-    ? [
-        { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
-        { name: 'firefox', use: { ...devices['Desktop Firefox'] } },
-        { name: 'webkit', use: { ...devices['Desktop Safari'] } },
-      ]
-    : [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],
+  // Desktop browsers run every test but those tagged @mobile; the phones run
+  // only those (a small screen, touch, the on-screen keyboard).
+  projects: [
+    ...(process.env['ALL_BROWSERS']
+      ? [
+          { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
+          { name: 'firefox', use: { ...devices['Desktop Firefox'] } },
+          { name: 'webkit', use: { ...devices['Desktop Safari'] } },
+        ]
+      : [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }]
+    ).map((project) => ({ ...project, grepInvert: /@mobile/ })),
+    ...(process.env['ALL_BROWSERS']
+      ? [
+          { name: 'mobile-chromium', use: { ...devices['Pixel 7'] } },
+          { name: 'mobile-webkit', use: { ...devices['iPhone 14'] } },
+        ]
+      : [{ name: 'mobile-chromium', use: { ...devices['Pixel 7'] } }]
+    ).map((project) => ({ ...project, grep: /@mobile/ })),
+  ],
 });

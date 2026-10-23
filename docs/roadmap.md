@@ -35,13 +35,13 @@ Across all components, also:
 
 ## Phase 0 — Groundwork (shared, before the components)
 
-- [ ] **Phone viewport in the e2e config**: a mobile project (a small Chromium and WebKit device) for tests marked mobile; a helper asserting no horizontal page scroll and the minimum target size.
-- [ ] **RTL demo pattern**: a container convention (`<div dir="rtl" lang="ar">`), Arabic sample texts for demos, and an e2e helper (the layout mirrored: start/end edges, arrow keys).
-- [ ] **Dark-mode axe**: the page axe tests run a second time with `.dark`.
-- [ ] **Style diff helper**: a script listing a shadcn component's classes next to ours, part by part, for the Styles column (by hand still decides — see [project notes on the parity method](shadcn-style-reference.md)).
-- [ ] **Inventory refresh**: a script regenerating this table's facts (counterpart, e2e, RTL) so the roadmap stays true.
+- [x] **Phone viewport in the e2e config**: tests tagged `@mobile` run in phone projects only (`mobile-chromium`, Pixel 7; with `ALL_BROWSERS`, `mobile-webkit`, iPhone 14), the rest on desktop only. Helpers in `apps/showcase-e2e/src/mobile.ts`: `expectNoHorizontalScroll(page)`, `expectTargetSize(scope, 24)` (a control in its label measured by the label; inline links exempt).
+- [x] **RTL demo pattern**: [rtl-demos.md](rtl-demos.md) — the demo (`rtl-<component>-demo`, `<div dir="rtl" lang="ar">`, Arabic written in it), what it checks, sample texts. Helpers in `apps/showcase-e2e/src/rtl.ts`: `expectRtl`, `expectInlineOrder` (fails on a layout that didn't mirror), `inlineKey(direction, 'next' | 'previous')`.
+- [x] **Dark-mode axe**: `expectNoA11yViolations(page, { dark: true })` — the browser's color scheme dark, the `.dark` class awaited. A component's page test adds it when its Dark column is ticked.
+- [x] **Style diff helper**: `node scripts/shadcn-diff.mjs <shadcn name> [our name]` — per part (`data-slot`) and per variant, the classes only shadcn has and only we have, from `shadcn-reference`. An aid: reading both still decides ([shadcn-style-reference.md](shadcn-style-reference.md)).
+- [x] **Inventory refresh**: `node scripts/roadmap.mjs`, then prettier — rewrites the inventory line and the phase tables (level, size, library, built on, shadcn, e2e, RTL); the ticks already set are kept.
 
-## Phase 1 — Atoms (60)
+## Phase 1 — Atoms (59)
 
 Components built on no other: the building blocks — what the rest reuse, so what they set (look, RTL, mobile, tests) the rest inherit.
 
@@ -85,28 +85,27 @@ Components built on no other: the building blocks — what the rest reuse, so wh
 |  36 | [Field](../apps/showcase/src/app/pages/docs/field)                                 | ui      | —        |  394 | yes    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
 |  37 | [Tooltip](../apps/showcase/src/app/pages/docs/tooltip)                             | ui      | —        |  401 | yes    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
 |  38 | [Command](../apps/showcase/src/app/pages/docs/command)                             | ui      | —        |  412 | yes    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  39 | [Date Range Picker](../apps/showcase/src/app/pages/docs/date-range-picker)         | ui      | —        |  461 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  40 | [Select](../apps/showcase/src/app/pages/docs/select)                               | ui      | —        |  617 | yes    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  41 | [Button Pattern](../apps/showcase/src/app/pages/docs/button-pattern)               | ui-lab  | —        |   28 | —      |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  42 | [Stacked Layout](../apps/showcase/src/app/pages/docs/stacked-layout)               | ui-lab  | —        |   36 | —      |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  43 | [Marker](../apps/showcase/src/app/pages/docs/marker)                               | ui-lab  | —        |   89 | yes    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  44 | [Intersection Observer](../apps/showcase/src/app/pages/docs/intersection-observer) | ui-lab  | —        |  109 | —      |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  45 | [Message](../apps/showcase/src/app/pages/docs/message)                             | ui-lab  | —        |  137 | yes    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  46 | [Bubble](../apps/showcase/src/app/pages/docs/bubble)                               | ui-lab  | —        |  148 | yes    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  47 | [Animated Counter](../apps/showcase/src/app/pages/docs/animated-counter)           | ui-lab  | —        |  186 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  48 | [Stat Card](../apps/showcase/src/app/pages/docs/stat-card)                         | ui-lab  | —        |  204 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  49 | [Masonry Grid](../apps/showcase/src/app/pages/docs/masonry-grid)                   | ui-lab  | —        |  234 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  50 | [Attachment](../apps/showcase/src/app/pages/docs/attachment)                       | ui-lab  | —        |  235 | yes    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  51 | [Kanban Board](../apps/showcase/src/app/pages/docs/kanban-board)                   | ui-lab  | —        |  237 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  52 | [Sortable List](../apps/showcase/src/app/pages/docs/sortable-list)                 | ui-lab  | —        |  237 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  53 | [Confetti](../apps/showcase/src/app/pages/docs/confetti)                           | ui-lab  | —        |  239 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  54 | [Compare](../apps/showcase/src/app/pages/docs/compare)                             | ui-lab  | —        |  309 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  55 | [Dock](../apps/showcase/src/app/pages/docs/dock)                                   | ui-lab  | —        |  315 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  56 | [Timeline](../apps/showcase/src/app/pages/docs/timeline)                           | ui-lab  | —        |  332 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  57 | [Virtual List](../apps/showcase/src/app/pages/docs/virtual-list)                   | ui-lab  | —        |  451 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  58 | [Query Param State](../apps/showcase/src/app/pages/docs/query-param-state)         | ui-lab  | —        |  611 | —      |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  59 | [Emoji Picker](../apps/showcase/src/app/pages/docs/emoji-picker)                   | ui-lab  | —        | 1679 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  60 | [Charts](../apps/showcase/src/app/pages/docs/charts)                               | charts  | —        |  884 | chart  |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  39 | [Select](../apps/showcase/src/app/pages/docs/select)                               | ui      | —        |  617 | yes    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  40 | [Button Pattern](../apps/showcase/src/app/pages/docs/button-pattern)               | ui-lab  | —        |   28 | —      |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  41 | [Stacked Layout](../apps/showcase/src/app/pages/docs/stacked-layout)               | ui-lab  | —        |   36 | —      |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  42 | [Marker](../apps/showcase/src/app/pages/docs/marker)                               | ui-lab  | —        |   89 | yes    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  43 | [Intersection Observer](../apps/showcase/src/app/pages/docs/intersection-observer) | ui-lab  | —        |  109 | —      |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  44 | [Message](../apps/showcase/src/app/pages/docs/message)                             | ui-lab  | —        |  137 | yes    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  45 | [Bubble](../apps/showcase/src/app/pages/docs/bubble)                               | ui-lab  | —        |  148 | yes    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  46 | [Animated Counter](../apps/showcase/src/app/pages/docs/animated-counter)           | ui-lab  | —        |  186 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  47 | [Stat Card](../apps/showcase/src/app/pages/docs/stat-card)                         | ui-lab  | —        |  204 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  48 | [Masonry Grid](../apps/showcase/src/app/pages/docs/masonry-grid)                   | ui-lab  | —        |  234 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  49 | [Attachment](../apps/showcase/src/app/pages/docs/attachment)                       | ui-lab  | —        |  235 | yes    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  50 | [Kanban Board](../apps/showcase/src/app/pages/docs/kanban-board)                   | ui-lab  | —        |  237 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  51 | [Sortable List](../apps/showcase/src/app/pages/docs/sortable-list)                 | ui-lab  | —        |  237 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  52 | [Confetti](../apps/showcase/src/app/pages/docs/confetti)                           | ui-lab  | —        |  239 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  53 | [Compare](../apps/showcase/src/app/pages/docs/compare)                             | ui-lab  | —        |  309 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  54 | [Dock](../apps/showcase/src/app/pages/docs/dock)                                   | ui-lab  | —        |  315 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  55 | [Timeline](../apps/showcase/src/app/pages/docs/timeline)                           | ui-lab  | —        |  332 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  56 | [Virtual List](../apps/showcase/src/app/pages/docs/virtual-list)                   | ui-lab  | —        |  451 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  57 | [Query Param State](../apps/showcase/src/app/pages/docs/query-param-state)         | ui-lab  | —        |  611 | —      |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  58 | [Emoji Picker](../apps/showcase/src/app/pages/docs/emoji-picker)                   | ui-lab  | —        | 1679 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  59 | [Charts](../apps/showcase/src/app/pages/docs/charts)                               | charts  | —        |  888 | chart  |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
 
 ## Phase 2 — Molecules (54)
 
@@ -169,27 +168,28 @@ Built on atoms (**Built on**): fields and form controls, overlays, menus, the ca
 |  53 | [Code Block](../apps/showcase/src/app/pages/docs/code-block)                   | code    | button                       |  454 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
 |  54 | [Editor](../apps/showcase/src/app/pages/docs/editor)                           | editor  | field, toggle                | 1665 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
 
-## Phase 3 — Organisms (15)
+## Phase 3 — Organisms (16)
 
 Built on molecules: pickers, menus in context, the sidebar, the data table, the editors and players.
 
-|   # | Component                                                        | Library | Built on                                                                |  Size | shadcn | Styles | E2E | Mobile | RTL | Dark | Docs |
-| --: | ---------------------------------------------------------------- | ------- | ----------------------------------------------------------------------- | ----: | ------ | :----: | :-: | :----: | :-: | :--: | :--: |
-|   1 | [Menu Bar](../apps/showcase/src/app/pages/docs/menu-bar)         | ui      | menu                                                                    |   143 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|   2 | [Password](../apps/showcase/src/app/pages/docs/password)         | ui      | button, field, input                                                    |   158 | —      |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
-|   3 | [Context Menu](../apps/showcase/src/app/pages/docs/context-menu) | ui      | menu                                                                    |   224 | yes    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|   4 | [Time Picker](../apps/showcase/src/app/pages/docs/time-picker)   | ui      | button, input-group, popover, time-input                                |   292 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|   5 | [Date Picker](../apps/showcase/src/app/pages/docs/date-picker)   | ui      | button, input-group, popover, select                                    |   461 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|   6 | [Date Input](../apps/showcase/src/app/pages/docs/date-input)     | ui      | date-picker, field, input                                               |   671 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|   7 | [Sidebar](../apps/showcase/src/app/pages/docs/sidebar)           | ui      | button, sheet, skeleton                                                 |   897 | yes    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|   8 | [Number Field](../apps/showcase/src/app/pages/docs/number-field) | ui      | button, button-group, field, input                                      |  1072 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|   9 | [Phone Input](../apps/showcase/src/app/pages/docs/phone-input)   | ui-lab  | combobox, field, input, input-group                                     |   512 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  10 | [Data Table](../apps/showcase/src/app/pages/docs/data-table)     | ui-lab  | checkbox, pagination                                                    |   553 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  11 | [Audio Player](../apps/showcase/src/app/pages/docs/audio-player) | ui-lab  | button, slider                                                          |  1083 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  12 | [Video Player](../apps/showcase/src/app/pages/docs/video-player) | ui-lab  | button, slider                                                          |  1112 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  13 | [PDF Viewer](../apps/showcase/src/app/pages/docs/pdf-viewer)     | ui-lab  | button, checkbox, dialog, input, progress, slider, switch, toggle-group | 12018 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  14 | [Code Editor](../apps/showcase/src/app/pages/docs/code-editor)   | code    | code-block, field                                                       |   390 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
-|  15 | [Diff Viewer](../apps/showcase/src/app/pages/docs/diff-viewer)   | code    | code-block                                                              |   629 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|   # | Component                                                                  | Library | Built on                                                                |  Size | shadcn | Styles | E2E | Mobile | RTL | Dark | Docs |
+| --: | -------------------------------------------------------------------------- | ------- | ----------------------------------------------------------------------- | ----: | ------ | :----: | :-: | :----: | :-: | :--: | :--: |
+|   1 | [Menu Bar](../apps/showcase/src/app/pages/docs/menu-bar)                   | ui      | menu                                                                    |   143 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|   2 | [Password](../apps/showcase/src/app/pages/docs/password)                   | ui      | button, field, input                                                    |   158 | —      |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ]  |
+|   3 | [Context Menu](../apps/showcase/src/app/pages/docs/context-menu)           | ui      | menu                                                                    |   224 | yes    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|   4 | [Time Picker](../apps/showcase/src/app/pages/docs/time-picker)             | ui      | button, input-group, popover, time-input                                |   292 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|   5 | [Date Picker](../apps/showcase/src/app/pages/docs/date-picker)             | ui      | button, input-group, popover, select                                    |   461 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|   6 | [Date Range Picker](../apps/showcase/src/app/pages/docs/date-range-picker) | ui      | button, input-group, popover, select                                    |   461 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|   7 | [Date Input](../apps/showcase/src/app/pages/docs/date-input)               | ui      | date-picker, field, input                                               |   671 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|   8 | [Sidebar](../apps/showcase/src/app/pages/docs/sidebar)                     | ui      | button, sheet, skeleton                                                 |   897 | yes    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|   9 | [Number Field](../apps/showcase/src/app/pages/docs/number-field)           | ui      | button, button-group, field, input                                      |  1072 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  10 | [Phone Input](../apps/showcase/src/app/pages/docs/phone-input)             | ui-lab  | combobox, field, input, input-group                                     |   512 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  11 | [Data Table](../apps/showcase/src/app/pages/docs/data-table)               | ui-lab  | checkbox, pagination                                                    |   553 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  12 | [Audio Player](../apps/showcase/src/app/pages/docs/audio-player)           | ui-lab  | button, slider                                                          |  1083 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  13 | [Video Player](../apps/showcase/src/app/pages/docs/video-player)           | ui-lab  | button, slider                                                          |  1112 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  14 | [PDF Viewer](../apps/showcase/src/app/pages/docs/pdf-viewer)               | ui-lab  | button, checkbox, dialog, input, progress, slider, switch, toggle-group | 12018 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  15 | [Code Editor](../apps/showcase/src/app/pages/docs/code-editor)             | code    | code-block, field                                                       |   390 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
+|  16 | [Diff Viewer](../apps/showcase/src/app/pages/docs/diff-viewer)             | code    | code-block                                                              |   629 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ]  |
 
 ## Later
 
