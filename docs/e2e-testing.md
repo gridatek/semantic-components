@@ -32,6 +32,8 @@ Both apps are static by default; SSR is the `ssr` build configuration. The CI jo
 | `npx nx serve showcase -c ssr`  | the dev server, with SSR (rebuilds as you edit)               | looking at SSR locally                |
 | `npx nx run showcase:serve-ssr` | the built app on its Node server (`dist/…/server/server.mjs`) | CI's `ssr` job — what production runs |
 
+The nightly workflow (`nightly-e2e.yml`) runs both ways — jobs `static` and `ssr` — in every browser (`ALL_BROWSERS`: Chromium, Firefox, WebKit and the phones); the pull requests' CI runs Chromium only.
+
 `serve-ssr` needs a build first (`npx nx build showcase -c ssr`); with `SSR=1`, the Playwright config starts it instead of `serve-static`. Its log goes to `dist/ssr-showcase.log` (`dist/ssr-blocks.log`). The same for `blocks`.
 
 **Import `test` from `src/test.ts`,** not from `@playwright/test` (it re-exports the rest). In the SSR job its `page.goto` and `page.reload` wait until the page has hydrated — until `<html data-hydrated>`, which the `ssr` build's browser entry (`main.ssr.ts`) sets once the app is hydrated and stable (`ApplicationRef.whenStable()`; Angular has no "hydrated" event, only a dev-mode console message): a page drawn by the server is visible before Angular listens, and a fill or click in between is lost — or replayed. Without SSR, Playwright's own. Anything that must be in place before the app starts (`dir="rtl"`…) goes in `page.addInitScript`, not an `evaluate` after `goto`.

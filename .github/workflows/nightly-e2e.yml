@@ -2,14 +2,19 @@ name: Nightly E2E
 
 on:
   schedule:
-    - cron: '0 3 * * *'
+    # Midnight UTC (02:00 in Paris in summer, 01:00 in winter).
+    - cron: '0 0 * * *'
   workflow_dispatch:
 
 permissions:
   contents: read
 
+# Every e2e test in every browser (Chromium, Firefox, WebKit, and the phones:
+# ALL_BROWSERS), both ways the apps can run — static and rendered on the
+# server — in two jobs side by side. The pull requests' CI runs Chromium only.
 jobs:
-  e2e-all-browsers:
+  # The apps as built by default (static, client-only).
+  static:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     env:
@@ -25,18 +30,89 @@ jobs:
       - name: Install dependencies
         run: npm i
 
+      # Built first: the e2e server (serve-static) then starts from the cache,
+      # within Playwright's start timeout.
+      - name: Build
+        run: npx nx run-many -t build -p showcase blocks
+
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
-      - name: E2E tests (all browsers)
-        run: npx nx run-many -t e2e
+      # Four workers and a reporter that shows progress; the preset's two
+      # retries kept — across five browsers overnight, a flake is retried.
+      - name: E2E tests (showcase)
+        run: npx playwright test -c apps/showcase-e2e/playwright.config.ts --workers=4 --reporter=line
 
-      - name: Upload report
+      - name: E2E tests (blocks)
+        if: ${{ !cancelled() }}
+        run: npx playwright test -c apps/blocks-e2e/playwright.config.ts --workers=4 --reporter=line
+
+      - name: Upload Playwright report
         if: failure()
         uses: actions/upload-artifact@v7
         with:
           name: playwright-report
           path: |
-            dist/.playwright/apps/showcase-e2e/playwright-report/
-            dist/.playwright/apps/blocks-e2e/playwright-report/
+            dist/.playwright/apps/showcase-e2e/
+            dist/.playwright/apps/blocks-e2e/
+          retention-days: 7
+
+  # The apps rendered on the server (the `ssr` build, on its Node server), then
+  # hydrated: every e2e test again, plus `ssr.spec.ts` (every page hydrates),
+  # in every browser — as CI's `ssr` job, which runs Chromium only.
+  ssr:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      ALL_BROWSERS: true
+      SSR: true
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 26
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm i
+
+      - name: Build (SSR)
+        run: npx nx run-many -t build -p showcase blocks -c ssr
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      # No retries: a failure here is a result, not a flake.
+      - name: E2E tests (showcase, SSR)
+        run: npx playwright test -c apps/showcase-e2e/playwright.config.ts --workers=4 --retries=0 --reporter=line
+
+      - name: E2E tests (blocks, SSR)
+        if: ${{ !cancelled() }}
+        run: npx playwright test -c apps/blocks-e2e/playwright.config.ts --workers=4 --retries=0 --reporter=line
+
+      # What failed on the server: Angular logs it, the page still answers 200.
+      - name: Server errors
+        if: ${{ !cancelled() }}
+        run: |
+          status=0
+          for log in dist/ssr-showcase.log dist/ssr-blocks.log; do
+            [ -f "$log" ] || continue
+            if grep -qE '^(ERROR|uncaughtException)' "$log"; then
+              echo "::error::Server errors in $log"
+              grep -E -A6 '^(ERROR|uncaughtException)' "$log" | head -400
+              status=1
+            fi
+          done
+          exit $status
+
+      - name: Upload Playwright report
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: playwright-report-ssr
+          path: |
+            dist/.playwright/apps/showcase-e2e/
+            dist/.playwright/apps/blocks-e2e/
+            dist/ssr-*.log
           retention-days: 7

@@ -1,12 +1,23 @@
 name: Deploy to Cloudflare Pages
 
+# One site a run, chosen when it's started (Actions → Run workflow): dev by
+# default; prod after dev has been checked.
 on:
   workflow_dispatch:
+    inputs:
+      target:
+        description: Where to deploy
+        type: choice
+        options:
+          - dev
+          - prod
+        default: dev
 
 jobs:
   deploy-showcase:
+    if: inputs.target == 'prod'
     runs-on: ubuntu-latest
-    name: Deploy Showcase
+    name: Deploy Showcase (Prod)
 
     steps:
       - name: Checkout repository
@@ -35,6 +46,7 @@ jobs:
           command: pages deploy dist/apps/showcase/browser --project-name=semantic-components
 
   deploy-showcase-dev:
+    if: inputs.target == 'dev'
     runs-on: ubuntu-latest
     name: Deploy Showcase (Dev)
 
