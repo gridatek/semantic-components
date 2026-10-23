@@ -100,3 +100,7 @@ Over the video, the parts are white: the preset's buttons (`ghost`, `icon-sm`), 
 ## Not here
 
 Streaming (HLS, DASH: bring hls.js or shaka-player and attach it to the video), ads, quality switching, YouTube or Vimeo embeds.
+
+## References
+
+It follows Vidstack's and Media Chrome's players — what we took, and what is still open: [docs/reference-libraries.md](../../../../../../docs/reference-libraries.md#video-player).
