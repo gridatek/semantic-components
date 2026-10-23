@@ -1,12 +1,14 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ScHeading } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { EntryInstall } from '../../../components/entry-install/entry-install';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { FeaturedDataTableDemoContainer } from './demos/featured-data-table-demo-container';
 
 @Component({
   selector: 'app-data-table-page',
   imports: [
+    EntryInstall,
     FeaturedDataTableDemoContainer,
     TocHeading,
     ComponentBadges,
@@ -23,6 +25,16 @@ import { FeaturedDataTableDemoContainer } from './demos/featured-data-table-demo
         </p>
         <app-component-badges path="data-table" />
       </div>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Installation</h2>
+        <app-entry-install
+          entry="data-table"
+          library="@tanstack/angular-table"
+          href="https://tanstack.com/table"
+          names="ScDataTable, ScDataTableRow, ScDataTableCell"
+        />
+      </section>
 
       <section class="space-y-3">
         <h2 scHeading appToc>How it works</h2>

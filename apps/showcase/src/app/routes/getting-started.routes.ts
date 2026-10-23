@@ -29,11 +29,6 @@ export const gettingStartedRoutes: Route[] = [
         loadComponent: () => import('../pages/getting-started/ui.page'),
       },
       {
-        path: 'carousel',
-        title: 'Carousel - Semantic Components',
-        loadComponent: () => import('../pages/getting-started/carousel.page'),
-      },
-      {
         path: 'charts',
         title: 'Charts - Semantic Components',
         loadComponent: () => import('../pages/getting-started/charts.page'),
@@ -42,27 +37,6 @@ export const gettingStartedRoutes: Route[] = [
         path: 'editor',
         title: 'Editor - Semantic Components',
         loadComponent: () => import('../pages/getting-started/editor.page'),
-      },
-      {
-        path: 'phone-input',
-        title: 'Phone Input - Semantic Components',
-        loadComponent: () =>
-          import('../pages/getting-started/phone-input.page'),
-      },
-      {
-        path: 'data-table',
-        title: 'Data Table - Semantic Components',
-        loadComponent: () => import('../pages/getting-started/data-table.page'),
-      },
-      {
-        path: 'qr-code',
-        title: 'QR Code - Semantic Components',
-        loadComponent: () => import('../pages/getting-started/qr-code.page'),
-      },
-      {
-        path: 'pdf-viewer',
-        title: 'PDF Viewer - Semantic Components',
-        loadComponent: () => import('../pages/getting-started/pdf-viewer.page'),
       },
       {
         path: 'code',

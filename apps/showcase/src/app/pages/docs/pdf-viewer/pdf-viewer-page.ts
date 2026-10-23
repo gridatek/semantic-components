@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ScHeading } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { EntryInstall } from '../../../components/entry-install/entry-install';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { PdfViewerDemoContainer } from './demos/pdf-viewer-demo-container';
 import { PdfViewerFormDemoContainer } from './demos/pdf-viewer-form-demo-container';
@@ -11,6 +12,7 @@ import { PdfViewerReadingDemoContainer } from './demos/pdf-viewer-reading-demo-c
 @Component({
   selector: 'app-pdf-viewer-page',
   imports: [
+    EntryInstall,
     PdfViewerDemoContainer,
     PdfViewerFormDemoContainer,
     PdfViewerOpenParametersDemoContainer,
@@ -39,6 +41,16 @@ import { PdfViewerReadingDemoContainer } from './demos/pdf-viewer-reading-demo-c
         </p>
         <app-component-badges path="pdf-viewer" />
       </div>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Installation</h2>
+        <app-entry-install
+          entry="pdf-viewer"
+          library="pdfjs-dist"
+          href="https://mozilla.github.io/pdf.js/"
+          names="ScPdfViewer"
+        />
+      </section>
 
       <section class="space-y-4">
         <h2 scHeading appToc>Examples</h2>

@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ScHeading } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { EntryInstall } from '../../../components/entry-install/entry-install';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicQrCodeDemoContainer } from './demos/basic-qr-code-demo-container';
 import { ColorsQrCodeDemoContainer } from './demos/colors-qr-code-demo-container';
@@ -14,6 +15,7 @@ import { UseCasesQrCodeDemoContainer } from './demos/use-cases-qr-code-demo-cont
 @Component({
   selector: 'app-qr-code-page',
   imports: [
+    EntryInstall,
     BasicQrCodeDemoContainer,
     InteractiveQrCodeDemoContainer,
     SizesQrCodeDemoContainer,
@@ -45,6 +47,16 @@ import { UseCasesQrCodeDemoContainer } from './demos/use-cases-qr-code-demo-cont
         </p>
         <app-component-badges path="qr-code" />
       </div>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Installation</h2>
+        <app-entry-install
+          entry="qr-code"
+          library="uqr"
+          href="https://github.com/unjs/uqr"
+          names="ScQrCode, ScQrCodeDownload"
+        />
+      </section>
 
       <section class="space-y-8">
         <h2 scHeading appToc>Examples</h2>

@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ScHeading } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { EntryInstall } from '../../../components/entry-install/entry-install';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { CardAnimatedCounterDemoContainer } from './demos/card-animated-counter-demo-container';
 import { CountAnimatedCounterDemoContainer } from './demos/count-animated-counter-demo-container';
@@ -11,6 +12,7 @@ import { VisibleAnimatedCounterDemoContainer } from './demos/visible-animated-co
 @Component({
   selector: 'app-animated-counter-page',
   imports: [
+    EntryInstall,
     CountAnimatedCounterDemoContainer,
     RollAnimatedCounterDemoContainer,
     FormatsAnimatedCounterDemoContainer,
@@ -34,31 +36,12 @@ import { VisibleAnimatedCounterDemoContainer } from './demos/visible-animated-co
 
       <section class="space-y-4">
         <h2 scHeading appToc>Installation</h2>
-        <p class="text-muted-foreground">
-          It counts with the
-          <a
-            href="https://motion.dev"
-            target="_blank"
-            rel="noopener"
-            class="text-foreground underline underline-offset-4"
-            >motion</a
-          >
-          library — an optional peer of the lab: install it where you use the
-          counter.
-        </p>
-        <pre
-          class="bg-muted overflow-x-auto rounded-md p-4 text-sm"
-        ><code>npm install motion</code></pre>
-      </section>
-
-      <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
-        <p class="text-muted-foreground">
-          It has its own entry point, so motion is only loaded where it is used:
-        </p>
-        <pre
-          class="bg-muted overflow-x-auto rounded-md p-4 text-sm"
-        ><code>import {{ '{' }} ScAnimatedCounter {{ '}' }} from '&#64;semantic-components/ui/animated-counter';</code></pre>
+        <app-entry-install
+          entry="animated-counter"
+          library="motion"
+          href="https://motion.dev"
+          names="ScAnimatedCounter"
+        />
       </section>
 
       <section class="space-y-4">

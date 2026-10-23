@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ScHeading } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { EntryInstall } from '../../../components/entry-install/entry-install';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { CardsCarouselDemoContainer } from './demos/cards-carousel-demo-container';
 import { CarouselUsageDemoContainer } from './demos/carousel-usage-demo-container';
@@ -13,6 +14,7 @@ import { VerticalCarouselDemoContainer } from './demos/vertical-carousel-demo-co
 @Component({
   selector: 'app-carousel-page',
   imports: [
+    EntryInstall,
     CarouselUsageDemoContainer,
     DefaultCarouselDemoContainer,
     CardsCarouselDemoContainer,
@@ -33,6 +35,16 @@ import { VerticalCarouselDemoContainer } from './demos/vertical-carousel-demo-co
         </p>
         <app-component-badges path="carousel" />
       </div>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Installation</h2>
+        <app-entry-install
+          entry="carousel"
+          library="embla-carousel"
+          href="https://www.embla-carousel.com"
+          names="ScCarousel, ScCarouselViewport, ScCarouselTrack, ScCarouselItem"
+        />
+      </section>
 
       <section class="space-y-4">
         <h2 scHeading appToc>Usage</h2>

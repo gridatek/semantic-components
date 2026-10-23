@@ -224,67 +224,12 @@ import { ConfigService } from '../../services/config.service';
                     <li scSidebarMenuSubItem>
                       <a
                         scSidebarMenuSubButton
-                        routerLink="/docs/getting-started/carousel"
-                        routerLinkActive
-                        #carouselRla="routerLinkActive"
-                        [isActive]="carouselRla.isActive"
-                      >
-                        <span>Carousel</span>
-                      </a>
-                    </li>
-                    <li scSidebarMenuSubItem>
-                      <a
-                        scSidebarMenuSubButton
                         routerLink="/docs/getting-started/editor"
                         routerLinkActive
                         #editorRla="routerLinkActive"
                         [isActive]="editorRla.isActive"
                       >
                         <span>Editor</span>
-                      </a>
-                    </li>
-                    <li scSidebarMenuSubItem>
-                      <a
-                        scSidebarMenuSubButton
-                        routerLink="/docs/getting-started/phone-input"
-                        routerLinkActive
-                        #phoneInputRla="routerLinkActive"
-                        [isActive]="phoneInputRla.isActive"
-                      >
-                        <span>Phone Input</span>
-                      </a>
-                    </li>
-                    <li scSidebarMenuSubItem>
-                      <a
-                        scSidebarMenuSubButton
-                        routerLink="/docs/getting-started/data-table"
-                        routerLinkActive
-                        #dataTableRla="routerLinkActive"
-                        [isActive]="dataTableRla.isActive"
-                      >
-                        <span>Data Table</span>
-                      </a>
-                    </li>
-                    <li scSidebarMenuSubItem>
-                      <a
-                        scSidebarMenuSubButton
-                        routerLink="/docs/getting-started/qr-code"
-                        routerLinkActive
-                        #qrCodeRla="routerLinkActive"
-                        [isActive]="qrCodeRla.isActive"
-                      >
-                        <span>QR Code</span>
-                      </a>
-                    </li>
-                    <li scSidebarMenuSubItem>
-                      <a
-                        scSidebarMenuSubButton
-                        routerLink="/docs/getting-started/pdf-viewer"
-                        routerLinkActive
-                        #pdfViewerRla="routerLinkActive"
-                        [isActive]="pdfViewerRla.isActive"
-                      >
-                        <span>PDF Viewer</span>
                       </a>
                     </li>
                     <li scSidebarMenuSubItem>

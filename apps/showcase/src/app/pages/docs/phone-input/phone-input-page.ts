@@ -1,12 +1,14 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ScHeading } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { EntryInstall } from '../../../components/entry-install/entry-install';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { CountrySelectorPhoneInputDemoContainer } from './demos/country-selector-phone-input-demo-container';
 
 @Component({
   selector: 'app-phone-input-page',
   imports: [
+    EntryInstall,
     CountrySelectorPhoneInputDemoContainer,
     TocHeading,
     ComponentBadges,
@@ -22,6 +24,16 @@ import { CountrySelectorPhoneInputDemoContainer } from './demos/country-selector
         </p>
         <app-component-badges path="phone-input" />
       </div>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Installation</h2>
+        <app-entry-install
+          entry="phone-input"
+          library="libphonenumber-js"
+          href="https://gitlab.com/catamphetamine/libphonenumber-js"
+          names="ScPhoneInput, ScPhoneInputCountry, ScPhoneInputNumber"
+        />
+      </section>
 
       <section class="space-y-8">
         <h2 scHeading appToc>Examples</h2>

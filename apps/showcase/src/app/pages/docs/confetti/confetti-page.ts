@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ScHeading } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { EntryInstall } from '../../../components/entry-install/entry-install';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BurstConfettiDemoContainer } from './demos/burst-confetti-demo-container';
 import { CustomConfettiDemoContainer } from './demos/custom-confetti-demo-container';
@@ -13,6 +14,7 @@ import { SidesConfettiDemoContainer } from './demos/sides-confetti-demo-containe
 @Component({
   selector: 'app-confetti-page',
   imports: [
+    EntryInstall,
     BurstConfettiDemoContainer,
     ElementConfettiDemoContainer,
     SidesConfettiDemoContainer,
@@ -37,32 +39,12 @@ import { SidesConfettiDemoContainer } from './demos/sides-confetti-demo-containe
 
       <section class="space-y-4">
         <h2 scHeading appToc>Installation</h2>
-        <p class="text-muted-foreground">
-          It draws with the
-          <a
-            href="https://github.com/catdad/canvas-confetti"
-            target="_blank"
-            rel="noopener"
-            class="text-foreground underline underline-offset-4"
-            >canvas-confetti</a
-          >
-          library — an optional peer of the lab: install it where you use
-          confetti.
-        </p>
-        <pre
-          class="bg-muted overflow-x-auto rounded-md p-4 text-sm"
-        ><code>npm install canvas-confetti</code></pre>
-      </section>
-
-      <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
-        <p class="text-muted-foreground">
-          It has its own entry point, and loads canvas-confetti on the first
-          burst only:
-        </p>
-        <pre
-          class="bg-muted overflow-x-auto rounded-md p-4 text-sm"
-        ><code>import {{ '{' }} ScConfetti, ScConfettiTrigger {{ '}' }} from '&#64;semantic-components/ui/confetti';</code></pre>
+        <app-entry-install
+          entry="confetti"
+          library="canvas-confetti"
+          href="https://github.com/catdad/canvas-confetti"
+          names="ScConfetti, ScConfettiTrigger"
+        />
       </section>
 
       <section class="space-y-4">
