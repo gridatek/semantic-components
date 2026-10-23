@@ -40,14 +40,14 @@ test.describe('SSR', () => {
           problems.push(m.text().split('\n')[0]);
         }
       });
-      // Dev mode logs it once the app has hydrated.
-      const hydrated = page.waitForEvent('console', {
-        predicate: (m) => m.text().startsWith('Angular hydrated'),
-        // A page that breaks never hydrates: say so soon, not at the test's end.
+      const response = await page.goto(route);
+      // Drawn by the server (Angular marks its HTML), then hydrated: the app
+      // marks <html> once hydrated and stable (main.ssr.ts). A page that
+      // breaks never gets there: say so soon, not at the test's end.
+      expect(await response?.text()).toContain('ng-server-context');
+      await expect(page.locator('html')).toHaveAttribute('data-hydrated', '', {
         timeout: 10_000,
       });
-      await page.goto(route);
-      await hydrated;
       expect(problems).toEqual([]);
     });
   }

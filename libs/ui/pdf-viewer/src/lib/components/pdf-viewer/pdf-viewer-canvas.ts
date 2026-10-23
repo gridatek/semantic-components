@@ -468,8 +468,9 @@ export class ScPdfViewerCanvas {
    * corrected when it's rendered (as pdf.js's own viewer does).
    */
   private async computePageLayouts(doc: PDFDocumentProxy): Promise<void> {
-    const first = await doc.getPage(1);
-    if (doc !== this.pdfDocument()) return;
+    // Another document since (this one closed: "Transport destroyed"): no layout.
+    const first = await doc.getPage(1).catch(() => null);
+    if (!first || doc !== this.pdfDocument()) return;
     const { width, height } = first.getViewport({ scale: 1 });
     this.pageLayouts.set(
       Array.from({ length: doc.numPages }, (_, i) => ({
@@ -971,8 +972,9 @@ export class ScPdfViewerCanvas {
       maxY: Math.min(box.height, view.bottom - box.top),
     };
     if (visible.maxX <= visible.minX || visible.maxY <= visible.minY) return;
-    const page = await doc.getPage(pageNumber);
-    if (!this.restrictedPages.has(pageNumber)) return;
+    // Another document since (this one closed): nothing to sharpen.
+    const page = await doc.getPage(pageNumber).catch(() => null);
+    if (!page || !this.restrictedPages.has(pageNumber)) return;
     const drawn = await this.detail.update(
       page,
       canvas,

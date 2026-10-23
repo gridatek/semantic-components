@@ -11,27 +11,23 @@ export * from '@playwright/test';
 export const test = base.extend({
   page: async ({ page }, use) => {
     if (process.env['SSR']) {
-      // Dev mode logs it once the app has hydrated.
+      // The app marks <html> once hydrated and stable (main.ssr.ts).
       const hydrated = () =>
         page
-          .waitForEvent('console', {
-            predicate: (m) => m.text().startsWith('Angular hydrated'),
-            timeout: 15_000,
-          })
+          .locator('html[data-hydrated]')
+          .waitFor({ state: 'attached', timeout: 15_000 })
           // A page without the app (a file, an error): nothing to wait for.
           .catch(() => undefined);
       const goto = page.goto.bind(page);
       const reload = page.reload.bind(page);
       page.goto = async (...args) => {
-        const done = hydrated();
         const response = await goto(...args);
-        await done;
+        await hydrated();
         return response;
       };
       page.reload = async (...args) => {
-        const done = hydrated();
         const response = await reload(...args);
-        await done;
+        await hydrated();
         return response;
       };
     }

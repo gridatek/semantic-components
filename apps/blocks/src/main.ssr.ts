@@ -14,4 +14,10 @@ bootstrapApplication(
   mergeApplicationConfig(appConfig, {
     providers: [provideClientHydration(withEventReplay())],
   }),
-).catch((err) => console.error(err));
+)
+  // Hydrated and stable: a mark on <html> for the e2e tests to wait for —
+  // Angular has no "hydrated" event (only a dev-mode console message), and
+  // a page drawn by the server is visible before Angular listens.
+  .then((app) => app.whenStable())
+  .then(() => document.documentElement.setAttribute('data-hydrated', ''))
+  .catch((err) => console.error(err));
