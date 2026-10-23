@@ -3,10 +3,6 @@ import {
   provideBrowserGlobalErrorListeners,
 } from '@angular/core';
 import {
-  provideClientHydration,
-  withEventReplay,
-} from '@angular/platform-browser';
-import {
   provideRouter,
   withInMemoryScrolling,
   withRouterConfig,
@@ -23,6 +19,5 @@ export const appConfig: ApplicationConfig = {
         scrollPositionRestoration: 'enabled',
       }),
     ),
-    provideClientHydration(withEventReplay()),
   ],
 };

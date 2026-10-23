@@ -21,12 +21,7 @@
             "input": "apps/blocks/public"
           }
         ],
-        "styles": ["apps/blocks/src/styles.css"],
-        "server": "apps/blocks/src/main.server.ts",
-        "outputMode": "server",
-        "ssr": {
-          "entry": "apps/blocks/src/server.ts"
-        }
+        "styles": ["apps/blocks/src/styles.css"]
       },
       "configurations": {
         "production": {
@@ -48,6 +43,14 @@
           "optimization": false,
           "extractLicenses": false,
           "sourceMap": true
+        },
+        "ssr": {
+          "browser": "apps/blocks/src/main.ssr.ts",
+          "server": "apps/blocks/src/main.server.ts",
+          "outputMode": "server",
+          "ssr": {
+            "entry": "apps/blocks/src/server.ts"
+          }
         }
       }
     },
@@ -64,6 +67,9 @@
         },
         "development": {
           "buildTarget": "blocks:build:development"
+        },
+        "ssr": {
+          "buildTarget": "blocks:build:development,ssr"
         }
       }
     },
