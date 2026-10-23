@@ -27,6 +27,9 @@ export class ScVideoPlayerVolume {
     bindInput(this.slider.min, 0);
     bindInput(this.slider.max, 1);
     bindInput(this.slider.step, 0.05);
+    // Its width, in the bar; not on a small player, as in other players
+    // (mute stays).
+    bindInput(this.slider.classInput, 'w-20 shrink-0 @max-xl/video:hidden');
     effect(() => {
       const value = this.shown();
       untracked(() => this.slider.value.set(value));

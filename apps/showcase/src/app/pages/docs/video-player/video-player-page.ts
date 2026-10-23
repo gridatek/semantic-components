@@ -48,9 +48,9 @@ import { PlayerVideoPlayerDemoContainer } from './demos/player-video-player-demo
           chapters and a preview on the seek bar, speeds, picture-in-picture and
           fullscreen. Focused, the keys work: Space or K, J and L, the arrows,
           M, F, C, 0–9. The controls hide while playing untouched. Below 576px
-          wide (measured with scResizeObserver) it has a small layout, as other
-          players do: play and the skips in the middle, captions and mute at the
-          top, time and fullscreen at the bottom.
+          wide it has a small layout, as other players do — play and the skips
+          in the middle; the volume, speeds and picture-in-picture out — from
+          the parts alone: the template is the same.
         </p>
         <app-player-video-player-demo-container />
       </section>

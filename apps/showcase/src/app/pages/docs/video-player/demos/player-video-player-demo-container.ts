@@ -18,17 +18,17 @@ import { PlayerVideoPlayerDemo } from './player-video-player-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class PlayerVideoPlayerDemoContainer {
-  readonly code = `import { NgTemplateOutlet } from '@angular/common';
-import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
   ScRadio,
   ScRadioField,
   ScRadioGroup,
-  ScResizeObserver,
   ScVideoPlayer,
+  ScVideoPlayerBar,
   ScVideoPlayerCaptions,
   ScVideoPlayerCaptionsDisplay,
+  ScVideoPlayerCenter,
   ScVideoPlayerControls,
   ScVideoPlayerFullscreen,
   ScVideoPlayerMedia,
@@ -41,6 +41,7 @@ import {
   ScVideoPlayerSeek,
   ScVideoPlayerSkip,
   ScVideoPlayerTime,
+  ScVideoPlayerTimeSeparator,
   ScVideoPlayerVolume,
 } from '@semantic-components/ui';
 import {
@@ -61,11 +62,11 @@ import {
 @Component({
   selector: 'app-player-video-player-demo',
   imports: [
-    NgTemplateOutlet,
-    ScResizeObserver,
     ScVideoPlayer,
+    ScVideoPlayerBar,
     ScVideoPlayerMedia,
     ScVideoPlayerCaptionsDisplay,
+    ScVideoPlayerCenter,
     ScVideoPlayerControls,
     ScVideoPlayerProgress,
     ScVideoPlayerSeek,
@@ -75,6 +76,7 @@ import {
     ScVideoPlayerMute,
     ScVideoPlayerVolume,
     ScVideoPlayerTime,
+    ScVideoPlayerTimeSeparator,
     ScVideoPlayerRate,
     ScVideoPlayerCaptions,
     ScVideoPlayerPictureInPicture,
@@ -99,8 +101,6 @@ import {
     <div
       scVideoPlayer
       #player="scVideoPlayer"
-      scResizeObserver
-      #size="scResizeObserver"
       aria-label="Video: Sintel, the trailer"
       [captions]="captions()"
       (captionsChange)="setCaptions($event)"
@@ -139,12 +139,27 @@ import {
           class="absolute inset-0 m-auto size-10 animate-spin text-white"
         ></svg>
       }
-      <!-- Small player (below 576px wide, as Vidstack's): the controls spread
-           over the video — captions and mute at the top, play and the skips
-           in the middle, time, fullscreen and the seek bar at the bottom. -->
-      @let small = size.width() < 576;
+      <div scVideoPlayerCenter>
+        <button [scVideoPlayerSkip]="-10">
+          <svg siRotateCcwIcon></svg>
+          <span class="sr-only">Back 10 seconds</span>
+        </button>
+        <button scVideoPlayerPlay>
+          @if (player.paused()) {
+            <svg siPlayIcon></svg>
+            <span class="sr-only">Play</span>
+          } @else {
+            <svg siPauseIcon></svg>
+            <span class="sr-only">Pause</span>
+          }
+        </button>
+        <button [scVideoPlayerSkip]="10">
+          <svg siRotateCwIcon></svg>
+          <span class="sr-only">Forward 10 seconds</span>
+        </button>
+      </div>
 
-      <ng-template #seekBar>
+      <div scVideoPlayerControls>
         <div scVideoPlayerProgress>
           <input
             scVideoPlayerSeek
@@ -164,150 +179,70 @@ import {
             </div>
           }
         </div>
-      </ng-template>
-
-      @if (small) {
-        <div
-          scVideoPlayerControls
-          class="top-0 justify-between bg-black/40 bg-none pt-2"
-        >
-          <div class="flex items-center justify-end gap-1">
-            <button scVideoPlayerCaptions>
-              <svg siCaptionsIcon></svg>
-              <span class="sr-only">Captions</span>
-            </button>
-            <button scVideoPlayerMute>
-              @if (player.muted()) {
-                <svg siVolumeXIcon></svg>
-              } @else {
-                <svg siVolume2Icon></svg>
-              }
-              <span class="sr-only">Mute</span>
-            </button>
-          </div>
-          <div class="flex items-center justify-center gap-6">
-            <button [scVideoPlayerSkip]="-10">
-              <svg siRotateCcwIcon></svg>
-              <span class="sr-only">Back 10 seconds</span>
-            </button>
-            <button
-              scVideoPlayerPlay
-              size="icon-lg"
-              class="size-14 rounded-full bg-black/50 [&_svg]:size-7"
-            >
-              @if (player.paused()) {
-                <svg siPlayIcon></svg>
-                <span class="sr-only">Play</span>
-              } @else {
-                <svg siPauseIcon></svg>
-                <span class="sr-only">Pause</span>
-              }
-            </button>
-            <button [scVideoPlayerSkip]="10">
-              <svg siRotateCwIcon></svg>
-              <span class="sr-only">Forward 10 seconds</span>
-            </button>
-          </div>
-          <div class="grid gap-1">
-            <div class="flex items-center gap-2">
-              <span class="shrink-0 text-xs whitespace-nowrap">
-                <time scVideoPlayerTime="current"></time> /
-                <time scVideoPlayerTime="duration"></time>
-              </span>
-              <button scVideoPlayerFullscreen class="ms-auto">
-                @if (player.fullscreen()) {
-                  <svg siMinimizeIcon></svg>
-                } @else {
-                  <svg siMaximizeIcon></svg>
-                }
-                <span class="sr-only">Fullscreen</span>
-              </button>
-            </div>
-            <ng-container [ngTemplateOutlet]="seekBar" />
-          </div>
-        </div>
-      } @else {
-        @if (player.paused()) {
-          <button
-            scVideoPlayerPlay
-            size="icon-lg"
-            class="absolute inset-0 m-auto size-16 rounded-full bg-black/50 [&_svg]:size-7"
-          >
-            <svg siPlayIcon></svg>
-            <span class="sr-only">Play</span>
-          </button>
-        }
-
-        <div scVideoPlayerControls>
-          <ng-container [ngTemplateOutlet]="seekBar" />
-          <div class="flex items-center gap-1">
-            <button scVideoPlayerPlay>
-              @if (player.paused()) {
-                <svg siPlayIcon></svg>
-                <span class="sr-only">Play</span>
-              } @else {
-                <svg siPauseIcon></svg>
-                <span class="sr-only">Pause</span>
-              }
-            </button>
-            <button [scVideoPlayerSkip]="-10">
-              <svg siRotateCcwIcon></svg>
-              <span class="sr-only">Back 10 seconds</span>
-            </button>
-            <button [scVideoPlayerSkip]="10">
-              <svg siRotateCwIcon></svg>
-              <span class="sr-only">Forward 10 seconds</span>
-            </button>
-            <button scVideoPlayerMute>
-              @if (player.muted()) {
-                <svg siVolumeXIcon></svg>
-              } @else {
-                <svg siVolume2Icon></svg>
-              }
-              <span class="sr-only">Mute</span>
-            </button>
-            <div class="flex w-20 shrink-0">
-              <input scVideoPlayerVolume aria-label="Volume" />
-            </div>
-            <span class="ms-1 shrink-0 text-xs whitespace-nowrap">
-              <time scVideoPlayerTime="current"></time> /
-              <time scVideoPlayerTime="duration"></time>
-            </span>
-            @if (player.chapter(); as chapter) {
-              <span class="ms-2 truncate text-xs text-white/80"
-                >· {{ chapter.title }}</span
-              >
+        <div scVideoPlayerBar>
+          <button scVideoPlayerPlay>
+            @if (player.paused()) {
+              <svg siPlayIcon></svg>
+              <span class="sr-only">Play</span>
+            } @else {
+              <svg siPauseIcon></svg>
+              <span class="sr-only">Pause</span>
             }
-            <div role="group" aria-label="Speed" class="ms-auto flex">
-              @for (rate of rates; track rate) {
-                <button
-                  [scVideoPlayerRate]="rate"
-                  size="sm"
-                  class="px-1.5 text-xs"
-                >
-                  {{ rate }}×
-                </button>
-              }
-            </div>
-            <button scVideoPlayerCaptions>
-              <svg siCaptionsIcon></svg>
-              <span class="sr-only">Captions</span>
-            </button>
-            <button scVideoPlayerPictureInPicture>
-              <svg siPictureInPicture2Icon></svg>
-              <span class="sr-only">Picture in picture</span>
-            </button>
-            <button scVideoPlayerFullscreen>
-              @if (player.fullscreen()) {
-                <svg siMinimizeIcon></svg>
-              } @else {
-                <svg siMaximizeIcon></svg>
-              }
-              <span class="sr-only">Fullscreen</span>
-            </button>
+          </button>
+          <button [scVideoPlayerSkip]="-10">
+            <svg siRotateCcwIcon></svg>
+            <span class="sr-only">Back 10 seconds</span>
+          </button>
+          <button [scVideoPlayerSkip]="10">
+            <svg siRotateCwIcon></svg>
+            <span class="sr-only">Forward 10 seconds</span>
+          </button>
+          <button scVideoPlayerMute>
+            @if (player.muted()) {
+              <svg siVolumeXIcon></svg>
+            } @else {
+              <svg siVolume2Icon></svg>
+            }
+            <span class="sr-only">Mute</span>
+          </button>
+          <input scVideoPlayerVolume aria-label="Volume" />
+          <time scVideoPlayerTime="current"></time>
+          <span scVideoPlayerTimeSeparator>/</span>
+          <time scVideoPlayerTime="duration"></time>
+          @if (player.chapter(); as chapter) {
+            <span class="ms-2 truncate text-xs text-white/80"
+              >· {{ chapter.title }}</span
+            >
+          }
+          <div role="group" aria-label="Speed" class="ms-auto flex">
+            @for (rate of rates; track rate) {
+              <button
+                [scVideoPlayerRate]="rate"
+                size="sm"
+                class="px-1.5 text-xs"
+              >
+                {{ rate }}×
+              </button>
+            }
           </div>
+          <button scVideoPlayerCaptions>
+            <svg siCaptionsIcon></svg>
+            <span class="sr-only">Captions</span>
+          </button>
+          <button scVideoPlayerPictureInPicture>
+            <svg siPictureInPicture2Icon></svg>
+            <span class="sr-only">Picture in picture</span>
+          </button>
+          <button scVideoPlayerFullscreen>
+            @if (player.fullscreen()) {
+              <svg siMinimizeIcon></svg>
+            } @else {
+              <svg siMaximizeIcon></svg>
+            }
+            <span class="sr-only">Fullscreen</span>
+          </button>
         </div>
-      }
+      </div>
     </div>
 
     <div class="flex items-center gap-4 text-sm">

@@ -30,6 +30,8 @@ export class ScVideoPlayerPictureInPicture {
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       // Over the video: white.
       'text-white hover:bg-white/15 hover:text-white dark:hover:bg-white/15 aria-pressed:bg-white/20',
+      // Not on a small player, as in other players.
+      '@max-xl/video:hidden',
       this.classInput(),
     ),
   );

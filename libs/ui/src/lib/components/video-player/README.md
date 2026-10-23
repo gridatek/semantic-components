@@ -9,10 +9,12 @@ scVideoPlayer (paused, currentTime, volume, muted, playbackRate, captions — tw
 │                  duration, buffered, waiting, ended, fullscreen, pictureInPicture, tracks, chapters, chapter, cues, preview)
 ├── video[scVideoPlayerMedia] — yours: src / <source>s, poster, <track>s
 ├── scVideoPlayerCaptionsDisplay — the captions, above the controls
+├── scVideoPlayerCenter — play and the skips over the video (small player; paused)
 └── scVideoPlayerControls — hides while playing untouched
     ├── scVideoPlayerProgress → input[scVideoPlayerSeek], scVideoPlayerPreview
-    └── buttons: Play, Skip, Mute, Captions, Rate, PictureInPicture, Fullscreen;
-        input[scVideoPlayerVolume]; time[scVideoPlayerTime]
+    └── scVideoPlayerBar → buttons: Play, Skip, Mute, Captions, Rate,
+        PictureInPicture, Fullscreen; input[scVideoPlayerVolume];
+        time[scVideoPlayerTime], span[scVideoPlayerTimeSeparator]
 ```
 
 ## Usage
@@ -25,6 +27,12 @@ scVideoPlayer (paused, currentTime, volume, muted, playbackRate, captions — tw
   </video>
   <div scVideoPlayerCaptionsDisplay></div>
 
+  <div scVideoPlayerCenter>
+    <button [scVideoPlayerSkip]="-10"><svg siRotateCcwIcon></svg><span class="sr-only">Back 10 seconds</span></button>
+    <button scVideoPlayerPlay><svg siPlayIcon></svg><span class="sr-only">{{ player.paused() ? 'Play' : 'Pause' }}</span></button>
+    <button [scVideoPlayerSkip]="10"><svg siRotateCwIcon></svg><span class="sr-only">Forward 10 seconds</span></button>
+  </div>
+
   <div scVideoPlayerControls>
     <div scVideoPlayerProgress>
       <input scVideoPlayerSeek aria-label="Seek" [attr.aria-valuetext]="player.formatTime(player.currentTime()) + ' of ' + player.formatTime(player.duration())" />
@@ -32,9 +40,13 @@ scVideoPlayer (paused, currentTime, volume, muted, playbackRate, captions — tw
       <div scVideoPlayerPreview>{{ player.chapterAt(preview.time)?.title }} {{ player.formatTime(preview.time) }}</div>
       }
     </div>
-    <div class="flex items-center gap-1">
+    <div scVideoPlayerBar>
       <button scVideoPlayerPlay><svg siPlayIcon></svg><span class="sr-only">{{ player.paused() ? 'Play' : 'Pause' }}</span></button>
-      <time scVideoPlayerTime="current"></time> / <time scVideoPlayerTime="duration"></time>
+      <button scVideoPlayerMute><svg siVolume2Icon></svg><span class="sr-only">Mute</span></button>
+      <input scVideoPlayerVolume aria-label="Volume" />
+      <time scVideoPlayerTime="current"></time>
+      <span scVideoPlayerTimeSeparator>/</span>
+      <time scVideoPlayerTime="duration"></time>
       <button scVideoPlayerCaptions><svg siCaptionsIcon></svg><span class="sr-only">Captions</span></button>
       <button scVideoPlayerFullscreen><svg siMaximizeIcon></svg><span class="sr-only">Fullscreen</span></button>
     </div>
@@ -48,19 +60,13 @@ Two-way: `paused`, `currentTime`, `volume`, `muted`, `playbackRate`, `captions` 
 
 ## Small players
 
-A small player gets its own layout, as in Vidstack's and Media Chrome's players: put `scResizeObserver` on the player and build the controls by its width. The demo's, below 576px (Vidstack's breakpoint): captions and mute at the top, back, play and forward in the middle, time and fullscreen at the bottom with the seek bar under them; the volume slider, the speeds and picture-in-picture stay out. From 576px, one bar with every control.
+The player is a container (`@container/video`), and its parts fit themselves to its width — the template stays the same. Below 576px (the breakpoint of Vidstack's player), as other players do:
 
-```html
-<div scVideoPlayer scResizeObserver #size="scResizeObserver">
-  … @if (size.width() < 576) {
-  <div scVideoPlayerControls class="top-0 justify-between">…</div>
-  } @else {
-  <div scVideoPlayerControls>…</div>
-  }
-</div>
-```
+- `scVideoPlayerCenter` shows play and the skips over the video. On a wide player it shows only while paused, and then only its play.
+- In `scVideoPlayerBar`, play and the skips step aside when the player has a center — they're in it. Without a center, they stay.
+- The volume slider, the speeds and picture-in-picture step aside; mute, the time, captions and fullscreen stay.
 
-The width is 0 until the first render in the browser (and on the server), so the player starts with its small layout.
+No JavaScript measures it, so the first render — and the server's — is already right. To build something only where the player is wide enough, `scResizeObserver` gives its width as a signal.
 
 **Volume on iPhone and iPad:** Safari doesn't let a page set the volume — the device's buttons do. There the volume slider (and ↑ / ↓) has no effect; mute works.
 

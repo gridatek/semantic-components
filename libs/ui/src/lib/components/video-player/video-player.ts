@@ -99,7 +99,8 @@ export class ScVideoPlayer {
 
   protected readonly class = computed(() =>
     cn(
-      'group/video relative isolate block overflow-hidden rounded-lg bg-black text-white outline-none',
+      // A container (@container/video): its parts fit themselves to its width.
+      'group/video @container/video relative isolate block overflow-hidden rounded-lg bg-black text-white outline-none',
       'focus-visible:ring-3 focus-visible:ring-ring/50',
       'data-idle:cursor-none',
       this.classInput(),

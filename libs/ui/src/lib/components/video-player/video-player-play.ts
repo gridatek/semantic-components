@@ -29,6 +29,8 @@ export class ScVideoPlayerPlay {
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       // Over the video: white.
       'text-white hover:bg-white/15 hover:text-white dark:hover:bg-white/15 aria-pressed:bg-white/20',
+      // On a small player with a center, its place is the center, not the bar.
+      'in-data-[slot=video-player-bar]:group-has-[[data-slot=video-player-center]]/video:@max-xl/video:hidden',
       this.classInput(),
     ),
   );

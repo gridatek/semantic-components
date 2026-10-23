@@ -52,7 +52,7 @@ test.describe('Player', () => {
     // Out of a small player (as Vidstack's): the volume slider, the speeds,
     // picture-in-picture.
     await expect(page.getByRole('slider', { name: 'Volume' })).toHaveCount(0);
-    await expect(page.getByRole('group', { name: 'Speed' })).toHaveCount(0);
+    await expect(page.getByRole('button', { name: /×$/ })).toHaveCount(0);
     await expect(
       page.getByRole('button', { name: 'Picture in picture' }),
     ).toHaveCount(0);
