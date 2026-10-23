@@ -15,6 +15,25 @@ test.describe('Player', () => {
       .toBeGreaterThan(50);
   });
 
+  test('the 10-second skips, where the player has room', async ({ page }) => {
+    await expect(
+      page.getByRole('button', { name: 'Back 10 seconds' }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole('button', { name: 'Forward 10 seconds' }),
+    ).toBeVisible();
+  });
+
+  test('no 10-second skips on a phone @mobile', async ({ page }) => {
+    // Measured after the first render: wait for the player's own controls.
+    await expect(
+      page.getByRole('button', { name: 'Fullscreen' }),
+    ).toBeAttached();
+    await expect(page.getByRole('button', { name: /10 seconds/ })).toHaveCount(
+      0,
+    );
+  });
+
   test('plays and pauses', async ({ page }) => {
     await page.getByRole('button', { name: 'Play' }).first().click();
     await expect

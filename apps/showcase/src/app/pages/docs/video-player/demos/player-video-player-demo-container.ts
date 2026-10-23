@@ -24,6 +24,7 @@ import {
   ScRadio,
   ScRadioField,
   ScRadioGroup,
+  ScResizeObserver,
   ScVideoPlayer,
   ScVideoPlayerCaptions,
   ScVideoPlayerCaptionsDisplay,
@@ -59,6 +60,7 @@ import {
 @Component({
   selector: 'app-player-video-player-demo',
   imports: [
+    ScResizeObserver,
     ScVideoPlayer,
     ScVideoPlayerMedia,
     ScVideoPlayerCaptionsDisplay,
@@ -95,6 +97,8 @@ import {
     <div
       scVideoPlayer
       #player="scVideoPlayer"
+      scResizeObserver
+      #size="scResizeObserver"
       aria-label="Video: Sintel, the trailer"
       [captions]="captions()"
       (captionsChange)="setCaptions($event)"
@@ -174,14 +178,17 @@ import {
               <span class="sr-only">Pause</span>
             }
           </button>
-          <button [scVideoPlayerSkip]="-10">
-            <svg siRotateCcwIcon></svg>
-            <span class="sr-only">Back 10 seconds</span>
-          </button>
-          <button [scVideoPlayerSkip]="10">
-            <svg siRotateCwIcon></svg>
-            <span class="sr-only">Forward 10 seconds</span>
-          </button>
+          <!-- The skips: only where there is room (the player's width). -->
+          @if (size.width() >= 480) {
+            <button [scVideoPlayerSkip]="-10">
+              <svg siRotateCcwIcon></svg>
+              <span class="sr-only">Back 10 seconds</span>
+            </button>
+            <button [scVideoPlayerSkip]="10">
+              <svg siRotateCwIcon></svg>
+              <span class="sr-only">Forward 10 seconds</span>
+            </button>
+          }
           <button scVideoPlayerMute>
             @if (player.muted()) {
               <svg siVolumeXIcon></svg>
