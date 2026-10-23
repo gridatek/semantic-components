@@ -2,10 +2,10 @@ import { Directive, computed, input } from '@angular/core';
 import { cn } from '../../utils/cn/cn';
 
 /**
- * Over the middle of the video: play (large) and the skips around it. Shown
- * on a small player (below 576px wide), as other players do; on a wide one,
- * only while paused, and then only its play. Hidden, as the controls, while
- * playing untouched. Clicks between its buttons reach the video.
+ * Over the middle of the video: play, large. Shown on a small player (below
+ * 576px wide), as in Vidstack's small layout; on a wide one, only while
+ * paused. Hidden, as the controls, while playing untouched. Clicks around its
+ * button reach the video.
  */
 @Directive({
   selector: 'div[scVideoPlayerCenter]',

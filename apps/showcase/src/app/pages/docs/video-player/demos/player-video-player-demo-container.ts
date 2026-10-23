@@ -42,6 +42,7 @@ import {
   ScVideoPlayerSkip,
   ScVideoPlayerTime,
   ScVideoPlayerTimeSeparator,
+  ScVideoPlayerTop,
   ScVideoPlayerVolume,
 } from '@semantic-components/ui';
 import {
@@ -77,6 +78,7 @@ import {
     ScVideoPlayerVolume,
     ScVideoPlayerTime,
     ScVideoPlayerTimeSeparator,
+    ScVideoPlayerTop,
     ScVideoPlayerRate,
     ScVideoPlayerCaptions,
     ScVideoPlayerPictureInPicture,
@@ -139,11 +141,14 @@ import {
           class="absolute inset-0 m-auto size-10 animate-spin text-white"
         ></svg>
       }
-      <div scVideoPlayerCenter>
-        <button [scVideoPlayerSkip]="-10">
-          <svg siRotateCcwIcon></svg>
-          <span class="sr-only">Back 10 seconds</span>
+      <div scVideoPlayerTop>
+        <button scVideoPlayerCaptions>
+          <svg siCaptionsIcon></svg>
+          <span class="sr-only">Captions</span>
         </button>
+      </div>
+
+      <div scVideoPlayerCenter>
         <button scVideoPlayerPlay>
           @if (player.paused()) {
             <svg siPlayIcon></svg>
@@ -152,10 +157,6 @@ import {
             <svg siPauseIcon></svg>
             <span class="sr-only">Pause</span>
           }
-        </button>
-        <button [scVideoPlayerSkip]="10">
-          <svg siRotateCwIcon></svg>
-          <span class="sr-only">Forward 10 seconds</span>
         </button>
       </div>
 

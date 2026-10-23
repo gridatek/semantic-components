@@ -33,24 +33,23 @@ test.describe('Player', () => {
   }) => {
     const box = await player(page).boundingBox();
     if (!box) throw new Error('no player');
-    // Captions and mute at the top, play and the skips in the middle,
-    // time, fullscreen and the seek bar at the bottom — all inside the player.
-    for (const name of [
-      'Captions',
-      'Mute',
-      'Back 10 seconds',
-      'Forward 10 seconds',
-      'Fullscreen',
-    ]) {
+    // As Vidstack's small layout: captions at the top, play in the middle,
+    // time and fullscreen at the bottom — all inside the player.
+    for (const name of ['Captions', 'Play', 'Fullscreen']) {
       const button = page.getByRole('button', { name });
+      await expect(button).toHaveCount(1);
       await expect(button).toBeVisible();
       const b = await button.boundingBox();
       expect(b && b.x >= box.x && b.x + b.width <= box.x + box.width).toBe(
         true,
       );
     }
-    // Out of a small player (as Vidstack's): the volume slider, the speeds,
-    // picture-in-picture.
+    // Out of a small player: the skips, mute, the volume slider, the
+    // speeds, picture-in-picture.
+    await expect(page.getByRole('button', { name: /10 seconds/ })).toHaveCount(
+      0,
+    );
+    await expect(page.getByRole('button', { name: 'Mute' })).toHaveCount(0);
     await expect(page.getByRole('slider', { name: 'Volume' })).toHaveCount(0);
     await expect(page.getByRole('button', { name: /×$/ })).toHaveCount(0);
     await expect(

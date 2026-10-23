@@ -60,6 +60,11 @@ export class ScVideoPlayerProgress {
   });
 
   protected readonly class = computed(() =>
-    cn('relative flex h-5 items-center', this.classInput()),
+    cn(
+      'relative flex h-5 items-center',
+      // A small player: at its bottom edge, under the bar (as Vidstack's).
+      '@max-xl/video:order-last',
+      this.classInput(),
+    ),
   );
 }

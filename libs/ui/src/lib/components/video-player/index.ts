@@ -20,4 +20,5 @@ export { ScVideoPlayerSeek } from './video-player-seek';
 export { ScVideoPlayerSkip } from './video-player-skip';
 export { ScVideoPlayerTime } from './video-player-time';
 export { ScVideoPlayerTimeSeparator } from './video-player-time-separator';
+export { ScVideoPlayerTop } from './video-player-top';
 export { ScVideoPlayerVolume } from './video-player-volume';

@@ -9,7 +9,8 @@ scVideoPlayer (paused, currentTime, volume, muted, playbackRate, captions — tw
 │                  duration, buffered, waiting, ended, fullscreen, pictureInPicture, tracks, chapters, chapter, cues, preview)
 ├── video[scVideoPlayerMedia] — yours: src / <source>s, poster, <track>s
 ├── scVideoPlayerCaptionsDisplay — the captions, above the controls
-├── scVideoPlayerCenter — play and the skips over the video (small player; paused)
+├── scVideoPlayerTop — the top bar of a small player: captions
+├── scVideoPlayerCenter — play over the video (small player; paused)
 └── scVideoPlayerControls — hides while playing untouched
     ├── scVideoPlayerProgress → input[scVideoPlayerSeek], scVideoPlayerPreview
     └── scVideoPlayerBar → buttons: Play, Skip, Mute, Captions, Rate,
@@ -27,10 +28,11 @@ scVideoPlayer (paused, currentTime, volume, muted, playbackRate, captions — tw
   </video>
   <div scVideoPlayerCaptionsDisplay></div>
 
+  <div scVideoPlayerTop>
+    <button scVideoPlayerCaptions><svg siCaptionsIcon></svg><span class="sr-only">Captions</span></button>
+  </div>
   <div scVideoPlayerCenter>
-    <button [scVideoPlayerSkip]="-10"><svg siRotateCcwIcon></svg><span class="sr-only">Back 10 seconds</span></button>
     <button scVideoPlayerPlay><svg siPlayIcon></svg><span class="sr-only">{{ player.paused() ? 'Play' : 'Pause' }}</span></button>
-    <button [scVideoPlayerSkip]="10"><svg siRotateCwIcon></svg><span class="sr-only">Forward 10 seconds</span></button>
   </div>
 
   <div scVideoPlayerControls>
@@ -60,11 +62,11 @@ Two-way: `paused`, `currentTime`, `volume`, `muted`, `playbackRate`, `captions` 
 
 ## Small players
 
-The player is a container (`@container/video`), and its parts fit themselves to its width — the template stays the same. Below 576px (the breakpoint of Vidstack's player), as other players do:
+The player is a container (`@container/video`), and its parts fit themselves to its width — the template stays the same. Below 576px, as in Vidstack's small layout:
 
-- `scVideoPlayerCenter` shows play and the skips over the video. On a wide player it shows only while paused, and then only its play.
-- In `scVideoPlayerBar`, play and the skips step aside when the player has a center — they're in it. Without a center, they stay.
-- The volume slider, the speeds and picture-in-picture step aside; mute, the time, captions and fullscreen stay.
+- `scVideoPlayerTop` shows at the top, with captions; `scVideoPlayerCenter` shows play in the middle. On a wide player the top bar isn't there, and the center shows only while paused.
+- In `scVideoPlayerBar`, play steps aside when the player has a center, captions when it has a top bar. Without them, they stay.
+- The skips, mute, the volume slider, the speeds and picture-in-picture step aside: the bar keeps the time, the title and fullscreen, and the seek bar goes under it, at the player's bottom edge.
 
 No JavaScript measures it, so the first render — and the server's — is already right. To build something only where the player is wide enough, `scResizeObserver` gives its width as a signal.
 

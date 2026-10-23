@@ -3,9 +3,10 @@ import { cn } from '../../utils/cn/cn';
 
 /**
  * The controls' row, in `scVideoPlayerControls`. On a small player (below
- * 576px wide) with a `scVideoPlayerCenter`, its play and skip buttons step
- * aside — they're in the center; the volume, the speeds and
- * picture-in-picture step aside on any small player.
+ * 576px wide), as in Vidstack's small layout: play steps aside when there's a
+ * `scVideoPlayerCenter`, captions when there's a `scVideoPlayerTop`; the
+ * skips, mute, the volume, the speeds and picture-in-picture always — the
+ * time, the title and fullscreen stay, the seek bar under them.
  */
 @Directive({
   selector: 'div[scVideoPlayerBar]',
