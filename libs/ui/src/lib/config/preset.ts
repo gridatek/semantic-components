@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
-import type { ScPresetStyles } from '@semantic-components/preset-styles';
-import { nova } from '@semantic-components/preset-styles/nova';
+import type { ScPreset } from '@semantic-components/presets';
+import { nova } from '@semantic-components/presets/nova';
 import { SC_CONFIG } from './config';
 
 /**
@@ -8,6 +8,6 @@ import { SC_CONFIG } from './config';
  * classes of the parts that follow it. In an injection context, e.g. a field:
  * `private readonly buttonStyles = injectPreset().button;`
  */
-export function injectPreset(): ScPresetStyles {
+export function injectPreset(): ScPreset {
   return inject(SC_CONFIG).preset ?? nova;
 }

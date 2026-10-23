@@ -52,7 +52,7 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
           The components, and their classes in shadcn's styles (the presets):
         </p>
         <app-package-manager-install
-          packages="@semantic-components/ui @semantic-components/preset-styles"
+          packages="@semantic-components/ui @semantic-components/presets"
         />
       </section>
 
@@ -89,7 +89,7 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
             >&#64;source</code
           >
           at its file (<code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >…-preset-styles-lyra.mjs</code
+            >…-presets-lyra.mjs</code
           >):
         </p>
         <div scCodeBlock>
@@ -213,7 +213,7 @@ export default class UiPage {
 /* The library and your preset (its file only): Tailwind skips node_modules.
    Adjust the path to node_modules to your project. */
 @source '../node_modules/@semantic-components/ui';
-@source '../node_modules/@semantic-components/preset-styles/fesm2022/semantic-components-preset-styles-nova.mjs';
+@source '../node_modules/@semantic-components/presets/fesm2022/semantic-components-presets-nova.mjs';
 
 /*
  * The theme: shadcn's nova, with our differences marked "Not shadcn's":
@@ -377,7 +377,7 @@ export default class UiPage {
 }
 `;
 
-  readonly presetCode = `import { lyra } from '@semantic-components/preset-styles/lyra';
+  readonly presetCode = `import { lyra } from '@semantic-components/presets/lyra';
 import { provideScConfig } from '@semantic-components/ui';
 
 export const appConfig: ApplicationConfig = {

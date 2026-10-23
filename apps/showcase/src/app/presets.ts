@@ -1,21 +1,18 @@
-import type {
-  ScPresetName,
-  ScPresetStyles,
-} from '@semantic-components/preset-styles';
-import { luma } from '@semantic-components/preset-styles/luma';
-import { lyra } from '@semantic-components/preset-styles/lyra';
-import { maia } from '@semantic-components/preset-styles/maia';
-import { mira } from '@semantic-components/preset-styles/mira';
-import { nova } from '@semantic-components/preset-styles/nova';
-import { rhea } from '@semantic-components/preset-styles/rhea';
-import { sera } from '@semantic-components/preset-styles/sera';
-import { vega } from '@semantic-components/preset-styles/vega';
+import type { ScPreset, ScPresetName } from '@semantic-components/presets';
+import { luma } from '@semantic-components/presets/luma';
+import { lyra } from '@semantic-components/presets/lyra';
+import { maia } from '@semantic-components/presets/maia';
+import { mira } from '@semantic-components/presets/mira';
+import { nova } from '@semantic-components/presets/nova';
+import { rhea } from '@semantic-components/presets/rhea';
+import { sera } from '@semantic-components/presets/sera';
+import { vega } from '@semantic-components/presets/vega';
 
 /**
  * Every preset, for the showcase's preset sheet. An app with one preset
  * imports only its own; the showcase shows them all.
  */
-export const PRESETS: Record<ScPresetName, ScPresetStyles> = {
+export const PRESETS: Record<ScPresetName, ScPreset> = {
   nova,
   vega,
   maia,

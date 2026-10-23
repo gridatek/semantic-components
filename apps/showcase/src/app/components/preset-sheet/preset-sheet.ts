@@ -1,6 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, ViewEncapsulation, inject } from '@angular/core';
-import type { ScPresetName } from '@semantic-components/preset-styles';
+import type { ScPresetName } from '@semantic-components/presets';
 import {
   ScButton,
   ScSheet,

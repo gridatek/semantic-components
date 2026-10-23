@@ -2,7 +2,7 @@ import { Directive, booleanAttribute, computed, input } from '@angular/core';
 import type {
   ScButtonSize,
   ScButtonVariant,
-} from '@semantic-components/preset-styles';
+} from '@semantic-components/presets';
 import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 
@@ -14,7 +14,7 @@ export interface ScButtonVariants {
 
 /**
  * A button in the app's preset: its classes are the preset's
- * (`provideScConfig({ preset })`, from `@semantic-components/preset-styles`;
+ * (`provideScConfig({ preset })`, from `@semantic-components/presets`;
  * nova by default), chosen when the app starts.
  */
 @Directive({

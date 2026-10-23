@@ -5,7 +5,7 @@ import {
   inject,
   makeEnvironmentProviders,
 } from '@angular/core';
-import type { ScPresetStyles } from '@semantic-components/preset-styles';
+import type { ScPreset } from '@semantic-components/presets';
 import type { ScToasterConfig } from '../components/toast/toast.types';
 
 /**
@@ -21,8 +21,8 @@ import type { ScToasterConfig } from '../components/toast/toast.types';
  * ```
  */
 export interface ScConfig {
-  /** The components' classes: a preset from preset-styles; nova by default. */
-  preset?: ScPresetStyles;
+  /** The components' classes: a preset from presets; nova by default. */
+  preset?: ScPreset;
   toaster?: ScToasterConfig;
 }
 

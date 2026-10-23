@@ -1,7 +1,7 @@
 {
-  "name": "preset-styles",
+  "name": "presets",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/preset-styles/src",
+  "sourceRoot": "libs/presets/src",
   "prefix": "sc",
   "projectType": "library",
   "tags": [],
@@ -11,12 +11,12 @@
       "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
       "defaultConfiguration": "production",
       "options": {
-        "project": "libs/preset-styles/ng-package.json",
-        "tsConfig": "libs/preset-styles/tsconfig.lib.json"
+        "project": "libs/presets/ng-package.json",
+        "tsConfig": "libs/presets/tsconfig.lib.json"
       },
       "configurations": {
         "production": {
-          "tsConfig": "libs/preset-styles/tsconfig.lib.prod.json"
+          "tsConfig": "libs/presets/tsconfig.lib.prod.json"
         },
         "development": {}
       }

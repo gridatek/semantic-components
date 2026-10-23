@@ -8,7 +8,7 @@ The Semantic Components library: components, layouts, utilities, and `cn()`.
 - **Layouts**: Auth layout, Sidebar layout, Stacked layout
 - **Utils**: `cn()` (Tailwind class merging via `clsx` + `tailwind-merge`)
 - **Presets**: the components' classes come from the app's preset
-  (`provideScConfig({ preset })`, from `@semantic-components/preset-styles`;
+  (`provideScConfig({ preset })`, from `@semantic-components/presets`;
   nova by default)
 
 ## Usage
