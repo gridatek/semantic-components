@@ -22,6 +22,20 @@ npx nx run showcase-e2e:e2e -- --grep "Button"
 npx nx run showcase-e2e:e2e-ci
 ```
 
+## Server-side rendering (SSR)
+
+Both apps are static by default; SSR is the `ssr` build configuration. The CI job `ssr` runs the e2e tests again against the app rendered on the server, then hydrated — plus `ssr.spec.ts` (every page hydrates) and a check of the server's log. It isn't a required check.
+
+| Command                         | What runs                                                     | For                                   |
+| ------------------------------- | ------------------------------------------------------------- | ------------------------------------- |
+| `npx nx serve showcase`         | the dev server, static                                        | daily work                            |
+| `npx nx serve showcase -c ssr`  | the dev server, with SSR (rebuilds as you edit)               | looking at SSR locally                |
+| `npx nx run showcase:serve-ssr` | the built app on its Node server (`dist/…/server/server.mjs`) | CI's `ssr` job — what production runs |
+
+`serve-ssr` needs a build first (`npx nx build showcase -c ssr`); with `SSR=1`, the Playwright config starts it instead of `serve-static`. Its log goes to `dist/ssr-showcase.log` (`dist/ssr-blocks.log`). The same for `blocks`.
+
+**Allowed hosts:** the built server answers only the hosts listed in the `ssr` configuration's `security.allowedHosts` (Angular's protection against server-side request forgery) — `localhost`, for the tests. Any other host gets `400 Bad Request` with "URL with hostname … is not allowed", and every test fails. The dev server skips this check, so it only shows up on the built server. A deployment adds its own domain to the list.
+
 ## Debugging Failures
 
 1. **Run with UI mode:** `npx nx run showcase-e2e:e2e -- --ui`
