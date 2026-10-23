@@ -14,14 +14,19 @@ import {
 import { provideCodeHighlighter } from '@semantic-components/code';
 import { provideScConfig } from '@semantic-components/ui';
 import { appRoutes } from './app.routes';
+import { PRESETS, storedPreset } from './presets';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     // Code blocks highlighted with Shiki, each language loaded when first shown.
     provideCodeHighlighter(),
-    // Alt+T moves focus to the toasts (the toaster's template names it); Escape goes back.
-    provideScConfig({ toaster: { hotkey: ['altKey', 'KeyT'] } }),
+    provideScConfig({
+      // The one picked in the preset sheet (nova by default).
+      preset: PRESETS[storedPreset()],
+      // Alt+T moves focus to the toasts (the toaster's template names it); Escape goes back.
+      toaster: { hotkey: ['altKey', 'KeyT'] },
+    }),
     // Overlays (dialogs, menus, tooltips) stay visible in fullscreen, e.g. in
     // the PDF viewer's presentation mode.
     { provide: OverlayContainer, useClass: FullscreenOverlayContainer },

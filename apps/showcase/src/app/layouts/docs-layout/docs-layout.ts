@@ -56,6 +56,7 @@ import {
 } from '@semantic-icons/lucide-icons';
 import { filter } from 'rxjs';
 import { Logo } from '../../components/logo/logo';
+import { PresetSheet } from '../../components/preset-sheet/preset-sheet';
 import { Toc } from '../../components/toc/toc';
 import { TocService } from '../../components/toc/toc.service';
 import { CommandPaletteService } from '../../services/command-palette.service';
@@ -65,6 +66,7 @@ import { ConfigService } from '../../services/config.service';
 @Component({
   selector: 'app-docs-layout',
   imports: [
+    PresetSheet,
     RouterOutlet,
     RouterLink,
     RouterLinkActive,
@@ -431,6 +433,9 @@ import { ConfigService } from '../../services/config.service';
           <span class="text-muted-foreground text-sm font-medium">
             Documentation
           </span>
+          <div class="ms-auto">
+            <app-preset-sheet />
+          </div>
         </header>
 
         <div class="flex flex-1">

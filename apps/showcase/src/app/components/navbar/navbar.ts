@@ -45,10 +45,12 @@ import { CommandPaletteService } from '../../services/command-palette.service';
 import { ComponentsService } from '../../services/components.service';
 import { GithubService } from '../../services/github.service';
 import { Logo } from '../logo/logo';
+import { PresetSheet } from '../preset-sheet/preset-sheet';
 
 @Component({
   selector: 'app-navbar',
   imports: [
+    PresetSheet,
     RouterLink,
     RouterLinkActive,
     ScNavbar,
@@ -200,6 +202,7 @@ import { Logo } from '../logo/logo';
           >
             Get Started
           </a>
+          <app-preset-sheet />
           <button scThemeModeToggle #themeToggle="scThemeModeToggle">
             @if (themeToggle.isDark()) {
               <svg siSunIcon></svg>
