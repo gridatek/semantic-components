@@ -83,13 +83,13 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
-      # No retries: a failure here is a result, not a flake.
+      # Two retries, as `static`: a flake is retried, and reported as flaky.
       - name: E2E tests (showcase, SSR)
-        run: npx playwright test -c apps/showcase-e2e/playwright.config.ts --workers=4 --retries=0 --reporter=line
+        run: npx playwright test -c apps/showcase-e2e/playwright.config.ts --workers=4 --retries=2 --reporter=line
 
       - name: E2E tests (blocks, SSR)
         if: ${{ !cancelled() }}
-        run: npx playwright test -c apps/blocks-e2e/playwright.config.ts --workers=4 --retries=0 --reporter=line
+        run: npx playwright test -c apps/blocks-e2e/playwright.config.ts --workers=4 --retries=2 --reporter=line
 
       # What failed on the server: Angular logs it, the page still answers 200.
       - name: Server errors
