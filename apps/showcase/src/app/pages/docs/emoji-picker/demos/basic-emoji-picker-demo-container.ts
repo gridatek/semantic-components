@@ -121,9 +121,9 @@ import { SiLoaderCircleIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
           scEmojiPickerSkinTone
           #tone="scEmojiPickerSkinTone"
           class="ms-auto"
-          aria-label="Change skin tone"
         >
           {{ tone.variation() }}
+          <span class="sr-only">Change skin tone</span>
         </button>
       </div>
     </div>
