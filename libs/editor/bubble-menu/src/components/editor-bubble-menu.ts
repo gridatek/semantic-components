@@ -39,7 +39,10 @@ export class ScEditorBubbleMenu {
 
   protected readonly class = computed(() =>
     cn(
-      'z-50 flex items-center gap-1 rounded-lg border bg-popover p-1 text-popover-foreground shadow-md',
+      // w-max from the start: the plugin measures it to centre it on the
+      // text, and only then sets its width — as wide as the editor, it was
+      // pushed to the edge.
+      'z-50 flex w-max items-center gap-1 rounded-lg border bg-popover p-1 text-popover-foreground shadow-md',
       this.classInput(),
     ),
   );
