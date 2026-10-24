@@ -42,6 +42,7 @@ async load() {
 - After each load it looks again: still near (a first page shorter than the box), it asks again — until the content fills the box, or `done`.
 - `auto` off: only the More button asks — always, or after an error (`[auto]="!failed()"`), so a failing server is not asked again and again.
 - `direction="start"` (a chat): the sentinel is before the items; it opens at the end, and as older items come in above, the one being read stays where it was.
+- It looks once it is in the page: rendered before (in a lazy tab panel, a dialog), it finds what scrolls — and a chat opens at its end — when it is shown.
 
 ## Accessibility
 

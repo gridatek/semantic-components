@@ -32,6 +32,8 @@ Render `rows()` — each `{ index, key, start, size, lane }` — and read your d
 
 - Give it a size and an overflow (`h-96 overflow-y-auto`): it scrolls itself.
 - Without: it takes its full size, and the box around it — or the page — scrolls.
+- A box that scrolls in a page that scrolls: either one moving it keeps the right rows rendered.
+- It looks once it is in the page: rendered before (in a lazy tab panel, a dialog), it waits until it is shown.
 
 ## Layout
 
