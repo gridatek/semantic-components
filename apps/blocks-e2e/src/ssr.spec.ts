@@ -36,6 +36,10 @@ test.describe('SSR', () => {
       const problems: string[] = [];
       page.on('pageerror', (e) => problems.push(e.message.split('\n')[0]));
       page.on('console', (m) => {
+        // Our pages' errors — not another site's (Firefox logs the cookies
+        // an image from github.com is refused as console errors).
+        const from = m.location().url;
+        if (from && new URL(from).origin !== new URL(page.url()).origin) return;
         if (m.type() === 'error' || /NG05\d\d/.test(m.text())) {
           problems.push(m.text().split('\n')[0]);
         }

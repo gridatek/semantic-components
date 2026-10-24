@@ -54,9 +54,12 @@ test.describe('Basic', () => {
     // Right to left before the app starts: the direction is read once, as it
     // starts (and with SSR, the page is drawn before the test could set it).
     await page.addInitScript(() => {
+      const rtl = () => document.documentElement?.setAttribute('dir', 'rtl');
+      // <html> may be there already (Firefox), or not yet (Chromium).
+      if (document.documentElement) return rtl();
       new MutationObserver((_, observer) => {
         if (!document.documentElement) return;
-        document.documentElement.setAttribute('dir', 'rtl');
+        rtl();
         observer.disconnect();
       }).observe(document, { childList: true });
     });
