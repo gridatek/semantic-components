@@ -881,7 +881,11 @@ export class ScPdfViewerCanvas {
       }
       this.pdfViewer.pageRendered(pageNumber);
     } catch (err) {
-      if ((err as { name?: string })?.name !== 'RenderingCancelledException') {
+      // Cancelled, or its document closed for another ("Transport
+      // destroyed"): not an error — only a failure on the current document.
+      const cancelled =
+        (err as { name?: string })?.name === 'RenderingCancelledException';
+      if (!cancelled && doc === this.pdfDocument()) {
         console.error(`Error rendering page ${pageNumber}:`, err);
       }
       this.activeRenderTasks.delete(pageNumber);

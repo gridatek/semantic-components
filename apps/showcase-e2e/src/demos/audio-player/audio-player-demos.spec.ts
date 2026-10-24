@@ -1,3 +1,4 @@
+import { collectErrors } from '../../interaction';
 import { type Page, expect, test } from '../../test';
 
 const audio = (page: Page) => page.locator('audio');
@@ -16,11 +17,15 @@ test.describe('Player', () => {
       .toBeGreaterThan(39);
   });
 
-  test('plays and pauses', async ({ page }) => {
+  test('plays and pauses, without an error', async ({ page }) => {
+    // Playing reads the audio every frame: no change-detection loop (NG0103).
+    const errors = collectErrors(page);
     await page.getByRole('button', { name: 'Play' }).click();
     await expect.poll(async () => (await state(page)).paused).toBe(false);
+    await expect.poll(async () => (await state(page)).time).toBeGreaterThan(1);
     await page.getByRole('button', { name: 'Pause' }).click();
     await expect.poll(async () => (await state(page)).paused).toBe(true);
+    expect(errors).toEqual([]);
   });
 
   test('the next track, the previous, and one from the playlist', async ({

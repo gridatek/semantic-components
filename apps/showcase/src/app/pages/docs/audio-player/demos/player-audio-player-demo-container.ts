@@ -95,6 +95,7 @@ interface Song {
           [ngSrc]="song().cover"
           width="64"
           height="64"
+          priority
           alt=""
           class="size-16 rounded-md"
         />
