@@ -71,6 +71,9 @@ test.describe('Full Featured Editor Demo', () => {
   test('superscript and subscript exclude each other', async ({ page }) => {
     await startEmpty(page);
     await page.keyboard.type('x2');
+    // Typed in before selecting: a selection made too soon is empty, and the
+    // mark would only wait for the next text.
+    await expect(output(page)).toHaveText('<p>x2</p>');
     await page.keyboard.press('Shift+ArrowLeft');
     await toolbar(page).getByRole('button', { name: 'Superscript' }).click();
     await expect(output(page)).toHaveText('<p>x<sup>2</sup></p>');
