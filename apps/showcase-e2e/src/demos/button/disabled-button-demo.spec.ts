@@ -45,11 +45,16 @@ test.describe('Disabled Button Demo', () => {
   test('should have reduced opacity when disabled', async ({ page }) => {
     const buttons = page.locator('button[scButton]');
     const count = await buttons.count();
+    // Polled: the opacity fades in (`transition-all`) — WebKit may report 1
+    // at the start.
     for (let i = 0; i < count; i++) {
-      const opacity = await buttons
-        .nth(i)
-        .evaluate((el) => window.getComputedStyle(el).opacity);
-      expect(parseFloat(opacity)).toBeLessThan(1);
+      await expect
+        .poll(() =>
+          buttons
+            .nth(i)
+            .evaluate((el) => parseFloat(window.getComputedStyle(el).opacity)),
+        )
+        .toBeLessThan(1);
     }
   });
 

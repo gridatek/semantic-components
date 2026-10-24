@@ -31,9 +31,14 @@ test.describe('Loading Button Demo', () => {
 
   test('should have reduced opacity', async ({ page }) => {
     const button = page.getByRole('button', { name: 'Please wait' });
-    const opacity = await button.evaluate(
-      (el) => window.getComputedStyle(el).opacity,
-    );
-    expect(parseFloat(opacity)).toBeLessThan(1);
+    // Polled: the opacity fades in (`transition-all`) — WebKit may report 1
+    // at the start.
+    await expect
+      .poll(() =>
+        button.evaluate((el) =>
+          parseFloat(window.getComputedStyle(el).opacity),
+        ),
+      )
+      .toBeLessThan(1);
   });
 });

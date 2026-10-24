@@ -56,6 +56,19 @@ Known upstream, by a sibling of the same cause:
 
 Nothing to change on our side; update Angular once #70594 is released.
 
+## Second run — `static`
+
+[Run 40077787027](https://github.com/gridatek/semantic-components/actions/runs/40077787027),
+on `ed866729c`: 1 failed, 4 flaky, 2198 passed (18.9 m).
+
+| Test                                             | Browser  | State                                                                                                                                                         |
+| ------------------------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Disabled button: reduced opacity (failed 3 / 3)  | WebKit   | **Fixed**: the opacity fades in (`transition-all`), and WebKit reported 1 at its start. The test polls now — and so does the loading button's, the same check |
+| Editor: the floating toolbar (#9)                | Chromium | Flaky again — no longer only under SSR                                                                                                                        |
+| Tree: one tab stop (#8)                          | WebKit   | Flaky — also in `static`, not only SSR                                                                                                                        |
+| Color picker swatches: → moves the focus to Cyan | WebKit   | Flaky — new                                                                                                                                                   |
+| Scheduler: previous / next / today               | WebKit   | Flaky — new: "Previous" clicked, the title unchanged                                                                                                          |
+
 ## Next
 
 - #7 and #8: find why WebKit lays out the masonry grid and wires the tree's
