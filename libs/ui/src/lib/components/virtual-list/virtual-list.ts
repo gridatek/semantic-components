@@ -179,29 +179,47 @@ export class ScVirtualList {
   constructor() {
     const destroyRef = inject(DestroyRef);
     afterNextRender(() => {
-      const style = getComputedStyle(this.host);
-      const overflow = this.vertical() ? style.overflowY : style.overflowX;
-      const own = /auto|scroll|overlay/.test(overflow);
-      this.outer.set(!own);
-      this.scroller = own ? this.host : scrollParent(this.host.parentElement);
-      const target: HTMLElement | Window | null =
-        this.scroller ?? this.document.defaultView;
-      const onScroll = () => this.schedule();
-      target?.addEventListener('scroll', onScroll, { passive: true });
-      this.document.defaultView?.addEventListener('resize', onScroll);
-      const box = new ResizeObserver(onScroll);
-      box.observe(this.host);
-      if (this.scroller && this.scroller !== this.host) {
-        box.observe(this.scroller);
-      }
-      this.measureView();
+      if (this.host.isConnected) return this.start(destroyRef);
+      // Rendered before it is in the page (projected into a lazy tab panel,
+      // a dialog…): no styles to read yet. Started once it is shown — in the
+      // next frame: observing from this callback would loop the observer.
+      const shown = new ResizeObserver(() => {
+        if (!this.host.isConnected) return;
+        shown.disconnect();
+        this.frame = requestAnimationFrame(() => this.start(destroyRef));
+      });
+      shown.observe(this.host);
       destroyRef.onDestroy(() => {
-        target?.removeEventListener('scroll', onScroll);
-        this.document.defaultView?.removeEventListener('resize', onScroll);
-        box.disconnect();
-        this.resize?.disconnect();
+        shown.disconnect();
         cancelAnimationFrame(this.frame);
       });
+    });
+  }
+
+  /** What scrolls — itself, a box it is in, or the page — and listens to it. */
+  private start(destroyRef: DestroyRef): void {
+    const style = getComputedStyle(this.host);
+    const overflow = this.vertical() ? style.overflowY : style.overflowX;
+    const own = /auto|scroll|overlay/.test(overflow);
+    this.outer.set(!own);
+    this.scroller = own ? this.host : scrollParent(this.host.parentElement);
+    const target: HTMLElement | Window | null =
+      this.scroller ?? this.document.defaultView;
+    const onScroll = () => this.schedule();
+    target?.addEventListener('scroll', onScroll, { passive: true });
+    this.document.defaultView?.addEventListener('resize', onScroll);
+    const box = new ResizeObserver(onScroll);
+    box.observe(this.host);
+    if (this.scroller && this.scroller !== this.host) {
+      box.observe(this.scroller);
+    }
+    this.measureView();
+    destroyRef.onDestroy(() => {
+      target?.removeEventListener('scroll', onScroll);
+      this.document.defaultView?.removeEventListener('resize', onScroll);
+      box.disconnect();
+      this.resize?.disconnect();
+      cancelAnimationFrame(this.frame);
     });
   }
 
