@@ -35,5 +35,35 @@ export async function expectNoA11yViolations(
     .exclude('[inert]')
     .exclude('[data-disabled="true"]')
     .analyze();
-  expect(results.violations).toEqual([]);
+  // Label in name, on a tree item named by a label (the org chart's card):
+  // axe counts as visible text the item's children — tree items of their
+  // own, named apart — and what is aria-hidden (an avatar's initials). The
+  // item passes if its text without them is its label's.
+  for (const violation of results.violations) {
+    if (violation.id !== 'label-content-name-mismatch') continue;
+    const kept = [];
+    for (const node of violation.nodes) {
+      const labelInName = await page.evaluate((selector) => {
+        const item = document.querySelector(selector);
+        const labels = item?.getAttribute('aria-labelledby');
+        if (!item?.matches('[role=treeitem]') || !labels) return false;
+        const text = (element: Element) => {
+          const copy = element.cloneNode(true) as Element;
+          copy
+            .querySelectorAll('[role=group], [aria-hidden=true]')
+            .forEach((e) => e.remove());
+          return (copy.textContent ?? '').replace(/\s+/g, '');
+        };
+        const label = labels
+          .split(' ')
+          .map((id) => document.getElementById(id))
+          .map((e) => (e ? text(e) : ''))
+          .join('');
+        return text(item) === label;
+      }, String(node.target[0]));
+      if (!labelInName) kept.push(node);
+    }
+    violation.nodes = kept;
+  }
+  expect(results.violations.filter((v) => v.nodes.length)).toEqual([]);
 }

@@ -171,10 +171,10 @@ import { PresetSheet } from '../preset-sheet/preset-sheet';
             href="https://github.com/gridatek/semantic-components"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="GitHub"
             class="hidden gap-1 md:inline-flex"
           >
             <svg siGithubIcon></svg>
+            <span class="sr-only">GitHub</span>
             @if (starCount()) {
               <span class="text-muted-foreground w-fit text-xs tabular-nums">
                 {{ starCount() }}

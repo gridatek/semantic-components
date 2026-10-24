@@ -69,6 +69,30 @@ on `ed866729c`: 1 failed, 4 flaky, 2198 passed (18.9 m).
 | Color picker swatches: → moves the focus to Cyan | WebKit   | Flaky — new                                                                                                                                                   |
 | Scheduler: previous / next / today               | WebKit   | Flaky — new: "Previous" clicked, the title unchanged                                                                                                          |
 
+## axe 4.14 — label in name
+
+[CI run 40079291160](https://github.com/gridatek/semantic-components/actions/runs/40079291160):
+`@axe-core/playwright` 4.14 turns on `label-content-name-mismatch` (WCAG
+2.5.3, experimental before): the visible text must be part of the name.
+
+- **Navbar GitHub link** — named "GitHub" by `aria-label`, showing the stars.
+  **Fixed**: a `sr-only` "GitHub" inside instead, so the name holds both.
+- **Org chart items** — named by their card (`aria-labelledby`), but axe
+  counts as their visible text their reports (tree items of their own) and
+  the `aria-hidden` avatar initials. The card stays the name — the same in
+  every browser. **Skipped** in `axe.ts` for a tree item whose own text,
+  without its group and its `aria-hidden` parts, is its label's.
+
+Also, in that run's `ssr` job: editor "superscript and subscript exclude each
+other" failed once (Chromium) — another editor flake beside #9.
+
+## Tree — ArrowDown skips rows (WebKit)
+
+Behind #8: logging the focus after each key, WebKit — static, no SSR — moved
+**more than one row** for one ArrowDown in 4 of 10 loads (app → app.routes.ts,
+src → app.ts, app → main.ts). A real bug in the tree's keyboard handling, not
+the test's timing. To investigate.
+
 ## Next
 
 - #7 and #8: find why WebKit lays out the masonry grid and wires the tree's
