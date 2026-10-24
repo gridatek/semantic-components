@@ -23,7 +23,12 @@ import { ScVirtualList, ScVirtualListRow } from '@semantic-components/ui';
         </li>
       }
     </ul>
-    <p class="text-muted-foreground text-sm" data-testid="range">
+    <!-- Shown above the list (order-first) and stuck there, so the range
+      follows the scroll — written after it: it reads the list's inputs. -->
+    <p
+      class="text-muted-foreground bg-background sticky top-14 z-10 order-first w-full max-w-md py-1 text-center text-sm"
+      data-testid="range"
+    >
       @if (list.range(); as range) {
         Rendered: {{ range.first + 1 }}–{{ range.last + 1 }} of
         {{ list.count() }}
@@ -35,7 +40,7 @@ import { ScVirtualList, ScVirtualListRow } from '@semantic-components/ui';
 })
 export class PageVirtualListDemo {
   readonly rows = Array.from(
-    { length: 5_000 },
+    { length: 500 },
     (_, i) => 'Entry ' + (i + 1) + ': all good',
   );
 }

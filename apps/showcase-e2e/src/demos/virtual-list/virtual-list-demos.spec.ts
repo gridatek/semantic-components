@@ -155,10 +155,10 @@ test('Page scroll: the page scrolls, the list follows', async ({ page }) => {
     (el) => getComputedStyle(el).overflowY,
   );
   expect(overflow).toBe('visible');
-  await page.evaluate(() => window.scrollTo(0, 80_000));
+  await page.evaluate(() => window.scrollTo(0, 10_000));
   await expect
     .poll(async () => (await boxes(page))[0]?.index ?? 0)
-    .toBeGreaterThan(1500);
+    .toBeGreaterThan(150);
   await expect(row(page, 0)).toHaveCount(0);
 });
 
