@@ -65,8 +65,12 @@ export class ScAudioPlayerMedia {
     // there is no real one to play, pause or read.
     afterNextRender(() => {
       this.player.ɵmedia.set(this.element);
-      // Already loaded (from the cache): no event comes.
-      if (this.element.readyState >= 1) this.sync();
+      // Already loaded (from the cache, or while the server's page was
+      // hydrating): no event comes — nor a render, without one asked for.
+      if (this.element.readyState >= 1) {
+        this.changes.markForCheck();
+        this.sync();
+      }
     });
   }
 

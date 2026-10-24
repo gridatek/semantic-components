@@ -86,6 +86,20 @@ on `ed866729c`: 1 failed, 4 flaky, 2198 passed (18.9 m).
 Also, in that run's `ssr` job: editor "superscript and subscript exclude each
 other" failed once (Chromium) — another editor flake beside #9.
 
+## Third run — `ssr`
+
+[Run 40083342485](https://github.com/gridatek/semantic-components/actions/runs/40083342485),
+on `df3337c83`: `static` green; `ssr` 5 failed, 4628 passed — in **55.9 m**, of
+its 60.
+
+| Test                                                               | Browser  | State                                                                                                                                                                                                                       |
+| ------------------------------------------------------------------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Editor page hydrates: `goto` timed out waiting for `load`          | Firefox  | **Fixed**: the SSR check waits for the HTML (`domcontentloaded`), then hydration — not every image and media file                                                                                                           |
+| Audio waveform: duration 0                                         | WebKit   | **Fixed** (lib): loaded before hydration, no event comes, and `sync()` only registered an after-render hook — zoneless, nothing rendered. Now it asks for one (`markForCheck`). Same in the video player                    |
+| Video captions: no Captions button (local, 1 in 6; not in the run) | WebKit   | **Fixed** (lib): the player stayed "before the first play" — `started` came from a read after the next render, which found it paused again. Set by the `play` event now. And tracks listed late are read again (`addtrack`) |
+| Editor floating toolbar (#9)                                       | Chromium | Flaky, again                                                                                                                                                                                                                |
+| Masonry (#7), tree (#8)                                            | WebKit   | Known, to investigate                                                                                                                                                                                                       |
+
 ## Tree — ArrowDown skips rows (WebKit)
 
 Behind #8: logging the focus after each key, WebKit — static, no SSR — moved

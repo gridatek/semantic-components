@@ -28,7 +28,9 @@ import { ScVideoPlayer } from './video-player';
     '[class]': 'class()',
     '(pointerdown)': 'onPointerDown($event)',
     '(click)': 'onClick()',
-    '(play)': 'sync()',
+    // Started at once: a read after the next render may already find it
+    // paused again.
+    '(play)': 'player.started.set(true); sync()',
     '(pause)': 'sync()',
     '(timeupdate)': 'sync()',
     '(durationchange)': 'sync()',
@@ -63,15 +65,33 @@ export class ScVideoPlayerMedia {
   private frame: number | null = null;
 
   constructor() {
-    inject(DestroyRef).onDestroy(() => {
+    const destroyRef = inject(DestroyRef);
+    destroyRef.onDestroy(() => {
       if (this.frame !== null) this.window?.cancelAnimationFrame(this.frame);
     });
     // The video, to the player once rendered in the browser — on the server
     // there is no real one to play, pause or read tracks from.
     afterNextRender(() => {
       this.player.ɵmedia.set(this.element);
-      // Already loaded (from the cache): no event comes.
-      if (this.element.readyState >= 1) this.onMetadata();
+      // Already loaded (from the cache, or while the server's page was
+      // hydrating): no event comes — nor a render, without one asked for.
+      if (this.element.readyState >= 1) {
+        this.changes.markForCheck();
+        this.onMetadata();
+      }
+      // Tracks listed after the metadata (WebKit, a page from the server):
+      // read again.
+      const tracks = this.element.textTracks;
+      const read = () => {
+        this.changes.markForCheck();
+        this.player.ɵreadTracks(this.element);
+      };
+      tracks.addEventListener('addtrack', read);
+      tracks.addEventListener('removetrack', read);
+      destroyRef.onDestroy(() => {
+        tracks.removeEventListener('addtrack', read);
+        tracks.removeEventListener('removetrack', read);
+      });
     });
   }
 
