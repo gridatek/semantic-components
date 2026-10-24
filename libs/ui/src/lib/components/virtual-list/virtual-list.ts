@@ -203,10 +203,11 @@ export class ScVirtualList {
     const own = /auto|scroll|overlay/.test(overflow);
     this.outer.set(!own);
     this.scroller = own ? this.host : scrollParent(this.host.parentElement);
-    const target: HTMLElement | Window | null =
-      this.scroller ?? this.document.defaultView;
     const onScroll = () => this.schedule();
-    target?.addEventListener('scroll', onScroll, { passive: true });
+    // Any scroll, captured: its scroller's, and the page's (or a box's
+    // around it) — those move it in view too.
+    const scrolls = { capture: true, passive: true };
+    this.document.addEventListener('scroll', onScroll, scrolls);
     this.document.defaultView?.addEventListener('resize', onScroll);
     const box = new ResizeObserver(onScroll);
     box.observe(this.host);
@@ -215,7 +216,7 @@ export class ScVirtualList {
     }
     this.measureView();
     destroyRef.onDestroy(() => {
-      target?.removeEventListener('scroll', onScroll);
+      this.document.removeEventListener('scroll', onScroll, scrolls);
       this.document.defaultView?.removeEventListener('resize', onScroll);
       box.disconnect();
       this.resize?.disconnect();

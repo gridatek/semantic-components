@@ -35,6 +35,9 @@ export const appConfig: ApplicationConfig = {
       withRouterConfig({ onSameUrlNavigation: 'reload' }), // Enable reloading on same URL navigation for mobile menu
       withInMemoryScrolling({
         scrollPositionRestoration: 'enabled',
+        // At a section (`#id`): there, not to the top — the table of
+        // contents scrolls there once the headings have ids.
+        anchorScrolling: 'enabled',
       }),
     ),
   ],

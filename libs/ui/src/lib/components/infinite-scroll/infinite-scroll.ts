@@ -79,6 +79,11 @@ export class ScInfiniteScroll {
   private readonly near = signal(false);
   /** The content's size changed: worth a look again. */
   private readonly resized = signal(0);
+  /**
+   * In the page: rendered before it is (projected into a lazy tab panel, a
+   * dialog…), it has no scroller to find yet.
+   */
+  private readonly connected = signal(false);
   /** With `start`: the distance from the end to keep, as content comes in. */
   private kept: number | null = null;
   private scroller: HTMLElement | null = null;
@@ -89,6 +94,7 @@ export class ScInfiniteScroll {
     const destroyRef = inject(DestroyRef);
     // The sentinel watched, against what scrolls.
     afterRenderEffect((onCleanup) => {
+      if (!this.connected()) return;
       const sentinel = this.sentinel().nativeElement;
       const margin = `${this.distance()}px`;
       untracked(() => {
@@ -115,17 +121,25 @@ export class ScInfiniteScroll {
     });
     afterNextRender(() => {
       const resize = new ResizeObserver(() => {
+        // Shown at last: in the page now.
+        if (!this.connected() && this.host.isConnected) this.shown();
         this.keepPlace();
         this.resized.update((n) => n + 1);
       });
+      if (this.host.isConnected) this.shown();
       resize.observe(this.host);
       destroyRef.onDestroy(() => resize.disconnect());
-      // A chat opens at its end.
-      if (this.direction() === 'start') {
-        const scroller = this.scrollingElement();
-        scroller.scrollTop = scroller.scrollHeight;
-      }
     });
+  }
+
+  /** In the page: its scroller found — and a chat opens at its end. */
+  private shown(): void {
+    this.scroller = scrollParent(this.host);
+    this.connected.set(true);
+    if (this.direction() === 'start') {
+      const scroller = this.scrollingElement();
+      scroller.scrollTop = scroller.scrollHeight;
+    }
   }
 
   /** Asks for more now (the More button): unless loading or done. */
