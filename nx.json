@@ -12,10 +12,6 @@
       "dependsOn": ["^build"],
       "inputs": ["production", "^production"]
     },
-    "@nx/eslint:lint": {
-      "cache": true,
-      "inputs": ["default", "^default", "{workspaceRoot}/eslint.config.mjs"]
-    },
     "@angular/build:unit-test": {
       "cache": true,
       "inputs": ["default", "^production"]
@@ -78,5 +74,11 @@
     }
   },
   "analytics": false,
-  "neverConnectToCloud": true
+  "neverConnectToCloud": true,
+  "migrate": {
+    "agentic": false
+  },
+  "affected": {
+    "legacy": true
+  }
 }

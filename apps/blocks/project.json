@@ -64,6 +64,9 @@
       "continuous": true,
       "executor": "@angular/build:dev-server",
       "defaultConfiguration": "development",
+      "readyWhen": {
+        "signal": true
+      },
       "options": {
         "port": 4201
       },
@@ -88,6 +91,9 @@
         "staticFilePath": "dist/apps/blocks/browser",
         "spa": true,
         "watch": false
+      },
+      "readyWhen": {
+        "signal": true
       }
     },
     "serve-ssr": {

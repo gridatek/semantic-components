@@ -70,6 +70,14 @@
       "continuous": true,
       "executor": "@angular/build:dev-server",
       "defaultConfiguration": "development",
+      "readyWhen": {
+        "signal": true
+      },
+      "options": {
+        "prebundle": {
+          "exclude": ["shiki", "@shikijs/langs", "@shikijs/themes"]
+        }
+      },
       "configurations": {
         "production": {
           "buildTarget": "showcase:build:production"
@@ -80,11 +88,6 @@
         "ssr": {
           "buildTarget": "showcase:build:development,ssr",
           "prebundle": false
-        }
-      },
-      "options": {
-        "prebundle": {
-          "exclude": ["shiki", "@shikijs/langs", "@shikijs/themes"]
         }
       }
     },
@@ -101,6 +104,9 @@
         "staticFilePath": "dist/apps/showcase/browser",
         "spa": true,
         "watch": false
+      },
+      "readyWhen": {
+        "signal": true
       }
     },
     "serve-ssr": {
