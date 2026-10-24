@@ -68,9 +68,9 @@ test.describe('Emoji picker', () => {
   test('skin tone', async ({ page }) => {
     const errors = collectErrors(page);
     const tone = page.getByRole('button', { name: 'Change skin tone' });
-    await expect(tone).toHaveText('✋');
+    await expect(tone).toHaveText('✋ Change skin tone');
     await tone.click();
-    await expect(tone).toHaveText('✋🏻');
+    await expect(tone).toHaveText('✋🏻 Change skin tone');
     await page
       .getByRole('searchbox', { name: 'Search emojis' })
       .fill('waving hand');

@@ -10,7 +10,10 @@ import { SC_COMBOBOX } from './combobox-tokens';
  * and give the button an accessible name:
  *
  * ```html
- * <button scComboboxClear aria-label="Clear"><svg siXIcon></svg></button>
+ * <button scComboboxClear>
+ *   <svg siXIcon></svg>
+ *   <span class="sr-only">Clear</span>
+ * </button>
  * ```
  */
 @Directive({

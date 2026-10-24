@@ -9,7 +9,10 @@ import { SC_AUTOCOMPLETE } from './autocomplete-tokens';
  * Project the icon and give the button an accessible name:
  *
  * ```html
- * <button scAutocompleteClear aria-label="Clear"><svg siXIcon></svg></button>
+ * <button scAutocompleteClear>
+ *   <svg siXIcon></svg>
+ *   <span class="sr-only">Clear</span>
+ * </button>
  * ```
  */
 @Directive({

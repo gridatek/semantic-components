@@ -105,14 +105,16 @@ import { SiLoaderCircleIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
           scEmojiPickerSkinTone
           #tone="scEmojiPickerSkinTone"
           class="ms-auto"
-          [attr.aria-label]="
-            'Teint : ' +
-            (skinTone() === 'none'
-              ? 'par défaut'
-              : picker.skinToneNames()[skinTone()])
-          "
         >
           {{ tone.variation() }}
+          <span class="sr-only">
+            Teint :
+            {{
+              skinTone() === 'none'
+                ? 'par défaut'
+                : picker.skinToneNames()[skinTone()]
+            }}
+          </span>
         </button>
       </div>
     </div>

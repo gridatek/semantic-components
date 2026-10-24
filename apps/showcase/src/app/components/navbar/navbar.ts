@@ -188,10 +188,10 @@ import { PresetSheet } from '../preset-sheet/preset-sheet';
             href="https://github.com/gridatek/semantic-components"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="GitHub"
             class="md:hidden"
           >
             <svg siGithubIcon></svg>
+            <span class="sr-only">GitHub</span>
           </a>
           <a
             scLink

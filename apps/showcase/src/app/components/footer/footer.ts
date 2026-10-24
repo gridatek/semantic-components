@@ -32,9 +32,9 @@ import { Logo } from '../logo/logo';
             href="https://github.com/gridatek/semantic-components"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="GitHub"
           >
             <svg siGithubIcon></svg>
+            <span class="sr-only">GitHub</span>
           </a>
         </div>
       </div>

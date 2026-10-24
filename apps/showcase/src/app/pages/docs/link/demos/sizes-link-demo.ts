@@ -10,8 +10,9 @@ import { SiLinkIcon } from '@semantic-icons/lucide-icons';
       <a scLink size="sm">Small</a>
       <a scLink size="default">Default</a>
       <a scLink size="lg">Large</a>
-      <a scLink size="icon" aria-label="Link">
+      <a scLink size="icon">
         <svg siLinkIcon></svg>
+        <span class="sr-only">Link</span>
       </a>
     </div>
   `,
