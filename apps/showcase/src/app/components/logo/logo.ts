@@ -1,27 +1,24 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 
+/** The logo: "SC" on a rounded tile, in the theme's primary colors. */
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'svg[app-logo]',
   template: `
-    <svg:rect x="2" y="2" width="20" height="20" rx="4" />
+    <svg:rect class="fill-primary" width="160" height="160" rx="36" />
     <svg:path
-      d="M10 8C9.5 7.4 8.7 7 7.5 7C6 7 5 8 5 9.5C5 11 6.5 11.5 8 12C9.5 12.5 11 13 11 14.5C11 16 9.5 17 8 17C6.8 17 6 16.6 5.5 16"
-    />
-    <svg:path
-      d="M19 8C18.3 7.3 17.3 7 16 7C14 7 13 8.5 13 12C13 15.5 14 17 16 17C17.3 17 18.3 16.7 19 16"
+      class="stroke-primary-foreground"
+      transform="translate(26.6 32) scale(0.6)"
+      fill="none"
+      stroke-width="18"
+      d="M69.5 50V38a32.25 33 0 0 0-64.5 0c0 20 15 30 32.5 42S69.5 102 69.5 122a32.25 33 0 0 1-64.5 0v-12M173 50V38a32.25 33 0 0 0-64.5 0v84a32.25 33 0 0 0 64.5 0v-12"
     />
   `,
   host: {
     xmlns: 'http://www.w3.org/2000/svg',
-    viewBox: '0 0 24 24',
+    viewBox: '0 0 160 160',
     width: '24',
     height: '24',
-    fill: 'none',
-    stroke: 'currentColor',
-    'stroke-width': '2',
-    'stroke-linecap': 'round',
-    'stroke-linejoin': 'round',
     'aria-hidden': 'true',
   },
   encapsulation: ViewEncapsulation.None,
