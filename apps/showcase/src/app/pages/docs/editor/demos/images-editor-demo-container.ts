@@ -20,6 +20,7 @@ import { ImagesEditorDemo } from './images-editor-demo';
 export class ImagesEditorDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
+import { ScButton, ScProgress } from '@semantic-components/ui';
 import {
   ScEditor,
   ScEditorBold,
@@ -37,7 +38,6 @@ import {
   ScEditorUploads,
   withImages,
 } from '@semantic-components/ui/editor/images';
-import { ScButton, ScProgress } from '@semantic-components/ui';
 import {
   SiBoldIcon,
   SiImagePlusIcon,

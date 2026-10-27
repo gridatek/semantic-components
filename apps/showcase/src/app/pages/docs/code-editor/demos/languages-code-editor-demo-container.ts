@@ -19,11 +19,11 @@ import { LanguagesCodeEditorDemo } from './languages-code-editor-demo';
 })
 export class LanguagesCodeEditorDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
 import { ScCodeBlock } from '@semantic-components/ui/code-block';
 import { ScCodeEditor } from '@semantic-components/ui/code-editor';
-import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
 
-/** language: each one loaded the first time it is shown. A language’s CodeMirror package (its structure: indentation, brackets) can join through extensions. */
+/** language: each one loaded the first time it is shown — its colors and structure (indentation, brackets). */
 @Component({
   selector: 'app-languages-code-editor-demo',
   imports: [ScCodeBlock, ScCodeEditor, ScToggleGroup, ScToggleGroupItem],

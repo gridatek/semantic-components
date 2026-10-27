@@ -21,6 +21,25 @@ export class FullFeaturedEditorDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
+  ScButton,
+  ScField,
+  ScInput,
+  ScLabel,
+  ScLink,
+  ScMenu,
+  ScMenuContent,
+  ScMenuItem,
+  ScMenuPortal,
+  ScMenuProvider,
+  ScMenuTrigger,
+  ScPopover,
+  ScPopoverPortal,
+  ScPopoverProvider,
+  ScPopoverTrigger,
+  ScProgress,
+  ScSeparator,
+} from '@semantic-components/ui';
+import {
   ScEditor,
   ScEditorBlockquote,
   ScEditorBold,
@@ -92,25 +111,6 @@ import {
   type ScEditorTableAction,
   withTables,
 } from '@semantic-components/ui/editor/tables';
-import {
-  ScButton,
-  ScField,
-  ScInput,
-  ScLabel,
-  ScLink,
-  ScMenu,
-  ScMenuContent,
-  ScMenuItem,
-  ScMenuPortal,
-  ScMenuProvider,
-  ScMenuTrigger,
-  ScPopover,
-  ScPopoverPortal,
-  ScPopoverProvider,
-  ScPopoverTrigger,
-  ScProgress,
-  ScSeparator,
-} from '@semantic-components/ui';
 import {
   SiBanIcon,
   SiBoldIcon,

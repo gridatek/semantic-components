@@ -20,6 +20,7 @@ import { SearchEditorDemo } from './search-editor-demo';
 export class SearchEditorDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
+import { ScInput } from '@semantic-components/ui';
 import {
   ScEditor,
   ScEditorBold,
@@ -43,7 +44,6 @@ import {
   ScEditorSearchResults,
   withSearch,
 } from '@semantic-components/ui/editor/search';
-import { ScInput } from '@semantic-components/ui';
 import {
   SiBoldIcon,
   SiChevronDownIcon,

@@ -38,12 +38,13 @@ import { WrapCodeEditorDemoContainer } from './demos/wrap-code-editor-demo-conta
         <h2 scHeading appToc>Installation</h2>
         <app-entry-install
           entry="code-editor"
-          library="@codemirror/state @codemirror/view @codemirror/commands @codemirror/language"
+          library="@codemirror/state @codemirror/view @codemirror/commands @codemirror/language @codemirror/language-data @lezer/highlight"
           href="https://codemirror.net"
           names="ScCodeEditor"
         />
         <p class="text-muted-foreground">
-          Colored by the code block's highlighter, when the app provides one.
+          Each language loads the first time it is shown, colored like a code
+          block — no highlighter to provide.
         </p>
       </section>
 
@@ -69,9 +70,8 @@ import { WrapCodeEditorDemoContainer } from './demos/wrap-code-editor-demo-conta
       <section class="space-y-4">
         <h2 scHeading appToc>Languages</h2>
         <p class="text-muted-foreground">
-          language: each one loaded the first time it is shown. A language’s
-          CodeMirror package (its structure: indentation, brackets) can join
-          through extensions.
+          language: each one loaded the first time it is shown — its colors and
+          its structure (indentation, brackets).
         </p>
         <app-languages-code-editor-demo-container />
       </section>

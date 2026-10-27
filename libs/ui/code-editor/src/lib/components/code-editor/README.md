@@ -1,6 +1,6 @@
 # Code Editor
 
-Code to edit: [CodeMirror 6](https://codemirror.net), colored by the app's highlighter — Shiki, through `provideCodeHighlighter()` — so it has the same colors as the [code block](../code-block/README.md) and the diff viewer. Undo, indentation from the keyboard, line numbers, the current line; a `[formField]` (`string`). `@codemirror/view`, `state`, `commands` and `language` are peers of this library.
+Code to edit: [CodeMirror 6](https://codemirror.net), its language loaded by name and colored like the [code block](../code-block/README.md). Undo, indentation from the keyboard and by syntax, matching brackets, line numbers, the current line; a `[formField]` (`string`). `@codemirror/view`, `state`, `commands`, `language`, `language-data` and `@lezer/highlight` are peers of this library.
 
 ## Usage
 
@@ -34,16 +34,19 @@ The code block's frame shows the editor's focus ring, and its invalid state once
 | Key                   | Does                                              |
 | --------------------- | ------------------------------------------------- |
 | Tab / Shift+Tab       | Indent / outdent the line, or every selected line |
-| Enter                 | A new line, keeping the indentation               |
+| Enter                 | A new line, indented by the syntax                |
 | Ctrl/⌘+Z, Ctrl/⌘+Y    | Undo, redo                                        |
 | Escape, then Tab      | Moves focus on (Tab otherwise indents)            |
 | Ctrl+M (⇧⌥M on macOS) | Tab moves focus until pressed again               |
 
-## The Shiki bridge
+## Languages
 
-`shikiHighlighting(highlighter, language)` is a CodeMirror extension: after each pause in typing, the whole text is highlighted by the highlighter, its tokens painted as decorations — moved along with the edits until the next answer. The editor adds it when the app provides a highlighter; it can also be used in any CodeMirror editor.
+`language` is a name or alias from [`@codemirror/language-data`](https://github.com/codemirror/language-data) — `typescript` (`ts`), `javascript`, `html`, `css`, `json`, `python`, `sql`, `markdown`, `yaml` and about 150 more, case aside. Each one loads the first time it is shown; until then, and for a name it doesn't know (`plaintext`), the code shows plain. A language gives:
 
-Shiki only colors. CodeMirror's syntax-aware features — indentation by syntax, bracket matching, folding — come from its own language packages: add them through `extensions` (`[javascript()]` from `@codemirror/lang-javascript`), with search, autocompletion and the rest.
+- **Colors**: the code block's — GitHub light (high contrast), GitHub dark under `.dark`. No highlighter to provide.
+- **Structure**: Enter indents by the syntax, a closing bracket typed outdents its line (`indentOnInput`), the bracket at the cursor and its match are marked.
+
+A language of yours (a `LanguageSupport`) goes in `extensions`, with search, autocompletion and the rest.
 
 ## API
 

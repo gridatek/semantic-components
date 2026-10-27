@@ -8,6 +8,8 @@ const editor = (page: Page, name?: string) =>
     : page.locator('.cm-content').first();
 const line = (page: Page, n: number) =>
   page.locator('.cm-content .cm-line').nth(n - 1);
+// A token colored by the language.
+const colored = 'span[class*="text-[#"]';
 
 let errors: string[];
 
@@ -24,13 +26,11 @@ test('Basic: highlighted; typed; undone; Tab indents', async ({ page }) => {
   const content = editor(page, 'counter.ts');
   await expect(content).toHaveAttribute('aria-multiline', 'true');
   await expect(page.locator('.cm-content .cm-line')).toHaveCount(13);
-  // Colored by Shiki.
+  // Colored by its language.
   await expect
-    .poll(() =>
-      page.locator('.cm-content span[style*="--shiki-light"]').count(),
-    )
+    .poll(() => page.locator(`.cm-content ${colored}`).count())
     .toBeGreaterThan(20);
-  // Typed at the end — colored too, after the pause.
+  // Typed at the end — colored too.
   await line(page, 13).click();
   await press(page, 'End');
   await press(page, 'Enter');
@@ -38,7 +38,7 @@ test('Basic: highlighted; typed; undone; Tab indents', async ({ page }) => {
   await expect(page.locator('.cm-content .cm-line')).toHaveCount(14);
   await expect(line(page, 14)).toHaveText('const answer = 42;');
   await expect
-    .poll(() => line(page, 14).locator('span[style*="--shiki-light"]').count())
+    .poll(() => line(page, 14).locator(colored).count())
     .toBeGreaterThan(0);
   // Undone.
   await press(page, 'ControlOrMeta+z');
@@ -85,11 +85,31 @@ test('Languages: switched, highlighted', async ({ page }) => {
   await page.goto(demo('languages'));
   await page.getByRole('button', { name: 'Python' }).click();
   await expect(line(page, 1)).toHaveText('def greet(name: str) -> str:');
+  // `def`: a keyword, in the code block's color.
+  await expect(line(page, 1).locator(colored, { hasText: /^def$/ })).toHaveCSS(
+    'color',
+    'rgb(160, 17, 31)',
+  );
   await expect
-    .poll(() =>
-      page.locator('.cm-content span[style*="--shiki-light"]').count(),
-    )
+    .poll(() => page.locator(`.cm-content ${colored}`).count())
     .toBeGreaterThan(5);
+});
+
+test('Languages: indented by the syntax; brackets matched', async ({
+  page,
+}) => {
+  await page.goto(demo('languages'));
+  await expect(line(page, 1)).toHaveText('.card {');
+  await line(page, 1).click();
+  await press(page, 'End');
+  // At the brace: it and its match are marked.
+  await expect(page.locator('.cm-matchingBracket')).toHaveCount(2);
+  // Enter, inside the rule: indented.
+  await press(page, 'Enter');
+  await expect(line(page, 2)).toHaveText('  ');
+  // A closing brace typed: back out.
+  await page.keyboard.type('}');
+  await expect(line(page, 2)).toHaveText('}');
 });
 
 test('Wrap: lines wrapped, no numbers', async ({ page }) => {

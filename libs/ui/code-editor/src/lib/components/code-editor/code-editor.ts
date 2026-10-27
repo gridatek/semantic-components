@@ -4,7 +4,14 @@ import {
   historyKeymap,
   indentWithTab,
 } from '@codemirror/commands';
-import { indentUnit } from '@codemirror/language';
+import {
+  LanguageDescription,
+  bracketMatching,
+  indentOnInput,
+  indentUnit,
+  syntaxHighlighting,
+} from '@codemirror/language';
+import { languages } from '@codemirror/language-data';
 import { Compartment, EditorState, type Extension } from '@codemirror/state';
 import {
   EditorView,
@@ -22,6 +29,7 @@ import {
   ElementRef,
   Injector,
   afterNextRender,
+  afterRenderEffect,
   booleanAttribute,
   computed,
   effect,
@@ -30,12 +38,12 @@ import {
   model,
   numberAttribute,
   output,
+  signal,
   untracked,
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
 import { SC_FIELD, cn } from '@semantic-components/ui';
-import { SC_CODE_HIGHLIGHTER } from '@semantic-components/ui/code-block';
-import { shikiHighlighting } from './shiki-highlighting';
+import { codeEditorHighlight } from './code-editor-highlight';
 
 /** CodeMirror in the theme's colors: the code block's look. */
 const theme = EditorView.theme({
@@ -64,15 +72,22 @@ const theme = EditorView.theme({
   '&.cm-focused > .cm-scroller > .cm-selectionLayer .cm-selectionBackground, .cm-selectionBackground, .cm-content ::selection':
     { backgroundColor: 'color-mix(in oklch, var(--ring) 35%, transparent)' },
   '.cm-placeholder': { color: 'var(--muted-foreground)' },
+  '&.cm-focused .cm-matchingBracket': {
+    backgroundColor: 'color-mix(in oklch, var(--ring) 25%, transparent)',
+  },
+  '&.cm-focused .cm-nonmatchingBracket': {
+    backgroundColor: 'color-mix(in oklch, var(--destructive) 20%, transparent)',
+  },
 });
 
 /**
- * Code to edit: CodeMirror, colored by the app's highlighter (Shiki, like a
- * code block) — undo, the keyboard's indentation (Tab, Shift+Tab; Escape
- * then Tab moves on), line numbers, the current line. A `[formField]`
- * (`string`). Put it in a code block for its frame and header; name it by
- * its `scField` or `aria-label`. CodeMirror extensions of yours (a language's
- * structure, search…) go in `extensions`.
+ * Code to edit: CodeMirror, its `language` loaded the first time it is shown
+ * (`@codemirror/language-data`) and colored like a code block — undo, the
+ * keyboard's indentation (Tab, Shift+Tab; Escape then Tab moves on), indentation
+ * by syntax, matching brackets, line numbers, the current line. A
+ * `[formField]` (`string`). Put it in a code block for its frame and header;
+ * name it by its `scField` or `aria-label`. CodeMirror extensions of yours
+ * (search, autocompletion…) go in `extensions`.
  */
 @Directive({
   selector: 'div[scCodeEditor]',
@@ -89,13 +104,10 @@ export class ScCodeEditor implements FormValueControl<string> {
   private readonly host =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
   private readonly field = inject(SC_FIELD, { optional: true });
-  private readonly highlighter = inject(SC_CODE_HIGHLIGHTER, {
-    optional: true,
-  });
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly value = model('');
-  /** Its language (`typescript`, `json`, `css`…), for highlighting. */
+  /** Its language, by name or alias (`typescript`, `json`, `css`…): its colors and structure. */
   readonly language = input('plaintext');
   readonly lineNumbers = input(true, { transform: booleanAttribute });
   /** Long lines wrap, instead of scrolling. */
@@ -110,7 +122,7 @@ export class ScCodeEditor implements FormValueControl<string> {
   readonly touched = input(false, { transform: booleanAttribute });
   /** Its name, when no field's label names it. */
   readonly ariaLabel = input('', { alias: 'aria-label' });
-  /** More CodeMirror: a language's structure (`javascript()`), search… */
+  /** More CodeMirror: search, autocompletion, a language of yours… */
   readonly extensions = input<readonly Extension[]>([]);
   /** Focus left it (Signal Forms marks it touched). */
   readonly touch = output<void>();
@@ -129,7 +141,7 @@ export class ScCodeEditor implements FormValueControl<string> {
     ),
   );
 
-  private readonly highlighting = new Compartment();
+  private readonly syntax = new Compartment();
   private readonly gutter = new Compartment();
   private readonly wrapping = new Compartment();
   private readonly indentation = new Compartment();
@@ -137,6 +149,9 @@ export class ScCodeEditor implements FormValueControl<string> {
   private readonly hint = new Compartment();
   private readonly attributes = new Compartment();
   private readonly custom = new Compartment();
+
+  /** The language, once loaded; none until then, or for an unknown name. */
+  private readonly support = signal<Extension>([]);
 
   /** The content's ARIA: its name, description, state. */
   private readonly contentAttributes = computed(() => {
@@ -168,6 +183,9 @@ export class ScCodeEditor implements FormValueControl<string> {
             extensions: [
               theme,
               history(),
+              syntaxHighlighting(codeEditorHighlight),
+              bracketMatching(),
+              indentOnInput(),
               drawSelection(),
               highlightSpecialChars(),
               highlightActiveLine(),
@@ -176,7 +194,7 @@ export class ScCodeEditor implements FormValueControl<string> {
                 if (update.docChanged)
                   this.value.set(update.state.doc.toString());
               }),
-              this.highlighting.of(this.highlight()),
+              this.syntax.of(untracked(this.support)),
               this.gutter.of(this.gutterExtension()),
               this.wrapping.of(this.wrapExtension()),
               this.indentation.of(this.indentExtension()),
@@ -195,6 +213,28 @@ export class ScCodeEditor implements FormValueControl<string> {
       { injector },
     );
 
+    // The language, loaded when named (in the browser); a newer name wins.
+    let request = 0;
+    afterRenderEffect(() => {
+      const description = LanguageDescription.matchLanguageName(
+        languages,
+        this.language(),
+        true,
+      );
+      const id = ++request;
+      if (!description) this.support.set([]);
+      else if (description.support) this.support.set(description.support);
+      else
+        description.load().then(
+          (support) => {
+            if (id === request) this.support.set(support);
+          },
+          () => {
+            if (id === request) this.support.set([]);
+          },
+        );
+    });
+
     // The value, from outside: the document follows.
     effect(() => {
       const value = this.value();
@@ -205,7 +245,7 @@ export class ScCodeEditor implements FormValueControl<string> {
       });
     });
     // The inputs: each reconfigures its part.
-    this.reconfigure(this.highlighting, () => this.highlight());
+    this.reconfigure(this.syntax, () => this.support());
     this.reconfigure(this.gutter, () => this.gutterExtension());
     this.reconfigure(this.wrapping, () => this.wrapExtension());
     this.reconfigure(this.indentation, () => this.indentExtension());
@@ -237,13 +277,6 @@ export class ScCodeEditor implements FormValueControl<string> {
       }
       this.view?.dispatch({ effects: compartment.reconfigure(extension) });
     });
-  }
-
-  private highlight(): Extension {
-    const language = this.language();
-    return this.highlighter
-      ? shikiHighlighting(this.highlighter, language)
-      : [];
   }
 
   private gutterExtension(): Extension {

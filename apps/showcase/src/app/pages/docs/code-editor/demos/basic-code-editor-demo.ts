@@ -40,7 +40,7 @@ import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
       <div
         scCodeEditor
         aria-label="counter.ts"
-        language="angular-ts"
+        language="typescript"
         class="max-h-80"
         [(value)]="code"
       ></div>

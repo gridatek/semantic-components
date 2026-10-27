@@ -21,6 +21,11 @@ export class FormatsEditorDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import { FormField, form, required } from '@angular/forms/signals';
 import {
+  ScButton,
+  ScToggleGroup,
+  ScToggleGroupItem,
+} from '@semantic-components/ui';
+import {
   ScEditor,
   ScEditorBold,
   ScEditorBulletList,
@@ -35,11 +40,6 @@ import {
   provideEditor,
 } from '@semantic-components/ui/editor';
 import { withMarkdown } from '@semantic-components/ui/editor/markdown';
-import {
-  ScButton,
-  ScToggleGroup,
-  ScToggleGroupItem,
-} from '@semantic-components/ui';
 import {
   SiBoldIcon,
   SiItalicIcon,

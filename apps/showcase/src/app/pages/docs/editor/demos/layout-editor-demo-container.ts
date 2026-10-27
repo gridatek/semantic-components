@@ -20,6 +20,7 @@ import { LayoutEditorDemo } from './layout-editor-demo';
 export class LayoutEditorDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
+import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
 import {
   ScEditor,
   ScEditorBold,
@@ -29,7 +30,6 @@ import {
   ScEditorToolbar,
   ScEditorToolbarGroup,
 } from '@semantic-components/ui/editor';
-import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
 import { SiBoldIcon, SiItalicIcon } from '@semantic-icons/lucide-icons';
 
 const LETTER = \`<h2>A letter</h2>

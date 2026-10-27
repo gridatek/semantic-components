@@ -19,6 +19,7 @@ import { SplitDiffViewerDemo } from './split-diff-viewer-demo';
 })
 export class SplitDiffViewerDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
 import {
   ScCodeBlock,
   ScCodeBlockHeader,
@@ -28,7 +29,6 @@ import {
   type ScDiffView,
   ScDiffViewer,
 } from '@semantic-components/ui/diff-viewer';
-import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
 
 /** Side by side: the old text facing the new, rows aligned, long lines wrapped. Your header holds the title, the counts and a switch for the view ([(view)]). */
 @Component({
