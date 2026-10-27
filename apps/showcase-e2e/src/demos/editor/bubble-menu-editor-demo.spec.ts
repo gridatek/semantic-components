@@ -34,3 +34,27 @@ test.describe('Bubble Menu Editor Demo', () => {
     await expect(bubble(page)).toBeHidden();
   });
 });
+
+test('on a scrolled page, the first selection shows it by the text', async ({
+  page,
+}) => {
+  // The editor's page: this demo far down it. The first place was off by
+  // the page's scroll — out of view — until the toolbar was fixed from the
+  // start (as Floating UI measures it).
+  await page.goto('/docs/components/editor');
+  const editor = page
+    .getByTitle('A comment with a floating toolbar', { exact: true })
+    .getByRole('textbox', { name: 'Comment' });
+  await editor.scrollIntoViewIfNeeded();
+  await editor.getByText('Select some of this text').dblclick({
+    position: { x: 10, y: 8 },
+  });
+  const toolbar = bubble(page);
+  await expect(toolbar).toBeInViewport({ ratio: 1 });
+  const text = await editor.boundingBox();
+  const box = await toolbar.boundingBox();
+  // Just above the text, not anywhere else in the view.
+  expect(
+    Math.abs((box?.y ?? 0) + (box?.height ?? 0) - (text?.y ?? 0)),
+  ).toBeLessThan(60);
+});

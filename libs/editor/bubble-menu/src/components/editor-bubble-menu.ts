@@ -39,10 +39,11 @@ export class ScEditorBubbleMenu {
 
   protected readonly class = computed(() =>
     cn(
-      // w-max from the start: the plugin measures it to centre it on the
-      // text, and only then sets its width — as wide as the editor, it was
+      // Placed as Floating UI asks, from the start (fixed, at 0 0, its own
+      // width): the plugin measures it before setting these itself. Without,
+      // its first place was off by the page's scroll — out of view — or
       // pushed to the edge.
-      'z-50 flex w-max items-center gap-1 rounded-lg border bg-popover p-1 text-popover-foreground shadow-md',
+      'fixed top-0 left-0 z-50 flex w-max items-center gap-1 rounded-lg border bg-popover p-1 text-popover-foreground shadow-md',
       this.classInput(),
     ),
   );
