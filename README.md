@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="logo.svg" alt="Semantic Components logo" width="96" height="96" />
+</p>
+
 # Semantic Components
 
 A collection of accessible, customizable UI components for Angular applications.
