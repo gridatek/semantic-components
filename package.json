@@ -78,6 +78,7 @@
     "@angular/cli": "22.2.4",
     "@angular/compiler-cli": "22.2.3",
     "@angular/language-service": "22.2.3",
+    "@angular/localize": "22.2.3",
     "@axe-core/playwright": "^4.14.0",
     "@codemirror/language-data": "^6.5.2",
     "@eslint/js": "^10.0.1",

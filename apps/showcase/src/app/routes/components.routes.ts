@@ -356,12 +356,6 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/label/label-page'),
       },
       {
-        path: 'language-switcher',
-        title: 'Language Switcher - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/language-switcher/language-switcher-page'),
-      },
-      {
         path: 'link',
         title: 'Link - Semantic Components',
         loadComponent: () => import('../pages/docs/link/link-page'),

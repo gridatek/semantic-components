@@ -480,14 +480,6 @@
     "category": "Forms"
   },
   {
-    "name": "Language Switcher",
-    "path": "language-switcher",
-    "description": "Switch between different languages.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Advanced"
-  },
-  {
     "name": "Lightbox",
     "path": "lightbox",
     "description": "A gallery of links opened in the native dialog, the thumbnail morphing in; zoom, pan, swipes, keys.",

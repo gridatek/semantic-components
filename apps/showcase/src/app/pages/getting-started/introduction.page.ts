@@ -82,7 +82,8 @@ import { ConfigService } from '../../services/config.service';
             carousel (Embla), data table (TanStack Table), PDF viewer (PDF.js),
             phone input (libphonenumber-js), QR code (uqr), animated counter
             (Motion), confetti, rich text editor (Tiptap), charts (d3), code
-            block (Shiki), diff viewer (jsdiff), code editor (CodeMirror)
+            block (Shiki), diff viewer (jsdiff), code editor (CodeMirror),
+            languages (Angular localize)
           </li>
           <li>
             <strong>&#64;semantic-components/presets</strong>

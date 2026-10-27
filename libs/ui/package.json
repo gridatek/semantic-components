@@ -19,6 +19,7 @@
     "tailwind-merge": ">=3.7.0",
     "@angular/aria": ">=22.2.3",
     "@angular/common": ">=22.2.3",
+    "@angular/localize": ">=22.2.3",
     "@angular/cdk": ">=22.2.3",
     "@angular/forms": ">=22.2.3",
     "rxjs": ">=7.8.2",
@@ -70,6 +71,9 @@
   },
   "sideEffects": false,
   "peerDependenciesMeta": {
+    "@angular/localize": {
+      "optional": true
+    },
     "motion": {
       "optional": true
     },
