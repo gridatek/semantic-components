@@ -85,6 +85,12 @@ import { ConfigService } from '../../services/config.service';
             block (Shiki), diff viewer (jsdiff), code editor (CodeMirror)
           </li>
           <li>
+            <strong>&#64;semantic-components/presets</strong>
+            — The components' looks, one per shadcn/ui style (Nova by default,
+            Lyra, Vega, Maia, Mira, Luma, Sera, Rhea), chosen when the app
+            starts
+          </li>
+          <li>
             <strong>&#64;semantic-components/mcp-server</strong>
             — MCP server for AI coding assistants
           </li>
