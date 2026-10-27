@@ -224,17 +224,6 @@ import { ConfigService } from '../../services/config.service';
                     <li scSidebarMenuSubItem>
                       <a
                         scSidebarMenuSubButton
-                        routerLink="/docs/getting-started/charts"
-                        routerLinkActive
-                        #chartsRla="routerLinkActive"
-                        [isActive]="chartsRla.isActive"
-                      >
-                        <span>Charts</span>
-                      </a>
-                    </li>
-                    <li scSidebarMenuSubItem>
-                      <a
-                        scSidebarMenuSubButton
                         routerLink="/docs/getting-started/code"
                         routerLinkActive
                         #codeRla="routerLinkActive"

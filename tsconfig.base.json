@@ -55,7 +55,7 @@
       "@semantic-components/ui/editor/tables": [
         "libs/ui/editor/tables/src/index.ts"
       ],
-      "@semantic-components/charts": ["libs/charts/src/index.ts"],
+      "@semantic-components/ui/charts": ["libs/ui/charts/src/index.ts"],
       "@semantic-components/presets": ["libs/presets/src/index.ts"],
       "@semantic-components/presets/lyra": ["libs/presets/lyra/src/index.ts"],
       "@semantic-components/presets/nova": ["libs/presets/nova/src/index.ts"],

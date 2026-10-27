@@ -3,7 +3,7 @@ import {
   ScChartContainer,
   ScChartDataPoint,
   ScLineChart,
-} from '@semantic-components/charts';
+} from '@semantic-components/ui/charts';
 
 @Component({
   selector: 'app-line-chart-demo',

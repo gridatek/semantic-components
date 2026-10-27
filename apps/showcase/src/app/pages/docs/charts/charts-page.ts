@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ScHeading } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { EntryInstall } from '../../../components/entry-install/entry-install';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { AreaChartDemoContainer } from './demos/area-chart-demo-container';
 import { BarChartDemoContainer } from './demos/bar-chart-demo-container';
@@ -24,6 +25,7 @@ import { UserGrowthChartDemoContainer } from './demos/user-growth-chart-demo-con
     UserGrowthChartDemoContainer,
     TocHeading,
     ComponentBadges,
+    EntryInstall,
     ScHeading,
   ],
   template: `
@@ -35,6 +37,16 @@ import { UserGrowthChartDemoContainer } from './demos/user-growth-chart-demo-con
         </p>
         <app-component-badges path="chart" />
       </div>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Installation</h2>
+        <app-entry-install
+          entry="charts"
+          library="d3-scale d3-shape"
+          href="https://d3js.org"
+          names="ScChartContainer, ScBarChart, ScLineChart, ScPieChart, ScDonutChart"
+        />
+      </section>
 
       <section class="space-y-4">
         <h2 scHeading appToc>Usage</h2>

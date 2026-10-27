@@ -164,7 +164,7 @@
     "path": "charts",
     "description": "Beautiful charts for data visualization.",
     "status": "Experimental",
-    "library": "charts",
+    "library": "ui",
     "category": "Data Display"
   },
   {

@@ -34,11 +34,6 @@ export const gettingStartedRoutes: Route[] = [
         loadComponent: () => import('../pages/getting-started/presets.page'),
       },
       {
-        path: 'charts',
-        title: 'Charts - Semantic Components',
-        loadComponent: () => import('../pages/getting-started/charts.page'),
-      },
-      {
         path: 'code',
         title: 'Code - Semantic Components',
         loadComponent: () => import('../pages/getting-started/code.page'),

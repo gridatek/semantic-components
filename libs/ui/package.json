@@ -45,7 +45,9 @@
     "@tiptap/extensions": ">=3.32.0",
     "@tiptap/markdown": ">=3.32.0",
     "@tiptap/pm": ">=3.32.0",
-    "@tiptap/starter-kit": ">=3.32.0"
+    "@tiptap/starter-kit": ">=3.32.0",
+    "d3-scale": ">=4.0.2",
+    "d3-shape": ">=3.2.0"
   },
   "exports": {
     "./styles": {
@@ -124,6 +126,12 @@
       "optional": true
     },
     "@tiptap/starter-kit": {
+      "optional": true
+    },
+    "d3-scale": {
+      "optional": true
+    },
+    "d3-shape": {
       "optional": true
     }
   }

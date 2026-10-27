@@ -4,7 +4,7 @@ import {
   ScChartContainer,
   ScChartDataPoint,
   ScChartLegend,
-} from '@semantic-components/charts';
+} from '@semantic-components/ui/charts';
 
 @Component({
   selector: 'app-charts-usage-demo',
