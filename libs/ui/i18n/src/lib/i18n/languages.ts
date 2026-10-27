@@ -4,8 +4,8 @@ import { SC_CONFIG } from '@semantic-components/ui';
 import {
   type ScLanguage,
   type ScLanguagesConfig,
+  languageDir,
   storageKey,
-  textDirection,
 } from './languages-config';
 
 /**
@@ -32,8 +32,8 @@ export class ScLanguages {
       label: this.config.sourceLanguage,
     };
 
-  /** Its writing direction. */
-  readonly direction = textDirection(this.current.code);
+  /** Its writing direction: its `dir`, else the platform's. */
+  readonly dir = languageDir(this.config, this.current.code);
 
   /** Keeps the choice and reloads the page in it; nothing for the language in use or one not offered. */
   switchTo(code: string): void {

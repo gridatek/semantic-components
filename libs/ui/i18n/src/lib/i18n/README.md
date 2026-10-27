@@ -17,7 +17,7 @@ export const LANGUAGES: ScLanguagesConfig = {
   languages: [
     { code: 'en', label: 'English' },
     { code: 'fr', label: 'Français' },
-    { code: 'ar', label: 'العربية' },
+    { code: 'ar', label: 'العربية', dir: 'rtl' },
   ],
   // For Angular's pipes (date, number…); each its own chunk.
   localeData: {
@@ -51,7 +51,7 @@ The translations, one file per language but the source one: `public/i18n/<code>.
 
 - **Picks** the language chosen before (`localStorage`, `storageKey`), else the first of the browser's languages offered (or its base: `fr` for `fr-CA`), else the source one. A stored code not offered is ignored.
 - **Loads** its translations and locale data together; if either fails, the source language, with an error in the console. A message missing from a file shows the source text.
-- **Sets** `<html lang>`, `<html dir>` (from `Intl.Locale#getTextInfo()`) and `$localize.locale`, before the app starts. Angular's `LOCALE_ID` follows `$localize.locale` — and the library's dates, numbers and calendars follow `LOCALE_ID`, with nothing to provide; the CDK's direction is right from the first render.
+- **Sets** `<html lang>`, `<html dir>` (the language's `dir`; left out, `Intl.Locale#getTextInfo()`'s) and `$localize.locale`, before the app starts. Angular's `LOCALE_ID` follows `$localize.locale` — and the library's dates, numbers and calendars follow `LOCALE_ID`, with nothing to provide; the CDK's direction is right from the first render.
 
 ## ScLanguages
 
@@ -59,7 +59,7 @@ The translations, one file per language but the source one: `public/i18n/<code>.
 | ---------------- | ---------------------------------------------------------------------------------- |
 | `all`            | The languages offered                                                              |
 | `current`        | The language in use                                                                |
-| `direction`      | Its writing direction, `ltr` or `rtl`                                              |
+| `dir`            | Its writing direction, `ltr` or `rtl`                                              |
 | `switchTo(code)` | Keeps the choice and reloads the page; nothing for `current` or a code not offered |
 
 A switcher of yours:

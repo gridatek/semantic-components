@@ -4,6 +4,8 @@ export interface ScLanguage {
   code: string;
   /** Its name, written in itself: `Français`. */
   label: string;
+  /** Its writing direction; left out, the platform's (`Intl.Locale#getTextInfo()`). */
+  dir?: 'ltr' | 'rtl';
 }
 
 /**
@@ -34,9 +36,16 @@ export interface ScLanguagesConfig {
 export const storageKey = (config: ScLanguagesConfig) =>
   config.storageKey ?? 'sc-language';
 
-/** The language's writing direction, from the platform. */
-export function textDirection(code: string): 'ltr' | 'rtl' {
-  return new Intl.Locale(code).getTextInfo().direction ?? 'ltr';
+/** The language's writing direction: the app's, else the platform's. */
+export function languageDir(
+  config: ScLanguagesConfig,
+  code: string,
+): 'ltr' | 'rtl' {
+  return (
+    config.languages.find((language) => language.code === code)?.dir ??
+    new Intl.Locale(code).getTextInfo().direction ??
+    'ltr'
+  );
 }
 
 declare module '@semantic-components/ui' {

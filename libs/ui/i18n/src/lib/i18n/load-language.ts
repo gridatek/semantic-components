@@ -2,8 +2,8 @@ import { registerLocaleData } from '@angular/common';
 import { loadTranslations } from '@angular/localize';
 import {
   type ScLanguagesConfig,
+  languageDir,
   storageKey,
-  textDirection,
 } from './languages-config';
 
 /**
@@ -34,7 +34,7 @@ export async function loadLanguage(config: ScLanguagesConfig): Promise<void> {
   $localize.locale = language;
   const html = document.documentElement;
   html.lang = language;
-  html.dir = textDirection(language);
+  html.dir = languageDir(config, language);
 }
 
 /** The language chosen before, else the first of the browser's offered (or its base: `fr` for `fr-CA`), else the source one. */
