@@ -33,8 +33,8 @@ import {
   type ScEditorValue,
   ScEditorView,
   provideEditor,
-} from '@semantic-components/editor';
-import { withMarkdown } from '@semantic-components/editor/markdown';
+} from '@semantic-components/ui/editor';
+import { withMarkdown } from '@semantic-components/ui/editor/markdown';
 import {
   ScButton,
   ScToggleGroup,

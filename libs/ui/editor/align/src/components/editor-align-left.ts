@@ -1,0 +1,51 @@
+import { ToolbarWidget } from '@angular/aria/toolbar';
+import { Directive, computed, inject, input } from '@angular/core';
+import { bindInput, cn, toggleVariants } from '@semantic-components/ui';
+import {
+  SC_EDITOR,
+  ɵassertEditorFeature,
+} from '@semantic-components/ui/editor';
+import { editorAlignment } from './editor-alignment';
+
+/**
+ * Aligns the paragraph left. Write its icon and name it (`aria-label` or
+ * visually hidden text). Needs `withAlign()`.
+ */
+@Directive({
+  selector: 'button[scEditorAlignLeft]',
+  hostDirectives: [ToolbarWidget],
+  host: {
+    type: 'button',
+    '[class]': 'class()',
+    '[disabled]': 'disabled()',
+    '[attr.aria-pressed]': "alignment() === 'left'",
+    '(click)': 'onClick()',
+  },
+})
+export class ScEditorAlignLeft {
+  protected readonly editor = inject(SC_EDITOR);
+  readonly classInput = input<string>('', { alias: 'class' });
+  readonly disabledInput = input(false, { alias: 'disabled' });
+
+  protected readonly alignment = computed(() => editorAlignment(this.editor));
+
+  protected readonly class = computed(() =>
+    cn(
+      toggleVariants({ variant: 'default', size: 'default' }),
+      this.classInput(),
+    ),
+  );
+
+  protected readonly disabled = computed(
+    () => this.disabledInput() || !this.editor.editable(),
+  );
+
+  constructor() {
+    ɵassertEditorFeature('withAlign', 'scEditorAlignLeft');
+    bindInput(inject(ToolbarWidget).disabled, this.disabled);
+  }
+
+  protected onClick(): void {
+    this.editor.run((chain) => chain.setTextAlign('left'));
+  }
+}

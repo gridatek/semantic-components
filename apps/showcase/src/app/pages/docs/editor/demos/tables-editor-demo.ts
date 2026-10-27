@@ -1,6 +1,14 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
+  ScMenu,
+  ScMenuContent,
+  ScMenuItem,
+  ScMenuPortal,
+  ScMenuProvider,
+  ScMenuTrigger,
+} from '@semantic-components/ui';
+import {
   ScEditor,
   ScEditorBold,
   ScEditorContent,
@@ -9,20 +17,12 @@ import {
   ScEditorToolbar,
   ScEditorToolbarGroup,
   provideEditor,
-} from '@semantic-components/editor';
+} from '@semantic-components/ui/editor';
 import {
   ScEditorTable,
   type ScEditorTableAction,
   withTables,
-} from '@semantic-components/editor/tables';
-import {
-  ScMenu,
-  ScMenuContent,
-  ScMenuItem,
-  ScMenuPortal,
-  ScMenuProvider,
-  ScMenuTrigger,
-} from '@semantic-components/ui';
+} from '@semantic-components/ui/editor/tables';
 import {
   SiBoldIcon,
   SiChevronDownIcon,

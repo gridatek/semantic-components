@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
+import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
 import {
   ScEditor,
   ScEditorBold,
@@ -8,8 +9,7 @@ import {
   ScEditorItalic,
   ScEditorToolbar,
   ScEditorToolbarGroup,
-} from '@semantic-components/editor';
-import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
+} from '@semantic-components/ui/editor';
 import { SiBoldIcon, SiItalicIcon } from '@semantic-icons/lucide-icons';
 
 const LETTER = `<h2>A letter</h2>

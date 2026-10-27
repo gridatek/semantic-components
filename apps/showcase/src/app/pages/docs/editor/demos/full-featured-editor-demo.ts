@@ -1,6 +1,25 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
+  ScButton,
+  ScField,
+  ScInput,
+  ScLabel,
+  ScLink,
+  ScMenu,
+  ScMenuContent,
+  ScMenuItem,
+  ScMenuPortal,
+  ScMenuProvider,
+  ScMenuTrigger,
+  ScPopover,
+  ScPopoverPortal,
+  ScPopoverProvider,
+  ScPopoverTrigger,
+  ScProgress,
+  ScSeparator,
+} from '@semantic-components/ui';
+import {
   ScEditor,
   ScEditorBlockquote,
   ScEditorBold,
@@ -27,32 +46,32 @@ import {
   ScEditorUndo,
   ScEditorWordCount,
   provideEditor,
-} from '@semantic-components/editor';
+} from '@semantic-components/ui/editor';
 import {
   ScEditorAlignCenter,
   ScEditorAlignJustify,
   ScEditorAlignLeft,
   ScEditorAlignRight,
   withAlign,
-} from '@semantic-components/editor/align';
-import { ScEditorBubbleMenu } from '@semantic-components/editor/bubble-menu';
+} from '@semantic-components/ui/editor/align';
+import { ScEditorBubbleMenu } from '@semantic-components/ui/editor/bubble-menu';
 import {
   ScEditorHighlight,
   ScEditorHighlightColor,
   ScEditorRemoveHighlight,
   withHighlight,
-} from '@semantic-components/editor/highlight';
+} from '@semantic-components/ui/editor/highlight';
 import {
   ScEditorImage,
   type ScEditorUploadHandler,
   ScEditorUploads,
   withImages,
-} from '@semantic-components/editor/images';
+} from '@semantic-components/ui/editor/images';
 import {
   ScEditorSubscript,
   ScEditorSuperscript,
   withScripts,
-} from '@semantic-components/editor/scripts';
+} from '@semantic-components/ui/editor/scripts';
 import {
   ScEditorReplace,
   ScEditorReplaceAll,
@@ -66,31 +85,12 @@ import {
   ScEditorSearchPrevious,
   ScEditorSearchResults,
   withSearch,
-} from '@semantic-components/editor/search';
+} from '@semantic-components/ui/editor/search';
 import {
   ScEditorTable,
   type ScEditorTableAction,
   withTables,
-} from '@semantic-components/editor/tables';
-import {
-  ScButton,
-  ScField,
-  ScInput,
-  ScLabel,
-  ScLink,
-  ScMenu,
-  ScMenuContent,
-  ScMenuItem,
-  ScMenuPortal,
-  ScMenuProvider,
-  ScMenuTrigger,
-  ScPopover,
-  ScPopoverPortal,
-  ScPopoverProvider,
-  ScPopoverTrigger,
-  ScProgress,
-  ScSeparator,
-} from '@semantic-components/ui';
+} from '@semantic-components/ui/editor/tables';
 import {
   SiBanIcon,
   SiBoldIcon,

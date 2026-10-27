@@ -9,8 +9,8 @@ import {
   ScEditorStrikethrough,
   ScEditorToolbarGroup,
   ScEditorUnderline,
-} from '@semantic-components/editor';
-import { ScEditorBubbleMenu } from '@semantic-components/editor/bubble-menu';
+} from '@semantic-components/ui/editor';
+import { ScEditorBubbleMenu } from '@semantic-components/ui/editor/bubble-menu';
 import {
   SiBoldIcon,
   SiCodeIcon,

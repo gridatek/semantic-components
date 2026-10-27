@@ -33,11 +33,11 @@ import {
   ScEditorToolbarGroup,
   ScEditorView,
   provideEditor,
-} from '@semantic-components/editor';
-import { withAlign } from '@semantic-components/editor/align';
-import { withHighlight } from '@semantic-components/editor/highlight';
-import { withImages } from '@semantic-components/editor/images';
-import { withScripts } from '@semantic-components/editor/scripts';
+} from '@semantic-components/ui/editor';
+import { withAlign } from '@semantic-components/ui/editor/align';
+import { withHighlight } from '@semantic-components/ui/editor/highlight';
+import { withImages } from '@semantic-components/ui/editor/images';
+import { withScripts } from '@semantic-components/ui/editor/scripts';
 import {
   SiBoldIcon,
   SiCodeXmlIcon,

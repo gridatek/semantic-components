@@ -30,7 +30,7 @@ import {
   ScEditorItalic,
   ScEditorToolbar,
   ScEditorToolbarGroup,
-} from '@semantic-components/editor';
+} from '@semantic-components/ui/editor';
 import {
   ScButton,
   ScCheckbox,

@@ -11,7 +11,7 @@ import {
   ScEditorToolbar,
   ScEditorToolbarGroup,
   ScEditorUnderline,
-} from '@semantic-components/editor';
+} from '@semantic-components/ui/editor';
 import {
   SiBoldIcon,
   SiItalicIcon,

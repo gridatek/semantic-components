@@ -19,6 +19,7 @@ import {
 } from '@semantic-components/ui';
 import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { PackageManagerInstall } from '../../../components/package-manager-install/package-manager-install';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BubbleMenuEditorDemoContainer } from './demos/bubble-menu-editor-demo-container';
 import { EditorUsageDemoContainer } from './demos/editor-usage-demo-container';
@@ -58,6 +59,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
     LayoutEditorDemoContainer,
     TocHeading,
     ComponentBadges,
+    PackageManagerInstall,
     ScHeading,
     ScTable,
     ScTableBody,
@@ -84,6 +86,57 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
       </div>
 
       <section class="space-y-4">
+        <h2 scHeading appToc>Installation</h2>
+        <p class="text-muted-foreground">
+          It has its own entry point,
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >&#64;semantic-components/ui/editor</code
+          >, built on
+          <a
+            href="https://tiptap.dev"
+            target="_blank"
+            rel="noopener"
+            class="text-foreground underline underline-offset-4"
+            >Tiptap</a
+          >
+          — optional peers of ui: install its core where you use the editor.
+          Each feature adds its own package; see
+          <a
+            href="#features"
+            class="text-foreground underline underline-offset-4"
+            >Features</a
+          >.
+        </p>
+        <app-package-manager-install
+          packages="@tiptap/core @tiptap/pm @tiptap/starter-kit"
+        />
+        <p class="text-muted-foreground">
+          Then its styles, in your
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code
+          >:
+        </p>
+        <div scCodeBlock>
+          <div scCodeBlockHeader>
+            <div scCodeBlockTitle>css</div>
+            <div scCodeBlockActions>
+              <button
+                [scCodeBlockCopy]="stylesCode"
+                #copyStyles="scCodeBlockCopy"
+              >
+                @if (copyStyles.copied()) {
+                  <svg siCheckIcon></svg>
+                } @else {
+                  <svg siCopyIcon></svg>
+                }
+                <span class="sr-only">Copy to clipboard</span>
+              </button>
+            </div>
+          </div>
+          <pre scCodeBlockContent [code]="stylesCode" language="css"></pre>
+        </div>
+      </section>
+
+      <section class="space-y-4">
         <h2 scHeading appToc>Usage</h2>
         <app-editor-usage-demo-container />
       </section>
@@ -93,7 +146,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
         <p class="text-muted-foreground">
           The core,
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >&#64;semantic-components/editor</code
+            >&#64;semantic-components/ui/editor</code
           >, writes text, headings, lists and task lists, quotes, code blocks
           and links, with undo and redo, the counts and
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
@@ -549,6 +602,8 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
   encapsulation: ViewEncapsulation.None,
 })
 export default class EditorPage {
+  readonly stylesCode = '@import "@semantic-components/ui/editor/styles";';
+
   readonly featuresCode = `import { Component, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
@@ -558,13 +613,13 @@ import {
   ScEditorToolbar,
   ScEditorToolbarGroup,
   provideEditor,
-} from '@semantic-components/editor';
-import { withMarkdown } from '@semantic-components/editor/markdown';
+} from '@semantic-components/ui/editor';
+import { withMarkdown } from '@semantic-components/ui/editor/markdown';
 import {
   ScEditorSubscript,
   ScEditorSuperscript,
   withScripts,
-} from '@semantic-components/editor/scripts';
+} from '@semantic-components/ui/editor/scripts';
 import {
   SiBoldIcon,
   SiSubscriptIcon,
@@ -622,7 +677,7 @@ export class NoteEditor {
     items: { name: string; inputs: string[]; read: string[]; do: string[] }[];
   }[] = [
     {
-      entry: '@semantic-components/editor',
+      entry: '@semantic-components/ui/editor',
       items: [
         {
           name: '[scEditor]',
@@ -724,7 +779,7 @@ export class NoteEditor {
       ],
     },
     {
-      entry: '@semantic-components/editor/tables',
+      entry: '@semantic-components/ui/editor/tables',
       items: [
         {
           name: 'button[scEditorTable]',
@@ -736,7 +791,7 @@ export class NoteEditor {
       ],
     },
     {
-      entry: '@semantic-components/editor/images',
+      entry: '@semantic-components/ui/editor/images',
       items: [
         {
           name: '[scEditor][upload]',
@@ -759,7 +814,7 @@ export class NoteEditor {
       ],
     },
     {
-      entry: '@semantic-components/editor/search',
+      entry: '@semantic-components/ui/editor/search',
       items: [
         {
           name: 'button[scEditorSearch]',
@@ -800,7 +855,7 @@ export class NoteEditor {
       ],
     },
     {
-      entry: '@semantic-components/editor/highlight',
+      entry: '@semantic-components/ui/editor/highlight',
       items: [
         {
           name: 'button[scEditorHighlightColor]',
@@ -818,7 +873,7 @@ export class NoteEditor {
       ],
     },
     {
-      entry: '@semantic-components/editor/scripts',
+      entry: '@semantic-components/ui/editor/scripts',
       items: [
         {
           name: 'scEditorSuperscript scEditorSubscript',
@@ -835,7 +890,7 @@ export class NoteEditor {
       ],
     },
     {
-      entry: '@semantic-components/editor/align',
+      entry: '@semantic-components/ui/editor/align',
       items: [
         {
           name: 'scEditorAlignLeft scEditorAlignCenter scEditorAlignRight scEditorAlignJustify',
@@ -847,7 +902,7 @@ export class NoteEditor {
       ],
     },
     {
-      entry: '@semantic-components/editor/markdown',
+      entry: '@semantic-components/ui/editor/markdown',
       items: [
         {
           name: 'withMarkdown()',
@@ -858,7 +913,7 @@ export class NoteEditor {
       ],
     },
     {
-      entry: '@semantic-components/editor/bubble-menu',
+      entry: '@semantic-components/ui/editor/bubble-menu',
       items: [
         {
           name: 'div[scEditorBubbleMenu]',

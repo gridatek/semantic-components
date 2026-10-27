@@ -28,7 +28,7 @@ import {
   ScEditorItalic,
   ScEditorToolbar,
   ScEditorToolbarGroup,
-} from '@semantic-components/editor';
+} from '@semantic-components/ui/editor';
 import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
 import { SiBoldIcon, SiItalicIcon } from '@semantic-icons/lucide-icons';
 

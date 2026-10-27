@@ -30,23 +30,31 @@
       "@semantic-components/ui/data-table": ["libs/ui/data-table/src/index.ts"],
       "@semantic-components/ui/qr-code": ["libs/ui/qr-code/src/index.ts"],
       "@semantic-components/ui/pdf-viewer": ["libs/ui/pdf-viewer/src/index.ts"],
-      "@semantic-components/editor": ["libs/editor/src/index.ts"],
-      "@semantic-components/editor/align": ["libs/editor/align/src/index.ts"],
-      "@semantic-components/editor/bubble-menu": [
-        "libs/editor/bubble-menu/src/index.ts"
+      "@semantic-components/ui/editor": ["libs/ui/editor/src/index.ts"],
+      "@semantic-components/ui/editor/align": [
+        "libs/ui/editor/align/src/index.ts"
       ],
-      "@semantic-components/editor/highlight": [
-        "libs/editor/highlight/src/index.ts"
+      "@semantic-components/ui/editor/bubble-menu": [
+        "libs/ui/editor/bubble-menu/src/index.ts"
       ],
-      "@semantic-components/editor/images": ["libs/editor/images/src/index.ts"],
-      "@semantic-components/editor/markdown": [
-        "libs/editor/markdown/src/index.ts"
+      "@semantic-components/ui/editor/highlight": [
+        "libs/ui/editor/highlight/src/index.ts"
       ],
-      "@semantic-components/editor/scripts": [
-        "libs/editor/scripts/src/index.ts"
+      "@semantic-components/ui/editor/images": [
+        "libs/ui/editor/images/src/index.ts"
       ],
-      "@semantic-components/editor/search": ["libs/editor/search/src/index.ts"],
-      "@semantic-components/editor/tables": ["libs/editor/tables/src/index.ts"],
+      "@semantic-components/ui/editor/markdown": [
+        "libs/ui/editor/markdown/src/index.ts"
+      ],
+      "@semantic-components/ui/editor/scripts": [
+        "libs/ui/editor/scripts/src/index.ts"
+      ],
+      "@semantic-components/ui/editor/search": [
+        "libs/ui/editor/search/src/index.ts"
+      ],
+      "@semantic-components/ui/editor/tables": [
+        "libs/ui/editor/tables/src/index.ts"
+      ],
       "@semantic-components/charts": ["libs/charts/src/index.ts"],
       "@semantic-components/presets": ["libs/presets/src/index.ts"],
       "@semantic-components/presets/lyra": ["libs/presets/lyra/src/index.ts"],

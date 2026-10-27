@@ -30,13 +30,13 @@ import {
   ScEditorToolbar,
   ScEditorToolbarGroup,
   provideEditor,
-} from '@semantic-components/editor';
+} from '@semantic-components/ui/editor';
 import {
   ScEditorImage,
   type ScEditorUploadHandler,
   ScEditorUploads,
   withImages,
-} from '@semantic-components/editor/images';
+} from '@semantic-components/ui/editor/images';
 import { ScButton, ScProgress } from '@semantic-components/ui';
 import {
   SiBoldIcon,

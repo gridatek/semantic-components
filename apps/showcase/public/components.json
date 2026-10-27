@@ -332,7 +332,7 @@
     "path": "editor",
     "description": "Composable WYSIWYG editor with customizable toolbar.",
     "status": "Experimental",
-    "library": "editor",
+    "library": "ui",
     "category": "Editor"
   },
   {

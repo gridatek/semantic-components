@@ -6,11 +6,11 @@ This guide describes how to publish a new version of the Semantic Components wor
 
 All libraries are versioned together:
 
-- `@semantic-components/ui`
-- `@semantic-components/ui`
-- `@semantic-components/editor`
+- `@semantic-components/ui` (with its entry points: `ui/editor`, `ui/carousel`…)
 - `@semantic-components/charts`
 - `@semantic-components/code`
+- `@semantic-components/presets`
+- `@semantic-components/mcp-server`
 
 ## Automated Release (CI)
 

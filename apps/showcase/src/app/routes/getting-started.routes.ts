@@ -39,11 +39,6 @@ export const gettingStartedRoutes: Route[] = [
         loadComponent: () => import('../pages/getting-started/charts.page'),
       },
       {
-        path: 'editor',
-        title: 'Editor - Semantic Components',
-        loadComponent: () => import('../pages/getting-started/editor.page'),
-      },
-      {
         path: 'code',
         title: 'Code - Semantic Components',
         loadComponent: () => import('../pages/getting-started/code.page'),

@@ -35,7 +35,7 @@ import {
   ScEditorToolbarGroup,
   ScEditorUnderline,
   ScEditorWordCount,
-} from '@semantic-components/editor';
+} from '@semantic-components/ui/editor';
 import {
   SiBoldIcon,
   SiItalicIcon,

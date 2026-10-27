@@ -29,7 +29,7 @@ import {
   ScEditorToolbar,
   ScEditorToolbarGroup,
   provideEditor,
-} from '@semantic-components/editor';
+} from '@semantic-components/ui/editor';
 import {
   ScEditorReplace,
   ScEditorReplaceAll,
@@ -42,7 +42,7 @@ import {
   ScEditorSearchPrevious,
   ScEditorSearchResults,
   withSearch,
-} from '@semantic-components/editor/search';
+} from '@semantic-components/ui/editor/search';
 import { ScInput } from '@semantic-components/ui';
 import {
   SiBoldIcon,

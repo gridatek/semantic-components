@@ -142,7 +142,7 @@ function scanLibrary(
     ...scanDirectory(join(srcLib, 'utilities'), visiblePaths),
   ];
 
-  // Secondary entry points (`@semantic-components/editor/tables`): their
+  // Secondary entry points (`@semantic-components/ui/editor/tables`): their
   // exports belong to the library's component of the same name, whose README
   // documents them.
   const main = components.find((c) => c.name === basename(libDir));
@@ -209,7 +209,6 @@ function main() {
   const libs: [string, string][] = [
     ['ui', '@semantic-components/ui'],
     ['code', '@semantic-components/code'],
-    ['editor', '@semantic-components/editor'],
   ];
 
   const visiblePaths = loadVisibleComponentPaths();

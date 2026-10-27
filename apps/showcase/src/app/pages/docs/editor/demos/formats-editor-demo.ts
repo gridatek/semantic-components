@@ -1,6 +1,11 @@
 import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import { FormField, form, required } from '@angular/forms/signals';
 import {
+  ScButton,
+  ScToggleGroup,
+  ScToggleGroupItem,
+} from '@semantic-components/ui';
+import {
   ScEditor,
   ScEditorBold,
   ScEditorBulletList,
@@ -13,13 +18,8 @@ import {
   type ScEditorValue,
   ScEditorView,
   provideEditor,
-} from '@semantic-components/editor';
-import { withMarkdown } from '@semantic-components/editor/markdown';
-import {
-  ScButton,
-  ScToggleGroup,
-  ScToggleGroupItem,
-} from '@semantic-components/ui';
+} from '@semantic-components/ui/editor';
+import { withMarkdown } from '@semantic-components/ui/editor/markdown';
 import {
   SiBoldIcon,
   SiItalicIcon,

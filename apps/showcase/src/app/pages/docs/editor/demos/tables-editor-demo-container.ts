@@ -29,12 +29,12 @@ import {
   ScEditorToolbar,
   ScEditorToolbarGroup,
   provideEditor,
-} from '@semantic-components/editor';
+} from '@semantic-components/ui/editor';
 import {
   ScEditorTable,
   type ScEditorTableAction,
   withTables,
-} from '@semantic-components/editor/tables';
+} from '@semantic-components/ui/editor/tables';
 import {
   ScMenu,
   ScMenuContent,

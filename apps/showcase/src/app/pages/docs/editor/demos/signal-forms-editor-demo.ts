@@ -1,6 +1,15 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, disabled, form, required } from '@angular/forms/signals';
 import {
+  ScButton,
+  ScCheckbox,
+  ScCheckboxField,
+  ScField,
+  ScFieldDescription,
+  ScFieldErrors,
+  ScLabel,
+} from '@semantic-components/ui';
+import {
   ScEditor,
   ScEditorBold,
   ScEditorCharCount,
@@ -10,16 +19,7 @@ import {
   ScEditorItalic,
   ScEditorToolbar,
   ScEditorToolbarGroup,
-} from '@semantic-components/editor';
-import {
-  ScButton,
-  ScCheckbox,
-  ScCheckboxField,
-  ScField,
-  ScFieldDescription,
-  ScFieldErrors,
-  ScLabel,
-} from '@semantic-components/ui';
+} from '@semantic-components/ui/editor';
 import { SiBoldIcon, SiItalicIcon } from '@semantic-icons/lucide-icons';
 
 interface PostModel {

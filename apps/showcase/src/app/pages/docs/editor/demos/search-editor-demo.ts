@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
+import { ScInput } from '@semantic-components/ui';
 import {
   ScEditor,
   ScEditorBold,
@@ -9,7 +10,7 @@ import {
   ScEditorToolbar,
   ScEditorToolbarGroup,
   provideEditor,
-} from '@semantic-components/editor';
+} from '@semantic-components/ui/editor';
 import {
   ScEditorReplace,
   ScEditorReplaceAll,
@@ -22,8 +23,7 @@ import {
   ScEditorSearchPrevious,
   ScEditorSearchResults,
   withSearch,
-} from '@semantic-components/editor/search';
-import { ScInput } from '@semantic-components/ui';
+} from '@semantic-components/ui/editor/search';
 import {
   SiBoldIcon,
   SiChevronDownIcon,

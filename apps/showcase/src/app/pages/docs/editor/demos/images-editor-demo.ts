@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
+import { ScButton, ScProgress } from '@semantic-components/ui';
 import {
   ScEditor,
   ScEditorBold,
@@ -10,14 +11,13 @@ import {
   ScEditorToolbar,
   ScEditorToolbarGroup,
   provideEditor,
-} from '@semantic-components/editor';
+} from '@semantic-components/ui/editor';
 import {
   ScEditorImage,
   type ScEditorUploadHandler,
   ScEditorUploads,
   withImages,
-} from '@semantic-components/editor/images';
-import { ScButton, ScProgress } from '@semantic-components/ui';
+} from '@semantic-components/ui/editor/images';
 import {
   SiBoldIcon,
   SiImagePlusIcon,
