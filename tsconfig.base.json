@@ -22,7 +22,13 @@
       ],
       "@semantic-components/ui/confetti": ["libs/ui/confetti/src/index.ts"],
       "@semantic-components/ui": ["libs/ui/src/index.ts"],
-      "@semantic-components/code": ["libs/code/src/index.ts"],
+      "@semantic-components/ui/code-block": ["libs/ui/code-block/src/index.ts"],
+      "@semantic-components/ui/code-editor": [
+        "libs/ui/code-editor/src/index.ts"
+      ],
+      "@semantic-components/ui/diff-viewer": [
+        "libs/ui/diff-viewer/src/index.ts"
+      ],
       "@semantic-components/ui/carousel": ["libs/ui/carousel/src/index.ts"],
       "@semantic-components/ui/phone-input": [
         "libs/ui/phone-input/src/index.ts"

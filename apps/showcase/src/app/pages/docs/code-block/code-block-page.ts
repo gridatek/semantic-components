@@ -1,6 +1,16 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ScHeading } from '@semantic-components/ui';
+import {
+  ScCodeBlock,
+  ScCodeBlockActions,
+  ScCodeBlockContent,
+  ScCodeBlockCopy,
+  ScCodeBlockHeader,
+  ScCodeBlockTitle,
+} from '@semantic-components/ui/code-block';
+import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { EntryInstall } from '../../../components/entry-install/entry-install';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicCodeBlockDemoContainer } from './demos/basic-code-block-demo-container';
 import { ChangesCodeBlockDemoContainer } from './demos/changes-code-block-demo-container';
@@ -20,6 +30,15 @@ import { WrapCodeBlockDemoContainer } from './demos/wrap-code-block-demo-contain
     ErrorCodeBlockDemoContainer,
     TocHeading,
     ComponentBadges,
+    EntryInstall,
+    ScCodeBlock,
+    ScCodeBlockActions,
+    ScCodeBlockContent,
+    ScCodeBlockCopy,
+    ScCodeBlockHeader,
+    ScCodeBlockTitle,
+    SiCheckIcon,
+    SiCopyIcon,
     ScHeading,
   ],
   template: `
@@ -33,6 +52,43 @@ import { WrapCodeBlockDemoContainer } from './demos/wrap-code-block-demo-contain
         </p>
         <app-component-badges path="code-block" />
       </div>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Installation</h2>
+        <app-entry-install
+          entry="code-block"
+          library="shiki"
+          href="https://shiki.style"
+          names="ScCodeBlock, ScCodeBlockContent"
+        />
+        <p class="text-muted-foreground">
+          Then provide the highlighter, in your app's config — without it, code
+          shows plain:
+        </p>
+        <div scCodeBlock>
+          <div scCodeBlockHeader>
+            <div scCodeBlockTitle>ts</div>
+            <div scCodeBlockActions>
+              <button
+                [scCodeBlockCopy]="highlighterCode"
+                #copyHighlighter="scCodeBlockCopy"
+              >
+                @if (copyHighlighter.copied()) {
+                  <svg siCheckIcon></svg>
+                } @else {
+                  <svg siCopyIcon></svg>
+                }
+                <span class="sr-only">Copy to clipboard</span>
+              </button>
+            </div>
+          </div>
+          <pre
+            scCodeBlockContent
+            [code]="highlighterCode"
+            language="angular-ts"
+          ></pre>
+        </div>
+      </section>
 
       <section class="space-y-4">
         <h2 scHeading appToc>Basic</h2>
@@ -89,4 +145,10 @@ import { WrapCodeBlockDemoContainer } from './demos/wrap-code-block-demo-contain
   `,
   encapsulation: ViewEncapsulation.None,
 })
-export default class CodeBlockPage {}
+export default class CodeBlockPage {
+  readonly highlighterCode = `import { provideCodeHighlighter } from '@semantic-components/ui/code-block';
+
+export const appConfig: ApplicationConfig = {
+  providers: [provideCodeHighlighter()],
+};`;
+}

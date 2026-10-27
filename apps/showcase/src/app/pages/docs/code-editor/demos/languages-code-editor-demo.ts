@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScCodeBlock, ScCodeEditor } from '@semantic-components/code';
 import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
+import { ScCodeBlock } from '@semantic-components/ui/code-block';
+import { ScCodeEditor } from '@semantic-components/ui/code-editor';
 
 /** language: each one loaded the first time it is shown. A language’s CodeMirror package (its structure: indentation, brackets) can join through extensions. */
 @Component({

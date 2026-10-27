@@ -2,8 +2,8 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCodeBlock,
   ScCodeBlockFooter,
-  ScDiffViewer,
-} from '@semantic-components/code';
+} from '@semantic-components/ui/code-block';
+import { ScDiffViewer } from '@semantic-components/ui/diff-viewer';
 
 /** identical(): nothing changed — show your own words. */
 @Component({

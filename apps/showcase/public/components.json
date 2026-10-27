@@ -180,7 +180,7 @@
     "path": "code-editor",
     "description": "Code to edit: CodeMirror, colored by Shiki; a form field.",
     "status": "Experimental",
-    "library": "code",
+    "library": "ui",
     "category": "Editor"
   },
   {
@@ -188,7 +188,7 @@
     "path": "code-block",
     "description": "Code to read and copy: highlighted, numbered, its lines marked.",
     "status": "Experimental",
-    "library": "code",
+    "library": "ui",
     "category": "Editor"
   },
   {
@@ -308,7 +308,7 @@
     "path": "diff-viewer",
     "description": "Two texts compared, line by line and word by word: split or unified, highlighted.",
     "status": "Experimental",
-    "library": "code",
+    "library": "ui",
     "category": "Editor"
   },
   {

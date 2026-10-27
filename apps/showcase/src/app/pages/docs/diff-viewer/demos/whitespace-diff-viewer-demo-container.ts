@@ -19,7 +19,8 @@ import { WhitespaceDiffViewerDemo } from './whitespace-diff-viewer-demo';
 })
 export class WhitespaceDiffViewerDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScCodeBlock, ScDiffViewer } from '@semantic-components/code';
+import { ScCodeBlock } from '@semantic-components/ui/code-block';
+import { ScDiffViewer } from '@semantic-components/ui/diff-viewer';
 import { ScSwitch, ScSwitchField } from '@semantic-components/ui';
 
 /** ignoreWhitespace: lines that differ only in spaces and tabs count as unchanged (ignoreCase, the same for letter case). */

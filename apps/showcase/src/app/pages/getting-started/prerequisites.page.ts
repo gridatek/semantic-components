@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { ScHeading, ScSeparator } from '@semantic-components/ui';
 import {
   ScCodeBlock,
   ScCodeBlockActions,
@@ -6,8 +7,7 @@ import {
   ScCodeBlockCopy,
   ScCodeBlockHeader,
   ScCodeBlockTitle,
-} from '@semantic-components/code';
-import { ScHeading, ScSeparator } from '@semantic-components/ui';
+} from '@semantic-components/ui/code-block';
 import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 import { PackageManagerInstall } from '../../components/package-manager-install/package-manager-install';
 import { TocHeading } from '../../components/toc/toc-heading';

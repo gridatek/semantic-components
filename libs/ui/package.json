@@ -47,7 +47,13 @@
     "@tiptap/pm": ">=3.32.0",
     "@tiptap/starter-kit": ">=3.32.0",
     "d3-scale": ">=4.0.2",
-    "d3-shape": ">=3.2.0"
+    "d3-shape": ">=3.2.0",
+    "@codemirror/commands": ">=6.11.1",
+    "@codemirror/language": ">=6.13.1",
+    "@codemirror/state": ">=6.7.6",
+    "@codemirror/view": ">=6.43.15",
+    "diff": ">=9.0.0",
+    "shiki": ">=4.5.0"
   },
   "exports": {
     "./styles": {
@@ -132,6 +138,24 @@
       "optional": true
     },
     "d3-shape": {
+      "optional": true
+    },
+    "@codemirror/commands": {
+      "optional": true
+    },
+    "@codemirror/language": {
+      "optional": true
+    },
+    "@codemirror/state": {
+      "optional": true
+    },
+    "@codemirror/view": {
+      "optional": true
+    },
+    "diff": {
+      "optional": true
+    },
+    "shiki": {
       "optional": true
     }
   }

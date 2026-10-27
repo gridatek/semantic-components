@@ -25,8 +25,10 @@ import {
   ScCodeBlockCopy,
   ScCodeBlockHeader,
   ScCodeBlockTitle,
+} from '@semantic-components/ui/code-block';
+import {
   ScCodeEditor,
-} from '@semantic-components/code';
+} from '@semantic-components/ui/code-editor';
 import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 
 /** CodeMirror, colored by the app’s highlighter (Shiki, like a code block), in a code block for its frame, title and copy button. Tab indents; Escape then Tab moves on. */

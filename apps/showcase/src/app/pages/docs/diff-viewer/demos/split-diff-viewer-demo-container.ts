@@ -23,9 +23,11 @@ import {
   ScCodeBlock,
   ScCodeBlockHeader,
   ScCodeBlockTitle,
+} from '@semantic-components/ui/code-block';
+import {
   type ScDiffView,
   ScDiffViewer,
-} from '@semantic-components/code';
+} from '@semantic-components/ui/diff-viewer';
 import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
 
 /** Side by side: the old text facing the new, rows aligned, long lines wrapped. Your header holds the title, the counts and a switch for the view ([(view)]). */

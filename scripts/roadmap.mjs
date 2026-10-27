@@ -22,7 +22,7 @@ const ALIAS = {
 };
 // Components without a folder of their own: measured as another.
 const SAME_AS = { 'date-range-picker': 'date-picker' };
-const LIBRARIES = ['ui', 'code'];
+const LIBRARIES = ['ui'];
 
 const registry = JSON.parse(
   readFileSync(at('apps/showcase/public/components.json'), 'utf8'),

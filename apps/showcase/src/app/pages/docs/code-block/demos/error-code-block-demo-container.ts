@@ -25,7 +25,7 @@ import {
   ScCodeBlockFooter,
   ScCodeBlockHeader,
   ScCodeBlockTitle,
-} from '@semantic-components/code';
+} from '@semantic-components/ui/code-block';
 import { SiCircleAlertIcon } from '@semantic-icons/lucide-icons';
 
 /** variant="destructive": an error’s output, with a footer under it. */

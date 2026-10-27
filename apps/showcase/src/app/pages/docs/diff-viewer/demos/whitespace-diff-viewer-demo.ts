@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScCodeBlock, ScDiffViewer } from '@semantic-components/code';
 import { ScSwitch, ScSwitchField } from '@semantic-components/ui';
+import { ScCodeBlock } from '@semantic-components/ui/code-block';
+import { ScDiffViewer } from '@semantic-components/ui/diff-viewer';
 
 /** ignoreWhitespace: lines that differ only in spaces and tabs count as unchanged (ignoreCase, the same for letter case). */
 @Component({

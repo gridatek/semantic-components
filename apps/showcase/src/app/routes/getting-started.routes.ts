@@ -34,11 +34,6 @@ export const gettingStartedRoutes: Route[] = [
         loadComponent: () => import('../pages/getting-started/presets.page'),
       },
       {
-        path: 'code',
-        title: 'Code - Semantic Components',
-        loadComponent: () => import('../pages/getting-started/code.page'),
-      },
-      {
         path: 'mcp-server',
         title: 'MCP Server - Semantic Components',
         loadComponent: () => import('../pages/getting-started/mcp-server.page'),

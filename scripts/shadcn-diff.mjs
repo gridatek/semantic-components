@@ -44,7 +44,6 @@ if (!existsSync(shadcnFile)) {
 const ourDir = [
   `libs/ui/src/lib/components/${ourName}`,
   `libs/ui/${ourName}/src`,
-  `libs/code/src/lib/components/${ourName}`,
   `libs/${ourName}/src`,
 ]
   .map((dir) => join(root, dir))

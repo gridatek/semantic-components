@@ -11,8 +11,8 @@ import {
   withInMemoryScrolling,
   withRouterConfig,
 } from '@angular/router';
-import { provideCodeHighlighter } from '@semantic-components/code';
 import { provideScConfig } from '@semantic-components/ui';
+import { provideCodeHighlighter } from '@semantic-components/ui/code-block';
 import { appRoutes } from './app.routes';
 import { PRESETS, storedPreset } from './presets';
 

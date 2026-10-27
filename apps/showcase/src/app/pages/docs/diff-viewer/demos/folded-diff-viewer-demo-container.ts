@@ -23,9 +23,11 @@ import {
   ScCodeBlock,
   ScCodeBlockHeader,
   ScCodeBlockTitle,
+} from '@semantic-components/ui/code-block';
+import {
   ScDiffViewer,
   ScDiffViewerFold,
-} from '@semantic-components/code';
+} from '@semantic-components/ui/diff-viewer';
 
 /** Settings with \`count\` keys. */
 function settings(count: number): Record<string, string> {

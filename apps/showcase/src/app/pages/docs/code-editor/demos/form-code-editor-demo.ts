@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, FormRoot, form, required } from '@angular/forms/signals';
-import { ScCodeBlock, ScCodeEditor } from '@semantic-components/code';
 import {
   ScButton,
   ScField,
@@ -8,6 +7,8 @@ import {
   ScFieldErrors,
   ScLabel,
 } from '@semantic-components/ui';
+import { ScCodeBlock } from '@semantic-components/ui/code-block';
+import { ScCodeEditor } from '@semantic-components/ui/code-editor';
 
 /** A [formField] (a string): named by the field’s label, required from the schema, marked once left. */
 @Component({

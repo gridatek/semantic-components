@@ -4,7 +4,7 @@ import {
   ScCodeBlockActions,
   ScCodeBlockContent,
   ScCodeBlockCopy,
-} from '@semantic-components/code';
+} from '@semantic-components/ui/code-block';
 import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 
 /** Actions straight in the block, without a header: at the top end, shown on hover or focus — always on a touch screen. size="sm" for a tighter block. */

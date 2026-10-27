@@ -24,7 +24,7 @@ import {
   ScCodeBlockContent,
   ScCodeBlockHeader,
   ScCodeBlockTitle,
-} from '@semantic-components/code';
+} from '@semantic-components/ui/code-block';
 import { SiFileDiffIcon } from '@semantic-icons/lucide-icons';
 
 /** addedLines and removedLines: a + or − at the start of the line, a tint across it. */

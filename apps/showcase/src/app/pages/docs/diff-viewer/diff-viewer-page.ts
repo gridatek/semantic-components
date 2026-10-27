@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ScHeading } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { EntryInstall } from '../../../components/entry-install/entry-install';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { FoldedDiffViewerDemoContainer } from './demos/folded-diff-viewer-demo-container';
 import { IdenticalDiffViewerDemoContainer } from './demos/identical-diff-viewer-demo-container';
@@ -18,6 +19,7 @@ import { WhitespaceDiffViewerDemoContainer } from './demos/whitespace-diff-viewe
     IdenticalDiffViewerDemoContainer,
     TocHeading,
     ComponentBadges,
+    EntryInstall,
     ScHeading,
   ],
   template: `
@@ -31,6 +33,19 @@ import { WhitespaceDiffViewerDemoContainer } from './demos/whitespace-diff-viewe
         </p>
         <app-component-badges path="diff-viewer" />
       </div>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Installation</h2>
+        <app-entry-install
+          entry="diff-viewer"
+          library="diff"
+          href="https://github.com/kpdecker/jsdiff"
+          names="ScDiffViewer"
+        />
+        <p class="text-muted-foreground">
+          Colored by the code block's highlighter, when the app provides one.
+        </p>
+      </section>
 
       <section class="space-y-4">
         <h2 scHeading appToc>Split</h2>

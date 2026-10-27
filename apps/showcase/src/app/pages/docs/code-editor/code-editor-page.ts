@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ScHeading } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { EntryInstall } from '../../../components/entry-install/entry-install';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicCodeEditorDemoContainer } from './demos/basic-code-editor-demo-container';
 import { FormCodeEditorDemoContainer } from './demos/form-code-editor-demo-container';
@@ -18,6 +19,7 @@ import { WrapCodeEditorDemoContainer } from './demos/wrap-code-editor-demo-conta
     ReadonlyCodeEditorDemoContainer,
     TocHeading,
     ComponentBadges,
+    EntryInstall,
     ScHeading,
   ],
   template: `
@@ -31,6 +33,19 @@ import { WrapCodeEditorDemoContainer } from './demos/wrap-code-editor-demo-conta
         </p>
         <app-component-badges path="code-editor" />
       </div>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Installation</h2>
+        <app-entry-install
+          entry="code-editor"
+          library="@codemirror/state @codemirror/view @codemirror/commands @codemirror/language"
+          href="https://codemirror.net"
+          names="ScCodeEditor"
+        />
+        <p class="text-muted-foreground">
+          Colored by the code block's highlighter, when the app provides one.
+        </p>
+      </section>
 
       <section class="space-y-4">
         <h2 scHeading appToc>Basic</h2>

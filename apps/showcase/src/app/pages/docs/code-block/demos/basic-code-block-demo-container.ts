@@ -26,7 +26,7 @@ import {
   ScCodeBlockCopy,
   ScCodeBlockHeader,
   ScCodeBlockTitle,
-} from '@semantic-components/code';
+} from '@semantic-components/ui/code-block';
 import {
   SiCheckIcon,
   SiCopyIcon,

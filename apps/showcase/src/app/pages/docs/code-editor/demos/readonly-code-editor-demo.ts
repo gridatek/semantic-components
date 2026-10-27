@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScCodeBlock, ScCodeEditor } from '@semantic-components/code';
+import { ScCodeBlock } from '@semantic-components/ui/code-block';
+import { ScCodeEditor } from '@semantic-components/ui/code-editor';
 
 /** readonly: selectable and copyable, not edited. disabled: out of the way. */
 @Component({

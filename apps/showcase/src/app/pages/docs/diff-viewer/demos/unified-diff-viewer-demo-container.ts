@@ -23,8 +23,10 @@ import {
   ScCodeBlock,
   ScCodeBlockHeader,
   ScCodeBlockTitle,
+} from '@semantic-components/ui/code-block';
+import {
   ScDiffViewer,
-} from '@semantic-components/code';
+} from '@semantic-components/ui/diff-viewer';
 
 /** One column, both line numbers, + and − — the words changed in a changed line marked. */
 @Component({

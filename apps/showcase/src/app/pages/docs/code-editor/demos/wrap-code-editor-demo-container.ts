@@ -19,7 +19,8 @@ import { WrapCodeEditorDemo } from './wrap-code-editor-demo';
 })
 export class WrapCodeEditorDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScCodeBlock, ScCodeEditor } from '@semantic-components/code';
+import { ScCodeBlock } from '@semantic-components/ui/code-block';
+import { ScCodeEditor } from '@semantic-components/ui/code-editor';
 
 /** wrap: long lines break instead of scrolling; lineNumbers off. */
 @Component({

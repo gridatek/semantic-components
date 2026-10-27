@@ -22,8 +22,10 @@ export class IdenticalDiffViewerDemoContainer {
 import {
   ScCodeBlock,
   ScCodeBlockFooter,
+} from '@semantic-components/ui/code-block';
+import {
   ScDiffViewer,
-} from '@semantic-components/code';
+} from '@semantic-components/ui/diff-viewer';
 
 /** identical(): nothing changed — show your own words. */
 @Component({

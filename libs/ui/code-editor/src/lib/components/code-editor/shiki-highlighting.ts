@@ -12,7 +12,10 @@ import {
   ViewPlugin,
   type ViewUpdate,
 } from '@codemirror/view';
-import type { ScCodeHighlighter, ScCodeToken } from '../code-block';
+import type {
+  ScCodeHighlighter,
+  ScCodeToken,
+} from '@semantic-components/ui/code-block';
 
 /** The token's colors, as in a code block: light, and dark under `.dark`. */
 const TOKEN_CLASS = 'text-(--shiki-light) dark:text-(--shiki-dark)';

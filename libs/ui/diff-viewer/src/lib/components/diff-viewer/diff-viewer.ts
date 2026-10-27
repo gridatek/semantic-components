@@ -12,7 +12,10 @@ import {
   signal,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { SC_CODE_HIGHLIGHTER, type ScCodeToken } from '../code-block';
+import {
+  SC_CODE_HIGHLIGHTER,
+  type ScCodeToken,
+} from '@semantic-components/ui/code-block';
 import {
   type ScDiffFold,
   type ScDiffLine,

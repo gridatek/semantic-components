@@ -1,6 +1,6 @@
 export type ComponentStatus = 'Experimental' | 'Developer Preview' | 'Stable';
 
-export type ComponentLibrary = 'ui' | 'code' | 'third-party';
+export type ComponentLibrary = 'ui' | 'third-party';
 
 export type ComponentCategory =
   | 'Forms'

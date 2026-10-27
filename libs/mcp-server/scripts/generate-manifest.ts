@@ -206,10 +206,7 @@ function scanGuides(): GuideEntry[] {
 }
 
 function main() {
-  const libs: [string, string][] = [
-    ['ui', '@semantic-components/ui'],
-    ['code', '@semantic-components/code'],
-  ];
+  const libs: [string, string][] = [['ui', '@semantic-components/ui']];
 
   const visiblePaths = loadVisibleComponentPaths();
 

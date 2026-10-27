@@ -22,7 +22,7 @@ div[scCodeBlock] (variant: default | destructive, size: default | sm)
 The content highlights its `language` when the app provides a highlighter; otherwise, and until it answers, the code shows plain.
 
 ```ts
-import { provideCodeHighlighter } from '@semantic-components/code';
+import { provideCodeHighlighter } from '@semantic-components/ui/code-block';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideCodeHighlighter()],

@@ -1,13 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScCodeBlock,
-  ScCodeBlockActions,
-  ScCodeBlockContent,
-  ScCodeBlockCopy,
-  ScCodeBlockHeader,
-  ScCodeBlockTitle,
-} from '@semantic-components/code';
-import {
   ScHeading,
   ScTable,
   ScTableBody,
@@ -17,6 +9,14 @@ import {
   ScTableHeaderCell,
   ScTableRow,
 } from '@semantic-components/ui';
+import {
+  ScCodeBlock,
+  ScCodeBlockActions,
+  ScCodeBlockContent,
+  ScCodeBlockCopy,
+  ScCodeBlockHeader,
+  ScCodeBlockTitle,
+} from '@semantic-components/ui/code-block';
 import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { PackageManagerInstall } from '../../../components/package-manager-install/package-manager-install';
@@ -625,7 +625,7 @@ import {
   SiSubscriptIcon,
   SiSuperscriptIcon,
 } from '@semantic-icons/lucide-icons';
-import { ScCodeBlock, ScCodeBlockHeader, ScCodeBlockTitle, ScCodeBlockActions, ScCodeBlockCopy, ScCodeBlockContent } from '@semantic-components/code';
+import { ScCodeBlock, ScCodeBlockHeader, ScCodeBlockTitle, ScCodeBlockActions, ScCodeBlockCopy, ScCodeBlockContent } from '@semantic-components/ui/code-block';
 import { ScHeading, ScTable, ScTableBody, ScTableCell, ScTableContainer, ScTableHeader, ScTableHeaderCell, ScTableRow } from '@semantic-components/ui';
 
 @Component({

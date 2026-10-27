@@ -12,20 +12,20 @@ import {
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import {
-  ScCodeBlock,
-  ScCodeBlockActions,
-  ScCodeBlockContent,
-  ScCodeBlockCopy,
-  ScCodeBlockHeader,
-  ScCodeBlockTitle,
-} from '@semantic-components/code';
-import {
   ScTab,
   ScTabContent,
   ScTabList,
   ScTabPanel,
   ScTabs,
 } from '@semantic-components/ui';
+import {
+  ScCodeBlock,
+  ScCodeBlockActions,
+  ScCodeBlockContent,
+  ScCodeBlockCopy,
+  ScCodeBlockHeader,
+  ScCodeBlockTitle,
+} from '@semantic-components/ui/code-block';
 import {
   SiCheckIcon,
   SiCopyIcon,

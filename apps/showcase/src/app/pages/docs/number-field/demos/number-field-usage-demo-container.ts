@@ -6,7 +6,7 @@ import {
   ScCodeBlockCopy,
   ScCodeBlockHeader,
   ScCodeBlockTitle,
-} from '@semantic-components/code';
+} from '@semantic-components/ui/code-block';
 import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 import { ConfigService } from '../../../../services/config.service';
 import { NumberFieldUsageDemo } from './number-field-usage-demo';

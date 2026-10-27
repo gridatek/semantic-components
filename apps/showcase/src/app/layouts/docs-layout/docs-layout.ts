@@ -224,17 +224,6 @@ import { ConfigService } from '../../services/config.service';
                     <li scSidebarMenuSubItem>
                       <a
                         scSidebarMenuSubButton
-                        routerLink="/docs/getting-started/code"
-                        routerLinkActive
-                        #codeRla="routerLinkActive"
-                        [isActive]="codeRla.isActive"
-                      >
-                        <span>Code</span>
-                      </a>
-                    </li>
-                    <li scSidebarMenuSubItem>
-                      <a
-                        scSidebarMenuSubButton
                         routerLink="/docs/getting-started/mcp-server"
                         routerLinkActive
                         #mcpServerRla="routerLinkActive"

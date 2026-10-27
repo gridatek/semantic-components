@@ -1,5 +1,8 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScCodeBlock, ScCodeBlockContent } from '@semantic-components/code';
+import {
+  ScCodeBlock,
+  ScCodeBlockContent,
+} from '@semantic-components/ui/code-block';
 
 /** wrap: long lines break instead of scrolling. */
 @Component({
@@ -14,5 +17,5 @@ import { ScCodeBlock, ScCodeBlockContent } from '@semantic-components/code';
   encapsulation: ViewEncapsulation.None,
 })
 export class WrapCodeBlockDemo {
-  readonly source = `npm install @semantic-components/ui @semantic-components/code @angular/cdk class-variance-authority clsx tailwind-merge tw-animate-css shiki`;
+  readonly source = `npm install @semantic-components/ui @angular/cdk class-variance-authority clsx tailwind-merge tw-animate-css shiki`;
 }

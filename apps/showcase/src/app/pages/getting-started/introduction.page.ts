@@ -81,12 +81,8 @@ import { ConfigService } from '../../services/config.service';
             — UI components, with entry points for the ones that need a library:
             carousel (Embla), data table (TanStack Table), PDF viewer (PDF.js),
             phone input (libphonenumber-js), QR code (uqr), animated counter
-            (Motion), confetti, rich text editor (Tiptap), charts (d3)
-          </li>
-          <li>
-            <strong>&#64;semantic-components/code</strong>
-            — Code block, diff viewer and code editor (CodeMirror), highlighted
-            by Shiki
+            (Motion), confetti, rich text editor (Tiptap), charts (d3), code
+            block (Shiki), diff viewer (jsdiff), code editor (CodeMirror)
           </li>
           <li>
             <strong>&#64;semantic-components/mcp-server</strong>

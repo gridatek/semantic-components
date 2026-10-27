@@ -34,7 +34,7 @@ import {
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
 import { SC_FIELD, cn } from '@semantic-components/ui';
-import { SC_CODE_HIGHLIGHTER } from '../code-block';
+import { SC_CODE_HIGHLIGHTER } from '@semantic-components/ui/code-block';
 import { shikiHighlighting } from './shiki-highlighting';
 
 /** CodeMirror in the theme's colors: the code block's look. */

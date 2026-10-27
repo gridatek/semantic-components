@@ -6,13 +6,6 @@ import {
   input,
 } from '@angular/core';
 import {
-  ScCodeBlock,
-  ScCodeBlockActions,
-  ScCodeBlockContent,
-  ScCodeBlockCopy,
-  ScCodeBlockHeader,
-} from '@semantic-components/code';
-import {
   ScTab,
   ScTabContent,
   ScTabList,
@@ -20,6 +13,13 @@ import {
   ScTabs,
   cn,
 } from '@semantic-components/ui';
+import {
+  ScCodeBlock,
+  ScCodeBlockActions,
+  ScCodeBlockContent,
+  ScCodeBlockCopy,
+  ScCodeBlockHeader,
+} from '@semantic-components/ui/code-block';
 import {
   SiCheckIcon,
   SiCopyIcon,

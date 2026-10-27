@@ -19,7 +19,7 @@ import { WrapCodeBlockDemo } from './wrap-code-block-demo';
 })
 export class WrapCodeBlockDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScCodeBlock, ScCodeBlockContent } from '@semantic-components/code';
+import { ScCodeBlock, ScCodeBlockContent } from '@semantic-components/ui/code-block';
 
 /** wrap: long lines break instead of scrolling. */
 @Component({

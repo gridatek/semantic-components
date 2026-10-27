@@ -24,7 +24,7 @@ import {
   ScCodeBlockContent,
   ScCodeBlockHeader,
   ScCodeBlockTitle,
-} from '@semantic-components/code';
+} from '@semantic-components/ui/code-block';
 
 /** lineNumbers, from startLine; highlightedLines marks lines by number. */
 @Component({

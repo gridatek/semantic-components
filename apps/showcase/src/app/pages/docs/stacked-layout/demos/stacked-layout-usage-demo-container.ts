@@ -6,7 +6,7 @@ import {
   ScCodeBlockCopy,
   ScCodeBlockHeader,
   ScCodeBlockTitle,
-} from '@semantic-components/code';
+} from '@semantic-components/ui/code-block';
 import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 
 /** Code only: a page frame can't be shown inside a page (its main, its header). */
