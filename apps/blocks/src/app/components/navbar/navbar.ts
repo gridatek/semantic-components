@@ -1,7 +1,20 @@
-import { Component, ViewEncapsulation, computed, input } from '@angular/core';
+import {
+  Component,
+  ViewEncapsulation,
+  computed,
+  inject,
+  input,
+} from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import {
+  ScButton,
   ScLink,
+  ScMenu,
+  ScMenuContent,
+  ScMenuItem,
+  ScMenuPortal,
+  ScMenuProvider,
+  ScMenuTrigger,
   ScNavbar,
   ScNavbarActions,
   ScNavbarBrand,
@@ -21,8 +34,10 @@ import {
   ScNavigationMenuTriggerIcon,
   cn,
 } from '@semantic-components/ui';
+import { ScI18n } from '@semantic-components/ui/i18n';
 import {
   SiChevronDownIcon,
+  SiLanguagesIcon,
   SiMenuIcon,
   SiMountainIcon,
   SiXIcon,
@@ -33,6 +48,14 @@ import {
   imports: [
     RouterLink,
     RouterLinkActive,
+    ScButton,
+    ScMenu,
+    ScMenuContent,
+    ScMenuItem,
+    ScMenuPortal,
+    ScMenuProvider,
+    ScMenuTrigger,
+    SiLanguagesIcon,
     ScNavbar,
     ScNavbarProvider,
     ScNavbarBrand,
@@ -69,7 +92,7 @@ import {
             <ul scNavigationMenuList>
               <li scNavigationMenuItem>
                 <button scNavigationMenuTrigger>
-                  Pages
+                  <ng-container i18n="@@navbar.pages">Pages</ng-container>
                   <svg siChevronDownIcon scNavigationMenuTriggerIcon></svg>
                 </button>
                 <ng-template scNavigationMenuPortal>
@@ -79,11 +102,15 @@ import {
                     >
                       <li>
                         <a scNavigationMenuLink routerLink="/dashboard">
-                          <div class="text-sm leading-none font-medium">
+                          <div
+                            class="text-sm leading-none font-medium"
+                            i18n="@@navbar.dashboard"
+                          >
                             Dashboard
                           </div>
                           <p
                             class="text-muted-foreground line-clamp-2 text-sm leading-snug"
+                            i18n="@@navbar.dashboard.description"
                           >
                             Sidebar layout with navigation
                           </p>
@@ -91,11 +118,15 @@ import {
                       </li>
                       <li>
                         <a scNavigationMenuLink routerLink="/settings">
-                          <div class="text-sm leading-none font-medium">
+                          <div
+                            class="text-sm leading-none font-medium"
+                            i18n="@@navbar.settings"
+                          >
                             Settings
                           </div>
                           <p
                             class="text-muted-foreground line-clamp-2 text-sm leading-snug"
+                            i18n="@@navbar.settings.description"
                           >
                             Account and profile management
                           </p>
@@ -103,11 +134,15 @@ import {
                       </li>
                       <li>
                         <a scNavigationMenuLink routerLink="/gallery">
-                          <div class="text-sm leading-none font-medium">
+                          <div
+                            class="text-sm leading-none font-medium"
+                            i18n="@@navbar.gallery"
+                          >
                             Gallery
                           </div>
                           <p
                             class="text-muted-foreground line-clamp-2 text-sm leading-snug"
+                            i18n="@@navbar.gallery.description"
                           >
                             Component showcase reference
                           </p>
@@ -115,11 +150,15 @@ import {
                       </li>
                       <li>
                         <a scNavigationMenuLink routerLink="/data-table">
-                          <div class="text-sm leading-none font-medium">
+                          <div
+                            class="text-sm leading-none font-medium"
+                            i18n="@@navbar.dataTable"
+                          >
                             Data Table
                           </div>
                           <p
                             class="text-muted-foreground line-clamp-2 text-sm leading-snug"
+                            i18n="@@navbar.dataTable.description"
                           >
                             Advanced table with sorting and filtering
                           </p>
@@ -131,30 +170,68 @@ import {
               </li>
 
               <li scNavigationMenuItem>
-                <a scNavigationMenuLink routerLink="/pricing">Pricing</a>
+                <a
+                  scNavigationMenuLink
+                  routerLink="/pricing"
+                  i18n="@@navbar.pricing"
+                >
+                  Pricing
+                </a>
               </li>
 
               <li scNavigationMenuItem>
-                <a scNavigationMenuLink routerLink="/blog">Blog</a>
+                <a scNavigationMenuLink routerLink="/blog" i18n="@@navbar.blog">
+                  Blog
+                </a>
               </li>
 
               <li scNavigationMenuItem>
-                <a scNavigationMenuLink routerLink="/contact">Contact</a>
+                <a
+                  scNavigationMenuLink
+                  routerLink="/contact"
+                  i18n="@@navbar.contact"
+                >
+                  Contact
+                </a>
               </li>
             </ul>
           </nav>
         </div>
 
         <div scNavbarActions>
+          <div scMenuProvider align="end">
+            <button scButton scMenuTrigger variant="ghost" size="sm">
+              <svg siLanguagesIcon></svg>
+              <span class="sr-only" i18n="@@navbar.language">Language</span>
+              <span [attr.lang]="i18n.locale.id">{{ i18n.locale.label }}</span>
+            </button>
+            <ng-template scMenuPortal>
+              <div scMenu (itemSelected)="i18n.setLocale($event)">
+                <ng-template scMenuContent>
+                  @for (locale of i18n.locales; track locale.id) {
+                    <div scMenuItem [value]="locale.id" [attr.lang]="locale.id">
+                      {{ locale.label }}
+                    </div>
+                  }
+                </ng-template>
+              </div>
+            </ng-template>
+          </div>
           <a
             scLink
             variant="ghost"
             routerLink="/login"
             class="hidden md:inline-flex"
+            i18n="@@navbar.signIn"
           >
             Sign In
           </a>
-          <a scLink routerLink="/signup" class="hidden md:inline-flex">
+          <a
+            scLink
+            routerLink="/signup"
+            class="hidden md:inline-flex"
+            i18n="@@navbar.getStarted"
+          >
             Get Started
           </a>
           <button scNavbarMobileTrigger #trigger="scNavbarMobileTrigger">
@@ -163,15 +240,21 @@ import {
             } @else {
               <svg siMenuIcon></svg>
             }
-            <span class="sr-only">
-              {{ trigger.isMobileMenuOpen() ? 'Close menu' : 'Open menu' }}
-            </span>
+            @if (trigger.isMobileMenuOpen()) {
+              <span class="sr-only" i18n="@@navbar.closeMenu">Close menu</span>
+            } @else {
+              <span class="sr-only" i18n="@@navbar.openMenu">Open menu</span>
+            }
           </button>
         </div>
       </nav>
 
       <ng-template scNavbarMobilePortal>
-        <div scNavbarMobileMenu aria-label="Mobile navigation">
+        <div
+          scNavbarMobileMenu
+          aria-label="Mobile navigation"
+          i18n-aria-label="@@navbar.mobileNavigation"
+        >
           <a
             scNavbarMobileLink
             routerLink="/"
@@ -179,6 +262,7 @@ import {
             [routerLinkActiveOptions]="{ exact: true }"
             #mobileHomeRla="routerLinkActive"
             [active]="mobileHomeRla.isActive"
+            i18n="@@navbar.home"
           >
             Home
           </a>
@@ -188,6 +272,7 @@ import {
             routerLinkActive="active"
             #mobilePricingRla="routerLinkActive"
             [active]="mobilePricingRla.isActive"
+            i18n="@@navbar.pricing"
           >
             Pricing
           </a>
@@ -197,6 +282,7 @@ import {
             routerLinkActive="active"
             #mobileBlogRla="routerLinkActive"
             [active]="mobileBlogRla.isActive"
+            i18n="@@navbar.blog"
           >
             Blog
           </a>
@@ -206,6 +292,7 @@ import {
             routerLinkActive="active"
             #mobileContactRla="routerLinkActive"
             [active]="mobileContactRla.isActive"
+            i18n="@@navbar.contact"
           >
             Contact
           </a>
@@ -216,6 +303,7 @@ import {
             routerLinkActive="active"
             #mobileDashboardRla="routerLinkActive"
             [active]="mobileDashboardRla.isActive"
+            i18n="@@navbar.dashboard"
           >
             Dashboard
           </a>
@@ -225,6 +313,7 @@ import {
             routerLinkActive="active"
             #mobileSettingsRla="routerLinkActive"
             [active]="mobileSettingsRla.isActive"
+            i18n="@@navbar.settings"
           >
             Settings
           </a>
@@ -234,6 +323,7 @@ import {
             routerLinkActive="active"
             #mobileGalleryRla="routerLinkActive"
             [active]="mobileGalleryRla.isActive"
+            i18n="@@navbar.gallery"
           >
             Gallery
           </a>
@@ -243,14 +333,28 @@ import {
             routerLinkActive="active"
             #mobileDataTableRla="routerLinkActive"
             [active]="mobileDataTableRla.isActive"
+            i18n="@@navbar.dataTable"
           >
             Data Table
           </a>
           <hr class="border-border my-2" />
-          <a scLink variant="ghost" routerLink="/login" class="w-full">
+          <a
+            scLink
+            variant="ghost"
+            routerLink="/login"
+            class="w-full"
+            i18n="@@navbar.signIn"
+          >
             Sign In
           </a>
-          <a scLink routerLink="/signup" class="w-full">Get Started</a>
+          <a
+            scLink
+            routerLink="/signup"
+            class="w-full"
+            i18n="@@navbar.getStarted"
+          >
+            Get Started
+          </a>
         </div>
       </ng-template>
     </div>
@@ -261,6 +365,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class Navbar {
+  protected readonly i18n = inject(ScI18n);
   readonly classInput = input<string>('', { alias: 'class' });
   protected readonly class = computed(() => cn('block', this.classInput()));
 }

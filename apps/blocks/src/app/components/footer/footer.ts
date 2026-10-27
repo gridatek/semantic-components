@@ -14,7 +14,7 @@ import { SiMountainIcon } from '@semantic-icons/lucide-icons';
           <svg siMountainIcon class="size-5"></svg>
           <span class="font-semibold">Acme Inc</span>
         </div>
-        <p class="text-muted-foreground text-sm">
+        <p class="text-muted-foreground text-sm" i18n="@@footer.builtWith">
           Built with Angular and Tailwind CSS. Open source.
         </p>
       </div>

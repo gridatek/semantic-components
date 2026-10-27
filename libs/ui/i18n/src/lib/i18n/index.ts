@@ -1,3 +1,3 @@
-export type { ScLanguage, ScLanguagesConfig } from './languages-config';
-export { loadLanguage } from './load-language';
-export { ScLanguages } from './languages';
+export type { ScI18nConfig, ScLocale } from './i18n-config';
+export { loadLocale } from './load-locale';
+export { ScI18n } from './i18n';

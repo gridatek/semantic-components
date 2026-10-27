@@ -12,7 +12,10 @@ import {
   template: `
     <section class="px-4 py-16 md:px-6 lg:px-8">
       <div class="mx-auto w-full max-w-7xl px-4 md:px-6 lg:px-8">
-        <h2 class="mb-12 text-center text-2xl font-bold md:text-3xl">
+        <h2
+          class="mb-12 text-center text-2xl font-bold md:text-3xl"
+          i18n="@@features.title"
+        >
           Features
         </h2>
         <div class="grid gap-8 md:grid-cols-3">
@@ -22,8 +25,13 @@ import {
             >
               <svg siLayoutDashboardIcon class="text-primary"></svg>
             </div>
-            <h3 class="mb-2 text-lg font-semibold">Responsive Design</h3>
-            <p class="text-muted-foreground">
+            <h3 class="mb-2 text-lg font-semibold" i18n="@@features.responsive">
+              Responsive Design
+            </h3>
+            <p
+              class="text-muted-foreground"
+              i18n="@@features.responsive.description"
+            >
               Automatically adapts between desktop and mobile layouts with
               smooth transitions.
             </p>
@@ -34,8 +42,13 @@ import {
             >
               <svg siCircleChevronDownIcon class="text-primary"></svg>
             </div>
-            <h3 class="mb-2 text-lg font-semibold">Accessible</h3>
-            <p class="text-muted-foreground">
+            <h3 class="mb-2 text-lg font-semibold" i18n="@@features.accessible">
+              Accessible
+            </h3>
+            <p
+              class="text-muted-foreground"
+              i18n="@@features.accessible.description"
+            >
               Built with ARIA attributes, keyboard navigation, and screen reader
               support.
             </p>
@@ -46,8 +59,13 @@ import {
             >
               <svg siMoonIcon class="text-primary"></svg>
             </div>
-            <h3 class="mb-2 text-lg font-semibold">Dark Mode Ready</h3>
-            <p class="text-muted-foreground">
+            <h3 class="mb-2 text-lg font-semibold" i18n="@@features.darkMode">
+              Dark Mode Ready
+            </h3>
+            <p
+              class="text-muted-foreground"
+              i18n="@@features.darkMode.description"
+            >
               Seamlessly supports light and dark themes with CSS variables.
             </p>
           </div>
