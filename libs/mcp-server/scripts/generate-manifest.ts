@@ -126,9 +126,7 @@ function scanDirectory(
 
   for (const entry of entries) {
     if (!entry.isDirectory()) continue;
-    // `common`: the parts an entry's components share (the charts'), in no
-    // catalog of their own but needed by every one of them.
-    if (!visiblePaths.has(entry.name) && entry.name !== 'common') continue;
+    if (!visiblePaths.has(entry.name)) continue;
 
     const compDir = join(dir, entry.name);
     const readmePath = join(compDir, 'README.md');

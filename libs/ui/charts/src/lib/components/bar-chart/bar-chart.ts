@@ -7,7 +7,7 @@ import {
   input,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { ScChartState } from '../common/chart-state';
+import { ScChartState } from '../chart/chart-state';
 
 /** Corners' radii: top start, top end, bottom end, bottom start. */
 export type ScChartRadius = number | readonly [number, number, number, number];

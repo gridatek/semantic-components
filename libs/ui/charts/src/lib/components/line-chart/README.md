@@ -1,6 +1,6 @@
 # Line Chart
 
-A series as a line through its values, in `--color-<key>`. Made with [the common parts](../common/README.md).
+A series as a line through its values, in `--color-<key>`. Made with [the chart's parts](../chart/README.md).
 
 ```html
 <div scChart [config]="config" [data]="data">

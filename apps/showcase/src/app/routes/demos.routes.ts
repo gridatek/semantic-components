@@ -651,6 +651,18 @@ export const demosRoutes: Route[] = [
   },
 
   {
+    path: 'demos/chart',
+    children: [
+      {
+        path: 'tooltip-chart-demo',
+        loadComponent: () =>
+          import('../pages/docs/chart/demos/tooltip-chart-demo').then(
+            (m) => m.TooltipChartDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/checkbox',
     children: [
       {

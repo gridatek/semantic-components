@@ -1,6 +1,6 @@
 # Bar Chart
 
-A series as bars: one per category, side by side with the other series' — or on one another, within a `stack`. Below 0, downwards. Made with [the common parts](../common/README.md).
+A series as bars: one per category, side by side with the other series' — or on one another, within a `stack`. Below 0, downwards. Made with [the chart's parts](../chart/README.md).
 
 ```html
 <div scChart [config]="config" [data]="data">

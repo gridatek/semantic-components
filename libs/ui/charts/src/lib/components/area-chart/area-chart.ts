@@ -9,9 +9,9 @@ import {
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { area, line } from 'd3-shape';
-import { CURVES } from '../common/chart-curve';
-import { ScChartState } from '../common/chart-state';
-import type { ScChartCurve } from '../common/chart-types';
+import { CURVES } from '../chart/chart-curve';
+import { ScChartState } from '../chart/chart-state';
+import type { ScChartCurve } from '../chart/chart-types';
 
 interface Point {
   x: number;

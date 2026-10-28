@@ -1,6 +1,6 @@
 # Area Chart
 
-A series as an area: its values filled down to 0 — or onto the series under it in its `stack`. Made with [the common parts](../common/README.md): a chart, its plot, grid, axes, cursor, tooltip and legend.
+A series as an area: its values filled down to 0 — or onto the series under it in its `stack`. Made with [the chart's parts](../chart/README.md): a chart, its plot, grid, axes, cursor, tooltip and legend.
 
 ```html
 <div scChart [config]="config" [data]="data">
