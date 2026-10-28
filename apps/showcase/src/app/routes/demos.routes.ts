@@ -565,6 +565,81 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/chart-next',
+    children: [
+      {
+        path: 'area-chart-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/chart-next/demos/area-chart-next-demo').then(
+            (m) => m.AreaChartNextDemo,
+          ),
+      },
+      {
+        path: 'stacked-area-chart-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/chart-next/demos/stacked-area-chart-next-demo').then(
+            (m) => m.StackedAreaChartNextDemo,
+          ),
+      },
+      {
+        path: 'expanded-area-chart-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/chart-next/demos/expanded-area-chart-next-demo').then(
+            (m) => m.ExpandedAreaChartNextDemo,
+          ),
+      },
+      {
+        path: 'bar-chart-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/chart-next/demos/bar-chart-next-demo').then(
+            (m) => m.BarChartNextDemo,
+          ),
+      },
+      {
+        path: 'multiple-bar-chart-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/chart-next/demos/multiple-bar-chart-next-demo').then(
+            (m) => m.MultipleBarChartNextDemo,
+          ),
+      },
+      {
+        path: 'stacked-bar-chart-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/chart-next/demos/stacked-bar-chart-next-demo').then(
+            (m) => m.StackedBarChartNextDemo,
+          ),
+      },
+      {
+        path: 'negative-bar-chart-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/chart-next/demos/negative-bar-chart-next-demo').then(
+            (m) => m.NegativeBarChartNextDemo,
+          ),
+      },
+      {
+        path: 'line-chart-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/chart-next/demos/line-chart-next-demo').then(
+            (m) => m.LineChartNextDemo,
+          ),
+      },
+      {
+        path: 'multiple-line-chart-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/chart-next/demos/multiple-line-chart-next-demo').then(
+            (m) => m.MultipleLineChartNextDemo,
+          ),
+      },
+      {
+        path: 'step-line-chart-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/chart-next/demos/step-line-chart-next-demo').then(
+            (m) => m.StepLineChartNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/charts',
     children: [
       {

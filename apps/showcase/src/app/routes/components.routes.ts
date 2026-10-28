@@ -149,6 +149,11 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/charts/charts-page'),
       },
       {
+        path: 'chart-next',
+        title: 'Chart (Next) - Semantic Components',
+        loadComponent: () => import('../pages/docs/chart-next/chart-next-page'),
+      },
+      {
         path: 'checkbox',
         title: 'Checkbox - Semantic Components',
         loadComponent: () => import('../pages/docs/checkbox/checkbox-page'),

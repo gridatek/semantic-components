@@ -168,6 +168,14 @@
     "category": "Data Display"
   },
   {
+    "name": "Chart (Next)",
+    "path": "chart-next",
+    "description": "Area, bar and line charts made of parts, as shadcn/ui's: series, stacks, axes, a tooltip and a legend; the keyboard moves through the categories.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Data Display"
+  },
+  {
     "name": "Checkbox",
     "path": "checkbox",
     "description": "A control for toggling a single option on or off.",
