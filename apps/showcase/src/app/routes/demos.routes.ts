@@ -565,134 +565,91 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/chart-next',
+    path: 'demos/area-chart',
     children: [
       {
-        path: 'area-chart-next-demo',
+        path: 'area-chart-demo',
         loadComponent: () =>
-          import('../pages/docs/chart-next/demos/area-chart-next-demo').then(
-            (m) => m.AreaChartNextDemo,
+          import('../pages/docs/area-chart/demos/area-chart-demo').then(
+            (m) => m.AreaChartDemo,
           ),
       },
       {
-        path: 'stacked-area-chart-next-demo',
+        path: 'stacked-area-chart-demo',
         loadComponent: () =>
-          import('../pages/docs/chart-next/demos/stacked-area-chart-next-demo').then(
-            (m) => m.StackedAreaChartNextDemo,
+          import('../pages/docs/area-chart/demos/stacked-area-chart-demo').then(
+            (m) => m.StackedAreaChartDemo,
           ),
       },
       {
-        path: 'expanded-area-chart-next-demo',
+        path: 'expanded-area-chart-demo',
         loadComponent: () =>
-          import('../pages/docs/chart-next/demos/expanded-area-chart-next-demo').then(
-            (m) => m.ExpandedAreaChartNextDemo,
-          ),
-      },
-      {
-        path: 'bar-chart-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/chart-next/demos/bar-chart-next-demo').then(
-            (m) => m.BarChartNextDemo,
-          ),
-      },
-      {
-        path: 'multiple-bar-chart-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/chart-next/demos/multiple-bar-chart-next-demo').then(
-            (m) => m.MultipleBarChartNextDemo,
-          ),
-      },
-      {
-        path: 'stacked-bar-chart-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/chart-next/demos/stacked-bar-chart-next-demo').then(
-            (m) => m.StackedBarChartNextDemo,
-          ),
-      },
-      {
-        path: 'negative-bar-chart-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/chart-next/demos/negative-bar-chart-next-demo').then(
-            (m) => m.NegativeBarChartNextDemo,
-          ),
-      },
-      {
-        path: 'line-chart-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/chart-next/demos/line-chart-next-demo').then(
-            (m) => m.LineChartNextDemo,
-          ),
-      },
-      {
-        path: 'multiple-line-chart-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/chart-next/demos/multiple-line-chart-next-demo').then(
-            (m) => m.MultipleLineChartNextDemo,
-          ),
-      },
-      {
-        path: 'step-line-chart-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/chart-next/demos/step-line-chart-next-demo').then(
-            (m) => m.StepLineChartNextDemo,
+          import('../pages/docs/area-chart/demos/expanded-area-chart-demo').then(
+            (m) => m.ExpandedAreaChartDemo,
           ),
       },
     ],
   },
   {
-    path: 'demos/charts',
+    path: 'demos/bar-chart',
     children: [
       {
         path: 'bar-chart-demo',
         loadComponent: () =>
-          import('../pages/docs/charts/demos/bar-chart-demo').then(
+          import('../pages/docs/bar-chart/demos/bar-chart-demo').then(
             (m) => m.BarChartDemo,
           ),
       },
       {
-        path: 'line-chart-demo',
+        path: 'multiple-bar-chart-demo',
         loadComponent: () =>
-          import('../pages/docs/charts/demos/line-chart-demo').then(
-            (m) => m.LineChartDemo,
+          import('../pages/docs/bar-chart/demos/multiple-bar-chart-demo').then(
+            (m) => m.MultipleBarChartDemo,
           ),
       },
       {
-        path: 'area-chart-demo',
+        path: 'stacked-bar-chart-demo',
         loadComponent: () =>
-          import('../pages/docs/charts/demos/area-chart-demo').then(
-            (m) => m.AreaChartDemo,
+          import('../pages/docs/bar-chart/demos/stacked-bar-chart-demo').then(
+            (m) => m.StackedBarChartDemo,
           ),
       },
       {
-        path: 'pie-chart-demo',
+        path: 'negative-bar-chart-demo',
         loadComponent: () =>
-          import('../pages/docs/charts/demos/pie-chart-demo').then(
-            (m) => m.PieChartDemo,
-          ),
-      },
-      {
-        path: 'donut-chart-demo',
-        loadComponent: () =>
-          import('../pages/docs/charts/demos/donut-chart-demo').then(
-            (m) => m.DonutChartDemo,
-          ),
-      },
-      {
-        path: 'monthly-revenue-chart-demo',
-        loadComponent: () =>
-          import('../pages/docs/charts/demos/monthly-revenue-chart-demo').then(
-            (m) => m.MonthlyRevenueChartDemo,
-          ),
-      },
-      {
-        path: 'user-growth-chart-demo',
-        loadComponent: () =>
-          import('../pages/docs/charts/demos/user-growth-chart-demo').then(
-            (m) => m.UserGrowthChartDemo,
+          import('../pages/docs/bar-chart/demos/negative-bar-chart-demo').then(
+            (m) => m.NegativeBarChartDemo,
           ),
       },
     ],
   },
+  {
+    path: 'demos/line-chart',
+    children: [
+      {
+        path: 'line-chart-demo',
+        loadComponent: () =>
+          import('../pages/docs/line-chart/demos/line-chart-demo').then(
+            (m) => m.LineChartDemo,
+          ),
+      },
+      {
+        path: 'multiple-line-chart-demo',
+        loadComponent: () =>
+          import('../pages/docs/line-chart/demos/multiple-line-chart-demo').then(
+            (m) => m.MultipleLineChartDemo,
+          ),
+      },
+      {
+        path: 'step-line-chart-demo',
+        loadComponent: () =>
+          import('../pages/docs/line-chart/demos/step-line-chart-demo').then(
+            (m) => m.StepLineChartDemo,
+          ),
+      },
+    ],
+  },
+
   {
     path: 'demos/checkbox',
     children: [

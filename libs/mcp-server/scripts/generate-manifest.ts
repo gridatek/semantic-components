@@ -62,6 +62,21 @@ function getExportedNames(filePath: string): string[] {
   const functionMatches = content.matchAll(/export\s+function\s+(\w+)/g);
   for (const m of functionMatches) names.push(m[1]);
 
+  // Named re-exports: "export { A, B as C, type D } from './foo'" — each
+  // name as exported (the alias, if any).
+  const namedMatches = content.matchAll(
+    /export\s+(?:type\s+)?\{([^}]*)\}\s+from\s+['"][^'"]+['"]/g,
+  );
+  for (const m of namedMatches)
+    for (const part of m[1].split(',')) {
+      const name = part
+        .trim()
+        .replace(/^type\s+/, '')
+        .split(/\s+as\s+/)
+        .pop();
+      if (name) names.push(name);
+    }
+
   return names;
 }
 
@@ -111,7 +126,9 @@ function scanDirectory(
 
   for (const entry of entries) {
     if (!entry.isDirectory()) continue;
-    if (!visiblePaths.has(entry.name)) continue;
+    // `common`: the parts an entry's components share (the charts'), in no
+    // catalog of their own but needed by every one of them.
+    if (!visiblePaths.has(entry.name) && entry.name !== 'common') continue;
 
     const compDir = join(dir, entry.name);
     const readmePath = join(compDir, 'README.md');

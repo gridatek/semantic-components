@@ -32,6 +32,14 @@
     "category": "Data Display"
   },
   {
+    "name": "Area Chart",
+    "path": "area-chart",
+    "description": "Series as areas, filled down to 0 or stacked — to 100% if you like — with natural, linear, step or monotone edges; gradients of your own.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Data Display"
+  },
+  {
     "name": "Aspect Ratio",
     "path": "aspect-ratio",
     "description": "Displays content within a fixed aspect ratio.",
@@ -83,6 +91,14 @@
     "name": "Badge",
     "path": "badge",
     "description": "Displays a small status indicator or label.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Data Display"
+  },
+  {
+    "name": "Bar Chart",
+    "path": "bar-chart",
+    "description": "Series as bars: side by side, stacked, below 0; each corner's radius of your choice.",
     "status": "Experimental",
     "library": "ui",
     "category": "Data Display"
@@ -158,22 +174,6 @@
     "status": "Experimental",
     "library": "ui",
     "category": "Media"
-  },
-  {
-    "name": "Charts",
-    "path": "charts",
-    "description": "Beautiful charts for data visualization.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Data Display"
-  },
-  {
-    "name": "Chart (Next)",
-    "path": "chart-next",
-    "description": "Area, bar and line charts made of parts, as shadcn/ui's: series, stacks, axes, a tooltip and a legend; the keyboard moves through the categories.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Data Display"
   },
   {
     "name": "Checkbox",
@@ -494,6 +494,14 @@
     "status": "Experimental",
     "library": "ui",
     "category": "Media"
+  },
+  {
+    "name": "Line Chart",
+    "path": "line-chart",
+    "description": "Series as lines through their values: natural, linear, step or monotone; dots if you like.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Data Display"
   },
   {
     "name": "Link",

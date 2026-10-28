@@ -1,0 +1,78 @@
+import { Component, ViewEncapsulation } from '@angular/core';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { LineChartDemo } from './line-chart-demo';
+
+@Component({
+  selector: 'app-line-chart-demo-container',
+  imports: [DemoContainer, LineChartDemo],
+  template: `
+    <app-demo-container
+      title="Line"
+      demoUrl="/demos/line-chart/line-chart-demo"
+      [code]="code"
+    >
+      <app-line-chart-demo />
+    </app-demo-container>
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class LineChartDemoContainer {
+  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+import {
+  ScChart,
+  type ScChartConfig,
+  ScChartCursor,
+  ScChartGrid,
+  ScChartLine,
+  ScChartPlot,
+  ScChartTooltip,
+  ScChartXAxis,
+} from '@semantic-components/ui/charts';
+
+@Component({
+  selector: 'app-line-chart-demo',
+  imports: [
+    ScChart,
+    ScChartPlot,
+    ScChartGrid,
+    ScChartXAxis,
+    ScChartCursor,
+    ScChartLine,
+    ScChartTooltip,
+  ],
+  template: \`
+    <div scChart [config]="config" [data]="data">
+      <svg
+        scChartPlot
+        categoryKey="month"
+        aria-label="Desktop visitors, January to June"
+      >
+        <g scChartGrid />
+        <g scChartXAxis [tickFormatter]="short" />
+        <g scChartCursor />
+        <g scChartLine key="desktop" dots />
+      </svg>
+      <div scChartTooltip hideLabel></div>
+    </div>
+  \`,
+  host: { class: 'block w-full max-w-xl' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class LineChartDemo {
+  readonly data = [
+    { month: 'January', desktop: 186, mobile: 80 },
+    { month: 'February', desktop: 305, mobile: 200 },
+    { month: 'March', desktop: 237, mobile: 120 },
+    { month: 'April', desktop: 73, mobile: 190 },
+    { month: 'May', desktop: 209, mobile: 130 },
+    { month: 'June', desktop: 214, mobile: 140 },
+  ];
+  readonly config: ScChartConfig = {
+    desktop: { label: 'Desktop', color: 'var(--chart-1)' },
+    mobile: { label: 'Mobile', color: 'var(--chart-2)' },
+  };
+  /** January → Jan. */
+  readonly short = (month: string) => month.slice(0, 3);
+}`;
+}

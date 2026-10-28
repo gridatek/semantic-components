@@ -34,6 +34,11 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/animated-counter/animated-counter-page'),
       },
       {
+        path: 'area-chart',
+        title: 'Area Chart - Semantic Components',
+        loadComponent: () => import('../pages/docs/area-chart/area-chart-page'),
+      },
+      {
         path: 'aspect-ratio',
         title: 'Aspect Ratio - Semantic Components',
         loadComponent: () =>
@@ -101,6 +106,11 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/badge/badge-page'),
       },
       {
+        path: 'bar-chart',
+        title: 'Bar Chart - Semantic Components',
+        loadComponent: () => import('../pages/docs/bar-chart/bar-chart-page'),
+      },
+      {
         path: 'barcode-scanner',
         title: 'Barcode Scanner - Semantic Components',
         loadComponent: () =>
@@ -142,16 +152,6 @@ export const componentsRoutes: Route[] = [
         path: 'carousel',
         title: 'Carousel - Semantic Components',
         loadComponent: () => import('../pages/docs/carousel/carousel-page'),
-      },
-      {
-        path: 'charts',
-        title: 'Charts - Semantic Components',
-        loadComponent: () => import('../pages/docs/charts/charts-page'),
-      },
-      {
-        path: 'chart-next',
-        title: 'Chart (Next) - Semantic Components',
-        loadComponent: () => import('../pages/docs/chart-next/chart-next-page'),
       },
       {
         path: 'checkbox',
@@ -359,6 +359,11 @@ export const componentsRoutes: Route[] = [
         path: 'label',
         title: 'Label - Semantic Components',
         loadComponent: () => import('../pages/docs/label/label-page'),
+      },
+      {
+        path: 'line-chart',
+        title: 'Line Chart - Semantic Components',
+        loadComponent: () => import('../pages/docs/line-chart/line-chart-page'),
       },
       {
         path: 'link',
