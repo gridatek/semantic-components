@@ -1,1 +1,1 @@
-export { ScCookies, readCookie } from './cookies';
+export { ScCookies, readCookie, writeCookie } from './cookies';

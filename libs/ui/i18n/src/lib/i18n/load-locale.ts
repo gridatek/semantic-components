@@ -18,7 +18,7 @@ import {
 export async function loadLocale(config: ScI18nConfig): Promise<void> {
   let locale = chooseLocale(
     config,
-    readCookie(document.cookie, cookieName(config)),
+    readCookie(cookieName(config)),
     navigator.languages,
   );
   if (locale !== config.sourceLocale) {
