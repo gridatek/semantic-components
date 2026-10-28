@@ -55,7 +55,9 @@ import type { User } from './user.service';
       class="flex items-center justify-between py-4"
     >
       <div class="text-muted-foreground flex items-center gap-2 text-sm">
-        <label for="users-page-size">Rows per page:</label>
+        <label for="users-page-size" i18n="@@dataTable.rowsPerPage"
+          >Rows per page:</label
+        >
         <select scPaginationPageSizeSelect id="users-page-size">
           @for (size of pageSizeOptions(); track size) {
             <option [value]="size">{{ size }}</option>
@@ -64,20 +66,28 @@ import type { User } from './user.service';
       </div>
 
       <div class="flex items-center gap-2 text-sm">
-        <span class="text-muted-foreground" aria-live="polite">
+        <span
+          class="text-muted-foreground"
+          aria-live="polite"
+          i18n="@@dataTable.pageOf"
+        >
           Page {{ pagination.currentPage() }} of {{ pagination.totalPages() }}
         </span>
         <ul scPaginationList>
           <li scPaginationItem>
             <button scPaginationFirst variant="outline" size="icon-sm">
               <svg siChevronsLeftIcon></svg>
-              <span class="sr-only">Go to first page</span>
+              <span class="sr-only" i18n="@@dataTable.firstPage"
+                >Go to first page</span
+              >
             </button>
           </li>
           <li scPaginationItem>
             <button scPaginationPrevious variant="outline" size="icon-sm">
               <svg siChevronLeftIcon></svg>
-              <span class="sr-only">Go to previous page</span>
+              <span class="sr-only" i18n="@@dataTable.previousPage"
+                >Go to previous page</span
+              >
             </button>
           </li>
 
@@ -98,13 +108,17 @@ import type { User } from './user.service';
           <li scPaginationItem>
             <button scPaginationNext variant="outline" size="icon-sm">
               <svg siChevronRightIcon></svg>
-              <span class="sr-only">Go to next page</span>
+              <span class="sr-only" i18n="@@dataTable.nextPage"
+                >Go to next page</span
+              >
             </button>
           </li>
           <li scPaginationItem>
             <button scPaginationLast variant="outline" size="icon-sm">
               <svg siChevronsRightIcon></svg>
-              <span class="sr-only">Go to last page</span>
+              <span class="sr-only" i18n="@@dataTable.lastPage"
+                >Go to last page</span
+              >
             </button>
           </li>
         </ul>

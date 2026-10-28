@@ -115,6 +115,13 @@
         "outFile": "messages.json"
       }
     },
+    "check-i18n": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["extract-i18n"],
+      "options": {
+        "command": "node scripts/check-translations.mjs apps/blocks/public/i18n"
+      }
+    },
     "lint": {
       "inputs": [
         "default",

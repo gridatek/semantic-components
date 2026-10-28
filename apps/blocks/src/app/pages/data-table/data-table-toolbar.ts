@@ -38,12 +38,24 @@ import type { User } from './user.service';
       scDataTableGlobalFilter
       [table]="table()"
       placeholder="Search all columns..."
+      i18n-placeholder="@@dataTable.toolbar.searchPlaceholder"
       aria-label="Search all columns"
+      i18n-aria-label="@@dataTable.toolbar.search"
     />
 
     <!-- Column Visibility -->
-    <div class="flex items-center gap-2" role="group" aria-label="Columns">
-      <span class="text-sm font-medium" aria-hidden="true">Columns:</span>
+    <div
+      class="flex items-center gap-2"
+      role="group"
+      aria-label="Columns"
+      i18n-aria-label="@@dataTable.toolbar.columnsLabel"
+    >
+      <span
+        class="text-sm font-medium"
+        aria-hidden="true"
+        i18n="@@dataTable.toolbar.columns"
+        >Columns:</span
+      >
       @for (column of table().getAllLeafColumns(); track column.id) {
         @if (column.id !== 'select' && column.id !== 'expand') {
           <label scCheckboxField class="text-sm">
@@ -53,7 +65,7 @@ import type { User } from './user.service';
               scDataTableColumnVisibility
               [column]="column"
             />
-            {{ column.id }}
+            {{ columnLabel(column.id) }}
           </label>
         }
       }
@@ -61,7 +73,9 @@ import type { User } from './user.service';
 
     <!-- Grouping -->
     <div class="flex items-center gap-2">
-      <span class="text-sm font-medium">Group by:</span>
+      <span class="text-sm font-medium" i18n="@@dataTable.toolbar.groupBy"
+        >Group by:</span
+      >
       @for (group of groupableColumns; track group) {
         <button
           scButton
@@ -70,14 +84,14 @@ import type { User } from './user.service';
           [attr.aria-pressed]="isGroupedBy(group)"
           (click)="toggleGroup(group)"
         >
-          {{ group }}
+          {{ columnLabel(group) }}
         </button>
       }
     </div>
 
     <!-- Selection Count -->
     @if (selectedRowCount() > 0) {
-      <span class="text-muted-foreground text-sm">
+      <span class="text-muted-foreground text-sm" i18n="@@dataTable.selected">
         {{ selectedRowCount() }} of
         {{ table().getRowModel().rows.length }} row(s) selected
       </span>
@@ -94,6 +108,12 @@ export class DataTableToolbar {
   readonly selectedRowCount = computed(
     () => Object.keys(this.table().atoms.rowSelection.get()).length,
   );
+
+  /** A column's header, translated in its definition. */
+  columnLabel(columnId: string): string {
+    const header = this.table().getColumn(columnId)?.columnDef.header;
+    return typeof header === 'string' ? header : columnId;
+  }
 
   isGroupedBy(columnId: string): boolean {
     return this.grouping().includes(columnId);

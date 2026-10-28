@@ -113,21 +113,31 @@ import {
                 >
                   <svg siLogInIcon class="size-4"></svg>
                 </div>
-                <div class="grid flex-1 text-left text-sm leading-tight">
+                <div class="grid flex-1 text-start text-sm leading-tight">
                   <span class="truncate font-semibold">Acme Inc</span>
-                  <span class="text-sidebar-foreground/70 truncate text-xs">
+                  <span
+                    class="text-sidebar-foreground/70 truncate text-xs"
+                    i18n="@@dashboard.plan"
+                  >
                     Enterprise
                   </span>
                 </div>
               </a>
             </li>
           </ul>
-          <input scSidebarInput type="search" placeholder="Search..." />
+          <input
+            scSidebarInput
+            type="search"
+            placeholder="Search..."
+            i18n-placeholder="@@dashboard.searchPlaceholder"
+          />
         </div>
 
         <div scSidebarBody>
           <div scSidebarGroup>
-            <div scSidebarGroupLabel>Platform</div>
+            <div scSidebarGroupLabel i18n="@@dashboard.group.platform">
+              Platform
+            </div>
             <div scSidebarGroupContent>
               <ul scSidebarMenu>
                 <li scSidebarMenuItem>
@@ -139,7 +149,7 @@ import {
                     [isActive]="dashboardRla.isActive"
                   >
                     <svg siLayoutDashboardIcon></svg>
-                    <span>Dashboard</span>
+                    <span i18n="@@dashboard.dashboard">Dashboard</span>
                   </a>
                 </li>
                 <li scSidebarMenuItem>
@@ -151,7 +161,7 @@ import {
                     [isActive]="usersRla.isActive"
                   >
                     <svg siUsersIcon></svg>
-                    <span>Users</span>
+                    <span i18n="@@dashboard.users">Users</span>
                   </a>
                   <div scSidebarMenuBadge>12</div>
                 </li>
@@ -164,7 +174,7 @@ import {
                     [isActive]="settingsRla.isActive"
                   >
                     <svg siSettingsIcon></svg>
-                    <span>Settings</span>
+                    <span i18n="@@dashboard.settings">Settings</span>
                   </a>
                   <button scSidebarMenuAction [showOnHover]="true">
                     <svg siEllipsisVerticalIcon></svg>
@@ -177,7 +187,9 @@ import {
           <div scSidebarSeparator></div>
 
           <div scSidebarGroup>
-            <div scSidebarGroupLabel>Projects</div>
+            <div scSidebarGroupLabel i18n="@@dashboard.group.projects">
+              Projects
+            </div>
             <button scSidebarGroupAction>
               <svg siPlusIcon></svg>
             </button>
@@ -186,7 +198,9 @@ import {
                 <li scSidebarMenuItem>
                   <a scSidebarMenuButton>
                     <svg siFileIcon></svg>
-                    <span>Design Engineering</span>
+                    <span i18n="@@dashboard.designEngineering"
+                      >Design Engineering</span
+                    >
                   </a>
                   <ul scSidebarMenuSub>
                     <li scSidebarMenuSubItem>
@@ -197,7 +211,7 @@ import {
                         #overviewRla="routerLinkActive"
                         [isActive]="overviewRla.isActive"
                       >
-                        <span>Overview</span>
+                        <span i18n="@@dashboard.overview">Overview</span>
                       </a>
                     </li>
                     <li scSidebarMenuSubItem>
@@ -208,7 +222,7 @@ import {
                         #componentsRla="routerLinkActive"
                         [isActive]="componentsRla.isActive"
                       >
-                        <span>Components</span>
+                        <span i18n="@@dashboard.components">Components</span>
                       </a>
                     </li>
                     <li scSidebarMenuSubItem>
@@ -219,7 +233,7 @@ import {
                         #templatesRla="routerLinkActive"
                         [isActive]="templatesRla.isActive"
                       >
-                        <span>Templates</span>
+                        <span i18n="@@dashboard.templates">Templates</span>
                       </a>
                     </li>
                   </ul>
@@ -233,7 +247,7 @@ import {
                     [isActive]="salesRla.isActive"
                   >
                     <svg siFileIcon></svg>
-                    <span>Sales & Marketing</span>
+                    <span i18n="@@dashboard.sales">Sales & Marketing</span>
                   </a>
                 </li>
                 <li scSidebarMenuItem>
@@ -245,7 +259,7 @@ import {
                     [isActive]="travelRla.isActive"
                   >
                     <svg siFileIcon></svg>
-                    <span>Travel</span>
+                    <span i18n="@@dashboard.travel">Travel</span>
                   </a>
                 </li>
               </ul>
@@ -255,7 +269,9 @@ import {
           <div scSidebarSeparator></div>
 
           <div scSidebarGroup>
-            <div scSidebarGroupLabel>Loading Example</div>
+            <div scSidebarGroupLabel i18n="@@dashboard.loading">
+              Loading Example
+            </div>
             <div scSidebarGroupContent>
               <ul scSidebarMenu>
                 <li scSidebarMenuItem>
@@ -274,31 +290,33 @@ import {
           <div scSidebarSeparator></div>
 
           <div scSidebarGroup>
-            <div scSidebarGroupLabel>Resources</div>
+            <div scSidebarGroupLabel i18n="@@dashboard.group.resources">
+              Resources
+            </div>
             <div scSidebarGroupContent>
               <ul scSidebarMenu>
                 <li scSidebarMenuItem>
                   <a scSidebarMenuButton>
                     <svg siBookIcon></svg>
-                    <span>Documentation</span>
+                    <span i18n="@@dashboard.documentation">Documentation</span>
                   </a>
                 </li>
                 <li scSidebarMenuItem>
                   <a scSidebarMenuButton>
                     <svg siCircleQuestionMarkIcon></svg>
-                    <span>Help Center</span>
+                    <span i18n="@@dashboard.helpCenter">Help Center</span>
                   </a>
                 </li>
                 <li scSidebarMenuItem>
                   <a scSidebarMenuButton>
                     <svg siMessageSquareIcon></svg>
-                    <span>Feedback</span>
+                    <span i18n="@@dashboard.feedback">Feedback</span>
                   </a>
                 </li>
                 <li scSidebarMenuItem>
                   <a scSidebarMenuButton>
                     <svg siSquarePenIcon></svg>
-                    <span>Changelog</span>
+                    <span i18n="@@dashboard.changelog">Changelog</span>
                   </a>
                 </li>
               </ul>
@@ -308,7 +326,9 @@ import {
           <div scSidebarSeparator></div>
 
           <div scSidebarGroup>
-            <div scSidebarGroupLabel>Integrations</div>
+            <div scSidebarGroupLabel i18n="@@dashboard.group.integrations">
+              Integrations
+            </div>
             <div scSidebarGroupContent>
               <ul scSidebarMenu>
                 <li scSidebarMenuItem>
@@ -320,7 +340,7 @@ import {
                 <li scSidebarMenuItem>
                   <a scSidebarMenuButton>
                     <svg siMailIcon></svg>
-                    <span>Email</span>
+                    <span i18n="@@dashboard.email">Email</span>
                   </a>
                 </li>
                 <li scSidebarMenuItem>
@@ -332,7 +352,7 @@ import {
                 <li scSidebarMenuItem>
                   <a scSidebarMenuButton>
                     <svg siGlobeIcon></svg>
-                    <span>Website</span>
+                    <span i18n="@@dashboard.website">Website</span>
                   </a>
                 </li>
                 <li scSidebarMenuItem>
@@ -344,7 +364,7 @@ import {
                 <li scSidebarMenuItem>
                   <a scSidebarMenuButton>
                     <svg siCloudIcon></svg>
-                    <span>Cloud Storage</span>
+                    <span i18n="@@dashboard.cloudStorage">Cloud Storage</span>
                   </a>
                 </li>
               </ul>
@@ -354,37 +374,39 @@ import {
           <div scSidebarSeparator></div>
 
           <div scSidebarGroup>
-            <div scSidebarGroupLabel>Account</div>
+            <div scSidebarGroupLabel i18n="@@dashboard.group.account">
+              Account
+            </div>
             <div scSidebarGroupContent>
               <ul scSidebarMenu>
                 <li scSidebarMenuItem>
                   <a scSidebarMenuButton>
                     <svg siUserIcon></svg>
-                    <span>Profile</span>
+                    <span i18n="@@dashboard.profile">Profile</span>
                   </a>
                 </li>
                 <li scSidebarMenuItem>
                   <a scSidebarMenuButton>
                     <svg siLockIcon></svg>
-                    <span>Security</span>
+                    <span i18n="@@dashboard.security">Security</span>
                   </a>
                 </li>
                 <li scSidebarMenuItem>
                   <a scSidebarMenuButton>
                     <svg siBellIcon></svg>
-                    <span>Notifications</span>
+                    <span i18n="@@dashboard.notifications">Notifications</span>
                   </a>
                 </li>
                 <li scSidebarMenuItem>
                   <a scSidebarMenuButton>
                     <svg siCreditCardIcon></svg>
-                    <span>Billing</span>
+                    <span i18n="@@dashboard.billing">Billing</span>
                   </a>
                 </li>
                 <li scSidebarMenuItem>
                   <a scSidebarMenuButton>
                     <svg siWalletIcon></svg>
-                    <span>Subscription</span>
+                    <span i18n="@@dashboard.subscription">Subscription</span>
                   </a>
                 </li>
               </ul>
@@ -401,7 +423,7 @@ import {
                 >
                   <svg siUserIcon class="size-4"></svg>
                 </div>
-                <div class="grid flex-1 text-left text-sm leading-tight">
+                <div class="grid flex-1 text-start text-sm leading-tight">
                   <span class="truncate font-semibold">John Doe</span>
                   <span class="text-sidebar-foreground/70 truncate text-xs">
                     john&#64;example.com
@@ -413,7 +435,9 @@ import {
         </div>
 
         <button scSidebarRail>
-          <span class="sr-only">Toggle Sidebar</span>
+          <span class="sr-only" i18n="@@dashboard.toggleSidebar"
+            >Toggle Sidebar</span
+          >
         </button>
       </div>
 
@@ -423,10 +447,14 @@ import {
         >
           <button scSidebarTrigger>
             <svg siPanelLeftIcon></svg>
-            <span class="sr-only">Toggle Sidebar</span>
+            <span class="sr-only" i18n="@@dashboard.toggleSidebar"
+              >Toggle Sidebar</span
+            >
           </button>
           <div class="flex-1">
-            <h1 class="text-lg font-semibold">Dashboard</h1>
+            <h1 class="text-lg font-semibold" i18n="@@dashboard.dashboard.2">
+              Dashboard
+            </h1>
           </div>
         </header>
 
@@ -435,50 +463,76 @@ import {
             <div
               class="bg-muted/50 flex aspect-video items-center justify-center rounded-xl"
             >
-              <p class="text-muted-foreground">Chart 1</p>
+              <p class="text-muted-foreground" i18n="@@dashboard.chart1">
+                Chart 1
+              </p>
             </div>
             <div
               class="bg-muted/50 flex aspect-video items-center justify-center rounded-xl"
             >
-              <p class="text-muted-foreground">Chart 2</p>
+              <p class="text-muted-foreground" i18n="@@dashboard.chart2">
+                Chart 2
+              </p>
             </div>
             <div
               class="bg-muted/50 flex aspect-video items-center justify-center rounded-xl"
             >
-              <p class="text-muted-foreground">Chart 3</p>
+              <p class="text-muted-foreground" i18n="@@dashboard.chart3">
+                Chart 3
+              </p>
             </div>
           </div>
           <div
             class="bg-muted/50 min-h-screen flex-1 rounded-xl p-8 md:min-h-min"
           >
             <div class="space-y-4">
-              <h2 class="text-2xl font-bold">Welcome to the Sidebar Demo</h2>
-              <p class="text-muted-foreground">
+              <h2 class="text-2xl font-bold" i18n="@@dashboard.welcome">
+                Welcome to the Sidebar Demo
+              </h2>
+              <p class="text-muted-foreground" i18n="@@dashboard.intro">
                 This is a comprehensive sidebar component built with Angular. It
                 features:
               </p>
               <ul class="text-muted-foreground list-inside list-disc space-y-2">
-                <li>Collapsible sidebar with icon-only mode</li>
-                <li>Keyboard shortcut (Cmd/Ctrl + B) to toggle</li>
-                <li>Mobile-responsive with sheet drawer</li>
-                <li>State persistence via cookies</li>
-                <li>Multiple variants (sidebar, floating, inset)</li>
-                <li>Nested menu items with submenus</li>
-                <li>Group sections with labels</li>
+                <li i18n="@@dashboard.feature.collapsible">
+                  Collapsible sidebar with icon-only mode
+                </li>
+                <li i18n="@@dashboard.feature.shortcut">
+                  Keyboard shortcut (Cmd/Ctrl + B) to toggle
+                </li>
+                <li i18n="@@dashboard.feature.mobile">
+                  Mobile-responsive with sheet drawer
+                </li>
+                <li i18n="@@dashboard.feature.persistence">
+                  State persistence via cookies
+                </li>
+                <li i18n="@@dashboard.feature.variants">
+                  Multiple variants (sidebar, floating, inset)
+                </li>
+                <li i18n="@@dashboard.feature.nested">
+                  Nested menu items with submenus
+                </li>
+                <li i18n="@@dashboard.feature.groups">
+                  Group sections with labels
+                </li>
               </ul>
               <div class="bg-card rounded-lg border p-4">
-                <h3 class="mb-2 font-semibold">Try these features:</h3>
+                <h3 class="mb-2 font-semibold" i18n="@@dashboard.try">
+                  Try these features:
+                </h3>
                 <ol class="list-inside list-decimal space-y-1 text-sm">
-                  <li>
+                  <li i18n="@@dashboard.try.shortcut">
                     Press Cmd+B (Mac) or Ctrl+B (Windows) to toggle the sidebar
                   </li>
-                  <li>
+                  <li i18n="@@dashboard.try.rail">
                     Click the rail on the right edge of the sidebar to toggle
                   </li>
-                  <li>
+                  <li i18n="@@dashboard.try.resize">
                     Resize your browser to see mobile mode with sheet drawer
                   </li>
-                  <li>Refresh the page - your sidebar state is preserved!</li>
+                  <li i18n="@@dashboard.try.refresh">
+                    Refresh the page - your sidebar state is preserved!
+                  </li>
                 </ol>
               </div>
             </div>

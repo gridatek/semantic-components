@@ -57,8 +57,12 @@ import { Logo } from '../../components/logo/logo';
           <div class="mb-2 flex justify-center">
             <app-logo />
           </div>
-          <h1 scCardTitle class="text-2xl">Create an account</h1>
-          <p scCardDescription>Enter your information to get started</p>
+          <h1 scCardTitle class="text-2xl" i18n="@@signup.title">
+            Create an account
+          </h1>
+          <p scCardDescription i18n="@@signup.description">
+            Enter your information to get started
+          </p>
         </div>
 
         <div scCardBody>
@@ -66,7 +70,7 @@ import { Logo } from '../../components/logo/logo';
             <div scFieldGroup>
               <div class="grid grid-cols-2 gap-4">
                 <div scField>
-                  <label scLabel>First name</label>
+                  <label scLabel i18n="@@signup.firstName">First name</label>
                   <input
                     scInput
                     type="text"
@@ -75,7 +79,7 @@ import { Logo } from '../../components/logo/logo';
                   />
                 </div>
                 <div scField>
-                  <label scLabel>Last name</label>
+                  <label scLabel i18n="@@signup.lastName">Last name</label>
                   <input
                     scInput
                     type="text"
@@ -86,7 +90,7 @@ import { Logo } from '../../components/logo/logo';
               </div>
 
               <div scField>
-                <label scLabel>Email</label>
+                <label scLabel i18n="@@common.email">Email</label>
                 <input
                   scInput
                   type="email"
@@ -96,22 +100,26 @@ import { Logo } from '../../components/logo/logo';
               </div>
 
               <div scField>
-                <label scLabel>Password</label>
+                <label scLabel i18n="@@common.password">Password</label>
                 <input
                   scInput
                   type="password"
                   [formField]="signupForm.password"
                   placeholder="Create a password"
+                  i18n-placeholder="@@signup.passwordPlaceholder"
                 />
               </div>
 
               <div scField>
-                <label scLabel>Confirm password</label>
+                <label scLabel i18n="@@signup.confirmPassword"
+                  >Confirm password</label
+                >
                 <input
                   scInput
                   type="password"
                   [formField]="signupForm.confirmPassword"
                   placeholder="Confirm your password"
+                  i18n-placeholder="@@signup.confirmPasswordPlaceholder"
                 />
               </div>
 
@@ -121,6 +129,7 @@ import { Logo } from '../../components/logo/logo';
                   scLabel
                   for="terms"
                   class="text-sm leading-snug font-normal"
+                  i18n="@@signup.terms"
                 >
                   I agree to the
                   <a scLink variant="link" href="#">Terms of Service</a>
@@ -129,7 +138,12 @@ import { Logo } from '../../components/logo/logo';
                 </label>
               </div>
 
-              <button scButton class="w-full" type="submit">
+              <button
+                scButton
+                class="w-full"
+                type="submit"
+                i18n="@@signup.submit"
+              >
                 Create Account
               </button>
 
@@ -138,7 +152,10 @@ import { Logo } from '../../components/logo/logo';
                   <div scSeparator class="w-full"></div>
                 </div>
                 <div class="relative flex justify-center text-xs uppercase">
-                  <span class="bg-card text-muted-foreground px-2">
+                  <span
+                    class="bg-card text-muted-foreground px-2"
+                    i18n="@@common.orContinueWith"
+                  >
                     Or continue with
                   </span>
                 </div>
@@ -156,7 +173,7 @@ import { Logo } from '../../components/logo/logo';
         </div>
 
         <div scCardFooter class="justify-center">
-          <p class="text-muted-foreground text-sm">
+          <p class="text-muted-foreground text-sm" i18n="@@signup.haveAccount">
             Already have an account?
             <a scLink variant="link" routerLink="/login">Log in</a>
           </p>

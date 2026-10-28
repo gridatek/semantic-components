@@ -57,15 +57,19 @@ import { Logo } from '../../components/logo/logo';
           <div class="mb-2 flex justify-center">
             <app-logo />
           </div>
-          <h1 scCardTitle class="text-2xl">Welcome back</h1>
-          <p scCardDescription>Enter your credentials to access your account</p>
+          <h1 scCardTitle class="text-2xl" i18n="@@login.title">
+            Welcome back
+          </h1>
+          <p scCardDescription i18n="@@login.description">
+            Enter your credentials to access your account
+          </p>
         </div>
 
         <div scCardBody>
           <form [formRoot]="loginForm">
             <div scFieldGroup>
               <div scField>
-                <label scLabel>Email</label>
+                <label scLabel i18n="@@common.email">Email</label>
                 <input
                   scInput
                   type="email"
@@ -77,8 +81,13 @@ import { Logo } from '../../components/logo/logo';
 
               <div scField>
                 <div class="flex items-center justify-between">
-                  <label scLabel>Password</label>
-                  <a scLink variant="link" routerLink="/forgot-password">
+                  <label scLabel i18n="@@common.password">Password</label>
+                  <a
+                    scLink
+                    variant="link"
+                    routerLink="/forgot-password"
+                    i18n="@@login.forgotPassword"
+                  >
                     Forgot password?
                   </a>
                 </div>
@@ -87,23 +96,36 @@ import { Logo } from '../../components/logo/logo';
                   type="password"
                   [formField]="loginForm.password"
                   placeholder="Enter your password"
+                  i18n-placeholder="@@login.passwordPlaceholder"
                   autocomplete="current-password"
                 />
               </div>
 
               <div class="flex items-center gap-2">
                 <input type="checkbox" scCheckbox id="remember" />
-                <label scLabel for="remember">Remember me</label>
+                <label scLabel for="remember" i18n="@@login.rememberMe"
+                  >Remember me</label
+                >
               </div>
 
-              <button scButton class="w-full" type="submit">Log in</button>
+              <button
+                scButton
+                class="w-full"
+                type="submit"
+                i18n="@@common.logIn"
+              >
+                Log in
+              </button>
 
               <div class="relative">
                 <div class="absolute inset-0 flex items-center">
                   <div scSeparator class="w-full"></div>
                 </div>
                 <div class="relative flex justify-center text-xs uppercase">
-                  <span class="bg-card text-muted-foreground px-2">
+                  <span
+                    class="bg-card text-muted-foreground px-2"
+                    i18n="@@common.orContinueWith"
+                  >
                     Or continue with
                   </span>
                 </div>
@@ -121,7 +143,7 @@ import { Logo } from '../../components/logo/logo';
         </div>
 
         <div scCardFooter class="justify-center">
-          <p class="text-muted-foreground text-sm">
+          <p class="text-muted-foreground text-sm" i18n="@@login.noAccount">
             Don't have an account?
             <a scLink variant="link" routerLink="/signup">Sign up</a>
           </p>

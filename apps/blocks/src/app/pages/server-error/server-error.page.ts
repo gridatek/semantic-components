@@ -13,15 +13,28 @@ import { ScButton } from '@semantic-components/ui';
     >
       <p class="text-muted-foreground/20 text-8xl font-bold">500</p>
 
-      <h1 class="mt-4 text-3xl font-bold tracking-tight">Server Error</h1>
+      <h1
+        class="mt-4 text-3xl font-bold tracking-tight"
+        i18n="@@serverError.title"
+      >
+        Server Error
+      </h1>
 
-      <p class="text-muted-foreground mt-2 text-center text-base">
+      <p
+        class="text-muted-foreground mt-2 text-center text-base"
+        i18n="@@serverError.description"
+      >
         Something went wrong on our end. Please try again later.
       </p>
 
       <div class="mt-8 flex gap-4">
-        <a scButton routerLink="/">Go Home</a>
-        <button scButton variant="outline" (click)="tryAgain()">
+        <a scButton routerLink="/" i18n="@@common.goHome">Go Home</a>
+        <button
+          scButton
+          variant="outline"
+          (click)="tryAgain()"
+          i18n="@@common.tryAgain"
+        >
           Try Again
         </button>
       </div>

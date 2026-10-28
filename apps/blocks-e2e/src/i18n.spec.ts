@@ -22,9 +22,9 @@ test.describe('i18n: the browser’s language', () => {
         'Créez quelque chose d’extraordinaire',
       );
       await expect(page.locator('html')).toHaveAttribute('lang', 'fr');
-      await expect(
-        page.getByRole('button', { name: 'Langue Français' }),
-      ).toBeVisible();
+      await expect(page.getByRole('combobox', { name: 'Langue' })).toHaveText(
+        'Français',
+      );
     });
   });
 });
@@ -41,10 +41,14 @@ test('i18n: a saved choice — Arabic, right to left', async ({ page }) => {
   expect(brand?.x ?? 0).toBeGreaterThan(width / 2);
 });
 
-test('i18n: switched from the menu; kept after a reload', async ({ page }) => {
+test('i18n: switched from the select; kept after a reload', async ({
+  page,
+}) => {
   await page.goto('/');
-  await page.getByRole('button', { name: 'Language English' }).click();
-  await page.getByRole('menuitem', { name: 'Français' }).click();
+  const language = page.getByRole('combobox', { name: 'Language' });
+  await expect(language).toHaveText('English');
+  await language.click();
+  await page.getByRole('option', { name: 'Français' }).click();
   await expect(heading(page)).toHaveText(
     'Créez quelque chose d’extraordinaire',
   );
@@ -68,4 +72,21 @@ test('i18n: translations not loaded — English', async ({ page }) => {
   await expect(heading(page)).toHaveText('Build Something Amazing');
   await expect(page.locator('html')).toHaveAttribute('lang', 'en');
   expect(errors.join('\n')).toContain('"fr" could not be loaded');
+});
+
+test.describe('i18n: in code and in formats', () => {
+  test.use({ locale: 'fr-FR' });
+
+  test('the data table: headers and values', async ({ page }) => {
+    await page.goto('/data-table');
+    await expect(
+      page.getByRole('columnheader', { name: 'Prénom' }),
+    ).toBeVisible();
+    await expect(page.getByText('Actif').first()).toBeVisible();
+  });
+
+  test('the blog: dates in the locale', async ({ page }) => {
+    await page.goto('/blog');
+    await expect(page.getByText('15 janv. 2026').first()).toBeVisible();
+  });
 });

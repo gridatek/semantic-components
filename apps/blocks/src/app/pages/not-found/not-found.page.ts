@@ -13,15 +13,30 @@ import { ScButton } from '@semantic-components/ui';
     >
       <p class="text-muted-foreground/20 text-8xl font-bold">404</p>
 
-      <h1 class="mt-4 text-3xl font-bold tracking-tight">Page not found</h1>
+      <h1
+        class="mt-4 text-3xl font-bold tracking-tight"
+        i18n="@@notFound.title"
+      >
+        Page not found
+      </h1>
 
-      <p class="text-muted-foreground mt-2 text-center text-base">
+      <p
+        class="text-muted-foreground mt-2 text-center text-base"
+        i18n="@@notFound.description"
+      >
         Sorry, we couldn't find the page you're looking for.
       </p>
 
       <div class="mt-8 flex gap-4">
-        <a scButton routerLink="/">Go Home</a>
-        <button scButton variant="outline" (click)="goBack()">Go Back</button>
+        <a scButton routerLink="/" i18n="@@common.goHome">Go Home</a>
+        <button
+          scButton
+          variant="outline"
+          (click)="goBack()"
+          i18n="@@common.goBack"
+        >
+          Go Back
+        </button>
       </div>
     </div>
   `,

@@ -11,7 +11,9 @@ import { UserService } from './user.service';
   host: { class: 'block' },
   template: `
     <div class="container mx-auto px-4 py-10">
-      <h1 class="mb-6 text-3xl font-bold">TanStack Table Demo</h1>
+      <h1 class="mb-6 text-3xl font-bold" i18n="@@dataTable.title">
+        TanStack Table Demo
+      </h1>
 
       <app-data-table
         [columns]="columns"

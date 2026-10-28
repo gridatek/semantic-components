@@ -103,7 +103,10 @@ test.describe('TanStack data table', () => {
   });
 
   test('grouping shows groups with aggregated values', async ({ page }) => {
-    await page.getByRole('button', { name: 'role', exact: true }).click();
+    await page
+      .locator('app-data-table-toolbar')
+      .getByRole('button', { name: 'Role', exact: true })
+      .click();
     const group = bodyRows(page).first();
     await expect(group).toContainText(/\(\d+\)/);
     await expect(group).toContainText('Avg:');

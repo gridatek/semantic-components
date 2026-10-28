@@ -7,14 +7,7 @@ import {
 } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import {
-  ScButton,
   ScLink,
-  ScMenu,
-  ScMenuContent,
-  ScMenuItem,
-  ScMenuPortal,
-  ScMenuProvider,
-  ScMenuTrigger,
   ScNavbar,
   ScNavbarActions,
   ScNavbarBrand,
@@ -32,10 +25,21 @@ import {
   ScNavigationMenuPortal,
   ScNavigationMenuTrigger,
   ScNavigationMenuTriggerIcon,
+  ScSelect,
+  ScSelectIcon,
+  ScSelectItem,
+  ScSelectItemIndicator,
+  ScSelectItemLabel,
+  ScSelectList,
+  ScSelectPopup,
+  ScSelectPortal,
+  ScSelectTrigger,
+  ScSelectValue,
   cn,
 } from '@semantic-components/ui';
 import { ScI18n } from '@semantic-components/ui/i18n';
 import {
+  SiCheckIcon,
   SiChevronDownIcon,
   SiLanguagesIcon,
   SiMenuIcon,
@@ -48,13 +52,17 @@ import {
   imports: [
     RouterLink,
     RouterLinkActive,
-    ScButton,
-    ScMenu,
-    ScMenuContent,
-    ScMenuItem,
-    ScMenuPortal,
-    ScMenuProvider,
-    ScMenuTrigger,
+    ScSelect,
+    ScSelectIcon,
+    ScSelectItem,
+    ScSelectItemIndicator,
+    ScSelectItemLabel,
+    ScSelectList,
+    ScSelectPopup,
+    ScSelectPortal,
+    ScSelectTrigger,
+    ScSelectValue,
+    SiCheckIcon,
     SiLanguagesIcon,
     ScNavbar,
     ScNavbarProvider,
@@ -199,21 +207,38 @@ import {
         </div>
 
         <div scNavbarActions>
-          <div scMenuProvider align="end">
-            <button scButton scMenuTrigger variant="ghost" size="sm">
+          <div
+            scSelect
+            class="w-32"
+            [value]="i18n.locale.id"
+            (valueChange)="i18n.setLocale($event)"
+          >
+            <div
+              scSelectTrigger
+              aria-label="Language"
+              i18n-aria-label="@@navbar.language"
+            >
               <svg siLanguagesIcon></svg>
-              <span class="sr-only" i18n="@@navbar.language">Language</span>
-              <span [attr.lang]="i18n.locale.id">{{ i18n.locale.label }}</span>
-            </button>
-            <ng-template scMenuPortal>
-              <div scMenu (itemSelected)="i18n.setLocale($event)">
-                <ng-template scMenuContent>
+              <span scSelectValue [attr.lang]="i18n.locale.id">
+                {{ i18n.locale.label }}
+              </span>
+              <svg scSelectIcon siChevronDownIcon></svg>
+            </div>
+            <ng-template scSelectPortal>
+              <div scSelectPopup>
+                <div scSelectList>
                   @for (locale of i18n.locales; track locale.id) {
-                    <div scMenuItem [value]="locale.id" [attr.lang]="locale.id">
-                      {{ locale.label }}
+                    <div
+                      scSelectItem
+                      [value]="locale.id"
+                      [label]="locale.label"
+                      [attr.lang]="locale.id"
+                    >
+                      <span scSelectItemLabel>{{ locale.label }}</span>
+                      <svg scSelectItemIndicator siCheckIcon></svg>
                     </div>
                   }
-                </ng-template>
+                </div>
               </div>
             </ng-template>
           </div>

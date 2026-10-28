@@ -8,12 +8,15 @@ import { ScButton } from '@semantic-components/ui';
   imports: [ScButton],
   host: { class: 'mt-4 flex flex-wrap gap-4 rounded-md border p-4' },
   template: `
-    <h3 class="w-full text-sm font-medium">Column Pinning</h3>
+    <h3 class="w-full text-sm font-medium" i18n="@@dataTable.pinning.title">
+      Column Pinning
+    </h3>
     <button
       scButton
       [variant]="columnPinning().start.includes('id') ? 'default' : 'outline'"
       size="sm"
       (click)="togglePin('id', 'start')"
+      i18n="@@dataTable.pinning.start"
     >
       Pin ID to start
     </button>
@@ -24,10 +27,17 @@ import { ScButton } from '@semantic-components/ui';
       "
       size="sm"
       (click)="togglePin('apiCalls', 'end')"
+      i18n="@@dataTable.pinning.end"
     >
       Pin API Calls to end
     </button>
-    <button scButton variant="outline" size="sm" (click)="reset()">
+    <button
+      scButton
+      variant="outline"
+      size="sm"
+      (click)="reset()"
+      i18n="@@dataTable.pinning.reset"
+    >
       Reset Pinning
     </button>
   `,

@@ -37,6 +37,9 @@ jobs:
       - name: Lint
         run: npx nx affected -t lint
 
+      - name: Translations
+        run: npx nx affected -t check-i18n
+
       - name: Unit tests
         run: npx nx affected -t test
 

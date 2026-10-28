@@ -10,10 +10,12 @@ import {
   ScCardTitle,
   ScSeparator,
 } from '@semantic-components/ui';
+import { LocalDatePipe } from '../../pipes/local-date';
 
 @Component({
   selector: 'app-blog-article',
   imports: [
+    LocalDatePipe,
     RouterLink,
     ScAvatar,
     ScAvatarFallback,
@@ -32,13 +34,17 @@ import {
         <a
           routerLink="/blog"
           class="text-muted-foreground hover:text-foreground mb-8 inline-flex items-center gap-1 text-sm transition-colors"
+          i18n="@@article.back"
         >
           &larr; Back to Blog
         </a>
 
         <!-- Article Header -->
         <header class="mt-6 space-y-4">
-          <h1 class="text-4xl font-bold tracking-tight">
+          <h1
+            class="text-4xl font-bold tracking-tight"
+            i18n="@@blog.signals.title"
+          >
             Getting Started with Angular Signals
           </h1>
 
@@ -48,9 +54,17 @@ import {
             </span>
             <div class="space-y-1">
               <p class="text-sm leading-none font-medium">Jane Smith</p>
-              <p class="text-muted-foreground text-sm">January 15, 2026</p>
+              <p class="text-muted-foreground text-sm">
+                {{ '2026-01-15' | localDate: 'long' }}
+              </p>
             </div>
-            <span scBadge variant="secondary" class="ml-auto">Tutorial</span>
+            <span
+              scBadge
+              variant="secondary"
+              class="ms-auto"
+              i18n="@@blog.category.tutorial"
+              >Tutorial</span
+            >
           </div>
         </header>
 
@@ -58,7 +72,7 @@ import {
 
         <!-- Article Body -->
         <article class="space-y-6 text-base leading-relaxed">
-          <p>
+          <p i18n="@@article.p1">
             Angular Signals represent a fundamental shift in how we manage
             reactivity in Angular applications. Introduced as a developer
             preview in Angular 16 and stabilized in Angular 17, signals provide
@@ -66,7 +80,7 @@ import {
             predictable and performant.
           </p>
 
-          <p>
+          <p i18n="@@article.p2">
             Unlike the traditional zone-based change detection that Angular has
             relied on since its inception, signals allow the framework to know
             exactly which parts of the UI need to be updated when state changes.
@@ -74,9 +88,14 @@ import {
             performance out of the box.
           </p>
 
-          <h2 class="text-2xl font-semibold tracking-tight">Why Signals?</h2>
+          <h2
+            class="text-2xl font-semibold tracking-tight"
+            i18n="@@article.whySignals"
+          >
+            Why Signals?
+          </h2>
 
-          <p>
+          <p i18n="@@article.p3">
             The primary motivation behind signals is to provide a simpler, more
             efficient way to handle reactive state. With traditional change
             detection, Angular had to check the entire component tree to
@@ -84,7 +103,7 @@ import {
             components to subscribe to only the state they care about.
           </p>
 
-          <p>
+          <p i18n="@@article.p4">
             Signals also integrate seamlessly with computed values and effects,
             creating a coherent reactivity graph that is easy to reason about.
             Here is a simple example of how signals work:
@@ -94,9 +113,14 @@ import {
             class="bg-muted overflow-x-auto rounded-lg p-4 font-mono text-sm"
             >{{ codeExample }}</pre>
 
-          <h2 class="text-2xl font-semibold tracking-tight">Getting Started</h2>
+          <h2
+            class="text-2xl font-semibold tracking-tight"
+            i18n="@@article.gettingStarted"
+          >
+            Getting Started
+          </h2>
 
-          <p>
+          <p i18n="@@article.p5">
             To start using signals in your Angular application, you need to
             import the signal function from the core package. Signals can hold
             any type of value, from primitives to complex objects and arrays.
@@ -111,7 +135,7 @@ import {
             for derived state.
           </p>
 
-          <p>
+          <p i18n="@@article.p6">
             When you need to perform side effects in response to signal changes,
             use the
             <code class="bg-muted rounded px-1.5 py-0.5 font-mono text-sm">
@@ -122,7 +146,7 @@ import {
             synchronize state with external systems like local storage or APIs.
           </p>
 
-          <p>
+          <p i18n="@@article.p7">
             As you build more complex applications, you will find that signals
             compose naturally. Computed signals can depend on other computed
             signals, forming a reactive graph that updates efficiently. Combined
@@ -142,7 +166,10 @@ import {
               </span>
               <div class="space-y-1">
                 <p class="text-sm font-medium">Jane Smith</p>
-                <p class="text-muted-foreground text-sm">
+                <p
+                  class="text-muted-foreground text-sm"
+                  i18n="@@article.authorBio"
+                >
                   Angular developer and open-source contributor. Writing about
                   modern web development, signals, and reactive patterns.
                 </p>
@@ -153,7 +180,10 @@ import {
 
         <!-- Related Articles -->
         <section class="mt-12 space-y-6">
-          <h2 class="text-2xl font-semibold tracking-tight">
+          <h2
+            class="text-2xl font-semibold tracking-tight"
+            i18n="@@article.related"
+          >
             Related Articles
           </h2>
 
@@ -161,10 +191,15 @@ import {
             <a routerLink="/blog/getting-started" class="no-underline">
               <div scCard>
                 <div scCardHeader>
-                  <h3 scCardTitle>Understanding Reactive Patterns</h3>
+                  <h3 scCardTitle i18n="@@article.reactive.title">
+                    Understanding Reactive Patterns
+                  </h3>
                 </div>
                 <div scCardBody>
-                  <p class="text-muted-foreground text-sm">
+                  <p
+                    class="text-muted-foreground text-sm"
+                    i18n="@@article.reactive.excerpt"
+                  >
                     A deep dive into reactive programming patterns and how they
                     apply to modern Angular development.
                   </p>
@@ -175,10 +210,15 @@ import {
             <a routerLink="/blog/getting-started" class="no-underline">
               <div scCard>
                 <div scCardHeader>
-                  <h3 scCardTitle>Signal-Based Components</h3>
+                  <h3 scCardTitle i18n="@@article.signalComponents.title">
+                    Signal-Based Components
+                  </h3>
                 </div>
                 <div scCardBody>
-                  <p class="text-muted-foreground text-sm">
+                  <p
+                    class="text-muted-foreground text-sm"
+                    i18n="@@article.signalComponents.excerpt"
+                  >
                     Learn how to build fully signal-based components using input
                     signals, model signals, and output functions.
                   </p>

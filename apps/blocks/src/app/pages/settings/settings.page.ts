@@ -50,8 +50,10 @@ import {
     <div class="bg-background min-h-screen">
       <div class="mx-auto max-w-4xl px-6 py-12">
         <div class="space-y-1">
-          <h1 class="text-3xl font-bold tracking-tight">Settings</h1>
-          <p class="text-muted-foreground">
+          <h1 class="text-3xl font-bold tracking-tight" i18n="@@settings.title">
+            Settings
+          </h1>
+          <p class="text-muted-foreground" i18n="@@settings.description">
             Manage your account settings and preferences.
           </p>
         </div>
@@ -60,10 +62,22 @@ import {
 
         <div scTabs class="w-full">
           <div scTabList [selectedTab]="'profile'">
-            <button scTab value="profile">Profile</button>
-            <button scTab value="account">Account</button>
-            <button scTab value="notifications">Notifications</button>
-            <button scTab value="appearance">Appearance</button>
+            <button scTab value="profile" i18n="@@settings.tab.profile">
+              Profile
+            </button>
+            <button scTab value="account" i18n="@@settings.tab.account">
+              Account
+            </button>
+            <button
+              scTab
+              value="notifications"
+              i18n="@@settings.tab.notifications"
+            >
+              Notifications
+            </button>
+            <button scTab value="appearance" i18n="@@settings.tab.appearance">
+              Appearance
+            </button>
           </div>
 
           <div scTabPanel value="profile">
@@ -87,13 +101,22 @@ import {
 
                 <div scCard>
                   <div scCardHeader>
-                    <h3 scCardTitle>Profile Information</h3>
-                    <p scCardDescription>Update your profile details below.</p>
+                    <h3 scCardTitle i18n="@@settings.profile.title">
+                      Profile Information
+                    </h3>
+                    <p scCardDescription i18n="@@settings.profile.description">
+                      Update your profile details below.
+                    </p>
                   </div>
                   <div scCardBody>
                     <div class="space-y-4">
                       <div class="space-y-2">
-                        <label scLabel for="display-name">Display Name</label>
+                        <label
+                          scLabel
+                          for="display-name"
+                          i18n="@@settings.displayName"
+                          >Display Name</label
+                        >
                         <input
                           scInput
                           id="display-name"
@@ -102,7 +125,9 @@ import {
                         />
                       </div>
                       <div class="space-y-2">
-                        <label scLabel for="email">Email</label>
+                        <label scLabel for="email" i18n="@@common.email"
+                          >Email</label
+                        >
                         <input
                           scInput
                           id="email"
@@ -111,18 +136,21 @@ import {
                         />
                       </div>
                       <div class="space-y-2">
-                        <label scLabel for="bio">Bio</label>
+                        <label scLabel for="bio" i18n="@@common.bio">Bio</label>
                         <textarea
                           scTextarea
                           id="bio"
                           placeholder="Tell us a little about yourself"
+                          i18n-placeholder="@@settings.bioPlaceholder"
                           rows="4"
                         ></textarea>
                       </div>
                     </div>
                   </div>
                   <div scCardFooter class="flex justify-end border-t px-4 py-3">
-                    <button scButton>Save Changes</button>
+                    <button scButton i18n="@@common.saveChanges">
+                      Save Changes
+                    </button>
                   </div>
                 </div>
               </div>
@@ -134,15 +162,21 @@ import {
               <div class="space-y-6 pt-6">
                 <div scCard>
                   <div scCardHeader>
-                    <h3 scCardTitle>Change Password</h3>
-                    <p scCardDescription>
+                    <h3 scCardTitle i18n="@@settings.password.title">
+                      Change Password
+                    </h3>
+                    <p scCardDescription i18n="@@settings.password.description">
                       Update your password to keep your account secure.
                     </p>
                   </div>
                   <div scCardBody>
                     <div class="space-y-4">
                       <div class="space-y-2">
-                        <label scLabel for="current-password">
+                        <label
+                          scLabel
+                          for="current-password"
+                          i18n="@@settings.currentPassword"
+                        >
                           Current Password
                         </label>
                         <input
@@ -150,19 +184,31 @@ import {
                           id="current-password"
                           type="password"
                           placeholder="Enter current password"
+                          i18n-placeholder="
+                            @@settings.currentPasswordPlaceholder"
                         />
                       </div>
                       <div class="space-y-2">
-                        <label scLabel for="new-password">New Password</label>
+                        <label
+                          scLabel
+                          for="new-password"
+                          i18n="@@settings.newPassword"
+                          >New Password</label
+                        >
                         <input
                           scInput
                           id="new-password"
                           type="password"
                           placeholder="Enter new password"
+                          i18n-placeholder="@@settings.newPasswordPlaceholder"
                         />
                       </div>
                       <div class="space-y-2">
-                        <label scLabel for="confirm-password">
+                        <label
+                          scLabel
+                          for="confirm-password"
+                          i18n="@@settings.confirmPassword"
+                        >
                           Confirm Password
                         </label>
                         <input
@@ -170,31 +216,49 @@ import {
                           id="confirm-password"
                           type="password"
                           placeholder="Confirm new password"
+                          i18n-placeholder="
+                            @@settings.confirmPasswordPlaceholder"
                         />
                       </div>
                     </div>
                   </div>
                   <div scCardFooter class="flex justify-end border-t px-4 py-3">
-                    <button scButton>Update Password</button>
+                    <button scButton i18n="@@settings.updatePassword">
+                      Update Password
+                    </button>
                   </div>
                 </div>
 
                 <div scCard>
                   <div scCardHeader>
-                    <h3 scCardTitle>Danger Zone</h3>
-                    <p scCardDescription>
+                    <h3 scCardTitle i18n="@@settings.danger.title">
+                      Danger Zone
+                    </h3>
+                    <p scCardDescription i18n="@@settings.danger.description">
                       Irreversible and destructive actions.
                     </p>
                   </div>
                   <div scCardBody>
                     <div class="flex items-center justify-between">
                       <div>
-                        <p class="text-sm font-medium">Delete Account</p>
-                        <p class="text-muted-foreground text-sm">
+                        <p
+                          class="text-sm font-medium"
+                          i18n="@@settings.deleteAccount"
+                        >
+                          Delete Account
+                        </p>
+                        <p
+                          class="text-muted-foreground text-sm"
+                          i18n="@@settings.deleteAccount.description"
+                        >
                           Permanently delete your account and all of your data.
                         </p>
                       </div>
-                      <button scButton variant="destructive">
+                      <button
+                        scButton
+                        variant="destructive"
+                        i18n="@@settings.deleteAccount"
+                      >
                         Delete Account
                       </button>
                     </div>
@@ -209,8 +273,15 @@ import {
               <div class="space-y-6 pt-6">
                 <div scCard>
                   <div scCardHeader>
-                    <h3 scCardTitle>Notification Preferences</h3>
-                    <p scCardDescription>Choose how you want to be notified.</p>
+                    <h3 scCardTitle i18n="@@common.notificationPreferences">
+                      Notification Preferences
+                    </h3>
+                    <p
+                      scCardDescription
+                      i18n="@@settings.notifications.description"
+                    >
+                      Choose how you want to be notified.
+                    </p>
                   </div>
                   <div scCardBody>
                     <div class="space-y-4">
@@ -219,8 +290,13 @@ import {
                         class="flex items-center justify-between rounded-lg border p-4"
                       >
                         <div>
-                          <p scLabelText>Email Notifications</p>
-                          <p scFieldDescription>
+                          <p scLabelText i18n="@@common.emailNotifications">
+                            Email Notifications
+                          </p>
+                          <p
+                            scFieldDescription
+                            i18n="@@settings.emailNotifications.description"
+                          >
                             Receive notifications via email.
                           </p>
                         </div>
@@ -232,8 +308,13 @@ import {
                         class="flex items-center justify-between rounded-lg border p-4"
                       >
                         <div>
-                          <p scLabelText>Push Notifications</p>
-                          <p scFieldDescription>
+                          <p scLabelText i18n="@@common.pushNotifications">
+                            Push Notifications
+                          </p>
+                          <p
+                            scFieldDescription
+                            i18n="@@settings.pushNotifications.description"
+                          >
                             Receive push notifications on your device.
                           </p>
                         </div>
@@ -245,8 +326,13 @@ import {
                         class="flex items-center justify-between rounded-lg border p-4"
                       >
                         <div>
-                          <p scLabelText>Marketing Emails</p>
-                          <p scFieldDescription>
+                          <p scLabelText i18n="@@settings.marketing">
+                            Marketing Emails
+                          </p>
+                          <p
+                            scFieldDescription
+                            i18n="@@settings.marketing.description"
+                          >
                             Receive emails about new features and updates.
                           </p>
                         </div>
@@ -258,8 +344,13 @@ import {
                         class="flex items-center justify-between rounded-lg border p-4"
                       >
                         <div>
-                          <p scLabelText>Security Alerts</p>
-                          <p scFieldDescription>
+                          <p scLabelText i18n="@@settings.security">
+                            Security Alerts
+                          </p>
+                          <p
+                            scFieldDescription
+                            i18n="@@settings.security.description"
+                          >
                             Get notified about security events on your account.
                           </p>
                         </div>
@@ -277,8 +368,8 @@ import {
               <div class="space-y-6 pt-6">
                 <div scCard>
                   <div scCardHeader>
-                    <h3 scCardTitle>Theme</h3>
-                    <p scCardDescription>
+                    <h3 scCardTitle i18n="@@settings.theme">Theme</h3>
+                    <p scCardDescription i18n="@@settings.theme.description">
                       Select your preferred theme for the application.
                     </p>
                   </div>
@@ -311,7 +402,11 @@ import {
                           <path d="m6.34 17.66-1.41 1.41" />
                           <path d="m19.07 4.93-1.41 1.41" />
                         </svg>
-                        <span class="text-sm font-medium">Light</span>
+                        <span
+                          class="text-sm font-medium"
+                          i18n="@@settings.theme.light"
+                          >Light</span
+                        >
                       </button>
                       <button
                         scButton
@@ -332,7 +427,11 @@ import {
                         >
                           <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
                         </svg>
-                        <span class="text-sm font-medium">Dark</span>
+                        <span
+                          class="text-sm font-medium"
+                          i18n="@@settings.theme.dark"
+                          >Dark</span
+                        >
                       </button>
                       <button
                         scButton
@@ -355,7 +454,11 @@ import {
                           <line x1="8" x2="16" y1="21" y2="21" />
                           <line x1="12" x2="12" y1="17" y2="21" />
                         </svg>
-                        <span class="text-sm font-medium">System</span>
+                        <span
+                          class="text-sm font-medium"
+                          i18n="@@settings.theme.system"
+                          >System</span
+                        >
                       </button>
                     </div>
                   </div>

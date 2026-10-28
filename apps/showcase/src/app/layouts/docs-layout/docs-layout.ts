@@ -224,6 +224,17 @@ import { ConfigService } from '../../services/config.service';
                     <li scSidebarMenuSubItem>
                       <a
                         scSidebarMenuSubButton
+                        routerLink="/docs/getting-started/i18n"
+                        routerLinkActive
+                        #i18nRla="routerLinkActive"
+                        [isActive]="i18nRla.isActive"
+                      >
+                        <span>Internationalization</span>
+                      </a>
+                    </li>
+                    <li scSidebarMenuSubItem>
+                      <a
+                        scSidebarMenuSubButton
                         routerLink="/docs/getting-started/mcp-server"
                         routerLinkActive
                         #mcpServerRla="routerLinkActive"

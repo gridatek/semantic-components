@@ -14,7 +14,9 @@ import {
 } from '@tanstack/angular-table';
 import {
   Component,
+  LOCALE_ID,
   ViewEncapsulation,
+  inject,
   input,
   output,
   signal,
@@ -49,6 +51,7 @@ import {
   SiChevronDownIcon,
   SiChevronRightIcon,
 } from '@semantic-icons/lucide-icons';
+import { LocalDatePipe } from '../../pipes/local-date';
 import { DataTableColumnPinning } from './data-table-column-pinning';
 import { type DataTableFeatures, features } from './data-table-features';
 import { DataTablePagination } from './data-table-pagination';
@@ -59,6 +62,7 @@ import type { User } from './user.service';
   selector: 'app-data-table',
   encapsulation: ViewEncapsulation.None,
   imports: [
+    LocalDatePipe,
     ScBadge,
     ScButton,
     ScCheckbox,
@@ -116,6 +120,7 @@ import type { User } from './user.service';
                           scCheckbox
                           scDataTableSelectAll
                           aria-label="Select all rows"
+                          i18n-aria-label="@@dataTable.selectAll"
                           [table]="table"
                         />
                       </label>
@@ -154,8 +159,10 @@ import type { User } from './user.service';
                     scInput
                     scDataTableColumnFilter
                     [column]="header.column"
-                    [attr.aria-label]="'Filter ' + getHeaderLabel(header)"
+                    aria-label="Filter {{ getHeaderLabel(header) }}"
+                    i18n-aria-label="@@dataTable.filterColumn"
                     placeholder="Filter..."
+                    i18n-placeholder="@@dataTable.filterPlaceholder"
                     class="h-7 text-xs"
                   />
                 }
@@ -186,7 +193,7 @@ import type { User } from './user.service';
                       @if (row.getIsExpanded()) {
                         <svg siChevronDownIcon></svg>
                       } @else {
-                        <svg siChevronRightIcon></svg>
+                        <svg siChevronRightIcon class="rtl:rotate-180"></svg>
                       }
                       <span>{{ cell.getValue() }}</span>
                       <span class="text-muted-foreground ml-1">
@@ -196,12 +203,18 @@ import type { User } from './user.service';
                   } @else if (cell.getIsAggregated()) {
                     <span class="text-muted-foreground">
                       @if (cell.column.id === 'storageUsed') {
-                        Avg:
-                        {{ formatNumber(asNumber(cell.getValue())) }}
-                        MB
+                        <ng-container i18n="@@dataTable.average"
+                          >Avg:
+                          {{ formatNumber(asNumber(cell.getValue())) }}
+                          MB</ng-container
+                        >
                       } @else if (cell.column.id === 'apiCalls') {
-                        Total:
-                        {{ formatNumber(asNumber(cell.getValue())) }}
+                        <ng-container i18n="@@dataTable.total"
+                          >Total:
+                          {{
+                            formatNumber(asNumber(cell.getValue()))
+                          }}</ng-container
+                        >
                       } @else {
                         {{ cell.getValue() }}
                       }
@@ -227,7 +240,8 @@ import type { User } from './user.service';
                           scCheckbox
                           scDataTableSelectRow
                           [row]="row"
-                          [attr.aria-label]="'Select ' + row.original.username"
+                          aria-label="Select {{ row.original.username }}"
+                          i18n-aria-label="@@dataTable.selectRow"
                         />
                       </label>
                     } @else if (cell.column.id === 'expand') {
@@ -241,7 +255,10 @@ import type { User } from './user.service';
                           @if (row.getIsExpanded()) {
                             <svg siChevronDownIcon></svg>
                           } @else {
-                            <svg siChevronRightIcon></svg>
+                            <svg
+                              siChevronRightIcon
+                              class="rtl:rotate-180"
+                            ></svg>
                           }
                         </button>
                       }
@@ -256,7 +273,7 @@ import type { User } from './user.service';
                               : 'outline'
                         "
                       >
-                        {{ cell.getValue() }}
+                        {{ valueLabel(cell.getValue()) }}
                       </span>
                     } @else if (cell.column.id === 'plan') {
                       <span
@@ -269,7 +286,7 @@ import type { User } from './user.service';
                               : 'outline'
                         "
                       >
-                        {{ cell.getValue() }}
+                        {{ valueLabel(cell.getValue()) }}
                       </span>
                     } @else if (cell.column.id === 'status') {
                       <span
@@ -282,13 +299,14 @@ import type { User } from './user.service';
                               : 'secondary'
                         "
                       >
-                        {{ cell.getValue() }}
+                        {{ valueLabel(cell.getValue()) }}
                       </span>
                     } @else if (cell.column.id === 'storageUsed') {
                       <div class="flex items-center gap-2">
                         <div
                           scProgress
                           aria-label="Storage used"
+                          i18n-aria-label="@@dataTable.storageUsed"
                           [value]="asNumber(cell.getValue())"
                           [max]="10000"
                           class="h-2 w-16"
@@ -337,44 +355,74 @@ import type { User } from './user.service';
                 <td scTableCell [attr.colSpan]="row.getVisibleCells().length">
                   <div class="grid grid-cols-2 gap-4 text-sm md:grid-cols-4">
                     <div>
-                      <span class="font-medium">Username:</span>
+                      <span
+                        class="font-medium"
+                        i18n="@@dataTable.detail.username"
+                        >Username:</span
+                      >
                       {{ row.original.username }}
                     </div>
                     <div>
-                      <span class="font-medium">Full Name:</span>
+                      <span
+                        class="font-medium"
+                        i18n="@@dataTable.detail.fullName"
+                        >Full Name:</span
+                      >
                       {{ row.original.firstName }}
                       {{ row.original.lastName }}
                     </div>
                     <div>
-                      <span class="font-medium">Email:</span>
+                      <span class="font-medium" i18n="@@dataTable.detail.email"
+                        >Email:</span
+                      >
                       {{ row.original.email }}
                     </div>
                     <div>
-                      <span class="font-medium">Role:</span>
-                      {{ row.original.role }}
+                      <span class="font-medium" i18n="@@dataTable.detail.role"
+                        >Role:</span
+                      >
+                      {{ valueLabel(row.original.role) }}
                     </div>
                     <div>
-                      <span class="font-medium">Plan:</span>
-                      {{ row.original.plan }}
+                      <span class="font-medium" i18n="@@dataTable.detail.plan"
+                        >Plan:</span
+                      >
+                      {{ valueLabel(row.original.plan) }}
                     </div>
                     <div>
-                      <span class="font-medium">Status:</span>
-                      {{ row.original.status }}
+                      <span class="font-medium" i18n="@@dataTable.detail.status"
+                        >Status:</span
+                      >
+                      {{ valueLabel(row.original.status) }}
                     </div>
                     <div>
-                      <span class="font-medium">Joined:</span>
-                      {{ row.original.joinedAt }}
+                      <span class="font-medium" i18n="@@dataTable.detail.joined"
+                        >Joined:</span
+                      >
+                      {{ row.original.joinedAt | localDate }}
                     </div>
                     <div>
-                      <span class="font-medium">Last Login:</span>
-                      {{ row.original.lastLoginAt }}
+                      <span
+                        class="font-medium"
+                        i18n="@@dataTable.detail.lastLogin"
+                        >Last Login:</span
+                      >
+                      {{ row.original.lastLoginAt | localDate }}
                     </div>
                     <div>
-                      <span class="font-medium">Storage:</span>
+                      <span
+                        class="font-medium"
+                        i18n="@@dataTable.detail.storage"
+                        >Storage:</span
+                      >
                       {{ formatNumber(row.original.storageUsed) }} MB
                     </div>
                     <div>
-                      <span class="font-medium">API Calls:</span>
+                      <span
+                        class="font-medium"
+                        i18n="@@dataTable.detail.apiCalls"
+                        >API Calls:</span
+                      >
                       {{ formatNumber(row.original.apiCalls) }}
                     </div>
                   </div>
@@ -388,6 +436,7 @@ import type { User } from './user.service';
                 scTableCell
                 [attr.colSpan]="columns().length"
                 class="text-muted-foreground h-24 text-center"
+                i18n="@@dataTable.noResults"
               >
                 No results.
               </td>
@@ -409,6 +458,19 @@ import type { User } from './user.service';
   `,
 })
 export class DataTable {
+  private readonly locale = inject(LOCALE_ID);
+  private readonly valueLabels: Record<string, string> = {
+    admin: $localize`:@@dataTable.role.admin:Admin`,
+    editor: $localize`:@@dataTable.role.editor:Editor`,
+    viewer: $localize`:@@dataTable.role.viewer:Viewer`,
+    free: $localize`:@@dataTable.plan.free:Free`,
+    pro: $localize`:@@dataTable.plan.pro:Pro`,
+    enterprise: $localize`:@@dataTable.plan.enterprise:Enterprise`,
+    active: $localize`:@@dataTable.status.active:Active`,
+    inactive: $localize`:@@dataTable.status.inactive:Inactive`,
+    suspended: $localize`:@@dataTable.status.suspended:Suspended`,
+  };
+
   readonly sorting = signal<SortingState>([]);
   readonly columnFilters = signal<ColumnFiltersState>([]);
   readonly globalFilter = signal('');
@@ -522,7 +584,12 @@ export class DataTable {
   }
 
   formatNumber(value: number): string {
-    return new Intl.NumberFormat('en-US').format(Math.round(value));
+    return new Intl.NumberFormat(this.locale).format(Math.round(value));
+  }
+
+  /** A role's, plan's or status's name, in the app's locale. */
+  valueLabel(value: unknown): string {
+    return this.valueLabels[String(value)] ?? String(value);
   }
 
   storageColor(value: number): string {

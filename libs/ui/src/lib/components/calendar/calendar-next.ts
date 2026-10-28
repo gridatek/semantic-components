@@ -25,6 +25,8 @@ export class ScCalendarNext {
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       'absolute end-1',
+      // Its arrow points the reading way.
+      'rtl:[&>svg]:rotate-180',
       this.classInput(),
     ),
   );

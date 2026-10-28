@@ -50,8 +50,10 @@ import { Logo } from '../../components/logo/logo';
           <div class="mb-2 flex justify-center">
             <app-logo />
           </div>
-          <h1 scCardTitle>Forgot your password?</h1>
-          <p scCardDescription>
+          <h1 scCardTitle i18n="@@forgotPassword.title">
+            Forgot your password?
+          </h1>
+          <p scCardDescription i18n="@@forgotPassword.description">
             Enter your email address and we'll send you a reset link.
           </p>
         </div>
@@ -59,7 +61,7 @@ import { Logo } from '../../components/logo/logo';
           <form [formRoot]="forgotPasswordForm">
             <div scFieldGroup>
               <div scField>
-                <label scLabel>Email</label>
+                <label scLabel i18n="@@common.email">Email</label>
                 <input
                   scInput
                   type="email"
@@ -67,14 +69,25 @@ import { Logo } from '../../components/logo/logo';
                   placeholder="name@example.com"
                 />
               </div>
-              <button scButton class="w-full" type="submit">
+              <button
+                scButton
+                class="w-full"
+                type="submit"
+                i18n="@@forgotPassword.submit"
+              >
                 Send Reset Link
               </button>
             </div>
           </form>
         </div>
         <div scCardFooter class="justify-center">
-          <a scLink variant="link" routerLink="/login">Back to login</a>
+          <a
+            scLink
+            variant="link"
+            routerLink="/login"
+            i18n="@@forgotPassword.backToLogin"
+            >Back to login</a
+          >
         </div>
       </div>
     </div>
