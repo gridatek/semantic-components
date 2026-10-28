@@ -29,12 +29,12 @@ export interface ScI18nConfig {
    * writes them.
    */
   loadTranslations?: (id: string) => Promise<Record<string, string>>;
-  /** The cookie the choice is kept in — the server reads it too. Default `sc-locale`. */
-  cookie?: string;
+  /** Where the choice is kept: a cookie, copied to `localStorage`. Default `sc-locale`. */
+  storageKey?: string;
 }
 
-export const cookieName = (config: ScI18nConfig) =>
-  config.cookie ?? 'sc-locale';
+export const storageKey = (config: ScI18nConfig) =>
+  config.storageKey ?? 'sc-locale';
 
 /**
  * The locale to show: the one chosen before (`saved`), else the first of the

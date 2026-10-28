@@ -71,7 +71,7 @@ import {
     SiSettingsIcon,
   ],
   template: \`
-    <div scSidebarProvider [cookie]="null">
+    <div scSidebarProvider [storageKey]="null">
       <div scSidebar aria-label="Acme navigation">
         <div scSidebarHeader>
           <ul scSidebarMenu>

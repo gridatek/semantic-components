@@ -271,7 +271,7 @@ The sidebar uses CSS variables that can be customized:
 
 ## State Persistence
 
-The sidebar state is saved in a cookie (`sc-sidebar-state`) and restored when the page loads — read on the server too, when a route is rendered per request, so the page is drawn as left. Give each independent sidebar its own cookie with `cookie="my-sidebar"`, or pass `[cookie]="null"` to keep nothing.
+The sidebar state is saved (`sc-sidebar-state`: a cookie, copied to `localStorage` — see [storage](../../utilities/storage/README.md)) and restored when the page loads — read on the server too, when a route is rendered per request, so the page is drawn as left. Give each independent sidebar its own key with `storageKey="my-sidebar"`, or pass `[storageKey]="null"` to keep nothing.
 
 ## Mobile Behavior
 

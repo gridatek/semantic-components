@@ -17,9 +17,9 @@ function parseCookie(cookies: string, name: string): string | null {
 /**
  * A saved choice, in the browser: its cookie, else its copy in
  * `localStorage` (where cookies are not kept: a `file://` page, an embed on
- * another site). For code that runs before the app; in it, `ScCookies`.
+ * another site). For code that runs before the app; in it, `ScStorage`.
  */
-export function readCookie(name: string): string | null {
+export function readStorage(name: string): string | null {
   const cookie = parseCookie(globalThis.document?.cookie ?? '', name);
   if (cookie !== null) return cookie;
   try {
@@ -30,7 +30,7 @@ export function readCookie(name: string): string | null {
 }
 
 /** Saves a choice, in the browser: a cookie for a year, and its copy in `localStorage`. */
-export function writeCookie(name: string, value: string): void {
+export function writeStorage(name: string, value: string): void {
   if (!globalThis.document) return;
   globalThis.document.cookie = `${name}=${encodeURIComponent(value)}; path=/; max-age=${MAX_AGE}; samesite=lax`;
   try {
@@ -41,24 +41,24 @@ export function writeCookie(name: string, value: string): void {
 }
 
 /**
- * The user's choices, as cookies: read in the browser and, while the server
+ * The user's choices, kept as cookies: read in the browser and, while the server
  * renders a request, from it — so a page rendered per request is drawn as the
  * user left it, from the first paint. A prerendered page has no request: its
  * defaults, then the browser's. Each choice is also copied to `localStorage`,
  * read where cookies are not kept.
  */
 @Service()
-export class ScCookies {
+export class ScStorage {
   private readonly request = inject(REQUEST, { optional: true });
   private readonly browser = isPlatformBrowser(inject(PLATFORM_ID));
 
   get(name: string): string | null {
-    if (this.browser) return readCookie(name);
+    if (this.browser) return readStorage(name);
     return parseCookie(this.request?.headers.get('cookie') ?? '', name);
   }
 
   /** Kept a year, for the whole site; nothing on the server. */
   set(name: string, value: string): void {
-    if (this.browser) writeCookie(name, value);
+    if (this.browser) writeStorage(name, value);
   }
 }

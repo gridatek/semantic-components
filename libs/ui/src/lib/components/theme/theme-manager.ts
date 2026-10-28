@@ -7,24 +7,24 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import { ScCookies } from '../../utilities/cookies/cookies';
+import { ScStorage } from '../../utilities/storage/storage';
 
 export type ScThemeMode = 'light' | 'dark' | 'system';
 
 export interface ScThemeConfig {
   defaultMode: ScThemeMode;
   defaultColorScheme: string;
-  /** The cookie the mode is kept in. */
-  modeCookie: string;
-  /** The cookie the color scheme is kept in. */
-  colorSchemeCookie: string;
+  /** Where the mode is kept (a cookie, copied to `localStorage`). */
+  modeStorageKey: string;
+  /** Where the color scheme is kept. */
+  colorSchemeStorageKey: string;
 }
 
 const defaultConfig: ScThemeConfig = {
   defaultMode: 'system',
   defaultColorScheme: 'default',
-  modeCookie: 'sc-theme-mode',
-  colorSchemeCookie: 'sc-theme-color',
+  modeStorageKey: 'sc-theme-mode',
+  colorSchemeStorageKey: 'sc-theme-color',
 };
 
 export const SC_THEME_CONFIG = new InjectionToken<Partial<ScThemeConfig>>(
@@ -38,7 +38,7 @@ export class ScThemeManager {
     ...inject(SC_THEME_CONFIG, { optional: true }),
   };
 
-  private readonly cookies = inject(ScCookies);
+  private readonly storage = inject(ScStorage);
   private readonly document = inject(DOCUMENT);
 
   // None on the server: there, "system" is light.
@@ -48,7 +48,7 @@ export class ScThemeManager {
 
   readonly mode = signal<ScThemeMode>(
     this.getStored(
-      this.config.modeCookie,
+      this.config.modeStorageKey,
       this.config.defaultMode,
       this.isValidMode,
     ),
@@ -56,7 +56,7 @@ export class ScThemeManager {
 
   readonly colorScheme = signal<string>(
     this.getStored(
-      this.config.colorSchemeCookie,
+      this.config.colorSchemeStorageKey,
       this.config.defaultColorScheme,
     ),
   );
@@ -91,7 +91,7 @@ export class ScThemeManager {
 
   setMode(mode: ScThemeMode): void {
     this.mode.set(mode);
-    this.store(this.config.modeCookie, mode);
+    this.store(this.config.modeStorageKey, mode);
   }
 
   toggleMode(): void {
@@ -101,7 +101,7 @@ export class ScThemeManager {
 
   setColorScheme(colorScheme: string): void {
     this.colorScheme.set(colorScheme);
-    this.store(this.config.colorSchemeCookie, colorScheme);
+    this.store(this.config.colorSchemeStorageKey, colorScheme);
   }
 
   private isValidMode(value: string): value is ScThemeMode {
@@ -113,7 +113,7 @@ export class ScThemeManager {
     fallback: T,
     validate?: (value: string) => value is T,
   ): T {
-    const stored = this.cookies.get(key);
+    const stored = this.storage.get(key);
     if (stored && (!validate || validate(stored))) {
       return stored as T;
     }
@@ -121,7 +121,7 @@ export class ScThemeManager {
   }
 
   private store(key: string, value: string): void {
-    this.cookies.set(key, value);
+    this.storage.set(key, value);
   }
 
   private getSystemMode(): 'light' | 'dark' {

@@ -1,11 +1,11 @@
 import { registerLocaleData } from '@angular/common';
 import { loadTranslations } from '@angular/localize';
-import { readCookie } from '@semantic-components/ui';
+import { readStorage } from '@semantic-components/ui';
 import {
   type ScI18nConfig,
   chooseLocale,
-  cookieName,
   localeDir,
+  storageKey,
 } from './i18n-config';
 
 /**
@@ -18,7 +18,7 @@ import {
 export async function loadLocale(config: ScI18nConfig): Promise<void> {
   let locale = chooseLocale(
     config,
-    readCookie(cookieName(config)),
+    readStorage(storageKey(config)),
     navigator.languages,
   );
   if (locale !== config.sourceLocale) {

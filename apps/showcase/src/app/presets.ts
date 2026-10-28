@@ -7,7 +7,7 @@ import { nova } from '@semantic-components/presets/nova';
 import { rhea } from '@semantic-components/presets/rhea';
 import { sera } from '@semantic-components/presets/sera';
 import { vega } from '@semantic-components/presets/vega';
-import { readCookie, writeCookie } from '@semantic-components/ui';
+import { readStorage, writeStorage } from '@semantic-components/ui';
 
 /**
  * Every preset, for the showcase's preset sheet. An app with one preset
@@ -31,11 +31,11 @@ const KEY = 'sc-preset';
  * once): its cookie, nova without one (or on the server).
  */
 export function storedPreset(): ScPresetName {
-  const name = readCookie(KEY);
+  const name = readStorage(KEY);
   return name && name in PRESETS ? (name as ScPresetName) : 'nova';
 }
 
 /** Saves the preset for the next start. */
 export function storePreset(name: ScPresetName): void {
-  writeCookie(KEY, name);
+  writeStorage(KEY, name);
 }

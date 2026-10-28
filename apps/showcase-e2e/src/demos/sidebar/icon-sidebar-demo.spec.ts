@@ -23,7 +23,7 @@ test.describe('Icon Sidebar Demo', () => {
       page.getByRole('button', { name: 'Dashboard' }),
     ).toHaveAttribute('aria-current', 'page');
 
-    // [cookie]="null": the demo never writes the shared cookie.
+    // [storageKey]="null": the demo never writes the shared cookie.
     const cookies = await page.context().cookies();
     expect(cookies.map((cookie) => cookie.name)).not.toContain(
       'sc-sidebar-state',

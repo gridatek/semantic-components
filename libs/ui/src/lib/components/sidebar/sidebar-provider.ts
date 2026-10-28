@@ -15,11 +15,11 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
-import { ScCookies } from '../../utilities/cookies/cookies';
+import { ScStorage } from '../../utilities/storage/storage';
 import { cn } from '../../utils';
 import { ScSidebarState } from './sidebar-state';
 
-const SIDEBAR_COOKIE = 'sc-sidebar-state';
+const SIDEBAR_STORAGE_KEY = 'sc-sidebar-state';
 const SIDEBAR_KEYBOARD_SHORTCUT = 'b';
 const MOBILE_QUERY = '(max-width: 767.98px)';
 
@@ -45,11 +45,11 @@ export class ScSidebarProvider implements OnInit {
   readonly open = model<boolean>(true);
 
   /**
-   * The cookie the open state is kept in — read on the server too, so the page
-   * is drawn as left. Give each independent sidebar its own; `null` keeps
-   * nothing.
+   * Where the open state is kept: a cookie (read on the server too, so the
+   * page is drawn as left), copied to `localStorage`. Give each independent
+   * sidebar its own key; `null` keeps nothing.
    */
-  readonly cookie = input<string | null>(SIDEBAR_COOKIE);
+  readonly storageKey = input<string | null>(SIDEBAR_STORAGE_KEY);
 
   protected readonly class = computed(() =>
     cn(
@@ -60,7 +60,7 @@ export class ScSidebarProvider implements OnInit {
 
   private readonly router = inject(Router);
   private readonly window = inject(DOCUMENT).defaultView;
-  private readonly cookies = inject(ScCookies);
+  private readonly storage = inject(ScStorage);
   /** Saved only once the saved state is read: not over it. */
   private readonly restored = signal(false);
 
@@ -115,13 +115,13 @@ export class ScSidebarProvider implements OnInit {
   }
 
   private saveState(open: boolean): void {
-    const name = this.cookie();
-    if (name) this.cookies.set(name, String(open));
+    const name = this.storageKey();
+    if (name) this.storage.set(name, String(open));
   }
 
   private loadState(): boolean | null {
-    const name = this.cookie();
-    const value = name ? this.cookies.get(name) : null;
+    const name = this.storageKey();
+    const value = name ? this.storage.get(name) : null;
     return value === null ? null : value === 'true';
   }
 }

@@ -63,7 +63,7 @@ import {
     SiUsersIcon,
   ],
   template: \`
-    <div scSidebarProvider [cookie]="null">
+    <div scSidebarProvider [storageKey]="null">
       <div
         scSidebar
         variant="inset"
