@@ -27,10 +27,14 @@ import { ScOrgChartItem } from './org-chart-item';
   selector: 'ul[scOrgChartGroup]',
   imports: [TreeItemGroup, ScTreeItemGroupRef],
   providers: [{ provide: SC_TREE_ITEM_GROUP, useExisting: ScOrgChartGroup }],
+  // The reports always in the page — a closed group hides them (`hidden`).
+  // Inside the aria group's deferred template, those of a closed person would
+  // exist (projected content is created anyway) but stay out of the DOM, and
+  // the tree, which orders its items by their place in the document, would
+  // order them at random (WebKit). The template only creates the aria group.
   template: `
-    <ng-template ngTreeItemGroup scTreeItemGroupRef [ownedBy]="item.treeItem">
-      <ng-content />
-    </ng-template>
+    <ng-template ngTreeItemGroup scTreeItemGroupRef [ownedBy]="item.treeItem" />
+    <ng-content />
   `,
   host: {
     role: 'group',

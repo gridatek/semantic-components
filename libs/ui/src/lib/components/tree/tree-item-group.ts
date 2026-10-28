@@ -15,10 +15,15 @@ import { SC_TREE_ITEM_GROUP, type ScTreeItemGroupContext } from './tree-tokens';
   selector: 'ul[scTreeItemGroup]',
   imports: [TreeItemGroup, ScTreeItemGroupRef],
   providers: [{ provide: SC_TREE_ITEM_GROUP, useExisting: ScTreeItemGroup }],
+  // The items always in the page — a closed group hides them (below). Inside
+  // the aria group's deferred template, the items of a group never opened
+  // would exist (projected content is created anyway) but stay out of the
+  // DOM, and the tree, which orders its items by their place in the
+  // document, would order those at random (WebKit): ArrowDown skipped rows.
+  // The template only creates the aria group; it renders nothing.
   template: `
-    <ng-template ngTreeItemGroup scTreeItemGroupRef [ownedBy]="item.treeItem">
-      <ng-content />
-    </ng-template>
+    <ng-template ngTreeItemGroup scTreeItemGroupRef [ownedBy]="item.treeItem" />
+    <ng-content />
   `,
   host: {
     role: 'group',
@@ -54,9 +59,9 @@ export class ScTreeItemGroup implements ScTreeItemGroupContext {
       'flex flex-col',
       // Expand/collapse: height animates between auto and 0 (global
       // `interpolate-size: allow-keywords`; other browsers switch instantly).
-      // Children stay rendered once opened (ScTreeItem preserves them), and a
-      // closed group — opened before or not — is 0 high and ends `invisible`
-      // (out of the accessibility tree, not focusable) after the transition.
+      // Children are always rendered, and a closed group is 0 high and ends
+      // `invisible` (out of the accessibility tree, not focusable) after the
+      // transition.
       // Padding + negative margin give the rows' focus ring room inside the
       // clipped area; vertically only while open, so a closed group takes no
       // space at all.

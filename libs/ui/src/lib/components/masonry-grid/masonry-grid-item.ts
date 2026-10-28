@@ -32,10 +32,12 @@ export class ScMasonryGridItem {
 
   protected readonly class = computed(() =>
     cn(
-      !this.grid.native() && [
-        'absolute',
-        'data-placed:transition-[inset-inline-start,top] data-placed:duration-300 data-placed:ease-out motion-reduce:transition-none',
-      ],
+      // Placed by us where the browser can't (`data-native` on the grid):
+      // a selector, not a class bound on `native()` — the server renders our
+      // layout (no CSS there to ask), and a class bound away while hydrating
+      // stays (WebKit's grid then collapsed). `data-placed` is ours only.
+      '[[data-slot=masonry-grid]:not([data-native])>&]:absolute',
+      'data-placed:transition-[inset-inline-start,top] data-placed:duration-300 data-placed:ease-out motion-reduce:transition-none',
       this.classInput(),
     ),
   );

@@ -63,10 +63,6 @@ export class ScTreeItem {
   );
 
   constructor() {
-    // Keep children rendered once opened, so collapsing can animate the group
-    // (ScTreeItemGroup) instead of the rows vanishing at once.
-    this.treeItem.preserveContent.set(true);
-
     // Nested items belong to the enclosing group, top-level items to the
     // tree. TreeItem reads `parent` in its ngOnInit to register.
     const group = inject(SC_TREE_ITEM_GROUP, { optional: true });
