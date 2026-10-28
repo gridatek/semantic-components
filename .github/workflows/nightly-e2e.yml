@@ -10,8 +10,9 @@ permissions:
   contents: read
 
 # Every e2e test in every browser (Chromium, Firefox, WebKit, and the phones:
-# ALL_BROWSERS), both ways the apps can run — static and rendered on the
-# server — in two jobs side by side. The pull requests' CI runs Chromium only.
+# ALL_BROWSERS), both ways the apps can run — static, and rendered on the
+# server (one job per browser engine) — side by side. The pull requests' CI
+# runs Chromium only.
 jobs:
   # The apps as built by default (static, client-only).
   static:
@@ -59,10 +60,29 @@ jobs:
 
   # The apps rendered on the server (the `ssr` build, on its Node server), then
   # hydrated: every e2e test again, plus `ssr.spec.ts` (every page hydrates),
-  # in every browser — as CI's `ssr` job, which runs Chromium only.
+  # in every browser — as CI's `ssr` job, which runs Chromium only. One job
+  # per browser engine, side by side: all of them in one ran close to the
+  # 60-minute limit.
   ssr:
+    name: ssr (${{ matrix.browser }})
     runs-on: ubuntu-latest
     timeout-minutes: 60
+    strategy:
+      # One browser failing doesn't stop the others.
+      fail-fast: false
+      matrix:
+        include:
+          # The engine's desktop project, and its phone where there is one
+          # (the showcase's `@mobile` tests; blocks has none).
+          - browser: chromium
+            showcase: --project=chromium --project=mobile-chromium
+            blocks: --project=chromium
+          - browser: firefox
+            showcase: --project=firefox
+            blocks: --project=firefox
+          - browser: webkit
+            showcase: --project=webkit --project=mobile-webkit
+            blocks: --project=webkit
     env:
       ALL_BROWSERS: true
       SSR: true
@@ -80,16 +100,17 @@ jobs:
       - name: Build (SSR)
         run: npx nx run-many -t build -p showcase blocks -c ssr
 
+      # Its own engine only.
       - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+        run: npx playwright install --with-deps ${{ matrix.browser }}
 
       # Two retries, as `static`: a flake is retried, and reported as flaky.
       - name: E2E tests (showcase, SSR)
-        run: npx playwright test -c apps/showcase-e2e/playwright.config.ts --workers=4 --retries=2 --reporter=line
+        run: npx playwright test -c apps/showcase-e2e/playwright.config.ts ${{ matrix.showcase }} --workers=4 --retries=2 --reporter=line
 
       - name: E2E tests (blocks, SSR)
         if: ${{ !cancelled() }}
-        run: npx playwright test -c apps/blocks-e2e/playwright.config.ts --workers=4 --retries=2 --reporter=line
+        run: npx playwright test -c apps/blocks-e2e/playwright.config.ts ${{ matrix.blocks }} --workers=4 --retries=2 --reporter=line
 
       # What failed on the server: Angular logs it, the page still answers 200.
       - name: Server errors
@@ -110,7 +131,7 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@v7
         with:
-          name: playwright-report-ssr
+          name: playwright-report-ssr-${{ matrix.browser }}
           path: |
             dist/.playwright/apps/showcase-e2e/
             dist/.playwright/apps/blocks-e2e/
