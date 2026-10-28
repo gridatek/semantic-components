@@ -29,12 +29,35 @@ export interface ScI18nConfig {
    * writes them.
    */
   loadTranslations?: (id: string) => Promise<Record<string, string>>;
-  /** Where the choice is kept in `localStorage`. Default `sc-locale`. */
-  storageKey?: string;
+  /** The cookie the choice is kept in — the server reads it too. Default `sc-locale`. */
+  cookie?: string;
 }
 
-export const storageKey = (config: ScI18nConfig) =>
-  config.storageKey ?? 'sc-locale';
+export const cookieName = (config: ScI18nConfig) =>
+  config.cookie ?? 'sc-locale';
+
+/**
+ * The locale to show: the one chosen before (`saved`), else the first of the
+ * user's languages offered (or its base: `fr` for `fr-CA`), else the source
+ * one. The browser and the server choose alike.
+ */
+export function chooseLocale(
+  config: ScI18nConfig,
+  saved: string | null,
+  languages: readonly string[],
+): string {
+  const offered = (id: string | null | undefined) =>
+    config.locales.find(
+      (locale) => locale.id.toLowerCase() === id?.toLowerCase(),
+    )?.id;
+  const chosen = offered(saved);
+  if (chosen) return chosen;
+  for (const tag of languages) {
+    const match = offered(tag) ?? offered(tag.split('-')[0]);
+    if (match) return match;
+  }
+  return config.sourceLocale;
+}
 
 /** The locale's writing direction: the app's, else the platform's. */
 export function localeDir(config: ScI18nConfig, id: string): 'ltr' | 'rtl' {

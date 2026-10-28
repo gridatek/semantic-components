@@ -78,8 +78,8 @@ bootstrapApplication(AppComponent, {
       useValue: {
         defaultMode: 'dark',
         defaultColorScheme: 'blue',
-        modeStorageKey: 'my-app-mode',
-        colorSchemeStorageKey: 'my-app-color',
+        modeCookie: 'my-app-mode',
+        colorSchemeCookie: 'my-app-color',
       },
     },
   ],
@@ -123,16 +123,16 @@ Singleton service for theme state.
 
 Injection token for overriding defaults.
 
-| Option                  | Type          | Default            | Description                |
-| ----------------------- | ------------- | ------------------ | -------------------------- |
-| `defaultMode`           | `ScThemeMode` | `'system'`         | Initial mode               |
-| `defaultColorScheme`    | `string`      | `'default'`        | Initial color scheme       |
-| `modeStorageKey`        | `string`      | `'sc-theme-mode'`  | localStorage key for mode  |
-| `colorSchemeStorageKey` | `string`      | `'sc-theme-color'` | localStorage key for color |
+| Option               | Type          | Default            | Description               |
+| -------------------- | ------------- | ------------------ | ------------------------- |
+| `defaultMode`        | `ScThemeMode` | `'system'`         | Initial mode              |
+| `defaultColorScheme` | `string`      | `'default'`        | Initial color scheme      |
+| `modeCookie`         | `string`      | `'sc-theme-mode'`  | The mode's cookie         |
+| `colorSchemeCookie`  | `string`      | `'sc-theme-color'` | The color scheme's cookie |
 
 ## Persistence
 
-Mode and color scheme are persisted independently to `localStorage` and restored on page load.
+Mode and color scheme are kept in their own cookies and restored on page load — read on the server too, when a route is rendered per request, so a dark page is drawn dark from the first paint. (`system` needs the browser: the server draws it light.)
 
 ## Accessibility
 

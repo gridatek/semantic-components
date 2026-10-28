@@ -2,6 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import {
   Component,
   DestroyRef,
+  type OnInit,
   ViewEncapsulation,
   afterNextRender,
   computed,
@@ -14,10 +15,11 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
+import { ScCookies } from '../../utilities/cookies/cookies';
 import { cn } from '../../utils';
 import { ScSidebarState } from './sidebar-state';
 
-const SIDEBAR_STORAGE_KEY = 'sc-sidebar-state';
+const SIDEBAR_COOKIE = 'sc-sidebar-state';
 const SIDEBAR_KEYBOARD_SHORTCUT = 'b';
 const MOBILE_QUERY = '(max-width: 767.98px)';
 
@@ -34,7 +36,7 @@ const MOBILE_QUERY = '(max-width: 767.98px)';
   },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScSidebarProvider {
+export class ScSidebarProvider implements OnInit {
   readonly state = inject(ScSidebarState);
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -43,10 +45,11 @@ export class ScSidebarProvider {
   readonly open = model<boolean>(true);
 
   /**
-   * localStorage key the open state is persisted under. Give each independent
-   * sidebar its own key; `null` disables persistence.
+   * The cookie the open state is kept in — read on the server too, so the page
+   * is drawn as left. Give each independent sidebar its own; `null` keeps
+   * nothing.
    */
-  readonly storageKey = input<string | null>(SIDEBAR_STORAGE_KEY);
+  readonly cookie = input<string | null>(SIDEBAR_COOKIE);
 
   protected readonly class = computed(() =>
     cn(
@@ -57,6 +60,7 @@ export class ScSidebarProvider {
 
   private readonly router = inject(Router);
   private readonly window = inject(DOCUMENT).defaultView;
+  private readonly cookies = inject(ScCookies);
   /** Saved only once the saved state is read: not over it. */
   private readonly restored = signal(false);
 
@@ -65,9 +69,9 @@ export class ScSidebarProvider {
     effect(() => this.state.setOpen(this.open()));
     effect(() => this.open.set(this.state.open()));
 
-    // Save to localStorage when state changes
+    // Saved when it changes, once read (ngOnInit).
     effect(() => {
-      if (this.restored()) this.saveToStorage(this.state.open());
+      if (this.restored()) this.saveState(this.state.open());
     });
 
     // Close mobile sidebar on navigation
@@ -79,14 +83,10 @@ export class ScSidebarProvider {
       )
       .subscribe(() => this.state.setOpenMobile(false));
 
-    // The saved state and the screen size: the browser's, so after the
-    // first render (the server renders the sidebar open, on a wide screen).
+    // The screen size: the browser's, so after the first render (the server
+    // renders a wide screen).
     const destroyRef = inject(DestroyRef);
     afterNextRender(() => {
-      const savedState = this.loadFromStorage();
-      if (savedState !== null) this.open.set(savedState);
-      this.restored.set(true);
-
       const mobile = this.window?.matchMedia(MOBILE_QUERY);
       if (!mobile) return;
       const update = () => this.state.setIsMobile(mobile.matches);
@@ -107,26 +107,21 @@ export class ScSidebarProvider {
     }
   }
 
-  private saveToStorage(open: boolean): void {
-    const key = this.storageKey();
-    if (!key) return;
-    try {
-      this.window?.localStorage.setItem(key, String(open));
-    } catch (error) {
-      // localStorage unavailable
-      console.warn('Unable to save sidebar state to localStorage:', error);
-    }
+  /** The saved state, once the inputs are set — on the server too, so the page is drawn as left. */
+  ngOnInit(): void {
+    const saved = this.loadState();
+    if (saved !== null) this.open.set(saved);
+    this.restored.set(true);
   }
 
-  private loadFromStorage(): boolean | null {
-    const key = this.storageKey();
-    if (!key) return null;
-    try {
-      const value = this.window?.localStorage.getItem(key) ?? null;
-      return value !== null ? value === 'true' : null;
-    } catch (error) {
-      console.warn('Unable to load sidebar state from localStorage:', error);
-      return null;
-    }
+  private saveState(open: boolean): void {
+    const name = this.cookie();
+    if (name) this.cookies.set(name, String(open));
+  }
+
+  private loadState(): boolean | null {
+    const name = this.cookie();
+    const value = name ? this.cookies.get(name) : null;
+    return value === null ? null : value === 'true';
   }
 }

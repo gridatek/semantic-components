@@ -1,3 +1,4 @@
+import { DOCUMENT } from '@angular/common';
 import {
   InjectionToken,
   Service,
@@ -6,21 +7,24 @@ import {
   inject,
   signal,
 } from '@angular/core';
+import { ScCookies } from '../../utilities/cookies/cookies';
 
 export type ScThemeMode = 'light' | 'dark' | 'system';
 
 export interface ScThemeConfig {
   defaultMode: ScThemeMode;
   defaultColorScheme: string;
-  modeStorageKey: string;
-  colorSchemeStorageKey: string;
+  /** The cookie the mode is kept in. */
+  modeCookie: string;
+  /** The cookie the color scheme is kept in. */
+  colorSchemeCookie: string;
 }
 
 const defaultConfig: ScThemeConfig = {
   defaultMode: 'system',
   defaultColorScheme: 'default',
-  modeStorageKey: 'sc-theme-mode',
-  colorSchemeStorageKey: 'sc-theme-color',
+  modeCookie: 'sc-theme-mode',
+  colorSchemeCookie: 'sc-theme-color',
 };
 
 export const SC_THEME_CONFIG = new InjectionToken<Partial<ScThemeConfig>>(
@@ -34,14 +38,17 @@ export class ScThemeManager {
     ...inject(SC_THEME_CONFIG, { optional: true }),
   };
 
+  private readonly cookies = inject(ScCookies);
+  private readonly document = inject(DOCUMENT);
+
+  // None on the server: there, "system" is light.
   private readonly darkMediaQuery =
-    typeof window !== 'undefined'
-      ? window.matchMedia('(prefers-color-scheme: dark)')
-      : null;
+    this.document.defaultView?.matchMedia?.('(prefers-color-scheme: dark)') ??
+    null;
 
   readonly mode = signal<ScThemeMode>(
     this.getStored(
-      this.config.modeStorageKey,
+      this.config.modeCookie,
       this.config.defaultMode,
       this.isValidMode,
     ),
@@ -49,7 +56,7 @@ export class ScThemeManager {
 
   readonly colorScheme = signal<string>(
     this.getStored(
-      this.config.colorSchemeStorageKey,
+      this.config.colorSchemeCookie,
       this.config.defaultColorScheme,
     ),
   );
@@ -84,7 +91,7 @@ export class ScThemeManager {
 
   setMode(mode: ScThemeMode): void {
     this.mode.set(mode);
-    this.store(this.config.modeStorageKey, mode);
+    this.store(this.config.modeCookie, mode);
   }
 
   toggleMode(): void {
@@ -94,7 +101,7 @@ export class ScThemeManager {
 
   setColorScheme(colorScheme: string): void {
     this.colorScheme.set(colorScheme);
-    this.store(this.config.colorSchemeStorageKey, colorScheme);
+    this.store(this.config.colorSchemeCookie, colorScheme);
   }
 
   private isValidMode(value: string): value is ScThemeMode {
@@ -106,10 +113,7 @@ export class ScThemeManager {
     fallback: T,
     validate?: (value: string) => value is T,
   ): T {
-    if (typeof localStorage === 'undefined') {
-      return fallback;
-    }
-    const stored = localStorage.getItem(key);
+    const stored = this.cookies.get(key);
     if (stored && (!validate || validate(stored))) {
       return stored as T;
     }
@@ -117,9 +121,7 @@ export class ScThemeManager {
   }
 
   private store(key: string, value: string): void {
-    if (typeof localStorage !== 'undefined') {
-      localStorage.setItem(key, value);
-    }
+    this.cookies.set(key, value);
   }
 
   private getSystemMode(): 'light' | 'dark' {
@@ -127,10 +129,7 @@ export class ScThemeManager {
   }
 
   private applyMode(mode: 'light' | 'dark'): void {
-    if (typeof document === 'undefined') {
-      return;
-    }
-    const root = document.documentElement;
+    const root = this.document.documentElement;
     if (mode === 'dark') {
       root.classList.add('dark');
     } else {
@@ -139,10 +138,7 @@ export class ScThemeManager {
   }
 
   private applyColorScheme(colorScheme: string): void {
-    if (typeof document === 'undefined') {
-      return;
-    }
-    const root = document.documentElement;
+    const root = this.document.documentElement;
     if (colorScheme === 'default') {
       root.removeAttribute('data-theme');
     } else {

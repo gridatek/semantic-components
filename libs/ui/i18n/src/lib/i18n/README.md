@@ -49,7 +49,7 @@ The translations, one file per locale but the source one: `public/i18n/<id>.json
 
 ## What `loadLocale()` does
 
-- **Picks** the locale chosen before (`localStorage`, `storageKey`), else the first of the browser's languages offered (or its base: `fr` for `fr-CA`), else the source one. A stored ID not offered is ignored.
+- **Picks** the locale chosen before (its cookie, `cookie`: `sc-locale` by default), else the first of the browser's languages offered (or its base: `fr` for `fr-CA`), else the source one. A stored ID not offered is ignored.
 - **Loads** its translations and locale data together; if either fails, the source locale, with an error in the console. A message missing from a file shows the source text.
 - **Sets** `<html lang>`, `<html dir>` (the locale's `dir`; left out, `Intl.Locale#getTextInfo()`'s) and `$localize.locale`, before the app starts. Angular's `LOCALE_ID` follows `$localize.locale` — and the library's dates, numbers and calendars follow `LOCALE_ID`, with nothing to provide; the CDK's direction is right from the first render.
 
@@ -71,6 +71,6 @@ A switcher of yours:
 ## Limits
 
 - Switching reloads the page: templates are translated once, when created.
-- No locale in the URL: the choice lives in `localStorage` — no per-locale links or SEO.
+- No locale in the URL: the choice lives in a cookie — no per-locale links or SEO.
 - Missing translations are not checked at build time: check them in CI.
-- In the browser. The server renders the source locale, with nothing to do: `LOCALE_ID` falls back to Angular's `en-US`, `ScI18n.locale` to its base or the source locale.
+- In the browser. A server renders the source locale: Angular evaluates a component's messages once per process (when it first creates its template), so one server can't render requests in different locales. Server-rendered locales need Angular's build-time i18n — a build per locale.

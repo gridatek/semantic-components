@@ -31,7 +31,7 @@ import { SiPanelRightIcon } from '@semantic-icons/lucide-icons';
     SiPanelRightIcon,
   ],
   template: `
-    <div scSidebarProvider [storageKey]="null">
+    <div scSidebarProvider [cookie]="null">
       <main scSidebarInset aria-label="Floating example content">
         <header class="flex h-14 shrink-0 items-center gap-2 border-b px-4">
           <h2 class="text-sm font-medium">Floating, on the right</h2>

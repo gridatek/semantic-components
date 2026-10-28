@@ -1,11 +1,11 @@
 import { DOCUMENT } from '@angular/common';
 import { LOCALE_ID, Service, inject } from '@angular/core';
-import { SC_CONFIG } from '@semantic-components/ui';
+import { SC_CONFIG, ScCookies } from '@semantic-components/ui';
 import {
   type ScI18nConfig,
   type ScLocale,
+  cookieName,
   localeDir,
-  storageKey,
 } from './i18n-config';
 
 /**
@@ -17,6 +17,7 @@ import {
 @Service()
 export class ScI18n {
   private readonly document = inject(DOCUMENT);
+  private readonly cookies = inject(ScCookies);
   private readonly config: ScI18nConfig = inject(SC_CONFIG).i18n ?? {
     sourceLocale: 'en',
     locales: [],
@@ -42,12 +43,7 @@ export class ScI18n {
       !this.locales.some((locale) => locale.id === id)
     )
       return;
-    try {
-      localStorage.setItem(storageKey(this.config), id);
-    } catch {
-      // No storage: the choice can't be kept.
-      return;
-    }
+    this.cookies.set(cookieName(this.config), id);
     this.document.defaultView?.location.reload();
   }
 

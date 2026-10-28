@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation, inject, signal } from '@angular/core';
 import { DataTable } from './data-table';
-import { columns } from './data-table-columns';
+import { userColumns } from './data-table-columns';
 import type { User } from './user.service';
 import { UserService } from './user.service';
 
@@ -26,7 +26,7 @@ import { UserService } from './user.service';
 export default class DataTablePage {
   private readonly userService = inject(UserService);
 
-  readonly columns = columns;
+  readonly columns = userColumns();
   readonly data = signal<User[]>(this.userService.getUsers());
 
   onEditSave(event: { row: User; columnId: string; value: string }): void {

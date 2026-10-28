@@ -1,9 +1,19 @@
 import { type Page, expect, test } from '@playwright/test';
 
-// Translated in the browser: the `ssr` build renders the source locale.
+// Translated in the browser: the `ssr` build renders the source locale —
+// Angular evaluates a template's messages once per process.
 test.skip(!!process.env['SSR'], 'i18n is browser-only');
 
 const heading = (page: Page) => page.getByRole('heading', { level: 1 });
+
+/** The locale chosen before: its cookie, which the server reads too. */
+async function chooseLocale(page: Page, id: string): Promise<void> {
+  await page
+    .context()
+    .addCookies([
+      { name: 'sc-locale', value: id, url: test.info().project.use.baseURL },
+    ]);
+}
 
 test.describe('i18n: the browser’s language', () => {
   test('English: the source locale', async ({ page }) => {
@@ -30,7 +40,7 @@ test.describe('i18n: the browser’s language', () => {
 });
 
 test('i18n: a saved choice — Arabic, right to left', async ({ page }) => {
-  await page.addInitScript(() => localStorage.setItem('sc-locale', 'ar'));
+  await chooseLocale(page, 'ar');
   await page.goto('/');
   await expect(heading(page)).toHaveText('ابنِ شيئًا مذهلًا');
   await expect(page.locator('html')).toHaveAttribute('lang', 'ar');
@@ -64,7 +74,7 @@ test('i18n: translations not loaded — English', async ({ page }) => {
   page.on('console', (message) => {
     if (message.type() === 'error') errors.push(message.text());
   });
-  await page.addInitScript(() => localStorage.setItem('sc-locale', 'fr'));
+  await chooseLocale(page, 'fr');
   await page.route('**/i18n/fr.json', (route) =>
     route.fulfill({ status: 404 }),
   );

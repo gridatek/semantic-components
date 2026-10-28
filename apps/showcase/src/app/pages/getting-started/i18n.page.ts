@@ -110,10 +110,7 @@ interface Step {
         <h2 scHeading appToc>How the locale is chosen</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
-            The one chosen before (kept in
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >localStorage</code
-            >), if it is still offered.
+            The one chosen before (kept in a cookie), if it is still offered.
           </li>
           <li>
             Else the first of the browser's languages that the app offers — or
@@ -190,7 +187,9 @@ interface Step {
           </li>
           <li>
             It runs in the browser: a server-rendered page is in the source
-            locale.
+            locale — Angular evaluates a component's messages once per server
+            process, so server-rendered locales need its build-time i18n, a
+            build per locale.
           </li>
         </ul>
       </section>

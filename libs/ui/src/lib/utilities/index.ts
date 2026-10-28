@@ -1,3 +1,4 @@
+export * from './cookies';
 export * from './copy-to-clipboard';
 export * from './focus-trap';
 export * from './hotkey';

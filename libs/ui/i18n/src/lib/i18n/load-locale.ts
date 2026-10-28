@@ -1,6 +1,12 @@
 import { registerLocaleData } from '@angular/common';
 import { loadTranslations } from '@angular/localize';
-import { type ScI18nConfig, localeDir, storageKey } from './i18n-config';
+import { readCookie } from '@semantic-components/ui';
+import {
+  type ScI18nConfig,
+  chooseLocale,
+  cookieName,
+  localeDir,
+} from './i18n-config';
 
 /**
  * Before bootstrapping, in `main.ts` (the app's code imported after it):
@@ -10,7 +16,11 @@ import { type ScI18nConfig, localeDir, storageKey } from './i18n-config';
  * If they fail to load: the source locale. In the browser.
  */
 export async function loadLocale(config: ScI18nConfig): Promise<void> {
-  let locale = chosenLocale(config);
+  let locale = chooseLocale(
+    config,
+    readCookie(document.cookie, cookieName(config)),
+    navigator.languages,
+  );
   if (locale !== config.sourceLocale) {
     try {
       const [translations, data] = await Promise.all([
@@ -31,27 +41,6 @@ export async function loadLocale(config: ScI18nConfig): Promise<void> {
   const html = document.documentElement;
   html.lang = locale;
   html.dir = localeDir(config, locale);
-}
-
-/** The locale chosen before, else the first of the browser's offered (or its base: `fr` for `fr-CA`), else the source one. */
-function chosenLocale(config: ScI18nConfig): string {
-  const offered = (id: string | null | undefined) =>
-    config.locales.find(
-      (locale) => locale.id.toLowerCase() === id?.toLowerCase(),
-    )?.id;
-  let stored: string | null = null;
-  try {
-    stored = localStorage.getItem(storageKey(config));
-  } catch {
-    // No storage: the browser's locale.
-  }
-  const chosen = offered(stored);
-  if (chosen) return chosen;
-  for (const tag of navigator.languages) {
-    const match = offered(tag) ?? offered(tag.split('-')[0]);
-    if (match) return match;
-  }
-  return config.sourceLocale;
 }
 
 async function fetchTranslations(id: string): Promise<Record<string, string>> {

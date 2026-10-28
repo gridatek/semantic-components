@@ -7,7 +7,6 @@ test.describe('Icon Sidebar Demo', () => {
   }) => {
     const errors = collectErrors(page);
     await page.goto('/demos/sidebar/icon-sidebar-demo');
-    await page.evaluate(() => localStorage.removeItem('sc-sidebar-state'));
     const trigger = page.getByRole('button', {
       name: 'Toggle sidebar',
       exact: true,
@@ -24,10 +23,11 @@ test.describe('Icon Sidebar Demo', () => {
       page.getByRole('button', { name: 'Dashboard' }),
     ).toHaveAttribute('aria-current', 'page');
 
-    // [storageKey]="null": the demo never writes the shared key.
-    expect(
-      await page.evaluate(() => localStorage.getItem('sc-sidebar-state')),
-    ).toBeNull();
+    // [cookie]="null": the demo never writes the shared cookie.
+    const cookies = await page.context().cookies();
+    expect(cookies.map((cookie) => cookie.name)).not.toContain(
+      'sc-sidebar-state',
+    );
     expect(errors).toEqual([]);
   });
 });
