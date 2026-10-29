@@ -4112,6 +4112,39 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/questionnaire',
+    children: [
+      {
+        path: 'basic-questionnaire-demo',
+        loadComponent: () =>
+          import('../pages/docs/questionnaire/demos/basic-questionnaire-demo').then(
+            (m) => m.BasicQuestionnaireDemo,
+          ),
+      },
+      {
+        path: 'multiple-questionnaire-demo',
+        loadComponent: () =>
+          import('../pages/docs/questionnaire/demos/multiple-questionnaire-demo').then(
+            (m) => m.MultipleQuestionnaireDemo,
+          ),
+      },
+      {
+        path: 'shortcuts-questionnaire-demo',
+        loadComponent: () =>
+          import('../pages/docs/questionnaire/demos/shortcuts-questionnaire-demo').then(
+            (m) => m.ShortcutsQuestionnaireDemo,
+          ),
+      },
+      {
+        path: 'rtl-questionnaire-demo',
+        loadComponent: () =>
+          import('../pages/docs/questionnaire/demos/rtl-questionnaire-demo').then(
+            (m) => m.RtlQuestionnaireDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/trace',
     children: [
       {

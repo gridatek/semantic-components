@@ -88,6 +88,7 @@ export * from './masonry-grid';
 export * from './mention-input';
 export * from './message';
 export * from './message-scroller';
+export * from './questionnaire';
 export * from './trace';
 export * from './native-dialog';
 export * from './navbar';

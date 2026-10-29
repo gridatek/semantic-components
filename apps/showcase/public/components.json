@@ -736,6 +736,14 @@
     "category": "Utilities"
   },
   {
+    "name": "Questionnaire",
+    "path": "questionnaire",
+    "description": "Questions one at a time on your Signal Form: checked before moving on, skipped when optional, picked by keys.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Forms"
+  },
+  {
     "name": "Radar Chart",
     "path": "radar-chart",
     "description": "Series as polygons over the categories, each on its spoke: filled or outlined, with dots, on a polygon or circle grid.",

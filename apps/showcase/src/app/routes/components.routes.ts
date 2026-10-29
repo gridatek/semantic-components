@@ -705,6 +705,12 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/message-scroller/message-scroller-page'),
       },
       {
+        path: 'questionnaire',
+        title: 'Questionnaire - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/questionnaire/questionnaire-page'),
+      },
+      {
         path: 'trace',
         title: 'Trace - Semantic Components',
         loadComponent: () => import('../pages/docs/trace/trace-page'),
