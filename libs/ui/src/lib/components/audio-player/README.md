@@ -50,7 +50,7 @@ Focused in the player: Space or K play / pause, J / L ±10 s, ← / → ±5 s, �
 ## Accessibility
 
 - Name the player (`aria-label`), every button (visually hidden text) and the sliders; write the seek's (or the waveform's) `aria-valuetext` with `formatTime()`.
-- Mute, Shuffle, Repeat and a speed are `aria-pressed`; write Repeat's name from `player.repeat()`.
+- Mute, Shuffle and a speed are `aria-pressed`. Repeat has three modes, so it isn't: write its name from `player.repeat()` ("Repeat: all"), its `data-state` is the mode.
 - Next track is disabled after the last track (unless repeating them all).
 
 ## Not here

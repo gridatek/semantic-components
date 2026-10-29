@@ -58,10 +58,11 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
         <button scPasswordToggle>
           @if (password.visible()) {
             <svg siEyeOffIcon></svg>
+            <span class="sr-only">Hide key</span>
           } @else {
             <svg siEyeIcon></svg>
+            <span class="sr-only">Show key</span>
           }
-          <span class="sr-only">Show key</span>
         </button>
       </div>
     </div>

@@ -12,10 +12,11 @@ A password field: its label, the input and a button to show or hide the password
     <button scPasswordToggle>
       @if (password.visible()) {
       <svg siEyeOffIcon></svg>
+      <span class="sr-only">Hide password</span>
       } @else {
       <svg siEyeIcon></svg>
-      }
       <span class="sr-only">Show password</span>
+      }
     </button>
   </div>
   <p scFieldDescription>The one you signed up with.</p>
@@ -48,18 +49,18 @@ A new password, with what helps choosing it:
 
 ## Parts
 
-| Part                         | What it does                                                                                                                                                                                                                      |
-| ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `div[scPasswordField]`       | The whole field — a `scField` underneath (`id`, `orientation`, `invalid`, `disabled`): the label, `scFieldDescription`, `scFieldErrors` work as in any field. `visible` (two-way, `false`). `exportAs`: `visible()`, `capsLock()` |
-| `div[scPasswordGroup]`       | The box around the input and the toggle: one border, one focus ring, red when invalid                                                                                                                                             |
-| `input[scPasswordInput]`     | Hidden, or text while visible. `autocomplete` (`current-password`, `new-password`, `off`), `ignorePasswordManagers` (a key, a code). Never spellchecked, capitalised or corrected. Signal Forms `[formField]`                     |
-| `button[scPasswordToggle]`   | Shows or hides: `aria-pressed`, `aria-controls` the input; a click leaves the caret in the input. The preset's button: `variant` (`ghost`), `size` (`icon-sm`). Your icons and its name inside                                    |
-| `[scPasswordCapsLock]`       | Your warning, while Caps Lock is on and the input has the focus — a polite live region                                                                                                                                            |
-| `div[scPasswordStrength]`    | `score` 0 (nothing yet) to 4 (strong) as four segments; a meter — name it (`aria-label`). From your rules or an estimator (zxcvbn-ts: its 0–4 as at least 1 once there is a password)                                             |
-| `[scPasswordStrengthLabel]`  | The strength in your words: the meter's value                                                                                                                                                                                     |
-| `ul[scPasswordRequirements]` | Your rules, read with the input (`aria-describedby`)                                                                                                                                                                              |
-| `li[scPasswordRequirement]`  | A rule: `met` (`data-met`). Your text, your icons, and the state in words (`sr-only`)                                                                                                                                             |
-| `button[scPasswordGenerate]` | A strong password into your form, shown: `length` (16), `lower`, `upper`, `digits`, `symbols` (all on; one at least of each; look-alikes left out) — from `crypto`. `variant` (`outline`), `size` (`sm`)                          |
+| Part                         | What it does                                                                                                                                                                                                                                                                                           |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `div[scPasswordField]`       | The whole field — a `scField` underneath (`id`, `orientation`, `invalid`, `disabled`): the label, `scFieldDescription`, `scFieldErrors` work as in any field. `visible` (two-way, `false`). `exportAs`: `visible()`, `capsLock()`                                                                      |
+| `div[scPasswordGroup]`       | The box around the input and the toggle: one border, one focus ring, red when invalid                                                                                                                                                                                                                  |
+| `input[scPasswordInput]`     | Hidden, or text while visible. `autocomplete` (`current-password`, `new-password`, `off`), `ignorePasswordManagers` (a key, a code). Never spellchecked, capitalised or corrected. Signal Forms `[formField]`                                                                                          |
+| `button[scPasswordToggle]`   | Shows or hides: `aria-controls` the input, `data-state` (`visible`, `hidden`); its name follows the state ("Show password", "Hide password") — not `aria-pressed`; a click leaves the caret in the input. The preset's button: `variant` (`ghost`), `size` (`icon-sm`). Your icons and its name inside |
+| `[scPasswordCapsLock]`       | Your warning, while Caps Lock is on and the input has the focus — a polite live region                                                                                                                                                                                                                 |
+| `div[scPasswordStrength]`    | `score` 0 (nothing yet) to 4 (strong) as four segments; a meter — name it (`aria-label`). From your rules or an estimator (zxcvbn-ts: its 0–4 as at least 1 once there is a password)                                                                                                                  |
+| `[scPasswordStrengthLabel]`  | The strength in your words: the meter's value                                                                                                                                                                                                                                                          |
+| `ul[scPasswordRequirements]` | Your rules, read with the input (`aria-describedby`)                                                                                                                                                                                                                                                   |
+| `li[scPasswordRequirement]`  | A rule: `met` (`data-met`). Your text, your icons, and the state in words (`sr-only`)                                                                                                                                                                                                                  |
+| `button[scPasswordGenerate]` | A strong password into your form, shown: `length` (16), `lower`, `upper`, `digits`, `symbols` (all on; one at least of each; look-alikes left out) — from `crypto`. `variant` (`outline`), `size` (`sm`)                                                                                               |
 
 ## Keyboard and screen readers
 

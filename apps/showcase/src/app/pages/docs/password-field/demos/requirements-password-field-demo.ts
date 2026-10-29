@@ -44,10 +44,11 @@ import {
         <button scPasswordToggle>
           @if (password.visible()) {
             <svg siEyeOffIcon></svg>
+            <span class="sr-only">Hide password</span>
           } @else {
             <svg siEyeIcon></svg>
+            <span class="sr-only">Show password</span>
           }
-          <span class="sr-only">Show password</span>
         </button>
       </div>
       <ul scPasswordRequirements>

@@ -5,13 +5,17 @@ import { cn } from '../../utils/cn/cn';
 import { type ScButtonVariants } from '../button/button';
 import { ScAudioPlayer } from './audio-player';
 
-/** Repeat: off, all, one — in turn; pressed while on. Write its icon and its name from `player.repeat()` ("Repeat: all"). */
+/**
+ * Repeat: off, all, one — in turn. Three states, not a toggle button
+ * (`aria-pressed` has two): write its icon and its name from `player.repeat()`
+ * ("Repeat: all"); `data-state` is the mode, for styling.
+ */
 @Directive({
   selector: 'button[scAudioPlayerRepeat]',
   host: {
     type: 'button',
     'data-slot': 'audio-player-repeat',
-    '[attr.aria-pressed]': "player.repeat() !== 'off'",
+    '[attr.data-state]': 'player.repeat()',
     '[class]': 'class()',
     '(click)': 'cycle()',
   },
@@ -28,7 +32,7 @@ export class ScAudioPlayerRepeat {
   protected readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
-      'aria-pressed:bg-accent aria-pressed:text-accent-foreground',
+      'data-[state=all]:bg-accent data-[state=all]:text-accent-foreground data-[state=one]:bg-accent data-[state=one]:text-accent-foreground',
       this.classInput(),
     ),
   );

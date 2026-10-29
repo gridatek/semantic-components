@@ -36,23 +36,26 @@ test('Password Field: the toggle shows it, the caret stays', async ({
 }) => {
   await page.goto(demo('basic'));
   const input = password(page);
-  const toggle = page.getByRole('button', { name: 'Show password' });
-  await expect(toggle).toHaveAttribute('aria-pressed', 'false');
-  await expect(toggle).toHaveAttribute(
+  const show = page.getByRole('button', { name: 'Show password' });
+  // Not a toggle button: its name says what a press does.
+  await expect(show).not.toHaveAttribute('aria-pressed');
+  await expect(show).toHaveAttribute(
     'aria-controls',
     (await input.getAttribute('id')) ?? '',
   );
   await input.fill('hunter22');
-  await toggle.click();
+  await show.click();
   await expect(input).toHaveAttribute('type', 'text');
-  await expect(toggle).toHaveAttribute('aria-pressed', 'true');
+  const hide = page.getByRole('button', { name: 'Hide password' });
+  await expect(hide).toHaveAttribute('data-state', 'visible');
   await expect(input).toBeFocused();
   await page.keyboard.type('!');
   await expect(input).toHaveValue('hunter22!');
   // The keyboard reaches it too.
-  await toggle.focus();
+  await hide.focus();
   await page.keyboard.press('Enter');
   await expect(input).toHaveAttribute('type', 'password');
+  await expect(show).toBeVisible();
 });
 
 test('Shown: open at first, for a key password managers ignore', async ({
@@ -63,8 +66,9 @@ test('Shown: open at first, for a key password managers ignore', async ({
   await expect(input).toHaveAttribute('type', 'text');
   await expect(input).toHaveAttribute('data-1p-ignore', '');
   await expect(input).toHaveAttribute('data-lpignore', 'true');
-  await page.getByRole('button', { name: 'Show key' }).click();
+  await page.getByRole('button', { name: 'Hide key' }).click();
   await expect(page.getByText('Shown: false')).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Show key' })).toBeVisible();
 });
 
 test('Disabled: the input and the toggle', async ({ page }) => {

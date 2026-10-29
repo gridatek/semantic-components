@@ -45,10 +45,11 @@ import {
           <button scPasswordToggle>
             @if (password.visible()) {
               <svg siEyeOffIcon></svg>
+              <span class="sr-only">إخفاء كلمة المرور</span>
             } @else {
               <svg siEyeIcon></svg>
+              <span class="sr-only">إظهار كلمة المرور</span>
             }
-            <span class="sr-only">إظهار كلمة المرور</span>
           </button>
         </div>
         <p scPasswordCapsLock>

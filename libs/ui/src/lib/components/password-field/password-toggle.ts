@@ -5,17 +5,18 @@ import type { ScButtonVariants } from '../button/button';
 import { ScPasswordField } from './password-field';
 
 /**
- * Shows or hides the password: pressed while shown (`aria-pressed`), naming
- * the input it controls. A click leaves the caret in the input. Your icons
- * and its name inside — `#password="scPasswordField"`, then
- * `password.visible()` to switch the icon.
+ * Shows or hides the password, naming the input it controls; a click leaves
+ * the caret in the input. Your icons and its name inside, both following the
+ * state — "Show password", then "Hide password" — with
+ * `#password="scPasswordField"` and `@if (password.visible())`. Not a
+ * toggle button (`aria-pressed`): its name says what a press does.
  */
 @Directive({
   selector: 'button[scPasswordToggle]',
   host: {
     'data-slot': 'password-toggle',
     type: 'button',
-    '[attr.aria-pressed]': 'password.visible()',
+    '[attr.data-state]': 'password.visible() ? "visible" : "hidden"',
     '[attr.aria-controls]': 'password.field.id()',
     '[disabled]': 'password.disabled()',
     '[class]': 'class()',

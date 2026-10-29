@@ -48,9 +48,10 @@ test.describe('Player', () => {
       page.getByRole('button', { name: 'Next track' }),
     ).toBeDisabled();
     await page.getByRole('button', { name: 'Repeat: off' }).click();
-    await expect(
-      page.getByRole('button', { name: 'Repeat: all' }),
-    ).toHaveAttribute('aria-pressed', 'true');
+    // Three modes: its name says which, not aria-pressed.
+    const repeat = page.getByRole('button', { name: 'Repeat: all' });
+    await expect(repeat).toHaveAttribute('data-state', 'all');
+    await expect(repeat).not.toHaveAttribute('aria-pressed');
     await expect(
       page.getByRole('button', { name: 'Next track' }),
     ).toBeEnabled();

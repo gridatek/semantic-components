@@ -57,10 +57,11 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
         <button scPasswordToggle>
           @if (password.visible()) {
             <svg siEyeOffIcon></svg>
+            <span class="sr-only">Hide password</span>
           } @else {
             <svg siEyeIcon></svg>
+            <span class="sr-only">Show password</span>
           }
-          <span class="sr-only">Show password</span>
         </button>
       </div>
       <div scPasswordStrength [score]="score()" aria-label="Password strength">
