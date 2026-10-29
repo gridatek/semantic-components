@@ -2855,41 +2855,69 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/password',
+    path: 'demos/password-field',
     children: [
       {
-        path: 'basic-password-demo',
+        path: 'basic-password-field-demo',
         loadComponent: () =>
-          import('../pages/docs/password/demos/basic-password-demo').then(
-            (m) => m.BasicPasswordDemo,
+          import('../pages/docs/password-field/demos/basic-password-field-demo').then(
+            (m) => m.BasicPasswordFieldDemo,
           ),
       },
       {
-        path: 'show-default-password-demo',
+        path: 'visible-password-field-demo',
         loadComponent: () =>
-          import('../pages/docs/password/demos/show-default-password-demo').then(
-            (m) => m.ShowDefaultPasswordDemo,
+          import('../pages/docs/password-field/demos/visible-password-field-demo').then(
+            (m) => m.VisiblePasswordFieldDemo,
           ),
       },
       {
-        path: 'disabled-password-demo',
+        path: 'disabled-password-field-demo',
         loadComponent: () =>
-          import('../pages/docs/password/demos/disabled-password-demo').then(
-            (m) => m.DisabledPasswordDemo,
+          import('../pages/docs/password-field/demos/disabled-password-field-demo').then(
+            (m) => m.DisabledPasswordFieldDemo,
           ),
       },
       {
-        path: 'new-password-demo',
+        path: 'form-password-field-demo',
         loadComponent: () =>
-          import('../pages/docs/password/demos/new-password-demo').then(
-            (m) => m.NewPasswordDemo,
+          import('../pages/docs/password-field/demos/form-password-field-demo').then(
+            (m) => m.FormPasswordFieldDemo,
           ),
       },
       {
-        path: 'signal-forms-password-demo',
+        path: 'caps-lock-password-field-demo',
         loadComponent: () =>
-          import('../pages/docs/password/demos/signal-forms-password-demo').then(
-            (m) => m.SignalFormsPasswordDemo,
+          import('../pages/docs/password-field/demos/caps-lock-password-field-demo').then(
+            (m) => m.CapsLockPasswordFieldDemo,
+          ),
+      },
+      {
+        path: 'strength-password-field-demo',
+        loadComponent: () =>
+          import('../pages/docs/password-field/demos/strength-password-field-demo').then(
+            (m) => m.StrengthPasswordFieldDemo,
+          ),
+      },
+      {
+        path: 'requirements-password-field-demo',
+        loadComponent: () =>
+          import('../pages/docs/password-field/demos/requirements-password-field-demo').then(
+            (m) => m.RequirementsPasswordFieldDemo,
+          ),
+      },
+      {
+        path: 'generate-password-field-demo',
+        loadComponent: () =>
+          import('../pages/docs/password-field/demos/generate-password-field-demo').then(
+            (m) => m.GeneratePasswordFieldDemo,
+          ),
+      },
+      {
+        path: 'rtl-password-field-demo',
+        loadComponent: () =>
+          import('../pages/docs/password-field/demos/rtl-password-field-demo').then(
+            (m) => m.RtlPasswordFieldDemo,
           ),
       },
     ],

@@ -28,12 +28,7 @@ import {
 
 @Component({
   selector: 'app-circle-progress-demo',
-  imports: [
-    PercentPipe,
-    ScProgress,
-    ScProgressCircle,
-    ScProgressValueText,
-  ],
+  imports: [PercentPipe, ScProgress, ScProgressCircle, ScProgressValueText],
   template: \`
     <div class="flex flex-wrap items-center gap-6">
       @for (value of values; track value) {
@@ -42,12 +37,7 @@ import {
           <span scProgressValueText>{{ value / 100 | percent }}</span>
         </div>
       }
-      <div
-        scProgress
-        [value]="60"
-        aria-label="Storage used"
-        class="size-24"
-      >
+      <div scProgress [value]="60" aria-label="Storage used" class="size-24">
         <svg scProgressCircle [thickness]="4"></svg>
         <span scProgressValueText>{{ 0.6 | percent }}</span>
       </div>

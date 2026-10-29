@@ -39,7 +39,7 @@ export * from './navigation-menu';
 export * from './number-field';
 export * from './otp-field';
 export * from './pagination';
-export * from './password';
+export * from './password-field';
 export * from './popover';
 export * from './progress';
 export * from './radio-group';

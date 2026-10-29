@@ -3,8 +3,8 @@ import { TestBed } from '@angular/core/testing';
 import { FormField, disabled, form, required } from '@angular/forms/signals';
 import {
   ScInput,
+  ScPasswordField,
   ScPasswordInput,
-  ScPasswordProvider,
   ScPasswordToggle,
   ScTextarea,
 } from '@semantic-components/ui';
@@ -144,9 +144,9 @@ describe('text controls and form state', () => {
 });
 
 @Component({
-  imports: [ScPasswordProvider, ScPasswordInput, FormField],
+  imports: [ScPasswordField, ScPasswordInput, FormField],
   template: `
-    <div scPasswordProvider>
+    <div scPasswordField>
       <input scPasswordInput [formField]="f.name" />
     </div>
   `,
@@ -159,9 +159,9 @@ class PasswordFormHost {
 }
 
 @Component({
-  imports: [ScPasswordProvider, ScPasswordInput, FormField],
+  imports: [ScPasswordField, ScPasswordInput, FormField],
   template: `
-    <div scPasswordProvider>
+    <div scPasswordField>
       <input scPasswordInput [formField]="f.name" />
     </div>
   `,
@@ -196,9 +196,9 @@ describe('password input and form state', () => {
 });
 
 @Component({
-  imports: [ScPasswordProvider, ScPasswordInput, ScPasswordToggle, FormField],
+  imports: [ScPasswordField, ScPasswordInput, ScPasswordToggle, FormField],
   template: `
-    <div scPasswordProvider>
+    <div scPasswordField>
       <input scPasswordInput [formField]="f.name" />
       <button scPasswordToggle type="button">show</button>
     </div>
@@ -231,7 +231,7 @@ describe('password toggle disabled', () => {
     fixture.detectChanges();
 
     // The toggle is a sibling of the input, so it cannot see the field
-    // directly; ScPasswordProvider queries it and passes the state along.
+    // directly; ScPasswordField queries it and passes the state along.
     expect(toggle(fixture).disabled).toBe(true);
   });
 });

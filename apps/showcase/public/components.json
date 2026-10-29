@@ -672,9 +672,9 @@
     "category": "Navigation"
   },
   {
-    "name": "Password",
-    "path": "password",
-    "description": "A composable password input with visibility toggle.",
+    "name": "Password Field",
+    "path": "password-field",
+    "description": "A password field: show or hide it, Caps Lock warning, strength, rules and a generator, on your Signal Form.",
     "status": "Experimental",
     "library": "ui",
     "category": "Forms"
