@@ -400,6 +400,14 @@
     "category": "Data Display"
   },
   {
+    "name": "Gantt",
+    "path": "gantt",
+    "description": "A Data Table with a timeline column: bars, progress, milestones, links, markers; dragged or moved from the keyboard.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Data Display"
+  },
+  {
     "name": "Hotkey",
     "path": "hotkey",
     "description": "A directive that runs an action on a keyboard shortcut and writes the shortcut for the platform.",

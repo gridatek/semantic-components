@@ -4220,6 +4220,39 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/gantt',
+    children: [
+      {
+        path: 'basic-gantt-demo',
+        loadComponent: () =>
+          import('../pages/docs/gantt/demos/basic-gantt-demo').then(
+            (m) => m.BasicGanttDemo,
+          ),
+      },
+      {
+        path: 'scales-gantt-demo',
+        loadComponent: () =>
+          import('../pages/docs/gantt/demos/scales-gantt-demo').then(
+            (m) => m.ScalesGanttDemo,
+          ),
+      },
+      {
+        path: 'milestones-gantt-demo',
+        loadComponent: () =>
+          import('../pages/docs/gantt/demos/milestones-gantt-demo').then(
+            (m) => m.MilestonesGanttDemo,
+          ),
+      },
+      {
+        path: 'rtl-gantt-demo',
+        loadComponent: () =>
+          import('../pages/docs/gantt/demos/rtl-gantt-demo').then(
+            (m) => m.RtlGanttDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/json-viewer',
     children: [
       {

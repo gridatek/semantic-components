@@ -26,10 +26,22 @@ import { ScButton, ScJsonViewer } from '@semantic-components/ui';
   imports: [ScButton, ScJsonViewer],
   template: \`
     <div class="flex flex-wrap gap-2">
-      <button scButton variant="outline" size="sm" type="button" (click)="viewer.expandAll()">
+      <button
+        scButton
+        variant="outline"
+        size="sm"
+        type="button"
+        (click)="viewer.expandAll()"
+      >
         Expand all
       </button>
-      <button scButton variant="outline" size="sm" type="button" (click)="viewer.collapseAll()">
+      <button
+        scButton
+        variant="outline"
+        size="sm"
+        type="button"
+        (click)="viewer.collapseAll()"
+      >
         Collapse all
       </button>
     </div>

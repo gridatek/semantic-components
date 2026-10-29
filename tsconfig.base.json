@@ -34,6 +34,7 @@
         "libs/ui/phone-input/src/index.ts"
       ],
       "@semantic-components/ui/data-table": ["libs/ui/data-table/src/index.ts"],
+      "@semantic-components/ui/gantt": ["libs/ui/gantt/src/index.ts"],
       "@semantic-components/ui/qr-code": ["libs/ui/qr-code/src/index.ts"],
       "@semantic-components/ui/pdf-viewer": ["libs/ui/pdf-viewer/src/index.ts"],
       "@semantic-components/ui/editor": ["libs/ui/editor/src/index.ts"],

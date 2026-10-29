@@ -2,7 +2,7 @@
 
 Every component brought to the same bar: shadcn's look, tested, mobile first, right to left, in light and dark, rendered on the server. One component at a time, from the building blocks up — atomic design: a component comes after the ones it is built on (its imports, **Built on**), as design-system roadmaps do (foundations, then buttons and inputs, then form controls, then overlays and complex widgets). In a phase: ui, then code / charts / editor, each from the smallest (**Size**: lines of its own TypeScript). Each row ticked when it meets the definition of done.
 
-Inventory (146 components): 61 with a shadcn counterpart · 95 with e2e demo tests · 146 with a page axe test · 7 with an RTL demo.
+Inventory (147 components): 61 with a shadcn counterpart · 96 with e2e demo tests · 147 with a page axe test · 8 with an RTL demo.
 
 ## Why this order
 
@@ -196,7 +196,7 @@ Built on atoms (**Built on**): fields and form controls, overlays, menus, the ca
 |  57 | [Image Annotator](../apps/showcase/src/app/pages/docs/image-annotator)         | ui      | button                       | 1560 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
 |  58 | [Editor](../apps/showcase/src/app/pages/docs/editor)                           | ui      | field, toggle                | 1673 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
 
-## Phase 3 — Organisms (15)
+## Phase 3 — Organisms (16)
 
 Built on molecules: pickers, menus in context, the sidebar, the data table, the editors and players.
 
@@ -212,11 +212,12 @@ Built on molecules: pickers, menus in context, the sidebar, the data table, the 
 |   8 | [Diff Viewer](../apps/showcase/src/app/pages/docs/diff-viewer)             | ui      | code-block                                                              |   636 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
 |   9 | [Date Input](../apps/showcase/src/app/pages/docs/date-input)               | ui      | date-picker, field, input                                               |   671 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
 |  10 | [Sidebar](../apps/showcase/src/app/pages/docs/sidebar)                     | ui      | button, sheet, skeleton                                                 |   888 | yes    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
-|  11 | [Data Table](../apps/showcase/src/app/pages/docs/data-table)               | ui      | button, checkbox, pagination                                            |   957 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
-|  12 | [Number Field](../apps/showcase/src/app/pages/docs/number-field)           | ui      | button, button-group, field, input                                      |  1076 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
-|  13 | [Audio Player](../apps/showcase/src/app/pages/docs/audio-player)           | ui      | button, slider                                                          |  1122 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
-|  14 | [Video Player](../apps/showcase/src/app/pages/docs/video-player)           | ui      | button, slider                                                          |  1382 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
-|  15 | [PDF Viewer](../apps/showcase/src/app/pages/docs/pdf-viewer)               | ui      | button, checkbox, dialog, input, progress, slider, switch, toggle-group | 12126 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
+|  11 | [Gantt](../apps/showcase/src/app/pages/docs/gantt)                         | ui      | data-table                                                              |   899 | —      |  [ ]   | [x] |  [ ]   | [x] | [ ]  | [ ] | [ ]  |
+|  12 | [Data Table](../apps/showcase/src/app/pages/docs/data-table)               | ui      | button, checkbox, pagination                                            |   957 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
+|  13 | [Number Field](../apps/showcase/src/app/pages/docs/number-field)           | ui      | button, button-group, field, input                                      |  1076 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
+|  14 | [Audio Player](../apps/showcase/src/app/pages/docs/audio-player)           | ui      | button, slider                                                          |  1122 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
+|  15 | [Video Player](../apps/showcase/src/app/pages/docs/video-player)           | ui      | button, slider                                                          |  1382 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
+|  16 | [PDF Viewer](../apps/showcase/src/app/pages/docs/pdf-viewer)               | ui      | button, checkbox, dialog, input, progress, slider, switch, toggle-group | 12126 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
 
 ## Later
 

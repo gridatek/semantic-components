@@ -717,6 +717,11 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/tree-table/tree-table-page'),
       },
       {
+        path: 'gantt',
+        title: 'Gantt - Semantic Components',
+        loadComponent: () => import('../pages/docs/gantt/gantt-page'),
+      },
+      {
         path: 'json-viewer',
         title: 'JSON Viewer - Semantic Components',
         loadComponent: () =>

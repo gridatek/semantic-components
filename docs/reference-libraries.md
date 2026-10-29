@@ -95,7 +95,36 @@ show it.
 - **Cell focus** inside a row (the treegrid pattern's cell navigation): rows
   only, for now.
 
-## Video Player
+## Gantt
+
+Researched 2026-10-29 (weekly npm downloads, Gantt-specific libraries;
+Mermaid and Highcharts draw Gantts among many charts and are left aside).
+
+| Library                                                           | Weekly | What to read                                                                                                                                      |
+| ----------------------------------------------------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Frappe Gantt](https://github.com/frappe/gantt)                   | 277k   | Task `{ id, name, start, end, progress, dependencies }`; view modes Day/Week/Month/Year; drag, resize and progress with `snap_at`; `readonly*`    |
+| [SVAR Gantt](https://docs.svar.dev/react/gantt/overview)          | 126k   | Task, summary and milestone; four link types; the task grid beside the chart (tree, sorting); zoom by scales; weekends and holidays; hotkeys      |
+| [gantt-task-react](https://github.com/MaTeMaTuK/gantt-task-react) | 67k    | `task` / `milestone` / `project` (collapsible); `onDateChange` / `onProgressChange` that can refuse the change; RTL                               |
+| dhtmlx-gantt                                                      | 52k    | The classic feature set (the free edition is GPL)                                                                                                 |
+| [Kibo UI Gantt](https://www.kibo-ui.com/components/gantt)         | —      | shadcn-style parts: provider, sidebar, timeline, feature rows, markers, today; `range` daily/monthly/quarterly + `zoom`; no keyboard for its bars |
+| @worktile/gantt                                                   | 8k     | The Angular one: day to year views, groups, children, links, drag                                                                                 |
+
+None documents an accessible Gantt: no ARIA pattern exists for one, and
+none gives the bars a keyboard (Kibo's drag is mouse only).
+
+**Taken** (built 2026-10-29, `@semantic-components/ui/gantt`):
+
+- **A timeline column for the Data Table**, its own entry (the user's
+  choice): the task list is the tree grid, as SVAR's grid beside the chart.
+- **Frappe's task** (`start`, `end`, `progress`, `dependencies`) and
+  snapping a day at a time; **SVAR's** task, summary and milestone;
+  **gantt-task-react's** changes the app may refuse (here: proposals,
+  `dateChange` / `progressChange`).
+- **Kibo's** parts and markers; its `range` became `scale` (day, week, month).
+- **Ours**: Alt+arrows on a row, dates read out and announced.
+
+**Open — to follow them later:** link types other than finish-to-start,
+moving the followers, drawing links or tasks by drag.
 
 | Library                                      | What to read                                                                                                                                                                                                                                                                                                                                                   |
 | -------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

@@ -24,9 +24,7 @@ import { ScJsonViewer } from '@semantic-components/ui';
 @Component({
   selector: 'app-basic-json-viewer-demo',
   imports: [ScJsonViewer],
-  template: \`
-    <ul scJsonViewer aria-label="User" [data]="user"></ul>
-  \`,
+  template: \` <ul scJsonViewer aria-label="User" [data]="user"></ul> \`,
   host: { class: 'block w-full max-w-md' },
   encapsulation: ViewEncapsulation.None,
 })
