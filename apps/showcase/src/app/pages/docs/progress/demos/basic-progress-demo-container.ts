@@ -6,7 +6,11 @@ import { BasicProgressDemo } from './basic-progress-demo';
   selector: 'app-basic-progress-demo-container',
   imports: [DemoContainer, BasicProgressDemo],
   template: `
-    <app-demo-container title="Basic Progress" [code]="code">
+    <app-demo-container
+      title="Bar"
+      demoUrl="/demos/progress/basic-progress-demo"
+      [code]="code"
+    >
       <app-basic-progress-demo />
     </app-demo-container>
   `,
@@ -14,44 +18,39 @@ import { BasicProgressDemo } from './basic-progress-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicProgressDemoContainer {
-  readonly code = `import {
-  Component,
-  OnDestroy,
-  OnInit,
-  ViewEncapsulation,
-  signal,
-} from '@angular/core';
-import { ScProgress } from '@semantic-components/ui';
+  readonly code = `import { PercentPipe } from '@angular/common';
+import { Component, ViewEncapsulation } from '@angular/core';
+import {
+  ScProgress,
+  ScProgressLabel,
+  ScProgressRange,
+  ScProgressTrack,
+  ScProgressValueText,
+} from '@semantic-components/ui';
 
 @Component({
   selector: 'app-basic-progress-demo',
-  imports: [ScProgress],
+  imports: [
+    PercentPipe,
+    ScProgress,
+    ScProgressLabel,
+    ScProgressRange,
+    ScProgressTrack,
+    ScProgressValueText,
+  ],
   template: \`
-    <div class="w-[60%] space-y-2">
-      <div scProgress aria-label="Loading progress" [value]="progress()"></div>
-      <p class="text-muted-foreground text-sm">{{ progress() }}% complete</p>
+    <div class="w-full max-w-sm">
+      <div scProgress [value]="value">
+        <span scProgressLabel>Uploading</span>
+        <span scProgressValueText>{{ value / 100 | percent }}</span>
+        <div scProgressTrack><div scProgressRange></div></div>
+      </div>
     </div>
   \`,
-  host: { class: 'flex w-full justify-center' },
+  host: { class: 'flex w-full flex-col items-center gap-4' },
   encapsulation: ViewEncapsulation.None,
 })
-export class BasicProgressDemo implements OnInit, OnDestroy {
-  readonly progress = signal(13);
-  private intervalId: ReturnType<typeof setInterval> | null = null;
-
-  ngOnInit(): void {
-    this.intervalId = setInterval(() => {
-      this.progress.update((prev) => {
-        if (prev >= 100) return 13;
-        return prev + 1;
-      });
-    }, 100);
-  }
-
-  ngOnDestroy(): void {
-    if (this.intervalId) {
-      clearInterval(this.intervalId);
-    }
-  }
+export class BasicProgressDemo {
+  readonly value = 33;
 }`;
 }

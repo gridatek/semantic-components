@@ -7,7 +7,7 @@ import {
   input,
 } from '@angular/core';
 import { cn } from '../../utils';
-import { ScProgressNext } from './progress-next';
+import { ScProgress } from './progress';
 
 /** The time one slide across an indeterminate bar takes (ms). */
 const SLIDE_TIME = 1500;
@@ -18,7 +18,7 @@ const SLIDE_TIME = 1500;
  * in the middle, when motion is reduced.
  */
 @Directive({
-  selector: 'div[scProgressNextRange]',
+  selector: 'div[scProgressRange]',
   host: {
     'data-slot': 'progress-indicator',
     '[style.width.%]':
@@ -26,8 +26,8 @@ const SLIDE_TIME = 1500;
     '[class]': 'class()',
   },
 })
-export class ScProgressNextRange {
-  protected readonly progress = inject(ScProgressNext);
+export class ScProgressRange {
+  protected readonly progress = inject(ScProgress);
 
   readonly classInput = input<string>('', { alias: 'class' });
 

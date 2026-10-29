@@ -1,19 +1,19 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
 import { Directive, computed, effect, inject, input } from '@angular/core';
 import { cn } from '../../utils';
-import { ScProgressNext } from './progress-next';
+import { ScProgress } from './progress';
 
 /** Your label for the progress — its name (`aria-labelledby`). */
 @Directive({
-  selector: '[scProgressNextLabel]',
+  selector: '[scProgressLabel]',
   host: {
     'data-slot': 'progress-label',
     '[id]': 'id()',
     '[class]': 'class()',
   },
 })
-export class ScProgressNextLabel {
-  private readonly progress = inject(ScProgressNext);
+export class ScProgressLabel {
+  private readonly progress = inject(ScProgress);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly id = input(inject(_IdGenerator).getId('sc-progress-label-'));

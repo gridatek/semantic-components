@@ -42,7 +42,6 @@ export * from './pagination';
 export * from './password';
 export * from './popover';
 export * from './progress';
-export * from './progress-next';
 export * from './radio-group';
 export * from './range-slider';
 export * from './rating';

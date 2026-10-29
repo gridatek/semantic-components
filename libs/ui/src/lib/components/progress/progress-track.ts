@@ -3,13 +3,13 @@ import { cn } from '../../utils';
 
 /** The bar's track: the whole line, the range inside it. */
 @Directive({
-  selector: 'div[scProgressNextTrack]',
+  selector: 'div[scProgressTrack]',
   host: {
     'data-slot': 'progress-track',
     '[class]': 'class()',
   },
 })
-export class ScProgressNextTrack {
+export class ScProgressTrack {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>

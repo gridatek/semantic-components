@@ -714,14 +714,6 @@
   {
     "name": "Progress",
     "path": "progress",
-    "description": "Displays an indicator showing completion progress.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Data Display"
-  },
-  {
-    "name": "Progress Next",
-    "path": "progress-next",
     "description": "A task's progress as a bar or a circle, named and read out, or not known yet.",
     "status": "Experimental",
     "library": "ui",

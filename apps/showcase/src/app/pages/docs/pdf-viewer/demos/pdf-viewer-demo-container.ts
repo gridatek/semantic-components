@@ -65,6 +65,8 @@ import {
   ScPopoverProvider,
   ScPopoverTrigger,
   ScProgress,
+  ScProgressRange,
+  ScProgressTrack,
   ScRadio,
   ScRadioField,
   ScRadioGroup,
@@ -362,6 +364,8 @@ const INK_COLORS = [
     ScSwitch,
     ScSwitchField,
     ScProgress,
+    ScProgressRange,
+    ScProgressTrack,
     ScNativeSelectContainer,
     ScNativeSelect,
     ScNativeSelectIcon,
@@ -1492,11 +1496,9 @@ const INK_COLORS = [
           }
 
           <div scPdfViewerContent class="flex-1">
-            <div
-              scProgress
-              scPdfViewerLoadingBar
-              aria-label="Loading document"
-            ></div>
+            <div scProgress scPdfViewerLoadingBar aria-label="Loading document">
+              <div scProgressTrack><div scProgressRange></div></div>
+            </div>
             <div scPdfViewerLoading>
               <svg scSpinner siLoaderCircleIcon></svg>
               Loading document…
@@ -1730,7 +1732,9 @@ const INK_COLORS = [
                 scProgress
                 scPdfViewerPrintProgress
                 aria-label="Print preparation"
-              ></div>
+              >
+                <div scProgressTrack><div scProgressRange></div></div>
+              </div>
               <div scDialogFooter>
                 <button scButton scDialogClose variant="outline">Cancel</button>
               </div>

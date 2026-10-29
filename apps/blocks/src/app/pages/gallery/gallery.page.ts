@@ -26,6 +26,8 @@ import {
   ScKbd,
   ScLabel,
   ScProgress,
+  ScProgressRange,
+  ScProgressTrack,
   ScSeparator,
   ScSkeleton,
   ScSlider,
@@ -71,6 +73,8 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     ScKbd,
     ScLabel,
     ScProgress,
+    ScProgressRange,
+    ScProgressTrack,
     ScSeparator,
     ScSkeleton,
     ScSlider,
@@ -422,19 +426,25 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
                 [value]="25"
                 aria-label="25% progress"
                 i18n-aria-label="@@gallery.progress25"
-              ></div>
+              >
+                <div scProgressTrack><div scProgressRange></div></div>
+              </div>
               <div
                 scProgress
                 [value]="50"
                 aria-label="50% progress"
                 i18n-aria-label="@@gallery.progress50"
-              ></div>
+              >
+                <div scProgressTrack><div scProgressRange></div></div>
+              </div>
               <div
                 scProgress
                 [value]="75"
                 aria-label="75% progress"
                 i18n-aria-label="@@gallery.progress75"
-              ></div>
+              >
+                <div scProgressTrack><div scProgressRange></div></div>
+              </div>
             </div>
           </section>
 

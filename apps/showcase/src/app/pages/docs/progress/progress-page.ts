@@ -3,19 +3,21 @@ import { ScHeading } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicProgressDemoContainer } from './demos/basic-progress-demo-container';
-import { CustomMaxProgressDemoContainer } from './demos/custom-max-progress-demo-container';
-import { CustomStylingProgressDemoContainer } from './demos/custom-styling-progress-demo-container';
-import { SignalFormsProgressDemoContainer } from './demos/signal-forms-progress-demo-container';
-import { ValuesProgressDemoContainer } from './demos/values-progress-demo-container';
+import { CircleProgressDemoContainer } from './demos/circle-progress-demo-container';
+import { DownloadProgressDemoContainer } from './demos/download-progress-demo-container';
+import { IndeterminateProgressDemoContainer } from './demos/indeterminate-progress-demo-container';
+import { RtlProgressDemoContainer } from './demos/rtl-progress-demo-container';
+import { StepsProgressDemoContainer } from './demos/steps-progress-demo-container';
 
 @Component({
   selector: 'app-progress-page',
   imports: [
     BasicProgressDemoContainer,
-    ValuesProgressDemoContainer,
-    CustomMaxProgressDemoContainer,
-    CustomStylingProgressDemoContainer,
-    SignalFormsProgressDemoContainer,
+    CircleProgressDemoContainer,
+    IndeterminateProgressDemoContainer,
+    DownloadProgressDemoContainer,
+    StepsProgressDemoContainer,
+    RtlProgressDemoContainer,
     TocHeading,
     ComponentBadges,
     ScHeading,
@@ -25,8 +27,10 @@ import { ValuesProgressDemoContainer } from './demos/values-progress-demo-contai
       <div class="space-y-2">
         <h1 scHeading>Progress</h1>
         <p class="text-muted-foreground">
-          Displays an indicator showing the completion progress of a task,
-          typically displayed as a progress bar.
+          A task's progress as a bar or a circle: a value between a minimum and
+          a maximum, or not known yet. Your label names it, your value text is
+          what screen readers hear; it fills from the start of the line, and
+          stays still when motion is reduced.
         </p>
         <app-component-badges path="progress" />
       </div>
@@ -34,10 +38,11 @@ import { ValuesProgressDemoContainer } from './demos/values-progress-demo-contai
       <section class="space-y-8">
         <h2 scHeading appToc>Examples</h2>
         <app-basic-progress-demo-container />
-        <app-values-progress-demo-container />
-        <app-custom-max-progress-demo-container />
-        <app-custom-styling-progress-demo-container />
-        <app-signal-forms-progress-demo-container />
+        <app-circle-progress-demo-container />
+        <app-indeterminate-progress-demo-container />
+        <app-download-progress-demo-container />
+        <app-steps-progress-demo-container />
+        <app-rtl-progress-demo-container />
       </section>
     </div>
   `,

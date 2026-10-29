@@ -2,8 +2,7 @@ import { collectErrors } from '../../interaction';
 import { expectRtl } from '../../rtl';
 import { type Locator, type Page, expect, test } from '../../test';
 
-const demo = (name: string) =>
-  `/demos/progress-next/${name}-progress-next-demo`;
+const demo = (name: string) => `/demos/progress/${name}-progress-demo`;
 const bars = (page: Page) => page.getByRole('progressbar');
 
 /** The bar's filled share of its track. */

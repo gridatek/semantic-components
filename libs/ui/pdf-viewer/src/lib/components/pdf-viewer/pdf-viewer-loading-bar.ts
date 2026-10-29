@@ -1,4 +1,4 @@
-import { Directive, computed, effect, inject, input } from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { ScProgress, bindInput, cn } from '@semantic-components/ui';
 import { SC_PDF_VIEWER } from './pdf-viewer';
 
@@ -6,7 +6,8 @@ import { SC_PDF_VIEWER } from './pdf-viewer';
  * A thin bar along the top of the content while the document downloads —
  * also after the first pages show, since pdf.js renders before the whole
  * file has arrived; hidden when the size isn't known. Use on a `scProgress`
- * inside `scPdfViewerContent`, and give it an `aria-label`.
+ * inside `scPdfViewerContent`, with its track and range, and give it an
+ * `aria-label`.
  */
 @Directive({
   selector: '[scProgress][scPdfViewerLoadingBar]',
@@ -29,7 +30,7 @@ export class ScPdfViewerLoadingBar {
 
   protected readonly class = computed(() =>
     cn(
-      'pointer-events-none absolute inset-x-0 top-0 z-20 h-1 rounded-none bg-transparent',
+      'pointer-events-none absolute inset-x-0 top-0 z-20 [&>[data-slot=progress-track]]:rounded-none [&>[data-slot=progress-track]]:bg-transparent',
       this.classInput(),
     ),
   );
@@ -38,6 +39,6 @@ export class ScPdfViewerLoadingBar {
     // Into the progress bar's own inputs, so its classes merge with ours.
     const progress = inject(ScProgress);
     bindInput(progress.classInput, this.class);
-    effect(() => progress.value.set(this.percent()));
+    bindInput(progress.value, this.percent);
   }
 }

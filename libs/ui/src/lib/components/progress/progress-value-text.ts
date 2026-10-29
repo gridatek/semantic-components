@@ -7,22 +7,22 @@ import {
   input,
 } from '@angular/core';
 import { cn } from '../../utils';
-import { ScProgressNext } from './progress-next';
+import { ScProgress } from './progress';
 
 /**
  * Your value text — "42%", "3 of 5": what screen readers hear as the value
  * (`aria-valuetext`). At the end of a bar's line; in a circle's middle.
  */
 @Directive({
-  selector: '[scProgressNextValueText]',
+  selector: '[scProgressValueText]',
   host: {
     'data-slot': 'progress-value',
     'aria-hidden': 'true',
     '[class]': 'class()',
   },
 })
-export class ScProgressNextValueText {
-  private readonly progress = inject(ScProgressNext);
+export class ScProgressValueText {
+  private readonly progress = inject(ScProgress);
 
   readonly classInput = input<string>('', { alias: 'class' });
 

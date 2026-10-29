@@ -29,6 +29,8 @@ import {
   ScCheckboxField,
   ScInput,
   ScProgress,
+  ScProgressRange,
+  ScProgressTrack,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -69,6 +71,8 @@ import type { User } from './user.service';
     ScCheckboxField,
     ScInput,
     ScProgress,
+    ScProgressRange,
+    ScProgressTrack,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -309,12 +313,14 @@ import type { User } from './user.service';
                           i18n-aria-label="@@dataTable.storageUsed"
                           [value]="asNumber(cell.getValue())"
                           [max]="10000"
-                          class="h-2 w-16"
+                          class="w-16"
                         >
-                          <div
-                            scProgressIndicator
-                            [class]="storageColor(asNumber(cell.getValue()))"
-                          ></div>
+                          <div scProgressTrack class="h-2">
+                            <div
+                              scProgressRange
+                              [class]="storageColor(asNumber(cell.getValue()))"
+                            ></div>
+                          </div>
                         </div>
                         <span class="text-sm">
                           {{ formatNumber(asNumber(cell.getValue())) }}

@@ -1,6 +1,11 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
-import { ScButton, ScProgress } from '@semantic-components/ui';
+import {
+  ScButton,
+  ScProgress,
+  ScProgressRange,
+  ScProgressTrack,
+} from '@semantic-components/ui';
 import {
   ScEditor,
   ScEditorBold,
@@ -46,6 +51,8 @@ import {
     ScEditorToolbar,
     ScEditorToolbarGroup,
     ScProgress,
+    ScProgressRange,
+    ScProgressTrack,
     SiBoldIcon,
     SiImagePlusIcon,
     SiItalicIcon,
@@ -98,7 +105,9 @@ import {
                   [value]="upload.progress * 100"
                   [attr.aria-label]="'Uploading ' + upload.file.name"
                   class="w-32"
-                ></div>
+                >
+                  <div scProgressTrack><div scProgressRange></div></div>
+                </div>
                 <button
                   scButton
                   variant="ghost"

@@ -1,23 +1,23 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { DownloadProgressNextDemo } from './download-progress-next-demo';
+import { DownloadProgressDemo } from './download-progress-demo';
 
 @Component({
-  selector: 'app-download-progress-next-demo-container',
-  imports: [DemoContainer, DownloadProgressNextDemo],
+  selector: 'app-download-progress-demo-container',
+  imports: [DemoContainer, DownloadProgressDemo],
   template: `
     <app-demo-container
       title="Download"
-      demoUrl="/demos/progress-next/download-progress-next-demo"
+      demoUrl="/demos/progress/download-progress-demo"
       [code]="code"
     >
-      <app-download-progress-next-demo />
+      <app-download-progress-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class DownloadProgressNextDemoContainer {
+export class DownloadProgressDemoContainer {
   readonly code = `import { PercentPipe } from '@angular/common';
 import {
   Component,
@@ -28,30 +28,30 @@ import {
 } from '@angular/core';
 import {
   ScButton,
-  ScProgressNext,
-  ScProgressNextCircle,
-  ScProgressNextValueText,
+  ScProgress,
+  ScProgressCircle,
+  ScProgressValueText,
 } from '@semantic-components/ui';
 
 @Component({
-  selector: 'app-download-progress-next-demo',
+  selector: 'app-download-progress-demo',
   imports: [
     PercentPipe,
     ScButton,
-    ScProgressNext,
-    ScProgressNextCircle,
-    ScProgressNextValueText,
+    ScProgress,
+    ScProgressCircle,
+    ScProgressValueText,
   ],
   template: \`
     <div class="flex items-center gap-4">
       <div
-        scProgressNext
+        scProgress
         [value]="received()"
         aria-label="Downloading report.pdf"
         class="size-20"
       >
-        <svg scProgressNextCircle [spin]="downloading()"></svg>
-        <span scProgressNextValueText>{{ received() / 100 | percent }}</span>
+        <svg scProgressCircle [spin]="downloading()"></svg>
+        <span scProgressValueText>{{ received() / 100 | percent }}</span>
       </div>
       <div class="flex flex-col gap-2">
         <span class="text-sm font-medium">report.pdf</span>
@@ -69,7 +69,7 @@ import {
   host: { class: 'flex w-full flex-col items-center gap-4' },
   encapsulation: ViewEncapsulation.None,
 })
-export class DownloadProgressNextDemo {
+export class DownloadProgressDemo {
   private timer: ReturnType<typeof setInterval> | undefined;
 
   readonly received = signal(0);

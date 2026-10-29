@@ -10,6 +10,8 @@ import {
   ScDialogProvider,
   ScDialogTitle,
   ScProgress,
+  ScProgressRange,
+  ScProgressTrack,
   ScSpinner,
   ScTooltipTrigger,
   cn,
@@ -60,6 +62,8 @@ import {
     ScDialogFooter,
     ScDialogClose,
     ScProgress,
+    ScProgressRange,
+    ScProgressTrack,
     ScButton,
     ScTooltipTrigger,
     ScSpinner,
@@ -112,7 +116,9 @@ import {
                 scProgress
                 scPdfViewerPrintProgress
                 aria-label="Print preparation"
-              ></div>
+              >
+                <div scProgressTrack><div scProgressRange></div></div>
+              </div>
               <div scDialogFooter>
                 <button scButton scDialogClose variant="outline">Cancel</button>
               </div>

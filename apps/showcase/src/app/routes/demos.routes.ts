@@ -3069,62 +3069,8 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/progress-next',
-    children: [
-      {
-        path: 'basic-progress-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/progress-next/demos/basic-progress-next-demo').then(
-            (m) => m.BasicProgressNextDemo,
-          ),
-      },
-      {
-        path: 'circle-progress-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/progress-next/demos/circle-progress-next-demo').then(
-            (m) => m.CircleProgressNextDemo,
-          ),
-      },
-      {
-        path: 'indeterminate-progress-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/progress-next/demos/indeterminate-progress-next-demo').then(
-            (m) => m.IndeterminateProgressNextDemo,
-          ),
-      },
-      {
-        path: 'download-progress-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/progress-next/demos/download-progress-next-demo').then(
-            (m) => m.DownloadProgressNextDemo,
-          ),
-      },
-      {
-        path: 'steps-progress-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/progress-next/demos/steps-progress-next-demo').then(
-            (m) => m.StepsProgressNextDemo,
-          ),
-      },
-      {
-        path: 'rtl-progress-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/progress-next/demos/rtl-progress-next-demo').then(
-            (m) => m.RtlProgressNextDemo,
-          ),
-      },
-    ],
-  },
-  {
     path: 'demos/progress',
     children: [
-      {
-        path: 'signal-forms-progress-demo',
-        loadComponent: () =>
-          import('../pages/docs/progress/demos/signal-forms-progress-demo').then(
-            (m) => m.SignalFormsProgressDemo,
-          ),
-      },
       {
         path: 'basic-progress-demo',
         loadComponent: () =>
@@ -3133,24 +3079,38 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'values-progress-demo',
+        path: 'circle-progress-demo',
         loadComponent: () =>
-          import('../pages/docs/progress/demos/values-progress-demo').then(
-            (m) => m.ValuesProgressDemo,
+          import('../pages/docs/progress/demos/circle-progress-demo').then(
+            (m) => m.CircleProgressDemo,
           ),
       },
       {
-        path: 'custom-max-progress-demo',
+        path: 'indeterminate-progress-demo',
         loadComponent: () =>
-          import('../pages/docs/progress/demos/custom-max-progress-demo').then(
-            (m) => m.CustomMaxProgressDemo,
+          import('../pages/docs/progress/demos/indeterminate-progress-demo').then(
+            (m) => m.IndeterminateProgressDemo,
           ),
       },
       {
-        path: 'custom-styling-progress-demo',
+        path: 'download-progress-demo',
         loadComponent: () =>
-          import('../pages/docs/progress/demos/custom-styling-progress-demo').then(
-            (m) => m.CustomStylingProgressDemo,
+          import('../pages/docs/progress/demos/download-progress-demo').then(
+            (m) => m.DownloadProgressDemo,
+          ),
+      },
+      {
+        path: 'steps-progress-demo',
+        loadComponent: () =>
+          import('../pages/docs/progress/demos/steps-progress-demo').then(
+            (m) => m.StepsProgressDemo,
+          ),
+      },
+      {
+        path: 'rtl-progress-demo',
+        loadComponent: () =>
+          import('../pages/docs/progress/demos/rtl-progress-demo').then(
+            (m) => m.RtlProgressDemo,
           ),
       },
     ],

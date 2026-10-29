@@ -32,6 +32,8 @@ import {
   ScInput,
   ScLabel,
   ScProgress,
+  ScProgressRange,
+  ScProgressTrack,
   ScSeparator,
   ScTab,
   ScTabContent,
@@ -80,6 +82,8 @@ import {
     ScInput,
     ScLabel,
     ScProgress,
+    ScProgressRange,
+    ScProgressTrack,
     ScSeparator,
     ScTab,
     ScTabContent,
@@ -1383,7 +1387,9 @@ import {
                       [value]="budget.percent"
                       aria-label="{{ budget.name }} budget"
                       i18n-aria-label="@@shadcn.budgetOf"
-                    ></div>
+                    >
+                      <div scProgressTrack><div scProgressRange></div></div>
+                    </div>
                   </div>
                 }
               </div>

@@ -10,7 +10,7 @@ import {
   signal,
 } from '@angular/core';
 import { cn } from '../../utils';
-import { ScProgressNext } from './progress-next';
+import { ScProgress } from './progress';
 
 /**
  * The progress as a circle: its track, and an arc from the top, clockwise
@@ -19,7 +19,7 @@ import { ScProgressNext } from './progress-next';
  * by default); `thickness` in hundredths of its width.
  */
 @Component({
-  selector: 'svg[scProgressNextCircle]',
+  selector: 'svg[scProgressCircle]',
   template: `
     <svg:circle
       data-slot="progress-circle-track"
@@ -54,8 +54,8 @@ import { ScProgressNext } from './progress-next';
   },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScProgressNextCircle {
-  private readonly progress = inject(ScProgressNext);
+export class ScProgressCircle {
+  private readonly progress = inject(ScProgress);
 
   readonly classInput = input<string>('', { alias: 'class' });
   /** The ring's width, in hundredths of the circle's. */

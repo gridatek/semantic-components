@@ -1,55 +1,84 @@
 import {
-  Component,
-  ViewEncapsulation,
+  Directive,
+  ElementRef,
   computed,
+  inject,
   input,
-  model,
+  numberAttribute,
+  signal,
 } from '@angular/core';
-import type { FormValueControl } from '@angular/forms/signals';
 import { cn, ɵwarnIfUnnamed } from '../../utils';
-import { ScProgressIndicator } from './progress-indicator';
 
-@Component({
-  selector: '[scProgress]',
-  imports: [ScProgressIndicator],
+/** Where a task is: not known yet, under way, or done. */
+export type ScProgressState = 'indeterminate' | 'loading' | 'complete';
+
+/** A value as a number, `null` (or nothing) meaning not known. */
+const valueAttribute = (value: unknown): number | null =>
+  value === null || value === undefined || value === ''
+    ? null
+    : numberAttribute(value, 0);
+
+/**
+ * A task's progress: a value between `min` and `max` — `null` while not
+ * known (indeterminate). Shown as a bar (`scProgressTrack` and
+ * `scProgressRange`) or a circle (`scProgressCircle`), with your
+ * label (its name) and your value text (read as its value).
+ */
+@Directive({
+  selector: 'div[scProgress]',
+  exportAs: 'scProgress',
   host: {
+    'data-slot': 'progress',
     role: 'progressbar',
-    '[class]': 'class()',
-    '[attr.aria-valuemin]': '0',
+    '[attr.aria-valuemin]': 'min()',
     '[attr.aria-valuemax]': 'max()',
-    '[attr.aria-valuenow]': 'value()',
+    '[attr.aria-valuenow]': 'indeterminate() ? null : value()',
+    '[attr.aria-labelledby]': 'labelId()',
     '[attr.data-state]': 'state()',
+    '[attr.data-shape]': 'shape()',
+    '[class]': 'class()',
   },
-  template: ` <div scProgressIndicator></div> `,
-  encapsulation: ViewEncapsulation.None,
 })
-export class ScProgress implements FormValueControl<number | null> {
-  constructor() {
-    ɵwarnIfUnnamed('scProgress');
-  }
+export class ScProgress {
+  readonly element = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly value = model<number | null>(null);
-  readonly max = input<number | undefined>(100);
+  /** How far the task is; `null` while not known. */
+  readonly value = input<number | null, unknown>(null, {
+    transform: valueAttribute,
+  });
+  readonly min = input(0, { transform: numberAttribute });
+  readonly max = input(100, { transform: numberAttribute });
 
-  readonly percentage = computed(() => {
-    const val = this.value();
-    const maxVal = this.max() ?? 100;
-    if (val === null || maxVal === 0) return 0;
-    return Math.min(Math.max((val / maxVal) * 100, 0), 100);
+  readonly indeterminate = computed(() => this.value() === null);
+  /** How much is done, from 0 to 1. */
+  readonly fraction = computed(() => {
+    const value = this.value();
+    const span = this.max() - this.min();
+    if (value === null || span <= 0) return 0;
+    return Math.min(Math.max((value - this.min()) / span, 0), 1);
+  });
+  readonly state = computed<ScProgressState>(() => {
+    const value = this.value();
+    if (value === null) return 'indeterminate';
+    return value >= this.max() ? 'complete' : 'loading';
   });
 
-  protected readonly state = computed(() => {
-    const val = this.value();
-    const maxVal = this.max() ?? 100;
-    if (val === null) return 'indeterminate';
-    return val >= maxVal ? 'complete' : 'loading';
-  });
+  /** Set by the parts: the label's id, the shape drawn. */
+  readonly labelId = signal<string | null>(null);
+  readonly shape = signal<'bar' | 'circle'>('bar');
 
   protected readonly class = computed(() =>
     cn(
-      'bg-muted relative flex h-1 w-full items-center overflow-x-hidden rounded-full',
+      'group/progress',
+      this.shape() === 'circle'
+        ? 'relative inline-flex size-16 shrink-0'
+        : 'flex flex-wrap gap-3',
       this.classInput(),
     ),
   );
+
+  constructor() {
+    ɵwarnIfUnnamed('scProgress');
+  }
 }

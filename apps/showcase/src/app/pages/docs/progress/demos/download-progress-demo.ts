@@ -8,30 +8,30 @@ import {
 } from '@angular/core';
 import {
   ScButton,
-  ScProgressNext,
-  ScProgressNextCircle,
-  ScProgressNextValueText,
+  ScProgress,
+  ScProgressCircle,
+  ScProgressValueText,
 } from '@semantic-components/ui';
 
 @Component({
-  selector: 'app-download-progress-next-demo',
+  selector: 'app-download-progress-demo',
   imports: [
     PercentPipe,
     ScButton,
-    ScProgressNext,
-    ScProgressNextCircle,
-    ScProgressNextValueText,
+    ScProgress,
+    ScProgressCircle,
+    ScProgressValueText,
   ],
   template: `
     <div class="flex items-center gap-4">
       <div
-        scProgressNext
+        scProgress
         [value]="received()"
         aria-label="Downloading report.pdf"
         class="size-20"
       >
-        <svg scProgressNextCircle [spin]="downloading()"></svg>
-        <span scProgressNextValueText>{{ received() / 100 | percent }}</span>
+        <svg scProgressCircle [spin]="downloading()"></svg>
+        <span scProgressValueText>{{ received() / 100 | percent }}</span>
       </div>
       <div class="flex flex-col gap-2">
         <span class="text-sm font-medium">report.pdf</span>
@@ -49,7 +49,7 @@ import {
   host: { class: 'flex w-full flex-col items-center gap-4' },
   encapsulation: ViewEncapsulation.None,
 })
-export class DownloadProgressNextDemo {
+export class DownloadProgressDemo {
   private timer: ReturnType<typeof setInterval> | undefined;
 
   readonly received = signal(0);

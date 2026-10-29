@@ -1,10 +1,11 @@
-import { Directive, computed, effect, inject, input } from '@angular/core';
-import { ScProgress, cn } from '@semantic-components/ui';
+import { Directive, computed, inject, input } from '@angular/core';
+import { ScProgress, bindInput, cn } from '@semantic-components/ui';
 import { SC_PDF_VIEWER } from './pdf-viewer';
 
 /**
  * How far the pages are prepared for printing. Use on a `scProgress` in the
- * `print` dialog (`scPdfViewerDialog="print"`), with an `aria-label`;
+ * `print` dialog (`scPdfViewerDialog="print"`), with its track and range and
+ * an `aria-label`;
  * `viewer.printProgress()` is the percentage, for your text.
  */
 @Directive({
@@ -22,6 +23,6 @@ export class ScPdfViewerPrintProgress {
 
   constructor() {
     const progress = inject(ScProgress);
-    effect(() => progress.value.set(this.pdfViewer.printProgress()));
+    bindInput(progress.value, this.pdfViewer.printProgress);
   }
 }

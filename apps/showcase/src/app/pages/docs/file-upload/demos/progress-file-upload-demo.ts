@@ -12,6 +12,8 @@ import {
   ScFileUploadList,
   ScFileUploadTrigger,
   ScProgress,
+  ScProgressRange,
+  ScProgressTrack,
 } from '@semantic-components/ui';
 import {
   SiFileIcon,
@@ -35,6 +37,8 @@ import {
     ScFileUploadItemRemove,
     ScButton,
     ScProgress,
+    ScProgressRange,
+    ScProgressTrack,
     SiUploadIcon,
     SiFileIcon,
     SiXIcon,
@@ -58,7 +62,9 @@ import {
                   scProgress
                   [value]="done"
                   [attr.aria-label]="'Uploading ' + file.name"
-                ></div>
+                >
+                  <div scProgressTrack><div scProgressRange></div></div>
+                </div>
               }
             </div>
             <span scFileUploadItemSize></span>

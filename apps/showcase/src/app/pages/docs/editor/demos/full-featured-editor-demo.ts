@@ -17,6 +17,8 @@ import {
   ScPopoverProvider,
   ScPopoverTrigger,
   ScProgress,
+  ScProgressRange,
+  ScProgressTrack,
   ScSeparator,
 } from '@semantic-components/ui';
 import {
@@ -189,6 +191,8 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
     ScPopoverProvider,
     ScPopoverTrigger,
     ScProgress,
+    ScProgressRange,
+    ScProgressTrack,
     ScSeparator,
     ScEditor,
     ScEditorBlockquote,
@@ -680,7 +684,9 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
                 [value]="upload.progress * 100"
                 [attr.aria-label]="'Uploading ' + upload.file.name"
                 class="w-32"
-              ></div>
+              >
+                <div scProgressTrack><div scProgressRange></div></div>
+              </div>
               <button
                 scButton
                 variant="ghost"
