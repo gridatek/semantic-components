@@ -47,3 +47,10 @@ test('Stacked radial: a half circle, both series in one ring', async ({
   await plot.focus();
   await expect(tooltip(page)).toContainText('1,260');
 });
+
+test('Labels: each browser on its ring', async ({ page }) => {
+  await page.goto(demo('label-radial'));
+  const labels = page.locator('[data-slot=chart-labels] text');
+  await expect(labels).toHaveCount(5);
+  await expect(labels.first()).toHaveText('chrome');
+});

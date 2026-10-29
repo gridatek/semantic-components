@@ -588,6 +588,13 @@ export const demosRoutes: Route[] = [
             (m) => m.ExpandedAreaChartDemo,
           ),
       },
+      {
+        path: 'interactive-area-chart-demo',
+        loadComponent: () =>
+          import('../pages/docs/area-chart/demos/interactive-area-chart-demo').then(
+            (m) => m.InteractiveAreaChartDemo,
+          ),
+      },
     ],
   },
   {
@@ -621,6 +628,27 @@ export const demosRoutes: Route[] = [
             (m) => m.NegativeBarChartDemo,
           ),
       },
+      {
+        path: 'horizontal-bar-chart-demo',
+        loadComponent: () =>
+          import('../pages/docs/bar-chart/demos/horizontal-bar-chart-demo').then(
+            (m) => m.HorizontalBarChartDemo,
+          ),
+      },
+      {
+        path: 'label-bar-chart-demo',
+        loadComponent: () =>
+          import('../pages/docs/bar-chart/demos/label-bar-chart-demo').then(
+            (m) => m.LabelBarChartDemo,
+          ),
+      },
+      {
+        path: 'custom-label-bar-chart-demo',
+        loadComponent: () =>
+          import('../pages/docs/bar-chart/demos/custom-label-bar-chart-demo').then(
+            (m) => m.CustomLabelBarChartDemo,
+          ),
+      },
     ],
   },
   {
@@ -645,6 +673,13 @@ export const demosRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/line-chart/demos/step-line-chart-demo').then(
             (m) => m.StepLineChartDemo,
+          ),
+      },
+      {
+        path: 'label-line-chart-demo',
+        loadComponent: () =>
+          import('../pages/docs/line-chart/demos/label-line-chart-demo').then(
+            (m) => m.LabelLineChartDemo,
           ),
       },
     ],
@@ -2396,6 +2431,13 @@ export const demosRoutes: Route[] = [
             (m) => m.StackedPieChartDemo,
           ),
       },
+      {
+        path: 'label-pie-chart-demo',
+        loadComponent: () =>
+          import('../pages/docs/pie-chart/demos/label-pie-chart-demo').then(
+            (m) => m.LabelPieChartDemo,
+          ),
+      },
     ],
   },
   {
@@ -2446,6 +2488,13 @@ export const demosRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/radial-chart/demos/grid-radial-chart-demo').then(
             (m) => m.GridRadialChartDemo,
+          ),
+      },
+      {
+        path: 'label-radial-chart-demo',
+        loadComponent: () =>
+          import('../pages/docs/radial-chart/demos/label-radial-chart-demo').then(
+            (m) => m.LabelRadialChartDemo,
           ),
       },
     ],

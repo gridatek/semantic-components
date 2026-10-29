@@ -21,6 +21,7 @@ export class MultipleLineChartDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScChart,
+  ScChartCategoryAxis,
   type ScChartConfig,
   ScChartCursor,
   ScChartGrid,
@@ -28,8 +29,7 @@ import {
   ScChartLine,
   ScChartPlot,
   ScChartTooltip,
-  ScChartXAxis,
-  ScChartYAxis,
+  ScChartValueAxis,
 } from '@semantic-components/ui/charts';
 
 @Component({
@@ -38,8 +38,8 @@ import {
     ScChart,
     ScChartPlot,
     ScChartGrid,
-    ScChartXAxis,
-    ScChartYAxis,
+    ScChartCategoryAxis,
+    ScChartValueAxis,
     ScChartCursor,
     ScChartLine,
     ScChartTooltip,
@@ -53,8 +53,8 @@ import {
         aria-label="Visitors by device, January to June"
       >
         <g scChartGrid />
-        <g scChartXAxis [tickFormatter]="short" />
-        <g scChartYAxis />
+        <g scChartCategoryAxis [tickFormatter]="short" />
+        <g scChartValueAxis />
         <g scChartCursor />
         <g scChartLine key="desktop" curve="monotone" />
         <g scChartLine key="mobile" curve="monotone" />

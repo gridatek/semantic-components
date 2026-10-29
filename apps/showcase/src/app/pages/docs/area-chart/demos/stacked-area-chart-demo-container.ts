@@ -22,13 +22,13 @@ export class StackedAreaChartDemoContainer {
 import {
   ScChart,
   ScChartArea,
+  ScChartCategoryAxis,
   type ScChartConfig,
   ScChartCursor,
   ScChartGrid,
   ScChartLegend,
   ScChartPlot,
   ScChartTooltip,
-  ScChartXAxis,
 } from '@semantic-components/ui/charts';
 
 @Component({
@@ -37,7 +37,7 @@ import {
     ScChart,
     ScChartPlot,
     ScChartGrid,
-    ScChartXAxis,
+    ScChartCategoryAxis,
     ScChartCursor,
     ScChartArea,
     ScChartTooltip,
@@ -77,7 +77,7 @@ import {
           </linearGradient>
         </defs>
         <g scChartGrid />
-        <g scChartXAxis [tickFormatter]="short" />
+        <g scChartCategoryAxis [tickFormatter]="short" />
         <g scChartCursor />
         <g
           scChartArea

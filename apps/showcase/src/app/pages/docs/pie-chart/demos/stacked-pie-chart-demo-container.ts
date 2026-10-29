@@ -31,8 +31,17 @@ import {
   selector: 'app-stacked-pie-chart-demo',
   imports: [ScChart, ScChartPlot, ScChartPie, ScChartTooltip],
   template: \`
-    <div scChart class="mx-auto aspect-square max-h-72" [config]="config" [data]="data">
-      <svg scChartPlot categoryKey="month" aria-label="Visitors by month, desktop inside, mobile outside">
+    <div
+      scChart
+      class="mx-auto aspect-square max-h-72"
+      [config]="config"
+      [data]="data"
+    >
+      <svg
+        scChartPlot
+        categoryKey="month"
+        aria-label="Visitors by month, desktop inside, mobile outside"
+      >
         <g scChartPie key="desktop" [outerRadius]="0.6" />
         <g scChartPie key="mobile" [innerRadius]="0.7" />
       </svg>

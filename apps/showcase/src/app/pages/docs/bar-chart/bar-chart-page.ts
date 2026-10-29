@@ -4,6 +4,9 @@ import { ComponentBadges } from '../../../components/component-badges/component-
 import { EntryInstall } from '../../../components/entry-install/entry-install';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BarChartDemoContainer } from './demos/bar-chart-demo-container';
+import { CustomLabelBarChartDemoContainer } from './demos/custom-label-bar-chart-demo-container';
+import { HorizontalBarChartDemoContainer } from './demos/horizontal-bar-chart-demo-container';
+import { LabelBarChartDemoContainer } from './demos/label-bar-chart-demo-container';
 import { MultipleBarChartDemoContainer } from './demos/multiple-bar-chart-demo-container';
 import { NegativeBarChartDemoContainer } from './demos/negative-bar-chart-demo-container';
 import { StackedBarChartDemoContainer } from './demos/stacked-bar-chart-demo-container';
@@ -11,6 +14,9 @@ import { StackedBarChartDemoContainer } from './demos/stacked-bar-chart-demo-con
 @Component({
   selector: 'app-bar-chart-page',
   imports: [
+    CustomLabelBarChartDemoContainer,
+    LabelBarChartDemoContainer,
+    HorizontalBarChartDemoContainer,
     BarChartDemoContainer,
     MultipleBarChartDemoContainer,
     StackedBarChartDemoContainer,
@@ -49,6 +55,9 @@ import { StackedBarChartDemoContainer } from './demos/stacked-bar-chart-demo-con
         <app-multiple-bar-chart-demo-container />
         <app-stacked-bar-chart-demo-container />
         <app-negative-bar-chart-demo-container />
+        <app-horizontal-bar-chart-demo-container />
+        <app-label-bar-chart-demo-container />
+        <app-custom-label-bar-chart-demo-container />
       </section>
     </div>
   `,

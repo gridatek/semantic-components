@@ -9,7 +9,11 @@ import {
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { ScChartState } from './chart-state';
-import type { ScChartMargin, ScChartStackOffset } from './chart-types';
+import type {
+  ScChartLayout,
+  ScChartMargin,
+  ScChartStackOffset,
+} from './chart-types';
 
 /**
  * The chart's drawing (`svg`): a category per row (`categoryKey`), and inside
@@ -46,6 +50,8 @@ export class ScChartPlot {
   readonly margin = input<Partial<ScChartMargin>>({});
   /** `expand`: each category's stacks to 100%. */
   readonly stackOffset = input<ScChartStackOffset>('none');
+  /** `vertical`: the categories down the side, the bars across. */
+  readonly layout = input<ScChartLayout>('horizontal');
   /** Polar charts: where they start, in degrees (0 at the top, clockwise). */
   readonly startAngle = input(0);
   /** Polar charts: where they end (180: a half circle). */
@@ -73,6 +79,7 @@ export class ScChartPlot {
         ...this.margin(),
       })),
       stackOffset: this.stackOffset,
+      layout: this.layout,
       startAngle: this.startAngle,
       endAngle: this.endAngle,
     });
@@ -104,7 +111,8 @@ export class ScChartPlot {
     const px = ((event.clientX - box.left) * this.state.width()) / box.width;
     const py = ((event.clientY - box.top) * this.state.height()) / box.height;
     // Pies and radial bars: their slices and rings say it themselves.
-    if (!this.state.polar()) this.state.activeIndex.set(this.state.indexAt(px));
+    if (!this.state.polar())
+      this.state.activeIndex.set(this.state.indexAt(px, py));
     else if (this.state.series().some((s) => s.kind === 'radar'))
       this.state.activeIndex.set(this.state.spokeAt(px, py));
   }

@@ -9,14 +9,23 @@ import {
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { area, line } from 'd3-shape';
-import { CURVES } from '../chart/chart-curve';
-import { ScChartState } from '../chart/chart-state';
+import { curveOf } from '../chart/chart-curve';
+import {
+  SC_CHART_SERIES,
+  type ScChartLabelPoint,
+  type ScChartLabelPosition,
+  type ScChartSeriesLabels,
+} from '../chart/chart-series';
+import { ScChartState, numberOf } from '../chart/chart-state';
 import type { ScChartCurve } from '../chart/chart-types';
 
 interface Point {
+  /** Its value. */
   x: number;
-  y0: number;
-  y1: number;
+  y: number;
+  /** Its base: 0, or the series under it. */
+  bx: number;
+  by: number;
 }
 
 /**
@@ -26,6 +35,7 @@ interface Point {
  */
 @Component({
   selector: 'g[scChartArea]',
+  providers: [{ provide: SC_CHART_SERIES, useExisting: ScChartArea }],
   template: `
     <svg:path
       [attr.d]="areaPath()"
@@ -42,12 +52,13 @@ interface Point {
       <svg:circle
         class="stroke-background"
         [attr.cx]="p.x"
-        [attr.cy]="p.y1"
+        [attr.cy]="p.y"
         r="4"
         stroke-width="2"
         [attr.fill]="color()"
       />
     }
+    <ng-content />
   `,
   host: {
     'data-slot': 'chart-area',
@@ -56,7 +67,7 @@ interface Point {
   },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScChartArea {
+export class ScChartArea implements ScChartSeriesLabels {
   private readonly state = inject(ScChartState);
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -73,30 +84,35 @@ export class ScChartArea {
 
   protected readonly color = computed(() => `var(--color-${this.key()})`);
 
-  private readonly points = computed<Point[]>(() => {
-    const y = this.state.y();
-    return (this.state.extents().get(this.key()) ?? []).map(([y0, y1], i) => ({
-      x: this.state.center(i),
-      y0: y(y0),
-      y1: y(y1),
-    }));
-  });
-
-  protected readonly areaPath = computed(
-    () =>
-      area<Point>()
-        .x((p) => p.x)
-        .y0((p) => p.y0)
-        .y1((p) => p.y1)
-        .curve(CURVES[this.curve()])(this.points()) ?? '',
+  private readonly points = computed<Point[]>(() =>
+    (this.state.extents().get(this.key()) ?? []).map(([low, high], i) => {
+      const value = this.state.at(i, high);
+      const below = this.state.at(i, low);
+      return { x: value.x, y: value.y, bx: below.x, by: below.y };
+    }),
   );
+
+  protected readonly areaPath = computed(() => {
+    const vertical = this.state.vertical();
+    const shape = vertical
+      ? area<Point>()
+          .y((p) => p.y)
+          .x0((p) => p.bx)
+          .x1((p) => p.x)
+      : area<Point>()
+          .x((p) => p.x)
+          .y0((p) => p.by)
+          .y1((p) => p.y);
+    return shape.curve(curveOf(this.curve(), vertical))(this.points()) ?? '';
+  });
 
   protected readonly edgePath = computed(
     () =>
       line<Point>()
         .x((p) => p.x)
-        .y((p) => p.y1)
-        .curve(CURVES[this.curve()])(this.points()) ?? '',
+        .y((p) => p.y)
+        .curve(curveOf(this.curve(), this.state.vertical()))(this.points()) ??
+      '',
   );
 
   protected readonly activePoint = computed(() => {
@@ -113,5 +129,42 @@ export class ScChartArea {
       stack: this.stack,
     });
     inject(DestroyRef).onDestroy(unregister);
+  }
+
+  labelPoints(
+    position: ScChartLabelPosition,
+    offset: number,
+  ): ScChartLabelPoint[] {
+    const rows = this.state.data();
+    const vertical = this.state.vertical();
+    return this.points().map((p, index) => {
+      const value = numberOf(rows[index]?.[this.key()]);
+      if (position === 'inside')
+        return {
+          index,
+          value,
+          x: (p.x + p.bx) / 2,
+          y: (p.y + p.by) / 2,
+          anchor: 'middle',
+          baseline: 'middle',
+        };
+      return vertical
+        ? {
+            index,
+            value,
+            x: p.x + offset,
+            y: p.y,
+            anchor: 'start',
+            baseline: 'middle',
+          }
+        : {
+            index,
+            value,
+            x: p.x,
+            y: p.y - offset,
+            anchor: 'middle',
+            baseline: 'auto',
+          };
+    });
   }
 }

@@ -36,3 +36,10 @@ test('Two lines: a legend; the tooltip has both', async ({ page }) => {
   await expect(tooltip(page)).toContainText('Desktop');
   await expect(tooltip(page)).toContainText('Mobile');
 });
+
+test('Labels: each value above its point', async ({ page }) => {
+  await page.goto(demo('label-line'));
+  const labels = page.locator('[data-slot=chart-labels] text');
+  await expect(labels).toHaveCount(6);
+  await expect(labels.first()).toHaveText('186');
+});

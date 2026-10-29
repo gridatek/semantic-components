@@ -30,12 +30,28 @@ import {
 
 @Component({
   selector: 'app-grid-radial-chart-demo',
-  imports: [ScChart, ScChartPlot, ScChartPolarGrid, ScChartRadialBar, ScChartTooltip],
+  imports: [
+    ScChart,
+    ScChartPlot,
+    ScChartPolarGrid,
+    ScChartRadialBar,
+    ScChartTooltip,
+  ],
   template: \`
-    <div scChart class="mx-auto aspect-square max-h-72" [config]="config" [data]="data">
+    <div
+      scChart
+      class="mx-auto aspect-square max-h-72"
+      [config]="config"
+      [data]="data"
+    >
       <svg scChartPlot categoryKey="browser" aria-label="Visitors by browser">
         <g scChartPolarGrid shape="circle" [spokes]="false" />
-        <g scChartRadialBar key="visitors" colorBy="category" [innerRadius]="0.2" />
+        <g
+          scChartRadialBar
+          key="visitors"
+          colorBy="category"
+          [innerRadius]="0.2"
+        />
       </svg>
       <div scChartTooltip hideLabel></div>
     </div>

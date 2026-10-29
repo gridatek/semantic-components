@@ -28,3 +28,7 @@ A series as radial bars: a ring per row, the first innermost, its value as an ar
 | `track`        | `boolean`: each ring's full length behind it           | `false` |
 
 An arc's length is its value's share of the largest one. A grid of circles behind: `<g scChartPolarGrid shape="circle" [spokes]="false" />`.
+
+## Labels
+
+`<g scChartLabels />` inside the radial bars writes each ring's value at its arc's start (`start`), beyond its end (`outside`) or in its middle (`inside`); its `formatter` can write the category instead.

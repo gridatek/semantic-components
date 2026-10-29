@@ -9,6 +9,9 @@ export type ScChartConfig = Readonly<
 /** How a line or an area's edge goes from point to point. */
 export type ScChartCurve = 'natural' | 'linear' | 'step' | 'monotone';
 
+/** Categories along the bottom (`horizontal`), or down the side (`vertical`: bars across). */
+export type ScChartLayout = 'horizontal' | 'vertical';
+
 /** Stacks as they are (`none`), or each category to 100% (`expand`). */
 export type ScChartStackOffset = 'none' | 'expand';
 

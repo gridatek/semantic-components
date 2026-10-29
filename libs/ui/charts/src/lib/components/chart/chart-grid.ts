@@ -9,7 +9,11 @@ import {
 import { cn } from '@semantic-components/ui';
 import { ScChartState } from './chart-state';
 
-/** The plot's grid: a line at each value tick and, if asked, each category. */
+/**
+ * The plot's grid: `horizontal` lines and, if asked, `vertical` ones — at
+ * the value ticks across the values' direction, at the categories across
+ * theirs.
+ */
 @Component({
   selector: 'g[scChartGrid]',
   template: `
@@ -50,13 +54,23 @@ export class ScChartGrid {
   /** About how many value lines. */
   readonly tickCount = input(5);
 
-  protected readonly rows = computed(() => {
-    const y = this.state.y();
-    return y.ticks(this.tickCount()).map((tick) => y(tick));
+  private readonly valueLines = computed(() => {
+    const scale = this.state.valueScale();
+    return scale.ticks(this.tickCount()).map((tick) => scale(tick));
   });
 
-  protected readonly columns = computed(() =>
+  private readonly categoryLines = computed(() =>
     this.state.data().map((_, index) => this.state.center(index)),
+  );
+
+  /** The horizontal lines: at the values — at the categories, laid out vertically. */
+  protected readonly rows = computed(() =>
+    this.state.vertical() ? this.categoryLines() : this.valueLines(),
+  );
+
+  /** The vertical lines: at the categories — at the values, laid out vertically. */
+  protected readonly columns = computed(() =>
+    this.state.vertical() ? this.valueLines() : this.categoryLines(),
   );
 
   protected readonly class = computed(() =>

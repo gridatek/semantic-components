@@ -32,10 +32,27 @@ import {
 
 @Component({
   selector: 'app-multiple-radar-chart-demo',
-  imports: [ScChart, ScChartPlot, ScChartPolarGrid, ScChartPolarAngleAxis, ScChartRadar, ScChartTooltip, ScChartLegend],
+  imports: [
+    ScChart,
+    ScChartPlot,
+    ScChartPolarGrid,
+    ScChartPolarAngleAxis,
+    ScChartRadar,
+    ScChartTooltip,
+    ScChartLegend,
+  ],
   template: \`
-    <div scChart class="mx-auto aspect-square max-h-72" [config]="config" [data]="data">
-      <svg scChartPlot categoryKey="month" aria-label="Visitors by device, January to June">
+    <div
+      scChart
+      class="mx-auto aspect-square max-h-72"
+      [config]="config"
+      [data]="data"
+    >
+      <svg
+        scChartPlot
+        categoryKey="month"
+        aria-label="Visitors by device, January to June"
+      >
         <g scChartPolarGrid />
         <g scChartPolarAngleAxis [tickFormatter]="short" />
         <g scChartRadar key="desktop" [fillOpacity]="0.6" />

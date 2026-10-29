@@ -4,12 +4,14 @@ import { ComponentBadges } from '../../../components/component-badges/component-
 import { EntryInstall } from '../../../components/entry-install/entry-install';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { DonutChartDemoContainer } from './demos/donut-chart-demo-container';
+import { LabelPieChartDemoContainer } from './demos/label-pie-chart-demo-container';
 import { PieChartDemoContainer } from './demos/pie-chart-demo-container';
 import { StackedPieChartDemoContainer } from './demos/stacked-pie-chart-demo-container';
 
 @Component({
   selector: 'app-pie-chart-page',
   imports: [
+    LabelPieChartDemoContainer,
     PieChartDemoContainer,
     DonutChartDemoContainer,
     StackedPieChartDemoContainer,
@@ -46,6 +48,7 @@ import { StackedPieChartDemoContainer } from './demos/stacked-pie-chart-demo-con
         <app-pie-chart-demo-container />
         <app-donut-chart-demo-container />
         <app-stacked-pie-chart-demo-container />
+        <app-label-pie-chart-demo-container />
       </section>
     </div>
   `,

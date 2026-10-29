@@ -31,10 +31,26 @@ import {
 
 @Component({
   selector: 'app-radar-chart-demo',
-  imports: [ScChart, ScChartPlot, ScChartPolarGrid, ScChartPolarAngleAxis, ScChartRadar, ScChartTooltip],
+  imports: [
+    ScChart,
+    ScChartPlot,
+    ScChartPolarGrid,
+    ScChartPolarAngleAxis,
+    ScChartRadar,
+    ScChartTooltip,
+  ],
   template: \`
-    <div scChart class="mx-auto aspect-square max-h-72" [config]="config" [data]="data">
-      <svg scChartPlot categoryKey="month" aria-label="Desktop visitors, January to June">
+    <div
+      scChart
+      class="mx-auto aspect-square max-h-72"
+      [config]="config"
+      [data]="data"
+    >
+      <svg
+        scChartPlot
+        categoryKey="month"
+        aria-label="Desktop visitors, January to June"
+      >
         <g scChartPolarGrid />
         <g scChartPolarAngleAxis [tickFormatter]="short" />
         <g scChartRadar key="desktop" dots />

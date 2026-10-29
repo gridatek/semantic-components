@@ -11,50 +11,56 @@ import { cn } from '@semantic-components/ui';
 import { ScChartState } from './chart-state';
 
 /**
- * The values, beside the plot: a label at each tick, in the app's locale or
- * through `tickFormatter` (`expand` stacks: a share, 0 to 1).
+ * The values: beside the plot, or under it in a `vertical` layout — a label at
+ * each tick, in the app's locale or through `tickFormatter` (`expand` stacks:
+ * a share, 0 to 1).
  */
 @Component({
-  selector: 'g[scChartYAxis]',
+  selector: 'g[scChartValueAxis]',
   template: `
     @for (tick of ticks(); track tick.value) {
       <svg:text
-        [attr.x]="x()"
+        [attr.x]="tick.x"
         [attr.y]="tick.y"
-        text-anchor="end"
-        dominant-baseline="middle"
+        [attr.text-anchor]="vertical() ? 'middle' : 'end'"
+        [attr.dominant-baseline]="vertical() ? 'hanging' : 'middle'"
       >
         {{ tick.label }}
       </svg:text>
     }
   `,
   host: {
-    'data-slot': 'chart-y-axis',
+    'data-slot': 'chart-value-axis',
     'aria-hidden': 'true',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScChartYAxis {
+export class ScChartValueAxis {
   private readonly state = inject(ScChartState);
   private readonly numbers = new Intl.NumberFormat(inject(LOCALE_ID));
 
   readonly classInput = input<string>('', { alias: 'class' });
-  /** The room its labels take, in px. */
+  /** Beside the plot: the room its labels take, in px. */
   readonly width = input(40);
   /** About how many ticks. */
   readonly tickCount = input(5);
   readonly tickFormatter = input<((value: number) => string) | null>(null);
 
-  protected readonly x = computed(() => this.state.area().left - 8);
+  protected readonly vertical = this.state.vertical;
 
   protected readonly ticks = computed(() => {
-    const y = this.state.y();
+    const scale = this.state.valueScale();
+    const { left, bottom } = this.state.area();
     const format =
       this.tickFormatter() ?? ((v: number) => this.numbers.format(v));
-    return y
-      .ticks(this.tickCount())
-      .map((value) => ({ value, y: y(value), label: format(value) }));
+    const vertical = this.vertical();
+    return scale.ticks(this.tickCount()).map((value) => ({
+      value,
+      label: format(value),
+      x: vertical ? scale(value) : left - 8,
+      y: vertical ? bottom + 8 : scale(value),
+    }));
   });
 
   protected readonly class = computed(() =>
@@ -62,7 +68,7 @@ export class ScChartYAxis {
   );
 
   constructor() {
-    this.state.yAxis.set(this.width);
-    inject(DestroyRef).onDestroy(() => this.state.yAxis.set(null));
+    this.state.valueAxis.set(this.width);
+    inject(DestroyRef).onDestroy(() => this.state.valueAxis.set(null));
   }
 }

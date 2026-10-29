@@ -28,3 +28,7 @@ A series as a pie: a slice per row, its share of the total, in its category's co
 | `activeOffset` | `number`: how far the slice pointed at grows | `6`     |
 
 The plot's `startAngle` and `endAngle` (degrees, 0 at the top, clockwise) bound it: 0 and 360 by default. The tooltip and the legend name and color each slice by its category.
+
+## Labels
+
+`<g scChartLabels />` inside the pie writes each slice's value beyond its edge (`outside`, anchored away from the center) or in its middle (`inside`). Make room for those outside with the plot's `margin`.

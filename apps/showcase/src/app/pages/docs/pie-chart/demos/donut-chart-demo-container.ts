@@ -32,12 +32,27 @@ import {
   selector: 'app-donut-chart-demo',
   imports: [ScChart, ScChartPlot, ScChartPie, ScChartCenter, ScChartTooltip],
   template: \`
-    <div scChart class="mx-auto aspect-square max-h-72" [config]="config" [data]="data">
+    <div
+      scChart
+      class="mx-auto aspect-square max-h-72"
+      [config]="config"
+      [data]="data"
+    >
       <svg scChartPlot categoryKey="browser" aria-label="Visitors by browser">
-        <g scChartPie key="visitors" [innerRadius]="0.6" [padAngle]="1" [strokeWidth]="0" />
+        <g
+          scChartPie
+          key="visitors"
+          [innerRadius]="0.6"
+          [padAngle]="1"
+          [strokeWidth]="0"
+        />
         <g scChartCenter>
-          <text text-anchor="middle" class="fill-foreground text-3xl font-bold">{{ total }}</text>
-          <text text-anchor="middle" dy="1.6em" class="fill-muted-foreground">Visitors</text>
+          <text text-anchor="middle" class="fill-foreground text-3xl font-bold">
+            {{ total }}
+          </text>
+          <text text-anchor="middle" dy="1.6em" class="fill-muted-foreground">
+            Visitors
+          </text>
         </g>
       </svg>
       <div scChartTooltip hideLabel></div>

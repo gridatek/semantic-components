@@ -9,14 +9,31 @@ import {
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { arc } from 'd3-shape';
-import { ScChartState } from '../chart/chart-state';
+import {
+  SC_CHART_SERIES,
+  type ScChartLabelPoint,
+  type ScChartLabelPosition,
+  type ScChartSeriesLabels,
+  anchorAt,
+} from '../chart/chart-series';
+import { ScChartState, numberOf } from '../chart/chart-state';
 
 interface Ring {
   index: number;
   path: string;
   track: string;
   color: string;
+  /** Its arc's angles, and its middle radius (px). */
+  from: number;
+  to: number;
+  radius: number;
 }
+
+/** A point at an angle (0 at the top, clockwise) and a radius, around (0, 0). */
+const around = (angle: number, radius: number) => ({
+  x: radius * Math.sin(angle),
+  y: -radius * Math.cos(angle),
+});
 
 /**
  * A series as radial bars: a ring per row, the first innermost, its value as
@@ -26,6 +43,7 @@ interface Ring {
  */
 @Component({
   selector: 'g[scChartRadialBar]',
+  providers: [{ provide: SC_CHART_SERIES, useExisting: ScChartRadialBar }],
   template: `
     @if (track()) {
       @for (ring of rings(); track ring.index) {
@@ -43,6 +61,7 @@ interface Ring {
         (pointerenter)="point(ring.index)"
       />
     }
+    <ng-content />
   `,
   host: {
     'data-slot': 'chart-radial-bar',
@@ -52,7 +71,7 @@ interface Ring {
   },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScChartRadialBar {
+export class ScChartRadialBar implements ScChartSeriesLabels {
   private readonly state = inject(ScChartState);
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -94,6 +113,9 @@ export class ScChartRadialBar {
       const angles = { innerRadius: 0, outerRadius: 0, padAngle: 0 };
       return {
         index,
+        from: at(low),
+        to: at(high),
+        radius: inner + (index + 0.5) * step,
         path:
           shape({ ...angles, startAngle: at(low), endAngle: at(high) }) ?? '',
         track: shape({ ...angles, startAngle: start, endAngle: end }) ?? '',
@@ -116,5 +138,30 @@ export class ScChartRadialBar {
 
   protected point(index: number): void {
     this.state.activeIndex.set(index);
+  }
+
+  labelPoints(
+    position: ScChartLabelPosition,
+    offset: number,
+  ): ScChartLabelPoint[] {
+    const rows = this.state.data();
+    return this.rings().map((ring) => {
+      const value = numberOf(rows[ring.index]?.[this.key()]);
+      // Along the ring: at its arc's start, beyond its end, or in its middle.
+      const nudge = offset / Math.max(1, ring.radius);
+      const angle =
+        position === 'start'
+          ? ring.from + nudge
+          : position === 'outside'
+            ? ring.to + nudge
+            : (ring.from + ring.to) / 2;
+      return {
+        index: ring.index,
+        value,
+        ...around(angle, ring.radius),
+        anchor: position === 'inside' ? 'middle' : 'start',
+        baseline: 'middle',
+      };
+    });
   }
 }

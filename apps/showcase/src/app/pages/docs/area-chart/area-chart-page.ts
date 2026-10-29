@@ -5,11 +5,13 @@ import { EntryInstall } from '../../../components/entry-install/entry-install';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { AreaChartDemoContainer } from './demos/area-chart-demo-container';
 import { ExpandedAreaChartDemoContainer } from './demos/expanded-area-chart-demo-container';
+import { InteractiveAreaChartDemoContainer } from './demos/interactive-area-chart-demo-container';
 import { StackedAreaChartDemoContainer } from './demos/stacked-area-chart-demo-container';
 
 @Component({
   selector: 'app-area-chart-page',
   imports: [
+    InteractiveAreaChartDemoContainer,
     AreaChartDemoContainer,
     StackedAreaChartDemoContainer,
     ExpandedAreaChartDemoContainer,
@@ -46,6 +48,7 @@ import { StackedAreaChartDemoContainer } from './demos/stacked-area-chart-demo-c
         <app-area-chart-demo-container />
         <app-stacked-area-chart-demo-container />
         <app-expanded-area-chart-demo-container />
+        <app-interactive-area-chart-demo-container />
       </section>
     </div>
   `,

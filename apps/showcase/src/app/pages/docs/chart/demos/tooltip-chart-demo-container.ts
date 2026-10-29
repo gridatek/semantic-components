@@ -23,6 +23,7 @@ import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
 import {
   ScChart,
   ScChartBar,
+  ScChartCategoryAxis,
   type ScChartConfig,
   ScChartCursor,
   ScChartGrid,
@@ -30,7 +31,6 @@ import {
   ScChartLegend,
   ScChartPlot,
   ScChartTooltip,
-  ScChartXAxis,
 } from '@semantic-components/ui/charts';
 
 @Component({
@@ -39,7 +39,7 @@ import {
     ScChart,
     ScChartPlot,
     ScChartGrid,
-    ScChartXAxis,
+    ScChartCategoryAxis,
     ScChartCursor,
     ScChartBar,
     ScChartTooltip,
@@ -67,7 +67,7 @@ import {
         aria-label="Visitors by device, January to June"
       >
         <g scChartGrid />
-        <g scChartXAxis [tickFormatter]="short" />
+        <g scChartCategoryAxis [tickFormatter]="short" />
         <g scChartCursor />
         <g scChartBar key="desktop" />
         <g scChartBar key="mobile" />

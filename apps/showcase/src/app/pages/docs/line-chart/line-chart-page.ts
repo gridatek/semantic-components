@@ -3,6 +3,7 @@ import { ScHeading } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { EntryInstall } from '../../../components/entry-install/entry-install';
 import { TocHeading } from '../../../components/toc/toc-heading';
+import { LabelLineChartDemoContainer } from './demos/label-line-chart-demo-container';
 import { LineChartDemoContainer } from './demos/line-chart-demo-container';
 import { MultipleLineChartDemoContainer } from './demos/multiple-line-chart-demo-container';
 import { StepLineChartDemoContainer } from './demos/step-line-chart-demo-container';
@@ -10,6 +11,7 @@ import { StepLineChartDemoContainer } from './demos/step-line-chart-demo-contain
 @Component({
   selector: 'app-line-chart-page',
   imports: [
+    LabelLineChartDemoContainer,
     LineChartDemoContainer,
     MultipleLineChartDemoContainer,
     StepLineChartDemoContainer,
@@ -46,6 +48,7 @@ import { StepLineChartDemoContainer } from './demos/step-line-chart-demo-contain
         <app-line-chart-demo-container />
         <app-multiple-line-chart-demo-container />
         <app-step-line-chart-demo-container />
+        <app-label-line-chart-demo-container />
       </section>
     </div>
   `,

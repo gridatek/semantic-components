@@ -6,8 +6,8 @@ A series as a line through its values, in `--color-<key>`. Made with [the chart'
 <div scChart [config]="config" [data]="data">
   <svg scChartPlot categoryKey="month" aria-label="Visitors by device, January to June">
     <g scChartGrid />
-    <g scChartXAxis />
-    <g scChartYAxis />
+    <g scChartCategoryAxis />
+    <g scChartValueAxis />
     <g scChartCursor />
     <g scChartLine key="desktop" curve="monotone" />
     <g scChartLine key="mobile" curve="monotone" />
@@ -26,3 +26,7 @@ A series as a line through its values, in `--color-<key>`. Made with [the chart'
 | `strokeWidth` | `number`                                         | `2`      |
 | `dots`        | `boolean`: a dot at each value                   | `false`  |
 | `activeDot`   | `boolean`: a dot where the pointer is            | `true`   |
+
+## Labels
+
+`<g scChartLabels />` inside the line writes each value above its point (`outside`), or on it (`inside`).

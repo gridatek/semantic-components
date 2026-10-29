@@ -8,13 +8,30 @@ import {
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { arc, pie } from 'd3-shape';
+import {
+  SC_CHART_SERIES,
+  type ScChartLabelPoint,
+  type ScChartLabelPosition,
+  type ScChartSeriesLabels,
+  anchorAt,
+} from '../chart/chart-series';
 import { ScChartState, numberOf } from '../chart/chart-state';
 
 interface Slice {
   index: number;
   path: string;
   color: string;
+  /** Its middle angle, and its radii (px). */
+  middle: number;
+  inner: number;
+  outer: number;
 }
+
+/** A point at an angle (0 at the top, clockwise) and a radius, around (0, 0). */
+const around = (angle: number, radius: number) => ({
+  x: radius * Math.sin(angle),
+  y: -radius * Math.cos(angle),
+});
 
 /**
  * A series as a pie: a slice per row, its share of the total, in its
@@ -23,6 +40,7 @@ interface Slice {
  */
 @Component({
   selector: 'g[scChartPie]',
+  providers: [{ provide: SC_CHART_SERIES, useExisting: ScChartPie }],
   template: `
     @for (slice of slices(); track slice.index) {
       <svg:path
@@ -33,6 +51,7 @@ interface Slice {
         (pointerenter)="point(slice.index)"
       />
     }
+    <ng-content />
   `,
   host: {
     'data-slot': 'chart-pie',
@@ -42,7 +61,7 @@ interface Slice {
   },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScChartPie {
+export class ScChartPie implements ScChartSeriesLabels {
   private readonly state = inject(ScChartState);
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -80,6 +99,9 @@ export class ScChartPie {
       .padAngle((this.padAngle() * Math.PI) / 180)(rows.map((_, i) => i));
     return arcs.map((a) => ({
       index: a.data,
+      middle: (a.startAngle + a.endAngle) / 2,
+      inner: radius * this.innerRadius(),
+      outer: radius * this.outerRadius(),
       color: `var(--color-${categories[a.data]})`,
       path:
         arc()
@@ -112,5 +134,31 @@ export class ScChartPie {
 
   protected point(index: number): void {
     this.state.activeIndex.set(index);
+  }
+
+  labelPoints(
+    position: ScChartLabelPosition,
+    offset: number,
+  ): ScChartLabelPoint[] {
+    const rows = this.state.data();
+    return this.slices().map((slice) => {
+      const value = numberOf(rows[slice.index]?.[this.key()]);
+      // Outside: beyond its edge; else in its middle.
+      if (position === 'outside')
+        return {
+          index: slice.index,
+          value,
+          ...around(slice.middle, slice.outer + offset),
+          anchor: anchorAt(slice.middle),
+          baseline: 'middle',
+        };
+      return {
+        index: slice.index,
+        value,
+        ...around(slice.middle, (slice.inner + slice.outer) / 2),
+        anchor: 'middle',
+        baseline: 'middle',
+      };
+    });
   }
 }

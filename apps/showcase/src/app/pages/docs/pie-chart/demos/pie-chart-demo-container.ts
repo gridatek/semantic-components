@@ -32,7 +32,12 @@ import {
   selector: 'app-pie-chart-demo',
   imports: [ScChart, ScChartPlot, ScChartPie, ScChartTooltip, ScChartLegend],
   template: \`
-    <div scChart class="mx-auto aspect-square max-h-72" [config]="config" [data]="data">
+    <div
+      scChart
+      class="mx-auto aspect-square max-h-72"
+      [config]="config"
+      [data]="data"
+    >
       <svg scChartPlot categoryKey="browser" aria-label="Visitors by browser">
         <g scChartPie key="visitors" />
       </svg>

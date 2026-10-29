@@ -61,7 +61,7 @@ interface Row {
     '[attr.data-state]': 'content() ? "open" : "closed"',
     '[style.left.px]': 'position().left',
     '[style.top.px]': 'position().top',
-    '[style.translate]': 'position().flip ? "calc(-100% - 24px) 0" : null',
+    '[style.translate]': 'position().translate',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
@@ -114,13 +114,26 @@ export class ScChartTooltip {
   /** Beside the category, on the side with room. */
   protected readonly position = computed(() => {
     const index = this.state.activeIndex() ?? 0;
-    const x = this.state.center(index);
+    const along = this.state.center(index);
     const { x: dx, y: dy } = this.state.offset();
-    return {
-      left: dx + x + 12,
-      top: dy + this.state.area().top,
-      flip: x > this.state.width() / 2,
-    };
+    const { left, top, right } = this.state.area();
+    // Beside its category, on the side with room: right or left of a column,
+    // under or over a row.
+    return this.state.vertical()
+      ? {
+          left: dx + (left + right) / 2,
+          top: dy + along + 12,
+          translate:
+            along > this.state.height() / 2
+              ? '-50% calc(-100% - 24px)'
+              : '-50% 0',
+        }
+      : {
+          left: dx + along + 12,
+          top: dy + top,
+          translate:
+            along > this.state.width() / 2 ? 'calc(-100% - 24px) 0' : null,
+        };
   });
 
   protected readonly indicatorClass = computed(() =>

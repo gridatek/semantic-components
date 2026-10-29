@@ -10,6 +10,7 @@ import { stack, stackOffsetDiverging, stackOffsetExpand } from 'd3-shape';
 import type {
   ScChartConfig,
   ScChartDatum,
+  ScChartLayout,
   ScChartMargin,
   ScChartStackOffset,
 } from './chart-types';
@@ -37,6 +38,8 @@ export interface ScChartPlotSource {
   readonly categoryKey: Signal<string>;
   readonly margin: Signal<ScChartMargin>;
   readonly stackOffset: Signal<ScChartStackOffset>;
+  /** `horizontal`: categories along the bottom; `vertical`: down the side (bars across). */
+  readonly layout: Signal<ScChartLayout>;
   /** Polar charts: where they start and end, in degrees (0 at the top, clockwise). */
   readonly startAngle: Signal<number>;
   readonly endAngle: Signal<number>;
@@ -45,6 +48,9 @@ export interface ScChartPlotSource {
 /** A value, as a number (`NaN` and the rest as 0). */
 export const numberOf = (value: unknown): number =>
   typeof value === 'number' ? value : Number(value) || 0;
+
+/** The room an axis along the bottom takes, in px. */
+const AXIS_HEIGHT = 24;
 
 const DEFAULT_MARGIN: ScChartMargin = {
   top: 8,
@@ -69,11 +75,12 @@ export class ScChartState {
   readonly height = signal(200);
   /** Where the plot is in the chart, in px: for the tooltip. */
   readonly offset = signal({ x: 0, y: 0 });
-  /** The room the axes take, set by them. */
-  readonly xAxisHeight = signal(0);
-  /** The value axis' width input, while there is one. */
-  readonly yAxis = signal<Signal<number> | null>(null);
-  readonly yAxisWidth = computed(() => this.yAxis()?.() ?? 0);
+  /** The axes, while there are: each one's width input (its room on the side). */
+  readonly categoryAxis = signal<Signal<number> | null>(null);
+  readonly valueAxis = signal<Signal<number> | null>(null);
+
+  /** Categories down the side, values across. */
+  readonly vertical = computed(() => this.plot()?.layout() === 'vertical');
 
   /** Polar charts: the room the labels around them take, set by them. */
   readonly polarPadding = signal(0);
@@ -91,15 +98,21 @@ export class ScChartState {
     return this.data().map((row) => String(row[key] ?? ''));
   });
 
-  /** The plot's drawing area, inside the margin and the axes. */
+  /**
+   * The plot's drawing area, inside the margin and the axes: the axis on the
+   * side takes its width, the one along the bottom its height.
+   */
   readonly area = computed(() => {
     const margin = this.plot()?.margin() ?? DEFAULT_MARGIN;
-    const left = margin.left + this.yAxisWidth();
+    const [side, below] = this.vertical()
+      ? [this.categoryAxis(), this.valueAxis()]
+      : [this.valueAxis(), this.categoryAxis()];
+    const left = margin.left + (side?.() ?? 0);
     const top = margin.top;
     const right = Math.max(left, this.width() - margin.right);
     const bottom = Math.max(
       top,
-      this.height() - margin.bottom - this.xAxisHeight(),
+      this.height() - margin.bottom - (below ? AXIS_HEIGHT : 0),
     );
     return { left, top, right, bottom };
   });
@@ -109,17 +122,23 @@ export class ScChartState {
     this.series().some((series) => series.kind === 'bar'),
   );
 
-  readonly x = computed<ScaleBand<number> | ScalePoint<number>>(() => {
-    const { left, right } = this.area();
-    const indices = this.data().map((_, index) => index);
-    return this.banded()
-      ? scaleBand<number>()
-          .domain(indices)
-          .range([left, right])
-          .paddingInner(0.2)
-          .paddingOuter(0.1)
-      : scalePoint<number>().domain(indices).range([left, right]);
-  });
+  /** Where each category is: along the bottom, or down the side. */
+  readonly categoryScale = computed<ScaleBand<number> | ScalePoint<number>>(
+    () => {
+      const { left, top, right, bottom } = this.area();
+      const range: [number, number] = this.vertical()
+        ? [top, bottom]
+        : [left, right];
+      const indices = this.data().map((_, index) => index);
+      return this.banded()
+        ? scaleBand<number>()
+            .domain(indices)
+            .range(range)
+            .paddingInner(0.2)
+            .paddingOuter(0.1)
+        : scalePoint<number>().domain(indices).range(range);
+    },
+  );
 
   /** Each series' [low, high] per row: within its stack, else from 0. */
   readonly extents = computed(() => {
@@ -155,10 +174,14 @@ export class ScChartState {
     return result;
   });
 
-  readonly y = computed(() => {
-    const { top, bottom } = this.area();
+  /** Where each value is: up from the bottom, or across from the side. */
+  readonly valueScale = computed(() => {
+    const { left, top, right, bottom } = this.area();
+    const range: [number, number] = this.vertical()
+      ? [left, right]
+      : [bottom, top];
     if (this.stackOffset() === 'expand')
-      return scaleLinear().domain([0, 1]).range([bottom, top]);
+      return scaleLinear().domain([0, 1]).range(range);
     let low = 0;
     let high = 0;
     for (const extent of this.extents().values())
@@ -167,7 +190,7 @@ export class ScChartState {
         high = Math.max(high, a, b);
       }
     if (high === low) high = low + 1;
-    return scaleLinear().domain([low, high]).nice().range([bottom, top]);
+    return scaleLinear().domain([low, high]).nice().range(range);
   });
 
   /** Within a band, a slot per bar stack (or unstacked bar series). */
@@ -180,22 +203,30 @@ export class ScChartState {
       }
     return scaleBand<string>()
       .domain(slots)
-      .range([0, this.x().bandwidth()])
+      .range([0, this.categoryScale().bandwidth()])
       .padding(slots.length > 1 ? 0.1 : 0);
   });
 
-  /** The middle of a category, in px. */
+  /** The middle of a category, along its axis, in px. */
   center(index: number): number {
-    const x = this.x();
-    return (x(index) ?? 0) + x.bandwidth() / 2;
+    const scale = this.categoryScale();
+    return (scale(index) ?? 0) + scale.bandwidth() / 2;
+  }
+
+  /** A category's value as a point in the plot, in px. */
+  at(index: number, value: number): { x: number; y: number } {
+    const c = this.center(index);
+    const v = this.valueScale()(value);
+    return this.vertical() ? { x: v, y: c } : { x: c, y: v };
   }
 
   /** The category nearest a point, in px. */
-  indexAt(px: number): number | null {
+  indexAt(px: number, py: number): number | null {
+    const along = this.vertical() ? py : px;
     let best: number | null = null;
     let distance = Infinity;
     for (let index = 0; index < this.data().length; index++) {
-      const d = Math.abs(this.center(index) - px);
+      const d = Math.abs(this.center(index) - along);
       if (d < distance) {
         distance = d;
         best = index;

@@ -9,8 +9,14 @@ import {
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { line } from 'd3-shape';
-import { CURVES } from '../chart/chart-curve';
-import { ScChartState } from '../chart/chart-state';
+import { curveOf } from '../chart/chart-curve';
+import {
+  SC_CHART_SERIES,
+  type ScChartLabelPoint,
+  type ScChartLabelPosition,
+  type ScChartSeriesLabels,
+} from '../chart/chart-series';
+import { ScChartState, numberOf } from '../chart/chart-state';
 import type { ScChartCurve } from '../chart/chart-types';
 
 interface Point {
@@ -21,6 +27,7 @@ interface Point {
 /** A series as a line through its values (`key`), in `--color-<key>`. */
 @Component({
   selector: 'g[scChartLine]',
+  providers: [{ provide: SC_CHART_SERIES, useExisting: ScChartLine }],
   template: `
     <svg:path
       [attr.d]="path()"
@@ -48,6 +55,7 @@ interface Point {
         [attr.fill]="color()"
       />
     }
+    <ng-content />
   `,
   host: {
     'data-slot': 'chart-line',
@@ -56,7 +64,7 @@ interface Point {
   },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScChartLine {
+export class ScChartLine implements ScChartSeriesLabels {
   private readonly state = inject(ScChartState);
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -71,20 +79,19 @@ export class ScChartLine {
 
   protected readonly color = computed(() => `var(--color-${this.key()})`);
 
-  protected readonly points = computed<Point[]>(() => {
-    const y = this.state.y();
-    return (this.state.extents().get(this.key()) ?? []).map(([, value], i) => ({
-      x: this.state.center(i),
-      y: y(value),
-    }));
-  });
+  protected readonly points = computed<Point[]>(() =>
+    (this.state.extents().get(this.key()) ?? []).map(([, value], i) =>
+      this.state.at(i, value),
+    ),
+  );
 
   protected readonly path = computed(
     () =>
       line<Point>()
         .x((p) => p.x)
         .y((p) => p.y)
-        .curve(CURVES[this.curve()])(this.points()) ?? '',
+        .curve(curveOf(this.curve(), this.state.vertical()))(this.points()) ??
+      '',
   );
 
   protected readonly activePoint = computed(() => {
@@ -101,5 +108,35 @@ export class ScChartLine {
       stack: computed(() => null),
     });
     inject(DestroyRef).onDestroy(unregister);
+  }
+
+  labelPoints(
+    position: ScChartLabelPosition,
+    offset: number,
+  ): ScChartLabelPoint[] {
+    const rows = this.state.data();
+    const vertical = this.state.vertical();
+    return this.points().map((p, index) => {
+      const value = numberOf(rows[index]?.[this.key()]);
+      if (position === 'inside')
+        return { index, value, ...p, anchor: 'middle', baseline: 'middle' };
+      return vertical
+        ? {
+            index,
+            value,
+            x: p.x + offset,
+            y: p.y,
+            anchor: 'start',
+            baseline: 'middle',
+          }
+        : {
+            index,
+            value,
+            x: p.x,
+            y: p.y - offset,
+            anchor: 'middle',
+            baseline: 'auto',
+          };
+    });
   }
 }

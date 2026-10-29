@@ -2,13 +2,13 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScChart,
   ScChartArea,
+  ScChartCategoryAxis,
   type ScChartConfig,
   ScChartCursor,
   ScChartGrid,
   ScChartPlot,
   ScChartTooltip,
-  ScChartXAxis,
-  ScChartYAxis,
+  ScChartValueAxis,
 } from '@semantic-components/ui/charts';
 
 @Component({
@@ -17,8 +17,8 @@ import {
     ScChart,
     ScChartPlot,
     ScChartGrid,
-    ScChartXAxis,
-    ScChartYAxis,
+    ScChartCategoryAxis,
+    ScChartValueAxis,
     ScChartCursor,
     ScChartArea,
     ScChartTooltip,
@@ -32,8 +32,8 @@ import {
         aria-label="Share of visitors by device, January to June"
       >
         <g scChartGrid />
-        <g scChartXAxis [tickFormatter]="short" />
-        <g scChartYAxis [tickFormatter]="percent" />
+        <g scChartCategoryAxis [tickFormatter]="short" />
+        <g scChartValueAxis [tickFormatter]="percent" />
         <g scChartCursor />
         <g scChartArea key="mobile" stack="a" curve="linear" />
         <g scChartArea key="desktop" stack="a" curve="linear" />

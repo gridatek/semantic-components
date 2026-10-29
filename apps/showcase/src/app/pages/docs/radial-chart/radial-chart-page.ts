@@ -4,12 +4,14 @@ import { ComponentBadges } from '../../../components/component-badges/component-
 import { EntryInstall } from '../../../components/entry-install/entry-install';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { GridRadialChartDemoContainer } from './demos/grid-radial-chart-demo-container';
+import { LabelRadialChartDemoContainer } from './demos/label-radial-chart-demo-container';
 import { RadialChartDemoContainer } from './demos/radial-chart-demo-container';
 import { StackedRadialChartDemoContainer } from './demos/stacked-radial-chart-demo-container';
 
 @Component({
   selector: 'app-radial-chart-page',
   imports: [
+    LabelRadialChartDemoContainer,
     RadialChartDemoContainer,
     StackedRadialChartDemoContainer,
     GridRadialChartDemoContainer,
@@ -46,6 +48,7 @@ import { StackedRadialChartDemoContainer } from './demos/stacked-radial-chart-de
         <app-radial-chart-demo-container />
         <app-stacked-radial-chart-demo-container />
         <app-grid-radial-chart-demo-container />
+        <app-label-radial-chart-demo-container />
       </section>
     </div>
   `,

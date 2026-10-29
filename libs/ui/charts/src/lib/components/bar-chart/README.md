@@ -6,7 +6,7 @@ A series as bars: one per category, side by side with the other series' — or o
 <div scChart [config]="config" [data]="data">
   <svg scChartPlot categoryKey="month" aria-label="Visitors by device, January to June">
     <g scChartGrid />
-    <g scChartXAxis />
+    <g scChartCategoryAxis />
     <g scChartCursor />
     <g scChartBar key="desktop" stack="a" [radius]="[0, 0, 4, 4]" />
     <g scChartBar key="mobile" stack="a" [radius]="[4, 4, 0, 0]" />
@@ -26,3 +26,7 @@ A series as bars: one per category, side by side with the other series' — or o
 | `fill`   | `string`: instead of its color, `url(#gradient)` | `''`                                                               |
 
 With bars in the plot, each category is a band: the cursor fills it, and the areas and lines of the same plot sit in its middle.
+
+## Across, and labels
+
+The plot's `layout="vertical"` puts the categories down the side and the bars across — the category axis beside them, the value axis under; `radius` turns with them (its first two: the bar's end). Labels: `<g scChartLabels />` inside the bar — `outside` beyond its end, `inside` in its middle, `start` at its base.

@@ -49,3 +49,10 @@ test('Rings: each series named, its category in the title', async ({
   await expect(tooltip(page)).toContainText('Desktop');
   await expect(tooltip(page)).toContainText('Mobile');
 });
+
+test('Labels: each value beyond its slice', async ({ page }) => {
+  await page.goto(demo('label-pie'));
+  const labels = page.locator('[data-slot=chart-labels] text');
+  await expect(labels).toHaveCount(5);
+  await expect(labels.first()).toHaveText('275');
+});

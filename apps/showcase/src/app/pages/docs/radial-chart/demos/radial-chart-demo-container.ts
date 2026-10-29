@@ -31,9 +31,20 @@ import {
   selector: 'app-radial-chart-demo',
   imports: [ScChart, ScChartPlot, ScChartRadialBar, ScChartTooltip],
   template: \`
-    <div scChart class="mx-auto aspect-square max-h-72" [config]="config" [data]="data">
+    <div
+      scChart
+      class="mx-auto aspect-square max-h-72"
+      [config]="config"
+      [data]="data"
+    >
       <svg scChartPlot categoryKey="browser" aria-label="Visitors by browser">
-        <g scChartRadialBar key="visitors" colorBy="category" track [cornerRadius]="6" />
+        <g
+          scChartRadialBar
+          key="visitors"
+          colorBy="category"
+          track
+          [cornerRadius]="6"
+        />
       </svg>
       <div scChartTooltip hideLabel></div>
     </div>
