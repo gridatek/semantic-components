@@ -1,10 +1,71 @@
 # Reference libraries
 
-For a component shadcn/ui doesn't have, the libraries we follow: what they do,
-what we took, and what is still open. We follow their behaviour and layout —
-never their CSS; the look stays ours (shadcn's tokens).
+For a component shadcn/ui doesn't have — or whose behaviour shadcn leaves to
+another library, as its charts do to Recharts — the libraries we follow: what
+they do, what we took, and what is still open. We follow their behaviour and
+layout — never their CSS; the look stays ours (shadcn's tokens).
 
 Check them before deciding how a component behaves — don't guess.
+
+## Charts
+
+shadcn's charts are [Recharts](https://recharts.org) with shadcn's config,
+tooltip and legend around it. Ours (`ui/charts`) take Recharts' API — composable
+parts, their option names, their chart types — and shadcn's look, but the
+drawing is our own: d3 for the maths (scales, shapes, stacks, the treemap and
+sankey layouts), Angular templates and signals for the SVG. Recharts' code isn't
+used; it's React.
+
+| Library                                          | What to read                                                                                                                                                                                                                               |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [Recharts](https://recharts.org)                 | The [API docs](https://recharts.org/en-US/api), part by part; the [source](https://github.com/recharts/recharts/tree/main/src) (`cartesian/`, `polar/`, `chart/`, `component/`); its [issues](https://github.com/recharts/recharts/issues) |
+| [shadcn/ui charts](https://ui.shadcn.com/charts) | The examples (our checklist), the [chart docs](https://ui.shadcn.com/docs/components/chart): config, tooltip, legend; the styles in `registry/styles/style-nova.css`                                                                       |
+
+**Check Recharts first when:**
+
+- **Fixing a chart bug.** Recharts has met most of them — edge cases in stacks,
+  negative values, empty data, a single row, labels that collide, a pointer
+  between two points. Read how its part handles it (source, issues) before
+  writing our own fix.
+- **Writing or changing a part's README.** Its API docs say what each option
+  does and its default; ours should cover the same ground, in our words.
+- **Adding an option or a type.** Use its name and its default unless we have
+  a reason not to (see below), so its examples port.
+
+**Taken:**
+
+- **The parts**: a plot holding a grid, axes, a cursor, series and labels
+  (`LabelList`), with a tooltip and a legend.
+- **The names**: `layout` (`vertical`), `stackOffset` (`expand`), `stack`
+  (Recharts' `stackId`), `startAngle` / `endAngle`, `innerRadius`,
+  `outerRadius`, `padAngle`, `cornerRadius`, label positions.
+- **The types**: shadcn's six (area, bar, line, pie, radial, radar), then
+  Recharts' scatter, funnel, treemap, sunburst and sankey.
+
+**Ours, on purpose:**
+
+- **Directives on the consumer's elements** (`<g scChartBar>`,
+  `<svg scChartPlot>`), not components that render their own tags.
+- **The axes are named by what they show**: `scChartCategoryAxis` and
+  `scChartValueAxis`, not `XAxis` and `YAxis` — laid out `vertical`, the
+  categories run down the side.
+- **The keyboard and screen readers by default**: the plot is one tab stop,
+  ←/→, Home and End move through the rows, the tooltip is a live region
+  (Recharts: an opt-in `accessibilityLayer`).
+- **A scatter's axes span its values**, not from 0 (Recharts' number axis
+  default).
+- **Less API**: no callback per event where state or Signal Forms cover it.
+
+**Open — to follow it later:**
+
+- **Animations.** Recharts animates its series as they appear and when the
+  data changes (`isAnimationActive`, `animationBegin`, `animationDuration`,
+  `animationEasing`); ours don't animate yet. Read how each series animates
+  (bars grow from their base, lines draw along, slices sweep) and its
+  defaults; honour `prefers-reduced-motion`.
+- **What it has that we don't**: its other options per part (`Brush`,
+  `ReferenceLine`, `ReferenceArea`, `ErrorBar`, axis `domain`, …), checked
+  against shadcn's examples first.
 
 ## Video Player
 
