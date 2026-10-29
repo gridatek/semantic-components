@@ -2,12 +2,12 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 
 @Component({
-  selector: 'app-rtl-navbar-next-demo-container',
+  selector: 'app-rtl-navbar-demo-container',
   imports: [DemoContainer],
   template: `
     <app-demo-container
       title="RTL"
-      demoUrl="/demos/navbar-next/rtl-navbar-next-demo"
+      demoUrl="/demos/navbar/rtl-navbar-demo"
       framed
       [frameWidth]="390"
       [frameHeight]="420"
@@ -17,16 +17,16 @@ import { DemoContainer } from '../../../../components/demo-container/demo-contai
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class RtlNavbarNextDemoContainer {
+export class RtlNavbarDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScNavbarNext,
-  ScNavbarNextBrand,
-  ScNavbarNextLink,
-  ScNavbarNextMenu,
-  ScNavbarNextMenuLink,
-  ScNavbarNextNav,
-  ScNavbarNextToggle,
+  ScNavbar,
+  ScNavbarBrand,
+  ScNavbarLink,
+  ScNavbarMenu,
+  ScNavbarMenuLink,
+  ScNavbarNav,
+  ScNavbarToggle,
 } from '@semantic-components/ui';
 import {
   SiGalleryVerticalEndIcon,
@@ -35,30 +35,30 @@ import {
 } from '@semantic-icons/lucide-icons';
 
 @Component({
-  selector: 'app-rtl-navbar-next-demo',
+  selector: 'app-rtl-navbar-demo',
   imports: [
-    ScNavbarNext,
-    ScNavbarNextBrand,
-    ScNavbarNextLink,
-    ScNavbarNextMenu,
-    ScNavbarNextMenuLink,
-    ScNavbarNextNav,
-    ScNavbarNextToggle,
+    ScNavbar,
+    ScNavbarBrand,
+    ScNavbarLink,
+    ScNavbarMenu,
+    ScNavbarMenuLink,
+    ScNavbarNav,
+    ScNavbarToggle,
     SiGalleryVerticalEndIcon,
     SiMenuIcon,
     SiXIcon,
   ],
   template: \`
     <div dir="rtl" lang="ar">
-      <header scNavbarNext aria-label="أكمي" #navbar="scNavbarNext">
-        <a scNavbarNextBrand href="#">
+      <header scNavbar aria-label="أكمي" #navbar="scNavbar">
+        <a scNavbarBrand href="#">
           <svg siGalleryVerticalEndIcon></svg>
           أكمي
         </a>
-        <nav scNavbarNextNav aria-label="الرئيسية">
+        <nav scNavbarNav aria-label="الرئيسية">
           @for (link of links; track link) {
             <a
-              scNavbarNextLink
+              scNavbarLink
               href="#"
               [active]="link === current()"
               (click)="go($event, link)"
@@ -67,7 +67,7 @@ import {
             </a>
           }
         </nav>
-        <button scNavbarNextToggle>
+        <button scNavbarToggle>
           @if (navbar.open()) {
             <svg siXIcon></svg>
             <span class="sr-only">إغلاق القائمة</span>
@@ -76,11 +76,11 @@ import {
             <span class="sr-only">فتح القائمة</span>
           }
         </button>
-        <div scNavbarNextMenu>
+        <div scNavbarMenu>
           <nav aria-label="الرئيسية">
             @for (link of links; track link) {
               <a
-                scNavbarNextMenuLink
+                scNavbarMenuLink
                 href="#"
                 [active]="link === current()"
                 (click)="go($event, link)"
@@ -95,7 +95,7 @@ import {
   \`,
   encapsulation: ViewEncapsulation.None,
 })
-export class RtlNavbarNextDemo {
+export class RtlNavbarDemo {
   readonly links = ['المنتجات', 'الأسعار', 'التوثيق', 'المدونة'];
   readonly current = signal('المنتجات');
 

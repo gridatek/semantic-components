@@ -1,11 +1,31 @@
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+
+@Component({
+  selector: 'app-navigation-menu-navbar-demo-container',
+  imports: [DemoContainer],
+  template: `
+    <app-demo-container
+      title="With a Navigation Menu"
+      demoUrl="/demos/navbar/navigation-menu-navbar-demo"
+      framed
+      [frameWidth]="1024"
+      [frameHeight]="360"
+      [code]="code"
+    />
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class NavigationMenuNavbarDemoContainer {
+  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScNavbarNext,
-  ScNavbarNextBrand,
-  ScNavbarNextMenu,
-  ScNavbarNextMenuLink,
-  ScNavbarNextNav,
-  ScNavbarNextToggle,
+  ScNavbar,
+  ScNavbarBrand,
+  ScNavbarMenu,
+  ScNavbarMenuLink,
+  ScNavbarNav,
+  ScNavbarToggle,
   ScNavigationMenu,
   ScNavigationMenuContent,
   ScNavigationMenuItem,
@@ -23,14 +43,14 @@ import {
 } from '@semantic-icons/lucide-icons';
 
 @Component({
-  selector: 'app-navigation-menu-navbar-next-demo',
+  selector: 'app-navigation-menu-navbar-demo',
   imports: [
-    ScNavbarNext,
-    ScNavbarNextBrand,
-    ScNavbarNextMenu,
-    ScNavbarNextMenuLink,
-    ScNavbarNextNav,
-    ScNavbarNextToggle,
+    ScNavbar,
+    ScNavbarBrand,
+    ScNavbarMenu,
+    ScNavbarMenuLink,
+    ScNavbarNav,
+    ScNavbarToggle,
     ScNavigationMenu,
     ScNavigationMenuContent,
     ScNavigationMenuItem,
@@ -44,13 +64,13 @@ import {
     SiMenuIcon,
     SiXIcon,
   ],
-  template: `
-    <header scNavbarNext aria-label="Acme, with menus" #navbar="scNavbarNext">
-      <a scNavbarNextBrand href="#">
+  template: \`
+    <header scNavbar aria-label="Acme, with menus" #navbar="scNavbar">
+      <a scNavbarBrand href="#">
         <svg siGalleryVerticalEndIcon></svg>
         Acme
       </a>
-      <nav scNavigationMenu scNavbarNextNav aria-label="Main, with menus">
+      <nav scNavigationMenu scNavbarNav aria-label="Main, with menus">
         <ul scNavigationMenuList>
           <li scNavigationMenuItem>
             <button scNavigationMenuTrigger>
@@ -76,7 +96,7 @@ import {
           }
         </ul>
       </nav>
-      <button scNavbarNextToggle>
+      <button scNavbarToggle>
         @if (navbar.open()) {
           <svg siXIcon></svg>
           <span class="sr-only">Close menu</span>
@@ -85,11 +105,11 @@ import {
           <span class="sr-only">Open menu</span>
         }
       </button>
-      <div scNavbarNextMenu>
+      <div scNavbarMenu>
         <nav aria-label="Main, with menus">
           @for (link of links; track link) {
             <a
-              scNavbarNextMenuLink
+              scNavbarMenuLink
               href="#"
               [active]="link === current()"
               (click)="go($event, link)"
@@ -100,10 +120,10 @@ import {
         </nav>
       </div>
     </header>
-  `,
+  \`,
   encapsulation: ViewEncapsulation.None,
 })
-export class NavigationMenuNavbarNextDemo {
+export class NavigationMenuNavbarDemo {
   readonly links = ['Products', 'Pricing', 'Docs', 'Blog'];
   readonly current = signal('Products');
 
@@ -113,4 +133,5 @@ export class NavigationMenuNavbarNextDemo {
     this.current.set(link);
   }
   readonly products = ['Analytics', 'Automation', 'Reports'];
+}`;
 }

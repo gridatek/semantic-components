@@ -32,7 +32,7 @@
     "navbar.getStarted": "Commencer",
     "navbar.closeMenu": "Fermer le menu",
     "navbar.openMenu": "Ouvrir le menu",
-    "navbar.mobileNavigation": "Navigation mobile",
+    "navbar.main": "Principal",
     "navbar.home": "Accueil",
     "article.back": "← Retour au blog",
     "blog.signals.title": "Bien démarrer avec les signaux Angular",

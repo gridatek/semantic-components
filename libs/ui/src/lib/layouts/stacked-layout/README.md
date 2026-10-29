@@ -6,7 +6,7 @@ A generic layout component that provides a stacked structure with slots for navb
 
 ```
 ┌───────────────────────────────────────────────┐
-│ scStackedLayout (data-slot="stacked-layout")│
+│ scStackedLayout (data-slot="stacked-layout")  │
 ├───────────────────────────────────────────────┤
 │              [scNavbar]                       │
 ├───────────────────────────────────────────────┤
@@ -57,10 +57,10 @@ const routes: Routes = [
 
 ## Content Projection
 
-| Attribute  | Description                               |
-| ---------- | ----------------------------------------- |
-| `scNavbar` | Projects content into the top navbar area |
-| `scFooter` | Projects content into the footer area     |
+| Attribute  | Description                                                                                                                                                     |
+| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `scNavbar` | Projects content into the top area, stuck to the top of the window. Not wrapped in a `header`: the navbar is the page's header (`header[scNavbar]`, the banner) |
+| `scFooter` | Projects content into the footer area                                                                                                                           |
 
 ## Data Slots
 

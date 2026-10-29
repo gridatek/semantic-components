@@ -6,9 +6,10 @@ import { cn } from '../../utils/cn/cn';
   selector: 'div[scStackedLayout]',
   imports: [RouterOutlet],
   template: `
-    <header class="sticky top-0 z-50">
+    <!-- Stuck to the top; the navbar itself is the page's header (banner). -->
+    <div class="sticky top-0 z-50">
       <ng-content select="[scNavbar]" />
-    </header>
+    </div>
 
     <main class="flex-1">
       <router-outlet />

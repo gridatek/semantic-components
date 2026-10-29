@@ -32,7 +32,7 @@
     "navbar.getStarted": " Get Started ",
     "navbar.closeMenu": "Close menu",
     "navbar.openMenu": "Open menu",
-    "navbar.mobileNavigation": "Mobile navigation",
+    "navbar.main": "Main",
     "navbar.home": " Home ",
     "article.back": " ← Back to Blog ",
     "blog.signals.title": " Getting Started with Angular Signals ",

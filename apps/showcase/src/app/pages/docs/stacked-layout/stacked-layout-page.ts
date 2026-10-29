@@ -34,9 +34,9 @@ import { StackedLayoutUsageDemoContainer } from './demos/stacked-layout-usage-de
           <li>
             The element marked
             <code>scNavbar</code>
-            goes in a
+            is stuck to the top of the window. It is not wrapped in a
             <code>header</code>
-            stuck to the top of the window.
+            : the navbar is the page's header itself.
           </li>
           <li>
             The routed page goes in

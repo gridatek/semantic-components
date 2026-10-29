@@ -9,7 +9,7 @@ import {
 import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils/cn/cn';
 import { type ScButtonVariants } from '../button/button';
-import { ScNavbarNext } from './navbar-next';
+import { ScNavbar } from './navbar';
 
 const HIDDEN = { sm: 'sm:hidden', md: 'md:hidden', lg: 'lg:hidden' } as const;
 
@@ -18,7 +18,7 @@ const HIDDEN = { sm: 'sm:hidden', md: 'md:hidden', lg: 'lg:hidden' } as const;
  * that follows the state (`sr-only`): "Open menu" / "Close menu".
  *
  * ```html
- * <button scNavbarNextToggle>
+ * <button scNavbarToggle>
  *   @if (navbar.open()) {
  *     <svg siXIcon></svg><span class="sr-only">Close menu</span>
  *   } @else {
@@ -28,7 +28,7 @@ const HIDDEN = { sm: 'sm:hidden', md: 'md:hidden', lg: 'lg:hidden' } as const;
  * ```
  */
 @Directive({
-  selector: 'button[scNavbarNextToggle]',
+  selector: 'button[scNavbarToggle]',
   host: {
     'data-slot': 'navbar-toggle',
     type: 'button',
@@ -38,9 +38,9 @@ const HIDDEN = { sm: 'sm:hidden', md: 'md:hidden', lg: 'lg:hidden' } as const;
     '(click)': 'navbar.open.set(!navbar.open())',
   },
 })
-export class ScNavbarNextToggle {
+export class ScNavbarToggle {
   private readonly buttonStyles = injectPreset().button;
-  protected readonly navbar = inject(ScNavbarNext);
+  protected readonly navbar = inject(ScNavbar);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('ghost');

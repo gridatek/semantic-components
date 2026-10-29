@@ -2,33 +2,31 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 
 @Component({
-  selector: 'app-basic-navbar-next-demo-container',
+  selector: 'app-overlay-navbar-demo-container',
   imports: [DemoContainer],
   template: `
     <app-demo-container
-      title="Basic"
-      demoUrl="/demos/navbar-next/basic-navbar-next-demo"
+      title="Overlay Menu"
+      demoUrl="/demos/navbar/overlay-navbar-demo"
       framed
-      [frameWidth]="1024"
-      [frameHeight]="300"
+      [frameWidth]="390"
+      [frameHeight]="420"
       [code]="code"
     />
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class BasicNavbarNextDemoContainer {
+export class OverlayNavbarDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScLink,
-  ScNavbarNext,
-  ScNavbarNextActions,
-  ScNavbarNextBrand,
-  ScNavbarNextLink,
-  ScNavbarNextMenu,
-  ScNavbarNextMenuLink,
-  ScNavbarNextNav,
-  ScNavbarNextToggle,
+  ScNavbar,
+  ScNavbarBrand,
+  ScNavbarLink,
+  ScNavbarMenu,
+  ScNavbarMenuLink,
+  ScNavbarNav,
+  ScNavbarToggle,
 } from '@semantic-components/ui';
 import {
   SiGalleryVerticalEndIcon,
@@ -37,31 +35,29 @@ import {
 } from '@semantic-icons/lucide-icons';
 
 @Component({
-  selector: 'app-basic-navbar-next-demo',
+  selector: 'app-overlay-navbar-demo',
   imports: [
-    ScLink,
-    ScNavbarNext,
-    ScNavbarNextActions,
-    ScNavbarNextBrand,
-    ScNavbarNextLink,
-    ScNavbarNextMenu,
-    ScNavbarNextMenuLink,
-    ScNavbarNextNav,
-    ScNavbarNextToggle,
+    ScNavbar,
+    ScNavbarBrand,
+    ScNavbarLink,
+    ScNavbarMenu,
+    ScNavbarMenuLink,
+    ScNavbarNav,
+    ScNavbarToggle,
     SiGalleryVerticalEndIcon,
     SiMenuIcon,
     SiXIcon,
   ],
   template: \`
-    <header scNavbarNext aria-label="Acme" #navbar="scNavbarNext">
-      <a scNavbarNextBrand href="#">
+    <header scNavbar aria-label="Acme, overlay" #navbar="scNavbar">
+      <a scNavbarBrand href="#">
         <svg siGalleryVerticalEndIcon></svg>
         Acme
       </a>
-      <nav scNavbarNextNav aria-label="Main">
+      <nav scNavbarNav aria-label="Main, overlay">
         @for (link of links; track link) {
           <a
-            scNavbarNextLink
+            scNavbarLink
             href="#"
             [active]="link === current()"
             (click)="go($event, link)"
@@ -70,11 +66,7 @@ import {
           </a>
         }
       </nav>
-      <div scNavbarNextActions>
-        <a scLink variant="ghost">Sign in</a>
-        <a scLink>Get started</a>
-      </div>
-      <button scNavbarNextToggle>
+      <button scNavbarToggle>
         @if (navbar.open()) {
           <svg siXIcon></svg>
           <span class="sr-only">Close menu</span>
@@ -83,11 +75,11 @@ import {
           <span class="sr-only">Open menu</span>
         }
       </button>
-      <div scNavbarNextMenu>
-        <nav aria-label="Main">
+      <div scNavbarMenu overlay>
+        <nav aria-label="Main, overlay">
           @for (link of links; track link) {
             <a
-              scNavbarNextMenuLink
+              scNavbarMenuLink
               href="#"
               [active]="link === current()"
               (click)="go($event, link)"
@@ -98,10 +90,17 @@ import {
         </nav>
       </div>
     </header>
+    <div class="space-y-4 p-4">
+      <h2 class="text-lg font-semibold">{{ current() }}</h2>
+      <p class="text-muted-foreground text-sm">
+        The menu opens over this text, which stays where it is. A click here, or
+        the focus moving here, closes it.
+      </p>
+    </div>
   \`,
   encapsulation: ViewEncapsulation.None,
 })
-export class BasicNavbarNextDemo {
+export class OverlayNavbarDemo {
   readonly links = ['Products', 'Pricing', 'Docs', 'Blog'];
   readonly current = signal('Products');
 

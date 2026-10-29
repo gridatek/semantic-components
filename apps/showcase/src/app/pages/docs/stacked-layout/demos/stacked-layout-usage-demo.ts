@@ -6,7 +6,7 @@ import { ScStackedLayout } from '@semantic-components/ui';
   imports: [ScStackedLayout],
   template: `
     <div scStackedLayout>
-      <nav scNavbar aria-label="Main">…</nav>
+      <header scNavbar>…</header>
       <footer scFooter>…</footer>
     </div>
   `,

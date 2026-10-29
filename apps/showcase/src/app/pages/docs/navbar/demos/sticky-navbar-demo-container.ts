@@ -2,12 +2,12 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 
 @Component({
-  selector: 'app-sticky-navbar-next-demo-container',
+  selector: 'app-sticky-navbar-demo-container',
   imports: [DemoContainer],
   template: `
     <app-demo-container
       title="Sticky, Hides on Scroll"
-      demoUrl="/demos/navbar-next/sticky-navbar-next-demo"
+      demoUrl="/demos/navbar/sticky-navbar-demo"
       framed
       [frameWidth]="1024"
       [frameHeight]="360"
@@ -17,16 +17,16 @@ import { DemoContainer } from '../../../../components/demo-container/demo-contai
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class StickyNavbarNextDemoContainer {
+export class StickyNavbarDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScNavbarNext,
-  ScNavbarNextBrand,
-  ScNavbarNextLink,
-  ScNavbarNextMenu,
-  ScNavbarNextMenuLink,
-  ScNavbarNextNav,
-  ScNavbarNextToggle,
+  ScNavbar,
+  ScNavbarBrand,
+  ScNavbarLink,
+  ScNavbarMenu,
+  ScNavbarMenuLink,
+  ScNavbarNav,
+  ScNavbarToggle,
 } from '@semantic-components/ui';
 import {
   SiGalleryVerticalEndIcon,
@@ -35,35 +35,35 @@ import {
 } from '@semantic-icons/lucide-icons';
 
 @Component({
-  selector: 'app-sticky-navbar-next-demo',
+  selector: 'app-sticky-navbar-demo',
   imports: [
-    ScNavbarNext,
-    ScNavbarNextBrand,
-    ScNavbarNextLink,
-    ScNavbarNextMenu,
-    ScNavbarNextMenuLink,
-    ScNavbarNextNav,
-    ScNavbarNextToggle,
+    ScNavbar,
+    ScNavbarBrand,
+    ScNavbarLink,
+    ScNavbarMenu,
+    ScNavbarMenuLink,
+    ScNavbarNav,
+    ScNavbarToggle,
     SiGalleryVerticalEndIcon,
     SiMenuIcon,
     SiXIcon,
   ],
   template: \`
     <header
-      scNavbarNext
+      scNavbar
       aria-label="Acme, sticky"
-      #navbar="scNavbarNext"
+      #navbar="scNavbar"
       sticky
       hideOnScroll
     >
-      <a scNavbarNextBrand href="#">
+      <a scNavbarBrand href="#">
         <svg siGalleryVerticalEndIcon></svg>
         Acme
       </a>
-      <nav scNavbarNextNav aria-label="Main, sticky">
+      <nav scNavbarNav aria-label="Main, sticky">
         @for (link of links; track link) {
           <a
-            scNavbarNextLink
+            scNavbarLink
             href="#"
             [active]="link === current()"
             (click)="go($event, link)"
@@ -72,7 +72,7 @@ import {
           </a>
         }
       </nav>
-      <button scNavbarNextToggle>
+      <button scNavbarToggle>
         @if (navbar.open()) {
           <svg siXIcon></svg>
           <span class="sr-only">Close menu</span>
@@ -81,11 +81,11 @@ import {
           <span class="sr-only">Open menu</span>
         }
       </button>
-      <div scNavbarNextMenu>
+      <div scNavbarMenu>
         <nav aria-label="Main, sticky">
           @for (link of links; track link) {
             <a
-              scNavbarNextMenuLink
+              scNavbarMenuLink
               href="#"
               [active]="link === current()"
               (click)="go($event, link)"
@@ -107,7 +107,7 @@ import {
   \`,
   encapsulation: ViewEncapsulation.None,
 })
-export class StickyNavbarNextDemo {
+export class StickyNavbarDemo {
   readonly links = ['Products', 'Pricing', 'Docs', 'Blog'];
   readonly current = signal('Products');
 

@@ -1,245 +1,121 @@
 # Navbar
 
-A responsive navigation bar block with mobile menu support. Automatically adapts between desktop horizontal navigation and a mobile hamburger menu with slide-in drawer.
+A site's top bar: your brand, links and actions; on narrow screens a toggle opens a menu under the bar. The bar is the page's banner (`header`); the menu is a disclosure, part of the page — nothing is trapped, the page still scrolls — following the WAI-ARIA disclosure navigation pattern.
 
-## Components
+## Features
 
-- `ScNavbarProvider` - Root provider that manages state and links navbar with mobile menu
-- `ScNavbar` - Root nav element for the main navigation bar
-- `ScNavbarBrand` - Brand/logo section with focus styles
-- `ScNavbarGroup` - Groups navbar elements together (e.g., brand + navigation)
-- `ScNavbarActions` - Right-aligned action buttons container
-- `ScNavbarMobileTrigger` - Mobile menu toggle button (uses content projection for icons)
-- `ScNavbarMobilePortal` - Mobile menu portal using CDK overlay (handles rendering)
-- `ScNavbarMobileMenu` - Mobile menu container with styling (customizable)
-- `ScNavbarMobileLink` - Mobile menu link with auto-close on navigation
+- **Responsive** — the links show from `expand` (`sm`, `md`, `lg`); below it, the toggle and the menu
+- **Disclosure menu** — `aria-expanded`, `aria-controls`; its height animates; it pushes the page down, or with `overlay` lies over it
+- **Closes by itself** — Escape (focus back on the toggle), a link followed, the window growing wide enough
+- **`[(open)]`** — the menu's state, two-way
+- **Sticky**, and **hides on scroll** (away going down, back going up)
+- **Current page** — `active` gives `aria-current="page"`
+- **Works with the Navigation Menu** — on the same `nav`
+- **RTL**
 
-## Architecture
-
-The navbar uses a provider pattern similar to the sheet component:
-
-- **Provider**: `ScNavbarProvider` wraps everything and manages state
-- **Navbar**: The actual navigation bar sits inside the provider
-- **Mobile Menu**: The mobile menu portal is a sibling to the navbar (not nested inside)
-- **Components communicate**: All components inject the provider to access shared state
-
-This architecture allows the mobile menu to be positioned independently while maintaining a clean connection to the navbar state.
-
-## Usage
-
-### Basic Navbar
-
-The recommended approach is to use `ScNavigationMenu` for navigation. See the example below.
-
-**Note:** The navbar uses `justify-between` to space its direct children. Use `sc-navbar-group` to keep related elements (like brand and navigation) together on the left side.
-
-### With Navigation Menu
-
-You can integrate `ScNavigationMenu` components for dropdown navigation:
-
-```typescript
-import { SiMenuIcon, SiXIcon } from '@semantic-icons/lucide-icons';
-
-@Component({
-  imports: [
-    ScNavbar,
-    ScNavbarProvider,
-    ScNavbarMobileTrigger,
-    // ... other imports
-    SiMenuIcon,
-    SiXIcon,
-  ],
-  template: `
-    <div scNavbarProvider>
-      <nav scNavbar>
-        <div scNavbarGroup>
-          <a scNavbarBrand routerLink="/">
-            <span>Brand</span>
-          </a>
-
-          <!-- Navigation Menu with Dropdowns -->
-          <nav scNavigationMenu class="hidden md:flex">
-            <ul scNavigationMenuList>
-              <li scNavigationMenuItem>
-                <button scNavigationMenuTrigger>
-  Products
-  <svg siChevronDownIcon scNavigationMenuTriggerIcon></svg>
-</button>
-                <div scNavigationMenuContent>
-                  <ul class="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2">
-                    <li>
-                      <a scNavigationMenuLink routerLink="/products/web">
-                        <div class="text-sm font-medium leading-none">Web Apps</div>
-                        <p class="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                          Build modern web applications
-                        </p>
-                      </a>
-                    </li>
-                    <!-- More items -->
-                  </ul>
-                </div>
-              </li>
-
-              <li scNavigationMenuItem>
-                <a scNavigationMenuLink routerLink="/docs">Docs</a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-
-        <div scNavbarActions>
-          <button scButton>Get Started</button>
-          <button scNavbarMobileTrigger #trigger="scNavbarMobileTrigger">
-            @if (trigger.isMobileMenuOpen()) {
-              <svg si-x-icon></svg>
-            } @else {
-              <svg si-menu-icon></svg>
-            }
-            <span class="sr-only">
-              {{ trigger.isMobileMenuOpen() ? 'Close menu' : 'Open menu' }}
-            </span>
-          </button>
-        </div>
-      </nav>
-
-      <!-- Mobile Menu -->
-      <ng-template scNavbarMobilePortal>
-        <div scNavbarMobileMenu aria-label="Mobile navigation">
-          <a scNavbarMobileLink routerLink="/products">Products</a>
-          <a scNavbarMobileLink routerLink="/docs">Docs</a>
-        </div>
-      </ng-template>
-    </div>
-  `,
-})
-```
-
-**Note:** The navigation menu automatically closes when navigation occurs (via router events).
-
-## Controlling Mobile Menu State
-
-You can control the mobile menu state using two-way binding on the provider:
+## Quick Start
 
 ```html
-<div scNavbarProvider [(open)]="mobileMenuOpen">
-  <!-- navbar content -->
-</div>
-```
+<header scNavbar #navbar="scNavbar">
+  <a scNavbarBrand href="/"><svg siGalleryVerticalEndIcon></svg> Acme</a>
 
-```typescript
-export class MyComponent {
-  readonly mobileMenuOpen = model(false);
-}
-```
-
-## Active State
-
-Use the `active` input to indicate the current page for mobile links:
-
-```html
-<a scNavbarMobileLink routerLink="/about" [active]="isAboutPage">About</a>
-```
-
-## With RouterLinkActive
-
-For automatic active state based on the current route:
-
-```html
-<a scNavbarMobileLink routerLink="/about" routerLinkActive="active" #rla="routerLinkActive" [active]="rla.isActive">About</a>
-```
-
-## Mobile Menu Behavior
-
-The mobile menu automatically:
-
-- Closes when clicking a mobile link (auto-navigation)
-- Closes when pressing the Escape key
-- Uses CDK overlay for proper z-index stacking and portal rendering
-- Slides in from the top below the navbar
-- Animates smoothly with CSS transitions
-- State is managed by the provider and shared across all components
-
-**Icons**: The mobile trigger uses content projection for icons, allowing consumers to provide their own icons (e.g., hamburger menu when closed, X when open) via the `isMobileMenuOpen()` signal accessible through template references.
-
-## Custom Styling
-
-All components accept a `class` input for custom styles:
-
-```html
-<nav scNavbar class="sticky top-0 z-50">
-  <a scNavbarBrand class="text-primary">Brand</a>
-  <nav scNavigationMenu>
-    <!-- navigation menu items -->
+  <nav scNavbarNav aria-label="Main">
+    <a scNavbarLink routerLink="/products" active>Products</a>
+    <a scNavbarLink routerLink="/pricing">Pricing</a>
   </nav>
+
+  <div scNavbarActions>
+    <a scLink routerLink="/start">Get started</a>
+  </div>
+
+  <button scNavbarToggle>
+    @if (navbar.open()) {
+    <svg siXIcon></svg>
+    <span class="sr-only">Close menu</span>
+    } @else {
+    <svg siMenuIcon></svg>
+    <span class="sr-only">Open menu</span>
+    }
+  </button>
+
+  <div scNavbarMenu>
+    <nav aria-label="Main">
+      <a scNavbarMenuLink routerLink="/products" active>Products</a>
+      <a scNavbarMenuLink routerLink="/pricing">Pricing</a>
+    </nav>
+  </div>
+</header>
+```
+
+**Rules**
+
+- Name each `nav` (`aria-label`). The bar's links and the menu's are the same navigation, shown at different widths: give them the same name — only one is ever shown.
+- The toggle's name follows its state ("Open menu" / "Close menu"); it has no `aria-pressed`.
+- Several bars on one page (or in frames checked together): name each `header` too.
+
+## With a Navigation Menu
+
+Both on the same `nav`, so there is one landmark:
+
+```html
+<nav scNavigationMenu scNavbarNav aria-label="Main">
+  <ul scNavigationMenuList>
+    …
+  </ul>
 </nav>
 ```
 
-### Customizing Mobile Menu
+## API
 
-The mobile menu container can be styled directly using the `class` input:
+### ScNavbar — `header[scNavbar]`
 
-```html
-<ng-template scNavbarMobilePortal>
-  <div scNavbarMobileMenu aria-label="Mobile navigation" class="bg-red-500 p-8">
-    <!-- Custom background and padding -->
-  </div>
-</ng-template>
-```
+`exportAs: 'scNavbar'`.
 
-## Inputs
+| Input          | Type                   | Default | Description                                         |
+| -------------- | ---------------------- | ------- | --------------------------------------------------- |
+| `open`         | `boolean` (two-way)    | `false` | Whether the menu is open                            |
+| `expand`       | `'sm' \| 'md' \| 'lg'` | `'md'`  | The width from which the links show, the toggle not |
+| `sticky`       | `boolean`              | `false` | Stays at the top of the page                        |
+| `hideOnScroll` | `boolean`              | `false` | Slides away scrolling down, back scrolling up       |
+| `class`        | `string`               | `''`    | Additional CSS classes                              |
 
-### ScNavbarProvider
+### ScNavbarBrand — `a[scNavbarBrand]`
 
-| Input   | Type      | Default | Description                           |
-| ------- | --------- | ------- | ------------------------------------- |
-| `class` | `string`  | `''`    | Additional CSS classes                |
-| `open`  | `boolean` | `false` | Two-way binding for mobile menu state |
+Your logo and name, a link home.
 
-### ScNavbar
+### ScNavbarNav — `nav[scNavbarNav]`
 
-| Input   | Type     | Default | Description            |
-| ------- | -------- | ------- | ---------------------- |
-| `class` | `string` | `''`    | Additional CSS classes |
+The links, from `expand` up.
 
-### ScNavbarMobileMenu
+### ScNavbarLink — `a[scNavbarLink]`
 
-| Input   | Type     | Default | Description            |
-| ------- | -------- | ------- | ---------------------- |
-| `class` | `string` | `''`    | Additional CSS classes |
+A link of the bar. `active`: the page shown (`aria-current="page"`).
 
-### ScNavbarMobileTrigger
+### ScNavbarActions — `div[scNavbarActions]`
 
-| Input   | Type     | Default | Description            |
-| ------- | -------- | ------- | ---------------------- |
-| `class` | `string` | `''`    | Additional CSS classes |
+The buttons at the end.
 
-**Export As:** `scNavbarMobileTrigger`
+### ScNavbarToggle — `button[scNavbarToggle]`
 
-**Public Properties (via template reference):**
+Opens and closes the menu, below `expand`. Styled as the preset's button: `variant` (`'ghost'`), `size` (`'icon'`).
 
-| Property           | Type              | Description                 |
-| ------------------ | ----------------- | --------------------------- |
-| `isMobileMenuOpen` | `Signal<boolean>` | Whether mobile menu is open |
+### ScNavbarMenu — `div[scNavbarMenu]`
 
-**Usage:** Use a template reference variable with `#trigger="scNavbarMobileTrigger"` to access the `isMobileMenuOpen()` signal for conditional icon rendering.
+The panel under the bar, below `expand`. Put a named `nav` inside, and any actions.
 
-### ScNavbarMobileLink
+| Input     | Type      | Default | Description                                                                                                |
+| --------- | --------- | ------- | ---------------------------------------------------------------------------------------------------------- |
+| `overlay` | `boolean` | `false` | Over the page, under the bar, instead of pushing the page down; closes on a click or focus outside the bar |
 
-| Input    | Type      | Default | Description                          |
-| -------- | --------- | ------- | ------------------------------------ |
-| `class`  | `string`  | `''`    | Additional CSS classes               |
-| `active` | `boolean` | `false` | Whether the link is currently active |
+### ScNavbarMenuLink — `a[scNavbarMenuLink]`
 
-## CSS Variables
-
-The navbar uses the following CSS variable for positioning:
-
-| Variable          | Default | Description                                           |
-| ----------------- | ------- | ----------------------------------------------------- |
-| `--navbar-height` | `57px`  | Height of the navbar, used to position mobile content |
+A link of the menu, a full-width row; closes the menu when followed. `active`: the page shown.
 
 ## Accessibility
 
-- The mobile trigger has `aria-expanded` and `aria-controls` pointing at the mobile menu (ids are generated per navbar, so several navbars can share a page).
-- The open mobile menu traps focus; Escape closes it and returns focus to the trigger.
-- Give each `nav` a unique `aria-label`. `scNavbarMobileLink` sets `aria-current="page"` when `active`.
+- One banner (`header`), named navigation landmarks, none nested.
+- The toggle: `aria-expanded`, `aria-controls` the menu; a name that follows the state.
+- The menu is not modal: Tab moves through it and on; a closed menu is `invisible`, out of the tab order.
+- Escape in the bar closes the menu and gives the toggle back the focus.
+- `aria-current="page"` on the current link.
+- Hiding on scroll is off under `prefers-reduced-motion` (no slide).

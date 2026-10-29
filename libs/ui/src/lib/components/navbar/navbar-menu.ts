@@ -6,7 +6,7 @@ import {
   input,
 } from '@angular/core';
 import { cn } from '../../utils/cn/cn';
-import { ScNavbarNext } from './navbar-next';
+import { ScNavbar } from './navbar';
 
 const HIDDEN = { sm: 'sm:hidden', md: 'md:hidden', lg: 'lg:hidden' } as const;
 
@@ -15,10 +15,10 @@ const HIDDEN = { sm: 'sm:hidden', md: 'md:hidden', lg: 'lg:hidden' } as const;
  * (its height animates), not modal — nothing is trapped and the page still
  * scrolls. It pushes the page down; `overlay`, it lies over the page instead,
  * and closes too when you click or tab outside the bar. Put a named `nav`
- * with `scNavbarNextMenuLink`s inside, and any actions.
+ * with `scNavbarMenuLink`s inside, and any actions.
  */
 @Directive({
-  selector: 'div[scNavbarNextMenu]',
+  selector: 'div[scNavbarMenu]',
   host: {
     'data-slot': 'navbar-menu',
     '[id]': 'navbar.menuId',
@@ -29,8 +29,8 @@ const HIDDEN = { sm: 'sm:hidden', md: 'md:hidden', lg: 'lg:hidden' } as const;
     '(document:focusin)': 'closeOutside($event)',
   },
 })
-export class ScNavbarNextMenu {
-  protected readonly navbar = inject(ScNavbarNext);
+export class ScNavbarMenu {
+  protected readonly navbar = inject(ScNavbar);
   readonly classInput = input<string>('', { alias: 'class' });
   /** Over the page, under the bar, rather than pushing the page down. */
   readonly overlay = input(false, { transform: booleanAttribute });

@@ -1,7 +1,7 @@
 import { collectErrors, press } from '../../interaction';
 import { type Page, expect, test } from '../../test';
 
-const demo = (name: string) => `/demos/navbar-next/${name}-navbar-next-demo`;
+const demo = (name: string) => `/demos/navbar/${name}-navbar-demo`;
 const toggle = (page: Page) => page.locator('[data-slot=navbar-toggle]');
 const menu = (page: Page) => page.locator('[data-slot=navbar-menu]');
 

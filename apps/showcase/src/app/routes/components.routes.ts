@@ -461,11 +461,6 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/multiselect/multiselect-page'),
       },
       {
-        path: 'navbar',
-        title: 'Navbar - Semantic Components',
-        loadComponent: () => import('../pages/docs/navbar/navbar-page'),
-      },
-      {
         path: 'native-dialog',
         title: 'Native Dialog - Semantic Components',
         loadComponent: () =>
@@ -717,10 +712,9 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/tree-table/tree-table-page'),
       },
       {
-        path: 'navbar-next',
-        title: 'Navbar Next - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/navbar-next/navbar-next-page'),
+        path: 'navbar',
+        title: 'Navbar - Semantic Components',
+        loadComponent: () => import('../pages/docs/navbar/navbar-page'),
       },
       {
         path: 'gantt',

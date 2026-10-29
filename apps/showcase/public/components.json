@@ -634,14 +634,6 @@
   {
     "name": "Navbar",
     "path": "navbar",
-    "description": "A responsive navigation bar with mobile menu support.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Navigation"
-  },
-  {
-    "name": "Navbar Next",
-    "path": "navbar-next",
     "description": "A site's top bar: brand, links, actions; on narrow screens a toggle and a menu panel under the bar.",
     "status": "Experimental",
     "library": "ui",

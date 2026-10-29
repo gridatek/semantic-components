@@ -3,14 +3,14 @@ import { cn } from '../../utils/cn/cn';
 
 /** A link of the bar: `active` for the page shown (`aria-current="page"`). */
 @Directive({
-  selector: 'a[scNavbarNextLink]',
+  selector: 'a[scNavbarLink]',
   host: {
     'data-slot': 'navbar-link',
     '[attr.aria-current]': 'active() ? "page" : null',
     '[class]': 'class()',
   },
 })
-export class ScNavbarNextLink {
+export class ScNavbarLink {
   readonly classInput = input<string>('', { alias: 'class' });
   /** The page shown. */
   readonly active = input(false, { transform: booleanAttribute });

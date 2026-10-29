@@ -32,7 +32,7 @@
     "navbar.getStarted": "ابدأ الآن",
     "navbar.closeMenu": "إغلاق القائمة",
     "navbar.openMenu": "فتح القائمة",
-    "navbar.mobileNavigation": "التنقل على الهاتف",
+    "navbar.main": "الرئيسي",
     "navbar.home": "الرئيسية",
     "article.back": "→ العودة إلى المدونة",
     "blog.signals.title": "البدء مع إشارات Angular",

@@ -11,12 +11,10 @@ import {
   ScNavbar,
   ScNavbarActions,
   ScNavbarBrand,
-  ScNavbarGroup,
-  ScNavbarMobileLink,
-  ScNavbarMobileMenu,
-  ScNavbarMobilePortal,
-  ScNavbarMobileTrigger,
-  ScNavbarProvider,
+  ScNavbarMenu,
+  ScNavbarMenuLink,
+  ScNavbarNav,
+  ScNavbarToggle,
   ScNavigationMenu,
   ScNavigationMenuContent,
   ScNavigationMenuItem,
@@ -65,14 +63,12 @@ import {
     SiCheckIcon,
     SiLanguagesIcon,
     ScNavbar,
-    ScNavbarProvider,
-    ScNavbarBrand,
-    ScNavbarGroup,
     ScNavbarActions,
-    ScNavbarMobileTrigger,
-    ScNavbarMobilePortal,
-    ScNavbarMobileMenu,
-    ScNavbarMobileLink,
+    ScNavbarBrand,
+    ScNavbarMenu,
+    ScNavbarMenuLink,
+    ScNavbarNav,
+    ScNavbarToggle,
     ScLink,
     ScNavigationMenu,
     ScNavigationMenuContent,
@@ -88,216 +84,211 @@ import {
     ScNavigationMenuTriggerIcon,
   ],
   template: `
-    <div scNavbarProvider>
-      <nav scNavbar>
-        <div scNavbarGroup>
-          <a scNavbarBrand routerLink="/">
-            <svg siMountainIcon></svg>
-            <span>Brand</span>
-          </a>
+    <header scNavbar #navbar="scNavbar">
+      <a scNavbarBrand routerLink="/">
+        <svg siMountainIcon></svg>
+        <span>Brand</span>
+      </a>
 
-          <nav scNavigationMenu class="hidden md:flex">
-            <ul scNavigationMenuList>
-              <li scNavigationMenuItem>
-                <button scNavigationMenuTrigger>
-                  <ng-container i18n="@@navbar.pages">Pages</ng-container>
-                  <svg siChevronDownIcon scNavigationMenuTriggerIcon></svg>
-                </button>
-                <ng-template scNavigationMenuPortal>
-                  <div scNavigationMenuContent>
-                    <ul
-                      class="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2"
-                    >
-                      <li>
-                        <a scNavigationMenuLink routerLink="/dashboard">
-                          <div
-                            class="text-sm leading-none font-medium"
-                            i18n="@@navbar.dashboard"
-                          >
-                            Dashboard
-                          </div>
-                          <p
-                            class="text-muted-foreground line-clamp-2 text-sm leading-snug"
-                            i18n="@@navbar.dashboard.description"
-                          >
-                            Sidebar layout with navigation
-                          </p>
-                        </a>
-                      </li>
-                      <li>
-                        <a scNavigationMenuLink routerLink="/settings">
-                          <div
-                            class="text-sm leading-none font-medium"
-                            i18n="@@navbar.settings"
-                          >
-                            Settings
-                          </div>
-                          <p
-                            class="text-muted-foreground line-clamp-2 text-sm leading-snug"
-                            i18n="@@navbar.settings.description"
-                          >
-                            Account and profile management
-                          </p>
-                        </a>
-                      </li>
-                      <li>
-                        <a scNavigationMenuLink routerLink="/gallery">
-                          <div
-                            class="text-sm leading-none font-medium"
-                            i18n="@@navbar.gallery"
-                          >
-                            Gallery
-                          </div>
-                          <p
-                            class="text-muted-foreground line-clamp-2 text-sm leading-snug"
-                            i18n="@@navbar.gallery.description"
-                          >
-                            Component showcase reference
-                          </p>
-                        </a>
-                      </li>
-                      <li>
-                        <a scNavigationMenuLink routerLink="/data-table">
-                          <div
-                            class="text-sm leading-none font-medium"
-                            i18n="@@navbar.dataTable"
-                          >
-                            Data Table
-                          </div>
-                          <p
-                            class="text-muted-foreground line-clamp-2 text-sm leading-snug"
-                            i18n="@@navbar.dataTable.description"
-                          >
-                            Advanced table with sorting and filtering
-                          </p>
-                        </a>
-                      </li>
-                      <li>
-                        <a scNavigationMenuLink routerLink="/chat">
-                          <div
-                            class="text-sm leading-none font-medium"
-                            i18n="@@navbar.chat"
-                          >
-                            Chat
-                          </div>
-                          <p
-                            class="text-muted-foreground line-clamp-2 text-sm leading-snug"
-                            i18n="@@navbar.chat.description"
-                          >
-                            An assistant's steps and streamed replies
-                          </p>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </ng-template>
-              </li>
-
-              <li scNavigationMenuItem>
-                <a
-                  scNavigationMenuLink
-                  routerLink="/pricing"
-                  i18n="@@navbar.pricing"
+      <nav
+        scNavigationMenu
+        scNavbarNav
+        aria-label="Main"
+        i18n-aria-label="@@navbar.main"
+      >
+        <ul scNavigationMenuList>
+          <li scNavigationMenuItem>
+            <button scNavigationMenuTrigger>
+              <ng-container i18n="@@navbar.pages">Pages</ng-container>
+              <svg siChevronDownIcon scNavigationMenuTriggerIcon></svg>
+            </button>
+            <ng-template scNavigationMenuPortal>
+              <div scNavigationMenuContent>
+                <ul
+                  class="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2"
                 >
-                  Pricing
-                </a>
-              </li>
-
-              <li scNavigationMenuItem>
-                <a scNavigationMenuLink routerLink="/blog" i18n="@@navbar.blog">
-                  Blog
-                </a>
-              </li>
-
-              <li scNavigationMenuItem>
-                <a
-                  scNavigationMenuLink
-                  routerLink="/contact"
-                  i18n="@@navbar.contact"
-                >
-                  Contact
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-
-        <div scNavbarActions>
-          <div
-            scSelect
-            class="w-32"
-            [value]="i18n.locale.id"
-            (valueChange)="i18n.setLocale($event)"
-          >
-            <div
-              scSelectTrigger
-              aria-label="Language"
-              i18n-aria-label="@@navbar.language"
-            >
-              <svg siLanguagesIcon></svg>
-              <span scSelectValue [attr.lang]="i18n.locale.id">
-                {{ i18n.locale.label }}
-              </span>
-              <svg scSelectIcon siChevronDownIcon></svg>
-            </div>
-            <ng-template scSelectPortal>
-              <div scSelectPopup>
-                <div scSelectList>
-                  @for (locale of i18n.locales; track locale.id) {
-                    <div
-                      scSelectItem
-                      [value]="locale.id"
-                      [label]="locale.label"
-                      [attr.lang]="locale.id"
-                    >
-                      <span scSelectItemLabel>{{ locale.label }}</span>
-                      <svg scSelectItemIndicator siCheckIcon></svg>
-                    </div>
-                  }
-                </div>
+                  <li>
+                    <a scNavigationMenuLink routerLink="/dashboard">
+                      <div
+                        class="text-sm leading-none font-medium"
+                        i18n="@@navbar.dashboard"
+                      >
+                        Dashboard
+                      </div>
+                      <p
+                        class="text-muted-foreground line-clamp-2 text-sm leading-snug"
+                        i18n="@@navbar.dashboard.description"
+                      >
+                        Sidebar layout with navigation
+                      </p>
+                    </a>
+                  </li>
+                  <li>
+                    <a scNavigationMenuLink routerLink="/settings">
+                      <div
+                        class="text-sm leading-none font-medium"
+                        i18n="@@navbar.settings"
+                      >
+                        Settings
+                      </div>
+                      <p
+                        class="text-muted-foreground line-clamp-2 text-sm leading-snug"
+                        i18n="@@navbar.settings.description"
+                      >
+                        Account and profile management
+                      </p>
+                    </a>
+                  </li>
+                  <li>
+                    <a scNavigationMenuLink routerLink="/gallery">
+                      <div
+                        class="text-sm leading-none font-medium"
+                        i18n="@@navbar.gallery"
+                      >
+                        Gallery
+                      </div>
+                      <p
+                        class="text-muted-foreground line-clamp-2 text-sm leading-snug"
+                        i18n="@@navbar.gallery.description"
+                      >
+                        Component showcase reference
+                      </p>
+                    </a>
+                  </li>
+                  <li>
+                    <a scNavigationMenuLink routerLink="/data-table">
+                      <div
+                        class="text-sm leading-none font-medium"
+                        i18n="@@navbar.dataTable"
+                      >
+                        Data Table
+                      </div>
+                      <p
+                        class="text-muted-foreground line-clamp-2 text-sm leading-snug"
+                        i18n="@@navbar.dataTable.description"
+                      >
+                        Advanced table with sorting and filtering
+                      </p>
+                    </a>
+                  </li>
+                  <li>
+                    <a scNavigationMenuLink routerLink="/chat">
+                      <div
+                        class="text-sm leading-none font-medium"
+                        i18n="@@navbar.chat"
+                      >
+                        Chat
+                      </div>
+                      <p
+                        class="text-muted-foreground line-clamp-2 text-sm leading-snug"
+                        i18n="@@navbar.chat.description"
+                      >
+                        An assistant's steps and streamed replies
+                      </p>
+                    </a>
+                  </li>
+                </ul>
               </div>
             </ng-template>
-          </div>
-          <a
-            scLink
-            variant="ghost"
-            routerLink="/login"
-            class="hidden md:inline-flex"
-            i18n="@@navbar.signIn"
-          >
-            Sign In
-          </a>
-          <a
-            scLink
-            routerLink="/signup"
-            class="hidden md:inline-flex"
-            i18n="@@navbar.getStarted"
-          >
-            Get Started
-          </a>
-          <button scNavbarMobileTrigger #trigger="scNavbarMobileTrigger">
-            @if (trigger.isMobileMenuOpen()) {
-              <svg siXIcon></svg>
-            } @else {
-              <svg siMenuIcon></svg>
-            }
-            @if (trigger.isMobileMenuOpen()) {
-              <span class="sr-only" i18n="@@navbar.closeMenu">Close menu</span>
-            } @else {
-              <span class="sr-only" i18n="@@navbar.openMenu">Open menu</span>
-            }
-          </button>
-        </div>
+          </li>
+
+          <li scNavigationMenuItem>
+            <a
+              scNavigationMenuLink
+              routerLink="/pricing"
+              i18n="@@navbar.pricing"
+            >
+              Pricing
+            </a>
+          </li>
+
+          <li scNavigationMenuItem>
+            <a scNavigationMenuLink routerLink="/blog" i18n="@@navbar.blog">
+              Blog
+            </a>
+          </li>
+
+          <li scNavigationMenuItem>
+            <a
+              scNavigationMenuLink
+              routerLink="/contact"
+              i18n="@@navbar.contact"
+            >
+              Contact
+            </a>
+          </li>
+        </ul>
       </nav>
 
-      <ng-template scNavbarMobilePortal>
+      <div scNavbarActions>
         <div
-          scNavbarMobileMenu
-          aria-label="Mobile navigation"
-          i18n-aria-label="@@navbar.mobileNavigation"
+          scSelect
+          class="w-32"
+          [value]="i18n.locale.id"
+          (valueChange)="i18n.setLocale($event)"
         >
+          <div
+            scSelectTrigger
+            aria-label="Language"
+            i18n-aria-label="@@navbar.language"
+          >
+            <svg siLanguagesIcon></svg>
+            <span scSelectValue [attr.lang]="i18n.locale.id">
+              {{ i18n.locale.label }}
+            </span>
+            <svg scSelectIcon siChevronDownIcon></svg>
+          </div>
+          <ng-template scSelectPortal>
+            <div scSelectPopup>
+              <div scSelectList>
+                @for (locale of i18n.locales; track locale.id) {
+                  <div
+                    scSelectItem
+                    [value]="locale.id"
+                    [label]="locale.label"
+                    [attr.lang]="locale.id"
+                  >
+                    <span scSelectItemLabel>{{ locale.label }}</span>
+                    <svg scSelectItemIndicator siCheckIcon></svg>
+                  </div>
+                }
+              </div>
+            </div>
+          </ng-template>
+        </div>
+        <a
+          scLink
+          variant="ghost"
+          routerLink="/login"
+          class="hidden md:inline-flex"
+          i18n="@@navbar.signIn"
+        >
+          Sign In
+        </a>
+        <a
+          scLink
+          routerLink="/signup"
+          class="hidden md:inline-flex"
+          i18n="@@navbar.getStarted"
+        >
+          Get Started
+        </a>
+      </div>
+
+      <button scNavbarToggle>
+        @if (navbar.open()) {
+          <svg siXIcon></svg>
+          <span class="sr-only" i18n="@@navbar.closeMenu">Close menu</span>
+        } @else {
+          <svg siMenuIcon></svg>
+          <span class="sr-only" i18n="@@navbar.openMenu">Open menu</span>
+        }
+      </button>
+
+      <div scNavbarMenu>
+        <nav aria-label="Main" i18n-aria-label="@@navbar.main">
           <a
-            scNavbarMobileLink
+            scNavbarMenuLink
             routerLink="/"
             routerLinkActive="active"
             [routerLinkActiveOptions]="{ exact: true }"
@@ -308,7 +299,7 @@ import {
             Home
           </a>
           <a
-            scNavbarMobileLink
+            scNavbarMenuLink
             routerLink="/pricing"
             routerLinkActive="active"
             #mobilePricingRla="routerLinkActive"
@@ -318,7 +309,7 @@ import {
             Pricing
           </a>
           <a
-            scNavbarMobileLink
+            scNavbarMenuLink
             routerLink="/blog"
             routerLinkActive="active"
             #mobileBlogRla="routerLinkActive"
@@ -328,7 +319,7 @@ import {
             Blog
           </a>
           <a
-            scNavbarMobileLink
+            scNavbarMenuLink
             routerLink="/contact"
             routerLinkActive="active"
             #mobileContactRla="routerLinkActive"
@@ -339,7 +330,7 @@ import {
           </a>
           <hr class="border-border my-2" />
           <a
-            scNavbarMobileLink
+            scNavbarMenuLink
             routerLink="/dashboard"
             routerLinkActive="active"
             #mobileDashboardRla="routerLinkActive"
@@ -349,7 +340,7 @@ import {
             Dashboard
           </a>
           <a
-            scNavbarMobileLink
+            scNavbarMenuLink
             routerLink="/settings"
             routerLinkActive="active"
             #mobileSettingsRla="routerLinkActive"
@@ -359,7 +350,7 @@ import {
             Settings
           </a>
           <a
-            scNavbarMobileLink
+            scNavbarMenuLink
             routerLink="/gallery"
             routerLinkActive="active"
             #mobileGalleryRla="routerLinkActive"
@@ -369,7 +360,7 @@ import {
             Gallery
           </a>
           <a
-            scNavbarMobileLink
+            scNavbarMenuLink
             routerLink="/data-table"
             routerLinkActive="active"
             #mobileDataTableRla="routerLinkActive"
@@ -379,7 +370,7 @@ import {
             Data Table
           </a>
           <a
-            scNavbarMobileLink
+            scNavbarMenuLink
             routerLink="/chat"
             routerLinkActive="active"
             #mobileChatRla="routerLinkActive"
@@ -388,27 +379,27 @@ import {
           >
             Chat
           </a>
-          <hr class="border-border my-2" />
-          <a
-            scLink
-            variant="ghost"
-            routerLink="/login"
-            class="w-full"
-            i18n="@@navbar.signIn"
-          >
-            Sign In
-          </a>
-          <a
-            scLink
-            routerLink="/signup"
-            class="w-full"
-            i18n="@@navbar.getStarted"
-          >
-            Get Started
-          </a>
-        </div>
-      </ng-template>
-    </div>
+        </nav>
+        <hr class="border-border my-2" />
+        <a
+          scLink
+          variant="ghost"
+          routerLink="/login"
+          class="w-full"
+          i18n="@@navbar.signIn"
+        >
+          Sign In
+        </a>
+        <a
+          scLink
+          routerLink="/signup"
+          class="w-full"
+          i18n="@@navbar.getStarted"
+        >
+          Get Started
+        </a>
+      </div>
+    </header>
   `,
   host: {
     '[class]': 'class()',

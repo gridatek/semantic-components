@@ -13,12 +13,10 @@ import {
   ScNavbar,
   ScNavbarActions,
   ScNavbarBrand,
-  ScNavbarGroup,
-  ScNavbarMobileLink,
-  ScNavbarMobileMenu,
-  ScNavbarMobilePortal,
-  ScNavbarMobileTrigger,
-  ScNavbarProvider,
+  ScNavbarMenu,
+  ScNavbarMenuLink,
+  ScNavbarNav,
+  ScNavbarToggle,
   ScNavigationMenu,
   ScNavigationMenuContent,
   ScNavigationMenuItem,
@@ -52,14 +50,12 @@ import { PresetSheet } from '../preset-sheet/preset-sheet';
     RouterLink,
     RouterLinkActive,
     ScNavbar,
-    ScNavbarProvider,
-    ScNavbarBrand,
-    ScNavbarGroup,
     ScNavbarActions,
-    ScNavbarMobilePortal,
-    ScNavbarMobileMenu,
-    ScNavbarMobileLink,
-    ScNavbarMobileTrigger,
+    ScNavbarBrand,
+    ScNavbarMenu,
+    ScNavbarMenuLink,
+    ScNavbarNav,
+    ScNavbarToggle,
     ScInputButton,
     ScKbd,
     ScLink,
@@ -82,152 +78,148 @@ import { PresetSheet } from '../preset-sheet/preset-sheet';
     ScNavigationMenuTriggerIcon,
   ],
   template: `
-    <div scNavbarProvider>
-      <nav scNavbar aria-label="Main">
-        <div scNavbarGroup>
-          <!-- Brand -->
-          <a scNavbarBrand href="#">
-            <svg app-logo class="size-6"></svg>
-            <span class="hidden sm:inline">Semantic Components</span>
-          </a>
+    <header scNavbar #navbar="scNavbar">
+      <!-- Brand -->
+      <a scNavbarBrand routerLink="/">
+        <svg app-logo class="size-6"></svg>
+        <span class="hidden sm:inline">Semantic Components</span>
+      </a>
 
-          <!-- Desktop Navigation -->
-          <nav scNavigationMenu aria-label="Desktop" class="hidden md:flex">
-            <ul scNavigationMenuList>
-              <li scNavigationMenuItem>
-                <button scNavigationMenuTrigger>
-                  Components
-                  <svg siChevronDownIcon scNavigationMenuTriggerIcon></svg>
-                </button>
-                <ng-template scNavigationMenuPortal>
-                  <div scNavigationMenuContent>
-                    <ul
-                      class="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]"
-                    >
-                      @for (
-                        component of featuredComponents();
-                        track component.path
-                      ) {
-                        <li>
-                          <a
-                            scNavigationMenuLink
-                            [routerLink]="'/docs/components/' + component.path"
-                          >
-                            <div class="text-sm leading-none font-medium">
-                              {{ component.name }}
-                            </div>
-                            <p
-                              class="text-muted-foreground line-clamp-2 text-sm leading-snug"
-                            >
-                              {{ component.description }}
-                            </p>
-                          </a>
-                        </li>
-                      }
-                      <li>
-                        <a scNavigationMenuLink routerLink="/docs/components">
-                          <div class="text-sm leading-none font-medium">
-                            View All
-                          </div>
-                          <p
-                            class="text-muted-foreground line-clamp-2 text-sm leading-snug"
-                          >
-                            See all available components.
-                          </p>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </ng-template>
-              </li>
+      <!-- Desktop Navigation -->
+      <nav scNavigationMenu scNavbarNav aria-label="Main">
+        <ul scNavigationMenuList>
+          <li scNavigationMenuItem>
+            <button scNavigationMenuTrigger>
+              Components
+              <svg siChevronDownIcon scNavigationMenuTriggerIcon></svg>
+            </button>
+            <ng-template scNavigationMenuPortal>
+              <div scNavigationMenuContent>
+                <ul
+                  class="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]"
+                >
+                  @for (
+                    component of featuredComponents();
+                    track component.path
+                  ) {
+                    <li>
+                      <a
+                        scNavigationMenuLink
+                        [routerLink]="'/docs/components/' + component.path"
+                      >
+                        <div class="text-sm leading-none font-medium">
+                          {{ component.name }}
+                        </div>
+                        <p
+                          class="text-muted-foreground line-clamp-2 text-sm leading-snug"
+                        >
+                          {{ component.description }}
+                        </p>
+                      </a>
+                    </li>
+                  }
+                  <li>
+                    <a scNavigationMenuLink routerLink="/docs/components">
+                      <div class="text-sm leading-none font-medium">
+                        View All
+                      </div>
+                      <p
+                        class="text-muted-foreground line-clamp-2 text-sm leading-snug"
+                      >
+                        See all available components.
+                      </p>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </ng-template>
+          </li>
 
-              <li scNavigationMenuItem>
-                <a scNavigationMenuLink routerLink="/docs/getting-started">
-                  Documentation
-                </a>
-              </li>
+          <li scNavigationMenuItem>
+            <a scNavigationMenuLink routerLink="/docs/getting-started">
+              Documentation
+            </a>
+          </li>
 
-              <li scNavigationMenuItem>
-                <a scNavigationMenuLink routerLink="/customize">Customize</a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-
-        <!-- Actions -->
-        <div scNavbarActions>
-          <button
-            scInputButton
-            class="hidden w-48 md:flex lg:w-64"
-            (click)="openCommandPalette()"
-          >
-            <svg siSearchIcon></svg>
-            <span class="flex-1 text-start">Search...</span>
-            <kbd scKbd>&#8984;K</kbd>
-          </button>
-          <a
-            scLink
-            variant="ghost"
-            href="https://github.com/gridatek/semantic-components"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="hidden gap-1 md:inline-flex"
-          >
-            <svg siGithubIcon></svg>
-            <span class="sr-only">GitHub</span>
-            @if (starCount()) {
-              <span class="text-muted-foreground w-fit text-xs tabular-nums">
-                {{ starCount() }}
-              </span>
-            }
-          </a>
-          <a
-            scLink
-            variant="ghost"
-            size="icon"
-            href="https://github.com/gridatek/semantic-components"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="md:hidden"
-          >
-            <svg siGithubIcon></svg>
-            <span class="sr-only">GitHub</span>
-          </a>
-          <a
-            scLink
-            class="hidden md:inline-flex"
-            routerLink="/docs/getting-started"
-          >
-            Get Started
-          </a>
-          <app-preset-sheet />
-          <button scThemeModeToggle #themeToggle="scThemeModeToggle">
-            @if (themeToggle.isDark()) {
-              <svg siSunIcon></svg>
-              <span class="sr-only">Switch to light theme</span>
-            } @else {
-              <svg siMoonIcon></svg>
-              <span class="sr-only">Switch to dark theme</span>
-            }
-          </button>
-          <button scNavbarMobileTrigger #trigger="scNavbarMobileTrigger">
-            @if (trigger.isMobileMenuOpen()) {
-              <svg siXIcon></svg>
-            } @else {
-              <svg siMenuIcon></svg>
-            }
-            <span class="sr-only">
-              {{ trigger.isMobileMenuOpen() ? 'Close menu' : 'Open menu' }}
-            </span>
-          </button>
-        </div>
+          <li scNavigationMenuItem>
+            <a scNavigationMenuLink routerLink="/customize">Customize</a>
+          </li>
+        </ul>
       </nav>
 
+      <!-- Actions -->
+      <div scNavbarActions>
+        <button
+          scInputButton
+          class="hidden w-48 md:flex lg:w-64"
+          (click)="openCommandPalette()"
+        >
+          <svg siSearchIcon></svg>
+          <span class="flex-1 text-start">Search...</span>
+          <kbd scKbd>&#8984;K</kbd>
+        </button>
+        <a
+          scLink
+          variant="ghost"
+          href="https://github.com/gridatek/semantic-components"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hidden gap-1 md:inline-flex"
+        >
+          <svg siGithubIcon></svg>
+          <span class="sr-only">GitHub</span>
+          @if (starCount()) {
+            <span class="text-muted-foreground w-fit text-xs tabular-nums">
+              {{ starCount() }}
+            </span>
+          }
+        </a>
+        <a
+          scLink
+          variant="ghost"
+          size="icon"
+          href="https://github.com/gridatek/semantic-components"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="md:hidden"
+        >
+          <svg siGithubIcon></svg>
+          <span class="sr-only">GitHub</span>
+        </a>
+        <a
+          scLink
+          class="hidden md:inline-flex"
+          routerLink="/docs/getting-started"
+        >
+          Get Started
+        </a>
+        <app-preset-sheet />
+        <button scThemeModeToggle #themeToggle="scThemeModeToggle">
+          @if (themeToggle.isDark()) {
+            <svg siSunIcon></svg>
+            <span class="sr-only">Switch to light theme</span>
+          } @else {
+            <svg siMoonIcon></svg>
+            <span class="sr-only">Switch to dark theme</span>
+          }
+        </button>
+      </div>
+
+      <button scNavbarToggle>
+        @if (navbar.open()) {
+          <svg siXIcon></svg>
+          <span class="sr-only">Close menu</span>
+        } @else {
+          <svg siMenuIcon></svg>
+          <span class="sr-only">Open menu</span>
+        }
+      </button>
+
       <!-- Mobile Menu -->
-      <ng-template scNavbarMobilePortal>
-        <div scNavbarMobileMenu aria-label="Mobile navigation">
+      <div scNavbarMenu>
+        <nav aria-label="Main">
           <a
-            scNavbarMobileLink
+            scNavbarMenuLink
             routerLink="/docs/components"
             routerLinkActive="active"
             #mobileComponentsRla="routerLinkActive"
@@ -236,7 +228,7 @@ import { PresetSheet } from '../preset-sheet/preset-sheet';
             Components
           </a>
           <a
-            scNavbarMobileLink
+            scNavbarMenuLink
             routerLink="/docs/getting-started"
             routerLinkActive="active"
             #mobileDocsRla="routerLinkActive"
@@ -245,7 +237,7 @@ import { PresetSheet } from '../preset-sheet/preset-sheet';
             Documentation
           </a>
           <a
-            scNavbarMobileLink
+            scNavbarMenuLink
             routerLink="/customize"
             routerLinkActive="active"
             #mobileCustomizeRla="routerLinkActive"
@@ -253,9 +245,9 @@ import { PresetSheet } from '../preset-sheet/preset-sheet';
           >
             Customize
           </a>
-        </div>
-      </ng-template>
-    </div>
+        </nav>
+      </div>
+    </header>
   `,
   host: {
     '[class]': 'class()',

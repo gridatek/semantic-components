@@ -4220,48 +4220,48 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/navbar-next',
+    path: 'demos/navbar',
     children: [
       {
-        path: 'basic-navbar-next-demo',
+        path: 'basic-navbar-demo',
         loadComponent: () =>
-          import('../pages/docs/navbar-next/demos/basic-navbar-next-demo').then(
-            (m) => m.BasicNavbarNextDemo,
+          import('../pages/docs/navbar/demos/basic-navbar-demo').then(
+            (m) => m.BasicNavbarDemo,
           ),
       },
       {
-        path: 'mobile-navbar-next-demo',
+        path: 'mobile-navbar-demo',
         loadComponent: () =>
-          import('../pages/docs/navbar-next/demos/mobile-navbar-next-demo').then(
-            (m) => m.MobileNavbarNextDemo,
+          import('../pages/docs/navbar/demos/mobile-navbar-demo').then(
+            (m) => m.MobileNavbarDemo,
           ),
       },
       {
-        path: 'overlay-navbar-next-demo',
+        path: 'overlay-navbar-demo',
         loadComponent: () =>
-          import('../pages/docs/navbar-next/demos/overlay-navbar-next-demo').then(
-            (m) => m.OverlayNavbarNextDemo,
+          import('../pages/docs/navbar/demos/overlay-navbar-demo').then(
+            (m) => m.OverlayNavbarDemo,
           ),
       },
       {
-        path: 'navigation-menu-navbar-next-demo',
+        path: 'navigation-menu-navbar-demo',
         loadComponent: () =>
-          import('../pages/docs/navbar-next/demos/navigation-menu-navbar-next-demo').then(
-            (m) => m.NavigationMenuNavbarNextDemo,
+          import('../pages/docs/navbar/demos/navigation-menu-navbar-demo').then(
+            (m) => m.NavigationMenuNavbarDemo,
           ),
       },
       {
-        path: 'sticky-navbar-next-demo',
+        path: 'sticky-navbar-demo',
         loadComponent: () =>
-          import('../pages/docs/navbar-next/demos/sticky-navbar-next-demo').then(
-            (m) => m.StickyNavbarNextDemo,
+          import('../pages/docs/navbar/demos/sticky-navbar-demo').then(
+            (m) => m.StickyNavbarDemo,
           ),
       },
       {
-        path: 'rtl-navbar-next-demo',
+        path: 'rtl-navbar-demo',
         loadComponent: () =>
-          import('../pages/docs/navbar-next/demos/rtl-navbar-next-demo').then(
-            (m) => m.RtlNavbarNextDemo,
+          import('../pages/docs/navbar/demos/rtl-navbar-demo').then(
+            (m) => m.RtlNavbarDemo,
           ),
       },
     ],
@@ -4924,25 +4924,6 @@ export const demosRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/sidebar/demos/floating-sidebar-demo').then(
             (m) => m.FloatingSidebarDemo,
-          ),
-      },
-    ],
-  },
-  {
-    path: 'demos/navbar',
-    children: [
-      {
-        path: 'basic-navbar-demo',
-        loadComponent: () =>
-          import('../pages/docs/navbar/demos/basic-navbar-demo').then(
-            (m) => m.BasicNavbarDemo,
-          ),
-      },
-      {
-        path: 'mobile-navbar-demo',
-        loadComponent: () =>
-          import('../pages/docs/navbar/demos/mobile-navbar-demo').then(
-            (m) => m.MobileNavbarDemo,
           ),
       },
     ],

@@ -1,13 +1,12 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScLink,
-  ScNavbarNext,
-  ScNavbarNextBrand,
-  ScNavbarNextLink,
-  ScNavbarNextMenu,
-  ScNavbarNextMenuLink,
-  ScNavbarNextNav,
-  ScNavbarNextToggle,
+  ScNavbar,
+  ScNavbarBrand,
+  ScNavbarLink,
+  ScNavbarMenu,
+  ScNavbarMenuLink,
+  ScNavbarNav,
+  ScNavbarToggle,
 } from '@semantic-components/ui';
 import {
   SiGalleryVerticalEndIcon,
@@ -16,35 +15,35 @@ import {
 } from '@semantic-icons/lucide-icons';
 
 @Component({
-  selector: 'app-mobile-navbar-next-demo',
+  selector: 'app-sticky-navbar-demo',
   imports: [
-    ScLink,
-    ScNavbarNext,
-    ScNavbarNextBrand,
-    ScNavbarNextLink,
-    ScNavbarNextMenu,
-    ScNavbarNextMenuLink,
-    ScNavbarNextNav,
-    ScNavbarNextToggle,
+    ScNavbar,
+    ScNavbarBrand,
+    ScNavbarLink,
+    ScNavbarMenu,
+    ScNavbarMenuLink,
+    ScNavbarNav,
+    ScNavbarToggle,
     SiGalleryVerticalEndIcon,
     SiMenuIcon,
     SiXIcon,
   ],
   template: `
     <header
-      scNavbarNext
-      aria-label="Acme, mobile"
-      #navbar="scNavbarNext"
-      [(open)]="open"
+      scNavbar
+      aria-label="Acme, sticky"
+      #navbar="scNavbar"
+      sticky
+      hideOnScroll
     >
-      <a scNavbarNextBrand href="#">
+      <a scNavbarBrand href="#">
         <svg siGalleryVerticalEndIcon></svg>
         Acme
       </a>
-      <nav scNavbarNextNav aria-label="Main, mobile">
+      <nav scNavbarNav aria-label="Main, sticky">
         @for (link of links; track link) {
           <a
-            scNavbarNextLink
+            scNavbarLink
             href="#"
             [active]="link === current()"
             (click)="go($event, link)"
@@ -53,7 +52,7 @@ import {
           </a>
         }
       </nav>
-      <button scNavbarNextToggle>
+      <button scNavbarToggle>
         @if (navbar.open()) {
           <svg siXIcon></svg>
           <span class="sr-only">Close menu</span>
@@ -62,11 +61,11 @@ import {
           <span class="sr-only">Open menu</span>
         }
       </button>
-      <div scNavbarNextMenu>
-        <nav aria-label="Main, mobile">
+      <div scNavbarMenu>
+        <nav aria-label="Main, sticky">
           @for (link of links; track link) {
             <a
-              scNavbarNextMenuLink
+              scNavbarMenuLink
               href="#"
               [active]="link === current()"
               (click)="go($event, link)"
@@ -75,16 +74,20 @@ import {
             </a>
           }
         </nav>
-        <a scLink class="mt-3">Get started</a>
       </div>
     </header>
-    <p class="text-muted-foreground p-4 text-sm">
-      Menu {{ open() ? 'open' : 'closed' }}
-    </p>
+    <div class="space-y-4 p-6">
+      @for (paragraph of paragraphs; track $index) {
+        <p class="text-muted-foreground max-w-prose">
+          Scroll down: the bar slides away. Scroll up: it comes back. Paragraph
+          {{ $index + 1 }}.
+        </p>
+      }
+    </div>
   `,
   encapsulation: ViewEncapsulation.None,
 })
-export class MobileNavbarNextDemo {
+export class StickyNavbarDemo {
   readonly links = ['Products', 'Pricing', 'Docs', 'Blog'];
   readonly current = signal('Products');
 
@@ -93,6 +96,5 @@ export class MobileNavbarNextDemo {
     event.preventDefault();
     this.current.set(link);
   }
-  /** Two-way bound to the navbar's open state. */
-  readonly open = signal(false);
+  readonly paragraphs = Array.from({ length: 30 });
 }

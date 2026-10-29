@@ -1,9 +1,8 @@
-export { ScNavbar } from './navbar';
-export { ScNavbarProvider } from './navbar-provider';
+export { ScNavbar, type ScNavbarExpand } from './navbar';
 export { ScNavbarBrand } from './navbar-brand';
-export { ScNavbarGroup } from './navbar-group';
+export { ScNavbarNav } from './navbar-nav';
+export { ScNavbarLink } from './navbar-link';
 export { ScNavbarActions } from './navbar-actions';
-export { ScNavbarMobileTrigger } from './navbar-mobile-trigger';
-export { ScNavbarMobilePortal } from './navbar-mobile-portal';
-export { ScNavbarMobileMenu } from './navbar-mobile-menu';
-export { ScNavbarMobileLink } from './navbar-mobile-link';
+export { ScNavbarToggle } from './navbar-toggle';
+export { ScNavbarMenu } from './navbar-menu';
+export { ScNavbarMenuLink } from './navbar-menu-link';
