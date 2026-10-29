@@ -67,6 +67,34 @@ used; it's React.
   `ReferenceLine`, `ReferenceArea`, `ErrorBar`, axis `domain`, …), checked
   against shadcn's examples first.
 
+## Tree Table
+
+Tree rows in the Data Table (`ui/data-table`), the user's choice over a
+component of its own: TanStack's expanding feature builds the tree, our parts
+show it.
+
+| Library                                                                             | What to read                                                                                         |
+| ----------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| [WAI-ARIA treegrid](https://www.w3.org/WAI/ARIA/apg/patterns/treegrid/)             | The keyboard and the row attributes (`aria-level`, `aria-posinset`, `aria-setsize`, `aria-expanded`) |
+| [TanStack Table: expanding](https://tanstack.com/table/latest/docs/guide/expanding) | `getSubRows`, `filterFromLeafRows`, `paginateExpandedRows`; its examples' checkbox states            |
+| AG Grid, MUI X Data Grid ("tree data")                                              | The same idea as ours: a mode of the grid, the first column grouping                                 |
+
+**Taken:**
+
+- **The name "Tree Table"** (the user's choice); parts keep the Data
+  Table's prefix (`scDataTableTreeGrid`, `scDataTableExpand`…).
+- **The full treegrid keyboard** (the user's choice): rows are one tab stop;
+  ↑/↓, → open or go in, ← close or go up (mirrored in RTL), Home/End, Enter,
+  Space selects.
+- **A parent half-ticked** while only some of its children are selected,
+  selected itself or not — as TanStack's examples.
+
+**Open — to follow them later:**
+
+- **Children loaded on opening**: a row's children fetched when it opens.
+- **Cell focus** inside a row (the treegrid pattern's cell navigation): rows
+  only, for now.
+
 ## Video Player
 
 | Library                                      | What to read                                                                                                                                                                                                                                                                                                                                                   |

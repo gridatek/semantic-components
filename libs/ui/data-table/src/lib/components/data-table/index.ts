@@ -10,3 +10,7 @@ export { ScDataTableGlobalFilter } from './data-table-global-filter';
 export { ScDataTableColumnFilter } from './data-table-column-filter';
 export { ScDataTablePagination } from './data-table-pagination';
 export { ScDataTableColumnVisibility } from './data-table-column-visibility';
+export { ScDataTableExpand } from './data-table-expand';
+export { ScDataTableExpandAll } from './data-table-expand-all';
+export { ScDataTableTreeCell } from './data-table-tree-cell';
+export { ScDataTableTreeGrid } from './data-table-tree-grid';

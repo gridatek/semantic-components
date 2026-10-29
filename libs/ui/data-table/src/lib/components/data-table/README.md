@@ -146,8 +146,55 @@ Set `enableHiding: false` on columns that shouldn't be listed (selection, action
 | `ScDataTableColumnFilter`     | `input[scDataTableColumnFilter]`                    | `column`         | Column filter as you type (empty clears it)                                                                  |
 | `ScDataTablePagination`       | `[scPagination][scDataTablePagination]`             | `table`          | Feeds `scPagination` (page, size, row count) and sends its changes back                                      |
 | `ScDataTableColumnVisibility` | `input[type=checkbox][scDataTableColumnVisibility]` | `column`         | Shows/hides its column                                                                                       |
+| `ScDataTableTreeGrid`         | `table[scDataTableTreeGrid]`                        | `table`          | A tree table (below): `role="treegrid"`, one tab stop, the keyboard                                          |
+| `ScDataTableTreeCell`         | `div[scDataTableTreeCell]`                          | `row`            | The first cell's content, indented by the row's depth                                                        |
+| `ScDataTableExpand`           | `button[scDataTableExpand]`                         | `row`            | Opens/closes the row's children; your chevron (pointing to the end) and its name inside                      |
+| `ScDataTableExpandAll`        | `button[scDataTableExpandAll]`                      | `table`          | Opens every row, or closes them all; `aria-expanded`                                                         |
 
-The checkbox parts work alone or together with `scCheckbox` (they then drive its `checked` / `indeterminate`).
+The checkbox parts work alone or together with `scCheckbox` (they then drive its `checked` / `indeterminate`). A row's checkbox is half-ticked while only some of its sub-rows are selected.
+
+## Tree table
+
+Rows that open on their children — folders and files, tasks and subtasks. TanStack's expanding feature builds the tree; these parts show it.
+
+```typescript
+const features = tableFeatures({
+  rowExpandingFeature,
+  expandedRowModel: createExpandedRowModel(),
+});
+
+readonly table = injectTable(() => ({
+  features,
+  columns,
+  data: FILES,
+  getSubRows: (file) => file.children,
+}));
+```
+
+```html
+<table scTable scDataTableTreeGrid [table]="table" aria-label="Files">
+  … @for (row of table.getRowModel().rows; track row.id) {
+  <tr scTableRow scDataTableRow [row]="row">
+    <td scTableCell>
+      <div scDataTableTreeCell [row]="row">
+        <button scDataTableExpand [row]="row">
+          <svg siChevronRightIcon></svg>
+          <span class="sr-only">Open {{ row.original.name }}</span>
+        </button>
+        {{ row.original.name }}
+      </div>
+    </td>
+    …
+  </tr>
+  }
+</table>
+```
+
+- **Keyboard** (WAI-ARIA treegrid): the rows are one tab stop. ↑/↓ move between them; → opens a row, or goes into it once open; ← closes it, or goes up to its parent (both mirrored in right-to-left); Home and End go to the first and last rows; Enter opens or closes; Space selects (with `rowSelectionFeature`).
+- **Screen readers:** each row says its level, its place among its siblings (`aria-posinset` / `aria-setsize`), whether it is open, and — when rows can be selected — whether it is. In the tree grid the expand buttons and row checkboxes are out of the tab order (the row is the control), and the buttons hidden.
+- **Selection:** selecting a row selects its sub-rows (TanStack). Count them with `getSelectedRowModel().flatRows`.
+- **Filtering:** `filterFromLeafRows: true` keeps the folders of a match; open them as the filter changes (`table.toggleAllRowsExpanded(true)`).
+- **Several pages:** `paginateExpandedRows` (TanStack) decides whether open rows count toward a page.
 
 ### Structural types
 

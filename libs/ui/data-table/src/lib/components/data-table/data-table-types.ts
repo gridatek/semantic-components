@@ -43,6 +43,32 @@ export interface ScDataTableSelectableRow {
   getIsSelected(): boolean;
   getCanSelect(): boolean;
   toggleSelected(value?: boolean): void;
+  /** With sub-rows: some of them selected — the box shows it, half-ticked. */
+  getIsSomeSelected?(): boolean;
+}
+
+/** A row of a tree table: TanStack's, with its expanding feature. */
+export interface ScDataTableTreeRow {
+  id: string;
+  /** 0 for a top row. */
+  depth: number;
+  parentId?: string;
+  getCanExpand(): boolean;
+  getIsExpanded(): boolean;
+  toggleExpanded(expanded?: boolean): void;
+  getCanSelect?(): boolean;
+  getIsSelected?(): boolean;
+  toggleSelected?(value?: boolean): void;
+}
+
+/** A tree table: its rows as shown — the expanded ones' children among them. */
+export interface ScDataTableTreeTable {
+  getRowModel(): { rows: readonly ScDataTableTreeRow[] };
+}
+
+export interface ScDataTableExpandAllTable {
+  getIsAllRowsExpanded(): boolean;
+  toggleAllRowsExpanded(expanded?: boolean): void;
 }
 
 export interface ScDataTableSelectAllTable {

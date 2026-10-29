@@ -1128,6 +1128,14 @@
     "category": "Data Display"
   },
   {
+    "name": "Tree Table",
+    "path": "tree-table",
+    "description": "A Data Table whose rows open on their children, as a tree grid: indented, opened by the arrows, selected with their children.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Data Display"
+  },
+  {
     "name": "Typography",
     "path": "typography",
     "description": "Styles for headings, paragraphs, lists, and other text elements.",

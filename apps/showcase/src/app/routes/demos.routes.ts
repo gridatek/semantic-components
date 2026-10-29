@@ -4145,6 +4145,46 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/tree-table',
+    children: [
+      {
+        path: 'basic-tree-table-demo',
+        loadComponent: () =>
+          import('../pages/docs/tree-table/demos/basic-tree-table-demo').then(
+            (m) => m.BasicTreeTableDemo,
+          ),
+      },
+      {
+        path: 'expand-all-tree-table-demo',
+        loadComponent: () =>
+          import('../pages/docs/tree-table/demos/expand-all-tree-table-demo').then(
+            (m) => m.ExpandAllTreeTableDemo,
+          ),
+      },
+      {
+        path: 'selection-tree-table-demo',
+        loadComponent: () =>
+          import('../pages/docs/tree-table/demos/selection-tree-table-demo').then(
+            (m) => m.SelectionTreeTableDemo,
+          ),
+      },
+      {
+        path: 'filter-tree-table-demo',
+        loadComponent: () =>
+          import('../pages/docs/tree-table/demos/filter-tree-table-demo').then(
+            (m) => m.FilterTreeTableDemo,
+          ),
+      },
+      {
+        path: 'rtl-tree-table-demo',
+        loadComponent: () =>
+          import('../pages/docs/tree-table/demos/rtl-tree-table-demo').then(
+            (m) => m.RtlTreeTableDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/trace',
     children: [
       {

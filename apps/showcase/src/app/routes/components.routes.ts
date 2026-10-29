@@ -711,6 +711,11 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/questionnaire/questionnaire-page'),
       },
       {
+        path: 'tree-table',
+        title: 'Tree Table - Semantic Components',
+        loadComponent: () => import('../pages/docs/tree-table/tree-table-page'),
+      },
+      {
         path: 'trace',
         title: 'Trace - Semantic Components',
         loadComponent: () => import('../pages/docs/trace/trace-page'),
