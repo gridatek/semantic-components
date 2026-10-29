@@ -220,3 +220,4 @@ Built on molecules: pickers, menus in context, the sidebar, the data table, the 
 ## Later
 
 - Visibility and status (Experimental → Developer Preview) stay separate decisions, per component.
+- Open issues and larger items: [todo.md](todo.md).
