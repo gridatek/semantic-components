@@ -1,151 +1,92 @@
-# Navigation Menu Components
+# Navigation Menu
 
-A collection of links for navigating websites with hover-activated dropdowns.
+Site navigation with panels, as shadcn's (nova, built on Base UI): a trigger opens its item's panel on hover, click, Enter or Space; one panel at a time, in a shared box that moves and resizes from item to item while the content slides in from the side you came from. It follows the WAI-ARIA disclosure navigation pattern — not `role="menu"`.
 
-## Architecture
+## Features
 
-```
-ScNavigationMenu (Root - nav element)
-    ├── activeItem: signal<string | null>
-    │
-    └── ScNavigationMenuList (ul element)
-          │
-          ├── ScNavigationMenuItem (li - with dropdown)
-          │     ├── open: signal<boolean>
-          │     ├── Handles hover enter/leave
-          │     ├── cdkConnectedOverlay
-          │     │
-          │     ├── ScNavigationMenuTrigger (button)
-          │     │     ├── CdkOverlayOrigin
-          │     │     └── ScNavigationMenuTriggerIcon (svg)
-          │     │
-          │     └── ScNavigationMenuPortal (ng-template)
-          │           └── ScNavigationMenuContent (div - styling)
-          │
-          └── ScNavigationMenuItem (li - simple link)
-                └── ScNavigationMenuLink (a element)
-```
+- **Hover or press** — `delay` / `closeDelay` (50 ms, as Base UI); a click keeps a hover-opened panel open, a second click closes it
+- **One shared box** (`viewport`, default) — or each panel under its trigger (`[viewport]="false"`)
+- **`[(value)]`** — the open item
+- **Tab order of the page** — a panel is written inside its item, after its trigger
+- **Keyboard** — ←/→ between the top-level items (mirrored in RTL), Home/End, ↓ into the open panel (opening it first), ↓/↑ between a panel's links, Escape back to the trigger
+- **Closes by itself** — Escape, a link followed, a click outside, the focus leaving its item
+- **Current page** — `active` on a link: `aria-current="page"`
 
-## Components
-
-| Component                 | Selector                              | Description                                 |
-| ------------------------- | ------------------------------------- | ------------------------------------------- |
-| `ScNavigationMenu`        | `nav[scNavigationMenu]`               | Root navigation wrapper                     |
-| `ScNavigationMenuList`    | `ul[scNavigationMenuList]`            | List container for items                    |
-| `ScNavigationMenuItem`    | `li[scNavigationMenuItem]`            | Individual menu item with optional dropdown |
-| `ScNavigationMenuTrigger` | `button[scNavigationMenuTrigger]`     | Button that shows dropdown on hover         |
-| `ScNavigationMenuPortal`  | `ng-template[scNavigationMenuPortal]` | Portal template for dropdown content        |
-| `ScNavigationMenuContent` | `div[scNavigationMenuContent]`        | Dropdown content styling wrapper            |
-| `ScNavigationMenuLink`    | `a[scNavigationMenuLink]`             | Simple navigation link (no dropdown)        |
-
-## Usage
-
-### Basic Navigation
+## Quick Start
 
 ```html
-<nav scNavigationMenu>
+<nav scNavigationMenu aria-label="Main">
   <ul scNavigationMenuList>
-    <!-- Item with dropdown -->
-    <li scNavigationMenuItem>
+    <li scNavigationMenuItem value="components">
       <button scNavigationMenuTrigger>
-        Products
+        Components
         <svg siChevronDownIcon scNavigationMenuTriggerIcon></svg>
       </button>
-      <ng-template scNavigationMenuPortal>
-        <div scNavigationMenuContent>
-          <ul class="grid w-[400px] gap-3 p-4">
-            <li>
-              <a href="/product-a">Product A</a>
-            </li>
-            <li>
-              <a href="/product-b">Product B</a>
-            </li>
-          </ul>
-        </div>
-      </ng-template>
+      <div scNavigationMenuContent>
+        <ul class="grid w-96 gap-1 md:grid-cols-2">
+          <li><a scNavigationMenuLink routerLink="/docs/dialog">Dialog</a></li>
+          <li><a scNavigationMenuLink routerLink="/docs/tabs">Tabs</a></li>
+        </ul>
+      </div>
     </li>
-
-    <!-- Simple link -->
     <li scNavigationMenuItem>
-      <a scNavigationMenuLink href="/about">About</a>
+      <a scNavigationMenuLink routerLink="/docs" active>Docs</a>
     </li>
   </ul>
 </nav>
 ```
 
-### Mega Menu Style
+**Rules**
 
-```html
-<li scNavigationMenuItem>
-  <button scNavigationMenuTrigger>
-    Components
-    <svg siChevronDownIcon scNavigationMenuTriggerIcon></svg>
-  </button>
-  <ng-template scNavigationMenuPortal>
-    <div scNavigationMenuContent>
-      <ul class="grid w-[600px] gap-3 p-4 md:grid-cols-2">
-        <li>
-          <a class="hover:bg-accent block rounded-md p-3" href="#">
-            <div class="font-medium">Alert Dialog</div>
-            <p class="text-muted-foreground text-sm">Modal dialog for important content.</p>
-          </a>
-        </li>
-        <!-- More items... -->
-      </ul>
-    </div>
-  </ng-template>
-</li>
-```
+- Name the `nav` (`aria-label`).
+- Write each panel inside its item, after the trigger; lay out its inside as you like.
+- A panel's links are `scNavigationMenuLink`: they close the menu when followed and get the panel's arrow keys.
 
-### With Featured Section
+## API
 
-```html
-<ng-template scNavigationMenuPortal>
-  <div scNavigationMenuContent>
-    <ul class="grid gap-3 p-4 lg:grid-cols-[.75fr_1fr]">
-      <!-- Featured card spanning rows -->
-      <li class="row-span-3">
-        <a class="from-muted/50 to-muted flex h-full flex-col justify-end rounded-md bg-linear-to-b p-6" href="#">
-          <div class="text-lg font-medium">Featured</div>
-          <p class="text-muted-foreground text-sm">Highlighted content here.</p>
-        </a>
-      </li>
-      <!-- Regular links -->
-      <li><a href="#">Link 1</a></li>
-      <li><a href="#">Link 2</a></li>
-      <li><a href="#">Link 3</a></li>
-    </ul>
-  </div>
-</ng-template>
-```
+### ScNavigationMenu — `nav[scNavigationMenu]`
 
-## Inputs
+`exportAs: 'scNavigationMenu'`.
 
-### ScNavigationMenuLink
+| Input        | Type                       | Default | Description                                                                      |
+| ------------ | -------------------------- | ------- | -------------------------------------------------------------------------------- |
+| `value`      | `string \| null` (two-way) | `null`  | The open item                                                                    |
+| `delay`      | `number`                   | `50`    | ms the pointer rests on a trigger before it opens (at once when another is open) |
+| `closeDelay` | `number`                   | `50`    | ms after the pointer leaves before it closes                                     |
+| `viewport`   | `boolean`                  | `true`  | One shared box for the panels; `false`: each its own                             |
+| `class`      | `string`                   | `''`    | Additional CSS classes                                                           |
 
-| Input    | Type      | Default | Description                           |
-| -------- | --------- | ------- | ------------------------------------- |
-| `active` | `boolean` | `false` | Whether this link is currently active |
+### ScNavigationMenuList — `ul[scNavigationMenuList]`
 
-## Features
+The top-level items, in a row.
 
-- **Hover triggered**: Dropdowns open on mouse enter
-- **Smooth close**: Small delay before closing allows mouse movement
-- **Portal pattern**: Content is decoupled from overlay via `ScNavigationMenuPortal`
-- **Flexible content**: Support any content in dropdowns
-- **Auto chevron**: Trigger buttons include animated chevron icon
-- **Simple links**: Support for non-dropdown navigation items
+### ScNavigationMenuItem — `li[scNavigationMenuItem]`
 
-## Styling
+`value`: its name in the menu's `value` (made up if left out).
 
-The components use Tailwind CSS classes with shadcn/ui design tokens:
+### ScNavigationMenuTrigger — `button[scNavigationMenuTrigger]`
 
-- Trigger: `bg-background hover:bg-accent`
-- Content: Uses CDK overlay for positioning
-- Transitions: Fade and scale animations
+Opens its item's panel. `aria-expanded`, `aria-controls`, `data-state="open|closed"`.
+
+### ScNavigationMenuTriggerIcon — `svg[scNavigationMenuTriggerIcon]`
+
+Your chevron (down): turns over while open. `aria-hidden`.
+
+### ScNavigationMenuContent — `div[scNavigationMenuContent]`
+
+The panel: always in the page; closed, `invisible` (out of the tab order and the accessibility tree). `data-state`, `data-side="start|end"` (where it rests from the open one).
+
+### ScNavigationMenuLink — `a[scNavigationMenuLink]`
+
+At the top level it looks like a trigger; in a panel, a row. `active`: `aria-current="page"`, `data-active`.
 
 ## Accessibility
 
-- Uses semantic `nav`, `ul`, `li` elements
-- `aria-expanded` on triggers indicates dropdown state
-- Keyboard navigation support through native focus handling
+- Disclosure navigation: buttons with `aria-expanded` and `aria-controls`, links with `aria-current`; no `menu` role (site navigation needs no menubar focus model).
+- The panels are in the page after their triggers: Tab reaches their links in order.
+- Escape closes and gives the trigger back the focus; the focus leaving an item closes its panel.
+- Motion off under `prefers-reduced-motion`.
+
+## Left out
+
+Nested submenus, a vertical orientation, the arrow indicator.

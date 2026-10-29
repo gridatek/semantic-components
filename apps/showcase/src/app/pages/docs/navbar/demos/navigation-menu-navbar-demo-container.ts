@@ -31,7 +31,6 @@ import {
   ScNavigationMenuItem,
   ScNavigationMenuLink,
   ScNavigationMenuList,
-  ScNavigationMenuPortal,
   ScNavigationMenuTrigger,
   ScNavigationMenuTriggerIcon,
 } from '@semantic-components/ui';
@@ -56,7 +55,6 @@ import {
     ScNavigationMenuItem,
     ScNavigationMenuLink,
     ScNavigationMenuList,
-    ScNavigationMenuPortal,
     ScNavigationMenuTrigger,
     ScNavigationMenuTriggerIcon,
     SiChevronDownIcon,
@@ -77,17 +75,15 @@ import {
               Products
               <svg siChevronDownIcon scNavigationMenuTriggerIcon></svg>
             </button>
-            <ng-template scNavigationMenuPortal>
-              <div scNavigationMenuContent>
-                <ul class="grid w-72 gap-1 p-2">
-                  @for (product of products; track product) {
-                    <li>
-                      <a scNavigationMenuLink href="#">{{ product }}</a>
-                    </li>
-                  }
-                </ul>
-              </div>
-            </ng-template>
+            <div scNavigationMenuContent>
+              <ul class="grid w-72 gap-1 p-2">
+                @for (product of products; track product) {
+                  <li>
+                    <a scNavigationMenuLink href="#">{{ product }}</a>
+                  </li>
+                }
+              </ul>
+            </div>
           </li>
           @for (link of links.slice(1); track link) {
             <li scNavigationMenuItem>

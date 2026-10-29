@@ -22,7 +22,6 @@ import {
   ScNavigationMenuItem,
   ScNavigationMenuLink,
   ScNavigationMenuList,
-  ScNavigationMenuPortal,
   ScNavigationMenuTrigger,
   ScNavigationMenuTriggerIcon,
   ScThemeModeToggle,
@@ -65,7 +64,6 @@ import { PresetSheet } from '../preset-sheet/preset-sheet';
     ScNavigationMenuItem,
     ScNavigationMenuLink,
     ScNavigationMenuList,
-    ScNavigationMenuPortal,
     ScNavigationMenuTrigger,
     SiGithubIcon,
     SiSearchIcon,
@@ -93,46 +91,44 @@ import { PresetSheet } from '../preset-sheet/preset-sheet';
               Components
               <svg siChevronDownIcon scNavigationMenuTriggerIcon></svg>
             </button>
-            <ng-template scNavigationMenuPortal>
-              <div scNavigationMenuContent>
-                <ul
-                  class="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]"
-                >
-                  @for (
-                    component of featuredComponents();
-                    track component.path
-                  ) {
-                    <li>
-                      <a
-                        scNavigationMenuLink
-                        [routerLink]="'/docs/components/' + component.path"
-                      >
-                        <div class="text-sm leading-none font-medium">
-                          {{ component.name }}
-                        </div>
-                        <p
-                          class="text-muted-foreground line-clamp-2 text-sm leading-snug"
-                        >
-                          {{ component.description }}
-                        </p>
-                      </a>
-                    </li>
-                  }
+            <div scNavigationMenuContent>
+              <ul
+                class="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]"
+              >
+                @for (component of featuredComponents(); track component.path) {
                   <li>
-                    <a scNavigationMenuLink routerLink="/docs/components">
+                    <a
+                      scNavigationMenuLink
+                      class="flex-col items-start gap-1"
+                      [routerLink]="'/docs/components/' + component.path"
+                    >
                       <div class="text-sm leading-none font-medium">
-                        View All
+                        {{ component.name }}
                       </div>
                       <p
                         class="text-muted-foreground line-clamp-2 text-sm leading-snug"
                       >
-                        See all available components.
+                        {{ component.description }}
                       </p>
                     </a>
                   </li>
-                </ul>
-              </div>
-            </ng-template>
+                }
+                <li>
+                  <a
+                    scNavigationMenuLink
+                    class="flex-col items-start gap-1"
+                    routerLink="/docs/components"
+                  >
+                    <div class="text-sm leading-none font-medium">View All</div>
+                    <p
+                      class="text-muted-foreground line-clamp-2 text-sm leading-snug"
+                    >
+                      See all available components.
+                    </p>
+                  </a>
+                </li>
+              </ul>
+            </div>
           </li>
 
           <li scNavigationMenuItem>

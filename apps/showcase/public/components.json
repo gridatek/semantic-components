@@ -642,7 +642,7 @@
   {
     "name": "Navigation Menu",
     "path": "navigation-menu",
-    "description": "A navigation menu with links and dropdowns.",
+    "description": "Site navigation with panels: opened by hover, click or keyboard; one shared box that moves between items.",
     "status": "Experimental",
     "library": "ui",
     "category": "Navigation"

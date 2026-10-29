@@ -1,9 +1,11 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from '../../utils';
 
+/** The top-level items, in a row. */
 @Directive({
   selector: 'ul[scNavigationMenuList]',
   host: {
+    'data-slot': 'navigation-menu-list',
     '[class]': 'class()',
   },
 })

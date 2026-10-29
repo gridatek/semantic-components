@@ -20,7 +20,6 @@ import {
   ScNavigationMenuItem,
   ScNavigationMenuLink,
   ScNavigationMenuList,
-  ScNavigationMenuPortal,
   ScNavigationMenuTrigger,
   ScNavigationMenuTriggerIcon,
   ScSelect,
@@ -75,7 +74,6 @@ import {
     ScNavigationMenuItem,
     ScNavigationMenuLink,
     ScNavigationMenuList,
-    ScNavigationMenuPortal,
     ScNavigationMenuTrigger,
     SiMenuIcon,
     SiXIcon,
@@ -102,94 +100,110 @@ import {
               <ng-container i18n="@@navbar.pages">Pages</ng-container>
               <svg siChevronDownIcon scNavigationMenuTriggerIcon></svg>
             </button>
-            <ng-template scNavigationMenuPortal>
-              <div scNavigationMenuContent>
-                <ul
-                  class="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2"
-                >
-                  <li>
-                    <a scNavigationMenuLink routerLink="/dashboard">
-                      <div
-                        class="text-sm leading-none font-medium"
-                        i18n="@@navbar.dashboard"
-                      >
-                        Dashboard
-                      </div>
-                      <p
-                        class="text-muted-foreground line-clamp-2 text-sm leading-snug"
-                        i18n="@@navbar.dashboard.description"
-                      >
-                        Sidebar layout with navigation
-                      </p>
-                    </a>
-                  </li>
-                  <li>
-                    <a scNavigationMenuLink routerLink="/settings">
-                      <div
-                        class="text-sm leading-none font-medium"
-                        i18n="@@navbar.settings"
-                      >
-                        Settings
-                      </div>
-                      <p
-                        class="text-muted-foreground line-clamp-2 text-sm leading-snug"
-                        i18n="@@navbar.settings.description"
-                      >
-                        Account and profile management
-                      </p>
-                    </a>
-                  </li>
-                  <li>
-                    <a scNavigationMenuLink routerLink="/gallery">
-                      <div
-                        class="text-sm leading-none font-medium"
-                        i18n="@@navbar.gallery"
-                      >
-                        Gallery
-                      </div>
-                      <p
-                        class="text-muted-foreground line-clamp-2 text-sm leading-snug"
-                        i18n="@@navbar.gallery.description"
-                      >
-                        Component showcase reference
-                      </p>
-                    </a>
-                  </li>
-                  <li>
-                    <a scNavigationMenuLink routerLink="/data-table">
-                      <div
-                        class="text-sm leading-none font-medium"
-                        i18n="@@navbar.dataTable"
-                      >
-                        Data Table
-                      </div>
-                      <p
-                        class="text-muted-foreground line-clamp-2 text-sm leading-snug"
-                        i18n="@@navbar.dataTable.description"
-                      >
-                        Advanced table with sorting and filtering
-                      </p>
-                    </a>
-                  </li>
-                  <li>
-                    <a scNavigationMenuLink routerLink="/chat">
-                      <div
-                        class="text-sm leading-none font-medium"
-                        i18n="@@navbar.chat"
-                      >
-                        Chat
-                      </div>
-                      <p
-                        class="text-muted-foreground line-clamp-2 text-sm leading-snug"
-                        i18n="@@navbar.chat.description"
-                      >
-                        An assistant's steps and streamed replies
-                      </p>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </ng-template>
+            <div scNavigationMenuContent>
+              <ul class="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2">
+                <li>
+                  <a
+                    scNavigationMenuLink
+                    class="flex-col items-start gap-1"
+                    routerLink="/dashboard"
+                  >
+                    <div
+                      class="text-sm leading-none font-medium"
+                      i18n="@@navbar.dashboard"
+                    >
+                      Dashboard
+                    </div>
+                    <p
+                      class="text-muted-foreground line-clamp-2 text-sm leading-snug"
+                      i18n="@@navbar.dashboard.description"
+                    >
+                      Sidebar layout with navigation
+                    </p>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    scNavigationMenuLink
+                    class="flex-col items-start gap-1"
+                    routerLink="/settings"
+                  >
+                    <div
+                      class="text-sm leading-none font-medium"
+                      i18n="@@navbar.settings"
+                    >
+                      Settings
+                    </div>
+                    <p
+                      class="text-muted-foreground line-clamp-2 text-sm leading-snug"
+                      i18n="@@navbar.settings.description"
+                    >
+                      Account and profile management
+                    </p>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    scNavigationMenuLink
+                    class="flex-col items-start gap-1"
+                    routerLink="/gallery"
+                  >
+                    <div
+                      class="text-sm leading-none font-medium"
+                      i18n="@@navbar.gallery"
+                    >
+                      Gallery
+                    </div>
+                    <p
+                      class="text-muted-foreground line-clamp-2 text-sm leading-snug"
+                      i18n="@@navbar.gallery.description"
+                    >
+                      Component showcase reference
+                    </p>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    scNavigationMenuLink
+                    class="flex-col items-start gap-1"
+                    routerLink="/data-table"
+                  >
+                    <div
+                      class="text-sm leading-none font-medium"
+                      i18n="@@navbar.dataTable"
+                    >
+                      Data Table
+                    </div>
+                    <p
+                      class="text-muted-foreground line-clamp-2 text-sm leading-snug"
+                      i18n="@@navbar.dataTable.description"
+                    >
+                      Advanced table with sorting and filtering
+                    </p>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    scNavigationMenuLink
+                    class="flex-col items-start gap-1"
+                    routerLink="/chat"
+                  >
+                    <div
+                      class="text-sm leading-none font-medium"
+                      i18n="@@navbar.chat"
+                    >
+                      Chat
+                    </div>
+                    <p
+                      class="text-muted-foreground line-clamp-2 text-sm leading-snug"
+                      i18n="@@navbar.chat.description"
+                    >
+                      An assistant's steps and streamed replies
+                    </p>
+                  </a>
+                </li>
+              </ul>
+            </div>
           </li>
 
           <li scNavigationMenuItem>

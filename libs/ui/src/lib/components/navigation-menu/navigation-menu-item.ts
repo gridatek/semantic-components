@@ -1,124 +1,72 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
-import { ConnectedPosition, OverlayModule } from '@angular/cdk/overlay';
-import { NgTemplateOutlet } from '@angular/common';
 import {
-  Component,
   DestroyRef,
-  OnInit,
-  ViewEncapsulation,
+  Directive,
+  ElementRef,
   computed,
-  contentChild,
   inject,
   input,
   signal,
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { NavigationStart, Router } from '@angular/router';
-import { filter } from 'rxjs';
 import { cn } from '../../utils';
-import { ScNavigationMenu } from './navigation-menu';
-import { ScNavigationMenuPortal } from './navigation-menu-portal';
-import { ScNavigationMenuTrigger } from './navigation-menu-trigger';
+import {
+  ScNavigationMenu,
+  type ScNavigationMenuItemRef,
+} from './navigation-menu';
 
-const position: ConnectedPosition = {
-  originX: 'start',
-  originY: 'bottom',
-  overlayX: 'start',
-  overlayY: 'top',
-  offsetY: 4,
-};
-
-@Component({
+/**
+ * A top-level item: a link, or a trigger and its panel (`scNavigationMenuContent`,
+ * written inside the item, after the trigger — the Tab order).
+ */
+@Directive({
   selector: 'li[scNavigationMenuItem]',
-  imports: [OverlayModule, NgTemplateOutlet],
-  template: `
-    <ng-content />
-
-    @if (origin(); as origin) {
-      <ng-template
-        cdkConnectedOverlay
-        [cdkConnectedOverlayOrigin]="origin"
-        [cdkConnectedOverlayOpen]="open()"
-        [cdkConnectedOverlayPositions]="[position]"
-      >
-        @if (navigationMenuPortal(); as portal) {
-          <ng-container [ngTemplateOutlet]="portal.templateRef" />
-        }
-      </ng-template>
-    }
-  `,
   host: {
+    'data-slot': 'navigation-menu-item',
     '[class]': 'class()',
-    '(mouseenter)': 'onMouseEnter()',
-    '(mouseleave)': 'onMouseLeave()',
+    '(mouseenter)': 'menu.hoverOpen(trigger() ? value() : null)',
   },
-  encapsulation: ViewEncapsulation.None,
 })
-export class ScNavigationMenuItem implements OnInit {
-  readonly navigationMenu = inject(ScNavigationMenu);
-  private readonly router = inject(Router);
-  private readonly destroyRef = inject(DestroyRef);
+export class ScNavigationMenuItem implements ScNavigationMenuItemRef {
+  protected readonly menu = inject(ScNavigationMenu);
+  readonly element = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
+
   readonly classInput = input<string>('', { alias: 'class' });
+  /** Its name in the menu's `value`; one is made up if left out. */
+  readonly valueInput = input<string | undefined>(undefined, {
+    alias: 'value',
+  });
 
-  readonly itemId = inject(_IdGenerator).getId('sc-navigation-menu-item-');
+  private readonly id = inject(_IdGenerator).getId('sc-navigation-menu-item-');
+  readonly value = computed(() => this.valueInput() ?? this.id);
+  /** Its panel's id, for its trigger's `aria-controls`. */
+  readonly contentId = `${this.id}-content`;
 
-  /** Whether this item's content is open */
-  readonly open = signal<boolean>(false);
+  readonly open = computed(() => this.menu.value() === this.value());
 
-  private readonly triggerChild = contentChild(ScNavigationMenuTrigger);
-  protected readonly navigationMenuPortal = contentChild(
-    ScNavigationMenuPortal,
-  );
+  /** Where it is from the open item: its panel rests on that side. */
+  readonly side = computed<'start' | 'end' | null>(() => {
+    const open = this.menu.openIndex();
+    if (open === -1) return null;
+    const index = this.menu.items().indexOf(this);
+    return index < open ? 'start' : index > open ? 'end' : null;
+  });
 
-  readonly origin = computed(() => this.triggerChild()?.overlayOrigin);
+  private readonly triggerElement = signal<HTMLElement | null>(null);
+  private readonly contentElement = signal<HTMLElement | null>(null);
+  readonly trigger = this.triggerElement.asReadonly();
+  readonly content = this.contentElement.asReadonly();
 
-  protected readonly position = position;
+  protected readonly class = computed(() => cn('relative', this.classInput()));
 
-  protected readonly class = computed(() =>
-    cn('block relative', this.classInput()),
-  );
-
-  private hideTimeout: ReturnType<typeof setTimeout> | null = null;
-
-  ngOnInit(): void {
-    // Close the menu when navigation starts
-    this.router.events
-      .pipe(
-        filter((event) => event instanceof NavigationStart),
-        takeUntilDestroyed(this.destroyRef),
-      )
-      .subscribe(() => {
-        this.open.set(false);
-        if (this.navigationMenu.activeItem() === this.itemId) {
-          this.navigationMenu.setActiveItem(null);
-        }
-      });
+  constructor() {
+    inject(DestroyRef).onDestroy(this.menu.register(this));
   }
 
-  onMouseEnter(): void {
-    this.cancelHide();
-    this.open.set(true);
-    this.navigationMenu.setActiveItem(this.itemId);
+  setTrigger(element: HTMLElement | null): void {
+    this.triggerElement.set(element);
   }
 
-  onMouseLeave(): void {
-    this.scheduleHide();
-  }
-
-  private scheduleHide(): void {
-    this.cancelHide();
-    this.hideTimeout = setTimeout(() => {
-      this.open.set(false);
-      if (this.navigationMenu.activeItem() === this.itemId) {
-        this.navigationMenu.setActiveItem(null);
-      }
-    }, 100);
-  }
-
-  cancelHide(): void {
-    if (this.hideTimeout) {
-      clearTimeout(this.hideTimeout);
-      this.hideTimeout = null;
-    }
+  setContent(element: HTMLElement | null): void {
+    this.contentElement.set(element);
   }
 }

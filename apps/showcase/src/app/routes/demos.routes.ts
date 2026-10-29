@@ -2666,18 +2666,6 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/navigation-menu',
-    children: [
-      {
-        path: 'navigation-menu-demo',
-        loadComponent: () =>
-          import('../pages/docs/navigation-menu/demos/navigation-menu-demo').then(
-            (m) => m.ScNavigationMenuDemo,
-          ),
-      },
-    ],
-  },
-  {
     path: 'demos/notification-center',
     children: [
       {
@@ -4262,6 +4250,39 @@ export const demosRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/navbar/demos/rtl-navbar-demo').then(
             (m) => m.RtlNavbarDemo,
+          ),
+      },
+    ],
+  },
+  {
+    path: 'demos/navigation-menu',
+    children: [
+      {
+        path: 'basic-navigation-menu-demo',
+        loadComponent: () =>
+          import('../pages/docs/navigation-menu/demos/basic-navigation-menu-demo').then(
+            (m) => m.BasicNavigationMenuDemo,
+          ),
+      },
+      {
+        path: 'separate-navigation-menu-demo',
+        loadComponent: () =>
+          import('../pages/docs/navigation-menu/demos/separate-navigation-menu-demo').then(
+            (m) => m.SeparateNavigationMenuDemo,
+          ),
+      },
+      {
+        path: 'controlled-navigation-menu-demo',
+        loadComponent: () =>
+          import('../pages/docs/navigation-menu/demos/controlled-navigation-menu-demo').then(
+            (m) => m.ControlledNavigationMenuDemo,
+          ),
+      },
+      {
+        path: 'rtl-navigation-menu-demo',
+        loadComponent: () =>
+          import('../pages/docs/navigation-menu/demos/rtl-navigation-menu-demo').then(
+            (m) => m.RtlNavigationMenuDemo,
           ),
       },
     ],

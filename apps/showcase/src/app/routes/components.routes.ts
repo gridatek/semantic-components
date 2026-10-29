@@ -484,12 +484,6 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/slider/slider-page'),
       },
       {
-        path: 'navigation-menu',
-        title: 'Navigation Menu - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/navigation-menu/navigation-menu-page'),
-      },
-      {
         path: 'notification-center',
         title: 'Notification Center - Semantic Components',
         loadComponent: () =>
@@ -715,6 +709,12 @@ export const componentsRoutes: Route[] = [
         path: 'navbar',
         title: 'Navbar - Semantic Components',
         loadComponent: () => import('../pages/docs/navbar/navbar-page'),
+      },
+      {
+        path: 'navigation-menu',
+        title: 'Navigation Menu - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/navigation-menu/navigation-menu-page'),
       },
       {
         path: 'gantt',
