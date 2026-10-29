@@ -87,6 +87,7 @@ export * from './marquee';
 export * from './masonry-grid';
 export * from './mention-input';
 export * from './message';
+export * from './trace';
 export * from './native-dialog';
 export * from './navbar';
 export * from './notification-center';

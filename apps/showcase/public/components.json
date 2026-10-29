@@ -1080,6 +1080,14 @@
     "category": "Advanced"
   },
   {
+    "name": "Trace",
+    "path": "trace",
+    "description": "The steps of a run — an agent's searches, reads and commands — a line each, with a status and the output it opens on.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Data Display"
+  },
+  {
     "name": "Transfer List",
     "path": "transfer-list",
     "description": "One value (the chosen ids, a form field), two listbox sides, keyboard moves, search, reorder.",

@@ -699,6 +699,11 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/message/message-page'),
       },
       {
+        path: 'trace',
+        title: 'Trace - Semantic Components',
+        loadComponent: () => import('../pages/docs/trace/trace-page'),
+      },
+      {
         path: 'marker',
         title: 'Marker - Semantic Components',
         loadComponent: () => import('../pages/docs/marker/marker-page'),

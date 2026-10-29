@@ -4112,6 +4112,53 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/trace',
+    children: [
+      {
+        path: 'basic-trace-demo',
+        loadComponent: () =>
+          import('../pages/docs/trace/demos/basic-trace-demo').then(
+            (m) => m.BasicTraceDemo,
+          ),
+      },
+      {
+        path: 'status-trace-demo',
+        loadComponent: () =>
+          import('../pages/docs/trace/demos/status-trace-demo').then(
+            (m) => m.StatusTraceDemo,
+          ),
+      },
+      {
+        path: 'description-trace-demo',
+        loadComponent: () =>
+          import('../pages/docs/trace/demos/description-trace-demo').then(
+            (m) => m.DescriptionTraceDemo,
+          ),
+      },
+      {
+        path: 'collapsible-trace-demo',
+        loadComponent: () =>
+          import('../pages/docs/trace/demos/collapsible-trace-demo').then(
+            (m) => m.CollapsibleTraceDemo,
+          ),
+      },
+      {
+        path: 'link-trace-demo',
+        loadComponent: () =>
+          import('../pages/docs/trace/demos/link-trace-demo').then(
+            (m) => m.LinkTraceDemo,
+          ),
+      },
+      {
+        path: 'rtl-trace-demo',
+        loadComponent: () =>
+          import('../pages/docs/trace/demos/rtl-trace-demo').then(
+            (m) => m.RtlTraceDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/message',
     children: [
       {

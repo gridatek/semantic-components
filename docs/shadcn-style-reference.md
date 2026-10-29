@@ -261,6 +261,10 @@ is a bug, not a style choice — the repo is RTL-first by policy.
 Known deliberate divergences — do **not** "fix" these to match upstream:
 
 - **The theme is each app's** (`apps/*/src/styles.css`), not the library's: shadcn's colors exactly — from the generated reference app (`shadcn-reference`) — plus our `--success` / `--warning` (the toast's).
+- **Contrast over opacity** — where upstream dims text with opacity
+  (`opacity-60`, `text-muted-foreground/70`), we keep `text-muted-foreground`
+  so the text keeps 4.5:1 and dim only what isn't text (Trace: a pending
+  line's icon, its description).
 - **Decomposition** — upstream ships one file per component; we split into
   composable directives, so one shadcn class often maps to several of our
   directives.
