@@ -30,10 +30,10 @@ import { SankeyChartDemoContainer } from './demos/sankey-chart-demo-container';
       <section class="space-y-4">
         <h2 scHeading appToc>Installation</h2>
         <app-entry-install
-          entry="charts"
+          entry="charts/sankey"
           library="d3-scale d3-shape d3-sankey"
           href="https://d3js.org"
-          names="ScChart, ScChartPlot, ScChartSankey"
+          names="ScChartSankey"
         />
       </section>
 

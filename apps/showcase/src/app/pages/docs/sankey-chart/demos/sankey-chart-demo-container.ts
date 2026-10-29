@@ -23,9 +23,9 @@ import {
   ScChart,
   type ScChartConfig,
   ScChartPlot,
-  ScChartSankey,
   ScChartTooltip,
 } from '@semantic-components/ui/charts';
+import { ScChartSankey } from '@semantic-components/ui/charts/sankey';
 
 @Component({
   selector: 'app-sankey-chart-demo',

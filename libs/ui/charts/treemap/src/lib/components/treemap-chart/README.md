@@ -1,6 +1,8 @@
 # Treemap Chart
 
-A series as a treemap: a box per row, its area its value, squarified (`d3-hierarchy`, a peer of this entry) — gathered under their groups' names with a `groupKey`. Each box in its category's color, or its group's (`--color-<group>`). Made with [the chart's parts](../chart/README.md).
+A series as a treemap: a box per row, its area its value, squarified (`d3-hierarchy`, a peer of this entry) — gathered under their groups' names with a `groupKey`. Each box in its category's color, or its group's (`--color-<group>`). Made with [the chart's parts](../../../../../src/lib/components/chart/README.md).
+
+Its own entry point, so the other charts don't need `d3-hierarchy`: `import { ScChartTreemap } from '@semantic-components/ui/charts/treemap';` — the chart's parts from `@semantic-components/ui/charts`. Install `d3-hierarchy` with `d3-scale` and `d3-shape`.
 
 ```html
 <div scChart class="aspect-video max-h-80" [config]="config" [data]="data">

@@ -7,14 +7,15 @@ import {
   input,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { hierarchy, treemap, treemapSquarify } from 'd3-hierarchy';
 import {
   SC_CHART_SERIES,
   type ScChartLabelPoint,
   type ScChartLabelPosition,
   type ScChartSeriesLabels,
-} from '../chart/chart-series';
-import { ScChartState, numberOf } from '../chart/chart-state';
+  ScChartState,
+  numberOf,
+} from '@semantic-components/ui/charts';
+import { hierarchy, treemap, treemapSquarify } from 'd3-hierarchy';
 
 interface Node {
   name: string;

@@ -1,6 +1,6 @@
 # Chart
 
-Charts made of parts, as [shadcn/ui's](https://ui.shadcn.com/charts) (Recharts): a plot (`svg`) holding a grid, axes, a cursor and series — areas, bars, lines, stacked or not — and around it a tooltip and a legend. Drawn with d3's scales and shapes (`d3-scale`, `d3-shape`, peers of this entry; `d3-hierarchy` for treemaps, `d3-sankey` for sankeys), in SVG of ours.
+Charts made of parts, as [shadcn/ui's](https://ui.shadcn.com/charts) (Recharts): a plot (`svg`) holding a grid, axes, a cursor and series — areas, bars, lines, stacked or not — and around it a tooltip and a legend. Drawn with d3's scales and shapes (`d3-scale`, `d3-shape`, peers of this entry), in SVG of ours.
 
 Recharts' API, shadcn's look, our drawing: before fixing a bug, writing these docs or adding an option, see how Recharts does it — [docs/reference-libraries.md](../../../../../../../docs/reference-libraries.md#charts).
 
@@ -35,7 +35,7 @@ Each row has its category (`categoryKey`) and a value per series. The config nam
 
 ## Parts
 
-The series have their own folders: [area](../area-chart/README.md), [bar](../bar-chart/README.md), [line](../line-chart/README.md), [pie](../pie-chart/README.md), [radial](../radial-chart/README.md), [radar](../radar-chart/README.md), [scatter](../scatter-chart/README.md), [funnel](../funnel-chart/README.md), [treemap](../treemap-chart/README.md), [sunburst](../sunburst-chart/README.md), [sankey](../sankey-chart/README.md).
+The series have their own folders: [area](../area-chart/README.md), [bar](../bar-chart/README.md), [line](../line-chart/README.md), [pie](../pie-chart/README.md), [radial](../radial-chart/README.md), [radar](../radar-chart/README.md), [scatter](../scatter-chart/README.md), [funnel](../funnel-chart/README.md), [treemap](../../../../treemap/src/lib/components/treemap-chart/README.md), [sunburst](../sunburst-chart/README.md), [sankey](../../../../sankey/src/lib/components/sankey-chart/README.md). Treemap and sankey are entry points of their own (`@semantic-components/ui/charts/treemap`, `…/sankey`): they need one more d3 library each (`d3-hierarchy`, `d3-sankey`), which the other charts shouldn't.
 
 | Part                       | Inputs                                                                                                                                                                                                                                                           |
 | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

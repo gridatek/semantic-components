@@ -62,6 +62,12 @@
         "libs/ui/editor/tables/src/index.ts"
       ],
       "@semantic-components/ui/charts": ["libs/ui/charts/src/index.ts"],
+      "@semantic-components/ui/charts/sankey": [
+        "libs/ui/charts/sankey/src/index.ts"
+      ],
+      "@semantic-components/ui/charts/treemap": [
+        "libs/ui/charts/treemap/src/index.ts"
+      ],
       "@semantic-components/ui/i18n": ["libs/ui/i18n/src/index.ts"],
       "@semantic-components/presets": ["libs/presets/src/index.ts"],
       "@semantic-components/presets/lyra": ["libs/presets/lyra/src/index.ts"],

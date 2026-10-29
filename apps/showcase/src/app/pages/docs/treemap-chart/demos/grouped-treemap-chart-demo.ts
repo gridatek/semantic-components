@@ -6,8 +6,8 @@ import {
   ScChartLegend,
   ScChartPlot,
   ScChartTooltip,
-  ScChartTreemap,
 } from '@semantic-components/ui/charts';
+import { ScChartTreemap } from '@semantic-components/ui/charts/treemap';
 
 @Component({
   selector: 'app-grouped-treemap-chart-demo',

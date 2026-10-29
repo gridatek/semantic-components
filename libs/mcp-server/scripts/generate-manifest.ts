@@ -176,7 +176,8 @@ function scanLibrary(
 
 /**
  * Entry points that are libraries of their own (`@semantic-components/ui/editor`,
- * with a `src/lib` of components): scanned as such, under their import path.
+ * with a `src/lib` of components): scanned as such, under their import path —
+ * and theirs in turn (`@semantic-components/ui/charts/treemap`).
  */
 function scanEntryLibraries(
   libDir: string,
@@ -190,13 +191,18 @@ function scanEntryLibraries(
         existsSync(join(libDir, entry.name, 'ng-package.json')) &&
         existsSync(join(libDir, entry.name, 'src', 'lib')),
     )
-    .map((entry) =>
+    .flatMap((entry) => [
       scanLibrary(
         join(libDir, entry.name),
         `${packageName}/${entry.name}`,
         visiblePaths,
       ),
-    );
+      ...scanEntryLibraries(
+        join(libDir, entry.name),
+        `${packageName}/${entry.name}`,
+        visiblePaths,
+      ),
+    ]);
 }
 
 function scanGuides(): GuideEntry[] {

@@ -10,7 +10,14 @@ export { ScChartPolarGrid } from './chart-polar-grid';
 export { ScChartLabels } from './chart-labels';
 export { ScChartTooltip } from './chart-tooltip';
 export { ScChartValueAxis } from './chart-value-axis';
-export type { ScChartLabelPosition } from './chart-series';
+export {
+  SC_CHART_SERIES,
+  type ScChartLabelPoint,
+  type ScChartLabelPosition,
+  type ScChartSeriesLabels,
+  anchorAt,
+} from './chart-series';
+export { ScChartState, type ScChartSeries, numberOf } from './chart-state';
 export type {
   ScChartConfig,
   ScChartCurve,

@@ -32,10 +32,10 @@ import { TreemapChartDemoContainer } from './demos/treemap-chart-demo-container'
       <section class="space-y-4">
         <h2 scHeading appToc>Installation</h2>
         <app-entry-install
-          entry="charts"
+          entry="charts/treemap"
           library="d3-scale d3-shape d3-hierarchy"
           href="https://d3js.org"
-          names="ScChart, ScChartPlot, ScChartTreemap"
+          names="ScChartTreemap"
         />
       </section>
 

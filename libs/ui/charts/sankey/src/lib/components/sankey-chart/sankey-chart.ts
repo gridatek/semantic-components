@@ -7,13 +7,14 @@ import {
   input,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { sankey, sankeyLinkHorizontal } from 'd3-sankey';
 import {
   SC_CHART_SERIES,
   type ScChartLabelPoint,
   type ScChartSeriesLabels,
-} from '../chart/chart-series';
-import { ScChartState, numberOf } from '../chart/chart-state';
+  ScChartState,
+  numberOf,
+} from '@semantic-components/ui/charts';
+import { sankey, sankeyLinkHorizontal } from 'd3-sankey';
 
 interface Flow {
   index: number;
