@@ -4159,6 +4159,53 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/message-scroller',
+    children: [
+      {
+        path: 'basic-message-scroller-demo',
+        loadComponent: () =>
+          import('../pages/docs/message-scroller/demos/basic-message-scroller-demo').then(
+            (m) => m.BasicMessageScrollerDemo,
+          ),
+      },
+      {
+        path: 'streaming-message-scroller-demo',
+        loadComponent: () =>
+          import('../pages/docs/message-scroller/demos/streaming-message-scroller-demo').then(
+            (m) => m.StreamingMessageScrollerDemo,
+          ),
+      },
+      {
+        path: 'history-message-scroller-demo',
+        loadComponent: () =>
+          import('../pages/docs/message-scroller/demos/history-message-scroller-demo').then(
+            (m) => m.HistoryMessageScrollerDemo,
+          ),
+      },
+      {
+        path: 'commands-message-scroller-demo',
+        loadComponent: () =>
+          import('../pages/docs/message-scroller/demos/commands-message-scroller-demo').then(
+            (m) => m.CommandsMessageScrollerDemo,
+          ),
+      },
+      {
+        path: 'position-message-scroller-demo',
+        loadComponent: () =>
+          import('../pages/docs/message-scroller/demos/position-message-scroller-demo').then(
+            (m) => m.PositionMessageScrollerDemo,
+          ),
+      },
+      {
+        path: 'rtl-message-scroller-demo',
+        loadComponent: () =>
+          import('../pages/docs/message-scroller/demos/rtl-message-scroller-demo').then(
+            (m) => m.RtlMessageScrollerDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/message',
     children: [
       {

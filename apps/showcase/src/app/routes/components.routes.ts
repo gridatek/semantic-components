@@ -699,6 +699,12 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/message/message-page'),
       },
       {
+        path: 'message-scroller',
+        title: 'Message Scroller - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/message-scroller/message-scroller-page'),
+      },
+      {
         path: 'trace',
         title: 'Trace - Semantic Components',
         loadComponent: () => import('../pages/docs/trace/trace-page'),

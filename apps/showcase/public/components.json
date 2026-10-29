@@ -584,6 +584,14 @@
     "category": "Data Display"
   },
   {
+    "name": "Message Scroller",
+    "path": "message-scroller",
+    "description": "A conversation that scrolls itself: opens at the end, holds a new turn near the top, follows the end, keeps your place.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Data Display"
+  },
+  {
     "name": "Multiselect",
     "path": "multiselect",
     "description": "A select component for multiple selections.",
