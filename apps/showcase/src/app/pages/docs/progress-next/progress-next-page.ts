@@ -4,6 +4,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicProgressNextDemoContainer } from './demos/basic-progress-next-demo-container';
 import { CircleProgressNextDemoContainer } from './demos/circle-progress-next-demo-container';
+import { DownloadProgressNextDemoContainer } from './demos/download-progress-next-demo-container';
 import { IndeterminateProgressNextDemoContainer } from './demos/indeterminate-progress-next-demo-container';
 import { RtlProgressNextDemoContainer } from './demos/rtl-progress-next-demo-container';
 import { StepsProgressNextDemoContainer } from './demos/steps-progress-next-demo-container';
@@ -14,6 +15,7 @@ import { StepsProgressNextDemoContainer } from './demos/steps-progress-next-demo
     BasicProgressNextDemoContainer,
     CircleProgressNextDemoContainer,
     IndeterminateProgressNextDemoContainer,
+    DownloadProgressNextDemoContainer,
     StepsProgressNextDemoContainer,
     RtlProgressNextDemoContainer,
     TocHeading,
@@ -38,6 +40,7 @@ import { StepsProgressNextDemoContainer } from './demos/steps-progress-next-demo
         <app-basic-progress-next-demo-container />
         <app-circle-progress-next-demo-container />
         <app-indeterminate-progress-next-demo-container />
+        <app-download-progress-next-demo-container />
         <app-steps-progress-next-demo-container />
         <app-rtl-progress-next-demo-container />
       </section>

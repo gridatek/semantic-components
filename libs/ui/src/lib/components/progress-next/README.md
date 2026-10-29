@@ -25,6 +25,15 @@ A circle — named with `aria-label`, as it has no label:
 
 Indeterminate: leave `value` out (or `null`).
 
+A spinner that shows how far it is — a download: `spin` turns the arc while loading, the value still known (your text says it, screen readers hear it). Done, the full ring; with motion reduced, the arc to the value.
+
+```html
+<div scProgressNext [value]="received()" aria-label="Downloading report.pdf" class="size-20">
+  <svg scProgressNextCircle [spin]="downloading()"></svg>
+  <span scProgressNextValueText>{{ received() / 100 | percent }}</span>
+</div>
+```
+
 ## Parts
 
 | Part                        | What it does                                                                                                                                                                                                                                                                                                                               |
@@ -34,7 +43,7 @@ Indeterminate: leave `value` out (or `null`).
 | `[scProgressNextValueText]` | Your value text: the progress's `aria-valuetext`. At the end of a bar's line; in a circle's middle                                                                                                                                                                                                                                         |
 | `div[scProgressNextTrack]`  | The bar's track                                                                                                                                                                                                                                                                                                                            |
 | `div[scProgressNextRange]`  | The bar's filled part, from the start of the line (the right in right-to-left); indeterminate, a segment sliding across                                                                                                                                                                                                                    |
-| `svg[scProgressNextCircle]` | The circle: its track and an arc from the top, clockwise (counter-clockwise in right-to-left); indeterminate, a quarter arc turning. `thickness` (8: hundredths of its width)                                                                                                                                                              |
+| `svg[scProgressNextCircle]` | The circle: its track and an arc from the top, clockwise (counter-clockwise in right-to-left); indeterminate, a quarter arc turning. `thickness` (8: hundredths of its width), `spin` (a spinner's look while loading, the value still known)                                                                                              |
 
 ## Accessibility
 

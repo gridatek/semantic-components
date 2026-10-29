@@ -119,3 +119,49 @@ test('RTL: the bar fills from the right', async ({ page }) => {
     Math.abs(track.x + track.width - (range.x + range.width)),
   ).toBeLessThan(1);
 });
+
+test('Download: the ring turns while the percentage climbs', async ({
+  page,
+}) => {
+  await page.goto(demo('download'));
+  const progress = page.getByRole('progressbar', {
+    name: 'Downloading report.pdf',
+  });
+  const ring = progress.locator('svg');
+  await expect(progress).toHaveAttribute('aria-valuetext', '0%');
+  await expect(ring).toHaveCSS('animation-name', 'none');
+  await page.getByRole('button', { name: 'Download' }).click();
+  await expect(ring).toHaveCSS('animation-name', 'spin');
+  // The value stays known while it turns.
+  await expect
+    .poll(async () => Number(await progress.getAttribute('aria-valuenow')))
+    .toBeGreaterThan(0);
+  await expect(progress).toHaveAttribute('data-state', 'complete', {
+    timeout: 15_000,
+  });
+  await expect(progress).toHaveAttribute('aria-valuetext', '100%');
+  await expect(ring).toHaveCSS('animation-name', 'none');
+});
+
+test('Download: with motion reduced, the arc to the value', async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto(demo('download'));
+  const progress = page.getByRole('progressbar', {
+    name: 'Downloading report.pdf',
+  });
+  await page.getByRole('button', { name: 'Download' }).click();
+  await expect
+    .poll(async () => Number(await progress.getAttribute('aria-valuenow')))
+    .toBeGreaterThan(0);
+  await expect(progress.locator('svg')).toHaveCSS('animation-name', 'none');
+  const now = Number(await progress.getAttribute('aria-valuenow'));
+  const offset = Number(
+    await progress
+      .locator('[data-slot=progress-circle-range]')
+      .getAttribute('stroke-dashoffset'),
+  );
+  // The arc follows the value (allowing for one more chunk in between).
+  expect(Math.abs(100 - offset - now)).toBeLessThanOrEqual(12);
+});

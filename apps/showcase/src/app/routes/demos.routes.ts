@@ -3093,6 +3093,13 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
+        path: 'download-progress-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/progress-next/demos/download-progress-next-demo').then(
+            (m) => m.DownloadProgressNextDemo,
+          ),
+      },
+      {
         path: 'steps-progress-next-demo',
         loadComponent: () =>
           import('../pages/docs/progress-next/demos/steps-progress-next-demo').then(

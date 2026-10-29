@@ -1,11 +1,13 @@
 import {
   Component,
   ViewEncapsulation,
+  booleanAttribute,
   computed,
   effect,
   inject,
   input,
   numberAttribute,
+  signal,
 } from '@angular/core';
 import { cn } from '../../utils';
 import { ScProgressNext } from './progress-next';
@@ -58,22 +60,41 @@ export class ScProgressNextCircle {
   readonly classInput = input<string>('', { alias: 'class' });
   /** The ring's width, in hundredths of the circle's. */
   readonly thickness = input(8, { transform: numberAttribute });
+  /**
+   * A spinner's look while loading — the turning arc — the value still known
+   * (your text says it). Done, the full ring; motion reduced, the arc to the
+   * value.
+   */
+  readonly spin = input(false, { transform: booleanAttribute });
+
+  private readonly reducedMotion = signal(
+    typeof matchMedia !== 'undefined' &&
+      matchMedia('(prefers-reduced-motion: reduce)').matches,
+  );
+
+  /** Drawn as the turning quarter arc. */
+  private readonly turning = computed(
+    () =>
+      this.progress.indeterminate() ||
+      (this.spin() &&
+        this.progress.state() === 'loading' &&
+        !this.reducedMotion()),
+  );
 
   protected readonly radius = computed(() => 50 - this.thickness() / 2);
-  /** What is left undrawn, out of 100 — three quarters while indeterminate. */
+  /** What is left undrawn, out of 100 — three quarters while turning. */
   protected readonly offset = computed(() =>
-    this.progress.indeterminate() ? 75 : 100 - this.progress.fraction() * 100,
+    this.turning() ? 75 : 100 - this.progress.fraction() * 100,
   );
   /** At 0, nothing: a round cap would draw a dot. */
   protected readonly empty = computed(
-    () => !this.progress.indeterminate() && this.progress.fraction() === 0,
+    () => !this.turning() && this.progress.fraction() === 0,
   );
 
   protected readonly class = computed(() =>
     cn(
       'size-full rtl:-scale-x-100',
-      this.progress.indeterminate() &&
-        'animate-spin motion-reduce:animate-none',
+      this.turning() && 'animate-spin motion-reduce:animate-none',
       this.classInput(),
     ),
   );
