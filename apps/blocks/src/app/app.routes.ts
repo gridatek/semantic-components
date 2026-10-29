@@ -19,6 +19,10 @@ export const appRoutes: Route[] = [
     loadComponent: () => import('./pages/data-table/data-table.page'),
   },
   {
+    path: 'chat',
+    loadComponent: () => import('./pages/chat/chat.page'),
+  },
+  {
     path: 'login',
     loadComponent: () => import('./pages/login/login.page'),
   },

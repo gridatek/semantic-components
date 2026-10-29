@@ -63,4 +63,5 @@ Data attributes for styling: `data-scrollable` (`start`, `end`), `data-autoscrol
 
 - **No provider**: `scMessageScroller` holds the state; its commands and signals are on it (`exportAs`), in place of the hooks.
 - **No default strings**: the viewport's name and the button's text are yours.
+- **Each row's size is watched**, not only the content's: a row drawn at its real size (it was `content-visibility`'s estimate) needn't change the content's height, which is at least the viewport's — and an anchored turn must be aimed again.
 - **A smooth scroll is aimed again** when the rows' heights change under it — WebKit drops it otherwise (rows drawn as they come into view).

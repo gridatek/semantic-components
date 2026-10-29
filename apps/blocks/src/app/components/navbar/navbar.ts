@@ -172,6 +172,22 @@ import {
                           </p>
                         </a>
                       </li>
+                      <li>
+                        <a scNavigationMenuLink routerLink="/chat">
+                          <div
+                            class="text-sm leading-none font-medium"
+                            i18n="@@navbar.chat"
+                          >
+                            Chat
+                          </div>
+                          <p
+                            class="text-muted-foreground line-clamp-2 text-sm leading-snug"
+                            i18n="@@navbar.chat.description"
+                          >
+                            An assistant's steps and streamed replies
+                          </p>
+                        </a>
+                      </li>
                     </ul>
                   </div>
                 </ng-template>
@@ -361,6 +377,16 @@ import {
             i18n="@@navbar.dataTable"
           >
             Data Table
+          </a>
+          <a
+            scNavbarMobileLink
+            routerLink="/chat"
+            routerLinkActive="active"
+            #mobileChatRla="routerLinkActive"
+            [active]="mobileChatRla.isActive"
+            i18n="@@navbar.chat"
+          >
+            Chat
           </a>
           <hr class="border-border my-2" />
           <a
