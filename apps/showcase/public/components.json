@@ -874,14 +874,6 @@
   {
     "name": "Sidebar",
     "path": "sidebar",
-    "description": "A collapsible side navigation panel.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Navigation"
-  },
-  {
-    "name": "Sidebar Next",
-    "path": "sidebar-next",
     "description": "An app's side panel, as shadcn's: collapsible off the screen or to icons, a sheet on phones; its navigation a named nav.",
     "status": "Experimental",
     "library": "ui",

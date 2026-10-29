@@ -1,21 +1,21 @@
 import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import {
-  ScSidebarNext,
-  ScSidebarNextContent,
-  ScSidebarNextFooter,
-  ScSidebarNextGroup,
-  ScSidebarNextGroupAction,
-  ScSidebarNextGroupContent,
-  ScSidebarNextGroupLabel,
-  ScSidebarNextHeader,
-  ScSidebarNextInset,
-  ScSidebarNextMenu,
-  ScSidebarNextMenuBadge,
-  ScSidebarNextMenuButton,
-  ScSidebarNextMenuItem,
-  ScSidebarNextProvider,
-  ScSidebarNextRail,
-  ScSidebarNextTrigger,
+  ScSidebar,
+  ScSidebarContent,
+  ScSidebarFooter,
+  ScSidebarGroup,
+  ScSidebarGroupAction,
+  ScSidebarGroupContent,
+  ScSidebarGroupLabel,
+  ScSidebarHeader,
+  ScSidebarInset,
+  ScSidebarMenu,
+  ScSidebarMenuBadge,
+  ScSidebarMenuButton,
+  ScSidebarMenuItem,
+  ScSidebarProvider,
+  ScSidebarRail,
+  ScSidebarTrigger,
 } from '@semantic-components/ui';
 import {
   SiCalendarIcon,
@@ -28,24 +28,24 @@ import {
 } from '@semantic-icons/lucide-icons';
 
 @Component({
-  selector: 'app-icon-sidebar-next-demo',
+  selector: 'app-inset-sidebar-demo',
   imports: [
-    ScSidebarNext,
-    ScSidebarNextContent,
-    ScSidebarNextFooter,
-    ScSidebarNextGroup,
-    ScSidebarNextGroupAction,
-    ScSidebarNextGroupContent,
-    ScSidebarNextGroupLabel,
-    ScSidebarNextHeader,
-    ScSidebarNextInset,
-    ScSidebarNextMenu,
-    ScSidebarNextMenuBadge,
-    ScSidebarNextMenuButton,
-    ScSidebarNextMenuItem,
-    ScSidebarNextProvider,
-    ScSidebarNextRail,
-    ScSidebarNextTrigger,
+    ScSidebar,
+    ScSidebarContent,
+    ScSidebarFooter,
+    ScSidebarGroup,
+    ScSidebarGroupAction,
+    ScSidebarGroupContent,
+    ScSidebarGroupLabel,
+    ScSidebarHeader,
+    ScSidebarInset,
+    ScSidebarMenu,
+    ScSidebarMenuBadge,
+    ScSidebarMenuButton,
+    ScSidebarMenuItem,
+    ScSidebarProvider,
+    ScSidebarRail,
+    ScSidebarTrigger,
     SiCalendarIcon,
     SiGalleryVerticalEndIcon,
     SiHouseIcon,
@@ -55,13 +55,13 @@ import {
     SiSettingsIcon,
   ],
   template: `
-    <div scSidebarNextProvider [storageKey]="null">
-      <div scSidebarNext aria-label="Navigation" collapsible="icon">
-        <div scSidebarNextHeader>
-          <ul scSidebarNextMenu>
-            <li scSidebarNextMenuItem>
+    <div scSidebarProvider [storageKey]="null">
+      <div scSidebar aria-label="Navigation" variant="inset" collapsible="icon">
+        <div scSidebarHeader>
+          <ul scSidebarMenu>
+            <li scSidebarMenuItem>
               <a
-                scSidebarNextMenuButton
+                scSidebarMenuButton
                 size="lg"
                 href="#"
                 (click)="$event.preventDefault()"
@@ -81,19 +81,19 @@ import {
             </li>
           </ul>
         </div>
-        <nav scSidebarNextContent aria-label="Main, icons">
-          <div scSidebarNextGroup>
-            <div scSidebarNextGroupLabel>Application</div>
-            <button scSidebarNextGroupAction>
+        <nav scSidebarContent aria-label="Main, inset">
+          <div scSidebarGroup>
+            <div scSidebarGroupLabel>Application</div>
+            <button scSidebarGroupAction>
               <svg siPlusIcon></svg>
               <span class="sr-only">Add a project</span>
             </button>
-            <div scSidebarNextGroupContent>
-              <ul scSidebarNextMenu>
+            <div scSidebarGroupContent>
+              <ul scSidebarMenu>
                 @for (item of items; track item.id) {
-                  <li scSidebarNextMenuItem>
+                  <li scSidebarMenuItem>
                     <a
-                      scSidebarNextMenuButton
+                      scSidebarMenuButton
                       href="#"
                       [tooltip]="item.label"
                       [active]="active() === item.id"
@@ -116,7 +116,7 @@ import {
                       <span>{{ item.label }}</span>
                     </a>
                     @if (item.badge) {
-                      <div scSidebarNextMenuBadge>{{ item.badge }}</div>
+                      <div scSidebarMenuBadge>{{ item.badge }}</div>
                     }
                   </li>
                 }
@@ -124,18 +124,18 @@ import {
             </div>
           </div>
         </nav>
-        <div scSidebarNextFooter>
+        <div scSidebarFooter>
           <p
             class="text-sidebar-foreground/70 truncate px-2 text-xs group-data-[collapsible=icon]:hidden"
           >
             Signed in as Ada
           </p>
         </div>
-        <button scSidebarNextRail></button>
+        <button scSidebarRail></button>
       </div>
-      <main scSidebarNextInset aria-label="Icons example">
+      <main scSidebarInset aria-label="Inset example">
         <header class="flex h-14 shrink-0 items-center gap-2 border-b px-4">
-          <button scSidebarNextTrigger>
+          <button scSidebarTrigger>
             <svg siPanelLeftIcon></svg>
             <span class="sr-only">Sidebar</span>
           </button>
@@ -154,7 +154,7 @@ import {
   `,
   encapsulation: ViewEncapsulation.None,
 })
-export class IconSidebarNextDemo {
+export class InsetSidebarDemo {
   readonly items = [
     { id: 'home', label: 'Home', badge: '' },
     { id: 'inbox', label: 'Inbox', badge: '12' },

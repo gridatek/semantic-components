@@ -1,12 +1,16 @@
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import {
   ScSidebar,
-  ScSidebarBody,
+  ScSidebarContent,
+  ScSidebarFooter,
   ScSidebarGroup,
+  ScSidebarGroupAction,
   ScSidebarGroupContent,
   ScSidebarGroupLabel,
+  ScSidebarHeader,
   ScSidebarInset,
   ScSidebarMenu,
+  ScSidebarMenuBadge,
   ScSidebarMenuButton,
   ScSidebarMenuItem,
   ScSidebarProvider,
@@ -14,100 +18,135 @@ import {
   ScSidebarTrigger,
 } from '@semantic-components/ui';
 import {
-  SiChartBarIcon,
-  SiFolderIcon,
-  SiLayoutDashboardIcon,
+  SiCalendarIcon,
+  SiGalleryVerticalEndIcon,
+  SiHouseIcon,
+  SiInboxIcon,
   SiPanelLeftIcon,
+  SiPlusIcon,
   SiSettingsIcon,
-  SiUsersIcon,
 } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-icon-sidebar-demo',
   imports: [
     ScSidebar,
-    ScSidebarBody,
+    ScSidebarContent,
+    ScSidebarFooter,
     ScSidebarGroup,
+    ScSidebarGroupAction,
     ScSidebarGroupContent,
     ScSidebarGroupLabel,
+    ScSidebarHeader,
     ScSidebarInset,
     ScSidebarMenu,
+    ScSidebarMenuBadge,
     ScSidebarMenuButton,
     ScSidebarMenuItem,
     ScSidebarProvider,
     ScSidebarRail,
     ScSidebarTrigger,
-    SiChartBarIcon,
-    SiFolderIcon,
-    SiLayoutDashboardIcon,
+    SiCalendarIcon,
+    SiGalleryVerticalEndIcon,
+    SiHouseIcon,
+    SiInboxIcon,
     SiPanelLeftIcon,
+    SiPlusIcon,
     SiSettingsIcon,
-    SiUsersIcon,
   ],
   template: `
     <div scSidebarProvider [storageKey]="null">
-      <div
-        scSidebar
-        variant="inset"
-        collapsible="icon"
-        aria-label="Workspace navigation"
-      >
-        <div scSidebarBody>
+      <div scSidebar aria-label="Navigation" collapsible="icon">
+        <div scSidebarHeader>
+          <ul scSidebarMenu>
+            <li scSidebarMenuItem>
+              <a
+                scSidebarMenuButton
+                size="lg"
+                href="#"
+                (click)="$event.preventDefault()"
+              >
+                <span
+                  class="bg-primary text-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg"
+                >
+                  <svg siGalleryVerticalEndIcon></svg>
+                </span>
+                <span class="grid flex-1 text-sm leading-tight">
+                  <span class="truncate font-semibold">Acme Inc</span>
+                  <span class="text-sidebar-foreground/70 truncate text-xs"
+                    >Enterprise</span
+                  >
+                </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <nav scSidebarContent aria-label="Main, icons">
           <div scSidebarGroup>
-            <div scSidebarGroupLabel>Workspace</div>
+            <div scSidebarGroupLabel>Application</div>
+            <button scSidebarGroupAction>
+              <svg siPlusIcon></svg>
+              <span class="sr-only">Add a project</span>
+            </button>
             <div scSidebarGroupContent>
               <ul scSidebarMenu>
                 @for (item of items; track item.id) {
                   <li scSidebarMenuItem>
-                    <button
+                    <a
                       scSidebarMenuButton
+                      href="#"
                       [tooltip]="item.label"
-                      [isActive]="active() === item.id"
-                      (click)="active.set(item.id)"
+                      [active]="active() === item.id"
+                      (click)="go($event, item.id)"
                     >
                       @switch (item.id) {
-                        @case ('dashboard') {
-                          <svg siLayoutDashboardIcon></svg>
+                        @case ('home') {
+                          <svg siHouseIcon></svg>
                         }
-                        @case ('projects') {
-                          <svg siFolderIcon></svg>
+                        @case ('inbox') {
+                          <svg siInboxIcon></svg>
                         }
-                        @case ('team') {
-                          <svg siUsersIcon></svg>
-                        }
-                        @case ('reports') {
-                          <svg siChartBarIcon></svg>
+                        @case ('calendar') {
+                          <svg siCalendarIcon></svg>
                         }
                         @case ('settings') {
                           <svg siSettingsIcon></svg>
                         }
                       }
                       <span>{{ item.label }}</span>
-                    </button>
+                    </a>
+                    @if (item.badge) {
+                      <div scSidebarMenuBadge>{{ item.badge }}</div>
+                    }
                   </li>
                 }
               </ul>
             </div>
           </div>
+        </nav>
+        <div scSidebarFooter>
+          <p
+            class="text-sidebar-foreground/70 truncate px-2 text-xs group-data-[collapsible=icon]:hidden"
+          >
+            Signed in as Ada
+          </p>
         </div>
-        <button scSidebarRail>
-          <span class="sr-only">Toggle Sidebar</span>
-        </button>
+        <button scSidebarRail></button>
       </div>
-
-      <main scSidebarInset aria-label="Icon example content">
-        <header class="flex h-14 shrink-0 items-center gap-2 px-4">
+      <main scSidebarInset aria-label="Icons example">
+        <header class="flex h-14 shrink-0 items-center gap-2 border-b px-4">
           <button scSidebarTrigger>
             <svg siPanelLeftIcon></svg>
-            <span class="sr-only">Toggle sidebar</span>
+            <span class="sr-only">Sidebar</span>
           </button>
-          <h2 class="text-sm font-medium">Collapse to icons</h2>
+          <p class="text-sm font-medium">{{ label() }}</p>
         </header>
-        <div class="flex flex-1 flex-col gap-4 p-4 pt-0">
-          <p class="text-muted-foreground text-sm">
-            Press the trigger, click the rail or use Ctrl/⌘ + B. Collapsed items
-            keep their names and show a tooltip.
-          </p>
+        <div class="flex flex-1 flex-col gap-4 p-4">
+          <div class="grid gap-4 md:grid-cols-3">
+            <div class="bg-muted/50 aspect-video rounded-xl"></div>
+            <div class="bg-muted/50 aspect-video rounded-xl"></div>
+            <div class="bg-muted/50 aspect-video rounded-xl"></div>
+          </div>
           <div class="bg-muted/50 min-h-64 flex-1 rounded-xl"></div>
         </div>
       </main>
@@ -117,12 +156,21 @@ import {
 })
 export class IconSidebarDemo {
   readonly items = [
-    { id: 'dashboard', label: 'Dashboard' },
-    { id: 'projects', label: 'Projects' },
-    { id: 'team', label: 'Team' },
-    { id: 'reports', label: 'Reports' },
-    { id: 'settings', label: 'Settings' },
+    { id: 'home', label: 'Home', badge: '' },
+    { id: 'inbox', label: 'Inbox', badge: '12' },
+    { id: 'calendar', label: 'Calendar', badge: '' },
+    { id: 'settings', label: 'Settings', badge: '' },
   ];
+  readonly active = signal('home');
+  readonly label = computed(
+    () =>
+      this.items.find((item) => item.id === this.active())?.label ??
+      this.active(),
+  );
 
-  readonly active = signal('dashboard');
+  /** A demo: the link marks its page, and stays here. */
+  go(event: Event, id: string): void {
+    event.preventDefault();
+    this.active.set(id);
+  }
 }

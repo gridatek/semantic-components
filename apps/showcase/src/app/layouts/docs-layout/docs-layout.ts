@@ -19,7 +19,7 @@ import {
 } from '@angular/router';
 import {
   ScSidebar,
-  ScSidebarBody,
+  ScSidebarContent,
   ScSidebarFooter,
   ScSidebarGroup,
   ScSidebarGroupContent,
@@ -73,7 +73,7 @@ import { ConfigService } from '../../services/config.service';
     ScSidebarProvider,
     ScSidebar,
     ScSidebarHeader,
-    ScSidebarBody,
+    ScSidebarContent,
     ScSidebarFooter,
     ScSidebarGroup,
     ScSidebarGroupLabel,
@@ -107,7 +107,7 @@ import { ConfigService } from '../../services/config.service';
     <div scSidebarProvider class="min-h-svh">
       <div
         scSidebar
-        side="left"
+        side="start"
         variant="sidebar"
         collapsible="icon"
         aria-label="Sidebar"
@@ -146,7 +146,7 @@ import { ConfigService } from '../../services/config.service';
           </button>
         </div>
 
-        <div scSidebarBody>
+        <nav scSidebarContent aria-label="Documentation">
           <div scSidebarGroup>
             <div scSidebarGroupLabel>Documentation</div>
             <div scSidebarGroupContent>
@@ -163,7 +163,7 @@ import { ConfigService } from '../../services/config.service';
                         routerLink="/docs/getting-started/introduction"
                         routerLinkActive
                         #introRla="routerLinkActive"
-                        [isActive]="introRla.isActive"
+                        [active]="introRla.isActive"
                       >
                         <span>Introduction</span>
                       </a>
@@ -175,7 +175,7 @@ import { ConfigService } from '../../services/config.service';
                         [routerLinkActiveOptions]="{ exact: true }"
                         routerLinkActive
                         #componentsListRla="routerLinkActive"
-                        [isActive]="componentsListRla.isActive"
+                        [active]="componentsListRla.isActive"
                       >
                         <span>Components</span>
                       </a>
@@ -194,7 +194,7 @@ import { ConfigService } from '../../services/config.service';
                         routerLink="/docs/getting-started/prerequisites"
                         routerLinkActive
                         #prerequisitesRla="routerLinkActive"
-                        [isActive]="prerequisitesRla.isActive"
+                        [active]="prerequisitesRla.isActive"
                       >
                         <span>Prerequisites</span>
                       </a>
@@ -205,7 +205,7 @@ import { ConfigService } from '../../services/config.service';
                         routerLink="/docs/getting-started/ui"
                         routerLinkActive
                         #coreRla="routerLinkActive"
-                        [isActive]="coreRla.isActive"
+                        [active]="coreRla.isActive"
                       >
                         <span>UI</span>
                       </a>
@@ -216,7 +216,7 @@ import { ConfigService } from '../../services/config.service';
                         routerLink="/docs/getting-started/presets"
                         routerLinkActive
                         #presetsRla="routerLinkActive"
-                        [isActive]="presetsRla.isActive"
+                        [active]="presetsRla.isActive"
                       >
                         <span>Presets</span>
                       </a>
@@ -227,7 +227,7 @@ import { ConfigService } from '../../services/config.service';
                         routerLink="/docs/getting-started/i18n"
                         routerLinkActive
                         #i18nRla="routerLinkActive"
-                        [isActive]="i18nRla.isActive"
+                        [active]="i18nRla.isActive"
                       >
                         <span>Internationalization</span>
                       </a>
@@ -238,7 +238,7 @@ import { ConfigService } from '../../services/config.service';
                         routerLink="/docs/getting-started/mcp-server"
                         routerLinkActive
                         #mcpServerRla="routerLinkActive"
-                        [isActive]="mcpServerRla.isActive"
+                        [active]="mcpServerRla.isActive"
                       >
                         <span>MCP Server</span>
                       </a>
@@ -258,7 +258,7 @@ import { ConfigService } from '../../services/config.service';
                           [routerLink]="'/docs/components/' + item.path"
                           routerLinkActive
                           #rla="routerLinkActive"
-                          [isActive]="rla.isActive"
+                          [active]="rla.isActive"
                         >
                           <span>{{ item.name }}</span>
                         </a>
@@ -280,7 +280,7 @@ import { ConfigService } from '../../services/config.service';
                             [routerLink]="'/docs/components/' + item.path"
                             routerLinkActive
                             #utilRla="routerLinkActive"
-                            [isActive]="utilRla.isActive"
+                            [active]="utilRla.isActive"
                           >
                             <span>{{ item.name }}</span>
                           </a>
@@ -303,7 +303,7 @@ import { ConfigService } from '../../services/config.service';
                             [routerLink]="'/docs/components/' + item.path"
                             routerLinkActive
                             #recipeRla="routerLinkActive"
-                            [isActive]="recipeRla.isActive"
+                            [active]="recipeRla.isActive"
                           >
                             <span>{{ item.name }}</span>
                           </a>
@@ -315,7 +315,7 @@ import { ConfigService } from '../../services/config.service';
               </ul>
             </div>
           </div>
-        </div>
+        </nav>
 
         <div scSidebarFooter>
           <ul scSidebarMenu>
@@ -339,9 +339,7 @@ import { ConfigService } from '../../services/config.service';
           </ul>
         </div>
 
-        <button scSidebarRail>
-          <span class="sr-only">Toggle Sidebar</span>
-        </button>
+        <button scSidebarRail></button>
       </div>
 
       <main scSidebarInset class="min-w-0 overflow-x-clip">

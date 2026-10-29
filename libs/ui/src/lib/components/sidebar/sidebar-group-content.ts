@@ -1,9 +1,11 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from '../../utils';
 
+/** A group's menu. */
 @Directive({
   selector: 'div[scSidebarGroupContent]',
   host: {
+    'data-slot': 'sidebar-group-content',
     '[class]': 'class()',
   },
 })

@@ -1,299 +1,140 @@
 # Sidebar
 
-A comprehensive sidebar component system for Angular applications with collapsible states, mobile responsiveness, keyboard shortcuts, and state persistence.
-
-## Components
-
-### Core Components
-
-- `ScSidebarProvider` - Root provider component with state management
-- `ScSidebar` - Main sidebar container (on mobile, a sheet closed by Escape or a click outside)
-- `ScSidebarGap` - Invisible spacer that pushes content (used internally by ScSidebar)
-- `ScSidebarContainer` - Fixed-position container for sidebar content (used internally by ScSidebar)
-- `ScSidebarInner` - Inner wrapper with background and variant styles (used internally by ScSidebar)
-- `ScSidebarTrigger` - Toggle button
-- `ScSidebarRail` - Thin invisible button on the sidebar edge that toggles collapse on click. Shows a 2px border on hover and changes cursor direction based on state (w-resize / e-resize)
-- `ScSidebarInset` - Main content wrapper
-
-### Layout Components
-
-- `ScSidebarHeader` - Header section
-- `ScSidebarFooter` - Footer section
-- `ScSidebarBody` - Scrollable content area
-- `ScSidebarSeparator` - Visual separator
-- `ScSidebarInput` - Styled input for search
-
-### Menu Components
-
-- `ScSidebarMenu` - Menu list container (ul)
-- `ScSidebarMenuItem` - Menu list item (li)
-- `ScSidebarMenuButton` - Menu button/link (works with both button and a elements)
-- `ScSidebarMenuAction` - Action button on menu items
-- `ScSidebarMenuBadge` - Badge/counter display
-- `ScSidebarMenuSkeleton` - Loading skeleton
-- `ScSidebarMenuSub` - Submenu container (ul)
-- `ScSidebarMenuSubItem` - Submenu item (li)
-- `ScSidebarMenuSubButton` - Submenu button/link
-
-### Group Components
-
-- `ScSidebarGroup` - Group container
-- `ScSidebarGroupLabel` - Group header/label
-- `ScSidebarGroupAction` - Action button for groups
-- `ScSidebarGroupContent` - Group content wrapper
+An app's side panel, as shadcn's (nova): beside the page on wide screens — collapsed off the screen (`offcanvas`), to icons (`icon`) or never (`none`) — and a sheet over it on phones. The parts follow shadcn's names, so its examples carry over.
 
 ## Features
 
-- **Reactive State Management** - Built with Angular signals
-- **Keyboard Shortcuts** - Cmd/Ctrl + B to toggle sidebar
-- **LocalStorage Persistence** - State persists across page refreshes
-- **Mobile Responsive** - Sheet drawer on mobile devices
-- **Multiple Variants** - sidebar, floating, inset
-- **Collapsible Modes** - offcanvas, icon, none
-- **Two-way Binding** - Model support for open state
-- **CSS Variables** - Customizable widths
+- **Variants** — `sidebar`, `floating`, `inset` (the page a raised card)
+- **`side`** — `start` or `end` of the line: right-to-left just works
+- **`[(open)]`**, kept between visits (`storageKey`: a cookie the server reads too, plus `localStorage`)
+- **Ctrl/⌘+B** (`shortcut`, `null` to turn off)
+- **Phones** — a sheet: a named dialog, the focus kept inside, Escape closes it and gives the trigger back the focus; following a link closes it
+- **Collapsed to icons** — each button keeps its name (its hidden text); `tooltip` shows our Tooltip, only then
+- **No landmark of its own** — the navigation is the named `nav` you put in it; header and footer stay outside
 
-## How It Works
+## Quick Start
 
-The sidebar uses a clever layout technique to push content to the side instead of overlaying it:
-
-```
-┌──────────────────────────────────────────────────────────────────────────────────┐
-│ ScSidebarProvider (flex container)                                               │
-│                                                                                  │
-│ ┌──────────────────────────────┐│┌──────────────────────────────────────────┐    │
-│ │  ScSidebar                   │││  ScSidebarInset (main content)           │    │
-│ │                              │││                                          │    │
-│ │ ┌──────────────────────────┐ │││  ┌──────────────────────────────────┐    │    │
-│ │ │ ScSidebarGap             │ │││  │ <header>                         │    │    │
-│ │ │ • Width: 16rem           │ │││  │   <button scSidebarTrigger>      │    │    │
-│ │ │ • No height              │ │││  │     Toggle                       │    │    │
-│ │ │ • Pushes content in flex │ │││  │   </button>                      │    │    │
-│ │ └──────────────────────────┘ │││  └──────────────────────────────────┘    │    │
-│ │                              │││                                          │    │
-│ │ ┌──────────────────────────┐ │││  ┌──────────────────────────────────┐    │    │
-│ │ │ ScSidebarContainer       │ │││  │ <main>                           │    │    │
-│ │ │ (position: fixed)        │ │││  │   Your content here              │    │    │
-│ │ │                          │ │││  │                                  │    │    │
-│ │ │ ┌──────────────────────┐ │ │││  │                                  │    │    │
-│ │ │ │ ScSidebarInner       │ │ │││  │                                  │    │    │
-│ │ │ │ (bg, rounded, ring)  │ │ │││  │                                  │    │    │
-│ │ │ │                      │ │ │││  │                                  │    │    │
-│ │ │ │ ┌──────────────────┐ │ │ │││  │                                  │    │    │
-│ │ │ │ │ ScSidebarHeader  │ │ │ │││  │                                  │    │    │
-│ │ │ │ └──────────────────┘ │ │ │││  │                                  │    │    │
-│ │ │ │ ┌──────────────────┐ │ │ │││  │                                  │    │    │
-│ │ │ │ │ ScSidebarBody    │ │ │ │││  │                                  │    │    │
-│ │ │ │ │ (scrollable)     │ │ │ │││  │                                  │    │    │
-│ │ │ │ │                  │ │ │ │││  │                                  │    │    │
-│ │ │ │ │ ┌──────────────┐ │ │ │ │││  │                                  │    │    │
-│ │ │ │ │ │ScSidebarGroup│ │ │ │ │││  │                                  │    │    │
-│ │ │ │ │ │ ┌──────────┐ │ │ │ │ │││  │                                  │    │    │
-│ │ │ │ │ │ │GroupLabel│ │ │ │ │ │││  │                                  │    │    │
-│ │ │ │ │ │ └──────────┘ │ │ │ │ │││  │                                  │    │    │
-│ │ │ │ │ │ ┌──────────┐ │ │ │ │ │││  │                                  │    │    │
-│ │ │ │ │ │ │  Menu    │ │ │ │ │ │││  │                                  │    │    │
-│ │ │ │ │ │ │ ┌──────┐ │ │ │ │ │ │││  │                                  │    │    │
-│ │ │ │ │ │ │ │Button│ │ │ │ │ │ │││  │                                  │    │    │
-│ │ │ │ │ │ │ └──────┘ │ │ │ │ │ │││  │                                  │    │    │
-│ │ │ │ │ │ └──────────┘ │ │ │ │ │││  │                                  │    │    │
-│ │ │ │ │ └──────────────┘ │ │ │ │││  │                                  │    │    │
-│ │ │ │ │                  │ │ │ │││  │                                  │    │    │
-│ │ │ │ └──────────────────┘ │ │ │││  │                                  │    │    │
-│ │ │ │ ┌──────────────────┐ │ │ │││  │                                  │    │    │
-│ │ │ │ │ ScSidebarFooter  │ │ │ │││  │                                  │    │    │
-│ │ │ │ └──────────────────┘ │ │ │││  │                                  │    │    │
-│ │ │ │                      │ │ │││  │                                  │    │    │
-│ │ │ └──────────────────────┘ │ │││  └──────────────────────────────────┘    │    │
-│ │ │                          │ │││                                          │    │
-│ │ └──────────────────────────┘ │││                                          │    │
-│ │                              │││                                          │    │
-│ └──────────────────────────────┘│└──────────────────────────────────────────┘    │
-│                                 │                                                │
-│                          ScSidebarRail                                           │
-│                          (thin clickable strip                                   │
-│                           on the edge between                                    │
-│                           sidebar and content,                                   │
-│                           click to toggle)                                       │
-│                                                                                  │
-└──────────────────────────────────────────────────────────────────────────────────┘
-```
-
-### Key Concepts
-
-1. **ScSidebarGap** - An invisible spacer with width but no height that participates in the flex layout, creating space for the sidebar
-2. **ScSidebarContainer** - The fixed-position wrapper that holds the actual sidebar content, overlaying the gap
-3. **ScSidebarInner** - Applies background color and variant-specific styles (rounded corners, shadow, ring for floating variant)
-4. **ScSidebarRail** - A thin invisible button on the edge between the sidebar and main content; click it to toggle the sidebar. Cursor changes to indicate collapse direction. Shows a subtle 2px border on hover
-5. **Flex Layout** - The provider uses flexbox, making the gap and content area sit side-by-side
-6. **Responsive Collapse** - When collapsed, the gap width transitions to 0, allowing content to use full width
-
-This architecture ensures smooth transitions and proper content flow without JavaScript layout calculations.
-
-## Basic Usage
-
-```typescript
-import { ScSidebar, ScSidebarBody, ScSidebarFooter, ScSidebarHeader, ScSidebarInset, ScSidebarMenu, ScSidebarMenuButton, ScSidebarMenuItem, ScSidebarProvider, ScSidebarTrigger } from '@semantic-components/ui';
-
-@Component({
-  selector: 'app-layout',
-  imports: [
-    ScSidebarProvider,
-    ScSidebar,
-    // ... other imports
-  ],
-  template: `
-    <div scSidebarProvider>
-      <div scSidebar>
-        <div scSidebarHeader>
-          <h2>My App</h2>
-        </div>
-
-        <div scSidebarBody>
+```html
+<div scSidebarProvider>
+  <div scSidebar aria-label="Navigation" collapsible="icon">
+    <div scSidebarHeader>…</div>
+    <nav scSidebarContent aria-label="Main">
+      <div scSidebarGroup>
+        <div scSidebarGroupLabel>Application</div>
+        <div scSidebarGroupContent>
           <ul scSidebarMenu>
             <li scSidebarMenuItem>
-              <a scSidebarMenuButton routerLink="/dashboard">Dashboard</a>
+              <a scSidebarMenuButton routerLink="/inbox" tooltip="Inbox" active>
+                <svg siInboxIcon></svg>
+                <span>Inbox</span>
+              </a>
+              <div scSidebarMenuBadge>12</div>
             </li>
           </ul>
         </div>
-
-        <div scSidebarFooter>User Info</div>
       </div>
-
-      <main scSidebarInset>
-        <header>
-          <button scSidebarTrigger>Toggle</button>
-        </header>
-        <router-outlet />
-      </main>
-    </div>
-  `,
-})
-export class AppLayout {}
-```
-
-## Advanced Usage
-
-### With Submenu
-
-```html
-<ul scSidebarMenu>
-  <li scSidebarMenuItem>
-    <a scSidebarMenuButton>Projects</a>
-    <ul scSidebarMenuSub>
-      <li scSidebarMenuSubItem>
-        <a scSidebarMenuSubButton routerLink="/projects/1">Project 1</a>
-      </li>
-    </ul>
-  </li>
-</ul>
-```
-
-### With Groups
-
-```html
-<div scSidebarGroup>
-  <div scSidebarGroupLabel>Navigation</div>
-  <div scSidebarGroupContent>
-    <ul scSidebarMenu>
-      <!-- menu items -->
-    </ul>
+    </nav>
+    <div scSidebarFooter>…</div>
+    <button scSidebarRail></button>
   </div>
+
+  <main scSidebarInset>
+    <button scSidebarTrigger>
+      <svg siPanelLeftIcon></svg>
+      <span class="sr-only">Sidebar</span>
+    </button>
+    …
+  </main>
 </div>
 ```
 
-### Variants
+**Rules**
+
+- Name the sidebar (`aria-label`): it names the sheet on phones (a `div` has no name of its own, so it isn't written on it).
+- Put the navigation in a named `nav[scSidebarContent]`.
+- A menu button's text goes in a `span`, last: it is truncated, hidden when collapsed to icons, and still names the button.
+- The trigger's name is yours (`sr-only`); the rail needs none — it is for the pointer only.
+
+## Sub-menus
+
+Our Collapsible around an item:
 
 ```html
-<!-- Default sidebar -->
-<div scSidebar variant="sidebar" collapsible="icon">
-  <!-- Floating sidebar -->
-  <div scSidebar variant="floating" collapsible="icon">
-    <!-- Inset sidebar -->
-    <div scSidebar variant="inset" collapsible="icon"></div>
+<li scSidebarMenuItem scCollapsible>
+  <button scSidebarMenuButton scCollapsibleTrigger [panel]="docs.panel"><svg siBookOpenIcon></svg><span>Docs</span></button>
+  <div scCollapsiblePanel #docs="scCollapsiblePanel">
+    <ng-template scCollapsibleContent>
+      <div scCollapsibleBody>
+        <ul scSidebarMenuSub>
+          <li scSidebarMenuSubItem>
+            <a scSidebarMenuSubButton routerLink="/docs/install">Installation</a>
+          </li>
+        </ul>
+      </div>
+    </ng-template>
   </div>
-</div>
+</li>
 ```
 
-### Two-way Binding
+## API
 
-```typescript
-@Component({
-  template: `
-    <div scSidebarProvider [(open)]="sidebarOpen">
-      <!-- sidebar content -->
-    </div>
-  `,
-})
-export class MyComponent {
-  sidebarOpen = signal(true);
-}
-```
+### ScSidebarProvider — `div[scSidebarProvider]`
 
-## Configuration
+| Input        | Type                | Default              | Description                               |
+| ------------ | ------------------- | -------------------- | ----------------------------------------- |
+| `open`       | `boolean` (two-way) | `true`               | Open on wide screens                      |
+| `storageKey` | `string \| null`    | `'sc-sidebar-state'` | Where the state is kept; `null`: nowhere  |
+| `shortcut`   | `string \| null`    | `'b'`                | With Ctrl/⌘, toggles; `null`: no shortcut |
 
-### CSS Variables
+### ScSidebar — `div[scSidebar]`
 
-The sidebar uses CSS variables that can be customized:
+| Input         | Type                                 | Default       | Description               |
+| ------------- | ------------------------------------ | ------------- | ------------------------- |
+| `side`        | `'start' \| 'end'`                   | `'start'`     | Its side of the line      |
+| `variant`     | `'sidebar' \| 'floating' \| 'inset'` | `'sidebar'`   | Its look                  |
+| `collapsible` | `'offcanvas' \| 'icon' \| 'none'`    | `'offcanvas'` | How it collapses          |
+| `aria-label`  | `string`                             | —             | Names the sheet on phones |
 
-```css
-:root {
-  --sidebar-width: 16rem;
-  --sidebar-width-mobile: 18rem; /* Available but not currently used */
-  --sidebar-width-icon: 3rem;
-}
-```
+`data-state="expanded|collapsed"`, `data-collapsible`, `data-variant`, `data-side` for styling.
 
-**Note:** The mobile sidebar currently uses the default width from the Sheet component. The `--sidebar-width-mobile` variable is available for future customization if needed.
+### ScSidebarTrigger — `button[scSidebarTrigger]`
 
-### Props
+Toggles the sidebar (the sheet on phones): `aria-expanded`, `aria-controls`. `variant` (`'ghost'`), `size` (`'icon-sm'`).
 
-#### ScSidebar
+### ScSidebarRail — `button[scSidebarRail]`
 
-- `side` - 'left' | 'right' (default: 'left')
-- `variant` - 'sidebar' | 'floating' | 'inset' (default: 'sidebar')
-- `collapsible` - 'offcanvas' | 'icon' | 'none' (default: 'offcanvas')
+The edge: a click toggles. `aria-hidden`, out of the tab order.
 
-#### ScSidebarMenuButton
+### ScSidebarMenuButton — `a|button[scSidebarMenuButton]`
 
-- `size` - 'default' | 'sm' | 'lg' (default: 'default')
-- `isActive` - boolean (default: false)
-- `tooltip` - string (optional)
+| Input     | Type                        | Default     | Description                                |
+| --------- | --------------------------- | ----------- | ------------------------------------------ |
+| `active`  | `boolean`                   | `false`     | The page shown (`aria-current="page"`)     |
+| `tooltip` | `string`                    | —           | Our Tooltip, shown only collapsed to icons |
+| `variant` | `'default' \| 'outline'`    | `'default'` |                                            |
+| `size`    | `'default' \| 'sm' \| 'lg'` | `'default'` |                                            |
 
-#### ScSidebarMenuSubButton
+### ScSidebarMenuSubButton — `a|button[scSidebarMenuSubButton]`
 
-- `size` - 'sm' | 'md' (default: 'md')
-- `isActive` - boolean (default: false)
+`active`, `size` (`'sm' | 'md'`).
 
-## Keyboard Shortcuts
+### ScSidebarMenuAction — `button[scSidebarMenuAction]`
 
-- `Cmd + B` (Mac) / `Ctrl + B` (Windows) - Toggle sidebar
+`showOnHover`: seen only while its item is hovered or focused (wide screens). Your icon and its name.
 
-## State Persistence
+### The others
 
-The sidebar state is saved (`sc-sidebar-state`: a cookie, copied to `localStorage` — see [storage](../../utilities/storage/README.md)) and restored when the page loads — read on the server too, when a route is rendered per request, so the page is drawn as left. Give each independent sidebar its own key with `storageKey="my-sidebar"`, or pass `[storageKey]="null"` to keep nothing.
+`scSidebarHeader`, `scSidebarContent` (`div|nav`), `scSidebarFooter`, `scSidebarSeparator`, `scSidebarInput`, `scSidebarGroup`, `scSidebarGroupLabel` (`div|button`), `scSidebarGroupAction`, `scSidebarGroupContent`, `scSidebarMenu`, `scSidebarMenuItem`, `scSidebarMenuBadge`, `scSidebarMenuSkeleton` (`showIcon`), `scSidebarMenuSub`, `scSidebarMenuSubItem`, `scSidebarInset` (`main`).
 
-## Mobile Behavior
-
-On screens smaller than 768px (md breakpoint), the sidebar automatically switches to a sheet drawer that slides in from the side using the `ScSheetProvider`, `ScSheetPortal`, and `ScSheet` components. The `ScSidebarTrigger` automatically handles mobile vs desktop toggle logic.
-
-### Mobile Implementation Details
-
-The mobile view uses the new ScSheet architecture with a provider pattern:
-
-- `ScSheetProvider` manages the open state and side
-- `ScSheetPortal` creates the overlay with backdrop
-- `ScSheet` is the dialog panel with slide animations
-
-**Mobile Width:** The mobile sidebar uses the default width provided by the Sheet component rather than a custom width. This ensures consistency with other sheet-based UI elements and provides a responsive width that adapts to different device sizes.
+`ScSidebarState` (provided by the provider): `open`, `openMobile`, `isMobile`, `state`, `expanded`, `toggle()`.
 
 ## Accessibility
 
-- The sidebar is a `navigation` landmark: give it an `aria-label` (unique on the page).
-- `scSidebarTrigger` reports the state with `aria-expanded`; give it an `aria-label` when it only holds an icon. `scSidebarRail` is labelled "Toggle Sidebar".
-- `scSidebarMenuButton` sets `aria-current="page"` when `isActive`, and shows its `tooltip` as a native tooltip while the sidebar is collapsed to icons (labels stay in the DOM, so names are kept).
-- Ctrl/⌘ + B toggles the sidebar.
+- No landmark of its own: your named `nav` is the navigation; on phones, a named modal dialog.
+- The trigger: `aria-expanded`, `aria-controls`; the rail is hidden from screen readers.
+- Collapsed to icons, buttons keep their names; the tooltip shows them on hover and focus.
+- `aria-current="page"` on the active link.
 
-## Demo
+## Left out
 
-See a comprehensive demo at `/dashboard` in the blocks application.
+Resizing by drag.

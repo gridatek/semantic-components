@@ -2,12 +2,12 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 
 @Component({
-  selector: 'app-icon-sidebar-next-demo-container',
+  selector: 'app-submenu-sidebar-demo-container',
   imports: [DemoContainer],
   template: `
     <app-demo-container
-      title="Collapse to Icons"
-      demoUrl="/demos/sidebar-next/icon-sidebar-next-demo"
+      title="Sub-menus"
+      demoUrl="/demos/sidebar/submenu-sidebar-demo"
       framed
       [code]="code"
     />
@@ -15,28 +15,38 @@ import { DemoContainer } from '../../../../components/demo-container/demo-contai
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class IconSidebarNextDemoContainer {
+export class SubmenuSidebarDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import {
-  ScSidebarNext,
-  ScSidebarNextContent,
-  ScSidebarNextFooter,
-  ScSidebarNextGroup,
-  ScSidebarNextGroupAction,
-  ScSidebarNextGroupContent,
-  ScSidebarNextGroupLabel,
-  ScSidebarNextHeader,
-  ScSidebarNextInset,
-  ScSidebarNextMenu,
-  ScSidebarNextMenuBadge,
-  ScSidebarNextMenuButton,
-  ScSidebarNextMenuItem,
-  ScSidebarNextProvider,
-  ScSidebarNextRail,
-  ScSidebarNextTrigger,
+  ScCollapsible,
+  ScCollapsibleBody,
+  ScCollapsibleContent,
+  ScCollapsiblePanel,
+  ScCollapsibleTrigger,
+  ScSidebar,
+  ScSidebarContent,
+  ScSidebarFooter,
+  ScSidebarGroup,
+  ScSidebarGroupAction,
+  ScSidebarGroupContent,
+  ScSidebarGroupLabel,
+  ScSidebarHeader,
+  ScSidebarInset,
+  ScSidebarMenu,
+  ScSidebarMenuBadge,
+  ScSidebarMenuButton,
+  ScSidebarMenuItem,
+  ScSidebarMenuSub,
+  ScSidebarMenuSubButton,
+  ScSidebarMenuSubItem,
+  ScSidebarProvider,
+  ScSidebarRail,
+  ScSidebarTrigger,
 } from '@semantic-components/ui';
 import {
+  SiBookOpenIcon,
   SiCalendarIcon,
+  SiChevronRightIcon,
   SiGalleryVerticalEndIcon,
   SiHouseIcon,
   SiInboxIcon,
@@ -46,25 +56,35 @@ import {
 } from '@semantic-icons/lucide-icons';
 
 @Component({
-  selector: 'app-icon-sidebar-next-demo',
+  selector: 'app-submenu-sidebar-demo',
   imports: [
-    ScSidebarNext,
-    ScSidebarNextContent,
-    ScSidebarNextFooter,
-    ScSidebarNextGroup,
-    ScSidebarNextGroupAction,
-    ScSidebarNextGroupContent,
-    ScSidebarNextGroupLabel,
-    ScSidebarNextHeader,
-    ScSidebarNextInset,
-    ScSidebarNextMenu,
-    ScSidebarNextMenuBadge,
-    ScSidebarNextMenuButton,
-    ScSidebarNextMenuItem,
-    ScSidebarNextProvider,
-    ScSidebarNextRail,
-    ScSidebarNextTrigger,
+    ScCollapsible,
+    ScCollapsibleBody,
+    ScCollapsibleContent,
+    ScCollapsiblePanel,
+    ScCollapsibleTrigger,
+    ScSidebar,
+    ScSidebarContent,
+    ScSidebarFooter,
+    ScSidebarGroup,
+    ScSidebarGroupAction,
+    ScSidebarGroupContent,
+    ScSidebarGroupLabel,
+    ScSidebarHeader,
+    ScSidebarInset,
+    ScSidebarMenu,
+    ScSidebarMenuBadge,
+    ScSidebarMenuButton,
+    ScSidebarMenuItem,
+    ScSidebarMenuSub,
+    ScSidebarMenuSubButton,
+    ScSidebarMenuSubItem,
+    ScSidebarProvider,
+    ScSidebarRail,
+    ScSidebarTrigger,
+    SiBookOpenIcon,
     SiCalendarIcon,
+    SiChevronRightIcon,
     SiGalleryVerticalEndIcon,
     SiHouseIcon,
     SiInboxIcon,
@@ -73,13 +93,13 @@ import {
     SiSettingsIcon,
   ],
   template: \`
-    <div scSidebarNextProvider [storageKey]="null">
-      <div scSidebarNext aria-label="Navigation" collapsible="icon">
-        <div scSidebarNextHeader>
-          <ul scSidebarNextMenu>
-            <li scSidebarNextMenuItem>
+    <div scSidebarProvider [storageKey]="null">
+      <div scSidebar aria-label="Navigation">
+        <div scSidebarHeader>
+          <ul scSidebarMenu>
+            <li scSidebarMenuItem>
               <a
-                scSidebarNextMenuButton
+                scSidebarMenuButton
                 size="lg"
                 href="#"
                 (click)="$event.preventDefault()"
@@ -99,21 +119,20 @@ import {
             </li>
           </ul>
         </div>
-        <nav scSidebarNextContent aria-label="Main, icons">
-          <div scSidebarNextGroup>
-            <div scSidebarNextGroupLabel>Application</div>
-            <button scSidebarNextGroupAction>
+        <nav scSidebarContent aria-label="Main, sub-menus">
+          <div scSidebarGroup>
+            <div scSidebarGroupLabel>Application</div>
+            <button scSidebarGroupAction>
               <svg siPlusIcon></svg>
               <span class="sr-only">Add a project</span>
             </button>
-            <div scSidebarNextGroupContent>
-              <ul scSidebarNextMenu>
+            <div scSidebarGroupContent>
+              <ul scSidebarMenu>
                 @for (item of items; track item.id) {
-                  <li scSidebarNextMenuItem>
+                  <li scSidebarMenuItem>
                     <a
-                      scSidebarNextMenuButton
+                      scSidebarMenuButton
                       href="#"
-                      [tooltip]="item.label"
                       [active]="active() === item.id"
                       (click)="go($event, item.id)"
                     >
@@ -134,26 +153,69 @@ import {
                       <span>{{ item.label }}</span>
                     </a>
                     @if (item.badge) {
-                      <div scSidebarNextMenuBadge>{{ item.badge }}</div>
+                      <div scSidebarMenuBadge>{{ item.badge }}</div>
                     }
                   </li>
                 }
               </ul>
             </div>
           </div>
+          <div scSidebarGroup>
+            <div scSidebarGroupLabel>Documentation</div>
+            <ul scSidebarMenu>
+              @for (section of sections; track section.title) {
+                <li scSidebarMenuItem scCollapsible>
+                  <button
+                    scSidebarMenuButton
+                    scCollapsibleTrigger
+                    [panel]="pages.panel"
+                    [expanded]="$first"
+                    class="[&[aria-expanded=true]>svg:last-child]:rotate-90"
+                  >
+                    <svg siBookOpenIcon></svg>
+                    <span>{{ section.title }}</span>
+                    <svg
+                      siChevronRightIcon
+                      class="ms-auto transition-transform rtl:-scale-x-100"
+                    ></svg>
+                  </button>
+                  <div scCollapsiblePanel #pages="scCollapsiblePanel">
+                    <ng-template scCollapsibleContent>
+                      <div scCollapsibleBody>
+                        <ul scSidebarMenuSub>
+                          @for (page of section.pages; track page) {
+                            <li scSidebarMenuSubItem>
+                              <a
+                                scSidebarMenuSubButton
+                                href="#"
+                                [active]="active() === page"
+                                (click)="go($event, page)"
+                              >
+                                <span>{{ page }}</span>
+                              </a>
+                            </li>
+                          }
+                        </ul>
+                      </div>
+                    </ng-template>
+                  </div>
+                </li>
+              }
+            </ul>
+          </div>
         </nav>
-        <div scSidebarNextFooter>
+        <div scSidebarFooter>
           <p
             class="text-sidebar-foreground/70 truncate px-2 text-xs group-data-[collapsible=icon]:hidden"
           >
             Signed in as Ada
           </p>
         </div>
-        <button scSidebarNextRail></button>
+        <button scSidebarRail></button>
       </div>
-      <main scSidebarNextInset aria-label="Icons example">
+      <main scSidebarInset aria-label="Sub-menus example">
         <header class="flex h-14 shrink-0 items-center gap-2 border-b px-4">
-          <button scSidebarNextTrigger>
+          <button scSidebarTrigger>
             <svg siPanelLeftIcon></svg>
             <span class="sr-only">Sidebar</span>
           </button>
@@ -172,7 +234,7 @@ import {
   \`,
   encapsulation: ViewEncapsulation.None,
 })
-export class IconSidebarNextDemo {
+export class SubmenuSidebarDemo {
   readonly items = [
     { id: 'home', label: 'Home', badge: '' },
     { id: 'inbox', label: 'Inbox', badge: '12' },
@@ -191,5 +253,9 @@ export class IconSidebarNextDemo {
     event.preventDefault();
     this.active.set(id);
   }
+  readonly sections = [
+    { title: 'Getting started', pages: ['Installation', 'Theming', 'Presets'] },
+    { title: 'Components', pages: ['Button', 'Dialog', 'Sidebar'] },
+  ];
 }`;
 }

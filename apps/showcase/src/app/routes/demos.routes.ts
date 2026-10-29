@@ -4288,48 +4288,48 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/sidebar-next',
+    path: 'demos/sidebar',
     children: [
       {
-        path: 'basic-sidebar-next-demo',
+        path: 'basic-sidebar-demo',
         loadComponent: () =>
-          import('../pages/docs/sidebar-next/demos/basic-sidebar-next-demo').then(
-            (m) => m.BasicSidebarNextDemo,
+          import('../pages/docs/sidebar/demos/basic-sidebar-demo').then(
+            (m) => m.BasicSidebarDemo,
           ),
       },
       {
-        path: 'icon-sidebar-next-demo',
+        path: 'icon-sidebar-demo',
         loadComponent: () =>
-          import('../pages/docs/sidebar-next/demos/icon-sidebar-next-demo').then(
-            (m) => m.IconSidebarNextDemo,
+          import('../pages/docs/sidebar/demos/icon-sidebar-demo').then(
+            (m) => m.IconSidebarDemo,
           ),
       },
       {
-        path: 'floating-sidebar-next-demo',
+        path: 'floating-sidebar-demo',
         loadComponent: () =>
-          import('../pages/docs/sidebar-next/demos/floating-sidebar-next-demo').then(
-            (m) => m.FloatingSidebarNextDemo,
+          import('../pages/docs/sidebar/demos/floating-sidebar-demo').then(
+            (m) => m.FloatingSidebarDemo,
           ),
       },
       {
-        path: 'inset-sidebar-next-demo',
+        path: 'inset-sidebar-demo',
         loadComponent: () =>
-          import('../pages/docs/sidebar-next/demos/inset-sidebar-next-demo').then(
-            (m) => m.InsetSidebarNextDemo,
+          import('../pages/docs/sidebar/demos/inset-sidebar-demo').then(
+            (m) => m.InsetSidebarDemo,
           ),
       },
       {
-        path: 'submenu-sidebar-next-demo',
+        path: 'submenu-sidebar-demo',
         loadComponent: () =>
-          import('../pages/docs/sidebar-next/demos/submenu-sidebar-next-demo').then(
-            (m) => m.SubmenuSidebarNextDemo,
+          import('../pages/docs/sidebar/demos/submenu-sidebar-demo').then(
+            (m) => m.SubmenuSidebarDemo,
           ),
       },
       {
-        path: 'rtl-sidebar-next-demo',
+        path: 'rtl-sidebar-demo',
         loadComponent: () =>
-          import('../pages/docs/sidebar-next/demos/rtl-sidebar-next-demo').then(
-            (m) => m.RtlSidebarNextDemo,
+          import('../pages/docs/sidebar/demos/rtl-sidebar-demo').then(
+            (m) => m.RtlSidebarDemo,
           ),
       },
     ],
@@ -4966,32 +4966,6 @@ export const demosRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/virtual-list/demos/infinite-virtual-list-demo').then(
             (m) => m.InfiniteVirtualListDemo,
-          ),
-      },
-    ],
-  },
-  {
-    path: 'demos/sidebar',
-    children: [
-      {
-        path: 'basic-sidebar-demo',
-        loadComponent: () =>
-          import('../pages/docs/sidebar/demos/basic-sidebar-demo').then(
-            (m) => m.BasicSidebarDemo,
-          ),
-      },
-      {
-        path: 'icon-sidebar-demo',
-        loadComponent: () =>
-          import('../pages/docs/sidebar/demos/icon-sidebar-demo').then(
-            (m) => m.IconSidebarDemo,
-          ),
-      },
-      {
-        path: 'floating-sidebar-demo',
-        loadComponent: () =>
-          import('../pages/docs/sidebar/demos/floating-sidebar-demo').then(
-            (m) => m.FloatingSidebarDemo,
           ),
       },
     ],

@@ -1,7 +1,7 @@
 import { collectErrors, press } from '../../interaction';
 import { type Page, expect, test } from '../../test';
 
-const demo = (name: string) => `/demos/sidebar-next/${name}-sidebar-next-demo`;
+const demo = (name: string) => `/demos/sidebar/${name}-sidebar-demo`;
 const sidebar = (page: Page) => page.locator('div[data-slot=sidebar]').first();
 const trigger = (page: Page) => page.locator('[data-slot=sidebar-trigger]');
 

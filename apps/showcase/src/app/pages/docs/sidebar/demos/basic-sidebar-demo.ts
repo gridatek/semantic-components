@@ -1,15 +1,16 @@
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import {
-  ScSeparator,
   ScSidebar,
-  ScSidebarBody,
+  ScSidebarContent,
   ScSidebarFooter,
   ScSidebarGroup,
+  ScSidebarGroupAction,
   ScSidebarGroupContent,
   ScSidebarGroupLabel,
   ScSidebarHeader,
   ScSidebarInset,
   ScSidebarMenu,
+  ScSidebarMenuAction,
   ScSidebarMenuBadge,
   ScSidebarMenuButton,
   ScSidebarMenuItem,
@@ -19,26 +20,29 @@ import {
 } from '@semantic-components/ui';
 import {
   SiCalendarIcon,
+  SiEllipsisIcon,
   SiGalleryVerticalEndIcon,
   SiHouseIcon,
   SiInboxIcon,
   SiPanelLeftIcon,
+  SiPlusIcon,
   SiSettingsIcon,
 } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-basic-sidebar-demo',
   imports: [
-    ScSeparator,
     ScSidebar,
-    ScSidebarBody,
+    ScSidebarContent,
     ScSidebarFooter,
     ScSidebarGroup,
+    ScSidebarGroupAction,
     ScSidebarGroupContent,
     ScSidebarGroupLabel,
     ScSidebarHeader,
     ScSidebarInset,
     ScSidebarMenu,
+    ScSidebarMenuAction,
     ScSidebarMenuBadge,
     ScSidebarMenuButton,
     ScSidebarMenuItem,
@@ -46,19 +50,26 @@ import {
     ScSidebarRail,
     ScSidebarTrigger,
     SiCalendarIcon,
+    SiEllipsisIcon,
     SiGalleryVerticalEndIcon,
     SiHouseIcon,
     SiInboxIcon,
     SiPanelLeftIcon,
+    SiPlusIcon,
     SiSettingsIcon,
   ],
   template: `
     <div scSidebarProvider [storageKey]="null">
-      <div scSidebar aria-label="Acme navigation">
+      <div scSidebar aria-label="Navigation">
         <div scSidebarHeader>
           <ul scSidebarMenu>
             <li scSidebarMenuItem>
-              <a scSidebarMenuButton size="lg" href="#">
+              <a
+                scSidebarMenuButton
+                size="lg"
+                href="#"
+                (click)="$event.preventDefault()"
+              >
                 <span
                   class="bg-primary text-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg"
                 >
@@ -66,26 +77,30 @@ import {
                 </span>
                 <span class="grid flex-1 text-sm leading-tight">
                   <span class="truncate font-semibold">Acme Inc</span>
-                  <span class="text-sidebar-foreground/70 truncate text-xs">
-                    Enterprise
-                  </span>
+                  <span class="text-sidebar-foreground/70 truncate text-xs"
+                    >Enterprise</span
+                  >
                 </span>
               </a>
             </li>
           </ul>
         </div>
-
-        <div scSidebarBody>
+        <nav scSidebarContent aria-label="Main, basic">
           <div scSidebarGroup>
             <div scSidebarGroupLabel>Application</div>
+            <button scSidebarGroupAction>
+              <svg siPlusIcon></svg>
+              <span class="sr-only">Add a project</span>
+            </button>
             <div scSidebarGroupContent>
               <ul scSidebarMenu>
                 @for (item of items; track item.id) {
                   <li scSidebarMenuItem>
-                    <button
+                    <a
                       scSidebarMenuButton
-                      [isActive]="active() === item.id"
-                      (click)="active.set(item.id)"
+                      href="#"
+                      [active]="active() === item.id"
+                      (click)="go($event, item.id)"
                     >
                       @switch (item.id) {
                         @case ('home') {
@@ -102,37 +117,38 @@ import {
                         }
                       }
                       <span>{{ item.label }}</span>
-                    </button>
+                    </a>
                     @if (item.badge) {
                       <div scSidebarMenuBadge>{{ item.badge }}</div>
+                    }
+                    @if (item.id === 'calendar') {
+                      <button scSidebarMenuAction showOnHover>
+                        <svg siEllipsisIcon></svg>
+                        <span class="sr-only">More</span>
+                      </button>
                     }
                   </li>
                 }
               </ul>
             </div>
           </div>
-        </div>
-
+        </nav>
         <div scSidebarFooter>
-          <p class="text-sidebar-foreground/70 px-2 text-xs">v1.0.0</p>
+          <p
+            class="text-sidebar-foreground/70 truncate px-2 text-xs group-data-[collapsible=icon]:hidden"
+          >
+            Signed in as Ada
+          </p>
         </div>
-        <button scSidebarRail>
-          <span class="sr-only">Toggle Sidebar</span>
-        </button>
+        <button scSidebarRail></button>
       </div>
-
-      <main scSidebarInset aria-label="Basic example content">
+      <main scSidebarInset aria-label="Basic example">
         <header class="flex h-14 shrink-0 items-center gap-2 border-b px-4">
           <button scSidebarTrigger>
             <svg siPanelLeftIcon></svg>
-            <span class="sr-only">Toggle sidebar</span>
+            <span class="sr-only">Sidebar</span>
           </button>
-          <div
-            scSeparator
-            orientation="vertical"
-            class="me-2 data-[orientation=vertical]:h-4"
-          ></div>
-          <h2 class="text-sm font-medium">{{ activeLabel() }}</h2>
+          <p class="text-sm font-medium">{{ label() }}</p>
         </header>
         <div class="flex flex-1 flex-col gap-4 p-4">
           <div class="grid gap-4 md:grid-cols-3">
@@ -154,10 +170,16 @@ export class BasicSidebarDemo {
     { id: 'calendar', label: 'Calendar', badge: '' },
     { id: 'settings', label: 'Settings', badge: '' },
   ];
-
   readonly active = signal('home');
+  readonly label = computed(
+    () =>
+      this.items.find((item) => item.id === this.active())?.label ??
+      this.active(),
+  );
 
-  activeLabel(): string {
-    return this.items.find((item) => item.id === this.active())?.label ?? '';
+  /** A demo: the link marks its page, and stays here. */
+  go(event: Event, id: string): void {
+    event.preventDefault();
+    this.active.set(id);
   }
 }

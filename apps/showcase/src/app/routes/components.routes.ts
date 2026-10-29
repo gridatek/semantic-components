@@ -586,11 +586,6 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/sheet/sheet-page'),
       },
       {
-        path: 'sidebar',
-        title: 'Sidebar - Semantic Components',
-        loadComponent: () => import('../pages/docs/sidebar/sidebar-page'),
-      },
-      {
         path: 'signature-pad',
         title: 'Signature Pad - Semantic Components',
         loadComponent: () =>
@@ -717,10 +712,9 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/navigation-menu/navigation-menu-page'),
       },
       {
-        path: 'sidebar-next',
-        title: 'Sidebar Next - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/sidebar-next/sidebar-next-page'),
+        path: 'sidebar',
+        title: 'Sidebar - Semantic Components',
+        loadComponent: () => import('../pages/docs/sidebar/sidebar-page'),
       },
       {
         path: 'gantt',

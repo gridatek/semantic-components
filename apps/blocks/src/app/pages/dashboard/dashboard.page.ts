@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import {
   ScSidebar,
-  ScSidebarBody,
+  ScSidebarContent,
   ScSidebarFooter,
   ScSidebarGroup,
   ScSidebarGroupAction,
@@ -57,7 +57,7 @@ import {
     ScSidebar,
     ScSidebarTrigger,
     ScSidebarHeader,
-    ScSidebarBody,
+    ScSidebarContent,
     ScSidebarFooter,
     ScSidebarMenu,
     ScSidebarMenuItem,
@@ -103,7 +103,14 @@ import {
   ],
   template: `
     <div scSidebarProvider class="min-h-svh">
-      <div scSidebar side="left" variant="sidebar" collapsible="icon">
+      <div
+        scSidebar
+        side="start"
+        variant="sidebar"
+        collapsible="icon"
+        aria-label="Navigation"
+        i18n-aria-label="@@dashboard.navigation"
+      >
         <div scSidebarHeader>
           <ul scSidebarMenu>
             <li scSidebarMenuItem>
@@ -133,7 +140,11 @@ import {
           />
         </div>
 
-        <div scSidebarBody>
+        <nav
+          scSidebarContent
+          aria-label="Navigation"
+          i18n-aria-label="@@dashboard.navigation"
+        >
           <div scSidebarGroup>
             <div scSidebarGroupLabel i18n="@@dashboard.group.platform">
               Platform
@@ -146,7 +157,7 @@ import {
                     routerLink="/dashboard"
                     routerLinkActive
                     #dashboardRla="routerLinkActive"
-                    [isActive]="dashboardRla.isActive"
+                    [active]="dashboardRla.isActive"
                   >
                     <svg siLayoutDashboardIcon></svg>
                     <span i18n="@@dashboard.dashboard">Dashboard</span>
@@ -158,7 +169,7 @@ import {
                     routerLink="/users"
                     routerLinkActive
                     #usersRla="routerLinkActive"
-                    [isActive]="usersRla.isActive"
+                    [active]="usersRla.isActive"
                   >
                     <svg siUsersIcon></svg>
                     <span i18n="@@dashboard.users">Users</span>
@@ -171,7 +182,7 @@ import {
                     routerLink="/settings"
                     routerLinkActive
                     #settingsRla="routerLinkActive"
-                    [isActive]="settingsRla.isActive"
+                    [active]="settingsRla.isActive"
                   >
                     <svg siSettingsIcon></svg>
                     <span i18n="@@dashboard.settings">Settings</span>
@@ -209,7 +220,7 @@ import {
                         routerLink="/projects/overview"
                         routerLinkActive
                         #overviewRla="routerLinkActive"
-                        [isActive]="overviewRla.isActive"
+                        [active]="overviewRla.isActive"
                       >
                         <span i18n="@@dashboard.overview">Overview</span>
                       </a>
@@ -220,7 +231,7 @@ import {
                         routerLink="/projects/components"
                         routerLinkActive
                         #componentsRla="routerLinkActive"
-                        [isActive]="componentsRla.isActive"
+                        [active]="componentsRla.isActive"
                       >
                         <span i18n="@@dashboard.components">Components</span>
                       </a>
@@ -231,7 +242,7 @@ import {
                         routerLink="/projects/templates"
                         routerLinkActive
                         #templatesRla="routerLinkActive"
-                        [isActive]="templatesRla.isActive"
+                        [active]="templatesRla.isActive"
                       >
                         <span i18n="@@dashboard.templates">Templates</span>
                       </a>
@@ -244,7 +255,7 @@ import {
                     routerLink="/projects/sales"
                     routerLinkActive
                     #salesRla="routerLinkActive"
-                    [isActive]="salesRla.isActive"
+                    [active]="salesRla.isActive"
                   >
                     <svg siFileIcon></svg>
                     <span i18n="@@dashboard.sales">Sales & Marketing</span>
@@ -256,7 +267,7 @@ import {
                     routerLink="/projects/travel"
                     routerLinkActive
                     #travelRla="routerLinkActive"
-                    [isActive]="travelRla.isActive"
+                    [active]="travelRla.isActive"
                   >
                     <svg siFileIcon></svg>
                     <span i18n="@@dashboard.travel">Travel</span>
@@ -412,7 +423,7 @@ import {
               </ul>
             </div>
           </div>
-        </div>
+        </nav>
 
         <div scSidebarFooter>
           <ul scSidebarMenu>
@@ -434,11 +445,7 @@ import {
           </ul>
         </div>
 
-        <button scSidebarRail>
-          <span class="sr-only" i18n="@@dashboard.toggleSidebar"
-            >Toggle Sidebar</span
-          >
-        </button>
+        <button scSidebarRail></button>
       </div>
 
       <main scSidebarInset>

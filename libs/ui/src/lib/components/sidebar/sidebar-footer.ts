@@ -1,9 +1,11 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from '../../utils';
 
+/** The bottom of the sidebar: the user, settings… */
 @Directive({
   selector: 'div[scSidebarFooter]',
   host: {
+    'data-slot': 'sidebar-footer',
     '[class]': 'class()',
   },
 })

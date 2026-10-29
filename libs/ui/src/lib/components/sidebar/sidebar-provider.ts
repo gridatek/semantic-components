@@ -1,9 +1,8 @@
-import { DOCUMENT } from '@angular/common';
 import {
-  Component,
+  DOCUMENT,
   DestroyRef,
+  Directive,
   type OnInit,
-  ViewEncapsulation,
   afterNextRender,
   computed,
   effect,
@@ -12,44 +11,50 @@ import {
   model,
   signal,
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { NavigationEnd, Router } from '@angular/router';
-import { filter } from 'rxjs';
 import { ScStorage } from '../../utilities/storage/storage';
 import { cn } from '../../utils';
 import { ScSidebarState } from './sidebar-state';
 
-const SIDEBAR_STORAGE_KEY = 'sc-sidebar-state';
-const SIDEBAR_KEYBOARD_SHORTCUT = 'b';
 const MOBILE_QUERY = '(max-width: 767.98px)';
 
-@Component({
+/**
+ * Wraps a sidebar and the page beside it (`scSidebarInset`): their
+ * shared state, `[(open)]`, kept between visits (`storageKey`), and the
+ * Ctrl/⌘ + `shortcut` key that opens and closes it. On phones the sidebar is
+ * a sheet.
+ */
+@Directive({
   selector: 'div[scSidebarProvider]',
-  template: '<ng-content />',
+  exportAs: 'scSidebarProvider',
   providers: [ScSidebarState],
   host: {
+    'data-slot': 'sidebar-wrapper',
     '[class]': 'class()',
     '[style.--sidebar-width]': '"16rem"',
     '[style.--sidebar-width-mobile]': '"18rem"',
     '[style.--sidebar-width-icon]': '"3rem"',
     '(window:keydown)': 'onKeydown($event)',
   },
-  encapsulation: ViewEncapsulation.None,
 })
 export class ScSidebarProvider implements OnInit {
   readonly state = inject(ScSidebarState);
 
   readonly classInput = input<string>('', { alias: 'class' });
-
-  // Two-way binding support
-  readonly open = model<boolean>(true);
-
+  /** Open on wide screens. */
+  readonly open = model(true);
   /**
    * Where the open state is kept: a cookie (read on the server too, so the
-   * page is drawn as left), copied to `localStorage`. Give each independent
-   * sidebar its own key; `null` keeps nothing.
+   * page is drawn as left), copied to `localStorage`. Give each sidebar its
+   * own key; `null` keeps nothing.
    */
-  readonly storageKey = input<string | null>(SIDEBAR_STORAGE_KEY);
+  readonly storageKey = input<string | null>('sc-sidebar-state');
+  /** With Ctrl or ⌘, opens and closes the sidebar; `null`: no shortcut. */
+  readonly shortcut = input<string | null>('b');
+
+  private readonly storage = inject(ScStorage);
+  private readonly window = inject(DOCUMENT).defaultView;
+  /** Saved only once the saved state is read: not over it. */
+  private readonly restored = signal(false);
 
   protected readonly class = computed(() =>
     cn(
@@ -58,70 +63,45 @@ export class ScSidebarProvider implements OnInit {
     ),
   );
 
-  private readonly router = inject(Router);
-  private readonly window = inject(DOCUMENT).defaultView;
-  private readonly storage = inject(ScStorage);
-  /** Saved only once the saved state is read: not over it. */
-  private readonly restored = signal(false);
-
   constructor() {
-    // Sync model with state
-    effect(() => this.state.setOpen(this.open()));
+    effect(() => this.state.open.set(this.open()));
     effect(() => this.open.set(this.state.open()));
-
-    // Saved when it changes, once read (ngOnInit).
     effect(() => {
-      if (this.restored()) this.saveState(this.state.open());
+      const name = this.storageKey();
+      if (this.restored() && name)
+        this.storage.set(name, String(this.state.open()));
     });
 
-    // Close mobile sidebar on navigation
-    this.router.events
-      .pipe(
-        filter((event) => event instanceof NavigationEnd),
-        filter(() => this.state.isMobile() && this.state.openMobile()),
-        takeUntilDestroyed(),
-      )
-      .subscribe(() => this.state.setOpenMobile(false));
-
-    // The screen size: the browser's, so after the first render (the server
-    // renders a wide screen).
+    // The screen's size: the browser's, after the first render (the server
+    // draws a wide screen).
     const destroyRef = inject(DestroyRef);
     afterNextRender(() => {
       const mobile = this.window?.matchMedia(MOBILE_QUERY);
       if (!mobile) return;
-      const update = () => this.state.setIsMobile(mobile.matches);
+      const update = () => this.state.isMobile.set(mobile.matches);
       update();
       mobile.addEventListener('change', update);
       destroyRef.onDestroy(() => mobile.removeEventListener('change', update));
     });
   }
 
-  // Cmd/Ctrl + B
+  ngOnInit(): void {
+    const name = this.storageKey();
+    const saved = name ? this.storage.get(name) : null;
+    if (saved !== null) this.open.set(saved === 'true');
+    this.restored.set(true);
+  }
+
   protected onKeydown(event: KeyboardEvent): void {
+    const key = this.shortcut();
     if (
+      key &&
       (event.metaKey || event.ctrlKey) &&
-      event.key === SIDEBAR_KEYBOARD_SHORTCUT
+      !event.altKey &&
+      event.key.toLowerCase() === key.toLowerCase()
     ) {
       event.preventDefault();
       this.state.toggle();
     }
-  }
-
-  /** The saved state, once the inputs are set — on the server too, so the page is drawn as left. */
-  ngOnInit(): void {
-    const saved = this.loadState();
-    if (saved !== null) this.open.set(saved);
-    this.restored.set(true);
-  }
-
-  private saveState(open: boolean): void {
-    const name = this.storageKey();
-    if (name) this.storage.set(name, String(open));
-  }
-
-  private loadState(): boolean | null {
-    const name = this.storageKey();
-    const value = name ? this.storage.get(name) : null;
-    return value === null ? null : value === 'true';
   }
 }

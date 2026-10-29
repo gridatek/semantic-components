@@ -1,9 +1,11 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from '../../utils';
 
+/** A list of menu items. */
 @Directive({
   selector: 'ul[scSidebarMenu]',
   host: {
+    'data-slot': 'sidebar-menu',
     '[class]': 'class()',
   },
 })
