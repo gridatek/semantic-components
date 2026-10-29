@@ -8,7 +8,10 @@ import {
 import { cn } from '@semantic-components/ui';
 import { ScChartState } from './chart-state';
 
-/** The series of the plot: each one's color and name (the chart's `config`). */
+/**
+ * The series of the plot — or, for a pie's slices and radial bars, the
+ * categories: each one's color and name (the chart's `config`).
+ */
 @Component({
   selector: 'div[scChartLegend]',
   template: `
@@ -36,7 +39,11 @@ export class ScChartLegend {
 
   protected readonly items = computed(() => {
     const config = this.state.config();
-    return this.state.keys().map((key) => ({
+    // A pie's slices, radial bars: their categories.
+    const names = this.state.categoryKeys().size
+      ? [...new Set(this.state.categories())]
+      : this.state.keys();
+    return names.map((key) => ({
       key,
       name: config[key]?.label ?? key,
       color: `var(--color-${key})`,

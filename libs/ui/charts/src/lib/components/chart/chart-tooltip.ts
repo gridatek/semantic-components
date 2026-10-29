@@ -90,12 +90,21 @@ export class ScChartTooltip {
     const config = this.state.config();
     const format =
       this.valueFormatter() ?? ((value: number) => this.numbers.format(value));
-    const rows: Row[] = this.state.keys().map((key) => ({
-      key,
-      name: config[key]?.label ?? key,
-      value: format(numberOf(row[key]), key),
-      color: `var(--color-${key})`,
-    }));
+    const byCategory = this.state.categoryKeys();
+    const keys = this.state.keys();
+    const rows: Row[] = keys.map((key) => {
+      // A pie's slice, a radial bar: colored by its category — and named by
+      // it too, when it is the only series (else by its series, the category
+      // in the title).
+      const colorKey = byCategory.has(key) ? category : key;
+      const nameKey = keys.length === 1 ? colorKey : key;
+      return {
+        key,
+        name: config[nameKey]?.label ?? nameKey,
+        value: format(numberOf(row[key]), key),
+        color: `var(--color-${colorKey})`,
+      };
+    });
     return {
       label: this.labelFormatter()?.(category) ?? category,
       rows,

@@ -680,6 +680,14 @@
     "category": "Forms"
   },
   {
+    "name": "Pie Chart",
+    "path": "pie-chart",
+    "description": "A series as slices of a whole, each in its category's color: a pie, a donut with your text in its center, rings.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Data Display"
+  },
+  {
     "name": "Popover",
     "path": "popover",
     "description": "Displays floating content in relation to a trigger.",
@@ -710,6 +718,22 @@
     "status": "Experimental",
     "library": "ui",
     "category": "Utilities"
+  },
+  {
+    "name": "Radar Chart",
+    "path": "radar-chart",
+    "description": "Series as polygons over the categories, each on its spoke: filled or outlined, with dots, on a polygon or circle grid.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Data Display"
+  },
+  {
+    "name": "Radial Chart",
+    "path": "radial-chart",
+    "description": "A series as radial bars: a ring per row, its value as an arc — on a track, stacked, on a half circle with your text in its center.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Data Display"
   },
   {
     "name": "Radio Group",

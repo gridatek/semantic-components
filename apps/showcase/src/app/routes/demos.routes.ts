@@ -2373,6 +2373,84 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/pie-chart',
+    children: [
+      {
+        path: 'pie-chart-demo',
+        loadComponent: () =>
+          import('../pages/docs/pie-chart/demos/pie-chart-demo').then(
+            (m) => m.PieChartDemo,
+          ),
+      },
+      {
+        path: 'donut-chart-demo',
+        loadComponent: () =>
+          import('../pages/docs/pie-chart/demos/donut-chart-demo').then(
+            (m) => m.DonutChartDemo,
+          ),
+      },
+      {
+        path: 'stacked-pie-chart-demo',
+        loadComponent: () =>
+          import('../pages/docs/pie-chart/demos/stacked-pie-chart-demo').then(
+            (m) => m.StackedPieChartDemo,
+          ),
+      },
+    ],
+  },
+  {
+    path: 'demos/radar-chart',
+    children: [
+      {
+        path: 'radar-chart-demo',
+        loadComponent: () =>
+          import('../pages/docs/radar-chart/demos/radar-chart-demo').then(
+            (m) => m.RadarChartDemo,
+          ),
+      },
+      {
+        path: 'multiple-radar-chart-demo',
+        loadComponent: () =>
+          import('../pages/docs/radar-chart/demos/multiple-radar-chart-demo').then(
+            (m) => m.MultipleRadarChartDemo,
+          ),
+      },
+      {
+        path: 'lines-radar-chart-demo',
+        loadComponent: () =>
+          import('../pages/docs/radar-chart/demos/lines-radar-chart-demo').then(
+            (m) => m.LinesRadarChartDemo,
+          ),
+      },
+    ],
+  },
+  {
+    path: 'demos/radial-chart',
+    children: [
+      {
+        path: 'radial-chart-demo',
+        loadComponent: () =>
+          import('../pages/docs/radial-chart/demos/radial-chart-demo').then(
+            (m) => m.RadialChartDemo,
+          ),
+      },
+      {
+        path: 'stacked-radial-chart-demo',
+        loadComponent: () =>
+          import('../pages/docs/radial-chart/demos/stacked-radial-chart-demo').then(
+            (m) => m.StackedRadialChartDemo,
+          ),
+      },
+      {
+        path: 'grid-radial-chart-demo',
+        loadComponent: () =>
+          import('../pages/docs/radial-chart/demos/grid-radial-chart-demo').then(
+            (m) => m.GridRadialChartDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/scheduler',
     children: [
       {

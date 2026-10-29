@@ -46,6 +46,10 @@ export class ScChartPlot {
   readonly margin = input<Partial<ScChartMargin>>({});
   /** `expand`: each category's stacks to 100%. */
   readonly stackOffset = input<ScChartStackOffset>('none');
+  /** Polar charts: where they start, in degrees (0 at the top, clockwise). */
+  readonly startAngle = input(0);
+  /** Polar charts: where they end (180: a half circle). */
+  readonly endAngle = input(360);
 
   protected readonly viewBox = computed(
     () => `0 0 ${this.state.width()} ${this.state.height()}`,
@@ -69,6 +73,8 @@ export class ScChartPlot {
         ...this.margin(),
       })),
       stackOffset: this.stackOffset,
+      startAngle: this.startAngle,
+      endAngle: this.endAngle,
     });
 
     // Its size, in the browser.
@@ -96,7 +102,11 @@ export class ScChartPlot {
   protected onPointerMove(event: PointerEvent): void {
     const box = this.host.getBoundingClientRect();
     const px = ((event.clientX - box.left) * this.state.width()) / box.width;
-    this.state.activeIndex.set(this.state.indexAt(px));
+    const py = ((event.clientY - box.top) * this.state.height()) / box.height;
+    // Pies and radial bars: their slices and rings say it themselves.
+    if (!this.state.polar()) this.state.activeIndex.set(this.state.indexAt(px));
+    else if (this.state.series().some((s) => s.kind === 'radar'))
+      this.state.activeIndex.set(this.state.spokeAt(px, py));
   }
 
   protected onFocus(): void {

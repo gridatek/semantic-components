@@ -1,0 +1,63 @@
+import { Component, ViewEncapsulation } from '@angular/core';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { GridRadialChartDemo } from './grid-radial-chart-demo';
+
+@Component({
+  selector: 'app-grid-radial-chart-demo-container',
+  imports: [DemoContainer, GridRadialChartDemo],
+  template: `
+    <app-demo-container
+      title="On a grid"
+      demoUrl="/demos/radial-chart/grid-radial-chart-demo"
+      [code]="code"
+    >
+      <app-grid-radial-chart-demo />
+    </app-demo-container>
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class GridRadialChartDemoContainer {
+  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+import {
+  ScChart,
+  type ScChartConfig,
+  ScChartPlot,
+  ScChartPolarGrid,
+  ScChartRadialBar,
+  ScChartTooltip,
+} from '@semantic-components/ui/charts';
+
+@Component({
+  selector: 'app-grid-radial-chart-demo',
+  imports: [ScChart, ScChartPlot, ScChartPolarGrid, ScChartRadialBar, ScChartTooltip],
+  template: \`
+    <div scChart class="mx-auto aspect-square max-h-72" [config]="config" [data]="data">
+      <svg scChartPlot categoryKey="browser" aria-label="Visitors by browser">
+        <g scChartPolarGrid shape="circle" [spokes]="false" />
+        <g scChartRadialBar key="visitors" colorBy="category" [innerRadius]="0.2" />
+      </svg>
+      <div scChartTooltip hideLabel></div>
+    </div>
+  \`,
+  host: { class: 'block w-full max-w-xl' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class GridRadialChartDemo {
+  readonly data = [
+    { browser: 'chrome', visitors: 275 },
+    { browser: 'safari', visitors: 200 },
+    { browser: 'firefox', visitors: 187 },
+    { browser: 'edge', visitors: 173 },
+    { browser: 'other', visitors: 90 },
+  ];
+  readonly config: ScChartConfig = {
+    visitors: { label: 'Visitors' },
+    chrome: { label: 'Chrome', color: 'var(--chart-1)' },
+    safari: { label: 'Safari', color: 'var(--chart-2)' },
+    firefox: { label: 'Firefox', color: 'var(--chart-3)' },
+    edge: { label: 'Edge', color: 'var(--chart-4)' },
+    other: { label: 'Other', color: 'var(--chart-5)' },
+  };
+}`;
+}

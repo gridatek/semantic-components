@@ -56,6 +56,23 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/auth-layout/auth-layout-page'),
       },
       {
+        path: 'pie-chart',
+        title: 'Pie Chart - Semantic Components',
+        loadComponent: () => import('../pages/docs/pie-chart/pie-chart-page'),
+      },
+      {
+        path: 'radar-chart',
+        title: 'Radar Chart - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/radar-chart/radar-chart-page'),
+      },
+      {
+        path: 'radial-chart',
+        title: 'Radial Chart - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/radial-chart/radial-chart-page'),
+      },
+      {
         path: 'sidebar-layout',
         title: 'Sidebar Layout - Semantic Components',
         loadComponent: () =>

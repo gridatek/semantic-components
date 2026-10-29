@@ -33,18 +33,21 @@ Each row has its category (`categoryKey`) and a value per series. The config nam
 
 ## Parts
 
-The series have their own folders: [area](../area-chart/README.md), [bar](../bar-chart/README.md), [line](../line-chart/README.md).
+The series have their own folders: [area](../area-chart/README.md), [bar](../bar-chart/README.md), [line](../line-chart/README.md), [pie](../pie-chart/README.md), [radial](../radial-chart/README.md), [radar](../radar-chart/README.md).
 
-| Part                  | Inputs                                                                                                      |
-| --------------------- | ----------------------------------------------------------------------------------------------------------- |
-| `div[scChart]`        | `data`, `config`                                                                                            |
-| `svg[scChartPlot]`    | `categoryKey` (required), `margin`, `stackOffset` (`none` \| `expand`: to 100%); name it (`aria-label`)     |
-| `g[scChartGrid]`      | `horizontal` (true), `vertical` (false), `tickCount`                                                        |
-| `g[scChartXAxis]`     | `tickFormatter(category, index)` — labels evenly skipped when they don't fit                                |
-| `g[scChartYAxis]`     | `width` (40), `tickCount`, `tickFormatter(value)` — the app's locale by default                             |
-| `g[scChartCursor]`    | — a band behind bars, a line across points                                                                  |
-| `div[scChartTooltip]` | `indicator` (`dot` \| `line` \| `dashed`), `hideLabel`, `hideIndicator`, `labelFormatter`, `valueFormatter` |
-| `div[scChartLegend]`  | — each series' color and name                                                                               |
+| Part                       | Inputs                                                                                                                                 |
+| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `div[scChart]`             | `data`, `config`                                                                                                                       |
+| `svg[scChartPlot]`         | `categoryKey` (required), `margin`, `stackOffset` (`none` \; polar charts: `startAngle`, `endAngle` (degrees, 0 at the top, clockwise) | `expand`: to 100%); name it (`aria-label`) |
+| `g[scChartGrid]`           | `horizontal` (true), `vertical` (false), `tickCount`                                                                                   |
+| `g[scChartXAxis]`          | `tickFormatter(category, index)` — labels evenly skipped when they don't fit                                                           |
+| `g[scChartYAxis]`          | `width` (40), `tickCount`, `tickFormatter(value)` — the app's locale by default                                                        |
+| `g[scChartCursor]`         | — a band behind bars, a line across points                                                                                             |
+| `g[scChartPolarGrid]`      | Polar charts: `shape` (`polygon` \| `circle`), `ringCount` (4), `spokes` (true)                                                        |
+| `g[scChartPolarAngleAxis]` | A radar's categories around it: `tickFormatter(category, index)`                                                                       |
+| `g[scChartCenter]`         | A polar chart's center: your SVG at (0, 0) — a donut's total                                                                           |
+| `div[scChartTooltip]`      | `indicator` (`dot` \| `line` \| `dashed`), `hideLabel`, `hideIndicator`, `labelFormatter`, `valueFormatter`                            |
+| `div[scChartLegend]`       | — each series' color and name                                                                                                          |
 
 Series with the same `stack` are drawn on one another; values below 0 go down (diverging stacks).
 
@@ -56,4 +59,4 @@ Series with the same `stack` are drawn on one another; values below 0 go down (d
 
 ## Not yet
 
-Horizontal bars, labels on bars and points, pie, radial and radar charts — the next pass, on the same parts.
+Horizontal bars, and labels on bars, points and slices.

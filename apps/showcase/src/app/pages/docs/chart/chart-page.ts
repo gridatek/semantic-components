@@ -54,7 +54,7 @@ import { TooltipChartDemoContainer } from './demos/tooltip-chart-demo-container'
 
       <section class="space-y-4">
         <h2 scHeading appToc>Chart types</h2>
-        <div class="grid gap-4 md:grid-cols-3">
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           @for (type of types; track type.path) {
             <a
               [routerLink]="'/docs/components/' + type.path"
@@ -90,6 +90,21 @@ export default class ChartPage {
       name: 'Line Chart',
       path: 'line-chart',
       description: 'Through the values, with dots if you like.',
+    },
+    {
+      name: 'Pie Chart',
+      path: 'pie-chart',
+      description: 'Slices of a whole: a pie, a donut, rings.',
+    },
+    {
+      name: 'Radial Chart',
+      path: 'radial-chart',
+      description: 'A ring per row, its value as an arc.',
+    },
+    {
+      name: 'Radar Chart',
+      path: 'radar-chart',
+      description: 'Polygons over the categories, one per series.',
     },
   ];
 }
