@@ -543,6 +543,12 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/progress/progress-page'),
       },
       {
+        path: 'progress-next',
+        title: 'Progress Next - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/progress-next/progress-next-page'),
+      },
+      {
         path: 'query-param-state',
         title: 'Query Param State - Semantic Components',
         loadComponent: () =>

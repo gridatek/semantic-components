@@ -2,7 +2,7 @@
 
 Every component brought to the same bar: shadcn's look, tested, mobile first, right to left, in light and dark, rendered on the server. One component at a time, from the building blocks up — atomic design: a component comes after the ones it is built on (its imports, **Built on**), as design-system roadmaps do (foundations, then buttons and inputs, then form controls, then overlays and complex widgets). In a phase: ui, then code / charts / editor, each from the smallest (**Size**: lines of its own TypeScript). Each row ticked when it meets the definition of done.
 
-Inventory (145 components): 61 with a shadcn counterpart · 92 with e2e demo tests · 145 with a page axe test · 4 with an RTL demo.
+Inventory (146 components): 61 with a shadcn counterpart · 93 with e2e demo tests · 146 with a page axe test · 5 with an RTL demo.
 
 ## Why this order
 
@@ -51,7 +51,7 @@ Across all components, also:
 - [x] **SSR checks**: both apps (showcase, blocks) are static by default, client-only; SSR is the `ssr` build configuration (`main.ssr.ts` hydrates, `main.server.ts`, `server.ts`, `outputMode: "server"`, dev mode so hydration warnings show), locally `nx serve <app> -c ssr`. The CI job `ssr`, beside `main`, not required (it may fail while components are fixed): builds both with `-c ssr`, runs their Node servers (`serve-ssr`, picked by `SSR=1` in each `playwright.config.ts`), runs every e2e test again in Chromium plus `ssr.spec.ts` (every page and demo route, 813 in the showcase and 14 in blocks, hydrates: Angular's hydration ran, no `NG05xx`, no browser error), then fails on any server error in `dist/ssr-*.log`. A component's SSR column is ticked when it passes there. First run, by hand: the sidebar provider fixed (it broke every docs page); Second CI run: 138 failures; all fixed since — every page of the 16 components renders on the server and hydrates without an error (checked locally on `serve -c ssr`; CI to confirm). The fixes: browser-only work after the first render (the media players take their element then; the editor view renders then), observers and media queries only where they exist, frames cancelled only when asked for, the injected document instead of the global one, and the bubble menu taken out of the page only when the editor places it. The showcase's GitHub star count no longer throws when GitHub rate-limits (403).
 - [ ] **File names without an extra dot**: hyphens only (`button-styles.ts`, never `button.styles.ts`). Rename the files that have one — about 75 in apps and libs: `*.page.ts` (showcase and blocks pages), `*.service.ts`, `*.types.ts` (`toast.types.ts`, `resizable.types.ts`), `main.ssr.ts`, the demo media (`sintel-trailer.en.vtt`…) — and their imports. Kept: what tools look for by name (`*.spec.ts`, `tsconfig.*.json`, `*.config.*`) and Angular's SSR files (`main.server.ts`, `app.config.server.ts`, `app.routes.server.ts`).
 
-## Phase 1 — Atoms (73)
+## Phase 1 — Atoms (74)
 
 Components built on no other: the building blocks — what the rest reuse, so what they set (look, RTL, mobile, tests) the rest inherit.
 
@@ -120,16 +120,17 @@ Components built on no other: the building blocks — what the rest reuse, so wh
 |  61 | [Compare](../apps/showcase/src/app/pages/docs/compare)                             | ui      | —        |  310 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
 |  62 | [Dock](../apps/showcase/src/app/pages/docs/dock)                                   | ui      | —        |  317 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
 |  63 | [Timeline](../apps/showcase/src/app/pages/docs/timeline)                           | ui      | —        |  332 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
-|  64 | [Navigation Menu](../apps/showcase/src/app/pages/docs/navigation-menu)             | ui      | —        |  354 | yes    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
-|  65 | [Tree](../apps/showcase/src/app/pages/docs/tree)                                   | ui      | —        |  358 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
-|  66 | [Rating](../apps/showcase/src/app/pages/docs/rating)                               | ui      | —        |  383 | —      |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
-|  67 | [Field](../apps/showcase/src/app/pages/docs/field)                                 | ui      | —        |  394 | yes    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
-|  68 | [Tooltip](../apps/showcase/src/app/pages/docs/tooltip)                             | ui      | —        |  401 | yes    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
-|  69 | [Command](../apps/showcase/src/app/pages/docs/command)                             | ui      | —        |  413 | yes    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
-|  70 | [Virtual List](../apps/showcase/src/app/pages/docs/virtual-list)                   | ui      | —        |  473 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
-|  71 | [Query Param State](../apps/showcase/src/app/pages/docs/query-param-state)         | ui      | —        |  611 | —      |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
-|  72 | [Select](../apps/showcase/src/app/pages/docs/select)                               | ui      | —        |  617 | yes    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
-|  73 | [Emoji Picker](../apps/showcase/src/app/pages/docs/emoji-picker)                   | ui      | —        | 1683 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
+|  64 | [Progress Next](../apps/showcase/src/app/pages/docs/progress-next)                 | ui      | —        |  349 | —      |  [ ]   | [x] |  [ ]   | [x] | [ ]  | [ ] | [ ]  |
+|  65 | [Navigation Menu](../apps/showcase/src/app/pages/docs/navigation-menu)             | ui      | —        |  354 | yes    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
+|  66 | [Tree](../apps/showcase/src/app/pages/docs/tree)                                   | ui      | —        |  358 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
+|  67 | [Rating](../apps/showcase/src/app/pages/docs/rating)                               | ui      | —        |  383 | —      |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
+|  68 | [Field](../apps/showcase/src/app/pages/docs/field)                                 | ui      | —        |  394 | yes    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
+|  69 | [Tooltip](../apps/showcase/src/app/pages/docs/tooltip)                             | ui      | —        |  401 | yes    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
+|  70 | [Command](../apps/showcase/src/app/pages/docs/command)                             | ui      | —        |  413 | yes    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
+|  71 | [Virtual List](../apps/showcase/src/app/pages/docs/virtual-list)                   | ui      | —        |  473 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
+|  72 | [Query Param State](../apps/showcase/src/app/pages/docs/query-param-state)         | ui      | —        |  611 | —      |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
+|  73 | [Select](../apps/showcase/src/app/pages/docs/select)                               | ui      | —        |  617 | yes    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
+|  74 | [Emoji Picker](../apps/showcase/src/app/pages/docs/emoji-picker)                   | ui      | —        | 1683 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
 
 ## Phase 2 — Molecules (57)
 

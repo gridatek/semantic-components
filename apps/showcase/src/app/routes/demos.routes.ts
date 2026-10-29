@@ -3069,6 +3069,46 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/progress-next',
+    children: [
+      {
+        path: 'basic-progress-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/progress-next/demos/basic-progress-next-demo').then(
+            (m) => m.BasicProgressNextDemo,
+          ),
+      },
+      {
+        path: 'circle-progress-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/progress-next/demos/circle-progress-next-demo').then(
+            (m) => m.CircleProgressNextDemo,
+          ),
+      },
+      {
+        path: 'indeterminate-progress-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/progress-next/demos/indeterminate-progress-next-demo').then(
+            (m) => m.IndeterminateProgressNextDemo,
+          ),
+      },
+      {
+        path: 'steps-progress-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/progress-next/demos/steps-progress-next-demo').then(
+            (m) => m.StepsProgressNextDemo,
+          ),
+      },
+      {
+        path: 'rtl-progress-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/progress-next/demos/rtl-progress-next-demo').then(
+            (m) => m.RtlProgressNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/progress',
     children: [
       {
