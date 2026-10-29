@@ -4288,6 +4288,53 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/sidebar-next',
+    children: [
+      {
+        path: 'basic-sidebar-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/sidebar-next/demos/basic-sidebar-next-demo').then(
+            (m) => m.BasicSidebarNextDemo,
+          ),
+      },
+      {
+        path: 'icon-sidebar-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/sidebar-next/demos/icon-sidebar-next-demo').then(
+            (m) => m.IconSidebarNextDemo,
+          ),
+      },
+      {
+        path: 'floating-sidebar-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/sidebar-next/demos/floating-sidebar-next-demo').then(
+            (m) => m.FloatingSidebarNextDemo,
+          ),
+      },
+      {
+        path: 'inset-sidebar-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/sidebar-next/demos/inset-sidebar-next-demo').then(
+            (m) => m.InsetSidebarNextDemo,
+          ),
+      },
+      {
+        path: 'submenu-sidebar-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/sidebar-next/demos/submenu-sidebar-next-demo').then(
+            (m) => m.SubmenuSidebarNextDemo,
+          ),
+      },
+      {
+        path: 'rtl-sidebar-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/sidebar-next/demos/rtl-sidebar-next-demo').then(
+            (m) => m.RtlSidebarNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/gantt',
     children: [
       {

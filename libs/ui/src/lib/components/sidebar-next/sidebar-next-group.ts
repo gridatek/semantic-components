@@ -1,0 +1,18 @@
+import { Directive, computed, input } from '@angular/core';
+import { cn } from '../../utils';
+
+/** A section of the content: a label, an action, its menu. */
+@Directive({
+  selector: 'div[scSidebarNextGroup]',
+  host: {
+    'data-slot': 'sidebar-group',
+    '[class]': 'class()',
+  },
+})
+export class ScSidebarNextGroup {
+  readonly classInput = input<string>('', { alias: 'class' });
+
+  protected readonly class = computed(() =>
+    cn('relative flex w-full min-w-0 flex-col p-2', this.classInput()),
+  );
+}

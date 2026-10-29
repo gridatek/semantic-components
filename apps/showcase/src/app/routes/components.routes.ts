@@ -717,6 +717,12 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/navigation-menu/navigation-menu-page'),
       },
       {
+        path: 'sidebar-next',
+        title: 'Sidebar Next - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/sidebar-next/sidebar-next-page'),
+      },
+      {
         path: 'gantt',
         title: 'Gantt - Semantic Components',
         loadComponent: () => import('../pages/docs/gantt/gantt-page'),

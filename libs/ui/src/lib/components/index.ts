@@ -51,6 +51,7 @@ export * from './select';
 export * from './separator';
 export * from './sheet';
 export * from './sidebar';
+export * from './sidebar-next';
 export * from './skeleton';
 export * from './slider';
 export * from './spinner';
