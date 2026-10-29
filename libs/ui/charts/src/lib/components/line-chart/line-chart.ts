@@ -19,7 +19,7 @@ import {
 import { ScChartState, numberOf } from '../chart/chart-state';
 import type { ScChartCurve } from '../chart/chart-types';
 
-interface Point {
+interface ScLineChartPoint {
   x: number;
   y: number;
 }
@@ -79,7 +79,7 @@ export class ScChartLine implements ScChartSeriesLabels {
 
   protected readonly color = computed(() => `var(--color-${this.key()})`);
 
-  protected readonly points = computed<Point[]>(() =>
+  protected readonly points = computed<ScLineChartPoint[]>(() =>
     (this.state.extents().get(this.key()) ?? []).map(([, value], i) =>
       this.state.at(i, value),
     ),
@@ -87,7 +87,7 @@ export class ScChartLine implements ScChartSeriesLabels {
 
   protected readonly path = computed(
     () =>
-      line<Point>()
+      line<ScLineChartPoint>()
         .x((p) => p.x)
         .y((p) => p.y)
         .curve(curveOf(this.curve(), this.state.vertical()))(this.points()) ??

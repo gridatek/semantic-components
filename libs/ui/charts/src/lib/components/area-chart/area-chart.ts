@@ -19,7 +19,7 @@ import {
 import { ScChartState, numberOf } from '../chart/chart-state';
 import type { ScChartCurve } from '../chart/chart-types';
 
-interface Point {
+interface ScAreaChartPoint {
   /** Its value. */
   x: number;
   y: number;
@@ -84,7 +84,7 @@ export class ScChartArea implements ScChartSeriesLabels {
 
   protected readonly color = computed(() => `var(--color-${this.key()})`);
 
-  private readonly points = computed<Point[]>(() =>
+  private readonly points = computed<ScAreaChartPoint[]>(() =>
     (this.state.extents().get(this.key()) ?? []).map(([low, high], i) => {
       const value = this.state.at(i, high);
       const below = this.state.at(i, low);
@@ -95,11 +95,11 @@ export class ScChartArea implements ScChartSeriesLabels {
   protected readonly areaPath = computed(() => {
     const vertical = this.state.vertical();
     const shape = vertical
-      ? area<Point>()
+      ? area<ScAreaChartPoint>()
           .y((p) => p.y)
           .x0((p) => p.bx)
           .x1((p) => p.x)
-      : area<Point>()
+      : area<ScAreaChartPoint>()
           .x((p) => p.x)
           .y0((p) => p.by)
           .y1((p) => p.y);
@@ -108,7 +108,7 @@ export class ScChartArea implements ScChartSeriesLabels {
 
   protected readonly edgePath = computed(
     () =>
-      line<Point>()
+      line<ScAreaChartPoint>()
         .x((p) => p.x)
         .y((p) => p.y)
         .curve(curveOf(this.curve(), this.state.vertical()))(this.points()) ??

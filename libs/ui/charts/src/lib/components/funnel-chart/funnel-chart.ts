@@ -15,7 +15,7 @@ import {
 } from '../chart/chart-series';
 import { ScChartState, numberOf } from '../chart/chart-state';
 
-interface Stage {
+interface ScFunnelChartStage {
   index: number;
   path: string;
   color: string;
@@ -62,7 +62,7 @@ export class ScChartFunnel implements ScChartSeriesLabels {
 
   protected readonly active = this.state.activeIndex;
 
-  protected readonly stages = computed<Stage[]>(() => {
+  protected readonly stages = computed<ScFunnelChartStage[]>(() => {
     const rows = this.state.data();
     const values = rows.map((row) => numberOf(row[this.key()]));
     const max = Math.max(1, ...values);

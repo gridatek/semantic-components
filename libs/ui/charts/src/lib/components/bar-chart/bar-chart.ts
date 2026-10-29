@@ -44,7 +44,7 @@ function roundedRect(
   ].join('');
 }
 
-interface Bar {
+interface ScBarChartBar {
   index: number;
   path: string;
   x: number;
@@ -94,7 +94,7 @@ export class ScChartBar implements ScChartSeriesLabels {
 
   protected readonly color = computed(() => `var(--color-${this.key()})`);
 
-  protected readonly bars = computed<Bar[]>(() => {
+  protected readonly bars = computed<ScBarChartBar[]>(() => {
     const categories = this.state.categoryScale();
     const values = this.state.valueScale();
     const vertical = this.state.vertical();

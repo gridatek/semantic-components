@@ -17,7 +17,7 @@ import {
 } from '../chart/chart-series';
 import { ScChartState, numberOf } from '../chart/chart-state';
 
-interface Ring {
+interface ScRadialChartRing {
   index: number;
   path: string;
   track: string;
@@ -93,7 +93,7 @@ export class ScChartRadialBar implements ScChartSeriesLabels {
     return `translate(${cx},${cy})`;
   });
 
-  protected readonly rings = computed<Ring[]>(() => {
+  protected readonly rings = computed<ScRadialChartRing[]>(() => {
     const extent = this.state.extents().get(this.key()) ?? [];
     const share = this.state.share();
     const [start, end] = this.state.angles();

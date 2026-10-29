@@ -17,7 +17,7 @@ import {
 } from '../chart/chart-series';
 import { ScChartState, numberOf } from '../chart/chart-state';
 
-interface Ring {
+interface ScSunburstChartRing {
   /** A leaf's row; a group's, -1. */
   index: number;
   name: string;
@@ -123,8 +123,8 @@ export class ScChartSunburst implements ScChartSeriesLabels {
         startAngle: a0,
         endAngle: a1,
       }) ?? '';
-    const groups: Ring[] = [];
-    const leaves: Ring[] = [];
+    const groups: ScSunburstChartRing[] = [];
+    const leaves: ScSunburstChartRing[] = [];
     let angle = start;
     for (const group of this.order()) {
       const from = angle;

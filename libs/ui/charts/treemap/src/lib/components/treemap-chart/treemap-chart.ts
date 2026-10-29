@@ -17,14 +17,14 @@ import {
 } from '@semantic-components/ui/charts';
 import { hierarchy, treemap, treemapSquarify } from 'd3-hierarchy';
 
-interface Node {
+interface ScTreemapChartNode {
   name: string;
   index?: number;
   value?: number;
-  children?: Node[];
+  children?: ScTreemapChartNode[];
 }
 
-interface Box {
+interface ScTreemapChartBox {
   index: number;
   x: number;
   y: number;
@@ -33,7 +33,7 @@ interface Box {
   color: string;
 }
 
-interface Group {
+interface ScTreemapChartGroup {
   name: string;
   x: number;
   y: number;
@@ -103,13 +103,13 @@ export class ScChartTreemap implements ScChartSeriesLabels {
     const rows = this.state.data();
     const key = this.key();
     const groupKey = this.groupKey();
-    const leaf = (index: number): Node => ({
+    const leaf = (index: number): ScTreemapChartNode => ({
       name: this.state.categories()[index],
       index,
       value: Math.max(0, numberOf(rows[index][key])),
     });
     const indices = rows.map((_, index) => index);
-    const children: Node[] = groupKey
+    const children: ScTreemapChartNode[] = groupKey
       ? [...new Set(rows.map((row) => String(row[groupKey] ?? '')))].map(
           (name) => ({
             name,
@@ -120,10 +120,10 @@ export class ScChartTreemap implements ScChartSeriesLabels {
         )
       : indices.map(leaf);
     const { left, top, right, bottom } = this.state.area();
-    const root = hierarchy<Node>({ name: '', children })
+    const root = hierarchy<ScTreemapChartNode>({ name: '', children })
       .sum((node) => node.value ?? 0)
       .sort(() => 0);
-    return treemap<Node>()
+    return treemap<ScTreemapChartNode>()
       .tile(treemapSquarify)
       .size([right - left, bottom - top])
       .paddingInner(this.gap())
@@ -132,7 +132,7 @@ export class ScChartTreemap implements ScChartSeriesLabels {
     );
   });
 
-  protected readonly boxes = computed<Box[]>(() => {
+  protected readonly boxes = computed<ScTreemapChartBox[]>(() => {
     const { left, top } = this.state.area();
     const groupKey = this.groupKey();
     const rows = this.state.data();
@@ -157,7 +157,7 @@ export class ScChartTreemap implements ScChartSeriesLabels {
   });
 
   /** The groups' names, above their boxes. */
-  protected readonly groups = computed<Group[]>(() => {
+  protected readonly groups = computed<ScTreemapChartGroup[]>(() => {
     if (!this.groupKey()) return [];
     const { left, top } = this.state.area();
     const config = this.state.config();

@@ -16,7 +16,7 @@ import {
 } from '../chart/chart-series';
 import { ScChartState, numberOf } from '../chart/chart-state';
 
-interface Dot {
+interface ScScatterChartDot {
   index: number;
   x: number;
   y: number;
@@ -76,7 +76,7 @@ export class ScChartScatter implements ScChartSeriesLabels {
 
   protected readonly color = computed(() => `var(--color-${this.key()})`);
 
-  protected readonly dots = computed<Dot[]>(() => {
+  protected readonly dots = computed<ScScatterChartDot[]>(() => {
     const rows = this.state.data();
     const sizeKey = this.sizeKey();
     const radius = this.radius();

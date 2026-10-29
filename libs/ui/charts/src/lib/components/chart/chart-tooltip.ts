@@ -11,7 +11,7 @@ import { cn } from '@semantic-components/ui';
 import { ScChartState, numberOf } from './chart-state';
 import type { ScChartIndicator } from './chart-types';
 
-interface Row {
+interface ScChartTooltipRow {
   key: string;
   name: string;
   value: string;
@@ -93,7 +93,7 @@ export class ScChartTooltip {
     const byCategory = this.state.categoryKeys();
     const keys = this.state.keys();
     const series = this.state.series();
-    const rows: Row[] = keys.map((key) => {
+    const rows: ScChartTooltipRow[] = keys.map((key) => {
       const own = series.find((s) => s.key() === key)?.colorOf?.(index);
       // A pie's slice, a radial bar: colored by its category — and named by
       // it too, when it is the only series (else by its series, the category

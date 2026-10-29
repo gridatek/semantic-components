@@ -17,7 +17,7 @@ import {
 } from '../chart/chart-series';
 import { ScChartState, numberOf } from '../chart/chart-state';
 
-interface Slice {
+interface ScPieChartSlice {
   index: number;
   path: string;
   color: string;
@@ -84,7 +84,7 @@ export class ScChartPie implements ScChartSeriesLabels {
     return `translate(${cx},${cy})`;
   });
 
-  protected readonly slices = computed<Slice[]>(() => {
+  protected readonly slices = computed<ScPieChartSlice[]>(() => {
     const rows = this.state.data();
     const key = this.key();
     const categories = this.state.categories();

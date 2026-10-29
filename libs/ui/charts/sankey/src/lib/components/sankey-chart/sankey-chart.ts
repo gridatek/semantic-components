@@ -16,7 +16,7 @@ import {
 } from '@semantic-components/ui/charts';
 import { sankey, sankeyLinkHorizontal } from 'd3-sankey';
 
-interface Flow {
+interface ScSankeyChartFlow {
   index: number;
   path: string;
   color: string;
@@ -25,7 +25,7 @@ interface Flow {
   y: number;
 }
 
-interface Node {
+interface ScSankeyChartNode {
   name: string;
   label: string;
   x: number;
@@ -134,7 +134,7 @@ export class ScChartSankey implements ScChartSeriesLabels {
     });
   });
 
-  protected readonly flows = computed<Flow[]>(() => {
+  protected readonly flows = computed<ScSankeyChartFlow[]>(() => {
     const path = sankeyLinkHorizontal<{ name: string }, { index: number }>();
     return this.layout()
       .links.map((link) => ({
@@ -151,7 +151,7 @@ export class ScChartSankey implements ScChartSeriesLabels {
       .sort((a, b) => a.index - b.index);
   });
 
-  protected readonly nodes = computed<Node[]>(() => {
+  protected readonly nodes = computed<ScSankeyChartNode[]>(() => {
     const config = this.state.config();
     const { right } = this.state.area();
     return this.layout().nodes.map((node) => {
