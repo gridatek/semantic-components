@@ -8,15 +8,10 @@ import {
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import type {
+  ScDataTableTreePosition,
   ScDataTableTreeRow,
   ScDataTableTreeTable,
 } from './data-table-types';
-
-/** A row's place among its siblings: `aria-posinset` / `aria-setsize`. */
-interface ScDataTableTreePosition {
-  readonly index: number;
-  readonly count: number;
-}
 
 /**
  * A tree table, for the keyboard and screen readers (WAI-ARIA treegrid): one

@@ -61,6 +61,12 @@ export interface ScDataTableTreeRow {
   toggleSelected?(value?: boolean): void;
 }
 
+/** A row's place among its siblings: `aria-posinset` / `aria-setsize`. */
+export interface ScDataTableTreePosition {
+  readonly index: number;
+  readonly count: number;
+}
+
 /** A tree table: its rows as shown — the expanded ones' children among them. */
 export interface ScDataTableTreeTable {
   getRowModel(): { rows: readonly ScDataTableTreeRow[] };
