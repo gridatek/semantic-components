@@ -1,6 +1,7 @@
 import {
   Component,
   DestroyRef,
+  LOCALE_ID,
   ViewEncapsulation,
   computed,
   inject,
@@ -15,7 +16,7 @@ const CHARACTER = 7;
 const LINE = 16;
 
 /**
- * The categories: under the plot, or beside it in a `vertical` layout — as
+ * The categories (a scatter's x values): under the plot, or beside it in a `vertical` layout — as
  * many as fit, evenly skipped; each as written in the data, or through
  * `tickFormatter`.
  */
@@ -42,6 +43,7 @@ const LINE = 16;
 })
 export class ScChartCategoryAxis {
   private readonly state = inject(ScChartState);
+  private readonly numbers = new Intl.NumberFormat(inject(LOCALE_ID));
 
   readonly classInput = input<string>('', { alias: 'class' });
   /** A category's label (`'January'` → `'Jan'`). */
@@ -54,6 +56,18 @@ export class ScChartCategoryAxis {
   protected readonly vertical = this.state.vertical;
 
   protected readonly ticks = computed(() => {
+    // A scatter's: the x values, at their ticks.
+    if (this.state.xKey()) {
+      const scale = this.state.xScale();
+      const { bottom } = this.state.area();
+      const format = this.tickFormatter();
+      return scale.ticks(5).map((value, index) => ({
+        index,
+        label: format(this.numbers.format(value), index),
+        x: scale(value),
+        y: bottom + 8,
+      }));
+    }
     const format = this.tickFormatter();
     const labels = this.state
       .categories()

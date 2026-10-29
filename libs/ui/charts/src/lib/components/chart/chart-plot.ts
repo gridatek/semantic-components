@@ -110,8 +110,9 @@ export class ScChartPlot {
     const box = this.host.getBoundingClientRect();
     const px = ((event.clientX - box.left) * this.state.width()) / box.width;
     const py = ((event.clientY - box.top) * this.state.height()) / box.height;
-    // Pies and radial bars: their slices and rings say it themselves.
-    if (!this.state.polar())
+    // Shapes (slices, rings, boxes, flows): they say it themselves; a radar,
+    // its nearest spoke.
+    if (!this.state.shaped())
       this.state.activeIndex.set(this.state.indexAt(px, py));
     else if (this.state.series().some((s) => s.kind === 'radar'))
       this.state.activeIndex.set(this.state.spokeAt(px, py));

@@ -106,5 +106,30 @@ export default class ChartPage {
       path: 'radar-chart',
       description: 'Polygons over the categories, one per series.',
     },
+    {
+      name: 'Scatter Chart',
+      path: 'scatter-chart',
+      description: 'Points at two values — sized by a third: bubbles.',
+    },
+    {
+      name: 'Funnel Chart',
+      path: 'funnel-chart',
+      description: 'Stages, top to bottom, narrowing to the next.',
+    },
+    {
+      name: 'Treemap Chart',
+      path: 'treemap-chart',
+      description: 'Boxes as large as their values, in groups.',
+    },
+    {
+      name: 'Sunburst Chart',
+      path: 'sunburst-chart',
+      description: 'Two rings: groups inside, their rows around.',
+    },
+    {
+      name: 'Sankey Chart',
+      path: 'sankey-chart',
+      description: 'Flows between nodes, as thick as their values.',
+    },
   ];
 }

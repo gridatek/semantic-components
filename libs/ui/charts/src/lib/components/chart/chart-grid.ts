@@ -59,9 +59,14 @@ export class ScChartGrid {
     return scale.ticks(this.tickCount()).map((tick) => scale(tick));
   });
 
-  private readonly categoryLines = computed(() =>
-    this.state.data().map((_, index) => this.state.center(index)),
-  );
+  private readonly categoryLines = computed(() => {
+    // A scatter's: at the x ticks.
+    if (this.state.xKey()) {
+      const scale = this.state.xScale();
+      return scale.ticks(5).map((tick) => scale(tick));
+    }
+    return this.state.data().map((_, index) => this.state.center(index));
+  });
 
   /** The horizontal lines: at the values — at the categories, laid out vertically. */
   protected readonly rows = computed(() =>

@@ -18,13 +18,30 @@ import type {
 /** A series drawn in the plot, as it registers. */
 export interface ScChartSeries {
   readonly key: Signal<string>;
-  readonly kind: 'area' | 'bar' | 'line' | 'pie' | 'radial' | 'radar';
+  readonly kind:
+    | 'area'
+    | 'bar'
+    | 'line'
+    | 'scatter'
+    | 'pie'
+    | 'radial'
+    | 'radar'
+    | 'funnel'
+    | 'treemap'
+    | 'sunburst'
+    | 'sankey';
+  /** A row's color, when the series knows it better (a sunburst's group, a sankey's source). */
+  readonly colorOf?: (index: number) => string;
+  /** A scatter's: the key of its rows' x values (a numeric axis). */
+  readonly xKey?: Signal<string>;
   readonly stack: Signal<string | null>;
   /**
    * Its colors and names: its key's (one per series), or each row's category
    * (a pie's slices, radial bars of one series).
    */
   readonly colorBy?: Signal<'key' | 'category'>;
+  /** What its legend lists, when not its key or categories: a sunburst's groups, a sankey's nodes. */
+  readonly legend?: Signal<readonly string[]>;
 }
 
 /** What the container gives: the rows and the series' names and colors. */
@@ -48,6 +65,12 @@ export interface ScChartPlotSource {
 /** A value, as a number (`NaN` and the rest as 0). */
 export const numberOf = (value: unknown): number =>
   typeof value === 'number' ? value : Number(value) || 0;
+
+/** A scatter's range, a tenth wider each way: its points clear of the edges. */
+const padded = (low: number, high: number): [number, number] => {
+  const room = (high - low) / 10;
+  return [low - room, high + room];
+};
 
 /** The room an axis along the bottom takes, in px. */
 const AXIS_HEIGHT = 24;
@@ -140,7 +163,7 @@ export class ScChartState {
     },
   );
 
-  /** Each series' [low, high] per row: within its stack, else from 0. */
+  /** Each series' [low, high] per row: within its stack, else from 0 — a scatter's, its value. */
   readonly extents = computed(() => {
     const rows = this.data() as ScChartDatum[];
     const expand = this.stackOffset() === 'expand';
@@ -149,7 +172,12 @@ export class ScChartState {
     for (const series of this.series()) {
       const key = series.key();
       const group = series.stack() ?? (expand ? `\u0000${key}` : null);
-      if (group === null) {
+      if (series.kind === 'scatter') {
+        result.set(
+          key,
+          rows.map((row) => [numberOf(row[key]), numberOf(row[key])] as const),
+        );
+      } else if (group === null) {
         result.set(
           key,
           rows.map((row) => [0, numberOf(row[key])] as const),
@@ -182,15 +210,21 @@ export class ScChartState {
       : [bottom, top];
     if (this.stackOffset() === 'expand')
       return scaleLinear().domain([0, 1]).range(range);
-    let low = 0;
-    let high = 0;
+    // A scatter's: its values' own range, not from 0.
+    const scatter = this.xKey() !== null;
+    let low = scatter ? Infinity : 0;
+    let high = scatter ? -Infinity : 0;
     for (const extent of this.extents().values())
       for (const [a, b] of extent) {
         low = Math.min(low, a, b);
         high = Math.max(high, a, b);
       }
+    if (!Number.isFinite(low)) [low, high] = [0, 0];
     if (high === low) high = low + 1;
-    return scaleLinear().domain([low, high]).nice().range(range);
+    return scaleLinear()
+      .domain(scatter ? padded(low, high) : [low, high])
+      .nice()
+      .range(range);
   });
 
   /** Within a band, a slot per bar stack (or unstacked bar series). */
@@ -207,8 +241,31 @@ export class ScChartState {
       .padding(slots.length > 1 ? 0.1 : 0);
   });
 
-  /** The middle of a category, along its axis, in px. */
+  /** A scatter's x key: the plot's x axis is then numeric, its values'. */
+  readonly xKey = computed(
+    () =>
+      this.series()
+        .find((s) => s.xKey)
+        ?.xKey?.() ?? null,
+  );
+
+  /** With a scatter: the x values' scale. */
+  readonly xScale = computed(() => {
+    const key = this.xKey();
+    const { left, right } = this.area();
+    const values = key ? this.data().map((row) => numberOf(row[key])) : [0];
+    const low = Math.min(...values);
+    const high = Math.max(...values);
+    return scaleLinear()
+      .domain(padded(low, high === low ? low + 1 : high))
+      .nice()
+      .range([left, right]);
+  });
+
+  /** The middle of a category, along its axis — a scatter's x — in px. */
   center(index: number): number {
+    const key = this.xKey();
+    if (key) return this.xScale()(numberOf(this.data()[index]?.[key]));
     const scale = this.categoryScale();
     return (scale(index) ?? 0) + scale.bandwidth() / 2;
   }
@@ -222,6 +279,22 @@ export class ScChartState {
 
   /** The category nearest a point, in px. */
   indexAt(px: number, py: number): number | null {
+    // A scatter: the nearest point.
+    const scatter = this.series().find((s) => s.kind === 'scatter');
+    if (scatter) {
+      let best: number | null = null;
+      let distance = Infinity;
+      const key = scatter.key();
+      this.data().forEach((row, index) => {
+        const p = this.at(index, numberOf(row[key]));
+        const d = Math.hypot(p.x - px, p.y - py);
+        if (d < distance) {
+          distance = d;
+          best = index;
+        }
+      });
+      return best;
+    }
     const along = this.vertical() ? py : px;
     let best: number | null = null;
     let distance = Infinity;
@@ -235,10 +308,32 @@ export class ScChartState {
     return best;
   }
 
-  /** Pies, radial bars, radars: drawn around a center, not along axes. */
+  /**
+   * Charts of shapes, not along axes (pies, radial bars, radars, funnels,
+   * treemaps, sunbursts, sankeys): their shapes say what they point at.
+   */
+  readonly shaped = computed(() =>
+    this.series().some((s) =>
+      [
+        'pie',
+        'radial',
+        'radar',
+        'funnel',
+        'treemap',
+        'sunburst',
+        'sankey',
+      ].includes(s.kind),
+    ),
+  );
+
+  /** Pies, radial bars, radars, sunbursts: drawn around a center, not along axes. */
   readonly polar = computed(() =>
     this.series().some(
-      (s) => s.kind === 'pie' || s.kind === 'radial' || s.kind === 'radar',
+      (s) =>
+        s.kind === 'pie' ||
+        s.kind === 'radial' ||
+        s.kind === 'radar' ||
+        s.kind === 'sunburst',
     ),
   );
 

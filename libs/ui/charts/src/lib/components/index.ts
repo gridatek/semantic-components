@@ -5,3 +5,8 @@ export * from './line-chart';
 export * from './pie-chart';
 export * from './radar-chart';
 export * from './radial-chart';
+export * from './scatter-chart';
+export * from './funnel-chart';
+export * from './treemap-chart';
+export * from './sunburst-chart';
+export * from './sankey-chart';

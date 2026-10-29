@@ -73,6 +73,36 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/radial-chart/radial-chart-page'),
       },
       {
+        path: 'sankey-chart',
+        title: 'Sankey Chart - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/sankey-chart/sankey-chart-page'),
+      },
+      {
+        path: 'sunburst-chart',
+        title: 'Sunburst Chart - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/sunburst-chart/sunburst-chart-page'),
+      },
+      {
+        path: 'treemap-chart',
+        title: 'Treemap Chart - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/treemap-chart/treemap-chart-page'),
+      },
+      {
+        path: 'funnel-chart',
+        title: 'Funnel Chart - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/funnel-chart/funnel-chart-page'),
+      },
+      {
+        path: 'scatter-chart',
+        title: 'Scatter Chart - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/scatter-chart/scatter-chart-page'),
+      },
+      {
         path: 'sidebar-layout',
         title: 'Sidebar Layout - Semantic Components',
         loadComponent: () =>

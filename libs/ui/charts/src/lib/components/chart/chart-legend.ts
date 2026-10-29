@@ -10,7 +10,8 @@ import { ScChartState } from './chart-state';
 
 /**
  * The series of the plot — or, for a pie's slices and radial bars, the
- * categories: each one's color and name (the chart's `config`).
+ * categories; a sunburst's groups, a sankey's nodes: each one's color and
+ * name (the chart's `config`).
  */
 @Component({
   selector: 'div[scChartLegend]',
@@ -39,10 +40,17 @@ export class ScChartLegend {
 
   protected readonly items = computed(() => {
     const config = this.state.config();
-    // A pie's slices, radial bars: their categories.
-    const names = this.state.categoryKeys().size
-      ? [...new Set(this.state.categories())]
-      : this.state.keys();
+    // A series' own list (groups, nodes); a pie's slices, radial bars: their
+    // categories.
+    const own = this.state
+      .series()
+      .find((s) => s.legend)
+      ?.legend?.();
+    const names =
+      own ??
+      (this.state.categoryKeys().size
+        ? [...new Set(this.state.categories())]
+        : this.state.keys());
     return names.map((key) => ({
       key,
       name: config[key]?.label ?? key,

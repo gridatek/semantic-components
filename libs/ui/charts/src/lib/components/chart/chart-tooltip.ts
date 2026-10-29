@@ -92,7 +92,9 @@ export class ScChartTooltip {
       this.valueFormatter() ?? ((value: number) => this.numbers.format(value));
     const byCategory = this.state.categoryKeys();
     const keys = this.state.keys();
+    const series = this.state.series();
     const rows: Row[] = keys.map((key) => {
+      const own = series.find((s) => s.key() === key)?.colorOf?.(index);
       // A pie's slice, a radial bar: colored by its category — and named by
       // it too, when it is the only series (else by its series, the category
       // in the title).
@@ -102,7 +104,7 @@ export class ScChartTooltip {
         key,
         name: config[nameKey]?.label ?? nameKey,
         value: format(numberOf(row[key]), key),
-        color: `var(--color-${colorKey})`,
+        color: own ?? `var(--color-${colorKey})`,
       };
     });
     return {

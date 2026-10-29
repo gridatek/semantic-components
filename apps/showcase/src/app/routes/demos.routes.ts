@@ -2441,6 +2441,94 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/scatter-chart',
+    children: [
+      {
+        path: 'scatter-chart-demo',
+        loadComponent: () =>
+          import('../pages/docs/scatter-chart/demos/scatter-chart-demo').then(
+            (m) => m.ScatterChartDemo,
+          ),
+      },
+      {
+        path: 'bubble-scatter-chart-demo',
+        loadComponent: () =>
+          import('../pages/docs/scatter-chart/demos/bubble-scatter-chart-demo').then(
+            (m) => m.BubbleScatterChartDemo,
+          ),
+      },
+    ],
+  },
+  {
+    path: 'demos/funnel-chart',
+    children: [
+      {
+        path: 'funnel-chart-demo',
+        loadComponent: () =>
+          import('../pages/docs/funnel-chart/demos/funnel-chart-demo').then(
+            (m) => m.FunnelChartDemo,
+          ),
+      },
+      {
+        path: 'label-funnel-chart-demo',
+        loadComponent: () =>
+          import('../pages/docs/funnel-chart/demos/label-funnel-chart-demo').then(
+            (m) => m.LabelFunnelChartDemo,
+          ),
+      },
+    ],
+  },
+  {
+    path: 'demos/treemap-chart',
+    children: [
+      {
+        path: 'treemap-chart-demo',
+        loadComponent: () =>
+          import('../pages/docs/treemap-chart/demos/treemap-chart-demo').then(
+            (m) => m.TreemapChartDemo,
+          ),
+      },
+      {
+        path: 'grouped-treemap-chart-demo',
+        loadComponent: () =>
+          import('../pages/docs/treemap-chart/demos/grouped-treemap-chart-demo').then(
+            (m) => m.GroupedTreemapChartDemo,
+          ),
+      },
+    ],
+  },
+  {
+    path: 'demos/sunburst-chart',
+    children: [
+      {
+        path: 'sunburst-chart-demo',
+        loadComponent: () =>
+          import('../pages/docs/sunburst-chart/demos/sunburst-chart-demo').then(
+            (m) => m.SunburstChartDemo,
+          ),
+      },
+      {
+        path: 'label-sunburst-chart-demo',
+        loadComponent: () =>
+          import('../pages/docs/sunburst-chart/demos/label-sunburst-chart-demo').then(
+            (m) => m.LabelSunburstChartDemo,
+          ),
+      },
+    ],
+  },
+  {
+    path: 'demos/sankey-chart',
+    children: [
+      {
+        path: 'sankey-chart-demo',
+        loadComponent: () =>
+          import('../pages/docs/sankey-chart/demos/sankey-chart-demo').then(
+            (m) => m.SankeyChartDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/radar-chart',
     children: [
       {

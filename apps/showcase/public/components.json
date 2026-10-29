@@ -392,6 +392,14 @@
     "category": "Utilities"
   },
   {
+    "name": "Funnel Chart",
+    "path": "funnel-chart",
+    "description": "A series as stages, top to bottom, each as wide as its value, narrowing to the next.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Data Display"
+  },
+  {
     "name": "Hotkey",
     "path": "hotkey",
     "description": "A directive that runs an action on a keyboard shortcut and writes the shortcut for the platform.",
@@ -768,6 +776,22 @@
     "category": "Layout"
   },
   {
+    "name": "Sankey Chart",
+    "path": "sankey-chart",
+    "description": "Flows between nodes, each as thick as its value, the nodes in columns.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Data Display"
+  },
+  {
+    "name": "Scatter Chart",
+    "path": "scatter-chart",
+    "description": "Points at two values, x and y — sized by a third: a bubble chart.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Data Display"
+  },
+  {
     "name": "Scheduler",
     "path": "scheduler",
     "description": "Events in month, week and day views, built from parts: overlapping events side by side, all-day events, now.",
@@ -920,6 +944,14 @@
     "category": "Navigation"
   },
   {
+    "name": "Sunburst Chart",
+    "path": "sunburst-chart",
+    "description": "A series in two rings: its rows' groups inside, the rows around them.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Data Display"
+  },
+  {
     "name": "Switch",
     "path": "switch",
     "description": "A toggle control for switching between two states.",
@@ -1059,6 +1091,14 @@
     "name": "Tree",
     "path": "tree",
     "description": "A hierarchical view of nested items.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Data Display"
+  },
+  {
+    "name": "Treemap Chart",
+    "path": "treemap-chart",
+    "description": "A series as boxes, each as large as its value — in groups if you like.",
     "status": "Experimental",
     "library": "ui",
     "category": "Data Display"

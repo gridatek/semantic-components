@@ -50,7 +50,7 @@ export class ScChartCursor {
   protected readonly cursor = computed(() => {
     const index = this.state.activeIndex();
     // Around a center, nothing to mark across: the slice says it.
-    if (index === null || this.state.polar()) return null;
+    if (index === null || this.state.shaped() || this.state.xKey()) return null;
     const { left, top, right, bottom } = this.state.area();
     const scale = this.state.categoryScale();
     const band = this.state.banded();

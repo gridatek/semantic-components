@@ -14,7 +14,6 @@ import {
   type ScChartLabelPoint,
   type ScChartLabelPosition,
   type ScChartSeriesLabels,
-  anchorAt,
 } from '../chart/chart-series';
 import { ScChartState, numberOf } from '../chart/chart-state';
 
