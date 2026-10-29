@@ -717,6 +717,12 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/tree-table/tree-table-page'),
       },
       {
+        path: 'json-viewer',
+        title: 'JSON Viewer - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/json-viewer/json-viewer-page'),
+      },
+      {
         path: 'trace',
         title: 'Trace - Semantic Components',
         loadComponent: () => import('../pages/docs/trace/trace-page'),

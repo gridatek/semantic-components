@@ -90,6 +90,7 @@ export * from './message';
 export * from './message-scroller';
 export * from './questionnaire';
 export * from './trace';
+export * from './json-viewer';
 export * from './native-dialog';
 export * from './navbar';
 export * from './notification-center';

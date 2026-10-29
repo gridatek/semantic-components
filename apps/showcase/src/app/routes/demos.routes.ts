@@ -4220,6 +4220,53 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/json-viewer',
+    children: [
+      {
+        path: 'basic-json-viewer-demo',
+        loadComponent: () =>
+          import('../pages/docs/json-viewer/demos/basic-json-viewer-demo').then(
+            (m) => m.BasicJsonViewerDemo,
+          ),
+      },
+      {
+        path: 'summary-json-viewer-demo',
+        loadComponent: () =>
+          import('../pages/docs/json-viewer/demos/summary-json-viewer-demo').then(
+            (m) => m.SummaryJsonViewerDemo,
+          ),
+      },
+      {
+        path: 'large-json-viewer-demo',
+        loadComponent: () =>
+          import('../pages/docs/json-viewer/demos/large-json-viewer-demo').then(
+            (m) => m.LargeJsonViewerDemo,
+          ),
+      },
+      {
+        path: 'controls-json-viewer-demo',
+        loadComponent: () =>
+          import('../pages/docs/json-viewer/demos/controls-json-viewer-demo').then(
+            (m) => m.ControlsJsonViewerDemo,
+          ),
+      },
+      {
+        path: 'types-json-viewer-demo',
+        loadComponent: () =>
+          import('../pages/docs/json-viewer/demos/types-json-viewer-demo').then(
+            (m) => m.TypesJsonViewerDemo,
+          ),
+      },
+      {
+        path: 'rtl-json-viewer-demo',
+        loadComponent: () =>
+          import('../pages/docs/json-viewer/demos/rtl-json-viewer-demo').then(
+            (m) => m.RtlJsonViewerDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/trace',
     children: [
       {

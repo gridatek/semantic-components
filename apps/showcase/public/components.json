@@ -480,6 +480,14 @@
     "category": "Layout"
   },
   {
+    "name": "JSON Viewer",
+    "path": "json-viewer",
+    "description": "A JSON value as a tree: type-coloured values, objects and arrays that open and close, long arrays in ranges, copy.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Data Display"
+  },
+  {
     "name": "Kanban Board",
     "path": "kanban-board",
     "description": "Your items by column, dragged by any pointer or moved by the keyboard, announced in your words.",
