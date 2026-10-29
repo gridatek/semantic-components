@@ -13,12 +13,12 @@ import { encode } from 'uqr';
 /** Error correction: how much of the code can be damaged and still read. */
 export type ScQrCodeEcc = 'L' | 'M' | 'Q' | 'H';
 
-interface Encoded {
+interface ScQrCodeEncoded {
   modules: boolean[][];
   error: string | null;
 }
 
-const EMPTY: Encoded = { modules: [], error: null };
+const EMPTY: ScQrCodeEncoded = { modules: [], error: null };
 
 /**
  * The dark modules as one SVG path: each run of dark modules in a row is one
@@ -95,7 +95,7 @@ export class ScQrCode {
   /** Mask pattern (0–7); chosen automatically by default. */
   readonly mask = input<number | undefined>(undefined);
 
-  private readonly encoded = computed((): Encoded => {
+  private readonly encoded = computed((): ScQrCodeEncoded => {
     const value = this.value();
     if (!value) return EMPTY;
     try {

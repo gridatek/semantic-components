@@ -51,7 +51,7 @@ const RENDER_MARGIN = '100% 0px';
 
 const VISIBILITY_THRESHOLDS = Array.from({ length: 11 }, (_, i) => i / 10);
 
-interface PageLayout {
+interface ScPdfPageLayout {
   pageNumber: number;
   width: number;
   height: number;
@@ -167,7 +167,7 @@ export class ScPdfViewerCanvas {
     this.watchDevicePixelRatio();
   };
 
-  readonly pageLayouts = signal<PageLayout[]>([]);
+  readonly pageLayouts = signal<ScPdfPageLayout[]>([]);
 
   private readonly pdfDocument = this.pdfViewer.pdfDocument;
   readonly rotation = this.pdfViewer.rotation;
@@ -211,11 +211,11 @@ export class ScPdfViewerCanvas {
   /** Rotated a quarter turn: the page's width and height swap on screen. */
   protected readonly sideways = computed(() => this.rotation() % 180 !== 0);
 
-  protected displayWidth(page: PageLayout): number {
+  protected displayWidth(page: ScPdfPageLayout): number {
     return this.sideways() ? page.height : page.width;
   }
 
-  protected displayHeight(page: PageLayout): number {
+  protected displayHeight(page: ScPdfPageLayout): number {
     return this.sideways() ? page.width : page.height;
   }
 
@@ -235,7 +235,7 @@ export class ScPdfViewerCanvas {
     );
   });
 
-  protected pageBox(page: PageLayout): ScPdfPageBox {
+  protected pageBox(page: ScPdfPageLayout): ScPdfPageBox {
     return (
       this.pageBoxes().get(page.pageNumber) ??
       pageBox(
@@ -247,10 +247,10 @@ export class ScPdfViewerCanvas {
   }
 
   /** The pages grouped into spreads (one or two side by side). */
-  protected readonly spreads = computed((): PageLayout[][] => {
+  protected readonly spreads = computed((): ScPdfPageLayout[][] => {
     const layouts = this.pageLayouts();
     if (this.pdfViewer.spreadMode() === 'none') return layouts.map((l) => [l]);
-    const spreads: PageLayout[][] = [];
+    const spreads: ScPdfPageLayout[][] = [];
     for (let page = 1; page <= layouts.length;) {
       const [first, last] = this.pdfViewer.spreadOf(page);
       spreads.push(layouts.slice(first - 1, last));
@@ -271,7 +271,7 @@ export class ScPdfViewerCanvas {
   });
 
   /** In page scroll mode, only the current spread shows. */
-  protected isSpreadShown(spread: PageLayout[]): boolean {
+  protected isSpreadShown(spread: ScPdfPageLayout[]): boolean {
     if (this.pdfViewer.scrollMode() !== 'page') return true;
     const current = this.pdfViewer.currentPage();
     return spread.some((page) => page.pageNumber === current);

@@ -32,7 +32,9 @@ export interface ScTimeStep {
   readonly seconds?: number;
 }
 
-type Parts = Partial<Record<'hour' | 'minute' | 'second', number>> & {
+type ScTimeInputParts = Partial<
+  Record<'hour' | 'minute' | 'second', number>
+> & {
   dayPeriod?: 'am' | 'pm';
 };
 
@@ -186,7 +188,7 @@ export class ScTimeInput implements FormValueControl<Temporal.PlainTime | null> 
 
   /** The parts typed so far: the value's — kept while one is still empty. */
   private written: Temporal.PlainTime | null | typeof NONE = NONE;
-  readonly parts = linkedSignal<Temporal.PlainTime | null, Parts>({
+  readonly parts = linkedSignal<Temporal.PlainTime | null, ScTimeInputParts>({
     source: this.value,
     computation: (value, previous) => {
       const own = previous && value === this.written;
@@ -367,9 +369,9 @@ export class ScTimeInput implements FormValueControl<Temporal.PlainTime | null> 
   }
 
   /** Now, in parts — where the arrows start an empty part (on the step). */
-  private nowParts(): Required<Parts> {
+  private nowParts(): Required<ScTimeInputParts> {
     const now = Temporal.Now.plainTimeISO();
-    const parts = this.split(now) as Required<Parts>;
+    const parts = this.split(now) as Required<ScTimeInputParts>;
     const minutes = this.stepOf('minute');
     const seconds = this.stepOf('second');
     return {
@@ -404,10 +406,10 @@ export class ScTimeInput implements FormValueControl<Temporal.PlainTime | null> 
     this.value.set(value);
   }
 
-  private split(value: Temporal.PlainTime | null): Parts {
+  private split(value: Temporal.PlainTime | null): ScTimeInputParts {
     if (!value) return {};
     const granularity = this.granularity();
-    const parts: Parts = {
+    const parts: ScTimeInputParts = {
       hour: this.twelveHours() ? value.hour % 12 || 12 : value.hour,
       minute: granularity === 'hour' ? undefined : value.minute,
       second: granularity === 'second' ? value.second : undefined,
@@ -416,7 +418,7 @@ export class ScTimeInput implements FormValueControl<Temporal.PlainTime | null> 
     return parts;
   }
 
-  private join(parts: Parts): Temporal.PlainTime {
+  private join(parts: ScTimeInputParts): Temporal.PlainTime {
     const hour = parts.hour ?? 0;
     return Temporal.PlainTime.from({
       hour: this.twelveHours()

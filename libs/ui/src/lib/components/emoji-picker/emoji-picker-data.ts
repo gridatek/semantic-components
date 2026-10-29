@@ -62,7 +62,7 @@ export const SC_EMOJI_SKIN_TONES: ScEmojiSkinTone[] = [
 
 const STORAGE_KEY = 'sc-emoji-picker';
 
-interface EmojibaseEmoji {
+interface ScEmojibaseEmoji {
   emoji: string;
   label: string;
   group?: number;
@@ -73,13 +73,13 @@ interface EmojibaseEmoji {
   skins?: { emoji: string; tone?: number | number[] }[];
 }
 
-interface EmojibaseMessages {
+interface ScEmojibaseMessages {
   groups: { key: string; message: string; order: number }[];
   subgroups: { key: string; message: string; order: number }[];
   skinTones: { key: string; message: string }[];
 }
 
-interface CachedData {
+interface ScEmojiPickerCachedData {
   etags: [string | null, string | null];
   data: ScEmojiData;
 }
@@ -116,8 +116,8 @@ function writeStorage(storage: () => Storage, key: string, value: unknown) {
 /** Emojibase's data, in the picker's shape. */
 function toEmojiData(
   locale: string,
-  emojis: EmojibaseEmoji[],
-  messages: EmojibaseMessages,
+  emojis: ScEmojibaseEmoji[],
+  messages: ScEmojibaseMessages,
 ): ScEmojiData {
   const flags = new Set(
     messages.subgroups
@@ -212,7 +212,7 @@ async function readEmojibaseData(
   const sessionKey = `${STORAGE_KEY}/revalidated`;
   const revalidated =
     readStorage<string[]>(() => sessionStorage, sessionKey) ?? [];
-  const cached = readStorage<CachedData>(() => localStorage, key);
+  const cached = readStorage<ScEmojiPickerCachedData>(() => localStorage, key);
 
   if (cached) {
     if (revalidated.includes(key)) return cached.data;
@@ -232,14 +232,14 @@ async function readEmojibaseData(
   }
 
   const [emojis, messages] = await Promise.all([
-    fetchJson<EmojibaseEmoji[]>(emojisUrl),
-    fetchJson<EmojibaseMessages>(messagesUrl),
+    fetchJson<ScEmojibaseEmoji[]>(emojisUrl),
+    fetchJson<ScEmojibaseMessages>(messagesUrl),
   ]);
   const data = toEmojiData(locale, emojis.json, messages.json);
   writeStorage(() => localStorage, key, {
     etags: [emojis.etag, messages.etag],
     data,
-  } satisfies CachedData);
+  } satisfies ScEmojiPickerCachedData);
   writeStorage(() => sessionStorage, sessionKey, [...revalidated, key]);
   return data;
 }
@@ -285,15 +285,15 @@ export function isEmojiSupported(emoji: string): boolean {
   return true;
 }
 
-interface EmojiSupport {
+interface ScEmojiSupport {
   version: number;
   countryFlags: boolean;
 }
 
 /** The newest Emoji version this system draws (checked once per session). */
-function emojiSupport(emojis: ScEmojiDataEmoji[]): EmojiSupport {
+function emojiSupport(emojis: ScEmojiDataEmoji[]): ScEmojiSupport {
   const sessionKey = `${STORAGE_KEY}/support`;
-  const known = readStorage<EmojiSupport>(() => sessionStorage, sessionKey);
+  const known = readStorage<ScEmojiSupport>(() => sessionStorage, sessionKey);
   if (known) return known;
   const byVersion = new Map<number, string>();
   for (const emoji of emojis) {

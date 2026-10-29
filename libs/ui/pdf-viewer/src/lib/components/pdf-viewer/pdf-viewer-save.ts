@@ -11,9 +11,9 @@ const EDITOR_PREFIX = 'pdfjs_internal_editor_';
 /** Size of a comment's note icon, in PDF points. */
 const NOTE_SIZE = 20;
 
-type Rgb = [number, number, number];
+type ScPdfRgb = [number, number, number];
 
-function rgb(hex: string | undefined, fallback: Rgb): Rgb {
+function rgb(hex: string | undefined, fallback: ScPdfRgb): ScPdfRgb {
   const match = /^#?([\da-f]{2})([\da-f]{2})([\da-f]{2})$/i.exec(hex ?? '');
   return match
     ? [parseInt(match[1], 16), parseInt(match[2], 16), parseInt(match[3], 16)]

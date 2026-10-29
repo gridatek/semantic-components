@@ -27,7 +27,7 @@ export interface ScDateSegment {
   readonly text: string;
 }
 
-type Parts = Partial<Record<ScDateSegmentType, number>>;
+type ScDateInputParts = Partial<Record<ScDateSegmentType, number>>;
 
 const NONE = Symbol('none');
 const PLACEHOLDER: Record<ScDateSegmentType, string> = {
@@ -210,7 +210,7 @@ export class ScSegmentedDateInput implements FormValueControl<Temporal.PlainDate
 
   /** The parts typed so far: the day's — kept while one is still empty. */
   private written: Temporal.PlainDate | null | typeof NONE = NONE;
-  readonly parts = linkedSignal<Temporal.PlainDate | null, Parts>({
+  readonly parts = linkedSignal<Temporal.PlainDate | null, ScDateInputParts>({
     source: this.date,
     computation: (date, previous) => {
       const own = previous && date === this.written;
@@ -398,7 +398,7 @@ export class ScSegmentedDateInput implements FormValueControl<Temporal.PlainDate
 
   /** A part set — the date once every part is there (the day kept within its month), else none. */
   private set(type: ScDateSegmentType, part: number | undefined): void {
-    const parts: Parts = { ...this.parts(), [type]: part };
+    const parts: ScDateInputParts = { ...this.parts(), [type]: part };
     let date: Temporal.PlainDate | null = null;
     if (parts.day && parts.month && parts.year) {
       date = Temporal.PlainDate.from(

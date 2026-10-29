@@ -59,7 +59,7 @@ const MIN_SCALE = 0.1;
 const MAX_SCALE = 25;
 
 /** pdf.js's optional content (layers) config; not exported by pdfjs-dist. */
-type OptionalContentConfig = Awaited<
+type ScPdfOptionalContentConfig = Awaited<
   ReturnType<PDFDocumentProxy['getOptionalContentConfig']>
 >;
 
@@ -113,14 +113,14 @@ const NAMED_ZOOMS: Record<string, ScPdfZoomLevel> = {
 };
 
 /** pdf.js's outline item, as `getOutline()` returns it. */
-interface PdfOutlineNode {
+interface ScPdfOutlineNode {
   title: string;
   dest: string | unknown[] | null;
   url: string | null;
   bold: boolean;
   italic: boolean;
   count: number | undefined;
-  items: PdfOutlineNode[];
+  items: ScPdfOutlineNode[];
 }
 
 /**
@@ -741,7 +741,7 @@ export class ScPdfViewer {
   /** The document's optional content (layers), and whether each shows. */
   readonly layers = signal<ScPdfLayer[]>([]);
   /** The layers' visibility as pdf.js renders it (with the pages). */
-  readonly optionalContent = signal<OptionalContentConfig | null>(null);
+  readonly optionalContent = signal<ScPdfOptionalContentConfig | null>(null);
 
   // Signature state
   readonly signatureDialogOpen = signal(false);
@@ -1155,9 +1155,9 @@ export class ScPdfViewer {
     doc: PDFDocumentProxy,
   ): Promise<ScPdfOutlineItem[]> {
     const nodes = (await doc.getOutline().catch(() => null)) as
-      PdfOutlineNode[] | null;
+      ScPdfOutlineNode[] | null;
     const convert = (
-      items: PdfOutlineNode[],
+      items: ScPdfOutlineNode[],
       path: string,
     ): Promise<ScPdfOutlineItem[]> =>
       Promise.all(

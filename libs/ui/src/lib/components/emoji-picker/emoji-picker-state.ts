@@ -15,7 +15,7 @@ const OVERSCAN_ROWS = 2;
 /** Rows drawn before the row and header heights are known. */
 const INITIAL_ROWS = 12;
 
-type Interaction = 'none' | 'keyboard' | 'pointer';
+type ScEmojiPickerInteraction = 'none' | 'keyboard' | 'pointer';
 
 /** Emojis matching a search, best first: by label, then by tags. */
 function search(emojis: ScEmojiDataEmoji[], query: string) {
@@ -61,7 +61,7 @@ export class ScEmojiPickerState {
   readonly rowWidth = signal<number | null>(null);
   readonly scrollTop = signal(0);
 
-  readonly interaction = signal<Interaction>('none');
+  readonly interaction = signal<ScEmojiPickerInteraction>('none');
   readonly activeRow = signal(0);
   readonly activeColumn = signal(0);
 
@@ -228,7 +228,11 @@ export class ScEmojiPickerState {
         null),
   );
 
-  setActive(interaction: Interaction, column: number, row: number): void {
+  setActive(
+    interaction: ScEmojiPickerInteraction,
+    column: number,
+    row: number,
+  ): void {
     this.interaction.set(interaction);
     this.activeColumn.set(column);
     this.activeRow.set(row);

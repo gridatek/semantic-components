@@ -19,13 +19,13 @@ export interface ScPdfScriptingHost {
 }
 
 /** pdf.js's QuickJS sandbox (`pdf.sandbox.mjs`). */
-interface Sandbox {
+interface ScPdfSandbox {
   create(data: object): void;
   dispatchEvent(event: object): void;
   nukeSandbox(): void;
 }
 
-interface SandboxUpdate {
+interface ScPdfSandboxUpdate {
   id?: string;
   siblings?: string[];
   command?: string;
@@ -42,7 +42,7 @@ interface SandboxUpdate {
  * that aren't rendered).
  */
 export class ScPdfScripting {
-  private sandbox: Promise<Sandbox> | null = null;
+  private sandbox: Promise<ScPdfSandbox> | null = null;
   private doc: PDFDocumentProxy | null = null;
   private objectIds = new Set<string>();
   /** Pages whose PageOpen ran (the promise), or that were closed (null). */
@@ -63,7 +63,7 @@ export class ScPdfScripting {
   };
 
   private readonly onUpdate = (event: Event): void => {
-    this.update((event as CustomEvent<SandboxUpdate>).detail);
+    this.update((event as CustomEvent<ScPdfSandboxUpdate>).detail);
   };
 
   constructor(
@@ -102,7 +102,7 @@ export class ScPdfScripting {
 
     const { sandboxSrc, wasmSrc } = this.sources();
     const sandbox = import(/* @vite-ignore */ sandboxSrc).then(
-      (module: { QuickJSSandbox(wasmUrl: string): Promise<Sandbox> }) =>
+      (module: { QuickJSSandbox(wasmUrl: string): Promise<ScPdfSandbox> }) =>
         module.QuickJSSandbox(new URL(wasmSrc, location.href).href),
     );
     this.sandbox = sandbox;
@@ -229,7 +229,7 @@ export class ScPdfScripting {
   }
 
   /** A message from the sandbox: a viewer command, or a field update. */
-  private update(detail: SandboxUpdate): void {
+  private update(detail: ScPdfSandboxUpdate): void {
     const host = this.host;
     const { id, siblings, command, value } = detail;
     if (!id) {

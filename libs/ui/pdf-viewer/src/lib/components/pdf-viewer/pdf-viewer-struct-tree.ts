@@ -7,7 +7,7 @@ import type { PDFPageProxy } from 'pdfjs-dist';
  * content. It goes inside the page's canvas, as its fallback content.
  */
 
-interface StructNode {
+interface ScPdfStructNode {
   role?: string;
   type?: string;
   id?: string;
@@ -22,10 +22,10 @@ interface StructNode {
   colSpan?: number;
   headers?: string[];
   bbox?: number[];
-  children?: StructNode[];
+  children?: ScPdfStructNode[];
 }
 
-interface RawDims {
+interface ScPdfRawDims {
   pageWidth: number;
   pageHeight: number;
   pageX: number;
@@ -155,7 +155,10 @@ const MATHML_NAMESPACE = 'http://www.w3.org/1998/Math/MathML';
 const HEADING_PATTERN = /^H(\d+)$/;
 
 /** The HTML Sanitizer API, where the browser has it. */
-type SanitizerHTML = (html: string, options: { sanitizer: unknown }) => void;
+type ScPdfSanitizerHtml = (
+  html: string,
+  options: { sanitizer: unknown },
+) => void;
 let mathSanitizer: unknown;
 
 /** A sanitizer keeping only MathML, or null without the Sanitizer API. */
@@ -194,7 +197,7 @@ function cleanText(text: string, replaceInvisible = false): string {
 let treeCount = 0;
 
 export class ScPdfStructTree {
-  private readonly tree: Promise<StructNode | null>;
+  private readonly tree: Promise<ScPdfStructNode | null>;
   private rendered: Promise<HTMLElement | null> | null = null;
   private readonly annotationIds = new Set<string>();
   private readonly elementAttributes = new Map<string, Map<string, string>>();
@@ -205,16 +208,16 @@ export class ScPdfStructTree {
   private linkTextId = 0;
   private readonly idPrefix = `sc_pdf_struct_${treeCount++}_`;
   private readonly structElementIds = new Map<string, string>();
-  private readonly structElements = new Map<string, StructNode>();
+  private readonly structElements = new Map<string, ScPdfStructNode>();
   private elementsToAddToTextLayer: Map<string, HTMLElement> | null = null;
   private elementsToHideInTextLayer: string[] | null = null;
   private elementsToStealFromTextLayer: [Element, string[]][] | null = null;
 
   constructor(
     page: PDFPageProxy,
-    private readonly rawDims: RawDims | null,
+    private readonly rawDims: ScPdfRawDims | null,
   ) {
-    this.tree = page.getStructTree() as Promise<StructNode | null>;
+    this.tree = page.getStructTree() as Promise<ScPdfStructNode | null>;
   }
 
   /** The tree's DOM (built once), or null for an untagged page. */
@@ -299,7 +302,7 @@ export class ScPdfStructTree {
     return attributes;
   }
 
-  private collectStructElements(node: StructNode): void {
+  private collectStructElements(node: ScPdfStructNode): void {
     if (node.structId && !this.structElements.has(node.structId)) {
       this.structElements.set(node.structId, node);
     }
@@ -308,7 +311,7 @@ export class ScPdfStructTree {
     }
   }
 
-  private collectAnnotations(node: StructNode): void {
+  private collectAnnotations(node: ScPdfStructNode): void {
     if (node.type === 'annotation') {
       if (node.id) this.annotationIds.add(node.id);
       return;
@@ -345,7 +348,7 @@ export class ScPdfStructTree {
     return result;
   }
 
-  private setAttributes(node: StructNode, element: Element): void {
+  private setAttributes(node: ScPdfStructNode, element: Element): void {
     const { alt, colSpan, headers, id, lang, rowSpan, short, structId } = node;
     if (alt !== undefined) {
       let added = false;
@@ -404,7 +407,10 @@ export class ScPdfStructTree {
    * A figure with alt text becomes an `img` in the text layer, where the
    * figure is on the page.
    */
-  private addImageInTextLayer(node: StructNode, element: Element): boolean {
+  private addImageInTextLayer(
+    node: ScPdfStructNode,
+    element: Element,
+  ): boolean {
     const { alt, bbox, children } = node;
     const child = children?.[0];
     if (!this.rawDims || !alt || !bbox || child?.type !== 'content') {
@@ -426,12 +432,12 @@ export class ScPdfStructTree {
     return true;
   }
 
-  private collectIds(node: StructNode, ids: string[]): void {
+  private collectIds(node: ScPdfStructNode, ids: string[]): void {
     if (node.id !== undefined) ids.push(node.id);
     for (const child of node.children ?? []) this.collectIds(child, ids);
   }
 
-  private walk(node: StructNode, parents: StructNode[]): Element {
+  private walk(node: ScPdfStructNode, parents: ScPdfStructNode[]): Element {
     let element: Element | null = null;
     let visitChildren = true;
     const { role } = node;
@@ -476,7 +482,7 @@ export class ScPdfStructTree {
       }
       if (role === 'Formula') {
         const sanitizer = mathMLSanitizer();
-        const setHTML = (element as unknown as { setHTML?: SanitizerHTML })
+        const setHTML = (element as unknown as { setHTML?: ScPdfSanitizerHtml })
           .setHTML;
         if (node.mathML && sanitizer && setHTML) {
           visitChildren = false;

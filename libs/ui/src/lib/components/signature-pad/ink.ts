@@ -137,7 +137,7 @@ export function pathData(shape: readonly [number, number][]): string {
 /** The size typed signatures are exported at. */
 const TEXT_SIZE = 64;
 
-interface Box {
+interface ScSignaturePadBox {
   x: number;
   y: number;
   width: number;
@@ -147,7 +147,7 @@ interface Box {
 function measureText(
   signature: ScTypedSignature,
   canvas: HTMLCanvasElement,
-): Box {
+): ScSignaturePadBox {
   const context = canvas.getContext('2d');
   if (context) context.font = `${TEXT_SIZE}px ${signature.font}`;
   const width = context?.measureText(signature.text).width ?? 0;
@@ -159,7 +159,7 @@ function bounds(
   signature: ScSignature,
   padding: number,
   canvas: HTMLCanvasElement,
-): Box | null {
+): ScSignaturePadBox | null {
   if (isTyped(signature)) {
     const box = measureText(signature, canvas);
     return {

@@ -15,7 +15,7 @@ export interface ScPdfVisibleArea {
   maxY: number;
 }
 
-interface DetailArea {
+interface ScPdfDetailArea {
   minX: number;
   minY: number;
   width: number;
@@ -27,7 +27,7 @@ interface DetailArea {
 const MOVEMENT_THRESHOLD = 0.5;
 
 export class ScPdfDetailCanvas {
-  private readonly areas = new Map<number, DetailArea>();
+  private readonly areas = new Map<number, ScPdfDetailArea>();
   private readonly tasks = new Map<number, RenderTask>();
 
   /** Forgets a page's detail; its canvas is hidden. */
@@ -82,7 +82,7 @@ export class ScPdfDetailCanvas {
       viewport.height,
       visible.maxY + visibleHeight * overflow,
     );
-    const area: DetailArea = {
+    const area: ScPdfDetailArea = {
       minX,
       minY,
       width: maxX - minX,
@@ -141,7 +141,7 @@ export class ScPdfDetailCanvas {
 
   /** Whether the visible part has left the drawn area, or nearly. */
   private needsNewArea(
-    area: DetailArea | undefined,
+    area: ScPdfDetailArea | undefined,
     visible: ScPdfVisibleArea,
     viewport: PageViewport,
   ): boolean {

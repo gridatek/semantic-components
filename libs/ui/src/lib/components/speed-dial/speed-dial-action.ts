@@ -24,7 +24,7 @@ const ARCS: Record<string, [number, number]> = {
   'down-right': [90, 0],
 };
 
-type Move = 'next' | 'previous' | 'first' | 'last';
+type ScSpeedDialMove = 'next' | 'previous' | 'first' | 'last';
 
 /**
  * An action — a menu item: done, the dial closes. Write its icon and its
@@ -134,14 +134,17 @@ export class ScSpeedDialAction {
   }
 
   /** The keys, by the way the actions open: away from the button is next. */
-  private moves(): Record<string, Move> {
+  private moves(): Record<string, ScSpeedDialMove> {
     const lines: Record<string, [string, string]> = {
       up: ['ArrowUp', 'ArrowDown'],
       down: ['ArrowDown', 'ArrowUp'],
       left: ['ArrowLeft', 'ArrowRight'],
       right: ['ArrowRight', 'ArrowLeft'],
     };
-    const ends: Record<string, Move> = { Home: 'first', End: 'last' };
+    const ends: Record<string, ScSpeedDialMove> = {
+      Home: 'first',
+      End: 'last',
+    };
     const line = lines[this.dial.direction()];
     if (line) return { [line[0]]: 'next', [line[1]]: 'previous', ...ends };
     return {

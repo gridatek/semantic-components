@@ -32,12 +32,17 @@ import type {
   ScImageAnnotatorKind,
 } from './image-annotator-types';
 
-type Handle = 'nw' | 'ne' | 'sw' | 'se' | 'start' | 'end';
+type ScImageAnnotatorHandle = 'nw' | 'ne' | 'sw' | 'se' | 'start' | 'end';
 
-type Gesture =
+type ScImageAnnotatorGesture =
   | { kind: 'draw' }
   | { kind: 'move'; id: string; from: Point }
-  | { kind: 'resize'; id: string; handle: Handle; start: Annotation }
+  | {
+      kind: 'resize';
+      id: string;
+      handle: ScImageAnnotatorHandle;
+      start: Annotation;
+    }
   | { kind: 'erase' };
 
 /**
@@ -251,7 +256,7 @@ export class ScImageAnnotatorStage {
   });
 
   protected readonly draft = signal<Annotation | null>(null);
-  private gesture: Gesture | null = null;
+  private gesture: ScImageAnnotatorGesture | null = null;
 
   protected readonly viewBox = computed(() => {
     const { width, height } = this.annotator.ɵnatural();
@@ -272,31 +277,41 @@ export class ScImageAnnotatorStage {
     if (annotation.kind === 'line' || annotation.kind === 'arrow') {
       const [a, b] = annotation.points;
       return [
-        { name: 'start' as Handle, x: a.x, y: a.y, cursor: 'cursor-move' },
-        { name: 'end' as Handle, x: b.x, y: b.y, cursor: 'cursor-move' },
+        {
+          name: 'start' as ScImageAnnotatorHandle,
+          x: a.x,
+          y: a.y,
+          cursor: 'cursor-move',
+        },
+        {
+          name: 'end' as ScImageAnnotatorHandle,
+          x: b.x,
+          y: b.y,
+          cursor: 'cursor-move',
+        },
       ];
     }
     return [
       {
-        name: 'nw' as Handle,
+        name: 'nw' as ScImageAnnotatorHandle,
         x: box.x,
         y: box.y,
         cursor: 'cursor-nwse-resize',
       },
       {
-        name: 'ne' as Handle,
+        name: 'ne' as ScImageAnnotatorHandle,
         x: box.x + box.width,
         y: box.y,
         cursor: 'cursor-nesw-resize',
       },
       {
-        name: 'sw' as Handle,
+        name: 'sw' as ScImageAnnotatorHandle,
         x: box.x,
         y: box.y + box.height,
         cursor: 'cursor-nesw-resize',
       },
       {
-        name: 'se' as Handle,
+        name: 'se' as ScImageAnnotatorHandle,
         x: box.x + box.width,
         y: box.y + box.height,
         cursor: 'cursor-nwse-resize',
@@ -442,7 +457,7 @@ export class ScImageAnnotatorStage {
       this.gesture = {
         kind: 'resize',
         id: selected.id,
-        handle: handle as Handle,
+        handle: handle as ScImageAnnotatorHandle,
         start: selected,
       };
       return;
@@ -534,7 +549,11 @@ export class ScImageAnnotatorStage {
     return Math.max(box.width, box.height) > 3 * this.unit();
   }
 
-  private resized(start: Annotation, handle: Handle, point: Point): Annotation {
+  private resized(
+    start: Annotation,
+    handle: ScImageAnnotatorHandle,
+    point: Point,
+  ): Annotation {
     if (handle === 'start')
       return { ...start, points: [point, start.points[1]] };
     if (handle === 'end') return { ...start, points: [start.points[0], point] };

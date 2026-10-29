@@ -27,17 +27,17 @@ function linkRegex(): RegExp | null {
   return regex;
 }
 
-interface FoundLink {
+interface ScPdfFoundLink {
   url: string;
   index: number;
   length: number;
 }
 
 /** URLs and emails in a page's text, with their place in it. */
-function findLinks(text: string): FoundLink[] {
+function findLinks(text: string): ScPdfFoundLink[] {
   const pattern = linkRegex();
   if (!pattern) return [];
-  const links: FoundLink[] = [];
+  const links: ScPdfFoundLink[] = [];
   for (const match of text.matchAll(pattern)) {
     const [found, emailDomain] = match;
     let raw: string;
@@ -91,9 +91,9 @@ function textPosition(container: Node, offset: number): [Node, number] {
   return [container, 0];
 }
 
-type Rect = [number, number, number, number];
+type ScPdfRect = [number, number, number, number];
 
-function normalizeRect([x1, y1, x2, y2]: number[]): Rect {
+function normalizeRect([x1, y1, x2, y2]: number[]): ScPdfRect {
   return [
     Math.min(x1, x2),
     Math.min(y1, y2),
@@ -102,7 +102,7 @@ function normalizeRect([x1, y1, x2, y2]: number[]): Rect {
   ];
 }
 
-function intersect(a: Rect, b: Rect): Rect | null {
+function intersect(a: ScPdfRect, b: ScPdfRect): ScPdfRect | null {
   const x1 = Math.max(a[0], b[0]);
   const y1 = Math.max(a[1], b[1]);
   const x2 = Math.min(a[2], b[2]);
@@ -110,7 +110,7 @@ function intersect(a: Rect, b: Rect): Rect | null {
   return x1 < x2 && y1 < y2 ? [x1, y1, x2, y2] : null;
 }
 
-function area(rects: Rect[]): number {
+function area(rects: ScPdfRect[]): number {
   return rects.reduce(
     (sum, r) => sum + Math.abs((r[2] - r[0]) * (r[3] - r[1])),
     0,
@@ -121,10 +121,10 @@ function area(rects: Rect[]): number {
 function rectsOf(annotation: {
   rect: number[];
   quadPoints?: ArrayLike<number> | null;
-}): Rect[] {
+}): ScPdfRect[] {
   const quads = annotation.quadPoints;
   if (!quads?.length) return [normalizeRect(annotation.rect)];
-  const rects: Rect[] = [];
+  const rects: ScPdfRect[] = [];
   for (let i = 0; i + 7 < quads.length; i += 8) {
     rects.push(
       normalizeRect([quads[i + 4], quads[i + 5], quads[i + 2], quads[i + 3]]),
@@ -183,7 +183,7 @@ export function inferLinkAnnotations(
     } catch {
       continue;
     }
-    const rects: Rect[] = [];
+    const rects: ScPdfRect[] = [];
     for (const box of range.getClientRects()) {
       if (!box.width || !box.height) continue;
       rects.push(
@@ -198,13 +198,13 @@ export function inferLinkAnnotations(
     // Already a link (mostly)? Leave it.
     const covered = existingLinks.some((annotation) => {
       const overlaps = rectsOf(annotation).flatMap((a) =>
-        rects.map((b) => intersect(a, b)).filter((r): r is Rect => !!r),
+        rects.map((b) => intersect(a, b)).filter((r): r is ScPdfRect => !!r),
       );
       return overlaps.length > 0 && area(overlaps) / area(rects) > 0.5;
     });
     if (covered) continue;
 
-    const rect: Rect = [
+    const rect: ScPdfRect = [
       Math.min(...rects.map((r) => r[0])),
       Math.min(...rects.map((r) => r[1])),
       Math.max(...rects.map((r) => r[2])),

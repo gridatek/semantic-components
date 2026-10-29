@@ -335,21 +335,21 @@ export function originalRange(
   return [oldStart, oldEnd + 1 - oldStart];
 }
 
-interface Segmenter {
+interface ScPdfSegmenter {
   segment(text: string): {
     containing(index: number): { index: number; segment: string };
   };
 }
-let wordSegmenter: Segmenter | null = null;
-let graphemeSegmenter: Segmenter | null = null;
+let wordSegmenter: ScPdfSegmenter | null = null;
+let graphemeSegmenter: ScPdfSegmenter | null = null;
 
-function segmenter(granularity: 'word' | 'grapheme'): Segmenter {
+function segmenter(granularity: 'word' | 'grapheme'): ScPdfSegmenter {
   const Ctor = (
     Intl as unknown as {
       Segmenter: new (
         locale: undefined,
         options: { granularity: string },
-      ) => Segmenter;
+      ) => ScPdfSegmenter;
     }
   ).Segmenter;
   return new Ctor(undefined, { granularity });

@@ -23,7 +23,7 @@ import {
 } from './color';
 
 /** The EyeDropper API, where the browser has it. */
-interface EyeDropperApi {
+interface ScColorPickerEyeDropper {
   open(): Promise<{ sRGBHex: string }>;
 }
 
@@ -142,7 +142,7 @@ export class ScColorPicker implements FormValueControl<string> {
   /** Picks a colour from the screen (where the browser can). */
   async pickFromScreen(): Promise<void> {
     const view = this.document.defaultView as
-      (Window & { EyeDropper?: new () => EyeDropperApi }) | null;
+      (Window & { EyeDropper?: new () => ScColorPickerEyeDropper }) | null;
     if (!view?.EyeDropper || this.disabled()) return;
     try {
       const { sRGBHex } = await new view.EyeDropper().open();

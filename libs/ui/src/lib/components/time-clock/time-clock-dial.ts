@@ -10,7 +10,7 @@ import {
 import { cn } from '../../utils/cn/cn';
 import { ScTimeClock } from './time-clock';
 
-interface Mark {
+interface ScTimeClockMark {
   /** The hour (0–23) or the minute it stands for. */
   readonly value: number;
   readonly label: string;
@@ -106,7 +106,7 @@ export class ScTimeClockDial {
     return this.clock.view() === 'hours' ? value.hour : value.minute;
   });
 
-  protected readonly marks = computed<Mark[]>(() => {
+  protected readonly marks = computed<ScTimeClockMark[]>(() => {
     const clock = this.clock;
     const { plain, padded } = clock.number();
     const at = (index: number, radius: number) => {

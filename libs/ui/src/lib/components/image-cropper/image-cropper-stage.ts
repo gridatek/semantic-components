@@ -11,7 +11,7 @@ import { cn } from '../../utils/cn/cn';
 import { ScImageCropper } from './image-cropper';
 import type { ScImageCropperHandlePosition } from './image-cropper-geometry';
 
-type Drag =
+type ScImageCropperDrag =
   | { kind: 'pan' }
   | { kind: 'move' }
   | { kind: 'resize'; handle: ScImageCropperHandlePosition };
@@ -41,7 +41,7 @@ export class ScImageCropperStage {
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly pointers = new Map<number, { x: number; y: number }>();
-  private drag: Drag | null = null;
+  private drag: ScImageCropperDrag | null = null;
 
   protected readonly class = computed(() =>
     cn(

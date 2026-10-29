@@ -10,7 +10,7 @@ import {
 import { cn } from '../../utils';
 import { ScCalendar } from './calendar';
 
-interface Day {
+interface ScCalendarDay {
   readonly date: Temporal.PlainDate;
   readonly key: string;
   /** Of the month before or after. */
@@ -141,7 +141,7 @@ export class ScCalendarMonth {
       this.calendar.showOutsideDays() && this.calendar.months().length === 1;
     const start = first.subtract({ days: offset });
     return Array.from({ length: count }, (_, w) =>
-      Array.from({ length: 7 }, (_, d): Day => {
+      Array.from({ length: 7 }, (_, d): ScCalendarDay => {
         const date = start.add({ days: w * 7 + d });
         const outside = date.month !== month.month;
         return {
@@ -154,11 +154,11 @@ export class ScCalendarMonth {
     );
   });
 
-  protected weekNumber(week: Day[]): number | undefined {
+  protected weekNumber(week: ScCalendarDay[]): number | undefined {
     return (week.find((day) => !day.outside) ?? week[0]).date.weekOfYear;
   }
 
-  protected tabIndex(day: Day): number | null {
+  protected tabIndex(day: ScCalendarDay): number | null {
     if (this.calendar.disabled() || day.outside) return -1;
     return day.date.equals(this.calendar.focused()) ? 0 : -1;
   }
@@ -171,7 +171,7 @@ export class ScCalendarMonth {
     return date.toLocaleString(this.calendar.locale(), { dateStyle: 'full' });
   }
 
-  protected context(day: Day) {
+  protected context(day: ScCalendarDay) {
     return {
       $implicit: day.date,
       selected: this.calendar.isSelected(day.date),
@@ -181,17 +181,17 @@ export class ScCalendarMonth {
     };
   }
 
-  protected pick(day: Day): void {
+  protected pick(day: ScCalendarDay): void {
     this.calendar.select(day.date);
     // An outside day: its month shown.
     if (day.outside) this.calendar.moveTo(day.date);
   }
 
-  protected preview(day: Day): void {
+  protected preview(day: ScCalendarDay): void {
     if (this.calendar.mode() === 'range') this.calendar.hovered.set(day.date);
   }
 
-  protected cellClass(day: Day): string {
+  protected cellClass(day: ScCalendarDay): string {
     const calendar = this.calendar;
     const selected = calendar.isSelected(day.date);
     const range = calendar.rangePart(day.date);

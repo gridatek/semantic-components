@@ -30,25 +30,25 @@ import { ScDiffViewerFold } from './diff-viewer-fold';
 export type ScDiffView = 'split' | 'unified';
 
 /** A piece of a line: a token, or a part of one — changed or not. */
-interface Piece {
+interface ScDiffPiece {
   readonly content: string;
   readonly style: Readonly<Record<string, string>>;
   readonly changed: boolean;
 }
 
-interface Cell {
+interface ScDiffCell {
   readonly kind: ScDiffLine['kind'];
   readonly oldNumber: number | null;
   readonly newNumber: number | null;
-  readonly pieces: readonly Piece[];
+  readonly pieces: readonly ScDiffPiece[];
 }
 
-type UnifiedRow = Cell | ScDiffFold;
-type SplitRow =
+type ScDiffUnifiedRow = ScDiffCell | ScDiffFold;
+type ScDiffSplitRow =
   | {
       readonly kind: 'pair';
-      readonly left: Cell | null;
-      readonly right: Cell | null;
+      readonly left: ScDiffCell | null;
+      readonly right: ScDiffCell | null;
     }
   | ScDiffFold;
 
@@ -243,11 +243,11 @@ export class ScDiffViewer {
     ),
   );
 
-  protected readonly unified = computed<UnifiedRow[]>(() =>
+  protected readonly unified = computed<ScDiffUnifiedRow[]>(() =>
     this.rows().map((row) => (row.kind === 'fold' ? row : this.cell(row))),
   );
 
-  protected readonly split = computed<SplitRow[]>(() =>
+  protected readonly split = computed<ScDiffSplitRow[]>(() =>
     splitRows(this.rows()).map((row) =>
       row.kind === 'fold'
         ? row
@@ -328,7 +328,7 @@ export class ScDiffViewer {
     return kind === 'added' ? '+' : kind === 'removed' ? '−' : '';
   }
 
-  protected pieceClass(piece: Piece, kind: 'added' | 'removed'): string {
+  protected pieceClass(piece: ScDiffPiece, kind: 'added' | 'removed'): string {
     return cn(
       this.tokenClass,
       piece.changed &&
@@ -343,7 +343,7 @@ export class ScDiffViewer {
   }
 
   /** A line, ready to draw: its numbers, and its pieces — tokens cut where words changed. */
-  private cell(line: ScDiffLine): Cell {
+  private cell(line: ScDiffLine): ScDiffCell {
     const side = line.kind === 'added' ? 'new' : 'old';
     const index = (side === 'new' ? line.new : line.old) ?? 0;
     const text =
@@ -376,8 +376,8 @@ export class ScDiffViewer {
 function cut(
   tokens: readonly ScCodeToken[],
   ranges: readonly (readonly [number, number])[],
-): Piece[] {
-  const pieces: Piece[] = [];
+): ScDiffPiece[] {
+  const pieces: ScDiffPiece[] = [];
   let at = 0;
   for (const token of tokens) {
     const start = at;

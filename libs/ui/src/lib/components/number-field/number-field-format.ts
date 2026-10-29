@@ -30,7 +30,7 @@ export function numberFormatter(
   return formatter;
 }
 
-interface NumberSymbols {
+interface ScNumberFieldSymbols {
   /** The locale's digits, 0 to 9. */
   digits: string[];
   decimal: string;
@@ -40,9 +40,9 @@ interface NumberSymbols {
   percent: boolean;
 }
 
-const symbolsCache = new Map<Intl.NumberFormat, NumberSymbols>();
+const symbolsCache = new Map<Intl.NumberFormat, ScNumberFieldSymbols>();
 
-function symbols(formatter: Intl.NumberFormat): NumberSymbols {
+function symbols(formatter: Intl.NumberFormat): ScNumberFieldSymbols {
   let found = symbolsCache.get(formatter);
   if (found) return found;
   const { locale, numberingSystem, style } = formatter.resolvedOptions();
