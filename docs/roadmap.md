@@ -2,7 +2,7 @@
 
 Every component brought to the same bar: shadcn's look, tested, mobile first, right to left, in light and dark, rendered on the server. One component at a time, from the building blocks up — atomic design: a component comes after the ones it is built on (its imports, **Built on**), as design-system roadmaps do (foundations, then buttons and inputs, then form controls, then overlays and complex widgets). In a phase: ui, then code / charts / editor, each from the smallest (**Size**: lines of its own TypeScript). Each row ticked when it meets the definition of done.
 
-Inventory (147 components): 61 with a shadcn counterpart · 96 with e2e demo tests · 147 with a page axe test · 8 with an RTL demo.
+Inventory (148 components): 61 with a shadcn counterpart · 97 with e2e demo tests · 148 with a page axe test · 9 with an RTL demo.
 
 ## Why this order
 
@@ -131,7 +131,7 @@ Components built on no other: the building blocks — what the rest reuse, so wh
 |  72 | [Select](../apps/showcase/src/app/pages/docs/select)                               | ui      | —        |  617 | yes    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
 |  73 | [Emoji Picker](../apps/showcase/src/app/pages/docs/emoji-picker)                   | ui      | —        | 1683 | —      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
 
-## Phase 2 — Molecules (58)
+## Phase 2 — Molecules (59)
 
 Built on atoms (**Built on**): fields and form controls, overlays, menus, the calendar.
 
@@ -164,37 +164,38 @@ Built on atoms (**Built on**): fields and form controls, overlays, menus, the ca
 |  25 | [Code Editor](../apps/showcase/src/app/pages/docs/code-editor)                 | ui      | field                        |  379 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
 |  26 | [OTP Field](../apps/showcase/src/app/pages/docs/otp-field)                     | ui      | field                        |  379 | input-otp              |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
 |  27 | [Alert Dialog](../apps/showcase/src/app/pages/docs/alert-dialog)               | ui      | backdrop, button, focus-trap |  383 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
-|  28 | [Spotlight](../apps/showcase/src/app/pages/docs/spotlight)                     | ui      | button                       |  404 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
-|  29 | [Menu](../apps/showcase/src/app/pages/docs/menu)                               | ui      | context-menu                 |  426 | dropdown-menu, menubar |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
-|  30 | [Time Input](../apps/showcase/src/app/pages/docs/time-input)                   | ui      | field                        |  434 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
-|  31 | [Countdown](../apps/showcase/src/app/pages/docs/countdown)                     | ui      | button                       |  447 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
-|  32 | [Code Block](../apps/showcase/src/app/pages/docs/code-block)                   | ui      | button                       |  461 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
-|  33 | [Tags Input](../apps/showcase/src/app/pages/docs/tags-input)                   | ui      | badge, button, field         |  462 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
-|  34 | [Speed Dial](../apps/showcase/src/app/pages/docs/speed-dial)                   | ui      | button                       |  471 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
-|  35 | [Multiselect](../apps/showcase/src/app/pages/docs/multiselect)                 | ui      | select                       |  484 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
-|  36 | [Tour Guide](../apps/showcase/src/app/pages/docs/tour-guide)                   | ui      | button                       |  489 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
-|  37 | [Autocomplete](../apps/showcase/src/app/pages/docs/autocomplete)               | ui      | button                       |  491 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
-|  38 | [JSON Viewer](../apps/showcase/src/app/pages/docs/json-viewer)                 | ui      | tree                         |  494 | —                      |  [ ]   | [x] |  [ ]   | [x] | [ ]  | [ ] | [ ]  |
-|  39 | [File Upload](../apps/showcase/src/app/pages/docs/file-upload)                 | ui      | button                       |  515 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
-|  40 | [Mention Input](../apps/showcase/src/app/pages/docs/mention-input)             | ui      | field                        |  535 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
-|  41 | [Stepper](../apps/showcase/src/app/pages/docs/stepper)                         | ui      | button                       |  561 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
-|  42 | [Barcode Scanner](../apps/showcase/src/app/pages/docs/barcode-scanner)         | ui      | button                       |  595 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
-|  43 | [Time Clock](../apps/showcase/src/app/pages/docs/time-clock)                   | ui      | button                       |  608 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
-|  44 | [Transfer List](../apps/showcase/src/app/pages/docs/transfer-list)             | ui      | button                       |  659 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
-|  45 | [Pagination](../apps/showcase/src/app/pages/docs/pagination)                   | ui      | button, field                |  682 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
-|  46 | [Combobox](../apps/showcase/src/app/pages/docs/combobox)                       | ui      | button, select               |  719 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
-|  47 | [Color Picker](../apps/showcase/src/app/pages/docs/color-picker)               | ui      | button                       |  789 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
-|  48 | [Lightbox](../apps/showcase/src/app/pages/docs/lightbox)                       | ui      | button                       |  853 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
-|  49 | [Notification Center](../apps/showcase/src/app/pages/docs/notification-center) | ui      | badge, button                |  884 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
-|  50 | [Signature Pad](../apps/showcase/src/app/pages/docs/signature-pad)             | ui      | button, field                |  909 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
-|  51 | [Toast](../apps/showcase/src/app/pages/docs/toast)                             | ui      | button                       | 1009 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
-|  52 | [Questionnaire](../apps/showcase/src/app/pages/docs/questionnaire)             | ui      | button                       | 1086 | yes                    |  [ ]   | [x] |  [ ]   | [x] | [ ]  | [ ] | [ ]  |
-|  53 | [Scheduler](../apps/showcase/src/app/pages/docs/scheduler)                     | ui      | button                       | 1172 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
-|  54 | [Calendar](../apps/showcase/src/app/pages/docs/calendar)                       | ui      | button                       | 1223 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
-|  55 | [Message Scroller](../apps/showcase/src/app/pages/docs/message-scroller)       | ui      | button                       | 1253 | yes                    |  [ ]   | [x] |  [ ]   | [x] | [ ]  | [ ] | [ ]  |
-|  56 | [Image Cropper](../apps/showcase/src/app/pages/docs/image-cropper)             | ui      | button                       | 1396 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
-|  57 | [Image Annotator](../apps/showcase/src/app/pages/docs/image-annotator)         | ui      | button                       | 1560 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
-|  58 | [Editor](../apps/showcase/src/app/pages/docs/editor)                           | ui      | field, toggle                | 1673 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
+|  28 | [Navbar Next](../apps/showcase/src/app/pages/docs/navbar-next)                 | ui      | button                       |  384 | —                      |  [ ]   | [x] |  [ ]   | [x] | [ ]  | [ ] | [ ]  |
+|  29 | [Spotlight](../apps/showcase/src/app/pages/docs/spotlight)                     | ui      | button                       |  404 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
+|  30 | [Menu](../apps/showcase/src/app/pages/docs/menu)                               | ui      | context-menu                 |  426 | dropdown-menu, menubar |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
+|  31 | [Time Input](../apps/showcase/src/app/pages/docs/time-input)                   | ui      | field                        |  434 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
+|  32 | [Countdown](../apps/showcase/src/app/pages/docs/countdown)                     | ui      | button                       |  447 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
+|  33 | [Code Block](../apps/showcase/src/app/pages/docs/code-block)                   | ui      | button                       |  461 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
+|  34 | [Tags Input](../apps/showcase/src/app/pages/docs/tags-input)                   | ui      | badge, button, field         |  462 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
+|  35 | [Speed Dial](../apps/showcase/src/app/pages/docs/speed-dial)                   | ui      | button                       |  471 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
+|  36 | [Multiselect](../apps/showcase/src/app/pages/docs/multiselect)                 | ui      | select                       |  484 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
+|  37 | [Tour Guide](../apps/showcase/src/app/pages/docs/tour-guide)                   | ui      | button                       |  489 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
+|  38 | [Autocomplete](../apps/showcase/src/app/pages/docs/autocomplete)               | ui      | button                       |  491 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
+|  39 | [JSON Viewer](../apps/showcase/src/app/pages/docs/json-viewer)                 | ui      | tree                         |  494 | —                      |  [ ]   | [x] |  [ ]   | [x] | [ ]  | [ ] | [ ]  |
+|  40 | [File Upload](../apps/showcase/src/app/pages/docs/file-upload)                 | ui      | button                       |  515 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
+|  41 | [Mention Input](../apps/showcase/src/app/pages/docs/mention-input)             | ui      | field                        |  535 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
+|  42 | [Stepper](../apps/showcase/src/app/pages/docs/stepper)                         | ui      | button                       |  561 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
+|  43 | [Barcode Scanner](../apps/showcase/src/app/pages/docs/barcode-scanner)         | ui      | button                       |  595 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
+|  44 | [Time Clock](../apps/showcase/src/app/pages/docs/time-clock)                   | ui      | button                       |  608 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
+|  45 | [Transfer List](../apps/showcase/src/app/pages/docs/transfer-list)             | ui      | button                       |  659 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
+|  46 | [Pagination](../apps/showcase/src/app/pages/docs/pagination)                   | ui      | button, field                |  682 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
+|  47 | [Combobox](../apps/showcase/src/app/pages/docs/combobox)                       | ui      | button, select               |  719 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
+|  48 | [Color Picker](../apps/showcase/src/app/pages/docs/color-picker)               | ui      | button                       |  789 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
+|  49 | [Lightbox](../apps/showcase/src/app/pages/docs/lightbox)                       | ui      | button                       |  853 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
+|  50 | [Notification Center](../apps/showcase/src/app/pages/docs/notification-center) | ui      | badge, button                |  884 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
+|  51 | [Signature Pad](../apps/showcase/src/app/pages/docs/signature-pad)             | ui      | button, field                |  909 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
+|  52 | [Toast](../apps/showcase/src/app/pages/docs/toast)                             | ui      | button                       | 1009 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
+|  53 | [Questionnaire](../apps/showcase/src/app/pages/docs/questionnaire)             | ui      | button                       | 1086 | yes                    |  [ ]   | [x] |  [ ]   | [x] | [ ]  | [ ] | [ ]  |
+|  54 | [Scheduler](../apps/showcase/src/app/pages/docs/scheduler)                     | ui      | button                       | 1172 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
+|  55 | [Calendar](../apps/showcase/src/app/pages/docs/calendar)                       | ui      | button                       | 1223 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
+|  56 | [Message Scroller](../apps/showcase/src/app/pages/docs/message-scroller)       | ui      | button                       | 1253 | yes                    |  [ ]   | [x] |  [ ]   | [x] | [ ]  | [ ] | [ ]  |
+|  57 | [Image Cropper](../apps/showcase/src/app/pages/docs/image-cropper)             | ui      | button                       | 1396 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
+|  58 | [Image Annotator](../apps/showcase/src/app/pages/docs/image-annotator)         | ui      | button                       | 1560 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
+|  59 | [Editor](../apps/showcase/src/app/pages/docs/editor)                           | ui      | field, toggle                | 1673 | —                      |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
 
 ## Phase 3 — Organisms (16)
 

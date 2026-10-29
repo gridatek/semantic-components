@@ -93,6 +93,7 @@ export * from './trace';
 export * from './json-viewer';
 export * from './native-dialog';
 export * from './navbar';
+export * from './navbar-next';
 export * from './notification-center';
 export * from './org-chart';
 export * from './scheduler';

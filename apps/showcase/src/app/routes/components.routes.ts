@@ -717,6 +717,12 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/tree-table/tree-table-page'),
       },
       {
+        path: 'navbar-next',
+        title: 'Navbar Next - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/navbar-next/navbar-next-page'),
+      },
+      {
         path: 'gantt',
         title: 'Gantt - Semantic Components',
         loadComponent: () => import('../pages/docs/gantt/gantt-page'),

@@ -4220,6 +4220,53 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/navbar-next',
+    children: [
+      {
+        path: 'basic-navbar-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/navbar-next/demos/basic-navbar-next-demo').then(
+            (m) => m.BasicNavbarNextDemo,
+          ),
+      },
+      {
+        path: 'mobile-navbar-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/navbar-next/demos/mobile-navbar-next-demo').then(
+            (m) => m.MobileNavbarNextDemo,
+          ),
+      },
+      {
+        path: 'overlay-navbar-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/navbar-next/demos/overlay-navbar-next-demo').then(
+            (m) => m.OverlayNavbarNextDemo,
+          ),
+      },
+      {
+        path: 'navigation-menu-navbar-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/navbar-next/demos/navigation-menu-navbar-next-demo').then(
+            (m) => m.NavigationMenuNavbarNextDemo,
+          ),
+      },
+      {
+        path: 'sticky-navbar-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/navbar-next/demos/sticky-navbar-next-demo').then(
+            (m) => m.StickyNavbarNextDemo,
+          ),
+      },
+      {
+        path: 'rtl-navbar-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/navbar-next/demos/rtl-navbar-next-demo').then(
+            (m) => m.RtlNavbarNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/gantt',
     children: [
       {
