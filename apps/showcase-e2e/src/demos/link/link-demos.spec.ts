@@ -136,6 +136,8 @@ test('Keyboard: Tab reaches a link, Enter follows it', async ({
 }) => {
   await page.goto(demo('variants'));
   const first = link(page, 'Default');
+  // The static build renders after the load: Tab once it's there.
+  await expect(first).toBeVisible();
   // WebKit, as Safari by default, doesn't tab to links.
   if (browserName === 'webkit') await first.focus();
   else await press(page, 'Tab');

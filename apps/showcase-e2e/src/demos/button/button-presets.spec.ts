@@ -1,30 +1,40 @@
-import { readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import type { ScPreset } from '@semantic-components/presets';
+import { luma } from '@semantic-components/presets/luma';
+import { lyra } from '@semantic-components/presets/lyra';
+import { maia } from '@semantic-components/presets/maia';
+import { mira } from '@semantic-components/presets/mira';
+import { nova } from '@semantic-components/presets/nova';
+import { rhea } from '@semantic-components/presets/rhea';
+import { sera } from '@semantic-components/presets/sera';
+import { vega } from '@semantic-components/presets/vega';
+import { twMerge } from 'tailwind-merge';
 import { expectNoA11yViolations } from '../../axe';
 import { expect, test } from '../../test';
 
-/** The presets, and each one's button base classes, from its source. */
-const PRESETS = [
-  'nova',
-  'vega',
-  'maia',
-  'lyra',
-  'mira',
-  'luma',
-  'sera',
-  'rhea',
-];
-const baseOf = (preset: string) => {
-  const source = readFileSync(
-    resolve(__dirname, `../../../../../libs/presets/${preset}/src/button.ts`),
-    'utf8',
-  );
-  const base = source.match(/cva\(\s*(["'`])([\s\S]*?)\1/)?.[2] ?? '';
-  return base.split(/\s+/).filter(Boolean);
+/** Every preset, as the showcase's preset sheet lists them. */
+const PRESETS: Record<string, ScPreset> = {
+  nova,
+  vega,
+  maia,
+  lyra,
+  mira,
+  luma,
+  sera,
+  rhea,
 };
 
+/**
+ * The classes a default button gets in a preset: its base, variant and size,
+ * merged as `scButton` merges them (`cn`: a size's icon size wins over the
+ * base's, so the base's isn't there).
+ */
+const classesOf = ({ button }: ScPreset) =>
+  twMerge(button({ variant: 'default', size: 'default' }))
+    .split(/\s+/)
+    .filter(Boolean);
+
 test.describe('Button in every preset', () => {
-  for (const preset of PRESETS)
+  for (const [preset, styles] of Object.entries(PRESETS))
     test(`${preset}: the button has its preset's classes; no axe violation, light and dark`, async ({
       page,
       context,
@@ -39,7 +49,7 @@ test.describe('Button in every preset', () => {
         .getByRole('button', { name: 'Button' })
         .getAttribute('class');
       const have = new Set((classes ?? '').split(/\s+/));
-      const missing = baseOf(preset).filter((c) => !have.has(c));
+      const missing = classesOf(styles).filter((c) => !have.has(c));
       expect(missing, `${preset} classes missing`).toEqual([]);
 
       await page.goto('/docs/components/button');

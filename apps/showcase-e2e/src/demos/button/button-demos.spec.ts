@@ -256,6 +256,17 @@ test('Submit: a button doesn’t submit the form, a submit button does', async (
 });
 
 test.describe('States', () => {
+  /**
+   * Opens a demo with its transitions off: a look read mid-transition
+   * (the buttons have transition-all) changes from one read to the next.
+   */
+  const open = async (page: Page, name: string) => {
+    await page.goto(demo(name));
+    await page.addStyleTag({
+      content: '*, *::before, *::after { transition: none !important; }',
+    });
+  };
+
   /** The look a style property has, now. */
   const look = (page: Page, name: string, property: string) =>
     button(page, name).evaluate(
@@ -272,7 +283,7 @@ test.describe('States', () => {
       ['destructive', 'Destructive', 'background-color'],
       ['link', 'Link', 'text-decoration-line'],
     ] as const) {
-      await page.goto(demo(name));
+      await open(page, name);
       await page.mouse.move(0, 0);
       const before = await look(page, label, property);
       await button(page, label).hover();
@@ -283,7 +294,7 @@ test.describe('States', () => {
   });
 
   test('pressed: it moves down a pixel', async ({ page }) => {
-    await page.goto(demo('default'));
+    await open(page, 'default');
     const target = button(page, 'Button');
     const box = (await target.boundingBox())!;
     await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
@@ -294,7 +305,9 @@ test.describe('States', () => {
 
   test('focus: a ring, red on Destructive', async ({ page }) => {
     const ring = async (name: string, label: string) => {
-      await page.goto(demo(name));
+      await open(page, name);
+      // The static build renders after the load: Tab once it's there.
+      await expect(button(page, label)).toBeVisible();
       await press(page, 'Tab');
       await expect(button(page, label)).toBeFocused();
       await expect.poll(() => look(page, label, 'box-shadow')).not.toBe('none');
@@ -312,7 +325,7 @@ test.describe('States', () => {
       ['outline', 'Outline'],
       ['ghost', 'Ghost'],
     ] as const) {
-      await page.goto(demo(name));
+      await open(page, name);
       await page.mouse.move(0, 0);
       const closed = await look(page, label, 'background-color');
       // As a menu's trigger would set it.
@@ -324,7 +337,7 @@ test.describe('States', () => {
         .not.toBe(closed);
     }
     // Secondary keeps its own background, open or not.
-    await page.goto(demo('secondary'));
+    await open(page, 'secondary');
     await page.mouse.move(0, 0);
     const rest = await look(page, 'Secondary', 'background-color');
     await button(page, 'Secondary').evaluate((el) =>
@@ -334,7 +347,7 @@ test.describe('States', () => {
   });
 
   test('invalid (aria-invalid): a red border and ring', async ({ page }) => {
-    await page.goto(demo('outline'));
+    await open(page, 'outline');
     const valid = await look(page, 'Outline', 'border-top-color');
     await button(page, 'Outline').evaluate((el) =>
       el.setAttribute('aria-invalid', 'true'),
