@@ -1,6 +1,6 @@
 # Button
 
-Displays a button or a component that looks like a button.
+A native button for an action: submit, open, delete. Six variants and eight sizes, in the look of the app's preset, with room for icons and a spinner. In a form it submits only when told to; to go somewhere, use a Link.
 
 ## Usage
 

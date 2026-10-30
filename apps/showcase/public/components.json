@@ -130,7 +130,7 @@
   {
     "name": "Button",
     "path": "button",
-    "description": "A clickable button with multiple variants.",
+    "description": "A native button for an action: six variants, eight sizes from the app's preset, icons and a spinner; it submits a form only when told to.",
     "status": "Experimental",
     "library": "ui",
     "category": "Buttons & Actions"

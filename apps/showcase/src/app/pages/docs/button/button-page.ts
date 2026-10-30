@@ -67,7 +67,10 @@ import { WithIconButtonDemoContainer } from './demos/with-icon-button-demo-conta
       <div class="space-y-2">
         <h1 scHeading>Button</h1>
         <p class="text-muted-foreground">
-          Displays a button or a component that looks like a button.
+          A native button for an action: submit, open, delete. Six variants and
+          eight sizes, in the look of the app&apos;s preset, with room for icons
+          and a spinner. In a form it submits only when told to; to go
+          somewhere, use a Link.
         </p>
         <app-component-badges path="button" />
       </div>
