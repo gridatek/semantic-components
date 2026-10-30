@@ -34,7 +34,7 @@ In Semantic Components, it's scTooltipTrigger:
 <button scTooltipTrigger="Save changes">Save</button>
 ```
 
-`scTooltipTrigger` — because `ScTooltip` is already the component that _renders_ the actual tooltip bubble. The directive on the button is not the tooltip — it's what triggers it. These are two different things, and the names reflect that. `ScDrawerTrigger`, `ScSelectTrigger`, `ScSidebarBody` — you know exactly what each piece does before reading a single line of docs.
+`scTooltipTrigger` — because `ScTooltip` is already the component that _renders_ the actual tooltip bubble. The directive on the button is not the tooltip — it's what triggers it. These are two different things, and the names reflect that. `ScDrawerTrigger`, `ScSelectTrigger`, `ScSidebarContent` — you know exactly what each piece does before reading a single line of docs.
 
 This principle extends to the **HTML elements themselves**. When possible, components/directives are applied to the right native element rather than a generic `<div>`.
 
@@ -239,13 +239,11 @@ The `@import` brings in the CDK overlay styles and the shadcn-compatible CSS var
 Then import what you need directly in your standalone component:
 
 ```typescript
-import { ScButton, ScDialog, ScDialogBody, ScDialogTitle } from '@semantic-components/ui';
+import { ScButton, ScDialog, ScDialogHeader, ScDialogTitle } from '@semantic-components/ui';
 
 @Component({
-  imports: [ScButton, ScDialog, ScDialogBody, ScDialogTitle],
-  template: `
-    <button scButton>Open Dialog</button>
-  `,
+  imports: [ScButton, ScDialog, ScDialogHeader, ScDialogTitle],
+  template: ` <button scButton>Open Dialog</button> `,
 })
 export class MyComponent {}
 ```
