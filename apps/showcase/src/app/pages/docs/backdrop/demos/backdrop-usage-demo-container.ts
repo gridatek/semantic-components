@@ -8,12 +8,14 @@ import {
   ScCodeBlockTitle,
 } from '@semantic-components/ui/code-block';
 import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
+import { DevOnly } from '../../../../components/dev-only/dev-only';
 import { ConfigService } from '../../../../services/config-service';
 import { BackdropUsageDemo } from './backdrop-usage-demo';
 
 @Component({
   selector: 'app-backdrop-usage-demo-container',
   imports: [
+    DevOnly,
     ScCodeBlock,
     ScCodeBlockHeader,
     ScCodeBlockTitle,
@@ -43,7 +45,9 @@ import { BackdropUsageDemo } from './backdrop-usage-demo';
     </div>
 
     @if (devMode()) {
-      <app-backdrop-usage-demo />
+      <app-dev-only>
+        <app-backdrop-usage-demo />
+      </app-dev-only>
     }
   `,
   host: { class: 'block w-full space-y-4' },

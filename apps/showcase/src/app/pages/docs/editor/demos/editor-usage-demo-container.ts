@@ -8,12 +8,14 @@ import {
   ScCodeBlockTitle,
 } from '@semantic-components/ui/code-block';
 import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
+import { DevOnly } from '../../../../components/dev-only/dev-only';
 import { ConfigService } from '../../../../services/config-service';
 import { EditorUsageDemo } from './editor-usage-demo';
 
 @Component({
   selector: 'app-editor-usage-demo-container',
   imports: [
+    DevOnly,
     ScCodeBlock,
     ScCodeBlockHeader,
     ScCodeBlockTitle,
@@ -43,7 +45,9 @@ import { EditorUsageDemo } from './editor-usage-demo';
     </div>
 
     @if (devMode()) {
-      <app-editor-usage-demo />
+      <app-dev-only>
+        <app-editor-usage-demo />
+      </app-dev-only>
     }
   `,
   host: { class: 'block w-full space-y-4' },

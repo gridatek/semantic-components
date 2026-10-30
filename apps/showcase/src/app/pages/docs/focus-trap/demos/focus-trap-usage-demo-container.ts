@@ -8,12 +8,14 @@ import {
   ScCodeBlockTitle,
 } from '@semantic-components/ui/code-block';
 import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
+import { DevOnly } from '../../../../components/dev-only/dev-only';
 import { ConfigService } from '../../../../services/config-service';
 import { FocusTrapUsageDemo } from './focus-trap-usage-demo';
 
 @Component({
   selector: 'app-focus-trap-usage-demo-container',
   imports: [
+    DevOnly,
     ScCodeBlock,
     ScCodeBlockHeader,
     ScCodeBlockTitle,
@@ -43,7 +45,9 @@ import { FocusTrapUsageDemo } from './focus-trap-usage-demo';
     </div>
 
     @if (devMode()) {
-      <app-focus-trap-usage-demo />
+      <app-dev-only>
+        <app-focus-trap-usage-demo />
+      </app-dev-only>
     }
   `,
   host: { class: 'block w-full space-y-4' },
