@@ -213,6 +213,11 @@ const roadmapPath = at('docs/roadmap.md');
 let roadmap = readFileSync(roadmapPath, 'utf8');
 const ticks = new Map();
 /**
+ * CI, by component: `waiting` while its changes haven't been through a GitHub
+ * Actions run; set and cleared by hand, kept here.
+ */
+const ci = new Map();
+/**
  * The rows as they stand: the order is the user's work order, set by hand in
  * the document — never changed here.
  */
@@ -232,6 +237,12 @@ for (const line of roadmap.split('\n')) {
   // A table from before the MCP column: MCP not ticked.
   if (boxes.length === 7) boxes.push(false);
   ticks.set(path, boxes);
+  const last = line
+    .split('|')
+    .map((cell) => cell.trim())
+    .filter(Boolean)
+    .at(-1);
+  if (last === 'waiting') ci.set(path, last);
   if (!listed.includes(path)) listed.push(path);
 }
 
@@ -244,8 +255,8 @@ const placeOf = (path) => {
 /** A list's table; `shadcn`: with the shadcn counterpart's name (List 1). */
 const table = (list, shadcn) =>
   [
-    `| # | Component | Library | Built on | Parts |${shadcn ? ' shadcn |' : ''} Styles | E2E | Mobile | RTL | Dark | SSR | Docs | MCP |`,
-    `| -: | --- | --- | --- | -: |${shadcn ? ' --- |' : ''} :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |`,
+    `| # | Component | Library | Built on | Parts |${shadcn ? ' shadcn |' : ''} Styles | E2E | Mobile | RTL | Dark | SSR | Docs | MCP | CI |`,
+    `| -: | --- | --- | --- | -: |${shadcn ? ' --- |' : ''} :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |`,
     ...list
       // The user's order, as the document has it: kept. A component not yet
       // listed goes at the end (new ones among themselves by name).
@@ -267,7 +278,7 @@ const table = (list, shadcn) =>
           false,
           false,
         ];
-        return `| ${i + 1} | [${row.name}](../apps/showcase/src/app/pages/docs/${row.path}) | ${row.lib} | ${row.deps.length ? row.deps.join(', ') : '—'} | ${row.parts} |${shadcn ? ` ${row.shadcn} |` : ''} ${set.map(box).join(' | ')} |`;
+        return `| ${i + 1} | [${row.name}](../apps/showcase/src/app/pages/docs/${row.path}) | ${row.lib} | ${row.deps.length ? row.deps.join(', ') : '—'} | ${row.parts} |${shadcn ? ` ${row.shadcn} |` : ''} ${set.map(box).join(' | ')} | ${ci.get(row.path) ?? '—'} |`;
       }),
   ].join('\n');
 

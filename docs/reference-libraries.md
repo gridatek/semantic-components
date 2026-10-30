@@ -97,6 +97,19 @@ A native text field (`input[scInput]`). A shadcn component: Base UI and shadcn's
 - **Each preset's look**, from its own `input.tsx`; the parts that look like an input share it.
 - **Not Base UI's state attributes**: Signal Forms holds that state (`touched`, `dirty`, `invalid`), and `aria-invalid` / `disabled` are what the styles read.
 
+## Input Group
+
+An input or a textarea with addons in one box (`div[scInputGroup]`). A shadcn component: Base UI has none; shadcn's reference app (2026-10-30).
+
+| Library                                                                 | What to read                                                                                                                                                                                                                              |
+| ----------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| shadcn Input Group (`shadcn-reference/presets/*/input-group.tsx`, docs) | Six parts (group, addon, button, text, input, textarea); a click on an addon focuses the input; addons after the input for focus order, `align` to place them; a custom control joins with `data-slot="input-group-control"`; eight looks |
+
+**Taken:**
+
+- **The parts and behaviour**, with a button part of our own selector (`button[scInputGroupButton]`) on the preset's button.
+- **Not the input and textarea parts**: the group shapes `scInput` / `scTextarea` itself, so there is one input, not two.
+
 ## Control Group
 
 An input or a select joined with its buttons (`div[scControlGroup]`): shadcn's Button Group, renamed for what it is for (the user, 2026-10-30: it is only useful when inputs or selects mix with buttons; buttons alone are on the Button page). A shadcn component, so no web research: Base UI and shadcn's reference app (2026-10-30).

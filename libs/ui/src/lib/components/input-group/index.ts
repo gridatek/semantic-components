@@ -1,8 +1,4 @@
-export { ScInputGroup, inputGroupStyles } from './input-group';
+export { ScInputGroup } from './input-group';
 export { ScInputGroupAddon } from './input-group-addon';
-export {
-  inputGroupButtonVariants,
-  type ScInputGroupButtonVariants,
-} from './input-group-button';
-export { ScInputGroupSeparator } from './input-group-separator';
+export { ScInputGroupButton } from './input-group-button';
 export { ScInputGroupText } from './input-group-text';

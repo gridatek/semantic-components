@@ -12,7 +12,6 @@ import {
 import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 import { SC_FIELD } from '../field';
-import { inputInGroupStyles } from '../input';
 import { SC_NUMBER_FIELD } from './number-field';
 import { isNumberCharacter } from './number-field-format';
 
@@ -89,12 +88,7 @@ export class ScNumberFieldInput {
   );
 
   protected readonly class = computed(() =>
-    cn(
-      this.inputStyles,
-      inputInGroupStyles,
-      'text-center tabular-nums',
-      this.classInput(),
-    ),
+    cn(this.inputStyles, 'text-center tabular-nums', this.classInput()),
   );
 
   constructor() {

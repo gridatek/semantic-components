@@ -1,6 +1,8 @@
 import { Directive, computed, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 
+/** Text (and its icons) in a group's addon, in the preset's look. */
 @Directive({
   selector: 'span[scInputGroupText]',
   host: {
@@ -8,12 +10,9 @@ import { cn } from '../../utils';
   },
 })
 export class ScInputGroupText {
+  private readonly styles = injectPreset().inputGroupText;
+
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
-    cn(
-      "text-muted-foreground gap-2 text-sm [&_svg:not([class*='size-'])]:size-4 flex items-center [&_svg]:pointer-events-none",
-      this.classInput(),
-    ),
-  );
+  protected readonly class = computed(() => cn(this.styles, this.classInput()));
 }

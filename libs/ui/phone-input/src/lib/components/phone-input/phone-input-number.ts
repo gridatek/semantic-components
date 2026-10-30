@@ -7,12 +7,7 @@ import {
   inject,
   input,
 } from '@angular/core';
-import {
-  SC_FIELD,
-  cn,
-  injectPreset,
-  inputInGroupStyles,
-} from '@semantic-components/ui';
+import { SC_FIELD, cn, injectPreset } from '@semantic-components/ui';
 import { PHONE_SEPARATOR } from './phone-input-text';
 import { SC_PHONE_INPUT } from './phone-input-types';
 
@@ -74,7 +69,7 @@ export class ScPhoneInputNumber {
   );
 
   protected readonly class = computed(() =>
-    cn(this.inputStyles, inputInGroupStyles, this.classInput()),
+    cn(this.inputStyles, this.classInput()),
   );
 
   constructor() {

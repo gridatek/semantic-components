@@ -1,5 +1,5 @@
 import { collectErrors, press } from '../../interaction';
-import { computed, openStill } from '../../looks';
+import { box, computed, openStill } from '../../looks';
 import { expectNoHorizontalScroll, expectTargetSize } from '../../mobile';
 import { expectRtl } from '../../rtl';
 import { expect, test } from '../../test';
@@ -116,8 +116,14 @@ test('Inline: the input and its button on one line', async ({ page }) => {
   await page.goto(demo('inline'));
   const input = page.getByRole('searchbox', { name: 'Search' });
   const button = page.getByRole('button', { name: 'Search' });
-  const [a, b] = [await input.boundingBox(), await button.boundingBox()];
-  expect(Math.abs((a?.y ?? 0) - (b?.y ?? 1))).toBeLessThan(1);
+  // Their middles level — read until the layout settles (fonts, the preset).
+  const middle = async (target: typeof input) => {
+    const found = await box(target);
+    return found.y + found.height / 2;
+  };
+  await expect
+    .poll(async () => Math.abs((await middle(input)) - (await middle(button))))
+    .toBeLessThan(1);
 });
 
 test('Grid: two fields side by side', async ({ page }) => {

@@ -12,15 +12,6 @@ import { ɵwarnIfUnnamed } from '../../utils/accessible-name/accessible-name';
 import { SC_FIELD } from '../field';
 
 /**
- * An input inside an input group (`div[scInputGroup]`): the group draws the
- * border, the ring and the corners, so the input drops its own. The same in
- * every preset; also for the parts that look like an input (password, date,
- * phone…).
- */
-export const inputInGroupStyles =
-  'in-data-[slot=input-group]:flex-1 in-data-[slot=input-group]:rounded-none in-data-[slot=input-group]:border-0 in-data-[slot=input-group]:shadow-none in-data-[slot=input-group]:ring-0 in-data-[slot=input-group]:h-full in-data-[slot=input-group]:focus-visible:ring-0 in-data-[slot=input-group]:focus-visible:border-transparent in-data-[slot=input-group]:aria-invalid:ring-0 in-data-[slot=input-group]:bg-transparent in-data-[slot=input-group]:disabled:bg-transparent in-data-[slot=input-group]:dark:bg-transparent in-data-[slot=input-group]:dark:disabled:bg-transparent';
-
-/**
  * A native text field in the app's preset: its classes are the preset's
  * (`injectPreset().input`). In a field (`div[scField]`) it takes the field's
  * id and description; with Signal Forms (`[formField]`) it is invalid once
@@ -70,9 +61,7 @@ export class ScInput {
     () => (this.touched() && this.invalid()) || null,
   );
 
-  protected readonly class = computed(() =>
-    cn(this.styles, inputInGroupStyles, this.classInput()),
-  );
+  protected readonly class = computed(() => cn(this.styles, this.classInput()));
 
   constructor() {
     ɵwarnIfUnnamed('scInput');

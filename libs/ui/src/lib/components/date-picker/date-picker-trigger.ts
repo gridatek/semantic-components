@@ -1,13 +1,10 @@
 import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { Directive, computed, inject, input } from '@angular/core';
+import type { ScInputGroupButtonSize } from '@semantic-components/presets';
 import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 import { type ScButtonVariants } from '../button';
-import {
-  ScInputGroup,
-  type ScInputGroupButtonVariants,
-  inputGroupButtonVariants,
-} from '../input-group';
+import { ScInputGroup } from '../input-group';
 import { ScPopoverProvider } from '../popover';
 import { selectTriggerStyles } from '../select/select-trigger';
 import { ScDatePicker } from './date-picker';
@@ -38,6 +35,7 @@ import { ScDatePicker } from './date-picker';
 })
 export class ScDatePickerTrigger {
   private readonly buttonStyles = injectPreset().button;
+  private readonly groupButtonStyles = injectPreset().inputGroupButton;
 
   protected readonly popover = inject(ScPopoverProvider);
   protected readonly picker = inject(ScDatePicker);
@@ -49,13 +47,13 @@ export class ScDatePickerTrigger {
   readonly size = input<'default' | 'sm'>('default');
   /** In an input group: the icon button's look. */
   readonly variant = input<ScButtonVariants['variant']>('ghost');
-  readonly buttonSize = input<ScInputGroupButtonVariants['size']>('icon-xs');
+  readonly buttonSize = input<ScInputGroupButtonSize>('icon-xs');
 
   protected readonly class = computed(() =>
     this.group
       ? cn(
           this.buttonStyles({ variant: this.variant() }),
-          inputGroupButtonVariants({ size: this.buttonSize() }),
+          this.groupButtonStyles({ size: this.buttonSize() }),
           this.classInput(),
         )
       : cn(

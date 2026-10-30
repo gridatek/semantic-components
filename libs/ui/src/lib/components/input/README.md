@@ -59,7 +59,7 @@ Its classes are the preset's (`injectPreset().input`, from `provideScConfig({ pr
 | `disabled`         | `boolean` | `false`                 | Without a form. With `[formField]`, declare `disabled()` in the schema |
 | `class`            | `string`  | `''`                    | Classes merged over the preset (`cn`: a later class wins)              |
 
-`data-slot="control"`: read by the input group and the control group (focus, invalid, border). In an input group (`div[scInputGroup]`) the group draws the border, the ring and the corners: the input drops its own (`inputInGroupStyles`, also used by the parts that look like an input — password, date, number, phone).
+`data-slot="control"`: read by the input group and the control group (focus, invalid, border). In an input group (`div[scInputGroup]`) the group gives it the look of being inside — no border, ring or corners of its own — as it does for every control in it.
 
 ## Examples
 

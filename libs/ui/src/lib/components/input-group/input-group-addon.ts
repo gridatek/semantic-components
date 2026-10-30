@@ -1,45 +1,37 @@
-import { Directive, computed, input } from '@angular/core';
-import { type VariantProps, cva } from 'class-variance-authority';
+import { Directive, ElementRef, computed, inject, input } from '@angular/core';
+import type { ScInputGroupAddonAlign } from '@semantic-components/presets';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 
-const inputGroupAddonVariants = cva(
-  "flex h-auto cursor-text items-center justify-center gap-2 py-1.5 text-sm font-medium text-muted-foreground select-none group-data-[disabled=true]/input-group:opacity-50 [&>kbd]:rounded-[calc(var(--radius)-5px)] [&>svg:not([class*='size-'])]:size-4",
-  {
-    variants: {
-      align: {
-        'inline-start':
-          'order-first ps-2 has-[>button]:ms-[-0.3rem] has-[>kbd]:ms-[-0.15rem]',
-        'inline-end':
-          'order-last pe-2 has-[>button]:me-[-0.3rem] has-[>kbd]:me-[-0.15rem]',
-        'block-start':
-          'px-2.5 pt-2 group-has-[>input]/input-group:pt-2 [.border-b]:pb-2 order-first w-full justify-start',
-        'block-end':
-          'px-2.5 pb-2 group-has-[>input]/input-group:pb-2 [.border-t]:pt-2 order-last w-full justify-start',
-      },
-    },
-    defaultVariants: {
-      align: 'inline-start',
-    },
-  },
-);
-
-export type ScInputGroupAddonVariants = VariantProps<
-  typeof inputGroupAddonVariants
->;
-
+/**
+ * Icons, text or buttons beside a group's control, placed by `align`. Write it
+ * after the control: Tab reaches the control first; `align` sets where it
+ * shows. A click on it (not on its buttons) focuses the control.
+ */
 @Directive({
   selector: 'div[scInputGroupAddon]',
   host: {
     role: 'group',
     '[attr.data-align]': 'align()',
     '[class]': 'class()',
+    '(click)': 'focusControl($event)',
   },
 })
 export class ScInputGroupAddon {
+  private readonly styles = injectPreset().inputGroupAddon;
+  private readonly element = inject<ElementRef<HTMLElement>>(ElementRef);
+
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly align = input<ScInputGroupAddonVariants['align']>('inline-start');
+  readonly align = input<ScInputGroupAddonAlign>('inline-start');
 
   protected readonly class = computed(() =>
-    cn(inputGroupAddonVariants({ align: this.align() }), this.classInput()),
+    cn(this.styles({ align: this.align() }), this.classInput()),
   );
+
+  protected focusControl(event: MouseEvent): void {
+    if ((event.target as HTMLElement).closest('button, a, [tabindex]')) return;
+    this.element.nativeElement.parentElement
+      ?.querySelector<HTMLElement>('[data-slot=control]')
+      ?.focus();
+  }
 }

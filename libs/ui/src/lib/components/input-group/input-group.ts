@@ -1,25 +1,26 @@
 import { Directive, computed, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 
-/** The group's styles, shared with groups built on other parts (e.g. a phone input). */
-export const inputGroupStyles = cn(
-  'group/input-group relative flex h-8 w-full min-w-0 items-center rounded-lg border border-input in-data-[slot=input-group]:border-none transition-colors outline-none in-data-[slot=combobox-content]:has-[[data-slot=control]:focus-visible]:border-inherit in-data-[slot=combobox-content]:has-[[data-slot=control]:focus-visible]:ring-0 has-disabled:bg-input/50 has-disabled:opacity-50 has-[[data-slot=control]:focus-visible]:border-ring has-[[data-slot=control]:focus-visible]:ring-3 has-[[data-slot=control]:focus-visible]:ring-ring/50 has-[[data-slot][aria-invalid=true]]:border-destructive has-[[data-slot][aria-invalid=true]]:ring-3 has-[[data-slot][aria-invalid=true]]:ring-destructive/20 has-[>[data-align=block-end]]:h-auto has-[>[data-align=block-end]]:flex-col has-[>[data-align=block-start]]:h-auto has-[>[data-align=block-start]]:flex-col has-[>textarea]:h-auto dark:bg-input/30 dark:has-disabled:bg-input/80 dark:has-[[data-slot][aria-invalid=true]]:ring-destructive/40 has-[>[data-align=block-end]]:[&>input]:pt-3 has-[>[data-align=block-start]]:[&>input]:pb-3 has-[>[data-align=inline-end]]:[&>input]:pe-1.5 has-[>[data-align=inline-start]]:[&>input]:ps-1.5',
-  // A select/multiselect/combobox trigger embedded in the group rings it too.
-  'has-[[data-slot=segmented-date-input-segment]:focus-visible]:border-ring has-[[data-slot=segmented-date-input-segment]:focus-visible]:ring-3 has-[[data-slot=segmented-date-input-segment]:focus-visible]:ring-ring/50 has-[[data-slot=time-input-segment]:focus-visible]:border-ring has-[[data-slot=time-input-segment]:focus-visible]:ring-3 has-[[data-slot=time-input-segment]:focus-visible]:ring-ring/50 has-[[data-slot=select-trigger]:focus-visible]:border-ring has-[[data-slot=select-trigger]:focus-visible]:ring-3 has-[[data-slot=select-trigger]:focus-visible]:ring-ring/50 has-[[data-slot=multiselect-trigger]:focus-visible]:border-ring has-[[data-slot=multiselect-trigger]:focus-visible]:ring-3 has-[[data-slot=multiselect-trigger]:focus-visible]:ring-ring/50 has-[[data-slot=combobox-trigger]:focus-visible]:border-ring has-[[data-slot=combobox-trigger]:focus-visible]:ring-3 has-[[data-slot=combobox-trigger]:focus-visible]:ring-ring/50',
-);
-
+/**
+ * An input or a textarea with addons — icons, text, buttons — in one box: the
+ * group draws the border, the ring and the corners, and gives its control
+ * (`[data-slot=control]`: `scInput`, `scTextarea`, or a control of yours) the
+ * look of being inside. Its classes are the preset's.
+ */
 @Directive({
   selector: 'div[scInputGroup]',
   host: {
+    // Read by a control group around it, and by the parts that join it.
     'data-slot': 'input-group',
     role: 'group',
     '[class]': 'class()',
   },
 })
 export class ScInputGroup {
+  private readonly styles = injectPreset().inputGroup;
+
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
-    cn(inputGroupStyles, this.classInput()),
-  );
+  protected readonly class = computed(() => cn(this.styles, this.classInput()));
 }

@@ -1,13 +1,10 @@
 import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { Directive, computed, inject, input } from '@angular/core';
+import type { ScInputGroupButtonSize } from '@semantic-components/presets';
 import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 import { type ScButtonVariants } from '../button';
-import {
-  ScInputGroup,
-  type ScInputGroupButtonVariants,
-  inputGroupButtonVariants,
-} from '../input-group';
+import { ScInputGroup } from '../input-group';
 import { ScPopoverProvider } from '../popover';
 import { ScTimePicker } from './time-picker';
 
@@ -31,6 +28,7 @@ import { ScTimePicker } from './time-picker';
 })
 export class ScTimePickerTrigger {
   private readonly buttonStyles = injectPreset().button;
+  private readonly groupButtonStyles = injectPreset().inputGroupButton;
 
   protected readonly popover = inject(ScPopoverProvider);
   protected readonly picker = inject(ScTimePicker);
@@ -41,13 +39,13 @@ export class ScTimePickerTrigger {
   /** The button's look: ghost in an input group, outline alone. */
   readonly variant = input<ScButtonVariants['variant'] | undefined>(undefined);
   /** In an input group: its size there. */
-  readonly buttonSize = input<ScInputGroupButtonVariants['size']>('icon-xs');
+  readonly buttonSize = input<ScInputGroupButtonSize>('icon-xs');
 
   protected readonly class = computed(() =>
     this.group
       ? cn(
           this.buttonStyles({ variant: this.variant() ?? 'ghost' }),
-          inputGroupButtonVariants({ size: this.buttonSize() }),
+          this.groupButtonStyles({ size: this.buttonSize() }),
           this.classInput(),
         )
       : cn(

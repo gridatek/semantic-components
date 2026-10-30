@@ -24,32 +24,68 @@ import {
   ScInputGroup,
   ScInputGroupAddon,
   ScInputGroupText,
+  ScTextarea,
 } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-text-input-group-demo',
-  imports: [ScInputGroup, ScInputGroupAddon, ScInput, ScInputGroupText],
+  imports: [
+    ScInput,
+    ScInputGroup,
+    ScInputGroupAddon,
+    ScInputGroupText,
+    ScTextarea,
+  ],
   template: \`
-    <div class="flex w-full max-w-sm flex-col gap-4">
+    <div class="grid w-full max-w-sm gap-6">
       <div scInputGroup>
+        <input
+          scInput
+          placeholder="0.00"
+          aria-label="Amount"
+          inputmode="decimal"
+        />
         <div scInputGroupAddon>
           <span scInputGroupText>$</span>
         </div>
-        <input scInput placeholder="Amount" />
         <div scInputGroupAddon align="inline-end">
           <span scInputGroupText>USD</span>
         </div>
       </div>
       <div scInputGroup>
+        <input
+          scInput
+          placeholder="example.com"
+          aria-label="Website"
+          class="ps-0.5!"
+        />
         <div scInputGroupAddon>
           <span scInputGroupText>https://</span>
         </div>
-        <input scInput placeholder="example.com" />
+        <div scInputGroupAddon align="inline-end">
+          <span scInputGroupText>.com</span>
+        </div>
       </div>
       <div scInputGroup>
-        <input scInput placeholder="Email" />
+        <input
+          scInput
+          placeholder="Enter your username"
+          aria-label="Username"
+        />
         <div scInputGroupAddon align="inline-end">
           <span scInputGroupText>&#64;company.com</span>
+        </div>
+      </div>
+      <div scInputGroup>
+        <textarea
+          scTextarea
+          placeholder="Enter your message"
+          aria-label="Message"
+        ></textarea>
+        <div scInputGroupAddon align="block-end">
+          <span scInputGroupText class="text-muted-foreground text-xs">
+            120 characters left
+          </span>
         </div>
       </div>
     </div>

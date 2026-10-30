@@ -2075,52 +2075,17 @@ export const demosRoutes: Route[] = [
     path: 'demos/input-group',
     children: [
       {
-        path: 'basic-input-group-demo',
+        path: 'input-group-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/input-group/demos/basic-input-group-demo').then(
-            (m) => m.BasicInputGroupDemo,
+          import('../pages/docs/input-group/demos/input-group-usage-demo').then(
+            (m) => m.InputGroupUsageDemo,
           ),
       },
       {
-        path: 'button-input-group-demo',
+        path: 'inline-start-input-group-demo',
         loadComponent: () =>
-          import('../pages/docs/input-group/demos/button-input-group-demo').then(
-            (m) => m.ButtonInputGroupDemo,
-          ),
-      },
-      {
-        path: 'text-input-group-demo',
-        loadComponent: () =>
-          import('../pages/docs/input-group/demos/text-input-group-demo').then(
-            (m) => m.TextInputGroupDemo,
-          ),
-      },
-      {
-        path: 'kbd-input-group-demo',
-        loadComponent: () =>
-          import('../pages/docs/input-group/demos/kbd-input-group-demo').then(
-            (m) => m.KbdInputGroupDemo,
-          ),
-      },
-      {
-        path: 'spinner-input-group-demo',
-        loadComponent: () =>
-          import('../pages/docs/input-group/demos/spinner-input-group-demo').then(
-            (m) => m.SpinnerInputGroupDemo,
-          ),
-      },
-      {
-        path: 'textarea-input-group-demo',
-        loadComponent: () =>
-          import('../pages/docs/input-group/demos/textarea-input-group-demo').then(
-            (m) => m.TextareaInputGroupDemo,
-          ),
-      },
-      {
-        path: 'icon-input-group-demo',
-        loadComponent: () =>
-          import('../pages/docs/input-group/demos/icon-input-group-demo').then(
-            (m) => m.IconInputGroupDemo,
+          import('../pages/docs/input-group/demos/inline-start-input-group-demo').then(
+            (m) => m.InlineStartInputGroupDemo,
           ),
       },
       {
@@ -2145,6 +2110,34 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
+        path: 'icon-input-group-demo',
+        loadComponent: () =>
+          import('../pages/docs/input-group/demos/icon-input-group-demo').then(
+            (m) => m.IconInputGroupDemo,
+          ),
+      },
+      {
+        path: 'text-input-group-demo',
+        loadComponent: () =>
+          import('../pages/docs/input-group/demos/text-input-group-demo').then(
+            (m) => m.TextInputGroupDemo,
+          ),
+      },
+      {
+        path: 'button-input-group-demo',
+        loadComponent: () =>
+          import('../pages/docs/input-group/demos/button-input-group-demo').then(
+            (m) => m.ButtonInputGroupDemo,
+          ),
+      },
+      {
+        path: 'kbd-input-group-demo',
+        loadComponent: () =>
+          import('../pages/docs/input-group/demos/kbd-input-group-demo').then(
+            (m) => m.KbdInputGroupDemo,
+          ),
+      },
+      {
         path: 'dropdown-input-group-demo',
         loadComponent: () =>
           import('../pages/docs/input-group/demos/dropdown-input-group-demo').then(
@@ -2152,10 +2145,31 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'label-input-group-demo',
+        path: 'spinner-input-group-demo',
         loadComponent: () =>
-          import('../pages/docs/input-group/demos/label-input-group-demo').then(
-            (m) => m.LabelInputGroupDemo,
+          import('../pages/docs/input-group/demos/spinner-input-group-demo').then(
+            (m) => m.SpinnerInputGroupDemo,
+          ),
+      },
+      {
+        path: 'textarea-input-group-demo',
+        loadComponent: () =>
+          import('../pages/docs/input-group/demos/textarea-input-group-demo').then(
+            (m) => m.TextareaInputGroupDemo,
+          ),
+      },
+      {
+        path: 'custom-input-group-demo',
+        loadComponent: () =>
+          import('../pages/docs/input-group/demos/custom-input-group-demo').then(
+            (m) => m.CustomInputGroupDemo,
+          ),
+      },
+      {
+        path: 'rtl-input-group-demo',
+        loadComponent: () =>
+          import('../pages/docs/input-group/demos/rtl-input-group-demo').then(
+            (m) => m.RtlInputGroupDemo,
           ),
       },
     ],

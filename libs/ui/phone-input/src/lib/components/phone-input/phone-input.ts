@@ -14,7 +14,7 @@ import {
   untracked,
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
-import { cn, inputGroupStyles } from '@semantic-components/ui';
+import { cn, injectPreset } from '@semantic-components/ui';
 import {
   AsYouType,
   getCountryCallingCode,
@@ -45,6 +45,7 @@ import { SC_PHONE_INPUT, type ScPhoneCountryCode } from './phone-input-types';
   },
 })
 export class ScPhoneInput implements FormValueControl<string>, OnInit {
+  private readonly groupStyles = injectPreset().inputGroup;
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -84,7 +85,7 @@ export class ScPhoneInput implements FormValueControl<string>, OnInit {
 
   protected readonly class = computed(() =>
     cn(
-      inputGroupStyles,
+      this.groupStyles,
       // The country trigger sits flush in the group, with a divider.
       '[&_[data-slot=combobox]]:h-full [&_[data-slot=combobox]]:min-w-0 [&_[data-slot=combobox]]:shrink-0',
       '[&_[data-slot=combobox-trigger]]:h-full [&_[data-slot=combobox-trigger]]:gap-1 [&_[data-slot=combobox-trigger]]:rounded-none [&_[data-slot=combobox-trigger]]:border-0 [&_[data-slot=combobox-trigger]]:border-e [&_[data-slot=combobox-trigger]]:border-input [&_[data-slot=combobox-trigger]]:bg-transparent [&_[data-slot=combobox-trigger]]:focus-visible:ring-0',

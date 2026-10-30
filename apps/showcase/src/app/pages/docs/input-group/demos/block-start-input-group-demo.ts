@@ -1,10 +1,14 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScButton,
+  ScField,
+  ScFieldDescription,
+  ScFieldGroup,
   ScInput,
   ScInputGroup,
   ScInputGroupAddon,
+  ScInputGroupButton,
   ScInputGroupText,
+  ScLabel,
   ScTextarea,
 } from '@semantic-components/ui';
 import { SiCopyIcon, SiFileCodeIcon } from '@semantic-icons/lucide-icons';
@@ -12,39 +16,49 @@ import { SiCopyIcon, SiFileCodeIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-block-start-input-group-demo',
   imports: [
+    ScField,
+    ScFieldDescription,
+    ScFieldGroup,
     ScInput,
     ScInputGroup,
     ScInputGroupAddon,
-    ScButton,
+    ScInputGroupButton,
     ScInputGroupText,
+    ScLabel,
     ScTextarea,
-    SiFileCodeIcon,
     SiCopyIcon,
+    SiFileCodeIcon,
   ],
   template: `
-    <div class="grid w-full max-w-sm gap-6">
-      <div scInputGroup class="h-auto">
-        <div scInputGroupAddon align="block-start">
-          <span scInputGroupText>Full Name</span>
+    <div scFieldGroup class="max-w-sm">
+      <div scField>
+        <label scLabel>Name</label>
+        <div scInputGroup class="h-auto">
+          <input scInput placeholder="Enter your name" />
+          <div scInputGroupAddon align="block-start">
+            <span scInputGroupText>Full Name</span>
+          </div>
         </div>
-        <input scInput placeholder="Enter your name" />
+        <p scFieldDescription>Header positioned above the input.</p>
       </div>
-      <div scInputGroup>
-        <div scInputGroupAddon align="block-start">
-          <span scInputGroupText>
-            <svg siFileCodeIcon></svg>
-          </span>
-          <span scInputGroupText class="font-mono">script.js</span>
-          <button scButton variant="ghost" size="icon-xs" class="ml-auto">
-            <svg siCopyIcon></svg>
-            <span class="sr-only">Copy</span>
-          </button>
+      <div scField>
+        <label scLabel>Script</label>
+        <div scInputGroup>
+          <textarea
+            scTextarea
+            placeholder="console.log('Hello, world!');"
+            class="font-mono text-sm"
+          ></textarea>
+          <div scInputGroupAddon align="block-start">
+            <svg siFileCodeIcon class="text-muted-foreground"></svg>
+            <span scInputGroupText class="font-mono">script.js</span>
+            <button scInputGroupButton size="icon-xs" class="ms-auto">
+              <svg siCopyIcon></svg>
+              <span class="sr-only">Copy</span>
+            </button>
+          </div>
         </div>
-        <textarea
-          scTextarea
-          class="font-mono text-sm"
-          placeholder="console.log('Hello, world!');"
-        ></textarea>
+        <p scFieldDescription>Header positioned above the textarea.</p>
       </div>
     </div>
   `,

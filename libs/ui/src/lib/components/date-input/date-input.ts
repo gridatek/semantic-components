@@ -19,7 +19,6 @@ import { cn } from '../../utils';
 import type { ScCalendarRange } from '../calendar';
 import { ScDatePicker } from '../date-picker/date-picker';
 import { SC_FIELD } from '../field';
-import { inputInGroupStyles } from '../input/input';
 
 /**
  * A date, typed — in the locale's numeric order (14/10/2026, 10/14/2026,
@@ -138,7 +137,7 @@ export class ScDateInput implements FormValueControl<Temporal.PlainDate | null> 
   });
 
   protected readonly class = computed(() =>
-    cn(this.inputStyles, inputInGroupStyles, this.classInput()),
+    cn(this.inputStyles, this.classInput()),
   );
 
   constructor() {

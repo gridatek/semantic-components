@@ -466,7 +466,7 @@
   {
     "name": "Input Group",
     "path": "input-group",
-    "description": "A composable input group for combining inputs with addons, buttons, and text.",
+    "description": "An input or a textarea with icons, text and buttons in one box: beside it, above or below; a click on an addon focuses the field.",
     "status": "Experimental",
     "library": "ui",
     "category": "Forms"

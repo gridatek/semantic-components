@@ -23,7 +23,6 @@ import {
   ScInput,
   ScInputGroup,
   ScInputGroupAddon,
-  ScInputGroupText,
 } from '@semantic-components/ui';
 import {
   SiCheckIcon,
@@ -40,52 +39,56 @@ import {
     ScInput,
     ScInputGroup,
     ScInputGroupAddon,
-    ScInputGroupText,
-    SiSearchIcon,
-    SiMailIcon,
-    SiCreditCardIcon,
     SiCheckIcon,
-    SiStarIcon,
+    SiCreditCardIcon,
     SiInfoIcon,
+    SiMailIcon,
+    SiSearchIcon,
+    SiStarIcon,
   ],
   template: \`
     <div class="grid w-full max-w-sm gap-6">
       <div scInputGroup>
+        <input scInput placeholder="Search..." aria-label="Search" />
         <div scInputGroupAddon>
-          <span scInputGroupText>
-            <svg siSearchIcon></svg>
-          </span>
+          <svg siSearchIcon></svg>
         </div>
-        <input scInput placeholder="Search..." />
       </div>
       <div scInputGroup>
+        <input
+          scInput
+          type="email"
+          placeholder="Enter your email"
+          aria-label="Email"
+        />
         <div scInputGroupAddon>
-          <span scInputGroupText>
-            <svg siMailIcon></svg>
-          </span>
+          <svg siMailIcon></svg>
         </div>
-        <input scInput type="email" placeholder="Enter your email" />
       </div>
       <div scInputGroup>
+        <input
+          scInput
+          placeholder="Card number"
+          aria-label="Card number"
+          inputmode="numeric"
+        />
         <div scInputGroupAddon>
-          <span scInputGroupText>
-            <svg siCreditCardIcon></svg>
-          </span>
+          <svg siCreditCardIcon></svg>
         </div>
-        <input scInput placeholder="Card number" />
         <div scInputGroupAddon align="inline-end">
-          <span scInputGroupText>
-            <svg siCheckIcon></svg>
-          </span>
+          <svg siCheckIcon></svg>
         </div>
       </div>
       <div scInputGroup>
-        <input scInput placeholder="Card number" />
+        <input
+          scInput
+          placeholder="Card number"
+          aria-label="Saved card number"
+          inputmode="numeric"
+        />
         <div scInputGroupAddon align="inline-end">
-          <span scInputGroupText>
-            <svg siStarIcon></svg>
-            <svg siInfoIcon></svg>
-          </span>
+          <svg siStarIcon></svg>
+          <svg siInfoIcon></svg>
         </div>
       </div>
     </div>

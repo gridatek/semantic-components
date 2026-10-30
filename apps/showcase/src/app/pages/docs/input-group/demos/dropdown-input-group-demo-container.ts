@@ -18,13 +18,12 @@ import { DropdownInputGroupDemo } from './dropdown-input-group-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class DropdownInputGroupDemoContainer {
-  readonly code = `import { CdkOverlayOrigin } from '@angular/cdk/overlay';
-import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScButton,
   ScInput,
   ScInputGroup,
   ScInputGroupAddon,
+  ScInputGroupButton,
   ScMenu,
   ScMenuContent,
   ScMenuItem,
@@ -43,24 +42,23 @@ import {
     ScInput,
     ScInputGroup,
     ScInputGroupAddon,
-    ScButton,
-    ScMenuProvider,
-    ScMenuTrigger,
-    ScMenuPortal,
+    ScInputGroupButton,
     ScMenu,
     ScMenuContent,
     ScMenuItem,
-    SiEllipsisIcon,
+    ScMenuPortal,
+    ScMenuProvider,
+    ScMenuTrigger,
     SiChevronDownIcon,
-    CdkOverlayOrigin,
+    SiEllipsisIcon,
   ],
   template: \`
     <div class="grid w-full max-w-sm gap-4">
-      <div scInputGroup cdkOverlayOrigin #group1="cdkOverlayOrigin">
-        <input scInput placeholder="Enter file name" />
+      <div scInputGroup>
+        <input scInput placeholder="Enter file name" aria-label="File name" />
         <div scInputGroupAddon align="inline-end">
-          <div scMenuProvider align="end" [origin]="group1">
-            <button scButton scMenuTrigger variant="ghost" size="icon-xs">
+          <div scMenuProvider align="end">
+            <button scInputGroupButton scMenuTrigger size="icon-xs">
               <svg siEllipsisIcon></svg>
               <span class="sr-only">More</span>
             </button>
@@ -76,17 +74,15 @@ import {
           </div>
         </div>
       </div>
-      <div scInputGroup cdkOverlayOrigin #group2="cdkOverlayOrigin">
-        <input scInput placeholder="Enter search query" />
+      <div scInputGroup>
+        <input
+          scInput
+          placeholder="Enter search query"
+          aria-label="Search query"
+        />
         <div scInputGroupAddon align="inline-end">
-          <div scMenuProvider align="end" [origin]="group2">
-            <button
-              scButton
-              scMenuTrigger
-              variant="ghost"
-              size="xs"
-              class="pr-1.5! text-xs"
-            >
+          <div scMenuProvider align="end">
+            <button scInputGroupButton scMenuTrigger class="pe-1.5! text-xs">
               Search In...
               <svg siChevronDownIcon class="size-3"></svg>
             </button>

@@ -23,29 +23,19 @@ import {
   ScInput,
   ScInputGroup,
   ScInputGroupAddon,
-  ScInputGroupText,
   ScKbd,
 } from '@semantic-components/ui';
 import { SiSearchIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-kbd-input-group-demo',
-  imports: [
-    ScInputGroup,
-    ScInputGroupAddon,
-    ScInput,
-    ScInputGroupText,
-    ScKbd,
-    SiSearchIcon,
-  ],
+  imports: [ScInput, ScInputGroup, ScInputGroupAddon, ScKbd, SiSearchIcon],
   template: \`
-    <div scInputGroup class="w-full max-w-sm">
+    <div scInputGroup class="max-w-sm">
+      <input scInput placeholder="Search..." aria-label="Search" />
       <div scInputGroupAddon>
-        <span scInputGroupText>
-          <svg siSearchIcon></svg>
-        </span>
+        <svg siSearchIcon class="text-muted-foreground"></svg>
       </div>
-      <input scInput placeholder="Search..." />
       <div scInputGroupAddon align="inline-end">
         <kbd scKbd>&#8984;K</kbd>
       </div>

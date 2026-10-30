@@ -1,24 +1,40 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScButton,
+  ScField,
+  ScFieldDescription,
   ScInput,
   ScInputGroup,
   ScInputGroupAddon,
+  ScLabel,
 } from '@semantic-components/ui';
 import { SiEyeOffIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-inline-end-input-group-demo',
-  imports: [ScButton, ScInput, ScInputGroup, ScInputGroupAddon, SiEyeOffIcon],
+  imports: [
+    ScField,
+    ScFieldDescription,
+    ScInput,
+    ScInputGroup,
+    ScInputGroupAddon,
+    ScLabel,
+    SiEyeOffIcon,
+  ],
   template: `
-    <div scInputGroup class="w-full max-w-sm">
-      <input scInput type="password" placeholder="Enter password" />
-      <div scInputGroupAddon align="inline-end">
-        <button scButton variant="ghost" size="icon-sm">
+    <div scField class="max-w-sm">
+      <label scLabel>Password</label>
+      <div scInputGroup>
+        <input
+          scInput
+          type="password"
+          placeholder="Enter password"
+          autocomplete="current-password"
+        />
+        <div scInputGroupAddon align="inline-end">
           <svg siEyeOffIcon></svg>
-          <span class="sr-only">Toggle password visibility</span>
-        </button>
+        </div>
       </div>
+      <p scFieldDescription>Icon positioned at the end.</p>
     </div>
   `,
   host: { class: 'flex w-full justify-center' },

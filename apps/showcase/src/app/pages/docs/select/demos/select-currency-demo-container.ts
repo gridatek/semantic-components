@@ -23,7 +23,6 @@ import { FormField, FormRoot, form } from '@angular/forms/signals';
 import {
   ScButton,
   ScInputGroup,
-  ScInputGroupSeparator,
   ScSelect,
   ScSelectIcon,
   ScSelectItem,
@@ -34,6 +33,7 @@ import {
   ScSelectPortal,
   ScSelectTrigger,
   ScSelectValue,
+  ScSeparator,
 } from '@semantic-components/ui';
 import {
   SiArrowRightIcon,
@@ -51,7 +51,7 @@ interface FormModel {
   imports: [
     ScButton,
     ScInputGroup,
-    ScInputGroupSeparator,
+    ScSeparator,
     ScSelect,
     ScSelectItem,
     ScSelectList,
@@ -103,7 +103,7 @@ interface FormModel {
               </div>
             </ng-template>
           </div>
-          <div scInputGroupSeparator class="mx-2"></div>
+          <div scSeparator orientation="vertical" class="mx-2 h-4"></div>
           <input
             class="w-full border-none outline-none"
             type="text"
