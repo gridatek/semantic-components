@@ -67,7 +67,12 @@ import { WithIconLinkDemoContainer } from './demos/with-icon-link-demo-container
           One part, on a native link: its
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">href</code> (or
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">routerLink</code
-          >) is yours. An icon may go at either side, marked with its side.
+          >) is yours, and it needs one: the link never writes or invents one,
+          and an
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">&lt;a&gt;</code>
+          without an address is not a link (not focusable, not announced as
+          one). For an action, use a button. An icon may go at either side,
+          marked with its side.
         </p>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>

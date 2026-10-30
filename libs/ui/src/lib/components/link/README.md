@@ -22,7 +22,7 @@ import { ScLink } from '@semantic-components/ui';
 </a>
 ```
 
-One part, on a native link. Its address is yours: `href`, or `routerLink` (it is never written by the link itself). An icon may go at either side, marked with its side.
+One part, on a native link. Its address is yours, and it needs one: `href`, or `routerLink` (which writes the `href` itself). The link never writes or invents one: an `<a>` without an address is not a link — not focusable, not announced as one — as with Angular Material's `a[mat-button]`. For an action rather than an address, use `button[scButton]`. An icon may go at either side, marked with its side.
 
 ## API reference
 

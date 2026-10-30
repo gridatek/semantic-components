@@ -67,6 +67,21 @@ used; it's React.
   `ReferenceLine`, `ReferenceArea`, `ErrorBar`, axis `domain`, …), checked
   against shadcn's examples first.
 
+## Link
+
+A link styled as a button (`a[scLink]`). shadcn has no Link component — its Button page styles an `<a>` with `buttonVariants` — so it is checked against these (2026-10-30):
+
+| Library                                                                                                | What to read                                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Base UI Button](https://base-ui.com/react/components/button)                                          | No link component: a Button must not render a link; a link that looks like a button is an `<a>` styled with CSS                                                                                 |
+| [Angular Material](https://github.com/angular/components/blob/main/src/material/button/button-base.ts) | `a[mat-button]`: no `href` input, no default, no check or warning for a missing one; disabled: `aria-disabled`, `tabindex="-1"`, clicks stopped (`preventDefault` + `stopImmediatePropagation`) |
+| [React Aria Link](https://react-aria.adobe.com/Link)                                                   | `isDisabled` blocks navigation and keeps the link announced; a link without `href` becomes `role="link"`                                                                                        |
+
+**Taken:**
+
+- **The address is the consumer's** (`href` or `routerLink`), as Angular Material: no `href` input, no default `'#'`, nothing written by the link; without one, the `<a>` is not a link — documented, not warned about (the user's choice).
+- **Disabled** as Angular Material, plus middle-click, and in the capture phase so a `routerLink` never hears the click; the `href` kept, as React Aria.
+
 ## Tree Table
 
 Tree rows in the Data Table (`ui/data-table`), the user's choice over a
