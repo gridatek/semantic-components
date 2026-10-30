@@ -107,17 +107,25 @@ A busy button: disabled, with a spinner (`svg[scSpinner]`, named).
 </button>
 ```
 
-### Button Group
+### Group
 
-Buttons side by side in a named group (`scButtonGroup`): their inner corners square.
+Buttons joined with a Control Group (`scControlGroup`, shadcn's Button Group): their inner corners square, one border between.
 
 ```html
-<div scButtonGroup aria-label="Message actions">
+<div scControlGroup aria-label="Message actions">
   <button scButton variant="outline">Archive</button>
   <button scButton variant="outline">Report</button>
   <button scButton variant="outline">Snooze</button>
 </div>
 ```
+
+- **Vertical Group** — `orientation="vertical"`: stacked.
+- **Group Sizes** — the buttons' own `size`, the same for all.
+- **Group Separator** — `<div scControlGroupSeparator></div>` between two borderless (secondary) buttons.
+- **Split Button** — an action and an icon button, a separator between.
+- **Group with Menu**, **Group with Popover** — the second button a menu's or a popover's trigger.
+
+Buttons that toggle a state are a Toggle Group.
 
 ### As Link
 

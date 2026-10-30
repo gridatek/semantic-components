@@ -24,6 +24,8 @@ const ALIAS = {
   charts: 'chart',
   // No link in shadcn: the Button's look on an <a> (its `render`).
   link: 'button',
+  // shadcn's Button Group, named for what it joins.
+  'control-group': 'button-group',
 };
 // Components without a folder of their own: measured as another.
 const SAME_AS = {
@@ -171,8 +173,8 @@ for (const row of rows) {
         )
           deps.add(owner.get(name));
     }
-  // A part's classes from the preset (`injectPreset().buttonGroup`): built on
-  // that part's component (`button-group`).
+  // A part's classes from the preset (`injectPreset().controlGroup`): built on
+  // that part's component (`control-group`).
   const styles = [...row.files];
   for (const file of row.files)
     for (const [, part] of readFileSync(file, 'utf8').matchAll(
@@ -193,7 +195,7 @@ for (const row of rows) {
     }
   // The slots its styles read in what it holds (`[&>[data-slot=select]]`,
   // `*:data-[slot=button]`, `has-[[data-slot=…]]`) — not those it adapts to
-  // when inside another (`in-data-[slot=button-group]`, `group-…`, `peer-…`).
+  // when inside another (`in-data-[slot=control-group]`, `group-…`, `peer-…`).
   for (const file of new Set(styles))
     for (const [token, slot] of readFileSync(file, 'utf8').matchAll(
       /[^\s'"`]*slot=([\w-]+)[^\s'"`]*/g,

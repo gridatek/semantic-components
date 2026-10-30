@@ -515,7 +515,7 @@ export class ScNumberFieldDecrement {
 <div scNumberField [(value)]="count" [min]="0" [max]="100">
   <label scLabel>Count</label>
 
-  <div scButtonGroup>
+  <div scControlGroup>
     <button scNumberFieldDecrement></button>
     <input scNumberFieldInput />
     <button scNumberFieldIncrement></button>

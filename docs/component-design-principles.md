@@ -68,9 +68,7 @@ export class ScPaginationPrevious {}
 ```typescript
 @Component({
   selector: 'a[scPaginationPrevious], button[scPaginationPrevious]',
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
 })
 export class ScPaginationPrevious {}
 ```
@@ -200,9 +198,7 @@ import { cn } from '../../utils';
     '[attr.aria-label]': '"Label"',
     '[attr.aria-disabled]': 'disabled() || null',
   },
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
 })
 export class ScComponentName {
   // Class input for custom styling

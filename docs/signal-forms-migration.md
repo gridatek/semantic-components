@@ -21,9 +21,7 @@ import { FormField, form } from '@angular/forms/signals';
 @Component({
   selector: 'app-example',
   imports: [FormField],
-  template: `
-    <input type="text" [formField]="profileForm.name" placeholder="Name" />
-  `,
+  template: ` <input type="text" [formField]="profileForm.name" placeholder="Name" /> `,
   encapsulation: ViewEncapsulation.None,
 })
 export class Example {
@@ -60,9 +58,7 @@ Native `<input>`, `<textarea>` and `<select>` elements are all supported by `[fo
 ```typescript
 @Component({
   imports: [FormsModule],
-  template: `
-    <input [(ngModel)]="name" />
-  `,
+  template: ` <input [(ngModel)]="name" /> `,
 })
 export class MyComponent {
   name = '';
@@ -74,9 +70,7 @@ export class MyComponent {
 ```typescript
 @Component({
   imports: [FormField],
-  template: `
-    <input [formField]="myForm.name" />
-  `,
+  template: ` <input [formField]="myForm.name" /> `,
 })
 export class MyComponent {
   readonly formModel = signal({ name: '' });
@@ -89,9 +83,7 @@ export class MyComponent {
 ```typescript
 @Component({
   imports: [FormField],
-  template: `
-    <input type="checkbox" [formField]="myForm.enabled" />
-  `,
+  template: ` <input type="checkbox" [formField]="myForm.enabled" /> `,
 })
 export class MyComponent {
   readonly formModel = signal({ enabled: false });
@@ -124,9 +116,7 @@ Constraints such as `min`, `max`, `minlength`, `maxlength`, `pattern`, `required
 ```typescript
 @Component({
   imports: [FormField],
-  template: `
-    <input type="number" [formField]="myForm.page" />
-  `,
+  template: ` <input type="number" [formField]="myForm.page" /> `,
 })
 export class MyComponent {
   readonly formModel = signal({ page: 1 });

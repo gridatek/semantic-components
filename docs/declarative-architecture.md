@@ -192,9 +192,7 @@ export class ScThemeToggle {
 @Component({
   selector: 'button[scThemeToggle]',
   exportAs: 'scThemeToggle',
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
   host: {
     '(click)': 'toggle()',
   },
@@ -282,9 +280,7 @@ Use `<ng-content />` when:
 
 ```typescript
 @Component({
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
 })
 export class ScButton {}
 ```

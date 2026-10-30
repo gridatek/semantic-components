@@ -132,7 +132,7 @@ Styles are written in Tailwind CSS and managed with [class-variance-authority](h
 - Predictable, overridable class names
 - Consistent variants (`default`, `outline`, `ghost`, `destructive`, `link`) across all components
 
-And shadcn's eight styles are presets — nova, vega, maia, lyra, mira, luma, sera, rhea — chosen once, when the app starts. A preset holds the classes of the components whose look changes from style to style: the button (every part that looks like one, a link included) and the button group, with its text, so far.
+And shadcn's eight styles are presets — nova, vega, maia, lyra, mira, luma, sera, rhea — chosen once, when the app starts. A preset holds the classes of the components whose look changes from style to style: the button (every part that looks like one, a link included) and the control group (shadcn's Button Group), with its text, so far.
 
 ```typescript
 import { nova } from '@semantic-components/presets/nova';
@@ -157,7 +157,7 @@ export const button = cva('group/button inline-flex shrink-0 items-center justif
 });
 ```
 
-A part reads its preset's classes (`injectPreset().button({ variant, size })`, `injectPreset().buttonGroup({ orientation })`); your `class` is merged over them.
+A part reads its preset's classes (`injectPreset().button({ variant, size })`, `injectPreset().controlGroup({ orientation })`); your `class` is merged over them.
 
 ### Built on Solid Foundations
 
@@ -203,7 +203,7 @@ This library makes deliberate choices that prioritize the future of Angular over
 
 | Category   | Components                                                                                                             |
 | ---------- | ---------------------------------------------------------------------------------------------------------------------- |
-| Actions    | Button, Button Group, Link, Toggle, Toggle Group                                                                       |
+| Actions    | Button, Control Group, Link, Toggle, Toggle Group                                                                      |
 | Layout     | Card, Separator, Aspect Ratio, Toolbar, Scroll Area, Typography                                                        |
 | Forms      | Input, Textarea, Checkbox, Radio Group, Switch, Select, Native Select, Label, Field, Input Group, Slider, Range Slider |
 | Overlays   | Dialog, Alert Dialog, Drawer, Sheet, Popover, Hover Card, Tooltip, Toast, Backdrop                                     |

@@ -82,9 +82,9 @@ A link styled as a button (`a[scLink]`). shadcn has no Link component — its Bu
 - **The address is the consumer's** (`href` or `routerLink`), as Angular Material: no `href` input, no default `'#'`, nothing written by the link; without one, the `<a>` is not a link — documented, not warned about (the user's choice).
 - **Disabled** as Angular Material, plus middle-click, and in the capture phase so a `routerLink` never hears the click; the `href` kept, as React Aria.
 
-## Button Group
+## Control Group
 
-Buttons joined into one (`div[scButtonGroup]`). A shadcn component, so no web research: Base UI and shadcn's reference app (2026-10-30).
+An input or a select joined with its buttons (`div[scControlGroup]`): shadcn's Button Group, renamed for what it is for (the user, 2026-10-30: it is only useful when inputs or selects mix with buttons; buttons alone are on the Button page). A shadcn component, so no web research: Base UI and shadcn's reference app (2026-10-30).
 
 | Library                                                                   | What to read                                                                                                                             |
 | ------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
