@@ -3,7 +3,9 @@
 // not in shadcn) — each
 // component's level (from the components it imports), size, library, shadcn
 // counterpart, and whether it has e2e demo tests and an RTL demo. The ticks
-// already set are kept; the rest of the document is left as it is.
+// already set are kept, and so is the order of the rows: it is the user's work
+// order, changed only by hand (a new component is added at the end of its
+// list). The rest of the document is left as it is.
 //
 //   node scripts/roadmap.mjs
 import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
@@ -168,6 +170,11 @@ for (const row of rows)
 const roadmapPath = at('docs/roadmap.md');
 let roadmap = readFileSync(roadmapPath, 'utf8');
 const ticks = new Map();
+/**
+ * The rows as they stand: the order is the user's work order, set by hand in
+ * the document — never changed here.
+ */
+const listed = [];
 for (const line of roadmap.split('\n')) {
   const path = line.match(
     /\(\.\.\/apps\/showcase\/src\/app\/pages\/docs\/([\w-]+)\)/,
@@ -181,9 +188,15 @@ for (const line of roadmap.split('\n')) {
   // A table from before the SSR column: SSR not ticked.
   if (boxes.length === 6) boxes.splice(5, 0, false);
   ticks.set(path, boxes);
+  if (!listed.includes(path)) listed.push(path);
 }
 
 const box = (done) => (done ? '[x]' : '[ ]');
+/** A row's place: where it stands in the document; a new component last. */
+const placeOf = (path) => {
+  const at = listed.indexOf(path);
+  return at === -1 ? Infinity : at;
+};
 /** Atomic design, from the imports: the level a component is at. */
 const LEVEL = ['atom', 'molecule', 'organism'];
 /** A list's table; `shadcn`: with the shadcn counterpart's name (List 1). */
@@ -192,8 +205,13 @@ const table = (list, shadcn) =>
     `| # | Component | Library | Level | Built on | Size |${shadcn ? ' shadcn |' : ''} Styles | E2E | Mobile | RTL | Dark | SSR | Docs |`,
     `| -: | --- | --- | --- | --- | -: |${shadcn ? ' --- |' : ''} :-: | :-: | :-: | :-: | :-: | :-: | :-: |`,
     ...list
-      // By name: the next one to rewrite is named by the user, not by its place.
-      .sort((a, b) => a.name.localeCompare(b.name))
+      // The user's order, as the document has it: kept. A component not yet
+      // listed goes at the end (new ones among themselves by name).
+      .sort((a, b) => {
+        const [pa, pb] = [placeOf(a.path), placeOf(b.path)];
+        if (pa !== pb) return pa - pb;
+        return a.name.localeCompare(b.name);
+      })
       .map((row, i) => {
         // [Styles, E2E, Mobile, RTL, Dark, SSR, Docs]: kept, or from the facts.
         const set = ticks.get(row.path) ?? [
