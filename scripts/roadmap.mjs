@@ -177,6 +177,8 @@ for (const line of roadmap.split('\n')) {
     .map((cell) => cell === '[x]');
   // A table from before the SSR column: SSR not ticked.
   if (boxes.length === 6) boxes.splice(5, 0, false);
+  // A table from before the MCP column: MCP not ticked.
+  if (boxes.length === 7) boxes.push(false);
   ticks.set(path, boxes);
   if (!listed.includes(path)) listed.push(path);
 }
@@ -190,8 +192,8 @@ const placeOf = (path) => {
 /** A list's table; `shadcn`: with the shadcn counterpart's name (List 1). */
 const table = (list, shadcn) =>
   [
-    `| # | Component | Library | Built on | Parts |${shadcn ? ' shadcn |' : ''} Styles | E2E | Mobile | RTL | Dark | SSR | Docs |`,
-    `| -: | --- | --- | --- | -: |${shadcn ? ' --- |' : ''} :-: | :-: | :-: | :-: | :-: | :-: | :-: |`,
+    `| # | Component | Library | Built on | Parts |${shadcn ? ' shadcn |' : ''} Styles | E2E | Mobile | RTL | Dark | SSR | Docs | MCP |`,
+    `| -: | --- | --- | --- | -: |${shadcn ? ' --- |' : ''} :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |`,
     ...list
       // The user's order, as the document has it: kept. A component not yet
       // listed goes at the end (new ones among themselves by name).
@@ -201,12 +203,14 @@ const table = (list, shadcn) =>
         return a.name.localeCompare(b.name);
       })
       .map((row, i) => {
-        // [Styles, E2E, Mobile, RTL, Dark, SSR, Docs]: kept, or from the facts.
+        // [Styles, E2E, Mobile, RTL, Dark, SSR, Docs, MCP]: kept, or from the
+        // facts.
         const set = ticks.get(row.path) ?? [
           false,
           row.e2e,
           false,
           row.rtl,
+          false,
           false,
           false,
           false,

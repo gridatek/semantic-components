@@ -29,22 +29,22 @@ The server exposes 4 tools:
 
 Lists all available components across libraries. Optionally filter by library name.
 
-**Input:** `library?` — e.g. `"ui"`, `"carousel"`
+**Input:** `library?` — e.g. `"ui"`, `"charts"`
 
 **Example output:**
 
 ```
-## @semantic-components/ui (57 components)
+## @semantic-components/ui (118 components)
 
 - 📄 **button** — `button[scButton]`
-- 📄 **dialog** — `sc-dialog`
-- 📄 **calendar** — `sc-calendar`
+- 📄 **dialog** — `div[scDialogProvider]`
+- 📄 **calendar** — `div[scCalendar]`
 ...
 ```
 
 ### `get_component`
 
-Returns the full README documentation for a specific component, including selector, inputs table, usage examples, and accessibility notes.
+Returns a component's exports, its parts with their selectors (read from the code), and its full README: inputs, usage examples, accessibility notes.
 
 **Input:** `name` — e.g. `"button"`, `"dialog"`, `"date-picker"`
 
@@ -62,7 +62,7 @@ Returns a full architectural guide by topic.
 
 ## How It Works
 
-At build time, a manifest generator scans all component directories and `docs/guides/`, collecting README content and export names into a single `manifest.json`. The MCP server bundles this manifest and serves it over stdio using JSON-RPC, which is the standard transport for Claude Code MCP servers.
+At build time, a manifest generator scans all component directories and `docs/guides/`, collecting README content, export names and each part's selector (from its decorator) into a single `manifest.json`. The MCP server bundles this manifest and serves it over stdio using JSON-RPC, which is the standard transport for Claude Code MCP servers.
 
 ## Building
 

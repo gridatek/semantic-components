@@ -17,10 +17,17 @@ interface ComponentMeta {
   hidden?: boolean;
 }
 
+interface PartEntry {
+  name: string;
+  selector: string;
+}
+
 interface ComponentEntry {
   name: string;
   readme: string | null;
   exports: string[];
+  /** Its components and directives, with their selectors, in export order. */
+  parts: PartEntry[];
 }
 
 interface LibraryEntry {
@@ -107,6 +114,25 @@ function resolveExportsRecursively(dir: string): string[] {
   return allExports;
 }
 
+/**
+ * The selectors of a folder's components and directives, by class name — read
+ * from the code, so they are right whatever the README says.
+ */
+function getSelectors(dir: string, selectors = new Map<string, string>()) {
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    const path = join(dir, entry.name);
+    if (entry.isDirectory()) getSelectors(path, selectors);
+    else if (entry.name.endsWith('.ts') && !entry.name.endsWith('.spec.ts')) {
+      const content = readFileSync(path, 'utf-8');
+      const matches = content.matchAll(
+        /^@(?:Component|Directive)\(\{[\s\S]*?selector:\s*['"`]([^'"`]+)['"`][\s\S]*?export\s+class\s+(\w+)/gm,
+      );
+      for (const m of matches) selectors.set(m[2], m[1].replace(/\s+/g, ' '));
+    }
+  }
+  return selectors;
+}
+
 function loadVisibleComponentPaths(): Set<string> {
   const jsonPath = join(ROOT, 'apps', 'showcase', 'public', 'components.json');
   const allComponents: ComponentMeta[] = JSON.parse(
@@ -135,11 +161,16 @@ function scanDirectory(
       : null;
 
     const exports = resolveExportsRecursively(compDir);
+    const selectors = getSelectors(compDir);
 
     results.push({
       name: entry.name,
       readme,
       exports,
+      parts: exports.flatMap((name) => {
+        const selector = selectors.get(name);
+        return selector ? [{ name, selector }] : [];
+      }),
     });
   }
 

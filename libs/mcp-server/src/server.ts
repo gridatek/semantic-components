@@ -38,7 +38,7 @@ export function createServer(): McpServer {
         lines.push(`## ${lib.name} (${lib.components.length} components)\n`);
 
         for (const comp of lib.components) {
-          const selectorHint = extractSelector(comp.readme);
+          const selectorHint = selectorOf(comp);
           const readmeFlag = comp.readme ? '📄' : '  ';
           lines.push(
             `- ${readmeFlag} **${comp.name}**${selectorHint ? ` — \`${selectorHint}\`` : ''}`,
@@ -106,6 +106,16 @@ export function createServer(): McpServer {
         if (component.exports.length > 0) {
           parts.push(
             `**Exports:** ${component.exports.map((e) => `\`${e}\``).join(', ')}\n`,
+          );
+        }
+
+        if (component.parts.length > 0) {
+          parts.push(
+            '**Parts:**\n',
+            ...component.parts.map(
+              (p) => `- \`${p.name}\` — \`${p.selector}\``,
+            ),
+            '',
           );
         }
 
@@ -188,7 +198,7 @@ export function createServer(): McpServer {
       ];
 
       for (const { library, component } of matches.slice(0, 20)) {
-        const selectorHint = extractSelector(component.readme);
+        const selectorHint = selectorOf(component);
         const libShort = library.replace('@semantic-components/', '');
         lines.push(
           `- **${component.name}** (${libShort})${selectorHint ? ` — \`${selectorHint}\`` : ''}`,
@@ -255,10 +265,9 @@ export function createServer(): McpServer {
   return server;
 }
 
-function extractSelector(readme: string | null): string | null {
-  if (!readme) return null;
-  const match = readme.match(/\*\*Selector:\*\*\s*`([^`]+)`/);
-  return match ? match[1] : null;
+/** Its first part's selector (the index exports the root first), from the code. */
+function selectorOf(component: Component): string | null {
+  return component.parts[0]?.selector ?? null;
 }
 
 function escapeRegex(str: string): string {
