@@ -25,7 +25,7 @@ import {
   SiCopyIcon,
   SiTerminalIcon,
 } from '@semantic-icons/lucide-icons';
-import { PackageManagerService } from './package-manager.service';
+import { PackageManagerService } from './package-manager-service';
 
 @Component({
   selector: 'app-package-manager-install',

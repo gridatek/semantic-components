@@ -63,7 +63,7 @@ Build it to the project's rules (`.claude/CLAUDE.md`, memory):
 Wire it into the showcase:
 
 - Export it from the library's `components/index.ts`.
-- A docs page, its route in `routes/components.routes.ts`, its demos' routes in `routes/demos.routes.ts`.
+- A docs page, its route in `routes/components-routes.ts`, its demos' routes in `routes/demos-routes.ts`.
 - A demo container per demo, with `demoUrl`; then `node scripts/sync-demo-code.mjs` (never write `readonly code` by hand).
 - An entry in `apps/showcase/public/components.json` (`Experimental`).
 - A README in the component's folder.

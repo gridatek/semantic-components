@@ -58,10 +58,10 @@ import { filter } from 'rxjs';
 import { Logo } from '../../components/logo/logo';
 import { PresetSheet } from '../../components/preset-sheet/preset-sheet';
 import { Toc } from '../../components/toc/toc';
-import { TocService } from '../../components/toc/toc.service';
-import { CommandPaletteService } from '../../services/command-palette.service';
-import { ComponentsService } from '../../services/components.service';
-import { ConfigService } from '../../services/config.service';
+import { TocService } from '../../components/toc/toc-service';
+import { CommandPaletteService } from '../../services/command-palette-service';
+import { ComponentsService } from '../../services/components-service';
+import { ConfigService } from '../../services/config-service';
 
 @Component({
   selector: 'app-docs-layout',

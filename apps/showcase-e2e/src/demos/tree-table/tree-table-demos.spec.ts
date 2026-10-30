@@ -116,7 +116,7 @@ test('Filtering: a match inside a folder keeps its folders', async ({
   const filter = page.getByRole('searchbox', { name: 'Filter files' });
   await filter.fill('routes');
   await expect(rows(page)).toHaveCount(3);
-  await expect(row(page, 'app.routes.ts')).toBeVisible();
+  await expect(row(page, 'app-routes.ts')).toBeVisible();
   await filter.fill('nothing like it');
   await expect(page.getByText('No files match.')).toBeVisible();
 });

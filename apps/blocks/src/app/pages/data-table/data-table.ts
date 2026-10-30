@@ -58,7 +58,7 @@ import { DataTableColumnPinning } from './data-table-column-pinning';
 import { type DataTableFeatures, features } from './data-table-features';
 import { DataTablePagination } from './data-table-pagination';
 import { DataTableToolbar } from './data-table-toolbar';
-import type { User } from './user.service';
+import type { User } from './user-service';
 
 @Component({
   selector: 'app-data-table',

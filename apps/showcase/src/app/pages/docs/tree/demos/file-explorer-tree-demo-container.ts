@@ -107,7 +107,7 @@ import {
                     <span>app.ts</span>
                   </div>
                 </li>
-                <li scTreeItem value="app.routes.ts">
+                <li scTreeItem value="app-routes.ts">
                   <div scTreeItemTrigger>
                     <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
                     <svg scTreeItemIcon siFileIcon class="text-green-500"></svg>

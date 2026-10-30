@@ -45,7 +45,7 @@
           "sourceMap": true
         },
         "ssr": {
-          "browser": "apps/blocks/src/main.ssr.ts",
+          "browser": "apps/blocks/src/main-ssr.ts",
           "server": "apps/blocks/src/main.server.ts",
           "outputMode": "server",
           "ssr": {

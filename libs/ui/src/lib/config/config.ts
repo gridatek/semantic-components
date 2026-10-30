@@ -6,7 +6,7 @@ import {
   makeEnvironmentProviders,
 } from '@angular/core';
 import type { ScPreset } from '@semantic-components/presets';
-import type { ScToasterConfig } from '../components/toast/toast.types';
+import type { ScToasterConfig } from '../components/toast/toast-types';
 
 /**
  * The libraries' settings, a part for each component. Another library adds

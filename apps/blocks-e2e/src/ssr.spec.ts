@@ -14,7 +14,7 @@ import { join } from 'node:path';
 const routes: string[] = [];
 let parent = '';
 for (const line of readFileSync(
-  join(workspaceRoot, 'apps/blocks/src/app/app.routes.ts'),
+  join(workspaceRoot, 'apps/blocks/src/app/app-routes.ts'),
   'utf8',
 ).split('\n')) {
   const match = line.match(/^( +)path: '([^']*)'/);
@@ -46,7 +46,7 @@ test.describe('SSR', () => {
       });
       const response = await page.goto(route);
       // Drawn by the server (Angular marks its HTML), then hydrated: the app
-      // marks <html> once hydrated and stable (main.ssr.ts). A page that
+      // marks <html> once hydrated and stable (main-ssr.ts). A page that
       // breaks never gets there: say so soon, not at the test's end.
       expect(await response?.text()).toContain('ng-server-context');
       await expect(page.locator('html')).toHaveAttribute('data-hydrated', '', {

@@ -1,7 +1,7 @@
 import { httpResource } from '@angular/common/http';
 import { Service, computed, inject } from '@angular/core';
 import { ComponentItem } from '../data/components';
-import { ConfigService } from './config.service';
+import { ConfigService } from './config-service';
 
 @Service()
 export class ComponentsService {

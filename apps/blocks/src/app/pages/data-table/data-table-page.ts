@@ -1,8 +1,8 @@
 import { Component, ViewEncapsulation, inject, signal } from '@angular/core';
 import { DataTable } from './data-table';
 import { userColumns } from './data-table-columns';
-import type { User } from './user.service';
-import { UserService } from './user.service';
+import type { User } from './user-service';
+import { UserService } from './user-service';
 
 @Component({
   selector: 'app-data-table-page',

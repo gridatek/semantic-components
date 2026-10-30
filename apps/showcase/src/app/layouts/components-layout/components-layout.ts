@@ -20,8 +20,8 @@ import {
 import { cn } from '@semantic-components/ui';
 import { filter } from 'rxjs';
 import { Toc } from '../../components/toc/toc';
-import { TocService } from '../../components/toc/toc.service';
-import { ComponentsService } from '../../services/components.service';
+import { TocService } from '../../components/toc/toc-service';
+import { ComponentsService } from '../../services/components-service';
 
 @Component({
   selector: 'app-components-layout',

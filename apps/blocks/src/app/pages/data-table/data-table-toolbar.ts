@@ -17,7 +17,7 @@ import {
   ScDataTableGlobalFilter,
 } from '@semantic-components/ui/data-table';
 import type { DataTableFeatures } from './data-table-features';
-import type { User } from './user.service';
+import type { User } from './user-service';
 
 @Component({
   selector: 'app-data-table-toolbar',

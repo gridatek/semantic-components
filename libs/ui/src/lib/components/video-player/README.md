@@ -24,8 +24,8 @@ scVideoPlayer (paused, currentTime, volume, muted, playbackRate, captions — tw
 ```html
 <div scVideoPlayer #player="scVideoPlayer" aria-label="Video: Sintel, the trailer" class="aspect-video">
   <video scVideoPlayerMedia src="/sintel-trailer.mp4" poster="/sintel-trailer.jpg">
-    <track kind="captions" src="/sintel-trailer.en.vtt" srclang="en" label="English" />
-    <track kind="chapters" src="/sintel-trailer.chapters.vtt" srclang="en" />
+    <track kind="captions" src="/sintel-trailer-en.vtt" srclang="en" label="English" />
+    <track kind="chapters" src="/sintel-trailer-chapters.vtt" srclang="en" />
   </video>
   <div scVideoPlayerCaptionsDisplay></div>
 

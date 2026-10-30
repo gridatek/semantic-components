@@ -7,7 +7,7 @@ import {
   input,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { TocItem } from './toc.service';
+import { TocItem } from './toc-service';
 
 @Component({
   selector: 'app-toc',

@@ -5,7 +5,7 @@ import {
   inject,
   input,
 } from '@angular/core';
-import type { ScToastData } from './toast.types';
+import type { ScToastData } from './toast-types';
 import { ScToaster } from './toaster';
 
 /**

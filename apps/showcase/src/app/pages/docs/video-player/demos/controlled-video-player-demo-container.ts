@@ -46,19 +46,19 @@ import {
       >
         <track
           kind="captions"
-          src="/media/sintel-trailer.en.vtt"
+          src="/media/sintel-trailer-en.vtt"
           srclang="en"
           label="English"
         />
         <track
           kind="captions"
-          src="/media/sintel-trailer.fr.vtt"
+          src="/media/sintel-trailer-fr.vtt"
           srclang="fr"
           label="Français"
         />
         <track
           kind="chapters"
-          src="/media/sintel-trailer.chapters.vtt"
+          src="/media/sintel-trailer-chapters.vtt"
           srclang="en"
         />
       </video>

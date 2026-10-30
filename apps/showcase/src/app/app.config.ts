@@ -13,7 +13,7 @@ import {
 } from '@angular/router';
 import { provideScConfig } from '@semantic-components/ui';
 import { provideCodeHighlighter } from '@semantic-components/ui/code-block';
-import { appRoutes } from './app.routes';
+import { appRoutes } from './app-routes';
 import { PRESETS, storedPreset } from './presets';
 
 export const appConfig: ApplicationConfig = {

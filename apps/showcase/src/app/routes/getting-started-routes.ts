@@ -15,33 +15,33 @@ export const gettingStartedRoutes: Route[] = [
         path: 'introduction',
         title: 'Introduction - Semantic Components',
         loadComponent: () =>
-          import('../pages/getting-started/introduction.page'),
+          import('../pages/getting-started/introduction-page'),
       },
       {
         path: 'prerequisites',
         title: 'Prerequisites - Semantic Components',
         loadComponent: () =>
-          import('../pages/getting-started/prerequisites.page'),
+          import('../pages/getting-started/prerequisites-page'),
       },
       {
         path: 'ui',
         title: 'UI - Semantic Components',
-        loadComponent: () => import('../pages/getting-started/ui.page'),
+        loadComponent: () => import('../pages/getting-started/ui-page'),
       },
       {
         path: 'presets',
         title: 'Presets - Semantic Components',
-        loadComponent: () => import('../pages/getting-started/presets.page'),
+        loadComponent: () => import('../pages/getting-started/presets-page'),
       },
       {
         path: 'i18n',
         title: 'Internationalization - Semantic Components',
-        loadComponent: () => import('../pages/getting-started/i18n.page'),
+        loadComponent: () => import('../pages/getting-started/i18n-page'),
       },
       {
         path: 'mcp-server',
         title: 'MCP Server - Semantic Components',
-        loadComponent: () => import('../pages/getting-started/mcp-server.page'),
+        loadComponent: () => import('../pages/getting-started/mcp-server-page'),
       },
     ],
   },

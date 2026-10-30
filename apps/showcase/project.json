@@ -50,7 +50,7 @@
           "sourceMap": true
         },
         "ssr": {
-          "browser": "apps/showcase/src/main.ssr.ts",
+          "browser": "apps/showcase/src/main-ssr.ts",
           "polyfills": ["temporal-polyfill/global"],
           "server": "apps/showcase/src/main.server.ts",
           "outputMode": "server",

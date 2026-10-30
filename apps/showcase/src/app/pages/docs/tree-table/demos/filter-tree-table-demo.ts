@@ -67,7 +67,7 @@ const FILES: FileNode[] = [
         modified: 'Apr 28',
         children: [
           { name: 'app.ts', size: '2 KB', modified: 'Apr 28' },
-          { name: 'app.routes.ts', size: '1 KB', modified: 'Mar 3' },
+          { name: 'app-routes.ts', size: '1 KB', modified: 'Mar 3' },
         ],
       },
       { name: 'main.ts', size: '1 KB', modified: 'Jan 12' },

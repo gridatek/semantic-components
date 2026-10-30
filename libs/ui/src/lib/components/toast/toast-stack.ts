@@ -19,7 +19,7 @@ import {
   SC_TOAST_PEEK,
   type ScToastLayout,
 } from './toast-layout';
-import type { ScToastData, ScToastPosition } from './toast.types';
+import type { ScToastData, ScToastPosition } from './toast-types';
 import { ScToaster } from './toaster';
 
 /** Where the stack sits; start and end follow the text's direction. */

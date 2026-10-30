@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation, inject } from '@angular/core';
 import { ScHeading } from '@semantic-components/ui';
 import { TocHeading } from '../../components/toc/toc-heading';
-import { ConfigService } from '../../services/config.service';
+import { ConfigService } from '../../services/config-service';
 
 @Component({
   selector: 'app-introduction-page',

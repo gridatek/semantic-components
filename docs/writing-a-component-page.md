@@ -134,7 +134,7 @@ Key points:
 
 ## Step 4: Register the Components Route
 
-**File:** `apps/showcase/src/app/routes/components.routes.ts`
+**File:** `apps/showcase/src/app/routes/components-routes.ts`
 
 ```typescript
 {
@@ -155,7 +155,7 @@ Key points:
 
 Every demo **must** be registered so Playwright can test it in isolation.
 
-**File:** `apps/showcase/src/app/routes/demos.routes.ts`
+**File:** `apps/showcase/src/app/routes/demos-routes.ts`
 
 ```typescript
 {
@@ -227,6 +227,6 @@ The demo container affects only the demo host element, not the demo's children.
 2. Create one minimal demo per behavior (named export)
 3. Create one container per demo (named export)
 4. Create the page component importing all containers (**default export** — only pages use default exports)
-5. Add route to `components.routes.ts`
+5. Add route to `components-routes.ts`
 6. Add entry to `data/components.ts`
-7. Register **every** demo in `demos.routes.ts` for Playwright testing
+7. Register **every** demo in `demos-routes.ts` for Playwright testing

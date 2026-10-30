@@ -103,7 +103,7 @@ its 60.
 ## Tree — ArrowDown skips rows (WebKit) — fixed
 
 Behind #8: logging the focus after each key, WebKit — static, no SSR — moved
-**more than one row** for one ArrowDown in 4 of 10 loads (app → app.routes.ts,
+**more than one row** for one ArrowDown in 4 of 10 loads (app → app-routes.ts,
 src → app.ts, app → main.ts).
 
 The cause: `@angular/aria` orders a tree's items by their place in the

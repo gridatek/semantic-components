@@ -11,7 +11,7 @@ export * from '@playwright/test';
 export const test = base.extend({
   page: async ({ page }, use) => {
     if (process.env['SSR']) {
-      // The app marks <html> once hydrated and stable (main.ssr.ts).
+      // The app marks <html> once hydrated and stable (main-ssr.ts).
       const hydrated = () =>
         page
           .locator('html[data-hydrated]')

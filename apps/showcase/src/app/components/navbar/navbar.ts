@@ -36,9 +36,9 @@ import {
   SiSunIcon,
   SiXIcon,
 } from '@semantic-icons/lucide-icons';
-import { CommandPaletteService } from '../../services/command-palette.service';
-import { ComponentsService } from '../../services/components.service';
-import { GithubService } from '../../services/github.service';
+import { CommandPaletteService } from '../../services/command-palette-service';
+import { ComponentsService } from '../../services/components-service';
+import { GithubService } from '../../services/github-service';
 import { Logo } from '../logo/logo';
 import { PresetSheet } from '../preset-sheet/preset-sheet';
 

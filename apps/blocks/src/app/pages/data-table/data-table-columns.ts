@@ -1,6 +1,6 @@
 import { createColumnHelper } from '@tanstack/angular-table';
 import type { DataTableFeatures } from './data-table-features';
-import type { User } from './user.service';
+import type { User } from './user-service';
 
 const columnHelper = createColumnHelper<DataTableFeatures, User>();
 

@@ -15,4 +15,4 @@ export type {
   ScToastVariant,
   ScToasterConfig,
   ScToasterLayout,
-} from './toast.types';
+} from './toast-types';

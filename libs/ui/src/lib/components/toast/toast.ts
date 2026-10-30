@@ -10,7 +10,7 @@ import {
 import { cn } from '../../utils';
 import { SC_TOAST_CONTEXT } from './toast-context';
 import { SC_TOAST_LAYOUT, SC_TOAST_PEEK } from './toast-layout';
-import type { ScToastVariant } from './toast.types';
+import type { ScToastVariant } from './toast-types';
 
 /** Each variant's text colour; the others keep the popover's. */
 const VARIANTS: Partial<Record<ScToastVariant, string>> = {

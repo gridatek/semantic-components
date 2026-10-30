@@ -11,7 +11,7 @@ import {
   ScToastPosition,
   ScToastPromiseConfig,
   ScToasterConfig,
-} from './toast.types';
+} from './toast-types';
 
 interface ScToastTimer {
   remaining: number;

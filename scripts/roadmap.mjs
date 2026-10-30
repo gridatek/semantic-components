@@ -21,7 +21,11 @@ const ALIAS = {
   charts: 'chart',
 };
 // Components without a folder of their own: measured as another.
-const SAME_AS = { 'date-range-picker': 'date-picker' };
+const SAME_AS = {
+  'date-range-picker': 'date-picker',
+  // Its parts are the Data Table's (tree rows).
+  'tree-table': 'data-table',
+};
 const LIBRARIES = ['ui'];
 
 const registry = JSON.parse(
@@ -45,24 +49,49 @@ const walk = (dir, files = []) => {
   }
   return files;
 };
-const sourceDir = (path, lib) =>
+/**
+ * The component folders inside a library's entry points
+ * (`libs/ui/charts/src/lib/components/area-chart`, and in theirs:
+ * `libs/ui/charts/treemap/src/lib/components/treemap-chart`), by name.
+ */
+const entryComponents = (lib) => {
+  const found = new Map();
+  const visit = (dir) => {
+    if (!existsSync(dir)) return;
+    for (const entry of readdirSync(dir, { withFileTypes: true })) {
+      if (!entry.isDirectory() || entry.name === 'node_modules') continue;
+      const path = join(dir, entry.name);
+      if (entry.name === 'components' && dir.endsWith(join('src', 'lib'))) {
+        for (const component of readdirSync(path, { withFileTypes: true }))
+          if (component.isDirectory() && !found.has(component.name))
+            found.set(component.name, join(path, component.name));
+      } else visit(path);
+    }
+  };
+  visit(at('libs', lib));
+  return found;
+};
+const entries = new Map(LIBRARIES.map((lib) => [lib, entryComponents(lib)]));
+/** A component's code: its folder, or its one file (a layout). */
+const sourceOf = (path, lib) =>
   [
     `libs/${lib}/src/lib/components/${path}`,
     `libs/${lib}/src/lib/utilities/${path}`,
     `libs/${lib}/src/lib/layouts/${path}`,
+    `libs/${lib}/src/lib/layouts/${path}.ts`,
     `libs/${lib}/${path}/src`,
     `libs/${path}/src`,
   ]
     .map((dir) => at(dir))
-    .find(existsSync);
+    .find(existsSync) ?? entries.get(lib)?.get(path);
 
 // The components: their files, size, demos.
 const rows = registry.map((item) => {
   const path = SAME_AS[item.path] ?? item.path;
   const lib =
     registry.find((other) => other.path === path)?.library ?? item.library;
-  const dir = sourceDir(path, lib);
-  const files = dir ? walk(dir) : [];
+  const source = sourceOf(path, lib);
+  const files = !source ? [] : source.endsWith('.ts') ? [source] : walk(source);
   const demos = at('apps/showcase/src/app/pages/docs', item.path, 'demos');
   const rtl =
     existsSync(demos) &&

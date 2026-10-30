@@ -31,7 +31,7 @@ import {
   SiCopyIcon,
   SiExternalLinkIcon,
 } from '@semantic-icons/lucide-icons';
-import { ConfigService } from '../../services/config.service';
+import { ConfigService } from '../../services/config-service';
 import { TocHeading } from '../toc/toc-heading';
 
 @Component({

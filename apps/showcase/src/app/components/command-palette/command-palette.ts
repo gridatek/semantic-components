@@ -30,8 +30,8 @@ import {
   SiSearchIcon,
   SiWrenchIcon,
 } from '@semantic-icons/lucide-icons';
-import { CommandPaletteService } from '../../services/command-palette.service';
-import { ComponentsService } from '../../services/components.service';
+import { CommandPaletteService } from '../../services/command-palette-service';
+import { ComponentsService } from '../../services/components-service';
 
 @Component({
   selector: 'app-command-palette',

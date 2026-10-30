@@ -43,7 +43,7 @@ export async function expectHydrated(page: Page, url: string): Promise<void> {
   // longer than the test to get there — hydration is waited for below.
   const response = await page.goto(url, { waitUntil: 'domcontentloaded' });
   // Drawn by the server (Angular marks its HTML), then hydrated: the app
-  // marks <html> once hydrated and stable (main.ssr.ts). A page that
+  // marks <html> once hydrated and stable (main-ssr.ts). A page that
   // breaks never gets there: say so soon, not at the test's end.
   expect(await response?.text()).toContain('ng-server-context');
   await expect(page.locator('html')).toHaveAttribute('data-hydrated', '', {
