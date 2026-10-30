@@ -7,8 +7,9 @@ import {
   inject,
   input,
 } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
-import { inputStyles } from '../input';
+import { inputInGroupStyles } from '../input';
 import { ScPasswordField } from './password-field';
 
 /**
@@ -43,6 +44,7 @@ import { ScPasswordField } from './password-field';
   },
 })
 export class ScPasswordInput {
+  private readonly inputStyles = injectPreset().input;
   protected readonly password = inject(ScPasswordField);
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -72,7 +74,9 @@ export class ScPasswordInput {
       null,
   );
 
-  protected readonly class = computed(() => cn(inputStyles, this.classInput()));
+  protected readonly class = computed(() =>
+    cn(this.inputStyles, inputInGroupStyles, this.classInput()),
+  );
 
   constructor() {
     const element =

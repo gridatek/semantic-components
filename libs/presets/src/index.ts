@@ -27,4 +27,6 @@ export interface ScPreset {
   }) => string;
   /** The text beside a group's buttons. */
   controlGroupText: string;
+  /** A text field (`input[scInput]`, and the inputs that look like one). */
+  input: string;
 }

@@ -1934,6 +1934,13 @@ export const demosRoutes: Route[] = [
     path: 'demos/input',
     children: [
       {
+        path: 'input-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/input/demos/input-usage-demo').then(
+            (m) => m.InputUsageDemo,
+          ),
+      },
+      {
         path: 'basic-input-demo',
         loadComponent: () =>
           import('../pages/docs/input/demos/basic-input-demo').then(
@@ -1941,24 +1948,17 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'label-input-demo',
+        path: 'field-input-demo',
         loadComponent: () =>
-          import('../pages/docs/input/demos/label-input-demo').then(
-            (m) => m.LabelInputDemo,
+          import('../pages/docs/input/demos/field-input-demo').then(
+            (m) => m.FieldInputDemo,
           ),
       },
       {
-        path: 'types-input-demo',
+        path: 'field-group-input-demo',
         loadComponent: () =>
-          import('../pages/docs/input/demos/types-input-demo').then(
-            (m) => m.TypesInputDemo,
-          ),
-      },
-      {
-        path: 'file-input-demo',
-        loadComponent: () =>
-          import('../pages/docs/input/demos/file-input-demo').then(
-            (m) => m.FileInputDemo,
+          import('../pages/docs/input/demos/field-group-input-demo').then(
+            (m) => m.FieldGroupInputDemo,
           ),
       },
       {
@@ -1969,10 +1969,59 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'button-input-demo',
+        path: 'invalid-input-demo',
         loadComponent: () =>
-          import('../pages/docs/input/demos/button-input-demo').then(
-            (m) => m.ButtonInputDemo,
+          import('../pages/docs/input/demos/invalid-input-demo').then(
+            (m) => m.InvalidInputDemo,
+          ),
+      },
+      {
+        path: 'file-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/input/demos/file-input-demo').then(
+            (m) => m.FileInputDemo,
+          ),
+      },
+      {
+        path: 'inline-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/input/demos/inline-input-demo').then(
+            (m) => m.InlineInputDemo,
+          ),
+      },
+      {
+        path: 'grid-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/input/demos/grid-input-demo').then(
+            (m) => m.GridInputDemo,
+          ),
+      },
+      {
+        path: 'required-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/input/demos/required-input-demo').then(
+            (m) => m.RequiredInputDemo,
+          ),
+      },
+      {
+        path: 'badge-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/input/demos/badge-input-demo').then(
+            (m) => m.BadgeInputDemo,
+          ),
+      },
+      {
+        path: 'input-group-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/input/demos/input-group-input-demo').then(
+            (m) => m.InputGroupInputDemo,
+          ),
+      },
+      {
+        path: 'control-group-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/input/demos/control-group-input-demo').then(
+            (m) => m.ControlGroupInputDemo,
           ),
       },
       {
@@ -1980,6 +2029,13 @@ export const demosRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/input/demos/form-input-demo').then(
             (m) => m.FormInputDemo,
+          ),
+      },
+      {
+        path: 'rtl-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/input/demos/rtl-input-demo').then(
+            (m) => m.RtlInputDemo,
           ),
       },
     ],

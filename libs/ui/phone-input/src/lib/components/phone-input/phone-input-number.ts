@@ -7,7 +7,12 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { SC_FIELD, cn, inputStyles } from '@semantic-components/ui';
+import {
+  SC_FIELD,
+  cn,
+  injectPreset,
+  inputInGroupStyles,
+} from '@semantic-components/ui';
 import { PHONE_SEPARATOR } from './phone-input-text';
 import { SC_PHONE_INPUT } from './phone-input-types';
 
@@ -51,6 +56,7 @@ function positionAfter(text: string, count: number): number {
   },
 })
 export class ScPhoneInputNumber {
+  private readonly inputStyles = injectPreset().input;
   protected readonly phone = inject(SC_PHONE_INPUT);
   private readonly field = inject(SC_FIELD, { optional: true });
   private readonly element =
@@ -67,7 +73,9 @@ export class ScPhoneInputNumber {
     () => this.field?.descriptionIds().join(' ') || null,
   );
 
-  protected readonly class = computed(() => cn(inputStyles, this.classInput()));
+  protected readonly class = computed(() =>
+    cn(this.inputStyles, inputInGroupStyles, this.classInput()),
+  );
 
   constructor() {
     // Show the number when it's set from outside (initial value, reset).

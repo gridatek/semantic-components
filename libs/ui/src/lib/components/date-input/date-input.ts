@@ -14,11 +14,12 @@ import {
   untracked,
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 import type { ScCalendarRange } from '../calendar';
 import { ScDatePicker } from '../date-picker/date-picker';
 import { SC_FIELD } from '../field';
-import { inputStyles } from '../input/input';
+import { inputInGroupStyles } from '../input/input';
 
 /**
  * A date, typed — in the locale's numeric order (14/10/2026, 10/14/2026,
@@ -47,6 +48,7 @@ import { inputStyles } from '../input/input';
   },
 })
 export class ScDateInput implements FormValueControl<Temporal.PlainDate | null> {
+  private readonly inputStyles = injectPreset().input;
   private readonly picker = inject(ScDatePicker, { optional: true });
   private readonly field = inject(SC_FIELD, { optional: true });
   private readonly element =
@@ -135,7 +137,9 @@ export class ScDateInput implements FormValueControl<Temporal.PlainDate | null> 
     return (part === 'start' ? range?.from : range?.to) ?? null;
   });
 
-  protected readonly class = computed(() => cn(inputStyles, this.classInput()));
+  protected readonly class = computed(() =>
+    cn(this.inputStyles, inputInGroupStyles, this.classInput()),
+  );
 
   constructor() {
     // The day, shown — unless it is being typed.

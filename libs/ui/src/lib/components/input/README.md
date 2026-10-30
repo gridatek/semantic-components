@@ -1,90 +1,120 @@
 # Input
 
-A styled input directive that applies consistent styling and integrates with form fields and signal-based forms.
+A native text field, in the look of the app's preset. In a Field it takes the field's label and description; with Signal Forms it shows itself invalid once touched. For a longer text, use a Textarea; for a choice among options, a Select.
 
 ## Usage
 
 ```html
-<input scInput placeholder="Enter your email" />
+<div scField>
+  <label scLabel>Name</label>
+  <input scInput placeholder="Jordan Lee" />
+</div>
 ```
 
-```typescript
+## Anatomy
+
+```ts
 import { ScInput } from '@semantic-components/ui';
-
-@Component({
-  imports: [ScInput],
-  template: ` <input scInput type="text" placeholder="Name" /> `,
-})
-export class MyComponent {}
 ```
 
-## API
+```html
+<div scField>
+  <label scLabel>Label</label>
+  <input scInput />
+  <p scFieldDescription>Description</p>
+</div>
+```
 
-### `scInput` directive
+One part, on a native `input`. It needs a name: a label — in a Field, the field links them — or `aria-label`; in development it warns without one. A placeholder is not a name.
 
-**Selector:** `input[scInput]`
+## Forms
 
-| Input              | Type      | Default | Description                                     |
-| ------------------ | --------- | ------- | ----------------------------------------------- |
-| `id`               | `string`  | auto    | Element id. Falls back to field id or generated |
-| `class`            | `string`  | `''`    | Additional CSS classes merged with base styles  |
-| `disabled`         | `boolean` | `false` | Disables the input                              |
-| `aria-describedby` | `string`  | `''`    | Linked description element ids                  |
+With `[formField]`, the form owns its state: its constraints (`required`, `disabled`, `email`…) are declared in the form's schema, not on the input, and the input is marked invalid (`aria-invalid`) once the field is touched.
 
-**Data attributes:**
+```ts
+readonly profile = form(signal({ email: '' }), (s) => {
+  required(s.email);
+  email(s.email, { message: 'Enter a valid email address.' });
+});
+```
 
-| Attribute   | Value       | Description                                                       |
-| ----------- | ----------- | ----------------------------------------------------------------- |
-| `data-slot` | `'control'` | Used by input-group to detect focus/invalid state on the control. |
+```html
+<div scField>
+  <label scLabel>Email</label>
+  <input scInput type="email" [formField]="profile.email" />
+  <div scFieldErrors></div>
+</div>
+```
 
-**Automatic behavior:**
+## API reference
 
-- Sets `aria-invalid` when the linked `FormField` is touched and invalid.
-- Sets `aria-describedby` from a parent `SC_FIELD` provider when available.
-- Resolves `id` from the parent field context or generates a unique fallback.
-- Reads `disabled` state from `FormField` signal state when present.
-- Automatically adapts styling when inside an input group (`data-slot=input-group`) — no variant prop needed.
+### ScInput — `input[scInput]`
+
+Its classes are the preset's (`injectPreset().input`, from `provideScConfig({ preset })`; nova by default). Every native attribute (`type`, `placeholder`, `autocomplete`…) is the input's own.
+
+| Input              | Type      | Default                 | Description                                                            |
+| ------------------ | --------- | ----------------------- | ---------------------------------------------------------------------- |
+| `id`               | `string`  | the field's, or made up | In a field, the field's id: its label points to it                     |
+| `aria-describedby` | `string`  | the field's description | In a field, its description and errors                                 |
+| `disabled`         | `boolean` | `false`                 | Without a form. With `[formField]`, declare `disabled()` in the schema |
+| `class`            | `string`  | `''`                    | Classes merged over the preset (`cn`: a later class wins)              |
+
+`data-slot="control"`: read by the input group and the control group (focus, invalid, border). In an input group (`div[scInputGroup]`) the group draws the border, the ring and the corners: the input drops its own (`inputInGroupStyles`, also used by the parts that look like an input — password, date, number, phone).
 
 ## Examples
 
-### Basic input
+### Field
 
 ```html
-<input scInput type="text" placeholder="Username" />
-```
-
-### With a label (inside a field)
-
-```html
-<sc-field>
-  <sc-label>Email</sc-label>
-  <input scInput type="email" placeholder="you@example.com" />
-  <sc-field-description>We'll never share your email.</sc-field-description>
-</sc-field>
-```
-
-### File input
-
-```html
-<input scInput type="file" />
+<div scField>
+  <label scLabel>Username</label>
+  <input scInput type="text" placeholder="Enter your username" />
+  <p scFieldDescription>Choose a unique username for your account.</p>
+</div>
 ```
 
 ### Disabled
 
-```html
-<input scInput disabled placeholder="Cannot edit" />
+Declared in the schema: `form(model, (s) => disabled(s.email))`.
+
+### Invalid
+
+```ts
+readonly emailForm = form(signal({ email: 'jordan@' }), (s) => email(s.email, { message: 'Enter a valid email address.' }));
 ```
 
-### Inside an input group
+Marked invalid once touched; `scFieldErrors` shows the message, and the input is described by it.
+
+### File
 
 ```html
-<div scInputGroup>
-  <input scInput placeholder="Search..." />
+<input scInput type="file" accept="image/*" />
+```
+
+### Inline
+
+```html
+<div scField orientation="horizontal">
+  <input scInput type="search" placeholder="Search..." aria-label="Search" />
+  <button scButton>Search</button>
 </div>
 ```
 
+### Required
+
+`required(s.name)` in the schema: the input gets `required`; mark the label yourself (`<span aria-hidden="true">*</span>`).
+
+### Input Group, Control Group
+
+In a `div[scInputGroup]` beside text and icons; in a `div[scControlGroup]` joined to a button.
+
+### RTL
+
+Logical properties: the text starts at the right. An email or a URL is typed left to right: `dir="ltr"` on that input.
+
 ## Accessibility
 
-- Automatically sets `aria-invalid="true"` when the associated form control is touched and invalid.
-- Propagates `aria-describedby` from parent field context so descriptions and error messages are announced by screen readers.
-- Supports the native `disabled` attribute and reflects disabled state from signal-based forms.
+- A native input: its role, value and keyboard are the browser's.
+- Named by a label or `aria-label`; a dev warning when it has neither.
+- In a field: described by its description and errors; `aria-invalid` once touched and invalid.
+- 16px text on small screens (`text-base md:text-sm`): phones don't zoom in on focus.

@@ -9,9 +9,10 @@ import {
   signal,
   untracked,
 } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 import { SC_FIELD } from '../field';
-import { inputStyles } from '../input';
+import { inputInGroupStyles } from '../input';
 import { SC_NUMBER_FIELD } from './number-field';
 import { isNumberCharacter } from './number-field-format';
 
@@ -53,6 +54,7 @@ import { isNumberCharacter } from './number-field-format';
   },
 })
 export class ScNumberFieldInput {
+  private readonly inputStyles = injectPreset().input;
   private readonly element = inject<ElementRef<HTMLInputElement>>(ElementRef);
   protected readonly number = inject(SC_NUMBER_FIELD);
   protected readonly field = inject(SC_FIELD, { optional: true });
@@ -87,7 +89,12 @@ export class ScNumberFieldInput {
   );
 
   protected readonly class = computed(() =>
-    cn(inputStyles, 'text-center tabular-nums', this.classInput()),
+    cn(
+      this.inputStyles,
+      inputInGroupStyles,
+      'text-center tabular-nums',
+      this.classInput(),
+    ),
   );
 
   constructor() {

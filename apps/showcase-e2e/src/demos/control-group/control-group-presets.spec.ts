@@ -39,6 +39,9 @@ const expectClasses = (target: Locator, classes: string[], label: string) =>
     .toEqual([]);
 
 test.describe('Control Group in every preset', () => {
+  // A docs page and axe, twice: slow under load.
+  test.slow();
+
   for (const [preset, styles] of Object.entries(PRESETS))
     test(`${preset}: the group and its text have their preset's classes; no axe violation, light and dark`, async ({
       page,

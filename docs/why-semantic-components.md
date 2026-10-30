@@ -132,7 +132,7 @@ Styles are written in Tailwind CSS and managed with [class-variance-authority](h
 - Predictable, overridable class names
 - Consistent variants (`default`, `outline`, `ghost`, `destructive`, `link`) across all components
 
-And shadcn's eight styles are presets — nova, vega, maia, lyra, mira, luma, sera, rhea — chosen once, when the app starts. A preset holds the classes of the components whose look changes from style to style: the button (every part that looks like one, a link included) and the control group (shadcn's Button Group), with its text, so far.
+And shadcn's eight styles are presets — nova, vega, maia, lyra, mira, luma, sera, rhea — chosen once, when the app starts. A preset holds the classes of the components whose look changes from style to style: the button (every part that looks like one, a link included) the control group (shadcn's Button Group), with its text, and the input (every part that looks like one: password, date, number, phone), so far.
 
 ```typescript
 import { nova } from '@semantic-components/presets/nova';

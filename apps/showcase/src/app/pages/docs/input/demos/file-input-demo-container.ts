@@ -19,16 +19,21 @@ import { FileInputDemo } from './file-input-demo';
 })
 export class FileInputDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScField, ScLabel } from '@semantic-components/ui';
-import { ScInput } from '@semantic-components/ui';
+import {
+  ScField,
+  ScFieldDescription,
+  ScInput,
+  ScLabel,
+} from '@semantic-components/ui';
 
 @Component({
   selector: 'app-file-input-demo',
-  imports: [ScField, ScInput, ScLabel],
+  imports: [ScField, ScFieldDescription, ScInput, ScLabel],
   template: \`
-    <div scField class="w-full max-w-sm">
-      <label scLabel>Upload file</label>
-      <input scInput type="file" />
+    <div scField class="w-full max-w-xs">
+      <label scLabel>Picture</label>
+      <input scInput type="file" accept="image/*" />
+      <p scFieldDescription>Select a picture to upload.</p>
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },

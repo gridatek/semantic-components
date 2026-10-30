@@ -6,15 +6,31 @@ import {
   inject,
   input,
 } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
+import { ɵwarnIfUnnamed } from '../../utils/accessible-name/accessible-name';
 import { SC_FIELD } from '../field';
 
-export const inputStyles =
-  'dark:bg-input/30 border-input focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:aria-invalid:border-destructive/50 disabled:bg-input/50 dark:disabled:bg-input/80 h-8 rounded-lg border bg-transparent px-2.5 py-1 text-base transition-colors file:h-6 file:text-sm file:font-medium focus-visible:ring-3 aria-invalid:ring-3 md:text-sm file:text-foreground placeholder:text-muted-foreground w-full min-w-0 outline-none file:inline-flex file:border-0 file:bg-transparent disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 in-data-[slot=input-group]:flex-1 in-data-[slot=input-group]:rounded-none in-data-[slot=input-group]:border-0 in-data-[slot=input-group]:shadow-none in-data-[slot=input-group]:ring-0 in-data-[slot=input-group]:h-full in-data-[slot=input-group]:focus-visible:ring-0 in-data-[slot=input-group]:focus-visible:border-transparent in-data-[slot=input-group]:aria-invalid:ring-0 in-data-[slot=input-group]:disabled:bg-transparent in-data-[slot=input-group]:dark:bg-transparent in-data-[slot=input-group]:dark:disabled:bg-transparent';
+/**
+ * An input inside an input group (`div[scInputGroup]`): the group draws the
+ * border, the ring and the corners, so the input drops its own. The same in
+ * every preset; also for the parts that look like an input (password, date,
+ * phone…).
+ */
+export const inputInGroupStyles =
+  'in-data-[slot=input-group]:flex-1 in-data-[slot=input-group]:rounded-none in-data-[slot=input-group]:border-0 in-data-[slot=input-group]:shadow-none in-data-[slot=input-group]:ring-0 in-data-[slot=input-group]:h-full in-data-[slot=input-group]:focus-visible:ring-0 in-data-[slot=input-group]:focus-visible:border-transparent in-data-[slot=input-group]:aria-invalid:ring-0 in-data-[slot=input-group]:bg-transparent in-data-[slot=input-group]:disabled:bg-transparent in-data-[slot=input-group]:dark:bg-transparent in-data-[slot=input-group]:dark:disabled:bg-transparent';
 
+/**
+ * A native text field in the app's preset: its classes are the preset's
+ * (`injectPreset().input`). In a field (`div[scField]`) it takes the field's
+ * id and description; with Signal Forms (`[formField]`) it is invalid once
+ * touched. It needs a name — a label, or `aria-label` — and warns in
+ * development without one.
+ */
 @Directive({
   selector: 'input[scInput]',
   host: {
+    // Read by the input group and the control group (focus, invalid, border).
     'data-slot': 'control',
     '[attr.id]': 'id()',
     '[attr.aria-invalid]': 'ariaInvalid()',
@@ -26,6 +42,7 @@ export const inputStyles =
 export class ScInput {
   protected readonly field = inject(SC_FIELD, { optional: true });
   private readonly fallbackId = inject(_IdGenerator).getId('sc-input-');
+  private readonly styles = injectPreset().input;
 
   readonly idInput = input('', { alias: 'id' });
   readonly classInput = input<string>('', { alias: 'class' });
@@ -53,5 +70,11 @@ export class ScInput {
     () => (this.touched() && this.invalid()) || null,
   );
 
-  protected readonly class = computed(() => cn(inputStyles, this.classInput()));
+  protected readonly class = computed(() =>
+    cn(this.styles, inputInGroupStyles, this.classInput()),
+  );
+
+  constructor() {
+    ɵwarnIfUnnamed('scInput');
+  }
 }

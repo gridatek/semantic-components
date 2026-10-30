@@ -34,6 +34,9 @@ const classesOf = ({ button }: ScPreset) =>
     .filter(Boolean);
 
 test.describe('Button in every preset', () => {
+  // A docs page and axe, twice: slow under load.
+  test.slow();
+
   for (const [preset, styles] of Object.entries(PRESETS))
     test(`${preset}: the button has its preset's classes; no axe violation, light and dark`, async ({
       page,

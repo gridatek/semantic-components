@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
-import { inputStyles } from '../input';
 
 /** A search field in the sidebar: the Input, at its size. Name it (a label or `aria-label`). */
 @Directive({
@@ -11,9 +11,14 @@ import { inputStyles } from '../input';
   },
 })
 export class ScSidebarInput {
+  private readonly inputStyles = injectPreset().input;
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn(inputStyles, 'h-8 w-full bg-background shadow-none', this.classInput()),
+    cn(
+      this.inputStyles,
+      'h-8 w-full bg-background shadow-none',
+      this.classInput(),
+    ),
   );
 }

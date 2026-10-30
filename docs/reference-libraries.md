@@ -82,6 +82,21 @@ A link styled as a button (`a[scLink]`). shadcn has no Link component — its Bu
 - **The address is the consumer's** (`href` or `routerLink`), as Angular Material: no `href` input, no default `'#'`, nothing written by the link; without one, the `<a>` is not a link — documented, not warned about (the user's choice).
 - **Disabled** as Angular Material, plus middle-click, and in the capture phase so a `routerLink` never hears the click; the `href` kept, as React Aria.
 
+## Input
+
+A native text field (`input[scInput]`). A shadcn component: Base UI and shadcn's reference app (2026-10-30).
+
+| Library                                                     | What to read                                                                                                                                           |
+| ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Base UI Input (`@base-ui/react/docs`)                       | A native input that works with Field; must have an accessible name (a label or Field); state attributes (`data-invalid`, `data-dirty`, `data-filled`…) |
+| shadcn Input (`shadcn-reference/presets/*/input.tsx`, docs) | Eight looks; examples: Field, Field Group, Disabled, Invalid, File, Inline, Grid, Required, Badge, Input Group, Button Group, Form, RTL                |
+
+**Taken:**
+
+- **The name rule**, as Base UI: a label or `aria-label`, and a dev warning without one (`ɵwarnIfUnnamed`).
+- **Each preset's look**, from its own `input.tsx`; the parts that look like an input share it.
+- **Not Base UI's state attributes**: Signal Forms holds that state (`touched`, `dirty`, `invalid`), and `aria-invalid` / `disabled` are what the styles read.
+
 ## Control Group
 
 An input or a select joined with its buttons (`div[scControlGroup]`): shadcn's Button Group, renamed for what it is for (the user, 2026-10-30: it is only useful when inputs or selects mix with buttons; buttons alone are on the Button page). A shadcn component, so no web research: Base UI and shadcn's reference app (2026-10-30).

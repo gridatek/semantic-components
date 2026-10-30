@@ -7,7 +7,7 @@ import { FormInputDemo } from './form-input-demo';
   imports: [DemoContainer, FormInputDemo],
   template: `
     <app-demo-container
-      title="Form Example"
+      title="Form"
       demoUrl="/demos/input/form-input-demo"
       [code]="code"
     >
@@ -19,95 +19,190 @@ import { FormInputDemo } from './form-input-demo';
 })
 export class FormInputDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { FormField, email, form, required } from '@angular/forms/signals';
 import {
-  ScCard,
-  ScCardBody,
-  ScCardHeader,
-  ScCardTitle,
+  FormField,
+  FormRoot,
+  email,
+  form,
+  required,
+} from '@angular/forms/signals';
+import {
+  ScButton,
   ScField,
+  ScFieldDescription,
+  ScFieldErrors,
+  ScFieldGroup,
+  ScInput,
   ScLabel,
+  ScSelect,
+  ScSelectIcon,
+  ScSelectItem,
+  ScSelectItemIndicator,
+  ScSelectItemLabel,
+  ScSelectList,
+  ScSelectPopup,
+  ScSelectPortal,
+  ScSelectTrigger,
+  ScSelectValue,
 } from '@semantic-components/ui';
-import { ScInput } from '@semantic-components/ui';
-
-interface CreateAccountForm {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-}
+import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-form-input-demo',
   imports: [
     FormField,
-    ScCard,
-    ScCardBody,
-    ScCardHeader,
-    ScCardTitle,
+    FormRoot,
+    ScButton,
     ScField,
+    ScFieldDescription,
+    ScFieldErrors,
+    ScFieldGroup,
     ScInput,
     ScLabel,
+    ScSelect,
+    ScSelectIcon,
+    ScSelectItem,
+    ScSelectItemIndicator,
+    ScSelectItemLabel,
+    ScSelectList,
+    ScSelectPopup,
+    ScSelectPortal,
+    ScSelectTrigger,
+    ScSelectValue,
+    SiCheckIcon,
+    SiChevronDownIcon,
   ],
   template: \`
-    <div scCard class="max-w-md">
-      <div scCardHeader>
-        <h4 scCardTitle class="text-base">Create Account</h4>
-      </div>
-      <div scCardBody class="grid gap-4">
-        <div class="grid grid-cols-2 gap-4">
-          <div scField>
-            <label scLabel>First name</label>
-            <input
-              scInput
-              type="text"
-              [formField]="accountForm.firstName"
-              placeholder="John"
-            />
-          </div>
-          <div scField>
-            <label scLabel>Last name</label>
-            <input
-              scInput
-              type="text"
-              [formField]="accountForm.lastName"
-              placeholder="Doe"
-            />
-          </div>
+    <form [formRoot]="contactForm" class="w-full max-w-sm">
+      <div scFieldGroup>
+        <div scField>
+          <label scLabel>Name</label>
+          <input
+            scInput
+            [formField]="contactForm.name"
+            placeholder="Evil Rabbit"
+            autocomplete="name"
+          />
+          <div scFieldErrors></div>
         </div>
         <div scField>
           <label scLabel>Email</label>
           <input
             scInput
             type="email"
-            [formField]="accountForm.email"
+            [formField]="contactForm.email"
             placeholder="john&#64;example.com"
+            autocomplete="email"
           />
+          <p scFieldDescription>We'll never share your email with anyone.</p>
+          <div scFieldErrors></div>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div scField>
+            <label scLabel>Phone</label>
+            <input
+              scInput
+              type="tel"
+              [formField]="contactForm.phone"
+              placeholder="+1 (555) 123-4567"
+              autocomplete="tel"
+            />
+          </div>
+          <div scField>
+            <label scLabel id="form-input-country">Country</label>
+            <div
+              scSelect
+              [formField]="contactForm.country"
+              class="w-full min-w-0"
+            >
+              <div scSelectTrigger aria-labelledby="form-input-country">
+                <span scSelectValue>{{ countryLabel() }}</span>
+                <svg scSelectIcon siChevronDownIcon></svg>
+              </div>
+              <ng-template scSelectPortal>
+                <div scSelectPopup>
+                  <div scSelectList>
+                    @for (country of countries; track country.value) {
+                      <div
+                        scSelectItem
+                        [value]="country.value"
+                        [label]="country.label"
+                      >
+                        <span scSelectItemLabel>{{ country.label }}</span>
+                        <svg scSelectItemIndicator siCheckIcon></svg>
+                      </div>
+                    }
+                  </div>
+                </div>
+              </ng-template>
+            </div>
+          </div>
         </div>
         <div scField>
-          <label scLabel>Password</label>
-          <input scInput type="password" [formField]="accountForm.password" />
+          <label scLabel>Address</label>
+          <input
+            scInput
+            [formField]="contactForm.address"
+            placeholder="123 Main St"
+            autocomplete="street-address"
+          />
         </div>
+        <div scField orientation="horizontal">
+          <button scButton variant="outline" (click)="cancel()">Cancel</button>
+          <button scButton type="submit">Submit</button>
+        </div>
+        @if (status()) {
+          <p class="text-muted-foreground text-sm" role="status">
+            {{ status() }}
+          </p>
+        }
       </div>
-    </div>
+    </form>
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
 export class FormInputDemo {
-  readonly formModel = signal<CreateAccountForm>({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-  });
+  protected readonly countries = [
+    { value: 'us', label: 'United States' },
+    { value: 'uk', label: 'United Kingdom' },
+    { value: 'ma', label: 'Morocco' },
+    { value: 'fr', label: 'France' },
+  ];
 
-  readonly accountForm = form(this.formModel, (s) => {
-    required(s.firstName);
-    required(s.lastName);
-    required(s.email);
-    email(s.email);
-    required(s.password);
-  });
+  private readonly empty = {
+    name: '',
+    email: '',
+    phone: '',
+    country: 'us',
+    address: '',
+  };
+  private readonly model = signal({ ...this.empty });
+  protected readonly status = signal('');
+  protected readonly contactForm = form(
+    this.model,
+    (s) => {
+      required(s.name, { message: 'Enter your name.' });
+      email(s.email, { message: 'Enter a valid email address.' });
+    },
+    {
+      submission: {
+        action: async () => {
+          this.status.set(\`Sent: \${this.model().name}\`);
+        },
+      },
+    },
+  );
+
+  protected countryLabel(): string {
+    const value = this.contactForm.country().value();
+    return this.countries.find((c) => c.value === value)?.label ?? '';
+  }
+
+  protected cancel(): void {
+    this.model.set({ ...this.empty });
+    this.contactForm().reset();
+    this.status.set('');
+  }
 }`;
 }

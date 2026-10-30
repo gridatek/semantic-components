@@ -450,7 +450,7 @@
   {
     "name": "Input",
     "path": "input",
-    "description": "A text input field for user data entry.",
+    "description": "A native text field in the look of the app's preset: in a Field it takes the label and description; with Signal Forms it shows itself invalid once touched.",
     "status": "Experimental",
     "library": "ui",
     "category": "Forms"
