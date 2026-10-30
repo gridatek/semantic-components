@@ -2,7 +2,7 @@
 
 Every component brought to the same bar: shadcn's look, tested, mobile first, right to left, in light and dark, rendered on the server. One component at a time, in the order the user names, each through [component-rewrite-process.md](component-rewrite-process.md). Two lists: the components shadcn has (**List 1**: its look and parts are the reference), and the ones it doesn't (**List 2**: shadcn's tokens and patterns, our design). Each by name; **Level** (atom, molecule, organism — from the components it imports, **Built on**) and **Size** (lines of its own TypeScript) show where it sits. Each row ticked when it meets the definition of done.
 
-Inventory (147 components): 61 with a shadcn counterpart · 97 with e2e demo tests · 147 with a page axe test · 11 with an RTL demo.
+Inventory (147 components): 61 with a shadcn counterpart · 97 with e2e demo tests · 147 with a page axe test · 12 with an RTL demo.
 
 ## The two lists
 
@@ -65,7 +65,7 @@ The components shadcn has: its look (the generated reference app, nova) and its 
 |   7 | [Badge](../apps/showcase/src/app/pages/docs/badge)                       | ui      | atom     | —                                       |   48 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
 |   8 | [Breadcrumb](../apps/showcase/src/app/pages/docs/breadcrumb)             | ui      | atom     | —                                       |  131 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
 |   9 | [Bubble](../apps/showcase/src/app/pages/docs/bubble)                     | ui      | atom     | —                                       |  148 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
-|  10 | [Button](../apps/showcase/src/app/pages/docs/button)                     | ui      | atom     | —                                       |   50 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
+|  10 | [Button](../apps/showcase/src/app/pages/docs/button)                     | ui      | atom     | —                                       |   50 | yes                    |  [x]   | [x] |  [x]   | [x] | [x]  | [x] | [x]  |
 |  11 | [Button Group](../apps/showcase/src/app/pages/docs/button-group)         | ui      | atom     | —                                       |  101 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
 |  12 | [Calendar](../apps/showcase/src/app/pages/docs/calendar)                 | ui      | molecule | button                                  | 1223 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
 |  13 | [Card](../apps/showcase/src/app/pages/docs/card)                         | ui      | atom     | —                                       |  147 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |

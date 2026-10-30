@@ -340,24 +340,101 @@ export const demosRoutes: Route[] = [
     path: 'demos/button',
     children: [
       {
-        path: 'variants-button-demo',
+        path: 'button-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/button/demos/variants-button-demo').then(
-            (m) => m.VariantsButtonDemo,
+          import('../pages/docs/button/demos/button-usage-demo').then(
+            (m) => m.ButtonUsageDemo,
           ),
       },
       {
-        path: 'sizes-button-demo',
+        path: 'size-button-demo',
         loadComponent: () =>
-          import('../pages/docs/button/demos/sizes-button-demo').then(
-            (m) => m.SizesButtonDemo,
+          import('../pages/docs/button/demos/size-button-demo').then(
+            (m) => m.SizeButtonDemo,
           ),
       },
       {
-        path: 'with-icons-button-demo',
+        path: 'default-button-demo',
         loadComponent: () =>
-          import('../pages/docs/button/demos/with-icons-button-demo').then(
-            (m) => m.WithIconsButtonDemo,
+          import('../pages/docs/button/demos/default-button-demo').then(
+            (m) => m.DefaultButtonDemo,
+          ),
+      },
+      {
+        path: 'outline-button-demo',
+        loadComponent: () =>
+          import('../pages/docs/button/demos/outline-button-demo').then(
+            (m) => m.OutlineButtonDemo,
+          ),
+      },
+      {
+        path: 'secondary-button-demo',
+        loadComponent: () =>
+          import('../pages/docs/button/demos/secondary-button-demo').then(
+            (m) => m.SecondaryButtonDemo,
+          ),
+      },
+      {
+        path: 'ghost-button-demo',
+        loadComponent: () =>
+          import('../pages/docs/button/demos/ghost-button-demo').then(
+            (m) => m.GhostButtonDemo,
+          ),
+      },
+      {
+        path: 'destructive-button-demo',
+        loadComponent: () =>
+          import('../pages/docs/button/demos/destructive-button-demo').then(
+            (m) => m.DestructiveButtonDemo,
+          ),
+      },
+      {
+        path: 'link-button-demo',
+        loadComponent: () =>
+          import('../pages/docs/button/demos/link-button-demo').then(
+            (m) => m.LinkButtonDemo,
+          ),
+      },
+      {
+        path: 'icon-button-demo',
+        loadComponent: () =>
+          import('../pages/docs/button/demos/icon-button-demo').then(
+            (m) => m.IconButtonDemo,
+          ),
+      },
+      {
+        path: 'with-icon-button-demo',
+        loadComponent: () =>
+          import('../pages/docs/button/demos/with-icon-button-demo').then(
+            (m) => m.WithIconButtonDemo,
+          ),
+      },
+      {
+        path: 'rounded-button-demo',
+        loadComponent: () =>
+          import('../pages/docs/button/demos/rounded-button-demo').then(
+            (m) => m.RoundedButtonDemo,
+          ),
+      },
+      {
+        path: 'spinner-button-demo',
+        loadComponent: () =>
+          import('../pages/docs/button/demos/spinner-button-demo').then(
+            (m) => m.SpinnerButtonDemo,
+          ),
+      },
+      {
+        path: 'group-button-demo',
+        loadComponent: () =>
+          import('../pages/docs/button/demos/group-button-demo').then(
+            (m) => m.GroupButtonDemo,
+          ),
+      },
+      {
+        path: 'as-link-button-demo',
+        loadComponent: () =>
+          import('../pages/docs/button/demos/as-link-button-demo').then(
+            (m) => m.AsLinkButtonDemo,
           ),
       },
       {
@@ -368,10 +445,10 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'loading-button-demo',
+        path: 'rtl-button-demo',
         loadComponent: () =>
-          import('../pages/docs/button/demos/loading-button-demo').then(
-            (m) => m.LoadingButtonDemo,
+          import('../pages/docs/button/demos/rtl-button-demo').then(
+            (m) => m.RtlButtonDemo,
           ),
       },
     ],

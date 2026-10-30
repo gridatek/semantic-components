@@ -107,10 +107,14 @@ function ourParts(dir) {
     }
   };
   walk(dir);
+  // Classes moved into the presets (nova, the default): read there too.
+  const preset = join(root, `libs/presets/nova/src/${ourName}.ts`);
+  if (existsSync(preset)) files.push(preset);
   for (const file of files) {
     const source = readFileSync(file, 'utf8');
+    // `buttonVariants = cva(…)`, or a preset's `button = cva(…)`.
     for (const block of source.matchAll(
-      /(\w+)Variants\s*=\s*cva\(([\s\S]*?)\n\);/g,
+      /(\w+?)(?:Variants)?\s*=\s*cva\(([\s\S]*?)\n\);/g,
     )) {
       const [, owner, body] = block;
       const base = body.match(/^\s*(["'`])([\s\S]*?)\1/);

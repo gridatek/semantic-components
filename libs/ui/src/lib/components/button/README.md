@@ -8,80 +8,123 @@ Displays a button or a component that looks like a button.
 <button scButton>Click me</button>
 ```
 
-## Directive
+## API
 
-### ScButton
+### ScButton — `button[scButton]`
 
-Button directive applied to `button` elements.
+Its classes are the app's preset's (`provideScConfig({ preset })`, from `@semantic-components/presets`; nova by default).
 
-**Selector:** `button[scButton]`
+| Input      | Type                              | Default     | Description                                   |
+| ---------- | --------------------------------- | ----------- | --------------------------------------------- |
+| `variant`  | `ScButtonVariant`                 | `'default'` | Its look                                      |
+| `size`     | `ScButtonSize`                    | `'default'` | Its size                                      |
+| `type`     | `'button' \| 'submit' \| 'reset'` | `'button'`  | `button` by default: it doesn't submit a form |
+| `disabled` | `boolean`                         | `false`     | Disabled: not pressed, not in the tab order   |
+| `class`    | `string`                          | `''`        | Additional CSS classes                        |
 
-**Inputs:**
+**Variants:** `default`, `outline`, `secondary`, `ghost`, `destructive`, `link`.
 
-| Input      | Type                              | Default     | Description            |
-| ---------- | --------------------------------- | ----------- | ---------------------- |
-| `variant`  | `ButtonVariant`                   | `'default'` | Visual style variant   |
-| `size`     | `ButtonSize`                      | `'default'` | Size of the button     |
-| `type`     | `'button' \| 'submit' \| 'reset'` | `'button'`  | Button type attribute  |
-| `disabled` | `boolean`                         | `false`     | Disables the button    |
-| `class`    | `string`                          | `''`        | Additional CSS classes |
+**Sizes:** `xs`, `sm`, `default`, `lg` (24, 28, 32 and 36 px high), and their square icon-only sizes `icon-xs`, `icon-sm`, `icon`, `icon-lg`.
 
-**ButtonVariant:**
+`ScButtonVariants` (`{ variant, size }`) is the type the parts that look like buttons take (`scLink`, `scPaginationLast`…).
 
-- `default` - Primary button style
-- `destructive` - Destructive/danger action
-- `outline` - Bordered button
-- `secondary` - Secondary action
-- `ghost` - Minimal styling
-- `link` - Looks like a link
+## Cursor
 
-**ButtonSize:**
+Buttons keep the default cursor, as native buttons and Tailwind do: a pointer is for links. To show one on buttons anyway, add to your global styles:
 
-- `default` - Standard size (h-8)
-- `xs` - Extra small size (h-6)
-- `sm` - Small size (h-7)
-- `lg` - Large size (h-9)
-- `icon` - Square icon button (size-8)
-- `icon-xs` - Extra small icon button (size-6)
-- `icon-sm` - Small icon button (size-7)
-- `icon-lg` - Large icon button (size-9)
+```css
+button:not(:disabled) {
+  cursor: pointer;
+}
+```
 
 ## Examples
+
+### Size
+
+```html
+<button scButton variant="outline" size="sm">Small</button>
+<button scButton variant="outline" size="icon-sm">
+  <svg siArrowUpRightIcon></svg>
+  <span class="sr-only">Submit</span>
+</button>
+```
 
 ### Variants
 
 ```html
-<button scButton>Default</button>
-<button scButton variant="secondary">Secondary</button>
-<button scButton variant="destructive">Destructive</button>
+<button scButton>Button</button>
 <button scButton variant="outline">Outline</button>
+<button scButton variant="secondary">Secondary</button>
 <button scButton variant="ghost">Ghost</button>
+<button scButton variant="destructive">Destructive</button>
 <button scButton variant="link">Link</button>
 ```
 
-### Sizes
+### Icon
+
+An icon-only button is named by its hidden text (`sr-only`), not `aria-label`:
 
 ```html
-<button scButton size="lg">Large</button>
-<button scButton size="default">Default</button>
-<button scButton size="sm">Small</button>
-<button scButton size="icon">
-  <svg><!-- icon --></svg>
+<button scButton variant="outline" size="icon">
+  <svg siCircleFadingArrowUpIcon></svg>
+  <span class="sr-only">Upgrade</span>
 </button>
 ```
 
-### With Icons
+### With Icon
+
+Mark the icon's side with `data-icon` — `inline-start` or `inline-end` — and the button tightens its padding there. Icons are bare: the button sizes them.
 
 ```html
-<button scButton>
-  <svg><!-- icon --></svg>
-  Upload
+<button scButton variant="outline" size="sm">
+  <svg siGitBranchIcon data-icon="inline-start"></svg>
+  New Branch
 </button>
+<button scButton variant="outline" size="sm">
+  Fork
+  <svg siGitForkIcon data-icon="inline-end"></svg>
+</button>
+```
 
-<button scButton variant="outline">
-  Settings
-  <svg><!-- icon --></svg>
+### Rounded
+
+```html
+<button scButton variant="outline" size="icon" class="rounded-full">
+  <svg siArrowUpIcon></svg>
+  <span class="sr-only">Scroll to top</span>
 </button>
+```
+
+### Spinner
+
+A busy button: disabled, with a spinner (`svg[scSpinner]`, named).
+
+```html
+<button scButton variant="outline" disabled>
+  <svg scSpinner siLoaderCircleIcon data-icon="inline-start" aria-label="Loading"></svg>
+  Generating
+</button>
+```
+
+### Button Group
+
+Buttons side by side in a named group (`scButtonGroup`): their inner corners square.
+
+```html
+<div scButtonGroup aria-label="Message actions">
+  <button scButton variant="outline">Archive</button>
+  <button scButton variant="outline">Report</button>
+  <button scButton variant="outline">Snooze</button>
+</div>
+```
+
+### As Link
+
+A link that looks like a button is a link: `a[scLink]`, which takes the same `variant` and `size`. Never a button made to navigate.
+
+```html
+<a scLink href="/docs/components/link">Go to the Link docs</a>
 ```
 
 ### Disabled
@@ -90,40 +133,33 @@ Button directive applied to `button` elements.
 <button scButton disabled>Disabled</button>
 ```
 
-### Form Submit
+### Form submit
 
-By default, `sc-button` sets `type="button"` to prevent accidental form submissions. Use `type="submit"` explicitly for submit buttons:
+`type` is `button` by default, so a button in a form doesn't submit it. Say `submit` for the one that does:
 
 ```html
 <form>
   <button scButton variant="outline">Cancel</button>
-  <!-- type="button" by default, won't submit -->
-
   <button scButton type="submit">Save</button>
-  <!-- explicit type="submit" -->
 </form>
 ```
 
-### Loading State
+### RTL
+
+Logical spacing, so `data-icon="inline-start"` is the right side in right to left. Mirror the icons that point along the line yourself (`class="rtl:-scale-x-100"`): only you know which do.
 
 ```html
-<button scButton disabled>
-  <svg scSpinner si-loader-2-icon></svg>
-  Please wait
-</button>
+<div dir="rtl" lang="ar">
+  <button scButton variant="outline">
+    <svg siArrowLeftIcon data-icon="inline-start" class="rtl:-scale-x-100"></svg>
+    السابق
+  </button>
+</div>
 ```
-
-## Features
-
-- **Multiple Variants**: 6 visual variants for different use cases
-- **Size Options**: 8 sizes including icon-only variants
-- **Icon Support**: Automatic sizing for nested SVG icons
-- **Disabled State**: Built-in disabled styling with `aria-disabled`
 
 ## Accessibility
 
-- Uses native `button` element
-- Supports native `disabled` attribute
-- Sets `aria-disabled` for assistive technology
-- Focus ring for keyboard navigation
-- Proper contrast ratios for all variants
+- A native `button`: Enter and Space press it, it is in the tab order.
+- `disabled` sets the native attribute and `aria-disabled`; a disabled button is skipped by Tab.
+- The focus ring shows on keyboard focus (`focus-visible`).
+- Icon-only buttons are named by hidden text; every variant meets AA contrast, in light and dark.

@@ -6,4 +6,11 @@ test.describe('Button Page', () => {
     await page.goto('/docs/components/button');
     await expectNoA11yViolations(page);
   });
+
+  test('should have no accessibility violations in dark mode', async ({
+    page,
+  }) => {
+    await page.goto('/docs/components/button');
+    await expectNoA11yViolations(page, { dark: true });
+  });
 });

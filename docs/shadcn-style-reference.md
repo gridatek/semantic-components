@@ -265,6 +265,10 @@ Known deliberate divergences — do **not** "fix" these to match upstream:
   (`opacity-60`, `text-muted-foreground/70`), we keep `text-muted-foreground`
   so the text keeps 4.5:1 and dim only what isn't text (Trace: a pending
   line's icon, its description).
+- **Button: `aria-disabled` styled too** — `scButton` sets `aria-disabled` with
+  `disabled`, so its preset adds `aria-disabled:pointer-events-none
+aria-disabled:opacity-50` beside shadcn's `disabled:` ones: the same look
+  (`libs/presets/*/src/button.ts`).
 - **Decomposition** — upstream ships one file per component; we split into
   composable directives, so one shadcn class often maps to several of our
   directives.
