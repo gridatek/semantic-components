@@ -83,24 +83,23 @@ Each component is a set of small, focused pieces that you assemble yourself. The
 The Select is a good example of how far this goes:
 
 ```html
-<div scSelect [formField]="form.label" placeholder="Select a label">
-  <div scSelectTrigger aria-label="Label">
-    <span scSelectValue>
-      @if (selected(); as item) {
-      <svg scSelectItemIcon siTagIcon></svg>
-      {{ item.label }} }
-    </span>
+<div scSelect [formField]="form.label" [items]="items">
+  <div scSelectLabel>Label</div>
+  <div scSelectTrigger>
+    <span scSelectValue placeholder="Select a label"></span>
     <svg scSelectIcon siChevronDownIcon></svg>
   </div>
   <ng-template scSelectPortal>
     <div scSelectPopup>
       <div scSelectList>
-        @for (item of items; track item.value) {
-        <div scSelectItem [value]="item.value" [label]="item.label">
-          <svg scSelectItemIcon siTagIcon></svg>
-          <span scSelectItemLabel>{{ item.label }}</span>
+        <div scSelectGroup>
+          @for (item of items; track item.value) {
+          <div scSelectItem [value]="item.value">
+            <span scSelectItemText><svg siTagIcon></svg> {{ item.label }}</span>
+            <span scSelectItemIndicator><svg siCheckIcon></svg></span>
+          </div>
+          }
         </div>
-        }
       </div>
     </div>
   </ng-template>

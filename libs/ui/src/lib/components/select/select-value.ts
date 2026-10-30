@@ -9,19 +9,20 @@ import { cn } from '../../utils';
 import { SC_SELECT } from './select-tokens';
 
 /**
- * Shows the selected option's label, or the select's placeholder.
- * Project content to customise how a selected value is rendered.
+ * The selected option's label in the trigger, or the placeholder. Project
+ * content to show a value your way.
  */
 @Component({
-  selector: '[scSelectValue]',
+  selector: 'span[scSelectValue]',
   template: `
     @if (select.hasValue()) {
       <ng-content>{{ select.selectedLabel() }}</ng-content>
     } @else {
-      {{ select.placeholder() }}
+      {{ placeholder() }}
     }
   `,
   host: {
+    // Read by the trigger (its value's layout).
     'data-slot': 'select-value',
     '[attr.data-placeholder]': '!select.hasValue() || null',
     '[class]': 'class()',
@@ -30,12 +31,10 @@ import { SC_SELECT } from './select-tokens';
 })
 export class ScSelectValue {
   protected readonly select = inject(SC_SELECT);
-  readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
-    cn(
-      'flex flex-1 text-start data-placeholder:text-muted-foreground',
-      this.classInput(),
-    ),
-  );
+  readonly classInput = input<string>('', { alias: 'class' });
+  /** Shown while nothing is selected. */
+  readonly placeholder = input('');
+
+  protected readonly class = computed(() => cn(this.classInput()));
 }

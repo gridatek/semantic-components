@@ -3559,92 +3559,52 @@ export const demosRoutes: Route[] = [
     path: 'demos/select',
     children: [
       {
-        path: 'select-demo',
+        path: 'select-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/select/demos/select-demo').then(
-            (m) => m.SelectDemo,
+          import('../pages/docs/select/demos/select-usage-demo').then(
+            (m) => m.SelectUsageDemo,
           ),
       },
       {
-        path: 'select-disabled-demo',
+        path: 'align-item-select-demo',
         loadComponent: () =>
-          import('../pages/docs/select/demos/select-disabled-demo').then(
-            (m) => m.SelectDisabledDemo,
+          import('../pages/docs/select/demos/align-item-select-demo').then(
+            (m) => m.AlignItemSelectDemo,
           ),
       },
       {
-        path: 'select-group-demo',
+        path: 'groups-select-demo',
         loadComponent: () =>
-          import('../pages/docs/select/demos/select-group-demo').then(
-            (m) => m.SelectGroupDemo,
+          import('../pages/docs/select/demos/groups-select-demo').then(
+            (m) => m.GroupsSelectDemo,
           ),
       },
       {
-        path: 'select-signal-forms-demo',
+        path: 'scrollable-select-demo',
         loadComponent: () =>
-          import('../pages/docs/select/demos/select-signal-forms-demo').then(
-            (m) => m.SelectSignalFormsDemo,
+          import('../pages/docs/select/demos/scrollable-select-demo').then(
+            (m) => m.ScrollableSelectDemo,
           ),
       },
       {
-        path: 'select-currency-demo',
+        path: 'disabled-select-demo',
         loadComponent: () =>
-          import('../pages/docs/select/demos/select-currency-demo').then(
-            (m) => m.SelectCurrencyDemo,
-          ),
-      },
-    ],
-  },
-  {
-    path: 'demos/select-next',
-    children: [
-      {
-        path: 'select-next-usage-demo',
-        loadComponent: () =>
-          import('../pages/docs/select-next/demos/select-next-usage-demo').then(
-            (m) => m.SelectNextUsageDemo,
+          import('../pages/docs/select/demos/disabled-select-demo').then(
+            (m) => m.DisabledSelectDemo,
           ),
       },
       {
-        path: 'align-item-select-next-demo',
+        path: 'invalid-select-demo',
         loadComponent: () =>
-          import('../pages/docs/select-next/demos/align-item-select-next-demo').then(
-            (m) => m.AlignItemSelectNextDemo,
+          import('../pages/docs/select/demos/invalid-select-demo').then(
+            (m) => m.InvalidSelectDemo,
           ),
       },
       {
-        path: 'groups-select-next-demo',
+        path: 'rtl-select-demo',
         loadComponent: () =>
-          import('../pages/docs/select-next/demos/groups-select-next-demo').then(
-            (m) => m.GroupsSelectNextDemo,
-          ),
-      },
-      {
-        path: 'scrollable-select-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/select-next/demos/scrollable-select-next-demo').then(
-            (m) => m.ScrollableSelectNextDemo,
-          ),
-      },
-      {
-        path: 'disabled-select-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/select-next/demos/disabled-select-next-demo').then(
-            (m) => m.DisabledSelectNextDemo,
-          ),
-      },
-      {
-        path: 'invalid-select-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/select-next/demos/invalid-select-next-demo').then(
-            (m) => m.InvalidSelectNextDemo,
-          ),
-      },
-      {
-        path: 'rtl-select-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/select-next/demos/rtl-select-next-demo').then(
-            (m) => m.RtlSelectNextDemo,
+          import('../pages/docs/select/demos/rtl-select-demo').then(
+            (m) => m.RtlSelectDemo,
           ),
       },
     ],

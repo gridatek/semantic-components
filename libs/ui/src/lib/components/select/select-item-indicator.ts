@@ -1,18 +1,25 @@
-import { Directive, computed, input } from '@angular/core';
+import { Option } from '@angular/aria/listbox';
+import { Directive, computed, inject, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 
+/** The check on the selected option: shown only on it. */
 @Directive({
-  selector: 'svg[scSelectItemIndicator]',
+  selector: 'span[scSelectItemIndicator]',
   host: {
     '[class]': 'class()',
   },
 })
 export class ScSelectItemIndicator {
+  private readonly option = inject<Option<string>>(Option);
+  private readonly styles = injectPreset().select;
+
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
     cn(
-      'pointer-events-none absolute end-2 flex size-4 items-center justify-center opacity-0 [[aria-selected=true]>&]:opacity-100',
+      this.styles.itemIndicator,
+      !this.option.selected() && 'invisible',
       this.classInput(),
     ),
   );

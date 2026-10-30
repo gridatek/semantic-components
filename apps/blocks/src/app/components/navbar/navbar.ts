@@ -26,7 +26,7 @@ import {
   ScSelectIcon,
   ScSelectItem,
   ScSelectItemIndicator,
-  ScSelectItemLabel,
+  ScSelectItemText,
   ScSelectList,
   ScSelectPopup,
   ScSelectPortal,
@@ -53,7 +53,7 @@ import {
     ScSelectIcon,
     ScSelectItem,
     ScSelectItemIndicator,
-    ScSelectItemLabel,
+    ScSelectItemText,
     ScSelectList,
     ScSelectPopup,
     ScSelectPortal,
@@ -237,12 +237,12 @@ import {
       <div scNavbarActions>
         <div
           scSelect
-          class="w-32"
           [value]="i18n.locale.id"
           (valueChange)="i18n.setLocale($event)"
         >
           <div
             scSelectTrigger
+            class="w-32"
             aria-label="Language"
             i18n-aria-label="@@navbar.language"
           >
@@ -262,8 +262,8 @@ import {
                     [label]="locale.label"
                     [attr.lang]="locale.id"
                   >
-                    <span scSelectItemLabel>{{ locale.label }}</span>
-                    <svg scSelectItemIndicator siCheckIcon></svg>
+                    <span scSelectItemText>{{ locale.label }}</span>
+                    <span scSelectItemIndicator><svg siCheckIcon></svg></span>
                   </div>
                 }
               </div>

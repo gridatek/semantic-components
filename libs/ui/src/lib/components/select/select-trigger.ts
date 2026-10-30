@@ -1,4 +1,5 @@
 import { Combobox } from '@angular/aria/combobox';
+import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   Directive,
   ElementRef,
@@ -7,22 +8,26 @@ import {
   inject,
   input,
 } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { bindInput, cn } from '../../utils';
+import { SC_FIELD } from '../field';
 import { SC_SELECT, SC_SELECT_TRIGGER } from './select-tokens';
 import { openOnTypeahead } from './select-typeahead';
 
-/** Base trigger styles, shared with `ScMultiselectTrigger`. */
-export const selectTriggerStyles = cn(
-  'border-input data-placeholder:text-muted-foreground dark:bg-input/30 dark:hover:bg-input/50 focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:aria-invalid:border-destructive/50 gap-1.5 rounded-lg border bg-transparent py-2 pe-2 ps-2.5 text-sm transition-colors select-none focus-visible:ring-3 aria-invalid:ring-3 data-[size=default]:h-8 data-[size=sm]:h-7 data-[size=sm]:rounded-[min(var(--radius-md),10px)] *:data-[slot=select-value]:flex *:data-[slot=select-value]:gap-1.5 [&_svg:not([class*=size-])]:size-4',
-  'flex w-full items-center justify-between whitespace-nowrap outline-none aria-disabled:cursor-not-allowed aria-disabled:opacity-50 *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center [&_svg]:pointer-events-none [&_svg]:shrink-0',
-);
-
+/**
+ * The select's button: a combobox showing the value. Named by the select's
+ * label (`scSelectLabel`), or by `aria-label`.
+ */
 @Directive({
-  selector: '[scSelectTrigger]',
+  selector: 'div[scSelectTrigger], button[scSelectTrigger]',
   hostDirectives: [Combobox],
   providers: [{ provide: SC_SELECT_TRIGGER, useExisting: ScSelectTrigger }],
   host: {
+    // Read by the control group and the input group (its focus ring).
     'data-slot': 'select-trigger',
+    '[id]': 'id()',
+    '[attr.aria-labelledby]': 'select.labelId()',
+    '[attr.aria-describedby]': 'describedBy()',
     '[attr.data-size]': 'size()',
     '[attr.data-placeholder]': '!select.hasValue() || null',
     '[attr.aria-invalid]': 'select.invalid() || null',
@@ -30,6 +35,7 @@ export const selectTriggerStyles = cn(
     '[class]': 'class()',
     '(focusout)': 'select.touch.emit()',
     '(keydown)': 'onKeydown($event)',
+    '(pointerdown)': 'onPointerDown($event)',
   },
 })
 export class ScSelectTrigger {
@@ -37,12 +43,23 @@ export class ScSelectTrigger {
   readonly combobox = inject(Combobox);
   readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly injector = inject(Injector);
+  private readonly styles = injectPreset().select;
+  private readonly field = inject(SC_FIELD, { optional: true });
 
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly idInput = input(inject(_IdGenerator).getId('sc-select-trigger-'), {
+    alias: 'id',
+  });
   readonly size = input<'default' | 'sm'>('default');
 
+  readonly id = computed(() => this.idInput());
+  /** In a field, its description and errors. */
+  protected readonly describedBy = computed(
+    () => this.field?.descriptionIds().join(' ') || null,
+  );
+
   protected readonly class = computed(() =>
-    cn(selectTriggerStyles, this.classInput()),
+    cn(this.styles.trigger, this.classInput()),
   );
 
   constructor() {
@@ -50,10 +67,19 @@ export class ScSelectTrigger {
     bindInput(this.combobox.readonly, this.select.readonly);
   }
 
+  /** Opened by touch: below the trigger, never over it (Base UI). */
+  protected onPointerDown(event: Event): void {
+    this.select.openedByTouch.set(
+      (event as PointerEvent).pointerType === 'touch',
+    );
+  }
+
   /** Type-ahead while closed opens the list at the first match. */
-  protected onKeydown(event: KeyboardEvent): void {
+  protected onKeydown(event: Event): void {
+    // Opened by the keyboard: over the trigger, as with a mouse.
+    this.select.openedByTouch.set(false);
     openOnTypeahead(
-      event,
+      event as KeyboardEvent,
       this.combobox,
       this.elementRef.nativeElement,
       this.injector,

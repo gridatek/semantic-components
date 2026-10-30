@@ -1,22 +1,33 @@
-import { Component, ViewEncapsulation, computed, input } from '@angular/core';
+import { _IdGenerator } from '@angular/cdk/a11y';
+import { Directive, computed, effect, inject, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
+import { ScSelectGroup } from './select-group';
 
-@Component({
+/** A group's heading: it names the group. */
+@Directive({
   selector: 'div[scSelectGroupLabel]',
-  imports: [],
-  template: ` <ng-content /> `,
   host: {
+    '[id]': 'id()',
     '[class]': 'class()',
   },
-  encapsulation: ViewEncapsulation.None,
 })
 export class ScSelectGroupLabel {
+  private readonly group = inject(ScSelectGroup, { optional: true });
+  private readonly styles = injectPreset().select;
+
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly idInput = input(inject(_IdGenerator).getId('sc-select-group-'), {
+    alias: 'id',
+  });
+
+  readonly id = computed(() => this.idInput());
 
   protected readonly class = computed(() =>
-    cn(
-      'text-muted-foreground px-2 py-1.5 text-xs font-medium',
-      this.classInput(),
-    ),
+    cn(this.styles.groupLabel, this.classInput()),
   );
+
+  constructor() {
+    effect(() => this.group?.labelId.set(this.id()));
+  }
 }

@@ -842,15 +842,7 @@
   {
     "name": "Select",
     "path": "select",
-    "description": "Displays a list of options for the user to pick from — mimics a native select.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Forms"
-  },
-  {
-    "name": "Select Next",
-    "path": "select-next",
-    "description": "The Select's rewrite: Base UI's parts in each preset's Radix look, a label, scroll buttons; the list below the trigger, or over it.",
+    "description": "A choice among a short list: a trigger showing the value, the options in a popup below it — a label, groups, scroll buttons, in each preset's look, with Signal Forms.",
     "status": "Experimental",
     "library": "ui",
     "category": "Forms"

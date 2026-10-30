@@ -7,8 +7,8 @@ import {
   inject,
   input,
 } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { bindInput, cn } from '../../utils';
-import { selectTriggerStyles } from '../select/select-trigger';
 import { openOnTypeahead } from '../select/select-typeahead';
 import { SC_MULTISELECT, SC_MULTISELECT_TRIGGER } from './multiselect-tokens';
 
@@ -30,6 +30,8 @@ import { SC_MULTISELECT, SC_MULTISELECT_TRIGGER } from './multiselect-tokens';
   },
 })
 export class ScMultiselectTrigger {
+  // The select's trigger, in the app's preset; as wide as its container.
+  private readonly triggerStyles = injectPreset().select.trigger;
   protected readonly multiselect = inject(SC_MULTISELECT);
   readonly combobox = inject(Combobox);
   readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
@@ -39,7 +41,7 @@ export class ScMultiselectTrigger {
   readonly size = input<'default' | 'sm'>('default');
 
   protected readonly class = computed(() =>
-    cn(selectTriggerStyles, this.classInput()),
+    cn(this.triggerStyles, 'w-full', this.classInput()),
   );
 
   constructor() {

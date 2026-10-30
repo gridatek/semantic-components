@@ -1,23 +1,24 @@
-import { Directive, computed, inject, input } from '@angular/core';
+import { Directive, computed, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
-import { SC_SELECT } from './select-tokens';
 
+/** The chevron in the trigger: it flips while the list is open. */
 @Directive({
   selector: 'svg[scSelectIcon]',
   host: {
-    'aria-hidden': 'true',
     '[class]': 'class()',
   },
 })
 export class ScSelectIcon {
-  readonly classInput = input<string>('', { alias: 'class' });
+  private readonly styles = injectPreset().select;
 
-  private readonly select = inject(SC_SELECT);
+  readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
     cn(
-      'text-muted-foreground pointer-events-none size-4 shrink-0 transition-transform duration-150',
-      this.select.open() && 'rotate-180',
+      this.styles.icon,
+      // Its trigger is aria-expanded while the list is open.
+      'transition-transform duration-150 in-aria-expanded:rotate-180 motion-reduce:transition-none',
       this.classInput(),
     ),
   );

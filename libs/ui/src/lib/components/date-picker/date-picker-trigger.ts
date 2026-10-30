@@ -6,7 +6,6 @@ import { cn } from '../../utils';
 import { type ScButtonVariants } from '../button';
 import { ScInputGroup } from '../input-group';
 import { ScPopoverProvider } from '../popover';
-import { selectTriggerStyles } from '../select/select-trigger';
 import { ScDatePicker } from './date-picker';
 
 /**
@@ -36,6 +35,7 @@ import { ScDatePicker } from './date-picker';
 export class ScDatePickerTrigger {
   private readonly buttonStyles = injectPreset().button;
   private readonly groupButtonStyles = injectPreset().inputGroupButton;
+  private readonly triggerStyles = injectPreset().select.trigger;
 
   protected readonly popover = inject(ScPopoverProvider);
   protected readonly picker = inject(ScDatePicker);
@@ -57,7 +57,8 @@ export class ScDatePickerTrigger {
           this.classInput(),
         )
       : cn(
-          selectTriggerStyles,
+          this.triggerStyles,
+          'w-full',
           'justify-start disabled:cursor-not-allowed disabled:opacity-50 [&>span]:truncate',
           this.classInput(),
         ),

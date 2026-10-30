@@ -21,7 +21,7 @@ Effort: **S** < 1h · **M** a few hours · **L** a day or more.
 - Toolbar demo named (`aria-label="Text formatting"`).
 - Input group: the in-popup ring reset wins on specificity (override in `combobox-popup.ts` removed); an embedded select/multiselect/combobox trigger rings the group (currency demo classes removed).
 - Highlight follows the pointer in select, multiselect, autocomplete, combobox, command (`useActiveOption`, `utils/active-option`); separate `hover:` styles dropped; hovering doesn't scroll the list.
-- `displayWith` on select, multiselect, combobox: labels for an initial value before the popup has opened.
+- Labels for an initial value before the popup has opened: `items` on the select (`{ value, label }[]`, as Base UI's), `displayWith` on multiselect and combobox.
 - Type-ahead on a closed select / multiselect opens the list at the first match (APG select-only combobox).
 - Decisions: autocomplete clear button stays a Tab stop; tree visible in the docs; every component stays `Experimental` for now.
 - Org chart: sibling connector lines drawn (they never rendered), and a chart wider than its box overflows to the end only (safe centering), so it can be scrolled in full.

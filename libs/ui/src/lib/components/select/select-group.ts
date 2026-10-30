@@ -1,19 +1,24 @@
-import { Component, ViewEncapsulation, computed, input } from '@angular/core';
+import { Directive, computed, input, signal } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 
-@Component({
+/** Options together: a `group`, named by its label. */
+@Directive({
   selector: 'div[scSelectGroup]',
-  imports: [],
-  template: ` <ng-content /> `,
   host: {
+    role: 'group',
+    '[attr.aria-labelledby]': 'labelId()',
     '[class]': 'class()',
   },
-  encapsulation: ViewEncapsulation.None,
 })
 export class ScSelectGroup {
+  private readonly styles = injectPreset().select;
+
   readonly classInput = input<string>('', { alias: 'class' });
+  /** Set by its label. */
+  readonly labelId = signal<string | null>(null);
 
   protected readonly class = computed(() =>
-    cn('flex flex-col scroll-my-1 p-1', this.classInput()),
+    cn(this.styles.group, this.classInput()),
   );
 }

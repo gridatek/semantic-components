@@ -1,44 +1,45 @@
 import { ComboboxWidget } from '@angular/aria/combobox';
 import { Listbox } from '@angular/aria/listbox';
 import {
-  Component,
-  ViewEncapsulation,
+  Directive,
   computed,
   effect,
   inject,
   input,
   untracked,
 } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { bindInput, cn } from '../../utils';
 import { SC_SELECT } from './select-tokens';
 
-@Component({
+/**
+ * The options: a listbox, named by the select's label. Focus stays on the
+ * trigger; the active option is announced through `aria-activedescendant`,
+ * and only Enter, Space or a click selects.
+ */
+@Directive({
   selector: 'div[scSelectList]',
-  template: ` <ng-content /> `,
   hostDirectives: [Listbox, ComboboxWidget],
   host: {
-    'data-slot': 'select-list',
+    '[attr.aria-labelledby]': 'select.labelId()',
+    '[attr.data-position]':
+      'select.side() === "none" ? "item-aligned" : "popper"',
     '[class]': 'class()',
   },
-  encapsulation: ViewEncapsulation.None,
 })
 export class ScSelectList {
-  private readonly select = inject(SC_SELECT);
+  protected readonly select = inject(SC_SELECT);
   private readonly listbox = inject<Listbox<string>>(Listbox);
   private readonly widget = inject(ComboboxWidget);
+  private readonly styles = injectPreset().select;
 
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn(
-      'flex h-full flex-col overflow-x-hidden overflow-y-auto',
-      this.classInput(),
-    ),
+    cn('outline-none', this.styles.viewport, this.classInput()),
   );
 
   constructor() {
-    // Focus stays on the trigger; the active option is announced through
-    // aria-activedescendant, and only Enter/Space/click selects.
     bindInput(this.listbox.focusMode, 'activedescendant');
     bindInput(this.listbox.selectionMode, 'explicit');
     bindInput(this.widget.activeDescendant, this.listbox.activeDescendant);

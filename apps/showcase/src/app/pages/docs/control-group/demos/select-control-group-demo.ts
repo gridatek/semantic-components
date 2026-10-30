@@ -8,7 +8,7 @@ import {
   ScSelectIcon,
   ScSelectItem,
   ScSelectItemIndicator,
-  ScSelectItemLabel,
+  ScSelectItemText,
   ScSelectList,
   ScSelectPopup,
   ScSelectPortal,
@@ -33,7 +33,7 @@ import {
     ScSelectIcon,
     ScSelectItem,
     ScSelectItemIndicator,
-    ScSelectItemLabel,
+    ScSelectItemText,
     ScSelectList,
     ScSelectPopup,
     ScSelectPortal,
@@ -61,13 +61,13 @@ import {
                       [value]="currency.value"
                       [label]="currency.value"
                     >
-                      <span scSelectItemLabel>
+                      <span scSelectItemText>
                         {{ currency.value }}
                         <span class="text-muted-foreground">
                           {{ currency.label }}
                         </span>
                       </span>
-                      <svg scSelectItemIndicator siCheckIcon></svg>
+                      <span scSelectItemIndicator><svg siCheckIcon></svg></span>
                     </div>
                   }
                 </div>

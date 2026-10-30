@@ -18,7 +18,8 @@ import {
   ScSelectIcon,
   ScSelectItem,
   ScSelectItemIndicator,
-  ScSelectItemLabel,
+  ScSelectItemText,
+  ScSelectLabel,
   ScSelectList,
   ScSelectPopup,
   ScSelectPortal,
@@ -43,7 +44,8 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     ScSelectIcon,
     ScSelectItem,
     ScSelectItemIndicator,
-    ScSelectItemLabel,
+    ScSelectItemText,
+    ScSelectLabel,
     ScSelectList,
     ScSelectPopup,
     ScSelectPortal,
@@ -89,13 +91,9 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
             />
           </div>
           <div scField>
-            <label scLabel id="form-input-country">Country</label>
-            <div
-              scSelect
-              [formField]="contactForm.country"
-              class="w-full min-w-0"
-            >
-              <div scSelectTrigger aria-labelledby="form-input-country">
+            <div scSelect [formField]="contactForm.country">
+              <div scSelectLabel>Country</div>
+              <div scSelectTrigger class="w-full">
                 <span scSelectValue>{{ countryLabel() }}</span>
                 <svg scSelectIcon siChevronDownIcon></svg>
               </div>
@@ -108,8 +106,10 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
                         [value]="country.value"
                         [label]="country.label"
                       >
-                        <span scSelectItemLabel>{{ country.label }}</span>
-                        <svg scSelectItemIndicator siCheckIcon></svg>
+                        <span scSelectItemText>{{ country.label }}</span>
+                        <span scSelectItemIndicator
+                          ><svg siCheckIcon></svg
+                        ></span>
                       </div>
                     }
                   </div>

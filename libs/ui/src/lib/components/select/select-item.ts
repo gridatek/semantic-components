@@ -1,19 +1,20 @@
 import { Option } from '@angular/aria/listbox';
 import {
-  Component,
+  Directive,
   ElementRef,
-  ViewEncapsulation,
+  afterNextRender,
   computed,
   effect,
   inject,
   input,
 } from '@angular/core';
-import { cn, useActiveOption } from '../../utils';
+import { injectPreset } from '../../config/preset';
+import { cn, setInput, useActiveOption } from '../../utils';
 import { SC_SELECT } from './select-tokens';
 
-@Component({
+/** An option. Its label is `label`, or its text. */
+@Directive({
   selector: 'div[scSelectItem]',
-  template: ` <ng-content /> `,
   hostDirectives: [
     {
       directive: Option,
@@ -21,35 +22,34 @@ import { SC_SELECT } from './select-tokens';
     },
   ],
   host: {
-    'data-slot': 'select-item',
     '[class]': 'class()',
     '(pointermove)': 'onPointerMove()',
   },
-  encapsulation: ViewEncapsulation.None,
 })
 export class ScSelectItem {
-  readonly classInput = input<string>('', { alias: 'class' });
-
   private readonly select = inject(SC_SELECT);
   private readonly option = inject<Option<string>>(Option);
+  private readonly element = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly styles = injectPreset().select;
   protected readonly onPointerMove = useActiveOption(this.option);
-  private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+
+  readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn(
-      'relative flex w-full cursor-default select-none items-center gap-1.5 rounded-md py-1 pe-8 ps-1.5 text-sm outline-hidden',
-      'transition-colors duration-100 data-[active=true]:bg-accent data-[active=true]:text-accent-foreground',
-      'aria-disabled:pointer-events-none aria-disabled:opacity-50',
-      '[&_svg:not([class*=size-])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0',
-      this.classInput(),
-    ),
+    cn(this.styles.item, this.classInput()),
   );
 
   constructor() {
+    // Type-ahead matches an option's label: without one, its text.
+    afterNextRender(() => {
+      if (this.option.label()) return;
+      const text = this.element.nativeElement.textContent?.trim();
+      if (text) setInput(this.option.label, text);
+    });
     effect(() => {
       const label =
         this.option.label() ||
-        this.elementRef.nativeElement.textContent?.trim() ||
+        this.element.nativeElement.textContent?.trim() ||
         '';
       this.select.registerLabel(this.option.value(), label);
     });

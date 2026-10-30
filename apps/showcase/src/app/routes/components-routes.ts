@@ -576,11 +576,6 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/select/select-page'),
       },
       {
-        path: 'select-next',
-        loadComponent: () =>
-          import('../pages/docs/select-next/select-next-page'),
-      },
-      {
         path: 'separator',
         title: 'Separator - Semantic Components',
         loadComponent: () => import('../pages/docs/separator/separator-page'),

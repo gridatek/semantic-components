@@ -270,8 +270,8 @@ export const appConfig: ApplicationConfig = {
       <div scSelectList>
         @for (locale of i18n.locales; track locale.id) {
           <div scSelectItem [value]="locale.id" [label]="locale.label" [attr.lang]="locale.id">
-            <span scSelectItemLabel>{{ locale.label }}</span>
-            <svg scSelectItemIndicator siCheckIcon></svg>
+            <span scSelectItemText>{{ locale.label }}</span>
+            <span scSelectItemIndicator><svg siCheckIcon></svg></span>
           </div>
         }
       </div>

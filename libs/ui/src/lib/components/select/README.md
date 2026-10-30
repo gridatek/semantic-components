@@ -1,200 +1,103 @@
-# Select Components
+# Select
 
-Displays a list of options for the user to pick from — mimics a native select.
+A choice among a short list of options — a trigger showing the value, the options in a popup below it. In the look of the app's preset, with Signal Forms. For a long list to filter, use a Combobox; for several values, a Multiselect.
 
-Built on the `@angular/aria` combobox pattern for a non-editable ("select-only") combobox: the trigger element itself is the combobox, focus stays on it, and the active option is announced through `aria-activedescendant`.
-
-## Features
-
-- Single tab stop; full keyboard navigation and typeahead
-- ARIA-compliant (`role="combobox"` trigger, `role="listbox"` popup)
-- Signal Forms control — bind `[formField]` directly on `scSelect`
-- Stores the option **value**, displays its **label**
-- Overlay positioning with CDK (`usePopover: 'inline'`), flips above when there is no room below
-- Enter/leave animations on the popup
-- Customizable styling via `class` input on every part
-- `exportAs: 'scSelect'` for direct template access
-
-## Components
-
-| Component               | Selector                      | Responsibility                                                                |
-| ----------------------- | ----------------------------- | ----------------------------------------------------------------------------- |
-| `ScSelect`              | `div[scSelect]`               | Root; the form control (`FormValueControl<string>`), owns the overlay         |
-| `ScSelectTrigger`       | `[scSelectTrigger]`           | The focusable combobox (wraps `Combobox`), overlay origin                     |
-| `ScSelectValue`         | `[scSelectValue]`             | Shows the selected label, or the placeholder                                  |
-| `ScSelectIcon`          | `svg[scSelectIcon]`           | Chevron in the trigger, rotates while open                                    |
-| `ScSelectPortal`        | `ng-template[scSelectPortal]` | Marks the lazy popup content                                                  |
-| `ScSelectPopup`         | `div[scSelectPopup]`          | Popup container with styling and enter/leave animations                       |
-| `ScSelectList`          | `div[scSelectList]`           | Listbox (wraps `Listbox` + `ComboboxWidget`), syncs selection with `ScSelect` |
-| `ScSelectItem`          | `div[scSelectItem]`           | Option (wraps `Option`)                                                       |
-| `ScSelectItemLabel`     | `[scSelectItemLabel]`         | Label text inside an item (`flex-1`)                                          |
-| `ScSelectItemIcon`      | `svg[scSelectItemIcon]`       | Decorative icon in items or the value (`aria-hidden="true"`)                  |
-| `ScSelectItemIndicator` | `svg[scSelectItemIndicator]`  | Checkmark shown on the selected option                                        |
-| `ScSelectGroup`         | `div[scSelectGroup]`          | Groups related options                                                        |
-| `ScSelectGroupLabel`    | `div[scSelectGroupLabel]`     | Label for a group                                                             |
-| `ScSelectSeparator`     | `[scSelectSeparator]`         | Visual separator between groups or items                                      |
-
-## Basic Usage
+## Usage
 
 ```html
-<div scSelect [formField]="form.fruit" placeholder="Select a fruit">
-  <div scSelectTrigger aria-label="Fruit">
+<div scField>
+  <div scSelect [formField]="form.theme" [items]="themes">
+    <div scSelectLabel>Theme</div>
+    <div scSelectTrigger class="w-full">
+      <span scSelectValue placeholder="Select a theme"></span>
+      <svg scSelectIcon siChevronDownIcon></svg>
+    </div>
+    <ng-template scSelectPortal>
+      <div scSelectPopup>
+        <div scSelectList>
+          <div scSelectGroup>
+            @for (item of themes; track item.value) {
+            <div scSelectItem [value]="item.value">
+              <span scSelectItemText>{{ item.label }}</span>
+              <span scSelectItemIndicator><svg siCheckIcon></svg></span>
+            </div>
+            }
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>
+```
+
+## Anatomy
+
+Base UI's parts, each a directive on your element:
+
+```html
+<div scSelect>
+  <div scSelectLabel></div>
+  <div scSelectTrigger>
     <span scSelectValue></span>
-    <svg scSelectIcon siChevronDownIcon></svg>
+    <svg scSelectIcon></svg>
   </div>
   <ng-template scSelectPortal>
     <div scSelectPopup>
+      <div scSelectScrollUpButton><svg></svg></div>
       <div scSelectList>
-        @for (fruit of fruits; track fruit.value) {
-        <div scSelectItem [value]="fruit.value" [label]="fruit.label">
-          <span scSelectItemLabel>{{ fruit.label }}</span>
-          <svg scSelectItemIndicator siCheckIcon></svg>
+        <div scSelectGroup>
+          <div scSelectGroupLabel></div>
+          <div scSelectItem>
+            <span scSelectItemText></span>
+            <span scSelectItemIndicator><svg></svg></span>
+          </div>
         </div>
-        }
+        <div scSelectSeparator></div>
       </div>
+      <div scSelectScrollDownButton><svg></svg></div>
     </div>
   </ng-template>
 </div>
 ```
 
-Without Signal Forms, use two-way binding: `<div scSelect [(value)]="fruit">`.
+The root has no box of its own, as Base UI's: its label and trigger are laid out by their container (a field); give the trigger its width. It needs a name: its label, or `aria-label` on the trigger.
 
-### Custom value rendering
+## Positioning
 
-`ScSelectValue` renders the selected option's label by default. Project content to render it yourself (shown only when a value is selected; the placeholder is used otherwise):
+The popup opens below the trigger, which stays in sight — above it when there is no room below (Radix's `popper`). With `[alignItemWithTrigger]="true"` on the popup it opens over the trigger instead, the selected item (or the first) where the value is (Radix's `item-aligned`, Base UI's default), except when opened by touch or without room. In right to left it lines up with the trigger's right edge.
 
-```html
-<span scSelectValue>
-  @if (selectedOption(); as option) {
-  <svg scSelectItemIcon [siIcon]="option.icon"></svg>
-  {{ option.label }} }
-</span>
-```
+## Keyboard
 
-> The popup is rendered lazily, so an option's label is only known after the list has been opened once. Until then the default `ScSelectValue` shows the raw value. If your initial value must show a label immediately, pass `[displayWith]` or project the content as above:
->
-> ```html
-> <div scSelect [formField]="form.fruit" [displayWith]="fruitLabel">…</div>
-> ```
->
-> ```typescript
-> readonly fruitLabel = (value: string) => this.fruits.find((f) => f.value === value)?.label;
-> ```
+Focus stays on the trigger (APG select-only combobox). Enter, Space or the arrow keys open the list; the arrows, Home and End move through it; Enter or Space selects; Escape closes. A letter, open or closed, goes to the first option starting with it (an option's `label`, or its text).
 
-### With Groups
+## API reference
 
-```html
-<div scSelectList>
-  <div scSelectGroup>
-    <div scSelectGroupLabel>Fruits</div>
-    <div scSelectItem value="apple" label="Apple"><span scSelectItemLabel>Apple</span></div>
-  </div>
-  <div scSelectSeparator></div>
-  <div scSelectGroup>
-    <div scSelectGroupLabel>Vegetables</div>
-    <div scSelectItem value="carrot" label="Carrot"><span scSelectItemLabel>Carrot</span></div>
-  </div>
-</div>
-```
+| Part                                                 | Selector                                          | Inputs                                                                                                                                                            |
+| ---------------------------------------------------- | ------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ScSelect`                                           | `div[scSelect]`                                   | `value` (`[formField]` or `[(value)]`), `items` (`{ value, label }[]`: labels before the list has opened), `disabled`, `readonly`, `required`, `invalid`, `class` |
+| `ScSelectLabel`                                      | `div[scSelectLabel]`, `label[scSelectLabel]`      | `id`, `class` — names the trigger and the list; a click focuses the trigger                                                                                       |
+| `ScSelectTrigger`                                    | `div[scSelectTrigger]`, `button[scSelectTrigger]` | `size` (`'default'` 32px, `'sm'` 28px), `id`, `class` — in a field, described by its description and errors                                                       |
+| `ScSelectValue`                                      | `span[scSelectValue]`                             | `placeholder`, `class` — its content, if any, shows the value your way                                                                                            |
+| `ScSelectIcon`                                       | `svg[scSelectIcon]`                               | `class` — flips while the list is open                                                                                                                            |
+| `ScSelectPortal`                                     | `ng-template[scSelectPortal]`                     | —                                                                                                                                                                 |
+| `ScSelectPopup`                                      | `div[scSelectPopup]`                              | `alignItemWithTrigger` (`false`), `class` — the scroll container                                                                                                  |
+| `ScSelectScrollUpButton`, `ScSelectScrollDownButton` | `div[…]`                                          | `class` — shown while there is more; hovering scrolls; `aria-hidden`                                                                                              |
+| `ScSelectList`                                       | `div[scSelectList]`                               | `class` — the listbox                                                                                                                                             |
+| `ScSelectGroup`, `ScSelectGroupLabel`                | `div[…]`                                          | `class` — a `group` named by its label                                                                                                                            |
+| `ScSelectItem`                                       | `div[scSelectItem]`                               | `value`, `label`, `disabled`, `class`                                                                                                                             |
+| `ScSelectItemText`, `ScSelectItemIndicator`          | `span[…]`                                         | `class` — the indicator shows on the selected option only                                                                                                         |
+| `ScSelectSeparator`                                  | `div[scSelectSeparator]`                          | `class`                                                                                                                                                           |
 
-## Signal Forms
+Every part's classes are the preset's (`injectPreset().select`): shadcn's Select on Radix, in each style. Its parts and behaviour follow Base UI; `alignItemWithTrigger` is Radix's `position="item-aligned"`, off is `"popper"`.
 
-`ScSelect` implements `FormValueControl<string>`. Put `[formField]` on `scSelect`, and declare constraints in the `form()` schema — not as attributes:
+`data-slot`: `select` (root) and `select-trigger`, read by the control group and the input group; `select-value`, read by the trigger.
 
-```typescript
-readonly fruitForm = form(this.model, (p) => {
-  required(p.fruit);
-  disabled(p.fruit, () => this.locked());
-});
-```
+## Left out
 
-`required` → `aria-required`, `invalid` (once touched) → `aria-invalid`, `disabled` → `aria-disabled` on the trigger. The control is marked touched when focus leaves the trigger.
-
-## Keyboard Navigation
-
-Focus always stays on the trigger.
-
-| Key                  | Closed                            | Open                               |
-| -------------------- | --------------------------------- | ---------------------------------- |
-| `Enter` / `Space`    | Open                              | Select the active option and close |
-| `ArrowDown`          | Open                              | Next option                        |
-| `ArrowUp`            | —                                 | Previous option                    |
-| `Home` / `End`       | —                                 | First / last option                |
-| Printable characters | Open at the first matching option | Typeahead to the matching option   |
-| `Escape`             | —                                 | Close without changing the value   |
-| `Tab`                | Move focus                        | Close and move focus               |
-
-Picking the already-selected option keeps it selected (it does not toggle off). The highlighted option follows the pointer too, so keyboard and mouse share one highlight.
-
-## Accessibility
-
-- Give the trigger an accessible name (`aria-label` or `aria-labelledby`).
-- `ScSelectItemIcon` and `ScSelectIcon` set `aria-hidden="true"`.
-- Disabled selects stay focusable (`aria-disabled`, Aria's soft-disabled default) so screen-reader users can discover them.
-
-## API Reference
-
-### ScSelect
-
-| Member            | Type                               | Description                                                                     |
-| ----------------- | ---------------------------------- | ------------------------------------------------------------------------------- |
-| `value`           | `model<string>`                    | Selected option value (`''` when none)                                          |
-| `placeholder`     | `input<string>`                    | Shown by `ScSelectValue` when nothing is chosen                                 |
-| `displayWith`     | `input<(value: string) => string>` | Label for a value, used before options render (return `undefined` to fall back) |
-| `disabled`        | `input<boolean>`                   | Disables the select                                                             |
-| `readonly`        | `input<boolean>`                   | Prevents opening/changing                                                       |
-| `required`        | `input<boolean>`                   | Sets `aria-required` on the trigger                                             |
-| `invalid`         | `input<boolean>`                   | Sets `aria-invalid` on the trigger                                              |
-| `touch`           | `output<void>`                     | Emitted when focus leaves the trigger                                           |
-| `open()`          | `Signal<boolean>`                  | Whether the popup is open                                                       |
-| `selectedLabel()` | `Signal<string>`                   | Label of the selected option (or its value)                                     |
-| `select(value)`   | `void`                             | Select a value, close, refocus the trigger                                      |
-| `close()`         | `void`                             | Close and refocus the trigger                                                   |
-| `focus()`         | `void`                             | Focus the trigger                                                               |
-| `class`           | `input<string>`                    | Additional CSS classes                                                          |
-
-### ScSelectTrigger
-
-| Property | Type                | Description            |
-| -------- | ------------------- | ---------------------- |
-| `size`   | `'default' \| 'sm'` | Trigger height         |
-| `class`  | `string`            | Additional CSS classes |
-
-### ScSelectItem
-
-| Property   | Type      | Description                                             |
-| ---------- | --------- | ------------------------------------------------------- |
-| `value`    | `string`  | The option's value                                      |
-| `label`    | `string`  | Label used for display and typeahead (defaults to text) |
-| `disabled` | `boolean` | Disables the option                                     |
-| `class`    | `string`  | Additional CSS classes                                  |
-
-All other parts accept a `class` input only.
-
-## Architecture
-
-```
-ScSelect (form control, exportAs: 'scSelect', provides SC_SELECT)
-├── ScSelectTrigger (Combobox host, role=combobox) [projected]
-│   ├── ScSelectValue (label or placeholder)
-│   └── ScSelectIcon (chevron)
-└── ScSelectPortal (ng-template, rendered inside ngComboboxPopup via ScPortalOutlet)
-    └── ScSelectPopup
-        └── ScSelectList (Listbox + ComboboxWidget; activedescendant focus, explicit selection)
-            ├── ScSelectGroup → ScSelectGroupLabel, ScSelectItem…
-            ├── ScSelectSeparator
-            └── ScSelectItem (Option) → ScSelectItemIcon, ScSelectItemLabel, ScSelectItemIndicator
-```
-
-`ScPortalOutlet` renders the consumer's portal template with the popup's injector so `ComboboxWidget` can resolve `COMBOBOX_POPUP` — the consumer-declared template cannot see it otherwise.
-
-## Dependencies
-
-- `@angular/aria/combobox` - Combobox behavior
-- `@angular/aria/listbox` - Listbox and option behavior
-- `@angular/cdk/overlay` - Overlay positioning
-- `@angular/forms/signals` - `FormValueControl` contract
+- Several values: the Multiselect.
+- Object values: the value is a string, as Signal Forms binds it.
+- Base UI's Backdrop and Arrow: shadcn uses neither.
 
 ## Known issue
 
-`@angular/aria` 22.2.1 forwards keys from the trigger to the list once per render (`Combobox` relays through an `afterRenderEffect`). Keys arriving within the same frame are coalesced and only the last one is applied. This does not affect normal typing, but scripted input or barcode scanners can lose keystrokes.
+`@angular/aria` forwards keys from the trigger to the list once per render: keys arriving within the same frame are coalesced. Normal typing is unaffected; scripted input or barcode scanners can lose keystrokes.
