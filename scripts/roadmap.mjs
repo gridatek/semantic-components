@@ -1,5 +1,6 @@
 #!/usr/bin/env node
-// Refreshes docs/roadmap.md: the inventory line and the phase tables — each
+// Refreshes docs/roadmap.md: the inventory line and its two lists (in shadcn,
+// not in shadcn) — each
 // component's level (from the components it imports), size, library, shadcn
 // counterpart, and whether it has e2e demo tests and an RTL demo. The ticks
 // already set are kept; the rest of the document is left as it is.
@@ -183,18 +184,16 @@ for (const line of roadmap.split('\n')) {
 }
 
 const box = (done) => (done ? '[x]' : '[ ]');
-const libOrder = (lib) => LIBRARIES.indexOf(lib);
-const table = (list) =>
+/** Atomic design, from the imports: the level a component is at. */
+const LEVEL = ['atom', 'molecule', 'organism'];
+/** A list's table; `shadcn`: with the shadcn counterpart's name (List 1). */
+const table = (list, shadcn) =>
   [
-    '| # | Component | Library | Built on | Size | shadcn | Styles | E2E | Mobile | RTL | Dark | SSR | Docs |',
-    '| -: | --- | --- | --- | -: | --- | :-: | :-: | :-: | :-: | :-: | :-: | :-: |',
+    `| # | Component | Library | Level | Built on | Size |${shadcn ? ' shadcn |' : ''} Styles | E2E | Mobile | RTL | Dark | SSR | Docs |`,
+    `| -: | --- | --- | --- | --- | -: |${shadcn ? ' --- |' : ''} :-: | :-: | :-: | :-: | :-: | :-: | :-: |`,
     ...list
-      .sort(
-        (a, b) =>
-          libOrder(a.lib) - libOrder(b.lib) ||
-          a.size - b.size ||
-          a.name.localeCompare(b.name),
-      )
+      // By name: the next one to rewrite is named by the user, not by its place.
+      .sort((a, b) => a.name.localeCompare(b.name))
       .map((row, i) => {
         // [Styles, E2E, Mobile, RTL, Dark, SSR, Docs]: kept, or from the facts.
         const set = ticks.get(row.path) ?? [
@@ -206,12 +205,12 @@ const table = (list) =>
           false,
           false,
         ];
-        return `| ${i + 1} | [${row.name}](../apps/showcase/src/app/pages/docs/${row.path}) | ${row.lib} | ${row.deps.length ? row.deps.join(', ') : '—'} | ${row.size} | ${row.shadcn} | ${set.map(box).join(' | ')} |`;
+        return `| ${i + 1} | [${row.name}](../apps/showcase/src/app/pages/docs/${row.path}) | ${row.lib} | ${LEVEL[Math.min(row.level, 3) - 1]} | ${row.deps.length ? row.deps.join(', ') : '—'} | ${row.size} |${shadcn ? ` ${row.shadcn} |` : ''} ${set.map(box).join(' | ')} |`;
       }),
   ].join('\n');
 
-const byLevel = (n) => rows.filter((row) => row.level === n);
-const organisms = rows.filter((row) => row.level >= 3);
+const fromShadcn = rows.filter((row) => row.shadcn !== '—');
+const ours = rows.filter((row) => row.shadcn === '—');
 const count = (key) =>
   rows.filter(
     (row) => row[key] === true || (key === 'shadcn' && row.shadcn !== '—'),
@@ -222,7 +221,7 @@ roadmap = roadmap.replace(
   /^Inventory \(.*$/m,
   `Inventory (${rows.length} components): ${count('shadcn')} with a shadcn counterpart · ${count('e2e')} with e2e demo tests · ${rows.length} with a page axe test · ${count('rtl')} with an RTL demo.`,
 );
-const replaceTable = (heading, list) => {
+const replaceTable = (heading, list, shadcn) => {
   const start = roadmap.indexOf(heading);
   if (start < 0) throw new Error(`missing: ${heading}`);
   // The table: from its header row (padded by prettier or not) to the first
@@ -238,13 +237,12 @@ const replaceTable = (heading, list) => {
   roadmap =
     roadmap.slice(0, start) +
     roadmap.slice(start, tableStart).replace(/\(\d+\)/, `(${list.length})`) +
-    table(list) +
+    table(list, shadcn) +
     roadmap.slice(tableEnd);
 };
-replaceTable('## Phase 1 — Atoms', byLevel(1));
-replaceTable('## Phase 2 — Molecules', byLevel(2));
-replaceTable('## Phase 3 — Organisms', organisms);
+replaceTable('## List 1 — In shadcn', fromShadcn, true);
+replaceTable('## List 2 — Not in shadcn', ours, false);
 writeFileSync(roadmapPath, roadmap);
 console.log(
-  `docs/roadmap.md: ${rows.length} components — ${byLevel(1).length} atoms, ${byLevel(2).length} molecules, ${organisms.length} organisms. Run prettier on it.`,
+  `docs/roadmap.md: ${rows.length} components — ${fromShadcn.length} in shadcn, ${ours.length} not. Run prettier on it.`,
 );
