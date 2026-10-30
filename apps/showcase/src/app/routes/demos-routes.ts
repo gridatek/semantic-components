@@ -503,60 +503,6 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/control-group',
-    children: [
-      {
-        path: 'control-group-usage-demo',
-        loadComponent: () =>
-          import('../pages/docs/control-group/demos/control-group-usage-demo').then(
-            (m) => m.ControlGroupUsageDemo,
-          ),
-      },
-      {
-        path: 'nested-control-group-demo',
-        loadComponent: () =>
-          import('../pages/docs/control-group/demos/nested-control-group-demo').then(
-            (m) => m.NestedControlGroupDemo,
-          ),
-      },
-      {
-        path: 'input-control-group-demo',
-        loadComponent: () =>
-          import('../pages/docs/control-group/demos/input-control-group-demo').then(
-            (m) => m.InputControlGroupDemo,
-          ),
-      },
-      {
-        path: 'text-control-group-demo',
-        loadComponent: () =>
-          import('../pages/docs/control-group/demos/text-control-group-demo').then(
-            (m) => m.TextControlGroupDemo,
-          ),
-      },
-      {
-        path: 'input-group-control-group-demo',
-        loadComponent: () =>
-          import('../pages/docs/control-group/demos/input-group-control-group-demo').then(
-            (m) => m.InputGroupControlGroupDemo,
-          ),
-      },
-      {
-        path: 'select-control-group-demo',
-        loadComponent: () =>
-          import('../pages/docs/control-group/demos/select-control-group-demo').then(
-            (m) => m.SelectControlGroupDemo,
-          ),
-      },
-      {
-        path: 'rtl-control-group-demo',
-        loadComponent: () =>
-          import('../pages/docs/control-group/demos/rtl-control-group-demo').then(
-            (m) => m.RtlControlGroupDemo,
-          ),
-      },
-    ],
-  },
-  {
     path: 'demos/calendar',
     children: [
       {
@@ -1144,6 +1090,60 @@ export const demosRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/context-menu/demos/context-menu-aria-demo').then(
             (m) => m.ContextMenuAriaDemo,
+          ),
+      },
+    ],
+  },
+  {
+    path: 'demos/control-group',
+    children: [
+      {
+        path: 'control-group-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/control-group/demos/control-group-usage-demo').then(
+            (m) => m.ControlGroupUsageDemo,
+          ),
+      },
+      {
+        path: 'nested-control-group-demo',
+        loadComponent: () =>
+          import('../pages/docs/control-group/demos/nested-control-group-demo').then(
+            (m) => m.NestedControlGroupDemo,
+          ),
+      },
+      {
+        path: 'input-control-group-demo',
+        loadComponent: () =>
+          import('../pages/docs/control-group/demos/input-control-group-demo').then(
+            (m) => m.InputControlGroupDemo,
+          ),
+      },
+      {
+        path: 'text-control-group-demo',
+        loadComponent: () =>
+          import('../pages/docs/control-group/demos/text-control-group-demo').then(
+            (m) => m.TextControlGroupDemo,
+          ),
+      },
+      {
+        path: 'input-group-control-group-demo',
+        loadComponent: () =>
+          import('../pages/docs/control-group/demos/input-group-control-group-demo').then(
+            (m) => m.InputGroupControlGroupDemo,
+          ),
+      },
+      {
+        path: 'select-control-group-demo',
+        loadComponent: () =>
+          import('../pages/docs/control-group/demos/select-control-group-demo').then(
+            (m) => m.SelectControlGroupDemo,
+          ),
+      },
+      {
+        path: 'rtl-control-group-demo',
+        loadComponent: () =>
+          import('../pages/docs/control-group/demos/rtl-control-group-demo').then(
+            (m) => m.RtlControlGroupDemo,
           ),
       },
     ],

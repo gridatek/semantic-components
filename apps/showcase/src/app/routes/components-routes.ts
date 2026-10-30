@@ -174,12 +174,6 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/button/button-page'),
       },
       {
-        path: 'control-group',
-        title: 'Control Group - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/control-group/control-group-page'),
-      },
-      {
         path: 'button-pattern',
         title: 'Button Pattern - Semantic Components',
         loadComponent: () =>
@@ -253,6 +247,12 @@ export const componentsRoutes: Route[] = [
         title: 'Context Menu - Semantic Components',
         loadComponent: () =>
           import('../pages/docs/context-menu/context-menu-page'),
+      },
+      {
+        path: 'control-group',
+        title: 'Control Group - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/control-group/control-group-page'),
       },
       {
         path: 'copy-to-clipboard',

@@ -136,14 +136,6 @@
     "category": "Buttons & Actions"
   },
   {
-    "name": "Control Group",
-    "path": "control-group",
-    "description": "An input or a select joined with its buttons into one control: shared borders, outer corners rounded. shadcn’s Button Group.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Buttons & Actions"
-  },
-  {
     "name": "Button Pattern",
     "path": "button-pattern",
     "description": "A directive that adds button behavior to non-button elements.",
@@ -262,6 +254,14 @@
     "status": "Experimental",
     "library": "ui",
     "category": "Overlay"
+  },
+  {
+    "name": "Control Group",
+    "path": "control-group",
+    "description": "An input or a select joined with its buttons into one control: shared borders, outer corners rounded. shadcn’s Button Group.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Buttons & Actions"
   },
   {
     "name": "Copy to Clipboard",
