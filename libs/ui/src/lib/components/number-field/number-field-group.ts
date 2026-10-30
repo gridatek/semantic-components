@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
-import { buttonGroupVariants } from '../button-group';
 
 /** How the group lays out the input and its buttons. */
 export type ScNumberFieldGroupVariant = 'split' | 'stacked';
@@ -40,6 +40,8 @@ const ring = cn(
   },
 })
 export class ScNumberFieldGroup {
+  private readonly buttonGroupStyles = injectPreset().buttonGroup;
+
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScNumberFieldGroupVariant>('split');
 
@@ -47,7 +49,7 @@ export class ScNumberFieldGroup {
     cn(
       this.variant() === 'stacked'
         ? stacked
-        : buttonGroupVariants({ orientation: 'horizontal' }),
+        : this.buttonGroupStyles({ orientation: 'horizontal' }),
       ring,
       this.classInput(),
     ),

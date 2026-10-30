@@ -20,6 +20,8 @@ export interface ScButtonVariants {
 @Directive({
   selector: 'button[scButton]',
   host: {
+    // Read by the button group's styles (borders beside an input).
+    'data-slot': 'button',
     '[attr.type]': 'type()',
     '[disabled]': 'disabled()',
     '[attr.aria-disabled]': 'disabled() || null',

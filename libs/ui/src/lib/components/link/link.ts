@@ -21,6 +21,8 @@ import { type ScButtonVariants } from '../button';
 @Directive({
   selector: 'a[scLink]',
   host: {
+    // A button's look: read by the button group's styles, as a button's.
+    'data-slot': 'button',
     '[attr.aria-disabled]': 'disabled() || null',
     '[attr.tabindex]': 'disabled() ? -1 : null',
     '[class]': 'class()',

@@ -138,7 +138,7 @@
   {
     "name": "Button Group",
     "path": "button-group",
-    "description": "Groups buttons together with merged borders and rounding.",
+    "description": "Related buttons joined into one: shared borders, outer corners rounded, side by side or stacked; inputs, selects and text join in.",
     "status": "Experimental",
     "library": "ui",
     "category": "Buttons & Actions"

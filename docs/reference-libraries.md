@@ -82,6 +82,20 @@ A link styled as a button (`a[scLink]`). shadcn has no Link component — its Bu
 - **The address is the consumer's** (`href` or `routerLink`), as Angular Material: no `href` input, no default `'#'`, nothing written by the link; without one, the `<a>` is not a link — documented, not warned about (the user's choice).
 - **Disabled** as Angular Material, plus middle-click, and in the capture phase so a `routerLink` never hears the click; the `href` kept, as React Aria.
 
+## Button Group
+
+Buttons joined into one (`div[scButtonGroup]`). A shadcn component, so no web research: Base UI and shadcn's reference app (2026-10-30).
+
+| Library                                                                   | What to read                                                                                                                             |
+| ------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| shadcn Button Group (`shadcn-reference/presets/*/button-group.tsx`, docs) | `div role="group"`, named by `aria-label`; Tab to each button; text (`render` as a label) and a separator (its Separator); eight looks   |
+| Base UI (`@base-ui/react/docs`)                                           | No button group. Its Toolbar is the other model — one tab stop, arrow keys between items — and its Toggle Group, for buttons that toggle |
+
+**Taken:**
+
+- **shadcn's model**: a plain group, Tab to each button — not Base UI's Toolbar (arrow keys), which is a component of its own. The page says when to use a Toggle Group or a Toolbar instead, as shadcn's "ButtonGroup vs ToggleGroup".
+- **Each preset's look**, from its own `button-group.tsx`; the text on a `label` too, for shadcn's `render={<Label />}`.
+
 ## Tree Table
 
 Tree rows in the Data Table (`ui/data-table`), the user's choice over a

@@ -132,25 +132,32 @@ Styles are written in Tailwind CSS and managed with [class-variance-authority](h
 - Predictable, overridable class names
 - Consistent variants (`default`, `outline`, `ghost`, `destructive`, `link`) across all components
 
+And shadcn's eight styles are presets — nova, vega, maia, lyra, mira, luma, sera, rhea — chosen once, when the app starts. A preset holds the classes of the components whose look changes from style to style: the button (every part that looks like one, a link included) and the button group, with its text, so far.
+
 ```typescript
-export const buttonVariants = cva('inline-flex items-center justify-center rounded-lg border ...', {
+import { nova } from '@semantic-components/presets/nova';
+
+provideScConfig({ preset: nova });
+```
+
+```typescript
+// libs/presets/nova/src/button.ts — shadcn's nova, as a cva
+export const button = cva('group/button inline-flex shrink-0 items-center justify-center rounded-lg border ...', {
   variants: {
     variant: {
-      default: 'bg-primary text-primary-foreground',
-      outline: 'border-border bg-background hover:bg-muted',
-      ghost: 'hover:bg-muted hover:text-foreground',
-      destructive: 'bg-destructive/10 text-destructive',
-      link: 'text-primary underline-offset-4 hover:underline',
+      default: 'bg-primary text-primary-foreground hover:bg-primary/80',
+      outline: 'border-border bg-background hover:bg-muted ...',
+      // secondary, ghost, destructive, link
     },
     size: {
-      default: 'h-8 px-2.5',
-      sm: 'h-7 px-2.5 text-[0.8rem]',
-      lg: 'h-9 px-2.5',
-      icon: 'size-8',
+      default: 'h-8 gap-1.5 px-2.5 ...',
+      // xs, sm, lg, icon, icon-xs, icon-sm, icon-lg
     },
   },
 });
 ```
+
+A part reads its preset's classes (`injectPreset().button({ variant, size })`, `injectPreset().buttonGroup({ orientation })`); your `class` is merged over them.
 
 ### Built on Solid Foundations
 

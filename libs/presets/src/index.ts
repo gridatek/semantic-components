@@ -14,10 +14,17 @@ export type ScButtonVariant =
 export type ScButtonSize =
   'default' | 'xs' | 'sm' | 'lg' | 'icon' | 'icon-xs' | 'icon-sm' | 'icon-lg';
 
+export type ScButtonGroupOrientation = 'horizontal' | 'vertical';
+
 /** A preset: the components' classes in one of shadcn's styles. */
 export interface ScPreset {
   button: (props: {
     variant?: ScButtonVariant | null;
     size?: ScButtonSize | null;
   }) => string;
+  buttonGroup: (props: {
+    orientation?: ScButtonGroupOrientation | null;
+  }) => string;
+  /** The text beside a group's buttons. */
+  buttonGroupText: string;
 }

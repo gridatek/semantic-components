@@ -1,19 +1,21 @@
 import { Directive, computed, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 
+/**
+ * Text beside a group's buttons, in the preset's look. On a `label`, it
+ * names the group's input (`for`).
+ */
 @Directive({
-  selector: 'div[scButtonGroupText]',
+  selector: 'div[scButtonGroupText], label[scButtonGroupText]',
   host: {
     '[class]': 'class()',
   },
 })
 export class ScButtonGroupText {
+  private readonly styles = injectPreset().buttonGroupText;
+
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
-    cn(
-      "bg-muted gap-2 rounded-lg border px-2.5 text-sm font-medium [&_svg:not([class*='size-'])]:size-4 flex items-center [&_svg]:pointer-events-none",
-      this.classInput(),
-    ),
-  );
+  protected readonly class = computed(() => cn(this.styles, this.classInput()));
 }

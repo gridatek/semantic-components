@@ -1,44 +1,44 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { ButtonGroupOrientationDemo } from './button-group-orientation-demo';
+import { OrientationButtonGroupDemo } from './orientation-button-group-demo';
 
 @Component({
-  selector: 'app-button-group-orientation-demo-container',
-  imports: [DemoContainer, ButtonGroupOrientationDemo],
-  encapsulation: ViewEncapsulation.None,
+  selector: 'app-orientation-button-group-demo-container',
+  imports: [DemoContainer, OrientationButtonGroupDemo],
   template: `
     <app-demo-container
       title="Orientation"
-      demoUrl="/demos/button-group/button-group-orientation-demo"
+      demoUrl="/demos/button-group/orientation-button-group-demo"
       [code]="code"
     >
-      <app-button-group-orientation-demo />
+      <app-orientation-button-group-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
 })
-export class ButtonGroupOrientationDemoContainer {
+export class OrientationButtonGroupDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScButton, ScButtonGroup } from '@semantic-components/ui';
 import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
-  selector: 'app-button-group-orientation-demo',
+  selector: 'app-orientation-button-group-demo',
   imports: [ScButton, ScButtonGroup, SiMinusIcon, SiPlusIcon],
-  host: { class: 'flex w-full justify-center' },
-  encapsulation: ViewEncapsulation.None,
   template: \`
-    <div scButtonGroup orientation="vertical">
+    <div scButtonGroup orientation="vertical" aria-label="Media controls">
       <button scButton variant="outline" size="icon">
         <svg siPlusIcon></svg>
-        <span class="sr-only">Increase</span>
+        <span class="sr-only">Volume up</span>
       </button>
       <button scButton variant="outline" size="icon">
         <svg siMinusIcon></svg>
-        <span class="sr-only">Decrease</span>
+        <span class="sr-only">Volume down</span>
       </button>
     </div>
   \`,
+  host: { class: 'flex w-full justify-center' },
+  encapsulation: ViewEncapsulation.None,
 })
-export class ButtonGroupOrientationDemo {}`;
+export class OrientationButtonGroupDemo {}`;
 }

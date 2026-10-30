@@ -269,6 +269,7 @@ Known deliberate divergences — do **not** "fix" these to match upstream:
   `disabled`, so its preset adds `aria-disabled:pointer-events-none
 aria-disabled:opacity-50` beside shadcn's `disabled:` ones: the same look
   (`libs/presets/*/src/button.ts`).
+- **Button Group: children by position** — shadcn's group finds its children by `data-slot` (`*:data-slot:rounded-e-none`, `[&>[data-slot]~[data-slot]]`, and a `!` rule for the last); ours by position (`[&>*:not(:last-child)]`, `[&>*:not(:first-child)]`), so any child joins, slot or not, and the last needs no `!` rule. Where luma, rhea and sera read `[data-variant=outline]` on a child (an input's border beside outline buttons), ours read `[data-slot=button]`: our buttons carry no `data-variant`, so the border follows any button, not only outline ones. Sera's text reads `group/button-group`, which shadcn's group doesn't set and ours does (`libs/presets/*/src/button-group.ts`).
 - **Decomposition** — upstream ships one file per component; we split into
   composable directives, so one shadcn class often maps to several of our
   directives.
