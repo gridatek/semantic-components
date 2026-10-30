@@ -136,9 +136,9 @@
     "category": "Buttons & Actions"
   },
   {
-    "name": "Button Group",
-    "path": "button-group",
-    "description": "Related buttons joined into one: shared borders, outer corners rounded, side by side or stacked; inputs, selects and text join in.",
+    "name": "Control Group",
+    "path": "control-group",
+    "description": "An input or a select joined with its buttons into one control: shared borders, outer corners rounded. shadcn’s Button Group.",
     "status": "Experimental",
     "library": "ui",
     "category": "Buttons & Actions"

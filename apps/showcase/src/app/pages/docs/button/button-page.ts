@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   ScHeading,
   ScTable,
@@ -19,6 +20,10 @@ import { DestructiveButtonDemoContainer } from './demos/destructive-button-demo-
 import { DisabledButtonDemoContainer } from './demos/disabled-button-demo-container';
 import { GhostButtonDemoContainer } from './demos/ghost-button-demo-container';
 import { GroupButtonDemoContainer } from './demos/group-button-demo-container';
+import { GroupMenuButtonDemoContainer } from './demos/group-menu-button-demo-container';
+import { GroupPopoverButtonDemoContainer } from './demos/group-popover-button-demo-container';
+import { GroupSeparatorButtonDemoContainer } from './demos/group-separator-button-demo-container';
+import { GroupSizeButtonDemoContainer } from './demos/group-size-button-demo-container';
 import { IconButtonDemoContainer } from './demos/icon-button-demo-container';
 import { LinkButtonDemoContainer } from './demos/link-button-demo-container';
 import { OutlineButtonDemoContainer } from './demos/outline-button-demo-container';
@@ -27,13 +32,16 @@ import { RtlButtonDemoContainer } from './demos/rtl-button-demo-container';
 import { SecondaryButtonDemoContainer } from './demos/secondary-button-demo-container';
 import { SizeButtonDemoContainer } from './demos/size-button-demo-container';
 import { SpinnerButtonDemoContainer } from './demos/spinner-button-demo-container';
+import { SplitButtonDemoContainer } from './demos/split-button-demo-container';
 import { SubmitButtonDemoContainer } from './demos/submit-button-demo-container';
+import { VerticalGroupButtonDemoContainer } from './demos/vertical-group-button-demo-container';
 import { WithIconButtonDemoContainer } from './demos/with-icon-button-demo-container';
 
 @Component({
   selector: 'app-button-page',
   imports: [
     Anatomy,
+    RouterLink,
     ButtonUsageDemoContainer,
     SizeButtonDemoContainer,
     DefaultButtonDemoContainer,
@@ -47,6 +55,12 @@ import { WithIconButtonDemoContainer } from './demos/with-icon-button-demo-conta
     RoundedButtonDemoContainer,
     SpinnerButtonDemoContainer,
     GroupButtonDemoContainer,
+    VerticalGroupButtonDemoContainer,
+    GroupSizeButtonDemoContainer,
+    GroupSeparatorButtonDemoContainer,
+    SplitButtonDemoContainer,
+    GroupMenuButtonDemoContainer,
+    GroupPopoverButtonDemoContainer,
     AsLinkButtonDemoContainer,
     DisabledButtonDemoContainer,
     RtlButtonDemoContainer,
@@ -101,6 +115,21 @@ import { WithIconButtonDemoContainer } from './demos/with-icon-button-demo-conta
         </p>
       </section>
 
+      <section class="space-y-4">
+        <h2 scHeading appToc>Groups</h2>
+        <p class="text-muted-foreground">
+          Buttons are joined with a
+          <a
+            routerLink="/docs/components/control-group"
+            class="underline underline-offset-4"
+            >Control Group</a
+          >
+          (shadcn&apos;s Button Group): side by side or stacked, with a
+          separator, as a split button, with a menu or a popover — the Group
+          examples below. Buttons that toggle a state are a Toggle Group.
+        </p>
+      </section>
+
       <section class="space-y-8">
         <h2 scHeading appToc>Examples</h2>
         <app-size-button-demo-container />
@@ -115,6 +144,12 @@ import { WithIconButtonDemoContainer } from './demos/with-icon-button-demo-conta
         <app-rounded-button-demo-container />
         <app-spinner-button-demo-container />
         <app-group-button-demo-container />
+        <app-vertical-group-button-demo-container />
+        <app-group-size-button-demo-container />
+        <app-group-separator-button-demo-container />
+        <app-split-button-demo-container />
+        <app-group-menu-button-demo-container />
+        <app-group-popover-button-demo-container />
         <app-as-link-button-demo-container />
         <app-disabled-button-demo-container />
         <app-submit-button-demo-container />

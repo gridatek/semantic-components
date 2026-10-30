@@ -8,7 +8,7 @@ export * from './backdrop';
 export * from './badge';
 export * from './breadcrumb';
 export * from './button';
-export * from './button-group';
+export * from './control-group';
 export * from './calendar';
 export * from './card';
 export * from './checkbox';

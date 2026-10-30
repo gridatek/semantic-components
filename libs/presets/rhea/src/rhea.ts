@@ -1,6 +1,6 @@
 import type { ScPreset } from '@semantic-components/presets';
 import { button } from './button';
-import { buttonGroup, buttonGroupText } from './button-group';
+import { controlGroup, controlGroupText } from './control-group';
 
 /** The rhea preset: `provideScConfig({ preset: rhea })`. */
-export const rhea: ScPreset = { button, buttonGroup, buttonGroupText };
+export const rhea: ScPreset = { button, controlGroup, controlGroupText };

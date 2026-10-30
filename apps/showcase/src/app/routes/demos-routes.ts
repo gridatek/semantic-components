@@ -431,6 +431,48 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
+        path: 'vertical-group-button-demo',
+        loadComponent: () =>
+          import('../pages/docs/button/demos/vertical-group-button-demo').then(
+            (m) => m.VerticalGroupButtonDemo,
+          ),
+      },
+      {
+        path: 'group-size-button-demo',
+        loadComponent: () =>
+          import('../pages/docs/button/demos/group-size-button-demo').then(
+            (m) => m.GroupSizeButtonDemo,
+          ),
+      },
+      {
+        path: 'group-separator-button-demo',
+        loadComponent: () =>
+          import('../pages/docs/button/demos/group-separator-button-demo').then(
+            (m) => m.GroupSeparatorButtonDemo,
+          ),
+      },
+      {
+        path: 'split-button-demo',
+        loadComponent: () =>
+          import('../pages/docs/button/demos/split-button-demo').then(
+            (m) => m.SplitButtonDemo,
+          ),
+      },
+      {
+        path: 'group-menu-button-demo',
+        loadComponent: () =>
+          import('../pages/docs/button/demos/group-menu-button-demo').then(
+            (m) => m.GroupMenuButtonDemo,
+          ),
+      },
+      {
+        path: 'group-popover-button-demo',
+        loadComponent: () =>
+          import('../pages/docs/button/demos/group-popover-button-demo').then(
+            (m) => m.GroupPopoverButtonDemo,
+          ),
+      },
+      {
         path: 'as-link-button-demo',
         loadComponent: () =>
           import('../pages/docs/button/demos/as-link-button-demo').then(
@@ -461,97 +503,55 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/button-group',
+    path: 'demos/control-group',
     children: [
       {
-        path: 'button-group-usage-demo',
+        path: 'control-group-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/button-group/demos/button-group-usage-demo').then(
-            (m) => m.ButtonGroupUsageDemo,
+          import('../pages/docs/control-group/demos/control-group-usage-demo').then(
+            (m) => m.ControlGroupUsageDemo,
           ),
       },
       {
-        path: 'orientation-button-group-demo',
+        path: 'nested-control-group-demo',
         loadComponent: () =>
-          import('../pages/docs/button-group/demos/orientation-button-group-demo').then(
-            (m) => m.OrientationButtonGroupDemo,
+          import('../pages/docs/control-group/demos/nested-control-group-demo').then(
+            (m) => m.NestedControlGroupDemo,
           ),
       },
       {
-        path: 'size-button-group-demo',
+        path: 'input-control-group-demo',
         loadComponent: () =>
-          import('../pages/docs/button-group/demos/size-button-group-demo').then(
-            (m) => m.SizeButtonGroupDemo,
+          import('../pages/docs/control-group/demos/input-control-group-demo').then(
+            (m) => m.InputControlGroupDemo,
           ),
       },
       {
-        path: 'nested-button-group-demo',
+        path: 'text-control-group-demo',
         loadComponent: () =>
-          import('../pages/docs/button-group/demos/nested-button-group-demo').then(
-            (m) => m.NestedButtonGroupDemo,
+          import('../pages/docs/control-group/demos/text-control-group-demo').then(
+            (m) => m.TextControlGroupDemo,
           ),
       },
       {
-        path: 'separator-button-group-demo',
+        path: 'input-group-control-group-demo',
         loadComponent: () =>
-          import('../pages/docs/button-group/demos/separator-button-group-demo').then(
-            (m) => m.SeparatorButtonGroupDemo,
+          import('../pages/docs/control-group/demos/input-group-control-group-demo').then(
+            (m) => m.InputGroupControlGroupDemo,
           ),
       },
       {
-        path: 'split-button-group-demo',
+        path: 'select-control-group-demo',
         loadComponent: () =>
-          import('../pages/docs/button-group/demos/split-button-group-demo').then(
-            (m) => m.SplitButtonGroupDemo,
+          import('../pages/docs/control-group/demos/select-control-group-demo').then(
+            (m) => m.SelectControlGroupDemo,
           ),
       },
       {
-        path: 'input-button-group-demo',
+        path: 'rtl-control-group-demo',
         loadComponent: () =>
-          import('../pages/docs/button-group/demos/input-button-group-demo').then(
-            (m) => m.InputButtonGroupDemo,
-          ),
-      },
-      {
-        path: 'text-button-group-demo',
-        loadComponent: () =>
-          import('../pages/docs/button-group/demos/text-button-group-demo').then(
-            (m) => m.TextButtonGroupDemo,
-          ),
-      },
-      {
-        path: 'input-group-button-group-demo',
-        loadComponent: () =>
-          import('../pages/docs/button-group/demos/input-group-button-group-demo').then(
-            (m) => m.InputGroupButtonGroupDemo,
-          ),
-      },
-      {
-        path: 'dropdown-button-group-demo',
-        loadComponent: () =>
-          import('../pages/docs/button-group/demos/dropdown-button-group-demo').then(
-            (m) => m.DropdownButtonGroupDemo,
-          ),
-      },
-      {
-        path: 'select-button-group-demo',
-        loadComponent: () =>
-          import('../pages/docs/button-group/demos/select-button-group-demo').then(
-            (m) => m.SelectButtonGroupDemo,
-          ),
-      },
-      {
-        path: 'popover-button-group-demo',
-        loadComponent: () =>
-          import('../pages/docs/button-group/demos/popover-button-group-demo').then(
-            (m) => m.PopoverButtonGroupDemo,
-          ),
-      },
-      {
-        path: 'rtl-button-group-demo',
-        loadComponent: () =>
-          import('../pages/docs/button-group/demos/rtl-button-group-demo').then(
-            (m) => m.RtlButtonGroupDemo,
+          import('../pages/docs/control-group/demos/rtl-control-group-demo').then(
+            (m) => m.RtlControlGroupDemo,
           ),
       },
     ],

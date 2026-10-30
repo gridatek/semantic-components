@@ -1,6 +1,6 @@
 import type { ScPreset } from '@semantic-components/presets';
 import { button } from './button';
-import { buttonGroup, buttonGroupText } from './button-group';
+import { controlGroup, controlGroupText } from './control-group';
 
 /** The lyra preset: `provideScConfig({ preset: lyra })`. */
-export const lyra: ScPreset = { button, buttonGroup, buttonGroupText };
+export const lyra: ScPreset = { button, controlGroup, controlGroupText };

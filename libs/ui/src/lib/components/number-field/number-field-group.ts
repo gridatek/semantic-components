@@ -40,7 +40,7 @@ const ring = cn(
   },
 })
 export class ScNumberFieldGroup {
-  private readonly buttonGroupStyles = injectPreset().buttonGroup;
+  private readonly controlGroupStyles = injectPreset().controlGroup;
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScNumberFieldGroupVariant>('split');
@@ -49,7 +49,7 @@ export class ScNumberFieldGroup {
     cn(
       this.variant() === 'stacked'
         ? stacked
-        : this.buttonGroupStyles({ orientation: 'horizontal' }),
+        : this.controlGroupStyles({ orientation: 'horizontal' }),
       ring,
       this.classInput(),
     ),

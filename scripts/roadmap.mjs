@@ -120,7 +120,33 @@ const rows = registry.map((item) => {
   };
 });
 
-// Built on: the components whose exports a component imports.
+// Built on: the components whose exports a component imports, and those whose
+// `data-slot` its styles (or its preset's) read — a button group shapes the
+// buttons, inputs and selects in it.
+const presetFiles = readdirSync(at('libs/presets'), { withFileTypes: true })
+  .filter((entry) => existsSync(at('libs/presets', entry.name, 'src')))
+  .flatMap((entry) => walk(at('libs/presets', entry.name, 'src')));
+/** The components declaring each `data-slot`. */
+const declaring = new Map();
+for (const row of rows)
+  for (const file of row.files)
+    for (const [, a, b] of readFileSync(file, 'utf8').matchAll(
+      /'data-slot':\s*'([\w-]+)'|data-slot="([\w-]+)"/g,
+    )) {
+      const slot = a ?? b;
+      if (!declaring.has(slot)) declaring.set(slot, new Set());
+      declaring.get(slot).add(row.path);
+    }
+/**
+ * The component a slot stands for: the one named after it (`select`), else
+ * its only declarer — none for a role several share (`control`).
+ */
+const slotOwner = (slot) => {
+  const paths = declaring.get(slot);
+  if (!paths) return undefined;
+  if (paths.has(slot)) return slot;
+  return paths.size === 1 ? [...paths][0] : undefined;
+};
 const owner = new Map();
 for (const row of rows)
   for (const file of row.files)
@@ -145,14 +171,38 @@ for (const row of rows) {
         )
           deps.add(owner.get(name));
     }
-  // The preset's button (`injectPreset().button`): built on the button.
-  if (
-    row.path !== 'button' &&
-    row.files.some((file) =>
-      readFileSync(file, 'utf8').includes('injectPreset().button'),
-    )
-  )
-    deps.add('button');
+  // A part's classes from the preset (`injectPreset().buttonGroup`): built on
+  // that part's component (`button-group`).
+  const styles = [...row.files];
+  for (const file of row.files)
+    for (const [, part] of readFileSync(file, 'utf8').matchAll(
+      /injectPreset\(\)\.(\w+)/g,
+    )) {
+      const path = part.replace(/[A-Z]/g, (c) => `-${c.toLowerCase()}`);
+      if (path !== row.path && rows.some((other) => other.path === path))
+        deps.add(path);
+      // Its own part's classes, in every preset: read for slots too.
+      if (path === row.path)
+        styles.push(
+          ...presetFiles.filter((preset) =>
+            new RegExp(`export const ${part}\\b`).test(
+              readFileSync(preset, 'utf8'),
+            ),
+          ),
+        );
+    }
+  // The slots its styles read in what it holds (`[&>[data-slot=select]]`,
+  // `*:data-[slot=button]`, `has-[[data-slot=…]]`) — not those it adapts to
+  // when inside another (`in-data-[slot=button-group]`, `group-…`, `peer-…`).
+  for (const file of new Set(styles))
+    for (const [token, slot] of readFileSync(file, 'utf8').matchAll(
+      /[^\s'"`]*slot=([\w-]+)[^\s'"`]*/g,
+    )) {
+      if (/^(in-|group-|peer-|dark:in-)/.test(token)) continue;
+      const path = slotOwner(slot);
+      if (path && path !== row.path && path !== SAME_AS[row.path])
+        deps.add(path);
+    }
   row.deps = [...deps].sort();
 }
 

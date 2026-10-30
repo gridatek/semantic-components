@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScButton, ScButtonGroup } from '@semantic-components/ui';
+import { ScButton, ScControlGroup } from '@semantic-components/ui';
 import {
   SiArchiveIcon,
   SiClockIcon,
@@ -8,9 +8,9 @@ import {
 
 @Component({
   selector: 'app-group-button-demo',
-  imports: [ScButton, ScButtonGroup, SiArchiveIcon, SiClockIcon, SiFlagIcon],
+  imports: [ScButton, ScControlGroup, SiArchiveIcon, SiClockIcon, SiFlagIcon],
   template: `
-    <div scButtonGroup aria-label="Message actions">
+    <div scControlGroup aria-label="Message actions">
       <button scButton variant="outline">
         <svg siArchiveIcon data-icon="inline-start"></svg>
         Archive

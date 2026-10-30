@@ -174,10 +174,10 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/button/button-page'),
       },
       {
-        path: 'button-group',
-        title: 'Button Group - Semantic Components',
+        path: 'control-group',
+        title: 'Control Group - Semantic Components',
         loadComponent: () =>
-          import('../pages/docs/button-group/button-group-page'),
+          import('../pages/docs/control-group/control-group-page'),
       },
       {
         path: 'button-pattern',
