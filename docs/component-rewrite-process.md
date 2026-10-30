@@ -6,6 +6,8 @@ The goal is not to port the old code: it is to keep the old component's **big id
 
 ## 1. Look outside first
 
+**A component shadcn has** (List 1 of the [roadmap](roadmap.md)): no web search, no downloads. Follow **Base UI** — shadcn's nova is built on it: its parts, behaviour and keyboard from Base UI (its docs in `shadcn-reference/presets/nova/node_modules/@base-ui/react/docs`), its look from shadcn's generated reference app. The steps below are for the components shadcn doesn't have.
+
 1. **Who is used the most.** Weekly npm downloads of the main packages (React, Angular, Vue, framework-agnostic), with a small script in the scratchpad:
 
    ```js
