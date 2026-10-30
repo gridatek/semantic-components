@@ -7,6 +7,7 @@ export {
   ScSidebarMenuButton,
   type ScSidebarMenuButtonVariants,
 } from './sidebar-menu-button';
+export { ScSidebarMenuTooltip } from './sidebar-menu-tooltip';
 export { ScSidebarMenuAction } from './sidebar-menu-action';
 export { ScSidebarMenuSubButton } from './sidebar-menu-sub-button';
 export { ScSidebarMenuSkeleton } from './sidebar-menu-skeleton';
