@@ -3596,6 +3596,60 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/select-next',
+    children: [
+      {
+        path: 'select-next-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/select-next/demos/select-next-usage-demo').then(
+            (m) => m.SelectNextUsageDemo,
+          ),
+      },
+      {
+        path: 'align-item-select-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/select-next/demos/align-item-select-next-demo').then(
+            (m) => m.AlignItemSelectNextDemo,
+          ),
+      },
+      {
+        path: 'groups-select-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/select-next/demos/groups-select-next-demo').then(
+            (m) => m.GroupsSelectNextDemo,
+          ),
+      },
+      {
+        path: 'scrollable-select-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/select-next/demos/scrollable-select-next-demo').then(
+            (m) => m.ScrollableSelectNextDemo,
+          ),
+      },
+      {
+        path: 'disabled-select-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/select-next/demos/disabled-select-next-demo').then(
+            (m) => m.DisabledSelectNextDemo,
+          ),
+      },
+      {
+        path: 'invalid-select-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/select-next/demos/invalid-select-next-demo').then(
+            (m) => m.InvalidSelectNextDemo,
+          ),
+      },
+      {
+        path: 'rtl-select-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/select-next/demos/rtl-select-next-demo').then(
+            (m) => m.RtlSelectNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/separator',
     children: [
       {

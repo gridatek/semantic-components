@@ -8,6 +8,7 @@ import {
   inputGroupButton,
   inputGroupText,
 } from './input-group';
+import { select } from './select';
 
 /** The vega preset: `provideScConfig({ preset: vega })`. */
 export const vega: ScPreset = {
@@ -19,4 +20,5 @@ export const vega: ScPreset = {
   inputGroupAddon,
   inputGroupButton,
   inputGroupText,
+  select,
 };

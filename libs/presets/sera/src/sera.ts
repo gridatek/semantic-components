@@ -8,6 +8,7 @@ import {
   inputGroupButton,
   inputGroupText,
 } from './input-group';
+import { select } from './select';
 
 /** The sera preset: `provideScConfig({ preset: sera })`. */
 export const sera: ScPreset = {
@@ -19,4 +20,5 @@ export const sera: ScPreset = {
   inputGroupAddon,
   inputGroupButton,
   inputGroupText,
+  select,
 };

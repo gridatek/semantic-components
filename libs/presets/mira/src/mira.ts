@@ -8,6 +8,7 @@ import {
   inputGroupButton,
   inputGroupText,
 } from './input-group';
+import { select } from './select';
 
 /** The mira preset: `provideScConfig({ preset: mira })`. */
 export const mira: ScPreset = {
@@ -19,4 +20,5 @@ export const mira: ScPreset = {
   inputGroupAddon,
   inputGroupButton,
   inputGroupText,
+  select,
 };

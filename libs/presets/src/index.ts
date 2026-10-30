@@ -21,6 +21,26 @@ export type ScInputGroupAddonAlign =
 
 export type ScInputGroupButtonSize = 'xs' | 'sm' | 'icon-xs' | 'icon-sm';
 
+/** A select's parts, each its classes: shadcn's on Radix. */
+export interface ScSelectStyles {
+  trigger: string;
+  /** The chevron in the trigger. */
+  icon: string;
+  popup: string;
+  /** Added to the popup when it opens below or above the trigger. */
+  popupPopper: string;
+  /** The list (Radix's Viewport). */
+  viewport: string;
+  group: string;
+  groupLabel: string;
+  item: string;
+  /** The check on the selected item. */
+  itemIndicator: string;
+  separator: string;
+  scrollUpButton: string;
+  scrollDownButton: string;
+}
+
 /** A preset: the components' classes in one of shadcn's styles. */
 export interface ScPreset {
   button: (props: {
@@ -40,4 +60,5 @@ export interface ScPreset {
   /** Over the preset's button, in an input group. */
   inputGroupButton: (props: { size?: ScInputGroupButtonSize | null }) => string;
   inputGroupText: string;
+  select: ScSelectStyles;
 }

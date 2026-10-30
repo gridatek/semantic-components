@@ -8,6 +8,7 @@ import {
   inputGroupButton,
   inputGroupText,
 } from './input-group';
+import { select } from './select';
 
 /** The nova preset: `provideScConfig({ preset: nova })`. */
 export const nova: ScPreset = {
@@ -19,4 +20,5 @@ export const nova: ScPreset = {
   inputGroupAddon,
   inputGroupButton,
   inputGroupText,
+  select,
 };

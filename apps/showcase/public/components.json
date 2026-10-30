@@ -848,6 +848,14 @@
     "category": "Forms"
   },
   {
+    "name": "Select Next",
+    "path": "select-next",
+    "description": "The Select's rewrite: Base UI's parts in each preset's Radix look, a label, scroll buttons; the list below the trigger, or over it.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Forms"
+  },
+  {
     "name": "Select On Focus",
     "path": "select-on-focus",
     "description": "A directive that automatically selects input text on programmatic focus.",

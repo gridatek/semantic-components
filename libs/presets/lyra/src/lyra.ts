@@ -8,6 +8,7 @@ import {
   inputGroupButton,
   inputGroupText,
 } from './input-group';
+import { select } from './select';
 
 /** The lyra preset: `provideScConfig({ preset: lyra })`. */
 export const lyra: ScPreset = {
@@ -19,4 +20,5 @@ export const lyra: ScPreset = {
   inputGroupAddon,
   inputGroupButton,
   inputGroupText,
+  select,
 };

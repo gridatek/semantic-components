@@ -110,6 +110,20 @@ An input or a textarea with addons in one box (`div[scInputGroup]`). A shadcn co
 - **The parts and behaviour**, with a button part of our own selector (`button[scInputGroupButton]`) on the preset's button.
 - **Not the input and textarea parts**: the group shapes `scInput` / `scTextarea` itself, so there is one input, not two.
 
+## Select
+
+A choice among a short list (`div[scSelect]`). A shadcn component: Base UI's Select (local docs) and shadcn's reference app (2026-10-30).
+
+| Library                                                                          | What to read                                                                                                                                                                                                                                                                                                |
+| -------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Base UI Select (`@base-ui/react/docs/react/components/select.md`)                | Parts (Label, Trigger, Value, Icon, Popup, List, Item, ItemText, ItemIndicator, Group, GroupLabel, Separator, ScrollUp/DownArrow); `alignItemWithTrigger` (over the trigger; off by touch, without room); placeholder on the Value; `items` for labels; a name is required; prefer Combobox for large lists |
+| shadcn Select on Radix (`shadcn-reference/presets-radix/*/select.tsx`), its docs | Eight looks (Radix's, the user's choice: not the Base UI ones); Radix's `position` (`item-aligned`, `popper`); examples: Align Item With Trigger, Groups, Scrollable, Disabled, Invalid, RTL                                                                                                                |
+
+**Taken:**
+
+- **The parts, the label and the scroll buttons**, as Base UI's; **the list below the trigger by default** (Radix's `popper`: the user wants the trigger in sight), over it as an option (`alignItemWithTrigger`, Base UI's default).
+- **Not**: several values (our Multiselect), object values (a string, as Signal Forms binds it), Backdrop and Arrow (shadcn uses neither).
+
 ## Control Group
 
 An input or a select joined with its buttons (`div[scControlGroup]`): shadcn's Button Group, renamed for what it is for (the user, 2026-10-30: it is only useful when inputs or selects mix with buttons; buttons alone are on the Button page). A shadcn component, so no web research: Base UI and shadcn's reference app (2026-10-30).

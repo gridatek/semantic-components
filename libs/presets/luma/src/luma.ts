@@ -8,6 +8,7 @@ import {
   inputGroupButton,
   inputGroupText,
 } from './input-group';
+import { select } from './select';
 
 /** The luma preset: `provideScConfig({ preset: luma })`. */
 export const luma: ScPreset = {
@@ -19,4 +20,5 @@ export const luma: ScPreset = {
   inputGroupAddon,
   inputGroupButton,
   inputGroupText,
+  select,
 };
