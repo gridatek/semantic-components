@@ -10,13 +10,13 @@ An app's side panel, as shadcn's (nova): beside the page on wide screens — col
 - **Ctrl/⌘+B** (`shortcut`, `null` to turn off)
 - **Phones** — a sheet: a named dialog, the focus kept inside, Escape closes it and gives the trigger back the focus; following a link closes it
 - **Collapsed to icons** — each button keeps its name (its hidden text); `tooltip` shows our Tooltip, only then
-- **No landmark of its own** — the navigation is the named `nav` you put in it; header and footer stay outside
+- **Landmarks you choose** — on an `aside`, the whole sidebar is a named landmark (complementary), header and footer included; on a `div`, none. Either way the navigation is the named `nav` you put in it
 
 ## Quick Start
 
 ```html
 <div scSidebarProvider>
-  <div scSidebar aria-label="Navigation" collapsible="icon">
+  <aside scSidebar aria-label="Navigation" collapsible="icon">
     <div scSidebarHeader>…</div>
     <nav scSidebarContent aria-label="Main">
       <div scSidebarGroup>
@@ -36,7 +36,7 @@ An app's side panel, as shadcn's (nova): beside the page on wide screens — col
     </nav>
     <div scSidebarFooter>…</div>
     <button scSidebarRail></button>
-  </div>
+  </aside>
 
   <main scSidebarInset>
     <button scSidebarTrigger>
@@ -50,7 +50,8 @@ An app's side panel, as shadcn's (nova): beside the page on wide screens — col
 
 **Rules**
 
-- Name the sidebar (`aria-label`): it names the sheet on phones (a `div` has no name of its own, so it isn't written on it).
+- Use an `aside` when the sidebar holds more than navigation (a team switcher, a user menu): its content is then in a landmark, as axe's `region` rule wants. A `div` suits a sidebar that is only its `nav`.
+- Name the sidebar (`aria-label`): it names the `aside`, and the sheet on phones (on a `div` it isn't written: a `div` has no name of its own).
 - Put the navigation in a named `nav[scSidebarContent]`.
 - A menu button's text goes in a `span`, last: it is truncated, hidden when collapsed to icons, and still names the button.
 - The trigger's name is yours (`sr-only`); the rail needs none — it is for the pointer only.
@@ -86,7 +87,7 @@ Our Collapsible around an item:
 | `storageKey` | `string \| null`    | `'sc-sidebar-state'` | Where the state is kept; `null`: nowhere  |
 | `shortcut`   | `string \| null`    | `'b'`                | With Ctrl/⌘, toggles; `null`: no shortcut |
 
-### ScSidebar — `div[scSidebar]`
+### ScSidebar — `aside[scSidebar]`, `div[scSidebar]`
 
 | Input         | Type                                 | Default       | Description               |
 | ------------- | ------------------------------------ | ------------- | ------------------------- |
@@ -130,7 +131,7 @@ The edge: a click toggles. `aria-hidden`, out of the tab order.
 
 ## Accessibility
 
-- No landmark of its own: your named `nav` is the navigation; on phones, a named modal dialog.
+- An `aside` is a named complementary landmark; a `div` is no landmark. Your named `nav` is the navigation; on phones, a named modal dialog.
 - The trigger: `aria-expanded`, `aria-controls`; the rail is hidden from screen readers.
 - Collapsed to icons, buttons keep their names; the tooltip shows them on hover and focus.
 - `aria-current="page"` on the active link.

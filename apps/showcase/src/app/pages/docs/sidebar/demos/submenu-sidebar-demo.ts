@@ -76,7 +76,7 @@ import {
   ],
   template: `
     <div scSidebarProvider [storageKey]="null">
-      <div scSidebar aria-label="Navigation">
+      <aside scSidebar aria-label="Sidebar, sub-menus">
         <div scSidebarHeader>
           <ul scSidebarMenu>
             <li scSidebarMenuItem>
@@ -194,7 +194,7 @@ import {
           </p>
         </div>
         <button scSidebarRail></button>
-      </div>
+      </aside>
       <main scSidebarInset aria-label="Sub-menus example">
         <header class="flex h-14 shrink-0 items-center gap-2 border-b px-4">
           <button scSidebarTrigger>

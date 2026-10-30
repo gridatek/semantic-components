@@ -103,7 +103,7 @@ import {
   ],
   template: `
     <div scSidebarProvider class="min-h-svh">
-      <div
+      <aside
         scSidebar
         side="start"
         variant="sidebar"
@@ -189,6 +189,9 @@ import {
                   </a>
                   <button scSidebarMenuAction [showOnHover]="true">
                     <svg siEllipsisVerticalIcon></svg>
+                    <span class="sr-only" i18n="@@dashboard.moreOptions"
+                      >More options</span
+                    >
                   </button>
                 </li>
               </ul>
@@ -203,6 +206,9 @@ import {
             </div>
             <button scSidebarGroupAction>
               <svg siPlusIcon></svg>
+              <span class="sr-only" i18n="@@dashboard.addProject"
+                >Add a project</span
+              >
             </button>
             <div scSidebarGroupContent>
               <ul scSidebarMenu>
@@ -446,7 +452,7 @@ import {
         </div>
 
         <button scSidebarRail></button>
-      </div>
+      </aside>
 
       <main scSidebarInset>
         <header

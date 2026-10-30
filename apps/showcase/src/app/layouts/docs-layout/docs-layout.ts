@@ -105,7 +105,7 @@ import { ConfigService } from '../../services/config.service';
   ],
   template: `
     <div scSidebarProvider class="min-h-svh">
-      <div
+      <aside
         scSidebar
         side="start"
         variant="sidebar"
@@ -340,7 +340,7 @@ import { ConfigService } from '../../services/config.service';
         </div>
 
         <button scSidebarRail></button>
-      </div>
+      </aside>
 
       <main scSidebarInset class="min-w-0 overflow-x-clip">
         <header

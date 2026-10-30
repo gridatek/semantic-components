@@ -2,7 +2,8 @@ import { collectErrors, press } from '../../interaction';
 import { type Page, expect, test } from '../../test';
 
 const demo = (name: string) => `/demos/sidebar/${name}-sidebar-demo`;
-const sidebar = (page: Page) => page.locator('div[data-slot=sidebar]').first();
+const sidebar = (page: Page) =>
+  page.locator('aside[data-slot=sidebar]').first();
 const trigger = (page: Page) => page.locator('[data-slot=sidebar-trigger]');
 
 let errors: string[];
@@ -18,7 +19,7 @@ test.afterEach(() => {
 test.describe('wide', () => {
   test.use({ viewport: { width: 1024, height: 600 } });
 
-  test('Basic: the navigation is the named nav; header and footer outside it', async ({
+  test('Basic: an aside landmark holds it all; the navigation is the named nav inside', async ({
     page,
   }) => {
     await page.goto(demo('basic'));
@@ -32,8 +33,10 @@ test.describe('wide', () => {
     ]);
     await expect(nav.getByText('Acme Inc')).toHaveCount(0);
     await expect(nav.getByText('Signed in as Ada')).toHaveCount(0);
-    await expect(sidebar(page)).not.toHaveAttribute('role');
-    await expect(sidebar(page)).not.toHaveAttribute('aria-label');
+    const aside = page.getByRole('complementary', { name: 'Sidebar, basic' });
+    await expect(aside).toBeVisible();
+    await expect(aside.getByText('Acme Inc')).toBeVisible();
+    await expect(aside.getByText('Signed in as Ada')).toBeVisible();
     await expect(page.getByRole('link', { name: 'Home' })).toHaveAttribute(
       'aria-current',
       'page',
@@ -149,7 +152,7 @@ test.describe('narrow', () => {
     // From the keyboard (WebKit doesn't focus a clicked button).
     await button.focus();
     await press(page, 'Enter');
-    const dialog = page.getByRole('dialog', { name: 'Navigation' });
+    const dialog = page.getByRole('dialog', { name: 'Sidebar, basic' });
     await expect(dialog).toBeVisible();
     await expect(button).toHaveAttribute('aria-expanded', 'true');
     await expect
@@ -165,7 +168,7 @@ test.describe('narrow', () => {
   test('Phone: following a link closes the sheet', async ({ page }) => {
     await page.goto(demo('basic'));
     await trigger(page).click();
-    const dialog = page.getByRole('dialog', { name: 'Navigation' });
+    const dialog = page.getByRole('dialog', { name: 'Sidebar, basic' });
     await dialog.getByRole('link', { name: 'Settings' }).click();
     await expect(dialog).toHaveCount(0);
     await expect(
@@ -176,7 +179,7 @@ test.describe('narrow', () => {
   test('Phone, RTL: the sheet comes from the right', async ({ page }) => {
     await page.goto(demo('rtl'));
     await trigger(page).click();
-    const dialog = page.getByRole('dialog', { name: 'التنقل' });
+    const dialog = page.getByRole('dialog', { name: 'الشريط الجانبي' });
     await expect(dialog).toBeVisible();
     await expect
       .poll(async () => {

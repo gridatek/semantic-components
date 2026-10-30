@@ -18,12 +18,14 @@ import { ScSidebarState } from './sidebar-state';
 /**
  * The sidebar: beside the page on wide screens — collapsed off the screen
  * (`offcanvas`), to icons (`icon`) or never (`none`) — and a sheet over it
- * on phones (a dialog: the focus kept inside, Escape closes it). No landmark
- * of its own: put the navigation in a named `nav[scSidebarContent]`.
- * Its `aria-label` names the sheet on phones.
+ * on phones (a dialog: the focus kept inside, Escape closes it). On an
+ * `aside` it is a landmark (complementary) holding all of it, header and
+ * footer too; on a `div`, none — then only your named
+ * `nav[scSidebarContent]` is. Its `aria-label` names the `aside`, and the
+ * sheet on phones.
  */
 @Component({
-  selector: 'div[scSidebar]',
+  selector: 'div[scSidebar], aside[scSidebar]',
   imports: [ScSheetProvider, ScSheetPortal, ScSheet, NgTemplateOutlet],
   template: `
     <ng-template #content><ng-content /></ng-template>
@@ -70,8 +72,8 @@ import { ScSidebarState } from './sidebar-state';
   host: {
     'data-slot': 'sidebar',
     '[id]': 'state.isMobile() ? null : id',
-    // The name is the sheet's (a div has no name of its own).
-    '[attr.aria-label]': 'null',
+    // An aside's name; a div has none (it would be ignored, or flagged).
+    '[attr.aria-label]': 'aside && label() ? label() : null',
     '[attr.data-state]': 'state.state()',
     '[attr.data-collapsible]':
       'state.state() === "collapsed" ? collapsible() : ""',
@@ -95,6 +97,8 @@ export class ScSidebar {
   protected readonly id = inject(_IdGenerator).getId('sc-sidebar-');
   private readonly element =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
+  /** On an `aside`: a landmark, named by its `aria-label`. */
+  protected readonly aside = this.element.tagName === 'ASIDE';
   /** The direction, read in the browser (the sheet only shows there). */
   private readonly rtl = signal(false);
   protected readonly sheetSide = computed(() =>

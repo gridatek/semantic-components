@@ -125,6 +125,8 @@
     "dashboard.notifications": "Notifications",
     "dashboard.billing": "Billing",
     "dashboard.subscription": "Subscription",
+    "dashboard.addProject": "Add a project",
+    "dashboard.moreOptions": "More options",
     "dashboard.navigation": "Navigation",
     "dashboard.toggleSidebar": "Toggle Sidebar",
     "dashboard.dashboard.2": " Dashboard ",

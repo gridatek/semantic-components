@@ -125,6 +125,8 @@
     "dashboard.notifications": "Notifications",
     "dashboard.billing": "Facturation",
     "dashboard.subscription": "Abonnement",
+    "dashboard.addProject": "Ajouter un projet",
+    "dashboard.moreOptions": "Plus d’options",
     "dashboard.navigation": "Navigation",
     "dashboard.toggleSidebar": "Afficher ou masquer la barre latérale",
     "dashboard.dashboard.2": "Tableau de bord",
