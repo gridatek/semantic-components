@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Refreshes docs/roadmap.md: the inventory line and its two lists (in shadcn,
 // not in shadcn) — each
-// component's level (from the components it imports), size, library, shadcn
+// component's parts (components, directives, services), library, the components it is built on, shadcn
 // counterpart, and whether it has e2e demo tests and an RTL demo. The ticks
 // already set are kept, and so is the order of the rows: it is the user's work
 // order, changed only by hand (a new component is added at the end of its
@@ -22,6 +22,8 @@ const ALIAS = {
   menu: 'dropdown-menu, menubar',
   'otp-field': 'input-otp',
   charts: 'chart',
+  // No link in shadcn: the Button's look on an <a> (its `render`).
+  link: 'button',
 };
 // Components without a folder of their own: measured as another.
 const SAME_AS = {
@@ -88,7 +90,7 @@ const sourceOf = (path, lib) =>
     .map((dir) => at(dir))
     .find(existsSync) ?? entries.get(lib)?.get(path);
 
-// The components: their files, size, demos.
+// The components: their files, parts, demos.
 const rows = registry.map((item) => {
   const path = SAME_AS[item.path] ?? item.path;
   const lib =
@@ -104,8 +106,12 @@ const rows = registry.map((item) => {
     path: item.path,
     lib: item.library,
     files,
-    size: files.reduce(
-      (total, file) => total + readFileSync(file, 'utf8').split('\n').length,
+    // Its parts: the components, directives and services it declares.
+    parts: files.reduce(
+      (total, file) =>
+        total +
+        (readFileSync(file, 'utf8').match(/^@(Component|Directive|Service)\(/gm)
+          ?.length ?? 0),
       0,
     ),
     shadcn: ALIAS[item.path] ?? (shadcn.has(item.path) ? 'yes' : '—'),
@@ -149,22 +155,6 @@ for (const row of rows) {
     deps.add('button');
   row.deps = [...deps].sort();
 }
-const level = new Map();
-const levelOf = (path, seen = new Set()) => {
-  if (level.has(path)) return level.get(path);
-  if (seen.has(path)) return 1;
-  seen.add(path);
-  const row = rows.find((r) => r.path === path);
-  let value = 1;
-  for (const dep of row?.deps ?? [])
-    value = Math.max(value, levelOf(dep, seen) + 1);
-  level.set(path, value);
-  return value;
-};
-for (const row of rows)
-  row.level = SAME_AS[row.path]
-    ? levelOf(SAME_AS[row.path])
-    : levelOf(row.path);
 
 // The ticks already set, by component.
 const roadmapPath = at('docs/roadmap.md');
@@ -197,13 +187,11 @@ const placeOf = (path) => {
   const at = listed.indexOf(path);
   return at === -1 ? Infinity : at;
 };
-/** Atomic design, from the imports: the level a component is at. */
-const LEVEL = ['atom', 'molecule', 'organism'];
 /** A list's table; `shadcn`: with the shadcn counterpart's name (List 1). */
 const table = (list, shadcn) =>
   [
-    `| # | Component | Library | Level | Built on | Size |${shadcn ? ' shadcn |' : ''} Styles | E2E | Mobile | RTL | Dark | SSR | Docs |`,
-    `| -: | --- | --- | --- | --- | -: |${shadcn ? ' --- |' : ''} :-: | :-: | :-: | :-: | :-: | :-: | :-: |`,
+    `| # | Component | Library | Built on | Parts |${shadcn ? ' shadcn |' : ''} Styles | E2E | Mobile | RTL | Dark | SSR | Docs |`,
+    `| -: | --- | --- | --- | -: |${shadcn ? ' --- |' : ''} :-: | :-: | :-: | :-: | :-: | :-: | :-: |`,
     ...list
       // The user's order, as the document has it: kept. A component not yet
       // listed goes at the end (new ones among themselves by name).
@@ -223,7 +211,7 @@ const table = (list, shadcn) =>
           false,
           false,
         ];
-        return `| ${i + 1} | [${row.name}](../apps/showcase/src/app/pages/docs/${row.path}) | ${row.lib} | ${LEVEL[Math.min(row.level, 3) - 1]} | ${row.deps.length ? row.deps.join(', ') : '—'} | ${row.size} |${shadcn ? ` ${row.shadcn} |` : ''} ${set.map(box).join(' | ')} |`;
+        return `| ${i + 1} | [${row.name}](../apps/showcase/src/app/pages/docs/${row.path}) | ${row.lib} | ${row.deps.length ? row.deps.join(', ') : '—'} | ${row.parts} |${shadcn ? ` ${row.shadcn} |` : ''} ${set.map(box).join(' | ')} |`;
       }),
   ].join('\n');
 
