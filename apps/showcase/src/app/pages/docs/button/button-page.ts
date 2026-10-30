@@ -27,6 +27,7 @@ import { RtlButtonDemoContainer } from './demos/rtl-button-demo-container';
 import { SecondaryButtonDemoContainer } from './demos/secondary-button-demo-container';
 import { SizeButtonDemoContainer } from './demos/size-button-demo-container';
 import { SpinnerButtonDemoContainer } from './demos/spinner-button-demo-container';
+import { SubmitButtonDemoContainer } from './demos/submit-button-demo-container';
 import { WithIconButtonDemoContainer } from './demos/with-icon-button-demo-container';
 
 @Component({
@@ -49,6 +50,7 @@ import { WithIconButtonDemoContainer } from './demos/with-icon-button-demo-conta
     AsLinkButtonDemoContainer,
     DisabledButtonDemoContainer,
     RtlButtonDemoContainer,
+    SubmitButtonDemoContainer,
     TocHeading,
     ComponentBadges,
     ScHeading,
@@ -112,6 +114,7 @@ import { WithIconButtonDemoContainer } from './demos/with-icon-button-demo-conta
         <app-group-button-demo-container />
         <app-as-link-button-demo-container />
         <app-disabled-button-demo-container />
+        <app-submit-button-demo-container />
         <app-rtl-button-demo-container />
       </section>
 

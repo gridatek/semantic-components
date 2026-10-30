@@ -225,3 +225,126 @@ test('On a phone: the widest demos fit, no sideways scroll @mobile', async ({
     await expectTargetSize(page.locator('body'), 24);
   }
 });
+
+test('Submit: a button doesn’t submit the form, a submit button does', async ({
+  page,
+}) => {
+  await page.goto(demo('submit'));
+  const name = page.getByRole('textbox', { name: 'Name' });
+  const status = page.getByRole('status');
+  await expect(button(page, 'Cancel')).toHaveAttribute('type', 'button');
+  await expect(button(page, 'Save')).toHaveAttribute('type', 'submit');
+
+  // Empty: submitting shows the error, nothing is saved.
+  await button(page, 'Save').click();
+  await expect(page.getByText('Enter a name.')).toBeVisible();
+  await expect(status).toHaveCount(0);
+
+  await name.fill('Ada');
+  await button(page, 'Save').click();
+  await expect(status).toHaveText('Saved: Ada');
+
+  // Cancel resets, without submitting (no error for the empty name).
+  await button(page, 'Cancel').click();
+  await expect(status).toHaveText('Cancelled');
+  await expect(name).toHaveValue('');
+  await expect(page.getByText('Enter a name.')).toHaveCount(0);
+
+  // Enter in the field submits too: through the submit button.
+  await name.fill('Grace');
+  await name.press('Enter');
+  await expect(status).toHaveText('Saved: Grace');
+});
+
+test.describe('States', () => {
+  /** The look a style property has, now. */
+  const look = (page: Page, name: string, property: string) =>
+    button(page, name).evaluate(
+      (el, p) => getComputedStyle(el).getPropertyValue(p),
+      property,
+    );
+
+  test('hover: each variant answers', async ({ page }) => {
+    for (const [name, label, property] of [
+      ['default', 'Button', 'background-color'],
+      ['outline', 'Outline', 'background-color'],
+      ['secondary', 'Secondary', 'background-color'],
+      ['ghost', 'Ghost', 'background-color'],
+      ['destructive', 'Destructive', 'background-color'],
+      ['link', 'Link', 'text-decoration-line'],
+    ] as const) {
+      await page.goto(demo(name));
+      await page.mouse.move(0, 0);
+      const before = await look(page, label, property);
+      await button(page, label).hover();
+      await expect
+        .poll(() => look(page, label, property), `${name} on hover`)
+        .not.toBe(before);
+    }
+  });
+
+  test('pressed: it moves down a pixel', async ({ page }) => {
+    await page.goto(demo('default'));
+    const target = button(page, 'Button');
+    const box = (await target.boundingBox())!;
+    await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+    await page.mouse.down();
+    await expect.poll(() => look(page, 'Button', 'translate')).toBe('0px 1px');
+    await page.mouse.up();
+  });
+
+  test('focus: a ring, red on Destructive', async ({ page }) => {
+    const ring = async (name: string, label: string) => {
+      await page.goto(demo(name));
+      await press(page, 'Tab');
+      await expect(button(page, label)).toBeFocused();
+      await expect.poll(() => look(page, label, 'box-shadow')).not.toBe('none');
+      return look(page, label, 'box-shadow');
+    };
+    expect(await ring('destructive', 'Destructive')).not.toBe(
+      await ring('default', 'Button'),
+    );
+  });
+
+  test('open (aria-expanded): outline and ghost take their open look, secondary keeps its own', async ({
+    page,
+  }) => {
+    for (const [name, label] of [
+      ['outline', 'Outline'],
+      ['ghost', 'Ghost'],
+    ] as const) {
+      await page.goto(demo(name));
+      await page.mouse.move(0, 0);
+      const closed = await look(page, label, 'background-color');
+      // As a menu's trigger would set it.
+      await button(page, label).evaluate((el) =>
+        el.setAttribute('aria-expanded', 'true'),
+      );
+      await expect
+        .poll(() => look(page, label, 'background-color'), name)
+        .not.toBe(closed);
+    }
+    // Secondary keeps its own background, open or not.
+    await page.goto(demo('secondary'));
+    await page.mouse.move(0, 0);
+    const rest = await look(page, 'Secondary', 'background-color');
+    await button(page, 'Secondary').evaluate((el) =>
+      el.setAttribute('aria-expanded', 'true'),
+    );
+    expect(await look(page, 'Secondary', 'background-color')).toBe(rest);
+  });
+
+  test('invalid (aria-invalid): a red border and ring', async ({ page }) => {
+    await page.goto(demo('outline'));
+    const valid = await look(page, 'Outline', 'border-top-color');
+    await button(page, 'Outline').evaluate((el) =>
+      el.setAttribute('aria-invalid', 'true'),
+    );
+    await expect
+      .poll(() => look(page, 'Outline', 'border-top-color'))
+      .not.toBe(valid);
+    await expect
+      .poll(() => look(page, 'Outline', 'box-shadow'))
+      .not.toBe('none');
+  });
+});

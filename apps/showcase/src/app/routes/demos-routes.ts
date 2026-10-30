@@ -445,6 +445,13 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
+        path: 'submit-button-demo',
+        loadComponent: () =>
+          import('../pages/docs/button/demos/submit-button-demo').then(
+            (m) => m.SubmitButtonDemo,
+          ),
+      },
+      {
         path: 'rtl-button-demo',
         loadComponent: () =>
           import('../pages/docs/button/demos/rtl-button-demo').then(

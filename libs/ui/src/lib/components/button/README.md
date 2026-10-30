@@ -12,7 +12,7 @@ Displays a button or a component that looks like a button.
 
 ### ScButton — `button[scButton]`
 
-Its classes are the app's preset's (`provideScConfig({ preset })`, from `@semantic-components/presets`; nova by default).
+Its classes are the app's preset's (`provideScConfig({ preset })`, from `@semantic-components/presets`; nova by default). Each of the eight presets (nova, vega, maia, lyra, mira, luma, sera, rhea) is shadcn's button in that style, class for class.
 
 | Input      | Type                              | Default     | Description                                   |
 | ---------- | --------------------------------- | ----------- | --------------------------------------------- |
