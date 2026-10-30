@@ -1,193 +1,85 @@
-# Data Slot Pattern
+# Data Slots
 
-This document explains how `data-slot` attributes are used in Semantic Components for layout and spacing, and how consumers can leverage them for style overrides.
+`data-slot` is an optional attribute used by some components for CSS-based layout detection. It is **not mandatory** — only add it when a parent or sibling component needs to detect the presence or position of a child element via CSS selectors like `has-[>`, `*:data-[slot=`, or `in-data-[slot=`.
 
-## Overview
+## When to use `data-slot`
 
-Every sub-component in the library sets a `data-slot` attribute on its host element. Parent containers use these attributes to position children in a CSS Grid layout.
+Add `data-slot` to a component only when another component references it in its styles. Common patterns:
 
-```html
-<div scCheckboxField>
-  <!-- grid container -->
-  <input scCheckbox data-slot="checkbox" />
-  <!-- col-1, row-1 -->
-  <label scLabel data-slot="label">...</label>
-  <!-- col-2, row-1 -->
-  <p scFieldDescription data-slot="field-description">...</p>
-  <!-- col-2, row-2 -->
-</div>
-```
+- **`has-[>[data-slot=X]]`** — parent detects if child X exists to adjust layout (e.g., card-header adds a grid column when card-action is present)
+- **`*:data-[slot=X]`** — parent targets child X for positioning (e.g., checkbox-field positions the label and description in a CSS grid)
+- **`in-data-[slot=X]`** — child detects it's inside parent X and adjusts its own styles (e.g., input strips borders when inside input-group)
 
-The `data-slot` values are set automatically by each directive — consumers never write them by hand.
+## When NOT to use `data-slot`
 
-## The Rule: Layout, Not Styling
+Do not add `data-slot` as a convention or for identification purposes. If no component references the value in its styles, it should not exist.
 
-`data-slot` is used by parent containers **only for layout and spacing** — grid placement, gaps, and alignment. Each component is responsible for its own visual styles (colors, borders, typography, focus rings, etc.).
+## Active data-slots
 
-### Parent Responsibility: Layout
+The following `data-slot` values are currently in use:
 
-The parent container uses `*:data-[slot=...]` selectors to control **where** children go:
+| data-slot              | Declared in                                                                            | Referenced by                                                                                       |
+| ---------------------- | -------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `alert-action`         | `alert-action.ts`                                                                      | `alert.ts` — adds right padding when action exists                                                  |
+| `alert-description`    | `alert-description.ts`                                                                 | `alert.ts` — styles description in destructive variant                                              |
+| `alert-dialog-media`   | `alert-dialog-media.ts`                                                                | `alert-dialog-header.ts`, `alert-dialog-title.ts` — switches grid layout                            |
+| `avatar`               | `avatar.ts`                                                                            | `avatar-group.ts` — adds ring to avatars in a group                                                 |
+| `button-group`         | `button-group.ts`                                                                      | `button.ts`, `button-group.ts` — adjusts border-radius for grouped buttons                          |
+| `card-action`          | `card-action.ts`                                                                       | `card-header.ts` — switches header to 2-column grid                                                 |
+| `card-description`     | `card-description.ts`                                                                  | `card-header.ts` — adds extra grid row                                                              |
+| `card-footer`          | `card-footer.ts`                                                                       | `card.ts` — removes bottom padding                                                                  |
+| `checkbox`             | `checkbox.ts`                                                                          | `checkbox-field.ts` — grid positioning                                                              |
+| `checkbox-visual`      | `checkbox-visual.ts`                                                                   | `checkbox-field.ts` — grid positioning                                                              |
+| `command-group-label`  | `command-group-label.ts`                                                               | `command-group.ts` — styles nested label                                                            |
+| `context-menu`         | `context-menu.ts`                                                                      | `context-menu.ts` (CSS) — positions menu panel                                                      |
+| `control`              | `input.ts`, `textarea.ts`, `combobox-display-value.ts`, `multiselect-display-value.ts` | `input-group.ts` — detects focus/invalid state on control                                           |
+| `field`                | `field.ts`                                                                             | `label.ts`, `field.ts`, `checkbox-field.ts`, `radio-field.ts`, `switch-field.ts` — layout detection |
+| `field-body`           | `field-body.ts`                                                                        | `field.ts` — adjusts alignment                                                                      |
+| `field-description`    | `field-description.ts`                                                                 | `checkbox-field.ts`, `radio-field.ts`, `switch-field.ts` — bold label, grid positioning             |
+| `field-group`          | `field-group.ts`                                                                       | `field-group.ts` — nested group gap                                                                 |
+| `input-group`          | `input-group.ts`                                                                       | `input.ts`, `textarea.ts`, `input-group.ts` — strips borders/rings inside group                     |
+| `item-body`            | `item-body.ts`                                                                         | `item-body.ts` — second body gets `flex-none`                                                       |
+| `item-description`     | `item-description.ts`                                                                  | `item-media.ts` — aligns media to top                                                               |
+| `label`                | `label.ts`                                                                             | `checkbox-field.ts`, `radio-field.ts`, `field.ts` — grid positioning, font-weight                   |
+| `label-text`           | `label-text.ts`                                                                        | `switch-field.ts` — grid column positioning                                                         |
+| `menu`                 | `menu.ts`                                                                              | `context-menu.ts` (CSS) — positions menu panel                                                      |
+| `navigation-menu-link` | `navigation-menu-link.ts`                                                              | `navigation-menu-content.ts` — removes focus ring                                                   |
+| `radio`                | `radio.ts`                                                                             | `radio-field.ts`, `fieldset.ts` — grid positioning                                                  |
+| `radio-group`          | `radio-group.ts`                                                                       | `fieldset.ts` — reduces gap                                                                         |
+| `switch`               | `switch.ts`                                                                            | `switch-field.ts` — CSS grid layout detection                                                       |
+| `switch-visual`        | `switch-visual.ts`                                                                     | `switch-field.ts` — grid column positioning                                                         |
+
+## Layout, not styling
+
+A parent uses a child's `data-slot` **only for layout and spacing** — grid placement, gaps, alignment, layout that depends on which children are there. Each component owns its own look (colors, borders, typography, focus rings, transitions).
 
 ```typescript
-// ScCheckboxField — positions children in a 2-column grid
+// ScCheckboxField — places its children in a 2-column grid
 cn(
   'grid grid-cols-[1rem_1fr] items-start gap-x-2 gap-y-1',
-
-  // Layout: grid placement
   '*:data-[slot=checkbox]:col-start-1 *:data-[slot=checkbox]:row-start-1',
-  '*:data-[slot=visual-checkbox]:col-start-1 *:data-[slot=visual-checkbox]:row-start-1',
   '*:data-[slot=label]:col-start-2 *:data-[slot=label]:row-start-1',
   '*:data-[slot=field-description]:col-start-2 *:data-[slot=field-description]:row-start-2',
-
-  // Conditional layout: bold label when description is present
+  // Layout that depends on a child: a bolder label when there is a description.
   'has-[>[data-slot=field-description]]:*:data-[slot=label]:font-medium',
 );
 ```
 
-### Child Responsibility: Styling
+## Consumer overrides
 
-Each component owns its own appearance. The parent never reaches into a child's visual styles through `data-slot`:
-
-```typescript
-// ScCheckboxIndicator — owns its own visual styles
-cn('pointer-events-none inline-flex size-4 shrink-0 items-center justify-center', 'rounded-sm border border-primary transition-colors', 'data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground', 'data-[state=indeterminate]:bg-primary data-[state=indeterminate]:text-primary-foreground');
-
-// ScVisualCheckbox — owns its own focus/disabled styles
-cn('pointer-events-none inline-flex size-4 shrink-0 items-center justify-center', 'ring-offset-background', 'peer-focus-visible:outline-none peer-focus-visible:ring-2 peer-focus-visible:ring-ring peer-focus-visible:ring-offset-2', 'peer-disabled:cursor-not-allowed peer-disabled:opacity-50');
-```
-
-### What Belongs Where
-
-| Concern                                                     | Who Handles It   | Via                                        |
-| ----------------------------------------------------------- | ---------------- | ------------------------------------------ |
-| Grid placement (`col-start`, `row-start`)                   | Parent container | `*:data-[slot=...]`                        |
-| Gaps (`gap-x`, `gap-y`)                                     | Parent container | Grid classes                               |
-| Alignment (`items-start`, `self-center`)                    | Parent container | Grid classes                               |
-| Conditional layout (`font-medium` when description present) | Parent container | `has-[>[data-slot=...]]:*:data-[slot=...]` |
-| Colors, borders, backgrounds                                | Each component   | Own `class` computed                       |
-| Focus rings, hover states                                   | Each component   | Own `class` computed                       |
-| Typography (size, weight, color)                            | Each component   | Own `class` computed                       |
-| Transitions, animations                                     | Each component   | Own `class` computed                       |
-
-## Consumer Overrides via Data Slot
-
-While the library follows the "layout only" rule internally, consumers are free to use `data-slot` selectors to override styles from the outside. This is a deliberate escape hatch.
-
-### Overriding a Specific Slot
+A slot that exists can also be used by a consumer, from a parent's `class` — an escape hatch, visible in the template:
 
 ```html
-<div scCheckboxField class="*:data-[slot=label]:text-blue-600 *:data-[slot=label]:uppercase">
+<div scCheckboxField class="*:data-[slot=label]:text-blue-600">
   <input type="checkbox" scCheckbox id="custom" />
   <label scLabel for="custom">Custom styled label</label>
 </div>
 ```
 
-The `*:data-[slot=label]:text-blue-600` selector targets the label by its slot and overrides the text color. This works because the consumer's classes are merged after the component's base classes via `cn()`.
+This is a use of the slots that exist, not a reason to add one.
 
-### Overriding the Visual Checkbox
+## The selectors
 
-```html
-<div scCheckboxField class="*:data-[slot=visual-checkbox]:rounded-full *:data-[slot=visual-checkbox]:ring-offset-4">
-  <input type="checkbox" scCheckbox id="round" />
-  <label scLabel for="round">Round checkbox</label>
-</div>
-```
-
-### Conditional Overrides
-
-Consumers can combine `:has()` with `data-slot` for conditional styling:
-
-```html
-<!-- Make description red when checkbox is unchecked -->
-<div scCheckboxField class="has-data-[state=unchecked]:*:data-[slot=field-description]:text-destructive">
-  <input type="checkbox" scCheckbox id="required" />
-  <label scLabel for="required">Required field</label>
-  <p scFieldDescription>You must accept to continue.</p>
-</div>
-```
-
-### Overriding in a Wrapper
-
-For repeated overrides, wrap multiple fields:
-
-```html
-<div class="*:*:data-[slot=label]:text-muted-foreground space-y-4 *:*:data-[slot=label]:text-sm">
-  <div scCheckboxField>
-    <input type="checkbox" scCheckbox id="a" />
-    <label scLabel for="a">Option A</label>
-  </div>
-  <div scCheckboxField>
-    <input type="checkbox" scCheckbox id="b" />
-    <label scLabel for="b">Option B</label>
-  </div>
-</div>
-```
-
-## Why This Separation Matters
-
-### Components Stay Predictable
-
-When each component owns its styles, changing one component's appearance doesn't accidentally affect siblings. A parent only decides _where_ things go, never _how_ they look.
-
-### Overrides Are Explicit
-
-Consumer overrides through `data-slot` are always visible in the template. There is no hidden CSS specificity battle — the consumer intentionally reaches in from the parent level.
-
-### Components Are Portable
-
-Because a component's visual styles don't depend on a specific parent, the same `ScLabel` or `ScFieldDescription` directive works inside `scCheckboxField`, `sc-radio-field`, `sc-switch-field`, or any other container. The parent only needs to position it.
-
-## Available Data Slots
-
-Each component declares its `data-slot` in its `host` metadata:
-
-```typescript
-@Directive({
-  host: {
-    'data-slot': 'label',      // ScLabel
-  },
-})
-
-@Directive({
-  host: {
-    'data-slot': 'field-description',  // ScFieldDescription
-  },
-})
-
-@Directive({
-  host: {
-    'data-slot': 'checkbox',   // ScCheckbox
-  },
-})
-```
-
-Consumers can discover available slots by inspecting the DOM or reading the component's README.
-
-## Tailwind CSS v4 Syntax Reference
-
-The `*:data-[slot=...]` syntax is a Tailwind CSS v4 feature combining two variants:
-
-- `*:` — targets direct children (`& > *`)
-- `data-[slot=value]:` — matches elements with `data-slot="value"`
-
-Combined: `*:data-[slot=label]:col-start-2` generates:
-
-```css
-& > *[data-slot='label'] {
-  grid-column-start: 2;
-}
-```
-
-For conditional styles based on a child's presence:
-
-```
-has-[>[data-slot=field-description]]:*:data-[slot=label]:font-medium
-```
-
-Generates:
-
-```css
-&:has(> [data-slot='field-description']) > *[data-slot='label'] {
-  font-weight: 500;
-}
-```
+- `*:data-[slot=label]:col-start-2` — a direct child with `data-slot="label"`: `& > *[data-slot='label'] { grid-column-start: 2; }`
+- `has-[>[data-slot=field-description]]:*:data-[slot=label]:font-medium` — when a direct child is the description, the label: `&:has(> [data-slot='field-description']) > *[data-slot='label'] { font-weight: 500; }`
+- `in-data-[slot=input-group]:border-0` — the element itself, when inside an input group: `[data-slot='input-group'] & { border-width: 0; }`

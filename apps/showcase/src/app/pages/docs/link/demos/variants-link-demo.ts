@@ -5,13 +5,15 @@ import { ScLink } from '@semantic-components/ui';
   selector: 'app-variants-link-demo',
   imports: [ScLink],
   template: `
-    <div class="flex flex-wrap items-center gap-4">
-      <a scLink>Default</a>
-      <a scLink variant="secondary">Secondary</a>
-      <a scLink variant="destructive">Destructive</a>
-      <a scLink variant="outline">Outline</a>
-      <a scLink variant="ghost">Ghost</a>
-      <a scLink variant="link">Link</a>
+    <div class="flex flex-wrap items-center gap-2">
+      <a scLink href="/docs/components/button">Default</a>
+      <a scLink variant="outline" href="/docs/components/badge">Outline</a>
+      <a scLink variant="secondary" href="/docs/components/card">Secondary</a>
+      <a scLink variant="ghost" href="/docs/components/dialog">Ghost</a>
+      <a scLink variant="destructive" href="/docs/components/alert"
+        >Destructive</a
+      >
+      <a scLink variant="link" href="/docs/components/tabs">Link</a>
     </div>
   `,
   host: { class: 'flex w-full justify-center' },

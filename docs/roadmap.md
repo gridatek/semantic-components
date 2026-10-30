@@ -2,7 +2,7 @@
 
 Every component brought to the same bar: shadcn's look, tested, mobile first, right to left, in light and dark, rendered on the server. One component at a time, in the order the user names, each through [component-rewrite-process.md](component-rewrite-process.md). Two lists: the components shadcn has (**List 1**: its look and parts are the reference), and the ones it doesn't (**List 2**: shadcn's tokens and patterns, our design). The order of each list is the user's work order: changed only by hand, in this document — `scripts/roadmap.mjs` keeps every row where it is, refreshes its columns, and adds a new component at the end of its list; **Level** (atom, molecule, organism — from the components it imports, **Built on**) and **Size** (lines of its own TypeScript) show where it sits. Each row ticked when it meets the definition of done.
 
-Inventory (147 components): 61 with a shadcn counterpart · 97 with e2e demo tests · 147 with a page axe test · 12 with an RTL demo.
+Inventory (147 components): 61 with a shadcn counterpart · 97 with e2e demo tests · 147 with a page axe test · 13 with an RTL demo.
 
 ## The two lists
 
@@ -161,7 +161,7 @@ The components shadcn doesn't have: shadcn's tokens and patterns, our parts.
 |  35 | [Kanban Board](../apps/showcase/src/app/pages/docs/kanban-board)                   | ui      | atom     | —                                                                       |   237 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
 |  36 | [Lightbox](../apps/showcase/src/app/pages/docs/lightbox)                           | ui      | molecule | button                                                                  |   853 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
 |  37 | [Line Chart](../apps/showcase/src/app/pages/docs/line-chart)                       | ui      | molecule | chart                                                                   |   145 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
-|  38 | [Link](../apps/showcase/src/app/pages/docs/link)                                   | ui      | molecule | button                                                                  |    35 |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
+|  38 | [Link](../apps/showcase/src/app/pages/docs/link)                                   | ui      | molecule | button                                                                  |    67 |  [x]   | [x] |  [x]   | [x] | [x]  | [x] | [x]  |
 |  39 | [Marquee](../apps/showcase/src/app/pages/docs/marquee)                             | ui      | molecule | button                                                                  |   297 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
 |  40 | [Masonry Grid](../apps/showcase/src/app/pages/docs/masonry-grid)                   | ui      | atom     | —                                                                       |   241 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |
 |  41 | [Mention Input](../apps/showcase/src/app/pages/docs/mention-input)                 | ui      | molecule | field                                                                   |   535 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  |

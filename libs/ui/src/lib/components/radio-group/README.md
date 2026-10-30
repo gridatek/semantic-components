@@ -234,7 +234,7 @@ You can customize the radio button colors by setting CSS custom properties (vari
 
 ## Data Attributes
 
-Some components have a `data-slot` attribute used for CSS targeting by parent components. `data-slot` is not mandatory — it is only added when referenced by another component's styles. See [DATA-SLOTS.md](../DATA-SLOTS.md) for details.
+Some components have a `data-slot` attribute used for CSS targeting by parent components. `data-slot` is not mandatory — it is only added when referenced by another component's styles. See [data-slot-pattern.md](../../../../../../docs/data-slot-pattern.md) for details.
 
 | Component    | data-slot     | Used by                             |
 | ------------ | ------------- | ----------------------------------- |

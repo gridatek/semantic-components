@@ -75,7 +75,9 @@ import {
             </a>
           }
         </nav>
-        <a scLink class="mt-3">Get started</a>
+        <a scLink class="mt-3" href="/docs/getting-started/introduction"
+          >Get started</a
+        >
       </div>
     </header>
     <p class="text-muted-foreground p-4 text-sm">

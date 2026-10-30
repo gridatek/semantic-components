@@ -2240,6 +2240,13 @@ export const demosRoutes: Route[] = [
     path: 'demos/link',
     children: [
       {
+        path: 'link-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/link/demos/link-usage-demo').then(
+            (m) => m.LinkUsageDemo,
+          ),
+      },
+      {
         path: 'variants-link-demo',
         loadComponent: () =>
           import('../pages/docs/link/demos/variants-link-demo').then(
@@ -2247,10 +2254,31 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'sizes-link-demo',
+        path: 'size-link-demo',
         loadComponent: () =>
-          import('../pages/docs/link/demos/sizes-link-demo').then(
-            (m) => m.SizesLinkDemo,
+          import('../pages/docs/link/demos/size-link-demo').then(
+            (m) => m.SizeLinkDemo,
+          ),
+      },
+      {
+        path: 'with-icon-link-demo',
+        loadComponent: () =>
+          import('../pages/docs/link/demos/with-icon-link-demo').then(
+            (m) => m.WithIconLinkDemo,
+          ),
+      },
+      {
+        path: 'router-link-demo',
+        loadComponent: () =>
+          import('../pages/docs/link/demos/router-link-demo').then(
+            (m) => m.RouterLinkDemo,
+          ),
+      },
+      {
+        path: 'external-link-demo',
+        loadComponent: () =>
+          import('../pages/docs/link/demos/external-link-demo').then(
+            (m) => m.ExternalLinkDemo,
           ),
       },
       {
@@ -2261,10 +2289,10 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'with-icons-link-demo',
+        path: 'rtl-link-demo',
         loadComponent: () =>
-          import('../pages/docs/link/demos/with-icons-link-demo').then(
-            (m) => m.WithIconsLinkDemo,
+          import('../pages/docs/link/demos/rtl-link-demo').then(
+            (m) => m.RtlLinkDemo,
           ),
       },
     ],
