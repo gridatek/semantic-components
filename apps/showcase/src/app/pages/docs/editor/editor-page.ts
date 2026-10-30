@@ -477,7 +477,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API</h2>
+        <h2 scHeading appToc>API reference</h2>
         <p class="text-muted-foreground">
           Every part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>, and

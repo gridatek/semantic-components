@@ -15,9 +15,13 @@ test.describe('Button Page', () => {
     await expectNoA11yViolations(page, { dark: true });
   });
 
-  test('API: every input, with its type and default', async ({ page }) => {
+  test('API reference: every input, with its type and default', async ({
+    page,
+  }) => {
     await page.goto('/docs/components/button');
-    await expect(page.getByRole('heading', { name: 'API' })).toBeVisible();
+    await expect(
+      page.getByRole('heading', { name: 'API reference' }),
+    ).toBeVisible();
     const table = page.getByRole('region', { name: 'ScButton inputs' });
     await expect(table.getByRole('row')).toHaveCount(6);
     await expect(table.getByRole('row').locator('td:first-child')).toHaveText([
@@ -32,11 +36,13 @@ test.describe('Button Page', () => {
     ).toHaveText("'button'");
   });
 
-  test('API: the table scrolls in its own box on a phone, not the page @mobile', async ({
+  test('API reference: the table scrolls in its own box on a phone, not the page @mobile', async ({
     page,
   }) => {
     await page.goto('/docs/components/button');
-    await page.getByRole('heading', { name: 'API' }).scrollIntoViewIfNeeded();
+    await page
+      .getByRole('heading', { name: 'API reference' })
+      .scrollIntoViewIfNeeded();
     await expectNoHorizontalScroll(page);
   });
 });

@@ -9,6 +9,7 @@ import {
   ScTableHeaderCell,
   ScTableRow,
 } from '@semantic-components/ui';
+import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { AsLinkButtonDemoContainer } from './demos/as-link-button-demo-container';
@@ -31,6 +32,7 @@ import { WithIconButtonDemoContainer } from './demos/with-icon-button-demo-conta
 @Component({
   selector: 'app-button-page',
   imports: [
+    Anatomy,
     ButtonUsageDemoContainer,
     SizeButtonDemoContainer,
     DefaultButtonDemoContainer,
@@ -74,6 +76,15 @@ import { WithIconButtonDemoContainer } from './demos/with-icon-button-demo-conta
       </section>
 
       <section class="space-y-4">
+        <h2 scHeading appToc>Anatomy</h2>
+        <p class="text-muted-foreground">
+          One part, on a native button. An icon may go at either side, marked
+          with its side; a spinner in place of the first while it is busy.
+        </p>
+        <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
+      </section>
+
+      <section class="space-y-4">
         <h2 scHeading appToc>Cursor</h2>
         <p class="text-muted-foreground">
           Buttons keep the default cursor, as native buttons and Tailwind do: a
@@ -105,7 +116,7 @@ import { WithIconButtonDemoContainer } from './demos/with-icon-button-demo-conta
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API</h2>
+        <h2 scHeading appToc>API reference</h2>
         <p class="text-muted-foreground">
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">ScButton</code>
           is a directive on a native
@@ -177,6 +188,17 @@ import { WithIconButtonDemoContainer } from './demos/with-icon-button-demo-conta
   encapsulation: ViewEncapsulation.None,
 })
 export default class ButtonPage {
+  protected readonly anatomy = {
+    imports: "import { ScButton } from '@semantic-components/ui';",
+    markup: [
+      '<button scButton>',
+      '  <svg data-icon="inline-start"></svg>',
+      '  Label',
+      '  <svg data-icon="inline-end"></svg>',
+      '</button>',
+    ].join('\n'),
+  };
+
   protected readonly inputs = [
     {
       name: 'variant',

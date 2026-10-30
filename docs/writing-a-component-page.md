@@ -14,6 +14,17 @@ For example, the accordion component has 3 separate demos:
 
 This keeps each demo focused and independently testable by Playwright.
 
+## The Page's Sections
+
+In this order (the Button page is the model, `pages/docs/button/button-page.ts`):
+
+1. **Title and description**, and the component's badges.
+2. **Usage** — the smallest use.
+3. **Anatomy** — as Base UI's pages: what to import, then the parts as markup, nested as they go together, with a sentence on what is optional. `<app-anatomy [imports]="…" [markup]="…" />` (`components/anatomy/anatomy.ts`).
+4. Notes the component needs (the Button's **Cursor**), each its own section.
+5. **Examples** — one demo per example, in the order of shadcn's page when shadcn has the component; an **RTL** demo last.
+6. **API reference** — every part: its selector, then a table of its inputs (Input, Type, Default, Description) in a scrollable `scTableContainer` (`tabindex="0"`, `role="region"`, named), and its outputs and what it exports.
+
 ## File Structure
 
 ```
