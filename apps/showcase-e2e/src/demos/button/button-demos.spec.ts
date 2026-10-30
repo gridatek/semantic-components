@@ -74,6 +74,10 @@ test('the variants look apart', async ({ page }) => {
     'link',
   ]) {
     await page.goto(demo(name));
+    // Transitions off: a look read mid-transition isn't its own.
+    await page.addStyleTag({
+      content: '*, *::before, *::after { transition: none !important; }',
+    });
     const element = page.getByRole('button');
     looks.add(
       await element.evaluate((el) => {

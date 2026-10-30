@@ -45,12 +45,17 @@ test.describe('Button in every preset', () => {
         { name: 'sc-preset', value: preset, url: baseURL! },
       ]);
       await page.goto('/demos/button/default-button-demo');
-      const classes = await page
-        .getByRole('button', { name: 'Button' })
-        .getAttribute('class');
-      const have = new Set((classes ?? '').split(/\s+/));
-      const missing = classesOf(styles).filter((c) => !have.has(c));
-      expect(missing, `${preset} classes missing`).toEqual([]);
+      // Read until the button has its classes: the first render may not
+      // have applied them yet.
+      const target = page.getByRole('button', { name: 'Button' });
+      await expect
+        .poll(async () => {
+          const have = new Set(
+            ((await target.getAttribute('class')) ?? '').split(/\s+/),
+          );
+          return classesOf(styles).filter((c) => !have.has(c));
+        }, `${preset} classes missing`)
+        .toEqual([]);
 
       await page.goto('/docs/components/button');
       await expectNoA11yViolations(page);

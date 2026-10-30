@@ -29,6 +29,10 @@ test('Usage: a real link, with its own href, a button look', async ({
 
 test('Variants: six links, six looks', async ({ page }) => {
   await page.goto(demo('variants'));
+  // Transitions off: a look read mid-transition isn't its own.
+  await page.addStyleTag({
+    content: '*, *::before, *::after { transition: none !important; }',
+  });
   const links = page.getByRole('link');
   await expect(links).toHaveText([
     'Default',
