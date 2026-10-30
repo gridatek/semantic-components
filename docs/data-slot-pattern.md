@@ -10,6 +10,10 @@ Add `data-slot` to a component only when another component references it in its 
 - **`*:data-[slot=X]`** — parent targets child X for positioning (e.g., checkbox-field positions the label and description in a CSS grid)
 - **`in-data-[slot=X]`** — child detects it's inside parent X and adjusts its own styles (e.g., input strips borders when inside input-group)
 
+## Naming: generic, by role
+
+A slot names the role a part plays for the component that reads it, not the component itself — so every part playing that role shares it. `control` is the model: input, textarea and the combobox's and multiselect's values all set `data-slot="control"`, and the input group reads that one name, whichever control it holds. A new slot is named the same way: what the reader needs to know (a control, a label, a description), not which part it is.
+
 ## When NOT to use `data-slot`
 
 Do not add `data-slot` as a convention or for identification purposes. If no component references the value in its styles, it should not exist.

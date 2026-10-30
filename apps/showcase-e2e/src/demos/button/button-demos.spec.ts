@@ -29,7 +29,6 @@ test('Usage: a button, its type "button" (not submitting a form)', async ({
 }) => {
   await page.goto('/demos/button/button-usage-demo');
   await expect(button(page, 'Click me')).toHaveAttribute('type', 'button');
-  await expect(button(page, 'Click me')).toHaveAttribute('data-slot', 'button');
 });
 
 test('Size: four sizes, each with its square icon size', async ({ page }) => {

@@ -128,10 +128,7 @@ import { WithIconButtonDemoContainer } from './demos/with-icon-button-demo-conta
           >: its classes are the app&apos;s preset&apos;s (
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
             >provideScConfig(&#123; preset &#125;)</code
-          >, nova by default), and it marks itself
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >data-slot="button"</code
-          >.
+          >, nova by default).
         </p>
         <div
           scTableContainer
