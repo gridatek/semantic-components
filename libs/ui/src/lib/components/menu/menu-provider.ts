@@ -1,3 +1,4 @@
+import { Directionality } from '@angular/cdk/bidi';
 import { CdkOverlayOrigin, OverlayModule } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import {
@@ -6,6 +7,7 @@ import {
   computed,
   contentChild,
   effect,
+  inject,
   input,
 } from '@angular/core';
 import {
@@ -14,6 +16,7 @@ import {
   cn,
   setInput,
 } from '../../utils';
+import { ScElementDirectionality } from '../../utils/element-directionality';
 import { ScMenuPortal } from './menu-portal';
 import { ScMenuTrigger } from './menu-trigger';
 
@@ -22,6 +25,7 @@ export type ScMenuSide = 'top' | 'bottom';
 
 @Component({
   selector: 'div[scMenuProvider]',
+  providers: [{ provide: Directionality, useClass: ScElementDirectionality }],
   imports: [OverlayModule, NgTemplateOutlet],
   template: `
     <ng-content />
@@ -43,6 +47,7 @@ export type ScMenuSide = 'top' | 'bottom';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScMenuProvider {
+  private readonly direction = inject(Directionality);
   readonly classInput = input<string>('', { alias: 'class' });
   readonly side = input<ScMenuSide>('bottom');
   readonly align = input<ScMenuAlign>('start');
@@ -61,7 +66,12 @@ export class ScMenuProvider {
   readonly menu = computed(() => this.menuPortal()?.menu());
 
   protected readonly positions = computed(() =>
-    buildOverlayPositionsWithFallback(this.side(), this.align(), this.offset()),
+    buildOverlayPositionsWithFallback(
+      this.side(),
+      this.align(),
+      this.offset(),
+      this.direction.value,
+    ),
   );
 
   protected readonly expanded = computed(

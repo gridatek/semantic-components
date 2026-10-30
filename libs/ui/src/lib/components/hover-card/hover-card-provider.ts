@@ -1,3 +1,4 @@
+import { Directionality } from '@angular/cdk/bidi';
 import { CdkOverlayOrigin, OverlayModule } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import {
@@ -5,6 +6,7 @@ import {
   ViewEncapsulation,
   computed,
   contentChild,
+  inject,
   input,
   signal,
 } from '@angular/core';
@@ -14,6 +16,7 @@ import {
   buildOverlayPositionsWithFallback,
   cn,
 } from '../../utils';
+import { ScElementDirectionality } from '../../utils/element-directionality';
 import { ScHoverCardPortal } from './hover-card-portal';
 import { ScHoverCardTrigger } from './hover-card-trigger';
 
@@ -22,6 +25,7 @@ export type ScHoverCardAlign = ScOverlayAlign;
 
 @Component({
   selector: 'div[scHoverCardProvider]',
+  providers: [{ provide: Directionality, useClass: ScElementDirectionality }],
   imports: [OverlayModule, NgTemplateOutlet],
   template: `
     <ng-content />
@@ -44,6 +48,7 @@ export type ScHoverCardAlign = ScOverlayAlign;
   encapsulation: ViewEncapsulation.None,
 })
 export class ScHoverCardProvider {
+  private readonly direction = inject(Directionality);
   readonly classInput = input<string>('', { alias: 'class' });
 
   /** Which side the hover card appears on */
@@ -77,7 +82,12 @@ export class ScHoverCardProvider {
   );
 
   protected readonly positions = computed(() =>
-    buildOverlayPositionsWithFallback(this.side(), this.align(), this.offset()),
+    buildOverlayPositionsWithFallback(
+      this.side(),
+      this.align(),
+      this.offset(),
+      this.direction.value,
+    ),
   );
 
   protected readonly class = computed(() => cn('contents', this.classInput()));

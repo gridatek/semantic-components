@@ -1,3 +1,4 @@
+import { Directionality } from '@angular/cdk/bidi';
 import { CdkOverlayOrigin, OverlayModule } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import {
@@ -5,6 +6,7 @@ import {
   ViewEncapsulation,
   computed,
   contentChild,
+  inject,
   input,
   model,
 } from '@angular/core';
@@ -15,6 +17,7 @@ import {
   buildOverlayPositionsWithFallback,
   cn,
 } from '../../utils';
+import { ScElementDirectionality } from '../../utils/element-directionality';
 import { ScPopoverPortal } from './popover-portal';
 import { ScPopoverTrigger } from './popover-trigger';
 
@@ -23,6 +26,7 @@ export type ScPopoverAlign = ScOverlayAlign;
 
 @Component({
   selector: 'div[scPopoverProvider]',
+  providers: [{ provide: Directionality, useClass: ScElementDirectionality }],
   imports: [OverlayModule, NgTemplateOutlet, ScFocusTrap],
   template: `
     <ng-content />
@@ -50,6 +54,7 @@ export type ScPopoverAlign = ScOverlayAlign;
   encapsulation: ViewEncapsulation.None,
 })
 export class ScPopoverProvider {
+  private readonly direction = inject(Directionality);
   readonly classInput = input<string>('', { alias: 'class' });
 
   /** Which side the popover appears on */
@@ -77,7 +82,12 @@ export class ScPopoverProvider {
   );
 
   protected readonly positions = computed(() =>
-    buildOverlayPositionsWithFallback(this.side(), this.align(), this.offset()),
+    buildOverlayPositionsWithFallback(
+      this.side(),
+      this.align(),
+      this.offset(),
+      this.direction.value,
+    ),
   );
 
   protected readonly class = computed(() => cn('contents', this.classInput()));

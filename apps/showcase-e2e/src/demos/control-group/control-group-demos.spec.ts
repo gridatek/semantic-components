@@ -140,6 +140,13 @@ test('RTL: from the right — the select, the amount, the button; the corners mi
     .toEqual([false, true, true, false]);
   expect(await corners(send)).toEqual([true, false, false, true]);
   await expect(send.locator('svg')).toHaveCSS('rotate', '180deg');
+  // The list opens from the trigger's start — its right edge — leftward.
+  await currency.click();
+  const list = page.getByRole('listbox');
+  await expect(list).toBeVisible();
+  const [t, l] = [await box(currency), await box(list)];
+  expect(Math.abs(t.x + t.width - (l.x + l.width))).toBeLessThan(8);
+  expect(l.x).toBeLessThan(t.x);
 });
 
 test('On a phone: the demos fit, every target 24px @mobile', async ({

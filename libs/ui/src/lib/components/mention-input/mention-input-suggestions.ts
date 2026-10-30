@@ -1,3 +1,4 @@
+import { Directionality } from '@angular/cdk/bidi';
 import {
   ConnectedPosition,
   OverlayModule,
@@ -12,10 +13,12 @@ import {
   input,
 } from '@angular/core';
 import { cn } from '../../utils/cn/cn';
+import { ScElementDirectionality } from '../../utils/element-directionality';
 import { ScMentionInputState } from './mention-input-state';
 
 @Component({
   selector: 'div[scMentionInputSuggestions]',
+  providers: [{ provide: Directionality, useClass: ScElementDirectionality }],
   imports: [OverlayModule],
   template: `
     @if (state.overlayOrigin; as origin) {

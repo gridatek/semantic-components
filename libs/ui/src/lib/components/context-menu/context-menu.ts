@@ -1,4 +1,5 @@
 import { Menu, MenuTrigger } from '@angular/aria/menu';
+import { Directionality } from '@angular/cdk/bidi';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { DOCUMENT } from '@angular/common';
 import {
@@ -14,6 +15,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { cn } from '../../utils';
+import { ScElementDirectionality } from '../../utils/element-directionality';
 import { ScMenu } from '../menu';
 import { SC_CONTEXT_MENU_PROVIDER } from './context-menu-types';
 
@@ -28,6 +30,7 @@ import { SC_CONTEXT_MENU_PROVIDER } from './context-menu-types';
  */
 @Component({
   selector: 'div[scContextMenu]',
+  providers: [{ provide: Directionality, useClass: ScElementDirectionality }],
   imports: [MenuTrigger, OverlayModule],
   template: `
     <div

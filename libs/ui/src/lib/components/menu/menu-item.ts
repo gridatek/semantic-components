@@ -1,4 +1,5 @@
 import { Menu, MenuItem } from '@angular/aria/menu';
+import { Directionality } from '@angular/cdk/bidi';
 import { CdkOverlayOrigin, OverlayModule } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import {
@@ -11,11 +12,13 @@ import {
   input,
 } from '@angular/core';
 import { cn, setInput } from '../../utils';
+import { ScElementDirectionality } from '../../utils/element-directionality';
 import { ScMenuPortal } from './menu-portal';
 import { useDefaultSearchTerm } from './menu-search-term';
 
 @Component({
   selector: '[scMenuItem]',
+  providers: [{ provide: Directionality, useClass: ScElementDirectionality }],
   exportAs: 'scMenuItem',
   imports: [OverlayModule, NgTemplateOutlet],
   hostDirectives: [

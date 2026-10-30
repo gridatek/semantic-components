@@ -14,7 +14,7 @@ Every component has a demo in right-to-left, with Arabic written in the demo —
 - **Logical properties only**: `ms-*`, `pe-*`, `start-*`, `end-*`, `border-s`, `text-start`, `rounded-e-*` — a physical one (`ml-*`, `left-*`, `text-left`) is a bug ([shadcn-style-reference.md](shadcn-style-reference.md)).
 - **Icons that point** (chevrons, arrows, "next", "back") flip: `rtl:rotate-180` or `rtl:-scale-x-100`. Icons that don't point (search, close, check) don't.
 - **Keys along the line reverse**: ArrowLeft goes to the next item, ArrowRight to the previous one (tabs, radio groups, sliders, menus across, carousels). Up and Down don't change.
-- **Overlays open on the right side**: `start` / `end` alignment, not `left` / `right`.
+- **Overlays open on the right side**: `start` / `end` alignment, not `left` / `right`. A part with a connected overlay provides `ScElementDirectionality` (`libs/ui/src/lib/utils/element-directionality`): CDK alone reads the document's direction, so under a `dir="rtl"` container its `start` would still be the left. `side="left"` / `"right"` stay physical (as Base UI's); `align` is logical.
 - **Text**: Arabic joins its letters — nothing that cuts it into letters (letter-spacing, `truncate` in the middle of a word is fine).
 
 ## The test

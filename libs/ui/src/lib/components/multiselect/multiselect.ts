@@ -1,4 +1,5 @@
 import { ComboboxPopup } from '@angular/aria/combobox';
+import { Directionality } from '@angular/cdk/bidi';
 import { OverlayModule } from '@angular/cdk/overlay';
 import {
   Component,
@@ -14,6 +15,7 @@ import {
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
 import { cn } from '../../utils';
+import { ScElementDirectionality } from '../../utils/element-directionality';
 import { ScPortalOutlet } from '../portal-outlet/portal-outlet';
 import { ScMultiselectPortal } from './multiselect-portal';
 import { SC_MULTISELECT, SC_MULTISELECT_TRIGGER } from './multiselect-tokens';
@@ -39,7 +41,10 @@ const positions = [
   selector: 'div[scMultiselect]',
   exportAs: 'scMultiselect',
   imports: [ComboboxPopup, OverlayModule, ScPortalOutlet],
-  providers: [{ provide: SC_MULTISELECT, useExisting: ScMultiselect }],
+  providers: [
+    { provide: Directionality, useClass: ScElementDirectionality },
+    { provide: SC_MULTISELECT, useExisting: ScMultiselect },
+  ],
   template: `
     <ng-content />
     @if (trigger(); as trigger) {
