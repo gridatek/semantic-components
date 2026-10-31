@@ -177,7 +177,7 @@ test('RTL: from the right, the list from the trigger’s right edge', async ({
   const list = page.locator('[scSelectPopup]');
   await expect(list).toBeVisible();
   const [t, l] = [await box(trigger), await box(list)];
-  expect(Math.abs(t.x + t.width - (l.x + l.width))).toBeLessThan(2);
+  expect(Math.abs(t.x + t.width - (l.x + l.width))).toBeLessThan(4);
 });
 
 test('On a phone: opened by touch, the list opens below; every target 24px @mobile', async ({

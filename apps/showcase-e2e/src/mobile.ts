@@ -49,40 +49,46 @@ export async function expectTargetSize(
   scope: Locator,
   min = 24,
 ): Promise<void> {
-  const small = await scope.evaluate(
-    (root, { selector, min }) => {
-      const found: string[] = [];
-      for (const element of root.querySelectorAll<HTMLElement>(selector)) {
-        const style = getComputedStyle(element);
-        if (style.visibility === 'hidden' || style.display === 'none') continue;
-        if (element.closest('[inert], [aria-hidden="true"]')) continue;
-        if ((element as HTMLButtonElement).disabled) continue;
-        // Inline: a link in a sentence.
-        if (
-          element.matches('a') &&
-          element.closest('p, li') &&
-          style.display === 'inline'
-        )
-          continue;
-        // A control in its label is clicked through the label: that's the target.
-        const box = (
-          element.closest('label') ?? element
-        ).getBoundingClientRect();
-        if (!box.width || !box.height) continue;
-        if (box.width < min || box.height < min) {
-          const name =
-            element.getAttribute('aria-label') ||
-            element.textContent?.trim().slice(0, 30) ||
-            element.getAttribute('data-slot') ||
-            element.tagName.toLowerCase();
-          found.push(
-            `${name} (${Math.round(box.width)}×${Math.round(box.height)})`,
-          );
+  // Read until the page has settled: the static build renders after the load,
+  // and a part measured before its classes apply is too small.
+  const measure = () =>
+    scope.evaluate(
+      (root, { selector, min }) => {
+        const found: string[] = [];
+        for (const element of root.querySelectorAll<HTMLElement>(selector)) {
+          const style = getComputedStyle(element);
+          if (style.visibility === 'hidden' || style.display === 'none')
+            continue;
+          if (element.closest('[inert], [aria-hidden="true"]')) continue;
+          if ((element as HTMLButtonElement).disabled) continue;
+          // Inline: a link in a sentence.
+          if (
+            element.matches('a') &&
+            element.closest('p, li') &&
+            style.display === 'inline'
+          )
+            continue;
+          // A control in its label is clicked through the label: that's the target.
+          const box = (
+            element.closest('label') ?? element
+          ).getBoundingClientRect();
+          if (!box.width || !box.height) continue;
+          if (box.width < min || box.height < min) {
+            const name =
+              element.getAttribute('aria-label') ||
+              element.textContent?.trim().slice(0, 30) ||
+              element.getAttribute('data-slot') ||
+              element.tagName.toLowerCase();
+            found.push(
+              `${name} (${Math.round(box.width)}×${Math.round(box.height)})`,
+            );
+          }
         }
-      }
-      return found;
-    },
-    { selector: TARGETS, min },
-  );
-  expect(small, `targets smaller than ${min}×${min}`).toEqual([]);
+        return found;
+      },
+      { selector: TARGETS, min },
+    );
+  await expect
+    .poll(measure, { message: `targets smaller than ${min}×${min}` })
+    .toEqual([]);
 }

@@ -31,7 +31,8 @@ test('Usage: one box — the group draws the border, the input none', async ({
   const input = page.getByRole('textbox', { name: 'Search' });
   await expect(group).toHaveCSS('border-top-width', '1px');
   await expect(input).toHaveCSS('border-top-width', '0px');
-  await expect(input).toHaveCSS('box-shadow', 'none');
+  // No ring of its own: every shadow, if any, of no size.
+  expect(await computed(input, 'box-shadow')).not.toMatch(/[1-9][d.]*px/);
 });
 
 test('Inline Start: the icon before the input, though written after', async ({

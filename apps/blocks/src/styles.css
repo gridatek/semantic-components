@@ -80,7 +80,7 @@
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
   /* Not shadcn's (0.556): 4.5:1 on the muted background (inactive tabs…). */
-  --muted-foreground: oklch(0.54 0 0);
+  --muted-foreground: oklch(0.51 0 0);
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
   /* Not shadcn's (0.577): 4.5:1 for text-destructive on bg-destructive/10. */

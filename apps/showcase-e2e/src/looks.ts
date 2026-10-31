@@ -5,11 +5,12 @@ import type { Locator, Page } from '@playwright/test';
  * a look read mid-transition isn't taken for its own.
  */
 
-/** Opens a page with transitions off. */
+/** Opens a page with transitions off and animations at their end. */
 export async function openStill(page: Page, url: string): Promise<void> {
   await page.goto(url);
   await page.addStyleTag({
-    content: '*, *::before, *::after { transition: none !important; }',
+    content:
+      '*, *::before, *::after { transition: none !important; animation-duration: 0s !important; animation-delay: 0s !important; }',
   });
 }
 
