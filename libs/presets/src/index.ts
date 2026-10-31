@@ -27,6 +27,10 @@ export interface ScSelectStyles {
   /** The chevron in the trigger. */
   icon: string;
   popup: string;
+  /** Played as the popup opens (Angular's `animate.enter`). */
+  popupEnter: string;
+  /** Played as it closes (`animate.leave`). */
+  popupLeave: string;
   /** Added to the popup when it opens below or above the trigger. */
   popupPopper: string;
   /** The list (Radix's Viewport). */

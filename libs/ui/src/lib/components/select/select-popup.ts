@@ -1,5 +1,4 @@
 import {
-  type AnimationCallbackEvent,
   Directive,
   ElementRef,
   afterNextRender,
@@ -15,9 +14,6 @@ import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 import { SC_SELECT } from './select-tokens';
 
-/** Room kept between the popup and the viewport's edge. */
-const MARGIN = 8;
-
 /**
  * The popup round the list: it scrolls, between its scroll buttons. It opens
  * below the trigger (above without room); with `alignItemWithTrigger`, over
@@ -28,25 +24,18 @@ const MARGIN = 8;
   selector: 'div[scSelectPopup]',
   exportAs: 'scSelectPopup',
   host: {
-    'data-open': '',
     '[attr.data-side]': 'select.side()',
     '[attr.data-align-trigger]': 'select.aligned()',
-    // At least as wide as the trigger, as Radix sets it.
-    '[style.min-width.px]': 'trigger?.offsetWidth',
-    // The variables Radix's Select sets, which the preset's classes read —
-    // not the trigger's height: Radix's Viewport grows from it in a flex
-    // box; ours is a plain block, which the popup scrolls.
-    '[style.--radix-select-trigger-width.px]': 'trigger?.offsetWidth',
-    '[style.--radix-select-content-available-height.px]': 'availableHeight',
-    '[style.--radix-select-content-transform-origin]': 'transformOrigin()',
+    // Opening and closing, the preset's classes, played by Angular.
+    '[animate.enter]': 'styles.popupEnter',
+    '[animate.leave]': 'styles.popupLeave',
     '[class]': 'class()',
     '(scroll)': 'measureScroll()',
-    '(animate.leave)': 'leave($event)',
   },
 })
 export class ScSelectPopup {
   protected readonly select = inject(SC_SELECT);
-  private readonly styles = injectPreset().select;
+  protected readonly styles = injectPreset().select;
   readonly element = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -63,18 +52,13 @@ export class ScSelectPopup {
   readonly canScrollUp = signal(false);
   readonly canScrollDown = signal(false);
 
-  protected readonly trigger = this.select.trigger()?.elementRef.nativeElement;
-  /** As tall as the viewport allows, beside or over the trigger. */
-  protected readonly availableHeight = this.roomFor(this.trigger);
-
-  protected readonly transformOrigin = computed(() => {
-    const side = this.select.side();
-    return side === 'none' ? 'center' : side === 'bottom' ? 'top' : 'bottom';
-  });
+  private readonly trigger = this.select.trigger()?.elementRef.nativeElement;
 
   protected readonly class = computed(() =>
     cn(
       this.styles.popup,
+      // As tall as the CDK overlay lets it be: the room in the viewport.
+      'max-h-[inherit]',
       // No scrollbar, as Radix's Viewport: the scroll buttons stand in.
       '[scrollbar-width:none] [&::-webkit-scrollbar]:hidden',
       // Below or above the trigger: Radix's popper position.
@@ -120,28 +104,6 @@ export class ScSelectPopup {
     const trigger = this.trigger.getBoundingClientRect();
     this.select.alignOffset.set(
       Math.round((trigger.height - item.offsetHeight) / 2 - offset),
-    );
-  }
-
-  /** The most room above or below the trigger; the viewport's, over it. */
-  private roomFor(trigger: HTMLElement | undefined): number | null {
-    if (!trigger || typeof window === 'undefined') return null;
-    if (this.select.aligned()) return window.innerHeight - 2 * MARGIN;
-    const { top, bottom } = trigger.getBoundingClientRect();
-    return Math.max(window.innerHeight - bottom, top) - 2 * MARGIN;
-  }
-
-  /** Closing: `data-closed` plays the preset's exit, then the popup goes. */
-  protected leave(event: AnimationCallbackEvent): void {
-    const element = event.target as HTMLElement;
-    element.removeAttribute('data-open');
-    element.setAttribute('data-closed', '');
-    const done = () => event.animationComplete();
-    const animations = element.getAnimations();
-    if (!animations.length) return done();
-    Promise.all(animations.map((animation) => animation.finished)).then(
-      done,
-      done,
     );
   }
 }

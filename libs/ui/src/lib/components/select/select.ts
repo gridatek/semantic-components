@@ -71,12 +71,20 @@ const above: ConnectedPosition = {
         [combobox]="trigger.combobox"
         popupType="listbox"
       >
+        <!--
+          The CDK sizes the overlay — the trigger's width as its minimum, the
+          room in the viewport as its height, which the popup inherits — and
+          sets the popup's transform origin by where it opened.
+        -->
         <ng-template
           [cdkConnectedOverlay]="{
             origin: trigger.elementRef,
             usePopover: 'inline',
-            matchWidth: true,
+            transformOriginSelector: '[scSelectPopup]',
+            flexibleDimensions: true,
+            viewportMargin: 8,
           }"
+          [cdkConnectedOverlayMinWidth]="triggerWidth()"
           [cdkConnectedOverlayOpen]="open()"
           [cdkConnectedOverlayPositions]="positions()"
           (positionChange)="onPositionChange($event)"
@@ -152,6 +160,11 @@ export class ScSelect implements FormValueControl<string> {
   );
 
   private readonly overlay = viewChild(CdkConnectedOverlay);
+
+  /** The overlay is at least as wide as the trigger, and grows to its options. */
+  protected triggerWidth(): number {
+    return this.trigger()?.elementRef.nativeElement.offsetWidth ?? 0;
+  }
 
   /** Labels of options seen so far, or given by `items`. */
   private readonly labels = signal<ReadonlyMap<string, string>>(new Map());
