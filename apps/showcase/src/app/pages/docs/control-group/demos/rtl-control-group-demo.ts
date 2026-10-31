@@ -52,7 +52,7 @@ import {
             <svg scSelectIcon siChevronDownIcon></svg>
           </div>
           <ng-template scSelectPortal>
-            <div scSelectPopup dir="rtl" lang="ar">
+            <div scSelectPopup class="min-w-36" dir="rtl" lang="ar">
               <div scSelectList>
                 @for (currency of currencies; track currency.value) {
                   <div

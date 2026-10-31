@@ -64,7 +64,7 @@ The root has no box of its own, as Base UI's: its label and trigger are laid out
 
 ## Positioning
 
-The popup opens below the trigger, which stays in sight — above it when there is no room below (Radix's `popper`). With `[alignItemWithTrigger]="true"` on the popup it opens over the trigger instead, the selected item (or the first) where the value is (Radix's `item-aligned`, Base UI's default), except when opened by touch or without room. In right to left it lines up with the trigger's right edge.
+The popup opens below the trigger, which stays in sight — above it when there is no room below (Radix's `popper`). With `[alignItemWithTrigger]="true"` on the popup it opens over the trigger instead, the selected item (or the first) where the value is (Radix's `item-aligned`, Base UI's default), except when opened by touch or without room. In right to left it lines up with the trigger's right edge. The list is as wide as the trigger; for another width, a class on the popup (`<div scSelectPopup class="min-w-36">`: at least 144px, wider than a narrow trigger).
 
 ## Keyboard
 
