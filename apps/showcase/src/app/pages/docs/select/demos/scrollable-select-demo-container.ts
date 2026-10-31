@@ -20,7 +20,6 @@ import { ScrollableSelectDemo } from './scrollable-select-demo';
 export class ScrollableSelectDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScField,
   ScSelect,
   ScSelectGroup,
   ScSelectGroupLabel,
@@ -46,7 +45,6 @@ import {
 @Component({
   selector: 'app-scrollable-select-demo',
   imports: [
-    ScField,
     ScSelect,
     ScSelectGroup,
     ScSelectGroupLabel,
@@ -67,39 +65,37 @@ import {
     SiChevronUpIcon,
   ],
   template: \`
-    <div scField class="w-full max-w-64">
-      <div scSelect [(value)]="zone" [items]="items">
-        <div scSelectLabel>Timezone</div>
-        <div scSelectTrigger class="w-full">
-          <span scSelectValue placeholder="Select a timezone"></span>
-          <svg scSelectIcon siChevronDownIcon></svg>
-        </div>
-        <ng-template scSelectPortal>
-          <div scSelectPopup>
-            <div scSelectScrollUpButton>
-              <svg siChevronUpIcon></svg>
-            </div>
-            <div scSelectList>
-              @for (region of regions; track region.label) {
-                <div scSelectGroup>
-                  <div scSelectGroupLabel>{{ region.label }}</div>
-                  @for (item of region.items; track item.value) {
-                    <div scSelectItem [value]="item.value">
-                      <span scSelectItemText>{{ item.label }}</span>
-                      <span scSelectItemIndicator>
-                        <svg siCheckIcon></svg>
-                      </span>
-                    </div>
-                  }
-                </div>
-              }
-            </div>
-            <div scSelectScrollDownButton>
-              <svg siChevronDownIcon></svg>
-            </div>
-          </div>
-        </ng-template>
+    <div scSelect [(value)]="zone" [items]="items" class="w-full max-w-64">
+      <div scSelectLabel>Timezone</div>
+      <div scSelectTrigger>
+        <span scSelectValue placeholder="Select a timezone"></span>
+        <svg scSelectIcon siChevronDownIcon></svg>
       </div>
+      <ng-template scSelectPortal>
+        <div scSelectPopup>
+          <div scSelectScrollUpButton>
+            <svg siChevronUpIcon></svg>
+          </div>
+          <div scSelectList>
+            @for (region of regions; track region.label) {
+              <div scSelectGroup>
+                <div scSelectGroupLabel>{{ region.label }}</div>
+                @for (item of region.items; track item.value) {
+                  <div scSelectItem [value]="item.value">
+                    <span scSelectItemText>{{ item.label }}</span>
+                    <span scSelectItemIndicator>
+                      <svg siCheckIcon></svg>
+                    </span>
+                  </div>
+                }
+              </div>
+            }
+          </div>
+          <div scSelectScrollDownButton>
+            <svg siChevronDownIcon></svg>
+          </div>
+        </div>
+      </ng-template>
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },

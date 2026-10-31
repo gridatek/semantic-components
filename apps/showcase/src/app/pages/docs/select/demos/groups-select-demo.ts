@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScField,
   ScSelect,
   ScSelectGroup,
   ScSelectGroupLabel,
@@ -21,7 +20,6 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-groups-select-demo',
   imports: [
-    ScField,
     ScSelect,
     ScSelectGroup,
     ScSelectGroupLabel,
@@ -40,43 +38,41 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     SiChevronDownIcon,
   ],
   template: `
-    <div scField class="w-full max-w-48">
-      <div scSelect [(value)]="food" [items]="all">
-        <div scSelectLabel>Food</div>
-        <div scSelectTrigger class="w-full">
-          <span scSelectValue placeholder="Select a fruit"></span>
-          <svg scSelectIcon siChevronDownIcon></svg>
-        </div>
-        <ng-template scSelectPortal>
-          <div scSelectPopup>
-            <div scSelectList>
-              <div scSelectGroup>
-                <div scSelectGroupLabel>Fruits</div>
-                @for (item of fruits; track item.value) {
-                  <div scSelectItem [value]="item.value">
-                    <span scSelectItemText>{{ item.label }}</span>
-                    <span scSelectItemIndicator>
-                      <svg siCheckIcon></svg>
-                    </span>
-                  </div>
-                }
-              </div>
-              <div scSelectSeparator></div>
-              <div scSelectGroup>
-                <div scSelectGroupLabel>Vegetables</div>
-                @for (item of vegetables; track item.value) {
-                  <div scSelectItem [value]="item.value">
-                    <span scSelectItemText>{{ item.label }}</span>
-                    <span scSelectItemIndicator>
-                      <svg siCheckIcon></svg>
-                    </span>
-                  </div>
-                }
-              </div>
+    <div scSelect [(value)]="food" [items]="all" class="w-full max-w-48">
+      <div scSelectLabel>Food</div>
+      <div scSelectTrigger>
+        <span scSelectValue placeholder="Select a fruit"></span>
+        <svg scSelectIcon siChevronDownIcon></svg>
+      </div>
+      <ng-template scSelectPortal>
+        <div scSelectPopup>
+          <div scSelectList>
+            <div scSelectGroup>
+              <div scSelectGroupLabel>Fruits</div>
+              @for (item of fruits; track item.value) {
+                <div scSelectItem [value]="item.value">
+                  <span scSelectItemText>{{ item.label }}</span>
+                  <span scSelectItemIndicator>
+                    <svg siCheckIcon></svg>
+                  </span>
+                </div>
+              }
+            </div>
+            <div scSelectSeparator></div>
+            <div scSelectGroup>
+              <div scSelectGroupLabel>Vegetables</div>
+              @for (item of vegetables; track item.value) {
+                <div scSelectItem [value]="item.value">
+                  <span scSelectItemText>{{ item.label }}</span>
+                  <span scSelectItemIndicator>
+                    <svg siCheckIcon></svg>
+                  </span>
+                </div>
+              }
             </div>
           </div>
-        </ng-template>
-      </div>
+        </div>
+      </ng-template>
     </div>
   `,
   host: { class: 'flex w-full justify-center' },

@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScField,
   ScSelect,
   ScSelectGroup,
   ScSelectIcon,
@@ -19,7 +18,6 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-select-usage-demo',
   imports: [
-    ScField,
     ScSelect,
     ScSelectGroup,
     ScSelectIcon,
@@ -36,30 +34,28 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     SiChevronDownIcon,
   ],
   template: `
-    <div scField class="w-full max-w-48">
-      <div scSelect [(value)]="theme" [items]="themes">
-        <div scSelectLabel>Theme</div>
-        <div scSelectTrigger class="w-full">
-          <span scSelectValue placeholder="Select a theme"></span>
-          <svg scSelectIcon siChevronDownIcon></svg>
-        </div>
-        <ng-template scSelectPortal>
-          <div scSelectPopup>
-            <div scSelectList>
-              <div scSelectGroup>
-                @for (item of themes; track item.value) {
-                  <div scSelectItem [value]="item.value">
-                    <span scSelectItemText>{{ item.label }}</span>
-                    <span scSelectItemIndicator>
-                      <svg siCheckIcon></svg>
-                    </span>
-                  </div>
-                }
-              </div>
+    <div scSelect [(value)]="theme" [items]="themes" class="w-full max-w-48">
+      <div scSelectLabel>Theme</div>
+      <div scSelectTrigger>
+        <span scSelectValue placeholder="Select a theme"></span>
+        <svg scSelectIcon siChevronDownIcon></svg>
+      </div>
+      <ng-template scSelectPortal>
+        <div scSelectPopup>
+          <div scSelectList>
+            <div scSelectGroup>
+              @for (item of themes; track item.value) {
+                <div scSelectItem [value]="item.value">
+                  <span scSelectItemText>{{ item.label }}</span>
+                  <span scSelectItemIndicator>
+                    <svg siCheckIcon></svg>
+                  </span>
+                </div>
+              }
             </div>
           </div>
-        </ng-template>
-      </div>
+        </div>
+      </ng-template>
     </div>
   `,
   host: { class: 'flex w-full justify-center' },

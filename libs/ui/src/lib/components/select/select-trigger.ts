@@ -59,7 +59,8 @@ export class ScSelectTrigger {
   );
 
   protected readonly class = computed(() =>
-    cn(this.styles.trigger, this.classInput()),
+    // As wide as the select (its root sets the width).
+    cn(this.styles.trigger, 'w-full', this.classInput()),
   );
 
   constructor() {

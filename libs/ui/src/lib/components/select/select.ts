@@ -173,9 +173,9 @@ export class ScSelect implements FormValueControl<string> {
   });
 
   protected readonly class = computed(() =>
-    // No box of its own, as Base UI's root: its label and trigger are
-    // laid out by their container (a field).
-    cn('contents', this.classInput()),
+    // It sets the width — its content's by default; the trigger fills it,
+    // the list matches the trigger. Its label above its trigger.
+    cn('flex w-fit flex-col gap-2', this.classInput()),
   );
 
   constructor() {

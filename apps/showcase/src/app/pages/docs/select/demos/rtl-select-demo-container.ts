@@ -20,7 +20,6 @@ import { RtlSelectDemo } from './rtl-select-demo';
 export class RtlSelectDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScField,
   ScSelect,
   ScSelectGroup,
   ScSelectGroupLabel,
@@ -40,7 +39,6 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-rtl-select-demo',
   imports: [
-    ScField,
     ScSelect,
     ScSelectGroup,
     ScSelectGroupLabel,
@@ -59,31 +57,29 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   ],
   template: \`
     <div dir="rtl" lang="ar" class="w-full max-w-48">
-      <div scField>
-        <div scSelect [(value)]="fruit" [items]="fruits">
-          <div scSelectLabel>الفاكهة</div>
-          <div scSelectTrigger class="w-full">
-            <span scSelectValue placeholder="اختر فاكهة"></span>
-            <svg scSelectIcon siChevronDownIcon></svg>
-          </div>
-          <ng-template scSelectPortal>
-            <div scSelectPopup dir="rtl" lang="ar">
-              <div scSelectList>
-                <div scSelectGroup>
-                  <div scSelectGroupLabel>الفواكه</div>
-                  @for (item of fruits; track item.value) {
-                    <div scSelectItem [value]="item.value">
-                      <span scSelectItemText>{{ item.label }}</span>
-                      <span scSelectItemIndicator>
-                        <svg siCheckIcon></svg>
-                      </span>
-                    </div>
-                  }
-                </div>
+      <div scSelect [(value)]="fruit" [items]="fruits" class="w-full">
+        <div scSelectLabel>الفاكهة</div>
+        <div scSelectTrigger>
+          <span scSelectValue placeholder="اختر فاكهة"></span>
+          <svg scSelectIcon siChevronDownIcon></svg>
+        </div>
+        <ng-template scSelectPortal>
+          <div scSelectPopup dir="rtl" lang="ar">
+            <div scSelectList>
+              <div scSelectGroup>
+                <div scSelectGroupLabel>الفواكه</div>
+                @for (item of fruits; track item.value) {
+                  <div scSelectItem [value]="item.value">
+                    <span scSelectItemText>{{ item.label }}</span>
+                    <span scSelectItemIndicator>
+                      <svg siCheckIcon></svg>
+                    </span>
+                  </div>
+                }
               </div>
             </div>
-          </ng-template>
-        </div>
+          </div>
+        </ng-template>
       </div>
     </div>
   \`,

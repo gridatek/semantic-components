@@ -237,12 +237,12 @@ import {
       <div scNavbarActions>
         <div
           scSelect
+          class="w-32"
           [value]="i18n.locale.id"
           (valueChange)="i18n.setLocale($event)"
         >
           <div
             scSelectTrigger
-            class="w-32"
             aria-label="Language"
             i18n-aria-label="@@navbar.language"
           >

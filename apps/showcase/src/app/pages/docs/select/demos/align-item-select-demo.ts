@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScField,
   ScFieldDescription,
   ScLabelText,
   ScSelect,
@@ -25,7 +24,6 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   imports: [
     ScFieldDescription,
     ScLabelText,
-    ScField,
     ScSelect,
     ScSelectGroup,
     ScSelectIcon,
@@ -50,30 +48,28 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
         <p scFieldDescription>Toggle to align the item with the trigger.</p>
         <input type="checkbox" scSwitch [(checked)]="align" />
       </label>
-      <div scField>
-        <div scSelect [(value)]="fruit" [items]="fruits">
-          <div scSelectLabel>Fruit</div>
-          <div scSelectTrigger class="w-full">
-            <span scSelectValue placeholder="Select a fruit"></span>
-            <svg scSelectIcon siChevronDownIcon></svg>
-          </div>
-          <ng-template scSelectPortal>
-            <div scSelectPopup [alignItemWithTrigger]="align()">
-              <div scSelectList>
-                <div scSelectGroup>
-                  @for (item of fruits; track item.value) {
-                    <div scSelectItem [value]="item.value">
-                      <span scSelectItemText>{{ item.label }}</span>
-                      <span scSelectItemIndicator>
-                        <svg siCheckIcon></svg>
-                      </span>
-                    </div>
-                  }
-                </div>
+      <div scSelect [(value)]="fruit" [items]="fruits" class="w-full">
+        <div scSelectLabel>Fruit</div>
+        <div scSelectTrigger>
+          <span scSelectValue placeholder="Select a fruit"></span>
+          <svg scSelectIcon siChevronDownIcon></svg>
+        </div>
+        <ng-template scSelectPortal>
+          <div scSelectPopup [alignItemWithTrigger]="align()">
+            <div scSelectList>
+              <div scSelectGroup>
+                @for (item of fruits; track item.value) {
+                  <div scSelectItem [value]="item.value">
+                    <span scSelectItemText>{{ item.label }}</span>
+                    <span scSelectItemIndicator>
+                      <svg siCheckIcon></svg>
+                    </span>
+                  </div>
+                }
               </div>
             </div>
-          </ng-template>
-        </div>
+          </div>
+        </ng-template>
       </div>
     </div>
   `,

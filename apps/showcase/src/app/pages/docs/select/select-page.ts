@@ -208,7 +208,7 @@ export default class SelectPage {
       name: 'ScSelect',
       selector: 'div[scSelect]',
       description:
-        'The select: its value, bound with [formField] or [(value)]. Its label above its trigger.',
+        'The select: its value, bound with [formField] or [(value)]. It sets the width (its content’s by default, or a class): the trigger fills it, the list matches the trigger. Its label above its trigger.',
       inputs: [
         {
           name: 'value',

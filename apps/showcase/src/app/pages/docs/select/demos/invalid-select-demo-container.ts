@@ -62,9 +62,14 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   ],
   template: \`
     <div scField class="w-full max-w-48">
-      <div scSelect [formField]="fruitForm.fruit" [items]="fruits">
+      <div
+        scSelect
+        [formField]="fruitForm.fruit"
+        [items]="fruits"
+        class="w-full"
+      >
         <div scSelectLabel>Fruit</div>
-        <div scSelectTrigger class="w-full">
+        <div scSelectTrigger>
           <span scSelectValue placeholder="Select a fruit"></span>
           <svg scSelectIcon siChevronDownIcon></svg>
         </div>

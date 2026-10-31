@@ -5,28 +5,26 @@ A choice among a short list of options — a trigger showing the value, the opti
 ## Usage
 
 ```html
-<div scField>
-  <div scSelect [formField]="form.theme" [items]="themes">
-    <div scSelectLabel>Theme</div>
-    <div scSelectTrigger class="w-full">
-      <span scSelectValue placeholder="Select a theme"></span>
-      <svg scSelectIcon siChevronDownIcon></svg>
-    </div>
-    <ng-template scSelectPortal>
-      <div scSelectPopup>
-        <div scSelectList>
-          <div scSelectGroup>
-            @for (item of themes; track item.value) {
-            <div scSelectItem [value]="item.value">
-              <span scSelectItemText>{{ item.label }}</span>
-              <span scSelectItemIndicator><svg siCheckIcon></svg></span>
-            </div>
-            }
+<div scSelect [formField]="form.theme" [items]="themes" class="w-48">
+  <div scSelectLabel>Theme</div>
+  <div scSelectTrigger>
+    <span scSelectValue placeholder="Select a theme"></span>
+    <svg scSelectIcon siChevronDownIcon></svg>
+  </div>
+  <ng-template scSelectPortal>
+    <div scSelectPopup>
+      <div scSelectList>
+        <div scSelectGroup>
+          @for (item of themes; track item.value) {
+          <div scSelectItem [value]="item.value">
+            <span scSelectItemText>{{ item.label }}</span>
+            <span scSelectItemIndicator><svg siCheckIcon></svg></span>
           </div>
+          }
         </div>
       </div>
-    </ng-template>
-  </div>
+    </div>
+  </ng-template>
 </div>
 ```
 
@@ -60,7 +58,7 @@ Base UI's parts, each a directive on your element:
 </div>
 ```
 
-The root has no box of its own, as Base UI's: its label and trigger are laid out by their container (a field); give the trigger its width. It needs a name: its label, or `aria-label` on the trigger.
+The root sets the width — its content's by default, or yours (`class="w-48"`); the trigger fills it and the list matches the trigger. Its label sits above its trigger. It needs a name: its label, or `aria-label` on the trigger.
 
 ## Positioning
 

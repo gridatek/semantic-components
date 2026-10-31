@@ -91,9 +91,9 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
             />
           </div>
           <div scField>
-            <div scSelect [formField]="contactForm.country">
+            <div scSelect [formField]="contactForm.country" class="w-full">
               <div scSelectLabel>Country</div>
-              <div scSelectTrigger class="w-full">
+              <div scSelectTrigger>
                 <span scSelectValue>{{ countryLabel() }}</span>
                 <svg scSelectIcon siChevronDownIcon></svg>
               </div>
