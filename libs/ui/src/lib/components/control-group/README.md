@@ -35,7 +35,7 @@ Tab goes to each control. For buttons that toggle a state, use a Toggle Group; f
 
 ### ScControlGroup — `div[scControlGroup]`
 
-The group: `role="group"`, `data-orientation`; its classes are the preset's (`injectPreset().controlGroup`). A group in a group is spaced from the others (`gap-2`); a select in it fits its value.
+The group: `role="group"`, `data-orientation`; its classes are the preset's (`injectPreset().controlGroup`). A group in a group is spaced from the others (`gap-2`).
 
 | Input         | Type                         | Default        | Description                                               |
 | ------------- | ---------------------------- | -------------- | --------------------------------------------------------- |

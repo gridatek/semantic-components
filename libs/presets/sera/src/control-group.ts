@@ -4,9 +4,9 @@ import { cva } from 'class-variance-authority';
 // children by position (`:first-child`, `:last-child`), not by `data-slot`;
 // `[data-slot=button]` for shadcn's `[data-variant=outline]`, `[data-slot=control]`
 // for its `[data-slot=input]`; a select's trigger reached through its root
-// (`[data-slot=select]`), which fits its value in a group (`min-w-0`).
+// (`[data-slot=select]`).
 export const controlGroup = cva(
-  'group/control-group flex w-fit items-stretch *:focus-visible:relative *:focus-visible:z-10 has-[>[data-slot=control-group]]:gap-2 *:data-[slot=control]:px-4 has-[>[data-slot=button]]:*:data-[slot=input-group]:border-border has-[>[data-slot=button]]:*:data-[slot=input-group]:px-2.5 has-[>[data-slot=button]]:[&>[data-slot=select]>[data-slot=select-trigger]]:border-border has-[>[data-slot=button]]:*:[[role=combobox]]:px-2.5 has-[>[data-slot=button]]:[&>[data-slot=input-group]:has(:focus-visible)]:border-ring has-[>[data-slot=button]]:[&>[data-slot=select]>[data-slot=select-trigger]:focus-visible]:border-ring [&>[data-slot=select]]:min-w-0 [&>[data-slot=select]:has(:focus-visible)]:z-10 [&>input]:flex-1 has-[>[data-slot=button]]:[&>input]:border-border has-[>[data-slot=button]]:[&>input:focus-visible]:border-ring',
+  'group/control-group flex w-fit items-stretch *:focus-visible:relative *:focus-visible:z-10 has-[>[data-slot=control-group]]:gap-2 *:data-[slot=control]:px-4 has-[>[data-slot=button]]:*:data-[slot=input-group]:border-border has-[>[data-slot=button]]:*:data-[slot=input-group]:px-2.5 has-[>[data-slot=button]]:[&>[data-slot=select]>[data-slot=select-trigger]]:border-border has-[>[data-slot=button]]:*:[[role=combobox]]:px-2.5 has-[>[data-slot=button]]:[&>[data-slot=input-group]:has(:focus-visible)]:border-ring has-[>[data-slot=button]]:[&>[data-slot=select]>[data-slot=select-trigger]:focus-visible]:border-ring [&>[data-slot=select]:has(:focus-visible)]:z-10 [&>input]:flex-1 has-[>[data-slot=button]]:[&>input]:border-border has-[>[data-slot=button]]:[&>input:focus-visible]:border-ring',
   {
     variants: {
       orientation: {
