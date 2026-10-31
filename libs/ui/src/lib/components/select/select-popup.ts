@@ -57,8 +57,9 @@ export class ScSelectPopup {
   protected readonly class = computed(() =>
     cn(
       this.styles.popup,
-      // As tall as the CDK overlay lets it be: the room in the viewport.
-      'max-h-[inherit]',
+      // As wide as the trigger and as tall as the room in the viewport: the
+      // CDK overlay's size.
+      'w-full max-h-[inherit]',
       // No scrollbar, as Radix's Viewport: the scroll buttons stand in.
       '[scrollbar-width:none] [&::-webkit-scrollbar]:hidden',
       // Below or above the trigger: Radix's popper position.
