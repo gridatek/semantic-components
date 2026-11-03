@@ -32,7 +32,7 @@ import {
   template: `
     <nav
       scPagination
-      aria-label="Results"
+      aria-label="Products"
       #pagination="scPagination"
       [totalItems]="200"
       [pageSize]="10"

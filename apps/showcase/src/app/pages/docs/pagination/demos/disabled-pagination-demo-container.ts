@@ -51,7 +51,7 @@ import {
   template: \`
     <nav
       scPagination
-      aria-label="Results"
+      aria-label="Messages"
       #pagination="scPagination"
       [totalItems]="30"
       [pageSize]="10"

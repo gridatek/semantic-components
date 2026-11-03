@@ -51,7 +51,7 @@ test.describe('Pagination in every preset', () => {
         { name: 'sc-preset', value: preset, url: baseURL! },
       ]);
       await page.goto('/demos/pagination/ellipsis-pagination-demo');
-      const nav = page.getByRole('navigation', { name: 'Results' });
+      const nav = page.getByRole('navigation', { name: 'Products' });
       await expectClasses(
         nav.locator('[scPaginationList]'),
         styles.pagination.list,

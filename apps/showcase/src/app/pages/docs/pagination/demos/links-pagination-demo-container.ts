@@ -60,7 +60,7 @@ import {
     <nav
       scPagination
       id="links-results"
-      aria-label="Results"
+      aria-label="Articles"
       #pagination="scPagination"
       [totalItems]="100"
       [pageSize]="10"

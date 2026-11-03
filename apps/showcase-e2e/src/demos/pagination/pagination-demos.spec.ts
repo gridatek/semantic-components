@@ -45,7 +45,7 @@ test('Usage: a named navigation; a page marked current; Next and Previous move',
 
 test('Simple: the pages only, starting at the one given', async ({ page }) => {
   await page.goto(demo('simple'));
-  const nav = page.getByRole('navigation', { name: 'Results' });
+  const nav = page.getByRole('navigation', { name: 'Search results' });
   await expect(nav.getByRole('button')).toHaveText(['1', '2', '3', '4', '5']);
   await expect(
     nav.getByRole('button', { name: '2', exact: true }),
@@ -72,7 +72,7 @@ test('Icons Only: named by sr-only text; the items shown; rows per page from a S
   page,
 }) => {
   await page.goto(demo('icons-only'));
-  const nav = page.getByRole('navigation', { name: 'Results' });
+  const nav = page.getByRole('navigation', { name: 'Orders' });
   const status = nav.getByRole('status');
   await expect(status).toHaveText('1–25 of 230');
 
@@ -91,7 +91,7 @@ test('Ellipsis: the first, the last, the current with its neighbours; ellipses h
   page,
 }) => {
   await page.goto(demo('ellipsis'));
-  const nav = page.getByRole('navigation', { name: 'Results' });
+  const nav = page.getByRole('navigation', { name: 'Products' });
   const pages = nav.locator('[scPaginationLink]');
   await expect(pages).toHaveText(['1', '4', '5', '6', '20']);
   const ellipses = nav.locator('[scPaginationEllipsis]');
@@ -107,7 +107,7 @@ test('Ellipsis: the first, the last, the current with its neighbours; ellipses h
 
 test('Siblings: two pages either side of the current one', async ({ page }) => {
   await page.goto(demo('siblings'));
-  const nav = page.getByRole('navigation', { name: 'Results' });
+  const nav = page.getByRole('navigation', { name: 'Photos' });
   const pages = nav.locator('[scPaginationLink]');
   await expect(pages).toHaveText(['1', '8', '9', '10', '11', '12', '20']);
   await nav.getByRole('button', { name: '20', exact: true }).click();
@@ -129,7 +129,7 @@ test('First and Last: jump to the ends, each disabled there; the status follows'
   page,
 }) => {
   await page.goto(demo('first-last'));
-  const nav = page.getByRole('navigation', { name: 'Results' });
+  const nav = page.getByRole('navigation', { name: 'Invoices' });
   const status = nav.getByRole('status');
   const button = (name: string) =>
     nav.getByRole('button', { name, exact: true });
@@ -150,7 +150,7 @@ test('Links: each follows its own href; the page read from the URL', async ({
   page,
 }) => {
   await page.goto(demo('links'));
-  const nav = page.getByRole('navigation', { name: 'Results' });
+  const nav = page.getByRole('navigation', { name: 'Articles' });
   const link = (name: string) => nav.getByRole('link', { name, exact: true });
   // A link gets no type.
   await expect(link('2')).not.toHaveAttribute('type');
@@ -177,7 +177,7 @@ test('Links: each follows its own href; the page read from the URL', async ({
 
 test('Disabled: a disabled page is not followed', async ({ page }) => {
   await page.goto(demo('disabled'));
-  const nav = page.getByRole('navigation', { name: 'Results' });
+  const nav = page.getByRole('navigation', { name: 'Messages' });
   const three = nav.getByRole('button', { name: '3', exact: true });
   await expectLooksDisabled(three);
   // pointer-events: none stops a pointer; a click event still reaches it.

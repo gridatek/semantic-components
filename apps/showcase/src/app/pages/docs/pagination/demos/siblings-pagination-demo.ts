@@ -26,7 +26,7 @@ import { SiEllipsisIcon } from '@semantic-icons/lucide-icons';
   template: `
     <nav
       scPagination
-      aria-label="Results"
+      aria-label="Photos"
       #pagination="scPagination"
       [totalItems]="200"
       [pageSize]="10"
