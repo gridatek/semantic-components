@@ -29,6 +29,9 @@ test('Usage: a named navigation; a page marked current; Next and Previous move',
     nav.getByRole('button', { name, exact: true });
   await expect(button('1')).toHaveAttribute('aria-current', 'page');
   await expectLooksDisabled(button('Previous'));
+  // Buttons by default: never a form's submit button.
+  await expect(button('1')).toHaveAttribute('type', 'button');
+  await expect(button('Next')).toHaveAttribute('type', 'button');
 
   await button('Next').click();
   await expect(button('2')).toHaveAttribute('aria-current', 'page');
@@ -129,6 +132,8 @@ test('Links: each follows its own href; the page read from the URL', async ({
   await page.goto(demo('links'));
   const nav = page.getByRole('navigation', { name: 'Results' });
   const link = (name: string) => nav.getByRole('link', { name, exact: true });
+  // A link gets no type.
+  await expect(link('2')).not.toHaveAttribute('type');
   // The hrefs are the consumer's, not "#".
   await expect(link('2')).toHaveAttribute('href', /[?&]page=2#links-results$/);
   await expect(link('1')).toHaveAttribute('aria-current', 'page');

@@ -237,6 +237,14 @@ export default class PaginationPage {
     description: "The button size; 'icon' for an icon-only button.",
   };
 
+  private readonly typeRow: ScApiRow = {
+    name: 'type',
+    type: "'button' | 'submit' | 'reset'",
+    default: "'button'",
+    description:
+      'On a button: its type, so by default it never submits a form round it. Not set on a link.',
+  };
+
   protected readonly parts = [
     {
       name: 'ScPagination',
@@ -297,6 +305,7 @@ export default class PaginationPage {
           default: 'false',
           description: 'Not followed; aria-disabled and out of the tab order.',
         },
+        this.typeRow,
         this.classRow,
       ],
     },
@@ -305,14 +314,26 @@ export default class PaginationPage {
       selector:
         'a[scPaginationPrevious], button[scPaginationPrevious], a[scPaginationNext], button[scPaginationNext]',
       description: 'One page back or on. Their chevrons flip right to left.',
-      inputs: [this.variantRow, this.sizeRow, this.disabledRow, this.classRow],
+      inputs: [
+        this.variantRow,
+        this.sizeRow,
+        this.disabledRow,
+        this.typeRow,
+        this.classRow,
+      ],
     },
     {
       name: 'ScPaginationFirst, ScPaginationLast',
       selector:
         'a[scPaginationFirst], button[scPaginationFirst], a[scPaginationLast], button[scPaginationLast]',
       description: 'The first or the last page.',
-      inputs: [this.variantRow, this.sizeRow, this.disabledRow, this.classRow],
+      inputs: [
+        this.variantRow,
+        this.sizeRow,
+        this.disabledRow,
+        this.typeRow,
+        this.classRow,
+      ],
     },
     {
       name: 'ScPaginationEllipsis',

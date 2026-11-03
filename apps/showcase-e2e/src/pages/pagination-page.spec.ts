@@ -19,10 +19,10 @@ test.describe('Pagination Page', () => {
     await page.goto('/docs/components/pagination');
     for (const [part, inputs] of [
       ['ScPagination', ['totalItems', 'pageSize', 'currentPage', 'class']],
-      ['ScPaginationLink', ['page', 'size', 'disabled', 'class']],
+      ['ScPaginationLink', ['page', 'size', 'disabled', 'type', 'class']],
       [
         'ScPaginationPrevious, ScPaginationNext',
-        ['variant', 'size', 'disabled', 'class'],
+        ['variant', 'size', 'disabled', 'type', 'class'],
       ],
       ['ScPaginationStatus', ['class']],
     ] as const) {

@@ -54,7 +54,7 @@ shadcn's parts, each a directive on your element; the icons and the text are you
 - `pages()` gives every page up to 7, then 7 items: the first, the last, the current with its neighbours, and ellipses.
 - The current page is outlined and `aria-current="page"`.
 - Previous and First are disabled on the first page, Next and Last on the last: `aria-disabled`, out of the tab order. A part's `disabled` disables it whatever the page.
-- Use buttons when the page changes in place, links when each page has its own URL. On an `a` the href is yours (`href="?page=2"`, a `routerLink`) and the link follows it; read the page from the URL into `currentPage`. A disabled link goes nowhere on a click but keeps its href: leave it off for one that should not open in a new tab either. A button never submits a form round it.
+- Use buttons when the page changes in place, links when each page has its own URL. On an `a` the href is yours (`href="?page=2"`, a `routerLink`) and the link follows it; read the page from the URL into `currentPage`. A disabled link goes nowhere on a click but keeps its href: leave it off for one that should not open in a new tab either. A button is `type="button"` unless you give it a `type`: it never submits a form round it by default.
 - Previous's and Next's chevrons flip right to left.
 
 ## Rows per page
@@ -93,23 +93,25 @@ Signals: `currentPage()`, `pageSize()`, `totalPages()`, `pages()`. Methods: `goT
 
 ### ScPaginationLink — `a[scPaginationLink], button[scPaginationLink]`
 
-| Input      | Type                       | Default  | Description          |
-| ---------- | -------------------------- | -------- | -------------------- |
-| `page`     | `number`                   | —        | The page it goes to. |
-| `size`     | `ScButtonVariants['size']` | `'icon'` | The button size.     |
-| `disabled` | `boolean`                  | `false`  | Not followed.        |
-| `class`    | `string`                   | `''`     |                      |
+| Input      | Type                                | Default    | Description                     |
+| ---------- | ----------------------------------- | ---------- | ------------------------------- |
+| `page`     | `number`                            | —          | The page it goes to.            |
+| `size`     | `ScButtonVariants['size']`          | `'icon'`   | The button size.                |
+| `disabled` | `boolean`                           | `false`    | Not followed.                   |
+| `type`     | `'button'`, `'submit'` or `'reset'` | `'button'` | On a button; not set on a link. |
+| `class`    | `string`                            | `''`       |                                 |
 
 ### ScPaginationPrevious, ScPaginationNext, ScPaginationFirst, ScPaginationLast
 
 On an `a` or a `button`.
 
-| Input      | Type                          | Default     | Description                       |
-| ---------- | ----------------------------- | ----------- | --------------------------------- |
-| `variant`  | `ScButtonVariants['variant']` | `'ghost'`   | The button look.                  |
-| `size`     | `ScButtonVariants['size']`    | `'default'` | `'icon'` for an icon-only button. |
-| `disabled` | `boolean`                     | `false`     | Disabled whatever the page.       |
-| `class`    | `string`                      | `''`        |                                   |
+| Input      | Type                                | Default     | Description                       |
+| ---------- | ----------------------------------- | ----------- | --------------------------------- |
+| `variant`  | `ScButtonVariants['variant']`       | `'ghost'`   | The button look.                  |
+| `size`     | `ScButtonVariants['size']`          | `'default'` | `'icon'` for an icon-only button. |
+| `disabled` | `boolean`                           | `false`     | Disabled whatever the page.       |
+| `type`     | `'button'`, `'submit'` or `'reset'` | `'button'`  | On a button; not set on a link.   |
+| `class`    | `string`                            | `''`        |                                   |
 
 ### ScPaginationList, ScPaginationItem, ScPaginationEllipsis, ScPaginationStatus
 

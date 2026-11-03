@@ -18,6 +18,7 @@ import { ScPagination } from './pagination';
     '[attr.aria-current]': 'isActive() ? "page" : null',
     '[attr.aria-disabled]': 'disabled() || null',
     '[attr.tabindex]': 'disabled() ? -1 : null',
+    '[attr.type]': 'isAnchor() ? null : type()',
     '(click)': 'onClick($event)',
   },
 })
@@ -28,6 +29,8 @@ export class ScPaginationLink {
   private readonly elementRef = inject(ElementRef<HTMLElement>);
 
   readonly classInput = input<string>('', { alias: 'class' });
+  /** On a button: `button` by default, so it never submits a form round it. */
+  readonly type = input<'button' | 'submit' | 'reset'>('button');
   readonly page = input<number>();
 
   readonly variant = computed(() => (this.isActive() ? 'outline' : 'ghost'));
@@ -56,13 +59,10 @@ export class ScPaginationLink {
   );
 
   onClick(event: Event): void {
-    // A link follows its own href (yours: "?page=2", a routerLink); a disabled
-    // one goes nowhere. A button never submits a form round it.
-    if (!this.isAnchor() || this.disabled()) {
-      event.preventDefault();
-    }
-
+    // A link follows its own href (yours: "?page=2", a routerLink), a button
+    // does what its type says; disabled, neither.
     if (this.disabled()) {
+      event.preventDefault();
       return;
     }
 
