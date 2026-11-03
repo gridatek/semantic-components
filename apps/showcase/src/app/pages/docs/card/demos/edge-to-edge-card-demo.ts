@@ -59,7 +59,7 @@ import {
           </p>
         </div>
       </div>
-      <div scCardFooter class="justify-end gap-2">
+      <div scCardFooter class="justify-end gap-2 border-t">
         <button scButton variant="outline">Decline</button>
         <button scButton>Accept</button>
       </div>
