@@ -54,7 +54,7 @@ shadcn's parts, each a directive on your element; the icons and the text are you
 - `pages()` gives every page up to 7, then 7 items: the first, the last, the current with its neighbours, and ellipses.
 - The current page is outlined and `aria-current="page"`.
 - Previous and First are disabled on the first page, Next and Last on the last: `aria-disabled`, out of the tab order. A part's `disabled` disables it whatever the page.
-- Use buttons when the page changes in place. On an `a` the parts set `href="#"` and keep the click.
+- Use buttons when the page changes in place, links when each page has its own URL. On an `a` the href is yours (`href="?page=2"`, a `routerLink`) and the link follows it; read the page from the URL into `currentPage`. A disabled link goes nowhere on a click but keeps its href: leave it off for one that should not open in a new tab either. A button never submits a form round it.
 - Previous's and Next's chevrons flip right to left.
 
 ## Rows per page

@@ -3180,6 +3180,13 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
+        path: 'links-pagination-demo',
+        loadComponent: () =>
+          import('../pages/docs/pagination/demos/links-pagination-demo').then(
+            (m) => m.LinksPaginationDemo,
+          ),
+      },
+      {
         path: 'disabled-pagination-demo',
         loadComponent: () =>
           import('../pages/docs/pagination/demos/disabled-pagination-demo').then(

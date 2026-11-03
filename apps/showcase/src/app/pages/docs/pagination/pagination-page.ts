@@ -16,6 +16,7 @@ import { DisabledPaginationDemoContainer } from './demos/disabled-pagination-dem
 import { EllipsisPaginationDemoContainer } from './demos/ellipsis-pagination-demo-container';
 import { FirstLastPaginationDemoContainer } from './demos/first-last-pagination-demo-container';
 import { IconsOnlyPaginationDemoContainer } from './demos/icons-only-pagination-demo-container';
+import { LinksPaginationDemoContainer } from './demos/links-pagination-demo-container';
 import { PaginationUsageDemoContainer } from './demos/pagination-usage-demo-container';
 import { RtlPaginationDemoContainer } from './demos/rtl-pagination-demo-container';
 import { SimplePaginationDemoContainer } from './demos/simple-pagination-demo-container';
@@ -36,6 +37,7 @@ interface ScApiRow {
     IconsOnlyPaginationDemoContainer,
     EllipsisPaginationDemoContainer,
     FirstLastPaginationDemoContainer,
+    LinksPaginationDemoContainer,
     DisabledPaginationDemoContainer,
     RtlPaginationDemoContainer,
     TocHeading,
@@ -88,8 +90,13 @@ interface ScApiRow {
         <h2 scHeading appToc>Notes</h2>
         <p class="text-muted-foreground">
           Use buttons when the page changes in place, links when each page has
-          its own URL. Previous and First turn disabled on the first page, Next
-          and Last on the last: they leave the tab order and say
+          its own URL: the href is yours (?page=2, a routerLink) and the link
+          follows it; read the page from the URL into
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">currentPage</code
+          >. A disabled link goes nowhere on a click, but keeps its href: leave
+          it off for a link that should not open in a new tab either. Previous
+          and First turn disabled on the first page, Next and Last on the last:
+          they leave the tab order and say
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
             >aria-disabled</code
           >. For rows per page, put a Select beside it and call
@@ -105,6 +112,7 @@ interface ScApiRow {
         <app-icons-only-pagination-demo-container />
         <app-ellipsis-pagination-demo-container />
         <app-first-last-pagination-demo-container />
+        <app-links-pagination-demo-container />
         <app-disabled-pagination-demo-container />
         <app-rtl-pagination-demo-container />
       </section>

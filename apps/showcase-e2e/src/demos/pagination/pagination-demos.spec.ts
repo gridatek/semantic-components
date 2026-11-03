@@ -123,6 +123,32 @@ test('First and Last: jump to the ends, each disabled there; the status follows'
   await expect(status).toHaveText('Page 1 of 12');
 });
 
+test('Links: each follows its own href; the page read from the URL', async ({
+  page,
+}) => {
+  await page.goto(demo('links'));
+  const nav = page.getByRole('navigation', { name: 'Results' });
+  const link = (name: string) => nav.getByRole('link', { name, exact: true });
+  // The hrefs are the consumer's, not "#".
+  await expect(link('2')).toHaveAttribute('href', /[?&]page=2#links-results$/);
+  await expect(link('1')).toHaveAttribute('aria-current', 'page');
+  await expectLooksDisabled(link('Previous'));
+  await expect(link('Previous')).toHaveAttribute('tabindex', '-1');
+
+  await link('2').click();
+  await expect(page).toHaveURL(/[?&]page=2#links-results$/);
+  await expect(link('2')).toHaveAttribute('aria-current', 'page');
+
+  await link('Next').click();
+  await expect(page).toHaveURL(/[?&]page=3#links-results$/);
+  await expect(link('3')).toHaveAttribute('aria-current', 'page');
+
+  // Opened at a page's URL: that page is current.
+  await page.goto(`${demo('links')}?page=10`);
+  await expect(link('10')).toHaveAttribute('aria-current', 'page');
+  await expectLooksDisabled(link('Next'));
+});
+
 test('Disabled: a disabled page is not followed', async ({ page }) => {
   await page.goto(demo('disabled'));
   const nav = page.getByRole('navigation', { name: 'Results' });
@@ -163,6 +189,7 @@ test('On a phone: the demos fit, every target 24px @mobile', async ({
     'icons-only',
     'ellipsis',
     'first-last',
+    'links',
     'disabled',
     'rtl',
   ]) {

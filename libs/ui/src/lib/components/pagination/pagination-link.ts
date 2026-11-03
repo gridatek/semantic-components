@@ -18,7 +18,6 @@ import { ScPagination } from './pagination';
     '[attr.aria-current]': 'isActive() ? "page" : null',
     '[attr.aria-disabled]': 'disabled() || null',
     '[attr.tabindex]': 'disabled() ? -1 : null',
-    '[attr.href]': 'isAnchor() ? "#" : null',
     '(click)': 'onClick($event)',
   },
 })
@@ -57,7 +56,11 @@ export class ScPaginationLink {
   );
 
   onClick(event: Event): void {
-    event.preventDefault();
+    // A link follows its own href (yours: "?page=2", a routerLink); a disabled
+    // one goes nowhere. A button never submits a form round it.
+    if (!this.isAnchor() || this.disabled()) {
+      event.preventDefault();
+    }
 
     if (this.disabled()) {
       return;
