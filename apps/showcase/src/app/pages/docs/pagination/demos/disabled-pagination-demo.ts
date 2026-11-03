@@ -40,7 +40,7 @@ import {
         <li scPaginationItem>
           <button scPaginationPrevious>
             <svg siChevronLeftIcon data-icon="inline-start"></svg>
-            Previous
+            <span class="sr-only sm:not-sr-only">Previous</span>
           </button>
         </li>
         @for (item of pagination.pages(); track item.value) {
@@ -56,7 +56,7 @@ import {
         }
         <li scPaginationItem>
           <button scPaginationNext>
-            Next
+            <span class="sr-only sm:not-sr-only">Next</span>
             <svg siChevronRightIcon data-icon="inline-end"></svg>
           </button>
         </li>

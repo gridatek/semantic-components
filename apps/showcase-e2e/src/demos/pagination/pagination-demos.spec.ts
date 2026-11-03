@@ -225,3 +225,29 @@ test('On a phone: the demos fit, every target 24px @mobile', async ({
     await expectTargetSize(page.locator('body'), 24);
   }
 });
+
+test('On a phone: in the docs page’s narrower previews, every list fits its navigation @mobile', async ({
+  page,
+}) => {
+  await page.goto('/docs/components/pagination');
+  const lists = page.locator('[scPaginationList]');
+  await expect(lists.first()).toBeVisible();
+  // A list wider than its nav is clipped by the preview, not scrolled: the
+  // page doesn't scroll sideways, so measure the list itself.
+  await expect
+    .poll(() =>
+      lists.evaluateAll((all) =>
+        all
+          .map((list) => {
+            const nav = list.closest('[scPagination]')?.getBoundingClientRect();
+            const box = list.getBoundingClientRect();
+            if (!nav) return 'a list outside a pagination';
+            return box.left >= nav.left - 1 && box.right <= nav.right + 1
+              ? null
+              : `${Math.round(box.width)}px in ${Math.round(nav.width)}px`;
+          })
+          .filter(Boolean),
+      ),
+    )
+    .toEqual([]);
+});

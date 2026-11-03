@@ -82,7 +82,13 @@ import {
           </button>
         </li>
         @for (item of pagination.pages(); track item.value) {
-          <li scPaginationItem>
+          <!-- On a phone, the current page only: the rest would not fit. -->
+          <li
+            scPaginationItem
+            [class]="
+              item.value === pagination.currentPage() ? '' : 'max-sm:hidden'
+            "
+          >
             @if (item.type === 'ellipsis') {
               <span scPaginationEllipsis>
                 <svg siEllipsisIcon></svg>

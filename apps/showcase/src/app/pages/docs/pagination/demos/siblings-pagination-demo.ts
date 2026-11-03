@@ -5,6 +5,7 @@ import {
   ScPaginationItem,
   ScPaginationLink,
   ScPaginationList,
+  type ScPaginationPage,
 } from '@semantic-components/ui';
 import { SiEllipsisIcon } from '@semantic-icons/lucide-icons';
 
@@ -34,7 +35,13 @@ import { SiEllipsisIcon } from '@semantic-icons/lucide-icons';
     >
       <ul scPaginationList>
         @for (item of pagination.pages(); track item.value) {
-          <li scPaginationItem>
+          <!-- On a phone, the current page and its siblings only. -->
+          <li
+            scPaginationItem
+            [class]="
+              isSibling(item, pagination.currentPage()) ? '' : 'max-sm:hidden'
+            "
+          >
             @if (item.type === 'ellipsis') {
               <span scPaginationEllipsis>
                 <svg siEllipsisIcon></svg>
@@ -52,4 +59,8 @@ import { SiEllipsisIcon } from '@semantic-icons/lucide-icons';
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class SiblingsPaginationDemo {}
+export class SiblingsPaginationDemo {
+  protected isSibling(item: ScPaginationPage, current: number): boolean {
+    return item.type === 'page' && Math.abs(item.value - current) <= 2;
+  }
+}
