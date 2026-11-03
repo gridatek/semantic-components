@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScCard, ScCardBody } from '@semantic-components/ui';
+import { ScCard, ScCardContent } from '@semantic-components/ui';
 import {
   ScCarousel,
   ScCarouselItem,
@@ -23,7 +23,7 @@ import {
     ScCarouselPrevious,
     ScCarouselNext,
     ScCard,
-    ScCardBody,
+    ScCardContent,
     SiChevronLeftIcon,
     SiChevronRightIcon,
   ],
@@ -46,7 +46,7 @@ import {
                 <div class="p-1">
                   <div scCard>
                     <div
-                      scCardBody
+                      scCardContent
                       class="flex aspect-square items-center justify-center p-6"
                     >
                       <span class="text-3xl font-semibold">{{ index }}</span>

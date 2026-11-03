@@ -1,5 +1,6 @@
 import type { ScPreset } from '@semantic-components/presets';
 import { button } from './button';
+import { card } from './card';
 import { controlGroup, controlGroupText } from './control-group';
 import { input } from './input';
 import {
@@ -15,6 +16,7 @@ import { table } from './table';
 /** The mira preset: `provideScConfig({ preset: mira })`. */
 export const mira: ScPreset = {
   button,
+  card,
   controlGroup,
   controlGroupText,
   input,

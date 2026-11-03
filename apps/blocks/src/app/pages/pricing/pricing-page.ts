@@ -3,7 +3,7 @@ import {
   ScBadge,
   ScButton,
   ScCard,
-  ScCardBody,
+  ScCardContent,
   ScCardDescription,
   ScCardFooter,
   ScCardHeader,
@@ -18,7 +18,7 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
     ScBadge,
     ScButton,
     ScCard,
-    ScCardBody,
+    ScCardContent,
     ScCardDescription,
     ScCardFooter,
     ScCardHeader,
@@ -53,7 +53,7 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
                 For individuals getting started
               </p>
             </div>
-            <div scCardBody class="flex-1">
+            <div scCardContent class="flex-1">
               <p class="mb-6 text-3xl font-bold">
                 $0
                 <span
@@ -114,7 +114,7 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
                 For growing teams
               </p>
             </div>
-            <div scCardBody class="flex-1">
+            <div scCardContent class="flex-1">
               <p class="mb-6 text-3xl font-bold">
                 $29
                 <span
@@ -179,7 +179,7 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
                 For large organizations
               </p>
             </div>
-            <div scCardBody class="flex-1">
+            <div scCardContent class="flex-1">
               <p
                 class="mb-6 text-3xl font-bold"
                 i18n="@@pricing.enterprise.price"

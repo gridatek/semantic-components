@@ -1,168 +1,61 @@
 # Card
 
-A container for grouping related content with header, body, and footer sections.
+A box of related content: a header with its title, description and action, the content, a footer. In the look of the app's preset.
 
 ## Usage
 
 ```html
-<div scCard>
+<div scCard class="w-full max-w-sm">
   <div scCardHeader>
-    <h3 scCardTitle>Title</h3>
-    <p scCardDescription>Description</p>
-  </div>
-  <div scCardBody>
-    <p>Content goes here.</p>
-  </div>
-  <div scCardFooter>
-    <p>Footer</p>
-  </div>
-</div>
-```
-
-## Directives
-
-### ScCard
-
-The main card container.
-
-**Selector:** `div[scCard]`
-
-**Inputs:**
-
-| Input   | Type                | Default     | Description            |
-| ------- | ------------------- | ----------- | ---------------------- |
-| `size`  | `'default' \| 'sm'` | `'default'` | Size of the card       |
-| `class` | `string`            | `''`        | Additional CSS classes |
-
-### ScCardHeader
-
-Header section of the card. Supports grid layout with automatic columns when a card action is present.
-
-**Selector:** `div[scCardHeader]`
-
-**Inputs:**
-
-| Input   | Type     | Default | Description            |
-| ------- | -------- | ------- | ---------------------- |
-| `class` | `string` | `''`    | Additional CSS classes |
-
-### ScCardTitle
-
-Title text within a card header.
-
-**Selector:** `[scCardTitle]`
-
-**Inputs:**
-
-| Input   | Type     | Default | Description            |
-| ------- | -------- | ------- | ---------------------- |
-| `class` | `string` | `''`    | Additional CSS classes |
-
-### ScCardDescription
-
-Description text within a card header.
-
-**Selector:** `[scCardDescription]`
-
-**Inputs:**
-
-| Input   | Type     | Default | Description            |
-| ------- | -------- | ------- | ---------------------- |
-| `class` | `string` | `''`    | Additional CSS classes |
-
-### ScCardAction
-
-Action area positioned at the top-right of the card header.
-
-**Selector:** `div[scCardAction]`
-
-**Inputs:**
-
-| Input   | Type     | Default | Description            |
-| ------- | -------- | ------- | ---------------------- |
-| `class` | `string` | `''`    | Additional CSS classes |
-
-### ScCardBody
-
-Main body area of the card.
-
-**Selector:** `div[scCardBody]`
-
-**Inputs:**
-
-| Input   | Type     | Default | Description            |
-| ------- | -------- | ------- | ---------------------- |
-| `class` | `string` | `''`    | Additional CSS classes |
-
-### ScCardFooter
-
-Footer section of the card with a muted background and top border.
-
-**Selector:** `div[scCardFooter]`
-
-**Inputs:**
-
-| Input   | Type     | Default | Description            |
-| ------- | -------- | ------- | ---------------------- |
-| `class` | `string` | `''`    | Additional CSS classes |
-
-## Examples
-
-### Basic
-
-```html
-<div scCard class="w-[350px]">
-  <div scCardHeader>
-    <h3 scCardTitle>Card Title</h3>
-    <p scCardDescription>Card description goes here.</p>
-  </div>
-  <div scCardBody>
-    <p>Card content goes here.</p>
-  </div>
-  <div scCardFooter>
-    <p class="text-muted-foreground text-sm">Card footer</p>
-  </div>
-</div>
-```
-
-### With Action
-
-```html
-<div scCard>
-  <div scCardHeader>
-    <h3 scCardTitle>Notifications</h3>
-    <p scCardDescription>You have 3 unread messages.</p>
+    <h3 scCardTitle>Login to your account</h3>
+    <p scCardDescription>Enter your email below to login to your account</p>
     <div scCardAction>
-      <button scButton variant="outline" size="sm">View all</button>
+      <button scButton variant="link">Sign Up</button>
     </div>
   </div>
-  <div scCardBody>
-    <p>Content here.</p>
+  <div scCardContent>…</div>
+  <div scCardFooter class="flex-col gap-2">
+    <button scButton class="w-full">Login</button>
   </div>
 </div>
 ```
 
-### Small Size
+## Anatomy
+
+shadcn's parts, each a directive on your element:
 
 ```html
-<div scCard size="sm">
+<div scCard>
   <div scCardHeader>
-    <h3 scCardTitle>Compact Card</h3>
+    <h3 scCardTitle></h3>
+    <p scCardDescription></p>
+    <div scCardAction></div>
   </div>
-  <div scCardBody>
-    <p>Smaller padding and gaps.</p>
-  </div>
+  <div scCardContent></div>
+  <div scCardFooter></div>
 </div>
 ```
 
-## Features
+- The title is the heading you choose, at the level that fits your page.
+- One variable, `--card-spacing`, sets the gap between the sections and the inset of every part: from the preset, smaller with `size="sm"`, yours with a class (`[--card-spacing:--spacing(6)]`). Edge to edge: `-mx-(--card-spacing)`, and `-mb-(--card-spacing)` on the content above a footer.
+- An image as the first child sits at the top, no padding above it, in the card's corners.
+- The action goes to the end of the header, beside the title and the description.
+- The footer's look is the preset's: a muted band with a line above in nova, a line in lyra, none in the others (`border-t` adds one, with its spacing).
 
-- **Size Variants**: Default and small sizes with responsive padding
-- **Card Action**: Optional action slot in the header with automatic grid layout
-- **Footer Styling**: Muted background with top border
-- **Composable**: Mix and match sub-components as needed
+## API reference
 
-## Accessibility
+Each part takes `class`, merged over the preset.
 
-- Uses semantic HTML elements for title (`h3`) and description (`p`)
-- Proper contrast ratios for text and backgrounds
+| Part                | Selector              | Description                                                |
+| ------------------- | --------------------- | ---------------------------------------------------------- |
+| `ScCard`            | `div[scCard]`         | The card. Input `size`: `'default'` or `'sm'`.             |
+| `ScCardHeader`      | `div[scCardHeader]`   | The title and description, the action beside them.         |
+| `ScCardTitle`       | `[scCardTitle]`       | The title, on a heading of yours.                          |
+| `ScCardDescription` | `[scCardDescription]` | Muted text under the title.                                |
+| `ScCardAction`      | `div[scCardAction]`   | A button or badge at the end of the header.                |
+| `ScCardContent`     | `div[scCardContent]`  | The content, inset by `--card-spacing`.                    |
+| `ScCardFooter`      | `div[scCardFooter]`   | Actions at the bottom, in a row; its look from the preset. |
+
+## Styles
+
+From the preset (`card`): every part but the action — the card's radius, ring, shadow, text size and `--card-spacing` (4 in nova, lyra and mira; 5 in rhea; 6 in vega, maia and luma; 8 in sera), the header's gap, the title (smaller in lyra and mira, uppercase in sera), the description, the content (a column in vega) and the footer.

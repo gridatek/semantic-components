@@ -5,7 +5,7 @@ import {
   ScAvatarFallback,
   ScBadge,
   ScCard,
-  ScCardBody,
+  ScCardContent,
   ScCardHeader,
   ScCardTitle,
   ScSeparator,
@@ -21,7 +21,7 @@ import { LocalDatePipe } from '../../pipes/local-date';
     ScAvatarFallback,
     ScBadge,
     ScCard,
-    ScCardBody,
+    ScCardContent,
     ScCardHeader,
     ScCardTitle,
     ScSeparator,
@@ -159,7 +159,7 @@ import { LocalDatePipe } from '../../pipes/local-date';
 
         <!-- Author Bio -->
         <div scCard>
-          <div scCardBody>
+          <div scCardContent>
             <div class="flex items-center gap-4">
               <span scAvatar size="lg">
                 <span scAvatarFallback>JS</span>
@@ -195,7 +195,7 @@ import { LocalDatePipe } from '../../pipes/local-date';
                     Understanding Reactive Patterns
                   </h3>
                 </div>
-                <div scCardBody>
+                <div scCardContent>
                   <p
                     class="text-muted-foreground text-sm"
                     i18n="@@article.reactive.excerpt"
@@ -214,7 +214,7 @@ import { LocalDatePipe } from '../../pipes/local-date';
                     Signal-Based Components
                   </h3>
                 </div>
-                <div scCardBody>
+                <div scCardContent>
                   <p
                     class="text-muted-foreground text-sm"
                     i18n="@@article.signalComponents.excerpt"

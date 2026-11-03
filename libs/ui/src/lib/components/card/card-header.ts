@@ -1,4 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 
 @Directive({
@@ -8,12 +9,11 @@ import { cn } from '../../utils';
   },
 })
 export class ScCardHeader {
+  private readonly styles = injectPreset().card;
+
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn(
-      'gap-1 rounded-t-xl px-(--card-spacing) [.border-b]:pb-(--card-spacing) group/card-header @container/card-header grid auto-rows-min items-start has-data-[slot=card-action]:grid-cols-[1fr_auto] has-data-[slot=card-description]:grid-rows-[auto_auto]',
-      this.classInput(),
-    ),
+    cn(this.styles.header, this.classInput()),
   );
 }

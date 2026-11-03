@@ -10,7 +10,7 @@ import { RouterLink } from '@angular/router';
 import {
   ScButton,
   ScCard,
-  ScCardBody,
+  ScCardContent,
   ScCardDescription,
   ScCardFooter,
   ScCardHeader,
@@ -34,7 +34,7 @@ import { Logo } from '../../components/logo/logo';
     RouterLink,
     ScButton,
     ScCard,
-    ScCardBody,
+    ScCardContent,
     ScCardDescription,
     ScCardFooter,
     ScCardHeader,
@@ -65,7 +65,7 @@ import { Logo } from '../../components/logo/logo';
           </p>
         </div>
 
-        <div scCardBody>
+        <div scCardContent>
           <form [formRoot]="signupForm">
             <div scFieldGroup>
               <div class="grid grid-cols-2 gap-4">

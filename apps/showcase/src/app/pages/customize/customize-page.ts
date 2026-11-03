@@ -10,7 +10,7 @@ import {
   ScBadge,
   ScButton,
   ScCard,
-  ScCardBody,
+  ScCardContent,
   ScCardDescription,
   ScCardHeader,
   ScCardTitle,
@@ -31,7 +31,7 @@ import { COLOR_SCHEMES, RADIUS_OPTIONS } from './color-schemes';
     ScBadge,
     ScButton,
     ScCard,
-    ScCardBody,
+    ScCardContent,
     ScCardDescription,
     ScCardHeader,
     ScCardTitle,
@@ -159,7 +159,7 @@ import { COLOR_SCHEMES, RADIUS_OPTIONS } from './color-schemes';
                     Enter your email below to create a new account.
                   </p>
                 </div>
-                <div scCardBody class="space-y-3">
+                <div scCardContent class="space-y-3">
                   <div class="space-y-1.5">
                     <label scLabel for="customize-preview-email">Email</label>
                     <input
@@ -194,7 +194,7 @@ import { COLOR_SCHEMES, RADIUS_OPTIONS } from './color-schemes';
                     How interactive elements look with your theme.
                   </p>
                 </div>
-                <div scCardBody class="space-y-3">
+                <div scCardContent class="space-y-3">
                   <div class="flex flex-wrap gap-2">
                     <button scButton>Default</button>
                     <button scButton variant="secondary">Secondary</button>

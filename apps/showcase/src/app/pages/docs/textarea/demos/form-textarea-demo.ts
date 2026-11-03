@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, email, form, required } from '@angular/forms/signals';
 import {
   ScCard,
-  ScCardBody,
+  ScCardContent,
   ScCardHeader,
   ScCardTitle,
   ScField,
@@ -23,7 +23,7 @@ interface ContactForm {
   imports: [
     FormField,
     ScCard,
-    ScCardBody,
+    ScCardContent,
     ScCardHeader,
     ScCardTitle,
     ScField,
@@ -36,7 +36,7 @@ interface ContactForm {
       <div scCardHeader>
         <h4 scCardTitle class="text-base">Contact Us</h4>
       </div>
-      <div scCardBody class="grid gap-4">
+      <div scCardContent class="grid gap-4">
         <div class="grid grid-cols-2 gap-4">
           <div scField>
             <label scLabel>Name</label>

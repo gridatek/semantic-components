@@ -1,4 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 
 @Directive({
@@ -8,12 +9,11 @@ import { cn } from '../../utils';
   },
 })
 export class ScCardTitle {
+  private readonly styles = injectPreset().card;
+
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn(
-      'text-base leading-snug font-medium group-data-[size=sm]/card:text-sm',
-      this.classInput(),
-    ),
+    cn(this.styles.title, this.classInput()),
   );
 }

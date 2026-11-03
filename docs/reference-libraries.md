@@ -160,6 +160,21 @@ The native table elements, styled (`table[scTable]`). A shadcn component; Base U
 - **The container as a part of its own** (`scTableContainer`): a directive on `table` can't wrap it. Named and focusable when it scrolls (axe's `scrollable-region-focusable`).
 - **Not**: the Actions example (a row's menu) and anything a Data Table does — sorting, selection, pages are on its page (the user, 2026-11-04).
 
+## Card
+
+A box of related content (`div[scCard]`). A shadcn component; Base UI has no card, so shadcn's reference app and its docs' examples (2026-11-04).
+
+| Library                                                                                         | What to read                                                                                                                   |
+| ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| shadcn Card (`shadcn-reference/presets/*/card.tsx`)                                             | Parts (Header, Title, Description, Action, Content, Footer); `size`; `--card-spacing`; eight looks (every part but the action) |
+| shadcn's examples (`apps/v4/examples/base/card-*.tsx`, `content/docs/components/base/card.mdx`) | Demo (login), Small, Spacing, Edge to Edge, Image, RTL                                                                         |
+
+**Taken:**
+
+- **The parts, `size` and `--card-spacing`**, each preset's look; the examples, our way (Signal Forms, a local image, the Toggle Group).
+- **`ScCardContent`**, shadcn's name (was `ScCardBody`; the user, 2026-11-04 — the library's Body/Content naming is still open).
+- **Not**: the old Form, Notification and Stats demos (the user: replaced by better ones; stats are the Stat Card's).
+
 ## Control Group
 
 An input or a select joined with its buttons (`div[scControlGroup]`): shadcn's Button Group, renamed for what it is for (the user, 2026-10-30: it is only useful when inputs or selects mix with buttons; buttons alone are on the Button page). A shadcn component, so no web research: Base UI and shadcn's reference app (2026-10-30).

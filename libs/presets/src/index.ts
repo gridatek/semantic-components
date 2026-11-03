@@ -45,6 +45,17 @@ export interface ScSelectStyles {
   scrollDownButton: string;
 }
 
+/** A card's parts that change from style to style (its action is the same in all). */
+export interface ScCardStyles {
+  /** The card: its radius, ring, shadow, text and `--card-spacing`. */
+  card: string;
+  header: string;
+  title: string;
+  description: string;
+  content: string;
+  footer: string;
+}
+
 /** A pagination's parts that change from style to style. */
 export interface ScPaginationStyles {
   /** The list of pages. */
@@ -75,6 +86,7 @@ export interface ScPreset {
     variant?: ScButtonVariant | null;
     size?: ScButtonSize | null;
   }) => string;
+  card: ScCardStyles;
   controlGroup: (props: {
     orientation?: ScControlGroupOrientation | null;
   }) => string;

@@ -19,7 +19,7 @@ import { CardsCarouselDemo } from './cards-carousel-demo';
 })
 export class CardsCarouselDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScCard, ScCardBody } from '@semantic-components/ui';
+import { ScCard, ScCardContent } from '@semantic-components/ui';
 import {
   ScCarousel,
   ScCarouselItem,
@@ -43,7 +43,7 @@ import {
     ScCarouselPrevious,
     ScCarouselNext,
     ScCard,
-    ScCardBody,
+    ScCardContent,
     SiChevronLeftIcon,
     SiChevronRightIcon,
   ],
@@ -61,7 +61,7 @@ import {
               <div scCarouselItem aria-roledescription="slide">
                 <div class="p-1">
                   <div scCard>
-                    <div scCardBody class="p-6">
+                    <div scCardContent class="p-6">
                       <h4 class="font-semibold">{{ card.title }}</h4>
                       <p class="text-muted-foreground mt-2 text-sm">
                         {{ card.description }}

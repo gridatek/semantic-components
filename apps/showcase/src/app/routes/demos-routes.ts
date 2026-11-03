@@ -567,31 +567,45 @@ export const demosRoutes: Route[] = [
     path: 'demos/card',
     children: [
       {
-        path: 'basic-card-demo',
+        path: 'card-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/card/demos/basic-card-demo').then(
-            (m) => m.BasicCardDemo,
+          import('../pages/docs/card/demos/card-usage-demo').then(
+            (m) => m.CardUsageDemo,
           ),
       },
       {
-        path: 'form-card-demo',
+        path: 'size-card-demo',
         loadComponent: () =>
-          import('../pages/docs/card/demos/form-card-demo').then(
-            (m) => m.FormCardDemo,
+          import('../pages/docs/card/demos/size-card-demo').then(
+            (m) => m.SizeCardDemo,
           ),
       },
       {
-        path: 'notification-card-demo',
+        path: 'spacing-card-demo',
         loadComponent: () =>
-          import('../pages/docs/card/demos/notification-card-demo').then(
-            (m) => m.NotificationCardDemo,
+          import('../pages/docs/card/demos/spacing-card-demo').then(
+            (m) => m.SpacingCardDemo,
           ),
       },
       {
-        path: 'stats-card-demo',
+        path: 'edge-to-edge-card-demo',
         loadComponent: () =>
-          import('../pages/docs/card/demos/stats-card-demo').then(
-            (m) => m.StatsCardDemo,
+          import('../pages/docs/card/demos/edge-to-edge-card-demo').then(
+            (m) => m.EdgeToEdgeCardDemo,
+          ),
+      },
+      {
+        path: 'image-card-demo',
+        loadComponent: () =>
+          import('../pages/docs/card/demos/image-card-demo').then(
+            (m) => m.ImageCardDemo,
+          ),
+      },
+      {
+        path: 'rtl-card-demo',
+        loadComponent: () =>
+          import('../pages/docs/card/demos/rtl-card-demo').then(
+            (m) => m.RtlCardDemo,
           ),
       },
     ],
