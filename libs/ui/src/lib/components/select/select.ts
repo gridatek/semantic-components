@@ -1,7 +1,6 @@
 import { ComboboxPopup } from '@angular/aria/combobox';
 import { Directionality } from '@angular/cdk/bidi';
 import {
-  CdkConnectedOverlay,
   type ConnectedOverlayPositionChange,
   type ConnectedPosition,
   OverlayModule,
@@ -9,7 +8,6 @@ import {
 import {
   Component,
   ViewEncapsulation,
-  afterRenderEffect,
   booleanAttribute,
   computed,
   contentChild,
@@ -18,7 +16,6 @@ import {
   output,
   signal,
   untracked,
-  viewChild,
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
 import { cn } from '../../utils';
@@ -33,26 +30,28 @@ import {
   type ScSelectSide,
 } from './select-tokens';
 
-// The gap from the trigger is the preset's (Radix's popper translate).
-const below: ConnectedPosition = {
-  originX: 'start',
-  originY: 'bottom',
-  overlayX: 'start',
-  overlayY: 'top',
-};
-const above: ConnectedPosition = {
-  originX: 'start',
-  originY: 'top',
-  overlayX: 'start',
-  overlayY: 'bottom',
-};
+// Below the trigger, or above it without room. The gap from the trigger is the
+// preset's (Radix's popper translate).
+const positions: ConnectedPosition[] = [
+  {
+    originX: 'start',
+    originY: 'bottom',
+    overlayX: 'start',
+    overlayY: 'top',
+  },
+  {
+    originX: 'start',
+    originY: 'top',
+    overlayX: 'start',
+    overlayY: 'bottom',
+  },
+];
 
 /**
  * A choice among a short list of options, as Base UI's Select: a trigger
  * showing the value, a list in a popup. Its value is a string, bound with
- * `[formField]` or `[(value)]`. The popup opens below the trigger, or over it
- * with the selected item where the value is (`alignItemWithTrigger` on the
- * popup). For a long list to filter, use a
+ * `[formField]` or `[(value)]`. The popup opens below the trigger — above it
+ * without room — as wide as the trigger. For a long list to filter, use a
  * Combobox.
  */
 @Component({
@@ -86,9 +85,8 @@ const above: ConnectedPosition = {
             viewportMargin: 8,
           }"
           [cdkConnectedOverlayOpen]="open()"
-          [cdkConnectedOverlayPositions]="positions()"
+          [cdkConnectedOverlayPositions]="positions"
           (positionChange)="onPositionChange($event)"
-          (detach)="opened.set(false)"
         >
           <ng-container [scPortalOutlet]="portal()" />
         </ng-template>
@@ -128,38 +126,9 @@ export class ScSelect implements FormValueControl<string> {
   readonly open = computed(() => this.trigger()?.combobox.expanded() ?? false);
   readonly hasValue = computed(() => this.value() !== '');
 
-  /** Set by the popup: whether it opens over the trigger. */
-  readonly alignItemWithTrigger = signal(false);
-  /** Whether the popup was last opened by touch: never over the trigger then. */
-  readonly openedByTouch = signal(false);
-  /** The popup's offset over the trigger, measured once it has rendered. */
-  readonly alignOffset = signal(0);
-  /** Where the popup opened. */
+  /** Where the popup opened: below the trigger, or above it. */
   readonly side = signal<ScSelectSide>('bottom');
-  /** Whether the popup is attached. */
-  readonly opened = signal(false);
-
-  /** Opens over the trigger when asked and not by touch; else below, or above. */
-  readonly aligned = computed(
-    () => this.alignItemWithTrigger() && !this.openedByTouch(),
-  );
-  protected readonly positions = computed<ConnectedPosition[]>(() =>
-    this.aligned()
-      ? [
-          {
-            originX: 'start',
-            originY: 'top',
-            overlayX: 'start',
-            overlayY: 'top',
-            offsetY: this.alignOffset(),
-          },
-          below,
-          above,
-        ]
-      : [below, above],
-  );
-
-  private readonly overlay = viewChild(CdkConnectedOverlay);
+  protected readonly positions = positions;
 
   /** Labels of options seen so far, or given by `items`. */
   private readonly labels = signal<ReadonlyMap<string, string>>(new Map());
@@ -178,17 +147,6 @@ export class ScSelect implements FormValueControl<string> {
     cn('flex w-fit flex-col gap-2', this.classInput()),
   );
 
-  constructor() {
-    // CDK takes new positions without moving an open overlay: once the
-    // popup has measured where the selected item is, move it there.
-    afterRenderEffect({
-      write: () => {
-        this.positions();
-        untracked(() => this.overlay()?.overlayRef?.updatePosition());
-      },
-    });
-  }
-
   registerLabel(value: string, label: string): void {
     // Untracked: items call this from an effect that must not depend on it.
     if (untracked(this.labels).get(value) === label) return;
@@ -196,10 +154,8 @@ export class ScSelect implements FormValueControl<string> {
   }
 
   protected onPositionChange(change: ConnectedOverlayPositionChange): void {
-    this.opened.set(true);
-    const { originY, overlayY } = change.connectionPair;
     this.side.set(
-      originY === overlayY ? 'none' : originY === 'bottom' ? 'bottom' : 'top',
+      change.connectionPair.originY === 'bottom' ? 'bottom' : 'top',
     );
   }
 

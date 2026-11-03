@@ -35,7 +35,6 @@ import { openOnTypeahead } from './select-typeahead';
     '[class]': 'class()',
     '(focusout)': 'select.touch.emit()',
     '(keydown)': 'onKeydown($event)',
-    '(pointerdown)': 'onPointerDown($event)',
   },
 })
 export class ScSelectTrigger {
@@ -68,17 +67,8 @@ export class ScSelectTrigger {
     bindInput(this.combobox.readonly, this.select.readonly);
   }
 
-  /** Opened by touch: below the trigger, never over it (Base UI). */
-  protected onPointerDown(event: Event): void {
-    this.select.openedByTouch.set(
-      (event as PointerEvent).pointerType === 'touch',
-    );
-  }
-
   /** Type-ahead while closed opens the list at the first match. */
   protected onKeydown(event: Event): void {
-    // Opened by the keyboard: over the trigger, as with a mouse.
-    this.select.openedByTouch.set(false);
     openOnTypeahead(
       event as KeyboardEvent,
       this.combobox,

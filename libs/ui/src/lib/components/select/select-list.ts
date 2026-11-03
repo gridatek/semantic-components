@@ -22,8 +22,8 @@ import { SC_SELECT } from './select-tokens';
   hostDirectives: [Listbox, ComboboxWidget],
   host: {
     '[attr.aria-labelledby]': 'select.labelId()',
-    '[attr.data-position]':
-      'select.side() === "none" ? "item-aligned" : "popper"',
+    // Radix's popper position: the preset's list classes read it.
+    'data-position': 'popper',
     '[class]': 'class()',
   },
 })

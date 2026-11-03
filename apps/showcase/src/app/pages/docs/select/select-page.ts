@@ -12,7 +12,6 @@ import {
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { AlignItemSelectDemoContainer } from './demos/align-item-select-demo-container';
 import { DisabledSelectDemoContainer } from './demos/disabled-select-demo-container';
 import { GroupsSelectDemoContainer } from './demos/groups-select-demo-container';
 import { InvalidSelectDemoContainer } from './demos/invalid-select-demo-container';
@@ -32,7 +31,6 @@ interface ScApiRow {
   imports: [
     Anatomy,
     SelectUsageDemoContainer,
-    AlignItemSelectDemoContainer,
     GroupsSelectDemoContainer,
     ScrollableSelectDemoContainer,
     DisabledSelectDemoContainer,
@@ -91,7 +89,6 @@ interface ScApiRow {
 
       <section class="space-y-8">
         <h2 scHeading appToc>Examples</h2>
-        <app-align-item-select-demo-container />
         <app-groups-select-demo-container />
         <app-scrollable-select-demo-container />
         <app-disabled-select-demo-container />
@@ -274,16 +271,7 @@ export default class SelectPage {
       selector: 'div[scSelectPopup]',
       description:
         'The popup round the list, in the portal template; it scrolls between its scroll buttons.',
-      inputs: [
-        {
-          name: 'alignItemWithTrigger',
-          type: 'boolean',
-          default: 'false',
-          description:
-            'Opens over the trigger, the selected item where the value is (Radix’s item-aligned); below it when opened by touch or without room. Off: below the trigger (Radix’s popper).',
-        },
-        this.classRow,
-      ],
+      inputs: [this.classRow],
     },
     {
       name: 'ScSelectItem',

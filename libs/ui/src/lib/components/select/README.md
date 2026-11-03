@@ -62,7 +62,7 @@ The root sets the width — its content's by default, or yours (`class="w-48"`);
 
 ## Positioning
 
-The popup opens below the trigger, which stays in sight — above it when there is no room below (Radix's `popper`). With `[alignItemWithTrigger]="true"` on the popup it opens over the trigger instead, the selected item (or the first) where the value is (Radix's `item-aligned`, Base UI's default), except when opened by touch or without room. In right to left it lines up with the trigger's right edge. The list is as wide as the trigger; for another width, a class on the popup (`<div scSelectPopup class="min-w-36">`: at least 144px, wider than a narrow trigger).
+The popup opens below the trigger, which stays in sight — above it when there is no room below — and is as wide as the trigger. In right to left it lines up with the trigger's right edge. The list is as wide as the trigger; for another width, a class on the popup (`<div scSelectPopup class="min-w-36">`: at least 144px, wider than a narrow trigger).
 
 ## Keyboard
 
@@ -78,7 +78,7 @@ Focus stays on the trigger (APG select-only combobox). Enter, Space or the arrow
 | `ScSelectValue`                                      | `span[scSelectValue]`                             | `placeholder`, `class` — its content, if any, shows the value your way                                                                                            |
 | `ScSelectIcon`                                       | `svg[scSelectIcon]`                               | `class` — flips while the list is open                                                                                                                            |
 | `ScSelectPortal`                                     | `ng-template[scSelectPortal]`                     | —                                                                                                                                                                 |
-| `ScSelectPopup`                                      | `div[scSelectPopup]`                              | `alignItemWithTrigger` (`false`), `class` — the scroll container                                                                                                  |
+| `ScSelectPopup`                                      | `div[scSelectPopup]`                              | `class` — the scroll container                                                                                                                                    |
 | `ScSelectScrollUpButton`, `ScSelectScrollDownButton` | `div[…]`                                          | `class` — shown while there is more; hovering scrolls; `aria-hidden`                                                                                              |
 | `ScSelectList`                                       | `div[scSelectList]`                               | `class` — the listbox                                                                                                                                             |
 | `ScSelectGroup`, `ScSelectGroupLabel`                | `div[…]`                                          | `class` — a `group` named by its label                                                                                                                            |
@@ -86,7 +86,7 @@ Focus stays on the trigger (APG select-only combobox). Enter, Space or the arrow
 | `ScSelectItemText`, `ScSelectItemIndicator`          | `span[…]`                                         | `class` — the indicator shows on the selected option only                                                                                                         |
 | `ScSelectSeparator`                                  | `div[scSelectSeparator]`                          | `class`                                                                                                                                                           |
 
-Every part's classes are the preset's (`injectPreset().select`): shadcn's Select on Radix, in each style. Its parts and behaviour follow Base UI; `alignItemWithTrigger` is Radix's `position="item-aligned"`, off is `"popper"`.
+Every part's classes are the preset's (`injectPreset().select`): shadcn's Select on Radix, in each style. Its parts and behaviour follow Base UI.
 
 `data-slot`: `select` (root) and `select-trigger`, read by the control group and the input group; `select-value`, read by the trigger.
 

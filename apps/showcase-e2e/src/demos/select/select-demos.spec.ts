@@ -69,38 +69,17 @@ test('Keyboard: Enter opens, the arrows move, Enter picks; type-ahead; Escape cl
   await expect(trigger).toHaveText('Blueberry');
 });
 
-test('Align Item With Trigger on: the selected item opens where the value is', async ({
+test('The list opens below, as wide as the trigger: the trigger stays in sight', async ({
   page,
 }) => {
-  await openStill(page, demo('align-item'));
-  // Its label, as a person clicks it: the switch's description sits over the input.
-  await page.getByText('Align Item', { exact: true }).click();
-  const trigger = page.getByRole('combobox', { name: 'Fruit' });
-  await expect(trigger).toHaveText('Banana');
-  await trigger.click();
-  const selected = page.getByRole('option', { name: 'Banana' });
-  await expect(selected).toHaveAttribute('aria-selected', 'true');
-  await expect
-    .poll(async () =>
-      Math.abs((await box(selected)).y - (await box(trigger)).y),
-    )
-    .toBeLessThan(4);
-  await expect(page.locator('[scSelectPopup]')).toHaveAttribute(
-    'data-side',
-    'none',
-  );
-});
-
-test('By default the list opens below: the trigger stays in sight', async ({
-  page,
-}) => {
-  await openStill(page, demo('align-item'));
-  const trigger = page.getByRole('combobox', { name: 'Fruit' });
+  await openStill(page, '/demos/select/select-usage-demo');
+  const trigger = page.getByRole('combobox', { name: 'Theme' });
   await trigger.click();
   const list = page.getByRole('listbox');
   await expect(list).toBeVisible();
   const [t, l] = [await box(trigger), await box(list)];
   expect(l.y).toBeGreaterThan(t.y + t.height);
+  expect(Math.abs(l.width - t.width)).toBeLessThan(1);
 });
 
 test('Groups: each group named by its label, a line between', async ({
@@ -180,16 +159,15 @@ test('RTL: from the right, the list from the trigger’s right edge', async ({
   expect(Math.abs(t.x + t.width - (l.x + l.width))).toBeLessThan(4);
 });
 
-test('On a phone: opened by touch, the list opens below; every target 24px @mobile', async ({
+test('On a phone: the demos fit, every target 24px; a tap opens the list @mobile', async ({
   page,
 }) => {
-  await page.goto(demo('align-item'));
-  await expectNoHorizontalScroll(page);
-  await expectTargetSize(page.locator('body'), 24);
-  const trigger = page.getByRole('combobox', { name: 'Fruit' });
-  await trigger.tap();
-  await expect(page.locator('[scSelectPopup]')).not.toHaveAttribute(
-    'data-side',
-    'none',
-  );
+  for (const name of ['groups', 'scrollable', 'rtl']) {
+    await page.goto(demo(name));
+    await expectNoHorizontalScroll(page);
+    await expectTargetSize(page.locator('body'), 24);
+  }
+  await page.goto('/demos/select/select-usage-demo');
+  await page.getByRole('combobox', { name: 'Theme' }).tap();
+  await expect(page.getByRole('listbox')).toBeVisible();
 });

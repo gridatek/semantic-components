@@ -21,7 +21,7 @@ test.describe('Select Page', () => {
       ['ScSelect', ['value', 'items', 'disabled', 'class']],
       ['ScSelectTrigger', ['size', 'class']],
       ['ScSelectValue', ['placeholder', 'class']],
-      ['ScSelectPopup', ['alignItemWithTrigger', 'class']],
+      ['ScSelectPopup', ['class']],
       ['ScSelectItem', ['value', 'label', 'disabled', 'class']],
     ] as const) {
       const table = page.getByRole('region', { name: `${part} inputs` });

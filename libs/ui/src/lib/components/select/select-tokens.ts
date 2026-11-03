@@ -21,5 +21,5 @@ export interface ScSelectItemData {
   label: string;
 }
 
-/** Where the popup opened: over the trigger (`none`), below or above it. */
-export type ScSelectSide = 'none' | 'bottom' | 'top';
+/** Where the popup opened: below the trigger, or above it. */
+export type ScSelectSide = 'bottom' | 'top';

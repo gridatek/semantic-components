@@ -121,8 +121,8 @@ A choice among a short list (`div[scSelect]`). A shadcn component: Base UI's Sel
 
 **Taken:**
 
-- **The parts, the label and the scroll buttons**, as Base UI's; **the list below the trigger by default** (Radix's `popper`: the user wants the trigger in sight), over it as an option (`alignItemWithTrigger`, Base UI's default).
-- **Not**: several values (our Multiselect), object values (a string, as Signal Forms binds it), Backdrop and Arrow (shadcn uses neither).
+- **The parts, the label and the scroll buttons**, as Base UI's; **the list below the trigger, as wide as it** (Radix's `popper`: the user wants the trigger in sight).
+- **Not**: the list over the trigger (Base UI's `alignItemWithTrigger`, Radix's `item-aligned` — removed, 2026-11-03: "no more maintenance"), several values (our Multiselect), object values (a string, as Signal Forms binds it), Backdrop and Arrow (shadcn uses neither).
 
 ## Control Group
 

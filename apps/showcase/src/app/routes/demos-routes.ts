@@ -3566,13 +3566,6 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'align-item-select-demo',
-        loadComponent: () =>
-          import('../pages/docs/select/demos/align-item-select-demo').then(
-            (m) => m.AlignItemSelectDemo,
-          ),
-      },
-      {
         path: 'groups-select-demo',
         loadComponent: () =>
           import('../pages/docs/select/demos/groups-select-demo').then(
