@@ -7,9 +7,9 @@ import { FirstLastPaginationDemo } from './first-last-pagination-demo';
   imports: [DemoContainer, FirstLastPaginationDemo],
   template: `
     <app-demo-container
-      title="With First & Last Buttons"
-      [code]="code"
+      title="First and Last"
       demoUrl="/demos/pagination/first-last-pagination-demo"
+      [code]="code"
     >
       <app-first-last-pagination-demo />
     </app-demo-container>
@@ -18,10 +18,9 @@ import { FirstLastPaginationDemo } from './first-last-pagination-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class FirstLastPaginationDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScPagination,
-  ScPaginationChange,
   ScPaginationEllipsis,
   ScPaginationFirst,
   ScPaginationItem,
@@ -30,6 +29,7 @@ import {
   ScPaginationList,
   ScPaginationNext,
   ScPaginationPrevious,
+  ScPaginationStatus,
 } from '@semantic-components/ui';
 import {
   SiChevronLeftIcon,
@@ -39,18 +39,20 @@ import {
   SiEllipsisIcon,
 } from '@semantic-icons/lucide-icons';
 
+/** First and Last beside Previous and Next; the page said in a status. */
 @Component({
   selector: 'app-first-last-pagination-demo',
   imports: [
     ScPagination,
-    ScPaginationList,
-    ScPaginationItem,
-    ScPaginationLink,
-    ScPaginationPrevious,
-    ScPaginationNext,
-    ScPaginationFirst,
-    ScPaginationLast,
     ScPaginationEllipsis,
+    ScPaginationFirst,
+    ScPaginationItem,
+    ScPaginationLast,
+    ScPaginationLink,
+    ScPaginationList,
+    ScPaginationNext,
+    ScPaginationPrevious,
+    ScPaginationStatus,
     SiChevronLeftIcon,
     SiChevronRightIcon,
     SiChevronsLeftIcon,
@@ -58,81 +60,60 @@ import {
     SiEllipsisIcon,
   ],
   template: \`
-    <div class="space-y-4">
-      <div class="flex items-center gap-4">
-        <p class="text-muted-foreground text-sm">
-          Page {{ currentPage() }} of {{ pagination.totalPages() }} ({{
-            totalItems()
-          }}
-          items total)
-        </p>
-      </div>
-
-      <nav
-        scPagination
-        aria-label="First and last pagination"
-        #pagination="scPagination"
-        [currentPage]="currentPage()"
-        [pageSize]="pageSize()"
-        [totalItems]="totalItems()"
-        (change)="onPaginationChange($event)"
-      >
-        <ul scPaginationList>
+    <nav
+      scPagination
+      aria-label="Results"
+      #pagination="scPagination"
+      [totalItems]="120"
+      [pageSize]="10"
+      class="flex-col items-center gap-3"
+    >
+      <ul scPaginationList>
+        <li scPaginationItem>
+          <button scPaginationFirst size="icon">
+            <svg siChevronsLeftIcon></svg>
+            <span class="sr-only">First</span>
+          </button>
+        </li>
+        <li scPaginationItem>
+          <button scPaginationPrevious size="icon">
+            <svg siChevronLeftIcon></svg>
+            <span class="sr-only">Previous</span>
+          </button>
+        </li>
+        @for (item of pagination.pages(); track item.value) {
           <li scPaginationItem>
-            <button scPaginationFirst aria-label="Go to first page">
-              <svg siChevronsLeftIcon></svg>
-              <span>First</span>
-            </button>
+            @if (item.type === 'ellipsis') {
+              <span scPaginationEllipsis>
+                <svg siEllipsisIcon></svg>
+              </span>
+            } @else {
+              <button scPaginationLink [page]="item.value">
+                {{ item.value }}
+              </button>
+            }
           </li>
-          <li scPaginationItem>
-            <button scPaginationPrevious aria-label="Go to previous page">
-              <svg siChevronLeftIcon></svg>
-              <span>Previous</span>
-            </button>
-          </li>
-
-          @for (page of pagination.pages(); track page.value) {
-            <li scPaginationItem>
-              @if (page.type === 'ellipsis') {
-                <span scPaginationEllipsis>
-                  <svg siEllipsisIcon></svg>
-                  <span class="sr-only">More pages</span>
-                </span>
-              } @else {
-                <button scPaginationLink [page]="page.value">
-                  {{ page.value }}
-                </button>
-              }
-            </li>
-          }
-
-          <li scPaginationItem>
-            <button scPaginationNext aria-label="Go to next page">
-              <span>Next</span>
-              <svg siChevronRightIcon></svg>
-            </button>
-          </li>
-          <li scPaginationItem>
-            <button scPaginationLast aria-label="Go to last page">
-              <span>Last</span>
-              <svg siChevronsRightIcon></svg>
-            </button>
-          </li>
-        </ul>
-      </nav>
-    </div>
+        }
+        <li scPaginationItem>
+          <button scPaginationNext size="icon">
+            <svg siChevronRightIcon></svg>
+            <span class="sr-only">Next</span>
+          </button>
+        </li>
+        <li scPaginationItem>
+          <button scPaginationLast size="icon">
+            <svg siChevronsRightIcon></svg>
+            <span class="sr-only">Last</span>
+          </button>
+        </li>
+      </ul>
+      <p scPaginationStatus>
+        Page {{ pagination.currentPage() }} of {{ pagination.totalPages() }}
+      </p>
+    </nav>
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class FirstLastPaginationDemo {
-  readonly currentPage = signal(1);
-  readonly pageSize = signal(10);
-  readonly totalItems = signal(100);
-
-  onPaginationChange(event: ScPaginationChange): void {
-    this.currentPage.set(event.page);
-    this.pageSize.set(event.pageSize);
-  }
-}`;
+export class FirstLastPaginationDemo {}`;
 }

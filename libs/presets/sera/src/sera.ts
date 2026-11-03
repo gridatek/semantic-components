@@ -8,6 +8,7 @@ import {
   inputGroupButton,
   inputGroupText,
 } from './input-group';
+import { pagination } from './pagination';
 import { select } from './select';
 
 /** The sera preset: `provideScConfig({ preset: sera })`. */
@@ -20,5 +21,6 @@ export const sera: ScPreset = {
   inputGroupAddon,
   inputGroupButton,
   inputGroupText,
+  pagination,
   select,
 };

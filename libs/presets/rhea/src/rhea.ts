@@ -8,6 +8,7 @@ import {
   inputGroupButton,
   inputGroupText,
 } from './input-group';
+import { pagination } from './pagination';
 import { select } from './select';
 
 /** The rhea preset: `provideScConfig({ preset: rhea })`. */
@@ -20,5 +21,6 @@ export const rhea: ScPreset = {
   inputGroupAddon,
   inputGroupButton,
   inputGroupText,
+  pagination,
   select,
 };

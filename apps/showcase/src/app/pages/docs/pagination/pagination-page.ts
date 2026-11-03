@@ -1,56 +1,323 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScHeading } from '@semantic-components/ui';
+import {
+  ScHeading,
+  ScTable,
+  ScTableBody,
+  ScTableCell,
+  ScTableContainer,
+  ScTableHeader,
+  ScTableHeaderCell,
+  ScTableRow,
+} from '@semantic-components/ui';
+import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { BasicPaginationDemoContainer } from './demos/basic-pagination-demo-container';
-import { ButtonsPaginationDemoContainer } from './demos/buttons-pagination-demo-container';
-import { DisabledLinkPaginationDemoContainer } from './demos/disabled-link-pagination-demo-container';
+import { DisabledPaginationDemoContainer } from './demos/disabled-pagination-demo-container';
 import { EllipsisPaginationDemoContainer } from './demos/ellipsis-pagination-demo-container';
-import { FirstPagePaginationDemoContainer } from './demos/first-page-pagination-demo-container';
-import { KeyboardNavigationPaginationDemoContainer } from './demos/keyboard-navigation-pagination-demo-container';
-import { LastPagePaginationDemoContainer } from './demos/last-page-pagination-demo-container';
-import { ManyPagesPaginationDemoContainer } from './demos/many-pages-pagination-demo-container';
-import { PageSizePaginationDemoContainer } from './demos/page-size-pagination-demo-container';
+import { FirstLastPaginationDemoContainer } from './demos/first-last-pagination-demo-container';
+import { IconsOnlyPaginationDemoContainer } from './demos/icons-only-pagination-demo-container';
+import { PaginationUsageDemoContainer } from './demos/pagination-usage-demo-container';
+import { RtlPaginationDemoContainer } from './demos/rtl-pagination-demo-container';
+import { SimplePaginationDemoContainer } from './demos/simple-pagination-demo-container';
+
+interface ScApiRow {
+  name: string;
+  type: string;
+  default: string;
+  description: string;
+}
 
 @Component({
   selector: 'app-pagination-page',
   imports: [
-    BasicPaginationDemoContainer,
+    Anatomy,
+    PaginationUsageDemoContainer,
+    SimplePaginationDemoContainer,
+    IconsOnlyPaginationDemoContainer,
     EllipsisPaginationDemoContainer,
-    ManyPagesPaginationDemoContainer,
-    ButtonsPaginationDemoContainer,
-    DisabledLinkPaginationDemoContainer,
-    FirstPagePaginationDemoContainer,
-    LastPagePaginationDemoContainer,
-    PageSizePaginationDemoContainer,
-    KeyboardNavigationPaginationDemoContainer,
+    FirstLastPaginationDemoContainer,
+    DisabledPaginationDemoContainer,
+    RtlPaginationDemoContainer,
     TocHeading,
     ComponentBadges,
     ScHeading,
+    ScTable,
+    ScTableBody,
+    ScTableCell,
+    ScTableContainer,
+    ScTableHeader,
+    ScTableHeaderCell,
+    ScTableRow,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
         <h1 scHeading>Pagination</h1>
         <p class="text-muted-foreground">
-          Pagination with page navigation, next and previous links.
+          Moves through pages of results: the pages, previous and next, in the
+          look of the app&apos;s preset. It counts the pages from the number of
+          items and the page size, and works out which to show.
         </p>
         <app-component-badges path="pagination" />
       </div>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Usage</h2>
+        <app-pagination-usage-demo-container />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Anatomy</h2>
+        <p class="text-muted-foreground">
+          A navigation round a list; every part is a directive on your element,
+          the icons and the text are yours. Name the navigation with
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">aria-label</code>
+          and an icon-only button with an
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">sr-only</code>
+          span. The pages come from
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">pages()</code>
+          (all of them up to 7, then 7 with ellipses); the current one is marked
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >aria-current="page"</code
+          >.
+        </p>
+        <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Notes</h2>
+        <p class="text-muted-foreground">
+          Use buttons when the page changes in place, links when each page has
+          its own URL. Previous and First turn disabled on the first page, Next
+          and Last on the last: they leave the tab order and say
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >aria-disabled</code
+          >. For rows per page, put a Select beside it and call
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >changePageSize()</code
+          >; to say which page is shown, a Status.
+        </p>
+      </section>
+
       <section class="space-y-8">
         <h2 scHeading appToc>Examples</h2>
-        <app-basic-pagination-demo-container />
+        <app-simple-pagination-demo-container />
+        <app-icons-only-pagination-demo-container />
         <app-ellipsis-pagination-demo-container />
-        <app-many-pages-pagination-demo-container />
-        <app-buttons-pagination-demo-container />
-        <app-disabled-link-pagination-demo-container />
-        <app-first-page-pagination-demo-container />
-        <app-last-page-pagination-demo-container />
-        <app-page-size-pagination-demo-container />
-        <app-keyboard-navigation-pagination-demo-container />
+        <app-first-last-pagination-demo-container />
+        <app-disabled-pagination-demo-container />
+        <app-rtl-pagination-demo-container />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>API reference</h2>
+        @for (part of parts; track part.name) {
+          <h3 class="font-heading text-base font-medium">
+            {{ part.name }} —
+            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">{{
+              part.selector
+            }}</code>
+          </h3>
+          <p class="text-muted-foreground">{{ part.description }}</p>
+          @if (part.inputs.length) {
+            <div
+              scTableContainer
+              tabindex="0"
+              role="region"
+              [attr.aria-label]="part.name + ' inputs'"
+            >
+              <table scTable>
+                <thead scTableHeader>
+                  <tr scTableRow>
+                    <th scTableHeaderCell>Input</th>
+                    <th scTableHeaderCell>Type</th>
+                    <th scTableHeaderCell>Default</th>
+                    <th scTableHeaderCell>Description</th>
+                  </tr>
+                </thead>
+                <tbody scTableBody>
+                  @for (input of part.inputs; track input.name) {
+                    <tr scTableRow>
+                      <td scTableCell>
+                        <code class="font-mono text-sm">{{ input.name }}</code>
+                      </td>
+                      <td scTableCell class="whitespace-normal">
+                        <code class="font-mono text-sm">{{ input.type }}</code>
+                      </td>
+                      <td scTableCell>
+                        <code class="font-mono text-sm">{{
+                          input.default
+                        }}</code>
+                      </td>
+                      <td
+                        scTableCell
+                        class="text-muted-foreground whitespace-normal"
+                      >
+                        {{ input.description }}
+                      </td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          }
+        }
       </section>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,
 })
-export default class PaginationPage {}
+export default class PaginationPage {
+  protected readonly anatomy = {
+    imports: [
+      'import {',
+      '  ScPagination, ScPaginationList, ScPaginationItem,',
+      '  ScPaginationFirst, ScPaginationPrevious, ScPaginationLink,',
+      '  ScPaginationEllipsis, ScPaginationNext, ScPaginationLast,',
+      '  ScPaginationStatus,',
+      "} from '@semantic-components/ui';",
+    ].join('\n'),
+    markup: [
+      '<nav scPagination aria-label="…" #pagination="scPagination"',
+      '     [totalItems]="…" [pageSize]="…">',
+      '  <ul scPaginationList>',
+      '    <li scPaginationItem><button scPaginationFirst>…</button></li>',
+      '    <li scPaginationItem><button scPaginationPrevious>…</button></li>',
+      '    @for (item of pagination.pages(); track item.value) {',
+      '      <li scPaginationItem>',
+      "        @if (item.type === 'ellipsis') {",
+      '          <span scPaginationEllipsis><svg></svg></span>',
+      '        } @else {',
+      '          <button scPaginationLink [page]="item.value">…</button>',
+      '        }',
+      '      </li>',
+      '    }',
+      '    <li scPaginationItem><button scPaginationNext>…</button></li>',
+      '    <li scPaginationItem><button scPaginationLast>…</button></li>',
+      '  </ul>',
+      '  <p scPaginationStatus>…</p>',
+      '</nav>',
+    ].join('\n'),
+  };
+
+  private readonly classRow: ScApiRow = {
+    name: 'class',
+    type: 'string',
+    default: "''",
+    description: 'Classes merged over the preset (cn: a later class wins).',
+  };
+
+  private readonly disabledRow: ScApiRow = {
+    name: 'disabled',
+    type: 'boolean',
+    default: 'false',
+    description:
+      'Disabled whatever the page (it is disabled by itself at the end it leads to).',
+  };
+
+  private readonly variantRow: ScApiRow = {
+    name: 'variant',
+    type: 'ScButtonVariants["variant"]',
+    default: "'ghost'",
+    description: 'The button look.',
+  };
+
+  private readonly sizeRow: ScApiRow = {
+    name: 'size',
+    type: 'ScButtonVariants["size"]',
+    default: "'default'",
+    description: "The button size; 'icon' for an icon-only button.",
+  };
+
+  protected readonly parts = [
+    {
+      name: 'ScPagination',
+      selector: 'nav[scPagination], div[scPagination]',
+      description:
+        'The navigation; holds the page (currentPage(), pageSize(), totalPages(), pages()) and emits change. Methods: goToPage(page), changePageSize(size), which goes back to page 1. Exported as scPagination.',
+      inputs: [
+        {
+          name: 'totalItems',
+          type: 'number',
+          default: '0',
+          description:
+            'How many items there are; the pages are counted from it.',
+        },
+        {
+          name: 'pageSize',
+          type: 'number',
+          default: '10',
+          description: 'Items per page, at first.',
+        },
+        {
+          name: 'currentPage',
+          type: 'number',
+          default: '1',
+          description:
+            'The page, at first and whenever it changes; the pagination keeps it after that.',
+        },
+        this.classRow,
+      ],
+    },
+    {
+      name: 'ScPaginationList, ScPaginationItem',
+      selector: 'ul[scPaginationList], li[scPaginationItem]',
+      description: 'The list of buttons, in a row; a place in it.',
+      inputs: [this.classRow],
+    },
+    {
+      name: 'ScPaginationLink',
+      selector: 'a[scPaginationLink], button[scPaginationLink]',
+      description:
+        'A page. Outlined and aria-current="page" while it is the current one.',
+      inputs: [
+        {
+          name: 'page',
+          type: 'number',
+          default: '—',
+          description: 'The page it goes to.',
+        },
+        {
+          name: 'size',
+          type: 'ScButtonVariants["size"]',
+          default: "'icon'",
+          description: 'The button size.',
+        },
+        {
+          name: 'disabled',
+          type: 'boolean',
+          default: 'false',
+          description: 'Not followed; aria-disabled and out of the tab order.',
+        },
+        this.classRow,
+      ],
+    },
+    {
+      name: 'ScPaginationPrevious, ScPaginationNext',
+      selector:
+        'a[scPaginationPrevious], button[scPaginationPrevious], a[scPaginationNext], button[scPaginationNext]',
+      description: 'One page back or on. Their chevrons flip right to left.',
+      inputs: [this.variantRow, this.sizeRow, this.disabledRow, this.classRow],
+    },
+    {
+      name: 'ScPaginationFirst, ScPaginationLast',
+      selector:
+        'a[scPaginationFirst], button[scPaginationFirst], a[scPaginationLast], button[scPaginationLast]',
+      description: 'The first or the last page.',
+      inputs: [this.variantRow, this.sizeRow, this.disabledRow, this.classRow],
+    },
+    {
+      name: 'ScPaginationEllipsis',
+      selector: 'span[scPaginationEllipsis]',
+      description: 'Pages left out; hidden from screen readers.',
+      inputs: [this.classRow],
+    },
+    {
+      name: 'ScPaginationStatus',
+      selector: '[scPaginationStatus]',
+      description:
+        'Says which page is shown, and announces it when it changes (a polite live region). Its text is yours: Page {{ pagination.currentPage() }} of {{ pagination.totalPages() }}, visible or sr-only.',
+      inputs: [this.classRow],
+    },
+  ];
+}

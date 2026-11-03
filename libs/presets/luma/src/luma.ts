@@ -8,6 +8,7 @@ import {
   inputGroupButton,
   inputGroupText,
 } from './input-group';
+import { pagination } from './pagination';
 import { select } from './select';
 
 /** The luma preset: `provideScConfig({ preset: luma })`. */
@@ -20,5 +21,6 @@ export const luma: ScPreset = {
   inputGroupAddon,
   inputGroupButton,
   inputGroupText,
+  pagination,
   select,
 };

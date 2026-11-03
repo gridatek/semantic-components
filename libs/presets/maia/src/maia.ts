@@ -8,6 +8,7 @@ import {
   inputGroupButton,
   inputGroupText,
 } from './input-group';
+import { pagination } from './pagination';
 import { select } from './select';
 
 /** The maia preset: `provideScConfig({ preset: maia })`. */
@@ -20,5 +21,6 @@ export const maia: ScPreset = {
   inputGroupAddon,
   inputGroupButton,
   inputGroupText,
+  pagination,
   select,
 };

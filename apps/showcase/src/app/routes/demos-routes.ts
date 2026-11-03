@@ -3145,17 +3145,24 @@ export const demosRoutes: Route[] = [
     path: 'demos/pagination',
     children: [
       {
-        path: 'first-last-pagination-demo',
+        path: 'pagination-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/pagination/demos/first-last-pagination-demo').then(
-            (m) => m.FirstLastPaginationDemo,
+          import('../pages/docs/pagination/demos/pagination-usage-demo').then(
+            (m) => m.PaginationUsageDemo,
           ),
       },
       {
-        path: 'basic-pagination-demo',
+        path: 'simple-pagination-demo',
         loadComponent: () =>
-          import('../pages/docs/pagination/demos/basic-pagination-demo').then(
-            (m) => m.BasicPaginationDemo,
+          import('../pages/docs/pagination/demos/simple-pagination-demo').then(
+            (m) => m.SimplePaginationDemo,
+          ),
+      },
+      {
+        path: 'icons-only-pagination-demo',
+        loadComponent: () =>
+          import('../pages/docs/pagination/demos/icons-only-pagination-demo').then(
+            (m) => m.IconsOnlyPaginationDemo,
           ),
       },
       {
@@ -3166,52 +3173,24 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'many-pages-pagination-demo',
+        path: 'first-last-pagination-demo',
         loadComponent: () =>
-          import('../pages/docs/pagination/demos/many-pages-pagination-demo').then(
-            (m) => m.ManyPagesPaginationDemo,
+          import('../pages/docs/pagination/demos/first-last-pagination-demo').then(
+            (m) => m.FirstLastPaginationDemo,
           ),
       },
       {
-        path: 'buttons-pagination-demo',
+        path: 'disabled-pagination-demo',
         loadComponent: () =>
-          import('../pages/docs/pagination/demos/buttons-pagination-demo').then(
-            (m) => m.ButtonsPaginationDemo,
+          import('../pages/docs/pagination/demos/disabled-pagination-demo').then(
+            (m) => m.DisabledPaginationDemo,
           ),
       },
       {
-        path: 'first-page-pagination-demo',
+        path: 'rtl-pagination-demo',
         loadComponent: () =>
-          import('../pages/docs/pagination/demos/first-page-pagination-demo').then(
-            (m) => m.FirstPagePaginationDemo,
-          ),
-      },
-      {
-        path: 'last-page-pagination-demo',
-        loadComponent: () =>
-          import('../pages/docs/pagination/demos/last-page-pagination-demo').then(
-            (m) => m.LastPagePaginationDemo,
-          ),
-      },
-      {
-        path: 'page-size-pagination-demo',
-        loadComponent: () =>
-          import('../pages/docs/pagination/demos/page-size-pagination-demo').then(
-            (m) => m.PageSizePaginationDemo,
-          ),
-      },
-      {
-        path: 'keyboard-navigation-pagination-demo',
-        loadComponent: () =>
-          import('../pages/docs/pagination/demos/keyboard-navigation-pagination-demo').then(
-            (m) => m.KeyboardNavigationPaginationDemo,
-          ),
-      },
-      {
-        path: 'disabled-link-pagination-demo',
-        loadComponent: () =>
-          import('../pages/docs/pagination/demos/disabled-link-pagination-demo').then(
-            (m) => m.DisabledLinkPaginationDemo,
+          import('../pages/docs/pagination/demos/rtl-pagination-demo').then(
+            (m) => m.RtlPaginationDemo,
           ),
       },
     ],

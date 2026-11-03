@@ -1,362 +1,120 @@
 # Pagination
 
-Pagination with page navigation, next and previous links. Supports both manual and smart automatic page generation.
-
-## Components
-
-- `ScPagination` - Navigation container with optional smart pagination logic
-- `ScPaginationList` - List container (ul)
-- `ScPaginationItem` - List item (li)
-- `ScPaginationLink` - Page number link/button
-- `ScPaginationPrevious` - Previous page link/button
-- `ScPaginationNext` - Next page link/button
-- `ScPaginationFirst` - First page link/button
-- `ScPaginationLast` - Last page link/button
-- `ScPaginationEllipsis` - Ellipsis indicator
-- `ScPaginationPageSizeSelect` - Page size selector (select dropdown)
-- `ScPaginationStatus` - Says which page is shown and announces it on change (`role="status"`): write `Page {{ p.currentPage() }} of {{ p.totalPages() }}`, visible or `sr-only`
-
-## Features
-
-- **Manual Mode**: Full control over pagination items (basic usage)
-- **Smart Mode**: Automatic page number and ellipsis generation (always returns 7 items when totalPages > 7)
-- Automatic calculation of total pages
-- Disabled state support for navigation buttons
-- **Internal state management**: Components handle state internally with automatic input syncing
-- **Unified change event**: Single event for both page and page size changes
-- **Auto-sized icons**: SVG icons automatically sized via `[&_svg]:size-4`
+Moves through pages of results — the pages, previous and next — in the look of the app's preset. It counts the pages from the number of items and the page size, and works out which to show.
 
 ## Usage
 
-### Basic Example
+```html
+<nav scPagination aria-label="Results" #pagination="scPagination" [totalItems]="200" [pageSize]="10">
+  <ul scPaginationList>
+    <li scPaginationItem>
+      <button scPaginationPrevious>
+        <svg siChevronLeftIcon data-icon="inline-start"></svg>
+        Previous
+      </button>
+    </li>
+    @for (item of pagination.pages(); track item.value) {
+    <li scPaginationItem>
+      @if (item.type === 'ellipsis') {
+      <span scPaginationEllipsis><svg siEllipsisIcon></svg></span>
+      } @else {
+      <button scPaginationLink [page]="item.value">{{ item.value }}</button>
+      }
+    </li>
+    }
+    <li scPaginationItem>
+      <button scPaginationNext>
+        Next
+        <svg siChevronRightIcon data-icon="inline-end"></svg>
+      </button>
+    </li>
+  </ul>
+</nav>
+```
+
+## Anatomy
+
+shadcn's parts, each a directive on your element; the icons and the text are yours:
 
 ```html
 <nav scPagination>
   <ul scPaginationList>
-    <li scPaginationItem>
-      <button scPaginationPrevious aria-label="Go to previous page">
-        <svg si-chevron-left-icon></svg>
-        <span>Previous</span>
-      </button>
-    </li>
-    <li scPaginationItem>
-      <button scPaginationLink [page]="1">1</button>
-    </li>
-    <li scPaginationItem>
-      <button scPaginationLink [page]="2">2</button>
-    </li>
-    <li scPaginationItem>
-      <button scPaginationLink [page]="3">3</button>
-    </li>
-    <li scPaginationItem>
-      <button scPaginationNext aria-label="Go to next page">
-        <span>Next</span>
-        <svg si-chevron-right-icon></svg>
-      </button>
-    </li>
+    <li scPaginationItem><button scPaginationFirst></button></li>
+    <li scPaginationItem><button scPaginationPrevious></button></li>
+    <li scPaginationItem><button scPaginationLink></button></li>
+    <li scPaginationItem><span scPaginationEllipsis></span></li>
+    <li scPaginationItem><button scPaginationNext></button></li>
+    <li scPaginationItem><button scPaginationLast></button></li>
   </ul>
+  <p scPaginationStatus></p>
 </nav>
 ```
 
-### With Icons (Lucide)
+- Name the navigation (`aria-label`) and every icon-only button (an `sr-only` span).
+- `pages()` gives every page up to 7, then 7 items: the first, the last, the current with its neighbours, and ellipses.
+- The current page is outlined and `aria-current="page"`.
+- Previous and First are disabled on the first page, Next and Last on the last: `aria-disabled`, out of the tab order. A part's `disabled` disables it whatever the page.
+- Use buttons when the page changes in place. On an `a` the parts set `href="#"` and keep the click.
+- Previous's and Next's chevrons flip right to left.
 
-```typescript
-import {
-  SiChevronLeftIcon,
-  SiChevronRightIcon,
-  SiEllipsisIcon,
-} from '@semantic-icons/lucide-icons';
+## Rows per page
 
-@Component({
-  imports: [
-    ScPagination,
-    ScPaginationList,
-    ScPaginationItem,
-    ScPaginationLink,
-    ScPaginationPrevious,
-    ScPaginationNext,
-    ScPaginationEllipsis,
-    SiChevronLeftIcon,
-    SiChevronRightIcon,
-    SiEllipsisIcon,
-  ],
-  template: `
-    <nav scPagination>
-      <ul scPaginationList>
-        <li scPaginationItem>
-          <button scPaginationPrevious aria-label="Go to previous page">
-            <svg si-chevron-left-icon></svg>
-            <span>Previous</span>
-          </button>
-        </li>
-        <!-- Page items here -->
-        <li scPaginationItem>
-          <button scPaginationNext aria-label="Go to next page">
-            <span>Next</span>
-            <svg si-chevron-right-icon></svg>
-          </button>
-        </li>
-      </ul>
-    </nav>
-  `,
-})
-```
-
-**Note**: Icons are automatically sized via `[&_svg]:size-4`. No need to add `class="size-4"` manually.
-
-## Smart Pagination (Automatic Page Generation)
-
-The pagination component can automatically calculate and generate page numbers with ellipses:
-
-```typescript
-import { Component, signal } from '@angular/core';
-import { ScPaginationChange } from '@semantic-components/ui';
-
-@Component({
-  template: `
-    <nav scPagination #pagination="scPagination" [currentPage]="currentPage()" [pageSize]="10" [totalItems]="100" (change)="onPaginationChange($event)">
-      <ul scPaginationList>
-        <li scPaginationItem>
-          <button scPaginationPrevious aria-label="Go to previous page">
-            <svg si-chevron-left-icon></svg>
-            <span>Previous</span>
-          </button>
-        </li>
-
-        @for (page of pagination.pages(); track page.value) {
-          <li scPaginationItem>
-            @if (page.type === 'ellipsis') {
-              <span scPaginationEllipsis>
-                <svg si-ellipsis-icon></svg>
-                <span class="sr-only">More pages</span>
-              </span>
-            } @else {
-              <button scPaginationLink [page]="page.value">
-                {{ page.value }}
-              </button>
-            }
-          </li>
-        }
-
-        <li scPaginationItem>
-          <button scPaginationNext aria-label="Go to next page">
-            <span>Next</span>
-            <svg si-chevron-right-icon></svg>
-          </button>
-        </li>
-      </ul>
-    </nav>
-  `,
-})
-export class MyComponent {
-  readonly currentPage = signal(1);
-
-  onPaginationChange(event: ScPaginationChange): void {
-    this.currentPage.set(event.page);
-  }
-}
-```
-
-### Smart Pagination Features
-
-- Automatically generates page numbers based on `currentPage`, `pageSize`, and `totalItems`
-- **Always returns exactly 7 items** when `totalPages > 7`
-- Intelligently places ellipses when there are many pages
-- Exposes `pagination.pages()` array for iteration
-- Exposes `pagination.totalPages()` for total page count
-- Each item in `pages()` has type `ScPaginationPage`: `{ type: 'page' | 'ellipsis', value: number | string }`
-- Active state is automatically computed for pagination links
-
-## Disabled State
-
-Navigation buttons (Previous, Next, First, Last) automatically disable themselves based on the current page:
-
-- **Previous** and **First**: Auto-disabled when on page 1
-- **Next** and **Last**: Auto-disabled when on the last page
-
-You can also manually disable any button:
+Not a part: put a Select beside it and call `changePageSize()`, which goes back to page 1.
 
 ```html
-<!-- Manually disabled -->
-<button scPaginationPrevious [disabled]="true">
-  <!-- content -->
-  <span class="sr-only">Go to previous page</span>
-</button>
-
-<!-- Disabled link -->
-<button scPaginationLink [disabled]="true">1</button>
+<div scSelect [value]="'' + pagination.pageSize()" (valueChange)="pagination.changePageSize(+$event)">
+  <div scSelectLabel>Rows per page</div>
+  …
+</div>
 ```
 
-## First and Last Page Navigation
+## Status
 
-Use `ScPaginationFirst` and `ScPaginationLast` for quick navigation to the first and last pages:
+`scPaginationStatus` says which page is shown and announces it when it changes (`role="status"`). Its text is yours: `Page {{ pagination.currentPage() }} of {{ pagination.totalPages() }}`, visible or `sr-only`.
 
-```html
-<nav scPagination #pagination="scPagination" [currentPage]="currentPage()" [pageSize]="10" [totalItems]="100" (change)="onPaginationChange($event)">
-  <ul scPaginationList>
-    <li scPaginationItem>
-      <button scPaginationFirst aria-label="Go to first page">
-        <svg si-chevrons-left-icon></svg>
-        <span>First</span>
-      </button>
-    </li>
-    <li scPaginationItem>
-      <button scPaginationPrevious aria-label="Go to previous page">
-        <svg si-chevron-left-icon></svg>
-        <span>Previous</span>
-      </button>
-    </li>
+## API reference
 
-    <!-- Page numbers here -->
+### ScPagination — `nav[scPagination], div[scPagination]`
 
-    <li scPaginationItem>
-      <button scPaginationNext aria-label="Go to next page">
-        <span>Next</span>
-        <svg si-chevron-right-icon></svg>
-      </button>
-    </li>
-    <li scPaginationItem>
-      <button scPaginationLast aria-label="Go to last page">
-        <span>Last</span>
-        <svg si-chevrons-right-icon></svg>
-      </button>
-    </li>
-  </ul>
-</nav>
-```
+Exported as `scPagination`.
 
-## Page Size Selector
+| Input         | Type     | Default | Description                                                        |
+| ------------- | -------- | ------- | ------------------------------------------------------------------ |
+| `totalItems`  | `number` | `0`     | How many items there are.                                          |
+| `pageSize`    | `number` | `10`    | Items per page, at first.                                          |
+| `currentPage` | `number` | `1`     | The page, at first and whenever it changes; kept by it after that. |
+| `class`       | `string` | `''`    | Classes merged over the preset.                                    |
 
-Use `ScPaginationPageSizeSelect` to allow users to change the number of items displayed per page:
+| Output   | Type                                 | Description                        |
+| -------- | ------------------------------------ | ---------------------------------- |
+| `change` | `{ page: number; pageSize: number }` | The page or the page size changed. |
 
-```typescript
-import { Component, signal } from '@angular/core';
-import { ScPaginationChange } from '@semantic-components/ui';
+Signals: `currentPage()`, `pageSize()`, `totalPages()`, `pages()`. Methods: `goToPage(page)`, `changePageSize(size)`.
 
-@Component({
-  template: `
-    <nav scPagination #pagination="scPagination" [currentPage]="currentPage()" [pageSize]="pageSize()" [totalItems]="totalItems()" [pageSizes]="[10, 25, 50, 100]" (change)="onPaginationChange($event)">
-      <div class="flex items-center gap-2">
-        <span class="text-muted-foreground text-sm">Items per page:</span>
-        <sc-pagination-page-size-select />
-      </div>
+### ScPaginationLink — `a[scPaginationLink], button[scPaginationLink]`
 
-      <ul scPaginationList>
-        <!-- Pagination items here -->
-      </ul>
-    </nav>
-  `,
-})
-export class MyComponent {
-  readonly currentPage = signal(1);
-  readonly pageSize = signal(10);
-  readonly totalItems = signal(250);
+| Input      | Type                       | Default  | Description          |
+| ---------- | -------------------------- | -------- | -------------------- |
+| `page`     | `number`                   | —        | The page it goes to. |
+| `size`     | `ScButtonVariants['size']` | `'icon'` | The button size.     |
+| `disabled` | `boolean`                  | `false`  | Not followed.        |
+| `class`    | `string`                   | `''`     |                      |
 
-  onPaginationChange(event: ScPaginationChange): void {
-    this.currentPage.set(event.page);
-    this.pageSize.set(event.pageSize);
-  }
-}
-```
+### ScPaginationPrevious, ScPaginationNext, ScPaginationFirst, ScPaginationLast
 
-Key points:
+On an `a` or a `button`.
 
-- `ScPaginationPageSizeSelect` renders only the select element
-- Wrap it with a label or other elements as needed in your template
-- Must be a child of `<nav scPagination>` to access pagination context
-- Configure available options via `[pageSizes]` on the parent `ScPagination`
-- Listen to `(change)` to receive both page and pageSize updates
-- The component automatically resets to page 1 when page size changes
+| Input      | Type                          | Default     | Description                       |
+| ---------- | ----------------------------- | ----------- | --------------------------------- |
+| `variant`  | `ScButtonVariants['variant']` | `'ghost'`   | The button look.                  |
+| `size`     | `ScButtonVariants['size']`    | `'default'` | `'icon'` for an icon-only button. |
+| `disabled` | `boolean`                     | `false`     | Disabled whatever the page.       |
+| `class`    | `string`                      | `''`        |                                   |
 
-## Inputs & Outputs
+### ScPaginationList, ScPaginationItem, ScPaginationEllipsis, ScPaginationStatus
 
-### ScPagination
+`ul[scPaginationList]`, `li[scPaginationItem]`, `span[scPaginationEllipsis]` (hidden from screen readers), `[scPaginationStatus]`. Input: `class`.
 
-| Input         | Type       | Default             | Description                            |
-| ------------- | ---------- | ------------------- | -------------------------------------- |
-| `currentPage` | `number`   | `1`                 | Current active page (1-based)          |
-| `pageSize`    | `number`   | `10`                | Number of items per page               |
-| `totalItems`  | `number`   | `0`                 | Total number of items across all pages |
-| `pageSizes`   | `number[]` | `[10, 25, 50, 100]` | Available page size options            |
-| `class`       | `string`   | `''`                | Additional CSS classes                 |
+## Styles
 
-| Output   | Type                 | Description                           |
-| -------- | -------------------- | ------------------------------------- |
-| `change` | `ScPaginationChange` | Emitted when page or pageSize changes |
-
-**ScPaginationChange interface:**
-
-```typescript
-interface ScPaginationChange {
-  page: number;
-  pageSize: number;
-}
-```
-
-### ScPaginationLink
-
-| Input      | Type                                  | Default  | Description                      |
-| ---------- | ------------------------------------- | -------- | -------------------------------- |
-| `page`     | `number`                              | -        | Page number this link represents |
-| `size`     | `'default' \| 'sm' \| 'lg' \| 'icon'` | `'icon'` | Button size                      |
-| `disabled` | `boolean`                             | `false`  | Disabled state                   |
-| `class`    | `string`                              | `''`     | Additional CSS classes           |
-
-**Note**: The active state is automatically computed by comparing the `page` input with the parent pagination's `currentPage`.
-
-### ScPaginationPrevious
-
-| Input      | Type      | Default | Description            |
-| ---------- | --------- | ------- | ---------------------- |
-| `disabled` | `boolean` | `false` | Disabled state         |
-| `class`    | `string`  | `''`    | Additional CSS classes |
-
-### ScPaginationNext
-
-| Input      | Type      | Default | Description            |
-| ---------- | --------- | ------- | ---------------------- |
-| `disabled` | `boolean` | `false` | Disabled state         |
-| `class`    | `string`  | `''`    | Additional CSS classes |
-
-### ScPaginationFirst
-
-| Input      | Type      | Default | Description            |
-| ---------- | --------- | ------- | ---------------------- |
-| `disabled` | `boolean` | `false` | Disabled state         |
-| `class`    | `string`  | `''`    | Additional CSS classes |
-
-### ScPaginationLast
-
-| Input      | Type      | Default | Description            |
-| ---------- | --------- | ------- | ---------------------- |
-| `disabled` | `boolean` | `false` | Disabled state         |
-| `class`    | `string`  | `''`    | Additional CSS classes |
-
-### ScPaginationPageSizeSelect
-
-| Input   | Type     | Default | Description            |
-| ------- | -------- | ------- | ---------------------- |
-| `class` | `string` | `''`    | Additional CSS classes |
-
-**Note**: This component renders only the select element. The page size options are configured via the `pageSizes` input on the parent `ScPagination` component.
-
-## Accessibility
-
-- A `nav`: name it (`aria-label`), uniquely when there are several on a page
-- Active page has `aria-current="page"`
-- Previous/Next/First/Last: name them (`aria-label`, "Go to next page") — the library writes no text
-- Page changes are announced with a `scPaginationStatus` you write
-- Disabled state uses `aria-disabled` attribute with automatic styling
-- Ellipsis is `aria-hidden` with `.sr-only` text
-- Focus ring for keyboard navigation
-
-## Internal State Management
-
-The pagination component uses internal signals with effects to manage state:
-
-- Accepts `currentPage` and `pageSize` as inputs
-- Maintains internal state that syncs with inputs
-- Updates internal state when user interacts (clicks links, changes page size)
-- Emits `change` event with both page and pageSize
-- Parent can optionally update inputs in response to the event
-- Works in both controlled and semi-controlled modes
+From the preset (`pagination`): the list's gap, the ellipsis's size, and the padding by the arrow of a text Previous or Next. The buttons are the preset's buttons.

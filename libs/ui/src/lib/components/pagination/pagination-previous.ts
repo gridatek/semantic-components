@@ -23,6 +23,9 @@ import { ScPagination } from './pagination';
 })
 export class ScPaginationPrevious {
   private readonly buttonStyles = injectPreset().button;
+  // The preset's padding by the arrow (shadcn's, important: it outweighs the
+  // button's own padding by an icon).
+  private readonly paginationStyles = injectPreset().pagination;
 
   constructor() {
     ɵwarnIfUnnamed('scPaginationPrevious');
@@ -56,7 +59,7 @@ export class ScPaginationPrevious {
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       // Balances a text button ("‹ Previous"); icon-only buttons stay centred.
-      !this.size()?.startsWith('icon') && 'ps-1.5',
+      !this.size()?.startsWith('icon') && this.paginationStyles.previous,
       'rtl:[&>svg]:rotate-180',
       this.classInput(),
     ),

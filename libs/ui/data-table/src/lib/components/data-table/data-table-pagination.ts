@@ -8,7 +8,7 @@ import type { ScDataTablePaginationTable } from './data-table-types';
  * parts (buttons, page links, size select) as usual.
  *
  * ```html
- * <nav scPagination scDataTablePagination [table]="table" [pageSizes]="[10, 20, 50]">…</nav>
+ * <nav scPagination scDataTablePagination [table]="table">…</nav>
  * ```
  */
 @Directive({

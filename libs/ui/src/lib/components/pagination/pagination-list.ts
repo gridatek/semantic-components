@@ -1,4 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 
 @Directive({
@@ -8,9 +9,11 @@ import { cn } from '../../utils';
   },
 })
 export class ScPaginationList {
+  private readonly styles = injectPreset().pagination;
+
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('gap-0.5 flex items-center', this.classInput()),
+    cn(this.styles.list, this.classInput()),
   );
 }

@@ -51,12 +51,23 @@ import {
   ScPaginationLast,
   ScPaginationList,
   ScPaginationNext,
-  ScPaginationPageSizeSelect,
   ScPaginationPrevious,
   ScPopover,
   ScPopoverPortal,
   ScPopoverProvider,
   ScPopoverTrigger,
+  ScSelect,
+  ScSelectGroup,
+  ScSelectIcon,
+  ScSelectItem,
+  ScSelectItemIndicator,
+  ScSelectItemText,
+  ScSelectLabel,
+  ScSelectList,
+  ScSelectPopup,
+  ScSelectPortal,
+  ScSelectTrigger,
+  ScSelectValue,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -79,6 +90,8 @@ import {
 import {
   SiArrowDownIcon,
   SiArrowUpIcon,
+  SiCheckIcon,
+  SiChevronDownIcon,
   SiChevronLeftIcon,
   SiChevronRightIcon,
   SiChevronsLeftIcon,
@@ -244,6 +257,8 @@ const SAMPLE_DATA: User[] = [
 @Component({
   selector: 'app-featured-data-table-demo',
   imports: [
+    SiChevronDownIcon,
+    SiCheckIcon,
     ScBadge,
     ScButton,
     ScCheckbox,
@@ -270,7 +285,18 @@ const SAMPLE_DATA: User[] = [
     ScPaginationLast,
     ScPaginationList,
     ScPaginationNext,
-    ScPaginationPageSizeSelect,
+    ScSelect,
+    ScSelectGroup,
+    ScSelectIcon,
+    ScSelectItem,
+    ScSelectItemIndicator,
+    ScSelectItemText,
+    ScSelectLabel,
+    ScSelectList,
+    ScSelectPopup,
+    ScSelectPortal,
+    ScSelectTrigger,
+    ScSelectValue,
     ScPaginationPrevious,
     ScTable,
     ScTableBody,
@@ -505,19 +531,36 @@ const SAMPLE_DATA: User[] = [
           scDataTablePagination
           #pagination="scPagination"
           [table]="table"
-          [pageSizes]="[5, 10, 20]"
           aria-label="Users pages"
           class="mx-0 w-auto flex-wrap items-center gap-4"
         >
-          <div class="flex items-center gap-2 text-sm">
-            <label for="users-page-size" class="font-medium">
-              Rows per page
-            </label>
-            <select scPaginationPageSizeSelect id="users-page-size">
-              @for (size of [5, 10, 20]; track size) {
-                <option [value]="size">{{ size }}</option>
-              }
-            </select>
+          <div
+            scSelect
+            [value]="'' + pagination.pageSize()"
+            (valueChange)="pagination.changePageSize(+$event)"
+            class="flex-row items-center"
+          >
+            <div scSelectLabel>Rows per page</div>
+            <div scSelectTrigger size="sm" class="w-18">
+              <span scSelectValue></span>
+              <svg scSelectIcon siChevronDownIcon></svg>
+            </div>
+            <ng-template scSelectPortal>
+              <div scSelectPopup>
+                <div scSelectList>
+                  <div scSelectGroup>
+                    @for (size of [5, 10, 20]; track size) {
+                      <div scSelectItem [value]="'' + size">
+                        <span scSelectItemText>{{ size }}</span>
+                        <span scSelectItemIndicator
+                          ><svg siCheckIcon></svg
+                        ></span>
+                      </div>
+                    }
+                  </div>
+                </div>
+              </div>
+            </ng-template>
           </div>
           <span class="text-sm font-medium" aria-live="polite">
             Page {{ pagination.currentPage() }} of

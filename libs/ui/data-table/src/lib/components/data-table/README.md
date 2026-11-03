@@ -96,9 +96,10 @@ export class UsersTable {
   </tbody>
 </table>
 
-<nav scPagination scDataTablePagination #pagination="scPagination" [table]="table" [pageSizes]="[10, 20, 50]">
-  <span aria-live="polite">Page {{ pagination.currentPage() }} of {{ pagination.totalPages() }}</span>
-  <!-- scPaginationList / scPaginationPrevious / scPaginationNext… as usual -->
+<nav scPagination scDataTablePagination #pagination="scPagination" [table]="table">
+  <p scPaginationStatus>Page {{ pagination.currentPage() }} of {{ pagination.totalPages() }}</p>
+  <!-- scPaginationList / scPaginationPrevious / scPaginationNext… as usual;
+       rows per page: a Select calling pagination.changePageSize(+$event) -->
 </nav>
 ```
 

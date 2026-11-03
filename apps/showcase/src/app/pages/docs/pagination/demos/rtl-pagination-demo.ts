@@ -1,7 +1,6 @@
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScPagination,
-  ScPaginationChange,
   ScPaginationEllipsis,
   ScPaginationItem,
   ScPaginationLink,
@@ -15,14 +14,15 @@ import {
   SiEllipsisIcon,
 } from '@semantic-icons/lucide-icons';
 
+/** Right to left: the order flips, the chevrons flip by themselves. */
 @Component({
-  selector: 'app-last-page-pagination-demo',
+  selector: 'app-rtl-pagination-demo',
   imports: [
     ScPagination,
-    ScPaginationList,
     ScPaginationEllipsis,
     ScPaginationItem,
     ScPaginationLink,
+    ScPaginationList,
     ScPaginationNext,
     ScPaginationPrevious,
     SiChevronLeftIcon,
@@ -32,38 +32,38 @@ import {
   template: `
     <nav
       scPagination
-      aria-label="Last page pagination"
+      dir="rtl"
+      lang="ar"
+      aria-label="النتائج"
       #pagination="scPagination"
-      [currentPage]="currentPage()"
       [totalItems]="100"
       [pageSize]="10"
-      (change)="onPaginationChange($event)"
+      [currentPage]="2"
     >
       <ul scPaginationList>
         <li scPaginationItem>
-          <button scPaginationPrevious aria-label="Go to previous page">
-            <svg siChevronLeftIcon></svg>
-            <span>Previous</span>
+          <button scPaginationPrevious>
+            <svg siChevronLeftIcon data-icon="inline-start"></svg>
+            <span class="sr-only sm:not-sr-only">السابق</span>
           </button>
         </li>
-        @for (page of pagination.pages(); track page.value) {
+        @for (item of pagination.pages(); track item.value) {
           <li scPaginationItem>
-            @if (page.type === 'ellipsis') {
+            @if (item.type === 'ellipsis') {
               <span scPaginationEllipsis>
                 <svg siEllipsisIcon></svg>
-                <span class="sr-only">More pages</span>
               </span>
             } @else {
-              <button scPaginationLink [page]="page.value">
-                {{ page.value }}
+              <button scPaginationLink [page]="item.value">
+                {{ item.value }}
               </button>
             }
           </li>
         }
         <li scPaginationItem>
-          <button scPaginationNext aria-label="Go to next page">
-            <span>Next</span>
-            <svg siChevronRightIcon></svg>
+          <button scPaginationNext>
+            <span class="sr-only sm:not-sr-only">التالي</span>
+            <svg siChevronRightIcon data-icon="inline-end"></svg>
           </button>
         </li>
       </ul>
@@ -72,10 +72,4 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class LastPagePaginationDemo {
-  readonly currentPage = signal(10);
-
-  onPaginationChange(event: ScPaginationChange): void {
-    this.currentPage.set(event.page);
-  }
-}
+export class RtlPaginationDemo {}

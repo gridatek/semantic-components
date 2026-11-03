@@ -9,11 +9,24 @@ import {
   ScPaginationLink,
   ScPaginationList,
   ScPaginationNext,
-  ScPaginationPageSizeSelect,
   ScPaginationPrevious,
+  ScSelect,
+  ScSelectGroup,
+  ScSelectIcon,
+  ScSelectItem,
+  ScSelectItemIndicator,
+  ScSelectItemText,
+  ScSelectLabel,
+  ScSelectList,
+  ScSelectPopup,
+  ScSelectPortal,
+  ScSelectTrigger,
+  ScSelectValue,
 } from '@semantic-components/ui';
 import { ScDataTablePagination } from '@semantic-components/ui/data-table';
 import {
+  SiCheckIcon,
+  SiChevronDownIcon,
   SiChevronLeftIcon,
   SiChevronRightIcon,
   SiChevronsLeftIcon,
@@ -27,6 +40,8 @@ import type { User } from './user-service';
   selector: 'app-data-table-pagination',
   encapsulation: ViewEncapsulation.None,
   imports: [
+    SiChevronDownIcon,
+    SiCheckIcon,
     ScPagination,
     ScPaginationList,
     ScPaginationItem,
@@ -36,7 +51,18 @@ import type { User } from './user-service';
     ScPaginationFirst,
     ScPaginationLast,
     ScPaginationEllipsis,
-    ScPaginationPageSizeSelect,
+    ScSelect,
+    ScSelectGroup,
+    ScSelectIcon,
+    ScSelectItem,
+    ScSelectItemIndicator,
+    ScSelectItemText,
+    ScSelectLabel,
+    ScSelectList,
+    ScSelectPopup,
+    ScSelectPortal,
+    ScSelectTrigger,
+    ScSelectValue,
     ScDataTablePagination,
     SiChevronsLeftIcon,
     SiChevronLeftIcon,
@@ -51,18 +77,39 @@ import type { User } from './user-service';
       scDataTablePagination
       #pagination="scPagination"
       [table]="table()"
-      [pageSizes]="pageSizeOptions()"
       class="flex items-center justify-between py-4"
     >
-      <div class="text-muted-foreground flex items-center gap-2 text-sm">
-        <label for="users-page-size" i18n="@@dataTable.rowsPerPage"
-          >Rows per page:</label
+      <div
+        scSelect
+        [value]="'' + pagination.pageSize()"
+        (valueChange)="pagination.changePageSize(+$event)"
+        class="flex-row items-center"
+      >
+        <div
+          scSelectLabel
+          class="text-muted-foreground font-normal"
+          i18n="@@dataTable.rowsPerPage"
         >
-        <select scPaginationPageSizeSelect id="users-page-size">
-          @for (size of pageSizeOptions(); track size) {
-            <option [value]="size">{{ size }}</option>
-          }
-        </select>
+          Rows per page:
+        </div>
+        <div scSelectTrigger size="sm" class="w-18">
+          <span scSelectValue></span>
+          <svg scSelectIcon siChevronDownIcon></svg>
+        </div>
+        <ng-template scSelectPortal>
+          <div scSelectPopup>
+            <div scSelectList>
+              <div scSelectGroup>
+                @for (size of pageSizeOptions(); track size) {
+                  <div scSelectItem [value]="'' + size">
+                    <span scSelectItemText>{{ size }}</span>
+                    <span scSelectItemIndicator><svg siCheckIcon></svg></span>
+                  </div>
+                }
+              </div>
+            </div>
+          </div>
+        </ng-template>
       </div>
 
       <div class="flex items-center gap-2 text-sm">

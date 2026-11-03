@@ -45,6 +45,17 @@ export interface ScSelectStyles {
   scrollDownButton: string;
 }
 
+/** A pagination's parts that change from style to style. */
+export interface ScPaginationStyles {
+  /** The list of pages. */
+  list: string;
+  ellipsis: string;
+  /** Over the preset's button, on Previous (and First). */
+  previous: string;
+  /** Over the preset's button, on Next (and Last). */
+  next: string;
+}
+
 /** A preset: the components' classes in one of shadcn's styles. */
 export interface ScPreset {
   button: (props: {
@@ -64,5 +75,6 @@ export interface ScPreset {
   /** Over the preset's button, in an input group. */
   inputGroupButton: (props: { size?: ScInputGroupButtonSize | null }) => string;
   inputGroupText: string;
+  pagination: ScPaginationStyles;
   select: ScSelectStyles;
 }

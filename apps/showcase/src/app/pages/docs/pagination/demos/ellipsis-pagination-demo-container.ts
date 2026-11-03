@@ -7,9 +7,9 @@ import { EllipsisPaginationDemo } from './ellipsis-pagination-demo';
   imports: [DemoContainer, EllipsisPaginationDemo],
   template: `
     <app-demo-container
-      title="With Ellipsis"
-      [code]="code"
+      title="Ellipsis"
       demoUrl="/demos/pagination/ellipsis-pagination-demo"
+      [code]="code"
     >
       <app-ellipsis-pagination-demo />
     </app-demo-container>
@@ -18,10 +18,9 @@ import { EllipsisPaginationDemo } from './ellipsis-pagination-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class EllipsisPaginationDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScPagination,
-  ScPaginationChange,
   ScPaginationEllipsis,
   ScPaginationItem,
   ScPaginationLink,
@@ -35,14 +34,15 @@ import {
   SiEllipsisIcon,
 } from '@semantic-icons/lucide-icons';
 
+/** Many pages: the first, the last, those round the current one, and ellipses. */
 @Component({
   selector: 'app-ellipsis-pagination-demo',
   imports: [
     ScPagination,
-    ScPaginationList,
     ScPaginationEllipsis,
     ScPaginationItem,
     ScPaginationLink,
+    ScPaginationList,
     ScPaginationNext,
     ScPaginationPrevious,
     SiChevronLeftIcon,
@@ -52,38 +52,36 @@ import {
   template: \`
     <nav
       scPagination
-      aria-label="Ellipsis pagination"
+      aria-label="Results"
       #pagination="scPagination"
-      [currentPage]="currentPage()"
-      [totalItems]="100"
+      [totalItems]="200"
       [pageSize]="10"
-      (change)="onPaginationChange($event)"
+      [currentPage]="5"
     >
       <ul scPaginationList>
         <li scPaginationItem>
-          <button scPaginationPrevious aria-label="Go to previous page">
-            <svg siChevronLeftIcon></svg>
-            <span>Previous</span>
+          <button scPaginationPrevious>
+            <svg siChevronLeftIcon data-icon="inline-start"></svg>
+            <span class="sr-only sm:not-sr-only">Previous</span>
           </button>
         </li>
-        @for (page of pagination.pages(); track page.value) {
+        @for (item of pagination.pages(); track item.value) {
           <li scPaginationItem>
-            @if (page.type === 'ellipsis') {
+            @if (item.type === 'ellipsis') {
               <span scPaginationEllipsis>
                 <svg siEllipsisIcon></svg>
-                <span class="sr-only">More pages</span>
               </span>
             } @else {
-              <button scPaginationLink [page]="page.value">
-                {{ page.value }}
+              <button scPaginationLink [page]="item.value">
+                {{ item.value }}
               </button>
             }
           </li>
         }
         <li scPaginationItem>
-          <button scPaginationNext aria-label="Go to next page">
-            <span>Next</span>
-            <svg siChevronRightIcon></svg>
+          <button scPaginationNext>
+            <span class="sr-only sm:not-sr-only">Next</span>
+            <svg siChevronRightIcon data-icon="inline-end"></svg>
           </button>
         </li>
       </ul>
@@ -92,11 +90,5 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class EllipsisPaginationDemo {
-  readonly currentPage = signal(1);
-
-  onPaginationChange(event: ScPaginationChange): void {
-    this.currentPage.set(event.page);
-  }
-}`;
+export class EllipsisPaginationDemo {}`;
 }

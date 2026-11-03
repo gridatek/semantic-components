@@ -41,7 +41,8 @@ test.describe('Featured Data Table Demo', () => {
     await expect(page.locator('tbody tr').first()).toContainText(
       'Diana Miller',
     );
-    await page.getByLabel('Rows per page').selectOption('10');
+    await page.getByRole('combobox', { name: 'Rows per page' }).click();
+    await page.getByRole('option', { name: '10', exact: true }).click();
     await expect(page.getByText('Page 1 of 2')).toBeVisible();
     await expect(page.locator('tbody tr')).toHaveCount(10);
   });

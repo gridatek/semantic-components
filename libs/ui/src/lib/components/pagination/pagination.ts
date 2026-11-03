@@ -30,7 +30,6 @@ export class ScPagination {
   readonly currentPageInput = input<number>(1, { alias: 'currentPage' });
   readonly pageSizeInput = input<number>(10, { alias: 'pageSize' });
   readonly totalItems = input<number>(0);
-  readonly pageSizes = input<number[]>([10, 25, 50, 100]); // Available page size options
 
   // Internal state (synced from inputs, writable for programmatic updates)
   readonly currentPage = linkedSignal(() => this.currentPageInput());
@@ -71,7 +70,8 @@ export class ScPagination {
   }
 
   /**
-   * Change the page size. Called internally by ScPaginationPageSizeSelect.
+   * Changes the page size and goes back to page 1 — from a page-size picker
+   * of yours (a Select: `(valueChange)="pagination.changePageSize(+$event)"`).
    * @param newPageSize The new page size
    */
   changePageSize(newPageSize: number): void {
