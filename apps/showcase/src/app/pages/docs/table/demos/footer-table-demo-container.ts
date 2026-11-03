@@ -7,7 +7,7 @@ import { FooterTableDemo } from './footer-table-demo';
   imports: [DemoContainer, FooterTableDemo],
   template: `
     <app-demo-container
-      title="With Footer"
+      title="Footer"
       demoUrl="/demos/table/footer-table-demo"
       [code]="code"
     >
@@ -17,7 +17,7 @@ import { FooterTableDemo } from './footer-table-demo';
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export default class FooterTableDemoContainer {
+export class FooterTableDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScTable,
@@ -44,13 +44,13 @@ import {
   ],
   template: \`
     <div scTableContainer>
-      <table scTable class="w-full max-w-2xl">
+      <table scTable>
         <thead scTableHeader>
           <tr scTableRow>
-            <th scTableHeaderCell class="w-[100px]">Invoice</th>
+            <th scTableHeaderCell class="w-24">Invoice</th>
             <th scTableHeaderCell>Status</th>
             <th scTableHeaderCell>Method</th>
-            <th scTableHeaderCell class="text-right">Amount</th>
+            <th scTableHeaderCell class="text-end">Amount</th>
           </tr>
         </thead>
         <tbody scTableBody>
@@ -58,25 +58,25 @@ import {
             <td scTableCell class="font-medium">INV001</td>
             <td scTableCell>Paid</td>
             <td scTableCell>Credit Card</td>
-            <td scTableCell class="text-right">$250.00</td>
+            <td scTableCell class="text-end">$250.00</td>
           </tr>
           <tr scTableRow>
             <td scTableCell class="font-medium">INV002</td>
             <td scTableCell>Pending</td>
             <td scTableCell>PayPal</td>
-            <td scTableCell class="text-right">$150.00</td>
+            <td scTableCell class="text-end">$150.00</td>
           </tr>
           <tr scTableRow>
             <td scTableCell class="font-medium">INV003</td>
             <td scTableCell>Paid</td>
             <td scTableCell>Bank Transfer</td>
-            <td scTableCell class="text-right">$350.00</td>
+            <td scTableCell class="text-end">$350.00</td>
           </tr>
         </tbody>
         <tfoot scTableFooter>
           <tr scTableRow>
             <td scTableCell colspan="3">Total</td>
-            <td scTableCell class="text-right">$750.00</td>
+            <td scTableCell class="text-end">$750.00</td>
           </tr>
         </tfoot>
       </table>

@@ -10,7 +10,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: 'div[scTableContainer]',
   host: {
-    'data-slot': 'table-container',
     '[class]': 'class()',
   },
 })

@@ -10,6 +10,7 @@ import {
 } from './input-group';
 import { pagination } from './pagination';
 import { select } from './select';
+import { table } from './table';
 
 /** The nova preset: `provideScConfig({ preset: nova })`. */
 export const nova: ScPreset = {
@@ -23,4 +24,5 @@ export const nova: ScPreset = {
   inputGroupText,
   pagination,
   select,
+  table,
 };

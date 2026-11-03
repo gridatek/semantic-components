@@ -10,6 +10,7 @@ import {
 } from './input-group';
 import { pagination } from './pagination';
 import { select } from './select';
+import { table } from './table';
 
 /** The rhea preset: `provideScConfig({ preset: rhea })`. */
 export const rhea: ScPreset = {
@@ -23,4 +24,5 @@ export const rhea: ScPreset = {
   inputGroupText,
   pagination,
   select,
+  table,
 };

@@ -4051,24 +4051,10 @@ export const demosRoutes: Route[] = [
     path: 'demos/table',
     children: [
       {
-        path: 'basic-table-demo',
+        path: 'table-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/table/demos/basic-table-demo').then(
-            (m) => m.BasicTableDemo,
-          ),
-      },
-      {
-        path: 'caption-table-demo',
-        loadComponent: () =>
-          import('../pages/docs/table/demos/caption-table-demo').then(
-            (m) => m.CaptionTableDemo,
-          ),
-      },
-      {
-        path: 'users-table-demo',
-        loadComponent: () =>
-          import('../pages/docs/table/demos/users-table-demo').then(
-            (m) => m.UsersTableDemo,
+          import('../pages/docs/table/demos/table-usage-demo').then(
+            (m) => m.TableUsageDemo,
           ),
       },
       {
@@ -4076,6 +4062,20 @@ export const demosRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/table/demos/footer-table-demo').then(
             (m) => m.FooterTableDemo,
+          ),
+      },
+      {
+        path: 'scrolling-table-demo',
+        loadComponent: () =>
+          import('../pages/docs/table/demos/scrolling-table-demo').then(
+            (m) => m.ScrollingTableDemo,
+          ),
+      },
+      {
+        path: 'rtl-table-demo',
+        loadComponent: () =>
+          import('../pages/docs/table/demos/rtl-table-demo').then(
+            (m) => m.RtlTableDemo,
           ),
       },
     ],

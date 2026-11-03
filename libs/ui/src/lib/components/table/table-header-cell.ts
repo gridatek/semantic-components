@@ -1,4 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 
 @Directive({
@@ -8,12 +9,11 @@ import { cn } from '../../utils';
   },
 })
 export class ScTableHeaderCell {
+  private readonly styles = injectPreset().table;
+
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn(
-      'text-foreground h-10 px-2 text-start align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pe-0',
-      this.classInput(),
-    ),
+    cn(this.styles.headerCell, this.classInput()),
   );
 }

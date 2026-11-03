@@ -1,156 +1,64 @@
 # Table
 
-A set of directives for building accessible, styled data tables using native HTML table elements.
+A table of data: the native table elements, in the look of the app's preset. For sorting, filtering, selection and pages, use a Data Table.
 
 ## Usage
-
-```typescript
-import { ScTable, ScTableBody, ScTableCaption, ScTableCell, ScTableContainer, ScTableFooter, ScTableHeader, ScTableHeaderCell, ScTableRow } from '@semantic-components/ui';
-```
 
 ```html
 <div scTableContainer>
   <table scTable>
     <caption scTableCaption>
-      A list of recent invoices.
+      A list of your recent invoices.
     </caption>
     <thead scTableHeader>
       <tr scTableRow>
         <th scTableHeaderCell>Invoice</th>
-        <th scTableHeaderCell>Status</th>
-        <th scTableHeaderCell>Amount</th>
+        <th scTableHeaderCell class="text-end">Amount</th>
       </tr>
     </thead>
     <tbody scTableBody>
+      @for (invoice of invoices; track invoice.id) {
       <tr scTableRow>
-        <td scTableCell>INV-001</td>
-        <td scTableCell>Paid</td>
-        <td scTableCell>$250.00</td>
+        <td scTableCell>{{ invoice.id }}</td>
+        <td scTableCell class="text-end">{{ invoice.amount }}</td>
       </tr>
+      }
     </tbody>
     <tfoot scTableFooter>
       <tr scTableRow>
-        <td scTableCell colspan="2">Total</td>
-        <td scTableCell>$250.00</td>
+        <td scTableCell>Total</td>
+        <td scTableCell class="text-end">$2,500.00</td>
       </tr>
     </tfoot>
   </table>
 </div>
 ```
 
-## Components
+## Anatomy
 
-All directives accept a `class` input for merging additional CSS classes via the `cn` utility.
+shadcn's parts, each a directive on the native element, so the table stays a table to screen readers. shadcn's `Table` renders its scrolling wrapper itself; here it is a part of its own (`scTableContainer`), since a directive on `table` cannot add one.
 
-### ScTable
+- The caption names the table; header cells name their columns (`scope="row"` for a row's).
+- The container scrolls a wide table sideways instead of the page. When it may scroll, make it focusable and name it (`tabindex="0" role="region" aria-label="…"`) so the keyboard reaches what is hidden.
+- A row is highlighted on hover, while it holds an expanded control (`aria-expanded`, an open menu) and with `data-state="selected"`.
+- Align numbers with `text-end`: it follows the reading direction.
 
-| Property        | Details                         |
-| --------------- | ------------------------------- |
-| Selector        | `table[scTable]`                |
-| Default classes | `w-full caption-bottom text-sm` |
+## API reference
 
-### ScTableContainer
+Each part takes `class`, merged over the preset.
 
-| Property        | Details                           |
-| --------------- | --------------------------------- |
-| Selector        | `div[scTableContainer]`           |
-| Default classes | `relative w-full overflow-x-auto` |
+| Part                | Selector                  | Description                                                                |
+| ------------------- | ------------------------- | -------------------------------------------------------------------------- |
+| `ScTableContainer`  | `div[scTableContainer]`   | Scrolls a wide table sideways.                                             |
+| `ScTable`           | `table[scTable]`          | Full width; its text size from the preset.                                 |
+| `ScTableCaption`    | `caption[scTableCaption]` | Names the table; shown below it.                                           |
+| `ScTableHeader`     | `thead[scTableHeader]`    | The header rows, a line below.                                             |
+| `ScTableBody`       | `tbody[scTableBody]`      | The rows; no line below the last.                                          |
+| `ScTableFooter`     | `tfoot[scTableFooter]`    | Totals: muted, a line above.                                               |
+| `ScTableRow`        | `tr[scTableRow]`          | A line below; highlighted on hover, with an expanded control, or selected. |
+| `ScTableHeaderCell` | `th[scTableHeaderCell]`   | Names its column.                                                          |
+| `ScTableCell`       | `td[scTableCell]`         | A cell; no padding at the end beside a checkbox.                           |
 
-Wraps the table so it scrolls horizontally rather than widening its parent.
+## Styles
 
-### ScTableHeader
-
-| Property        | Details                |
-| --------------- | ---------------------- |
-| Selector        | `thead[scTableHeader]` |
-| Default classes | `[&_tr]:border-b`      |
-
-### ScTableBody
-
-| Property        | Details                      |
-| --------------- | ---------------------------- |
-| Selector        | `tbody[scTableBody]`         |
-| Default classes | `[&_tr:last-child]:border-0` |
-
-### ScTableFooter
-
-| Property        | Details                                                   |
-| --------------- | --------------------------------------------------------- |
-| Selector        | `tfoot[scTableFooter]`                                    |
-| Default classes | `border-t bg-muted/50 font-medium [&>tr]:last:border-b-0` |
-
-### ScTableRow
-
-| Property        | Details                                                                       |
-| --------------- | ----------------------------------------------------------------------------- |
-| Selector        | `tr[scTableRow]`                                                              |
-| Default classes | `border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted` |
-
-Rows support a `data-state="selected"` attribute for highlighting selected rows.
-
-### ScTableHeaderCell
-
-| Property        | Details                                                                                            |
-| --------------- | -------------------------------------------------------------------------------------------------- |
-| Selector        | `th[scTableHeaderCell]`                                                                            |
-| Default classes | `h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0` |
-
-### ScTableCell
-
-| Property        | Details                                          |
-| --------------- | ------------------------------------------------ |
-| Selector        | `td[scTableCell]`                                |
-| Default classes | `p-4 align-middle [&:has([role=checkbox])]:pr-0` |
-
-### ScTableCaption
-
-| Property        | Details                              |
-| --------------- | ------------------------------------ |
-| Selector        | `caption[scTableCaption]`            |
-| Default classes | `mt-4 text-sm text-muted-foreground` |
-
-## Examples
-
-### Selected row
-
-Add `data-state="selected"` to a row to apply the selected background:
-
-```html
-<tr scTableRow data-state="selected">
-  <td scTableCell>Selected item</td>
-</tr>
-```
-
-### Row with checkbox
-
-Cells containing a checkbox automatically reduce right padding:
-
-```html
-<tr scTableRow>
-  <td scTableCell>
-    <input type="checkbox" role="checkbox" />
-  </td>
-  <td scTableCell>Row content</td>
-</tr>
-```
-
-### Custom class overrides
-
-Pass additional classes via the `class` input:
-
-```html
-<table scTable class="rounded-md border">
-  <tbody scTableBody>
-    <tr scTableRow class="bg-accent">
-      <td scTableCell class="font-bold">Custom styled cell</td>
-    </tr>
-  </tbody>
-</table>
-```
-
-## Accessibility
-
-- Uses native HTML table elements (`<table>`, `<thead>`, `<tbody>`, `<tfoot>`, `<tr>`, `<th>`, `<td>`, `<caption>`), which provide built-in semantics and screen reader support.
-- Use `<caption scTableCaption>` to provide a visible, accessible description of the table's purpose.
-- Header cells (`<th scTableHeaderCell>`) are automatically associated with their columns by the browser.
-- Use `scope="col"` or `scope="row"` on header cells when the table structure requires disambiguation.
+From the preset (`table`): the table's text size (`text-xs` in lyra and mira), the header cell (taller and wider in maia, luma and sera; small uppercase muted in sera), the cell's padding and the caption. The rest is the same in every style.

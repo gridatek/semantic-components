@@ -10,6 +10,7 @@ import {
 } from './input-group';
 import { pagination } from './pagination';
 import { select } from './select';
+import { table } from './table';
 
 /** The maia preset: `provideScConfig({ preset: maia })`. */
 export const maia: ScPreset = {
@@ -23,4 +24,5 @@ export const maia: ScPreset = {
   inputGroupText,
   pagination,
   select,
+  table,
 };

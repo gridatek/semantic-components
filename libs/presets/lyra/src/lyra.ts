@@ -10,6 +10,7 @@ import {
 } from './input-group';
 import { pagination } from './pagination';
 import { select } from './select';
+import { table } from './table';
 
 /** The lyra preset: `provideScConfig({ preset: lyra })`. */
 export const lyra: ScPreset = {
@@ -23,4 +24,5 @@ export const lyra: ScPreset = {
   inputGroupText,
   pagination,
   select,
+  table,
 };

@@ -10,6 +10,7 @@ import {
 } from './input-group';
 import { pagination } from './pagination';
 import { select } from './select';
+import { table } from './table';
 
 /** The mira preset: `provideScConfig({ preset: mira })`. */
 export const mira: ScPreset = {
@@ -23,4 +24,5 @@ export const mira: ScPreset = {
   inputGroupText,
   pagination,
   select,
+  table,
 };

@@ -10,6 +10,7 @@ import {
 } from './input-group';
 import { pagination } from './pagination';
 import { select } from './select';
+import { table } from './table';
 
 /** The vega preset: `provideScConfig({ preset: vega })`. */
 export const vega: ScPreset = {
@@ -23,4 +24,5 @@ export const vega: ScPreset = {
   inputGroupText,
   pagination,
   select,
+  table,
 };

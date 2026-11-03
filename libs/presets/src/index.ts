@@ -56,6 +56,17 @@ export interface ScPaginationStyles {
   next: string;
 }
 
+/** A table's parts that change from style to style. */
+export interface ScTableStyles {
+  /** The table: its text size. */
+  table: string;
+  /** A header cell (`th`). */
+  headerCell: string;
+  /** A cell (`td`). */
+  cell: string;
+  caption: string;
+}
+
 /** A preset: the components' classes in one of shadcn's styles. */
 export interface ScPreset {
   button: (props: {
@@ -77,4 +88,5 @@ export interface ScPreset {
   inputGroupText: string;
   pagination: ScPaginationStyles;
   select: ScSelectStyles;
+  table: ScTableStyles;
 }

@@ -10,6 +10,7 @@ import {
 } from './input-group';
 import { pagination } from './pagination';
 import { select } from './select';
+import { table } from './table';
 
 /** The sera preset: `provideScConfig({ preset: sera })`. */
 export const sera: ScPreset = {
@@ -23,4 +24,5 @@ export const sera: ScPreset = {
   inputGroupText,
   pagination,
   select,
+  table,
 };

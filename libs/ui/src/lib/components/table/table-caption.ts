@@ -1,4 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 
 @Directive({
@@ -8,9 +9,11 @@ import { cn } from '../../utils';
   },
 })
 export class ScTableCaption {
+  private readonly styles = injectPreset().table;
+
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('mt-4 text-sm text-muted-foreground', this.classInput()),
+    cn(this.styles.caption, this.classInput()),
   );
 }

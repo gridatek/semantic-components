@@ -65,7 +65,6 @@ import {
   ScTableCaption,
   ScTableCell,
   ScTableContainer,
-  ScTableFooter,
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
@@ -75,13 +74,12 @@ import {
   selector: 'app-table-usage-demo',
   imports: [
     ScTable,
-    ScTableContainer,
     ScTableBody,
     ScTableCaption,
     ScTableCell,
-    ScTableFooter,
-    ScTableHeaderCell,
+    ScTableContainer,
     ScTableHeader,
+    ScTableHeaderCell,
     ScTableRow,
   ],
   template: \`
@@ -92,29 +90,52 @@ import {
         </caption>
         <thead scTableHeader>
           <tr scTableRow>
-            <th scTableHeaderCell>Invoice</th>
+            <th scTableHeaderCell class="w-24">Invoice</th>
             <th scTableHeaderCell>Status</th>
-            <th scTableHeaderCell class="text-right">Amount</th>
+            <th scTableHeaderCell>Method</th>
+            <th scTableHeaderCell class="text-end">Amount</th>
           </tr>
         </thead>
         <tbody scTableBody>
-          <tr scTableRow>
-            <td scTableCell>INV001</td>
-            <td scTableCell>Paid</td>
-            <td scTableCell class="text-right">$250.00</td>
-          </tr>
+          @for (invoice of invoices; track invoice.id) {
+            <tr scTableRow>
+              <td scTableCell class="font-medium">{{ invoice.id }}</td>
+              <td scTableCell>{{ invoice.status }}</td>
+              <td scTableCell>{{ invoice.method }}</td>
+              <td scTableCell class="text-end">{{ invoice.amount }}</td>
+            </tr>
+          }
         </tbody>
-        <tfoot scTableFooter>
-          <tr scTableRow>
-            <td scTableCell colspan="2">Total</td>
-            <td scTableCell class="text-right">$250.00</td>
-          </tr>
-        </tfoot>
       </table>
     </div>
   \`,
-  host: { class: 'flex w-full justify-center' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class TableUsageDemo {}`;
+export class TableUsageDemo {
+  protected readonly invoices = [
+    { id: 'INV001', status: 'Paid', method: 'Credit Card', amount: '$250.00' },
+    { id: 'INV002', status: 'Pending', method: 'PayPal', amount: '$150.00' },
+    {
+      id: 'INV003',
+      status: 'Unpaid',
+      method: 'Bank Transfer',
+      amount: '$350.00',
+    },
+    { id: 'INV004', status: 'Paid', method: 'Credit Card', amount: '$450.00' },
+    { id: 'INV005', status: 'Paid', method: 'PayPal', amount: '$550.00' },
+    {
+      id: 'INV006',
+      status: 'Pending',
+      method: 'Bank Transfer',
+      amount: '$200.00',
+    },
+    {
+      id: 'INV007',
+      status: 'Unpaid',
+      method: 'Credit Card',
+      amount: '$550.00',
+    },
+  ];
+}`;
 }

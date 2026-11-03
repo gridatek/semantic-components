@@ -10,6 +10,7 @@ import {
 } from './input-group';
 import { pagination } from './pagination';
 import { select } from './select';
+import { table } from './table';
 
 /** The luma preset: `provideScConfig({ preset: luma })`. */
 export const luma: ScPreset = {
@@ -23,4 +24,5 @@ export const luma: ScPreset = {
   inputGroupText,
   pagination,
   select,
+  table,
 };

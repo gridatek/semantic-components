@@ -145,6 +145,20 @@ Pages of results (`nav[scPagination]`). A shadcn component, but Base UI and Radi
 - **Links follow their `href`** (shadcn, Ark's link type, Mantine, MUI — and Bootstrap's `?page=` links); a button is `type="button"` unless given a type.
 - **Not**: `slice(data)` (`range()` covers it), Mantine's `startValue`, `withPages`, responsive layout; default labels (MUI's "pagination navigation": the text is the consumer's); a page-size part (a Select).
 
+## Table
+
+The native table elements, styled (`table[scTable]`). A shadcn component; Base UI has no table, so shadcn's reference app only (2026-11-04).
+
+| Library                                               | What to read                                                                                                                                                        |
+| ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| shadcn Table (`shadcn-reference/presets/*/table.tsx`) | Parts on the native elements; the table wraps itself in a scrolling container; rows highlighted on hover, `has-aria-expanded`, `data-state="selected"`; eight looks |
+
+**Taken:**
+
+- **The parts and each preset's look** (the table's text size, header cell, cell, caption — the rest is the same in every style); the row's `has-aria-expanded` highlight.
+- **The container as a part of its own** (`scTableContainer`): a directive on `table` can't wrap it. Named and focusable when it scrolls (axe's `scrollable-region-focusable`).
+- **Not**: the Actions example (a row's menu) and anything a Data Table does — sorting, selection, pages are on its page (the user, 2026-11-04).
+
 ## Control Group
 
 An input or a select joined with its buttons (`div[scControlGroup]`): shadcn's Button Group, renamed for what it is for (the user, 2026-10-30: it is only useful when inputs or selects mix with buttons; buttons alone are on the Button page). A shadcn component, so no web research: Base UI and shadcn's reference app (2026-10-30).
