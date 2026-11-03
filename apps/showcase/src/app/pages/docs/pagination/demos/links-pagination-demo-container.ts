@@ -71,7 +71,9 @@ import {
           <a
             scPaginationPrevious
             routerLink="."
-            [queryParams]="{ page: previousPage() }"
+            [queryParams]="{
+              page: pagination.previousPage() ?? pagination.currentPage(),
+            }"
             fragment="links-results"
           >
             <svg siChevronLeftIcon data-icon="inline-start"></svg>
@@ -101,7 +103,9 @@ import {
           <a
             scPaginationNext
             routerLink="."
-            [queryParams]="{ page: nextPage() }"
+            [queryParams]="{
+              page: pagination.nextPage() ?? pagination.currentPage(),
+            }"
             fragment="links-results"
           >
             <span class="sr-only sm:not-sr-only">Next</span>
@@ -117,21 +121,9 @@ import {
 export class LinksPaginationDemo {
   private readonly query = toSignal(inject(ActivatedRoute).queryParamMap);
 
-  private readonly totalPages = 10;
-
-  protected readonly page = computed(() => {
-    const page = Number(this.query()?.get('page') ?? 1);
-    return Number.isInteger(page)
-      ? Math.min(Math.max(page, 1), this.totalPages)
-      : 1;
-  });
-
-  protected readonly previousPage = computed(() =>
-    Math.max(this.page() - 1, 1),
-  );
-
-  protected readonly nextPage = computed(() =>
-    Math.min(this.page() + 1, this.totalPages),
+  // The pagination keeps it in range (?page=99: the last page).
+  protected readonly page = computed(
+    () => Number(this.query()?.get('page')) || 1,
   );
 }`;
 }

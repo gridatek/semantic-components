@@ -51,7 +51,7 @@ shadcn's parts, each a directive on your element; the icons and the text are you
 ```
 
 - Name the navigation (`aria-label`) and every icon-only button (an `sr-only` span).
-- `pages()` gives every page up to 7, then 7 items: the first, the last, the current with its neighbours, and ellipses.
+- `pages()`: the first and the last page (`boundaryCount`), the current one with `siblingCount` pages either side, ellipses between — as many items wherever the current page is (7 by default), all the pages when they fit.
 - The current page is outlined and `aria-current="page"`.
 - Previous and First are disabled on the first page, Next and Last on the last: `aria-disabled`, out of the tab order. A part's `disabled` disables it whatever the page.
 - Use buttons when the page changes in place, links when each page has its own URL. On an `a` the href is yours (`href="?page=2"`, a `routerLink`) and the link follows it; read the page from the URL into `currentPage`. A disabled link goes nowhere on a click but keeps its href: leave it off for one that should not open in a new tab either. A button is `type="button"` unless you give it a `type`: it never submits a form round it by default.
@@ -70,7 +70,7 @@ Not a part: put a Select beside it and call `changePageSize()`, which goes back 
 
 ## Status
 
-`scPaginationStatus` says which page is shown and announces it when it changes (`role="status"`). Its text is yours: `Page {{ pagination.currentPage() }} of {{ pagination.totalPages() }}`, visible or `sr-only`.
+`scPaginationStatus` says which page is shown and announces it when it changes (`role="status"`). Its text is yours: `Page {{ pagination.currentPage() }} of {{ pagination.totalPages() }}`, or the items shown, `{{ pagination.range().start }}–{{ pagination.range().end }} of {{ pagination.totalItems() }}`; visible or `sr-only`.
 
 ## API reference
 
@@ -78,18 +78,28 @@ Not a part: put a Select beside it and call `changePageSize()`, which goes back 
 
 Exported as `scPagination`.
 
-| Input         | Type     | Default | Description                                                        |
-| ------------- | -------- | ------- | ------------------------------------------------------------------ |
-| `totalItems`  | `number` | `0`     | How many items there are.                                          |
-| `pageSize`    | `number` | `10`    | Items per page, at first.                                          |
-| `currentPage` | `number` | `1`     | The page, at first and whenever it changes; kept by it after that. |
-| `class`       | `string` | `''`    | Classes merged over the preset.                                    |
+| Input           | Type     | Default | Description                                     |
+| --------------- | -------- | ------- | ----------------------------------------------- |
+| `totalItems`    | `number` | `0`     | How many items there are.                       |
+| `pageSize`      | `number` | `10`    | Items per page; `[(pageSize)]` two-way.         |
+| `currentPage`   | `number` | `1`     | The page; `[(currentPage)]` two-way.            |
+| `siblingCount`  | `number` | `1`     | Pages shown on each side of the current one.    |
+| `boundaryCount` | `number` | `1`     | Pages always shown at the start and at the end. |
+| `class`         | `string` | `''`    | Classes merged over the preset.                 |
 
-| Output   | Type                                 | Description                        |
-| -------- | ------------------------------------ | ---------------------------------- |
-| `change` | `{ page: number; pageSize: number }` | The page or the page size changed. |
+| Output   | Type                                 | Description                                        |
+| -------- | ------------------------------------ | -------------------------------------------------- |
+| `change` | `{ page: number; pageSize: number }` | The user changed the page or its size: to load it. |
 
-Signals: `currentPage()`, `pageSize()`, `totalPages()`, `pages()`. Methods: `goToPage(page)`, `changePageSize(size)`.
+Signals:
+
+- `currentPage()`: the page, kept between 1 and the last page, even as items go (a filter);
+- `pageSize()`, `totalPages()` (at least 1, with no items too);
+- `previousPage()`, `nextPage()`: the page before and after, `null` at the ends (for links);
+- `range()`: `{ start, end }`, the items shown, counted from 1 (`0`–`0` with none);
+- `pages()`.
+
+Methods: `goToPage(page)` (kept in range), `changePageSize(size)` (back to page 1).
 
 ### ScPaginationLink — `a[scPaginationLink], button[scPaginationLink]`
 

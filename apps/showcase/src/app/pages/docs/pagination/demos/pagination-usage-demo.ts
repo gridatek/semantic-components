@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScPagination,
   ScPaginationItem,
@@ -31,6 +31,7 @@ import {
       #pagination="scPagination"
       [totalItems]="30"
       [pageSize]="10"
+      [(currentPage)]="page"
     >
       <ul scPaginationList>
         <li scPaginationItem>
@@ -58,4 +59,6 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class PaginationUsageDemo {}
+export class PaginationUsageDemo {
+  protected readonly page = signal(1);
+}

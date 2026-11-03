@@ -3173,6 +3173,13 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
+        path: 'siblings-pagination-demo',
+        loadComponent: () =>
+          import('../pages/docs/pagination/demos/siblings-pagination-demo').then(
+            (m) => m.SiblingsPaginationDemo,
+          ),
+      },
+      {
         path: 'first-last-pagination-demo',
         loadComponent: () =>
           import('../pages/docs/pagination/demos/first-last-pagination-demo').then(

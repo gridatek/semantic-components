@@ -124,6 +124,27 @@ A choice among a short list (`div[scSelect]`). A shadcn component: Base UI's Sel
 - **The parts, the label and the scroll buttons**, as Base UI's; **the list below the trigger, as wide as it** (Radix's `popper`: the user wants the trigger in sight).
 - **Not**: the list over the trigger (Base UI's `alignItemWithTrigger`, Radix's `item-aligned` — removed, 2026-11-03: "no more maintenance"), several values (our Multiselect), object values (a string, as Signal Forms binds it), Backdrop and Arrow (shadcn uses neither).
 
+## Pagination
+
+Pages of results (`nav[scPagination]`). A shadcn component, but Base UI and Radix have none, so compared on the web too, at the user's request (2026-11-03).
+
+| Library                                                            | What to read                                                                                                                                                                                            |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| shadcn Pagination (`shadcn-reference/presets/*/pagination.tsx`)    | Parts (Content, Item, Link, Previous, Next, Ellipsis): plain `a`s with your `href`, `aria-current="page"`, ellipsis `aria-hidden`; text hidden on phones; eight looks                                   |
+| [Ark UI Pagination](https://ark-ui.com/docs/components/pagination) | `count`, `pageSize`, `page` (controlled or not), `siblingCount`, `boundaryCount`, `type: 'link'` with `getPageUrl`; context `previousPage`, `nextPage` (null at the ends), `pageRange`, `slice(data)`   |
+| [Mantine Pagination](https://mantine.dev/core/pagination/)         | `siblings`, `boundaries`, `withEdges` (first, last); `getItemProps` / `getControlProps` for links; a responsive "Page X of Y" label                                                                     |
+| [MUI Pagination](https://mui.com/material-ui/react-pagination/)    | `siblingCount`, `boundaryCount` (1 and 1: `1 … 5 6 7 … 11`, as many items wherever the page is); first/last buttons; router links through `renderItem`; `TablePagination` for rows per page and a range |
+
+**Taken:**
+
+- **shadcn's parts and look**; First, Last and a Status as Ark's and Mantine's.
+- **`siblingCount`, `boundaryCount`** (all three), with MUI's algorithm: the count of items stays the same as the page moves.
+- **`previousPage()`, `nextPage()`, `range()`** (Ark's context and `pageRange`): links' hrefs, "Showing 11–20 of 100".
+- **Two-way `[(currentPage)]`, `[(pageSize)]`** (Ark's controlled `page`), as `model()`; `change` stays, the one event for loading a page.
+- **Kept in range**: at least one page, the current page never past the last one (MUI and Ark).
+- **Links follow their `href`** (shadcn, Ark's link type, Mantine, MUI — and Bootstrap's `?page=` links); a button is `type="button"` unless given a type.
+- **Not**: `slice(data)` (`range()` covers it), Mantine's `startValue`, `withPages`, responsive layout; default labels (MUI's "pagination navigation": the text is the consumer's); a page-size part (a Select).
+
 ## Control Group
 
 An input or a select joined with its buttons (`div[scControlGroup]`): shadcn's Button Group, renamed for what it is for (the user, 2026-10-30: it is only useful when inputs or selects mix with buttons; buttons alone are on the Button page). A shadcn component, so no web research: Base UI and shadcn's reference app (2026-10-30).

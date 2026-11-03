@@ -68,20 +68,20 @@ test('Keyboard: Tab through the buttons, a disabled one skipped; Enter goes', as
   await expect(button('2')).toHaveAttribute('aria-current', 'page');
 });
 
-test('Icons Only: named by sr-only text; rows per page from a Select, back to page 1', async ({
+test('Icons Only: named by sr-only text; the items shown; rows per page from a Select, back to page 1', async ({
   page,
 }) => {
   await page.goto(demo('icons-only'));
   const nav = page.getByRole('navigation', { name: 'Results' });
   const status = nav.getByRole('status');
-  await expect(status).toHaveText('Page 1 of 10');
+  await expect(status).toHaveText('1–25 of 230');
 
   await nav.getByRole('button', { name: 'Next' }).click();
-  await expect(status).toHaveText('Page 2 of 10');
+  await expect(status).toHaveText('26–50 of 230');
 
   await page.getByRole('combobox', { name: 'Rows per page' }).click();
   await page.getByRole('option', { name: '100', exact: true }).click();
-  await expect(status).toHaveText('Page 1 of 3');
+  await expect(status).toHaveText('1–100 of 230');
   await expect(
     page.getByRole('combobox', { name: 'Rows per page' }),
   ).toHaveText('100');
@@ -103,6 +103,26 @@ test('Ellipsis: the first, the last, the current with its neighbours; ellipses h
   await nav.getByRole('button', { name: '20', exact: true }).click();
   await expect(pages).toHaveText(['1', '16', '17', '18', '19', '20']);
   await expect(ellipses).toHaveCount(1);
+});
+
+test('Siblings: two pages either side of the current one', async ({ page }) => {
+  await page.goto(demo('siblings'));
+  const nav = page.getByRole('navigation', { name: 'Results' });
+  const pages = nav.locator('[scPaginationLink]');
+  await expect(pages).toHaveText(['1', '8', '9', '10', '11', '12', '20']);
+  await nav.getByRole('button', { name: '20', exact: true }).click();
+  // As many items at the end: 9.
+  await expect(pages).toHaveText([
+    '1',
+    '14',
+    '15',
+    '16',
+    '17',
+    '18',
+    '19',
+    '20',
+  ]);
+  await expect(nav.locator('[scPaginationEllipsis]')).toHaveCount(1);
 });
 
 test('First and Last: jump to the ends, each disabled there; the status follows', async ({
@@ -149,7 +169,8 @@ test('Links: each follows its own href; the page read from the URL', async ({
   await expect(link('3')).toHaveAttribute('aria-current', 'page');
 
   // Opened at a page's URL: that page is current.
-  await page.goto(`${demo('links')}?page=10`);
+  // Past the last page: kept to the last.
+  await page.goto(`${demo('links')}?page=99`);
   await expect(link('10')).toHaveAttribute('aria-current', 'page');
   await expectLooksDisabled(link('Next'));
 });
@@ -193,6 +214,7 @@ test('On a phone: the demos fit, every target 24px @mobile', async ({
     'simple',
     'icons-only',
     'ellipsis',
+    'siblings',
     'first-last',
     'links',
     'disabled',

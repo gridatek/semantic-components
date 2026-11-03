@@ -48,7 +48,7 @@ export class ScPaginationPrevious {
   protected readonly disabled = computed(() => {
     if (this.disabledInput()) return true;
     if (this.pagination) {
-      return this.pagination.currentPage() === 1;
+      return this.pagination.previousPage() === null;
     }
     return false;
   });

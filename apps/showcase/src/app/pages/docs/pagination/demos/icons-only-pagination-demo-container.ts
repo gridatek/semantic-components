@@ -46,7 +46,10 @@ import {
   SiChevronRightIcon,
 } from '@semantic-icons/lucide-icons';
 
-/** Rows per page from a Select, the pages by Previous and Next only. */
+/**
+ * Rows per page from a Select, the items shown from range(), the pages by
+ * Previous and Next only.
+ */
 @Component({
   selector: 'app-icons-only-pagination-demo',
   imports: [
@@ -110,7 +113,8 @@ import {
       </div>
       <div class="flex items-center gap-2">
         <p scPaginationStatus>
-          Page {{ pagination.currentPage() }} of {{ pagination.totalPages() }}
+          {{ pagination.range().start }}–{{ pagination.range().end }} of
+          {{ pagination.totalItems() }}
         </p>
         <ul scPaginationList>
           <li scPaginationItem>

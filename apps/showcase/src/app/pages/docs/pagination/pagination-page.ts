@@ -19,6 +19,7 @@ import { IconsOnlyPaginationDemoContainer } from './demos/icons-only-pagination-
 import { LinksPaginationDemoContainer } from './demos/links-pagination-demo-container';
 import { PaginationUsageDemoContainer } from './demos/pagination-usage-demo-container';
 import { RtlPaginationDemoContainer } from './demos/rtl-pagination-demo-container';
+import { SiblingsPaginationDemoContainer } from './demos/siblings-pagination-demo-container';
 import { SimplePaginationDemoContainer } from './demos/simple-pagination-demo-container';
 
 interface ScApiRow {
@@ -36,6 +37,7 @@ interface ScApiRow {
     SimplePaginationDemoContainer,
     IconsOnlyPaginationDemoContainer,
     EllipsisPaginationDemoContainer,
+    SiblingsPaginationDemoContainer,
     FirstLastPaginationDemoContainer,
     LinksPaginationDemoContainer,
     DisabledPaginationDemoContainer,
@@ -78,7 +80,9 @@ interface ScApiRow {
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">sr-only</code>
           span. The pages come from
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">pages()</code>
-          (all of them up to 7, then 7 with ellipses); the current one is marked
+          (the first and the last, the current one with a page either side,
+          ellipses between; as many items wherever the current page is); the
+          current one is marked
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
             >aria-current="page"</code
           >.
@@ -111,6 +115,7 @@ interface ScApiRow {
         <app-simple-pagination-demo-container />
         <app-icons-only-pagination-demo-container />
         <app-ellipsis-pagination-demo-container />
+        <app-siblings-pagination-demo-container />
         <app-first-last-pagination-demo-container />
         <app-links-pagination-demo-container />
         <app-disabled-pagination-demo-container />
@@ -250,7 +255,7 @@ export default class PaginationPage {
       name: 'ScPagination',
       selector: 'nav[scPagination], div[scPagination]',
       description:
-        'The navigation; holds the page (currentPage(), pageSize(), totalPages(), pages()) and emits change. Methods: goToPage(page), changePageSize(size), which goes back to page 1. Exported as scPagination.',
+        'The navigation; exported as scPagination. It reads currentPage() (kept between 1 and the last page, even as items go), pageSize(), totalPages() (at least 1), previousPage() and nextPage() (null at the ends), range() (the items shown: { start, end }) and pages(). Methods: goToPage(page), changePageSize(size), which goes back to page 1. Output change ({ page, pageSize }): the user changed one, to load that page.',
       inputs: [
         {
           name: 'totalItems',
@@ -263,14 +268,25 @@ export default class PaginationPage {
           name: 'pageSize',
           type: 'number',
           default: '10',
-          description: 'Items per page, at first.',
+          description: 'Items per page; [(pageSize)] two-way.',
         },
         {
           name: 'currentPage',
           type: 'number',
           default: '1',
-          description:
-            'The page, at first and whenever it changes; the pagination keeps it after that.',
+          description: 'The page; [(currentPage)] two-way.',
+        },
+        {
+          name: 'siblingCount',
+          type: 'number',
+          default: '1',
+          description: 'Pages shown on each side of the current one.',
+        },
+        {
+          name: 'boundaryCount',
+          type: 'number',
+          default: '1',
+          description: 'Pages always shown at the start and at the end.',
         },
         this.classRow,
       ],

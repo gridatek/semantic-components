@@ -1,4 +1,11 @@
-import { DestroyRef, Directive, computed, inject, input } from '@angular/core';
+import {
+  DestroyRef,
+  Directive,
+  computed,
+  effect,
+  inject,
+  input,
+} from '@angular/core';
 import { ScPagination, bindInput, cn } from '@semantic-components/ui';
 import type { ScDataTablePaginationTable } from './data-table-types';
 
@@ -27,14 +34,9 @@ export class ScDataTablePagination {
 
   constructor() {
     const pagination = inject(ScPagination, { self: true });
-    bindInput(
-      pagination.currentPageInput,
-      computed(() => this.state().pageIndex + 1),
-    );
-    bindInput(
-      pagination.pageSizeInput,
-      computed(() => this.state().pageSize),
-    );
+    // The table's page and size, into the pagination's models.
+    effect(() => pagination.currentPageModel.set(this.state().pageIndex + 1));
+    effect(() => pagination.pageSizeModel.set(this.state().pageSize));
     bindInput(
       pagination.totalItems,
       computed(() => this.table().getRowCount()),

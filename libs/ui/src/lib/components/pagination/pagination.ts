@@ -1,18 +1,19 @@
-import {
-  Directive,
-  computed,
-  input,
-  linkedSignal,
-  output,
-} from '@angular/core';
+import { Directive, computed, input, model, output } from '@angular/core';
 import { cn } from '../../utils';
 
 export type ScPaginationPage =
-  { type: 'page'; value: number } | { type: 'ellipsis'; value: string };
+  | { type: 'page'; value: number }
+  | { type: 'ellipsis'; value: 'ellipsis-start' | 'ellipsis-end' };
 
 export interface ScPaginationChange {
   page: number;
   pageSize: number;
+}
+
+/** The items on the current page, counted from 1: `start` to `end`. */
+export interface ScPaginationRange {
+  start: number;
+  end: number;
 }
 
 @Directive({
@@ -26,139 +27,135 @@ export interface ScPaginationChange {
 export class ScPagination {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  // Smart pagination inputs
-  readonly currentPageInput = input<number>(1, { alias: 'currentPage' });
-  readonly pageSizeInput = input<number>(10, { alias: 'pageSize' });
+  /** `[(currentPage)]`: the page asked for; read `currentPage()`, kept in range. */
+  readonly currentPageModel = model(1, { alias: 'currentPage' });
+  /** `[(pageSize)]`: items per page. */
+  readonly pageSizeModel = model(10, { alias: 'pageSize' });
   readonly totalItems = input<number>(0);
+  /** Pages shown on each side of the current one. */
+  readonly siblingCount = input<number>(1);
+  /** Pages always shown at the start and at the end. */
+  readonly boundaryCount = input<number>(1);
 
-  // Internal state (synced from inputs, writable for programmatic updates)
-  readonly currentPage = linkedSignal(() => this.currentPageInput());
-  readonly pageSize = linkedSignal(() => this.pageSizeInput());
-
-  // Output events
+  /** A page or its size changed by the user: to load that page. */
   readonly change = output<ScPaginationChange>();
 
   protected readonly class = computed(() =>
     cn('mx-auto flex w-full justify-center', this.classInput()),
   );
 
-  // Computed total pages
-  readonly totalPages = computed(() => {
+  readonly pageSize = computed(() => Math.max(1, this.pageSizeModel()));
+
+  /** At least 1: with no items there is still a (empty) first page. */
+  readonly totalPages = computed(() =>
+    Math.max(1, Math.ceil(this.totalItems() / this.pageSize())),
+  );
+
+  /** The current page, between 1 and the last page, even as items go. */
+  readonly currentPage = computed(() =>
+    Math.min(
+      Math.max(1, Math.trunc(this.currentPageModel())),
+      this.totalPages(),
+    ),
+  );
+
+  /** The page before, or null on the first. */
+  readonly previousPage = computed(() =>
+    this.currentPage() > 1 ? this.currentPage() - 1 : null,
+  );
+
+  /** The page after, or null on the last. */
+  readonly nextPage = computed(() =>
+    this.currentPage() < this.totalPages() ? this.currentPage() + 1 : null,
+  );
+
+  /** The items on this page, for "Showing 11–20 of 100"; 0–0 with none. */
+  readonly range = computed<ScPaginationRange>(() => {
     const total = this.totalItems();
-    const size = this.pageSize();
-    return Math.ceil(total / size);
+    if (total <= 0) return { start: 0, end: 0 };
+    const start = (this.currentPage() - 1) * this.pageSize() + 1;
+    return { start, end: Math.min(start + this.pageSize() - 1, total) };
   });
 
-  // Computed pages array for rendering
-  readonly pages = computed(() => {
-    const current = this.currentPage();
-    const total = this.totalPages();
+  /** The pages to show, with ellipses: always as many items once there are more pages. */
+  readonly pages = computed(() =>
+    pageItems(
+      this.currentPage(),
+      this.totalPages(),
+      Math.max(0, this.siblingCount()),
+      Math.max(0, this.boundaryCount()),
+    ),
+  );
 
-    return this.generatePageNumbers(current, total);
-  });
-
-  /**
-   * Trigger a page change. Called internally by child components.
-   * @param page The target page number
-   */
+  /** Goes to a page (kept in range) and emits `change`. */
   goToPage(page: number): void {
-    const total = this.totalPages();
-    if (page >= 1 && page <= total && page !== this.currentPage()) {
-      this.currentPage.set(page);
-      this.change.emit({ page, pageSize: this.pageSize() });
-    }
+    const target = Math.min(Math.max(1, page), this.totalPages());
+    if (target === this.currentPage()) return;
+    this.currentPageModel.set(target);
+    this.change.emit({ page: target, pageSize: this.pageSize() });
   }
 
   /**
    * Changes the page size and goes back to page 1 — from a page-size picker
    * of yours (a Select: `(valueChange)="pagination.changePageSize(+$event)"`).
-   * @param newPageSize The new page size
    */
-  changePageSize(newPageSize: number): void {
-    if (newPageSize > 0 && newPageSize !== this.pageSize()) {
-      // Reset to page 1 when page size changes
-      this.currentPage.set(1);
-      this.pageSize.set(newPageSize);
-      this.change.emit({ page: 1, pageSize: newPageSize });
-    }
+  changePageSize(pageSize: number): void {
+    if (pageSize <= 0 || pageSize === this.pageSize()) return;
+    this.pageSizeModel.set(pageSize);
+    this.currentPageModel.set(1);
+    this.change.emit({ page: 1, pageSize });
+  }
+}
+
+/**
+ * The pages round the current one, with ellipses: the boundaries at each
+ * end, the siblings either side of the current page. The count of items
+ * stays the same as the page moves (an ellipsis stands for two pages or
+ * more; a single gap shows the page instead).
+ */
+function pageItems(
+  page: number,
+  total: number,
+  siblings: number,
+  boundaries: number,
+): ScPaginationPage[] {
+  const range = (from: number, to: number) =>
+    Array.from({ length: Math.max(0, to - from + 1) }, (_, i) => from + i);
+
+  const start = range(1, Math.min(boundaries, total));
+  const end = range(Math.max(total - boundaries + 1, boundaries + 1), total);
+
+  const siblingsStart = Math.max(
+    Math.min(page - siblings, total - boundaries - siblings * 2 - 1),
+    boundaries + 2,
+  );
+  const siblingsEnd = Math.min(
+    Math.max(page + siblings, boundaries + siblings * 2 + 2),
+    end.length > 0 ? end[0] - 2 : total - 1,
+  );
+
+  const items: ScPaginationPage[] = start.map((value) => ({
+    type: 'page',
+    value,
+  }));
+
+  if (siblingsStart > boundaries + 2) {
+    items.push({ type: 'ellipsis', value: 'ellipsis-start' });
+  } else if (boundaries + 1 < total - boundaries) {
+    items.push({ type: 'page', value: boundaries + 1 });
   }
 
-  private generatePageNumbers(
-    currentPage: number,
-    totalPages: number,
-  ): ScPaginationPage[] {
-    const siblingCount = 1;
-    // If total pages is less than or equal to 7, show all pages
-    if (totalPages <= 7) {
-      return Array.from({ length: totalPages }, (_, i) => ({
-        type: 'page' as const,
-        value: i + 1,
-      }));
-    }
-
-    // For more than 7 pages, always return exactly 7 items
-    const pages: ScPaginationPage[] = [];
-
-    // First page
-    pages.push({ type: 'page', value: 1 });
-
-    // Calculate the range around current page
-    let start = Math.max(2, currentPage - siblingCount);
-    let end = Math.min(totalPages - 1, currentPage + siblingCount);
-
-    // Adjust to ensure we show the right number of pages
-    const totalMiddleSlots = 5; // Total slots minus first and last
-    const needLeftEllipsis = start > 2;
-    const needRightEllipsis = end < totalPages - 1;
-
-    // Calculate how many actual page slots we have (excluding ellipsis)
-    let pageSlots = totalMiddleSlots;
-    if (needLeftEllipsis) pageSlots--;
-    if (needRightEllipsis) pageSlots--;
-
-    // Adjust range to fit in available slots
-    if (!needLeftEllipsis && needRightEllipsis) {
-      // Near start: [1, 2, 3, 4, 5, ..., last]
-      end = Math.min(pageSlots + 1, totalPages - 1);
-    } else if (needLeftEllipsis && !needRightEllipsis) {
-      // Near end: [1, ..., n-4, n-3, n-2, n-1, n]
-      start = Math.max(2, totalPages - pageSlots);
-    } else if (needLeftEllipsis && needRightEllipsis) {
-      // Middle: [1, ..., current-1, current, current+1, ..., last]
-      const middlePages = pageSlots;
-      const halfPages = Math.floor(middlePages / 2);
-      start = currentPage - halfPages;
-      end = currentPage + (middlePages - halfPages - 1);
-
-      // Adjust if we're too close to edges
-      if (start < 2) {
-        start = 2;
-        end = start + middlePages - 1;
-      }
-      if (end > totalPages - 1) {
-        end = totalPages - 1;
-        start = end - middlePages + 1;
-      }
-    }
-
-    // Add left ellipsis if needed
-    if (start > 2) {
-      pages.push({ type: 'ellipsis', value: 'ellipsis-left' });
-    }
-
-    // Add middle pages
-    for (let i = start; i <= end; i++) {
-      pages.push({ type: 'page', value: i });
-    }
-
-    // Add right ellipsis if needed
-    if (end < totalPages - 1) {
-      pages.push({ type: 'ellipsis', value: 'ellipsis-right' });
-    }
-
-    // Last page
-    pages.push({ type: 'page', value: totalPages });
-
-    return pages;
+  for (const value of range(siblingsStart, siblingsEnd)) {
+    items.push({ type: 'page', value });
   }
+
+  if (siblingsEnd < total - boundaries - 1) {
+    items.push({ type: 'ellipsis', value: 'ellipsis-end' });
+  } else if (total - boundaries > boundaries) {
+    items.push({ type: 'page', value: total - boundaries });
+  }
+
+  for (const value of end) items.push({ type: 'page', value });
+
+  return items;
 }

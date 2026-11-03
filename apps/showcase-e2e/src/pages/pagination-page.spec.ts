@@ -18,7 +18,17 @@ test.describe('Pagination Page', () => {
   test('API reference: each part, its inputs', async ({ page }) => {
     await page.goto('/docs/components/pagination');
     for (const [part, inputs] of [
-      ['ScPagination', ['totalItems', 'pageSize', 'currentPage', 'class']],
+      [
+        'ScPagination',
+        [
+          'totalItems',
+          'pageSize',
+          'currentPage',
+          'siblingCount',
+          'boundaryCount',
+          'class',
+        ],
+      ],
       ['ScPaginationLink', ['page', 'size', 'disabled', 'type', 'class']],
       [
         'ScPaginationPrevious, ScPaginationNext',
