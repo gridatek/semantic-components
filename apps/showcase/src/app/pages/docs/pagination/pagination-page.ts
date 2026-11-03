@@ -277,13 +277,13 @@ export default class PaginationPage {
           description: 'The page; [(currentPage)] two-way.',
         },
         {
-          name: 'siblingCount',
+          name: 'siblings',
           type: 'number',
           default: '1',
           description: 'Pages shown on each side of the current one.',
         },
         {
-          name: 'boundaryCount',
+          name: 'boundaries',
           type: 'number',
           default: '1',
           description: 'Pages always shown at the start and at the end.',

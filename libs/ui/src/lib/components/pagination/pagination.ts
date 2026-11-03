@@ -33,9 +33,9 @@ export class ScPagination {
   readonly pageSizeModel = model(10, { alias: 'pageSize' });
   readonly totalItems = input<number>(0);
   /** Pages shown on each side of the current one. */
-  readonly siblingCount = input<number>(1);
+  readonly siblings = input<number>(1);
   /** Pages always shown at the start and at the end. */
-  readonly boundaryCount = input<number>(1);
+  readonly boundaries = input<number>(1);
 
   /** A page or its size changed by the user: to load that page. */
   readonly change = output<ScPaginationChange>();
@@ -82,8 +82,8 @@ export class ScPagination {
     pageItems(
       this.currentPage(),
       this.totalPages(),
-      Math.max(0, this.siblingCount()),
-      Math.max(0, this.boundaryCount()),
+      Math.max(0, this.siblings()),
+      Math.max(0, this.boundaries()),
     ),
   );
 

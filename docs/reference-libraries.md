@@ -138,7 +138,7 @@ Pages of results (`nav[scPagination]`). A shadcn component, but Base UI and Radi
 **Taken:**
 
 - **shadcn's parts and look**; First, Last and a Status as Ark's and Mantine's.
-- **`siblingCount`, `boundaryCount`** (all three), with MUI's algorithm: the count of items stays the same as the page moves.
+- **`siblings`, `boundaries`** (all three; Mantine's names, Ark's and MUI's `siblingCount`, `boundaryCount` — renamed by the user, 2026-11-04), with MUI's algorithm: the count of items stays the same as the page moves.
 - **`previousPage()`, `nextPage()`, `range()`** (Ark's context and `pageRange`): links' hrefs, "Showing 11–20 of 100".
 - **Two-way `[(currentPage)]`, `[(pageSize)]`** (Ark's controlled `page`), as `model()`; `change` stays, the one event for loading a page.
 - **Kept in range**: at least one page, the current page never past the last one (MUI and Ark).

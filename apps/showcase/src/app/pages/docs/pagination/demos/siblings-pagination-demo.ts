@@ -10,7 +10,7 @@ import {
 import { SiEllipsisIcon } from '@semantic-icons/lucide-icons';
 
 /**
- * Two pages either side of the current one (siblingCount); boundaryCount
+ * Two pages either side of the current one (siblings); boundaries
  * sets how many stay at each end.
  */
 @Component({
@@ -31,7 +31,7 @@ import { SiEllipsisIcon } from '@semantic-icons/lucide-icons';
       [totalItems]="200"
       [pageSize]="10"
       [currentPage]="10"
-      [siblingCount]="2"
+      [siblings]="2"
     >
       <ul scPaginationList>
         @for (item of pagination.pages(); track item.value) {
