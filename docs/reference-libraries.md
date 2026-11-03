@@ -156,6 +156,7 @@ The native table elements, styled (`table[scTable]`). A shadcn component; Base U
 **Taken:**
 
 - **The parts and each preset's look** (the table's text size, header cell, cell, caption — the rest is the same in every style); the row's `has-aria-expanded` highlight.
+- **A frame on the container** (`bordered`, the user's idea, 2026-11-04): shadcn's Table has none, its examples hard-code `rounded-md border`, which suits no style but vega and mira. It takes the preset's card frame (radius, ring, shadow; not its `overflow-hidden`, the container scrolls).
 - **The container as a part of its own** (`scTableContainer`): a directive on `table` can't wrap it. Named and focusable when it scrolls (axe's `scrollable-region-focusable`).
 - **Not**: the Actions example (a row's menu) and anything a Data Table does — sorting, selection, pages are on its page (the user, 2026-11-04).
 

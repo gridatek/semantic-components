@@ -30,7 +30,8 @@ import {
       tabindex="0"
       role="region"
       aria-label="Orders"
-      class="max-w-md rounded-md border"
+      bordered
+      class="max-w-md"
     >
       <table scTable>
         <thead scTableHeader>

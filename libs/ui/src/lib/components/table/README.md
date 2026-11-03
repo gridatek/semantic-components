@@ -49,7 +49,7 @@ Each part takes `class`, merged over the preset.
 
 | Part                | Selector                  | Description                                                                |
 | ------------------- | ------------------------- | -------------------------------------------------------------------------- |
-| `ScTableContainer`  | `div[scTableContainer]`   | Scrolls a wide table sideways.                                             |
+| `ScTableContainer`  | `div[scTableContainer]`   | Scrolls a wide table sideways. `bordered`: a frame in the preset's look.   |
 | `ScTable`           | `table[scTable]`          | Full width; its text size from the preset.                                 |
 | `ScTableCaption`    | `caption[scTableCaption]` | Names the table; shown below it.                                           |
 | `ScTableHeader`     | `thead[scTableHeader]`    | The header rows, a line below.                                             |
@@ -61,4 +61,4 @@ Each part takes `class`, merged over the preset.
 
 ## Styles
 
-From the preset (`table`): the table's text size (`text-xs` in lyra and mira), the header cell (taller and wider in maia, luma and sera; small uppercase muted in sera), the cell's padding and the caption. The rest is the same in every style.
+From the preset (`table`): the table's text size (`text-xs` in lyra and mira), the header cell (taller and wider in maia, luma and sera; small uppercase muted in sera), the cell's padding and the caption; the container's frame (`bordered`), which shadcn's Table doesn't have: its card's radius, ring and shadow (square in lyra and sera, `4xl` in luma). The rest is the same in every style.

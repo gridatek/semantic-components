@@ -34,6 +34,7 @@ import {
   ScTable,
   ScTableBody,
   ScTableCell,
+  ScTableContainer,
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
@@ -74,6 +75,7 @@ import type { User } from './user-service';
     ScProgressRange,
     ScProgressTrack,
     ScTable,
+    ScTableContainer,
     ScTableBody,
     ScTableCell,
     ScTableHeader,
@@ -103,7 +105,7 @@ import type { User } from './user-service';
       (groupingChange)="grouping.set($event)"
     />
 
-    <div class="relative overflow-auto rounded-md border">
+    <div scTableContainer bordered class="overflow-auto">
       <table scTable>
         <!-- Header -->
         <thead scTableHeader>

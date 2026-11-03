@@ -65,6 +65,8 @@ export interface ScTableStyles {
   /** A cell (`td`). */
   cell: string;
   caption: string;
+  /** The container's frame (`bordered`): the card's radius, ring and shadow. */
+  bordered: string;
 }
 
 /** A preset: the components' classes in one of shadcn's styles. */

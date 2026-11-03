@@ -71,6 +71,7 @@ import {
   ScTable,
   ScTableBody,
   ScTableCell,
+  ScTableContainer,
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
@@ -299,6 +300,7 @@ const SAMPLE_DATA: User[] = [
     ScSelectValue,
     ScPaginationPrevious,
     ScTable,
+    ScTableContainer,
     ScTableBody,
     ScTableCell,
     ScTableHeader,
@@ -361,7 +363,7 @@ const SAMPLE_DATA: User[] = [
         </div>
       </div>
 
-      <div class="overflow-hidden rounded-md border">
+      <div scTableContainer bordered>
         <table scTable>
           <thead scTableHeader>
             @for (

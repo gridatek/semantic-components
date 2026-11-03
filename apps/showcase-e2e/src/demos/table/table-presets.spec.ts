@@ -41,7 +41,7 @@ test.describe('Table in every preset', () => {
   test.slow();
 
   for (const [preset, styles] of Object.entries(PRESETS))
-    test(`${preset}: the table, its header cells, cells and caption have their preset's classes; no axe violation, light and dark`, async ({
+    test(`${preset}: the table, its header cells, cells, caption and frame have their preset's classes; no axe violation, light and dark`, async ({
       page,
       context,
       baseURL,
@@ -68,6 +68,13 @@ test.describe('Table in every preset', () => {
         table.locator('caption'),
         styles.table.caption,
         `${preset} caption`,
+      );
+
+      await page.goto('/demos/table/scrolling-table-demo');
+      await expectClasses(
+        page.getByRole('region', { name: 'Orders' }),
+        styles.table.bordered,
+        `${preset} frame`,
       );
 
       await page.goto('/docs/components/table');
