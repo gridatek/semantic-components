@@ -1,203 +1,54 @@
 # Avatar
 
-An image element with a fallback for representing the user.
-
-## Components
-
-- `ScAvatar` - Container with rounded styling and size variants
-- `ScAvatarImage` - The image element with load/error handling
-- `ScAvatarFallback` - Fallback content when image is unavailable
-- `ScAvatarBadge` - Status badge/indicator (e.g., online/offline)
-- `ScAvatarGroup` - Container for displaying multiple avatars with overlap
-- `ScAvatarGroupCount` - Count indicator for overflow avatars
+A person's picture, with initials when there is none — alone, in a group, with a status badge. In the look of the app's preset.
 
 ## Usage
 
-### Basic Avatar
-
 ```html
 <span scAvatar>
-  <img scAvatarImage src="https://example.com/avatar.jpg" alt="User" />
-  <span scAvatarFallback>JD</span>
+  <img scAvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+  <span scAvatarFallback>CN</span>
 </span>
 ```
 
-### Fallback Only
+## Anatomy
 
-When no image is available:
-
-```html
-<span scAvatar>
-  <span scAvatarFallback>JD</span>
-</span>
-```
-
-### With Icon Fallback
-
-```html
-<span scAvatar>
-  <img scAvatarImage src="https://example.com/avatar.jpg" alt="User" />
-  <span scAvatarFallback>
-    <svg class="size-5"><!-- user icon --></svg>
-  </span>
-</span>
-```
-
-## Sizes
-
-The avatar component supports three sizes: `sm`, `default`, and `lg`.
-
-```html
-<!-- Small -->
-<span scAvatar size="sm">
-  <img scAvatarImage src="..." alt="User" />
-  <span scAvatarFallback>JD</span>
-</span>
-
-<!-- Default -->
-<span scAvatar>
-  <img scAvatarImage src="..." alt="User" />
-  <span scAvatarFallback>JD</span>
-</span>
-
-<!-- Large -->
-<span scAvatar size="lg">
-  <img scAvatarImage src="..." alt="User" />
-  <span scAvatarFallback>JD</span>
-</span>
-```
-
-## Avatar with Badge
-
-Display a status indicator using the badge component:
-
-```html
-<span scAvatar>
-  <img scAvatarImage src="..." alt="User" />
-  <span scAvatarFallback>JD</span>
-  <span scAvatarBadge></span>
-</span>
-```
-
-### Badge with Icon
-
-```html
-<span scAvatar>
-  <img scAvatarImage src="..." alt="User" />
-  <span scAvatarFallback>JD</span>
-  <span scAvatarBadge>
-    <svg><!-- check icon --></svg>
-  </span>
-</span>
-```
-
-## Avatar Group
-
-Display multiple avatars with overlap:
+Every part is a directive on your element. The image and the fallback fill the avatar, the image on top.
 
 ```html
 <div scAvatarGroup>
-  <span scAvatar>
-    <img scAvatarImage src="..." alt="User 1" />
-    <span scAvatarFallback>U1</span>
+  <span scAvatar size="lg">
+    <img scAvatarImage src="…" alt="…" />
+    <span scAvatarFallback>…</span>
+    <span scAvatarBadge></span>
   </span>
-  <span scAvatar>
-    <img scAvatarImage src="..." alt="User 2" />
-    <span scAvatarFallback>U2</span>
-  </span>
-  <span scAvatar>
-    <img scAvatarImage src="..." alt="User 3" />
-    <span scAvatarFallback>U3</span>
-  </span>
+  <div scAvatarGroupCount>+3</div>
 </div>
 ```
 
-### Avatar Group with Count
+## Loading
 
-Show overflow count for additional avatars:
+As Base UI's avatar (its `keepMounted` way):
 
-```html
-<div scAvatarGroup>
-  <span scAvatar>
-    <img scAvatarImage src="..." alt="User 1" />
-    <span scAvatarFallback>U1</span>
-  </span>
-  <span scAvatar>
-    <span scAvatarFallback>U2</span>
-  </span>
-  <span scAvatar>
-    <span scAvatarFallback>U3</span>
-  </span>
-  <div scAvatarGroupCount>+5</div>
-</div>
-```
+- The image is rendered at once and loads in place, so `loading="lazy"` and `NgOptimizedImage` work. Until it has loaded, and if it fails, it is invisible (`data-loading`, `data-error`) and the fallback shows through.
+- Hidden with `visibility`, not `display: none`: an element with no box never enters the viewport, and a lazy image would never load.
+- Rendered on the server, an image that loads before hydration is seen as loaded (`img.complete`) — its load event has gone by then.
+- The state is in attributes (`data-image` on the avatar), not in classes: hydration updates attributes, and may leave a class behind.
+- Loading, the image is not read: the fallback names the avatar. Give the image an `alt` for when it shows.
 
-### Avatar Group with Count Icon
+## API reference
 
-```html
-<div scAvatarGroup>
-  <span scAvatar>
-    <span scAvatarFallback>U1</span>
-  </span>
-  <span scAvatar>
-    <span scAvatarFallback>U2</span>
-  </span>
-  <div scAvatarGroupCount>
-    <svg><!-- users icon --></svg>
-  </div>
-</div>
-```
+Each part takes `class`, merged over the preset.
 
-## Inputs
+| Part                 | Selector                  | Description                                                                                             |
+| -------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `ScAvatar`           | `span[scAvatar]`          | Round, with a thin outline. Input `size`: `'sm'`, `'default'`, `'lg'`. `data-image`: the image's state. |
+| `ScAvatarImage`      | `img[scAvatarImage]`      | The picture, over the fallback; invisible while it loads and if it fails.                               |
+| `ScAvatarFallback`   | `span[scAvatarFallback]`  | Initials or an icon: shown until the image has loaded, or with none.                                    |
+| `ScAvatarBadge`      | `span[scAvatarBadge]`     | A dot in the corner (a status, your color), or a small icon; sized by the avatar.                       |
+| `ScAvatarGroup`      | `div[scAvatarGroup]`      | Avatars overlapping, each ringed by the background; mirrored right to left.                             |
+| `ScAvatarGroupCount` | `div[scAvatarGroupCount]` | How many more: text or an icon, sized by the group's avatars.                                           |
 
-### ScAvatar
+## Styles
 
-| Input   | Type                        | Default     | Description            |
-| ------- | --------------------------- | ----------- | ---------------------- |
-| `class` | `string`                    | `''`        | Additional CSS classes |
-| `size`  | `'sm' \| 'default' \| 'lg'` | `'default'` | Avatar size variant    |
-
-### ScAvatarImage
-
-| Input   | Type     | Default | Description            |
-| ------- | -------- | ------- | ---------------------- |
-| `class` | `string` | `''`    | Additional CSS classes |
-
-### ScAvatarFallback
-
-| Input   | Type     | Default | Description            |
-| ------- | -------- | ------- | ---------------------- |
-| `class` | `string` | `''`    | Additional CSS classes |
-
-### ScAvatarBadge
-
-| Input   | Type     | Default | Description            |
-| ------- | -------- | ------- | ---------------------- |
-| `class` | `string` | `''`    | Additional CSS classes |
-
-### ScAvatarGroup
-
-| Input   | Type     | Default | Description            |
-| ------- | -------- | ------- | ---------------------- |
-| `class` | `string` | `''`    | Additional CSS classes |
-
-### ScAvatarGroupCount
-
-| Input   | Type     | Default | Description            |
-| ------- | -------- | ------- | ---------------------- |
-| `class` | `string` | `''`    | Additional CSS classes |
-
-## How It Works
-
-1. `ScAvatarImage` starts loading and hides itself
-2. `ScAvatarFallback` is visible while image loads
-3. On successful load, image shows and fallback hides
-4. On error, fallback remains visible
-
-## Size Behavior
-
-- **Small (`sm`)**: 6x6 (24px), text-xs for fallback, size-2 for badge
-- **Default**: 8x8 (32px), text-sm for fallback, size-2.5 for badge
-- **Large (`lg`)**: 10x10 (40px), text-sm for fallback, size-3 for badge
-
-The badge automatically adjusts its size based on the avatar size and hides icons on small avatars.
+shadcn's avatar is the same in every style but for the group count's text (`text-xs` in lyra and mira): that one is the preset's (`avatarGroupCount`).

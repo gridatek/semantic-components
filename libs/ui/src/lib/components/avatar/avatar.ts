@@ -9,6 +9,8 @@ export type ScAvatarSize = 'sm' | 'default' | 'lg';
   host: {
     'data-slot': 'avatar',
     '[attr.data-size]': 'size()',
+    // The image's state, for the fallback (an attribute: hydration updates it).
+    '[attr.data-image]': 'imageStatus()',
     '[class]': 'class()',
   },
 })
@@ -22,6 +24,7 @@ export class ScAvatar {
   protected readonly class = computed(() =>
     cn(
       'group/avatar relative flex size-8 shrink-0 rounded-full select-none',
+      'after:border-border after:absolute after:inset-0 after:rounded-full after:border after:mix-blend-darken dark:after:mix-blend-lighten',
       'data-[size=lg]:size-10 data-[size=sm]:size-6',
       this.classInput(),
     ),

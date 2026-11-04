@@ -219,6 +219,21 @@ A modal dialog asking for an answer (`div[scAlertDialog]`). A shadcn component: 
 - **shadcn's parts, `size` and each preset's look**, without its placement and animation classes (the CDK overlay, Angular's `animate.enter`/`leave`).
 - **Not**: Base UI's handles and payloads (detached triggers), nested dialogs, `initialFocus`/`finalFocus` (the focus trap takes the first button and gives focus back).
 
+## Avatar
+
+A person's picture (`span[scAvatar]`). A shadcn component: Base UI's Avatar (local docs) and shadcn's reference app and docs' examples (2026-11-04).
+
+| Library                                                                                                  | What to read                                                                                                                                                                                                                             |
+| -------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Base UI Avatar (`@base-ui/react/docs/react/components/avatar.md`)                                        | Root, Image, Fallback; `keepMounted`: the image rendered at once, stacked over the fallback, hidden by `visibility` while `data-loading`/`data-error` — lazy loading and image optimizers work; server rendering; the fallback's `delay` |
+| shadcn Avatar (`shadcn-reference/presets/*/avatar.tsx`), examples (`apps/v4/examples/base/avatar-*.tsx`) | Badge, Group, GroupCount; sizes; the outline (`after:`); the same look in every style but the group count's text; Basic, Badge, Badge with Icon, Group, Group Count, Group with Icon, Sizes, Dropdown, RTL                               |
+
+**Taken:**
+
+- **Base UI's loading, as its `keepMounted`** (the user, 2026-11-04): ours hid the image with `display: none` until loaded — a lazy image never loaded — and missed an image loaded before hydration. Now stacked, `visibility`, `data-loading`/`data-error`, `img.complete` checked on start; the state in attributes (hydration).
+- **shadcn's parts, outline and examples**; only the group count from the preset.
+- **Not**: the fallback's `delay`.
+
 ## Control Group
 
 An input or a select joined with its buttons (`div[scControlGroup]`): shadcn's Button Group, renamed for what it is for (the user, 2026-10-30: it is only useful when inputs or selects mix with buttons; buttons alone are on the Button page). A shadcn component, so no web research: Base UI and shadcn's reference app (2026-10-30).

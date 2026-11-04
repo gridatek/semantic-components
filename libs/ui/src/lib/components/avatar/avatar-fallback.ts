@@ -1,6 +1,5 @@
-import { Directive, computed, inject, input } from '@angular/core';
+import { Directive, computed, input } from '@angular/core';
 import { cn } from '../../utils';
-import { ScAvatar } from './avatar';
 
 @Directive({
   selector: 'span[scAvatarFallback]',
@@ -9,17 +8,15 @@ import { ScAvatar } from './avatar';
   },
 })
 export class ScAvatarFallback {
-  private readonly avatar = inject(ScAvatar);
-
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => {
-    const status = this.avatar.imageStatus();
-    return cn(
-      'bg-muted text-muted-foreground flex size-full items-center justify-center rounded-full text-sm',
+  protected readonly class = computed(() =>
+    cn(
+      'bg-muted text-muted-foreground absolute inset-0 flex size-full items-center justify-center rounded-full text-sm',
       'group-data-[size=sm]/avatar:text-xs',
-      status === 'loaded' && 'hidden',
+      // Gone once the image has loaded (it covers this place).
+      'group-data-[image=loaded]/avatar:hidden',
       this.classInput(),
-    );
-  });
+    ),
+  );
 }

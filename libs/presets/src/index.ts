@@ -109,6 +109,8 @@ export interface ScTableStyles {
 export interface ScPreset {
   alert: ScAlertStyles;
   alertDialog: ScAlertDialogStyles;
+  /** An avatar group's "+N" (the rest of the avatar is the same in every style). */
+  avatarGroupCount: string;
   /** The backdrop behind every overlay (dialogs, sheets, drawers): its shade and blur. */
   backdrop: string;
   badge: (props: { variant?: ScBadgeVariant | null }) => string;

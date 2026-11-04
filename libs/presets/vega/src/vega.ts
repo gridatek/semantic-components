@@ -1,6 +1,7 @@
 import type { ScPreset } from '@semantic-components/presets';
 import { alert } from './alert';
 import { alertDialog } from './alert-dialog';
+import { avatarGroupCount } from './avatar';
 import { backdrop } from './backdrop';
 import { badge } from './badge';
 import { button } from './button';
@@ -21,6 +22,7 @@ import { table } from './table';
 export const vega: ScPreset = {
   alert,
   alertDialog,
+  avatarGroupCount,
   backdrop,
   badge,
   button,

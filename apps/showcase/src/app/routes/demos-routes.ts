@@ -278,6 +278,13 @@ export const demosRoutes: Route[] = [
     path: 'demos/avatar',
     children: [
       {
+        path: 'avatar-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/avatar/demos/avatar-usage-demo').then(
+            (m) => m.AvatarUsageDemo,
+          ),
+      },
+      {
         path: 'basic-avatar-demo',
         loadComponent: () =>
           import('../pages/docs/avatar/demos/basic-avatar-demo').then(
@@ -292,13 +299,6 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'sizes-avatar-demo',
-        loadComponent: () =>
-          import('../pages/docs/avatar/demos/sizes-avatar-demo').then(
-            (m) => m.SizesAvatarDemo,
-          ),
-      },
-      {
         path: 'badge-avatar-demo',
         loadComponent: () =>
           import('../pages/docs/avatar/demos/badge-avatar-demo').then(
@@ -306,10 +306,52 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
+        path: 'badge-icon-avatar-demo',
+        loadComponent: () =>
+          import('../pages/docs/avatar/demos/badge-icon-avatar-demo').then(
+            (m) => m.BadgeIconAvatarDemo,
+          ),
+      },
+      {
         path: 'group-avatar-demo',
         loadComponent: () =>
           import('../pages/docs/avatar/demos/group-avatar-demo').then(
             (m) => m.GroupAvatarDemo,
+          ),
+      },
+      {
+        path: 'group-count-avatar-demo',
+        loadComponent: () =>
+          import('../pages/docs/avatar/demos/group-count-avatar-demo').then(
+            (m) => m.GroupCountAvatarDemo,
+          ),
+      },
+      {
+        path: 'group-icon-avatar-demo',
+        loadComponent: () =>
+          import('../pages/docs/avatar/demos/group-icon-avatar-demo').then(
+            (m) => m.GroupIconAvatarDemo,
+          ),
+      },
+      {
+        path: 'sizes-avatar-demo',
+        loadComponent: () =>
+          import('../pages/docs/avatar/demos/sizes-avatar-demo').then(
+            (m) => m.SizesAvatarDemo,
+          ),
+      },
+      {
+        path: 'dropdown-avatar-demo',
+        loadComponent: () =>
+          import('../pages/docs/avatar/demos/dropdown-avatar-demo').then(
+            (m) => m.DropdownAvatarDemo,
+          ),
+      },
+      {
+        path: 'rtl-avatar-demo',
+        loadComponent: () =>
+          import('../pages/docs/avatar/demos/rtl-avatar-demo').then(
+            (m) => m.RtlAvatarDemo,
           ),
       },
     ],
