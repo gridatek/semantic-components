@@ -10,12 +10,12 @@ permissions:
   contents: read
 
 # Every e2e test in every browser (Chromium, Firefox, WebKit, and the phones:
-# ALL_BROWSERS), both ways the apps can run — static, and rendered on the
+# ALL_BROWSERS), both ways the apps can run — client-side (csr), and rendered on the
 # server (one job per browser engine) — side by side. The pull requests' CI
 # runs Chromium only.
 jobs:
-  # The apps as built by default (static, client-only).
-  static:
+  # The apps as built by default (client-side).
+  csr:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     env:
@@ -104,7 +104,7 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps ${{ matrix.browser }}
 
-      # Two retries, as `static`: a flake is retried, and reported as flaky.
+      # Two retries, as `csr`: a flake is retried, and reported as flaky.
       - name: E2E tests (showcase, SSR)
         run: npx playwright test -c apps/showcase-e2e/playwright.config.ts ${{ matrix.showcase }} --workers=4 --retries=2 --reporter=line
 

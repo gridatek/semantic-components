@@ -14,8 +14,17 @@ const baseURL = process.env['BASE_URL'] || 'http://localhost:4201';
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
+const preset = nxE2EPreset(__filename, { testDir: './src' });
+
 export default defineConfig({
-  ...nxE2EPreset(__filename, { testDir: './src' }),
+  ...preset,
+  // On CI, four workers and the progress in the log. The preset's CI default
+  // is one worker: the showcase's suite then outgrew the csr job's 30 minutes,
+  // and the html report alone printed nothing while it ran.
+  workers: process.env['CI'] ? 4 : undefined,
+  reporter: process.env['CI']
+    ? [...(Array.isArray(preset.reporter) ? preset.reporter : []), ['line']]
+    : preset.reporter,
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     baseURL,

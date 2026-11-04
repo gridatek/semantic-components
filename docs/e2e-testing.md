@@ -32,7 +32,7 @@ Both apps are static by default; SSR is the `ssr` build configuration. The CI jo
 | `npx nx serve showcase -c ssr`  | the dev server, with SSR (rebuilds as you edit)               | looking at SSR locally                |
 | `npx nx run showcase:serve-ssr` | the built app on its Node server (`dist/…/server/server.mjs`) | CI's `ssr` job — what production runs |
 
-The nightly workflow (`nightly-e2e.yml`) runs both ways — jobs `static` and `ssr` — in every browser (`ALL_BROWSERS`: Chromium, Firefox, WebKit and the phones); the pull requests' CI runs Chromium only.
+The nightly workflow (`nightly-e2e.yml`) runs both ways — jobs `csr` and `ssr` — in every browser (`ALL_BROWSERS`: Chromium, Firefox, WebKit and the phones); the pull requests' CI runs Chromium only.
 
 `serve-ssr` needs a build first (`npx nx build showcase -c ssr`); with `SSR=1`, the Playwright config starts it instead of `serve-static`. Its log goes to `dist/ssr-showcase.log` (`dist/ssr-blocks.log`). The same for `blocks`.
 
