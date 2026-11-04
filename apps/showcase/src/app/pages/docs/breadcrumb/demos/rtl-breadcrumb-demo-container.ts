@@ -28,13 +28,23 @@ import {
   ScBreadcrumbList,
   ScBreadcrumbPage,
   ScBreadcrumbSeparator,
+  ScButton,
+  ScMenu,
+  ScMenuContent,
+  ScMenuItem,
+  ScMenuPortal,
+  ScMenuProvider,
+  ScMenuTrigger,
 } from '@semantic-components/ui';
 import {
   SiChevronRightIcon,
   SiEllipsisIcon,
 } from '@semantic-icons/lucide-icons';
 
-/** Right to left: from the right, the separators pointing left. */
+/**
+ * Right to left: from the right, the separators pointing left; the ellipsis
+ * opens the steps left out, the menu right to left too.
+ */
 @Component({
   selector: 'app-rtl-breadcrumb-demo',
   imports: [
@@ -46,6 +56,13 @@ import {
     ScBreadcrumbList,
     ScBreadcrumbPage,
     ScBreadcrumbSeparator,
+    ScButton,
+    ScMenu,
+    ScMenuContent,
+    ScMenuItem,
+    ScMenuPortal,
+    ScMenuProvider,
+    ScMenuTrigger,
     SiChevronRightIcon,
     SiEllipsisIcon,
   ],
@@ -57,7 +74,21 @@ import {
         </li>
         <li scBreadcrumbSeparator><svg siChevronRightIcon></svg></li>
         <li scBreadcrumbItem>
-          <span scBreadcrumbEllipsis><svg siEllipsisIcon></svg></span>
+          <div scMenuProvider>
+            <button scButton scMenuTrigger variant="ghost" size="icon-sm">
+              <span scBreadcrumbEllipsis><svg siEllipsisIcon></svg></span>
+              <span class="sr-only">صفحات أخرى</span>
+            </button>
+            <ng-template scMenuPortal>
+              <div scMenu dir="rtl" lang="ar">
+                <ng-template scMenuContent>
+                  <div scMenuItem value="التوثيق">التوثيق</div>
+                  <div scMenuItem value="السمات">السمات</div>
+                  <div scMenuItem value="GitHub">GitHub</div>
+                </ng-template>
+              </div>
+            </ng-template>
+          </div>
         </li>
         <li scBreadcrumbSeparator><svg siChevronRightIcon></svg></li>
         <li scBreadcrumbItem>

@@ -94,7 +94,7 @@ test('Collapsed: an ellipsis for the steps left out, not read', async ({
   ).toHaveCount(2);
 });
 
-test('RTL: from the right, the chevrons turned to point left', async ({
+test('RTL: from the right, the chevrons turned to point left; the ellipsis menu right to left', async ({
   page,
 }) => {
   await page.goto(demo('rtl'));
@@ -106,6 +106,17 @@ test('RTL: from the right, the chevrons turned to point left', async ({
     'rotate',
     '180deg',
   );
+  // The ellipsis opens the steps left out: a menu right to left, from the
+  // trigger's start (right) edge; Escape gives focus back.
+  const more = nav.getByRole('button', { name: 'صفحات أخرى' });
+  await more.click();
+  const menu = page.getByRole('menu');
+  await expectRtl(menu);
+  const [t, m] = [await box(more), await box(menu)];
+  expect(Math.abs(t.x + t.width - (m.x + m.width))).toBeLessThan(2);
+  await page.keyboard.press('Escape');
+  await expect(menu).toBeHidden();
+  await expect(more).toBeFocused();
 });
 
 test('The separator stays upright left to right', async ({ page }) => {
