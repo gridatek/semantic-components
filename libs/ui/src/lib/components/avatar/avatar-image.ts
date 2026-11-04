@@ -2,7 +2,6 @@ import { isPlatformBrowser } from '@angular/common';
 import {
   Directive,
   ElementRef,
-  OnInit,
   PLATFORM_ID,
   computed,
   inject,
@@ -28,7 +27,7 @@ import { ScAvatar } from './avatar';
     '(error)': 'onError()',
   },
 })
-export class ScAvatarImage implements OnInit {
+export class ScAvatarImage {
   protected readonly avatar = inject(ScAvatar);
   private readonly image =
     inject<ElementRef<HTMLImageElement>>(ElementRef).nativeElement;
@@ -45,8 +44,9 @@ export class ScAvatarImage implements OnInit {
     ),
   );
 
-  ngOnInit(): void {
-    // Loaded already — cached, or before hydration: its load event has gone.
+  constructor() {
+    // Loaded already — cached, or before hydration (the server's element is
+    // this one): its load event has gone.
     const loaded =
       this.browser && this.image.complete && this.image.naturalWidth > 0;
     this.avatar.imageStatus.set(loaded ? 'loaded' : 'loading');
