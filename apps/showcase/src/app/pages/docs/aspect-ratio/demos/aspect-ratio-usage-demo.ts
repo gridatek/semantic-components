@@ -1,22 +1,18 @@
 import { NgOptimizedImage } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScAspectRatio } from '@semantic-components/ui';
+import { ScAspectRatio, ScFrame } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-aspect-ratio-usage-demo',
-  imports: [NgOptimizedImage, ScAspectRatio],
+  imports: [NgOptimizedImage, ScAspectRatio, ScFrame],
   template: `
-    <div
-      scAspectRatio
-      [ratio]="16 / 9"
-      class="bg-muted w-full max-w-sm rounded-lg"
-    >
+    <div scAspectRatio scFrame [ratio]="16 / 9" class="w-full max-w-sm">
       <img
         ngSrc="/images/gallery/forest.jpg"
         fill
         priority
         alt="A forest path"
-        class="rounded-lg object-cover"
+        class="object-cover"
       />
     </div>
   `,

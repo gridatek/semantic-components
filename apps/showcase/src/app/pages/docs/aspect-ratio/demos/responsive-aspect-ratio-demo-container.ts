@@ -20,24 +20,25 @@ import { ResponsiveAspectRatioDemo } from './responsive-aspect-ratio-demo';
 export class ResponsiveAspectRatioDemoContainer {
   readonly code = `import { NgOptimizedImage } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScAspectRatio } from '@semantic-components/ui';
+import { ScAspectRatio, ScFrame } from '@semantic-components/ui';
 
 /** A class over the ratio: square on a phone, 16 / 9 beyond (the ratio is a CSS variable, so a class wins). */
 @Component({
   selector: 'app-responsive-aspect-ratio-demo',
-  imports: [NgOptimizedImage, ScAspectRatio],
+  imports: [NgOptimizedImage, ScAspectRatio, ScFrame],
   template: \`
     <div
       scAspectRatio
+      scFrame
       [ratio]="16 / 9"
-      class="bg-muted w-full max-w-sm rounded-lg max-sm:aspect-square"
+      class="w-full max-w-sm max-sm:aspect-square"
     >
       <img
         ngSrc="/images/gallery/mountains.jpg"
         fill
         priority
         alt="Mountains"
-        class="rounded-lg object-cover"
+        class="object-cover"
       />
     </div>
   \`,

@@ -188,7 +188,7 @@ export default class TablePage {
       name: 'ScTableContainer',
       selector: 'div[scTableContainer]',
       description:
-        'Scrolls a wide table sideways. With bordered, a frame in the preset’s look (its card’s radius and ring).',
+        'Scrolls a wide table sideways. Framed: add scFrame (the preset’s frame).',
     },
     {
       name: 'ScTable',

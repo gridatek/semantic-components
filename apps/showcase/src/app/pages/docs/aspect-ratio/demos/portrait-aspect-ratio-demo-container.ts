@@ -20,24 +20,20 @@ import { PortraitAspectRatioDemo } from './portrait-aspect-ratio-demo';
 export class PortraitAspectRatioDemoContainer {
   readonly code = `import { NgOptimizedImage } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScAspectRatio } from '@semantic-components/ui';
+import { ScAspectRatio, ScFrame } from '@semantic-components/ui';
 
 /** Taller than wide: 9 / 16. */
 @Component({
   selector: 'app-portrait-aspect-ratio-demo',
-  imports: [NgOptimizedImage, ScAspectRatio],
+  imports: [NgOptimizedImage, ScAspectRatio, ScFrame],
   template: \`
-    <div
-      scAspectRatio
-      [ratio]="9 / 16"
-      class="bg-muted w-full max-w-40 rounded-lg"
-    >
+    <div scAspectRatio scFrame [ratio]="9 / 16" class="w-full max-w-40">
       <img
         ngSrc="/images/gallery/gorge.jpg"
         fill
         priority
         alt="A narrow gorge"
-        class="rounded-lg object-cover"
+        class="object-cover"
       />
     </div>
   \`,

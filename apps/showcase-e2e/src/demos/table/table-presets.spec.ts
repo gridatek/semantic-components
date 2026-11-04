@@ -73,7 +73,7 @@ test.describe('Table in every preset', () => {
       await page.goto('/demos/table/scrolling-table-demo');
       await expectClasses(
         page.getByRole('region', { name: 'Orders' }),
-        styles.table.bordered,
+        styles.frame,
         `${preset} frame`,
       );
 

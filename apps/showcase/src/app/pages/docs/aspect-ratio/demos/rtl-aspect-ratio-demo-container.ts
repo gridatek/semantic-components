@@ -20,21 +20,21 @@ import { RtlAspectRatioDemo } from './rtl-aspect-ratio-demo';
 export class RtlAspectRatioDemoContainer {
   readonly code = `import { NgOptimizedImage } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScAspectRatio } from '@semantic-components/ui';
+import { ScAspectRatio, ScFrame } from '@semantic-components/ui';
 
 /** Right to left: the ratio doesn't change; the caption reads from the right. */
 @Component({
   selector: 'app-rtl-aspect-ratio-demo',
-  imports: [NgOptimizedImage, ScAspectRatio],
+  imports: [NgOptimizedImage, ScAspectRatio, ScFrame],
   template: \`
     <figure dir="rtl" lang="ar" class="grid w-full max-w-sm gap-2">
-      <div scAspectRatio [ratio]="16 / 9" class="bg-muted rounded-lg">
+      <div scAspectRatio scFrame [ratio]="16 / 9">
         <img
           ngSrc="/images/gallery/cafe.jpg"
           fill
           priority
           alt="مقهى"
-          class="rounded-lg object-cover"
+          class="object-cover"
         />
       </div>
       <figcaption class="text-muted-foreground text-sm">

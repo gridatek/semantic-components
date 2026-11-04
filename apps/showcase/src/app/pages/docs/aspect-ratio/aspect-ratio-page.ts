@@ -88,7 +88,17 @@ import { VideoAspectRatioDemoContainer } from './demos/video-aspect-ratio-demo-c
           <li>
             It is
             <code class="bg-muted rounded px-1.5 py-0.5 text-sm">relative</code
-            >: what fills it can be placed inside it.
+            >: what fills it can be placed inside it. It clips what overflows
+            its box, so a framed photo takes the frame&apos;s corners.
+          </li>
+          <li>
+            Framed: add
+            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">scFrame</code>
+            — the style&apos;s card radius, ring and shadow (a fixed
+            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+              >rounded-lg</code
+            >
+            suits few styles).
           </li>
         </ul>
       </section>
@@ -155,9 +165,10 @@ import { VideoAspectRatioDemoContainer } from './demos/video-aspect-ratio-demo-c
 })
 export default class AspectRatioPage {
   protected readonly anatomy = {
-    imports: "import { ScAspectRatio } from '@semantic-components/ui';",
+    imports:
+      "import { ScAspectRatio, ScFrame } from '@semantic-components/ui';",
     markup: [
-      '<div scAspectRatio [ratio]="16 / 9" class="w-full max-w-sm">',
+      '<div scAspectRatio scFrame [ratio]="16 / 9" class="w-full max-w-sm">',
       '  <img ngSrc="…" fill alt="…" />',
       '</div>',
     ].join('\n'),

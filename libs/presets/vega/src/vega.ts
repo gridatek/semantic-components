@@ -8,6 +8,7 @@ import { breadcrumb } from './breadcrumb';
 import { button } from './button';
 import { card } from './card';
 import { controlGroup, controlGroupText } from './control-group';
+import { frame } from './frame';
 import { input } from './input';
 import {
   inputGroup,
@@ -29,6 +30,7 @@ export const vega: ScPreset = {
   breadcrumb,
   button,
   card,
+  frame,
   controlGroup,
   controlGroupText,
   input,

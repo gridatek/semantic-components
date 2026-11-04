@@ -20,6 +20,7 @@ import { ScrollingTableDemo } from './scrolling-table-demo';
 export class ScrollingTableDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
+  ScFrame,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -36,6 +37,7 @@ import {
 @Component({
   selector: 'app-scrolling-table-demo',
   imports: [
+    ScFrame,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -50,7 +52,7 @@ import {
       tabindex="0"
       role="region"
       aria-label="Orders"
-      bordered
+      scFrame
       class="max-w-md"
     >
       <table scTable>

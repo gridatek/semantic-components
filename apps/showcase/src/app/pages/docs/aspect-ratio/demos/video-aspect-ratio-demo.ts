@@ -1,15 +1,16 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScAspectRatio } from '@semantic-components/ui';
+import { ScAspectRatio, ScFrame } from '@semantic-components/ui';
 
 /** A video in a 16 / 9 frame, filling it. */
 @Component({
   selector: 'app-video-aspect-ratio-demo',
-  imports: [ScAspectRatio],
+  imports: [ScAspectRatio, ScFrame],
   template: `
     <div
       scAspectRatio
+      scFrame
       [ratio]="16 / 9"
-      class="w-full max-w-md overflow-hidden rounded-lg bg-black"
+      class="w-full max-w-md bg-black"
     >
       <video
         controls

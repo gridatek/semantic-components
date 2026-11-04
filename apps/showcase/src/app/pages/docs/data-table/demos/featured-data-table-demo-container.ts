@@ -37,6 +37,7 @@ import {
   ScButton,
   ScCheckbox,
   ScCheckboxField,
+  ScFrame,
   ScInput,
   ScMenu,
   ScMenuContent,
@@ -299,6 +300,7 @@ const SAMPLE_DATA: User[] = [
     ScSelectTrigger,
     ScSelectValue,
     ScPaginationPrevious,
+    ScFrame,
     ScTable,
     ScTableContainer,
     ScTableBody,
@@ -363,7 +365,7 @@ const SAMPLE_DATA: User[] = [
         </div>
       </div>
 
-      <div scTableContainer bordered>
+      <div scTableContainer scFrame>
         <table scTable>
           <thead scTableHeader>
             @for (

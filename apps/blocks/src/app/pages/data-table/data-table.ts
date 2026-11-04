@@ -27,6 +27,7 @@ import {
   ScButtonPattern,
   ScCheckbox,
   ScCheckboxField,
+  ScFrame,
   ScInput,
   ScProgress,
   ScProgressRange,
@@ -74,6 +75,7 @@ import type { User } from './user-service';
     ScProgress,
     ScProgressRange,
     ScProgressTrack,
+    ScFrame,
     ScTable,
     ScTableContainer,
     ScTableBody,
@@ -105,7 +107,7 @@ import type { User } from './user-service';
       (groupingChange)="grouping.set($event)"
     />
 
-    <div scTableContainer bordered class="overflow-auto">
+    <div scTableContainer scFrame class="overflow-auto">
       <table scTable>
         <!-- Header -->
         <thead scTableHeader>

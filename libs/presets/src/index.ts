@@ -109,8 +109,6 @@ export interface ScTableStyles {
   /** A cell (`td`). */
   cell: string;
   caption: string;
-  /** The container's frame (`bordered`): the card's radius, ring and shadow. */
-  bordered: string;
 }
 
 /** A preset: the components' classes in one of shadcn's styles. */
@@ -128,6 +126,8 @@ export interface ScPreset {
     size?: ScButtonSize | null;
   }) => string;
   card: ScCardStyles;
+  /** scFrame: a box's frame — the style's card radius, ring and shadow. */
+  frame: string;
   controlGroup: (props: {
     orientation?: ScControlGroupOrientation | null;
   }) => string;
