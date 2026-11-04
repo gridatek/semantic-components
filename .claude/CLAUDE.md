@@ -24,7 +24,7 @@ You are an expert in TypeScript, Angular, and scalable web application developme
 
 ## Styling
 
-- Component styling tracks shadcn/ui. Upstream styles live in `registry/styles/style-nova.css` (`nova` is the default theme), NOT in the `.tsx` files. See [docs/shadcn-style-reference.md](../docs/shadcn-style-reference.md) for how to find and compare them, and for the divergences that are deliberate.
+- Component styling tracks shadcn/ui, in all eight of its styles. The reference is the app generated with shadcn's CLI (`D:/Workspace/Projects/shadcn-reference`, one per style in `presets/<style>/`): classes written out in full, RTL-ready, in `src/components/ui/*.tsx`. What differs between styles lives in our presets (`libs/presets/<style>/src/*.ts`, read by the parts with `injectPreset()`); what is the same stays in the part. See [docs/shadcn-style-reference.md](../docs/shadcn-style-reference.md) for how to compare, and for the divergences that are deliberate.
 
 ## Accessibility Requirements
 

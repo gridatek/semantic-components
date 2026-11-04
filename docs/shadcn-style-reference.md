@@ -1,280 +1,82 @@
 # Finding shadcn Styles
 
-How to locate the upstream shadcn/ui styles so you can compare them against our
-components in `libs/ui`.
+How to find shadcn/ui's styles and compare them with ours. Rewritten 2026-11-04: the reference is now a generated app, one per style, and our looks live in presets.
 
-Verified against `shadcn-ui/ui@main` on 2026-08-01.
+## The reference: a generated app per style
 
-## The one thing to know first
+Not shadcn's GitHub source, not its website: **`D:/Workspace/Projects/shadcn-reference`** ([klagrida/shadcn-reference](https://github.com/klagrida/shadcn-reference)), made with shadcn's own CLI.
 
-**The styles are not in the `.tsx` files anymore.** shadcn moved them into theme
-stylesheets. The component file only maps a variant name to a CSS class:
+| Folder                   | What                                                                                |
+| ------------------------ | ----------------------------------------------------------------------------------- |
+| `presets/<style>/`       | One app per style — nova, vega, maia, lyra, mira, luma, sera, rhea — on **Base UI** |
+| `presets-radix/<style>/` | The same on **Radix**, for the components whose Radix look we follow (the Select)   |
 
-```tsx
-// registry/bases/base/ui/button.tsx
-const buttonVariants = cva('cn-button group/button inline-flex shrink-0 …', {
-  variants: {
-    variant: {
-      default: 'cn-button-variant-default',
-      outline: 'cn-button-variant-outline',
-      // …
-    },
-  },
-});
-```
+In each app, `src/components/ui/*.tsx` holds every component with its **classes written out in full**: the CLI has resolved shadcn's `cn-*` names (in its source, the looks live in `registry/styles/style-*.css`) into plain Tailwind classes. So:
 
-The actual declarations live in the theme CSS:
+- **Read the `.tsx`**, class for class — no theme CSS to look up.
+- **One style against another** is a diff of two files (`diff presets/nova/… presets/maia/…`).
+- **The classes are already RTL-ready**: the CLI ran with `--rtl`, so they are logical (`ms-*`, `pe-*`, `start-*`, `text-start`) with `rtl:` variants where needed (`rtl:translate-x-1/2`, `rtl:rotate-180`) — compare them with ours as they are.
+- The theme (colors, radius): `src/styles.css`.
 
-```css
-/* registry/styles/style-nova.css */
-.cn-button-variant-default {
-  @apply bg-primary text-primary-foreground hover:bg-primary/80;
-}
-```
+Regenerate with its `setup.sh` (`sh setup.sh`, `sh setup.sh vega maia`, `BASE=radix sh setup.sh`), or refresh one app inside it with `npx shadcn@latest add --all -y -o` and read the `git diff`.
 
-So when comparing our styling to shadcn's, **read the CSS file**. Reading the
-`.tsx` will only tell you the variant/slot structure.
-
-## Where things live
-
-All paths are under `https://github.com/shadcn-ui/ui/tree/main/`.
-
-| What you want                                      | Path                                                      |
-| -------------------------------------------------- | --------------------------------------------------------- |
-| **Styles** (class declarations)                    | `apps/v4/registry/styles/style-<theme>.css`               |
-| Component source (structure, slots, variant names) | `apps/v4/registry/bases/base/ui/*.tsx`                    |
-| Usage examples / demos                             | `apps/v4/examples/base/*.tsx`                             |
-| Theme list and metadata                            | `apps/v4/registry/styles.tsx`                             |
-| Defaults                                           | `apps/v4/registry/config.ts` (`DEFAULT_CONFIG`)           |
-| **RTL mapping table**                              | `packages/shadcn/src/utils/transformers/transform-rtl.ts` |
-
-> Historical note: the path `apps/v4/examples/base/ui` no longer exists. If you
-> find it referenced anywhere, it is stale.
-
-### The three bases
-
-`registry/bases/` contains three parallel implementations, differing only in the
-headless primitive library they wrap:
-
-| Base    | Primitives                 | Files |
-| ------- | -------------------------- | ----- |
-| `base`  | Base UI (`@base-ui/react`) | 62    |
-| `radix` | Radix UI                   | 61    |
-| `aria`  | React Aria                 | 58    |
-
-**Use `base`.** It is what `DEFAULT_CONFIG.base` points to and what shadcn treats
-as canonical. They share the same `cn-*` class names, so the theme CSS applies to
-all three — the base choice does not affect styling.
-
-## Which theme is the default
-
-**`nova`.** Confirmed in `apps/v4/registry/config.ts`:
-
-```ts
-export const DEFAULT_CONFIG: DesignSystemConfig = {
-  base: 'base',
-  style: 'nova',
-  baseColor: 'neutral',
-  theme: 'neutral',
-  iconLibrary: 'lucide',
-  radius: 'default', // 0.625rem
-  // …
-};
-```
-
-So the file to diff against is **`apps/v4/registry/styles/style-nova.css`**.
-
-Beware a trap: `registry/styles.tsx` lists `vega` first and describes it as
-"Clean, neutral, and familiar", which reads like the default. It is not — it is
-just first in the picker. `DEFAULT_CONFIG.style` is the authority.
-
-The full set (8 themes, ~70KB each):
-
-| Theme                                  | Description                                   |
-| -------------------------------------- | --------------------------------------------- |
-| `vega`                                 | Clean, neutral, and familiar                  |
-| **`nova`**                             | **Reduced padding and margins — the default** |
-| `maia`                                 | Rounded, with generous spacing                |
-| `lyra`, `mira`, `luma`, `sera`, `rhea` | Further variations                            |
-
-They differ in real spacing and radius values, so make sure you are diffing
-against `nova` and not whichever file you opened first.
-
-## The styles you are reading are LTR-first
-
-This is the second thing that trips people up. `style-nova.css` is full of
-**physical** properties — 49 uses of `pr-*`/`pl-*`/`mr-*`/`ml-*`, against 2
-logical ones, and not a single `[dir=rtl]` or `:dir()` anywhere.
-
-That does **not** mean shadcn ignores RTL. RTL is a **build-time transform**, not
-something expressed in the CSS. The registry build generates a parallel
-`styles/<style>/ui-rtl/` tree by running every component through
-`transformDirection()`, which rewrites physical classes to logical ones. The RTL
-demos import from that tree:
-
-```tsx
-// examples/base/badge-rtl.tsx
-import { Badge } from '@/styles/base-nova/ui-rtl/badge';
-```
-
-**That tree is gitignored** — `apps/v4/styles/` contains only a README on GitHub.
-You cannot fetch the RTL output; you have to apply the mapping yourself (or
-generate it with `pnpm --filter=v4 registry:build --style all` in a clone).
-
-The same transform ships to consumers as `shadcn migrate rtl`.
-
-### Consequence for comparing
-
-**Apply the mapping before you diff, or every logical class in our code will look
-like a divergence when it is actually the correct transformed form.** Our
-`pe-2`/`ps-2` is exactly what `transformDirection` produces from upstream's
-`pr-2`/`pl-2` — same style, further along the pipeline.
-
-The table in `transform-rtl.ts` is the authority. Direct replacements:
-
-```
--ml- → -ms-      pl-  → ps-      left-  → start-    rounded-l- → rounded-s-
--mr- → -me-      pr-  → pe-      right- → end-      rounded-tl- → rounded-ss-
-ml-  → ms-       text-left  → text-start     border-l- → border-s-
-mr-  → me-       text-right → text-end       border-r- → border-e-
-scroll-pl- → scroll-ps-    float-left  → float-start    origin-left → origin-start
-```
-
-Four rules are not simple renames, and are the easiest to miss:
-
-| Case              | Rule                                                  |
-| ----------------- | ----------------------------------------------------- |
-| `translate-x-*`   | add an `rtl:` variant with the sign flipped           |
-| `space-x-*`       | add `rtl:space-x-reverse` (likewise `divide-x-*`)     |
-| `cn-rtl-flip`     | marker class → becomes `rtl:rotate-180`               |
-| `cursor-w-resize` | add `rtl:` variant with the value swapped (`w` ↔ `e`) |
-
-`cn-rtl-flip` is worth calling out: it is how upstream flips **directional
-icons** — chevrons and arrows in pagination, carousel and breadcrumb. Grep
-upstream for it to find every icon that must rotate in RTL.
-
-### What must stay physical
-
-The mapping is not universal. Four groups in this repo keep physical
-properties on purpose, and converting them is a regression, not a fix.
-
-**1. Centring: `left-1/2` paired with `-translate-x-1/2`.** This is the one that
-looks most like an oversight. `translate-x` has no logical form — it does not
-flip — so changing only the inset moves the element off-centre in RTL:
-
-```
-left-1/2  -translate-x-1/2   ✅ centred in both directions
-start-1/2 -translate-x-1/2   ❌ off-centre in RTL
-```
-
-Upstream's transform handles this by adding an `rtl:` variant with the sign
-flipped, rather than by touching the inset. If you convert the inset, you must
-do both. Affects tooltip, radio, the resizable handle and toast-stack's centre
-positions.
-
-**2. Explicitly physical APIs.** Where a component takes a side or position by
-name — `side="left"`, `direction="left"`, `'top-right'` — the caller means
-literally left. Its border or offset must sit on the matching physical edge, so
-a logical property puts it on the wrong side in RTL. Affects drawer, sheet,
-sidebar and toast-stack.
-
-**3. Spatial widgets.** Image cropper, image compare, image annotator and
-org-chart. Handle offsets pair with physical resize cursors (`w-resize`,
-`sw-resize`), and mirroring a crop box or a diagram is wrong regardless of
-writing direction. Flipping the position without the cursor is worse than
-leaving both.
-
-**4. Anything an overlay is coupled to.** The media progress fills are absolutely
-positioned over a slider. Flipping the overlay without confirming the slider's
-own thumb math would desync them.
-
-The general test: ask whether the edge is _the trailing one_ (flip it) or _a
-specific physical side_ (leave it). Close buttons, badges and indicators are the
-former; a `side="left"` drawer is the latter.
-
-## Fetching a file
-
-Use `gh api` — the `contents` endpoint returns base64:
+shadcn's docs and **examples** are still on GitHub — `apps/v4/content/docs/components/base/<name>.mdx` (the page: which examples, in what order) and `apps/v4/examples/base/<name>-*.tsx` (each example):
 
 ```bash
-gh api repos/shadcn-ui/ui/contents/apps/v4/registry/styles/style-nova.css \
-  --jq '.content' | base64 -d > nova.css
+gh api repos/shadcn-ui/ui/contents/apps/v4/examples/base/card-image.tsx --jq '.content' | base64 -d
+gh api repos/shadcn-ui/ui/contents/apps/v4/examples/base --jq '.[].name' | grep '^card'
 ```
 
-Same pattern for a component:
+For a component's parts and behaviour, Base UI's own docs are in the reference app's `node_modules`: `presets/nova/node_modules/@base-ui/react/docs/react/components/<name>.md`.
 
-```bash
-gh api repos/shadcn-ui/ui/contents/apps/v4/registry/bases/base/ui/button.tsx \
-  --jq '.content' | base64 -d
-```
+## Where our looks live: presets
 
-Listing a directory:
+shadcn's eight styles are our **presets** (`@semantic-components/presets`), one chosen when the app starts (`provideScConfig({ preset })`, nova by default).
 
-```bash
-gh api repos/shadcn-ui/ui/contents/apps/v4/registry/bases/base/ui --jq '.[].name'
-```
+- **`libs/presets/<style>/src/<component>.ts`** — the classes of a component that change from style to style, one file per component per style, each generated from that style's `.tsx` in the reference app (the source in its header comment). A `cva` where shadcn has one (`button`, `badge`, `alert`), strings otherwise.
+- **`libs/presets/src/index.ts`** — the `ScPreset` interface: every key (`button`, `card`, `table`, `alertDialog`, `backdrop`, `avatarGroupCount`…).
+- **The part reads its preset**: `injectPreset().card`, then `cn(this.styles.title, this.classInput())`. Classes that are the same in every style stay in the part.
 
-## Navigating the CSS
+So when a component's turn comes:
 
-The whole file is one scope block, `.style-nova { … }`, with 58 component
-sections delimited by `MARK` comments:
+1. Diff its `.tsx` across the eight styles: what differs goes into the preset, what's the same stays in the part.
+2. Write the preset files from the `.tsx` with a small script (one per component, kept out of the repo) — never by hand — so each class is shadcn's exactly.
+3. Leave out what our machinery does instead (below), and say so in the preset file's comment.
+4. A presets spec checks every style's classes on the rendered part (`apps/showcase-e2e/src/demos/<name>/<name>-presets.spec.ts`).
 
-```css
-.style-nova {
-  /* MARK: Accordion */
-  .cn-accordion-item {
-    @apply not-last:border-b;
-  }
-  …
-  /* MARK: Button */
-  .cn-button {
-    @apply …;
-  }
-}
-```
+## RTL: what must stay physical
 
-Jump to a component:
+The reference's classes are logical already; so are ours. A physical class in our code (`pr-*`, `left-*`, `text-right`) is a bug — the repo is RTL-first — with four exceptions, kept physical on purpose:
 
-```bash
-grep -n "MARK:" nova.css              # table of contents
-grep -n "cn-button" nova.css          # every button-related class
-sed -n '148,210p' nova.css            # read the Button section
-```
+**1. Centring: `left-1/2` paired with `-translate-x-1/2`.** `translate-x` has no logical form, so changing only the inset moves the element off-centre in RTL. shadcn's output keeps the inset logical and adds `rtl:translate-x-1/2`; if you convert the inset, do both. Affects tooltip, radio, the resizable handle and toast-stack's centre positions.
 
-Class naming is predictable: `cn-<component>`,
-`cn-<component>-variant-<name>`, `cn-<component>-size-<name>`, and
-`cn-<component>-<slot>`.
+**2. Explicitly physical APIs.** Where a component takes a side by name — `side="left"`, `direction="left"`, `'top-right'` — the caller means literally left. Affects drawer, sheet, sidebar and toast-stack.
 
-## Comparing against our components
+**3. Spatial widgets.** Image cropper, image compare, image annotator and org-chart: handle offsets pair with physical resize cursors (`w-resize`), and mirroring a crop box or a diagram is wrong whatever the writing direction.
 
-Our styles are inline `cn()` strings in the component `.ts` files, not a
-stylesheet, so the comparison is per-class rather than file-to-file. For a given
-component: pull the `cn-*` block out of `nova.css`, then read the matching
-`libs/ui/src/lib/components/<name>/*.ts`.
+**4. Anything an overlay is coupled to.** The media progress fills are positioned over a slider; flipping one without the other's thumb math would desync them.
 
-**Logical properties are not a divergence.** We write `pe-*`, `ms-*`,
-`border-e`, `text-start` inline, which is the _output_ of upstream's RTL
-transform. Run the mapping in the section above over the shadcn class before
-concluding anything differs. Where our code still uses a physical property, that
-is a bug, not a style choice — the repo is RTL-first by policy.
+The test: is the edge _the trailing one_ (flip it) or _a specific physical side_ (leave it)?
 
-Known deliberate divergences — do **not** "fix" these to match upstream:
+For background, shadcn's mapping table is `packages/shadcn/src/utils/transformers/transform-rtl.ts` (`pl-` → `ps-`, `space-x-*` → `rtl:space-x-reverse`, `cn-rtl-flip` → `rtl:rotate-180`…).
 
-- **The theme is each app's** (`apps/*/src/styles.css`), not the library's: shadcn's colors exactly — from the generated reference app (`shadcn-reference`) — plus our `--success` / `--warning` (the toast's).
-- **Contrast over opacity** — where upstream dims text with opacity
-  (`opacity-60`, `text-muted-foreground/70`), we keep `text-muted-foreground`
-  so the text keeps 4.5:1 and dim only what isn't text (Trace: a pending
-  line's icon, its description).
-- **Button: `aria-disabled` styled too** — `scButton` sets `aria-disabled` with
-  `disabled`, so its preset adds `aria-disabled:pointer-events-none
-aria-disabled:opacity-50` beside shadcn's `disabled:` ones: the same look
-  (`libs/presets/*/src/button.ts`).
-- **Input Group: no InputGroupInput or InputGroupTextarea** — shadcn wraps the input and the textarea in parts of their own to give them the look of being inside the group; ours are plain `scInput` / `scTextarea` (and any control with `data-slot="control"`), and the group gives them those classes (`[&>input[data-slot=control]]:…`, `[&>textarea[data-slot=control]]:…`), from each preset's InputGroupInput / InputGroupTextarea (`libs/presets/*/src/input-group.ts`). shadcn's `data-slot="input-group-control"` is our `control`. The group also rings for a focused date/time segment or a select, multiselect or combobox trigger, with the preset's own focus classes.
-- **Control Group (shadcn's Button Group): its name, children by position** — named for what it is for, an input or a select joined with its buttons; its examples of buttons alone are on the Button page. shadcn's group finds its children by `data-slot` (`*:data-slot:rounded-e-none`, `[&>[data-slot]~[data-slot]]`, and a `!` rule for the last); ours by position (`[&>*:not(:last-child)]`, `[&>*:not(:first-child)]`), so any child joins, slot or not, and the last needs no `!` rule. Where luma, rhea and sera read `[data-variant=outline]` on a child (an input's border beside outline buttons), ours read `[data-slot=button]`: our buttons carry no `data-variant`, so the border follows any button, not only outline ones. Sera's text reads `group/button-group`, which shadcn's group doesn't set and ours does (`libs/presets/*/src/control-group.ts`).
-- **Select: Radix's styles, not Base UI's** (the user's choice, 2026-10-30), **built the Angular way** — from `shadcn-reference/presets-radix/<style>/select.tsx` (`BASE=radix sh setup.sh`). Radix marks the highlighted item by focus and disabled by `data-disabled`; ours keeps focus on the trigger, so the preset's classes read `data-[active=true]:` for `focus:` and `aria-disabled:` for `data-disabled:` / `disabled:`. Nothing of Radix's machinery is recreated: its `data-open:` / `data-closed:` classes become the `popupEnter` / `popupLeave` keys, played by Angular's `animate.enter` / `animate.leave`; the classes that read its variables (`--radix-select-*`) are dropped — the CDK overlay sets the transform origin (`transformOriginSelector`), keeps it within the viewport (`flexibleDimensions`, its height inherited by the popup) and gives the list the trigger's width exactly (`matchWidth`; shadcn's `min-w-36` dropped — a consumer sets a width on the popup). Kept: `data-side` (where it opened, from the CDK's `positionChange`) for Radix's popper classes, and `data-position` on the list. The root sets the width (its content's by default), the trigger fills it (`w-full`) and the list matches it; the scroll buttons are `sticky` in the popup, which scrolls (`libs/presets/*/src/select.ts`).
-- **Decomposition** — upstream ships one file per component; we split into
-  composable directives, so one shadcn class often maps to several of our
-  directives.
+## Deliberate divergences
 
-See also [component-design-principles.md](component-design-principles.md) and
-[data-slot-pattern.md](data-slot-pattern.md).
+Do **not** "fix" these to match shadcn:
+
+- **The theme is each app's** (`apps/*/src/styles.css`), not the library's: shadcn's colors exactly, from the reference app, plus our `--success` / `--warning` (the toast's). `--muted-foreground` is darker (`oklch(0.51 0 0)`) and `--destructive` too (`oklch(0.52 0.245 27.325)`), for 4.5:1 contrast.
+- **Contrast over opacity** — where shadcn dims text with opacity (`opacity-60`, `text-muted-foreground/70`), we keep `text-muted-foreground` so the text keeps 4.5:1, and dim only what isn't text (Trace: a pending line's icon).
+- **Placement and open/close animation are Angular's and the CDK's** — shadcn's `fixed top-1/2 start-1/2 -translate-*` (placement) and `data-open:` / `data-closed:` classes (animation) are left out of the presets: the CDK overlay places (centres a dialog; a select's list from its `positionChange`), Angular's `animate.enter` / `animate.leave` animate. Alert Dialog, Select.
+- **One backdrop for every overlay** — shadcn's overlay is the same in Alert Dialog, Dialog, Sheet and Drawer for a style, so it is one preset key (`backdrop`), read by the shared `scBackdrop` itself.
+- **Button: `aria-disabled` styled too** — `scButton` sets `aria-disabled` with `disabled`, so its preset adds `aria-disabled:pointer-events-none aria-disabled:opacity-50` beside shadcn's `disabled:` ones (`libs/presets/*/src/button.ts`).
+- **Input Group: no InputGroupInput or InputGroupTextarea** — ours are plain `scInput` / `scTextarea` (and any control with `data-slot="control"`); the group gives them those classes (`[&>input[data-slot=control]]:…`), from each preset's InputGroupInput / InputGroupTextarea. shadcn's `data-slot="input-group-control"` is our `control`. The group also rings for a focused date/time segment or a select, multiselect or combobox trigger.
+- **Control Group (shadcn's Button Group): its name, children by position** — named for what it is for, an input or a select joined with its buttons. Its children are found by position (`[&>*:not(:last-child)]`), not by `data-slot`; where luma, rhea and sera read `[data-variant=outline]` on a child, ours read `[data-slot=button]` (our buttons carry no `data-variant`).
+- **Select: Radix's styles, not Base UI's** (the user's choice, 2026-10-30), from `presets-radix/<style>/select.tsx`, **built the Angular way**: the highlighted item reads `data-[active=true]:` for `focus:` and `aria-disabled:` for `data-disabled:`; nothing of Radix's machinery is recreated (its `--radix-select-*` variables dropped — the CDK sets the transform origin, the height and the width). The root sets the width, the trigger fills it, the list matches it.
+- **Table: the container is a part, and can be framed** — shadcn's Table wraps itself in its scrolling div; a directive on `table` can't, so `scTableContainer` is the consumer's. Its `bordered` frame is ours (shadcn has none): each style's card frame (radius, ring, shadow).
+- **Alert: no `role="alert"`** — shadcn's always has it; ours has none, and the consumer announces one that appears (`role="status"` or `role="alert"` on a wrapper — the Alert page's Announcing section).
+- **Avatar: Base UI's image loading** — the image rendered at once over its fallback, hidden by `visibility` while `data-loading` / `data-error` (shadcn's preloads, then swaps). The group count is the only preset key: shadcn's avatar is the same in every style but for it.
+- **Notification Center's count: its own pill** — it doesn't take the badge's preset (sera's badges are bare text): a counter keeps a filled pill in every style.
+- **Pagination: parts on buttons or your links** — the parts set no `href`: a link follows the one you give it.
+- **Decomposition** — shadcn ships one function per part in one file; we split into directives, one per file, so one shadcn part can map to several of ours.
+
+See also [component-design-principles.md](component-design-principles.md), [data-slot-pattern.md](data-slot-pattern.md) and [reference-libraries.md](reference-libraries.md) (what each component took from where).
