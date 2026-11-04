@@ -199,23 +199,25 @@ An input's value isn't read in the constructor (it isn't bound yet): read it in 
 
 ## Component Structure Template
 
+A part is a `@Directive` on the consumer's element — a `@Component` only when it needs a template of its own, encapsulation or a CDK base class. It sets no text (no default label: the consumer writes it), and a `data-slot` only when another component styles by it ([data-slot-pattern.md](data-slot-pattern.md)).
+
 ```typescript
-import { Component, booleanAttribute, computed, input } from '@angular/core';
+import { Directive, booleanAttribute, computed, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 
-@Component({
-  selector: 'element[scComponentName]',
+@Directive({
+  selector: 'button[scComponentName]',
   host: {
-    'data-slot': 'component-name',
     '[class]': 'class()',
-    // ARIA attributes
-    '[attr.aria-label]': '"Label"',
     '[attr.aria-disabled]': 'disabled() || null',
   },
-  template: ` <ng-content /> `,
 })
 export class ScComponentName {
-  // Class input for custom styling
+  // What changes from style to style: the preset's (libs/presets/<style>/src).
+  private readonly styles = injectPreset().componentName;
+
+  // Class input for custom styling, merged last.
   readonly classInput = input<string>('', { alias: 'class' });
 
   // Boolean inputs with transform
@@ -223,8 +225,8 @@ export class ScComponentName {
     transform: booleanAttribute,
   });
 
-  // State-based classes
-  protected readonly class = computed(() => cn('base-styling-classes', 'hover:state-classes', 'aria-disabled:disabled-classes', this.classInput()));
+  // The preset's classes, then what is the same in every style, then yours.
+  protected readonly class = computed(() => cn(this.styles.root, 'aria-disabled:opacity-50', this.classInput()));
 }
 ```
 
