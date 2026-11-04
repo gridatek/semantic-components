@@ -16,6 +16,7 @@ import { BasicBreadcrumbDemoContainer } from './demos/basic-breadcrumb-demo-cont
 import { BreadcrumbUsageDemoContainer } from './demos/breadcrumb-usage-demo-container';
 import { DropdownBreadcrumbDemoContainer } from './demos/dropdown-breadcrumb-demo-container';
 import { EllipsisBreadcrumbDemoContainer } from './demos/ellipsis-breadcrumb-demo-container';
+import { EllipsisMenuBreadcrumbDemoContainer } from './demos/ellipsis-menu-breadcrumb-demo-container';
 import { LinkBreadcrumbDemoContainer } from './demos/link-breadcrumb-demo-container';
 import { RtlBreadcrumbDemoContainer } from './demos/rtl-breadcrumb-demo-container';
 import { SeparatorBreadcrumbDemoContainer } from './demos/separator-breadcrumb-demo-container';
@@ -29,6 +30,7 @@ import { SeparatorBreadcrumbDemoContainer } from './demos/separator-breadcrumb-d
     SeparatorBreadcrumbDemoContainer,
     DropdownBreadcrumbDemoContainer,
     EllipsisBreadcrumbDemoContainer,
+    EllipsisMenuBreadcrumbDemoContainer,
     LinkBreadcrumbDemoContainer,
     RtlBreadcrumbDemoContainer,
     TocHeading,
@@ -101,6 +103,7 @@ import { SeparatorBreadcrumbDemoContainer } from './demos/separator-breadcrumb-d
         <app-separator-breadcrumb-demo-container />
         <app-dropdown-breadcrumb-demo-container />
         <app-ellipsis-breadcrumb-demo-container />
+        <app-ellipsis-menu-breadcrumb-demo-container />
         <app-link-breadcrumb-demo-container />
         <app-rtl-breadcrumb-demo-container />
       </section>

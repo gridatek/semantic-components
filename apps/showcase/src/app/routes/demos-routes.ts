@@ -475,6 +475,13 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
+        path: 'ellipsis-menu-breadcrumb-demo',
+        loadComponent: () =>
+          import('../pages/docs/breadcrumb/demos/ellipsis-menu-breadcrumb-demo').then(
+            (m) => m.EllipsisMenuBreadcrumbDemo,
+          ),
+      },
+      {
         path: 'link-breadcrumb-demo',
         loadComponent: () =>
           import('../pages/docs/breadcrumb/demos/link-breadcrumb-demo').then(

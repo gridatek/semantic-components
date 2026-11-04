@@ -16,6 +16,17 @@ test.afterEach(() => {
   expect(errors).toEqual([]);
 });
 
+test('Usage: the ellipsis is a button that opens the steps left out', async ({
+  page,
+}) => {
+  await page.goto('/demos/breadcrumb/breadcrumb-usage-demo');
+  const more = page.getByRole('button', { name: 'More pages' });
+  await expect(more).toHaveAttribute('aria-expanded', 'false');
+  await more.click();
+  await expect(more).toHaveAttribute('aria-expanded', 'true');
+  await expect(page.getByRole('menuitem', { name: 'Themes' })).toBeVisible();
+});
+
 test('Basic: a named navigation; the links, then the current page', async ({
   page,
 }) => {
@@ -38,6 +49,17 @@ test('Basic: a named navigation; the links, then the current page', async ({
     'aria-hidden',
     'true',
   );
+});
+
+test('Collapsed with Menu: the ellipsis opens the steps left out', async ({
+  page,
+}) => {
+  await page.goto(demo('ellipsis-menu'));
+  const nav = page.getByRole('navigation', { name: 'Docs path' });
+  const more = nav.getByRole('button', { name: 'More pages' });
+  await more.click();
+  await expect(more).toHaveAttribute('aria-expanded', 'true');
+  await expect(page.getByRole('menuitem', { name: 'GitHub' })).toBeVisible();
 });
 
 test('Link Component: a routerLink goes there in the app', async ({ page }) => {
@@ -97,7 +119,14 @@ test('The separator stays upright left to right', async ({ page }) => {
 test('On a phone: the demos fit, wrapping if needed @mobile', async ({
   page,
 }) => {
-  for (const name of ['basic', 'separator', 'dropdown', 'ellipsis', 'rtl']) {
+  for (const name of [
+    'basic',
+    'separator',
+    'dropdown',
+    'ellipsis',
+    'ellipsis-menu',
+    'rtl',
+  ]) {
     await page.goto(demo(name));
     await expectNoHorizontalScroll(page);
     const list = await box(page.locator('[scBreadcrumbList]'));
