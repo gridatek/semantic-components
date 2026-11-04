@@ -35,20 +35,20 @@ ScPaginationList;
 ScPaginationContent;
 ```
 
-### Prefix with `sc-`
+### Attribute selectors, prefixed `sc`
 
-All selectors should be prefixed with `sc-` to avoid naming conflicts.
+A part is an attribute on the consumer's element, in camelCase with the `sc` prefix — never a custom element (`<sc-…>`), not even for an internal part. The element is named in the selector when the part needs it (`nav`, `button`, `a`).
 
 ```typescript
-@Component({
-  selector: 'nav[scPagination]',
+@Directive({
+  selector: 'nav[scPagination], div[scPagination]',
   // ...
 })
 ```
 
-## Content Projection Pattern
+## The Consumer Writes the Content
 
-Components should use `<ng-content />` to allow consumers to provide their own content instead of hardcoding UI elements.
+A part is a directive on the consumer's element, so what is inside is the consumer's already: icons, text, labels. A part never hard-codes them — no template with an icon, no default text, not even an `aria-label` (translation is the consumer's).
 
 ### ❌ Don't: Hardcode Content
 
@@ -63,12 +63,12 @@ Components should use `<ng-content />` to allow consumers to provide their own c
 export class ScPaginationPrevious {}
 ```
 
-### ✅ Do: Use Content Projection
+### ✅ Do: A Directive on the Consumer's Element
 
 ```typescript
-@Component({
+@Directive({
   selector: 'a[scPaginationPrevious], button[scPaginationPrevious]',
-  template: ` <ng-content /> `,
+  host: { '[class]': 'class()' },
 })
 export class ScPaginationPrevious {}
 ```
@@ -131,7 +131,7 @@ The library should handle all styling for different states through CSS classes a
 ### ✅ Do: Provide Input-Driven Styling
 
 ```typescript
-@Component({
+@Directive({
   host: {
     '[attr.aria-disabled]': 'disabled() || null',
   },
@@ -158,29 +158,35 @@ export class ScPaginationPrevious {
 
 ### Always Include ARIA Attributes
 
-Components must include appropriate ARIA attributes for accessibility.
+Parts set the roles and states (ARIA attributes that follow their state); the names are the consumer's.
 
 ```typescript
-@Component({
+@Directive({
   host: {
     role: 'navigation',
-    '[attr.aria-label]': '"pagination"',
     '[attr.aria-current]': 'isActive() ? "page" : null',
     '[attr.aria-disabled]': 'disabled() || null',
-    '[attr.aria-hidden]': 'true', // for decorative elements
   },
 })
 ```
 
+```html
+<!-- The name: the consumer's, in their language. -->
+<nav scPagination aria-label="Results">…</nav>
+```
+
 ### Screen Reader Support
 
-Include screen reader text where appropriate:
+An icon-only button is named by an `sr-only` span inside it (not `aria-label`); a decorative part is hidden from screen readers, with nothing to read inside:
 
 ```html
-<span scPaginationEllipsis>
-  <svg><!-- ellipsis icon --></svg>
-  <span class="sr-only">More pages</span>
-</span>
+<button scPaginationNext size="icon">
+  <svg siChevronRightIcon></svg>
+  <span class="sr-only">Next</span>
+</button>
+
+<!-- aria-hidden on the part: the pages left out are not read. -->
+<span scPaginationEllipsis><svg siEllipsisIcon></svg></span>
 ```
 
 ## Modern Angular
@@ -313,16 +319,15 @@ When refactoring components, ensure:
 
 See the pagination components for reference implementations:
 
-- `sc-pagination` - Navigation container
-- `sc-pagination-list` - List container (renamed from `pagination-content`)
-- `sc-pagination-previous` - Previous button with content projection
-- `sc-pagination-next` - Next button with content projection
-- `sc-pagination-link` - Page link with states
-- `sc-pagination-ellipsis` - Ellipsis indicator with content projection
+- `ScPagination` (`nav[scPagination]`) - the navigation, its state
+- `ScPaginationList` (`ul[scPaginationList]`) - the list of buttons
+- `ScPaginationPrevious`, `ScPaginationNext` - Previous and Next, their content the consumer's
+- `ScPaginationLink` - a page, with its states (`aria-current`)
+- `ScPaginationEllipsis` - pages left out, hidden from screen readers
 
 All follow these principles and demonstrate:
 
-- Content projection for customization
+- The consumer's content, inside directives on the consumer's elements
 - Disabled state management
 - ARIA attributes
 - Flexible styling
