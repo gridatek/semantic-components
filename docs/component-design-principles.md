@@ -183,6 +183,20 @@ Include screen reader text where appropriate:
 </span>
 ```
 
+## Modern Angular
+
+No lifecycle hooks (`ngOnInit`, `ngOnChanges`, `ngAfterViewInit`, `ngAfterContentInit`, `ngOnDestroy`, and their `implements`):
+
+| Instead of           | Use                                                                                       |
+| -------------------- | ----------------------------------------------------------------------------------------- |
+| `ngOnInit`           | the constructor: `inject()` and `input()` fields are ready, the host element exists       |
+| `ngOnChanges`        | `computed()`, `linkedSignal()`, `effect()` on the inputs                                  |
+| `ngAfterViewInit`    | `afterNextRender()` (once), `afterRenderEffect()` (each render)                           |
+| `ngAfterContentInit` | signal queries (`contentChild()`, `contentChildren()`) read in `computed()` or `effect()` |
+| `ngOnDestroy`        | `inject(DestroyRef).onDestroy()`                                                          |
+
+An input's value isn't read in the constructor (it isn't bound yet): read it in a `computed()` or `effect()`. The avatar's image is a model: it checks in its constructor whether the picture already loaded (the element and its `src` exist then).
+
 ## Component Structure Template
 
 ```typescript
@@ -283,6 +297,7 @@ When refactoring components, ensure:
 - [ ] Names are semantic and descriptive
 - [ ] Uses `<ng-content />` for customizable content
 - [ ] Boolean inputs use `input<boolean, unknown>` with `booleanAttribute`
+- [ ] No lifecycle hooks: the constructor, signals, `afterNextRender()`, `DestroyRef` (see Modern Angular)
 - [ ] Library handles all state styling (no manual CSS needed by consumers)
 - [ ] ARIA attributes are properly set
 - [ ] Supports both `<a>` and `<button>` where appropriate

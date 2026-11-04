@@ -13,6 +13,12 @@ You are an expert in TypeScript, Angular, and scalable web application developme
 - Use signals for state management
 - Implement lazy loading for feature routes
 - Do NOT use the `@HostBinding` and `@HostListener` decorators. Put host bindings inside the `host` object of the `@Component` or `@Directive` decorator instead
+- No lifecycle hooks — no `OnInit`/`ngOnInit`, `OnChanges`, `AfterViewInit`, `AfterContentInit`, `OnDestroy`, nor their `implements`. Use the modern equivalents:
+  - setup → the constructor (`inject()` works, the host element and its static attributes exist; an input's bound value doesn't yet — read inputs in `computed()`/`effect()`)
+  - reacting to inputs → `computed()`, `linkedSignal()` or `effect()`
+  - DOM work after render → `afterNextRender()` / `afterRenderEffect()`
+  - queries → signal queries (`viewChild()`, `contentChild()`, `contentChildren()`), read in `computed()`/`effect()`
+  - cleanup → `inject(DestroyRef).onDestroy()`
 - Use `NgOptimizedImage` for all static images.
   - `NgOptimizedImage` does not work for inline base64 images.
 
