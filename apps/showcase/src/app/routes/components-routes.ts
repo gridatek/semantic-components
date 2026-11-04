@@ -50,6 +50,11 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/backdrop/backdrop-page'),
       },
       {
+        path: 'frame',
+        title: 'Frame - Semantic Components',
+        loadComponent: () => import('../pages/docs/frame/frame-page'),
+      },
+      {
         path: 'auth-layout',
         title: 'Auth Layout - Semantic Components',
         loadComponent: () =>

@@ -392,6 +392,14 @@
     "category": "Utilities"
   },
   {
+    "name": "Frame",
+    "path": "frame",
+    "description": "A frame round a box — the style's card radius, ring and shadow — for an aspect ratio, a table, any box.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Layout"
+  },
+  {
     "name": "Funnel Chart",
     "path": "funnel-chart",
     "description": "A series as stages, top to bottom, each as wide as its value, narrowing to the next.",

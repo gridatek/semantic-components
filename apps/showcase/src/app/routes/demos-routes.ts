@@ -3098,6 +3098,32 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/frame',
+    children: [
+      {
+        path: 'frame-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/frame/demos/frame-usage-demo').then(
+            (m) => m.FrameUsageDemo,
+          ),
+      },
+      {
+        path: 'aspect-ratio-frame-demo',
+        loadComponent: () =>
+          import('../pages/docs/frame/demos/aspect-ratio-frame-demo').then(
+            (m) => m.AspectRatioFrameDemo,
+          ),
+      },
+      {
+        path: 'table-frame-demo',
+        loadComponent: () =>
+          import('../pages/docs/frame/demos/table-frame-demo').then(
+            (m) => m.TableFrameDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/backdrop',
     children: [
       {
