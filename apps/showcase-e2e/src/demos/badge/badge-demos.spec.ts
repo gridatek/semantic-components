@@ -49,8 +49,10 @@ test('With Icon: less padding on the icon’s side', async ({ page }) => {
 
 test('With Spinner: the spinner a named status, turning', async ({ page }) => {
   await page.goto(demo('spinner'));
-  const spinners = page.getByRole('status', { name: 'Loading' });
+  // Icons are aria-hidden: the spinner by its attribute (as the Button spec).
+  const spinners = page.locator('svg[role=status]');
   await expect(spinners).toHaveCount(2);
+  await expect(spinners.first()).toHaveAttribute('aria-label', 'Loading');
   await expect(spinners.first()).not.toHaveCSS('animation-name', 'none');
 });
 
@@ -64,7 +66,7 @@ test('Custom Colors: your classes over the preset’s', async ({ page }) => {
   await page.goto(demo('colors'));
   const blue = page.locator('[scBadge]', { hasText: 'Blue' });
   await expect(blue).toHaveClass(/bg-blue-50/);
-  await expect(blue).not.toHaveClass(/bg-primary/);
+  await expect(blue).not.toHaveClass(/(^|s)bg-primary(s|$)/);
 });
 
 test('RTL: from the right, the icon at the start', async ({ page }) => {

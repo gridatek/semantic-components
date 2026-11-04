@@ -31,6 +31,7 @@ import {
         ngSrc="/images/gallery/mountains.jpg"
         width="1600"
         height="1067"
+        priority
         alt="Mountains at dawn"
         class="aspect-video w-full object-cover"
       />

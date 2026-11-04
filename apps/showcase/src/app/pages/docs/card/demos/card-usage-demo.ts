@@ -44,7 +44,7 @@ import {
   template: `
     <div scCard class="w-full max-w-sm">
       <div scCardHeader>
-        <h4 scCardTitle>Login to your account</h4>
+        <h3 scCardTitle>Login to your account</h3>
         <p scCardDescription>Enter your email below to login to your account</p>
         <div scCardAction>
           <button scButton variant="link">Sign Up</button>
@@ -89,9 +89,15 @@ import {
 })
 export class CardUsageDemo {
   private readonly model = signal({ email: '', password: '' });
-  protected readonly loginForm = form(this.model, (path) => {
-    required(path.email);
-    email(path.email);
-    required(path.password);
-  });
+  protected readonly loginForm = form(
+    this.model,
+    (path) => {
+      required(path.email);
+      email(path.email);
+      required(path.password);
+    },
+    // Submitted from the footer's Login (form="…"); invalid, the fields are
+    // marked and the action waits.
+    { submission: { action: async () => undefined } },
+  );
 }

@@ -119,10 +119,16 @@ import {
 })
 export class RtlCardDemo {
   private readonly model = signal({ email: '', password: '' });
-  protected readonly loginForm = form(this.model, (path) => {
-    required(path.email);
-    email(path.email);
-    required(path.password);
-  });
+  protected readonly loginForm = form(
+    this.model,
+    (path) => {
+      required(path.email);
+      email(path.email);
+      required(path.password);
+    },
+    // Submitted from the footer's Login (form="…"); invalid, the fields are
+    // marked and the action waits.
+    { submission: { action: async () => undefined } },
+  );
 }`;
 }

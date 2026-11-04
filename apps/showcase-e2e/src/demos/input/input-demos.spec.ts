@@ -63,9 +63,13 @@ test('Field Group: Submit sends the form, Reset empties it', async ({
 }) => {
   await page.goto(demo('field-group'));
   const name = page.getByRole('textbox', { name: 'Name' });
-  // Typed as a person types it, and in the form before it is sent.
-  await name.pressSequentially('Jordan Lee');
-  await expect(name).toHaveValue('Jordan Lee');
+  // Typed as a person types it, and in the form before it is sent. Typed
+  // again if the app, starting, reset it (the form binds its value then).
+  await expect(async () => {
+    await name.fill('');
+    await name.pressSequentially('Jordan Lee');
+    await expect(name).toHaveValue('Jordan Lee', { timeout: 500 });
+  }).toPass();
   await page.getByRole('button', { name: 'Submit' }).click();
   await expect(page.getByRole('status')).toHaveText('Submitted: Jordan Lee');
   await page.getByRole('button', { name: 'Reset' }).click();
