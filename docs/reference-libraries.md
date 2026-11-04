@@ -204,6 +204,21 @@ A callout (`div[scAlert]`). A shadcn component; Base UI and Radix have none, so 
 - **The parts, the variants and each preset's look.**
 - **Not `role="alert"` on every alert** (the user, 2026-11-04): no role by default; the consumer adds `role="status"` or `role="alert"` on a region that is there from the start, when the alert appears after an action. The page's Announcing section and the Announced example say how.
 
+## Alert Dialog
+
+A modal dialog asking for an answer (`div[scAlertDialog]`). A shadcn component: Base UI's Alert Dialog (local docs) and shadcn's reference app and docs' examples (2026-11-04).
+
+| Library                                                                                                                    | What to read                                                                                                                                                                                 |
+| -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Base UI Alert Dialog (`@base-ui/react/docs/react/components/alert-dialog.md`)                                              | Parts (Trigger, Portal, Backdrop, Viewport, Popup, Title, Description, Close); close reasons: `escape-key`, not an outside press; initial and final focus; handles, payloads, nested dialogs |
+| shadcn Alert Dialog (`shadcn-reference/presets/*/alert-dialog.tsx`), examples (`apps/v4/examples/base/alert-dialog-*.tsx`) | Header, Footer, Media, Cancel, Action; `size`; eight looks; Basic, Small, Media, Small with Media, Destructive, RTL                                                                          |
+
+**Taken:**
+
+- **Escape closes it** (Base UI, and the WAI-ARIA pattern) — ours ignored it until 2026-11-04; a click outside still doesn't.
+- **shadcn's parts, `size` and each preset's look**, without its placement and animation classes (the CDK overlay, Angular's `animate.enter`/`leave`).
+- **Not**: Base UI's handles and payloads (detached triggers), nested dialogs, `initialFocus`/`finalFocus` (the focus trap takes the first button and gives focus back).
+
 ## Control Group
 
 An input or a select joined with its buttons (`div[scControlGroup]`): shadcn's Button Group, renamed for what it is for (the user, 2026-10-30: it is only useful when inputs or selects mix with buttons; buttons alone are on the Button page). A shadcn component, so no web research: Base UI and shadcn's reference app (2026-10-30).

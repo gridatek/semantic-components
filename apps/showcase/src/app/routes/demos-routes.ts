@@ -85,6 +85,13 @@ export const demosRoutes: Route[] = [
     path: 'demos/alert-dialog',
     children: [
       {
+        path: 'alert-dialog-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/alert-dialog/demos/alert-dialog-usage-demo').then(
+            (m) => m.AlertDialogUsageDemo,
+          ),
+      },
+      {
         path: 'basic-alert-dialog-demo',
         loadComponent: () =>
           import('../pages/docs/alert-dialog/demos/basic-alert-dialog-demo').then(
@@ -92,10 +99,38 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
+        path: 'small-alert-dialog-demo',
+        loadComponent: () =>
+          import('../pages/docs/alert-dialog/demos/small-alert-dialog-demo').then(
+            (m) => m.SmallAlertDialogDemo,
+          ),
+      },
+      {
+        path: 'media-alert-dialog-demo',
+        loadComponent: () =>
+          import('../pages/docs/alert-dialog/demos/media-alert-dialog-demo').then(
+            (m) => m.MediaAlertDialogDemo,
+          ),
+      },
+      {
+        path: 'small-media-alert-dialog-demo',
+        loadComponent: () =>
+          import('../pages/docs/alert-dialog/demos/small-media-alert-dialog-demo').then(
+            (m) => m.SmallMediaAlertDialogDemo,
+          ),
+      },
+      {
         path: 'destructive-alert-dialog-demo',
         loadComponent: () =>
           import('../pages/docs/alert-dialog/demos/destructive-alert-dialog-demo').then(
             (m) => m.DestructiveAlertDialogDemo,
+          ),
+      },
+      {
+        path: 'rtl-alert-dialog-demo',
+        loadComponent: () =>
+          import('../pages/docs/alert-dialog/demos/rtl-alert-dialog-demo').then(
+            (m) => m.RtlAlertDialogDemo,
           ),
       },
     ],

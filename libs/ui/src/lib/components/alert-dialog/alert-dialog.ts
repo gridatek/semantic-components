@@ -6,6 +6,7 @@ import {
   inject,
   input,
 } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 import { ScAlertDialogProvider } from './alert-dialog-provider';
 
@@ -27,6 +28,8 @@ import { ScAlertDialogProvider } from './alert-dialog-provider';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScAlertDialog {
+  private readonly styles = injectPreset().alertDialog;
+
   readonly alertDialogProvider = inject(ScAlertDialogProvider);
   readonly classInput = input<string>('', { alias: 'class' });
   readonly size = input<'default' | 'sm'>('default');
@@ -38,9 +41,8 @@ export class ScAlertDialog {
 
   protected readonly class = computed(() =>
     cn(
-      'relative bg-background ring-foreground/10 grid w-full max-w-[calc(100%-2rem)] gap-4 rounded-xl p-4 text-sm ring-1 duration-100 outline-none',
-      'data-[size=default]:max-w-xs data-[size=sm]:max-w-xs data-[size=default]:sm:max-w-sm',
-      'group/alert-dialog-content',
+      'relative max-w-[calc(100%-2rem)] text-sm',
+      this.styles.content,
       this.classInput(),
     ),
   );

@@ -97,16 +97,16 @@ Where it slides or zooms from and to is set by plain classes (`slide-in-from-*`,
 - `display: contents` makes the element's box disappear while keeping children in flow
 - Consumer can place trigger and other content without layout interference
 
-### 3. No Backdrop Click / Escape Handlers
+### 3. Escape Closes, a Click Outside Doesn't
 
-**Decision:** Alert dialog does not close on backdrop click or Escape key
+**Decision:** Escape closes the alert dialog, as Cancel does; a click on the backdrop does nothing (changed 2026-11-04: it used to ignore Escape too).
 
 **Why:**
 
-- Alert dialogs require explicit user action (Cancel or Action button)
-- This follows WAI-ARIA alert dialog best practices
-- Prevents accidental dismissal of critical confirmations
-- Unlike `ScDialogProvider`, the provider does not subscribe to `overlayRef.backdropClick()` or `overlayRef.keydownEvents()`
+- The WAI-ARIA dialog pattern, alert dialogs included: Escape closes. Base UI's alert dialog closes on `escape-key` too, and not on an outside press.
+- Without it, a keyboard user could only leave through a button.
+- A click outside still does nothing: an alert dialog wants an answer, and a stray click shouldn't dismiss it.
+- The provider subscribes to `overlayRef.keydownEvents()` (Escape), not to `overlayRef.backdropClick()`; the overlay is disposed with the provider.
 
 ## Accessibility Considerations
 
@@ -115,7 +115,7 @@ The animation system preserves accessibility:
 1. **Focus Management:** Dialog auto-focuses on mount via `scFocusTrap`, which gives focus back on close — unless it has moved on elsewhere
 2. **ARIA Attributes:** Set before animations start (`role="alertdialog"`, `aria-modal="true"`)
 3. **Screen Readers:** Announce dialog immediately (not after animation)
-4. **No Escape Dismiss:** Escape key does NOT close the alert dialog — user must choose an action
+4. **Escape Dismisses:** Escape closes the alert dialog, as Cancel; focus goes back to the trigger
 5. **No Backdrop Dismiss:** Clicking outside does NOT close the alert dialog — user must choose an action
 6. **Reduced Motion:** the library stylesheet keeps the fades and drops the movement (slide, zoom) under `prefers-reduced-motion: reduce`
 
@@ -145,4 +145,4 @@ The animation system preserves accessibility:
 - Content is only instantiated when dialog opens
 - `ScAlertDialogPortal` must be imported in the consumer's `imports` array
 - `[(open)]` provides two-way binding for programmatic control
-- No close button, escape, or backdrop click — user must choose Cancel or Action
+- No close button or backdrop click — Cancel, the Action or Escape close it

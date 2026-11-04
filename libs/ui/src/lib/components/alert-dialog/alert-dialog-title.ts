@@ -1,4 +1,5 @@
 import { Directive, computed, inject, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 import { ScAlertDialog } from './alert-dialog';
 
@@ -10,14 +11,12 @@ import { ScAlertDialog } from './alert-dialog';
   },
 })
 export class ScAlertDialogTitle {
+  private readonly styles = injectPreset().alertDialog;
+
   readonly dialog = inject(ScAlertDialog);
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn(
-      'text-base font-medium',
-      'sm:group-data-[size=default]/alert-dialog-content:group-has-data-[slot=alert-dialog-media]/alert-dialog-content:col-start-2',
-      this.classInput(),
-    ),
+    cn(this.styles.title, this.classInput()),
   );
 }

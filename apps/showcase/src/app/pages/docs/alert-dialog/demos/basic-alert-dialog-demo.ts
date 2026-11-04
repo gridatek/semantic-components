@@ -1,5 +1,4 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScButton } from '@semantic-components/ui';
 import {
   ScAlertDialog,
   ScAlertDialogAction,
@@ -11,29 +10,29 @@ import {
   ScAlertDialogProvider,
   ScAlertDialogTitle,
   ScAlertDialogTrigger,
+  ScButton,
 } from '@semantic-components/ui';
 
+/** A title, a description, Cancel and the action. Cancel first: the least harmful answer, and focused first. */
 @Component({
   selector: 'app-basic-alert-dialog-demo',
   imports: [
-    ScAlertDialogProvider,
+    ScAlertDialog,
     ScAlertDialogAction,
     ScAlertDialogCancel,
-    ScAlertDialog,
     ScAlertDialogDescription,
     ScAlertDialogFooter,
     ScAlertDialogHeader,
     ScAlertDialogPortal,
+    ScAlertDialogProvider,
     ScAlertDialogTitle,
     ScAlertDialogTrigger,
     ScButton,
   ],
-  host: { class: 'flex w-full justify-center' },
-  encapsulation: ViewEncapsulation.None,
   template: `
     <div scAlertDialogProvider>
       <button scButton scAlertDialogTrigger variant="outline">
-        Delete Account
+        Show Dialog
       </button>
       <ng-template scAlertDialogPortal>
         <div scAlertDialog>
@@ -52,5 +51,7 @@ import {
       </ng-template>
     </div>
   `,
+  host: { class: 'flex w-full justify-center' },
+  encapsulation: ViewEncapsulation.None,
 })
 export class BasicAlertDialogDemo {}

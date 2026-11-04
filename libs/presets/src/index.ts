@@ -59,6 +59,19 @@ export interface ScAlertStyles {
   action: string;
 }
 
+/** An alert dialog's parts, in one of shadcn's styles. */
+export interface ScAlertDialogStyles {
+  /** Over the backdrop: its shade and blur. */
+  backdrop: string;
+  /** The dialog box (`div[scAlertDialog]`). */
+  content: string;
+  header: string;
+  footer: string;
+  media: string;
+  title: string;
+  description: string;
+}
+
 /** A card's parts that change from style to style (its action is the same in all). */
 export interface ScCardStyles {
   /** The card: its radius, ring, shadow, text and `--card-spacing`. */
@@ -97,6 +110,7 @@ export interface ScTableStyles {
 /** A preset: the components' classes in one of shadcn's styles. */
 export interface ScPreset {
   alert: ScAlertStyles;
+  alertDialog: ScAlertDialogStyles;
   badge: (props: { variant?: ScBadgeVariant | null }) => string;
   button: (props: {
     variant?: ScButtonVariant | null;

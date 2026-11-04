@@ -1,4 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 
 @Directive({
@@ -9,14 +10,11 @@ import { cn } from '../../utils';
   },
 })
 export class ScAlertDialogMedia {
+  private readonly styles = injectPreset().alertDialog;
+
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn(
-      'bg-muted mb-2 inline-flex size-10 items-center justify-center rounded-md',
-      'sm:group-data-[size=default]/alert-dialog-content:row-span-2',
-      '*:[svg:not([class*="size-"])]:size-6',
-      this.classInput(),
-    ),
+    cn(this.styles.media, this.classInput()),
   );
 }

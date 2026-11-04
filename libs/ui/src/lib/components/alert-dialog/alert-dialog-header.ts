@@ -1,4 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 
 @Directive({
@@ -8,16 +9,11 @@ import { cn } from '../../utils';
   },
 })
 export class ScAlertDialogHeader {
+  private readonly styles = injectPreset().alertDialog;
+
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn(
-      'grid grid-rows-[auto_1fr] place-items-center gap-1.5 text-center',
-      'has-data-[slot=alert-dialog-media]:grid-rows-[auto_auto_1fr] has-data-[slot=alert-dialog-media]:gap-x-4',
-      'sm:group-data-[size=default]/alert-dialog-content:place-items-start',
-      'sm:group-data-[size=default]/alert-dialog-content:text-start',
-      'sm:group-data-[size=default]/alert-dialog-content:has-data-[slot=alert-dialog-media]:grid-rows-[auto_1fr]',
-      this.classInput(),
-    ),
+    cn(this.styles.header, this.classInput()),
   );
 }

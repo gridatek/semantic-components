@@ -1,205 +1,73 @@
-# ScAlertDialog Components
+# Alert Dialog
 
-A set of Angular components for creating accessible alert dialogs with shadcn/ui styling.
-
-## Architecture
-
-The components follow a dependency injection (DI) pattern where child components inject the parent `ScAlertDialogProvider` to access shared state. `ScAlertDialogProvider` owns all overlay lifecycle logic (CDK overlay, backdrop, focus trap). The `ScAlertDialogPortal` directive marks the lazy content template that gets portaled into the overlay.
-
-```
-ScAlertDialogProvider (root wrapper - manages open state + overlay lifecycle)
-├── ScAlertDialogTrigger (button that opens dialog)
-└── ng-template[scAlertDialogPortal] (lazy content, portaled to CDK overlay)
-    └── ScAlertDialog (dialog panel with animations)
-        ├── ScAlertDialogHeader
-        │   ├── ScAlertDialogTitle
-        │   └── ScAlertDialogDescription
-        └── ScAlertDialogFooter
-            ├── ScAlertDialogCancel
-            └── ScAlertDialogAction
-```
-
-## Components
-
-| Component                  | Selector                           | Description                                    |
-| -------------------------- | ---------------------------------- | ---------------------------------------------- |
-| `ScAlertDialogProvider`    | `div[scAlertDialogProvider]`       | Root wrapper, manages open state + overlay     |
-| `ScAlertDialogTrigger`     | `button[scAlertDialogTrigger]`     | Button that opens the dialog                   |
-| `ScAlertDialogPortal`      | `ng-template[scAlertDialogPortal]` | Directive marking lazy content for the overlay |
-| `ScAlertDialog`            | `div[scAlertDialog]`               | Dialog panel with animations                   |
-| `ScAlertDialogHeader`      | `div[scAlertDialogHeader]`         | Header section container                       |
-| `ScAlertDialogTitle`       | `h2[scAlertDialogTitle]`           | Dialog title (aria-labelledby)                 |
-| `ScAlertDialogDescription` | `p[scAlertDialogDescription]`      | Dialog description (aria-describedby)          |
-| `ScAlertDialogFooter`      | `div[scAlertDialogFooter]`         | Footer section for actions                     |
-| `ScAlertDialogCancel`      | `button[scAlertDialogCancel]`      | Cancel button (closes dialog)                  |
-| `ScAlertDialogAction`      | `button[scAlertDialogAction]`      | Confirm/action button                          |
+A modal dialog that asks for an answer before going on — to confirm, to cancel. In the look of the app's preset. For a dialog that can simply be dismissed, use a Dialog. How it works inside: [ARCHITECTURE.md](./ARCHITECTURE.md).
 
 ## Usage
 
-### Basic Alert Dialog
-
 ```html
 <div scAlertDialogProvider>
-  <button scAlertDialogTrigger>Delete Account</button>
+  <button scButton scAlertDialogTrigger variant="outline">Show Dialog</button>
   <ng-template scAlertDialogPortal>
     <div scAlertDialog>
       <div scAlertDialogHeader>
         <h2 scAlertDialogTitle>Are you absolutely sure?</h2>
-        <p scAlertDialogDescription>This action cannot be undone. This will permanently delete your account and remove your data from our servers.</p>
-      </div>
-      <div scAlertDialogFooter>
-        <button scAlertDialogCancel>Cancel</button>
-        <button scAlertDialogAction>Continue</button>
-      </div>
-    </div>
-  </ng-template>
-</div>
-```
-
-### Destructive Action
-
-```html
-<div scAlertDialogProvider>
-  <button scAlertDialogTrigger>Delete</button>
-  <ng-template scAlertDialogPortal>
-    <div scAlertDialog>
-      <div scAlertDialogHeader>
-        <h2 scAlertDialogTitle>Delete item?</h2>
         <p scAlertDialogDescription>This action cannot be undone.</p>
       </div>
       <div scAlertDialogFooter>
         <button scAlertDialogCancel>Cancel</button>
-        <button scAlertDialogAction class="bg-destructive text-destructive-foreground hover:bg-destructive/90">Delete</button>
+        <button scAlertDialogAction (click)="delete()">Continue</button>
       </div>
     </div>
   </ng-template>
 </div>
 ```
 
-### Controlled
+## Anatomy
 
-```typescript
-@Component({
-  template: `
-    <div scAlertDialogProvider [(open)]="isOpen">
-      <button scAlertDialogTrigger>Open</button>
-      <ng-template scAlertDialogPortal>
-        <div scAlertDialog>
-          <!-- content -->
-        </div>
-      </ng-template>
-    </div>
-  `,
-})
-export class MyComponent {
-  isOpen = signal(false);
-}
-```
-
-### Custom Action Handler
-
-```typescript
-@Component({
-  template: `
-    <div scAlertDialogProvider>
-      <button scAlertDialogTrigger>Delete</button>
-      <ng-template scAlertDialogPortal>
-        <div scAlertDialog>
-          <div scAlertDialogHeader>
-            <h2 scAlertDialogTitle>Confirm deletion</h2>
-            <p scAlertDialogDescription>Are you sure?</p>
-          </div>
-          <div scAlertDialogFooter>
-            <button scAlertDialogCancel>Cancel</button>
-            <button scAlertDialogAction (click)="onDelete()">Delete</button>
-          </div>
-        </div>
-      </ng-template>
-    </div>
-  `,
-})
-export class MyComponent {
-  onDelete(): void {
-    // Handle deletion - dialog closes automatically
-    console.log('Item deleted');
-  }
-}
-```
-
-## Differences from Dialog
-
-| Feature       | Dialog          | AlertDialog     |
-| ------------- | --------------- | --------------- |
-| Purpose       | General content | Confirmations   |
-| Escape key    | Closes dialog   | Does NOT close  |
-| Click outside | Closes dialog   | Does NOT close  |
-| Role          | `dialog`        | `alertdialog`   |
-| Buttons       | Any             | Cancel + Action |
-
-## How It Works
-
-### State Management
-
-`ScAlertDialogProvider` uses a `model` signal for the `open` state:
-
-```typescript
-readonly open = model<boolean>(false);
-```
-
-Child components inject `ScAlertDialogProvider` to read or modify this state:
-
-```typescript
-// ScAlertDialogTrigger
-openDialog(): void {
-  this.alertDialogProvider.open.set(true);
-}
-
-// ScAlertDialogCancel
-closeDialog(): void {
-  this.alertDialogProvider.open.set(false);
-}
-```
-
-### Overlay Management
-
-`ScAlertDialogProvider` creates a CDK overlay and attaches/detaches the `scAlertDialogPortal` template based on state:
-
-```typescript
-effect(() => {
-  if (this.open()) {
-    this.attachDialog();
-  } else {
-    this.detachDialog();
-  }
-});
-```
-
-The `scAlertDialogPortal` directive marks the `ng-template` whose content is lazily instantiated into the overlay only when the dialog opens.
-
-### Animations
-
-`ScAlertDialog` animates with Angular's `animate.enter` / `animate.leave`: it fades and zooms in (with the backdrop behind it fading in) when it is shown, and back out when it goes — Angular removes it once that animation ends.
-
-## Accessibility
-
-- `role="alertdialog"` on `ScAlertDialog`
-- `aria-modal="true"` for modal behavior
-- `aria-labelledby` linked to `ScAlertDialogTitle`
-- `aria-describedby` linked to `ScAlertDialogDescription`
-- `aria-haspopup="alertdialog"` on the trigger
-- `aria-expanded` reflects open state on trigger
-- Escape key does NOT close (user must choose an action)
-- Click outside does NOT close (user must choose an action)
-- Focus trapped within the dialog
-
-## Customization
-
-All components accept a `class` input for custom styling:
+Every part is a directive on your element. The dialog is in a template, rendered while it is open, over a backdrop; it is an `alertdialog`, named by its title and described by its description. Cancel and the action close it; do the work on the action's `(click)`, or follow `[(open)]`.
 
 ```html
-<div scAlertDialog class="max-w-md">
-  <!-- narrower dialog -->
+<div scAlertDialogProvider [(open)]="open">
+  <button scButton scAlertDialogTrigger></button>
+  <ng-template scAlertDialogPortal>
+    <div scAlertDialog size="sm">
+      <div scAlertDialogHeader>
+        <div scAlertDialogMedia><svg></svg></div>
+        <h2 scAlertDialogTitle></h2>
+        <p scAlertDialogDescription></p>
+      </div>
+      <div scAlertDialogFooter>
+        <button scAlertDialogCancel></button>
+        <button scAlertDialogAction></button>
+      </div>
+    </div>
+  </ng-template>
 </div>
-
-<button scAlertDialogAction class="bg-destructive">Delete</button>
 ```
+
+## Keyboard
+
+- Open, focus goes into the dialog — to its first button, Cancel: put the least harmful answer first.
+- Tab and Shift+Tab stay in the dialog.
+- Escape closes it, as Cancel does. A click outside doesn't: it wants an answer.
+- Closed, focus goes back to the trigger.
+
+## API reference
+
+Each part takes `class`, merged over the preset.
+
+| Part                                             | Selector                                                     | Description                                                                                     |
+| ------------------------------------------------ | ------------------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
+| `ScAlertDialogProvider`                          | `div[scAlertDialogProvider]`                                 | The state: `[(open)]` (default `false`). The dialog in an overlay, over a backdrop, while open. |
+| `ScAlertDialogTrigger`                           | `button[scAlertDialogTrigger]`                               | Opens it; behaviour only, on any button (`scButton` for the look).                              |
+| `ScAlertDialogPortal`                            | `ng-template[scAlertDialogPortal]`                           | The dialog's template.                                                                          |
+| `ScAlertDialog`                                  | `div[scAlertDialog]`                                         | The dialog. Input `size`: `'default'` or `'sm'` (narrower, centered, two buttons side by side). |
+| `ScAlertDialogHeader`                            | `div[scAlertDialogHeader]`                                   | The media, title and description.                                                               |
+| `ScAlertDialogMedia`                             | `div[scAlertDialogMedia]`                                    | An icon, beside the title (above it in a small dialog).                                         |
+| `ScAlertDialogTitle`, `ScAlertDialogDescription` | `h2[scAlertDialogTitle]`, `p[scAlertDialogDescription]`      | Name and describe the dialog.                                                                   |
+| `ScAlertDialogFooter`                            | `div[scAlertDialogFooter]`                                   | The buttons: stacked on a phone, in a row beyond.                                               |
+| `ScAlertDialogCancel`, `ScAlertDialogAction`     | `button[scAlertDialogCancel]`, `button[scAlertDialogAction]` | Close it. The preset's buttons: inputs `variant` (`'outline'`, `'default'`) and `size`.         |
+
+## Styles
+
+From the preset (`alertDialog`): the backdrop's shade and blur, the dialog (padding, radius, width, shadow), the header, the footer (a muted band only in nova), the media, the title and the description. shadcn's placement and open/close classes are left out: the CDK overlay centers the dialog, Angular animates it.

@@ -1,4 +1,5 @@
 import { Directive, computed, inject, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 import { ScAlertDialog } from './alert-dialog';
 
@@ -10,14 +11,12 @@ import { ScAlertDialog } from './alert-dialog';
   },
 })
 export class ScAlertDialogDescription {
+  private readonly styles = injectPreset().alertDialog;
+
   readonly dialog = inject(ScAlertDialog);
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn(
-      'text-muted-foreground text-sm text-balance md:text-pretty',
-      '*:[a]:underline *:[a]:underline-offset-3 *:[a]:hover:text-foreground',
-      this.classInput(),
-    ),
+    cn(this.styles.description, this.classInput()),
   );
 }

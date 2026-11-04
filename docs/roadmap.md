@@ -2,7 +2,7 @@
 
 Every component brought to the same bar: shadcn's look, tested, mobile first, right to left, in light and dark, rendered on the server. One component at a time, in the order the user names, each through [component-rewrite-process.md](component-rewrite-process.md). Two lists: the components shadcn has (**List 1**: its look and parts are the reference), and the ones it doesn't (**List 2**: shadcn's tokens and patterns, our design). The order of each list is the user's work order: changed only by hand, in this document — `scripts/roadmap.mjs` keeps every row where it is, refreshes its columns, and adds a new component at the end of its list; **Built on** (the components it imports, and those it shapes inside it — the `data-slot` its styles, or its preset's, read: a button group shapes its buttons, input groups and selects) and **Parts** (the components, directives and services it declares) show where it sits. Each row ticked when it meets the definition of done.
 
-Inventory (147 components): 62 with a shadcn counterpart · 103 with e2e demo tests · 147 with a page axe test · 22 with an RTL demo.
+Inventory (147 components): 62 with a shadcn counterpart · 103 with e2e demo tests · 147 with a page axe test · 23 with an RTL demo.
 
 ## The two lists
 
@@ -67,8 +67,8 @@ The components shadcn has: its look (the generated reference app, nova) and its 
 |   9 | [Card](../apps/showcase/src/app/pages/docs/card)                         | ui      | —                                                          |     7 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] | waiting |
 |  10 | [Badge](../apps/showcase/src/app/pages/docs/badge)                       | ui      | —                                                          |     1 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] | waiting |
 |  11 | [Alert](../apps/showcase/src/app/pages/docs/alert)                       | ui      | —                                                          |     4 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] | waiting |
-|  12 | [Accordion](../apps/showcase/src/app/pages/docs/accordion)               | ui      | —                                                          |     7 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
-|  13 | [Alert Dialog](../apps/showcase/src/app/pages/docs/alert-dialog)         | ui      | backdrop, button, focus-trap                               |    11 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
+|  12 | [Alert Dialog](../apps/showcase/src/app/pages/docs/alert-dialog)         | ui      | backdrop, button, focus-trap                               |    11 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] | waiting |
+|  13 | [Accordion](../apps/showcase/src/app/pages/docs/accordion)               | ui      | —                                                          |     7 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 |  14 | [Aspect Ratio](../apps/showcase/src/app/pages/docs/aspect-ratio)         | ui      | —                                                          |     1 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 |  15 | [Attachment](../apps/showcase/src/app/pages/docs/attachment)             | ui      | —                                                          |     8 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 |  16 | [Avatar](../apps/showcase/src/app/pages/docs/avatar)                     | ui      | —                                                          |     6 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |

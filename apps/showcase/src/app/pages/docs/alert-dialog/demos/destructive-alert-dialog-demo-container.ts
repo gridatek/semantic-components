@@ -5,7 +5,6 @@ import { DestructiveAlertDialogDemo } from './destructive-alert-dialog-demo';
 @Component({
   selector: 'app-destructive-alert-dialog-demo-container',
   imports: [DemoContainer, DestructiveAlertDialogDemo],
-  encapsulation: ViewEncapsulation.None,
   template: `
     <app-demo-container
       title="Destructive"
@@ -16,10 +15,10 @@ import { DestructiveAlertDialogDemo } from './destructive-alert-dialog-demo';
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
 })
 export class DestructiveAlertDialogDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScButton } from '@semantic-components/ui';
 import {
   ScAlertDialog,
   ScAlertDialogAction,
@@ -27,53 +26,63 @@ import {
   ScAlertDialogDescription,
   ScAlertDialogFooter,
   ScAlertDialogHeader,
+  ScAlertDialogMedia,
   ScAlertDialogPortal,
   ScAlertDialogProvider,
   ScAlertDialogTitle,
   ScAlertDialogTrigger,
+  ScButton,
 } from '@semantic-components/ui';
+import { SiTrash2Icon } from '@semantic-icons/lucide-icons';
 
+/** A destructive action: its button and media in the destructive color. */
 @Component({
   selector: 'app-destructive-alert-dialog-demo',
   imports: [
-    ScAlertDialogProvider,
+    ScAlertDialog,
     ScAlertDialogAction,
     ScAlertDialogCancel,
-    ScAlertDialog,
     ScAlertDialogDescription,
     ScAlertDialogFooter,
     ScAlertDialogHeader,
+    ScAlertDialogMedia,
     ScAlertDialogPortal,
+    ScAlertDialogProvider,
     ScAlertDialogTitle,
     ScAlertDialogTrigger,
     ScButton,
+    SiTrash2Icon,
   ],
-  host: { class: 'flex w-full justify-center' },
-  encapsulation: ViewEncapsulation.None,
   template: \`
     <div scAlertDialogProvider>
       <button scButton scAlertDialogTrigger variant="destructive">
-        Delete All
+        Delete Chat
       </button>
       <ng-template scAlertDialogPortal>
-        <div scAlertDialog>
+        <div scAlertDialog size="sm">
           <div scAlertDialogHeader>
-            <h2 scAlertDialogTitle>Delete all items?</h2>
+            <div
+              scAlertDialogMedia
+              class="bg-destructive/10 text-destructive dark:bg-destructive/20 dark:text-destructive"
+            >
+              <svg siTrash2Icon></svg>
+            </div>
+            <h2 scAlertDialogTitle>Delete chat?</h2>
             <p scAlertDialogDescription>
-              This will permanently delete all items in your collection. This
-              action cannot be reversed.
+              This will permanently delete this chat conversation. Memories
+              saved during this chat stay until you delete them in Settings.
             </p>
           </div>
           <div scAlertDialogFooter>
             <button scAlertDialogCancel>Cancel</button>
-            <button scAlertDialogAction variant="destructive">
-              Delete All
-            </button>
+            <button scAlertDialogAction variant="destructive">Delete</button>
           </div>
         </div>
       </ng-template>
     </div>
   \`,
+  host: { class: 'flex w-full justify-center' },
+  encapsulation: ViewEncapsulation.None,
 })
 export class DestructiveAlertDialogDemo {}`;
 }
