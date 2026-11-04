@@ -2,11 +2,11 @@ import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScBackdrop, ScButton } from '@semantic-components/ui';
 
 /**
- * The backdrop over a card (kept inside it: `absolute` instead of the
- * overlay's `fixed`): it fades in when shown and out when it goes.
+ * Your own shade: classes over the preset's (cn: a later class wins) — here
+ * a tint of the primary color, no blur.
  */
 @Component({
-  selector: 'app-basic-backdrop-demo',
+  selector: 'app-custom-backdrop-demo',
   imports: [ScBackdrop, ScButton],
   template: `
     <div class="flex flex-col items-center gap-4">
@@ -15,7 +15,10 @@ import { ScBackdrop, ScButton } from '@semantic-components/ui';
       >
         <p class="text-sm">The page behind</p>
         @if (open()) {
-          <div scBackdrop class="absolute z-0"></div>
+          <div
+            scBackdrop
+            class="bg-primary/20 absolute z-0 supports-backdrop-filter:backdrop-blur-none"
+          ></div>
         }
       </div>
       <button
@@ -24,13 +27,13 @@ import { ScBackdrop, ScButton } from '@semantic-components/ui';
         [attr.aria-pressed]="open()"
         (click)="open.set(!open())"
       >
-        Backdrop
+        Tinted backdrop
       </button>
     </div>
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class BasicBackdropDemo {
+export class CustomBackdropDemo {
   protected readonly open = signal(false);
 }

@@ -3045,10 +3045,17 @@ export const demosRoutes: Route[] = [
     path: 'demos/backdrop',
     children: [
       {
-        path: 'basic-backdrop-demo',
+        path: 'backdrop-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/backdrop/demos/basic-backdrop-demo').then(
-            (m) => m.BasicBackdropDemo,
+          import('../pages/docs/backdrop/demos/backdrop-usage-demo').then(
+            (m) => m.BackdropUsageDemo,
+          ),
+      },
+      {
+        path: 'custom-backdrop-demo',
+        loadComponent: () =>
+          import('../pages/docs/backdrop/demos/custom-backdrop-demo').then(
+            (m) => m.CustomBackdropDemo,
           ),
       },
     ],
