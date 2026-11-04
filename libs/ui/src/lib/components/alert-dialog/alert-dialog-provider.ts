@@ -15,7 +15,6 @@ import {
   model,
   viewChild,
 } from '@angular/core';
-import { injectPreset } from '../../config/preset';
 import { ScFocusTrap } from '../../utilities';
 import { cn } from '../../utils';
 import { ScBackdrop } from '../backdrop';
@@ -27,7 +26,7 @@ import { ScAlertDialogPortal } from './alert-dialog-portal';
   template: `
     <ng-content />
     <ng-template #overlayTemplate>
-      <div scBackdrop [class]="backdropClass"></div>
+      <div scBackdrop></div>
       <div scFocusTrap>
         <ng-container [ngTemplateOutlet]="alertDialogPortal().templateRef" />
       </div>
@@ -40,8 +39,6 @@ import { ScAlertDialogPortal } from './alert-dialog-portal';
 })
 export class ScAlertDialogProvider {
   private readonly overlay = inject(Overlay);
-  /** The backdrop's shade and blur, from the preset. */
-  protected readonly backdropClass = injectPreset().alertDialog.backdrop;
   private readonly viewContainerRef = inject(ViewContainerRef);
 
   readonly classInput = input<string>('', { alias: 'class' });

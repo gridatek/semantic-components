@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation, computed, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 
 /**
@@ -16,11 +17,15 @@ import { cn } from '../../utils';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScBackdrop {
+  // Its shade and blur: the preset's, the same behind every overlay.
+  private readonly backdrop = injectPreset().backdrop;
+
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
     cn(
-      'pointer-events-none fixed inset-0 -z-50 bg-black/10 duration-100 supports-backdrop-filter:backdrop-blur-xs',
+      'pointer-events-none fixed inset-0 -z-50 duration-100',
+      this.backdrop,
       this.classInput(),
     ),
   );

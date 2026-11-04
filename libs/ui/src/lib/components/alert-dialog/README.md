@@ -70,4 +70,4 @@ Each part takes `class`, merged over the preset.
 
 ## Styles
 
-From the preset (`alertDialog`): the backdrop's shade and blur, the dialog (padding, radius, width, shadow), the header, the footer (a muted band only in nova), the media, the title and the description. shadcn's placement and open/close classes are left out: the CDK overlay centers the dialog, Angular animates it.
+From the preset (`alertDialog`): the dialog (padding, radius, width, shadow), the header, the footer (a muted band only in nova), the media, the title and the description. shadcn's placement and open/close classes are left out: the CDK overlay centers the dialog, Angular animates it. The backdrop is the shared `scBackdrop`, its shade and blur the preset's `backdrop`, the same behind every overlay.

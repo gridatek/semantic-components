@@ -61,8 +61,6 @@ export interface ScAlertStyles {
 
 /** An alert dialog's parts, in one of shadcn's styles. */
 export interface ScAlertDialogStyles {
-  /** Over the backdrop: its shade and blur. */
-  backdrop: string;
   /** The dialog box (`div[scAlertDialog]`). */
   content: string;
   header: string;
@@ -111,6 +109,8 @@ export interface ScTableStyles {
 export interface ScPreset {
   alert: ScAlertStyles;
   alertDialog: ScAlertDialogStyles;
+  /** The backdrop behind every overlay (dialogs, sheets, drawers): its shade and blur. */
+  backdrop: string;
   badge: (props: { variant?: ScBadgeVariant | null }) => string;
   button: (props: {
     variant?: ScButtonVariant | null;

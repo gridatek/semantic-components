@@ -4,7 +4,6 @@ import type { ScAlertDialogStyles } from '@semantic-components/presets';
 // without its placement and animation classes: the CDK overlay centers it,
 // Angular animates it (animate.enter / animate.leave).
 export const alertDialog: ScAlertDialogStyles = {
-  backdrop: 'bg-black/80 supports-backdrop-filter:backdrop-blur-xs',
   content:
     'group/alert-dialog-content grid w-full gap-3 rounded-xl bg-popover p-4 text-popover-foreground ring-1 ring-foreground/10 duration-100 outline-none data-[size=default]:max-w-xs data-[size=sm]:max-w-64 data-[size=default]:sm:max-w-sm',
   header:

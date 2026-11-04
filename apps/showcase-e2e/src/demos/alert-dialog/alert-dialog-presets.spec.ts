@@ -58,7 +58,7 @@ test.describe('Alert Dialog in every preset', () => {
       const s = styles.alertDialog;
       await expectClasses(
         page.locator('[scBackdrop]'),
-        s.backdrop,
+        styles.backdrop,
         `${preset} backdrop`,
       );
       await expectClasses(
