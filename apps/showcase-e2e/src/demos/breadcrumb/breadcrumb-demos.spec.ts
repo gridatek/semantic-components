@@ -1,0 +1,106 @@
+import { collectErrors } from '../../interaction';
+import { box } from '../../looks';
+import { expectNoHorizontalScroll } from '../../mobile';
+import { expectInlineOrder, expectRtl } from '../../rtl';
+import { expect, test } from '../../test';
+
+const demo = (name: string) => `/demos/breadcrumb/${name}-breadcrumb-demo`;
+
+let errors: string[];
+
+test.beforeEach(({ page }) => {
+  errors = collectErrors(page);
+});
+
+test.afterEach(() => {
+  expect(errors).toEqual([]);
+});
+
+test('Basic: a named navigation; the links, then the current page', async ({
+  page,
+}) => {
+  await page.goto(demo('basic'));
+  const nav = page.getByRole('navigation', { name: 'Location' });
+  await expect(nav.getByRole('listitem')).toHaveText([
+    'Home',
+    'Components',
+    'Breadcrumb',
+  ]);
+  await expect(nav.getByRole('link', { name: 'Home' })).toHaveAttribute(
+    'href',
+    '/',
+  );
+  const current = nav.getByText('Breadcrumb', { exact: true });
+  await expect(current).toHaveAttribute('aria-current', 'page');
+  await expect(current).toHaveAttribute('aria-disabled', 'true');
+  // The separators are not read.
+  await expect(nav.locator('[scBreadcrumbSeparator]').first()).toHaveAttribute(
+    'aria-hidden',
+    'true',
+  );
+});
+
+test('Link Component: a routerLink goes there in the app', async ({ page }) => {
+  await page.goto(demo('link'));
+  await page
+    .getByRole('navigation', { name: 'Site' })
+    .getByRole('link', { name: 'Components' })
+    .click();
+  await expect(page).toHaveURL(/\/docs\/components$/);
+});
+
+test('Custom Separator: your icon between the steps', async ({ page }) => {
+  await page.goto(demo('separator'));
+  const separators = page.locator('[scBreadcrumbSeparator] svg');
+  await expect(separators).toHaveCount(2);
+});
+
+test('Dropdown: a crumb opens a menu', async ({ page }) => {
+  await page.goto(demo('dropdown'));
+  await page.getByRole('button', { name: 'Components' }).click();
+  await expect(page.getByRole('menuitem', { name: 'Themes' })).toBeVisible();
+});
+
+test('Collapsed: an ellipsis for the steps left out, not read', async ({
+  page,
+}) => {
+  await page.goto(demo('ellipsis'));
+  const ellipsis = page.locator('[scBreadcrumbEllipsis]');
+  await expect(ellipsis).toHaveAttribute('aria-hidden', 'true');
+  await expect(
+    page.getByRole('navigation', { name: 'Folder path' }).getByRole('link'),
+  ).toHaveCount(2);
+});
+
+test('RTL: from the right, the chevrons turned to point left', async ({
+  page,
+}) => {
+  await page.goto(demo('rtl'));
+  const nav = page.getByRole('navigation', { name: 'مسار التنقل' });
+  await expectRtl(nav);
+  const items = nav.locator('[scBreadcrumbItem]');
+  await expectInlineOrder([items.first(), items.nth(1), items.last()]);
+  await expect(nav.locator('[scBreadcrumbSeparator] svg').first()).toHaveCSS(
+    'rotate',
+    '180deg',
+  );
+});
+
+test('The separator stays upright left to right', async ({ page }) => {
+  await page.goto('/demos/breadcrumb/breadcrumb-usage-demo');
+  await expect(page.locator('[scBreadcrumbSeparator] svg').first()).toHaveCSS(
+    'rotate',
+    'none',
+  );
+});
+
+test('On a phone: the demos fit, wrapping if needed @mobile', async ({
+  page,
+}) => {
+  for (const name of ['basic', 'separator', 'dropdown', 'ellipsis', 'rtl']) {
+    await page.goto(demo(name));
+    await expectNoHorizontalScroll(page);
+    const list = await box(page.locator('[scBreadcrumbList]'));
+    expect(list.x).toBeGreaterThanOrEqual(0);
+  }
+});

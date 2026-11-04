@@ -248,6 +248,20 @@ A box kept to a ratio (`[scAspectRatio]`). A shadcn component; Base UI has none,
 - **Not**: a required `ratio` — ours defaults to 1 (the user, 2026-11-04).
 - **Ours beside shadcn's examples**: Video, and Responsive (another ratio on a phone, by a class).
 
+## Breadcrumb
+
+Where the page is (`nav[scBreadcrumb]`). A shadcn component; Base UI has none, so shadcn's reference app and its docs' examples (2026-11-04).
+
+| Library                                                                                                              | What to read                                                                                                                                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| shadcn Breadcrumb (`shadcn-reference/presets/*/breadcrumb.tsx`), examples (`apps/v4/examples/base/breadcrumb-*.tsx`) | Parts; the page as `role="link"` `aria-disabled` `aria-current`; separator and ellipsis hidden; the default chevron turned in RTL; the list, item and ellipsis per style; Basic, Custom separator, Dropdown, Collapsed, Link component, RTL |
+
+**Taken:**
+
+- **The parts and each preset's look** — ours mixed vega's list with nova's item.
+- **The separator's icon turned right to left**, whatever the icon (ours has no default; a slash or a dot looks the same turned).
+- **Not**: shadcn's default `aria-label="breadcrumb"`, chevron and ellipsis icon, nor its `sr-only` "More" inside the hidden ellipsis — the consumer writes the name and the icons.
+
 ## Control Group
 
 An input or a select joined with its buttons (`div[scControlGroup]`): shadcn's Button Group, renamed for what it is for (the user, 2026-10-30: it is only useful when inputs or selects mix with buttons; buttons alone are on the Button page). A shadcn component, so no web research: Base UI and shadcn's reference app (2026-10-30).

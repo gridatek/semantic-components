@@ -1,4 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 
 @Directive({
@@ -8,9 +9,11 @@ import { cn } from '../../utils';
   },
 })
 export class ScBreadcrumbItem {
+  private readonly styles = injectPreset().breadcrumb;
+
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('inline-flex items-center gap-1', this.classInput()),
+    cn(this.styles.item, this.classInput()),
   );
 }

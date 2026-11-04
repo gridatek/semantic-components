@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   ScBreadcrumb,
   ScBreadcrumbEllipsis,
@@ -13,9 +14,11 @@ import {
   SiEllipsisIcon,
 } from '@semantic-icons/lucide-icons';
 
+/** Collapsed: an ellipsis for the levels left out (hidden from screen readers). */
 @Component({
   selector: 'app-ellipsis-breadcrumb-demo',
   imports: [
+    RouterLink,
     ScBreadcrumb,
     ScBreadcrumbEllipsis,
     ScBreadcrumbItem,
@@ -27,21 +30,18 @@ import {
     SiEllipsisIcon,
   ],
   template: `
-    <nav scBreadcrumb aria-label="Ellipsis breadcrumb">
+    <nav scBreadcrumb aria-label="Folder path">
       <ol scBreadcrumbList>
         <li scBreadcrumbItem>
-          <a scBreadcrumbLink href="#">Home</a>
+          <a scBreadcrumbLink routerLink="/">Home</a>
         </li>
         <li scBreadcrumbSeparator><svg siChevronRightIcon></svg></li>
         <li scBreadcrumbItem>
-          <span scBreadcrumbEllipsis>
-            <svg siEllipsisIcon></svg>
-            <span class="sr-only">More</span>
-          </span>
+          <span scBreadcrumbEllipsis><svg siEllipsisIcon></svg></span>
         </li>
         <li scBreadcrumbSeparator><svg siChevronRightIcon></svg></li>
         <li scBreadcrumbItem>
-          <a scBreadcrumbLink href="#">Components</a>
+          <a scBreadcrumbLink routerLink="/docs/components">Components</a>
         </li>
         <li scBreadcrumbSeparator><svg siChevronRightIcon></svg></li>
         <li scBreadcrumbItem>

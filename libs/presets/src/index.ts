@@ -70,6 +70,14 @@ export interface ScAlertDialogStyles {
   description: string;
 }
 
+/** A breadcrumb's parts that change from style to style. */
+export interface ScBreadcrumbStyles {
+  /** The list: its gaps and text. */
+  list: string;
+  item: string;
+  ellipsis: string;
+}
+
 /** A card's parts that change from style to style (its action is the same in all). */
 export interface ScCardStyles {
   /** The card: its radius, ring, shadow, text and `--card-spacing`. */
@@ -114,6 +122,7 @@ export interface ScPreset {
   /** The backdrop behind every overlay (dialogs, sheets, drawers): its shade and blur. */
   backdrop: string;
   badge: (props: { variant?: ScBadgeVariant | null }) => string;
+  breadcrumb: ScBreadcrumbStyles;
   button: (props: {
     variant?: ScButtonVariant | null;
     size?: ScButtonSize | null;

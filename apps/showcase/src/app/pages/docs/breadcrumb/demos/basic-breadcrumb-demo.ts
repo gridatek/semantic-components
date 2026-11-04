@@ -9,6 +9,7 @@ import {
 } from '@semantic-components/ui';
 import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
 
+/** Links with your hrefs, a separator between, the current page last (aria-current). */
 @Component({
   selector: 'app-basic-breadcrumb-demo',
   imports: [
@@ -21,14 +22,14 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
     SiChevronRightIcon,
   ],
   template: `
-    <nav scBreadcrumb aria-label="Basic breadcrumb">
+    <nav scBreadcrumb aria-label="Location">
       <ol scBreadcrumbList>
         <li scBreadcrumbItem>
-          <a scBreadcrumbLink href="#">Home</a>
+          <a scBreadcrumbLink href="/">Home</a>
         </li>
         <li scBreadcrumbSeparator><svg siChevronRightIcon></svg></li>
         <li scBreadcrumbItem>
-          <a scBreadcrumbLink href="#">Components</a>
+          <a scBreadcrumbLink href="/docs/components">Components</a>
         </li>
         <li scBreadcrumbSeparator><svg siChevronRightIcon></svg></li>
         <li scBreadcrumbItem>

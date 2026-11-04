@@ -4,6 +4,7 @@ import { alertDialog } from './alert-dialog';
 import { avatarGroupCount } from './avatar';
 import { backdrop } from './backdrop';
 import { badge } from './badge';
+import { breadcrumb } from './breadcrumb';
 import { button } from './button';
 import { card } from './card';
 import { controlGroup, controlGroupText } from './control-group';
@@ -25,6 +26,7 @@ export const vega: ScPreset = {
   avatarGroupCount,
   backdrop,
   badge,
+  breadcrumb,
   button,
   card,
   controlGroup,

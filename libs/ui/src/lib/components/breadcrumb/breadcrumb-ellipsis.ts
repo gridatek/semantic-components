@@ -1,4 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 
 @Directive({
@@ -10,12 +11,11 @@ import { cn } from '../../utils';
   },
 })
 export class ScBreadcrumbEllipsis {
+  private readonly styles = injectPreset().breadcrumb;
+
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn(
-      'flex size-5 items-center justify-center [&_svg]:size-4',
-      this.classInput(),
-    ),
+    cn(this.styles.ellipsis, this.classInput()),
   );
 }

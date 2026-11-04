@@ -440,10 +440,31 @@ export const demosRoutes: Route[] = [
     path: 'demos/breadcrumb',
     children: [
       {
+        path: 'breadcrumb-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/breadcrumb/demos/breadcrumb-usage-demo').then(
+            (m) => m.BreadcrumbUsageDemo,
+          ),
+      },
+      {
         path: 'basic-breadcrumb-demo',
         loadComponent: () =>
           import('../pages/docs/breadcrumb/demos/basic-breadcrumb-demo').then(
             (m) => m.BasicBreadcrumbDemo,
+          ),
+      },
+      {
+        path: 'separator-breadcrumb-demo',
+        loadComponent: () =>
+          import('../pages/docs/breadcrumb/demos/separator-breadcrumb-demo').then(
+            (m) => m.SeparatorBreadcrumbDemo,
+          ),
+      },
+      {
+        path: 'dropdown-breadcrumb-demo',
+        loadComponent: () =>
+          import('../pages/docs/breadcrumb/demos/dropdown-breadcrumb-demo').then(
+            (m) => m.DropdownBreadcrumbDemo,
           ),
       },
       {
@@ -454,17 +475,17 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'custom-separator-breadcrumb-demo',
+        path: 'link-breadcrumb-demo',
         loadComponent: () =>
-          import('../pages/docs/breadcrumb/demos/custom-separator-breadcrumb-demo').then(
-            (m) => m.CustomSeparatorBreadcrumbDemo,
+          import('../pages/docs/breadcrumb/demos/link-breadcrumb-demo').then(
+            (m) => m.LinkBreadcrumbDemo,
           ),
       },
       {
-        path: 'longer-path-breadcrumb-demo',
+        path: 'rtl-breadcrumb-demo',
         loadComponent: () =>
-          import('../pages/docs/breadcrumb/demos/longer-path-breadcrumb-demo').then(
-            (m) => m.LongerPathBreadcrumbDemo,
+          import('../pages/docs/breadcrumb/demos/rtl-breadcrumb-demo').then(
+            (m) => m.RtlBreadcrumbDemo,
           ),
       },
     ],
