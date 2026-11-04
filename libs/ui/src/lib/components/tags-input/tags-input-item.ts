@@ -6,8 +6,8 @@ import {
   inject,
   input,
 } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils/cn/cn';
-import { badgeVariants } from '../badge/badge';
 import { ScTagsInput } from './tags-input';
 
 /**
@@ -26,6 +26,9 @@ import { ScTagsInput } from './tags-input';
   },
 })
 export class ScTagsInputItem {
+  // A tag looks like the preset's secondary badge.
+  private readonly badgeStyles = injectPreset().badge;
+
   private readonly tags = inject(forwardRef(() => ScTagsInput));
   private readonly element =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
@@ -37,7 +40,7 @@ export class ScTagsInputItem {
 
   protected readonly class = computed(() =>
     cn(
-      badgeVariants({ variant: 'secondary' }),
+      this.badgeStyles({ variant: 'secondary' }),
       'max-w-48 gap-0.5 pe-0.5 outline-none [&>span]:truncate',
       // Focused: inverted — the field's own ring is around it already.
       'focus-visible:bg-primary focus-visible:text-primary-foreground focus-visible:ring-0',

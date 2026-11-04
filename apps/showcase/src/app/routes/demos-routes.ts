@@ -248,6 +248,13 @@ export const demosRoutes: Route[] = [
     path: 'demos/badge',
     children: [
       {
+        path: 'badge-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/badge/demos/badge-usage-demo').then(
+            (m) => m.BadgeUsageDemo,
+          ),
+      },
+      {
         path: 'variants-badge-demo',
         loadComponent: () =>
           import('../pages/docs/badge/demos/variants-badge-demo').then(
@@ -255,10 +262,38 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'with-icons-badge-demo',
+        path: 'icon-badge-demo',
         loadComponent: () =>
-          import('../pages/docs/badge/demos/with-icons-badge-demo').then(
-            (m) => m.WithIconsBadgeDemo,
+          import('../pages/docs/badge/demos/icon-badge-demo').then(
+            (m) => m.IconBadgeDemo,
+          ),
+      },
+      {
+        path: 'spinner-badge-demo',
+        loadComponent: () =>
+          import('../pages/docs/badge/demos/spinner-badge-demo').then(
+            (m) => m.SpinnerBadgeDemo,
+          ),
+      },
+      {
+        path: 'link-badge-demo',
+        loadComponent: () =>
+          import('../pages/docs/badge/demos/link-badge-demo').then(
+            (m) => m.LinkBadgeDemo,
+          ),
+      },
+      {
+        path: 'colors-badge-demo',
+        loadComponent: () =>
+          import('../pages/docs/badge/demos/colors-badge-demo').then(
+            (m) => m.ColorsBadgeDemo,
+          ),
+      },
+      {
+        path: 'rtl-badge-demo',
+        loadComponent: () =>
+          import('../pages/docs/badge/demos/rtl-badge-demo').then(
+            (m) => m.RtlBadgeDemo,
           ),
       },
     ],

@@ -1,66 +1,32 @@
 # Badge
 
-Displays a badge or a component that looks like a badge.
-
-## Components
-
-- `ScBadge` - A small status indicator with variant support
+A short label — a status, a count, a tag — in the look of the app's preset.
 
 ## Usage
 
 ```html
-<div scBadge>Badge</div>
+<span scBadge>Badge</span>
+<span scBadge variant="secondary">Secondary</span>
+<span scBadge variant="destructive">Destructive</span>
+<span scBadge variant="outline">Outline</span>
 ```
 
-## Variants
+## Anatomy
 
-```html
-<div scBadge>Default</div>
-<div scBadge variant="secondary">Secondary</div>
-<div scBadge variant="destructive">Destructive</div>
-<div scBadge variant="outline">Outline</div>
-```
+One directive, on a `span` or a `div`; on an `a` it is a link, with a hover (`<a scBadge routerLink="…">`).
 
-## With Icons
+- An icon takes `data-icon="inline-start"` or `"inline-end"`: less padding on that side. A spinner too (`<svg scSpinner data-icon="inline-start" aria-label="Loading">`).
+- Your own colors: classes over the preset's (`class="bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300"`).
 
-```html
-<div scBadge class="gap-1">
-  <svg class="size-3"><!-- icon --></svg>
-  Premium
-</div>
-```
+## API reference
 
-## Notification Count
+### ScBadge — `div[scBadge], span[scBadge], a[scBadge]`
 
-```html
-<div class="relative">
-  <button><!-- button content --></button>
-  <span scBadge class="absolute -top-1 -right-1 flex size-5 items-center justify-center p-0">3</span>
-</div>
-```
+| Input     | Type                                                                          | Default     | Description                     |
+| --------- | ----------------------------------------------------------------------------- | ----------- | ------------------------------- |
+| `variant` | `'default'`, `'secondary'`, `'destructive'`, `'outline'`, `'ghost'`, `'link'` | `'default'` | Its look, from the preset.      |
+| `class`   | `string`                                                                      | `''`        | Classes merged over the preset. |
 
-## Custom Colors
+## Styles
 
-Override the default colors with custom classes:
-
-```html
-<div scBadge class="bg-green-500 hover:bg-green-500/80">Active</div>
-<div scBadge class="bg-yellow-500 hover:bg-yellow-500/80">Warning</div>
-<div scBadge class="bg-blue-500 hover:bg-blue-500/80">Info</div>
-```
-
-## Inputs
-
-| Input     | Type                                                     | Default     | Description            |
-| --------- | -------------------------------------------------------- | ----------- | ---------------------- |
-| `variant` | `'default' \| 'secondary' \| 'destructive' \| 'outline'` | `'default'` | Badge variant          |
-| `class`   | `string`                                                 | `''`        | Additional CSS classes |
-
-## Variant Styles
-
-| Variant       | Description                                     |
-| ------------- | ----------------------------------------------- |
-| `default`     | Primary background with primary-foreground text |
-| `secondary`   | Secondary background with secondary-foreground  |
-| `destructive` | Destructive background for errors/warnings      |
-| `outline`     | Transparent with border                         |
+From the preset (`badge`, a cva like the button's: `injectPreset().badge({ variant })`): the radius (square in lyra, `rounded-full` in mira, `3xl` in luma, `2xl` in rhea, `4xl` elsewhere), a background on the outline in maia and mira, smaller text in mira — and in sera no pill at all: small uppercase text, each variant a color. The Tags Input's tags take the secondary badge's look; the Notification Center's count keeps its own filled pill in every preset (a counter, not a label).

@@ -175,6 +175,21 @@ A box of related content (`div[scCard]`). A shadcn component; Base UI has no car
 - **`ScCardContent`**, shadcn's name (was `ScCardBody`; the user, 2026-11-04 — the library's Body/Content naming is still open).
 - **Not**: the old Form, Notification and Stats demos (the user: replaced by better ones; stats are the Stat Card's).
 
+## Badge
+
+A short label (`span[scBadge]`). A shadcn component; Base UI has no badge, so shadcn's reference app and its docs' examples (2026-11-04).
+
+| Library                                                                                           | What to read                                                                                   |
+| ------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| shadcn Badge (`shadcn-reference/presets/*/badge.tsx`)                                             | Six variants in a cva; `data-icon` padding; `render` for a link; eight looks (sera: bare text) |
+| shadcn's examples (`apps/v4/examples/base/badge-*.tsx`, `content/docs/components/base/badge.mdx`) | Variants, With Icon, With Spinner, Link, Custom Colors, RTL                                    |
+
+**Taken:**
+
+- **Each preset's cva** (`injectPreset().badge({ variant })`, as the button's); `badgeVariants` left the public API.
+- **The examples**, our way: our Spinner (named, a status), the link on `a[scBadge]` with a `routerLink`.
+- **The Tags Input's tags follow the preset; the Notification Center's count doesn't** (the user, 2026-11-04): a counter keeps a filled pill — sera's badges are bare text.
+
 ## Control Group
 
 An input or a select joined with its buttons (`div[scControlGroup]`): shadcn's Button Group, renamed for what it is for (the user, 2026-10-30: it is only useful when inputs or selects mix with buttons; buttons alone are on the Button page). A shadcn component, so no web research: Base UI and shadcn's reference app (2026-10-30).

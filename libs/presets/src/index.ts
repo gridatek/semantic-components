@@ -8,6 +8,9 @@
 export type ScPresetName =
   'nova' | 'vega' | 'maia' | 'lyra' | 'mira' | 'luma' | 'sera' | 'rhea';
 
+export type ScBadgeVariant =
+  'default' | 'secondary' | 'destructive' | 'outline' | 'ghost' | 'link';
+
 export type ScButtonVariant =
   'default' | 'outline' | 'secondary' | 'ghost' | 'destructive' | 'link';
 
@@ -82,6 +85,7 @@ export interface ScTableStyles {
 
 /** A preset: the components' classes in one of shadcn's styles. */
 export interface ScPreset {
+  badge: (props: { variant?: ScBadgeVariant | null }) => string;
   button: (props: {
     variant?: ScButtonVariant | null;
     size?: ScButtonSize | null;

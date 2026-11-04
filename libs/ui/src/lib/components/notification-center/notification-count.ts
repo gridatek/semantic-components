@@ -1,6 +1,5 @@
 import { Directive, LOCALE_ID, computed, inject, input } from '@angular/core';
 import { cn } from '../../utils/cn/cn';
-import { badgeVariants } from '../badge/badge';
 import { SC_NOTIFICATION_CENTER } from './notification-center';
 
 /**
@@ -36,8 +35,9 @@ export class ScNotificationCount {
 
   protected readonly class = computed(() =>
     cn(
-      badgeVariants({ variant: 'default' }),
-      'pointer-events-none absolute -end-1.5 -top-1.5 h-4 min-w-4 px-1 tabular-nums',
+      // A counter, not a label: a filled pill in every preset (sera's badges
+      // are bare text).
+      'bg-primary text-primary-foreground pointer-events-none absolute -end-1.5 -top-1.5 inline-flex h-4 min-w-4 items-center justify-center rounded-full px-1 text-xs font-medium whitespace-nowrap tabular-nums',
       this.classInput(),
     ),
   );
