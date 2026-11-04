@@ -1,18 +1,20 @@
+import { NgOptimizedImage } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ScAspectRatio } from '@semantic-components/ui';
 
+/** A square: ratio 1. */
 @Component({
   selector: 'app-square-aspect-ratio-demo',
-  imports: [ScAspectRatio],
+  imports: [NgOptimizedImage, ScAspectRatio],
   template: `
-    <div class="w-[300px] overflow-hidden rounded-md">
-      <div scAspectRatio [ratio]="1">
-        <img
-          src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80"
-          alt="Photo by Drew Beamer"
-          class="size-full object-cover"
-        />
-      </div>
+    <div scAspectRatio [ratio]="1" class="bg-muted w-full max-w-48 rounded-lg">
+      <img
+        ngSrc="/images/gallery/coast.jpg"
+        fill
+        priority
+        alt="A rocky coast"
+        class="rounded-lg object-cover"
+      />
     </div>
   `,
   host: { class: 'flex w-full justify-center' },

@@ -7,7 +7,7 @@ import { VideoAspectRatioDemo } from './video-aspect-ratio-demo';
   imports: [DemoContainer, VideoAspectRatioDemo],
   template: `
     <app-demo-container
-      title="Video Embed Container"
+      title="Video"
       demoUrl="/demos/aspect-ratio/video-aspect-ratio-demo"
       [code]="code"
     >
@@ -20,18 +20,26 @@ import { VideoAspectRatioDemo } from './video-aspect-ratio-demo';
 export class VideoAspectRatioDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScAspectRatio } from '@semantic-components/ui';
-import { SiPlayIcon } from '@semantic-icons/lucide-icons';
 
+/** A video in a 16 / 9 frame, filling it. */
 @Component({
   selector: 'app-video-aspect-ratio-demo',
-  imports: [ScAspectRatio, SiPlayIcon],
+  imports: [ScAspectRatio],
   template: \`
-    <div class="w-[450px] overflow-hidden rounded-md border">
-      <div scAspectRatio [ratio]="16 / 9" class="bg-black">
-        <div class="flex size-full items-center justify-center text-white">
-          <svg siPlayIcon class="size-16 fill-current"></svg>
-        </div>
-      </div>
+    <div
+      scAspectRatio
+      [ratio]="16 / 9"
+      class="w-full max-w-md overflow-hidden rounded-lg bg-black"
+    >
+      <video
+        controls
+        preload="none"
+        poster="/media/sintel-trailer.jpg"
+        class="size-full"
+        aria-label="Sintel, trailer"
+      >
+        <source src="/media/sintel-trailer.mp4" type="video/mp4" />
+      </video>
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },

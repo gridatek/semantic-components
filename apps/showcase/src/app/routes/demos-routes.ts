@@ -179,17 +179,10 @@ export const demosRoutes: Route[] = [
     path: 'demos/aspect-ratio',
     children: [
       {
-        path: 'sixteen-nine-aspect-ratio-demo',
+        path: 'aspect-ratio-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/aspect-ratio/demos/sixteen-nine-aspect-ratio-demo').then(
-            (m) => m.SixteenNineAspectRatioDemo,
-          ),
-      },
-      {
-        path: 'four-three-aspect-ratio-demo',
-        loadComponent: () =>
-          import('../pages/docs/aspect-ratio/demos/four-three-aspect-ratio-demo').then(
-            (m) => m.FourThreeAspectRatioDemo,
+          import('../pages/docs/aspect-ratio/demos/aspect-ratio-usage-demo').then(
+            (m) => m.AspectRatioUsageDemo,
           ),
       },
       {
@@ -200,24 +193,10 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'ultrawide-aspect-ratio-demo',
-        loadComponent: () =>
-          import('../pages/docs/aspect-ratio/demos/ultrawide-aspect-ratio-demo').then(
-            (m) => m.UltrawideAspectRatioDemo,
-          ),
-      },
-      {
         path: 'portrait-aspect-ratio-demo',
         loadComponent: () =>
           import('../pages/docs/aspect-ratio/demos/portrait-aspect-ratio-demo').then(
             (m) => m.PortraitAspectRatioDemo,
-          ),
-      },
-      {
-        path: 'placeholder-aspect-ratio-demo',
-        loadComponent: () =>
-          import('../pages/docs/aspect-ratio/demos/placeholder-aspect-ratio-demo').then(
-            (m) => m.PlaceholderAspectRatioDemo,
           ),
       },
       {
@@ -228,10 +207,17 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'map-aspect-ratio-demo',
+        path: 'responsive-aspect-ratio-demo',
         loadComponent: () =>
-          import('../pages/docs/aspect-ratio/demos/map-aspect-ratio-demo').then(
-            (m) => m.MapAspectRatioDemo,
+          import('../pages/docs/aspect-ratio/demos/responsive-aspect-ratio-demo').then(
+            (m) => m.ResponsiveAspectRatioDemo,
+          ),
+      },
+      {
+        path: 'rtl-aspect-ratio-demo',
+        loadComponent: () =>
+          import('../pages/docs/aspect-ratio/demos/rtl-aspect-ratio-demo').then(
+            (m) => m.RtlAspectRatioDemo,
           ),
       },
     ],

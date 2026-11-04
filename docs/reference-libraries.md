@@ -234,6 +234,20 @@ A person's picture (`span[scAvatar]`). A shadcn component: Base UI's Avatar (loc
 - **shadcn's parts, outline and examples**; only the group count from the preset.
 - **Not**: the fallback's `delay`.
 
+## Aspect Ratio
+
+A box kept to a ratio (`[scAspectRatio]`). A shadcn component; Base UI has none, so shadcn's reference app and its docs' examples (2026-11-04).
+
+| Library                                                                                                                    | What to read                                                                                                              |
+| -------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| shadcn Aspect Ratio (`shadcn-reference/presets/*/aspect-ratio.tsx`), examples (`apps/v4/examples/base/aspect-ratio-*.tsx`) | `--ratio` read by `aspect-(--ratio)`, no width of its own, the same in every style; Usage (16 / 9), Square, Portrait, RTL |
+
+**Taken:**
+
+- **The ratio as a CSS variable** (ours was an inline `aspect-ratio`, which no class could change) and **no width of its own** (ours was `w-full`).
+- **Not**: a required `ratio` — ours defaults to 1 (the user, 2026-11-04).
+- **Ours beside shadcn's examples**: Video, and Responsive (another ratio on a phone, by a class).
+
 ## Control Group
 
 An input or a select joined with its buttons (`div[scControlGroup]`): shadcn's Button Group, renamed for what it is for (the user, 2026-10-30: it is only useful when inputs or selects mix with buttons; buttons alone are on the Button page). A shadcn component, so no web research: Base UI and shadcn's reference app (2026-10-30).

@@ -1,18 +1,24 @@
+import { NgOptimizedImage } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ScAspectRatio } from '@semantic-components/ui';
 
+/** Taller than wide: 9 / 16. */
 @Component({
   selector: 'app-portrait-aspect-ratio-demo',
-  imports: [ScAspectRatio],
+  imports: [NgOptimizedImage, ScAspectRatio],
   template: `
-    <div class="w-[200px] overflow-hidden rounded-md">
-      <div scAspectRatio [ratio]="9 / 16">
-        <img
-          src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80"
-          alt="Photo by Drew Beamer"
-          class="size-full object-cover"
-        />
-      </div>
+    <div
+      scAspectRatio
+      [ratio]="9 / 16"
+      class="bg-muted w-full max-w-40 rounded-lg"
+    >
+      <img
+        ngSrc="/images/gallery/gorge.jpg"
+        fill
+        priority
+        alt="A narrow gorge"
+        class="rounded-lg object-cover"
+      />
     </div>
   `,
   host: { class: 'flex w-full justify-center' },
