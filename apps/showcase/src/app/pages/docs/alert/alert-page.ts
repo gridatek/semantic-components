@@ -91,9 +91,31 @@ import { RtlAlertDemoContainer } from './demos/rtl-alert-demo-container';
             now: a failed payment, a lost connection.
           </li>
           <li>
-            Put the role on an element that is on the page from the start, and
-            show the alert inside it: a region added together with its content
-            is often not announced.
+            Put the role on a wrapper that is on the page from the start, empty,
+            and show the alert inside it. Screen readers watch a live region
+            that already exists and announce what changes in it; with the role
+            on an alert added by
+            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">@if</code>,
+            the region and its text arrive together, and many (NVDA, JAWS,
+            VoiceOver, depending on the browser) start watching too late and
+            say nothing.
+          </li>
+          <li>
+            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+              >role="alert"</code
+            >
+            is more forgiving: browsers send an event when one is inserted, so
+            on the alert itself it is usually read.
+            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+              >role="status"</code
+            >
+            has no such event — the wrapper is the safe way for both.
+          </li>
+          <li>
+            The other way, without a wrapper: keep the alert always rendered
+            with its role and change only its text. But an empty alert box
+            stays on the page until there is something to say; the wrapper has
+            no look, so nothing shows until then.
           </li>
           <li>
             Don&apos;t give a role to an alert that is there from the start: it

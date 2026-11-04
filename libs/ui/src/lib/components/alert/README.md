@@ -31,7 +31,7 @@ An alert has no role of its own (shadcn's always has `role="alert"`). One on the
 
 - `role="status"` — polite: read when the screen reader is free. For most: saved, sent, updated.
 - `role="alert"` — urgent: interrupts what is being read. Only for what needs action now: a failed payment, a lost connection.
-- Put the role on an element that is on the page from the start and show the alert inside it — a region added together with its content is often not announced:
+- Put the role on a wrapper that is on the page from the start, empty, and show the alert inside it:
 
 ```html
 <div role="status">
@@ -40,6 +40,11 @@ An alert has no role of its own (shadcn's always has `role="alert"`). One on the
   }
 </div>
 ```
+
+Screen readers watch a live region that already exists and announce what changes in it. With the role on an alert added by `@if`, the region and its text arrive together, and many (NVDA, JAWS, VoiceOver, depending on the browser) start watching too late and say nothing.
+
+- `role="alert"` is more forgiving: browsers send an event when one is inserted, so on the alert itself it is usually read. `role="status"` has no such event — the wrapper is the safe way for both.
+- The other way, without a wrapper: keep the alert always rendered with its role and change only its text. But an empty alert box stays on the page until there is something to say; the wrapper has no look, so nothing shows until then.
 
 - Don't give a role to an alert that is there from the start: it would be announced on every visit, or not at all.
 
