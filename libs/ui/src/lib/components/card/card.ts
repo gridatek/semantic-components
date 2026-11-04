@@ -11,11 +11,13 @@ import { cn } from '../../utils';
 })
 export class ScCard {
   private readonly styles = injectPreset().card;
+  // The card's frame (radius, ring, shadow): the preset's, as scFrame's.
+  private readonly frame = injectPreset().frame;
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly size = input<'default' | 'sm'>('default');
 
   protected readonly class = computed(() =>
-    cn(this.styles.card, this.classInput()),
+    cn(this.frame, this.styles.card, this.classInput()),
   );
 }

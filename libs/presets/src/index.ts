@@ -80,7 +80,7 @@ export interface ScBreadcrumbStyles {
 
 /** A card's parts that change from style to style (its action is the same in all). */
 export interface ScCardStyles {
-  /** The card: its radius, ring, shadow, text and `--card-spacing`. */
+  /** The card: its text, background and `--card-spacing` (its radius, ring and shadow are `frame`). */
   card: string;
   header: string;
   title: string;

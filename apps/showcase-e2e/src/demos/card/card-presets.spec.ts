@@ -53,10 +53,10 @@ test.describe('Card in every preset', () => {
       ]);
       await page.goto('/demos/card/card-usage-demo');
       const card = page.locator('[scCard]');
-      // The demo's own classes merged over the preset's (cn).
+      // The frame, the card's own, then the demo's (cn).
       await expectClasses(
         card,
-        twMerge(`${styles.card.card} w-full max-w-sm`),
+        twMerge(`${styles.frame} ${styles.card.card} w-full max-w-sm`),
         `${preset} card`,
       );
       await expectClasses(

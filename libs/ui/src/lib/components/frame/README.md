@@ -23,4 +23,4 @@ A frame round a box, in the app's preset: the style's card radius, ring and shad
 
 ## Styles
 
-From the preset (`frame`): the card's radius, ring and shadow in each style (`shadcn-reference/presets/<style>/card.tsx`).
+From the preset (`frame`): the card's radius, ring and shadow in each style (`shadcn-reference/presets/<style>/card.tsx`). The Card draws its own frame from it too, so a framed box always matches the cards beside it — and a change to the card's frame is made here.

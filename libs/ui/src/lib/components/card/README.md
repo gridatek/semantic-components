@@ -58,4 +58,4 @@ Each part takes `class`, merged over the preset.
 
 ## Styles
 
-From the preset (`card`): every part but the action — the card's radius, ring, shadow, text size and `--card-spacing` (4 in nova, lyra and mira; 5 in rhea; 6 in vega, maia and luma; 8 in sera), the header's gap, the title (smaller in lyra and mira, uppercase in sera), the description, the content (a column in vega) and the footer.
+The card's radius, ring and shadow are the preset's `frame` — the same as `scFrame`'s — which `ScCard` adds: to change the card's frame, change `frame`. From the preset (`card`): every part but the action — the card's text size and `--card-spacing` (4 in nova, lyra and mira; 5 in rhea; 6 in vega, maia and luma; 8 in sera), the header's gap, the title (smaller in lyra and mira, uppercase in sera), the description, the content (a column in vega) and the footer.
