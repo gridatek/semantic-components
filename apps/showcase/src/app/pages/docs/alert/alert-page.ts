@@ -95,10 +95,10 @@ import { RtlAlertDemoContainer } from './demos/rtl-alert-demo-container';
             and show the alert inside it. Screen readers watch a live region
             that already exists and announce what changes in it; with the role
             on an alert added by
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">@if</code>,
+            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">&#64;if</code>,
             the region and its text arrive together, and many (NVDA, JAWS,
-            VoiceOver, depending on the browser) start watching too late and
-            say nothing.
+            VoiceOver, depending on the browser) start watching too late and say
+            nothing.
           </li>
           <li>
             <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
@@ -113,9 +113,9 @@ import { RtlAlertDemoContainer } from './demos/rtl-alert-demo-container';
           </li>
           <li>
             The other way, without a wrapper: keep the alert always rendered
-            with its role and change only its text. But an empty alert box
-            stays on the page until there is something to say; the wrapper has
-            no look, so nothing shows until then.
+            with its role and change only its text. But an empty alert box stays
+            on the page until there is something to say; the wrapper has no
+            look, so nothing shows until then.
           </li>
           <li>
             Don&apos;t give a role to an alert that is there from the start: it
