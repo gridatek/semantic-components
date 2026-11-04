@@ -1,117 +1,59 @@
 # Alert
 
-Displays a callout for important information.
-
-## Components
-
-- `ScAlert` - Container with variant styling and icon support
-- `ScAlertTitle` - Bold title text
-- `ScAlertDescription` - Description text
-- `ScAlertAction` - Action button or link
+A callout for something to notice — a success, a warning, an error — with an icon, a title, a description and an action. In the look of the app's preset.
 
 ## Usage
 
 ```html
 <div scAlert>
-  <svg class="size-4"><!-- icon --></svg>
-  <h5 scAlertTitle>Heads up!</h5>
-  <div scAlertDescription>You can add components using the cli.</div>
-  <button scAlertAction>Action</button>
+  <svg siCircleCheckIcon></svg>
+  <div scAlertTitle>Payment successful</div>
+  <div scAlertDescription>Your payment of $29.99 has been processed.</div>
 </div>
 ```
 
-## Variants
+## Anatomy
 
-### Default
+shadcn's parts, each a directive on your element; the icon is yours, the first child: it sits beside the title and the description.
 
 ```html
 <div scAlert>
-  <h5 scAlertTitle>Note</h5>
-  <div scAlertDescription>This is an informational alert.</div>
-  <button scAlertAction>Action</button>
+  <svg></svg>
+  <div scAlertTitle></div>
+  <div scAlertDescription></div>
+  <div scAlertAction></div>
 </div>
 ```
 
-### Destructive
+## Announcing
+
+An alert has no role of its own (shadcn's always has `role="alert"`). One on the page when it loads is read in its place, like the rest of the page. Announce one only when it appears after something the user did:
+
+- `role="status"` — polite: read when the screen reader is free. For most: saved, sent, updated.
+- `role="alert"` — urgent: interrupts what is being read. Only for what needs action now: a failed payment, a lost connection.
+- Put the role on an element that is on the page from the start and show the alert inside it — a region added together with its content is often not announced:
 
 ```html
-<div scAlert variant="destructive">
-  <h5 scAlertTitle>Error</h5>
-  <div scAlertDescription>Your session has expired.</div>
-  <button scAlertAction>Action</button>
+<div role="status">
+  @if (saved()) {
+  <div scAlert>…</div>
+  }
 </div>
 ```
 
-## With Icon
+- Don't give a role to an alert that is there from the start: it would be announced on every visit, or not at all.
 
-Icons are automatically positioned using CSS selectors:
+## API reference
 
-```html
-<div scAlert>
-  <svg class="size-4"><!-- icon --></svg>
-  <h5 scAlertTitle>Title</h5>
-  <div scAlertDescription>Description with icon offset.</div>
-  <button scAlertAction>Action</button>
-</div>
-```
+Each part takes `class`, merged over the preset.
 
-## Custom Variants
+| Part                 | Selector               | Description                                                          |
+| -------------------- | ---------------------- | -------------------------------------------------------------------- |
+| `ScAlert`            | `div[scAlert]`         | The alert; no role. Input `variant`: `'default'` or `'destructive'`. |
+| `ScAlertTitle`       | `[scAlertTitle]`       | The title, beside the icon.                                          |
+| `ScAlertDescription` | `[scAlertDescription]` | Muted text under the title; its links underlined.                    |
+| `ScAlertAction`      | `[scAlertAction]`      | A button in the end corner; the text keeps clear of it.              |
 
-Use the `class` input for custom styling:
+## Styles
 
-```html
-<!-- Success -->
-<div scAlert class="border-green-500/50 text-green-600 [&>svg]:text-green-600">
-  <h5 scAlertTitle>Success!</h5>
-  <div scAlertDescription>Changes saved.</div>
-  <button scAlertAction>Action</button>
-</div>
-
-<!-- Warning -->
-<div scAlert class="border-yellow-500/50 text-yellow-600 [&>svg]:text-yellow-600">
-  <h5 scAlertTitle>Warning</h5>
-  <div scAlertDescription>Account expiring soon.</div>
-  <button scAlertAction>Action</button>
-</div>
-```
-
-## ScAlert Inputs
-
-| Input     | Type                         | Default     | Description            |
-| --------- | ---------------------------- | ----------- | ---------------------- |
-| `variant` | `'default' \| 'destructive'` | `'default'` | Alert variant          |
-| `class`   | `string`                     | `''`        | Additional CSS classes |
-
-## ScAlertTitle Inputs
-
-| Input   | Type     | Default | Description            |
-| ------- | -------- | ------- | ---------------------- |
-| `class` | `string` | `''`    | Additional CSS classes |
-
-## ScAlertDescription Inputs
-
-| Input   | Type     | Default | Description            |
-| ------- | -------- | ------- | ---------------------- |
-| `class` | `string` | `''`    | Additional CSS classes |
-
-## ScAlertAction Inputs
-
-| Input   | Type     | Default | Description            |
-| ------- | -------- | ------- | ---------------------- |
-| `class` | `string` | `''`    | Additional CSS classes |
-
-## Styling
-
-The alert uses CSS selectors to position icons:
-
-- `[&>svg~*]:pl-7` - Adds left padding to siblings after SVG
-- `[&>svg+div]:translate-y-[-3px]` - Adjusts vertical alignment
-- `[&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4` - Positions icon
-
-## Accessibility
-
-- Uses `role="alert"` for screen reader announcements
-- Semantic heading structure with alert title
-- Sufficient color contrast for both variants
-- Icons are decorative (content is in title/description)
-- Action is a `button` or `a` element for keyboard accessibility.
+From the preset (`alert`): the alert's cva (its radius, padding, text size and icon gap), the title, the description and the action's place. More padding in vega, maia, luma, rhea and sera; square and `text-xs` in lyra; tighter in mira; in sera a bar on the start side (the foreground's color, or the destructive one) and a semibold title.

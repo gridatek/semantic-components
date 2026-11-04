@@ -1,37 +1,32 @@
 import { Directive, computed, input } from '@angular/core';
-import { type VariantProps, cva } from 'class-variance-authority';
+import type { ScAlertVariant } from '@semantic-components/presets';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 
-const alertVariants = cva(
-  "grid gap-0.5 rounded-lg border px-2.5 py-2 text-start text-sm has-data-[slot=alert-action]:relative has-data-[slot=alert-action]:pe-18 has-[>svg]:grid-cols-[auto_1fr] has-[>svg]:gap-x-2 *:[svg]:row-span-2 *:[svg]:translate-y-0.5 *:[svg]:text-current *:[svg:not([class*='size-'])]:size-4 w-full relative group/alert",
-  {
-    variants: {
-      variant: {
-        default: 'bg-card text-card-foreground',
-        destructive:
-          'text-destructive bg-card *:data-[slot=alert-description]:text-destructive/90 *:[svg]:text-current',
-      },
-    },
-    defaultVariants: {
-      variant: 'default',
-    },
-  },
-);
+/** An alert's look: its variant, the classes the preset's. */
+export interface ScAlertVariants {
+  variant?: ScAlertVariant | null;
+}
 
-export type ScAlertVariants = VariantProps<typeof alertVariants>;
-
+/**
+ * A callout for something to notice, in the app's preset. No role of its own:
+ * one already on the page is read in its place. One that appears, to be
+ * announced, takes yours — `role="status"` (polite) or `role="alert"`
+ * (urgent: interrupts).
+ */
 @Directive({
-  selector: '[scAlert]',
+  selector: 'div[scAlert]',
   host: {
-    role: 'alert',
     '[class]': 'class()',
   },
 })
 export class ScAlert {
+  private readonly styles = injectPreset().alert;
+
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScAlertVariants['variant']>('default');
 
   protected readonly class = computed(() =>
-    cn(alertVariants({ variant: this.variant() }), this.classInput()),
+    cn(this.styles.alert({ variant: this.variant() }), this.classInput()),
   );
 }

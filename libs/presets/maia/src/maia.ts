@@ -1,4 +1,5 @@
 import type { ScPreset } from '@semantic-components/presets';
+import { alert } from './alert';
 import { badge } from './badge';
 import { button } from './button';
 import { card } from './card';
@@ -16,6 +17,7 @@ import { table } from './table';
 
 /** The maia preset: `provideScConfig({ preset: maia })`. */
 export const maia: ScPreset = {
+  alert,
   badge,
   button,
   card,

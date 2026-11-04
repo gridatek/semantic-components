@@ -190,6 +190,20 @@ A short label (`span[scBadge]`). A shadcn component; Base UI has no badge, so sh
 - **The examples**, our way: our Spinner (named, a status), the link on `a[scBadge]` with a `routerLink`.
 - **The Tags Input's tags follow the preset; the Notification Center's count doesn't** (the user, 2026-11-04): a counter keeps a filled pill — sera's badges are bare text.
 
+## Alert
+
+A callout (`div[scAlert]`). A shadcn component; Base UI and Radix have none, so shadcn's reference app and its docs' examples (2026-11-04).
+
+| Library                                                                                           | What to read                                                                                  |
+| ------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| shadcn Alert (`shadcn-reference/presets/*/alert.tsx`)                                             | Parts (Title, Description, Action); two variants in a cva; `role="alert"` always; eight looks |
+| shadcn's examples (`apps/v4/examples/base/alert-*.tsx`, `content/docs/components/base/alert.mdx`) | Basic, Destructive, Action, Custom Colors, RTL                                                |
+
+**Taken:**
+
+- **The parts, the variants and each preset's look.**
+- **Not `role="alert"` on every alert** (the user, 2026-11-04): no role by default; the consumer adds `role="status"` or `role="alert"` on a region that is there from the start, when the alert appears after an action. The page's Announcing section and the Announced example say how.
+
 ## Control Group
 
 An input or a select joined with its buttons (`div[scControlGroup]`): shadcn's Button Group, renamed for what it is for (the user, 2026-10-30: it is only useful when inputs or selects mix with buttons; buttons alone are on the Button page). A shadcn component, so no web research: Base UI and shadcn's reference app (2026-10-30).

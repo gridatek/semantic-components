@@ -1,4 +1,5 @@
 import type { ScPreset } from '@semantic-components/presets';
+import { alert } from './alert';
 import { badge } from './badge';
 import { button } from './button';
 import { card } from './card';
@@ -16,6 +17,7 @@ import { table } from './table';
 
 /** The nova preset: `provideScConfig({ preset: nova })`. */
 export const nova: ScPreset = {
+  alert,
   badge,
   button,
   card,

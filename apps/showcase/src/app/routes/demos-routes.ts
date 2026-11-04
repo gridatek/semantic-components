@@ -31,10 +31,17 @@ export const demosRoutes: Route[] = [
     path: 'demos/alert',
     children: [
       {
-        path: 'default-alert-demo',
+        path: 'alert-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/alert/demos/default-alert-demo').then(
-            (m) => m.DefaultAlertDemo,
+          import('../pages/docs/alert/demos/alert-usage-demo').then(
+            (m) => m.AlertUsageDemo,
+          ),
+      },
+      {
+        path: 'basic-alert-demo',
+        loadComponent: () =>
+          import('../pages/docs/alert/demos/basic-alert-demo').then(
+            (m) => m.BasicAlertDemo,
           ),
       },
       {
@@ -42,6 +49,34 @@ export const demosRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/alert/demos/destructive-alert-demo').then(
             (m) => m.DestructiveAlertDemo,
+          ),
+      },
+      {
+        path: 'action-alert-demo',
+        loadComponent: () =>
+          import('../pages/docs/alert/demos/action-alert-demo').then(
+            (m) => m.ActionAlertDemo,
+          ),
+      },
+      {
+        path: 'colors-alert-demo',
+        loadComponent: () =>
+          import('../pages/docs/alert/demos/colors-alert-demo').then(
+            (m) => m.ColorsAlertDemo,
+          ),
+      },
+      {
+        path: 'announced-alert-demo',
+        loadComponent: () =>
+          import('../pages/docs/alert/demos/announced-alert-demo').then(
+            (m) => m.AnnouncedAlertDemo,
+          ),
+      },
+      {
+        path: 'rtl-alert-demo',
+        loadComponent: () =>
+          import('../pages/docs/alert/demos/rtl-alert-demo').then(
+            (m) => m.RtlAlertDemo,
           ),
       },
     ],

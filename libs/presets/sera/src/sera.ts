@@ -1,4 +1,5 @@
 import type { ScPreset } from '@semantic-components/presets';
+import { alert } from './alert';
 import { badge } from './badge';
 import { button } from './button';
 import { card } from './card';
@@ -16,6 +17,7 @@ import { table } from './table';
 
 /** The sera preset: `provideScConfig({ preset: sera })`. */
 export const sera: ScPreset = {
+  alert,
   badge,
   button,
   card,

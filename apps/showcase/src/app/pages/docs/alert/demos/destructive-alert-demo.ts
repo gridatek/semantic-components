@@ -4,17 +4,18 @@ import {
   ScAlertDescription,
   ScAlertTitle,
 } from '@semantic-components/ui';
-import { SiTriangleAlertIcon } from '@semantic-icons/lucide-icons';
+import { SiCircleAlertIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-destructive-alert-demo',
-  imports: [ScAlert, ScAlertDescription, ScAlertTitle, SiTriangleAlertIcon],
+  imports: [ScAlert, ScAlertDescription, ScAlertTitle, SiCircleAlertIcon],
   template: `
-    <div scAlert variant="destructive" class="w-full max-w-lg">
-      <svg siTriangleAlertIcon></svg>
-      <div scAlertTitle>Error</div>
+    <div scAlert variant="destructive" class="max-w-md">
+      <svg siCircleAlertIcon></svg>
+      <div scAlertTitle>Payment failed</div>
       <div scAlertDescription>
-        Your session has expired. Please log in again.
+        Your payment could not be processed. Please check your payment method
+        and try again.
       </div>
     </div>
   `,

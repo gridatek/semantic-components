@@ -8,6 +8,8 @@
 export type ScPresetName =
   'nova' | 'vega' | 'maia' | 'lyra' | 'mira' | 'luma' | 'sera' | 'rhea';
 
+export type ScAlertVariant = 'default' | 'destructive';
+
 export type ScBadgeVariant =
   'default' | 'secondary' | 'destructive' | 'outline' | 'ghost' | 'link';
 
@@ -48,6 +50,15 @@ export interface ScSelectStyles {
   scrollDownButton: string;
 }
 
+/** An alert's parts, in one of shadcn's styles. */
+export interface ScAlertStyles {
+  alert: (props: { variant?: ScAlertVariant | null }) => string;
+  title: string;
+  description: string;
+  /** A button at the end, in the alert's corner. */
+  action: string;
+}
+
 /** A card's parts that change from style to style (its action is the same in all). */
 export interface ScCardStyles {
   /** The card: its radius, ring, shadow, text and `--card-spacing`. */
@@ -85,6 +96,7 @@ export interface ScTableStyles {
 
 /** A preset: the components' classes in one of shadcn's styles. */
 export interface ScPreset {
+  alert: ScAlertStyles;
   badge: (props: { variant?: ScBadgeVariant | null }) => string;
   button: (props: {
     variant?: ScButtonVariant | null;

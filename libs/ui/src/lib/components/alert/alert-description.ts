@@ -1,4 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 
 @Directive({
@@ -9,12 +10,11 @@ import { cn } from '../../utils';
   },
 })
 export class ScAlertDescription {
+  private readonly styles = injectPreset().alert;
+
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn(
-      'text-muted-foreground text-sm text-balance md:text-pretty [&_p:not(:last-child)]:mb-4 [&_a]:hover:text-foreground [&_a]:underline [&_a]:underline-offset-3',
-      this.classInput(),
-    ),
+    cn(this.styles.description, this.classInput()),
   );
 }
