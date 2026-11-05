@@ -1,4 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 
 @Directive({
@@ -8,12 +9,10 @@ import { cn } from '../../utils';
   },
 })
 export class ScItemTitle {
+  private readonly styles = injectPreset().item;
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn(
-      'gap-2 text-sm leading-snug font-medium underline-offset-4 line-clamp-1 flex w-fit items-center',
-      this.classInput(),
-    ),
+    cn(this.styles.title, this.classInput()),
   );
 }

@@ -277,6 +277,22 @@ export interface ScMessageStyles {
   footer: string;
 }
 
+export type ScItemVariant = 'default' | 'outline' | 'muted';
+export type ScItemSize = 'default' | 'sm' | 'xs';
+export type ScItemMediaVariant = 'default' | 'icon' | 'image';
+
+/** An item's parts that change from style to style. */
+export interface ScItemStyles {
+  root: (props: {
+    variant?: ScItemVariant | null;
+    size?: ScItemSize | null;
+  }) => string;
+  media: (props: { variant?: ScItemMediaVariant | null }) => string;
+  body: string;
+  title: string;
+  description: string;
+}
+
 /** A preset: the components' classes in one of shadcn's styles. */
 export interface ScPreset {
   accordion: ScAccordionStyles;
@@ -314,6 +330,7 @@ export interface ScPreset {
   /** Over the preset's button, in an input group. */
   inputGroupButton: (props: { size?: ScInputGroupButtonSize | null }) => string;
   inputGroupText: string;
+  item: ScItemStyles;
   /** A key. */
   kbd: string;
   marker: ScMarkerStyles;

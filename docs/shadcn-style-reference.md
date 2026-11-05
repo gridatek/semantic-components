@@ -91,6 +91,7 @@ Do **not** "fix" these to match shadcn:
 - **Trace: the output at the lines' size** — shadcn's collapsible content inherits the page's text size; ours takes the line's (`text-sm`, `text-xs` in lyra, `text-xs/relaxed` in mira). The chevron is yours (`scTraceCollapsibleIcon`), turned and mirrored in RTL; shadcn's trigger draws its own.
 - **Marker: a button host, its hover the part's** — shadcn's `Marker` takes `render` for a link or a button, the button's hover written by the consumer (`transition-colors hover:text-foreground`); ours is a directive on a `div`, an `a` or a `button`, adding `[a,button]:transition-colors [a,button]:hover:text-foreground` itself.
 - **Message: actions named in sr-only text** — shadcn's examples name icon-only actions with `aria-label` (and `title`); ours with an sr-only span (our rule for icon buttons).
+- **Item: our slots, no list role** — the presets' `in-data-[slot=dropdown-menu-content]` is `in-data-[slot=menu]` (our menu), `[data-slot=item-content]` is `item-body` (our ScItemBody). shadcn's group has `role="list"`; ours leaves it to the consumer.
 - **Pagination: parts on buttons or your links** — the parts set no `href`: a link follows the one you give it.
 - **Decomposition** — shadcn ships one function per part in one file; we split into directives, one per file, so one shadcn part can map to several of ours.
 

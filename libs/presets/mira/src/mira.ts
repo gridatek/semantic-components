@@ -22,6 +22,7 @@ import {
   inputGroupButton,
   inputGroupText,
 } from './input-group';
+import { item } from './item';
 import { kbd } from './kbd';
 import { marker } from './marker';
 import { menu } from './menu';
@@ -60,6 +61,7 @@ export const mira: ScPreset = {
   inputGroupAddon,
   inputGroupButton,
   inputGroupText,
+  item,
   kbd,
   menu,
   menubar,

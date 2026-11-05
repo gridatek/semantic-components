@@ -1,4 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 
 @Directive({
@@ -9,12 +10,10 @@ import { cn } from '../../utils';
   },
 })
 export class ScItemBody {
+  private readonly styles = injectPreset().item;
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn(
-      'gap-1 group-data-[size=xs]/item:gap-0 flex flex-1 flex-col [&+[data-slot=item-body]]:flex-none',
-      this.classInput(),
-    ),
+    cn(this.styles.body, this.classInput()),
   );
 }

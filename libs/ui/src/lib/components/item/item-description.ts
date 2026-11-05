@@ -1,4 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 
 @Directive({
@@ -9,12 +10,10 @@ import { cn } from '../../utils';
   },
 })
 export class ScItemDescription {
+  private readonly styles = injectPreset().item;
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn(
-      'text-muted-foreground text-start text-sm leading-normal group-data-[size=xs]/item:text-xs [&>a:hover]:text-primary line-clamp-2 font-normal [&>a]:underline [&>a]:underline-offset-4',
-      this.classInput(),
-    ),
+    cn(this.styles.description, this.classInput()),
   );
 }

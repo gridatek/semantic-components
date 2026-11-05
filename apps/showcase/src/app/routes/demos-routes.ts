@@ -2307,10 +2307,80 @@ export const demosRoutes: Route[] = [
     path: 'demos/item',
     children: [
       {
-        path: 'basic-item-demo',
+        path: 'item-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/item/demos/basic-item-demo').then(
-            (m) => m.BasicItemDemo,
+          import('../pages/docs/item/demos/item-usage-demo').then(
+            (m) => m.ItemUsageDemo,
+          ),
+      },
+      {
+        path: 'variant-item-demo',
+        loadComponent: () =>
+          import('../pages/docs/item/demos/variant-item-demo').then(
+            (m) => m.VariantItemDemo,
+          ),
+      },
+      {
+        path: 'size-item-demo',
+        loadComponent: () =>
+          import('../pages/docs/item/demos/size-item-demo').then(
+            (m) => m.SizeItemDemo,
+          ),
+      },
+      {
+        path: 'icon-item-demo',
+        loadComponent: () =>
+          import('../pages/docs/item/demos/icon-item-demo').then(
+            (m) => m.IconItemDemo,
+          ),
+      },
+      {
+        path: 'avatar-item-demo',
+        loadComponent: () =>
+          import('../pages/docs/item/demos/avatar-item-demo').then(
+            (m) => m.AvatarItemDemo,
+          ),
+      },
+      {
+        path: 'image-item-demo',
+        loadComponent: () =>
+          import('../pages/docs/item/demos/image-item-demo').then(
+            (m) => m.ImageItemDemo,
+          ),
+      },
+      {
+        path: 'group-item-demo',
+        loadComponent: () =>
+          import('../pages/docs/item/demos/group-item-demo').then(
+            (m) => m.GroupItemDemo,
+          ),
+      },
+      {
+        path: 'header-item-demo',
+        loadComponent: () =>
+          import('../pages/docs/item/demos/header-item-demo').then(
+            (m) => m.HeaderItemDemo,
+          ),
+      },
+      {
+        path: 'link-item-demo',
+        loadComponent: () =>
+          import('../pages/docs/item/demos/link-item-demo').then(
+            (m) => m.LinkItemDemo,
+          ),
+      },
+      {
+        path: 'dropdown-item-demo',
+        loadComponent: () =>
+          import('../pages/docs/item/demos/dropdown-item-demo').then(
+            (m) => m.DropdownItemDemo,
+          ),
+      },
+      {
+        path: 'rtl-item-demo',
+        loadComponent: () =>
+          import('../pages/docs/item/demos/rtl-item-demo').then(
+            (m) => m.RtlItemDemo,
           ),
       },
     ],

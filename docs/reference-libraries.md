@@ -502,6 +502,21 @@ A conversation that scrolls itself (`div[scMessageScroller]`; built 2026-10-29, 
 - **Every Core concept as an example**: Anchoring turns (an "Anchor the reply" toggle), Group chat (a marker as the anchor), Keeping context visible (the peek), Following the live edge, Opening saved threads, Loading earlier messages, Animating new messages (a `starting:` transition, not height), Jumping to messages, Tracking the reader's position (a jump menu from `visibility()`), Reading scroll state (`scrollable()`), RTL.
 - **Not** the "Avoiding a flash on reload" script: React SSR-specific; our viewport stays hidden until positioned (`data-pending-scroll`).
 
+## Item
+
+A row of content (`div[scItem]`; restyled 2026-11-05): shadcn's Item. A shadcn component, so no web research: shadcn's reference app, its docs page and 11 examples (2026-11-05).
+
+| Library                                                                                 | What to read                                                                                                                                                 |
+| --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| shadcn Item (`shadcn-reference/presets/*/item.tsx`, `apps/v4/examples/base/item-*.tsx`) | The item (cva), the image media, the content, title and description change per style; Variant, Size, Icon, Avatar, Image, Group, Header, Link, Dropdown, RTL |
+
+**Taken:**
+
+- **Each preset's look** as the `item` key (`root({ variant, size })`, `media({ variant })`, `body`, `title`, `description`); shadcn's `dropdown-menu-content` slot is our menu's (`menu`), its `item-content` our `item-body`.
+- **`data-slot="item"`** and a `button` host (shadcn's `render`).
+- **The examples**, images local (`NgOptimizedImage`), avatars as initials.
+- **Not** `role="list"` built into the group (axe fails without listitems): the consumer says it, and not on a link item (`aria-allowed-role`).
+
 ## Control Group
 
 An input or a select joined with its buttons (`div[scControlGroup]`): shadcn's Button Group, renamed for what it is for (the user, 2026-10-30: it is only useful when inputs or selects mix with buttons; buttons alone are on the Button page). A shadcn component, so no web research: Base UI and shadcn's reference app (2026-10-30).
