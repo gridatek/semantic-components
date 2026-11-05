@@ -71,8 +71,10 @@ import { StickyFooterDialogDemoContainer } from './demos/sticky-footer-dialog-de
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             scDialogClose closes it, on any button — the ✕ straight in the
-            dialog (in its corner), Cancel or Done in the footer. It only
-            closes: the look is the button&apos;s.
+            dialog (in its corner), Cancel or Done in the footer. It is the
+            preset&apos;s button: ghost and icon-sized for the ✕,
+            variant=&quot;outline&quot; size=&quot;default&quot; for Cancel — no
+            scButton.
           </li>
           <li>
             When your code runs first — Save checks and sends the form — the
@@ -155,14 +157,14 @@ export default class DialogPage {
       '  <button scButton scDialogTrigger>…</button>',
       '  <ng-template scDialogPortal>',
       '    <div scDialog>',
-      '      <button scButton variant="ghost" size="icon-sm" scDialogClose>…</button>',
+      '      <button scDialogClose>…</button>',
       '      <div scDialogHeader>',
       '        <h2 scDialogTitle>…</h2>',
       '        <p scDialogDescription>…</p>',
       '      </div>',
       '      …',
       '      <div scDialogFooter>',
-      '        <button scButton variant="outline" scDialogClose>Cancel</button>',
+      '        <button scDialogClose variant="outline" size="default">Cancel</button>',
       '        <button scButton (click)="save()">…</button>',
       '      </div>',
       '    </div>',
@@ -193,7 +195,7 @@ export default class DialogPage {
       name: 'ScDialogClose',
       selector: 'button[scDialogClose]',
       description:
-        'Closes it; behaviour only, on any button. Straight in the dialog (the ✕): in its corner.',
+        'Closes it: the preset’s button, variant and size (ghost, icon-sm: the ✕). Straight in the dialog: in its corner.',
     },
     {
       name: 'ScDialogHeader, ScDialogFooter',

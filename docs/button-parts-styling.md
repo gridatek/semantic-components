@@ -28,7 +28,7 @@ Model: `libs/ui/src/lib/components/pagination/pagination-last.ts`.
 
 These add behaviour to whatever button the consumer writes, `scButton` or another part:
 
-- **Triggers and closes that go on any button** — `scDialogTrigger`, `scDialogClose` and `scToastClose` (straight in the dialog or the toast, the ✕: it places it), `scSheetTrigger`, `scDrawerTrigger`, `scDrawerClose`, `scPopoverTrigger`, `scAlertDialogTrigger`, `scNativeDialogTrigger`, `scThemeModeToggle` (on a `scButton`, a `scSidebarMenuButton`, a menu item…).
+- **Triggers and closes that go on any button** — `scDialogTrigger`, `scToastClose` (straight in the toast, the ✕: it places it), `scSheetTrigger`, `scDrawerTrigger`, `scDrawerClose`, `scPopoverTrigger`, `scAlertDialogTrigger`, `scNativeDialogTrigger`, `scThemeModeToggle` (on a `scButton`, a `scSidebarMenuButton`, a menu item…).
 
 And these keep a look of their own, as they are not buttons to the eye:
 
@@ -60,14 +60,18 @@ Every one with a close part makes it **behaviour only**, on any button: Base UI 
 
 Done the same way for the toast (`scToastClose`: the toast places a direct-child close, faint, shown on hover or focus).
 
+### Revised (2026-11-05): the close styles itself again, the dialog still places it
+
+The user changed their mind: `scDialogClose` is the preset's button again (`variant`, `size` inputs; ghost / icon-sm by default, for the ✕), and keeps `data-slot="dialog-close"`: the dialog still puts a direct-child close in its corner. A footer close sets its look: `<button scDialogClose variant="outline" size="default">Cancel</button>`, no `scButton`. So the problem above (a Cancel pulled into the corner) stays solved by the place, not by dropping the look. `scToastClose` is unchanged (behaviour only) for now.
+
 ### What it changes in the rule
 
-- **The ✕ is written with `scButton`** — the consumer picks its look again (rule 2 said the consumer writes nothing for it). The part's job is the action; the look is the button's; the place is the container's.
+- **The look is the part's, its defaults the ✕'s** (since the revision): a close elsewhere sets `variant` and `size`, as any button part does. The place is the container's.
 - **Position moved out of the part** — rule 3's example (`absolute end-1 top-1`) was the toast close's; it is the container's now, chosen by where the close sits.
 
 ### To decide
 
-Where the line falls. A criterion, from this case: **a part styles itself when its action has one look in one place** (`scPaginationLast`, `scPdfViewerZoomIn`: always the same button); **it adds behaviour only when the same action goes on buttons that look different** (a close: the ✕, Cancel, Done), and the container places it when the place depends on where it sits.
+Where the line falls. A criterion, from this case: **a part styles itself when its action has one look in one place** (`scPaginationLast`, `scPdfViewerZoomIn`: always the same button); **it adds behaviour only when the same action goes on buttons that look different** (a trigger), and the container places a part whose place depends on where it sits (`scDialogClose`, which styles itself with `variant` / `size` for the ✕, Cancel, Done).
 
 Parts this would move, if kept:
 

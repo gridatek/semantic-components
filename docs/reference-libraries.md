@@ -365,7 +365,7 @@ A window over the page (`div[scDialogProvider]`): shadcn's Dialog. Its styles, i
 
 **Taken:**
 
-- **Close is behaviour only**, on any button — all of them. `scDialogClose` was the ✕ with its look and place built in (a Cancel with it went to the corner); now the ✕ is a `scButton` like any other, and the dialog places a close that is its direct child (`data-slot="dialog-close"`) where the preset says — no second part.
+- **Close is behaviour only**, on any button — all of them (not followed since 2026-11-05, below). `scDialogClose` was the ✕ with its look and place built in (a Cancel with it went to the corner); then it was behaviour only on a `scButton`; since the user's revision (2026-11-05) it is the preset's button again (`variant`, `size`: ghost / icon-sm by default, `variant="outline" size="default"` for Cancel), and the dialog places a close that is its direct child (`data-slot="dialog-close"`) where the preset says — no second part. Unlike the other libraries, the look is ours.
 - **Code first closes through the state** (`[(open)]`) — everyone. Not Material's result value: ours live in the template.
 - **Each preset's look**, as the `dialog` key (the ✕'s place and fill too: `top-2 end-2` to `top-5 end-5`, `bg-secondary` in luma, sera, rhea).
 - **The direction and language of where it is opened**, given to the dialog (rendered at the end of the page).

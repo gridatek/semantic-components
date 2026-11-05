@@ -101,7 +101,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
       <button scButton variant="outline" scDialogTrigger>Open Dialog</button>
       <ng-template scDialogPortal>
         <div scDialog class="sm:max-w-sm">
-          <button scButton variant="ghost" size="icon-sm" scDialogClose>
+          <button scDialogClose>
             <svg siXIcon></svg>
             <span class="sr-only">Close</span>
           </button>
@@ -122,7 +122,9 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
             </div>
           </div>
           <div scDialogFooter>
-            <button scButton variant="outline" scDialogClose>Cancel</button>
+            <button scDialogClose variant="outline" size="default">
+              Cancel
+            </button>
             <button scButton (click)="save()">Save changes</button>
           </div>
         </div>

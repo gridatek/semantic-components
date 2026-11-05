@@ -58,7 +58,7 @@ The entire UI is described in the template — no imperative `open()`, `close()`
       </div>
       <!-- content -->
       <div scDialogFooter>
-        <button scButton variant="outline" (click)="isOpen.set(false)">Cancel</button>
+        <button scDialogClose variant="outline" size="default">Cancel</button>
         <button scButton type="submit">Save changes</button>
       </div>
     </div>

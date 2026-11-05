@@ -20,7 +20,6 @@ import { PdfViewerFormDemo } from './pdf-viewer-form-demo';
 export class PdfViewerFormDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, computed, input } from '@angular/core';
 import {
-  ScButton,
   ScDialog,
   ScDialogClose,
   ScDialogDescription,
@@ -84,7 +83,6 @@ import {
     ScProgress,
     ScProgressRange,
     ScProgressTrack,
-    ScButton,
     ScTooltipTrigger,
     ScSpinner,
     SiDownloadIcon,
@@ -140,7 +138,9 @@ import {
                 <div scProgressTrack><div scProgressRange></div></div>
               </div>
               <div scDialogFooter>
-                <button scButton scDialogClose variant="outline">Cancel</button>
+                <button scDialogClose variant="outline" size="default">
+                  Cancel
+                </button>
               </div>
             </div>
           </ng-template>

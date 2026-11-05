@@ -40,7 +40,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
       <button scButton variant="outline" scDialogTrigger>Share</button>
       <ng-template scDialogPortal>
         <div scDialog class="sm:max-w-md">
-          <button scButton variant="ghost" size="icon-sm" scDialogClose>
+          <button scDialogClose>
             <svg siXIcon></svg>
             <span class="sr-only">Close</span>
           </button>
@@ -59,7 +59,9 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
             />
           </div>
           <div scDialogFooter class="sm:justify-start">
-            <button scButton scDialogClose>Close</button>
+            <button scDialogClose variant="default" size="default">
+              Close
+            </button>
           </div>
         </div>
       </ng-template>

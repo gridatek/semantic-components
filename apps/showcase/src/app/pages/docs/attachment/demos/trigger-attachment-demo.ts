@@ -8,7 +8,6 @@ import {
   ScAttachmentMedia,
   ScAttachmentTitle,
   ScAttachmentTrigger,
-  ScButton,
   ScDialog,
   ScDialogClose,
   ScDialogDescription,
@@ -44,7 +43,6 @@ import {
     ScDialogTitle,
     ScDialogDescription,
     ScDialogClose,
-    ScButton,
     SiCopyIcon,
     SiFileSearchIcon,
     SiXIcon,
@@ -73,7 +71,7 @@ import {
       </div>
       <ng-template scDialogPortal>
         <div scDialog class="sm:max-w-md">
-          <button scButton variant="ghost" size="icon-sm" scDialogClose>
+          <button scDialogClose>
             <svg siXIcon></svg>
             <span class="sr-only">Close</span>
           </button>

@@ -28,7 +28,7 @@ test.describe('Dialog in every preset', () => {
   test.slow();
 
   for (const [preset, styles] of Object.entries(PRESETS))
-    test(`${preset}: the dialog and its title have their preset's classes; no axe violation, light and dark`, async ({
+    test(`${preset}: the dialog, its title and its closes have their preset's classes; no axe violation, light and dark`, async ({
       page,
       context,
       baseURL,
@@ -50,6 +50,17 @@ test.describe('Dialog in every preset', () => {
           page.getByRole('heading', { name: 'Edit profile' }),
           styles.dialog.title,
           'title',
+        ],
+        // The ✕ and Cancel: the preset's button, each its variant and size.
+        [
+          page.getByRole('button', { name: 'Close' }),
+          styles.button({ variant: 'ghost', size: 'icon-sm' }),
+          'the ✕',
+        ],
+        [
+          page.getByRole('button', { name: 'Cancel' }),
+          styles.button({ variant: 'outline', size: 'default' }),
+          'Cancel',
         ],
       ] as const) {
         const classes = twMerge(wanted).split(/\s+/).filter(Boolean);

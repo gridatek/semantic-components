@@ -54,7 +54,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
       <button scButton variant="outline" scDialogTrigger>Sticky Footer</button>
       <ng-template scDialogPortal>
         <div scDialog>
-          <button scButton variant="ghost" size="icon-sm" scDialogClose>
+          <button scDialogClose>
             <svg siXIcon></svg>
             <span class="sr-only">Close</span>
           </button>
@@ -71,7 +71,9 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
             }
           </div>
           <div scDialogFooter>
-            <button scButton variant="outline" scDialogClose>Close</button>
+            <button scDialogClose variant="outline" size="default">
+              Close
+            </button>
           </div>
         </div>
       </ng-template>

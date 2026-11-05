@@ -54,7 +54,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
       </button>
       <ng-template scDialogPortal>
         <div scDialog>
-          <button scButton variant="ghost" size="icon-sm" scDialogClose>
+          <button scDialogClose>
             <svg siXIcon></svg>
             <span class="sr-only">Close</span>
           </button>

@@ -9,7 +9,7 @@ A window over the page, which waits until it is closed: the page behind it can't
   <button scButton variant="outline" scDialogTrigger>Edit profile</button>
   <ng-template scDialogPortal>
     <div scDialog>
-      <button scButton variant="ghost" size="icon-sm" scDialogClose>
+      <button scDialogClose>
         <svg siXIcon></svg>
         <span class="sr-only">Close</span>
       </button>
@@ -19,7 +19,7 @@ A window over the page, which waits until it is closed: the page behind it can't
       </div>
       …
       <div scDialogFooter>
-        <button scButton variant="outline" scDialogClose>Cancel</button>
+        <button scDialogClose variant="outline" size="default">Cancel</button>
         <button scButton (click)="save()">Save changes</button>
       </div>
     </div>
@@ -29,7 +29,7 @@ A window over the page, which waits until it is closed: the page behind it can't
 
 ## Closing
 
-- `scDialogClose` closes it, on any button: the ✕ straight in the dialog (the dialog puts it in its corner), Cancel or Done in the footer. It only closes; the look is the button's.
+- `scDialogClose` closes it, on any button: the ✕ straight in the dialog (the dialog puts it in its corner), Cancel or Done in the footer. It styles itself — the preset's button, `variant` and `size` (ghost, icon-sm: the ✕); in the footer `variant="outline" size="default"` — so it takes no `scButton`.
 - When your code runs first (Save checks and sends the form), the button is yours and closes the dialog through `[(open)]` when it is done, or keeps it open to show what is wrong.
 - Escape and a click outside close it too. Focus stays in it while it is open, starts on its first focusable element, and goes back to what opened it.
 
@@ -40,7 +40,7 @@ A window over the page, which waits until it is closed: the page behind it can't
 | `ScDialogProvider`                     | `div[scDialogProvider]`                        | `open` (`[(open)]`), `class` — renders the dialog centred over the backdrop                                                              |
 | `ScDialogTrigger`                      | `button[scDialogTrigger]`                      | `class` — opens it; behaviour only                                                                                                       |
 | `ScDialogPortal`, `ScDialog`           | `ng-template[scDialogPortal]`, `div[scDialog]` | `class` — role `dialog`, modal; named by its title, described by its description; takes the direction and language of where it is opened |
-| `ScDialogClose`                        | `button[scDialogClose]`                        | `class` — closes it; behaviour only                                                                                                      |
+| `ScDialogClose`                        | `button[scDialogClose]`                        | `class`, `variant` (`ghost`), `size` (`icon-sm`), `type` — closes it; the preset's button                                                |
 | `ScDialogHeader`, `ScDialogFooter`     | `div[…]`                                       | `class`                                                                                                                                  |
 | `ScDialogTitle`, `ScDialogDescription` | `h2[scDialogTitle]`, `p[scDialogDescription]`  | `class`                                                                                                                                  |
 

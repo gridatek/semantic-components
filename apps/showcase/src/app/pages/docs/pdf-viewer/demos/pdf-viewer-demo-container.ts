@@ -1712,12 +1712,7 @@ const INK_COLORS = [
                   />
                 </div>
                 <div scDialogFooter>
-                  <button
-                    scButton
-                    scDialogClose
-                    variant="outline"
-                    type="button"
-                  >
+                  <button scDialogClose variant="outline" size="default">
                     Cancel
                   </button>
                   <button
@@ -1751,7 +1746,9 @@ const INK_COLORS = [
                 <div scProgressTrack><div scProgressRange></div></div>
               </div>
               <div scDialogFooter>
-                <button scButton scDialogClose variant="outline">Cancel</button>
+                <button scDialogClose variant="outline" size="default">
+                  Cancel
+                </button>
               </div>
             </div>
           </ng-template>
@@ -1802,12 +1799,7 @@ const INK_COLORS = [
                   ></textarea>
                 }
                 <div scDialogFooter>
-                  <button
-                    scButton
-                    scDialogClose
-                    variant="outline"
-                    type="button"
-                  >
+                  <button scDialogClose variant="outline" size="default">
                     Cancel
                   </button>
                   <button scButton type="submit">Save</button>
@@ -1939,7 +1931,7 @@ const INK_COLORS = [
               <div scDialogFooter class="sm:justify-between">
                 <button scPdfViewerSignatureClear>Clear</button>
                 <div class="flex gap-2">
-                  <button scButton scDialogClose variant="outline">
+                  <button scDialogClose variant="outline" size="default">
                     Cancel
                   </button>
                   <button scPdfViewerSignatureAdd>Add</button>
@@ -2036,7 +2028,9 @@ const INK_COLORS = [
               <p class="text-muted-foreground text-sm">Loading…</p>
             }
             <div scDialogFooter>
-              <button scButton scDialogClose>Close</button>
+              <button scDialogClose variant="default" size="default">
+                Close
+              </button>
             </div>
           </div>
         </ng-template>
