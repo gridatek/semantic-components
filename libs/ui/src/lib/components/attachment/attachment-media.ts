@@ -7,6 +7,7 @@ import { cn } from '../../utils';
   selector: 'div[scAttachmentMedia]',
   host: {
     'data-slot': 'attachment-media',
+    '[attr.data-variant]': 'variant()',
     '[class]': 'class()',
   },
 })

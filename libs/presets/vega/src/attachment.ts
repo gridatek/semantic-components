@@ -2,6 +2,7 @@ import type { ScAttachmentStyles } from '@semantic-components/presets';
 import { cva } from 'class-variance-authority';
 
 // shadcn's attachment in vega (shadcn-reference/presets/vega/attachment.tsx).
+// An error's description in the full destructive colour, not /80: 4.5:1.
 export const attachment: ScAttachmentStyles = {
   root: cva(
     'group/attachment relative flex w-fit max-w-full min-w-0 shrink-0 flex-wrap rounded-xl border bg-card text-card-foreground transition-colors focus-within:ring-1 focus-within:ring-ring/50 has-[>a,>button]:hover:bg-muted/50 data-[state=error]:border-destructive/30 data-[state=idle]:border-dashed',
@@ -39,7 +40,7 @@ export const attachment: ScAttachmentStyles = {
   title:
     'block max-w-full min-w-0 truncate font-medium group-data-[state=processing]/attachment:shimmer group-data-[state=uploading]/attachment:shimmer',
   description:
-    'mt-0.5 block min-w-0 truncate text-xs text-muted-foreground group-data-[state=error]/attachment:text-destructive/80 max-w-full',
+    'mt-0.5 block min-w-0 truncate text-xs text-muted-foreground group-data-[state=error]/attachment:text-destructive max-w-full',
   actions:
     'relative z-20 flex shrink-0 items-center group-data-[orientation=vertical]/attachment:absolute group-data-[orientation=vertical]/attachment:top-3 group-data-[orientation=vertical]/attachment:end-3 group-data-[orientation=vertical]/attachment:gap-1',
   group:
