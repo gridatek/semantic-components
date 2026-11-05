@@ -208,7 +208,7 @@ This library makes deliberate choices that prioritize the future of Angular over
 | Layout     | Card, Separator, Aspect Ratio, Toolbar, Scroll Area, Typography                                                        |
 | Forms      | Input, Textarea, Checkbox, Radio Group, Switch, Select, Native Select, Label, Field, Input Group, Slider, Range Slider |
 | Overlays   | Dialog, Alert Dialog, Drawer, Sheet, Popover, Hover Card, Tooltip, Toast, Backdrop                                     |
-| Navigation | Breadcrumb, Pagination, Tabs, Menu, Menu Bar, Navigation Menu                                                          |
+| Navigation | Breadcrumb, Pagination, Tabs, Menu, Menubar, Navigation Menu                                                           |
 | Display    | Alert, Badge, Avatar, Skeleton, Spinner, Progress, Kbd, Empty, Item                                                    |
 | Data       | Table, Accordion, Collapsible, Calendar, Date Picker, Time Picker                                                      |
 | File       | File Upload                                                                                                            |

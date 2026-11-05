@@ -282,9 +282,9 @@ A menu of actions from a button (`div[scMenuProvider]`; rewritten 2026-11-05, sw
 - **A key that opens a submenu focuses its first item** — Aria tries, but our submenu exists only once its overlay renders, so the item does it then.
 - **Not**: shadcn's default check and chevron icons — the consumer writes them.
 
-## Menu Bar
+## Menubar
 
-A row of menus (`[scMenuBar]`): shadcn's Menubar. A shadcn component, so no web research: shadcn's reference app and its docs' examples (2026-11-05).
+A row of menus (`[scMenubar]`): shadcn's Menubar. A shadcn component, so no web research: shadcn's reference app and its docs' examples (2026-11-05).
 
 | Library                                                                                                     | What to read                                                                                                                                                         |
 | ----------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -293,7 +293,7 @@ A row of menus (`[scMenuBar]`): shadcn's Menubar. A shadcn component, so no web 
 
 **Taken:**
 
-- **The look of each preset**, as the `menuBar` key: the bar, its triggers, and the Menu's parts in a bar (where shadcn's menubar part wraps a dropdown part, its classes merged over it).
+- **The look of each preset**, as the `menubar` key: the bar, its triggers, and the Menu's parts in a bar (where shadcn's menubar part wraps a dropdown part, its classes merged over it).
 - **The same parts as the Menu** — not shadcn's MenubarItem, MenubarCheckboxItem…: a Menu part reads the menu bar's look when it is in one.
 - **The placement**, mirrored right to left; **the bar's arrows follow its area's direction**, not only the document's.
 - **Not**: shadcn's trigger with no focus style — ours has a focus ring.

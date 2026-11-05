@@ -12,7 +12,7 @@ export function injectMenuStyles(): Signal<ScMenuStyles> {
   const menu = inject(Menu, { optional: true });
   return computed(() =>
     menu && inMenuBar(menu as Menu<unknown>)
-      ? preset.menuBar.menu
+      ? preset.menubar.menu
       : preset.menu,
   );
 }

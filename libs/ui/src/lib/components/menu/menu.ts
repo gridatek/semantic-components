@@ -139,11 +139,11 @@ export class ScMenu<V = string> {
   protected onTab(event: Event): void {
     const opener = topLevelOpener(this.menu as Menu<unknown>);
     if (!opener) return;
-    const menuBar = opener instanceof MenuItem ? opener.parent : null;
-    if (menuBar instanceof MenuBar) {
+    const menubar = opener instanceof MenuItem ? opener.parent : null;
+    if (menubar instanceof MenuBar) {
       event.preventDefault();
-      menuBar.close();
-      this.focusOutside(menuBar.element, (event as KeyboardEvent).shiftKey);
+      menubar.close();
+      this.focusOutside(menubar.element, (event as KeyboardEvent).shiftKey);
       return;
     }
     opener.close();

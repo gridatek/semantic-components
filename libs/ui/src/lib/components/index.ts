@@ -32,7 +32,7 @@ export * from './kbd';
 export * from './label';
 export * from './link';
 export * from './menu';
-export * from './menu-bar';
+export * from './menubar';
 export * from './multiselect';
 export * from './native-select';
 export * from './navigation-menu';

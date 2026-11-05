@@ -592,8 +592,8 @@
     "category": "Navigation"
   },
   {
-    "name": "Menu Bar",
-    "path": "menu-bar",
+    "name": "Menubar",
+    "path": "menubar",
     "description": "A horizontal menu bar with keyboard navigation support.",
     "status": "Experimental",
     "library": "ui",

@@ -2738,48 +2738,48 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/menu-bar',
+    path: 'demos/menubar',
     children: [
       {
-        path: 'menu-bar-usage-demo',
+        path: 'menubar-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/menu-bar/demos/menu-bar-usage-demo').then(
-            (m) => m.MenuBarUsageDemo,
+          import('../pages/docs/menubar/demos/menubar-usage-demo').then(
+            (m) => m.MenubarUsageDemo,
           ),
       },
       {
-        path: 'checkbox-menu-bar-demo',
+        path: 'checkbox-menubar-demo',
         loadComponent: () =>
-          import('../pages/docs/menu-bar/demos/checkbox-menu-bar-demo').then(
-            (m) => m.CheckboxMenuBarDemo,
+          import('../pages/docs/menubar/demos/checkbox-menubar-demo').then(
+            (m) => m.CheckboxMenubarDemo,
           ),
       },
       {
-        path: 'radio-menu-bar-demo',
+        path: 'radio-menubar-demo',
         loadComponent: () =>
-          import('../pages/docs/menu-bar/demos/radio-menu-bar-demo').then(
-            (m) => m.RadioMenuBarDemo,
+          import('../pages/docs/menubar/demos/radio-menubar-demo').then(
+            (m) => m.RadioMenubarDemo,
           ),
       },
       {
-        path: 'submenu-menu-bar-demo',
+        path: 'submenu-menubar-demo',
         loadComponent: () =>
-          import('../pages/docs/menu-bar/demos/submenu-menu-bar-demo').then(
-            (m) => m.SubmenuMenuBarDemo,
+          import('../pages/docs/menubar/demos/submenu-menubar-demo').then(
+            (m) => m.SubmenuMenubarDemo,
           ),
       },
       {
-        path: 'icons-menu-bar-demo',
+        path: 'icons-menubar-demo',
         loadComponent: () =>
-          import('../pages/docs/menu-bar/demos/icons-menu-bar-demo').then(
-            (m) => m.IconsMenuBarDemo,
+          import('../pages/docs/menubar/demos/icons-menubar-demo').then(
+            (m) => m.IconsMenubarDemo,
           ),
       },
       {
-        path: 'rtl-menu-bar-demo',
+        path: 'rtl-menubar-demo',
         loadComponent: () =>
-          import('../pages/docs/menu-bar/demos/rtl-menu-bar-demo').then(
-            (m) => m.RtlMenuBarDemo,
+          import('../pages/docs/menubar/demos/rtl-menubar-demo').then(
+            (m) => m.RtlMenubarDemo,
           ),
       },
     ],

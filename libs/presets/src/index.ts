@@ -110,7 +110,7 @@ export interface ScMenuStyles {
 }
 
 /** A menu bar's parts that change from style to style. */
-export interface ScMenuBarStyles {
+export interface ScMenubarStyles {
   /** The bar. */
   bar: string;
   /** A bar item, opening its menu. */
@@ -172,7 +172,7 @@ export interface ScPreset {
   inputGroupButton: (props: { size?: ScInputGroupButtonSize | null }) => string;
   inputGroupText: string;
   menu: ScMenuStyles;
-  menuBar: ScMenuBarStyles;
+  menubar: ScMenubarStyles;
   pagination: ScPaginationStyles;
   select: ScSelectStyles;
   table: ScTableStyles;

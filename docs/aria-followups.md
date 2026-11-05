@@ -13,7 +13,7 @@ Effort: **S** < 1h · **M** a few hours · **L** a day or more.
 - Menu bar: Tab / Shift+Tab from an open menu leaves the menubar (aria refocused the bar item).
 - Context menu: focus returns to the trigger also when the menu is closed straight away with Escape; demo shows the selected action (`itemSelected`).
 - Tree production-ready and moved from `ui-lab` to `ui`: one Tab stop, selection API, nav mode, height animation, RTL-safe indentation.
-- Interaction e2e tests: `apps/showcase-e2e/src/demos/{select,multiselect,autocomplete,combobox,phone-input,command,menu,menu-bar,context-menu,tree,calendar}`, helpers in `src/interaction.ts`.
+- Interaction e2e tests: `apps/showcase-e2e/src/demos/{select,multiselect,autocomplete,combobox,phone-input,command,menu,menubar,context-menu,tree,calendar}`, helpers in `src/interaction.ts`.
 - Tailwind no longer scans `apps/showcase-e2e` (`@source not` in the showcase stylesheet).
 - Hand-written ARIA replaced by Aria: stepper (`Tabs`), speed dial (`MenuTrigger`/`Menu`/`MenuItem`), org chart (`Tree`), emoji picker categories and image annotator (`Toolbar`), PDF signature dialog (`Tabs`). Mention input keeps its own listbox, now wired with `aria-controls`/`aria-activedescendant`.
 - Tabs: a vertical `ScTabs` makes its tab list vertical (`aria-orientation`, ↑/↓).
@@ -56,7 +56,7 @@ The select, multiselect and command demos store icon _names_ (`'tag'`, `'star'`�
 
 - `bindInput` / `setInput` (`utils/bind-input`) write to input signal nodes through `@angular/core/primitives/signals`. Replace with host-directive bindings once [angular/angular#50510](https://github.com/angular/angular/issues/50510) ships.
 - `ScComboboxListContainer` / `ScCommandListContainer` are plain template markers, and `ScAriaTreeItem` / `ScAriaOrgChartItem` make required Aria inputs optional, only because required inputs of host directives can't be hidden (same issue).
-- Menu bar Escape (`ScMenuBar`) and menu Tab (`ScMenu`) handling — see the upstream drafts.
+- Menu bar Escape (`ScMenubar`) and menu Tab (`ScMenu`) handling — see the upstream drafts.
 
 ## Upstream
 
