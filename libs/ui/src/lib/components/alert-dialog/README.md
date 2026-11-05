@@ -1,6 +1,6 @@
 # Alert Dialog
 
-A modal dialog that asks for an answer before going on — to confirm, to cancel. In the look of the app's preset. For a dialog that can simply be dismissed, use a Dialog. How it works inside: [ARCHITECTURE.md](./ARCHITECTURE.md).
+A modal dialog that asks for an answer before going on — to confirm, to cancel. In the look of the app's preset. For a dialog that can simply be dismissed, use a Dialog.
 
 ## Usage
 

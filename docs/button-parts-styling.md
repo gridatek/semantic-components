@@ -1,6 +1,6 @@
 # Button parts style themselves
 
-Status: **decided** (2026-10-16) — option A: a part on a `button` gives it its look. The rule is in `CLAUDE.md` (Components).
+Status: **decided** (2026-10-16) — option A: a part on a `button` gives it its look. The rule is in `CLAUDE.md` (Components). **Reopened** (2026-11-05) by the dialog case, below: where the line falls between a part that styles itself and one that only adds behaviour.
 
 ## The rule
 
@@ -35,6 +35,44 @@ And these keep a look of their own, as they are not buttons to the eye:
 - **Controls over media** — the lightbox's (white on a dark photo).
 - **Items in lists and grids** — emoji, swatches, suggestions, outline items, dock items, presets, the tag chip's delete.
 - **Parts with a design of their own** — the sidebar's, the navigation menu trigger, the date pickers' triggers, the stepper trigger, the speed dial.
+
+## The dialog case (2026-11-05)
+
+### What happened
+
+`scDialogClose` followed the rule: it gave its button a look and a place — a ghost icon button in the corner (`absolute top-2 end-2`). But a dialog has more than one close:
+
+- the ✕ in the corner — a ghost icon button;
+- Cancel, Done, Close in the footer — an outline or a primary button, where it sits.
+
+One part can't style both. Written on a Cancel (`<button scButton variant="outline" scDialogClose>`), it pulled the button into the corner; so the consumer closed it through the dialog's state instead (`(click)="open.set(false)"`), and kept that state only to close.
+
+### What other libraries do
+
+Every one with a close part makes it **behaviour only**, on any button: Base UI (`Dialog.Close`), Angular Material (`mat-dialog-close`: no classes at all), Ark UI (`Dialog.CloseTrigger`), React Aria (`slot="close"`), Headless UI (`CloseButton`). A styled ✕ is a separate thing, when there is one: shadcn draws it inside `DialogContent`, Mantine has `Modal.CloseButton`. Code that runs before closing (Save) never goes through the close part: it closes through the state. Details: [reference-libraries.md](reference-libraries.md#dialog).
+
+### What we weighed
+
+1. **Two parts** — `scDialogClose` behaviour only, `scDialogCloseButton` the styled ✕. Turned down: "button" in the name.
+2. **`scDialogClose` stays the ✕; another verb for the rest** (`scDialogDismiss`). Turned down: close and dismiss are synonyms, and the other libraries' "close" is the behaviour.
+3. **One part, behaviour only; the container places the ✕** — chosen. The ✕ is the consumer's button (`scButton variant="ghost" size="icon-sm"`); a close that is a **direct child** of the dialog goes in its corner, from the preset (`[&>[data-slot=dialog-close]]:…` classes, on the dialog). A close anywhere else (the footer) stays where it is.
+4. **The same, but asked for** — `<button scDialogClose corner>`. Turned down: the place in the markup says it already (option 3 was preferred).
+
+Done the same way for the toast (`scToastClose`: the toast places a direct-child close, faint, shown on hover or focus).
+
+### What it changes in the rule
+
+- **The ✕ is written with `scButton`** — the consumer picks its look again (rule 2 said the consumer writes nothing for it). The part's job is the action; the look is the button's; the place is the container's.
+- **Position moved out of the part** — rule 3's example (`absolute end-1 top-1`) was the toast close's; it is the container's now, chosen by where the close sits.
+
+### To decide
+
+Where the line falls. A criterion, from this case: **a part styles itself when its action has one look in one place** (`scPaginationLast`, `scPdfViewerZoomIn`: always the same button); **it adds behaviour only when the same action goes on buttons that look different** (a close: the ✕, Cancel, Done), and the container places it when the place depends on where it sits.
+
+Parts this would move, if kept:
+
+- the closes that still style themselves — popover close, spotlight close, the tour guide's close;
+- maybe actions with the same split — the alert dialog's Cancel and Action, the date range picker's apply / cancel, the stepper's next / previous (each always one look, so they would stay as they are under the criterion).
 
 ## Done (2026-10-16)
 
