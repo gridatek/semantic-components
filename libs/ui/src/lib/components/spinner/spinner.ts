@@ -1,10 +1,18 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn, ɵwarnIfUnnamed } from '../../utils';
 
+/**
+ * Something loading, on your icon's `svg` (`siLoaderCircleIcon`…): a status,
+ * named by your `aria-label`. It takes back what the icon hides
+ * (`aria-hidden`): its host bindings run after the icon's, which never
+ * change.
+ */
 @Directive({
   selector: 'svg[scSpinner]',
   host: {
+    'data-slot': 'spinner',
     role: 'status',
+    '[attr.aria-hidden]': 'null',
     '[class]': 'class()',
   },
 })

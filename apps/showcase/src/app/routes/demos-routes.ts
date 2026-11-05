@@ -4411,17 +4411,17 @@ export const demosRoutes: Route[] = [
     path: 'demos/spinner',
     children: [
       {
-        path: 'default-spinner-demo',
+        path: 'spinner-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/spinner/demos/default-spinner-demo').then(
-            (m) => m.DefaultSpinnerDemo,
+          import('../pages/docs/spinner/demos/spinner-usage-demo').then(
+            (m) => m.SpinnerUsageDemo,
           ),
       },
       {
-        path: 'colors-spinner-demo',
+        path: 'size-spinner-demo',
         loadComponent: () =>
-          import('../pages/docs/spinner/demos/colors-spinner-demo').then(
-            (m) => m.ColorsSpinnerDemo,
+          import('../pages/docs/spinner/demos/size-spinner-demo').then(
+            (m) => m.SizeSpinnerDemo,
           ),
       },
       {
@@ -4432,10 +4432,38 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'overlay-spinner-demo',
+        path: 'badge-spinner-demo',
         loadComponent: () =>
-          import('../pages/docs/spinner/demos/overlay-spinner-demo').then(
-            (m) => m.OverlaySpinnerDemo,
+          import('../pages/docs/spinner/demos/badge-spinner-demo').then(
+            (m) => m.BadgeSpinnerDemo,
+          ),
+      },
+      {
+        path: 'input-group-spinner-demo',
+        loadComponent: () =>
+          import('../pages/docs/spinner/demos/input-group-spinner-demo').then(
+            (m) => m.InputGroupSpinnerDemo,
+          ),
+      },
+      {
+        path: 'empty-spinner-demo',
+        loadComponent: () =>
+          import('../pages/docs/spinner/demos/empty-spinner-demo').then(
+            (m) => m.EmptySpinnerDemo,
+          ),
+      },
+      {
+        path: 'custom-spinner-demo',
+        loadComponent: () =>
+          import('../pages/docs/spinner/demos/custom-spinner-demo').then(
+            (m) => m.CustomSpinnerDemo,
+          ),
+      },
+      {
+        path: 'rtl-spinner-demo',
+        loadComponent: () =>
+          import('../pages/docs/spinner/demos/rtl-spinner-demo').then(
+            (m) => m.RtlSpinnerDemo,
           ),
       },
     ],

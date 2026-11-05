@@ -18,9 +18,9 @@ Open work found along the way, kept for later — tick an item when it's done. N
 - [ ] **Toast: an old review's findings, to check in its turn** (from `toast/REVIEW.md`, 2026-10-23, removed with the rule of one md per component folder; some are out of date — the toast swipes now): the dismiss animation never plays; hover-pause outputs wired but unconnected; duplicate rendering with several stacks (demos); the live region should be on the container; private CDK API in `toaster.ts`; no maximum number of toasts; a field public by mistake in `toast-stack.ts`.
 - [ ] **Tooltip: an old review's findings, to check in its turn** (from `tooltip/REVIEW.md`, 2026-10-23, removed likewise): no fallback if the animation never ends (the tooltip can get stuck); Escape leaves a stale `aria-describedby` on the trigger; `aria-live` may announce twice; no touch support (tap to show, tap outside to hide); content is a snapshot, not reactive; an outside dismissal doesn't sync the trigger's state; `ScTooltipConfig` not exported.
 
-- [ ] **Spinner: hidden from screen readers by its icon** — `<svg scSpinner siLoaderCircleIcon>`: the icon directive sets `aria-hidden="true"` on the same `svg` as the spinner's `role="status"` and name, so it is never announced (seen in Attachment's demos, 2026-11-05; an older spec reads `svg[role=status]` around it). For Spinner's turn: the spinner removes `aria-hidden`, or wraps.
-
 - [ ] **Tooltip: rich content** — `[scTooltipTrigger]` takes a string, so a tooltip can't hold a `<kbd>` (shadcn's Kbd Tooltip example: "Save Changes <Kbd>S</Kbd>"). For Tooltip's turn; the key's tooltip colours (`in-data-[slot=tooltip-content]:…`) are already in the `kbd` preset (2026-11-05).
+
+- [ ] **Input Group: a disabled group dims its words** — a group whose control is disabled is half opacity, its addon text too ("Validating...": 2:1, axe fails). shadcn's does the same. For Input Group's turn: dim the control only, or keep the addon's text at 4.5:1 (seen in Spinner's demos, 2026-11-05).
 
 ## Larger items
 

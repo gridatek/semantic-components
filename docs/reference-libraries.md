@@ -531,6 +531,20 @@ An empty state (`div[scEmpty]`; restyled 2026-11-05): shadcn's Empty. A shadcn c
 - **The title on a heading** (`h2`–`h6`) as well as a `div`: shadcn's is a `div`; a heading can be found by heading.
 - **The examples**; links that look like buttons are `a[scLink]` (shadcn: `Button render={<a />}`); Card is inside a real Card.
 
+## Spinner
+
+Something loading (`svg[scSpinner]`; restyled 2026-11-05): shadcn's Spinner. A shadcn component, so no web research: shadcn's reference app, its docs page and 8 examples (2026-11-05).
+
+| Library                                                                                          | What to read                                                                                                                         |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
+| shadcn Spinner (`shadcn-reference/presets/*/spinner.tsx`, `apps/v4/examples/base/spinner-*.tsx`) | Only the icon changes per style (ours is yours); `role="status"`, `aria-label`; Size, Button, Badge, Input Group, Empty, Custom, RTL |
+
+**Taken:**
+
+- **A named status, read out**: the spinner removes its icon's `aria-hidden` (it hid every spinner from screen readers until 2026-11-05). Named even beside words that say it, as shadcn's (the user's choice: one rule).
+- **No preset key**: `size-4 animate-spin` in every style.
+- **The examples**; Input group's textarea stays enabled (a disabled group dims its words below 4.5:1 — docs/todo.md).
+
 ## Control Group
 
 An input or a select joined with its buttons (`div[scControlGroup]`): shadcn's Button Group, renamed for what it is for (the user, 2026-10-30: it is only useful when inputs or selects mix with buttons; buttons alone are on the Button page). A shadcn component, so no web research: Base UI and shadcn's reference app (2026-10-30).

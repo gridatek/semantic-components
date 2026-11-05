@@ -1,6 +1,6 @@
 # Spinner
 
-A loading indicator directive applied to an SVG icon.
+Something loading, on your icon's `svg`: a status (`role="status"`), named by your `aria-label` — read out, as shadcn's: the spinner takes back the `aria-hidden` its icon sets (its host bindings run after the icon's, which never change). Its size is a `size-*` class; nothing changes from style to style, so it has no preset key.
 
 ## Components
 
