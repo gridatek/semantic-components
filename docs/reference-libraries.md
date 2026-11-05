@@ -517,6 +517,20 @@ A row of content (`div[scItem]`; restyled 2026-11-05): shadcn's Item. A shadcn c
 - **The examples**, images local (`NgOptimizedImage`), avatars as initials.
 - **Not** `role="list"` built into the group (axe fails without listitems): the consumer says it, and not on a link item (`aria-allowed-role`).
 
+## Empty
+
+An empty state (`div[scEmpty]`; restyled 2026-11-05): shadcn's Empty. A shadcn component, so no web research: shadcn's reference app, its docs page and 8 examples (2026-11-05).
+
+| Library                                                                                    | What to read                                                                                                                            |
+| ------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------- |
+| shadcn Empty (`shadcn-reference/presets/*/empty.tsx`, `apps/v4/examples/base/empty-*.tsx`) | Every part's look changes per style (padding, icon size, title size); Outline, Background, Avatar, Avatar group, Input group, Card, RTL |
+
+**Taken:**
+
+- **Each preset's look** as the `empty` key (`root`, `header`, `media({ variant })`, `title`, `description`, `body` — shadcn's EmptyContent).
+- **The title on a heading** (`h2`–`h6`) as well as a `div`: shadcn's is a `div`; a heading can be found by heading.
+- **The examples**; links that look like buttons are `a[scLink]` (shadcn: `Button render={<a />}`); Card is inside a real Card.
+
 ## Control Group
 
 An input or a select joined with its buttons (`div[scControlGroup]`): shadcn's Button Group, renamed for what it is for (the user, 2026-10-30: it is only useful when inputs or selects mix with buttons; buttons alone are on the Button page). A shadcn component, so no web research: Base UI and shadcn's reference app (2026-10-30).

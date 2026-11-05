@@ -1,13 +1,13 @@
 # Empty
 
-Displays an empty state with optional media, header, and action content.
+What to show where there is nothing yet — what is empty, why, what to do — in the look of the app's preset (`empty` key: shadcn's in each of the eight styles). Add `border` for a dashed outline.
 
 ## Components
 
 - `ScEmpty` - Root container with centered layout
 - `ScEmptyHeader` - Groups media, title, and description
 - `ScEmptyMedia` - Icon or image wrapper with variant support
-- `ScEmptyTitle` - Short heading for the empty state
+- `ScEmptyTitle` - What is empty: on a `div`, or best a heading (`h2`–`h6`, at the page's level)
 - `ScEmptyDescription` - Explanatory text below the title
 - `ScEmptyBody` - Slot for action buttons or additional content
 
@@ -19,7 +19,7 @@ Displays an empty state with optional media, header, and action content.
     <div scEmptyMedia variant="icon">
       <svg><!-- icon --></svg>
     </div>
-    <div scEmptyTitle>No results found</div>
+    <h2 scEmptyTitle>No results found</h2>
     <div scEmptyDescription>Try adjusting your search or filter to find what you're looking for.</div>
   </div>
 </div>
@@ -33,7 +33,7 @@ Displays an empty state with optional media, header, and action content.
     <div scEmptyMedia variant="icon">
       <svg><!-- icon --></svg>
     </div>
-    <div scEmptyTitle>No projects yet</div>
+    <h2 scEmptyTitle>No projects yet</h2>
     <div scEmptyDescription>Get started by creating your first project.</div>
   </div>
   <div scEmptyBody>

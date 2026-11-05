@@ -1,24 +1,9 @@
 import { Directive, computed, input } from '@angular/core';
-import { type VariantProps, cva } from 'class-variance-authority';
+import type { ScEmptyMediaVariant } from '@semantic-components/presets';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 
-export const emptyMediaVariants = cva(
-  'mb-2 flex shrink-0 items-center justify-center [&_svg]:pointer-events-none [&_svg]:shrink-0',
-  {
-    variants: {
-      variant: {
-        default: 'bg-transparent',
-        icon: "bg-muted text-foreground flex size-8 shrink-0 items-center justify-center rounded-lg [&_svg:not([class*='size-'])]:size-4",
-      },
-    },
-    defaultVariants: {
-      variant: 'default',
-    },
-  },
-);
-
-export type ScEmptyMediaVariants = VariantProps<typeof emptyMediaVariants>;
-
+/** Your icon, avatar or image above the title; `icon` frames an icon. */
 @Directive({
   selector: 'div[scEmptyMedia]',
   host: {
@@ -27,10 +12,11 @@ export type ScEmptyMediaVariants = VariantProps<typeof emptyMediaVariants>;
   },
 })
 export class ScEmptyMedia {
+  private readonly styles = injectPreset().empty;
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly variant = input<ScEmptyMediaVariants['variant']>('default');
+  readonly variant = input<ScEmptyMediaVariant>('default');
 
   protected readonly class = computed(() =>
-    cn(emptyMediaVariants({ variant: this.variant() }), this.classInput()),
+    cn(this.styles.media({ variant: this.variant() }), this.classInput()),
   );
 }

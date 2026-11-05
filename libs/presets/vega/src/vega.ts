@@ -14,6 +14,7 @@ import { codeBlock } from './code-block';
 import { contextMenu } from './context-menu';
 import { controlGroup, controlGroupText } from './control-group';
 import { dialog } from './dialog';
+import { empty } from './empty';
 import { frame } from './frame';
 import { input } from './input';
 import {
@@ -54,6 +55,7 @@ export const vega: ScPreset = {
   controlGroup,
   controlGroupText,
   dialog,
+  empty,
   contextMenu,
   input,
   marker,

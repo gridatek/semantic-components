@@ -293,6 +293,19 @@ export interface ScItemStyles {
   description: string;
 }
 
+export type ScEmptyMediaVariant = 'default' | 'icon';
+
+/** An empty state's parts that change from style to style. */
+export interface ScEmptyStyles {
+  root: string;
+  header: string;
+  media: (props: { variant?: ScEmptyMediaVariant | null }) => string;
+  title: string;
+  description: string;
+  /** The actions below (shadcn's EmptyContent). */
+  body: string;
+}
+
 /** A preset: the components' classes in one of shadcn's styles. */
 export interface ScPreset {
   accordion: ScAccordionStyles;
@@ -320,6 +333,7 @@ export interface ScPreset {
   /** The text beside a group's buttons. */
   controlGroupText: string;
   dialog: ScDialogStyles;
+  empty: ScEmptyStyles;
   /** The Menu's parts in a context menu. */
   contextMenu: ScMenuStyles;
   /** A text field (`input[scInput]`, and the inputs that look like one). */

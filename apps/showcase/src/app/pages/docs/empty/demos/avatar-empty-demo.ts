@@ -1,0 +1,48 @@
+import { Component, ViewEncapsulation } from '@angular/core';
+import {
+  ScAvatar,
+  ScAvatarFallback,
+  ScButton,
+  ScEmpty,
+  ScEmptyBody,
+  ScEmptyDescription,
+  ScEmptyHeader,
+  ScEmptyMedia,
+  ScEmptyTitle,
+} from '@semantic-components/ui';
+
+/** An avatar as the media (variant default). */
+@Component({
+  selector: 'app-avatar-empty-demo',
+  imports: [
+    ScAvatar,
+    ScAvatarFallback,
+    ScButton,
+    ScEmpty,
+    ScEmptyBody,
+    ScEmptyDescription,
+    ScEmptyHeader,
+    ScEmptyMedia,
+    ScEmptyTitle,
+  ],
+  template: `
+    <div scEmpty>
+      <div scEmptyHeader>
+        <div scEmptyMedia>
+          <span scAvatar class="size-12"><span scAvatarFallback>LR</span></span>
+        </div>
+        <h2 scEmptyTitle>User Offline</h2>
+        <div scEmptyDescription>
+          This user is currently offline. You can leave a message to notify them
+          or try again later.
+        </div>
+      </div>
+      <div scEmptyBody>
+        <button scButton size="sm">Leave Message</button>
+      </div>
+    </div>
+  `,
+  host: { class: 'flex w-full justify-center' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class AvatarEmptyDemo {}

@@ -2050,17 +2050,59 @@ export const demosRoutes: Route[] = [
     path: 'demos/empty',
     children: [
       {
-        path: 'basic-empty-demo',
+        path: 'empty-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/empty/demos/basic-empty-demo').then(
-            (m) => m.BasicEmptyDemo,
+          import('../pages/docs/empty/demos/empty-usage-demo').then(
+            (m) => m.EmptyUsageDemo,
           ),
       },
       {
-        path: 'actions-empty-demo',
+        path: 'outline-empty-demo',
         loadComponent: () =>
-          import('../pages/docs/empty/demos/actions-empty-demo').then(
-            (m) => m.ActionsEmptyDemo,
+          import('../pages/docs/empty/demos/outline-empty-demo').then(
+            (m) => m.OutlineEmptyDemo,
+          ),
+      },
+      {
+        path: 'background-empty-demo',
+        loadComponent: () =>
+          import('../pages/docs/empty/demos/background-empty-demo').then(
+            (m) => m.BackgroundEmptyDemo,
+          ),
+      },
+      {
+        path: 'avatar-empty-demo',
+        loadComponent: () =>
+          import('../pages/docs/empty/demos/avatar-empty-demo').then(
+            (m) => m.AvatarEmptyDemo,
+          ),
+      },
+      {
+        path: 'avatar-group-empty-demo',
+        loadComponent: () =>
+          import('../pages/docs/empty/demos/avatar-group-empty-demo').then(
+            (m) => m.AvatarGroupEmptyDemo,
+          ),
+      },
+      {
+        path: 'input-group-empty-demo',
+        loadComponent: () =>
+          import('../pages/docs/empty/demos/input-group-empty-demo').then(
+            (m) => m.InputGroupEmptyDemo,
+          ),
+      },
+      {
+        path: 'card-empty-demo',
+        loadComponent: () =>
+          import('../pages/docs/empty/demos/card-empty-demo').then(
+            (m) => m.CardEmptyDemo,
+          ),
+      },
+      {
+        path: 'rtl-empty-demo',
+        loadComponent: () =>
+          import('../pages/docs/empty/demos/rtl-empty-demo').then(
+            (m) => m.RtlEmptyDemo,
           ),
       },
     ],
