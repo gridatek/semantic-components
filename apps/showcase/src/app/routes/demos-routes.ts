@@ -2741,10 +2741,45 @@ export const demosRoutes: Route[] = [
     path: 'demos/menu-bar',
     children: [
       {
-        path: 'menu-bar-demo',
+        path: 'menu-bar-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/menu-bar/demos/menu-bar-demo').then(
-            (m) => m.MenuBarDemo,
+          import('../pages/docs/menu-bar/demos/menu-bar-usage-demo').then(
+            (m) => m.MenuBarUsageDemo,
+          ),
+      },
+      {
+        path: 'checkbox-menu-bar-demo',
+        loadComponent: () =>
+          import('../pages/docs/menu-bar/demos/checkbox-menu-bar-demo').then(
+            (m) => m.CheckboxMenuBarDemo,
+          ),
+      },
+      {
+        path: 'radio-menu-bar-demo',
+        loadComponent: () =>
+          import('../pages/docs/menu-bar/demos/radio-menu-bar-demo').then(
+            (m) => m.RadioMenuBarDemo,
+          ),
+      },
+      {
+        path: 'submenu-menu-bar-demo',
+        loadComponent: () =>
+          import('../pages/docs/menu-bar/demos/submenu-menu-bar-demo').then(
+            (m) => m.SubmenuMenuBarDemo,
+          ),
+      },
+      {
+        path: 'icons-menu-bar-demo',
+        loadComponent: () =>
+          import('../pages/docs/menu-bar/demos/icons-menu-bar-demo').then(
+            (m) => m.IconsMenuBarDemo,
+          ),
+      },
+      {
+        path: 'rtl-menu-bar-demo',
+        loadComponent: () =>
+          import('../pages/docs/menu-bar/demos/rtl-menu-bar-demo').then(
+            (m) => m.RtlMenuBarDemo,
           ),
       },
     ],

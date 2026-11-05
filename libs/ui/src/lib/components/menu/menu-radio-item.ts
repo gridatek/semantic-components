@@ -6,12 +6,12 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { injectPreset } from '../../config/preset';
 import { cn, setInput } from '../../utils';
 import { SC_MENU_CHECKABLE } from './menu-context';
 import { injectMenuHighlight } from './menu-highlight';
 import { ScMenuRadioGroup } from './menu-radio-group';
 import { useDefaultSearchTerm } from './menu-search-term';
+import { injectMenuStyles } from './menu-styles';
 
 /**
  * One of a radio group's items (menuitemradio): a click, Enter or Space
@@ -38,7 +38,7 @@ import { useDefaultSearchTerm } from './menu-search-term';
   },
 })
 export class ScMenuRadioItem {
-  private readonly styles = injectPreset().menu;
+  private readonly styles = injectMenuStyles();
   private readonly menuItem = inject<MenuItem<string>>(MenuItem);
   private readonly group = inject(ScMenuRadioGroup);
   protected readonly highlight = injectMenuHighlight(
@@ -57,7 +57,7 @@ export class ScMenuRadioItem {
   );
 
   protected readonly class = computed(() =>
-    cn('group/menu-item', this.styles.radioItem, this.classInput()),
+    cn('group/menu-item', this.styles().radioItem, this.classInput()),
   );
 
   constructor() {

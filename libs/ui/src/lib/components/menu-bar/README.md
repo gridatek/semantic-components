@@ -1,119 +1,59 @@
 # Menu Bar
 
-A horizontal menu bar component for application-style navigation, built on `@angular/aria/menu` primitives with CDK overlay positioning.
+A row of menus, as at the top of a desktop app: File, Edit, View. In the look of the app's preset (shadcn's Menubar), on `@angular/aria`. The menus are made of the Menu's parts, which take the menu bar's look inside it.
 
 ## Usage
 
-```typescript
-import { ScMenu, ScMenuBar, ScMenuBarItem, ScMenuContent, ScMenuItem, ScMenuPortal, ScMenuSeparator } from '@semantic-components/ui';
-```
-
 ```html
-<div scMenuBar>
+<div scMenuBar aria-label="Browser">
   <div scMenuBarItem value="File">
     File
     <ng-template scMenuPortal>
       <div scMenu>
         <ng-template scMenuContent>
-          <div scMenuItem value="New">New</div>
-          <div scMenuItem value="Open">Open</div>
+          <div scMenuGroup>
+            <div scMenuItem value="New Tab">
+              New Tab
+              <span scMenuShortcut>⌘T</span>
+            </div>
+            <div scMenuItem value="New Window">New Window</div>
+          </div>
           <div scMenuSeparator></div>
-          <div scMenuItem value="Save">Save</div>
+          <div scMenuItem value="Print">Print...</div>
         </ng-template>
       </div>
     </ng-template>
   </div>
+</div>
+```
 
-  <div scMenuBarItem value="Edit">
-    Edit
+## Anatomy
+
+```html
+<div scMenuBar>
+  <div scMenuBarItem>
     <ng-template scMenuPortal>
       <div scMenu>
-        <ng-template scMenuContent>
-          <div scMenuItem value="Undo">Undo</div>
-          <div scMenuItem value="Redo">Redo</div>
-        </ng-template>
+        <ng-template scMenuContent>…the Menu's parts…</ng-template>
       </div>
     </ng-template>
   </div>
 </div>
 ```
 
-## Components
+Each menu opens 8px below its item, 4px toward the start (mirrored right to left), above it if there is no room. In a menu bar, checkbox and radio items have their check at the start.
 
-### `scMenuBar`
+## Keyboard
 
-Directive applied to the menu bar container. Delegates to `@angular/aria/menu` `MenuBar` via host directives.
+The bar is one tab stop: ArrowLeft and ArrowRight move along it (mirrored right to left, by the bar's own direction), Home and End go to its ends, a letter goes to the item it starts. Enter, Space or ArrowDown opens an item's menu on its first item, ArrowUp on its last; with a menu open, ArrowLeft and ArrowRight open the next item's. In a menu, the Menu's keys. Escape closes the menu and gives focus back to its item; Tab closes it and leaves the bar.
 
-| Property | Type     | Description                         |
-| -------- | -------- | ----------------------------------- |
-| `class`  | `string` | Additional CSS classes to merge in. |
+## API reference
 
-### `scMenuBarItem`
+| Part            | Selector          | Inputs                                                                  |
+| --------------- | ----------------- | ----------------------------------------------------------------------- |
+| `ScMenuBar`     | `[scMenuBar]`     | `class` — the bar (`menubar`); name it with `aria-label`                |
+| `ScMenuBarItem` | `[scMenuBarItem]` | `value`, `disabled`, `class` — holding a `scMenuPortal`, opens its menu |
 
-Component applied to each top-level menu bar item. Uses `MenuItem` and `CdkOverlayOrigin` as host directives and renders an attached CDK overlay for the submenu.
+The menus: the Menu's parts (see the Menu's README).
 
-| Input      | Type      | Description                             |
-| ---------- | --------- | --------------------------------------- |
-| `class`    | `string`  | Additional CSS classes to merge in.     |
-| `id`       | `string`  | Forwarded to the underlying `MenuItem`. |
-| `value`    | `string`  | Identifies the menu item.               |
-| `disabled` | `boolean` | Disables the menu item.                 |
-
-| Export As       | Description                         |
-| --------------- | ----------------------------------- |
-| `scMenuBarItem` | Template reference to the instance. |
-
-Submenus are declared by placing an `<ng-template scMenuPortal>` inside the item, containing an `scMenu` with `scMenuContent`.
-
-## Examples
-
-### Items with icons and keyboard shortcuts
-
-```html
-<div scMenuBarItem value="File">
-  File
-  <ng-template scMenuPortal>
-    <div scMenu>
-      <ng-template scMenuContent>
-        <div scMenuItem value="New">
-          <svg siFileTextIcon></svg>
-          <span class="flex-1">New</span>
-          <span class="text-muted-foreground ml-auto text-xs tracking-widest">&#8984;N</span>
-        </div>
-      </ng-template>
-    </div>
-  </ng-template>
-</div>
-```
-
-### Nested submenus
-
-Nest another `scMenuPortal` inside a `scMenuItem` to create multi-level menus:
-
-```html
-<div scMenuItem value="Share">
-  <span class="flex-1">Share</span>
-  <svg siChevronRightIcon class="ml-auto"></svg>
-  <ng-template scMenuPortal>
-    <div scMenu>
-      <ng-template scMenuContent>
-        <div scMenuItem value="Share with others">Share with others</div>
-        <div scMenuItem value="Publish to web">Publish to web</div>
-      </ng-template>
-    </div>
-  </ng-template>
-</div>
-```
-
-### Disabled items
-
-```html
-<div scMenuItem value="Show ruler" [disabled]="true">Show ruler</div>
-```
-
-## Accessibility
-
-- Built on `@angular/aria/menu` (`MenuBar` and `MenuItem`), which provides the WAI-ARIA Menu Bar pattern including `role="menubar"`, `role="menuitem"`, and `aria-expanded` attributes.
-- Keyboard navigation (arrow keys, Enter, Escape) is handled by the underlying ARIA primitives.
-- Focus management and roving tabindex are provided automatically.
-- Decorative icons inside menu items should use `aria-hidden="true"`.
+Every part's classes are the preset's (`injectPreset().menuBar`: `bar`, `trigger`, and `menu` for the Menu's parts in a bar): shadcn's Menubar, in each style. The trigger adds a focus ring shadcn's lacks.

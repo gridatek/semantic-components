@@ -9,11 +9,11 @@ import {
   input,
   signal,
 } from '@angular/core';
-import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 import { SC_CONTEXT_MENU_PROVIDER } from '../context-menu/context-menu-types';
 import { SC_MENU } from './menu-context';
 import { ScMenuPortal } from './menu-portal';
+import { injectMenuStyles } from './menu-styles';
 
 /**
  * The menu's popup, in its portal. It takes its trigger's direction and
@@ -46,7 +46,7 @@ import { ScMenuPortal } from './menu-portal';
   },
 })
 export class ScMenu<V = string> {
-  private readonly styles = injectPreset().menu;
+  private readonly styles = injectMenuStyles();
   protected readonly context = inject(SC_MENU, { optional: true });
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -90,7 +90,7 @@ export class ScMenu<V = string> {
 
   protected readonly class = computed(() =>
     cn(
-      this.submenu() ? this.styles.subPopup : this.styles.popup,
+      this.submenu() ? this.styles().subPopup : this.styles().popup,
       'z-50 data-[visible=false]:hidden',
       // Size icons here too, not only on the items: the menu is measured
       // before its items are styled — unsized icons (300×150) would make it

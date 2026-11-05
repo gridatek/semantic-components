@@ -282,6 +282,22 @@ A menu of actions from a button (`div[scMenuProvider]`; rewritten 2026-11-05, sw
 - **A key that opens a submenu focuses its first item** — Aria tries, but our submenu exists only once its overlay renders, so the item does it then.
 - **Not**: shadcn's default check and chevron icons — the consumer writes them.
 
+## Menu Bar
+
+A row of menus (`[scMenuBar]`): shadcn's Menubar. A shadcn component, so no web research: shadcn's reference app and its docs' examples (2026-11-05).
+
+| Library                                                                                                     | What to read                                                                                                                                                         |
+| ----------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| shadcn Menubar (`shadcn-reference/presets/*/menubar.tsx`), examples (`apps/v4/examples/base/menubar-*.tsx`) | The bar and its triggers; menus 8px below, 4px toward the start; its items over the dropdown's, checks at the start; Demo, Checkbox, Radio, Submenu, With Icons, RTL |
+| `@angular/aria` MenuBar                                                                                     | The bar's roles and keys we build on; its direction read from the document                                                                                           |
+
+**Taken:**
+
+- **The look of each preset**, as the `menuBar` key: the bar, its triggers, and the Menu's parts in a bar (where shadcn's menubar part wraps a dropdown part, its classes merged over it).
+- **The same parts as the Menu** — not shadcn's MenubarItem, MenubarCheckboxItem…: a Menu part reads the menu bar's look when it is in one.
+- **The placement**, mirrored right to left; **the bar's arrows follow its area's direction**, not only the document's.
+- **Not**: shadcn's trigger with no focus style — ours has a focus ring.
+
 ## Control Group
 
 An input or a select joined with its buttons (`div[scControlGroup]`): shadcn's Button Group, renamed for what it is for (the user, 2026-10-30: it is only useful when inputs or selects mix with buttons; buttons alone are on the Button page). A shadcn component, so no web research: Base UI and shadcn's reference app (2026-10-30).

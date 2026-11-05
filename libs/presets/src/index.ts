@@ -109,6 +109,16 @@ export interface ScMenuStyles {
   shortcut: string;
 }
 
+/** A menu bar's parts that change from style to style. */
+export interface ScMenuBarStyles {
+  /** The bar. */
+  bar: string;
+  /** A bar item, opening its menu. */
+  trigger: string;
+  /** The menus in the bar: the menu's parts, in the menu bar's look. */
+  menu: ScMenuStyles;
+}
+
 /** A pagination's parts that change from style to style. */
 export interface ScPaginationStyles {
   /** The list of pages. */
@@ -162,6 +172,7 @@ export interface ScPreset {
   inputGroupButton: (props: { size?: ScInputGroupButtonSize | null }) => string;
   inputGroupText: string;
   menu: ScMenuStyles;
+  menuBar: ScMenuBarStyles;
   pagination: ScPaginationStyles;
   select: ScSelectStyles;
   table: ScTableStyles;

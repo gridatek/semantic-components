@@ -17,6 +17,7 @@ import {
   inputGroupText,
 } from './input-group';
 import { menu } from './menu';
+import { menuBar } from './menu-bar';
 import { pagination } from './pagination';
 import { select } from './select';
 import { table } from './table';
@@ -40,6 +41,7 @@ export const maia: ScPreset = {
   inputGroupButton,
   inputGroupText,
   menu,
+  menuBar,
   pagination,
   select,
   table,

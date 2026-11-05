@@ -20,12 +20,12 @@ import {
   untracked,
   viewChild,
 } from '@angular/core';
-import { injectPreset } from '../../config/preset';
 import { cn, setInput } from '../../utils';
 import { ScElementDirectionality } from '../../utils/element-directionality';
 import { injectMenuHighlight } from './menu-highlight';
 import { ScMenuPortal } from './menu-portal';
 import { useDefaultSearchTerm } from './menu-search-term';
+import { injectMenuStyles } from './menu-styles';
 
 /** The space between a menu and its submenu. */
 const SUBMENU_GAP = 4;
@@ -73,7 +73,7 @@ export type ScMenuItemVariant = 'default' | 'destructive';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScMenuItem {
-  private readonly styles = injectPreset().menu;
+  private readonly styles = injectMenuStyles();
   readonly overlayOrigin = inject(CdkOverlayOrigin);
   private readonly menuItem = inject(MenuItem);
   private readonly parentMenu = inject(Menu);
@@ -142,11 +142,11 @@ export class ScMenuItem {
     cn(
       this.submenuPortal()
         ? [
-            this.styles.subTrigger,
+            this.styles().subTrigger,
             // The chevron: at the end, turned right to left.
             '[&>svg:last-of-type]:ms-auto rtl:[&>svg:last-of-type]:rotate-180',
           ]
-        : this.styles.item,
+        : this.styles().item,
       this.classInput(),
     ),
   );

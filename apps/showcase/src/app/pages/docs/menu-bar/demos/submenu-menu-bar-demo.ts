@@ -1,0 +1,97 @@
+import { Component, ViewEncapsulation } from '@angular/core';
+import {
+  ScMenu,
+  ScMenuBar,
+  ScMenuBarItem,
+  ScMenuContent,
+  ScMenuItem,
+  ScMenuPortal,
+  ScMenuSeparator,
+  ScMenuShortcut,
+} from '@semantic-components/ui';
+import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
+
+/** An item holding a portal opens a submenu beside it. */
+@Component({
+  selector: 'app-submenu-menu-bar-demo',
+  imports: [
+    ScMenuBar,
+    ScMenuBarItem,
+    ScMenu,
+    ScMenuContent,
+    ScMenuItem,
+    ScMenuPortal,
+    ScMenuSeparator,
+    ScMenuShortcut,
+    SiChevronRightIcon,
+  ],
+  template: `
+    <div scMenuBar aria-label="Editor" class="w-72">
+      <div scMenuBarItem value="File">
+        File
+        <ng-template scMenuPortal>
+          <div scMenu>
+            <ng-template scMenuContent>
+              <div scMenuItem value="Share">
+                Share
+                <svg siChevronRightIcon></svg>
+                <ng-template scMenuPortal>
+                  <div scMenu>
+                    <ng-template scMenuContent>
+                      <div scMenuItem value="Email link">Email link</div>
+                      <div scMenuItem value="Messages">Messages</div>
+                      <div scMenuItem value="Notes">Notes</div>
+                    </ng-template>
+                  </div>
+                </ng-template>
+              </div>
+              <div scMenuSeparator></div>
+              <div scMenuItem value="Print...">
+                Print...
+                <span scMenuShortcut>⌘P</span>
+              </div>
+            </ng-template>
+          </div>
+        </ng-template>
+      </div>
+      <div scMenuBarItem value="Edit">
+        Edit
+        <ng-template scMenuPortal>
+          <div scMenu>
+            <ng-template scMenuContent>
+              <div scMenuItem value="Undo">
+                Undo
+                <span scMenuShortcut>⌘Z</span>
+              </div>
+              <div scMenuItem value="Redo">
+                Redo
+                <span scMenuShortcut>⇧⌘Z</span>
+              </div>
+              <div scMenuSeparator></div>
+              <div scMenuItem value="Find">
+                Find
+                <svg siChevronRightIcon></svg>
+                <ng-template scMenuPortal>
+                  <div scMenu>
+                    <ng-template scMenuContent>
+                      <div scMenuItem value="Find...">Find...</div>
+                      <div scMenuItem value="Find Next">Find Next</div>
+                      <div scMenuItem value="Find Previous">Find Previous</div>
+                    </ng-template>
+                  </div>
+                </ng-template>
+              </div>
+              <div scMenuSeparator></div>
+              <div scMenuItem value="Cut">Cut</div>
+              <div scMenuItem value="Copy">Copy</div>
+              <div scMenuItem value="Paste">Paste</div>
+            </ng-template>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  `,
+  host: { class: 'flex w-full justify-center' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class SubmenuMenuBarDemo {}

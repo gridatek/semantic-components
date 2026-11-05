@@ -6,9 +6,9 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 import { SC_MENU_GROUP } from './menu-context';
+import { injectMenuStyles } from './menu-styles';
 
 /** A group's title; it names the group. */
 @Directive({
@@ -20,7 +20,7 @@ import { SC_MENU_GROUP } from './menu-context';
   },
 })
 export class ScMenuLabel {
-  private readonly styles = injectPreset().menu;
+  private readonly styles = injectMenuStyles();
   protected readonly id = inject(_IdGenerator).getId('sc-menu-label-');
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -29,7 +29,7 @@ export class ScMenuLabel {
   });
 
   protected readonly class = computed(() =>
-    cn(this.styles.label, this.classInput()),
+    cn(this.styles().label, this.classInput()),
   );
 
   constructor() {

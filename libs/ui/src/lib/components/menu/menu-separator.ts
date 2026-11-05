@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
-import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
+import { injectMenuStyles } from './menu-styles';
 
 /** A line between items. */
 @Directive({
@@ -12,11 +12,11 @@ import { cn } from '../../utils';
   },
 })
 export class ScMenuSeparator {
-  private readonly styles = injectPreset().menu;
+  private readonly styles = injectMenuStyles();
 
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn(this.styles.separator, this.classInput()),
+    cn(this.styles().separator, this.classInput()),
   );
 }

@@ -7,11 +7,11 @@ import {
   input,
   model,
 } from '@angular/core';
-import { injectPreset } from '../../config/preset';
 import { cn, setInput } from '../../utils';
 import { SC_MENU_CHECKABLE } from './menu-context';
 import { injectMenuHighlight } from './menu-highlight';
 import { useDefaultSearchTerm } from './menu-search-term';
+import { injectMenuStyles } from './menu-styles';
 
 /**
  * An item that is on or off (menuitemcheckbox), `[(checked)]`. A click, Enter
@@ -38,7 +38,7 @@ import { useDefaultSearchTerm } from './menu-search-term';
   },
 })
 export class ScMenuCheckboxItem {
-  private readonly styles = injectPreset().menu;
+  private readonly styles = injectMenuStyles();
   private readonly menuItem = inject(MenuItem);
   protected readonly highlight = injectMenuHighlight(
     this.menuItem as MenuItem<unknown>,
@@ -52,7 +52,7 @@ export class ScMenuCheckboxItem {
   });
 
   protected readonly class = computed(() =>
-    cn('group/menu-item', this.styles.checkboxItem, this.classInput()),
+    cn('group/menu-item', this.styles().checkboxItem, this.classInput()),
   );
 
   constructor() {
