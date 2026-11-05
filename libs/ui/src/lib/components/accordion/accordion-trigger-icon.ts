@@ -4,13 +4,13 @@ import { cn } from '../../utils';
 
 /** Your chevron, in the trigger: at its end, turned while open. */
 @Directive({
-  selector: 'svg[scAccordionNextTriggerIcon]',
+  selector: 'svg[scAccordionTriggerIcon]',
   host: {
     'aria-hidden': 'true',
     '[class]': 'class()',
   },
 })
-export class ScAccordionNextTriggerIcon {
+export class ScAccordionTriggerIcon {
   private readonly styles = injectPreset().accordion;
 
   readonly classInput = input<string>('', { alias: 'class' });

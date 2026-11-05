@@ -1,37 +1,46 @@
-import { AccordionTrigger } from '@angular/aria/accordion';
-import { Directive, computed, input } from '@angular/core';
+import { AccordionPanel, AccordionTrigger } from '@angular/aria/accordion';
+import { Directive, computed, inject, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
+import { SC_ACCORDION_ITEM } from './accordion-item-context';
 
 /**
- * Opens and closes its panel. Write its text, then its icon (a chevron down):
- * it goes to the end, and turns over while open.
+ * Opens and closes its item's panel (Enter, Space, a click) — connected by
+ * the item, nothing to wire.
+ *
+ * Angular Aria's trigger itself (extended, not a host directive): Aria
+ * declares its panel a required input, which every template would then have
+ * to bind; here it is optional, and the item sets it.
  */
 @Directive({
-  selector: '[scAccordionTrigger]',
-  hostDirectives: [
-    {
-      directive: AccordionTrigger,
-      inputs: ['panel', 'disabled', 'expanded', 'id'],
-      outputs: ['expandedChange'],
-    },
-  ],
+  selector: 'button[scAccordionTrigger]',
+  exportAs: 'scAccordionTrigger',
   host: {
+    type: 'button',
     '[class]': 'class()',
   },
 })
-export class ScAccordionTrigger {
+export class ScAccordionTrigger extends AccordionTrigger {
+  private readonly styles = injectPreset().accordion;
+
+  /** Its panel: set by the item. */
+  override readonly panel = input<AccordionPanel>(
+    undefined as unknown as AccordionPanel,
+  );
+
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly class = computed(() =>
+
+  protected readonly class = computed(() =>
     cn(
-      'focus-visible:ring-ring/50 focus-visible:border-ring focus-visible:after:border-ring',
-      'rounded-lg py-2.5 text-start text-sm font-medium hover:underline focus-visible:ring-3',
-      'group/accordion-trigger relative flex flex-1 items-start justify-between',
-      'border border-transparent transition-all outline-none',
-      'aria-disabled:pointer-events-none aria-disabled:opacity-50',
-      // Its icon, last: at the end, turned over while open.
-      '[&>svg:last-child]:text-muted-foreground [&>svg:last-child]:pointer-events-none [&>svg:last-child]:ms-auto [&>svg:last-child]:size-4 [&>svg:last-child]:shrink-0 [&>svg:last-child]:transition-transform',
-      'aria-expanded:[&>svg:last-child]:rotate-180',
+      // Focus shown in every style (luma's has none); a style's own wins.
+      'focus-visible:ring-3 focus-visible:ring-ring/50',
+      this.styles.trigger,
       this.classInput(),
     ),
   );
+
+  constructor() {
+    super();
+    inject(SC_ACCORDION_ITEM).registerTrigger(this);
+  }
 }

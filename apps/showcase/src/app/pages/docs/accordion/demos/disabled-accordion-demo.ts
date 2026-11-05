@@ -1,75 +1,77 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScAccordionBody,
+  ScAccordion,
   ScAccordionContent,
-  ScAccordionGroup,
   ScAccordionHeader,
   ScAccordionItem,
   ScAccordionPanel,
   ScAccordionTrigger,
+  ScAccordionTriggerIcon,
 } from '@semantic-components/ui';
 import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
+/** A disabled item: reached by the keyboard, not opened. */
 @Component({
   selector: 'app-disabled-accordion-demo',
   imports: [
-    ScAccordionGroup,
-    ScAccordionHeader,
+    ScAccordion,
     ScAccordionItem,
+    ScAccordionHeader,
     ScAccordionTrigger,
+    ScAccordionTriggerIcon,
     ScAccordionPanel,
     ScAccordionContent,
-    ScAccordionBody,
     SiChevronDownIcon,
   ],
-  host: { class: 'flex w-full justify-center' },
   template: `
-    <div scAccordionGroup [multiExpandable]="false" class="w-full max-w-lg">
-      <div scAccordionItem>
-        <div scAccordionHeader>
-          <button scAccordionTrigger [panel]="enabled1.panel" [expanded]="true">
-            Enabled Item
-            <svg siChevronDownIcon></svg>
+    <div scAccordion class="w-full">
+      <div scAccordionItem value="item-1">
+        <h3 scAccordionHeader>
+          <button scAccordionTrigger>
+            Can I access my account history?
+            <svg siChevronDownIcon scAccordionTriggerIcon></svg>
           </button>
-        </div>
-        <div scAccordionPanel #enabled1="scAccordionPanel">
+        </h3>
+        <div scAccordionPanel>
           <ng-template scAccordionContent>
-            <div scAccordionBody>This item can be toggled normally.</div>
+            Yes, you can view your complete account history including all
+            transactions, plan changes, and support tickets in the Account
+            History section of your dashboard.
           </ng-template>
         </div>
       </div>
-      <div scAccordionItem>
-        <div scAccordionHeader>
-          <button
-            scAccordionTrigger
-            [panel]="disabled1.panel"
-            [disabled]="true"
-          >
-            Disabled Item
-            <svg siChevronDownIcon></svg>
+      <div scAccordionItem value="item-2" disabled>
+        <h3 scAccordionHeader>
+          <button scAccordionTrigger>
+            Premium feature information
+            <svg siChevronDownIcon scAccordionTriggerIcon></svg>
           </button>
-        </div>
-        <div scAccordionPanel #disabled1="scAccordionPanel">
+        </h3>
+        <div scAccordionPanel>
           <ng-template scAccordionContent>
-            <div scAccordionBody>This content won't be shown.</div>
+            This section contains information about premium features. Upgrade
+            your plan to access this content.
           </ng-template>
         </div>
       </div>
-      <div scAccordionItem>
-        <div scAccordionHeader>
-          <button scAccordionTrigger [panel]="enabled2.panel">
-            Another Enabled Item
-            <svg siChevronDownIcon></svg>
+      <div scAccordionItem value="item-3">
+        <h3 scAccordionHeader>
+          <button scAccordionTrigger>
+            How do I update my email address?
+            <svg siChevronDownIcon scAccordionTriggerIcon></svg>
           </button>
-        </div>
-        <div scAccordionPanel #enabled2="scAccordionPanel">
+        </h3>
+        <div scAccordionPanel>
           <ng-template scAccordionContent>
-            <div scAccordionBody>This item also works normally.</div>
+            You can update your email address in your account settings. You’ll
+            receive a verification email at your new address to confirm the
+            change.
           </ng-template>
         </div>
       </div>
     </div>
   `,
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
 export class DisabledAccordionDemo {}

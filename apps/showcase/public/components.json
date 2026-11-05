@@ -2,14 +2,6 @@
   {
     "name": "Accordion",
     "path": "accordion",
-    "description": "A vertically stacked set of interactive headings.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Layout"
-  },
-  {
-    "name": "Accordion Next",
-    "path": "accordion-next",
     "description": "Items whose panels open and close under their heading — in the look of the app's preset.",
     "status": "Experimental",
     "library": "ui",

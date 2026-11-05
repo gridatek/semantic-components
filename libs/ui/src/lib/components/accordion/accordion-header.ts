@@ -1,8 +1,10 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from '../../utils';
 
+/** The heading around an item's trigger: its level is yours. */
 @Directive({
-  selector: '[scAccordionHeader]',
+  selector:
+    'h2[scAccordionHeader], h3[scAccordionHeader], h4[scAccordionHeader], h5[scAccordionHeader], h6[scAccordionHeader]',
   host: {
     '[class]': 'class()',
   },

@@ -1,5 +1,4 @@
 export * from './accordion';
-export * from './accordion-next';
 export * from './alert';
 export * from './alert-dialog';
 export * from './aspect-ratio';

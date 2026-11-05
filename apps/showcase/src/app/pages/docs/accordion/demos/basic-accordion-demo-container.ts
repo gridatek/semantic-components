@@ -8,8 +8,8 @@ import { BasicAccordionDemo } from './basic-accordion-demo';
   template: `
     <app-demo-container
       title="Basic"
-      [code]="code"
       demoUrl="/demos/accordion/basic-accordion-demo"
+      [code]="code"
     >
       <app-basic-accordion-demo />
     </app-demo-container>
@@ -20,81 +20,78 @@ import { BasicAccordionDemo } from './basic-accordion-demo';
 export class BasicAccordionDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScAccordionBody,
+  ScAccordion,
   ScAccordionContent,
-  ScAccordionGroup,
   ScAccordionHeader,
   ScAccordionItem,
   ScAccordionPanel,
   ScAccordionTrigger,
+  ScAccordionTriggerIcon,
 } from '@semantic-components/ui';
 import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
+/** One open at a time; [value] opens the first. */
 @Component({
   selector: 'app-basic-accordion-demo',
   imports: [
-    ScAccordionGroup,
-    ScAccordionHeader,
+    ScAccordion,
     ScAccordionItem,
+    ScAccordionHeader,
     ScAccordionTrigger,
+    ScAccordionTriggerIcon,
     ScAccordionPanel,
     ScAccordionContent,
-    ScAccordionBody,
     SiChevronDownIcon,
   ],
-  host: { class: 'flex w-full justify-center' },
   template: \`
-    <div scAccordionGroup [multiExpandable]="false" class="max-w-lg">
-      <div scAccordionItem>
-        <div scAccordionHeader>
-          <button scAccordionTrigger [panel]="shipping.panel" [expanded]="true">
-            What are your shipping options?
-            <svg siChevronDownIcon></svg>
+    <div scAccordion [value]="['item-1']" class="max-w-lg">
+      <div scAccordionItem value="item-1">
+        <h3 scAccordionHeader>
+          <button scAccordionTrigger>
+            How do I reset my password?
+            <svg siChevronDownIcon scAccordionTriggerIcon></svg>
           </button>
-        </div>
-        <div scAccordionPanel #shipping="scAccordionPanel">
+        </h3>
+        <div scAccordionPanel>
           <ng-template scAccordionContent>
-            <div scAccordionBody>
-              We offer standard (5-7 days), express (2-3 days), and overnight
-              shipping. Free shipping on international orders.
-            </div>
+            Click on 'Forgot Password' on the login page, enter your email
+            address, and we'll send you a link to reset your password. The link
+            will expire in 24 hours.
           </ng-template>
         </div>
       </div>
-      <div scAccordionItem>
-        <div scAccordionHeader>
-          <button scAccordionTrigger [panel]="returns.panel">
-            What is your return policy?
-            <svg siChevronDownIcon></svg>
+      <div scAccordionItem value="item-2">
+        <h3 scAccordionHeader>
+          <button scAccordionTrigger>
+            Can I change my subscription plan?
+            <svg siChevronDownIcon scAccordionTriggerIcon></svg>
           </button>
-        </div>
-        <div scAccordionPanel #returns="scAccordionPanel">
+        </h3>
+        <div scAccordionPanel>
           <ng-template scAccordionContent>
-            <div scAccordionBody>
-              Returns accepted within 30 days. Items must be unused and in
-              original packaging. Refunds processed within 5-7 business days.
-            </div>
+            Yes, you can upgrade or downgrade your plan at any time from your
+            account settings. Changes will be reflected in your next billing
+            cycle.
           </ng-template>
         </div>
       </div>
-      <div scAccordionItem>
-        <div scAccordionHeader>
-          <button scAccordionTrigger [panel]="support.panel">
-            How can I contact customer support?
-            <svg siChevronDownIcon></svg>
+      <div scAccordionItem value="item-3">
+        <h3 scAccordionHeader>
+          <button scAccordionTrigger>
+            What payment methods do you accept?
+            <svg siChevronDownIcon scAccordionTriggerIcon></svg>
           </button>
-        </div>
-        <div scAccordionPanel #support="scAccordionPanel">
+        </h3>
+        <div scAccordionPanel>
           <ng-template scAccordionContent>
-            <div scAccordionBody>
-              Reach us via email, live chat, or phone. We respond within 24
-              hours during business days.
-            </div>
+            We accept all major credit cards, PayPal, and bank transfers. All
+            payments are processed securely through our payment partners.
           </ng-template>
         </div>
       </div>
     </div>
   \`,
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicAccordionDemo {}`;

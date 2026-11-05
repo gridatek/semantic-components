@@ -1,12 +1,12 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScAccordionBody,
+  ScAccordion,
   ScAccordionContent,
-  ScAccordionGroup,
   ScAccordionHeader,
   ScAccordionItem,
   ScAccordionPanel,
   ScAccordionTrigger,
+  ScAccordionTriggerIcon,
   ScAlert,
   ScAlertDescription,
   ScAlertTitle,
@@ -47,13 +47,13 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-gallery',
   imports: [
-    ScAccordionBody,
+    ScAccordion,
     ScAccordionContent,
-    ScAccordionGroup,
     ScAccordionHeader,
     ScAccordionItem,
     ScAccordionPanel,
     ScAccordionTrigger,
+    ScAccordionTriggerIcon,
     ScAlert,
     ScAlertDescription,
     ScAlertTitle,
@@ -705,64 +705,51 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
               Accordion
             </h2>
             <div scSeparator></div>
-            <div scAccordionGroup [multiExpandable]="false" class="max-w-lg">
-              <div scAccordionItem>
-                <div scAccordionHeader>
-                  <button
-                    scAccordionTrigger
-                    [panel]="faq1.panel"
-                    [expanded]="true"
-                    i18n="@@gallery.faq.accessible"
-                  >
+            <div scAccordion [value]="['faq1']" class="max-w-lg">
+              <div scAccordionItem value="faq1">
+                <h3 scAccordionHeader>
+                  <button scAccordionTrigger i18n="@@gallery.faq.accessible">
                     Is it accessible?
-                    <svg siChevronDownIcon></svg>
+                    <svg siChevronDownIcon scAccordionTriggerIcon></svg>
                   </button>
-                </div>
-                <div scAccordionPanel #faq1="scAccordionPanel">
+                </h3>
+                <div scAccordionPanel>
                   <ng-template scAccordionContent>
-                    <div scAccordionBody i18n="@@gallery.faq.accessible.answer">
+                    <ng-container i18n="@@gallery.faq.accessible.answer">
                       Yes. It adheres to the WAI-ARIA design pattern.
-                    </div>
+                    </ng-container>
                   </ng-template>
                 </div>
               </div>
-              <div scAccordionItem>
-                <div scAccordionHeader>
-                  <button
-                    scAccordionTrigger
-                    [panel]="faq2.panel"
-                    i18n="@@gallery.faq.styled"
-                  >
+              <div scAccordionItem value="faq2">
+                <h3 scAccordionHeader>
+                  <button scAccordionTrigger i18n="@@gallery.faq.styled">
                     Is it styled?
-                    <svg siChevronDownIcon></svg>
+                    <svg siChevronDownIcon scAccordionTriggerIcon></svg>
                   </button>
-                </div>
-                <div scAccordionPanel #faq2="scAccordionPanel">
+                </h3>
+                <div scAccordionPanel>
                   <ng-template scAccordionContent>
-                    <div scAccordionBody i18n="@@gallery.faq.styled.answer">
+                    <ng-container i18n="@@gallery.faq.styled.answer">
                       Yes. It comes with default styles that match the other
                       components' aesthetic.
-                    </div>
+                    </ng-container>
                   </ng-template>
                 </div>
               </div>
-              <div scAccordionItem>
-                <div scAccordionHeader>
-                  <button
-                    scAccordionTrigger
-                    [panel]="faq3.panel"
-                    i18n="@@gallery.faq.animated"
-                  >
+              <div scAccordionItem value="faq3">
+                <h3 scAccordionHeader>
+                  <button scAccordionTrigger i18n="@@gallery.faq.animated">
                     Is it animated?
-                    <svg siChevronDownIcon></svg>
+                    <svg siChevronDownIcon scAccordionTriggerIcon></svg>
                   </button>
-                </div>
-                <div scAccordionPanel #faq3="scAccordionPanel">
+                </h3>
+                <div scAccordionPanel>
                   <ng-template scAccordionContent>
-                    <div scAccordionBody i18n="@@gallery.faq.animated.answer">
+                    <ng-container i18n="@@gallery.faq.animated.answer">
                       Yes. It's animated by default, but you can disable it if
                       you prefer.
-                    </div>
+                    </ng-container>
                   </ng-template>
                 </div>
               </div>

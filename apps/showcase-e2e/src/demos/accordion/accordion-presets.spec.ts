@@ -23,7 +23,7 @@ const PRESETS: Record<string, ScPreset> = {
   rhea,
 };
 
-test.describe('Accordion Next in every preset', () => {
+test.describe('Accordion in every preset', () => {
   // A docs page and axe, twice: slow under load.
   test.slow();
 
@@ -37,15 +37,15 @@ test.describe('Accordion Next in every preset', () => {
       await context.addCookies([
         { name: 'sc-preset', value: preset, url: baseURL! },
       ]);
-      await page.goto('/demos/accordion-next/accordion-next-usage-demo');
+      await page.goto('/demos/accordion/accordion-usage-demo');
       for (const [target, wanted, what] of [
         [
-          page.locator('[scAccordionNextItem]').first(),
+          page.locator('[scAccordionItem]').first(),
           styles.accordion.item,
           'item',
         ],
         [
-          page.locator('button[scAccordionNextTrigger]').first(),
+          page.locator('button[scAccordionTrigger]').first(),
           styles.accordion.trigger,
           'trigger',
         ],
@@ -62,7 +62,7 @@ test.describe('Accordion Next in every preset', () => {
           .toEqual([]);
       }
 
-      await page.goto('/docs/components/accordion-next');
+      await page.goto('/docs/components/accordion');
       await expectNoA11yViolations(page);
       await expectNoA11yViolations(page, { dark: true });
     });

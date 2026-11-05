@@ -1,45 +1,45 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScAccordionNext,
-  ScAccordionNextContent,
-  ScAccordionNextHeader,
-  ScAccordionNextItem,
-  ScAccordionNextPanel,
-  ScAccordionNextTrigger,
-  ScAccordionNextTriggerIcon,
+  ScAccordion,
+  ScAccordionContent,
+  ScAccordionHeader,
+  ScAccordionItem,
+  ScAccordionPanel,
+  ScAccordionTrigger,
+  ScAccordionTriggerIcon,
   ScFrame,
 } from '@semantic-components/ui';
 import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
 /** A frame round the accordion (scFrame: the style’s), lines between its items. */
 @Component({
-  selector: 'app-borders-accordion-next-demo',
+  selector: 'app-borders-accordion-demo',
   imports: [
-    ScAccordionNext,
-    ScAccordionNextItem,
-    ScAccordionNextHeader,
-    ScAccordionNextTrigger,
-    ScAccordionNextTriggerIcon,
-    ScAccordionNextPanel,
-    ScAccordionNextContent,
+    ScAccordion,
+    ScAccordionItem,
+    ScAccordionHeader,
+    ScAccordionTrigger,
+    ScAccordionTriggerIcon,
+    ScAccordionPanel,
+    ScAccordionContent,
     ScFrame,
     SiChevronDownIcon,
   ],
   template: `
-    <div scAccordionNext scFrame [value]="['billing']" class="max-w-lg">
+    <div scAccordion scFrame [value]="['billing']" class="max-w-lg">
       <div
-        scAccordionNextItem
+        scAccordionItem
         value="billing"
         class="border-b px-4 last:border-b-0"
       >
-        <h3 scAccordionNextHeader>
-          <button scAccordionNextTrigger>
+        <h3 scAccordionHeader>
+          <button scAccordionTrigger>
             How does billing work?
-            <svg siChevronDownIcon scAccordionNextTriggerIcon></svg>
+            <svg siChevronDownIcon scAccordionTriggerIcon></svg>
           </button>
         </h3>
-        <div scAccordionNextPanel>
-          <ng-template scAccordionNextContent>
+        <div scAccordionPanel>
+          <ng-template scAccordionContent>
             We offer monthly and annual subscription plans. Billing is charged
             at the beginning of each cycle, and you can cancel anytime. All
             plans include automatic backups, 24/7 support, and unlimited team
@@ -48,18 +48,18 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
         </div>
       </div>
       <div
-        scAccordionNextItem
+        scAccordionItem
         value="security"
         class="border-b px-4 last:border-b-0"
       >
-        <h3 scAccordionNextHeader>
-          <button scAccordionNextTrigger>
+        <h3 scAccordionHeader>
+          <button scAccordionTrigger>
             Is my data secure?
-            <svg siChevronDownIcon scAccordionNextTriggerIcon></svg>
+            <svg siChevronDownIcon scAccordionTriggerIcon></svg>
           </button>
         </h3>
-        <div scAccordionNextPanel>
-          <ng-template scAccordionNextContent>
+        <div scAccordionPanel>
+          <ng-template scAccordionContent>
             Yes. We use end-to-end encryption, SOC 2 Type II compliance, and
             regular third-party security audits. All data is encrypted at rest
             and in transit using industry-standard protocols.
@@ -67,18 +67,18 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
         </div>
       </div>
       <div
-        scAccordionNextItem
+        scAccordionItem
         value="integration"
         class="border-b px-4 last:border-b-0"
       >
-        <h3 scAccordionNextHeader>
-          <button scAccordionNextTrigger>
+        <h3 scAccordionHeader>
+          <button scAccordionTrigger>
             What integrations do you support?
-            <svg siChevronDownIcon scAccordionNextTriggerIcon></svg>
+            <svg siChevronDownIcon scAccordionTriggerIcon></svg>
           </button>
         </h3>
-        <div scAccordionNextPanel>
-          <ng-template scAccordionNextContent>
+        <div scAccordionPanel>
+          <ng-template scAccordionContent>
             We integrate with 500+ popular tools including Slack, Zapier,
             Salesforce, HubSpot, and more. You can also build custom
             integrations using our REST API and webhooks.
@@ -90,4 +90,4 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class BordersAccordionNextDemo {}
+export class BordersAccordionDemo {}

@@ -5,10 +5,24 @@ export const demosRoutes: Route[] = [
     path: 'demos/accordion',
     children: [
       {
+        path: 'accordion-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/accordion/demos/accordion-usage-demo').then(
+            (m) => m.AccordionUsageDemo,
+          ),
+      },
+      {
         path: 'basic-accordion-demo',
         loadComponent: () =>
           import('../pages/docs/accordion/demos/basic-accordion-demo').then(
             (m) => m.BasicAccordionDemo,
+          ),
+      },
+      {
+        path: 'multiple-accordion-demo',
+        loadComponent: () =>
+          import('../pages/docs/accordion/demos/multiple-accordion-demo').then(
+            (m) => m.MultipleAccordionDemo,
           ),
       },
       {
@@ -19,64 +33,24 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'multiple-accordion-demo',
+        path: 'borders-accordion-demo',
         loadComponent: () =>
-          import('../pages/docs/accordion/demos/multiple-accordion-demo').then(
-            (m) => m.MultipleAccordionDemo,
-          ),
-      },
-    ],
-  },
-  {
-    path: 'demos/accordion-next',
-    children: [
-      {
-        path: 'accordion-next-usage-demo',
-        loadComponent: () =>
-          import('../pages/docs/accordion-next/demos/accordion-next-usage-demo').then(
-            (m) => m.AccordionNextUsageDemo,
+          import('../pages/docs/accordion/demos/borders-accordion-demo').then(
+            (m) => m.BordersAccordionDemo,
           ),
       },
       {
-        path: 'basic-accordion-next-demo',
+        path: 'card-accordion-demo',
         loadComponent: () =>
-          import('../pages/docs/accordion-next/demos/basic-accordion-next-demo').then(
-            (m) => m.BasicAccordionNextDemo,
+          import('../pages/docs/accordion/demos/card-accordion-demo').then(
+            (m) => m.CardAccordionDemo,
           ),
       },
       {
-        path: 'multiple-accordion-next-demo',
+        path: 'rtl-accordion-demo',
         loadComponent: () =>
-          import('../pages/docs/accordion-next/demos/multiple-accordion-next-demo').then(
-            (m) => m.MultipleAccordionNextDemo,
-          ),
-      },
-      {
-        path: 'disabled-accordion-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/accordion-next/demos/disabled-accordion-next-demo').then(
-            (m) => m.DisabledAccordionNextDemo,
-          ),
-      },
-      {
-        path: 'borders-accordion-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/accordion-next/demos/borders-accordion-next-demo').then(
-            (m) => m.BordersAccordionNextDemo,
-          ),
-      },
-      {
-        path: 'card-accordion-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/accordion-next/demos/card-accordion-next-demo').then(
-            (m) => m.CardAccordionNextDemo,
-          ),
-      },
-      {
-        path: 'rtl-accordion-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/accordion-next/demos/rtl-accordion-next-demo').then(
-            (m) => m.RtlAccordionNextDemo,
+          import('../pages/docs/accordion/demos/rtl-accordion-demo').then(
+            (m) => m.RtlAccordionDemo,
           ),
       },
     ],

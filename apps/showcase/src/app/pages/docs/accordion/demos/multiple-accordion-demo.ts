@@ -1,80 +1,78 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScAccordionBody,
+  ScAccordion,
   ScAccordionContent,
-  ScAccordionGroup,
   ScAccordionHeader,
   ScAccordionItem,
   ScAccordionPanel,
   ScAccordionTrigger,
+  ScAccordionTriggerIcon,
 } from '@semantic-components/ui';
 import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
+/** multiple: several open at once. */
 @Component({
   selector: 'app-multiple-accordion-demo',
   imports: [
-    ScAccordionGroup,
-    ScAccordionHeader,
+    ScAccordion,
     ScAccordionItem,
+    ScAccordionHeader,
     ScAccordionTrigger,
+    ScAccordionTriggerIcon,
     ScAccordionPanel,
     ScAccordionContent,
-    ScAccordionBody,
     SiChevronDownIcon,
   ],
-  host: { class: 'flex w-full justify-center' },
   template: `
-    <div scAccordionGroup [multiExpandable]="true" class="w-full max-w-lg">
-      <div scAccordionItem>
-        <div scAccordionHeader>
-          <button scAccordionTrigger [panel]="itemA.panel" [expanded]="true">
-            Can I open multiple items?
-            <svg siChevronDownIcon></svg>
+    <div scAccordion multiple [value]="['notifications']" class="max-w-lg">
+      <div scAccordionItem value="notifications">
+        <h3 scAccordionHeader>
+          <button scAccordionTrigger>
+            Notification Settings
+            <svg siChevronDownIcon scAccordionTriggerIcon></svg>
           </button>
-        </div>
-        <div scAccordionPanel #itemA="scAccordionPanel">
+        </h3>
+        <div scAccordionPanel>
           <ng-template scAccordionContent>
-            <div scAccordionBody>
-              Yes! When using multiExpandable, you can have multiple accordion
-              items open at the same time.
-            </div>
+            Manage how you receive notifications. You can enable email alerts
+            for updates or push notifications for mobile devices.
           </ng-template>
         </div>
       </div>
-      <div scAccordionItem>
-        <div scAccordionHeader>
-          <button scAccordionTrigger [panel]="itemB.panel" [expanded]="true">
-            How does it work?
-            <svg siChevronDownIcon></svg>
+      <div scAccordionItem value="privacy">
+        <h3 scAccordionHeader>
+          <button scAccordionTrigger>
+            Privacy & Security
+            <svg siChevronDownIcon scAccordionTriggerIcon></svg>
           </button>
-        </div>
-        <div scAccordionPanel #itemB="scAccordionPanel">
+        </h3>
+        <div scAccordionPanel>
           <ng-template scAccordionContent>
-            <div scAccordionBody>
-              Each trigger has an expanded input that you can bind to with
-              [(expanded)] for two-way binding.
-            </div>
+            Control your privacy settings and security preferences. Enable
+            two-factor authentication, manage connected devices, review active
+            sessions, and configure data sharing preferences. You can also
+            download your data or delete your account.
           </ng-template>
         </div>
       </div>
-      <div scAccordionItem>
-        <div scAccordionHeader>
-          <button scAccordionTrigger [panel]="itemC.panel">
-            What about accessibility?
-            <svg siChevronDownIcon></svg>
+      <div scAccordionItem value="billing">
+        <h3 scAccordionHeader>
+          <button scAccordionTrigger>
+            Billing & Subscription
+            <svg siChevronDownIcon scAccordionTriggerIcon></svg>
           </button>
-        </div>
-        <div scAccordionPanel #itemC="scAccordionPanel">
+        </h3>
+        <div scAccordionPanel>
           <ng-template scAccordionContent>
-            <div scAccordionBody>
-              Each item uses proper ARIA attributes including aria-expanded and
-              role="region" for the content.
-            </div>
+            View your current plan, payment history, and upcoming invoices.
+            Update your payment method, change your subscription tier, or cancel
+            your subscription.
           </ng-template>
         </div>
       </div>
     </div>
   `,
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
 export class MultipleAccordionDemo {}

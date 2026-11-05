@@ -5,9 +5,8 @@ import { expectNoHorizontalScroll } from '../../mobile';
 import { expectRtl } from '../../rtl';
 import { expect, test } from '../../test';
 
-const demo = (name: string) =>
-  `/demos/accordion-next/${name}-accordion-next-demo`;
-const usage = '/demos/accordion-next/accordion-next-usage-demo';
+const demo = (name: string) => `/demos/accordion/${name}-accordion-demo`;
+const usage = '/demos/accordion/accordion-usage-demo';
 
 const trigger = (page: Page, name: RegExp | string) =>
   page.getByRole('button', { name });
@@ -116,7 +115,7 @@ test('Card: in a card, its first item open', async ({ page }) => {
 
 test('RTL: right to left, the chevron on the left', async ({ page }) => {
   await page.goto(demo('rtl'));
-  const first = page.locator('button[scAccordionNextTrigger]').first();
+  const first = page.locator('button[scAccordionTrigger]').first();
   await expectRtl(first);
   const [t, icon] = [await box(first), await box(first.locator('svg'))];
   expect(icon.x - t.x).toBeLessThan(30);

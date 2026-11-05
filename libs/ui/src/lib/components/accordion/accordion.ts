@@ -15,8 +15,8 @@ import { bindInput, cn } from '../../utils';
  * which are open (`[(value)]`, their values).
  */
 @Directive({
-  selector: '[scAccordionNext]',
-  exportAs: 'scAccordionNext',
+  selector: '[scAccordion]',
+  exportAs: 'scAccordion',
   hostDirectives: [
     {
       directive: AccordionGroup,
@@ -27,7 +27,7 @@ import { bindInput, cn } from '../../utils';
     '[class]': 'class()',
   },
 })
-export class ScAccordionNext {
+export class ScAccordion {
   private readonly styles = injectPreset().accordion;
 
   readonly classInput = input<string>('', { alias: 'class' });

@@ -10,10 +10,10 @@ import {
 import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 import { DevOnly } from '../../../../components/dev-only/dev-only';
 import { ConfigService } from '../../../../services/config-service';
-import { AccordionNextUsageDemo } from './accordion-next-usage-demo';
+import { AccordionUsageDemo } from './accordion-usage-demo';
 
 @Component({
-  selector: 'app-accordion-next-usage-demo-container',
+  selector: 'app-accordion-usage-demo-container',
   imports: [
     DevOnly,
     ScCodeBlock,
@@ -24,7 +24,7 @@ import { AccordionNextUsageDemo } from './accordion-next-usage-demo';
     ScCodeBlockContent,
     SiCheckIcon,
     SiCopyIcon,
-    AccordionNextUsageDemo,
+    AccordionUsageDemo,
   ],
   template: `
     <div scCodeBlock>
@@ -46,81 +46,81 @@ import { AccordionNextUsageDemo } from './accordion-next-usage-demo';
 
     @if (devMode()) {
       <app-dev-only>
-        <app-accordion-next-usage-demo />
+        <app-accordion-usage-demo />
       </app-dev-only>
     }
   `,
   host: { class: 'block w-full space-y-4' },
   encapsulation: ViewEncapsulation.None,
 })
-export class AccordionNextUsageDemoContainer {
+export class AccordionUsageDemoContainer {
   private readonly config = inject(ConfigService);
 
   protected readonly devMode = this.config.devMode;
 
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScAccordionNext,
-  ScAccordionNextContent,
-  ScAccordionNextHeader,
-  ScAccordionNextItem,
-  ScAccordionNextPanel,
-  ScAccordionNextTrigger,
-  ScAccordionNextTriggerIcon,
+  ScAccordion,
+  ScAccordionContent,
+  ScAccordionHeader,
+  ScAccordionItem,
+  ScAccordionPanel,
+  ScAccordionTrigger,
+  ScAccordionTriggerIcon,
 } from '@semantic-components/ui';
 import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
-  selector: 'app-accordion-next-usage-demo',
+  selector: 'app-accordion-usage-demo',
   imports: [
-    ScAccordionNext,
-    ScAccordionNextItem,
-    ScAccordionNextHeader,
-    ScAccordionNextTrigger,
-    ScAccordionNextTriggerIcon,
-    ScAccordionNextPanel,
-    ScAccordionNextContent,
+    ScAccordion,
+    ScAccordionItem,
+    ScAccordionHeader,
+    ScAccordionTrigger,
+    ScAccordionTriggerIcon,
+    ScAccordionPanel,
+    ScAccordionContent,
     SiChevronDownIcon,
   ],
   template: \`
-    <div scAccordionNext [value]="['shipping']" class="max-w-lg">
-      <div scAccordionNextItem value="shipping">
-        <h3 scAccordionNextHeader>
-          <button scAccordionNextTrigger>
+    <div scAccordion [value]="['shipping']" class="max-w-lg">
+      <div scAccordionItem value="shipping">
+        <h3 scAccordionHeader>
+          <button scAccordionTrigger>
             What are your shipping options?
-            <svg siChevronDownIcon scAccordionNextTriggerIcon></svg>
+            <svg siChevronDownIcon scAccordionTriggerIcon></svg>
           </button>
         </h3>
-        <div scAccordionNextPanel>
-          <ng-template scAccordionNextContent>
+        <div scAccordionPanel>
+          <ng-template scAccordionContent>
             We offer standard (5-7 days), express (2-3 days), and overnight
             shipping. Free shipping on international orders.
           </ng-template>
         </div>
       </div>
-      <div scAccordionNextItem value="returns">
-        <h3 scAccordionNextHeader>
-          <button scAccordionNextTrigger>
+      <div scAccordionItem value="returns">
+        <h3 scAccordionHeader>
+          <button scAccordionTrigger>
             What is your return policy?
-            <svg siChevronDownIcon scAccordionNextTriggerIcon></svg>
+            <svg siChevronDownIcon scAccordionTriggerIcon></svg>
           </button>
         </h3>
-        <div scAccordionNextPanel>
-          <ng-template scAccordionNextContent>
+        <div scAccordionPanel>
+          <ng-template scAccordionContent>
             Returns accepted within 30 days. Items must be unused and in
             original packaging. Refunds processed within 5-7 business days.
           </ng-template>
         </div>
       </div>
-      <div scAccordionNextItem value="support">
-        <h3 scAccordionNextHeader>
-          <button scAccordionNextTrigger>
+      <div scAccordionItem value="support">
+        <h3 scAccordionHeader>
+          <button scAccordionTrigger>
             How can I contact customer support?
-            <svg siChevronDownIcon scAccordionNextTriggerIcon></svg>
+            <svg siChevronDownIcon scAccordionTriggerIcon></svg>
           </button>
         </h3>
-        <div scAccordionNextPanel>
-          <ng-template scAccordionNextContent>
+        <div scAccordionPanel>
+          <ng-template scAccordionContent>
             Reach us via email, live chat, or phone. We respond within 24 hours
             during business days.
           </ng-template>
@@ -131,5 +131,5 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class AccordionNextUsageDemo {}`;
+export class AccordionUsageDemo {}`;
 }
