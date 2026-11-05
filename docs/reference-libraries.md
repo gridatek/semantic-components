@@ -263,6 +263,25 @@ Where the page is (`nav[scBreadcrumb]`). A shadcn component; Base UI has none, s
 - **The separator's icon turned right to left**, whatever the icon (ours has no default; a slash or a dot looks the same turned).
 - **Not**: shadcn's default `aria-label="breadcrumb"`, chevron and ellipsis icon, nor its `sr-only` "More" inside the hidden ellipsis — the consumer writes the name and the icons.
 
+## Menu
+
+A menu of actions from a button (`div[scMenuNextProvider]`, beside the old Menu until it is validated): shadcn's Dropdown Menu. A shadcn component, so no web research: Base UI's docs and shadcn's reference app (2026-11-05).
+
+| Library                                                               | What to read                                                                                                                                                                          |
+| --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| shadcn Dropdown Menu (`shadcn-reference/presets/*/dropdown-menu.tsx`) | Parts (group, label, item, checkbox and radio items, separator, shortcut, submenu); `variant="destructive"`, `inset`; the check at the item's end; eight looks                        |
+| Base UI Menu (`@base-ui/react/docs`)                                  | `data-highlighted`, and none after a pointer open; checkbox and radio items stay open on a click; the submenu at the reading end, flipped in RTL; Escape back to the trigger, Tab out |
+| `@angular/aria` Menu                                                  | The roles, roving focus, type-ahead and submenu keys we build on; disabled items stay reachable (`softDisabled`)                                                                      |
+
+**Taken:**
+
+- **The parts and each preset's look**, from each style's `dropdown-menu.tsx`, as the `menu` preset key.
+- **Base UI's highlight**: `data-highlighted` on the active item, none after a click open until the pointer moves or a key is pressed; the first ArrowDown then shows the first item.
+- **Checkbox and radio items that stay open**, `[(checked)]` and the group's `[(value)]`.
+- **The menu takes the trigger's direction and language** — no `dir` on the menu.
+- **A key that opens a submenu focuses its first item** — Aria tries, but our submenu exists only once its overlay renders, so the item does it then.
+- **Not**: shadcn's default check and chevron icons — the consumer writes them.
+
 ## Control Group
 
 An input or a select joined with its buttons (`div[scControlGroup]`): shadcn's Button Group, renamed for what it is for (the user, 2026-10-30: it is only useful when inputs or selects mix with buttons; buttons alone are on the Button page). A shadcn component, so no web research: Base UI and shadcn's reference app (2026-10-30).

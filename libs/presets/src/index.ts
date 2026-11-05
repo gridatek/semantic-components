@@ -89,6 +89,26 @@ export interface ScCardStyles {
   footer: string;
 }
 
+/** A menu's parts that change from style to style. */
+export interface ScMenuStyles {
+  /** The menu's popup. */
+  popup: string;
+  /** A submenu's popup. */
+  subPopup: string;
+  /** A group's label. */
+  label: string;
+  item: string;
+  /** An item that opens a submenu. */
+  subTrigger: string;
+  checkboxItem: string;
+  radioItem: string;
+  /** The check or dot of a checkbox or radio item. */
+  indicator: string;
+  separator: string;
+  /** The keyboard hint at the end of an item. */
+  shortcut: string;
+}
+
 /** A pagination's parts that change from style to style. */
 export interface ScPaginationStyles {
   /** The list of pages. */
@@ -141,6 +161,7 @@ export interface ScPreset {
   /** Over the preset's button, in an input group. */
   inputGroupButton: (props: { size?: ScInputGroupButtonSize | null }) => string;
   inputGroupText: string;
+  menu: ScMenuStyles;
   pagination: ScPaginationStyles;
   select: ScSelectStyles;
   table: ScTableStyles;

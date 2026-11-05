@@ -592,6 +592,14 @@
     "category": "Navigation"
   },
   {
+    "name": "Menu Next",
+    "path": "menu-next",
+    "description": "A menu of actions from a button: groups, checkbox and radio items, submenus, shortcuts — in the look of the app's preset.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Navigation"
+  },
+  {
     "name": "Menu Bar",
     "path": "menu-bar",
     "description": "A horizontal menu bar with keyboard navigation support.",

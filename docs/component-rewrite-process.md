@@ -74,7 +74,7 @@ Wire it into the showcase:
 
 - Type-checks: `npx ngc -p libs/<lib>/tsconfig.lib.json --noEmit`, `npx ngc -p apps/showcase/tsconfig.app.json --noEmit`, `npx tsc -p apps/showcase-e2e/tsconfig.json --noEmit`.
 - Lint: `npx nx run-many -t lint -p <lib> showcase showcase-e2e --skip-nx-cache --output-style=static`.
-- E2E specs for its demos (one spec per behaviour: keyboard, gestures, output…) and the page's axe test — **only these specs** locally, never the whole suite:
+- E2E specs for its demos (one spec per behaviour: keyboard, gestures, output…) and the page's axe test. Locally, run **only the specs you need** — the new component's, Chromium, one worker — never the whole suite or several browsers: the full run is GitHub Actions' (the user, 2026-11-05).
 
   ```sh
   cd apps/showcase-e2e

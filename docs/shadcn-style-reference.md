@@ -77,6 +77,7 @@ Do **not** "fix" these to match shadcn:
 - **Alert: no `role="alert"`** — shadcn's always has it; ours has none, and the consumer announces one that appears (`role="status"` or `role="alert"` on a wrapper — the Alert page's Announcing section).
 - **Avatar: Base UI's image loading** — the image rendered at once over its fallback, hidden by `visibility` while `data-loading` / `data-error` (shadcn's preloads, then swaps). The group count is the only preset key: shadcn's avatar is the same in every style but for it.
 - **Notification Center's count: its own pill** — it doesn't take the badge's preset (sera's badges are bare text): a counter keeps a filled pill in every style.
+- **Menu (shadcn's Dropdown Menu): `data-highlighted:` for `focus:`** — an item is highlighted when Aria makes it active, not when it has focus (after a click open none is), so the presets read `data-highlighted:` for `focus:`, `aria-disabled:` for `data-disabled:`, `aria-expanded:` for `data-popup-open:` (a submenu's item), `group/menu-item` for `group/dropdown-menu-item`. Placement and animation classes are left out (above).
 - **Pagination: parts on buttons or your links** — the parts set no `href`: a link follows the one you give it.
 - **Decomposition** — shadcn ships one function per part in one file; we split into directives, one per file, so one shadcn part can map to several of ours.
 

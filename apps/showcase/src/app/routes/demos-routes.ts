@@ -2790,6 +2790,74 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/menu-next',
+    children: [
+      {
+        path: 'menu-next-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/menu-next/demos/menu-next-usage-demo').then(
+            (m) => m.MenuNextUsageDemo,
+          ),
+      },
+      {
+        path: 'basic-menu-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/menu-next/demos/basic-menu-next-demo').then(
+            (m) => m.BasicMenuNextDemo,
+          ),
+      },
+      {
+        path: 'submenu-menu-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/menu-next/demos/submenu-menu-next-demo').then(
+            (m) => m.SubmenuMenuNextDemo,
+          ),
+      },
+      {
+        path: 'shortcuts-menu-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/menu-next/demos/shortcuts-menu-next-demo').then(
+            (m) => m.ShortcutsMenuNextDemo,
+          ),
+      },
+      {
+        path: 'icons-menu-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/menu-next/demos/icons-menu-next-demo').then(
+            (m) => m.IconsMenuNextDemo,
+          ),
+      },
+      {
+        path: 'checkboxes-menu-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/menu-next/demos/checkboxes-menu-next-demo').then(
+            (m) => m.CheckboxesMenuNextDemo,
+          ),
+      },
+      {
+        path: 'radio-group-menu-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/menu-next/demos/radio-group-menu-next-demo').then(
+            (m) => m.RadioGroupMenuNextDemo,
+          ),
+      },
+      {
+        path: 'destructive-menu-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/menu-next/demos/destructive-menu-next-demo').then(
+            (m) => m.DestructiveMenuNextDemo,
+          ),
+      },
+      {
+        path: 'rtl-menu-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/menu-next/demos/rtl-menu-next-demo').then(
+            (m) => m.RtlMenuNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/multiselect',
     children: [
       {

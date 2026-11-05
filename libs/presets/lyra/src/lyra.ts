@@ -16,6 +16,7 @@ import {
   inputGroupButton,
   inputGroupText,
 } from './input-group';
+import { menu } from './menu';
 import { pagination } from './pagination';
 import { select } from './select';
 import { table } from './table';
@@ -38,6 +39,7 @@ export const lyra: ScPreset = {
   inputGroupAddon,
   inputGroupButton,
   inputGroupText,
+  menu,
   pagination,
   select,
   table,
