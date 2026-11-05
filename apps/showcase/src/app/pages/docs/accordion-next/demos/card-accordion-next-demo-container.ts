@@ -66,12 +66,12 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
         <div scAccordionNext [value]="['plans']">
           <div scAccordionNextItem value="plans">
             <h3 scAccordionNextHeader>
-              <button scAccordionNextTrigger [panel]="plans">
+              <button scAccordionNextTrigger>
                 What subscription plans do you offer?
                 <svg siChevronDownIcon scAccordionNextTriggerIcon></svg>
               </button>
             </h3>
-            <div scAccordionNextPanel #plans>
+            <div scAccordionNextPanel>
               <ng-template scAccordionNextContent>
                 We offer three subscription tiers: Starter ($9/month),
                 Professional ($29/month), and Enterprise ($99/month). Each plan
@@ -82,12 +82,12 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
           </div>
           <div scAccordionNextItem value="billing">
             <h3 scAccordionNextHeader>
-              <button scAccordionNextTrigger [panel]="billing">
+              <button scAccordionNextTrigger>
                 How does billing work?
                 <svg siChevronDownIcon scAccordionNextTriggerIcon></svg>
               </button>
             </h3>
-            <div scAccordionNextPanel #billing>
+            <div scAccordionNextPanel>
               <ng-template scAccordionNextContent>
                 Billing occurs automatically at the start of each billing cycle.
                 We accept all major credit cards, PayPal, and ACH transfers for
@@ -98,12 +98,12 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
           </div>
           <div scAccordionNextItem value="cancel">
             <h3 scAccordionNextHeader>
-              <button scAccordionNextTrigger [panel]="cancel">
+              <button scAccordionNextTrigger>
                 How do I cancel my subscription?
                 <svg siChevronDownIcon scAccordionNextTriggerIcon></svg>
               </button>
             </h3>
-            <div scAccordionNextPanel #cancel>
+            <div scAccordionNextPanel>
               <ng-template scAccordionNextContent>
                 You can cancel your subscription anytime from your account
                 settings. There are no cancellation fees or penalties. Your

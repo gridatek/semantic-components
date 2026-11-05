@@ -47,12 +47,12 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     <div scAccordionNext class="w-full">
       <div scAccordionNextItem value="item-1">
         <h3 scAccordionNextHeader>
-          <button scAccordionNextTrigger [panel]="item1">
+          <button scAccordionNextTrigger>
             Can I access my account history?
             <svg siChevronDownIcon scAccordionNextTriggerIcon></svg>
           </button>
         </h3>
-        <div scAccordionNextPanel #item1>
+        <div scAccordionNextPanel>
           <ng-template scAccordionNextContent>
             Yes, you can view your complete account history including all
             transactions, plan changes, and support tickets in the Account
@@ -62,12 +62,12 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
       </div>
       <div scAccordionNextItem value="item-2" disabled>
         <h3 scAccordionNextHeader>
-          <button scAccordionNextTrigger [panel]="item2">
+          <button scAccordionNextTrigger>
             Premium feature information
             <svg siChevronDownIcon scAccordionNextTriggerIcon></svg>
           </button>
         </h3>
-        <div scAccordionNextPanel #item2>
+        <div scAccordionNextPanel>
           <ng-template scAccordionNextContent>
             This section contains information about premium features. Upgrade
             your plan to access this content.
@@ -76,12 +76,12 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
       </div>
       <div scAccordionNextItem value="item-3">
         <h3 scAccordionNextHeader>
-          <button scAccordionNextTrigger [panel]="item3">
+          <button scAccordionNextTrigger>
             How do I update my email address?
             <svg siChevronDownIcon scAccordionNextTriggerIcon></svg>
           </button>
         </h3>
-        <div scAccordionNextPanel #item3>
+        <div scAccordionNextPanel>
           <ng-template scAccordionNextContent>
             You can update your email address in your account settings. You’ll
             receive a verification email at your new address to confirm the

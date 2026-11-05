@@ -55,12 +55,12 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
         class="border-b px-4 last:border-b-0"
       >
         <h3 scAccordionNextHeader>
-          <button scAccordionNextTrigger [panel]="billing">
+          <button scAccordionNextTrigger>
             How does billing work?
             <svg siChevronDownIcon scAccordionNextTriggerIcon></svg>
           </button>
         </h3>
-        <div scAccordionNextPanel #billing>
+        <div scAccordionNextPanel>
           <ng-template scAccordionNextContent>
             We offer monthly and annual subscription plans. Billing is charged
             at the beginning of each cycle, and you can cancel anytime. All
@@ -75,12 +75,12 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
         class="border-b px-4 last:border-b-0"
       >
         <h3 scAccordionNextHeader>
-          <button scAccordionNextTrigger [panel]="security">
+          <button scAccordionNextTrigger>
             Is my data secure?
             <svg siChevronDownIcon scAccordionNextTriggerIcon></svg>
           </button>
         </h3>
-        <div scAccordionNextPanel #security>
+        <div scAccordionNextPanel>
           <ng-template scAccordionNextContent>
             Yes. We use end-to-end encryption, SOC 2 Type II compliance, and
             regular third-party security audits. All data is encrypted at rest
@@ -94,12 +94,12 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
         class="border-b px-4 last:border-b-0"
       >
         <h3 scAccordionNextHeader>
-          <button scAccordionNextTrigger [panel]="integration">
+          <button scAccordionNextTrigger>
             What integrations do you support?
             <svg siChevronDownIcon scAccordionNextTriggerIcon></svg>
           </button>
         </h3>
-        <div scAccordionNextPanel #integration>
+        <div scAccordionNextPanel>
           <ng-template scAccordionNextContent>
             We integrate with 500+ popular tools including Slack, Zapier,
             Salesforce, HubSpot, and more. You can also build custom

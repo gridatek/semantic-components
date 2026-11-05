@@ -1,24 +1,32 @@
-import { AccordionTrigger } from '@angular/aria/accordion';
+import { AccordionPanel, AccordionTrigger } from '@angular/aria/accordion';
 import { Directive, computed, inject, input } from '@angular/core';
 import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
+import { SC_ACCORDION_NEXT_ITEM } from './accordion-next-item-context';
 
 /**
- * Opens and closes a panel (Enter, Space, a click): `[panel]`, the panel
- * (`<div scAccordionNextPanel #shipping>`).
+ * Opens and closes its item's panel (Enter, Space, a click) — connected by
+ * the item, nothing to wire.
+ *
+ * Angular Aria's trigger itself (extended, not a host directive): Aria
+ * declares its panel a required input, which every template would then have
+ * to bind; here it is optional, and the item sets it.
  */
 @Directive({
   selector: 'button[scAccordionNextTrigger]',
   exportAs: 'scAccordionNextTrigger',
-  hostDirectives: [{ directive: AccordionTrigger, inputs: ['id', 'panel'] }],
   host: {
     type: 'button',
     '[class]': 'class()',
   },
 })
-export class ScAccordionNextTrigger {
+export class ScAccordionNextTrigger extends AccordionTrigger {
   private readonly styles = injectPreset().accordion;
-  readonly trigger = inject(AccordionTrigger);
+
+  /** Its panel: set by the item. */
+  override readonly panel = input<AccordionPanel>(
+    undefined as unknown as AccordionPanel,
+  );
 
   readonly classInput = input<string>('', { alias: 'class' });
 
@@ -30,4 +38,9 @@ export class ScAccordionNextTrigger {
       this.classInput(),
     ),
   );
+
+  constructor() {
+    super();
+    inject(SC_ACCORDION_NEXT_ITEM).registerTrigger(this);
+  }
 }

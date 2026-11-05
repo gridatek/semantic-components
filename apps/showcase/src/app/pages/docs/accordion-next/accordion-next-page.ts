@@ -63,8 +63,8 @@ import { RtlAccordionNextDemoContainer } from './demos/rtl-accordion-next-demo-c
         <h2 scHeading appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           Every part is a directive on your element; the heading&apos;s level,
-          the text and the chevron are yours. Each trigger is given its panel:
-          name the panel (#shipping) and pass it ([panel]="shipping").
+          the text and the chevron are yours. The item connects its trigger and
+          its panel: nothing to wire.
         </p>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
@@ -163,12 +163,12 @@ export default class AccordionNextPage {
       '<div scAccordionNext [(value)]="open">',
       '  <div scAccordionNextItem value="shipping">',
       '    <h3 scAccordionNextHeader>',
-      '      <button scAccordionNextTrigger [panel]="shipping">',
+      '      <button scAccordionNextTrigger>',
       '        …',
       '        <svg scAccordionNextTriggerIcon></svg>',
       '      </button>',
       '    </h3>',
-      '    <div scAccordionNextPanel #shipping>',
+      '    <div scAccordionNextPanel>',
       '      <ng-template scAccordionNextContent>…</ng-template>',
       '    </div>',
       '  </div>',
@@ -197,8 +197,7 @@ export default class AccordionNextPage {
     {
       name: 'ScAccordionNextTrigger',
       selector: 'button[scAccordionNextTrigger]',
-      description:
-        'Opens and closes its panel: [panel], the panel (required, by Angular Aria).',
+      description: 'Opens and closes its item’s panel; the item connects them.',
     },
     {
       name: 'ScAccordionNextTriggerIcon',

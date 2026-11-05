@@ -1,33 +1,40 @@
+import type { AccordionPanel, AccordionTrigger } from '@angular/aria/accordion';
 import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   Directive,
   booleanAttribute,
   computed,
-  contentChild,
   effect,
   inject,
   input,
+  signal,
   untracked,
 } from '@angular/core';
 import { injectPreset } from '../../config/preset';
 import { cn, setInput } from '../../utils';
 import { ScAccordionNext } from './accordion-next';
-import { ScAccordionNextTrigger } from './accordion-next-trigger';
+import {
+  SC_ACCORDION_NEXT_ITEM,
+  type ScAccordionNextItemContext,
+} from './accordion-next-item-context';
 
 /**
- * An item: its heading and trigger, and its panel. Open when its value is in
- * the accordion's.
+ * An item: its heading and trigger, and its panel — connected here, nothing
+ * to wire. Open when its value is in the accordion's.
  */
 @Directive({
   selector: '[scAccordionNextItem]',
   exportAs: 'scAccordionNextItem',
+  providers: [
+    { provide: SC_ACCORDION_NEXT_ITEM, useExisting: ScAccordionNextItem },
+  ],
   host: {
     '[class]': 'class()',
     '[attr.data-open]': 'open() || null',
     '[attr.data-disabled]': 'disabled() || null',
   },
 })
-export class ScAccordionNextItem {
+export class ScAccordionNextItem implements ScAccordionNextItemContext {
   private readonly styles = injectPreset().accordion;
   private readonly accordion = inject(ScAccordionNext);
 
@@ -41,7 +48,8 @@ export class ScAccordionNextItem {
     transform: booleanAttribute,
   });
 
-  private readonly triggerPart = contentChild.required(ScAccordionNextTrigger);
+  private readonly trigger = signal<AccordionTrigger | undefined>(undefined);
+  private readonly panel = signal<AccordionPanel | undefined>(undefined);
 
   /** Open: its value is in the accordion's. */
   readonly open = computed(() => this.accordion.value().includes(this.value()));
@@ -52,17 +60,21 @@ export class ScAccordionNextItem {
 
   constructor() {
     effect(() => {
-      setInput(this.triggerPart().trigger.disabled, this.disabled());
+      const trigger = this.trigger();
+      if (trigger) setInput(trigger.disabled, this.disabled());
     });
     // The accordion's value opens it…
     effect(() => {
       const open = this.open();
-      const trigger = untracked(this.triggerPart).trigger;
-      if (open !== untracked(trigger.expanded)) trigger.expanded.set(open);
+      const trigger = untracked(this.trigger);
+      if (trigger && open !== untracked(trigger.expanded))
+        trigger.expanded.set(open);
     });
     // …and its trigger writes it back.
     effect(() => {
-      const expanded = this.triggerPart().trigger.expanded();
+      const trigger = this.trigger();
+      if (!trigger) return;
+      const expanded = trigger.expanded();
       const value = untracked(this.value);
       untracked(() =>
         this.accordion.value.update((open) =>
@@ -74,5 +86,24 @@ export class ScAccordionNextItem {
         ),
       );
     });
+  }
+
+  registerTrigger(trigger: AccordionTrigger): void {
+    this.trigger.set(trigger);
+    this.connect();
+  }
+
+  registerPanel(panel: AccordionPanel): void {
+    this.panel.set(panel);
+    this.connect();
+  }
+
+  /**
+   * Its trigger controls its panel — set as soon as both exist, before Aria's
+   * trigger initialises (it reads its panel then).
+   */
+  private connect(): void {
+    const [trigger, panel] = [untracked(this.trigger), untracked(this.panel)];
+    if (trigger && panel) setInput(trigger.panel, panel);
   }
 }

@@ -9,17 +9,15 @@ import {
 } from '@angular/core';
 import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
+import { SC_ACCORDION_NEXT_ITEM } from './accordion-next-item-context';
 
 /**
- * An item's panel (role region, named by its trigger), given to its trigger:
- * `<div scAccordionNextPanel #shipping>` and `[panel]="shipping"`. Its
- * content, in an `ng-template scAccordionNextContent`, is created when it
+ * An item's panel (role region, named by its trigger). Its content, in an `ng-template scAccordionNextContent`, is created when it
  * first opens and kept: closed, the panel is inert and its height animates to
  * nothing.
  *
- * Angular Aria's panel itself (extended, not a host directive): its trigger
- * takes the panel as a required input, which only a panel of its own type
- * satisfies.
+ * Angular Aria's panel itself (extended, not a host directive), so the item
+ * can give it to its trigger.
  */
 @Component({
   selector: '[scAccordionNextPanel]',
@@ -50,5 +48,6 @@ export class ScAccordionNextPanel extends AccordionPanel {
     // Kept once created: the close animates the content, not an empty box.
     // (Aria's, from the panel's host directive; published as private.)
     inject(DeferredContentAware).preserveContent.set(true);
+    inject(SC_ACCORDION_NEXT_ITEM).registerPanel(this);
   }
 }

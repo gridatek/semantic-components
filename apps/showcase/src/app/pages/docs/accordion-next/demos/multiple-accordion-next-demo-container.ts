@@ -47,12 +47,12 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     <div scAccordionNext multiple [value]="['notifications']" class="max-w-lg">
       <div scAccordionNextItem value="notifications">
         <h3 scAccordionNextHeader>
-          <button scAccordionNextTrigger [panel]="notifications">
+          <button scAccordionNextTrigger>
             Notification Settings
             <svg siChevronDownIcon scAccordionNextTriggerIcon></svg>
           </button>
         </h3>
-        <div scAccordionNextPanel #notifications>
+        <div scAccordionNextPanel>
           <ng-template scAccordionNextContent>
             Manage how you receive notifications. You can enable email alerts
             for updates or push notifications for mobile devices.
@@ -61,12 +61,12 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
       </div>
       <div scAccordionNextItem value="privacy">
         <h3 scAccordionNextHeader>
-          <button scAccordionNextTrigger [panel]="privacy">
+          <button scAccordionNextTrigger>
             Privacy & Security
             <svg siChevronDownIcon scAccordionNextTriggerIcon></svg>
           </button>
         </h3>
-        <div scAccordionNextPanel #privacy>
+        <div scAccordionNextPanel>
           <ng-template scAccordionNextContent>
             Control your privacy settings and security preferences. Enable
             two-factor authentication, manage connected devices, review active
@@ -77,12 +77,12 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
       </div>
       <div scAccordionNextItem value="billing">
         <h3 scAccordionNextHeader>
-          <button scAccordionNextTrigger [panel]="billing">
+          <button scAccordionNextTrigger>
             Billing & Subscription
             <svg siChevronDownIcon scAccordionNextTriggerIcon></svg>
           </button>
         </h3>
-        <div scAccordionNextPanel #billing>
+        <div scAccordionNextPanel>
           <ng-template scAccordionNextContent>
             View your current plan, payment history, and upcoming invoices.
             Update your payment method, change your subscription tier, or cancel

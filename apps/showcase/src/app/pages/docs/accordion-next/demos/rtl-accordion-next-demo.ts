@@ -28,12 +28,12 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
       <div scAccordionNext [value]="['item-1']">
         <div scAccordionNextItem value="item-1">
           <h3 scAccordionNextHeader>
-            <button scAccordionNextTrigger [panel]="item1">
+            <button scAccordionNextTrigger>
               كيف يمكنني إعادة تعيين كلمة المرور؟
               <svg siChevronDownIcon scAccordionNextTriggerIcon></svg>
             </button>
           </h3>
-          <div scAccordionNextPanel #item1>
+          <div scAccordionNextPanel>
             <ng-template scAccordionNextContent>
               انقر على 'نسيت كلمة المرور' في صفحة تسجيل الدخول، أدخل عنوان بريدك
               الإلكتروني، وسنرسل لك رابطًا لإعادة تعيين كلمة المرور. سينتهي
@@ -43,12 +43,12 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
         </div>
         <div scAccordionNextItem value="item-2">
           <h3 scAccordionNextHeader>
-            <button scAccordionNextTrigger [panel]="item2">
+            <button scAccordionNextTrigger>
               هل يمكنني تغيير خطة الاشتراك الخاصة بي؟
               <svg siChevronDownIcon scAccordionNextTriggerIcon></svg>
             </button>
           </h3>
-          <div scAccordionNextPanel #item2>
+          <div scAccordionNextPanel>
             <ng-template scAccordionNextContent>
               نعم، يمكنك ترقية أو تخفيض خطتك في أي وقت من إعدادات حسابك. ستظهر
               التغييرات في دورة الفوترة التالية.
@@ -57,12 +57,12 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
         </div>
         <div scAccordionNextItem value="item-3">
           <h3 scAccordionNextHeader>
-            <button scAccordionNextTrigger [panel]="item3">
+            <button scAccordionNextTrigger>
               ما هي طرق الدفع التي تقبلونها؟
               <svg siChevronDownIcon scAccordionNextTriggerIcon></svg>
             </button>
           </h3>
-          <div scAccordionNextPanel #item3>
+          <div scAccordionNextPanel>
             <ng-template scAccordionNextContent>
               نقبل جميع بطاقات الائتمان الرئيسية و PayPal والتحويلات المصرفية.
               تتم معالجة جميع المدفوعات بأمان من خلال شركاء الدفع لدينا.
