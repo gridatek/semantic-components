@@ -1,6 +1,10 @@
 import { EnvironmentInjector, createEnvironmentInjector } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { SC_CONFIG, ScToaster, provideScConfig } from '@semantic-components/ui';
+import {
+  SC_CONFIG,
+  ScToaster,
+  provideSemanticComponents,
+} from '@semantic-components/ui';
 
 describe('ScToaster', () => {
   let toaster: ScToaster;
@@ -164,10 +168,10 @@ describe('ScToaster config', () => {
     vi.restoreAllMocks();
   });
 
-  it('takes its defaults from provideScConfig', () => {
+  it('takes its defaults from provideSemanticComponents', () => {
     TestBed.configureTestingModule({
       providers: [
-        provideScConfig({
+        provideSemanticComponents({
           toaster: { position: 'top-center', duration: 1000, maxToasts: 2 },
         }),
       ],
@@ -186,10 +190,12 @@ describe('ScToaster config', () => {
 
   it('merges a config given again into the one above', () => {
     TestBed.configureTestingModule({
-      providers: [provideScConfig({ toaster: { position: 'top-center' } })],
+      providers: [
+        provideSemanticComponents({ toaster: { position: 'top-center' } }),
+      ],
     });
     const child = createEnvironmentInjector(
-      [provideScConfig({ toaster: { duration: 1000 } })],
+      [provideSemanticComponents({ toaster: { duration: 1000 } })],
       TestBed.inject(EnvironmentInjector),
     );
     expect(child.get(SC_CONFIG).toaster).toEqual({

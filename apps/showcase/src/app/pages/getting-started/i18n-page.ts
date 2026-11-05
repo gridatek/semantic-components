@@ -241,11 +241,11 @@ bootstrapApplication(App, appConfig);`,
       text: "With the library's other settings, for ScI18n — your switcher reads it.",
       file: 'app.config.ts',
       language: 'typescript',
-      code: `import { provideScConfig } from '@semantic-components/ui';
+      code: `import { provideSemanticComponents } from '@semantic-components/ui';
 import { I18N } from './i18n';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideScConfig({ i18n: I18N })],
+  providers: [provideSemanticComponents({ i18n: I18N })],
 };`,
     },
     {

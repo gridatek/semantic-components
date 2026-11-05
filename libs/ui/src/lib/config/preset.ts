@@ -4,7 +4,7 @@ import { nova } from '@semantic-components/presets/nova';
 import { SC_CONFIG } from './config';
 
 /**
- * The app's preset (`provideScConfig({ preset })`), nova by default: the
+ * The app's preset (`provideSemanticComponents({ preset })`), nova by default: the
  * classes of the parts that follow it. In an injection context, e.g. a field:
  * `private readonly buttonStyles = injectPreset().button;`
  */

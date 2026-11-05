@@ -70,12 +70,12 @@ interface ScToastConfig {
 
 ## Config
 
-The toaster's settings go in `provideScConfig`, the libraries' settings, under `toaster`. All are optional:
+The toaster's settings go in `provideSemanticComponents`, the libraries' settings, under `toaster`. All are optional:
 
 ```typescript
 // app.config.ts
 providers: [
-  provideScConfig({
+  provideSemanticComponents({
     toaster: {
       position: 'bottom-end', // where toasts show when show() gives no position
       duration: 5000, // ms, when show() gives no duration; 0 keeps them

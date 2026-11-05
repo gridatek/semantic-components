@@ -50,7 +50,7 @@ readonly profile = form(signal({ email: '' }), (s) => {
 
 ### ScInput — `input[scInput]`
 
-Its classes are the preset's (`injectPreset().input`, from `provideScConfig({ preset })`; nova by default). Every native attribute (`type`, `placeholder`, `autocomplete`…) is the input's own.
+Its classes are the preset's (`injectPreset().input`, from `provideSemanticComponents({ preset })`; nova by default). Every native attribute (`type`, `placeholder`, `autocomplete`…) is the input's own.
 
 | Input              | Type      | Default                 | Description                                                            |
 | ------------------ | --------- | ----------------------- | ---------------------------------------------------------------------- |

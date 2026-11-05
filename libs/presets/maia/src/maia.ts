@@ -23,7 +23,7 @@ import { menubar } from './menubar';
 import { pagination } from './pagination';
 import { select } from './select';
 import { table } from './table';
-/** The maia preset: `provideScConfig({ preset: maia })`. */
+/** The maia preset: `provideSemanticComponents({ preset: maia })`. */
 import { tabs } from './tabs';
 
 export const maia: ScPreset = {

@@ -23,7 +23,7 @@ import { menubar } from './menubar';
 import { pagination } from './pagination';
 import { select } from './select';
 import { table } from './table';
-/** The lyra preset: `provideScConfig({ preset: lyra })`. */
+/** The lyra preset: `provideSemanticComponents({ preset: lyra })`. */
 import { tabs } from './tabs';
 
 export const lyra: ScPreset = {

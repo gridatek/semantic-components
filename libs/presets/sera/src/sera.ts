@@ -23,7 +23,7 @@ import { menubar } from './menubar';
 import { pagination } from './pagination';
 import { select } from './select';
 import { table } from './table';
-/** The sera preset: `provideScConfig({ preset: sera })`. */
+/** The sera preset: `provideSemanticComponents({ preset: sera })`. */
 import { tabs } from './tabs';
 
 export const sera: ScPreset = {

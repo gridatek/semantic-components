@@ -50,7 +50,7 @@ export interface ScToastPromiseConfig<T> {
 /** How a position's toasts are laid out. */
 export type ScToasterLayout = 'stacked' | 'list';
 
-/** The toaster's settings, in `provideScConfig({ toaster })`. */
+/** The toaster's settings, in `provideSemanticComponents({ toaster })`. */
 export interface ScToasterConfig {
   /** Where toasts show when `show` gives no `position`. Default `bottom-end`. */
   position?: ScToastPosition;

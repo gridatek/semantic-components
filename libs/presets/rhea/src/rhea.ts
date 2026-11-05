@@ -23,7 +23,7 @@ import { menubar } from './menubar';
 import { pagination } from './pagination';
 import { select } from './select';
 import { table } from './table';
-/** The rhea preset: `provideScConfig({ preset: rhea })`. */
+/** The rhea preset: `provideSemanticComponents({ preset: rhea })`. */
 import { tabs } from './tabs';
 
 export const rhea: ScPreset = {

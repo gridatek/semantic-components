@@ -23,7 +23,7 @@ import { menubar } from './menubar';
 import { pagination } from './pagination';
 import { select } from './select';
 import { table } from './table';
-/** The mira preset: `provideScConfig({ preset: mira })`. */
+/** The mira preset: `provideSemanticComponents({ preset: mira })`. */
 import { tabs } from './tabs';
 
 export const mira: ScPreset = {

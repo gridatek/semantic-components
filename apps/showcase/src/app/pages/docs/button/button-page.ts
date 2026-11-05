@@ -165,7 +165,7 @@ import { WithIconButtonDemoContainer } from './demos/with-icon-button-demo-conta
             >button[scButton]</code
           >: its classes are the app&apos;s preset&apos;s (
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >provideScConfig(&#123; preset &#125;)</code
+            >provideSemanticComponents(&#123; preset &#125;)</code
           >, nova by default).
         </p>
         <div

@@ -23,7 +23,7 @@ import { menubar } from './menubar';
 import { pagination } from './pagination';
 import { select } from './select';
 import { table } from './table';
-/** The luma preset: `provideScConfig({ preset: luma })`. */
+/** The luma preset: `provideSemanticComponents({ preset: luma })`. */
 import { tabs } from './tabs';
 
 export const luma: ScPreset = {

@@ -1,7 +1,7 @@
 /**
  * shadcn's styles (presets) for the components, one entry point each:
  * `@semantic-components/presets/nova`, `…/lyra`…. The app imports its
- * one and gives it to `provideScConfig({ preset })` (nova by default); its
+ * one and gives it to `provideSemanticComponents({ preset })` (nova by default); its
  * styles.css points Tailwind at that folder only, so only that preset's
  * classes are scanned.
  */

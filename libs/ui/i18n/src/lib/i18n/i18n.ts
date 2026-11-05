@@ -9,7 +9,7 @@ import {
 } from './i18n-config';
 
 /**
- * The app's locales (`provideScConfig({ i18n })`) and the one in use
+ * The app's locales (`provideSemanticComponents({ i18n })`) and the one in use
  * (`LOCALE_ID`, set by `loadLocale()`) — for the page's life: switching
  * reloads it, since templates are translated once, when they are created.
  * Write your switcher from it (a select, a menu, buttons).

@@ -14,7 +14,7 @@ export interface ScButtonVariants {
 
 /**
  * A button in the app's preset: its classes are the preset's
- * (`provideScConfig({ preset })`, from `@semantic-components/presets`;
+ * (`provideSemanticComponents({ preset })`, from `@semantic-components/presets`;
  * nova by default), chosen when the app starts.
  */
 @Directive({

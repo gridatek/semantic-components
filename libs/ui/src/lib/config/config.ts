@@ -35,7 +35,9 @@ export const SC_CONFIG = new InjectionToken<ScConfig>('SC_CONFIG', {
  * defaults. Given again lower down (a lazy route), its parts merge into those
  * above.
  */
-export function provideScConfig(config: ScConfig): EnvironmentProviders {
+export function provideSemanticComponents(
+  config: ScConfig,
+): EnvironmentProviders {
   const provider: Provider = {
     provide: SC_CONFIG,
     useFactory: (): ScConfig => {

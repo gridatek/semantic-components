@@ -10,7 +10,7 @@ export interface ScLocale {
 
 /**
  * The app's locales, and where their translations come from: the `i18n` part
- * of `provideScConfig()`, and what `loadLocale()` is given.
+ * of `provideSemanticComponents()`, and what `loadLocale()` is given.
  */
 export interface ScI18nConfig {
   /** The locale the templates are written in: nothing is loaded for it. */

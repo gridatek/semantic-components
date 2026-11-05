@@ -31,7 +31,7 @@ For a component's parts and behaviour, Base UI's own docs are in the reference a
 
 ## Where our looks live: presets
 
-shadcn's eight styles are our **presets** (`@semantic-components/presets`), one chosen when the app starts (`provideScConfig({ preset })`, nova by default).
+shadcn's eight styles are our **presets** (`@semantic-components/presets`), one chosen when the app starts (`provideSemanticComponents({ preset })`, nova by default).
 
 - **`libs/presets/<style>/src/<component>.ts`** — the classes of a component that change from style to style, one file per component per style, each generated from that style's `.tsx` in the reference app (the source in its header comment). A `cva` where shadcn has one (`button`, `badge`, `alert`), strings otherwise.
 - **`libs/presets/src/index.ts`** — the `ScPreset` interface: every key (`button`, `card`, `table`, `alertDialog`, `backdrop`, `avatarGroupCount`…).

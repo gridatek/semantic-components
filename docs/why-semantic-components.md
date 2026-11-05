@@ -138,7 +138,7 @@ And shadcn's eight styles are presets — nova, vega, maia, lyra, mira, luma, se
 ```typescript
 import { nova } from '@semantic-components/presets/nova';
 
-provideScConfig({ preset: nova });
+provideSemanticComponents({ preset: nova });
 ```
 
 ```typescript

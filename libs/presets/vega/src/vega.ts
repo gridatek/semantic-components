@@ -23,7 +23,7 @@ import { menubar } from './menubar';
 import { pagination } from './pagination';
 import { select } from './select';
 import { table } from './table';
-/** The vega preset: `provideScConfig({ preset: vega })`. */
+/** The vega preset: `provideSemanticComponents({ preset: vega })`. */
 import { tabs } from './tabs';
 
 export const vega: ScPreset = {

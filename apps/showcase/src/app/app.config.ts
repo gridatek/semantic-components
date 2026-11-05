@@ -11,7 +11,7 @@ import {
   withInMemoryScrolling,
   withRouterConfig,
 } from '@angular/router';
-import { provideScConfig } from '@semantic-components/ui';
+import { provideSemanticComponents } from '@semantic-components/ui';
 import { provideCodeHighlighter } from '@semantic-components/ui/code-block';
 import { appRoutes } from './app-routes';
 import { PRESETS, storedPreset } from './presets';
@@ -21,7 +21,7 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     // Code blocks highlighted with Shiki, each language loaded when first shown.
     provideCodeHighlighter(),
-    provideScConfig({
+    provideSemanticComponents({
       // The one picked in the preset sheet (nova by default).
       preset: PRESETS[storedPreset()],
       // Alt+T moves focus to the toasts (the toaster's template names it); Escape goes back.

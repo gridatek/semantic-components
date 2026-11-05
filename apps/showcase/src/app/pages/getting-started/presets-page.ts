@@ -83,7 +83,7 @@ import { PRESETS } from '../../presets';
         <p class="text-muted-foreground">
           Give it to
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >provideScConfig</code
+            >provideSemanticComponents</code
           >
           when the app starts — for nova, nothing to do:
         </p>
@@ -156,10 +156,10 @@ export default class PresetsPage {
   protected readonly names = Object.keys(PRESETS) as ScPresetName[];
 
   readonly configCode = `import { lyra } from '@semantic-components/presets/lyra';
-import { provideScConfig } from '@semantic-components/ui';
+import { provideSemanticComponents } from '@semantic-components/ui';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideScConfig({ preset: lyra })],
+  providers: [provideSemanticComponents({ preset: lyra })],
 };`;
 
   readonly sourceCode =

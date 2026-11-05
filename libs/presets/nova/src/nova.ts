@@ -23,7 +23,7 @@ import { menubar } from './menubar';
 import { pagination } from './pagination';
 import { select } from './select';
 import { table } from './table';
-/** The nova preset: `provideScConfig({ preset: nova })`. */
+/** The nova preset: `provideSemanticComponents({ preset: nova })`. */
 import { tabs } from './tabs';
 
 export const nova: ScPreset = {

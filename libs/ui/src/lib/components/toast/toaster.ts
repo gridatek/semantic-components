@@ -24,7 +24,7 @@ export class ScToaster {
   private readonly toastsSignal = signal<ScToastData[]>([]);
   readonly toasts = this.toastsSignal.asReadonly();
 
-  /** Its settings: `provideScConfig({ toaster })`, then the defaults. */
+  /** Its settings: `provideSemanticComponents({ toaster })`, then the defaults. */
   readonly ɵconfig: Required<ScToasterConfig> = {
     position: 'bottom-end',
     duration: 5000,

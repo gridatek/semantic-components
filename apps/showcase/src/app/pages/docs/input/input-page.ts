@@ -132,7 +132,7 @@ import { RtlInputDemoContainer } from './demos/rtl-input-demo-container';
             >input[scInput]</code
           >: its classes are the app&apos;s preset&apos;s (
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >provideScConfig(&#123; preset &#125;)</code
+            >provideSemanticComponents(&#123; preset &#125;)</code
           >, nova by default). Every native attribute (
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">type</code>,
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">placeholder</code

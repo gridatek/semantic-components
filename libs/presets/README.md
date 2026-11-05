@@ -20,10 +20,10 @@ The app chooses its preset once, when it starts; without one, the components use
 
 ```ts
 import { lyra } from '@semantic-components/presets/lyra';
-import { provideScConfig } from '@semantic-components/ui';
+import { provideSemanticComponents } from '@semantic-components/ui';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideScConfig({ preset: lyra })],
+  providers: [provideSemanticComponents({ preset: lyra })],
 };
 ```
 

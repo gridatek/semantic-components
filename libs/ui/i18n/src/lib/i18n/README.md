@@ -42,7 +42,7 @@ await bootstrapApplication(App, appConfig);
 The app's config gives them to `ScI18n`, with the library's other settings:
 
 ```ts
-providers: [provideScConfig({ preset: nova, i18n: I18N })];
+providers: [provideSemanticComponents({ preset: nova, i18n: I18N })];
 ```
 
 The translations, one file per locale but the source one: `public/i18n/<id>.json`, as `ng extract-i18n --format json` writes them (`{ "locale": "fr", "translations": { … } }`). Copy the placeholders and plural forms from the extracted file. Another source: `loadTranslations: (id) => …` in the config.

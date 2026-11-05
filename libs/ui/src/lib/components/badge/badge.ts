@@ -10,7 +10,7 @@ export interface ScBadgeVariants {
 
 /**
  * A badge in the app's preset: its classes are the preset's
- * (`provideScConfig({ preset })`), chosen when the app starts.
+ * (`provideSemanticComponents({ preset })`), chosen when the app starts.
  */
 @Directive({
   // `a` is included so the preset's `[a]:hover:*` classes can match: a badge
