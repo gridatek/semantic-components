@@ -4,6 +4,7 @@ import { DOCUMENT } from '@angular/common';
 import {
   type AnimationCallbackEvent,
   Directive,
+  afterNextRender,
   computed,
   inject,
   input,
@@ -33,8 +34,8 @@ import { injectMenuStyles } from './menu-styles';
   host: {
     'data-slot': 'menu',
     '[class]': 'class()',
-    '[attr.dir]': 'direction',
-    '[attr.lang]': 'lang',
+    '[attr.dir]': 'direction()',
+    '[attr.lang]': 'lang()',
     'animate.enter': 'animate-in fade-in-0 zoom-in-95 duration-150',
     '(animate.leave)': 'leave($event)',
     '(keydown.tab)': 'onTab($event)',
@@ -53,9 +54,10 @@ export class ScMenu<V = string> {
   readonly menu = inject<Menu<V>>(Menu);
   readonly visible = this.menu.visible;
 
-  // Read once, when it opens (it is created then).
-  protected readonly direction = this.context?.direction() ?? null;
-  protected readonly lang = this.context?.lang() ?? null;
+  // Read when it is created — a dropdown's menu, as it opens — and again once
+  // rendered: a context menu's is created with the page, before it is there.
+  protected readonly direction = signal(this.context?.direction() ?? null);
+  protected readonly lang = signal(this.context?.lang() ?? null);
 
   protected readonly focused = signal(false);
   protected readonly pointerInside = signal(false);
@@ -101,7 +103,15 @@ export class ScMenu<V = string> {
   );
 
   constructor() {
-    if (this.direction) this.menu.textDirection.set(this.direction);
+    const direction = this.direction();
+    if (direction) this.menu.textDirection.set(direction);
+    afterNextRender(() => {
+      const context = this.context;
+      if (!context) return;
+      this.direction.set(context.direction());
+      this.lang.set(context.lang());
+      this.menu.textDirection.set(context.direction());
+    });
     inject(ScMenuPortal, { optional: true })?.menu.set(
       this.menu as Menu<unknown>,
     );

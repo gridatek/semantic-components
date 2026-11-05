@@ -298,6 +298,23 @@ A row of menus (`[scMenubar]`): shadcn's Menubar. A shadcn component, so no web 
 - **The placement**, mirrored right to left; **the bar's arrows follow its area's direction**, not only the document's.
 - **Not**: shadcn's trigger with no focus style — ours has a focus ring.
 
+## Context Menu
+
+A menu at the pointer (`div[scContextMenuProvider]`): shadcn's Context Menu. A shadcn component, so no web research: shadcn's reference app and its docs' examples, Base UI's docs (2026-11-05).
+
+| Library                                                                                                                    | What to read                                                                                                                                                                                                      |
+| -------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| shadcn Context Menu (`shadcn-reference/presets/*/context-menu.tsx`), examples (`apps/v4/examples/base/context-menu-*.tsx`) | Its own classes per style (close to the dropdown's); at the pointer's inline end, 4px down; the area's look in the examples; Basic, Submenu, Shortcuts, Groups, Icons, Checkboxes, Radio, Destructive, Sides, RTL |
+| Base UI Context Menu                                                                                                       | Nothing highlighted after a pointer open                                                                                                                                                                          |
+
+**Taken:**
+
+- **The look of each preset**, as the `contextMenu` key, read by the Menu's parts in a context menu — not shadcn's ContextMenuItem, ContextMenuCheckboxItem…
+- **The highlight**: none after a right-click or a long press; the first item after Shift+F10 or the Menu key.
+- **The placement**, and `side` — as `'start'` / `'end'` for shadcn's left / right, so it mirrors right to left.
+- **The area is the consumer's**: the trigger part keeps `select-none`, its focus and nothing of the look (it had a dashed box).
+- **Not**: shadcn's area, which is not focusable — ours is, so the keyboard opens the menu too.
+
 ## Control Group
 
 An input or a select joined with its buttons (`div[scControlGroup]`): shadcn's Button Group, renamed for what it is for (the user, 2026-10-30: it is only useful when inputs or selects mix with buttons; buttons alone are on the Button page). A shadcn component, so no web research: Base UI and shadcn's reference app (2026-10-30).

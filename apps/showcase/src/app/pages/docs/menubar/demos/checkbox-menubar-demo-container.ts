@@ -21,8 +21,6 @@ export class CheckboxMenubarDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScMenu,
-  ScMenubar,
-  ScMenubarItem,
   ScMenuCheckboxItem,
   ScMenuContent,
   ScMenuItem,
@@ -30,6 +28,8 @@ import {
   ScMenuPortal,
   ScMenuSeparator,
   ScMenuShortcut,
+  ScMenubar,
+  ScMenubarItem,
 } from '@semantic-components/ui';
 import { SiCheckIcon } from '@semantic-icons/lucide-icons';
 

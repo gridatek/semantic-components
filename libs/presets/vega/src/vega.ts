@@ -7,6 +7,7 @@ import { badge } from './badge';
 import { breadcrumb } from './breadcrumb';
 import { button } from './button';
 import { card } from './card';
+import { contextMenu } from './context-menu';
 import { controlGroup, controlGroupText } from './control-group';
 import { frame } from './frame';
 import { input } from './input';
@@ -35,6 +36,7 @@ export const vega: ScPreset = {
   frame,
   controlGroup,
   controlGroupText,
+  contextMenu,
   input,
   inputGroup,
   inputGroupAddon,

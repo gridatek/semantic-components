@@ -1,9 +1,10 @@
 import { Menu, MenuTrigger } from '@angular/aria/menu';
-import { Directionality } from '@angular/cdk/bidi';
-import { OverlayModule } from '@angular/cdk/overlay';
+import { type Direction, Directionality } from '@angular/cdk/bidi';
+import { type ConnectedPosition, OverlayModule } from '@angular/cdk/overlay';
 import { DOCUMENT } from '@angular/common';
 import {
   Component,
+  ElementRef,
   Injector,
   ViewEncapsulation,
   afterNextRender,
@@ -12,12 +13,16 @@ import {
   effect,
   inject,
   input,
+  signal,
   viewChild,
 } from '@angular/core';
 import { cn } from '../../utils';
 import { ScElementDirectionality } from '../../utils/element-directionality';
 import { ScMenu } from '../menu';
+import { SC_MENU, type ScMenuContext } from '../menu/menu-context';
 import { SC_CONTEXT_MENU_PROVIDER } from './context-menu-types';
+
+export type ScContextMenuSide = 'top' | 'bottom' | 'start' | 'end';
 
 /**
  * Holds the menu for a context menu: an anchor element parked at the pointer,
@@ -30,7 +35,10 @@ import { SC_CONTEXT_MENU_PROVIDER } from './context-menu-types';
  */
 @Component({
   selector: 'div[scContextMenu]',
-  providers: [{ provide: Directionality, useClass: ScElementDirectionality }],
+  providers: [
+    { provide: Directionality, useClass: ScElementDirectionality },
+    { provide: SC_MENU, useExisting: ScContextMenu },
+  ],
   imports: [MenuTrigger, OverlayModule],
   template: `
     <div
@@ -51,6 +59,7 @@ import { SC_CONTEXT_MENU_PROVIDER } from './context-menu-types';
         hasBackdrop: true,
         backdropClass: 'cdk-overlay-transparent-backdrop',
       }"
+      [cdkConnectedOverlayPositions]="positions()"
       (backdropClick)="close()"
       (overlayKeydown)="onOverlayKeydown($event)"
       cdkAttachPopoverAsChild
@@ -64,8 +73,21 @@ import { SC_CONTEXT_MENU_PROVIDER } from './context-menu-types';
   },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScContextMenu {
+export class ScContextMenu implements ScMenuContext {
   readonly classInput = input<string>('', { alias: 'class' });
+  /**
+   * Where the menu opens from the pointer: at its reading end (default), its
+   * start, above or below it — at another side if there is no room.
+   */
+  readonly side = input<ScContextMenuSide>('end');
+
+  /** Opened by a pointer: no item highlighted until it moves or a key. */
+  readonly quiet = signal(false);
+  private readonly directionality = inject(Directionality);
+  readonly direction = (): Direction => this.directionality.value;
+  readonly lang = (): string | null =>
+    this.host.closest('[lang]')?.getAttribute('lang') ?? null;
+  private readonly host = inject(ElementRef).nativeElement as HTMLElement;
 
   private readonly provider = inject(SC_CONTEXT_MENU_PROVIDER);
   private readonly cursorTrigger = viewChild(MenuTrigger);
@@ -112,8 +134,51 @@ export class ScContextMenu {
     });
   }
 
-  open(): void {
+  /**
+   * Beside the pointer, 4px along it (shadcn's): at the reading end by
+   * default. The CDK mirrors start and end right to left, not the offsets:
+   * turned here. Each side falls back to the opposite one.
+   */
+  protected readonly positions = computed((): ConnectedPosition[] => {
+    const along = this.direction() === 'rtl' ? -4 : 4;
+    const at = (
+      overlayX: 'start' | 'end',
+      overlayY: 'top' | 'bottom',
+      offsetX: number,
+      offsetY: number,
+    ): ConnectedPosition => ({
+      originX: 'start',
+      originY: 'top',
+      overlayX,
+      overlayY,
+      offsetX,
+      offsetY,
+    });
+    const end = at('start', 'top', 0, 4);
+    const start = at('end', 'top', 0, 4);
+    const bottom = at('start', 'top', along, 0);
+    const top = at('start', 'bottom', along, 0);
+    const up = (p: ConnectedPosition): ConnectedPosition => ({
+      ...p,
+      overlayY: 'bottom',
+      offsetY: -(p.offsetY ?? 0),
+    });
+    switch (this.side()) {
+      case 'start':
+        return [start, end, up(start), up(end)];
+      case 'top':
+        return [top, bottom];
+      case 'bottom':
+        return [bottom, top];
+      default:
+        return [end, start, up(end), up(start)];
+    }
+  });
+
+  /** Opens at the last right-click; `pointer`: by a pointer, not a key. */
+  open(pointer = false): void {
     this.returnFocus = this.document.activeElement as HTMLElement | null;
+    this.quiet.set(pointer);
     this.cursorTrigger()?.open();
   }
 

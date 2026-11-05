@@ -163,6 +163,8 @@ export interface ScPreset {
   }) => string;
   /** The text beside a group's buttons. */
   controlGroupText: string;
+  /** The Menu's parts in a context menu. */
+  contextMenu: ScMenuStyles;
   /** A text field (`input[scInput]`, and the inputs that look like one). */
   input: string;
   /** The group, and what it gives its input or textarea (`[data-slot=control]`). */

@@ -21,8 +21,6 @@ export class RadioMenubarDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScMenu,
-  ScMenubar,
-  ScMenubarItem,
   ScMenuContent,
   ScMenuItem,
   ScMenuItemIndicator,
@@ -30,6 +28,8 @@ import {
   ScMenuRadioGroup,
   ScMenuRadioItem,
   ScMenuSeparator,
+  ScMenubar,
+  ScMenubarItem,
 } from '@semantic-components/ui';
 import { SiCheckIcon } from '@semantic-icons/lucide-icons';
 

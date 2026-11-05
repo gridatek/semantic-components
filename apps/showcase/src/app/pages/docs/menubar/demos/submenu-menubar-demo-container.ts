@@ -21,13 +21,13 @@ export class SubmenuMenubarDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScMenu,
-  ScMenubar,
-  ScMenubarItem,
   ScMenuContent,
   ScMenuItem,
   ScMenuPortal,
   ScMenuSeparator,
   ScMenuShortcut,
+  ScMenubar,
+  ScMenubarItem,
 } from '@semantic-components/ui';
 import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
 

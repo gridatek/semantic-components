@@ -21,14 +21,14 @@ export class IconsMenubarDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScMenu,
-  ScMenubar,
-  ScMenubarItem,
   ScMenuContent,
   ScMenuGroup,
   ScMenuItem,
   ScMenuPortal,
   ScMenuSeparator,
   ScMenuShortcut,
+  ScMenubar,
+  ScMenubarItem,
 } from '@semantic-components/ui';
 import {
   SiCircleQuestionMarkIcon,

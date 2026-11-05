@@ -1254,17 +1254,80 @@ export const demosRoutes: Route[] = [
     path: 'demos/context-menu',
     children: [
       {
-        path: 'context-menu-demo',
+        path: 'context-menu-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/context-menu/demos/context-menu-demo').then(
-            (m) => m.ScContextMenuDemo,
+          import('../pages/docs/context-menu/demos/context-menu-usage-demo').then(
+            (m) => m.ContextMenuUsageDemo,
           ),
       },
       {
-        path: 'context-menu-aria-demo',
+        path: 'basic-context-menu-demo',
         loadComponent: () =>
-          import('../pages/docs/context-menu/demos/context-menu-aria-demo').then(
-            (m) => m.ContextMenuAriaDemo,
+          import('../pages/docs/context-menu/demos/basic-context-menu-demo').then(
+            (m) => m.BasicContextMenuDemo,
+          ),
+      },
+      {
+        path: 'submenu-context-menu-demo',
+        loadComponent: () =>
+          import('../pages/docs/context-menu/demos/submenu-context-menu-demo').then(
+            (m) => m.SubmenuContextMenuDemo,
+          ),
+      },
+      {
+        path: 'shortcuts-context-menu-demo',
+        loadComponent: () =>
+          import('../pages/docs/context-menu/demos/shortcuts-context-menu-demo').then(
+            (m) => m.ShortcutsContextMenuDemo,
+          ),
+      },
+      {
+        path: 'groups-context-menu-demo',
+        loadComponent: () =>
+          import('../pages/docs/context-menu/demos/groups-context-menu-demo').then(
+            (m) => m.GroupsContextMenuDemo,
+          ),
+      },
+      {
+        path: 'icons-context-menu-demo',
+        loadComponent: () =>
+          import('../pages/docs/context-menu/demos/icons-context-menu-demo').then(
+            (m) => m.IconsContextMenuDemo,
+          ),
+      },
+      {
+        path: 'checkboxes-context-menu-demo',
+        loadComponent: () =>
+          import('../pages/docs/context-menu/demos/checkboxes-context-menu-demo').then(
+            (m) => m.CheckboxesContextMenuDemo,
+          ),
+      },
+      {
+        path: 'radio-context-menu-demo',
+        loadComponent: () =>
+          import('../pages/docs/context-menu/demos/radio-context-menu-demo').then(
+            (m) => m.RadioContextMenuDemo,
+          ),
+      },
+      {
+        path: 'destructive-context-menu-demo',
+        loadComponent: () =>
+          import('../pages/docs/context-menu/demos/destructive-context-menu-demo').then(
+            (m) => m.DestructiveContextMenuDemo,
+          ),
+      },
+      {
+        path: 'sides-context-menu-demo',
+        loadComponent: () =>
+          import('../pages/docs/context-menu/demos/sides-context-menu-demo').then(
+            (m) => m.SidesContextMenuDemo,
+          ),
+      },
+      {
+        path: 'rtl-context-menu-demo',
+        loadComponent: () =>
+          import('../pages/docs/context-menu/demos/rtl-context-menu-demo').then(
+            (m) => m.RtlContextMenuDemo,
           ),
       },
     ],

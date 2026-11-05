@@ -61,8 +61,6 @@ export class MenubarUsageDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScMenu,
-  ScMenubar,
-  ScMenubarItem,
   ScMenuCheckboxItem,
   ScMenuContent,
   ScMenuGroup,
@@ -73,6 +71,8 @@ import {
   ScMenuRadioItem,
   ScMenuSeparator,
   ScMenuShortcut,
+  ScMenubar,
+  ScMenubarItem,
 } from '@semantic-components/ui';
 import { SiCheckIcon, SiChevronRightIcon } from '@semantic-icons/lucide-icons';
 

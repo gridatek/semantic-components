@@ -46,6 +46,10 @@ export class ScContextMenuProvider {
 
     event.preventDefault();
     this.position.set({ x: event.clientX, y: event.clientY });
-    this.contextMenu()?.open();
+    // A right-click, or a long press (touch, pen). The Menu key and Shift+F10
+    // fire it as a mouse event too, but with no button pressed (Chrome: -1).
+    const type = (event as Partial<PointerEvent>).pointerType;
+    const pointer = event.button === 2 || type === 'touch' || type === 'pen';
+    this.contextMenu()?.open(pointer);
   }
 }

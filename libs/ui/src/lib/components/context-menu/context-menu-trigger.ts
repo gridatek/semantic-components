@@ -19,7 +19,8 @@ export class ScContextMenuTrigger {
 
   protected readonly class = computed(() =>
     cn(
-      'flex h-full w-full items-center justify-center rounded-md border border-dashed text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50',
+      // Its look is yours (the area to right-click); focusable, it shows focus.
+      'select-none outline-none focus-visible:ring-3 focus-visible:ring-ring/50',
       this.classInput(),
     ),
   );

@@ -2,19 +2,21 @@ import { Menu, MenuBar, MenuItem } from '@angular/aria/menu';
 import { type Signal, computed, inject } from '@angular/core';
 import type { ScMenuStyles } from '@semantic-components/presets';
 import { injectPreset } from '../../config/preset';
+import { SC_CONTEXT_MENU_PROVIDER } from '../context-menu/context-menu-types';
 
 /**
- * The preset's classes for a menu's parts: the menu's, or — in a menu bar,
- * however deep — the menu bar's. The same parts serve both.
+ * The preset's classes for a menu's parts: the menu's, or — in a menubar,
+ * however deep — the menubar's, or in a context menu the context menu's. The
+ * same parts serve all three.
  */
 export function injectMenuStyles(): Signal<ScMenuStyles> {
   const preset = injectPreset();
   const menu = inject(Menu, { optional: true });
-  return computed(() =>
-    menu && inMenuBar(menu as Menu<unknown>)
-      ? preset.menubar.menu
-      : preset.menu,
-  );
+  const contextMenu = inject(SC_CONTEXT_MENU_PROVIDER, { optional: true });
+  return computed(() => {
+    if (menu && inMenuBar(menu as Menu<unknown>)) return preset.menubar.menu;
+    return contextMenu ? preset.contextMenu : preset.menu;
+  });
 }
 
 /** Whether a menu was opened, through its parents, from a menu bar. */

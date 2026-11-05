@@ -1,103 +1,55 @@
 # Context Menu
 
-A right-click context menu built on top of the `ScMenu` component, positioned at the cursor location.
+A menu at the pointer, opened by a right-click on an area — a long press on touch, Shift+F10 or the Menu key on the focused area. In the look of the app's preset (shadcn's Context Menu), on `@angular/aria`. The menu is made of the Menu's parts, which take the context menu's look in it.
 
 ## Usage
 
-```typescript
-import { ScContextMenuProvider, ScContextMenuTrigger, ScMenu, ScMenuContent, ScMenuItem, ScMenuSeparator } from '@semantic-components/ui';
-```
-
 ```html
-<div scContextMenuProvider class="h-[150px] w-[300px]">
-  <div scContextMenuTrigger>Right click here</div>
-
-  <div scMenu>
-    <ng-template scMenuContent>
-      <div scMenuItem value="Cut">Cut</div>
-      <div scMenuItem value="Copy">Copy</div>
-      <div scMenuItem value="Paste">Paste</div>
-    </ng-template>
-  </div>
-</div>
-```
-
-## Components
-
-### ScContextMenuProvider
-
-Container component that listens for right-click events and manages the menu lifecycle.
-
-| Property | Type                         | Description                                        |
-| -------- | ---------------------------- | -------------------------------------------------- |
-| Selector | `div[scContextMenuProvider]` | Must be placed on a `<div>` element.               |
-| `class`  | `input<string>`              | CSS classes merged with the default `block` class. |
-
-**Data attributes:**
-
-| Attribute   | Value          | Description                                        |
-| ----------- | -------------- | -------------------------------------------------- |
-| `data-slot` | `context-menu` | Used internally for CSS positioning of menu panel. |
-
-### ScContextMenuTrigger
-
-Directive that marks the area where right-clicking opens the menu.
-
-| Property | Type                     | Description                                                                |
-| -------- | ------------------------ | -------------------------------------------------------------------------- |
-| Selector | `[scContextMenuTrigger]` | Attribute directive.                                                       |
-| `class`  | `input<string>`          | CSS classes merged with default styling (flex, border-dashed, rounded-md). |
-
-### Menu components
-
-The context menu content uses the shared menu primitives (`ScMenu`, `ScMenuContent`, `ScMenuItem`, `ScMenuSeparator`, `ScMenuPortal`). See the menu component documentation for their full API.
-
-## Examples
-
-### With keyboard shortcuts
-
-```html
-<div scContextMenuProvider class="h-[150px] w-[300px]">
-  <div scContextMenuTrigger>Right click here</div>
-
-  <div scMenu>
-    <ng-template scMenuContent>
-      <div scMenuItem value="Back">
-        <span class="flex-1">Back</span>
-        <span class="text-muted-foreground ml-auto text-xs">&#x2318;[</span>
-      </div>
-      <div scMenuItem value="Forward" [disabled]="true">
-        <span class="flex-1">Forward</span>
-        <span class="text-muted-foreground ml-auto text-xs">&#x2318;]</span>
-      </div>
-    </ng-template>
-  </div>
-</div>
-```
-
-### With submenus
-
-Use `ScMenuPortal` inside a menu item to nest a submenu.
-
-```html
-<div scMenuItem value="More Tools">
-  <span class="flex-1">More Tools</span>
-  <svg siChevronRightIcon class="ml-auto"></svg>
-  <ng-template scMenuPortal>
+<div scContextMenuProvider class="w-full max-w-xs">
+  <div scContextMenuTrigger class="flex aspect-video w-full items-center justify-center rounded-xl border border-dashed text-sm">Right click here</div>
+  <div scContextMenu>
     <div scMenu>
       <ng-template scMenuContent>
-        <div scMenuItem value="Developer Tools">Developer Tools</div>
+        <div scMenuGroup>
+          <div scMenuItem value="Back">Back</div>
+          <div scMenuItem value="Forward" [disabled]="true">Forward</div>
+          <div scMenuItem value="Reload">Reload</div>
+        </div>
       </ng-template>
     </div>
-  </ng-template>
+  </div>
 </div>
 ```
 
-## Accessibility
+## Anatomy
 
-- The menu opens on the native `contextmenu` event: right-click, or — for keyboard users — the Menu key or Shift+F10 on the focused trigger. `scContextMenuTrigger` is focusable (`tabindex="0"`, focus ring) for this; a keyboard-opened menu appears at the trigger's centre.
-- When the menu closes, focus returns to the element that had it when the menu opened (unless the user has moved focus elsewhere).
-- Focus is moved to the first menu item when the menu opens.
-- The menu closes when focus leaves the context menu container (`focusout`).
-- Keyboard navigation and ARIA roles are handled by the underlying `ScMenu` component.
-- Disabled items are supported via `[disabled]="true"` on `scMenuItem`.
+```html
+<div scContextMenuProvider>
+  <div scContextMenuTrigger></div>
+  <div scContextMenu>
+    <div scMenu>
+      <ng-template scMenuContent>…the Menu's parts…</ng-template>
+    </div>
+  </div>
+</div>
+```
+
+The area's look and text are yours; the part makes it focusable, shows its focus, and stops text selection on a long press.
+
+The menu opens at the pointer: at its reading end, 4px down (`side`: `'end'`, `'start'`, `'top'`, `'bottom'`), mirrored right to left, at the other side if there is no room. It takes the area's direction and language.
+
+## Keyboard
+
+A right-click opens the menu with nothing highlighted, until the pointer moves or a key is pressed (the first ArrowDown then shows the first item). On the focused area, Shift+F10 or the Menu key opens it on its first item. In the menu, the Menu's keys. Escape, a click outside or a choice closes it; focus goes back to where it was.
+
+## API reference
+
+| Part                    | Selector                     | Inputs                                                                                    |
+| ----------------------- | ---------------------------- | ----------------------------------------------------------------------------------------- |
+| `ScContextMenuProvider` | `div[scContextMenuProvider]` | `class` — holds the area and the menu; catches the right-click                            |
+| `ScContextMenuTrigger`  | `[scContextMenuTrigger]`     | `class` — the area (focusable)                                                            |
+| `ScContextMenu`         | `div[scContextMenu]`         | `side` (`'end'`, `'start'`, `'top'`, `'bottom'`), `class` — opens the menu at the pointer |
+
+The menu: the Menu's parts (see the Menu's README).
+
+The menu's parts read the preset's `contextMenu` key (`injectPreset().contextMenu`): shadcn's Context Menu, in each style.
