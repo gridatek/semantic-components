@@ -7,13 +7,21 @@ import {
   computed,
   inject,
   input,
+  signal,
 } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 import { SC_CONTEXT_MENU_PROVIDER } from '../context-menu/context-menu-types';
+import { SC_MENU } from './menu-context';
 import { ScMenuPortal } from './menu-portal';
 
+/**
+ * The menu's popup, in its portal. It takes its trigger's direction and
+ * language (it is rendered in an overlay, outside them), so a menu opened in a
+ * right-to-left area is right to left.
+ */
 @Directive({
-  selector: '[scMenu]',
+  selector: 'div[scMenu]',
   exportAs: 'scMenu',
   hostDirectives: [
     {
@@ -25,29 +33,84 @@ import { ScMenuPortal } from './menu-portal';
   host: {
     'data-slot': 'menu',
     '[class]': 'class()',
+    '[attr.dir]': 'direction',
+    '[attr.lang]': 'lang',
     'animate.enter': 'animate-in fade-in-0 zoom-in-95 duration-150',
     '(animate.leave)': 'leave($event)',
     '(keydown.tab)': 'onTab($event)',
+    '(pointermove)': 'context?.quiet.set(false)',
+    '(focusin)': 'focused.set(true)',
+    '(focusout)': 'focusOut($event)',
+    '(pointerenter)': 'pointerInside.set(true)',
+    '(pointerleave)': 'pointerInside.set(false)',
   },
 })
 export class ScMenu<V = string> {
+  private readonly styles = injectPreset().menu;
+  protected readonly context = inject(SC_MENU, { optional: true });
+
   readonly classInput = input<string>('', { alias: 'class' });
   readonly menu = inject<Menu<V>>(Menu);
+  readonly visible = this.menu.visible;
+
+  // Read once, when it opens (it is created then).
+  protected readonly direction = this.context?.direction() ?? null;
+  protected readonly lang = this.context?.lang() ?? null;
+
+  protected readonly focused = signal(false);
+  protected readonly pointerInside = signal(false);
+
+  /**
+   * In use: opened (from a trigger, an item, a menu bar), or — a standalone
+   * menu, always shown — while it has focus or the pointer is over it. Its
+   * items show their highlight only then.
+   */
+  readonly inUse = computed(
+    () => !!this.menu.parent() || this.focused() || this.pointerInside(),
+  );
+
+  protected focusOut(event: FocusEvent): void {
+    const next = event.relatedTarget as Node | null;
+    if (!next || !this.menu.element.contains(next)) this.focused.set(false);
+  }
+
+  /** A submenu: opened from an item of a menu (not of a menu bar). */
+  private readonly submenu = computed(() => {
+    const parent = this.menu.parent();
+    return parent instanceof MenuItem && !(parent.parent instanceof MenuBar);
+  });
 
   /**
    * A context menu tears its overlay down on close, so the leave animation
-   * never finishes and its classes stay on the element. The next open then
-   * reuses that element and fades in and out at once. Nothing is lost by
-   * skipping it: the pane is destroyed either way.
+   * never finishes and the next open reuses the element mid-fade: skipped.
    */
   private readonly contextMenu = inject(SC_CONTEXT_MENU_PROVIDER, {
     optional: true,
   });
 
+  protected readonly class = computed(() =>
+    cn(
+      this.submenu() ? this.styles.subPopup : this.styles.popup,
+      'z-50 data-[visible=false]:hidden',
+      // Size icons here too, not only on the items: the menu is measured
+      // before its items are styled — unsized icons (300×150) would make it
+      // too tall and open on the wrong side.
+      "[&_svg:not([class*='size-'])]:size-4",
+      this.classInput(),
+    ),
+  );
+
+  constructor() {
+    if (this.direction) this.menu.textDirection.set(this.direction);
+    inject(ScMenuPortal, { optional: true })?.menu.set(
+      this.menu as Menu<unknown>,
+    );
+  }
+
   /**
-   * Closing: out of reach at once (`inert`, `aria-hidden`) — a menu fading
-   * out is gone for the user, its items no longer to be found or clicked
-   * while the next menu may already be open — then fades out.
+   * Closing: out of reach at once (`inert`, `aria-hidden`) — its items no
+   * longer to be found or clicked while the next menu may already be open —
+   * then fades out.
    */
   protected leave(event: AnimationCallbackEvent): void {
     const element = event.target as HTMLElement;
@@ -63,38 +126,19 @@ export class ScMenu<V = string> {
       'zoom-out-95',
       'duration-150',
     );
-    // Done when its animations are (none, with reduced motion: at once).
     Promise.allSettled(
       element.getAnimations().map((animation) => animation.finished),
     ).then(() => event.animationComplete());
   }
 
-  readonly visible = this.menu.visible;
-
-  protected readonly class = computed(() =>
-    cn(
-      'bg-popover text-popover-foreground min-w-32 w-60 rounded-lg p-1 shadow-md ring-1 ring-foreground/10 z-50 overflow-x-hidden overflow-y-auto data-[visible=false]:hidden',
-      // Size icons here too, not only on the items: the menu is styled when
-      // the overlay measures it, its items not yet — unsized icons (300×150)
-      // would make it look too tall and open on the wrong side.
-      "[&_svg:not([class*='size-'])]:size-4",
-      this.classInput(),
-    ),
-  );
-
   /**
-   * Tab closes the whole menu chain and moves on, as in the WAI-ARIA menu
-   * button pattern. `@angular/aria` has no Tab handling, and because the
-   * popover sits before its trigger in the DOM, Tab would land on the trigger
-   * and leave the menu open. Refocusing the top-level opener here, without
-   * preventing the default, lets the browser's Tab continue from it.
+   * Tab closes the whole menu chain and moves on (the WAI-ARIA menu button
+   * pattern); `@angular/aria` has no Tab handling, and the popover sits before
+   * its trigger in the DOM.
    */
   protected onTab(event: Event): void {
     const opener = topLevelOpener(this.menu as Menu<unknown>);
     if (!opener) return;
-
-    // In a menubar, aria refocuses the bar item after closing — after the
-    // browser's Tab would have moved on — so move focus out ourselves.
     const menuBar = opener instanceof MenuItem ? opener.parent : null;
     if (menuBar instanceof MenuBar) {
       event.preventDefault();
@@ -102,7 +146,6 @@ export class ScMenu<V = string> {
       this.focusOutside(menuBar.element, (event as KeyboardEvent).shiftKey);
       return;
     }
-
     opener.close();
     opener.element.focus();
   }
@@ -127,11 +170,6 @@ export class ScMenu<V = string> {
       ? candidates.filter((el) => !after(el)).pop()
       : candidates.find(after);
     target?.focus();
-  }
-
-  constructor() {
-    const portal = inject(ScMenuPortal, { optional: true });
-    portal?.menu.set(this.menu as Menu<unknown>);
   }
 }
 

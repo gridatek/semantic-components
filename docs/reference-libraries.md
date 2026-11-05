@@ -265,7 +265,7 @@ Where the page is (`nav[scBreadcrumb]`). A shadcn component; Base UI has none, s
 
 ## Menu
 
-A menu of actions from a button (`div[scMenuNextProvider]`, beside the old Menu until it is validated): shadcn's Dropdown Menu. A shadcn component, so no web research: Base UI's docs and shadcn's reference app (2026-11-05).
+A menu of actions from a button (`div[scMenuProvider]`; rewritten 2026-11-05, switched in the same day): shadcn's Dropdown Menu. A shadcn component, so no web research: Base UI's docs and shadcn's reference app (2026-11-05).
 
 | Library                                                               | What to read                                                                                                                                                                          |
 | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

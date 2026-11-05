@@ -2753,106 +2753,73 @@ export const demosRoutes: Route[] = [
     path: 'demos/menu',
     children: [
       {
-        path: 'menu-demo',
+        path: 'menu-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/menu/demos/menu-demo').then(
-            (m) => m.ScMenuDemo,
+          import('../pages/docs/menu/demos/menu-usage-demo').then(
+            (m) => m.MenuUsageDemo,
           ),
       },
       {
-        path: 'menu-shortcuts-demo',
+        path: 'basic-menu-demo',
         loadComponent: () =>
-          import('../pages/docs/menu/demos/menu-shortcuts-demo').then(
-            (m) => m.MenuShortcutsDemo,
+          import('../pages/docs/menu/demos/basic-menu-demo').then(
+            (m) => m.BasicMenuDemo,
           ),
       },
       {
-        path: 'menu-tools-demo',
+        path: 'submenu-menu-demo',
         loadComponent: () =>
-          import('../pages/docs/menu/demos/menu-tools-demo').then(
-            (m) => m.MenuToolsDemo,
+          import('../pages/docs/menu/demos/submenu-menu-demo').then(
+            (m) => m.SubmenuMenuDemo,
           ),
       },
       {
-        path: 'menu-avatar-demo',
+        path: 'shortcuts-menu-demo',
         loadComponent: () =>
-          import('../pages/docs/menu/demos/menu-avatar-demo').then(
-            (m) => m.MenuAvatarDemo,
+          import('../pages/docs/menu/demos/shortcuts-menu-demo').then(
+            (m) => m.ShortcutsMenuDemo,
           ),
       },
       {
-        path: 'menu-align-demo',
+        path: 'icons-menu-demo',
         loadComponent: () =>
-          import('../pages/docs/menu/demos/menu-align-demo').then(
-            (m) => m.ScMenuAlignDemo,
-          ),
-      },
-    ],
-  },
-  {
-    path: 'demos/menu-next',
-    children: [
-      {
-        path: 'menu-next-usage-demo',
-        loadComponent: () =>
-          import('../pages/docs/menu-next/demos/menu-next-usage-demo').then(
-            (m) => m.MenuNextUsageDemo,
+          import('../pages/docs/menu/demos/icons-menu-demo').then(
+            (m) => m.IconsMenuDemo,
           ),
       },
       {
-        path: 'basic-menu-next-demo',
+        path: 'checkboxes-menu-demo',
         loadComponent: () =>
-          import('../pages/docs/menu-next/demos/basic-menu-next-demo').then(
-            (m) => m.BasicMenuNextDemo,
+          import('../pages/docs/menu/demos/checkboxes-menu-demo').then(
+            (m) => m.CheckboxesMenuDemo,
           ),
       },
       {
-        path: 'submenu-menu-next-demo',
+        path: 'radio-group-menu-demo',
         loadComponent: () =>
-          import('../pages/docs/menu-next/demos/submenu-menu-next-demo').then(
-            (m) => m.SubmenuMenuNextDemo,
+          import('../pages/docs/menu/demos/radio-group-menu-demo').then(
+            (m) => m.RadioGroupMenuDemo,
           ),
       },
       {
-        path: 'shortcuts-menu-next-demo',
+        path: 'destructive-menu-demo',
         loadComponent: () =>
-          import('../pages/docs/menu-next/demos/shortcuts-menu-next-demo').then(
-            (m) => m.ShortcutsMenuNextDemo,
+          import('../pages/docs/menu/demos/destructive-menu-demo').then(
+            (m) => m.DestructiveMenuDemo,
           ),
       },
       {
-        path: 'icons-menu-next-demo',
+        path: 'standalone-menu-demo',
         loadComponent: () =>
-          import('../pages/docs/menu-next/demos/icons-menu-next-demo').then(
-            (m) => m.IconsMenuNextDemo,
+          import('../pages/docs/menu/demos/standalone-menu-demo').then(
+            (m) => m.StandaloneMenuDemo,
           ),
       },
       {
-        path: 'checkboxes-menu-next-demo',
+        path: 'rtl-menu-demo',
         loadComponent: () =>
-          import('../pages/docs/menu-next/demos/checkboxes-menu-next-demo').then(
-            (m) => m.CheckboxesMenuNextDemo,
-          ),
-      },
-      {
-        path: 'radio-group-menu-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/menu-next/demos/radio-group-menu-next-demo').then(
-            (m) => m.RadioGroupMenuNextDemo,
-          ),
-      },
-      {
-        path: 'destructive-menu-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/menu-next/demos/destructive-menu-next-demo').then(
-            (m) => m.DestructiveMenuNextDemo,
-          ),
-      },
-      {
-        path: 'rtl-menu-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/menu-next/demos/rtl-menu-next-demo').then(
-            (m) => m.RtlMenuNextDemo,
+          import('../pages/docs/menu/demos/rtl-menu-demo').then(
+            (m) => m.RtlMenuDemo,
           ),
       },
     ],

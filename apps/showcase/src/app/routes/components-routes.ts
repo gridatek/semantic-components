@@ -450,11 +450,6 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/mention-input/mention-input-page'),
       },
       {
-        path: 'menu-next',
-        title: 'Menu Next - Semantic Components',
-        loadComponent: () => import('../pages/docs/menu-next/menu-next-page'),
-      },
-      {
         path: 'menu',
         title: 'Menu - Semantic Components',
         loadComponent: () => import('../pages/docs/menu/menu-page'),

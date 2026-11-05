@@ -1,0 +1,77 @@
+import { Component, ViewEncapsulation } from '@angular/core';
+import {
+  ScButton,
+  ScMenu,
+  ScMenuContent,
+  ScMenuItem,
+  ScMenuPortal,
+  ScMenuProvider,
+  ScMenuSeparator,
+  ScMenuShortcut,
+  ScMenuTrigger,
+} from '@semantic-components/ui';
+import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
+
+/** An item holding a portal opens a submenu: the arrow toward the reading end opens it, the other way closes it. */
+@Component({
+  selector: 'app-submenu-menu-demo',
+  imports: [
+    ScButton,
+    ScMenu,
+    ScMenuContent,
+    ScMenuItem,
+    ScMenuPortal,
+    ScMenuProvider,
+    ScMenuSeparator,
+    ScMenuShortcut,
+    ScMenuTrigger,
+    SiChevronRightIcon,
+  ],
+  template: `
+    <div scMenuProvider>
+      <button scButton scMenuTrigger variant="outline">Open</button>
+      <ng-template scMenuPortal>
+        <div scMenu>
+          <ng-template scMenuContent>
+            <div scMenuItem value="Team">Team</div>
+            <div scMenuItem value="Invite users">
+              Invite users
+              <svg siChevronRightIcon></svg>
+              <ng-template scMenuPortal>
+                <div scMenu>
+                  <ng-template scMenuContent>
+                    <div scMenuItem value="Email">Email</div>
+                    <div scMenuItem value="Message">Message</div>
+                    <div scMenuItem value="More options">
+                      More options
+                      <svg siChevronRightIcon></svg>
+                      <ng-template scMenuPortal>
+                        <div scMenu>
+                          <ng-template scMenuContent>
+                            <div scMenuItem value="Calendly">Calendly</div>
+                            <div scMenuItem value="Slack">Slack</div>
+                            <div scMenuSeparator></div>
+                            <div scMenuItem value="Webhook">Webhook</div>
+                          </ng-template>
+                        </div>
+                      </ng-template>
+                    </div>
+                    <div scMenuSeparator></div>
+                    <div scMenuItem value="Advanced…">Advanced…</div>
+                  </ng-template>
+                </div>
+              </ng-template>
+            </div>
+            <div scMenuItem value="New Team">
+              New Team
+              <span scMenuShortcut>⌘+T</span>
+            </div>
+          </ng-template>
+        </div>
+      </ng-template>
+    </div>
+  `,
+  host: { class: 'flex w-full justify-center' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class SubmenuMenuDemo {}

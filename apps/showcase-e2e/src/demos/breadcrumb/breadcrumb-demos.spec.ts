@@ -1,5 +1,5 @@
 import { collectErrors } from '../../interaction';
-import { box } from '../../looks';
+import { box, openStill } from '../../looks';
 import { expectNoHorizontalScroll } from '../../mobile';
 import { expectInlineOrder, expectRtl } from '../../rtl';
 import { expect, test } from '../../test';
@@ -97,7 +97,7 @@ test('Collapsed: an ellipsis for the steps left out, not read', async ({
 test('RTL: from the right, the chevrons turned to point left; the ellipsis menu right to left', async ({
   page,
 }) => {
-  await page.goto(demo('rtl'));
+  await openStill(page, demo('rtl'));
   const nav = page.getByRole('navigation', { name: 'مسار التنقل' });
   await expectRtl(nav);
   const items = nav.locator('[scBreadcrumbItem]');

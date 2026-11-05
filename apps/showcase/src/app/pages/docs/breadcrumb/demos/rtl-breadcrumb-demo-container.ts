@@ -80,7 +80,7 @@ import {
               <span class="sr-only">صفحات أخرى</span>
             </button>
             <ng-template scMenuPortal>
-              <div scMenu dir="rtl" lang="ar">
+              <div scMenu>
                 <ng-template scMenuContent>
                   <div scMenuItem value="التوثيق">التوثيق</div>
                   <div scMenuItem value="السمات">السمات</div>

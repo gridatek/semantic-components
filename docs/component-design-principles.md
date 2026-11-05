@@ -40,8 +40,8 @@ ScPaginationContent;
 `…Content` names a part on an `ng-template` whose content is rendered later — once its menu has opened, its panel expanded:
 
 ```html
-<div scMenuNext>
-  <ng-template scMenuNextContent>…the items…</ng-template>
+<div scMenu>
+  <ng-template scMenuContent>…the items…</ng-template>
 </div>
 ```
 
