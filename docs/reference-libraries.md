@@ -370,6 +370,23 @@ A window over the page (`div[scDialogProvider]`): shadcn's Dialog. Its styles, i
 - **Each preset's look**, as the `dialog` key (the ✕'s place and fill too: `top-2 end-2` to `top-5 end-5`, `bg-secondary` in luma, sera, rhea).
 - **The direction and language of where it is opened**, given to the dialog (rendered at the end of the page).
 
+## Accordion
+
+Items whose panels open and close (`[scAccordionNext]`, beside the old Accordion until it is validated): shadcn's Accordion, Base UI's parts. A shadcn component, so no web research: Base UI's docs, shadcn's reference app and its docs' examples (2026-11-05).
+
+| Library                                                                                                | What to read                                                                                                                                                                                              |
+| ------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| shadcn Accordion (`shadcn-reference/presets/*/accordion.tsx`, `apps/v4/examples/base/accordion-*.tsx`) | The look per style (luma frames the whole and tints the open item); two chevrons swapped; Basic, Multiple, Disabled, Borders, Card, RTL                                                                   |
+| Base UI Accordion (`@base-ui/react/docs`)                                                              | Root `value` (open items), `multiple` (default false), `disabled`; Item `value`; Header around the Trigger; `keepMounted`, `hiddenUntilFound`; roving focus dropped (APG update)                          |
+| `@angular/aria` Accordion                                                                              | Roles, `aria-expanded`/`aria-controls`, arrow keys between triggers; the trigger's `panel` is a **required** input; a panel renders only through `ngAccordionContent` (checked in dev); `preserveContent` |
+
+**Taken:**
+
+- **Base UI's state** on the root: `[(value)]` and `multiple` (one at a time by default — Aria's default is several), the item's `value`; the trigger in a real heading (`h2`–`h6`).
+- **Each preset's look**, as the `accordion` key; one chevron turned (`scAccordionNextTriggerIcon`) for shadcn's two swapped.
+- **The panel animates its height both ways**: a transition on height and display (`starting:h-0`, `[[inert]]:h-0`), the content kept after the first opening (Aria's `preserveContent`, set from `@angular/aria/private`).
+- **Not**: the item connecting trigger and panel itself — Aria's trigger requires its `panel` from the consumer (`NG8008`); the panel part extends Aria's panel so `[panel]="ref"` type-checks. Not `hiddenUntilFound` (Aria's template). Aria's arrow keys stay (APG and Base UI dropped them).
+
 ## Control Group
 
 An input or a select joined with its buttons (`div[scControlGroup]`): shadcn's Button Group, renamed for what it is for (the user, 2026-10-30: it is only useful when inputs or selects mix with buttons; buttons alone are on the Button page). A shadcn component, so no web research: Base UI and shadcn's reference app (2026-10-30).

@@ -188,8 +188,22 @@ export interface ScDialogStyles {
   description: string;
 }
 
+/** An accordion's parts that change from style to style. */
+export interface ScAccordionStyles {
+  root: string;
+  item: string;
+  trigger: string;
+  /** The trigger's icon (a chevron), turned while open. */
+  icon: string;
+  /** The panel: it clips its content while its height animates. */
+  panel: string;
+  /** Its content's padding and text. */
+  content: string;
+}
+
 /** A preset: the components' classes in one of shadcn's styles. */
 export interface ScPreset {
+  accordion: ScAccordionStyles;
   alert: ScAlertStyles;
   alertDialog: ScAlertDialogStyles;
   /** An avatar group's "+N" (the rest of the avatar is the same in every style). */

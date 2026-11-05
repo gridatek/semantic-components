@@ -1,4 +1,5 @@
 import type { ScPreset } from '@semantic-components/presets';
+import { accordion } from './accordion';
 import { alert } from './alert';
 import { alertDialog } from './alert-dialog';
 import { avatarGroupCount } from './avatar';
@@ -28,6 +29,7 @@ import { table } from './table';
 import { tabs } from './tabs';
 
 export const maia: ScPreset = {
+  accordion,
   alert,
   alertDialog,
   avatarGroupCount,

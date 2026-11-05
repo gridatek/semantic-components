@@ -12,6 +12,12 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/components/components-page'),
       },
       {
+        path: 'accordion-next',
+        title: 'Accordion Next - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/accordion-next/accordion-next-page'),
+      },
+      {
         path: 'accordion',
         title: 'Accordion - Semantic Components',
         loadComponent: () => import('../pages/docs/accordion/accordion-page'),

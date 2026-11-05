@@ -1,0 +1,116 @@
+import { Component, ViewEncapsulation } from '@angular/core';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { BordersAccordionNextDemo } from './borders-accordion-next-demo';
+
+@Component({
+  selector: 'app-borders-accordion-next-demo-container',
+  imports: [DemoContainer, BordersAccordionNextDemo],
+  template: `
+    <app-demo-container
+      title="Borders"
+      demoUrl="/demos/accordion-next/borders-accordion-next-demo"
+      [code]="code"
+    >
+      <app-borders-accordion-next-demo />
+    </app-demo-container>
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class BordersAccordionNextDemoContainer {
+  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+import {
+  ScAccordionNext,
+  ScAccordionNextContent,
+  ScAccordionNextHeader,
+  ScAccordionNextItem,
+  ScAccordionNextPanel,
+  ScAccordionNextTrigger,
+  ScAccordionNextTriggerIcon,
+} from '@semantic-components/ui';
+import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
+
+/** Your borders, on the accordion and its items. */
+@Component({
+  selector: 'app-borders-accordion-next-demo',
+  imports: [
+    ScAccordionNext,
+    ScAccordionNextItem,
+    ScAccordionNextHeader,
+    ScAccordionNextTrigger,
+    ScAccordionNextTriggerIcon,
+    ScAccordionNextPanel,
+    ScAccordionNextContent,
+    SiChevronDownIcon,
+  ],
+  template: \`
+    <div
+      scAccordionNext
+      [value]="['billing']"
+      class="max-w-lg rounded-lg border"
+    >
+      <div
+        scAccordionNextItem
+        value="billing"
+        class="border-b px-4 last:border-b-0"
+      >
+        <h3 scAccordionNextHeader>
+          <button scAccordionNextTrigger [panel]="billing">
+            How does billing work?
+            <svg siChevronDownIcon scAccordionNextTriggerIcon></svg>
+          </button>
+        </h3>
+        <div scAccordionNextPanel #billing>
+          <ng-template scAccordionNextContent>
+            We offer monthly and annual subscription plans. Billing is charged
+            at the beginning of each cycle, and you can cancel anytime. All
+            plans include automatic backups, 24/7 support, and unlimited team
+            members.
+          </ng-template>
+        </div>
+      </div>
+      <div
+        scAccordionNextItem
+        value="security"
+        class="border-b px-4 last:border-b-0"
+      >
+        <h3 scAccordionNextHeader>
+          <button scAccordionNextTrigger [panel]="security">
+            Is my data secure?
+            <svg siChevronDownIcon scAccordionNextTriggerIcon></svg>
+          </button>
+        </h3>
+        <div scAccordionNextPanel #security>
+          <ng-template scAccordionNextContent>
+            Yes. We use end-to-end encryption, SOC 2 Type II compliance, and
+            regular third-party security audits. All data is encrypted at rest
+            and in transit using industry-standard protocols.
+          </ng-template>
+        </div>
+      </div>
+      <div
+        scAccordionNextItem
+        value="integration"
+        class="border-b px-4 last:border-b-0"
+      >
+        <h3 scAccordionNextHeader>
+          <button scAccordionNextTrigger [panel]="integration">
+            What integrations do you support?
+            <svg siChevronDownIcon scAccordionNextTriggerIcon></svg>
+          </button>
+        </h3>
+        <div scAccordionNextPanel #integration>
+          <ng-template scAccordionNextContent>
+            We integrate with 500+ popular tools including Slack, Zapier,
+            Salesforce, HubSpot, and more. You can also build custom
+            integrations using our REST API and webhooks.
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  \`,
+  host: { class: 'flex w-full justify-center' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class BordersAccordionNextDemo {}`;
+}

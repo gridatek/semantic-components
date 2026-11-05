@@ -28,6 +28,60 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/accordion-next',
+    children: [
+      {
+        path: 'accordion-next-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/accordion-next/demos/accordion-next-usage-demo').then(
+            (m) => m.AccordionNextUsageDemo,
+          ),
+      },
+      {
+        path: 'basic-accordion-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/accordion-next/demos/basic-accordion-next-demo').then(
+            (m) => m.BasicAccordionNextDemo,
+          ),
+      },
+      {
+        path: 'multiple-accordion-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/accordion-next/demos/multiple-accordion-next-demo').then(
+            (m) => m.MultipleAccordionNextDemo,
+          ),
+      },
+      {
+        path: 'disabled-accordion-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/accordion-next/demos/disabled-accordion-next-demo').then(
+            (m) => m.DisabledAccordionNextDemo,
+          ),
+      },
+      {
+        path: 'borders-accordion-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/accordion-next/demos/borders-accordion-next-demo').then(
+            (m) => m.BordersAccordionNextDemo,
+          ),
+      },
+      {
+        path: 'card-accordion-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/accordion-next/demos/card-accordion-next-demo').then(
+            (m) => m.CardAccordionNextDemo,
+          ),
+      },
+      {
+        path: 'rtl-accordion-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/accordion-next/demos/rtl-accordion-next-demo').then(
+            (m) => m.RtlAccordionNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/alert',
     children: [
       {
