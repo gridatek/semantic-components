@@ -22,8 +22,9 @@ import { menubar } from './menubar';
 import { pagination } from './pagination';
 import { select } from './select';
 import { table } from './table';
-
 /** The luma preset: `provideScConfig({ preset: luma })`. */
+import { tabs } from './tabs';
+
 export const luma: ScPreset = {
   alert,
   alertDialog,
@@ -47,4 +48,5 @@ export const luma: ScPreset = {
   pagination,
   select,
   table,
+  tabs,
 };

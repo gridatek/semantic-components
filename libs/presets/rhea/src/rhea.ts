@@ -22,8 +22,9 @@ import { menubar } from './menubar';
 import { pagination } from './pagination';
 import { select } from './select';
 import { table } from './table';
-
 /** The rhea preset: `provideScConfig({ preset: rhea })`. */
+import { tabs } from './tabs';
+
 export const rhea: ScPreset = {
   alert,
   alertDialog,
@@ -47,4 +48,5 @@ export const rhea: ScPreset = {
   pagination,
   select,
   table,
+  tabs,
 };

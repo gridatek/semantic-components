@@ -4389,6 +4389,53 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/tabs-next',
+    children: [
+      {
+        path: 'tabs-next-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/tabs-next/demos/tabs-next-usage-demo').then(
+            (m) => m.TabsNextUsageDemo,
+          ),
+      },
+      {
+        path: 'line-tabs-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/tabs-next/demos/line-tabs-next-demo').then(
+            (m) => m.LineTabsNextDemo,
+          ),
+      },
+      {
+        path: 'vertical-tabs-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/tabs-next/demos/vertical-tabs-next-demo').then(
+            (m) => m.VerticalTabsNextDemo,
+          ),
+      },
+      {
+        path: 'disabled-tabs-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/tabs-next/demos/disabled-tabs-next-demo').then(
+            (m) => m.DisabledTabsNextDemo,
+          ),
+      },
+      {
+        path: 'icons-tabs-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/tabs-next/demos/icons-tabs-next-demo').then(
+            (m) => m.IconsTabsNextDemo,
+          ),
+      },
+      {
+        path: 'rtl-tabs-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/tabs-next/demos/rtl-tabs-next-demo').then(
+            (m) => m.RtlTabsNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/table',
     children: [
       {

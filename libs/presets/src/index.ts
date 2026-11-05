@@ -141,6 +141,20 @@ export interface ScTableStyles {
   caption: string;
 }
 
+export type ScTabsListVariant = 'default' | 'line';
+
+/** Tabs' parts that change from style to style. */
+export interface ScTabsStyles {
+  /** The root: the list and the panels, in a column or a row. */
+  root: string;
+  /** The tab list, by variant. */
+  list: (props: { variant?: ScTabsListVariant | null }) => string;
+  /** A tab. */
+  trigger: string;
+  /** A panel. */
+  panel: string;
+}
+
 /** A preset: the components' classes in one of shadcn's styles. */
 export interface ScPreset {
   alert: ScAlertStyles;
@@ -178,4 +192,5 @@ export interface ScPreset {
   pagination: ScPaginationStyles;
   select: ScSelectStyles;
   table: ScTableStyles;
+  tabs: ScTabsStyles;
 }

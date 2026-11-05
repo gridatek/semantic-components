@@ -22,8 +22,9 @@ import { menubar } from './menubar';
 import { pagination } from './pagination';
 import { select } from './select';
 import { table } from './table';
-
 /** The sera preset: `provideScConfig({ preset: sera })`. */
+import { tabs } from './tabs';
+
 export const sera: ScPreset = {
   alert,
   alertDialog,
@@ -47,4 +48,5 @@ export const sera: ScPreset = {
   pagination,
   select,
   table,
+  tabs,
 };

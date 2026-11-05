@@ -22,8 +22,9 @@ import { menubar } from './menubar';
 import { pagination } from './pagination';
 import { select } from './select';
 import { table } from './table';
-
 /** The lyra preset: `provideScConfig({ preset: lyra })`. */
+import { tabs } from './tabs';
+
 export const lyra: ScPreset = {
   alert,
   alertDialog,
@@ -47,4 +48,5 @@ export const lyra: ScPreset = {
   pagination,
   select,
   table,
+  tabs,
 };

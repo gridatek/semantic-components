@@ -22,8 +22,9 @@ import { menubar } from './menubar';
 import { pagination } from './pagination';
 import { select } from './select';
 import { table } from './table';
-
 /** The mira preset: `provideScConfig({ preset: mira })`. */
+import { tabs } from './tabs';
+
 export const mira: ScPreset = {
   alert,
   alertDialog,
@@ -47,4 +48,5 @@ export const mira: ScPreset = {
   pagination,
   select,
   table,
+  tabs,
 };

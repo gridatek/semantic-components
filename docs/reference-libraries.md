@@ -316,6 +316,24 @@ A menu at the pointer (`div[scContextMenu]`): shadcn's Context Menu. A shadcn co
 - **The area is the consumer's**: the trigger part keeps `select-none`, its focus and nothing of the look (it had a dashed box); the demos frame it with `scFrame`, the style's frame, not shadcn's hand-drawn `rounded-xl border border-dashed`.
 - **Not**: shadcn's area, which is not focusable — ours is, so the keyboard opens the menu too.
 
+## Tabs
+
+Tabs and their panels (`[scTabsNext]`, beside the old Tabs until it is validated): shadcn's Tabs, Base UI's parts. A shadcn component, so no web research: Base UI's docs, shadcn's reference app and its docs' examples (2026-11-05).
+
+| Library                                                                                            | What to read                                                                                                                        |
+| -------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| shadcn Tabs (`shadcn-reference/presets/*/tabs.tsx`), examples (`apps/v4/examples/base/tabs-*.tsx`) | The look per style (list `default` / `line`, trigger, panel); Demo (cards), Line, Vertical, Disabled, Icons, RTL                    |
+| Base UI Tabs (`@base-ui/react/docs`)                                                               | The state on the root (`value`, `orientation`); `activateOnFocus` off by default; `loopFocus`; Indicator; `keepMounted`             |
+| `@angular/aria` Tabs                                                                               | Roles, roving focus, soft-disabled tabs; a panel renders only through its `ngTabContent` template (a content query, checked in dev) |
+
+**Taken:**
+
+- **Base UI's state**: `[(value)]` and `orientation` on the root only (they were on the list too); `activateOnFocus` (default off) and `wrap` on the list. Aria's `selectionMode` and `focusMode` are not exposed.
+- **Each preset's look**, as the `tabs` key.
+- **The list's arrows follow its area's direction**, not only the document's.
+- **A disabled tab is reached by the arrows**: the tab part removes a native `disabled` (it would take the tab out of focus).
+- **Not**: content written straight in a panel, nor Base UI's `keepMounted` — Aria allows a panel's content only in its template, created when shown, destroyed when hidden (tried: a template inside the panel's own view does not satisfy Aria's content query). Documented as a limitation. Not Base UI's Indicator nor `data-activation-direction` (shadcn uses neither).
+
 ## Control Group
 
 An input or a select joined with its buttons (`div[scControlGroup]`): shadcn's Button Group, renamed for what it is for (the user, 2026-10-30: it is only useful when inputs or selects mix with buttons; buttons alone are on the Button page). A shadcn component, so no web research: Base UI and shadcn's reference app (2026-10-30).
