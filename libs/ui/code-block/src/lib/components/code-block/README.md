@@ -22,14 +22,15 @@ div[scCodeBlock] (variant: default | destructive, size: default | sm)
 The content highlights its `language` when the app provides a highlighter; otherwise, and until it answers, the code shows plain.
 
 ```ts
-import { provideCodeHighlighter } from '@semantic-components/ui/code-block';
+import { provideSemanticComponents } from '@semantic-components/ui';
+import { withCodeHighlighter } from '@semantic-components/ui/code-block';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideCodeHighlighter()],
+  providers: [provideSemanticComponents({}, withCodeHighlighter())],
 };
 ```
 
-`provideCodeHighlighter()` uses Shiki's core with its JavaScript engine and the GitHub light (high contrast) / dark themes; each language loads the first time it is shown: `angular-html`, `angular-ts`, `bash` (`sh`, `shell`, `zsh`), `css`, `diff`, `html`, `javascript` (`js`), `json`, `markdown` (`md`), `python` (`py`), `scss`, `sql`, `typescript` (`ts`), `yaml` (`yml`) — and `ansi`, a terminal's output in its colours (Shiki reads the codes; its dim text is drawn in the muted foreground, to keep 4.5:1). Another highlighter can be provided as `SC_CODE_HIGHLIGHTER` (`ScCodeHighlighter`: code and language in, lines of tokens out).
+`withCodeHighlighter()` uses Shiki's core with its JavaScript engine and the GitHub light (high contrast) / dark themes; each language loads the first time it is shown: `angular-html`, `angular-ts`, `bash` (`sh`, `shell`, `zsh`), `css`, `diff`, `html`, `javascript` (`js`), `json`, `markdown` (`md`), `python` (`py`), `scss`, `sql`, `typescript` (`ts`), `yaml` (`yml`) — and `ansi`, a terminal's output in its colours (Shiki reads the codes; its dim text is drawn in the muted foreground, to keep 4.5:1). Another highlighter can be provided as `SC_CODE_HIGHLIGHTER` (`ScCodeHighlighter`: code and language in, lines of tokens out).
 
 ## Usage
 

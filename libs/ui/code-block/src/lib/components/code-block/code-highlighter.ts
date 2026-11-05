@@ -1,8 +1,5 @@
-import {
-  InjectionToken,
-  type Provider,
-  makeEnvironmentProviders,
-} from '@angular/core';
+import { InjectionToken } from '@angular/core';
+import { type ScFeature, makeScFeature } from '@semantic-components/ui';
 import type { HighlighterCore, LanguageInput } from 'shiki/core';
 
 /** A piece of a line, and its colors (`--shiki-light`, `--shiki-dark`). */
@@ -108,13 +105,12 @@ function readable(style: Record<string, string>): Record<string, string> {
   return out;
 }
 
-/** Highlights code blocks, with Shiki. */
-export function provideCodeHighlighter(): ReturnType<
-  typeof makeEnvironmentProviders
-> {
-  const provider: Provider = {
-    provide: SC_CODE_HIGHLIGHTER,
-    useFactory: shikiHighlighter,
-  };
-  return makeEnvironmentProviders([provider]);
+/**
+ * Highlights code blocks, with Shiki:
+ * `provideSemanticComponents({ preset }, withCodeHighlighter())`.
+ */
+export function withCodeHighlighter(): ScFeature<'codeHighlighter'> {
+  return makeScFeature('codeHighlighter', [
+    { provide: SC_CODE_HIGHLIGHTER, useFactory: shikiHighlighter },
+  ]);
 }

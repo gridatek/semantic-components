@@ -109,8 +109,8 @@ import { WrapCodeBlockDemoContainer } from './demos/wrap-code-block-demo-contain
           names="ScCodeBlock, ScCodeBlockContent"
         />
         <p class="text-muted-foreground">
-          Then provide the highlighter, in your app&apos;s config — without it,
-          code shows plain:
+          Then add the highlighter, a feature of the library, in your app&apos;s
+          config — without it, code shows plain:
         </p>
         <div scCodeBlock>
           <div scCodeBlockHeader>
@@ -226,10 +226,11 @@ import { WrapCodeBlockDemoContainer } from './demos/wrap-code-block-demo-contain
   encapsulation: ViewEncapsulation.None,
 })
 export default class CodeBlockPage {
-  readonly highlighterCode = `import { provideCodeHighlighter } from '@semantic-components/ui/code-block';
+  readonly highlighterCode = `import { provideSemanticComponents } from '@semantic-components/ui';
+import { withCodeHighlighter } from '@semantic-components/ui/code-block';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideCodeHighlighter()],
+  providers: [provideSemanticComponents({}, withCodeHighlighter())],
 };`;
 
   protected readonly anatomy = {

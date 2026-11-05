@@ -38,7 +38,7 @@ It renders the lines itself; the only thing inside it is the optional fold templ
 | `additions()` / `deletions()` | Lines added / removed                             |
 | `identical()`                 | Nothing changed                                   |
 
-- **Highlighting**: by the app's highlighter (`provideCodeHighlighter()`), each text whole, so multi-line strings and comments stay right; plain without one.
+- **Highlighting**: by the app's highlighter (`withCodeHighlighter()`), each text whole, so multi-line strings and comments stay right; plain without one.
 - **Changed words**: within a removed line facing an added one, the words that differ are tinted.
 - **Folding**: with `context` and a `ng-template[scDiffViewerFold]` (`let-count`: the hidden lines), unchanged runs beyond `context` lines of a change fold into a button — its text yours; a click shows them. Without the template, nothing folds.
 - **Split view**: long lines wrap; an added line faces an empty cell, and so does a removed one.

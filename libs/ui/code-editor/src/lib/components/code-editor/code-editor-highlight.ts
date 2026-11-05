@@ -4,7 +4,7 @@ import { tags as t } from '@lezer/highlight';
 /**
  * The code block's colors for CodeMirror's syntax: GitHub light (high
  * contrast), and GitHub dark under `.dark` — the themes of
- * `provideCodeHighlighter()`.
+ * `withCodeHighlighter()`.
  */
 export const codeEditorHighlight = HighlightStyle.define([
   {

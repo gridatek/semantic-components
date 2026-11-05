@@ -31,12 +31,31 @@ export const SC_CONFIG = new InjectionToken<ScConfig>('SC_CONFIG', {
 });
 
 /**
- * Sets the libraries' settings — each part falls back to its component's
- * defaults. Given again lower down (a lazy route), its parts merge into those
- * above.
+ * A feature of the libraries, from one of their entries — `withI18n()`,
+ * `withCodeHighlighter()`: its providers, given with the settings.
+ */
+export interface ScFeature<Kind extends string = string> {
+  readonly kind: Kind;
+  readonly providers: readonly (Provider | EnvironmentProviders)[];
+}
+
+/** A feature, for an entry to export as `with…()`. */
+export function makeScFeature<Kind extends string>(
+  kind: Kind,
+  providers: readonly (Provider | EnvironmentProviders)[],
+): ScFeature<Kind> {
+  return { kind, providers };
+}
+
+/**
+ * Sets up the libraries: their settings — each part falls back to its
+ * component's defaults — and the features of their entries:
+ * `provideSemanticComponents({ preset: nova }, withCodeHighlighter())`.
+ * Given again lower down (a lazy route), its parts merge into those above.
  */
 export function provideSemanticComponents(
-  config: ScConfig,
+  config: ScConfig = {},
+  ...features: ScFeature[]
 ): EnvironmentProviders {
   const provider: Provider = {
     provide: SC_CONFIG,
@@ -52,5 +71,8 @@ export function provideSemanticComponents(
       return merged as ScConfig;
     },
   };
-  return makeEnvironmentProviders([provider]);
+  return makeEnvironmentProviders([
+    provider,
+    ...features.flatMap((feature) => feature.providers),
+  ]);
 }

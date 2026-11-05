@@ -1,7 +1,8 @@
 import { DOCUMENT } from '@angular/common';
 import { LOCALE_ID, Service, inject } from '@angular/core';
-import { SC_CONFIG, ScStorage } from '@semantic-components/ui';
+import { ScStorage } from '@semantic-components/ui';
 import {
+  SC_I18N_CONFIG,
   type ScI18nConfig,
   type ScLocale,
   localeDir,
@@ -9,7 +10,7 @@ import {
 } from './i18n-config';
 
 /**
- * The app's locales (`provideSemanticComponents({ i18n })`) and the one in use
+ * The app's locales (`withI18n()`) and the one in use
  * (`LOCALE_ID`, set by `loadLocale()`) — for the page's life: switching
  * reloads it, since templates are translated once, when they are created.
  * Write your switcher from it (a select, a menu, buttons).
@@ -18,7 +19,9 @@ import {
 export class ScI18n {
   private readonly document = inject(DOCUMENT);
   private readonly storage = inject(ScStorage);
-  private readonly config: ScI18nConfig = inject(SC_CONFIG).i18n ?? {
+  private readonly config: ScI18nConfig = inject(SC_I18N_CONFIG, {
+    optional: true,
+  }) ?? {
     sourceLocale: 'en',
     locales: [],
   };

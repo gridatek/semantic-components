@@ -238,14 +238,15 @@ bootstrapApplication(App, appConfig);`,
     },
     {
       title: 'Give the locales to the app',
-      text: "With the library's other settings, for ScI18n — your switcher reads it.",
+      text: 'A feature of the library, withI18n(), for ScI18n — your switcher reads it.',
       file: 'app.config.ts',
       language: 'typescript',
       code: `import { provideSemanticComponents } from '@semantic-components/ui';
+import { withI18n } from '@semantic-components/ui/i18n';
 import { I18N } from './i18n';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideSemanticComponents({ i18n: I18N })],
+  providers: [provideSemanticComponents({}, withI18n(I18N))],
 };`,
     },
     {

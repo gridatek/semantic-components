@@ -1,3 +1,5 @@
+import { InjectionToken } from '@angular/core';
+
 /** A locale the app offers. */
 export interface ScLocale {
   /** Its ID, a BCP 47 tag — `LOCALE_ID`'s value: `fr`, `pt-BR`. */
@@ -9,8 +11,8 @@ export interface ScLocale {
 }
 
 /**
- * The app's locales, and where their translations come from: the `i18n` part
- * of `provideSemanticComponents()`, and what `loadLocale()` is given.
+ * The app's locales, and where their translations come from: what
+ * `withI18n()` and `loadLocale()` are given.
  */
 export interface ScI18nConfig {
   /** The locale the templates are written in: nothing is loaded for it. */
@@ -68,9 +70,7 @@ export function localeDir(config: ScI18nConfig, id: string): 'ltr' | 'rtl' {
   );
 }
 
-declare module '@semantic-components/ui' {
-  interface ScConfig {
-    /** The app's locales (`@semantic-components/ui/i18n`). */
-    i18n?: ScI18nConfig;
-  }
-}
+/** The app's locales, given by `withI18n()`. */
+export const SC_I18N_CONFIG = new InjectionToken<ScI18nConfig>(
+  'SC_I18N_CONFIG',
+);

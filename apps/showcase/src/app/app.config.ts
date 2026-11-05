@@ -12,21 +12,23 @@ import {
   withRouterConfig,
 } from '@angular/router';
 import { provideSemanticComponents } from '@semantic-components/ui';
-import { provideCodeHighlighter } from '@semantic-components/ui/code-block';
+import { withCodeHighlighter } from '@semantic-components/ui/code-block';
 import { appRoutes } from './app-routes';
 import { PRESETS, storedPreset } from './presets';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    // Code blocks highlighted with Shiki, each language loaded when first shown.
-    provideCodeHighlighter(),
-    provideSemanticComponents({
-      // The one picked in the preset sheet (nova by default).
-      preset: PRESETS[storedPreset()],
-      // Alt+T moves focus to the toasts (the toaster's template names it); Escape goes back.
-      toaster: { hotkey: ['altKey', 'KeyT'] },
-    }),
+    provideSemanticComponents(
+      {
+        // The one picked in the preset sheet (nova by default).
+        preset: PRESETS[storedPreset()],
+        // Alt+T moves focus to the toasts (the toaster's template names it); Escape goes back.
+        toaster: { hotkey: ['altKey', 'KeyT'] },
+      },
+      // Code blocks highlighted with Shiki, each language loaded when first shown.
+      withCodeHighlighter(),
+    ),
     // Overlays (dialogs, menus, tooltips) stay visible in fullscreen, e.g. in
     // the PDF viewer's presentation mode.
     { provide: OverlayContainer, useClass: FullscreenOverlayContainer },

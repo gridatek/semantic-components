@@ -6,7 +6,7 @@ export type ScCodeBlockVariants = { variant?: ScCodeBlockVariant | null };
 
 /**
  * A block of code: its header (title, actions), its content — highlighted
- * when the app provides a highlighter (`provideCodeHighlighter()`) — and a
+ * when the app provides a highlighter (`withCodeHighlighter()`) — and a
  * footer. `destructive` for an error's output; `size="sm"` for a tighter one.
  */
 @Directive({

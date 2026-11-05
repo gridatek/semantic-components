@@ -8,13 +8,14 @@ import {
   withRouterConfig,
 } from '@angular/router';
 import { provideSemanticComponents } from '@semantic-components/ui';
+import { withI18n } from '@semantic-components/ui/i18n';
 import { appRoutes } from './app-routes';
 import { I18N } from './i18n';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideSemanticComponents({ i18n: I18N }),
+    provideSemanticComponents({}, withI18n(I18N)),
     provideRouter(
       appRoutes,
       withRouterConfig({ onSameUrlNavigation: 'reload' }), // Enable reloading on same URL navigation for mobile menu

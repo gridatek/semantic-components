@@ -133,12 +133,21 @@ Styles are written in Tailwind CSS and managed with [class-variance-authority](h
 - Predictable, overridable class names
 - Consistent variants (`default`, `outline`, `ghost`, `destructive`, `link`) across all components
 
-And shadcn's eight styles are presets — nova, vega, maia, lyra, mira, luma, sera, rhea — chosen once, when the app starts. A preset holds the classes of the components whose look changes from style to style: the alert, the alert dialog, the avatar group's count, the backdrop behind every overlay, the breadcrumb, the badge (the tags input's tags too), the button (every part that looks like one, a link included), the card the control group (shadcn's Button Group), with its text, the input (every part that looks like one: password, date, number, phone), the input group with its addon, button and text, the select (its trigger, popup and items) the pagination (its list, ellipsis and the padding by its arrows) and the table (its text size, cells and caption), so far.
+And shadcn's eight styles are presets — nova, vega, maia, lyra, mira, luma, sera, rhea — chosen once, when the app starts. A preset holds the classes of the components whose look changes from style to style: the alert, the alert dialog, the avatar group's count, the backdrop behind every overlay, the breadcrumb, the badge (the tags input's tags too), the button (every part that looks like one, a link included), the card and the frame it shares with any framed box, the code block, the control group (shadcn's Button Group), with its text, the input (every part that looks like one: password, date, number, phone), the input group with its addon, button and text, the menu — and the same parts in a menubar or a context menu, in their own looks —, the select (its trigger, popup and items), the pagination (its list, ellipsis and the padding by its arrows), the table (its text size, cells and caption) and the tabs, so far.
 
 ```typescript
 import { nova } from '@semantic-components/presets/nova';
 
 provideSemanticComponents({ preset: nova });
+```
+
+What an entry needs set up comes with it, as a feature of the same call — the Angular way, as `provideRouter(routes, withComponentInputBinding())`: one place to set the library up, and an app that doesn't use an entry doesn't load it.
+
+```typescript
+import { withCodeHighlighter } from '@semantic-components/ui/code-block';
+import { withI18n } from '@semantic-components/ui/i18n';
+
+provideSemanticComponents({ preset: nova }, withCodeHighlighter(), withI18n(I18N));
 ```
 
 ```typescript
