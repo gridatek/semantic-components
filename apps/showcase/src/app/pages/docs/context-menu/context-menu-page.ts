@@ -70,10 +70,10 @@ import { SubmenuContextMenuDemoContainer } from './demos/submenu-context-menu-de
       <section class="space-y-4">
         <h2 scHeading appToc>Anatomy</h2>
         <p class="text-muted-foreground">
-          The provider holds the area (the trigger) and the menu, in a portal as
-          the Menu&apos;s: rendered while it is open. The menu is made of the
-          Menu&apos;s parts, which take the context menu&apos;s look in it. The
-          area&apos;s look and text are yours.
+          The context menu holds the area (the trigger) and the menu, in a
+          portal as the Menu&apos;s: rendered while it is open. The menu is made
+          of the Menu&apos;s parts, which take the context menu&apos;s look in
+          it. The area&apos;s look and text are yours.
         </p>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
@@ -162,12 +162,12 @@ export default class ContextMenuPage {
   protected readonly anatomy = {
     imports: [
       'import {',
-      '  ScContextMenuProvider, ScContextMenuTrigger, ScMenuPortal, ScMenu,',
+      '  ScContextMenu, ScContextMenuTrigger, ScMenuPortal, ScMenu,',
       '  ScMenuContent, ScMenuGroup, ScMenuItem, ScMenuSeparator,',
       "} from '@semantic-components/ui';",
     ].join('\n'),
     markup: [
-      '<div scContextMenuProvider>',
+      '<div scContextMenu>',
       '  <div scContextMenuTrigger>…</div>',
       '  <ng-template scMenuPortal>',
       '    <div scMenu>',
@@ -186,8 +186,8 @@ export default class ContextMenuPage {
 
   protected readonly parts = [
     {
-      name: 'ScContextMenuProvider',
-      selector: 'div[scContextMenuProvider]',
+      name: 'ScContextMenu',
+      selector: 'div[scContextMenu]',
       description:
         "Holds the area and its menu: catches the right-click and opens the menu there. [(open)]; side: 'end' (default), 'start', 'top' or 'bottom'.",
     },

@@ -20,7 +20,7 @@ import { ShortcutsContextMenuDemo } from './shortcuts-context-menu-demo';
 export class ShortcutsContextMenuDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScContextMenuProvider,
+  ScContextMenu,
   ScContextMenuTrigger,
   ScMenu,
   ScMenuContent,
@@ -35,7 +35,7 @@ import {
 @Component({
   selector: 'app-shortcuts-context-menu-demo',
   imports: [
-    ScContextMenuProvider,
+    ScContextMenu,
     ScContextMenuTrigger,
     ScMenu,
     ScMenuContent,
@@ -46,7 +46,7 @@ import {
     ScMenuShortcut,
   ],
   template: \`
-    <div scContextMenuProvider class="w-full max-w-xs">
+    <div scContextMenu class="w-full max-w-xs">
       <div
         scContextMenuTrigger
         class="flex aspect-video w-full items-center justify-center rounded-xl border border-dashed text-sm"

@@ -300,7 +300,7 @@ A row of menus (`[scMenubar]`): shadcn's Menubar. A shadcn component, so no web 
 
 ## Context Menu
 
-A menu at the pointer (`div[scContextMenuProvider]`): shadcn's Context Menu. A shadcn component, so no web research: shadcn's reference app and its docs' examples, Base UI's docs (2026-11-05).
+A menu at the pointer (`div[scContextMenu]`): shadcn's Context Menu. A shadcn component, so no web research: shadcn's reference app and its docs' examples, Base UI's docs (2026-11-05).
 
 | Library                                                                                                                    | What to read                                                                                                                                                                                                      |
 | -------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -312,7 +312,7 @@ A menu at the pointer (`div[scContextMenuProvider]`): shadcn's Context Menu. A s
 - **The look of each preset**, as the `contextMenu` key, read by the Menu's parts in a context menu — not shadcn's ContextMenuItem, ContextMenuCheckboxItem…
 - **The highlight**: none after a right-click or a long press; the first item after Shift+F10 or the Menu key.
 - **The placement**, and `side` — as `'start'` / `'end'` for shadcn's left / right, so it mirrors right to left.
-- **The menu in a portal, as the Menu's** (`ng-template scMenuPortal`, rendered while open), with `side` and `[(open)]` on the provider — it was a `div[scContextMenu]` whose menu was created with the page.
+- **The menu in a portal, as the Menu's** (`ng-template scMenuPortal`, rendered while open), with `side` and `[(open)]` on the root, `div[scContextMenu]` (the name freed by the old part, a `div` whose menu was created with the page; the root was `scContextMenuProvider`).
 - **The area is the consumer's**: the trigger part keeps `select-none`, its focus and nothing of the look (it had a dashed box).
 - **Not**: shadcn's area, which is not focusable — ours is, so the keyboard opens the menu too.
 

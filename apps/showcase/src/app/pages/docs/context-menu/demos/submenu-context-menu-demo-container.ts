@@ -20,7 +20,7 @@ import { SubmenuContextMenuDemo } from './submenu-context-menu-demo';
 export class SubmenuContextMenuDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScContextMenuProvider,
+  ScContextMenu,
   ScContextMenuTrigger,
   ScMenu,
   ScMenuContent,
@@ -37,7 +37,7 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-submenu-context-menu-demo',
   imports: [
-    ScContextMenuProvider,
+    ScContextMenu,
     ScContextMenuTrigger,
     ScMenuSubmenuIcon,
     ScMenu,
@@ -50,7 +50,7 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
     SiChevronRightIcon,
   ],
   template: \`
-    <div scContextMenuProvider class="w-full max-w-xs">
+    <div scContextMenu class="w-full max-w-xs">
       <div
         scContextMenuTrigger
         class="flex aspect-video w-full items-center justify-center rounded-xl border border-dashed text-sm"

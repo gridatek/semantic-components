@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScContextMenuProvider,
+  ScContextMenu,
   ScContextMenuTrigger,
   ScMenu,
   ScMenuContent,
@@ -18,7 +18,7 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-radio-context-menu-demo',
   imports: [
-    ScContextMenuProvider,
+    ScContextMenu,
     ScContextMenuTrigger,
     ScMenu,
     ScMenuContent,
@@ -32,7 +32,7 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
     SiCheckIcon,
   ],
   template: `
-    <div scContextMenuProvider class="w-full max-w-xs">
+    <div scContextMenu class="w-full max-w-xs">
       <div
         scContextMenuTrigger
         class="flex aspect-video w-full items-center justify-center rounded-xl border border-dashed text-sm"

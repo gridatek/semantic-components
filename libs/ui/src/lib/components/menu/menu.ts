@@ -11,7 +11,7 @@ import {
   signal,
 } from '@angular/core';
 import { cn } from '../../utils';
-import { SC_CONTEXT_MENU_PROVIDER } from '../context-menu/context-menu-types';
+import { SC_CONTEXT_MENU } from '../context-menu/context-menu-types';
 import { SC_MENU } from './menu-context';
 import { ScMenuPortal } from './menu-portal';
 import { injectMenuStyles } from './menu-styles';
@@ -86,7 +86,7 @@ export class ScMenu<V = string> {
    * A context menu tears its overlay down on close, so the leave animation
    * never finishes and the next open reuses the element mid-fade: skipped.
    */
-  private readonly contextMenu = inject(SC_CONTEXT_MENU_PROVIDER, {
+  private readonly contextMenu = inject(SC_CONTEXT_MENU, {
     optional: true,
   });
 

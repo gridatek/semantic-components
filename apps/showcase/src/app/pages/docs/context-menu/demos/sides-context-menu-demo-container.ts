@@ -20,7 +20,7 @@ import { SidesContextMenuDemo } from './sides-context-menu-demo';
 export class SidesContextMenuDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScContextMenuProvider,
+  ScContextMenu,
   ScContextMenuTrigger,
   ScMenu,
   ScMenuContent,
@@ -33,7 +33,7 @@ import {
 @Component({
   selector: 'app-sides-context-menu-demo',
   imports: [
-    ScContextMenuProvider,
+    ScContextMenu,
     ScContextMenuTrigger,
     ScMenu,
     ScMenuContent,
@@ -43,7 +43,7 @@ import {
   ],
   template: \`
     <div class="grid w-full max-w-sm grid-cols-2 gap-4">
-      <div scContextMenuProvider side="top" class="w-full max-w-xs">
+      <div scContextMenu side="top" class="w-full max-w-xs">
         <div
           scContextMenuTrigger
           class="flex aspect-video w-full items-center justify-center rounded-xl border border-dashed text-sm"
@@ -67,7 +67,7 @@ import {
           </div>
         </ng-template>
       </div>
-      <div scContextMenuProvider side="end" class="w-full max-w-xs">
+      <div scContextMenu side="end" class="w-full max-w-xs">
         <div
           scContextMenuTrigger
           class="flex aspect-video w-full items-center justify-center rounded-xl border border-dashed text-sm"
@@ -91,7 +91,7 @@ import {
           </div>
         </ng-template>
       </div>
-      <div scContextMenuProvider side="bottom" class="w-full max-w-xs">
+      <div scContextMenu side="bottom" class="w-full max-w-xs">
         <div
           scContextMenuTrigger
           class="flex aspect-video w-full items-center justify-center rounded-xl border border-dashed text-sm"
@@ -115,7 +115,7 @@ import {
           </div>
         </ng-template>
       </div>
-      <div scContextMenuProvider side="start" class="w-full max-w-xs">
+      <div scContextMenu side="start" class="w-full max-w-xs">
         <div
           scContextMenuTrigger
           class="flex aspect-video w-full items-center justify-center rounded-xl border border-dashed text-sm"

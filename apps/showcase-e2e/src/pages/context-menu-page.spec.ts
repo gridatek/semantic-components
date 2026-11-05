@@ -19,7 +19,7 @@ test.describe('Context Menu Page', () => {
     await page.goto('/docs/components/context-menu');
     const table = page.getByRole('region', { name: 'Context Menu parts' });
     await expect(table.getByRole('row').locator('td:first-child')).toHaveText([
-      'ScContextMenuProvider',
+      'ScContextMenu',
       'ScContextMenuTrigger',
       'ScMenuPortal, ScMenu, ScMenuItem…',
     ]);

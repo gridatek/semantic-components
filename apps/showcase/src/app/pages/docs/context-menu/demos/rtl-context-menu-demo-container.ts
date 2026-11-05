@@ -20,7 +20,7 @@ import { RtlContextMenuDemo } from './rtl-context-menu-demo';
 export class RtlContextMenuDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScContextMenuProvider,
+  ScContextMenu,
   ScContextMenuTrigger,
   ScMenu,
   ScMenuCheckboxItem,
@@ -48,7 +48,7 @@ import {
 @Component({
   selector: 'app-rtl-context-menu-demo',
   imports: [
-    ScContextMenuProvider,
+    ScContextMenu,
     ScContextMenuTrigger,
     ScMenuSubmenuIcon,
     ScMenu,
@@ -71,7 +71,7 @@ import {
   ],
   template: \`
     <div dir="rtl" lang="ar" class="flex w-full justify-center">
-      <div scContextMenuProvider class="w-full max-w-xs">
+      <div scContextMenu class="w-full max-w-xs">
         <div
           scContextMenuTrigger
           class="flex aspect-video w-full items-center justify-center rounded-xl border border-dashed text-sm"

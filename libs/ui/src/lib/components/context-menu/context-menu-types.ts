@@ -5,5 +5,6 @@ export interface ScContextMenuContext {
   position: () => { x: number; y: number };
 }
 
-export const SC_CONTEXT_MENU_PROVIDER =
-  new InjectionToken<ScContextMenuContext>('SC_CONTEXT_MENU_PROVIDER');
+export const SC_CONTEXT_MENU = new InjectionToken<ScContextMenuContext>(
+  'SC_CONTEXT_MENU',
+);

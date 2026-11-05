@@ -20,7 +20,7 @@ import { IconsContextMenuDemo } from './icons-context-menu-demo';
 export class IconsContextMenuDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScContextMenuProvider,
+  ScContextMenu,
   ScContextMenuTrigger,
   ScMenu,
   ScMenuContent,
@@ -40,7 +40,7 @@ import {
 @Component({
   selector: 'app-icons-context-menu-demo',
   imports: [
-    ScContextMenuProvider,
+    ScContextMenu,
     ScContextMenuTrigger,
     ScMenu,
     ScMenuContent,
@@ -54,7 +54,7 @@ import {
     SiTrashIcon,
   ],
   template: \`
-    <div scContextMenuProvider class="w-full max-w-xs">
+    <div scContextMenu class="w-full max-w-xs">
       <div
         scContextMenuTrigger
         class="flex aspect-video w-full items-center justify-center rounded-xl border border-dashed text-sm"

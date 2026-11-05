@@ -5,7 +5,7 @@ A menu at the pointer, opened by a right-click on an area — a long press on to
 ## Usage
 
 ```html
-<div scContextMenuProvider class="w-full max-w-xs">
+<div scContextMenu class="w-full max-w-xs">
   <div scContextMenuTrigger class="flex aspect-video w-full items-center justify-center rounded-xl border border-dashed text-sm">Right click here</div>
   <ng-template scMenuPortal>
     <div scMenu>
@@ -24,7 +24,7 @@ A menu at the pointer, opened by a right-click on an area — a long press on to
 ## Anatomy
 
 ```html
-<div scContextMenuProvider>
+<div scContextMenu>
   <div scContextMenuTrigger></div>
   <ng-template scMenuPortal>
     <div scMenu>
@@ -44,10 +44,10 @@ A right-click opens the menu with nothing highlighted, until the pointer moves o
 
 ## API reference
 
-| Part                    | Selector                     | Inputs                                                                                                                                                                   |
-| ----------------------- | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `ScContextMenuProvider` | `div[scContextMenuProvider]` | `open` (`[(open)]`: opened here, at the area's centre), `side` (`'end'`, `'start'`, `'top'`, `'bottom'`), `class` — holds the area and the menu; catches the right-click |
-| `ScContextMenuTrigger`  | `[scContextMenuTrigger]`     | `class` — the area (focusable)                                                                                                                                           |
+| Part                   | Selector                 | Inputs                                                                                                                                                                   |
+| ---------------------- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `ScContextMenu`        | `div[scContextMenu]`     | `open` (`[(open)]`: opened here, at the area's centre), `side` (`'end'`, `'start'`, `'top'`, `'bottom'`), `class` — holds the area and the menu; catches the right-click |
+| `ScContextMenuTrigger` | `[scContextMenuTrigger]` | `class` — the area (focusable)                                                                                                                                           |
 
 The menu: in a `scMenuPortal`, rendered while it is open, made of the Menu's parts (see the Menu's README).
 

@@ -23,7 +23,7 @@ import { ScElementDirectionality } from '../../utils/element-directionality';
 import { SC_MENU, type ScMenuContext } from '../menu/menu-context';
 import { ScMenuPortal } from '../menu/menu-portal';
 import { ScContextMenuTrigger } from './context-menu-trigger';
-import { SC_CONTEXT_MENU_PROVIDER } from './context-menu-types';
+import { SC_CONTEXT_MENU } from './context-menu-types';
 
 export type ScContextMenuSide = 'top' | 'bottom' | 'start' | 'end';
 
@@ -37,10 +37,10 @@ export type ScContextMenuSide = 'top' | 'bottom' | 'start' | 'end';
  * outside click and on Escape.
  */
 @Component({
-  selector: 'div[scContextMenuProvider]',
+  selector: 'div[scContextMenu]',
   providers: [
-    { provide: SC_CONTEXT_MENU_PROVIDER, useExisting: ScContextMenuProvider },
-    { provide: SC_MENU, useExisting: ScContextMenuProvider },
+    { provide: SC_CONTEXT_MENU, useExisting: ScContextMenu },
+    { provide: SC_MENU, useExisting: ScContextMenu },
     { provide: Directionality, useClass: ScElementDirectionality },
   ],
   imports: [MenuTrigger, OverlayModule, NgTemplateOutlet],
@@ -79,7 +79,7 @@ export type ScContextMenuSide = 'top' | 'bottom' | 'start' | 'end';
   },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScContextMenuProvider implements ScMenuContext {
+export class ScContextMenu implements ScMenuContext {
   readonly classInput = input<string>('', { alias: 'class' });
   /** Open or not; `[(open)]`. Opened here, the menu is at the area's centre. */
   readonly open = model(false);
