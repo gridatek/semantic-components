@@ -22,6 +22,7 @@ export class RtlMessageScrollerDemoContainer {
 import {
   ScBubble,
   ScBubbleContent,
+  ScFrame,
   ScMessage,
   ScMessageContent,
   ScMessageScroller,
@@ -35,6 +36,7 @@ import { SiArrowDownIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-rtl-message-scroller-demo',
   imports: [
+    ScFrame,
     ScBubble,
     ScBubbleContent,
     ScMessage,
@@ -48,7 +50,7 @@ import { SiArrowDownIcon } from '@semantic-icons/lucide-icons';
   ],
   template: \`
     <div dir="rtl" lang="ar">
-      <div class="bg-background h-80 overflow-hidden rounded-xl border">
+      <div scFrame class="h-80 overflow-hidden">
         <div scMessageScroller>
           <div scMessageScrollerViewport aria-label="المحادثة">
             <div scMessageScrollerContent class="p-4">

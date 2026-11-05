@@ -320,6 +320,8 @@ export interface ScPreset {
   menu: ScMenuStyles;
   menubar: ScMenubarStyles;
   message: ScMessageStyles;
+  /** A message scroller's rows: the gap between them. */
+  messageScrollerContent: string;
   pagination: ScPaginationStyles;
   questionnaire: ScQuestionnaireStyles;
   select: ScSelectStyles;

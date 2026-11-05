@@ -2,6 +2,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScBubble,
   ScBubbleContent,
+  ScFrame,
   ScMessage,
   ScMessageContent,
   ScMessageScroller,
@@ -15,6 +16,7 @@ import { SiArrowDownIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-position-message-scroller-demo',
   imports: [
+    ScFrame,
     ScBubble,
     ScBubbleContent,
     ScMessage,
@@ -27,7 +29,7 @@ import { SiArrowDownIcon } from '@semantic-icons/lucide-icons';
     SiArrowDownIcon,
   ],
   template: `
-    <div class="bg-background h-80 overflow-hidden rounded-xl border">
+    <div scFrame class="h-80 overflow-hidden">
       <div scMessageScroller defaultScrollPosition="last-anchor">
         <div scMessageScrollerViewport aria-label="Saved conversation">
           <div scMessageScrollerContent class="p-4">

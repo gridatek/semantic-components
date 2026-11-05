@@ -27,6 +27,7 @@ import { marker } from './marker';
 import { menu } from './menu';
 import { menubar } from './menubar';
 import { message } from './message';
+import { messageScrollerContent } from './message-scroller';
 import { pagination } from './pagination';
 import { questionnaire } from './questionnaire';
 import { select } from './select';
@@ -63,6 +64,7 @@ export const vega: ScPreset = {
   menu,
   menubar,
   message,
+  messageScrollerContent,
   pagination,
   questionnaire,
   select,

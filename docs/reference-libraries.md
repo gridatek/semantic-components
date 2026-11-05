@@ -488,6 +488,20 @@ A row of a conversation (`div[scMessage]`; restyled 2026-11-05): shadcn's Messag
 - **The examples**: Avatar, Group, Header and footer, Actions, Attachment (ours), Status (a Marker, from shadcn's accessibility notes), Pattern (Copy → Copied; feedback with `aria-pressed`), RTL.
 - **Not** Markdown (no Markdown component), nor the Pattern's local `MessageAction` (button + tooltip): actions are your `scButton`s, named in sr-only text.
 
+## Message Scroller
+
+A conversation that scrolls itself (`div[scMessageScroller]`; built 2026-10-29, restyled 2026-11-05): shadcn's Message Scroller. A shadcn component, so no web research: shadcn's reference app, its headless primitive, its docs page and 12 examples (2026-11-05).
+
+| Library                                                                                                                     | What to read                                                                                                                                                                                     |
+| --------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| shadcn Message Scroller (`shadcn-reference/presets/*/message-scroller.tsx`, `apps/v4/examples/base/message-scroller-*.tsx`) | Only the rows' gap changes per style; Core concepts: anchoring, group chat, previous-item peek, live edge, opening position, reload flash, history, animation, jumping, visibility, scroll state |
+
+**Taken:**
+
+- **The rows' gap** as the `messageScrollerContent` preset key; the jump is the preset's button already.
+- **Every Core concept as an example**: Anchoring turns (an "Anchor the reply" toggle), Group chat (a marker as the anchor), Keeping context visible (the peek), Following the live edge, Opening saved threads, Loading earlier messages, Animating new messages (a `starting:` transition, not height), Jumping to messages, Tracking the reader's position (a jump menu from `visibility()`), Reading scroll state (`scrollable()`), RTL.
+- **Not** the "Avoiding a flash on reload" script: React SSR-specific; our viewport stays hidden until positioned (`data-pending-scroll`).
+
 ## Control Group
 
 An input or a select joined with its buttons (`div[scControlGroup]`): shadcn's Button Group, renamed for what it is for (the user, 2026-10-30: it is only useful when inputs or selects mix with buttons; buttons alone are on the Button page). A shadcn component, so no web research: Base UI and shadcn's reference app (2026-10-30).

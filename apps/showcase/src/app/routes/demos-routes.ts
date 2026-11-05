@@ -5443,10 +5443,31 @@ export const demosRoutes: Route[] = [
     path: 'demos/message-scroller',
     children: [
       {
-        path: 'basic-message-scroller-demo',
+        path: 'message-scroller-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/message-scroller/demos/basic-message-scroller-demo').then(
-            (m) => m.BasicMessageScrollerDemo,
+          import('../pages/docs/message-scroller/demos/message-scroller-usage-demo').then(
+            (m) => m.MessageScrollerUsageDemo,
+          ),
+      },
+      {
+        path: 'anchoring-message-scroller-demo',
+        loadComponent: () =>
+          import('../pages/docs/message-scroller/demos/anchoring-message-scroller-demo').then(
+            (m) => m.AnchoringMessageScrollerDemo,
+          ),
+      },
+      {
+        path: 'group-chat-message-scroller-demo',
+        loadComponent: () =>
+          import('../pages/docs/message-scroller/demos/group-chat-message-scroller-demo').then(
+            (m) => m.GroupChatMessageScrollerDemo,
+          ),
+      },
+      {
+        path: 'previous-context-message-scroller-demo',
+        loadComponent: () =>
+          import('../pages/docs/message-scroller/demos/previous-context-message-scroller-demo').then(
+            (m) => m.PreviousContextMessageScrollerDemo,
           ),
       },
       {
@@ -5457,10 +5478,24 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
+        path: 'position-message-scroller-demo',
+        loadComponent: () =>
+          import('../pages/docs/message-scroller/demos/position-message-scroller-demo').then(
+            (m) => m.PositionMessageScrollerDemo,
+          ),
+      },
+      {
         path: 'history-message-scroller-demo',
         loadComponent: () =>
           import('../pages/docs/message-scroller/demos/history-message-scroller-demo').then(
             (m) => m.HistoryMessageScrollerDemo,
+          ),
+      },
+      {
+        path: 'animation-message-scroller-demo',
+        loadComponent: () =>
+          import('../pages/docs/message-scroller/demos/animation-message-scroller-demo').then(
+            (m) => m.AnimationMessageScrollerDemo,
           ),
       },
       {
@@ -5471,10 +5506,17 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'position-message-scroller-demo',
+        path: 'visibility-message-scroller-demo',
         loadComponent: () =>
-          import('../pages/docs/message-scroller/demos/position-message-scroller-demo').then(
-            (m) => m.PositionMessageScrollerDemo,
+          import('../pages/docs/message-scroller/demos/visibility-message-scroller-demo').then(
+            (m) => m.VisibilityMessageScrollerDemo,
+          ),
+      },
+      {
+        path: 'scrollable-message-scroller-demo',
+        loadComponent: () =>
+          import('../pages/docs/message-scroller/demos/scrollable-message-scroller-demo').then(
+            (m) => m.ScrollableMessageScrollerDemo,
           ),
       },
       {

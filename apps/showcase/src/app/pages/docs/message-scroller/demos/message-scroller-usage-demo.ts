@@ -1,27 +1,8 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { BasicMessageScrollerDemo } from './basic-message-scroller-demo';
-
-@Component({
-  selector: 'app-basic-message-scroller-demo-container',
-  imports: [DemoContainer, BasicMessageScrollerDemo],
-  template: `
-    <app-demo-container
-      title="Conversation"
-      demoUrl="/demos/message-scroller/basic-message-scroller-demo"
-      [code]="code"
-    >
-      <app-basic-message-scroller-demo />
-    </app-demo-container>
-  `,
-  host: { class: 'block w-full' },
-  encapsulation: ViewEncapsulation.None,
-})
-export class BasicMessageScrollerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScBubble,
   ScBubbleContent,
+  ScFrame,
   ScMessage,
   ScMessageContent,
   ScMessageScroller,
@@ -33,8 +14,9 @@ import {
 import { SiArrowDownIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
-  selector: 'app-basic-message-scroller-demo',
+  selector: 'app-message-scroller-usage-demo',
   imports: [
+    ScFrame,
     ScBubble,
     ScBubbleContent,
     ScMessage,
@@ -46,8 +28,8 @@ import { SiArrowDownIcon } from '@semantic-icons/lucide-icons';
     ScMessageScrollerViewport,
     SiArrowDownIcon,
   ],
-  template: \`
-    <div class="bg-background h-80 overflow-hidden rounded-xl border">
+  template: `
+    <div scFrame class="h-80 overflow-hidden">
       <div scMessageScroller>
         <div scMessageScrollerViewport aria-label="Conversation">
           <div scMessageScrollerContent class="p-4">
@@ -81,11 +63,11 @@ import { SiArrowDownIcon } from '@semantic-icons/lucide-icons';
         </button>
       </div>
     </div>
-  \`,
+  `,
   host: { class: 'block w-full max-w-md' },
   encapsulation: ViewEncapsulation.None,
 })
-export class BasicMessageScrollerDemo {
+export class MessageScrollerUsageDemo {
   readonly messages = [
     { id: 'q1', role: 'user', text: 'What does a message scroller do?' },
     {
@@ -112,5 +94,4 @@ export class BasicMessageScrollerDemo {
       text: 'They do: the messages are a log, so each new one is announced once it is added.',
     },
   ];
-}`;
 }

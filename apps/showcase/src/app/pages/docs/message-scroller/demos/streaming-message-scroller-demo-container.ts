@@ -7,7 +7,7 @@ import { StreamingMessageScrollerDemo } from './streaming-message-scroller-demo'
   imports: [DemoContainer, StreamingMessageScrollerDemo],
   template: `
     <app-demo-container
-      title="Streaming"
+      title="Following the live edge"
       demoUrl="/demos/message-scroller/streaming-message-scroller-demo"
       [code]="code"
     >
@@ -29,6 +29,7 @@ import {
   ScBubble,
   ScBubbleContent,
   ScButton,
+  ScFrame,
   ScMessage,
   ScMessageContent,
   ScMessageScroller,
@@ -42,6 +43,7 @@ import { SiArrowDownIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-streaming-message-scroller-demo',
   imports: [
+    ScFrame,
     ScBubble,
     ScBubbleContent,
     ScButton,
@@ -56,7 +58,7 @@ import { SiArrowDownIcon } from '@semantic-icons/lucide-icons';
   ],
   template: \`
     <div class="flex flex-col gap-3">
-      <div class="bg-background h-80 overflow-hidden rounded-xl border">
+      <div scFrame class="h-80 overflow-hidden">
         <div scMessageScroller autoScroll>
           <div scMessageScrollerViewport aria-label="Streaming conversation">
             <div

@@ -54,7 +54,7 @@ test.afterEach(() => {
 test('Conversation: opens at the end; the jump button only when away', async ({
   page,
 }) => {
-  await page.goto(demo('basic'));
+  await page.goto('/demos/message-scroller/message-scroller-usage-demo');
   await expect(
     page.getByRole('region', { name: 'Conversation' }),
   ).toBeVisible();
@@ -75,7 +75,7 @@ test('Conversation: opens at the end; the jump button only when away', async ({
 });
 
 test('Conversation: the keyboard reaches and scrolls it', async ({ page }) => {
-  await page.goto(demo('basic'));
+  await page.goto('/demos/message-scroller/message-scroller-usage-demo');
   await atEnd(page);
   await viewport(page).focus();
   await press(page, 'Home');
@@ -144,4 +144,71 @@ test('RTL: mirrored, your messages on the left', async ({ page }) => {
   const theirs = await bubble('a1').boundingBox();
   expect(mine && theirs && mine.x < theirs.x).toBe(true);
   await atEnd(page);
+});
+
+test('Anchoring turns: the anchor near the top — your question, or the reply', async ({
+  page,
+}) => {
+  await page.goto(demo('anchoring'));
+  await atEnd(page);
+  await page.getByRole('button', { name: 'Send' }).click();
+  await expect.poll(() => nearTop(page, 'ask-1')).toBe(true);
+  const reply = page.getByRole('button', { name: 'Anchor the reply' });
+  await reply.click();
+  await expect(reply).toHaveAttribute('aria-pressed', 'true');
+  await page.getByRole('button', { name: 'Send' }).click();
+  await expect.poll(() => nearTop(page, 'reply-2')).toBe(true);
+});
+
+test('Group chat: the joined marker is the new turn', async ({ page }) => {
+  await page.goto(demo('group-chat'));
+  await atEnd(page);
+  await page.getByRole('button', { name: 'Marcus joins' }).click();
+  await expect(page.getByText('Marcus joined the chat')).toBeVisible();
+  await expect.poll(() => nearTop(page, 'joined')).toBe(true);
+});
+
+test('Keeping context visible: the peek above a new turn', async ({ page }) => {
+  await page.goto(demo('previous-context'));
+  await atEnd(page);
+  await page.getByRole('button', { name: '160px' }).click();
+  await page.getByRole('button', { name: 'Send' }).click();
+  await expect
+    .poll(async () => (await rowTop(page, 'ask-1')) ?? 0)
+    .toBeGreaterThan(150);
+});
+
+test('Animating new messages: the new row rises in, then the turn is placed', async ({
+  page,
+}) => {
+  await page.goto(demo('animation'));
+  await atEnd(page);
+  await page.getByRole('button', { name: 'Send' }).click();
+  const row = page.locator('[data-message-id="ask-1"]');
+  await expect(row).toHaveCSS('opacity', '1');
+  await expect.poll(() => nearTop(page, 'ask-1')).toBe(true);
+});
+
+test('Tracking the reader’s position: the jump menu marks the turn read', async ({
+  page,
+}) => {
+  await page.goto(demo('visibility'));
+  const menu = page.getByRole('navigation', { name: 'Questions' });
+  const first = menu.getByRole('button', {
+    name: 'What does a message scroller do?',
+  });
+  await first.click();
+  await expect(first).toHaveAttribute('aria-current', 'true');
+  const last = menu.getByRole('button', { name: 'Can a keyboard scroll it?' });
+  await last.click();
+  await expect(last).toHaveAttribute('aria-current', 'true');
+  await expect(first).not.toHaveAttribute('aria-current');
+});
+
+test('Reading scroll state: the edges said in words', async ({ page }) => {
+  await page.goto(demo('scrollable'));
+  const state = page.getByText(/More above|At the start/);
+  await expect(state).toHaveText(/More above · At the end/);
+  await viewport(page).evaluate((v) => (v.scrollTop = 0));
+  await expect(state).toHaveText(/At the start · More below/);
 });

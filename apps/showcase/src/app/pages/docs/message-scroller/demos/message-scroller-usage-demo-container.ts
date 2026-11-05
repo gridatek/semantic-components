@@ -1,7 +1,68 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, inject } from '@angular/core';
+import {
+  ScCodeBlock,
+  ScCodeBlockActions,
+  ScCodeBlockContent,
+  ScCodeBlockCopy,
+  ScCodeBlockHeader,
+  ScCodeBlockTitle,
+} from '@semantic-components/ui/code-block';
+import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
+import { DevOnly } from '../../../../components/dev-only/dev-only';
+import { ConfigService } from '../../../../services/config-service';
+import { MessageScrollerUsageDemo } from './message-scroller-usage-demo';
+
+@Component({
+  selector: 'app-message-scroller-usage-demo-container',
+  imports: [
+    DevOnly,
+    ScCodeBlock,
+    ScCodeBlockHeader,
+    ScCodeBlockTitle,
+    ScCodeBlockActions,
+    ScCodeBlockCopy,
+    ScCodeBlockContent,
+    SiCheckIcon,
+    SiCopyIcon,
+    MessageScrollerUsageDemo,
+  ],
+  template: `
+    <div scCodeBlock>
+      <div scCodeBlockHeader>
+        <div scCodeBlockTitle>angular-ts</div>
+        <div scCodeBlockActions>
+          <button [scCodeBlockCopy]="code" #copy="scCodeBlockCopy">
+            @if (copy.copied()) {
+              <svg siCheckIcon></svg>
+            } @else {
+              <svg siCopyIcon></svg>
+            }
+            <span class="sr-only">Copy to clipboard</span>
+          </button>
+        </div>
+      </div>
+      <pre scCodeBlockContent [code]="code" language="angular-ts"></pre>
+    </div>
+
+    @if (devMode()) {
+      <app-dev-only>
+        <app-message-scroller-usage-demo />
+      </app-dev-only>
+    }
+  `,
+  host: { class: 'block w-full space-y-4' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class MessageScrollerUsageDemoContainer {
+  private readonly config = inject(ConfigService);
+
+  protected readonly devMode = this.config.devMode;
+
+  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScBubble,
   ScBubbleContent,
+  ScFrame,
   ScMessage,
   ScMessageContent,
   ScMessageScroller,
@@ -13,8 +74,9 @@ import {
 import { SiArrowDownIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
-  selector: 'app-basic-message-scroller-demo',
+  selector: 'app-message-scroller-usage-demo',
   imports: [
+    ScFrame,
     ScBubble,
     ScBubbleContent,
     ScMessage,
@@ -26,8 +88,8 @@ import { SiArrowDownIcon } from '@semantic-icons/lucide-icons';
     ScMessageScrollerViewport,
     SiArrowDownIcon,
   ],
-  template: `
-    <div class="bg-background h-80 overflow-hidden rounded-xl border">
+  template: \`
+    <div scFrame class="h-80 overflow-hidden">
       <div scMessageScroller>
         <div scMessageScrollerViewport aria-label="Conversation">
           <div scMessageScrollerContent class="p-4">
@@ -61,11 +123,11 @@ import { SiArrowDownIcon } from '@semantic-icons/lucide-icons';
         </button>
       </div>
     </div>
-  `,
+  \`,
   host: { class: 'block w-full max-w-md' },
   encapsulation: ViewEncapsulation.None,
 })
-export class BasicMessageScrollerDemo {
+export class MessageScrollerUsageDemo {
   readonly messages = [
     { id: 'q1', role: 'user', text: 'What does a message scroller do?' },
     {
@@ -92,4 +154,5 @@ export class BasicMessageScrollerDemo {
       text: 'They do: the messages are a log, so each new one is announced once it is added.',
     },
   ];
+}`;
 }

@@ -9,6 +9,8 @@ A conversation that scrolls itself, as [shadcn/ui's Message Scroller](https://ui
 
 It fills its parent: give that a height. Each row is a `scMessageScrollerItem` — put history controls outside the content, so a prepend is seen as one.
 
+The look is the app's preset's: the rows' gap (`messageScrollerContent`: `gap-6` or `gap-8`, shadcn's per style) and the preset's button for the jump.
+
 ## Usage
 
 ```html

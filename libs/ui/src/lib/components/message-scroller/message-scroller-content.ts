@@ -9,6 +9,7 @@ import {
   input,
   viewChild,
 } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 import { ScMessageScrollerState } from './message-scroller-state';
 
@@ -37,6 +38,7 @@ import { ScMessageScrollerState } from './message-scroller-state';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScMessageScrollerContent {
+  private readonly styles = injectPreset().messageScrollerContent;
   private readonly state = inject(ScMessageScrollerState);
   private readonly element = inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly spacer =
@@ -44,9 +46,7 @@ export class ScMessageScrollerContent {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
-    cn('flex h-max min-h-full flex-col gap-6', this.classInput()),
-  );
+  protected readonly class = computed(() => cn(this.styles, this.classInput()));
 
   constructor() {
     const destroyRef = inject(DestroyRef);

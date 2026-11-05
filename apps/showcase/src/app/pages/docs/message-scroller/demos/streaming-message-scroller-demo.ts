@@ -9,6 +9,7 @@ import {
   ScBubble,
   ScBubbleContent,
   ScButton,
+  ScFrame,
   ScMessage,
   ScMessageContent,
   ScMessageScroller,
@@ -22,6 +23,7 @@ import { SiArrowDownIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-streaming-message-scroller-demo',
   imports: [
+    ScFrame,
     ScBubble,
     ScBubbleContent,
     ScButton,
@@ -36,7 +38,7 @@ import { SiArrowDownIcon } from '@semantic-icons/lucide-icons';
   ],
   template: `
     <div class="flex flex-col gap-3">
-      <div class="bg-background h-80 overflow-hidden rounded-xl border">
+      <div scFrame class="h-80 overflow-hidden">
         <div scMessageScroller autoScroll>
           <div scMessageScrollerViewport aria-label="Streaming conversation">
             <div

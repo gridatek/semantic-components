@@ -7,7 +7,7 @@ import { HistoryMessageScrollerDemo } from './history-message-scroller-demo';
   imports: [DemoContainer, HistoryMessageScrollerDemo],
   template: `
     <app-demo-container
-      title="Load History"
+      title="Loading earlier messages"
       demoUrl="/demos/message-scroller/history-message-scroller-demo"
       [code]="code"
     >
@@ -23,6 +23,7 @@ import {
   ScBubble,
   ScBubbleContent,
   ScButton,
+  ScFrame,
   ScMessage,
   ScMessageContent,
   ScMessageScroller,
@@ -36,6 +37,7 @@ import { SiArrowDownIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-history-message-scroller-demo',
   imports: [
+    ScFrame,
     ScBubble,
     ScBubbleContent,
     ScButton,
@@ -59,7 +61,7 @@ import { SiArrowDownIcon } from '@semantic-icons/lucide-icons';
     >
       Load older messages
     </button>
-    <div class="bg-background h-80 overflow-hidden rounded-xl border">
+    <div scFrame class="h-80 overflow-hidden">
       <div scMessageScroller>
         <div
           scMessageScrollerViewport
