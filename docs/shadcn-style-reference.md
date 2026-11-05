@@ -81,6 +81,7 @@ Do **not** "fix" these to match shadcn:
 - **Menubar: the Menu's parts, a focus ring** — no MenubarItem, MenubarCheckboxItem…: the Menu's parts take the preset's `menubar.menu` look inside a bar (shadcn's menubar classes merged over its dropdown ones, as its parts wrap them). Its triggers add `focus-visible:outline-2 focus-visible:outline-ring`: shadcn's have none (`outline-hidden`).
 - **Context Menu: the Menu's parts, a focusable area** — no ContextMenuItem…: the Menu's parts take the preset's `contextMenu` look in a context menu. Its area (`scContextMenuTrigger`) is focusable — Shift+F10 and the Menu key open the menu — so it adds `focus-visible:ring-3 focus-visible:ring-ring/50`; shadcn's has `select-none` only. `side` is logical (`start` / `end`).
 - **Tabs: our states** — `aria-selected:` for `data-active:`, and the root's `data-[orientation=…]` for `data-horizontal:` / `data-vertical:` (`libs/presets/*/src/tabs.ts`). A hidden panel is `inert`, so the part adds `[[inert]]:hidden`.
+- **Code Block: terminal dim text readable** — Shiki draws ANSI dim at half opacity (`#rrggbb80`); our highlighter gives it `--muted-foreground` (contrast over opacity, above). A code editor in the block takes the preset's focus classes for the code (`has-[>[data-slot=code-editor]:focus-within]`).
 - **Pagination: parts on buttons or your links** — the parts set no `href`: a link follows the one you give it.
 - **Decomposition** — shadcn ships one function per part in one file; we split into directives, one per file, so one shadcn part can map to several of ours.
 

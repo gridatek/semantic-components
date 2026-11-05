@@ -72,10 +72,12 @@ function shikiHighlighter(): ScCodeHighlighter {
   return {
     async highlight(code, language) {
       const name = language.toLowerCase();
-      const lang = name in languages ? name : aliases[name];
+      // Terminal output: its ANSI colours, read by Shiki itself (no grammar).
+      const lang =
+        name === 'ansi' ? name : name in languages ? name : aliases[name];
       if (!lang) return null;
       const highlighter = await load();
-      if (!highlighter.getLoadedLanguages().includes(lang))
+      if (lang !== 'ansi' && !highlighter.getLoadedLanguages().includes(lang))
         await highlighter.loadLanguage(languages[lang]);
       return highlighter
         .codeToTokens(code, {
@@ -86,11 +88,24 @@ function shikiHighlighter(): ScCodeHighlighter {
         .tokens.map((line) =>
           line.map((token) => ({
             content: token.content,
-            style: (token.htmlStyle ?? {}) as Record<string, string>,
+            style: readable((token.htmlStyle ?? {}) as Record<string, string>),
           })),
         );
     },
   };
+}
+
+/**
+ * Shiki draws a terminal's dim text at half opacity (`#rrggbb80`), below
+ * 4.5:1: in the muted foreground instead, which keeps its contrast.
+ */
+function readable(style: Record<string, string>): Record<string, string> {
+  const out: Record<string, string> = {};
+  for (const [name, value] of Object.entries(style))
+    out[name] = /^#[0-9a-f]{6}80$/i.test(value)
+      ? 'var(--muted-foreground)'
+      : value;
+  return out;
 }
 
 /** Highlights code blocks, with Shiki. */

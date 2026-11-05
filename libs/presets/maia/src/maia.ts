@@ -7,6 +7,7 @@ import { badge } from './badge';
 import { breadcrumb } from './breadcrumb';
 import { button } from './button';
 import { card } from './card';
+import { codeBlock } from './code-block';
 import { contextMenu } from './context-menu';
 import { controlGroup, controlGroupText } from './control-group';
 import { frame } from './frame';
@@ -34,6 +35,7 @@ export const maia: ScPreset = {
   breadcrumb,
   button,
   card,
+  codeBlock,
   frame,
   controlGroup,
   controlGroupText,

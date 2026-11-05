@@ -334,6 +334,21 @@ Tabs and their panels (`[scTabs]`; rewritten and switched in 2026-11-05): shadcn
 - **A disabled tab is reached by the arrows**: the tab part removes a native `disabled` (it would take the tab out of focus).
 - **Not**: content written straight in a panel, nor Base UI's `keepMounted` — Aria allows a panel's content only in its template, created when shown, destroyed when hidden (tried: a template inside the panel's own view does not satisfy Aria's content query). Documented as a limitation. Not Base UI's Indicator nor `data-activation-direction` (shadcn uses neither).
 
+## Code Block
+
+Code to read and copy (`div[scCodeBlock]`, entry `ui/code-block`): shadcn's Code Block — no Base UI part. Its styles and docs' examples (2026-11-05).
+
+| Library                                                                                                              | What to read                                                                                                                                                                            |
+| -------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| shadcn Code Block (`shadcn-reference/presets/*/code-block.tsx`), examples (`apps/v4/examples/base/code-block-*.tsx`) | The look per style; Basic, Header, Actions, Floating Actions, Line Numbers, Start Line, Wrap, Highlighted Lines, Diff, Height, Show More, Size, Destructive, Tabs, Languages, ANSI, RTL |
+
+**Taken:**
+
+- **Each preset's look**, as the `codeBlock` key (it had nova's only).
+- **The examples**, in shadcn's order. Show More is composition, not a part: a max height on the code, your button in the footer (`aria-expanded`).
+- **Terminal output** (`language="ansi"`): Shiki's own; its dim text in `--muted-foreground`, not at half opacity.
+- **Not**: the integrations (Trace, Message, Chat, Typeset, Markdown, Streaming) — on those components' pages; shadcn's `aria-label="Copy"` default — the copy button's name is yours.
+
 ## Control Group
 
 An input or a select joined with its buttons (`div[scControlGroup]`): shadcn's Button Group, renamed for what it is for (the user, 2026-10-30: it is only useful when inputs or selects mix with buttons; buttons alone are on the Button page). A shadcn component, so no web research: Base UI and shadcn's reference app (2026-10-30).

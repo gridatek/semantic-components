@@ -1,5 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn, injectPreset } from '@semantic-components/ui';
 
 /** The block's header: its title, then its actions at the end. */
 @Directive({
@@ -12,9 +12,11 @@ import { cn } from '@semantic-components/ui';
 export class ScCodeBlockHeader {
   readonly classInput = input<string>('', { alias: 'class' });
 
+  private readonly styles = injectPreset().codeBlock;
+
   protected readonly class = computed(() =>
     cn(
-      'flex min-w-0 shrink-0 items-center gap-2 px-3 pt-3 text-muted-foreground group-data-[size=sm]/code-block:px-2.5 group-data-[size=sm]/code-block:pt-2.5 group-data-[variant=destructive]/code-block:text-destructive *:has-[>[data-slot=code-block-title]]:min-w-0',
+      this.styles.header,
       "[&>svg]:pointer-events-none [&>svg]:shrink-0 [&>svg:not([class*='size-'])]:size-4",
       this.classInput(),
     ),

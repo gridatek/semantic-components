@@ -1,59 +1,47 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { NumbersCodeBlockDemo } from './numbers-code-block-demo';
+import { LineNumbersCodeBlockDemo } from './line-numbers-code-block-demo';
 
 @Component({
-  selector: 'app-numbers-code-block-demo-container',
-  imports: [DemoContainer, NumbersCodeBlockDemo],
+  selector: 'app-line-numbers-code-block-demo-container',
+  imports: [DemoContainer, LineNumbersCodeBlockDemo],
   template: `
     <app-demo-container
-      title="Line numbers"
+      title="Line Numbers"
+      demoUrl="/demos/code-block/line-numbers-code-block-demo"
       [code]="code"
-      demoUrl="/demos/code-block/numbers-code-block-demo"
     >
-      <app-numbers-code-block-demo />
+      <app-line-numbers-code-block-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class NumbersCodeBlockDemoContainer {
+export class LineNumbersCodeBlockDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCodeBlock,
   ScCodeBlockContent,
-  ScCodeBlockHeader,
-  ScCodeBlockTitle,
 } from '@semantic-components/ui/code-block';
 
-/** lineNumbers, from startLine; highlightedLines marks lines by number. */
+/** lineNumbers: each line numbered; the numbers are not copied. */
 @Component({
-  selector: 'app-numbers-code-block-demo',
-  imports: [
-    ScCodeBlock,
-    ScCodeBlockHeader,
-    ScCodeBlockTitle,
-    ScCodeBlockContent,
-  ],
+  selector: 'app-line-numbers-code-block-demo',
+  imports: [ScCodeBlock, ScCodeBlockContent],
   template: \`
     <div scCodeBlock>
-      <div scCodeBlockHeader>
-        <div scCodeBlockTitle>counter.ts</div>
-      </div>
       <pre
         scCodeBlockContent
-        lineNumbers
-        [startLine]="12"
-        [highlightedLines]="[7, 8]"
         [code]="source"
         language="angular-ts"
+        lineNumbers
       ></pre>
     </div>
   \`,
-  host: { class: 'block w-full max-w-xl' },
+  host: { class: 'block w-full max-w-md' },
   encapsulation: ViewEncapsulation.None,
 })
-export class NumbersCodeBlockDemo {
+export class LineNumbersCodeBlockDemo {
   readonly source = \`import { Component, signal } from '@angular/core';
 
 @Component({

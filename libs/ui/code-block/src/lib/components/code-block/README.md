@@ -1,6 +1,6 @@
 # Code Block
 
-Code to read and copy, following shadcn/ui's code block: a header (title, actions), the code — highlighted, numbered, wrapped, its lines marked — and a footer.
+Code to read and copy, following shadcn/ui's code block, in the look of the app's preset: a header (title, actions), the code — highlighted, numbered, wrapped, its lines marked — and a footer.
 
 ## Architecture
 
@@ -29,7 +29,7 @@ export const appConfig: ApplicationConfig = {
 };
 ```
 
-`provideCodeHighlighter()` uses Shiki's core with its JavaScript engine and the GitHub light (high contrast) / dark themes; each language loads the first time it is shown: `angular-html`, `angular-ts`, `bash` (`sh`, `shell`, `zsh`), `css`, `diff`, `html`, `javascript` (`js`), `json`, `markdown` (`md`), `python` (`py`), `scss`, `sql`, `typescript` (`ts`), `yaml` (`yml`). Another highlighter can be provided as `SC_CODE_HIGHLIGHTER` (`ScCodeHighlighter`: code and language in, lines of tokens out).
+`provideCodeHighlighter()` uses Shiki's core with its JavaScript engine and the GitHub light (high contrast) / dark themes; each language loads the first time it is shown: `angular-html`, `angular-ts`, `bash` (`sh`, `shell`, `zsh`), `css`, `diff`, `html`, `javascript` (`js`), `json`, `markdown` (`md`), `python` (`py`), `scss`, `sql`, `typescript` (`ts`), `yaml` (`yml`) — and `ansi`, a terminal's output in its colours (Shiki reads the codes; its dim text is drawn in the muted foreground, to keep 4.5:1). Another highlighter can be provided as `SC_CODE_HIGHLIGHTER` (`ScCodeHighlighter`: code and language in, lines of tokens out).
 
 ## Usage
 
@@ -82,3 +82,7 @@ Renders its own lines: nothing to put inside it. Always `dir="ltr"`; focusable (
 ### ScCodeBlockHeader, ScCodeBlockTitle, ScCodeBlockActions, ScCodeBlockFooter
 
 Layout parts, each a `div` with its `class`.
+
+## Styles
+
+Every part's classes are the preset's (`injectPreset().codeBlock`: `root` by variant, `header`, `title`, `actions`, `content`, `code`, `line` by mark, `footer`): shadcn's Code Block, in each style. A code editor in the block (the Code Editor) takes the preset's focus look for the code.

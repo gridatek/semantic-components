@@ -2,38 +2,27 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCodeBlock,
   ScCodeBlockContent,
-  ScCodeBlockHeader,
-  ScCodeBlockTitle,
 } from '@semantic-components/ui/code-block';
 
-/** lineNumbers, from startLine; highlightedLines marks lines by number. */
+/** highlightedLines: lines (from 1) to draw the eye to. */
 @Component({
-  selector: 'app-numbers-code-block-demo',
-  imports: [
-    ScCodeBlock,
-    ScCodeBlockHeader,
-    ScCodeBlockTitle,
-    ScCodeBlockContent,
-  ],
+  selector: 'app-highlighted-lines-code-block-demo',
+  imports: [ScCodeBlock, ScCodeBlockContent],
   template: `
     <div scCodeBlock>
-      <div scCodeBlockHeader>
-        <div scCodeBlockTitle>counter.ts</div>
-      </div>
       <pre
         scCodeBlockContent
-        lineNumbers
-        [startLine]="12"
-        [highlightedLines]="[7, 8]"
         [code]="source"
         language="angular-ts"
+        lineNumbers
+        [highlightedLines]="[5, 8]"
       ></pre>
     </div>
   `,
-  host: { class: 'block w-full max-w-xl' },
+  host: { class: 'block w-full max-w-md' },
   encapsulation: ViewEncapsulation.None,
 })
-export class NumbersCodeBlockDemo {
+export class HighlightedLinesCodeBlockDemo {
   readonly source = `import { Component, signal } from '@angular/core';
 
 @Component({

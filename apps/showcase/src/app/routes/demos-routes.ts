@@ -1056,6 +1056,13 @@ export const demosRoutes: Route[] = [
     path: 'demos/code-block',
     children: [
       {
+        path: 'code-block-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/code-block/demos/code-block-usage-demo').then(
+            (m) => m.CodeBlockUsageDemo,
+          ),
+      },
+      {
         path: 'basic-code-block-demo',
         loadComponent: () =>
           import('../pages/docs/code-block/demos/basic-code-block-demo').then(
@@ -1063,17 +1070,38 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'numbers-code-block-demo',
+        path: 'header-code-block-demo',
         loadComponent: () =>
-          import('../pages/docs/code-block/demos/numbers-code-block-demo').then(
-            (m) => m.NumbersCodeBlockDemo,
+          import('../pages/docs/code-block/demos/header-code-block-demo').then(
+            (m) => m.HeaderCodeBlockDemo,
           ),
       },
       {
-        path: 'changes-code-block-demo',
+        path: 'actions-code-block-demo',
         loadComponent: () =>
-          import('../pages/docs/code-block/demos/changes-code-block-demo').then(
-            (m) => m.ChangesCodeBlockDemo,
+          import('../pages/docs/code-block/demos/actions-code-block-demo').then(
+            (m) => m.ActionsCodeBlockDemo,
+          ),
+      },
+      {
+        path: 'floating-actions-code-block-demo',
+        loadComponent: () =>
+          import('../pages/docs/code-block/demos/floating-actions-code-block-demo').then(
+            (m) => m.FloatingActionsCodeBlockDemo,
+          ),
+      },
+      {
+        path: 'line-numbers-code-block-demo',
+        loadComponent: () =>
+          import('../pages/docs/code-block/demos/line-numbers-code-block-demo').then(
+            (m) => m.LineNumbersCodeBlockDemo,
+          ),
+      },
+      {
+        path: 'start-line-code-block-demo',
+        loadComponent: () =>
+          import('../pages/docs/code-block/demos/start-line-code-block-demo').then(
+            (m) => m.StartLineCodeBlockDemo,
           ),
       },
       {
@@ -1084,17 +1112,73 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'floating-code-block-demo',
+        path: 'highlighted-lines-code-block-demo',
         loadComponent: () =>
-          import('../pages/docs/code-block/demos/floating-code-block-demo').then(
-            (m) => m.FloatingCodeBlockDemo,
+          import('../pages/docs/code-block/demos/highlighted-lines-code-block-demo').then(
+            (m) => m.HighlightedLinesCodeBlockDemo,
           ),
       },
       {
-        path: 'error-code-block-demo',
+        path: 'diff-code-block-demo',
         loadComponent: () =>
-          import('../pages/docs/code-block/demos/error-code-block-demo').then(
-            (m) => m.ErrorCodeBlockDemo,
+          import('../pages/docs/code-block/demos/diff-code-block-demo').then(
+            (m) => m.DiffCodeBlockDemo,
+          ),
+      },
+      {
+        path: 'height-code-block-demo',
+        loadComponent: () =>
+          import('../pages/docs/code-block/demos/height-code-block-demo').then(
+            (m) => m.HeightCodeBlockDemo,
+          ),
+      },
+      {
+        path: 'show-more-code-block-demo',
+        loadComponent: () =>
+          import('../pages/docs/code-block/demos/show-more-code-block-demo').then(
+            (m) => m.ShowMoreCodeBlockDemo,
+          ),
+      },
+      {
+        path: 'size-code-block-demo',
+        loadComponent: () =>
+          import('../pages/docs/code-block/demos/size-code-block-demo').then(
+            (m) => m.SizeCodeBlockDemo,
+          ),
+      },
+      {
+        path: 'destructive-code-block-demo',
+        loadComponent: () =>
+          import('../pages/docs/code-block/demos/destructive-code-block-demo').then(
+            (m) => m.DestructiveCodeBlockDemo,
+          ),
+      },
+      {
+        path: 'tabs-code-block-demo',
+        loadComponent: () =>
+          import('../pages/docs/code-block/demos/tabs-code-block-demo').then(
+            (m) => m.TabsCodeBlockDemo,
+          ),
+      },
+      {
+        path: 'languages-code-block-demo',
+        loadComponent: () =>
+          import('../pages/docs/code-block/demos/languages-code-block-demo').then(
+            (m) => m.LanguagesCodeBlockDemo,
+          ),
+      },
+      {
+        path: 'terminal-output-code-block-demo',
+        loadComponent: () =>
+          import('../pages/docs/code-block/demos/terminal-output-code-block-demo').then(
+            (m) => m.TerminalOutputCodeBlockDemo,
+          ),
+      },
+      {
+        path: 'rtl-code-block-demo',
+        loadComponent: () =>
+          import('../pages/docs/code-block/demos/rtl-code-block-demo').then(
+            (m) => m.RtlCodeBlockDemo,
           ),
       },
     ],

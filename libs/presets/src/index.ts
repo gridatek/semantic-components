@@ -155,6 +155,27 @@ export interface ScTabsStyles {
   panel: string;
 }
 
+export type ScCodeBlockVariant = 'default' | 'destructive';
+export type ScCodeBlockLineVariant =
+  'default' | 'added' | 'removed' | 'highlighted';
+
+/** A code block's parts that change from style to style. */
+export interface ScCodeBlockStyles {
+  /** The block, by variant. */
+  root: (props: { variant?: ScCodeBlockVariant | null }) => string;
+  header: string;
+  title: string;
+  /** The buttons: in the header, or floating over the code. */
+  actions: string;
+  /** The scrolling `pre`. */
+  content: string;
+  /** The `code` in it: the lines' grid. */
+  code: string;
+  /** A line, by its mark. */
+  line: (props: { variant?: ScCodeBlockLineVariant | null }) => string;
+  footer: string;
+}
+
 /** A preset: the components' classes in one of shadcn's styles. */
 export interface ScPreset {
   alert: ScAlertStyles;
@@ -170,6 +191,7 @@ export interface ScPreset {
     size?: ScButtonSize | null;
   }) => string;
   card: ScCardStyles;
+  codeBlock: ScCodeBlockStyles;
   /** scFrame: a box's frame — the style's card radius, ring and shadow. */
   frame: string;
   controlGroup: (props: {

@@ -8,8 +8,8 @@ import { WrapCodeBlockDemo } from './wrap-code-block-demo';
   template: `
     <app-demo-container
       title="Wrap"
-      [code]="code"
       demoUrl="/demos/code-block/wrap-code-block-demo"
+      [code]="code"
     >
       <app-wrap-code-block-demo />
     </app-demo-container>
@@ -24,19 +24,19 @@ import {
   ScCodeBlockContent,
 } from '@semantic-components/ui/code-block';
 
-/** wrap: long lines break instead of scrolling. */
+/** wrap: long lines wrap instead of scrolling. */
 @Component({
   selector: 'app-wrap-code-block-demo',
   imports: [ScCodeBlock, ScCodeBlockContent],
   template: \`
     <div scCodeBlock>
-      <pre scCodeBlockContent wrap [code]="source" language="bash"></pre>
+      <pre scCodeBlockContent [code]="source" language="bash" wrap></pre>
     </div>
   \`,
-  host: { class: 'block w-full max-w-xl' },
+  host: { class: 'block w-full max-w-md' },
   encapsulation: ViewEncapsulation.None,
 })
 export class WrapCodeBlockDemo {
-  readonly source = \`npm install @semantic-components/ui @angular/cdk class-variance-authority clsx tailwind-merge tw-animate-css shiki\`;
+  readonly source = \`npx create-semantic-app my-application --template dashboard --style nova --package-manager pnpm --no-git --skip-install\`;
 }`;
 }

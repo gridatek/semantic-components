@@ -9,30 +9,11 @@ import {
   numberAttribute,
   signal,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
-import { type VariantProps, cva } from 'class-variance-authority';
+import type { ScCodeBlockLineVariant } from '@semantic-components/presets';
+import { cn, injectPreset } from '@semantic-components/ui';
 import { SC_CODE_HIGHLIGHTER, type ScCodeToken } from './code-highlighter';
 
-const lineVariants = cva(
-  "relative -mx-3 block min-h-lh px-3 group-data-[size=sm]/code-block:-mx-2.5 group-data-[size=sm]/code-block:px-2.5 before:min-w-6 before:text-end before:text-muted-foreground after:absolute after:start-1 after:top-0 after:text-muted-foreground after:select-none in-data-numbered:col-span-2 in-data-numbered:grid in-data-numbered:grid-cols-subgrid in-data-numbered:gap-x-3 in-data-numbered:[counter-increment:line] in-data-numbered:before:content-[counter(line)] in-data-numbered:before:select-none in-data-numbered:supports-[content:counter(line)_/_'']:before:content-[counter(line)_/_'']",
-  {
-    variants: {
-      variant: {
-        default: '',
-        added: "bg-muted after:content-['+']",
-        removed: "bg-destructive/10 after:text-destructive after:content-['−']",
-        highlighted: 'bg-muted',
-      },
-    },
-    defaultVariants: {
-      variant: 'default',
-    },
-  },
-);
-
-export type ScCodeBlockLineVariant = NonNullable<
-  VariantProps<typeof lineVariants>['variant']
->;
+export type { ScCodeBlockLineVariant } from '@semantic-components/presets';
 
 /**
  * The code (`[code]`), line by line — highlighted in its `language` when the
@@ -106,16 +87,13 @@ export class ScCodeBlockContent {
     return this.lines().map((_, i) => marks.get(i + 1) ?? 'default');
   });
 
-  protected readonly codeClass =
-    'grid min-h-lh min-w-max content-start in-data-numbered:grid-cols-[auto_1fr] in-data-wrap:min-w-0';
+  private readonly styles = injectPreset().codeBlock;
+  protected readonly codeClass = this.styles.code;
   protected readonly tokenClass =
     'text-(--shiki-light) dark:text-(--shiki-dark)';
 
   protected readonly class = computed(() =>
-    cn(
-      'min-h-0 min-w-0 scroll-fade-x scrollbar-thin overflow-auto px-3 py-3 text-start font-mono leading-relaxed outline-none group-has-data-[slot=code-block-footer]/code-block:pb-2 group-has-data-[slot=code-block-header]/code-block:pt-2 group-data-[size=sm]/code-block:px-2.5 group-data-[size=sm]/code-block:py-2.5 group-data-[size=sm]/code-block:group-has-data-[slot=code-block-header]/code-block:pt-1.5 data-wrap:scroll-fade-y data-wrap:wrap-break-word data-wrap:whitespace-pre-wrap',
-      this.classInput(),
-    ),
+    cn(this.styles.content, this.classInput()),
   );
 
   constructor() {
@@ -138,6 +116,6 @@ export class ScCodeBlockContent {
   }
 
   protected lineClass(variant: ScCodeBlockLineVariant): string {
-    return lineVariants({ variant });
+    return this.styles.line({ variant });
   }
 }

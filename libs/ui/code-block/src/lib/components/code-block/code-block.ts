@@ -1,25 +1,8 @@
 import { Directive, computed, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
-import { type VariantProps, cva } from 'class-variance-authority';
+import type { ScCodeBlockVariant } from '@semantic-components/presets';
+import { cn, injectPreset } from '@semantic-components/ui';
 
-const codeBlockVariants = cva(
-  'group/code-block relative flex w-full min-w-0 flex-col overflow-hidden rounded-lg text-sm has-[>[data-slot=code-block-content]:focus-visible]:ring-3 has-[>[data-slot=code-block-content]:focus-visible]:ring-ring/50 has-[>[data-slot=code-editor]:focus-within]:ring-3 has-[>[data-slot=code-editor]:focus-within]:ring-ring/50 has-[>[data-slot=code-editor][data-invalid]]:ring-3 has-[>[data-slot=code-editor][data-invalid]]:ring-destructive/20 data-[size=sm]:text-xs',
-  {
-    variants: {
-      variant: {
-        default:
-          'border border-input text-foreground has-[>[data-slot=code-block-content]:focus-visible]:border-ring has-[>[data-slot=code-editor]:focus-within]:border-ring has-[>[data-slot=code-editor][data-invalid]]:border-destructive dark:bg-input/30',
-        destructive:
-          'border border-destructive/30 text-destructive dark:border-destructive/40',
-      },
-    },
-    defaultVariants: {
-      variant: 'default',
-    },
-  },
-);
-
-export type ScCodeBlockVariants = VariantProps<typeof codeBlockVariants>;
+export type ScCodeBlockVariants = { variant?: ScCodeBlockVariant | null };
 
 /**
  * A block of code: its header (title, actions), its content — highlighted
@@ -40,7 +23,29 @@ export class ScCodeBlock {
   readonly variant = input<ScCodeBlockVariants['variant']>('default');
   readonly size = input<'default' | 'sm'>('default');
 
-  protected readonly class = computed(() =>
-    cn(codeBlockVariants({ variant: this.variant() }), this.classInput()),
-  );
+  private readonly styles = injectPreset().codeBlock;
+
+  protected readonly class = computed(() => {
+    const root = this.styles.root({ variant: this.variant() });
+    return cn(root, editorStates(root), this.classInput());
+  });
+}
+
+/**
+ * A code editor in the block (the Code Editor): the preset's focus look for
+ * the code, given to the editor while it has focus; a ring when invalid.
+ */
+function editorStates(root: string): string {
+  const focused = 'has-[>[data-slot=code-block-content]:focus-visible]:';
+  return [
+    ...root
+      .split(/s+/)
+      .filter((c) => c.includes(focused))
+      .map((c) =>
+        c.replace(focused, 'has-[>[data-slot=code-editor]:focus-within]:'),
+      ),
+    'has-[>[data-slot=code-editor][data-invalid]]:ring-3',
+    'has-[>[data-slot=code-editor][data-invalid]]:ring-destructive/20',
+    'has-[>[data-slot=code-editor][data-invalid]]:border-destructive',
+  ].join(' ');
 }
