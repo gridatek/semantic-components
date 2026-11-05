@@ -39,6 +39,16 @@ test('Usage: a modal dialog, centred, named and described; the ✕ in its corner
     page.getByRole('dialog', { name: 'Edit profile' }),
   ).toBeVisible();
   await expect(d).toHaveAccessibleDescription(/Make changes to your profile/);
+  // Focus starts on Name, its text selected (cdkFocusInitial, scSelectOnFocus).
+  const name = page.getByRole('textbox', { name: 'Name', exact: true });
+  await expect(name).toBeFocused();
+  await expect
+    .poll(() =>
+      name.evaluate(
+        (el: HTMLInputElement) => el.selectionEnd! - el.selectionStart!,
+      ),
+    )
+    .toBe('Pedro Duarte'.length);
   const offset = await d.evaluate((el) => {
     const rect = el.getBoundingClientRect();
     return {
@@ -71,14 +81,16 @@ test('Closing: the ✕, Cancel, Escape, a click outside — focus back on the tr
   await expect(trigger).toBeFocused();
 
   await trigger.click();
-  // Focus in the dialog first: on its first button, the ✕.
-  await expect(page.getByRole('button', { name: 'Close' })).toBeFocused();
+  // Focus in the dialog first: on Name (cdkFocusInitial).
+  await expect(
+    page.getByRole('textbox', { name: 'Name', exact: true }),
+  ).toBeFocused();
   await press(page, 'Escape');
   await expect(dialog(page)).toBeHidden();
   await expect(trigger).toBeFocused();
 
   await trigger.click();
-  await expect(page.getByRole('button', { name: 'Close' })).toBeFocused();
+  await expect(dialog(page)).toBeVisible();
   // Outside it: on the backdrop.
   await page
     .locator('.cdk-overlay-backdrop')

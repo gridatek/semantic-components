@@ -74,6 +74,7 @@ import {
   ScFieldGroup,
   ScInput,
   ScLabel,
+  ScSelectOnFocus,
 } from '@semantic-components/ui';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
@@ -94,6 +95,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
     ScField,
     ScLabel,
     ScInput,
+    ScSelectOnFocus,
     SiXIcon,
   ],
   template: \`
@@ -114,7 +116,12 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
           <div scFieldGroup>
             <div scField>
               <label scLabel>Name</label>
-              <input scInput value="Pedro Duarte" />
+              <input
+                cdkFocusInitial
+                scSelectOnFocus="program"
+                scInput
+                value="Pedro Duarte"
+              />
             </div>
             <div scField>
               <label scLabel>Username</label>
