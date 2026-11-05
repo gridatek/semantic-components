@@ -40,10 +40,9 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
       <ng-template scDrawerPortal>
         <div scDrawer>
           <button
-            scButton
+            scDrawerClose
             variant="ghost"
             size="icon"
-            scDrawerClose
             class="absolute top-4 right-4"
           >
             <svg siXIcon></svg>

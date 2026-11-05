@@ -56,7 +56,7 @@ import {
             </div>
           </div>
           <div scDrawerFooter>
-            <button scButton class="w-full" scDrawerClose>
+            <button scDrawerClose variant="default" class="w-full">
               Mark all as read
             </button>
           </div>

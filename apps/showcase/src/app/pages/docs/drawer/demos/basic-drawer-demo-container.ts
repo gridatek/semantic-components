@@ -92,10 +92,10 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
             </div>
           </div>
           <div scDrawerFooter>
-            <button scButton class="w-full" scDrawerClose>Submit</button>
-            <button scButton variant="outline" class="w-full" scDrawerClose>
-              Cancel
+            <button scDrawerClose variant="default" class="w-full">
+              Submit
             </button>
+            <button scDrawerClose class="w-full">Cancel</button>
           </div>
         </div>
       </ng-template>

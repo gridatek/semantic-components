@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScButton,
   ScToast,
   ScToastAction,
   ScToastClose,
@@ -21,7 +20,6 @@ import {
 @Component({
   selector: 'app-toaster',
   imports: [
-    ScButton,
     ScToastTemplate,
     ScToast,
     ScToastIcon,
@@ -63,7 +61,7 @@ import {
         @if (toast.action) {
           <button scToastAction>{{ toast.action.label }}</button>
         }
-        <button scButton variant="ghost" size="icon-xs" scToastClose>
+        <button scToastClose>
           <svg siXIcon></svg>
           <span class="sr-only">Close</span>
         </button>

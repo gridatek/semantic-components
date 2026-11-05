@@ -28,7 +28,7 @@ Model: `libs/ui/src/lib/components/pagination/pagination-last.ts`.
 
 These add behaviour to whatever button the consumer writes, `scButton` or another part:
 
-- **Triggers and closes that go on any button** — `scDialogTrigger`, `scToastClose` (straight in the toast, the ✕: it places it), `scSheetTrigger`, `scDrawerTrigger`, `scDrawerClose`, `scPopoverTrigger`, `scAlertDialogTrigger`, `scNativeDialogTrigger`, `scThemeModeToggle` (on a `scButton`, a `scSidebarMenuButton`, a menu item…).
+- **Triggers that go on any button** — `scDialogTrigger`, `scSheetTrigger`, `scDrawerTrigger`, `scPopoverTrigger`, `scAlertDialogTrigger`, `scNativeDialogTrigger`, `scThemeModeToggle` (on a `scButton`, a `scSidebarMenuButton`, a menu item…).
 
 And these keep a look of their own, as they are not buttons to the eye:
 
@@ -62,7 +62,7 @@ Done the same way for the toast (`scToastClose`: the toast places a direct-child
 
 ### Revised (2026-11-05): the close styles itself again, the dialog still places it
 
-The user changed their mind: `scDialogClose` is the preset's button again (`variant`, `size` inputs; ghost / icon-sm by default, for the ✕), and keeps `data-slot="dialog-close"`: the dialog still puts a direct-child close in its corner. A footer close sets its look: `<button scDialogClose variant="outline" size="default">Cancel</button>`, no `scButton`. So the problem above (a Cancel pulled into the corner) stays solved by the place, not by dropping the look. `scToastClose` is unchanged (behaviour only) for now.
+The user changed their mind: `scDialogClose` is the preset's button again (`variant`, `size` inputs; ghost / icon-sm by default, for the ✕), and keeps `data-slot="dialog-close"`: the dialog still puts a direct-child close in its corner. A footer close sets its look: `<button scDialogClose variant="outline" size="default">Cancel</button>`, no `scButton`. So the problem above (a Cancel pulled into the corner) stays solved by the place, not by dropping the look. The same for `scToastClose` (ghost / icon-xs, placed by the toast) and `scDrawerClose` (outline / default: shadcn's Cancel; the drawer places nothing).
 
 ### What it changes in the rule
 

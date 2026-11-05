@@ -22,18 +22,18 @@ ScDrawerProvider (root wrapper - manages open state + overlay lifecycle)
 
 ## Components
 
-| Component             | Selector                      | Description                                        |
-| --------------------- | ----------------------------- | -------------------------------------------------- |
-| `ScDrawerProvider`    | `div[scDrawerProvider]`       | Root wrapper, manages open state + overlay         |
-| `ScDrawerTrigger`     | `button[scDrawerTrigger]`     | Button that opens the drawer                       |
-| `ScDrawerPortal`      | `ng-template[scDrawerPortal]` | Directive marking lazy content for the overlay     |
-| `ScDrawer`            | `div[scDrawer]`               | Drawer directive with directional slide animations |
-| `ScDrawerHeader`      | `div[scDrawerHeader]`         | Header section container                           |
-| `ScDrawerTitle`       | `h2[scDrawerTitle]`           | Drawer title (aria-labelledby)                     |
-| `ScDrawerDescription` | `p[scDrawerDescription]`      | Drawer description (aria-describedby)              |
-| `ScDrawerHandle`      | `div[scDrawerHandle]`         | Visual drag handle indicator                       |
-| `ScDrawerFooter`      | `div[scDrawerFooter]`         | Footer section for actions                         |
-| `ScDrawerClose`       | `button[scDrawerClose]`       | Close button (sets `type="button"` automatically)  |
+| Component             | Selector                      | Description                                                                      |
+| --------------------- | ----------------------------- | -------------------------------------------------------------------------------- |
+| `ScDrawerProvider`    | `div[scDrawerProvider]`       | Root wrapper, manages open state + overlay                                       |
+| `ScDrawerTrigger`     | `button[scDrawerTrigger]`     | Button that opens the drawer                                                     |
+| `ScDrawerPortal`      | `ng-template[scDrawerPortal]` | Directive marking lazy content for the overlay                                   |
+| `ScDrawer`            | `div[scDrawer]`               | Drawer directive with directional slide animations                               |
+| `ScDrawerHeader`      | `div[scDrawerHeader]`         | Header section container                                                         |
+| `ScDrawerTitle`       | `h2[scDrawerTitle]`           | Drawer title (aria-labelledby)                                                   |
+| `ScDrawerDescription` | `p[scDrawerDescription]`      | Drawer description (aria-describedby)                                            |
+| `ScDrawerHandle`      | `div[scDrawerHandle]`         | Visual drag handle indicator                                                     |
+| `ScDrawerFooter`      | `div[scDrawerFooter]`         | Footer section for actions                                                       |
+| `ScDrawerClose`       | `button[scDrawerClose]`       | Closes it: the preset's button, `variant` (`outline`), `size`, `type` (`button`) |
 
 ## Usage
 
@@ -54,7 +54,7 @@ ScDrawerProvider (root wrapper - manages open state + overlay lifecycle)
       </div>
       <div scDrawerFooter>
         <button scDrawerClose>Cancel</button>
-        <button scDrawerClose>Submit</button>
+        <button scDrawerClose variant="default">Submit</button>
       </div>
     </div>
   </ng-template>
