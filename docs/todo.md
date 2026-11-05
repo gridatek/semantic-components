@@ -20,6 +20,8 @@ Open work found along the way, kept for later — tick an item when it's done. N
 
 - [ ] **Spinner: hidden from screen readers by its icon** — `<svg scSpinner siLoaderCircleIcon>`: the icon directive sets `aria-hidden="true"` on the same `svg` as the spinner's `role="status"` and name, so it is never announced (seen in Attachment's demos, 2026-11-05; an older spec reads `svg[role=status]` around it). For Spinner's turn: the spinner removes `aria-hidden`, or wraps.
 
+- [ ] **Tooltip: rich content** — `[scTooltipTrigger]` takes a string, so a tooltip can't hold a `<kbd>` (shadcn's Kbd Tooltip example: "Save Changes <Kbd>S</Kbd>"). For Tooltip's turn; the key's tooltip colours (`in-data-[slot=tooltip-content]:…`) are already in the `kbd` preset (2026-11-05).
+
 ## Larger items
 
 - [ ] **Part names across the whole library**, after the styles rewrite (the user, 2026-11-05). `…Content` only for an `ng-template` rendered later (`ng-template[scMenuContent]`; the rule in [component-design-principles.md](component-design-principles.md#content-only-for-content-rendered-later)), never for one section between a header and a footer; `ScCardContent` breaks it, and `…Body` (ScCollapsibleBody, ScEmptyBody, ScFieldBody, ScItemBody, ScNativeDialogBody, ScTableBody) has no defined meaning. Find the name for a section, then check every part's name.

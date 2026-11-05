@@ -460,6 +460,20 @@ A note between messages (`div[scMarker]`; restyled 2026-11-05): shadcn's Marker.
 - **A button host** (`button[scMarker]`, `type="button"`) for shadcn's `render={<button />}`; the hover colour is the part's (shadcn's example writes it in the consumer's className).
 - **The examples**: Variants, Status (our Spinner), Shimmer, Separator, Border, With icon, Links and buttons, RTL.
 
+## Kbd
+
+A key (`kbd[scKbd]`; restyled 2026-11-05): shadcn's Kbd. A shadcn component, so no web research: shadcn's reference app, its docs page and 6 examples (2026-11-05).
+
+| Library                                                                              | What to read                                                                                                                                    |
+| ------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| shadcn Kbd (`shadcn-reference/presets/*/kbd.tsx`, `apps/v4/examples/base/kbd-*.tsx`) | Only the key changes per style (corners, size, text; an input group's background in luma, sera, rhea); Group, Button, Tooltip, Input Group, RTL |
+
+**Taken:**
+
+- **Each preset's look** as the `kbd` key (a string); the group stays in the part.
+- **The examples**: Group, Button, Input group, RTL — ours (Shortcuts, Arrow keys, Function keys…) folded into Usage. Symbols named in sr-only text.
+- **Not yet** the Tooltip example: our tooltip takes plain text (docs/todo.md).
+
 ## Control Group
 
 An input or a select joined with its buttons (`div[scControlGroup]`): shadcn's Button Group, renamed for what it is for (the user, 2026-10-30: it is only useful when inputs or selects mix with buttons; buttons alone are on the Button page). A shadcn component, so no web research: Base UI and shadcn's reference app (2026-10-30).

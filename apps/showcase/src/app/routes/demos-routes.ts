@@ -2657,52 +2657,38 @@ export const demosRoutes: Route[] = [
     path: 'demos/kbd',
     children: [
       {
-        path: 'basic-kbd-demo',
+        path: 'kbd-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/kbd/demos/basic-kbd-demo').then(
-            (m) => m.BasicKbdDemo,
+          import('../pages/docs/kbd/demos/kbd-usage-demo').then(
+            (m) => m.KbdUsageDemo,
           ),
       },
       {
-        path: 'shortcuts-kbd-demo',
+        path: 'group-kbd-demo',
         loadComponent: () =>
-          import('../pages/docs/kbd/demos/shortcuts-kbd-demo').then(
-            (m) => m.ShortcutsKbdDemo,
+          import('../pages/docs/kbd/demos/group-kbd-demo').then(
+            (m) => m.GroupKbdDemo,
           ),
       },
       {
-        path: 'variants-kbd-demo',
+        path: 'button-kbd-demo',
         loadComponent: () =>
-          import('../pages/docs/kbd/demos/variants-kbd-demo').then(
-            (m) => m.VariantsKbdDemo,
+          import('../pages/docs/kbd/demos/button-kbd-demo').then(
+            (m) => m.ButtonKbdDemo,
           ),
       },
       {
-        path: 'arrow-keys-kbd-demo',
+        path: 'input-group-kbd-demo',
         loadComponent: () =>
-          import('../pages/docs/kbd/demos/arrow-keys-kbd-demo').then(
-            (m) => m.ArrowKeysKbdDemo,
+          import('../pages/docs/kbd/demos/input-group-kbd-demo').then(
+            (m) => m.InputGroupKbdDemo,
           ),
       },
       {
-        path: 'function-keys-kbd-demo',
+        path: 'rtl-kbd-demo',
         loadComponent: () =>
-          import('../pages/docs/kbd/demos/function-keys-kbd-demo').then(
-            (m) => m.FunctionKeysKbdDemo,
-          ),
-      },
-      {
-        path: 'inline-kbd-demo',
-        loadComponent: () =>
-          import('../pages/docs/kbd/demos/inline-kbd-demo').then(
-            (m) => m.InlineKbdDemo,
-          ),
-      },
-      {
-        path: 'complex-shortcuts-kbd-demo',
-        loadComponent: () =>
-          import('../pages/docs/kbd/demos/complex-shortcuts-kbd-demo').then(
-            (m) => m.ComplexShortcutsKbdDemo,
+          import('../pages/docs/kbd/demos/rtl-kbd-demo').then(
+            (m) => m.RtlKbdDemo,
           ),
       },
     ],

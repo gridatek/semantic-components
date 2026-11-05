@@ -22,6 +22,7 @@ import {
   inputGroupButton,
   inputGroupText,
 } from './input-group';
+import { kbd } from './kbd';
 import { marker } from './marker';
 import { menu } from './menu';
 import { menubar } from './menubar';
@@ -57,6 +58,7 @@ export const luma: ScPreset = {
   inputGroupAddon,
   inputGroupButton,
   inputGroupText,
+  kbd,
   menu,
   menubar,
   pagination,

@@ -1,6 +1,8 @@
 # Kbd
 
-Displays a keyboard key or shortcut indicator styled as an inline badge.
+A key or a shortcut, as it is pressed — in the look of the app's preset (`kbd` key: shadcn's in each of the eight styles). In a button (`data-icon="inline-end"`), an input group or a tooltip it takes their colours.
+
+A key is read as text: where a symbol alone is unclear, write its name too (`<kbd scKbd>⌘<span class="sr-only"> Command</span></kbd>`).
 
 ## Usage
 

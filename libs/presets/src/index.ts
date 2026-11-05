@@ -304,6 +304,8 @@ export interface ScPreset {
   /** Over the preset's button, in an input group. */
   inputGroupButton: (props: { size?: ScInputGroupButtonSize | null }) => string;
   inputGroupText: string;
+  /** A key. */
+  kbd: string;
   marker: ScMarkerStyles;
   menu: ScMenuStyles;
   menubar: ScMenubarStyles;

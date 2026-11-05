@@ -1,6 +1,12 @@
 import { Directive, computed, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 
+/**
+ * A key, in the preset's look — in a button, an input group or a tooltip it
+ * takes their colours. Read as text: where a symbol alone is unclear, write
+ * its name too (⌘ with sr-only "Command").
+ */
 @Directive({
   selector: 'kbd[scKbd]',
   host: {
@@ -9,12 +15,8 @@ import { cn } from '../../utils';
   },
 })
 export class ScKbd {
+  private readonly styles = injectPreset().kbd;
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
-    cn(
-      'bg-muted text-muted-foreground in-data-[slot=tooltip-content]:bg-background/20 in-data-[slot=tooltip-content]:text-background dark:in-data-[slot=tooltip-content]:bg-background/10 h-5 w-fit min-w-5 gap-1 rounded-sm px-1 font-sans text-xs font-medium [&_svg:not([class*=size-])]:size-3 pointer-events-none inline-flex items-center justify-center select-none',
-      this.classInput(),
-    ),
-  );
+  protected readonly class = computed(() => cn(this.styles, this.classInput()));
 }
