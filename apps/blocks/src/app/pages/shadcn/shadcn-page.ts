@@ -221,7 +221,12 @@ import {
                 </button>
                 <ng-template scDialogPortal>
                   <div scDialog class="sm:max-w-md">
-                    <button scDialogClose>
+                    <button
+                      scButton
+                      variant="ghost"
+                      size="icon-sm"
+                      scDialogClose
+                    >
                       <svg siXIcon></svg>
                       <span class="sr-only" i18n="@@shadcn.dialog.close"
                         >Close</span
@@ -262,7 +267,12 @@ import {
                 </button>
                 <ng-template scDialogPortal>
                   <div scDialog class="sm:max-w-md">
-                    <button scDialogClose>
+                    <button
+                      scButton
+                      variant="ghost"
+                      size="icon-sm"
+                      scDialogClose
+                    >
                       <svg siXIcon></svg>
                       <span class="sr-only" i18n="@@shadcn.dialog.close"
                         >Close</span
@@ -314,7 +324,12 @@ import {
                 </button>
                 <ng-template scDialogPortal>
                   <div scDialog class="sm:max-w-md">
-                    <button scDialogClose>
+                    <button
+                      scButton
+                      variant="ghost"
+                      size="icon-sm"
+                      scDialogClose
+                    >
                       <svg siXIcon></svg>
                       <span class="sr-only" i18n="@@shadcn.dialog.close"
                         >Close</span

@@ -1,198 +1,47 @@
-# ScDialog Components
+# Dialog
 
-A set of Angular components for creating accessible modal dialogs with shadcn/ui styling.
-
-## Architecture
-
-The components follow a dependency injection (DI) pattern where child components inject the parent `ScDialogProvider` to access shared state. `ScDialogProvider` owns all overlay lifecycle logic (CDK overlay, backdrop, focus trap). The `ScDialogPortal` directive marks the lazy content template that gets portaled into the overlay.
-
-```
-ScDialogProvider (root wrapper - manages open state + overlay lifecycle)
-├── ScDialogTrigger (button that opens dialog)
-└── ng-template[scDialogPortal] (lazy content, portaled to CDK overlay)
-    └── ScDialog (dialog container)
-        ├── ScDialogClose (close button)
-        ├── ScDialogHeader
-        │   ├── ScDialogTitle
-        │   └── ScDialogDescription
-        ├── (user content)
-        └── ScDialogFooter
-```
-
-## Components
-
-| Component             | Selector                      | Description                                       |
-| --------------------- | ----------------------------- | ------------------------------------------------- |
-| `ScDialogProvider`    | `div[scDialogProvider]`       | Root wrapper, manages open state + overlay        |
-| `ScDialogTrigger`     | `button[scDialogTrigger]`     | Button that opens the dialog                      |
-| `ScDialogPortal`      | `ng-template[scDialogPortal]` | Directive marking lazy content for the overlay    |
-| `ScDialog`            | `div[scDialog]`               | Dialog panel with animations                      |
-| `ScDialogHeader`      | `div[scDialogHeader]`         | Header section container                          |
-| `ScDialogTitle`       | `h2[scDialogTitle]`           | Dialog title (aria-labelledby)                    |
-| `ScDialogDescription` | `p[scDialogDescription]`      | Dialog description (aria-describedby)             |
-| `ScDialogFooter`      | `div[scDialogFooter]`         | Footer section for actions                        |
-| `ScDialogClose`       | `button[scDialogClose]`       | Close button (sets `type="button"` automatically) |
+A window over the page, which waits until it is closed: the page behind it can't be reached. In the look of the app's preset (shadcn's Dialog).
 
 ## Usage
 
-### Basic Dialog
-
 ```html
-<div scDialogProvider [(open)]="isOpen">
-  <button scDialogTrigger>Open Dialog</button>
+<div scDialogProvider [(open)]="open">
+  <button scButton variant="outline" scDialogTrigger>Edit profile</button>
   <ng-template scDialogPortal>
     <div scDialog>
-      <button scDialogClose>
-        <svg><!-- X icon --></svg>
+      <button scButton variant="ghost" size="icon-sm" scDialogClose>
+        <svg siXIcon></svg>
         <span class="sr-only">Close</span>
       </button>
       <div scDialogHeader>
-        <h2 scDialogTitle>Dialog Title</h2>
-        <p scDialogDescription>Dialog description goes here.</p>
+        <h2 scDialogTitle>Edit profile</h2>
+        <p scDialogDescription>Make changes to your profile here.</p>
       </div>
-      <!-- Your content -->
+      …
       <div scDialogFooter>
-        <button>Cancel</button>
-        <button>Save</button>
+        <button scButton variant="outline" scDialogClose>Cancel</button>
+        <button scButton (click)="save()">Save changes</button>
       </div>
     </div>
   </ng-template>
 </div>
 ```
 
-### Controlled Dialog
+## Closing
 
-You can control the dialog state programmatically using the `open` model:
+- `scDialogClose` closes it, on any button: the ✕ straight in the dialog (the dialog puts it in its corner), Cancel or Done in the footer. It only closes; the look is the button's.
+- When your code runs first (Save checks and sends the form), the button is yours and closes the dialog through `[(open)]` when it is done, or keeps it open to show what is wrong.
+- Escape and a click outside close it too. Focus stays in it while it is open, starts on its first focusable element, and goes back to what opened it.
 
-```typescript
-@Component({
-  template: `
-    <div scDialogProvider [(open)]="isOpen">
-      <button scDialogTrigger>Open</button>
-      <ng-template scDialogPortal>
-        <div scDialog>
-          <!-- content -->
-        </div>
-      </ng-template>
-    </div>
-  `,
-})
-export class MyComponent {
-  isOpen = signal(false);
+## API reference
 
-  openDialog() {
-    this.isOpen.set(true);
-  }
+| Part                                   | Selector                                       | Inputs                                                                                                                                   |
+| -------------------------------------- | ---------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `ScDialogProvider`                     | `div[scDialogProvider]`                        | `open` (`[(open)]`), `class` — renders the dialog centred over the backdrop                                                              |
+| `ScDialogTrigger`                      | `button[scDialogTrigger]`                      | `class` — opens it; behaviour only                                                                                                       |
+| `ScDialogPortal`, `ScDialog`           | `ng-template[scDialogPortal]`, `div[scDialog]` | `class` — role `dialog`, modal; named by its title, described by its description; takes the direction and language of where it is opened |
+| `ScDialogClose`                        | `button[scDialogClose]`                        | `class` — closes it; behaviour only                                                                                                      |
+| `ScDialogHeader`, `ScDialogFooter`     | `div[…]`                                       | `class`                                                                                                                                  |
+| `ScDialogTitle`, `ScDialogDescription` | `h2[scDialogTitle]`, `p[scDialogDescription]`  | `class`                                                                                                                                  |
 
-  closeDialog() {
-    this.isOpen.set(false);
-  }
-}
-```
-
-### Form Dialog
-
-```html
-<div scDialogProvider [(open)]="isOpen">
-  <button scDialogTrigger>Edit Profile</button>
-  <ng-template scDialogPortal>
-    <form>
-      <div scDialog>
-        <button scDialogClose>
-          <svg><!-- X icon --></svg>
-        </button>
-        <div scDialogHeader>
-          <h2 scDialogTitle>Edit profile</h2>
-          <p scDialogDescription>Make changes to your profile here.</p>
-        </div>
-        <div class="grid gap-4 py-4">
-          <div class="grid grid-cols-4 items-center gap-4">
-            <label for="name" class="text-right">Name</label>
-            <input id="name" class="col-span-3" />
-          </div>
-        </div>
-        <div scDialogFooter>
-          <button type="submit">Save changes</button>
-        </div>
-      </div>
-    </form>
-  </ng-template>
-</div>
-```
-
-## Keyboard Navigation
-
-| Key      | Action                 |
-| -------- | ---------------------- |
-| `Escape` | Close dialog           |
-| `Tab`    | Navigate within dialog |
-
-## How It Works
-
-### State Management
-
-`ScDialogProvider` uses a `model` signal for the `open` state:
-
-```typescript
-readonly open = model<boolean>(false);
-```
-
-Child components inject `ScDialogProvider` to read or modify this state:
-
-```typescript
-// ScDialogTrigger
-openDialog(): void {
-  this.dialogProvider.open.set(true);
-}
-
-// ScDialogClose
-closeDialog(): void {
-  this.dialogProvider.open.set(false);
-}
-```
-
-### Overlay Management
-
-`ScDialogProvider` creates a CDK overlay and attaches/detaches the `scDialogPortal` template based on state:
-
-```typescript
-effect(() => {
-  if (this.open()) {
-    this.attachDialog();
-  } else {
-    this.detachDialog();
-  }
-});
-```
-
-The `scDialogPortal` directive marks the `ng-template` whose content is lazily instantiated into the overlay only when the dialog opens.
-
-### Animations
-
-`ScDialog` animates with Angular's `animate.enter` / `animate.leave`: it fades and zooms in (with the backdrop behind it fading in) when it is shown, and back out when it goes — Angular removes it once that animation ends.
-
-## Accessibility
-
-- `role="dialog"` on the content
-- `aria-modal="true"` for modal behavior
-- `aria-labelledby` linked to `ScDialogTitle`
-- `aria-describedby` linked to `ScDialogDescription`
-- `aria-haspopup="dialog"` on the trigger
-- `aria-expanded` reflects open state on trigger
-- Focus trapped within the dialog
-- Escape key closes the dialog
-- Click outside (backdrop) closes the dialog
-
-## Customization
-
-All components accept a `class` input for custom styling:
-
-```html
-<div scDialog class="max-w-2xl">
-  <!-- wider dialog -->
-</div>
-
-<div scDialogFooter class="flex-row-reverse">
-  <!-- reversed button order -->
-</div>
-```
+Every part's classes are the preset's (`injectPreset().dialog`: `content`, `close` — the ✕'s place and fill —, `header`, `footer`, `title`, `description`): shadcn's Dialog, in each style. The backdrop is the shared `backdrop` key.

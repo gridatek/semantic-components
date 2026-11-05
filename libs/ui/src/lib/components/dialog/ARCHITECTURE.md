@@ -113,7 +113,7 @@ The animation system preserves accessibility:
   <button scDialogTrigger scButton>Open</button>
   <ng-template scDialogPortal>
     <div scDialog>
-      <button scDialogClose>...</button>
+      <button scButton variant="ghost" size="icon-sm" scDialogClose>...</button>
       <div scDialogHeader>
         <h2 scDialogTitle>Title</h2>
         <p scDialogDescription>Description</p>

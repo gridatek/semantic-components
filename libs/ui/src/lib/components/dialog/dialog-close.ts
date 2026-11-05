@@ -1,35 +1,30 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
-import { ScButtonVariants } from '../button';
 import { ScDialogProvider } from './dialog-provider';
 
+/**
+ * Closes the dialog, on any button — the ✕ (`scButton variant="ghost"
+ * size="icon-sm"`, straight in the dialog: in its corner), Cancel, Done.
+ * Behaviour only: the look is the button's. Code to run before closing
+ * (Save) closes through the provider's `[(open)]` instead.
+ */
 @Directive({
   selector: 'button[scDialogClose]',
   host: {
+    'data-slot': 'dialog-close',
     type: 'button',
     '[class]': 'class()',
-    '(click)': 'closeDialog()',
+    '(click)': 'close()',
   },
 })
 export class ScDialogClose {
-  private readonly buttonStyles = injectPreset().button;
-
   private readonly dialogProvider = inject(ScDialogProvider);
 
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly variant = input<ScButtonVariants['variant']>('ghost');
-  readonly size = input<ScButtonVariants['size']>('icon-sm');
 
-  protected readonly class = computed(() =>
-    cn(
-      this.buttonStyles({ variant: this.variant(), size: this.size() }),
-      'absolute top-2 end-2',
-      this.classInput(),
-    ),
-  );
+  protected readonly class = computed(() => cn(this.classInput()));
 
-  protected closeDialog(): void {
+  protected close(): void {
     this.dialogProvider.open.set(false);
   }
 }

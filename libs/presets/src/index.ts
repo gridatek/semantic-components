@@ -176,6 +176,18 @@ export interface ScCodeBlockStyles {
   footer: string;
 }
 
+/** A dialog's parts that change from style to style. */
+export interface ScDialogStyles {
+  /** The panel. */
+  content: string;
+  /** A close straight in the panel (the ✕): its place and fill, as `[&>[data-slot=dialog-close]]:…` classes. */
+  close: string;
+  header: string;
+  footer: string;
+  title: string;
+  description: string;
+}
+
 /** A preset: the components' classes in one of shadcn's styles. */
 export interface ScPreset {
   alert: ScAlertStyles;
@@ -199,6 +211,7 @@ export interface ScPreset {
   }) => string;
   /** The text beside a group's buttons. */
   controlGroupText: string;
+  dialog: ScDialogStyles;
   /** The Menu's parts in a context menu. */
   contextMenu: ScMenuStyles;
   /** A text field (`input[scInput]`, and the inputs that look like one). */

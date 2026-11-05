@@ -82,6 +82,8 @@ Do **not** "fix" these to match shadcn:
 - **Context Menu: the Menu's parts, a focusable area** — no ContextMenuItem…: the Menu's parts take the preset's `contextMenu` look in a context menu. Its area (`scContextMenuTrigger`) is focusable — Shift+F10 and the Menu key open the menu — so it adds `focus-visible:ring-3 focus-visible:ring-ring/50`; shadcn's has `select-none` only. `side` is logical (`start` / `end`).
 - **Tabs: our states** — `aria-selected:` for `data-active:`, and the root's `data-[orientation=…]` for `data-horizontal:` / `data-vertical:` (`libs/presets/*/src/tabs.ts`). A hidden panel is `inert`, so the part adds `[[inert]]:hidden`.
 - **Code Block: terminal dim text readable** — Shiki draws ANSI dim at half opacity (`#rrggbb80`); our highlighter gives it `--muted-foreground` (contrast over opacity, above). A code editor in the block takes the preset's focus classes for the code (`has-[>[data-slot=code-editor]:focus-within]`).
+- **Dialog: the ✕ is yours, placed by the dialog** — shadcn's `DialogContent` draws its ✕; ours is your `scButton` with `scDialogClose`, put in the corner by the dialog (the preset's `close`, as `[&>[data-slot=dialog-close]]:` classes).
+- **Code: GitHub dark default, not GitHub dark** — the dark theme's comments (`#6a737d`) are 3.79:1 on the code's background; GitHub's default dark (`#8b949e`) keeps 4.5:1. Light stays GitHub's high-contrast theme. The Code Editor's palette follows.
 - **Pagination: parts on buttons or your links** — the parts set no `href`: a link follows the one you give it.
 - **Decomposition** — shadcn ships one function per part in one file; we split into directives, one per file, so one shadcn part can map to several of ours.
 

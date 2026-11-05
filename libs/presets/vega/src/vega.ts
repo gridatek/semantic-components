@@ -10,6 +10,7 @@ import { card } from './card';
 import { codeBlock } from './code-block';
 import { contextMenu } from './context-menu';
 import { controlGroup, controlGroupText } from './control-group';
+import { dialog } from './dialog';
 import { frame } from './frame';
 import { input } from './input';
 import {
@@ -39,6 +40,7 @@ export const vega: ScPreset = {
   frame,
   controlGroup,
   controlGroupText,
+  dialog,
   contextMenu,
   input,
   inputGroup,

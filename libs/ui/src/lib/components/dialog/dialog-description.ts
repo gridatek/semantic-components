@@ -1,4 +1,5 @@
 import { Directive, computed, inject, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 import { ScDialog } from './dialog';
 
@@ -10,13 +11,11 @@ import { ScDialog } from './dialog';
   },
 })
 export class ScDialogDescription {
+  private readonly styles = injectPreset().dialog;
   readonly dialog = inject(ScDialog);
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn(
-      'text-muted-foreground *:[a]:hover:text-foreground text-sm *:[a]:underline *:[a]:underline-offset-3',
-      this.classInput(),
-    ),
+    cn(this.styles.description, this.classInput()),
   );
 }

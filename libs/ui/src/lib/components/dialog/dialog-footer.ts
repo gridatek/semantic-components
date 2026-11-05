@@ -1,4 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 
 @Directive({
@@ -8,12 +9,10 @@ import { cn } from '../../utils';
   },
 })
 export class ScDialogFooter {
+  private readonly styles = injectPreset().dialog;
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn(
-      'bg-muted/50 -mx-4 -mb-4 rounded-b-xl border-t p-4 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end',
-      this.classInput(),
-    ),
+    cn(this.styles.footer, this.classInput()),
   );
 }

@@ -3,6 +3,7 @@ import { TemplatePortal } from '@angular/cdk/portal';
 import { NgTemplateOutlet } from '@angular/common';
 import {
   Component,
+  ElementRef,
   TemplateRef,
   ViewContainerRef,
   ViewEncapsulation,
@@ -15,7 +16,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { ScFocusTrap } from '../../utilities';
-import { cn } from '../../utils';
+import { cn, elementDirection } from '../../utils';
 import { ScBackdrop } from '../backdrop';
 import { ScDialogPortal } from './dialog-portal';
 
@@ -37,6 +38,17 @@ import { ScDialogPortal } from './dialog-portal';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScDialogProvider {
+  private readonly host =
+    inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
+
+  /**
+   * The direction and language of where the dialog was opened from: it is
+   * rendered at the end of the page, outside them.
+   */
+  readonly direction = (): 'ltr' | 'rtl' => elementDirection(this.host);
+  readonly lang = (): string | null =>
+    this.host.closest('[lang]')?.getAttribute('lang') ?? null;
+
   private readonly overlay = inject(Overlay);
   private readonly viewContainerRef = inject(ViewContainerRef);
 

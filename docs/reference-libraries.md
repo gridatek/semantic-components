@@ -349,6 +349,27 @@ Code to read and copy (`div[scCodeBlock]`, entry `ui/code-block`): shadcn's Code
 - **Terminal output** (`language="ansi"`): Shiki's own; its dim text in `--muted-foreground`, not at half opacity.
 - **Not**: the integrations (Trace, Message, Chat, Typeset, Markdown, Streaming) — on those components' pages; shadcn's `aria-label="Copy"` default — the copy button's name is yours.
 
+## Dialog
+
+A window over the page (`div[scDialogProvider]`): shadcn's Dialog. Its styles, its docs' examples, and how other libraries close a dialog (2026-11-05).
+
+| Library                                                                                | Close on any button                                                             | The ✕                                                           | Code first (Save)                    |
+| -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | --------------------------------------------------------------- | ------------------------------------ |
+| Base UI (`@base-ui/react/docs`)                                                        | `Dialog.Close`, no look                                                         | none: a `Dialog.Close` you place                                | controlled `open` / `onOpenChange`   |
+| shadcn (`shadcn-reference/presets/*/dialog.tsx`, `apps/v4/examples/base/dialog-*.tsx`) | `DialogClose` as your button                                                    | built into `DialogContent` (`showCloseButton`), place per style | a submit button, not a `DialogClose` |
+| Angular Material (`MatDialogClose`)                                                    | `mat-dialog-close`: behaviour only, no classes, `type="button"`, a result value | none                                                            | `dialogRef.close(result)`            |
+| Ark UI                                                                                 | `Dialog.CloseTrigger`, a plain button part                                      | none                                                            | state                                |
+| React Aria                                                                             | `<Button slot="close">` or the dialog's `close` function                        | none                                                            | that `close` function                |
+| Headless UI                                                                            | `CloseButton`, any element                                                      | none                                                            | `useClose()` or state                |
+| Mantine                                                                                | none: `onClose`                                                                 | built in, and `Modal.CloseButton`                               | `onClose` / `opened`                 |
+
+**Taken:**
+
+- **Close is behaviour only**, on any button — all of them. `scDialogClose` was the ✕ with its look and place built in (a Cancel with it went to the corner); now the ✕ is a `scButton` like any other, and the dialog places a close that is its direct child (`data-slot="dialog-close"`) where the preset says — no second part.
+- **Code first closes through the state** (`[(open)]`) — everyone. Not Material's result value: ours live in the template.
+- **Each preset's look**, as the `dialog` key (the ✕'s place and fill too: `top-2 end-2` to `top-5 end-5`, `bg-secondary` in luma, sera, rhea).
+- **The direction and language of where it is opened**, given to the dialog (rendered at the end of the page).
+
 ## Control Group
 
 An input or a select joined with its buttons (`div[scControlGroup]`): shadcn's Button Group, renamed for what it is for (the user, 2026-10-30: it is only useful when inputs or selects mix with buttons; buttons alone are on the Button page). A shadcn component, so no web research: Base UI and shadcn's reference app (2026-10-30).

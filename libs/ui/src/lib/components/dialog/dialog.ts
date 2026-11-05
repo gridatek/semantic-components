@@ -6,10 +6,15 @@ import {
   inject,
   input,
 } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 import { ScDialogProvider } from './dialog-provider';
 
-/** The dialog's panel: animates in when shown and out when it goes (`animate.enter` / `animate.leave`). */
+/**
+ * The dialog's panel: animates in when shown and out when it goes
+ * (`animate.enter` / `animate.leave`). A close straight in it (the ✕) goes
+ * in its corner, from the preset.
+ */
 @Component({
   selector: 'div[scDialog]',
   template: ` <ng-content /> `,
@@ -19,6 +24,8 @@ import { ScDialogProvider } from './dialog-provider';
     '[attr.aria-labelledby]': 'titleId',
     '[attr.aria-describedby]': 'descriptionId',
     '[class]': 'class()',
+    '[attr.dir]': 'direction',
+    '[attr.lang]': 'lang',
     '[tabindex]': '-1',
     'animate.enter': 'animate-in fade-in-0 zoom-in-95',
     'animate.leave': 'animate-out fade-out-0 zoom-out-95',
@@ -26,7 +33,11 @@ import { ScDialogProvider } from './dialog-provider';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScDialog {
+  private readonly styles = injectPreset().dialog;
   readonly dialogProvider = inject(ScDialogProvider);
+  // Created as it opens: its provider's direction and language then.
+  protected readonly direction = this.dialogProvider.direction();
+  protected readonly lang = this.dialogProvider.lang();
   readonly classInput = input<string>('', { alias: 'class' });
 
   readonly dialogId = inject(_IdGenerator).getId('sc-dialog-');
@@ -36,7 +47,10 @@ export class ScDialog {
 
   protected readonly class = computed(() =>
     cn(
-      'mx-auto relative bg-popover text-popover-foreground ring-foreground/10 grid w-full max-w-[calc(100%-2rem)] gap-4 rounded-xl p-4 text-sm ring-1 duration-100 outline-none sm:max-w-sm',
+      'relative mx-auto',
+      this.styles.content,
+      // The ✕: a close straight in the panel, in its corner.
+      this.styles.close,
       this.classInput(),
     ),
   );

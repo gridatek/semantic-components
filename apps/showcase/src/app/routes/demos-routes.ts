@@ -1707,10 +1707,45 @@ export const demosRoutes: Route[] = [
     path: 'demos/dialog',
     children: [
       {
-        path: 'dialog-demo',
+        path: 'dialog-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/dialog/demos/dialog-demo').then(
-            (m) => m.ScDialogDemo,
+          import('../pages/docs/dialog/demos/dialog-usage-demo').then(
+            (m) => m.DialogUsageDemo,
+          ),
+      },
+      {
+        path: 'close-button-dialog-demo',
+        loadComponent: () =>
+          import('../pages/docs/dialog/demos/close-button-dialog-demo').then(
+            (m) => m.CloseButtonDialogDemo,
+          ),
+      },
+      {
+        path: 'no-close-button-dialog-demo',
+        loadComponent: () =>
+          import('../pages/docs/dialog/demos/no-close-button-dialog-demo').then(
+            (m) => m.NoCloseButtonDialogDemo,
+          ),
+      },
+      {
+        path: 'sticky-footer-dialog-demo',
+        loadComponent: () =>
+          import('../pages/docs/dialog/demos/sticky-footer-dialog-demo').then(
+            (m) => m.StickyFooterDialogDemo,
+          ),
+      },
+      {
+        path: 'scrollable-content-dialog-demo',
+        loadComponent: () =>
+          import('../pages/docs/dialog/demos/scrollable-content-dialog-demo').then(
+            (m) => m.ScrollableContentDialogDemo,
+          ),
+      },
+      {
+        path: 'rtl-dialog-demo',
+        loadComponent: () =>
+          import('../pages/docs/dialog/demos/rtl-dialog-demo').then(
+            (m) => m.RtlDialogDemo,
           ),
       },
     ],
