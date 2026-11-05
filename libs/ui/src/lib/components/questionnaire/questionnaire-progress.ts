@@ -6,6 +6,7 @@ import {
   inject,
   input,
 } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 import { ScQuestionnaire } from './questionnaire';
 
@@ -28,15 +29,13 @@ import { ScQuestionnaire } from './questionnaire';
   },
 })
 export class ScQuestionnaireProgress {
+  private readonly styles = injectPreset().questionnaire;
   protected readonly questionnaire = inject(ScQuestionnaire);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn(
-      'text-muted-foreground min-h-[1lh] w-fit min-w-[14ch] text-xs font-medium tabular-nums',
-      this.classInput(),
-    ),
+    cn(this.styles.progress, this.classInput()),
   );
 
   constructor() {

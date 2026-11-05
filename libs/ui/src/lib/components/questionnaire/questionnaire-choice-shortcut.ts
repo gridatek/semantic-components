@@ -5,6 +5,7 @@ import {
   inject,
   input,
 } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 import { ScQuestionnaireChoice } from './questionnaire-choice';
 
@@ -25,14 +26,12 @@ import { ScQuestionnaireChoice } from './questionnaire-choice';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScQuestionnaireChoiceShortcut {
+  private readonly styles = injectPreset().questionnaire;
   protected readonly choice = inject(ScQuestionnaireChoice);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn(
-      'border-input bg-background text-muted-foreground pointer-events-none ms-auto inline-flex size-5 shrink-0 translate-y-[--spacing(0.45)] items-center justify-center rounded-md border font-mono text-[0.625rem] leading-none font-medium group-has-data-[slot=questionnaire-choice-description]/questionnaire-choice:translate-y-0.5',
-      this.classInput(),
-    ),
+    cn(this.styles.shortcut, this.classInput()),
   );
 }

@@ -4976,10 +4976,17 @@ export const demosRoutes: Route[] = [
     path: 'demos/questionnaire',
     children: [
       {
-        path: 'basic-questionnaire-demo',
+        path: 'questionnaire-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/questionnaire/demos/basic-questionnaire-demo').then(
-            (m) => m.BasicQuestionnaireDemo,
+          import('../pages/docs/questionnaire/demos/questionnaire-usage-demo').then(
+            (m) => m.QuestionnaireUsageDemo,
+          ),
+      },
+      {
+        path: 'skip-questionnaire-demo',
+        loadComponent: () =>
+          import('../pages/docs/questionnaire/demos/skip-questionnaire-demo').then(
+            (m) => m.SkipQuestionnaireDemo,
           ),
       },
       {
@@ -4994,6 +5001,76 @@ export const demosRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/questionnaire/demos/shortcuts-questionnaire-demo').then(
             (m) => m.ShortcutsQuestionnaireDemo,
+          ),
+      },
+      {
+        path: 'validation-questionnaire-demo',
+        loadComponent: () =>
+          import('../pages/docs/questionnaire/demos/validation-questionnaire-demo').then(
+            (m) => m.ValidationQuestionnaireDemo,
+          ),
+      },
+      {
+        path: 'controlled-questionnaire-demo',
+        loadComponent: () =>
+          import('../pages/docs/questionnaire/demos/controlled-questionnaire-demo').then(
+            (m) => m.ControlledQuestionnaireDemo,
+          ),
+      },
+      {
+        path: 'resume-questionnaire-demo',
+        loadComponent: () =>
+          import('../pages/docs/questionnaire/demos/resume-questionnaire-demo').then(
+            (m) => m.ResumeQuestionnaireDemo,
+          ),
+      },
+      {
+        path: 'conditional-questionnaire-demo',
+        loadComponent: () =>
+          import('../pages/docs/questionnaire/demos/conditional-questionnaire-demo').then(
+            (m) => m.ConditionalQuestionnaireDemo,
+          ),
+      },
+      {
+        path: 'navigation-state-questionnaire-demo',
+        loadComponent: () =>
+          import('../pages/docs/questionnaire/demos/navigation-state-questionnaire-demo').then(
+            (m) => m.NavigationStateQuestionnaireDemo,
+          ),
+      },
+      {
+        path: 'progress-questionnaire-demo',
+        loadComponent: () =>
+          import('../pages/docs/questionnaire/demos/progress-questionnaire-demo').then(
+            (m) => m.ProgressQuestionnaireDemo,
+          ),
+      },
+      {
+        path: 'animated-questionnaire-demo',
+        loadComponent: () =>
+          import('../pages/docs/questionnaire/demos/animated-questionnaire-demo').then(
+            (m) => m.AnimatedQuestionnaireDemo,
+          ),
+      },
+      {
+        path: 'card-questionnaire-demo',
+        loadComponent: () =>
+          import('../pages/docs/questionnaire/demos/card-questionnaire-demo').then(
+            (m) => m.CardQuestionnaireDemo,
+          ),
+      },
+      {
+        path: 'dialog-questionnaire-demo',
+        loadComponent: () =>
+          import('../pages/docs/questionnaire/demos/dialog-questionnaire-demo').then(
+            (m) => m.DialogQuestionnaireDemo,
+          ),
+      },
+      {
+        path: 'freeform-questionnaire-demo',
+        loadComponent: () =>
+          import('../pages/docs/questionnaire/demos/freeform-questionnaire-demo').then(
+            (m) => m.FreeformQuestionnaireDemo,
           ),
       },
       {

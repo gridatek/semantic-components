@@ -11,6 +11,7 @@ import {
   signal,
   untracked,
 } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 import {
   type ScQuestionnaireItemRef,
@@ -60,6 +61,7 @@ const isFilled = (answer: HTMLInputElement | HTMLTextAreaElement) =>
   },
 })
 export class ScQuestionnaire {
+  private readonly styles = injectPreset().questionnaire;
   private readonly injector = inject(Injector);
   private readonly form =
     inject<ElementRef<HTMLFormElement>>(ElementRef).nativeElement;
@@ -100,7 +102,7 @@ export class ScQuestionnaire {
   );
 
   protected readonly class = computed(() =>
-    cn('flex w-full min-w-0 flex-col gap-4', this.classInput()),
+    cn(this.styles.root, this.classInput()),
   );
 
   constructor() {

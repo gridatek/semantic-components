@@ -44,12 +44,7 @@ import {
     ScQuestionnaireTitle,
   ],
   template: `
-    <form
-      scQuestionnaire
-      shortcuts="letters"
-      [formRoot]="survey"
-      class="rounded-xl border p-6"
-    >
+    <form scQuestionnaire shortcuts="letters" [formRoot]="survey">
       <fieldset scQuestionnaireItem name="action" [field]="survey.action">
         <legend scQuestionnaireTitle>What should happen to the branch?</legend>
         <p scQuestionnaireDescription>Press a letter to choose, then Enter.</p>

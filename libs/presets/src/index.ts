@@ -228,6 +228,26 @@ export interface ScBubbleStyles {
   reactions: string;
 }
 
+/** A questionnaire's parts that change from style to style. */
+export interface ScQuestionnaireStyles {
+  root: string;
+  progress: string;
+  item: string;
+  title: string;
+  description: string;
+  choices: string;
+  /** A choice's card, its state from its input (`has-[>input:checked]`). */
+  choice: string;
+  /** The radio's or checkbox's box, with your check icon (`[&>svg]:`). */
+  indicator: string;
+  /** A chosen radio's dot. */
+  indicatorDot: string;
+  choiceLabel: string;
+  shortcut: string;
+  error: string;
+  actions: string;
+}
+
 /** A preset: the components' classes in one of shadcn's styles. */
 export interface ScPreset {
   accordion: ScAccordionStyles;
@@ -268,6 +288,7 @@ export interface ScPreset {
   menu: ScMenuStyles;
   menubar: ScMenubarStyles;
   pagination: ScPaginationStyles;
+  questionnaire: ScQuestionnaireStyles;
   select: ScSelectStyles;
   table: ScTableStyles;
   tabs: ScTabsStyles;

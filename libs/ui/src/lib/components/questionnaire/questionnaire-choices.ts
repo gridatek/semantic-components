@@ -1,4 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 
 /** The question's choices, in a column. */
@@ -10,9 +11,10 @@ import { cn } from '../../utils';
   },
 })
 export class ScQuestionnaireChoices {
+  private readonly styles = injectPreset().questionnaire;
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('group/questionnaire-choices grid min-w-0 gap-2', this.classInput()),
+    cn(this.styles.choices, this.classInput()),
   );
 }

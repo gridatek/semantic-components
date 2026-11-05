@@ -66,7 +66,7 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
     SiCheckIcon,
   ],
   template: \`
-    <form scQuestionnaire [formRoot]="survey" class="rounded-xl border p-6">
+    <form scQuestionnaire [formRoot]="survey">
       <fieldset scQuestionnaireItem name="sources" [field]="survey.sources">
         <legend scQuestionnaireTitle>Which sources should I read?</legend>
         <p scQuestionnaireDescription>

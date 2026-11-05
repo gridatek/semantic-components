@@ -5,6 +5,7 @@ import {
   inject,
   input,
 } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 import { ScQuestionnaireChoice } from './questionnaire-choice';
 
@@ -18,7 +19,7 @@ import { ScQuestionnaireChoice } from './questionnaire-choice';
     @if (choice.type() === 'radio') {
       <span
         data-slot="questionnaire-choice-indicator-dot"
-        class="bg-primary-foreground hidden size-2 rounded-full group-has-[>input:checked]/questionnaire-choice:block"
+        [class]="styles.indicatorDot"
       ></span>
     } @else {
       <ng-content />
@@ -32,15 +33,12 @@ import { ScQuestionnaireChoice } from './questionnaire-choice';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScQuestionnaireChoiceIndicator {
+  protected readonly styles = injectPreset().questionnaire;
   protected readonly choice = inject(ScQuestionnaireChoice);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn(
-      'border-input group-has-[>input:checked]/questionnaire-choice:border-primary group-has-[>input:checked]/questionnaire-choice:bg-primary group-has-[>input:checked]/questionnaire-choice:text-primary-foreground dark:bg-input/30 dark:group-has-[>input:checked]/questionnaire-choice:bg-primary pointer-events-none relative flex size-4 shrink-0 translate-y-[--spacing(0.45)] items-center justify-center rounded-[4px] border group-has-data-[slot=questionnaire-choice-description]/questionnaire-choice:translate-y-0.5 group-data-[type=radio]/questionnaire-choice:rounded-full',
-      '[&>svg]:hidden [&>svg]:size-3.5 group-has-[>input:checked]/questionnaire-choice:[&>svg]:block',
-      this.classInput(),
-    ),
+    cn(this.styles.indicator, this.classInput()),
   );
 }

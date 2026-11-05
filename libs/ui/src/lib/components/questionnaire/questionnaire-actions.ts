@@ -1,4 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 
 /** The buttons' row: Previous at the start, Skip and Next (or Submit) at the end. */
@@ -10,12 +11,10 @@ import { cn } from '../../utils';
   },
 })
 export class ScQuestionnaireActions {
+  private readonly styles = injectPreset().questionnaire;
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn(
-      'grid min-h-11 w-full grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-2 sm:min-h-8',
-      this.classInput(),
-    ),
+    cn(this.styles.actions, this.classInput()),
   );
 }

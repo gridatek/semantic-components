@@ -25,6 +25,7 @@ import {
 import { menu } from './menu';
 import { menubar } from './menubar';
 import { pagination } from './pagination';
+import { questionnaire } from './questionnaire';
 import { select } from './select';
 import { table } from './table';
 /** The maia preset: `provideSemanticComponents({ preset: maia })`. */
@@ -56,6 +57,7 @@ export const maia: ScPreset = {
   menu,
   menubar,
   pagination,
+  questionnaire,
   select,
   table,
   tabs,

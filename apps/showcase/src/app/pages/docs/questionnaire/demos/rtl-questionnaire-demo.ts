@@ -48,7 +48,6 @@ import {
         shortcuts="numbers"
         [formRoot]="survey"
         #questionnaire="scQuestionnaire"
-        class="rounded-xl border p-6"
       >
         <div scQuestionnaireProgress aria-label="التقدّم">
           السؤال {{ questionnaire.current() }} من {{ questionnaire.total() }}

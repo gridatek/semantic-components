@@ -1,11 +1,18 @@
 import { JsonPipe } from '@angular/common';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { FormField, FormRoot, form, required } from '@angular/forms/signals';
 import {
+  FormField,
+  FormRoot,
+  form,
+  required,
+  validate,
+} from '@angular/forms/signals';
+import {
+  ScButton,
+  ScInput,
   ScQuestionnaire,
   ScQuestionnaireActions,
   ScQuestionnaireChoice,
-  ScQuestionnaireChoiceDescription,
   ScQuestionnaireChoiceIndicator,
   ScQuestionnaireChoiceInput,
   ScQuestionnaireChoiceLabel,
@@ -21,17 +28,27 @@ import {
   ScQuestionnaireSubmit,
   ScQuestionnaireTitle,
 } from '@semantic-components/ui';
+import { SiCheckIcon } from '@semantic-icons/lucide-icons';
 
+/** What was saved last time. */
+const saved = () => ({
+  change: 'incremental',
+  verification: { tests: true, typecheck: true, manual: false },
+  notes: 'Keep the existing public API stable.',
+});
+
+/** Answers saved last time, back at the question where it stopped; Reset goes back to them. */
 @Component({
-  selector: 'app-basic-questionnaire-demo',
+  selector: 'app-resume-questionnaire-demo',
   imports: [
     JsonPipe,
     FormField,
     FormRoot,
+    ScButton,
+    ScInput,
     ScQuestionnaire,
     ScQuestionnaireActions,
     ScQuestionnaireChoice,
-    ScQuestionnaireChoiceDescription,
     ScQuestionnaireChoiceIndicator,
     ScQuestionnaireChoiceInput,
     ScQuestionnaireChoiceLabel,
@@ -46,136 +63,122 @@ import {
     ScQuestionnaireSkip,
     ScQuestionnaireSubmit,
     ScQuestionnaireTitle,
+    SiCheckIcon,
   ],
   template: `
     <form
       scQuestionnaire
       [formRoot]="survey"
       #questionnaire="scQuestionnaire"
-      class="rounded-xl border p-6"
+      [(item)]="item"
     >
       <div scQuestionnaireProgress aria-label="Progress">
         Question {{ questionnaire.current() }} of {{ questionnaire.total() }}
       </div>
-      <fieldset scQuestionnaireItem name="goal" [field]="survey.goal">
-        <legend scQuestionnaireTitle>What should we work on first?</legend>
+      <fieldset scQuestionnaireItem name="change" [field]="survey.change">
+        <legend scQuestionnaireTitle>What kind of migration is this?</legend>
         <p scQuestionnaireDescription>
-          Pick the one that matters most this week.
+          This answer was saved during the previous session.
         </p>
         <div scQuestionnaireChoices>
           <label scQuestionnaireChoice>
             <input
               type="radio"
               scQuestionnaireChoiceInput
-              value="tests"
-              [formField]="survey.goal"
+              value="incremental"
+              [formField]="survey.change"
             />
             <span scQuestionnaireChoiceIndicator></span>
-            <span scQuestionnaireChoiceLabel>
-              Add tests
-              <span scQuestionnaireChoiceDescription
-                >Cover the parts that broke last month.</span
-              >
-            </span>
+            <span scQuestionnaireChoiceLabel> Incremental migration </span>
             <kbd scQuestionnaireChoiceShortcut></kbd>
           </label>
           <label scQuestionnaireChoice>
             <input
               type="radio"
               scQuestionnaireChoiceInput
-              value="docs"
-              [formField]="survey.goal"
+              value="cutover"
+              [formField]="survey.change"
             />
             <span scQuestionnaireChoiceIndicator></span>
-            <span scQuestionnaireChoiceLabel>
-              Write the docs
-              <span scQuestionnaireChoiceDescription
-                >Every component gets a page.</span
-              >
-            </span>
+            <span scQuestionnaireChoiceLabel> Single cutover </span>
+            <kbd scQuestionnaireChoiceShortcut></kbd>
+          </label>
+        </div>
+        <p scQuestionnaireError>Choose an answer to continue.</p>
+      </fieldset>
+      <fieldset
+        scQuestionnaireItem
+        name="verification"
+        [field]="survey.verification"
+      >
+        <legend scQuestionnaireTitle>
+          How should the migration be verified?
+        </legend>
+        <p scQuestionnaireDescription>
+          These checks were selected during the previous session.
+        </p>
+        <div scQuestionnaireChoices>
+          <label scQuestionnaireChoice>
+            <input
+              type="checkbox"
+              scQuestionnaireChoiceInput
+              [formField]="survey.verification.tests"
+            />
+            <span scQuestionnaireChoiceIndicator><svg siCheckIcon></svg></span>
+            <span scQuestionnaireChoiceLabel> Run migration tests </span>
             <kbd scQuestionnaireChoiceShortcut></kbd>
           </label>
           <label scQuestionnaireChoice>
             <input
-              type="radio"
+              type="checkbox"
               scQuestionnaireChoiceInput
-              value="speed"
-              [formField]="survey.goal"
+              [formField]="survey.verification.typecheck"
             />
-            <span scQuestionnaireChoiceIndicator></span>
+            <span scQuestionnaireChoiceIndicator><svg siCheckIcon></svg></span>
+            <span scQuestionnaireChoiceLabel> Run the typecheck </span>
+            <kbd scQuestionnaireChoiceShortcut></kbd>
+          </label>
+          <label scQuestionnaireChoice>
+            <input
+              type="checkbox"
+              scQuestionnaireChoiceInput
+              [formField]="survey.verification.manual"
+            />
+            <span scQuestionnaireChoiceIndicator><svg siCheckIcon></svg></span>
             <span scQuestionnaireChoiceLabel>
-              Make it faster
-              <span scQuestionnaireChoiceDescription
-                >Load the first page in under a second.</span
-              >
+              Perform a manual smoke test
             </span>
             <kbd scQuestionnaireChoiceShortcut></kbd>
           </label>
         </div>
         <p scQuestionnaireError>Choose an answer to continue.</p>
       </fieldset>
-      <fieldset scQuestionnaireItem name="scope" [field]="survey.scope">
-        <legend scQuestionnaireTitle>How much of it?</legend>
-        <div scQuestionnaireChoices>
-          <label scQuestionnaireChoice>
-            <input
-              type="radio"
-              scQuestionnaireChoiceInput
-              value="small"
-              [formField]="survey.scope"
-            />
-            <span scQuestionnaireChoiceIndicator></span>
-            <span scQuestionnaireChoiceLabel> A small step </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
-          </label>
-          <label scQuestionnaireChoice>
-            <input
-              type="radio"
-              scQuestionnaireChoiceInput
-              value="all"
-              [formField]="survey.scope"
-            />
-            <span scQuestionnaireChoiceIndicator></span>
-            <span scQuestionnaireChoiceLabel> All of it </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
-          </label>
-        </div>
-        <p scQuestionnaireError>Choose an answer to continue.</p>
-      </fieldset>
-      <fieldset scQuestionnaireItem name="when" [field]="survey.when">
-        <legend scQuestionnaireTitle>By when?</legend>
-        <div scQuestionnaireChoices>
-          <label scQuestionnaireChoice>
-            <input
-              type="radio"
-              scQuestionnaireChoiceInput
-              value="week"
-              [formField]="survey.when"
-            />
-            <span scQuestionnaireChoiceIndicator></span>
-            <span scQuestionnaireChoiceLabel> This week </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
-          </label>
-          <label scQuestionnaireChoice>
-            <input
-              type="radio"
-              scQuestionnaireChoiceInput
-              value="month"
-              [formField]="survey.when"
-            />
-            <span scQuestionnaireChoiceIndicator></span>
-            <span scQuestionnaireChoiceLabel> This month </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
-          </label>
-        </div>
-        <p scQuestionnaireError>Choose an answer to continue.</p>
+      <fieldset scQuestionnaireItem name="notes" [field]="survey.notes">
+        <legend scQuestionnaireTitle>
+          Anything else the agent should remember?
+        </legend>
+        <p scQuestionnaireDescription>This note was saved with the draft.</p>
+        <input
+          scInput
+          aria-label="Saved migration note"
+          [formField]="survey.notes"
+        />
       </fieldset>
       <div scQuestionnaireActions>
         <button scQuestionnairePrevious>Previous</button>
         <button scQuestionnaireSkip>Skip</button>
         <button scQuestionnaireNext>Next</button>
-        <button scQuestionnaireSubmit>Submit</button>
+        <button scQuestionnaireSubmit>Update draft</button>
       </div>
+      <button
+        scButton
+        variant="outline"
+        type="button"
+        class="self-start"
+        (click)="reset()"
+      >
+        Reset changes
+      </button>
     </form>
     @if (sent(); as answers) {
       <div class="bg-muted rounded-md p-4 text-sm">
@@ -187,18 +190,25 @@ import {
   host: { class: 'flex w-full max-w-md flex-col gap-4' },
   encapsulation: ViewEncapsulation.None,
 })
-export class BasicQuestionnaireDemo {
-  private readonly model = signal({ goal: '', scope: '', when: '' });
-  readonly sent = signal<{ goal: string; scope: string; when: string } | null>(
-    null,
-  );
+export class ResumeQuestionnaireDemo {
+  private readonly model = signal(saved());
+  readonly sent = signal<ReturnType<typeof this.model> | null>(null);
+  readonly item = signal('verification');
+
+  reset(): void {
+    this.model.set(saved());
+    this.item.set('verification');
+  }
 
   readonly survey = form(
     this.model,
     (s) => {
-      required(s.goal);
-      required(s.scope);
-      required(s.when);
+      required(s.change);
+      validate(s.verification, ({ value }) =>
+        Object.values(value()).some(Boolean)
+          ? null
+          : { kind: 'required', message: 'Choose at least one check.' },
+      );
     },
     { submission: { action: async () => this.sent.set(this.model()) } },
   );

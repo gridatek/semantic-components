@@ -11,6 +11,7 @@ import {
   input,
   signal,
 } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 import { ScQuestionnaire } from './questionnaire';
 import {
@@ -39,6 +40,7 @@ import {
   },
 })
 export class ScQuestionnaireItem implements ScQuestionnaireItemRef {
+  private readonly styles = injectPreset().questionnaire;
   private readonly questionnaire = inject(ScQuestionnaire);
   private readonly injector = inject(Injector);
   readonly element = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
@@ -79,10 +81,7 @@ export class ScQuestionnaireItem implements ScQuestionnaireItemRef {
   );
 
   protected readonly class = computed(() =>
-    cn(
-      'flex min-w-0 flex-col gap-4 border-0 p-0 outline-none',
-      this.classInput(),
-    ),
+    cn(this.styles.item, this.classInput()),
   );
 
   constructor() {

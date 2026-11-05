@@ -1,4 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 
 /** The choice's text — its description under it. */
@@ -10,9 +11,10 @@ import { cn } from '../../utils';
   },
 })
 export class ScQuestionnaireChoiceLabel {
+  private readonly styles = injectPreset().questionnaire;
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('flex min-w-0 flex-1 flex-col gap-0.5 leading-snug', this.classInput()),
+    cn(this.styles.choiceLabel, this.classInput()),
   );
 }
