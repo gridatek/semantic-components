@@ -387,6 +387,21 @@ Items whose panels open and close (`[scAccordion]`; rewritten and switched in 20
 - **The panel animates its height both ways**: a transition on height and display (`starting:h-0`, `[[inert]]:h-0`), the content kept after the first opening (Aria's `preserveContent`, set from `@angular/aria/private`).
 - **The item connects its trigger and panel** (nothing to wire), though Aria's trigger declares `panel` a required input (every template would have to bind it, `NG8008`): the trigger and panel parts **extend** Aria's directives — the trigger redeclares `panel` as optional — and register with their item as they are created; it sets the panel before Aria's trigger reads it (`ngOnInit`). No official way in angular/components: `[panel]="ref"` is Aria's design since #32855 (it was matching ids before; #32977), Aria is in developer preview. Relies on Aria's classes staying extendable. - **Not** `hiddenUntilFound` (Aria's template). Aria's arrow keys stay (APG and Base UI dropped them).
 
+## Attachment
+
+A file and its upload state (`div[scAttachment]`; restyled 2026-11-05): shadcn's Attachment. A shadcn component, so no web research: shadcn's reference app and its docs' examples (2026-11-05). Base UI has no attachment.
+
+| Library                                                                                                   | What to read                                                                                                                              |
+| --------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| shadcn Attachment (`shadcn-reference/presets/*/attachment.tsx`, `apps/v4/examples/base/attachment-*.tsx`) | The look per style (root and media cvas, the text, actions, group); states, sizes, orientation; image media; a trigger over the card; RTL |
+
+**Taken:**
+
+- **Each preset's look**, as the `attachment` key (`root({ size, orientation })`, `media({ variant })`, the rest as strings).
+- **An action part** (`scAttachmentAction`): shadcn's examples put a ghost icon button in the actions; ours styles itself from the preset's button (ghost, icon-xs), `type="button"`.
+- **The trigger** on a link or a button (`type="button"`), with `scDialogTrigger` for a dialog — shadcn's examples wrap a link or a dialog trigger.
+- **The error's description** in the full destructive colour (shadcn: `/80`, 4.36:1 in dark).
+
 ## Control Group
 
 An input or a select joined with its buttons (`div[scControlGroup]`): shadcn's Button Group, renamed for what it is for (the user, 2026-10-30: it is only useful when inputs or selects mix with buttons; buttons alone are on the Button page). A shadcn component, so no web research: Base UI and shadcn's reference app (2026-10-30).

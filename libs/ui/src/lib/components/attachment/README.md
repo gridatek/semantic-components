@@ -5,7 +5,7 @@ Shows a file alongside its upload state, on its own or in a scrollable row.
 ## Usage
 
 ```typescript
-import { ScAttachment, ScAttachmentActions, ScAttachmentContent, ScAttachmentDescription, ScAttachmentMedia, ScAttachmentTitle } from '@semantic-components/ui';
+import { ScAttachment, ScAttachmentAction, ScAttachmentActions, ScAttachmentContent, ScAttachmentDescription, ScAttachmentMedia, ScAttachmentTitle } from '@semantic-components/ui';
 ```
 
 ```html
@@ -15,13 +15,20 @@ import { ScAttachment, ScAttachmentActions, ScAttachmentContent, ScAttachmentDes
     <div scAttachmentTitle>quarterly-report.pdf</div>
     <div scAttachmentDescription>2.4 MB</div>
   </div>
+  <div scAttachmentActions>
+    <button scAttachmentAction>
+      <svg siXIcon></svg>
+      <span class="sr-only">Remove quarterly-report.pdf</span>
+    </button>
+  </div>
 </div>
 ```
 
 ## Components
 
-All directives accept a `class` input for merging additional CSS classes via
-the `cn` utility.
+The look is the app's preset's (`attachment` key, shadcn's in each of the
+eight styles). All directives accept a `class` input for merging additional
+CSS classes via the `cn` utility.
 
 ### ScAttachment
 
@@ -57,6 +64,16 @@ Text column. The title and description both truncate rather than wrap.
 Sits above the trigger. Under `orientation="vertical"` it moves to the top
 inline-end corner of the card.
 
+### ScAttachmentAction
+
+| Property | Details                                                    |
+| -------- | ---------------------------------------------------------- |
+| Selector | `button[scAttachmentAction]`                               |
+| Inputs   | `variant` (`ghost`), `size` (`icon-xs`), `type` (`button`) |
+
+An action (remove, retry, cancel…): the preset's button. Name it after what it
+does and to which file, in sr-only text ("Remove report.pdf").
+
 ### ScAttachmentTrigger
 
 | Property | Details                                               |
@@ -64,7 +81,9 @@ inline-end corner of the card.
 | Selector | `a[scAttachmentTrigger], button[scAttachmentTrigger]` |
 
 Stretches over the whole attachment so the entire card is the click target,
-while the actions stay clickable above it.
+while the actions stay clickable above it. A `button` gets `type="button"`;
+with `scDialogTrigger` it opens a dialog. Name it after what it opens
+("Preview report.pdf").
 
 ### ScAttachmentGroup
 
