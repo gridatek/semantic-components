@@ -248,6 +248,18 @@ export interface ScQuestionnaireStyles {
   actions: string;
 }
 
+/** A trace's parts that change from style to style. */
+export interface ScTraceStyles {
+  /** The rows, and any trigger or link around a line. */
+  root: string;
+  line: string;
+  icon: string;
+  /** The chevron after a collapsible line, turned while open. */
+  collapsibleIcon: string;
+  collapsibleTrigger: string;
+  collapsibleContent: string;
+}
+
 /** A preset: the components' classes in one of shadcn's styles. */
 export interface ScPreset {
   accordion: ScAccordionStyles;
@@ -292,4 +304,5 @@ export interface ScPreset {
   select: ScSelectStyles;
   table: ScTableStyles;
   tabs: ScTabsStyles;
+  trace: ScTraceStyles;
 }

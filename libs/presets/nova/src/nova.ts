@@ -30,6 +30,7 @@ import { select } from './select';
 import { table } from './table';
 /** The nova preset: `provideSemanticComponents({ preset: nova })`. */
 import { tabs } from './tabs';
+import { trace } from './trace';
 
 export const nova: ScPreset = {
   accordion,
@@ -61,4 +62,5 @@ export const nova: ScPreset = {
   select,
   table,
   tabs,
+  trace,
 };

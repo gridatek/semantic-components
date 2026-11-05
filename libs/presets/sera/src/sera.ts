@@ -30,6 +30,7 @@ import { select } from './select';
 import { table } from './table';
 /** The sera preset: `provideSemanticComponents({ preset: sera })`. */
 import { tabs } from './tabs';
+import { trace } from './trace';
 
 export const sera: ScPreset = {
   accordion,
@@ -61,4 +62,5 @@ export const sera: ScPreset = {
   select,
   table,
   tabs,
+  trace,
 };

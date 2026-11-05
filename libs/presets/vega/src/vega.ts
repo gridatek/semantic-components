@@ -30,6 +30,7 @@ import { select } from './select';
 import { table } from './table';
 /** The vega preset: `provideSemanticComponents({ preset: vega })`. */
 import { tabs } from './tabs';
+import { trace } from './trace';
 
 export const vega: ScPreset = {
   accordion,
@@ -61,4 +62,5 @@ export const vega: ScPreset = {
   select,
   table,
   tabs,
+  trace,
 };

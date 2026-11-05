@@ -432,6 +432,20 @@ Questions one at a time (`form[scQuestionnaire]`; built 2026-10-29, restyled 202
 - **The examples**, the Angular way: Validation is a validator in the schema (Submit goes back to the question left wrong); Conditional an `@if` with `required(…, { when })`; Navigation state reads `active()?.answered()`; Resume sets the model and `item`; Custom progress draws steps inside the part; Animated a `starting:` transition; Card names each question with `aria-labelledby`.
 - **Not** `QuestionnaireInput` beside choices: free answers stay your `scInput` / `scTextarea` (one field can't hold a choice and free text). Freeform is a question answered in words.
 
+## Trace
+
+An agent's steps (`div[scTrace]`; built 2026-10-29, restyled 2026-11-05): shadcn's Trace. A shadcn component, so no web research: shadcn's reference app, its docs page and 16 examples (2026-11-05).
+
+| Library                                                                                    | What to read                                                                                                                                                                                                                               |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| shadcn Trace (`shadcn-reference/presets/*/trace.tsx`, `apps/v4/examples/base/trace-*.tsx`) | The row, line, icon and the collapsible's trigger and content change per style; Line, Status, Description, Collapsible, Open state, Link, Dialog, Sheet, Group, Sources, Chain of thought, Commit, Whole turn, Reasoning and Tool (AI SDK) |
+
+**Taken:**
+
+- **Each preset's look**, as the `trace` key (`root`, `line`, `icon`, `collapsibleIcon`, `collapsibleTrigger`, `collapsibleContent`), with our contrast fixes (a pending step dims its icon only) and the output at the lines' size.
+- **All the examples**; the Usage, Reasoning and Tool ones without the AI SDK: Usage a static turn, Reasoning and Tool replay their states on a timer (a Replay button), in a live region.
+- **Open state** through the Collapsible's `[(expanded)]` (Aria's model), "open while running, your click wins" as `choice() ?? running()`.
+
 ## Control Group
 
 An input or a select joined with its buttons (`div[scControlGroup]`): shadcn's Button Group, renamed for what it is for (the user, 2026-10-30: it is only useful when inputs or selects mix with buttons; buttons alone are on the Button page). A shadcn component, so no web research: Base UI and shadcn's reference app (2026-10-30).

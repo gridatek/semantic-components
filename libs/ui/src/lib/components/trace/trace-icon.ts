@@ -1,4 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 
 /** A step's icon — your SVG inside; hidden from screen readers: the title says it. */
@@ -11,12 +12,10 @@ import { cn } from '../../utils';
   },
 })
 export class ScTraceIcon {
+  private readonly styles = injectPreset().trace;
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn(
-      'flex size-4 shrink-0 items-center justify-center [&_svg]:pointer-events-none [&_svg:not([class*=size-])]:size-4 [[data-slot=trace-title]~&]:-ms-1',
-      this.classInput(),
-    ),
+    cn(this.styles.icon, this.classInput()),
   );
 }

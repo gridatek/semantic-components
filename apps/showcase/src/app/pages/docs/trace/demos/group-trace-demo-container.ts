@@ -1,23 +1,23 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { BasicTraceDemo } from './basic-trace-demo';
+import { GroupTraceDemo } from './group-trace-demo';
 
 @Component({
-  selector: 'app-basic-trace-demo-container',
-  imports: [DemoContainer, BasicTraceDemo],
+  selector: 'app-group-trace-demo-container',
+  imports: [DemoContainer, GroupTraceDemo],
   template: `
     <app-demo-container
-      title="Trace Line"
-      demoUrl="/demos/trace/basic-trace-demo"
+      title="Group"
+      demoUrl="/demos/trace/group-trace-demo"
       [code]="code"
     >
-      <app-basic-trace-demo />
+      <app-group-trace-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class BasicTraceDemoContainer {
+export class GroupTraceDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScTrace,
@@ -31,35 +31,36 @@ import {
   SiTerminalIcon,
 } from '@semantic-icons/lucide-icons';
 
+/** Rows side by side in a scTrace; it also styles the triggers and links around lines. */
 @Component({
-  selector: 'app-basic-trace-demo',
+  selector: 'app-group-trace-demo',
   imports: [
     ScTrace,
     ScTraceIcon,
     ScTraceLine,
     ScTraceTitle,
-    SiFileTextIcon,
     SiSearchIcon,
+    SiFileTextIcon,
     SiTerminalIcon,
   ],
   template: \`
-    <div scTrace>
+    <div scTrace class="max-w-sm">
       <span scTraceLine>
         <span scTraceIcon><svg siSearchIcon></svg></span>
         <span scTraceTitle>Searched for minimumReleaseAge</span>
       </span>
       <span scTraceLine>
         <span scTraceIcon><svg siFileTextIcon></svg></span>
-        <span scTraceTitle>Read package.json</span>
+        <span scTraceTitle>Read pnpm-workspace.yaml</span>
       </span>
       <span scTraceLine>
         <span scTraceIcon><svg siTerminalIcon></svg></span>
-        <span scTraceTitle>Ran node --version</span>
+        <span scTraceTitle>Ran pnpm install</span>
       </span>
     </div>
   \`,
-  host: { class: 'block w-full max-w-md' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class BasicTraceDemo {}`;
+export class GroupTraceDemo {}`;
 }

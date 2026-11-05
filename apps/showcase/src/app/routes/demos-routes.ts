@@ -5333,10 +5333,17 @@ export const demosRoutes: Route[] = [
     path: 'demos/trace',
     children: [
       {
-        path: 'basic-trace-demo',
+        path: 'trace-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/trace/demos/basic-trace-demo').then(
-            (m) => m.BasicTraceDemo,
+          import('../pages/docs/trace/demos/trace-usage-demo').then(
+            (m) => m.TraceUsageDemo,
+          ),
+      },
+      {
+        path: 'line-trace-demo',
+        loadComponent: () =>
+          import('../pages/docs/trace/demos/line-trace-demo').then(
+            (m) => m.LineTraceDemo,
           ),
       },
       {
@@ -5361,10 +5368,80 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
+        path: 'open-trace-demo',
+        loadComponent: () =>
+          import('../pages/docs/trace/demos/open-trace-demo').then(
+            (m) => m.OpenTraceDemo,
+          ),
+      },
+      {
         path: 'link-trace-demo',
         loadComponent: () =>
           import('../pages/docs/trace/demos/link-trace-demo').then(
             (m) => m.LinkTraceDemo,
+          ),
+      },
+      {
+        path: 'dialog-trace-demo',
+        loadComponent: () =>
+          import('../pages/docs/trace/demos/dialog-trace-demo').then(
+            (m) => m.DialogTraceDemo,
+          ),
+      },
+      {
+        path: 'sheet-trace-demo',
+        loadComponent: () =>
+          import('../pages/docs/trace/demos/sheet-trace-demo').then(
+            (m) => m.SheetTraceDemo,
+          ),
+      },
+      {
+        path: 'group-trace-demo',
+        loadComponent: () =>
+          import('../pages/docs/trace/demos/group-trace-demo').then(
+            (m) => m.GroupTraceDemo,
+          ),
+      },
+      {
+        path: 'sources-trace-demo',
+        loadComponent: () =>
+          import('../pages/docs/trace/demos/sources-trace-demo').then(
+            (m) => m.SourcesTraceDemo,
+          ),
+      },
+      {
+        path: 'chain-of-thought-trace-demo',
+        loadComponent: () =>
+          import('../pages/docs/trace/demos/chain-of-thought-trace-demo').then(
+            (m) => m.ChainOfThoughtTraceDemo,
+          ),
+      },
+      {
+        path: 'commit-trace-demo',
+        loadComponent: () =>
+          import('../pages/docs/trace/demos/commit-trace-demo').then(
+            (m) => m.CommitTraceDemo,
+          ),
+      },
+      {
+        path: 'turn-trace-demo',
+        loadComponent: () =>
+          import('../pages/docs/trace/demos/turn-trace-demo').then(
+            (m) => m.TurnTraceDemo,
+          ),
+      },
+      {
+        path: 'reasoning-trace-demo',
+        loadComponent: () =>
+          import('../pages/docs/trace/demos/reasoning-trace-demo').then(
+            (m) => m.ReasoningTraceDemo,
+          ),
+      },
+      {
+        path: 'tool-trace-demo',
+        loadComponent: () =>
+          import('../pages/docs/trace/demos/tool-trace-demo').then(
+            (m) => m.ToolTraceDemo,
           ),
       },
       {

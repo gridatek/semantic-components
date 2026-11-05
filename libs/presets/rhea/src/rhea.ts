@@ -30,6 +30,7 @@ import { select } from './select';
 import { table } from './table';
 /** The rhea preset: `provideSemanticComponents({ preset: rhea })`. */
 import { tabs } from './tabs';
+import { trace } from './trace';
 
 export const rhea: ScPreset = {
   accordion,
@@ -61,4 +62,5 @@ export const rhea: ScPreset = {
   select,
   table,
   tabs,
+  trace,
 };

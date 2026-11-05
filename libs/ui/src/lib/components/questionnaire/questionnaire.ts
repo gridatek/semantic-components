@@ -83,7 +83,7 @@ export class ScQuestionnaire {
       inDocumentOrder(a.element, b.element),
     );
   });
-  readonly active = computed(
+  readonly active = computed<ScQuestionnaireItemRef | null>(
     () =>
       this.items().find((item) => item.name() === this.item()) ??
       this.items()[0] ??

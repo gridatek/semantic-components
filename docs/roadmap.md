@@ -117,7 +117,7 @@ The components shadcn has: its look (the generated reference app, nova) and its 
 |  59 | [Toggle](../apps/showcase/src/app/pages/docs/toggle)                     | ui      | —                                                          |     1 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 |  60 | [Toggle Group](../apps/showcase/src/app/pages/docs/toggle-group)         | ui      | toggle                                                     |     2 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 |  61 | [Tooltip](../apps/showcase/src/app/pages/docs/tooltip)                   | ui      | kbd                                                        |     3 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
-|  62 | [Trace](../apps/showcase/src/app/pages/docs/trace)                       | ui      | —                                                          |     9 | yes                    |  [ ]   | [x] |  [ ]   | [x] | [ ]  | [ ] | [ ]  | [ ] |    —    |
+|  62 | [Trace](../apps/showcase/src/app/pages/docs/trace)                       | ui      | —                                                          |     9 | yes                    |  [ ]   | [x] |  [ ]   | [x] | [ ]  | [ ] | [ ]  | [ ] | waiting |
 |  63 | [Menubar](../apps/showcase/src/app/pages/docs/menubar)                   | ui      | menu                                                       |     2 | yes                    |  [ ]   | [x] |  [ ]   | [x] | [ ]  | [ ] | [ ]  | [ ] | waiting |
 
 ## List 2 — Not in shadcn (85)

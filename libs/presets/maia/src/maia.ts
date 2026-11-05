@@ -30,6 +30,7 @@ import { select } from './select';
 import { table } from './table';
 /** The maia preset: `provideSemanticComponents({ preset: maia })`. */
 import { tabs } from './tabs';
+import { trace } from './trace';
 
 export const maia: ScPreset = {
   accordion,
@@ -61,4 +62,5 @@ export const maia: ScPreset = {
   select,
   table,
   tabs,
+  trace,
 };

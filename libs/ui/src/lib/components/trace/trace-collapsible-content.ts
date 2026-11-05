@@ -1,4 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 
 /**
@@ -13,13 +14,11 @@ import { cn } from '../../utils';
   },
 })
 export class ScTraceCollapsibleContent {
+  private readonly styles = injectPreset().trace;
   readonly classInput = input<string>('', { alias: 'class' });
 
   // Not shadcn's: text-sm, the lines' size, not the page's.
   protected readonly class = computed(() =>
-    cn(
-      'text-muted-foreground ms-[calc(--spacing(2)-1px)] mt-2 mb-1 min-w-0 border-s ps-4 pe-1 text-sm leading-relaxed wrap-break-word',
-      this.classInput(),
-    ),
+    cn(this.styles.collapsibleContent, this.classInput()),
   );
 }

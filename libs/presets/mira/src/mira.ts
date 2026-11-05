@@ -30,6 +30,7 @@ import { select } from './select';
 import { table } from './table';
 /** The mira preset: `provideSemanticComponents({ preset: mira })`. */
 import { tabs } from './tabs';
+import { trace } from './trace';
 
 export const mira: ScPreset = {
   accordion,
@@ -61,4 +62,5 @@ export const mira: ScPreset = {
   select,
   table,
   tabs,
+  trace,
 };

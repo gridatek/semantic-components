@@ -1,4 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 
 /**
@@ -14,12 +15,10 @@ import { cn } from '../../utils';
   },
 })
 export class ScTraceCollapsibleIcon {
+  private readonly styles = injectPreset().trace;
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn(
-      'flex size-4 shrink-0 items-center justify-center transition-transform group-aria-expanded/trace-collapsible-trigger:rotate-90 rtl:group-not-aria-expanded/trace-collapsible-trigger:-scale-x-100 [&_svg]:pointer-events-none [&_svg:not([class*=size-])]:size-4',
-      this.classInput(),
-    ),
+    cn(this.styles.collapsibleIcon, this.classInput()),
   );
 }

@@ -4,6 +4,8 @@ The steps of a run — an agent's searches, reads and commands — a line each, 
 
 A line is text on its own: inside a link it is a link, inside a collapsible's trigger a button with `aria-expanded`. Its title says what happened — its status too ("Failed to run pnpm build"): the color and the shimmer aren't read out.
 
+The look is the app's preset's (`trace` key: shadcn's in each of the eight styles).
+
 ## Usage
 
 ```html
@@ -73,8 +75,12 @@ Open at first with the trigger's `[expanded]="true"`.
 - Icons are hidden: the title is the name. Write the status into it.
 - The running shimmer stops with `prefers-reduced-motion`; animate a spinner with `motion-safe:animate-spin`.
 
+## Open state
+
+Rows start closed: `[expanded]="true"` on the trigger opens one at first; `[(expanded)]` makes it yours. Open while a step runs, your click winning: `[expanded]="choice() ?? running()" (expandedChange)="choice.set($event)"` (the Reasoning example).
+
 ## Not shadcn's
 
 - **Pending dims the icon, not the line** (shadcn: `opacity-60` on the line), and **the description is `text-muted-foreground`** (shadcn: `/70`): the text keeps 4.5:1.
 - **The chevron is yours** (`scTraceCollapsibleIcon`), not built into the trigger — icons are the consumer's.
-- **The output is `text-sm`**, the lines' size.
+- **The output is the lines' size** (`text-sm`; `text-xs` in lyra and mira): shadcn's inherits the page's.
