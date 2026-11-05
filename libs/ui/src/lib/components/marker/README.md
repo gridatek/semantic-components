@@ -1,7 +1,7 @@
 # Marker
 
-Labels a point in a list or feed — a date divider, an unread boundary, or a
-short inline note.
+A note between messages — a status, a labeled divider, an action. In the look
+of the app's preset (`marker` key: shadcn's in each of the eight styles).
 
 ## Usage
 
@@ -25,11 +25,14 @@ the `cn` utility.
 
 | Property | Details                                         |
 | -------- | ----------------------------------------------- |
-| Selector | `div[scMarker], a[scMarker]`                    |
+| Selector | `div[scMarker], a[scMarker], button[scMarker]`  |
 | Inputs   | `variant`: `default` \| `separator` \| `border` |
 
-`a` is a valid host so a marker can link back to whatever it marks; the
-underline styling only applies in that case.
+On a link or a button it does what it says, named by its content: a link is
+underlined, both take the foreground colour on hover, a button gets
+`type="button"`. Streaming or in progress ("Thinking…"): `role="status"`, so
+it is announced as it appears. A labeled divider needs no role — not
+`role="separator"`, which is named by `aria-label` and leaves its text unread.
 
 | Variant     | Rendering                                                    |
 | ----------- | ------------------------------------------------------------ |

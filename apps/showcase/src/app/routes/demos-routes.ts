@@ -5516,10 +5516,66 @@ export const demosRoutes: Route[] = [
     path: 'demos/marker',
     children: [
       {
-        path: 'basic-marker-demo',
+        path: 'marker-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/marker/demos/basic-marker-demo').then(
-            (m) => m.BasicMarkerDemo,
+          import('../pages/docs/marker/demos/marker-usage-demo').then(
+            (m) => m.MarkerUsageDemo,
+          ),
+      },
+      {
+        path: 'variants-marker-demo',
+        loadComponent: () =>
+          import('../pages/docs/marker/demos/variants-marker-demo').then(
+            (m) => m.VariantsMarkerDemo,
+          ),
+      },
+      {
+        path: 'status-marker-demo',
+        loadComponent: () =>
+          import('../pages/docs/marker/demos/status-marker-demo').then(
+            (m) => m.StatusMarkerDemo,
+          ),
+      },
+      {
+        path: 'shimmer-marker-demo',
+        loadComponent: () =>
+          import('../pages/docs/marker/demos/shimmer-marker-demo').then(
+            (m) => m.ShimmerMarkerDemo,
+          ),
+      },
+      {
+        path: 'separator-marker-demo',
+        loadComponent: () =>
+          import('../pages/docs/marker/demos/separator-marker-demo').then(
+            (m) => m.SeparatorMarkerDemo,
+          ),
+      },
+      {
+        path: 'border-marker-demo',
+        loadComponent: () =>
+          import('../pages/docs/marker/demos/border-marker-demo').then(
+            (m) => m.BorderMarkerDemo,
+          ),
+      },
+      {
+        path: 'icon-marker-demo',
+        loadComponent: () =>
+          import('../pages/docs/marker/demos/icon-marker-demo').then(
+            (m) => m.IconMarkerDemo,
+          ),
+      },
+      {
+        path: 'links-buttons-marker-demo',
+        loadComponent: () =>
+          import('../pages/docs/marker/demos/links-buttons-marker-demo').then(
+            (m) => m.LinksButtonsMarkerDemo,
+          ),
+      },
+      {
+        path: 'rtl-marker-demo',
+        loadComponent: () =>
+          import('../pages/docs/marker/demos/rtl-marker-demo').then(
+            (m) => m.RtlMarkerDemo,
           ),
       },
     ],

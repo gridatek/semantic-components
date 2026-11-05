@@ -446,6 +446,20 @@ An agent's steps (`div[scTrace]`; built 2026-10-29, restyled 2026-11-05): shadcn
 - **All the examples**; the Usage, Reasoning and Tool ones without the AI SDK: Usage a static turn, Reasoning and Tool replay their states on a timer (a Replay button), in a live region.
 - **Open state** through the Collapsible's `[(expanded)]` (Aria's model), "open while running, your click wins" as `choice() ?? running()`.
 
+## Marker
+
+A note between messages (`div[scMarker]`; restyled 2026-11-05): shadcn's Marker. A shadcn component, so no web research: shadcn's reference app, its docs page and 8 examples (2026-11-05).
+
+| Library                                                                                       | What to read                                                                                                                              |
+| --------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| shadcn Marker (`shadcn-reference/presets/*/marker.tsx`, `apps/v4/examples/base/marker-*.tsx`) | Only the root's text and icon sizes change per style (sera: uppercase); default, separator, border; `render` for links and buttons; roles |
+
+**Taken:**
+
+- **Each preset's look** for what changes, as the `marker` key (`root`, `icon`); the variants and the content stay in the parts.
+- **A button host** (`button[scMarker]`, `type="button"`) for shadcn's `render={<button />}`; the hover colour is the part's (shadcn's example writes it in the consumer's className).
+- **The examples**: Variants, Status (our Spinner), Shimmer, Separator, Border, With icon, Links and buttons, RTL.
+
 ## Control Group
 
 An input or a select joined with its buttons (`div[scControlGroup]`): shadcn's Button Group, renamed for what it is for (the user, 2026-10-30: it is only useful when inputs or selects mix with buttons; buttons alone are on the Button page). A shadcn component, so no web research: Base UI and shadcn's reference app (2026-10-30).

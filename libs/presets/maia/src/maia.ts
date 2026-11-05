@@ -22,6 +22,7 @@ import {
   inputGroupButton,
   inputGroupText,
 } from './input-group';
+import { marker } from './marker';
 import { menu } from './menu';
 import { menubar } from './menubar';
 import { pagination } from './pagination';
@@ -51,6 +52,7 @@ export const maia: ScPreset = {
   dialog,
   contextMenu,
   input,
+  marker,
   inputGroup,
   inputGroupAddon,
   inputGroupButton,

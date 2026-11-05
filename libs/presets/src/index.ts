@@ -260,6 +260,13 @@ export interface ScTraceStyles {
   collapsibleContent: string;
 }
 
+/** A marker's parts that change from style to style. */
+export interface ScMarkerStyles {
+  /** Its base: text size, icon size (the variants stay the part's). */
+  root: string;
+  icon: string;
+}
+
 /** A preset: the components' classes in one of shadcn's styles. */
 export interface ScPreset {
   accordion: ScAccordionStyles;
@@ -297,6 +304,7 @@ export interface ScPreset {
   /** Over the preset's button, in an input group. */
   inputGroupButton: (props: { size?: ScInputGroupButtonSize | null }) => string;
   inputGroupText: string;
+  marker: ScMarkerStyles;
   menu: ScMenuStyles;
   menubar: ScMenubarStyles;
   pagination: ScPaginationStyles;

@@ -1,6 +1,8 @@
 import { Directive, computed, input } from '@angular/core';
-import { cn } from '../../utils/cn/cn';
+import { injectPreset } from '../../config/preset';
+import { cn } from '../../utils';
 
+/** Your icon, hidden from screen readers: the content says it. */
 @Directive({
   selector: 'span[scMarkerIcon]',
   host: {
@@ -10,12 +12,10 @@ import { cn } from '../../utils/cn/cn';
   },
 })
 export class ScMarkerIcon {
+  private readonly styles = injectPreset().marker;
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn(
-      "size-4 shrink-0 [&_svg:not([class*='size-'])]:size-4",
-      this.classInput(),
-    ),
+    cn(this.styles.icon, this.classInput()),
   );
 }
