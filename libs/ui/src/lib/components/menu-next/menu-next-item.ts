@@ -21,6 +21,9 @@ import { useDefaultSearchTerm } from '../menu/menu-search-term';
 import { injectMenuNextHighlight } from './menu-next-highlight';
 import { ScMenuNextPortal } from './menu-next-portal';
 
+/** The space between a menu and its submenu. */
+const SUBMENU_GAP = 4;
+
 export type ScMenuNextItemVariant = 'default' | 'destructive';
 
 /**
@@ -47,7 +50,7 @@ export type ScMenuNextItemVariant = 'default' | 'destructive';
       <ng-template
         [cdkConnectedOverlayOpen]="submenuOpen()"
         [cdkConnectedOverlay]="{ origin: overlayOrigin, usePopover: 'inline' }"
-        [cdkConnectedOverlayPositions]="positions"
+        [cdkConnectedOverlayPositions]="positions()"
         cdkAttachPopoverAsChild
       >
         <ng-container [ngTemplateOutlet]="portal.templateRef" />
@@ -86,25 +89,40 @@ export class ScMenuNextItem {
     () => this.parentMenu.visible() && this.menuItem.expanded() !== false,
   );
 
-  /** Beside the item, at its reading end; at the other end if no room. */
-  protected readonly positions = [
-    {
-      originX: 'end' as const,
-      originY: 'top' as const,
-      overlayX: 'start' as const,
-      overlayY: 'top' as const,
-      offsetX: 4,
-      offsetY: -4,
-    },
-    {
-      originX: 'start' as const,
-      originY: 'top' as const,
-      overlayX: 'end' as const,
-      overlayY: 'top' as const,
-      offsetX: -4,
-      offsetY: -4,
-    },
-  ];
+  /**
+   * Beside its menu, at the reading end — at the other end if there is no
+   * room — a gap from the menu's edge, whatever the preset's padding. The
+   * CDK mirrors start and end in right to left, not the offsets: they are
+   * turned here. Measured as the submenu opens.
+   */
+  protected readonly positions = computed(() => {
+    let [right, left] = [SUBMENU_GAP, SUBMENU_GAP];
+    const rtl = this.directionality.value === 'rtl';
+    if (this.submenuOpen()) {
+      const item = this.menuItem.element.getBoundingClientRect();
+      const menu = this.parentMenu.element.getBoundingClientRect();
+      right += menu.right - item.right;
+      left += item.left - menu.left;
+    }
+    return [
+      {
+        originX: 'end' as const,
+        originY: 'top' as const,
+        overlayX: 'start' as const,
+        overlayY: 'top' as const,
+        offsetX: rtl ? -left : right,
+        offsetY: -4,
+      },
+      {
+        originX: 'start' as const,
+        originY: 'top' as const,
+        overlayX: 'end' as const,
+        overlayY: 'top' as const,
+        offsetX: rtl ? right : -left,
+        offsetY: -4,
+      },
+    ];
+  });
 
   protected readonly class = computed(() =>
     cn(

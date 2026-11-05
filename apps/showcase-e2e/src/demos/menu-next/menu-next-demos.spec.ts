@@ -163,12 +163,12 @@ test('Submenu: ArrowRight opens it on its first item, ArrowLeft closes it; neste
   await press(page, 'ArrowRight');
   await expect(page.getByRole('menuitem', { name: 'Email' })).toBeFocused();
   await expect(invite).toHaveAttribute('aria-expanded', 'true');
-  // Beside its item, at the reading end.
   const [parent, sub] = [
     await box(page.getByRole('menu').first()),
     await box(page.getByRole('menu').nth(1)),
   ];
-  expect(sub.x).toBeGreaterThanOrEqual(parent.x + parent.width - 8);
+  // At the reading end, 4px from its menu, whatever the preset's padding.
+  expect(sub.x - (parent.x + parent.width)).toBeCloseTo(4, 0);
   await press(page, 'ArrowDown');
   await press(page, 'ArrowDown');
   await press(page, 'ArrowRight');
@@ -205,7 +205,7 @@ test('RTL: the menu takes its trigger’s direction and language; the submenu op
     await box(menu),
     await box(page.getByRole('menu').nth(1)),
   ];
-  expect(sub.x + sub.width).toBeLessThanOrEqual(parent.x + 8);
+  expect(parent.x - (sub.x + sub.width)).toBeCloseTo(4, 0);
   await press(page, 'ArrowRight');
   await expect(invite).toBeFocused();
 });
