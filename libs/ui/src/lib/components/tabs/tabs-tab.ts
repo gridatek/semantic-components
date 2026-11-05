@@ -8,8 +8,8 @@ import { cn } from '../../utils';
  * tab is reached by the arrows but not selected.
  */
 @Directive({
-  selector: 'button[scTabsNextTab]',
-  exportAs: 'scTabsNextTab',
+  selector: 'button[scTabsTab]',
+  exportAs: 'scTabsTab',
   hostDirectives: [{ directive: Tab, inputs: ['value', 'disabled', 'id'] }],
   host: {
     type: 'button',
@@ -19,7 +19,7 @@ import { cn } from '../../utils';
     '[class]': 'class()',
   },
 })
-export class ScTabsNextTab {
+export class ScTabsTab {
   private readonly styles = injectPreset().tabs;
 
   readonly classInput = input<string>('', { alias: 'class' });

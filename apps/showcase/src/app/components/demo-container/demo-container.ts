@@ -12,11 +12,11 @@ import {
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import {
-  ScTab,
-  ScTabContent,
-  ScTabList,
-  ScTabPanel,
   ScTabs,
+  ScTabsContent,
+  ScTabsList,
+  ScTabsPanel,
+  ScTabsTab,
 } from '@semantic-components/ui';
 import {
   ScCodeBlock,
@@ -44,10 +44,10 @@ import { TocHeading } from '../toc/toc-heading';
     ScCodeBlockCopy,
     ScCodeBlockContent,
     ScTabs,
-    ScTabList,
-    ScTab,
-    ScTabPanel,
-    ScTabContent,
+    ScTabsList,
+    ScTabsTab,
+    ScTabsPanel,
+    ScTabsContent,
     SiCheckIcon,
     SiCopyIcon,
     SiExternalLinkIcon,
@@ -76,14 +76,14 @@ import { TocHeading } from '../toc/toc-heading';
         <p class="text-muted-foreground text-sm">{{ description() }}</p>
       }
 
-      <div scTabs class="w-full">
-        <div scTabList selectedTab="preview">
-          <button scTab value="preview">Preview</button>
-          <button scTab value="code">Code</button>
+      <div scTabs class="w-full" value="preview">
+        <div scTabsList>
+          <button scTabsTab value="preview">Preview</button>
+          <button scTabsTab value="code">Code</button>
         </div>
 
-        <div scTabPanel value="preview" [class]="previewClass()">
-          <ng-template scTabContent>
+        <div scTabsPanel value="preview" [class]="previewClass()">
+          <ng-template scTabsContent>
             @if (framed()) {
               <!--
                 Full-page demos (e.g. a sidebar layout) run in their own
@@ -111,8 +111,8 @@ import { TocHeading } from '../toc/toc-heading';
           </ng-template>
         </div>
 
-        <div scTabPanel value="code">
-          <ng-template scTabContent>
+        <div scTabsPanel value="code">
+          <ng-template scTabsContent>
             <div scCodeBlock>
               <div scCodeBlockHeader>
                 <div scCodeBlockTitle>{{ language() }}</div>

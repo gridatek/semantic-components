@@ -6,11 +6,11 @@ import {
   input,
 } from '@angular/core';
 import {
-  ScTab,
-  ScTabContent,
-  ScTabList,
-  ScTabPanel,
   ScTabs,
+  ScTabsContent,
+  ScTabsList,
+  ScTabsPanel,
+  ScTabsTab,
   cn,
 } from '@semantic-components/ui';
 import {
@@ -39,27 +39,25 @@ import { PackageManagerService } from './package-manager-service';
     SiCopyIcon,
     SiTerminalIcon,
     ScTabs,
-    ScTabList,
-    ScTab,
-    ScTabPanel,
-    ScTabContent,
+    ScTabsList,
+    ScTabsTab,
+    ScTabsPanel,
+    ScTabsContent,
   ],
   template: `
-    <div scTabs>
+    <div
+      scTabs
+      [value]="selected()"
+      (valueChange)="$event && selected.set($event)"
+    >
       <div scCodeBlock>
         <div scCodeBlockHeader>
           <svg siTerminalIcon></svg>
-          <div
-            scTabList
-            [selectedTab]="selected()"
-            (selectedTabChange)="$event && selected.set($event)"
-            variant="line"
-            class="h-auto"
-          >
-            <button scTab value="pnpm">pnpm</button>
-            <button scTab value="npm">npm</button>
-            <button scTab value="yarn">yarn</button>
-            <button scTab value="bun">bun</button>
+          <div scTabsList variant="line" class="h-auto">
+            <button scTabsTab value="pnpm">pnpm</button>
+            <button scTabsTab value="npm">npm</button>
+            <button scTabsTab value="yarn">yarn</button>
+            <button scTabsTab value="bun">bun</button>
           </div>
           <div scCodeBlockActions>
             <button [scCodeBlockCopy]="command()" #copy="scCodeBlockCopy">
@@ -73,8 +71,8 @@ import { PackageManagerService } from './package-manager-service';
           </div>
         </div>
         @for (entry of commands(); track entry.id) {
-          <div scTabPanel [value]="entry.id">
-            <ng-template scTabContent>
+          <div scTabsPanel [value]="entry.id">
+            <ng-template scTabsContent>
               <pre
                 scCodeBlockContent
                 [code]="entry.command"

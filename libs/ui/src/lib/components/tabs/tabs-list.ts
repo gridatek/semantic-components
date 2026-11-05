@@ -13,21 +13,21 @@ import {
 import type { ScTabsListVariant } from '@semantic-components/presets';
 import { injectPreset } from '../../config/preset';
 import { bindInput, cn, elementDirection, setInput } from '../../utils';
-import { ScTabsNext } from './tabs-next';
+import { ScTabs } from './tabs';
 
 /** The list of tabs (role tablist): one tab stop, the arrows inside. */
 @Directive({
-  selector: '[scTabsNextList]',
-  exportAs: 'scTabsNextList',
+  selector: '[scTabsList]',
+  exportAs: 'scTabsList',
   hostDirectives: [TabList],
   host: {
     '[class]': 'class()',
     '[attr.data-variant]': 'variant()',
   },
 })
-export class ScTabsNextList {
+export class ScTabsList {
   private readonly styles = injectPreset().tabs;
-  private readonly tabs = inject(ScTabsNext);
+  private readonly tabs = inject(ScTabs);
   private readonly tabList = inject(TabList);
 
   readonly classInput = input<string>('', { alias: 'class' });

@@ -4359,17 +4359,10 @@ export const demosRoutes: Route[] = [
     path: 'demos/tabs',
     children: [
       {
-        path: 'basic-tabs-demo',
+        path: 'tabs-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/tabs/demos/basic-tabs-demo').then(
-            (m) => m.BasicTabsDemo,
-          ),
-      },
-      {
-        path: 'disabled-tabs-demo',
-        loadComponent: () =>
-          import('../pages/docs/tabs/demos/disabled-tabs-demo').then(
-            (m) => m.DisabledTabsDemo,
+          import('../pages/docs/tabs/demos/tabs-usage-demo').then(
+            (m) => m.TabsUsageDemo,
           ),
       },
       {
@@ -4386,51 +4379,25 @@ export const demosRoutes: Route[] = [
             (m) => m.VerticalTabsDemo,
           ),
       },
-    ],
-  },
-  {
-    path: 'demos/tabs-next',
-    children: [
       {
-        path: 'tabs-next-usage-demo',
+        path: 'disabled-tabs-demo',
         loadComponent: () =>
-          import('../pages/docs/tabs-next/demos/tabs-next-usage-demo').then(
-            (m) => m.TabsNextUsageDemo,
+          import('../pages/docs/tabs/demos/disabled-tabs-demo').then(
+            (m) => m.DisabledTabsDemo,
           ),
       },
       {
-        path: 'line-tabs-next-demo',
+        path: 'icons-tabs-demo',
         loadComponent: () =>
-          import('../pages/docs/tabs-next/demos/line-tabs-next-demo').then(
-            (m) => m.LineTabsNextDemo,
+          import('../pages/docs/tabs/demos/icons-tabs-demo').then(
+            (m) => m.IconsTabsDemo,
           ),
       },
       {
-        path: 'vertical-tabs-next-demo',
+        path: 'rtl-tabs-demo',
         loadComponent: () =>
-          import('../pages/docs/tabs-next/demos/vertical-tabs-next-demo').then(
-            (m) => m.VerticalTabsNextDemo,
-          ),
-      },
-      {
-        path: 'disabled-tabs-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/tabs-next/demos/disabled-tabs-next-demo').then(
-            (m) => m.DisabledTabsNextDemo,
-          ),
-      },
-      {
-        path: 'icons-tabs-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/tabs-next/demos/icons-tabs-next-demo').then(
-            (m) => m.IconsTabsNextDemo,
-          ),
-      },
-      {
-        path: 'rtl-tabs-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/tabs-next/demos/rtl-tabs-next-demo').then(
-            (m) => m.RtlTabsNextDemo,
+          import('../pages/docs/tabs/demos/rtl-tabs-demo').then(
+            (m) => m.RtlTabsDemo,
           ),
       },
     ],

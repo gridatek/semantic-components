@@ -33,11 +33,11 @@ import {
   ScSlider,
   ScSpinner,
   ScSwitch,
-  ScTab,
-  ScTabContent,
-  ScTabList,
-  ScTabPanel,
   ScTabs,
+  ScTabsContent,
+  ScTabsList,
+  ScTabsPanel,
+  ScTabsTab,
   ScTextarea,
   ScToggle,
   ScToggleGroup,
@@ -80,10 +80,10 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     ScSlider,
     ScSpinner,
     ScSwitch,
-    ScTab,
-    ScTabContent,
-    ScTabList,
-    ScTabPanel,
+    ScTabsTab,
+    ScTabsContent,
+    ScTabsList,
+    ScTabsPanel,
     ScTabs,
     ScTextarea,
     ScToggle,
@@ -636,24 +636,20 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
               Tabs
             </h2>
             <div scSeparator></div>
-            <div scTabs class="max-w-md">
-              <div
-                scTabList
-                [selectedTab]="'overview'"
-                class="grid w-full grid-cols-3"
-              >
-                <button scTab value="overview" i18n="@@gallery.overview">
+            <div scTabs class="max-w-md" value="overview">
+              <div scTabsList class="grid w-full grid-cols-3">
+                <button scTabsTab value="overview" i18n="@@gallery.overview">
                   Overview
                 </button>
-                <button scTab value="analytics" i18n="@@gallery.analytics">
+                <button scTabsTab value="analytics" i18n="@@gallery.analytics">
                   Analytics
                 </button>
-                <button scTab value="reports" i18n="@@gallery.reports">
+                <button scTabsTab value="reports" i18n="@@gallery.reports">
                   Reports
                 </button>
               </div>
-              <div scTabPanel value="overview">
-                <ng-template scTabContent>
+              <div scTabsPanel value="overview">
+                <ng-template scTabsContent>
                   <div class="rounded-lg border p-4">
                     <h3 class="text-lg font-medium" i18n="@@gallery.overview">
                       Overview
@@ -667,8 +663,8 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
                   </div>
                 </ng-template>
               </div>
-              <div scTabPanel value="analytics">
-                <ng-template scTabContent>
+              <div scTabsPanel value="analytics">
+                <ng-template scTabsContent>
                   <div class="rounded-lg border p-4">
                     <h3 class="text-lg font-medium" i18n="@@gallery.analytics">
                       Analytics
@@ -682,8 +678,8 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
                   </div>
                 </ng-template>
               </div>
-              <div scTabPanel value="reports">
-                <ng-template scTabContent>
+              <div scTabsPanel value="reports">
+                <ng-template scTabsContent>
                   <div class="rounded-lg border p-4">
                     <h3 class="text-lg font-medium" i18n="@@gallery.reports">
                       Reports

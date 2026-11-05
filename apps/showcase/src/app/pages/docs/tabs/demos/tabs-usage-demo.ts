@@ -1,33 +1,101 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScTab,
-  ScTabContent,
-  ScTabList,
-  ScTabPanel,
+  ScCard,
+  ScCardContent,
+  ScCardDescription,
+  ScCardHeader,
+  ScCardTitle,
   ScTabs,
+  ScTabsContent,
+  ScTabsList,
+  ScTabsPanel,
+  ScTabsTab,
 } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-tabs-usage-demo',
-  imports: [ScTabs, ScTabPanel, ScTabContent, ScTabList, ScTab],
+  imports: [
+    ScTabs,
+    ScTabsList,
+    ScTabsTab,
+    ScTabsPanel,
+    ScTabsContent,
+    ScCard,
+    ScCardHeader,
+    ScCardTitle,
+    ScCardDescription,
+    ScCardContent,
+  ],
   template: `
-    <div scTabs class="w-[400px]">
-      <div scTabList [selectedTab]="'account'" class="grid w-full grid-cols-2">
-        <button scTab value="account">Account</button>
-        <button scTab value="password">Password</button>
+    <div scTabs value="overview" class="w-full max-w-sm">
+      <div scTabsList>
+        <button scTabsTab value="overview">Overview</button>
+        <button scTabsTab value="analytics">Analytics</button>
+        <button scTabsTab value="reports">Reports</button>
+        <button scTabsTab value="settings">Settings</button>
       </div>
-      <div scTabPanel value="account">
-        <ng-template scTabContent>
-          <p class="text-muted-foreground p-4 text-sm">
-            Make changes to your account here.
-          </p>
+      <div scTabsPanel value="overview">
+        <ng-template scTabsContent>
+          <div scCard>
+            <div scCardHeader>
+              <div scCardTitle>Overview</div>
+              <p scCardDescription>
+                View your key metrics and recent project activity. Track
+                progress across all your active projects.
+              </p>
+            </div>
+            <div scCardContent class="text-muted-foreground text-sm">
+              You have 12 active projects and 3 pending tasks.
+            </div>
+          </div>
         </ng-template>
       </div>
-      <div scTabPanel value="password">
-        <ng-template scTabContent>
-          <p class="text-muted-foreground p-4 text-sm">
-            Change your password here.
-          </p>
+      <div scTabsPanel value="analytics">
+        <ng-template scTabsContent>
+          <div scCard>
+            <div scCardHeader>
+              <div scCardTitle>Analytics</div>
+              <p scCardDescription>
+                Track performance and user engagement metrics. Monitor trends
+                and identify growth opportunities.
+              </p>
+            </div>
+            <div scCardContent class="text-muted-foreground text-sm">
+              Page views are up 25% compared to last month.
+            </div>
+          </div>
+        </ng-template>
+      </div>
+      <div scTabsPanel value="reports">
+        <ng-template scTabsContent>
+          <div scCard>
+            <div scCardHeader>
+              <div scCardTitle>Reports</div>
+              <p scCardDescription>
+                Generate and download your detailed reports. Export data in
+                multiple formats for analysis.
+              </p>
+            </div>
+            <div scCardContent class="text-muted-foreground text-sm">
+              You have 5 reports ready and available to export.
+            </div>
+          </div>
+        </ng-template>
+      </div>
+      <div scTabsPanel value="settings">
+        <ng-template scTabsContent>
+          <div scCard>
+            <div scCardHeader>
+              <div scCardTitle>Settings</div>
+              <p scCardDescription>
+                Manage your account preferences and options. Customize your
+                experience to fit your needs.
+              </p>
+            </div>
+            <div scCardContent class="text-muted-foreground text-sm">
+              Configure notifications, security, and themes.
+            </div>
+          </div>
         </ng-template>
       </div>
     </div>

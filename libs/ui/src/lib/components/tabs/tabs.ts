@@ -1,28 +1,34 @@
 import { Tabs } from '@angular/aria/tabs';
-import { Component, ViewEncapsulation, computed, input } from '@angular/core';
+import { Directive, computed, input, model } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 
-@Component({
+export type ScTabsOrientation = 'horizontal' | 'vertical';
+
+/**
+ * Tabs: a list of tabs and their panels, one shown at a time. Holds the
+ * selected tab (`[(value)]`) and the orientation, for the list and the
+ * panels.
+ */
+@Directive({
   selector: '[scTabs]',
-  encapsulation: ViewEncapsulation.None,
-  hostDirectives: [
-    {
-      directive: Tabs,
-    },
-  ],
+  exportAs: 'scTabs',
+  hostDirectives: [Tabs],
   host: {
     '[class]': 'class()',
     '[attr.data-orientation]': 'orientation()',
   },
-  template: ` <ng-content /> `,
 })
 export class ScTabs {
+  private readonly styles = injectPreset().tabs;
+
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly orientation = input<'horizontal' | 'vertical'>('horizontal');
-  readonly class = computed(() =>
-    cn(
-      'group/tabs gap-2 flex data-[orientation=horizontal]:flex-col data-[orientation=vertical]:flex-row',
-      this.classInput(),
-    ),
+  /** The selected tab's value; `[(value)]`. */
+  readonly value = model<string | undefined>(undefined);
+  /** The list's direction: its arrow keys, and the panels beside or below. */
+  readonly orientation = input<ScTabsOrientation>('horizontal');
+
+  protected readonly class = computed(() =>
+    cn(this.styles.root, this.classInput()),
   );
 }

@@ -5,8 +5,8 @@ import { expectNoHorizontalScroll, expectTargetSize } from '../../mobile';
 import { expectRtl } from '../../rtl';
 import { expect, test } from '../../test';
 
-const demo = (name: string) => `/demos/tabs-next/${name}-tabs-next-demo`;
-const usage = '/demos/tabs-next/tabs-next-usage-demo';
+const demo = (name: string) => `/demos/tabs/${name}-tabs-demo`;
+const usage = '/demos/tabs/tabs-usage-demo';
 
 const tab = (page: Page, name: string) => page.getByRole('tab', { name });
 /** The panel shown. */

@@ -35,11 +35,11 @@ import {
   ScProgressRange,
   ScProgressTrack,
   ScSeparator,
-  ScTab,
-  ScTabContent,
-  ScTabList,
-  ScTabPanel,
   ScTabs,
+  ScTabsContent,
+  ScTabsList,
+  ScTabsPanel,
+  ScTabsTab,
 } from '@semantic-components/ui';
 import {
   SiArrowLeftIcon,
@@ -85,10 +85,10 @@ import {
     ScProgressRange,
     ScProgressTrack,
     ScSeparator,
-    ScTab,
-    ScTabContent,
-    ScTabList,
-    ScTabPanel,
+    ScTabsTab,
+    ScTabsContent,
+    ScTabsList,
+    ScTabsPanel,
     ScTabs,
     SiArrowLeftIcon,
     SiChevronLeftIcon,
@@ -871,35 +871,35 @@ import {
                 </div>
               </div>
               <div scCardContent>
-                <div scTabs>
-                  <div
-                    scTabList
-                    [selectedTab]="'starters'"
-                    class="grid w-full grid-cols-4"
-                  >
+                <div scTabs value="starters">
+                  <div scTabsList class="grid w-full grid-cols-4">
                     <button
-                      scTab
+                      scTabsTab
                       value="starters"
                       i18n="@@shadcn.menu.starters"
                     >
                       Starters
                     </button>
-                    <button scTab value="mains" i18n="@@shadcn.menu.mains">
+                    <button scTabsTab value="mains" i18n="@@shadcn.menu.mains">
                       Mains
                     </button>
                     <button
-                      scTab
+                      scTabsTab
                       value="desserts"
                       i18n="@@shadcn.menu.desserts"
                     >
                       Desserts
                     </button>
-                    <button scTab value="drinks" i18n="@@shadcn.menu.drinks">
+                    <button
+                      scTabsTab
+                      value="drinks"
+                      i18n="@@shadcn.menu.drinks"
+                    >
                       Drinks
                     </button>
                   </div>
-                  <div scTabPanel value="starters">
-                    <ng-template scTabContent>
+                  <div scTabsPanel value="starters">
+                    <ng-template scTabsContent>
                       <div class="space-y-4 pt-4">
                         @for (item of menuStarters; track item.name) {
                           <div
@@ -942,8 +942,8 @@ import {
                       </div>
                     </ng-template>
                   </div>
-                  <div scTabPanel value="mains">
-                    <ng-template scTabContent>
+                  <div scTabsPanel value="mains">
+                    <ng-template scTabsContent>
                       <div
                         class="text-muted-foreground flex h-32 items-center justify-center text-sm"
                         i18n="@@shadcn.menu.mainsSoon"
@@ -952,8 +952,8 @@ import {
                       </div>
                     </ng-template>
                   </div>
-                  <div scTabPanel value="desserts">
-                    <ng-template scTabContent>
+                  <div scTabsPanel value="desserts">
+                    <ng-template scTabsContent>
                       <div
                         class="text-muted-foreground flex h-32 items-center justify-center text-sm"
                         i18n="@@shadcn.menu.dessertsSoon"
@@ -962,8 +962,8 @@ import {
                       </div>
                     </ng-template>
                   </div>
-                  <div scTabPanel value="drinks">
-                    <ng-template scTabContent>
+                  <div scTabsPanel value="drinks">
+                    <ng-template scTabsContent>
                       <div
                         class="text-muted-foreground flex h-32 items-center justify-center text-sm"
                         i18n="@@shadcn.menu.drinksSoon"

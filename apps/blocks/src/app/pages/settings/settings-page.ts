@@ -14,11 +14,11 @@ import {
   ScSeparator,
   ScSwitch,
   ScSwitchField,
-  ScTab,
-  ScTabContent,
-  ScTabList,
-  ScTabPanel,
   ScTabs,
+  ScTabsContent,
+  ScTabsList,
+  ScTabsPanel,
+  ScTabsTab,
   ScTextarea,
 } from '@semantic-components/ui';
 
@@ -39,10 +39,10 @@ import {
     ScSeparator,
     ScSwitch,
     ScSwitchField,
-    ScTab,
-    ScTabContent,
-    ScTabList,
-    ScTabPanel,
+    ScTabsTab,
+    ScTabsContent,
+    ScTabsList,
+    ScTabsPanel,
     ScTabs,
     ScTextarea,
   ],
@@ -60,28 +60,32 @@ import {
 
         <div scSeparator class="my-6"></div>
 
-        <div scTabs class="w-full">
-          <div scTabList [selectedTab]="'profile'">
-            <button scTab value="profile" i18n="@@settings.tab.profile">
+        <div scTabs class="w-full" value="profile">
+          <div scTabsList>
+            <button scTabsTab value="profile" i18n="@@settings.tab.profile">
               Profile
             </button>
-            <button scTab value="account" i18n="@@settings.tab.account">
+            <button scTabsTab value="account" i18n="@@settings.tab.account">
               Account
             </button>
             <button
-              scTab
+              scTabsTab
               value="notifications"
               i18n="@@settings.tab.notifications"
             >
               Notifications
             </button>
-            <button scTab value="appearance" i18n="@@settings.tab.appearance">
+            <button
+              scTabsTab
+              value="appearance"
+              i18n="@@settings.tab.appearance"
+            >
               Appearance
             </button>
           </div>
 
-          <div scTabPanel value="profile">
-            <ng-template scTabContent>
+          <div scTabsPanel value="profile">
+            <ng-template scTabsContent>
               <div class="space-y-6 pt-6">
                 <div scCard>
                   <div scCardHeader>
@@ -157,8 +161,8 @@ import {
             </ng-template>
           </div>
 
-          <div scTabPanel value="account">
-            <ng-template scTabContent>
+          <div scTabsPanel value="account">
+            <ng-template scTabsContent>
               <div class="space-y-6 pt-6">
                 <div scCard>
                   <div scCardHeader>
@@ -268,8 +272,8 @@ import {
             </ng-template>
           </div>
 
-          <div scTabPanel value="notifications">
-            <ng-template scTabContent>
+          <div scTabsPanel value="notifications">
+            <ng-template scTabsContent>
               <div class="space-y-6 pt-6">
                 <div scCard>
                   <div scCardHeader>
@@ -363,8 +367,8 @@ import {
             </ng-template>
           </div>
 
-          <div scTabPanel value="appearance">
-            <ng-template scTabContent>
+          <div scTabsPanel value="appearance">
+            <ng-template scTabsContent>
               <div class="space-y-6 pt-6">
                 <div scCard>
                   <div scCardHeader>

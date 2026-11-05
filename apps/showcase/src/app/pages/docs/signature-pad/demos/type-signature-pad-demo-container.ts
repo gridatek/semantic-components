@@ -26,11 +26,11 @@ import {
   ScSignaturePadLine,
   ScSignaturePadSurface,
   ScSignaturePadText,
-  ScTab,
-  ScTabContent,
-  ScTabList,
-  ScTabPanel,
   ScTabs,
+  ScTabsContent,
+  ScTabsList,
+  ScTabsPanel,
+  ScTabsTab,
 } from '@semantic-components/ui';
 
 /** Without a pointer, type your name: the text is the signature, in the input's font. One pad, two ways in. */
@@ -43,28 +43,28 @@ import {
     ScSignaturePadText,
     ScSignaturePadClear,
     ScTabs,
-    ScTabList,
-    ScTab,
-    ScTabPanel,
-    ScTabContent,
+    ScTabsList,
+    ScTabsTab,
+    ScTabsPanel,
+    ScTabsContent,
     ScLabel,
   ],
   template: \`
     <div scSignaturePad #pad="scSignaturePad" class="w-full max-w-md">
-      <div scTabs>
-        <div scTabList [selectedTab]="'draw'" class="grid w-full grid-cols-2">
-          <button scTab value="draw">Draw</button>
-          <button scTab value="type">Type</button>
+      <div scTabs value="draw">
+        <div scTabsList class="grid w-full grid-cols-2">
+          <button scTabsTab value="draw">Draw</button>
+          <button scTabsTab value="type">Type</button>
         </div>
-        <div scTabPanel value="draw">
-          <ng-template scTabContent>
+        <div scTabsPanel value="draw">
+          <ng-template scTabsContent>
             <div scSignaturePadSurface aria-label="Signature">
               <div scSignaturePadLine>× Sign here</div>
             </div>
           </ng-template>
         </div>
-        <div scTabPanel value="type">
-          <ng-template scTabContent>
+        <div scTabsPanel value="type">
+          <ng-template scTabsContent>
             <label scLabel for="signature-name" class="mb-2">
               Type your name
             </label>

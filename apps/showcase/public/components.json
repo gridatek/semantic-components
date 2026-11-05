@@ -1010,14 +1010,6 @@
   {
     "name": "Tabs",
     "path": "tabs",
-    "description": "Organize content into multiple sections with tabs.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Navigation"
-  },
-  {
-    "name": "Tabs Next",
-    "path": "tabs-next",
     "description": "Tabs and their panels, one shown at a time — in the look of the app's preset.",
     "status": "Experimental",
     "library": "ui",

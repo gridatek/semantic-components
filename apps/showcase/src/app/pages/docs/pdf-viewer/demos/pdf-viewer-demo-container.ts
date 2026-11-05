@@ -75,11 +75,11 @@ import {
   ScSpinner,
   ScSwitch,
   ScSwitchField,
-  ScTab,
-  ScTabContent,
-  ScTabList,
-  ScTabPanel,
   ScTabs,
+  ScTabsContent,
+  ScTabsList,
+  ScTabsPanel,
+  ScTabsTab,
   ScTextarea,
   ScToggleGroup,
   ScToggleGroupItem,
@@ -383,10 +383,10 @@ const INK_COLORS = [
     ScMenuItem,
     ScMenuSeparator,
     ScTabs,
-    ScTabList,
-    ScTab,
-    ScTabPanel,
-    ScTabContent,
+    ScTabsList,
+    ScTabsTab,
+    ScTabsPanel,
+    ScTabsContent,
     ScDialogProvider,
     ScDialogPortal,
     ScDialog,
@@ -1076,38 +1076,53 @@ const INK_COLORS = [
               aria-label="Document sidebar"
               [style.width.px]="viewer.sidebarWidth()"
             >
-              <div scTabs class="flex min-h-0 flex-1 flex-col">
+              <div
+                scTabs
+                class="flex min-h-0 flex-1 flex-col"
+                [value]="sidebarTab()"
+                (valueChange)="setSidebarTab($event)"
+              >
                 <div
-                  scTabList
+                  scTabsList
                   variant="line"
-                  selectionMode="follow"
                   aria-label="Sidebar views"
                   class="w-full justify-start border-b px-1"
-                  [selectedTab]="sidebarTab()"
-                  (selectedTabChange)="setSidebarTab($event)"
+                  activateOnFocus
                 >
-                  <button scTab value="thumbnails" [scTooltipTrigger]="'Pages'">
+                  <button
+                    scTabsTab
+                    value="thumbnails"
+                    [scTooltipTrigger]="'Pages'"
+                  >
                     <svg siLayoutGridIcon></svg>
                     <span class="sr-only">Pages</span>
                   </button>
-                  <button scTab value="outline" [scTooltipTrigger]="'Outline'">
+                  <button
+                    scTabsTab
+                    value="outline"
+                    [scTooltipTrigger]="'Outline'"
+                  >
                     <svg siListTreeIcon></svg>
                     <span class="sr-only">Outline</span>
                   </button>
                   <button
-                    scTab
+                    scTabsTab
                     value="attachments"
                     [scTooltipTrigger]="'Attachments'"
                   >
                     <svg siPaperclipIcon></svg>
                     <span class="sr-only">Attachments</span>
                   </button>
-                  <button scTab value="layers" [scTooltipTrigger]="'Layers'">
+                  <button
+                    scTabsTab
+                    value="layers"
+                    [scTooltipTrigger]="'Layers'"
+                  >
                     <svg siLayersIcon></svg>
                     <span class="sr-only">Layers</span>
                   </button>
                   <button
-                    scTab
+                    scTabsTab
                     value="comments"
                     [scTooltipTrigger]="'Comments'"
                   >
@@ -1118,11 +1133,11 @@ const INK_COLORS = [
 
                 <!-- Pages: thumbnails, and page organisation -->
                 <div
-                  scTabPanel
+                  scTabsPanel
                   value="thumbnails"
                   class="flex-1 overflow-y-auto"
                 >
-                  <ng-template scTabContent>
+                  <ng-template scTabsContent>
                     <div
                       role="toolbar"
                       aria-label="Organise pages"
@@ -1234,8 +1249,8 @@ const INK_COLORS = [
                 </div>
 
                 <!-- Outline -->
-                <div scTabPanel value="outline" class="flex-1 overflow-y-auto">
-                  <ng-template scTabContent>
+                <div scTabsPanel value="outline" class="flex-1 overflow-y-auto">
+                  <ng-template scTabsContent>
                     @if (viewer.outline().length === 0) {
                       <p class="text-muted-foreground p-4 text-center text-sm">
                         No outline in this document.
@@ -1278,11 +1293,11 @@ const INK_COLORS = [
 
                 <!-- Attachments -->
                 <div
-                  scTabPanel
+                  scTabsPanel
                   value="attachments"
                   class="flex-1 overflow-y-auto"
                 >
-                  <ng-template scTabContent>
+                  <ng-template scTabsContent>
                     @if (viewer.attachments().length === 0) {
                       <p class="text-muted-foreground p-4 text-center text-sm">
                         No attachments in this document.
@@ -1311,8 +1326,8 @@ const INK_COLORS = [
                 </div>
 
                 <!-- Layers -->
-                <div scTabPanel value="layers" class="flex-1 overflow-y-auto">
-                  <ng-template scTabContent>
+                <div scTabsPanel value="layers" class="flex-1 overflow-y-auto">
+                  <ng-template scTabsContent>
                     @if (viewer.layers().length === 0) {
                       <p class="text-muted-foreground p-4 text-center text-sm">
                         No layers in this document.
@@ -1337,8 +1352,8 @@ const INK_COLORS = [
                 </div>
 
                 <!-- Comments -->
-                <div scTabPanel value="comments" class="min-h-0 flex-1">
-                  <ng-template scTabContent>
+                <div scTabsPanel value="comments" class="min-h-0 flex-1">
+                  <ng-template scTabsContent>
                     <div class="flex h-full flex-col">
                       <div
                         class="flex items-center justify-between gap-2 border-b px-3 py-2"
@@ -1815,21 +1830,19 @@ const INK_COLORS = [
                 <h2 scDialogTitle>Add a signature</h2>
               </div>
 
-              <div scTabs>
-                <div
-                  scTabList
-                  selectionMode="follow"
-                  aria-label="Signature type"
-                  [selectedTab]="signature.mode()"
-                  (selectedTabChange)="signature.setMode($event)"
-                >
-                  <button scTab value="type">Type</button>
-                  <button scTab value="draw">Draw</button>
-                  <button scTab value="image">Image</button>
+              <div
+                scTabs
+                [value]="signature.mode()"
+                (valueChange)="signature.setMode($event)"
+              >
+                <div scTabsList aria-label="Signature type" activateOnFocus>
+                  <button scTabsTab value="type">Type</button>
+                  <button scTabsTab value="draw">Draw</button>
+                  <button scTabsTab value="image">Image</button>
                 </div>
 
-                <div scTabPanel value="type">
-                  <ng-template scTabContent>
+                <div scTabsPanel value="type">
+                  <ng-template scTabsContent>
                     <input
                       scInput
                       scPdfViewerSignatureName
@@ -1839,8 +1852,8 @@ const INK_COLORS = [
                   </ng-template>
                 </div>
 
-                <div scTabPanel value="draw">
-                  <ng-template scTabContent>
+                <div scTabsPanel value="draw">
+                  <ng-template scTabsContent>
                     <div class="grid gap-3">
                       <div class="relative h-36">
                         @if (!signature.strokes().length) {
@@ -1871,8 +1884,8 @@ const INK_COLORS = [
                   </ng-template>
                 </div>
 
-                <div scTabPanel value="image">
-                  <ng-template scTabContent>
+                <div scTabsPanel value="image">
+                  <ng-template scTabsContent>
                     <div
                       class="flex h-36 flex-col items-center justify-center gap-2 rounded-lg border bg-white"
                     >

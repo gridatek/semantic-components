@@ -20,52 +20,32 @@ import { VerticalTabsDemo } from './vertical-tabs-demo';
 export class VerticalTabsDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScTab,
-  ScTabContent,
-  ScTabList,
-  ScTabPanel,
   ScTabs,
+  ScTabsContent,
+  ScTabsList,
+  ScTabsPanel,
+  ScTabsTab,
 } from '@semantic-components/ui';
 
+/** orientation="vertical": the list beside the panels; ArrowUp and ArrowDown move. */
 @Component({
   selector: 'app-vertical-tabs-demo',
-  imports: [ScTabs, ScTabPanel, ScTabContent, ScTabList, ScTab],
+  imports: [ScTabs, ScTabsList, ScTabsTab, ScTabsPanel, ScTabsContent],
   template: \`
-    <div scTabs orientation="vertical" class="w-[500px]">
-      <div scTabList [selectedTab]="'account'">
-        <button scTab value="account">Account</button>
-        <button scTab value="password">Password</button>
-        <button scTab value="settings">Settings</button>
+    <div scTabs value="account" orientation="vertical">
+      <div scTabsList>
+        <button scTabsTab value="account">Account</button>
+        <button scTabsTab value="password">Password</button>
+        <button scTabsTab value="notifications">Notifications</button>
       </div>
-      <div scTabPanel value="account" class="w-full">
-        <ng-template scTabContent>
-          <div class="space-y-2 rounded-lg border p-4">
-            <h3 class="text-lg font-medium">Account</h3>
-            <p class="text-muted-foreground text-sm">
-              Manage your account settings and preferences.
-            </p>
-          </div>
-        </ng-template>
+      <div scTabsPanel value="account" class="text-muted-foreground p-2">
+        <ng-template scTabsContent> Your name and email. </ng-template>
       </div>
-      <div scTabPanel value="password" class="w-full">
-        <ng-template scTabContent>
-          <div class="space-y-2 rounded-lg border p-4">
-            <h3 class="text-lg font-medium">Password</h3>
-            <p class="text-muted-foreground text-sm">
-              Change your password and security settings.
-            </p>
-          </div>
-        </ng-template>
+      <div scTabsPanel value="password" class="text-muted-foreground p-2">
+        <ng-template scTabsContent> Change your password. </ng-template>
       </div>
-      <div scTabPanel value="settings" class="w-full">
-        <ng-template scTabContent>
-          <div class="space-y-2 rounded-lg border p-4">
-            <h3 class="text-lg font-medium">Settings</h3>
-            <p class="text-muted-foreground text-sm">
-              Configure your application preferences.
-            </p>
-          </div>
-        </ng-template>
+      <div scTabsPanel value="notifications" class="text-muted-foreground p-2">
+        <ng-template scTabsContent> What we tell you, and how. </ng-template>
       </div>
     </div>
   \`,

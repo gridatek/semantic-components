@@ -57,7 +57,6 @@ export * from './spinner';
 export * from './switch';
 export * from './table';
 export * from './tabs';
-export * from './tabs-next';
 export * from './textarea';
 export * from './theme';
 export * from './time-input';

@@ -23,7 +23,7 @@ const PRESETS: Record<string, ScPreset> = {
   rhea,
 };
 
-test.describe('Tabs Next in every preset', () => {
+test.describe('Tabs in every preset', () => {
   // A docs page and axe, twice: slow under load.
   test.slow();
 
@@ -37,7 +37,7 @@ test.describe('Tabs Next in every preset', () => {
       await context.addCookies([
         { name: 'sc-preset', value: preset, url: baseURL! },
       ]);
-      await page.goto('/demos/tabs-next/tabs-next-usage-demo');
+      await page.goto('/demos/tabs/tabs-usage-demo');
       for (const [target, wanted, what] of [
         [page.getByRole('tablist'), styles.tabs.list({}), 'list'],
         [page.getByRole('tab').first(), styles.tabs.trigger, 'tab'],
@@ -54,7 +54,7 @@ test.describe('Tabs Next in every preset', () => {
           .toEqual([]);
       }
 
-      await page.goto('/docs/components/tabs-next');
+      await page.goto('/docs/components/tabs');
       await expectNoA11yViolations(page);
       await expectNoA11yViolations(page, { dark: true });
     });

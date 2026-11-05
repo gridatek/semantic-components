@@ -1,5 +1,5 @@
-export { ScTabs } from './tabs';
-export { ScTabList, tabsListVariants } from './tab-list';
-export { ScTab } from './tab';
-export { ScTabPanel } from './tab-panel';
-export { ScTabContent } from './tab-content';
+export * from './tabs';
+export * from './tabs-content';
+export * from './tabs-list';
+export * from './tabs-panel';
+export * from './tabs-tab';

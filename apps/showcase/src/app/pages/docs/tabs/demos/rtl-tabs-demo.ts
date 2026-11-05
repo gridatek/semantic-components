@@ -1,63 +1,43 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { RtlTabsNextDemo } from './rtl-tabs-next-demo';
-
-@Component({
-  selector: 'app-rtl-tabs-next-demo-container',
-  imports: [DemoContainer, RtlTabsNextDemo],
-  template: `
-    <app-demo-container
-      title="RTL"
-      demoUrl="/demos/tabs-next/rtl-tabs-next-demo"
-      [code]="code"
-    >
-      <app-rtl-tabs-next-demo />
-    </app-demo-container>
-  `,
-  host: { class: 'block w-full' },
-  encapsulation: ViewEncapsulation.None,
-})
-export class RtlTabsNextDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCard,
   ScCardContent,
   ScCardDescription,
   ScCardHeader,
   ScCardTitle,
-  ScTabsNext,
-  ScTabsNextContent,
-  ScTabsNextList,
-  ScTabsNextPanel,
-  ScTabsNextTab,
+  ScTabs,
+  ScTabsContent,
+  ScTabsList,
+  ScTabsPanel,
+  ScTabsTab,
 } from '@semantic-components/ui';
 
 /** Right to left: the tabs from the right, the arrows mirrored. Only the area is marked right to left. */
 @Component({
-  selector: 'app-rtl-tabs-next-demo',
+  selector: 'app-rtl-tabs-demo',
   imports: [
-    ScTabsNext,
-    ScTabsNextList,
-    ScTabsNextTab,
-    ScTabsNextPanel,
-    ScTabsNextContent,
+    ScTabs,
+    ScTabsList,
+    ScTabsTab,
+    ScTabsPanel,
+    ScTabsContent,
     ScCard,
     ScCardHeader,
     ScCardTitle,
     ScCardDescription,
     ScCardContent,
   ],
-  template: \`
+  template: `
     <div dir="rtl" lang="ar" class="flex w-full justify-center">
-      <div scTabsNext value="overview" class="w-full max-w-sm">
-        <div scTabsNextList>
-          <button scTabsNextTab value="overview">نظرة عامة</button>
-          <button scTabsNextTab value="analytics">التحليلات</button>
-          <button scTabsNextTab value="reports">التقارير</button>
-          <button scTabsNextTab value="settings">الإعدادات</button>
+      <div scTabs value="overview" class="w-full max-w-sm">
+        <div scTabsList>
+          <button scTabsTab value="overview">نظرة عامة</button>
+          <button scTabsTab value="analytics">التحليلات</button>
+          <button scTabsTab value="reports">التقارير</button>
+          <button scTabsTab value="settings">الإعدادات</button>
         </div>
-        <div scTabsNextPanel value="overview">
-          <ng-template scTabsNextContent>
+        <div scTabsPanel value="overview">
+          <ng-template scTabsContent>
             <div scCard>
               <div scCardHeader>
                 <div scCardTitle>نظرة عامة</div>
@@ -72,8 +52,8 @@ import {
             </div>
           </ng-template>
         </div>
-        <div scTabsNextPanel value="analytics">
-          <ng-template scTabsNextContent>
+        <div scTabsPanel value="analytics">
+          <ng-template scTabsContent>
             <div scCard>
               <div scCardHeader>
                 <div scCardTitle>التحليلات</div>
@@ -88,8 +68,8 @@ import {
             </div>
           </ng-template>
         </div>
-        <div scTabsNextPanel value="reports">
-          <ng-template scTabsNextContent>
+        <div scTabsPanel value="reports">
+          <ng-template scTabsContent>
             <div scCard>
               <div scCardHeader>
                 <div scCardTitle>التقارير</div>
@@ -104,8 +84,8 @@ import {
             </div>
           </ng-template>
         </div>
-        <div scTabsNextPanel value="settings">
-          <ng-template scTabsNextContent>
+        <div scTabsPanel value="settings">
+          <ng-template scTabsContent>
             <div scCard>
               <div scCardHeader>
                 <div scCardTitle>الإعدادات</div>
@@ -121,9 +101,8 @@ import {
         </div>
       </div>
     </div>
-  \`,
+  `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class RtlTabsNextDemo {}`;
-}
+export class RtlTabsDemo {}

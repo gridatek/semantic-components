@@ -3,7 +3,7 @@ import { Directive } from '@angular/core';
 
 /** A panel's content, in a template: created when the panel is shown. */
 @Directive({
-  selector: 'ng-template[scTabsNextContent]',
+  selector: 'ng-template[scTabsContent]',
   hostDirectives: [TabContent],
 })
-export class ScTabsNextContent {}
+export class ScTabsContent {}

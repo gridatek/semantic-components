@@ -318,7 +318,7 @@ A menu at the pointer (`div[scContextMenu]`): shadcn's Context Menu. A shadcn co
 
 ## Tabs
 
-Tabs and their panels (`[scTabsNext]`, beside the old Tabs until it is validated): shadcn's Tabs, Base UI's parts. A shadcn component, so no web research: Base UI's docs, shadcn's reference app and its docs' examples (2026-11-05).
+Tabs and their panels (`[scTabs]`; rewritten and switched in 2026-11-05): shadcn's Tabs, Base UI's parts. A shadcn component, so no web research: Base UI's docs, shadcn's reference app and its docs' examples (2026-11-05).
 
 | Library                                                                                            | What to read                                                                                                                        |
 | -------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |

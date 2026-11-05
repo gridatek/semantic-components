@@ -20,43 +20,32 @@ import { LineTabsDemo } from './line-tabs-demo';
 export class LineTabsDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScTab,
-  ScTabContent,
-  ScTabList,
-  ScTabPanel,
   ScTabs,
+  ScTabsContent,
+  ScTabsList,
+  ScTabsPanel,
+  ScTabsTab,
 } from '@semantic-components/ui';
 
+/** variant="line": the selected tab underlined, no box. */
 @Component({
   selector: 'app-line-tabs-demo',
-  imports: [ScTabs, ScTabPanel, ScTabContent, ScTabList, ScTab],
+  imports: [ScTabs, ScTabsList, ScTabsTab, ScTabsPanel, ScTabsContent],
   template: \`
-    <div scTabs class="w-[500px]">
-      <div scTabList variant="line" [selectedTab]="'overview'">
-        <button scTab value="overview">Overview</button>
-        <button scTab value="analytics">Analytics</button>
-        <button scTab value="reports">Reports</button>
+    <div scTabs value="overview">
+      <div scTabsList variant="line">
+        <button scTabsTab value="overview">Overview</button>
+        <button scTabsTab value="analytics">Analytics</button>
+        <button scTabsTab value="reports">Reports</button>
       </div>
-      <div scTabPanel value="overview">
-        <ng-template scTabContent>
-          <p class="text-muted-foreground text-sm">
-            Overview content. View your dashboard summary and key metrics.
-          </p>
-        </ng-template>
+      <div scTabsPanel value="overview" class="text-muted-foreground p-2">
+        <ng-template scTabsContent> Your key metrics at a glance. </ng-template>
       </div>
-      <div scTabPanel value="analytics">
-        <ng-template scTabContent>
-          <p class="text-muted-foreground text-sm">
-            Analytics content. Dive deep into your data and discover insights.
-          </p>
-        </ng-template>
+      <div scTabsPanel value="analytics" class="text-muted-foreground p-2">
+        <ng-template scTabsContent> Trends and engagement. </ng-template>
       </div>
-      <div scTabPanel value="reports">
-        <ng-template scTabContent>
-          <p class="text-muted-foreground text-sm">
-            Reports content. Generate and download detailed reports.
-          </p>
-        </ng-template>
+      <div scTabsPanel value="reports" class="text-muted-foreground p-2">
+        <ng-template scTabsContent> Reports ready to export. </ng-template>
       </div>
     </div>
   \`,

@@ -1,66 +1,58 @@
 # Tabs
 
-A set of layered sections of content, known as tab panels, that are displayed one at a time.
-
-Built on `@angular/aria/tabs` directives with shadcn styling.
-
-## Components
-
-| Component      | Selector                    | Role                                                                                                                                                                        |
-| -------------- | --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ScTabs`       | `[scTabs]`                  | Root container. Inputs: `orientation` (`horizontal` \| `vertical`)                                                                                                          |
-| `ScTabList`    | `[scTabList]`               | Tab button container. Inputs: `selectedTab`, `selectionMode`, `orientation`, `disabled`, `wrap`, `focusMode`, `variant` (`default` \| `line`). Outputs: `selectedTabChange` |
-| `ScTab`        | `[scTab]`                   | Individual tab trigger (directive). Inputs: `value`, `disabled`, `id`                                                                                                       |
-| `ScTabPanel`   | `[scTabPanel]`              | Content container. Inputs: `value`, `id`                                                                                                                                    |
-| `ScTabContent` | `ng-template[scTabContent]` | Lazy content — only instantiated when the panel is active                                                                                                                   |
+Tabs and their panels, one shown at a time. In the look of the app's preset (shadcn's Tabs), Base UI's parts and state, on `@angular/aria`.
 
 ## Usage
 
 ```html
+<div scTabs value="account">
+  <div scTabsList>
+    <button scTabsTab value="account">Account</button>
+    <button scTabsTab value="password">Password</button>
+  </div>
+  <div scTabsPanel value="account">
+    <ng-template scTabsContent>Make changes to your account here.</ng-template>
+  </div>
+  <div scTabsPanel value="password">
+    <ng-template scTabsContent>Change your password here.</ng-template>
+  </div>
+</div>
+```
+
+## Anatomy
+
+```html
 <div scTabs>
-  <div scTabList selectedTab="account" selectionMode="follow">
-    <button scTab value="account">Account</button>
-    <button scTab value="password">Password</button>
+  <div scTabsList>
+    <button scTabsTab></button>
   </div>
-  <div scTabPanel value="account">
-    <ng-template scTabContent>Account content here.</ng-template>
-  </div>
-  <div scTabPanel value="password">
-    <ng-template scTabContent>Password content here.</ng-template>
+  <div scTabsPanel>
+    <ng-template scTabsContent></ng-template>
   </div>
 </div>
 ```
 
-### Line variant
+## Limitation: panel content
 
-```html
-<div scTabList variant="line" selectedTab="overview" selectionMode="follow">...</div>
-```
-
-### Vertical orientation
-
-```html
-<div scTabs orientation="vertical">
-  <div scTabList selectedTab="profile" selectionMode="follow">...</div>
-  ...
-</div>
-```
-
-The tab list follows the root's `orientation` (`aria-orientation`, ↑/↓ instead of ←/→) unless it sets its own.
-
-### Disabled tab
-
-```html
-<button scTab value="notifications" disabled>Notifications</button>
-```
-
-A disabled tab stays focusable with the arrow keys (`aria-disabled`) but can't be selected.
+Angular Aria renders a panel only through its template: content written straight in a panel is not allowed (Aria reports it in development). A panel's content is created when its tab is selected, and destroyed when another one is — keep what must survive a switch (typed text, state) outside the panel, in your component or your form.
 
 ## Keyboard
 
-| Key                            | Action                                                                |
-| ------------------------------ | --------------------------------------------------------------------- |
-| `Tab`                          | Into the tab list (the selected tab), then into the panel             |
-| `←` / `→` (`↑` / `↓` vertical) | Previous / next tab (wraps); selects it with `selectionMode="follow"` |
-| `Home` / `End`                 | First / last tab                                                      |
-| `Enter` / `Space`              | Select the focused tab (`selectionMode="explicit"`)                   |
+Tab enters the list on the selected tab, then goes on to its panel. ArrowLeft and ArrowRight move between the tabs (mirrored right to left, by the list's own direction), ArrowUp and ArrowDown when vertical; Home and End go to the ends. Enter or Space selects — or the arrows select as they move, with `activateOnFocus`. A disabled tab is reached, not selected.
+
+## API reference
+
+| Part            | Selector                     | Inputs                                                                                                            |
+| --------------- | ---------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `ScTabs`        | `[scTabs]`                   | `value` (`[(value)]`), `orientation` (`'horizontal'`, `'vertical'`), `class`                                      |
+| `ScTabsList`    | `[scTabsList]`               | `variant` (`'default'`, `'line'`), `activateOnFocus` (default off), `wrap` (default on), `class` — role `tablist` |
+| `ScTabsTab`     | `button[scTabsTab]`          | `value`, `disabled` (reached, not selected: `aria-disabled`), `class` — role `tab`                                |
+| `ScTabsPanel`   | `[scTabsPanel]`              | `value`, `class` — role `tabpanel`, named by its tab                                                              |
+| `ScTabsContent` | `ng-template[scTabsContent]` | — the panel's content                                                                                             |
+
+Every part's classes are the preset's (`injectPreset().tabs`: `root`, `list` by variant, `trigger`, `panel`): shadcn's Tabs, in each style.
+
+## Left out
+
+- Base UI's `Tabs.Indicator` (a highlight sliding between tabs) and `data-activation-direction` (for panels sliding in): shadcn uses neither.
+- Tabs as links for routing: page navigation is a `nav` with `aria-current`.

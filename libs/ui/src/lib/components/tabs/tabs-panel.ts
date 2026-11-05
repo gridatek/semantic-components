@@ -5,18 +5,18 @@ import { cn } from '../../utils';
 
 /**
  * A tab's panel (role tabpanel), named by its tab, shown while its tab is
- * selected. Its content goes in an `ng-template scTabsNextContent` (Angular
+ * selected. Its content goes in an `ng-template scTabsContent` (Angular
  * Aria's way): created when the panel is shown.
  */
 @Directive({
-  selector: '[scTabsNextPanel]',
-  exportAs: 'scTabsNextPanel',
+  selector: '[scTabsPanel]',
+  exportAs: 'scTabsPanel',
   hostDirectives: [{ directive: TabPanel, inputs: ['value', 'id'] }],
   host: {
     '[class]': 'class()',
   },
 })
-export class ScTabsNextPanel {
+export class ScTabsPanel {
   private readonly styles = injectPreset().tabs;
 
   readonly classInput = input<string>('', { alias: 'class' });
