@@ -17,6 +17,7 @@ Open work found along the way, kept for later — tick an item when it's done. N
 
 ## Larger items
 
+- [ ] **Part names across the whole library**, after the styles rewrite (the user, 2026-11-05). `…Content` only for an `ng-template` rendered later (`ng-template[scMenuNextContent]`; the rule in [component-design-principles.md](component-design-principles.md#content-only-for-content-rendered-later)), never for one section between a header and a footer; `ScCardContent` breaks it, and `…Body` (ScAccordionBody, ScCollapsibleBody, ScEmptyBody, ScFieldBody, ScItemBody, ScNativeDialogBody, ScTableBody) has no defined meaning. Find the name for a section, then check every part's name.
 - [ ] **SSR: 16 components still throw on the server**; the CI `ssr` job may fail because of them.
 - [ ] **Charts** (see [reference-libraries.md](reference-libraries.md#charts)):
   - [ ] Animations, as Recharts: series appearing and changing data (`isAnimationActive`, duration, easing); honour `prefers-reduced-motion`.

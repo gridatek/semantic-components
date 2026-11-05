@@ -35,6 +35,18 @@ ScPaginationList;
 ScPaginationContent;
 ```
 
+### `Content`: only for content rendered later
+
+`…Content` names a part on an `ng-template` whose content is rendered later — once its menu has opened, its panel expanded:
+
+```html
+<div scMenuNext>
+  <ng-template scMenuNextContent>…the items…</ng-template>
+</div>
+```
+
+It doesn't name one part among others, as the part between a header and a footer: that is one section of the component, and needs a name saying which. (`ScCardContent`, shadcn's name, doesn't follow this yet: its name, with the parts named `…Body`, is still to be found.)
+
 ### Attribute selectors, prefixed `sc`
 
 A part is an attribute on the consumer's element, in camelCase with the `sc` prefix — never a custom element (`<sc-…>`), not even for an internal part. The element is named in the selector when the part needs it (`nav`, `button`, `a`).
