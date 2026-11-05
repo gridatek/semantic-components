@@ -1,10 +1,15 @@
 import { Menu, MenuItem } from '@angular/aria/menu';
 import { Directionality } from '@angular/cdk/bidi';
-import { CdkOverlayOrigin, OverlayModule } from '@angular/cdk/overlay';
+import {
+  CdkConnectedOverlay,
+  CdkOverlayOrigin,
+  OverlayModule,
+} from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import {
   Component,
   ViewEncapsulation,
+  afterRenderEffect,
   booleanAttribute,
   computed,
   contentChild,
@@ -13,6 +18,7 @@ import {
   input,
   signal,
   untracked,
+  viewChild,
 } from '@angular/core';
 import { injectPreset } from '../../config/preset';
 import { cn, setInput } from '../../utils';
@@ -90,6 +96,14 @@ export class ScMenuItem {
   );
 
   /**
+   * How far the submenu's first row is from its top (its padding and
+   * border, the preset's): lifted by as much, that row is level with this
+   * item. Measured once the submenu is rendered.
+   */
+  private readonly submenuInset = signal(0);
+  private readonly overlay = viewChild(CdkConnectedOverlay);
+
+  /**
    * Beside its menu, at the reading end — at the other end if there is no
    * room — a gap from the menu's edge, whatever the preset's padding. The
    * CDK mirrors start and end in right to left, not the offsets: they are
@@ -111,7 +125,7 @@ export class ScMenuItem {
         overlayX: 'start' as const,
         overlayY: 'top' as const,
         offsetX: rtl ? -left : right,
-        offsetY: -4,
+        offsetY: -this.submenuInset(),
       },
       {
         originX: 'start' as const,
@@ -119,7 +133,7 @@ export class ScMenuItem {
         overlayX: 'end' as const,
         overlayY: 'top' as const,
         offsetX: rtl ? right : -left,
-        offsetY: -4,
+        offsetY: -this.submenuInset(),
       },
     ];
   });
@@ -145,6 +159,7 @@ export class ScMenuItem {
 
   constructor() {
     useDefaultSearchTerm(this.menuItem as MenuItem<unknown>);
+    this.measureSubmenu();
     effect(() => {
       const menu = this.submenuPortal()?.menu();
       if (menu) setInput(this.menuItem.submenu, menu);
@@ -158,6 +173,23 @@ export class ScMenuItem {
         menu._pattern.first();
         this.focusFirst.set(false);
       });
+    });
+  }
+
+  private measureSubmenu(): void {
+    afterRenderEffect({
+      read: () => {
+        if (!this.submenuOpen()) return;
+        const element = this.submenuPortal()?.menu()?.element;
+        if (!element) return;
+        const style = getComputedStyle(element);
+        const inset =
+          parseFloat(style.paddingTop) + parseFloat(style.borderTopWidth);
+        if (inset === untracked(this.submenuInset)) return;
+        this.submenuInset.set(inset);
+        // The CDK takes new positions, but places by them on its next update.
+        queueMicrotask(() => this.overlay()?.overlayRef?.updatePosition());
+      },
     });
   }
 

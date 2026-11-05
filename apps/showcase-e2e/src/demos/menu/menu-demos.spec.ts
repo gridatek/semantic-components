@@ -169,6 +169,12 @@ test('Submenu: ArrowRight opens it on its first item, ArrowLeft closes it; neste
   ];
   // At the reading end, 4px from its menu, whatever the preset's padding.
   expect(sub.x - (parent.x + parent.width)).toBeCloseTo(4, 0);
+  // Its first row level with the item that opened it.
+  const [opener, first] = [
+    await box(invite),
+    await box(page.getByRole('menuitem', { name: 'Email' })),
+  ];
+  expect(first.y).toBeCloseTo(opener.y, 0);
   await press(page, 'ArrowDown');
   await press(page, 'ArrowDown');
   await press(page, 'ArrowRight');
