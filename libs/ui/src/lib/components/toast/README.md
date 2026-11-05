@@ -15,16 +15,16 @@ ScToaster.show({ title, description, variant, action })
 
 ## Parts
 
-| Part                 | Selector                       | Does                                                                                                     |
-| -------------------- | ------------------------------ | -------------------------------------------------------------------------------------------------------- |
-| `ScToastTemplate`    | `ng-template[scToastTemplate]` | How a toast looks — once, in your app; `let-toast` is the toast's data; `label` names the toasts' region |
-| `ScToastIcon`        | `[scToastIcon]`                | Your icon (a spinner turns while `loading`)                                                              |
-| `ScToastTitle`       | `[scToastTitle]`               | The title                                                                                                |
-| `ScToastDescription` | `[scToastDescription]`         | The description                                                                                          |
-| `ScToastAction`      | `button[scToastAction]`        | Runs the toast's `action`, then dismisses it: write `toast.action.label`                                 |
-| `ScToastClose`       | `button[scToastClose]`         | Dismisses the toast: write its icon and name it                                                          |
-| `ScToast`            | `div[scToast]`                 | The toast, your template's root: variant styles, its place in the stack, swipe to dismiss                |
-| `ScToastStack`       | `div[scToastStack]`            | The stack — the toaster creates it in an overlay: don't place it yourself                                |
+| Part                 | Selector                       | Does                                                                                                                                                   |
+| -------------------- | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `ScToastTemplate`    | `ng-template[scToastTemplate]` | How a toast looks — once, in your app; `let-toast` is the toast's data; `label` names the toasts' region                                               |
+| `ScToastIcon`        | `[scToastIcon]`                | Your icon (a spinner turns while `loading`)                                                                                                            |
+| `ScToastTitle`       | `[scToastTitle]`               | The title                                                                                                                                              |
+| `ScToastDescription` | `[scToastDescription]`         | The description                                                                                                                                        |
+| `ScToastAction`      | `button[scToastAction]`        | Runs the toast's `action`, then dismisses it: write `toast.action.label`                                                                               |
+| `ScToastClose`       | `button[scToastClose]`         | Dismisses the toast, on any button (behaviour only): write its icon and name it. Straight in the toast (the ✕): in its corner, shown on hover or focus |
+| `ScToast`            | `div[scToast]`                 | The toast, your template's root: variant styles, its place in the stack, swipe to dismiss                                                              |
+| `ScToastStack`       | `div[scToastStack]`            | The stack — the toaster creates it in an overlay: don't place it yourself                                                                              |
 
 ## Service
 
@@ -111,7 +111,7 @@ providers: [
     @if (toast.action) {
     <button scToastAction>{{ toast.action.label }}</button>
     }
-    <button scToastClose><svg siXIcon></svg><span class="sr-only">Close</span></button>
+    <button scButton variant="ghost" size="icon-xs" scToastClose><svg siXIcon></svg><span class="sr-only">Close</span></button>
   </div>
 </ng-template>
 ```

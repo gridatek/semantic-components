@@ -4,7 +4,7 @@ Status: **decided** (2026-10-16) — option A: a part on a `button` gives it its
 
 ## The rule
 
-A part on a `button` (`scToastClose`, `scPdfViewerZoomIn`, `scTransferListMoveToTarget`…):
+A part on a `button` (`scPdfViewerZoomIn`, `scTransferListMoveToTarget`…):
 
 1. takes its look from the preset's button (`injectPreset().button(…)`, in a field) (or `toggleVariants()`), never from a class list of its own that copies a button;
 2. has `variant` and `size` inputs, with defaults that suit where it sits — the consumer writes nothing to get the right look, and picks another with the same words as `scButton` (`variant="outline" size="icon-sm"`);
@@ -13,9 +13,9 @@ A part on a `button` (`scToastClose`, `scPdfViewerZoomIn`, `scTransferListMoveTo
 
 ```html
 <!-- The part styles the button -->
-<button scToastClose>
-  <svg siXIcon></svg>
-  <span class="sr-only">Close</span>
+<button scPaginationLast>
+  <svg siChevronsRightIcon></svg>
+  <span class="sr-only">Last page</span>
 </button>
 
 <!-- Another look: the same words as scButton -->
@@ -28,7 +28,7 @@ Model: `libs/ui/src/lib/components/pagination/pagination-last.ts`.
 
 These add behaviour to whatever button the consumer writes, `scButton` or another part:
 
-- **Triggers and closes that go on any button** — `scDialogTrigger`, `scDialogClose` (straight in the dialog, the ✕: the dialog places it), `scSheetTrigger`, `scDrawerTrigger`, `scDrawerClose`, `scPopoverTrigger`, `scAlertDialogTrigger`, `scNativeDialogTrigger`, `scThemeModeToggle` (on a `scButton`, a `scSidebarMenuButton`, a menu item…).
+- **Triggers and closes that go on any button** — `scDialogTrigger`, `scDialogClose` and `scToastClose` (straight in the dialog or the toast, the ✕: it places it), `scSheetTrigger`, `scDrawerTrigger`, `scDrawerClose`, `scPopoverTrigger`, `scAlertDialogTrigger`, `scNativeDialogTrigger`, `scThemeModeToggle` (on a `scButton`, a `scSidebarMenuButton`, a menu item…).
 
 And these keep a look of their own, as they are not buttons to the eye:
 
@@ -39,5 +39,5 @@ And these keep a look of their own, as they are not buttons to the eye:
 ## Done (2026-10-16)
 
 - 67 parts that relied on the consumer's `scButton` style themselves: the PDF viewer's, the editor's search buttons, the image cropper's, the transfer list's, the notification center's, the stepper's next / previous, the date range picker's apply / cancel, `scQrCodeDownload` (its image size input is now `imageSize`). Their consumers lost `scButton`, and `variant` / `size` equal to the new defaults.
-- 11 parts with their own class lists moved to `buttonVariants()`: toast close and action, popover close, spotlight close, the tour guide's close and actions, the autocomplete and combobox clears, the colour picker's eyedropper, the image annotator's actions, the navbar's mobile trigger.
+- 11 parts with their own class lists moved to `buttonVariants()`: toast action, popover close, spotlight close, the tour guide's close and actions, the autocomplete and combobox clears, the colour picker's eyedropper, the image annotator's actions, the navbar's mobile trigger.
 - `scCodeEditorCopyButton` became a directive: its icons were drawn by the library (and dropped the consumer's name); the consumer writes them now, switched by `copied()`.

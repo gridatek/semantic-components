@@ -89,6 +89,9 @@ export class ScToast {
     cn(
       'group pointer-events-auto absolute inset-x-0 flex items-center gap-3 overflow-hidden rounded-2xl border p-4 pe-6 shadow-lg',
       'bg-popover text-popover-foreground',
+      // The ✕: a close straight in the toast — in its corner, faint, shown on
+      // hover or focus.
+      '[&>[data-slot=toast-close]]:absolute [&>[data-slot=toast-close]]:end-1 [&>[data-slot=toast-close]]:top-1 [&>[data-slot=toast-close]]:text-foreground/50 [&>[data-slot=toast-close]]:opacity-0 [&>[data-slot=toast-close]]:group-hover:opacity-100 [&>[data-slot=toast-close]]:focus-visible:opacity-100',
       'transition-[transform,height,opacity,translate] duration-300 ease-out',
       this.layout.fromBottom ? 'bottom-0 origin-top' : 'top-0 origin-bottom',
       // Behind the front one, stacked: only its edge shows.
