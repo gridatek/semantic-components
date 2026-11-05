@@ -27,10 +27,11 @@ import {
   ScAccordionNextPanel,
   ScAccordionNextTrigger,
   ScAccordionNextTriggerIcon,
+  ScFrame,
 } from '@semantic-components/ui';
 import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
-/** Your borders, on the accordion and its items. */
+/** A frame round the accordion (scFrame: the style’s), lines between its items. */
 @Component({
   selector: 'app-borders-accordion-next-demo',
   imports: [
@@ -41,14 +42,11 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     ScAccordionNextTriggerIcon,
     ScAccordionNextPanel,
     ScAccordionNextContent,
+    ScFrame,
     SiChevronDownIcon,
   ],
   template: \`
-    <div
-      scAccordionNext
-      [value]="['billing']"
-      class="max-w-lg rounded-lg border"
-    >
+    <div scAccordionNext scFrame [value]="['billing']" class="max-w-lg">
       <div
         scAccordionNextItem
         value="billing"
