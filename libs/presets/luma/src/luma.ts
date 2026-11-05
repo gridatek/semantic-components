@@ -26,6 +26,7 @@ import { kbd } from './kbd';
 import { marker } from './marker';
 import { menu } from './menu';
 import { menubar } from './menubar';
+import { message } from './message';
 import { pagination } from './pagination';
 import { questionnaire } from './questionnaire';
 import { select } from './select';
@@ -61,6 +62,7 @@ export const luma: ScPreset = {
   kbd,
   menu,
   menubar,
+  message,
   pagination,
   questionnaire,
   select,

@@ -5490,10 +5490,66 @@ export const demosRoutes: Route[] = [
     path: 'demos/message',
     children: [
       {
-        path: 'basic-message-demo',
+        path: 'message-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/message/demos/basic-message-demo').then(
-            (m) => m.BasicMessageDemo,
+          import('../pages/docs/message/demos/message-usage-demo').then(
+            (m) => m.MessageUsageDemo,
+          ),
+      },
+      {
+        path: 'avatar-message-demo',
+        loadComponent: () =>
+          import('../pages/docs/message/demos/avatar-message-demo').then(
+            (m) => m.AvatarMessageDemo,
+          ),
+      },
+      {
+        path: 'group-message-demo',
+        loadComponent: () =>
+          import('../pages/docs/message/demos/group-message-demo').then(
+            (m) => m.GroupMessageDemo,
+          ),
+      },
+      {
+        path: 'header-footer-message-demo',
+        loadComponent: () =>
+          import('../pages/docs/message/demos/header-footer-message-demo').then(
+            (m) => m.HeaderFooterMessageDemo,
+          ),
+      },
+      {
+        path: 'actions-message-demo',
+        loadComponent: () =>
+          import('../pages/docs/message/demos/actions-message-demo').then(
+            (m) => m.ActionsMessageDemo,
+          ),
+      },
+      {
+        path: 'attachment-message-demo',
+        loadComponent: () =>
+          import('../pages/docs/message/demos/attachment-message-demo').then(
+            (m) => m.AttachmentMessageDemo,
+          ),
+      },
+      {
+        path: 'status-message-demo',
+        loadComponent: () =>
+          import('../pages/docs/message/demos/status-message-demo').then(
+            (m) => m.StatusMessageDemo,
+          ),
+      },
+      {
+        path: 'pattern-message-demo',
+        loadComponent: () =>
+          import('../pages/docs/message/demos/pattern-message-demo').then(
+            (m) => m.PatternMessageDemo,
+          ),
+      },
+      {
+        path: 'rtl-message-demo',
+        loadComponent: () =>
+          import('../pages/docs/message/demos/rtl-message-demo').then(
+            (m) => m.RtlMessageDemo,
           ),
       },
     ],

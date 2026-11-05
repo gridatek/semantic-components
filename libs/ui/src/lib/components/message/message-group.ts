@@ -1,4 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils/cn/cn';
 
 @Directive({
@@ -9,9 +10,10 @@ import { cn } from '../../utils/cn/cn';
   },
 })
 export class ScMessageGroup {
+  private readonly styles = injectPreset().message;
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('flex min-w-0 flex-col gap-2', this.classInput()),
+    cn(this.styles.group, this.classInput()),
   );
 }

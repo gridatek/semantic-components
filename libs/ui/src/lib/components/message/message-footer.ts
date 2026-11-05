@@ -1,4 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils/cn/cn';
 
 @Directive({
@@ -9,12 +10,10 @@ import { cn } from '../../utils/cn/cn';
   },
 })
 export class ScMessageFooter {
+  private readonly styles = injectPreset().message;
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn(
-      'flex max-w-full min-w-0 items-center px-3 text-xs font-medium text-muted-foreground group-has-data-[variant=ghost]/message:px-0',
-      this.classInput(),
-    ),
+    cn(this.styles.footer, this.classInput()),
   );
 }

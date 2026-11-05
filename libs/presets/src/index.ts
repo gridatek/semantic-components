@@ -267,6 +267,16 @@ export interface ScMarkerStyles {
   icon: string;
 }
 
+/** A message's parts that change from style to style. */
+export interface ScMessageStyles {
+  group: string;
+  root: string;
+  content: string;
+  header: string;
+  /** At the message's end when it is yours (align end). */
+  footer: string;
+}
+
 /** A preset: the components' classes in one of shadcn's styles. */
 export interface ScPreset {
   accordion: ScAccordionStyles;
@@ -309,6 +319,7 @@ export interface ScPreset {
   marker: ScMarkerStyles;
   menu: ScMenuStyles;
   menubar: ScMenubarStyles;
+  message: ScMessageStyles;
   pagination: ScPaginationStyles;
   questionnaire: ScQuestionnaireStyles;
   select: ScSelectStyles;

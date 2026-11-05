@@ -474,6 +474,20 @@ A key (`kbd[scKbd]`; restyled 2026-11-05): shadcn's Kbd. A shadcn component, so 
 - **The examples**: Group, Button, Input group, RTL — ours (Shortcuts, Arrow keys, Function keys…) folded into Usage. Symbols named in sr-only text.
 - **Not yet** the Tooltip example: our tooltip takes plain text (docs/todo.md).
 
+## Message
+
+A row of a conversation (`div[scMessage]`; restyled 2026-11-05): shadcn's Message. A shadcn component, so no web research: shadcn's reference app, its docs page and 8 examples (2026-11-05).
+
+| Library                                                                                          | What to read                                                                                                                                        |
+| ------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| shadcn Message (`shadcn-reference/presets/*/message.tsx`, `apps/v4/examples/base/message-*.tsx`) | Group, row, content, header and footer change per style (sera: uppercase); Avatar, Group, Header and footer, Actions, Attachment, Markdown, Pattern |
+
+**Taken:**
+
+- **Each preset's look** as the `message` key (`group`, `root`, `content`, `header`, `footer`); the avatar stays in its part. The footer's `justify-end` on your messages, which ours lacked.
+- **The examples**: Avatar, Group, Header and footer, Actions, Attachment (ours), Status (a Marker, from shadcn's accessibility notes), Pattern (Copy → Copied; feedback with `aria-pressed`), RTL.
+- **Not** Markdown (no Markdown component), nor the Pattern's local `MessageAction` (button + tooltip): actions are your `scButton`s, named in sr-only text.
+
 ## Control Group
 
 An input or a select joined with its buttons (`div[scControlGroup]`): shadcn's Button Group, renamed for what it is for (the user, 2026-10-30: it is only useful when inputs or selects mix with buttons; buttons alone are on the Button page). A shadcn component, so no web research: Base UI and shadcn's reference app (2026-10-30).

@@ -1,7 +1,8 @@
 # Message
 
 A row in a conversation: an avatar beside a column of bubbles, with an
-optional header and footer.
+optional header and footer. In the look of the app's preset (`message` key:
+shadcn's in each of the eight styles).
 
 Pairs with [Bubble](../bubble/README.md) — a bubble reads the message's
 alignment and pushes itself to the matching side.
@@ -58,7 +59,11 @@ The column of bubbles.
 
 Small muted lines above and below the bubbles — a sender name, a timestamp, a
 delivery state. Both drop their horizontal padding when the message contains a
-`ghost` bubble, so the text lines up with the unpadded content.
+`ghost` bubble, so the text lines up with the unpadded content. On your own
+messages (`align="end"`) the footer — a status, your actions — sits at the end.
+
+Actions are your `scButton`s in the footer, each named in sr-only text. A message
+in progress: a Marker with `role="status"`.
 
 ### ScMessageGroup
 
