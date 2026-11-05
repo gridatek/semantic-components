@@ -86,7 +86,7 @@ import { SiArrowDownIcon } from '@semantic-icons/lucide-icons';
       </div>
     </div>
   `,
-  host: { class: 'block w-full max-w-md' },
+  host: { class: 'mx-auto block w-full max-w-md' },
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviousContextMessageScrollerDemo {
