@@ -418,6 +418,20 @@ A message's surface (`div[scBubble]`; restyled 2026-11-05): shadcn's Bubble. A s
 - **The examples**: Variants, Alignment, Group, Links and buttons, Reactions, Show more (our Collapsible: the first paragraph, the rest in its panel, for shadcn's swapped text), Tooltip, Popover, RTL.
 - **Not** the Markdown example: no Markdown component; its point (ghost, full width) is in Variants.
 
+## Questionnaire
+
+Questions one at a time (`form[scQuestionnaire]`; built 2026-10-29, restyled 2026-11-05): shadcn's Questionnaire. A shadcn component, so no web research: shadcn's reference app, its headless primitive (`@shadcn/react/questionnaire`), its docs page and 14 examples (2026-11-05).
+
+| Library                                                                                                            | What to read                                                                                                                                                                                                                                         |
+| ------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| shadcn Questionnaire (`shadcn-reference/presets/*/questionnaire.tsx`, `apps/v4/examples/base/questionnaire-*.tsx`) | Almost every part's look changes per style; Multiple, Freeform (`QuestionnaireInput` beside choices), Skip, Shortcuts, Validation (Zod), Controlled, Resume, Conditional (disabled items), Navigation state, Custom progress, Animated, Card, Dialog |
+
+**Taken:**
+
+- **Each preset's look**, as the `questionnaire` key (13 strings); `data-checked` / `data-disabled` read as `:has(>input:checked / :disabled)`, the check icon (yours) as `[&>svg]:`.
+- **The examples**, the Angular way: Validation is a validator in the schema (Submit goes back to the question left wrong); Conditional an `@if` with `required(…, { when })`; Navigation state reads `active()?.answered()`; Resume sets the model and `item`; Custom progress draws steps inside the part; Animated a `starting:` transition; Card names each question with `aria-labelledby`.
+- **Not** `QuestionnaireInput` beside choices: free answers stay your `scInput` / `scTextarea` (one field can't hold a choice and free text). Freeform is a question answered in words.
+
 ## Control Group
 
 An input or a select joined with its buttons (`div[scControlGroup]`): shadcn's Button Group, renamed for what it is for (the user, 2026-10-30: it is only useful when inputs or selects mix with buttons; buttons alone are on the Button page). A shadcn component, so no web research: Base UI and shadcn's reference app (2026-10-30).

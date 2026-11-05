@@ -86,4 +86,6 @@ Several answers: checkboxes, each bound to a boolean (`survey.sources.docs`), th
 
 - **Your Signal Form holds the answers**, its schema the rules (`required`, your validators) — not `required` on each question, nor a `FormData` on submit.
 - **No default strings**: the progress text, the error, the buttons' text are yours.
-- **Choices are your inputs**, bound with `[formField]`; free answers are your `scInput` / `scTextarea`, not a part of their own.
+- **Choices are your inputs**, bound with `[formField]`; free answers are your `scInput` / `scTextarea`, not a part of their own — so a question is answered in choices or in words, not both (shadcn's `QuestionnaireInput` beside fixed choices).
+- **A question asked only for some answers** is in an `@if` (with `required(…, { when })`), not a disabled item; the questionnaire counts the questions in the page.
+- **The state is read, not reported**: `active()?.answered()` through `exportAs` (Navigation state), not an `onStatusChange`.
