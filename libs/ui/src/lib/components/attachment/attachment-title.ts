@@ -1,5 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
-import { cn } from '../../utils/cn/cn';
+import { injectPreset } from '../../config/preset';
+import { cn } from '../../utils';
 
 @Directive({
   selector: 'div[scAttachmentTitle]',
@@ -9,12 +10,10 @@ import { cn } from '../../utils/cn/cn';
   },
 })
 export class ScAttachmentTitle {
+  private readonly styles = injectPreset().attachment;
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn(
-      'block max-w-full min-w-0 truncate font-medium group-data-[state=processing]/attachment:shimmer group-data-[state=uploading]/attachment:shimmer',
-      this.classInput(),
-    ),
+    cn(this.styles.title, this.classInput()),
   );
 }

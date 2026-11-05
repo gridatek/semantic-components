@@ -1,4 +1,4 @@
-import { Directive, computed, input } from '@angular/core';
+import { Directive, ElementRef, computed, inject, input } from '@angular/core';
 import { cn } from '../../utils/cn/cn';
 
 /**
@@ -9,10 +9,15 @@ import { cn } from '../../utils/cn/cn';
   selector: 'a[scAttachmentTrigger], button[scAttachmentTrigger]',
   host: {
     'data-slot': 'attachment-trigger',
+    // On a button, not a submit; a link keeps none.
+    '[attr.type]': "isButton ? 'button' : null",
     '[class]': 'class()',
   },
 })
 export class ScAttachmentTrigger {
+  protected readonly isButton =
+    inject<ElementRef<HTMLElement>>(ElementRef).nativeElement.tagName ===
+    'BUTTON';
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>

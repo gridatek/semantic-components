@@ -2,6 +2,7 @@ import type { ScPreset } from '@semantic-components/presets';
 import { accordion } from './accordion';
 import { alert } from './alert';
 import { alertDialog } from './alert-dialog';
+import { attachment } from './attachment';
 import { avatarGroupCount } from './avatar';
 import { backdrop } from './backdrop';
 import { badge } from './badge';
@@ -32,6 +33,7 @@ export const luma: ScPreset = {
   accordion,
   alert,
   alertDialog,
+  attachment,
   avatarGroupCount,
   backdrop,
   badge,

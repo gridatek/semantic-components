@@ -201,11 +201,31 @@ export interface ScAccordionStyles {
   content: string;
 }
 
+export type ScAttachmentSize = 'default' | 'sm' | 'xs';
+export type ScAttachmentOrientation = 'horizontal' | 'vertical';
+export type ScAttachmentMediaVariant = 'icon' | 'image';
+
+/** An attachment's parts that change from style to style. */
+export interface ScAttachmentStyles {
+  root: (props: {
+    size?: ScAttachmentSize | null;
+    orientation?: ScAttachmentOrientation | null;
+  }) => string;
+  media: (props: { variant?: ScAttachmentMediaVariant | null }) => string;
+  content: string;
+  title: string;
+  description: string;
+  actions: string;
+  /** A row of attachments, scrolling. */
+  group: string;
+}
+
 /** A preset: the components' classes in one of shadcn's styles. */
 export interface ScPreset {
   accordion: ScAccordionStyles;
   alert: ScAlertStyles;
   alertDialog: ScAlertDialogStyles;
+  attachment: ScAttachmentStyles;
   /** An avatar group's "+N" (the rest of the avatar is the same in every style). */
   avatarGroupCount: string;
   /** The backdrop behind every overlay (dialogs, sheets, drawers): its shade and blur. */

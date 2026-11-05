@@ -1,5 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
-import { cn } from '../../utils/cn/cn';
+import { injectPreset } from '../../config/preset';
+import { cn } from '../../utils';
 
 @Directive({
   selector: 'div[scAttachmentActions]',
@@ -9,12 +10,10 @@ import { cn } from '../../utils/cn/cn';
   },
 })
 export class ScAttachmentActions {
+  private readonly styles = injectPreset().attachment;
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn(
-      'relative z-20 flex shrink-0 items-center group-data-[orientation=vertical]/attachment:absolute group-data-[orientation=vertical]/attachment:top-3 group-data-[orientation=vertical]/attachment:end-3 group-data-[orientation=vertical]/attachment:gap-1',
-      this.classInput(),
-    ),
+    cn(this.styles.actions, this.classInput()),
   );
 }

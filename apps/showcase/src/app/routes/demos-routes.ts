@@ -4847,10 +4847,52 @@ export const demosRoutes: Route[] = [
     path: 'demos/attachment',
     children: [
       {
-        path: 'basic-attachment-demo',
+        path: 'attachment-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/attachment/demos/basic-attachment-demo').then(
-            (m) => m.BasicAttachmentDemo,
+          import('../pages/docs/attachment/demos/attachment-usage-demo').then(
+            (m) => m.AttachmentUsageDemo,
+          ),
+      },
+      {
+        path: 'image-attachment-demo',
+        loadComponent: () =>
+          import('../pages/docs/attachment/demos/image-attachment-demo').then(
+            (m) => m.ImageAttachmentDemo,
+          ),
+      },
+      {
+        path: 'states-attachment-demo',
+        loadComponent: () =>
+          import('../pages/docs/attachment/demos/states-attachment-demo').then(
+            (m) => m.StatesAttachmentDemo,
+          ),
+      },
+      {
+        path: 'sizes-attachment-demo',
+        loadComponent: () =>
+          import('../pages/docs/attachment/demos/sizes-attachment-demo').then(
+            (m) => m.SizesAttachmentDemo,
+          ),
+      },
+      {
+        path: 'group-attachment-demo',
+        loadComponent: () =>
+          import('../pages/docs/attachment/demos/group-attachment-demo').then(
+            (m) => m.GroupAttachmentDemo,
+          ),
+      },
+      {
+        path: 'trigger-attachment-demo',
+        loadComponent: () =>
+          import('../pages/docs/attachment/demos/trigger-attachment-demo').then(
+            (m) => m.TriggerAttachmentDemo,
+          ),
+      },
+      {
+        path: 'rtl-attachment-demo',
+        loadComponent: () =>
+          import('../pages/docs/attachment/demos/rtl-attachment-demo').then(
+            (m) => m.RtlAttachmentDemo,
           ),
       },
     ],
