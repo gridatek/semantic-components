@@ -28,6 +28,7 @@ test.describe('Menu Page', () => {
       'ScMenuRadioGroup, ScMenuRadioItem',
       'ScMenuItemIndicator',
       'ScMenuGroup, ScMenuLabel',
+      'ScMenuSubmenuIcon',
       'ScMenuSeparator, ScMenuShortcut',
     ]);
   });

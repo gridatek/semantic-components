@@ -20,13 +20,13 @@ import { SidesContextMenuDemo } from './sides-context-menu-demo';
 export class SidesContextMenuDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScContextMenu,
   ScContextMenuProvider,
   ScContextMenuTrigger,
   ScMenu,
   ScMenuContent,
   ScMenuGroup,
   ScMenuItem,
+  ScMenuPortal,
 } from '@semantic-components/ui';
 
 /** side: where the menu opens from the pointer — its reading end (default), its start, above or below. */
@@ -35,15 +35,15 @@ import {
   imports: [
     ScContextMenuProvider,
     ScContextMenuTrigger,
-    ScContextMenu,
     ScMenu,
     ScMenuContent,
     ScMenuGroup,
     ScMenuItem,
+    ScMenuPortal,
   ],
   template: \`
     <div class="grid w-full max-w-sm grid-cols-2 gap-4">
-      <div scContextMenuProvider class="w-full max-w-xs">
+      <div scContextMenuProvider side="top" class="w-full max-w-xs">
         <div
           scContextMenuTrigger
           class="flex aspect-video w-full items-center justify-center rounded-xl border border-dashed text-sm"
@@ -55,7 +55,7 @@ import {
             >Long press (top)</span
           >
         </div>
-        <div scContextMenu side="top">
+        <ng-template scMenuPortal>
           <div scMenu>
             <ng-template scMenuContent>
               <div scMenuGroup>
@@ -65,9 +65,9 @@ import {
               </div>
             </ng-template>
           </div>
-        </div>
+        </ng-template>
       </div>
-      <div scContextMenuProvider class="w-full max-w-xs">
+      <div scContextMenuProvider side="end" class="w-full max-w-xs">
         <div
           scContextMenuTrigger
           class="flex aspect-video w-full items-center justify-center rounded-xl border border-dashed text-sm"
@@ -79,7 +79,7 @@ import {
             >Long press (end)</span
           >
         </div>
-        <div scContextMenu side="end">
+        <ng-template scMenuPortal>
           <div scMenu>
             <ng-template scMenuContent>
               <div scMenuGroup>
@@ -89,9 +89,9 @@ import {
               </div>
             </ng-template>
           </div>
-        </div>
+        </ng-template>
       </div>
-      <div scContextMenuProvider class="w-full max-w-xs">
+      <div scContextMenuProvider side="bottom" class="w-full max-w-xs">
         <div
           scContextMenuTrigger
           class="flex aspect-video w-full items-center justify-center rounded-xl border border-dashed text-sm"
@@ -103,7 +103,7 @@ import {
             >Long press (bottom)</span
           >
         </div>
-        <div scContextMenu side="bottom">
+        <ng-template scMenuPortal>
           <div scMenu>
             <ng-template scMenuContent>
               <div scMenuGroup>
@@ -113,9 +113,9 @@ import {
               </div>
             </ng-template>
           </div>
-        </div>
+        </ng-template>
       </div>
-      <div scContextMenuProvider class="w-full max-w-xs">
+      <div scContextMenuProvider side="start" class="w-full max-w-xs">
         <div
           scContextMenuTrigger
           class="flex aspect-video w-full items-center justify-center rounded-xl border border-dashed text-sm"
@@ -127,7 +127,7 @@ import {
             >Long press (start)</span
           >
         </div>
-        <div scContextMenu side="start">
+        <ng-template scMenuPortal>
           <div scMenu>
             <ng-template scMenuContent>
               <div scMenuGroup>
@@ -137,7 +137,7 @@ import {
               </div>
             </ng-template>
           </div>
-        </div>
+        </ng-template>
       </div>
     </div>
   \`,

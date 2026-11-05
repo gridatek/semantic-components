@@ -8,6 +8,7 @@ import {
   ScMenuProvider,
   ScMenuSeparator,
   ScMenuShortcut,
+  ScMenuSubmenuIcon,
   ScMenuTrigger,
 } from '@semantic-components/ui';
 import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
@@ -21,6 +22,7 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
     ScMenuContent,
     ScMenuItem,
     ScMenuPortal,
+    ScMenuSubmenuIcon,
     ScMenuProvider,
     ScMenuSeparator,
     ScMenuShortcut,
@@ -36,7 +38,7 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
             <div scMenuItem value="Team">Team</div>
             <div scMenuItem value="Invite users">
               Invite users
-              <svg siChevronRightIcon></svg>
+              <svg siChevronRightIcon scMenuSubmenuIcon></svg>
               <ng-template scMenuPortal>
                 <div scMenu>
                   <ng-template scMenuContent>
@@ -44,7 +46,7 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
                     <div scMenuItem value="Message">Message</div>
                     <div scMenuItem value="More options">
                       More options
-                      <svg siChevronRightIcon></svg>
+                      <svg siChevronRightIcon scMenuSubmenuIcon></svg>
                       <ng-template scMenuPortal>
                         <div scMenu>
                           <ng-template scMenuContent>

@@ -20,13 +20,13 @@ import { ShortcutsContextMenuDemo } from './shortcuts-context-menu-demo';
 export class ShortcutsContextMenuDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScContextMenu,
   ScContextMenuProvider,
   ScContextMenuTrigger,
   ScMenu,
   ScMenuContent,
   ScMenuGroup,
   ScMenuItem,
+  ScMenuPortal,
   ScMenuSeparator,
   ScMenuShortcut,
 } from '@semantic-components/ui';
@@ -37,11 +37,11 @@ import {
   imports: [
     ScContextMenuProvider,
     ScContextMenuTrigger,
-    ScContextMenu,
     ScMenu,
     ScMenuContent,
     ScMenuGroup,
     ScMenuItem,
+    ScMenuPortal,
     ScMenuSeparator,
     ScMenuShortcut,
   ],
@@ -54,7 +54,7 @@ import {
         <span class="hidden pointer-fine:inline-block">Right click here</span>
         <span class="hidden pointer-coarse:inline-block">Long press here</span>
       </div>
-      <div scContextMenu>
+      <ng-template scMenuPortal>
         <div scMenu>
           <ng-template scMenuContent>
             <div scMenuGroup>
@@ -84,7 +84,7 @@ import {
             </div>
           </ng-template>
         </div>
-      </div>
+      </ng-template>
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },

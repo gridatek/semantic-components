@@ -6,6 +6,7 @@ import {
   ScMenuPortal,
   ScMenuSeparator,
   ScMenuShortcut,
+  ScMenuSubmenuIcon,
   ScMenubar,
   ScMenubarItem,
 } from '@semantic-components/ui';
@@ -21,6 +22,7 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
     ScMenuContent,
     ScMenuItem,
     ScMenuPortal,
+    ScMenuSubmenuIcon,
     ScMenuSeparator,
     ScMenuShortcut,
     SiChevronRightIcon,
@@ -34,7 +36,7 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
             <ng-template scMenuContent>
               <div scMenuItem value="Share">
                 Share
-                <svg siChevronRightIcon></svg>
+                <svg siChevronRightIcon scMenuSubmenuIcon></svg>
                 <ng-template scMenuPortal>
                   <div scMenu>
                     <ng-template scMenuContent>
@@ -70,7 +72,7 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
               <div scMenuSeparator></div>
               <div scMenuItem value="Find">
                 Find
-                <svg siChevronRightIcon></svg>
+                <svg siChevronRightIcon scMenuSubmenuIcon></svg>
                 <ng-template scMenuPortal>
                   <div scMenu>
                     <ng-template scMenuContent>

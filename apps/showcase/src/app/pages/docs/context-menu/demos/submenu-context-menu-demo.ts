@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScContextMenu,
   ScContextMenuProvider,
   ScContextMenuTrigger,
   ScMenu,
@@ -10,6 +9,7 @@ import {
   ScMenuPortal,
   ScMenuSeparator,
   ScMenuShortcut,
+  ScMenuSubmenuIcon,
 } from '@semantic-components/ui';
 import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
 
@@ -19,7 +19,7 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
   imports: [
     ScContextMenuProvider,
     ScContextMenuTrigger,
-    ScContextMenu,
+    ScMenuSubmenuIcon,
     ScMenu,
     ScMenuContent,
     ScMenuGroup,
@@ -38,7 +38,7 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
         <span class="hidden pointer-fine:inline-block">Right click here</span>
         <span class="hidden pointer-coarse:inline-block">Long press here</span>
       </div>
-      <div scContextMenu>
+      <ng-template scMenuPortal>
         <div scMenu>
           <ng-template scMenuContent>
             <div scMenuGroup>
@@ -53,7 +53,7 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
             </div>
             <div scMenuItem value="More Tools">
               More Tools
-              <svg siChevronRightIcon></svg>
+              <svg siChevronRightIcon scMenuSubmenuIcon></svg>
               <ng-template scMenuPortal>
                 <div scMenu>
                   <ng-template scMenuContent>
@@ -84,7 +84,7 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
             </div>
           </ng-template>
         </div>
-      </div>
+      </ng-template>
     </div>
   `,
   host: { class: 'flex w-full justify-center' },

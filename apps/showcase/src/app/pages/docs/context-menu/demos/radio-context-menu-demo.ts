@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScContextMenu,
   ScContextMenuProvider,
   ScContextMenuTrigger,
   ScMenu,
@@ -8,6 +7,7 @@ import {
   ScMenuGroup,
   ScMenuItemIndicator,
   ScMenuLabel,
+  ScMenuPortal,
   ScMenuRadioGroup,
   ScMenuRadioItem,
   ScMenuSeparator,
@@ -20,12 +20,12 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
   imports: [
     ScContextMenuProvider,
     ScContextMenuTrigger,
-    ScContextMenu,
     ScMenu,
     ScMenuContent,
     ScMenuGroup,
     ScMenuItemIndicator,
     ScMenuLabel,
+    ScMenuPortal,
     ScMenuRadioGroup,
     ScMenuRadioItem,
     ScMenuSeparator,
@@ -40,7 +40,7 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
         <span class="hidden pointer-fine:inline-block">Right click here</span>
         <span class="hidden pointer-coarse:inline-block">Long press here</span>
       </div>
-      <div scContextMenu>
+      <ng-template scMenuPortal>
         <div scMenu>
           <ng-template scMenuContent>
             <div scMenuGroup>
@@ -76,7 +76,7 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
             </div>
           </ng-template>
         </div>
-      </div>
+      </ng-template>
     </div>
   `,
   host: { class: 'flex w-full justify-center' },

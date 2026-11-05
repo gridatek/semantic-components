@@ -140,13 +140,7 @@ export class ScMenuItem {
 
   protected readonly class = computed(() =>
     cn(
-      this.submenuPortal()
-        ? [
-            this.styles().subTrigger,
-            // The chevron: at the end, turned right to left.
-            '[&>svg:last-of-type]:ms-auto rtl:[&>svg:last-of-type]:rotate-180',
-          ]
-        : this.styles().item,
+      this.submenuPortal() ? this.styles().subTrigger : this.styles().item,
       this.classInput(),
     ),
   );

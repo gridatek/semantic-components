@@ -12,6 +12,7 @@ import {
   ScMenuProvider,
   ScMenuSeparator,
   ScMenuShortcut,
+  ScMenuSubmenuIcon,
   ScMenuTrigger,
 } from '@semantic-components/ui';
 import { SiCheckIcon, SiChevronRightIcon } from '@semantic-icons/lucide-icons';
@@ -33,6 +34,7 @@ import { SiCheckIcon, SiChevronRightIcon } from '@semantic-icons/lucide-icons';
     ScMenuItemIndicator,
     ScMenuLabel,
     ScMenuPortal,
+    ScMenuSubmenuIcon,
     ScMenuProvider,
     ScMenuSeparator,
     ScMenuShortcut,
@@ -62,7 +64,7 @@ import { SiCheckIcon, SiChevronRightIcon } from '@semantic-icons/lucide-icons';
               </div>
               <div scMenuItem value="دعوة">
                 دعوة مستخدمين
-                <svg siChevronRightIcon></svg>
+                <svg siChevronRightIcon scMenuSubmenuIcon></svg>
                 <ng-template scMenuPortal>
                   <div scMenu>
                     <ng-template scMenuContent>

@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScContextMenu,
   ScContextMenuProvider,
   ScContextMenuTrigger,
   ScMenu,
@@ -15,6 +14,7 @@ import {
   ScMenuRadioItem,
   ScMenuSeparator,
   ScMenuShortcut,
+  ScMenuSubmenuIcon,
 } from '@semantic-components/ui';
 import {
   SiArrowLeftIcon,
@@ -30,7 +30,7 @@ import {
   imports: [
     ScContextMenuProvider,
     ScContextMenuTrigger,
-    ScContextMenu,
+    ScMenuSubmenuIcon,
     ScMenu,
     ScMenuCheckboxItem,
     ScMenuContent,
@@ -63,13 +63,13 @@ import {
             >اضغط مطولاً هنا</span
           >
         </div>
-        <div scContextMenu>
+        <ng-template scMenuPortal>
           <div scMenu class="w-48">
             <ng-template scMenuContent>
               <div scMenuGroup>
                 <div scMenuItem value="التنقل">
                   التنقل
-                  <svg siChevronRightIcon></svg>
+                  <svg siChevronRightIcon scMenuSubmenuIcon></svg>
                   <ng-template scMenuPortal>
                     <div scMenu class="w-44">
                       <ng-template scMenuContent>
@@ -96,7 +96,7 @@ import {
                 </div>
                 <div scMenuItem value="المزيد من الأدوات">
                   المزيد من الأدوات
-                  <svg siChevronRightIcon></svg>
+                  <svg siChevronRightIcon scMenuSubmenuIcon></svg>
                   <ng-template scMenuPortal>
                     <div scMenu class="w-44">
                       <ng-template scMenuContent>
@@ -155,7 +155,7 @@ import {
               </div>
             </ng-template>
           </div>
-        </div>
+        </ng-template>
       </div>
     </div>
   `,

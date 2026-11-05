@@ -26,6 +26,7 @@ import {
   ScMenuItem,
   ScMenuPortal,
   ScMenuSeparator,
+  ScMenuSubmenuIcon,
 } from '@semantic-components/ui';
 import {
   SiChevronRightIcon,
@@ -49,6 +50,7 @@ import {
     ScMenuContent,
     ScMenuItem,
     ScMenuPortal,
+    ScMenuSubmenuIcon,
     ScMenuSeparator,
     SiChevronRightIcon,
     SiClipboardPasteIcon,
@@ -82,7 +84,7 @@ import {
           <div scMenuItem value="Share">
             <svg siShareIcon></svg>
             Share
-            <svg siChevronRightIcon></svg>
+            <svg siChevronRightIcon scMenuSubmenuIcon></svg>
             <ng-template scMenuPortal>
               <div scMenu>
                 <ng-template scMenuContent>

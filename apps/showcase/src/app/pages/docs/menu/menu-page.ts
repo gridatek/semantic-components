@@ -167,7 +167,7 @@ export default class MenuPage {
       '  ScMenuProvider, ScMenuTrigger, ScMenuPortal, ScMenu,',
       '  ScMenuContent, ScMenuGroup, ScMenuLabel, ScMenuItem,',
       '  ScMenuShortcut, ScMenuCheckboxItem, ScMenuRadioGroup,',
-      '  ScMenuRadioItem, ScMenuItemIndicator, ScMenuSeparator,',
+      '  ScMenuRadioItem, ScMenuItemIndicator, ScMenuSeparator, ScMenuSubmenuIcon,',
       "} from '@semantic-components/ui';",
     ].join('\n'),
     markup: [
@@ -190,6 +190,7 @@ export default class MenuPage {
       '          <div scMenuRadioItem value="…">…</div>',
       '        </div>',
       '        <div scMenuItem value="…">…',
+      '          <svg scMenuSubmenuIcon></svg>',
       '          <ng-template scMenuPortal>…a submenu…</ng-template>',
       '        </div>',
       '      </ng-template>',
@@ -252,6 +253,12 @@ export default class MenuPage {
       name: 'ScMenuGroup, ScMenuLabel',
       selector: '[scMenuGroup], [scMenuLabel]',
       description: 'A titled section (role group), named by its label.',
+    },
+    {
+      name: 'ScMenuSubmenuIcon',
+      selector: 'svg[scMenuSubmenuIcon]',
+      description:
+        'The icon (yours) of an item that opens a submenu: at its end, turned right to left.',
     },
     {
       name: 'ScMenuSeparator, ScMenuShortcut',

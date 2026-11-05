@@ -11,4 +11,5 @@ export * from './menu-radio-group';
 export * from './menu-radio-item';
 export * from './menu-separator';
 export * from './menu-shortcut';
+export * from './menu-submenu-icon';
 export * from './menu-trigger';

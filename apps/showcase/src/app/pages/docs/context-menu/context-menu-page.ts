@@ -70,9 +70,10 @@ import { SubmenuContextMenuDemoContainer } from './demos/submenu-context-menu-de
       <section class="space-y-4">
         <h2 scHeading appToc>Anatomy</h2>
         <p class="text-muted-foreground">
-          The provider holds the area (the trigger) and the menu; the menu is
-          made of the Menu&apos;s parts, which take the context menu&apos;s look
-          in it. The area&apos;s look and text are yours.
+          The provider holds the area (the trigger) and the menu, in a portal as
+          the Menu&apos;s: rendered while it is open. The menu is made of the
+          Menu&apos;s parts, which take the context menu&apos;s look in it. The
+          area&apos;s look and text are yours.
         </p>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
@@ -161,14 +162,14 @@ export default class ContextMenuPage {
   protected readonly anatomy = {
     imports: [
       'import {',
-      '  ScContextMenuProvider, ScContextMenuTrigger, ScContextMenu,',
-      '  ScMenu, ScMenuContent, ScMenuGroup, ScMenuItem, ScMenuSeparator,',
+      '  ScContextMenuProvider, ScContextMenuTrigger, ScMenuPortal, ScMenu,',
+      '  ScMenuContent, ScMenuGroup, ScMenuItem, ScMenuSeparator,',
       "} from '@semantic-components/ui';",
     ].join('\n'),
     markup: [
       '<div scContextMenuProvider>',
       '  <div scContextMenuTrigger>…</div>',
-      '  <div scContextMenu>',
+      '  <ng-template scMenuPortal>',
       '    <div scMenu>',
       '      <ng-template scMenuContent>',
       '        <div scMenuGroup>',
@@ -178,7 +179,7 @@ export default class ContextMenuPage {
       '        …the Menu’s other parts…',
       '      </ng-template>',
       '    </div>',
-      '  </div>',
+      '  </ng-template>',
       '</div>',
     ].join('\n'),
   };
@@ -188,7 +189,7 @@ export default class ContextMenuPage {
       name: 'ScContextMenuProvider',
       selector: 'div[scContextMenuProvider]',
       description:
-        'Holds the area and its menu; catches the right-click and where it was.',
+        "Holds the area and its menu: catches the right-click and opens the menu there. [(open)]; side: 'end' (default), 'start', 'top' or 'bottom'.",
     },
     {
       name: 'ScContextMenuTrigger',
@@ -197,14 +198,8 @@ export default class ContextMenuPage {
         'The area: focusable (Shift+F10, the Menu key), no text selection on a long press. Its look is yours.',
     },
     {
-      name: 'ScContextMenu',
-      selector: 'div[scContextMenu]',
-      description:
-        "Opens the menu at the pointer. side: 'end' (default), 'start', 'top' or 'bottom'.",
-    },
-    {
-      name: 'ScMenu, ScMenuContent, ScMenuItem…',
-      selector: 'div[scMenu], ng-template[scMenuContent]…',
+      name: 'ScMenuPortal, ScMenu, ScMenuItem…',
+      selector: 'ng-template[scMenuPortal], div[scMenu]…',
       description:
         'The menu and its parts: the Menu’s, in the context menu’s look.',
     },

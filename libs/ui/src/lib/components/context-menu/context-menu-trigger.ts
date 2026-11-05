@@ -1,4 +1,4 @@
-import { Directive, computed, input } from '@angular/core';
+import { Directive, ElementRef, computed, inject, input } from '@angular/core';
 import { cn } from '../../utils';
 
 /**
@@ -15,6 +15,7 @@ import { cn } from '../../utils';
   },
 })
 export class ScContextMenuTrigger {
+  readonly element = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>

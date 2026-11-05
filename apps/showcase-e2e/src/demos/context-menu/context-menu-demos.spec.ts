@@ -34,6 +34,8 @@ test('Usage: a right-click opens the menu at the pointer, nothing highlighted; A
   page,
 }) => {
   await openStill(page, usage);
+  // Not in the page until it opens: it is in a portal.
+  await expect(page.locator('[role=menu]')).toHaveCount(0);
   const at = await rightClick(page);
   const menu = page.getByRole('menu');
   await expect(menu).toBeVisible();

@@ -1,12 +1,12 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScContextMenu,
   ScContextMenuProvider,
   ScContextMenuTrigger,
   ScMenu,
   ScMenuContent,
   ScMenuGroup,
   ScMenuItem,
+  ScMenuPortal,
 } from '@semantic-components/ui';
 
 /** A right-click (a long press on touch, Shift+F10 or the Menu key on the focused area) opens the menu at the pointer. */
@@ -15,11 +15,11 @@ import {
   imports: [
     ScContextMenuProvider,
     ScContextMenuTrigger,
-    ScContextMenu,
     ScMenu,
     ScMenuContent,
     ScMenuGroup,
     ScMenuItem,
+    ScMenuPortal,
   ],
   template: `
     <div scContextMenuProvider class="w-full max-w-xs">
@@ -30,7 +30,7 @@ import {
         <span class="hidden pointer-fine:inline-block">Right click here</span>
         <span class="hidden pointer-coarse:inline-block">Long press here</span>
       </div>
-      <div scContextMenu>
+      <ng-template scMenuPortal>
         <div scMenu>
           <ng-template scMenuContent>
             <div scMenuGroup>
@@ -40,7 +40,7 @@ import {
             </div>
           </ng-template>
         </div>
-      </div>
+      </ng-template>
     </div>
   `,
   host: { class: 'flex w-full justify-center' },

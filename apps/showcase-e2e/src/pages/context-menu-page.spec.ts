@@ -21,8 +21,7 @@ test.describe('Context Menu Page', () => {
     await expect(table.getByRole('row').locator('td:first-child')).toHaveText([
       'ScContextMenuProvider',
       'ScContextMenuTrigger',
-      'ScContextMenu',
-      'ScMenu, ScMenuContent, ScMenuItem…',
+      'ScMenuPortal, ScMenu, ScMenuItem…',
     ]);
   });
 
