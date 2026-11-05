@@ -385,7 +385,7 @@ Items whose panels open and close (`[scAccordionNext]`, beside the old Accordion
 - **Base UI's state** on the root: `[(value)]` and `multiple` (one at a time by default — Aria's default is several), the item's `value`; the trigger in a real heading (`h2`–`h6`).
 - **Each preset's look**, as the `accordion` key; one chevron turned (`scAccordionNextTriggerIcon`) for shadcn's two swapped.
 - **The panel animates its height both ways**: a transition on height and display (`starting:h-0`, `[[inert]]:h-0`), the content kept after the first opening (Aria's `preserveContent`, set from `@angular/aria/private`).
-- **Not**: the item connecting trigger and panel itself — Aria's trigger requires its `panel` from the consumer (`NG8008`); the panel part extends Aria's panel so `[panel]="ref"` type-checks. Not `hiddenUntilFound` (Aria's template). Aria's arrow keys stay (APG and Base UI dropped them).
+- **The item connects its trigger and panel** (nothing to wire), though Aria's trigger declares `panel` a required input (every template would have to bind it, `NG8008`): the trigger and panel parts **extend** Aria's directives — the trigger redeclares `panel` as optional — and register with their item as they are created; it sets the panel before Aria's trigger reads it (`ngOnInit`). No official way in angular/components: `[panel]="ref"` is Aria's design since #32855 (it was matching ids before; #32977), Aria is in developer preview. Relies on Aria's classes staying extendable. - **Not** `hiddenUntilFound` (Aria's template). Aria's arrow keys stay (APG and Base UI dropped them).
 
 ## Control Group
 
