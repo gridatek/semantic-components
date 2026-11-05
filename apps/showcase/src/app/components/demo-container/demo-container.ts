@@ -1,3 +1,4 @@
+import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   Component,
   ElementRef,
@@ -12,6 +13,7 @@ import {
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import {
+  ScButton,
   ScFrame,
   ScTabs,
   ScTabsContent,
@@ -24,11 +26,13 @@ import {
   ScCodeBlockActions,
   ScCodeBlockContent,
   ScCodeBlockCopy,
+  ScCodeBlockFooter,
   ScCodeBlockHeader,
   ScCodeBlockTitle,
 } from '@semantic-components/ui/code-block';
 import {
   SiCheckIcon,
+  SiChevronDownIcon,
   SiCopyIcon,
   SiExternalLinkIcon,
 } from '@semantic-icons/lucide-icons';
@@ -38,6 +42,9 @@ import { TocHeading } from '../toc/toc-heading';
 @Component({
   selector: 'app-demo-container',
   imports: [
+    ScButton,
+    ScCodeBlockFooter,
+    SiChevronDownIcon,
     ScFrame,
     ScCodeBlock,
     ScCodeBlockHeader,
@@ -131,10 +138,34 @@ import { TocHeading } from '../toc/toc-heading';
               </div>
               <pre
                 scCodeBlockContent
+                [id]="codeId"
                 [code]="code()"
                 [language]="language()"
                 lineNumbers
+                [class]="
+                  long() && !expanded()
+                    ? 'scroll-fade-y max-h-96 overflow-y-hidden'
+                    : ''
+                "
               ></pre>
+              @if (long()) {
+                <div scCodeBlockFooter class="justify-center">
+                  <button
+                    scButton
+                    variant="ghost"
+                    size="xs"
+                    [attr.aria-controls]="codeId"
+                    [attr.aria-expanded]="expanded()"
+                    (click)="expanded.set(!expanded())"
+                  >
+                    <svg
+                      siChevronDownIcon
+                      class="transition-transform in-aria-expanded:rotate-180"
+                    ></svg>
+                    {{ expanded() ? 'Show less' : 'Show more' }}
+                  </button>
+                </div>
+              }
             </div>
           </ng-template>
         </div>
@@ -154,6 +185,11 @@ export class DemoContainer {
   readonly demoUrl = input<string>('');
   readonly code = input.required<string>();
   readonly language = input<string>('angular-ts');
+
+  /** Long code shows in part, until Show more. */
+  protected readonly long = computed(() => this.code().split('\n').length > 20);
+  protected readonly expanded = signal(false);
+  protected readonly codeId = inject(_IdGenerator).getId('demo-code-');
   /**
    * Render the preview as an iframe of `demoUrl` instead of projected
    * content. For demos that take over the viewport (fixed positioning, global
