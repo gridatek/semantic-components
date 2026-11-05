@@ -1,6 +1,7 @@
 import { Directive, computed, input } from '@angular/core';
-import { cn } from '../../utils/cn/cn';
+import { cn } from '../../utils';
 
+/** Consecutive bubbles from the same sender, closer together. */
 @Directive({
   selector: 'div[scBubbleGroup]',
   host: {

@@ -220,12 +220,21 @@ export interface ScAttachmentStyles {
   group: string;
 }
 
+/** A bubble's parts that change from style to style. */
+export interface ScBubbleStyles {
+  /** The surface: its corners, padding, text and focus ring. */
+  content: string;
+  /** The row of reactions over the bubble's edge (its side and end stay the part's). */
+  reactions: string;
+}
+
 /** A preset: the components' classes in one of shadcn's styles. */
 export interface ScPreset {
   accordion: ScAccordionStyles;
   alert: ScAlertStyles;
   alertDialog: ScAlertDialogStyles;
   attachment: ScAttachmentStyles;
+  bubble: ScBubbleStyles;
   /** An avatar group's "+N" (the rest of the avatar is the same in every style). */
   avatarGroupCount: string;
   /** The backdrop behind every overlay (dialogs, sheets, drawers): its shade and blur. */

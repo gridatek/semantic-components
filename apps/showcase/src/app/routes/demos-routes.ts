@@ -4901,10 +4901,73 @@ export const demosRoutes: Route[] = [
     path: 'demos/bubble',
     children: [
       {
-        path: 'basic-bubble-demo',
+        path: 'bubble-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/bubble/demos/basic-bubble-demo').then(
-            (m) => m.BasicBubbleDemo,
+          import('../pages/docs/bubble/demos/bubble-usage-demo').then(
+            (m) => m.BubbleUsageDemo,
+          ),
+      },
+      {
+        path: 'variants-bubble-demo',
+        loadComponent: () =>
+          import('../pages/docs/bubble/demos/variants-bubble-demo').then(
+            (m) => m.VariantsBubbleDemo,
+          ),
+      },
+      {
+        path: 'alignment-bubble-demo',
+        loadComponent: () =>
+          import('../pages/docs/bubble/demos/alignment-bubble-demo').then(
+            (m) => m.AlignmentBubbleDemo,
+          ),
+      },
+      {
+        path: 'group-bubble-demo',
+        loadComponent: () =>
+          import('../pages/docs/bubble/demos/group-bubble-demo').then(
+            (m) => m.GroupBubbleDemo,
+          ),
+      },
+      {
+        path: 'links-buttons-bubble-demo',
+        loadComponent: () =>
+          import('../pages/docs/bubble/demos/links-buttons-bubble-demo').then(
+            (m) => m.LinksButtonsBubbleDemo,
+          ),
+      },
+      {
+        path: 'reactions-bubble-demo',
+        loadComponent: () =>
+          import('../pages/docs/bubble/demos/reactions-bubble-demo').then(
+            (m) => m.ReactionsBubbleDemo,
+          ),
+      },
+      {
+        path: 'show-more-bubble-demo',
+        loadComponent: () =>
+          import('../pages/docs/bubble/demos/show-more-bubble-demo').then(
+            (m) => m.ShowMoreBubbleDemo,
+          ),
+      },
+      {
+        path: 'tooltip-bubble-demo',
+        loadComponent: () =>
+          import('../pages/docs/bubble/demos/tooltip-bubble-demo').then(
+            (m) => m.TooltipBubbleDemo,
+          ),
+      },
+      {
+        path: 'popover-bubble-demo',
+        loadComponent: () =>
+          import('../pages/docs/bubble/demos/popover-bubble-demo').then(
+            (m) => m.PopoverBubbleDemo,
+          ),
+      },
+      {
+        path: 'rtl-bubble-demo',
+        loadComponent: () =>
+          import('../pages/docs/bubble/demos/rtl-bubble-demo').then(
+            (m) => m.RtlBubbleDemo,
           ),
       },
     ],

@@ -1,24 +1,27 @@
-import { Directive, computed, input } from '@angular/core';
-import { cn } from '../../utils/cn/cn';
+import { Directive, ElementRef, computed, inject, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
+import { cn } from '../../utils';
 
 /**
- * `button` and `a` are valid hosts: a bubble is sometimes tappable, and the
- * `[button,a]:*` focus and transition rules only apply on those elements.
+ * The bubble's text, in the preset's look. On a `button` or an `a` the whole
+ * bubble is clickable, with a focus ring (a button gets `type="button"`).
  */
 @Directive({
   selector: 'div[scBubbleContent], button[scBubbleContent], a[scBubbleContent]',
   host: {
     'data-slot': 'bubble-content',
+    '[attr.type]': "isButton ? 'button' : null",
     '[class]': 'class()',
   },
 })
 export class ScBubbleContent {
+  private readonly styles = injectPreset().bubble;
   readonly classInput = input<string>('', { alias: 'class' });
 
+  protected readonly isButton =
+    inject(ElementRef<HTMLElement>).nativeElement.tagName === 'BUTTON';
+
   protected readonly class = computed(() =>
-    cn(
-      'w-fit max-w-full min-w-0 overflow-hidden rounded-xl border border-transparent px-3 py-2 text-sm leading-relaxed wrap-break-word group-data-[align=end]/bubble:self-end [button]:text-start [button,a]:outline-none [button,a]:transition-colors [button,a]:focus-visible:border-ring [button,a]:focus-visible:ring-3 [button,a]:focus-visible:ring-ring/50',
-      this.classInput(),
-    ),
+    cn(this.styles.content, this.classInput()),
   );
 }

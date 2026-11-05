@@ -7,6 +7,7 @@ import { avatarGroupCount } from './avatar';
 import { backdrop } from './backdrop';
 import { badge } from './badge';
 import { breadcrumb } from './breadcrumb';
+import { bubble } from './bubble';
 import { button } from './button';
 import { card } from './card';
 import { codeBlock } from './code-block';
@@ -34,6 +35,7 @@ export const lyra: ScPreset = {
   alert,
   alertDialog,
   attachment,
+  bubble,
   avatarGroupCount,
   backdrop,
   badge,

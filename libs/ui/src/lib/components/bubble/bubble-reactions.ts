@@ -1,46 +1,45 @@
 import { Directive, computed, input } from '@angular/core';
-import { type VariantProps, cva } from 'class-variance-authority';
-import { cn } from '../../utils/cn/cn';
+import { cva } from 'class-variance-authority';
+import { injectPreset } from '../../config/preset';
+import { cn } from '../../utils';
 
-export const bubbleReactionsVariants = cva(
-  'absolute z-10 flex w-fit shrink-0 items-center justify-center gap-1 rounded-full bg-muted px-1.5 py-0.5 text-sm ring-3 ring-card has-[button]:p-0',
-  {
-    variants: {
-      side: {
-        top: 'top-0 -translate-y-3/4',
-        bottom: 'bottom-0 translate-y-3/4',
-      },
-      align: {
-        start: 'start-3',
-        end: 'end-3',
-      },
+// The same in every style: where the row sits. Its look is the preset's.
+const position = cva('', {
+  variants: {
+    side: {
+      top: 'top-0 -translate-y-3/4',
+      bottom: 'bottom-0 translate-y-3/4',
     },
-    defaultVariants: {
-      side: 'bottom',
-      align: 'start',
+    align: {
+      start: 'start-3',
+      end: 'end-3',
     },
   },
-);
+});
 
-export type ScBubbleReactionsVariants = VariantProps<
-  typeof bubbleReactionsVariants
->;
-
+/**
+ * Reactions or quick actions over the bubble's edge. A row of emoji: name it
+ * as one image (`role="img"`, `aria-label`). Buttons: name each.
+ */
 @Directive({
   selector: 'div[scBubbleReactions]',
   host: {
     'data-slot': 'bubble-reactions',
+    '[attr.data-side]': 'side()',
+    '[attr.data-align]': 'align()',
     '[class]': 'class()',
   },
 })
 export class ScBubbleReactions {
+  private readonly styles = injectPreset().bubble;
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly side = input<ScBubbleReactionsVariants['side']>('bottom');
-  readonly align = input<ScBubbleReactionsVariants['align']>('start');
+  readonly side = input<'top' | 'bottom'>('bottom');
+  readonly align = input<'start' | 'end'>('end');
 
   protected readonly class = computed(() =>
     cn(
-      bubbleReactionsVariants({ side: this.side(), align: this.align() }),
+      this.styles.reactions,
+      position({ side: this.side(), align: this.align() }),
       this.classInput(),
     ),
   );

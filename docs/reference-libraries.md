@@ -402,6 +402,22 @@ A file and its upload state (`div[scAttachment]`; restyled 2026-11-05): shadcn's
 - **The trigger** on a link or a button (`type="button"`), with `scDialogTrigger` for a dialog — shadcn's examples wrap a link or a dialog trigger.
 - **The error's description** in the full destructive colour (shadcn: `/80`, 4.36:1 in dark).
 
+## Bubble
+
+A message's surface (`div[scBubble]`; restyled 2026-11-05): shadcn's Bubble. A shadcn component, so no web research: shadcn's reference app, its docs page and examples (2026-11-05). Base UI has no bubble.
+
+| Library                                                                                             | What to read                                                                                                                                                                                 |
+| --------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| shadcn Bubble (`shadcn-reference/presets/*/bubble.tsx`, `apps/v4/examples/base/bubble-*.tsx`, docs) | Only the content and the reactions change per style; 7 variants, align, group, reactions (side, align: end by default), links and buttons (`render`); examples; accessibility (`role="img"`) |
+
+**Taken:**
+
+- **Each preset's look** for what changes, as the `bubble` key (`content`, `reactions`); the variants, alignment and positions stay in the parts.
+- **Reactions at the end by default**, `data-side` / `data-align` set, as shadcn's (ours were at the start).
+- **Links and buttons**: `scBubbleContent` on a `button` (`type="button"`) or an `a` for shadcn's `render`.
+- **The examples**: Variants, Alignment, Group, Links and buttons, Reactions, Show more (our Collapsible: the first paragraph, the rest in its panel, for shadcn's swapped text), Tooltip, Popover, RTL.
+- **Not** the Markdown example: no Markdown component; its point (ghost, full width) is in Variants.
+
 ## Control Group
 
 An input or a select joined with its buttons (`div[scControlGroup]`): shadcn's Button Group, renamed for what it is for (the user, 2026-10-30: it is only useful when inputs or selects mix with buttons; buttons alone are on the Button page). A shadcn component, so no web research: Base UI and shadcn's reference app (2026-10-30).
