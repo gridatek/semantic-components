@@ -12,6 +12,7 @@ import {
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import {
+  ScFrame,
   ScTabs,
   ScTabsContent,
   ScTabsList,
@@ -37,6 +38,7 @@ import { TocHeading } from '../toc/toc-heading';
 @Component({
   selector: 'app-demo-container',
   imports: [
+    ScFrame,
     ScCodeBlock,
     ScCodeBlockHeader,
     ScCodeBlockTitle,
@@ -82,7 +84,7 @@ import { TocHeading } from '../toc/toc-heading';
           <button scTabsTab value="code">Code</button>
         </div>
 
-        <div scTabsPanel value="preview" [class]="previewClass()">
+        <div scTabsPanel scFrame value="preview" [class]="previewClass()">
           <ng-template scTabsContent>
             @if (framed()) {
               <!--
@@ -186,9 +188,10 @@ export class DemoContainer {
   }
 
   protected readonly previewClass = computed(() =>
+    // Framed in the app's style (scFrame): its radius, ring and shadow.
     this.framed()
-      ? 'overflow-hidden rounded-md border'
-      : 'flex min-h-40 items-center justify-center rounded-md border p-6',
+      ? 'overflow-hidden'
+      : 'flex min-h-40 items-center justify-center p-6',
   );
 
   protected readonly devMode = this.config.devMode;
