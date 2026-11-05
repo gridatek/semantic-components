@@ -99,9 +99,7 @@ import {
               <div scMenuItem value="Settings">Settings</div>
             </div>
             <div scMenuSeparator></div>
-            <div scMenuItem value="Log out" variant="destructive">
-              Log out
-            </div>
+            <div scMenuItem value="Log out" variant="destructive">Log out</div>
           </ng-template>
         </div>
       </ng-template>

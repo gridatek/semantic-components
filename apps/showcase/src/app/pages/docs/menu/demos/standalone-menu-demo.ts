@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
+  ScFrame,
   ScMenu,
   ScMenuContent,
   ScMenuItem,
@@ -23,6 +24,7 @@ import {
 @Component({
   selector: 'app-standalone-menu-demo',
   imports: [
+    ScFrame,
     ScMenu,
     ScMenuContent,
     ScMenuItem,
@@ -78,7 +80,7 @@ import {
           </div>
         </ng-template>
       </div>
-      <p class="bg-muted w-48 rounded-md p-4 text-sm">
+      <p scFrame class="w-48 p-4 text-sm">
         Chosen: {{ chosen() ?? 'nothing yet' }}
       </p>
     </div>
