@@ -22,6 +22,7 @@ export class DestructiveContextMenuDemoContainer {
 import {
   ScContextMenu,
   ScContextMenuTrigger,
+  ScFrame,
   ScMenu,
   ScMenuContent,
   ScMenuGroup,
@@ -41,6 +42,7 @@ import {
   imports: [
     ScContextMenu,
     ScContextMenuTrigger,
+    ScFrame,
     ScMenu,
     ScMenuContent,
     ScMenuGroup,
@@ -55,7 +57,8 @@ import {
     <div scContextMenu class="w-full max-w-xs">
       <div
         scContextMenuTrigger
-        class="flex aspect-video w-full items-center justify-center rounded-xl border border-dashed text-sm"
+        scFrame
+        class="flex aspect-video w-full items-center justify-center text-sm"
       >
         <span class="hidden pointer-fine:inline-block">Right click here</span>
         <span class="hidden pointer-coarse:inline-block">Long press here</span>

@@ -313,7 +313,7 @@ A menu at the pointer (`div[scContextMenu]`): shadcn's Context Menu. A shadcn co
 - **The highlight**: none after a right-click or a long press; the first item after Shift+F10 or the Menu key.
 - **The placement**, and `side` — as `'start'` / `'end'` for shadcn's left / right, so it mirrors right to left.
 - **The menu in a portal, as the Menu's** (`ng-template scMenuPortal`, rendered while open), with `side` and `[(open)]` on the root, `div[scContextMenu]` (the name freed by the old part, a `div` whose menu was created with the page; the root was `scContextMenuProvider`).
-- **The area is the consumer's**: the trigger part keeps `select-none`, its focus and nothing of the look (it had a dashed box).
+- **The area is the consumer's**: the trigger part keeps `select-none`, its focus and nothing of the look (it had a dashed box); the demos frame it with `scFrame`, the style's frame, not shadcn's hand-drawn `rounded-xl border border-dashed`.
 - **Not**: shadcn's area, which is not focusable — ours is, so the keyboard opens the menu too.
 
 ## Control Group

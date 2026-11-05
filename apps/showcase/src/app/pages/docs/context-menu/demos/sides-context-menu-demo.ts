@@ -2,6 +2,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScContextMenu,
   ScContextMenuTrigger,
+  ScFrame,
   ScMenu,
   ScMenuContent,
   ScMenuGroup,
@@ -15,6 +16,7 @@ import {
   imports: [
     ScContextMenu,
     ScContextMenuTrigger,
+    ScFrame,
     ScMenu,
     ScMenuContent,
     ScMenuGroup,
@@ -26,7 +28,8 @@ import {
       <div scContextMenu side="top" class="w-full max-w-xs">
         <div
           scContextMenuTrigger
-          class="flex aspect-video w-full items-center justify-center rounded-xl border border-dashed text-sm"
+          scFrame
+          class="flex aspect-video w-full items-center justify-center text-sm"
         >
           <span class="hidden pointer-fine:inline-block"
             >Right click (top)</span
@@ -50,7 +53,8 @@ import {
       <div scContextMenu side="end" class="w-full max-w-xs">
         <div
           scContextMenuTrigger
-          class="flex aspect-video w-full items-center justify-center rounded-xl border border-dashed text-sm"
+          scFrame
+          class="flex aspect-video w-full items-center justify-center text-sm"
         >
           <span class="hidden pointer-fine:inline-block"
             >Right click (end)</span
@@ -74,7 +78,8 @@ import {
       <div scContextMenu side="bottom" class="w-full max-w-xs">
         <div
           scContextMenuTrigger
-          class="flex aspect-video w-full items-center justify-center rounded-xl border border-dashed text-sm"
+          scFrame
+          class="flex aspect-video w-full items-center justify-center text-sm"
         >
           <span class="hidden pointer-fine:inline-block"
             >Right click (bottom)</span
@@ -98,7 +103,8 @@ import {
       <div scContextMenu side="start" class="w-full max-w-xs">
         <div
           scContextMenuTrigger
-          class="flex aspect-video w-full items-center justify-center rounded-xl border border-dashed text-sm"
+          scFrame
+          class="flex aspect-video w-full items-center justify-center text-sm"
         >
           <span class="hidden pointer-fine:inline-block"
             >Right click (start)</span

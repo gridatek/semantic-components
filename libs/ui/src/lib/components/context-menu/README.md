@@ -6,7 +6,7 @@ A menu at the pointer, opened by a right-click on an area — a long press on to
 
 ```html
 <div scContextMenu class="w-full max-w-xs">
-  <div scContextMenuTrigger class="flex aspect-video w-full items-center justify-center rounded-xl border border-dashed text-sm">Right click here</div>
+  <div scContextMenuTrigger scFrame class="flex aspect-video w-full items-center justify-center text-sm">Right click here</div>
   <ng-template scMenuPortal>
     <div scMenu>
       <ng-template scMenuContent>

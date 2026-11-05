@@ -22,6 +22,7 @@ export class RtlContextMenuDemoContainer {
 import {
   ScContextMenu,
   ScContextMenuTrigger,
+  ScFrame,
   ScMenu,
   ScMenuCheckboxItem,
   ScMenuContent,
@@ -50,6 +51,7 @@ import {
   imports: [
     ScContextMenu,
     ScContextMenuTrigger,
+    ScFrame,
     ScMenuSubmenuIcon,
     ScMenu,
     ScMenuCheckboxItem,
@@ -74,7 +76,8 @@ import {
       <div scContextMenu class="w-full max-w-xs">
         <div
           scContextMenuTrigger
-          class="flex aspect-video w-full items-center justify-center rounded-xl border border-dashed text-sm"
+          scFrame
+          class="flex aspect-video w-full items-center justify-center text-sm"
         >
           <span class="hidden pointer-fine:inline-block"
             >انقر بزر الماوس الأيمن هنا</span

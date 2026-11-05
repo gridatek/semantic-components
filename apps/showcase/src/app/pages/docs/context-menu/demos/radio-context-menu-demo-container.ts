@@ -22,6 +22,7 @@ export class RadioContextMenuDemoContainer {
 import {
   ScContextMenu,
   ScContextMenuTrigger,
+  ScFrame,
   ScMenu,
   ScMenuContent,
   ScMenuGroup,
@@ -40,6 +41,7 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
   imports: [
     ScContextMenu,
     ScContextMenuTrigger,
+    ScFrame,
     ScMenu,
     ScMenuContent,
     ScMenuGroup,
@@ -55,7 +57,8 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
     <div scContextMenu class="w-full max-w-xs">
       <div
         scContextMenuTrigger
-        class="flex aspect-video w-full items-center justify-center rounded-xl border border-dashed text-sm"
+        scFrame
+        class="flex aspect-video w-full items-center justify-center text-sm"
       >
         <span class="hidden pointer-fine:inline-block">Right click here</span>
         <span class="hidden pointer-coarse:inline-block">Long press here</span>
