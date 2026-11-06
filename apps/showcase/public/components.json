@@ -344,6 +344,14 @@
     "category": "Overlay"
   },
   {
+    "name": "Drawer Next",
+    "path": "drawer-next",
+    "description": "A panel at the edge of the screen that a swipe dismisses, with snap points and stacking — in the look of the app's preset.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Overlay"
+  },
+  {
     "name": "Editor",
     "path": "editor",
     "description": "Composable WYSIWYG editor with customizable toolbar.",

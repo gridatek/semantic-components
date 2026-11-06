@@ -332,6 +332,18 @@ export interface ScSheetStyles {
   description: string;
 }
 
+/** A drawer's parts that change from style to style. */
+export interface ScDrawerStyles {
+  /** The panel's look, by `data-swipe-direction`: colours, corners, borders, an inset. */
+  content: string;
+  /** The swipe handle's bar (`after:`), by the panel's `data-swipe-axis`. */
+  handle: string;
+  header: string;
+  footer: string;
+  title: string;
+  description: string;
+}
+
 /** A preset: the components' classes in one of shadcn's styles. */
 export interface ScPreset {
   accordion: ScAccordionStyles;
@@ -359,6 +371,7 @@ export interface ScPreset {
   /** The text beside a group's buttons. */
   controlGroupText: string;
   dialog: ScDialogStyles;
+  drawer: ScDrawerStyles;
   empty: ScEmptyStyles;
   /** The Menu's parts in a context menu. */
   contextMenu: ScMenuStyles;

@@ -1897,6 +1897,67 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/drawer-next',
+    children: [
+      {
+        path: 'drawer-next-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/drawer-next/demos/drawer-next-usage-demo').then(
+            (m) => m.DrawerNextUsageDemo,
+          ),
+      },
+      {
+        path: 'sides-drawer-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/drawer-next/demos/sides-drawer-next-demo').then(
+            (m) => m.SidesDrawerNextDemo,
+          ),
+      },
+      {
+        path: 'swipe-handle-drawer-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/drawer-next/demos/swipe-handle-drawer-next-demo').then(
+            (m) => m.SwipeHandleDrawerNextDemo,
+          ),
+      },
+      {
+        path: 'snap-points-drawer-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/drawer-next/demos/snap-points-drawer-next-demo').then(
+            (m) => m.SnapPointsDrawerNextDemo,
+          ),
+      },
+      {
+        path: 'nested-drawer-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/drawer-next/demos/nested-drawer-next-demo').then(
+            (m) => m.NestedDrawerNextDemo,
+          ),
+      },
+      {
+        path: 'non-modal-drawer-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/drawer-next/demos/non-modal-drawer-next-demo').then(
+            (m) => m.NonModalDrawerNextDemo,
+          ),
+      },
+      {
+        path: 'responsive-drawer-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/drawer-next/demos/responsive-drawer-next-demo').then(
+            (m) => m.ResponsiveDrawerNextDemo,
+          ),
+      },
+      {
+        path: 'rtl-drawer-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/drawer-next/demos/rtl-drawer-next-demo').then(
+            (m) => m.RtlDrawerNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/emoji-picker',
     children: [
       {

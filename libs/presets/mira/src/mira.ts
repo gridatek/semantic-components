@@ -14,6 +14,7 @@ import { codeBlock } from './code-block';
 import { contextMenu } from './context-menu';
 import { controlGroup, controlGroupText } from './control-group';
 import { dialog } from './dialog';
+import { drawer } from './drawer';
 import { empty } from './empty';
 import { frame } from './frame';
 import { input } from './input';
@@ -58,6 +59,7 @@ export const mira: ScPreset = {
   controlGroup,
   controlGroupText,
   dialog,
+  drawer,
   empty,
   contextMenu,
   input,
