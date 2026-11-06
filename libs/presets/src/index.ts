@@ -351,8 +351,10 @@ export interface ScPreviewCardStyles {
 
 /** A scroll area's parts that change from style to style. */
 export interface ScScrollAreaStyles {
-  /** The scrollbar's thumb. */
+  /** The scrollbar's thumb (Scroll Area Next: drawn). */
   thumb: string;
+  /** The same look on the browser's scrollbar thumb, `::-webkit-scrollbar-thumb` (Scroll Area Next2). */
+  nativeThumb: string;
 }
 
 /** A preset: the components' classes in one of shadcn's styles. */

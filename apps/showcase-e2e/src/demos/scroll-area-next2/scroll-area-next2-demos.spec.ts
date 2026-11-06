@@ -17,7 +17,7 @@ test.afterEach(() => {
   expect(errors).toEqual([]);
 });
 
-test('Usage: overflows down only; the native scrollbar, thin and themed', async ({
+test('Usage: overflows down only; the browser’s scrollbar in the preset’s look', async ({
   page,
 }) => {
   await page.goto('/demos/scroll-area-next2/scroll-area-next2-usage-demo');
@@ -27,8 +27,14 @@ test('Usage: overflows down only; the native scrollbar, thin and themed', async 
   await expect(a).toHaveAttribute('data-overflow-y-end', '');
   await expect(a).not.toHaveAttribute('data-overflow-y-start');
   await expect(a).toHaveCSS('overflow-y', 'auto');
-  await expect(a).toHaveCSS('scrollbar-width', 'thin');
-  await expect(a).not.toHaveCSS('scrollbar-color', 'auto');
+  // Chromium draws ::-webkit-scrollbar: no scrollbar-width / -color set.
+  await expect(a).toHaveCSS('scrollbar-width', 'auto');
+  const thumb = await a.evaluate((el) => {
+    const s = getComputedStyle(el, '::-webkit-scrollbar-thumb');
+    return { radius: s.borderTopLeftRadius, color: s.backgroundColor };
+  });
+  expect(thumb.radius).not.toBe('0px');
+  expect(thumb.color).not.toBe('rgba(0, 0, 0, 0)');
 });
 
 test('Keyboard: a tab stop while it overflows; End scrolls to the bottom', async ({

@@ -7,8 +7,9 @@ import { nova } from '@semantic-components/presets/nova';
 import { rhea } from '@semantic-components/presets/rhea';
 import { sera } from '@semantic-components/presets/sera';
 import { vega } from '@semantic-components/presets/vega';
+import { twMerge } from 'tailwind-merge';
 import { expectNoA11yViolations } from '../../axe';
-import { test } from '../../test';
+import { expect, test } from '../../test';
 
 /** Every preset, as the showcase's preset sheet lists them. */
 const PRESETS: Record<string, ScPreset> = {
@@ -26,8 +27,8 @@ test.describe('Scroll Area Next2 in every preset', () => {
   // A docs page and axe, twice: slow under load.
   test.slow();
 
-  for (const preset of Object.keys(PRESETS))
-    test(`${preset}: no axe violation, light and dark`, async ({
+  for (const [preset, styles] of Object.entries(PRESETS))
+    test(`${preset}: the thumb has its preset's classes; no axe violation, light and dark`, async ({
       page,
       context,
       baseURL,
@@ -36,6 +37,22 @@ test.describe('Scroll Area Next2 in every preset', () => {
       await context.addCookies([
         { name: 'sc-preset', value: preset, url: baseURL! },
       ]);
+      await page.goto('/demos/scroll-area-next2/scroll-area-next2-usage-demo');
+      const classes = twMerge(styles.scrollArea.nativeThumb).split(/\s+/);
+      // Read until it has them all: the first render may not have them yet.
+      await expect
+        .poll(async () => {
+          const have = new Set(
+            (
+              (await page
+                .locator('[scScrollAreaNext2]')
+                .getAttribute('class')) ?? ''
+            ).split(/\s+/),
+          );
+          return classes.filter((c) => !have.has(c));
+        }, `${preset} thumb classes missing`)
+        .toEqual([]);
+
       await page.goto('/docs/components/scroll-area-next2');
       await expectNoA11yViolations(page);
       await expectNoA11yViolations(page, { dark: true });

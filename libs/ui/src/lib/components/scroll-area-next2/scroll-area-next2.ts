@@ -8,6 +8,7 @@ import {
   input,
   signal,
 } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 
 interface ScScrollAreaNext2Metrics {
@@ -22,8 +23,8 @@ interface ScScrollAreaNext2Metrics {
 const SCROLLING = 500;
 
 /**
- * A box that scrolls, with the browser's own scrollbar — thin, in the
- * theme's colors (Tailwind's `scrollbar-*` utilities: yours override them).
+ * A box that scrolls, with the browser's own scrollbar in the preset's look
+ * (`::-webkit-scrollbar`: Chromium, Safari; Firefox's thin bar, themed).
  * A tab stop while it overflows, ringed when focused: the arrow keys, Page
  * Up / Down, Home and End scroll it. It tells what overflows and where —
  * `data-has-overflow-x` / `-y`, `data-overflow-{x,y}-{start,end}`,
@@ -50,6 +51,7 @@ const SCROLLING = 500;
   },
 })
 export class ScScrollAreaNext2 {
+  private readonly styles = injectPreset().scrollArea;
   private readonly element =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
   readonly classInput = input<string>('', { alias: 'class' });
@@ -74,7 +76,14 @@ export class ScScrollAreaNext2 {
 
   protected readonly class = computed(() =>
     cn(
-      'overflow-auto scrollbar-thin scrollbar-thumb-border scrollbar-track-transparent',
+      'overflow-auto',
+      // The browser's scrollbar in the preset's look (Chromium, Safari): 10px,
+      // no track, the thumb inset by 1px. Setting scrollbar-width or -color
+      // would make Chromium ignore these.
+      '[&::-webkit-scrollbar]:size-2.5 [&::-webkit-scrollbar-corner]:bg-transparent [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:border [&::-webkit-scrollbar-thumb]:border-transparent [&::-webkit-scrollbar-thumb]:bg-clip-padding',
+      this.styles.nativeThumb,
+      // Firefox has no ::-webkit-scrollbar: its thin bar, themed.
+      '[@supports_not_selector(::-webkit-scrollbar)]:scrollbar-thin [@supports_not_selector(::-webkit-scrollbar)]:scrollbar-thumb-border [@supports_not_selector(::-webkit-scrollbar)]:scrollbar-track-transparent',
       'transition-[color,box-shadow] outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-1',
       this.classInput(),
     ),
