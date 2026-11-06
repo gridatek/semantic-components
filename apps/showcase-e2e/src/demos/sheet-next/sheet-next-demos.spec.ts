@@ -77,7 +77,7 @@ test('Closing animates out: the panel stays while it slides away', async ({
   // Once it has slid in.
   await expect(sheet(page)).toHaveCSS('opacity', '1');
   await press(page, 'Escape');
-  await expect(page.locator('[scSheetNext].sc-leaving')).toHaveCount(1);
+  await expect(page.locator('[scSheetNext].animate-out')).toHaveCount(1);
   await expect(sheet(page)).toHaveCount(0);
 });
 

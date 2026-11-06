@@ -6,8 +6,8 @@ import { ScSheetNextProvider } from './sheet-next-provider';
 /**
  * The sheet's panel, in the preset's look: a modal dialog at its side's
  * edge, named by its title and described by its description. It slides in
- * (`starting:`) and out (the preset's `[&.sc-leaving]:`, while Angular's
- * leave runs); a close straight in it goes in its corner.
+ * and out from its side (animate.enter / animate.leave; the preset's side
+ * classes set the direction); a close straight in it goes in its corner.
  */
 @Directive({
   selector: 'div[scSheetNext]',
@@ -22,7 +22,8 @@ import { ScSheetNextProvider } from './sheet-next-provider';
     '[attr.lang]': 'lang',
     '[tabindex]': '-1',
     '[class]': 'class()',
-    'animate.leave': 'sc-leaving',
+    'animate.enter': 'animate-in fade-in-0',
+    'animate.leave': 'animate-out fade-out-0',
   },
 })
 export class ScSheetNext {

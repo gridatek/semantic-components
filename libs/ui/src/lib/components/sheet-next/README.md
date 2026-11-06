@@ -49,6 +49,6 @@ A dialog at the edge of the screen, sliding in from its side — shadcn's Sheet 
 
 ## Not shadcn's
 
-- **Its transitions kept**, the Angular way: shadcn's `data-starting-style` is Tailwind's `starting:`, its `data-ending-style` the class Angular's `animate.leave` adds (`sc-leaving`).
+- **Angular's animations**: the panel slides and fades with `animate.enter` / `animate.leave` (tw-animate's `animate-in` / `animate-out`), the side's `slide-in-from-*-10` / `slide-out-to-*-10` — shadcn's 2.5rem slide, as our other overlays.
 - **Logical sides** (`inline-start`, `inline-end`), shared with Tooltip and Popover (`utils/overlay-positions`).
 - **The ✕ is yours** (`scSheetNextClose`), placed by the panel — shadcn's content draws it (`showCloseButton`).

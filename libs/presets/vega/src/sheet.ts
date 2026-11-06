@@ -1,11 +1,11 @@
 import type { ScSheetStyles } from '@semantic-components/presets';
 
 // shadcn's sheet in vega (shadcn-reference/presets/vega/sheet.tsx). Its
-// transitions kept: data-starting-style is `starting:`, data-ending-style
-// `[&.sc-leaving]:` (the class the panel's animate.leave adds).
+// slide and fade are the panel's animate.enter / animate.leave (tw-animate):
+// each side's slide-in-from-*-10 / slide-out-to-*-10.
 export const sheet: ScSheetStyles = {
   content:
-    'fixed z-50 flex flex-col gap-4 bg-popover bg-clip-padding text-sm text-popover-foreground shadow-lg transition duration-200 ease-in-out [&.sc-leaving]:opacity-0 starting:opacity-0 data-[side=bottom]:inset-x-0 data-[side=bottom]:bottom-0 data-[side=bottom]:h-auto data-[side=bottom]:border-t data-[side=bottom]:[&.sc-leaving]:translate-y-[2.5rem] data-[side=bottom]:starting:translate-y-[2.5rem] data-[side=left]:inset-y-0 data-[side=left]:left-0 data-[side=left]:h-full data-[side=left]:w-3/4 data-[side=left]:border-e data-[side=left]:[&.sc-leaving]:translate-x-[-2.5rem] rtl:data-[side=left]:[&.sc-leaving]:-translate-x-[-2.5rem] data-[side=left]:starting:translate-x-[-2.5rem] rtl:data-[side=left]:starting:-translate-x-[-2.5rem] data-[side=right]:inset-y-0 data-[side=right]:right-0 data-[side=right]:h-full data-[side=right]:w-3/4 data-[side=right]:border-s data-[side=right]:[&.sc-leaving]:translate-x-[2.5rem] rtl:data-[side=right]:[&.sc-leaving]:-translate-x-[2.5rem] data-[side=right]:starting:translate-x-[2.5rem] rtl:data-[side=right]:starting:-translate-x-[2.5rem] data-[side=top]:inset-x-0 data-[side=top]:top-0 data-[side=top]:h-auto data-[side=top]:border-b data-[side=top]:[&.sc-leaving]:translate-y-[-2.5rem] data-[side=top]:starting:translate-y-[-2.5rem] data-[side=left]:sm:max-w-sm data-[side=right]:sm:max-w-sm',
+    'fixed z-50 flex flex-col gap-4 bg-popover bg-clip-padding text-sm text-popover-foreground shadow-lg transition duration-200 ease-in-out data-[side=bottom]:inset-x-0 data-[side=bottom]:bottom-0 data-[side=bottom]:h-auto data-[side=bottom]:border-t data-[side=left]:inset-y-0 data-[side=left]:left-0 data-[side=left]:h-full data-[side=left]:w-3/4 data-[side=left]:border-e data-[side=right]:inset-y-0 data-[side=right]:right-0 data-[side=right]:h-full data-[side=right]:w-3/4 data-[side=right]:border-s data-[side=top]:inset-x-0 data-[side=top]:top-0 data-[side=top]:h-auto data-[side=top]:border-b data-[side=left]:sm:max-w-sm data-[side=right]:sm:max-w-sm data-[side=top]:slide-in-from-top-10 data-[side=top]:slide-out-to-top-10 data-[side=right]:slide-in-from-right-10 data-[side=right]:slide-out-to-right-10 data-[side=bottom]:slide-in-from-bottom-10 data-[side=bottom]:slide-out-to-bottom-10 data-[side=left]:slide-in-from-left-10 data-[side=left]:slide-out-to-left-10',
   close:
     '[&>[data-slot=sheet-close]]:absolute [&>[data-slot=sheet-close]]:top-4 [&>[data-slot=sheet-close]]:end-4',
   header: 'flex flex-col gap-1.5 p-4',
