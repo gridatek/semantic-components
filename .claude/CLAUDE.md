@@ -25,6 +25,7 @@ You are an expert in TypeScript, Angular, and scalable web application developme
 ## Styling
 
 - Component styling tracks shadcn/ui, in all eight of its styles. The reference is the app generated with shadcn's CLI (`D:/Workspace/Projects/shadcn-reference`, one per style in `presets/<style>/`): classes written out in full, RTL-ready, in `src/components/ui/*.tsx`. What differs between styles lives in our presets (`libs/presets/<style>/src/*.ts`, read by the parts with `injectPreset()`); what is the same stays in the part. See [docs/shadcn-style-reference.md](../docs/shadcn-style-reference.md) for how to compare, and for the divergences that are deliberate.
+- Animate with Angular's `animate.enter` and `animate.leave` whenever possible (with tw-animate's `animate-in` / `animate-out` classes; a direction from the preset, e.g. `data-[side=right]:slide-in-from-right-10`). shadcn's `data-open:` / `data-closed:` and `data-starting-style:` / `data-ending-style:` classes map to those — not to CSS transitions, `starting:` or a made-up class.
 
 ## Accessibility Requirements
 
