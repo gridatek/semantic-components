@@ -17,6 +17,7 @@ import { dialog } from './dialog';
 import { drawer } from './drawer';
 import { empty } from './empty';
 import { frame } from './frame';
+import { hoverCard } from './hover-card';
 import { input } from './input';
 import {
   inputGroup,
@@ -61,6 +62,7 @@ export const mira: ScPreset = {
   dialog,
   drawer,
   empty,
+  hoverCard,
   contextMenu,
   input,
   marker,

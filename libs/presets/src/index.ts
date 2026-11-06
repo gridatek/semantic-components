@@ -344,6 +344,11 @@ export interface ScDrawerStyles {
   description: string;
 }
 
+/** A hover card's look, from style to style. */
+export interface ScHoverCardStyles {
+  popup: string;
+}
+
 /** A preset: the components' classes in one of shadcn's styles. */
 export interface ScPreset {
   accordion: ScAccordionStyles;
@@ -373,6 +378,7 @@ export interface ScPreset {
   dialog: ScDialogStyles;
   drawer: ScDrawerStyles;
   empty: ScEmptyStyles;
+  hoverCard: ScHoverCardStyles;
   /** The Menu's parts in a context menu. */
   contextMenu: ScMenuStyles;
   /** A text field (`input[scInput]`, and the inputs that look like one). */

@@ -2242,6 +2242,46 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/hover-card-next',
+    children: [
+      {
+        path: 'hover-card-next-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/hover-card-next/demos/hover-card-next-usage-demo').then(
+            (m) => m.HoverCardNextUsageDemo,
+          ),
+      },
+      {
+        path: 'in-text-hover-card-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/hover-card-next/demos/in-text-hover-card-next-demo').then(
+            (m) => m.InTextHoverCardNextDemo,
+          ),
+      },
+      {
+        path: 'sides-hover-card-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/hover-card-next/demos/sides-hover-card-next-demo').then(
+            (m) => m.SidesHoverCardNextDemo,
+          ),
+      },
+      {
+        path: 'logical-sides-hover-card-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/hover-card-next/demos/logical-sides-hover-card-next-demo').then(
+            (m) => m.LogicalSidesHoverCardNextDemo,
+          ),
+      },
+      {
+        path: 'rtl-hover-card-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/hover-card-next/demos/rtl-hover-card-next-demo').then(
+            (m) => m.RtlHoverCardNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/image-annotator',
     children: [
       {

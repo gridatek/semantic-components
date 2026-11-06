@@ -432,6 +432,14 @@
     "category": "Overlay"
   },
   {
+    "name": "Hover Card Next",
+    "path": "hover-card-next",
+    "description": "A preview of a link's destination, shown on hover or keyboard focus — in the look of the app's preset.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Overlay"
+  },
+  {
     "name": "Image Annotator",
     "path": "image-annotator",
     "description": "Annotate an image: shapes over it — selected, moved, resized, restyled — with keyboard, kept as data, exported as an image.",
