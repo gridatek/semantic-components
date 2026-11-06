@@ -576,9 +576,9 @@ Rich content beside its trigger (`div[scPopoverProvider]`; rewritten and switche
 - **Kept** `origin` (an input group as anchor: the date pickers), `[(open)]`, side, align, offset — the 31 uses switched unchanged.
 - **Not** detached triggers, handles, payloads, Viewport, Backdrop, an Arrow (shadcn draws none).
 
-## Hover Card
+## Preview Card
 
-A preview of a link's destination (`div[scHoverCardProvider]`; rewritten and switched 2026-11-06): shadcn's Hover Card, Base UI's Preview Card. A shadcn component, so no web research: shadcn's reference app and its 3 examples, Base UI's Preview Card docs.
+A preview of a link's destination (`div[scPreviewCardProvider]`; rewritten and switched 2026-11-06): shadcn's Hover Card, Base UI's Preview Card. A shadcn component, so no web research: shadcn's reference app and its 3 examples, Base UI's Preview Card docs.
 
 | Library                                                                                                   | What to read                                                                                                                           |
 | --------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
@@ -587,6 +587,7 @@ A preview of a link's destination (`div[scHoverCardProvider]`; rewritten and swi
 
 **Taken:**
 
+- **Base UI's name, Preview Card** (the user, 2026-11-06; shadcn's is Hover Card): it previews a link's destination, and opens on keyboard focus too — not only on hover.
 - **Base UI's accessibility stance**: the link is the only thing to reach; the card has no role, no link to its trigger, takes no focus, and must only repeat what is at the link's destination.
 - **The delays on the trigger** (`delay` 600, `closeDelay` 300), as Base UI's; hover after the delay, keyboard focus at once; Escape, blur and a press outside close it; a touch only follows the link.
 - **The trigger on `a` or `button`** (the user's "ok", 2026-11-06): Base UI renders a link, shadcn's examples a link-styled button.

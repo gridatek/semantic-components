@@ -17,7 +17,6 @@ import { dialog } from './dialog';
 import { drawer } from './drawer';
 import { empty } from './empty';
 import { frame } from './frame';
-import { hoverCard } from './hover-card';
 import { input } from './input';
 import {
   inputGroup,
@@ -34,6 +33,7 @@ import { message } from './message';
 import { messageScrollerContent } from './message-scroller';
 import { pagination } from './pagination';
 import { popover } from './popover';
+import { previewCard } from './preview-card';
 import { questionnaire } from './questionnaire';
 import { select } from './select';
 import { sheet } from './sheet';
@@ -62,7 +62,6 @@ export const luma: ScPreset = {
   dialog,
   drawer,
   empty,
-  hoverCard,
   contextMenu,
   input,
   marker,
@@ -78,6 +77,7 @@ export const luma: ScPreset = {
   messageScrollerContent,
   pagination,
   popover,
+  previewCard,
   questionnaire,
   select,
   sheet,

@@ -344,8 +344,8 @@ export interface ScDrawerStyles {
   description: string;
 }
 
-/** A hover card's look, from style to style. */
-export interface ScHoverCardStyles {
+/** A preview card's look, from style to style. */
+export interface ScPreviewCardStyles {
   popup: string;
 }
 
@@ -378,7 +378,6 @@ export interface ScPreset {
   dialog: ScDialogStyles;
   drawer: ScDrawerStyles;
   empty: ScEmptyStyles;
-  hoverCard: ScHoverCardStyles;
   /** The Menu's parts in a context menu. */
   contextMenu: ScMenuStyles;
   /** A text field (`input[scInput]`, and the inputs that look like one). */
@@ -400,6 +399,7 @@ export interface ScPreset {
   messageScrollerContent: string;
   pagination: ScPaginationStyles;
   popover: ScPopoverStyles;
+  previewCard: ScPreviewCardStyles;
   questionnaire: ScQuestionnaireStyles;
   select: ScSelectStyles;
   sheet: ScSheetStyles;

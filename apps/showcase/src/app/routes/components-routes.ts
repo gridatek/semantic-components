@@ -341,11 +341,6 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/file-upload/file-upload-page'),
       },
       {
-        path: 'hover-card',
-        title: 'Hover Card - Semantic Components',
-        loadComponent: () => import('../pages/docs/hover-card/hover-card-page'),
-      },
-      {
         path: 'image-annotator',
         title: 'Image Annotator - Semantic Components',
         loadComponent: () =>
@@ -531,6 +526,12 @@ export const componentsRoutes: Route[] = [
         path: 'popover',
         title: 'Popover - Semantic Components',
         loadComponent: () => import('../pages/docs/popover/popover-page'),
+      },
+      {
+        path: 'preview-card',
+        title: 'Preview Card - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/preview-card/preview-card-page'),
       },
       {
         path: 'progress',

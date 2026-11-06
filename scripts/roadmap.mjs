@@ -26,6 +26,8 @@ const ALIAS = {
   link: 'button',
   // shadcn's Button Group, named for what it joins.
   'control-group': 'button-group',
+  // shadcn's Hover Card, under Base UI's name: a preview of a link's destination.
+  'preview-card': 'hover-card',
 };
 // Components without a folder of their own: measured as another.
 const SAME_AS = {

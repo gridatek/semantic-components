@@ -424,14 +424,6 @@
     "category": "Utilities"
   },
   {
-    "name": "Hover Card",
-    "path": "hover-card",
-    "description": "A preview of a link's destination, shown on hover or keyboard focus — in the look of the app's preset.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Overlay"
-  },
-  {
     "name": "Image Annotator",
     "path": "image-annotator",
     "description": "Annotate an image: shapes over it — selected, moved, resized, restyled — with keyboard, kept as data, exported as an image.",
@@ -731,6 +723,14 @@
     "name": "Popover",
     "path": "popover",
     "description": "Rich content in a panel beside its trigger — a dialog, modal or not, opened by a click or a hover, in the look of the app's preset.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Overlay"
+  },
+  {
+    "name": "Preview Card",
+    "path": "preview-card",
+    "description": "A preview of a link's destination, shown on hover or keyboard focus — in the look of the app's preset.",
     "status": "Experimental",
     "library": "ui",
     "category": "Overlay"

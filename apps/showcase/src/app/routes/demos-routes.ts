@@ -2216,46 +2216,6 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/hover-card',
-    children: [
-      {
-        path: 'hover-card-usage-demo',
-        loadComponent: () =>
-          import('../pages/docs/hover-card/demos/hover-card-usage-demo').then(
-            (m) => m.HoverCardUsageDemo,
-          ),
-      },
-      {
-        path: 'in-text-hover-card-demo',
-        loadComponent: () =>
-          import('../pages/docs/hover-card/demos/in-text-hover-card-demo').then(
-            (m) => m.InTextHoverCardDemo,
-          ),
-      },
-      {
-        path: 'sides-hover-card-demo',
-        loadComponent: () =>
-          import('../pages/docs/hover-card/demos/sides-hover-card-demo').then(
-            (m) => m.SidesHoverCardDemo,
-          ),
-      },
-      {
-        path: 'logical-sides-hover-card-demo',
-        loadComponent: () =>
-          import('../pages/docs/hover-card/demos/logical-sides-hover-card-demo').then(
-            (m) => m.LogicalSidesHoverCardDemo,
-          ),
-      },
-      {
-        path: 'rtl-hover-card-demo',
-        loadComponent: () =>
-          import('../pages/docs/hover-card/demos/rtl-hover-card-demo').then(
-            (m) => m.RtlHoverCardDemo,
-          ),
-      },
-    ],
-  },
-  {
     path: 'demos/image-annotator',
     children: [
       {
@@ -3946,6 +3906,46 @@ export const demosRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/popover/demos/rtl-popover-demo').then(
             (m) => m.RtlPopoverDemo,
+          ),
+      },
+    ],
+  },
+  {
+    path: 'demos/preview-card',
+    children: [
+      {
+        path: 'preview-card-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/preview-card/demos/preview-card-usage-demo').then(
+            (m) => m.PreviewCardUsageDemo,
+          ),
+      },
+      {
+        path: 'in-text-preview-card-demo',
+        loadComponent: () =>
+          import('../pages/docs/preview-card/demos/in-text-preview-card-demo').then(
+            (m) => m.InTextPreviewCardDemo,
+          ),
+      },
+      {
+        path: 'sides-preview-card-demo',
+        loadComponent: () =>
+          import('../pages/docs/preview-card/demos/sides-preview-card-demo').then(
+            (m) => m.SidesPreviewCardDemo,
+          ),
+      },
+      {
+        path: 'logical-sides-preview-card-demo',
+        loadComponent: () =>
+          import('../pages/docs/preview-card/demos/logical-sides-preview-card-demo').then(
+            (m) => m.LogicalSidesPreviewCardDemo,
+          ),
+      },
+      {
+        path: 'rtl-preview-card-demo',
+        loadComponent: () =>
+          import('../pages/docs/preview-card/demos/rtl-preview-card-demo').then(
+            (m) => m.RtlPreviewCardDemo,
           ),
       },
     ],
