@@ -1,84 +1,42 @@
 # Resizable
 
-Accessible resizable panel groups and layouts with drag support.
-
-## Components
-
-| Component                    | Selector                       | Role                                                          |
-| ---------------------------- | ------------------------------ | ------------------------------------------------------------- |
-| `ScResizablePanelGroup`      | `[scResizablePanelGroup]`      | Container with `aria-orientation`. Inputs: `direction`        |
-| `ScResizablePanel`           | `[scResizablePanel]`           | Individual panel. Inputs: `defaultSize`, `minSize`, `maxSize` |
-| `ScResizableHandle`          | `[scResizableHandle]`          | Drag handle with `aria-orientation`. Inputs: `withHandle`     |
-| `ScResizableHandleIndicator` | `[scResizableHandleIndicator]` | Visual grip bar rendered inside the handle                    |
-
-## Types
-
-| Type                   | Description                  |
-| ---------------------- | ---------------------------- |
-| `ScResizableDirection` | `'horizontal' \| 'vertical'` |
+Panels resized by the handles between them, by pointer or keyboard — shadcn's Resizable (react-resizable-panels) in the look of the app's preset (`resizable` key: the grip, shadcn's in each of the eight styles).
 
 ## Usage
 
 ```html
-<div scResizablePanelGroup direction="horizontal" class="min-h-[200px] max-w-md rounded-lg border">
-  <div scResizablePanel [defaultSize]="50">
-    <div class="flex h-full items-center justify-center p-6">
-      <span class="font-semibold">One</span>
-    </div>
+<div scResizablePanelGroup class="min-h-[200px]">
+  <div scResizablePanel [defaultSize]="25">Sidebar</div>
+  <div scResizableHandle aria-label="Resize Sidebar">
+    <div scResizableHandleGrip></div>
   </div>
-  <div scResizableHandle></div>
-  <div scResizablePanel [defaultSize]="50">
-    <div class="flex h-full items-center justify-center p-6">
-      <span class="font-semibold">Two</span>
-    </div>
-  </div>
+  <div scResizablePanel [defaultSize]="75">Content</div>
 </div>
 ```
 
-### Vertical Layout
+The panels are the group's direct children, a handle between each two. A group nests inside a panel.
 
-```html
-<div scResizablePanelGroup direction="vertical" class="h-[300px] max-w-md rounded-lg border">
-  <div scResizablePanel [defaultSize]="30">Header</div>
-  <div scResizableHandle></div>
-  <div scResizablePanel [defaultSize]="70">Content</div>
-</div>
-```
+## Parts
 
-### With Handle
+| Part                    | Selector                     | What it does                                                                                                                          |
+| ----------------------- | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `ScResizablePanelGroup` | `div[scResizablePanelGroup]` | `orientation` (`horizontal`, `vertical`); `[(layout)]`: the panels' sizes in %, in order — to save a layout and restore it            |
+| `ScResizablePanel`      | `div[scResizablePanel]`      | `defaultSize` (else a share of what is left), `minSize`, `maxSize` (%); `collapsible`, `collapsedSize`; `data-collapsed`              |
+| `ScResizableHandle`     | `div[scResizableHandle]`     | The splitter: drag, or the keyboard. `role="separator"`, `aria-valuenow` / `-min` / `-max`, `aria-controls`; `data-dragging`. Name it |
+| `ScResizableHandleGrip` | `div[scResizableHandleGrip]` | Its grip, in the preset's look; `aria-hidden`                                                                                         |
 
-```html
-<div scResizablePanelGroup direction="horizontal" class="min-h-[200px] max-w-md rounded-lg border">
-  <div scResizablePanel [defaultSize]="30">Sidebar</div>
-  <div scResizableHandle [withHandle]="true"></div>
-  <div scResizablePanel [defaultSize]="70">Content</div>
-</div>
-```
+A collapsible panel shuts to `collapsedSize` when dragged below half its minimum, or on Enter; Enter opens it again to its size before.
 
-### Size Constraints
+## Keyboard and screen readers
 
-```html
-<div scResizablePanelGroup direction="horizontal" class="min-h-[200px] max-w-lg rounded-lg border">
-  <div scResizablePanel [defaultSize]="25" [minSize]="15">Left</div>
-  <div scResizableHandle [withHandle]="true"></div>
-  <div scResizablePanel [defaultSize]="50">Center</div>
-  <div scResizableHandle [withHandle]="true"></div>
-  <div scResizablePanel [defaultSize]="25" [minSize]="15">Right</div>
-</div>
-```
+WAI-ARIA's window splitter:
 
-### Nested Panels
+- A handle is a focusable separator; its value is the size of the panel before it, which it controls. Name it (`aria-label="Resize Sidebar"`).
+- ← → (a horizontal group; mirrored right to left) or ↑ ↓ (a vertical one) resize by 10%. Home and End go to the panel's minimum and maximum. Enter shuts or opens a collapsible panel beside it.
 
-```html
-<div scResizablePanelGroup direction="horizontal" class="min-h-[300px] max-w-lg rounded-lg border">
-  <div scResizablePanel [defaultSize]="30">Sidebar</div>
-  <div scResizableHandle></div>
-  <div scResizablePanel [defaultSize]="70">
-    <div scResizablePanelGroup direction="vertical" class="h-full">
-      <div scResizablePanel [defaultSize]="40">Top</div>
-      <div scResizableHandle></div>
-      <div scResizablePanel [defaultSize]="60">Bottom</div>
-    </div>
-  </div>
-</div>
-```
+## Not shadcn's
+
+- **Sizes in % only** (react-resizable-panels also takes px, rem, vh).
+- **The grip is a part you write** (`scResizableHandleGrip`), not `withHandle`.
+- **`[(layout)]`** in place of `defaultLayout` / `onLayoutChanged`.
+- Not taken: react-resizable-panels' Grid, its separator preview mode, `groupResizeBehavior`, `disabled`.

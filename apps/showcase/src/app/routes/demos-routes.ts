@@ -4121,10 +4121,17 @@ export const demosRoutes: Route[] = [
     path: 'demos/resizable',
     children: [
       {
-        path: 'horizontal-resizable-demo',
+        path: 'resizable-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/resizable/demos/horizontal-resizable-demo').then(
-            (m) => m.HorizontalResizableDemo,
+          import('../pages/docs/resizable/demos/resizable-usage-demo').then(
+            (m) => m.ResizableUsageDemo,
+          ),
+      },
+      {
+        path: 'handle-resizable-demo',
+        loadComponent: () =>
+          import('../pages/docs/resizable/demos/handle-resizable-demo').then(
+            (m) => m.HandleResizableDemo,
           ),
       },
       {
@@ -4135,78 +4142,24 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'with-handle-resizable-demo',
+        path: 'collapsible-resizable-demo',
         loadComponent: () =>
-          import('../pages/docs/resizable/demos/with-handle-resizable-demo').then(
-            (m) => m.WithHandleResizableDemo,
+          import('../pages/docs/resizable/demos/collapsible-resizable-demo').then(
+            (m) => m.CollapsibleResizableDemo,
           ),
       },
       {
-        path: 'three-panels-resizable-demo',
+        path: 'remembered-resizable-demo',
         loadComponent: () =>
-          import('../pages/docs/resizable/demos/three-panels-resizable-demo').then(
-            (m) => m.ThreePanelsResizableDemo,
+          import('../pages/docs/resizable/demos/remembered-resizable-demo').then(
+            (m) => m.RememberedResizableDemo,
           ),
       },
       {
-        path: 'nested-resizable-demo',
+        path: 'rtl-resizable-demo',
         loadComponent: () =>
-          import('../pages/docs/resizable/demos/nested-resizable-demo').then(
-            (m) => m.NestedResizableDemo,
-          ),
-      },
-      {
-        path: 'ide-layout-resizable-demo',
-        loadComponent: () =>
-          import('../pages/docs/resizable/demos/ide-layout-resizable-demo').then(
-            (m) => m.IdeLayoutResizableDemo,
-          ),
-      },
-    ],
-  },
-  {
-    path: 'demos/resizable-next',
-    children: [
-      {
-        path: 'resizable-next-usage-demo',
-        loadComponent: () =>
-          import('../pages/docs/resizable-next/demos/resizable-next-usage-demo').then(
-            (m) => m.ResizableNextUsageDemo,
-          ),
-      },
-      {
-        path: 'handle-resizable-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/resizable-next/demos/handle-resizable-next-demo').then(
-            (m) => m.HandleResizableNextDemo,
-          ),
-      },
-      {
-        path: 'vertical-resizable-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/resizable-next/demos/vertical-resizable-next-demo').then(
-            (m) => m.VerticalResizableNextDemo,
-          ),
-      },
-      {
-        path: 'collapsible-resizable-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/resizable-next/demos/collapsible-resizable-next-demo').then(
-            (m) => m.CollapsibleResizableNextDemo,
-          ),
-      },
-      {
-        path: 'remembered-resizable-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/resizable-next/demos/remembered-resizable-next-demo').then(
-            (m) => m.RememberedResizableNextDemo,
-          ),
-      },
-      {
-        path: 'rtl-resizable-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/resizable-next/demos/rtl-resizable-next-demo').then(
-            (m) => m.RtlResizableNextDemo,
+          import('../pages/docs/resizable/demos/rtl-resizable-demo').then(
+            (m) => m.RtlResizableDemo,
           ),
       },
     ],

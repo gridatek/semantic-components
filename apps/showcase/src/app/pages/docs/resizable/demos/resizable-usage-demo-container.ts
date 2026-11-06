@@ -10,10 +10,10 @@ import {
 import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 import { DevOnly } from '../../../../components/dev-only/dev-only';
 import { ConfigService } from '../../../../services/config-service';
-import { ResizableNextUsageDemo } from './resizable-next-usage-demo';
+import { ResizableUsageDemo } from './resizable-usage-demo';
 
 @Component({
-  selector: 'app-resizable-next-usage-demo-container',
+  selector: 'app-resizable-usage-demo-container',
   imports: [
     DevOnly,
     ScCodeBlock,
@@ -24,7 +24,7 @@ import { ResizableNextUsageDemo } from './resizable-next-usage-demo';
     ScCodeBlockContent,
     SiCheckIcon,
     SiCopyIcon,
-    ResizableNextUsageDemo,
+    ResizableUsageDemo,
   ],
   template: `
     <div scCodeBlock>
@@ -46,14 +46,14 @@ import { ResizableNextUsageDemo } from './resizable-next-usage-demo';
 
     @if (devMode()) {
       <app-dev-only>
-        <app-resizable-next-usage-demo />
+        <app-resizable-usage-demo />
       </app-dev-only>
     }
   `,
   host: { class: 'block w-full space-y-4' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ResizableNextUsageDemoContainer {
+export class ResizableUsageDemoContainer {
   private readonly config = inject(ConfigService);
 
   protected readonly devMode = this.config.devMode;
@@ -61,42 +61,42 @@ export class ResizableNextUsageDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScFrame,
-  ScResizableHandleNext,
-  ScResizableHandleNextGrip,
-  ScResizablePanelGroupNext,
-  ScResizablePanelNext,
+  ScResizableHandle,
+  ScResizableHandleGrip,
+  ScResizablePanel,
+  ScResizablePanelGroup,
 } from '@semantic-components/ui';
 
 @Component({
-  selector: 'app-resizable-next-usage-demo',
+  selector: 'app-resizable-usage-demo',
   imports: [
     ScFrame,
-    ScResizableHandleNext,
-    ScResizableHandleNextGrip,
-    ScResizablePanelGroupNext,
-    ScResizablePanelNext,
+    ScResizableHandle,
+    ScResizableHandleGrip,
+    ScResizablePanelGroup,
+    ScResizablePanel,
   ],
   template: \`
-    <div scResizablePanelGroupNext scFrame class="max-w-sm">
-      <div scResizablePanelNext [defaultSize]="50">
+    <div scResizablePanelGroup scFrame class="max-w-sm">
+      <div scResizablePanel [defaultSize]="50">
         <div class="flex h-[200px] items-center justify-center p-6">
           <span class="font-semibold">One</span>
         </div>
       </div>
-      <div scResizableHandleNext aria-label="Resize One">
-        <div scResizableHandleNextGrip></div>
+      <div scResizableHandle aria-label="Resize One">
+        <div scResizableHandleGrip></div>
       </div>
-      <div scResizablePanelNext [defaultSize]="50">
-        <div scResizablePanelGroupNext orientation="vertical">
-          <div scResizablePanelNext [defaultSize]="25">
+      <div scResizablePanel [defaultSize]="50">
+        <div scResizablePanelGroup orientation="vertical">
+          <div scResizablePanel [defaultSize]="25">
             <div class="flex h-full items-center justify-center p-6">
               <span class="font-semibold">Two</span>
             </div>
           </div>
-          <div scResizableHandleNext aria-label="Resize Two">
-            <div scResizableHandleNextGrip></div>
+          <div scResizableHandle aria-label="Resize Two">
+            <div scResizableHandleGrip></div>
           </div>
-          <div scResizablePanelNext [defaultSize]="75">
+          <div scResizablePanel [defaultSize]="75">
             <div class="flex h-full items-center justify-center p-6">
               <span class="font-semibold">Three</span>
             </div>
@@ -108,5 +108,5 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ResizableNextUsageDemo {}`;
+export class ResizableUsageDemo {}`;
 }

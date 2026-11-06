@@ -1,48 +1,185 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScHeading } from '@semantic-components/ui';
+import {
+  ScHeading,
+  ScTable,
+  ScTableBody,
+  ScTableCell,
+  ScTableContainer,
+  ScTableHeader,
+  ScTableHeaderCell,
+  ScTableRow,
+} from '@semantic-components/ui';
+import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { HorizontalResizableDemoContainer } from './demos/horizontal-resizable-demo-container';
-import { IdeLayoutResizableDemoContainer } from './demos/ide-layout-resizable-demo-container';
-import { NestedResizableDemoContainer } from './demos/nested-resizable-demo-container';
-import { ThreePanelsResizableDemoContainer } from './demos/three-panels-resizable-demo-container';
+import { CollapsibleResizableDemoContainer } from './demos/collapsible-resizable-demo-container';
+import { HandleResizableDemoContainer } from './demos/handle-resizable-demo-container';
+import { RememberedResizableDemoContainer } from './demos/remembered-resizable-demo-container';
+import { ResizableUsageDemoContainer } from './demos/resizable-usage-demo-container';
+import { RtlResizableDemoContainer } from './demos/rtl-resizable-demo-container';
 import { VerticalResizableDemoContainer } from './demos/vertical-resizable-demo-container';
-import { WithHandleResizableDemoContainer } from './demos/with-handle-resizable-demo-container';
 
 @Component({
   selector: 'app-resizable-page',
   imports: [
-    HorizontalResizableDemoContainer,
+    Anatomy,
+    ResizableUsageDemoContainer,
+    HandleResizableDemoContainer,
     VerticalResizableDemoContainer,
-    WithHandleResizableDemoContainer,
-    ThreePanelsResizableDemoContainer,
-    NestedResizableDemoContainer,
-    IdeLayoutResizableDemoContainer,
+    CollapsibleResizableDemoContainer,
+    RememberedResizableDemoContainer,
+    RtlResizableDemoContainer,
     TocHeading,
     ComponentBadges,
     ScHeading,
+    ScTable,
+    ScTableBody,
+    ScTableCell,
+    ScTableContainer,
+    ScTableHeader,
+    ScTableHeaderCell,
+    ScTableRow,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
         <h1 scHeading>Resizable</h1>
         <p class="text-muted-foreground">
-          Accessible resizable panel groups and layouts with keyboard support.
+          Panels resized by the handles between them, by pointer or keyboard. In
+          the look of the app&apos;s preset.
         </p>
         <app-component-badges path="resizable" />
       </div>
 
+      <section class="space-y-4">
+        <h2 scHeading appToc>Usage</h2>
+        <app-resizable-usage-demo-container />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Anatomy</h2>
+        <p class="text-muted-foreground">
+          Every part is a directive on your element; the panels are the
+          group&apos;s direct children, a handle between each two; the
+          handle&apos;s name and grip are yours.
+        </p>
+        <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Accessibility</h2>
+        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+          <li>
+            A handle is a window splitter: a focusable separator whose value is
+            the size of the panel before it (aria-valuenow, -min, -max), which
+            it controls (aria-controls). Name it (aria-label).
+          </li>
+          <li>
+            The arrow keys along its axis resize by 10% (mirrored right to
+            left), Home and End to the limits, Enter shuts or opens a
+            collapsible panel.
+          </li>
+          <li>The grip is only for the eye (aria-hidden).</li>
+        </ul>
+      </section>
+
       <section class="space-y-8">
         <h2 scHeading appToc>Examples</h2>
-        <app-horizontal-resizable-demo-container />
+        <app-handle-resizable-demo-container />
         <app-vertical-resizable-demo-container />
-        <app-with-handle-resizable-demo-container />
-        <app-three-panels-resizable-demo-container />
-        <app-nested-resizable-demo-container />
-        <app-ide-layout-resizable-demo-container />
+        <app-collapsible-resizable-demo-container />
+        <app-remembered-resizable-demo-container />
+        <app-rtl-resizable-demo-container />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>API reference</h2>
+        <p class="text-muted-foreground">
+          Each part takes
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
+          merged over the preset (cn: a later class wins).
+        </p>
+        <div
+          scTableContainer
+          tabindex="0"
+          role="region"
+          aria-label="Resizable parts"
+        >
+          <table scTable>
+            <thead scTableHeader>
+              <tr scTableRow>
+                <th scTableHeaderCell>Part</th>
+                <th scTableHeaderCell>Selector</th>
+                <th scTableHeaderCell>Description</th>
+              </tr>
+            </thead>
+            <tbody scTableBody>
+              @for (part of parts; track part.name) {
+                <tr scTableRow>
+                  <td scTableCell>
+                    <code class="font-mono text-sm">{{ part.name }}</code>
+                  </td>
+                  <td scTableCell>
+                    <code class="font-mono text-sm">{{ part.selector }}</code>
+                  </td>
+                  <td
+                    scTableCell
+                    class="text-muted-foreground whitespace-normal"
+                  >
+                    {{ part.description }}
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
       </section>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,
 })
-export default class ResizablePage {}
+export default class ResizablePage {
+  protected readonly anatomy = {
+    imports: [
+      'import {',
+      '  ScResizablePanelGroup, ScResizablePanel,',
+      '  ScResizableHandle, ScResizableHandleGrip,',
+      "} from '@semantic-components/ui';",
+    ].join('\n'),
+    markup: [
+      '<div scResizablePanelGroup orientation="…">',
+      '  <div scResizablePanel [defaultSize]="…">…</div>',
+      '  <div scResizableHandle aria-label="…">',
+      '    <div scResizableHandleGrip></div>',
+      '  </div>',
+      '  <div scResizablePanel>…</div>',
+      '</div>',
+    ].join('\n'),
+  };
+
+  protected readonly parts = [
+    {
+      name: 'ScResizablePanelGroup',
+      selector: 'div[scResizablePanelGroup]',
+      description:
+        "orientation ('horizontal', 'vertical'); [(layout)]: the panels' sizes in %, in order.",
+    },
+    {
+      name: 'ScResizablePanel',
+      selector: 'div[scResizablePanel]',
+      description:
+        'defaultSize, minSize, maxSize (%); collapsible, collapsedSize; data-collapsed. A direct child of its group.',
+    },
+    {
+      name: 'ScResizableHandle',
+      selector: 'div[scResizableHandle]',
+      description:
+        'The splitter between two panels: drag, arrows, Home, End, Enter; role="separator" with aria-valuenow / -min / -max, aria-controls. Name it.',
+    },
+    {
+      name: 'ScResizableHandleGrip',
+      selector: 'div[scResizableHandleGrip]',
+      description: "The handle's grip, in the preset's look; aria-hidden.",
+    },
+  ];
+}

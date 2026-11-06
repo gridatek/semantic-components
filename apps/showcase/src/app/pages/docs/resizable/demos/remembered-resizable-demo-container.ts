@@ -1,68 +1,68 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { RememberedResizableNextDemo } from './remembered-resizable-next-demo';
+import { RememberedResizableDemo } from './remembered-resizable-demo';
 
 @Component({
-  selector: 'app-remembered-resizable-next-demo-container',
-  imports: [DemoContainer, RememberedResizableNextDemo],
+  selector: 'app-remembered-resizable-demo-container',
+  imports: [DemoContainer, RememberedResizableDemo],
   template: `
     <app-demo-container
       title="Remembered layout"
-      demoUrl="/demos/resizable-next/remembered-resizable-next-demo"
+      demoUrl="/demos/resizable/remembered-resizable-demo"
       [code]="code"
     >
-      <app-remembered-resizable-next-demo />
+      <app-remembered-resizable-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class RememberedResizableNextDemoContainer {
+export class RememberedResizableDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, effect, signal } from '@angular/core';
 import {
   ScFrame,
-  ScResizableHandleNext,
-  ScResizableHandleNextGrip,
-  ScResizablePanelGroupNext,
-  ScResizablePanelNext,
+  ScResizableHandle,
+  ScResizableHandleGrip,
+  ScResizablePanel,
+  ScResizablePanelGroup,
 } from '@semantic-components/ui';
 
-const KEY = 'resizable-next-demo-layout';
+const KEY = 'resizable-demo-layout';
 
 /** [(layout)]: the sizes in %, saved in localStorage and read again on the next visit. */
 @Component({
-  selector: 'app-remembered-resizable-next-demo',
+  selector: 'app-remembered-resizable-demo',
   imports: [
     ScFrame,
-    ScResizableHandleNext,
-    ScResizableHandleNextGrip,
-    ScResizablePanelGroupNext,
-    ScResizablePanelNext,
+    ScResizableHandle,
+    ScResizableHandleGrip,
+    ScResizablePanelGroup,
+    ScResizablePanel,
   ],
   template: \`
     <div
-      scResizablePanelGroupNext
+      scResizablePanelGroup
       [(layout)]="layout"
       scFrame
       class="min-h-[200px] max-w-md"
     >
-      <div scResizablePanelNext [minSize]="20">
+      <div scResizablePanel [minSize]="20">
         <div class="flex h-full items-center justify-center p-6">
           <span class="font-semibold">One</span>
         </div>
       </div>
-      <div scResizableHandleNext aria-label="Resize One">
-        <div scResizableHandleNextGrip></div>
+      <div scResizableHandle aria-label="Resize One">
+        <div scResizableHandleGrip></div>
       </div>
-      <div scResizablePanelNext [minSize]="20">
+      <div scResizablePanel [minSize]="20">
         <div class="flex h-full items-center justify-center p-6">
           <span class="font-semibold">Two</span>
         </div>
       </div>
-      <div scResizableHandleNext aria-label="Resize Two">
-        <div scResizableHandleNextGrip></div>
+      <div scResizableHandle aria-label="Resize Two">
+        <div scResizableHandleGrip></div>
       </div>
-      <div scResizablePanelNext [minSize]="20">
+      <div scResizablePanel [minSize]="20">
         <div class="flex h-full items-center justify-center p-6">
           <span class="font-semibold">Three</span>
         </div>
@@ -72,7 +72,7 @@ const KEY = 'resizable-next-demo-layout';
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class RememberedResizableNextDemo {
+export class RememberedResizableDemo {
   protected readonly layout = signal<readonly number[]>(this.read());
 
   constructor() {

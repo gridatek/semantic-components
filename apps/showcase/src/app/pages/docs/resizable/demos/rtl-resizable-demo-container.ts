@@ -1,64 +1,64 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { RtlResizableNextDemo } from './rtl-resizable-next-demo';
+import { RtlResizableDemo } from './rtl-resizable-demo';
 
 @Component({
-  selector: 'app-rtl-resizable-next-demo-container',
-  imports: [DemoContainer, RtlResizableNextDemo],
+  selector: 'app-rtl-resizable-demo-container',
+  imports: [DemoContainer, RtlResizableDemo],
   template: `
     <app-demo-container
       title="RTL"
-      demoUrl="/demos/resizable-next/rtl-resizable-next-demo"
+      demoUrl="/demos/resizable/rtl-resizable-demo"
       [code]="code"
     >
-      <app-rtl-resizable-next-demo />
+      <app-rtl-resizable-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class RtlResizableNextDemoContainer {
+export class RtlResizableDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScFrame,
-  ScResizableHandleNext,
-  ScResizableHandleNextGrip,
-  ScResizablePanelGroupNext,
-  ScResizablePanelNext,
+  ScResizableHandle,
+  ScResizableHandleGrip,
+  ScResizablePanel,
+  ScResizablePanelGroup,
 } from '@semantic-components/ui';
 
 /** In a right-to-left page: the first panel at the right; the arrows and a drag follow. */
 @Component({
-  selector: 'app-rtl-resizable-next-demo',
+  selector: 'app-rtl-resizable-demo',
   imports: [
     ScFrame,
-    ScResizableHandleNext,
-    ScResizableHandleNextGrip,
-    ScResizablePanelGroupNext,
-    ScResizablePanelNext,
+    ScResizableHandle,
+    ScResizableHandleGrip,
+    ScResizablePanelGroup,
+    ScResizablePanel,
   ],
   template: \`
     <div dir="rtl" lang="ar" class="flex w-full justify-center">
-      <div scResizablePanelGroupNext scFrame class="max-w-sm">
-        <div scResizablePanelNext [defaultSize]="50">
+      <div scResizablePanelGroup scFrame class="max-w-sm">
+        <div scResizablePanel [defaultSize]="50">
           <div class="flex h-[200px] items-center justify-center p-6">
             <span class="font-semibold">واحد</span>
           </div>
         </div>
-        <div scResizableHandleNext aria-label="Resize واحد">
-          <div scResizableHandleNextGrip></div>
+        <div scResizableHandle aria-label="Resize واحد">
+          <div scResizableHandleGrip></div>
         </div>
-        <div scResizablePanelNext [defaultSize]="50">
-          <div scResizablePanelGroupNext orientation="vertical">
-            <div scResizablePanelNext [defaultSize]="25">
+        <div scResizablePanel [defaultSize]="50">
+          <div scResizablePanelGroup orientation="vertical">
+            <div scResizablePanel [defaultSize]="25">
               <div class="flex h-full items-center justify-center p-6">
                 <span class="font-semibold">اثنان</span>
               </div>
             </div>
-            <div scResizableHandleNext aria-label="Resize اثنان">
-              <div scResizableHandleNextGrip></div>
+            <div scResizableHandle aria-label="Resize اثنان">
+              <div scResizableHandleGrip></div>
             </div>
-            <div scResizablePanelNext [defaultSize]="75">
+            <div scResizablePanel [defaultSize]="75">
               <div class="flex h-full items-center justify-center p-6">
                 <span class="font-semibold">ثلاثة</span>
               </div>
@@ -71,5 +71,5 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class RtlResizableNextDemo {}`;
+export class RtlResizableDemo {}`;
 }

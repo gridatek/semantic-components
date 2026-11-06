@@ -1,57 +1,77 @@
+import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   Directive,
+  ElementRef,
+  booleanAttribute,
   computed,
+  forwardRef,
   inject,
   input,
-  linkedSignal,
 } from '@angular/core';
 import { cn } from '../../utils';
 import { ScResizablePanelGroup } from './resizable-panel-group';
 
+/**
+ * A panel of the group, sized in %: `defaultSize` (else a share of what is
+ * left), `minSize`, `maxSize`. `collapsible`: dragged below half its minimum,
+ * or Enter on its handle, it shuts to `collapsedSize`. A direct child of its
+ * group. As react-resizable-panels' Panel.
+ */
 @Directive({
-  selector: '[scResizablePanel]',
+  selector: 'div[scResizablePanel]',
   host: {
+    '[id]': 'id',
+    '[attr.data-collapsed]': 'collapsed() ? "" : null',
+    '[style.flex]': 'flex()',
     '[class]': 'class()',
-    '[style.flex-grow]': 'size()',
-    '[style.flex-shrink]': '1',
-    '[style.flex-basis]': '"0%"',
-    '[style.min-width]':
-      'group.direction() === "horizontal" ? minSizePx() : undefined',
-    '[style.min-height]':
-      'group.direction() === "vertical" ? minSizePx() : undefined',
-    '[style.max-width]':
-      'group.direction() === "horizontal" ? maxSizePx() : undefined',
-    '[style.max-height]':
-      'group.direction() === "vertical" ? maxSizePx() : undefined',
   },
 })
 export class ScResizablePanel {
-  readonly group = inject(ScResizablePanelGroup);
-
+  readonly element = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
+  private readonly group = inject(forwardRef(() => ScResizablePanelGroup));
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly defaultSize = input<number>(50);
-  readonly minSize = input<number>(0);
-  readonly maxSize = input<number>(100);
 
-  /**
-   * Clamping lives in the `set` interceptor rather than in `setSize`, so a
-   * direct `size.set(...)` from a consumer honours minSize/maxSize too.
-   */
-  readonly size = linkedSignal<number, number>({
-    source: () => this.defaultSize(),
-    computation: (defaultSize) => defaultSize,
-    set: (value, rawSet) =>
-      rawSet(Math.max(this.minSize(), Math.min(this.maxSize(), value))),
-  });
+  /** Its size at first (%); without one, it shares what the others leave. */
+  readonly defaultSize = input<number | undefined>(undefined);
+  readonly minSize = input(0);
+  readonly maxSize = input(100);
+  /** It can be shut: to `collapsedSize`, below half its minimum. */
+  readonly collapsible = input(false, { transform: booleanAttribute });
+  readonly collapsedSize = input(0);
+
+  readonly id = inject(_IdGenerator).getId('sc-resizable-panel-');
+
+  /** Its size now (%). */
+  readonly size = computed(() => this.group.sizeOf(this));
+  readonly collapsed = computed(
+    () => this.collapsible() && this.size() <= this.collapsedSize(),
+  );
+  /** Its size before it was shut: opened again, it goes back to it. */
+  private lastOpen: number | undefined;
+
+  protected readonly flex = computed(() => `${this.size()} 1 0%`);
 
   protected readonly class = computed(() =>
     cn('overflow-hidden', this.classInput()),
   );
 
-  protected readonly minSizePx = computed(() => `${this.minSize()}%`);
-  protected readonly maxSizePx = computed(() => `${this.maxSize()}%`);
+  /** A size it may take: within its limits, or shut. */
+  constrain(size: number): number {
+    if (this.collapsible() && size < this.minSize() / 2)
+      return this.collapsedSize();
+    return Math.min(this.maxSize(), Math.max(this.minSize(), size));
+  }
 
-  setSize(newSize: number): void {
-    this.size.set(newSize);
+  /** Shut, or open again, through the handle beside it. */
+  toggle(other: ScResizablePanel, order: 'before' | 'after'): void {
+    if (!this.collapsible()) return;
+    let wanted: number;
+    if (this.collapsed()) wanted = this.lastOpen ?? Math.max(this.minSize(), 1);
+    else {
+      this.lastOpen = this.size();
+      wanted = this.collapsedSize();
+    }
+    if (order === 'before') this.group.resize(this, other, wanted);
+    else this.group.resize(other, this, other.size() + this.size() - wanted);
   }
 }

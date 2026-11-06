@@ -23,7 +23,7 @@ const PRESETS: Record<string, ScPreset> = {
   rhea,
 };
 
-test.describe('Resizable Next in every preset', () => {
+test.describe('Resizable in every preset', () => {
   // A docs page and axe, twice: slow under load.
   test.slow();
 
@@ -37,10 +37,10 @@ test.describe('Resizable Next in every preset', () => {
       await context.addCookies([
         { name: 'sc-preset', value: preset, url: baseURL! },
       ]);
-      await page.goto('/demos/resizable-next/handle-resizable-next-demo');
+      await page.goto('/demos/resizable/handle-resizable-demo');
       for (const [target, wanted, what] of [
         [
-          page.locator('[scResizableHandleNextGrip]').first(),
+          page.locator('[scResizableHandleGrip]').first(),
           styles.resizable.grip,
           'grip',
         ],
@@ -57,7 +57,7 @@ test.describe('Resizable Next in every preset', () => {
           .toEqual([]);
       }
 
-      await page.goto('/docs/components/resizable-next');
+      await page.goto('/docs/components/resizable');
       await expectNoA11yViolations(page);
       await expectNoA11yViolations(page, { dark: true });
     });

@@ -1,136 +1,144 @@
 import {
-  Component,
+  Directive,
   ElementRef,
-  ViewEncapsulation,
   computed,
   inject,
   input,
+  signal,
 } from '@angular/core';
 import { cn } from '../../utils';
-import { ScResizableHandleIndicator } from './resizable-handle-indicator';
+import { type ScResizablePanel } from './resizable-panel';
 import { ScResizablePanelGroup } from './resizable-panel-group';
 
-@Component({
-  selector: '[scResizableHandle]',
-  imports: [ScResizableHandleIndicator],
+/** An arrow key resizes by this much (%). */
+const STEP = 10;
+
+/**
+ * The splitter between two panels (WAI-ARIA's window splitter): a focusable
+ * `role="separator"` whose value is the size of the panel before it, which
+ * it controls. Name it (`aria-label`). Dragged, it resizes the two panels
+ * beside it; the arrow keys along its axis by 10% (mirrored right to left),
+ * Home and End to the limits, Enter shuts or opens a collapsible panel.
+ * Its grip, if you want one, is yours: `<div scResizableHandleGrip>`.
+ * As react-resizable-panels' Separator (shadcn's ResizableHandle).
+ */
+@Directive({
+  selector: 'div[scResizableHandle]',
   host: {
     role: 'separator',
+    tabindex: '0',
+    '[attr.aria-orientation]': 'ariaOrientation()',
+    '[attr.aria-valuenow]': 'valueNow()',
+    '[attr.aria-valuemin]': 'before()?.minSize() ?? 0',
+    '[attr.aria-valuemax]': 'before()?.maxSize() ?? 100',
+    '[attr.aria-controls]': 'before()?.id ?? null',
+    '[attr.data-dragging]': 'dragging() ? "" : null',
     '[class]': 'class()',
-    '[attr.aria-orientation]':
-      'group.direction() === "horizontal" ? "vertical" : "horizontal"',
-    '(mousedown)': 'onMouseDown($event)',
-    '(touchstart)': 'onTouchStart($event)',
+    '(pointerdown)': 'onPointerDown($event)',
+    '(pointermove)': 'onPointerMove($event)',
+    '(pointerup)': 'onPointerUp($event)',
+    '(pointercancel)': 'onPointerUp($event)',
+    '(keydown)': 'onKeydown($event)',
   },
-  template: `
-    @if (withHandle()) {
-      <div scResizableHandleIndicator></div>
-    }
-  `,
-  encapsulation: ViewEncapsulation.None,
 })
 export class ScResizableHandle {
-  readonly group = inject(ScResizablePanelGroup);
-  private readonly elementRef = inject(ElementRef);
-
+  private readonly element =
+    inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
+  private readonly group = inject(ScResizablePanelGroup);
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly withHandle = input<boolean>(false);
 
-  private dragging = false;
-  private startPos = 0;
-  private startSizes: number[] = [];
+  protected readonly dragging = signal(false);
+  private drag: {
+    id: number;
+    from: number;
+    start: readonly number[];
+    size: number;
+  } | null = null;
+
+  /** The panels beside it: read again with the group's panels. */
+  private readonly neighbours = computed(() => {
+    this.group.panels();
+    return this.group.around(this.element);
+  });
+  protected readonly before = computed(() => this.neighbours().before);
+  private readonly after = computed(() => this.neighbours().after);
+  protected readonly valueNow = computed(() => {
+    const b = this.before();
+    return b ? Math.round(b.size()) : null;
+  });
+
+  /** A separator runs across its group's axis. */
+  protected readonly ariaOrientation = computed(() =>
+    this.group.orientation() === 'horizontal' ? 'vertical' : 'horizontal',
+  );
 
   protected readonly class = computed(() =>
     cn(
-      'bg-border focus-visible:ring-ring ring-offset-background relative flex w-px items-center justify-center after:absolute after:inset-y-0 after:left-1/2 after:w-1 after:-translate-x-1/2 focus-visible:ring-1 focus-visible:outline-hidden aria-[orientation=vertical]:cursor-ew-resize aria-[orientation=horizontal]:h-px aria-[orientation=horizontal]:w-full aria-[orientation=horizontal]:cursor-ns-resize aria-[orientation=horizontal]:after:left-0 aria-[orientation=horizontal]:after:h-1 aria-[orientation=horizontal]:after:w-full aria-[orientation=horizontal]:after:translate-x-0 aria-[orientation=horizontal]:after:-translate-y-1/2 [&[aria-orientation=horizontal]>div]:rotate-90',
+      'relative flex shrink-0 items-center justify-center bg-border ring-offset-background touch-none select-none after:absolute focus-visible:ring-1 focus-visible:ring-ring focus-visible:outline-hidden',
+      // Plain classes, not aria-[orientation=…]: (they'd outrank yours).
+      this.group.orientation() === 'horizontal'
+        ? 'w-px cursor-ew-resize after:inset-y-0 after:start-1/2 after:w-1 after:-translate-x-1/2 rtl:after:translate-x-1/2'
+        : 'h-px w-full cursor-ns-resize after:inset-x-0 after:top-1/2 after:h-1 after:-translate-y-1/2 *:rotate-90',
       this.classInput(),
     ),
   );
 
-  protected onMouseDown(event: MouseEvent): void {
+  protected onPointerDown(event: PointerEvent): void {
+    if (event.button !== 0 || !this.before() || !this.after()) return;
+    // No text selected while dragging.
     event.preventDefault();
-    this.startDrag(event.clientX, event.clientY);
-
-    const onMouseMove = (e: MouseEvent) => this.onDrag(e.clientX, e.clientY);
-    const onMouseUp = () => {
-      this.dragging = false;
-      document.removeEventListener('mousemove', onMouseMove);
-      document.removeEventListener('mouseup', onMouseUp);
+    this.element.setPointerCapture(event.pointerId);
+    this.drag = {
+      id: event.pointerId,
+      from: this.position(event),
+      start: this.group.layout(),
+      size: this.before()?.size() ?? 0,
     };
-
-    document.addEventListener('mousemove', onMouseMove);
-    document.addEventListener('mouseup', onMouseUp);
+    this.dragging.set(true);
   }
 
-  protected onTouchStart(event: TouchEvent): void {
-    if (event.touches.length !== 1) return;
+  protected onPointerMove(event: PointerEvent): void {
+    const d = this.drag;
+    const [b, a] = [this.before(), this.after()];
+    if (!d || event.pointerId !== d.id || !b || !a) return;
+    const length = this.group.length();
+    if (!length) return;
+    let moved = ((this.position(event) - d.from) / length) * 100;
+    if (this.group.reversed()) moved = -moved;
+    this.group.resize(b, a, d.size + moved, d.start);
+  }
+
+  protected onPointerUp(event: PointerEvent): void {
+    if (!this.drag || event.pointerId !== this.drag.id) return;
+    this.drag = null;
+    this.dragging.set(false);
+  }
+
+  protected onKeydown(event: KeyboardEvent): void {
+    const [b, a] = [this.before(), this.after()];
+    if (!b || !a) return;
+    const horizontal = this.group.orientation() === 'horizontal';
+    const flip = this.group.reversed() ? -1 : 1;
+    const step: Record<string, number> = horizontal
+      ? { ArrowLeft: -STEP * flip, ArrowRight: STEP * flip }
+      : { ArrowUp: -STEP, ArrowDown: STEP };
+    if (event.key in step) this.group.resize(b, a, b.size() + step[event.key]);
+    else if (event.key === 'Home') this.group.resize(b, a, b.minSize());
+    else if (event.key === 'End') this.group.resize(b, a, b.maxSize());
+    else if (event.key === 'Enter') this.toggle(b, a);
+    else return;
     event.preventDefault();
-    const touch = event.touches[0];
-    this.startDrag(touch.clientX, touch.clientY);
-
-    const onTouchMove = (e: TouchEvent) => {
-      if (e.touches.length !== 1) return;
-      const t = e.touches[0];
-      this.onDrag(t.clientX, t.clientY);
-    };
-    const onTouchEnd = () => {
-      this.dragging = false;
-      document.removeEventListener('touchmove', onTouchMove);
-      document.removeEventListener('touchend', onTouchEnd);
-    };
-
-    document.addEventListener('touchmove', onTouchMove, { passive: false });
-    document.addEventListener('touchend', onTouchEnd);
   }
 
-  private startDrag(clientX: number, clientY: number): void {
-    this.dragging = true;
-    const isHorizontal = this.group.direction() === 'horizontal';
-    this.startPos = isHorizontal ? clientX : clientY;
-
-    const panels = this.group.getPanels();
-    this.startSizes = panels.map((p) => p.size());
+  /** Enter: the collapsible panel beside it shuts, or opens again. */
+  private toggle(b: ScResizablePanel, a: ScResizablePanel): void {
+    if (b.collapsible()) b.toggle(a, 'before');
+    else if (a.collapsible()) a.toggle(b, 'after');
   }
 
-  private onDrag(clientX: number, clientY: number): void {
-    if (!this.dragging) return;
-
-    const isHorizontal = this.group.direction() === 'horizontal';
-    const currentPos = isHorizontal ? clientX : clientY;
-    const delta = currentPos - this.startPos;
-
-    const panels = this.group.getPanels();
-    const handles = this.group.getHandles();
-    const handleIndex = handles.indexOf(this);
-
-    if (handleIndex === -1 || panels.length < 2) return;
-
-    const container = this.elementRef.nativeElement.parentElement;
-    if (!container) return;
-
-    const containerSize = isHorizontal
-      ? container.offsetWidth
-      : container.offsetHeight;
-    const deltaPercent = (delta / containerSize) * 100;
-
-    const leftPanelIndex = handleIndex;
-    const rightPanelIndex = handleIndex + 1;
-
-    if (leftPanelIndex >= 0 && rightPanelIndex < panels.length) {
-      const leftPanel = panels[leftPanelIndex];
-      const rightPanel = panels[rightPanelIndex];
-
-      const newLeftSize = this.startSizes[leftPanelIndex] + deltaPercent;
-      const newRightSize = this.startSizes[rightPanelIndex] - deltaPercent;
-
-      if (
-        newLeftSize >= leftPanel.minSize() &&
-        newLeftSize <= leftPanel.maxSize() &&
-        newRightSize >= rightPanel.minSize() &&
-        newRightSize <= rightPanel.maxSize()
-      ) {
-        leftPanel.setSize(newLeftSize);
-        rightPanel.setSize(newRightSize);
-      }
-    }
+  private position(event: PointerEvent): number {
+    return this.group.orientation() === 'horizontal'
+      ? event.clientX
+      : event.clientY;
   }
 }

@@ -531,6 +531,24 @@ An empty state (`div[scEmpty]`; restyled 2026-11-05): shadcn's Empty. A shadcn c
 - **The title on a heading** (`h2`–`h6`) as well as a `div`: shadcn's is a `div`; a heading can be found by heading.
 - **The examples**; links that look like buttons are `a[scLink]` (shadcn: `Button render={<a />}`); Card is inside a real Card.
 
+## Resizable
+
+Panels resized by the handles between them (`div[scResizablePanelGroup]`; rewritten and switched 2026-11-06): shadcn's Resizable, on react-resizable-panels — Base UI has none. Its keyboard and screen-reader behaviour is WAI-ARIA's window splitter.
+
+| Library                                                                                                | What to read                                                                                                                                      |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| shadcn Resizable (`shadcn-reference/presets/*/resizable.tsx`, `apps/v4/examples/base/resizable-*.tsx`) | The handle and its grip per style (only the grip's corners change); Demo, Handle, Vertical, RTL                                                   |
+| react-resizable-panels (v4, its README in the reference app's `node_modules`)                          | Group (`orientation`, `defaultLayout`, `onLayoutChanged`), Panel (`defaultSize`, `minSize`, `maxSize`, `collapsible`, `collapsedSize`), Separator |
+| WAI-ARIA APG: Window Splitter                                                                          | A focusable separator valued by its primary pane (`aria-valuenow`, `-min`, `-max`, `aria-controls`); arrows, Home, End, Enter                     |
+
+**Taken** (the user's "ok", 2026-11-06):
+
+- **Keyboard and screen readers, which the old one had none of**: a focusable separator named by you, valued by the panel before it; the arrows by 10% (mirrored right to left), Home and End to the limits, Enter shuts or opens a collapsible panel.
+- **Sizes in % only**; `collapsible` (shut below half its minimum) and `collapsedSize`; `[(layout)]` in place of `defaultLayout` / `onLayoutChanged`.
+- **The grip is a part you write** (`scResizableHandleGrip`), not `withHandle`; the `resizable` preset key holds its look.
+- **Plain classes for the handle's orientation** (the rule in .claude/CLAUDE.md), a logical hit area (`start-1/2`, `rtl:`).
+- Not taken: react-resizable-panels' Grid, separator preview mode, `groupResizeBehavior`, `disabled`, px / rem / vh sizes.
+
 ## Separator
 
 A line between sections (`div[scSeparator]`; restyled 2026-11-06): shadcn's Separator, Base UI's. A shadcn component, so no web research: shadcn's reference app and its 5 examples, Base UI's Separator docs.

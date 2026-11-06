@@ -7,13 +7,13 @@ import { cn } from '../../utils';
  * line (turned in a vertical group). Inside its handle; only for the eye.
  */
 @Directive({
-  selector: 'div[scResizableHandleNextGrip]',
+  selector: 'div[scResizableHandleGrip]',
   host: {
     'aria-hidden': 'true',
     '[class]': 'class()',
   },
 })
-export class ScResizableHandleNextGrip {
+export class ScResizableHandleGrip {
   private readonly styles = injectPreset().resizable;
   readonly classInput = input<string>('', { alias: 'class' });
 

@@ -1,26 +1,33 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
+  ScFrame,
   ScResizableHandle,
+  ScResizableHandleGrip,
   ScResizablePanel,
   ScResizablePanelGroup,
 } from '@semantic-components/ui';
 
+/** A grip on the handle: a scResizableHandleGrip inside it. */
 @Component({
-  selector: 'app-with-handle-resizable-demo',
-  imports: [ScResizableHandle, ScResizablePanel, ScResizablePanelGroup],
+  selector: 'app-handle-resizable-demo',
+  imports: [
+    ScFrame,
+    ScResizableHandle,
+    ScResizableHandleGrip,
+    ScResizablePanelGroup,
+    ScResizablePanel,
+  ],
   template: `
-    <div
-      scResizablePanelGroup
-      direction="horizontal"
-      class="min-h-[200px] max-w-md rounded-lg border"
-    >
-      <div scResizablePanel [defaultSize]="30">
+    <div scResizablePanelGroup scFrame class="min-h-[200px] max-w-sm">
+      <div scResizablePanel [defaultSize]="25">
         <div class="flex h-full items-center justify-center p-6">
           <span class="font-semibold">Sidebar</span>
         </div>
       </div>
-      <div scResizableHandle [withHandle]="true"></div>
-      <div scResizablePanel [defaultSize]="70">
+      <div scResizableHandle aria-label="Resize Sidebar">
+        <div scResizableHandleGrip></div>
+      </div>
+      <div scResizablePanel [defaultSize]="75">
         <div class="flex h-full items-center justify-center p-6">
           <span class="font-semibold">Content</span>
         </div>
@@ -30,4 +37,4 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class WithHandleResizableDemo {}
+export class HandleResizableDemo {}

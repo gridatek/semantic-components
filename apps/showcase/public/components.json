@@ -810,14 +810,6 @@
   {
     "name": "Resizable",
     "path": "resizable",
-    "description": "A component that can be resized by dragging.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Layout"
-  },
-  {
-    "name": "Resizable Next",
-    "path": "resizable-next",
     "description": "Panels resized by the handles between them, by pointer or keyboard — in the look of the app's preset.",
     "status": "Experimental",
     "library": "ui",

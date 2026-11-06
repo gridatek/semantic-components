@@ -1,26 +1,26 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScFrame,
-  ScResizableHandleNext,
-  ScResizableHandleNextGrip,
-  ScResizablePanelGroupNext,
-  ScResizablePanelNext,
+  ScResizableHandle,
+  ScResizableHandleGrip,
+  ScResizablePanel,
+  ScResizablePanelGroup,
 } from '@semantic-components/ui';
 
 /** collapsible: dragged below half its minimum, or Enter on its handle, the sidebar shuts; Enter or a drag opens it again. */
 @Component({
-  selector: 'app-collapsible-resizable-next-demo',
+  selector: 'app-collapsible-resizable-demo',
   imports: [
     ScFrame,
-    ScResizableHandleNext,
-    ScResizableHandleNextGrip,
-    ScResizablePanelGroupNext,
-    ScResizablePanelNext,
+    ScResizableHandle,
+    ScResizableHandleGrip,
+    ScResizablePanelGroup,
+    ScResizablePanel,
   ],
   template: `
-    <div scResizablePanelGroupNext scFrame class="min-h-[200px] max-w-md">
+    <div scResizablePanelGroup scFrame class="min-h-[200px] max-w-md">
       <div
-        scResizablePanelNext
+        scResizablePanel
         [defaultSize]="30"
         [minSize]="20"
         [maxSize]="50"
@@ -30,10 +30,10 @@ import {
           <span class="font-semibold">Sidebar</span>
         </div>
       </div>
-      <div scResizableHandleNext aria-label="Resize Sidebar">
-        <div scResizableHandleNextGrip></div>
+      <div scResizableHandle aria-label="Resize Sidebar">
+        <div scResizableHandleGrip></div>
       </div>
-      <div scResizablePanelNext>
+      <div scResizablePanel>
         <div class="flex h-full items-center justify-center p-6">
           <span class="font-semibold">Content</span>
         </div>
@@ -43,4 +43,4 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class CollapsibleResizableNextDemo {}
+export class CollapsibleResizableDemo {}
