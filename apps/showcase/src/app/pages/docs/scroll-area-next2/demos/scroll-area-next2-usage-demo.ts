@@ -1,11 +1,15 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScScrollAreaNext2, ScSeparator } from '@semantic-components/ui';
+import {
+  ScFrame,
+  ScScrollAreaNext2,
+  ScSeparator,
+} from '@semantic-components/ui';
 
 @Component({
   selector: 'app-scroll-area-next2-usage-demo',
-  imports: [ScScrollAreaNext2, ScSeparator],
+  imports: [ScFrame, ScScrollAreaNext2, ScSeparator],
   template: `
-    <div scScrollAreaNext2 class="h-72 w-48 rounded-md border">
+    <div scScrollAreaNext2 scFrame class="h-72 w-48">
       <div class="p-4">
         <p class="mb-4 text-sm leading-none font-medium">Tags</p>
         @for (tag of tags; track tag) {

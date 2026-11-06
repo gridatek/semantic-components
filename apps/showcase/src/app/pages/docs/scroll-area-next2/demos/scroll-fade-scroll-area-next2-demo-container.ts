@@ -19,16 +19,17 @@ import { ScrollFadeScrollAreaNext2Demo } from './scroll-fade-scroll-area-next2-d
 })
 export class ScrollFadeScrollAreaNext2DemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScScrollAreaNext2 } from '@semantic-components/ui';
+import { ScFrame, ScScrollAreaNext2 } from '@semantic-components/ui';
 
 /** The text fades out at an edge it continues past: a mask from its --scroll-area-overflow-y-start / -end. */
 @Component({
   selector: 'app-scroll-fade-scroll-area-next2-demo',
-  imports: [ScScrollAreaNext2],
+  imports: [ScFrame, ScScrollAreaNext2],
   template: \`
     <div
       scScrollAreaNext2
-      class="h-48 w-96 max-w-full rounded-md border mask-linear-[to_bottom,transparent_0,black_min(40px,var(--scroll-area-overflow-y-start)),black_calc(100%_-_min(40px,var(--scroll-area-overflow-y-end,40px))),transparent_100%] mask-no-repeat"
+      scFrame
+      class="h-48 w-96 max-w-full mask-linear-[to_bottom,transparent_0,black_min(40px,var(--scroll-area-overflow-y-start)),black_calc(100%_-_min(40px,var(--scroll-area-overflow-y-end,40px))),transparent_100%] mask-no-repeat"
     >
       <div class="flex flex-col gap-4 px-4 py-2 text-sm">
         <p>

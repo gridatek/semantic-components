@@ -1,16 +1,13 @@
 import { NgOptimizedImage } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScScrollAreaNext2 } from '@semantic-components/ui';
+import { ScFrame, ScScrollAreaNext2 } from '@semantic-components/ui';
 
 /** A row wider than the box: it scrolls sideways. */
 @Component({
   selector: 'app-horizontal-scroll-area-next2-demo',
-  imports: [NgOptimizedImage, ScScrollAreaNext2],
+  imports: [NgOptimizedImage, ScFrame, ScScrollAreaNext2],
   template: `
-    <div
-      scScrollAreaNext2
-      class="w-96 max-w-full rounded-md border whitespace-nowrap"
-    >
+    <div scScrollAreaNext2 scFrame class="w-96 max-w-full whitespace-nowrap">
       <div class="flex w-max gap-4 p-4">
         @for (place of places; track place) {
           <figure class="shrink-0">

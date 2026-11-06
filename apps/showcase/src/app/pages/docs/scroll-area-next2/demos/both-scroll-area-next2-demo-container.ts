@@ -19,14 +19,14 @@ import { BothScrollAreaNext2Demo } from './both-scroll-area-next2-demo';
 })
 export class BothScrollAreaNext2DemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScScrollAreaNext2 } from '@semantic-components/ui';
+import { ScFrame, ScScrollAreaNext2 } from '@semantic-components/ui';
 
 /** Content wider and taller than the box: it scrolls both ways. */
 @Component({
   selector: 'app-both-scroll-area-next2-demo',
-  imports: [ScScrollAreaNext2],
+  imports: [ScFrame, ScScrollAreaNext2],
   template: \`
-    <div scScrollAreaNext2 class="h-64 w-80 max-w-full rounded-md border">
+    <div scScrollAreaNext2 scFrame class="h-64 w-80 max-w-full">
       <div class="grid w-max grid-cols-10 gap-3 p-4">
         @for (cell of cells; track cell) {
           <div
