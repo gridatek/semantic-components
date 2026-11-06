@@ -11,7 +11,7 @@ import { ScTooltipNextProvider } from './tooltip-next-provider';
 @Directive({
   selector: 'div[scTooltipNext]',
   host: {
-    'data-slot': 'tooltip-content',
+    'data-slot': 'tooltip',
     role: 'tooltip',
     '[id]': 'tooltip.id',
     '[attr.data-side]': 'tooltip.placedSide()',

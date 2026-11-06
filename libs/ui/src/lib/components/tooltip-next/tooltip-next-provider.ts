@@ -62,7 +62,6 @@ const HOVER_BRIDGE = 100;
     }
   `,
   host: {
-    'data-slot': 'tooltip',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
