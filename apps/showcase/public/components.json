@@ -858,7 +858,7 @@
   {
     "name": "Scroll Area Next2",
     "path": "scroll-area-next2",
-    "description": "A box that scrolls with the browser's own scrollbar — thin, in the theme's colors.",
+    "description": "A box that scrolls with the browser's own scrollbar, in the look of the app's preset.",
     "status": "Experimental",
     "library": "ui",
     "category": "Layout"

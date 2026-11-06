@@ -1,3 +1,5 @@
+import { Directionality } from '@angular/cdk/bidi';
+import { CdkScrollable } from '@angular/cdk/scrolling';
 import {
   DestroyRef,
   Directive,
@@ -8,70 +10,75 @@ import {
   input,
   signal,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
+import { ScElementDirectionality } from '../../utils/element-directionality';
 
-interface ScScrollAreaNext2Metrics {
-  /** Scrolled from the start (px; positive in either direction). */
-  x: number;
-  y: number;
-  maxX: number;
-  maxY: number;
+/** How far it is scrolled from each edge (whole px). */
+interface ScScrollAreaNext2Edges {
+  top: number;
+  bottom: number;
+  start: number;
+  end: number;
 }
 
-/** How long `data-scrolling` stays after the last scroll (ms). */
-const SCROLLING = 500;
+const sameEdges = (a: ScScrollAreaNext2Edges, b: ScScrollAreaNext2Edges) =>
+  a.top === b.top &&
+  a.bottom === b.bottom &&
+  a.start === b.start &&
+  a.end === b.end;
 
 /**
  * A box that scrolls, with the browser's own scrollbar in the preset's look
  * (`::-webkit-scrollbar`: Chromium, Safari; Firefox's thin bar, themed).
  * A tab stop while it overflows, ringed when focused: the arrow keys, Page
  * Up / Down, Home and End scroll it. It tells what overflows and where —
- * `data-has-overflow-x` / `-y`, `data-overflow-{x,y}-{start,end}`,
- * `data-scrolling`, and `--scroll-area-overflow-{x,y}-{start,end}` (how far
- * from each edge, for a fade).
+ * `data-has-overflow-x` / `-y`, `data-overflow-{x,y}-{start,end}` and
+ * `--scroll-area-overflow-{x,y}-{start,end}` (how far from each edge, for a
+ * fade). A `CdkScrollable`: overlays opened from inside it follow its scroll.
  */
 @Directive({
   selector: 'div[scScrollAreaNext2]',
+  // Its direction, not the page's: start and end in a right-to-left box.
+  providers: [{ provide: Directionality, useClass: ScElementDirectionality }],
+  hostDirectives: [CdkScrollable],
   host: {
     '[attr.tabindex]': 'overflows() ? 0 : null',
-    '[attr.data-has-overflow-x]': 'metrics().maxX > 0 ? "" : null',
-    '[attr.data-has-overflow-y]': 'metrics().maxY > 0 ? "" : null',
-    '[attr.data-overflow-x-start]': 'metrics().x > 0 ? "" : null',
-    '[attr.data-overflow-x-end]': 'xEnd() > 0 ? "" : null',
-    '[attr.data-overflow-y-start]': 'metrics().y > 0 ? "" : null',
-    '[attr.data-overflow-y-end]': 'yEnd() > 0 ? "" : null',
-    '[attr.data-scrolling]': 'scrolling() ? "" : null',
-    '[style.--scroll-area-overflow-x-start.px]': 'metrics().x',
-    '[style.--scroll-area-overflow-x-end.px]': 'xEnd()',
-    '[style.--scroll-area-overflow-y-start.px]': 'metrics().y',
-    '[style.--scroll-area-overflow-y-end.px]': 'yEnd()',
+    '[attr.data-has-overflow-x]': 'overflowsX() ? "" : null',
+    '[attr.data-has-overflow-y]': 'overflowsY() ? "" : null',
+    '[attr.data-overflow-x-start]': 'edges().start > 0 ? "" : null',
+    '[attr.data-overflow-x-end]': 'edges().end > 0 ? "" : null',
+    '[attr.data-overflow-y-start]': 'edges().top > 0 ? "" : null',
+    '[attr.data-overflow-y-end]': 'edges().bottom > 0 ? "" : null',
+    '[style.--scroll-area-overflow-x-start.px]': 'edges().start',
+    '[style.--scroll-area-overflow-x-end.px]': 'edges().end',
+    '[style.--scroll-area-overflow-y-start.px]': 'edges().top',
+    '[style.--scroll-area-overflow-y-end.px]': 'edges().bottom',
     '[class]': 'class()',
-    '(scroll)': 'scrolled()',
   },
 })
 export class ScScrollAreaNext2 {
   private readonly styles = injectPreset().scrollArea;
+  private readonly scrollable = inject(CdkScrollable);
   private readonly element =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly metrics = signal<ScScrollAreaNext2Metrics>({
-    x: 0,
-    y: 0,
-    maxX: 0,
-    maxY: 0,
-  });
-  protected readonly scrolling = signal(false);
+  /** Set only when an edge's distance changes: nothing to redraw otherwise. */
+  protected readonly edges = signal<ScScrollAreaNext2Edges>(
+    { top: 0, bottom: 0, start: 0, end: 0 },
+    { equal: sameEdges },
+  );
 
+  protected readonly overflowsX = computed(
+    () => this.edges().start + this.edges().end > 0,
+  );
+  protected readonly overflowsY = computed(
+    () => this.edges().top + this.edges().bottom > 0,
+  );
   protected readonly overflows = computed(
-    () => this.metrics().maxX > 0 || this.metrics().maxY > 0,
-  );
-  protected readonly xEnd = computed(() =>
-    Math.max(0, this.metrics().maxX - this.metrics().x),
-  );
-  protected readonly yEnd = computed(() =>
-    Math.max(0, this.metrics().maxY - this.metrics().y),
+    () => this.overflowsX() || this.overflowsY(),
   );
 
   protected readonly class = computed(() =>
@@ -89,9 +96,11 @@ export class ScScrollAreaNext2 {
     ),
   );
 
-  private timer: ReturnType<typeof setTimeout> | undefined;
-
   constructor() {
+    this.scrollable
+      .elementScrolled()
+      .pipe(takeUntilDestroyed())
+      .subscribe(() => this.measure());
     let resize: ResizeObserver | undefined;
     let mutation: MutationObserver | undefined;
     afterNextRender(() => {
@@ -114,26 +123,18 @@ export class ScScrollAreaNext2 {
     inject(DestroyRef).onDestroy(() => {
       resize?.disconnect();
       mutation?.disconnect();
-      clearTimeout(this.timer);
     });
   }
 
-  protected scrolled(): void {
-    this.measure();
-    this.scrolling.set(true);
-    clearTimeout(this.timer);
-    this.timer = setTimeout(() => this.scrolling.set(false), SCROLLING);
-  }
-
   private measure(): void {
-    const e = this.element;
-    // Whole pixels: a fractional remainder isn't overflow.
-    this.metrics.set({
-      // A right-to-left box scrolls from 0 down to negative values.
-      x: Math.round(Math.abs(e.scrollLeft)),
-      y: Math.round(e.scrollTop),
-      maxX: Math.max(0, Math.round(e.scrollWidth - e.clientWidth)),
-      maxY: Math.max(0, Math.round(e.scrollHeight - e.clientHeight)),
+    // The CDK's offsets: start and end follow the box's direction.
+    const at = (from: 'top' | 'bottom' | 'start' | 'end') =>
+      Math.max(0, Math.round(this.scrollable.measureScrollOffset(from)));
+    this.edges.set({
+      top: at('top'),
+      bottom: at('bottom'),
+      start: at('start'),
+      end: at('end'),
     });
   }
 }

@@ -50,14 +50,6 @@ test('Keyboard: a tab stop while it overflows; End scrolls to the bottom', async
   await expect(a).not.toHaveAttribute('data-overflow-y-end');
 });
 
-test('Scrolling: data-scrolling for a moment', async ({ page }) => {
-  await page.goto('/demos/scroll-area-next2/scroll-area-next2-usage-demo');
-  await area(page).hover();
-  await page.mouse.wheel(0, 300);
-  await expect(area(page)).toHaveAttribute('data-scrolling', '');
-  await expect(area(page)).not.toHaveAttribute('data-scrolling');
-});
-
 test('Horizontal: overflows sideways only', async ({ page }) => {
   await page.goto(demo('horizontal'));
   await expect(area(page)).toHaveAttribute('data-has-overflow-x', '');

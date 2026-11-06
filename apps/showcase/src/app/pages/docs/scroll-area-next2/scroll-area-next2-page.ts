@@ -43,8 +43,8 @@ import { ScrollFadeScrollAreaNext2DemoContainer } from './demos/scroll-fade-scro
       <div class="space-y-2">
         <h1 scHeading>Scroll Area Next2</h1>
         <p class="text-muted-foreground">
-          A box that scrolls with the browser&apos;s own scrollbar — thin, in
-          the theme&apos;s colors.
+          A box that scrolls with the browser&apos;s own scrollbar, in the look
+          of the app&apos;s preset.
         </p>
         <app-component-badges path="scroll-area-next2" />
       </div>
@@ -69,7 +69,7 @@ import { ScrollFadeScrollAreaNext2DemoContainer } from './demos/scroll-fade-scro
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             The browser scrolls it — the wheel, touch, the keyboard — with its
-            own scrollbar, thin and in the theme&apos;s colors.
+            own scrollbar, in the preset&apos;s look.
           </li>
           <li>
             While it overflows, it is in the tab order (with a focus ring): the
@@ -144,7 +144,7 @@ export default class ScrollAreaNext2Page {
       name: 'ScScrollAreaNext2',
       selector: 'div[scScrollAreaNext2]',
       description:
-        'Scrolls, with a thin themed native scrollbar; a tab stop while it overflows; data-has-overflow-x / -y, data-overflow-{x,y}-{start,end}, data-scrolling, --scroll-area-overflow-{x,y}-{start,end}.',
+        "Scrolls, with the browser's scrollbar in the preset's look; a CdkScrollable (overlays follow its scroll); a tab stop while it overflows; data-has-overflow-x / -y, data-overflow-{x,y}-{start,end}, --scroll-area-overflow-{x,y}-{start,end}.",
     },
   ];
 }

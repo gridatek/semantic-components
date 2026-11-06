@@ -1,6 +1,6 @@
 # Scroll Area Next2
 
-A box that scrolls with the browser's own scrollbar — thin, in the theme's colors. One directive on your element, Tailwind's scrollbar utilities for the look.
+A box that scrolls with the browser's own scrollbar, in the preset's look. One directive on your element; a `CdkScrollable`, so overlays opened from inside it follow its scroll.
 
 ## Usage
 
@@ -10,13 +10,13 @@ A box that scrolls with the browser's own scrollbar — thin, in the theme's col
 </div>
 ```
 
-Its look is classes — yours override them: `scrollbar-thin`, `scrollbar-thumb-border`, `scrollbar-track-transparent` by default; `scrollbar-thumb-primary/40`, `scrollbar-none`, `scrollbar-gutter-stable` (no shift when the bar appears)…
+Its look: the preset's `nativeThumb` on `::-webkit-scrollbar` (Chromium, Safari); Firefox, which has none, gets its thin bar in the theme's colors. Your classes override them.
 
 ## Part
 
-| Part                | Selector                 | What it does                                                                                                                                                                                               |
-| ------------------- | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ScScrollAreaNext2` | `div[scScrollAreaNext2]` | Scrolls, with a thin themed native scrollbar; a tab stop while it overflows; `data-has-overflow-x` / `-y`, `data-overflow-{x,y}-{start,end}`, `data-scrolling`, `--scroll-area-overflow-{x,y}-{start,end}` |
+| Part                | Selector                 | What it does                                                                                                                                                                             |
+| ------------------- | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ScScrollAreaNext2` | `div[scScrollAreaNext2]` | Scrolls, with a thin themed native scrollbar; a tab stop while it overflows; `data-has-overflow-x` / `-y`, `data-overflow-{x,y}-{start,end}`, `--scroll-area-overflow-{x,y}-{start,end}` |
 
 ## Keyboard and screen readers
 
