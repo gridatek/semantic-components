@@ -28,7 +28,10 @@ import {
   ScTooltipNextTrigger,
 } from '@semantic-components/ui';
 
-/** Disabled but explained: aria-disabled, not disabled — the button keeps its focus and hover, so keyboard users get the tooltip too. */
+/**
+ * Disabled but explained: disabled with softDisabled — the button keeps its
+ * focus and hover, so keyboard users get the tooltip too.
+ */
 @Component({
   selector: 'app-disabled-tooltip-next-demo',
   imports: [
@@ -45,7 +48,8 @@ import {
         scButton
         scTooltipNextTrigger
         variant="outline"
-        aria-disabled="true"
+        disabled
+        softDisabled
       >
         Disabled
       </button>
