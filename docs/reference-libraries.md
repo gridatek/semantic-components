@@ -535,7 +535,7 @@ An empty state (`div[scEmpty]`; restyled 2026-11-05): shadcn's Empty. A shadcn c
 
 Restyled 2026-11-06 (the parts are the 2026-10-29 rewrite's): shadcn's Progress in each style.
 
-- **The `progress` preset key**: the track (its height and corners change most: `h-0.5` sera, `h-1` nova, lyra, mira, `h-1.5` vega, `h-2` rhea, `h-3` maia, luma), the label and the value text, from each style's `progress.tsx`. The range is the same everywhere; the circle (ours alone) keeps its look.
+- **The `progress` preset key**: the track (its height and corners change most: `h-0.5` sera, `h-1` nova, lyra, mira, `h-1.5` vega, `h-2` rhea, `h-3` maia, luma), the label and the value text, from each style's `progress.tsx`. The range is the same everywhere. The circle is ours alone (shadcn has none); its `arc` field gives its ends: square in lyra and sera, whose corners are square (the user, 2026-11-06), round elsewhere.
 - **shadcn's examples added**: Demo (the Usage: a bar further along a moment after it appears) and Controlled (on our Slider); the page in the standard sections.
 
 ## Resizable

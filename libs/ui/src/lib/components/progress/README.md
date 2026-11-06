@@ -1,6 +1,6 @@
 # Progress
 
-A task's progress, as a bar or a circle: a value between `min` and `max` — or `null` while not known (indeterminate). Your label names it, your value text is what screen readers hear. After Ark UI / Zag (one progress, two shapes), MUI and Angular Material (determinate and indeterminate), antd and `react-circular-progressbar` (the text in the middle). The bar in the look of the app's preset (`progress` key: the track, the label and the value text, shadcn's in each of the eight styles); the circle has no shadcn counterpart and keeps its own.
+A task's progress, as a bar or a circle: a value between `min` and `max` — or `null` while not known (indeterminate). Your label names it, your value text is what screen readers hear. After Ark UI / Zag (one progress, two shapes), MUI and Angular Material (determinate and indeterminate), antd and `react-circular-progressbar` (the text in the middle). The bar in the look of the app's preset (`progress` key: the track, the label and the value text, shadcn's in each of the eight styles); the circle has no shadcn counterpart: the preset's `arc` gives its ends — square in the square styles (lyra, sera), round elsewhere.
 
 ## Usage
 
