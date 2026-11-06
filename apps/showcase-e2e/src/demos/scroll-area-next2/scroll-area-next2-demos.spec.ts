@@ -76,9 +76,7 @@ test('Scroll fade: it says how far from each edge it is', async ({ page }) => {
   await expect.poll(end).toBe(0);
 });
 
-test('RTL: scrolled sideways from the right, still counted from the start', async ({
-  page,
-}) => {
+test('RTL: its content runs from the right', async ({ page }) => {
   await page.goto(demo('rtl'));
   const a = area(page);
   await expect(a).toHaveAttribute('data-has-overflow-y', '');

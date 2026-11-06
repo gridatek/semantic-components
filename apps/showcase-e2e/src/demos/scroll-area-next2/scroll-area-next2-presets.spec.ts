@@ -8,7 +8,7 @@ import { rhea } from '@semantic-components/presets/rhea';
 import { sera } from '@semantic-components/presets/sera';
 import { vega } from '@semantic-components/presets/vega';
 import { expectNoA11yViolations } from '../../axe';
-import { expect, test } from '../../test';
+import { test } from '../../test';
 
 /** Every preset, as the showcase's preset sheet lists them. */
 const PRESETS: Record<string, ScPreset> = {
