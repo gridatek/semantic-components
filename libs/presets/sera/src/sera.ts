@@ -36,6 +36,7 @@ import { select } from './select';
 import { table } from './table';
 /** The sera preset: `provideSemanticComponents({ preset: sera })`. */
 import { tabs } from './tabs';
+import { tooltip } from './tooltip';
 import { trace } from './trace';
 
 export const sera: ScPreset = {
@@ -74,5 +75,6 @@ export const sera: ScPreset = {
   select,
   table,
   tabs,
+  tooltip,
   trace,
 };

@@ -36,6 +36,7 @@ import { select } from './select';
 import { table } from './table';
 /** The nova preset: `provideSemanticComponents({ preset: nova })`. */
 import { tabs } from './tabs';
+import { tooltip } from './tooltip';
 import { trace } from './trace';
 
 export const nova: ScPreset = {
@@ -74,5 +75,6 @@ export const nova: ScPreset = {
   select,
   table,
   tabs,
+  tooltip,
   trace,
 };

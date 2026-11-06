@@ -36,6 +36,7 @@ import { select } from './select';
 import { table } from './table';
 /** The luma preset: `provideSemanticComponents({ preset: luma })`. */
 import { tabs } from './tabs';
+import { tooltip } from './tooltip';
 import { trace } from './trace';
 
 export const luma: ScPreset = {
@@ -74,5 +75,6 @@ export const luma: ScPreset = {
   select,
   table,
   tabs,
+  tooltip,
   trace,
 };

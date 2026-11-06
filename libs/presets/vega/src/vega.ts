@@ -36,6 +36,7 @@ import { select } from './select';
 import { table } from './table';
 /** The vega preset: `provideSemanticComponents({ preset: vega })`. */
 import { tabs } from './tabs';
+import { tooltip } from './tooltip';
 import { trace } from './trace';
 
 export const vega: ScPreset = {
@@ -74,5 +75,6 @@ export const vega: ScPreset = {
   select,
   table,
   tabs,
+  tooltip,
   trace,
 };

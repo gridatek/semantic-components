@@ -306,6 +306,12 @@ export interface ScEmptyStyles {
   body: string;
 }
 
+/** A tooltip's look: its popup and its arrow (placed by `data-side`). */
+export interface ScTooltipStyles {
+  popup: string;
+  arrow: string;
+}
+
 /** A preset: the components' classes in one of shadcn's styles. */
 export interface ScPreset {
   accordion: ScAccordionStyles;
@@ -358,5 +364,6 @@ export interface ScPreset {
   select: ScSelectStyles;
   table: ScTableStyles;
   tabs: ScTabsStyles;
+  tooltip: ScTooltipStyles;
   trace: ScTraceStyles;
 }

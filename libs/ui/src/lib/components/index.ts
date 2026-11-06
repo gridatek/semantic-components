@@ -66,6 +66,7 @@ export * from './toggle';
 export * from './toggle-group';
 export * from './toolbar';
 export * from './tooltip';
+export * from './tooltip-next';
 export * from './tree';
 export * from './typography';
 export * from './attachment';

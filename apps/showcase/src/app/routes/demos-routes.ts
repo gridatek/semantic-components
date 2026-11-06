@@ -6052,6 +6052,60 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/tooltip-next',
+    children: [
+      {
+        path: 'tooltip-next-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/tooltip-next/demos/tooltip-next-usage-demo').then(
+            (m) => m.TooltipNextUsageDemo,
+          ),
+      },
+      {
+        path: 'sides-tooltip-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/tooltip-next/demos/sides-tooltip-next-demo').then(
+            (m) => m.SidesTooltipNextDemo,
+          ),
+      },
+      {
+        path: 'keyboard-tooltip-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/tooltip-next/demos/keyboard-tooltip-next-demo').then(
+            (m) => m.KeyboardTooltipNextDemo,
+          ),
+      },
+      {
+        path: 'disabled-tooltip-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/tooltip-next/demos/disabled-tooltip-next-demo').then(
+            (m) => m.DisabledTooltipNextDemo,
+          ),
+      },
+      {
+        path: 'controlled-tooltip-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/tooltip-next/demos/controlled-tooltip-next-demo').then(
+            (m) => m.ControlledTooltipNextDemo,
+          ),
+      },
+      {
+        path: 'group-tooltip-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/tooltip-next/demos/group-tooltip-next-demo').then(
+            (m) => m.GroupTooltipNextDemo,
+          ),
+      },
+      {
+        path: 'rtl-tooltip-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/tooltip-next/demos/rtl-tooltip-next-demo').then(
+            (m) => m.RtlTooltipNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/tour-guide',
     children: [
       {

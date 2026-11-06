@@ -36,6 +36,7 @@ import { select } from './select';
 import { table } from './table';
 /** The lyra preset: `provideSemanticComponents({ preset: lyra })`. */
 import { tabs } from './tabs';
+import { tooltip } from './tooltip';
 import { trace } from './trace';
 
 export const lyra: ScPreset = {
@@ -74,5 +75,6 @@ export const lyra: ScPreset = {
   select,
   table,
   tabs,
+  tooltip,
   trace,
 };

@@ -36,6 +36,7 @@ import { select } from './select';
 import { table } from './table';
 /** The mira preset: `provideSemanticComponents({ preset: mira })`. */
 import { tabs } from './tabs';
+import { tooltip } from './tooltip';
 import { trace } from './trace';
 
 export const mira: ScPreset = {
@@ -74,5 +75,6 @@ export const mira: ScPreset = {
   select,
   table,
   tabs,
+  tooltip,
   trace,
 };

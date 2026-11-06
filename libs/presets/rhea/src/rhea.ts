@@ -36,6 +36,7 @@ import { select } from './select';
 import { table } from './table';
 /** The rhea preset: `provideSemanticComponents({ preset: rhea })`. */
 import { tabs } from './tabs';
+import { tooltip } from './tooltip';
 import { trace } from './trace';
 
 export const rhea: ScPreset = {
@@ -74,5 +75,6 @@ export const rhea: ScPreset = {
   select,
   table,
   tabs,
+  tooltip,
   trace,
 };
