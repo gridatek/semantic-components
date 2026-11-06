@@ -266,6 +266,13 @@ export default class ButtonPage {
         'Sets the native disabled and aria-disabled: not pressed, skipped by Tab.',
     },
     {
+      name: 'softDisabled',
+      type: 'boolean',
+      default: 'false',
+      description:
+        'With disabled: aria-disabled only — still focusable and hoverable (a tooltip can say why), never pressed. Base UI: focusableWhenDisabled; Angular Material: disabledInteractive.',
+    },
+    {
       name: 'class',
       type: 'string',
       default: "''",

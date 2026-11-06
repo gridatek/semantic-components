@@ -7,8 +7,8 @@ import { ScTooltipNextProvider } from './tooltip-next-provider';
  * What the tooltip is about — your button, link… (name it: the tooltip is
  * not its label). The pointer's hover opens it after the delay, keyboard
  * focus at once; leaving, blur, a click and Escape close it. Not on touch.
- * Disabled but still to be explained: `aria-disabled`, not `disabled` — a
- * disabled button takes no focus and no hover.
+ * Disabled but still to be explained: `scButton` with `disabled` and
+ * `softDisabled` — a natively disabled button takes no focus and no hover.
  */
 @Directive({
   selector: '[scTooltipNextTrigger]',

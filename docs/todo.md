@@ -22,6 +22,8 @@ Open work found along the way, kept for later — tick an item when it's done. N
 
 - [ ] **Input Group: a disabled group dims its words** — a group whose control is disabled is half opacity, its addon text too ("Validating...": 2:1, axe fails). shadcn's does the same. For Input Group's turn: dim the control only, or keep the addon's text at 4.5:1 (seen in Spinner's demos, 2026-11-05).
 
+- [ ] **Tooltip: the arrow in RTL** — the user sees the arrow nearly on the trigger's text in RTL (2026-11-06). Measured: the arrow stands out 6px past the tooltip, the gap is 4px (shadcn's), so the tip reaches 2px into the trigger in both directions. To come back to (an 8px gap was tried and reverted).
+
 ## Larger items
 
 - [ ] **Part names across the whole library**, after the styles rewrite (the user, 2026-11-05). `…Content` only for an `ng-template` rendered later (`ng-template[scMenuContent]`; the rule in [component-design-principles.md](component-design-principles.md#content-only-for-content-rendered-later)), never for one section between a header and a footer; `ScCardContent` breaks it, and `…Body` (ScCollapsibleBody, ScEmptyBody, ScFieldBody, ScItemBody, ScNativeDialogBody, ScTableBody) has no defined meaning. Find the name for a section, then check every part's name.

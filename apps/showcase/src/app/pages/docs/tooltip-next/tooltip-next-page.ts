@@ -84,8 +84,8 @@ import { TooltipNextUsageDemoContainer } from './demos/tooltip-next-usage-demo-c
             a Popover.
           </li>
           <li>
-            A disabled control to explain: aria-disabled, not disabled — it
-            keeps its focus and hover.
+            A disabled button to explain: disabled with softDisabled — it keeps
+            its focus and hover.
           </li>
         </ul>
       </section>

@@ -14,13 +14,14 @@ A native button for an action: submit, open, delete. Six variants and eight size
 
 Its classes are the app's preset's (`provideSemanticComponents({ preset })`, from `@semantic-components/presets`; nova by default). Each of the eight presets (nova, vega, maia, lyra, mira, luma, sera, rhea) is shadcn's button in that style, class for class.
 
-| Input      | Type                              | Default     | Description                                   |
-| ---------- | --------------------------------- | ----------- | --------------------------------------------- |
-| `variant`  | `ScButtonVariant`                 | `'default'` | Its look                                      |
-| `size`     | `ScButtonSize`                    | `'default'` | Its size                                      |
-| `type`     | `'button' \| 'submit' \| 'reset'` | `'button'`  | `button` by default: it doesn't submit a form |
-| `disabled` | `boolean`                         | `false`     | Disabled: not pressed, not in the tab order   |
-| `class`    | `string`                          | `''`        | Additional CSS classes                        |
+| Input          | Type                              | Default     | Description                                    |
+| -------------- | --------------------------------- | ----------- | ---------------------------------------------- |
+| `variant`      | `ScButtonVariant`                 | `'default'` | Its look                                       |
+| `size`         | `ScButtonSize`                    | `'default'` | Its size                                       |
+| `type`         | `'button' \| 'submit' \| 'reset'` | `'button'`  | `button` by default: it doesn't submit a form  |
+| `disabled`     | `boolean`                         | `false`     | Disabled: not pressed, not in the tab order    |
+| `softDisabled` | `boolean`                         | `false`     | With `disabled`: still focusable and hoverable |
+| `class`        | `string`                          | `''`        | Additional CSS classes                         |
 
 **Variants:** `default`, `outline`, `secondary`, `ghost`, `destructive`, `link`.
 
@@ -169,5 +170,6 @@ Logical spacing, so `data-icon="inline-start"` is the right side in right to lef
 
 - A native `button`: Enter and Space press it, it is in the tab order.
 - `disabled` sets the native attribute and `aria-disabled`; a disabled button is skipped by Tab.
+- `disabled` with `softDisabled`: no native attribute — `aria-disabled` only. The button stays in the tab order and keeps its hover (a tooltip can say why it is disabled), looks disabled, and nothing presses it (a click, Enter or Space is stopped before your handlers). The same as Angular Aria's `softDisabled` (on its widgets' items), Base UI's `focusableWhenDisabled` and Angular Material's `disabledInteractive`.
 - The focus ring shows on keyboard focus (`focus-visible`).
 - Icon-only buttons are named by hidden text; every variant meets AA contrast, in light and dark.

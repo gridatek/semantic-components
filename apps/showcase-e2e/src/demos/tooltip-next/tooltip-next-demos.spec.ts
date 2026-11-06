@@ -85,16 +85,29 @@ test('Keyboard shortcut: rich content, a kbd inside', async ({ page }) => {
   await expect(tooltip(page).locator('kbd')).toHaveText('S');
 });
 
-test('Disabled button: aria-disabled keeps its focus and its tooltip', async ({
+test('Disabled button: softDisabled — announced disabled, yet focusable and hoverable, never pressed', async ({
   page,
 }) => {
   await page.goto(demo('disabled'));
   const button = page.getByRole('button', { name: 'Disabled' });
   await expect(button).toHaveAttribute('aria-disabled', 'true');
-  await button.hover();
+  await expect(button).not.toHaveAttribute('disabled');
+  // The keyboard reaches it, and gets its tooltip.
+  await press(page, 'Tab');
+  await expect(button).toBeFocused();
   await expect(tooltip(page)).toHaveText(
     'This feature is currently unavailable',
   );
+  await press(page, 'Escape');
+  // The pointer too.
+  await page.mouse.move(0, 0);
+  await button.hover();
+  await expect(tooltip(page)).toBeVisible();
+  // Nothing presses it: the click stops before any handler (no submit, no focus loss).
+  // (Playwright waits for an aria-disabled button to be enabled: by position.)
+  const b = await box(button);
+  await page.mouse.click(b.x + b.width / 2, b.y + b.height / 2);
+  await expect(button).toBeFocused();
 });
 
 test('Controlled: opened and closed by the page', async ({ page }) => {

@@ -1,4 +1,12 @@
-import { Directive, booleanAttribute, computed, input } from '@angular/core';
+import {
+  DestroyRef,
+  Directive,
+  ElementRef,
+  booleanAttribute,
+  computed,
+  inject,
+  input,
+} from '@angular/core';
 import type {
   ScButtonSize,
   ScButtonVariant,
@@ -16,6 +24,12 @@ export interface ScButtonVariants {
  * A button in the app's preset: its classes are the preset's
  * (`provideSemanticComponents({ preset })`, from `@semantic-components/presets`;
  * nova by default), chosen when the app starts.
+ *
+ * `disabled` with `softDisabled`: disabled but still reachable — announced
+ * and styled as disabled (`aria-disabled`), yet it keeps its focus and hover
+ * (a tooltip can say why), and nothing presses it. Angular Aria's
+ * `softDisabled`; Base UI's `focusableWhenDisabled`, Angular Material's
+ * `disabledInteractive`.
  */
 @Directive({
   selector: 'button[scButton]',
@@ -23,7 +37,7 @@ export interface ScButtonVariants {
     // Read by the button group's styles (borders beside an input).
     'data-slot': 'button',
     '[attr.type]': 'type()',
-    '[disabled]': 'disabled()',
+    '[disabled]': 'disabled() && !softDisabled()',
     '[attr.aria-disabled]': 'disabled() || null',
     '[class]': 'class()',
   },
@@ -38,11 +52,37 @@ export class ScButton {
   readonly disabled = input<boolean, unknown>(false, {
     transform: booleanAttribute,
   });
+  /** Disabled, yet focusable and hoverable (with `disabled`). */
+  readonly softDisabled = input<boolean, unknown>(false, {
+    transform: booleanAttribute,
+  });
 
   protected readonly class = computed(() =>
     cn(
       this.styles({ variant: this.variant(), size: this.size() }),
+      // The preset's aria-disabled blocks the pointer: a soft-disabled
+      // button keeps its hover (its tooltip).
+      this.disabled() && this.softDisabled()
+        ? 'pointer-events-auto cursor-not-allowed'
+        : '',
       this.classInput(),
     ),
   );
+
+  constructor() {
+    // Soft-disabled: nothing presses it — a click, Enter or Space (which
+    // click) stops here, before your handlers (capture runs first).
+    const element =
+      inject<ElementRef<HTMLButtonElement>>(ElementRef).nativeElement;
+    const stop = (event: Event) => {
+      if (this.disabled() && this.softDisabled()) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+      }
+    };
+    element.addEventListener('click', stop, { capture: true });
+    inject(DestroyRef).onDestroy(() =>
+      element.removeEventListener('click', stop, { capture: true }),
+    );
+  }
 }
