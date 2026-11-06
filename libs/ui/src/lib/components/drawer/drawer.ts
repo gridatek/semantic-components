@@ -91,21 +91,37 @@ export class ScDrawer {
     this.dragging() ? 'none' : this.settling() ? SETTLE : null,
   );
 
+  // Plain classes chosen here, not data-[…]: variants: those outrank yours in
+  // specificity (a width, a height, an inset), and cn can't merge them.
+  private readonly edge = computed(
+    () =>
+      ({
+        down: 'inset-x-0 bottom-0 origin-bottom slide-in-from-bottom slide-out-to-bottom after:inset-x-0 after:top-full after:h-12',
+        up: 'inset-x-0 top-0 origin-top slide-in-from-top slide-out-to-top after:inset-x-0 after:bottom-full after:h-12',
+        left: 'inset-y-0 left-0 w-3/4 sm:w-96 origin-left slide-in-from-left slide-out-to-left after:inset-y-0 after:right-full after:w-12',
+        right:
+          'inset-y-0 right-0 w-3/4 sm:w-96 origin-right slide-in-from-right slide-out-to-right after:inset-y-0 after:left-full after:w-12',
+      })[this.drawer.physicalDirection()],
+  );
+  // Snap points: the screen's height, shown in part.
+  private readonly height = computed(() =>
+    this.drawer.hasSnapPoints()
+      ? 'h-dvh'
+      : this.drawer.axis() === 'y'
+        ? 'max-h-[calc(100dvh-6rem)]'
+        : '',
+  );
+
   protected readonly class = computed(() =>
     cn(
       'group/drawer-popup fixed z-50 m-(--drawer-inset,0px) flex flex-col outline-none data-swiping:select-none duration-450 ease-[cubic-bezier(0.22,1,0.36,1)]',
-      // At its edge, and sliding from and to it.
-      'data-[swipe-direction=down]:inset-x-0 data-[swipe-direction=down]:bottom-0 data-[swipe-direction=down]:slide-in-from-bottom data-[swipe-direction=down]:slide-out-to-bottom',
-      'data-[swipe-direction=up]:inset-x-0 data-[swipe-direction=up]:top-0 data-[swipe-direction=up]:slide-in-from-top data-[swipe-direction=up]:slide-out-to-top',
-      'data-[swipe-direction=left]:inset-y-0 data-[swipe-direction=left]:left-0 data-[swipe-direction=left]:slide-in-from-left data-[swipe-direction=left]:slide-out-to-left',
-      'data-[swipe-direction=right]:inset-y-0 data-[swipe-direction=right]:right-0 data-[swipe-direction=right]:slide-in-from-right data-[swipe-direction=right]:slide-out-to-right',
-      'data-[swipe-axis=x]:w-3/4 data-[swipe-axis=x]:sm:w-96',
-      // Dragged away from its edge: no gap behind it.
-      'after:pointer-events-none after:absolute after:bg-inherit data-[swipe-axis=x]:after:inset-y-0 data-[swipe-axis=x]:after:w-12 data-[swipe-axis=y]:after:inset-x-0 data-[swipe-axis=y]:after:h-12 data-[swipe-direction=down]:after:top-full data-[swipe-direction=up]:after:bottom-full data-[swipe-direction=left]:after:right-full data-[swipe-direction=right]:after:left-full',
-      // Snap points: the screen's height, shown in part.
-      'data-[swipe-axis=y]:not-data-snap-points:max-h-[calc(100dvh-6rem)] data-snap-points:h-dvh',
+      // At its edge, and sliding from and to it; dragged away from it, no
+      // gap behind it (after:).
+      'after:pointer-events-none after:absolute after:bg-inherit',
+      this.edge(),
+      this.height(),
       // A drawer open on top: this one shrinks and dims behind it.
-      'transition-[scale,filter] data-nested-drawer-open:scale-95 data-nested-drawer-open:brightness-95 data-[swipe-direction=down]:origin-bottom data-[swipe-direction=up]:origin-top data-[swipe-direction=left]:origin-left data-[swipe-direction=right]:origin-right',
+      'transition-[scale,filter] data-nested-drawer-open:scale-95 data-nested-drawer-open:brightness-95',
       this.styles.content,
       this.classInput(),
     ),

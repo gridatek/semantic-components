@@ -70,8 +70,11 @@ export class ScScrollAreaNextScrollbar {
   protected readonly class = computed(() =>
     cn(
       'absolute flex touch-none p-px transition-colors select-none',
-      'data-[orientation=vertical]:end-0 data-[orientation=vertical]:top-0 data-[orientation=vertical]:bottom-(--scroll-area-corner-size) data-[orientation=vertical]:w-2.5 data-[orientation=vertical]:border-s data-[orientation=vertical]:border-s-transparent',
-      'data-[orientation=horizontal]:start-0 data-[orientation=horizontal]:end-(--scroll-area-corner-size) data-[orientation=horizontal]:bottom-0 data-[orientation=horizontal]:h-2.5 data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:border-t data-[orientation=horizontal]:border-t-transparent',
+      // Plain classes, not data-[orientation=…]: variants: those outrank
+      // yours in specificity, and cn can't merge them.
+      this.orientation() === 'vertical'
+        ? 'end-0 top-0 bottom-(--scroll-area-corner-size) w-2.5 border-s border-s-transparent'
+        : 'start-0 end-(--scroll-area-corner-size) bottom-0 h-2.5 flex-col border-t border-t-transparent',
       this.classInput(),
     ),
   );
