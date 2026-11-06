@@ -1,198 +1,63 @@
 # Drawer
 
-A mobile-friendly slide-in panel that can be opened from any edge of the screen. Ideal for navigation menus, forms, and quick actions on touch devices.
-
-## Architecture
-
-The components follow a dependency injection (DI) pattern where child components inject the parent `ScDrawerProvider` to access shared state. `ScDrawerProvider` owns all overlay lifecycle logic (CDK overlay, backdrop, focus trap). The `ScDrawerPortal` directive marks the lazy content template that gets portaled into the overlay.
-
-```
-ScDrawerProvider (root wrapper - manages open state + overlay lifecycle)
-├── ScDrawerTrigger (button that opens drawer)
-└── ng-template[scDrawerPortal] (lazy content, portaled to CDK overlay)
-    └── ScDrawer (drawer directive - slides from configured direction)
-        ├── ScDrawerHandle (optional drag indicator)
-        ├── ScDrawerHeader
-        │   ├── ScDrawerTitle
-        │   └── ScDrawerDescription
-        ├── (user content)
-        └── ScDrawerFooter
-            └── ScDrawerClose
-```
-
-## Components
-
-| Component             | Selector                      | Description                                                                      |
-| --------------------- | ----------------------------- | -------------------------------------------------------------------------------- |
-| `ScDrawerProvider`    | `div[scDrawerProvider]`       | Root wrapper, manages open state + overlay                                       |
-| `ScDrawerTrigger`     | `button[scDrawerTrigger]`     | Button that opens the drawer                                                     |
-| `ScDrawerPortal`      | `ng-template[scDrawerPortal]` | Directive marking lazy content for the overlay                                   |
-| `ScDrawer`            | `div[scDrawer]`               | Drawer directive with directional slide animations                               |
-| `ScDrawerHeader`      | `div[scDrawerHeader]`         | Header section container                                                         |
-| `ScDrawerTitle`       | `h2[scDrawerTitle]`           | Drawer title (aria-labelledby)                                                   |
-| `ScDrawerDescription` | `p[scDrawerDescription]`      | Drawer description (aria-describedby)                                            |
-| `ScDrawerHandle`      | `div[scDrawerHandle]`         | Visual drag handle indicator                                                     |
-| `ScDrawerFooter`      | `div[scDrawerFooter]`         | Footer section for actions                                                       |
-| `ScDrawerClose`       | `button[scDrawerClose]`       | Closes it: the preset's button, `variant` (`outline`), `size`, `type` (`button`) |
+A panel at the edge of the screen that a swipe dismisses — or moves between its snap points. shadcn's Drawer (Base UI's Drawer) in the look of the app's preset (`drawer` key: shadcn's in each of the eight styles).
 
 ## Usage
 
-### Basic Drawer
-
 ```html
-<div scDrawerProvider direction="bottom" [(open)]="isOpen">
-  <button scDrawerTrigger>Open Drawer</button>
+<div scDrawerProvider [(open)]="open">
+  <button scButton scDrawerTrigger variant="outline">Edit profile</button>
   <ng-template scDrawerPortal>
     <div scDrawer>
       <div scDrawerHandle></div>
       <div scDrawerHeader>
-        <h2 scDrawerTitle>Drawer Title</h2>
-        <p scDrawerDescription>Drawer description text.</p>
+        <h2 scDrawerTitle>Edit profile</h2>
+        <p scDrawerDescription>Make changes to your profile here.</p>
       </div>
-      <div class="p-4">
-        <!-- Main content -->
-      </div>
+      …
       <div scDrawerFooter>
+        <button scButton (click)="save()">Save changes</button>
         <button scDrawerClose>Cancel</button>
-        <button scDrawerClose variant="default">Submit</button>
       </div>
     </div>
   </ng-template>
 </div>
 ```
 
-### Controlled Drawer
+## Parts
 
-You can control the drawer state programmatically using the `open` model:
+| Part                  | Selector                                        | What it does                                                                                                                                                                                       |
+| --------------------- | ----------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ScDrawerProvider`    | `div[scDrawerProvider]`                         | `[(open)]`, `swipeDirection` (`down`, `up`, `left`, `right`, `inline-start`, `inline-end`), `snapPoints` and `[(snapPoint)]`, `modal` (`true`, `'trap-focus'`, `false`), `disablePointerDismissal` |
+| `ScDrawerTrigger`     | `button[scDrawerTrigger]`                       | Opens and closes it, on any button (`aria-haspopup`, `aria-expanded`)                                                                                                                              |
+| `ScDrawerPortal`      | `ng-template[scDrawerPortal]`                   | The content, rendered while open                                                                                                                                                                   |
+| `ScDrawer`            | `div[scDrawer]`                                 | The panel: `role="dialog"`, `aria-modal` when modal, named and described; `data-swipe-direction`, `data-swipe-axis`, `data-snap-points`, `data-nested-drawer-open`, `data-swiping`                 |
+| `ScDrawerHandle`      | `div[scDrawerHandle]`, `button[scDrawerHandle]` | The bar to drag it by. A `div` is hidden from screen readers; a `button` (named by you) moves to the next snap point                                                                               |
+| `ScDrawerHeader`      | `div[scDrawerHeader]`                           | Its title and description                                                                                                                                                                          |
+| `ScDrawerTitle`       | `h2[scDrawerTitle]`                             | Names it                                                                                                                                                                                           |
+| `ScDrawerDescription` | `p[scDrawerDescription]`                        | Describes it                                                                                                                                                                                       |
+| `ScDrawerFooter`      | `div[scDrawerFooter]`                           | Its actions, at the bottom                                                                                                                                                                         |
+| `ScDrawerClose`       | `button[scDrawerClose]`                         | Closes it: the preset's button, outline by default                                                                                                                                                 |
 
-```typescript
-@Component({
-  template: `
-    <div scDrawerProvider direction="bottom" [(open)]="isOpen">
-      <button scDrawerTrigger>Open</button>
-      <ng-template scDrawerPortal>
-        <div scDrawer>
-          <!-- content -->
-        </div>
-      </ng-template>
-    </div>
-  `,
-})
-export class MyComponent {
-  isOpen = signal(false);
+## Swiping
 
-  openDrawer() {
-    this.isOpen.set(true);
-  }
+- It follows a drag towards its edge; let go, it closes (past half its size, or flicked), or settles back. Dragged the other way it stretches a little.
+- A mouse drags it by its handle or the panel's own edges — text inside stays selectable. A finger or a pen drags from anywhere but a field. `data-swipe-ignore` keeps an element's drags its own.
+- **Snap points**: heights it rests at, fractions of the screen (0–1) or pixels, smallest first. It opens at the first; let go, it rests at the nearest one where the drag would have brought it, or closes below half the first.
+- **Nested**: a drawer opened from inside another stacks on it; the one behind shrinks and dims, and doesn't swipe, until the front one closes.
 
-  closeDrawer() {
-    this.isOpen.set(false);
-  }
-}
-```
+## Keyboard and screen readers
 
-## Direction
+- A dialog, named by its title and described by its description (when it has them).
+- Modal (the default): a backdrop, focus held, the page still. `'trap-focus'`: focus held, the page usable. `false`: neither — focus still moves in and back.
+- Escape closes the front drawer; a press outside too, unless `disablePointerDismissal`. Closing gives focus back to the trigger.
+- Swiping is for the pointer: from the keyboard, Escape or its close button; a handle on a button steps through the snap points.
+- In a right-to-left page its text follows (`dir` and `lang` carried from where it was opened); `inline-start` is the right.
 
-The drawer can slide in from any edge of the screen. The `direction` input is set on the provider:
+## Not shadcn's
 
-```html
-<!-- Bottom (default) -->
-<div scDrawerProvider direction="bottom">
-  <button scDrawerTrigger>Open</button>
-  <ng-template scDrawerPortal>
-    <div scDrawer>...</div>
-  </ng-template>
-</div>
-
-<!-- Top -->
-<div scDrawerProvider direction="top">...</div>
-
-<!-- Left -->
-<div scDrawerProvider direction="left">...</div>
-
-<!-- Right -->
-<div scDrawerProvider direction="right">...</div>
-```
-
-## Keyboard Navigation
-
-| Key      | Action                 |
-| -------- | ---------------------- |
-| `Escape` | Close drawer           |
-| `Tab`    | Navigate within drawer |
-
-## How It Works
-
-### State Management
-
-`ScDrawerProvider` uses a `model` signal for the `open` state:
-
-```typescript
-readonly open = model<boolean>(false);
-```
-
-Child components inject `ScDrawerProvider` to read or modify this state:
-
-```typescript
-// ScDrawerTrigger
-openDrawer(): void {
-  this.drawerProvider.open.set(true);
-}
-
-// ScDrawerClose
-closeDrawer(): void {
-  this.drawerProvider.open.set(false);
-}
-```
-
-### Overlay Management
-
-`ScDrawerProvider` creates a CDK overlay and attaches/detaches the `scDrawerPortal` template based on state:
-
-```typescript
-effect(() => {
-  if (this.open()) {
-    this.attachDrawer();
-  } else {
-    this.detachDrawer();
-  }
-});
-```
-
-The `scDrawerPortal` directive marks the `ng-template` whose content is lazily instantiated into the overlay only when the drawer opens.
-
-### Animations
-
-`ScDrawer` animates with Angular's `animate.enter` / `animate.leave`: it fades and slides in from its `direction` (with the backdrop behind it fading in) when it is shown, and back out when it goes — Angular removes it once that animation ends.
-
-## Accessibility
-
-- `role="dialog"` on the drawer
-- `aria-modal="true"` for modal behavior
-- `aria-labelledby` linked to `ScDrawerTitle`
-- `aria-describedby` linked to `ScDrawerDescription`
-- `aria-haspopup="dialog"` on the trigger
-- `aria-expanded` reflects open state on trigger
-- Focus trapped within the drawer
-- Escape key closes the drawer (via CDK overlay keydown events)
-- Backdrop click closes the drawer (via CDK overlay backdrop click)
-
-## Customization
-
-All components accept a `class` input for custom styling:
-
-```html
-<div scDrawer class="max-h-[80vh]">
-  <!-- constrained height drawer -->
-</div>
-
-<div scDrawerFooter class="flex-row-reverse">
-  <!-- reversed button order -->
-</div>
-```
-
-## Dependencies
-
-- Angular CDK Overlay (`@angular/cdk/overlay`)
-- Angular CDK Portal (`@angular/cdk/portal`)
-- Angular CDK A11y (`@angular/cdk/a11y`)
+- **Angular's animations**: the panel slides in and out from its edge with `animate.enter` / `animate.leave` (tw-animate's `animate-in` / `animate-out`, `slide-in-from-*` / `slide-out-to-*`). A swipe's leave starts where it was let go (tw-animate's exit has only an end state).
+- **Mechanics in the part, look in the preset**: Base UI's CSS variables (`--drawer-swipe-movement-*`, `--stack-*`) aren't used; the part sets the panel's transform. The preset keeps colours, corners, borders and the handle's bar.
+- **A simpler stack**: the drawer behind scales to 95% and dims; Base UI's peek and height matching aren't copied.
+- **Physical swipe directions** (as Base UI), plus `inline-start` / `inline-end`, resolved by the page's direction.
+- **The responsive example is composition**: a Dialog on wide screens, a Drawer on phones, on one `open` signal and a media query in your component.

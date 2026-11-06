@@ -1867,92 +1867,59 @@ export const demosRoutes: Route[] = [
     path: 'demos/drawer',
     children: [
       {
-        path: 'basic-drawer-demo',
+        path: 'drawer-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/drawer/demos/basic-drawer-demo').then(
-            (m) => m.BasicDrawerDemo,
+          import('../pages/docs/drawer/demos/drawer-usage-demo').then(
+            (m) => m.DrawerUsageDemo,
           ),
       },
       {
-        path: 'top-drawer-demo',
+        path: 'sides-drawer-demo',
         loadComponent: () =>
-          import('../pages/docs/drawer/demos/top-drawer-demo').then(
-            (m) => m.TopDrawerDemo,
+          import('../pages/docs/drawer/demos/sides-drawer-demo').then(
+            (m) => m.SidesDrawerDemo,
           ),
       },
       {
-        path: 'left-drawer-demo',
+        path: 'swipe-handle-drawer-demo',
         loadComponent: () =>
-          import('../pages/docs/drawer/demos/left-drawer-demo').then(
-            (m) => m.LeftDrawerDemo,
+          import('../pages/docs/drawer/demos/swipe-handle-drawer-demo').then(
+            (m) => m.SwipeHandleDrawerDemo,
           ),
       },
       {
-        path: 'right-drawer-demo',
+        path: 'snap-points-drawer-demo',
         loadComponent: () =>
-          import('../pages/docs/drawer/demos/right-drawer-demo').then(
-            (m) => m.RightDrawerDemo,
-          ),
-      },
-    ],
-  },
-  {
-    path: 'demos/drawer-next',
-    children: [
-      {
-        path: 'drawer-next-usage-demo',
-        loadComponent: () =>
-          import('../pages/docs/drawer-next/demos/drawer-next-usage-demo').then(
-            (m) => m.DrawerNextUsageDemo,
+          import('../pages/docs/drawer/demos/snap-points-drawer-demo').then(
+            (m) => m.SnapPointsDrawerDemo,
           ),
       },
       {
-        path: 'sides-drawer-next-demo',
+        path: 'nested-drawer-demo',
         loadComponent: () =>
-          import('../pages/docs/drawer-next/demos/sides-drawer-next-demo').then(
-            (m) => m.SidesDrawerNextDemo,
+          import('../pages/docs/drawer/demos/nested-drawer-demo').then(
+            (m) => m.NestedDrawerDemo,
           ),
       },
       {
-        path: 'swipe-handle-drawer-next-demo',
+        path: 'non-modal-drawer-demo',
         loadComponent: () =>
-          import('../pages/docs/drawer-next/demos/swipe-handle-drawer-next-demo').then(
-            (m) => m.SwipeHandleDrawerNextDemo,
+          import('../pages/docs/drawer/demos/non-modal-drawer-demo').then(
+            (m) => m.NonModalDrawerDemo,
           ),
       },
       {
-        path: 'snap-points-drawer-next-demo',
+        path: 'responsive-drawer-demo',
         loadComponent: () =>
-          import('../pages/docs/drawer-next/demos/snap-points-drawer-next-demo').then(
-            (m) => m.SnapPointsDrawerNextDemo,
+          import('../pages/docs/drawer/demos/responsive-drawer-demo').then(
+            (m) => m.ResponsiveDrawerDemo,
           ),
       },
       {
-        path: 'nested-drawer-next-demo',
+        path: 'rtl-drawer-demo',
         loadComponent: () =>
-          import('../pages/docs/drawer-next/demos/nested-drawer-next-demo').then(
-            (m) => m.NestedDrawerNextDemo,
-          ),
-      },
-      {
-        path: 'non-modal-drawer-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/drawer-next/demos/non-modal-drawer-next-demo').then(
-            (m) => m.NonModalDrawerNextDemo,
-          ),
-      },
-      {
-        path: 'responsive-drawer-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/drawer-next/demos/responsive-drawer-next-demo').then(
-            (m) => m.ResponsiveDrawerNextDemo,
-          ),
-      },
-      {
-        path: 'rtl-drawer-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/drawer-next/demos/rtl-drawer-next-demo').then(
-            (m) => m.RtlDrawerNextDemo,
+          import('../pages/docs/drawer/demos/rtl-drawer-demo').then(
+            (m) => m.RtlDrawerDemo,
           ),
       },
     ],

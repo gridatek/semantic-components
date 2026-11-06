@@ -23,7 +23,7 @@ const PRESETS: Record<string, ScPreset> = {
   rhea,
 };
 
-test.describe('Drawer Next in every preset', () => {
+test.describe('Drawer in every preset', () => {
   // A docs page and axe, twice: slow under load.
   test.slow();
 
@@ -37,15 +37,15 @@ test.describe('Drawer Next in every preset', () => {
       await context.addCookies([
         { name: 'sc-preset', value: preset, url: baseURL! },
       ]);
-      await page.goto('/demos/drawer-next/drawer-next-usage-demo');
+      await page.goto('/demos/drawer/drawer-usage-demo');
       await page.getByRole('button', { name: 'Edit profile' }).click();
       for (const [target, wanted, what] of [
         [page.getByRole('dialog'), styles.drawer.content, 'drawer'],
-        [page.locator('[scDrawerNextHandle]'), styles.drawer.handle, 'handle'],
-        [page.locator('[scDrawerNextHeader]'), styles.drawer.header, 'header'],
-        [page.locator('[scDrawerNextTitle]'), styles.drawer.title, 'title'],
+        [page.locator('[scDrawerHandle]'), styles.drawer.handle, 'handle'],
+        [page.locator('[scDrawerHeader]'), styles.drawer.header, 'header'],
+        [page.locator('[scDrawerTitle]'), styles.drawer.title, 'title'],
         [
-          page.locator('[scDrawerNextDescription]'),
+          page.locator('[scDrawerDescription]'),
           styles.drawer.description,
           'description',
         ],
@@ -62,7 +62,7 @@ test.describe('Drawer Next in every preset', () => {
           .toEqual([]);
       }
 
-      await page.goto('/docs/components/drawer-next');
+      await page.goto('/docs/components/drawer');
       await expectNoA11yViolations(page);
       await expectNoA11yViolations(page, { dark: true });
     });

@@ -1,16 +1,16 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
-  ScDrawerNext,
-  ScDrawerNextClose,
-  ScDrawerNextDescription,
-  ScDrawerNextFooter,
-  ScDrawerNextHandle,
-  ScDrawerNextHeader,
-  ScDrawerNextPortal,
-  ScDrawerNextProvider,
-  ScDrawerNextTitle,
-  ScDrawerNextTrigger,
+  ScDrawer,
+  ScDrawerClose,
+  ScDrawerDescription,
+  ScDrawerFooter,
+  ScDrawerHandle,
+  ScDrawerHeader,
+  ScDrawerPortal,
+  ScDrawerProvider,
+  ScDrawerTitle,
+  ScDrawerTrigger,
   ScField,
   ScFieldGroup,
   ScInput,
@@ -19,19 +19,19 @@ import {
 } from '@semantic-components/ui';
 
 @Component({
-  selector: 'app-drawer-next-usage-demo',
+  selector: 'app-drawer-usage-demo',
   imports: [
     ScButton,
-    ScDrawerNext,
-    ScDrawerNextClose,
-    ScDrawerNextDescription,
-    ScDrawerNextFooter,
-    ScDrawerNextHandle,
-    ScDrawerNextHeader,
-    ScDrawerNextPortal,
-    ScDrawerNextProvider,
-    ScDrawerNextTitle,
-    ScDrawerNextTrigger,
+    ScDrawer,
+    ScDrawerClose,
+    ScDrawerDescription,
+    ScDrawerFooter,
+    ScDrawerHandle,
+    ScDrawerHeader,
+    ScDrawerPortal,
+    ScDrawerProvider,
+    ScDrawerTitle,
+    ScDrawerTrigger,
     ScField,
     ScFieldGroup,
     ScInput,
@@ -39,16 +39,14 @@ import {
     ScSelectOnFocus,
   ],
   template: `
-    <div scDrawerNextProvider [(open)]="open">
-      <button scButton scDrawerNextTrigger variant="outline">
-        Edit profile
-      </button>
-      <ng-template scDrawerNextPortal>
-        <div scDrawerNext>
-          <div scDrawerNextHandle></div>
-          <div scDrawerNextHeader>
-            <h2 scDrawerNextTitle>Edit profile</h2>
-            <p scDrawerNextDescription>
+    <div scDrawerProvider [(open)]="open">
+      <button scButton scDrawerTrigger variant="outline">Edit profile</button>
+      <ng-template scDrawerPortal>
+        <div scDrawer>
+          <div scDrawerHandle></div>
+          <div scDrawerHeader>
+            <h2 scDrawerTitle>Edit profile</h2>
+            <p scDrawerDescription>
               Make changes to your profile here. Click save when you&apos;re
               done.
             </p>
@@ -68,9 +66,9 @@ import {
               <input scInput value="@shadcn" />
             </div>
           </div>
-          <div scDrawerNextFooter>
+          <div scDrawerFooter>
             <button scButton (click)="open.set(false)">Save changes</button>
-            <button scDrawerNextClose>Cancel</button>
+            <button scDrawerClose>Cancel</button>
           </div>
         </div>
       </ng-template>
@@ -79,6 +77,6 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class DrawerNextUsageDemo {
+export class DrawerUsageDemo {
   protected readonly open = signal(false);
 }

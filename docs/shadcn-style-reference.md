@@ -50,7 +50,7 @@ The reference's classes are logical already; so are ours. A physical class in ou
 
 **1. Centring: `left-1/2` paired with `-translate-x-1/2`.** `translate-x` has no logical form, so changing only the inset moves the element off-centre in RTL. shadcn's output keeps the inset logical and adds `rtl:translate-x-1/2`; if you convert the inset, do both. Affects tooltip, radio, the resizable handle and toast-stack's centre positions.
 
-**2. Explicitly physical APIs.** Where a component takes a side by name — `side="left"`, `direction="left"`, `'top-right'` — the caller means literally left. Affects drawer, sheet, sidebar and toast-stack.
+**2. Explicitly physical APIs.** Where a component takes a side by name — `side="left"`, `swipeDirection="left"`, `'top-right'` — the caller means literally left. Affects drawer, sheet, sidebar and toast-stack.
 
 **3. Spatial widgets.** Image cropper, image compare, image annotator and org-chart: handle offsets pair with physical resize cursors (`w-resize`), and mirroring a crop box or a diagram is wrong whatever the writing direction.
 
@@ -92,6 +92,7 @@ Do **not** "fix" these to match shadcn:
 - **Marker: a button host, its hover the part's** — shadcn's `Marker` takes `render` for a link or a button, the button's hover written by the consumer (`transition-colors hover:text-foreground`); ours is a directive on a `div`, an `a` or a `button`, adding `[a,button]:transition-colors [a,button]:hover:text-foreground` itself.
 - **Message: actions named in sr-only text** — shadcn's examples name icon-only actions with `aria-label` (and `title`); ours with an sr-only span (our rule for icon buttons).
 - **Item: our slots, no list role** — the presets' `in-data-[slot=dropdown-menu-content]` is `in-data-[slot=menu]` (our menu), `[data-slot=item-content]` is `item-body` (our ScItemBody). shadcn's group has `role="list"`; ours leaves it to the consumer.
+- **Drawer: the look only in the preset** — shadcn's popup carries Base UI's swipe and stack variables (`--drawer-swipe-movement-*`, `--stack-*`, `--closed-transform`); the `drawer` key keeps only its look (colours, corners and borders by `data-swipe-direction` — physical `rounded-r` / `rounded-l` for left / right, as a swipe direction is physical — the inset, the handle's `after:` bar). The part moves the panel; the drawer behind a nested one scales to 95% and dims (shadcn's also peeks and hides its content). A side drawer's handle sits over its free edge (shadcn's popup turns into a row).
 - **Pagination: parts on buttons or your links** — the parts set no `href`: a link follows the one you give it.
 - **Decomposition** — shadcn ships one function per part in one file; we split into directives, one per file, so one shadcn part can map to several of ours.
 

@@ -7,20 +7,20 @@ import { ScDrawerProvider } from './drawer-provider';
 /**
  * Closes the drawer: the preset's button, outline by default (Cancel, in the
  * footer, as shadcn's). Submit: `variant="default"`; a ✕: `variant="ghost"
- * size="icon"`, named.
+ * size="icon-sm"`, named.
  */
 @Directive({
   selector: 'button[scDrawerClose]',
   host: {
+    'data-slot': 'drawer-close',
     '[attr.type]': 'type()',
     '[class]': 'class()',
-    '(click)': 'closeDrawer()',
+    '(click)': 'drawer.close()',
   },
 })
 export class ScDrawerClose {
-  private readonly drawer = inject(ScDrawerProvider);
   private readonly buttonStyles = injectPreset().button;
-
+  protected readonly drawer = inject(ScDrawerProvider);
   readonly classInput = input<string>('', { alias: 'class' });
   readonly type = input<'button' | 'submit' | 'reset'>('button');
   readonly variant = input<ScButtonVariants['variant']>('outline');
@@ -32,8 +32,4 @@ export class ScDrawerClose {
       this.classInput(),
     ),
   );
-
-  protected closeDrawer(): void {
-    this.drawer.open.set(false);
-  }
 }

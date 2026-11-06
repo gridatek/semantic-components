@@ -19,7 +19,6 @@ export * from './date-input';
 export * from './date-picker';
 export * from './dialog';
 export * from './drawer';
-export * from './drawer-next';
 export * from './empty';
 export * from './field';
 export * from './file-upload';

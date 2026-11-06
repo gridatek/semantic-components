@@ -314,12 +314,6 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/drawer/drawer-page'),
       },
       {
-        path: 'drawer-next',
-        title: 'Drawer Next - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/drawer-next/drawer-next-page'),
-      },
-      {
         path: 'emoji-picker',
         title: 'Emoji Picker - Semantic Components',
         loadComponent: () =>

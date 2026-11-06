@@ -3,7 +3,7 @@ import { collectErrors, press } from '../../interaction';
 import { box } from '../../looks';
 import { expect, test } from '../../test';
 
-const demo = (name: string) => `/demos/drawer-next/${name}-drawer-next-demo`;
+const demo = (name: string) => `/demos/drawer/${name}-drawer-demo`;
 const drawer = (page: Page) => page.getByRole('dialog');
 
 /** Once it has slid in: no transform left from its enter animation. */
@@ -34,7 +34,7 @@ test.afterEach(() => {
 test('Usage: a modal dialog at the bottom, named and described; focus in, then back', async ({
   page,
 }) => {
-  await page.goto('/demos/drawer-next/drawer-next-usage-demo');
+  await page.goto('/demos/drawer/drawer-usage-demo');
   const trigger = page.getByRole('button', { name: 'Edit profile' });
   await trigger.click();
   const d = page.getByRole('dialog', { name: 'Edit profile' });
@@ -53,7 +53,7 @@ test('Usage: a modal dialog at the bottom, named and described; focus in, then b
 });
 
 test('Cancel closes it; a press on the backdrop too', async ({ page }) => {
-  await page.goto('/demos/drawer-next/drawer-next-usage-demo');
+  await page.goto('/demos/drawer/drawer-usage-demo');
   await page.getByRole('button', { name: 'Edit profile' }).click();
   await drawer(page).getByRole('button', { name: 'Cancel' }).click();
   await expect(drawer(page)).toHaveCount(0);
@@ -135,7 +135,7 @@ test('Closing animates out: the panel stays while it slides away', async ({
   await page.getByRole('button', { name: 'Open drawer' }).click();
   await settled(drawer(page));
   await press(page, 'Escape');
-  await expect(page.locator('[scDrawerNext].animate-out')).toHaveCount(1);
+  await expect(page.locator('[scDrawer].animate-out')).toHaveCount(1);
   await expect(drawer(page)).toHaveCount(0);
 });
 
@@ -197,7 +197,7 @@ test('Responsive: a drawer on a phone', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 800 });
   await page.goto(demo('responsive'));
   await page.getByRole('button', { name: 'Edit profile' }).click();
-  await expect(page.locator('[scDrawerNext]')).toBeVisible();
+  await expect(page.locator('[scDrawer]')).toBeVisible();
 });
 
 test('Responsive: a dialog on a wide screen', async ({ page }) => {
@@ -205,7 +205,7 @@ test('Responsive: a dialog on a wide screen', async ({ page }) => {
   await page.goto(demo('responsive'));
   await page.getByRole('button', { name: 'Edit profile' }).click();
   await expect(page.locator('[scDialog]')).toBeVisible();
-  await expect(page.locator('[scDrawerNext]')).toHaveCount(0);
+  await expect(page.locator('[scDrawer]')).toHaveCount(0);
 });
 
 test('RTL: inline-start is the right; its text right to left', async ({

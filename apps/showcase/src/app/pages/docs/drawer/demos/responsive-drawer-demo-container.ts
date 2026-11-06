@@ -1,4 +1,24 @@
-import { DOCUMENT } from '@angular/common';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { ResponsiveDrawerDemo } from './responsive-drawer-demo';
+
+@Component({
+  selector: 'app-responsive-drawer-demo-container',
+  imports: [DemoContainer, ResponsiveDrawerDemo],
+  template: `
+    <app-demo-container
+      title="Responsive"
+      demoUrl="/demos/drawer/responsive-drawer-demo"
+      [code]="code"
+    >
+      <app-responsive-drawer-demo />
+    </app-demo-container>
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class ResponsiveDrawerDemoContainer {
+  readonly code = `import { DOCUMENT } from '@angular/common';
 import {
   Component,
   DestroyRef,
@@ -16,16 +36,16 @@ import {
   ScDialogProvider,
   ScDialogTitle,
   ScDialogTrigger,
-  ScDrawerNext,
-  ScDrawerNextClose,
-  ScDrawerNextDescription,
-  ScDrawerNextFooter,
-  ScDrawerNextHandle,
-  ScDrawerNextHeader,
-  ScDrawerNextPortal,
-  ScDrawerNextProvider,
-  ScDrawerNextTitle,
-  ScDrawerNextTrigger,
+  ScDrawer,
+  ScDrawerClose,
+  ScDrawerDescription,
+  ScDrawerFooter,
+  ScDrawerHandle,
+  ScDrawerHeader,
+  ScDrawerPortal,
+  ScDrawerProvider,
+  ScDrawerTitle,
+  ScDrawerTrigger,
   ScField,
   ScFieldGroup,
   ScInput,
@@ -35,7 +55,7 @@ import {
 
 /** A dialog on wide screens, a drawer on phones: composed with a media query, both on one open signal. */
 @Component({
-  selector: 'app-responsive-drawer-next-demo',
+  selector: 'app-responsive-drawer-demo',
   imports: [
     ScButton,
     ScDialog,
@@ -46,23 +66,23 @@ import {
     ScDialogProvider,
     ScDialogTitle,
     ScDialogTrigger,
-    ScDrawerNext,
-    ScDrawerNextClose,
-    ScDrawerNextDescription,
-    ScDrawerNextFooter,
-    ScDrawerNextHandle,
-    ScDrawerNextHeader,
-    ScDrawerNextPortal,
-    ScDrawerNextProvider,
-    ScDrawerNextTitle,
-    ScDrawerNextTrigger,
+    ScDrawer,
+    ScDrawerClose,
+    ScDrawerDescription,
+    ScDrawerFooter,
+    ScDrawerHandle,
+    ScDrawerHeader,
+    ScDrawerPortal,
+    ScDrawerProvider,
+    ScDrawerTitle,
+    ScDrawerTrigger,
     ScField,
     ScFieldGroup,
     ScInput,
     ScLabel,
     ScSelectOnFocus,
   ],
-  template: `
+  template: \`
     @if (desktop()) {
       <div scDialogProvider [(open)]="open">
         <button scButton scDialogTrigger variant="outline">Edit profile</button>
@@ -97,16 +117,14 @@ import {
         </ng-template>
       </div>
     } @else {
-      <div scDrawerNextProvider [(open)]="open">
-        <button scButton scDrawerNextTrigger variant="outline">
-          Edit profile
-        </button>
-        <ng-template scDrawerNextPortal>
-          <div scDrawerNext>
-            <div scDrawerNextHandle></div>
-            <div scDrawerNextHeader>
-              <h2 scDrawerNextTitle>Edit profile</h2>
-              <p scDrawerNextDescription>
+      <div scDrawerProvider [(open)]="open">
+        <button scButton scDrawerTrigger variant="outline">Edit profile</button>
+        <ng-template scDrawerPortal>
+          <div scDrawer>
+            <div scDrawerHandle></div>
+            <div scDrawerHeader>
+              <h2 scDrawerTitle>Edit profile</h2>
+              <p scDrawerDescription>
                 Make changes to your profile here. Click save when you&apos;re
                 done.
               </p>
@@ -126,19 +144,19 @@ import {
                 <input scInput value="@shadcn" />
               </div>
             </div>
-            <div scDrawerNextFooter>
+            <div scDrawerFooter>
               <button scButton (click)="open.set(false)">Save changes</button>
-              <button scDrawerNextClose>Cancel</button>
+              <button scDrawerClose>Cancel</button>
             </div>
           </div>
         </ng-template>
       </div>
     }
-  `,
+  \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ResponsiveDrawerNextDemo {
+export class ResponsiveDrawerDemo {
   protected readonly open = signal(false);
   protected readonly desktop = signal(false);
 
@@ -154,4 +172,5 @@ export class ResponsiveDrawerNextDemo {
       query.removeEventListener('change', change),
     );
   }
+}`;
 }

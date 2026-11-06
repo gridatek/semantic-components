@@ -2,22 +2,20 @@ import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '../../utils';
 import { ScDrawerProvider } from './drawer-provider';
 
+/** Opens the drawer, on any button: behaviour only, the look is the button's. */
 @Directive({
   selector: 'button[scDrawerTrigger]',
   host: {
-    type: 'button',
-    '[class]': 'class()',
+    '[attr.aria-haspopup]': '"dialog"',
     '[attr.aria-expanded]': 'drawer.open()',
-    '(click)': 'openDrawer()',
+    '[attr.aria-controls]': 'drawer.open() ? drawer.id : null',
+    '[class]': 'class()',
+    '(click)': 'drawer.open.set(!drawer.open())',
   },
 })
 export class ScDrawerTrigger {
-  readonly drawer = inject(ScDrawerProvider);
+  protected readonly drawer = inject(ScDrawerProvider);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => cn('', this.classInput()));
-
-  openDrawer(): void {
-    this.drawer.open.set(true);
-  }
+  protected readonly class = computed(() => cn(this.classInput()));
 }

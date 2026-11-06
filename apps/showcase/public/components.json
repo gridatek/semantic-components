@@ -338,14 +338,6 @@
   {
     "name": "Drawer",
     "path": "drawer",
-    "description": "A touch-friendly drawer that slides from the bottom.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Overlay"
-  },
-  {
-    "name": "Drawer Next",
-    "path": "drawer-next",
     "description": "A panel at the edge of the screen that a swipe dismisses, with snap points and stacking — in the look of the app's preset.",
     "status": "Experimental",
     "library": "ui",

@@ -576,6 +576,25 @@ Rich content beside its trigger (`div[scPopoverProvider]`; rewritten and switche
 - **Kept** `origin` (an input group as anchor: the date pickers), `[(open)]`, side, align, offset — the 31 uses switched unchanged.
 - **Not** detached triggers, handles, payloads, Viewport, Backdrop, an Arrow (shadcn draws none).
 
+## Drawer
+
+A panel at the edge of the screen that a swipe dismisses (`div[scDrawerProvider]`; rewritten and switched 2026-11-06): shadcn's Drawer, Base UI's Drawer. A shadcn component, so no web research: shadcn's reference app and its examples, Base UI's Drawer docs.
+
+| Library                                                                                       | What to read                                                                                                                                                                              |
+| --------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| shadcn Drawer (`shadcn-reference/presets/*/drawer.tsx`, `apps/v4/examples/base/drawer-*.tsx`) | The panel's look by swipe direction, the swipe handle's bar, header, footer, title, description per style; Demo, Sides, Swipe handle, Snap points, Nested, Non-modal, Dialog (responsive) |
+| Base UI Drawer (`@base-ui/react/docs`)                                                        | `swipeDirection`, `snapPoints` / `snapPoint`, `modal` (`true`, `'trap-focus'`, `false`), `disablePointerDismissal`, nested drawers, `data-swipe-ignore`                                   |
+
+**Taken:**
+
+- **Base UI's API**: `swipeDirection` (physical, down by default) plus our `inline-start` / `inline-end`; `snapPoints` (fractions of the screen or pixels) and `[(snapPoint)]`; `modal`; `disablePointerDismissal`; `data-swipe-ignore`.
+- **Mechanics in the part, look in the preset**: the `drawer` preset key keeps colours, corners and borders by `data-swipe-direction`, an inset and the handle's bar; the part sets the panel's transform while dragged — Base UI's CSS variables (`--drawer-swipe-movement-*`, `--stack-*`) aren't recreated.
+- **Swiping** (the user's "ok", 2026-11-06): a mouse by the handle or the panel's edges (text stays selectable), a finger or a pen from anywhere but a field; it closes past half its size or on a flick, otherwise settles back or rests at the nearest snap point.
+- **A simple stack** (the user's choice): the drawer behind scales to 95% and dims; Base UI's peek and height matching aren't copied.
+- **The handle on a button** moves to the next snap point: snap points reachable from the keyboard.
+- **Responsive as composition** (the user's choice): a Dialog on wide screens, a Drawer on phones, in the demo — no responsive mode in the library.
+- **Angular's animations** (`animate.enter` / `animate.leave`, tw-animate's `slide-in-from-*` / `slide-out-to-*`); a swipe's leave starts where it was let go.
+
 ## Sheet
 
 A dialog at the edge of the screen (`div[scSheetProvider]`; rewritten and switched 2026-11-06): shadcn's Sheet, Base UI's Dialog. A shadcn component, so no web research: shadcn's reference app and its 4 examples, Base UI's Dialog docs.
