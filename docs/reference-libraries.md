@@ -545,6 +545,18 @@ Something loading (`svg[scSpinner]`; restyled 2026-11-05): shadcn's Spinner. A s
 - **No preset key**: `size-4 animate-spin` in every style.
 - **The examples**; Input group's textarea stays enabled (a disabled group dims its words below 4.5:1 — docs/todo.md).
 
+## Button: disabled yet reachable
+
+A disabled button that keeps its focus and hover — so a tooltip can say why (2026-11-06, for Tooltip): `scButton`'s `softDisabled`, with `disabled`. Checked in each library's source or docs.
+
+| Library          | Name                                                               | What it does                                                                                                                         |
+| ---------------- | ------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
+| Angular Aria     | `softDisabled`                                                     | On its widgets (listbox, tabs, toolbar, accordion, tree, grid, menu): disabled items stay focusable; default `true`. No Button part. |
+| Base UI          | `focusableWhenDisabled` (Button)                                   | No native `disabled`, `aria-disabled`, focusable, not pressed.                                                                       |
+| Angular Material | `disabledInteractive` (MatButton; app-wide in `MAT_BUTTON_CONFIG`) | No native `disabled`, `aria-disabled`, focusable, takes events — its docs name tooltips; your own `aria-disabled` wins (an input).   |
+
+**Taken:** Angular Aria's name (the user, 2026-11-06), default `false`; Base UI's behaviour — we stop the click (capture phase, before your handlers), so you don't have to as with Material. The preset's `aria-disabled:pointer-events-none` is undone (`aria-disabled:pointer-events-auto aria-disabled:cursor-not-allowed`, replacing it) so the hover stays.
+
 ## Control Group
 
 An input or a select joined with its buttons (`div[scControlGroup]`): shadcn's Button Group, renamed for what it is for (the user, 2026-10-30: it is only useful when inputs or selects mix with buttons; buttons alone are on the Button page). A shadcn component, so no web research: Base UI and shadcn's reference app (2026-10-30).

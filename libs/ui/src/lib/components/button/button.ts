@@ -63,7 +63,7 @@ export class ScButton {
       // The preset's aria-disabled blocks the pointer: a soft-disabled
       // button keeps its hover (its tooltip).
       this.disabled() && this.softDisabled()
-        ? 'pointer-events-auto cursor-not-allowed'
+        ? 'aria-disabled:pointer-events-auto aria-disabled:cursor-not-allowed'
         : '',
       this.classInput(),
     ),
