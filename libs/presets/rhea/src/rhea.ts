@@ -34,6 +34,7 @@ import { messageScrollerContent } from './message-scroller';
 import { pagination } from './pagination';
 import { popover } from './popover';
 import { previewCard } from './preview-card';
+import { progress } from './progress';
 import { questionnaire } from './questionnaire';
 import { resizable } from './resizable';
 import { scrollArea } from './scroll-area';
@@ -81,6 +82,7 @@ export const rhea: ScPreset = {
   pagination,
   popover,
   previewCard,
+  progress,
   questionnaire,
   resizable,
   scrollArea,

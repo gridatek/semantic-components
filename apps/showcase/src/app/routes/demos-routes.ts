@@ -3954,6 +3954,20 @@ export const demosRoutes: Route[] = [
     path: 'demos/progress',
     children: [
       {
+        path: 'progress-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/progress/demos/progress-usage-demo').then(
+            (m) => m.ProgressUsageDemo,
+          ),
+      },
+      {
+        path: 'controlled-progress-demo',
+        loadComponent: () =>
+          import('../pages/docs/progress/demos/controlled-progress-demo').then(
+            (m) => m.ControlledProgressDemo,
+          ),
+      },
+      {
         path: 'basic-progress-demo',
         loadComponent: () =>
           import('../pages/docs/progress/demos/basic-progress-demo').then(

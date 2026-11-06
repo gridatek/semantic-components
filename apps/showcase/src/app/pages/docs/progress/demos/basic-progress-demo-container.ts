@@ -7,7 +7,7 @@ import { BasicProgressDemo } from './basic-progress-demo';
   imports: [DemoContainer, BasicProgressDemo],
   template: `
     <app-demo-container
-      title="Bar"
+      title="Label"
       demoUrl="/demos/progress/basic-progress-demo"
       [code]="code"
     >

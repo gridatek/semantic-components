@@ -363,6 +363,15 @@ export interface ScResizableStyles {
   grip: string;
 }
 
+/** A progress bar's parts that change from style to style. */
+export interface ScProgressStyles {
+  /** The bar's track: its height, corners and color. */
+  track: string;
+  label: string;
+  /** The value as text. */
+  value: string;
+}
+
 /** A preset: the components' classes in one of shadcn's styles. */
 export interface ScPreset {
   accordion: ScAccordionStyles;
@@ -414,6 +423,7 @@ export interface ScPreset {
   pagination: ScPaginationStyles;
   popover: ScPopoverStyles;
   previewCard: ScPreviewCardStyles;
+  progress: ScProgressStyles;
   questionnaire: ScQuestionnaireStyles;
   resizable: ScResizableStyles;
   scrollArea: ScScrollAreaStyles;

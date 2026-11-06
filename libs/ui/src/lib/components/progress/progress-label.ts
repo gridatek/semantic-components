@@ -1,5 +1,6 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
 import { Directive, computed, effect, inject, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 import { ScProgress } from './progress';
 
@@ -13,13 +14,14 @@ import { ScProgress } from './progress';
   },
 })
 export class ScProgressLabel {
+  private readonly styles = injectPreset().progress;
   private readonly progress = inject(ScProgress);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly id = input(inject(_IdGenerator).getId('sc-progress-label-'));
 
   protected readonly class = computed(() =>
-    cn('text-sm font-medium', this.classInput()),
+    cn(this.styles.label, this.classInput()),
   );
 
   constructor() {

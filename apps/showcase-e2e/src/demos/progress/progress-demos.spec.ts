@@ -164,3 +164,21 @@ test('Download: with motion reduced, the arc to the value', async ({
   // The arc follows the value (allowing for one more chunk in between).
   expect(Math.abs(100 - offset - now)).toBeLessThanOrEqual(12);
 });
+
+test('Usage: further along a moment after it appears', async ({ page }) => {
+  await page.goto('/demos/progress/progress-usage-demo');
+  const bar = bars(page);
+  await expect(bar).toHaveAccessibleName('Loading');
+  await expect(bar).toHaveAttribute('aria-valuenow', '66');
+  await expect.poll(() => filled(page)).toBe(66);
+});
+
+test('Controlled: its value from a slider', async ({ page }) => {
+  await page.goto(demo('controlled'));
+  const bar = bars(page);
+  await expect(bar).toHaveAttribute('aria-valuenow', '50');
+  await page.getByRole('slider').focus();
+  await page.keyboard.press('End');
+  await expect(bar).toHaveAttribute('aria-valuenow', '100');
+  await expect.poll(() => filled(page)).toBe(100);
+});
