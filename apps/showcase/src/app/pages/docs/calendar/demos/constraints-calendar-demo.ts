@@ -5,6 +5,7 @@ import {
   ScCalendarNext,
   ScCalendarPrevious,
   type ScCalendarValue,
+  ScFrame,
 } from '@semantic-components/ui';
 import {
   SiChevronLeftIcon,
@@ -15,6 +16,7 @@ import {
 @Component({
   selector: 'app-constraints-calendar-demo',
   imports: [
+    ScFrame,
     ScCalendar,
     ScCalendarHeader,
     ScCalendarPrevious,
@@ -31,7 +33,7 @@ import {
       [maxDate]="max"
       [unavailable]="weekend"
       [(value)]="date"
-      class="rounded-lg border"
+      scFrame
     >
       <div scCalendarHeader>
         <button scCalendarPrevious>

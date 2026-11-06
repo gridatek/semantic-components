@@ -135,10 +135,10 @@ export class ScCalendarMonths {
   protected cellClass(month: Temporal.PlainYearMonth): string {
     const picked = this.isFocused(month);
     return cn(
-      'flex h-12 w-[5.5rem] cursor-pointer items-center justify-center rounded-md text-sm outline-none select-none',
-      'hover:bg-accent hover:text-accent-foreground',
+      'flex h-[calc(var(--cell-size)*1.5)] w-[calc(var(--cell-size)*7/3)] cursor-pointer items-center justify-center rounded-(--cell-radius) text-sm outline-none select-none',
+      'hover:bg-muted hover:text-foreground',
       'focus-visible:ring-ring/50 focus-visible:ring-3',
-      this.isCurrent(month) && !picked && 'bg-accent text-accent-foreground',
+      this.isCurrent(month) && !picked && 'bg-muted text-foreground',
       picked &&
         'bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground',
       this.isOut(month) &&

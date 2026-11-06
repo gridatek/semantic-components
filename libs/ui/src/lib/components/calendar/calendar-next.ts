@@ -18,13 +18,13 @@ export class ScCalendarNext {
   private readonly calendar = inject(ScCalendar);
 
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly variant = input<ScButtonVariants['variant']>('outline');
+  readonly variant = input<ScButtonVariants['variant']>('ghost');
   readonly size = input<ScButtonVariants['size']>('icon-sm');
 
   protected readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
-      'absolute end-1',
+      'absolute end-0 size-(--cell-size) p-0 select-none',
       // Its arrow points the reading way.
       'rtl:[&>svg]:rotate-180',
       this.classInput(),

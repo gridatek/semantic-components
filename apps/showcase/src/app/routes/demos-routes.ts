@@ -750,6 +750,69 @@ export const demosRoutes: Route[] = [
             (m) => m.OutsideCalendarDemo,
           ),
       },
+      {
+        path: 'calendar-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/calendar/demos/calendar-usage-demo').then(
+            (m) => m.CalendarUsageDemo,
+          ),
+      },
+      {
+        path: 'basic-calendar-demo',
+        loadComponent: () =>
+          import('../pages/docs/calendar/demos/basic-calendar-demo').then(
+            (m) => m.BasicCalendarDemo,
+          ),
+      },
+      {
+        path: 'booked-calendar-demo',
+        loadComponent: () =>
+          import('../pages/docs/calendar/demos/booked-calendar-demo').then(
+            (m) => m.BookedCalendarDemo,
+          ),
+      },
+      {
+        path: 'months-years-calendar-demo',
+        loadComponent: () =>
+          import('../pages/docs/calendar/demos/months-years-calendar-demo').then(
+            (m) => m.MonthsYearsCalendarDemo,
+          ),
+      },
+      {
+        path: 'custom-days-calendar-demo',
+        loadComponent: () =>
+          import('../pages/docs/calendar/demos/custom-days-calendar-demo').then(
+            (m) => m.CustomDaysCalendarDemo,
+          ),
+      },
+      {
+        path: 'presets-calendar-demo',
+        loadComponent: () =>
+          import('../pages/docs/calendar/demos/presets-calendar-demo').then(
+            (m) => m.PresetsCalendarDemo,
+          ),
+      },
+      {
+        path: 'time-calendar-demo',
+        loadComponent: () =>
+          import('../pages/docs/calendar/demos/time-calendar-demo').then(
+            (m) => m.TimeCalendarDemo,
+          ),
+      },
+      {
+        path: 'week-numbers-calendar-demo',
+        loadComponent: () =>
+          import('../pages/docs/calendar/demos/week-numbers-calendar-demo').then(
+            (m) => m.WeekNumbersCalendarDemo,
+          ),
+      },
+      {
+        path: 'rtl-calendar-demo',
+        loadComponent: () =>
+          import('../pages/docs/calendar/demos/rtl-calendar-demo').then(
+            (m) => m.RtlCalendarDemo,
+          ),
+      },
     ],
   },
   {

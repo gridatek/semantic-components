@@ -34,6 +34,9 @@ export class ScCalendarHeader {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('relative flex items-center justify-center pt-1', this.classInput()),
+    cn(
+      'relative flex h-(--cell-size) items-center justify-center',
+      this.classInput(),
+    ),
   );
 }

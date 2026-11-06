@@ -11,6 +11,8 @@ import { ScPopoverProvider } from './popover-provider';
 @Directive({
   selector: 'div[scPopover]',
   host: {
+    // Read by the parts inside that blend in (a calendar: no background).
+    'data-slot': 'popover',
     role: 'dialog',
     '[id]': 'popover.id',
     '[attr.aria-labelledby]': 'popover.titleId()',

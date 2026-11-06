@@ -25,6 +25,7 @@ import {
   ScCalendarNext,
   ScCalendarPrevious,
   type ScCalendarValue,
+  ScFrame,
 } from '@semantic-components/ui';
 import {
   SiChevronLeftIcon,
@@ -35,6 +36,7 @@ import {
 @Component({
   selector: 'app-locale-calendar-demo',
   imports: [
+    ScFrame,
     ScCalendar,
     ScCalendarHeader,
     ScCalendarPrevious,
@@ -50,7 +52,7 @@ import {
       locale="fr-FR"
       showWeekNumbers
       [(value)]="date"
-      class="rounded-lg border"
+      scFrame
     >
       <div scCalendarHeader>
         <button scCalendarPrevious>

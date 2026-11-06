@@ -531,6 +531,14 @@ An empty state (`div[scEmpty]`; restyled 2026-11-05): shadcn's Empty. A shadcn c
 - **The title on a heading** (`h2`–`h6`) as well as a `div`: shadcn's is a `div`; a heading can be found by heading.
 - **The examples**; links that look like buttons are `a[scLink]` (shadcn: `Button render={<a />}`); Card is inside a real Card.
 
+## Calendar: restyled
+
+Restyled 2026-11-06 (the parts stay): shadcn's Calendar (react-day-picker) in each style, and its examples.
+
+- **The `calendar` preset key**: the root — padding, `--cell-size` (6 to 8 spacing units) and `--cell-radius` (`radius-md`, `4xl` in maia and luma, `2xl` rhea, 0 sera, none in lyra) — from each style's `calendar.tsx`; the cells, the weekdays, the month and year views (as wide as a week) and the arrows (ghost, a cell square) take them. Today, hover and the range's middle in `muted`, as shadcn's.
+- **No background in a card's content or a popover**: `data-slot="card-content"` and `data-slot="popover"` added for it (docs/data-slot-pattern.md).
+- **shadcn's examples added**: Demo (the Usage), Basic, Booked dates (`unavailable`), Custom days (a price, bigger cells), Presets and Time (composed in a Card), Week numbers, RTL. Its Caption (month and year dropdowns) is our heading's zoom instead — "Months and years", `startView="month"` (the user, 2026-11-06: dropdowns are hard to use). Its Hijri example is left for later (other calendar systems: docs/todo.md).
+
 ## Progress: restyled
 
 Restyled 2026-11-06 (the parts are the 2026-10-29 rewrite's): shadcn's Progress in each style.

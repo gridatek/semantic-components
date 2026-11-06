@@ -5,6 +5,8 @@ import { cn } from '../../utils';
 @Directive({
   selector: 'div[scCardContent]',
   host: {
+    // Read by the parts inside that blend in (a calendar: no background).
+    'data-slot': 'card-content',
     '[class]': 'class()',
   },
 })

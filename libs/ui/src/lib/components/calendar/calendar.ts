@@ -16,6 +16,7 @@ import {
   signal,
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 import { ScCalendarDay } from './calendar-day';
 import { ScCalendarMonth } from './calendar-month';
@@ -85,6 +86,7 @@ export type ScCalendarValue =
   encapsulation: ViewEncapsulation.None,
 })
 export class ScCalendar implements FormValueControl<ScCalendarValue> {
+  private readonly styles = injectPreset().calendar;
   private readonly host =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
   private readonly injector = inject(Injector);
@@ -206,7 +208,8 @@ export class ScCalendar implements FormValueControl<ScCalendarValue> {
 
   protected readonly class = computed(() =>
     cn(
-      'bg-background in-data-[slot=popover]:bg-transparent flex w-fit flex-col gap-4 p-3',
+      'group/calendar flex w-fit flex-col gap-4',
+      this.styles,
       this.disabled() && 'pointer-events-none opacity-50',
       this.classInput(),
     ),

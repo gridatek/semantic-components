@@ -25,6 +25,7 @@ import {
   ScCalendarNext,
   ScCalendarPrevious,
   type ScCalendarValue,
+  ScFrame,
 } from '@semantic-components/ui';
 import {
   SiChevronLeftIcon,
@@ -35,6 +36,7 @@ import {
 @Component({
   selector: 'app-outside-calendar-demo',
   imports: [
+    ScFrame,
     ScCalendar,
     ScCalendarHeader,
     ScCalendarPrevious,
@@ -50,7 +52,7 @@ import {
       [showOutsideDays]="false"
       fixedWeeks
       [(value)]="date"
-      class="rounded-lg border"
+      scFrame
     >
       <div scCalendarHeader>
         <button scCalendarPrevious>

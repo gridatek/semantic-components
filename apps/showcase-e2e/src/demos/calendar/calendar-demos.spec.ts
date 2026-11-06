@@ -225,3 +225,68 @@ test('Outside days: none shown; always six weeks', async ({ page }) => {
   await expect(day(page, '2026-01-31')).toHaveCount(0);
   await expect(page.getByRole('grid').locator('tbody tr')).toHaveCount(6);
 });
+
+test.describe('shadcn’s examples', () => {
+  test('Usage: the picked day shown and marked', async ({ page }) => {
+    await page.goto('/demos/calendar/calendar-usage-demo');
+    await expect(day(page, '2026-10-14')).toHaveAttribute(
+      'aria-selected',
+      'true',
+    );
+  });
+
+  test('Booked dates: 15 days from January 12 can’t be picked', async ({
+    page,
+  }) => {
+    await page.goto(demo('booked'));
+    await expect(day(page, '2026-01-12')).toHaveAttribute(
+      'aria-disabled',
+      'true',
+    );
+    await expect(day(page, '2026-01-26')).toHaveAttribute(
+      'aria-disabled',
+      'true',
+    );
+    await expect(day(page, '2026-01-27')).not.toHaveAttribute('aria-disabled');
+  });
+
+  test('Months and years: it opens on the months', async ({ page }) => {
+    await page.goto(demo('months-years'));
+    await expect(heading(page)).toHaveText('2026');
+  });
+
+  test('Custom days: a price under each day of the month', async ({ page }) => {
+    await page.goto(demo('custom-days'));
+    await expect(day(page, '2026-12-12')).toContainText('$120');
+    await expect(day(page, '2026-12-14')).toContainText('$100');
+  });
+
+  test('Presets: a button picks a day from today, and shows its month', async ({
+    page,
+  }) => {
+    await page.goto(demo('presets'));
+    await page.getByRole('button', { name: 'In 2 weeks' }).click();
+    await expect(day(page, '2026-11-05')).toHaveAttribute(
+      'aria-selected',
+      'true',
+    );
+  });
+
+  test('Time: the day, and two time fields', async ({ page }) => {
+    await page.goto(demo('time'));
+    await expect(page.getByLabel('Start time')).toHaveValue('10:30:00');
+    await expect(page.getByLabel('End time')).toHaveValue('12:30:00');
+  });
+
+  test('Week numbers: each week’s number before it', async ({ page }) => {
+    await page.goto(demo('week-numbers'));
+    await expect(page.getByRole('rowheader').first()).toHaveText(/\d+/);
+  });
+
+  test('RTL: in Arabic, from the right', async ({ page }) => {
+    await page.goto(demo('rtl'));
+    const grid = page.getByRole('grid').first();
+    await expect(grid).toHaveAccessibleName(/2026|٢٠٢٦/);
+    await expect(page.locator('[scCalendar]')).toHaveCSS('direction', 'rtl');
+  });
+});

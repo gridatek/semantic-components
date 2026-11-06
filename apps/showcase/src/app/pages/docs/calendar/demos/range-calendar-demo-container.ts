@@ -26,6 +26,7 @@ import {
   ScCalendarPrevious,
   type ScCalendarRange,
   type ScCalendarValue,
+  ScFrame,
 } from '@semantic-components/ui';
 import {
   SiChevronLeftIcon,
@@ -36,6 +37,7 @@ import {
 @Component({
   selector: 'app-range-calendar-demo',
   imports: [
+    ScFrame,
     ScCalendar,
     ScCalendarHeader,
     ScCalendarPrevious,
@@ -51,7 +53,7 @@ import {
       mode="range"
       [numberOfMonths]="2"
       [(value)]="stay"
-      class="rounded-lg border"
+      scFrame
     >
       <div scCalendarHeader>
         <button scCalendarPrevious>

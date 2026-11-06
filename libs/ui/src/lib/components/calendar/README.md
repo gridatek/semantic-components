@@ -1,6 +1,6 @@
 # Calendar
 
-Days, months and years in the app's language — every word from `Intl`, the week as the locale has it — one day, several, or a range; reached by the keyboard across months; a `[formField]`.
+Days, months and years in the app's language — every word from `Intl`, the week as the locale has it — one day, several, or a range; reached by the keyboard across months; a `[formField]`. In the look of the app's preset (`calendar` key, shadcn's per style: the padding, the cells' size `--cell-size` and corners `--cell-radius`; no background in a card's content or a popover). Change the cells in your class: `class="[--cell-size:--spacing(10)]"`.
 
 ## Architecture
 

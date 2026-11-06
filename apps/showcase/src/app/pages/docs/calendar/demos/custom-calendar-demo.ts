@@ -6,6 +6,7 @@ import {
   ScCalendarNext,
   ScCalendarPrevious,
   type ScCalendarValue,
+  ScFrame,
 } from '@semantic-components/ui';
 import {
   SiChevronLeftIcon,
@@ -16,6 +17,7 @@ import {
 @Component({
   selector: 'app-custom-calendar-demo',
   imports: [
+    ScFrame,
     ScCalendar,
     ScCalendarHeader,
     ScCalendarPrevious,
@@ -30,7 +32,7 @@ import {
       #cal="scCalendar"
       aria-label="Events"
       [(value)]="date"
-      class="rounded-lg border"
+      scFrame
     >
       <div scCalendarHeader>
         <button scCalendarPrevious>

@@ -29,6 +29,7 @@ import {
   type ScCalendarValue,
   ScField,
   ScFieldErrors,
+  ScFrame,
 } from '@semantic-components/ui';
 import {
   SiChevronLeftIcon,
@@ -39,6 +40,7 @@ import {
 @Component({
   selector: 'app-form-calendar-demo',
   imports: [
+    ScFrame,
     FormField,
     FormRoot,
     ScCalendar,
@@ -60,7 +62,7 @@ import {
           #cal="scCalendar"
           aria-labelledby="booking-day"
           [formField]="bookingForm.day"
-          class="rounded-lg border"
+          scFrame
         >
           <div scCalendarHeader>
             <button scCalendarPrevious>

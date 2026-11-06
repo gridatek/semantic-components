@@ -391,6 +391,8 @@ export interface ScPreset {
     variant?: ScButtonVariant | null;
     size?: ScButtonSize | null;
   }) => string;
+  /** A calendar's root: its padding, --cell-size and --cell-radius. */
+  calendar: string;
   card: ScCardStyles;
   codeBlock: ScCodeBlockStyles;
   /** scFrame: a box's frame — the style's card radius, ring and shadow. */

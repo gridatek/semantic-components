@@ -5,6 +5,7 @@ import {
   ScCalendarNext,
   ScCalendarPrevious,
   type ScCalendarValue,
+  ScFrame,
 } from '@semantic-components/ui';
 import {
   SiChevronLeftIcon,
@@ -15,6 +16,7 @@ import {
 @Component({
   selector: 'app-multiple-calendar-demo',
   imports: [
+    ScFrame,
     ScCalendar,
     ScCalendarHeader,
     ScCalendarPrevious,
@@ -29,7 +31,7 @@ import {
       aria-label="Shifts"
       mode="multiple"
       [(value)]="days"
-      class="rounded-lg border"
+      scFrame
     >
       <div scCalendarHeader>
         <button scCalendarPrevious>

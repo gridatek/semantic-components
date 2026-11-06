@@ -7,7 +7,7 @@ import { SingleCalendarDemo } from './single-calendar-demo';
   imports: [DemoContainer, SingleCalendarDemo],
   template: `
     <app-demo-container
-      title="Single"
+      title="Today and clear"
       [code]="code"
       demoUrl="/demos/calendar/single-calendar-demo"
     >
@@ -28,6 +28,7 @@ import {
   ScCalendarPrevious,
   ScCalendarToday,
   type ScCalendarValue,
+  ScFrame,
 } from '@semantic-components/ui';
 import {
   SiChevronLeftIcon,
@@ -38,6 +39,7 @@ import {
 @Component({
   selector: 'app-single-calendar-demo',
   imports: [
+    ScFrame,
     ScCalendar,
     ScCalendarHeader,
     ScCalendarPrevious,
@@ -54,7 +56,7 @@ import {
       #cal="scCalendar"
       aria-label="Appointment"
       [(value)]="date"
-      class="rounded-lg border"
+      scFrame
     >
       <div scCalendarHeader>
         <button scCalendarPrevious>

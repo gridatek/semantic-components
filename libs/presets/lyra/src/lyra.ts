@@ -9,6 +9,7 @@ import { badge } from './badge';
 import { breadcrumb } from './breadcrumb';
 import { bubble } from './bubble';
 import { button } from './button';
+import { calendar } from './calendar';
 import { card } from './card';
 import { codeBlock } from './code-block';
 import { contextMenu } from './context-menu';
@@ -58,6 +59,7 @@ export const lyra: ScPreset = {
   badge,
   breadcrumb,
   button,
+  calendar,
   card,
   codeBlock,
   frame,

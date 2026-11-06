@@ -41,12 +41,12 @@ const MONDAY = Temporal.PlainDate.from('2024-01-01');
       <thead>
         <tr class="flex">
           @if (calendar.showWeekNumbers()) {
-            <td class="w-9"></td>
+            <td class="w-(--cell-size)"></td>
           }
           @for (name of weekdays(); track name.long) {
             <th
               scope="col"
-              class="text-muted-foreground w-9 text-[0.8rem] font-normal"
+              class="text-muted-foreground w-(--cell-size) text-[0.8rem] font-normal"
             >
               <span aria-hidden="true">{{ name.short }}</span>
               <span class="sr-only">{{ name.long }}</span>
@@ -60,14 +60,14 @@ const MONDAY = Temporal.PlainDate.from('2024-01-01');
             @if (calendar.showWeekNumbers()) {
               <th
                 scope="row"
-                class="text-muted-foreground grid w-9 place-items-center text-[0.8rem] font-normal"
+                class="text-muted-foreground grid w-(--cell-size) place-items-center text-[0.8rem] font-normal"
               >
                 {{ weekNumber(week) }}
               </th>
             }
             @for (day of week; track day.key) {
               @if (day.blank) {
-                <td class="size-9"></td>
+                <td class="size-(--cell-size)"></td>
               } @else {
                 <td
                   data-slot="calendar-cell"
@@ -197,17 +197,17 @@ export class ScCalendarMonth {
     const range = calendar.rangePart(day.date);
     const today = day.date.equals(calendar.today());
     return cn(
-      'relative flex size-9 cursor-pointer flex-col items-center justify-center rounded-md text-sm outline-none select-none',
-      'hover:bg-accent hover:text-accent-foreground',
+      'relative flex size-(--cell-size) cursor-pointer flex-col items-center justify-center rounded-(--cell-radius) text-sm outline-none select-none',
+      'hover:bg-muted hover:text-foreground',
       'focus-visible:ring-ring/50 focus-visible:ring-3',
-      today && !selected && 'bg-accent text-accent-foreground',
+      today && !selected && 'bg-muted text-foreground',
       selected &&
         range !== 'middle' &&
         'bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground',
-      range === 'middle' && 'bg-accent text-accent-foreground rounded-none',
+      range === 'middle' && 'bg-muted text-foreground rounded-none',
       range === 'start' && calendar.isSelected(day.date) && 'rounded-e-none',
       range === 'end' && 'rounded-s-none',
-      range === 'preview' && 'bg-accent/60 rounded-none',
+      range === 'preview' && 'bg-muted/60 rounded-none',
       day.outside && !selected && 'text-muted-foreground',
       calendar.isUnavailable(day.date) &&
         'text-muted-foreground pointer-events-none line-through opacity-50',
