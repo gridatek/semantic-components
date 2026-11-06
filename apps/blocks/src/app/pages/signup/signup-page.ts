@@ -149,7 +149,7 @@ import { Logo } from '../../components/logo/logo';
 
               <div class="relative">
                 <div class="absolute inset-0 flex items-center">
-                  <div scSeparator class="w-full"></div>
+                  <div scSeparator aria-hidden="true" class="w-full"></div>
                 </div>
                 <div class="relative flex justify-center text-xs uppercase">
                   <span

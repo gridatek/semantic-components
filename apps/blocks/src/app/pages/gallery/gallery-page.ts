@@ -111,7 +111,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
             >
               Button
             </h2>
-            <div scSeparator></div>
+            <div scSeparator aria-hidden="true"></div>
             <div class="flex flex-wrap items-center gap-3">
               <button scButton i18n="@@gallery.default">Default</button>
               <button scButton variant="secondary" i18n="@@gallery.secondary">
@@ -154,7 +154,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
             >
               Badge
             </h2>
-            <div scSeparator></div>
+            <div scSeparator aria-hidden="true"></div>
             <div class="flex flex-wrap items-center gap-3">
               <div scBadge i18n="@@gallery.default">Default</div>
               <div scBadge variant="secondary" i18n="@@gallery.secondary">
@@ -177,7 +177,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
             >
               Card
             </h2>
-            <div scSeparator></div>
+            <div scSeparator aria-hidden="true"></div>
             <div class="grid gap-6 md:grid-cols-2">
               <div scCard>
                 <div scCardHeader>
@@ -239,7 +239,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
             >
               Alert
             </h2>
-            <div scSeparator></div>
+            <div scSeparator aria-hidden="true"></div>
             <div class="space-y-4">
               <div scAlert>
                 <h4 scAlertTitle i18n="@@gallery.headsUp">Heads up!</h4>
@@ -264,7 +264,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
             >
               Avatar
             </h2>
-            <div scSeparator></div>
+            <div scSeparator aria-hidden="true"></div>
             <div class="flex items-center gap-4">
               <span scAvatar size="sm">
                 <span scAvatarFallback>SM</span>
@@ -294,7 +294,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
             >
               Input
             </h2>
-            <div scSeparator></div>
+            <div scSeparator aria-hidden="true"></div>
             <div class="grid max-w-sm gap-4">
               <div class="space-y-2">
                 <label scLabel for="email" i18n="@@gallery.email">Email</label>
@@ -329,7 +329,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
             >
               Textarea
             </h2>
-            <div scSeparator></div>
+            <div scSeparator aria-hidden="true"></div>
             <div class="max-w-sm space-y-2">
               <label scLabel for="message" i18n="@@gallery.yourMessage"
                 >Your message</label
@@ -351,7 +351,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
             >
               Checkbox
             </h2>
-            <div scSeparator></div>
+            <div scSeparator aria-hidden="true"></div>
             <div class="space-y-3">
               <div class="flex items-center gap-2">
                 <input type="checkbox" scCheckbox id="terms" />
@@ -376,7 +376,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
             >
               Switch
             </h2>
-            <div scSeparator></div>
+            <div scSeparator aria-hidden="true"></div>
             <div class="space-y-3">
               <div class="flex items-center gap-2">
                 <input type="checkbox" scSwitch id="airplane" />
@@ -404,7 +404,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
             >
               Slider
             </h2>
-            <div scSeparator></div>
+            <div scSeparator aria-hidden="true"></div>
             <div class="max-w-sm space-y-2">
               <label scLabel for="volume" i18n="@@gallery.volume">Volume</label>
               <input scSlider id="volume" />
@@ -419,7 +419,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
             >
               Progress
             </h2>
-            <div scSeparator></div>
+            <div scSeparator aria-hidden="true"></div>
             <div class="max-w-sm space-y-4">
               <div
                 scProgress
@@ -456,7 +456,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
             >
               Spinner
             </h2>
-            <div scSeparator></div>
+            <div scSeparator aria-hidden="true"></div>
             <div class="flex items-center gap-4">
               <svg
                 scSpinner
@@ -487,7 +487,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
             >
               Skeleton
             </h2>
-            <div scSeparator></div>
+            <div scSeparator aria-hidden="true"></div>
             <div class="flex items-center gap-4">
               <div scSkeleton class="size-12 rounded-full"></div>
               <div class="space-y-2">
@@ -500,7 +500,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
           <!-- Kbd -->
           <section class="space-y-4">
             <h2 class="text-2xl font-semibold tracking-tight">Kbd</h2>
-            <div scSeparator></div>
+            <div scSeparator aria-hidden="true"></div>
             <div class="flex items-center gap-2">
               <kbd scKbd>Ctrl</kbd>
               <span class="text-muted-foreground">+</span>
@@ -531,7 +531,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
             >
               Separator
             </h2>
-            <div scSeparator></div>
+            <div scSeparator aria-hidden="true"></div>
             <div class="space-y-1">
               <h4 class="text-sm leading-none font-medium">
                 Semantic Components
@@ -561,7 +561,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
             >
               Toggle
             </h2>
-            <div scSeparator></div>
+            <div scSeparator aria-hidden="true"></div>
             <div class="flex items-center gap-3">
               <button
                 scToggle
@@ -598,7 +598,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
             >
               Toggle Group
             </h2>
-            <div scSeparator></div>
+            <div scSeparator aria-hidden="true"></div>
             <div scToggleGroup type="single" variant="outline">
               <button
                 scToggle
@@ -635,7 +635,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
             >
               Tabs
             </h2>
-            <div scSeparator></div>
+            <div scSeparator aria-hidden="true"></div>
             <div scTabs class="max-w-md" value="overview">
               <div scTabsList class="grid w-full grid-cols-3">
                 <button scTabsTab value="overview" i18n="@@gallery.overview">
@@ -704,7 +704,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
             >
               Accordion
             </h2>
-            <div scSeparator></div>
+            <div scSeparator aria-hidden="true"></div>
             <div scAccordion [value]="['faq1']" class="max-w-lg">
               <div scAccordionItem value="faq1">
                 <h3 scAccordionHeader>

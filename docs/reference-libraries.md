@@ -531,6 +531,19 @@ An empty state (`div[scEmpty]`; restyled 2026-11-05): shadcn's Empty. A shadcn c
 - **The title on a heading** (`h2`–`h6`) as well as a `div`: shadcn's is a `div`; a heading can be found by heading.
 - **The examples**; links that look like buttons are `a[scLink]` (shadcn: `Button render={<a />}`); Card is inside a real Card.
 
+## Separator
+
+A line between sections (`div[scSeparator]`; restyled 2026-11-06): shadcn's Separator, Base UI's. A shadcn component, so no web research: shadcn's reference app and its 5 examples, Base UI's Separator docs.
+
+| Library                                                                                                | What to read                                                             |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| shadcn Separator (`shadcn-reference/presets/*/separator.tsx`, `apps/v4/examples/base/separator-*.tsx`) | The same in all 8 styles: no preset key; Demo, List, Menu, Vertical, RTL |
+| Base UI Separator (`@base-ui/react/docs`)                                                              | `orientation` only; always `role="separator"`                            |
+
+**Taken:**
+
+- **Base UI's semantics** (the user's "ok", 2026-11-06): always `role="separator"` and `aria-orientation`; the `decorative` input (Radix's, true by default here) is gone. A line that is only decoration gets `aria-hidden="true"` in your markup: the library's 32 uses were gone through — lines under headings, behind "Or continue with", and the docs header's were hidden; section breaks, toolbars and lists kept.
+
 ## Skeleton
 
 A placeholder while content loads (`div[scSkeleton]`; restyled 2026-11-06): shadcn's Skeleton. A shadcn component, so no web research: shadcn's reference app and its 7 examples.

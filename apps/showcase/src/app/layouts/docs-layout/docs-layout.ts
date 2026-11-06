@@ -350,7 +350,12 @@ import { ConfigService } from '../../services/config-service';
             <svg siPanelLeftIcon></svg>
             <span class="sr-only">Toggle Sidebar</span>
           </button>
-          <div scSeparator orientation="vertical" class="h-4 self-center"></div>
+          <div
+            scSeparator
+            orientation="vertical"
+            aria-hidden="true"
+            class="h-4 self-center"
+          ></div>
           <span class="text-muted-foreground text-sm font-medium">
             Documentation
           </span>

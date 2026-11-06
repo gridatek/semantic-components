@@ -1,63 +1,25 @@
 # Separator
 
-Visually separates content with a line.
-
-## Components
-
-- `ScSeparator` - A horizontal or vertical divider line applied as a directive on a `div`
+A line between sections, across or up and down — shadcn's Separator (Base UI's). The same in every style, so it has no preset key.
 
 ## Usage
 
 ```html
 <div scSeparator></div>
-```
-
-## Orientation
-
-```html
-<!-- Horizontal (default) -->
-<div scSeparator></div>
-
-<!-- Vertical -->
 <div scSeparator orientation="vertical"></div>
 ```
 
-## Decorative vs Semantic
+## Part
 
-By default the separator is decorative (`role="none"`, `aria-hidden="true"`). Set `decorative` to `false` for semantic separators that convey structure to assistive technologies.
+| Part          | Selector           | What it does                                                                                                           |
+| ------------- | ------------------ | ---------------------------------------------------------------------------------------------------------------------- |
+| `ScSeparator` | `div[scSeparator]` | `role="separator"`, `orientation` (`horizontal` — the default — or `vertical`), `aria-orientation`, `data-orientation` |
 
-```html
-<div scSeparator [decorative]="false"></div>
-```
+## Keyboard and screen readers
 
-## Examples
+- A separator: screen readers announce the break, as for an `<hr>`.
+- Only decoration — a line under a heading, behind "Or continue with" — hide it yourself: `<div scSeparator aria-hidden="true"></div>`.
 
-### Between content sections
+## Not Radix's
 
-```html
-<div>
-  <p>Section one</p>
-  <div scSeparator class="my-4"></div>
-  <p>Section two</p>
-</div>
-```
-
-### Vertical separator in a toolbar
-
-```html
-<div class="flex h-8 items-center gap-2">
-  <button>Cut</button>
-  <div scSeparator orientation="vertical"></div>
-  <button>Copy</button>
-  <div scSeparator orientation="vertical"></div>
-  <button>Paste</button>
-</div>
-```
-
-## Inputs
-
-| Input         | Type                         | Default        | Description                                           |
-| ------------- | ---------------------------- | -------------- | ----------------------------------------------------- |
-| `orientation` | `'horizontal' \| 'vertical'` | `'horizontal'` | Direction of the separator                            |
-| `decorative`  | `boolean`                    | `true`         | When `false`, exposes the separator to screen readers |
-| `class`       | `string`                     | `''`           | Additional CSS classes                                |
+- **No `decorative` input** (Base UI has none; the library's had one, true by default, until 2026-11-06): one way — `aria-hidden="true"` in your markup.

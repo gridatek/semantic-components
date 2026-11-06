@@ -4321,10 +4321,24 @@ export const demosRoutes: Route[] = [
     path: 'demos/separator',
     children: [
       {
-        path: 'basic-separator-demo',
+        path: 'separator-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/separator/demos/basic-separator-demo').then(
-            (m) => m.BasicSeparatorDemo,
+          import('../pages/docs/separator/demos/separator-usage-demo').then(
+            (m) => m.SeparatorUsageDemo,
+          ),
+      },
+      {
+        path: 'list-separator-demo',
+        loadComponent: () =>
+          import('../pages/docs/separator/demos/list-separator-demo').then(
+            (m) => m.ListSeparatorDemo,
+          ),
+      },
+      {
+        path: 'menu-separator-demo',
+        loadComponent: () =>
+          import('../pages/docs/separator/demos/menu-separator-demo').then(
+            (m) => m.MenuSeparatorDemo,
           ),
       },
       {
@@ -4335,10 +4349,10 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'card-separator-demo',
+        path: 'rtl-separator-demo',
         loadComponent: () =>
-          import('../pages/docs/separator/demos/card-separator-demo').then(
-            (m) => m.CardSeparatorDemo,
+          import('../pages/docs/separator/demos/rtl-separator-demo').then(
+            (m) => m.RtlSeparatorDemo,
           ),
       },
     ],

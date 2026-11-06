@@ -1,18 +1,17 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ScSeparator } from '@semantic-components/ui';
 
+/** orientation="vertical": a line up and down, as tall as its row. */
 @Component({
   selector: 'app-vertical-separator-demo',
   imports: [ScSeparator],
   template: `
-    <div class="flex h-5 items-center space-x-4 text-sm">
-      <div>Home</div>
+    <div class="flex h-5 items-center gap-4 text-sm">
+      <div>Blog</div>
       <div scSeparator orientation="vertical"></div>
-      <div>Products</div>
+      <div>Docs</div>
       <div scSeparator orientation="vertical"></div>
-      <div>About</div>
-      <div scSeparator orientation="vertical"></div>
-      <div>Contact</div>
+      <div>Source</div>
     </div>
   `,
   host: { class: 'flex w-full justify-center' },

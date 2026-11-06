@@ -129,7 +129,7 @@ import {
             >
               Login form
             </h2>
-            <div scSeparator></div>
+            <div scSeparator aria-hidden="true"></div>
             <div class="flex justify-center">
               <div scCard class="w-full max-w-sm">
                 <div scCardHeader class="text-center">
@@ -208,7 +208,7 @@ import {
             >
               Dialog
             </h2>
-            <div scSeparator></div>
+            <div scSeparator aria-hidden="true"></div>
             <div class="flex flex-wrap gap-3">
               <div scDialogProvider [(open)]="basicDialogOpen">
                 <button
@@ -380,7 +380,7 @@ import {
             >
               Kanban board
             </h2>
-            <div scSeparator></div>
+            <div scSeparator aria-hidden="true"></div>
             <div class="grid gap-6 md:grid-cols-3">
               <!-- Todo Column -->
               <div class="space-y-3">
@@ -572,7 +572,7 @@ import {
             >
               Analytics Dashboard
             </h2>
-            <div scSeparator></div>
+            <div scSeparator aria-hidden="true"></div>
 
             <!-- Metrics Cards -->
             <div class="grid gap-4 md:grid-cols-3">
@@ -747,7 +747,7 @@ import {
             >
               Artist Page
             </h2>
-            <div scSeparator></div>
+            <div scSeparator aria-hidden="true"></div>
             <div scCard>
               <div scCardContent class="space-y-6">
                 <!-- Artist Header -->
@@ -846,7 +846,7 @@ import {
             >
               Restaurant Menu
             </h2>
-            <div scSeparator></div>
+            <div scSeparator aria-hidden="true"></div>
             <div scCard>
               <div scCardHeader>
                 <div class="flex items-start justify-between">
@@ -985,7 +985,7 @@ import {
             >
               Activity
             </h2>
-            <div scSeparator></div>
+            <div scSeparator aria-hidden="true"></div>
             <div scCard>
               <div scCardHeader>
                 <h3 scCardTitle i18n="@@shadcn.activity.2">Activity</h3>
@@ -1235,7 +1235,7 @@ import {
             >
               Finance Dashboard
             </h2>
-            <div scSeparator></div>
+            <div scSeparator aria-hidden="true"></div>
 
             <!-- Net Worth -->
             <div scCard>
@@ -1439,7 +1439,7 @@ import {
             >
               Doctor Booking
             </h2>
-            <div scSeparator></div>
+            <div scSeparator aria-hidden="true"></div>
             <div class="grid gap-6 md:grid-cols-2">
               <!-- Doctor Info -->
               <div scCard>
