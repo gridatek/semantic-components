@@ -1,232 +1,54 @@
-# ScSheet Components
+# Sheet
 
-A set of Angular components for creating accessible side panels (drawers) with shadcn/ui styling.
-
-## Architecture
-
-The components follow a dependency injection (DI) pattern where child components inject the parent `ScSheetProvider` to access shared state. `ScSheetProvider` owns all overlay lifecycle logic (CDK overlay, backdrop, focus trap). The `ScSheetPortal` directive marks the lazy content template that gets portaled into the overlay.
-
-```
-ScSheetProvider (root wrapper - manages open state, side + overlay lifecycle)
-├── ScSheetTrigger (button that opens sheet)
-└── ng-template[scSheetPortal] (lazy content, portaled to CDK overlay)
-    └── ScSheet (dialog panel with slide animations)
-        ├── ScSheetClose (close button)
-        ├── ScSheetHeader
-        │   ├── ScSheetTitle
-        │   └── ScSheetDescription
-        ├── (user content)
-        └── ScSheetFooter
-```
-
-## Components
-
-| Component            | Selector                     | Description                                    |
-| -------------------- | ---------------------------- | ---------------------------------------------- |
-| `ScSheetProvider`    | `div[scSheetProvider]`       | Root wrapper, manages open state + overlay     |
-| `ScSheetTrigger`     | `button[scSheetTrigger]`     | Button that opens the sheet                    |
-| `ScSheetPortal`      | `ng-template[scSheetPortal]` | Directive marking lazy content for the overlay |
-| `ScSheet`            | `div[scSheet]`               | Dialog panel with slide animations             |
-| `ScSheetHeader`      | `div[scSheetHeader]`         | Header section container                       |
-| `ScSheetTitle`       | `h2[scSheetTitle]`           | Sheet title (aria-labelledby)                  |
-| `ScSheetDescription` | `p[scSheetDescription]`      | Sheet description (aria-describedby)           |
-| `ScSheetFooter`      | `div[scSheetFooter]`         | Footer section for actions                     |
-| `ScSheetClose`       | `button[scSheetClose]`       | Button that closes the sheet                   |
+A dialog at the edge of the screen, sliding in from its side — shadcn's Sheet (Base UI's Dialog) in the look of the app's preset (`sheet` key: shadcn's in each of the eight styles).
 
 ## Usage
 
-### Basic Sheet (Right Side)
-
 ```html
-<div scSheetProvider>
-  <button scSheetTrigger>Open Sheet</button>
+<div scSheetProvider side="right" [(open)]="open">
+  <button scButton scSheetTrigger variant="outline">Open</button>
   <ng-template scSheetPortal>
     <div scSheet>
+      <div scSheetHeader>
+        <h2 scSheetTitle>Edit profile</h2>
+        <p scSheetDescription>Make changes to your profile here.</p>
+      </div>
+      …
+      <div scSheetFooter>
+        <button scButton (click)="save()">Save changes</button>
+        <button scSheetClose variant="outline" size="default">Close</button>
+      </div>
       <button scSheetClose>
-        <svg><!-- X icon --></svg>
+        <svg siXIcon></svg>
         <span class="sr-only">Close</span>
       </button>
-      <div scSheetHeader>
-        <h2 scSheetTitle>Sheet Title</h2>
-        <p scSheetDescription>Sheet description goes here.</p>
-      </div>
-      <!-- Your content -->
-      <div scSheetFooter>
-        <button>Cancel</button>
-        <button>Save</button>
-      </div>
     </div>
   </ng-template>
 </div>
 ```
 
-### Different Sides
+## Parts
 
-```html
-<!-- Left side -->
-<div scSheetProvider side="left">
-  <button scSheetTrigger>Open Left</button>
-  <ng-template scSheetPortal>
-    <div scSheet>
-      <!-- content -->
-    </div>
-  </ng-template>
-</div>
+| Part                 | Selector                     | What it does                                                                                            |
+| -------------------- | ---------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `ScSheetProvider`    | `div[scSheetProvider]`       | `[(open)]`, `side` (`right`, `left`, `top`, `bottom`, `inline-start`, `inline-end`)                     |
+| `ScSheetTrigger`     | `button[scSheetTrigger]`     | Opens it, on any button (`aria-haspopup`, `aria-expanded`)                                              |
+| `ScSheetPortal`      | `ng-template[scSheetPortal]` | The content, rendered while open                                                                        |
+| `ScSheet`            | `div[scSheet]`               | The panel: `role="dialog"`, `aria-modal`, named and described, `data-side`; slides in and out           |
+| `ScSheetHeader`      | `div[scSheetHeader]`         | Its title and description                                                                               |
+| `ScSheetTitle`       | `h2[scSheetTitle]`           | Names it                                                                                                |
+| `ScSheetDescription` | `p[scSheetDescription]`      | Describes it                                                                                            |
+| `ScSheetFooter`      | `div[scSheetFooter]`         | Its actions, at the bottom                                                                              |
+| `ScSheetClose`       | `button[scSheetClose]`       | Closes it: the preset's button (ghost, icon-sm); straight in the panel, the panel puts it in its corner |
 
-<!-- Top side -->
-<div scSheetProvider side="top">
-  <button scSheetTrigger>Open Top</button>
-  <ng-template scSheetPortal>
-    <div scSheet>
-      <!-- content -->
-    </div>
-  </ng-template>
-</div>
+## Keyboard and screen readers
 
-<!-- Bottom side -->
-<div scSheetProvider side="bottom">
-  <button scSheetTrigger>Open Bottom</button>
-  <ng-template scSheetPortal>
-    <div scSheet>
-      <!-- content -->
-    </div>
-  </ng-template>
-</div>
-```
+- A modal dialog, named by its title and described by its description (when it has them).
+- Focus moves into it and stays there; closing gives it back to the trigger. Escape or a press on the backdrop closes it.
+- In a right-to-left page its text and its ✕ follow (`dir` and `lang` carried from where it was opened); `inline-start` is the right.
 
-### Controlled Sheet
+## Not shadcn's
 
-```typescript
-@Component({
-  template: `
-    <div scSheetProvider [(open)]="isOpen" side="right">
-      <button scSheetTrigger>Open</button>
-      <ng-template scSheetPortal>
-        <div scSheet>
-          <!-- content -->
-        </div>
-      </ng-template>
-    </div>
-  `,
-})
-export class MyComponent {
-  isOpen = signal(false);
-
-  openSheet() {
-    this.isOpen.set(true);
-  }
-
-  closeSheet() {
-    this.isOpen.set(false);
-  }
-}
-```
-
-### Navigation Sheet
-
-```html
-<div scSheetProvider side="left">
-  <button scSheetTrigger>Menu</button>
-  <ng-template scSheetPortal>
-    <div scSheet>
-      <button scSheetClose>X</button>
-      <div scSheetHeader>
-        <h2 scSheetTitle>Navigation</h2>
-      </div>
-      <nav class="flex flex-col gap-2">
-        <a href="#">Home</a>
-        <a href="#">Products</a>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
-      </nav>
-    </div>
-  </ng-template>
-</div>
-```
-
-## Keyboard Navigation
-
-| Key      | Action                |
-| -------- | --------------------- |
-| `Escape` | Close sheet           |
-| `Tab`    | Navigate within sheet |
-
-## Side Options
-
-| Side     | Description                    |
-| -------- | ------------------------------ |
-| `right`  | Slides in from right (default) |
-| `left`   | Slides in from left            |
-| `top`    | Slides down from top           |
-| `bottom` | Slides up from bottom          |
-
-## How It Works
-
-### State Management
-
-`ScSheetProvider` uses a `model` signal for the `open` state and an `input` for the `side`:
-
-```typescript
-readonly side = input<SheetSide>('right');
-readonly open = model<boolean>(false);
-```
-
-Child components inject `ScSheetProvider` to read or modify this state:
-
-```typescript
-// ScSheetTrigger
-openSheet(): void {
-  this.sheetProvider.open.set(true);
-}
-
-// ScSheetClose
-closeSheet(): void {
-  this.sheetProvider.open.set(false);
-}
-```
-
-### Overlay Management
-
-`ScSheetProvider` creates a CDK overlay and attaches/detaches the `scSheetPortal` template based on state:
-
-```typescript
-effect(() => {
-  if (this.open()) {
-    this.attachSheet();
-  } else {
-    this.detachSheet();
-  }
-});
-```
-
-The `scSheetPortal` directive marks the `ng-template` whose content is lazily instantiated into the overlay only when the sheet opens.
-
-### Slide Animations
-
-`ScSheet` animates with Angular's `animate.enter` / `animate.leave`: it fades and slides in from its `side` (with the backdrop behind it fading in) when it is shown, and back out when it goes — Angular removes it once that animation ends.
-
-## Accessibility
-
-- `role="dialog"` on `ScSheet`
-- `aria-modal="true"` for modal behavior
-- `aria-labelledby` linked to `ScSheetTitle`
-- `aria-describedby` linked to `ScSheetDescription`
-- `aria-haspopup="dialog"` on the trigger
-- `aria-expanded` reflects open state on trigger
-- Focus trapped within the sheet via `scFocusTrap`
-- Escape key closes the sheet (via CDK overlay keydown events)
-- Click outside (backdrop) closes the sheet (via CDK overlay backdrop click)
-
-## Customization
-
-All components accept a `class` input for custom styling:
-
-```html
-<div scSheet class="w-[400px]">
-  <!-- custom width -->
-</div>
-
-<div scSheetFooter class="flex-row-reverse">
-  <!-- reversed button order -->
-</div>
-```
+- **Angular's animations**: the panel slides and fades with `animate.enter` / `animate.leave` (tw-animate's `animate-in` / `animate-out`), the side's `slide-in-from-*-10` / `slide-out-to-*-10` — shadcn's 2.5rem slide, as our other overlays.
+- **Logical sides** (`inline-start`, `inline-end`), shared with Tooltip and Popover (`utils/overlay-positions`).
+- **The ✕ is yours** (`scSheetClose`), placed by the panel — shadcn's content draws it (`showCloseButton`).

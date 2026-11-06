@@ -23,7 +23,7 @@ const PRESETS: Record<string, ScPreset> = {
   rhea,
 };
 
-test.describe('Sheet Next in every preset', () => {
+test.describe('Sheet in every preset', () => {
   // A docs page and axe, twice: slow under load.
   test.slow();
 
@@ -37,7 +37,7 @@ test.describe('Sheet Next in every preset', () => {
       await context.addCookies([
         { name: 'sc-preset', value: preset, url: baseURL! },
       ]);
-      await page.goto('/demos/sheet-next/sheet-next-usage-demo');
+      await page.goto('/demos/sheet/sheet-usage-demo');
       await page.getByRole('button', { name: 'Open' }).click();
       for (const [target, wanted, what] of [
         [
@@ -45,10 +45,10 @@ test.describe('Sheet Next in every preset', () => {
           `${styles.sheet.content} ${styles.sheet.close}`,
           'sheet',
         ],
-        [page.locator('[scSheetNextHeader]'), styles.sheet.header, 'header'],
-        [page.locator('[scSheetNextTitle]'), styles.sheet.title, 'title'],
+        [page.locator('[scSheetHeader]'), styles.sheet.header, 'header'],
+        [page.locator('[scSheetTitle]'), styles.sheet.title, 'title'],
         [
-          page.locator('[scSheetNextDescription]'),
+          page.locator('[scSheetDescription]'),
           styles.sheet.description,
           'description',
         ],
@@ -65,7 +65,7 @@ test.describe('Sheet Next in every preset', () => {
           .toEqual([]);
       }
 
-      await page.goto('/docs/components/sheet-next');
+      await page.goto('/docs/components/sheet');
       await expectNoA11yViolations(page);
       await expectNoA11yViolations(page, { dark: true });
     });

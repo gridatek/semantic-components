@@ -6,20 +6,20 @@ import {
   ScInput,
   ScLabel,
   ScSelectOnFocus,
-  ScSheetNext,
-  ScSheetNextClose,
-  ScSheetNextDescription,
-  ScSheetNextFooter,
-  ScSheetNextHeader,
-  ScSheetNextPortal,
-  ScSheetNextProvider,
-  ScSheetNextTitle,
-  ScSheetNextTrigger,
+  ScSheet,
+  ScSheetClose,
+  ScSheetDescription,
+  ScSheetFooter,
+  ScSheetHeader,
+  ScSheetPortal,
+  ScSheetProvider,
+  ScSheetTitle,
+  ScSheetTrigger,
 } from '@semantic-components/ui';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
-  selector: 'app-sheet-next-usage-demo',
+  selector: 'app-sheet-usage-demo',
   imports: [
     ScButton,
     ScField,
@@ -27,25 +27,25 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
     ScInput,
     ScLabel,
     ScSelectOnFocus,
-    ScSheetNext,
-    ScSheetNextClose,
-    ScSheetNextDescription,
-    ScSheetNextFooter,
-    ScSheetNextHeader,
-    ScSheetNextPortal,
-    ScSheetNextProvider,
-    ScSheetNextTitle,
-    ScSheetNextTrigger,
+    ScSheet,
+    ScSheetClose,
+    ScSheetDescription,
+    ScSheetFooter,
+    ScSheetHeader,
+    ScSheetPortal,
+    ScSheetProvider,
+    ScSheetTitle,
+    ScSheetTrigger,
     SiXIcon,
   ],
   template: `
-    <div scSheetNextProvider [(open)]="open">
-      <button scButton scSheetNextTrigger variant="outline">Open</button>
-      <ng-template scSheetNextPortal>
-        <div scSheetNext>
-          <div scSheetNextHeader>
-            <h2 scSheetNextTitle>Edit profile</h2>
-            <p scSheetNextDescription>
+    <div scSheetProvider [(open)]="open">
+      <button scButton scSheetTrigger variant="outline">Open</button>
+      <ng-template scSheetPortal>
+        <div scSheet>
+          <div scSheetHeader>
+            <h2 scSheetTitle>Edit profile</h2>
+            <p scSheetDescription>
               Make changes to your profile here. Click save when you&apos;re
               done.
             </p>
@@ -65,15 +65,13 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
               <input scInput value="@peduarte" />
             </div>
           </div>
-          <div scSheetNextFooter>
+          <div scSheetFooter>
             <button scButton type="submit" (click)="open.set(false)">
               Save changes
             </button>
-            <button scSheetNextClose variant="outline" size="default">
-              Close
-            </button>
+            <button scSheetClose variant="outline" size="default">Close</button>
           </div>
-          <button scSheetNextClose>
+          <button scSheetClose>
             <svg siXIcon></svg>
             <span class="sr-only">Close</span>
           </button>
@@ -84,6 +82,6 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class SheetNextUsageDemo {
+export class SheetUsageDemo {
   protected readonly open = signal(false);
 }

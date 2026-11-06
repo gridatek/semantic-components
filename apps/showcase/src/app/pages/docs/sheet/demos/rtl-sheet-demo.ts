@@ -1,0 +1,67 @@
+import { Component, ViewEncapsulation } from '@angular/core';
+import {
+  ScButton,
+  ScSheet,
+  ScSheetClose,
+  ScSheetDescription,
+  ScSheetHeader,
+  ScSheetPortal,
+  ScSheetProvider,
+  ScSheetTitle,
+  ScSheetTrigger,
+} from '@semantic-components/ui';
+import { SiXIcon } from '@semantic-icons/lucide-icons';
+
+/** In a right-to-left page: its text and its ✕ follow; inline-start is the right. */
+@Component({
+  selector: 'app-rtl-sheet-demo',
+  imports: [
+    ScButton,
+    ScSheet,
+    ScSheetClose,
+    ScSheetDescription,
+    ScSheetHeader,
+    ScSheetPortal,
+    ScSheetProvider,
+    ScSheetTitle,
+    ScSheetTrigger,
+    SiXIcon,
+  ],
+  template: `
+    <div dir="rtl" lang="ar" class="flex flex-wrap gap-2">
+      <div scSheetProvider side="inline-start">
+        <button scButton scSheetTrigger variant="outline">البداية</button>
+        <ng-template scSheetPortal>
+          <div scSheet>
+            <div scSheetHeader>
+              <h2 scSheetTitle>تعديل الملف الشخصي</h2>
+              <p scSheetDescription>أجرِ تغييراتك هنا.</p>
+            </div>
+            <button scSheetClose>
+              <svg siXIcon></svg>
+              <span class="sr-only">Close</span>
+            </button>
+          </div>
+        </ng-template>
+      </div>
+      <div scSheetProvider side="inline-end">
+        <button scButton scSheetTrigger variant="outline">النهاية</button>
+        <ng-template scSheetPortal>
+          <div scSheet>
+            <div scSheetHeader>
+              <h2 scSheetTitle>تعديل الملف الشخصي</h2>
+              <p scSheetDescription>أجرِ تغييراتك هنا.</p>
+            </div>
+            <button scSheetClose>
+              <svg siXIcon></svg>
+              <span class="sr-only">Close</span>
+            </button>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  `,
+  host: { class: 'flex w-full justify-center' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class RtlSheetDemo {}

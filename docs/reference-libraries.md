@@ -576,6 +576,23 @@ Rich content beside its trigger (`div[scPopoverProvider]`; rewritten and switche
 - **Kept** `origin` (an input group as anchor: the date pickers), `[(open)]`, side, align, offset — the 31 uses switched unchanged.
 - **Not** detached triggers, handles, payloads, Viewport, Backdrop, an Arrow (shadcn draws none).
 
+## Sheet
+
+A dialog at the edge of the screen (`div[scSheetProvider]`; rewritten and switched 2026-11-06): shadcn's Sheet, Base UI's Dialog. A shadcn component, so no web research: shadcn's reference app and its 4 examples, Base UI's Dialog docs.
+
+| Library                                                                                    | What to read                                                                                                                               |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| shadcn Sheet (`shadcn-reference/presets/*/sheet.tsx`, `apps/v4/examples/base/sheet-*.tsx`) | The panel by side, its ✕'s place, header, footer, title, description per style; the backdrop as Dialog's; Demo, Side, No close button, RTL |
+| Base UI Dialog (`@base-ui/react/docs`)                                                     | Modal: focus trapped and returned, Escape, a press outside; named by its Title, described by its Description                               |
+
+**Taken:**
+
+- **Sheet keeps its own parts** (the user, 2026-11-06: not Dialog's parts with a sheet panel) and **its own `sheet` preset key** per style; the backdrop is the shared `backdrop` key (the same as Dialog's in every style).
+- **Angular's animations** (`animate.enter` / `animate.leave`, tw-animate): shadcn's starting and ending states become each side's `slide-in-from-*-10` / `slide-out-to-*-10` — the rule in .claude/CLAUDE.md (an `sc-leaving` class keeping shadcn's transitions was tried and dropped).
+- **The ✕ is yours** (`scSheetClose`, the preset's button), placed by the panel (`[&>[data-slot=sheet-close]]:…`); shadcn's content draws it (`showCloseButton`).
+- **Logical sides** (`inline-start`, `inline-end`), the helpers shared with Tooltip and Popover; `dir` and `lang` carried from where it opened (as Dialog).
+- **Title and description register their ids**: a sheet without a title (the Sidebar's on phones) isn't labelled by nothing.
+
 ## Tooltip
 
 A short label on hover or keyboard focus (`div[scTooltipProvider]`; rewritten and switched 2026-11-06): shadcn's Tooltip, Base UI's parts and behaviour. A shadcn component, so no web research: Base UI's docs (`@base-ui/react/docs`), shadcn's reference app and its 5 examples, the APG tooltip pattern.

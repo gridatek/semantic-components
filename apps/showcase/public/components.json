@@ -874,14 +874,6 @@
   {
     "name": "Sheet",
     "path": "sheet",
-    "description": "A panel that slides in from the edge of the screen.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Overlay"
-  },
-  {
-    "name": "Sheet Next",
-    "path": "sheet-next",
     "description": "A dialog at the edge of the screen, sliding in from its side — in the look of the app's preset.",
     "status": "Experimental",
     "library": "ui",

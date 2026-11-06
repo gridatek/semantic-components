@@ -4225,71 +4225,38 @@ export const demosRoutes: Route[] = [
     path: 'demos/sheet',
     children: [
       {
-        path: 'right-sheet-demo',
+        path: 'sheet-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/sheet/demos/right-sheet-demo').then(
-            (m) => m.RightSheetDemo,
+          import('../pages/docs/sheet/demos/sheet-usage-demo').then(
+            (m) => m.SheetUsageDemo,
           ),
       },
       {
-        path: 'left-sheet-demo',
+        path: 'side-sheet-demo',
         loadComponent: () =>
-          import('../pages/docs/sheet/demos/left-sheet-demo').then(
-            (m) => m.LeftSheetDemo,
+          import('../pages/docs/sheet/demos/side-sheet-demo').then(
+            (m) => m.SideSheetDemo,
           ),
       },
       {
-        path: 'top-sheet-demo',
+        path: 'inline-side-sheet-demo',
         loadComponent: () =>
-          import('../pages/docs/sheet/demos/top-sheet-demo').then(
-            (m) => m.TopSheetDemo,
+          import('../pages/docs/sheet/demos/inline-side-sheet-demo').then(
+            (m) => m.InlineSideSheetDemo,
           ),
       },
       {
-        path: 'bottom-sheet-demo',
+        path: 'no-close-button-sheet-demo',
         loadComponent: () =>
-          import('../pages/docs/sheet/demos/bottom-sheet-demo').then(
-            (m) => m.BottomSheetDemo,
-          ),
-      },
-    ],
-  },
-  {
-    path: 'demos/sheet-next',
-    children: [
-      {
-        path: 'sheet-next-usage-demo',
-        loadComponent: () =>
-          import('../pages/docs/sheet-next/demos/sheet-next-usage-demo').then(
-            (m) => m.SheetNextUsageDemo,
+          import('../pages/docs/sheet/demos/no-close-button-sheet-demo').then(
+            (m) => m.NoCloseButtonSheetDemo,
           ),
       },
       {
-        path: 'side-sheet-next-demo',
+        path: 'rtl-sheet-demo',
         loadComponent: () =>
-          import('../pages/docs/sheet-next/demos/side-sheet-next-demo').then(
-            (m) => m.SideSheetNextDemo,
-          ),
-      },
-      {
-        path: 'inline-side-sheet-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/sheet-next/demos/inline-side-sheet-next-demo').then(
-            (m) => m.InlineSideSheetNextDemo,
-          ),
-      },
-      {
-        path: 'no-close-button-sheet-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/sheet-next/demos/no-close-button-sheet-next-demo').then(
-            (m) => m.NoCloseButtonSheetNextDemo,
-          ),
-      },
-      {
-        path: 'rtl-sheet-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/sheet-next/demos/rtl-sheet-next-demo').then(
-            (m) => m.RtlSheetNextDemo,
+          import('../pages/docs/sheet/demos/rtl-sheet-demo').then(
+            (m) => m.RtlSheetDemo,
           ),
       },
     ],

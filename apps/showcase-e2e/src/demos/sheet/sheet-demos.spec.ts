@@ -3,7 +3,7 @@ import { collectErrors, press } from '../../interaction';
 import { box } from '../../looks';
 import { expect, test } from '../../test';
 
-const demo = (name: string) => `/demos/sheet-next/${name}-sheet-next-demo`;
+const demo = (name: string) => `/demos/sheet/${name}-sheet-demo`;
 const sheet = (page: Page) => page.getByRole('dialog');
 
 let errors: string[];
@@ -19,7 +19,7 @@ test.afterEach(() => {
 test('Usage: a modal dialog, named and described; focus in, then back', async ({
   page,
 }) => {
-  await page.goto('/demos/sheet-next/sheet-next-usage-demo');
+  await page.goto('/demos/sheet/sheet-usage-demo');
   const trigger = page.getByRole('button', { name: 'Open' });
   await trigger.click();
   const s = page.getByRole('dialog', { name: 'Edit profile' });
@@ -35,7 +35,7 @@ test('Usage: a modal dialog, named and described; focus in, then back', async ({
 test('The ✕ in its corner; Close in the footer closes it too', async ({
   page,
 }) => {
-  await page.goto('/demos/sheet-next/sheet-next-usage-demo');
+  await page.goto('/demos/sheet/sheet-usage-demo');
   await page.getByRole('button', { name: 'Open' }).click();
   const s = sheet(page);
   const x = s.locator('> [data-slot=sheet-close]');
@@ -77,7 +77,7 @@ test('Closing animates out: the panel stays while it slides away', async ({
   // Once it has slid in.
   await expect(sheet(page)).toHaveCSS('opacity', '1');
   await press(page, 'Escape');
-  await expect(page.locator('[scSheetNext].animate-out')).toHaveCount(1);
+  await expect(page.locator('[scSheet].animate-out')).toHaveCount(1);
   await expect(sheet(page)).toHaveCount(0);
 });
 
