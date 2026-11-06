@@ -46,7 +46,12 @@ import {
             <div scFieldGroup class="gap-4">
               <div scField orientation="horizontal">
                 <label scLabel class="w-1/2">Width</label>
-                <input scInput value="100%" scSelectOnFocus="program" />
+                <input
+                  scInput
+                  value="100%"
+                  cdkFocusInitial
+                  scSelectOnFocus="program"
+                />
               </div>
               <div scField orientation="horizontal">
                 <label scLabel class="w-1/2">Height</label>
@@ -67,7 +72,12 @@ import {
             <div scFieldGroup class="gap-4">
               <div scField orientation="horizontal">
                 <label scLabel class="w-1/2">Width</label>
-                <input scInput value="100%" scSelectOnFocus="program" />
+                <input
+                  scInput
+                  value="100%"
+                  cdkFocusInitial
+                  scSelectOnFocus="program"
+                />
               </div>
               <div scField orientation="horizontal">
                 <label scLabel class="w-1/2">Height</label>
@@ -88,7 +98,12 @@ import {
             <div scFieldGroup class="gap-4">
               <div scField orientation="horizontal">
                 <label scLabel class="w-1/2">Width</label>
-                <input scInput value="100%" scSelectOnFocus="program" />
+                <input
+                  scInput
+                  value="100%"
+                  cdkFocusInitial
+                  scSelectOnFocus="program"
+                />
               </div>
               <div scField orientation="horizontal">
                 <label scLabel class="w-1/2">Height</label>

@@ -65,6 +65,7 @@ import {
   ScFieldGroup,
   ScInput,
   ScLabel,
+  ScSelectOnFocus,
   ScSheetNext,
   ScSheetNextClose,
   ScSheetNextDescription,
@@ -85,6 +86,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
     ScFieldGroup,
     ScInput,
     ScLabel,
+    ScSelectOnFocus,
     ScSheetNext,
     ScSheetNextClose,
     ScSheetNextDescription,
@@ -111,7 +113,12 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
           <div scFieldGroup class="px-4">
             <div scField>
               <label scLabel>Name</label>
-              <input scInput value="Pedro Duarte" />
+              <input
+                cdkFocusInitial
+                scSelectOnFocus="program"
+                scInput
+                value="Pedro Duarte"
+              />
             </div>
             <div scField>
               <label scLabel>Username</label>
