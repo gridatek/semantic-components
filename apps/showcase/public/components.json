@@ -880,6 +880,14 @@
     "category": "Overlay"
   },
   {
+    "name": "Sheet Next",
+    "path": "sheet-next",
+    "description": "A dialog at the edge of the screen, sliding in from its side — in the look of the app's preset.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Overlay"
+  },
+  {
     "name": "Sidebar",
     "path": "sidebar",
     "description": "An app's side panel, as shadcn's: collapsible off the screen or to icons, a sheet on phones; its navigation a named nav.",

@@ -4255,6 +4255,46 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/sheet-next',
+    children: [
+      {
+        path: 'sheet-next-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/sheet-next/demos/sheet-next-usage-demo').then(
+            (m) => m.SheetNextUsageDemo,
+          ),
+      },
+      {
+        path: 'side-sheet-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/sheet-next/demos/side-sheet-next-demo').then(
+            (m) => m.SideSheetNextDemo,
+          ),
+      },
+      {
+        path: 'inline-side-sheet-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/sheet-next/demos/inline-side-sheet-next-demo').then(
+            (m) => m.InlineSideSheetNextDemo,
+          ),
+      },
+      {
+        path: 'no-close-button-sheet-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/sheet-next/demos/no-close-button-sheet-next-demo').then(
+            (m) => m.NoCloseButtonSheetNextDemo,
+          ),
+      },
+      {
+        path: 'rtl-sheet-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/sheet-next/demos/rtl-sheet-next-demo').then(
+            (m) => m.RtlSheetNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/signature-pad',
     children: [
       {

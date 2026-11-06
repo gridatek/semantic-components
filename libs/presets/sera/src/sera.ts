@@ -34,6 +34,7 @@ import { pagination } from './pagination';
 import { popover } from './popover';
 import { questionnaire } from './questionnaire';
 import { select } from './select';
+import { sheet } from './sheet';
 import { table } from './table';
 /** The sera preset: `provideSemanticComponents({ preset: sera })`. */
 import { tabs } from './tabs';
@@ -75,6 +76,7 @@ export const sera: ScPreset = {
   popover,
   questionnaire,
   select,
+  sheet,
   table,
   tabs,
   tooltip,

@@ -34,6 +34,7 @@ import { pagination } from './pagination';
 import { popover } from './popover';
 import { questionnaire } from './questionnaire';
 import { select } from './select';
+import { sheet } from './sheet';
 import { table } from './table';
 /** The luma preset: `provideSemanticComponents({ preset: luma })`. */
 import { tabs } from './tabs';
@@ -75,6 +76,7 @@ export const luma: ScPreset = {
   popover,
   questionnaire,
   select,
+  sheet,
   table,
   tabs,
   tooltip,

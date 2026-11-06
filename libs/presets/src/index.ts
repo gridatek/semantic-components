@@ -320,6 +320,18 @@ export interface ScPopoverStyles {
   description: string;
 }
 
+/** A sheet's parts that change from style to style. */
+export interface ScSheetStyles {
+  /** The panel, by `data-side`: its place, size and slide. */
+  content: string;
+  /** A close straight in the panel (the ✕): its place, as `[&>[data-slot=sheet-close]]:…` classes. */
+  close: string;
+  header: string;
+  footer: string;
+  title: string;
+  description: string;
+}
+
 /** A preset: the components' classes in one of shadcn's styles. */
 export interface ScPreset {
   accordion: ScAccordionStyles;
@@ -371,6 +383,7 @@ export interface ScPreset {
   popover: ScPopoverStyles;
   questionnaire: ScQuestionnaireStyles;
   select: ScSelectStyles;
+  sheet: ScSheetStyles;
   table: ScTableStyles;
   tabs: ScTabsStyles;
   tooltip: ScTooltipStyles;
