@@ -48,6 +48,7 @@ export * from './rating';
 export * from './resizable';
 export * from './scroll-area';
 export * from './scroll-area-next';
+export * from './scroll-area-next2';
 export * from './select';
 export * from './separator';
 export * from './sheet';

@@ -856,6 +856,14 @@
     "category": "Layout"
   },
   {
+    "name": "Scroll Area Next2",
+    "path": "scroll-area-next2",
+    "description": "A box that scrolls with the browser's own scrollbar — thin, in the theme's colors.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Layout"
+  },
+  {
     "name": "Select",
     "path": "select",
     "description": "A choice among a short list: a trigger showing the value, the options in a popup below it — a label, groups, scroll buttons, in each preset's look, with Signal Forms.",

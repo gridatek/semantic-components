@@ -4231,6 +4231,46 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/scroll-area-next2',
+    children: [
+      {
+        path: 'scroll-area-next2-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/scroll-area-next2/demos/scroll-area-next2-usage-demo').then(
+            (m) => m.ScrollAreaNext2UsageDemo,
+          ),
+      },
+      {
+        path: 'horizontal-scroll-area-next2-demo',
+        loadComponent: () =>
+          import('../pages/docs/scroll-area-next2/demos/horizontal-scroll-area-next2-demo').then(
+            (m) => m.HorizontalScrollAreaNext2Demo,
+          ),
+      },
+      {
+        path: 'both-scroll-area-next2-demo',
+        loadComponent: () =>
+          import('../pages/docs/scroll-area-next2/demos/both-scroll-area-next2-demo').then(
+            (m) => m.BothScrollAreaNext2Demo,
+          ),
+      },
+      {
+        path: 'scroll-fade-scroll-area-next2-demo',
+        loadComponent: () =>
+          import('../pages/docs/scroll-area-next2/demos/scroll-fade-scroll-area-next2-demo').then(
+            (m) => m.ScrollFadeScrollAreaNext2Demo,
+          ),
+      },
+      {
+        path: 'rtl-scroll-area-next2-demo',
+        loadComponent: () =>
+          import('../pages/docs/scroll-area-next2/demos/rtl-scroll-area-next2-demo').then(
+            (m) => m.RtlScrollAreaNext2Demo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/select',
     children: [
       {
