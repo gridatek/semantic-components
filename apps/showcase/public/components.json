@@ -848,6 +848,14 @@
     "category": "Layout"
   },
   {
+    "name": "Scroll Area Next",
+    "path": "scroll-area-next",
+    "description": "A native scroll container with custom scrollbars — in the look of the app's preset.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Layout"
+  },
+  {
     "name": "Select",
     "path": "select",
     "description": "A choice among a short list: a trigger showing the value, the options in a popup below it — a label, groups, scroll buttons, in each preset's look, with Signal Forms.",

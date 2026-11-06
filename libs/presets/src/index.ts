@@ -349,6 +349,12 @@ export interface ScPreviewCardStyles {
   popup: string;
 }
 
+/** A scroll area's parts that change from style to style. */
+export interface ScScrollAreaStyles {
+  /** The scrollbar's thumb. */
+  thumb: string;
+}
+
 /** A preset: the components' classes in one of shadcn's styles. */
 export interface ScPreset {
   accordion: ScAccordionStyles;
@@ -401,6 +407,7 @@ export interface ScPreset {
   popover: ScPopoverStyles;
   previewCard: ScPreviewCardStyles;
   questionnaire: ScQuestionnaireStyles;
+  scrollArea: ScScrollAreaStyles;
   select: ScSelectStyles;
   sheet: ScSheetStyles;
   table: ScTableStyles;
