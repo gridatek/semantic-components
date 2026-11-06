@@ -38,6 +38,7 @@ import { questionnaire } from './questionnaire';
 import { scrollArea } from './scroll-area';
 import { select } from './select';
 import { sheet } from './sheet';
+import { skeleton } from './skeleton';
 import { table } from './table';
 /** The nova preset: `provideSemanticComponents({ preset: nova })`. */
 import { tabs } from './tabs';
@@ -83,6 +84,7 @@ export const nova: ScPreset = {
   scrollArea,
   select,
   sheet,
+  skeleton,
   table,
   tabs,
   tooltip,

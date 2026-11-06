@@ -38,6 +38,7 @@ import { questionnaire } from './questionnaire';
 import { scrollArea } from './scroll-area';
 import { select } from './select';
 import { sheet } from './sheet';
+import { skeleton } from './skeleton';
 import { table } from './table';
 /** The vega preset: `provideSemanticComponents({ preset: vega })`. */
 import { tabs } from './tabs';
@@ -83,6 +84,7 @@ export const vega: ScPreset = {
   scrollArea,
   select,
   sheet,
+  skeleton,
   table,
   tabs,
   tooltip,

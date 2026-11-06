@@ -531,6 +531,20 @@ An empty state (`div[scEmpty]`; restyled 2026-11-05): shadcn's Empty. A shadcn c
 - **The title on a heading** (`h2`–`h6`) as well as a `div`: shadcn's is a `div`; a heading can be found by heading.
 - **The examples**; links that look like buttons are `a[scLink]` (shadcn: `Button render={<a />}`); Card is inside a real Card.
 
+## Skeleton
+
+A placeholder while content loads (`div[scSkeleton]`; restyled 2026-11-06): shadcn's Skeleton. A shadcn component, so no web research: shadcn's reference app and its 7 examples.
+
+| Library                                                                                             | What to read                                                                             |
+| --------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| shadcn Skeleton (`shadcn-reference/presets/*/skeleton.tsx`, `apps/v4/examples/base/skeleton-*.tsx`) | The look per style (only the corners change); Demo, Avatar, Card, Text, Form, Table, RTL |
+
+**Taken:**
+
+- **The `skeleton` preset key**, a string as `kbd`: `animate-pulse bg-muted` and each style's corners (`rounded-md`, `rounded-xl` in maia, `rounded-2xl` in luma and rhea, none in lyra and sera).
+- **Still with reduced motion** (`motion-reduce:animate-none`; the user's "ok", 2026-11-06): shadcn's keeps pulsing.
+- **`aria-busy` on the region, in the docs**: the skeleton stays empty and silent, as shadcn's.
+
 ## Spinner
 
 Something loading (`svg[scSpinner]`; restyled 2026-11-05): shadcn's Spinner. A shadcn component, so no web research: shadcn's reference app, its docs page and 8 examples (2026-11-05).

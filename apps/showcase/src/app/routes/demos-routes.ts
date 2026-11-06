@@ -4427,10 +4427,17 @@ export const demosRoutes: Route[] = [
     path: 'demos/skeleton',
     children: [
       {
-        path: 'basic-skeleton-demo',
+        path: 'skeleton-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/skeleton/demos/basic-skeleton-demo').then(
-            (m) => m.BasicSkeletonDemo,
+          import('../pages/docs/skeleton/demos/skeleton-usage-demo').then(
+            (m) => m.SkeletonUsageDemo,
+          ),
+      },
+      {
+        path: 'avatar-skeleton-demo',
+        loadComponent: () =>
+          import('../pages/docs/skeleton/demos/avatar-skeleton-demo').then(
+            (m) => m.AvatarSkeletonDemo,
           ),
       },
       {
@@ -4441,17 +4448,17 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'article-skeleton-demo',
+        path: 'text-skeleton-demo',
         loadComponent: () =>
-          import('../pages/docs/skeleton/demos/article-skeleton-demo').then(
-            (m) => m.ArticleSkeletonDemo,
+          import('../pages/docs/skeleton/demos/text-skeleton-demo').then(
+            (m) => m.TextSkeletonDemo,
           ),
       },
       {
-        path: 'list-skeleton-demo',
+        path: 'form-skeleton-demo',
         loadComponent: () =>
-          import('../pages/docs/skeleton/demos/list-skeleton-demo').then(
-            (m) => m.ListSkeletonDemo,
+          import('../pages/docs/skeleton/demos/form-skeleton-demo').then(
+            (m) => m.FormSkeletonDemo,
           ),
       },
       {
@@ -4459,6 +4466,13 @@ export const demosRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/skeleton/demos/table-skeleton-demo').then(
             (m) => m.TableSkeletonDemo,
+          ),
+      },
+      {
+        path: 'rtl-skeleton-demo',
+        loadComponent: () =>
+          import('../pages/docs/skeleton/demos/rtl-skeleton-demo').then(
+            (m) => m.RtlSkeletonDemo,
           ),
       },
     ],

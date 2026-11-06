@@ -412,6 +412,8 @@ export interface ScPreset {
   scrollArea: ScScrollAreaStyles;
   select: ScSelectStyles;
   sheet: ScSheetStyles;
+  /** A placeholder while content loads. */
+  skeleton: string;
   table: ScTableStyles;
   tabs: ScTabsStyles;
   tooltip: ScTooltipStyles;
