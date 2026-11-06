@@ -59,7 +59,7 @@ export class BackdropUsageDemoContainer {
   protected readonly devMode = this.config.devMode;
 
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScBackdrop, ScButton } from '@semantic-components/ui';
+import { ScBackdrop, ScButton, ScFrame } from '@semantic-components/ui';
 
 /**
  * Over a card here (absolute, in a positioned box); in an overlay it covers
@@ -67,11 +67,12 @@ import { ScBackdrop, ScButton } from '@semantic-components/ui';
  */
 @Component({
   selector: 'app-backdrop-usage-demo',
-  imports: [ScBackdrop, ScButton],
+  imports: [ScBackdrop, ScButton, ScFrame],
   template: \`
     <div class="flex flex-col items-center gap-4">
       <div
-        class="relative grid h-40 w-72 place-items-center overflow-hidden rounded-lg border"
+        scFrame
+        class="relative grid h-40 w-72 place-items-center overflow-hidden"
       >
         <p class="text-sm">The page behind</p>
         @if (open()) {

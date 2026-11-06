@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScBackdrop, ScButton } from '@semantic-components/ui';
+import { ScBackdrop, ScButton, ScFrame } from '@semantic-components/ui';
 
 /**
  * Your own shade: classes over the preset's (cn: a later class wins) — here
@@ -7,11 +7,12 @@ import { ScBackdrop, ScButton } from '@semantic-components/ui';
  */
 @Component({
   selector: 'app-custom-backdrop-demo',
-  imports: [ScBackdrop, ScButton],
+  imports: [ScBackdrop, ScButton, ScFrame],
   template: `
     <div class="flex flex-col items-center gap-4">
       <div
-        class="relative grid h-40 w-72 place-items-center overflow-hidden rounded-lg border"
+        scFrame
+        class="relative grid h-40 w-72 place-items-center overflow-hidden"
       >
         <p class="text-sm">The page behind</p>
         @if (open()) {
