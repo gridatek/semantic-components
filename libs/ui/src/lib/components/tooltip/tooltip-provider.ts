@@ -25,12 +25,12 @@ import {
   type ScOverlaySide,
   buildOverlayPositionsWithFallback,
 } from '../../utils/overlay-positions';
-import { ScTooltipNextGroup } from './tooltip-next-group';
-import { ScTooltipNextPortal } from './tooltip-next-portal';
-import { ScTooltipNextTrigger } from './tooltip-next-trigger';
+import { ScTooltipGroup } from './tooltip-group';
+import { ScTooltipPortal } from './tooltip-portal';
+import { ScTooltipTrigger } from './tooltip-trigger';
 
 /** Physical (`left`, `right`, as Base UI's) or logical (`inline-start`, `inline-end`). */
-export type ScTooltipNextSide = ScOverlaySide | 'inline-start' | 'inline-end';
+export type ScTooltipSide = ScOverlaySide | 'inline-start' | 'inline-end';
 
 /** The pointer's grace to cross from the trigger to the tooltip (ms). */
 const HOVER_BRIDGE = 100;
@@ -40,7 +40,7 @@ const HOVER_BRIDGE = 100;
  * `offset`) and when (`delay`, `closeDelay`). As Base UI's Tooltip.Root.
  */
 @Component({
-  selector: 'div[scTooltipNextProvider]',
+  selector: 'div[scTooltipProvider]',
   providers: [{ provide: Directionality, useClass: ScElementDirectionality }],
   imports: [OverlayModule, NgTemplateOutlet],
   template: `
@@ -66,15 +66,15 @@ const HOVER_BRIDGE = 100;
   },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScTooltipNextProvider {
+export class ScTooltipProvider {
   private readonly direction = inject(Directionality);
-  private readonly group = inject(ScTooltipNextGroup, { optional: true });
+  private readonly group = inject(ScTooltipGroup, { optional: true });
 
   readonly classInput = input<string>('', { alias: 'class' });
   /** Shown or not. */
   readonly open = model(false);
   /** Which side of the trigger it goes on; flips when there is no room. */
-  readonly side = input<ScTooltipNextSide>('top');
+  readonly side = input<ScTooltipSide>('top');
   /** Along that side: `start`, `center`, `end` (logical). */
   readonly align = input<ScOverlayAlign>('center');
   /** The gap from the trigger (px). */
@@ -88,8 +88,8 @@ export class ScTooltipNextProvider {
 
   readonly id = inject(_IdGenerator).getId('sc-tooltip-');
 
-  protected readonly trigger = contentChild(ScTooltipNextTrigger);
-  protected readonly portal = contentChild.required(ScTooltipNextPortal);
+  protected readonly trigger = contentChild(ScTooltipTrigger);
+  protected readonly portal = contentChild.required(ScTooltipPortal);
 
   /** The side asked for, as the screen sees it. */
   private readonly physicalSide = computed<ScOverlaySide>(() => {
@@ -110,7 +110,7 @@ export class ScTooltipNextProvider {
 
   /** The side it was placed on, after any flip — in the words asked for. */
   private readonly placed = signal<ScOverlaySide | null>(null);
-  readonly placedSide = computed<ScTooltipNextSide>(() => {
+  readonly placedSide = computed<ScTooltipSide>(() => {
     const placed = this.placed() ?? this.physicalSide();
     const side = this.side();
     if (

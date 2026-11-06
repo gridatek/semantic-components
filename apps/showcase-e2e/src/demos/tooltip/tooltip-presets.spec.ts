@@ -23,7 +23,7 @@ const PRESETS: Record<string, ScPreset> = {
   rhea,
 };
 
-test.describe('Tooltip Next in every preset', () => {
+test.describe('Tooltip in every preset', () => {
   // A docs page and axe, twice: slow under load.
   test.slow();
 
@@ -37,11 +37,11 @@ test.describe('Tooltip Next in every preset', () => {
       await context.addCookies([
         { name: 'sc-preset', value: preset, url: baseURL! },
       ]);
-      await page.goto('/demos/tooltip-next/keyboard-tooltip-next-demo');
+      await page.goto('/demos/tooltip/keyboard-tooltip-demo');
       await page.getByRole('button', { name: 'Save' }).hover();
       for (const [target, wanted, what] of [
         [page.getByRole('tooltip'), styles.tooltip.popup, 'tooltip'],
-        [page.locator('[scTooltipNextArrow]'), styles.tooltip.arrow, 'arrow'],
+        [page.locator('[scTooltipArrow]'), styles.tooltip.arrow, 'arrow'],
       ] as const) {
         const classes = twMerge(wanted).split(/\s+/).filter(Boolean);
         // Read until it has them all: the first render may not have them yet.
@@ -55,7 +55,7 @@ test.describe('Tooltip Next in every preset', () => {
           .toEqual([]);
       }
 
-      await page.goto('/docs/components/tooltip-next');
+      await page.goto('/docs/components/tooltip');
       await expectNoA11yViolations(page);
       await expectNoA11yViolations(page, { dark: true });
     });

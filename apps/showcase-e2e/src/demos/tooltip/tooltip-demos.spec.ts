@@ -3,7 +3,7 @@ import { collectErrors, press } from '../../interaction';
 import { box } from '../../looks';
 import { expect, test } from '../../test';
 
-const demo = (name: string) => `/demos/tooltip-next/${name}-tooltip-next-demo`;
+const demo = (name: string) => `/demos/tooltip/${name}-tooltip-demo`;
 const tooltip = (page: Page) => page.getByRole('tooltip');
 
 let errors: string[];
@@ -19,7 +19,7 @@ test.afterEach(() => {
 test('Usage: hover opens it after the delay; it describes its trigger', async ({
   page,
 }) => {
-  await page.goto('/demos/tooltip-next/tooltip-next-usage-demo');
+  await page.goto('/demos/tooltip/tooltip-usage-demo');
   const trigger = page.getByRole('button', { name: 'Hover' });
   await trigger.hover();
   // Not at once: after 600ms.
@@ -41,7 +41,7 @@ test('Usage: hover opens it after the delay; it describes its trigger', async ({
 });
 
 test('Keyboard: focus opens it at once; Escape closes it', async ({ page }) => {
-  await page.goto('/demos/tooltip-next/tooltip-next-usage-demo');
+  await page.goto('/demos/tooltip/tooltip-usage-demo');
   await page.getByRole('button', { name: 'Hover' }).waitFor();
   await press(page, 'Tab');
   await expect(tooltip(page)).toBeVisible({ timeout: 300 });
@@ -52,7 +52,7 @@ test('Keyboard: focus opens it at once; Escape closes it', async ({ page }) => {
 test('Hoverable: the pointer moves onto it and it stays; a click closes it', async ({
   page,
 }) => {
-  await page.goto('/demos/tooltip-next/tooltip-next-usage-demo');
+  await page.goto('/demos/tooltip/tooltip-usage-demo');
   const trigger = page.getByRole('button', { name: 'Hover' });
   await trigger.hover();
   await expect(tooltip(page)).toBeVisible();

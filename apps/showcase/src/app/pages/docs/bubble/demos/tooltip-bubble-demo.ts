@@ -4,6 +4,10 @@ import {
   ScBubbleContent,
   ScBubbleReactions,
   ScButton,
+  ScTooltip,
+  ScTooltipArrow,
+  ScTooltipPortal,
+  ScTooltipProvider,
   ScTooltipTrigger,
 } from '@semantic-components/ui';
 import { SiCheckIcon } from '@semantic-icons/lucide-icons';
@@ -16,7 +20,11 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
     ScBubbleContent,
     ScBubbleReactions,
     ScButton,
+    ScTooltipProvider,
     ScTooltipTrigger,
+    ScTooltipPortal,
+    ScTooltip,
+    ScTooltipArrow,
     SiCheckIcon,
   ],
   template: `
@@ -27,15 +35,17 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
       <div scBubble align="end">
         <div scBubbleContent>Yes, removed it from the registry.</div>
         <div scBubbleReactions>
-          <button
-            scButton
-            variant="ghost"
-            size="icon-xs"
-            [scTooltipTrigger]="'Read on Jan 5, 2026 at 4:32 PM'"
-          >
-            <svg siCheckIcon></svg>
-            <span class="sr-only">Read</span>
-          </button>
+          <div scTooltipProvider>
+            <button scButton variant="ghost" size="icon-xs" scTooltipTrigger>
+              <svg siCheckIcon></svg>
+              <span class="sr-only">Read</span>
+            </button>
+            <ng-template scTooltipPortal>
+              <div scTooltip>
+                Read on Jan 5, 2026 at 4:32 PM<span scTooltipArrow></span>
+              </div>
+            </ng-template>
+          </div>
         </div>
       </div>
     </div>

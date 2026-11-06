@@ -32,6 +32,10 @@ import {
   ScProgressRange,
   ScProgressTrack,
   ScSpinner,
+  ScTooltip,
+  ScTooltipArrow,
+  ScTooltipPortal,
+  ScTooltipProvider,
   ScTooltipTrigger,
   cn,
 } from '@semantic-components/ui';
@@ -83,7 +87,11 @@ import {
     ScProgress,
     ScProgressRange,
     ScProgressTrack,
+    ScTooltipProvider,
     ScTooltipTrigger,
+    ScTooltipPortal,
+    ScTooltip,
+    ScTooltipArrow,
     ScSpinner,
     SiDownloadIcon,
     SiLoaderCircleIcon,
@@ -102,17 +110,26 @@ import {
         <div scPdfViewerToolbar aria-label="Order form" class="py-1.5">
           <span class="text-sm font-medium">Order form</span>
           <div scPdfViewerSpacer></div>
-          <button scPdfViewerPrint [scTooltipTrigger]="'Print'">
-            <svg siPrinterIcon></svg>
-            <span class="sr-only">Print</span>
-          </button>
-          <button
-            scPdfViewerDownload
-            [scTooltipTrigger]="'Download with your answers'"
-          >
-            <svg siDownloadIcon></svg>
-            <span class="sr-only">Download with your answers</span>
-          </button>
+          <div scTooltipProvider>
+            <button scPdfViewerPrint scTooltipTrigger>
+              <svg siPrinterIcon></svg>
+              <span class="sr-only">Print</span>
+            </button>
+            <ng-template scTooltipPortal>
+              <div scTooltip>Print<span scTooltipArrow></span></div>
+            </ng-template>
+          </div>
+          <div scTooltipProvider>
+            <button scPdfViewerDownload scTooltipTrigger>
+              <svg siDownloadIcon></svg>
+              <span class="sr-only">Download with your answers</span>
+            </button>
+            <ng-template scTooltipPortal>
+              <div scTooltip>
+                Download with your answers<span scTooltipArrow></span>
+              </div>
+            </ng-template>
+          </div>
         </div>
         <div scPdfViewerContent>
           <div scPdfViewerLoading>

@@ -12,6 +12,10 @@ import {
   ScSwitchField,
   ScToggleGroup,
   ScToggleGroupItem,
+  ScTooltip,
+  ScTooltipArrow,
+  ScTooltipPortal,
+  ScTooltipProvider,
   ScTooltipTrigger,
   cn,
 } from '@semantic-components/ui';
@@ -66,7 +70,11 @@ const READING_MODES: Record<string, ScPdfPageColors | null> = {
     ScSwitchField,
     ScToggleGroup,
     ScToggleGroupItem,
+    ScTooltipProvider,
     ScTooltipTrigger,
+    ScTooltipPortal,
+    ScTooltip,
+    ScTooltipArrow,
     SiArrowLeftIcon,
     SiArrowRightIcon,
     SiLoaderCircleIcon,
@@ -88,14 +96,24 @@ const READING_MODES: Record<string, ScPdfPageColors | null> = {
           class="flex-wrap gap-y-1.5 py-1.5"
         >
           <div scPdfViewerNav aria-label="History">
-            <button scPdfViewerBack [scTooltipTrigger]="'Back'">
-              <svg siArrowLeftIcon></svg>
-              <span class="sr-only">Back</span>
-            </button>
-            <button scPdfViewerForward [scTooltipTrigger]="'Forward'">
-              <svg siArrowRightIcon></svg>
-              <span class="sr-only">Forward</span>
-            </button>
+            <div scTooltipProvider>
+              <button scPdfViewerBack scTooltipTrigger>
+                <svg siArrowLeftIcon></svg>
+                <span class="sr-only">Back</span>
+              </button>
+              <ng-template scTooltipPortal>
+                <div scTooltip>Back<span scTooltipArrow></span></div>
+              </ng-template>
+            </div>
+            <div scTooltipProvider>
+              <button scPdfViewerForward scTooltipTrigger>
+                <svg siArrowRightIcon></svg>
+                <span class="sr-only">Forward</span>
+              </button>
+              <ng-template scTooltipPortal>
+                <div scTooltip>Forward<span scTooltipArrow></span></div>
+              </ng-template>
+            </div>
           </div>
           <input scInput scPdfViewerPageInput aria-label="Page" />
           <span class="text-muted-foreground text-sm">

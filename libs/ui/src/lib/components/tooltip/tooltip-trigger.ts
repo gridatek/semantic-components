@@ -1,144 +1,59 @@
-import { _IdGenerator } from '@angular/cdk/a11y';
-import {
-  DestroyRef,
-  Directive,
-  ElementRef,
-  effect,
-  inject,
-  input,
-  signal,
-} from '@angular/core';
-import { ScTooltipManager, ScTooltipPosition } from './tooltip-manager';
+import { CdkOverlayOrigin } from '@angular/cdk/overlay';
+import { Directive, computed, inject, input } from '@angular/core';
+import { cn } from '../../utils';
+import { ScTooltipProvider } from './tooltip-provider';
 
+/**
+ * What the tooltip is about — your button, link… (name it: the tooltip is
+ * not its label). The pointer's hover opens it after the delay, keyboard
+ * focus at once; leaving, blur, a click and Escape close it. Not on touch.
+ * Disabled but still to be explained: `scButton` with `disabled` and
+ * `softDisabled` — a natively disabled button takes no focus and no hover.
+ */
 @Directive({
   selector: '[scTooltipTrigger]',
+  hostDirectives: [CdkOverlayOrigin],
   host: {
-    '(mouseenter)': 'onMouseEnter()',
-    '(mouseleave)': 'onMouseLeave()',
-    '(focus)': 'onFocus()',
-    '(blur)': 'onBlur()',
-    '[attr.aria-describedby]': 'ariaDescribedBy()',
+    'data-slot': 'tooltip-trigger',
+    '[attr.aria-describedby]': 'tooltip.open() ? tooltip.id : null',
+    '[class]': 'class()',
+    '(pointerenter)': 'onPointerEnter($event)',
+    '(pointerleave)': 'onPointerLeave($event)',
+    '(focus)': 'onFocus($event)',
+    '(blur)': 'tooltip.hide()',
+    '(click)': 'onClick()',
+    '(keydown.escape)': 'tooltip.hide()',
   },
 })
 export class ScTooltipTrigger {
-  private readonly tooltipManager = inject(ScTooltipManager);
-  private readonly elementRef = inject(ElementRef);
-  private readonly destroyRef = inject(DestroyRef);
-  private readonly idGenerator = inject(_IdGenerator);
+  protected readonly tooltip = inject(ScTooltipProvider);
+  readonly overlayOrigin = inject(CdkOverlayOrigin);
+  readonly classInput = input<string>('', { alias: 'class' });
 
-  /** The tooltip text content */
-  readonly content = input.required<string>({ alias: 'scTooltipTrigger' });
+  /** After a click, not again until the pointer leaves. */
+  private clicked = false;
 
-  /** Position of the tooltip relative to the trigger element */
-  readonly position = input<ScTooltipPosition>('top', {
-    alias: 'tooltipPosition',
-  });
+  protected readonly class = computed(() => cn(this.classInput()));
 
-  /** Delay before showing the tooltip in milliseconds */
-  readonly showDelay = input<number>(200, { alias: 'tooltipDelay' });
-
-  /** Delay before hiding the tooltip in milliseconds */
-  readonly hideDelay = input<number>(0, { alias: 'tooltipHideDelay' });
-
-  /** Whether the tooltip is disabled */
-  readonly disabled = input<boolean>(false, { alias: 'tooltipDisabled' });
-
-  private readonly tooltipId = this.idGenerator.getId('sc-tooltip-');
-  private showTimeout: ReturnType<typeof setTimeout> | null = null;
-  private hideTimeout: ReturnType<typeof setTimeout> | null = null;
-  private readonly isVisible = signal(false);
-
-  protected readonly ariaDescribedBy = () =>
-    this.isVisible() ? this.tooltipId : null;
-
-  constructor() {
-    // Effect to hide tooltip when content becomes empty
-    effect(() => {
-      if (!this.content() && this.isVisible()) {
-        this.hide();
-      }
-    });
-
-    // Cleanup on destroy
-    this.destroyRef.onDestroy(() => {
-      this.cancelTimers();
-      this.hide();
-    });
+  protected onPointerEnter(event: PointerEvent): void {
+    if (event.pointerType === 'touch' || this.clicked) return;
+    this.tooltip.showSoon();
   }
 
-  protected onMouseEnter(): void {
-    this.scheduleShow();
+  protected onPointerLeave(event: PointerEvent): void {
+    if (event.pointerType === 'touch') return;
+    this.clicked = false;
+    this.tooltip.hideSoon();
   }
 
-  protected onMouseLeave(): void {
-    this.scheduleHide();
+  protected onFocus(event: FocusEvent): void {
+    // Keyboard focus only: a click's focus is the pointer's, already handled.
+    const target = event.target as HTMLElement;
+    if (target.matches(':focus-visible')) this.tooltip.show();
   }
 
-  protected onFocus(): void {
-    this.scheduleShow();
-  }
-
-  protected onBlur(): void {
-    this.scheduleHide();
-  }
-
-  private scheduleShow(): void {
-    if (this.disabled() || !this.content()) {
-      return;
-    }
-
-    this.cancelTimers();
-
-    const delay = this.showDelay();
-    if (delay > 0) {
-      this.showTimeout = setTimeout(() => this.show(), delay);
-    } else {
-      this.show();
-    }
-  }
-
-  private scheduleHide(): void {
-    this.cancelTimers();
-
-    const delay = this.hideDelay();
-    if (delay > 0) {
-      this.hideTimeout = setTimeout(() => this.hide(), delay);
-    } else {
-      this.hide();
-    }
-  }
-
-  private show(): void {
-    if (this.disabled() || !this.content()) {
-      return;
-    }
-
-    this.tooltipManager.show(
-      this.elementRef,
-      {
-        content: this.content(),
-        position: this.position(),
-      },
-      this.tooltipId,
-    );
-    this.isVisible.set(true);
-  }
-
-  private hide(): void {
-    if (this.tooltipManager.isTooltipVisible(this.tooltipId)) {
-      this.tooltipManager.hide();
-    }
-    this.isVisible.set(false);
-  }
-
-  private cancelTimers(): void {
-    if (this.showTimeout) {
-      clearTimeout(this.showTimeout);
-      this.showTimeout = null;
-    }
-    if (this.hideTimeout) {
-      clearTimeout(this.hideTimeout);
-      this.hideTimeout = null;
-    }
+  protected onClick(): void {
+    this.clicked = true;
+    this.tooltip.hide();
   }
 }

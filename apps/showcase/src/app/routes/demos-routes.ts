@@ -6022,85 +6022,52 @@ export const demosRoutes: Route[] = [
     path: 'demos/tooltip',
     children: [
       {
-        path: 'basic-tooltip-demo',
+        path: 'tooltip-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/tooltip/demos/basic-tooltip-demo').then(
-            (m) => m.BasicTooltipDemo,
+          import('../pages/docs/tooltip/demos/tooltip-usage-demo').then(
+            (m) => m.TooltipUsageDemo,
           ),
       },
       {
-        path: 'positions-tooltip-demo',
+        path: 'sides-tooltip-demo',
         loadComponent: () =>
-          import('../pages/docs/tooltip/demos/positions-tooltip-demo').then(
-            (m) => m.PositionsTooltipDemo,
+          import('../pages/docs/tooltip/demos/sides-tooltip-demo').then(
+            (m) => m.SidesTooltipDemo,
           ),
       },
       {
-        path: 'icon-button-tooltip-demo',
+        path: 'keyboard-tooltip-demo',
         loadComponent: () =>
-          import('../pages/docs/tooltip/demos/icon-button-tooltip-demo').then(
-            (m) => m.IconButtonTooltipDemo,
+          import('../pages/docs/tooltip/demos/keyboard-tooltip-demo').then(
+            (m) => m.KeyboardTooltipDemo,
           ),
       },
       {
-        path: 'delay-tooltip-demo',
+        path: 'disabled-tooltip-demo',
         loadComponent: () =>
-          import('../pages/docs/tooltip/demos/delay-tooltip-demo').then(
-            (m) => m.DelayTooltipDemo,
-          ),
-      },
-    ],
-  },
-  {
-    path: 'demos/tooltip-next',
-    children: [
-      {
-        path: 'tooltip-next-usage-demo',
-        loadComponent: () =>
-          import('../pages/docs/tooltip-next/demos/tooltip-next-usage-demo').then(
-            (m) => m.TooltipNextUsageDemo,
+          import('../pages/docs/tooltip/demos/disabled-tooltip-demo').then(
+            (m) => m.DisabledTooltipDemo,
           ),
       },
       {
-        path: 'sides-tooltip-next-demo',
+        path: 'controlled-tooltip-demo',
         loadComponent: () =>
-          import('../pages/docs/tooltip-next/demos/sides-tooltip-next-demo').then(
-            (m) => m.SidesTooltipNextDemo,
+          import('../pages/docs/tooltip/demos/controlled-tooltip-demo').then(
+            (m) => m.ControlledTooltipDemo,
           ),
       },
       {
-        path: 'keyboard-tooltip-next-demo',
+        path: 'group-tooltip-demo',
         loadComponent: () =>
-          import('../pages/docs/tooltip-next/demos/keyboard-tooltip-next-demo').then(
-            (m) => m.KeyboardTooltipNextDemo,
+          import('../pages/docs/tooltip/demos/group-tooltip-demo').then(
+            (m) => m.GroupTooltipDemo,
           ),
       },
       {
-        path: 'disabled-tooltip-next-demo',
+        path: 'rtl-tooltip-demo',
         loadComponent: () =>
-          import('../pages/docs/tooltip-next/demos/disabled-tooltip-next-demo').then(
-            (m) => m.DisabledTooltipNextDemo,
-          ),
-      },
-      {
-        path: 'controlled-tooltip-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/tooltip-next/demos/controlled-tooltip-next-demo').then(
-            (m) => m.ControlledTooltipNextDemo,
-          ),
-      },
-      {
-        path: 'group-tooltip-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/tooltip-next/demos/group-tooltip-next-demo').then(
-            (m) => m.GroupTooltipNextDemo,
-          ),
-      },
-      {
-        path: 'rtl-tooltip-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/tooltip-next/demos/rtl-tooltip-next-demo').then(
-            (m) => m.RtlTooltipNextDemo,
+          import('../pages/docs/tooltip/demos/rtl-tooltip-demo').then(
+            (m) => m.RtlTooltipDemo,
           ),
       },
     ],

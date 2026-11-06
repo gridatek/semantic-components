@@ -2,7 +2,7 @@ import { Directive, computed, input } from '@angular/core';
 import { cn } from '../../utils';
 
 /** What the group needs of a tooltip. */
-export interface ScTooltipNextGroupMember {
+export interface ScTooltipGroupMember {
   hide(): void;
 }
 
@@ -12,16 +12,16 @@ export interface ScTooltipNextGroupMember {
  * closes (Base UI's provider). One at a time.
  */
 @Directive({
-  selector: '[scTooltipNextGroup]',
+  selector: '[scTooltipGroup]',
   host: { '[class]': 'class()' },
 })
-export class ScTooltipNextGroup {
+export class ScTooltipGroup {
   readonly classInput = input<string>('', { alias: 'class' });
   /** How long after a tooltip closed the next one still opens at once (ms). */
   readonly timeout = input(400);
 
   private lastClosed = -Infinity;
-  private current: ScTooltipNextGroupMember | null = null;
+  private current: ScTooltipGroupMember | null = null;
 
   protected readonly class = computed(() => cn(this.classInput()));
 
@@ -34,13 +34,13 @@ export class ScTooltipNextGroup {
   }
 
   /** A tooltip opened: the one before closes. */
-  opened(member: ScTooltipNextGroupMember): void {
+  opened(member: ScTooltipGroupMember): void {
     const previous = this.current;
     this.current = member;
     if (previous && previous !== member) previous.hide();
   }
 
-  closed(member: ScTooltipNextGroupMember): void {
+  closed(member: ScTooltipGroupMember): void {
     if (this.current === member) this.current = null;
     this.lastClosed = performance.now();
   }

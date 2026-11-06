@@ -63,6 +63,10 @@ import {
   ScTextarea,
   ScToggleGroup,
   ScToggleGroupItem,
+  ScTooltip,
+  ScTooltipArrow,
+  ScTooltipPortal,
+  ScTooltipProvider,
   ScTooltipTrigger,
   cn,
 } from '@semantic-components/ui';
@@ -328,7 +332,11 @@ const INK_COLORS = [
     ScPdfViewerSignatureRemove,
     ScPdfViewerSignatureNew,
     ScButton,
+    ScTooltipProvider,
     ScTooltipTrigger,
+    ScTooltipPortal,
+    ScTooltip,
+    ScTooltipArrow,
     ScSeparator,
     ScInput,
     ScTextarea,
@@ -444,62 +452,71 @@ const INK_COLORS = [
           aria-label="PDF viewer toolbar"
           class="flex-wrap gap-1 px-2 py-1.5"
         >
-          <button
-            scButton
-            variant="ghost"
-            size="icon"
-            [attr.aria-pressed]="sidebarOpen()"
-            [scTooltipTrigger]="'Sidebar'"
-            tooltipPosition="bottom"
-            (click)="sidebarOpen.set(!sidebarOpen())"
-          >
-            <svg siPanelLeftIcon></svg>
-            <span class="sr-only">Sidebar</span>
-          </button>
-          <button
-            scPdfViewerFindToggle
-            [scTooltipTrigger]="'Find in document'"
-            tooltipPosition="bottom"
-          >
-            <svg siSearchIcon></svg>
-            <span class="sr-only">Find in document</span>
-          </button>
+          <div scTooltipProvider side="bottom">
+            <button
+              scButton
+              variant="ghost"
+              size="icon"
+              [attr.aria-pressed]="sidebarOpen()"
+              scTooltipTrigger
+              (click)="sidebarOpen.set(!sidebarOpen())"
+            >
+              <svg siPanelLeftIcon></svg>
+              <span class="sr-only">Sidebar</span>
+            </button>
+            <ng-template scTooltipPortal>
+              <div scTooltip>Sidebar<span scTooltipArrow></span></div>
+            </ng-template>
+          </div>
+          <div scTooltipProvider side="bottom">
+            <button scPdfViewerFindToggle scTooltipTrigger>
+              <svg siSearchIcon></svg>
+              <span class="sr-only">Find in document</span>
+            </button>
+            <ng-template scTooltipPortal>
+              <div scTooltip>Find in document<span scTooltipArrow></span></div>
+            </ng-template>
+          </div>
 
           <div scSeparator orientation="vertical"></div>
 
           <div scPdfViewerNav aria-label="Page navigation">
-            <button
-              scPdfViewerBack
-              [scTooltipTrigger]="'Back'"
-              tooltipPosition="bottom"
-            >
-              <svg siArrowLeftIcon></svg>
-              <span class="sr-only">Back</span>
-            </button>
-            <button
-              scPdfViewerForward
-              [scTooltipTrigger]="'Forward'"
-              tooltipPosition="bottom"
-            >
-              <svg siArrowRightIcon></svg>
-              <span class="sr-only">Forward</span>
-            </button>
-            <button
-              scPdfViewerPrevPage
-              [scTooltipTrigger]="'Previous page'"
-              tooltipPosition="bottom"
-            >
-              <svg siChevronUpIcon></svg>
-              <span class="sr-only">Previous page</span>
-            </button>
-            <button
-              scPdfViewerNextPage
-              [scTooltipTrigger]="'Next page'"
-              tooltipPosition="bottom"
-            >
-              <svg siChevronDownIcon></svg>
-              <span class="sr-only">Next page</span>
-            </button>
+            <div scTooltipProvider side="bottom">
+              <button scPdfViewerBack scTooltipTrigger>
+                <svg siArrowLeftIcon></svg>
+                <span class="sr-only">Back</span>
+              </button>
+              <ng-template scTooltipPortal>
+                <div scTooltip>Back<span scTooltipArrow></span></div>
+              </ng-template>
+            </div>
+            <div scTooltipProvider side="bottom">
+              <button scPdfViewerForward scTooltipTrigger>
+                <svg siArrowRightIcon></svg>
+                <span class="sr-only">Forward</span>
+              </button>
+              <ng-template scTooltipPortal>
+                <div scTooltip>Forward<span scTooltipArrow></span></div>
+              </ng-template>
+            </div>
+            <div scTooltipProvider side="bottom">
+              <button scPdfViewerPrevPage scTooltipTrigger>
+                <svg siChevronUpIcon></svg>
+                <span class="sr-only">Previous page</span>
+              </button>
+              <ng-template scTooltipPortal>
+                <div scTooltip>Previous page<span scTooltipArrow></span></div>
+              </ng-template>
+            </div>
+            <div scTooltipProvider side="bottom">
+              <button scPdfViewerNextPage scTooltipTrigger>
+                <svg siChevronDownIcon></svg>
+                <span class="sr-only">Next page</span>
+              </button>
+              <ng-template scTooltipPortal>
+                <div scTooltip>Next page<span scTooltipArrow></span></div>
+              </ng-template>
+            </div>
           </div>
           <input scInput scPdfViewerPageInput aria-label="Page" />
           <span
@@ -516,22 +533,24 @@ const INK_COLORS = [
           <div scSeparator orientation="vertical"></div>
 
           <div scPdfViewerZoom aria-label="Zoom controls">
-            <button
-              scPdfViewerZoomOut
-              [scTooltipTrigger]="'Zoom out'"
-              tooltipPosition="bottom"
-            >
-              <svg siZoomOutIcon></svg>
-              <span class="sr-only">Zoom out</span>
-            </button>
-            <button
-              scPdfViewerZoomIn
-              [scTooltipTrigger]="'Zoom in'"
-              tooltipPosition="bottom"
-            >
-              <svg siZoomInIcon></svg>
-              <span class="sr-only">Zoom in</span>
-            </button>
+            <div scTooltipProvider side="bottom">
+              <button scPdfViewerZoomOut scTooltipTrigger>
+                <svg siZoomOutIcon></svg>
+                <span class="sr-only">Zoom out</span>
+              </button>
+              <ng-template scTooltipPortal>
+                <div scTooltip>Zoom out<span scTooltipArrow></span></div>
+              </ng-template>
+            </div>
+            <div scTooltipProvider side="bottom">
+              <button scPdfViewerZoomIn scTooltipTrigger>
+                <svg siZoomInIcon></svg>
+                <span class="sr-only">Zoom in</span>
+              </button>
+              <ng-template scTooltipPortal>
+                <div scTooltip>Zoom in<span scTooltipArrow></span></div>
+              </ng-template>
+            </div>
           </div>
           <div scNativeSelectContainer>
             <select
@@ -555,17 +574,21 @@ const INK_COLORS = [
             <svg siChevronDownIcon scNativeSelectIcon></svg>
           </div>
           <div scPopoverProvider side="bottom" align="start">
-            <button
-              scButton
-              scPopoverTrigger
-              variant="ghost"
-              size="icon"
-              [scTooltipTrigger]="'View options'"
-              tooltipPosition="bottom"
-            >
-              <svg siBookOpenIcon></svg>
-              <span class="sr-only">View options</span>
-            </button>
+            <div scTooltipProvider side="bottom">
+              <button
+                scButton
+                scPopoverTrigger
+                variant="ghost"
+                size="icon"
+                scTooltipTrigger
+              >
+                <svg siBookOpenIcon></svg>
+                <span class="sr-only">View options</span>
+              </button>
+              <ng-template scTooltipPortal>
+                <div scTooltip>View options<span scTooltipArrow></span></div>
+              </ng-template>
+            </div>
             <ng-template scPopoverPortal>
               <div scPopover class="w-auto gap-4">
                 <div class="grid gap-2">
@@ -645,56 +668,60 @@ const INK_COLORS = [
             [value]="selectedTool()"
             (valueChange)="setTool($event)"
           >
-            <button
-              scToggleGroupItem
-              value="highlight"
-              [scTooltipTrigger]="'Highlight'"
-              tooltipPosition="bottom"
-            >
-              <svg siHighlighterIcon></svg>
-              <span class="sr-only">Highlight</span>
-            </button>
-            <button
-              scToggleGroupItem
-              value="freetext"
-              [scTooltipTrigger]="'Text'"
-              tooltipPosition="bottom"
-            >
-              <svg siTypeIcon></svg>
-              <span class="sr-only">Text</span>
-            </button>
-            <button
-              scToggleGroupItem
-              value="ink"
-              [scTooltipTrigger]="'Draw'"
-              tooltipPosition="bottom"
-            >
-              <svg siPenIcon></svg>
-              <span class="sr-only">Draw</span>
-            </button>
-            <button
-              scToggleGroupItem
-              value="comment"
-              [scTooltipTrigger]="'Comment'"
-              tooltipPosition="bottom"
-            >
-              <svg siMessageSquarePlusIcon></svg>
-              <span class="sr-only">Comment</span>
-            </button>
+            <div scTooltipProvider side="bottom">
+              <button scToggleGroupItem value="highlight" scTooltipTrigger>
+                <svg siHighlighterIcon></svg>
+                <span class="sr-only">Highlight</span>
+              </button>
+              <ng-template scTooltipPortal>
+                <div scTooltip>Highlight<span scTooltipArrow></span></div>
+              </ng-template>
+            </div>
+            <div scTooltipProvider side="bottom">
+              <button scToggleGroupItem value="freetext" scTooltipTrigger>
+                <svg siTypeIcon></svg>
+                <span class="sr-only">Text</span>
+              </button>
+              <ng-template scTooltipPortal>
+                <div scTooltip>Text<span scTooltipArrow></span></div>
+              </ng-template>
+            </div>
+            <div scTooltipProvider side="bottom">
+              <button scToggleGroupItem value="ink" scTooltipTrigger>
+                <svg siPenIcon></svg>
+                <span class="sr-only">Draw</span>
+              </button>
+              <ng-template scTooltipPortal>
+                <div scTooltip>Draw<span scTooltipArrow></span></div>
+              </ng-template>
+            </div>
+            <div scTooltipProvider side="bottom">
+              <button scToggleGroupItem value="comment" scTooltipTrigger>
+                <svg siMessageSquarePlusIcon></svg>
+                <span class="sr-only">Comment</span>
+              </button>
+              <ng-template scTooltipPortal>
+                <div scTooltip>Comment<span scTooltipArrow></span></div>
+              </ng-template>
+            </div>
           </div>
           <div scPopoverProvider side="bottom" align="end">
-            <button
-              scButton
-              scPopoverTrigger
-              variant="ghost"
-              size="icon"
-              [disabled]="!activeTool()"
-              [scTooltipTrigger]="'Tool options'"
-              tooltipPosition="bottom"
-            >
-              <svg siSlidersHorizontalIcon></svg>
-              <span class="sr-only">Tool options</span>
-            </button>
+            <div scTooltipProvider side="bottom">
+              <button
+                scButton
+                scPopoverTrigger
+                variant="ghost"
+                size="icon"
+                [disabled]="!activeTool()"
+                scTooltipTrigger
+              >
+                <svg siSlidersHorizontalIcon></svg>
+                <span class="sr-only">Tool options</span>
+              </button>
+              <ng-template scTooltipPortal>
+                <div scTooltip>Tool options<span scTooltipArrow></span></div>
+              </ng-template>
+            </div>
             <ng-template scPopoverPortal>
               <div scPopover class="w-60 gap-4">
                 @switch (activeTool()) {
@@ -816,17 +843,21 @@ const INK_COLORS = [
               </div>
             </ng-template>
           </div>
-          <button
-            scButton
-            variant="ghost"
-            size="icon"
-            [scTooltipTrigger]="'Add image'"
-            tooltipPosition="bottom"
-            (click)="imageInput.click()"
-          >
-            <svg siImageIcon></svg>
-            <span class="sr-only">Add image</span>
-          </button>
+          <div scTooltipProvider side="bottom">
+            <button
+              scButton
+              variant="ghost"
+              size="icon"
+              scTooltipTrigger
+              (click)="imageInput.click()"
+            >
+              <svg siImageIcon></svg>
+              <span class="sr-only">Add image</span>
+            </button>
+            <ng-template scTooltipPortal>
+              <div scTooltip>Add image<span scTooltipArrow></span></div>
+            </ng-template>
+          </div>
           <input #imageInput type="file" scPdfViewerAddImage class="hidden" />
           <div
             scPopoverProvider
@@ -834,17 +865,21 @@ const INK_COLORS = [
             align="end"
             [(open)]="signaturesOpen"
           >
-            <button
-              scButton
-              scPopoverTrigger
-              variant="ghost"
-              size="icon"
-              [scTooltipTrigger]="'Signature'"
-              tooltipPosition="bottom"
-            >
-              <svg siSignatureIcon></svg>
-              <span class="sr-only">Signature</span>
-            </button>
+            <div scTooltipProvider side="bottom">
+              <button
+                scButton
+                scPopoverTrigger
+                variant="ghost"
+                size="icon"
+                scTooltipTrigger
+              >
+                <svg siSignatureIcon></svg>
+                <span class="sr-only">Signature</span>
+              </button>
+              <ng-template scTooltipPortal>
+                <div scTooltip>Signature<span scTooltipArrow></span></div>
+              </ng-template>
+            </div>
             <ng-template scPopoverPortal>
               <div scPopover class="w-60 gap-3">
                 @if (viewer.savedSignatures().length) {
@@ -909,35 +944,41 @@ const INK_COLORS = [
 
           <div scSeparator orientation="vertical"></div>
 
-          <button
-            scPdfViewerPrint
-            [scTooltipTrigger]="'Print'"
-            tooltipPosition="bottom"
-          >
-            <svg siPrinterIcon></svg>
-            <span class="sr-only">Print</span>
-          </button>
-          <button
-            scPdfViewerDownload
-            [scTooltipTrigger]="'Download'"
-            tooltipPosition="bottom"
-          >
-            <svg siDownloadIcon></svg>
-            <span class="sr-only">Download</span>
-          </button>
+          <div scTooltipProvider side="bottom">
+            <button scPdfViewerPrint scTooltipTrigger>
+              <svg siPrinterIcon></svg>
+              <span class="sr-only">Print</span>
+            </button>
+            <ng-template scTooltipPortal>
+              <div scTooltip>Print<span scTooltipArrow></span></div>
+            </ng-template>
+          </div>
+          <div scTooltipProvider side="bottom">
+            <button scPdfViewerDownload scTooltipTrigger>
+              <svg siDownloadIcon></svg>
+              <span class="sr-only">Download</span>
+            </button>
+            <ng-template scTooltipPortal>
+              <div scTooltip>Download<span scTooltipArrow></span></div>
+            </ng-template>
+          </div>
 
           <div scMenuProvider side="bottom" align="end">
-            <button
-              scButton
-              scMenuTrigger
-              variant="ghost"
-              size="icon"
-              [scTooltipTrigger]="'More'"
-              tooltipPosition="bottom"
-            >
-              <svg siEllipsisVerticalIcon></svg>
-              <span class="sr-only">More</span>
-            </button>
+            <div scTooltipProvider side="bottom">
+              <button
+                scButton
+                scMenuTrigger
+                variant="ghost"
+                size="icon"
+                scTooltipTrigger
+              >
+                <svg siEllipsisVerticalIcon></svg>
+                <span class="sr-only">More</span>
+              </button>
+              <ng-template scTooltipPortal>
+                <div scTooltip>More<span scTooltipArrow></span></div>
+              </ng-template>
+            </div>
             <ng-template scMenuPortal>
               <div scMenu (itemSelected)="onMenuItem($event)">
                 <ng-template scMenuContent>
@@ -970,17 +1011,24 @@ const INK_COLORS = [
               placeholder="Find in document…"
               class="h-8 w-56"
             />
-            <button
-              scPdfViewerFindPrevious
-              [scTooltipTrigger]="'Previous match'"
-            >
-              <svg siChevronUpIcon></svg>
-              <span class="sr-only">Previous match</span>
-            </button>
-            <button scPdfViewerFindNext [scTooltipTrigger]="'Next match'">
-              <svg siChevronDownIcon></svg>
-              <span class="sr-only">Next match</span>
-            </button>
+            <div scTooltipProvider>
+              <button scPdfViewerFindPrevious scTooltipTrigger>
+                <svg siChevronUpIcon></svg>
+                <span class="sr-only">Previous match</span>
+              </button>
+              <ng-template scTooltipPortal>
+                <div scTooltip>Previous match<span scTooltipArrow></span></div>
+              </ng-template>
+            </div>
+            <div scTooltipProvider>
+              <button scPdfViewerFindNext scTooltipTrigger>
+                <svg siChevronDownIcon></svg>
+                <span class="sr-only">Next match</span>
+              </button>
+              <ng-template scTooltipPortal>
+                <div scTooltip>Next match<span scTooltipArrow></span></div>
+              </ng-template>
+            </div>
             <label scCheckboxField class="ms-2 text-sm">
               <input
                 type="checkbox"
@@ -1069,46 +1117,53 @@ const INK_COLORS = [
                   class="w-full justify-start border-b px-1"
                   activateOnFocus
                 >
-                  <button
-                    scTabsTab
-                    value="thumbnails"
-                    [scTooltipTrigger]="'Pages'"
-                  >
-                    <svg siLayoutGridIcon></svg>
-                    <span class="sr-only">Pages</span>
-                  </button>
-                  <button
-                    scTabsTab
-                    value="outline"
-                    [scTooltipTrigger]="'Outline'"
-                  >
-                    <svg siListTreeIcon></svg>
-                    <span class="sr-only">Outline</span>
-                  </button>
-                  <button
-                    scTabsTab
-                    value="attachments"
-                    [scTooltipTrigger]="'Attachments'"
-                  >
-                    <svg siPaperclipIcon></svg>
-                    <span class="sr-only">Attachments</span>
-                  </button>
-                  <button
-                    scTabsTab
-                    value="layers"
-                    [scTooltipTrigger]="'Layers'"
-                  >
-                    <svg siLayersIcon></svg>
-                    <span class="sr-only">Layers</span>
-                  </button>
-                  <button
-                    scTabsTab
-                    value="comments"
-                    [scTooltipTrigger]="'Comments'"
-                  >
-                    <svg siMessageSquareIcon></svg>
-                    <span class="sr-only">Comments</span>
-                  </button>
+                  <div scTooltipProvider>
+                    <button scTabsTab value="thumbnails" scTooltipTrigger>
+                      <svg siLayoutGridIcon></svg>
+                      <span class="sr-only">Pages</span>
+                    </button>
+                    <ng-template scTooltipPortal>
+                      <div scTooltip>Pages<span scTooltipArrow></span></div>
+                    </ng-template>
+                  </div>
+                  <div scTooltipProvider>
+                    <button scTabsTab value="outline" scTooltipTrigger>
+                      <svg siListTreeIcon></svg>
+                      <span class="sr-only">Outline</span>
+                    </button>
+                    <ng-template scTooltipPortal>
+                      <div scTooltip>Outline<span scTooltipArrow></span></div>
+                    </ng-template>
+                  </div>
+                  <div scTooltipProvider>
+                    <button scTabsTab value="attachments" scTooltipTrigger>
+                      <svg siPaperclipIcon></svg>
+                      <span class="sr-only">Attachments</span>
+                    </button>
+                    <ng-template scTooltipPortal>
+                      <div scTooltip>
+                        Attachments<span scTooltipArrow></span>
+                      </div>
+                    </ng-template>
+                  </div>
+                  <div scTooltipProvider>
+                    <button scTabsTab value="layers" scTooltipTrigger>
+                      <svg siLayersIcon></svg>
+                      <span class="sr-only">Layers</span>
+                    </button>
+                    <ng-template scTooltipPortal>
+                      <div scTooltip>Layers<span scTooltipArrow></span></div>
+                    </ng-template>
+                  </div>
+                  <div scTooltipProvider>
+                    <button scTabsTab value="comments" scTooltipTrigger>
+                      <svg siMessageSquareIcon></svg>
+                      <span class="sr-only">Comments</span>
+                    </button>
+                    <ng-template scTooltipPortal>
+                      <div scTooltip>Comments<span scTooltipArrow></span></div>
+                    </ng-template>
+                  </div>
                 </div>
 
                 <!-- Pages: thumbnails, and page organisation -->
@@ -1123,62 +1178,102 @@ const INK_COLORS = [
                       aria-label="Organise pages"
                       class="bg-background sticky top-0 z-10 flex flex-wrap items-center gap-0.5 border-b px-2 py-1"
                     >
-                      <button
-                        scPdfViewerInsertPages
-                        [scTooltipTrigger]="'Insert a file after this page'"
-                        (insertFailed)="insertFailed.set($event.name)"
-                      >
-                        <svg siFilePlusIcon></svg>
-                        <span class="sr-only">Insert file</span>
-                      </button>
-                      <button
-                        scPdfViewerPastePages
-                        [scTooltipTrigger]="'Paste after this page'"
-                      >
-                        <svg siClipboardPasteIcon></svg>
-                        <span class="sr-only">Paste</span>
-                      </button>
+                      <div scTooltipProvider>
+                        <button
+                          scPdfViewerInsertPages
+                          scTooltipTrigger
+                          (insertFailed)="insertFailed.set($event.name)"
+                        >
+                          <svg siFilePlusIcon></svg>
+                          <span class="sr-only">Insert file</span>
+                        </button>
+                        <ng-template scTooltipPortal>
+                          <div scTooltip>
+                            Insert a file after this page<span
+                              scTooltipArrow
+                            ></span>
+                          </div>
+                        </ng-template>
+                      </div>
+                      <div scTooltipProvider>
+                        <button scPdfViewerPastePages scTooltipTrigger>
+                          <svg siClipboardPasteIcon></svg>
+                          <span class="sr-only">Paste</span>
+                        </button>
+                        <ng-template scTooltipPortal>
+                          <div scTooltip>
+                            Paste after this page<span scTooltipArrow></span>
+                          </div>
+                        </ng-template>
+                      </div>
                       @if (viewer.pageSelection().length) {
                         <div scSeparator orientation="vertical"></div>
-                        <button
-                          scPdfViewerMovePagesEarlier
-                          [scTooltipTrigger]="'Move earlier'"
-                        >
-                          <svg siArrowUpIcon></svg>
-                          <span class="sr-only">Move earlier</span>
-                        </button>
-                        <button
-                          scPdfViewerMovePagesLater
-                          [scTooltipTrigger]="'Move later'"
-                        >
-                          <svg siArrowDownIcon></svg>
-                          <span class="sr-only">Move later</span>
-                        </button>
-                        <button
-                          scPdfViewerCopyPages
-                          [scTooltipTrigger]="'Copy'"
-                        >
-                          <svg siCopyIcon></svg>
-                          <span class="sr-only">Copy</span>
-                        </button>
-                        <button scPdfViewerCutPages [scTooltipTrigger]="'Cut'">
-                          <svg siScissorsIcon></svg>
-                          <span class="sr-only">Cut</span>
-                        </button>
-                        <button
-                          scPdfViewerDeletePages
-                          [scTooltipTrigger]="'Delete'"
-                        >
-                          <svg siTrash2Icon></svg>
-                          <span class="sr-only">Delete</span>
-                        </button>
-                        <button
-                          scPdfViewerExportPages
-                          [scTooltipTrigger]="'Save selected pages as…'"
-                        >
-                          <svg siFileOutputIcon></svg>
-                          <span class="sr-only">Save selected pages</span>
-                        </button>
+                        <div scTooltipProvider>
+                          <button scPdfViewerMovePagesEarlier scTooltipTrigger>
+                            <svg siArrowUpIcon></svg>
+                            <span class="sr-only">Move earlier</span>
+                          </button>
+                          <ng-template scTooltipPortal>
+                            <div scTooltip>
+                              Move earlier<span scTooltipArrow></span>
+                            </div>
+                          </ng-template>
+                        </div>
+                        <div scTooltipProvider>
+                          <button scPdfViewerMovePagesLater scTooltipTrigger>
+                            <svg siArrowDownIcon></svg>
+                            <span class="sr-only">Move later</span>
+                          </button>
+                          <ng-template scTooltipPortal>
+                            <div scTooltip>
+                              Move later<span scTooltipArrow></span>
+                            </div>
+                          </ng-template>
+                        </div>
+                        <div scTooltipProvider>
+                          <button scPdfViewerCopyPages scTooltipTrigger>
+                            <svg siCopyIcon></svg>
+                            <span class="sr-only">Copy</span>
+                          </button>
+                          <ng-template scTooltipPortal>
+                            <div scTooltip>
+                              Copy<span scTooltipArrow></span>
+                            </div>
+                          </ng-template>
+                        </div>
+                        <div scTooltipProvider>
+                          <button scPdfViewerCutPages scTooltipTrigger>
+                            <svg siScissorsIcon></svg>
+                            <span class="sr-only">Cut</span>
+                          </button>
+                          <ng-template scTooltipPortal>
+                            <div scTooltip>Cut<span scTooltipArrow></span></div>
+                          </ng-template>
+                        </div>
+                        <div scTooltipProvider>
+                          <button scPdfViewerDeletePages scTooltipTrigger>
+                            <svg siTrash2Icon></svg>
+                            <span class="sr-only">Delete</span>
+                          </button>
+                          <ng-template scTooltipPortal>
+                            <div scTooltip>
+                              Delete<span scTooltipArrow></span>
+                            </div>
+                          </ng-template>
+                        </div>
+                        <div scTooltipProvider>
+                          <button scPdfViewerExportPages scTooltipTrigger>
+                            <svg siFileOutputIcon></svg>
+                            <span class="sr-only">Save selected pages</span>
+                          </button>
+                          <ng-template scTooltipPortal>
+                            <div scTooltip>
+                              Save selected pages as…<span
+                                scTooltipArrow
+                              ></span>
+                            </div>
+                          </ng-template>
+                        </div>
                         <span
                           class="text-muted-foreground ms-auto text-xs"
                           role="status"
@@ -1237,27 +1332,49 @@ const INK_COLORS = [
                       </p>
                     } @else {
                       <div class="flex gap-1 border-b px-2 py-1">
-                        <button
-                          scPdfViewerOutlineExpandAll
-                          [scTooltipTrigger]="'Expand all'"
-                        >
-                          <svg siChevronsUpDownIcon></svg>
-                          <span class="sr-only">Expand all</span>
-                        </button>
-                        <button
-                          scPdfViewerOutlineCollapseAll
-                          [scTooltipTrigger]="'Collapse all'"
-                        >
-                          <svg siChevronsDownUpIcon></svg>
-                          <span class="sr-only">Collapse all</span>
-                        </button>
-                        <button
-                          scPdfViewerOutlineFindCurrent
-                          [scTooltipTrigger]="'Find current outline item'"
-                        >
-                          <svg siLocateFixedIcon></svg>
-                          <span class="sr-only">Find current outline item</span>
-                        </button>
+                        <div scTooltipProvider>
+                          <button scPdfViewerOutlineExpandAll scTooltipTrigger>
+                            <svg siChevronsUpDownIcon></svg>
+                            <span class="sr-only">Expand all</span>
+                          </button>
+                          <ng-template scTooltipPortal>
+                            <div scTooltip>
+                              Expand all<span scTooltipArrow></span>
+                            </div>
+                          </ng-template>
+                        </div>
+                        <div scTooltipProvider>
+                          <button
+                            scPdfViewerOutlineCollapseAll
+                            scTooltipTrigger
+                          >
+                            <svg siChevronsDownUpIcon></svg>
+                            <span class="sr-only">Collapse all</span>
+                          </button>
+                          <ng-template scTooltipPortal>
+                            <div scTooltip>
+                              Collapse all<span scTooltipArrow></span>
+                            </div>
+                          </ng-template>
+                        </div>
+                        <div scTooltipProvider>
+                          <button
+                            scPdfViewerOutlineFindCurrent
+                            scTooltipTrigger
+                          >
+                            <svg siLocateFixedIcon></svg>
+                            <span class="sr-only"
+                              >Find current outline item</span
+                            >
+                          </button>
+                          <ng-template scTooltipPortal>
+                            <div scTooltip>
+                              Find current outline item<span
+                                scTooltipArrow
+                              ></span>
+                            </div>
+                          </ng-template>
+                        </div>
                       </div>
                       <nav aria-label="Outline" class="p-2">
                         <ng-container

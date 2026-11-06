@@ -25,6 +25,10 @@ import {
   ScInput,
   ScInputGroup,
   ScInputGroupAddon,
+  ScTooltip,
+  ScTooltipArrow,
+  ScTooltipPortal,
+  ScTooltipProvider,
   ScTooltipTrigger,
 } from '@semantic-components/ui';
 import { SiAudioLinesIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
@@ -37,7 +41,11 @@ import { SiAudioLinesIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
     ScInput,
     ScInputGroup,
     ScInputGroupAddon,
+    ScTooltipProvider,
     ScTooltipTrigger,
+    ScTooltipPortal,
+    ScTooltip,
+    ScTooltipArrow,
     SiAudioLinesIcon,
     SiPlusIcon,
   ],
@@ -53,15 +61,22 @@ import { SiAudioLinesIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
         <div scInputGroup>
           <input scInput placeholder="Send a message..." aria-label="Message" />
           <div scInputGroupAddon align="inline-end">
-            <button
-              scButton
-              variant="ghost"
-              size="icon-xs"
-              scTooltipTrigger="Voice Mode"
-            >
-              <svg siAudioLinesIcon></svg>
-              <span class="sr-only">Voice Mode</span>
-            </button>
+            <div scTooltipProvider>
+              <button
+                scButton
+                variant="ghost"
+                size="icon-xs"
+                scTooltipTrigger
+              >
+                <svg siAudioLinesIcon></svg>
+                <span class="sr-only">Voice Mode</span>
+              </button>
+              <ng-template scTooltipPortal>
+                <div scTooltip>
+                  Voice Mode<span scTooltipArrow></span>
+                </div>
+              </ng-template>
+            </div>
           </div>
         </div>
       </div>

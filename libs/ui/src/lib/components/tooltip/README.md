@@ -1,55 +1,44 @@
 # Tooltip
 
-A directive-based tooltip for displaying text hints on hover or focus. For rich content with HTML, images, or interactive elements, use Hovercard instead.
+A short label shown when the pointer rests on a control or the keyboard reaches it — as Base UI's Tooltip (parts, behaviour) in the look of the app's preset (`tooltip` key: shadcn's in each of the eight styles). Its content is yours: text, a `kbd`, anything short.
 
 ## Usage
 
 ```html
-<button [scTooltipTrigger]="'Add to library'">Hover me</button>
+<div scTooltipProvider side="top">
+  <button scButton scTooltipTrigger variant="outline" size="icon">
+    <svg siSaveIcon></svg>
+    <span class="sr-only">Save</span>
+  </button>
+  <ng-template scTooltipPortal>
+    <div scTooltip>
+      Save changes <kbd scKbd>S</kbd>
+      <span scTooltipArrow></span>
+    </div>
+  </ng-template>
+</div>
 ```
 
-### Position
+## Parts
 
-```html
-<button [scTooltipTrigger]="'Top'" tooltipPosition="top">Top</button>
-<button [scTooltipTrigger]="'Right'" tooltipPosition="right">Right</button>
-<button [scTooltipTrigger]="'Bottom'" tooltipPosition="bottom">Bottom</button>
-<button [scTooltipTrigger]="'Left'" tooltipPosition="left">Left</button>
-```
+| Part                | Selector                       | What it does                                                                                                                                                                |
+| ------------------- | ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ScTooltipProvider` | `div[scTooltipProvider]`       | `[(open)]`, `side` (`top`, `bottom`, `left`, `right`, `inline-start`, `inline-end`; flips without room), `align`, `offset` (4), `delay` (600), `closeDelay` (0), `disabled` |
+| `ScTooltipTrigger`  | `[scTooltipTrigger]`           | Your control: the pointer's hover opens it after the delay, keyboard focus at once; leaving, blur, a click and Escape close it; `aria-describedby` while open               |
+| `ScTooltipPortal`   | `ng-template[scTooltipPortal]` | The content, rendered while open                                                                                                                                            |
+| `ScTooltip`         | `div[scTooltip]`               | The tooltip: `role="tooltip"`, `data-side`, the preset's look; the pointer can move onto it; animates in and out                                                            |
+| `ScTooltipArrow`    | `span[scTooltipArrow]`         | Your arrow, on the side towards the trigger                                                                                                                                 |
+| `ScTooltipGroup`    | `[scTooltipGroup]`             | Tooltips side by side (a toolbar): once one has shown, the next opens at once and the one before closes (`timeout`, 400)                                                    |
 
-### Delay
+## Keyboard and screen readers
 
-```html
-<button [scTooltipTrigger]="'Delayed'" [tooltipDelay]="500">Show after 500ms</button> <button [scTooltipTrigger]="'Slow hide'" [tooltipHideDelay]="300">Hide after 300ms</button>
-```
+- A tooltip is a visual aid: name the trigger itself (its text, or `sr-only` text). While open it is the trigger's description (`role="tooltip"`, `aria-describedby`).
+- Keyboard focus opens it at once; Escape, blur or a click closes it. The pointer can move onto it without closing it (WCAG 1.4.13).
+- It doesn't open on touch: what matters goes in the page, or in a Popover.
+- A disabled button to explain: `scButton` with `disabled` and `softDisabled` — it keeps its focus and hover.
 
-### Disabled
+## Not shadcn's
 
-```html
-<button [scTooltipTrigger]="'Hidden'" [tooltipDisabled]="true">No tooltip</button>
-```
-
-## API
-
-### ScTooltipTrigger (Directive)
-
-Selector: `[scTooltipTrigger]`
-
-| Input              | Type                                     | Default | Description                          |
-| ------------------ | ---------------------------------------- | ------- | ------------------------------------ |
-| `scTooltipTrigger` | `string` (required)                      | -       | The tooltip text content             |
-| `tooltipPosition`  | `'top' \| 'right' \| 'bottom' \| 'left'` | `'top'` | Position relative to trigger element |
-| `tooltipDelay`     | `number`                                 | `200`   | Show delay in milliseconds           |
-| `tooltipHideDelay` | `number`                                 | `0`     | Hide delay in milliseconds           |
-| `tooltipDisabled`  | `boolean`                                | `false` | Whether the tooltip is disabled      |
-
-## Animation
-
-`ScTooltip` animates with Angular's `animate.enter` / `animate.leave`: it fades and zooms in, sliding from its `data-side` (the side it opened on, after any flip), and back out when it goes. Hiding detaches its overlay, and Angular removes it once that animation ends.
-
-## Accessibility
-
-- Sets `aria-describedby` on the trigger element when tooltip is visible
-- Tooltip has `role="tooltip"` and `aria-live="polite"`
-- Dismissible via Escape key
-- Triggered on both hover and focus
+- **One way**: no text shortcut (`[scTooltipTrigger]="'…'"`, the old Tooltip's); the content is your markup. The sidebar's `tooltip` on its menu buttons is its own (docs/todo.md).
+- **The arrow is your part** (shadcn's content draws it).
+- **Base UI's delay** (600 ms): shadcn's provider sets 0.

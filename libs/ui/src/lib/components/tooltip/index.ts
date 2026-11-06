@@ -1,3 +1,6 @@
-export { ScTooltipTrigger } from './tooltip-trigger';
-export { ScTooltipManager } from './tooltip-manager';
-export type { ScTooltipPosition } from './tooltip-manager';
+export * from './tooltip';
+export * from './tooltip-arrow';
+export * from './tooltip-group';
+export * from './tooltip-portal';
+export * from './tooltip-provider';
+export * from './tooltip-trigger';

@@ -1106,14 +1106,6 @@
   {
     "name": "Tooltip",
     "path": "tooltip",
-    "description": "A popup that displays information on hover or focus.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Overlay"
-  },
-  {
-    "name": "Tooltip Next",
-    "path": "tooltip-next",
     "description": "A short label shown on hover or keyboard focus — rich content, a group delay, in the look of the app's preset.",
     "status": "Experimental",
     "library": "ui",

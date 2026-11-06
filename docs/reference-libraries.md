@@ -557,6 +557,25 @@ A disabled button that keeps its focus and hover — so a tooltip can say why (2
 
 **Taken:** Angular Aria's name (the user, 2026-11-06), default `false`; Base UI's behaviour — we stop the click (capture phase, before your handlers), so you don't have to as with Material. The preset's `aria-disabled:pointer-events-none` is undone (`aria-disabled:pointer-events-auto aria-disabled:cursor-not-allowed`, replacing it) so the hover stays.
 
+## Tooltip
+
+A short label on hover or keyboard focus (`div[scTooltipProvider]`; rewritten and switched 2026-11-06): shadcn's Tooltip, Base UI's parts and behaviour. A shadcn component, so no web research: Base UI's docs (`@base-ui/react/docs`), shadcn's reference app and its 5 examples, the APG tooltip pattern.
+
+| Library                                                                                          | What to read                                                                                                                                                                                                                                          |
+| ------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Base UI Tooltip (`@base-ui/react/docs`)                                                          | Provider (`delay`, `closeDelay`, `timeout`: a warm group), Root (`open`, `disabled`, `disableHoverablePopup`), Trigger (`delay` 600, `closeOnClick`), Positioner (side, align, offsets, flips), Popup, Arrow; not on touch; the trigger must be named |
+| shadcn Tooltip (`shadcn-reference/presets/*/tooltip.tsx`, `apps/v4/examples/base/tooltip-*.tsx`) | The popup's corners per style, its arrow, room for a `kbd`; Sides, Keyboard, Disabled (a span round a disabled button), RTL                                                                                                                           |
+| APG Tooltip pattern                                                                              | `role="tooltip"`, the trigger `aria-describedby` it while shown; Escape closes                                                                                                                                                                        |
+
+**Taken:**
+
+- **Base UI's parts** as directives on your markup (provider, trigger, portal, tooltip, arrow, group) — the content is yours (text, `kbd`); the old string Tooltip is gone (45 uses moved).
+- **Its behaviour**: delay 600 (shadcn's provider: 0), focus opens at once, close on click and Escape, hoverable (WCAG 1.4.13), not on touch, a warm group that also closes the one before.
+- **APG's description**: `aria-describedby` while open.
+- **A disabled button explained**: `scButton`'s `softDisabled` (Button: disabled yet reachable, below), not shadcn's span (mouse only).
+- **The arrow your part**; the `data-slot` is `tooltip` (Kbd's preset reads it).
+- **Not** `trackCursorAxis`, detached handles, payloads, multiple triggers. The sidebar keeps a text `tooltip` of its own (docs/todo.md).
+
 ## Control Group
 
 An input or a select joined with its buttons (`div[scControlGroup]`): shadcn's Button Group, renamed for what it is for (the user, 2026-10-30: it is only useful when inputs or selects mix with buttons; buttons alone are on the Button page). A shadcn component, so no web research: Base UI and shadcn's reference app (2026-10-30).

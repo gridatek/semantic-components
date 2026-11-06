@@ -1,31 +1,31 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { DisabledTooltipNextDemo } from './disabled-tooltip-next-demo';
+import { DisabledTooltipDemo } from './disabled-tooltip-demo';
 
 @Component({
-  selector: 'app-disabled-tooltip-next-demo-container',
-  imports: [DemoContainer, DisabledTooltipNextDemo],
+  selector: 'app-disabled-tooltip-demo-container',
+  imports: [DemoContainer, DisabledTooltipDemo],
   template: `
     <app-demo-container
       title="Disabled button"
-      demoUrl="/demos/tooltip-next/disabled-tooltip-next-demo"
+      demoUrl="/demos/tooltip/disabled-tooltip-demo"
       [code]="code"
     >
-      <app-disabled-tooltip-next-demo />
+      <app-disabled-tooltip-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class DisabledTooltipNextDemoContainer {
+export class DisabledTooltipDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
-  ScTooltipNext,
-  ScTooltipNextArrow,
-  ScTooltipNextPortal,
-  ScTooltipNextProvider,
-  ScTooltipNextTrigger,
+  ScTooltip,
+  ScTooltipArrow,
+  ScTooltipPortal,
+  ScTooltipProvider,
+  ScTooltipTrigger,
 } from '@semantic-components/ui';
 
 /**
@@ -33,30 +33,30 @@ import {
  * focus and hover, so keyboard users get the tooltip too.
  */
 @Component({
-  selector: 'app-disabled-tooltip-next-demo',
+  selector: 'app-disabled-tooltip-demo',
   imports: [
     ScButton,
-    ScTooltipNext,
-    ScTooltipNextArrow,
-    ScTooltipNextPortal,
-    ScTooltipNextProvider,
-    ScTooltipNextTrigger,
+    ScTooltip,
+    ScTooltipArrow,
+    ScTooltipPortal,
+    ScTooltipProvider,
+    ScTooltipTrigger,
   ],
   template: \`
-    <div scTooltipNextProvider>
+    <div scTooltipProvider>
       <button
         scButton
-        scTooltipNextTrigger
+        scTooltipTrigger
         variant="outline"
         disabled
         softDisabled
       >
         Disabled
       </button>
-      <ng-template scTooltipNextPortal>
-        <div scTooltipNext>
+      <ng-template scTooltipPortal>
+        <div scTooltip>
           This feature is currently unavailable
-          <span scTooltipNextArrow></span>
+          <span scTooltipArrow></span>
         </div>
       </ng-template>
     </div>
@@ -64,5 +64,5 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class DisabledTooltipNextDemo {}`;
+export class DisabledTooltipDemo {}`;
 }

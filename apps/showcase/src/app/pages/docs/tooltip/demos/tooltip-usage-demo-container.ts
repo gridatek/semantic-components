@@ -10,10 +10,10 @@ import {
 import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 import { DevOnly } from '../../../../components/dev-only/dev-only';
 import { ConfigService } from '../../../../services/config-service';
-import { TooltipNextUsageDemo } from './tooltip-next-usage-demo';
+import { TooltipUsageDemo } from './tooltip-usage-demo';
 
 @Component({
-  selector: 'app-tooltip-next-usage-demo-container',
+  selector: 'app-tooltip-usage-demo-container',
   imports: [
     DevOnly,
     ScCodeBlock,
@@ -24,7 +24,7 @@ import { TooltipNextUsageDemo } from './tooltip-next-usage-demo';
     ScCodeBlockContent,
     SiCheckIcon,
     SiCopyIcon,
-    TooltipNextUsageDemo,
+    TooltipUsageDemo,
   ],
   template: `
     <div scCodeBlock>
@@ -46,14 +46,14 @@ import { TooltipNextUsageDemo } from './tooltip-next-usage-demo';
 
     @if (devMode()) {
       <app-dev-only>
-        <app-tooltip-next-usage-demo />
+        <app-tooltip-usage-demo />
       </app-dev-only>
     }
   `,
   host: { class: 'block w-full space-y-4' },
   encapsulation: ViewEncapsulation.None,
 })
-export class TooltipNextUsageDemoContainer {
+export class TooltipUsageDemoContainer {
   private readonly config = inject(ConfigService);
 
   protected readonly devMode = this.config.devMode;
@@ -61,30 +61,30 @@ export class TooltipNextUsageDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
-  ScTooltipNext,
-  ScTooltipNextArrow,
-  ScTooltipNextPortal,
-  ScTooltipNextProvider,
-  ScTooltipNextTrigger,
+  ScTooltip,
+  ScTooltipArrow,
+  ScTooltipPortal,
+  ScTooltipProvider,
+  ScTooltipTrigger,
 } from '@semantic-components/ui';
 
 @Component({
-  selector: 'app-tooltip-next-usage-demo',
+  selector: 'app-tooltip-usage-demo',
   imports: [
     ScButton,
-    ScTooltipNext,
-    ScTooltipNextArrow,
-    ScTooltipNextPortal,
-    ScTooltipNextProvider,
-    ScTooltipNextTrigger,
+    ScTooltip,
+    ScTooltipArrow,
+    ScTooltipPortal,
+    ScTooltipProvider,
+    ScTooltipTrigger,
   ],
   template: \`
-    <div scTooltipNextProvider>
-      <button scButton scTooltipNextTrigger variant="outline">Hover</button>
-      <ng-template scTooltipNextPortal>
-        <div scTooltipNext>
+    <div scTooltipProvider>
+      <button scButton scTooltipTrigger variant="outline">Hover</button>
+      <ng-template scTooltipPortal>
+        <div scTooltip>
           Add to library
-          <span scTooltipNextArrow></span>
+          <span scTooltipArrow></span>
         </div>
       </ng-template>
     </div>
@@ -92,5 +92,5 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class TooltipNextUsageDemo {}`;
+export class TooltipUsageDemo {}`;
 }

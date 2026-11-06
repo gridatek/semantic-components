@@ -1,23 +1,23 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
-import { ScTooltipNextProvider } from './tooltip-next-provider';
+import { ScTooltipProvider } from './tooltip-provider';
 
 /**
  * The tooltip's arrow, written by you inside it: on the side towards the
  * trigger, at its middle.
  */
 @Directive({
-  selector: 'span[scTooltipNextArrow]',
+  selector: 'span[scTooltipArrow]',
   host: {
     'aria-hidden': 'true',
     '[attr.data-side]': 'tooltip.placedSide()',
     '[class]': 'class()',
   },
 })
-export class ScTooltipNextArrow {
+export class ScTooltipArrow {
   private readonly styles = injectPreset().tooltip;
-  protected readonly tooltip = inject(ScTooltipNextProvider);
+  protected readonly tooltip = inject(ScTooltipProvider);
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>

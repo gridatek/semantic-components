@@ -1,53 +1,53 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { KeyboardTooltipNextDemo } from './keyboard-tooltip-next-demo';
+import { KeyboardTooltipDemo } from './keyboard-tooltip-demo';
 
 @Component({
-  selector: 'app-keyboard-tooltip-next-demo-container',
-  imports: [DemoContainer, KeyboardTooltipNextDemo],
+  selector: 'app-keyboard-tooltip-demo-container',
+  imports: [DemoContainer, KeyboardTooltipDemo],
   template: `
     <app-demo-container
       title="Keyboard shortcut"
-      demoUrl="/demos/tooltip-next/keyboard-tooltip-next-demo"
+      demoUrl="/demos/tooltip/keyboard-tooltip-demo"
       [code]="code"
     >
-      <app-keyboard-tooltip-next-demo />
+      <app-keyboard-tooltip-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class KeyboardTooltipNextDemoContainer {
+export class KeyboardTooltipDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScKbd,
-  ScTooltipNext,
-  ScTooltipNextArrow,
-  ScTooltipNextPortal,
-  ScTooltipNextProvider,
-  ScTooltipNextTrigger,
+  ScTooltip,
+  ScTooltipArrow,
+  ScTooltipPortal,
+  ScTooltipProvider,
+  ScTooltipTrigger,
 } from '@semantic-components/ui';
 import { SiSaveIcon } from '@semantic-icons/lucide-icons';
 
 /** Content is yours, a kbd too; the button says its shortcut to screen readers with aria-keyshortcuts. */
 @Component({
-  selector: 'app-keyboard-tooltip-next-demo',
+  selector: 'app-keyboard-tooltip-demo',
   imports: [
     ScButton,
     ScKbd,
-    ScTooltipNext,
-    ScTooltipNextArrow,
-    ScTooltipNextPortal,
-    ScTooltipNextProvider,
-    ScTooltipNextTrigger,
+    ScTooltip,
+    ScTooltipArrow,
+    ScTooltipPortal,
+    ScTooltipProvider,
+    ScTooltipTrigger,
     SiSaveIcon,
   ],
   template: \`
-    <div scTooltipNextProvider>
+    <div scTooltipProvider>
       <button
         scButton
-        scTooltipNextTrigger
+        scTooltipTrigger
         variant="outline"
         size="icon"
         aria-keyshortcuts="S"
@@ -55,10 +55,10 @@ import { SiSaveIcon } from '@semantic-icons/lucide-icons';
         <svg siSaveIcon></svg>
         <span class="sr-only">Save</span>
       </button>
-      <ng-template scTooltipNextPortal>
-        <div scTooltipNext>
+      <ng-template scTooltipPortal>
+        <div scTooltip>
           Save Changes <kbd scKbd>S</kbd>
-          <span scTooltipNextArrow></span>
+          <span scTooltipArrow></span>
         </div>
       </ng-template>
     </div>
@@ -66,5 +66,5 @@ import { SiSaveIcon } from '@semantic-icons/lucide-icons';
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class KeyboardTooltipNextDemo {}`;
+export class KeyboardTooltipDemo {}`;
 }

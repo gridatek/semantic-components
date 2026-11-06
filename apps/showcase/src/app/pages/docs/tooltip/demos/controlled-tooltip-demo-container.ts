@@ -1,52 +1,52 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { ControlledTooltipNextDemo } from './controlled-tooltip-next-demo';
+import { ControlledTooltipDemo } from './controlled-tooltip-demo';
 
 @Component({
-  selector: 'app-controlled-tooltip-next-demo-container',
-  imports: [DemoContainer, ControlledTooltipNextDemo],
+  selector: 'app-controlled-tooltip-demo-container',
+  imports: [DemoContainer, ControlledTooltipDemo],
   template: `
     <app-demo-container
       title="Controlled"
-      demoUrl="/demos/tooltip-next/controlled-tooltip-next-demo"
+      demoUrl="/demos/tooltip/controlled-tooltip-demo"
       [code]="code"
     >
-      <app-controlled-tooltip-next-demo />
+      <app-controlled-tooltip-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ControlledTooltipNextDemoContainer {
+export class ControlledTooltipDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
-  ScTooltipNext,
-  ScTooltipNextArrow,
-  ScTooltipNextPortal,
-  ScTooltipNextProvider,
-  ScTooltipNextTrigger,
+  ScTooltip,
+  ScTooltipArrow,
+  ScTooltipPortal,
+  ScTooltipProvider,
+  ScTooltipTrigger,
 } from '@semantic-components/ui';
 
 /** [(open)]: the tooltip opened and closed by the page too. */
 @Component({
-  selector: 'app-controlled-tooltip-next-demo',
+  selector: 'app-controlled-tooltip-demo',
   imports: [
     ScButton,
-    ScTooltipNext,
-    ScTooltipNextArrow,
-    ScTooltipNextPortal,
-    ScTooltipNextProvider,
-    ScTooltipNextTrigger,
+    ScTooltip,
+    ScTooltipArrow,
+    ScTooltipPortal,
+    ScTooltipProvider,
+    ScTooltipTrigger,
   ],
   template: \`
     <div class="flex items-center gap-4">
-      <div scTooltipNextProvider [(open)]="open">
-        <button scButton scTooltipNextTrigger variant="outline">Trigger</button>
-        <ng-template scTooltipNextPortal>
-          <div scTooltipNext>
+      <div scTooltipProvider [(open)]="open">
+        <button scButton scTooltipTrigger variant="outline">Trigger</button>
+        <ng-template scTooltipPortal>
+          <div scTooltip>
             Opened from outside
-            <span scTooltipNextArrow></span>
+            <span scTooltipArrow></span>
           </div>
         </ng-template>
       </div>
@@ -58,7 +58,7 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ControlledTooltipNextDemo {
+export class ControlledTooltipDemo {
   protected readonly open = signal(false);
 }`;
 }

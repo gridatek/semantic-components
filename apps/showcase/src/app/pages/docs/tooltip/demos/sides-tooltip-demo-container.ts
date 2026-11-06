@@ -1,107 +1,107 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { SidesTooltipNextDemo } from './sides-tooltip-next-demo';
+import { SidesTooltipDemo } from './sides-tooltip-demo';
 
 @Component({
-  selector: 'app-sides-tooltip-next-demo-container',
-  imports: [DemoContainer, SidesTooltipNextDemo],
+  selector: 'app-sides-tooltip-demo-container',
+  imports: [DemoContainer, SidesTooltipDemo],
   template: `
     <app-demo-container
       title="Sides"
-      demoUrl="/demos/tooltip-next/sides-tooltip-next-demo"
+      demoUrl="/demos/tooltip/sides-tooltip-demo"
       [code]="code"
     >
-      <app-sides-tooltip-next-demo />
+      <app-sides-tooltip-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class SidesTooltipNextDemoContainer {
+export class SidesTooltipDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
-  ScTooltipNext,
-  ScTooltipNextArrow,
-  ScTooltipNextPortal,
-  ScTooltipNextProvider,
-  ScTooltipNextTrigger,
+  ScTooltip,
+  ScTooltipArrow,
+  ScTooltipPortal,
+  ScTooltipProvider,
+  ScTooltipTrigger,
 } from '@semantic-components/ui';
 
 /** side: top (default), bottom, left, right — or inline-start, inline-end, which follow the direction. It flips when there is no room. */
 @Component({
-  selector: 'app-sides-tooltip-next-demo',
+  selector: 'app-sides-tooltip-demo',
   imports: [
     ScButton,
-    ScTooltipNext,
-    ScTooltipNextArrow,
-    ScTooltipNextPortal,
-    ScTooltipNextProvider,
-    ScTooltipNextTrigger,
+    ScTooltip,
+    ScTooltipArrow,
+    ScTooltipPortal,
+    ScTooltipProvider,
+    ScTooltipTrigger,
   ],
   template: \`
     <div class="flex flex-wrap gap-2">
-      <div scTooltipNextProvider side="left">
+      <div scTooltipProvider side="left">
         <button
           scButton
-          scTooltipNextTrigger
+          scTooltipTrigger
           variant="outline"
           class="capitalize"
         >
           left
         </button>
-        <ng-template scTooltipNextPortal>
-          <div scTooltipNext>
+        <ng-template scTooltipPortal>
+          <div scTooltip>
             Add to library
-            <span scTooltipNextArrow></span>
+            <span scTooltipArrow></span>
           </div>
         </ng-template>
       </div>
-      <div scTooltipNextProvider side="top">
+      <div scTooltipProvider side="top">
         <button
           scButton
-          scTooltipNextTrigger
+          scTooltipTrigger
           variant="outline"
           class="capitalize"
         >
           top
         </button>
-        <ng-template scTooltipNextPortal>
-          <div scTooltipNext>
+        <ng-template scTooltipPortal>
+          <div scTooltip>
             Add to library
-            <span scTooltipNextArrow></span>
+            <span scTooltipArrow></span>
           </div>
         </ng-template>
       </div>
-      <div scTooltipNextProvider side="bottom">
+      <div scTooltipProvider side="bottom">
         <button
           scButton
-          scTooltipNextTrigger
+          scTooltipTrigger
           variant="outline"
           class="capitalize"
         >
           bottom
         </button>
-        <ng-template scTooltipNextPortal>
-          <div scTooltipNext>
+        <ng-template scTooltipPortal>
+          <div scTooltip>
             Add to library
-            <span scTooltipNextArrow></span>
+            <span scTooltipArrow></span>
           </div>
         </ng-template>
       </div>
-      <div scTooltipNextProvider side="right">
+      <div scTooltipProvider side="right">
         <button
           scButton
-          scTooltipNextTrigger
+          scTooltipTrigger
           variant="outline"
           class="capitalize"
         >
           right
         </button>
-        <ng-template scTooltipNextPortal>
-          <div scTooltipNext>
+        <ng-template scTooltipPortal>
+          <div scTooltip>
             Add to library
-            <span scTooltipNextArrow></span>
+            <span scTooltipArrow></span>
           </div>
         </ng-template>
       </div>
@@ -110,5 +110,5 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class SidesTooltipNextDemo {}`;
+export class SidesTooltipDemo {}`;
 }

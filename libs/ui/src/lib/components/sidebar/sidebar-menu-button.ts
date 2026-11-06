@@ -6,7 +6,7 @@ import {
   input,
 } from '@angular/core';
 import { type VariantProps, cva } from 'class-variance-authority';
-import { bindInput, cn } from '../../utils';
+import { cn } from '../../utils';
 import { ScSidebarMenuTooltip } from './sidebar-menu-tooltip';
 import { ScSidebarState } from './sidebar-state';
 
@@ -36,15 +36,15 @@ export type ScSidebarMenuButtonVariants = VariantProps<
 /**
  * A menu item's button or link: your icon, then its text (in a `span`, kept
  * as its name when collapsed to icons). `active` for the page shown
- * (`aria-current="page"`). `tooltip`: shown (our Tooltip) only while
- * collapsed to icons. On phones, following a link closes the sheet.
+ * (`aria-current="page"`). `tooltip`: its label, shown beside it (in the
+ * Tooltip's look) only while collapsed to icons. On phones, following a link closes the sheet.
  */
 @Directive({
   selector: 'a[scSidebarMenuButton], button[scSidebarMenuButton]',
   hostDirectives: [
     {
       directive: ScSidebarMenuTooltip,
-      inputs: ['scTooltipTrigger: tooltip'],
+      inputs: ['tooltip'],
     },
   ],
   host: {
@@ -58,7 +58,6 @@ export type ScSidebarMenuButtonVariants = VariantProps<
 })
 export class ScSidebarMenuButton {
   private readonly state = inject(ScSidebarState, { optional: true });
-  private readonly tooltip = inject(ScSidebarMenuTooltip);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScSidebarMenuButtonVariants['variant']>('default');
@@ -72,20 +71,6 @@ export class ScSidebarMenuButton {
       this.classInput(),
     ),
   );
-
-  constructor() {
-    // Only collapsed to icons, beside the page: there the text is hidden.
-    bindInput(
-      this.tooltip.disabled,
-      computed(
-        () =>
-          !this.tooltip.content() ||
-          this.state?.state() !== 'collapsed' ||
-          !!this.state?.isMobile(),
-      ),
-    );
-    bindInput(this.tooltip.position, 'right');
-  }
 
   protected onClick(event: Event): void {
     // A link followed on a phone: the sheet goes.

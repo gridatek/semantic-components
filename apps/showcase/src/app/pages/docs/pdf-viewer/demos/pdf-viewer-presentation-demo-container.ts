@@ -29,6 +29,10 @@ import {
   ScSpinner,
   ScToggleGroup,
   ScToggleGroupItem,
+  ScTooltip,
+  ScTooltipArrow,
+  ScTooltipPortal,
+  ScTooltipProvider,
   ScTooltipTrigger,
   cn,
 } from '@semantic-components/ui';
@@ -73,7 +77,11 @@ import {
     ScPopover,
     ScToggleGroup,
     ScToggleGroupItem,
+    ScTooltipProvider,
     ScTooltipTrigger,
+    ScTooltipPortal,
+    ScTooltip,
+    ScTooltipArrow,
     ScSpinner,
     SiBookOpenIcon,
     SiLoaderCircleIcon,
@@ -98,16 +106,23 @@ import {
             }
           </span>
           <div scPopoverProvider side="bottom" align="start">
-            <button
-              scButton
-              scPopoverTrigger
-              variant="ghost"
-              size="icon"
-              [scTooltipTrigger]="'View options'"
-            >
-              <svg siBookOpenIcon></svg>
-              <span class="sr-only">View options</span>
-            </button>
+            <div scTooltipProvider>
+              <button
+                scButton
+                scPopoverTrigger
+                variant="ghost"
+                size="icon"
+                scTooltipTrigger
+              >
+                <svg siBookOpenIcon></svg>
+                <span class="sr-only">View options</span>
+              </button>
+              <ng-template scTooltipPortal>
+                <div scTooltip>
+                  View options<span scTooltipArrow></span>
+                </div>
+              </ng-template>
+            </div>
             <ng-template scPopoverPortal>
               <div scPopover class="w-auto gap-4">
                 <div class="grid gap-2">

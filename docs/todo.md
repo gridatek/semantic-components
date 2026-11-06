@@ -18,11 +18,13 @@ Open work found along the way, kept for later — tick an item when it's done. N
 - [ ] **Toast: an old review's findings, to check in its turn** (from `toast/REVIEW.md`, 2026-10-23, removed with the rule of one md per component folder; some are out of date — the toast swipes now): the dismiss animation never plays; hover-pause outputs wired but unconnected; duplicate rendering with several stacks (demos); the live region should be on the container; private CDK API in `toaster.ts`; no maximum number of toasts; a field public by mistake in `toast-stack.ts`.
 - [ ] **Tooltip: an old review's findings, to check in its turn** (from `tooltip/REVIEW.md`, 2026-10-23, removed likewise): no fallback if the animation never ends (the tooltip can get stuck); Escape leaves a stale `aria-describedby` on the trigger; `aria-live` may announce twice; no touch support (tap to show, tap outside to hide); content is a snapshot, not reactive; an outside dismissal doesn't sync the trigger's state; `ScTooltipConfig` not exported.
 
-- [ ] **Tooltip: rich content** — `[scTooltipTrigger]` takes a string, so a tooltip can't hold a `<kbd>` (shadcn's Kbd Tooltip example: "Save Changes <Kbd>S</Kbd>"). For Tooltip's turn; the key's tooltip colours (`in-data-[slot=tooltip-content]:…`) are already in the `kbd` preset (2026-11-05).
+- [ ] **Kbd: shadcn's Tooltip example** — the Tooltip takes markup now (2026-11-06), so a `<kbd>` fits in it: add Kbd's Tooltip example ("Save Changes <kbd>S</kbd>"; Tooltip's Keyboard shortcut example has one).
 
 - [ ] **Input Group: a disabled group dims its words** — a group whose control is disabled is half opacity, its addon text too ("Validating...": 2:1, axe fails). shadcn's does the same. For Input Group's turn: dim the control only, or keep the addon's text at 4.5:1 (seen in Spinner's demos, 2026-11-05).
 
 - [ ] **Tooltip: the arrow in RTL** — the user sees the arrow nearly on the trigger's text in RTL (2026-11-06). Measured: the arrow stands out 6px past the tooltip, the gap is 4px (shadcn's), so the tip reaches 2px into the trigger in both directions. To come back to (an 8px gap was tried and reverted).
+
+- [ ] **Sidebar: the menu button's `tooltip`, to think about in depth** — `[tooltip]="item.label"` stays (shadcn's API), but since the Tooltip became markup (2026-11-06) the sidebar shows it through its own text tooltip (`ScSidebarMenuTooltip` + an internal panel: the `tooltip` preset, its delay, focus, Escape, hoverable) — a second tooltip, text only, kept apart from the public one. The other way: the consumer writes the Tooltip's markup round each menu button (`[disabled]="!collapsed"`), one tooltip but about 6 lines an item. The user, 2026-11-06: keep the `tooltip` input for now, think about it later.
 
 ## Larger items
 
