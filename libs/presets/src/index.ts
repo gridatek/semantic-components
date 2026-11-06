@@ -357,6 +357,12 @@ export interface ScScrollAreaStyles {
   nativeThumb: string;
 }
 
+/** A resizable's parts that change from style to style. */
+export interface ScResizableStyles {
+  /** The handle's grip. */
+  grip: string;
+}
+
 /** A preset: the components' classes in one of shadcn's styles. */
 export interface ScPreset {
   accordion: ScAccordionStyles;
@@ -409,6 +415,7 @@ export interface ScPreset {
   popover: ScPopoverStyles;
   previewCard: ScPreviewCardStyles;
   questionnaire: ScQuestionnaireStyles;
+  resizable: ScResizableStyles;
   scrollArea: ScScrollAreaStyles;
   select: ScSelectStyles;
   sheet: ScSheetStyles;

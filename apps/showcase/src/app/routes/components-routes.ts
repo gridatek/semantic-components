@@ -566,6 +566,12 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/resizable/resizable-page'),
       },
       {
+        path: 'resizable-next',
+        title: 'Resizable Next - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/resizable-next/resizable-next-page'),
+      },
+      {
         path: 'scheduler',
         title: 'Scheduler - Semantic Components',
         loadComponent: () => import('../pages/docs/scheduler/scheduler-page'),

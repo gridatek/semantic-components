@@ -816,6 +816,14 @@
     "category": "Layout"
   },
   {
+    "name": "Resizable Next",
+    "path": "resizable-next",
+    "description": "Panels resized by the handles between them, by pointer or keyboard — in the look of the app's preset.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Layout"
+  },
+  {
     "name": "Sankey Chart",
     "path": "sankey-chart",
     "description": "Flows between nodes, each as thick as its value, the nodes in columns.",

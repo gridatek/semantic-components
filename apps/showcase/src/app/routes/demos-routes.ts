@@ -4165,6 +4165,53 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/resizable-next',
+    children: [
+      {
+        path: 'resizable-next-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/resizable-next/demos/resizable-next-usage-demo').then(
+            (m) => m.ResizableNextUsageDemo,
+          ),
+      },
+      {
+        path: 'handle-resizable-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/resizable-next/demos/handle-resizable-next-demo').then(
+            (m) => m.HandleResizableNextDemo,
+          ),
+      },
+      {
+        path: 'vertical-resizable-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/resizable-next/demos/vertical-resizable-next-demo').then(
+            (m) => m.VerticalResizableNextDemo,
+          ),
+      },
+      {
+        path: 'collapsible-resizable-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/resizable-next/demos/collapsible-resizable-next-demo').then(
+            (m) => m.CollapsibleResizableNextDemo,
+          ),
+      },
+      {
+        path: 'remembered-resizable-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/resizable-next/demos/remembered-resizable-next-demo').then(
+            (m) => m.RememberedResizableNextDemo,
+          ),
+      },
+      {
+        path: 'rtl-resizable-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/resizable-next/demos/rtl-resizable-next-demo').then(
+            (m) => m.RtlResizableNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/scroll-area',
     children: [
       {

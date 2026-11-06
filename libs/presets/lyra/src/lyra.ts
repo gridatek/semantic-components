@@ -35,6 +35,7 @@ import { pagination } from './pagination';
 import { popover } from './popover';
 import { previewCard } from './preview-card';
 import { questionnaire } from './questionnaire';
+import { resizable } from './resizable';
 import { scrollArea } from './scroll-area';
 import { select } from './select';
 import { sheet } from './sheet';
@@ -81,6 +82,7 @@ export const lyra: ScPreset = {
   popover,
   previewCard,
   questionnaire,
+  resizable,
   scrollArea,
   select,
   sheet,

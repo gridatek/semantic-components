@@ -1,0 +1,40 @@
+import { Component, ViewEncapsulation } from '@angular/core';
+import {
+  ScFrame,
+  ScResizableHandleNext,
+  ScResizableHandleNextGrip,
+  ScResizablePanelGroupNext,
+  ScResizablePanelNext,
+} from '@semantic-components/ui';
+
+/** A grip on the handle: a scResizableHandleNextGrip inside it. */
+@Component({
+  selector: 'app-handle-resizable-next-demo',
+  imports: [
+    ScFrame,
+    ScResizableHandleNext,
+    ScResizableHandleNextGrip,
+    ScResizablePanelGroupNext,
+    ScResizablePanelNext,
+  ],
+  template: `
+    <div scResizablePanelGroupNext scFrame class="min-h-[200px] max-w-sm">
+      <div scResizablePanelNext [defaultSize]="25">
+        <div class="flex h-full items-center justify-center p-6">
+          <span class="font-semibold">Sidebar</span>
+        </div>
+      </div>
+      <div scResizableHandleNext aria-label="Resize Sidebar">
+        <div scResizableHandleNextGrip></div>
+      </div>
+      <div scResizablePanelNext [defaultSize]="75">
+        <div class="flex h-full items-center justify-center p-6">
+          <span class="font-semibold">Content</span>
+        </div>
+      </div>
+    </div>
+  `,
+  host: { class: 'flex w-full justify-center' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class HandleResizableNextDemo {}
