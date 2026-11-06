@@ -730,14 +730,6 @@
   {
     "name": "Popover",
     "path": "popover",
-    "description": "Displays floating content in relation to a trigger.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Overlay"
-  },
-  {
-    "name": "Popover Next",
-    "path": "popover-next",
     "description": "Rich content in a panel beside its trigger — a dialog, modal or not, opened by a click or a hover, in the look of the app's preset.",
     "status": "Experimental",
     "library": "ui",

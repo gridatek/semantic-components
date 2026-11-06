@@ -1,48 +1,46 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
-  ScPopoverNext,
-  ScPopoverNextClose,
-  ScPopoverNextDescription,
-  ScPopoverNextHeader,
-  ScPopoverNextPortal,
-  ScPopoverNextProvider,
-  ScPopoverNextTitle,
-  ScPopoverNextTrigger,
+  ScPopover,
+  ScPopoverClose,
+  ScPopoverDescription,
+  ScPopoverHeader,
+  ScPopoverPortal,
+  ScPopoverProvider,
+  ScPopoverTitle,
+  ScPopoverTrigger,
 } from '@semantic-components/ui';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 /** [(open)]: opened and closed by the page too — a close button inside, yours. */
 @Component({
-  selector: 'app-controlled-popover-next-demo',
+  selector: 'app-controlled-popover-demo',
   imports: [
     ScButton,
-    ScPopoverNext,
-    ScPopoverNextClose,
-    ScPopoverNextDescription,
-    ScPopoverNextHeader,
-    ScPopoverNextPortal,
-    ScPopoverNextProvider,
-    ScPopoverNextTitle,
-    ScPopoverNextTrigger,
+    ScPopover,
+    ScPopoverClose,
+    ScPopoverDescription,
+    ScPopoverHeader,
+    ScPopoverPortal,
+    ScPopoverProvider,
+    ScPopoverTitle,
+    ScPopoverTrigger,
     SiXIcon,
   ],
   template: `
     <div class="flex items-center gap-4">
-      <div scPopoverNextProvider [(open)]="open">
-        <button scButton scPopoverNextTrigger variant="outline">
-          Settings
-        </button>
-        <ng-template scPopoverNextPortal>
-          <div scPopoverNext>
+      <div scPopoverProvider [(open)]="open">
+        <button scButton scPopoverTrigger variant="outline">Settings</button>
+        <ng-template scPopoverPortal>
+          <div scPopover>
             <div class="flex items-start justify-between gap-2">
-              <div scPopoverNextHeader>
-                <h2 scPopoverNextTitle>Settings</h2>
-                <p scPopoverNextDescription>
+              <div scPopoverHeader>
+                <h2 scPopoverTitle>Settings</h2>
+                <p scPopoverDescription>
                   Opened from outside, closed from inside.
                 </p>
               </div>
-              <button scPopoverNextClose>
+              <button scPopoverClose>
                 <svg siXIcon></svg>
                 <span class="sr-only">Close</span>
               </button>
@@ -58,6 +56,6 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ControlledPopoverNextDemo {
+export class ControlledPopoverDemo {
   protected readonly open = signal(false);
 }

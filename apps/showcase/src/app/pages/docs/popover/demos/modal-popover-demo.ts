@@ -5,45 +5,43 @@ import {
   ScFieldGroup,
   ScInput,
   ScLabel,
-  ScPopoverNext,
-  ScPopoverNextDescription,
-  ScPopoverNextHeader,
-  ScPopoverNextPortal,
-  ScPopoverNextProvider,
-  ScPopoverNextTitle,
-  ScPopoverNextTrigger,
+  ScPopover,
+  ScPopoverDescription,
+  ScPopoverHeader,
+  ScPopoverPortal,
+  ScPopoverProvider,
+  ScPopoverTitle,
+  ScPopoverTrigger,
   ScSelectOnFocus,
 } from '@semantic-components/ui';
 
 /** modal: false (default) — Tab may leave, and closes it; trap-focus — Tab stays inside; true — and the page behind takes no scroll or click. */
 @Component({
-  selector: 'app-modal-popover-next-demo',
+  selector: 'app-modal-popover-demo',
   imports: [
     ScButton,
     ScField,
     ScFieldGroup,
     ScInput,
     ScLabel,
-    ScPopoverNext,
-    ScPopoverNextDescription,
-    ScPopoverNextHeader,
-    ScPopoverNextPortal,
-    ScPopoverNextProvider,
-    ScPopoverNextTitle,
-    ScPopoverNextTrigger,
+    ScPopover,
+    ScPopoverDescription,
+    ScPopoverHeader,
+    ScPopoverPortal,
+    ScPopoverProvider,
+    ScPopoverTitle,
+    ScPopoverTrigger,
     ScSelectOnFocus,
   ],
   template: `
     <div class="flex flex-wrap gap-2">
-      <div scPopoverNextProvider>
-        <button scButton scPopoverNextTrigger variant="outline">
-          Not modal
-        </button>
-        <ng-template scPopoverNextPortal>
-          <div scPopoverNext class="w-64">
-            <div scPopoverNextHeader>
-              <h2 scPopoverNextTitle>Not modal</h2>
-              <p scPopoverNextDescription>Tab through it, then press Escape.</p>
+      <div scPopoverProvider>
+        <button scButton scPopoverTrigger variant="outline">Not modal</button>
+        <ng-template scPopoverPortal>
+          <div scPopover class="w-64">
+            <div scPopoverHeader>
+              <h2 scPopoverTitle>Not modal</h2>
+              <p scPopoverDescription>Tab through it, then press Escape.</p>
             </div>
             <div scFieldGroup class="gap-4">
               <div scField orientation="horizontal">
@@ -58,15 +56,13 @@ import {
           </div>
         </ng-template>
       </div>
-      <div scPopoverNextProvider [modal]="'trap-focus'">
-        <button scButton scPopoverNextTrigger variant="outline">
-          Trap focus
-        </button>
-        <ng-template scPopoverNextPortal>
-          <div scPopoverNext class="w-64">
-            <div scPopoverNextHeader>
-              <h2 scPopoverNextTitle>Trap focus</h2>
-              <p scPopoverNextDescription>Tab through it, then press Escape.</p>
+      <div scPopoverProvider [modal]="'trap-focus'">
+        <button scButton scPopoverTrigger variant="outline">Trap focus</button>
+        <ng-template scPopoverPortal>
+          <div scPopover class="w-64">
+            <div scPopoverHeader>
+              <h2 scPopoverTitle>Trap focus</h2>
+              <p scPopoverDescription>Tab through it, then press Escape.</p>
             </div>
             <div scFieldGroup class="gap-4">
               <div scField orientation="horizontal">
@@ -81,13 +77,13 @@ import {
           </div>
         </ng-template>
       </div>
-      <div scPopoverNextProvider [modal]="true">
-        <button scButton scPopoverNextTrigger variant="outline">Modal</button>
-        <ng-template scPopoverNextPortal>
-          <div scPopoverNext class="w-64">
-            <div scPopoverNextHeader>
-              <h2 scPopoverNextTitle>Modal</h2>
-              <p scPopoverNextDescription>Tab through it, then press Escape.</p>
+      <div scPopoverProvider [modal]="true">
+        <button scButton scPopoverTrigger variant="outline">Modal</button>
+        <ng-template scPopoverPortal>
+          <div scPopover class="w-64">
+            <div scPopoverHeader>
+              <h2 scPopoverTitle>Modal</h2>
+              <p scPopoverDescription>Tab through it, then press Escape.</p>
             </div>
             <div scFieldGroup class="gap-4">
               <div scField orientation="horizontal">
@@ -107,4 +103,4 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ModalPopoverNextDemo {}
+export class ModalPopoverDemo {}

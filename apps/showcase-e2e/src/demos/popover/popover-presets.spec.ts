@@ -23,7 +23,7 @@ const PRESETS: Record<string, ScPreset> = {
   rhea,
 };
 
-test.describe('Popover Next in every preset', () => {
+test.describe('Popover in every preset', () => {
   // A docs page and axe, twice: slow under load.
   test.slow();
 
@@ -37,18 +37,14 @@ test.describe('Popover Next in every preset', () => {
       await context.addCookies([
         { name: 'sc-preset', value: preset, url: baseURL! },
       ]);
-      await page.goto('/demos/popover-next/basic-popover-next-demo');
+      await page.goto('/demos/popover/basic-popover-demo');
       await page.getByRole('button', { name: 'Open Popover' }).click();
       for (const [target, wanted, what] of [
         [page.getByRole('dialog'), `${styles.popover.popup}`, 'popover'],
+        [page.locator('[scPopoverHeader]'), styles.popover.header, 'header'],
+        [page.locator('[scPopoverTitle]'), styles.popover.title, 'title'],
         [
-          page.locator('[scPopoverNextHeader]'),
-          styles.popover.header,
-          'header',
-        ],
-        [page.locator('[scPopoverNextTitle]'), styles.popover.title, 'title'],
-        [
-          page.locator('[scPopoverNextDescription]'),
+          page.locator('[scPopoverDescription]'),
           styles.popover.description,
           'description',
         ],
@@ -65,7 +61,7 @@ test.describe('Popover Next in every preset', () => {
           .toEqual([]);
       }
 
-      await page.goto('/docs/components/popover-next');
+      await page.goto('/docs/components/popover');
       await expectNoA11yViolations(page);
       await expectNoA11yViolations(page, { dark: true });
     });

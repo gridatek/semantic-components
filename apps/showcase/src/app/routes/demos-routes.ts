@@ -3851,6 +3851,13 @@ export const demosRoutes: Route[] = [
     path: 'demos/popover',
     children: [
       {
+        path: 'popover-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/popover/demos/popover-usage-demo').then(
+            (m) => m.PopoverUsageDemo,
+          ),
+      },
+      {
         path: 'basic-popover-demo',
         loadComponent: () =>
           import('../pages/docs/popover/demos/basic-popover-demo').then(
@@ -3858,99 +3865,45 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'top-popover-demo',
+        path: 'alignments-popover-demo',
         loadComponent: () =>
-          import('../pages/docs/popover/demos/top-popover-demo').then(
-            (m) => m.TopPopoverDemo,
+          import('../pages/docs/popover/demos/alignments-popover-demo').then(
+            (m) => m.AlignmentsPopoverDemo,
           ),
       },
       {
-        path: 'right-popover-demo',
+        path: 'sides-popover-demo',
         loadComponent: () =>
-          import('../pages/docs/popover/demos/right-popover-demo').then(
-            (m) => m.RightPopoverDemo,
+          import('../pages/docs/popover/demos/sides-popover-demo').then(
+            (m) => m.SidesPopoverDemo,
           ),
       },
       {
-        path: 'left-popover-demo',
+        path: 'hover-popover-demo',
         loadComponent: () =>
-          import('../pages/docs/popover/demos/left-popover-demo').then(
-            (m) => m.LeftPopoverDemo,
+          import('../pages/docs/popover/demos/hover-popover-demo').then(
+            (m) => m.HoverPopoverDemo,
           ),
       },
       {
-        path: 'align-start-popover-demo',
+        path: 'modal-popover-demo',
         loadComponent: () =>
-          import('../pages/docs/popover/demos/align-start-popover-demo').then(
-            (m) => m.AlignStartPopoverDemo,
+          import('../pages/docs/popover/demos/modal-popover-demo').then(
+            (m) => m.ModalPopoverDemo,
           ),
       },
       {
-        path: 'align-end-popover-demo',
+        path: 'controlled-popover-demo',
         loadComponent: () =>
-          import('../pages/docs/popover/demos/align-end-popover-demo').then(
-            (m) => m.AlignEndPopoverDemo,
-          ),
-      },
-    ],
-  },
-  {
-    path: 'demos/popover-next',
-    children: [
-      {
-        path: 'popover-next-usage-demo',
-        loadComponent: () =>
-          import('../pages/docs/popover-next/demos/popover-next-usage-demo').then(
-            (m) => m.PopoverNextUsageDemo,
+          import('../pages/docs/popover/demos/controlled-popover-demo').then(
+            (m) => m.ControlledPopoverDemo,
           ),
       },
       {
-        path: 'basic-popover-next-demo',
+        path: 'rtl-popover-demo',
         loadComponent: () =>
-          import('../pages/docs/popover-next/demos/basic-popover-next-demo').then(
-            (m) => m.BasicPopoverNextDemo,
-          ),
-      },
-      {
-        path: 'alignments-popover-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/popover-next/demos/alignments-popover-next-demo').then(
-            (m) => m.AlignmentsPopoverNextDemo,
-          ),
-      },
-      {
-        path: 'sides-popover-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/popover-next/demos/sides-popover-next-demo').then(
-            (m) => m.SidesPopoverNextDemo,
-          ),
-      },
-      {
-        path: 'hover-popover-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/popover-next/demos/hover-popover-next-demo').then(
-            (m) => m.HoverPopoverNextDemo,
-          ),
-      },
-      {
-        path: 'modal-popover-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/popover-next/demos/modal-popover-next-demo').then(
-            (m) => m.ModalPopoverNextDemo,
-          ),
-      },
-      {
-        path: 'controlled-popover-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/popover-next/demos/controlled-popover-next-demo').then(
-            (m) => m.ControlledPopoverNextDemo,
-          ),
-      },
-      {
-        path: 'rtl-popover-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/popover-next/demos/rtl-popover-next-demo').then(
-            (m) => m.RtlPopoverNextDemo,
+          import('../pages/docs/popover/demos/rtl-popover-demo').then(
+            (m) => m.RtlPopoverDemo,
           ),
       },
     ],

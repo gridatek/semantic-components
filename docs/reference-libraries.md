@@ -557,6 +557,25 @@ A disabled button that keeps its focus and hover — so a tooltip can say why (2
 
 **Taken:** Angular Aria's name (the user, 2026-11-06), default `false`; Base UI's behaviour — we stop the click (capture phase, before your handlers), so you don't have to as with Material. The preset's `aria-disabled:pointer-events-none` is undone (`aria-disabled:pointer-events-auto aria-disabled:cursor-not-allowed`, replacing it) so the hover stays.
 
+## Popover
+
+Rich content beside its trigger (`div[scPopoverProvider]`; rewritten and switched 2026-11-06): shadcn's Popover, Base UI's parts and behaviour. A shadcn component, so no web research: Base UI's docs (`@base-ui/react/docs`), shadcn's reference app and its 5 examples.
+
+| Library                                                                                          | What to read                                                                                                                                                                                                                                         |
+| ------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Base UI Popover (`@base-ui/react/docs`)                                                          | Root (`open`, `modal`: `false` / `'trap-focus'` / `true`), Trigger (`openOnHover`, `delay` 300, `closeDelay`), Positioner (side, align, offsets), Popup (`initialFocus`, `finalFocus`), Title, Description, Close; Escape and an outside press close |
+| shadcn Popover (`shadcn-reference/presets/*/popover.tsx`, `apps/v4/examples/base/popover-*.tsx`) | The popup (corners, padding, gap, shadow, text), the header, title and description per style; Basic, Demo (a form), Alignments, Form, RTL                                                                                                            |
+
+**Taken:**
+
+- **Each preset's look** as the `popover` key (`popup`, `header`, `title`, `description`).
+- **Base UI's `modal`, not modal by default** (the old one always trapped focus): focus moves in and back; Tab out of it closes it and goes on from the trigger; `'trap-focus'` and `true` (the page blocked) on demand — `ScFocusTrap` got an off switch for it.
+- **A dialog named and described** (`aria-labelledby` its title, `aria-describedby` its description), the trigger's `aria-controls`.
+- **`openOnHover`**: Base UI's infotip, a click still opening it.
+- **Shared with Tooltip**, not copied: logical sides and the side placed (`utils/overlay-positions`), the hover timing (`ScOpenDelay`).
+- **Kept** `origin` (an input group as anchor: the date pickers), `[(open)]`, side, align, offset — the 31 uses switched unchanged.
+- **Not** detached triggers, handles, payloads, Viewport, Backdrop, an Arrow (shadcn draws none).
+
 ## Tooltip
 
 A short label on hover or keyboard focus (`div[scTooltipProvider]`; rewritten and switched 2026-11-06): shadcn's Tooltip, Base UI's parts and behaviour. A shadcn component, so no web research: Base UI's docs (`@base-ui/react/docs`), shadcn's reference app and its 5 examples, the APG tooltip pattern.

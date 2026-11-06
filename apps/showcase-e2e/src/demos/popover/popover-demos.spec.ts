@@ -3,7 +3,7 @@ import { collectErrors, press } from '../../interaction';
 import { box } from '../../looks';
 import { expect, test } from '../../test';
 
-const demo = (name: string) => `/demos/popover-next/${name}-popover-next-demo`;
+const demo = (name: string) => `/demos/popover/${name}-popover-demo`;
 const dialog = (page: Page) => page.getByRole('dialog');
 
 let errors: string[];
@@ -19,7 +19,7 @@ test.afterEach(() => {
 test('Usage: a dialog named and described; focus in, then back to the trigger', async ({
   page,
 }) => {
-  await page.goto('/demos/popover-next/popover-next-usage-demo');
+  await page.goto('/demos/popover/popover-usage-demo');
   const trigger = page.getByRole('button', { name: 'Open Popover' });
   await expect(trigger).toHaveAttribute('aria-haspopup', 'dialog');
   await trigger.click();
