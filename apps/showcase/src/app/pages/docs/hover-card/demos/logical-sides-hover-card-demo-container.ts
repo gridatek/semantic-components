@@ -1,56 +1,56 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { LogicalSidesHoverCardNextDemo } from './logical-sides-hover-card-next-demo';
+import { LogicalSidesHoverCardDemo } from './logical-sides-hover-card-demo';
 
 @Component({
-  selector: 'app-logical-sides-hover-card-next-demo-container',
-  imports: [DemoContainer, LogicalSidesHoverCardNextDemo],
+  selector: 'app-logical-sides-hover-card-demo-container',
+  imports: [DemoContainer, LogicalSidesHoverCardDemo],
   template: `
     <app-demo-container
       title="Logical sides"
-      demoUrl="/demos/hover-card-next/logical-sides-hover-card-next-demo"
+      demoUrl="/demos/hover-card/logical-sides-hover-card-demo"
       [code]="code"
     >
-      <app-logical-sides-hover-card-next-demo />
+      <app-logical-sides-hover-card-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class LogicalSidesHoverCardNextDemoContainer {
+export class LogicalSidesHoverCardDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
-  ScHoverCardNext,
-  ScHoverCardNextPortal,
-  ScHoverCardNextProvider,
-  ScHoverCardNextTrigger,
+  ScHoverCard,
+  ScHoverCardPortal,
+  ScHoverCardProvider,
+  ScHoverCardTrigger,
 } from '@semantic-components/ui';
 
 /** side: inline-start, inline-end — the reading start and end, which swap in right to left. */
 @Component({
-  selector: 'app-logical-sides-hover-card-next-demo',
+  selector: 'app-logical-sides-hover-card-demo',
   imports: [
     ScButton,
-    ScHoverCardNext,
-    ScHoverCardNextPortal,
-    ScHoverCardNextProvider,
-    ScHoverCardNextTrigger,
+    ScHoverCard,
+    ScHoverCardPortal,
+    ScHoverCardProvider,
+    ScHoverCardTrigger,
   ],
   template: \`
     <div class="flex flex-wrap justify-center gap-2">
-      <div scHoverCardNextProvider side="inline-start">
+      <div scHoverCardProvider side="inline-start">
         <button
           scButton
           variant="outline"
-          scHoverCardNextTrigger
+          scHoverCardTrigger
           [delay]="100"
           [closeDelay]="100"
         >
           inline-start
         </button>
-        <ng-template scHoverCardNextPortal>
-          <div scHoverCardNext>
+        <ng-template scHoverCardPortal>
+          <div scHoverCard>
             <div class="flex flex-col gap-1">
               <h4 class="font-medium">Hover Card</h4>
               <p>
@@ -60,18 +60,18 @@ import {
           </div>
         </ng-template>
       </div>
-      <div scHoverCardNextProvider side="inline-end">
+      <div scHoverCardProvider side="inline-end">
         <button
           scButton
           variant="outline"
-          scHoverCardNextTrigger
+          scHoverCardTrigger
           [delay]="100"
           [closeDelay]="100"
         >
           inline-end
         </button>
-        <ng-template scHoverCardNextPortal>
-          <div scHoverCardNext>
+        <ng-template scHoverCardPortal>
+          <div scHoverCard>
             <div class="flex flex-col gap-1">
               <h4 class="font-medium">Hover Card</h4>
               <p>
@@ -86,5 +86,5 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class LogicalSidesHoverCardNextDemo {}`;
+export class LogicalSidesHoverCardDemo {}`;
 }

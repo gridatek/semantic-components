@@ -23,7 +23,7 @@ const PRESETS: Record<string, ScPreset> = {
   rhea,
 };
 
-test.describe('Hover Card Next in every preset', () => {
+test.describe('Hover Card in every preset', () => {
   // A docs page and axe, twice: slow under load.
   test.slow();
 
@@ -37,10 +37,10 @@ test.describe('Hover Card Next in every preset', () => {
       await context.addCookies([
         { name: 'sc-preset', value: preset, url: baseURL! },
       ]);
-      await page.goto('/demos/hover-card-next/sides-hover-card-next-demo');
+      await page.goto('/demos/hover-card/sides-hover-card-demo');
       await page.getByRole('button', { name: 'bottom' }).hover();
       for (const [target, wanted, what] of [
-        [page.locator('[scHoverCardNext]'), styles.hoverCard.popup, 'card'],
+        [page.locator('[scHoverCard]'), styles.hoverCard.popup, 'card'],
       ] as const) {
         const classes = twMerge(wanted).split(/\s+/).filter(Boolean);
         // Read until it has them all: the first render may not have them yet.
@@ -54,7 +54,7 @@ test.describe('Hover Card Next in every preset', () => {
           .toEqual([]);
       }
 
-      await page.goto('/docs/components/hover-card-next');
+      await page.goto('/docs/components/hover-card');
       await expectNoA11yViolations(page);
       await expectNoA11yViolations(page, { dark: true });
     });

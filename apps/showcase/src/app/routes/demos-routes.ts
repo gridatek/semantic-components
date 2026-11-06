@@ -2219,64 +2219,38 @@ export const demosRoutes: Route[] = [
     path: 'demos/hover-card',
     children: [
       {
-        path: 'basic-hover-card-demo',
+        path: 'hover-card-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/hover-card/demos/basic-hover-card-demo').then(
-            (m) => m.BasicHoverCardDemo,
+          import('../pages/docs/hover-card/demos/hover-card-usage-demo').then(
+            (m) => m.HoverCardUsageDemo,
           ),
       },
       {
-        path: 'right-hover-card-demo',
+        path: 'in-text-hover-card-demo',
         loadComponent: () =>
-          import('../pages/docs/hover-card/demos/right-hover-card-demo').then(
-            (m) => m.RightHoverCardDemo,
+          import('../pages/docs/hover-card/demos/in-text-hover-card-demo').then(
+            (m) => m.InTextHoverCardDemo,
           ),
       },
       {
-        path: 'top-hover-card-demo',
+        path: 'sides-hover-card-demo',
         loadComponent: () =>
-          import('../pages/docs/hover-card/demos/top-hover-card-demo').then(
-            (m) => m.TopHoverCardDemo,
-          ),
-      },
-    ],
-  },
-  {
-    path: 'demos/hover-card-next',
-    children: [
-      {
-        path: 'hover-card-next-usage-demo',
-        loadComponent: () =>
-          import('../pages/docs/hover-card-next/demos/hover-card-next-usage-demo').then(
-            (m) => m.HoverCardNextUsageDemo,
+          import('../pages/docs/hover-card/demos/sides-hover-card-demo').then(
+            (m) => m.SidesHoverCardDemo,
           ),
       },
       {
-        path: 'in-text-hover-card-next-demo',
+        path: 'logical-sides-hover-card-demo',
         loadComponent: () =>
-          import('../pages/docs/hover-card-next/demos/in-text-hover-card-next-demo').then(
-            (m) => m.InTextHoverCardNextDemo,
+          import('../pages/docs/hover-card/demos/logical-sides-hover-card-demo').then(
+            (m) => m.LogicalSidesHoverCardDemo,
           ),
       },
       {
-        path: 'sides-hover-card-next-demo',
+        path: 'rtl-hover-card-demo',
         loadComponent: () =>
-          import('../pages/docs/hover-card-next/demos/sides-hover-card-next-demo').then(
-            (m) => m.SidesHoverCardNextDemo,
-          ),
-      },
-      {
-        path: 'logical-sides-hover-card-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/hover-card-next/demos/logical-sides-hover-card-next-demo').then(
-            (m) => m.LogicalSidesHoverCardNextDemo,
-          ),
-      },
-      {
-        path: 'rtl-hover-card-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/hover-card-next/demos/rtl-hover-card-next-demo').then(
-            (m) => m.RtlHoverCardNextDemo,
+          import('../pages/docs/hover-card/demos/rtl-hover-card-demo').then(
+            (m) => m.RtlHoverCardDemo,
           ),
       },
     ],

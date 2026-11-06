@@ -1,5 +1,9 @@
 import { Directionality } from '@angular/cdk/bidi';
-import { CdkOverlayOrigin, OverlayModule } from '@angular/cdk/overlay';
+import {
+  CdkOverlayOrigin,
+  type ConnectedOverlayPositionChange,
+  OverlayModule,
+} from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import {
   Component,
@@ -8,21 +12,32 @@ import {
   contentChild,
   inject,
   input,
+  model,
   signal,
 } from '@angular/core';
+import { ScOpenDelay, cn } from '../../utils';
+import { ScElementDirectionality } from '../../utils/element-directionality';
 import {
   type ScOverlayAlign,
+  type ScOverlayLogicalSide,
   type ScOverlaySide,
   buildOverlayPositionsWithFallback,
-  cn,
-} from '../../utils';
-import { ScElementDirectionality } from '../../utils/element-directionality';
+  physicalSide,
+  placedSide,
+  sideInWords,
+} from '../../utils/overlay-positions';
 import { ScHoverCardPortal } from './hover-card-portal';
 import { ScHoverCardTrigger } from './hover-card-trigger';
 
-export type ScHoverCardSide = ScOverlaySide;
-export type ScHoverCardAlign = ScOverlayAlign;
+/** Physical (`left`, `right`, as Base UI's) or logical (`inline-start`, `inline-end`). */
+export type ScHoverCardSide = ScOverlayLogicalSide;
 
+/**
+ * A hover card and its trigger: `[(open)]`, where it goes (`side`, `align`,
+ * `offset`; `origin` for another anchor than the trigger). A preview of the
+ * link's destination for sighted mouse and keyboard users — nothing in it is
+ * reached by the keyboard or a screen reader. As Base UI's PreviewCard.Root.
+ */
 @Component({
   selector: 'div[scHoverCardProvider]',
   providers: [{ provide: Directionality, useClass: ScElementDirectionality }],
@@ -36,9 +51,13 @@ export type ScHoverCardAlign = ScOverlayAlign;
         [cdkConnectedOverlayOrigin]="origin"
         [cdkConnectedOverlayOpen]="open()"
         [cdkConnectedOverlayPositions]="positions()"
-        (detach)="onDetach()"
+        [cdkConnectedOverlayDisableClose]="true"
+        (overlayOutsideClick)="onOutsideClick($event)"
+        (overlayKeydown)="onKeydown($event)"
+        (positionChange)="onPositionChange($event)"
+        (detach)="hide()"
       >
-        <ng-container [ngTemplateOutlet]="hoverCardPortal().templateRef" />
+        <ng-container [ngTemplateOutlet]="portal().templateRef" />
       </ng-template>
     }
   `,
@@ -49,64 +68,79 @@ export type ScHoverCardAlign = ScOverlayAlign;
 })
 export class ScHoverCardProvider {
   private readonly direction = inject(Directionality);
+
   readonly classInput = input<string>('', { alias: 'class' });
-
-  /** Which side the hover card appears on */
+  /** Shown or not. */
+  readonly open = model(false);
+  /** Which side of the trigger it goes on; flips when there is no room. */
   readonly side = input<ScHoverCardSide>('bottom');
-
-  /** Alignment along the side */
-  readonly align = input<ScHoverCardAlign>('center');
-
-  /** Gap (in pixels) between the trigger and the hover card */
+  /** Along that side: `start`, `center`, `end` (logical). */
+  readonly align = input<ScOverlayAlign>('center');
+  /** The gap from the trigger (px). */
   readonly offset = input(4);
-
-  /** Custom overlay origin. Defaults to the trigger element if not provided. */
+  /** Another anchor than the trigger. */
   readonly originInput = input<CdkOverlayOrigin | undefined>(undefined, {
     alias: 'origin',
   });
 
-  /** Delay before showing hover card (ms) */
-  readonly openDelay = input<number>(700);
-
-  /** Delay before hiding hover card (ms) */
-  readonly closeDelay = input<number>(300);
-
-  /** Shown or not; the hover card animates in and out (`animate.enter` / `animate.leave`). */
-  readonly open = signal<boolean>(false);
-
-  private readonly triggerChild = contentChild(ScHoverCardTrigger);
-  protected readonly hoverCardPortal = contentChild.required(ScHoverCardPortal);
+  protected readonly trigger = contentChild(ScHoverCardTrigger);
+  protected readonly portal = contentChild.required(ScHoverCardPortal);
 
   readonly origin = computed(
-    () => this.originInput() ?? this.triggerChild()?.overlayOrigin,
+    () => this.originInput() ?? this.trigger()?.overlayOrigin,
   );
+
+  /** Opening and closing after the trigger's delays. */
+  readonly timing = new ScOpenDelay(this.open);
 
   protected readonly positions = computed(() =>
     buildOverlayPositionsWithFallback(
-      this.side(),
+      physicalSide(this.side(), this.direction.value),
       this.align(),
       this.offset(),
       this.direction.value,
     ),
   );
 
+  /** The side it was placed on, after any flip — in the words asked for. */
+  private readonly placed = signal<ScOverlaySide | null>(null);
+  readonly placedSide = computed(() =>
+    sideInWords(
+      this.placed() ?? physicalSide(this.side(), this.direction.value),
+      this.side(),
+      this.direction.value,
+    ),
+  );
+
   protected readonly class = computed(() => cn('contents', this.classInput()));
 
-  show(): void {
-    this.open.set(true);
+  /** The pointer is on the card: it stays. */
+  keepOpen(): void {
+    this.timing.cancel();
+  }
+
+  /** Closes after the trigger's close delay — time to move onto the card. */
+  hideSoon(): void {
+    this.timing.closeSoon(this.trigger()?.closeDelay() ?? 300);
   }
 
   hide(): void {
-    this.open.set(false);
-  }
-
-  /** The CDK detached the overlay itself (Escape): closed. */
-  protected onDetach(): void {
+    this.timing.cancel();
     if (this.open()) this.open.set(false);
   }
 
-  /** Cancel pending hide timeout on the trigger */
-  cancelTriggerHide(): void {
-    this.triggerChild()?.cancelHide();
+  protected onOutsideClick(event: MouseEvent): void {
+    const origin = this.origin()?.elementRef.nativeElement as
+      HTMLElement | undefined;
+    if (origin?.contains(event.target as Node)) return;
+    this.hide();
+  }
+
+  protected onKeydown(event: KeyboardEvent): void {
+    if (event.key === 'Escape') this.hide();
+  }
+
+  protected onPositionChange(change: ConnectedOverlayPositionChange): void {
+    this.placed.set(placedSide(change, this.direction.value));
   }
 }

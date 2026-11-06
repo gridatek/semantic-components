@@ -346,12 +346,6 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/hover-card/hover-card-page'),
       },
       {
-        path: 'hover-card-next',
-        title: 'Hover Card Next - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/hover-card-next/hover-card-next-page'),
-      },
-      {
         path: 'image-annotator',
         title: 'Image Annotator - Semantic Components',
         loadComponent: () =>

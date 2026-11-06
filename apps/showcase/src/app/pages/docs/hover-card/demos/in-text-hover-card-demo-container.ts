@@ -1,57 +1,57 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { InTextHoverCardNextDemo } from './in-text-hover-card-next-demo';
+import { InTextHoverCardDemo } from './in-text-hover-card-demo';
 
 @Component({
-  selector: 'app-in-text-hover-card-next-demo-container',
-  imports: [DemoContainer, InTextHoverCardNextDemo],
+  selector: 'app-in-text-hover-card-demo-container',
+  imports: [DemoContainer, InTextHoverCardDemo],
   template: `
     <app-demo-container
       title="In text"
-      demoUrl="/demos/hover-card-next/in-text-hover-card-next-demo"
+      demoUrl="/demos/hover-card/in-text-hover-card-demo"
       [code]="code"
     >
-      <app-in-text-hover-card-next-demo />
+      <app-in-text-hover-card-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class InTextHoverCardNextDemoContainer {
+export class InTextHoverCardDemoContainer {
   readonly code = `import { NgOptimizedImage } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScHoverCardNext,
-  ScHoverCardNextPortal,
-  ScHoverCardNextProvider,
-  ScHoverCardNextTrigger,
+  ScHoverCard,
+  ScHoverCardPortal,
+  ScHoverCardProvider,
+  ScHoverCardTrigger,
 } from '@semantic-components/ui';
 
 /** A link in a sentence, previewing its destination — what the card shows is on that page too. */
 @Component({
-  selector: 'app-in-text-hover-card-next-demo',
+  selector: 'app-in-text-hover-card-demo',
   imports: [
     NgOptimizedImage,
-    ScHoverCardNext,
-    ScHoverCardNextPortal,
-    ScHoverCardNextProvider,
-    ScHoverCardNextTrigger,
+    ScHoverCard,
+    ScHoverCardPortal,
+    ScHoverCardProvider,
+    ScHoverCardTrigger,
   ],
   template: \`
-    <div scHoverCardNextProvider [offset]="8">
+    <div scHoverCardProvider [offset]="8">
       <p class="text-base text-balance">
         The trail ends at a
         <a
           href="https://en.wikipedia.org/wiki/Waterfall"
-          scHoverCardNextTrigger
+          scHoverCardTrigger
           class="decoration-foreground/60 hover:decoration-foreground data-popup-open:decoration-foreground focus-visible:outline-ring underline decoration-1 underline-offset-2 outline-0 focus-visible:no-underline focus-visible:outline-2"
         >
           waterfall</a
         >
         you can hear long before you see it.
       </p>
-      <ng-template scHoverCardNextPortal>
-        <div scHoverCardNext class="flex w-60 flex-col gap-2">
+      <ng-template scHoverCardPortal>
+        <div scHoverCard class="flex w-60 flex-col gap-2">
           <img
             ngSrc="/images/gallery/waterfall-thumb.jpg"
             width="224"
@@ -71,5 +71,5 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class InTextHoverCardNextDemo {}`;
+export class InTextHoverCardDemo {}`;
 }

@@ -10,10 +10,10 @@ import {
 import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 import { DevOnly } from '../../../../components/dev-only/dev-only';
 import { ConfigService } from '../../../../services/config-service';
-import { HoverCardNextUsageDemo } from './hover-card-next-usage-demo';
+import { HoverCardUsageDemo } from './hover-card-usage-demo';
 
 @Component({
-  selector: 'app-hover-card-next-usage-demo-container',
+  selector: 'app-hover-card-usage-demo-container',
   imports: [
     DevOnly,
     ScCodeBlock,
@@ -24,7 +24,7 @@ import { HoverCardNextUsageDemo } from './hover-card-next-usage-demo';
     ScCodeBlockContent,
     SiCheckIcon,
     SiCopyIcon,
-    HoverCardNextUsageDemo,
+    HoverCardUsageDemo,
   ],
   template: `
     <div scCodeBlock>
@@ -46,50 +46,50 @@ import { HoverCardNextUsageDemo } from './hover-card-next-usage-demo';
 
     @if (devMode()) {
       <app-dev-only>
-        <app-hover-card-next-usage-demo />
+        <app-hover-card-usage-demo />
       </app-dev-only>
     }
   `,
   host: { class: 'block w-full space-y-4' },
   encapsulation: ViewEncapsulation.None,
 })
-export class HoverCardNextUsageDemoContainer {
+export class HoverCardUsageDemoContainer {
   private readonly config = inject(ConfigService);
 
   protected readonly devMode = this.config.devMode;
 
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScHoverCardNext,
-  ScHoverCardNextPortal,
-  ScHoverCardNextProvider,
-  ScHoverCardNextTrigger,
+  ScHoverCard,
+  ScHoverCardPortal,
+  ScHoverCardProvider,
+  ScHoverCardTrigger,
   ScLink,
 } from '@semantic-components/ui';
 
 @Component({
-  selector: 'app-hover-card-next-usage-demo',
+  selector: 'app-hover-card-usage-demo',
   imports: [
-    ScHoverCardNext,
-    ScHoverCardNextPortal,
-    ScHoverCardNextProvider,
-    ScHoverCardNextTrigger,
+    ScHoverCard,
+    ScHoverCardPortal,
+    ScHoverCardProvider,
+    ScHoverCardTrigger,
     ScLink,
   ],
   template: \`
-    <div scHoverCardNextProvider>
+    <div scHoverCardProvider>
       <a
         scLink
         variant="link"
         href="https://nextjs.org"
-        scHoverCardNextTrigger
+        scHoverCardTrigger
         [delay]="10"
         [closeDelay]="100"
       >
         Hover Here
       </a>
-      <ng-template scHoverCardNextPortal>
-        <div scHoverCardNext class="flex w-64 flex-col gap-0.5">
+      <ng-template scHoverCardPortal>
+        <div scHoverCard class="flex w-64 flex-col gap-0.5">
           <div class="font-semibold">@nextjs</div>
           <div>The React Framework – created and maintained by @vercel.</div>
           <div class="text-muted-foreground mt-1 text-xs">
@@ -102,5 +102,5 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class HoverCardNextUsageDemo {}`;
+export class HoverCardUsageDemo {}`;
 }

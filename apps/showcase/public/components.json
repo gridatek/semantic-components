@@ -426,14 +426,6 @@
   {
     "name": "Hover Card",
     "path": "hover-card",
-    "description": "A card that appears when hovering over an element.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Overlay"
-  },
-  {
-    "name": "Hover Card Next",
-    "path": "hover-card-next",
     "description": "A preview of a link's destination, shown on hover or keyboard focus — in the look of the app's preset.",
     "status": "Experimental",
     "library": "ui",

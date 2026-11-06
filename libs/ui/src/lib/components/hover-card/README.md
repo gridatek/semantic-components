@@ -1,124 +1,35 @@
 # Hover Card
 
-For sighted users to preview content available behind a link.
-
-## Architecture
-
-```
-ScHoverCardProvider (Root)
-    ├── open: signal<boolean>
-    ├── side: input ('top' | 'right' | 'bottom' | 'left')
-    ├── align: input ('start' | 'center' | 'end')
-    ├── openDelay: input (default: 700ms)
-    ├── closeDelay: input (default: 300ms)
-    ├── CDK overlay positioning (via cdkConnectedOverlay)
-    │
-    ├── ScHoverCardTrigger
-    │     ├── Injects ScHoverCardProvider
-    │     ├── Uses CdkOverlayOrigin
-    │     └── Handles hover/focus with delay
-    │
-    └── ScHoverCardPortal (ng-template directive)
-          ├── Captures TemplateRef
-          └── Rendered by provider via ngTemplateOutlet
-               │
-               └── ScHoverCard
-                     ├── Injects ScHoverCardProvider
-                     ├── Content panel with styling
-                     └── Handles hover to keep card open
-```
-
-## Components
-
-| Component             | Selector                         | Description                                     |
-| --------------------- | -------------------------------- | ----------------------------------------------- |
-| `ScHoverCardProvider` | `div[scHoverCardProvider]`       | Root wrapper with state, configuration, overlay |
-| `ScHoverCardTrigger`  | `[scHoverCardTrigger]`           | Element that triggers hover card on hover/focus |
-| `ScHoverCardPortal`   | `ng-template[scHoverCardPortal]` | Template directive for portal content           |
-| `ScHoverCard`         | `div[scHoverCard]`               | The card content displayed on hover             |
-
-## Inputs
-
-### ScHoverCardProvider
-
-| Input        | Type                                     | Default    | Description                                                             |
-| ------------ | ---------------------------------------- | ---------- | ----------------------------------------------------------------------- |
-| `side`       | `'top' \| 'right' \| 'bottom' \| 'left'` | `'bottom'` | Which side to show the card. Falls back to the opposite side.           |
-| `align`      | `'start' \| 'center' \| 'end'`           | `'center'` | Alignment along the side.                                               |
-| `offset`     | `number`                                 | `4`        | Gap (in pixels) between the trigger and the hover card.                 |
-| `origin`     | `CdkOverlayOrigin`                       | trigger    | Custom overlay origin. Defaults to the trigger element if not provided. |
-| `openDelay`  | `number`                                 | `700`      | Delay before showing (ms).                                              |
-| `closeDelay` | `number`                                 | `300`      | Delay before hiding (ms).                                               |
+A preview of a link's destination, shown on hover or keyboard focus — shadcn's Hover Card (Base UI's Preview Card) in the look of the app's preset (`hoverCard` key: shadcn's in each of the eight styles).
 
 ## Usage
 
 ```html
 <div scHoverCardProvider>
-  <a scHoverCardTrigger href="/profile">@username</a>
+  <a scLink variant="link" href="https://nextjs.org" scHoverCardTrigger> Hover Here </a>
   <ng-template scHoverCardPortal>
-    <div scHoverCard>
-      <div class="flex gap-4">
-        <img src="avatar.jpg" class="size-12 rounded-full" />
-        <div>
-          <h4 class="font-semibold">@username</h4>
-          <p class="text-muted-foreground text-sm">Software developer at Example Corp.</p>
-        </div>
-      </div>
-    </div>
+    <div scHoverCard>…</div>
   </ng-template>
 </div>
 ```
 
-### With Custom Position
+## Parts
 
-```html
-<div scHoverCardProvider side="right" align="start">
-  <button scHoverCardTrigger>Hover me</button>
-  <ng-template scHoverCardPortal>
-    <div scHoverCard>Content appears to the right, aligned to the top</div>
-  </ng-template>
-</div>
-```
+| Part                  | Selector                                              | What it does                                                                                                         |
+| --------------------- | ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `ScHoverCardProvider` | `div[scHoverCardProvider]`                            | `[(open)]`, `side` (`bottom`, `top`, `left`, `right`, `inline-start`, `inline-end`), `align`, `offset` (4), `origin` |
+| `ScHoverCardTrigger`  | `a[scHoverCardTrigger]`, `button[scHoverCardTrigger]` | Your link (or button): `delay` (600), `closeDelay` (300); `data-popup-open` while open                               |
+| `ScHoverCardPortal`   | `ng-template[scHoverCardPortal]`                      | The content, rendered while open                                                                                     |
+| `ScHoverCard`         | `div[scHoverCard]`                                    | The card in the preset's look; `data-side` as placed (after a flip); animates in and out                             |
 
-### With Custom Delays
+## Keyboard and screen readers
 
-```html
-<div scHoverCardProvider [openDelay]="500" [closeDelay]="200">
-  <span scHoverCardTrigger>Quick hover</span>
-  <ng-template scHoverCardPortal>
-    <div scHoverCard>Shows faster, hides faster</div>
-  </ng-template>
-</div>
-```
+- A visual preview, for sighted mouse and keyboard users (Base UI's guidance): the link is the only thing to reach. The card has no role, isn't linked to its trigger and takes no focus, so a screen reader isn't led through it at every link.
+- Keep it supplementary: what it shows must be at the link's destination too.
+- Hover opens it after the trigger's `delay`, keyboard focus at once. Leaving (after `closeDelay`), blur, Escape or a press outside close it. The pointer can move onto it. A touch only follows the link.
 
-## Position Combinations
+## Not shadcn's
 
-The component supports 12 position combinations:
-
-| Side     | Align Options            |
-| -------- | ------------------------ |
-| `top`    | `start`, `center`, `end` |
-| `bottom` | `start`, `center`, `end` |
-| `left`   | `start`, `center`, `end` |
-| `right`  | `start`, `center`, `end` |
-
-## Animation
-
-`ScHoverCard` animates with Angular's `animate.enter` / `animate.leave`: it fades and zooms in, sliding from its `data-side` when it is shown, and back out when it goes — Angular removes it once that animation ends.
-
-## Differences from Tooltip
-
-| Feature     | Hover Card                   | Tooltip          |
-| ----------- | ---------------------------- | ---------------- |
-| Content     | Rich content (cards, images) | Simple text      |
-| Styling     | Card with border/shadow      | Solid background |
-| Open delay  | 700ms (longer)               | 200ms (shorter)  |
-| Close delay | 300ms (has delay)            | 0ms (instant)    |
-| Width       | 256px default                | Auto             |
-
-## Accessibility
-
-- Content remains visible when hovering over the card itself
-- Supports focus trigger for keyboard users
-- Uses connected overlay for proper positioning
-- Close delay allows mouse movement to the card
+- **Angular's animations**: the card fades, zooms and slides with `animate.enter` / `animate.leave` (tw-animate's `animate-in` / `animate-out`); shadcn's `data-open:` / `data-closed:` classes are left out of the preset.
+- **The CDK places it** (`cdkConnectedOverlay`), with the sides and hover timing shared with Tooltip and Popover (`utils/overlay-positions`, `utils/open-delay`).
+- **One card per trigger**: Base UI's detached triggers (`handle`, `payload`), its Viewport, Arrow and Backdrop aren't taken — shadcn uses none of them.

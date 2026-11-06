@@ -3,9 +3,8 @@ import { collectErrors, press } from '../../interaction';
 import { box } from '../../looks';
 import { expect, test } from '../../test';
 
-const demo = (name: string) =>
-  `/demos/hover-card-next/${name}-hover-card-next-demo`;
-const card = (page: Page) => page.locator('[scHoverCardNext]');
+const demo = (name: string) => `/demos/hover-card/${name}-hover-card-demo`;
+const card = (page: Page) => page.locator('[scHoverCard]');
 
 let errors: string[];
 
@@ -20,7 +19,7 @@ test.afterEach(() => {
 test('Usage: hover opens it below its link; no role, no link to it', async ({
   page,
 }) => {
-  await page.goto('/demos/hover-card-next/hover-card-next-usage-demo');
+  await page.goto('/demos/hover-card/hover-card-usage-demo');
   const trigger = page.getByRole('link', { name: 'Hover Here' });
   await trigger.hover();
   await expect(card(page)).toContainText('@nextjs');
@@ -46,7 +45,7 @@ test('Not at once: after the trigger’s delay', async ({ page }) => {
 });
 
 test('Hoverable: the pointer moves onto it and it stays', async ({ page }) => {
-  await page.goto('/demos/hover-card-next/hover-card-next-usage-demo');
+  await page.goto('/demos/hover-card/hover-card-usage-demo');
   await page.getByRole('link', { name: 'Hover Here' }).hover();
   await expect(card(page)).toBeVisible();
   const c = await box(card(page));
@@ -60,7 +59,7 @@ test('Hoverable: the pointer moves onto it and it stays', async ({ page }) => {
 test('Keyboard: focus opens it at once, it takes no focus; Escape closes it', async ({
   page,
 }) => {
-  await page.goto('/demos/hover-card-next/hover-card-next-usage-demo');
+  await page.goto('/demos/hover-card/hover-card-usage-demo');
   const trigger = page.getByRole('link', { name: 'Hover Here' });
   await trigger.waitFor();
   await press(page, 'Tab');
@@ -72,7 +71,7 @@ test('Keyboard: focus opens it at once, it takes no focus; Escape closes it', as
 });
 
 test('A press outside closes it', async ({ page }) => {
-  await page.goto('/demos/hover-card-next/hover-card-next-usage-demo');
+  await page.goto('/demos/hover-card/hover-card-usage-demo');
   await page.getByRole('link', { name: 'Hover Here' }).waitFor();
   await press(page, 'Tab');
   await expect(card(page)).toBeVisible();

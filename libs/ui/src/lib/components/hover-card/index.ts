@@ -1,5 +1,4 @@
-export { ScHoverCardProvider } from './hover-card-provider';
-export type { ScHoverCardAlign, ScHoverCardSide } from './hover-card-provider';
-export { ScHoverCardPortal } from './hover-card-portal';
-export { ScHoverCard } from './hover-card';
-export { ScHoverCardTrigger } from './hover-card-trigger';
+export * from './hover-card';
+export * from './hover-card-portal';
+export * from './hover-card-provider';
+export * from './hover-card-trigger';

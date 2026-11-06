@@ -1,108 +1,108 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { RtlHoverCardNextDemo } from './rtl-hover-card-next-demo';
+import { RtlHoverCardDemo } from './rtl-hover-card-demo';
 
 @Component({
-  selector: 'app-rtl-hover-card-next-demo-container',
-  imports: [DemoContainer, RtlHoverCardNextDemo],
+  selector: 'app-rtl-hover-card-demo-container',
+  imports: [DemoContainer, RtlHoverCardDemo],
   template: `
     <app-demo-container
       title="RTL"
-      demoUrl="/demos/hover-card-next/rtl-hover-card-next-demo"
+      demoUrl="/demos/hover-card/rtl-hover-card-demo"
       [code]="code"
     >
-      <app-rtl-hover-card-next-demo />
+      <app-rtl-hover-card-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class RtlHoverCardNextDemoContainer {
+export class RtlHoverCardDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
-  ScHoverCardNext,
-  ScHoverCardNextPortal,
-  ScHoverCardNextProvider,
-  ScHoverCardNextTrigger,
+  ScHoverCard,
+  ScHoverCardPortal,
+  ScHoverCardProvider,
+  ScHoverCardTrigger,
 } from '@semantic-components/ui';
 
 /** In a right-to-left page: its text follows; inline-start is the right. */
 @Component({
-  selector: 'app-rtl-hover-card-next-demo',
+  selector: 'app-rtl-hover-card-demo',
   imports: [
     ScButton,
-    ScHoverCardNext,
-    ScHoverCardNextPortal,
-    ScHoverCardNextProvider,
-    ScHoverCardNextTrigger,
+    ScHoverCard,
+    ScHoverCardPortal,
+    ScHoverCardProvider,
+    ScHoverCardTrigger,
   ],
   template: \`
     <div dir="rtl" lang="ar" class="grid gap-4">
       <div class="flex flex-wrap justify-center gap-2">
-        <div scHoverCardNextProvider side="left">
+        <div scHoverCardProvider side="left">
           <button
             scButton
             variant="outline"
-            scHoverCardNextTrigger
+            scHoverCardTrigger
             [delay]="10"
             [closeDelay]="100"
           >
             يسار
           </button>
-          <ng-template scHoverCardNextPortal>
-            <div scHoverCardNext class="flex w-64 flex-col gap-1">
+          <ng-template scHoverCardPortal>
+            <div scHoverCard class="flex w-64 flex-col gap-1">
               <div class="font-semibold">سماعات لاسلكية</div>
               <div class="text-muted-foreground text-sm">٩٩.٩٩ $</div>
             </div>
           </ng-template>
         </div>
-        <div scHoverCardNextProvider side="top">
+        <div scHoverCardProvider side="top">
           <button
             scButton
             variant="outline"
-            scHoverCardNextTrigger
+            scHoverCardTrigger
             [delay]="10"
             [closeDelay]="100"
           >
             أعلى
           </button>
-          <ng-template scHoverCardNextPortal>
-            <div scHoverCardNext class="flex w-64 flex-col gap-1">
+          <ng-template scHoverCardPortal>
+            <div scHoverCard class="flex w-64 flex-col gap-1">
               <div class="font-semibold">سماعات لاسلكية</div>
               <div class="text-muted-foreground text-sm">٩٩.٩٩ $</div>
             </div>
           </ng-template>
         </div>
-        <div scHoverCardNextProvider side="bottom">
+        <div scHoverCardProvider side="bottom">
           <button
             scButton
             variant="outline"
-            scHoverCardNextTrigger
+            scHoverCardTrigger
             [delay]="10"
             [closeDelay]="100"
           >
             أسفل
           </button>
-          <ng-template scHoverCardNextPortal>
-            <div scHoverCardNext class="flex w-64 flex-col gap-1">
+          <ng-template scHoverCardPortal>
+            <div scHoverCard class="flex w-64 flex-col gap-1">
               <div class="font-semibold">سماعات لاسلكية</div>
               <div class="text-muted-foreground text-sm">٩٩.٩٩ $</div>
             </div>
           </ng-template>
         </div>
-        <div scHoverCardNextProvider side="right">
+        <div scHoverCardProvider side="right">
           <button
             scButton
             variant="outline"
-            scHoverCardNextTrigger
+            scHoverCardTrigger
             [delay]="10"
             [closeDelay]="100"
           >
             يمين
           </button>
-          <ng-template scHoverCardNextPortal>
-            <div scHoverCardNext class="flex w-64 flex-col gap-1">
+          <ng-template scHoverCardPortal>
+            <div scHoverCard class="flex w-64 flex-col gap-1">
               <div class="font-semibold">سماعات لاسلكية</div>
               <div class="text-muted-foreground text-sm">٩٩.٩٩ $</div>
             </div>
@@ -110,35 +110,35 @@ import {
         </div>
       </div>
       <div class="flex flex-wrap justify-center gap-2">
-        <div scHoverCardNextProvider side="inline-start">
+        <div scHoverCardProvider side="inline-start">
           <button
             scButton
             variant="outline"
-            scHoverCardNextTrigger
+            scHoverCardTrigger
             [delay]="10"
             [closeDelay]="100"
           >
             بداية السطر
           </button>
-          <ng-template scHoverCardNextPortal>
-            <div scHoverCardNext class="flex w-64 flex-col gap-1">
+          <ng-template scHoverCardPortal>
+            <div scHoverCard class="flex w-64 flex-col gap-1">
               <div class="font-semibold">سماعات لاسلكية</div>
               <div class="text-muted-foreground text-sm">٩٩.٩٩ $</div>
             </div>
           </ng-template>
         </div>
-        <div scHoverCardNextProvider side="inline-end">
+        <div scHoverCardProvider side="inline-end">
           <button
             scButton
             variant="outline"
-            scHoverCardNextTrigger
+            scHoverCardTrigger
             [delay]="10"
             [closeDelay]="100"
           >
             نهاية السطر
           </button>
-          <ng-template scHoverCardNextPortal>
-            <div scHoverCardNext class="flex w-64 flex-col gap-1">
+          <ng-template scHoverCardPortal>
+            <div scHoverCard class="flex w-64 flex-col gap-1">
               <div class="font-semibold">سماعات لاسلكية</div>
               <div class="text-muted-foreground text-sm">٩٩.٩٩ $</div>
             </div>
@@ -150,5 +150,5 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class RtlHoverCardNextDemo {}`;
+export class RtlHoverCardDemo {}`;
 }

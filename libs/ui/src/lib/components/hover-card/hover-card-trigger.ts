@@ -3,72 +3,52 @@ import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '../../utils';
 import { ScHoverCardProvider } from './hover-card-provider';
 
+/**
+ * Your link (or button) whose destination the card previews. The pointer's
+ * hover opens it after `delay`, keyboard focus at once; leaving (after
+ * `closeDelay`), blur, Escape and a press outside close it. A touch only
+ * follows the link. As Base UI's PreviewCard.Trigger.
+ */
 @Directive({
-  selector: '[scHoverCardTrigger]',
+  selector: 'a[scHoverCardTrigger], button[scHoverCardTrigger]',
   hostDirectives: [CdkOverlayOrigin],
   host: {
+    '[attr.data-popup-open]': 'card.open() ? "" : null',
     '[class]': 'class()',
-    '(mouseenter)': 'onMouseEnter()',
-    '(mouseleave)': 'onMouseLeave()',
-    '(focus)': 'onFocus()',
-    '(blur)': 'onBlur()',
+    '(pointerenter)': 'onPointerEnter($event)',
+    '(pointerleave)': 'onPointerLeave($event)',
+    '(focus)': 'onFocus($event)',
+    '(blur)': 'card.hide()',
+    '(keydown.escape)': 'card.hide()',
   },
 })
 export class ScHoverCardTrigger {
-  readonly hoverCardProvider = inject(ScHoverCardProvider);
+  protected readonly card = inject(ScHoverCardProvider);
   readonly overlayOrigin = inject(CdkOverlayOrigin);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  private showTimeout: ReturnType<typeof setTimeout> | null = null;
-  private hideTimeout: ReturnType<typeof setTimeout> | null = null;
+  /** How long the pointer rests on it before the card opens (ms). */
+  readonly delay = input(600);
+  /** How long the card stays once the pointer has left (ms). */
+  readonly closeDelay = input(300);
 
-  protected readonly class = computed(() => cn('', this.classInput()));
+  protected readonly class = computed(() => cn(this.classInput()));
 
-  onMouseEnter(): void {
-    this.cancelHide();
-    this.scheduleShow();
+  protected onPointerEnter(event: Event): void {
+    if ((event as PointerEvent).pointerType === 'touch') return;
+    this.card.timing.openSoon(this.delay());
   }
 
-  onMouseLeave(): void {
-    this.cancelShow();
-    this.scheduleHide();
+  protected onPointerLeave(event: Event): void {
+    if ((event as PointerEvent).pointerType === 'touch') return;
+    this.card.hideSoon();
   }
 
-  onFocus(): void {
-    this.cancelHide();
-    this.scheduleShow();
-  }
-
-  onBlur(): void {
-    this.cancelShow();
-    this.scheduleHide();
-  }
-
-  private scheduleShow(): void {
-    this.cancelShow();
-    this.showTimeout = setTimeout(() => {
-      this.hoverCardProvider.show();
-    }, this.hoverCardProvider.openDelay());
-  }
-
-  private cancelShow(): void {
-    if (this.showTimeout) {
-      clearTimeout(this.showTimeout);
-      this.showTimeout = null;
-    }
-  }
-
-  private scheduleHide(): void {
-    this.cancelHide();
-    this.hideTimeout = setTimeout(() => {
-      this.hoverCardProvider.hide();
-    }, this.hoverCardProvider.closeDelay());
-  }
-
-  cancelHide(): void {
-    if (this.hideTimeout) {
-      clearTimeout(this.hideTimeout);
-      this.hideTimeout = null;
-    }
+  protected onFocus(event: Event): void {
+    // Keyboard focus only: a click's focus is the pointer's.
+    const target = event.target as HTMLElement;
+    if (!target.matches(':focus-visible')) return;
+    this.card.timing.cancel();
+    this.card.open.set(true);
   }
 }

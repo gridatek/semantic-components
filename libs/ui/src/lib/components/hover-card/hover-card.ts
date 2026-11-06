@@ -1,62 +1,31 @@
-import {
-  Component,
-  ViewEncapsulation,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 import { ScHoverCardProvider } from './hover-card-provider';
 
-/** The hover card's panel: animates in when shown and out when it goes (`animate.enter` / `animate.leave`). */
-@Component({
+/**
+ * The card, in the preset's look. No role and no link to its trigger: it is
+ * a visual preview (Base UI's guidance) — what it shows must be at the
+ * link's destination too. The pointer can move onto it (it stays open); it
+ * animates in and out.
+ */
+@Directive({
   selector: 'div[scHoverCard]',
-  template: ` <ng-content /> `,
   host: {
+    '[attr.data-side]': 'card.placedSide()',
     '[class]': 'class()',
-    '[attr.data-side]': 'hoverCardProvider.side()',
-    '(mouseenter)': 'onMouseEnter()',
-    '(mouseleave)': 'onMouseLeave()',
+    '(pointerenter)': 'card.keepOpen()',
+    '(pointerleave)': 'card.hideSoon()',
     'animate.enter': 'animate-in fade-in-0 zoom-in-95',
     'animate.leave': 'animate-out fade-out-0 zoom-out-95',
   },
-  encapsulation: ViewEncapsulation.None,
 })
 export class ScHoverCard {
-  readonly hoverCardProvider = inject(ScHoverCardProvider);
+  private readonly styles = injectPreset().hoverCard;
+  protected readonly card = inject(ScHoverCardProvider);
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn(
-      'z-50 w-64 rounded-lg ring-1 ring-foreground/10 bg-popover p-2.5 text-sm text-popover-foreground shadow-md outline-hidden duration-100',
-      'data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
-      this.classInput(),
-    ),
+    cn(this.styles.popup, this.classInput()),
   );
-
-  private hideTimeout: ReturnType<typeof setTimeout> | null = null;
-
-  onMouseEnter(): void {
-    this.hoverCardProvider.cancelTriggerHide();
-    this.cancelHide();
-    this.hoverCardProvider.show();
-  }
-
-  onMouseLeave(): void {
-    this.scheduleHide();
-  }
-
-  private scheduleHide(): void {
-    this.cancelHide();
-    this.hideTimeout = setTimeout(() => {
-      this.hoverCardProvider.hide();
-    }, this.hoverCardProvider.closeDelay());
-  }
-
-  private cancelHide(): void {
-    if (this.hideTimeout) {
-      clearTimeout(this.hideTimeout);
-      this.hideTimeout = null;
-    }
-  }
 }

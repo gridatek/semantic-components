@@ -576,6 +576,24 @@ Rich content beside its trigger (`div[scPopoverProvider]`; rewritten and switche
 - **Kept** `origin` (an input group as anchor: the date pickers), `[(open)]`, side, align, offset — the 31 uses switched unchanged.
 - **Not** detached triggers, handles, payloads, Viewport, Backdrop, an Arrow (shadcn draws none).
 
+## Hover Card
+
+A preview of a link's destination (`div[scHoverCardProvider]`; rewritten and switched 2026-11-06): shadcn's Hover Card, Base UI's Preview Card. A shadcn component, so no web research: shadcn's reference app and its 3 examples, Base UI's Preview Card docs.
+
+| Library                                                                                                   | What to read                                                                                                                           |
+| --------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| shadcn Hover Card (`shadcn-reference/presets/*/hover-card.tsx`, `apps/v4/examples/base/hover-card-*.tsx`) | The card's look per style; Demo, Sides, RTL                                                                                            |
+| Base UI Preview Card (`@base-ui/react/docs`)                                                              | Usage guidelines (a visual preview, not for the keyboard or a screen reader), `delay` / `closeDelay` on the trigger, `data-popup-open` |
+
+**Taken:**
+
+- **Base UI's accessibility stance**: the link is the only thing to reach; the card has no role, no link to its trigger, takes no focus, and must only repeat what is at the link's destination.
+- **The delays on the trigger** (`delay` 600, `closeDelay` 300), as Base UI's; hover after the delay, keyboard focus at once; Escape, blur and a press outside close it; a touch only follows the link.
+- **The trigger on `a` or `button`** (the user's "ok", 2026-11-06): Base UI renders a link, shadcn's examples a link-styled button.
+- **Left out**: detached triggers (`handle`, `payload`), Viewport, Arrow, Backdrop — shadcn uses none.
+- **Shared with Tooltip and Popover**: the hover timing (`ScOpenDelay`) and the sides (`physicalSide`, `placedSide`, logical `inline-start` / `inline-end`).
+- **Base UI's example as "In text"**: a link in a sentence, a picture and a summary in the card.
+
 ## Drawer
 
 A panel at the edge of the screen that a swipe dismisses (`div[scDrawerProvider]`; rewritten and switched 2026-11-06): shadcn's Drawer, Base UI's Drawer. A shadcn component, so no web research: shadcn's reference app and its examples, Base UI's Drawer docs.
