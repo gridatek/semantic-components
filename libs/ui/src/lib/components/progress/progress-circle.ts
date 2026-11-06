@@ -9,6 +9,7 @@ import {
   numberAttribute,
   signal,
 } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 import { ScProgress } from './progress';
 
@@ -32,13 +33,12 @@ import { ScProgress } from './progress';
     />
     <svg:circle
       data-slot="progress-circle-range"
-      class="stroke-primary transition-[stroke-dashoffset] duration-300"
+      [class]="arcClass"
       cx="50"
       cy="50"
       fill="none"
       pathLength="100"
       stroke-dasharray="100"
-      stroke-linecap="round"
       transform="rotate(-90 50 50)"
       [attr.r]="radius()"
       [attr.stroke-width]="thickness()"
@@ -55,6 +55,11 @@ import { ScProgress } from './progress';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScProgressCircle {
+  /** The arc: its ends round, or square in a square style (the preset). */
+  protected readonly arcClass = cn(
+    'stroke-primary transition-[stroke-dashoffset] duration-300',
+    injectPreset().progress.arc,
+  );
   private readonly progress = inject(ScProgress);
 
   readonly classInput = input<string>('', { alias: 'class' });

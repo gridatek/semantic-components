@@ -6,4 +6,5 @@ export const progress: ScProgressStyles = {
     'relative flex h-0.5 w-full items-center overflow-x-hidden rounded-none bg-muted',
   label: 'text-xs font-semibold tracking-wide uppercase',
   value: 'ms-auto text-sm text-muted-foreground tabular-nums',
+  arc: '[stroke-linecap:butt]',
 };

@@ -370,6 +370,8 @@ export interface ScProgressStyles {
   label: string;
   /** The value as text. */
   value: string;
+  /** The circle's arc: its ends, square where the style's corners are. */
+  arc: string;
 }
 
 /** A preset: the components' classes in one of shadcn's styles. */
