@@ -533,6 +533,12 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/popover/popover-page'),
       },
       {
+        path: 'popover-next',
+        title: 'Popover Next - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/popover-next/popover-next-page'),
+      },
+      {
         path: 'progress',
         title: 'Progress - Semantic Components',
         loadComponent: () => import('../pages/docs/progress/progress-page'),

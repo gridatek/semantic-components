@@ -7,7 +7,6 @@ import {
 import { NgTemplateOutlet } from '@angular/common';
 import {
   Component,
-  DestroyRef,
   ViewEncapsulation,
   computed,
   contentChild,
@@ -18,22 +17,23 @@ import {
   signal,
   untracked,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { ScOpenDelay, cn } from '../../utils';
 import { ScElementDirectionality } from '../../utils/element-directionality';
 import {
   type ScOverlayAlign,
+  type ScOverlayLogicalSide,
   type ScOverlaySide,
   buildOverlayPositionsWithFallback,
+  physicalSide,
+  placedSide,
+  sideInWords,
 } from '../../utils/overlay-positions';
 import { ScTooltipGroup } from './tooltip-group';
 import { ScTooltipPortal } from './tooltip-portal';
 import { ScTooltipTrigger } from './tooltip-trigger';
 
 /** Physical (`left`, `right`, as Base UI's) or logical (`inline-start`, `inline-end`). */
-export type ScTooltipSide = ScOverlaySide | 'inline-start' | 'inline-end';
-
-/** The pointer's grace to cross from the trigger to the tooltip (ms). */
-const HOVER_BRIDGE = 100;
+export type ScTooltipSide = ScOverlayLogicalSide;
 
 /**
  * A tooltip and its trigger: `[(open)]`, where it goes (`side`, `align`,
@@ -91,17 +91,11 @@ export class ScTooltipProvider {
   protected readonly trigger = contentChild(ScTooltipTrigger);
   protected readonly portal = contentChild.required(ScTooltipPortal);
 
-  /** The side asked for, as the screen sees it. */
-  private readonly physicalSide = computed<ScOverlaySide>(() => {
-    const side = this.side();
-    if (side !== 'inline-start' && side !== 'inline-end') return side;
-    const rtl = this.direction.value === 'rtl';
-    return (side === 'inline-start') !== rtl ? 'left' : 'right';
-  });
+  private readonly timing = new ScOpenDelay(this.open);
 
   protected readonly positions = computed(() =>
     buildOverlayPositionsWithFallback(
-      this.physicalSide(),
+      physicalSide(this.side(), this.direction.value),
       this.align(),
       this.offset(),
       this.direction.value,
@@ -110,25 +104,17 @@ export class ScTooltipProvider {
 
   /** The side it was placed on, after any flip — in the words asked for. */
   private readonly placed = signal<ScOverlaySide | null>(null);
-  readonly placedSide = computed<ScTooltipSide>(() => {
-    const placed = this.placed() ?? this.physicalSide();
-    const side = this.side();
-    if (
-      (side !== 'inline-start' && side !== 'inline-end') ||
-      placed === 'top' ||
-      placed === 'bottom'
-    )
-      return placed;
-    const rtl = this.direction.value === 'rtl';
-    return (placed === 'left') !== rtl ? 'inline-start' : 'inline-end';
-  });
+  readonly placedSide = computed(() =>
+    sideInWords(
+      this.placed() ?? physicalSide(this.side(), this.direction.value),
+      this.side(),
+      this.direction.value,
+    ),
+  );
 
   protected readonly class = computed(() => cn('contents', this.classInput()));
 
-  private timer: ReturnType<typeof setTimeout> | undefined;
-
   constructor() {
-    inject(DestroyRef).onDestroy(() => clearTimeout(this.timer));
     // The group knows which of its tooltips are open.
     let wasOpen = false;
     effect(() => {
@@ -149,35 +135,27 @@ export class ScTooltipProvider {
   /** Opens after the delay — at once when its group is warm. */
   showSoon(): void {
     if (this.disabled()) return;
-    clearTimeout(this.timer);
-    const delay = this.group?.warm() ? 0 : this.delay();
-    if (delay <= 0) this.show();
-    else this.timer = setTimeout(() => this.show(), delay);
+    this.timing.openSoon(this.group?.warm() ? 0 : this.delay());
   }
 
   show(): void {
     if (this.disabled()) return;
-    clearTimeout(this.timer);
+    this.timing.cancel();
     this.open.set(true);
   }
 
   /** Closes after the close delay — time to move onto the tooltip. */
   hideSoon(): void {
-    clearTimeout(this.timer);
-    if (!this.open()) return;
-    this.timer = setTimeout(
-      () => this.hide(),
-      Math.max(this.closeDelay(), HOVER_BRIDGE),
-    );
+    this.timing.closeSoon(this.closeDelay());
   }
 
   /** The pointer is on the tooltip: it stays. */
   keepOpen(): void {
-    clearTimeout(this.timer);
+    this.timing.cancel();
   }
 
   hide(): void {
-    clearTimeout(this.timer);
+    this.timing.cancel();
     if (this.open()) this.open.set(false);
   }
 
@@ -186,16 +164,6 @@ export class ScTooltipProvider {
   }
 
   protected onPositionChange(change: ConnectedOverlayPositionChange): void {
-    const { originX, originY, overlayX, overlayY } = change.connectionPair;
-    let side: ScOverlaySide;
-    if (originY === 'top' && overlayY === 'bottom') side = 'top';
-    else if (originY === 'bottom' && overlayY === 'top') side = 'bottom';
-    else {
-      // Horizontal: CDK's start and end follow the direction.
-      const toEnd = originX === 'end' && overlayX === 'start';
-      const rtl = this.direction.value === 'rtl';
-      side = toEnd !== rtl ? 'right' : 'left';
-    }
-    this.placed.set(side);
+    this.placed.set(placedSide(change, this.direction.value));
   }
 }

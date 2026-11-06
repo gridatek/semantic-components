@@ -3895,6 +3895,67 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/popover-next',
+    children: [
+      {
+        path: 'popover-next-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/popover-next/demos/popover-next-usage-demo').then(
+            (m) => m.PopoverNextUsageDemo,
+          ),
+      },
+      {
+        path: 'basic-popover-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/popover-next/demos/basic-popover-next-demo').then(
+            (m) => m.BasicPopoverNextDemo,
+          ),
+      },
+      {
+        path: 'alignments-popover-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/popover-next/demos/alignments-popover-next-demo').then(
+            (m) => m.AlignmentsPopoverNextDemo,
+          ),
+      },
+      {
+        path: 'sides-popover-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/popover-next/demos/sides-popover-next-demo').then(
+            (m) => m.SidesPopoverNextDemo,
+          ),
+      },
+      {
+        path: 'hover-popover-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/popover-next/demos/hover-popover-next-demo').then(
+            (m) => m.HoverPopoverNextDemo,
+          ),
+      },
+      {
+        path: 'modal-popover-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/popover-next/demos/modal-popover-next-demo').then(
+            (m) => m.ModalPopoverNextDemo,
+          ),
+      },
+      {
+        path: 'controlled-popover-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/popover-next/demos/controlled-popover-next-demo').then(
+            (m) => m.ControlledPopoverNextDemo,
+          ),
+      },
+      {
+        path: 'rtl-popover-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/popover-next/demos/rtl-popover-next-demo').then(
+            (m) => m.RtlPopoverNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/progress',
     children: [
       {

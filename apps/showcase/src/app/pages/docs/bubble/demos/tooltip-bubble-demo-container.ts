@@ -56,12 +56,7 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
         <div scBubbleContent>Yes, removed it from the registry.</div>
         <div scBubbleReactions>
           <div scTooltipProvider>
-            <button
-              scButton
-              variant="ghost"
-              size="icon-xs"
-              scTooltipTrigger
-            >
+            <button scButton variant="ghost" size="icon-xs" scTooltipTrigger>
               <svg siCheckIcon></svg>
               <span class="sr-only">Read</span>
             </button>

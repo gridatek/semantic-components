@@ -82,9 +82,7 @@ import { SiAudioLinesIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
                 <span class="sr-only">Voice Mode</span>
               </button>
               <ng-template scTooltipPortal>
-                <div scTooltip>
-                  Voice Mode<span scTooltipArrow></span>
-                </div>
+                <div scTooltip>Voice Mode<span scTooltipArrow></span></div>
               </ng-template>
             </div>
           </div>

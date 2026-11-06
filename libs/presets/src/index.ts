@@ -312,6 +312,14 @@ export interface ScTooltipStyles {
   arrow: string;
 }
 
+/** A popover's parts that change from style to style. */
+export interface ScPopoverStyles {
+  popup: string;
+  header: string;
+  title: string;
+  description: string;
+}
+
 /** A preset: the components' classes in one of shadcn's styles. */
 export interface ScPreset {
   accordion: ScAccordionStyles;
@@ -360,6 +368,7 @@ export interface ScPreset {
   /** A message scroller's rows: the gap between them. */
   messageScrollerContent: string;
   pagination: ScPaginationStyles;
+  popover: ScPopoverStyles;
   questionnaire: ScQuestionnaireStyles;
   select: ScSelectStyles;
   table: ScTableStyles;

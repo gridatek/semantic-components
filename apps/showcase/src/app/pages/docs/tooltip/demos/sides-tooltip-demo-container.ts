@@ -42,12 +42,7 @@ import {
   template: \`
     <div class="flex flex-wrap gap-2">
       <div scTooltipProvider side="left">
-        <button
-          scButton
-          scTooltipTrigger
-          variant="outline"
-          class="capitalize"
-        >
+        <button scButton scTooltipTrigger variant="outline" class="capitalize">
           left
         </button>
         <ng-template scTooltipPortal>
@@ -58,12 +53,7 @@ import {
         </ng-template>
       </div>
       <div scTooltipProvider side="top">
-        <button
-          scButton
-          scTooltipTrigger
-          variant="outline"
-          class="capitalize"
-        >
+        <button scButton scTooltipTrigger variant="outline" class="capitalize">
           top
         </button>
         <ng-template scTooltipPortal>
@@ -74,12 +64,7 @@ import {
         </ng-template>
       </div>
       <div scTooltipProvider side="bottom">
-        <button
-          scButton
-          scTooltipTrigger
-          variant="outline"
-          class="capitalize"
-        >
+        <button scButton scTooltipTrigger variant="outline" class="capitalize">
           bottom
         </button>
         <ng-template scTooltipPortal>
@@ -90,12 +75,7 @@ import {
         </ng-template>
       </div>
       <div scTooltipProvider side="right">
-        <button
-          scButton
-          scTooltipTrigger
-          variant="outline"
-          class="capitalize"
-        >
+        <button scButton scTooltipTrigger variant="outline" class="capitalize">
           right
         </button>
         <ng-template scTooltipPortal>

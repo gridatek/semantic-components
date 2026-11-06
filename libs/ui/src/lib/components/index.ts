@@ -41,6 +41,7 @@ export * from './otp-field';
 export * from './pagination';
 export * from './password-field';
 export * from './popover';
+export * from './popover-next';
 export * from './progress';
 export * from './radio-group';
 export * from './range-slider';

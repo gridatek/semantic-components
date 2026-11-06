@@ -31,6 +31,7 @@ import { menubar } from './menubar';
 import { message } from './message';
 import { messageScrollerContent } from './message-scroller';
 import { pagination } from './pagination';
+import { popover } from './popover';
 import { questionnaire } from './questionnaire';
 import { select } from './select';
 import { table } from './table';
@@ -71,6 +72,7 @@ export const luma: ScPreset = {
   message,
   messageScrollerContent,
   pagination,
+  popover,
   questionnaire,
   select,
   table,

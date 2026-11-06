@@ -494,9 +494,7 @@ const INK_COLORS = [
               <span class="sr-only">Find in document</span>
             </button>
             <ng-template scTooltipPortal>
-              <div scTooltip>
-                Find in document<span scTooltipArrow></span>
-              </div>
+              <div scTooltip>Find in document<span scTooltipArrow></span></div>
             </ng-template>
           </div>
 
@@ -527,9 +525,7 @@ const INK_COLORS = [
                 <span class="sr-only">Previous page</span>
               </button>
               <ng-template scTooltipPortal>
-                <div scTooltip>
-                  Previous page<span scTooltipArrow></span>
-                </div>
+                <div scTooltip>Previous page<span scTooltipArrow></span></div>
               </ng-template>
             </div>
             <div scTooltipProvider side="bottom">
@@ -538,9 +534,7 @@ const INK_COLORS = [
                 <span class="sr-only">Next page</span>
               </button>
               <ng-template scTooltipPortal>
-                <div scTooltip>
-                  Next page<span scTooltipArrow></span>
-                </div>
+                <div scTooltip>Next page<span scTooltipArrow></span></div>
               </ng-template>
             </div>
           </div>
@@ -565,9 +559,7 @@ const INK_COLORS = [
                 <span class="sr-only">Zoom out</span>
               </button>
               <ng-template scTooltipPortal>
-                <div scTooltip>
-                  Zoom out<span scTooltipArrow></span>
-                </div>
+                <div scTooltip>Zoom out<span scTooltipArrow></span></div>
               </ng-template>
             </div>
             <div scTooltipProvider side="bottom">
@@ -614,9 +606,7 @@ const INK_COLORS = [
                 <span class="sr-only">View options</span>
               </button>
               <ng-template scTooltipPortal>
-                <div scTooltip>
-                  View options<span scTooltipArrow></span>
-                </div>
+                <div scTooltip>View options<span scTooltipArrow></span></div>
               </ng-template>
             </div>
             <ng-template scPopoverPortal>
@@ -704,9 +694,7 @@ const INK_COLORS = [
                 <span class="sr-only">Highlight</span>
               </button>
               <ng-template scTooltipPortal>
-                <div scTooltip>
-                  Highlight<span scTooltipArrow></span>
-                </div>
+                <div scTooltip>Highlight<span scTooltipArrow></span></div>
               </ng-template>
             </div>
             <div scTooltipProvider side="bottom">
@@ -751,9 +739,7 @@ const INK_COLORS = [
                 <span class="sr-only">Tool options</span>
               </button>
               <ng-template scTooltipPortal>
-                <div scTooltip>
-                  Tool options<span scTooltipArrow></span>
-                </div>
+                <div scTooltip>Tool options<span scTooltipArrow></span></div>
               </ng-template>
             </div>
             <ng-template scPopoverPortal>
@@ -911,9 +897,7 @@ const INK_COLORS = [
                 <span class="sr-only">Signature</span>
               </button>
               <ng-template scTooltipPortal>
-                <div scTooltip>
-                  Signature<span scTooltipArrow></span>
-                </div>
+                <div scTooltip>Signature<span scTooltipArrow></span></div>
               </ng-template>
             </div>
             <ng-template scPopoverPortal>
@@ -1053,9 +1037,7 @@ const INK_COLORS = [
                 <span class="sr-only">Previous match</span>
               </button>
               <ng-template scTooltipPortal>
-                <div scTooltip>
-                  Previous match<span scTooltipArrow></span>
-                </div>
+                <div scTooltip>Previous match<span scTooltipArrow></span></div>
               </ng-template>
             </div>
             <div scTooltipProvider>
@@ -1064,9 +1046,7 @@ const INK_COLORS = [
                 <span class="sr-only">Next match</span>
               </button>
               <ng-template scTooltipPortal>
-                <div scTooltip>
-                  Next match<span scTooltipArrow></span>
-                </div>
+                <div scTooltip>Next match<span scTooltipArrow></span></div>
               </ng-template>
             </div>
             <label scCheckboxField class="ms-2 text-sm">
@@ -1163,9 +1143,7 @@ const INK_COLORS = [
                       <span class="sr-only">Pages</span>
                     </button>
                     <ng-template scTooltipPortal>
-                      <div scTooltip>
-                        Pages<span scTooltipArrow></span>
-                      </div>
+                      <div scTooltip>Pages<span scTooltipArrow></span></div>
                     </ng-template>
                   </div>
                   <div scTooltipProvider>
@@ -1174,9 +1152,7 @@ const INK_COLORS = [
                       <span class="sr-only">Outline</span>
                     </button>
                     <ng-template scTooltipPortal>
-                      <div scTooltip>
-                        Outline<span scTooltipArrow></span>
-                      </div>
+                      <div scTooltip>Outline<span scTooltipArrow></span></div>
                     </ng-template>
                   </div>
                   <div scTooltipProvider>
@@ -1196,9 +1172,7 @@ const INK_COLORS = [
                       <span class="sr-only">Layers</span>
                     </button>
                     <ng-template scTooltipPortal>
-                      <div scTooltip>
-                        Layers<span scTooltipArrow></span>
-                      </div>
+                      <div scTooltip>Layers<span scTooltipArrow></span></div>
                     </ng-template>
                   </div>
                   <div scTooltipProvider>
@@ -1207,9 +1181,7 @@ const INK_COLORS = [
                       <span class="sr-only">Comments</span>
                     </button>
                     <ng-template scTooltipPortal>
-                      <div scTooltip>
-                        Comments<span scTooltipArrow></span>
-                      </div>
+                      <div scTooltip>Comments<span scTooltipArrow></span></div>
                     </ng-template>
                   </div>
                 </div>
@@ -1250,19 +1222,14 @@ const INK_COLORS = [
                         </button>
                         <ng-template scTooltipPortal>
                           <div scTooltip>
-                            Paste after this page<span
-                              scTooltipArrow
-                            ></span>
+                            Paste after this page<span scTooltipArrow></span>
                           </div>
                         </ng-template>
                       </div>
                       @if (viewer.pageSelection().length) {
                         <div scSeparator orientation="vertical"></div>
                         <div scTooltipProvider>
-                          <button
-                            scPdfViewerMovePagesEarlier
-                            scTooltipTrigger
-                          >
+                          <button scPdfViewerMovePagesEarlier scTooltipTrigger>
                             <svg siArrowUpIcon></svg>
                             <span class="sr-only">Move earlier</span>
                           </button>
@@ -1273,10 +1240,7 @@ const INK_COLORS = [
                           </ng-template>
                         </div>
                         <div scTooltipProvider>
-                          <button
-                            scPdfViewerMovePagesLater
-                            scTooltipTrigger
-                          >
+                          <button scPdfViewerMovePagesLater scTooltipTrigger>
                             <svg siArrowDownIcon></svg>
                             <span class="sr-only">Move later</span>
                           </button>
@@ -1303,9 +1267,7 @@ const INK_COLORS = [
                             <span class="sr-only">Cut</span>
                           </button>
                           <ng-template scTooltipPortal>
-                            <div scTooltip>
-                              Cut<span scTooltipArrow></span>
-                            </div>
+                            <div scTooltip>Cut<span scTooltipArrow></span></div>
                           </ng-template>
                         </div>
                         <div scTooltipProvider>
@@ -1391,10 +1353,7 @@ const INK_COLORS = [
                     } @else {
                       <div class="flex gap-1 border-b px-2 py-1">
                         <div scTooltipProvider>
-                          <button
-                            scPdfViewerOutlineExpandAll
-                            scTooltipTrigger
-                          >
+                          <button scPdfViewerOutlineExpandAll scTooltipTrigger>
                             <svg siChevronsUpDownIcon></svg>
                             <span class="sr-only">Expand all</span>
                           </button>

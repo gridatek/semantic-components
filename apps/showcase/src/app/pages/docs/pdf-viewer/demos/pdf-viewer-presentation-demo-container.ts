@@ -118,9 +118,7 @@ import {
                 <span class="sr-only">View options</span>
               </button>
               <ng-template scTooltipPortal>
-                <div scTooltip>
-                  View options<span scTooltipArrow></span>
-                </div>
+                <div scTooltip>View options<span scTooltipArrow></span></div>
               </ng-template>
             </div>
             <ng-template scPopoverPortal>

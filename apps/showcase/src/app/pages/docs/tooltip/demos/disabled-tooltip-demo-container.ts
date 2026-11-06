@@ -44,13 +44,7 @@ import {
   ],
   template: \`
     <div scTooltipProvider>
-      <button
-        scButton
-        scTooltipTrigger
-        variant="outline"
-        disabled
-        softDisabled
-      >
+      <button scButton scTooltipTrigger variant="outline" disabled softDisabled>
         Disabled
       </button>
       <ng-template scTooltipPortal>
