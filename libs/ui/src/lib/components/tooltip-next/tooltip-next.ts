@@ -1,10 +1,4 @@
-import {
-  Component,
-  ViewEncapsulation,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 import { ScTooltipNextProvider } from './tooltip-next-provider';
@@ -14,9 +8,8 @@ import { ScTooltipNextProvider } from './tooltip-next-provider';
  * trigger while open. The pointer can move onto it (it stays open); it
  * animates in and out.
  */
-@Component({
+@Directive({
   selector: 'div[scTooltipNext]',
-  template: `<ng-content />`,
   host: {
     'data-slot': 'tooltip-content',
     role: 'tooltip',
@@ -28,7 +21,6 @@ import { ScTooltipNextProvider } from './tooltip-next-provider';
     'animate.enter': 'animate-in fade-in-0 zoom-in-95',
     'animate.leave': 'animate-out fade-out-0 zoom-out-95',
   },
-  encapsulation: ViewEncapsulation.None,
 })
 export class ScTooltipNext {
   private readonly styles = injectPreset().tooltip;
