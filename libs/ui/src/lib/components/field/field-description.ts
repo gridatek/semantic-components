@@ -7,6 +7,7 @@ import {
   inject,
   input,
 } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 import { SC_FIELD } from './field';
 
@@ -19,6 +20,7 @@ import { SC_FIELD } from './field';
   },
 })
 export class ScFieldDescription {
+  private readonly styles = injectPreset().field;
   private readonly field = inject(SC_FIELD, { optional: true });
   private readonly fallbackId = inject(_IdGenerator).getId(
     'sc-field-description-',
@@ -43,11 +45,6 @@ export class ScFieldDescription {
   }
 
   protected readonly class = computed(() =>
-    cn(
-      'text-muted-foreground text-start text-sm [[data-variant=legend]+&]:-mt-1.5 leading-normal font-normal group-has-data-[orientation=horizontal]/field:text-balance',
-      'last:mt-0 nth-last-2:-mt-1',
-      '[&>a:hover]:text-primary [&>a]:underline [&>a]:underline-offset-4',
-      this.classInput(),
-    ),
+    cn(this.styles.description, this.classInput()),
   );
 }

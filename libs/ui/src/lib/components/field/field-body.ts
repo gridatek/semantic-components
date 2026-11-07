@@ -1,4 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 
 @Directive({
@@ -9,12 +10,10 @@ import { cn } from '../../utils';
   },
 })
 export class ScFieldBody {
+  private readonly styles = injectPreset().field;
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn(
-      'gap-0.5 group/field-body flex flex-1 flex-col leading-snug',
-      this.classInput(),
-    ),
+    cn(this.styles.body, this.classInput()),
   );
 }

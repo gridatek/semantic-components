@@ -382,6 +382,23 @@ export interface ScLabelStyles {
   field: string;
 }
 
+/** A field's parts that change from style to style: their spacing and text. */
+export interface ScFieldStyles {
+  /** A fieldset. */
+  set: string;
+  legend: string;
+  group: string;
+  /** A field (its orientation's layout is the part's). */
+  field: string;
+  /** Its title and description beside a control (shadcn's FieldContent). */
+  body: string;
+  title: string;
+  description: string;
+  separator: string;
+  /** Its errors. */
+  error: string;
+}
+
 /** A preset: the components' classes in one of shadcn's styles. */
 export interface ScPreset {
   accordion: ScAccordionStyles;
@@ -413,6 +430,7 @@ export interface ScPreset {
   dialog: ScDialogStyles;
   drawer: ScDrawerStyles;
   empty: ScEmptyStyles;
+  field: ScFieldStyles;
   /** The Menu's parts in a context menu. */
   contextMenu: ScMenuStyles;
   /** A text field (`input[scInput]`, and the inputs that look like one). */

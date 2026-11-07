@@ -1,4 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 
 @Directive({
@@ -8,12 +9,10 @@ import { cn } from '../../utils';
   },
 })
 export class ScFieldSeparator {
+  private readonly styles = injectPreset().field;
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn(
-      '-my-2 h-5 text-sm group-data-[variant=outline]/field-group:-mb-2 relative',
-      this.classInput(),
-    ),
+    cn(this.styles.separator, this.classInput()),
   );
 }

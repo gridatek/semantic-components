@@ -17,6 +17,7 @@ import { controlGroup, controlGroupText } from './control-group';
 import { dialog } from './dialog';
 import { drawer } from './drawer';
 import { empty } from './empty';
+import { field } from './field';
 import { frame } from './frame';
 import { input } from './input';
 import {
@@ -69,6 +70,7 @@ export const vega: ScPreset = {
   dialog,
   drawer,
   empty,
+  field,
   contextMenu,
   input,
   marker,

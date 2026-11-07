@@ -13,25 +13,23 @@ import {
 } from '@angular/core';
 import { FormField } from '@angular/forms/signals';
 import { type VariantProps, cva } from 'class-variance-authority';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 
-const fieldVariants = cva(
-  'gap-2 group/field flex w-full data-[invalid=true]:text-destructive',
-  {
-    variants: {
-      orientation: {
-        vertical: 'flex-col *:w-full [&>.sr-only]:w-auto',
-        horizontal:
-          'flex-row items-center *:data-[slot=label]:flex-auto has-[>[data-slot=field-body]]:items-start has-[>[data-slot=field-body]]:[&>[role=checkbox],[role=radio]]:mt-px',
-        responsive:
-          'flex-col *:w-full [&>.sr-only]:w-auto @md/field-group:flex-row @md/field-group:items-center @md/field-group:*:w-auto @md/field-group:*:data-[slot=label]:flex-auto @md/field-group:has-[>[data-slot=field-body]]:items-start @md/field-group:has-[>[data-slot=field-body]]:[&>[role=checkbox],[role=radio]]:mt-px',
-      },
-    },
-    defaultVariants: {
-      orientation: 'vertical',
+const fieldVariants = cva('', {
+  variants: {
+    orientation: {
+      vertical: 'flex-col *:w-full [&>.sr-only]:w-auto',
+      horizontal:
+        'flex-row items-center *:data-[slot=label]:flex-auto has-[>[data-slot=field-body]]:items-start has-[>[data-slot=field-body]]:[&>[role=checkbox],[role=radio]]:mt-px',
+      responsive:
+        'flex-col *:w-full [&>.sr-only]:w-auto @md/field-group:flex-row @md/field-group:items-center @md/field-group:*:w-auto @md/field-group:*:data-[slot=label]:flex-auto @md/field-group:has-[>[data-slot=field-body]]:items-start @md/field-group:has-[>[data-slot=field-body]]:[&>[role=checkbox],[role=radio]]:mt-px',
     },
   },
-);
+  defaultVariants: {
+    orientation: 'vertical',
+  },
+});
 
 export type ScFieldVariants = VariantProps<typeof fieldVariants>;
 
@@ -62,6 +60,7 @@ export const SC_FIELD = new InjectionToken<ScFieldContext>('SC_FIELD');
   ],
 })
 export class ScField implements ScFieldContext {
+  private readonly styles = injectPreset().field;
   private readonly elementRef = inject(ElementRef<HTMLElement>);
 
   /**
@@ -116,6 +115,10 @@ export class ScField implements ScFieldContext {
   );
 
   protected readonly class = computed(() =>
-    cn(fieldVariants({ orientation: this.orientation() }), this.classInput()),
+    cn(
+      this.styles.field,
+      fieldVariants({ orientation: this.orientation() }),
+      this.classInput(),
+    ),
   );
 }

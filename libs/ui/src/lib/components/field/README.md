@@ -2,6 +2,8 @@
 
 A flexible field composition system for building accessible forms with labels, descriptions, errors, and various layout orientations.
 
+In the look of the app's preset (`field` key: each part's spacing and text, shadcn's in each of the eight styles — lyra and mira smaller, sera's legends and titles uppercase). The orientation layouts are the same in every style and stay in `scField`.
+
 ## Components
 
 - `ScField` - Main field wrapper with orientation support

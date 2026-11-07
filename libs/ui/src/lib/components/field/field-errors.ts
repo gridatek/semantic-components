@@ -8,6 +8,7 @@ import {
   inject,
   input,
 } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 import { SC_FIELD } from './field';
 
@@ -35,6 +36,7 @@ import { SC_FIELD } from './field';
   },
 })
 export class ScFieldErrors {
+  private readonly styles = injectPreset().field;
   private readonly field = inject(SC_FIELD, { optional: true });
   private readonly fallbackId = inject(_IdGenerator).getId('sc-field-errors-');
 
@@ -79,6 +81,6 @@ export class ScFieldErrors {
   }
 
   protected readonly class = computed(() =>
-    cn('text-destructive text-sm font-normal', this.classInput()),
+    cn(this.styles.error, this.classInput()),
   );
 }

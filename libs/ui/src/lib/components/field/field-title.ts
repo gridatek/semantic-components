@@ -1,4 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 
 @Directive({
@@ -8,12 +9,10 @@ import { cn } from '../../utils';
   },
 })
 export class ScFieldTitle {
+  private readonly styles = injectPreset().field;
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn(
-      'gap-2 text-sm font-medium group-data-[disabled=true]/field:opacity-50 flex w-fit items-center leading-snug',
-      this.classInput(),
-    ),
+    cn(this.styles.title, this.classInput()),
   );
 }

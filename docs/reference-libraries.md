@@ -531,6 +531,15 @@ An empty state (`div[scEmpty]`; restyled 2026-11-05): shadcn's Empty. A shadcn c
 - **The title on a heading** (`h2`–`h6`) as well as a `div`: shadcn's is a `div`; a heading can be found by heading.
 - **The examples**; links that look like buttons are `a[scLink]` (shadcn: `Button render={<a />}`); Card is inside a real Card.
 
+## Field: restyled
+
+Restyled 2026-11-07: shadcn's Field parts in each style, and its 13 examples.
+
+- **The `field` preset key**: `set`, `legend`, `group`, `field` (its base: the orientation layouts stay in the part, the same everywhere), `body` (shadcn's FieldContent), `title`, `description`, `separator`, `error` — the spacing (field `gap-2`/`3`, group `gap-4` to `10`, set, legend margin) and text (`text-xs` in lyra and mira, sera's uppercase legend and title). shadcn's `field-content` / `field-label` slots and `data-horizontal` become our `field-body` / `label` and `data-[orientation=horizontal]`.
+- **ScLabelText** reads the `title` (shadcn's FieldTitle).
+- **Select in a field**: its label part (`scSelectLabel`) takes the `label` preset, and the `field` classes in a field (shadcn's FieldLabel); the select root is `contents` there, so its label and trigger take the field's gap — in line with the field's other labels.
+- **shadcn's examples ported**: Demo (the Usage: a payment form), Input, Textarea, Select, Slider (one value: our slider has one thumb), Fieldset, Checkbox, Radio, Switch, Choice card, Field group, Responsive, RTL; ours kept: Errors (Signal Forms), Separator.
+
 ## Label: restyled
 
 Restyled 2026-11-07: shadcn's Label and FieldLabel in each style, and its two examples (Demo, RTL).

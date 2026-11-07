@@ -1,4 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 
 export type ScLegendVariant = 'legend' | 'label';
@@ -11,13 +12,11 @@ export type ScLegendVariant = 'legend' | 'label';
   },
 })
 export class ScLegend {
+  private readonly styles = injectPreset().field;
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScLegendVariant>('legend');
 
   protected readonly class = computed(() =>
-    cn(
-      'mb-1.5 font-medium data-[variant=label]:text-sm data-[variant=legend]:text-base',
-      this.classInput(),
-    ),
+    cn(this.styles.legend, this.classInput()),
   );
 }

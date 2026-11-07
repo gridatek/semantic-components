@@ -2202,17 +2202,94 @@ export const demosRoutes: Route[] = [
     path: 'demos/field',
     children: [
       {
-        path: 'basic-field-demo',
+        path: 'field-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/field/demos/basic-field-demo').then(
-            (m) => m.BasicFieldDemo,
+          import('../pages/docs/field/demos/field-usage-demo').then(
+            (m) => m.FieldUsageDemo,
           ),
       },
       {
-        path: 'horizontal-field-demo',
+        path: 'input-field-demo',
         loadComponent: () =>
-          import('../pages/docs/field/demos/horizontal-field-demo').then(
-            (m) => m.HorizontalFieldDemo,
+          import('../pages/docs/field/demos/input-field-demo').then(
+            (m) => m.InputFieldDemo,
+          ),
+      },
+      {
+        path: 'textarea-field-demo',
+        loadComponent: () =>
+          import('../pages/docs/field/demos/textarea-field-demo').then(
+            (m) => m.TextareaFieldDemo,
+          ),
+      },
+      {
+        path: 'select-field-demo',
+        loadComponent: () =>
+          import('../pages/docs/field/demos/select-field-demo').then(
+            (m) => m.SelectFieldDemo,
+          ),
+      },
+      {
+        path: 'slider-field-demo',
+        loadComponent: () =>
+          import('../pages/docs/field/demos/slider-field-demo').then(
+            (m) => m.SliderFieldDemo,
+          ),
+      },
+      {
+        path: 'fieldset-field-demo',
+        loadComponent: () =>
+          import('../pages/docs/field/demos/fieldset-field-demo').then(
+            (m) => m.FieldsetFieldDemo,
+          ),
+      },
+      {
+        path: 'checkbox-field-demo',
+        loadComponent: () =>
+          import('../pages/docs/field/demos/checkbox-field-demo').then(
+            (m) => m.CheckboxFieldDemo,
+          ),
+      },
+      {
+        path: 'radio-field-demo',
+        loadComponent: () =>
+          import('../pages/docs/field/demos/radio-field-demo').then(
+            (m) => m.RadioFieldDemo,
+          ),
+      },
+      {
+        path: 'switch-field-demo',
+        loadComponent: () =>
+          import('../pages/docs/field/demos/switch-field-demo').then(
+            (m) => m.SwitchFieldDemo,
+          ),
+      },
+      {
+        path: 'choice-card-field-demo',
+        loadComponent: () =>
+          import('../pages/docs/field/demos/choice-card-field-demo').then(
+            (m) => m.ChoiceCardFieldDemo,
+          ),
+      },
+      {
+        path: 'group-field-demo',
+        loadComponent: () =>
+          import('../pages/docs/field/demos/group-field-demo').then(
+            (m) => m.GroupFieldDemo,
+          ),
+      },
+      {
+        path: 'responsive-field-demo',
+        loadComponent: () =>
+          import('../pages/docs/field/demos/responsive-field-demo').then(
+            (m) => m.ResponsiveFieldDemo,
+          ),
+      },
+      {
+        path: 'rtl-field-demo',
+        loadComponent: () =>
+          import('../pages/docs/field/demos/rtl-field-demo').then(
+            (m) => m.RtlFieldDemo,
           ),
       },
       {
@@ -2220,13 +2297,6 @@ export const demosRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/field/demos/error-field-demo').then(
             (m) => m.ErrorFieldDemo,
-          ),
-      },
-      {
-        path: 'fieldset-demo',
-        loadComponent: () =>
-          import('../pages/docs/field/demos/fieldset-demo').then(
-            (m) => m.FieldsetDemo,
           ),
       },
       {

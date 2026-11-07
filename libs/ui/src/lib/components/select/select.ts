@@ -11,6 +11,7 @@ import {
   booleanAttribute,
   computed,
   contentChild,
+  inject,
   input,
   model,
   output,
@@ -20,6 +21,7 @@ import {
 import type { FormValueControl } from '@angular/forms/signals';
 import { cn } from '../../utils';
 import { ScElementDirectionality } from '../../utils/element-directionality';
+import { SC_FIELD } from '../field';
 import { ScPortalOutlet } from '../portal-outlet/portal-outlet';
 import { ScSelectLabel } from './select-label';
 import { ScSelectPortal } from './select-portal';
@@ -102,6 +104,8 @@ const positions: ConnectedPosition[] = [
   encapsulation: ViewEncapsulation.None,
 })
 export class ScSelect implements FormValueControl<string> {
+  /** In a field: its label and trigger are the field's, spaced as its others. */
+  private readonly inField = !!inject(SC_FIELD, { optional: true });
   readonly classInput = input<string>('', { alias: 'class' });
 
   /** The selected option's value. Bind with `[formField]` or `[(value)]`. */
@@ -144,7 +148,10 @@ export class ScSelect implements FormValueControl<string> {
   protected readonly class = computed(() =>
     // It sets the width — its content's by default; the trigger fills it,
     // the list matches the trigger. Its label above its trigger.
-    cn('flex w-fit flex-col gap-2', this.classInput()),
+    cn(
+      this.inField ? 'contents' : 'flex w-fit flex-col gap-2',
+      this.classInput(),
+    ),
   );
 
   registerLabel(value: string, label: string): void {
