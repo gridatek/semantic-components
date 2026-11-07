@@ -2676,10 +2676,31 @@ export const demosRoutes: Route[] = [
     path: 'demos/input-button',
     children: [
       {
-        path: 'basic-input-button-demo',
+        path: 'input-button-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/input-button/demos/basic-input-button-demo').then(
-            (m) => m.BasicInputButtonDemo,
+          import('../pages/docs/input-button/demos/input-button-usage-demo').then(
+            (m) => m.InputButtonUsageDemo,
+          ),
+      },
+      {
+        path: 'full-width-input-button-demo',
+        loadComponent: () =>
+          import('../pages/docs/input-button/demos/full-width-input-button-demo').then(
+            (m) => m.FullWidthInputButtonDemo,
+          ),
+      },
+      {
+        path: 'icon-input-button-demo',
+        loadComponent: () =>
+          import('../pages/docs/input-button/demos/icon-input-button-demo').then(
+            (m) => m.IconInputButtonDemo,
+          ),
+      },
+      {
+        path: 'rtl-input-button-demo',
+        loadComponent: () =>
+          import('../pages/docs/input-button/demos/rtl-input-button-demo').then(
+            (m) => m.RtlInputButtonDemo,
           ),
       },
     ],

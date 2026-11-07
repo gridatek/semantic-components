@@ -1,56 +1,24 @@
 # Input Button
 
-A button styled to look like an input field. Useful as a trigger for search dialogs, command palettes, or any action that visually resembles an input.
+A button that looks like a text field — in the look of the app's preset's `input` — to open a search or a command palette. Our own: shadcn has none.
 
 ## Usage
 
 ```html
 <button scInputButton>
   <svg siSearchIcon></svg>
-  <span>Search...</span>
-  <kbd scKbd>⌘J</kbd>
+  <span class="flex-1">Search...</span>
+  <kbd scKbd>⌘<span class="sr-only"> Command</span>J</kbd>
 </button>
 ```
 
-Import the directive:
+## Part
 
-```typescript
-import { ScInputButton } from '@semantic-components/ui';
-```
+| Part            | Selector                | What it does                                                                                 |
+| --------------- | ----------------------- | -------------------------------------------------------------------------------------------- |
+| `ScInputButton` | `button[scInputButton]` | The preset's input look, muted text, its icon sized (`size-4` unless yours); `type="button"` |
 
-## Components
+## Keyboard and screen readers
 
-### ScInputButton
-
-A directive applied to `<button>` elements to style them as input-like triggers. Builds on the preset's button with the `outline` variant.
-
-| Property | Type     | Default | Description                                          |
-| -------- | -------- | ------- | ---------------------------------------------------- |
-| `class`  | `string` | `''`    | Additional CSS classes to merge with default styles. |
-
-**Selector:** `button[scInputButton]`
-
-## Examples
-
-### Command dialog trigger
-
-```html
-<button scDialogTrigger scInputButton>
-  <svg siSearchIcon></svg>
-  <span>Search...</span>
-  <kbd scKbd scHotkey="mod+j" #hk="scHotkey" (scHotkeyPressed)="toggleOpen()">{{ hk.displayKey() }}</kbd>
-</button>
-```
-
-### Simple search trigger
-
-```html
-<button scInputButton (click)="openSearch()">
-  <svg siSearchIcon></svg>
-  <span>Search...</span>
-</button>
-```
-
-## Accessibility
-
-Uses a native `<button>` element with `type="button"`, ensuring proper keyboard interaction (Enter/Space to activate) and screen reader support out of the box.
+- A button, not a field: read as one, pressed with Enter or Space. What it opens does the searching.
+- Its name is its text; icon only, give it sr-only text. Name a shortcut's symbols too (⌘: "Command").

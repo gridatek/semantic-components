@@ -531,6 +531,13 @@ An empty state (`div[scEmpty]`; restyled 2026-11-05): shadcn's Empty. A shadcn c
 - **The title on a heading** (`h2`–`h6`) as well as a `div`: shadcn's is a `div`; a heading can be found by heading.
 - **The examples**; links that look like buttons are `a[scLink]` (shadcn: `Button render={<a />}`); Card is inside a real Card.
 
+## Input Button: restyled
+
+Restyled 2026-11-07. Our own component — shadcn has none; its docs site's search trigger is a secondary button.
+
+- **The preset's `input` look** (the user's choice over the outline button, 2026-11-07): it looks like the text fields beside it in every style — sera's underline, luma's and rhea's filled box — with muted text and a sized icon. No key of its own.
+- **Examples**: Usage (a search with its shortcut), Full width, Icon only (a collapsed sidebar), RTL.
+
 ## Textarea: restyled
 
 Restyled 2026-11-07: shadcn's Textarea in each style, and its 6 examples.

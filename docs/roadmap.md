@@ -2,7 +2,7 @@
 
 Every component brought to the same bar: shadcn's look, tested, mobile first, right to left, in light and dark, rendered on the server. One component at a time, in the order the user names, each through [component-rewrite-process.md](component-rewrite-process.md). Two lists: the components shadcn has (**List 1**: its look and parts are the reference), and the ones it doesn't (**List 2**: shadcn's tokens and patterns, our design). The order of each list is the user's work order: changed only by hand, in this document — `scripts/roadmap.mjs` keeps every row where it is, refreshes its columns, and adds a new component at the end of its list; **Built on** (the components it imports, and those it shapes inside it — the `data-slot` its styles, or its preset's, read: a button group shapes its buttons, input groups and selects) and **Parts** (the components, directives and services it declares) show where it sits. Each row ticked when it meets the definition of done.
 
-Inventory (150 components): 63 with a shadcn counterpart · 127 with e2e demo tests · 150 with a page axe test · 55 with an RTL demo.
+Inventory (150 components): 63 with a shadcn counterpart · 128 with e2e demo tests · 150 with a page axe test · 56 with an RTL demo.
 
 ## The two lists
 
@@ -157,7 +157,7 @@ The components shadcn doesn't have: shadcn's tokens and patterns, our parts.
 |  29 | [Image Annotator](../apps/showcase/src/app/pages/docs/image-annotator)             | ui      | button                                                                  |    10 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 |  30 | [Image Cropper](../apps/showcase/src/app/pages/docs/image-cropper)                 | ui      | button                                                                  |    16 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 |  31 | [Infinite Scroll](../apps/showcase/src/app/pages/docs/infinite-scroll)             | ui      | button                                                                  |     3 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
-|  32 | [Input Button](../apps/showcase/src/app/pages/docs/input-button)                   | ui      | button                                                                  |     1 |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
+|  32 | [Input Button](../apps/showcase/src/app/pages/docs/input-button)                   | ui      | input                                                                   |     1 |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] | waiting |
 |  33 | [Intersection Observer](../apps/showcase/src/app/pages/docs/intersection-observer) | ui      | —                                                                       |     1 |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 |  34 | [JSON Viewer](../apps/showcase/src/app/pages/docs/json-viewer)                     | ui      | tree                                                                    |     3 |  [ ]   | [x] |  [ ]   | [x] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 |  35 | [Kanban Board](../apps/showcase/src/app/pages/docs/kanban-board)                   | ui      | —                                                                       |     3 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
