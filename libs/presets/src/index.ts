@@ -374,6 +374,14 @@ export interface ScProgressStyles {
   arc: string;
 }
 
+/** A label's look, from style to style. */
+export interface ScLabelStyles {
+  /** A label alone: its text. */
+  label: string;
+  /** What it adds in a field: as a choice card around one, its border, corners, padding and ring. */
+  field: string;
+}
+
 /** A preset: the components' classes in one of shadcn's styles. */
 export interface ScPreset {
   accordion: ScAccordionStyles;
@@ -418,6 +426,7 @@ export interface ScPreset {
   item: ScItemStyles;
   /** A key. */
   kbd: string;
+  label: ScLabelStyles;
   marker: ScMarkerStyles;
   menu: ScMenuStyles;
   menubar: ScMenubarStyles;

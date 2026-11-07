@@ -2,8 +2,8 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui';
 
 @Component({
-  selector: 'app-checkbox-label-demo',
-  imports: [ScLabel, ScCheckboxField, ScCheckbox],
+  selector: 'app-label-usage-demo',
+  imports: [ScCheckbox, ScCheckboxField, ScLabel],
   template: `
     <div scCheckboxField>
       <input type="checkbox" scCheckbox />
@@ -13,4 +13,4 @@ import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui';
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class CheckboxLabelDemo {}
+export class LabelUsageDemo {}

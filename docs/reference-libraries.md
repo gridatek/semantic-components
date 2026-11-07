@@ -531,6 +531,16 @@ An empty state (`div[scEmpty]`; restyled 2026-11-05): shadcn's Empty. A shadcn c
 - **The title on a heading** (`h2`–`h6`) as well as a `div`: shadcn's is a `div`; a heading can be found by heading.
 - **The examples**; links that look like buttons are `a[scLink]` (shadcn: `Button render={<a />}`); Card is inside a real Card.
 
+## Label: restyled
+
+Restyled 2026-11-07: shadcn's Label and FieldLabel in each style, and its two examples (Demo, RTL).
+
+- **The `label` preset key**: `label` (Label: `text-sm font-medium leading-none` mostly; `text-xs` lyra, `text-xs/relaxed` mira, sera's uppercase — back to normal case beside a checkbox, radio or switch) and `field` (FieldLabel: the choice card's border, corners, padding, ring, checked tint). Before, our label had FieldLabel's classes only, and no text size of its own.
+- **One part**: the field look is added in a field (its context injected) or around one (a content query) — shadcn's Label and FieldLabel are two.
+- **Checked tint by `:checked`** (`has-checked:`, mapped from shadcn's `has-data-checked:`): our checkboxes and radios are native inputs.
+- **A field inside a label is not a group**: `role="group"` hid the card's texts from its control's name (axe's `label` rule; Chrome named it). `ScField` drops the role inside a label.
+- **ScLabelText** keeps its classes: they are shadcn's FieldTitle, for the Field restyle.
+
 ## Calendar: restyled
 
 Restyled 2026-11-06 (the parts stay): shadcn's Calendar (react-day-picker) in each style, and its examples.

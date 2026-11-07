@@ -1,9 +1,10 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScLabelText, ScSwitch, ScSwitchField } from '@semantic-components/ui';
 
+/** Text inside another label (a switch’s): scLabelText, a label’s look without a second label. */
 @Component({
   selector: 'app-label-text-label-demo',
-  imports: [ScSwitch, ScSwitchField, ScLabelText],
+  imports: [ScLabelText, ScSwitch, ScSwitchField],
   template: `
     <div class="space-y-4">
       <label scSwitchField>
@@ -20,6 +21,6 @@ import { ScLabelText, ScSwitch, ScSwitchField } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class LabelTextLabelDemo {
-  readonly airplaneMode = signal(false);
-  readonly wifi = signal(true);
+  protected readonly airplaneMode = signal(false);
+  protected readonly wifi = signal(true);
 }

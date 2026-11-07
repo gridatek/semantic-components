@@ -260,7 +260,7 @@ Errors are automatically read from the parent `ScField`'s `FormField` directive 
 
 ## Accessibility
 
-- Uses `role="group"` for field wrapper
+- Uses `role="group"` for field wrapper — not inside a label (a choice card), where the field is the label's control and its texts name it
 - Uses `role="alert"` for error messages
 - Supports proper label associations via `for` attribute
 - Disabled state uses `data-disabled` attribute

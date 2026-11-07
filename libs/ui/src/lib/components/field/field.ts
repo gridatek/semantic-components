@@ -87,9 +87,13 @@ export class ScField implements ScFieldContext {
   );
 
   protected readonly role = computed(() => {
-    // Only LABEL preserves native semantics, DIV gets role="group"
-    const tagName = this.elementRef.nativeElement.tagName;
-    return tagName === 'LABEL' ? null : 'group';
+    const element: HTMLElement = this.elementRef.nativeElement;
+    // A label keeps its own semantics. Inside a label (a choice card) it is
+    // the label's control and texts, not a group: a group would hide the
+    // texts from the control's name (axe's label rule).
+    if (element.tagName === 'LABEL' || element.parentElement?.closest('label'))
+      return null;
+    return 'group';
   });
 
   readonly invalid = computed(() => {

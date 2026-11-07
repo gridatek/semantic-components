@@ -1,63 +1,17 @@
 # Label
 
-A directive that styles and connects `<label>` elements to form controls, with automatic integration with the field context.
+A control's name, shown beside it — shadcn's Label (and FieldLabel) in the look of the app's preset (`label` key: shadcn's in each of the eight styles).
 
 ## Usage
 
 ```html
-<label scLabel for="email">Email</label> <input id="email" type="email" />
+<div scCheckboxField>
+  <input type="checkbox" scCheckbox />
+  <label scLabel>Accept terms and conditions</label>
+</div>
 ```
 
-## Components
-
-### ScLabel
-
-**Selector:** `label[scLabel]`
-
-A directive applied to native `<label>` elements.
-
-#### Inputs
-
-| Input   | Type     | Default | Description                                                               |
-| ------- | -------- | ------- | ------------------------------------------------------------------------- |
-| `for`   | `string` | `''`    | The `id` of the associated form control. Falls back to the field context. |
-| `class` | `string` | `''`    | Additional CSS classes merged with the default styles.                    |
-
-#### Data Attributes
-
-| Attribute   | Value     | Description                                                          |
-| ----------- | --------- | -------------------------------------------------------------------- |
-| `data-slot` | `"label"` | Used by parent components (field, checkbox-field) for CSS targeting. |
-
-### ScLabelText
-
-**Selector:** `[scLabelText]`
-
-A directive for label-like text that lives inside another `<label>` element, avoiding invalid nested `<label>` HTML. Commonly used with `ScSwitchField` or `ScCheckboxField`.
-
-#### Inputs
-
-| Input   | Type     | Default | Description                                            |
-| ------- | -------- | ------- | ------------------------------------------------------ |
-| `class` | `string` | `''`    | Additional CSS classes merged with the default styles. |
-
-#### Data Attributes
-
-| Attribute   | Value          | Description                                           |
-| ----------- | -------------- | ----------------------------------------------------- |
-| `data-slot` | `"label-text"` | Used by switch-field for CSS grid column positioning. |
-
-## Examples
-
-### Basic label
-
-```html
-<label scLabel for="name">Name</label> <input id="name" type="text" />
-```
-
-### With field context
-
-When used inside an `ScField`, the `for` attribute is automatically resolved from the field's `id`, so you don't need to set it explicitly.
+In a field it names the field's control by itself:
 
 ```html
 <div scField>
@@ -66,25 +20,34 @@ When used inside an `ScField`, the `for` attribute is automatically resolved fro
 </div>
 ```
 
-### With custom classes
+Around a field, it is a choice card — the whole card picks:
 
 ```html
-<label scLabel class="text-sm font-medium" for="username">Username</label>
-```
-
-### Inside a switch field
-
-Use `ScLabelText` instead of a nested `<label>` to avoid invalid HTML:
-
-```html
-<label scSwitchField>
-  <input type="checkbox" scSwitch />
-  <p scLabelText>Airplane Mode</p>
+<label scLabel>
+  <div scField orientation="horizontal">
+    <div scFieldBody>
+      <div scFieldTitle>Enable notifications</div>
+      <p scFieldDescription>You can enable or disable notifications at any time.</p>
+    </div>
+    <div scCheckboxField><input type="checkbox" scCheckbox /></div>
+  </div>
 </label>
 ```
 
-## Accessibility
+## Parts
 
-- The directive renders a native `<label>` element, ensuring built-in browser accessibility.
-- The `for` attribute is automatically set, either from the explicit input or from the parent field context, linking the label to its form control.
-- When the parent field is disabled (`data-disabled="true"`), the label's opacity is reduced to visually communicate the disabled state.
+| Part          | Selector         | What it does                                                                                                                                                                               |
+| ------------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `ScLabel`     | `label[scLabel]` | The preset's `label` look; in a field, or around one, its `field` look too (choice card: border, corners, padding, focus ring, tint when checked). `for`, `id`: from the field when in one |
+| `ScLabelText` | `[scLabelText]`  | A label's text inside another label (a switch's), so there is never a label in a label                                                                                                     |
+
+## Keyboard and screen readers
+
+- A real label: a press on it focuses or toggles its control. In a field it is linked by `for`; around a control, by wrapping it.
+- A field's group of controls (radios, checkboxes) is named by the label's id (`<field id>-label`), not by `for`.
+- A field inside a label (a choice card) is not a `group`: its texts name the control.
+
+## Not shadcn's
+
+- **One part for Label and FieldLabel**: the field look is added when the label is in a field or around one.
+- **Checked tint by `:checked`** (`has-checked:`): our checkboxes and radios are native inputs; shadcn's FieldLabel reads Base UI's `data-checked`.

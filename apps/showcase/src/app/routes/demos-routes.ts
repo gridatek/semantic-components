@@ -2874,17 +2874,10 @@ export const demosRoutes: Route[] = [
     path: 'demos/label',
     children: [
       {
-        path: 'basic-label-demo',
+        path: 'label-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/label/demos/basic-label-demo').then(
-            (m) => m.BasicLabelDemo,
-          ),
-      },
-      {
-        path: 'checkbox-label-demo',
-        loadComponent: () =>
-          import('../pages/docs/label/demos/checkbox-label-demo').then(
-            (m) => m.CheckboxLabelDemo,
+          import('../pages/docs/label/demos/label-usage-demo').then(
+            (m) => m.LabelUsageDemo,
           ),
       },
       {
@@ -2895,10 +2888,31 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
+        path: 'description-label-demo',
+        loadComponent: () =>
+          import('../pages/docs/label/demos/description-label-demo').then(
+            (m) => m.DescriptionLabelDemo,
+          ),
+      },
+      {
+        path: 'choice-card-label-demo',
+        loadComponent: () =>
+          import('../pages/docs/label/demos/choice-card-label-demo').then(
+            (m) => m.ChoiceCardLabelDemo,
+          ),
+      },
+      {
         path: 'label-text-label-demo',
         loadComponent: () =>
           import('../pages/docs/label/demos/label-text-label-demo').then(
             (m) => m.LabelTextLabelDemo,
+          ),
+      },
+      {
+        path: 'rtl-label-demo',
+        loadComponent: () =>
+          import('../pages/docs/label/demos/rtl-label-demo').then(
+            (m) => m.RtlLabelDemo,
           ),
       },
     ],

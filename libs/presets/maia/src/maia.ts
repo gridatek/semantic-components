@@ -27,6 +27,7 @@ import {
 } from './input-group';
 import { item } from './item';
 import { kbd } from './kbd';
+import { label } from './label';
 import { marker } from './marker';
 import { menu } from './menu';
 import { menubar } from './menubar';
@@ -77,6 +78,7 @@ export const maia: ScPreset = {
   inputGroupText,
   item,
   kbd,
+  label,
   menu,
   menubar,
   message,

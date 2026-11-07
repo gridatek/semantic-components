@@ -98,6 +98,7 @@ Do **not** "fix" these to match shadcn:
 - **Skeleton: still with reduced motion** — the part adds `motion-reduce:animate-none` to the preset's `skeleton` (shadcn's keeps pulsing).
 - **Resizable: the grip a part, the handle's orientation plain classes** — the `resizable` key holds the grip (`withHandle`'s div, `rounded-none` in lyra and sera); the handle's `aria-[orientation=…]:` classes are chosen in the part (they would outrank the consumer's), its hit area logical as shadcn's.
 - **Calendar: no caption dropdowns; our cells** — shadcn's `captionLayout="dropdown"` is not taken: the heading is a button that zooms out to months and years (the user: dropdowns are hard to use). The cells are our `td`s (one Tab stop, a grid), styled from the preset's `--cell-size` / `--cell-radius`; shadcn's react-day-picker `classNames` and `CalendarDayButton` aren't copied class for class.
+- **Label: one part for Label and FieldLabel; `has-checked:`** — the `label` key's `field` classes are added in or around a field; shadcn's `has-data-checked:` (Base UI's attribute) is `has-checked:` (our native inputs).
 - **Pagination: parts on buttons or your links** — the parts set no `href`: a link follows the one you give it.
 - **Decomposition** — shadcn ships one function per part in one file; we split into directives, one per file, so one shadcn part can map to several of ours.
 
