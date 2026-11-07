@@ -5077,31 +5077,17 @@ export const demosRoutes: Route[] = [
     path: 'demos/textarea',
     children: [
       {
-        path: 'basic-textarea-demo',
+        path: 'textarea-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/textarea/demos/basic-textarea-demo').then(
-            (m) => m.BasicTextareaDemo,
+          import('../pages/docs/textarea/demos/textarea-usage-demo').then(
+            (m) => m.TextareaUsageDemo,
           ),
       },
       {
-        path: 'label-textarea-demo',
+        path: 'field-textarea-demo',
         loadComponent: () =>
-          import('../pages/docs/textarea/demos/label-textarea-demo').then(
-            (m) => m.LabelTextareaDemo,
-          ),
-      },
-      {
-        path: 'helper-text-textarea-demo',
-        loadComponent: () =>
-          import('../pages/docs/textarea/demos/helper-text-textarea-demo').then(
-            (m) => m.HelperTextTextareaDemo,
-          ),
-      },
-      {
-        path: 'rows-textarea-demo',
-        loadComponent: () =>
-          import('../pages/docs/textarea/demos/rows-textarea-demo').then(
-            (m) => m.RowsTextareaDemo,
+          import('../pages/docs/textarea/demos/field-textarea-demo').then(
+            (m) => m.FieldTextareaDemo,
           ),
       },
       {
@@ -5112,10 +5098,24 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'maxlength-textarea-demo',
+        path: 'invalid-textarea-demo',
         loadComponent: () =>
-          import('../pages/docs/textarea/demos/maxlength-textarea-demo').then(
-            (m) => m.MaxlengthTextareaDemo,
+          import('../pages/docs/textarea/demos/invalid-textarea-demo').then(
+            (m) => m.InvalidTextareaDemo,
+          ),
+      },
+      {
+        path: 'button-textarea-demo',
+        loadComponent: () =>
+          import('../pages/docs/textarea/demos/button-textarea-demo').then(
+            (m) => m.ButtonTextareaDemo,
+          ),
+      },
+      {
+        path: 'rtl-textarea-demo',
+        loadComponent: () =>
+          import('../pages/docs/textarea/demos/rtl-textarea-demo').then(
+            (m) => m.RtlTextareaDemo,
           ),
       },
       {
@@ -5123,6 +5123,20 @@ export const demosRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/textarea/demos/form-textarea-demo').then(
             (m) => m.FormTextareaDemo,
+          ),
+      },
+      {
+        path: 'maxlength-textarea-demo',
+        loadComponent: () =>
+          import('../pages/docs/textarea/demos/maxlength-textarea-demo').then(
+            (m) => m.MaxlengthTextareaDemo,
+          ),
+      },
+      {
+        path: 'rows-textarea-demo',
+        loadComponent: () =>
+          import('../pages/docs/textarea/demos/rows-textarea-demo').then(
+            (m) => m.RowsTextareaDemo,
           ),
       },
     ],

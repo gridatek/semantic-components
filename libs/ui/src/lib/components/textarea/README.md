@@ -2,6 +2,8 @@
 
 A styled textarea directive that integrates with Angular Signal Forms and the `ScField` layout system.
 
+In the look of the app's preset (`textarea` key: shadcn's in each of the eight styles — sera's an underline). In an Input Group, the group's preset styles it.
+
 ## Usage
 
 ```html

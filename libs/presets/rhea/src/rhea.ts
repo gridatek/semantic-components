@@ -47,6 +47,7 @@ import { skeleton } from './skeleton';
 import { table } from './table';
 /** The rhea preset: `provideSemanticComponents({ preset: rhea })`. */
 import { tabs } from './tabs';
+import { textarea } from './textarea';
 import { tooltip } from './tooltip';
 import { trace } from './trace';
 
@@ -97,6 +98,7 @@ export const rhea: ScPreset = {
   skeleton,
   table,
   tabs,
+  textarea,
   tooltip,
   trace,
 };

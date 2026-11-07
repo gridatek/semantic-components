@@ -47,6 +47,7 @@ import { skeleton } from './skeleton';
 import { table } from './table';
 /** The luma preset: `provideSemanticComponents({ preset: luma })`. */
 import { tabs } from './tabs';
+import { textarea } from './textarea';
 import { tooltip } from './tooltip';
 import { trace } from './trace';
 
@@ -97,6 +98,7 @@ export const luma: ScPreset = {
   skeleton,
   table,
   tabs,
+  textarea,
   tooltip,
   trace,
 };

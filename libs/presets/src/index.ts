@@ -464,6 +464,8 @@ export interface ScPreset {
   skeleton: string;
   table: ScTableStyles;
   tabs: ScTabsStyles;
+  /** A multi-line text field. */
+  textarea: string;
   tooltip: ScTooltipStyles;
   trace: ScTraceStyles;
 }

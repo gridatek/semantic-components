@@ -531,6 +531,14 @@ An empty state (`div[scEmpty]`; restyled 2026-11-05): shadcn's Empty. A shadcn c
 - **The title on a heading** (`h2`–`h6`) as well as a `div`: shadcn's is a `div`; a heading can be found by heading.
 - **The examples**; links that look like buttons are `a[scLink]` (shadcn: `Button render={<a />}`); Card is inside a real Card.
 
+## Textarea: restyled
+
+Restyled 2026-11-07: shadcn's Textarea in each style, and its 6 examples.
+
+- **The `textarea` preset key**, a string as `input`: corners, padding, background, ring and text size per style (sera's an underline only).
+- **No Input Group classes in the part**: the group's preset already styles its textarea (`[&>textarea[data-slot=control]]`), as it does an input.
+- **shadcn's examples**: Demo (the Usage), Field, Disabled, Invalid (ours from Signal Forms, once touched — not a static `aria-invalid`), Button, RTL; ours kept: In a form, Max length, Rows.
+
 ## Field: restyled
 
 Restyled 2026-11-07: shadcn's Field parts in each style, and its 13 examples.

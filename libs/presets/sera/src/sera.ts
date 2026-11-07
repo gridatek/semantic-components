@@ -47,6 +47,7 @@ import { skeleton } from './skeleton';
 import { table } from './table';
 /** The sera preset: `provideSemanticComponents({ preset: sera })`. */
 import { tabs } from './tabs';
+import { textarea } from './textarea';
 import { tooltip } from './tooltip';
 import { trace } from './trace';
 
@@ -97,6 +98,7 @@ export const sera: ScPreset = {
   skeleton,
   table,
   tabs,
+  textarea,
   tooltip,
   trace,
 };

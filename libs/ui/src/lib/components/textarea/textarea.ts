@@ -6,6 +6,7 @@ import {
   inject,
   input,
 } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 import { SC_FIELD } from '../field';
 
@@ -21,6 +22,7 @@ import { SC_FIELD } from '../field';
   },
 })
 export class ScTextarea {
+  private readonly styles = injectPreset().textarea;
   protected readonly field = inject(SC_FIELD, { optional: true });
   private readonly fallbackId = inject(_IdGenerator).getId('sc-textarea-');
 
@@ -50,10 +52,5 @@ export class ScTextarea {
     () => (this.touched() && this.invalid()) || null,
   );
 
-  protected readonly class = computed(() =>
-    cn(
-      'border-input dark:bg-input/30 focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:aria-invalid:border-destructive/50 disabled:bg-input/50 dark:disabled:bg-input/80 rounded-lg border bg-transparent px-2.5 py-2 text-base transition-colors focus-visible:ring-3 aria-invalid:ring-3 md:text-sm placeholder:text-muted-foreground flex field-sizing-content min-h-16 w-full outline-none disabled:cursor-not-allowed disabled:opacity-50 in-data-[slot=input-group]:flex-1 in-data-[slot=input-group]:rounded-none in-data-[slot=input-group]:border-0 in-data-[slot=input-group]:shadow-none in-data-[slot=input-group]:ring-0 in-data-[slot=input-group]:h-full in-data-[slot=input-group]:focus-visible:ring-0 in-data-[slot=input-group]:focus-visible:border-transparent in-data-[slot=input-group]:aria-invalid:ring-0 in-data-[slot=input-group]:disabled:bg-transparent in-data-[slot=input-group]:dark:bg-transparent in-data-[slot=input-group]:dark:disabled:bg-transparent in-data-[slot=input-group]:resize-none in-data-[slot=input-group]:min-w-0',
-      this.classInput(),
-    ),
-  );
+  protected readonly class = computed(() => cn(this.styles, this.classInput()));
 }

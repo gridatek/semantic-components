@@ -2,7 +2,7 @@
 
 Every component brought to the same bar: shadcn's look, tested, mobile first, right to left, in light and dark, rendered on the server. One component at a time, in the order the user names, each through [component-rewrite-process.md](component-rewrite-process.md). Two lists: the components shadcn has (**List 1**: its look and parts are the reference), and the ones it doesn't (**List 2**: shadcn's tokens and patterns, our design). The order of each list is the user's work order: changed only by hand, in this document — `scripts/roadmap.mjs` keeps every row where it is, refreshes its columns, and adds a new component at the end of its list; **Built on** (the components it imports, and those it shapes inside it — the `data-slot` its styles, or its preset's, read: a button group shapes its buttons, input groups and selects) and **Parts** (the components, directives and services it declares) show where it sits. Each row ticked when it meets the definition of done.
 
-Inventory (150 components): 63 with a shadcn counterpart · 126 with e2e demo tests · 150 with a page axe test · 54 with an RTL demo.
+Inventory (150 components): 63 with a shadcn counterpart · 127 with e2e demo tests · 150 with a page axe test · 55 with an RTL demo.
 
 ## The two lists
 
@@ -111,7 +111,7 @@ The components shadcn has: its look (the generated reference app, nova) and its 
 |  53 | [Spinner](../apps/showcase/src/app/pages/docs/spinner)                   | ui      | —                                                          |     1 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] | waiting |
 |  54 | [Switch](../apps/showcase/src/app/pages/docs/switch)                     | ui      | field, label                                               |     3 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 |  55 | [Tabs](../apps/showcase/src/app/pages/docs/tabs)                         | ui      | —                                                          |     5 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] | waiting |
-|  56 | [Textarea](../apps/showcase/src/app/pages/docs/textarea)                 | ui      | field                                                      |     1 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
+|  56 | [Textarea](../apps/showcase/src/app/pages/docs/textarea)                 | ui      | field                                                      |     1 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] | waiting |
 |  57 | [Toast](../apps/showcase/src/app/pages/docs/toast)                       | ui      | button                                                     |     9 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] | waiting |
 |  58 | [Toggle](../apps/showcase/src/app/pages/docs/toggle)                     | ui      | —                                                          |     1 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 |  59 | [Toggle Group](../apps/showcase/src/app/pages/docs/toggle-group)         | ui      | toggle                                                     |     2 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
