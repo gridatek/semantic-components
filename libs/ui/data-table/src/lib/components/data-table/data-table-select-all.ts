@@ -9,9 +9,7 @@ import type { ScDataTableSelectAllTable } from './data-table-types';
  * every row. Works alone or with `scCheckbox`.
  *
  * ```html
- * <div scCheckboxField>
- *   <input type="checkbox" scCheckbox scDataTableSelectAll aria-label="Select all rows" [table]="table" />
- * </div>
+ * <input type="checkbox" scCheckbox scDataTableSelectAll aria-label="Select all rows" [table]="table" />
  * ```
  */
 @Directive({

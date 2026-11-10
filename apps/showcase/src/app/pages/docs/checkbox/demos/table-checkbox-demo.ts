@@ -1,7 +1,6 @@
 import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import {
   ScCheckbox,
-  ScCheckboxField,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -16,7 +15,6 @@ import {
   selector: 'app-table-checkbox-demo',
   imports: [
     ScCheckbox,
-    ScCheckboxField,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -31,16 +29,14 @@ import {
         <thead scTableHeader>
           <tr scTableRow>
             <th scTableHeaderCell class="w-8">
-              <div scCheckboxField>
-                <input
-                  type="checkbox"
-                  scCheckbox
-                  aria-label="Select all"
-                  [checked]="allSelected()"
-                  [indeterminate]="someSelected()"
-                  (checkedChange)="selectAll($event)"
-                />
-              </div>
+              <input
+                type="checkbox"
+                scCheckbox
+                aria-label="Select all"
+                [checked]="allSelected()"
+                [indeterminate]="someSelected()"
+                (checkedChange)="selectAll($event)"
+              />
             </th>
             <th scTableHeaderCell>Name</th>
             <th scTableHeaderCell>Email</th>
@@ -54,15 +50,13 @@ import {
               [attr.data-state]="selected().has(row.id) ? 'selected' : null"
             >
               <td scTableCell>
-                <div scCheckboxField>
-                  <input
-                    type="checkbox"
-                    scCheckbox
-                    [attr.aria-label]="'Select ' + row.name"
-                    [checked]="selected().has(row.id)"
-                    (checkedChange)="select(row.id, $event)"
-                  />
-                </div>
+                <input
+                  type="checkbox"
+                  scCheckbox
+                  [attr.aria-label]="'Select ' + row.name"
+                  [checked]="selected().has(row.id)"
+                  (checkedChange)="select(row.id, $event)"
+                />
               </td>
               <td scTableCell class="font-medium">{{ row.name }}</td>
               <td scTableCell>{{ row.email }}</td>

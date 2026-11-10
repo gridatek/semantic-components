@@ -28,7 +28,7 @@ test.describe('Checkbox in every preset', () => {
   test.slow();
 
   for (const [preset, styles] of Object.entries(PRESETS))
-    test(`${preset}: a checkbox's box has its preset's classes; no axe violation, light and dark`, async ({
+    test(`${preset}: a checkbox has its preset's classes; no axe violation, light and dark`, async ({
       page,
       context,
       baseURL,
@@ -40,9 +40,9 @@ test.describe('Checkbox in every preset', () => {
       await page.goto('/demos/checkbox/group-checkbox-demo');
       for (const [target, wanted, what] of [
         [
-          page.locator('[scCheckboxVisual]').first(),
-          styles.checkbox.visual,
-          'box',
+          page.locator('input[scCheckbox]').first(),
+          `${styles.checkbox.item} ${styles.checkbox.mark}`,
+          'checkbox',
         ],
       ] as const) {
         const classes = twMerge(wanted).split(/\s+/).filter(Boolean);

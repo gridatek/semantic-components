@@ -5,13 +5,9 @@ import { expect, test } from '../../test';
 
 const demo = (name: string) => `/demos/checkbox/${name}-checkbox-demo`;
 
-/** Its mark: the SVG in the box the field draws beside it. */
+/** Its mark: the ::before's mask, an image when checked or indeterminate. */
 const mark = (checkbox: Locator) =>
-  checkbox.evaluate((el) =>
-    el.parentElement?.querySelector('[data-slot=checkbox-visual] svg')
-      ? 'url(svg)'
-      : 'none',
-  );
+  checkbox.evaluate((el) => getComputedStyle(el, '::before').maskImage);
 
 let errors: string[];
 
@@ -150,4 +146,14 @@ test('RTL: the checkbox at the right of its text', async ({ page }) => {
     await box(page.getByText(name).first()),
   ];
   expect(checkbox.x).toBeGreaterThan(label.x);
+});
+
+test('Custom mark: the image from --sc-checkbox-check', async ({ page }) => {
+  await page.goto(demo('custom-mark'));
+  expect(await mark(page.getByRole('checkbox', { name: 'Red' }))).toContain(
+    'checkbox-heart.svg',
+  );
+  expect(await mark(page.getByRole('checkbox', { name: 'Green' }))).toBe(
+    'none',
+  );
 });

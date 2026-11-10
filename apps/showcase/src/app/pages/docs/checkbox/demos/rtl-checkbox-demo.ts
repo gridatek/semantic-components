@@ -42,13 +42,11 @@ import {
       </div>
       <label scLabel>
         <div scField orientation="horizontal">
-          <div scCheckboxField>
-            <input
-              type="checkbox"
-              scCheckbox
-              [formField]="termsForm.notifications"
-            />
-          </div>
+          <input
+            type="checkbox"
+            scCheckbox
+            [formField]="termsForm.notifications"
+          />
           <div scFieldBody>
             <div scFieldTitle>تفعيل الإشعارات</div>
             <p scFieldDescription>

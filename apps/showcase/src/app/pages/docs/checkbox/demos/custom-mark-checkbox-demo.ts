@@ -1,8 +1,8 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
-  ScCheckboxNext,
-  ScCheckboxNextField,
+  ScCheckbox,
+  ScCheckboxField,
   ScFieldGroup,
   ScFieldset,
   ScLegend,
@@ -14,11 +14,11 @@ import {
  * mask: the image's outline only, in the preset's colour.
  */
 @Component({
-  selector: 'app-custom-mark-checkbox-next-demo',
+  selector: 'app-custom-mark-checkbox-demo',
   imports: [
     FormField,
-    ScCheckboxNext,
-    ScCheckboxNextField,
+    ScCheckbox,
+    ScCheckboxField,
     ScFieldGroup,
     ScFieldset,
     ScLegend,
@@ -31,20 +31,16 @@ import {
     >
       <legend scLegend variant="label">Favorite colors</legend>
       <div scFieldGroup class="gap-3">
-        <label scCheckboxNextField>
-          <input type="checkbox" scCheckboxNext [formField]="colorsForm.red" />
+        <label scCheckboxField>
+          <input type="checkbox" scCheckbox [formField]="colorsForm.red" />
           Red
         </label>
-        <label scCheckboxNextField>
-          <input
-            type="checkbox"
-            scCheckboxNext
-            [formField]="colorsForm.green"
-          />
+        <label scCheckboxField>
+          <input type="checkbox" scCheckbox [formField]="colorsForm.green" />
           Green
         </label>
-        <label scCheckboxNextField>
-          <input type="checkbox" scCheckboxNext [formField]="colorsForm.blue" />
+        <label scCheckboxField>
+          <input type="checkbox" scCheckbox [formField]="colorsForm.blue" />
           Blue
         </label>
       </div>
@@ -53,7 +49,7 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class CustomMarkCheckboxNextDemo {
+export class CustomMarkCheckboxDemo {
   protected readonly colorsForm = form(
     signal({ red: true, green: false, blue: true }),
   );

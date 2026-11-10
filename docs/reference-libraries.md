@@ -539,15 +539,15 @@ Restyled 2026-11-10: shadcn's Radio Group in each style, and its examples.
 - **A radio field's text** takes the `label` preset at normal weight and case — shadcn's `FieldLabel className="font-normal"` beside a radio (sera's uppercase drops there); medium with a description. Its radio column is `auto` (sera's radio is `size-4.5`).
 - **shadcn's examples**: Demo (the Usage), Description, Choice card, Fieldset, Disabled (one option: a plain disabled radio — Signal Forms owns a bound field's `disabled`), Invalid (required, touched), RTL; ours kept: Horizontal, In a form, Custom theme.
 
-## Checkbox: restyled, and Checkbox Next
+## Checkbox: rewritten
 
-Restyled 2026-11-10: shadcn's Checkbox in each style, and its examples. Checkbox Next built beside it (the user): the same look, the input drawing itself.
+Rewritten 2026-11-10: shadcn's Checkbox in each style, and its examples. Restyled first (a box drawn by the field beside a transparent input, the field required), then rebuilt beside it as Checkbox Next — the input drawing itself — and switched in (the user: one element, works alone, nothing hidden).
 
-- **The `checkbox` preset key**: shadcn's root class, three ways. `visual` for Checkbox's box (`ScCheckboxVisual`, beside the transparent input): the input's `focus-visible:` / `disabled:` / `aria-invalid:` as `peer-…`, Base UI's `aria-checked:` as `data-checked:` — the box has `data-checked` when checked or indeterminate. `item` for Checkbox Next's native input: `data-checked:` as `:checked` and again as `:indeterminate`. `mark`: its `::before`, the style's icon as a mask (lucide in nova, vega, luma, sera, rhea; hugeicons' Tick02 in maia, mira; phosphor in lyra — `strokeWidth 2` as shadcn's), `size-3.5` (shadcn's indicator). The mask reads `--sc-checkbox-check` / `--sc-checkbox-indeterminate` first (the user): a consumer's own shape (Checkbox Next's Custom mark example).
-- **Indeterminate filled** like checked, with a minus: Base UI's root has no `data-checked` when indeterminate (shadcn draws only a check); Radix's shadcn fills it. A minus from the same icon set.
-- **Checkbox needs its field**, an error in dev mode without one (the user): its box is drawn by the field. The blocks app's checkboxes (gallery, login, signup) and the PDF viewer's page select had none — invisible; now in fields.
-- **A checkbox field's text**: the `label` preset at normal weight and case, as the radio field's; its box column `auto` (sera's box is `size-4.5`).
-- **shadcn's examples**: Demo (the Usage), Description, Group (a fieldset), Disabled, Invalid (required, touched), Table, RTL; ours kept: Indeterminate, Signal Forms, Form (two-way, no form), Custom theme; Checkbox Next adds Custom mark. Basic, Label and With description dropped (shadcn's cover them).
+- **The `checkbox` preset key**: `item`, shadcn's root class on the native input (`appearance-none`): `data-checked:` as `:checked` and again as `:indeterminate`. `mark`: its `::before`, the style's icon as a mask (lucide in nova, vega, luma, sera, rhea; hugeicons' Tick02 in maia, mira; phosphor in lyra — `strokeWidth 2` as shadcn's), `size-3.5` (shadcn's indicator). The mask reads `--sc-checkbox-check` / `--sc-checkbox-indeterminate` first (the user): a consumer's own shape (the Custom mark example).
+- **Indeterminate filled** like checked, with a minus: Base UI's root has no `data-checked` when indeterminate (shadcn draws only a check); Radix's shadcn fills it. A minus from the same icon set. A click clears the native `indeterminate`; the input sets it back to its own.
+- **The field is optional**: a checkbox alone (a table row) draws itself; `scCheckboxField` only lays out the checkbox and its text — the `label` preset at normal weight and case, as the radio field's; its box column `auto` (sera's box is `size-4.5`). In a `scField` (a card label) its description is read with it.
+- **shadcn's examples**: Demo (the Usage), Description, Group (a fieldset), Disabled, Invalid (required, touched), Table, RTL; ours kept: Indeterminate, Signal Forms, Form (two-way, no form, in a Card), Custom theme; new: Custom mark. Basic, Label and With description dropped (shadcn's cover them).
+- **Gone**: `ScCheckboxVisual`, `SC_CHECKBOX_FIELD` / `ScCheckboxContext`, the field's `data-state` / `data-disabled` (style by `has-checked:`, `has-disabled:`).
 
 ## Input Button: restyled
 

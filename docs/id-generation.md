@@ -60,13 +60,13 @@ The control (e.g. `ScCheckbox`) injects the field context optionally and uses th
 ```typescript
 // checkbox.ts
 export class ScCheckbox {
-  private readonly checkboxField = inject(SC_CHECKBOX_FIELD, { optional: true });
+  protected readonly field = inject(SC_FIELD, { optional: true });
   private readonly fallbackId = inject(_IdGenerator).getId('sc-checkbox-');
 
   readonly idInput = input('', { alias: 'id' });
 
   // Priority: explicit id > field's id > own fallback id
-  readonly id = computed(() => this.idInput() || this.checkboxField?.id() || this.fallbackId);
+  readonly id = computed(() => this.idInput() || this.field?.id() || this.fallbackId);
 }
 ```
 
@@ -94,10 +94,10 @@ export class ScLabel {
 ScCheckboxField
   │
   ├─ generates id: "sc-checkbox-field-0"
-  ├─ provides SC_FIELD  ──────────────────────► ScLabel reads SC_FIELD
-  │                                                  └─ sets for="sc-checkbox-field-0"
-  └─ provides SC_CHECKBOX_FIELD ─► ScCheckbox reads id
-                                     └─ sets id="sc-checkbox-field-0"
+  └─ provides SC_FIELD ─┬─► ScLabel reads SC_FIELD
+                        │     └─ sets for="sc-checkbox-field-0"
+                        └─► ScCheckbox reads SC_FIELD
+                              └─ sets id="sc-checkbox-field-0"
 ```
 
 Both the `<input>` and the `<label>` point to the same ID without any manual wiring.
@@ -154,7 +154,7 @@ export const SC_FIELD = new InjectionToken<ScFieldContext>('SC_FIELD');
 
 A minimal interface with a single `id` method. Any field component that provides `SC_FIELD` automatically connects to `ScLabel`.
 
-Each field also provides its own specific token (e.g. `SC_CHECKBOX_FIELD`, `SC_PASSWORD`, `SC_NUMBER_FIELD`) for domain-specific children that need more than just `id`.
+Each field also provides its own specific token (e.g. `SC_PASSWORD`, `SC_NUMBER_FIELD`) for domain-specific children that need more than just `id`.
 
 ## Implementing for New Field Components
 

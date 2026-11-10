@@ -1,6 +1,6 @@
 # Checkbox
 
-A native checkbox in a checkbox field: the field draws the box (`ScCheckboxVisual`) beside it, in the look of the app's preset (the `checkbox` key's `visual`). A checkbox without its field is an error in dev mode — nothing would draw its box. Being rewritten as [Checkbox Next](../checkbox-next/README.md), which draws itself.
+A native checkbox that draws itself (`appearance-none`): its box, and its check or minus as its `::before` — the style's icon (lucide, hugeicons or phosphor) as a CSS mask. In the look of the app's preset: the `checkbox` key's `item` and `mark`. Alone (a table row), in a checkbox field beside its text, or in any field.
 
 ## Usage
 
@@ -10,33 +10,28 @@ A native checkbox in a checkbox field: the field draws the box (`ScCheckboxVisua
   Accept terms and conditions
 </label>
 
-<div scCheckboxField>
-  <input type="checkbox" scCheckbox [(checked)]="marketing" />
-  <label scLabel>Marketing emails</label>
-  <p scFieldDescription>Receive emails about new products.</p>
-</div>
-```
-
-A checkbox with no text (a table row) is still in a field, named by `aria-label`:
-
-```html
-<div scCheckboxField>
-  <input type="checkbox" scCheckbox aria-label="Select all" [checked]="all()" [indeterminate]="some()" (checkedChange)="selectAll($event)" />
-</div>
+<input type="checkbox" scCheckbox aria-label="Select all" [checked]="all()" [indeterminate]="some()" (checkedChange)="selectAll($event)" />
 ```
 
 ## Parts
 
-| Part               | Selector                                       | What it does                                                                                                    |
-| ------------------ | ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| `ScCheckboxField`  | `label[scCheckboxField], div[scCheckboxField]` | Draws the box; lays out the checkbox and its text (the `label` preset, normal weight), or label and description |
-| `ScCheckbox`       | `input[type="checkbox"][scCheckbox]`           | The native input, transparent over the box: `checked` (model, or `[formField]`), `indeterminate`, `disabled`    |
-| `ScCheckboxVisual` | `span[scCheckboxVisual]`                       | The box and its check or minus (`data-checked`, `data-indeterminate`, `data-state`); placed by the field        |
+| Part              | Selector                                       | What it does                                                                                                |
+| ----------------- | ---------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `ScCheckboxField` | `label[scCheckboxField], div[scCheckboxField]` | A checkbox beside its text (the `label` preset, normal weight), or its label and description; optional      |
+| `ScCheckbox`      | `input[type="checkbox"][scCheckbox]`           | The native input, drawn: `checked` (model, or `[formField]`), `indeterminate` (a property only), `disabled` |
 
-Invalid once touched (`aria-invalid`, from Signal Forms). The field sets `data-state` (`checked`, `unchecked`, `indeterminate`) and `data-disabled`.
+## Custom mark
+
+The mark is a mask: set `--sc-checkbox-check` (and `--sc-checkbox-indeterminate`) to your image, on the checkbox or any element round it. Its outline only, in the preset's colour; the style's icon when unset.
+
+```html
+<fieldset scFieldset style="--sc-checkbox-check: url(/images/checkbox-heart.svg)">…</fieldset>
+```
+
+Base UI's `data-checked` is `:checked` here, and `:indeterminate` is filled too. A click clears the native `indeterminate`; the input sets it back to its own.
 
 ## Accessibility
 
-- A native checkbox: Tab, Space; indeterminate is announced as mixed. The drawn box is `aria-hidden`.
-- Named by its label (a label field, or `scLabel` in a div field — `for` is set), or `aria-label`.
-- A description in the field is read with the checkbox (`aria-describedby`).
+- A native checkbox: Tab, Space; indeterminate is announced as mixed. Nothing drawn beside it: no hidden element.
+- Named by its label (a label field, or `scLabel` in a div field or `scField` — `for` is set), or `aria-label`.
+- A description in its field is read with it (`aria-describedby`); invalid once touched (`aria-invalid`).

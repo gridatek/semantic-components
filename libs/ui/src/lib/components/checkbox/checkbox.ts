@@ -7,16 +7,18 @@ import {
   effect,
   inject,
   input,
-  isDevMode,
   model,
 } from '@angular/core';
 import type { FormCheckboxControl } from '@angular/forms/signals';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 import { SC_FIELD } from '../field';
-import { SC_CHECKBOX_FIELD } from './checkbox-types';
 
-export const SC_CHECKBOX = 'SC_CHECKBOX';
-
+/**
+ * A native checkbox in the preset's look, drawn by itself: its box, and its
+ * check or minus (its ::before). Alone (a table's row), in a checkbox field
+ * beside its text, or in any field.
+ */
 @Directive({
   selector: 'input[type="checkbox"][scCheckbox]',
   host: {
@@ -24,82 +26,68 @@ export const SC_CHECKBOX = 'SC_CHECKBOX';
     '[id]': 'id()',
     '[attr.aria-describedby]': 'ariaDescribedBy()',
     '[attr.aria-invalid]': 'ariaInvalid()',
-    '[attr.disabled]': 'disabled() || null',
-    '[class]': 'class()',
+    '[disabled]': 'disabled()',
     '[checked]': 'checked()',
-    '(change)': 'onInputChange($event)',
+    '[class]': 'class()',
+    '(change)': 'onChange()',
   },
-  exportAs: SC_CHECKBOX,
+  exportAs: 'scCheckbox',
 })
 export class ScCheckbox implements FormCheckboxControl {
-  private readonly elementRef = inject(ElementRef<HTMLInputElement>);
-  private readonly checkboxField = inject(SC_CHECKBOX_FIELD, {
-    optional: true,
-  });
+  private readonly styles = injectPreset().checkbox;
+  private readonly element =
+    inject<ElementRef<HTMLInputElement>>(ElementRef).nativeElement;
   protected readonly field = inject(SC_FIELD, { optional: true });
   private readonly fallbackId = inject(_IdGenerator).getId('sc-checkbox-');
 
   readonly idInput = input('', { alias: 'id' });
   readonly classInput = input<string>('', { alias: 'class' });
   readonly ariaDescribedByInput = input('', { alias: 'aria-describedby' });
-  readonly indeterminate = input<boolean>(false);
-  readonly checked = model<boolean>(false);
+  /** Checked: two-way, or a [formField]. */
+  readonly checked = model(false);
+  /** Neither checked nor not (a "select all" over some): shows a minus. */
+  readonly indeterminate = input(false, { transform: booleanAttribute });
 
-  // Priority: explicit id > field's generated id > own fallback id
+  // Bound by the Field directive (FormCheckboxControl).
+  readonly disabled = input(false, { transform: booleanAttribute });
+  readonly invalid = input(false);
+  readonly touched = input(false);
+
   readonly id = computed(
-    () => this.idInput() || this.checkboxField?.id() || this.fallbackId,
+    () => this.idInput() || this.field?.id() || this.fallbackId,
   );
 
-  readonly ariaDescribedBy = computed(
+  protected readonly ariaDescribedBy = computed(
     () =>
       this.ariaDescribedByInput() ||
       this.field?.descriptionIds().join(' ') ||
       null,
   );
 
-  // Bound automatically by the Field directive (FormUiControl contract).
-  readonly invalid = input<boolean>(false);
-  readonly touched = input<boolean>(false);
-
-  // Matches ScInput: do not surface invalid until the control is touched.
+  // Invalid once touched, as the other controls.
   protected readonly ariaInvalid = computed(
     () => (this.touched() && this.invalid()) || null,
   );
 
-  // Part of the FormUiControl contract, so the Field directive binds a
-  // disabled field straight to it.
-  readonly disabled = input<boolean, unknown>(false, {
-    transform: booleanAttribute,
-  });
-
-  // Kept for ScCheckboxField, which derives its data-disabled from this.
-  readonly disabledSignal = computed(() => this.disabled());
-
-  constructor() {
-    // The field draws the box: without one, the input (transparent) shows nothing.
-    if (isDevMode() && !this.checkboxField) {
-      throw new Error(
-        'scCheckbox: put it inside a scCheckboxField (<label scCheckboxField> or <div scCheckboxField>) — the field draws the box.',
-      );
-    }
-    // Sync indeterminate input to native property
-    effect(() => {
-      this.elementRef.nativeElement.indeterminate = this.indeterminate();
-    });
-  }
-
-  protected onInputChange(event: Event): void {
-    this.checked.set((event.target as HTMLInputElement).checked);
-    // A click clears the native indeterminate; it stays the input's.
-    this.elementRef.nativeElement.indeterminate = this.indeterminate();
-  }
-
   protected readonly class = computed(() =>
     cn(
-      // Transparent, over the box the field draws: the box's size, the click target.
-      'peer m-0 size-full opacity-0',
-      'disabled:cursor-not-allowed',
+      "appearance-none before:content-['']",
+      this.styles.item,
+      this.styles.mark,
       this.classInput(),
     ),
   );
+
+  constructor() {
+    // A property only, no attribute.
+    effect(() => {
+      this.element.indeterminate = this.indeterminate();
+    });
+  }
+
+  protected onChange(): void {
+    this.checked.set(this.element.checked);
+    // A click clears the native indeterminate; it stays the input's.
+    this.element.indeterminate = this.indeterminate();
+  }
 }

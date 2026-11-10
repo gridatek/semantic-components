@@ -1,28 +1,28 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { CustomMarkCheckboxNextDemo } from './custom-mark-checkbox-next-demo';
+import { CustomMarkCheckboxDemo } from './custom-mark-checkbox-demo';
 
 @Component({
-  selector: 'app-custom-mark-checkbox-next-demo-container',
-  imports: [DemoContainer, CustomMarkCheckboxNextDemo],
+  selector: 'app-custom-mark-checkbox-demo-container',
+  imports: [DemoContainer, CustomMarkCheckboxDemo],
   template: `
     <app-demo-container
       title="Custom mark"
-      demoUrl="/demos/checkbox-next/custom-mark-checkbox-next-demo"
+      demoUrl="/demos/checkbox/custom-mark-checkbox-demo"
       [code]="code"
     >
-      <app-custom-mark-checkbox-next-demo />
+      <app-custom-mark-checkbox-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class CustomMarkCheckboxNextDemoContainer {
+export class CustomMarkCheckboxDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
-  ScCheckboxNext,
-  ScCheckboxNextField,
+  ScCheckbox,
+  ScCheckboxField,
   ScFieldGroup,
   ScFieldset,
   ScLegend,
@@ -34,11 +34,11 @@ import {
  * mask: the image's outline only, in the preset's colour.
  */
 @Component({
-  selector: 'app-custom-mark-checkbox-next-demo',
+  selector: 'app-custom-mark-checkbox-demo',
   imports: [
     FormField,
-    ScCheckboxNext,
-    ScCheckboxNextField,
+    ScCheckbox,
+    ScCheckboxField,
     ScFieldGroup,
     ScFieldset,
     ScLegend,
@@ -51,20 +51,20 @@ import {
     >
       <legend scLegend variant="label">Favorite colors</legend>
       <div scFieldGroup class="gap-3">
-        <label scCheckboxNextField>
-          <input type="checkbox" scCheckboxNext [formField]="colorsForm.red" />
+        <label scCheckboxField>
+          <input type="checkbox" scCheckbox [formField]="colorsForm.red" />
           Red
         </label>
-        <label scCheckboxNextField>
+        <label scCheckboxField>
           <input
             type="checkbox"
-            scCheckboxNext
+            scCheckbox
             [formField]="colorsForm.green"
           />
           Green
         </label>
-        <label scCheckboxNextField>
-          <input type="checkbox" scCheckboxNext [formField]="colorsForm.blue" />
+        <label scCheckboxField>
+          <input type="checkbox" scCheckbox [formField]="colorsForm.blue" />
           Blue
         </label>
       </div>
@@ -73,7 +73,7 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class CustomMarkCheckboxNextDemo {
+export class CustomMarkCheckboxDemo {
   protected readonly colorsForm = form(
     signal({ red: true, green: false, blue: true }),
   );

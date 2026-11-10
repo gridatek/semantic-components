@@ -4,7 +4,7 @@ import { SC_PDF_VIEWER } from './pdf-viewer';
 
 /**
  * Selects a page for page organisation (`viewer.pageSelection()`). Use on a
- * `scCheckbox` (in its `scCheckboxField`) and name it (e.g. "Select page 3").
+ * `scCheckbox` and name it (e.g. "Select page 3").
  */
 @Directive({
   selector: 'input[scCheckbox][scPdfViewerPageSelect]',

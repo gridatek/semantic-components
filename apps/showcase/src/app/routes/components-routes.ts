@@ -210,12 +210,6 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/checkbox/checkbox-page'),
       },
       {
-        path: 'checkbox-next',
-        title: 'Checkbox Next - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/checkbox-next/checkbox-next-page'),
-      },
-      {
         path: 'code-editor',
         title: 'Code Editor - Semantic Components',
         loadComponent: () =>

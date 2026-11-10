@@ -1,8 +1,7 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
 import {
-  Component,
+  Directive,
   ElementRef,
-  ViewEncapsulation,
   computed,
   contentChild,
   inject,
@@ -12,70 +11,42 @@ import {
 import { FormField } from '@angular/forms/signals';
 import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
-import { SC_FIELD, type ScFieldContext } from '../field';
-import { ScCheckbox } from './checkbox';
-import { SC_CHECKBOX_FIELD, type ScCheckboxContext } from './checkbox-types';
-import { ScCheckboxVisual } from './checkbox-visual';
+import { SC_FIELD, type ScFieldContext } from '../field/field';
 
-@Component({
+/**
+ * A checkbox beside its text: a label round both, or a div with a label and a
+ * description. The checkbox draws itself: the field only lays them out.
+ */
+@Directive({
   selector: 'div[scCheckboxField], label[scCheckboxField]',
-  imports: [ScCheckboxVisual],
-  providers: [
-    { provide: SC_CHECKBOX_FIELD, useExisting: ScCheckboxField },
-    { provide: SC_FIELD, useExisting: ScCheckboxField },
-  ],
+  providers: [{ provide: SC_FIELD, useExisting: ScCheckboxField }],
   host: {
     '[attr.role]': 'role()',
     '[class]': 'class()',
-    '[attr.data-state]': 'dataState()',
-    '[attr.data-disabled]': 'disabled() || null',
   },
-  template: `
-    <ng-content select="[scCheckbox]" />
-    <span scCheckboxVisual></span>
-    <ng-content />
-  `,
-  encapsulation: ViewEncapsulation.None,
 })
-export class ScCheckboxField implements ScCheckboxContext, ScFieldContext {
+export class ScCheckboxField implements ScFieldContext {
   private readonly labelStyles = injectPreset().label;
-  private readonly elementRef = inject(ElementRef<HTMLElement>);
-  private readonly checkbox = contentChild(ScCheckbox);
-
-  readonly classInput = input<string>('', { alias: 'class' });
+  private readonly element =
+    inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
   readonly id = input(inject(_IdGenerator).getId('sc-checkbox-field-'));
   readonly descriptionIds = signal<string[]>([]);
   /** The `[formField]` inside, for `scFieldErrors`. */
   readonly formField = contentChild(FormField);
+  readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly role = computed(() => {
-    const tagName = this.elementRef.nativeElement.tagName;
-    return tagName === 'LABEL' ? null : 'group';
-  });
-
-  // Computed state from input (implements ScCheckboxContext)
-  // These read directly from the ScCheckbox's signals
-  readonly checked = computed(() => this.checkbox()?.checked() ?? false);
-  readonly disabled = computed(
-    () => this.checkbox()?.disabledSignal() ?? false,
+  // A div groups its label and description; a label is one already.
+  protected readonly role = computed(() =>
+    this.element.tagName === 'LABEL' ? null : 'group',
   );
-  readonly indeterminate = computed(
-    () => this.checkbox()?.indeterminate() ?? false,
-  );
-  readonly dataState = computed(() => {
-    if (this.indeterminate()) return 'indeterminate';
-    return this.checked() ? 'checked' : 'unchecked';
-  });
 
   protected readonly class = computed(() =>
     cn(
       this.labelStyles.label,
       'font-normal tracking-normal normal-case',
       'grid grid-cols-[auto_1fr] items-center gap-x-2 gap-y-1',
-      // The input over the box, in the first column.
       '*:data-[slot=checkbox]:col-start-1 *:data-[slot=checkbox]:row-start-1',
-      '*:data-[slot=checkbox-visual]:col-start-1 *:data-[slot=checkbox-visual]:row-start-1',
       '*:data-[slot=label]:col-start-2 *:data-[slot=label]:row-start-1',
       '*:data-[slot=field-description]:col-start-2 *:data-[slot=field-description]:row-start-2',
       'has-[>[data-slot=field-description]]:*:data-[slot=label]:font-medium',

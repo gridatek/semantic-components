@@ -5,8 +5,7 @@ import type { ScPdfLayer } from './pdf-viewer-types';
 
 /**
  * Shows or hides a layer of `viewer.layers()` (optional content); the pages
- * redraw. Use on a `scCheckbox` (in its `scCheckboxField`), labelled with the
- * layer's name.
+ * redraw. Use on a `scCheckbox`, labelled with the layer's name.
  */
 @Directive({
   selector: 'input[scCheckbox][scPdfViewerLayer]',

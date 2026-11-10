@@ -13,16 +13,14 @@ interface InvalidHost {
 }
 
 @Component({
-  imports: [ScCheckbox, ScCheckboxField],
+  imports: [ScCheckbox],
   template: `
-    <div scCheckboxField>
-      <input
-        type="checkbox"
-        scCheckbox
-        [invalid]="invalid()"
-        [touched]="touched()"
-      />
-    </div>
+    <input
+      type="checkbox"
+      scCheckbox
+      [invalid]="invalid()"
+      [touched]="touched()"
+    />
   `,
 })
 class CheckboxHost implements InvalidHost {

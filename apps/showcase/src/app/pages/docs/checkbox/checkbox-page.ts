@@ -13,6 +13,7 @@ import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { CheckboxUsageDemoContainer } from './demos/checkbox-usage-demo-container';
+import { CustomMarkCheckboxDemoContainer } from './demos/custom-mark-checkbox-demo-container';
 import { CustomThemeCheckboxDemoContainer } from './demos/custom-theme-checkbox-demo-container';
 import { DescriptionCheckboxDemoContainer } from './demos/description-checkbox-demo-container';
 import { DisabledCheckboxDemoContainer } from './demos/disabled-checkbox-demo-container';
@@ -38,6 +39,7 @@ import { TableCheckboxDemoContainer } from './demos/table-checkbox-demo-containe
     SignalFormsCheckboxDemoContainer,
     FormCheckboxDemoContainer,
     CustomThemeCheckboxDemoContainer,
+    CustomMarkCheckboxDemoContainer,
     RtlCheckboxDemoContainer,
     TocHeading,
     ComponentBadges,
@@ -55,8 +57,8 @@ import { TableCheckboxDemoContainer } from './demos/table-checkbox-demo-containe
       <div class="space-y-2">
         <h1 scHeading>Checkbox</h1>
         <p class="text-muted-foreground">
-          A native checkbox in a field that draws its box, in the look of the
-          app&apos;s preset.
+          A native checkbox that draws itself, in the look of the app&apos;s
+          preset.
         </p>
         <app-component-badges path="checkbox" />
       </div>
@@ -69,9 +71,9 @@ import { TableCheckboxDemoContainer } from './demos/table-checkbox-demo-containe
       <section class="space-y-4">
         <h2 scHeading appToc>Anatomy</h2>
         <p class="text-muted-foreground">
-          A native checkbox input, in a checkbox field: the field draws the box
-          beside it (in dev mode, a checkbox without one is an error). A
-          [formField] or [(checked)] binds it.
+          A native checkbox input that draws its own box and mark: alone (a
+          table row), or in a checkbox field beside its text. A [formField] or
+          [(checked)] binds it.
         </p>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
@@ -80,8 +82,8 @@ import { TableCheckboxDemoContainer } from './demos/table-checkbox-demo-containe
         <h2 scHeading appToc>Accessibility</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
-            A native checkbox: Tab reaches it, Space toggles it; the box the
-            field draws is hidden from screen readers.
+            A native checkbox: Tab reaches it, Space toggles it; its box and
+            mark are its own (CSS), nothing extra for screen readers.
           </li>
           <li>
             Name it by its text: a label round both (label scCheckboxField), or
@@ -106,6 +108,7 @@ import { TableCheckboxDemoContainer } from './demos/table-checkbox-demo-containe
         <app-signal-forms-checkbox-demo-container />
         <app-form-checkbox-demo-container />
         <app-custom-theme-checkbox-demo-container />
+        <app-custom-mark-checkbox-demo-container />
         <app-rtl-checkbox-demo-container />
       </section>
 
@@ -172,19 +175,13 @@ export default class CheckboxPage {
       name: 'ScCheckboxField',
       selector: 'label[scCheckboxField], div[scCheckboxField]',
       description:
-        "Draws the box beside its checkbox; with its text (a label), or its label and description (a div). The preset's label look, normal weight. Required.",
+        "A checkbox beside its text (a label), or its label and description (a div); the preset's label look, normal weight. Optional.",
     },
     {
       name: 'ScCheckbox',
       selector: 'input[type="checkbox"][scCheckbox]',
       description:
-        'A native checkbox, transparent over the box: checked (two-way, or a [formField]); indeterminate; invalid once touched.',
-    },
-    {
-      name: 'ScCheckboxVisual',
-      selector: 'span[scCheckboxVisual]',
-      description:
-        "The box and its check or minus, in the preset's look. Placed by the field: not written.",
+        "A native checkbox in the preset's look, its check or minus drawn by itself: checked (two-way, or a [formField]); indeterminate; invalid once touched.",
     },
   ];
 }

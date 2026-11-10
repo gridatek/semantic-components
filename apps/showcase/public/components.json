@@ -185,14 +185,6 @@
   {
     "name": "Checkbox",
     "path": "checkbox",
-    "description": "A control for toggling a single option on or off.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Forms"
-  },
-  {
-    "name": "Checkbox Next",
-    "path": "checkbox-next",
     "description": "A native checkbox that draws itself, in the look of the app's preset.",
     "status": "Experimental",
     "library": "ui",

@@ -7,10 +7,7 @@ import type { ScDataTableHideableColumn } from './data-table-types';
  * Shows/hides a column. Works alone or with `scCheckbox`.
  *
  * ```html
- * <label scCheckboxField>
- *   <input type="checkbox" scCheckbox scDataTableColumnVisibility [column]="column" />
- *   …
- * </label>
+ * <input type="checkbox" scCheckbox scDataTableColumnVisibility [column]="column" />
  * ```
  */
 @Directive({

@@ -411,11 +411,9 @@ export interface ScRadioGroupStyles {
 
 /** A checkbox's parts that change from style to style. */
 export interface ScCheckboxStyles {
-  /** Checkbox's box, drawn beside the hidden input: data-checked, the input's states as peer-. */
-  visual: string;
-  /** Checkbox Next: the native input drawing itself (appearance-none). */
+  /** The native checkbox drawing itself (appearance-none). */
   item: string;
-  /** Checkbox Next: its check or minus when checked or indeterminate (its ::before, masked). */
+  /** Its check or minus when checked or indeterminate (its ::before, masked). */
   mark: string;
 }
 

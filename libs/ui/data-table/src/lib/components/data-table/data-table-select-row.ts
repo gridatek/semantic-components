@@ -10,9 +10,7 @@ import type { ScDataTableSelectableRow } from './data-table-types';
  * it a name, e.g. `[attr.aria-label]="'Select ' + row.original.name"`.
  *
  * ```html
- * <div scCheckboxField>
- *   <input type="checkbox" scCheckbox scDataTableSelectRow [row]="row" />
- * </div>
+ * <input type="checkbox" scCheckbox scDataTableSelectRow [row]="row" />
  * ```
  */
 @Directive({

@@ -53,7 +53,11 @@ import {
           <label scLabel>Subscribe to newsletter</label>
         </div>
         <div scCheckboxField>
-          <input type="checkbox" scCheckbox [formField]="emailForm.marketing" />
+          <input
+            type="checkbox"
+            scCheckbox
+            [formField]="emailForm.marketing"
+          />
           <label scLabel>Receive marketing emails</label>
         </div>
       </div>
