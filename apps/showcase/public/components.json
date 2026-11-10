@@ -1252,7 +1252,8 @@
     "description": "Styles for headings, paragraphs, lists, and other text elements.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Data Display"
+    "category": "Data Display",
+    "hidden": true
   },
   {
     "name": "Video Player",
