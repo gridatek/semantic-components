@@ -1297,15 +1297,19 @@ const INK_COLORS = [
                     >
                       @for (page of viewer.pageNumbers(); track page) {
                         <li [scPdfViewerPageItem]="page">
-                          <input
-                            type="checkbox"
-                            scCheckbox
-                            [scPdfViewerPageSelect]="page"
+                          <div
+                            scCheckboxField
                             class="absolute start-3 top-3 z-10"
-                            [attr.aria-label]="
-                              'Select page ' + viewer.pageLabel(page)
-                            "
-                          />
+                          >
+                            <input
+                              type="checkbox"
+                              scCheckbox
+                              [scPdfViewerPageSelect]="page"
+                              [attr.aria-label]="
+                                'Select page ' + viewer.pageLabel(page)
+                              "
+                            />
+                          </div>
                           <button
                             scButton
                             variant="ghost"

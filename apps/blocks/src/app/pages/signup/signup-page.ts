@@ -16,6 +16,7 @@ import {
   ScCardHeader,
   ScCardTitle,
   ScCheckbox,
+  ScCheckboxField,
   ScField,
   ScFieldGroup,
   ScInput,
@@ -40,6 +41,7 @@ import { Logo } from '../../components/logo/logo';
     ScCardHeader,
     ScCardTitle,
     ScCheckbox,
+    ScCheckboxField,
     ScField,
     ScFieldGroup,
     ScInput,
@@ -123,7 +125,7 @@ import { Logo } from '../../components/logo/logo';
                 />
               </div>
 
-              <div class="flex items-start gap-2">
+              <div scCheckboxField>
                 <input type="checkbox" scCheckbox id="terms" />
                 <label
                   scLabel

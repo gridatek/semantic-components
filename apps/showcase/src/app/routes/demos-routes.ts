@@ -1046,31 +1046,24 @@ export const demosRoutes: Route[] = [
     path: 'demos/checkbox',
     children: [
       {
-        path: 'signal-forms-checkbox-demo',
+        path: 'checkbox-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/checkbox/demos/signal-forms-checkbox-demo').then(
-            (m) => m.SignalFormsCheckboxDemo,
+          import('../pages/docs/checkbox/demos/checkbox-usage-demo').then(
+            (m) => m.CheckboxUsageDemo,
           ),
       },
       {
-        path: 'label-checkbox-demo',
+        path: 'description-checkbox-demo',
         loadComponent: () =>
-          import('../pages/docs/checkbox/demos/label-checkbox-demo').then(
-            (m) => m.LabelCheckboxDemo,
+          import('../pages/docs/checkbox/demos/description-checkbox-demo').then(
+            (m) => m.DescriptionCheckboxDemo,
           ),
       },
       {
-        path: 'basic-checkbox-demo',
+        path: 'group-checkbox-demo',
         loadComponent: () =>
-          import('../pages/docs/checkbox/demos/basic-checkbox-demo').then(
-            (m) => m.BasicCheckboxDemo,
-          ),
-      },
-      {
-        path: 'with-description-checkbox-demo',
-        loadComponent: () =>
-          import('../pages/docs/checkbox/demos/with-description-checkbox-demo').then(
-            (m) => m.WithDescriptionCheckboxDemo,
+          import('../pages/docs/checkbox/demos/group-checkbox-demo').then(
+            (m) => m.GroupCheckboxDemo,
           ),
       },
       {
@@ -1081,10 +1074,31 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
+        path: 'invalid-checkbox-demo',
+        loadComponent: () =>
+          import('../pages/docs/checkbox/demos/invalid-checkbox-demo').then(
+            (m) => m.InvalidCheckboxDemo,
+          ),
+      },
+      {
+        path: 'table-checkbox-demo',
+        loadComponent: () =>
+          import('../pages/docs/checkbox/demos/table-checkbox-demo').then(
+            (m) => m.TableCheckboxDemo,
+          ),
+      },
+      {
         path: 'indeterminate-checkbox-demo',
         loadComponent: () =>
           import('../pages/docs/checkbox/demos/indeterminate-checkbox-demo').then(
             (m) => m.IndeterminateCheckboxDemo,
+          ),
+      },
+      {
+        path: 'signal-forms-checkbox-demo',
+        loadComponent: () =>
+          import('../pages/docs/checkbox/demos/signal-forms-checkbox-demo').then(
+            (m) => m.SignalFormsCheckboxDemo,
           ),
       },
       {
@@ -1099,6 +1113,95 @@ export const demosRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/checkbox/demos/custom-theme-checkbox-demo').then(
             (m) => m.CustomThemeCheckboxDemo,
+          ),
+      },
+      {
+        path: 'rtl-checkbox-demo',
+        loadComponent: () =>
+          import('../pages/docs/checkbox/demos/rtl-checkbox-demo').then(
+            (m) => m.RtlCheckboxDemo,
+          ),
+      },
+    ],
+  },
+  {
+    path: 'demos/checkbox-next',
+    children: [
+      {
+        path: 'checkbox-next-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/checkbox-next/demos/checkbox-next-usage-demo').then(
+            (m) => m.CheckboxNextUsageDemo,
+          ),
+      },
+      {
+        path: 'description-checkbox-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/checkbox-next/demos/description-checkbox-next-demo').then(
+            (m) => m.DescriptionCheckboxNextDemo,
+          ),
+      },
+      {
+        path: 'group-checkbox-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/checkbox-next/demos/group-checkbox-next-demo').then(
+            (m) => m.GroupCheckboxNextDemo,
+          ),
+      },
+      {
+        path: 'disabled-checkbox-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/checkbox-next/demos/disabled-checkbox-next-demo').then(
+            (m) => m.DisabledCheckboxNextDemo,
+          ),
+      },
+      {
+        path: 'invalid-checkbox-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/checkbox-next/demos/invalid-checkbox-next-demo').then(
+            (m) => m.InvalidCheckboxNextDemo,
+          ),
+      },
+      {
+        path: 'table-checkbox-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/checkbox-next/demos/table-checkbox-next-demo').then(
+            (m) => m.TableCheckboxNextDemo,
+          ),
+      },
+      {
+        path: 'indeterminate-checkbox-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/checkbox-next/demos/indeterminate-checkbox-next-demo').then(
+            (m) => m.IndeterminateCheckboxNextDemo,
+          ),
+      },
+      {
+        path: 'signal-forms-checkbox-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/checkbox-next/demos/signal-forms-checkbox-next-demo').then(
+            (m) => m.SignalFormsCheckboxNextDemo,
+          ),
+      },
+      {
+        path: 'form-checkbox-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/checkbox-next/demos/form-checkbox-next-demo').then(
+            (m) => m.FormCheckboxNextDemo,
+          ),
+      },
+      {
+        path: 'custom-theme-checkbox-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/checkbox-next/demos/custom-theme-checkbox-next-demo').then(
+            (m) => m.CustomThemeCheckboxNextDemo,
+          ),
+      },
+      {
+        path: 'rtl-checkbox-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/checkbox-next/demos/rtl-checkbox-next-demo').then(
+            (m) => m.RtlCheckboxNextDemo,
           ),
       },
     ],

@@ -16,6 +16,7 @@ import {
   ScCardHeader,
   ScCardTitle,
   ScCheckbox,
+  ScCheckboxField,
   ScField,
   ScFieldGroup,
   ScInput,
@@ -40,6 +41,7 @@ import { Logo } from '../../components/logo/logo';
     ScCardHeader,
     ScCardTitle,
     ScCheckbox,
+    ScCheckboxField,
     ScField,
     ScFieldGroup,
     ScInput,
@@ -101,7 +103,7 @@ import { Logo } from '../../components/logo/logo';
                 />
               </div>
 
-              <div class="flex items-center gap-2">
+              <div scCheckboxField>
                 <input type="checkbox" scCheckbox id="remember" />
                 <label scLabel for="remember" i18n="@@login.rememberMe"
                   >Remember me</label

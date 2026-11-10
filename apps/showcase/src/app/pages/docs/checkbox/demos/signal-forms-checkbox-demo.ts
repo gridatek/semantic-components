@@ -1,62 +1,47 @@
 import { JsonPipe } from '@angular/common';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
-import { required } from '@angular/forms/signals';
-import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui';
+import {
+  ScCheckbox,
+  ScCheckboxField,
+  ScFieldGroup,
+  ScLabel,
+} from '@semantic-components/ui';
 
-interface CheckboxFormModel {
-  newsletter: boolean;
-  marketing: boolean;
-  acceptTerms: boolean;
-}
+/** Bound with [formField]: the form's values follow. */
 @Component({
   selector: 'app-signal-forms-checkbox-demo',
-  imports: [ScCheckboxField, ScCheckbox, ScLabel, JsonPipe, FormField],
+  imports: [
+    FormField,
+    JsonPipe,
+    ScCheckbox,
+    ScCheckboxField,
+    ScFieldGroup,
+    ScLabel,
+  ],
   template: `
-    <form>
-      <div class="space-y-4">
+    <div class="flex w-64 flex-col gap-4">
+      <div scFieldGroup class="gap-3">
         <div scCheckboxField>
           <input
             type="checkbox"
             scCheckbox
-            [formField]="checkboxForm.newsletter"
+            [formField]="emailForm.newsletter"
           />
           <label scLabel>Subscribe to newsletter</label>
         </div>
         <div scCheckboxField>
-          <input
-            type="checkbox"
-            scCheckbox
-            [formField]="checkboxForm.marketing"
-          />
+          <input type="checkbox" scCheckbox [formField]="emailForm.marketing" />
           <label scLabel>Receive marketing emails</label>
         </div>
-        <div scCheckboxField>
-          <input
-            type="checkbox"
-            scCheckbox
-            [formField]="checkboxForm.acceptTerms"
-          />
-          <label scLabel>Accept terms and conditions</label>
-        </div>
       </div>
-      <div class="bg-muted mt-4 rounded-md p-4">
-        <p class="text-sm font-medium">Form Values:</p>
-        <pre class="mt-2 text-xs">{{ formModel() | json }}</pre>
-      </div>
-    </form>
+      <pre class="bg-muted rounded-md p-4 text-xs">{{ model() | json }}</pre>
+    </div>
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
 export class SignalFormsCheckboxDemo {
-  readonly formModel = signal<CheckboxFormModel>({
-    newsletter: false,
-    marketing: false,
-    acceptTerms: false,
-  });
-  readonly checkboxForm = form(this.formModel, (schemaPath) => {
-    required(schemaPath.newsletter);
-    required(schemaPath.acceptTerms);
-  });
+  protected readonly model = signal({ newsletter: true, marketing: false });
+  protected readonly emailForm = form(this.model);
 }

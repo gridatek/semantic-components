@@ -7,7 +7,7 @@ import { FormCheckboxDemo } from './form-checkbox-demo';
   imports: [DemoContainer, FormCheckboxDemo],
   template: `
     <app-demo-container
-      title="Form Example"
+      title="Form"
       demoUrl="/demos/checkbox/form-checkbox-demo"
       [code]="code"
     >
@@ -19,28 +19,32 @@ import { FormCheckboxDemo } from './form-checkbox-demo';
 })
 export class FormCheckboxDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui';
+import {
+  ScCheckbox,
+  ScCheckboxField,
+  ScFieldGroup,
+  ScLabel,
+} from '@semantic-components/ui';
 
+/** Without a form: each checked state two-way bound, [(checked)]. */
 @Component({
   selector: 'app-form-checkbox-demo',
-  imports: [ScCheckboxField, ScCheckbox, ScLabel],
+  imports: [ScCheckbox, ScCheckboxField, ScFieldGroup, ScLabel],
   template: \`
-    <div class="max-w-md rounded-lg border p-6">
-      <div class="space-y-4">
-        <h4 class="font-semibold">Notification Preferences</h4>
-        <div class="space-y-4">
-          <div scCheckboxField>
-            <input type="checkbox" scCheckbox [(checked)]="emailNotif" />
-            <label scLabel>Email notifications</label>
-          </div>
-          <div scCheckboxField>
-            <input type="checkbox" scCheckbox [(checked)]="smsNotif" />
-            <label scLabel>SMS notifications</label>
-          </div>
-          <div scCheckboxField>
-            <input type="checkbox" scCheckbox [(checked)]="pushNotif" />
-            <label scLabel>Push notifications</label>
-          </div>
+    <div class="w-full max-w-md rounded-lg border p-6">
+      <h4 class="mb-4 font-semibold">Notification Preferences</h4>
+      <div scFieldGroup class="gap-3">
+        <div scCheckboxField>
+          <input type="checkbox" scCheckbox [(checked)]="email" />
+          <label scLabel>Email notifications</label>
+        </div>
+        <div scCheckboxField>
+          <input type="checkbox" scCheckbox [(checked)]="sms" />
+          <label scLabel>SMS notifications</label>
+        </div>
+        <div scCheckboxField>
+          <input type="checkbox" scCheckbox [(checked)]="push" />
+          <label scLabel>Push notifications</label>
         </div>
       </div>
     </div>
@@ -49,8 +53,8 @@ import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class FormCheckboxDemo {
-  readonly emailNotif = signal(true);
-  readonly smsNotif = signal(false);
-  readonly pushNotif = signal(true);
+  protected readonly email = signal(true);
+  protected readonly sms = signal(false);
+  protected readonly push = signal(true);
 }`;
 }

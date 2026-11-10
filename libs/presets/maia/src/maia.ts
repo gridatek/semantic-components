@@ -11,6 +11,7 @@ import { bubble } from './bubble';
 import { button } from './button';
 import { calendar } from './calendar';
 import { card } from './card';
+import { checkbox } from './checkbox';
 import { codeBlock } from './code-block';
 import { contextMenu } from './context-menu';
 import { controlGroup, controlGroupText } from './control-group';
@@ -65,6 +66,7 @@ export const maia: ScPreset = {
   button,
   calendar,
   card,
+  checkbox,
   codeBlock,
   frame,
   controlGroup,

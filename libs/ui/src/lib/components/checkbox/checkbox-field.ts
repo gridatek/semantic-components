@@ -10,6 +10,7 @@ import {
   signal,
 } from '@angular/core';
 import { FormField } from '@angular/forms/signals';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 import { SC_FIELD, type ScFieldContext } from '../field';
 import { ScCheckbox } from './checkbox';
@@ -37,6 +38,7 @@ import { ScCheckboxVisual } from './checkbox-visual';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScCheckboxField implements ScCheckboxContext, ScFieldContext {
+  private readonly labelStyles = injectPreset().label;
   private readonly elementRef = inject(ElementRef<HTMLElement>);
   private readonly checkbox = contentChild(ScCheckbox);
 
@@ -68,9 +70,12 @@ export class ScCheckboxField implements ScCheckboxContext, ScFieldContext {
 
   protected readonly class = computed(() =>
     cn(
-      'grid grid-cols-[1rem_1fr] items-start gap-x-2 gap-y-1',
-      '*:data-[slot=checkbox]:col-start-1 *:data-[slot=checkbox]:row-start-1 *:data-[slot=checkbox]:mt-0.5',
-      '*:data-[slot=checkbox-visual]:col-start-1 *:data-[slot=checkbox-visual]:row-start-1 *:data-[slot=checkbox-visual]:mt-0.5',
+      this.labelStyles.label,
+      'font-normal tracking-normal normal-case',
+      'grid grid-cols-[auto_1fr] items-center gap-x-2 gap-y-1',
+      // The input over the box, in the first column.
+      '*:data-[slot=checkbox]:col-start-1 *:data-[slot=checkbox]:row-start-1',
+      '*:data-[slot=checkbox-visual]:col-start-1 *:data-[slot=checkbox-visual]:row-start-1',
       '*:data-[slot=label]:col-start-2 *:data-[slot=label]:row-start-1',
       '*:data-[slot=field-description]:col-start-2 *:data-[slot=field-description]:row-start-2',
       'has-[>[data-slot=field-description]]:*:data-[slot=label]:font-medium',

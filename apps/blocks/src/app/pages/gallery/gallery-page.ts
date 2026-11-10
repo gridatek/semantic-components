@@ -22,6 +22,7 @@ import {
   ScCardHeader,
   ScCardTitle,
   ScCheckbox,
+  ScCheckboxField,
   ScInput,
   ScKbd,
   ScLabel,
@@ -69,6 +70,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     ScCardHeader,
     ScCardTitle,
     ScCheckbox,
+    ScCheckboxField,
     ScInput,
     ScKbd,
     ScLabel,
@@ -353,13 +355,13 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
             </h2>
             <div scSeparator aria-hidden="true"></div>
             <div class="space-y-3">
-              <div class="flex items-center gap-2">
+              <div scCheckboxField>
                 <input type="checkbox" scCheckbox id="terms" />
                 <label scLabel for="terms" i18n="@@gallery.acceptTerms"
                   >Accept terms and conditions</label
                 >
               </div>
-              <div class="flex items-center gap-2">
+              <div scCheckboxField>
                 <input type="checkbox" scCheckbox id="newsletter" />
                 <label scLabel for="newsletter" i18n="@@gallery.newsletter"
                   >Subscribe to newsletter</label

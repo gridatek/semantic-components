@@ -191,6 +191,14 @@
     "category": "Forms"
   },
   {
+    "name": "Checkbox Next",
+    "path": "checkbox-next",
+    "description": "A native checkbox that draws itself, in the look of the app's preset.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Forms"
+  },
+  {
     "name": "Code Editor",
     "path": "code-editor",
     "description": "Code to edit: CodeMirror, colored by Shiki; a form field.",

@@ -7,7 +7,7 @@ import { IndeterminateCheckboxDemo } from './indeterminate-checkbox-demo';
   imports: [DemoContainer, IndeterminateCheckboxDemo],
   template: `
     <app-demo-container
-      title="Indeterminate State"
+      title="Indeterminate"
       demoUrl="/demos/checkbox/indeterminate-checkbox-demo"
       [code]="code"
     >
@@ -19,36 +19,40 @@ import { IndeterminateCheckboxDemo } from './indeterminate-checkbox-demo';
 })
 export class IndeterminateCheckboxDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
-import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui';
+import {
+  ScCheckbox,
+  ScCheckboxField,
+  ScFieldGroup,
+} from '@semantic-components/ui';
 
+/** A "select all" over a few items: a minus when only some are checked. */
 @Component({
   selector: 'app-indeterminate-checkbox-demo',
-  imports: [ScCheckboxField, ScCheckbox, ScLabel],
+  imports: [ScCheckbox, ScCheckboxField, ScFieldGroup],
   template: \`
-    <div class="flex flex-col gap-4">
-      <div scCheckboxField>
+    <div scFieldGroup class="w-56 gap-3">
+      <label scCheckboxField>
         <input
           type="checkbox"
           scCheckbox
           [checked]="allSelected()"
           [indeterminate]="someSelected()"
-          (change)="toggleAll($event)"
+          (checkedChange)="selectAll($event)"
         />
-        <label scLabel>Select all</label>
-      </div>
-      <div class="ml-6 flex flex-col gap-2">
-        <div scCheckboxField>
-          <input type="checkbox" scCheckbox [(checked)]="item1" />
-          <label scLabel>Item 1</label>
-        </div>
-        <div scCheckboxField>
-          <input type="checkbox" scCheckbox [(checked)]="item2" />
-          <label scLabel>Item 2</label>
-        </div>
-        <div scCheckboxField>
-          <input type="checkbox" scCheckbox [(checked)]="item3" />
-          <label scLabel>Item 3</label>
-        </div>
+        Select all
+      </label>
+      <div class="flex flex-col gap-3 ps-6">
+        @for (item of items(); track item.name; let i = $index) {
+          <label scCheckboxField>
+            <input
+              type="checkbox"
+              scCheckbox
+              [checked]="item.checked"
+              (checkedChange)="select(i, $event)"
+            />
+            {{ item.name }}
+          </label>
+        }
       </div>
     </div>
   \`,
@@ -56,25 +60,26 @@ import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class IndeterminateCheckboxDemo {
-  readonly item1 = signal(true);
-  readonly item2 = signal(false);
-  readonly item3 = signal(false);
-
-  readonly allSelected = computed(
-    () => this.item1() && this.item2() && this.item3(),
+  protected readonly items = signal([
+    { name: 'Item 1', checked: true },
+    { name: 'Item 2', checked: false },
+    { name: 'Item 3', checked: false },
+  ]);
+  protected readonly allSelected = computed(() =>
+    this.items().every((item) => item.checked),
   );
-  readonly someSelected = computed(() => {
-    const selected = [this.item1(), this.item2(), this.item3()].filter(
-      Boolean,
-    ).length;
-    return selected > 0 && selected < 3;
-  });
+  protected readonly someSelected = computed(
+    () => this.items().some((item) => item.checked) && !this.allSelected(),
+  );
 
-  toggleAll(event: Event): void {
-    const checked = (event.target as HTMLInputElement).checked;
-    this.item1.set(checked);
-    this.item2.set(checked);
-    this.item3.set(checked);
+  protected selectAll(checked: boolean): void {
+    this.items.update((items) => items.map((item) => ({ ...item, checked })));
+  }
+
+  protected select(index: number, checked: boolean): void {
+    this.items.update((items) =>
+      items.map((item, i) => (i === index ? { ...item, checked } : item)),
+    );
   }
 }`;
 }

@@ -409,6 +409,16 @@ export interface ScRadioGroupStyles {
   dot: string;
 }
 
+/** A checkbox's parts that change from style to style. */
+export interface ScCheckboxStyles {
+  /** Checkbox's box, drawn beside the hidden input: data-checked, the input's states as peer-. */
+  visual: string;
+  /** Checkbox Next: the native input drawing itself (appearance-none). */
+  item: string;
+  /** Checkbox Next: its check or minus when checked or indeterminate (its ::before, masked). */
+  mark: string;
+}
+
 /** A preset: the components' classes in one of shadcn's styles. */
 export interface ScPreset {
   accordion: ScAccordionStyles;
@@ -429,6 +439,7 @@ export interface ScPreset {
   /** A calendar's root: its padding, --cell-size and --cell-radius. */
   calendar: string;
   card: ScCardStyles;
+  checkbox: ScCheckboxStyles;
   codeBlock: ScCodeBlockStyles;
   /** scFrame: a box's frame — the style's card radius, ring and shadow. */
   frame: string;

@@ -5,6 +5,7 @@ import {
   inject,
   input,
 } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 import { SC_CHECKBOX_FIELD } from './checkbox-types';
 
@@ -14,6 +15,9 @@ import { SC_CHECKBOX_FIELD } from './checkbox-types';
     'data-slot': 'checkbox-visual',
     '[class]': 'class()',
     '[attr.data-state]': 'checkbox.dataState()',
+    // shadcn's: filled when checked or indeterminate.
+    '[attr.data-checked]': "checkbox.dataState() === 'unchecked' ? null : ''",
+    '[attr.data-indeterminate]': 'checkbox.indeterminate() || null',
     '[attr.aria-hidden]': 'true',
   },
   template: `
@@ -46,19 +50,11 @@ import { SC_CHECKBOX_FIELD } from './checkbox-types';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScCheckboxVisual {
+  private readonly styles = injectPreset().checkbox;
   readonly checkbox = inject(SC_CHECKBOX_FIELD);
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn(
-      'pointer-events-none inline-flex size-4 shrink-0 items-center justify-center rounded-sm border border-input dark:bg-input/30 transition-colors',
-      'data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground data-[state=checked]:border-primary',
-      'data-[state=indeterminate]:bg-primary data-[state=indeterminate]:text-primary-foreground data-[state=indeterminate]:border-primary',
-      'peer-focus-visible:border-ring peer-focus-visible:ring-ring/50 peer-focus-visible:ring-3',
-      'peer-aria-invalid:border-destructive peer-aria-invalid:ring-destructive/20 peer-aria-invalid:ring-3',
-      'dark:peer-aria-invalid:border-destructive/50 dark:peer-aria-invalid:ring-destructive/40',
-      'peer-disabled:cursor-not-allowed peer-disabled:opacity-50',
-      this.classInput(),
-    ),
+    cn('pointer-events-none', this.styles.visual, this.classInput()),
   );
 }

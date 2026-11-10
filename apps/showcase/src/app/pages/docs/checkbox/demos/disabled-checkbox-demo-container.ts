@@ -7,7 +7,7 @@ import { DisabledCheckboxDemo } from './disabled-checkbox-demo';
   imports: [DemoContainer, DisabledCheckboxDemo],
   template: `
     <app-demo-container
-      title="Disabled States"
+      title="Disabled"
       demoUrl="/demos/checkbox/disabled-checkbox-demo"
       [code]="code"
     >
@@ -19,20 +19,26 @@ import { DisabledCheckboxDemo } from './disabled-checkbox-demo';
 })
 export class DisabledCheckboxDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui';
+import {
+  ScCheckbox,
+  ScCheckboxField,
+  ScFieldGroup,
+  ScLabel,
+} from '@semantic-components/ui';
 
+/** Disabled, unchecked and checked: dimmed, out of the Tab order. */
 @Component({
   selector: 'app-disabled-checkbox-demo',
-  imports: [ScCheckboxField, ScCheckbox, ScLabel],
+  imports: [ScCheckbox, ScCheckboxField, ScFieldGroup, ScLabel],
   template: \`
-    <div class="flex flex-col gap-4">
+    <div scFieldGroup class="w-56">
       <div scCheckboxField>
-        <input type="checkbox" scCheckbox [disabled]="true" />
-        <label scLabel>Disabled unchecked</label>
+        <input type="checkbox" scCheckbox disabled />
+        <label scLabel>Enable notifications</label>
       </div>
       <div scCheckboxField>
-        <input type="checkbox" scCheckbox [checked]="true" [disabled]="true" />
-        <label scLabel>Disabled checked</label>
+        <input type="checkbox" scCheckbox [checked]="true" disabled />
+        <label scLabel>Sync settings</label>
       </div>
     </div>
   \`,

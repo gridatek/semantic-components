@@ -7,6 +7,7 @@ import {
   effect,
   inject,
   input,
+  isDevMode,
   model,
 } from '@angular/core';
 import type { FormCheckboxControl } from '@angular/forms/signals';
@@ -75,6 +76,12 @@ export class ScCheckbox implements FormCheckboxControl {
   readonly disabledSignal = computed(() => this.disabled());
 
   constructor() {
+    // The field draws the box: without one, the input (transparent) shows nothing.
+    if (isDevMode() && !this.checkboxField) {
+      throw new Error(
+        'scCheckbox: put it inside a scCheckboxField (<label scCheckboxField> or <div scCheckboxField>) — the field draws the box.',
+      );
+    }
     // Sync indeterminate input to native property
     effect(() => {
       this.elementRef.nativeElement.indeterminate = this.indeterminate();
@@ -83,11 +90,14 @@ export class ScCheckbox implements FormCheckboxControl {
 
   protected onInputChange(event: Event): void {
     this.checked.set((event.target as HTMLInputElement).checked);
+    // A click clears the native indeterminate; it stays the input's.
+    this.elementRef.nativeElement.indeterminate = this.indeterminate();
   }
 
   protected readonly class = computed(() =>
     cn(
-      'peer size-4 opacity-0',
+      // Transparent, over the box the field draws: the box's size, the click target.
+      'peer m-0 size-full opacity-0',
       'disabled:cursor-not-allowed',
       this.classInput(),
     ),
