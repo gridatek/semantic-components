@@ -20,6 +20,14 @@ A native checkbox that draws itself (`appearance-none`): its box, and its check 
 | `ScCheckboxNextField` | `label[scCheckboxNextField], div[scCheckboxNextField]` | A checkbox beside its text (the `label` preset, normal weight), or its label and description; optional      |
 | `ScCheckboxNext`      | `input[type="checkbox"][scCheckboxNext]`               | The native input, drawn: `checked` (model, or `[formField]`), `indeterminate` (a property only), `disabled` |
 
+## Custom mark
+
+The mark is a mask: set `--sc-checkbox-check` (and `--sc-checkbox-indeterminate`) to your image, on the checkbox or any element round it. Its outline only, in the preset's colour; the style's icon when unset.
+
+```html
+<fieldset scFieldset style="--sc-checkbox-check: url(/images/checkbox-heart.svg)">…</fieldset>
+```
+
 Base UI's `data-checked` is `:checked` here, and `:indeterminate` is filled too. A click clears the native `indeterminate`; the input sets it back to its own.
 
 ## Accessibility

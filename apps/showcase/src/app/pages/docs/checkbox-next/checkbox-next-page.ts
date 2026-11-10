@@ -13,6 +13,7 @@ import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { CheckboxNextUsageDemoContainer } from './demos/checkbox-next-usage-demo-container';
+import { CustomMarkCheckboxNextDemoContainer } from './demos/custom-mark-checkbox-next-demo-container';
 import { CustomThemeCheckboxNextDemoContainer } from './demos/custom-theme-checkbox-next-demo-container';
 import { DescriptionCheckboxNextDemoContainer } from './demos/description-checkbox-next-demo-container';
 import { DisabledCheckboxNextDemoContainer } from './demos/disabled-checkbox-next-demo-container';
@@ -38,6 +39,7 @@ import { TableCheckboxNextDemoContainer } from './demos/table-checkbox-next-demo
     SignalFormsCheckboxNextDemoContainer,
     FormCheckboxNextDemoContainer,
     CustomThemeCheckboxNextDemoContainer,
+    CustomMarkCheckboxNextDemoContainer,
     RtlCheckboxNextDemoContainer,
     TocHeading,
     ComponentBadges,
@@ -106,6 +108,7 @@ import { TableCheckboxNextDemoContainer } from './demos/table-checkbox-next-demo
         <app-signal-forms-checkbox-next-demo-container />
         <app-form-checkbox-next-demo-container />
         <app-custom-theme-checkbox-next-demo-container />
+        <app-custom-mark-checkbox-next-demo-container />
         <app-rtl-checkbox-next-demo-container />
       </section>
 

@@ -148,3 +148,13 @@ test('RTL: the checkbox at the right of its text', async ({ page }) => {
   ];
   expect(checkbox.x).toBeGreaterThan(label.x);
 });
+
+test('Custom mark: the image from --sc-checkbox-check', async ({ page }) => {
+  await page.goto(demo('custom-mark'));
+  expect(await mark(page.getByRole('checkbox', { name: 'Red' }))).toContain(
+    'checkbox-heart.svg',
+  );
+  expect(await mark(page.getByRole('checkbox', { name: 'Green' }))).toBe(
+    'none',
+  );
+});

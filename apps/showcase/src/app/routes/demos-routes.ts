@@ -1198,6 +1198,13 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
+        path: 'custom-mark-checkbox-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/checkbox-next/demos/custom-mark-checkbox-next-demo').then(
+            (m) => m.CustomMarkCheckboxNextDemo,
+          ),
+      },
+      {
         path: 'rtl-checkbox-next-demo',
         loadComponent: () =>
           import('../pages/docs/checkbox-next/demos/rtl-checkbox-next-demo').then(
