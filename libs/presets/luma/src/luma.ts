@@ -35,6 +35,7 @@ import { menu } from './menu';
 import { menubar } from './menubar';
 import { message } from './message';
 import { messageScrollerContent } from './message-scroller';
+import { otpField } from './otp-field';
 import { pagination } from './pagination';
 import { popover } from './popover';
 import { previewCard } from './preview-card';
@@ -93,6 +94,7 @@ export const luma: ScPreset = {
   menubar,
   message,
   messageScrollerContent,
+  otpField,
   pagination,
   popover,
   previewCard,

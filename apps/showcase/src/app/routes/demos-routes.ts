@@ -6902,4 +6902,114 @@ export const demosRoutes: Route[] = [
       },
     ],
   },
+  {
+    path: 'demos/otp-field-next',
+    children: [
+      {
+        path: 'otp-field-next-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/otp-field-next/demos/otp-field-next-usage-demo').then(
+            (m) => m.OtpFieldNextUsageDemo,
+          ),
+      },
+      {
+        path: 'digits-only-otp-field-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/otp-field-next/demos/digits-only-otp-field-next-demo').then(
+            (m) => m.DigitsOnlyOtpFieldNextDemo,
+          ),
+      },
+      {
+        path: 'alphanumeric-otp-field-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/otp-field-next/demos/alphanumeric-otp-field-next-demo').then(
+            (m) => m.AlphanumericOtpFieldNextDemo,
+          ),
+      },
+      {
+        path: 'four-digits-otp-field-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/otp-field-next/demos/four-digits-otp-field-next-demo').then(
+            (m) => m.FourDigitsOtpFieldNextDemo,
+          ),
+      },
+      {
+        path: 'separator-otp-field-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/otp-field-next/demos/separator-otp-field-next-demo').then(
+            (m) => m.SeparatorOtpFieldNextDemo,
+          ),
+      },
+      {
+        path: 'invalid-otp-field-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/otp-field-next/demos/invalid-otp-field-next-demo').then(
+            (m) => m.InvalidOtpFieldNextDemo,
+          ),
+      },
+      {
+        path: 'disabled-otp-field-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/otp-field-next/demos/disabled-otp-field-next-demo').then(
+            (m) => m.DisabledOtpFieldNextDemo,
+          ),
+      },
+      {
+        path: 'controlled-otp-field-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/otp-field-next/demos/controlled-otp-field-next-demo').then(
+            (m) => m.ControlledOtpFieldNextDemo,
+          ),
+      },
+      {
+        path: 'form-otp-field-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/otp-field-next/demos/form-otp-field-next-demo').then(
+            (m) => m.FormOtpFieldNextDemo,
+          ),
+      },
+      {
+        path: 'placeholder-otp-field-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/otp-field-next/demos/placeholder-otp-field-next-demo').then(
+            (m) => m.PlaceholderOtpFieldNextDemo,
+          ),
+      },
+      {
+        path: 'normalization-otp-field-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/otp-field-next/demos/normalization-otp-field-next-demo').then(
+            (m) => m.NormalizationOtpFieldNextDemo,
+          ),
+      },
+      {
+        path: 'masked-otp-field-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/otp-field-next/demos/masked-otp-field-next-demo').then(
+            (m) => m.MaskedOtpFieldNextDemo,
+          ),
+      },
+      {
+        path: 'verification-otp-field-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/otp-field-next/demos/verification-otp-field-next-demo').then(
+            (m) => m.VerificationOtpFieldNextDemo,
+          ),
+      },
+      {
+        path: 'server-validation-otp-field-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/otp-field-next/demos/server-validation-otp-field-next-demo').then(
+            (m) => m.ServerValidationOtpFieldNextDemo,
+          ),
+      },
+      {
+        path: 'rtl-otp-field-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/otp-field-next/demos/rtl-otp-field-next-demo').then(
+            (m) => m.RtlOtpFieldNextDemo,
+          ),
+      },
+    ],
+  },
 ];

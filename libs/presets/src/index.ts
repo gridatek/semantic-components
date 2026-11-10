@@ -448,6 +448,16 @@ export interface ScToggleGroupStyles {
   item: string;
 }
 
+/** An OTP field's parts that change from style to style. */
+export interface ScOtpFieldStyles {
+  /** A group: one chunk of inputs, joined into one box (separate boxes in sera). */
+  group: string;
+  /** An input: one character (shadcn's slot; its active look on :focus). */
+  input: string;
+  /** A separator between groups. */
+  separator: string;
+}
+
 /** A preset: the components' classes in one of shadcn's styles. */
 export interface ScPreset {
   accordion: ScAccordionStyles;
@@ -501,6 +511,7 @@ export interface ScPreset {
   message: ScMessageStyles;
   /** A message scroller's rows: the gap between them. */
   messageScrollerContent: string;
+  otpField: ScOtpFieldStyles;
   pagination: ScPaginationStyles;
   popover: ScPopoverStyles;
   previewCard: ScPreviewCardStyles;
