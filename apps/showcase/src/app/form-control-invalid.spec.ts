@@ -1,11 +1,6 @@
 import { Component, Type, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import {
-  ScCheckbox,
-  ScCheckboxField,
-  ScSwitch,
-  ScSwitchField,
-} from '@semantic-components/ui';
+import { ScCheckbox, ScSwitch, ScSwitchField } from '@semantic-components/ui';
 
 interface InvalidHost {
   readonly invalid: ReturnType<typeof signal<boolean>>;
@@ -98,18 +93,6 @@ describe('aria-invalid on form controls', () => {
 });
 
 @Component({
-  imports: [ScCheckbox, ScCheckboxField],
-  template: `
-    <div scCheckboxField>
-      <input type="checkbox" scCheckbox [disabled]="disabled()" />
-    </div>
-  `,
-})
-class CheckboxDisabledHost {
-  readonly disabled = signal(false);
-}
-
-@Component({
   imports: [ScSwitch, ScSwitchField],
   template: `
     <div scSwitchField>
@@ -132,9 +115,9 @@ function mountDisabled(type: Type<DisabledHost>) {
   return fixture;
 }
 
+// The checkbox field sets no data-disabled: style it by has-disabled:.
 describe('disabled on form controls', () => {
   const cases: [string, Type<DisabledHost>][] = [
-    ['checkbox', CheckboxDisabledHost],
     ['switch', SwitchDisabledHost],
   ];
 
