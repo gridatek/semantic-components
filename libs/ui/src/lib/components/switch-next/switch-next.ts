@@ -76,8 +76,10 @@ export class ScSwitchNext implements FormCheckboxControl {
     cn(
       'appearance-none',
       this.styles.track,
-      // The thumb: at the track's start, centred; the preset moves it.
-      "before:absolute before:start-0 before:top-1/2 before:-translate-y-1/2 before:content-['']",
+      // The thumb: at the track's start, centred by its margins — not a
+      // transform, which isn't snapped to pixels (uneven edges at 125%); the
+      // preset moves it.
+      "before:absolute before:inset-y-0 before:start-0 before:my-auto before:content-['']",
       this.styles.thumb,
       this.classInput(),
     ),
