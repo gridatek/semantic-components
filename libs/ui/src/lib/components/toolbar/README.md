@@ -112,7 +112,7 @@ A container for grouping a set of controls, such as toggle buttons, with keyboar
 
 ## Styling
 
-- `ScToolbarToggle` reuses `toggleVariants` from the Toggle component for consistent hover, focus, disabled, and sizing styles.
+- `ScToolbarToggle` takes the preset's toggle look (`injectPreset().toggle`), as the Toggle for consistent hover, focus, disabled, and sizing styles.
 - `ScToolbarToggleGroup` uses a small gap (`gap-0.5`) between toggles so focus rings remain visible.
 
 ## Accessibility

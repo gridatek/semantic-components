@@ -1,6 +1,6 @@
 import { ToolbarWidget } from '@angular/aria/toolbar';
 import { DestroyRef, Directive, computed, inject, input } from '@angular/core';
-import { bindInput, cn, toggleVariants } from '@semantic-components/ui';
+import { bindInput, cn, injectPreset } from '@semantic-components/ui';
 import {
   SC_EDITOR,
   ɵassertEditorFeature,
@@ -26,6 +26,7 @@ import { editorSearch } from './editor-search-state';
   },
 })
 export class ScEditorSearch {
+  private readonly toggleStyles = injectPreset().toggle;
   private readonly editor = inject(SC_EDITOR);
   private readonly search = editorSearch(this.editor);
 
@@ -37,7 +38,7 @@ export class ScEditorSearch {
 
   protected readonly class = computed(() =>
     cn(
-      toggleVariants({ variant: 'default', size: 'default' }),
+      this.toggleStyles({ variant: 'default', size: 'default' }),
       this.classInput(),
     ),
   );

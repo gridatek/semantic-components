@@ -49,17 +49,11 @@ import {
       </p>
       <div scFieldGroup class="gap-3">
         <label scCheckboxField>
-          <input
-            scCheckbox
-            [formField]="desktopForm.hardDisks"
-          />
+          <input scCheckbox [formField]="desktopForm.hardDisks" />
           Hard disks
         </label>
         <label scCheckboxField>
-          <input
-            scCheckbox
-            [formField]="desktopForm.externalDisks"
-          />
+          <input scCheckbox [formField]="desktopForm.externalDisks" />
           External disks
         </label>
         <label scCheckboxField>

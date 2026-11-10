@@ -571,6 +571,15 @@ Rewritten 2026-11-10: built beside the old one as Slider Next, switched in. shad
 - **One thumb**: shadcn's Range and Multiple are left out (Range Slider is ours, in its turn).
 - **shadcn's examples**: Demo (the Usage), Controlled, Disabled, Vertical, RTL; ours kept: Form, Custom color.
 
+## Toggle: restyled
+
+Restyled 2026-11-10: shadcn's Toggle in each style, and its examples.
+
+- **The `toggle` preset key**: each style's `toggleVariants` cva, copied (`variant` default / outline, `size` sm / default / lg) — the corners (none in lyra and sera), text (`text-xs` in lyra and mira, sera's uppercase), heights (mira 7, sera 10, vega/maia/luma 9) differ by style.
+- **`toggleVariants` gone**: its 31 users (the editor's buttons, the toolbar's toggle, the toggle group's items) read `injectPreset().toggle`, so they take each style's look too.
+- **`disabled` a boolean attribute**; `data-state` kept (shadcn's classes and the toolbar style by it).
+- **shadcn's examples**: Demo (the Usage: Bookmark, outline sm, the icon filled when pressed), Outline, With text, Sizes, Disabled, RTL — named by their text, not shadcn's `aria-label` beside it; ours kept: Toolbar. Basic dropped.
+
 ## Input Button: restyled
 
 Restyled 2026-11-07. Our own component — shadcn has none; its docs site's search trigger is a secondary button.

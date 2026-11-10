@@ -24,7 +24,8 @@ import { ScRadio, ScRadioField, ScRadioGroup } from '@semantic-components/ui';
   template: \`
     <div scRadioGroup aria-label="Spacing" class="w-fit">
       <label scRadioField>
-        <input type="radio"
+        <input
+          type="radio"
           scRadio
           value="default"
           [formField]="spacingForm.spacing"
@@ -32,7 +33,8 @@ import { ScRadio, ScRadioField, ScRadioGroup } from '@semantic-components/ui';
         Default
       </label>
       <label scRadioField>
-        <input type="radio"
+        <input
+          type="radio"
           scRadio
           value="comfortable"
           [formField]="spacingForm.spacing"
@@ -40,7 +42,8 @@ import { ScRadio, ScRadioField, ScRadioGroup } from '@semantic-components/ui';
         Comfortable
       </label>
       <label scRadioField>
-        <input type="radio"
+        <input
+          type="radio"
           scRadio
           value="compact"
           [formField]="spacingForm.spacing"

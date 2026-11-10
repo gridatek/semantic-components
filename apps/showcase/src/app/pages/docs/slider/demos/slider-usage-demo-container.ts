@@ -22,12 +22,7 @@ import { ScSlider } from '@semantic-components/ui';
   selector: 'app-slider-usage-demo',
   imports: [ScSlider],
   template: \`
-    <input
-      scSlider
-      [(value)]="volume"
-      aria-label="Volume"
-      class="max-w-xs"
-    />
+    <input scSlider [(value)]="volume" aria-label="Volume" class="max-w-xs" />
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,

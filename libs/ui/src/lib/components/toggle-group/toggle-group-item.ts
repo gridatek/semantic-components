@@ -1,6 +1,7 @@
 import { Directive, computed, inject, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
-import { type ScToggleVariants, toggleVariants } from '../toggle/toggle';
+import { type ScToggleVariants } from '../toggle/toggle';
 import { ScToggleGroup } from './toggle-group';
 
 @Directive({
@@ -18,6 +19,7 @@ import { ScToggleGroup } from './toggle-group';
   },
 })
 export class ScToggleGroupItem {
+  private readonly toggleStyles = injectPreset().toggle;
   protected readonly group = inject(ScToggleGroup);
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -37,7 +39,7 @@ export class ScToggleGroupItem {
   protected readonly class = computed(() =>
     cn(
       'group-data-[spacing=0]/toggle-group:rounded-none group-data-[spacing=0]/toggle-group:px-2 group-data-[spacing=0]/toggle-group:has-data-[icon=inline-end]:pe-1.5 group-data-[spacing=0]/toggle-group:has-data-[icon=inline-start]:ps-1.5 group-data-horizontal/toggle-group:data-[spacing=0]:first:rounded-s-lg group-data-vertical/toggle-group:data-[spacing=0]:first:rounded-t-lg group-data-horizontal/toggle-group:data-[spacing=0]:last:rounded-e-lg group-data-vertical/toggle-group:data-[spacing=0]:last:rounded-b-lg shrink-0 focus:z-10 focus-visible:z-10 group-data-horizontal/toggle-group:data-[spacing=0]:data-[variant=outline]:border-s-0 group-data-vertical/toggle-group:data-[spacing=0]:data-[variant=outline]:border-t-0 group-data-horizontal/toggle-group:data-[spacing=0]:data-[variant=outline]:first:border-s group-data-vertical/toggle-group:data-[spacing=0]:data-[variant=outline]:first:border-t',
-      toggleVariants({
+      this.toggleStyles({
         variant: this.group.variant() || this.variant(),
         size: this.group.size() || this.size(),
       }),

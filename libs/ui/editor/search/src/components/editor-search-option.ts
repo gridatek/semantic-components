@@ -1,5 +1,5 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { cn, toggleVariants } from '@semantic-components/ui';
+import { cn, injectPreset } from '@semantic-components/ui';
 import { SC_EDITOR } from '@semantic-components/ui/editor';
 import {
   type ScEditorSearchFlag as Option,
@@ -22,6 +22,7 @@ import {
   },
 })
 export class ScEditorSearchOption {
+  private readonly toggleStyles = injectPreset().toggle;
   protected readonly search = editorSearch(inject(SC_EDITOR));
 
   readonly option = input.required<Option>({ alias: 'scEditorSearchOption' });
@@ -39,6 +40,9 @@ export class ScEditorSearchOption {
   });
 
   protected readonly class = computed(() =>
-    cn(toggleVariants({ variant: 'default', size: 'sm' }), this.classInput()),
+    cn(
+      this.toggleStyles({ variant: 'default', size: 'sm' }),
+      this.classInput(),
+    ),
   );
 }

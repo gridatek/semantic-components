@@ -20,21 +20,15 @@ import { DisabledToggleDemo } from './disabled-toggle-demo';
 export class DisabledToggleDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScToggle } from '@semantic-components/ui';
-import { SiBoldIcon } from '@semantic-icons/lucide-icons';
 
+/** Disabled: dimmed, out of the Tab order. */
 @Component({
   selector: 'app-disabled-toggle-demo',
-  imports: [ScToggle, SiBoldIcon],
+  imports: [ScToggle],
   template: \`
-    <div class="flex items-center gap-2">
-      <button scToggle [disabled]="true">
-        <svg siBoldIcon></svg>
-        <span class="sr-only">Toggle disabled</span>
-      </button>
-      <button scToggle [pressed]="true" [disabled]="true">
-        <svg siBoldIcon></svg>
-        <span class="sr-only">Toggle disabled pressed</span>
-      </button>
+    <div class="flex flex-wrap items-center gap-2">
+      <button scToggle disabled>Disabled</button>
+      <button scToggle variant="outline" disabled>Disabled outline</button>
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },

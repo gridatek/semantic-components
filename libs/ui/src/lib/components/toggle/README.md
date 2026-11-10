@@ -1,73 +1,24 @@
 # Toggle
 
-A two-state button that can be either on or off.
-
-## Components
-
-- `ScToggle` - Toggle button with pressed/unpressed state
+A button that stays pressed: `aria-pressed` follows `pressed`. In the look of the app's preset — its `toggle` key, shadcn's `toggleVariants` in each style (a cva, as the `button` key). Parts that look like a toggle (the editor's buttons, the toolbar's toggle, the toggle group's items) read the same key: `private readonly toggleStyles = injectPreset().toggle;` then `this.toggleStyles({ variant, size })`.
 
 ## Usage
 
 ```html
-<button scToggle [(pressed)]="bold">
-  <svg><!-- icon --></svg>
-  <span class="sr-only">Toggle bold</span>
+<button scToggle variant="outline" size="sm" [(pressed)]="bookmarked">
+  <svg siBookmarkIcon class="group-aria-pressed/toggle:fill-foreground"></svg>
+  Bookmark
 </button>
 ```
 
-## Variants
+## Part
 
-```html
-<!-- Default -->
-<button scToggle>Toggle</button>
-
-<!-- Outline -->
-<button scToggle variant="outline">Toggle</button>
-```
-
-## Sizes
-
-```html
-<button scToggle size="sm">Small</button>
-<button scToggle size="default">Default</button>
-<button scToggle size="lg">Large</button>
-```
-
-## With Text
-
-```html
-<button scToggle [(pressed)]="underline">
-  <svg class="mr-2 size-4"><!-- icon --></svg>
-  Underline
-</button>
-```
-
-## Disabled
-
-```html
-<button scToggle [disabled]="true">Toggle</button>
-```
-
-## Inputs
-
-| Input      | Type                        | Default     | Description                |
-| ---------- | --------------------------- | ----------- | -------------------------- |
-| `pressed`  | `boolean`                   | `false`     | The pressed state (model)  |
-| `disabled` | `boolean`                   | `false`     | Whether toggle is disabled |
-| `variant`  | `'default' \| 'outline'`    | `'default'` | Toggle variant             |
-| `size`     | `'default' \| 'sm' \| 'lg'` | `'default'` | Toggle size                |
-| `class`    | `string`                    | `''`        | Additional CSS classes     |
-
-## Outputs
-
-| Output          | Type      | Description                      |
-| --------------- | --------- | -------------------------------- |
-| `pressedChange` | `boolean` | Emits when pressed state changes |
+| Part       | Selector           | What it does                                                                                                             |
+| ---------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| `ScToggle` | `button[scToggle]` | `pressed` (two-way); `variant` (`default`, `outline`); `size` (`sm`, `default`, `lg`); `disabled`; `data-state` on / off |
 
 ## Accessibility
 
-- Uses `aria-pressed` to communicate state
-- `data-state` attribute: `on` or `off`
-- Should include `aria-label` when using only icons
-- Keyboard accessible (Enter/Space to toggle)
-- Focus ring for keyboard navigation
+- A native button with `aria-pressed`: announced as a toggle button, pressed or not; Tab, Space, Enter.
+- Its name stays the same as it toggles: its text, or an icon with `sr-only` text — never a name that follows the state as well (see the Button's stateful names).
+- Disabled: out of the Tab order.

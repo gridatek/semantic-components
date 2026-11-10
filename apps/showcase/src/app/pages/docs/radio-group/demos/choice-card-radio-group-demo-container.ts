@@ -54,7 +54,8 @@ import {
             <p scFieldDescription>For individuals and small teams.</p>
           </div>
           <div scRadioField>
-            <input type="radio"
+            <input
+              type="radio"
               scRadio
               value="plus"
               [formField]="planForm.plan"
@@ -69,7 +70,8 @@ import {
             <p scFieldDescription>For growing businesses.</p>
           </div>
           <div scRadioField>
-            <input type="radio"
+            <input
+              type="radio"
               scRadio
               value="pro"
               [formField]="planForm.plan"
@@ -84,7 +86,8 @@ import {
             <p scFieldDescription>For large teams and enterprises.</p>
           </div>
           <div scRadioField>
-            <input type="radio"
+            <input
+              type="radio"
               scRadio
               value="enterprise"
               [formField]="planForm.plan"

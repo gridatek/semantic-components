@@ -6266,10 +6266,10 @@ export const demosRoutes: Route[] = [
     path: 'demos/toggle',
     children: [
       {
-        path: 'basic-toggle-demo',
+        path: 'toggle-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/toggle/demos/basic-toggle-demo').then(
-            (m) => m.BasicToggleDemo,
+          import('../pages/docs/toggle/demos/toggle-usage-demo').then(
+            (m) => m.ToggleUsageDemo,
           ),
       },
       {
@@ -6277,6 +6277,13 @@ export const demosRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/toggle/demos/outline-toggle-demo').then(
             (m) => m.OutlineToggleDemo,
+          ),
+      },
+      {
+        path: 'rtl-toggle-demo',
+        loadComponent: () =>
+          import('../pages/docs/toggle/demos/rtl-toggle-demo').then(
+            (m) => m.RtlToggleDemo,
           ),
       },
       {

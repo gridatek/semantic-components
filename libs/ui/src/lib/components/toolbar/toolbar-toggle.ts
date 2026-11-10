@@ -7,8 +7,8 @@ import {
   inject,
   input,
 } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
-import { toggleVariants } from '../toggle/toggle';
 import { ScToolbar } from './toolbar';
 import { ScToolbarToggleGroup } from './toolbar-toggle-group';
 
@@ -31,6 +31,7 @@ import { ScToolbarToggleGroup } from './toolbar-toggle-group';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScToolbarToggle {
+  private readonly toggleStyles = injectPreset().toggle;
   private readonly toolbar = inject(ScToolbar);
   private readonly group = inject(ScToolbarToggleGroup, { optional: true });
   private readonly widget = inject(ToolbarWidget);
@@ -45,7 +46,7 @@ export class ScToolbarToggle {
 
   protected readonly class = computed(() =>
     cn(
-      toggleVariants({ variant: 'default', size: 'default' }),
+      this.toggleStyles({ variant: 'default', size: 'default' }),
       'data-[state=on]:bg-muted',
       this.classInput(),
     ),

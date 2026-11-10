@@ -46,10 +46,7 @@ import {
       <div scFieldGroup class="gap-3">
         <div scSwitchField>
           <label scLabel>Notifications</label>
-          <input
-            scSwitch
-            [formField]="settingsForm.notifications"
-          />
+          <input scSwitch [formField]="settingsForm.notifications" />
         </div>
         <div scSwitchField>
           <label scLabel>Dark mode</label>

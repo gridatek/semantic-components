@@ -1,6 +1,6 @@
 import { ToolbarWidget } from '@angular/aria/toolbar';
 import { Directive, computed, inject, input } from '@angular/core';
-import { bindInput, cn, toggleVariants } from '@semantic-components/ui';
+import { bindInput, cn, injectPreset } from '@semantic-components/ui';
 import {
   SC_EDITOR,
   ɵassertEditorFeature,
@@ -22,13 +22,14 @@ import {
   },
 })
 export class ScEditorSuperscript {
+  private readonly toggleStyles = injectPreset().toggle;
   protected readonly editor = inject(SC_EDITOR);
   readonly classInput = input<string>('', { alias: 'class' });
   readonly disabledInput = input(false, { alias: 'disabled' });
 
   protected readonly class = computed(() =>
     cn(
-      toggleVariants({ variant: 'default', size: 'default' }),
+      this.toggleStyles({ variant: 'default', size: 'default' }),
       this.classInput(),
     ),
   );

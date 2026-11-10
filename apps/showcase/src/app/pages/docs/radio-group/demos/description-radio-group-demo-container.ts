@@ -42,7 +42,8 @@ import {
   template: \`
     <div scRadioGroup aria-label="Spacing" class="w-fit">
       <div scRadioField>
-        <input type="radio"
+        <input
+          type="radio"
           scRadio
           value="default"
           [formField]="spacingForm.spacing"
@@ -51,7 +52,8 @@ import {
         <p scFieldDescription>Standard spacing for most use cases.</p>
       </div>
       <div scRadioField>
-        <input type="radio"
+        <input
+          type="radio"
           scRadio
           value="comfortable"
           [formField]="spacingForm.spacing"
@@ -60,7 +62,8 @@ import {
         <p scFieldDescription>More space between elements.</p>
       </div>
       <div scRadioField>
-        <input type="radio"
+        <input
+          type="radio"
           scRadio
           value="compact"
           [formField]="spacingForm.spacing"

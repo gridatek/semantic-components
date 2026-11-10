@@ -20,21 +20,22 @@ import { WithTextToggleDemo } from './with-text-toggle-demo';
 export class WithTextToggleDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScToggle } from '@semantic-components/ui';
-import { SiUnderlineIcon } from '@semantic-icons/lucide-icons';
+import { SiItalicIcon } from '@semantic-icons/lucide-icons';
 
+/** An icon and its text: the text names it. */
 @Component({
   selector: 'app-with-text-toggle-demo',
-  imports: [ScToggle, SiUnderlineIcon],
+  imports: [ScToggle, SiItalicIcon],
   template: \`
-    <button scToggle [(pressed)]="underline" aria-label="Toggle underline">
-      <svg siUnderlineIcon></svg>
-      Underline
+    <button scToggle [(pressed)]="italic">
+      <svg siItalicIcon></svg>
+      Italic
     </button>
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
 export class WithTextToggleDemo {
-  readonly underline = signal(false);
+  protected readonly italic = signal(false);
 }`;
 }

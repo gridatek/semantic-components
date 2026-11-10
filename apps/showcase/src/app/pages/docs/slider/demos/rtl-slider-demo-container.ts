@@ -27,11 +27,7 @@ import { ScSlider } from '@semantic-components/ui';
   imports: [ScSlider],
   template: \`
     <div dir="rtl" lang="ar" class="w-full max-w-xs">
-      <input
-        scSlider
-        [(value)]="volume"
-        aria-label="مستوى الصوت"
-      />
+      <input scSlider [(value)]="volume" aria-label="مستوى الصوت" />
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },

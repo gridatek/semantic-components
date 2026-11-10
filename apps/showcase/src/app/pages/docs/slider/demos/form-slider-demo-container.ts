@@ -21,12 +21,7 @@ export class FormSliderDemoContainer {
   readonly code = `import { JsonPipe } from '@angular/common';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form, max, min } from '@angular/forms/signals';
-import {
-  ScField,
-  ScFrame,
-  ScLabel,
-  ScSlider,
-} from '@semantic-components/ui';
+import { ScField, ScFrame, ScLabel, ScSlider } from '@semantic-components/ui';
 
 /** Bound with [formField], in a field: the schema's min and max, the form's value. */
 @Component({

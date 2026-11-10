@@ -777,10 +777,7 @@ const INK_COLORS = [
                     </div>
                     <label scSwitchField>
                       Show all
-                      <input
-                        scSwitch
-                        scPdfViewerSetting="highlightShowAll"
-                      />
+                      <input scSwitch scPdfViewerSetting="highlightShowAll" />
                     </label>
                   }
                   @case ('freetext') {
@@ -1448,10 +1445,7 @@ const INK_COLORS = [
                         @for (layer of viewer.layers(); track layer.id) {
                           <li>
                             <label scCheckboxField>
-                              <input
-                                scCheckbox
-                                [scPdfViewerLayer]="layer"
-                              />
+                              <input scCheckbox [scPdfViewerLayer]="layer" />
                               {{ layer.name }}
                             </label>
                           </li>
@@ -2030,10 +2024,7 @@ const INK_COLORS = [
               </div>
 
               <label scCheckboxField>
-                <input
-                  scCheckbox
-                  [(checked)]="signature.saveForReuse"
-                />
+                <input scCheckbox [(checked)]="signature.saveForReuse" />
                 Save signature for later
               </label>
 

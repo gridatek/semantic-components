@@ -103,7 +103,8 @@ import {
         >
           @for (mode of modes; track mode) {
             <label scRadioField>
-              <input type="radio"
+              <input
+                type="radio"
                 scRadio
                 [value]="mode"
                 [formField]="settingsForm.repeat"

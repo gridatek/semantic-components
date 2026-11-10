@@ -47,7 +47,8 @@ import {
       <p scFieldDescription>Choose how you want to receive notifications.</p>
       <div scRadioGroup>
         <label scRadioField>
-          <input type="radio"
+          <input
+            type="radio"
             scRadio
             value="email"
             [formField]="notifyForm.notify"
@@ -55,7 +56,8 @@ import {
           Email only
         </label>
         <label scRadioField>
-          <input type="radio"
+          <input
+            type="radio"
             scRadio
             value="sms"
             [formField]="notifyForm.notify"
@@ -63,7 +65,8 @@ import {
           SMS only
         </label>
         <label scRadioField>
-          <input type="radio"
+          <input
+            type="radio"
             scRadio
             value="both"
             [formField]="notifyForm.notify"

@@ -65,10 +65,7 @@ import {
               Receive notifications when focus mode is enabled or disabled.
             </p>
           </div>
-          <input
-            scSwitch
-            [formField]="focusForm.notifications"
-          />
+          <input scSwitch [formField]="focusForm.notifications" />
         </div>
       </label>
     </div>

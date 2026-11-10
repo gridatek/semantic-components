@@ -1,6 +1,6 @@
 import { ToolbarWidget } from '@angular/aria/toolbar';
 import { Directive, computed, inject, input } from '@angular/core';
-import { bindInput, cn, toggleVariants } from '@semantic-components/ui';
+import { bindInput, cn, injectPreset } from '@semantic-components/ui';
 import { SC_EDITOR } from './editor';
 
 export type ScEditorListType = 'bulletList' | 'orderedList' | 'taskList';
@@ -29,6 +29,7 @@ const LIST_TYPES: ScEditorListType[] = [
   },
 })
 export class ScEditorList {
+  private readonly toggleStyles = injectPreset().toggle;
   private readonly editor = inject(SC_EDITOR);
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -49,7 +50,7 @@ export class ScEditorList {
 
   protected readonly class = computed(() =>
     cn(
-      toggleVariants({ variant: 'default', size: 'default' }),
+      this.toggleStyles({ variant: 'default', size: 'default' }),
       this.classInput(),
     ),
   );

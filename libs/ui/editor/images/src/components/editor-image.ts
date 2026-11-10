@@ -1,6 +1,6 @@
 import { ToolbarWidget } from '@angular/aria/toolbar';
 import { DOCUMENT, Directive, computed, inject, input } from '@angular/core';
-import { bindInput, cn, toggleVariants } from '@semantic-components/ui';
+import { bindInput, cn, injectPreset } from '@semantic-components/ui';
 import {
   SC_EDITOR,
   ɵassertEditorFeature,
@@ -25,6 +25,7 @@ import { ScEditorUploads } from './editor-uploads';
   },
 })
 export class ScEditorImage {
+  private readonly toggleStyles = injectPreset().toggle;
   private readonly editor = inject(SC_EDITOR);
   private readonly document = inject(DOCUMENT);
   private readonly uploads = inject(ScEditorUploads, { optional: true });
@@ -34,7 +35,7 @@ export class ScEditorImage {
 
   protected readonly class = computed(() =>
     cn(
-      toggleVariants({ variant: 'default', size: 'default' }),
+      this.toggleStyles({ variant: 'default', size: 'default' }),
       this.classInput(),
     ),
   );

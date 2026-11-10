@@ -52,6 +52,7 @@ import { table } from './table';
 /** The sera preset: `provideSemanticComponents({ preset: sera })`. */
 import { tabs } from './tabs';
 import { textarea } from './textarea';
+import { toggle } from './toggle';
 import { tooltip } from './tooltip';
 import { trace } from './trace';
 
@@ -107,6 +108,7 @@ export const sera: ScPreset = {
   table,
   tabs,
   textarea,
+  toggle,
   tooltip,
   trace,
 };

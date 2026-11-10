@@ -20,21 +20,29 @@ import { OutlineToggleDemo } from './outline-toggle-demo';
 export class OutlineToggleDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScToggle } from '@semantic-components/ui';
-import { SiItalicIcon } from '@semantic-icons/lucide-icons';
+import { SiBoldIcon, SiItalicIcon } from '@semantic-icons/lucide-icons';
 
+/** variant="outline": a border round it. */
 @Component({
   selector: 'app-outline-toggle-demo',
-  imports: [ScToggle, SiItalicIcon],
+  imports: [ScToggle, SiBoldIcon, SiItalicIcon],
   template: \`
-    <button scToggle variant="outline" [(pressed)]="italic">
-      <svg siItalicIcon></svg>
-      <span class="sr-only">Toggle italic</span>
-    </button>
+    <div class="flex flex-wrap items-center gap-2">
+      <button scToggle variant="outline" [(pressed)]="italic">
+        <svg siItalicIcon></svg>
+        Italic
+      </button>
+      <button scToggle variant="outline" [(pressed)]="bold">
+        <svg siBoldIcon></svg>
+        Bold
+      </button>
+    </div>
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
 export class OutlineToggleDemo {
-  readonly italic = signal(false);
+  protected readonly italic = signal(false);
+  protected readonly bold = signal(false);
 }`;
 }

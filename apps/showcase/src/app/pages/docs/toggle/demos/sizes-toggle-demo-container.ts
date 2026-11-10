@@ -20,25 +20,16 @@ import { SizesToggleDemo } from './sizes-toggle-demo';
 export class SizesToggleDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScToggle } from '@semantic-components/ui';
-import { SiBoldIcon } from '@semantic-icons/lucide-icons';
 
+/** size: sm, default, lg. */
 @Component({
   selector: 'app-sizes-toggle-demo',
-  imports: [ScToggle, SiBoldIcon],
+  imports: [ScToggle],
   template: \`
-    <div class="flex items-center gap-2">
-      <button scToggle size="sm">
-        <svg siBoldIcon></svg>
-        <span class="sr-only">Toggle small</span>
-      </button>
-      <button scToggle size="default">
-        <svg siBoldIcon></svg>
-        <span class="sr-only">Toggle default</span>
-      </button>
-      <button scToggle size="lg">
-        <svg siBoldIcon></svg>
-        <span class="sr-only">Toggle large</span>
-      </button>
+    <div class="flex flex-wrap items-center gap-2">
+      <button scToggle variant="outline" size="sm">Small</button>
+      <button scToggle variant="outline" size="default">Default</button>
+      <button scToggle variant="outline" size="lg">Large</button>
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },

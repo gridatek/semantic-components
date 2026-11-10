@@ -59,7 +59,8 @@ import { SiCameraIcon, SiCameraOffIcon } from '@semantic-icons/lucide-icons';
       >
         @for (kind of kinds; track kind.id) {
           <label scRadioField>
-            <input type="radio"
+            <input
+              type="radio"
               scRadio
               [value]="kind.id"
               [formField]="settingsForm.kind"

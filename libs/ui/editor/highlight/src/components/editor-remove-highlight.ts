@@ -1,5 +1,5 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { cn, toggleVariants } from '@semantic-components/ui';
+import { cn, injectPreset } from '@semantic-components/ui';
 import {
   SC_EDITOR,
   ɵassertEditorFeature,
@@ -19,6 +19,7 @@ import {
   },
 })
 export class ScEditorRemoveHighlight {
+  private readonly toggleStyles = injectPreset().toggle;
   private readonly editor = inject(SC_EDITOR);
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -29,7 +30,7 @@ export class ScEditorRemoveHighlight {
 
   protected readonly class = computed(() =>
     cn(
-      toggleVariants({ variant: 'default', size: 'sm' }),
+      this.toggleStyles({ variant: 'default', size: 'sm' }),
       'rounded-full',
       this.classInput(),
     ),

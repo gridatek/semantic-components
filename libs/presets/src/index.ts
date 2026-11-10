@@ -435,6 +435,11 @@ export interface ScSliderStyles {
   thumb: string;
 }
 
+/** A toggle's look: its variants, the same in every style. */
+export type ScToggleVariant = 'default' | 'outline';
+/** A toggle's size. */
+export type ScToggleSize = 'default' | 'sm' | 'lg';
+
 /** A preset: the components' classes in one of shadcn's styles. */
 export interface ScPreset {
   accordion: ScAccordionStyles;
@@ -506,6 +511,11 @@ export interface ScPreset {
   tabs: ScTabsStyles;
   /** A multi-line text field. */
   textarea: string;
+  /** A toggle's look (shadcn's toggleVariants): a button that stays pressed. */
+  toggle: (props: {
+    variant?: ScToggleVariant | null;
+    size?: ScToggleSize | null;
+  }) => string;
   tooltip: ScTooltipStyles;
   trace: ScTraceStyles;
 }

@@ -62,10 +62,7 @@ import {
       </div>
       <label scLabel>
         <div scField orientation="horizontal">
-          <input
-            scCheckbox
-            [formField]="termsForm.notifications"
-          />
+          <input scCheckbox [formField]="termsForm.notifications" />
           <div scFieldBody>
             <div scFieldTitle>تفعيل الإشعارات</div>
             <p scFieldDescription>
