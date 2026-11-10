@@ -6395,10 +6395,52 @@ export const demosRoutes: Route[] = [
     path: 'demos/toolbar',
     children: [
       {
-        path: 'basic-toolbar-demo',
+        path: 'toolbar-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/toolbar/demos/basic-toolbar-demo').then(
-            (m) => m.BasicToolbarDemo,
+          import('../pages/docs/toolbar/demos/toolbar-usage-demo').then(
+            (m) => m.ToolbarUsageDemo,
+          ),
+      },
+      {
+        path: 'menu-toolbar-demo',
+        loadComponent: () =>
+          import('../pages/docs/toolbar/demos/menu-toolbar-demo').then(
+            (m) => m.MenuToolbarDemo,
+          ),
+      },
+      {
+        path: 'tooltip-toolbar-demo',
+        loadComponent: () =>
+          import('../pages/docs/toolbar/demos/tooltip-toolbar-demo').then(
+            (m) => m.TooltipToolbarDemo,
+          ),
+      },
+      {
+        path: 'input-toolbar-demo',
+        loadComponent: () =>
+          import('../pages/docs/toolbar/demos/input-toolbar-demo').then(
+            (m) => m.InputToolbarDemo,
+          ),
+      },
+      {
+        path: 'vertical-toolbar-demo',
+        loadComponent: () =>
+          import('../pages/docs/toolbar/demos/vertical-toolbar-demo').then(
+            (m) => m.VerticalToolbarDemo,
+          ),
+      },
+      {
+        path: 'disabled-toolbar-demo',
+        loadComponent: () =>
+          import('../pages/docs/toolbar/demos/disabled-toolbar-demo').then(
+            (m) => m.DisabledToolbarDemo,
+          ),
+      },
+      {
+        path: 'rtl-toolbar-demo',
+        loadComponent: () =>
+          import('../pages/docs/toolbar/demos/rtl-toolbar-demo').then(
+            (m) => m.RtlToolbarDemo,
           ),
       },
     ],

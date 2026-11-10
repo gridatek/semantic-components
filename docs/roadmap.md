@@ -2,7 +2,7 @@
 
 Every component brought to the same bar: shadcn's look, tested, mobile first, right to left, in light and dark, rendered on the server. One component at a time, in the order the user names, each through [component-rewrite-process.md](component-rewrite-process.md). Two lists: the components shadcn has (**List 1**: its look and parts are the reference), and the ones it doesn't (**List 2**: shadcn's tokens and patterns, our design). The order of each list is the user's work order: changed only by hand, in this document — `scripts/roadmap.mjs` keeps every row where it is, refreshes its columns, and adds a new component at the end of its list; **Built on** (the components it imports, and those it shapes inside it — the `data-slot` its styles, or its preset's, read: a button group shapes its buttons, input groups and selects) and **Parts** (the components, directives and services it declares) show where it sits. Each row ticked when it meets the definition of done.
 
-Inventory (151 components): 63 with a shadcn counterpart · 135 with e2e demo tests · 151 with a page axe test · 63 with an RTL demo.
+Inventory (151 components): 63 with a shadcn counterpart · 135 with e2e demo tests · 151 with a page axe test · 64 with an RTL demo.
 
 ## The two lists
 
@@ -201,7 +201,7 @@ The components shadcn doesn't have: shadcn's tokens and patterns, our parts.
 |  73 | [Time Input](../apps/showcase/src/app/pages/docs/time-input)                       | ui      | field                                                                   |     1 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 |  74 | [Time Picker](../apps/showcase/src/app/pages/docs/time-picker)                     | ui      | button, input-group, popover, time-input                                |     3 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 |  75 | [Timeline](../apps/showcase/src/app/pages/docs/timeline)                           | ui      | —                                                                       |     8 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
-|  76 | [Toolbar](../apps/showcase/src/app/pages/docs/toolbar)                             | ui      | toggle                                                                  |     4 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
+|  76 | [Toolbar](../apps/showcase/src/app/pages/docs/toolbar)                             | ui      | frame, toggle                                                           |     4 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] | waiting |
 |  77 | [Tour Guide](../apps/showcase/src/app/pages/docs/tour-guide)                       | ui      | button                                                                  |     7 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 |  78 | [Transfer List](../apps/showcase/src/app/pages/docs/transfer-list)                 | ui      | button                                                                  |     9 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 |  79 | [Tree](../apps/showcase/src/app/pages/docs/tree)                                   | ui      | —                                                                       |     8 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |

@@ -24,7 +24,7 @@ One Tab stop (the pressed item, or the first): the arrow keys move between the i
 
 **We follow Base UI here, not Angular Aria.** Angular Aria's Toolbar has the same keys, but it makes its host a `role="toolbar"`: a toolbar is its own component (`scToolbar`), so the toggle group stays Base UI's group, with the CDK's key manager.
 
-Inside a toolbar, use the toolbar's toggle group (`scToolbarToggleGroup`): its items share the toolbar's Tab stop and arrow keys (Angular Aria's Toolbar). The two are the consumer's choice: a toggle group on its own, or a toolbar.
+Inside a toolbar, use a widget group in the toolbar (`scToolbarWidgetGroup`): its items share the toolbar's Tab stop and arrow keys (Angular Aria's Toolbar). The two are the consumer's choice: a toggle group on its own, or a toolbar.
 
 ## Accessibility
 

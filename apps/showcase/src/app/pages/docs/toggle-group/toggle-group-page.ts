@@ -69,8 +69,8 @@ import { VerticalToggleGroupDemoContainer } from './demos/vertical-toggle-group-
         <p class="text-muted-foreground">
           A group round your buttons, each with its value; the group holds the
           pressed ones — a [formField] or [(value)], an array. Inside a toolbar,
-          use the toolbar&apos;s toggle group: it shares the toolbar&apos;s
-          arrow keys.
+          use a widget group in the toolbar: it shares the toolbar&apos;s arrow
+          keys.
         </p>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
@@ -92,9 +92,9 @@ import { VerticalToggleGroupDemoContainer } from './demos/vertical-toggle-group-
             The keyboard follows Base UI&apos;s toggle group
             (role=&quot;group&quot;, the CDK&apos;s FocusKeyManager), not
             Angular Aria&apos;s Toolbar: a toolbar is its own component
-            (scToolbar), with its own toggle group (scToolbarToggleGroup)
-            sharing the toolbar&apos;s Tab stop and arrow keys. You choose: a
-            toggle group on its own, or a toolbar.
+            (scToolbar), with its widget group (scToolbarWidgetGroup) sharing
+            the toolbar&apos;s Tab stop and arrow keys. You choose: a toggle
+            group on its own, or a toolbar.
           </li>
         </ul>
       </section>

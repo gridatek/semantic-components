@@ -1,41 +1,45 @@
 import { Toolbar } from '@angular/aria/toolbar';
-import {
-  Component,
-  ViewEncapsulation,
-  computed,
-  inject,
-  input,
-  model,
-} from '@angular/core';
+import { Directionality } from '@angular/cdk/bidi';
+import { Directive, computed, inject, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
+import { ScElementDirectionality } from '../../utils/element-directionality/element-directionality';
 
-@Component({
+/**
+ * A toolbar: Angular Aria's Toolbar — one Tab stop, the arrow keys move
+ * between its widgets (mirrored right to left; Up and Down when vertical),
+ * wrapping at the ends (`loopFocus`). Disabled widgets stay focusable
+ * (`softDisabled`). Its widgets are any parts made `scToolbarWidget`.
+ */
+@Directive({
   selector: 'div[scToolbar]',
+  // Its own direction (a dir="rtl" section too): the arrows mirrored there.
+  providers: [{ provide: Directionality, useClass: ScElementDirectionality }],
   hostDirectives: [
     {
       directive: Toolbar,
-      inputs: ['orientation', 'disabled', 'wrap', 'softDisabled'],
+      inputs: ['orientation', 'disabled', 'softDisabled', 'wrap: loopFocus'],
     },
   ],
-  template: ` <ng-content /> `,
   host: {
+    'data-slot': 'toolbar',
     '[attr.data-orientation]': 'toolbar.orientation()',
     '[class]': 'class()',
   },
-  encapsulation: ViewEncapsulation.None,
 })
 export class ScToolbar {
+  private readonly frame = injectPreset().frame;
   protected readonly toolbar = inject(Toolbar);
-
-  /** Values of the currently pressed toggles. */
-  readonly values = model<string[]>([]);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
     cn(
-      'flex w-fit items-center gap-1 rounded-lg border bg-background p-1',
-      this.toolbar.orientation() === 'vertical' && 'flex-col items-stretch',
+      this.frame,
+      'flex w-fit gap-1 bg-background p-1',
+      this.toolbar.orientation() === 'vertical'
+        ? 'flex-col items-stretch'
+        : 'items-center',
       this.classInput(),
     ),
   );

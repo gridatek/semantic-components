@@ -596,9 +596,20 @@ Rewritten 2026-11-10, in place (the user): shadcn's look, Base UI's API.
 
 - **The `toggleGroup` preset key** (`group`, `item`): each style's `toggle-group.tsx` classes as they are — corners (lg, md, 3xl, 2xl, none), the joined items' padding and shadow, `data-[state=on]`; the items' look stays the `toggle` key's.
 - **Base UI's API**: `value` always an array, `multiple` (a boolean) for Radix's `type` — "single" gone; one pressed can be released (none). The group a Signal Forms control (`FormValueControl<T[]>`: `[formField]` on the group), values of any type; `touch` when focus leaves it. `spacing` defaults to 2, as shadcn's.
-- **Keyboard**: one Tab stop, the arrows, Home / End, `loopFocus` — the CDK's `FocusKeyManager` (`role="group"`, as Base UI). Angular Aria's Toolbar was weighed: its `role="toolbar"` is the toolbar's; the consumer chooses between a toggle group and a toolbar (`scToolbarToggleGroup`), each with one keyboard (the user).
+- **Keyboard**: one Tab stop, the arrows, Home / End, `loopFocus` — the CDK's `FocusKeyManager` (`role="group"`, as Base UI). Angular Aria's Toolbar was weighed: its `role="toolbar"` is the toolbar's; the consumer chooses between a toggle group and a toolbar (`scToolbarWidgetGroup`), each with one keyboard (the user).
 - **Migrated**: `type="single"` dropped, `type="multiple"` → `multiple`, single string values → one-item arrays (`[value]="[x()]"`, `$event[0]`) in the demos (PDF viewer, editor, Gantt, charts, card, diff viewer, code editor, components list) and the PDF viewer's settings part.
 - **shadcn's examples**: Demo (the Usage), Outline, Sizes, Spacing, Vertical, Disabled, Font weight selector, RTL; ours kept: Single, Multiple.
+
+## Toolbar: rewritten
+
+Rewritten 2026-11-10, in place. shadcn has none; Base UI's Toolbar for the features, Angular Aria's Toolbar for the keyboard and the names (the user: generic, a widget of any kind, mixed in a group).
+
+- **Parts**: `scToolbar` (Aria `Toolbar`), `scToolbarWidget` (Aria `ToolbarWidget`, on any element), `scToolbarWidgetGroup` (Aria `ToolbarWidgetGroup`), `scToolbarSeparator`. A widget's look and state are the part beside it — `scButton`, `scToggle`, `scLink`, `scInput`, a trigger — Base UI's `render` done the Angular way.
+- **Toggles in a widget group**: the group holds their pressed values (an array, `multiple`, `FormValueControl`), `scToggle` with a `value` reads it (the `SC_TOGGLE_VALUES` token). Gone: `ScToolbarToggle`, `ScToolbarToggleGroup`, the toolbar-level `values`.
+- **Base UI's features kept**: `loopFocus` (Aria's `wrap`), disabled widgets still focusable (Aria's `softDisabled`, Base UI's `focusableWhenDisabled`), a group with `disabled`, the input last.
+- **Fixed on the way**: `scLink` in a toolbar takes the widget's roving tabindex (its own binding made it a second Tab stop); `ScElementDirectionality` sets the CDK's `valueSignal` from the element (Aria reads it): the arrows mirrored in a `dir="rtl"` section.
+- **Look**: the preset's `frame` (each style's card corners and ring), `p-1 gap-1`.
+- **Examples**: Base UI's Usage (alignment toggles, $ and % buttons, a font Select, a link), With Menu, With Tooltip, With input; ours: Vertical, Disabled, RTL.
 
 ## Input Button: restyled
 

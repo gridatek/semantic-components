@@ -1,3 +1,4 @@
+import { ToolbarWidget } from '@angular/aria/toolbar';
 import {
   DestroyRef,
   Directive,
@@ -24,12 +25,18 @@ import { type ScButtonVariants } from '../button';
     // A button's look: read by the button group's styles, as a button's.
     'data-slot': 'button',
     '[attr.aria-disabled]': 'disabled() || null',
-    '[attr.tabindex]': 'disabled() ? -1 : null',
+    '[attr.tabindex]': 'tabIndex()',
     '[class]': 'class()',
   },
 })
 export class ScLink {
   private readonly buttonStyles = injectPreset().button;
+  // A toolbar's widget: its roving tabindex (one Tab stop for the toolbar),
+  // which this binding would otherwise override.
+  private readonly widget = inject(ToolbarWidget, {
+    self: true,
+    optional: true,
+  });
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('default');
@@ -38,6 +45,10 @@ export class ScLink {
   readonly disabled = input<boolean, unknown>(false, {
     transform: booleanAttribute,
   });
+
+  protected readonly tabIndex = computed(() =>
+    this.widget ? this.widget._pattern.tabIndex() : this.disabled() ? -1 : null,
+  );
 
   protected readonly class = computed(() =>
     cn(

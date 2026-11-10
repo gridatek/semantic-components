@@ -1,5 +1,5 @@
 import { type Direction, Directionality } from '@angular/cdk/bidi';
-import { ElementRef, Service, inject } from '@angular/core';
+import { ElementRef, Service, afterNextRender, inject } from '@angular/core';
 
 /**
  * The direction an element is laid out in: `rtl` under any `dir="rtl"`
@@ -18,6 +18,8 @@ export function elementDirection(element: Element): Direction {
  * overlay provides this instead, so the overlay's `start` and `end` follow a
  * `dir="rtl"` container too:
  * `providers: [{ provide: Directionality, useClass: ScElementDirectionality }]`.
+ * Its `valueSignal` too, once rendered: Angular Aria reads that (a toolbar's
+ * arrows mirrored right to left).
  */
 @Service({ autoProvided: false })
 export class ScElementDirectionality extends Directionality {
@@ -25,5 +27,11 @@ export class ScElementDirectionality extends Directionality {
 
   override get value(): Direction {
     return elementDirection(this.host);
+  }
+
+  constructor() {
+    super();
+    // Laid out only once rendered: read then.
+    afterNextRender(() => this.valueSignal.set(elementDirection(this.host)));
   }
 }
