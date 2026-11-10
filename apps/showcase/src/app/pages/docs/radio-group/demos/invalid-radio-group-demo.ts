@@ -25,32 +25,17 @@ import {
     <fieldset scFieldset class="w-full max-w-xs">
       <legend scLegend variant="label">Notification Preferences</legend>
       <p scFieldDescription>Choose how you want to receive notifications.</p>
-      <div scRadioGroup>
+      <div scRadioGroup [formField]="notifyForm.notify">
         <label scRadioField>
-          <input
-            type="radio"
-            scRadio
-            value="email"
-            [formField]="notifyForm.notify"
-          />
+          <input scRadio value="email" />
           Email only
         </label>
         <label scRadioField>
-          <input
-            type="radio"
-            scRadio
-            value="sms"
-            [formField]="notifyForm.notify"
-          />
+          <input scRadio value="sms" />
           SMS only
         </label>
         <label scRadioField>
-          <input
-            type="radio"
-            scRadio
-            value="both"
-            [formField]="notifyForm.notify"
-          />
+          <input scRadio value="both" />
           Both Email &amp; SMS
         </label>
       </div>

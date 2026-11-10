@@ -263,26 +263,17 @@ import {
       <span id="captions-label" class="text-muted-foreground">Captions:</span>
       <div
         scRadioGroup
+        [formField]="settingsForm.captions"
         orientation="horizontal"
         aria-labelledby="captions-label"
       >
         <label scRadioField>
-          <input
-            type="radio"
-            scRadio
-            value="off"
-            [formField]="settingsForm.captions"
-          />
+          <input scRadio value="off" />
           Off
         </label>
         @for (track of player.tracks(); track track.id) {
           <label scRadioField>
-            <input
-              type="radio"
-              scRadio
-              [value]="track.id"
-              [formField]="settingsForm.captions"
-            />
+            <input scRadio [value]="track.id" />
             {{ track.label }}
           </label>
         }

@@ -40,34 +40,24 @@ import {
     ScRadioGroup,
   ],
   template: \`
-    <div scRadioGroup aria-label="Spacing" class="w-fit">
+    <div
+      scRadioGroup
+      [formField]="spacingForm.spacing"
+      aria-label="Spacing"
+      class="w-fit"
+    >
       <div scRadioField>
-        <input
-          type="radio"
-          scRadio
-          value="default"
-          [formField]="spacingForm.spacing"
-        />
+        <input scRadio value="default" />
         <label scLabel>Default</label>
         <p scFieldDescription>Standard spacing for most use cases.</p>
       </div>
       <div scRadioField>
-        <input
-          type="radio"
-          scRadio
-          value="comfortable"
-          [formField]="spacingForm.spacing"
-        />
+        <input scRadio value="comfortable" />
         <label scLabel>Comfortable</label>
         <p scFieldDescription>More space between elements.</p>
       </div>
       <div scRadioField>
-        <input
-          type="radio"
-          scRadio
-          value="compact"
-          [formField]="spacingForm.spacing"
-        />
+        <input scRadio value="compact" />
         <label scLabel>Compact</label>
         <p scFieldDescription>Minimal spacing for dense layouts.</p>
       </div>

@@ -47,32 +47,17 @@ import {
       <p scFieldDescription>
         Yearly and lifetime plans offer significant savings.
       </p>
-      <div scRadioGroup>
+      <div scRadioGroup [formField]="planForm.plan">
         <label scRadioField>
-          <input
-            type="radio"
-            scRadio
-            value="monthly"
-            [formField]="planForm.plan"
-          />
+          <input scRadio value="monthly" />
           Monthly ($9.99/month)
         </label>
         <label scRadioField>
-          <input
-            type="radio"
-            scRadio
-            value="yearly"
-            [formField]="planForm.plan"
-          />
+          <input scRadio value="yearly" />
           Yearly ($99.99/year)
         </label>
         <label scRadioField>
-          <input
-            type="radio"
-            scRadio
-            value="lifetime"
-            [formField]="planForm.plan"
-          />
+          <input scRadio value="lifetime" />
           Lifetime ($299.99)
         </label>
       </div>

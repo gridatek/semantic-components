@@ -1,276 +1,51 @@
 # Radio Group
 
-A set of checkable buttons where only one button can be checked at a time.
-
-In the look of the app's preset (`radioGroup` key: the group's gap, the radio and its dot, shadcn's in each of the eight styles — luma's and rhea's filled, sera's a ring with a dark dot). The radio is a native input (`appearance-none`), its dot the `::before`; a radio field's text takes the `label` preset, at normal weight.
-
-## Components
-
-- `ScRadioGroup` - Container directive that provides radiogroup semantics (applied to div)
-- `ScRadioField` - Container component for each radio option (applied to div or label)
-- `ScRadio` - Directive for styling native radio inputs (applied to input[type="radio"])
+One choice among several: native radios in the look of the app's preset (the `radioGroup` key: `group`, `item`, `dot` — the radio draws itself, its dot the `::before`). The group holds the choice: a `[formField]` or `[(value)]` on the group, a `value` on each radio.
 
 ## Usage
 
-```typescript
-import { Component, signal } from '@angular/core';
-import { FormField, form } from '@angular/forms/signals';
-import { ScRadio, ScRadioField, ScRadioGroup } from '@semantic-components/ui';
-
-interface FormModel {
-  option: string;
-}
-
-@Component({
-  imports: [ScRadioGroup, ScRadioField, ScRadio, FormField],
-  template: `
-    <div scRadioGroup>
-      <label scRadioField>
-        <input type="radio" scRadio value="option1" [formField]="optionForm.option" />
-        Option 1
-      </label>
-      <label scRadioField>
-        <input type="radio" scRadio value="option2" [formField]="optionForm.option" />
-        Option 2
-      </label>
-      <label scRadioField>
-        <input type="radio" scRadio value="option3" [formField]="optionForm.option" />
-        Option 3
-      </label>
-    </div>
-    <p>Selected: {{ formModel().option }}</p>
-  `,
-})
-export class MyComponent {
-  readonly formModel = signal<FormModel>({ option: 'option1' });
-  readonly optionForm = form(this.formModel);
-}
+```html
+<div scRadioGroup [formField]="spacingForm.spacing" aria-label="Spacing">
+  <label scRadioField>
+    <input scRadio value="default" />
+    Default
+  </label>
+  <label scRadioField>
+    <input scRadio value="comfortable" />
+    Comfortable
+  </label>
+</div>
 ```
 
-## Horizontal Layout
+A radio field with a description is a `div`: `<label scLabel>` and `<p scFieldDescription>` inside, read with the radio.
+
+## Parts
+
+| Part           | Selector                                 | What it does                                                                                                                                                                                                    |
+| -------------- | ---------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ScRadioGroup` | `div[scRadioGroup]`                      | `role="radiogroup"`; the choice: `value` (a `[formField]`, or two-way); `orientation`; `disabled`. Checks the radio whose value matches, names its radios alike, invalid once touched (focus leaving the group) |
+| `ScRadioField` | `label[scRadioField], div[scRadioField]` | A radio beside its text (a label), or its label and description (a div); the preset's label look, normal weight                                                                                                 |
+| `ScRadio`      | `input[scRadio]`                         | A native radio (its own `type`), in the preset's look: `value` (its option, any type), `disabled`                                                                                                               |
+
+## Why the group holds the choice
+
+Signal Forms also binds a native radio itself — a `[formField]` on each radio, all on the same field (the Angular way). That still works here, but each radio then needs `type="radio"` written in the template: Angular's template type-checker types a native input's `[formField]` by the `type` it sees in the template (`string` for a radio), not by the part's own type — without it the input counts as text, and a field typed as a union (`'off' | 'all' | 'one'`) doesn't compile.
+
+So the group is the control: `ScRadioGroup` implements `FormValueControl`, Signal Forms types the field by the group's `value` (any type, unions too), and the markup needs no `type` and one `[formField]` — as Base UI and shadcn, where the group holds the value.
 
 ```html
-<div scRadioGroup orientation="horizontal">
+<!-- The Angular way: still works, with type="radio" on each -->
+<div scRadioGroup aria-label="Spacing">
   <label scRadioField>
-    <input type="radio" scRadio value="all" [formField]="filterForm.filter" />
-    All
+    <input type="radio" scRadio value="default" [formField]="form.spacing" />
+    Default
   </label>
-  <label scRadioField>
-    <input type="radio" scRadio value="unread" [formField]="filterForm.filter" />
-    Unread
-  </label>
+  …
 </div>
 ```
-
-## Disabled
-
-```html
-<!-- Disable entire group using fieldset -->
-<fieldset disabled>
-  <div scRadioGroup>
-    <label scRadioField>
-      <input type="radio" scRadio value="option1" [formField]="optionForm.option" />
-      Option 1
-    </label>
-    <label scRadioField>
-      <input type="radio" scRadio value="option2" [formField]="optionForm.option" />
-      Option 2
-    </label>
-  </div>
-</fieldset>
-
-<!-- Disable individual items (without formField) -->
-<div scRadioGroup>
-  <label scRadioField>
-    <input type="radio" scRadio value="option1" [formField]="optionForm.option" />
-    Option 1
-  </label>
-  <label scRadioField>
-    <input type="radio" scRadio value="option2" disabled />
-    Option 2 (disabled)
-  </label>
-</div>
-```
-
-**Note:** The `disabled` attribute cannot be used on inputs with `[formField]`. To disable individual form-connected radio buttons, remove `[formField]` and use the native `disabled` attribute.
-
-## With Accessible Label
-
-```html
-<!-- Using aria-label -->
-<div scRadioGroup aria-label="Choose your theme">
-  <label scRadioField>
-    <input type="radio" scRadio value="light" [formField]="themeForm.theme" />
-    Light
-  </label>
-  <label scRadioField>
-    <input type="radio" scRadio value="dark" [formField]="themeForm.theme" />
-    Dark
-  </label>
-</div>
-
-<!-- Using aria-labelledby with a visible heading -->
-<div>
-  <h3 id="theme-heading">Choose your theme</h3>
-  <div scRadioGroup aria-labelledby="theme-heading">
-    <label scRadioField>
-      <input type="radio" scRadio value="light" [formField]="themeForm.theme" />
-      Light
-    </label>
-    <label scRadioField>
-      <input type="radio" scRadio value="dark" [formField]="themeForm.theme" />
-      Dark
-    </label>
-  </div>
-</div>
-```
-
-## API
-
-### ScRadioGroup
-
-Container directive for radio buttons that provides radiogroup semantics.
-
-**Selector:** `div[scRadioGroup]`
-
-**Inputs:**
-
-| Input         | Type                         | Default      | Description                         |
-| ------------- | ---------------------------- | ------------ | ----------------------------------- |
-| `class`       | `string`                     | `''`         | Additional CSS classes              |
-| `orientation` | `'vertical' \| 'horizontal'` | `'vertical'` | Layout direction of the radio group |
-
-**Host Attributes:**
-
-- `role="radiogroup"` - Provides semantic grouping for screen readers
-- You can add `aria-label` or `aria-labelledby` directly to the element
-
-### ScRadioField
-
-Container component for each radio option. Can be applied to `div` or `label` elements.
-
-**Selector:** `div[scRadioField], label[scRadioField]`
-
-**Inputs:**
-
-| Input   | Type     | Default | Description            |
-| ------- | -------- | ------- | ---------------------- |
-| `class` | `string` | `''`    | Additional CSS classes |
-
-### ScRadio
-
-Directive for styling native radio inputs. Apply to `input[type="radio"]` elements.
-
-**Selector:** `input[type="radio"][scRadio]`
-
-**Inputs:**
-
-| Input              | Type     | Default | Description                          |
-| ------------------ | -------- | ------- | ------------------------------------ |
-| `id`               | `string` | `''`    | Element ID (auto-generated if empty) |
-| `class`            | `string` | `''`    | Additional CSS classes               |
-| `aria-describedby` | `string` | `''`    | IDs of describing elements           |
-
-**State Management:**
-
-- Use `[formField]` from Signal Forms (`@angular/forms/signals`) to bind the group to a model field
-- All native input attributes are supported (`name`, `value`, `checked`, etc.); constraints such as `required` and `disabled` are declared in the `form()` schema rather than as template attributes
-
-## Customization
-
-The `ScRadio` directive styles the native radio input using CSS. You can customize the appearance by passing custom classes:
-
-```html
-<div scRadioGroup>
-  <label scRadioField>
-    <input type="radio" scRadio class="h-6 w-6 border-2" value="option1" [formField]="myForm.selected" />
-    Custom sized radio
-  </label>
-</div>
-```
-
-For complete custom styling, you can omit the `sc-radio` directive and style the native input directly:
-
-```html
-<div scRadioGroup>
-  <label scRadioField>
-    <input type="radio" class="your-custom-classes" value="option1" [formField]="myForm.selected" />
-    Fully custom radio
-  </label>
-</div>
-```
-
-### Theming with CSS Variables
-
-You can customize the radio button colors by setting CSS custom properties (variables) on a parent element:
-
-```html
-<!-- Purple theme -->
-<div style="--primary: oklch(0.6 0.25 280); --primary-foreground: oklch(0.985 0 0);">
-  <div scRadioGroup>
-    <label scRadioField>
-      <input type="radio" scRadio value="option1" [formField]="myForm.selected" />
-      Option 1
-    </label>
-  </div>
-</div>
-
-<!-- Green theme -->
-<div style="--primary: oklch(0.5 0.18 145); --primary-foreground: oklch(0.985 0 0);">
-  <div scRadioGroup>
-    <label scRadioField>
-      <input type="radio" scRadio value="option1" [formField]="myForm.selected" />
-      Option 1
-    </label>
-  </div>
-</div>
-```
-
-**Available CSS Variables:**
-
-| Variable               | Usage                                          |
-| ---------------------- | ---------------------------------------------- |
-| `--primary`            | Border color and checked indicator background  |
-| `--primary-foreground` | Foreground color (not used in default styling) |
-| `--ring`               | Focus ring color                               |
-
-## Data Attributes
-
-Some components have a `data-slot` attribute used for CSS targeting by parent components. `data-slot` is not mandatory — it is only added when referenced by another component's styles. See [data-slot-pattern.md](../../../../../../docs/data-slot-pattern.md) for details.
-
-| Component    | data-slot     | Used by                             |
-| ------------ | ------------- | ----------------------------------- |
-| ScRadioGroup | `radio-group` | `fieldset.ts` — reduces gap         |
-| ScRadio      | `radio`       | `radio-field.ts` — grid positioning |
 
 ## Accessibility
 
-- Uses native `<input type="radio">` elements with custom styling via CSS
-- Native radio inputs provide all semantic roles and ARIA attributes automatically
-- Container uses `role="radiogroup"` for group semantics
-- Keyboard accessible via native browser behavior (arrow keys navigate, space/enter to select)
-- Native radio grouping via the `name` attribute ensures only one selection — Signal Forms sets `name` from the bound field, so every radio bound to the same `[formField]` shares a group
-- Works seamlessly with associated `<label>` elements for click-to-focus
-- Full native form integration (submission, validation, autofill)
-- Supports `aria-label` for programmatic group labels (WCAG 4.1.2)
-- Supports `aria-labelledby` to reference visible group labels (WCAG 4.1.2)
-- Visual styling uses CSS `appearance-none` with custom ::before pseudo-element
-- Compatible with all screen readers (NVDA, JAWS, VoiceOver, TalkBack)
-
-## Architecture
-
-The radio group uses a composable directive-based architecture:
-
-```
-div[scRadioGroup] (container with role="radiogroup")
-└── label[scRadioField] (or div[scRadioField]) (for each radio option)
-    └── input[type="radio"][scRadio] (styled native radio input)
-```
-
-This pattern provides:
-
-- **Simplicity**: Minimal abstraction over native HTML
-- **Flexibility**: Use native inputs with standard form integration (Signal Forms `[formField]`)
-- **Accessibility**: Native radio buttons provide full keyboard and screen reader support
-- **Customization**: Direct access to native input attributes and styling
-- **No Magic**: State management is handled through Angular Signal Forms, not internal component state
+- Native radios, named alike by the group: one Tab stop, the arrows move the choice (mirrored right to left), Space picks.
+- Name the group (a fieldset's legend, `aria-label` or `aria-labelledby`); each radio by its label.
+- A description is read with its radio; invalid once the group is touched (`aria-invalid` on its radios).

@@ -51,15 +51,15 @@ import {
   template: \`
     <div class="flex items-center gap-4 text-sm">
       <span id="format-label" class="text-muted-foreground">Format:</span>
-      <div scRadioGroup orientation="horizontal" aria-labelledby="format-label">
+      <div
+        scRadioGroup
+        [formField]="settingsForm.format"
+        orientation="horizontal"
+        aria-labelledby="format-label"
+      >
         @for (format of formats; track format) {
           <label scRadioField>
-            <input
-              type="radio"
-              scRadio
-              [value]="format"
-              [formField]="settingsForm.format"
-            />
+            <input scRadio [value]="format" />
             {{ format }}
           </label>
         }

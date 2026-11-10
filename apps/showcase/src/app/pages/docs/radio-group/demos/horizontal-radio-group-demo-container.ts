@@ -30,32 +30,17 @@ interface FilterFormModel {
   selector: 'app-horizontal-radio-group-demo',
   imports: [ScRadioGroup, ScRadioField, ScRadio, FormField],
   template: \`
-    <div scRadioGroup orientation="horizontal">
+    <div scRadioGroup [formField]="filterForm.filter" orientation="horizontal">
       <label scRadioField>
-        <input
-          type="radio"
-          scRadio
-          value="all"
-          [formField]="filterForm.filter"
-        />
+        <input scRadio value="all" />
         All
       </label>
       <label scRadioField>
-        <input
-          type="radio"
-          scRadio
-          value="unread"
-          [formField]="filterForm.filter"
-        />
+        <input scRadio value="unread" />
         Unread
       </label>
       <label scRadioField>
-        <input
-          type="radio"
-          scRadio
-          value="archived"
-          [formField]="filterForm.filter"
-        />
+        <input scRadio value="archived" />
         Archived
       </label>
     </div>

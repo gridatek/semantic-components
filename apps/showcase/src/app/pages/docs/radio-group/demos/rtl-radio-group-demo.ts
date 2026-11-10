@@ -21,34 +21,24 @@ import {
   ],
   template: `
     <div dir="rtl" lang="ar">
-      <div scRadioGroup aria-label="التباعد" class="w-fit">
+      <div
+        scRadioGroup
+        [formField]="spacingForm.spacing"
+        aria-label="التباعد"
+        class="w-fit"
+      >
         <div scRadioField>
-          <input
-            type="radio"
-            scRadio
-            value="default"
-            [formField]="spacingForm.spacing"
-          />
+          <input scRadio value="default" />
           <label scLabel>افتراضي</label>
           <p scFieldDescription>تباعد قياسي لمعظم حالات الاستخدام.</p>
         </div>
         <div scRadioField>
-          <input
-            type="radio"
-            scRadio
-            value="comfortable"
-            [formField]="spacingForm.spacing"
-          />
+          <input scRadio value="comfortable" />
           <label scLabel>مريح</label>
           <p scFieldDescription>مساحة أكبر بين العناصر.</p>
         </div>
         <div scRadioField>
-          <input
-            type="radio"
-            scRadio
-            value="compact"
-            [formField]="spacingForm.spacing"
-          />
+          <input scRadio value="compact" />
           <label scLabel>مضغوط</label>
           <p scFieldDescription>تباعد أدنى للتخطيطات الكثيفة.</p>
         </div>

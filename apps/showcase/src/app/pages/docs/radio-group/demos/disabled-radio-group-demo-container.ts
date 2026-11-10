@@ -27,27 +27,22 @@ import { ScRadio, ScRadioField, ScRadioGroup } from '@semantic-components/ui';
   selector: 'app-disabled-radio-group-demo',
   imports: [FormField, ScRadio, ScRadioField, ScRadioGroup],
   template: \`
-    <div scRadioGroup aria-label="Options" class="w-fit">
+    <div
+      scRadioGroup
+      [formField]="optionForm.option"
+      aria-label="Options"
+      class="w-fit"
+    >
       <label scRadioField>
-        <input type="radio" scRadio value="option1" disabled />
+        <input scRadio value="option1" disabled />
         Disabled
       </label>
       <label scRadioField>
-        <input
-          type="radio"
-          scRadio
-          value="option2"
-          [formField]="optionForm.option"
-        />
+        <input scRadio value="option2" />
         Option 2
       </label>
       <label scRadioField>
-        <input
-          type="radio"
-          scRadio
-          value="option3"
-          [formField]="optionForm.option"
-        />
+        <input scRadio value="option3" />
         Option 3
       </label>
     </div>

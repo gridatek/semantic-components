@@ -68,7 +68,7 @@ A part on a native `input` sets the input's `type` itself, as a host attribute �
 // <input scSlider [(value)]="volume" aria-label="Volume" />
 ```
 
-Checkbox, Switch and Slider do (2026-11-10). Two exceptions name the type: parts that only add behaviour to someone else's input (`input[type="checkbox"][scDataTableSelectRow]`), and the Radio (`input[type="radio"][scRadio]`) — it is a plain native radio for Signal Forms, which types its `[formField]` by the template's `type`: a union value (`'off' | 'all' | 'one'`) fails to compile without `type="radio"`. Checkbox, Switch and Slider implement Signal Forms' control interfaces, so they are typed by the part.
+Checkbox, Switch, Radio and Slider do (2026-11-10). Parts that only add behaviour to someone else's input still name its type (`input[type="checkbox"][scDataTableSelectRow]`). One limit, Angular's: Signal Forms types a plain native radio's `[formField]` by the template's `type`, so a radio bound to a union value (`'off' | 'all' | 'one'`) without `type="radio"` doesn't compile — so the Radio Group is the control (its `[formField]`, typed by the group); a `[formField]` on each radio, the Angular way, still works with `type="radio"` written (radio-group README).
 
 ## The Consumer Writes the Content
 

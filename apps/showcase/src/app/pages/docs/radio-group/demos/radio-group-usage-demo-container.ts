@@ -22,32 +22,22 @@ import { ScRadio, ScRadioField, ScRadioGroup } from '@semantic-components/ui';
   selector: 'app-radio-group-usage-demo',
   imports: [FormField, ScRadio, ScRadioField, ScRadioGroup],
   template: \`
-    <div scRadioGroup aria-label="Spacing" class="w-fit">
+    <div
+      scRadioGroup
+      [formField]="spacingForm.spacing"
+      aria-label="Spacing"
+      class="w-fit"
+    >
       <label scRadioField>
-        <input
-          type="radio"
-          scRadio
-          value="default"
-          [formField]="spacingForm.spacing"
-        />
+        <input scRadio value="default" />
         Default
       </label>
       <label scRadioField>
-        <input
-          type="radio"
-          scRadio
-          value="comfortable"
-          [formField]="spacingForm.spacing"
-        />
+        <input scRadio value="comfortable" />
         Comfortable
       </label>
       <label scRadioField>
-        <input
-          type="radio"
-          scRadio
-          value="compact"
-          [formField]="spacingForm.spacing"
-        />
+        <input scRadio value="compact" />
         Compact
       </label>
     </div>

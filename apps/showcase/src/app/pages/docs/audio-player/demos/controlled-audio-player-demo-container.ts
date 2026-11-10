@@ -34,11 +34,11 @@ import {
 @Component({
   selector: 'app-controlled-audio-player-demo',
   imports: [
+    FormField,
     ScButton,
     ScRadioGroup,
     ScRadioField,
     ScRadio,
-    FormField,
     ScAudioPlayer,
     ScAudioPlayerMedia,
     ScAudioPlayerSeek,
@@ -98,17 +98,13 @@ import {
         <span id="repeat-label" class="text-muted-foreground">Repeat:</span>
         <div
           scRadioGroup
+          [formField]="settingsForm.repeat"
           orientation="horizontal"
           aria-labelledby="repeat-label"
         >
           @for (mode of modes; track mode) {
             <label scRadioField>
-              <input
-                type="radio"
-                scRadio
-                [value]="mode"
-                [formField]="settingsForm.repeat"
-              />
+              <input scRadio [value]="mode" />
               {{ mode }}
             </label>
           }

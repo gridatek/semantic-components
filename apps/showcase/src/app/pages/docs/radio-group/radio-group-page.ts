@@ -67,8 +67,9 @@ import { RtlRadioGroupDemoContainer } from './demos/rtl-radio-group-demo-contain
       <section class="space-y-4">
         <h2 scHeading appToc>Anatomy</h2>
         <p class="text-muted-foreground">
-          Native radio inputs in your labels; a [formField] binds the choice.
-          The group lays them out; a radio field puts a radio beside its text.
+          Native radio inputs in your labels, each with its value; the group
+          holds the choice — a [formField] or [(value)] on the group. A radio
+          field puts a radio beside its text.
         </p>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
@@ -89,6 +90,20 @@ import { RtlRadioGroupDemoContainer } from './demos/rtl-radio-group-demo-contain
             (aria-invalid, from Signal Forms).
           </li>
         </ul>
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Why the group holds the choice</h2>
+        <p class="text-muted-foreground">
+          Signal Forms can also bind each native radio itself — a [formField] on
+          each, the Angular way. That still works, but each radio then needs
+          type="radio" in your template: Angular types a native input&apos;s
+          [formField] by the type it sees there, so without it a field typed as
+          a union (&apos;off&apos; | &apos;all&apos; | &apos;one&apos;)
+          doesn&apos;t compile. On the group, the field is typed by the
+          group&apos;s value — any type, no type attribute, one [formField] — as
+          Base UI and shadcn, where the group holds the value.
+        </p>
       </section>
 
       <section class="space-y-8">
@@ -155,9 +170,9 @@ export default class RadioGroupPage {
     imports:
       "import { ScRadioGroup, ScRadioField, ScRadio } from '@semantic-components/ui';",
     markup: [
-      '<div scRadioGroup aria-label="…">',
+      '<div scRadioGroup [formField]="…" aria-label="…">',
       '  <label scRadioField>',
-      '    <input type="radio" scRadio value="…" [formField]="…" />',
+      '    <input scRadio value="…" />',
       '    …',
       '  </label>',
       '</div>',
@@ -169,7 +184,7 @@ export default class RadioGroupPage {
       name: 'ScRadioGroup',
       selector: 'div[scRadioGroup]',
       description:
-        "role=\"radiogroup\"; orientation ('vertical', 'horizontal'); disabled.",
+        "role=\"radiogroup\"; the choice: value (a [formField], or two-way); orientation ('vertical', 'horizontal'); disabled. Checks the radio whose value matches, names its radios alike; invalid once touched.",
     },
     {
       name: 'ScRadioField',
@@ -179,9 +194,9 @@ export default class RadioGroupPage {
     },
     {
       name: 'ScRadio',
-      selector: 'input[type="radio"][scRadio]',
+      selector: 'input[scRadio]',
       description:
-        "A native radio in the preset's look, its dot when checked; a [formField]; invalid once touched.",
+        "A native radio (its own type) in the preset's look, its dot when checked: value (its option, any type); disabled.",
     },
   ];
 }

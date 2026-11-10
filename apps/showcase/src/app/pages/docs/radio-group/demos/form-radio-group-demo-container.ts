@@ -33,32 +33,17 @@ interface NotificationFormModel {
     <div class="max-w-md rounded-lg border p-6">
       <div class="space-y-4">
         <h4 class="font-semibold">Notification Preferences</h4>
-        <div scRadioGroup>
+        <div scRadioGroup [formField]="notificationForm.notify">
           <label scRadioField>
-            <input
-              type="radio"
-              scRadio
-              value="all"
-              [formField]="notificationForm.notify"
-            />
+            <input scRadio value="all" />
             All new messages
           </label>
           <label scRadioField>
-            <input
-              type="radio"
-              scRadio
-              value="mentions"
-              [formField]="notificationForm.notify"
-            />
+            <input scRadio value="mentions" />
             Direct messages and mentions
           </label>
           <label scRadioField>
-            <input
-              type="radio"
-              scRadio
-              value="none"
-              [formField]="notificationForm.notify"
-            />
+            <input scRadio value="none" />
             Nothing
           </label>
         </div>

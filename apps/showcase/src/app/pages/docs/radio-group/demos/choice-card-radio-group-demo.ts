@@ -26,7 +26,12 @@ import {
     ScRadioGroup,
   ],
   template: `
-    <div scRadioGroup aria-label="Plan" class="w-full max-w-sm">
+    <div
+      scRadioGroup
+      [formField]="planForm.plan"
+      aria-label="Plan"
+      class="w-full max-w-sm"
+    >
       <label scLabel>
         <div scField orientation="horizontal">
           <div scFieldBody>
@@ -34,12 +39,7 @@ import {
             <p scFieldDescription>For individuals and small teams.</p>
           </div>
           <div scRadioField>
-            <input
-              type="radio"
-              scRadio
-              value="plus"
-              [formField]="planForm.plan"
-            />
+            <input scRadio value="plus" />
           </div>
         </div>
       </label>
@@ -50,12 +50,7 @@ import {
             <p scFieldDescription>For growing businesses.</p>
           </div>
           <div scRadioField>
-            <input
-              type="radio"
-              scRadio
-              value="pro"
-              [formField]="planForm.plan"
-            />
+            <input scRadio value="pro" />
           </div>
         </div>
       </label>
@@ -66,12 +61,7 @@ import {
             <p scFieldDescription>For large teams and enterprises.</p>
           </div>
           <div scRadioField>
-            <input
-              type="radio"
-              scRadio
-              value="enterprise"
-              [formField]="planForm.plan"
-            />
+            <input scRadio value="enterprise" />
           </div>
         </div>
       </label>

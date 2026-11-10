@@ -34,17 +34,13 @@ import { SiCameraIcon, SiCameraOffIcon } from '@semantic-icons/lucide-icons';
       <span id="formats-label" class="text-muted-foreground">Read:</span>
       <div
         scRadioGroup
+        [formField]="settingsForm.kind"
         orientation="horizontal"
         aria-labelledby="formats-label"
       >
         @for (kind of kinds; track kind.id) {
           <label scRadioField>
-            <input
-              type="radio"
-              scRadio
-              [value]="kind.id"
-              [formField]="settingsForm.kind"
-            />
+            <input scRadio [value]="kind.id" />
             {{ kind.label }}
           </label>
         }

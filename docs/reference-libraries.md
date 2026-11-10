@@ -537,6 +537,7 @@ Restyled 2026-11-10: shadcn's Radio Group in each style, and its examples.
 
 - **The `radioGroup` preset key**: `group` (`gap-2` / `gap-3`), `item` (the radio), `dot`. Our radio is a native input: Base UI's `data-checked:` / `aria-checked:` are `checked:`; shadcn's dot span is our `::before`, its classes `checked:before:…` (shown only when checked, no scale transition).
 - **A radio field's text** takes the `label` preset at normal weight and case — shadcn's `FieldLabel className="font-normal"` beside a radio (sera's uppercase drops there); medium with a description. Its radio column is `auto` (sera's radio is `size-4.5`).
+- **The group holds the choice** (2026-11-10, the user): `ScRadioGroup` implements `FormValueControl` — `[formField]` or `[(value)]` on the group, `value` on each radio (as Base UI's RadioGroup); it checks the matching radio, names them alike, emits `touch` when focus leaves it. The radio sets its own `type`. Signal Forms' own native-radio binding (a `[formField]` on each) still works, with `type="radio"` written: Angular types a native input's `[formField]` by the template's `type` (compiler `TcbNativeFieldOp`), so a union-typed field fails without it.
 - **shadcn's examples**: Demo (the Usage), Description, Choice card, Fieldset, Disabled (one option: a plain disabled radio — Signal Forms owns a bound field's `disabled`), Invalid (required, touched), RTL; ours kept: Horizontal, In a form, Custom theme.
 
 ## Checkbox: rewritten
