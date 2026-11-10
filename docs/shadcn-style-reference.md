@@ -101,6 +101,7 @@ Do **not** "fix" these to match shadcn:
 - **Label: one part for Label and FieldLabel; `has-checked:`** — the `label` key's `field` classes are added in or around a field; shadcn's `has-data-checked:` (Base UI's attribute) is `has-checked:` (our native inputs).
 - **Field: our slot names; a select in a field** — the `field` key's strings use `field-body` (shadcn's `field-content`), `label` (`field-label`) and `data-[orientation=horizontal]` (`data-horizontal`). A select in a field is `contents`, its label the field's look; shadcn's FieldLabel goes beside a SelectTrigger.
 - **Radio Group: a native radio** — the `radioGroup` key's `item` reads `checked:` (Base UI's `data-checked:` / `aria-checked:`); its `dot` is the input's `::before` (`checked:before:…`), shadcn's an indicator span.
+- **Checkbox: the box beside the input, or the input itself** — Checkbox's `ScCheckboxVisual` reads the `checkbox` key's `visual` (the input's states as `peer-…`, `data-checked` when checked or indeterminate); Checkbox Next's native input reads `item` (`:checked`, `:indeterminate`) and `mark` (its `::before`, the style's icon as a mask). Indeterminate is filled, with a minus: shadcn's Base UI checkbox draws only a check.
 - **Pagination: parts on buttons or your links** — the parts set no `href`: a link follows the one you give it.
 - **Decomposition** — shadcn ships one function per part in one file; we split into directives, one per file, so one shadcn part can map to several of ours.
 

@@ -1,114 +1,42 @@
 # Checkbox
 
-A native checkbox input with a custom visual overlay, label support, and indeterminate state.
+A native checkbox in a checkbox field: the field draws the box (`ScCheckboxVisual`) beside it, in the look of the app's preset (the `checkbox` key's `visual`). A checkbox without its field is an error in dev mode — nothing would draw its box. Being rewritten as [Checkbox Next](../checkbox-next/README.md), which draws itself.
 
 ## Usage
 
 ```html
-<div scCheckboxField>
-  <input type="checkbox" scCheckbox [(checked)]="value" />
-  <label scLabel>Accept terms and conditions</label>
-</div>
-```
-
-### Label as Checkbox Field
-
-Using `<label>` as the field makes the entire row clickable without needing `for`/`id` association:
-
-```html
 <label scCheckboxField>
-  <input type="checkbox" scCheckbox [(checked)]="value" />
+  <input type="checkbox" scCheckbox [formField]="form.terms" />
   Accept terms and conditions
 </label>
-```
 
-## Components
-
-### ScCheckbox
-
-Directive on a native `<input type="checkbox">`. Manages checked state, indeterminate property, and styling.
-
-**Selector:** `input[type="checkbox"][scCheckbox]`
-
-**Two-way Bindings:**
-
-| Binding   | Type      | Description   |
-| --------- | --------- | ------------- |
-| `checked` | `boolean` | Checked state |
-
-**Inputs:**
-
-| Input           | Type      | Default | Description                |
-| --------------- | --------- | ------- | -------------------------- |
-| `indeterminate` | `boolean` | `false` | Indeterminate state        |
-| `id`            | `string`  | auto    | Override auto-generated id |
-| `class`         | `string`  | `''`    | Additional CSS classes     |
-
-**Implements:** `FormCheckboxControl` from `@angular/forms/signals`
-
-### ScCheckboxField
-
-Container component that provides layout, visual overlay, and context for child components. Can be used on `<div>` or `<label>`.
-
-**Selector:** `div[scCheckboxField]`, `label[scCheckboxField]`
-
-**Data Attributes:**
-
-| Attribute       | Values                                            |
-| --------------- | ------------------------------------------------- |
-| `data-state`    | `'checked'` \| `'unchecked'` \| `'indeterminate'` |
-| `data-disabled` | `''` \| `null`                                    |
-
-### ScCheckboxVisual
-
-Internal component that renders the visual checkbox (check/minus icon). Automatically included by `ScCheckboxField`.
-
-**Selector:** `span[scCheckboxVisual]`
-
-## Examples
-
-### Basic
-
-```html
-<div scCheckboxField>
-  <input type="checkbox" scCheckbox [(checked)]="terms" />
-  <label scLabel>Accept terms and conditions</label>
-</div>
-```
-
-### With Description
-
-```html
 <div scCheckboxField>
   <input type="checkbox" scCheckbox [(checked)]="marketing" />
   <label scLabel>Marketing emails</label>
-  <p scFieldDescription>Receive emails about new products and features.</p>
+  <p scFieldDescription>Receive emails about new products.</p>
 </div>
 ```
 
-### Indeterminate
+A checkbox with no text (a table row) is still in a field, named by `aria-label`:
 
 ```html
 <div scCheckboxField>
-  <input type="checkbox" scCheckbox [(checked)]="selectAll" [indeterminate]="isIndeterminate()" />
-  <label scLabel>Select all</label>
+  <input type="checkbox" scCheckbox aria-label="Select all" [checked]="all()" [indeterminate]="some()" (checkedChange)="selectAll($event)" />
 </div>
 ```
 
-### Disabled
+## Parts
 
-```html
-<div scCheckboxField>
-  <input type="checkbox" scCheckbox [(checked)]="value" disabled />
-  <label scLabel>Disabled checkbox</label>
-</div>
-```
+| Part               | Selector                                       | What it does                                                                                                    |
+| ------------------ | ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `ScCheckboxField`  | `label[scCheckboxField], div[scCheckboxField]` | Draws the box; lays out the checkbox and its text (the `label` preset, normal weight), or label and description |
+| `ScCheckbox`       | `input[type="checkbox"][scCheckbox]`           | The native input, transparent over the box: `checked` (model, or `[formField]`), `indeterminate`, `disabled`    |
+| `ScCheckboxVisual` | `span[scCheckboxVisual]`                       | The box and its check or minus (`data-checked`, `data-indeterminate`, `data-state`); placed by the field        |
+
+Invalid once touched (`aria-invalid`, from Signal Forms). The field sets `data-state` (`checked`, `unchecked`, `indeterminate`) and `data-disabled`.
 
 ## Accessibility
 
-- Uses native `<input type="checkbox">` — inherits full keyboard and screen reader support
-- Auto-generates unique `id` for input-label association when used with `<div scCheckboxField>`
-- `<label scCheckboxField>` wraps both input and text — no `for`/`id` needed
-- `aria-describedby` automatically links to field descriptions
-- Disabled state uses native `disabled` attribute
-- Visual overlay is `aria-hidden="true"` — screen readers only see the native input
+- A native checkbox: Tab, Space; indeterminate is announced as mixed. The drawn box is `aria-hidden`.
+- Named by its label (a label field, or `scLabel` in a div field — `for` is set), or `aria-label`.
+- A description in the field is read with the checkbox (`aria-describedby`).
