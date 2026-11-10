@@ -6778,4 +6778,51 @@ export const demosRoutes: Route[] = [
       },
     ],
   },
+  {
+    path: 'demos/checkbox-group',
+    children: [
+      {
+        path: 'checkbox-group-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/checkbox-group/demos/checkbox-group-usage-demo').then(
+            (m) => m.CheckboxGroupUsageDemo,
+          ),
+      },
+      {
+        path: 'parent-checkbox-group-demo',
+        loadComponent: () =>
+          import('../pages/docs/checkbox-group/demos/parent-checkbox-group-demo').then(
+            (m) => m.ParentCheckboxGroupDemo,
+          ),
+      },
+      {
+        path: 'nested-parent-checkbox-group-demo',
+        loadComponent: () =>
+          import('../pages/docs/checkbox-group/demos/nested-parent-checkbox-group-demo').then(
+            (m) => m.NestedParentCheckboxGroupDemo,
+          ),
+      },
+      {
+        path: 'form-checkbox-group-demo',
+        loadComponent: () =>
+          import('../pages/docs/checkbox-group/demos/form-checkbox-group-demo').then(
+            (m) => m.FormCheckboxGroupDemo,
+          ),
+      },
+      {
+        path: 'disabled-checkbox-group-demo',
+        loadComponent: () =>
+          import('../pages/docs/checkbox-group/demos/disabled-checkbox-group-demo').then(
+            (m) => m.DisabledCheckboxGroupDemo,
+          ),
+      },
+      {
+        path: 'rtl-checkbox-group-demo',
+        loadComponent: () =>
+          import('../pages/docs/checkbox-group/demos/rtl-checkbox-group-demo').then(
+            (m) => m.RtlCheckboxGroupDemo,
+          ),
+      },
+    ],
+  },
 ];

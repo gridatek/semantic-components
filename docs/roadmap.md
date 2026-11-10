@@ -2,7 +2,7 @@
 
 Every component brought to the same bar: shadcn's look, tested, mobile first, right to left, in light and dark, rendered on the server. One component at a time, in the order the user names, each through [component-rewrite-process.md](component-rewrite-process.md). Two lists: the components shadcn has (**List 1**: its look and parts are the reference), and the ones it doesn't (**List 2**: shadcn's tokens and patterns, our design). The order of each list is the user's work order: changed only by hand, in this document — `scripts/roadmap.mjs` keeps every row where it is, refreshes its columns, and adds a new component at the end of its list; **Built on** (the components it imports, and those it shapes inside it — the `data-slot` its styles, or its preset's, read: a button group shapes its buttons, input groups and selects) and **Parts** (the components, directives and services it declares) show where it sits. Each row ticked when it meets the definition of done.
 
-Inventory (150 components): 63 with a shadcn counterpart · 133 with e2e demo tests · 150 with a page axe test · 61 with an RTL demo.
+Inventory (151 components): 63 with a shadcn counterpart · 134 with e2e demo tests · 151 with a page axe test · 62 with an RTL demo.
 
 ## The two lists
 
@@ -77,7 +77,7 @@ The components shadcn has: its look (the generated reference app, nova) and its 
 |  19 | [Calendar](../apps/showcase/src/app/pages/docs/calendar)                 | ui      | button                                                     |    12 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] | waiting |
 |  20 | [Carousel](../apps/showcase/src/app/pages/docs/carousel)                 | ui      | button                                                     |     6 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 |  21 | [Chart](../apps/showcase/src/app/pages/docs/chart)                       | ui      | —                                                          |    13 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
-|  22 | [Checkbox](../apps/showcase/src/app/pages/docs/checkbox)                 | ui      | field, label                                               |     2 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] | waiting |
+|  22 | [Checkbox](../apps/showcase/src/app/pages/docs/checkbox)                 | ui      | field, label                                               |     3 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] | waiting |
 |  23 | [Code Block](../apps/showcase/src/app/pages/docs/code-block)             | ui      | button, code-editor                                        |     7 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] | waiting |
 |  24 | [Collapsible](../apps/showcase/src/app/pages/docs/collapsible)           | ui      | —                                                          |     5 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 |  25 | [Combobox](../apps/showcase/src/app/pages/docs/combobox)                 | ui      | button, input-group, select                                |    14 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
@@ -86,7 +86,7 @@ The components shadcn has: its look (the generated reference app, nova) and its 
 |  28 | [Dialog](../apps/showcase/src/app/pages/docs/dialog)                     | ui      | backdrop, button, focus-trap                               |     9 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] | waiting |
 |  29 | [Drawer](../apps/showcase/src/app/pages/docs/drawer)                     | ui      | backdrop, button, focus-trap                               |    10 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] | waiting |
 |  30 | [Empty](../apps/showcase/src/app/pages/docs/empty)                       | ui      | —                                                          |     6 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] | waiting |
-|  31 | [Field](../apps/showcase/src/app/pages/docs/field)                       | ui      | label, radio-group                                         |     9 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] | waiting |
+|  31 | [Field](../apps/showcase/src/app/pages/docs/field)                       | ui      | checkbox, label, radio-group                               |     9 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] | waiting |
 |  32 | [Item](../apps/showcase/src/app/pages/docs/item)                         | ui      | —                                                          |    10 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] | waiting |
 |  33 | [Kbd](../apps/showcase/src/app/pages/docs/kbd)                           | ui      | —                                                          |     2 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] | waiting |
 |  34 | [Label](../apps/showcase/src/app/pages/docs/label)                       | ui      | field                                                      |     2 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] | waiting |
@@ -120,7 +120,7 @@ The components shadcn has: its look (the generated reference app, nova) and its 
 |  62 | [Menubar](../apps/showcase/src/app/pages/docs/menubar)                   | ui      | menu                                                       |     2 | yes                    |  [ ]   | [x] |  [ ]   | [x] | [ ]  | [ ] | [ ]  | [ ] | waiting |
 |  63 | [Preview Card](../apps/showcase/src/app/pages/docs/preview-card)         | ui      | —                                                          |     4 | hover-card             |  [ ]   | [x] |  [ ]   | [x] | [ ]  | [ ] | [ ]  | [ ] | waiting |
 
-## List 2 — Not in shadcn (87)
+## List 2 — Not in shadcn (88)
 
 The components shadcn doesn't have: shadcn's tokens and patterns, our parts.
 
@@ -213,6 +213,7 @@ The components shadcn doesn't have: shadcn's tokens and patterns, our parts.
 |  85 | [Frame](../apps/showcase/src/app/pages/docs/frame)                                 | ui      | —                                                                       |     1 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] | waiting |
 |  86 | [Scroll Area Next](../apps/showcase/src/app/pages/docs/scroll-area-next)           | ui      | scroll-area                                                             |     6 |  [ ]   | [x] |  [ ]   | [x] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 |  87 | [Scroll Area Next2](../apps/showcase/src/app/pages/docs/scroll-area-next2)         | ui      | scroll-area                                                             |     1 |  [ ]   | [x] |  [ ]   | [x] | [ ]  | [ ] | [ ]  | [ ] |    —    |
+|  88 | [Checkbox Group](../apps/showcase/src/app/pages/docs/checkbox-group)               | ui      | —                                                                       |     0 |  [ ]   | [x] |  [ ]   | [x] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 
 ## Later
 

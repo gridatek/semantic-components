@@ -13,11 +13,13 @@ import type { FormCheckboxControl } from '@angular/forms/signals';
 import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 import { SC_FIELD } from '../field';
+import { ScCheckboxGroup } from './checkbox-group';
 
 /**
  * A native checkbox in the preset's look, drawn by itself: its box, and its
  * check or minus (its ::before). Alone (a table's row), in a checkbox field
- * beside its text, or in any field.
+ * beside its text, or in any field. In a checkbox group: its value is ticked
+ * in the group's, or as the parent it ticks them all.
  */
 @Directive({
   selector: 'input[scCheckbox]',
@@ -28,8 +30,9 @@ import { SC_FIELD } from '../field';
     '[id]': 'id()',
     '[attr.aria-describedby]': 'ariaDescribedBy()',
     '[attr.aria-invalid]': 'ariaInvalid()',
-    '[disabled]': 'disabled()',
-    '[checked]': 'checked()',
+    '[disabled]': 'isDisabled()',
+    '[checked]': 'isChecked()',
+    '[value]': 'nativeValue()',
     '[class]': 'class()',
     '(change)': 'onChange()',
   },
@@ -40,6 +43,7 @@ export class ScCheckbox implements FormCheckboxControl {
   private readonly element =
     inject<ElementRef<HTMLInputElement>>(ElementRef).nativeElement;
   protected readonly field = inject(SC_FIELD, { optional: true });
+  private readonly group = inject(ScCheckboxGroup, { optional: true });
   private readonly fallbackId = inject(_IdGenerator).getId('sc-checkbox-');
 
   readonly idInput = input('', { alias: 'id' });
@@ -49,6 +53,14 @@ export class ScCheckbox implements FormCheckboxControl {
   readonly checked = model(false);
   /** Neither checked nor not (a "select all" over some): shows a minus. */
   readonly indeterminate = input(false, { transform: booleanAttribute });
+  /**
+   * In a checkbox group: its option, ticked in the group's value. Written
+   * `value` (as Base UI); `valueInput` in the class — FormCheckboxControl keeps
+   * `value` for value controls.
+   */
+  readonly valueInput = input<unknown>(undefined, { alias: 'value' });
+  /** In a checkbox group: ticks all of its allValues, or none. */
+  readonly parent = input(false, { transform: booleanAttribute });
 
   // Bound by the Field directive (FormCheckboxControl).
   readonly disabled = input(false, { transform: booleanAttribute });
@@ -66,9 +78,42 @@ export class ScCheckbox implements FormCheckboxControl {
       null,
   );
 
-  // Invalid once touched, as the other controls.
+  /** In a group, as one of its options or its parent. */
+  private readonly inGroup = computed(
+    () => !!this.group && (this.parent() || this.valueInput() !== undefined),
+  );
+
+  protected readonly isChecked = computed(() => {
+    if (!this.inGroup()) return this.checked();
+    return this.parent()
+      ? this.group!.allTicked()
+      : this.group!.has(this.valueInput());
+  });
+
+  // A parent is mixed when some of its group are ticked — or when told so
+  // (a nested group partly ticked, as Base UI's nested parent).
+  private readonly isIndeterminate = computed(
+    () =>
+      (this.inGroup() && this.parent() && this.group!.someTicked()) ||
+      this.indeterminate(),
+  );
+
+  protected readonly isDisabled = computed(
+    () => this.disabled() || (this.inGroup() && this.group!.disabled()),
+  );
+
+  /** The native value: its option, as text. */
+  protected readonly nativeValue = computed(() => {
+    const value = this.valueInput();
+    return value === undefined || value === null ? 'on' : String(value);
+  });
+
+  // Invalid once touched, as the other controls: its own, or its group's.
   protected readonly ariaInvalid = computed(
-    () => (this.touched() && this.invalid()) || null,
+    () =>
+      (this.touched() && this.invalid()) ||
+      (this.inGroup() && this.group!.showInvalid()) ||
+      null,
   );
 
   protected readonly class = computed(() =>
@@ -83,13 +128,21 @@ export class ScCheckbox implements FormCheckboxControl {
   constructor() {
     // A property only, no attribute.
     effect(() => {
-      this.element.indeterminate = this.indeterminate();
+      this.element.indeterminate = this.isIndeterminate();
     });
   }
 
   protected onChange(): void {
-    this.checked.set(this.element.checked);
-    // A click clears the native indeterminate; it stays the input's.
-    this.element.indeterminate = this.indeterminate();
+    const ticked = this.element.checked;
+    if (this.inGroup()) {
+      if (this.parent()) this.group!.setAll(ticked);
+      else this.group!.set(this.valueInput(), ticked);
+    } else {
+      this.checked.set(ticked);
+    }
+    // A click clears the native indeterminate, and may tick what the group
+    // doesn't: both stay the state's.
+    this.element.indeterminate = this.isIndeterminate();
+    this.element.checked = this.isChecked();
   }
 }

@@ -200,6 +200,14 @@
     "category": "Forms"
   },
   {
+    "name": "Checkbox Group",
+    "path": "checkbox-group",
+    "description": "Checkboxes sharing one value, with an optional parent checkbox that ticks them all.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Forms"
+  },
+  {
     "name": "Code Editor",
     "path": "code-editor",
     "description": "Code to edit: CodeMirror, colored by Shiki; a form field.",

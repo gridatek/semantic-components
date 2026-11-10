@@ -581,6 +581,15 @@ Restyled 2026-11-10: shadcn's Toggle in each style, and its examples.
 - **`disabled` a boolean attribute**; `data-state` kept (shadcn's classes and the toolbar style by it).
 - **shadcn's examples**: Demo (the Usage: Bookmark, outline sm, the icon filled when pressed), Outline, With text, Sizes, Disabled, RTL — named by their text, not shadcn's `aria-label` beside it; ours kept: Toolbar. Basic dropped.
 
+## Checkbox Group
+
+Built 2026-11-10 (the user). shadcn has none; Base UI's CheckboxGroup (`@base-ui/react/docs/react/components/checkbox-group.md`).
+
+- **Taken**: shared state for a series of checkboxes — the group's `value` is the ticked checkboxes' values, each checkbox its `value`; `allValues` and a `parent` checkbox (all / none, mixed when some); nested parents (a `parent` heading a group inside a group, the two joined by the consumer as Base UI's example); `disabled` / `data-disabled`.
+- **Ours**: the group is the Signal Forms control (`FormValueControl<T[]>`: `[formField]` on the group, typed by it — values of any type, not only strings), `touch` when focus leaves it, invalid passed to its checkboxes. On a `div` inside the fieldset (shadcn's field preset styles `data-slot="checkbox-group"`), not on the fieldset.
+- **Left out**: `render`, `nativeButton` (React), `onValueChange`'s event details (Signal Forms and `[(value)]`).
+- **Examples**: Base UI's Usage (Apples), Parent checkbox, Nested parent, Form; ours: Disabled, RTL.
+
 ## Input Button: restyled
 
 Restyled 2026-11-07. Our own component — shadcn has none; its docs site's search trigger is a secondary button.
