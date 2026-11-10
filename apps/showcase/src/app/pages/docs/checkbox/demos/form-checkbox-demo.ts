@@ -1,5 +1,9 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
+  ScCard,
+  ScCardContent,
+  ScCardHeader,
+  ScCardTitle,
   ScCheckbox,
   ScCheckboxField,
   ScFieldGroup,
@@ -9,22 +13,35 @@ import {
 /** Without a form: each checked state two-way bound, [(checked)]. */
 @Component({
   selector: 'app-form-checkbox-demo',
-  imports: [ScCheckbox, ScCheckboxField, ScFieldGroup, ScLabel],
+  imports: [
+    ScCard,
+    ScCardContent,
+    ScCardHeader,
+    ScCardTitle,
+    ScCheckbox,
+    ScCheckboxField,
+    ScFieldGroup,
+    ScLabel,
+  ],
   template: `
-    <div class="w-full max-w-md rounded-lg border p-6">
-      <h4 class="mb-4 font-semibold">Notification Preferences</h4>
-      <div scFieldGroup class="gap-3">
-        <div scCheckboxField>
-          <input type="checkbox" scCheckbox [(checked)]="email" />
-          <label scLabel>Email notifications</label>
-        </div>
-        <div scCheckboxField>
-          <input type="checkbox" scCheckbox [(checked)]="sms" />
-          <label scLabel>SMS notifications</label>
-        </div>
-        <div scCheckboxField>
-          <input type="checkbox" scCheckbox [(checked)]="push" />
-          <label scLabel>Push notifications</label>
+    <div scCard class="w-full max-w-md">
+      <div scCardHeader>
+        <h3 scCardTitle>Notification Preferences</h3>
+      </div>
+      <div scCardContent>
+        <div scFieldGroup class="gap-3">
+          <div scCheckboxField>
+            <input type="checkbox" scCheckbox [(checked)]="email" />
+            <label scLabel>Email notifications</label>
+          </div>
+          <div scCheckboxField>
+            <input type="checkbox" scCheckbox [(checked)]="sms" />
+            <label scLabel>SMS notifications</label>
+          </div>
+          <div scCheckboxField>
+            <input type="checkbox" scCheckbox [(checked)]="push" />
+            <label scLabel>Push notifications</label>
+          </div>
         </div>
       </div>
     </div>
