@@ -1,82 +1,25 @@
 # Switch
 
-A toggle control for switching between two states.
-
-## Components
-
-- `ScSwitchField` - Container `label` that wires the hidden input to the visual
-- `ScSwitch` - Hidden native `input[type="checkbox"]` directive that drives state
-- `ScSwitchVisual` - Visual track and thumb, rendered automatically by `ScSwitchField`
+A switch: a native checkbox with `role="switch"` that draws itself (`appearance-none`) — its track, and its thumb as its `::before`. In the look of the app's preset: the `switch` key's `track` and `thumb`, from shadcn's (Base UI's `data-checked` / `data-unchecked` / `data-disabled` as `:checked` / `:not(:checked)` / `:disabled`; the thumb's size from the input's `data-size`). In lyra it is square, track and thumb — not shadcn's, whose lyra switch is round: a deliberate divergence ([shadcn-style-reference.md](../../../../../../docs/shadcn-style-reference.md#deliberate-divergences)). Alone, in a switch field beside its text, or in any field.
 
 ## Usage
 
 ```html
-<label scSwitchField>
-  <input type="checkbox" scSwitch />
-  <span>Airplane Mode</span>
-</label>
+<div scSwitchField>
+  <input type="checkbox" scSwitch [formField]="form.airplane" />
+  <label scLabel>Airplane Mode</label>
+</div>
 ```
 
-## With Two-Way Binding
+## Parts
 
-```html
-<label scSwitchField>
-  <input type="checkbox" scSwitch [(checked)]="enabled" />
-  <span>Notifications: {{ enabled() ? 'On' : 'Off' }}</span>
-</label>
-```
-
-## Standalone (no label text)
-
-Provide an `aria-label` when the label contains no visible text:
-
-```html
-<label scSwitchField aria-label="Dark Mode">
-  <input type="checkbox" scSwitch />
-</label>
-```
-
-## Disabled
-
-```html
-<label scSwitchField>
-  <input type="checkbox" scSwitch disabled />
-  <span>Disabled (Off)</span>
-</label>
-
-<label scSwitchField>
-  <input type="checkbox" scSwitch [checked]="true" disabled />
-  <span>Disabled (On)</span>
-</label>
-```
-
-## With Signal Forms
-
-```html
-<label scSwitchField aria-label="Enable Notifications">
-  <input type="checkbox" scSwitch [formField]="myForm.notifications" />
-</label>
-```
-
-Add `FormField` to your component's `imports` array when using `[formField]`.
-
-## Inputs (`ScSwitch`)
-
-| Input     | Type      | Default | Description                       |
-| --------- | --------- | ------- | --------------------------------- |
-| `checked` | `boolean` | `false` | The checked state (two-way model) |
-| `class`   | `string`  | `''`    | Additional CSS classes            |
-
-## Inputs (`ScSwitchField`)
-
-| Input   | Type     | Default | Description            |
-| ------- | -------- | ------- | ---------------------- |
-| `class` | `string` | `''`    | Additional CSS classes |
+| Part            | Selector                                   | What it does                                                                                                             |
+| --------------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| `ScSwitchField` | `label[scSwitchField], div[scSwitchField]` | A switch beside its text (the `label` preset, normal weight): first, at the start; last, at the end. Optional            |
+| `ScSwitch`      | `input[type="checkbox"][scSwitch]`         | The native input, drawn: `checked` (model, or `[formField]`), `size` (`default`, `sm`), `disabled`; invalid once touched |
 
 ## Accessibility
 
-- Uses `role="switch"` on the native input for screen readers
-- `aria-checked` is reflected automatically by the browser
-- Keyboard accessible — Space toggles, Tab moves focus
-- Focus ring appears on the visual track via `peer-focus-visible`
-- Disabled state communicated via `peer-disabled` styles and `data-disabled` on the field
+- A native checkbox with `role="switch"`: announced as a switch, on or off; Tab, Space. Nothing drawn beside it.
+- Named by its label (a label field, or `scLabel` in a div field or `scField`), or `aria-label`; the name stays the same as it toggles.
+- A description in its field is read with it (`aria-describedby`).

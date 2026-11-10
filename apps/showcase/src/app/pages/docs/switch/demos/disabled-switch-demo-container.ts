@@ -6,7 +6,11 @@ import { DisabledSwitchDemo } from './disabled-switch-demo';
   selector: 'app-disabled-switch-demo-container',
   imports: [DemoContainer, DisabledSwitchDemo],
   template: `
-    <app-demo-container title="Disabled" [code]="code">
+    <app-demo-container
+      title="Disabled"
+      demoUrl="/demos/switch/disabled-switch-demo"
+      [code]="code"
+    >
       <app-disabled-switch-demo />
     </app-demo-container>
   `,
@@ -15,21 +19,20 @@ import { DisabledSwitchDemo } from './disabled-switch-demo';
 })
 export class DisabledSwitchDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScSwitch, ScSwitchField } from '@semantic-components/ui';
+import {
+  ScLabel,
+  ScSwitch,
+  ScSwitchField,
+} from '@semantic-components/ui';
 
+/** Disabled: dimmed, out of the Tab order. */
 @Component({
   selector: 'app-disabled-switch-demo',
-  imports: [ScSwitch, ScSwitchField],
+  imports: [ScLabel, ScSwitch, ScSwitchField],
   template: \`
-    <div class="grid gap-3">
-      <label scSwitchField>
-        <input type="checkbox" scSwitch disabled />
-        Disabled (Off)
-      </label>
-      <label scSwitchField>
-        <input type="checkbox" scSwitch [checked]="true" disabled />
-        Disabled (On)
-      </label>
+    <div scSwitchField class="w-fit">
+      <input type="checkbox" scSwitch disabled />
+      <label scLabel>Disabled</label>
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },

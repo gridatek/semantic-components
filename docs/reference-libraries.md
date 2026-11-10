@@ -549,6 +549,17 @@ Rewritten 2026-11-10: shadcn's Checkbox in each style, and its examples. Restyle
 - **shadcn's examples**: Demo (the Usage), Description, Group (a fieldset), Disabled, Invalid (required, touched), Table, RTL; ours kept: Indeterminate, Signal Forms, Form (two-way, no form, in a Card), Custom theme; new: Custom mark. Basic, Label and With description dropped (shadcn's cover them).
 - **Gone**: `ScCheckboxVisual`, `SC_CHECKBOX_FIELD` / `ScCheckboxContext`, the field's `data-state` / `data-disabled` (style by `has-checked:`, `has-disabled:`).
 
+## Switch: rewritten
+
+Rewritten 2026-11-10 as Checkbox was: built beside the old one as Switch Next (the old one not restyled: the user), compared, switched in. shadcn's Switch in each style, and its examples.
+
+- **The `switch` preset key**: `track`, shadcn's root class on the native checkbox (`role="switch"`, `appearance-none`): `data-checked:` / `data-unchecked:` / `data-disabled:` as `:checked` / `:not(:checked)` / `:disabled`. `thumb`: its `::before` (shadcn's thumb classes under `before:`; its `group-data-[size=…]/switch:` the input's own `data-[size=…]:`), centred by its margins, moved by the preset's `translate-x`.
+- **`size`** (`default`, `sm`) as shadcn's, on the input as `data-size`.
+- **Lyra square**, a deliberate divergence: track and thumb `rounded-none`, true squares on a 4px grid (see shadcn-style-reference.md).
+- **The field is optional**: `scSwitchField` only lays out a switch and its text — first at the start, last at the end — in the `label` preset at normal weight. A switch alone or in a `scField` (a card label) draws itself.
+- **shadcn's examples**: Demo (the Usage), Description, Choice card, Disabled, Invalid, Sizes, RTL; ours kept: State, Signal Forms; Input first and Input last merged into Placement.
+- **Gone**: `ScSwitchVisual`, `SC_SWITCH_FIELD` / `ScSwitchContext`, the field's `data-state` / `data-disabled` (style by `has-checked:`, `has-disabled:`).
+
 ## Input Button: restyled
 
 Restyled 2026-11-07. Our own component — shadcn has none; its docs site's search trigger is a secondary button.

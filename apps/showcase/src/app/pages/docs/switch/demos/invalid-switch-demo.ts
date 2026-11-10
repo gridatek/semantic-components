@@ -3,33 +3,27 @@ import { FormField, form, required } from '@angular/forms/signals';
 import {
   ScFieldDescription,
   ScLabel,
-  ScSwitchNext,
-  ScSwitchNextField,
+  ScSwitch,
+  ScSwitchField,
 } from '@semantic-components/ui';
 
 /** A required switch, touched and off: marked invalid (Signal Forms). */
 @Component({
-  selector: 'app-invalid-switch-next-demo',
-  imports: [
-    FormField,
-    ScFieldDescription,
-    ScLabel,
-    ScSwitchNext,
-    ScSwitchNextField,
-  ],
+  selector: 'app-invalid-switch-demo',
+  imports: [FormField, ScFieldDescription, ScLabel, ScSwitch, ScSwitchField],
   template: `
-    <div scSwitchNextField class="max-w-sm">
+    <div scSwitchField class="max-w-sm">
       <label scLabel>Accept terms and conditions</label>
       <p scFieldDescription>
         You must accept the terms and conditions to continue.
       </p>
-      <input type="checkbox" scSwitchNext [formField]="termsForm.terms" />
+      <input type="checkbox" scSwitch [formField]="termsForm.terms" />
     </div>
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class InvalidSwitchNextDemo {
+export class InvalidSwitchDemo {
   protected readonly termsForm = form(signal({ terms: false }), (path) => {
     required(path.terms);
   });

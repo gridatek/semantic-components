@@ -6,7 +6,11 @@ import { StateSwitchDemo } from './state-switch-demo';
   selector: 'app-state-switch-demo-container',
   imports: [DemoContainer, StateSwitchDemo],
   template: `
-    <app-demo-container title="With State" [code]="code">
+    <app-demo-container
+      title="State"
+      demoUrl="/demos/switch/state-switch-demo"
+      [code]="code"
+    >
       <app-state-switch-demo />
     </app-demo-container>
   `,
@@ -17,6 +21,7 @@ export class StateSwitchDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScSwitch, ScSwitchField } from '@semantic-components/ui';
 
+/** Its state in its text: two-way, [(checked)]. */
 @Component({
   selector: 'app-state-switch-demo',
   imports: [ScSwitch, ScSwitchField],
@@ -30,6 +35,6 @@ import { ScSwitch, ScSwitchField } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class StateSwitchDemo {
-  readonly notifications = signal(true);
+  protected readonly notifications = signal(true);
 }`;
 }

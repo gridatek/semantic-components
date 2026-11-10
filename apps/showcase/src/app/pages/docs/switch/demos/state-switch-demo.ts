@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScSwitch, ScSwitchField } from '@semantic-components/ui';
 
+/** Its state in its text: two-way, [(checked)]. */
 @Component({
   selector: 'app-state-switch-demo',
   imports: [ScSwitch, ScSwitchField],
@@ -14,5 +15,5 @@ import { ScSwitch, ScSwitchField } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class StateSwitchDemo {
-  readonly notifications = signal(true);
+  protected readonly notifications = signal(true);
 }

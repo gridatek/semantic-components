@@ -1,4 +1,24 @@
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { ChoiceCardSwitchDemo } from './choice-card-switch-demo';
+
+@Component({
+  selector: 'app-choice-card-switch-demo-container',
+  imports: [DemoContainer, ChoiceCardSwitchDemo],
+  template: `
+    <app-demo-container
+      title="Choice card"
+      demoUrl="/demos/switch/choice-card-switch-demo"
+      [code]="code"
+    >
+      <app-choice-card-switch-demo />
+    </app-demo-container>
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class ChoiceCardSwitchDemoContainer {
+  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
   ScField,
@@ -7,12 +27,12 @@ import {
   ScFieldGroup,
   ScFieldTitle,
   ScLabel,
-  ScSwitchNext,
+  ScSwitch,
 } from '@semantic-components/ui';
 
 /** A whole card as the label: a press anywhere on it switches. */
 @Component({
-  selector: 'app-choice-card-switch-next-demo',
+  selector: 'app-choice-card-switch-demo',
   imports: [
     FormField,
     ScField,
@@ -21,9 +41,9 @@ import {
     ScFieldGroup,
     ScFieldTitle,
     ScLabel,
-    ScSwitchNext,
+    ScSwitch,
   ],
-  template: `
+  template: \`
     <div scFieldGroup class="w-full max-w-sm">
       <label scLabel>
         <div scField orientation="horizontal">
@@ -34,7 +54,7 @@ import {
               app.
             </p>
           </div>
-          <input type="checkbox" scSwitchNext [formField]="focusForm.share" />
+          <input type="checkbox" scSwitch [formField]="focusForm.share" />
         </div>
       </label>
       <label scLabel>
@@ -47,18 +67,19 @@ import {
           </div>
           <input
             type="checkbox"
-            scSwitchNext
+            scSwitch
             [formField]="focusForm.notifications"
           />
         </div>
       </label>
     </div>
-  `,
+  \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ChoiceCardSwitchNextDemo {
+export class ChoiceCardSwitchDemo {
   protected readonly focusForm = form(
     signal({ share: false, notifications: true }),
   );
+}`;
 }

@@ -3,7 +3,7 @@ import { collectErrors, press } from '../../interaction';
 import { box } from '../../looks';
 import { expect, test } from '../../test';
 
-const demo = (name: string) => `/demos/switch-next/${name}-switch-next-demo`;
+const demo = (name: string) => `/demos/switch/${name}-switch-demo`;
 
 /** How far its thumb (its ::before) is moved along the track: translate's x. */
 const thumbX = (control: Locator) =>
@@ -27,7 +27,7 @@ test.afterEach(() => {
 test('Usage: a switch, named by its label; a press on the label switches it', async ({
   page,
 }) => {
-  await page.goto('/demos/switch-next/switch-next-usage-demo');
+  await page.goto('/demos/switch/switch-usage-demo');
   const airplane = page.getByRole('switch', { name: 'Airplane Mode' });
   await expect(airplane).not.toBeChecked();
   await page.getByText('Airplane Mode').click();
@@ -37,7 +37,7 @@ test('Usage: a switch, named by its label; a press on the label switches it', as
 test('Usage: Space switches it; its thumb moves to the end', async ({
   page,
 }) => {
-  await page.goto('/demos/switch-next/switch-next-usage-demo');
+  await page.goto('/demos/switch/switch-usage-demo');
   const airplane = page.getByRole('switch', { name: 'Airplane Mode' });
   expect(await thumbX(airplane)).toMatch(/^0(px)?$/);
   await airplane.focus();

@@ -1,19 +1,14 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScSwitch, ScSwitchField } from '@semantic-components/ui';
+import { ScLabel, ScSwitch, ScSwitchField } from '@semantic-components/ui';
 
+/** Disabled: dimmed, out of the Tab order. */
 @Component({
   selector: 'app-disabled-switch-demo',
-  imports: [ScSwitch, ScSwitchField],
+  imports: [ScLabel, ScSwitch, ScSwitchField],
   template: `
-    <div class="grid gap-3">
-      <label scSwitchField>
-        <input type="checkbox" scSwitch disabled />
-        Disabled (Off)
-      </label>
-      <label scSwitchField>
-        <input type="checkbox" scSwitch [checked]="true" disabled />
-        Disabled (On)
-      </label>
+    <div scSwitchField class="w-fit">
+      <input type="checkbox" scSwitch disabled />
+      <label scLabel>Disabled</label>
     </div>
   `,
   host: { class: 'flex w-full justify-center' },

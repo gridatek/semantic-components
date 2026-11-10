@@ -5,42 +5,42 @@ import {
   ScFieldDescription,
   ScFieldGroup,
   ScLabelText,
-  ScSwitchNext,
-  ScSwitchNextField,
+  ScSwitch,
+  ScSwitchField,
 } from '@semantic-components/ui';
 
 /** The switch first, it is at the start; last, at the end — a settings list. */
 @Component({
-  selector: 'app-placement-switch-next-demo',
+  selector: 'app-placement-switch-demo',
   imports: [
     ScCard,
     ScCardContent,
     ScFieldDescription,
     ScFieldGroup,
     ScLabelText,
-    ScSwitchNext,
-    ScSwitchNextField,
+    ScSwitch,
+    ScSwitchField,
   ],
   template: `
     <div scCard class="w-full max-w-md">
       <div scCardContent>
         <div scFieldGroup>
-          <label scSwitchNextField>
+          <label scSwitchField>
             <p scLabelText>Marketing emails</p>
             <p scFieldDescription>
               Receive emails about new products and features.
             </p>
-            <input type="checkbox" scSwitchNext [(checked)]="marketing" />
+            <input type="checkbox" scSwitch [(checked)]="marketing" />
           </label>
-          <label scSwitchNextField>
+          <label scSwitchField>
             <p scLabelText>Security emails</p>
             <p scFieldDescription>
               Receive emails about your account security.
             </p>
-            <input type="checkbox" scSwitchNext [(checked)]="security" />
+            <input type="checkbox" scSwitch [(checked)]="security" />
           </label>
-          <label scSwitchNextField>
-            <input type="checkbox" scSwitchNext [(checked)]="updates" />
+          <label scSwitchField>
+            <input type="checkbox" scSwitch [(checked)]="updates" />
             <p scLabelText>Product updates</p>
             <p scFieldDescription>
               Receive emails about product updates and tips.
@@ -53,7 +53,7 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class PlacementSwitchNextDemo {
+export class PlacementSwitchDemo {
   protected readonly marketing = signal(false);
   protected readonly security = signal(true);
   protected readonly updates = signal(false);

@@ -23,7 +23,7 @@ const PRESETS: Record<string, ScPreset> = {
   rhea,
 };
 
-test.describe('Switch Next in every preset', () => {
+test.describe('Switch in every preset', () => {
   // A docs page and axe, twice: slow under load.
   test.slow();
 
@@ -37,10 +37,10 @@ test.describe('Switch Next in every preset', () => {
       await context.addCookies([
         { name: 'sc-preset', value: preset, url: baseURL! },
       ]);
-      await page.goto('/demos/switch-next/placement-switch-next-demo');
+      await page.goto('/demos/switch/placement-switch-demo');
       for (const [target, wanted, what] of [
         [
-          page.locator('input[scSwitchNext]').first(),
+          page.locator('input[scSwitch]').first(),
           `${styles.switch.track} ${styles.switch.thumb}`,
           'switch',
         ],
@@ -57,7 +57,7 @@ test.describe('Switch Next in every preset', () => {
           .toEqual([]);
       }
 
-      await page.goto('/docs/components/switch-next');
+      await page.goto('/docs/components/switch');
       await expectNoA11yViolations(page);
       await expectNoA11yViolations(page, { dark: true });
     });

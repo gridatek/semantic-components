@@ -1064,14 +1064,6 @@
   {
     "name": "Switch",
     "path": "switch",
-    "description": "A toggle control for switching between two states.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Forms"
-  },
-  {
-    "name": "Switch Next",
-    "path": "switch-next",
     "description": "A native checkbox shown as a switch, drawn by itself, in the look of the app's preset.",
     "status": "Experimental",
     "library": "ui",

@@ -1,76 +1,49 @@
 import { JsonPipe } from '@angular/common';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
-import { required } from '@angular/forms/signals';
 import {
-  ScFieldDescription,
-  ScLabelText,
+  ScFieldGroup,
+  ScFrame,
+  ScLabel,
   ScSwitch,
   ScSwitchField,
 } from '@semantic-components/ui';
 
-interface SwitchFormModel {
-  notifications: boolean;
-  darkMode: boolean;
-  autoSave: boolean;
-}
-
+/** Bound with [formField]: the form's values follow. */
 @Component({
   selector: 'app-signal-forms-switch-demo',
   imports: [
+    FormField,
+    JsonPipe,
+    ScFieldGroup,
+    ScFrame,
+    ScLabel,
     ScSwitch,
     ScSwitchField,
-    ScLabelText,
-    ScFieldDescription,
-    JsonPipe,
-    FormField,
   ],
   template: `
-    <form>
-      <div class="space-y-4">
-        <label scSwitchField>
-          <p scLabelText>Enable Notifications</p>
-          <p scFieldDescription>
-            Receive notifications about your account activity
-          </p>
+    <div class="flex w-64 flex-col gap-4">
+      <div scFieldGroup class="gap-3">
+        <div scSwitchField>
+          <label scLabel>Notifications</label>
           <input
             type="checkbox"
             scSwitch
-            [formField]="switchForm.notifications"
+            [formField]="settingsForm.notifications"
           />
-        </label>
-
-        <label scSwitchField>
-          <p scLabelText>Dark Mode</p>
-          <p scFieldDescription>Switch to dark theme</p>
-          <input type="checkbox" scSwitch [formField]="switchForm.darkMode" />
-        </label>
-
-        <label scSwitchField>
-          <p scLabelText>Auto Save</p>
-          <p scFieldDescription>Automatically save your work</p>
-          <input type="checkbox" scSwitch [formField]="switchForm.autoSave" />
-        </label>
+        </div>
+        <div scSwitchField>
+          <label scLabel>Dark mode</label>
+          <input type="checkbox" scSwitch [formField]="settingsForm.darkMode" />
+        </div>
       </div>
-
-      <div class="bg-muted mt-6 rounded-md p-4">
-        <p class="text-sm font-medium">Form Values:</p>
-        <pre class="mt-2 text-xs">{{ formModel() | json }}</pre>
-      </div>
-    </form>
+      <pre scFrame class="bg-muted p-4 text-xs">{{ model() | json }}</pre>
+    </div>
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
 export class SignalFormsSwitchDemo {
-  readonly formModel = signal<SwitchFormModel>({
-    notifications: true,
-    darkMode: false,
-    autoSave: true,
-  });
-
-  readonly switchForm = form(this.formModel, (schemaPath) => {
-    required(schemaPath.notifications);
-    required(schemaPath.autoSave);
-  });
+  protected readonly model = signal({ notifications: true, darkMode: false });
+  protected readonly settingsForm = form(this.model);
 }

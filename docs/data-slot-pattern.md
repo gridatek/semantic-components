@@ -56,7 +56,6 @@ The following `data-slot` values are currently in use:
 | `select-trigger`       | `select-trigger.ts`                                                                    | `control-group.ts` (presets) — corners and border in a group; luma, rhea, sera: its border beside buttons                                                      |
 | `select-value`         | `select-value.ts`                                                                      | `select-trigger.ts` (presets) — the value's layout in the trigger (`*:data-[slot=select-value]:…`)                                                             |
 | `switch`               | `switch.ts`                                                                            | `switch-field.ts` — CSS grid layout detection                                                                                                                  |
-| `switch-visual`        | `switch-visual.ts`                                                                     | `switch-field.ts` — grid column positioning                                                                                                                    |
 
 ## Layout, not styling
 

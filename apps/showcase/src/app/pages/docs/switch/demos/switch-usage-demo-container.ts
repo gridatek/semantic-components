@@ -1,41 +1,41 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { UsageCode } from '../../../../components/usage-code/usage-code';
-import { SwitchNextUsageDemo } from './switch-next-usage-demo';
+import { SwitchUsageDemo } from './switch-usage-demo';
 
 @Component({
-  selector: 'app-switch-next-usage-demo-container',
-  imports: [UsageCode, SwitchNextUsageDemo],
+  selector: 'app-switch-usage-demo-container',
+  imports: [UsageCode, SwitchUsageDemo],
   template: `
     <app-usage-code [code]="code">
-      <ng-template><app-switch-next-usage-demo /></ng-template>
+      <ng-template><app-switch-usage-demo /></ng-template>
     </app-usage-code>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class SwitchNextUsageDemoContainer {
+export class SwitchUsageDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
   ScLabel,
-  ScSwitchNext,
-  ScSwitchNextField,
+  ScSwitch,
+  ScSwitchField,
 } from '@semantic-components/ui';
 
 /** A switch beside its label. */
 @Component({
-  selector: 'app-switch-next-usage-demo',
-  imports: [FormField, ScLabel, ScSwitchNext, ScSwitchNextField],
+  selector: 'app-switch-usage-demo',
+  imports: [FormField, ScLabel, ScSwitch, ScSwitchField],
   template: \`
-    <div scSwitchNextField>
-      <input type="checkbox" scSwitchNext [formField]="modeForm.airplane" />
+    <div scSwitchField>
+      <input type="checkbox" scSwitch [formField]="modeForm.airplane" />
       <label scLabel>Airplane Mode</label>
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class SwitchNextUsageDemo {
+export class SwitchUsageDemo {
   protected readonly modeForm = form(signal({ airplane: false }));
 }`;
 }

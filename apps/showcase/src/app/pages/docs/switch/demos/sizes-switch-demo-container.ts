@@ -1,43 +1,43 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { SizesSwitchNextDemo } from './sizes-switch-next-demo';
+import { SizesSwitchDemo } from './sizes-switch-demo';
 
 @Component({
-  selector: 'app-sizes-switch-next-demo-container',
-  imports: [DemoContainer, SizesSwitchNextDemo],
+  selector: 'app-sizes-switch-demo-container',
+  imports: [DemoContainer, SizesSwitchDemo],
   template: `
     <app-demo-container
       title="Sizes"
-      demoUrl="/demos/switch-next/sizes-switch-next-demo"
+      demoUrl="/demos/switch/sizes-switch-demo"
       [code]="code"
     >
-      <app-sizes-switch-next-demo />
+      <app-sizes-switch-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class SizesSwitchNextDemoContainer {
+export class SizesSwitchDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScFieldGroup,
   ScLabel,
-  ScSwitchNext,
-  ScSwitchNextField,
+  ScSwitch,
+  ScSwitchField,
 } from '@semantic-components/ui';
 
 /** size: default, or sm. */
 @Component({
-  selector: 'app-sizes-switch-next-demo',
-  imports: [ScFieldGroup, ScLabel, ScSwitchNext, ScSwitchNextField],
+  selector: 'app-sizes-switch-demo',
+  imports: [ScFieldGroup, ScLabel, ScSwitch, ScSwitchField],
   template: \`
     <div scFieldGroup class="w-full max-w-40">
-      <div scSwitchNextField>
-        <input type="checkbox" scSwitchNext size="sm" />
+      <div scSwitchField>
+        <input type="checkbox" scSwitch size="sm" />
         <label scLabel>Small</label>
       </div>
-      <div scSwitchNextField>
-        <input type="checkbox" scSwitchNext size="default" />
+      <div scSwitchField>
+        <input type="checkbox" scSwitch size="default" />
         <label scLabel>Default</label>
       </div>
     </div>
@@ -45,5 +45,5 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class SizesSwitchNextDemo {}`;
+export class SizesSwitchDemo {}`;
 }
