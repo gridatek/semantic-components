@@ -20,11 +20,7 @@ import { CustomThemeCheckboxDemo } from './custom-theme-checkbox-demo';
 export class CustomThemeCheckboxDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
-import {
-  ScCheckbox,
-  ScCheckboxField,
-  ScLabel,
-} from '@semantic-components/ui';
+import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui';
 
 /** The app's colours, changed on a part of the page: --primary and --primary-foreground. */
 @Component({

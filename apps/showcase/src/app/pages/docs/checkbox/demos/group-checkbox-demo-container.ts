@@ -65,19 +65,11 @@ import {
           External disks
         </label>
         <label scCheckboxField>
-          <input
-            type="checkbox"
-            scCheckbox
-            [formField]="desktopForm.media"
-          />
+          <input type="checkbox" scCheckbox [formField]="desktopForm.media" />
           CDs, DVDs, and iPods
         </label>
         <label scCheckboxField>
-          <input
-            type="checkbox"
-            scCheckbox
-            [formField]="desktopForm.servers"
-          />
+          <input type="checkbox" scCheckbox [formField]="desktopForm.servers" />
           Connected servers
         </label>
       </div>

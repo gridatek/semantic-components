@@ -417,6 +417,14 @@ export interface ScCheckboxStyles {
   mark: string;
 }
 
+/** A switch's parts that change from style to style. */
+export interface ScSwitchStyles {
+  /** The track: the native checkbox (appearance-none), its size from data-size. */
+  track: string;
+  /** The thumb: its ::before, moved when checked. */
+  thumb: string;
+}
+
 /** A preset: the components' classes in one of shadcn's styles. */
 export interface ScPreset {
   accordion: ScAccordionStyles;
@@ -480,6 +488,7 @@ export interface ScPreset {
   scrollArea: ScScrollAreaStyles;
   select: ScSelectStyles;
   sheet: ScSheetStyles;
+  switch: ScSwitchStyles;
   /** A placeholder while content loads. */
   skeleton: string;
   table: ScTableStyles;

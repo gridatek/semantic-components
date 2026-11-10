@@ -46,6 +46,7 @@ import { scrollArea } from './scroll-area';
 import { select } from './select';
 import { sheet } from './sheet';
 import { skeleton } from './skeleton';
+import { switchStyles } from './switch';
 import { table } from './table';
 /** The mira preset: `provideSemanticComponents({ preset: mira })`. */
 import { tabs } from './tabs';
@@ -100,6 +101,7 @@ export const mira: ScPreset = {
   select,
   sheet,
   skeleton,
+  switch: switchStyles,
   table,
   tabs,
   textarea,

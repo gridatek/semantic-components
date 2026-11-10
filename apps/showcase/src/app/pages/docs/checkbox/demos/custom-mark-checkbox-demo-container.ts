@@ -56,11 +56,7 @@ import {
           Red
         </label>
         <label scCheckboxField>
-          <input
-            type="checkbox"
-            scCheckbox
-            [formField]="colorsForm.green"
-          />
+          <input type="checkbox" scCheckbox [formField]="colorsForm.green" />
           Green
         </label>
         <label scCheckboxField>

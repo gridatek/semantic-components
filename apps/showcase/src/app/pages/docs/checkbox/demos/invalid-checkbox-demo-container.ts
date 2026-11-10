@@ -20,11 +20,7 @@ import { InvalidCheckboxDemo } from './invalid-checkbox-demo';
 export class InvalidCheckboxDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form, required } from '@angular/forms/signals';
-import {
-  ScCheckbox,
-  ScCheckboxField,
-  ScLabel,
-} from '@semantic-components/ui';
+import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui';
 
 /** A required checkbox, touched and not checked: marked invalid (Signal Forms). */
 @Component({

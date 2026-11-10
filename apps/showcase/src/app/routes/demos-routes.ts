@@ -6722,4 +6722,79 @@ export const demosRoutes: Route[] = [
       },
     ],
   },
+  {
+    path: 'demos/switch-next',
+    children: [
+      {
+        path: 'switch-next-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/switch-next/demos/switch-next-usage-demo').then(
+            (m) => m.SwitchNextUsageDemo,
+          ),
+      },
+      {
+        path: 'description-switch-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/switch-next/demos/description-switch-next-demo').then(
+            (m) => m.DescriptionSwitchNextDemo,
+          ),
+      },
+      {
+        path: 'choice-card-switch-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/switch-next/demos/choice-card-switch-next-demo').then(
+            (m) => m.ChoiceCardSwitchNextDemo,
+          ),
+      },
+      {
+        path: 'disabled-switch-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/switch-next/demos/disabled-switch-next-demo').then(
+            (m) => m.DisabledSwitchNextDemo,
+          ),
+      },
+      {
+        path: 'invalid-switch-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/switch-next/demos/invalid-switch-next-demo').then(
+            (m) => m.InvalidSwitchNextDemo,
+          ),
+      },
+      {
+        path: 'sizes-switch-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/switch-next/demos/sizes-switch-next-demo').then(
+            (m) => m.SizesSwitchNextDemo,
+          ),
+      },
+      {
+        path: 'placement-switch-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/switch-next/demos/placement-switch-next-demo').then(
+            (m) => m.PlacementSwitchNextDemo,
+          ),
+      },
+      {
+        path: 'state-switch-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/switch-next/demos/state-switch-next-demo').then(
+            (m) => m.StateSwitchNextDemo,
+          ),
+      },
+      {
+        path: 'signal-forms-switch-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/switch-next/demos/signal-forms-switch-next-demo').then(
+            (m) => m.SignalFormsSwitchNextDemo,
+          ),
+      },
+      {
+        path: 'rtl-switch-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/switch-next/demos/rtl-switch-next-demo').then(
+            (m) => m.RtlSwitchNextDemo,
+          ),
+      },
+    ],
+  },
 ];

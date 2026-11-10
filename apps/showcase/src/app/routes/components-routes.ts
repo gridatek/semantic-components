@@ -651,6 +651,12 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/switch/switch-page'),
       },
       {
+        path: 'switch-next',
+        title: 'Switch Next - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/switch-next/switch-next-page'),
+      },
+      {
         path: 'tabs',
         title: 'Tabs - Semantic Components',
         loadComponent: () => import('../pages/docs/tabs/tabs-page'),
