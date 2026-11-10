@@ -1,63 +1,19 @@
-import { Component, ViewEncapsulation, inject } from '@angular/core';
-import {
-  ScCodeBlock,
-  ScCodeBlockActions,
-  ScCodeBlockContent,
-  ScCodeBlockCopy,
-  ScCodeBlockHeader,
-  ScCodeBlockTitle,
-} from '@semantic-components/ui/code-block';
-import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
-import { DevOnly } from '../../../../components/dev-only/dev-only';
-import { ConfigService } from '../../../../services/config-service';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { UsageCode } from '../../../../components/usage-code/usage-code';
 import { BreadcrumbUsageDemo } from './breadcrumb-usage-demo';
 
 @Component({
   selector: 'app-breadcrumb-usage-demo-container',
-  imports: [
-    DevOnly,
-    ScCodeBlock,
-    ScCodeBlockHeader,
-    ScCodeBlockTitle,
-    ScCodeBlockActions,
-    ScCodeBlockCopy,
-    ScCodeBlockContent,
-    SiCheckIcon,
-    SiCopyIcon,
-    BreadcrumbUsageDemo,
-  ],
+  imports: [UsageCode, BreadcrumbUsageDemo],
   template: `
-    <div scCodeBlock>
-      <div scCodeBlockHeader>
-        <div scCodeBlockTitle>angular-ts</div>
-        <div scCodeBlockActions>
-          <button [scCodeBlockCopy]="code" #copy="scCodeBlockCopy">
-            @if (copy.copied()) {
-              <svg siCheckIcon></svg>
-            } @else {
-              <svg siCopyIcon></svg>
-            }
-            <span class="sr-only">Copy to clipboard</span>
-          </button>
-        </div>
-      </div>
-      <pre scCodeBlockContent [code]="code" language="angular-ts"></pre>
-    </div>
-
-    @if (devMode()) {
-      <app-dev-only>
-        <app-breadcrumb-usage-demo />
-      </app-dev-only>
-    }
+    <app-usage-code [code]="code">
+      <ng-template><app-breadcrumb-usage-demo /></ng-template>
+    </app-usage-code>
   `,
-  host: { class: 'block w-full space-y-4' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
 export class BreadcrumbUsageDemoContainer {
-  private readonly config = inject(ConfigService);
-
-  protected readonly devMode = this.config.devMode;
-
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
