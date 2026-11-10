@@ -69,7 +69,7 @@ async function verifyOnServer(code: string): Promise<boolean> {
   ],
   template: \`
     <div class="w-72 space-y-4">
-      <div scField>
+      <div scField class="w-fit">
         <label scLabel>Verification code</label>
         <div scOtpFieldNext [formField]="otpForm.code">
           <div scOtpFieldNextGroup>

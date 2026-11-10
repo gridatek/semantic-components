@@ -20,7 +20,8 @@ test.describe('OTP field — validation with a server call', () => {
     await page.goto(
       '/demos/otp-field-next/server-validation-otp-field-next-demo',
     );
-    const field = page.locator('[data-slot=otp-field]');
+    // The field round the row: its pending and invalid state.
+    const field = page.locator('[data-slot=field]');
     const status = page.getByRole('status');
     const message = page.getByRole('alert');
     const first = page.getByRole('textbox', { name: 'Verification code' });

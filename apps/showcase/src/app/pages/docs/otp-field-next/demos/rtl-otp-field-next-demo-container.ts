@@ -45,7 +45,7 @@ import { SiMinusIcon } from '@semantic-icons/lucide-icons';
   ],
   template: \`
     <div dir="rtl" lang="ar">
-      <div scField>
+      <div scField class="w-fit">
         <label scLabel>رمز التحقق</label>
         <div scOtpFieldNext [formField]="otpForm.code">
           <div scOtpFieldNextGroup>

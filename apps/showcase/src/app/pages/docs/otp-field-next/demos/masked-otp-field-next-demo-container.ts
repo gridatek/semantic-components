@@ -40,7 +40,7 @@ import {
     ScOtpFieldNextInput,
   ],
   template: \`
-    <div scField>
+    <div scField class="w-fit">
       <label scLabel>PIN</label>
       <div scOtpFieldNext mask [formField]="otpForm.pin">
         <div scOtpFieldNextGroup>

@@ -19,7 +19,7 @@ import {
   ],
   template: `
     <div class="space-y-2">
-      <div scField>
+      <div scField class="w-fit">
         <label scLabel>One-time password</label>
         <div scOtpFieldNext [(value)]="code">
           <div scOtpFieldNextGroup>

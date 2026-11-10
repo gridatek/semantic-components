@@ -59,10 +59,10 @@ const accepted: Record<ScOtpFieldNextValidationType, (char: string) => string> =
   host: {
     '[class]': 'class()',
     'data-slot': 'otp-field',
-    '[attr.data-complete]': 'complete() || null',
+    '[attr.data-complete]': 'complete() ? "" : null',
     '[attr.data-filled]': 'value() ? "" : null',
-    '[attr.data-focused]': 'focused() || null',
-    '[attr.data-readonly]': 'readOnly() || null',
+    '[attr.data-focused]': 'focused() ? "" : null',
+    '[attr.data-readonly]': 'readOnly() ? "" : null',
     '(paste)': 'onPaste($event)',
     '(focusin)': 'focused.set(true)',
     '(focusout)': 'onFocusOut($event)',

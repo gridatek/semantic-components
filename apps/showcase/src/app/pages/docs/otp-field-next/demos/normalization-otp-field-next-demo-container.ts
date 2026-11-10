@@ -44,7 +44,7 @@ import { SiMinusIcon } from '@semantic-icons/lucide-icons';
     SiMinusIcon,
   ],
   template: \`
-    <div scField>
+    <div scField class="w-fit">
       <label scLabel>Invite code</label>
       <div
         scOtpFieldNext
