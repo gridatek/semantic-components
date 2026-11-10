@@ -27,7 +27,9 @@ import { ScLink } from '@semantic-components/ui';
   imports: [ScLink, RouterLink],
   template: \`
     <div class="flex flex-wrap items-center gap-2">
-      <a scLink href="/docs/components/button" disabled>Button docs</a>
+      <a scLink variant="button" href="/docs/components/button" disabled
+        >Button docs</a
+      >
       <a scLink variant="outline" routerLink="/docs/components/badge" disabled>
         Badge docs
       </a>

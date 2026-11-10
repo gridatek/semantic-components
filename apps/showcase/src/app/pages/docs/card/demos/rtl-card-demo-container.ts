@@ -90,9 +90,7 @@ import {
               <div scField>
                 <div class="flex items-center">
                   <label scLabel>كلمة المرور</label>
-                  <a scLink variant="link" href="#" class="ms-auto">
-                    نسيت كلمة المرور؟
-                  </a>
+                  <a scLink href="#" class="ms-auto"> نسيت كلمة المرور؟ </a>
                 </div>
                 <input
                   scInput

@@ -134,9 +134,9 @@ import { Logo } from '../../components/logo/logo';
                   i18n="@@signup.terms"
                 >
                   I agree to the
-                  <a scLink variant="link" href="#">Terms of Service</a>
+                  <a scLink href="#">Terms of Service</a>
                   and
-                  <a scLink variant="link" href="#">Privacy Policy</a>
+                  <a scLink href="#">Privacy Policy</a>
                 </label>
               </div>
 
@@ -177,7 +177,7 @@ import { Logo } from '../../components/logo/logo';
         <div scCardFooter class="justify-center">
           <p class="text-muted-foreground text-sm" i18n="@@signup.haveAccount">
             Already have an account?
-            <a scLink variant="link" routerLink="/login">Log in</a>
+            <a scLink routerLink="/login">Log in</a>
           </p>
         </div>
       </div>

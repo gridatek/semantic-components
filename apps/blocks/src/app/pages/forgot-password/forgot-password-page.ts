@@ -81,11 +81,7 @@ import { Logo } from '../../components/logo/logo';
           </form>
         </div>
         <div scCardFooter class="justify-center">
-          <a
-            scLink
-            variant="link"
-            routerLink="/login"
-            i18n="@@forgotPassword.backToLogin"
+          <a scLink routerLink="/login" i18n="@@forgotPassword.backToLogin"
             >Back to login</a
           >
         </div>

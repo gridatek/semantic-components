@@ -49,9 +49,9 @@ import { WithIconLinkDemoContainer } from './demos/with-icon-link-demo-container
       <div class="space-y-2">
         <h1 scHeading>Link</h1>
         <p class="text-muted-foreground">
-          A link that looks like a button: it goes somewhere, so it stays a link
-          — opened in a new tab, copied, announced as a link — with a button's
-          look.
+          A link: it goes somewhere, so it stays a link — opened in a new tab,
+          copied, announced as a link. In the preset&apos;s link look, or a
+          button&apos;s (variant).
         </p>
         <app-component-badges path="link" />
       </div>
@@ -147,7 +147,7 @@ export default class LinkPage {
   protected readonly anatomy = {
     imports: "import { ScLink } from '@semantic-components/ui';",
     markup: [
-      '<a scLink href="…">',
+      '<a scLink variant="button" href="…">',
       '  <svg data-icon="inline-start"></svg>',
       '  Label',
       '  <svg data-icon="inline-end"></svg>',
@@ -158,9 +158,10 @@ export default class LinkPage {
   protected readonly inputs = [
     {
       name: 'variant',
-      type: "'default' | 'outline' | 'secondary' | 'ghost' | 'destructive' | 'link'",
+      type: "'default' | 'button' | 'outline' | 'secondary' | 'ghost' | 'destructive'",
       default: "'default'",
-      description: "Its look: the button's variants.",
+      description:
+        "Its look: a link (default), or a button's — button the primary one, or outline, secondary, ghost, destructive.",
     },
     {
       name: 'size',

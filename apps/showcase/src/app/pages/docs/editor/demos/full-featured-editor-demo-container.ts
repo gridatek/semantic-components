@@ -519,6 +519,7 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
                     <div class="flex items-center justify-between gap-2">
                       <a
                         scLink
+                        variant="button"
                         [href]="href"
                         target="_blank"
                         rel="noopener noreferrer"

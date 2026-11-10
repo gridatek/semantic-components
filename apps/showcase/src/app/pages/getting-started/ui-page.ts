@@ -167,7 +167,7 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
             >&lt;html&gt;</code
           >. Try them live on the
-          <a scLink variant="link" routerLink="/customize">Customize page</a>
+          <a scLink routerLink="/customize">Customize page</a>
           .
         </p>
         <p class="text-muted-foreground">

@@ -281,6 +281,7 @@ import {
         </a>
         <a
           scLink
+          variant="button"
           routerLink="/signup"
           class="hidden md:inline-flex"
           i18n="@@navbar.getStarted"
@@ -406,6 +407,7 @@ import {
         </a>
         <a
           scLink
+          variant="button"
           routerLink="/signup"
           class="w-full"
           i18n="@@navbar.getStarted"

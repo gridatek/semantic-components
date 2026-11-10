@@ -1,11 +1,11 @@
 # Link
 
-A link that looks like a button: it goes somewhere, so it stays a link — opened in a new tab, copied, announced as a link — with a button's look.
+A link: it goes somewhere, so it stays a link — opened in a new tab, copied, announced as a link. In the preset's link look by default, or a button's (`variant`): `button` the primary one, or `outline`, `secondary`, `ghost`, `destructive`.
 
 ## Usage
 
 ```html
-<a scLink href="/docs/components/button">Go to Button</a>
+<a scLink variant="button" href="/docs/components/button">Go to Button</a>
 ```
 
 ## Anatomy
@@ -15,7 +15,7 @@ import { ScLink } from '@semantic-components/ui';
 ```
 
 ```html
-<a scLink href="…">
+<a scLink variant="button" href="…">
   <svg data-icon="inline-start"></svg>
   Label
   <svg data-icon="inline-end"></svg>
@@ -32,7 +32,7 @@ Its classes are the preset's button (`injectPreset().button`), as `scButton`'s.
 
 | Input      | Type                                                                                 | Default     | Description                                                                                                 |
 | ---------- | ------------------------------------------------------------------------------------ | ----------- | ----------------------------------------------------------------------------------------------------------- |
-| `variant`  | `'default' \| 'outline' \| 'secondary' \| 'ghost' \| 'destructive' \| 'link'`        | `'default'` | Its look: the button's variants                                                                             |
+| `variant`  | `'default' \| 'button' \| 'outline' \| 'secondary' \| 'ghost' \| 'destructive'`      | `'default'` | Its look: a link (default), or a button's — `button` the primary one                                        |
 | `size`     | `'xs' \| 'sm' \| 'default' \| 'lg' \| 'icon-xs' \| 'icon-sm' \| 'icon' \| 'icon-lg'` | `'default'` | Its size: the button's sizes                                                                                |
 | `disabled` | `boolean`                                                                            | `false`     | Not followed by any means (click, Enter, middle-click, `routerLink`); out of the tab order; `aria-disabled` |
 | `class`    | `string`                                                                             | `''`        | Classes merged over the preset (`cn`: a later class wins)                                                   |
@@ -42,9 +42,9 @@ Its classes are the preset's button (`injectPreset().button`), as `scButton`'s.
 ### Variants
 
 ```html
-<a scLink href="/docs/components/button">Default</a>
+<a scLink variant="button" href="/docs/components/button">Default</a>
 <a scLink variant="outline" href="/docs/components/badge">Outline</a>
-<a scLink variant="link" href="/docs/components/tabs">Link</a>
+<a scLink href="/docs/components/tabs">Link</a>
 ```
 
 ### Size
@@ -87,7 +87,7 @@ A new tab, without the opener; said to the reader:
 ### Disabled
 
 ```html
-<a scLink href="/docs/components/button" disabled>Button docs</a> <a scLink routerLink="/docs/components/badge" disabled>Badge docs</a>
+<a scLink variant="button" href="/docs/components/button" disabled>Button docs</a> <a scLink variant="button" routerLink="/docs/components/badge" disabled>Badge docs</a>
 ```
 
 Its `href` stays: a disabled link is still announced as a link, dimmed. Nothing follows it — the clicks are stopped before any other listener (a `routerLink`'s) hears them.

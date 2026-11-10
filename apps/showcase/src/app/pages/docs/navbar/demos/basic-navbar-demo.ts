@@ -52,7 +52,9 @@ import {
       </nav>
       <div scNavbarActions>
         <a scLink variant="ghost" href="/docs/components/navbar">Sign in</a>
-        <a scLink href="/docs/getting-started/introduction">Get started</a>
+        <a scLink variant="button" href="/docs/getting-started/introduction"
+          >Get started</a
+        >
       </div>
       <button scNavbarToggle>
         @if (navbar.open()) {

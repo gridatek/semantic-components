@@ -14,11 +14,28 @@ import { cn } from '../../utils';
 import { type ScButtonVariants } from '../button';
 
 /**
- * A link that looks like a button: a real `<a>`, its `href` (or
- * `routerLink`) yours, its classes the preset's button. `disabled`: still
+ * A link's look: a link (default), or a button's — `button` the primary
+ * one, or the outline, secondary, ghost and destructive buttons.
+ */
+export type ScLinkVariant =
+  'default' | 'button' | 'outline' | 'secondary' | 'ghost' | 'destructive';
+
+/**
+ * A link: a real `<a>`, its `href` (or `routerLink`) yours — in the
+ * preset's link look, or a button's (`variant`). `disabled`: still
  * announced as a link (dimmed), out of the tab order, and nothing follows it
  * — not a click, Enter, a middle-click, nor a `routerLink`.
  */
+/** The preset's button variant for each link look. */
+const LINK_TO_BUTTON: Record<ScLinkVariant, ScButtonVariants['variant']> = {
+  default: 'link',
+  button: 'default',
+  outline: 'outline',
+  secondary: 'secondary',
+  ghost: 'ghost',
+  destructive: 'destructive',
+};
+
 @Directive({
   selector: 'a[scLink]',
   host: {
@@ -39,7 +56,8 @@ export class ScLink {
   });
 
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly variant = input<ScButtonVariants['variant']>('default');
+  /** A link (default), or a button's look. */
+  readonly variant = input<ScLinkVariant>('default');
   readonly size = input<ScButtonVariants['size']>('default');
   /** Not followed, by any means; announced as a dimmed link. */
   readonly disabled = input<boolean, unknown>(false, {
@@ -52,7 +70,10 @@ export class ScLink {
 
   protected readonly class = computed(() =>
     cn(
-      this.buttonStyles({ variant: this.variant(), size: this.size() }),
+      this.buttonStyles({
+        variant: LINK_TO_BUTTON[this.variant()],
+        size: this.size(),
+      }),
       this.classInput(),
     ),
   );

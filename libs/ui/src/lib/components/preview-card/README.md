@@ -6,7 +6,7 @@ A preview of a link's destination, shown on hover or keyboard focus — shadcn's
 
 ```html
 <div scPreviewCardProvider>
-  <a scLink variant="link" href="https://nextjs.org" scPreviewCardTrigger> Hover Here </a>
+  <a scLink href="https://nextjs.org" scPreviewCardTrigger> Hover Here </a>
   <ng-template scPreviewCardPortal>
     <div scPreviewCard>…</div>
   </ng-template>

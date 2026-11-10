@@ -30,7 +30,13 @@ import { SiGithubIcon, SiStarIcon } from '@semantic-icons/lucide-icons';
         <div
           class="flex flex-col justify-center gap-3 pt-2 sm:flex-row sm:gap-4"
         >
-          <a scLink size="lg" routerLink="/docs/getting-started">Get Started</a>
+          <a
+            scLink
+            variant="button"
+            size="lg"
+            routerLink="/docs/getting-started"
+            >Get Started</a
+          >
           <a scLink variant="outline" size="lg" routerLink="/docs/components">
             View Components
           </a>

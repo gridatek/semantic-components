@@ -47,7 +47,9 @@ import { TableUsageDemoContainer } from './demos/table-usage-demo-container';
         <p class="text-muted-foreground">
           A table of data: the native table elements, in the look of the
           app&apos;s preset. For sorting, filtering, selection and pages, use a
-          <a scLink routerLink="/docs/components/data-table">Data Table</a>.
+          <a scLink variant="button" routerLink="/docs/components/data-table"
+            >Data Table</a
+          >.
         </p>
         <app-component-badges path="table" />
       </div>

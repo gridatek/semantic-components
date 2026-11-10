@@ -65,9 +65,7 @@ import {
             <div scField>
               <div class="flex items-center">
                 <label scLabel>Password</label>
-                <a scLink variant="link" href="#" class="ms-auto">
-                  Forgot your password?
-                </a>
+                <a scLink href="#" class="ms-auto"> Forgot your password? </a>
               </div>
               <input scInput type="password" [formField]="loginForm.password" />
             </div>

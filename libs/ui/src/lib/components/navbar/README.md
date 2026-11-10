@@ -25,7 +25,7 @@ A site's top bar: your brand, links and actions; on narrow screens a toggle open
   </nav>
 
   <div scNavbarActions>
-    <a scLink routerLink="/start">Get started</a>
+    <a scLink variant="button" routerLink="/start">Get started</a>
   </div>
 
   <button scNavbarToggle>

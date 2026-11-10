@@ -130,10 +130,10 @@ Buttons that toggle a state are a Toggle Group.
 
 ### As Link
 
-A link that looks like a button is a link: `a[scLink]`, which takes the same `variant` and `size`. Never a button made to navigate.
+A link is a link: `a[scLink]` — a link by default, a button's look with `variant` (`button` the primary one, `outline`, `secondary`, `ghost`, `destructive`) and `size`. Never a button made to navigate.
 
 ```html
-<a scLink href="/docs/components/link">Go to the Link docs</a>
+<a scLink variant="button" href="/docs/components/link">Go to the Link docs</a>
 ```
 
 ### Disabled

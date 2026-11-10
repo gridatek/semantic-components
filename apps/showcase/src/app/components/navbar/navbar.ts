@@ -184,6 +184,7 @@ import { PresetSheet } from '../preset-sheet/preset-sheet';
         </a>
         <a
           scLink
+          variant="button"
           class="hidden md:inline-flex"
           routerLink="/docs/getting-started"
         >

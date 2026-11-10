@@ -43,17 +43,11 @@ import { CustomBackdropDemoContainer } from './demos/custom-backdrop-demo-contai
         <p class="text-muted-foreground">
           The dimmed, blurred layer behind an overlay, in the look of the
           app&apos;s preset. The
-          <a scLink variant="link" routerLink="/docs/components/dialog"
-            >Dialog</a
-          >,
-          <a scLink variant="link" routerLink="/docs/components/alert-dialog"
-            >Alert Dialog</a
-          >,
-          <a scLink variant="link" routerLink="/docs/components/sheet">Sheet</a>
+          <a scLink routerLink="/docs/components/dialog">Dialog</a>,
+          <a scLink routerLink="/docs/components/alert-dialog">Alert Dialog</a>,
+          <a scLink routerLink="/docs/components/sheet">Sheet</a>
           and
-          <a scLink variant="link" routerLink="/docs/components/drawer"
-            >Drawer</a
-          >
+          <a scLink routerLink="/docs/components/drawer">Drawer</a>
           render it in theirs; use it on its own for an overlay of yours.
         </p>
         <app-component-badges path="backdrop" />

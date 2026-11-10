@@ -86,7 +86,6 @@ import { Logo } from '../../components/logo/logo';
                   <label scLabel i18n="@@common.password">Password</label>
                   <a
                     scLink
-                    variant="link"
                     routerLink="/forgot-password"
                     i18n="@@login.forgotPassword"
                   >
@@ -147,7 +146,7 @@ import { Logo } from '../../components/logo/logo';
         <div scCardFooter class="justify-center">
           <p class="text-muted-foreground text-sm" i18n="@@login.noAccount">
             Don't have an account?
-            <a scLink variant="link" routerLink="/signup">Sign up</a>
+            <a scLink routerLink="/signup">Sign up</a>
           </p>
         </div>
       </div>

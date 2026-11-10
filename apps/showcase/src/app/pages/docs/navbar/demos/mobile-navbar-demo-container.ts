@@ -95,7 +95,11 @@ import {
             </a>
           }
         </nav>
-        <a scLink class="mt-3" href="/docs/getting-started/introduction"
+        <a
+          scLink
+          variant="button"
+          class="mt-3"
+          href="/docs/getting-started/introduction"
           >Get started</a
         >
       </div>
