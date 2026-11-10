@@ -35,7 +35,6 @@ import { ComponentsService } from '../../../services/components-service';
 
       <div
         scToggleGroup
-        type="single"
         class="flex-wrap"
         [(value)]="filterCategory"
         aria-label="Filter components by category"
@@ -133,10 +132,10 @@ export default class ComponentsPage {
     },
   };
 
-  readonly filterCategory = signal<string | null>('All');
+  readonly filterCategory = signal<string[]>(['All']);
 
   readonly filteredComponents = computed(() => {
-    const category = this.filterCategory();
+    const [category] = this.filterCategory();
     const visible = this.componentsService.visibleComponents();
     const items =
       category && category !== 'All'

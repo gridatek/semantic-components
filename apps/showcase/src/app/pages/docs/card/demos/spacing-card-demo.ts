@@ -32,13 +32,12 @@ import {
     <div class="grid w-full max-w-sm gap-4">
       <div
         scToggleGroup
-        type="single"
         variant="outline"
         size="sm"
         aria-label="Card spacing"
         class="justify-center"
-        [value]="spacing()"
-        (valueChange)="choose($event)"
+        [value]="[spacing()]"
+        (valueChange)="choose($event[0])"
       >
         @for (option of options; track option.value) {
           <button scToggleGroupItem [value]="option.value">

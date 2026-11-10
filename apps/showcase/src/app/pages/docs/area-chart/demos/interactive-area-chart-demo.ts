@@ -39,8 +39,8 @@ import {
       size="sm"
       aria-label="Time range"
       class="mb-3"
-      [value]="range()"
-      (valueChange)="choose($event)"
+      [value]="[range()]"
+      (valueChange)="choose($event[0])"
     >
       <button scToggleGroupItem value="90">Last 3 months</button>
       <button scToggleGroupItem value="30">Last 30 days</button>

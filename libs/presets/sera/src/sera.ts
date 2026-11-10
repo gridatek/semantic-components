@@ -53,6 +53,7 @@ import { table } from './table';
 import { tabs } from './tabs';
 import { textarea } from './textarea';
 import { toggle } from './toggle';
+import { toggleGroup } from './toggle-group';
 import { tooltip } from './tooltip';
 import { trace } from './trace';
 
@@ -109,6 +110,7 @@ export const sera: ScPreset = {
   tabs,
   textarea,
   toggle,
+  toggleGroup,
   tooltip,
   trace,
 };

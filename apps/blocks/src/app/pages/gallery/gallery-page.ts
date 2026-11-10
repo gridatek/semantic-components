@@ -601,7 +601,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
               Toggle Group
             </h2>
             <div scSeparator aria-hidden="true"></div>
-            <div scToggleGroup type="single" variant="outline">
+            <div scToggleGroup variant="outline">
               <button
                 scToggle
                 aria-label="Align left"

@@ -621,7 +621,6 @@ const INK_COLORS = [
                   <div
                     scToggleGroup
                     scPdfViewerSetting="cursorTool"
-                    type="single"
                     variant="outline"
                     size="sm"
                     aria-labelledby="pdf-demo-cursor"
@@ -640,7 +639,6 @@ const INK_COLORS = [
                   <div
                     scToggleGroup
                     scPdfViewerSetting="scrollMode"
-                    type="single"
                     variant="outline"
                     size="sm"
                     aria-labelledby="pdf-demo-scrolling"
@@ -663,7 +661,6 @@ const INK_COLORS = [
                   <div
                     scToggleGroup
                     scPdfViewerSetting="spreadMode"
-                    type="single"
                     variant="outline"
                     size="sm"
                     aria-labelledby="pdf-demo-spreads"
@@ -682,11 +679,10 @@ const INK_COLORS = [
           <!-- Annotation tools (off when the document forbids changes) -->
           <div
             scToggleGroup
-            type="single"
             aria-label="Annotation tool"
             [disabled]="!viewer.canEdit()"
-            [value]="selectedTool()"
-            (valueChange)="setTool($event)"
+            [value]="[selectedTool()]"
+            (valueChange)="setTool($event[0])"
           >
             <div scTooltipProvider side="bottom">
               <button scToggleGroupItem value="highlight" scTooltipTrigger>
@@ -749,7 +745,6 @@ const INK_COLORS = [
                     <div
                       scToggleGroup
                       scPdfViewerSetting="highlightColor"
-                      type="single"
                       size="sm"
                       aria-label="Highlight colour"
                     >
@@ -784,7 +779,6 @@ const INK_COLORS = [
                     <div
                       scToggleGroup
                       scPdfViewerSetting="freetextColor"
-                      type="single"
                       size="sm"
                       aria-label="Text colour"
                     >
@@ -815,7 +809,6 @@ const INK_COLORS = [
                     <div
                       scToggleGroup
                       scPdfViewerSetting="inkColor"
-                      type="single"
                       size="sm"
                       aria-label="Drawing colour"
                     >

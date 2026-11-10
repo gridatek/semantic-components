@@ -38,11 +38,10 @@ const LAYOUTS: ScEditorContentLayout[] = ['default', 'page'];
     <div class="w-full space-y-4">
       <div
         scToggleGroup
-        type="single"
         variant="outline"
         aria-label="Layout"
-        [value]="layout()"
-        (valueChange)="setLayout($event)"
+        [value]="[layout()]"
+        (valueChange)="setLayout($event[0])"
       >
         @for (l of layouts; track l) {
           <button scToggleGroupItem [value]="l">{{ layoutLabels[l] }}</button>

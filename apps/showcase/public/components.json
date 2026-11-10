@@ -338,7 +338,8 @@
     "description": "The date picker in range mode, with presets, typed ends and Apply.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Forms"
+    "category": "Forms",
+    "hidden": true
   },
   {
     "name": "Dialog",
@@ -670,7 +671,8 @@
     "description": "A modal dialog built on the native HTML dialog element.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Feedback"
+    "category": "Feedback",
+    "hidden": true
   },
   {
     "name": "Native Select",
@@ -762,7 +764,8 @@
     "description": "An input for international phone numbers.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Forms"
+    "category": "Forms",
+    "hidden": true
   },
   {
     "name": "Pie Chart",
@@ -855,7 +858,8 @@
     "description": "A dual-thumb range slider for selecting a numeric range between a minimum and maximum value.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Forms"
+    "category": "Forms",
+    "hidden": true
   },
   {
     "name": "Rating",
@@ -863,7 +867,8 @@
     "description": "A composable rating component for feedback and reviews.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Forms"
+    "category": "Forms",
+    "hidden": true
   },
   {
     "name": "Resizable",
@@ -1116,7 +1121,8 @@
     "description": "Theme management with mode switching and color scheme support.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Utilities"
+    "category": "Utilities",
+    "hidden": true
   },
   {
     "name": "Time Picker",
@@ -1226,7 +1232,8 @@
     "description": "A hierarchical view of nested items.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Data Display"
+    "category": "Data Display",
+    "hidden": true
   },
   {
     "name": "Treemap Chart",

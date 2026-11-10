@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
 import {
   SiBoldIcon,
@@ -6,6 +6,7 @@ import {
   SiUnderlineIcon,
 } from '@semantic-icons/lucide-icons';
 
+/** Several pressed at a time: the value lists them. */
 @Component({
   selector: 'app-multiple-toggle-group-demo',
   imports: [
@@ -16,28 +17,28 @@ import {
     SiUnderlineIcon,
   ],
   template: `
-    <div class="space-y-4">
+    <div class="flex flex-col items-center gap-4">
       <div
         scToggleGroup
-        type="multiple"
-        [(value)]="formatting"
+        multiple
         aria-label="Text formatting"
+        [(value)]="formatting"
       >
         <button scToggleGroupItem value="bold">
           <svg siBoldIcon></svg>
-          <span class="sr-only">Toggle bold</span>
+          <span class="sr-only">Bold</span>
         </button>
         <button scToggleGroupItem value="italic">
           <svg siItalicIcon></svg>
-          <span class="sr-only">Toggle italic</span>
+          <span class="sr-only">Italic</span>
         </button>
         <button scToggleGroupItem value="underline">
           <svg siUnderlineIcon></svg>
-          <span class="sr-only">Toggle underline</span>
+          <span class="sr-only">Underline</span>
         </button>
       </div>
       <p class="text-muted-foreground text-sm">
-        Selected: {{ formattingDisplay() }}
+        Formatting: {{ formatting().join(', ') || 'none' }}
       </p>
     </div>
   `,
@@ -45,10 +46,5 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class MultipleToggleGroupDemo {
-  readonly formatting = signal<string[]>(['bold']);
-
-  readonly formattingDisplay = computed(() => {
-    const val = this.formatting();
-    return val.length > 0 ? val.join(', ') : 'none';
-  });
+  protected readonly formatting = signal(['bold']);
 }

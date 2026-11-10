@@ -115,13 +115,7 @@ const columns = columnHelper.columns([
     ScGanttTimeline,
   ],
   template: \`
-    <div
-      scToggleGroup
-      type="single"
-      variant="outline"
-      aria-label="Scale"
-      [(value)]="choice"
-    >
+    <div scToggleGroup variant="outline" aria-label="Scale" [(value)]="choice">
       <button scToggleGroupItem value="day">Days</button>
       <button scToggleGroupItem value="week">Weeks</button>
       <button scToggleGroupItem value="month">Months</button>
@@ -170,11 +164,9 @@ export class ScalesGanttDemo {
   readonly from = date('2027-01-01');
   readonly to = date('2027-06-30');
 
-  readonly choice = signal<string | string[] | null>('week');
+  readonly choice = signal<ScGanttScaleUnit[]>(['week']);
   /** The toggle group can be emptied: weeks then. */
-  readonly scale = computed<ScGanttScaleUnit>(
-    () => (this.choice() as ScGanttScaleUnit | null) ?? 'week',
-  );
+  readonly scale = computed<ScGanttScaleUnit>(() => this.choice()[0] ?? 'week');
 
   readonly releases = signal(RELEASES);
 

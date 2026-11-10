@@ -6320,17 +6320,10 @@ export const demosRoutes: Route[] = [
     path: 'demos/toggle-group',
     children: [
       {
-        path: 'single-toggle-group-demo',
+        path: 'toggle-group-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/toggle-group/demos/single-toggle-group-demo').then(
-            (m) => m.SingleToggleGroupDemo,
-          ),
-      },
-      {
-        path: 'multiple-toggle-group-demo',
-        loadComponent: () =>
-          import('../pages/docs/toggle-group/demos/multiple-toggle-group-demo').then(
-            (m) => m.MultipleToggleGroupDemo,
+          import('../pages/docs/toggle-group/demos/toggle-group-usage-demo').then(
+            (m) => m.ToggleGroupUsageDemo,
           ),
       },
       {
@@ -6348,10 +6341,52 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
+        path: 'spacing-toggle-group-demo',
+        loadComponent: () =>
+          import('../pages/docs/toggle-group/demos/spacing-toggle-group-demo').then(
+            (m) => m.SpacingToggleGroupDemo,
+          ),
+      },
+      {
+        path: 'vertical-toggle-group-demo',
+        loadComponent: () =>
+          import('../pages/docs/toggle-group/demos/vertical-toggle-group-demo').then(
+            (m) => m.VerticalToggleGroupDemo,
+          ),
+      },
+      {
         path: 'disabled-toggle-group-demo',
         loadComponent: () =>
           import('../pages/docs/toggle-group/demos/disabled-toggle-group-demo').then(
             (m) => m.DisabledToggleGroupDemo,
+          ),
+      },
+      {
+        path: 'font-weight-toggle-group-demo',
+        loadComponent: () =>
+          import('../pages/docs/toggle-group/demos/font-weight-toggle-group-demo').then(
+            (m) => m.FontWeightToggleGroupDemo,
+          ),
+      },
+      {
+        path: 'single-toggle-group-demo',
+        loadComponent: () =>
+          import('../pages/docs/toggle-group/demos/single-toggle-group-demo').then(
+            (m) => m.SingleToggleGroupDemo,
+          ),
+      },
+      {
+        path: 'multiple-toggle-group-demo',
+        loadComponent: () =>
+          import('../pages/docs/toggle-group/demos/multiple-toggle-group-demo').then(
+            (m) => m.MultipleToggleGroupDemo,
+          ),
+      },
+      {
+        path: 'rtl-toggle-group-demo',
+        loadComponent: () =>
+          import('../pages/docs/toggle-group/demos/rtl-toggle-group-demo').then(
+            (m) => m.RtlToggleGroupDemo,
           ),
       },
     ],

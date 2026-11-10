@@ -13,8 +13,8 @@ import { ScCodeEditor } from '@semantic-components/ui/code-editor';
       size="sm"
       aria-label="Language"
       class="mb-3"
-      [value]="language()"
-      (valueChange)="show($event)"
+      [value]="[language()]"
+      (valueChange)="show($event[0])"
     >
       <button scToggleGroupItem value="css">CSS</button>
       <button scToggleGroupItem value="html">HTML</button>

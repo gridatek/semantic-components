@@ -53,8 +53,8 @@ import {
           size="sm"
           aria-label="View"
           class="ms-auto"
-          [value]="view()"
-          (valueChange)="show($event)"
+          [value]="[view()]"
+          (valueChange)="show($event[0])"
         >
           <button scToggleGroupItem value="split">Split</button>
           <button scToggleGroupItem value="unified">Unified</button>

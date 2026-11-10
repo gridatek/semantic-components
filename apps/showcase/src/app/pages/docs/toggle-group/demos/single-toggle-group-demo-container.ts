@@ -6,7 +6,11 @@ import { SingleToggleGroupDemo } from './single-toggle-group-demo';
   selector: 'app-single-toggle-group-demo-container',
   imports: [DemoContainer, SingleToggleGroupDemo],
   template: `
-    <app-demo-container title="Single Selection" [code]="code">
+    <app-demo-container
+      title="Single"
+      demoUrl="/demos/toggle-group/single-toggle-group-demo"
+      [code]="code"
+    >
       <app-single-toggle-group-demo />
     </app-demo-container>
   `,
@@ -22,38 +26,34 @@ import {
   SiTextAlignStartIcon,
 } from '@semantic-icons/lucide-icons';
 
+/** One pressed at a time — or none: pressing it again releases it. */
 @Component({
   selector: 'app-single-toggle-group-demo',
   imports: [
     ScToggleGroup,
     ScToggleGroupItem,
-    SiTextAlignStartIcon,
     SiTextAlignCenterIcon,
     SiTextAlignEndIcon,
+    SiTextAlignStartIcon,
   ],
   template: \`
-    <div class="space-y-4">
-      <div
-        scToggleGroup
-        type="single"
-        [(value)]="alignment"
-        aria-label="Text alignment"
-      >
-        <button scToggleGroupItem value="left">
+    <div class="flex flex-col items-center gap-4">
+      <div scToggleGroup aria-label="Text alignment" [(value)]="alignment">
+        <button scToggleGroupItem value="start">
           <svg siTextAlignStartIcon></svg>
-          <span class="sr-only">Align left</span>
+          <span class="sr-only">Align start</span>
         </button>
         <button scToggleGroupItem value="center">
           <svg siTextAlignCenterIcon></svg>
           <span class="sr-only">Align center</span>
         </button>
-        <button scToggleGroupItem value="right">
+        <button scToggleGroupItem value="end">
           <svg siTextAlignEndIcon></svg>
-          <span class="sr-only">Align right</span>
+          <span class="sr-only">Align end</span>
         </button>
       </div>
       <p class="text-muted-foreground text-sm">
-        Selected: {{ alignment() || 'none' }}
+        Alignment: {{ alignment()[0] ?? 'none' }}
       </p>
     </div>
   \`,
@@ -61,6 +61,6 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class SingleToggleGroupDemo {
-  readonly alignment = signal<string | null>('center');
+  protected readonly alignment = signal(['start']);
 }`;
 }

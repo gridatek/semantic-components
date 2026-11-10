@@ -1,37 +1,35 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
+import {
+  SiBoldIcon,
+  SiItalicIcon,
+  SiUnderlineIcon,
+} from '@semantic-icons/lucide-icons';
 
+/** A disabled group: every item dimmed, out of the Tab order. */
 @Component({
   selector: 'app-disabled-toggle-group-demo',
-  imports: [ScToggleGroup, ScToggleGroupItem],
+  imports: [
+    ScToggleGroup,
+    ScToggleGroupItem,
+    SiBoldIcon,
+    SiItalicIcon,
+    SiUnderlineIcon,
+  ],
   template: `
-    <div class="flex flex-col gap-4">
-      <div
-        scToggleGroup
-        type="single"
-        [disabled]="true"
-        aria-label="Disabled toggle group"
-      >
-        <button scToggleGroupItem value="a" aria-label="Option A">A</button>
-        <button scToggleGroupItem value="b" aria-label="Option B">B</button>
-        <button scToggleGroupItem value="c" aria-label="Option C">C</button>
-      </div>
-      <div
-        scToggleGroup
-        type="single"
-        aria-label="Toggle group with disabled item"
-      >
-        <button scToggleGroupItem value="a" aria-label="Option A">A</button>
-        <button
-          scToggleGroupItem
-          value="b"
-          [disabled]="true"
-          aria-label="Option B (disabled)"
-        >
-          B
-        </button>
-        <button scToggleGroupItem value="c" aria-label="Option C">C</button>
-      </div>
+    <div scToggleGroup disabled aria-label="Text formatting">
+      <button scToggleGroupItem value="bold">
+        <svg siBoldIcon></svg>
+        <span class="sr-only">Bold</span>
+      </button>
+      <button scToggleGroupItem value="italic">
+        <svg siItalicIcon></svg>
+        <span class="sr-only">Italic</span>
+      </button>
+      <button scToggleGroupItem value="underline">
+        <svg siUnderlineIcon></svg>
+        <span class="sr-only">Underline</span>
+      </button>
     </div>
   `,
   host: { class: 'flex w-full justify-center' },

@@ -123,11 +123,10 @@ const SAMPLES: Record<ScEditorFormat, ScEditorValue> = {
       <div class="flex flex-wrap items-center gap-2">
         <div
           scToggleGroup
-          type="single"
           variant="outline"
           aria-label="Format"
-          [value]="format()"
-          (valueChange)="setFormat($event)"
+          [value]="[format()]"
+          (valueChange)="setFormat($event[0])"
         >
           @for (f of formats; track f) {
             <button scToggleGroupItem [value]="f">

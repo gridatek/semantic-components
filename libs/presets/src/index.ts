@@ -440,6 +440,14 @@ export type ScToggleVariant = 'default' | 'outline';
 /** A toggle's size. */
 export type ScToggleSize = 'default' | 'sm' | 'lg';
 
+/** A toggle group's parts that change from style to style. */
+export interface ScToggleGroupStyles {
+  /** The group: its layout, gap (--gap) and corners. */
+  group: string;
+  /** An item's place in the group (joined when spacing is 0); its look is the toggle key's. */
+  item: string;
+}
+
 /** A preset: the components' classes in one of shadcn's styles. */
 export interface ScPreset {
   accordion: ScAccordionStyles;
@@ -516,6 +524,7 @@ export interface ScPreset {
     variant?: ScToggleVariant | null;
     size?: ScToggleSize | null;
   }) => string;
+  toggleGroup: ScToggleGroupStyles;
   tooltip: ScTooltipStyles;
   trace: ScTraceStyles;
 }

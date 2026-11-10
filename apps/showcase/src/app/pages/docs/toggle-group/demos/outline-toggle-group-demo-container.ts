@@ -6,7 +6,11 @@ import { OutlineToggleGroupDemo } from './outline-toggle-group-demo';
   selector: 'app-outline-toggle-group-demo-container',
   imports: [DemoContainer, OutlineToggleGroupDemo],
   template: `
-    <app-demo-container title="Outline" [code]="code">
+    <app-demo-container
+      title="Outline"
+      demoUrl="/demos/toggle-group/outline-toggle-group-demo"
+      [code]="code"
+    >
       <app-outline-toggle-group-demo />
     </app-demo-container>
   `,
@@ -16,47 +20,21 @@ import { OutlineToggleGroupDemo } from './outline-toggle-group-demo';
 export class OutlineToggleGroupDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
-import {
-  SiKanbanIcon,
-  SiLayoutGridIcon,
-  SiListIcon,
-} from '@semantic-icons/lucide-icons';
 
+/** variant="outline": the items joined in a border. */
 @Component({
   selector: 'app-outline-toggle-group-demo',
-  imports: [
-    ScToggleGroup,
-    ScToggleGroupItem,
-    SiListIcon,
-    SiLayoutGridIcon,
-    SiKanbanIcon,
-  ],
+  imports: [ScToggleGroup, ScToggleGroupItem],
   template: \`
-    <div
-      scToggleGroup
-      type="single"
-      variant="outline"
-      [(value)]="view"
-      aria-label="View mode"
-    >
-      <button scToggleGroupItem value="list">
-        <svg siListIcon></svg>
-        <span class="sr-only">List view</span>
-      </button>
-      <button scToggleGroupItem value="grid">
-        <svg siLayoutGridIcon></svg>
-        <span class="sr-only">Grid view</span>
-      </button>
-      <button scToggleGroupItem value="kanban">
-        <svg siKanbanIcon></svg>
-        <span class="sr-only">Kanban view</span>
-      </button>
+    <div scToggleGroup variant="outline" aria-label="Calls" [(value)]="calls">
+      <button scToggleGroupItem value="all">All</button>
+      <button scToggleGroupItem value="missed">Missed</button>
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
 export class OutlineToggleGroupDemo {
-  readonly view = signal<string | null>('list');
+  protected readonly calls = signal(['all']);
 }`;
 }

@@ -53,8 +53,8 @@ import {
       size="sm"
       aria-label="Tooltip indicator"
       class="mb-3"
-      [value]="indicator()"
-      (valueChange)="choose($event)"
+      [value]="[indicator()]"
+      (valueChange)="choose($event[0])"
     >
       <button scToggleGroupItem value="dot">Dot</button>
       <button scToggleGroupItem value="line">Line</button>

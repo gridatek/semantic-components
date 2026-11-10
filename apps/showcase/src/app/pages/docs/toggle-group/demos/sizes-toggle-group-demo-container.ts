@@ -6,7 +6,11 @@ import { SizesToggleGroupDemo } from './sizes-toggle-group-demo';
   selector: 'app-sizes-toggle-group-demo-container',
   imports: [DemoContainer, SizesToggleGroupDemo],
   template: `
-    <app-demo-container title="Sizes" [code]="code">
+    <app-demo-container
+      title="Sizes"
+      demoUrl="/demos/toggle-group/sizes-toggle-group-demo"
+      [code]="code"
+    >
       <app-sizes-toggle-group-demo />
     </app-demo-container>
   `,
@@ -14,9 +18,10 @@ import { SizesToggleGroupDemo } from './sizes-toggle-group-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SizesToggleGroupDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
 
+/** size: sm, default, lg — for every item. */
 @Component({
   selector: 'app-sizes-toggle-group-demo',
   imports: [ScToggleGroup, ScToggleGroupItem],
@@ -24,38 +29,34 @@ import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
     <div class="flex flex-col gap-4">
       <div
         scToggleGroup
-        type="single"
         size="sm"
-        aria-label="Small toggle group"
+        variant="outline"
+        aria-label="Side, small"
+        [(value)]="small"
       >
-        <button scToggleGroupItem value="a" aria-label="Option A">A</button>
-        <button scToggleGroupItem value="b" aria-label="Option B">B</button>
-        <button scToggleGroupItem value="c" aria-label="Option C">C</button>
+        <button scToggleGroupItem value="top">Top</button>
+        <button scToggleGroupItem value="bottom">Bottom</button>
+        <button scToggleGroupItem value="left">Left</button>
+        <button scToggleGroupItem value="right">Right</button>
       </div>
       <div
         scToggleGroup
-        type="single"
-        size="default"
-        aria-label="Default toggle group"
+        variant="outline"
+        aria-label="Side, default"
+        [(value)]="normal"
       >
-        <button scToggleGroupItem value="a" aria-label="Option A">A</button>
-        <button scToggleGroupItem value="b" aria-label="Option B">B</button>
-        <button scToggleGroupItem value="c" aria-label="Option C">C</button>
-      </div>
-      <div
-        scToggleGroup
-        type="single"
-        size="lg"
-        aria-label="Large toggle group"
-      >
-        <button scToggleGroupItem value="a" aria-label="Option A">A</button>
-        <button scToggleGroupItem value="b" aria-label="Option B">B</button>
-        <button scToggleGroupItem value="c" aria-label="Option C">C</button>
+        <button scToggleGroupItem value="top">Top</button>
+        <button scToggleGroupItem value="bottom">Bottom</button>
+        <button scToggleGroupItem value="left">Left</button>
+        <button scToggleGroupItem value="right">Right</button>
       </div>
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class SizesToggleGroupDemo {}`;
+export class SizesToggleGroupDemo {
+  protected readonly small = signal(['top']);
+  protected readonly normal = signal(['top']);
+}`;
 }

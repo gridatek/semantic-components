@@ -55,19 +55,28 @@ export class ScPdfViewerSetting {
       toggleGroup?.value ?? slider?.value ?? switchControl?.checked;
     if (!control) return;
 
-    // Viewer → control.
+    // Viewer → control (a toggle group holds its pressed values: one, here).
     effect(() => {
       const value = this.target()();
-      untracked(() => (control.set as (value: unknown) => void)(value));
+      untracked(() =>
+        (control.set as (value: unknown) => void)(
+          toggleGroup ? [value] : value,
+        ),
+      );
     });
 
     // Control → viewer.
     control.subscribe((value: unknown) => {
       const target = untracked(this.target);
-      if (toggleGroup && (typeof value !== 'string' || !value)) {
-        // A second click on the selected item clears a single toggle group;
-        // a setting always has a value, so put it back.
-        toggleGroup.value.set(untracked(target) as string);
+      if (toggleGroup) {
+        const [pressed] = value as unknown[];
+        if (pressed === undefined) {
+          // A second click on the pressed item releases it; a setting always
+          // has a value, so press it again.
+          toggleGroup.value.set([untracked(target)]);
+          return;
+        }
+        target.set(pressed);
         return;
       }
       target.set(value);

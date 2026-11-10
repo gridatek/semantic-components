@@ -122,12 +122,11 @@ const READING_MODES: Record<string, ScPdfPageColors | null> = {
           <div scPdfViewerSpacer></div>
           <div
             scToggleGroup
-            type="single"
             variant="outline"
             size="sm"
             aria-label="Page colours"
-            [value]="readingMode()"
-            (valueChange)="setReadingMode($event)"
+            [value]="[readingMode()]"
+            (valueChange)="setReadingMode($event[0])"
           >
             <button scToggleGroupItem value="default">Default</button>
             <button scToggleGroupItem value="sepia">Sepia</button>

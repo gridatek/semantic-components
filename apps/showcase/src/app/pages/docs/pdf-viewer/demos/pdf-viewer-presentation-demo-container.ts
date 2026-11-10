@@ -133,7 +133,6 @@ import {
                   <div
                     scToggleGroup
                     scPdfViewerSetting="scrollMode"
-                    type="single"
                     variant="outline"
                     size="sm"
                     aria-labelledby="presentation-demo-scrolling"
@@ -156,7 +155,6 @@ import {
                   <div
                     scToggleGroup
                     scPdfViewerSetting="spreadMode"
-                    type="single"
                     variant="outline"
                     size="sm"
                     aria-labelledby="presentation-demo-spreads"
