@@ -36,11 +36,11 @@ test('Variants: six links, six looks', async ({ page }) => {
   const links = page.getByRole('link');
   await expect(links).toHaveText([
     'Default',
+    'Button',
     'Outline',
     'Secondary',
     'Ghost',
     'Destructive',
-    'Link',
   ]);
   const looks = await links.evaluateAll((all) =>
     all.map((el) => {
@@ -139,6 +139,7 @@ test('Keyboard: Tab reaches a link, Enter follows it', async ({
   browserName,
 }) => {
   await page.goto(demo('variants'));
+  // The first: the default look, a link (to the Tabs page).
   const first = link(page, 'Default');
   // The static build renders after the load: Tab once it's there.
   await expect(first).toBeVisible();
@@ -148,7 +149,7 @@ test('Keyboard: Tab reaches a link, Enter follows it', async ({
   await expect(first).toBeFocused();
   await expect(first).not.toHaveCSS('box-shadow', 'none');
   await press(page, 'Enter');
-  await expect(page).toHaveURL(/\/docs\/components\/button$/, {
+  await expect(page).toHaveURL(/\/docs\/components\/tabs$/, {
     timeout: 15_000,
   });
 });
