@@ -1,126 +1,139 @@
 import { collectErrors, press, type } from '../../interaction';
 import { expect, test } from '../../test';
 
-test.describe('OTP field', () => {
-  test('typing fills in order, overwrites, and completes', async ({ page }) => {
-    const errors = collectErrors(page);
-    await page.goto('/demos/otp-field/verification-otp-field-demo');
-    // The label names the first input (it has the field's id).
-    const first = page.getByRole('textbox', {
-      name: 'Enter verification code',
-    });
-    const status = page.getByRole('status');
-    await expect(first).toHaveAttribute('autocomplete', 'one-time-code');
-    await expect(
-      page.getByRole('textbox', { name: 'Digit 2 of 6' }),
-    ).toHaveAttribute('autocomplete', 'off');
+const demo = (name: string) => `/demos/otp-field/${name}-otp-field-demo`;
+const input = (page: import('@playwright/test').Page, n: number) =>
+  n === 1
+    ? page.getByRole('textbox', { name: 'One-time password' })
+    : page.getByRole('textbox', { name: `Character ${n} of 6` });
 
-    // Focus goes to the first empty input, whichever is clicked.
-    await page.getByRole('textbox', { name: 'Digit 4 of 6' }).click();
-    await expect(first).toBeFocused();
-    await type(page, '12345');
-    await expect(
-      page.getByRole('textbox', { name: 'Digit 6 of 6' }),
-    ).toBeFocused();
-    // Only digits.
-    await type(page, 'x');
-    await expect(status).toHaveText('Enter all 6 digits.');
-    await type(page, '6');
-    await expect(status).toHaveText('Verifying 123456…');
+let errors: string[];
 
-    // Typing over a filled input replaces its character.
-    await page.getByRole('textbox', { name: 'Digit 2 of 6' }).click();
-    await type(page, '9');
-    await expect(status).toHaveText('Verifying 193456…');
-    expect(errors).toEqual([]);
-  });
+test.beforeEach(({ page }) => {
+  errors = collectErrors(page);
+});
 
-  test('Backspace, Delete, arrows, Home and End', async ({ page }) => {
-    const errors = collectErrors(page);
-    await page.goto('/demos/otp-field/basic-otp-field-demo');
-    const input = (n: number) =>
-      page.getByRole('textbox', { name: `Digit ${n} of 6` });
-    const value = page.getByText(/Value:/);
-    await input(1).click();
-    await type(page, '1234');
-    await expect(value).toHaveText('Value: 1234');
+test.afterEach(() => {
+  expect(errors).toEqual([]);
+});
 
-    // On an empty input, Backspace clears the previous one.
-    await press(page, 'Backspace');
-    await expect(value).toHaveText('Value: 123');
-    await expect(input(4)).toBeFocused();
+test('Usage: the label names the first input; it offers the SMS code', async ({
+  page,
+}) => {
+  await page.goto('/demos/otp-field/otp-field-usage-demo');
+  const first = page.getByRole('textbox', { name: 'Verification code' });
+  await expect(first).toHaveValue('1');
+  await expect(first).toHaveAttribute('autocomplete', 'one-time-code');
+  await expect(
+    page.getByRole('textbox', { name: 'Character 2 of 6' }),
+  ).toHaveAttribute('autocomplete', 'off');
+  await expect(page.locator('[data-slot=otp-field]')).toHaveAttribute(
+    'data-complete',
+    '',
+  );
+});
 
-    await press(page, 'Home');
-    await expect(input(1)).toBeFocused();
-    await press(page, 'ArrowRight');
-    await expect(input(2)).toBeFocused();
-    // Delete clears it; the ones after move back.
-    await press(page, 'Delete');
-    await expect(value).toHaveText('Value: 13');
-    await press(page, 'End');
-    await expect(input(3)).toBeFocused();
-    expect(errors).toEqual([]);
-  });
+test('Controlled: typing fills in order; Backspace, Delete, Home, End', async ({
+  page,
+}) => {
+  await page.goto(demo('controlled'));
+  const said = page.getByText(/You entered|Enter your/);
+  // Focus goes to the first empty input, whichever is clicked.
+  await input(page, 4).click();
+  await expect(input(page, 1)).toBeFocused();
+  await type(page, '1234');
+  await expect(said).toHaveText('You entered: 1234');
+  await press(page, 'Backspace');
+  await expect(said).toHaveText('You entered: 123');
+  await press(page, 'Home');
+  await expect(input(page, 1)).toBeFocused();
+  await press(page, 'ArrowRight');
+  await press(page, 'Delete');
+  await expect(said).toHaveText('You entered: 13');
+  await press(page, 'End');
+  await expect(input(page, 3)).toBeFocused();
+});
 
-  test('digits of any script are kept as ASCII digits', async ({ page }) => {
-    const errors = collectErrors(page);
-    await page.goto('/demos/otp-field/basic-otp-field-demo');
-    await page.getByRole('textbox', { name: 'Digit 1 of 6' }).click();
-    // Arabic-Indic, Devanagari, full-width.
-    await type(page, '٣३３');
-    await expect(page.getByText(/Value:/)).toHaveText('Value: 333');
-    expect(errors).toEqual([]);
-  });
+test('Digits only: letters dropped, digits of any script kept as ASCII', async ({
+  page,
+}) => {
+  await page.goto(demo('digits-only'));
+  const first = page.getByRole('textbox', { name: 'Digits Only' });
+  await first.click();
+  await type(page, 'a٣३');
+  await expect(first).toHaveValue('3');
+  await expect(
+    page.getByRole('textbox', { name: 'Character 2 of 6' }),
+  ).toHaveValue('3');
+});
 
-  test('right to left, the arrows go the way they point', async ({ page }) => {
-    const errors = collectErrors(page);
-    // The page right to left, from before the app starts (Directionality
-    // reads it then): once the HTML is parsed, before the scripts run. Not
-    // by rewriting the page's HTML — Chromium then blocks the dev server.
-    await page.addInitScript(() =>
-      document.addEventListener('readystatechange', () => {
-        if (document.readyState === 'interactive') {
-          document.documentElement.dir = 'rtl';
-        }
+test('A code pasted or autofilled into the first input fills them all', async ({
+  page,
+}) => {
+  await page.goto(demo('controlled'));
+  await input(page, 1).evaluate((el: HTMLInputElement) => {
+    el.value = '987654';
+    el.dispatchEvent(
+      new InputEvent('input', {
+        bubbles: true,
+        inputType: 'insertReplacementText',
       }),
     );
-    await page.goto('/demos/otp-field/basic-otp-field-demo');
-    await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
-    const input = (n: number) =>
-      page.getByRole('textbox', { name: `Digit ${n} of 6` });
-    await input(1).click();
-    await type(page, '123');
-    await press(page, 'Home');
-    await expect(input(1)).toBeFocused();
-    // The second input is on the left of the first: ← goes there.
-    await press(page, 'ArrowLeft');
-    await expect(input(2)).toBeFocused();
-    await press(page, 'ArrowRight');
-    await expect(input(1)).toBeFocused();
-    expect(errors).toEqual([]);
   });
+  await expect(page.getByText('You entered: 987654')).toBeVisible();
+});
 
-  test('a code autofilled into the first input fills them all', async ({
-    page,
-  }) => {
-    const errors = collectErrors(page);
-    await page.goto('/demos/otp-field/basic-otp-field-demo');
-    const first = page.getByRole('textbox', { name: 'Digit 1 of 6' });
-    // What an SMS code autofill does: the whole code into one input.
-    await first.evaluate((input: HTMLInputElement) => {
-      input.value = '987654';
-      input.dispatchEvent(
-        new InputEvent('input', {
-          bubbles: true,
-          inputType: 'insertReplacementText',
-        }),
-      );
-    });
-    await expect(page.getByText(/Value:/)).toHaveText('Value: 987654');
-    await expect(first).toHaveValue('9');
-    await expect(
-      page.getByRole('textbox', { name: 'Digit 6 of 6' }),
-    ).toHaveValue('4');
-    expect(errors).toEqual([]);
-  });
+test('Custom normalization: uppercased', async ({ page }) => {
+  await page.goto(demo('normalization'));
+  await page.getByRole('textbox', { name: 'Invite code' }).click();
+  await type(page, 'ab');
+  await expect(page.getByRole('textbox', { name: 'Invite code' })).toHaveValue(
+    'A',
+  );
+});
+
+test('Masked entry: password inputs', async ({ page }) => {
+  await page.goto(demo('masked'));
+  await expect(page.locator('input[scOtpFieldInput]').first()).toHaveAttribute(
+    'type',
+    'password',
+  );
+});
+
+test('Invalid: marked once touched, its error shown', async ({ page }) => {
+  await page.goto(demo('invalid'));
+  await expect(
+    page.getByRole('textbox', { name: 'Verification code' }),
+  ).toHaveAttribute('aria-invalid', 'true');
+  await expect(page.getByText('Enter all 6 digits.')).toBeVisible();
+});
+
+test('Disabled: every input disabled', async ({ page }) => {
+  await page.goto(demo('disabled'));
+  for (const box of await page.locator('input[scOtpFieldInput]').all())
+    await expect(box).toBeDisabled();
+});
+
+test('Verification: complete() once every input is filled', async ({
+  page,
+}) => {
+  await page.goto(demo('verification'));
+  await page.getByRole('textbox', { name: 'Enter verification code' }).click();
+  await type(page, '123456');
+  await expect(page.getByRole('status')).toHaveText('Verifying 123456…');
+});
+
+test('RTL: in a right-to-left section, ArrowLeft goes to the next input', async ({
+  page,
+}) => {
+  await page.goto(demo('rtl'));
+  const first = page.getByRole('textbox', { name: 'رمز التحقق' });
+  await first.click();
+  await type(page, '123');
+  await press(page, 'Home');
+  await expect(first).toBeFocused();
+  await press(page, 'ArrowLeft');
+  await expect(
+    page.getByRole('textbox', { name: 'الحرف 2 من 6' }),
+  ).toBeFocused();
 });

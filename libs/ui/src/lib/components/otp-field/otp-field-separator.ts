@@ -1,7 +1,8 @@
 import { Directive, computed, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 
-/** Between inputs: splits the joined box in two; write its content (an icon, a dash, a dot). */
+/** Between chunks (`scOtpFieldGroup`): write its content (an icon, a dash, a dot). */
 @Directive({
   selector: '[scOtpFieldSeparator]',
   host: {
@@ -11,12 +12,10 @@ import { cn } from '../../utils';
   },
 })
 export class ScOtpFieldSeparator {
+  private readonly styles = injectPreset().otpField;
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn(
-      "flex items-center px-2 [&_svg:not([class*='size-'])]:size-4",
-      this.classInput(),
-    ),
+    cn(this.styles.separator, this.classInput()),
   );
 }

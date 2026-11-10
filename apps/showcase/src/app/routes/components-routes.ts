@@ -403,12 +403,6 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/otp-field/otp-field-page'),
       },
       {
-        path: 'otp-field-next',
-        title: 'OTP Field Next - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/otp-field-next/otp-field-next-page'),
-      },
-      {
         path: 'kanban-board',
         title: 'Kanban Board - Semantic Components',
         loadComponent: () =>

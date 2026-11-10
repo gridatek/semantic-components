@@ -10,10 +10,10 @@ import {
   isDevMode,
   model,
   output,
+  signal,
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
-import { bindInput } from '../../utils';
-import { ScField } from '../field';
+import { cn } from '../../utils';
 import { ScOtpFieldInput } from './otp-field-input';
 
 /** Which characters the code accepts. */
@@ -47,28 +47,43 @@ const accepted: Record<ScOtpFieldValidationType, (char: string) => string> = {
  * `scOtpFieldInput` (the code is as long as there are inputs), entered left
  * to right; a pasted or autofilled code is spread over them. A Signal Forms
  * control: bind `[formField]` here — the value, its length (`minLength` in
- * the schema), its state and its errors are the form's. It is a `scField`
- * too (a label, description and errors go inside it), whose `id`,
- * `orientation` and `class` it takes; the inputs sit in a `scOtpFieldGroup`.
+ * the schema), its state and its errors are the form's. It is the row of
+ * chunks (`scOtpFieldGroup`) and separators, as shadcn's InputOTP; its
+ * label, description and errors go round it, in a `scField` (whose id the
+ * first input takes).
  */
 @Directive({
   selector: 'div[scOtpField]',
-  hostDirectives: [
-    { directive: ScField, inputs: ['id', 'orientation', 'class'] },
-  ],
+  exportAs: 'scOtpField',
   host: {
+    '[class]': 'class()',
     'data-slot': 'otp-field',
+    '[attr.data-complete]': 'complete() ? "" : null',
+    '[attr.data-filled]': 'value() ? "" : null',
+    '[attr.data-focused]': 'focused() ? "" : null',
+    '[attr.data-readonly]': 'readOnly() ? "" : null',
     '(paste)': 'onPaste($event)',
+    '(focusin)': 'focused.set(true)',
     '(focusout)': 'onFocusOut($event)',
   },
 })
 export class ScOtpField implements FormValueControl<string> {
-  private readonly field = inject(ScField);
   private readonly element =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
   /** Which characters are accepted (anything else is dropped); `numeric` brings up a numeric keypad. */
   readonly validationType = input<ScOtpFieldValidationType>('numeric');
+  /**
+   * Runs on accepted text, before it is kept (uppercase, say); its result is
+   * filtered by `validationType` again. Base UI's `normalizeValue`.
+   */
+  readonly normalizeValue = input<((value: string) => string) | undefined>(
+    undefined,
+  );
+  /** The characters hidden as they are typed: the inputs become password inputs. */
+  readonly mask = input(false, { transform: booleanAttribute });
+  /** Shown, not changed. */
+  readonly readOnly = input(false, { transform: booleanAttribute });
 
   // Set by [formField] — the field's value, state and length come from the form.
   readonly value = model<string>('');
@@ -92,6 +107,20 @@ export class ScOtpField implements FormValueControl<string> {
   readonly firstEmptyIndex = computed(() =>
     this.value().length >= this.length() ? -1 : this.value().length,
   );
+  readonly classInput = input<string>('', { alias: 'class' });
+  protected readonly class = computed(() =>
+    cn('flex w-fit items-center has-disabled:opacity-50', this.classInput()),
+  );
+
+  /** Every input has its character. */
+  readonly complete = computed(
+    () => this.length() > 0 && this.value().length === this.length(),
+  );
+  /** Focus is in one of the inputs. */
+  protected readonly focused = signal(false);
+  /** Can't be changed: disabled, or read-only. */
+  private readonly locked = computed(() => this.disabled() || this.readOnly());
+
   /** Invalid once touched: the inputs' `aria-invalid`, the field's `data-invalid`. */
   readonly showInvalid = computed(() => this.invalid() && this.touched());
 
@@ -100,10 +129,6 @@ export class ScOtpField implements FormValueControl<string> {
   );
 
   constructor() {
-    // The field's state follows the code's (`data-disabled`, `data-invalid`).
-    bindInput(this.field.disabledInput, this.disabled);
-    bindInput(this.field.invalidInput, this.showInvalid);
-
     // The schema's length and the inputs must agree: one says what's valid,
     // the other what can be entered.
     if (isDevMode()) {
@@ -136,7 +161,9 @@ export class ScOtpField implements FormValueControl<string> {
    */
   accept(text: string): string {
     const keep = accepted[this.validationType()];
-    return [...text].map(keep).join('');
+    const kept = [...text].map(keep).join('');
+    const normalize = this.normalizeValue();
+    return normalize ? [...normalize(kept)].map(keep).join('') : kept;
   }
 
   /**
@@ -146,7 +173,7 @@ export class ScOtpField implements FormValueControl<string> {
    */
   write(index: number, text: string): void {
     const chars = this.accept(text);
-    if (!chars || this.disabled()) return;
+    if (!chars || this.locked()) return;
     const value = this.value();
     const next = (
       value.slice(0, index) +
@@ -159,7 +186,7 @@ export class ScOtpField implements FormValueControl<string> {
 
   /** Clears an input's character (the ones after it move back one). */
   clear(index: number): void {
-    if (this.disabled()) return;
+    if (this.locked()) return;
     const value = this.value();
     this.value.set(value.slice(0, index) + value.slice(index + 1));
   }
@@ -170,13 +197,16 @@ export class ScOtpField implements FormValueControl<string> {
 
   protected onFocusOut(event: FocusEvent): void {
     const next = event.relatedTarget as Node | null;
-    if (!next || !this.element.contains(next)) this.touch.emit();
+    if (!next || !this.element.contains(next)) {
+      this.focused.set(false);
+      this.touch.emit();
+    }
   }
 
   /** A pasted code replaces the whole value. */
   protected onPaste(event: ClipboardEvent): void {
     event.preventDefault();
-    if (this.disabled()) return;
+    if (this.locked()) return;
     const chars = this.accept(event.clipboardData?.getData('text') ?? '');
     if (!chars) return;
     this.value.set(chars.slice(0, this.length()));

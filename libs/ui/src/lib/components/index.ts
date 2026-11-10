@@ -37,7 +37,6 @@ export * from './native-select';
 export * from './navigation-menu';
 export * from './number-field';
 export * from './otp-field';
-export * from './otp-field-next';
 export * from './pagination';
 export * from './password-field';
 export * from './popover';

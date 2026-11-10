@@ -611,6 +611,17 @@ Rewritten 2026-11-10, in place. shadcn has none; Base UI's Toolbar for the featu
 - **Look**: the preset's `frame` (each style's card corners and ring), `p-1 gap-1`.
 - **Examples**: Base UI's Usage (alignment toggles, $ and % buttons, a font Select, a link), With Menu, With Tooltip, With input; ours: Vertical, Disabled, RTL.
 
+## OTP Field: rewritten
+
+Rewritten 2026-11-11: built beside the old one as OTP Field Next, switched in. Base UI's OTP Field (one real input per character) in shadcn's Input OTP look.
+
+- **The `otpField` preset key** (`group`, `input`, `separator`), each style's `input-otp.tsx`: slot sizes 7 to 10, corners, sera's separate underlined boxes. shadcn's slot is a div with a fake caret; ours a real input — its `data-[active=true]:` is `:focus`.
+- **Groups are chunks** (a joined box each, separators between), as shadcn's; the old one joined neighbouring inputs in one group.
+- **The root is the row**, in a `scField` (its label, description and errors round it; the first input takes its id) — as Base UI's OTP Field in a Field. The old root was itself a field.
+- **Base UI's options added**: `normalizeValue`, `mask`, `readOnly`, `complete()`, `data-complete` / `data-filled` / `data-focused`. Left out: `autoSubmit`, `form` / `name` (native forms).
+- **The arrows** follow the input's own direction (a `dir="rtl"` section too).
+- **Examples**: shadcn's Demo (the Usage), Digits only, Alphanumeric, Four digits, Separator, Invalid, Disabled, Controlled, Form, RTL; Base UI's Placeholder hints, Custom normalization, Masked entry; ours kept: Verification, Validation with a server call.
+
 ## Input Button: restyled
 
 Restyled 2026-11-07. Our own component — shadcn has none; its docs site's search trigger is a secondary button.

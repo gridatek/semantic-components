@@ -729,14 +729,6 @@
   {
     "name": "OTP Field",
     "path": "otp-field",
-    "description": "An input for entering one-time passwords.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Forms"
-  },
-  {
-    "name": "OTP Field Next",
-    "path": "otp-field-next",
     "description": "A one-time code, one input per character, in the look of the app's preset.",
     "status": "Experimental",
     "library": "ui",

@@ -1,6 +1,7 @@
-import { Directionality } from '@angular/cdk/bidi';
 import { Directive, ElementRef, computed, inject, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
+import { elementDirection } from '../../utils/element-directionality/element-directionality';
 import { SC_FIELD } from '../field';
 import { ScOtpField } from './otp-field';
 
@@ -16,7 +17,8 @@ import { ScOtpField } from './otp-field';
   selector: 'input[scOtpFieldInput]',
   host: {
     'data-slot': 'otp-field-input',
-    type: 'text',
+    '[attr.type]': 'otp.mask() ? "password" : "text"',
+    '[readOnly]': 'otp.readOnly()',
     autocapitalize: 'off',
     spellcheck: 'false',
     '[attr.id]': 'id()',
@@ -34,9 +36,9 @@ import { ScOtpField } from './otp-field';
   },
 })
 export class ScOtpFieldInput {
+  private readonly styles = injectPreset().otpField;
   protected readonly otp = inject(ScOtpField);
   private readonly field = inject(SC_FIELD, { optional: true });
-  private readonly dir = inject(Directionality);
   private readonly element =
     inject<ElementRef<HTMLInputElement>>(ElementRef).nativeElement;
 
@@ -57,10 +59,10 @@ export class ScOtpFieldInput {
 
   protected readonly class = computed(() =>
     cn(
-      'border-input dark:bg-input/30 relative size-10 rounded-md border bg-transparent text-center text-sm shadow-xs outline-none transition-[color,box-shadow]',
-      'selection:bg-transparent disabled:cursor-not-allowed',
-      'focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:z-10 focus-visible:ring-3',
-      'aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40',
+      this.styles.input,
+      // A real input, where shadcn's slot is a div: its text centred, no
+      // selection shown (one character), its own caret.
+      'text-center selection:bg-transparent disabled:cursor-not-allowed',
       this.classInput(),
     ),
   );
@@ -113,7 +115,8 @@ export class ScOtpFieldInput {
       case 'ArrowRight': {
         // The input on that side: right to left, the next one is on the left.
         const forward =
-          (event.key === 'ArrowRight') !== (this.dir.value === 'rtl');
+          (event.key === 'ArrowRight') !==
+          (elementDirection(this.element) === 'rtl');
         otp.focusInput(index + (forward ? 1 : -1));
         break;
       }

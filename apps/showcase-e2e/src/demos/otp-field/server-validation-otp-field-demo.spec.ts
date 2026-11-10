@@ -18,7 +18,8 @@ test.describe('OTP field — validation with a server call', () => {
   }) => {
     const errors = collectErrors(page);
     await page.goto('/demos/otp-field/server-validation-otp-field-demo');
-    const field = page.locator('[data-slot=otp-field]');
+    // The field round the row: its pending and invalid state.
+    const field = page.locator('[data-slot=field]');
     const status = page.getByRole('status');
     const message = page.getByRole('alert');
     const first = page.getByRole('textbox', { name: 'Verification code' });
