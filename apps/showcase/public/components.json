@@ -67,6 +67,15 @@
     "hidden": true
   },
   {
+    "name": "Auth Layout",
+    "path": "auth-layout",
+    "description": "A page frame for sign-in pages: the routed page, alone.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Layout",
+    "hidden": true
+  },
+  {
     "name": "Autocomplete",
     "path": "autocomplete",
     "description": "An input with autocomplete suggestions.",
@@ -1005,15 +1014,6 @@
     "status": "Experimental",
     "library": "ui",
     "category": "Overlay",
-    "hidden": true
-  },
-  {
-    "name": "Auth Layout",
-    "path": "auth-layout",
-    "description": "A page frame for sign-in pages: the routed page, alone.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Layout",
     "hidden": true
   },
   {
