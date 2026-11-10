@@ -1,6 +1,6 @@
 # Switch Next
 
-A switch: a native checkbox with `role="switch"` that draws itself (`appearance-none`) — its track, and its thumb as its `::before`. In the look of the app's preset: the `switch` key's `track` and `thumb`, from shadcn's (Base UI's `data-checked` / `data-unchecked` / `data-disabled` as `:checked` / `:not(:checked)` / `:disabled`; the thumb's size from the input's `data-size`). Alone, in a switch field beside its text, or in any field. Built beside [Switch](../switch/README.md), to compare.
+A switch: a native checkbox with `role="switch"` that draws itself (`appearance-none`) — its track, and its thumb as its `::before`. In the look of the app's preset: the `switch` key's `track` and `thumb`, from shadcn's (Base UI's `data-checked` / `data-unchecked` / `data-disabled` as `:checked` / `:not(:checked)` / `:disabled`; the thumb's size from the input's `data-size`). In lyra it is square, track and thumb — not shadcn's, whose lyra switch is round: a deliberate divergence ([shadcn-style-reference.md](../../../../../../docs/shadcn-style-reference.md#deliberate-divergences)). Alone, in a switch field beside its text, or in any field. Built beside [Switch](../switch/README.md), to compare.
 
 ## Usage
 
