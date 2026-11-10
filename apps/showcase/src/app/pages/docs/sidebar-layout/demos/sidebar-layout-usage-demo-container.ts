@@ -1,11 +1,17 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { UsageCode } from '../../../../components/usage-code/usage-code';
 
-/** Code only: a page frame can't be shown inside a page (its main, its header). */
+/** A page frame can't sit inside a page (its main, its header): in dev mode, its demo in an iframe. */
 @Component({
   selector: 'app-sidebar-layout-usage-demo-container',
   imports: [UsageCode],
-  template: `<app-usage-code [code]="code" />`,
+  template: `
+    <app-usage-code
+      [code]="code"
+      demoUrl="/demos/sidebar-layout/sidebar-layout-usage-demo"
+      demoTitle="Sidebar Layout demo"
+    />
+  `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })

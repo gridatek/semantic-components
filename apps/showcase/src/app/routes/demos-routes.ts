@@ -6658,4 +6658,40 @@ export const demosRoutes: Route[] = [
       },
     ],
   },
+  {
+    path: 'demos/auth-layout',
+    children: [
+      {
+        path: 'auth-layout-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/auth-layout/demos/auth-layout-usage-demo').then(
+            (m) => m.AuthLayoutUsageDemo,
+          ),
+      },
+    ],
+  },
+  {
+    path: 'demos/sidebar-layout',
+    children: [
+      {
+        path: 'sidebar-layout-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/sidebar-layout/demos/sidebar-layout-usage-demo').then(
+            (m) => m.SidebarLayoutUsageDemo,
+          ),
+      },
+    ],
+  },
+  {
+    path: 'demos/stacked-layout',
+    children: [
+      {
+        path: 'stacked-layout-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/stacked-layout/demos/stacked-layout-usage-demo').then(
+            (m) => m.StackedLayoutUsageDemo,
+          ),
+      },
+    ],
+  },
 ];

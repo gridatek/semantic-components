@@ -34,6 +34,9 @@ export async function expectNoA11yViolations(
   const results = await new AxeBuilder({ page })
     .exclude('[inert]')
     .exclude('[data-disabled="true"]')
+    // A Usage's dev-only iframe (a layout's demo on its own route): a page in
+    // a page — its main beside the docs page's. Not in production.
+    .exclude('app-usage-code app-dev-only iframe')
     .analyze();
   // Label in name, on a tree item named by a label (the org chart's card):
   // axe counts as visible text the item's children — tree items of their
