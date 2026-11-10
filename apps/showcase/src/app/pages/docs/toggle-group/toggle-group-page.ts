@@ -88,6 +88,14 @@ import { VerticalToggleGroupDemoContainer } from './demos/vertical-toggle-group-
             toggles — its text, or an icon with sr-only text.
           </li>
           <li>Name the group: aria-label or aria-labelledby.</li>
+          <li>
+            The keyboard follows Base UI&apos;s toggle group
+            (role=&quot;group&quot;, the CDK&apos;s FocusKeyManager), not
+            Angular Aria&apos;s Toolbar: a toolbar is its own component
+            (scToolbar), with its own toggle group (scToolbarToggleGroup)
+            sharing the toolbar&apos;s Tab stop and arrow keys. You choose: a
+            toggle group on its own, or a toolbar.
+          </li>
         </ul>
       </section>
 
