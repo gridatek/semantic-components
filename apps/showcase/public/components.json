@@ -29,7 +29,8 @@
     "description": "Counting or rolling to a new value, in the reader’s language; motion only where it is used.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Data Display"
+    "category": "Data Display",
+    "hidden": true
   },
   {
     "name": "Area Chart",
@@ -37,7 +38,8 @@
     "description": "Series as areas, filled down to 0 or stacked — to 100% if you like — with natural, linear, step or monotone edges; gradients of your own.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Data Display"
+    "category": "Data Display",
+    "hidden": true
   },
   {
     "name": "Aspect Ratio",
@@ -61,7 +63,8 @@
     "description": "An audio player: a playlist, a waveform, controls as parts, state two ways, keyboard shortcuts.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Media"
+    "category": "Media",
+    "hidden": true
   },
   {
     "name": "Autocomplete",
@@ -69,7 +72,8 @@
     "description": "An input with autocomplete suggestions.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Forms"
+    "category": "Forms",
+    "hidden": true
   },
   {
     "name": "Avatar",
@@ -101,7 +105,8 @@
     "description": "Series as bars: side by side, stacked, below 0; each corner's radius of your choice.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Data Display"
+    "category": "Data Display",
+    "hidden": true
   },
   {
     "name": "Barcode Scanner",
@@ -109,7 +114,8 @@
     "description": "Camera or picture, codes outlined, states, torch and cameras; the standard BarcodeDetector.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Media"
+    "category": "Media",
+    "hidden": true
   },
   {
     "name": "Breadcrumb",
@@ -173,7 +179,8 @@
     "description": "The parts every chart is made of, as shadcn/ui's: rows and series' names and colors, a plot with its grid, axes and cursor, a tooltip and a legend.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Data Display"
+    "category": "Data Display",
+    "hidden": true
   },
   {
     "name": "Checkbox",
@@ -189,7 +196,8 @@
     "description": "Code to edit: CodeMirror, colored by Shiki; a form field.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Editor"
+    "category": "Editor",
+    "hidden": true
   },
   {
     "name": "Code Block",
@@ -213,7 +221,8 @@
     "description": "A color picker: area and channel sliders with alpha, any CSS colour in, swatches, hex/rgb/hsl/oklch out; a form field.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Forms"
+    "category": "Forms",
+    "hidden": true
   },
   {
     "name": "Combobox",
@@ -237,7 +246,8 @@
     "description": "Two things compared, split by a divider: photos before and after, two themes, any content.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Media"
+    "category": "Media",
+    "hidden": true
   },
   {
     "name": "Confetti",
@@ -245,7 +255,8 @@
     "description": "A burst, two cannons or fireworks in the theme’s colours; canvas-confetti only where it is used.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Advanced"
+    "category": "Advanced",
+    "hidden": true
   },
   {
     "name": "Context Menu",
@@ -277,7 +288,8 @@
     "description": "To a moment or a pausable timer, on the second, units in the app's language, rolling digits and a ring.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Data Display"
+    "category": "Data Display",
+    "hidden": true
   },
   {
     "name": "Data Table",
@@ -325,7 +337,8 @@
     "description": "Two texts compared, line by line and word by word: split or unified, highlighted.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Editor"
+    "category": "Editor",
+    "hidden": true
   },
   {
     "name": "Dock",
@@ -333,7 +346,8 @@
     "description": "Your links and buttons, magnified by distance to the pointer and on focus; labels, counts, dots.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Advanced"
+    "category": "Advanced",
+    "hidden": true
   },
   {
     "name": "Drawer",
@@ -349,7 +363,8 @@
     "description": "Composable WYSIWYG editor with customizable toolbar.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Editor"
+    "category": "Editor",
+    "hidden": true
   },
   {
     "name": "Emoji Picker",
@@ -357,7 +372,8 @@
     "description": "A picker for selecting emojis.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Media"
+    "category": "Media",
+    "hidden": true
   },
   {
     "name": "Empty",
@@ -381,7 +397,8 @@
     "description": "Files picked or dropped, as a File[] for Signal Forms; rejections with their reason.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Forms"
+    "category": "Forms",
+    "hidden": true
   },
   {
     "name": "Focus Trap",
@@ -405,7 +422,8 @@
     "description": "A series as stages, top to bottom, each as wide as its value, narrowing to the next.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Data Display"
+    "category": "Data Display",
+    "hidden": true
   },
   {
     "name": "Gantt",
@@ -413,7 +431,8 @@
     "description": "A Data Table with a timeline column: bars, progress, milestones, links, markers; dragged or moved from the keyboard.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Data Display"
+    "category": "Data Display",
+    "hidden": true
   },
   {
     "name": "Hotkey",
@@ -421,7 +440,8 @@
     "description": "A directive that runs an action on a keyboard shortcut and writes the shortcut for the platform.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Utilities"
+    "category": "Utilities",
+    "hidden": true
   },
   {
     "name": "Image Annotator",
@@ -429,7 +449,8 @@
     "description": "Annotate an image: shapes over it — selected, moved, resized, restyled — with keyboard, kept as data, exported as an image.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Media"
+    "category": "Media",
+    "hidden": true
   },
   {
     "name": "Image Cropper",
@@ -437,7 +458,8 @@
     "description": "Crop an image: a box over it or a frame it moves under, with keyboard, pinch and wheel, the crop as a file.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Media"
+    "category": "Media",
+    "hidden": true
   },
   {
     "name": "Infinite Scroll",
@@ -445,7 +467,8 @@
     "description": "More near the end or the start, with whatever scrolls; a Load more button and a status.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Advanced"
+    "category": "Advanced",
+    "hidden": true
   },
   {
     "name": "Input",
@@ -477,7 +500,8 @@
     "description": "A signal-based directive that tracks when an element enters or leaves the viewport or a scroll container.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Utilities"
+    "category": "Utilities",
+    "hidden": true
   },
   {
     "name": "Item",
@@ -493,7 +517,8 @@
     "description": "A JSON value as a tree: type-coloured values, objects and arrays that open and close, long arrays in ranges, copy.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Data Display"
+    "category": "Data Display",
+    "hidden": true
   },
   {
     "name": "Kanban Board",
@@ -501,7 +526,8 @@
     "description": "Your items by column, dragged by any pointer or moved by the keyboard, announced in your words.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Advanced"
+    "category": "Advanced",
+    "hidden": true
   },
   {
     "name": "Kbd",
@@ -525,7 +551,8 @@
     "description": "A gallery of links opened in the native dialog, the thumbnail morphing in; zoom, pan, swipes, keys.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Media"
+    "category": "Media",
+    "hidden": true
   },
   {
     "name": "Line Chart",
@@ -533,7 +560,8 @@
     "description": "Series as lines through their values: natural, linear, step or monotone; dots if you like.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Data Display"
+    "category": "Data Display",
+    "hidden": true
   },
   {
     "name": "Link",
@@ -557,7 +585,8 @@
     "description": "Content written once and repeated to fill, speed in px/s, four directions, pauses for hover, focus and a button; still for reduced motion.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Advanced"
+    "category": "Advanced",
+    "hidden": true
   },
   {
     "name": "Masonry Grid",
@@ -565,7 +594,8 @@
     "description": "Columns by width, the source order kept, re-laid out on any size change, spans, animated moves; native where possible.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Layout"
+    "category": "Layout",
+    "hidden": true
   },
   {
     "name": "Mention Input",
@@ -573,7 +603,8 @@
     "description": "A textarea with inline mention suggestions triggered by a configurable character.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Forms"
+    "category": "Forms",
+    "hidden": true
   },
   {
     "name": "Menu",
@@ -613,7 +644,8 @@
     "description": "A select component for multiple selections.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Forms"
+    "category": "Forms",
+    "hidden": true
   },
   {
     "name": "Native Dialog",
@@ -637,7 +669,8 @@
     "description": "A site's top bar: brand, links, actions; on narrow screens a toggle and a menu panel under the bar.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Navigation"
+    "category": "Navigation",
+    "hidden": true
   },
   {
     "name": "Navigation Menu",
@@ -653,7 +686,8 @@
     "description": "Notifications you put together from parts: by day, titled in your language, with an unread count for the bell.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Advanced"
+    "category": "Advanced",
+    "hidden": true
   },
   {
     "name": "Number Field",
@@ -669,7 +703,8 @@
     "description": "Your people as nested lists, laid out as a chart and joined by lines; a tree for the keyboard.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Data Display"
+    "category": "Data Display",
+    "hidden": true
   },
   {
     "name": "OTP Field",
@@ -701,7 +736,8 @@
     "description": "Document viewer with navigation and zoom controls.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Media"
+    "category": "Media",
+    "hidden": true
   },
   {
     "name": "Phone Input",
@@ -717,7 +753,8 @@
     "description": "A series as slices of a whole, each in its category's color: a pie, a donut with your text in its center, rings.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Data Display"
+    "category": "Data Display",
+    "hidden": true
   },
   {
     "name": "Popover",
@@ -749,7 +786,8 @@
     "description": "Generate and display QR codes.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Media"
+    "category": "Media",
+    "hidden": true
   },
   {
     "name": "Query Param State",
@@ -757,7 +795,8 @@
     "description": "Type-safe, signal-based URL query parameter state management inspired by nuqs.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Utilities"
+    "category": "Utilities",
+    "hidden": true
   },
   {
     "name": "Questionnaire",
@@ -773,7 +812,8 @@
     "description": "Series as polygons over the categories, each on its spoke: filled or outlined, with dots, on a polygon or circle grid.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Data Display"
+    "category": "Data Display",
+    "hidden": true
   },
   {
     "name": "Radial Chart",
@@ -781,7 +821,8 @@
     "description": "A series as radial bars: a ring per row, its value as an arc — on a track, stacked, on a half circle with your text in its center.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Data Display"
+    "category": "Data Display",
+    "hidden": true
   },
   {
     "name": "Radio Group",
@@ -821,7 +862,8 @@
     "description": "Flows between nodes, each as thick as its value, the nodes in columns.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Data Display"
+    "category": "Data Display",
+    "hidden": true
   },
   {
     "name": "Scatter Chart",
@@ -829,7 +871,8 @@
     "description": "Points at two values, x and y — sized by a third: a bubble chart.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Data Display"
+    "category": "Data Display",
+    "hidden": true
   },
   {
     "name": "Scheduler",
@@ -837,7 +880,8 @@
     "description": "Events in month, week and day views, built from parts: overlapping events side by side, all-day events, now.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Advanced"
+    "category": "Advanced",
+    "hidden": true
   },
   {
     "name": "Scroll Area",
@@ -909,7 +953,8 @@
     "description": "A signature pad: pressure ink, drawn or typed, a value to store and redraw, trimmed PNG and SVG export.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Forms"
+    "category": "Forms",
+    "hidden": true
   },
   {
     "name": "Skeleton",
@@ -933,7 +978,8 @@
     "description": "Your array reordered by any pointer or the keyboard, announced in your words; down, along, or as a grid.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Advanced"
+    "category": "Advanced",
+    "hidden": true
   },
   {
     "name": "Speed Dial",
@@ -941,7 +987,8 @@
     "description": "A floating button opening a menu of actions, in a line or on an arc, with a backdrop.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Buttons & Actions"
+    "category": "Buttons & Actions",
+    "hidden": true
   },
   {
     "name": "Spinner",
@@ -957,7 +1004,8 @@
     "description": "One element lit, your content in a native dialog; modal, or interactive through the cutout.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Overlay"
+    "category": "Overlay",
+    "hidden": true
   },
   {
     "name": "Auth Layout",
@@ -965,7 +1013,8 @@
     "description": "A page frame for sign-in pages: the routed page, alone.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Layout"
+    "category": "Layout",
+    "hidden": true
   },
   {
     "name": "Sidebar Layout",
@@ -973,7 +1022,8 @@
     "description": "A page frame: a sidebar beside the routed page.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Layout"
+    "category": "Layout",
+    "hidden": true
   },
   {
     "name": "Stacked Layout",
@@ -981,7 +1031,8 @@
     "description": "A page frame: a sticky navbar, the routed page and a footer.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Layout"
+    "category": "Layout",
+    "hidden": true
   },
   {
     "name": "Stat Card",
@@ -989,7 +1040,8 @@
     "description": "A figure on a description list, formatted by Intl, its change coloured by good news.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Data Display"
+    "category": "Data Display",
+    "hidden": true
   },
   {
     "name": "Stepper",
@@ -997,7 +1049,8 @@
     "description": "Guides users through a multi-step process.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Navigation"
+    "category": "Navigation",
+    "hidden": true
   },
   {
     "name": "Sunburst Chart",
@@ -1005,7 +1058,8 @@
     "description": "A series in two rings: its rows' groups inside, the rows around them.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Data Display"
+    "category": "Data Display",
+    "hidden": true
   },
   {
     "name": "Switch",
@@ -1037,7 +1091,8 @@
     "description": "Tags typed into one field, a string[] for Signal Forms, checked before they go in.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Forms"
+    "category": "Forms",
+    "hidden": true
   },
   {
     "name": "Textarea",
@@ -1061,7 +1116,8 @@
     "description": "A time input with a list of times to pick from.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Forms"
+    "category": "Forms",
+    "hidden": true
   },
   {
     "name": "Time Input",
@@ -1069,7 +1125,8 @@
     "description": "A time typed part by part, in your language; a form field.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Forms"
+    "category": "Forms",
+    "hidden": true
   },
   {
     "name": "Time Clock",
@@ -1077,7 +1134,8 @@
     "description": "A time picked on a clock face, by pointer or keyboard.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Forms"
+    "category": "Forms",
+    "hidden": true
   },
   {
     "name": "Timeline",
@@ -1085,7 +1143,8 @@
     "description": "An ordered list, the line drawn for you, progress by status, Temporal times, alternate and horizontal.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Data Display"
+    "category": "Data Display",
+    "hidden": true
   },
   {
     "name": "Toast",
@@ -1133,7 +1192,8 @@
     "description": "Steps as markup on their targets, a native modal dialog with a spotlight, flipping cards, scrolling, keys.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Advanced"
+    "category": "Advanced",
+    "hidden": true
   },
   {
     "name": "Trace",
@@ -1149,7 +1209,8 @@
     "description": "One value (the chosen ids, a form field), two listbox sides, keyboard moves, search, reorder.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Advanced"
+    "category": "Advanced",
+    "hidden": true
   },
   {
     "name": "Tree",
@@ -1165,7 +1226,8 @@
     "description": "A series as boxes, each as large as its value — in groups if you like.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Data Display"
+    "category": "Data Display",
+    "hidden": true
   },
   {
     "name": "Tree Table",
@@ -1173,7 +1235,8 @@
     "description": "A Data Table whose rows open on their children, as a tree grid: indented, opened by the arrows, selected with their children.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Data Display"
+    "category": "Data Display",
+    "hidden": true
   },
   {
     "name": "Typography",
@@ -1189,7 +1252,8 @@
     "description": "A video player: controls as parts, state two ways, captions, chapters, seek preview, keyboard shortcuts.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Media"
+    "category": "Media",
+    "hidden": true
   },
   {
     "name": "Virtual List",
@@ -1197,6 +1261,7 @@
     "description": "Only what is seen rendered, rows measured as they render; a box or the page; down, along or in lanes.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Advanced"
+    "category": "Advanced",
+    "hidden": true
   }
 ]
