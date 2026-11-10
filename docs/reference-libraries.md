@@ -590,6 +590,16 @@ Built 2026-11-10 (the user). shadcn has none; Base UI's CheckboxGroup (`@base-ui
 - **Left out**: `render`, `nativeButton` (React), `onValueChange`'s event details (Signal Forms and `[(value)]`).
 - **Examples**: Base UI's Usage (Apples), Parent checkbox, Nested parent, Form; ours: Disabled, RTL.
 
+## Toggle Group: rewritten
+
+Rewritten 2026-11-10, in place (the user): shadcn's look, Base UI's API.
+
+- **The `toggleGroup` preset key** (`group`, `item`): each style's `toggle-group.tsx` classes as they are — corners (lg, md, 3xl, 2xl, none), the joined items' padding and shadow, `data-[state=on]`; the items' look stays the `toggle` key's.
+- **Base UI's API**: `value` always an array, `multiple` (a boolean) for Radix's `type` — "single" gone; one pressed can be released (none). The group a Signal Forms control (`FormValueControl<T[]>`: `[formField]` on the group), values of any type; `touch` when focus leaves it. `spacing` defaults to 2, as shadcn's.
+- **Keyboard**: one Tab stop, the arrows, Home / End, `loopFocus` — the CDK's `FocusKeyManager` (`role="group"`, as Base UI). Angular Aria's Toolbar was weighed: its `role="toolbar"` is the toolbar's; the consumer chooses between a toggle group and a toolbar (`scToolbarToggleGroup`), each with one keyboard (the user).
+- **Migrated**: `type="single"` dropped, `type="multiple"` → `multiple`, single string values → one-item arrays (`[value]="[x()]"`, `$event[0]`) in the demos (PDF viewer, editor, Gantt, charts, card, diff viewer, code editor, components list) and the PDF viewer's settings part.
+- **shadcn's examples**: Demo (the Usage), Outline, Sizes, Spacing, Vertical, Disabled, Font weight selector, RTL; ours kept: Single, Multiple.
+
 ## Input Button: restyled
 
 Restyled 2026-11-07. Our own component — shadcn has none; its docs site's search trigger is a secondary button.
