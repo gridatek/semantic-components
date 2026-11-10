@@ -6743,4 +6743,58 @@ export const demosRoutes: Route[] = [
       },
     ],
   },
+  {
+    path: 'demos/slider-next',
+    children: [
+      {
+        path: 'slider-next-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/slider-next/demos/slider-next-usage-demo').then(
+            (m) => m.SliderNextUsageDemo,
+          ),
+      },
+      {
+        path: 'controlled-slider-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/slider-next/demos/controlled-slider-next-demo').then(
+            (m) => m.ControlledSliderNextDemo,
+          ),
+      },
+      {
+        path: 'disabled-slider-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/slider-next/demos/disabled-slider-next-demo').then(
+            (m) => m.DisabledSliderNextDemo,
+          ),
+      },
+      {
+        path: 'vertical-slider-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/slider-next/demos/vertical-slider-next-demo').then(
+            (m) => m.VerticalSliderNextDemo,
+          ),
+      },
+      {
+        path: 'form-slider-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/slider-next/demos/form-slider-next-demo').then(
+            (m) => m.FormSliderNextDemo,
+          ),
+      },
+      {
+        path: 'custom-color-slider-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/slider-next/demos/custom-color-slider-next-demo').then(
+            (m) => m.CustomColorSliderNextDemo,
+          ),
+      },
+      {
+        path: 'rtl-slider-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/slider-next/demos/rtl-slider-next-demo').then(
+            (m) => m.RtlSliderNextDemo,
+          ),
+      },
+    ],
+  },
 ];

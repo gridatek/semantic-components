@@ -30,13 +30,7 @@ import {
 /** A description under the label, read with the switch; the switch at the end. */
 @Component({
   selector: 'app-description-switch-demo',
-  imports: [
-    FormField,
-    ScFieldDescription,
-    ScLabel,
-    ScSwitch,
-    ScSwitchField,
-  ],
+  imports: [FormField, ScFieldDescription, ScLabel, ScSwitch, ScSwitchField],
   template: \`
     <div scSwitchField class="max-w-sm">
       <label scLabel>Share across devices</label>

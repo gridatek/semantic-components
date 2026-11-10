@@ -46,6 +46,7 @@ import { scrollArea } from './scroll-area';
 import { select } from './select';
 import { sheet } from './sheet';
 import { skeleton } from './skeleton';
+import { slider } from './slider';
 import { switchStyles } from './switch';
 import { table } from './table';
 /** The vega preset: `provideSemanticComponents({ preset: vega })`. */
@@ -101,6 +102,7 @@ export const vega: ScPreset = {
   select,
   sheet,
   skeleton,
+  slider,
   switch: switchStyles,
   table,
   tabs,

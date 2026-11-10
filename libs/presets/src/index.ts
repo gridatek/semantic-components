@@ -425,6 +425,16 @@ export interface ScSwitchStyles {
   thumb: string;
 }
 
+/** A slider's parts that change from style to style. */
+export interface ScSliderStyles {
+  /** The native range: its thickness (the thumb's), and the thumb's size along the track. */
+  root: string;
+  /** The track (::-webkit-slider-runnable-track, ::-moz-range-track), and Firefox's range. */
+  track: string;
+  /** The thumb (::-webkit-slider-thumb, ::-moz-range-thumb). */
+  thumb: string;
+}
+
 /** A preset: the components' classes in one of shadcn's styles. */
 export interface ScPreset {
   accordion: ScAccordionStyles;
@@ -488,6 +498,7 @@ export interface ScPreset {
   scrollArea: ScScrollAreaStyles;
   select: ScSelectStyles;
   sheet: ScSheetStyles;
+  slider: ScSliderStyles;
   switch: ScSwitchStyles;
   /** A placeholder while content loads. */
   skeleton: string;

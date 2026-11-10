@@ -973,6 +973,14 @@
     "category": "Forms"
   },
   {
+    "name": "Slider Next",
+    "path": "slider-next",
+    "description": "A native range input, its track and thumb in the look of the app's preset.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Forms"
+  },
+  {
     "name": "Sortable List",
     "path": "sortable-list",
     "description": "Your array reordered by any pointer or the keyboard, announced in your words; down, along, or as a grid.",

@@ -55,6 +55,7 @@ export * from './sheet';
 export * from './sidebar';
 export * from './skeleton';
 export * from './slider';
+export * from './slider-next';
 export * from './spinner';
 export * from './switch';
 export * from './table';

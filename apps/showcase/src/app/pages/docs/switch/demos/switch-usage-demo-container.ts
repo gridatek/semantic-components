@@ -16,11 +16,7 @@ import { SwitchUsageDemo } from './switch-usage-demo';
 export class SwitchUsageDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
-import {
-  ScLabel,
-  ScSwitch,
-  ScSwitchField,
-} from '@semantic-components/ui';
+import { ScLabel, ScSwitch, ScSwitchField } from '@semantic-components/ui';
 
 /** A switch beside its label. */
 @Component({

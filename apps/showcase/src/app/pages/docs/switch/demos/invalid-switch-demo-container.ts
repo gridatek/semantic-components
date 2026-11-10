@@ -30,13 +30,7 @@ import {
 /** A required switch, touched and off: marked invalid (Signal Forms). */
 @Component({
   selector: 'app-invalid-switch-demo',
-  imports: [
-    FormField,
-    ScFieldDescription,
-    ScLabel,
-    ScSwitch,
-    ScSwitchField,
-  ],
+  imports: [FormField, ScFieldDescription, ScLabel, ScSwitch, ScSwitchField],
   template: \`
     <div scSwitchField class="max-w-sm">
       <label scLabel>Accept terms and conditions</label>
