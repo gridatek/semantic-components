@@ -531,6 +531,14 @@ An empty state (`div[scEmpty]`; restyled 2026-11-05): shadcn's Empty. A shadcn c
 - **The title on a heading** (`h2`–`h6`) as well as a `div`: shadcn's is a `div`; a heading can be found by heading.
 - **The examples**; links that look like buttons are `a[scLink]` (shadcn: `Button render={<a />}`); Card is inside a real Card.
 
+## Radio Group: restyled
+
+Restyled 2026-11-10: shadcn's Radio Group in each style, and its examples.
+
+- **The `radioGroup` preset key**: `group` (`gap-2` / `gap-3`), `item` (the radio), `dot`. Our radio is a native input: Base UI's `data-checked:` / `aria-checked:` are `checked:`; shadcn's dot span is our `::before`, its classes `checked:before:…` (shown only when checked, no scale transition).
+- **A radio field's text** takes the `label` preset at normal weight and case — shadcn's `FieldLabel className="font-normal"` beside a radio (sera's uppercase drops there); medium with a description. Its radio column is `auto` (sera's radio is `size-4.5`).
+- **shadcn's examples**: Demo (the Usage), Description, Choice card, Fieldset, Disabled (one option: a plain disabled radio — Signal Forms owns a bound field's `disabled`), Invalid (required, touched), RTL; ours kept: Horizontal, In a form, Custom theme.
+
 ## Input Button: restyled
 
 Restyled 2026-11-07. Our own component — shadcn has none; its docs site's search trigger is a secondary button.

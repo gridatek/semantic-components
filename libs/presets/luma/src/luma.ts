@@ -39,6 +39,7 @@ import { popover } from './popover';
 import { previewCard } from './preview-card';
 import { progress } from './progress';
 import { questionnaire } from './questionnaire';
+import { radioGroup } from './radio-group';
 import { resizable } from './resizable';
 import { scrollArea } from './scroll-area';
 import { select } from './select';
@@ -91,6 +92,7 @@ export const luma: ScPreset = {
   previewCard,
   progress,
   questionnaire,
+  radioGroup,
   resizable,
   scrollArea,
   select,

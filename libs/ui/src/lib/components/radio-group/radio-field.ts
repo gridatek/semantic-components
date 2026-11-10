@@ -10,6 +10,7 @@ import {
   signal,
 } from '@angular/core';
 import { FormField } from '@angular/forms/signals';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 import { SC_FIELD, type ScFieldContext } from '../field/field';
 
@@ -25,6 +26,7 @@ import { SC_FIELD, type ScFieldContext } from '../field/field';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScRadioField implements ScFieldContext {
+  private readonly labelStyles = injectPreset().label;
   private readonly elementRef = inject(ElementRef<HTMLElement>);
 
   readonly id = input(inject(_IdGenerator).getId('sc-radio-field-'));
@@ -40,7 +42,9 @@ export class ScRadioField implements ScFieldContext {
 
   protected readonly class = computed(() =>
     cn(
-      'grid grid-cols-[1rem_1fr] items-center gap-x-2 gap-y-1 text-sm font-medium has-[:disabled]:cursor-not-allowed has-[:disabled]:opacity-50',
+      this.labelStyles.label,
+      'font-normal tracking-normal normal-case',
+      'grid grid-cols-[auto_1fr] items-center gap-x-2 gap-y-1 has-[:disabled]:cursor-not-allowed has-[:disabled]:opacity-50',
       '*:data-[slot=radio]:col-start-1 *:data-[slot=radio]:row-start-1',
       '*:data-[slot=label]:col-start-2 *:data-[slot=label]:row-start-1',
       '*:data-[slot=field-description]:col-start-2 *:data-[slot=field-description]:row-start-2',

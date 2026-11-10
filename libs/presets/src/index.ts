@@ -399,6 +399,16 @@ export interface ScFieldStyles {
   error: string;
 }
 
+/** A radio group's parts that change from style to style. */
+export interface ScRadioGroupStyles {
+  /** The group, stacked. */
+  group: string;
+  /** A radio (a native input, appearance-none). */
+  item: string;
+  /** Its dot when checked (its ::before). */
+  dot: string;
+}
+
 /** A preset: the components' classes in one of shadcn's styles. */
 export interface ScPreset {
   accordion: ScAccordionStyles;
@@ -456,6 +466,7 @@ export interface ScPreset {
   previewCard: ScPreviewCardStyles;
   progress: ScProgressStyles;
   questionnaire: ScQuestionnaireStyles;
+  radioGroup: ScRadioGroupStyles;
   resizable: ScResizableStyles;
   scrollArea: ScScrollAreaStyles;
   select: ScSelectStyles;

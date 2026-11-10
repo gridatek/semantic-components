@@ -100,6 +100,7 @@ Do **not** "fix" these to match shadcn:
 - **Calendar: no caption dropdowns; our cells** — shadcn's `captionLayout="dropdown"` is not taken: the heading is a button that zooms out to months and years (the user: dropdowns are hard to use). The cells are our `td`s (one Tab stop, a grid), styled from the preset's `--cell-size` / `--cell-radius`; shadcn's react-day-picker `classNames` and `CalendarDayButton` aren't copied class for class.
 - **Label: one part for Label and FieldLabel; `has-checked:`** — the `label` key's `field` classes are added in or around a field; shadcn's `has-data-checked:` (Base UI's attribute) is `has-checked:` (our native inputs).
 - **Field: our slot names; a select in a field** — the `field` key's strings use `field-body` (shadcn's `field-content`), `label` (`field-label`) and `data-[orientation=horizontal]` (`data-horizontal`). A select in a field is `contents`, its label the field's look; shadcn's FieldLabel goes beside a SelectTrigger.
+- **Radio Group: a native radio** — the `radioGroup` key's `item` reads `checked:` (Base UI's `data-checked:` / `aria-checked:`); its `dot` is the input's `::before` (`checked:before:…`), shadcn's an indicator span.
 - **Pagination: parts on buttons or your links** — the parts set no `href`: a link follows the one you give it.
 - **Decomposition** — shadcn ships one function per part in one file; we split into directives, one per file, so one shadcn part can map to several of ours.
 

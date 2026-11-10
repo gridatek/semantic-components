@@ -2,6 +2,8 @@
 
 A set of checkable buttons where only one button can be checked at a time.
 
+In the look of the app's preset (`radioGroup` key: the group's gap, the radio and its dot, shadcn's in each of the eight styles — luma's and rhea's filled, sera's a ring with a dark dot). The radio is a native input (`appearance-none`), its dot the `::before`; a radio field's text takes the `label` preset, at normal weight.
+
 ## Components
 
 - `ScRadioGroup` - Container directive that provides radiogroup semantics (applied to div)

@@ -4256,17 +4256,31 @@ export const demosRoutes: Route[] = [
     path: 'demos/radio-group',
     children: [
       {
-        path: 'basic-radio-group-demo',
+        path: 'radio-group-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/radio-group/demos/basic-radio-group-demo').then(
-            (m) => m.BasicRadioGroupDemo,
+          import('../pages/docs/radio-group/demos/radio-group-usage-demo').then(
+            (m) => m.RadioGroupUsageDemo,
           ),
       },
       {
-        path: 'descriptions-radio-group-demo',
+        path: 'description-radio-group-demo',
         loadComponent: () =>
-          import('../pages/docs/radio-group/demos/descriptions-radio-group-demo').then(
-            (m) => m.DescriptionsRadioGroupDemo,
+          import('../pages/docs/radio-group/demos/description-radio-group-demo').then(
+            (m) => m.DescriptionRadioGroupDemo,
+          ),
+      },
+      {
+        path: 'choice-card-radio-group-demo',
+        loadComponent: () =>
+          import('../pages/docs/radio-group/demos/choice-card-radio-group-demo').then(
+            (m) => m.ChoiceCardRadioGroupDemo,
+          ),
+      },
+      {
+        path: 'fieldset-radio-group-demo',
+        loadComponent: () =>
+          import('../pages/docs/radio-group/demos/fieldset-radio-group-demo').then(
+            (m) => m.FieldsetRadioGroupDemo,
           ),
       },
       {
@@ -4274,6 +4288,20 @@ export const demosRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/radio-group/demos/disabled-radio-group-demo').then(
             (m) => m.DisabledRadioGroupDemo,
+          ),
+      },
+      {
+        path: 'invalid-radio-group-demo',
+        loadComponent: () =>
+          import('../pages/docs/radio-group/demos/invalid-radio-group-demo').then(
+            (m) => m.InvalidRadioGroupDemo,
+          ),
+      },
+      {
+        path: 'rtl-radio-group-demo',
+        loadComponent: () =>
+          import('../pages/docs/radio-group/demos/rtl-radio-group-demo').then(
+            (m) => m.RtlRadioGroupDemo,
           ),
       },
       {
