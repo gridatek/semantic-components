@@ -6,7 +6,7 @@ A control's name, shown beside it — shadcn's Label (and FieldLabel) in the loo
 
 ```html
 <div scCheckboxField>
-  <input type="checkbox" scCheckbox />
+  <input scCheckbox />
   <label scLabel>Accept terms and conditions</label>
 </div>
 ```
@@ -29,7 +29,7 @@ Around a field, it is a choice card — the whole card picks:
       <div scFieldTitle>Enable notifications</div>
       <p scFieldDescription>You can enable or disable notifications at any time.</p>
     </div>
-    <div scCheckboxField><input type="checkbox" scCheckbox /></div>
+    <div scCheckboxField><input scCheckbox /></div>
   </div>
 </label>
 ```

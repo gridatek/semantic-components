@@ -31,15 +31,15 @@ import {
       <div scCardContent>
         <div scFieldGroup class="gap-3">
           <div scCheckboxField>
-            <input type="checkbox" scCheckbox [(checked)]="email" />
+            <input scCheckbox [(checked)]="email" />
             <label scLabel>Email notifications</label>
           </div>
           <div scCheckboxField>
-            <input type="checkbox" scCheckbox [(checked)]="sms" />
+            <input scCheckbox [(checked)]="sms" />
             <label scLabel>SMS notifications</label>
           </div>
           <div scCheckboxField>
-            <input type="checkbox" scCheckbox [(checked)]="push" />
+            <input scCheckbox [(checked)]="push" />
             <label scLabel>Push notifications</label>
           </div>
         </div>

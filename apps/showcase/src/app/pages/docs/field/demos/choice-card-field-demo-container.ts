@@ -66,8 +66,7 @@ import {
                 <p scFieldDescription>Run GPU workloads on a K8s cluster.</p>
               </div>
               <div scRadioField>
-                <input
-                  type="radio"
+                <input type="radio"
                   scRadio
                   value="kubernetes"
                   [formField]="envForm.environment"
@@ -82,8 +81,7 @@ import {
                 <p scFieldDescription>Access a cluster to run GPU workloads.</p>
               </div>
               <div scRadioField>
-                <input
-                  type="radio"
+                <input type="radio"
                   scRadio
                   value="vm"
                   [formField]="envForm.environment"

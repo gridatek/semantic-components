@@ -50,7 +50,6 @@ import {
       <div scFieldGroup class="gap-3">
         <label scCheckboxField>
           <input
-            type="checkbox"
             scCheckbox
             [formField]="desktopForm.hardDisks"
           />
@@ -58,18 +57,17 @@ import {
         </label>
         <label scCheckboxField>
           <input
-            type="checkbox"
             scCheckbox
             [formField]="desktopForm.externalDisks"
           />
           External disks
         </label>
         <label scCheckboxField>
-          <input type="checkbox" scCheckbox [formField]="desktopForm.media" />
+          <input scCheckbox [formField]="desktopForm.media" />
           CDs, DVDs, and iPods
         </label>
         <label scCheckboxField>
-          <input type="checkbox" scCheckbox [formField]="desktopForm.servers" />
+          <input scCheckbox [formField]="desktopForm.servers" />
           Connected servers
         </label>
       </div>

@@ -32,8 +32,7 @@ import { ScRadio, ScRadioField, ScRadioGroup } from '@semantic-components/ui';
     >
       <div scRadioGroup>
         <label scRadioField>
-          <input
-            type="radio"
+          <input type="radio"
             scRadio
             value="option1"
             [formField]="themeForm.selected"
@@ -41,8 +40,7 @@ import { ScRadio, ScRadioField, ScRadioGroup } from '@semantic-components/ui';
           Option 1
         </label>
         <label scRadioField>
-          <input
-            type="radio"
+          <input type="radio"
             scRadio
             value="option2"
             [formField]="themeForm.selected"

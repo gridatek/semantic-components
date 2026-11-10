@@ -7,7 +7,7 @@ import { ScLabel, ScSwitch, ScSwitchField } from '@semantic-components/ui';
   imports: [ScLabel, ScSwitch, ScSwitchField],
   template: `
     <div scSwitchField class="w-fit">
-      <input type="checkbox" scSwitch disabled />
+      <input scSwitch disabled />
       <label scLabel>Disabled</label>
     </div>
   `,

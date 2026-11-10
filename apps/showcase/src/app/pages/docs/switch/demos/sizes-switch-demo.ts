@@ -13,11 +13,11 @@ import {
   template: `
     <div scFieldGroup class="w-full max-w-40">
       <div scSwitchField>
-        <input type="checkbox" scSwitch size="sm" />
+        <input scSwitch size="sm" />
         <label scLabel>Small</label>
       </div>
       <div scSwitchField>
-        <input type="checkbox" scSwitch size="default" />
+        <input scSwitch size="default" />
         <label scLabel>Default</label>
       </div>
     </div>

@@ -22,8 +22,10 @@ export type ScSwitchSize = 'default' | 'sm';
  * field beside its text, or in any field.
  */
 @Directive({
-  selector: 'input[type="checkbox"][scSwitch]',
+  selector: 'input[scSwitch]',
   host: {
+    // A checkbox shown as a switch: its own type and role, the markup needs neither.
+    type: 'checkbox',
     'data-slot': 'switch',
     role: 'switch',
     '[attr.data-size]': 'size()',

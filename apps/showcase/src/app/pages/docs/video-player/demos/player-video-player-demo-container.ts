@@ -267,8 +267,7 @@ import {
         aria-labelledby="captions-label"
       >
         <label scRadioField>
-          <input
-            type="radio"
+          <input type="radio"
             scRadio
             value="off"
             [formField]="settingsForm.captions"
@@ -277,8 +276,7 @@ import {
         </label>
         @for (track of player.tracks(); track track.id) {
           <label scRadioField>
-            <input
-              type="radio"
+            <input type="radio"
               scRadio
               [value]="track.id"
               [formField]="settingsForm.captions"

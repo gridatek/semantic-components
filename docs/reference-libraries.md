@@ -560,6 +560,17 @@ Rewritten 2026-11-10 as Checkbox was: built beside the old one as Switch Next (t
 - **shadcn's examples**: Demo (the Usage), Description, Choice card, Disabled, Invalid, Sizes, RTL; ours kept: State, Signal Forms; Input first and Input last merged into Placement.
 - **Gone**: `ScSwitchVisual`, `SC_SWITCH_FIELD` / `ScSwitchContext`, the field's `data-state` / `data-disabled` (style by `has-checked:`, `has-disabled:`).
 
+## Slider: rewritten
+
+Rewritten 2026-11-10: built beside the old one as Slider Next, switched in. shadcn's Slider in each style, and its examples.
+
+- **A native range, styled by the `slider` preset key** (`root`, `track`, `thumb`): shadcn's classes on the browser's parts (`::-webkit-slider-runnable-track` / `::-moz-range-track`, `::-webkit-slider-thumb` / `::-moz-range-thumb`), hover, focus and active from the input; Chrome's thumb centred by the generator (`margin-block-start`).
+- **Sizes logical** (`block-*` thickness, `inline-*` along the track): `orientation="vertical"` is the native range turned (`writing-mode: vertical-lr`, `direction: rtl`), the same classes; `aria-orientation`.
+- **The range**: Firefox's `::-moz-range-progress`; on Chrome's track a fill up to the thumb's centre (shadcn's `thumbAlignment="edge"`): `thumb/2 + (100% - thumb) × value`. `var(--primary)`, so a section's colours apply.
+- **Its own `type="range"`**, as before: the markup needs none, and the audio and video players use it as a host directive (Checkbox and Switch do the same now: component-design-principles.md).
+- **One thumb**: shadcn's Range and Multiple are left out (Range Slider is ours, in its turn).
+- **shadcn's examples**: Demo (the Usage), Controlled, Disabled, Vertical, RTL; ours kept: Form, Custom color.
+
 ## Input Button: restyled
 
 Restyled 2026-11-07. Our own component — shadcn has none; its docs site's search trigger is a secondary button.

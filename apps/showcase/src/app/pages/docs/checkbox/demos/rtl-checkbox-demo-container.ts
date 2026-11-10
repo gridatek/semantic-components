@@ -48,22 +48,21 @@ import {
   template: \`
     <div dir="rtl" lang="ar" scFieldGroup class="max-w-sm">
       <div scCheckboxField>
-        <input type="checkbox" scCheckbox [formField]="termsForm.terms" />
+        <input scCheckbox [formField]="termsForm.terms" />
         <label scLabel>قبول الشروط والأحكام</label>
       </div>
       <div scCheckboxField>
-        <input type="checkbox" scCheckbox [formField]="termsForm.agreed" />
+        <input scCheckbox [formField]="termsForm.agreed" />
         <label scLabel>قبول الشروط والأحكام</label>
         <p scFieldDescription>بالنقر على هذا المربع، فإنك توافق على الشروط.</p>
       </div>
       <div scCheckboxField>
-        <input type="checkbox" scCheckbox disabled />
+        <input scCheckbox disabled />
         <label scLabel>تفعيل الإشعارات</label>
       </div>
       <label scLabel>
         <div scField orientation="horizontal">
           <input
-            type="checkbox"
             scCheckbox
             [formField]="termsForm.notifications"
           />

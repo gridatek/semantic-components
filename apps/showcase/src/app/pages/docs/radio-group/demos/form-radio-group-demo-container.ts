@@ -35,8 +35,7 @@ interface NotificationFormModel {
         <h4 class="font-semibold">Notification Preferences</h4>
         <div scRadioGroup>
           <label scRadioField>
-            <input
-              type="radio"
+            <input type="radio"
               scRadio
               value="all"
               [formField]="notificationForm.notify"
@@ -44,8 +43,7 @@ interface NotificationFormModel {
             All new messages
           </label>
           <label scRadioField>
-            <input
-              type="radio"
+            <input type="radio"
               scRadio
               value="mentions"
               [formField]="notificationForm.notify"
@@ -53,8 +51,7 @@ interface NotificationFormModel {
             Direct messages and mentions
           </label>
           <label scRadioField>
-            <input
-              type="radio"
+            <input type="radio"
               scRadio
               value="none"
               [formField]="notificationForm.notify"

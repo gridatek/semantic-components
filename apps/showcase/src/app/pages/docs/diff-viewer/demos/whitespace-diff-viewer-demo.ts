@@ -9,12 +9,7 @@ import { ScDiffViewer } from '@semantic-components/ui/diff-viewer';
   imports: [ScCodeBlock, ScDiffViewer, ScSwitch, ScSwitchField],
   template: `
     <label scSwitchField class="mb-3">
-      <input
-        type="checkbox"
-        scSwitch
-        [checked]="ignore()"
-        (change)="ignore.set(!ignore())"
-      />
+      <input scSwitch [checked]="ignore()" (change)="ignore.set(!ignore())" />
       Ignore whitespace
     </label>
     <div scCodeBlock>

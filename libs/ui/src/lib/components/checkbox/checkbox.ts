@@ -20,8 +20,10 @@ import { SC_FIELD } from '../field';
  * beside its text, or in any field.
  */
 @Directive({
-  selector: 'input[type="checkbox"][scCheckbox]',
+  selector: 'input[scCheckbox]',
   host: {
+    // Its own type: the markup needs none.
+    type: 'checkbox',
     'data-slot': 'checkbox',
     '[id]': 'id()',
     '[attr.aria-describedby]': 'ariaDescribedBy()',

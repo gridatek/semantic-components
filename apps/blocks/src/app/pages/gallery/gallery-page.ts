@@ -356,13 +356,13 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
             <div scSeparator aria-hidden="true"></div>
             <div class="space-y-3">
               <div scCheckboxField>
-                <input type="checkbox" scCheckbox id="terms" />
+                <input scCheckbox id="terms" />
                 <label scLabel for="terms" i18n="@@gallery.acceptTerms"
                   >Accept terms and conditions</label
                 >
               </div>
               <div scCheckboxField>
-                <input type="checkbox" scCheckbox id="newsletter" />
+                <input scCheckbox id="newsletter" />
                 <label scLabel for="newsletter" i18n="@@gallery.newsletter"
                   >Subscribe to newsletter</label
                 >
@@ -381,13 +381,13 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
             <div scSeparator aria-hidden="true"></div>
             <div class="space-y-3">
               <div class="flex items-center gap-2">
-                <input type="checkbox" scSwitch id="airplane" />
+                <input scSwitch id="airplane" />
                 <label scLabel for="airplane" i18n="@@gallery.airplaneMode"
                   >Airplane Mode</label
                 >
               </div>
               <div class="flex items-center gap-2">
-                <input type="checkbox" scSwitch id="notifications" />
+                <input scSwitch id="notifications" />
                 <label
                   scLabel
                   for="notifications"

@@ -136,7 +136,6 @@ const READING_MODES: Record<string, ScPdfPageColors | null> = {
           <label scSwitchField class="text-sm">
             Caret browsing
             <input
-              type="checkbox"
               scSwitch
               [checked]="caretBrowsing()"
               (change)="setCaretBrowsing($event)"

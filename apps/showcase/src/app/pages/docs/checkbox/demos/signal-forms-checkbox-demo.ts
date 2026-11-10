@@ -25,15 +25,11 @@ import {
     <div class="flex w-64 flex-col gap-4">
       <div scFieldGroup class="gap-3">
         <div scCheckboxField>
-          <input
-            type="checkbox"
-            scCheckbox
-            [formField]="emailForm.newsletter"
-          />
+          <input scCheckbox [formField]="emailForm.newsletter" />
           <label scLabel>Subscribe to newsletter</label>
         </div>
         <div scCheckboxField>
-          <input type="checkbox" scCheckbox [formField]="emailForm.marketing" />
+          <input scCheckbox [formField]="emailForm.marketing" />
           <label scLabel>Receive marketing emails</label>
         </div>
       </div>

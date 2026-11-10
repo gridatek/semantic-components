@@ -12,6 +12,8 @@ import { SC_FIELD } from '../field';
 import { ScRadioGroup } from './radio-group';
 
 @Directive({
+  // type="radio" stays in the markup: Signal Forms types a native radio's
+  // [formField] by the template's type (a union value fails without it).
   selector: 'input[type="radio"][scRadio]',
   host: {
     'data-slot': 'radio',

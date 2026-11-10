@@ -34,7 +34,7 @@ import {
               app.
             </p>
           </div>
-          <input type="checkbox" scSwitch [formField]="focusForm.share" />
+          <input scSwitch [formField]="focusForm.share" />
         </div>
       </label>
       <label scLabel>
@@ -45,11 +45,7 @@ import {
               Receive notifications when focus mode is enabled or disabled.
             </p>
           </div>
-          <input
-            type="checkbox"
-            scSwitch
-            [formField]="focusForm.notifications"
-          />
+          <input scSwitch [formField]="focusForm.notifications" />
         </div>
       </label>
     </div>

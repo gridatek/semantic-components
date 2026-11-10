@@ -43,8 +43,7 @@ import {
     <div dir="rtl" lang="ar">
       <div scRadioGroup aria-label="التباعد" class="w-fit">
         <div scRadioField>
-          <input
-            type="radio"
+          <input type="radio"
             scRadio
             value="default"
             [formField]="spacingForm.spacing"
@@ -53,8 +52,7 @@ import {
           <p scFieldDescription>تباعد قياسي لمعظم حالات الاستخدام.</p>
         </div>
         <div scRadioField>
-          <input
-            type="radio"
+          <input type="radio"
             scRadio
             value="comfortable"
             [formField]="spacingForm.spacing"
@@ -63,8 +61,7 @@ import {
           <p scFieldDescription>مساحة أكبر بين العناصر.</p>
         </div>
         <div scRadioField>
-          <input
-            type="radio"
+          <input type="radio"
             scRadio
             value="compact"
             [formField]="spacingForm.spacing"

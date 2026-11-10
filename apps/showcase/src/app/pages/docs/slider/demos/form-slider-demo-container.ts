@@ -20,43 +20,35 @@ import { FormSliderDemo } from './form-slider-demo';
 export class FormSliderDemoContainer {
   readonly code = `import { JsonPipe } from '@angular/common';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { FormField, form } from '@angular/forms/signals';
+import { FormField, form, max, min } from '@angular/forms/signals';
 import {
   ScField,
-  ScFieldErrors,
+  ScFrame,
   ScLabel,
   ScSlider,
 } from '@semantic-components/ui';
 
-interface VolumeFormModel {
-  volume: number;
-}
-
+/** Bound with [formField], in a field: the schema's min and max, the form's value. */
 @Component({
   selector: 'app-form-slider-demo',
-  imports: [ScSlider, ScField, ScFieldErrors, ScLabel, FormField, JsonPipe],
+  imports: [FormField, JsonPipe, ScField, ScFrame, ScLabel, ScSlider],
   template: \`
-    <div class="w-[280px] space-y-6">
+    <div class="flex w-72 flex-col gap-4">
       <div scField>
-        <label scLabel>Volume — {{ formModel().volume }}</label>
-        <input scSlider [formField]="volumeForm.volume" aria-label="Volume" />
-        <p scFieldErrors></p>
+        <label scLabel>Volume — {{ model().volume }}</label>
+        <input scSlider [formField]="volumeForm.volume" />
       </div>
-
-      <div class="bg-muted rounded-md p-4">
-        <p class="text-sm font-medium">Form Values:</p>
-        <pre class="mt-2 text-xs">{{ formModel() | json }}</pre>
-      </div>
+      <pre scFrame class="bg-muted p-4 text-xs">{{ model() | json }}</pre>
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
 export class FormSliderDemo {
-  readonly formModel = signal<VolumeFormModel>({
-    volume: 50,
+  protected readonly model = signal({ volume: 50 });
+  protected readonly volumeForm = form(this.model, (path) => {
+    min(path.volume, 0);
+    max(path.volume, 100);
   });
-
-  readonly volumeForm = form(this.formModel);
 }`;
 }

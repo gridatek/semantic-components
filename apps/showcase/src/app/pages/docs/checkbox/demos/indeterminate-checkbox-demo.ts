@@ -13,7 +13,6 @@ import {
     <div scFieldGroup class="w-56 gap-3">
       <label scCheckboxField>
         <input
-          type="checkbox"
           scCheckbox
           [checked]="allSelected()"
           [indeterminate]="someSelected()"
@@ -25,7 +24,6 @@ import {
         @for (item of items(); track item.name; let i = $index) {
           <label scCheckboxField>
             <input
-              type="checkbox"
               scCheckbox
               [checked]="item.checked"
               (checkedChange)="select(i, $event)"

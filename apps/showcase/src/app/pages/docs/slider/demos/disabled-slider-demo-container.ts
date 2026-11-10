@@ -1,34 +1,33 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { DisabledSliderNextDemo } from './disabled-slider-next-demo';
+import { DisabledSliderDemo } from './disabled-slider-demo';
 
 @Component({
-  selector: 'app-disabled-slider-next-demo-container',
-  imports: [DemoContainer, DisabledSliderNextDemo],
+  selector: 'app-disabled-slider-demo-container',
+  imports: [DemoContainer, DisabledSliderDemo],
   template: `
     <app-demo-container
       title="Disabled"
-      demoUrl="/demos/slider-next/disabled-slider-next-demo"
+      demoUrl="/demos/slider/disabled-slider-demo"
       [code]="code"
     >
-      <app-disabled-slider-next-demo />
+      <app-disabled-slider-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class DisabledSliderNextDemoContainer {
+export class DisabledSliderDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScSliderNext } from '@semantic-components/ui';
+import { ScSlider } from '@semantic-components/ui';
 
 /** Disabled: dimmed, out of the Tab order. */
 @Component({
-  selector: 'app-disabled-slider-next-demo',
-  imports: [ScSliderNext],
+  selector: 'app-disabled-slider-demo',
+  imports: [ScSlider],
   template: \`
     <input
-      type="range"
-      scSliderNext
+      scSlider
       [value]="50"
       disabled
       aria-label="Volume"
@@ -38,5 +37,5 @@ import { ScSliderNext } from '@semantic-components/ui';
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class DisabledSliderNextDemo {}`;
+export class DisabledSliderDemo {}`;
 }

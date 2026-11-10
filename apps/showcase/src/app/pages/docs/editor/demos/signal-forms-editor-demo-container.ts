@@ -115,7 +115,7 @@ interface PostModel {
       </div>
 
       <div scCheckboxField>
-        <input type="checkbox" scCheckbox [formField]="postForm.locked" />
+        <input scCheckbox [formField]="postForm.locked" />
         <label scLabel>Lock the post</label>
       </div>
 

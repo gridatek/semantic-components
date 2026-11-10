@@ -32,8 +32,7 @@ interface FilterFormModel {
   template: \`
     <div scRadioGroup orientation="horizontal">
       <label scRadioField>
-        <input
-          type="radio"
+        <input type="radio"
           scRadio
           value="all"
           [formField]="filterForm.filter"
@@ -41,8 +40,7 @@ interface FilterFormModel {
         All
       </label>
       <label scRadioField>
-        <input
-          type="radio"
+        <input type="radio"
           scRadio
           value="unread"
           [formField]="filterForm.filter"
@@ -50,8 +48,7 @@ interface FilterFormModel {
         Unread
       </label>
       <label scRadioField>
-        <input
-          type="radio"
+        <input type="radio"
           scRadio
           value="archived"
           [formField]="filterForm.filter"

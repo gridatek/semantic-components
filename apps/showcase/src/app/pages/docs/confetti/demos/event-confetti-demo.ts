@@ -27,7 +27,6 @@ import { ScConfetti } from '@semantic-components/ui/confetti';
           <li>
             <div scCheckboxField>
               <input
-                type="checkbox"
                 scCheckbox
                 [checked]="task.done"
                 (checkedChange)="toggle(i)"

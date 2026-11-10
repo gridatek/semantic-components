@@ -158,7 +158,7 @@ export default class SwitchPage {
       "import { ScSwitch, ScSwitchField } from '@semantic-components/ui';",
     markup: [
       '<label scSwitchField>',
-      '  <input type="checkbox" scSwitch [formField]="…" />',
+      '  <input scSwitch [formField]="…" />',
       '  …',
       '</label>',
     ].join('\n'),
@@ -173,7 +173,7 @@ export default class SwitchPage {
     },
     {
       name: 'ScSwitch',
-      selector: 'input[type="checkbox"][scSwitch]',
+      selector: 'input[scSwitch]',
       description:
         "A native checkbox with role=\"switch\", its track and thumb drawn by itself in the preset's look: checked (two-way, or a [formField]); size ('default', 'sm'); invalid once touched.",
     },

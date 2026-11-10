@@ -1,30 +1,30 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { ControlledSliderNextDemo } from './controlled-slider-next-demo';
+import { ControlledSliderDemo } from './controlled-slider-demo';
 
 @Component({
-  selector: 'app-controlled-slider-next-demo-container',
-  imports: [DemoContainer, ControlledSliderNextDemo],
+  selector: 'app-controlled-slider-demo-container',
+  imports: [DemoContainer, ControlledSliderDemo],
   template: `
     <app-demo-container
       title="Controlled"
-      demoUrl="/demos/slider-next/controlled-slider-next-demo"
+      demoUrl="/demos/slider/controlled-slider-demo"
       [code]="code"
     >
-      <app-controlled-slider-next-demo />
+      <app-controlled-slider-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ControlledSliderNextDemoContainer {
+export class ControlledSliderDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScLabel, ScSliderNext } from '@semantic-components/ui';
+import { ScLabel, ScSlider } from '@semantic-components/ui';
 
 /** Its value shown beside its label: two-way, [(value)]; min, max and step. */
 @Component({
-  selector: 'app-controlled-slider-next-demo',
-  imports: [ScLabel, ScSliderNext],
+  selector: 'app-controlled-slider-demo',
+  imports: [ScLabel, ScSlider],
   template: \`
     <div class="grid w-full max-w-xs gap-3">
       <div class="flex items-center justify-between gap-2">
@@ -33,8 +33,7 @@ import { ScLabel, ScSliderNext } from '@semantic-components/ui';
       </div>
       <input
         id="slider-temperature"
-        type="range"
-        scSliderNext
+        scSlider
         [(value)]="temperature"
         [min]="0"
         [max]="1"
@@ -45,7 +44,7 @@ import { ScLabel, ScSliderNext } from '@semantic-components/ui';
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ControlledSliderNextDemo {
+export class ControlledSliderDemo {
   protected readonly temperature = signal(0.3);
 }`;
 }

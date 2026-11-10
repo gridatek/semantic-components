@@ -180,7 +180,7 @@ import { COLOR_SCHEMES, RADIUS_OPTIONS } from './color-schemes';
                     />
                   </div>
                   <label scSwitchField>
-                    <input type="checkbox" scSwitch [checked]="true" />
+                    <input scSwitch [checked]="true" />
                     Email me about new features
                   </label>
                   <button scButton class="w-full">Create account</button>

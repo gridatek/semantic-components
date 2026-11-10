@@ -54,7 +54,6 @@ import {
         <div scFieldGroup class="gap-3">
           <div scCheckboxField>
             <input
-              type="checkbox"
               scCheckbox
               [(checked)]="push"
               [disabled]="true"
@@ -72,11 +71,11 @@ import {
         </p>
         <div scFieldGroup class="gap-3">
           <div scCheckboxField>
-            <input type="checkbox" scCheckbox />
+            <input scCheckbox />
             <label scLabel class="font-normal">Push notifications</label>
           </div>
           <div scCheckboxField>
-            <input type="checkbox" scCheckbox />
+            <input scCheckbox />
             <label scLabel class="font-normal">Email notifications</label>
           </div>
         </div>

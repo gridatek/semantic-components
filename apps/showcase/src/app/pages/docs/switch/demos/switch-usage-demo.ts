@@ -8,7 +8,7 @@ import { ScLabel, ScSwitch, ScSwitchField } from '@semantic-components/ui';
   imports: [FormField, ScLabel, ScSwitch, ScSwitchField],
   template: `
     <div scSwitchField>
-      <input type="checkbox" scSwitch [formField]="modeForm.airplane" />
+      <input scSwitch [formField]="modeForm.airplane" />
       <label scLabel>Airplane Mode</label>
     </div>
   `,

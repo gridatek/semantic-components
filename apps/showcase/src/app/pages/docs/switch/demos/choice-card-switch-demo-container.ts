@@ -54,7 +54,7 @@ import {
               app.
             </p>
           </div>
-          <input type="checkbox" scSwitch [formField]="focusForm.share" />
+          <input scSwitch [formField]="focusForm.share" />
         </div>
       </label>
       <label scLabel>
@@ -66,7 +66,6 @@ import {
             </p>
           </div>
           <input
-            type="checkbox"
             scSwitch
             [formField]="focusForm.notifications"
           />

@@ -6,7 +6,7 @@ A switch: a native checkbox with `role="switch"` that draws itself (`appearance-
 
 ```html
 <div scSwitchField>
-  <input type="checkbox" scSwitch [formField]="form.airplane" />
+  <input scSwitch [formField]="form.airplane" />
   <label scLabel>Airplane Mode</label>
 </div>
 ```
@@ -16,7 +16,7 @@ A switch: a native checkbox with `role="switch"` that draws itself (`appearance-
 | Part            | Selector                                   | What it does                                                                                                             |
 | --------------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
 | `ScSwitchField` | `label[scSwitchField], div[scSwitchField]` | A switch beside its text (the `label` preset, normal weight): first, at the start; last, at the end. Optional            |
-| `ScSwitch`      | `input[type="checkbox"][scSwitch]`         | The native input, drawn: `checked` (model, or `[formField]`), `size` (`default`, `sm`), `disabled`; invalid once touched |
+| `ScSwitch`      | `input[scSwitch]`                          | The native input, drawn: `checked` (model, or `[formField]`), `size` (`default`, `sm`), `disabled`; invalid once touched |
 
 ## Accessibility
 

@@ -164,7 +164,7 @@ export default class CheckboxPage {
       "import { ScCheckbox, ScCheckboxField } from '@semantic-components/ui';",
     markup: [
       '<label scCheckboxField>',
-      '  <input type="checkbox" scCheckbox [formField]="…" />',
+      '  <input scCheckbox [formField]="…" />',
       '  …',
       '</label>',
     ].join('\n'),
@@ -179,7 +179,7 @@ export default class CheckboxPage {
     },
     {
       name: 'ScCheckbox',
-      selector: 'input[type="checkbox"][scCheckbox]',
+      selector: 'input[scCheckbox]',
       description:
         "A native checkbox in the preset's look, its check or minus drawn by itself: checked (two-way, or a [formField]); indeterminate; invalid once touched.",
     },

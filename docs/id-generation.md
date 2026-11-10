@@ -8,7 +8,7 @@ Connecting a `<label>` to its control requires matching `id` and `for` attribute
 
 ```html
 <div scCheckboxField>
-  <input type="checkbox" scCheckbox id="terms" />
+  <input scCheckbox id="terms" />
   <label scLabel for="terms">Accept terms</label>
 </div>
 ```
@@ -21,7 +21,7 @@ Field components auto-generate an ID and share it with their children via the `S
 
 ```html
 <div scCheckboxField>
-  <input type="checkbox" scCheckbox />
+  <input scCheckbox />
   <label scLabel>Accept terms</label>
 </div>
 ```
@@ -125,7 +125,7 @@ Consumers can override the auto-generated ID at the field level:
 
 ```html
 <div scCheckboxField id="accept-terms">
-  <input type="checkbox" scCheckbox />
+  <input scCheckbox />
   <label scLabel>Accept terms</label>
 </div>
 ```
@@ -136,7 +136,7 @@ Or override at the control level for full manual control:
 
 ```html
 <div scCheckboxField>
-  <input type="checkbox" scCheckbox id="my-checkbox" />
+  <input scCheckbox id="my-checkbox" />
   <label scLabel for="my-checkbox">Accept terms</label>
 </div>
 ```

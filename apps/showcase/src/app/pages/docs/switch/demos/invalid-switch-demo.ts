@@ -17,7 +17,7 @@ import {
       <p scFieldDescription>
         You must accept the terms and conditions to continue.
       </p>
-      <input type="checkbox" scSwitch [formField]="termsForm.terms" />
+      <input scSwitch [formField]="termsForm.terms" />
     </div>
   `,
   host: { class: 'flex w-full justify-center' },

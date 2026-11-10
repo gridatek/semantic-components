@@ -10,12 +10,7 @@ interface InvalidHost {
 @Component({
   imports: [ScCheckbox],
   template: `
-    <input
-      type="checkbox"
-      scCheckbox
-      [invalid]="invalid()"
-      [touched]="touched()"
-    />
+    <input scCheckbox [invalid]="invalid()" [touched]="touched()" />
   `,
 })
 class CheckboxHost implements InvalidHost {
@@ -25,14 +20,7 @@ class CheckboxHost implements InvalidHost {
 
 @Component({
   imports: [ScSwitch],
-  template: `
-    <input
-      type="checkbox"
-      scSwitch
-      [invalid]="invalid()"
-      [touched]="touched()"
-    />
-  `,
+  template: ` <input scSwitch [invalid]="invalid()" [touched]="touched()" /> `,
 })
 class SwitchHost implements InvalidHost {
   readonly invalid = signal(false);

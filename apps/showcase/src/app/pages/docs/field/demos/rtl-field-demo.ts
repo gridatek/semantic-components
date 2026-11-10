@@ -150,11 +150,7 @@ const MONTHS = [
             </p>
             <div scFieldGroup>
               <div scCheckboxField>
-                <input
-                  type="checkbox"
-                  scCheckbox
-                  [(checked)]="sameAsShipping"
-                />
+                <input scCheckbox [(checked)]="sameAsShipping" />
                 <label scLabel class="font-normal">نفس عنوان الشحن</label>
               </div>
             </div>

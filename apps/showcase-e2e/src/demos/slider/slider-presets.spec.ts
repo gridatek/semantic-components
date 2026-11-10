@@ -23,7 +23,7 @@ const PRESETS: Record<string, ScPreset> = {
   rhea,
 };
 
-test.describe('Slider Next in every preset', () => {
+test.describe('Slider in every preset', () => {
   // A docs page and axe, twice: slow under load.
   test.slow();
 
@@ -37,10 +37,10 @@ test.describe('Slider Next in every preset', () => {
       await context.addCookies([
         { name: 'sc-preset', value: preset, url: baseURL! },
       ]);
-      await page.goto('/demos/slider-next/controlled-slider-next-demo');
+      await page.goto('/demos/slider/controlled-slider-demo');
       for (const [target, wanted, what] of [
         [
-          page.locator('input[scSliderNext]').first(),
+          page.locator('input[scSlider]').first(),
           `${styles.slider.root} ${styles.slider.track} ${styles.slider.thumb}`,
           'slider',
         ],
@@ -57,7 +57,7 @@ test.describe('Slider Next in every preset', () => {
           .toEqual([]);
       }
 
-      await page.goto('/docs/components/slider-next');
+      await page.goto('/docs/components/slider');
       await expectNoA11yViolations(page);
       await expectNoA11yViolations(page, { dark: true });
     });

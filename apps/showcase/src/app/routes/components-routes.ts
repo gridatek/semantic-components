@@ -484,12 +484,6 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/slider/slider-page'),
       },
       {
-        path: 'slider-next',
-        title: 'Slider Next - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/slider-next/slider-next-page'),
-      },
-      {
         path: 'notification-center',
         title: 'Notification Center - Semantic Components',
         loadComponent: () =>

@@ -1,35 +1,34 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { RtlSliderNextDemo } from './rtl-slider-next-demo';
+import { RtlSliderDemo } from './rtl-slider-demo';
 
 @Component({
-  selector: 'app-rtl-slider-next-demo-container',
-  imports: [DemoContainer, RtlSliderNextDemo],
+  selector: 'app-rtl-slider-demo-container',
+  imports: [DemoContainer, RtlSliderDemo],
   template: `
     <app-demo-container
       title="RTL"
-      demoUrl="/demos/slider-next/rtl-slider-next-demo"
+      demoUrl="/demos/slider/rtl-slider-demo"
       [code]="code"
     >
-      <app-rtl-slider-next-demo />
+      <app-rtl-slider-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class RtlSliderNextDemoContainer {
+export class RtlSliderDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScSliderNext } from '@semantic-components/ui';
+import { ScSlider } from '@semantic-components/ui';
 
 /** In a right-to-left page: the value grows to the left, the arrows mirrored. */
 @Component({
-  selector: 'app-rtl-slider-next-demo',
-  imports: [ScSliderNext],
+  selector: 'app-rtl-slider-demo',
+  imports: [ScSlider],
   template: \`
     <div dir="rtl" lang="ar" class="w-full max-w-xs">
       <input
-        type="range"
-        scSliderNext
+        scSlider
         [(value)]="volume"
         aria-label="مستوى الصوت"
       />
@@ -38,7 +37,7 @@ import { ScSliderNext } from '@semantic-components/ui';
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class RtlSliderNextDemo {
+export class RtlSliderDemo {
   protected readonly volume = signal(75);
 }`;
 }

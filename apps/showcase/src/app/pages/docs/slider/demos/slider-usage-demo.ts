@@ -1,22 +1,16 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScSliderNext } from '@semantic-components/ui';
+import { ScSlider } from '@semantic-components/ui';
 
 /** A slider, named by aria-label (no label beside it). */
 @Component({
-  selector: 'app-slider-next-usage-demo',
-  imports: [ScSliderNext],
+  selector: 'app-slider-usage-demo',
+  imports: [ScSlider],
   template: `
-    <input
-      type="range"
-      scSliderNext
-      [(value)]="volume"
-      aria-label="Volume"
-      class="max-w-xs"
-    />
+    <input scSlider [(value)]="volume" aria-label="Volume" class="max-w-xs" />
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class SliderNextUsageDemo {
+export class SliderUsageDemo {
   protected readonly volume = signal(75);
 }

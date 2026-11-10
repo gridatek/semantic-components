@@ -49,8 +49,7 @@ import {
       </p>
       <div scRadioGroup>
         <label scRadioField>
-          <input
-            type="radio"
+          <input type="radio"
             scRadio
             value="monthly"
             [formField]="planForm.plan"
@@ -58,8 +57,7 @@ import {
           Monthly ($9.99/month)
         </label>
         <label scRadioField>
-          <input
-            type="radio"
+          <input type="radio"
             scRadio
             value="yearly"
             [formField]="planForm.plan"
@@ -67,8 +65,7 @@ import {
           Yearly ($99.99/year)
         </label>
         <label scRadioField>
-          <input
-            type="radio"
+          <input type="radio"
             scRadio
             value="lifetime"
             [formField]="planForm.plan"

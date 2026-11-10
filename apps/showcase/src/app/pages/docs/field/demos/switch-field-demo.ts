@@ -8,7 +8,7 @@ import { ScLabelText, ScSwitch, ScSwitchField } from '@semantic-components/ui';
   template: `
     <label scSwitchField class="w-fit">
       <p scLabelText>Multi-factor authentication</p>
-      <input type="checkbox" scSwitch />
+      <input scSwitch />
     </label>
   `,
   host: { class: 'flex w-full justify-center' },

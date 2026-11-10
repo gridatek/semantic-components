@@ -309,7 +309,7 @@ Product designer with 8+ years of experience in SaaS applications. Passionate ab
                     important changes.
                   </p>
                 </div>
-                <input type="checkbox" scSwitch [checked]="true" />
+                <input scSwitch [checked]="true" />
               </label>
 
               <label
@@ -328,7 +328,7 @@ Product designer with 8+ years of experience in SaaS applications. Passionate ab
                     device.
                   </p>
                 </div>
-                <input type="checkbox" scSwitch [checked]="true" />
+                <input scSwitch [checked]="true" />
               </label>
 
               <label
@@ -347,7 +347,7 @@ Product designer with 8+ years of experience in SaaS applications. Passionate ab
                     metrics.
                   </p>
                 </div>
-                <input type="checkbox" scSwitch />
+                <input scSwitch />
               </label>
             </div>
           </div>

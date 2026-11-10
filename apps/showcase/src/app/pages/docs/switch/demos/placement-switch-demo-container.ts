@@ -50,17 +50,17 @@ import {
             <p scFieldDescription>
               Receive emails about new products and features.
             </p>
-            <input type="checkbox" scSwitch [(checked)]="marketing" />
+            <input scSwitch [(checked)]="marketing" />
           </label>
           <label scSwitchField>
             <p scLabelText>Security emails</p>
             <p scFieldDescription>
               Receive emails about your account security.
             </p>
-            <input type="checkbox" scSwitch [(checked)]="security" />
+            <input scSwitch [(checked)]="security" />
           </label>
           <label scSwitchField>
-            <input type="checkbox" scSwitch [(checked)]="updates" />
+            <input scSwitch [(checked)]="updates" />
             <p scLabelText>Product updates</p>
             <p scFieldDescription>
               Receive emails about product updates and tips.

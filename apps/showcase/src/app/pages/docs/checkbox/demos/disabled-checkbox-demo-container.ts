@@ -33,11 +33,11 @@ import {
   template: \`
     <div scFieldGroup class="w-56">
       <div scCheckboxField>
-        <input type="checkbox" scCheckbox disabled />
+        <input scCheckbox disabled />
         <label scLabel>Enable notifications</label>
       </div>
       <div scCheckboxField>
-        <input type="checkbox" scCheckbox [checked]="true" disabled />
+        <input scCheckbox [checked]="true" disabled />
         <label scLabel>Sync settings</label>
       </div>
     </div>

@@ -38,7 +38,7 @@ interface Item {
   imports: [ScSortableList, ScSortableListItem, ScSwitch, ScSwitchField],
   template: \`
     <label scSwitchField>
-      <input type="checkbox" scSwitch [(checked)]="locked" />
+      <input scSwitch [(checked)]="locked" />
       Locked
     </label>
     <p id="disabled-sortable-help" class="sr-only">

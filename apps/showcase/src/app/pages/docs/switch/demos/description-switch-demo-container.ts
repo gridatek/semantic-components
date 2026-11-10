@@ -37,7 +37,7 @@ import {
       <p scFieldDescription>
         Focus is shared across devices, and turns off when you leave the app.
       </p>
-      <input type="checkbox" scSwitch [formField]="focusForm.share" />
+      <input scSwitch [formField]="focusForm.share" />
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },

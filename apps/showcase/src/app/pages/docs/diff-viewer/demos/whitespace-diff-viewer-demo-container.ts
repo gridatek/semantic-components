@@ -30,7 +30,6 @@ import { ScDiffViewer } from '@semantic-components/ui/diff-viewer';
   template: \`
     <label scSwitchField class="mb-3">
       <input
-        type="checkbox"
         scSwitch
         [checked]="ignore()"
         (change)="ignore.set(!ignore())"

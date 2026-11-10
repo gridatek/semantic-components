@@ -52,15 +52,15 @@ import {
       <legend scLegend variant="label">Favorite colors</legend>
       <div scFieldGroup class="gap-3">
         <label scCheckboxField>
-          <input type="checkbox" scCheckbox [formField]="colorsForm.red" />
+          <input scCheckbox [formField]="colorsForm.red" />
           Red
         </label>
         <label scCheckboxField>
-          <input type="checkbox" scCheckbox [formField]="colorsForm.green" />
+          <input scCheckbox [formField]="colorsForm.green" />
           Green
         </label>
         <label scCheckboxField>
-          <input type="checkbox" scCheckbox [formField]="colorsForm.blue" />
+          <input scCheckbox [formField]="colorsForm.blue" />
           Blue
         </label>
       </div>

@@ -1,7 +1,7 @@
 import { collectErrors, press } from '../../interaction';
 import { expect, test } from '../../test';
 
-const demo = (name: string) => `/demos/slider-next/${name}-slider-next-demo`;
+const demo = (name: string) => `/demos/slider/${name}-slider-demo`;
 
 let errors: string[];
 
@@ -16,7 +16,7 @@ test.afterEach(() => {
 test('Usage: a named slider; the arrows move it, End to its end', async ({
   page,
 }) => {
-  await page.goto('/demos/slider-next/slider-next-usage-demo');
+  await page.goto('/demos/slider/slider-usage-demo');
   const volume = page.getByRole('slider', { name: 'Volume' });
   await expect(volume).toHaveValue('75');
   await volume.focus();
@@ -29,7 +29,7 @@ test('Usage: a named slider; the arrows move it, End to its end', async ({
 test('Usage: the range follows the value (Chrome draws it from it)', async ({
   page,
 }) => {
-  await page.goto('/demos/slider-next/slider-next-usage-demo');
+  await page.goto('/demos/slider/slider-usage-demo');
   const volume = page.getByRole('slider', { name: 'Volume' });
   const fraction = () =>
     volume.evaluate((el) =>

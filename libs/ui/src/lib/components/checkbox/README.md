@@ -6,11 +6,11 @@ A native checkbox that draws itself (`appearance-none`): its box, and its check 
 
 ```html
 <label scCheckboxField>
-  <input type="checkbox" scCheckbox [formField]="form.terms" />
+  <input scCheckbox [formField]="form.terms" />
   Accept terms and conditions
 </label>
 
-<input type="checkbox" scCheckbox aria-label="Select all" [checked]="all()" [indeterminate]="some()" (checkedChange)="selectAll($event)" />
+<input scCheckbox aria-label="Select all" [checked]="all()" [indeterminate]="some()" (checkedChange)="selectAll($event)" />
 ```
 
 ## Parts
@@ -18,7 +18,7 @@ A native checkbox that draws itself (`appearance-none`): its box, and its check 
 | Part              | Selector                                       | What it does                                                                                                |
 | ----------------- | ---------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
 | `ScCheckboxField` | `label[scCheckboxField], div[scCheckboxField]` | A checkbox beside its text (the `label` preset, normal weight), or its label and description; optional      |
-| `ScCheckbox`      | `input[type="checkbox"][scCheckbox]`           | The native input, drawn: `checked` (model, or `[formField]`), `indeterminate` (a property only), `disabled` |
+| `ScCheckbox`      | `input[scCheckbox]`                            | The native input, drawn: `checked` (model, or `[formField]`), `indeterminate` (a property only), `disabled` |
 
 ## Custom mark
 

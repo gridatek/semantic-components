@@ -54,8 +54,7 @@ import {
       <div scRadioGroup orientation="horizontal" aria-labelledby="format-label">
         @for (format of formats; track format) {
           <label scRadioField>
-            <input
-              type="radio"
+            <input type="radio"
               scRadio
               [value]="format"
               [formField]="settingsForm.format"

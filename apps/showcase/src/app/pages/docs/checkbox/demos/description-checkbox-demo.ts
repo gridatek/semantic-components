@@ -19,7 +19,7 @@ import {
   ],
   template: `
     <div scCheckboxField class="w-72">
-      <input type="checkbox" scCheckbox [formField]="termsForm.terms" />
+      <input scCheckbox [formField]="termsForm.terms" />
       <label scLabel>Accept terms and conditions</label>
       <p scFieldDescription>
         By clicking this checkbox, you agree to the terms and conditions.

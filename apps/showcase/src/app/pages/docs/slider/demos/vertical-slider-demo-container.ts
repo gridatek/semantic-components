@@ -1,42 +1,40 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { VerticalSliderNextDemo } from './vertical-slider-next-demo';
+import { VerticalSliderDemo } from './vertical-slider-demo';
 
 @Component({
-  selector: 'app-vertical-slider-next-demo-container',
-  imports: [DemoContainer, VerticalSliderNextDemo],
+  selector: 'app-vertical-slider-demo-container',
+  imports: [DemoContainer, VerticalSliderDemo],
   template: `
     <app-demo-container
       title="Vertical"
-      demoUrl="/demos/slider-next/vertical-slider-next-demo"
+      demoUrl="/demos/slider/vertical-slider-demo"
       [code]="code"
     >
-      <app-vertical-slider-next-demo />
+      <app-vertical-slider-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class VerticalSliderNextDemoContainer {
+export class VerticalSliderDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScSliderNext } from '@semantic-components/ui';
+import { ScSlider } from '@semantic-components/ui';
 
 /** orientation="vertical": the value grows upward; the arrows still move it. */
 @Component({
-  selector: 'app-vertical-slider-next-demo',
-  imports: [ScSliderNext],
+  selector: 'app-vertical-slider-demo',
+  imports: [ScSlider],
   template: \`
     <div class="flex h-40 items-center justify-center gap-6">
       <input
-        type="range"
-        scSliderNext
+        scSlider
         orientation="vertical"
         [(value)]="bass"
         aria-label="Bass"
       />
       <input
-        type="range"
-        scSliderNext
+        scSlider
         orientation="vertical"
         [(value)]="treble"
         aria-label="Treble"
@@ -46,7 +44,7 @@ import { ScSliderNext } from '@semantic-components/ui';
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class VerticalSliderNextDemo {
+export class VerticalSliderDemo {
   protected readonly bass = signal(50);
   protected readonly treble = signal(25);
 }`;

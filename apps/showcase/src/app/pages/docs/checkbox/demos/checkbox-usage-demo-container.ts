@@ -44,24 +44,23 @@ import {
   template: \`
     <div scFieldGroup class="max-w-sm">
       <div scCheckboxField>
-        <input type="checkbox" scCheckbox [formField]="termsForm.terms" />
+        <input scCheckbox [formField]="termsForm.terms" />
         <label scLabel>Accept terms and conditions</label>
       </div>
       <div scCheckboxField>
-        <input type="checkbox" scCheckbox [formField]="termsForm.agreed" />
+        <input scCheckbox [formField]="termsForm.agreed" />
         <label scLabel>Accept terms and conditions</label>
         <p scFieldDescription>
           By clicking this checkbox, you agree to the terms.
         </p>
       </div>
       <div scCheckboxField>
-        <input type="checkbox" scCheckbox disabled />
+        <input scCheckbox disabled />
         <label scLabel>Enable notifications</label>
       </div>
       <label scLabel>
         <div scField orientation="horizontal">
           <input
-            type="checkbox"
             scCheckbox
             [formField]="termsForm.notifications"
           />

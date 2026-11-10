@@ -79,7 +79,7 @@ A slot that exists can also be used by a consumer, from a parent's `class` — a
 
 ```html
 <div scCheckboxField class="*:data-[slot=label]:text-blue-600">
-  <input type="checkbox" scCheckbox id="custom" />
+  <input scCheckbox id="custom" />
   <label scLabel for="custom">Custom styled label</label>
 </div>
 ```

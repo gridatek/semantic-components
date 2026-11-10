@@ -33,8 +33,7 @@ import { ScRadio, ScRadioField, ScRadioGroup } from '@semantic-components/ui';
         Disabled
       </label>
       <label scRadioField>
-        <input
-          type="radio"
+        <input type="radio"
           scRadio
           value="option2"
           [formField]="optionForm.option"
@@ -42,8 +41,7 @@ import { ScRadio, ScRadioField, ScRadioGroup } from '@semantic-components/ui';
         Option 2
       </label>
       <label scRadioField>
-        <input
-          type="radio"
+        <input type="radio"
           scRadio
           value="option3"
           [formField]="optionForm.option"

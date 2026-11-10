@@ -3596,32 +3596,6 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/slider',
-    children: [
-      {
-        path: 'basic-slider-demo',
-        loadComponent: () =>
-          import('../pages/docs/slider/demos/basic-slider-demo').then(
-            (m) => m.BasicSliderDemo,
-          ),
-      },
-      {
-        path: 'custom-color-slider-demo',
-        loadComponent: () =>
-          import('../pages/docs/slider/demos/custom-color-slider-demo').then(
-            (m) => m.CustomColorSliderDemo,
-          ),
-      },
-      {
-        path: 'form-slider-demo',
-        loadComponent: () =>
-          import('../pages/docs/slider/demos/form-slider-demo').then(
-            (m) => m.FormSliderDemo,
-          ),
-      },
-    ],
-  },
-  {
     path: 'demos/range-slider',
     children: [
       {
@@ -6744,55 +6718,55 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/slider-next',
+    path: 'demos/slider',
     children: [
       {
-        path: 'slider-next-usage-demo',
+        path: 'slider-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/slider-next/demos/slider-next-usage-demo').then(
-            (m) => m.SliderNextUsageDemo,
+          import('../pages/docs/slider/demos/slider-usage-demo').then(
+            (m) => m.SliderUsageDemo,
           ),
       },
       {
-        path: 'controlled-slider-next-demo',
+        path: 'controlled-slider-demo',
         loadComponent: () =>
-          import('../pages/docs/slider-next/demos/controlled-slider-next-demo').then(
-            (m) => m.ControlledSliderNextDemo,
+          import('../pages/docs/slider/demos/controlled-slider-demo').then(
+            (m) => m.ControlledSliderDemo,
           ),
       },
       {
-        path: 'disabled-slider-next-demo',
+        path: 'disabled-slider-demo',
         loadComponent: () =>
-          import('../pages/docs/slider-next/demos/disabled-slider-next-demo').then(
-            (m) => m.DisabledSliderNextDemo,
+          import('../pages/docs/slider/demos/disabled-slider-demo').then(
+            (m) => m.DisabledSliderDemo,
           ),
       },
       {
-        path: 'vertical-slider-next-demo',
+        path: 'vertical-slider-demo',
         loadComponent: () =>
-          import('../pages/docs/slider-next/demos/vertical-slider-next-demo').then(
-            (m) => m.VerticalSliderNextDemo,
+          import('../pages/docs/slider/demos/vertical-slider-demo').then(
+            (m) => m.VerticalSliderDemo,
           ),
       },
       {
-        path: 'form-slider-next-demo',
+        path: 'form-slider-demo',
         loadComponent: () =>
-          import('../pages/docs/slider-next/demos/form-slider-next-demo').then(
-            (m) => m.FormSliderNextDemo,
+          import('../pages/docs/slider/demos/form-slider-demo').then(
+            (m) => m.FormSliderDemo,
           ),
       },
       {
-        path: 'custom-color-slider-next-demo',
+        path: 'custom-color-slider-demo',
         loadComponent: () =>
-          import('../pages/docs/slider-next/demos/custom-color-slider-next-demo').then(
-            (m) => m.CustomColorSliderNextDemo,
+          import('../pages/docs/slider/demos/custom-color-slider-demo').then(
+            (m) => m.CustomColorSliderDemo,
           ),
       },
       {
-        path: 'rtl-slider-next-demo',
+        path: 'rtl-slider-demo',
         loadComponent: () =>
-          import('../pages/docs/slider-next/demos/rtl-slider-next-demo').then(
-            (m) => m.RtlSliderNextDemo,
+          import('../pages/docs/slider/demos/rtl-slider-demo').then(
+            (m) => m.RtlSliderDemo,
           ),
       },
     ],

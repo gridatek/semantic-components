@@ -17,7 +17,7 @@ import {
       <p scFieldDescription>
         يتم مشاركة التركيز عبر الأجهزة، ويتم إيقاف تشغيله عند مغادرة التطبيق.
       </p>
-      <input type="checkbox" scSwitch [formField]="focusForm.share" />
+      <input scSwitch [formField]="focusForm.share" />
     </div>
   `,
   host: { class: 'flex w-full justify-center' },

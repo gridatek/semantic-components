@@ -757,11 +757,7 @@ const INK_COLORS = [
                     </div>
                     <label scSwitchField>
                       Show all
-                      <input
-                        type="checkbox"
-                        scSwitch
-                        scPdfViewerSetting="highlightShowAll"
-                      />
+                      <input scSwitch scPdfViewerSetting="highlightShowAll" />
                     </label>
                   }
                   @case ('freetext') {
@@ -1031,7 +1027,6 @@ const INK_COLORS = [
             </div>
             <label scCheckboxField class="ms-2 text-sm">
               <input
-                type="checkbox"
                 scCheckbox
                 [checked]="viewer.findHighlightAll()"
                 (checkedChange)="setHighlightAll($event)"
@@ -1040,7 +1035,6 @@ const INK_COLORS = [
             </label>
             <label scCheckboxField class="text-sm">
               <input
-                type="checkbox"
                 scCheckbox
                 [checked]="viewer.findMatchCase()"
                 (checkedChange)="
@@ -1052,7 +1046,6 @@ const INK_COLORS = [
             </label>
             <label scCheckboxField class="text-sm">
               <input
-                type="checkbox"
                 scCheckbox
                 [checked]="viewer.findMatchDiacritics()"
                 (checkedChange)="
@@ -1064,7 +1057,6 @@ const INK_COLORS = [
             </label>
             <label scCheckboxField class="text-sm">
               <input
-                type="checkbox"
                 scCheckbox
                 [checked]="viewer.findEntireWord()"
                 (checkedChange)="
@@ -1298,7 +1290,6 @@ const INK_COLORS = [
                       @for (page of viewer.pageNumbers(); track page) {
                         <li [scPdfViewerPageItem]="page">
                           <input
-                            type="checkbox"
                             scCheckbox
                             [scPdfViewerPageSelect]="page"
                             class="absolute start-3 top-3 z-10"
@@ -1434,11 +1425,7 @@ const INK_COLORS = [
                         @for (layer of viewer.layers(); track layer.id) {
                           <li>
                             <label scCheckboxField>
-                              <input
-                                type="checkbox"
-                                scCheckbox
-                                [scPdfViewerLayer]="layer"
-                              />
+                              <input scCheckbox [scPdfViewerLayer]="layer" />
                               {{ layer.name }}
                             </label>
                           </li>
@@ -2017,11 +2004,7 @@ const INK_COLORS = [
               </div>
 
               <label scCheckboxField>
-                <input
-                  type="checkbox"
-                  scCheckbox
-                  [(checked)]="signature.saveForReuse"
-                />
+                <input scCheckbox [(checked)]="signature.saveForReuse" />
                 Save signature for later
               </label>
 

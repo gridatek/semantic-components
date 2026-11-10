@@ -22,7 +22,7 @@ import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui';
   imports: [ScCheckbox, ScCheckboxField, ScLabel],
   template: \`
     <div scCheckboxField>
-      <input type="checkbox" scCheckbox />
+      <input scCheckbox />
       <label scLabel>Accept terms and conditions</label>
     </div>
   \`,

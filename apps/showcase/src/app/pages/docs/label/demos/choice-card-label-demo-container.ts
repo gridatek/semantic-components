@@ -51,7 +51,7 @@ import {
           </p>
         </div>
         <div scCheckboxField>
-          <input type="checkbox" scCheckbox />
+          <input scCheckbox />
         </div>
       </div>
     </label>

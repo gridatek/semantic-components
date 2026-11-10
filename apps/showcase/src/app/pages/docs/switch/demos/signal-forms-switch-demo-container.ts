@@ -47,14 +47,13 @@ import {
         <div scSwitchField>
           <label scLabel>Notifications</label>
           <input
-            type="checkbox"
             scSwitch
             [formField]="settingsForm.notifications"
           />
         </div>
         <div scSwitchField>
           <label scLabel>Dark mode</label>
-          <input type="checkbox" scSwitch [formField]="settingsForm.darkMode" />
+          <input scSwitch [formField]="settingsForm.darkMode" />
         </div>
       </div>
       <pre scFrame class="bg-muted p-4 text-xs">{{ model() | json }}</pre>

@@ -149,7 +149,7 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
           </p>
           <div scFieldGroup>
             <div scCheckboxField>
-              <input type="checkbox" scCheckbox [(checked)]="sameAsShipping" />
+              <input scCheckbox [(checked)]="sameAsShipping" />
               <label scLabel class="font-normal"
                 >Same as shipping address</label
               >

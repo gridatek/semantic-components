@@ -126,7 +126,7 @@ import { Logo } from '../../components/logo/logo';
               </div>
 
               <div scCheckboxField>
-                <input type="checkbox" scCheckbox id="terms" />
+                <input scCheckbox id="terms" />
                 <label
                   scLabel
                   for="terms"

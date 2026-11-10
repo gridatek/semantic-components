@@ -58,6 +58,18 @@ A part is an attribute on the consumer's element, in camelCase with the `sc` pre
 })
 ```
 
+A part on a native `input` sets the input's `type` itself, as a host attribute — the selector names the element only, and the markup needs no `type` (the user, 2026-11-10). Fewer attributes to write, and the part works as a host directive on any input (the audio player's seek bar is a slider).
+
+```typescript
+@Directive({
+  selector: 'input[scSlider]',
+  host: { type: 'range' /* … */ },
+})
+// <input scSlider [(value)]="volume" aria-label="Volume" />
+```
+
+Checkbox, Switch and Slider do (2026-11-10). Two exceptions name the type: parts that only add behaviour to someone else's input (`input[type="checkbox"][scDataTableSelectRow]`), and the Radio (`input[type="radio"][scRadio]`) — it is a plain native radio for Signal Forms, which types its `[formField]` by the template's `type`: a union value (`'off' | 'all' | 'one'`) fails to compile without `type="radio"`. Checkbox, Switch and Slider implement Signal Forms' control interfaces, so they are typed by the part.
+
 ## The Consumer Writes the Content
 
 A part is a directive on the consumer's element, so what is inside is the consumer's already: icons, text, labels. A part never hard-codes them — no template with an icon, no default text, not even an `aria-label` (translation is the consumer's).

@@ -304,7 +304,7 @@ import {
                             Receive notifications via email.
                           </p>
                         </div>
-                        <input type="checkbox" scSwitch [checked]="true" />
+                        <input scSwitch [checked]="true" />
                       </label>
 
                       <label
@@ -322,7 +322,7 @@ import {
                             Receive push notifications on your device.
                           </p>
                         </div>
-                        <input type="checkbox" scSwitch [checked]="true" />
+                        <input scSwitch [checked]="true" />
                       </label>
 
                       <label
@@ -340,7 +340,7 @@ import {
                             Receive emails about new features and updates.
                           </p>
                         </div>
-                        <input type="checkbox" scSwitch />
+                        <input scSwitch />
                       </label>
 
                       <label
@@ -358,7 +358,7 @@ import {
                             Get notified about security events on your account.
                           </p>
                         </div>
-                        <input type="checkbox" scSwitch [checked]="true" />
+                        <input scSwitch [checked]="true" />
                       </label>
                     </div>
                   </div>

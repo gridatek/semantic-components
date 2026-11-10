@@ -104,7 +104,7 @@ import { Logo } from '../../components/logo/logo';
               </div>
 
               <div scCheckboxField>
-                <input type="checkbox" scCheckbox id="remember" />
+                <input scCheckbox id="remember" />
                 <label scLabel for="remember" i18n="@@login.rememberMe"
                   >Remember me</label
                 >

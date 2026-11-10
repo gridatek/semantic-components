@@ -30,7 +30,6 @@ import {
           <tr scTableRow>
             <th scTableHeaderCell class="w-8">
               <input
-                type="checkbox"
                 scCheckbox
                 aria-label="Select all"
                 [checked]="allSelected()"
@@ -51,7 +50,6 @@ import {
             >
               <td scTableCell>
                 <input
-                  type="checkbox"
                   scCheckbox
                   [attr.aria-label]="'Select ' + row.name"
                   [checked]="selected().has(row.id)"

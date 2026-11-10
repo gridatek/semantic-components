@@ -34,26 +34,26 @@ import {
         </p>
         <div scFieldGroup class="gap-3">
           <div scCheckboxField>
-            <input type="checkbox" scCheckbox [(checked)]="hardDisks" />
+            <input scCheckbox [(checked)]="hardDisks" />
             <label scLabel class="font-normal">Hard disks</label>
           </div>
           <div scCheckboxField>
-            <input type="checkbox" scCheckbox />
+            <input scCheckbox />
             <label scLabel class="font-normal">External disks</label>
           </div>
           <div scCheckboxField>
-            <input type="checkbox" scCheckbox />
+            <input scCheckbox />
             <label scLabel class="font-normal">CDs, DVDs, and iPods</label>
           </div>
           <div scCheckboxField>
-            <input type="checkbox" scCheckbox />
+            <input scCheckbox />
             <label scLabel class="font-normal">Connected servers</label>
           </div>
         </div>
       </fieldset>
       <div scFieldSeparator></div>
       <div scCheckboxField>
-        <input type="checkbox" scCheckbox [(checked)]="sync" />
+        <input scCheckbox [(checked)]="sync" />
         <label scLabel>Sync Desktop &amp; Documents folders</label>
         <p scFieldDescription>
           Your Desktop &amp; Documents folders are being synced with iCloud

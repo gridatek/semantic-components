@@ -28,11 +28,11 @@ import { ScLabelText, ScSwitch, ScSwitchField } from '@semantic-components/ui';
   template: \`
     <div class="space-y-4">
       <label scSwitchField>
-        <input type="checkbox" scSwitch [(checked)]="airplaneMode" />
+        <input scSwitch [(checked)]="airplaneMode" />
         <p scLabelText>Airplane Mode</p>
       </label>
       <label scSwitchField>
-        <input type="checkbox" scSwitch [(checked)]="wifi" />
+        <input scSwitch [(checked)]="wifi" />
         <p scLabelText>Wi-Fi</p>
       </label>
     </div>

@@ -69,7 +69,6 @@ interface Item {
           <span scSortableListHandle><svg siGripVerticalIcon></svg></span>
           <div scCheckboxField>
             <input
-              type="checkbox"
               scCheckbox
               [checked]="done().has(item.id)"
               (checkedChange)="toggle(item.id)"

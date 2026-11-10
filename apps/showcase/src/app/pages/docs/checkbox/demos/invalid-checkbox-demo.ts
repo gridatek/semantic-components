@@ -8,7 +8,7 @@ import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui';
   imports: [FormField, ScCheckbox, ScCheckboxField, ScLabel],
   template: `
     <div scCheckboxField class="w-56">
-      <input type="checkbox" scCheckbox [formField]="termsForm.terms" />
+      <input scCheckbox [formField]="termsForm.terms" />
       <label scLabel>Accept terms and conditions</label>
     </div>
   `,

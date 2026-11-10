@@ -7,7 +7,7 @@ import { ScSwitch, ScSwitchField } from '@semantic-components/ui';
   imports: [ScSwitch, ScSwitchField],
   template: `
     <label scSwitchField>
-      <input type="checkbox" scSwitch [(checked)]="notifications" />
+      <input scSwitch [(checked)]="notifications" />
       Notifications: {{ notifications() ? 'On' : 'Off' }}
     </label>
   `,
