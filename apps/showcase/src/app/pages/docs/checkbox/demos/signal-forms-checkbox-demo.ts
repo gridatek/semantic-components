@@ -5,6 +5,7 @@ import {
   ScCheckbox,
   ScCheckboxField,
   ScFieldGroup,
+  ScFrame,
   ScLabel,
 } from '@semantic-components/ui';
 
@@ -17,6 +18,7 @@ import {
     ScCheckbox,
     ScCheckboxField,
     ScFieldGroup,
+    ScFrame,
     ScLabel,
   ],
   template: `
@@ -35,7 +37,7 @@ import {
           <label scLabel>Receive marketing emails</label>
         </div>
       </div>
-      <pre class="bg-muted rounded-md p-4 text-xs">{{ model() | json }}</pre>
+      <pre scFrame class="bg-muted p-4 text-xs">{{ model() | json }}</pre>
     </div>
   `,
   host: { class: 'flex w-full justify-center' },
