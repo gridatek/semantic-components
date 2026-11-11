@@ -49,6 +49,11 @@ export class ScDialog {
     cn(
       'relative mx-auto',
       this.styles.content,
+      // Its full width, capped by the preset's max-w — as shadcn's, whose
+      // w-full fills a fixed, screen-wide box. The CDK's pane is only as wide
+      // as its content, so w-full had nothing to fill: short content left the
+      // dialog narrow, and it collapsed while zooming in.
+      'w-screen',
       // The ✕: a close straight in the panel, in its corner.
       this.styles.close,
       this.classInput(),
