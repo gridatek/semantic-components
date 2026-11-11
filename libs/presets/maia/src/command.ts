@@ -13,7 +13,7 @@ export const command: ScCommandStyles = {
     "[&>svg:not([class*='size-'])]:size-4 [&>svg]:shrink-0 [&>svg]:opacity-50",
   input:
     'w-full text-sm outline-hidden disabled:cursor-not-allowed disabled:opacity-50',
-  list: 'no-scrollbar max-h-72 scroll-py-1 overflow-x-hidden overflow-y-auto outline-none',
+  list: 'max-h-72 scroll-py-1 overflow-x-hidden overflow-y-auto outline-none',
   empty: 'py-6 text-center text-sm',
   group: 'overflow-hidden p-1 text-foreground',
   groupLabel: 'px-3 py-2 text-xs font-medium text-muted-foreground',

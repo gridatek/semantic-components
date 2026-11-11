@@ -4,6 +4,7 @@ import {
   Directive,
   Injector,
   afterNextRender,
+  booleanAttribute,
   computed,
   effect,
   inject,
@@ -21,7 +22,8 @@ function sameItems<T>(a: readonly T[], b: readonly T[]): boolean {
 /**
  * The options (Angular Aria's Listbox): focus stays in the input, the active
  * option is announced through `aria-activedescendant`, and only Enter or a
- * click selects. Name it (`aria-label`).
+ * click selects. It scrolls past its height, its scrollbar shown
+ * (`hideScrollbar` hides it). Name it (`aria-label`).
  */
 @Directive({
   selector: 'div[scComboboxNextList]',
@@ -39,9 +41,15 @@ export class ScComboboxNextList<T = unknown> {
   private readonly widget = inject(ComboboxWidget);
 
   readonly classInput = input<string>('', { alias: 'class' });
+  /** Hides its scrollbar (shadcn's look): nothing then shows that it scrolls. */
+  readonly hideScrollbar = input(false, { transform: booleanAttribute });
 
   protected readonly class = computed(() =>
-    cn(this.styles.list, this.classInput()),
+    cn(
+      this.styles.list,
+      this.hideScrollbar() ? 'no-scrollbar' : '[scrollbar-width:thin]',
+      this.classInput(),
+    ),
   );
 
   constructor() {

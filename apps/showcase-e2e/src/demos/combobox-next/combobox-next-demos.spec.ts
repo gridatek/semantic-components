@@ -278,6 +278,8 @@ test('Popup: Down opens it with an empty search; Escape and a click outside clos
   await expect(search).toBeFocused();
   await expect(search).toHaveValue('');
   await expect(options(page)).toHaveCount(12);
+  // A long list: its scrollbar shows (thin).
+  await expect(page.getByRole('listbox')).toHaveCSS('scrollbar-width', 'thin');
   await page.keyboard.press('Escape');
   await expect(page.getByRole('dialog')).toBeHidden();
   await expect(trigger).toBeFocused();

@@ -221,7 +221,7 @@ export default class CommandPage {
       name: 'ScCommandList',
       selector: 'div[scCommandList]',
       description:
-        'The items (role listbox), scrolling past its height, the highlighted one kept in view. Name it.',
+        'The items (role listbox), scrolling past its height, the highlighted one kept in view; its scrollbar shown (hideScrollbar hides it, as shadcn). Name it.',
     },
     {
       name: 'ScCommandEmpty',

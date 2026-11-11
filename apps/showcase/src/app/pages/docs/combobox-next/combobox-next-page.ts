@@ -335,7 +335,8 @@ export default class ComboboxNextPage {
     {
       name: 'ScComboboxNextList',
       selector: 'div[scComboboxNextList]',
-      description: "The options (Aria's Listbox). Name it.",
+      description:
+        "The options (Aria's Listbox), scrolling past its height; its scrollbar shown (hideScrollbar hides it, as shadcn). Name it.",
     },
     {
       name: 'ScComboboxNextItem, ScComboboxNextItemIndicator',

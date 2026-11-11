@@ -159,6 +159,8 @@ test('Scrollable: the highlighted item kept in view', async ({ page }) => {
   await page.goto(demo('scrollable'));
   await page.getByRole('button', { name: 'Open Menu' }).click();
   const list = page.getByRole('listbox');
+  // Its scrollbar shows (thin): shadcn hides it, Base UI's examples don't.
+  await expect(list).toHaveCSS('scrollbar-width', 'thin');
   await expect(page.getByRole('combobox')).toBeFocused();
   await expect.poll(() => activeText(page)).toBe('Home⌘H');
   // Home, then 11 down: List View.
