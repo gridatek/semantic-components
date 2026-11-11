@@ -22,6 +22,7 @@ export class DurationToastDemoContainer {
 import { ScButton } from '@semantic-components/ui';
 import { ScToaster } from '@semantic-components/ui';
 
+/** A duration of its own: this one stays 10 seconds (0 keeps it until closed). */
 @Component({
   selector: 'app-duration-toast-demo',
   imports: [ScButton],

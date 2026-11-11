@@ -16,28 +16,55 @@ test.describe('Toast', () => {
   test('a toast is written by the app template, and closes', async ({
     page,
   }) => {
-    await page.goto('/demos/toast/basic-toast-demo');
+    await page.goto('/demos/toast/toast-usage-demo');
     await page.getByRole('button', { name: 'Show Toast' }).click();
     const toast = toasts(page).first();
-    await expect(toast).toContainText('Your message has been sent.');
+    await expect(toast).toContainText('Event created');
+    await expect(toast).toContainText('Sunday, December 3 at 9:00 AM');
     // The stack is the one live region: each toast is announced in it.
     await expect(page.locator('[scToastStack]')).toHaveAttribute(
       'aria-live',
       'polite',
     );
 
-    await toast.hover();
-    await toast.getByRole('button', { name: 'Close' }).click();
+    // Its close shows without a hover, at the end of the row.
+    const close = toast.getByRole('button', { name: 'Close' });
+    await expect(close).toBeVisible();
+    await expect(close).toHaveCSS('opacity', '1');
+    await close.click();
     await expect(toasts(page)).toHaveCount(0);
   });
 
   test('its action runs, then dismisses it', async ({ page }) => {
-    await page.goto('/demos/toast/action-toast-demo');
+    await page.goto('/demos/toast/toast-usage-demo');
     await page.getByRole('button', { name: 'Show Toast' }).click();
     const toast = toasts(page).first();
-    await expect(toast).toContainText('Event has been created');
+    await expect(toast).toContainText('Event created');
     await toast.getByRole('button', { name: 'Undo' }).click();
     await expect(toasts(page)).toHaveCount(0);
+  });
+});
+
+test.describe('Toast types', () => {
+  test('each its icon; only the error icon red, not its text', async ({
+    page,
+  }) => {
+    await page.goto('/demos/toast/types-toast-demo');
+    await page.getByRole('button', { name: 'Info' }).click();
+    const info = toasts(page).filter({ hasText: 'Arrive 10 minutes' });
+    await expect(info).toHaveAttribute('data-variant', 'info');
+    await expect(info.locator('[data-slot=toast-icon] svg')).toBeAttached();
+
+    await page.getByRole('button', { name: 'Error' }).click();
+    const error = toasts(page).filter({ hasText: 'could not be created' });
+    await expect(error).toHaveAttribute('data-variant', 'error');
+    const icon = error.locator('[data-slot=toast-icon]');
+    const description = error.getByText('The event could not be created.');
+    const [iconColor, textColor] = await Promise.all([
+      icon.evaluate((el) => getComputedStyle(el).color),
+      description.evaluate((el) => getComputedStyle(el).color),
+    ]);
+    expect(iconColor).not.toBe(textColor);
   });
 });
 
@@ -95,7 +122,7 @@ test.describe('Toast stack', () => {
   test('the hotkey moves focus to the toasts, and Escape back', async ({
     page,
   }) => {
-    await page.goto('/demos/toast/basic-toast-demo');
+    await page.goto('/demos/toast/toast-usage-demo');
     const button = page.getByRole('button', { name: 'Show Toast' });
     // From the keyboard, so the button has focus to return to (Safari doesn't
     // focus a clicked button).
@@ -129,13 +156,10 @@ test.describe('Toast updates', () => {
 
   test('a promise shows loading, then its result', async ({ page }) => {
     await page.goto('/demos/toast/promise-toast-demo');
-    await page.getByRole('button', { name: 'Save', exact: true }).click();
-    await expect(toasts(page)).toHaveText(/Saving…/);
-    await expect(toasts(page)).toHaveText(/Settings saved\./);
-
-    await page.getByRole('button', { name: 'Save (fails)' }).click();
-    await expect(
-      toasts(page).filter({ hasText: 'Network error' }),
-    ).toHaveAttribute('data-variant', 'error');
+    await page.getByRole('button', { name: 'Create Event' }).click();
+    await expect(toasts(page)).toHaveText(/Creating event…/);
+    await expect(toasts(page)).toHaveAttribute('data-variant', 'loading');
+    await expect(toasts(page)).toHaveText(/Event created\./);
+    await expect(toasts(page)).toHaveAttribute('data-variant', 'success');
   });
 });
