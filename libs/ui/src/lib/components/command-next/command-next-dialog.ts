@@ -20,6 +20,13 @@ export class ScCommandNextDialog {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn(this.styles.dialog, this.classInput()),
+    cn(
+      // The dialog's full width (its own max-w caps it), as shadcn's: in the
+      // CDK's pane, which is as wide as its content, w-full has nothing to
+      // fill — short items left it narrow, and it collapsed while zooming in.
+      'w-screen!',
+      this.styles.dialog,
+      this.classInput(),
+    ),
   );
 }

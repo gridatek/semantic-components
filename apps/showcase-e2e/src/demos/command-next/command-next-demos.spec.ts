@@ -138,6 +138,8 @@ test('Basic: in a dialog, focus in the search; Escape closes it, focus back', as
   const dialog = page.getByRole('dialog', { name: 'Command Palette' });
   await expect(dialog).toBeVisible();
   await expect(page.getByRole('combobox')).toBeFocused();
+  // The dialog's full width (max-w-sm in nova), not its short items' width.
+  await expect.poll(async () => (await box(dialog)).width).toBeGreaterThan(380);
   await page.keyboard.press('Escape');
   await expect(dialog).toBeHidden();
   await expect(open).toBeFocused();
