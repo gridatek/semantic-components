@@ -18,9 +18,9 @@ ScToaster.show({ title, description, variant, action })
 | Part                 | Selector                       | Does                                                                                                                                                  |
 | -------------------- | ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `ScToastTemplate`    | `ng-template[scToastTemplate]` | How a toast looks — once, in your app; `let-toast` is the toast's data; `label` names the toasts' region                                              |
-| `ScToastIcon`        | `[scToastIcon]`                | Your icon: red for an `error`; a spinner turns while `loading`                                                                                        |
+| `ScToastIcon`        | `[scToastIcon]`                | Your icon, in its variant's colour; a spinner turns while `loading`                                                                                   |
 | `ScToastTitle`       | `[scToastTitle]`               | The title                                                                                                                                             |
-| `ScToastDescription` | `[scToastDescription]`         | The description, muted                                                                                                                                |
+| `ScToastDescription` | `[scToastDescription]`         | The description, muted (or the variant's colour)                                                                                                      |
 | `ScToastAction`      | `button[scToastAction]`        | Runs the toast's `action`, then dismisses it: the preset's button, `variant` / `size` (outline, sm). Write `toast.action.label`                       |
 | `ScToastClose`       | `button[scToastClose]`         | Dismisses the toast: the preset's button, `variant` / `size` (ghost, icon-sm), at the end of the row, muted until hovered. Write its icon and name it |
 | `ScToast`            | `div[scToast]`                 | The toast, your template's root: the preset's look, `data-variant`, its place in the stack, swipe to dismiss                                          |
@@ -157,14 +157,14 @@ An update replaces the fields it gives and keeps the others; the timer starts ag
 
 ## Variants
 
-| Variant   | Looks                                    |
-| --------- | ---------------------------------------- |
-| `default` | The popover's colours                    |
-| `success` | As `default`; your icon tells it         |
-| `info`    | As `default`; your icon tells it         |
-| `warning` | As `default`; your icon tells it         |
-| `error`   | As `default`; `scToastIcon` red          |
-| `loading` | As `default`; `scToastIcon` spins. Stays |
+| Variant   | Looks                                              |
+| --------- | -------------------------------------------------- |
+| `default` | The popover's colours                              |
+| `success` | Its title, description and icon in `--success`     |
+| `info`    | As `default`; your icon tells it                   |
+| `warning` | Its title, description and icon in `--warning`     |
+| `error`   | Its title, description and icon in `--destructive` |
+| `loading` | As `default`; `scToastIcon` spins. Stays           |
 
 ## The stack
 
@@ -190,6 +190,6 @@ this.toaster.show({ position: 'top-center', description: 'Copied.' });
 
 ## Styling
 
-shadcn's Toast: `border bg-popover text-popover-foreground shadow-lg`, its corners the preset's (`toast.toast`: `rounded-2xl`, `rounded-md` in mira, none in lyra and sera); the stack's focus ring takes them too (`toast.list`). A row (`p-4 gap-3`): your icon, the text column (`flex min-w-0 flex-1 flex-col gap-1`, yours), the action, the close. The stack as shadcn's: `max-w-sm` (the screen's width on a phone), each toast behind showing 12px and 10% smaller, 12px apart when spread out.
+shadcn's Toast: `border bg-popover text-popover-foreground shadow-lg`, its corners the preset's (`toast.toast`: `rounded-2xl`, `rounded-md` in mira, none in lyra and sera); the stack's focus ring takes them too (`toast.list`). Its variant colours its title, description and icon, the Alert's way (`success`, `warning`, `error`; not `info`, its icon is enough), not its buttons — not shadcn's, which colours only the error icon. A row (`p-4 gap-3`): your icon, the text column (`flex min-w-0 flex-1 flex-col gap-1`, yours), the action, the close. The stack as shadcn's: `max-w-sm` (the screen's width on a phone), each toast behind showing 12px and 10% smaller, 12px apart when spread out.
 
 Not shadcn's: the six positions (shadcn's bottom end only), the `hotkey` (Base UI's F6), and the enter and leave animations (Angular's `animate.enter` / `animate.leave` with tw-animate).

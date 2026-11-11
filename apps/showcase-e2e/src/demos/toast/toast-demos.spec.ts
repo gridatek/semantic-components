@@ -46,7 +46,7 @@ test.describe('Toast', () => {
 });
 
 test.describe('Toast types', () => {
-  test('each its icon; only the error icon red, not its text', async ({
+  test('success, warning and error in their colour; info its icon only', async ({
     page,
   }) => {
     await page.goto('/demos/toast/types-toast-demo');
@@ -58,13 +58,17 @@ test.describe('Toast types', () => {
     await page.getByRole('button', { name: 'Error' }).click();
     const error = toasts(page).filter({ hasText: 'could not be created' });
     await expect(error).toHaveAttribute('data-variant', 'error');
-    const icon = error.locator('[data-slot=toast-icon]');
-    const description = error.getByText('The event could not be created.');
-    const [iconColor, textColor] = await Promise.all([
-      icon.evaluate((el) => getComputedStyle(el).color),
-      description.evaluate((el) => getComputedStyle(el).color),
-    ]);
-    expect(iconColor).not.toBe(textColor);
+    const color = (target: Locator) =>
+      target.evaluate((el) => getComputedStyle(el).color);
+    // The error's icon and description in one colour (the Alert's way)…
+    const errorIcon = await color(error.locator('[data-slot=toast-icon]'));
+    expect(
+      await color(error.getByText('The event could not be created.')),
+    ).toBe(errorIcon);
+    // …info's description muted, not its icon's colour.
+    expect(
+      await color(info.getByText('Arrive 10 minutes before the event.')),
+    ).not.toBe(await color(info.locator('[data-slot=toast-icon]')));
   });
 });
 

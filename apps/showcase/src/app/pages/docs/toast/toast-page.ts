@@ -208,12 +208,13 @@ export default class ToastPage {
       name: 'ScToastIcon',
       selector: '[scToastIcon]',
       description:
-        'Your icon, hidden from screen readers: red for an error; it spins while loading.',
+        "Your icon, hidden from screen readers: in its variant's colour; it spins while loading.",
     },
     {
       name: 'ScToastTitle, ScToastDescription',
       selector: '[scToastTitle], [scToastDescription]',
-      description: 'The title, and the description under it, muted.',
+      description:
+        "The title, and the description under it, muted; both in the variant's colour for success, warning and error.",
     },
     {
       name: 'ScToastAction',
