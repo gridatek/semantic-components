@@ -34,7 +34,6 @@ export * from './menu';
 export * from './menubar';
 export * from './multiselect';
 export * from './native-select';
-export * from './native-select-next';
 export * from './navigation-menu';
 export * from './number-field';
 export * from './otp-field';

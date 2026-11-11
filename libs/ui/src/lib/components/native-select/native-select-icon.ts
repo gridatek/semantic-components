@@ -1,19 +1,23 @@
 import { Directive, computed, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 
+/**
+ * Your chevron, on its SVG after the select: placed at the select's end by
+ * the preset, hidden from screen readers.
+ */
 @Directive({
-  selector: '[scNativeSelectIcon]',
+  selector: 'svg[scNativeSelectIcon]',
   host: {
+    'aria-hidden': 'true',
     '[class]': 'class()',
   },
 })
 export class ScNativeSelectIcon {
+  private readonly styles = injectPreset().nativeSelect;
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn(
-      'text-muted-foreground top-1/2 end-2.5 size-4 -translate-y-1/2 pointer-events-none absolute select-none',
-      this.classInput(),
-    ),
+    cn(this.styles.icon, this.classInput()),
   );
 }

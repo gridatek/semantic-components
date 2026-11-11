@@ -3301,57 +3301,45 @@ export const demosRoutes: Route[] = [
     path: 'demos/native-select',
     children: [
       {
-        path: 'basic-native-select-demo',
+        path: 'native-select-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/native-select/demos/basic-native-select-demo').then(
-            (m) => m.BasicNativeSelectDemo,
-          ),
-      },
-    ],
-  },
-  {
-    path: 'demos/native-select-next',
-    children: [
-      {
-        path: 'native-select-next-usage-demo',
-        loadComponent: () =>
-          import('../pages/docs/native-select-next/demos/native-select-next-usage-demo').then(
-            (m) => m.NativeSelectNextUsageDemo,
+          import('../pages/docs/native-select/demos/native-select-usage-demo').then(
+            (m) => m.NativeSelectUsageDemo,
           ),
       },
       {
-        path: 'groups-native-select-next-demo',
+        path: 'groups-native-select-demo',
         loadComponent: () =>
-          import('../pages/docs/native-select-next/demos/groups-native-select-next-demo').then(
-            (m) => m.GroupsNativeSelectNextDemo,
+          import('../pages/docs/native-select/demos/groups-native-select-demo').then(
+            (m) => m.GroupsNativeSelectDemo,
           ),
       },
       {
-        path: 'disabled-native-select-next-demo',
+        path: 'disabled-native-select-demo',
         loadComponent: () =>
-          import('../pages/docs/native-select-next/demos/disabled-native-select-next-demo').then(
-            (m) => m.DisabledNativeSelectNextDemo,
+          import('../pages/docs/native-select/demos/disabled-native-select-demo').then(
+            (m) => m.DisabledNativeSelectDemo,
           ),
       },
       {
-        path: 'invalid-native-select-next-demo',
+        path: 'invalid-native-select-demo',
         loadComponent: () =>
-          import('../pages/docs/native-select-next/demos/invalid-native-select-next-demo').then(
-            (m) => m.InvalidNativeSelectNextDemo,
+          import('../pages/docs/native-select/demos/invalid-native-select-demo').then(
+            (m) => m.InvalidNativeSelectDemo,
           ),
       },
       {
-        path: 'sizes-native-select-next-demo',
+        path: 'sizes-native-select-demo',
         loadComponent: () =>
-          import('../pages/docs/native-select-next/demos/sizes-native-select-next-demo').then(
-            (m) => m.SizesNativeSelectNextDemo,
+          import('../pages/docs/native-select/demos/sizes-native-select-demo').then(
+            (m) => m.SizesNativeSelectDemo,
           ),
       },
       {
-        path: 'rtl-native-select-next-demo',
+        path: 'rtl-native-select-demo',
         loadComponent: () =>
-          import('../pages/docs/native-select-next/demos/rtl-native-select-next-demo').then(
-            (m) => m.RtlNativeSelectNextDemo,
+          import('../pages/docs/native-select/demos/rtl-native-select-demo').then(
+            (m) => m.RtlNativeSelectDemo,
           ),
       },
     ],

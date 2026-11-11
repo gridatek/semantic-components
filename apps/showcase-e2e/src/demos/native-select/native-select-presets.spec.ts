@@ -23,7 +23,7 @@ const PRESETS: Record<string, ScPreset> = {
   rhea,
 };
 
-test.describe('Native Select Next in every preset', () => {
+test.describe('Native Select in every preset', () => {
   // A docs page and axe, twice: slow under load.
   test.slow();
 
@@ -37,17 +37,15 @@ test.describe('Native Select Next in every preset', () => {
       await context.addCookies([
         { name: 'sc-preset', value: preset, url: baseURL! },
       ]);
-      await page.goto(
-        '/demos/native-select-next/native-select-next-usage-demo',
-      );
+      await page.goto('/demos/native-select/native-select-usage-demo');
       for (const [target, wanted, what] of [
         [
-          page.locator('select[scNativeSelectNext]'),
+          page.locator('select[scNativeSelect]'),
           styles.nativeSelect.select,
           'select',
         ],
         [
-          page.locator('svg[scNativeSelectNextIcon]'),
+          page.locator('svg[scNativeSelectIcon]'),
           styles.nativeSelect.icon,
           'icon',
         ],
@@ -64,7 +62,7 @@ test.describe('Native Select Next in every preset', () => {
           .toEqual([]);
       }
 
-      await page.goto('/docs/components/native-select-next');
+      await page.goto('/docs/components/native-select');
       await expectNoA11yViolations(page);
       await expectNoA11yViolations(page, { dark: true });
     });

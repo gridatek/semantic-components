@@ -1,61 +1,61 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { InvalidNativeSelectNextDemo } from './invalid-native-select-next-demo';
+import { InvalidNativeSelectDemo } from './invalid-native-select-demo';
 
 @Component({
-  selector: 'app-invalid-native-select-next-demo-container',
-  imports: [DemoContainer, InvalidNativeSelectNextDemo],
+  selector: 'app-invalid-native-select-demo-container',
+  imports: [DemoContainer, InvalidNativeSelectDemo],
   template: `
     <app-demo-container
       title="Invalid"
-      demoUrl="/demos/native-select-next/invalid-native-select-next-demo"
+      demoUrl="/demos/native-select/invalid-native-select-demo"
       [code]="code"
     >
-      <app-invalid-native-select-next-demo />
+      <app-invalid-native-select-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class InvalidNativeSelectNextDemoContainer {
+export class InvalidNativeSelectDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form, required } from '@angular/forms/signals';
 import {
   ScField,
   ScFieldErrors,
   ScLabel,
-  ScNativeSelectNext,
-  ScNativeSelectNextContainer,
-  ScNativeSelectNextIcon,
-  ScNativeSelectNextOption,
+  ScNativeSelect,
+  ScNativeSelectContainer,
+  ScNativeSelectIcon,
+  ScNativeSelectOption,
 } from '@semantic-components/ui';
 import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
 /** Invalid once touched (Signal Forms): marked, and its error read with it. */
 @Component({
-  selector: 'app-invalid-native-select-next-demo',
+  selector: 'app-invalid-native-select-demo',
   imports: [
     FormField,
     ScField,
     ScFieldErrors,
     ScLabel,
-    ScNativeSelectNext,
-    ScNativeSelectNextContainer,
-    ScNativeSelectNextIcon,
-    ScNativeSelectNextOption,
+    ScNativeSelect,
+    ScNativeSelectContainer,
+    ScNativeSelectIcon,
+    ScNativeSelectOption,
     SiChevronDownIcon,
   ],
   template: \`
     <div scField class="w-56">
       <label scLabel>Fruit</label>
-      <div scNativeSelectNextContainer class="w-full">
-        <select scNativeSelectNext [formField]="fruitForm.fruit">
-          <option scNativeSelectNextOption value="">Select a fruit</option>
-          <option scNativeSelectNextOption value="apple">Apple</option>
-          <option scNativeSelectNextOption value="banana">Banana</option>
-          <option scNativeSelectNextOption value="blueberry">Blueberry</option>
+      <div scNativeSelectContainer class="w-full">
+        <select scNativeSelect [formField]="fruitForm.fruit">
+          <option scNativeSelectOption value="">Select a fruit</option>
+          <option scNativeSelectOption value="apple">Apple</option>
+          <option scNativeSelectOption value="banana">Banana</option>
+          <option scNativeSelectOption value="blueberry">Blueberry</option>
         </select>
-        <svg siChevronDownIcon scNativeSelectNextIcon></svg>
+        <svg siChevronDownIcon scNativeSelectIcon></svg>
       </div>
       <div scFieldErrors></div>
     </div>
@@ -63,7 +63,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class InvalidNativeSelectNextDemo {
+export class InvalidNativeSelectDemo {
   protected readonly fruitForm = form(signal({ fruit: '' }), (path) => {
     required(path.fruit, { message: 'Please select a fruit.' });
   });

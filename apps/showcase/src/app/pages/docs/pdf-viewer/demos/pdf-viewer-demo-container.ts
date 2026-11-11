@@ -60,6 +60,7 @@ import {
   ScNativeSelect,
   ScNativeSelectContainer,
   ScNativeSelectIcon,
+  ScNativeSelectOption,
   ScPopover,
   ScPopoverPortal,
   ScPopoverProvider,
@@ -377,6 +378,7 @@ const INK_COLORS = [
     ScNativeSelectContainer,
     ScNativeSelect,
     ScNativeSelectIcon,
+    ScNativeSelectOption,
     ScToggleGroup,
     ScToggleGroupItem,
     ScPopoverProvider,
@@ -580,15 +582,23 @@ const INK_COLORS = [
               aria-label="Zoom"
               #zoom="scPdfViewerZoomSelect"
             >
-              <option value="auto">Automatic zoom</option>
-              <option value="page-actual">Actual size</option>
-              <option value="page-fit">Page fit</option>
-              <option value="page-width">Page width</option>
+              <option scNativeSelectOption value="auto">Automatic zoom</option>
+              <option scNativeSelectOption value="page-actual">
+                Actual size
+              </option>
+              <option scNativeSelectOption value="page-fit">Page fit</option>
+              <option scNativeSelectOption value="page-width">
+                Page width
+              </option>
               @for (scale of zoom.scales(); track scale) {
-                <option [value]="scale">{{ scale * 100 }}%</option>
+                <option scNativeSelectOption [value]="scale">
+                  {{ scale * 100 }}%
+                </option>
               }
               @if (zoom.customZoom(); as custom) {
-                <option [value]="custom">{{ zoom.customPercent() }}%</option>
+                <option scNativeSelectOption [value]="custom">
+                  {{ zoom.customPercent() }}%
+                </option>
               }
             </select>
             <svg siChevronDownIcon scNativeSelectIcon></svg>

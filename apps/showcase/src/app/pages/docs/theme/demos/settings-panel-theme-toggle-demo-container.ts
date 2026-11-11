@@ -21,13 +21,23 @@ export class SettingsPanelThemeToggleDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, inject } from '@angular/core';
 import {
   ScNativeSelect,
+  ScNativeSelectContainer,
+  ScNativeSelectIcon,
+  ScNativeSelectOption,
   ScThemeManager,
   ScThemeMode,
 } from '@semantic-components/ui';
+import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-settings-panel-theme-toggle-demo',
-  imports: [ScNativeSelect],
+  imports: [
+    ScNativeSelect,
+    ScNativeSelectContainer,
+    ScNativeSelectIcon,
+    ScNativeSelectOption,
+    SiChevronDownIcon,
+  ],
   template: \`
     <div class="w-[400px] rounded-lg border p-4">
       <div class="space-y-4">
@@ -38,16 +48,18 @@ import {
               Select your preferred theme
             </p>
           </div>
-          <select
-            scNativeSelect
-            class="w-32"
-            [value]="themeManager.mode()"
-            (change)="onThemeChange($event)"
-          >
-            <option value="light">Light</option>
-            <option value="dark">Dark</option>
-            <option value="system">System</option>
-          </select>
+          <div scNativeSelectContainer class="w-32">
+            <select
+              scNativeSelect
+              [value]="themeManager.mode()"
+              (change)="onThemeChange($event)"
+            >
+              <option scNativeSelectOption value="light">Light</option>
+              <option scNativeSelectOption value="dark">Dark</option>
+              <option scNativeSelectOption value="system">System</option>
+            </select>
+            <svg siChevronDownIcon scNativeSelectIcon></svg>
+          </div>
         </label>
       </div>
     </div>

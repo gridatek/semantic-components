@@ -1,25 +1,47 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
-import { Directive, computed, inject, input } from '@angular/core';
+import {
+  Directive,
+  booleanAttribute,
+  computed,
+  inject,
+  input,
+} from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 import { SC_FIELD } from '../field';
 
+/**
+ * The browser's own select, in the preset's look: its list, keyboard and
+ * mobile picker are the browser's. In a `scNativeSelectContainer`, beside
+ * your chevron. Its id and description from a `scField`; `[formField]` on it.
+ */
 @Directive({
   selector: 'select[scNativeSelect]',
   host: {
     '[attr.id]': 'id()',
+    '[attr.aria-invalid]': 'ariaInvalid()',
     '[attr.aria-describedby]': 'ariaDescribedBy()',
+    '[attr.disabled]': 'disabled() || null',
     '[attr.data-size]': 'size()',
     '[class]': 'class()',
   },
 })
 export class ScNativeSelect {
+  private readonly styles = injectPreset().nativeSelect;
   protected readonly field = inject(SC_FIELD, { optional: true });
   private readonly fallbackId = inject(_IdGenerator).getId('sc-native-select-');
 
   readonly idInput = input('', { alias: 'id' });
   readonly classInput = input<string>('', { alias: 'class' });
   readonly ariaDescribedByInput = input('', { alias: 'aria-describedby' });
+  /** Its height: `default`, or `sm` (smaller). */
   readonly size = input<'default' | 'sm'>('default');
+  // Bound automatically by the Field directive (FormUiControl contract).
+  readonly invalid = input<boolean>(false);
+  readonly touched = input<boolean>(false);
+  readonly disabled = input<boolean, unknown>(false, {
+    transform: booleanAttribute,
+  });
 
   readonly id = computed(
     () => this.idInput() || this.field?.id() || this.fallbackId,
@@ -32,10 +54,12 @@ export class ScNativeSelect {
       null,
   );
 
+  // Not invalid until it has been touched.
+  protected readonly ariaInvalid = computed(
+    () => (this.touched() && this.invalid()) || null,
+  );
+
   protected readonly class = computed(() =>
-    cn(
-      'border-input placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 dark:hover:bg-input/50 focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:aria-invalid:border-destructive/50 h-8 w-full min-w-0 appearance-none rounded-lg border bg-transparent py-1 pe-8 ps-2.5 text-sm transition-colors select-none focus-visible:ring-3 aria-invalid:ring-3 data-[size=sm]:h-7 data-[size=sm]:rounded-[min(var(--radius-md),10px)] data-[size=sm]:py-0.5 outline-none disabled:pointer-events-none disabled:cursor-not-allowed',
-      this.classInput(),
-    ),
+    cn(this.styles.select, this.classInput()),
   );
 }

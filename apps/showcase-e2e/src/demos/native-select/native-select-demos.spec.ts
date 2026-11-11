@@ -3,7 +3,7 @@ import { box } from '../../looks';
 import { expect, test } from '../../test';
 
 const demo = (name: string) =>
-  `/demos/native-select-next/${name}-native-select-next-demo`;
+  `/demos/native-select/${name}-native-select-demo`;
 
 let errors: string[];
 
@@ -18,11 +18,11 @@ test.afterEach(() => {
 test('Usage: a real select, named by its label; the chevron hidden, at its end', async ({
   page,
 }) => {
-  await page.goto('/demos/native-select-next/native-select-next-usage-demo');
+  await page.goto('/demos/native-select/native-select-usage-demo');
   const select = page.getByRole('combobox', { name: 'Status' });
   await select.selectOption('done');
   await expect(select).toHaveValue('done');
-  const icon = page.locator('svg[scNativeSelectNextIcon]');
+  const icon = page.locator('svg[scNativeSelectIcon]');
   await expect(icon).toHaveAttribute('aria-hidden', 'true');
   const [s, i] = [await box(select), await box(icon)];
   // Inside the select, at its end.
@@ -41,7 +41,7 @@ test('Groups: options under their group labels', async ({ page }) => {
 test('Disabled: disabled, its container dimmed', async ({ page }) => {
   await page.goto(demo('disabled'));
   await expect(page.getByRole('combobox', { name: 'Priority' })).toBeDisabled();
-  await expect(page.locator('[scNativeSelectNextContainer]')).toHaveCSS(
+  await expect(page.locator('[scNativeSelectContainer]')).toHaveCSS(
     'opacity',
     '0.5',
   );
@@ -68,7 +68,7 @@ test('Sizes: sm is shorter; the container carries its size', async ({
   ];
   expect(small.height).toBeLessThan(normal.height);
   await expect(
-    page.locator('[scNativeSelectNextContainer]').nth(1),
+    page.locator('[scNativeSelectContainer]').nth(1),
   ).toHaveAttribute('data-size', 'sm');
 });
 
@@ -76,7 +76,7 @@ test('RTL: the chevron at the left end', async ({ page }) => {
   await page.goto(demo('rtl'));
   const [s, i] = [
     await box(page.getByRole('combobox')),
-    await box(page.locator('svg[scNativeSelectNextIcon]')),
+    await box(page.locator('svg[scNativeSelectIcon]')),
   ];
   expect(i.x + i.width).toBeLessThan(s.x + s.width / 2);
 });
