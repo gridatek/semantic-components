@@ -1,6 +1,6 @@
 # Angular Aria follow-ups
 
-Open tasks after migrating the `@angular/aria` 22.2 based components (select, multiselect, autocomplete, combobox, command, menu, menu bar, context menu, tree, calendar, tabs, toolbar) and the ui-lab components moved onto Aria (stepper, speed dial, org chart, emoji picker, image annotator, PDF signature dialog). Each item is independent; pick what is worth it.
+The Command left Aria for the CDK's ActiveDescendantKeyManager (2026-11-11: Aria's popup forced a template, coalesced keys pressed in one frame, and didn't know filtered items). Open tasks after migrating the `@angular/aria` 22.2 based components (select, multiselect, autocomplete, combobox, menu, menu bar, context menu, tree, calendar, tabs, toolbar) and the ui-lab components moved onto Aria (stepper, speed dial, org chart, emoji picker, image annotator, PDF signature dialog). Each item is independent; pick what is worth it.
 
 Effort: **S** < 1h · **M** a few hours · **L** a day or more.
 
@@ -20,7 +20,7 @@ Effort: **S** < 1h · **M** a few hours · **L** a day or more.
 - Lightbox: ←/→ (RTL-aware, wrapping with `loop`) handled by the provider, not only by the carousel.
 - Toolbar demo named (`aria-label="Text formatting"`).
 - Input group: the in-popup ring reset wins on specificity (override in `combobox-popup.ts` removed); an embedded select/multiselect/combobox trigger rings the group (currency demo classes removed).
-- Highlight follows the pointer in select, multiselect, autocomplete, combobox, command (`useActiveOption`, `utils/active-option`); separate `hover:` styles dropped; hovering doesn't scroll the list.
+- Highlight follows the pointer in select, multiselect, autocomplete, combobox (`useActiveOption`, `utils/active-option`); separate `hover:` styles dropped; hovering doesn't scroll the list.
 - Labels for an initial value before the popup has opened: `items` on the select (`{ value, label }[]`, as Base UI's), `displayWith` on multiselect and combobox.
 - Type-ahead on a closed select / multiselect opens the list at the first match (APG select-only combobox).
 - Decisions: autocomplete clear button stays a Tab stop; tree visible in the docs; every component stays `Experimental` for now.
@@ -50,12 +50,12 @@ A printable key on a closed `ScComboboxTrigger` could open the popup with that c
 
 ### 4. Demo icon mapping — S
 
-The select, multiselect and command demos store icon _names_ (`'tag'`, `'star'`…) and map them with a big `@switch` in an `<ng-template>`. Icons must stay in the consumer template (they do), but the mapping could be simpler. Revisit together.
+The select and multiselect demos store icon _names_ (`'tag'`, `'star'`…) and map them with a big `@switch` in an `<ng-template>`. Icons must stay in the consumer template (they do), but the mapping could be simpler. Revisit together.
 
 ### 5. Drop the workarounds when Angular catches up — S each
 
 - `bindInput` / `setInput` (`utils/bind-input`) write to input signal nodes through `@angular/core/primitives/signals`. Replace with host-directive bindings once [angular/angular#50510](https://github.com/angular/angular/issues/50510) ships.
-- `ScComboboxListContainer` / `ScCommandListContainer` are plain template markers, and `ScAriaTreeItem` / `ScAriaOrgChartItem` make required Aria inputs optional, only because required inputs of host directives can't be hidden (same issue).
+- `ScComboboxListContainer` is a plain template marker, and `ScAriaTreeItem` / `ScAriaOrgChartItem` make required Aria inputs optional, only because required inputs of host directives can't be hidden (same issue).
 - Menu bar Escape (`ScMenubar`) and menu Tab (`ScMenu`) handling — see the upstream drafts.
 
 ## Upstream

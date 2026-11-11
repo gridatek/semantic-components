@@ -1,63 +1,59 @@
-import { Combobox } from '@angular/aria/combobox';
 import {
-  DestroyRef,
   Directive,
   computed,
   effect,
   inject,
   input,
   model,
-  untracked,
 } from '@angular/core';
-import { bindInput, cn } from '../../utils';
-import { SC_COMMAND } from './command-tokens';
+import { injectPreset } from '../../config/preset';
+import { cn } from '../../utils';
+import { ScCommand } from './command';
 
 /**
- * The search input of a command. It is an always-expanded editable combobox:
- * typing filters (via `[(value)]`), arrows move through the list, Enter runs
- * the active item.
+ * The search (`role="combobox"`): `[(value)]` is its text. Focus stays in it
+ * while the arrows move the list's highlight (`aria-activedescendant`). Name
+ * it (`aria-label`).
  */
 @Directive({
   selector: 'input[scCommandInput]',
-  hostDirectives: [Combobox],
   host: {
     'data-slot': 'command-input',
+    role: 'combobox',
+    type: 'text',
     autocomplete: 'off',
+    autocorrect: 'off',
+    spellcheck: 'false',
+    'aria-autocomplete': 'list',
+    'aria-expanded': 'true',
+    '[attr.aria-controls]': 'command.listId()',
+    '[attr.aria-activedescendant]': 'command.active()?.id ?? null',
+    '[value]': 'value()',
     '[class]': 'class()',
+    '(input)': 'onInput($any($event.target).value)',
+    '(keydown)': 'command.handleKeydown($event)',
   },
 })
 export class ScCommandInput {
-  readonly combobox = inject(Combobox);
+  private readonly styles = injectPreset().command;
+  protected readonly command = inject(ScCommand);
 
   readonly classInput = input<string>('', { alias: 'class' });
-  /** The search text, for filtering. */
+  /** The search text. */
   readonly value = model('');
 
   protected readonly class = computed(() =>
-    cn(
-      'w-full bg-transparent text-sm outline-hidden placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50',
-      this.classInput(),
-    ),
+    cn(this.styles.input, this.classInput()),
   );
 
   constructor() {
-    bindInput(this.combobox.alwaysExpanded, true);
+    // Your [(value)] set from outside (a cleared search).
+    effect(() => this.command.setSearch(this.value()));
+  }
 
-    effect(() => {
-      const value = this.value();
-      untracked(() => {
-        if (this.combobox.value() !== value) this.combobox.value.set(value);
-      });
-    });
-    effect(() => {
-      const value = this.combobox.value();
-      untracked(() => {
-        if (this.value() !== value) this.value.set(value);
-      });
-    });
-
-    const command = inject(SC_COMMAND);
-    command.input.set(this.combobox);
-    inject(DestroyRef).onDestroy(() => command.input.set(undefined));
+  /** Typed: the list filtered at once, not on the next render. */
+  protected onInput(text: string): void {
+    this.value.set(text);
+    this.command.setSearch(text);
   }
 }

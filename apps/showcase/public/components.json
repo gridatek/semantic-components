@@ -252,14 +252,6 @@
   {
     "name": "Command",
     "path": "command",
-    "description": "A command palette for quick actions and search.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Overlay"
-  },
-  {
-    "name": "Command Next",
-    "path": "command-next",
     "description": "A search over commands: typing filters them, the arrows and Enter run them.",
     "status": "Experimental",
     "library": "ui",

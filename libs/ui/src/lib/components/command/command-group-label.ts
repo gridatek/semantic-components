@@ -1,20 +1,31 @@
-import { Directive, computed, input } from '@angular/core';
+import { _IdGenerator } from '@angular/cdk/a11y';
+import { DestroyRef, Directive, computed, inject, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
+import { ScCommandGroup } from './command-group';
 
+/** A group's heading: it names the group. */
 @Directive({
   selector: '[scCommandGroupLabel]',
   host: {
     'data-slot': 'command-group-label',
+    '[id]': 'id',
     '[class]': 'class()',
   },
 })
 export class ScCommandGroupLabel {
+  private readonly styles = injectPreset().command;
+  protected readonly id = inject(_IdGenerator).getId('sc-command-group-');
+
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn(
-      'px-2 py-1.5 text-xs font-medium text-muted-foreground',
-      this.classInput(),
-    ),
+    cn(this.styles.groupLabel, this.classInput()),
   );
+
+  constructor() {
+    const group = inject(ScCommandGroup);
+    group.labelId.set(this.id);
+    inject(DestroyRef).onDestroy(() => group.labelId.set(null));
+  }
 }

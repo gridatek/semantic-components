@@ -1,233 +1,73 @@
-# Command Components
+# Command
 
-A command palette for fast, keyboard-driven navigation and actions.
-
-## Architecture
-
-```
-ScCommand (root; provides SC_COMMAND; renders the list container inside ngComboboxPopup)
-    │
-    ├── ScCommandInputGroup (input wrapper with border)
-    │     ├── Search Icon
-    │     └── ScCommandInput (Combobox host directive, always expanded, role=combobox)
-    │
-    └── ScCommandListContainer (template marker, rendered by ScCommand after its content)
-          └── ScCommandList (Listbox + ComboboxWidget, scrollable results)
-                │
-                ├── ScCommandEmpty (shown when no results)
-                │
-                ├── ScCommandGroup
-                │     ├── ScCommandGroupLabel
-                │     ├── ScCommandItem (Option host directive)
-                │     │     └── ScCommandShortcut
-                │     └── ScCommandItem
-                │
-                ├── ScCommandSeparator
-                │
-                └── ScCommandGroup
-                      └── ...
-```
-
-The input is the combobox: focus stays in it while arrows move the active item (`aria-activedescendant`). `ScCommandListContainer` is a plain template marker so consumers don't have to bind `ComboboxPopup`'s required `combobox` input by hand ([angular/angular#50510](https://github.com/angular/angular/issues/50510)).
-
-## Components
-
-| Component                | Selector                              | Description                                         |
-| ------------------------ | ------------------------------------- | --------------------------------------------------- |
-| `ScCommand`              | `div[scCommand]`                      | Root; renders the list connected to the input       |
-| `ScCommandInputGroup`    | `div[scCommandInputGroup]`            | Input wrapper with border                           |
-| `ScCommandInput`         | `input[scCommandInput]`               | Search input (`Combobox`); `[(value)]` is the text  |
-| `ScCommandListContainer` | `ng-template[scCommandListContainer]` | Marks the list template                             |
-| `ScCommandList`          | `div[scCommandList]`                  | Scrollable results (`Listbox` + `ComboboxWidget`)   |
-| `ScCommandEmpty`         | `div[scCommandEmpty]`                 | Shown when no results match                         |
-| `ScCommandGroup`         | `div[scCommandGroup]`                 | Group of related items                              |
-| `ScCommandGroupLabel`    | `[scCommandGroupLabel]`               | Group heading text                                  |
-| `ScCommandItem`          | `div[scCommandItem]`                  | Command (`Option`); `(select)` fires on Enter/click |
-| `ScCommandSeparator`     | `[scCommandSeparator]`                | Visual separator                                    |
-| `ScCommandShortcut`      | `[scCommandShortcut]`                 | Keyboard shortcut display                           |
+A search over commands: typing filters them, the arrows move the highlight while focus stays in the search, Enter runs it. shadcn's Command (built on cmdk) in the look of the app's preset (the `command` key).
 
 ## Usage
 
-### Basic Command
-
 ```html
-<div scCommand class="rounded-lg border shadow-md">
+<div scCommand #cmd="scCommand" scFrame>
   <div scCommandInputGroup>
     <svg siSearchIcon></svg>
-    <input scCommandInput placeholder="Type a command..." [(value)]="searchString" />
+    <input scCommandInput placeholder="Type a command or search..." aria-label="Search commands" />
   </div>
-  <ng-template scCommandListContainer>
-    <div scCommandList>
-      <div scCommandEmpty>No results found.</div>
-      <div scCommandGroup>
-        <span scCommandGroupLabel>Actions</span>
-        <div scCommandItem value="new file" label="New File" (select)="newFile()">
-          <svg>...</svg>
-          <span>New File</span>
-          <span scCommandShortcut>⌘N</span>
-        </div>
+  <div scCommandList aria-label="Commands">
+    <div scCommandEmpty>No results found.</div>
+    <div scCommandGroup>
+      <div scCommandGroupLabel>Settings</div>
+      <div scCommandItem [keywords]="['account']" (select)="openProfile()">
+        <svg siUserIcon></svg>
+        <span>Profile</span>
+        <span scCommandShortcut>⌘P</span>
       </div>
     </div>
-  </ng-template>
-</div>
-```
-
-### In a Dialog
-
-```html
-<div scDialogProvider [(open)]="open">
-  <ng-template scDialogPortal>
-    <div scDialog class="w-lg gap-0 p-0">
-      <div scCommand>
-        <div scCommandInputGroup>
-          <svg siSearchIcon></svg>
-          <input scCommandInput placeholder="Type a command or search..." [(value)]="searchString" />
-        </div>
-        <ng-template scCommandListContainer>
-          <div scCommandList>
-            <!-- items -->
-          </div>
-        </ng-template>
-      </div>
-    </div>
-  </ng-template>
-</div>
-```
-
-# Command Components
-
-A command palette for fast, keyboard-driven navigation and actions.
-
-## Architecture
-
-```
-ScCommand (root; provides SC_COMMAND; renders the list container inside ngComboboxPopup)
-    │
-    ├── ScCommandInputGroup (input wrapper with border)
-    │     ├── Search Icon
-    │     └── ScCommandInput (Combobox host directive, always expanded, role=combobox)
-    │
-    └── ScCommandListContainer (template marker, rendered by ScCommand after its content)
-          └── ScCommandList (Listbox + ComboboxWidget, scrollable results)
-                │
-                ├── ScCommandEmpty (shown when no results)
-                │
-                ├── ScCommandGroup
-                │     ├── ScCommandGroupLabel
-                │     ├── ScCommandItem (Option host directive)
-                │     │     └── ScCommandShortcut
-                │     └── ScCommandItem
-                │
-                ├── ScCommandSeparator
-                │
-                └── ScCommandGroup
-                      └── ...
-```
-
-The input is the combobox: focus stays in it while arrows move the active item (`aria-activedescendant`). `ScCommandListContainer` is a plain template marker so consumers don't have to bind `ComboboxPopup`'s required `combobox` input by hand ([angular/angular#50510](https://github.com/angular/angular/issues/50510)).
-
-## Components
-
-| Component                | Selector                              | Description                                         |
-| ------------------------ | ------------------------------------- | --------------------------------------------------- |
-| `ScCommand`              | `div[scCommand]`                      | Root; renders the list connected to the input       |
-| `ScCommandInputGroup`    | `div[scCommandInputGroup]`            | Input wrapper with border                           |
-| `ScCommandInput`         | `input[scCommandInput]`               | Search input (`Combobox`); `[(value)]` is the text  |
-| `ScCommandListContainer` | `ng-template[scCommandListContainer]` | Marks the list template                             |
-| `ScCommandList`          | `div[scCommandList]`                  | Scrollable results (`Listbox` + `ComboboxWidget`)   |
-| `ScCommandEmpty`         | `div[scCommandEmpty]`                 | Shown when no results match                         |
-| `ScCommandGroup`         | `div[scCommandGroup]`                 | Group of related items                              |
-| `ScCommandGroupLabel`    | `[scCommandGroupLabel]`               | Group heading text                                  |
-| `ScCommandItem`          | `div[scCommandItem]`                  | Command (`Option`); `(select)` fires on Enter/click |
-| `ScCommandSeparator`     | `[scCommandSeparator]`                | Visual separator                                    |
-| `ScCommandShortcut`      | `[scCommandShortcut]`                 | Keyboard shortcut display                           |
-
-## Usage
-
-### Basic Command
-
-```html
-<div scCommand class="rounded-lg border shadow-md">
-  <div scCommandInputGroup>
-    <svg siSearchIcon></svg>
-    <input scCommandInput placeholder="Type a command..." [(value)]="searchString" />
+    <div scCommandSeparator></div>
   </div>
-  <ng-template scCommandListContainer>
-    <div scCommandList>
-      <div scCommandEmpty>No results found.</div>
-      <div scCommandGroup>
-        <span scCommandGroupLabel>Actions</span>
-        <div scCommandItem value="new file" label="New File" (select)="newFile()">
-          <svg>...</svg>
-          <span>New File</span>
-          <span scCommandShortcut>⌘N</span>
-        </div>
-      </div>
-    </div>
-  </ng-template>
+  <div scCommandStatus>{{ cmd.count() }} results</div>
 </div>
 ```
 
-### In a Dialog
+In a dialog, on the dialog itself: `<div scDialog scCommandDialog>`, with an `sr-only` title and description.
 
-```html
-<div scDialogProvider [(open)]="open">
-  <ng-template scDialogPortal>
-    <div scDialog class="w-lg gap-0 p-0">
-      <div scCommand>
-        <div scCommandInputGroup>
-          <svg siSearchIcon></svg>
-          <input scCommandInput placeholder="Type a command or search..." [(value)]="searchString" />
-        </div>
-        <ng-template scCommandListContainer>
-          <div scCommandList>
-            <!-- items -->
-          </div>
-        </ng-template>
-      </div>
-    </div>
-  </ng-template>
-</div>
-```
+## Parts
 
-## Features
+| Part                                    | Selector                                       | What it does                                                                                                                                                    |
+| --------------------------------------- | ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ScCommand`                             | `div[scCommand]`                               | Filters its items by the search. `filter`, `shouldFilter`, `loopFocus`, `vimBindings`, `highlightItemOnHover`; exportAs: `count()`, `active()`, `search()`      |
+| `ScCommandInputGroup`                   | `div[scCommandInputGroup]`                     | Around the search: your search icon (an SVG, placed first) and the input, in the input group's look                                                             |
+| `ScCommandInput`                        | `input[scCommandInput]`                        | The search (`role="combobox"`, `aria-activedescendant`): `[(value)]` is its text; the keys. Name it                                                             |
+| `ScCommandList`                         | `div[scCommandList]`                           | The items (`role="listbox"`), scrolling, the highlighted one kept in view. Name it                                                                              |
+| `ScCommandEmpty`                        | `div[scCommandEmpty]`                          | Your text when no item shows                                                                                                                                    |
+| `ScCommandGroup`, `ScCommandGroupLabel` | `div[scCommandGroup]`, `[scCommandGroupLabel]` | Related items (`role="group"`), named by the label; hidden while none of its items shows                                                                        |
+| `ScCommandItem`                         | `div[scCommandItem]`, `a[scCommandItem]`       | A command (`role="option"`): `(select)` on Enter or a click, a link followed. `value`, `keywords`, `disabled`, `forceMount`; `data-selected="true"` highlighted |
+| `ScCommandShortcut`                     | `span[scCommandShortcut]`                      | A key hint at the end of an item: shown, not bound                                                                                                              |
+| `ScCommandSeparator`                    | `div[scCommandSeparator]`                      | A line between groups, hidden while searching; decorative (`aria-hidden`: not allowed in a listbox)                                                             |
+| `ScCommandStatus`                       | `div[scCommandStatus]`                         | Read, not shown (`role="status"`): your text about the results. Outside the list                                                                                |
+| `ScCommandDialog`                       | `div[scCommandDialog]`                         | On the `scDialog` a command opens in: no padding, the preset's corners (important over the dialog's); its items' corners follow                                 |
 
-- **Angular Aria primitives**: `Combobox` (on the input), `ComboboxPopup`, `ComboboxWidget`, `Listbox`, and `Option`
-- **Manual filtering**: derive the items from the input's `[(value)]`
-- **Actions, not a value**: picking an item emits its `(select)` and clears the listbox selection, so the same item can be run again
-- **Groups**: Organize items into logical groups with separators
-- **Keyboard shortcuts**: Display shortcuts with `scCommandShortcut`
-- **Empty state**: Show message when no results
-- **Scrollable list**: Fixed height with overflow scroll and auto-scroll to the active item
+## Filtering
 
-## Keyboard Navigation
+Built in: a "contains", accents and case ignored, on the item's `value` (its text when not set) and its `keywords`. Your order is kept (cmdk re-sorts by a score, which fights `@for`). `filter: (text, search, keywords) => boolean` replaces the match; `[shouldFilter]="false"` shows every item, filtered by you (an async search: the Async search example). `forceMount` shows an item whatever the search.
 
-Focus always stays in the input.
+The search reaches the list as it is typed, not on the next render: an Enter right after typing runs a match, never a hidden item.
 
-| Key                     | Action               |
-| ----------------------- | -------------------- |
-| Printable characters    | Edit the search text |
-| `ArrowDown` / `ArrowUp` | Move the active item |
-| `Home` / `End`          | First / last item    |
-| `Enter`                 | Run the active item  |
+## Keyboard
 
-The active item follows the pointer too, so keyboard and mouse share one highlight.
+Focus stays in the search.
 
-## ScCommandItem
+| Key                              | Does                                                                     |
+| -------------------------------- | ------------------------------------------------------------------------ |
+| ↓ / ↑                            | The next / previous item (round with `loopFocus`); disabled ones skipped |
+| Ctrl+N / Ctrl+J, Ctrl+P / Ctrl+K | The same (`vimBindings`)                                                 |
+| Alt+↓ / Alt+↑                    | The first item of the next / previous group                              |
+| Enter                            | Runs the highlighted item                                                |
+| Home / End                       | The search's own (the caret)                                             |
 
-| Member     | Type           | Description                                  |
-| ---------- | -------------- | -------------------------------------------- |
-| `value`    | `string`       | The item's value (unique within the command) |
-| `label`    | `string`       | Label used for typeahead                     |
-| `disabled` | `boolean`      | Disables the item                            |
-| `select`   | `output<void>` | Emitted on Enter or click                    |
+The first match is always highlighted; the pointer highlights what it moves over (`highlightItemOnHover`).
 
-## Accessibility
+## Built on
 
-- Built on `@angular/aria/combobox` and `@angular/aria/listbox` primitives
-- The input has `role="combobox"` and `aria-activedescendant`; the list has `role="listbox"`
-- Style states with `data-active="true"` (active item) and `aria-disabled="true"` (disabled item), as set by `Option`
+Our own engine on the CDK's `ActiveDescendantKeyManager`, not Angular Aria's Combobox: Aria's popup must be an `ng-template` (the old Command's `scCommandListContainer`), it coalesces keys pressed in one frame (three ArrowDowns moved one, checked on 22.2.6), and its listbox doesn't know the items filtering hides. The roles are cmdk's.
 
-## Known issue
+## Left out
 
-`@angular/aria` 22.2.1 forwards navigation keys from the input to the list once per render (`Combobox` relays through an `afterRenderEffect`). Keys arriving within the same frame are coalesced and only the last one is applied. Normal typing is unaffected.
+Re-sorting by score; a grid (Base UI's `grid`, Bits UI's `columns`); virtualization; a built-in ⌘K listener (the Dialog example's `scHotkey`); nested pages (the Pages example, app code as cmdk and kbar show it); shadcn's check icon on items (choosing a value is Select's and Combobox's); cmdk's Loading part (your text, announced by the status).

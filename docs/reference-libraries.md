@@ -381,7 +381,7 @@ A window over the page (`div[scDialogProvider]`): shadcn's Dialog. Its styles, i
 - **Code first closes through the state** (`[(open)]`) — everyone. Not Material's result value: ours live in the template.
 - **Each preset's look**, as the `dialog` key (the ✕'s place and fill too: `top-2 end-2` to `top-5 end-5`, `bg-secondary` in luma, sera, rhea).
 - **The direction and language of where it is opened**, given to the dialog (rendered at the end of the page).
-- **shadcn's width** (2026-11-11, the user, after the Command Next dialog opened narrow and collapsed while zooming in): `w-screen` on `scDialog`, capped by the preset's `max-w` — the CDK's pane is as wide as its content, so the preset's `w-full` alone left short dialogs narrow.
+- **shadcn's width** (2026-11-11, the user, after the Command dialog opened narrow and collapsed while zooming in): `w-screen` on `scDialog`, capped by the preset's `max-w` — the CDK's pane is as wide as its content, so the preset's `w-full` alone left short dialogs narrow.
 
 ## Accordion
 
@@ -585,9 +585,9 @@ Rewritten 2026-11-10: built beside the old one as Slider Next, switched in. shad
 - **One thumb**: shadcn's Range and Multiple are left out (Range Slider is ours, in its turn).
 - **shadcn's examples**: Demo (the Usage), Controlled, Disabled, Vertical, RTL; ours kept: Form, Custom color.
 
-## Command: rewriting
+## Command: rewritten
 
-Built 2026-11-11 beside the old one as Command Next (the user: "check what other libs do"). Base UI has no Command (its Autocomplete has a command-palette example); shadcn's is cmdk in both bases.
+Rewritten 2026-11-11 (the user: "check what other libs do"): built beside the old one as Command Next, switched in. The showcase's docs search (Ctrl+K) moved onto it: its own filtering gone, descriptions as keywords, results as links. Base UI has no Command (its Autocomplete has a command-palette example); shadcn's is cmdk in both bases.
 
 | Library (weekly npm downloads, 2026-11-11)             | What we read                                                                                                                                                                                               |
 | ------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

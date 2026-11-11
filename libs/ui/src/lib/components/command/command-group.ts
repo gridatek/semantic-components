@@ -1,22 +1,36 @@
-import { Directive, computed, input } from '@angular/core';
+import { Directive, computed, inject, input, signal } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
+import { ScCommand } from './command';
 
+/**
+ * Related items (`role="group"`), named by its `scCommandGroupLabel`.
+ * Hidden while none of its items shows.
+ */
 @Directive({
   selector: 'div[scCommandGroup]',
   host: {
+    'data-slot': 'command-group',
     role: 'group',
+    '[attr.aria-labelledby]': 'labelId()',
+    '[attr.hidden]': 'shown() ? null : ""',
     '[class]': 'class()',
   },
 })
 export class ScCommandGroup {
+  private readonly styles = injectPreset().command;
+  private readonly command = inject(ScCommand);
+
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly heading = input<string>('');
+
+  /** Its label's id. */
+  readonly labelId = signal<string | null>(null);
+
+  protected readonly shown = computed(() =>
+    this.command.shownItems().some((item) => item.group === this),
+  );
 
   protected readonly class = computed(() =>
-    cn(
-      'overflow-hidden p-1 text-foreground',
-      '**:data-[slot=command-group-label]:px-2 **:data-[slot=command-group-label]:py-1.5 **:data-[slot=command-group-label]:text-xs **:data-[slot=command-group-label]:font-medium **:data-[slot=command-group-label]:text-muted-foreground',
-      this.classInput(),
-    ),
+    cn(this.styles.group, this.classInput()),
   );
 }

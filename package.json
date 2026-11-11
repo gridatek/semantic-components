@@ -34,6 +34,7 @@
     "@lezer/highlight": "^1.2.5",
     "@modelcontextprotocol/sdk": "^1.32.2",
     "@semantic-icons/lucide-icons": "^0.60.0",
+    "@tanstack/angular-hotkeys": "^0.22.1",
     "@tanstack/angular-table": "^9.3.1",
     "@tiptap/core": "^3.33.0",
     "@tiptap/extension-bubble-menu": "^3.33.0",

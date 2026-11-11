@@ -1,54 +1,32 @@
-import { ComboboxWidget } from '@angular/aria/combobox';
-import { Listbox } from '@angular/aria/listbox';
-import {
-  Directive,
-  computed,
-  effect,
-  inject,
-  input,
-  untracked,
-} from '@angular/core';
-import { bindInput, cn } from '../../utils';
-import { SC_COMMAND } from './command-tokens';
+import { _IdGenerator } from '@angular/cdk/a11y';
+import { DestroyRef, Directive, computed, inject, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
+import { cn } from '../../utils';
+import { ScCommand } from './command';
 
+/** The items (`role="listbox"`), scrolling past its height. Name it (`aria-label`). */
 @Directive({
   selector: 'div[scCommandList]',
-  hostDirectives: [Listbox, ComboboxWidget],
   host: {
     'data-slot': 'command-list',
+    role: 'listbox',
+    '[id]': 'id',
     '[class]': 'class()',
   },
 })
 export class ScCommandList {
+  private readonly styles = injectPreset().command;
+  protected readonly id = inject(_IdGenerator).getId('sc-command-list-');
+
   readonly classInput = input<string>('', { alias: 'class' });
 
-  private readonly command = inject(SC_COMMAND);
-  private readonly listbox = inject<Listbox<string>>(Listbox);
-  private readonly widget = inject(ComboboxWidget);
-
   protected readonly class = computed(() =>
-    cn(
-      'no-scrollbar max-h-72 scroll-py-1 overflow-x-hidden overflow-y-auto outline-none',
-      this.classInput(),
-    ),
+    cn(this.styles.list, this.classInput()),
   );
 
   constructor() {
-    // Focus stays in the input; the active item is announced through
-    // aria-activedescendant, and Enter/click runs it.
-    bindInput(this.listbox.focusMode, 'activedescendant');
-    bindInput(this.listbox.selectionMode, 'explicit');
-    bindInput(this.widget.activeDescendant, this.listbox.activeDescendant);
-
-    // Commands are actions, not a value: run the picked item, then clear the
-    // selection so the same item can be picked again.
-    effect(() => {
-      const [value] = this.listbox.value();
-      if (value === undefined) return;
-      untracked(() => {
-        this.listbox.value.set([]);
-        this.command.itemFor(value)?.select.emit();
-      });
-    });
+    const command = inject(ScCommand);
+    command.listId.set(this.id);
+    inject(DestroyRef).onDestroy(() => command.listId.set(null));
   }
 }

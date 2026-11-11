@@ -1,60 +1,118 @@
-import { Option } from '@angular/aria/listbox';
+import { type Highlightable, _IdGenerator } from '@angular/cdk/a11y';
 import {
   DestroyRef,
   Directive,
   ElementRef,
+  afterNextRender,
+  booleanAttribute,
   computed,
-  effect,
   inject,
   input,
   output,
+  signal,
 } from '@angular/core';
-import { cn, useActiveOption } from '../../utils';
-import { SC_COMMAND } from './command-tokens';
+import { injectPreset } from '../../config/preset';
+import { cn } from '../../utils';
+import { ScCommand } from './command';
+import { ScCommandGroup } from './command-group';
 
+/**
+ * A command (`role="option"`): run by Enter or a click — `(select)`; on a
+ * link, the link is followed. Hidden while it doesn't match the search: its
+ * text (or `value`) and its `keywords`.
+ */
 @Directive({
-  selector: 'div[scCommandItem]',
-  hostDirectives: [
-    {
-      directive: Option,
-      inputs: ['value', 'label', 'disabled'],
-    },
-  ],
+  selector: 'div[scCommandItem], a[scCommandItem]',
   host: {
     'data-slot': 'command-item',
+    role: 'option',
+    tabindex: '-1',
+    '[id]': 'id',
+    '[attr.hidden]': 'shown() ? null : ""',
+    '[attr.aria-selected]': 'highlighted()',
+    '[attr.aria-disabled]': 'disabledInput() || null',
+    '[attr.data-disabled]': 'disabledInput() || null',
+    '[attr.data-selected]': 'highlighted() || null',
     '[class]': 'class()',
-    '(pointermove)': 'onPointerMove()',
+    '(pointermove)':
+      'command.highlightItemOnHover() && command.highlight(this)',
+    '(mousedown)': '$event.preventDefault()',
+    '(click)': 'onClick($event)',
   },
 })
-export class ScCommandItem {
-  readonly classInput = input<string>('', { alias: 'class' });
+export class ScCommandItem implements Highlightable {
+  private readonly styles = injectPreset().command;
+  protected readonly command = inject(ScCommand);
+  /** The group it is in. */
+  readonly group = inject(ScCommandGroup, { optional: true });
+  readonly element = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
+  readonly id = inject(_IdGenerator).getId('sc-command-item-');
 
-  /** Emitted when the item is run, by Enter or click. */
+  readonly classInput = input<string>('', { alias: 'class' });
+  /** What the search matches: its text when not set. */
+  readonly value = input('');
+  /** More words it is found by. */
+  readonly keywords = input<readonly string[]>([]);
+  readonly disabledInput = input(false, {
+    alias: 'disabled',
+    transform: booleanAttribute,
+  });
+  /** Shown whatever the search (a "Search for …" item). */
+  readonly forceMount = input(false, { transform: booleanAttribute });
+
+  /** Run: Enter or a click. */
   readonly select = output<void>();
 
-  private readonly option = inject<Option<string>>(Option);
-  protected readonly onPointerMove = useActiveOption(this.option);
-  private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+  /** Its text, read once rendered. */
+  private readonly text = signal('');
+  protected readonly highlighted = signal(false);
 
-  readonly value = computed(() => this.option.value());
+  /** Shown: it matches the search, or always shown. */
+  readonly shown = computed(
+    () =>
+      this.forceMount() ||
+      this.command.matches(this.value() || this.text(), this.keywords()),
+  );
 
-  constructor() {
-    const command = inject(SC_COMMAND);
-    effect((onCleanup) => {
-      this.value();
-      command.registerItem(this);
-      onCleanup(() => command.unregisterItem(this));
-    });
-    inject(DestroyRef).onDestroy(() => command.unregisterItem(this));
+  /** For the key manager: skipped when disabled. */
+  get disabled(): boolean {
+    return this.disabledInput();
   }
 
   protected readonly class = computed(() =>
-    cn(
-      'group/command-item relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none',
-      'aria-disabled:pointer-events-none aria-disabled:opacity-50',
-      'transition-colors duration-100 data-[active=true]:bg-muted data-[active=true]:text-foreground',
-      '[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*=size-])]:size-4',
-      this.classInput(),
-    ),
+    cn(this.styles.item, this.classInput()),
   );
+
+  constructor() {
+    afterNextRender(() =>
+      this.text.set(this.element.textContent?.trim() ?? ''),
+    );
+    this.command.register(this);
+    inject(DestroyRef).onDestroy(() => this.command.unregister(this));
+  }
+
+  setActiveStyles(): void {
+    this.highlighted.set(true);
+    this.element.scrollIntoView?.({ block: 'nearest' });
+  }
+
+  setInactiveStyles(): void {
+    this.highlighted.set(false);
+  }
+
+  /** Runs it: a link is followed (its click), anything else emits `select`. */
+  run(): void {
+    if (this.disabledInput()) return;
+    if (this.element instanceof HTMLAnchorElement) this.element.click();
+    else this.select.emit();
+  }
+
+  protected onClick(event: Event): void {
+    if (this.disabledInput()) {
+      event.preventDefault();
+      return;
+    }
+    // A link is followed by the browser too.
+    this.select.emit();
+  }
 }

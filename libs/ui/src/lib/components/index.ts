@@ -14,7 +14,6 @@ export * from './checkbox';
 export * from './collapsible';
 export * from './combobox';
 export * from './command';
-export * from './command-next';
 export * from './context-menu';
 export * from './date-input';
 export * from './date-picker';

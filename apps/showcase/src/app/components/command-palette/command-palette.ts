@@ -4,11 +4,11 @@ import {
   computed,
   inject,
   input,
-  signal,
 } from '@angular/core';
-import { Router } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import {
   ScCommand,
+  ScCommandDialog,
   ScCommandEmpty,
   ScCommandGroup,
   ScCommandGroupLabel,
@@ -16,11 +16,13 @@ import {
   ScCommandInputGroup,
   ScCommandItem,
   ScCommandList,
-  ScCommandListContainer,
   ScCommandSeparator,
+  ScCommandStatus,
   ScDialog,
+  ScDialogDescription,
   ScDialogPortal,
   ScDialogProvider,
+  ScDialogTitle,
   ScHotkey,
   cn,
 } from '@semantic-components/ui';
@@ -33,10 +35,13 @@ import {
 import { CommandPaletteService } from '../../services/command-palette-service';
 import { ComponentsService } from '../../services/components-service';
 
+/** The docs' search (Ctrl+K, ⌘K on a Mac): pages, components and utilities, by name or description. */
 @Component({
   selector: 'app-command-palette',
   imports: [
+    RouterLink,
     ScCommand,
+    ScCommandDialog,
     ScCommandEmpty,
     ScCommandGroup,
     ScCommandGroupLabel,
@@ -44,11 +49,13 @@ import { ComponentsService } from '../../services/components-service';
     ScCommandInputGroup,
     ScCommandItem,
     ScCommandList,
-    ScCommandListContainer,
     ScCommandSeparator,
+    ScCommandStatus,
     ScDialogProvider,
     ScDialogPortal,
     ScDialog,
+    ScDialogTitle,
+    ScDialogDescription,
     ScHotkey,
     SiBoxIcon,
     SiFileTextIcon,
@@ -63,92 +70,69 @@ import { ComponentsService } from '../../services/components-service';
         class="hidden"
       ></span>
       <ng-template scDialogPortal>
-        <div scDialog class="w-lg gap-0 p-0">
-          <div scCommand>
+        <div scDialog scCommandDialog>
+          <h2 scDialogTitle class="sr-only">Search the docs</h2>
+          <p scDialogDescription class="sr-only">
+            Pages, components and utilities, by name or description.
+          </p>
+          <div scCommand #cmd="scCommand">
             <div scCommandInputGroup>
               <svg siSearchIcon></svg>
               <input
                 scCommandInput
                 placeholder="Search components..."
-                [(value)]="searchString"
+                aria-label="Search the docs"
               />
             </div>
-            <ng-template scCommandListContainer>
-              <div scCommandList>
-                @if (
-                  filteredComponents().length === 0 &&
-                  filteredPages().length === 0 &&
-                  filteredUtilities().length === 0
-                ) {
-                  <div scCommandEmpty>No results found.</div>
-                }
-                @if (filteredPages().length > 0) {
-                  <div scCommandGroup>
-                    <span scCommandGroupLabel>Pages</span>
-                    @for (page of filteredPages(); track page.path) {
-                      <div
-                        scCommandItem
-                        [value]="page.name"
-                        [label]="page.name"
-                        (select)="navigate(page.path)"
-                      >
-                        <svg siFileTextIcon></svg>
-                        <span>{{ page.name }}</span>
-                      </div>
-                    }
-                  </div>
-                }
-                @if (
-                  filteredPages().length > 0 && filteredComponents().length > 0
-                ) {
-                  <div scCommandSeparator></div>
-                }
-                @if (filteredComponents().length > 0) {
-                  <div scCommandGroup>
-                    <span scCommandGroupLabel>Components</span>
-                    @for (
-                      component of filteredComponents();
-                      track component.path
-                    ) {
-                      <div
-                        scCommandItem
-                        [value]="component.name"
-                        [label]="component.name"
-                        (select)="
-                          navigate('/docs/components/' + component.path)
-                        "
-                      >
-                        <svg siBoxIcon></svg>
-                        <span>{{ component.name }}</span>
-                      </div>
-                    }
-                  </div>
-                }
-                @if (
-                  (filteredComponents().length > 0 ||
-                    filteredPages().length > 0) &&
-                  filteredUtilities().length > 0
-                ) {
-                  <div scCommandSeparator></div>
-                }
-                @if (filteredUtilities().length > 0) {
-                  <div scCommandGroup>
-                    <span scCommandGroupLabel>Utilities</span>
-                    @for (utility of filteredUtilities(); track utility.path) {
-                      <div
-                        scCommandItem
-                        [value]="utility.name"
-                        [label]="utility.name"
-                        (select)="navigate('/docs/components/' + utility.path)"
-                      >
-                        <svg siWrenchIcon></svg>
-                        <span>{{ utility.name }}</span>
-                      </div>
-                    }
-                  </div>
+            <div scCommandList aria-label="Results">
+              <div scCommandEmpty>No results found.</div>
+              <div scCommandGroup>
+                <div scCommandGroupLabel>Pages</div>
+                @for (page of pages; track page.path) {
+                  <a scCommandItem [routerLink]="page.path" (select)="close()">
+                    <svg siFileTextIcon></svg>
+                    <span>{{ page.name }}</span>
+                  </a>
                 }
               </div>
-            </ng-template>
+              <div scCommandSeparator></div>
+              <div scCommandGroup>
+                <div scCommandGroupLabel>Components</div>
+                @for (
+                  component of componentsService.visibleComponents();
+                  track component.path
+                ) {
+                  <a
+                    scCommandItem
+                    [routerLink]="'/docs/components/' + component.path"
+                    [keywords]="[component.description]"
+                    (select)="close()"
+                  >
+                    <svg siBoxIcon></svg>
+                    <span>{{ component.name }}</span>
+                  </a>
+                }
+              </div>
+              <div scCommandSeparator></div>
+              <div scCommandGroup>
+                <div scCommandGroupLabel>Utilities</div>
+                @for (
+                  utility of componentsService.visibleUtilities();
+                  track utility.path
+                ) {
+                  <a
+                    scCommandItem
+                    [routerLink]="'/docs/components/' + utility.path"
+                    [keywords]="[utility.description]"
+                    (select)="close()"
+                  >
+                    <svg siWrenchIcon></svg>
+                    <span>{{ utility.name }}</span>
+                  </a>
+                }
+              </div>
+            </div>
+            <div scCommandStatus>{{ cmd.count() }} results</div>
           </div>
         </div>
       </ng-template>
@@ -164,52 +148,21 @@ export class CommandPalette {
 
   protected readonly class = computed(() => cn('block', this.classInput()));
 
-  private readonly router = inject(Router);
-  private readonly componentsService = inject(ComponentsService);
+  protected readonly componentsService = inject(ComponentsService);
   protected readonly commandPaletteService = inject(CommandPaletteService);
 
-  readonly searchString = signal('');
-
-  private readonly pages = [
+  protected readonly pages = [
     { name: 'Introduction', path: '/docs/getting-started/introduction' },
     { name: 'Prerequisites', path: '/docs/getting-started/prerequisites' },
     { name: 'Components', path: '/docs/components' },
   ];
 
-  readonly filteredPages = computed(() => {
-    const search = this.searchString().toLowerCase();
-    if (!search) return this.pages;
-    return this.pages.filter((p) => p.name.toLowerCase().includes(search));
-  });
-
-  readonly filteredComponents = computed(() => {
-    const search = this.searchString().toLowerCase();
-    const components = this.componentsService.visibleComponents();
-    if (!search) return components;
-    return components.filter(
-      (c) =>
-        c.name.toLowerCase().includes(search) ||
-        c.description.toLowerCase().includes(search),
-    );
-  });
-
-  readonly filteredUtilities = computed(() => {
-    const search = this.searchString().toLowerCase();
-    const utilities = this.componentsService.visibleUtilities();
-    if (!search) return utilities;
-    return utilities.filter(
-      (c) =>
-        c.name.toLowerCase().includes(search) ||
-        c.description.toLowerCase().includes(search),
-    );
-  });
-
   toggleOpen(): void {
     this.commandPaletteService.toggle();
   }
 
-  navigate(path: string): void {
-    this.router.navigateByUrl(path);
+  /** A result followed: the link navigates, the palette closes. */
+  protected close(): void {
     this.commandPaletteService.open.set(false);
   }
 }

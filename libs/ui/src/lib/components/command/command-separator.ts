@@ -1,17 +1,28 @@
-import { Directive, computed, input } from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
+import { ScCommand } from './command';
 
+/**
+ * A line between groups, hidden while searching. Decorative: the groups are
+ * named (a separator isn't allowed in a listbox).
+ */
 @Directive({
-  selector: '[scCommandSeparator]',
+  selector: 'div[scCommandSeparator]',
   host: {
-    role: 'none',
+    'data-slot': 'command-separator',
+    'aria-hidden': 'true',
+    '[attr.hidden]': 'command.search().trim() ? "" : null',
     '[class]': 'class()',
   },
 })
 export class ScCommandSeparator {
+  private readonly styles = injectPreset().command;
+  protected readonly command = inject(ScCommand);
+
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('-mx-1 h-px bg-border', this.classInput()),
+    cn(this.styles.separator, this.classInput()),
   );
 }

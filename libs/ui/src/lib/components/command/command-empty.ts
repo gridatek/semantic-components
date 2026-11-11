@@ -1,16 +1,25 @@
-import { Directive, computed, input } from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
+import { ScCommand } from './command';
 
+/** Your text when no item shows. */
 @Directive({
   selector: 'div[scCommandEmpty]',
   host: {
+    'data-slot': 'command-empty',
+    role: 'presentation',
+    '[attr.hidden]': 'command.count() ? "" : null',
     '[class]': 'class()',
   },
 })
 export class ScCommandEmpty {
+  private readonly styles = injectPreset().command;
+  protected readonly command = inject(ScCommand);
+
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('py-6 text-center text-sm', this.classInput()),
+    cn(this.styles.empty, this.classInput()),
   );
 }
