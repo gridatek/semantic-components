@@ -684,6 +684,14 @@
     "category": "Forms"
   },
   {
+    "name": "Native Select Next",
+    "path": "native-select-next",
+    "description": "The browser's own select, in the preset's look.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Forms"
+  },
+  {
     "name": "Navbar",
     "path": "navbar",
     "description": "A site's top bar: brand, links, actions; on narrow screens a toggle and a menu panel under the bar.",

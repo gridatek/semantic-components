@@ -466,6 +466,14 @@ export interface ScToastStyles {
   list: string;
 }
 
+/** A native select's parts that change from style to style. */
+export interface ScNativeSelectStyles {
+  /** The select: its size (`data-[size=sm]:`), corners, border, background, focus and invalid rings. */
+  select: string;
+  /** The chevron's place and size. */
+  icon: string;
+}
+
 /** A preset: the components' classes in one of shadcn's styles. */
 export interface ScPreset {
   accordion: ScAccordionStyles;
@@ -519,6 +527,7 @@ export interface ScPreset {
   message: ScMessageStyles;
   /** A message scroller's rows: the gap between them. */
   messageScrollerContent: string;
+  nativeSelect: ScNativeSelectStyles;
   otpField: ScOtpFieldStyles;
   pagination: ScPaginationStyles;
   popover: ScPopoverStyles;

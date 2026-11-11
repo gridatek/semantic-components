@@ -583,6 +583,15 @@ Rewritten 2026-11-10: built beside the old one as Slider Next, switched in. shad
 - **One thumb**: shadcn's Range and Multiple are left out (Range Slider is ours, in its turn).
 - **shadcn's examples**: Demo (the Usage), Controlled, Disabled, Vertical, RTL; ours kept: Form, Custom color.
 
+## Native Select: rewriting
+
+Built 2026-11-11 beside the old one as Native Select Next. shadcn's Native Select (`native-select.tsx` in each style, its docs' examples); Base UI has none.
+
+- **The `nativeSelect` preset key** (`select`, `icon`), copied as shadcn writes them: heights 6 to 10, corners, backgrounds (`bg-input/…` in maia, mira, luma, rhea), lyra's `text-xs` and `ring-1`, sera's underline; the chevron's place (`end-3.5` maia, `end-1.5` and smaller in mira, `end-0` sera). The wrapper's classes are the same in every style: in the container part.
+- **Parts**: the select (`size`, the field's id and description, `[formField]`, `aria-invalid` once touched), the container (it carries its select's `data-size`, for mira's icon), your chevron (`aria-hidden` by the part: the old one wasn't hidden), option and optgroup with shadcn's `bg-[Canvas] text-[CanvasText]` (the old ones had no classes).
+- **Not taken**: the customizable select (`appearance: base-select`), Chromium only, not in shadcn's.
+- **Examples**: shadcn's Demo (the Usage, in a field), Groups, Disabled, Invalid (Signal Forms, its error), RTL; ours: Sizes. shadcn's "Native Select vs Select" note as a section of the page.
+
 ## Toast: restyled
 
 Restyled 2026-11-11: shadcn's Toast (Base UI's, `toast.tsx` in each style; it replaced Sonner) and its examples.

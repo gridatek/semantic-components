@@ -479,6 +479,12 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/native-select/native-select-page'),
       },
       {
+        path: 'native-select-next',
+        title: 'Native Select Next - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/native-select-next/native-select-next-page'),
+      },
+      {
         path: 'range-slider',
         title: 'Range Slider - Semantic Components',
         loadComponent: () =>

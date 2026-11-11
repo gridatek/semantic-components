@@ -35,6 +35,7 @@ import { menu } from './menu';
 import { menubar } from './menubar';
 import { message } from './message';
 import { messageScrollerContent } from './message-scroller';
+import { nativeSelect } from './native-select';
 import { otpField } from './otp-field';
 import { pagination } from './pagination';
 import { popover } from './popover';
@@ -95,6 +96,7 @@ export const rhea: ScPreset = {
   menubar,
   message,
   messageScrollerContent,
+  nativeSelect,
   otpField,
   pagination,
   popover,

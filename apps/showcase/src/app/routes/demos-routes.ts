@@ -3310,6 +3310,53 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/native-select-next',
+    children: [
+      {
+        path: 'native-select-next-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/native-select-next/demos/native-select-next-usage-demo').then(
+            (m) => m.NativeSelectNextUsageDemo,
+          ),
+      },
+      {
+        path: 'groups-native-select-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/native-select-next/demos/groups-native-select-next-demo').then(
+            (m) => m.GroupsNativeSelectNextDemo,
+          ),
+      },
+      {
+        path: 'disabled-native-select-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/native-select-next/demos/disabled-native-select-next-demo').then(
+            (m) => m.DisabledNativeSelectNextDemo,
+          ),
+      },
+      {
+        path: 'invalid-native-select-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/native-select-next/demos/invalid-native-select-next-demo').then(
+            (m) => m.InvalidNativeSelectNextDemo,
+          ),
+      },
+      {
+        path: 'sizes-native-select-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/native-select-next/demos/sizes-native-select-next-demo').then(
+            (m) => m.SizesNativeSelectNextDemo,
+          ),
+      },
+      {
+        path: 'rtl-native-select-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/native-select-next/demos/rtl-native-select-next-demo').then(
+            (m) => m.RtlNativeSelectNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/pie-chart',
     children: [
       {
