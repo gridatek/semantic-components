@@ -228,6 +228,7 @@ A modal dialog asking for an answer (`div[scAlertDialog]`). A shadcn component: 
 
 - **Escape closes it** (Base UI, and the WAI-ARIA pattern) — ours ignored it until 2026-11-04; a click outside still doesn't.
 - **shadcn's parts, `size` and each preset's look**, without its placement and animation classes (the CDK overlay, Angular's `animate.enter`/`leave`).
+- **shadcn's width** (2026-11-11, the user, after the Dialog's): `w-screen`, capped by the preset's `max-w` for the size — the CDK's pane is as wide as its content, so a short alert stayed narrow.
 - **Not**: Base UI's handles and payloads (detached triggers), nested dialogs, `initialFocus`/`finalFocus` (the focus trap takes the first button and gives focus back).
 
 ## Avatar
@@ -380,6 +381,7 @@ A window over the page (`div[scDialogProvider]`): shadcn's Dialog. Its styles, i
 - **Code first closes through the state** (`[(open)]`) — everyone. Not Material's result value: ours live in the template.
 - **Each preset's look**, as the `dialog` key (the ✕'s place and fill too: `top-2 end-2` to `top-5 end-5`, `bg-secondary` in luma, sera, rhea).
 - **The direction and language of where it is opened**, given to the dialog (rendered at the end of the page).
+- **shadcn's width** (2026-11-11, the user, after the Command Next dialog opened narrow and collapsed while zooming in): `w-screen` on `scDialog`, capped by the preset's `max-w` — the CDK's pane is as wide as its content, so the preset's `w-full` alone left short dialogs narrow.
 
 ## Accordion
 

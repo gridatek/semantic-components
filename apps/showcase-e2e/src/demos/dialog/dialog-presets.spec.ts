@@ -40,10 +40,11 @@ test.describe('Dialog in every preset', () => {
       await page.goto('/demos/dialog/dialog-usage-demo');
       await page.getByRole('button', { name: 'Open Dialog' }).click();
       for (const [target, wanted, what] of [
-        // The demo narrows it (sm:max-w-sm), as shadcn's does.
+        // The demo narrows it (sm:max-w-sm), as shadcn's does; its full width
+        // is w-screen (the CDK's pane gives w-full nothing to fill).
         [
           page.getByRole('dialog'),
-          `${styles.dialog.content} sm:max-w-sm`,
+          `${styles.dialog.content} w-screen sm:max-w-sm`,
           'dialog',
         ],
         [

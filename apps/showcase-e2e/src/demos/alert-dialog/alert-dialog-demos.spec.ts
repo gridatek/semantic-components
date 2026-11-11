@@ -80,7 +80,9 @@ test('Small: narrower, its two buttons side by side', async ({ page }) => {
     await box(dialog.getByRole('button', { name: 'Allow', exact: true })),
   ];
   expect(Math.abs(cancel.y - allow.y)).toBeLessThan(1);
-  expect((await box(dialog)).width).toBeLessThanOrEqual(321);
+  // Its full small width (max-w-xs), not its text's: the CDK's pane gives
+  // w-full nothing to fill, so the dialog sets w-screen.
+  expect((await box(dialog)).width).toBe(320);
 });
 
 test('Media: the icon beside the title', async ({ page }) => {

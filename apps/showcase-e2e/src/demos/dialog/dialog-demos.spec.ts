@@ -136,6 +136,16 @@ test('No Close Button: closed by Escape', async ({ page }) => {
   await expect(dialog(page)).toBeHidden();
 });
 
+test('Short content: the dialog still opens at its full width', async ({
+  page,
+}) => {
+  // Two lines of text: as wide as the preset's max (sm:max-w-sm, 384px, in
+  // nova), not as its text — and not narrower while it zooms in.
+  await page.goto(demo('no-close-button'));
+  await page.getByRole('button', { name: 'No Close Button' }).click();
+  await expect.poll(async () => (await box(dialog(page))).width).toBe(384);
+});
+
 test('Sticky Footer: the content scrolls, the footer stays in view', async ({
   page,
 }) => {

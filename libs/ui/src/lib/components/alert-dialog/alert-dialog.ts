@@ -43,6 +43,10 @@ export class ScAlertDialog {
     cn(
       'relative max-w-[calc(100%-2rem)] text-sm',
       this.styles.content,
+      // Its full width, capped by the preset's max-w (by size) — as shadcn's,
+      // whose w-full fills a fixed, screen-wide box. The CDK's pane is only as
+      // wide as its content: short text left it narrow.
+      'w-screen',
       this.classInput(),
     ),
   );

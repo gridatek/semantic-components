@@ -63,7 +63,9 @@ test.describe('Alert Dialog in every preset', () => {
       );
       await expectClasses(
         dialog,
-        twMerge(`relative max-w-[calc(100%-2rem)] text-sm ${s.content}`),
+        twMerge(
+          `relative max-w-[calc(100%-2rem)] text-sm ${s.content} w-screen`,
+        ),
         `${preset} dialog`,
       );
       for (const [part, classes] of [

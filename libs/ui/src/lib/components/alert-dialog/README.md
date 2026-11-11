@@ -70,4 +70,4 @@ Each part takes `class`, merged over the preset.
 
 ## Styles
 
-From the preset (`alertDialog`): the dialog (padding, radius, width, shadow), the header, the footer (a muted band only in nova), the media, the title and the description. shadcn's placement and open/close classes are left out: the CDK overlay centers the dialog, Angular animates it. The backdrop is the shared `scBackdrop`, its shade and blur the preset's `backdrop`, the same behind every overlay.
+From the preset (`alertDialog`): the dialog (padding, radius, width, shadow), the header, the footer (a muted band only in nova), the media, the title and the description. shadcn's placement and open/close classes are left out: the CDK overlay centers the dialog, Angular animates it. Its width is the preset's maximum for its `size`, whatever its text, as shadcn's: the dialog adds `w-screen`, capped by that `max-w` (the CDK's pane is only as wide as its content, so `w-full` alone left a short alert narrow). Your classes win. The backdrop is the shared `scBackdrop`, its shade and blur the preset's `backdrop`, the same behind every overlay.

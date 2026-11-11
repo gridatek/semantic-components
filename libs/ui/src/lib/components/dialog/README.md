@@ -33,6 +33,12 @@ A window over the page, which waits until it is closed: the page behind it can't
 - When your code runs first (Save checks and sends the form), the button is yours and closes the dialog through `[(open)]` when it is done, or keeps it open to show what is wrong.
 - Escape and a click outside close it too. Focus stays in it while it is open, starts on its first focusable element, and goes back to what opened it.
 
+## Width
+
+The dialog is as wide as the preset allows (`sm:max-w-sm` or `sm:max-w-md`, depending on the style; the screen less 2rem on a phone), whatever its content — as shadcn's. Its own `w-screen` gives it that width: the CDK's overlay pane is only as wide as its content, so a `w-full` has nothing to fill, and a dialog with short content (a command, a one-line confirm) stayed narrow and collapsed while zooming in.
+
+Narrow it with a `max-w` of your own (`class="sm:max-w-md"`), or set a width (`class="w-lg"`): your classes win.
+
 ## API reference
 
 | Part                                   | Selector                                       | Inputs                                                                                                                                   |
