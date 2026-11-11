@@ -30,13 +30,7 @@ import {
 /** Two-way, [(value)], without a form: the code shown as it is typed. */
 @Component({
   selector: 'app-controlled-otp-field-demo',
-  imports: [
-    ScField,
-    ScLabel,
-    ScOtpField,
-    ScOtpFieldGroup,
-    ScOtpFieldInput,
-  ],
+  imports: [ScField, ScLabel, ScOtpField, ScOtpFieldGroup, ScOtpFieldInput],
   template: \`
     <div class="space-y-2">
       <div scField class="w-fit">

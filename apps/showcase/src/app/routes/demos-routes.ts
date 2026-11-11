@@ -6951,4 +6951,65 @@ export const demosRoutes: Route[] = [
       },
     ],
   },
+  {
+    path: 'demos/collapsible-next',
+    children: [
+      {
+        path: 'collapsible-next-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/collapsible-next/demos/collapsible-next-usage-demo').then(
+            (m) => m.CollapsibleNextUsageDemo,
+          ),
+      },
+      {
+        path: 'basic-collapsible-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/collapsible-next/demos/basic-collapsible-next-demo').then(
+            (m) => m.BasicCollapsibleNextDemo,
+          ),
+      },
+      {
+        path: 'settings-collapsible-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/collapsible-next/demos/settings-collapsible-next-demo').then(
+            (m) => m.SettingsCollapsibleNextDemo,
+          ),
+      },
+      {
+        path: 'file-tree-collapsible-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/collapsible-next/demos/file-tree-collapsible-next-demo').then(
+            (m) => m.FileTreeCollapsibleNextDemo,
+          ),
+      },
+      {
+        path: 'hidden-until-found-collapsible-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/collapsible-next/demos/hidden-until-found-collapsible-next-demo').then(
+            (m) => m.HiddenUntilFoundCollapsibleNextDemo,
+          ),
+      },
+      {
+        path: 'disabled-collapsible-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/collapsible-next/demos/disabled-collapsible-next-demo').then(
+            (m) => m.DisabledCollapsibleNextDemo,
+          ),
+      },
+      {
+        path: 'open-collapsible-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/collapsible-next/demos/open-collapsible-next-demo').then(
+            (m) => m.OpenCollapsibleNextDemo,
+          ),
+      },
+      {
+        path: 'rtl-collapsible-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/collapsible-next/demos/rtl-collapsible-next-demo').then(
+            (m) => m.RtlCollapsibleNextDemo,
+          ),
+      },
+    ],
+  },
 ];

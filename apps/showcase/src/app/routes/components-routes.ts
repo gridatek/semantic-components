@@ -233,6 +233,12 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/collapsible/collapsible-page'),
       },
       {
+        path: 'collapsible-next',
+        title: 'Collapsible Next - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/collapsible-next/collapsible-next-page'),
+      },
+      {
         path: 'color-picker',
         title: 'Color Picker - Semantic Components',
         loadComponent: () =>

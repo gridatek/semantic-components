@@ -46,11 +46,7 @@ import { SiMinusIcon } from '@semantic-icons/lucide-icons';
   template: \`
     <div scField class="w-fit">
       <label scLabel>Recovery code</label>
-      <div
-        scOtpField
-        validationType="alphanumeric"
-        [formField]="otpForm.code"
-      >
+      <div scOtpField validationType="alphanumeric" [formField]="otpForm.code">
         <div scOtpFieldGroup>
           <input scOtpFieldInput />
           <input scOtpFieldInput aria-label="Character 2 of 6" />
