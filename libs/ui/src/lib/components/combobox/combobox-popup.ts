@@ -1,68 +1,99 @@
-import { ComboboxPopup, ComboboxWidget } from '@angular/aria/combobox';
+import { ComboboxPopup } from '@angular/aria/combobox';
 import {
   Component,
+  ElementRef,
   ViewEncapsulation,
   computed,
   contentChild,
   inject,
   input,
 } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 import { ScPortalOutlet } from '../portal-outlet/portal-outlet';
-import { ScComboboxListContainer } from './combobox-list-container';
-import { SC_COMBOBOX } from './combobox-tokens';
+import { ScComboboxBase } from './combobox-base';
+import { ScComboboxListContent } from './combobox-list-content';
 
 /**
- * The dialog popup of a combobox. Holds the search box and the list.
- * Named after the trigger's `aria-label` unless given its own; Escape
- * closes it.
- *
- * The list template (`scComboboxListContainer`) is rendered after the
- * projected content, inside an `ngComboboxPopup` bound to the search box.
+ * The popup: the list, its empty text, and — when a trigger opens it — the
+ * search (then it is a dialog, named as its trigger, closed by Escape). As
+ * wide as its field, below it, above without room.
  */
 @Component({
   selector: 'div[scComboboxPopup]',
   imports: [ComboboxPopup, ScPortalOutlet],
-  hostDirectives: [ComboboxWidget],
   template: `
     <ng-content />
-    @if (combobox.search(); as search) {
-      <ng-template ngComboboxPopup [combobox]="search" popupType="listbox">
-        @if (listContainer(); as listContainer) {
-          <ng-container [scPortalOutlet]="listContainer" />
+    @if (root.search(); as search) {
+      <ng-template
+        ngComboboxPopup
+        [combobox]="search.combobox"
+        popupType="listbox"
+      >
+        @if (listContent(); as listContent) {
+          <ng-container [scPortalOutlet]="listContent" />
         }
       </ng-template>
     }
   `,
   host: {
     'data-slot': 'combobox-content',
-    role: 'dialog',
-    '[attr.aria-label]': 'label()',
+    '[attr.role]': 'withSearch() ? "dialog" : null',
+    '[attr.aria-label]': 'withSearch() ? label() : null',
+    '[attr.aria-labelledby]':
+      'withSearch() && !label() ? root.labelId() : null',
+    '[attr.data-side]': 'root.side()',
+    '[attr.data-empty]': 'root.rendered().length ? null : ""',
+    '[animate.enter]': 'styles.popupEnter',
+    '[animate.leave]': 'styles.popupLeave',
     '[class]': 'class()',
-    '(keydown.escape)': 'combobox.close()',
-    'animate.enter': 'animate-in fade-in-0 zoom-in-95 duration-100',
-    'animate.leave': 'animate-out fade-out-0 zoom-out-95 duration-100',
+    '(mousedown)': 'onMousedown($event)',
+    '(keydown.escape)': 'withSearch() && root.close()',
+    '(focusout)': 'onFocusout($event)',
   },
   encapsulation: ViewEncapsulation.None,
 })
 export class ScComboboxPopup {
-  protected readonly combobox = inject(SC_COMBOBOX);
+  protected readonly styles = injectPreset().combobox;
+  protected readonly root = inject(ScComboboxBase);
+  private readonly element =
+    inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
+
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly ariaLabel = input<string | undefined>(undefined, {
-    alias: 'aria-label',
-  });
+  /** Its name as a dialog: its trigger's `aria-label`, or its field's label, when not given. */
+  readonly ariaLabel = input<string | null>(null, { alias: 'aria-label' });
 
+  protected readonly listContent = contentChild(ScComboboxListContent);
+
+  /** A trigger opened it: the search is inside. */
+  protected readonly withSearch = computed(() => !this.root.field());
   protected readonly label = computed(
-    () => this.ariaLabel() || this.combobox.trigger()?.label || null,
+    () => this.ariaLabel() ?? this.root.triggerLabel(),
   );
-
-  protected readonly listContainer = contentChild(ScComboboxListContainer);
 
   protected readonly class = computed(() =>
     cn(
-      'bg-popover text-popover-foreground ring-foreground/10 relative z-50 flex max-h-72 w-full min-w-36 flex-col overflow-hidden rounded-lg shadow-md ring-1',
-      '*:data-[slot=input-group]:bg-input/30 *:data-[slot=input-group]:border-input/30 *:data-[slot=input-group]:m-1 *:data-[slot=input-group]:w-auto *:data-[slot=input-group]:mb-0 *:data-[slot=input-group]:h-8 *:data-[slot=input-group]:shadow-none',
+      this.styles.popup,
+      // The CDK overlay's size: its field's width, the room in the viewport.
+      'flex max-h-[inherit] w-full flex-col',
+      // The search inside it: within its margins (our input group is w-full).
+      '*:data-[slot=input-group]:w-auto *:data-[slot=input-group]:shrink-0',
       this.classInput(),
     ),
   );
+
+  /** Beside the input, a press in the list keeps focus in the input. */
+  protected onMousedown(event: Event): void {
+    if (!this.withSearch()) event.preventDefault();
+  }
+
+  /** With the search inside: focus gone elsewhere closes it. */
+  protected onFocusout(event: FocusEvent): void {
+    if (!this.withSearch()) return;
+    const next = event.relatedTarget as Node | null;
+    if (!next || this.element.contains(next)) return;
+    if (this.root.triggerElement()?.contains(next)) return;
+    this.root.open.set(false);
+    this.root.touch.emit();
+  }
 }

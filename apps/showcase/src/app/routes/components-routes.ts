@@ -244,12 +244,6 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/combobox/combobox-page'),
       },
       {
-        path: 'combobox-next',
-        title: 'Combobox Next - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/combobox-next/combobox-next-page'),
-      },
-      {
         path: 'command',
         title: 'Command - Semantic Components',
         loadComponent: () => import('../pages/docs/command/command-page'),

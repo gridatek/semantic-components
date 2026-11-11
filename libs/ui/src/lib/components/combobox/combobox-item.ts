@@ -2,14 +2,17 @@ import { Option } from '@angular/aria/listbox';
 import {
   Directive,
   ElementRef,
+  afterNextRender,
   computed,
   effect,
   inject,
   input,
 } from '@angular/core';
-import { cn, useActiveOption } from '../../utils';
-import { SC_COMBOBOX } from './combobox-tokens';
+import { injectPreset } from '../../config/preset';
+import { cn, setInput, useActiveOption } from '../../utils';
+import { ScComboboxBase } from './combobox-base';
 
+/** An option (Angular Aria's Option): its `value`; its label is `label`, or its text. */
 @Directive({
   selector: 'div[scComboboxItem]',
   hostDirectives: [
@@ -21,38 +24,40 @@ import { SC_COMBOBOX } from './combobox-tokens';
   host: {
     'data-slot': 'combobox-item',
     '[class]': 'class()',
-    '(pointermove)': 'onPointerMove()',
+    '(pointermove)': 'root.highlightItemOnHover() && onPointerMove()',
   },
 })
-export class ScComboboxItem {
+export class ScComboboxItem<T = unknown> {
+  private readonly styles = injectPreset().combobox;
+  protected readonly root = inject<ScComboboxBase<T>>(ScComboboxBase);
+  private readonly option = inject<Option<T>>(Option);
+  private readonly element =
+    inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
+  protected readonly onPointerMove = useActiveOption(this.option);
+
   readonly classInput = input<string>('', { alias: 'class' });
 
-  private readonly combobox = inject(SC_COMBOBOX);
-  private readonly option = inject<Option<string>>(Option);
-  protected readonly onPointerMove = useActiveOption(this.option);
-  private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+  protected readonly class = computed(() =>
+    cn(this.styles.item, this.classInput()),
+  );
 
   constructor() {
+    afterNextRender(() => {
+      if (this.option.label()) return;
+      const text = this.element.textContent?.trim();
+      if (text) setInput(this.option.label, text);
+    });
+
     effect(() => {
       const label =
-        this.option.label() ||
-        this.elementRef.nativeElement.textContent?.trim() ||
-        '';
-      this.combobox.registerLabel(this.option.value(), label);
+        this.option.label() || this.element.textContent?.trim() || '';
+      this.root.registerLabel(this.option.value(), label);
     });
 
     effect((onCleanup) => {
       const value = this.option.value();
-      this.combobox.setRendered(value, true);
-      onCleanup(() => this.combobox.setRendered(value, false));
+      this.root.setRendered(value, true);
+      onCleanup(() => this.root.setRendered(value, false));
     });
   }
-
-  protected readonly class = computed(() =>
-    cn(
-      'group transition-colors duration-100 data-[active=true]:bg-accent data-[active=true]:text-accent-foreground aria-selected:text-primary relative flex cursor-pointer items-center gap-2 rounded-md py-1 pe-8 ps-1.5 text-sm outline-none aria-disabled:pointer-events-none aria-disabled:opacity-50',
-      "[&_svg:not([class*='size-'])]:size-4",
-      this.classInput(),
-    ),
-  );
 }

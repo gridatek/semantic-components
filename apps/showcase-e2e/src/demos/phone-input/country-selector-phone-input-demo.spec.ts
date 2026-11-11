@@ -14,7 +14,7 @@ test.describe('Country Selector Phone Input Demo', () => {
   });
 
   test('picking a country updates the trigger', async ({ page }) => {
-    const trigger = page.locator('[scComboboxTrigger]');
+    const trigger = page.locator('[data-slot=combobox-trigger]');
     const flag = trigger.locator('img');
     await expect(trigger).toContainText('+1');
     await expect(flag).toHaveAttribute('src', /\/US\.svg$/);
@@ -39,7 +39,7 @@ test.describe('Country Selector Phone Input Demo', () => {
   test('a number typed without the trunk 0 is still grouped', async ({
     page,
   }) => {
-    const trigger = page.locator('[scComboboxTrigger]');
+    const trigger = page.locator('[data-slot=combobox-trigger]');
     await trigger.click();
     await type(page, 'fra');
     await page.getByRole('option', { name: /France/ }).click();
@@ -54,7 +54,7 @@ test.describe('Country Selector Phone Input Demo', () => {
   test('a typed space shows straight away where the format puts one', async ({
     page,
   }) => {
-    const trigger = page.locator('[scComboboxTrigger]');
+    const trigger = page.locator('[data-slot=combobox-trigger]');
     await trigger.click();
     await type(page, 'fra');
     await page.getByRole('option', { name: /France/ }).click();
@@ -100,10 +100,9 @@ test.describe('Country Selector Phone Input Demo', () => {
     const input = page.getByLabel('Phone number');
     await input.click();
     await type(page, '+33612345678');
-    await expect(page.locator('[scComboboxTrigger] img')).toHaveAttribute(
-      'src',
-      /\/FR\.svg$/,
-    );
+    await expect(
+      page.locator('[data-slot=combobox-trigger] img'),
+    ).toHaveAttribute('src', /\/FR\.svg$/);
     await expect(page.getByText('Value: +33612345678')).toBeVisible();
   });
 

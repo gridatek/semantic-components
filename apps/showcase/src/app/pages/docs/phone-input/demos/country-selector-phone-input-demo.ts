@@ -1,16 +1,14 @@
-import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form, required } from '@angular/forms/signals';
 import {
   ScCombobox,
   ScComboboxEmpty,
-  ScComboboxIcon,
+  ScComboboxInput,
   ScComboboxItem,
-  ScComboboxItemLabel,
   ScComboboxList,
-  ScComboboxListContainer,
+  ScComboboxListContent,
   ScComboboxPopup,
   ScComboboxPortal,
-  ScComboboxSearch,
   ScComboboxTrigger,
   ScComboboxValue,
   ScField,
@@ -36,14 +34,12 @@ import { SiChevronDownIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
     FormField,
     ScCombobox,
     ScComboboxEmpty,
-    ScComboboxIcon,
     ScComboboxItem,
-    ScComboboxItemLabel,
     ScComboboxList,
-    ScComboboxListContainer,
+    ScComboboxListContent,
     ScComboboxPopup,
     ScComboboxPortal,
-    ScComboboxSearch,
+    ScComboboxInput,
     ScComboboxTrigger,
     ScComboboxValue,
     ScField,
@@ -69,43 +65,42 @@ import { SiChevronDownIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
           defaultCountry="US"
           #phone="scPhoneInput"
         >
-          <div scCombobox scPhoneInputCountry>
-            <div scComboboxTrigger aria-label="Country">
-              <span scComboboxValue>
+          <div scCombobox scPhoneInputCountry #picker="scCombobox">
+            <button scComboboxTrigger>
+              <span class="sr-only">Country</span>
+              <span scComboboxValue class="flex items-center gap-2">
                 <img scPhoneInputFlag alt="" />
                 +{{ phone.callingCode() }}
               </span>
-              <svg scComboboxIcon siChevronDownIcon></svg>
-            </div>
+              <svg siChevronDownIcon></svg>
+            </button>
             <ng-template scComboboxPortal>
-              <div scComboboxPopup class="min-w-72">
+              <div scComboboxPopup aria-label="Country" class="min-w-72">
                 <div scInputGroup>
                   <div scInputGroupAddon align="inline-start">
                     <svg siSearchIcon></svg>
                   </div>
                   <input
                     scInput
-                    scComboboxSearch
+                    scComboboxInput
                     aria-label="Search countries"
                     placeholder="Search countries..."
-                    [(value)]="search"
                   />
                 </div>
-                <ng-template scComboboxListContainer>
-                  @if (filteredCountries().length === 0) {
-                    <div scComboboxEmpty>No countries found</div>
-                  }
-                  <div scComboboxList>
-                    @for (country of filteredCountries(); track country.code) {
+                <div scComboboxEmpty>No countries found</div>
+                <ng-template scComboboxListContent>
+                  <div scComboboxList aria-label="Countries">
+                    @for (
+                      country of matching(picker.query());
+                      track country.code
+                    ) {
                       <div
                         scComboboxItem
                         [value]="country.code"
                         [label]="country.name"
                       >
                         <img scPhoneInputFlag [country]="country.code" alt="" />
-                        <span scComboboxItemLabel>
-                          {{ country.name }} +{{ country.callingCode }}
-                        </span>
+                        {{ country.name }} +{{ country.callingCode }}
                       </div>
                     }
                   </div>
@@ -127,11 +122,11 @@ import { SiChevronDownIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class CountrySelectorPhoneInputDemo {
-  protected readonly search = signal('');
   private readonly countries = phoneCountries('en');
 
-  protected readonly filteredCountries = computed(() => {
-    const query = this.search().toLowerCase().replace(/^\+/, '');
+  /** By name, by code ("fr") or by calling code ("+33" or "33"). */
+  protected matching(text: string) {
+    const query = text.trim().toLowerCase().replace(/^\+/, '');
     if (!query) return this.countries;
     return this.countries.filter(
       (c) =>
@@ -139,7 +134,7 @@ export class CountrySelectorPhoneInputDemo {
         c.code.toLowerCase() === query ||
         c.callingCode.startsWith(query),
     );
-  });
+  }
 
   protected readonly model = signal({ phone: '' });
   protected readonly contactForm = form(this.model, (s) => {

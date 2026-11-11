@@ -13,15 +13,17 @@ import { SC_PHONE_INPUT } from './phone-input-types';
 })
 export class ScPhoneInputCountry {
   private readonly phone = inject(SC_PHONE_INPUT);
-  private readonly combobox = inject(ScCombobox);
+  private readonly combobox = inject<ScCombobox<string>>(ScCombobox);
 
   constructor() {
     bindInput(this.combobox.disabled, this.phone.disabled);
     bindInput(this.combobox.readonly, this.phone.readonly);
+    // The field's label is the number's: the picker is named by you.
+    this.combobox.namedByField.set(false);
 
     // phone → combobox
     effect(() => {
-      const country = this.phone.country() ?? '';
+      const country = this.phone.country() ?? null;
       untracked(() => {
         if (this.combobox.value() !== country) this.combobox.value.set(country);
       });
@@ -30,7 +32,7 @@ export class ScPhoneInputCountry {
     effect(() => {
       const value = this.combobox.value();
       untracked(() => {
-        const country = isSupportedCountry(value) ? value : undefined;
+        const country = value && isSupportedCountry(value) ? value : undefined;
         this.phone.selectCountry(country);
       });
     });

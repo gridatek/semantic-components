@@ -1,19 +1,26 @@
-import { Directive, computed, input } from '@angular/core';
+import { Option } from '@angular/aria/listbox';
+import { Directive, computed, inject, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 
+/** Round your check icon, in an option: shown only on a selected one. */
 @Directive({
-  selector: 'svg[scComboboxItemIndicator]',
+  selector: 'span[scComboboxItemIndicator]',
   host: {
-    '[class]': 'class()',
     'aria-hidden': 'true',
+    '[class]': 'class()',
   },
 })
 export class ScComboboxItemIndicator {
+  private readonly option = inject<Option<unknown>>(Option);
+  private readonly styles = injectPreset().combobox;
+
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
     cn(
-      'pointer-events-none absolute end-2 hidden size-4 shrink-0 group-aria-selected:block',
+      this.styles.itemIndicator,
+      !this.option.selected() && 'invisible',
       this.classInput(),
     ),
   );

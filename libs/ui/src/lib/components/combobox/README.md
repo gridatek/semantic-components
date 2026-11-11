@@ -1,175 +1,120 @@
 # Combobox
 
-A select with a search box: the trigger opens a dialog popup that holds a search input and a filtered list. Built on the `@angular/aria` "combobox with dialog popup" pattern — the trigger is a non-editable combobox whose popup is a dialog, and the search box inside it is a second (editable, always-expanded) combobox that drives the list through `aria-activedescendant`.
-
-## Features
-
-- Single tab stop on the trigger; opening moves focus into the search box, closing returns it
-- Type to filter, arrows to move, Enter or click to pick
-- ARIA-compliant (`role="combobox"` + `aria-haspopup="dialog"` trigger, `role="dialog"` popup, `role="combobox"` search, `role="listbox"` list)
-- Signal Forms control — bind `[formField]` on `scCombobox` (the selected option's value, `string`)
-- Search text resets on every open
-- Optional clear button
-- Overlay positioning with CDK, flips above when there is no room below
-- Icons are yours — every icon is an `<svg>` in your template
-
-## Components
-
-| Component                 | Selector                               | Aria Primitive               | Responsibility                                                    |
-| ------------------------- | -------------------------------------- | ---------------------------- | ----------------------------------------------------------------- |
-| `ScCombobox`              | `div[scCombobox]`                      | `ComboboxPopup` (template)   | Root; the form control (`FormValueControl<string>`), owns overlay |
-| `ScComboboxTrigger`       | `[scComboboxTrigger]`                  | `Combobox` (hostDirective)   | The focusable trigger, overlay origin                             |
-| `ScComboboxValue`         | `[scComboboxValue]`                    | —                            | Selected label, or the placeholder                                |
-| `ScComboboxIcon`          | `svg[scComboboxIcon]`                  | —                            | Icon styling in the trigger                                       |
-| `ScComboboxClear`         | `button[scComboboxClear]`              | —                            | Clears the selection; hidden while empty                          |
-| `ScComboboxPortal`        | `ng-template[scComboboxPortal]`        | —                            | Marks the lazy popup content                                      |
-| `ScComboboxPopup`         | `div[scComboboxPopup]`                 | `ComboboxWidget`             | The dialog; renders the list container after its content          |
-| `ScComboboxSearch`        | `input[scComboboxSearch]`              | `Combobox` (hostDirective)   | Search box; focused on open; `[(value)]` is the search text       |
-| `ScComboboxListContainer` | `ng-template[scComboboxListContainer]` | —                            | Marks the list template, connected to the search box              |
-| `ScComboboxList`          | `div[scComboboxList]`                  | `Listbox` + `ComboboxWidget` | The options list                                                  |
-| `ScComboboxItem`          | `div[scComboboxItem]`                  | `Option` (hostDirective)     | Option                                                            |
-| `ScComboboxItemLabel`     | `[scComboboxItemLabel]`                | —                            | Label text inside an item                                         |
-| `ScComboboxItemIndicator` | `svg[scComboboxItemIndicator]`         | —                            | Check icon on the selected option                                 |
-| `ScComboboxEmpty`         | `div[scComboboxEmpty]`                 | —                            | Empty state when nothing matches                                  |
+A select to filter: an input over a list of options, one or several of which are its value — never free text (that is an autocomplete). Base UI's Combobox, on Angular Aria's Combobox and Listbox, in the look of the app's preset (the `combobox` key). Built beside [Combobox](../combobox/README.md), to compare.
 
 ## Usage
 
-```html
-<div scCombobox class="w-60" [formField]="countryForm.country" placeholder="Select a country...">
-  <div scComboboxTrigger aria-label="Country">
-    <span scComboboxValue></span>
-    <svg scComboboxIcon siChevronsUpDownIcon></svg>
-  </div>
-  <button scComboboxClear><svg siXIcon></svg><span class="sr-only">Clear selection</span></button>
+The input is the field, in our input group; the popup hangs from it.
 
+```html
+<div scCombobox #cb="scCombobox" [formField]="form.framework" class="w-56">
+  <div scInputGroup>
+    <input scInput scComboboxInput placeholder="Select a framework" aria-label="Framework" />
+    <div scInputGroupAddon align="inline-end">
+      <button scComboboxTrigger><svg siChevronDownIcon></svg><span class="sr-only">Show the list</span></button>
+      <button scComboboxClear><svg siXIcon></svg><span class="sr-only">Clear</span></button>
+    </div>
+  </div>
   <ng-template scComboboxPortal>
     <div scComboboxPopup>
-      <div scInputGroup>
-        <div scInputGroupAddon align="inline-start"><svg siSearchIcon></svg></div>
-        <input scInput scComboboxSearch aria-label="Search countries" placeholder="Search..." [(value)]="search" />
-      </div>
-      <ng-template scComboboxListContainer>
-        @if (options().length === 0) {
-        <div scComboboxEmpty>No results found</div>
-        }
-        <div scComboboxList>
-          @for (option of options(); track option.value) {
-          <div scComboboxItem [value]="option.value" [label]="option.label">
-            <span scComboboxItemLabel>{{ option.label }}</span>
-            <svg siCheckIcon scComboboxItemIndicator></svg>
-          </div>
-          }
+      <div scComboboxEmpty>No items found.</div>
+      <div scComboboxList aria-label="Frameworks">
+        @for (framework of matching(cb.query()); track framework) {
+        <div scComboboxItem [value]="framework">
+          {{ framework }}
+          <span scComboboxItemIndicator><svg siCheckIcon></svg></span>
         </div>
-      </ng-template>
+        }
+      </div>
     </div>
   </ng-template>
 </div>
 ```
 
-```typescript
-readonly countryForm = form(signal({ country: '' }));
-readonly search = signal('');
-readonly options = computed(() =>
-  ALL_COUNTRIES.filter((c) => c.label.toLowerCase().startsWith(this.search().toLowerCase())),
-);
+```ts
+protected matching(query: string): string[] {
+  return this.frameworks.filter((name) => scComboboxMatches(name, query));
+}
 ```
 
-Filtering is yours: derive the options from the search text. Without Signal Forms, use `[(value)]` on `scCombobox`.
+## Filtering is yours
 
-### Rules
+Angular Aria's listbox moves through every option it is given, so the options you render are the list: filter them by `query()`, the text typed since the list opened (empty until then — a list opened on a selected value shows them all). `scComboboxMatches(text, query)` is a match with accents and case ignored. A group with no match, your `@for` leaves out; with no option rendered, the popup shows your `scComboboxEmpty`. For a server search, the options are its results (the Async search example).
 
-- `scComboboxSearch` must come **before** `scComboboxListContainer` inside the popup — the list is wired to it.
-- Put `scComboboxClear` next to the trigger, **not inside it** (a button inside a combobox is invalid nesting). It positions itself over the trigger's end; the trigger reserves the space.
-- The popup is named after the trigger's `aria-label`. Give `scComboboxPopup` its own `aria-label` to override.
+## Three layouts
 
-### Custom value rendering
+- **The input is the field** (above): `input scInput scComboboxInput` in a `scInputGroup`, the trigger (a chevron) and the clear button at its end.
+- **Several values**: `<div scCombobox multiple [(value)]="values">`, with `scComboboxChips` holding a `scComboboxChip` (and its `scComboboxChipRemove`) for each value, then the `scComboboxInput`. Picking adds or removes and keeps the list open.
+- **A trigger, the search inside the popup**: `button scComboboxTrigger` holding a `scComboboxValue` — with no input beside it, the trigger takes the field's look by itself (outline, as wide as the combobox); in the popup, the input, then the list in an `ng-template scComboboxListContent` — Angular Aria renders a combobox's list from a template, and here that combobox is the search beside it. In a `scField`, the label names the trigger (with the value it shows) and the popup, and a click on it focuses the trigger. Without a field, name them yourself: `aria-labelledby="label-id value-id"` on the trigger (an `aria-label` alone leaves the text it shows out of its name), `aria-label` on the popup.
 
-Project content into `ScComboboxValue` to render the selection yourself (shown only when something is selected):
+  ```html
+  <div scField>
+    <label scLabel>Country</label>
+    <div scCombobox #cb="scCombobox" [(value)]="country" class="w-full">
+      <button scComboboxTrigger>
+        <span scComboboxValue placeholder="Select a country"></span>
+        <svg siChevronDownIcon></svg>
+      </button>
+      <ng-template scComboboxPortal>
+        <div scComboboxPopup>
+          <div scInputGroup><input scInput scComboboxInput placeholder="Search" aria-label="Search countries" /></div>
+          <div scComboboxEmpty>No items found.</div>
+          <ng-template scComboboxListContent>
+            <div scComboboxList aria-label="Countries">…</div>
+          </ng-template>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+  ```
 
-```html
-<span scComboboxValue>@if (selectedCountry(); as c) { {{ c.code }} {{ c.dialCode }} }</span>
-```
+## Parts
 
-> The popup is rendered lazily, so an option's label is only known after the list has been opened once. Until then the default `ScComboboxValue` shows the raw value — pass `[displayWith]="labelFor"` (a `(value: string) => string | undefined` function) or project content if an initial value must show its label.
+| Part                                           | Selector                                 | What it does                                                                                                                                                                                                                                                                    |
+| ---------------------------------------------- | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ScCombobox`                                   | `div[scCombobox]`                        | One value, `T \| null`: `[formField]` or `[(value)]`. `[(inputValue)]`, `[(open)]`, `itemToStringLabel`, `isItemEqualToValue`, `autoHighlight`, `highlightItemOnHover`, `loopFocus`, `openOnInputClick`. exportAs: `query()`, `selectedLabel()`, `show()`, `close()`, `clear()` |
+| `ScComboboxMultiple`                           | `div[scCombobox][multiple]`              | Several values, `T[]`; the same inputs                                                                                                                                                                                                                                          |
+| `ScComboboxInput`                              | `input[scComboboxInput]`                 | The input (Aria's Combobox): the field, the chips' input, or the search inside the popup — it reads where it is                                                                                                                                                                 |
+| `ScComboboxTrigger`                            | `button[scComboboxTrigger]`              | Opens and closes: the preset's button (`variant`, `size`; ghost, icon-xs). Beside the input, not a tab stop; alone, the field                                                                                                                                                   |
+| `ScComboboxValue`                              | `span[scComboboxValue]`                  | In a trigger: the value's label, or its `placeholder`                                                                                                                                                                                                                           |
+| `ScComboboxClear`                              | `button[scComboboxClear]`                | Clears the value; shown only with a value, in the trigger's place                                                                                                                                                                                                               |
+| `ScComboboxChips`, `…Chip`, `…ChipRemove`      | `div[…]`, `span[…]`, `button[…]`         | The field of several values; a chip (`value`); its remove button                                                                                                                                                                                                                |
+| `ScComboboxPortal`, `ScComboboxPopup`          | `ng-template[…]`, `div[scComboboxPopup]` | The popup, rendered while open: its field's width, below it (above without room); `data-empty` with no option                                                                                                                                                                   |
+| `ScComboboxListContent`                        | `ng-template[scComboboxListContent]`     | Round the list, only when the search is inside the popup                                                                                                                                                                                                                        |
+| `ScComboboxList`                               | `div[scComboboxList]`                    | The options (Aria's Listbox); its scrollbar shown (`hideScrollbar` hides it). Name it                                                                                                                                                                                           |
+| `ScComboboxItem`, `ScComboboxItemIndicator`    | `div[scComboboxItem]`, `span[…]`         | An option (Aria's Option): `value`, `label`, `disabled`; the check on a selected one                                                                                                                                                                                            |
+| `ScComboboxGroup`, `…GroupLabel`, `…Separator` | `div[…]`                                 | A named group; a line between groups                                                                                                                                                                                                                                            |
+| `ScComboboxEmpty`, `ScComboboxStatus`          | `div[…]`                                 | Your text with no option; a text read out, not shown                                                                                                                                                                                                                            |
+| `scComboboxMatches`                            | function                                 | `(text, query) => boolean`                                                                                                                                                                                                                                                      |
+
+## A value's label
+
+The options' texts are only known once the list has opened. `itemToStringLabel` (a function from a value to its label) gives the label before — and is how an object value is shown (the Custom items example). Without it, a string value shows as itself.
+
+## Keyboard
+
+| Where                   | Key                 | Does                                                                              |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------- |
+| Input                   | typing              | Opens the list; the text is `query()`                                             |
+| Input                   | ↓                   | Opens the list; then ↓ / ↑ move the highlight (round, `loopFocus`)                |
+| Input, open             | Home / End          | The first / last option (Angular Aria's; not the caret)                           |
+| Input, open             | Enter               | Picks the highlighted option                                                      |
+| Input, open             | Escape              | Closes; the input shows the value again                                           |
+| Input, emptied          |                     | One value: cleared                                                                |
+| Chips' input, empty     | Backspace           | Removes the last chip                                                             |
+| Chips' input, at start  | ← (→ right to left) | To the last chip's remove button; ← / → between them, Backspace or Delete removes |
+| Trigger (search inside) | Enter, Space, ↓     | Opens the popup, focus in the search; Escape or a pick, back on it                |
 
 ## Signal Forms
 
-`ScCombobox` implements `FormValueControl<string>`. Declare constraints in the `form()` schema:
+`[formField]` on the root: `required` (`aria-required`), invalid once touched (`aria-invalid`, on the input or the trigger), `disabled`. Touched when focus leaves the input (or the popup a trigger opened). In a `scField`, the label names the input and the errors are read with it.
 
-```typescript
-readonly countryForm = form(this.model, (p) => {
-  required(p.country);
-});
-```
+## Angular Aria
 
-`required` → `aria-required`, `invalid` (once touched) → `aria-invalid`, `disabled` → `aria-disabled` on the trigger. The control is marked touched when focus leaves the trigger.
+- **Keys pressed in one frame**: Aria relays them to the list once per render, so several arrow keys within a frame move the highlight once (checked on 22.2.6). Typing is not affected.
+- **Home and End** go to the list while it is open (Base UI leaves them to the caret).
+- **The list template** in the search-inside layout (above).
 
-## Keyboard Navigation
+## Left out
 
-| Where   | Key                       | Action                                         |
-| ------- | ------------------------- | ---------------------------------------------- |
-| Trigger | `Enter` / `Space` / `↓`   | Open; focus moves to the search box            |
-| Search  | Printable characters      | Edit the search text                           |
-| Search  | `ArrowDown` / `ArrowUp`   | Move the active option                         |
-| Search  | `Enter`                   | Pick the active option, close, refocus trigger |
-| Search  | `Escape`                  | Close, refocus the trigger                     |
-| Popup   | `Tab` out / click outside | Close                                          |
-
-The highlighted option follows the pointer too, so keyboard and mouse share one highlight.
-
-## API Reference
-
-### ScCombobox
-
-| Member            | Type                               | Description                                                                     |
-| ----------------- | ---------------------------------- | ------------------------------------------------------------------------------- |
-| `value`           | `model<string>`                    | Selected option value (`''` when none)                                          |
-| `placeholder`     | `input<string>`                    | Shown by `ScComboboxValue` when nothing selected                                |
-| `displayWith`     | `input<(value: string) => string>` | Label for a value, used before options render (return `undefined` to fall back) |
-| `disabled`        | `input<boolean>`                   | Disables the combobox                                                           |
-| `readonly`        | `input<boolean>`                   | Prevents opening/changing                                                       |
-| `required`        | `input<boolean>`                   | Sets `aria-required` on the trigger                                             |
-| `invalid`         | `input<boolean>`                   | Sets `aria-invalid` on the trigger                                              |
-| `touch`           | `output<void>`                     | Emitted when focus leaves the trigger                                           |
-| `open()`          | `Signal<boolean>`                  | Whether the popup is open                                                       |
-| `selectedLabel()` | `Signal<string>`                   | Label of the selected option (or its value)                                     |
-| `select(value)`   | `void`                             | Select a value, close, refocus the trigger                                      |
-| `clear()`         | `void`                             | Clear the selection, focus the trigger                                          |
-| `close()`         | `void`                             | Close and refocus the trigger                                                   |
-| `focus()`         | `void`                             | Focus the trigger                                                               |
-
-### ScComboboxSearch
-
-| Property | Type            | Description                                  |
-| -------- | --------------- | -------------------------------------------- |
-| `value`  | `model<string>` | The search text; reset to `''` on every open |
-
-### ScComboboxItem
-
-| Property   | Type      | Description                                            |
-| ---------- | --------- | ------------------------------------------------------ |
-| `value`    | `string`  | The option's value                                     |
-| `label`    | `string`  | Label shown in the trigger (defaults to the item text) |
-| `disabled` | `boolean` | Disables the option                                    |
-
-All parts accept a `class` input.
-
-## Architecture
-
-```
-ScCombobox (form control, provides SC_COMBOBOX; ngComboboxPopup popupType="dialog" + CDK overlay)
-├── ScComboboxTrigger (Combobox, role=combobox, aria-haspopup=dialog) → ScComboboxValue, ScComboboxIcon
-├── ScComboboxClear
-└── ScComboboxPortal (rendered inside the dialog popup via ScPortalOutlet)
-    └── ScComboboxPopup (ComboboxWidget, role=dialog)
-        ├── ScComboboxSearch (inner Combobox, alwaysExpanded; registers itself on SC_COMBOBOX)
-        └── ScComboboxListContainer (rendered by the popup inside ngComboboxPopup [combobox]=search)
-            ├── ScComboboxEmpty
-            └── ScComboboxList (Listbox + ComboboxWidget) → ScComboboxItem (Option)
-```
-
-`ScComboboxListContainer` is a plain template marker rather than a host for `ComboboxPopup`: Angular forces a host directive's required inputs (`ComboboxPopup.combobox`) to be re-exposed, which would make consumers bind it by hand ([angular/angular#50510](https://github.com/angular/angular/issues/50510)).
-
-## Known issue
-
-`@angular/aria` 22.2.1 forwards navigation keys from a combobox to its list once per render (`Combobox` relays through an `afterRenderEffect`). Keys arriving within the same frame are coalesced and only the last one is applied. Normal typing is unaffected.
+Virtualization, a grid, `limit`, `modal`, an inline list; Base UI's Creatable example (app code); its Arrow, Backdrop, Positioner, Collection and Row parts (the CDK and `@for`); its Label part (`scLabel`, a field).

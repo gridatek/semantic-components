@@ -1,51 +1,50 @@
-import { Directive, computed, inject, input } from '@angular/core';
+import { Directive, computed, effect, inject, input } from '@angular/core';
 import { injectPreset } from '../../config/preset';
-import { cn } from '../../utils';
+import { cn, ɵwarnIfUnnamed } from '../../utils';
 import { type ScButtonVariants } from '../button/button';
-import { SC_COMBOBOX } from './combobox-tokens';
+import { ScComboboxBase } from './combobox-base';
 
 /**
- * Clears the selection. Place it next to (not inside) the trigger — it sits
- * over the trigger's end. Hidden while nothing is selected. Project the icon
- * and give the button an accessible name:
- *
- * ```html
- * <button scComboboxClear>
- *   <svg siXIcon></svg>
- *   <span class="sr-only">Clear</span>
- * </button>
- * ```
+ * Clears the value: the preset's button (ghost, icon-xs), beside the trigger
+ * at the input's end — shown only while there is a value, in the trigger's
+ * place. Write its icon and name it. Not a tab stop: emptying the input
+ * clears the value too.
  */
 @Directive({
   selector: 'button[scComboboxClear]',
   host: {
     'data-slot': 'combobox-clear',
     type: 'button',
-    '[hidden]': '!visible()',
+    tabindex: '-1',
+    '[attr.hidden]': 'visible() ? null : ""',
     '[class]': 'class()',
-    '(click)': 'combobox.clear()',
+    '(mousedown)': '$event.preventDefault()',
+    '(click)': 'root.clear()',
   },
 })
 export class ScComboboxClear {
-  private readonly buttonStyles = injectPreset().button;
+  private readonly preset = injectPreset();
+  protected readonly root = inject(ScComboboxBase);
 
-  protected readonly combobox = inject(SC_COMBOBOX);
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('ghost');
   readonly size = input<ScButtonVariants['size']>('icon-xs');
 
-  readonly visible = computed(
+  protected readonly visible = computed(
     () =>
-      this.combobox.hasValue() &&
-      !this.combobox.disabled() &&
-      !this.combobox.readonly(),
+      this.root.hasValue() && !this.root.disabled() && !this.root.readonly(),
   );
 
   protected readonly class = computed(() =>
     cn(
-      this.buttonStyles({ variant: this.variant(), size: this.size() }),
-      'absolute end-7 top-1/2 size-5 -translate-y-1/2 text-muted-foreground',
+      this.preset.button({ variant: this.variant(), size: this.size() }),
+      this.preset.inputGroupButton({ size: 'icon-xs' }),
       this.classInput(),
     ),
   );
+
+  constructor() {
+    ɵwarnIfUnnamed('scComboboxClear');
+    effect(() => this.root.clearVisible.set(this.visible()));
+  }
 }

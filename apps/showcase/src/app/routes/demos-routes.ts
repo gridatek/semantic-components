@@ -1350,109 +1350,97 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/combobox-next',
-    children: [
-      {
-        path: 'combobox-next-usage-demo',
-        loadComponent: () =>
-          import('../pages/docs/combobox-next/demos/combobox-next-usage-demo').then(
-            (m) => m.ComboboxNextUsageDemo,
-          ),
-      },
-      {
-        path: 'multiple-combobox-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/combobox-next/demos/multiple-combobox-next-demo').then(
-            (m) => m.MultipleComboboxNextDemo,
-          ),
-      },
-      {
-        path: 'clear-combobox-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/combobox-next/demos/clear-combobox-next-demo').then(
-            (m) => m.ClearComboboxNextDemo,
-          ),
-      },
-      {
-        path: 'groups-combobox-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/combobox-next/demos/groups-combobox-next-demo').then(
-            (m) => m.GroupsComboboxNextDemo,
-          ),
-      },
-      {
-        path: 'custom-combobox-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/combobox-next/demos/custom-combobox-next-demo').then(
-            (m) => m.CustomComboboxNextDemo,
-          ),
-      },
-      {
-        path: 'invalid-combobox-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/combobox-next/demos/invalid-combobox-next-demo').then(
-            (m) => m.InvalidComboboxNextDemo,
-          ),
-      },
-      {
-        path: 'disabled-combobox-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/combobox-next/demos/disabled-combobox-next-demo').then(
-            (m) => m.DisabledComboboxNextDemo,
-          ),
-      },
-      {
-        path: 'auto-highlight-combobox-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/combobox-next/demos/auto-highlight-combobox-next-demo').then(
-            (m) => m.AutoHighlightComboboxNextDemo,
-          ),
-      },
-      {
-        path: 'popup-combobox-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/combobox-next/demos/popup-combobox-next-demo').then(
-            (m) => m.PopupComboboxNextDemo,
-          ),
-      },
-      {
-        path: 'input-group-combobox-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/combobox-next/demos/input-group-combobox-next-demo').then(
-            (m) => m.InputGroupComboboxNextDemo,
-          ),
-      },
-      {
-        path: 'form-combobox-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/combobox-next/demos/form-combobox-next-demo').then(
-            (m) => m.FormComboboxNextDemo,
-          ),
-      },
-      {
-        path: 'async-combobox-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/combobox-next/demos/async-combobox-next-demo').then(
-            (m) => m.AsyncComboboxNextDemo,
-          ),
-      },
-      {
-        path: 'rtl-combobox-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/combobox-next/demos/rtl-combobox-next-demo').then(
-            (m) => m.RtlComboboxNextDemo,
-          ),
-      },
-    ],
-  },
-  {
     path: 'demos/combobox',
     children: [
       {
-        path: 'combobox-demo',
+        path: 'combobox-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/combobox/demos/combobox-demo').then(
-            (m) => m.ComboboxDemo,
+          import('../pages/docs/combobox/demos/combobox-usage-demo').then(
+            (m) => m.ComboboxUsageDemo,
+          ),
+      },
+      {
+        path: 'multiple-combobox-demo',
+        loadComponent: () =>
+          import('../pages/docs/combobox/demos/multiple-combobox-demo').then(
+            (m) => m.MultipleComboboxDemo,
+          ),
+      },
+      {
+        path: 'clear-combobox-demo',
+        loadComponent: () =>
+          import('../pages/docs/combobox/demos/clear-combobox-demo').then(
+            (m) => m.ClearComboboxDemo,
+          ),
+      },
+      {
+        path: 'groups-combobox-demo',
+        loadComponent: () =>
+          import('../pages/docs/combobox/demos/groups-combobox-demo').then(
+            (m) => m.GroupsComboboxDemo,
+          ),
+      },
+      {
+        path: 'custom-combobox-demo',
+        loadComponent: () =>
+          import('../pages/docs/combobox/demos/custom-combobox-demo').then(
+            (m) => m.CustomComboboxDemo,
+          ),
+      },
+      {
+        path: 'invalid-combobox-demo',
+        loadComponent: () =>
+          import('../pages/docs/combobox/demos/invalid-combobox-demo').then(
+            (m) => m.InvalidComboboxDemo,
+          ),
+      },
+      {
+        path: 'disabled-combobox-demo',
+        loadComponent: () =>
+          import('../pages/docs/combobox/demos/disabled-combobox-demo').then(
+            (m) => m.DisabledComboboxDemo,
+          ),
+      },
+      {
+        path: 'auto-highlight-combobox-demo',
+        loadComponent: () =>
+          import('../pages/docs/combobox/demos/auto-highlight-combobox-demo').then(
+            (m) => m.AutoHighlightComboboxDemo,
+          ),
+      },
+      {
+        path: 'popup-combobox-demo',
+        loadComponent: () =>
+          import('../pages/docs/combobox/demos/popup-combobox-demo').then(
+            (m) => m.PopupComboboxDemo,
+          ),
+      },
+      {
+        path: 'input-group-combobox-demo',
+        loadComponent: () =>
+          import('../pages/docs/combobox/demos/input-group-combobox-demo').then(
+            (m) => m.InputGroupComboboxDemo,
+          ),
+      },
+      {
+        path: 'form-combobox-demo',
+        loadComponent: () =>
+          import('../pages/docs/combobox/demos/form-combobox-demo').then(
+            (m) => m.FormComboboxDemo,
+          ),
+      },
+      {
+        path: 'async-combobox-demo',
+        loadComponent: () =>
+          import('../pages/docs/combobox/demos/async-combobox-demo').then(
+            (m) => m.AsyncComboboxDemo,
+          ),
+      },
+      {
+        path: 'rtl-combobox-demo',
+        loadComponent: () =>
+          import('../pages/docs/combobox/demos/rtl-combobox-demo').then(
+            (m) => m.RtlComboboxDemo,
           ),
       },
     ],
