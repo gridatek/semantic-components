@@ -38,19 +38,30 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     SiChevronDownIcon,
   ],
   template: `
-    <div scComboboxNext #cb="scComboboxNext" [(value)]="country" class="w-64">
+    <div
+      scComboboxNext
+      #cb="scComboboxNext"
+      [(value)]="country"
+      class="flex w-64 flex-col gap-2"
+    >
+      <span id="country-label" class="text-sm font-medium">Country</span>
+      <!-- Named by its label and its value: the text it shows is in its name. -->
       <button
         scComboboxNextTrigger
         variant="outline"
         size="default"
-        aria-label="Country"
+        aria-labelledby="country-label country-value"
         class="w-full justify-between font-normal"
       >
-        <span scComboboxNextValue placeholder="Select a country"></span>
+        <span
+          scComboboxNextValue
+          id="country-value"
+          placeholder="Select a country"
+        ></span>
         <svg siChevronDownIcon></svg>
       </button>
       <ng-template scComboboxNextPortal>
-        <div scComboboxNextPopup>
+        <div scComboboxNextPopup aria-label="Country">
           <div scInputGroup>
             <input
               scInput

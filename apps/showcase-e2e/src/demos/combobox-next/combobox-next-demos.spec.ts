@@ -235,7 +235,7 @@ test('Popup: a trigger opens a dialog with the search; a pick closes it, focus b
   page,
 }) => {
   await page.goto(demo('popup'));
-  const trigger = page.getByRole('button', { name: 'Country' });
+  const trigger = page.getByRole('button', { name: /^Country/ });
   await expect(trigger).toHaveText(/Algeria/);
   await expect(trigger).toHaveAttribute('aria-haspopup', 'dialog');
   await trigger.click();
@@ -243,12 +243,16 @@ test('Popup: a trigger opens a dialog with the search; a pick closes it, focus b
   await expect(dialog).toBeVisible();
   const search = page.getByRole('combobox', { name: 'Search countries' });
   await expect(search).toBeFocused();
-  // The search inside the popup's edges.
-  const [d, s] = [
-    await box(dialog),
-    await box(dialog.locator('[data-slot=input-group]')),
-  ];
-  expect(s.x + s.width).toBeLessThanOrEqual(d.x + d.width);
+  // The search inside the popup's edges (once it has zoomed in).
+  await expect
+    .poll(async () => {
+      const [d, s] = [
+        await box(dialog),
+        await box(dialog.locator('[data-slot=input-group]')),
+      ];
+      return d.x + d.width - (s.x + s.width);
+    })
+    .toBeGreaterThan(0);
 
   await page.keyboard.type('fr');
   await expect(options(page)).toHaveText([/France/]);
@@ -263,7 +267,7 @@ test('Popup: Down opens it with an empty search; Escape and a click outside clos
   page,
 }) => {
   await page.goto(demo('popup'));
-  const trigger = page.getByRole('button', { name: 'Country' });
+  const trigger = page.getByRole('button', { name: /^Country/ });
   await trigger.focus();
   await page.keyboard.press('ArrowDown');
   const search = page.getByRole('combobox', { name: 'Search countries' });
