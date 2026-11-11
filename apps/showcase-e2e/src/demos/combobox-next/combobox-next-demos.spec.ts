@@ -237,6 +237,10 @@ test('Popup: a trigger opens a dialog with the search; a pick closes it, focus b
   await page.goto(demo('popup'));
   const trigger = page.getByRole('button', { name: /^Country/ });
   await expect(trigger).toHaveText(/Algeria/);
+  // Named by the field's label and the value it shows; the label focuses it.
+  await expect(trigger).toHaveAccessibleName('Country Algeria');
+  await page.getByText('Country', { exact: true }).click();
+  await expect(trigger).toBeFocused();
   await expect(trigger).toHaveAttribute('aria-haspopup', 'dialog');
   await trigger.click();
   const dialog = page.getByRole('dialog', { name: 'Country' });

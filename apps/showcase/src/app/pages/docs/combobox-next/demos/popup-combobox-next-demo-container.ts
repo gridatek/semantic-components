@@ -26,18 +26,20 @@ import {
   ScComboboxNextItem,
   ScComboboxNextItemIndicator,
   ScComboboxNextList,
-  ScComboboxNextListContainer,
+  ScComboboxNextListContent,
   ScComboboxNextPopup,
   ScComboboxNextPortal,
   ScComboboxNextTrigger,
   ScComboboxNextValue,
+  ScField,
   ScInput,
   ScInputGroup,
+  ScLabel,
   scComboboxNextMatches,
 } from '@semantic-components/ui';
 import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
-/** A trigger showing the value, the search inside the popup: the list goes in a scComboboxNextListContainer template. */
+/** A trigger showing the value, the search inside the popup (the list in a scComboboxNextListContent template). In a field, the label names the trigger and the popup. */
 @Component({
   selector: 'app-popup-combobox-next-demo',
   imports: [
@@ -47,64 +49,57 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     ScComboboxNextItem,
     ScComboboxNextItemIndicator,
     ScComboboxNextList,
-    ScComboboxNextListContainer,
+    ScComboboxNextListContent,
     ScComboboxNextPopup,
     ScComboboxNextPortal,
     ScComboboxNextTrigger,
     ScComboboxNextValue,
+    ScField,
     ScInput,
     ScInputGroup,
+    ScLabel,
     SiCheckIcon,
     SiChevronDownIcon,
   ],
   template: \`
-    <div
-      scComboboxNext
-      #cb="scComboboxNext"
-      [(value)]="country"
-      class="flex w-64 flex-col gap-2"
-    >
-      <span id="country-label" class="text-sm font-medium">Country</span>
-      <!-- Named by its label and its value: the text it shows is in its name. -->
-      <button
-        scComboboxNextTrigger
-        variant="outline"
-        size="default"
-        aria-labelledby="country-label country-value"
-        class="w-full justify-between font-normal"
+    <div scField class="w-64">
+      <label scLabel>Country</label>
+      <div
+        scComboboxNext
+        #cb="scComboboxNext"
+        [(value)]="country"
+        class="w-full"
       >
-        <span
-          scComboboxNextValue
-          id="country-value"
-          placeholder="Select a country"
-        ></span>
-        <svg siChevronDownIcon></svg>
-      </button>
-      <ng-template scComboboxNextPortal>
-        <div scComboboxNextPopup aria-label="Country">
-          <div scInputGroup>
-            <input
-              scInput
-              scComboboxNextInput
-              placeholder="Search"
-              aria-label="Search countries"
-            />
-          </div>
-          <div scComboboxNextEmpty>No items found.</div>
-          <ng-template scComboboxNextListContainer>
-            <div scComboboxNextList aria-label="Countries">
-              @for (name of matching(cb.query()); track name) {
-                <div scComboboxNextItem [value]="name">
-                  {{ name }}
-                  <span scComboboxNextItemIndicator
-                    ><svg siCheckIcon></svg
-                  ></span>
-                </div>
-              }
+        <button scComboboxNextTrigger>
+          <span scComboboxNextValue placeholder="Select a country"></span>
+          <svg siChevronDownIcon></svg>
+        </button>
+        <ng-template scComboboxNextPortal>
+          <div scComboboxNextPopup>
+            <div scInputGroup>
+              <input
+                scInput
+                scComboboxNextInput
+                placeholder="Search"
+                aria-label="Search countries"
+              />
             </div>
-          </ng-template>
-        </div>
-      </ng-template>
+            <div scComboboxNextEmpty>No items found.</div>
+            <ng-template scComboboxNextListContent>
+              <div scComboboxNextList aria-label="Countries">
+                @for (name of matching(cb.query()); track name) {
+                  <div scComboboxNextItem [value]="name">
+                    {{ name }}
+                    <span scComboboxNextItemIndicator
+                      ><svg siCheckIcon></svg
+                    ></span>
+                  </div>
+                }
+              </div>
+            </ng-template>
+          </div>
+        </ng-template>
+      </div>
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },

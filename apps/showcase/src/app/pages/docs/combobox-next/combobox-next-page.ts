@@ -85,9 +85,11 @@ import { RtlComboboxNextDemoContainer } from './demos/rtl-combobox-next-demo-con
         </p>
         <app-anatomy [imports]="chips.imports" [markup]="chips.markup" />
         <p class="text-muted-foreground">
-          A trigger showing the value, the search inside the popup: Angular Aria
-          renders a combobox&apos;s list from a template, so the list goes in a
-          list container beside the search.
+          A trigger showing the value, the search inside the popup: the trigger
+          takes the field&apos;s look by itself, and in a field its label names
+          it and the popup. Angular Aria renders a combobox&apos;s list from a
+          template, so the list goes in a list content template beside the
+          search.
         </p>
         <app-anatomy [imports]="inside.imports" [markup]="inside.markup" />
       </section>
@@ -115,9 +117,12 @@ import { RtlComboboxNextDemoContainer } from './demos/rtl-combobox-next-demo-con
             opens with Down and clears by emptying the input.
           </li>
           <li>
-            With the search inside the popup, the trigger opens a dialog named
-            as it; focus goes to the search, and back to the trigger on Escape
-            or a pick.
+            With the search inside the popup, the trigger opens a dialog; focus
+            goes to the search, and back to the trigger on Escape or a pick. In
+            a field, the trigger is named by the label and the value it shows,
+            the dialog by the label; without one, name them (aria-labelledby
+            with the value&apos;s id on the trigger: an aria-label alone leaves
+            its text out of its name).
           </li>
           <li>
             Invalid once touched (aria-invalid on the input, or the trigger),
@@ -249,22 +254,25 @@ export default class ComboboxNextPage {
 
   protected readonly inside = {
     imports:
-      "import { ScComboboxNextValue, ScComboboxNextListContainer } from '@semantic-components/ui';",
+      "import { ScComboboxNextValue, ScComboboxNextListContent } from '@semantic-components/ui';",
     markup: [
-      '<div scComboboxNext #cb="scComboboxNext">',
-      '  <button scComboboxNextTrigger variant="outline" size="default" aria-label="…">',
-      '    <span scComboboxNextValue placeholder="…"></span>',
-      '    …',
-      '  </button>',
-      '  <ng-template scComboboxNextPortal>',
-      '    <div scComboboxNextPopup>',
-      '      <div scInputGroup><input scInput scComboboxNextInput aria-label="…" /></div>',
-      '      <div scComboboxNextEmpty>…</div>',
-      '      <ng-template scComboboxNextListContainer>',
-      '        <div scComboboxNextList aria-label="…">…</div>',
-      '      </ng-template>',
-      '    </div>',
-      '  </ng-template>',
+      '<div scField>',
+      '  <label scLabel>…</label>',
+      '  <div scComboboxNext #cb="scComboboxNext">',
+      '    <button scComboboxNextTrigger>',
+      '      <span scComboboxNextValue placeholder="…"></span>',
+      '      …',
+      '    </button>',
+      '    <ng-template scComboboxNextPortal>',
+      '      <div scComboboxNextPopup>',
+      '        <div scInputGroup><input scInput scComboboxNextInput aria-label="…" /></div>',
+      '        <div scComboboxNextEmpty>…</div>',
+      '        <ng-template scComboboxNextListContent>',
+      '          <div scComboboxNextList aria-label="…">…</div>',
+      '        </ng-template>',
+      '      </div>',
+      '    </ng-template>',
+      '  </div>',
       '</div>',
     ].join('\n'),
   };
@@ -292,7 +300,7 @@ export default class ComboboxNextPage {
       name: 'ScComboboxNextTrigger',
       selector: 'button[scComboboxNextTrigger]',
       description:
-        "Opens and closes the list: the preset's button (ghost, icon-xs; variant, size). Beside the input, the chevron — not a tab stop. With no input in the field, the field itself (variant outline), holding a scComboboxNextValue.",
+        "Opens and closes the list: the preset's button (variant, size). Beside the input, the chevron (ghost, icon-xs) — not a tab stop. With no input in the field, the field itself (outline, as wide as the combobox), holding a scComboboxNextValue; in a scField, named by its label and its value.",
     },
     {
       name: 'ScComboboxNextValue',
@@ -316,12 +324,13 @@ export default class ComboboxNextPage {
       name: 'ScComboboxNextPortal, ScComboboxNextPopup',
       selector: 'ng-template[…], div[scComboboxNextPopup]',
       description:
-        'The popup, rendered while open: as wide as its field, below it (above without room). data-empty while no option is rendered. With the search inside, a dialog named as its trigger (or its aria-label).',
+        "The popup, rendered while open: as wide as its field, below it (above without room). data-empty while no option is rendered. With the search inside, a dialog named by the field's label (or its aria-label).",
     },
     {
-      name: 'ScComboboxNextListContainer',
-      selector: 'ng-template[scComboboxNextListContainer]',
-      description: 'Round the list, only when the search is inside the popup.',
+      name: 'ScComboboxNextListContent',
+      selector: 'ng-template[scComboboxNextListContent]',
+      description:
+        'The list, rendered by the search beside it: only when the search is inside the popup.',
     },
     {
       name: 'ScComboboxNextList',

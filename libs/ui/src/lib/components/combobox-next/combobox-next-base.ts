@@ -10,6 +10,7 @@ import {
   booleanAttribute,
   computed,
   effect,
+  inject,
   input,
   model,
   output,
@@ -17,6 +18,7 @@ import {
   untracked,
 } from '@angular/core';
 import { cn } from '../../utils';
+import { SC_FIELD } from '../field';
 
 /** What the root needs of its input: the Aria combobox on it, and its element. */
 export interface ScComboboxNextInputRef {
@@ -138,6 +140,19 @@ export abstract class ScComboboxNextBase<T = unknown> {
   /** The options rendered now (those your filter kept). */
   private readonly renderedSignal = signal<readonly T[]>([]);
   readonly rendered = this.renderedSignal.asReadonly();
+
+  /** The scField it is in: its label names a trigger that is the field. */
+  private readonly formField = inject(SC_FIELD, { optional: true });
+  /** The field's label's id. */
+  readonly labelId = computed(() =>
+    this.formField ? `${this.formField.id()}-label` : null,
+  );
+  /** The field's description and errors. */
+  readonly descriptionIds = computed(
+    () => this.formField?.descriptionIds().join(' ') || null,
+  );
+  /** The value's element in a trigger (`scComboboxNextValue`): part of its name. */
+  readonly valueId = signal<string | null>(null);
 
   /** Labels of the options seen so far. */
   private readonly labels = signal<ReadonlyMap<T, string>>(new Map());

@@ -1,5 +1,7 @@
+import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   Component,
+  DestroyRef,
   ViewEncapsulation,
   computed,
   inject,
@@ -23,6 +25,7 @@ import { ScComboboxNextBase } from './combobox-next-base';
   `,
   host: {
     'data-slot': 'combobox-value',
+    '[id]': 'id',
     '[attr.data-placeholder]': 'root.hasValue() ? null : ""',
     '[class]': 'class()',
   },
@@ -30,10 +33,17 @@ import { ScComboboxNextBase } from './combobox-next-base';
 })
 export class ScComboboxNextValue {
   protected readonly root = inject(ScComboboxNextBase);
+  /** Its id: with the field's label, its trigger's name. */
+  protected readonly id = inject(_IdGenerator).getId('sc-combobox-value-');
 
   readonly classInput = input<string>('', { alias: 'class' });
   /** Shown while nothing is selected. */
   readonly placeholder = input('');
+
+  constructor() {
+    this.root.valueId.set(this.id);
+    inject(DestroyRef).onDestroy(() => this.root.valueId.set(null));
+  }
 
   protected readonly class = computed(() =>
     cn(

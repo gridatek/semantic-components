@@ -12,7 +12,7 @@ import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 import { ScPortalOutlet } from '../portal-outlet/portal-outlet';
 import { ScComboboxNextBase } from './combobox-next-base';
-import { ScComboboxNextListContainer } from './combobox-next-list-container';
+import { ScComboboxNextListContent } from './combobox-next-list-content';
 
 /**
  * The popup: the list, its empty text, and — when a trigger opens it — the
@@ -30,8 +30,8 @@ import { ScComboboxNextListContainer } from './combobox-next-list-container';
         [combobox]="search.combobox"
         popupType="listbox"
       >
-        @if (listContainer(); as listContainer) {
-          <ng-container [scPortalOutlet]="listContainer" />
+        @if (listContent(); as listContent) {
+          <ng-container [scPortalOutlet]="listContent" />
         }
       </ng-template>
     }
@@ -40,6 +40,8 @@ import { ScComboboxNextListContainer } from './combobox-next-list-container';
     'data-slot': 'combobox-content',
     '[attr.role]': 'withSearch() ? "dialog" : null',
     '[attr.aria-label]': 'withSearch() ? label() : null',
+    '[attr.aria-labelledby]':
+      'withSearch() && !label() ? root.labelId() : null',
     '[attr.data-side]': 'root.side()',
     '[attr.data-empty]': 'root.rendered().length ? null : ""',
     '[animate.enter]': 'styles.popupEnter',
@@ -58,10 +60,10 @@ export class ScComboboxNextPopup {
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
   readonly classInput = input<string>('', { alias: 'class' });
-  /** Its name as a dialog: its trigger's `aria-label` when not given. */
+  /** Its name as a dialog: its trigger's `aria-label`, or its field's label, when not given. */
   readonly ariaLabel = input<string | null>(null, { alias: 'aria-label' });
 
-  protected readonly listContainer = contentChild(ScComboboxNextListContainer);
+  protected readonly listContent = contentChild(ScComboboxNextListContent);
 
   /** A trigger opened it: the search is inside. */
   protected readonly withSearch = computed(() => !this.root.field());

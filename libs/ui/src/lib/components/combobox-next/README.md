@@ -45,7 +45,28 @@ Angular Aria's listbox moves through every option it is given, so the options yo
 
 - **The input is the field** (above): `input scInput scComboboxNextInput` in a `scInputGroup`, the trigger (a chevron) and the clear button at its end.
 - **Several values**: `<div scComboboxNext multiple [(value)]="values">`, with `scComboboxNextChips` holding a `scComboboxNextChip` (and its `scComboboxNextChipRemove`) for each value, then the `scComboboxNextInput`. Picking adds or removes and keeps the list open.
-- **A trigger, the search inside the popup**: `button scComboboxNextTrigger variant="outline" size="default"` holding a `scComboboxNextValue`; in the popup, the input, then the list in an `ng-template scComboboxNextListContainer` — Angular Aria renders a combobox's list from a template, and here that combobox is the search beside it. Name the trigger by a label and its value (`aria-labelledby="label-id value-id"`): an `aria-label` alone leaves the text it shows out of its name.
+- **A trigger, the search inside the popup**: `button scComboboxNextTrigger` holding a `scComboboxNextValue` — with no input beside it, the trigger takes the field's look by itself (outline, as wide as the combobox); in the popup, the input, then the list in an `ng-template scComboboxNextListContent` — Angular Aria renders a combobox's list from a template, and here that combobox is the search beside it. In a `scField`, the label names the trigger (with the value it shows) and the popup, and a click on it focuses the trigger. Without a field, name them yourself: `aria-labelledby="label-id value-id"` on the trigger (an `aria-label` alone leaves the text it shows out of its name), `aria-label` on the popup.
+
+  ```html
+  <div scField>
+    <label scLabel>Country</label>
+    <div scComboboxNext #cb="scComboboxNext" [(value)]="country" class="w-full">
+      <button scComboboxNextTrigger>
+        <span scComboboxNextValue placeholder="Select a country"></span>
+        <svg siChevronDownIcon></svg>
+      </button>
+      <ng-template scComboboxNextPortal>
+        <div scComboboxNextPopup>
+          <div scInputGroup><input scInput scComboboxNextInput placeholder="Search" aria-label="Search countries" /></div>
+          <div scComboboxNextEmpty>No items found.</div>
+          <ng-template scComboboxNextListContent>
+            <div scComboboxNextList aria-label="Countries">…</div>
+          </ng-template>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+  ```
 
 ## Parts
 
@@ -59,7 +80,7 @@ Angular Aria's listbox moves through every option it is given, so the options yo
 | `ScComboboxNextClear`                               | `button[scComboboxNextClear]`                | Clears the value; shown only with a value, in the trigger's place                                                                                                                                                                                                               |
 | `ScComboboxNextChips`, `…Chip`, `…ChipRemove`       | `div[…]`, `span[…]`, `button[…]`             | The field of several values; a chip (`value`); its remove button                                                                                                                                                                                                                |
 | `ScComboboxNextPortal`, `ScComboboxNextPopup`       | `ng-template[…]`, `div[scComboboxNextPopup]` | The popup, rendered while open: its field's width, below it (above without room); `data-empty` with no option                                                                                                                                                                   |
-| `ScComboboxNextListContainer`                       | `ng-template[scComboboxNextListContainer]`   | Round the list, only when the search is inside the popup                                                                                                                                                                                                                        |
+| `ScComboboxNextListContent`                         | `ng-template[scComboboxNextListContent]`     | Round the list, only when the search is inside the popup                                                                                                                                                                                                                        |
 | `ScComboboxNextList`                                | `div[scComboboxNextList]`                    | The options (Aria's Listbox). Name it                                                                                                                                                                                                                                           |
 | `ScComboboxNextItem`, `ScComboboxNextItemIndicator` | `div[scComboboxNextItem]`, `span[…]`         | An option (Aria's Option): `value`, `label`, `disabled`; the check on a selected one                                                                                                                                                                                            |
 | `ScComboboxNextGroup`, `…GroupLabel`, `…Separator`  | `div[…]`                                     | A named group; a line between groups                                                                                                                                                                                                                                            |

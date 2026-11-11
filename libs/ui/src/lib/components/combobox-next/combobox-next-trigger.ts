@@ -4,6 +4,7 @@ import {
   ElementRef,
   HostAttributeToken,
   computed,
+  effect,
   inject,
   input,
 } from '@angular/core';
@@ -15,8 +16,9 @@ import { ScComboboxNextBase } from './combobox-next-base';
 /**
  * Opens and closes the list: the preset's button. Beside the input, the
  * chevron at its end (ghost, icon-xs; not a tab stop — the input is). With no
- * input in the field, it is the field (`variant="outline"`): it shows the
- * value and opens a popup with the search inside.
+ * input in the field, it is the field (outline, as wide as the combobox): it
+ * shows the value and opens a popup with the search inside; in a `scField`,
+ * named by the field's label and its value.
  */
 @Directive({
   selector: 'button[scComboboxNextTrigger]',
@@ -41,16 +43,24 @@ export class ScComboboxNextTrigger {
   protected readonly root = inject(ScComboboxNextBase);
 
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly variant = input<ScButtonVariants['variant']>('ghost');
-  readonly size = input<ScButtonVariants['size']>('icon-xs');
+  /** Ghost beside the input, outline as the field. */
+  readonly variant = input<ScButtonVariants['variant']>();
+  /** icon-xs beside the input, default as the field. */
+  readonly size = input<ScButtonVariants['size']>();
 
   /** The input is the field: this is the chevron at its end. */
   protected readonly besideInput = computed(() => !!this.root.field());
 
   protected readonly class = computed(() =>
     cn(
-      this.preset.button({ variant: this.variant(), size: this.size() }),
-      this.besideInput() && this.preset.inputGroupButton({ size: 'icon-xs' }),
+      this.preset.button({
+        variant: this.variant() ?? (this.besideInput() ? 'ghost' : 'outline'),
+        size: this.size() ?? (this.besideInput() ? 'icon-xs' : 'default'),
+      }),
+      this.besideInput()
+        ? this.preset.inputGroupButton({ size: 'icon-xs' })
+        : // The field: as wide as the combobox, its value at the start.
+          'w-full justify-between font-normal',
       this.preset.combobox.trigger,
       this.preset.combobox.triggerIcon,
       // A clear button showing takes its place.
@@ -62,9 +72,39 @@ export class ScComboboxNextTrigger {
   constructor() {
     const element = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
     this.root.triggerElement.set(element);
-    this.root.triggerLabel.set(
-      inject(new HostAttributeToken('aria-label'), { optional: true }),
-    );
+    const label = inject(new HostAttributeToken('aria-label'), {
+      optional: true,
+    });
+    const labelledBy = inject(new HostAttributeToken('aria-labelledby'), {
+      optional: true,
+    });
+    this.root.triggerLabel.set(label);
+
+    // The field itself, in a scField, not named by you: a name made of the
+    // field's label and the value it shows — the label alone would leave its
+    // text out of its name.
+    effect(() => {
+      if (this.besideInput()) return;
+      const description = this.root.descriptionIds();
+      if (description) element.setAttribute('aria-describedby', description);
+      else element.removeAttribute('aria-describedby');
+      if (label || labelledBy) return;
+      const name = [this.root.labelId(), this.root.valueId()]
+        .filter(Boolean)
+        .join(' ');
+      if (this.root.labelId()) element.setAttribute('aria-labelledby', name);
+    });
+
+    // A click on that label focuses it without opening it (it is not the
+    // label's `for`: a label's click would press the button).
+    effect((onCleanup) => {
+      const labelId = this.besideInput() ? null : this.root.labelId();
+      const labelElement = labelId ? document.getElementById(labelId) : null;
+      if (!labelElement) return;
+      const focus = () => element.focus();
+      labelElement.addEventListener('click', focus);
+      onCleanup(() => labelElement.removeEventListener('click', focus));
+    });
     inject(DestroyRef).onDestroy(() => this.root.triggerElement.set(undefined));
   }
 
