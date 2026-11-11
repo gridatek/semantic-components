@@ -1362,6 +1362,88 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/command-next',
+    children: [
+      {
+        path: 'command-next-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/command-next/demos/command-next-usage-demo').then(
+            (m) => m.CommandNextUsageDemo,
+          ),
+      },
+      {
+        path: 'basic-command-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/command-next/demos/basic-command-next-demo').then(
+            (m) => m.BasicCommandNextDemo,
+          ),
+      },
+      {
+        path: 'shortcuts-command-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/command-next/demos/shortcuts-command-next-demo').then(
+            (m) => m.ShortcutsCommandNextDemo,
+          ),
+      },
+      {
+        path: 'groups-command-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/command-next/demos/groups-command-next-demo').then(
+            (m) => m.GroupsCommandNextDemo,
+          ),
+      },
+      {
+        path: 'scrollable-command-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/command-next/demos/scrollable-command-next-demo').then(
+            (m) => m.ScrollableCommandNextDemo,
+          ),
+      },
+      {
+        path: 'dialog-command-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/command-next/demos/dialog-command-next-demo').then(
+            (m) => m.DialogCommandNextDemo,
+          ),
+      },
+      {
+        path: 'keywords-command-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/command-next/demos/keywords-command-next-demo').then(
+            (m) => m.KeywordsCommandNextDemo,
+          ),
+      },
+      {
+        path: 'async-command-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/command-next/demos/async-command-next-demo').then(
+            (m) => m.AsyncCommandNextDemo,
+          ),
+      },
+      {
+        path: 'pages-command-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/command-next/demos/pages-command-next-demo').then(
+            (m) => m.PagesCommandNextDemo,
+          ),
+      },
+      {
+        path: 'links-command-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/command-next/demos/links-command-next-demo').then(
+            (m) => m.LinksCommandNextDemo,
+          ),
+      },
+      {
+        path: 'rtl-command-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/command-next/demos/rtl-command-next-demo').then(
+            (m) => m.RtlCommandNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/command',
     children: [
       {

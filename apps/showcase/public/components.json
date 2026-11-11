@@ -258,6 +258,14 @@
     "category": "Overlay"
   },
   {
+    "name": "Command Next",
+    "path": "command-next",
+    "description": "A search over commands: typing filters them, the arrows and Enter run them.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Overlay"
+  },
+  {
     "name": "Compare",
     "path": "compare",
     "description": "Two things compared, split by a divider: photos before and after, two themes, any content.",

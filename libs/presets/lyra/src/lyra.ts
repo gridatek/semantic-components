@@ -13,6 +13,7 @@ import { calendar } from './calendar';
 import { card } from './card';
 import { checkbox } from './checkbox';
 import { codeBlock } from './code-block';
+import { command } from './command';
 import { contextMenu } from './context-menu';
 import { controlGroup, controlGroupText } from './control-group';
 import { dialog } from './dialog';
@@ -75,6 +76,7 @@ export const lyra: ScPreset = {
   card,
   checkbox,
   codeBlock,
+  command,
   frame,
   controlGroup,
   controlGroupText,

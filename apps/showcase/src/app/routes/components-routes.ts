@@ -249,6 +249,12 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/command/command-page'),
       },
       {
+        path: 'command-next',
+        title: 'Command Next - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/command-next/command-next-page'),
+      },
+      {
         path: 'confetti',
         title: 'Confetti - Semantic Components',
         loadComponent: () => import('../pages/docs/confetti/confetti-page'),

@@ -583,6 +583,26 @@ Rewritten 2026-11-10: built beside the old one as Slider Next, switched in. shad
 - **One thumb**: shadcn's Range and Multiple are left out (Range Slider is ours, in its turn).
 - **shadcn's examples**: Demo (the Usage), Controlled, Disabled, Vertical, RTL; ours kept: Form, Custom color.
 
+## Command: rewriting
+
+Built 2026-11-11 beside the old one as Command Next (the user: "check what other libs do"). Base UI has no Command (its Autocomplete has a command-palette example); shadcn's is cmdk in both bases.
+
+| Library (weekly npm downloads, 2026-11-11)             | What we read                                                                                                                                                                                               |
+| ------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `cmdk` (46.4M)                                         | Its parts and props (README), its ARIA and keys (its dist, in the shadcn reference app): combobox input, listbox, options `aria-selected`, groups `aria-labelledby`; arrows, Home/End, Enter, vim bindings |
+| Base UI Autocomplete (`@base-ui/react` 28.8M)          | Its "Command palette" example: inline list always open, `autoHighlight="always"`, `loopFocus` (on), `highlightItemOnHover`, a `Status` part                                                                |
+| React Aria Autocomplete (`react-aria-components` 9.1M) | Search field over a Menu, virtual focus, empty state, its command palette (⌘J)                                                                                                                             |
+| Bits UI Command (1.7M)                                 | A cmdk port: `LinkItem`, `columns` (grid), `onStateChange`, `disablePointerSelection`                                                                                                                      |
+| `kbar` (395k)                                          | An actions registry, nested actions (Backspace back), undo                                                                                                                                                 |
+| `@angular/aria` (175k)                                 | Combobox (`alwaysExpanded`, popup an `ng-template`) and Listbox: the old Command's base                                                                                                                    |
+| spartan (`@spartan-ng/brain`, 117k)                    | An Angular Command with its own engine                                                                                                                                                                     |
+| WAI-ARIA combobox pattern                              | Roles and keys of a list autocomplete                                                                                                                                                                      |
+
+- **Taken**: shadcn's parts and look (the `command` preset key, 13 strings); cmdk's built-in filter (text, `value`, `keywords`; `filter`, `shouldFilter`, `forceMount`), its hiding of empty groups and of separators while searching, its ARIA and vim bindings, Alt+arrows between groups; Bits UI's link items; Base UI's `loopFocus`, `highlightItemOnHover`, the first match always highlighted, a status live region (cmdk announces nothing).
+- **Ours**: the CDK's `ActiveDescendantKeyManager`, not Aria (the user's choice, A): no `ng-template` wrapper, no coalesced keys (checked on Aria 22.2.6), hidden items skipped. Home/End stay the search's (cmdk takes them for the list). The search applied as typed, so an Enter right after typing never runs a hidden item (a bug found while building).
+- **Left out**: re-sorting by score (fights `@for`), grid, virtualization, a built-in ⌘K listener, nested pages (an example), shadcn's check icon, cmdk's Loading.
+- **Examples**: shadcn's Demo (the Usage), Basic, Shortcuts, Groups, Scrollable, Dialog (⌘J with `scHotkey`); ours: Keywords, Async search, Pages, Links; RTL.
+
 ## Native Select: rewritten
 
 Rewritten 2026-11-11: built beside the old one as Native Select Next, switched in. Its users (the PDF Viewer, two Theme examples) moved to the container, chevron and option parts. shadcn's Native Select (`native-select.tsx` in each style, its docs' examples); Base UI has none.

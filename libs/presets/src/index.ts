@@ -474,6 +474,36 @@ export interface ScNativeSelectStyles {
   icon: string;
 }
 
+/** A command's parts that change from style to style. */
+export interface ScCommandStyles {
+  /** The command: its corners, padding and colours. */
+  root: string;
+  /** On the scDialog it sits in: no padding, its corners (important over the dialog's own). */
+  dialog: string;
+  /** Around the search box. */
+  inputWrapper: string;
+  /** The search box, over the preset's input group: its height, background, border. */
+  inputGroup: string;
+  /** Your search icon, through its addon. */
+  inputIcon: string;
+  /** The search input. */
+  input: string;
+  /** The scrolling list. */
+  list: string;
+  /** The text when nothing matches. */
+  empty: string;
+  /** A group of items. */
+  group: string;
+  /** A group's heading. */
+  groupLabel: string;
+  /** An item: highlighted (data-selected), disabled (data-disabled="true"). */
+  item: string;
+  /** Between groups. */
+  separator: string;
+  /** A key hint at the end of an item. */
+  shortcut: string;
+}
+
 /** A preset: the components' classes in one of shadcn's styles. */
 export interface ScPreset {
   accordion: ScAccordionStyles;
@@ -497,6 +527,7 @@ export interface ScPreset {
   checkbox: ScCheckboxStyles;
   codeBlock: ScCodeBlockStyles;
   /** scFrame: a box's frame — the style's card radius, ring and shadow. */
+  command: ScCommandStyles;
   frame: string;
   controlGroup: (props: {
     orientation?: ScControlGroupOrientation | null;
