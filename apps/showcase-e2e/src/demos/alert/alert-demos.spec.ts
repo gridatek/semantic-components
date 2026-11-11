@@ -54,6 +54,7 @@ test('Success and warning: each its own colour, on the description and icon too'
   page,
 }) => {
   await page.goto(demo('status'));
+  await expect(page.locator('[scAlert]')).toHaveCount(2);
   const colors = await page
     .locator('[scAlert]')
     .evaluateAll((alerts) =>
