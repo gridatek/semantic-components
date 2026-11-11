@@ -585,6 +585,20 @@ Rewritten 2026-11-10: built beside the old one as Slider Next, switched in. shad
 - **One thumb**: shadcn's Range and Multiple are left out (Range Slider is ours, in its turn).
 - **shadcn's examples**: Demo (the Usage), Controlled, Disabled, Vertical, RTL; ours kept: Form, Custom color.
 
+## Combobox: rewriting
+
+Built 2026-11-11 beside the old one as Combobox Next. A shadcn component with a Base UI one, so no web research: Base UI's docs (`combobox.md`), shadcn's `combobox.tsx` in the 8 styles and its 12 examples.
+
+- **On Angular Aria** (the user, 2026-11-11: "here we should use angular aria, forget about command, they are two separate components"): Aria's Combobox on the input, Listbox and Option for the list. So **filtering is the consumer's** (Aria's listbox can't skip hidden options): the root gives `query()`, the text typed since it opened, and `scComboboxMatches` helps.
+- **Base UI's three layouts**, the old one had only the last: the input as the field (in our `scInputGroup`), several values as chips, a trigger with the search inside the popup. One input part reads where it is. With the search inside, the trigger is a plain button (`aria-haspopup="dialog"`) and the search the only Aria combobox; its list needs a template (`scComboboxListContainer`), as Aria renders a combobox's list from one.
+- **Two roots, by the `multiple` attribute**: `T | null` and `T[]`, each exact for `[formField]`.
+- **`itemToStringLabel`** for a value's label before the list has opened (the user's choice over the Select's `items`); object values.
+- **Base UI's behaviour**: the input shows the value's label, a list opened on a value shows every option, text that is no option goes on closing, emptying the input clears one value; several: picking toggles and keeps the list open, Backspace removes the last chip, the arrows reach the chips. `autoHighlight`, `highlightItemOnHover`, `loopFocus`, `openOnInputClick`, `isItemEqualToValue`.
+- **The `combobox` preset key** (15 strings): Base UI's states as Aria shows them (`data-highlighted:` → `data-[active=true]:`, `data-disabled:` → `aria-disabled:`), its positioner variables and `data-open:` / `data-closed:` left out (the CDK, `animate.enter` / `animate.leave`). The popup is as wide as its field (shadcn's is 28px wider).
+- **Aria's limits, kept and documented**: keys pressed in one frame move the highlight once (checked on 22.2.6); Home / End go to the list while open.
+- **Left out**: virtualization, grid, `limit`, `modal`, inline, Creatable; Arrow, Backdrop, Positioner, Collection, Row, Label parts.
+- **Examples**: shadcn's Demo (the Usage), Multiple, Clear, Groups, Custom items, Invalid, Disabled, Auto highlight, Popup, Input group, RTL; ours: Form, Async search. shadcn's Basic is its Demo.
+
 ## Command: rewritten
 
 Rewritten 2026-11-11 (the user: "check what other libs do"): built beside the old one as Command Next, switched in. The showcase's docs search (Ctrl+K) moved onto it: its own filtering gone, descriptions as keywords, results as links. Base UI has no Command (its Autocomplete has a command-palette example); shadcn's is cmdk in both bases.
