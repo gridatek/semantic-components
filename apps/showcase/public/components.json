@@ -250,6 +250,14 @@
     "category": "Forms"
   },
   {
+    "name": "Combobox Next",
+    "path": "combobox-next",
+    "description": "A select to filter: an input over a list of options, one or several of which are its value.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Forms"
+  },
+  {
     "name": "Command",
     "path": "command",
     "description": "A search over commands: typing filters them, the arrows and Enter run them.",

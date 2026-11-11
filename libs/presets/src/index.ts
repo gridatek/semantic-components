@@ -504,6 +504,39 @@ export interface ScCommandStyles {
   shortcut: string;
 }
 
+/** A combobox's parts that change from style to style. */
+export interface ScComboboxStyles {
+  /** The button that opens the list: its icon's size. */
+  trigger: string;
+  /** The trigger's chevron, through the trigger. */
+  triggerIcon: string;
+  /** The popup round the list. */
+  popup: string;
+  /** Its opening and closing, played by Angular. */
+  popupEnter: string;
+  popupLeave: string;
+  /** The scrolling list of options. */
+  list: string;
+  /** An option: highlighted (data-active="true"), disabled (aria-disabled). */
+  item: string;
+  /** The check on a selected option. */
+  itemIndicator: string;
+  /** A group's heading. */
+  groupLabel: string;
+  /** The text when nothing matches. */
+  empty: string;
+  /** Between groups. */
+  separator: string;
+  /** The field of chips (multiple). */
+  chips: string;
+  /** A chip: one selected value. */
+  chip: string;
+  /** A chip's remove button, over the preset's button. */
+  chipRemove: string;
+  /** The input after the chips. */
+  chipsInput: string;
+}
+
 /** A preset: the components' classes in one of shadcn's styles. */
 export interface ScPreset {
   accordion: ScAccordionStyles;
@@ -527,6 +560,7 @@ export interface ScPreset {
   checkbox: ScCheckboxStyles;
   codeBlock: ScCodeBlockStyles;
   /** scFrame: a box's frame — the style's card radius, ring and shadow. */
+  combobox: ScComboboxStyles;
   command: ScCommandStyles;
   frame: string;
   controlGroup: (props: {

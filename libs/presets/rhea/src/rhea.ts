@@ -13,6 +13,7 @@ import { calendar } from './calendar';
 import { card } from './card';
 import { checkbox } from './checkbox';
 import { codeBlock } from './code-block';
+import { combobox } from './combobox';
 import { command } from './command';
 import { contextMenu } from './context-menu';
 import { controlGroup, controlGroupText } from './control-group';
@@ -76,6 +77,7 @@ export const rhea: ScPreset = {
   card,
   checkbox,
   codeBlock,
+  combobox,
   command,
   frame,
   controlGroup,
