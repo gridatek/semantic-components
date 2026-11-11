@@ -39,10 +39,10 @@ test.describe('Command Next in every preset', () => {
       ]);
       await page.goto('/demos/command-next/command-next-usage-demo');
       for (const [target, wanted, what] of [
-        // The Usage's own rounded-lg border, over the preset's (as shadcn's example).
+        // The frame round it (scFrame), over the root's corners.
         [
           page.locator('[data-slot=command]'),
-          `${styles.command.root} rounded-lg border`,
+          `${styles.command.root} ${styles.frame}`,
           'root',
         ],
         [page.locator('[role=combobox]'), styles.command.input, 'input'],

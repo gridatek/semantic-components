@@ -9,6 +9,7 @@ import {
   ScCommandNextItem,
   ScCommandNextList,
   ScCommandNextStatus,
+  ScFrame,
 } from '@semantic-components/ui';
 import {
   SiCreditCardIcon,
@@ -30,6 +31,7 @@ import {
     ScCommandNextItem,
     ScCommandNextList,
     ScCommandNextStatus,
+    ScFrame,
     SiCreditCardIcon,
     SiSearchIcon,
     SiSettingsIcon,
@@ -37,7 +39,7 @@ import {
   ],
   template: `
     <div class="flex w-full max-w-sm flex-col gap-3">
-      <div scCommandNext #cmd="scCommandNext" class="rounded-lg border">
+      <div scCommandNext #cmd="scCommandNext" scFrame>
         <div scCommandNextInputGroup>
           <svg siSearchIcon></svg>
           <input

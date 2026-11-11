@@ -5,7 +5,7 @@ A search over commands: typing filters them, the arrows move the highlight while
 ## Usage
 
 ```html
-<div scCommandNext #cmd="scCommandNext" class="rounded-lg border">
+<div scCommandNext #cmd="scCommandNext" scFrame>
   <div scCommandNextInputGroup>
     <svg siSearchIcon></svg>
     <input scCommandNextInput placeholder="Type a command or search..." aria-label="Search commands" />

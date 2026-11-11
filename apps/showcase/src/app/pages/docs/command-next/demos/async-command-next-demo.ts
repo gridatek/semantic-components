@@ -9,6 +9,7 @@ import {
   ScCommandNextItem,
   ScCommandNextList,
   ScCommandNextStatus,
+  ScFrame,
 } from '@semantic-components/ui';
 import { SiSearchIcon } from '@semantic-icons/lucide-icons';
 
@@ -25,16 +26,12 @@ import { SiSearchIcon } from '@semantic-icons/lucide-icons';
     ScCommandNextItem,
     ScCommandNextList,
     ScCommandNextStatus,
+    ScFrame,
     SiSearchIcon,
   ],
   template: `
     <div class="flex w-full max-w-sm flex-col gap-3">
-      <div
-        scCommandNext
-        #cmd="scCommandNext"
-        [shouldFilter]="false"
-        class="rounded-lg border"
-      >
+      <div scCommandNext #cmd="scCommandNext" [shouldFilter]="false" scFrame>
         <div scCommandNextInputGroup>
           <svg siSearchIcon></svg>
           <input
