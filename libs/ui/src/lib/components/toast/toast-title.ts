@@ -11,6 +11,6 @@ export class ScToastTitle {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('text-sm font-semibold', this.classInput()),
+    cn('text-sm font-medium', this.classInput()),
   );
 }

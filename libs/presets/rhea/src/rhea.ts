@@ -53,6 +53,7 @@ import { table } from './table';
 /** The rhea preset: `provideSemanticComponents({ preset: rhea })`. */
 import { tabs } from './tabs';
 import { textarea } from './textarea';
+import { toast } from './toast';
 import { toggle } from './toggle';
 import { toggleGroup } from './toggle-group';
 import { tooltip } from './tooltip';
@@ -111,6 +112,7 @@ export const rhea: ScPreset = {
   table,
   tabs,
   textarea,
+  toast,
   toggle,
   toggleGroup,
   tooltip,

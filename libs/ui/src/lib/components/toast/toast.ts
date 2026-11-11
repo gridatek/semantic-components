@@ -7,20 +7,18 @@ import {
   inject,
   input,
 } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 import { SC_TOAST_CONTEXT } from './toast-context';
-import { SC_TOAST_LAYOUT, SC_TOAST_PEEK } from './toast-layout';
+import {
+  SC_TOAST_LAYOUT,
+  SC_TOAST_PEEK,
+  SC_TOAST_SHRINK,
+} from './toast-layout';
 import type { ScToastVariant } from './toast-types';
 
-/** Each variant's text colour; the others keep the popover's. */
-const VARIANTS: Partial<Record<ScToastVariant, string>> = {
-  success: 'text-success',
-  warning: 'text-warning',
-  error: 'text-destructive',
-};
-
 /**
- * A toast, the root of your `scToastTemplate`: its variant's styles and its
+ * A toast, the root of your `scToastTemplate`: the preset's look, its variant (`data-variant`) and its
  * place in the stack. It slides in when shown and out when dismissed, and
  * goes when swiped sideways.
  */
@@ -48,6 +46,7 @@ const VARIANTS: Partial<Record<ScToastVariant, string>> = {
 export class ScToast {
   protected readonly context = inject(SC_TOAST_CONTEXT);
   protected readonly layout = inject(SC_TOAST_LAYOUT);
+  private readonly styles = injectPreset().toast;
 
   readonly classInput = input<string>('', { alias: 'class' });
 
@@ -82,16 +81,13 @@ export class ScToast {
     }
     if (!index) return null;
     const visible = Math.min(index, this.layout.visible - 1);
-    return `translateY(${direction * visible * SC_TOAST_PEEK}px) scale(${1 - visible * 0.05})`;
+    return `translateY(${direction * visible * SC_TOAST_PEEK}px) scale(${1 - visible * SC_TOAST_SHRINK})`;
   });
 
   protected readonly class = computed(() =>
     cn(
-      'group pointer-events-auto absolute inset-x-0 flex items-center gap-3 overflow-hidden rounded-2xl border p-4 pe-6 shadow-lg',
-      'bg-popover text-popover-foreground',
-      // The ✕: a close straight in the toast — in its corner, faint, shown on
-      // hover or focus.
-      '[&>[data-slot=toast-close]]:absolute [&>[data-slot=toast-close]]:end-1 [&>[data-slot=toast-close]]:top-1 [&>[data-slot=toast-close]]:text-foreground/50 [&>[data-slot=toast-close]]:opacity-0 [&>[data-slot=toast-close]]:group-hover:opacity-100 [&>[data-slot=toast-close]]:focus-visible:opacity-100',
+      'pointer-events-auto absolute inset-x-0 flex items-center gap-3 overflow-hidden p-4',
+      this.styles.toast,
       'transition-[transform,height,opacity,translate] duration-300 ease-out',
       this.layout.fromBottom ? 'bottom-0 origin-top' : 'top-0 origin-bottom',
       // Behind the front one, stacked: only its edge shows.
@@ -104,7 +100,6 @@ export class ScToast {
         ? 'slide-in-from-bottom-full not-data-swipe:slide-out-to-bottom-full'
         : 'slide-in-from-top-full not-data-swipe:slide-out-to-top-full',
       'data-[swipe=left]:slide-out-to-left-full data-[swipe=right]:slide-out-to-right-full',
-      VARIANTS[this.variant()],
       this.classInput(),
     ),
   );

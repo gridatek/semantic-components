@@ -6,9 +6,9 @@ import { SC_TOAST_CONTEXT } from './toast-context';
 
 /**
  * Dismisses its toast, in your `scToastTemplate`: the preset's button, ghost
- * and icon-sized for the ✕ — straight in the toast, the toast puts it in its
- * corner, shown on hover or focus (`data-slot`). A Dismiss of your own sets
- * `variant` and `size`. Write its icon and name it.
+ * and icon-sized for the ✕, at the end of the row, muted until hovered, its
+ * hit area a little larger than itself. A Dismiss of your own sets `variant`
+ * and `size`. Write its icon and name it.
  */
 @Directive({
   selector: 'button[scToastClose]',
@@ -26,7 +26,7 @@ export class ScToastClose {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly type = input<'button' | 'submit' | 'reset'>('button');
   readonly variant = input<ScButtonVariants['variant']>('ghost');
-  readonly size = input<ScButtonVariants['size']>('icon-xs');
+  readonly size = input<ScButtonVariants['size']>('icon-sm');
 
   constructor() {
     ɵwarnIfUnnamed('scToastClose');
@@ -35,6 +35,7 @@ export class ScToastClose {
   protected readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
+      "relative shrink-0 text-muted-foreground after:absolute after:-inset-2 after:content-[''] hover:text-foreground",
       this.classInput(),
     ),
   );

@@ -1,17 +1,12 @@
 import { Component, ViewEncapsulation, inject } from '@angular/core';
 import { ScButton, ScToaster } from '@semantic-components/ui';
 
-/** A loading toast while a promise runs, then its success or its error. */
+/** One toast while a promise runs, then its result: loading, success or error. */
 @Component({
   selector: 'app-promise-toast-demo',
   imports: [ScButton],
   template: `
-    <div class="flex gap-2">
-      <button scButton variant="outline" (click)="save(true)">Save</button>
-      <button scButton variant="outline" (click)="save(false)">
-        Save (fails)
-      </button>
-    </div>
+    <button scButton variant="outline" (click)="create()">Create Event</button>
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
@@ -19,21 +14,15 @@ import { ScButton, ScToaster } from '@semantic-components/ui';
 export class PromiseToastDemo {
   private readonly toaster = inject(ScToaster);
 
-  save(succeeds: boolean): void {
-    const saving = new Promise<string>((resolve, reject) =>
-      setTimeout(
-        () =>
-          succeeds ? resolve('Settings') : reject(new Error('Network error')),
-        1500,
-      ),
+  create(): void {
+    const creating = new Promise<{ name: string }>((resolve) =>
+      setTimeout(() => resolve({ name: 'Event' }), 2000),
     );
     this.toaster
-      .promise(saving, {
-        loading: { description: 'Saving…' },
-        success: (name) => ({ description: `${name} saved.` }),
-        error: (error) => ({
-          description: error instanceof Error ? error.message : 'Not saved.',
-        }),
+      .promise(creating, {
+        loading: { description: 'Creating event…' },
+        success: (data) => ({ description: `${data.name} created.` }),
+        error: { description: 'Could not create event.' },
       })
       .catch(() => undefined);
   }

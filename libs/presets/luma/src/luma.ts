@@ -53,6 +53,7 @@ import { table } from './table';
 /** The luma preset: `provideSemanticComponents({ preset: luma })`. */
 import { tabs } from './tabs';
 import { textarea } from './textarea';
+import { toast } from './toast';
 import { toggle } from './toggle';
 import { toggleGroup } from './toggle-group';
 import { tooltip } from './tooltip';
@@ -111,6 +112,7 @@ export const luma: ScPreset = {
   table,
   tabs,
   textarea,
+  toast,
   toggle,
   toggleGroup,
   tooltip,

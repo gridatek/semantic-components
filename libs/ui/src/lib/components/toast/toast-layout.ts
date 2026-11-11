@@ -22,7 +22,9 @@ export const SC_TOAST_LAYOUT = new InjectionToken<ScToastLayout>(
   'SC_TOAST_LAYOUT',
 );
 
-/** How far each toast behind the front one shows, stacked. */
-export const SC_TOAST_PEEK = 14;
-/** Between toasts, spread out. */
-export const SC_TOAST_GAP = 8;
+/** How far each toast behind the front one shows, stacked (shadcn's 0.75rem). */
+export const SC_TOAST_PEEK = 12;
+/** Between toasts, spread out (shadcn's 0.75rem). */
+export const SC_TOAST_GAP = 12;
+/** How much smaller each toast behind the front one is, stacked (shadcn's 10%). */
+export const SC_TOAST_SHRINK = 0.1;

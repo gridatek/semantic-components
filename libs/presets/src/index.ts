@@ -458,6 +458,14 @@ export interface ScOtpFieldStyles {
   separator: string;
 }
 
+/** A toast's parts that change from style to style. */
+export interface ScToastStyles {
+  /** The toast: its border, colours, shadow and corners. */
+  toast: string;
+  /** The stack's corners, for its focus ring (the hotkey focuses it). */
+  list: string;
+}
+
 /** A preset: the components' classes in one of shadcn's styles. */
 export interface ScPreset {
   accordion: ScAccordionStyles;
@@ -531,6 +539,7 @@ export interface ScPreset {
   /** A multi-line text field. */
   textarea: string;
   /** A toggle's look (shadcn's toggleVariants): a button that stays pressed. */
+  toast: ScToastStyles;
   toggle: (props: {
     variant?: ScToggleVariant | null;
     size?: ScToggleSize | null;

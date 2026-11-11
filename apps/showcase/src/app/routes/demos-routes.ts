@@ -6104,31 +6104,17 @@ export const demosRoutes: Route[] = [
     path: 'demos/toast',
     children: [
       {
-        path: 'basic-toast-demo',
+        path: 'toast-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/toast/demos/basic-toast-demo').then(
-            (m) => m.BasicToastDemo,
+          import('../pages/docs/toast/demos/toast-usage-demo').then(
+            (m) => m.ToastUsageDemo,
           ),
       },
       {
-        path: 'title-toast-demo',
+        path: 'types-toast-demo',
         loadComponent: () =>
-          import('../pages/docs/toast/demos/title-toast-demo').then(
-            (m) => m.TitleToastDemo,
-          ),
-      },
-      {
-        path: 'action-toast-demo',
-        loadComponent: () =>
-          import('../pages/docs/toast/demos/action-toast-demo').then(
-            (m) => m.ActionToastDemo,
-          ),
-      },
-      {
-        path: 'destructive-toast-demo',
-        loadComponent: () =>
-          import('../pages/docs/toast/demos/destructive-toast-demo').then(
-            (m) => m.DestructiveToastDemo,
+          import('../pages/docs/toast/demos/types-toast-demo').then(
+            (m) => m.TypesToastDemo,
           ),
       },
       {
@@ -6143,13 +6129,6 @@ export const demosRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/toast/demos/position-toast-demo').then(
             (m) => m.PositionToastDemo,
-          ),
-      },
-      {
-        path: 'variants-toast-demo',
-        loadComponent: () =>
-          import('../pages/docs/toast/demos/variants-toast-demo').then(
-            (m) => m.VariantsToastDemo,
           ),
       },
       {

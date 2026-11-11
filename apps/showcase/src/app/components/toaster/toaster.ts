@@ -10,6 +10,7 @@ import {
 } from '@semantic-components/ui';
 import {
   SiCircleCheckIcon,
+  SiInfoIcon,
   SiLoaderCircleIcon,
   SiOctagonXIcon,
   SiTriangleAlertIcon,
@@ -28,6 +29,7 @@ import {
     ScToastAction,
     ScToastClose,
     SiCircleCheckIcon,
+    SiInfoIcon,
     SiLoaderCircleIcon,
     SiOctagonXIcon,
     SiTriangleAlertIcon,
@@ -40,6 +42,9 @@ import {
           @case ('success') {
             <span scToastIcon><svg siCircleCheckIcon></svg></span>
           }
+          @case ('info') {
+            <span scToastIcon><svg siInfoIcon></svg></span>
+          }
           @case ('warning') {
             <span scToastIcon><svg siTriangleAlertIcon></svg></span>
           }
@@ -50,7 +55,7 @@ import {
             <span scToastIcon><svg siLoaderCircleIcon></svg></span>
           }
         }
-        <div class="grid gap-1">
+        <div class="flex min-w-0 flex-1 flex-col gap-1">
           @if (toast.title) {
             <div scToastTitle>{{ toast.title }}</div>
           }

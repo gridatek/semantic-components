@@ -11,6 +11,7 @@ import {
   signal,
   viewChildren,
 } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 import { SC_TOAST_CONTEXT, type ScToastContext } from './toast-context';
 import {
@@ -108,6 +109,7 @@ function lasting<T>(value: () => T | undefined, initial: T) {
 export class ScToastStack {
   protected readonly toaster = inject(ScToaster);
   private readonly injector = inject(Injector);
+  private readonly styles = injectPreset().toast;
 
   readonly classInput = input<string>('', { alias: 'class' });
 
@@ -164,12 +166,14 @@ export class ScToastStack {
   );
 
   protected readonly listClass = cn(
-    'pointer-events-auto relative w-full rounded-2xl outline-none transition-[height] duration-300',
+    'pointer-events-auto relative w-full outline-none transition-[height] duration-300',
     'focus-visible:ring-3 focus-visible:ring-ring/50',
+    this.styles.list,
   );
 
   protected columnClass(position: ScToastPosition): string {
-    return cn('absolute flex w-full p-4 md:max-w-[420px]', POSITIONS[position]);
+    // shadcn's: the screen's width on a phone, max-w-sm (and its p-4) above.
+    return cn('absolute flex w-full p-4 sm:max-w-104', POSITIONS[position]);
   }
 
   /** Hovered or focused, the column spreads out and its timers pause. */

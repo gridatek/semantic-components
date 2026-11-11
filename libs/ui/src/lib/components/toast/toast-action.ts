@@ -25,7 +25,7 @@ export class ScToastAction {
   protected readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
-      'ms-auto',
+      'shrink-0',
       this.classInput(),
     ),
   );

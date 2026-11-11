@@ -11,6 +11,6 @@ export class ScToastDescription {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('text-sm opacity-90', this.classInput()),
+    cn('text-sm text-muted-foreground', this.classInput()),
   );
 }
