@@ -227,14 +227,6 @@
   {
     "name": "Collapsible",
     "path": "collapsible",
-    "description": "An interactive component that expands and collapses.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Layout"
-  },
-  {
-    "name": "Collapsible Next",
-    "path": "collapsible-next",
     "description": "A trigger that shows and hides a panel of content.",
     "status": "Experimental",
     "library": "ui",

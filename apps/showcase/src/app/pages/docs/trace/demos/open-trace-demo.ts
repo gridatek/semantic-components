@@ -2,8 +2,6 @@ import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
   ScCollapsible,
-  ScCollapsibleBody,
-  ScCollapsibleContent,
   ScCollapsiblePanel,
   ScCollapsibleTrigger,
   ScTraceCollapsible,
@@ -23,14 +21,12 @@ import {
   SiTerminalIcon,
 } from '@semantic-icons/lucide-icons';
 
-/** Rows start closed: [expanded]="true" opens one at first; [(expanded)] makes it yours. */
+/** Rows start closed: [open]="true" opens one at first; [(open)] makes it yours. */
 @Component({
   selector: 'app-open-trace-demo',
   imports: [
     ScButton,
     ScCollapsible,
-    ScCollapsibleBody,
-    ScCollapsibleContent,
     ScCollapsiblePanel,
     ScCollapsibleTrigger,
     ScTraceCollapsible,
@@ -47,64 +43,46 @@ import {
   ],
   template: `
     <div class="flex w-full max-w-sm flex-col items-start gap-4">
-      <div scCollapsible scTraceCollapsible>
-        <button
-          scCollapsibleTrigger
-          scTraceCollapsibleTrigger
-          [panel]="node.panel"
-          [expanded]="true"
-        >
+      <div scCollapsible [open]="true" scTraceCollapsible>
+        <button scCollapsibleTrigger scTraceCollapsibleTrigger>
           <span scTraceLine>
             <span scTraceIcon><svg siTerminalIcon></svg></span>
             <span scTraceTitle>Ran node --version</span>
           </span>
           <span scTraceCollapsibleIcon><svg siChevronRightIcon></svg></span>
         </button>
-        <div scCollapsiblePanel #node="scCollapsiblePanel">
-          <ng-template scCollapsibleContent>
-            <div scCollapsibleBody>
-              <div scTraceCollapsibleContent>
-                <div scCodeBlock size="sm">
-                  <pre
-                    scCodeBlockContent
-                    wrap
-                    class="max-h-64"
-                    [code]="nodeOutput"
-                  ></pre>
-                </div>
-              </div>
+        <div scCollapsiblePanel>
+          <div scTraceCollapsibleContent>
+            <div scCodeBlock size="sm">
+              <pre
+                scCodeBlockContent
+                wrap
+                class="max-h-64"
+                [code]="nodeOutput"
+              ></pre>
             </div>
-          </ng-template>
+          </div>
         </div>
       </div>
-      <div scCollapsible scTraceCollapsible>
-        <button
-          scCollapsibleTrigger
-          scTraceCollapsibleTrigger
-          [panel]="pnpm.panel"
-          [(expanded)]="open"
-        >
+      <div scCollapsible [(open)]="open" scTraceCollapsible>
+        <button scCollapsibleTrigger scTraceCollapsibleTrigger>
           <span scTraceLine>
             <span scTraceIcon><svg siTerminalIcon></svg></span>
             <span scTraceTitle>Ran pnpm --version</span>
           </span>
           <span scTraceCollapsibleIcon><svg siChevronRightIcon></svg></span>
         </button>
-        <div scCollapsiblePanel #pnpm="scCollapsiblePanel">
-          <ng-template scCollapsibleContent>
-            <div scCollapsibleBody>
-              <div scTraceCollapsibleContent>
-                <div scCodeBlock size="sm">
-                  <pre
-                    scCodeBlockContent
-                    wrap
-                    class="max-h-64"
-                    [code]="pnpmOutput"
-                  ></pre>
-                </div>
-              </div>
+        <div scCollapsiblePanel>
+          <div scTraceCollapsibleContent>
+            <div scCodeBlock size="sm">
+              <pre
+                scCodeBlockContent
+                wrap
+                class="max-h-64"
+                [code]="pnpmOutput"
+              ></pre>
             </div>
-          </ng-template>
+          </div>
         </div>
       </div>
       <button scButton variant="outline" size="sm" (click)="open.set(!open())">

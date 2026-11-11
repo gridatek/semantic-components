@@ -21,8 +21,6 @@ export class RtlTraceDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCollapsible,
-  ScCollapsibleBody,
-  ScCollapsibleContent,
   ScCollapsiblePanel,
   ScCollapsibleTrigger,
   ScTrace,
@@ -47,8 +45,6 @@ import {
   selector: 'app-rtl-trace-demo',
   imports: [
     ScCollapsible,
-    ScCollapsibleBody,
-    ScCollapsibleContent,
     ScCollapsiblePanel,
     ScCollapsibleTrigger,
     ScTrace,
@@ -78,23 +74,15 @@ import {
         <span scTraceTitle>قرأ package.json</span>
       </span>
       <div scCollapsible scTraceCollapsible>
-        <button
-          scCollapsibleTrigger
-          scTraceCollapsibleTrigger
-          [panel]="version.panel"
-        >
+        <button scCollapsibleTrigger scTraceCollapsibleTrigger>
           <span scTraceLine>
             <span scTraceIcon><svg siTerminalIcon></svg></span>
             <span scTraceTitle>شغّل node --version</span>
           </span>
           <span scTraceCollapsibleIcon><svg siChevronRightIcon></svg></span>
         </button>
-        <div scCollapsiblePanel #version="scCollapsiblePanel">
-          <ng-template scCollapsibleContent>
-            <div scCollapsibleBody>
-              <div scTraceCollapsibleContent>v24.18.0</div>
-            </div>
-          </ng-template>
+        <div scCollapsiblePanel>
+          <div scTraceCollapsibleContent>v24.18.0</div>
         </div>
       </div>
       <span scTraceLine status="error">

@@ -1303,32 +1303,6 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/collapsible',
-    children: [
-      {
-        path: 'basic-collapsible-demo',
-        loadComponent: () =>
-          import('../pages/docs/collapsible/demos/basic-collapsible-demo').then(
-            (m) => m.BasicCollapsibleDemo,
-          ),
-      },
-      {
-        path: 'open-collapsible-demo',
-        loadComponent: () =>
-          import('../pages/docs/collapsible/demos/open-collapsible-demo').then(
-            (m) => m.OpenCollapsibleDemo,
-          ),
-      },
-      {
-        path: 'disabled-collapsible-demo',
-        loadComponent: () =>
-          import('../pages/docs/collapsible/demos/disabled-collapsible-demo').then(
-            (m) => m.DisabledCollapsibleDemo,
-          ),
-      },
-    ],
-  },
-  {
     path: 'demos/color-picker',
     children: [
       {
@@ -6952,62 +6926,62 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/collapsible-next',
+    path: 'demos/collapsible',
     children: [
       {
-        path: 'collapsible-next-usage-demo',
+        path: 'collapsible-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/collapsible-next/demos/collapsible-next-usage-demo').then(
-            (m) => m.CollapsibleNextUsageDemo,
+          import('../pages/docs/collapsible/demos/collapsible-usage-demo').then(
+            (m) => m.CollapsibleUsageDemo,
           ),
       },
       {
-        path: 'basic-collapsible-next-demo',
+        path: 'basic-collapsible-demo',
         loadComponent: () =>
-          import('../pages/docs/collapsible-next/demos/basic-collapsible-next-demo').then(
-            (m) => m.BasicCollapsibleNextDemo,
+          import('../pages/docs/collapsible/demos/basic-collapsible-demo').then(
+            (m) => m.BasicCollapsibleDemo,
           ),
       },
       {
-        path: 'settings-collapsible-next-demo',
+        path: 'settings-collapsible-demo',
         loadComponent: () =>
-          import('../pages/docs/collapsible-next/demos/settings-collapsible-next-demo').then(
-            (m) => m.SettingsCollapsibleNextDemo,
+          import('../pages/docs/collapsible/demos/settings-collapsible-demo').then(
+            (m) => m.SettingsCollapsibleDemo,
           ),
       },
       {
-        path: 'file-tree-collapsible-next-demo',
+        path: 'file-tree-collapsible-demo',
         loadComponent: () =>
-          import('../pages/docs/collapsible-next/demos/file-tree-collapsible-next-demo').then(
-            (m) => m.FileTreeCollapsibleNextDemo,
+          import('../pages/docs/collapsible/demos/file-tree-collapsible-demo').then(
+            (m) => m.FileTreeCollapsibleDemo,
           ),
       },
       {
-        path: 'hidden-until-found-collapsible-next-demo',
+        path: 'hidden-until-found-collapsible-demo',
         loadComponent: () =>
-          import('../pages/docs/collapsible-next/demos/hidden-until-found-collapsible-next-demo').then(
-            (m) => m.HiddenUntilFoundCollapsibleNextDemo,
+          import('../pages/docs/collapsible/demos/hidden-until-found-collapsible-demo').then(
+            (m) => m.HiddenUntilFoundCollapsibleDemo,
           ),
       },
       {
-        path: 'disabled-collapsible-next-demo',
+        path: 'disabled-collapsible-demo',
         loadComponent: () =>
-          import('../pages/docs/collapsible-next/demos/disabled-collapsible-next-demo').then(
-            (m) => m.DisabledCollapsibleNextDemo,
+          import('../pages/docs/collapsible/demos/disabled-collapsible-demo').then(
+            (m) => m.DisabledCollapsibleDemo,
           ),
       },
       {
-        path: 'open-collapsible-next-demo',
+        path: 'open-collapsible-demo',
         loadComponent: () =>
-          import('../pages/docs/collapsible-next/demos/open-collapsible-next-demo').then(
-            (m) => m.OpenCollapsibleNextDemo,
+          import('../pages/docs/collapsible/demos/open-collapsible-demo').then(
+            (m) => m.OpenCollapsibleDemo,
           ),
       },
       {
-        path: 'rtl-collapsible-next-demo',
+        path: 'rtl-collapsible-demo',
         loadComponent: () =>
-          import('../pages/docs/collapsible-next/demos/rtl-collapsible-next-demo').then(
-            (m) => m.RtlCollapsibleNextDemo,
+          import('../pages/docs/collapsible/demos/rtl-collapsible-demo').then(
+            (m) => m.RtlCollapsibleDemo,
           ),
       },
     ],

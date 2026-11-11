@@ -1,8 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCollapsible,
-  ScCollapsibleBody,
-  ScCollapsibleContent,
   ScCollapsiblePanel,
   ScCollapsibleTrigger,
   ScTrace,
@@ -24,8 +22,6 @@ import {
   selector: 'app-collapsible-trace-demo',
   imports: [
     ScCollapsible,
-    ScCollapsibleBody,
-    ScCollapsibleContent,
     ScCollapsiblePanel,
     ScCollapsibleTrigger,
     ScTrace,
@@ -43,49 +39,32 @@ import {
   template: `
     <div scTrace>
       <div scCollapsible scTraceCollapsible>
-        <button
-          scCollapsibleTrigger
-          scTraceCollapsibleTrigger
-          [panel]="version.panel"
-        >
+        <button scCollapsibleTrigger scTraceCollapsibleTrigger>
           <span scTraceLine>
             <span scTraceIcon><svg siTerminalIcon></svg></span>
             <span scTraceTitle>Ran node --version</span>
           </span>
           <span scTraceCollapsibleIcon><svg siChevronRightIcon></svg></span>
         </button>
-        <div scCollapsiblePanel #version="scCollapsiblePanel">
-          <ng-template scCollapsibleContent>
-            <div scCollapsibleBody>
-              <div scTraceCollapsibleContent>v24.18.0</div>
-            </div>
-          </ng-template>
+        <div scCollapsiblePanel>
+          <div scTraceCollapsibleContent>v24.18.0</div>
         </div>
       </div>
-      <div scCollapsible scTraceCollapsible>
-        <button
-          scCollapsibleTrigger
-          scTraceCollapsibleTrigger
-          [panel]="search.panel"
-          [expanded]="true"
-        >
+      <div scCollapsible [open]="true" scTraceCollapsible>
+        <button scCollapsibleTrigger scTraceCollapsibleTrigger>
           <span scTraceLine>
             <span scTraceIcon><svg siSearchIcon></svg></span>
             <span scTraceTitle>Searched for provideRouter</span>
           </span>
           <span scTraceCollapsibleIcon><svg siChevronRightIcon></svg></span>
         </button>
-        <div scCollapsiblePanel #search="scCollapsiblePanel">
-          <ng-template scCollapsibleContent>
-            <div scCollapsibleBody>
-              <div scTraceCollapsibleContent>
-                <ul class="list-inside list-disc">
-                  <li>src/main.ts</li>
-                  <li>src/app/app.config.ts</li>
-                </ul>
-              </div>
-            </div>
-          </ng-template>
+        <div scCollapsiblePanel>
+          <div scTraceCollapsibleContent>
+            <ul class="list-inside list-disc">
+              <li>src/main.ts</li>
+              <li>src/app/app.config.ts</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>

@@ -1,8 +1,7 @@
 import { collectErrors, press } from '../../interaction';
 import { expect, test } from '../../test';
 
-const demo = (name: string) =>
-  `/demos/collapsible-next/${name}-collapsible-next-demo`;
+const demo = (name: string) => `/demos/collapsible/${name}-collapsible-demo`;
 
 let errors: string[];
 
@@ -17,7 +16,7 @@ test.afterEach(() => {
 test('Usage: the trigger opens and closes its panel (aria-expanded, aria-controls)', async ({
   page,
 }) => {
-  await page.goto('/demos/collapsible-next/collapsible-next-usage-demo');
+  await page.goto('/demos/collapsible/collapsible-usage-demo');
   const trigger = page.getByRole('button', { name: 'Toggle details' });
   const details = page.getByText('Shipping address');
   await expect(trigger).toHaveAttribute('aria-expanded', 'false');

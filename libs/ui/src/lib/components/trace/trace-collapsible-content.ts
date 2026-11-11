@@ -3,7 +3,7 @@ import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 
 /**
- * A step's details, indented under it — inside the `scCollapsibleBody`.
+ * A step's details, indented under it — inside the `scCollapsiblePanel`.
  * Muted: a block with its own background inside sets `text-foreground`.
  */
 @Directive({

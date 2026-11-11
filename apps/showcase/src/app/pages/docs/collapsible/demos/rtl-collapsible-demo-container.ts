@@ -1,39 +1,50 @@
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { RtlCollapsibleDemo } from './rtl-collapsible-demo';
+
+@Component({
+  selector: 'app-rtl-collapsible-demo-container',
+  imports: [DemoContainer, RtlCollapsibleDemo],
+  template: `
+    <app-demo-container
+      title="RTL"
+      demoUrl="/demos/collapsible/rtl-collapsible-demo"
+      [code]="code"
+    >
+      <app-rtl-collapsible-demo />
+    </app-demo-container>
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class RtlCollapsibleDemoContainer {
+  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
-  ScCollapsibleNext,
-  ScCollapsibleNextPanel,
-  ScCollapsibleNextTrigger,
+  ScCollapsible,
+  ScCollapsiblePanel,
+  ScCollapsibleTrigger,
   ScFrame,
 } from '@semantic-components/ui';
 import { SiChevronsUpDownIcon } from '@semantic-icons/lucide-icons';
 
 /** In a right-to-left page. */
 @Component({
-  selector: 'app-rtl-collapsible-next-demo',
+  selector: 'app-rtl-collapsible-demo',
   imports: [
     ScButton,
-    ScCollapsibleNext,
-    ScCollapsibleNextPanel,
-    ScCollapsibleNextTrigger,
+    ScCollapsible,
+    ScCollapsiblePanel,
+    ScCollapsibleTrigger,
     ScFrame,
     SiChevronsUpDownIcon,
   ],
-  template: `
+  template: \`
     <div dir="rtl" lang="ar">
-      <div
-        scCollapsibleNext
-        [(open)]="open"
-        class="flex w-[350px] flex-col gap-2"
-      >
+      <div scCollapsible [(open)]="open" class="flex w-[350px] flex-col gap-2">
         <div class="flex items-center justify-between gap-4 ps-4">
           <h3 class="text-sm font-semibold">الطلب #4189</h3>
-          <button
-            scButton
-            scCollapsibleNextTrigger
-            variant="ghost"
-            size="icon-sm"
-          >
+          <button scButton scCollapsibleTrigger variant="ghost" size="icon-sm">
             <svg siChevronsUpDownIcon></svg>
             <span class="sr-only">إظهار التفاصيل</span>
           </button>
@@ -45,7 +56,7 @@ import { SiChevronsUpDownIcon } from '@semantic-icons/lucide-icons';
           <span class="text-muted-foreground">الحالة</span>
           <span class="font-medium">تم الشحن</span>
         </div>
-        <div scCollapsibleNextPanel class="-m-px flex flex-col gap-2 p-px">
+        <div scCollapsiblePanel class="-m-px flex flex-col gap-2 p-px">
           <div scFrame class="px-4 py-2 text-sm">
             <p class="font-medium">عنوان الشحن</p>
             <p class="text-muted-foreground">100 Market St, San Francisco</p>
@@ -57,10 +68,11 @@ import { SiChevronsUpDownIcon } from '@semantic-icons/lucide-icons';
         </div>
       </div>
     </div>
-  `,
+  \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class RtlCollapsibleNextDemo {
+export class RtlCollapsibleDemo {
   protected readonly open = signal(false);
+}`;
 }

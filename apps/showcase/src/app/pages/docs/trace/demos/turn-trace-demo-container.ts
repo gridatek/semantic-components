@@ -21,8 +21,6 @@ export class TurnTraceDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCollapsible,
-  ScCollapsibleBody,
-  ScCollapsibleContent,
   ScCollapsiblePanel,
   ScCollapsibleTrigger,
   ScTrace,
@@ -51,8 +49,6 @@ import {
   selector: 'app-turn-trace-demo',
   imports: [
     ScCollapsible,
-    ScCollapsibleBody,
-    ScCollapsibleContent,
     ScCollapsiblePanel,
     ScCollapsibleTrigger,
     ScTrace,
@@ -73,144 +69,94 @@ import {
   ],
   template: \`
     <div class="w-full max-w-sm">
-      <div scCollapsible scTraceCollapsible>
-        <button
-          scCollapsibleTrigger
-          scTraceCollapsibleTrigger
-          [panel]="turn.panel"
-          [expanded]="true"
-        >
+      <div scCollapsible [open]="true" scTraceCollapsible>
+        <button scCollapsibleTrigger scTraceCollapsibleTrigger>
           <span scTraceLine status="error">
             <span scTraceTitle>Worked for 2m 4s, 1 command failed</span>
           </span>
           <span scTraceCollapsibleIcon><svg siChevronRightIcon></svg></span>
         </button>
-        <div scCollapsiblePanel #turn="scCollapsiblePanel">
-          <ng-template scCollapsibleContent>
-            <div scCollapsibleBody>
-              <div scTraceCollapsibleContent class="flex flex-col gap-2">
-                <div scTrace>
-                  <div scCollapsible scTraceCollapsible>
-                    <button
-                      scCollapsibleTrigger
-                      scTraceCollapsibleTrigger
-                      [panel]="thought.panel"
-                    >
-                      <span scTraceLine>
-                        <span scTraceIcon><svg siBrainIcon></svg></span>
-                        <span scTraceTitle>Thought</span>
-                        <span scTraceDescription>12s</span>
-                      </span>
-                      <span scTraceCollapsibleIcon
-                        ><svg siChevronRightIcon></svg
-                      ></span>
-                    </button>
-                    <div scCollapsiblePanel #thought="scCollapsiblePanel">
-                      <ng-template scCollapsibleContent>
-                        <div scCollapsibleBody>
-                          <div
-                            scTraceCollapsibleContent
-                            class="whitespace-pre-wrap"
-                          >
-                            I should check which package managers are installed
-                            before I scaffold anything.
-                          </div>
-                        </div>
-                      </ng-template>
-                    </div>
+        <div scCollapsiblePanel>
+          <div scTraceCollapsibleContent class="flex flex-col gap-2">
+            <div scTrace>
+              <div scCollapsible scTraceCollapsible>
+                <button scCollapsibleTrigger scTraceCollapsibleTrigger>
+                  <span scTraceLine>
+                    <span scTraceIcon><svg siBrainIcon></svg></span>
+                    <span scTraceTitle>Thought</span>
+                    <span scTraceDescription>12s</span>
+                  </span>
+                  <span scTraceCollapsibleIcon
+                    ><svg siChevronRightIcon></svg
+                  ></span>
+                </button>
+                <div scCollapsiblePanel>
+                  <div scTraceCollapsibleContent class="whitespace-pre-wrap">
+                    I should check which package managers are installed before I
+                    scaffold anything.
                   </div>
-                  <div scCollapsible scTraceCollapsible>
-                    <button
-                      scCollapsibleTrigger
-                      scTraceCollapsibleTrigger
-                      [panel]="commands.panel"
-                      [expanded]="true"
-                    >
-                      <span scTraceLine status="error">
+                </div>
+              </div>
+              <div scCollapsible [open]="true" scTraceCollapsible>
+                <button scCollapsibleTrigger scTraceCollapsibleTrigger>
+                  <span scTraceLine status="error">
+                    <span scTraceIcon><svg siTerminalIcon></svg></span>
+                    <span scTraceTitle>Ran 2 commands, 1 failed</span>
+                  </span>
+                  <span scTraceCollapsibleIcon
+                    ><svg siChevronRightIcon></svg
+                  ></span>
+                </button>
+                <div scCollapsiblePanel>
+                  <div scTraceCollapsibleContent>
+                    <div scTrace>
+                      <span scTraceLine>
                         <span scTraceIcon><svg siTerminalIcon></svg></span>
-                        <span scTraceTitle>Ran 2 commands, 1 failed</span>
+                        <span scTraceTitle>Ran node --version</span>
                       </span>
-                      <span scTraceCollapsibleIcon
-                        ><svg siChevronRightIcon></svg
-                      ></span>
-                    </button>
-                    <div scCollapsiblePanel #commands="scCollapsiblePanel">
-                      <ng-template scCollapsibleContent>
-                        <div scCollapsibleBody>
+                      <div scCollapsible scTraceCollapsible>
+                        <button scCollapsibleTrigger scTraceCollapsibleTrigger>
+                          <span scTraceLine status="error">
+                            <span scTraceIcon><svg siTerminalIcon></svg></span>
+                            <span scTraceTitle
+                              >Failed to run pnpm --version</span
+                            >
+                          </span>
+                          <span scTraceCollapsibleIcon
+                            ><svg siChevronRightIcon></svg
+                          ></span>
+                        </button>
+                        <div scCollapsiblePanel>
                           <div scTraceCollapsibleContent>
-                            <div scTrace>
-                              <span scTraceLine>
-                                <span scTraceIcon
-                                  ><svg siTerminalIcon></svg
-                                ></span>
-                                <span scTraceTitle>Ran node --version</span>
-                              </span>
-                              <div scCollapsible scTraceCollapsible>
-                                <button
-                                  scCollapsibleTrigger
-                                  scTraceCollapsibleTrigger
-                                  [panel]="pnpm.panel"
-                                >
-                                  <span scTraceLine status="error">
-                                    <span scTraceIcon
-                                      ><svg siTerminalIcon></svg
-                                    ></span>
-                                    <span scTraceTitle
-                                      >Failed to run pnpm --version</span
-                                    >
-                                  </span>
-                                  <span scTraceCollapsibleIcon
-                                    ><svg siChevronRightIcon></svg
-                                  ></span>
-                                </button>
-                                <div
-                                  scCollapsiblePanel
-                                  #pnpm="scCollapsiblePanel"
-                                >
-                                  <ng-template scCollapsibleContent>
-                                    <div scCollapsibleBody>
-                                      <div scTraceCollapsibleContent>
-                                        <div
-                                          scCodeBlock
-                                          size="sm"
-                                          variant="destructive"
-                                        >
-                                          <pre
-                                            scCodeBlockContent
-                                            wrap
-                                            class="max-h-64"
-                                            [code]="'command not found: pnpm'"
-                                          ></pre>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </ng-template>
-                                </div>
-                              </div>
+                            <div scCodeBlock size="sm" variant="destructive">
+                              <pre
+                                scCodeBlockContent
+                                wrap
+                                class="max-h-64"
+                                [code]="'command not found: pnpm'"
+                              ></pre>
                             </div>
                           </div>
                         </div>
-                      </ng-template>
+                      </div>
                     </div>
                   </div>
                 </div>
-                <p>
-                  Node is installed and pnpm is not. Reading the docs config.
-                </p>
-                <div scTrace>
-                  <a href="#whole-turn">
-                    <span scTraceLine>
-                      <span scTraceIcon><svg siFileTextIcon></svg></span>
-                      <span scTraceTitle
-                        >Read apps/showcase/src/app/app.config.ts</span
-                      >
-                      <span scTraceIcon><svg siChevronRightIcon></svg></span>
-                    </span>
-                  </a>
-                </div>
               </div>
             </div>
-          </ng-template>
+            <p>Node is installed and pnpm is not. Reading the docs config.</p>
+            <div scTrace>
+              <a href="#whole-turn">
+                <span scTraceLine>
+                  <span scTraceIcon><svg siFileTextIcon></svg></span>
+                  <span scTraceTitle
+                    >Read apps/showcase/src/app/app.config.ts</span
+                  >
+                  <span scTraceIcon><svg siChevronRightIcon></svg></span>
+                </span>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>

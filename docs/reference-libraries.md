@@ -67,6 +67,16 @@ used; it's React.
   `ReferenceLine`, `ReferenceArea`, `ErrorBar`, axis `domain`, …), checked
   against shadcn's examples first.
 
+## Collapsible: rewritten
+
+Rewritten 2026-11-11: built beside the old one as Collapsible Next, switched in. Base UI's Collapsible (root, trigger, panel); shadcn adds no classes, so no preset key.
+
+- **No Angular Aria**: it has no disclosure pattern. The old one was Aria's Accordion, its trigger wired by `[panel]="x.panel"`, its content in `ng-template scCollapsibleContent` inside `scCollapsibleBody` (padding and animate classes of its own).
+- **The state on the root**: `[(open)]` (Base UI's `open` / `onOpenChange`), not the trigger's `[(expanded)]`; `disabled` there too. The trigger finds its panel itself (`aria-controls`).
+- **The content written in the panel**, always in the page; closed, the `hidden` attribute (Tailwind's base keeps it `display: none` over the panel's own display class), its height animating with `interpolate-size`. Base UI's `hiddenUntilFound` as `hidden="until-found"`: find-in-page searches it and its `beforematch` opens it. Left out: `keepMounted` (always kept).
+- **Users migrated**: Trace (`[open]` on the `scCollapsible`; its content's own margins, as shadcn's, no body padding), Sidebar sub-menus, Bubble's Show more (`#details="scCollapsible"`, `details.open()`), the blocks' chat.
+- **Examples**: shadcn's Demo (the Usage), Basic, Settings, File Tree, RTL; Base UI's Hidden until found; ours: Disabled, Open by default.
+
 ## Link
 
 A link styled as a button (`a[scLink]`). shadcn has no Link component — its Button page styles an `<a>` with `buttonVariants` — so it is checked against these (2026-10-30):
@@ -444,7 +454,7 @@ An agent's steps (`div[scTrace]`; built 2026-10-29, restyled 2026-11-05): shadcn
 
 - **Each preset's look**, as the `trace` key (`root`, `line`, `icon`, `collapsibleIcon`, `collapsibleTrigger`, `collapsibleContent`), with our contrast fixes (a pending step dims its icon only) and the output at the lines' size.
 - **All the examples**; the Usage, Reasoning and Tool ones without the AI SDK: Usage a static turn, Reasoning and Tool replay their states on a timer (a Replay button), in a live region.
-- **Open state** through the Collapsible's `[(expanded)]` (Aria's model), "open while running, your click wins" as `choice() ?? running()`.
+- **Open state** through the Collapsible's `[(open)]`, "open while running, your click wins" as `choice() ?? running()`.
 
 ## Marker
 

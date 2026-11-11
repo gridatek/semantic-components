@@ -1,59 +1,47 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
+  ScCard,
+  ScCardContent,
   ScCollapsible,
-  ScCollapsibleBody,
-  ScCollapsibleContent,
   ScCollapsiblePanel,
   ScCollapsibleTrigger,
 } from '@semantic-components/ui';
 import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
+/** In a card: the trigger a full-width button, its chevron turned when open. */
 @Component({
   selector: 'app-basic-collapsible-demo',
   imports: [
     ScButton,
+    ScCard,
+    ScCardContent,
     ScCollapsible,
-    ScCollapsibleBody,
-    ScCollapsibleContent,
     ScCollapsiblePanel,
     ScCollapsibleTrigger,
     SiChevronDownIcon,
   ],
   template: `
-    <div scCollapsible class="w-[350px] space-y-2">
-      <div class="flex items-center justify-between space-x-4 px-4">
-        <h4 class="text-sm font-semibold">Angular Project Dependencies</h4>
-        <button
-          scButton
-          scCollapsibleTrigger
-          [panel]="colPanel.panel"
-          #trigger="scCollapsibleTrigger"
-          variant="outline"
-          size="icon"
-        >
-          <svg
-            siChevronDownIcon
-            class="transition-transform duration-200"
-            [class.rotate-180]="trigger.expanded()"
-          ></svg>
-          <span class="sr-only">Toggle</span>
-        </button>
-      </div>
-      <div class="rounded-md border px-4 py-3 font-mono text-sm">
-        &#64;angular/core
-      </div>
-      <div scCollapsiblePanel #colPanel="scCollapsiblePanel">
-        <ng-template scCollapsibleContent>
-          <div scCollapsibleBody class="space-y-2">
-            <div class="rounded-md border px-4 py-3 font-mono text-sm">
-              &#64;angular/common
-            </div>
-            <div class="rounded-md border px-4 py-3 font-mono text-sm">
-              &#64;angular/forms
+    <div scCard class="w-full max-w-sm">
+      <div scCardContent>
+        <div scCollapsible class="data-open:bg-muted rounded-md">
+          <button scButton scCollapsibleTrigger variant="ghost" class="w-full">
+            Product details
+            <svg
+              siChevronDownIcon
+              class="ms-auto transition-transform in-data-panel-open:rotate-180"
+            ></svg>
+          </button>
+          <div scCollapsiblePanel>
+            <div class="flex flex-col items-start gap-2 p-2.5 pt-0 text-sm">
+              <p>
+                This panel can be expanded or collapsed to reveal additional
+                content.
+              </p>
+              <button scButton size="xs">Learn More</button>
             </div>
           </div>
-        </ng-template>
+        </div>
       </div>
     </div>
   `,

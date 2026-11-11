@@ -2,8 +2,6 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScBadge,
   ScCollapsible,
-  ScCollapsibleBody,
-  ScCollapsibleContent,
   ScCollapsiblePanel,
   ScCollapsibleTrigger,
   ScTrace,
@@ -31,8 +29,6 @@ import {
   imports: [
     ScBadge,
     ScCollapsible,
-    ScCollapsibleBody,
-    ScCollapsibleContent,
     ScCollapsiblePanel,
     ScCollapsibleTrigger,
     ScTrace,
@@ -51,95 +47,67 @@ import {
   ],
   template: `
     <div class="w-full max-w-sm">
-      <div scCollapsible scTraceCollapsible>
-        <button
-          scCollapsibleTrigger
-          scTraceCollapsibleTrigger
-          [panel]="slow.panel"
-          [expanded]="true"
-        >
+      <div scCollapsible [open]="true" scTraceCollapsible>
+        <button scCollapsibleTrigger scTraceCollapsibleTrigger>
           <span scTraceLine status="running">
             <span scTraceTitle>Looking into the slow deploy</span>
           </span>
           <span scTraceCollapsibleIcon><svg siChevronRightIcon></svg></span>
         </button>
-        <div scCollapsiblePanel #slow="scCollapsiblePanel">
-          <ng-template scCollapsibleContent>
-            <div scCollapsibleBody>
-              <div scTraceCollapsibleContent>
-                <div scTrace>
-                  <div scCollapsible scTraceCollapsible>
-                    <button
-                      scCollapsibleTrigger
-                      scTraceCollapsibleTrigger
-                      [panel]="log.panel"
+        <div scCollapsiblePanel>
+          <div scTraceCollapsibleContent>
+            <div scTrace>
+              <div scCollapsible scTraceCollapsible>
+                <button scCollapsibleTrigger scTraceCollapsibleTrigger>
+                  <span scTraceLine>
+                    <span scTraceIcon><svg siSearchIcon></svg></span>
+                    <span scTraceTitle
+                      >Searched for the checkout build log</span
                     >
-                      <span scTraceLine>
-                        <span scTraceIcon><svg siSearchIcon></svg></span>
-                        <span scTraceTitle
-                          >Searched for the checkout build log</span
-                        >
-                      </span>
-                      <span scTraceCollapsibleIcon
-                        ><svg siChevronRightIcon></svg
-                      ></span>
-                    </button>
-                    <div scCollapsiblePanel #log="scCollapsiblePanel">
-                      <ng-template scCollapsibleContent>
-                        <div scCollapsibleBody>
-                          <div
-                            scTraceCollapsibleContent
-                            class="flex flex-wrap gap-1.5"
-                          >
-                            <span scBadge variant="secondary">vercel.com</span>
-                            <span scBadge variant="secondary">github.com</span>
-                          </div>
-                        </div>
-                      </ng-template>
-                    </div>
+                  </span>
+                  <span scTraceCollapsibleIcon
+                    ><svg siChevronRightIcon></svg
+                  ></span>
+                </button>
+                <div scCollapsiblePanel>
+                  <div scTraceCollapsibleContent class="flex flex-wrap gap-1.5">
+                    <span scBadge variant="secondary">vercel.com</span>
+                    <span scBadge variant="secondary">github.com</span>
                   </div>
-                  <a href="#chain-of-thought">
-                    <span scTraceLine>
-                      <span scTraceIcon><svg siFileTextIcon></svg></span>
-                      <span scTraceTitle>Read the last twelve deploys</span>
-                      <span scTraceIcon><svg siChevronRightIcon></svg></span>
-                    </span>
-                  </a>
-                  <div scCollapsible scTraceCollapsible>
-                    <button
-                      scCollapsibleTrigger
-                      scTraceCollapsibleTrigger
-                      [panel]="key.panel"
-                    >
-                      <span scTraceLine status="running">
-                        <span scTraceIcon><svg siSearchIcon></svg></span>
-                        <span scTraceTitle>Searching for the cache key</span>
-                      </span>
-                      <span scTraceCollapsibleIcon
-                        ><svg siChevronRightIcon></svg
-                      ></span>
-                    </button>
-                    <div scCollapsiblePanel #key="scCollapsiblePanel">
-                      <ng-template scCollapsibleContent>
-                        <div scCollapsibleBody>
-                          <div scTraceCollapsibleContent>
-                            <div scCodeBlock size="sm">
-                              <pre
-                                scCodeBlockContent
-                                wrap
-                                class="max-h-64"
-                                [code]="'cache key image optimization'"
-                              ></pre>
-                            </div>
-                          </div>
-                        </div>
-                      </ng-template>
+                </div>
+              </div>
+              <a href="#chain-of-thought">
+                <span scTraceLine>
+                  <span scTraceIcon><svg siFileTextIcon></svg></span>
+                  <span scTraceTitle>Read the last twelve deploys</span>
+                  <span scTraceIcon><svg siChevronRightIcon></svg></span>
+                </span>
+              </a>
+              <div scCollapsible scTraceCollapsible>
+                <button scCollapsibleTrigger scTraceCollapsibleTrigger>
+                  <span scTraceLine status="running">
+                    <span scTraceIcon><svg siSearchIcon></svg></span>
+                    <span scTraceTitle>Searching for the cache key</span>
+                  </span>
+                  <span scTraceCollapsibleIcon
+                    ><svg siChevronRightIcon></svg
+                  ></span>
+                </button>
+                <div scCollapsiblePanel>
+                  <div scTraceCollapsibleContent>
+                    <div scCodeBlock size="sm">
+                      <pre
+                        scCodeBlockContent
+                        wrap
+                        class="max-h-64"
+                        [code]="'cache key image optimization'"
+                      ></pre>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </ng-template>
+          </div>
         </div>
       </div>
     </div>

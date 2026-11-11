@@ -19,8 +19,6 @@ export class SubmenuSidebarDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import {
   ScCollapsible,
-  ScCollapsibleBody,
-  ScCollapsibleContent,
   ScCollapsiblePanel,
   ScCollapsibleTrigger,
   ScSidebar,
@@ -59,8 +57,6 @@ import {
   selector: 'app-submenu-sidebar-demo',
   imports: [
     ScCollapsible,
-    ScCollapsibleBody,
-    ScCollapsibleContent,
     ScCollapsiblePanel,
     ScCollapsibleTrigger,
     ScSidebar,
@@ -164,12 +160,10 @@ import {
             <div scSidebarGroupLabel>Documentation</div>
             <ul scSidebarMenu>
               @for (section of sections; track section.title) {
-                <li scSidebarMenuItem scCollapsible>
+                <li scSidebarMenuItem scCollapsible [open]="$first">
                   <button
                     scSidebarMenuButton
                     scCollapsibleTrigger
-                    [panel]="pages.panel"
-                    [expanded]="$first"
                     class="[&[aria-expanded=true]>svg:last-child]:rotate-90"
                   >
                     <svg siBookOpenIcon></svg>
@@ -179,25 +173,21 @@ import {
                       class="ms-auto transition-transform rtl:-scale-x-100"
                     ></svg>
                   </button>
-                  <div scCollapsiblePanel #pages="scCollapsiblePanel">
-                    <ng-template scCollapsibleContent>
-                      <div scCollapsibleBody>
-                        <ul scSidebarMenuSub>
-                          @for (page of section.pages; track page) {
-                            <li scSidebarMenuSubItem>
-                              <a
-                                scSidebarMenuSubButton
-                                href="#"
-                                [active]="active() === page"
-                                (click)="go($event, page)"
-                              >
-                                <span>{{ page }}</span>
-                              </a>
-                            </li>
-                          }
-                        </ul>
-                      </div>
-                    </ng-template>
+                  <div scCollapsiblePanel>
+                    <ul scSidebarMenuSub>
+                      @for (page of section.pages; track page) {
+                        <li scSidebarMenuSubItem>
+                          <a
+                            scSidebarMenuSubButton
+                            href="#"
+                            [active]="active() === page"
+                            (click)="go($event, page)"
+                          >
+                            <span>{{ page }}</span>
+                          </a>
+                        </li>
+                      }
+                    </ul>
                   </div>
                 </li>
               }

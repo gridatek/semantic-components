@@ -1,43 +1,27 @@
-import { AccordionTrigger } from '@angular/aria/accordion';
-import {
-  Component,
-  ViewEncapsulation,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '../../utils';
+import { ScCollapsible } from './collapsible';
 
-@Component({
-  selector: '[scCollapsibleTrigger]',
-  exportAs: 'scCollapsibleTrigger',
-  hostDirectives: [
-    {
-      directive: AccordionTrigger,
-      inputs: ['panel', 'disabled', 'expanded'],
-      outputs: ['expandedChange'],
-    },
-  ],
-  template: ` <ng-content /> `,
+/**
+ * The button that shows and hides its collapsible's panel: aria-expanded,
+ * aria-controls. Behaviour only — its look is yours (scButton).
+ */
+@Directive({
+  selector: 'button[scCollapsibleTrigger]',
   host: {
+    'data-slot': 'collapsible-trigger',
     type: 'button',
-    '[attr.data-state]': 'trigger.expanded() ? "open" : "closed"',
-    '[attr.disabled]': 'trigger.disabled() || null',
+    '[attr.aria-expanded]': 'collapsible.open()',
+    '[attr.aria-controls]': 'collapsible.panelId()',
+    '[attr.data-panel-open]': 'collapsible.open() ? "" : null',
+    '[disabled]': 'collapsible.disabled()',
     '[class]': 'class()',
+    '(click)': 'collapsible.toggle()',
   },
-  encapsulation: ViewEncapsulation.None,
 })
 export class ScCollapsibleTrigger {
-  readonly trigger = inject(AccordionTrigger);
-
-  /**
-   * Whether the collapsible is expanded
-   */
-  readonly expanded = this.trigger.expanded;
-
+  protected readonly collapsible = inject(ScCollapsible);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
-    cn('[&_svg]:pointer-events-none', this.classInput()),
-  );
+  protected readonly class = computed(() => cn(this.classInput()));
 }

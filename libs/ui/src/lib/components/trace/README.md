@@ -36,38 +36,34 @@ A step that opens on its output — on the [Collapsible](../collapsible/README.m
 
 ```html
 <div scCollapsible scTraceCollapsible>
-  <button scCollapsibleTrigger scTraceCollapsibleTrigger [panel]="output.panel">
+  <button scCollapsibleTrigger scTraceCollapsibleTrigger>
     <span scTraceLine>
       <span scTraceIcon><svg siTerminalIcon></svg></span>
       <span scTraceTitle>Ran node --version</span>
     </span>
     <span scTraceCollapsibleIcon><svg siChevronRightIcon></svg></span>
   </button>
-  <div scCollapsiblePanel #output="scCollapsiblePanel">
-    <ng-template scCollapsibleContent>
-      <div scCollapsibleBody>
-        <div scTraceCollapsibleContent>v24.18.0</div>
-      </div>
-    </ng-template>
+  <div scCollapsiblePanel>
+    <div scTraceCollapsibleContent>v24.18.0</div>
   </div>
 </div>
 ```
 
-Open at first with the trigger's `[expanded]="true"`.
+Open at first with `[open]="true"` on the `scCollapsible`.
 
 ## Parts
 
-| Part                                | What it does                                                                                                                              |
-| ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `div[scTrace]`                      | The steps, in a column; a link or a button around a line gets its focus ring                                                              |
-| `span[scTraceLine]`                 | A step. `status`: `running` (its title shimmers, unless motion is reduced), `error` (red), `pending` (its icon dimmed); done when not set |
-| `span[scTraceIcon]`                 | Your SVG, sized; hidden from screen readers. After the title: a trailing icon (an arrow for a new tab)                                    |
-| `span[scTraceTitle]`                | What the step did, as a sentence; truncated on one line                                                                                   |
-| `span[scTraceDescription]`          | A detail after the title: a count, a duration, a file                                                                                     |
-| `div[scTraceCollapsible]`           | With `scCollapsible`: a step that opens                                                                                                   |
-| `button[scTraceCollapsibleTrigger]` | With `scCollapsibleTrigger`: the line as the button, looking like the line; red when its line failed                                      |
-| `span[scTraceCollapsibleIcon]`      | Your chevron pointing to the end (`siChevronRightIcon`): turned down when open, mirrored in right-to-left when closed                     |
-| `div[scTraceCollapsibleContent]`    | Inside `scCollapsibleBody`: the output, indented under the line, muted — a block with its own background inside it sets `text-foreground` |
+| Part                                | What it does                                                                                                                               |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `div[scTrace]`                      | The steps, in a column; a link or a button around a line gets its focus ring                                                               |
+| `span[scTraceLine]`                 | A step. `status`: `running` (its title shimmers, unless motion is reduced), `error` (red), `pending` (its icon dimmed); done when not set  |
+| `span[scTraceIcon]`                 | Your SVG, sized; hidden from screen readers. After the title: a trailing icon (an arrow for a new tab)                                     |
+| `span[scTraceTitle]`                | What the step did, as a sentence; truncated on one line                                                                                    |
+| `span[scTraceDescription]`          | A detail after the title: a count, a duration, a file                                                                                      |
+| `div[scTraceCollapsible]`           | With `scCollapsible`: a step that opens                                                                                                    |
+| `button[scTraceCollapsibleTrigger]` | With `scCollapsibleTrigger`: the line as the button, looking like the line; red when its line failed                                       |
+| `span[scTraceCollapsibleIcon]`      | Your chevron pointing to the end (`siChevronRightIcon`): turned down when open, mirrored in right-to-left when closed                      |
+| `div[scTraceCollapsibleContent]`    | Inside `scCollapsiblePanel`: the output, indented under the line, muted — a block with its own background inside it sets `text-foreground` |
 
 ## Keyboard and screen readers
 
@@ -77,7 +73,7 @@ Open at first with the trigger's `[expanded]="true"`.
 
 ## Open state
 
-Rows start closed: `[expanded]="true"` on the trigger opens one at first; `[(expanded)]` makes it yours. Open while a step runs, your click winning: `[expanded]="choice() ?? running()" (expandedChange)="choice.set($event)"` (the Reasoning example).
+Rows start closed: `[open]="true"` on the `scCollapsible` opens one at first; `[(open)]` makes it yours. Open while a step runs, your click winning: `[open]="choice() ?? running()" (openChange)="choice.set($event)"` (the Reasoning example).
 
 ## Not shadcn's
 

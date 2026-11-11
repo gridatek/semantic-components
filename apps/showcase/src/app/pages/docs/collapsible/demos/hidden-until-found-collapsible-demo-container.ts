@@ -1,47 +1,47 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { HiddenUntilFoundCollapsibleNextDemo } from './hidden-until-found-collapsible-next-demo';
+import { HiddenUntilFoundCollapsibleDemo } from './hidden-until-found-collapsible-demo';
 
 @Component({
-  selector: 'app-hidden-until-found-collapsible-next-demo-container',
-  imports: [DemoContainer, HiddenUntilFoundCollapsibleNextDemo],
+  selector: 'app-hidden-until-found-collapsible-demo-container',
+  imports: [DemoContainer, HiddenUntilFoundCollapsibleDemo],
   template: `
     <app-demo-container
       title="Hidden until found"
-      demoUrl="/demos/collapsible-next/hidden-until-found-collapsible-next-demo"
+      demoUrl="/demos/collapsible/hidden-until-found-collapsible-demo"
       [code]="code"
     >
-      <app-hidden-until-found-collapsible-next-demo />
+      <app-hidden-until-found-collapsible-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class HiddenUntilFoundCollapsibleNextDemoContainer {
+export class HiddenUntilFoundCollapsibleDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
-  ScCollapsibleNext,
-  ScCollapsibleNextPanel,
-  ScCollapsibleNextTrigger,
+  ScCollapsible,
+  ScCollapsiblePanel,
+  ScCollapsibleTrigger,
 } from '@semantic-components/ui';
 import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
 /** hiddenUntilFound: closed, still searched by the browser's find-in-page (Ctrl+F); a match opens it. */
 @Component({
-  selector: 'app-hidden-until-found-collapsible-next-demo',
+  selector: 'app-hidden-until-found-collapsible-demo',
   imports: [
     ScButton,
-    ScCollapsibleNext,
-    ScCollapsibleNextPanel,
-    ScCollapsibleNextTrigger,
+    ScCollapsible,
+    ScCollapsiblePanel,
+    ScCollapsibleTrigger,
     SiChevronDownIcon,
   ],
   template: \`
-    <div scCollapsibleNext class="w-full max-w-sm">
+    <div scCollapsible class="w-full max-w-sm">
       <button
         scButton
-        scCollapsibleNextTrigger
+        scCollapsibleTrigger
         variant="ghost"
         class="w-full justify-between"
       >
@@ -51,7 +51,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
           class="transition-transform in-data-panel-open:rotate-180"
         ></svg>
       </button>
-      <div scCollapsibleNextPanel hiddenUntilFound>
+      <div scCollapsiblePanel hiddenUntilFound>
         <p class="text-muted-foreground p-2.5 text-sm">
           Standard shipping takes 3–5 business days. Search this page for
           "business days": the panel opens.
@@ -62,5 +62,5 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class HiddenUntilFoundCollapsibleNextDemo {}`;
+export class HiddenUntilFoundCollapsibleDemo {}`;
 }

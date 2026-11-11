@@ -1,24 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { FileTreeCollapsibleNextDemo } from './file-tree-collapsible-next-demo';
-
-@Component({
-  selector: 'app-file-tree-collapsible-next-demo-container',
-  imports: [DemoContainer, FileTreeCollapsibleNextDemo],
-  template: `
-    <app-demo-container
-      title="File tree"
-      demoUrl="/demos/collapsible-next/file-tree-collapsible-next-demo"
-      [code]="code"
-    >
-      <app-file-tree-collapsible-next-demo />
-    </app-demo-container>
-  `,
-  host: { class: 'block w-full' },
-  encapsulation: ViewEncapsulation.None,
-})
-export class FileTreeCollapsibleNextDemoContainer {
-  readonly code = `import { NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
@@ -26,9 +6,9 @@ import {
   ScCardContent,
   ScCardHeader,
   ScCardTitle,
-  ScCollapsibleNext,
-  ScCollapsibleNextPanel,
-  ScCollapsibleNextTrigger,
+  ScCollapsible,
+  ScCollapsiblePanel,
+  ScCollapsibleTrigger,
   ScLink,
 } from '@semantic-components/ui';
 import {
@@ -45,7 +25,7 @@ interface ScFileTreeItem {
 
 /** Collapsibles in collapsibles: a folder each, its chevron turned when open. */
 @Component({
-  selector: 'app-file-tree-collapsible-next-demo',
+  selector: 'app-file-tree-collapsible-demo',
   imports: [
     NgTemplateOutlet,
     ScButton,
@@ -53,15 +33,15 @@ interface ScFileTreeItem {
     ScCardContent,
     ScCardHeader,
     ScCardTitle,
-    ScCollapsibleNext,
-    ScCollapsibleNextPanel,
-    ScCollapsibleNextTrigger,
+    ScCollapsible,
+    ScCollapsiblePanel,
+    ScCollapsibleTrigger,
     ScLink,
     SiChevronRightIcon,
     SiFileIcon,
     SiFolderIcon,
   ],
-  template: \`
+  template: `
     <div scCard class="w-full max-w-64 gap-2">
       <div scCardHeader>
         <h3 scCardTitle>Explorer</h3>
@@ -79,10 +59,10 @@ interface ScFileTreeItem {
     </div>
     <ng-template #node let-item>
       @if (item.items) {
-        <div scCollapsibleNext>
+        <div scCollapsible>
           <button
             scButton
-            scCollapsibleNextTrigger
+            scCollapsibleTrigger
             variant="ghost"
             size="sm"
             class="w-full justify-start"
@@ -94,7 +74,7 @@ interface ScFileTreeItem {
             <svg siFolderIcon></svg>
             {{ item.name }}
           </button>
-          <div scCollapsibleNextPanel class="ms-5 mt-1">
+          <div scCollapsiblePanel class="ms-5 mt-1">
             <div class="flex flex-col gap-1">
               @for (child of item.items; track child.name) {
                 <ng-container
@@ -117,11 +97,11 @@ interface ScFileTreeItem {
         </a>
       }
     </ng-template>
-  \`,
+  `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class FileTreeCollapsibleNextDemo {
+export class FileTreeCollapsibleDemo {
   protected readonly tree: ScFileTreeItem[] = [
     {
       name: 'components',
@@ -145,5 +125,4 @@ export class FileTreeCollapsibleNextDemo {
     { name: 'package.json' },
     { name: 'README.md' },
   ];
-}`;
 }

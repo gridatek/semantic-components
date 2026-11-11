@@ -17,8 +17,6 @@ export class TraceUsageDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCollapsible,
-  ScCollapsibleBody,
-  ScCollapsibleContent,
   ScCollapsiblePanel,
   ScCollapsibleTrigger,
   ScTrace,
@@ -48,8 +46,6 @@ import {
   selector: 'app-trace-usage-demo',
   imports: [
     ScCollapsible,
-    ScCollapsibleBody,
-    ScCollapsibleContent,
     ScCollapsiblePanel,
     ScCollapsibleTrigger,
     ScTrace,
@@ -73,11 +69,7 @@ import {
   template: \`
     <div scTrace class="max-w-sm">
       <div scCollapsible scTraceCollapsible>
-        <button
-          scCollapsibleTrigger
-          scTraceCollapsibleTrigger
-          [panel]="thought.panel"
-        >
+        <button scCollapsibleTrigger scTraceCollapsibleTrigger>
           <span scTraceLine>
             <span scTraceIcon><svg siBrainIcon></svg></span>
             <span scTraceTitle>Thought</span>
@@ -85,14 +77,10 @@ import {
           </span>
           <span scTraceCollapsibleIcon><svg siChevronRightIcon></svg></span>
         </button>
-        <div scCollapsiblePanel #thought="scCollapsiblePanel">
-          <ng-template scCollapsibleContent>
-            <div scCollapsibleBody>
-              <div scTraceCollapsibleContent class="whitespace-pre-wrap">
-                I should read the deploy logs before changing the cache.
-              </div>
-            </div>
-          </ng-template>
+        <div scCollapsiblePanel>
+          <div scTraceCollapsibleContent class="whitespace-pre-wrap">
+            I should read the deploy logs before changing the cache.
+          </div>
         </div>
       </div>
       <span scTraceLine>
@@ -100,40 +88,28 @@ import {
         <span scTraceTitle>Searched for the cache key</span>
       </span>
       <div scCollapsible scTraceCollapsible>
-        <button
-          scCollapsibleTrigger
-          scTraceCollapsibleTrigger
-          [panel]="build.panel"
-        >
+        <button scCollapsibleTrigger scTraceCollapsibleTrigger>
           <span scTraceLine>
             <span scTraceIcon><svg siTerminalIcon></svg></span>
             <span scTraceTitle>Ran pnpm build</span>
           </span>
           <span scTraceCollapsibleIcon><svg siChevronRightIcon></svg></span>
         </button>
-        <div scCollapsiblePanel #build="scCollapsiblePanel">
-          <ng-template scCollapsibleContent>
-            <div scCollapsibleBody>
-              <div scTraceCollapsibleContent>
-                <div scCodeBlock size="sm">
-                  <pre
-                    scCodeBlockContent
-                    wrap
-                    class="max-h-64"
-                    [code]="buildOutput"
-                  ></pre>
-                </div>
-              </div>
+        <div scCollapsiblePanel>
+          <div scTraceCollapsibleContent>
+            <div scCodeBlock size="sm">
+              <pre
+                scCodeBlockContent
+                wrap
+                class="max-h-64"
+                [code]="buildOutput"
+              ></pre>
             </div>
-          </ng-template>
+          </div>
         </div>
       </div>
       <div scCollapsible scTraceCollapsible>
-        <button
-          scCollapsibleTrigger
-          scTraceCollapsibleTrigger
-          [panel]="commit.panel"
-        >
+        <button scCollapsibleTrigger scTraceCollapsibleTrigger>
           <span scTraceLine>
             <span scTraceIcon><svg siGitCommitHorizontalIcon></svg></span>
             <span scTraceTitle
@@ -142,20 +118,16 @@ import {
           </span>
           <span scTraceCollapsibleIcon><svg siChevronRightIcon></svg></span>
         </button>
-        <div scCollapsiblePanel #commit="scCollapsiblePanel">
-          <ng-template scCollapsibleContent>
-            <div scCollapsibleBody>
-              <div scTraceCollapsibleContent>
-                <div scTrace>
-                  <span scTraceLine>
-                    <span scTraceIcon><svg siFilePenIcon></svg></span>
-                    <span scTraceTitle>Edited next.config.mjs</span>
-                    <span scTraceDescription class="font-mono">+4 −1</span>
-                  </span>
-                </div>
-              </div>
+        <div scCollapsiblePanel>
+          <div scTraceCollapsibleContent>
+            <div scTrace>
+              <span scTraceLine>
+                <span scTraceIcon><svg siFilePenIcon></svg></span>
+                <span scTraceTitle>Edited next.config.mjs</span>
+                <span scTraceDescription class="font-mono">+4 −1</span>
+              </span>
             </div>
-          </ng-template>
+          </div>
         </div>
       </div>
     </div>

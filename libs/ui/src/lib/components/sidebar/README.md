@@ -62,17 +62,13 @@ Our Collapsible around an item:
 
 ```html
 <li scSidebarMenuItem scCollapsible>
-  <button scSidebarMenuButton scCollapsibleTrigger [panel]="docs.panel"><svg siBookOpenIcon></svg><span>Docs</span></button>
-  <div scCollapsiblePanel #docs="scCollapsiblePanel">
-    <ng-template scCollapsibleContent>
-      <div scCollapsibleBody>
-        <ul scSidebarMenuSub>
-          <li scSidebarMenuSubItem>
-            <a scSidebarMenuSubButton routerLink="/docs/install">Installation</a>
-          </li>
-        </ul>
-      </div>
-    </ng-template>
+  <button scSidebarMenuButton scCollapsibleTrigger><svg siBookOpenIcon></svg><span>Docs</span></button>
+  <div scCollapsiblePanel>
+    <ul scSidebarMenuSub>
+      <li scSidebarMenuSubItem>
+        <a scSidebarMenuSubButton routerLink="/docs/install">Installation</a>
+      </li>
+    </ul>
   </div>
 </li>
 ```

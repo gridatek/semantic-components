@@ -9,8 +9,6 @@ import {
 import {
   ScButton,
   ScCollapsible,
-  ScCollapsibleBody,
-  ScCollapsibleContent,
   ScCollapsiblePanel,
   ScCollapsibleTrigger,
   ScTrace,
@@ -34,8 +32,6 @@ import {
   imports: [
     ScButton,
     ScCollapsible,
-    ScCollapsibleBody,
-    ScCollapsibleContent,
     ScCollapsiblePanel,
     ScCollapsibleTrigger,
     ScTrace,
@@ -58,14 +54,13 @@ import {
       </button>
       <div scTrace class="w-full" aria-live="polite">
         @if (thought()) {
-          <div scCollapsible scTraceCollapsible>
-            <button
-              scCollapsibleTrigger
-              scTraceCollapsibleTrigger
-              [panel]="reasoning.panel"
-              [expanded]="open()"
-              (expandedChange)="choice.set($event)"
-            >
+          <div
+            scCollapsible
+            (openChange)="choice.set($event)"
+            [open]="open()"
+            scTraceCollapsible
+          >
+            <button scCollapsibleTrigger scTraceCollapsibleTrigger>
               <span scTraceLine [status]="running() ? 'running' : undefined">
                 <span scTraceIcon><svg siBrainIcon></svg></span>
                 <span scTraceTitle>{{
@@ -74,14 +69,10 @@ import {
               </span>
               <span scTraceCollapsibleIcon><svg siChevronRightIcon></svg></span>
             </button>
-            <div scCollapsiblePanel #reasoning="scCollapsiblePanel">
-              <ng-template scCollapsibleContent>
-                <div scCollapsibleBody>
-                  <div scTraceCollapsibleContent class="whitespace-pre-wrap">
-                    {{ thought() }}
-                  </div>
-                </div>
-              </ng-template>
+            <div scCollapsiblePanel>
+              <div scTraceCollapsibleContent class="whitespace-pre-wrap">
+                {{ thought() }}
+              </div>
             </div>
           </div>
         } @else {

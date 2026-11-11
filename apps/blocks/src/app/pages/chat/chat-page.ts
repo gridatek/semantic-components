@@ -12,8 +12,6 @@ import {
   ScBubbleContent,
   ScButton,
   ScCollapsible,
-  ScCollapsibleBody,
-  ScCollapsibleContent,
   ScCollapsiblePanel,
   ScCollapsibleTrigger,
   ScMessage,
@@ -75,8 +73,6 @@ const WORD_TIME = 50;
     ScBubbleContent,
     ScButton,
     ScCollapsible,
-    ScCollapsibleBody,
-    ScCollapsibleContent,
     ScCollapsiblePanel,
     ScCollapsibleTrigger,
     ScMessage,
@@ -144,7 +140,6 @@ const WORD_TIME = 50;
                                   <button
                                     scCollapsibleTrigger
                                     scTraceCollapsibleTrigger
-                                    [panel]="output.panel"
                                   >
                                     <span scTraceLine [status]="step.status">
                                       <span scTraceIcon>
@@ -156,17 +151,10 @@ const WORD_TIME = 50;
                                       <svg siChevronRightIcon></svg>
                                     </span>
                                   </button>
-                                  <div
-                                    scCollapsiblePanel
-                                    #output="scCollapsiblePanel"
-                                  >
-                                    <ng-template scCollapsibleContent>
-                                      <div scCollapsibleBody>
-                                        <div scTraceCollapsibleContent>
-                                          {{ step.output }}
-                                        </div>
-                                      </div>
-                                    </ng-template>
+                                  <div scCollapsiblePanel>
+                                    <div scTraceCollapsibleContent>
+                                      {{ step.output }}
+                                    </div>
                                   </div>
                                 </div>
                               } @else {

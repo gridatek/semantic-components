@@ -12,7 +12,6 @@ export * from './calendar';
 export * from './card';
 export * from './checkbox';
 export * from './collapsible';
-export * from './collapsible-next';
 export * from './combobox';
 export * from './command';
 export * from './context-menu';

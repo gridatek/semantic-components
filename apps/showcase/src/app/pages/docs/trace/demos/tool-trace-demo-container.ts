@@ -28,8 +28,6 @@ export class ToolTraceDemoContainer {
 import {
   ScButton,
   ScCollapsible,
-  ScCollapsibleBody,
-  ScCollapsibleContent,
   ScCollapsiblePanel,
   ScCollapsibleTrigger,
   ScTrace,
@@ -65,8 +63,6 @@ interface ScDemoToolCall {
   imports: [
     ScButton,
     ScCollapsible,
-    ScCollapsibleBody,
-    ScCollapsibleContent,
     ScCollapsiblePanel,
     ScCollapsibleTrigger,
     ScTrace,
@@ -98,11 +94,7 @@ interface ScDemoToolCall {
             </span>
           } @else {
             <div scCollapsible scTraceCollapsible>
-              <button
-                scCollapsibleTrigger
-                scTraceCollapsibleTrigger
-                [panel]="output.panel"
-              >
+              <button scCollapsibleTrigger scTraceCollapsibleTrigger>
                 <span scTraceLine [status]="call.failed ? 'error' : undefined">
                   <span scTraceIcon><svg siTerminalIcon></svg></span>
                   <span scTraceTitle
@@ -114,25 +106,21 @@ interface ScDemoToolCall {
                   ><svg siChevronRightIcon></svg
                 ></span>
               </button>
-              <div scCollapsiblePanel #output="scCollapsiblePanel">
-                <ng-template scCollapsibleContent>
-                  <div scCollapsibleBody>
-                    <div scTraceCollapsibleContent>
-                      <div
-                        scCodeBlock
-                        size="sm"
-                        [variant]="call.failed ? 'destructive' : 'default'"
-                      >
-                        <pre
-                          scCodeBlockContent
-                          wrap
-                          class="max-h-64"
-                          [code]="call.output"
-                        ></pre>
-                      </div>
-                    </div>
+              <div scCollapsiblePanel>
+                <div scTraceCollapsibleContent>
+                  <div
+                    scCodeBlock
+                    size="sm"
+                    [variant]="call.failed ? 'destructive' : 'default'"
+                  >
+                    <pre
+                      scCodeBlockContent
+                      wrap
+                      class="max-h-64"
+                      [code]="call.output"
+                    ></pre>
                   </div>
-                </ng-template>
+                </div>
               </div>
             </div>
           }

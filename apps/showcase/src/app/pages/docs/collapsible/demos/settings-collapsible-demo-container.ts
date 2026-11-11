@@ -1,23 +1,23 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { SettingsCollapsibleNextDemo } from './settings-collapsible-next-demo';
+import { SettingsCollapsibleDemo } from './settings-collapsible-demo';
 
 @Component({
-  selector: 'app-settings-collapsible-next-demo-container',
-  imports: [DemoContainer, SettingsCollapsibleNextDemo],
+  selector: 'app-settings-collapsible-demo-container',
+  imports: [DemoContainer, SettingsCollapsibleDemo],
   template: `
     <app-demo-container
       title="Settings"
-      demoUrl="/demos/collapsible-next/settings-collapsible-next-demo"
+      demoUrl="/demos/collapsible/settings-collapsible-demo"
       [code]="code"
     >
-      <app-settings-collapsible-next-demo />
+      <app-settings-collapsible-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class SettingsCollapsibleNextDemoContainer {
+export class SettingsCollapsibleDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
@@ -26,16 +26,16 @@ import {
   ScCardDescription,
   ScCardHeader,
   ScCardTitle,
-  ScCollapsibleNext,
-  ScCollapsibleNextPanel,
-  ScCollapsibleNextTrigger,
+  ScCollapsible,
+  ScCollapsiblePanel,
+  ScCollapsibleTrigger,
   ScInput,
 } from '@semantic-components/ui';
 import { SiMaximizeIcon, SiMinimizeIcon } from '@semantic-icons/lucide-icons';
 
 /** Two fields shown, two more on demand; the trigger beside them, its icon following the state. */
 @Component({
-  selector: 'app-settings-collapsible-next-demo',
+  selector: 'app-settings-collapsible-demo',
   imports: [
     ScButton,
     ScCard,
@@ -43,9 +43,9 @@ import { SiMaximizeIcon, SiMinimizeIcon } from '@semantic-icons/lucide-icons';
     ScCardDescription,
     ScCardHeader,
     ScCardTitle,
-    ScCollapsibleNext,
-    ScCollapsibleNextPanel,
-    ScCollapsibleNextTrigger,
+    ScCollapsible,
+    ScCollapsiblePanel,
+    ScCollapsibleTrigger,
     ScInput,
     SiMaximizeIcon,
     SiMinimizeIcon,
@@ -57,12 +57,12 @@ import { SiMaximizeIcon, SiMinimizeIcon } from '@semantic-icons/lucide-icons';
         <p scCardDescription>Set the corner radius of the element.</p>
       </div>
       <div scCardContent>
-        <div scCollapsibleNext [(open)]="open" class="flex items-start gap-2">
+        <div scCollapsible [(open)]="open" class="flex items-start gap-2">
           <div class="grid w-full grid-cols-2 gap-2">
             <input scInput aria-label="Radius, top start" placeholder="0" />
             <input scInput aria-label="Radius, top end" placeholder="0" />
             <div
-              scCollapsibleNextPanel
+              scCollapsiblePanel
               class="col-span-full grid grid-cols-subgrid gap-2"
             >
               <input
@@ -73,12 +73,7 @@ import { SiMaximizeIcon, SiMinimizeIcon } from '@semantic-icons/lucide-icons';
               <input scInput aria-label="Radius, bottom end" placeholder="0" />
             </div>
           </div>
-          <button
-            scButton
-            scCollapsibleNextTrigger
-            variant="outline"
-            size="icon"
-          >
+          <button scButton scCollapsibleTrigger variant="outline" size="icon">
             @if (open()) {
               <svg siMinimizeIcon></svg>
               <span class="sr-only">Fewer corners</span>
@@ -94,7 +89,7 @@ import { SiMaximizeIcon, SiMinimizeIcon } from '@semantic-icons/lucide-icons';
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class SettingsCollapsibleNextDemo {
+export class SettingsCollapsibleDemo {
   protected readonly open = signal(false);
 }`;
 }

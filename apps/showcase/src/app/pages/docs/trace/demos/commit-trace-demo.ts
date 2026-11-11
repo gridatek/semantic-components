@@ -1,8 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCollapsible,
-  ScCollapsibleBody,
-  ScCollapsibleContent,
   ScCollapsiblePanel,
   ScCollapsibleTrigger,
   ScSheet,
@@ -38,8 +36,6 @@ import {
   selector: 'app-commit-trace-demo',
   imports: [
     ScCollapsible,
-    ScCollapsibleBody,
-    ScCollapsibleContent,
     ScCollapsiblePanel,
     ScCollapsibleTrigger,
     ScSheet,
@@ -67,73 +63,62 @@ import {
   ],
   template: `
     <div scTrace class="max-w-sm">
-      <div scCollapsible scTraceCollapsible>
-        <button
-          scCollapsibleTrigger
-          scTraceCollapsibleTrigger
-          [panel]="commit.panel"
-          [expanded]="true"
-        >
+      <div scCollapsible [open]="true" scTraceCollapsible>
+        <button scCollapsibleTrigger scTraceCollapsibleTrigger>
           <span scTraceLine>
             <span scTraceIcon><svg siGitCommitHorizontalIcon></svg></span>
             <span scTraceTitle>Committed a1b2c3: Fix the login redirect</span>
           </span>
           <span scTraceCollapsibleIcon><svg siChevronRightIcon></svg></span>
         </button>
-        <div scCollapsiblePanel #commit="scCollapsiblePanel">
-          <ng-template scCollapsibleContent>
-            <div scCollapsibleBody>
-              <div scTraceCollapsibleContent>
-                <div scTrace>
-                  @for (file of files; track file.path) {
-                    <div scSheetProvider>
-                      <button scSheetTrigger>
-                        <span scTraceLine>
-                          <span scTraceIcon>
-                            @if (file.added) {
-                              <svg siFilePlusIcon></svg>
-                            } @else {
-                              <svg siFilePenIcon></svg>
-                            }
-                          </span>
-                          <span scTraceTitle>
-                            {{ file.added ? 'Added' : 'Edited' }}
-                            {{ file.path }}
-                          </span>
-                          <span scTraceDescription class="font-mono">
-                            +{{ file.additions }} −{{ file.deletions }}
-                          </span>
-                          <span scTraceIcon
-                            ><svg siChevronRightIcon></svg
-                          ></span>
-                        </span>
-                      </button>
-                      <ng-template scSheetPortal>
-                        <div scSheet>
-                          <div scSheetHeader>
-                            <h2 scSheetTitle class="font-mono">
-                              {{ file.path }}
-                            </h2>
-                            <p scSheetDescription>
-                              {{ file.additions }} additions,
-                              {{ file.deletions }} deletions
-                            </p>
-                          </div>
-                          <div scCodeBlock class="mx-6 mb-6 w-auto">
-                            <pre
-                              scCodeBlockContent
-                              language="diff"
-                              [code]="file.diff"
-                            ></pre>
-                          </div>
-                        </div>
-                      </ng-template>
+        <div scCollapsiblePanel>
+          <div scTraceCollapsibleContent>
+            <div scTrace>
+              @for (file of files; track file.path) {
+                <div scSheetProvider>
+                  <button scSheetTrigger>
+                    <span scTraceLine>
+                      <span scTraceIcon>
+                        @if (file.added) {
+                          <svg siFilePlusIcon></svg>
+                        } @else {
+                          <svg siFilePenIcon></svg>
+                        }
+                      </span>
+                      <span scTraceTitle>
+                        {{ file.added ? 'Added' : 'Edited' }}
+                        {{ file.path }}
+                      </span>
+                      <span scTraceDescription class="font-mono">
+                        +{{ file.additions }} −{{ file.deletions }}
+                      </span>
+                      <span scTraceIcon><svg siChevronRightIcon></svg></span>
+                    </span>
+                  </button>
+                  <ng-template scSheetPortal>
+                    <div scSheet>
+                      <div scSheetHeader>
+                        <h2 scSheetTitle class="font-mono">
+                          {{ file.path }}
+                        </h2>
+                        <p scSheetDescription>
+                          {{ file.additions }} additions,
+                          {{ file.deletions }} deletions
+                        </p>
+                      </div>
+                      <div scCodeBlock class="mx-6 mb-6 w-auto">
+                        <pre
+                          scCodeBlockContent
+                          language="diff"
+                          [code]="file.diff"
+                        ></pre>
+                      </div>
                     </div>
-                  }
+                  </ng-template>
                 </div>
-              </div>
+              }
             </div>
-          </ng-template>
+          </div>
         </div>
       </div>
     </div>

@@ -24,8 +24,6 @@ import {
   ScBubbleContent,
   ScButton,
   ScCollapsible,
-  ScCollapsibleBody,
-  ScCollapsibleContent,
   ScCollapsiblePanel,
   ScCollapsibleTrigger,
 } from '@semantic-components/ui';
@@ -41,8 +39,6 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     ScCollapsible,
     ScCollapsibleTrigger,
     ScCollapsiblePanel,
-    ScCollapsibleContent,
-    ScCollapsibleBody,
     SiChevronDownIcon,
   ],
   template: \`
@@ -52,39 +48,34 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
       </div>
       <div scBubble variant="muted" align="end">
         <div scBubbleContent>
-          <div scCollapsible class="flex flex-col gap-2">
+          <div
+            scCollapsible
+            #details="scCollapsible"
+            class="flex flex-col gap-2"
+          >
             <p>
               The accessibility review found two focus states that were visually
               too subtle in dark mode.
             </p>
-            <div scCollapsiblePanel #panel="scCollapsiblePanel">
-              <ng-template scCollapsibleContent>
-                <div scCollapsibleBody class="flex flex-col gap-2">
-                  <p>
-                    I checked the dialog, menu, and drawer paths because each
-                    one renders focusable controls inside a layered surface.
-                  </p>
-                  <p>
-                    The dialog and drawer are fine. The menu needs the hover and
-                    focus tokens split so keyboard focus stays visible when the
-                    pointer is not involved.
-                  </p>
-                </div>
-              </ng-template>
+            <div scCollapsiblePanel class="flex flex-col gap-2">
+              <p>
+                I checked the dialog, menu, and drawer paths because each one
+                renders focusable controls inside a layered surface.
+              </p>
+              <p>
+                The dialog and drawer are fine. The menu needs the hover and
+                focus tokens split so keyboard focus stays visible when the
+                pointer is not involved.
+              </p>
             </div>
             <button
               scButton
               scCollapsibleTrigger
-              [panel]="panel.panel"
-              #trigger="scCollapsibleTrigger"
               variant="link"
               class="text-muted-foreground h-auto self-start p-0"
             >
-              {{ trigger.expanded() ? 'Show less' : 'Show more' }}
-              <svg
-                siChevronDownIcon
-                [class.rotate-180]="trigger.expanded()"
-              ></svg>
+              {{ details.open() ? 'Show less' : 'Show more' }}
+              <svg siChevronDownIcon [class.rotate-180]="details.open()"></svg>
             </button>
           </div>
         </div>
