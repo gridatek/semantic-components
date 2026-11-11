@@ -585,9 +585,9 @@ Rewritten 2026-11-10: built beside the old one as Slider Next, switched in. shad
 - **One thumb**: shadcn's Range and Multiple are left out (Range Slider is ours, in its turn).
 - **shadcn's examples**: Demo (the Usage), Controlled, Disabled, Vertical, RTL; ours kept: Form, Custom color.
 
-## Combobox: rewriting
+## Combobox: rewritten
 
-Built 2026-11-11 beside the old one as Combobox. A shadcn component with a Base UI one, so no web research: Base UI's docs (`combobox.md`), shadcn's `combobox.tsx` in the 8 styles and its 12 examples.
+Rewritten 2026-11-11: built beside the old one as Combobox Next, switched in 2026-11-12. The Phone Input's country picker moved onto it (a trigger with the search inside the popup; `namedByField` off, as the field's label is the number's). A shadcn component with a Base UI one, so no web research: Base UI's docs (`combobox.md`), shadcn's `combobox.tsx` in the 8 styles and its 12 examples.
 
 - **On Angular Aria** (the user, 2026-11-11: "here we should use angular aria, forget about command, they are two separate components"): Aria's Combobox on the input, Listbox and Option for the list. So **filtering is the consumer's** (Aria's listbox can't skip hidden options): the root gives `query()`, the text typed since it opened, and `scComboboxMatches` helps.
 - **Base UI's three layouts**, the old one had only the last: the input as the field (in our `scInputGroup`), several values as chips, a trigger with the search inside the popup. One input part reads where it is. With the search inside, the trigger is a plain button (`aria-haspopup="dialog"`) and the search the only Aria combobox; its list needs a template (`scComboboxListContent`: the project's `…Content` name for a template rendered later), as Aria renders a combobox's list from one. That trigger takes the field's look by itself and, in a `scField`, is named by the label and the value it shows — the popup by the label (the user, 2026-11-11: "make the API simple").

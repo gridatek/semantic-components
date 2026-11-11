@@ -1,6 +1,6 @@
 # Combobox
 
-A select to filter: an input over a list of options, one or several of which are its value — never free text (that is an autocomplete). Base UI's Combobox, on Angular Aria's Combobox and Listbox, in the look of the app's preset (the `combobox` key). Built beside [Combobox](../combobox/README.md), to compare.
+A select to filter: an input over a list of options, one or several of which are its value — never free text (that is an autocomplete). Base UI's Combobox, on Angular Aria's Combobox and Listbox, in the look of the app's preset (the `combobox` key).
 
 ## Usage
 

@@ -21,7 +21,7 @@ Effort: **S** < 1h · **M** a few hours · **L** a day or more.
 - Toolbar demo named (`aria-label="Text formatting"`).
 - Input group: the in-popup ring reset wins on specificity (override in `combobox-popup.ts` removed); an embedded select/multiselect/combobox trigger rings the group (currency demo classes removed).
 - Highlight follows the pointer in select, multiselect, autocomplete, combobox (`useActiveOption`, `utils/active-option`); separate `hover:` styles dropped; hovering doesn't scroll the list.
-- Labels for an initial value before the popup has opened: `items` on the select (`{ value, label }[]`, as Base UI's), `displayWith` on multiselect and combobox.
+- Labels for an initial value before the popup has opened: `items` on the select (`{ value, label }[]`, as Base UI's), `displayWith` on multiselect, `itemToStringLabel` on combobox.
 - Type-ahead on a closed select / multiselect opens the list at the first match (APG select-only combobox).
 - Decisions: autocomplete clear button stays a Tab stop; tree visible in the docs; every component stays `Experimental` for now.
 - Org chart: sibling connector lines drawn (they never rendered), and a chart wider than its box overflows to the end only (safe centering), so it can be scrolled in full.
@@ -55,7 +55,7 @@ The select and multiselect demos store icon _names_ (`'tag'`, `'star'`…) and m
 ### 5. Drop the workarounds when Angular catches up — S each
 
 - `bindInput` / `setInput` (`utils/bind-input`) write to input signal nodes through `@angular/core/primitives/signals`. Replace with host-directive bindings once [angular/angular#50510](https://github.com/angular/angular/issues/50510) ships.
-- `ScComboboxListContainer` is a plain template marker, and `ScAriaTreeItem` / `ScAriaOrgChartItem` make required Aria inputs optional, only because required inputs of host directives can't be hidden (same issue).
+- `ScComboboxListContent` (the list's template when the search is inside the popup) is a plain template marker, and `ScAriaTreeItem` / `ScAriaOrgChartItem` make required Aria inputs optional, only because required inputs of host directives can't be hidden (same issue).
 - Menu bar Escape (`ScMenubar`) and menu Tab (`ScMenu`) handling — see the upstream drafts.
 
 ## Upstream

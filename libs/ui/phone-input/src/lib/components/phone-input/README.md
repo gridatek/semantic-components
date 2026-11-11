@@ -10,23 +10,25 @@ The value is the full international number (`+33612345678`), or `''` while nothi
 <div scField>
   <label scLabel>Phone number</label>
   <div scPhoneInput [formField]="contactForm.phone" defaultCountry="US" #phone="scPhoneInput">
-    <div scCombobox scPhoneInputCountry>
-      <div scComboboxTrigger aria-label="Country">
-        <span scComboboxValue>
+    <div scCombobox scPhoneInputCountry #picker="scCombobox">
+      <button scComboboxTrigger>
+        <span class="sr-only">Country</span>
+        <span scComboboxValue class="flex items-center gap-2">
           <img scPhoneInputFlag alt="" />
           +{{ phone.callingCode() }}
         </span>
-        <svg scComboboxIcon siChevronDownIcon></svg>
-      </div>
+        <svg siChevronDownIcon></svg>
+      </button>
       <ng-template scComboboxPortal>
-        <div scComboboxPopup>
-          <!-- search box, then the list -->
-          <ng-template scComboboxListContainer>
-            <div scComboboxList>
-              @for (country of countries; track country.code) {
+        <div scComboboxPopup aria-label="Country">
+          <div scInputGroup><input scInput scComboboxInput aria-label="Search countries" /></div>
+          <div scComboboxEmpty>No countries found</div>
+          <ng-template scComboboxListContent>
+            <div scComboboxList aria-label="Countries">
+              @for (country of matching(picker.query()); track country.code) {
               <div scComboboxItem [value]="country.code" [label]="country.name">
                 <img scPhoneInputFlag [country]="country.code" alt="" />
-                <span scComboboxItemLabel>{{ country.name }} +{{ country.callingCode }}</span>
+                {{ country.name }} +{{ country.callingCode }}
               </div>
               }
             </div>
@@ -49,7 +51,7 @@ readonly contactForm = form(this.model, (s) => {
 });
 ```
 
-The country picker is a regular `scCombobox` (see Combobox): the trigger content, the list and its filtering are yours.
+The country picker is a regular `scCombobox` (see Combobox), its trigger with the search inside the popup: the trigger content, the list and its filtering (by `picker.query()`) are yours. The field's label names the number, not the picker: name the trigger (a `sr-only` "Country" before its value) and the popup (`aria-label`).
 
 ### Flags
 
