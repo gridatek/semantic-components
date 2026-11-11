@@ -3,6 +3,7 @@ import {
   Directive,
   ElementRef,
   HostAttributeToken,
+  afterNextRender,
   computed,
   effect,
   inject,
@@ -97,15 +98,18 @@ export class ScComboboxNextTrigger {
 
     // A click on that label focuses it without opening it (it is not the
     // label's `for`: a label's click would press the button).
-    effect((onCleanup) => {
+    const destroyRef = inject(DestroyRef);
+    afterNextRender(() => {
       const labelId = this.besideInput() ? null : this.root.labelId();
       const labelElement = labelId ? document.getElementById(labelId) : null;
       if (!labelElement) return;
       const focus = () => element.focus();
       labelElement.addEventListener('click', focus);
-      onCleanup(() => labelElement.removeEventListener('click', focus));
+      destroyRef.onDestroy(() =>
+        labelElement.removeEventListener('click', focus),
+      );
     });
-    inject(DestroyRef).onDestroy(() => this.root.triggerElement.set(undefined));
+    destroyRef.onDestroy(() => this.root.triggerElement.set(undefined));
   }
 
   protected onArrowDown(event: Event): void {
