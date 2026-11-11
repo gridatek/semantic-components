@@ -11,6 +11,11 @@ export const alert: ScAlertStyles = {
           default: 'bg-card text-card-foreground',
           destructive:
             'bg-card text-destructive *:data-[slot=alert-description]:text-destructive/90 *:[svg]:text-current',
+          // Not shadcn's: the toast's colours (the theme's --success, --warning).
+          success:
+            'bg-card text-success *:data-[slot=alert-description]:text-success *:[svg]:text-current',
+          warning:
+            'bg-card text-warning *:data-[slot=alert-description]:text-warning *:[svg]:text-current',
         },
       },
       defaultVariants: {

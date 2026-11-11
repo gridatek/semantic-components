@@ -80,6 +80,13 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
+        path: 'status-alert-demo',
+        loadComponent: () =>
+          import('../pages/docs/alert/demos/status-alert-demo').then(
+            (m) => m.StatusAlertDemo,
+          ),
+      },
+      {
         path: 'action-alert-demo',
         loadComponent: () =>
           import('../pages/docs/alert/demos/action-alert-demo').then(

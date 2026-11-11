@@ -8,7 +8,7 @@
 export type ScPresetName =
   'nova' | 'vega' | 'maia' | 'lyra' | 'mira' | 'luma' | 'sera' | 'rhea';
 
-export type ScAlertVariant = 'default' | 'destructive';
+export type ScAlertVariant = 'default' | 'destructive' | 'success' | 'warning';
 
 export type ScBadgeVariant =
   'default' | 'secondary' | 'destructive' | 'outline' | 'ghost' | 'link';

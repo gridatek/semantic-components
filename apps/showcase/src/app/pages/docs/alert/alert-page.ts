@@ -19,6 +19,7 @@ import { BasicAlertDemoContainer } from './demos/basic-alert-demo-container';
 import { ColorsAlertDemoContainer } from './demos/colors-alert-demo-container';
 import { DestructiveAlertDemoContainer } from './demos/destructive-alert-demo-container';
 import { RtlAlertDemoContainer } from './demos/rtl-alert-demo-container';
+import { StatusAlertDemoContainer } from './demos/status-alert-demo-container';
 
 @Component({
   selector: 'app-alert-page',
@@ -27,6 +28,7 @@ import { RtlAlertDemoContainer } from './demos/rtl-alert-demo-container';
     AlertUsageDemoContainer,
     BasicAlertDemoContainer,
     DestructiveAlertDemoContainer,
+    StatusAlertDemoContainer,
     ActionAlertDemoContainer,
     ColorsAlertDemoContainer,
     AnnouncedAlertDemoContainer,
@@ -129,6 +131,7 @@ import { RtlAlertDemoContainer } from './demos/rtl-alert-demo-container';
         <h2 scHeading appToc>Examples</h2>
         <app-basic-alert-demo-container />
         <app-destructive-alert-demo-container />
+        <app-status-alert-demo-container />
         <app-action-alert-demo-container />
         <app-colors-alert-demo-container />
         <app-announced-alert-demo-container />
@@ -203,7 +206,7 @@ export default class AlertPage {
       name: 'ScAlert',
       selector: 'div[scAlert]',
       description:
-        "The alert; no role (see Announcing). Input variant: 'default' or 'destructive'.",
+        "The alert; no role (see Announcing). Input variant: 'default', 'destructive', 'success' or 'warning' (the last two not shadcn's: the toast's colours).",
     },
     {
       name: 'ScAlertTitle',

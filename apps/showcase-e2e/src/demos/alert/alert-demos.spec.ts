@@ -50,6 +50,26 @@ test('Destructive: the destructive color, on the icon too', async ({
   expect(basic).not.toBe(normal);
 });
 
+test('Success and warning: each its own colour, on the description and icon too', async ({
+  page,
+}) => {
+  await page.goto(demo('status'));
+  const colors = await page
+    .locator('[scAlert]')
+    .evaluateAll((alerts) =>
+      alerts.map((alert) => [
+        getComputedStyle(alert).color,
+        getComputedStyle(alert.querySelector('svg')!).color,
+        getComputedStyle(alert.querySelector('[scAlertDescription]')!).color,
+      ]),
+    );
+  for (const [alert, icon, description] of colors) {
+    expect(icon).toBe(alert);
+    expect(description).toBe(alert);
+  }
+  expect(colors[0][0]).not.toBe(colors[1][0]);
+});
+
 test('Action: the button in the end corner, the text clear of it', async ({
   page,
 }) => {

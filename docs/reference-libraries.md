@@ -212,6 +212,7 @@ A callout (`div[scAlert]`). A shadcn component; Base UI and Radix have none, so 
 **Taken:**
 
 - **The parts, the variants and each preset's look.**
+- **`success` and `warning` variants, not shadcn's** (the user, 2026-11-11, with the Toast's colours): each style's `destructive` with the theme's `--success` / `--warning`; the description in the full colour (they sit at 4.5:1: no `/90`). No `info`: the default with an info icon is one. The Success and warning example.
 - **Not `role="alert"` on every alert** (the user, 2026-11-04): no role by default; the consumer adds `role="status"` or `role="alert"` on a region that is there from the start, when the alert appears after an action. The page's Announcing section and the Announced example say how.
 
 ## Alert Dialog
