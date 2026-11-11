@@ -68,6 +68,10 @@ export const appRoutes: Route[] = [
         loadComponent: () => import('./pages/blog/blog-page'),
       },
       {
+        path: 'toast',
+        loadComponent: () => import('./pages/toast/toast-page'),
+      },
+      {
         path: 'blog/:slug',
         loadComponent: () => import('./pages/blog-article/blog-article-page'),
       },

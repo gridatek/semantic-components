@@ -590,7 +590,7 @@ Restyled 2026-11-11: shadcn's Toast (Base UI's, `toast.tsx` in each style; it re
 - **shadcn's look**: the title `font-medium`, the description muted, the variants no longer colour the text (only the error icon is red), `max-w-sm`, shadcn's stack (12px peek, 12px gap, 10% smaller each). An `info` variant (shadcn's types).
 - **The close at the end of the row**, always shown (ghost `icon-sm`, muted, its hit area larger): it was in the corner, shown on hover or focus.
 - **Kept, ours**: `ScToaster`'s API (`show` / `update` / `promise` / `dismiss`, `variant`, `duration`), the template written in the app, six positions, the hotkey, swipe.
-- **Examples**: shadcn's Demo (the Usage), Types, Promise; ours kept: Position, Duration, Update, Stacked. Basic, Title, Action, Destructive and Variants dropped (the Usage and Types cover them). No RTL example: the toasts follow the page's direction, one stack for the app.
+- **Examples**: shadcn's Demo (the Usage), Types, Promise; ours kept: Position, Duration, Update, Stacked. Basic, Title, Action, Destructive and Variants dropped (the Usage and Types cover them). No RTL example: the toasts follow the page's direction, one stack for the app (a note on the page); tried in the blocks app instead (`/toast`, Arabic).
 - **Left for a rewrite** (docs/todo.md): Base UI's names (`add`, `close`, `type`, `timeout`), `priority`, F6, an update by passing the id again, anchored toasts, focusable toasts.
 
 ## Toggle: restyled

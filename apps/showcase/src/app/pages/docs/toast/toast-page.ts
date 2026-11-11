@@ -104,6 +104,12 @@ import { UpdateToastDemoContainer } from './demos/update-toast-demo-container';
         <app-duration-toast-demo-container />
         <app-update-toast-demo-container />
         <app-stacked-toast-demo-container />
+        <p class="text-muted-foreground">
+          No right-to-left example here: the toasts are one stack for the whole
+          app, and follow the page&apos;s direction (dir on the html element) —
+          not a dir="rtl" around an example, as other components do. In an
+          Arabic or Hebrew page their row is mirrored and start is the right.
+        </p>
       </section>
 
       <section class="space-y-4">

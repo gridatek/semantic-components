@@ -174,6 +174,8 @@ Toasts at one position stack, the newest in front and up to `visibleToasts` show
 
 `top-start`, `top-center`, `top-end`, `bottom-start`, `bottom-center`, `bottom-end` — start and end follow the text's direction (start is on the right in Arabic or Hebrew). Each toast shows at its own position, in a stack with the others there: showing one somewhere else leaves the rest where they are.
 
+The toasts are one stack for the whole app, following the page's direction (`<html dir>`), not a `dir="rtl"` around where `show` is called: so the showcase has no right-to-left example. Try it in the blocks app (`/toast`, the language switch to Arabic).
+
 ```ts
 this.toaster.show({ position: 'top-center', description: 'Copied.' });
 ```
