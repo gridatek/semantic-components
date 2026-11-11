@@ -155,7 +155,7 @@ export default class NativeSelectPage {
     imports: [
       'import {',
       '  ScNativeSelect, ScNativeSelectContainer, ScNativeSelectIcon,',
-      '  ScNativeSelectOption, ScNativeSelectOptGroup,',
+      '  ScNativeSelectOption, ScNativeSelectOptionGroup,',
       "} from '@semantic-components/ui';",
     ].join('\n'),
     markup: [
@@ -164,7 +164,7 @@ export default class NativeSelectPage {
       '  <div scNativeSelectContainer>',
       '    <select scNativeSelect [formField]="…">',
       '      <option scNativeSelectOption value="…">…</option>',
-      '      <optgroup scNativeSelectOptGroup label="…">',
+      '      <optgroup scNativeSelectOptionGroup label="…">',
       '        <option scNativeSelectOption value="…">…</option>',
       '      </optgroup>',
       '    </select>',
@@ -195,7 +195,7 @@ export default class NativeSelectPage {
         'Your chevron (siChevronDownIcon), after the select: at its end, by the preset; hidden from screen readers.',
     },
     {
-      name: 'ScNativeSelectOption, ScNativeSelectOptGroup',
+      name: 'ScNativeSelectOption, ScNativeSelectOptionGroup',
       selector: 'option[…], optgroup[…]',
       description:
         "An option, and a group of them under its label: the system's colours, so the browser's list reads in dark mode too.",

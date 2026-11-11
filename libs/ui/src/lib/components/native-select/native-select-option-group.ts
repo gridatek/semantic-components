@@ -3,12 +3,12 @@ import { cn } from '../../utils';
 
 /** A group of options under its `label`: the system's colours, as the options. */
 @Directive({
-  selector: 'optgroup[scNativeSelectOptGroup]',
+  selector: 'optgroup[scNativeSelectOptionGroup]',
   host: {
     '[class]': 'class()',
   },
 })
-export class ScNativeSelectOptGroup {
+export class ScNativeSelectOptionGroup {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>

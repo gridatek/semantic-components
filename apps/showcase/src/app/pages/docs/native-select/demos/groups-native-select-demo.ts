@@ -5,8 +5,8 @@ import {
   ScNativeSelect,
   ScNativeSelectContainer,
   ScNativeSelectIcon,
-  ScNativeSelectOptGroup,
   ScNativeSelectOption,
+  ScNativeSelectOptionGroup,
 } from '@semantic-components/ui';
 import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
@@ -19,7 +19,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     ScNativeSelect,
     ScNativeSelectContainer,
     ScNativeSelectIcon,
-    ScNativeSelectOptGroup,
+    ScNativeSelectOptionGroup,
     ScNativeSelectOption,
     SiChevronDownIcon,
   ],
@@ -29,12 +29,12 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
       <div scNativeSelectContainer class="w-full">
         <select scNativeSelect>
           <option scNativeSelectOption value="">Select department</option>
-          <optgroup scNativeSelectOptGroup label="Engineering">
+          <optgroup scNativeSelectOptionGroup label="Engineering">
             <option scNativeSelectOption value="frontend">Frontend</option>
             <option scNativeSelectOption value="backend">Backend</option>
             <option scNativeSelectOption value="devops">DevOps</option>
           </optgroup>
-          <optgroup scNativeSelectOptGroup label="Sales">
+          <optgroup scNativeSelectOptionGroup label="Sales">
             <option scNativeSelectOption value="sales-rep">Sales Rep</option>
             <option scNativeSelectOption value="account-manager">
               Account Manager
@@ -43,7 +43,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
               Sales Director
             </option>
           </optgroup>
-          <optgroup scNativeSelectOptGroup label="Operations">
+          <optgroup scNativeSelectOptionGroup label="Operations">
             <option scNativeSelectOption value="support">
               Customer Support
             </option>

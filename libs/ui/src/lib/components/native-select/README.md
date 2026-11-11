@@ -21,13 +21,13 @@ The browser's own select, in the look of the app's preset (the `nativeSelect` ke
 
 ## Parts
 
-| Part                      | Selector                           | What it does                                                                                                                                       |
-| ------------------------- | ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ScNativeSelect`          | `select[scNativeSelect]`           | The browser's select, the preset's look. `size` (`default`, `sm`); id and description from a `scField`; `[formField]`; `aria-invalid` once touched |
-| `ScNativeSelectContainer` | `div[scNativeSelectContainer]`     | Around the select and your chevron: `w-fit` (`w-full` to fill a field), dimmed while the select is disabled; its select's `data-size`              |
-| `ScNativeSelectIcon`      | `svg[scNativeSelectIcon]`          | Your chevron, after the select: placed at its end by the preset, `aria-hidden`                                                                     |
-| `ScNativeSelectOption`    | `option[scNativeSelectOption]`     | An option: `bg-[Canvas] text-[CanvasText]`, so the browser's list reads in dark mode                                                               |
-| `ScNativeSelectOptGroup`  | `optgroup[scNativeSelectOptGroup]` | A group of options under its `label`: the same colours                                                                                             |
+| Part                        | Selector                              | What it does                                                                                                                                       |
+| --------------------------- | ------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ScNativeSelect`            | `select[scNativeSelect]`              | The browser's select, the preset's look. `size` (`default`, `sm`); id and description from a `scField`; `[formField]`; `aria-invalid` once touched |
+| `ScNativeSelectContainer`   | `div[scNativeSelectContainer]`        | Around the select and your chevron: `w-fit` (`w-full` to fill a field), dimmed while the select is disabled; its select's `data-size`              |
+| `ScNativeSelectIcon`        | `svg[scNativeSelectIcon]`             | Your chevron, after the select: placed at its end by the preset, `aria-hidden`                                                                     |
+| `ScNativeSelectOption`      | `option[scNativeSelectOption]`        | An option: `bg-[Canvas] text-[CanvasText]`, so the browser's list reads in dark mode                                                               |
+| `ScNativeSelectOptionGroup` | `optgroup[scNativeSelectOptionGroup]` | A group of options under its `label`: the same colours                                                                                             |
 
 The container's classes are the same in every style, so they are in the part; the select's and the icon's are the preset's, copied as shadcn writes them (`data-[size=sm]:`, mira's `group-data-[size=sm]/native-select:` on the icon — the container carries the size for it).
 
