@@ -7,7 +7,6 @@ import {
 } from '@angular/core';
 import { ScBadge } from '@semantic-components/ui';
 import { cn } from 'cn';
-import { ComponentItem } from '../../data/components';
 import { ComponentsService } from '../../services/components-service';
 import { ComponentStatusBadge } from '../component-status-badge/component-status-badge';
 
@@ -16,13 +15,8 @@ import { ComponentStatusBadge } from '../component-status-badge/component-status
   imports: [ComponentStatusBadge, ScBadge],
   template: `
     @if (componentItem(); as item) {
+      <span scBadge variant="outline">{{ item.category }}</span>
       <app-component-status-badge [status]="item.status" />
-      <span scBadge variant="outline">
-        {{ item.category }}
-      </span>
-      <span scBadge variant="outline">
-        {{ item.library }}
-      </span>
     }
   `,
   host: {

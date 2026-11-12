@@ -10,7 +10,7 @@ import {
   input,
   viewChild,
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import {
   NavigationEnd,
   Router,
@@ -19,6 +19,12 @@ import {
   RouterOutlet,
 } from '@angular/router';
 import {
+  ScBreadcrumb,
+  ScBreadcrumbItem,
+  ScBreadcrumbLink,
+  ScBreadcrumbList,
+  ScBreadcrumbPage,
+  ScBreadcrumbSeparator,
   ScSidebar,
   ScSidebarContent,
   ScSidebarFooter,
@@ -41,6 +47,7 @@ import { ScInputButton, ScKbd, ScSeparator } from '@semantic-components/ui';
 import {
   SiBookOpenTextIcon,
   SiBoxIcon,
+  SiChevronRightIcon,
   SiCookingPotIcon,
   SiDownloadIcon,
   SiPanelLeftIcon,
@@ -48,7 +55,7 @@ import {
   SiWrenchIcon,
 } from '@semantic-icons/lucide-icons';
 import { cn } from 'cn';
-import { filter } from 'rxjs';
+import { filter, map } from 'rxjs';
 import { Logo } from '../../components/logo/logo';
 import { PageNav, type PageNavItem } from '../../components/page-nav/page-nav';
 import { PresetSheet } from '../../components/preset-sheet/preset-sheet';
@@ -87,6 +94,13 @@ import { ConfigService } from '../../services/config-service';
     ScKbd,
     ScSeparator,
     ThemeMenu,
+    ScBreadcrumb,
+    ScBreadcrumbItem,
+    ScBreadcrumbLink,
+    ScBreadcrumbList,
+    ScBreadcrumbPage,
+    ScBreadcrumbSeparator,
+    SiChevronRightIcon,
     PageNav,
     SiBookOpenTextIcon,
     SiBoxIcon,
@@ -340,9 +354,26 @@ import { ConfigService } from '../../services/config-service';
             aria-hidden="true"
             class="h-4 self-center"
           ></div>
-          <span class="text-muted-foreground text-sm font-medium">
-            Documentation
-          </span>
+          <nav scBreadcrumb aria-label="Where you are">
+            <ol scBreadcrumbList>
+              @for (crumb of crumbs(); track crumb.name; let last = $last) {
+                <li scBreadcrumbItem>
+                  @if (last || !crumb.path) {
+                    <span scBreadcrumbPage>{{ crumb.name }}</span>
+                  } @else {
+                    <a scBreadcrumbLink [routerLink]="crumb.path">{{
+                      crumb.name
+                    }}</a>
+                  }
+                </li>
+                @if (!last) {
+                  <li scBreadcrumbSeparator>
+                    <svg siChevronRightIcon></svg>
+                  </li>
+                }
+              }
+            </ol>
+          </nav>
           <div class="ms-auto">
             <app-preset-sheet />
           </div>
@@ -391,6 +422,34 @@ export class DocsLayout {
   readonly utilities = this.componentsService.visibleUtilities;
   readonly recipes = this.componentsService.visibleRecipes;
   protected readonly devMode = this.config.devMode;
+
+  /** The page shown: its path, without query or fragment. */
+  private readonly url = toSignal(
+    this.router.events.pipe(
+      filter((event) => event instanceof NavigationEnd),
+      map(() => this.router.url.split(/[?#]/)[0]),
+    ),
+    { initialValue: this.router.url.split(/[?#]/)[0] },
+  );
+
+  /** The header's breadcrumb: Docs › Components › Button. */
+  protected readonly crumbs = computed<{ name: string; path?: string }[]>(
+    () => {
+      const url = this.url();
+      const docs = { name: 'Docs', path: '/docs/getting-started/introduction' };
+      const components = { name: 'Components', path: '/docs/components' };
+      if (url === components.path) return [docs, components];
+      const named = this.pages().find((page) => page.path === url);
+      if (url.startsWith('/docs/components/')) {
+        const slug = url.slice('/docs/components/'.length);
+        const item = this.componentsService
+          .components()
+          .find((c) => c.path === slug);
+        return [docs, components, { name: named?.name ?? item?.name ?? slug }];
+      }
+      return named ? [docs, { name: named.name }] : [docs];
+    },
+  );
 
   /** Every docs page, in the sidebar's order: the bottom's previous and next. */
   protected readonly pages = computed<PageNavItem[]>(() => [

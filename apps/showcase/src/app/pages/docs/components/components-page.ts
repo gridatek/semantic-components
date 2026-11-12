@@ -6,11 +6,15 @@ import {
   signal,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ScBadge } from '@semantic-components/ui';
-import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
-import { ScHeading } from '@semantic-components/ui';
+import {
+  ScBadge,
+  ScFrame,
+  ScHeading,
+  ScToggleGroup,
+  ScToggleGroupItem,
+} from '@semantic-components/ui';
 import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { ComponentCategory, ComponentLibrary } from '../../../data/components';
+import { ComponentCategory } from '../../../data/components';
 import { ComponentsService } from '../../../services/components-service';
 
 @Component({
@@ -19,6 +23,7 @@ import { ComponentsService } from '../../../services/components-service';
     RouterLink,
     ComponentStatusBadge,
     ScBadge,
+    ScFrame,
     ScToggleGroup,
     ScToggleGroupItem,
     ScHeading,
@@ -60,8 +65,9 @@ import { ComponentsService } from '../../../services/components-service';
       <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         @for (item of filteredComponents(); track item.path) {
           <a
+            scFrame
             [routerLink]="'/docs/components/' + item.path"
-            class="group hover:bg-accent relative rounded-lg border p-6 transition-colors"
+            class="group hover:bg-accent relative p-6 transition-colors"
           >
             <h3 class="leading-none font-semibold tracking-tight">
               {{ item.name }}
@@ -70,25 +76,8 @@ import { ComponentsService } from '../../../services/components-service';
               {{ item.description }}
             </p>
             <div class="mt-3 flex flex-wrap items-center gap-2">
+              <span scBadge variant="outline">{{ item.category }}</span>
               <app-component-status-badge [status]="item.status" />
-              <span
-                scBadge
-                variant="outline"
-                [style.background-color]="categoryColor.bg"
-                [style.color]="categoryColor.text"
-                [style.border-color]="categoryColor.text"
-              >
-                {{ item.category }}
-              </span>
-              <span
-                scBadge
-                variant="outline"
-                [style.background-color]="libraryColors[item.library].bg"
-                [style.color]="libraryColors[item.library].text"
-                [style.border-color]="libraryColors[item.library].text"
-              >
-                {{ item.library }}
-              </span>
             </div>
           </a>
         }
@@ -112,25 +101,6 @@ export default class ComponentsPage {
     'Editor',
     'Advanced',
   ];
-
-  readonly categoryColor = {
-    bg: 'color-mix(in oklch, var(--primary) 15%, transparent)',
-    text: 'var(--primary)',
-  };
-
-  readonly libraryColors: Record<
-    ComponentLibrary,
-    { bg: string; text: string }
-  > = {
-    ui: {
-      bg: 'color-mix(in oklch, var(--chart-1) 15%, transparent)',
-      text: 'var(--chart-1)',
-    },
-    'third-party': {
-      bg: 'color-mix(in oklch, var(--chart-4) 15%, transparent)',
-      text: 'var(--chart-4)',
-    },
-  };
 
   readonly filterCategory = signal<string[]>(['All']);
 
