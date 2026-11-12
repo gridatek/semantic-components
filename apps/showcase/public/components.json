@@ -314,7 +314,8 @@
     "description": "Styled, accessible parts for TanStack Table data tables.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Data Display"
+    "category": "Data Display",
+    "hidden": true
   },
   {
     "name": "Date Input",
