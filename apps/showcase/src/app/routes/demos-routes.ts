@@ -1794,6 +1794,13 @@ export const demosRoutes: Route[] = [
     path: 'demos/data-table',
     children: [
       {
+        path: 'data-table-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/data-table/demos/data-table-usage-demo').then(
+            (m) => m.DataTableUsageDemo,
+          ),
+      },
+      {
         path: 'featured-data-table-demo',
         loadComponent: () =>
           import('../pages/docs/data-table/demos/featured-data-table-demo').then(
@@ -3835,6 +3842,30 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/button-pattern',
+    children: [
+      {
+        path: 'conditional-button-pattern-demo',
+        loadComponent: () =>
+          import('../pages/docs/button-pattern/demos/conditional-button-pattern-demo').then(
+            (m) => m.ConditionalButtonPatternDemo,
+          ),
+      },
+    ],
+  },
+  {
+    path: 'demos/select-on-focus',
+    children: [
+      {
+        path: 'keyboard-select-on-focus-demo',
+        loadComponent: () =>
+          import('../pages/docs/select-on-focus/demos/keyboard-select-on-focus-demo').then(
+            (m) => m.KeyboardSelectOnFocusDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/hotkey',
     children: [
       {
@@ -3965,10 +3996,10 @@ export const demosRoutes: Route[] = [
     path: 'demos/password-field',
     children: [
       {
-        path: 'basic-password-field-demo',
+        path: 'password-field-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/password-field/demos/basic-password-field-demo').then(
-            (m) => m.BasicPasswordFieldDemo,
+          import('../pages/docs/password-field/demos/password-field-usage-demo').then(
+            (m) => m.PasswordFieldUsageDemo,
           ),
       },
       {

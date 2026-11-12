@@ -3,7 +3,9 @@ import { expectInlineOrder, expectRtl } from '../../rtl';
 import { type Page, expect, test } from '../../test';
 
 const demo = (name: string) =>
-  `/demos/password-field/${name}-password-field-demo`;
+  name === 'usage'
+    ? '/demos/password-field/password-field-usage-demo'
+    : `/demos/password-field/${name}-password-field-demo`;
 const password = (page: Page, name = 'Password') =>
   page.getByLabel(name, { exact: true });
 
@@ -20,7 +22,7 @@ test.afterEach(() => {
 test('Password Field: labelled, described, never spellchecked', async ({
   page,
 }) => {
-  await page.goto(demo('basic'));
+  await page.goto(demo('usage'));
   const input = password(page);
   await expect(input).toHaveAttribute('type', 'password');
   await expect(input).toHaveAttribute('autocomplete', 'current-password');
@@ -34,7 +36,7 @@ test('Password Field: labelled, described, never spellchecked', async ({
 test('Password Field: the toggle shows it, the caret stays', async ({
   page,
 }) => {
-  await page.goto(demo('basic'));
+  await page.goto(demo('usage'));
   const input = password(page);
   const show = page.getByRole('button', { name: 'Show password' });
   // Not a toggle button: its name says what a press does.

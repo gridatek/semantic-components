@@ -11,7 +11,7 @@ import {
 import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
-  selector: 'app-basic-password-field-demo',
+  selector: 'app-password-field-usage-demo',
   imports: [
     FormField,
     ScFieldDescription,
@@ -44,6 +44,6 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
   host: { class: 'flex w-full flex-col items-center gap-4' },
   encapsulation: ViewEncapsulation.None,
 })
-export class BasicPasswordFieldDemo {
+export class PasswordFieldUsageDemo {
   readonly login = form(signal({ password: '' }));
 }

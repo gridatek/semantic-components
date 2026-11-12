@@ -1,23 +1,19 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { BasicPasswordFieldDemo } from './basic-password-field-demo';
+import { UsageCode } from '../../../../components/usage-code/usage-code';
+import { PasswordFieldUsageDemo } from './password-field-usage-demo';
 
 @Component({
-  selector: 'app-basic-password-field-demo-container',
-  imports: [DemoContainer, BasicPasswordFieldDemo],
+  selector: 'app-password-field-usage-demo-container',
+  imports: [UsageCode, PasswordFieldUsageDemo],
   template: `
-    <app-demo-container
-      title="Password Field"
-      demoUrl="/demos/password-field/basic-password-field-demo"
-      [code]="code"
-    >
-      <app-basic-password-field-demo />
-    </app-demo-container>
+    <app-usage-code [code]="code">
+      <ng-template><app-password-field-usage-demo /></ng-template>
+    </app-usage-code>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class BasicPasswordFieldDemoContainer {
+export class PasswordFieldUsageDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
@@ -31,7 +27,7 @@ import {
 import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
-  selector: 'app-basic-password-field-demo',
+  selector: 'app-password-field-usage-demo',
   imports: [
     FormField,
     ScFieldDescription,
@@ -64,7 +60,7 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
   host: { class: 'flex w-full flex-col items-center gap-4' },
   encapsulation: ViewEncapsulation.None,
 })
-export class BasicPasswordFieldDemo {
+export class PasswordFieldUsageDemo {
   readonly login = form(signal({ password: '' }));
 }`;
 }

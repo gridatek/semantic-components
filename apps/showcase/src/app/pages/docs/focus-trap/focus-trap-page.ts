@@ -1,5 +1,15 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScHeading } from '@semantic-components/ui';
+import {
+  ScHeading,
+  ScTable,
+  ScTableBody,
+  ScTableCell,
+  ScTableContainer,
+  ScTableHeader,
+  ScTableHeaderCell,
+  ScTableRow,
+} from '@semantic-components/ui';
+import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import BasicFocusTrapDemoContainer from './demos/basic-focus-trap-demo-container';
@@ -8,6 +18,14 @@ import { FocusTrapUsageDemoContainer } from './demos/focus-trap-usage-demo-conta
 @Component({
   selector: 'app-focus-trap-page',
   imports: [
+    Anatomy,
+    ScTable,
+    ScTableBody,
+    ScTableCell,
+    ScTableContainer,
+    ScTableHeader,
+    ScTableHeaderCell,
+    ScTableRow,
     TocHeading,
     ComponentBadges,
     ScHeading,
@@ -30,9 +48,14 @@ import { FocusTrapUsageDemoContainer } from './demos/focus-trap-usage-demo-conta
         <app-focus-trap-usage-demo-container />
       </section>
 
-      <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
-        <app-basic-focus-trap-demo-container />
+      <section class="space-y-4">
+        <h2 scHeading appToc>Anatomy</h2>
+        <p class="text-muted-foreground">
+          One directive on the element shown — a dialog, a panel: focus moves
+          in, Tab stays inside, and focus goes back where it came from when it
+          goes away.
+        </p>
+        <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
 
       <section class="space-y-4">
@@ -55,8 +78,68 @@ import { FocusTrapUsageDemoContainer } from './demos/focus-trap-usage-demo-conta
           </li>
         </ul>
       </section>
+
+      <section class="space-y-8">
+        <h2 scHeading appToc>Examples</h2>
+        <app-basic-focus-trap-demo-container />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>API reference</h2>
+        <p class="text-muted-foreground">A behaviour only, on any element.</p>
+        <div
+          scTableContainer
+          tabindex="0"
+          role="region"
+          aria-label="Focus Trap parts"
+        >
+          <table scTable>
+            <thead scTableHeader>
+              <tr scTableRow>
+                <th scTableHeaderCell>Part</th>
+                <th scTableHeaderCell>Selector</th>
+                <th scTableHeaderCell>Description</th>
+              </tr>
+            </thead>
+            <tbody scTableBody>
+              @for (part of parts; track part.name) {
+                <tr scTableRow>
+                  <td scTableCell>
+                    <code class="font-mono text-sm">{{ part.name }}</code>
+                  </td>
+                  <td scTableCell>
+                    <code class="font-mono text-sm">{{ part.selector }}</code>
+                  </td>
+                  <td
+                    scTableCell
+                    class="text-muted-foreground whitespace-normal"
+                  >
+                    {{ part.description }}
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </section>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,
 })
-export default class FocusTrapPage {}
+export default class FocusTrapPage {
+  protected readonly anatomy = {
+    imports: ["import { ScFocusTrap } from '@semantic-components/ui';"].join(
+      '\n',
+    ),
+    markup: ['@if (open()) {', '  <div scFocusTrap>…</div>', '}'].join('\n'),
+  };
+
+  protected readonly parts = [
+    {
+      name: 'ScFocusTrap',
+      selector: '[scFocusTrap]',
+      description:
+        'Focuses the first focusable element once rendered (or the one marked cdkFocusInitial); Tab and Shift+Tab wrap inside. [scFocusTrap]="false": focus still moves in and comes back, but Tab may leave (a non-modal popover). On the way out, focus goes back only if it was still inside, or lost to the page.',
+    },
+  ];
+}
