@@ -61,16 +61,17 @@ import { PreviewCards } from './cards/preview-cards';
     <div class="flex flex-col gap-4 p-4 md:flex-row md:items-start">
       <section
         aria-label="Options"
-        class="shrink-0 rounded-2xl bg-neutral-900 p-3 text-neutral-50 md:sticky md:top-4 md:w-52"
+        scFrame
+        class="bg-card text-card-foreground shrink-0 p-3 md:sticky md:top-4 md:w-52"
       >
         <ul
           class="flex gap-2.5 overflow-x-auto py-px md:flex-col md:gap-3 md:overflow-visible"
         >
           <li>
             <div scMenuProvider align="start">
-              <button scMenuTrigger type="button" [class]="card">
+              <button scMenuTrigger scFrame type="button" [class]="card">
                 <span class="flex flex-col">
-                  <span class="text-xs text-neutral-400">Style</span>
+                  <span class="text-muted-foreground text-xs">Style</span>
                   <span class="text-sm font-medium capitalize">{{
                     current
                   }}</span>
@@ -101,9 +102,9 @@ import { PreviewCards } from './cards/preview-cards';
           </li>
           @for (option of soon; track option.label) {
             <li>
-              <button type="button" disabled [class]="card">
+              <button type="button" scFrame disabled [class]="card">
                 <span class="flex flex-col">
-                  <span class="text-xs text-neutral-400">{{
+                  <span class="text-muted-foreground text-xs">{{
                     option.label
                   }}</span>
                   <span class="text-sm font-medium">{{ option.value }}</span>
@@ -138,7 +139,7 @@ import { PreviewCards } from './cards/preview-cards';
             </li>
           }
         </ul>
-        <p class="mt-3 px-1 text-xs text-neutral-400">
+        <p class="text-muted-foreground mt-3 px-1 text-xs">
           Only the style can change for now; more options are coming.
         </p>
       </section>
@@ -159,7 +160,7 @@ export default class Presets {
 
   /** An option's card: its name and value, an icon at the end. */
   protected readonly card =
-    'relative flex w-36 shrink-0 items-center justify-between gap-2 rounded-lg px-2.5 py-2 text-start ring-1 ring-white/10 select-none hover:bg-white/5 focus-visible:ring-white/60 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 md:w-full';
+    'relative flex w-36 shrink-0 items-center justify-between gap-2 px-2.5 py-2 text-start select-none hover:bg-muted focus-visible:ring-ring/50 focus-visible:ring-3 focus-visible:outline-none aria-expanded:bg-muted disabled:pointer-events-none disabled:opacity-50 md:w-full';
   protected readonly icon = 'size-4 shrink-0';
 
   /** The options still to come, as shadcn's Create lists them. */
