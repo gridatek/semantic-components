@@ -15,8 +15,8 @@ permissions:
 
 jobs:
   # The apps as built by default, rendered in the browser (client-side: CSR):
-  # lint, unit tests, build, then each app's e2e tests — only what the change
-  # affects.
+  # lint, unit tests and build — only what the change affects. Their e2e tests
+  # are the `csr-e2e` job.
   csr:
     runs-on: ubuntu-latest
     timeout-minutes: 30
@@ -48,22 +48,62 @@ jobs:
       - name: Build
         run: npx nx affected -t build
 
+  # The e2e tests of the client-side apps, in four shards run side by side:
+  # the showcase's suite (over 3,000 tests) outgrew one job's 30 minutes, even
+  # on four workers. Each shard builds the app and runs its quarter
+  # (Playwright's `--shard`); the blocks' small suite runs in the first. Only
+  # when the change affects them.
+  csr-e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3, 4]
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 26
+          cache: 'npm'
+
+      - uses: nrwl/nx-set-shas@v4
+
+      - name: Install dependencies
+        run: npm i
+
+      # Which e2e projects the change affects.
+      - name: Affected
+        id: affected
+        run: |
+          projects=$(npx nx show projects --affected -t e2e)
+          echo "showcase=$(echo "$projects" | grep -qw showcase-e2e && echo true || echo false)" >> "$GITHUB_OUTPUT"
+          echo "blocks=$(echo "$projects" | grep -qw blocks-e2e && echo true || echo false)" >> "$GITHUB_OUTPUT"
+
+      - name: Build
+        if: steps.affected.outputs.showcase == 'true' || (matrix.shard == 1 && steps.affected.outputs.blocks == 'true')
+        run: npx nx run-many -t build -p showcase blocks
+
       - name: Install Playwright Browsers
+        if: steps.affected.outputs.showcase == 'true' || (matrix.shard == 1 && steps.affected.outputs.blocks == 'true')
         run: npx playwright install --with-deps chromium
 
-      # Streamed: Playwright's progress in the log as it runs.
-      - name: E2E tests (showcase)
-        run: npx nx affected -t e2e --exclude=blocks-e2e --outputStyle=stream
+      - name: E2E tests (showcase, shard ${{ matrix.shard }}/4)
+        if: steps.affected.outputs.showcase == 'true'
+        run: npx playwright test -c apps/showcase-e2e/playwright.config.ts --shard=${{ matrix.shard }}/4
 
       - name: E2E tests (blocks)
-        if: ${{ !cancelled() }}
-        run: npx nx affected -t e2e --exclude=showcase-e2e --outputStyle=stream
+        if: ${{ !cancelled() && matrix.shard == 1 && steps.affected.outputs.blocks == 'true' }}
+        run: npx playwright test -c apps/blocks-e2e/playwright.config.ts
 
       - name: Upload Playwright report
         if: failure()
         uses: actions/upload-artifact@v7
         with:
-          name: playwright-report
+          name: playwright-report-${{ matrix.shard }}
           path: |
             dist/.playwright/apps/showcase-e2e/
             dist/.playwright/apps/blocks-e2e/
@@ -71,12 +111,17 @@ jobs:
 
   # The apps rendered on the server (the `ssr` build, on its Node server), then
   # hydrated: every e2e test again, plus `ssr.spec.ts` (every page hydrates),
-  # in Chromium. Not required: the apps stay client-side by default. Its own
-  # Playwright flags: four workers, not the preset's CI default of one (which
-  # made it run for hours), two retries, and a reporter that shows progress.
+  # in Chromium, in four shards as `csr-e2e`. Not required: the apps stay
+  # client-side by default. Its own Playwright flags: four workers, not the
+  # preset's CI default of one (which made it run for hours), two retries, and
+  # a reporter that shows progress.
   ssr:
     runs-on: ubuntu-latest
     timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3, 4]
     env:
       SSR: true
     steps:
@@ -96,11 +141,11 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps chromium
 
-      - name: E2E tests (showcase, SSR)
-        run: npx playwright test -c apps/showcase-e2e/playwright.config.ts --project=chromium --workers=4 --retries=2 --reporter=line
+      - name: E2E tests (showcase, SSR, shard ${{ matrix.shard }}/4)
+        run: npx playwright test -c apps/showcase-e2e/playwright.config.ts --project=chromium --workers=4 --retries=2 --reporter=line --shard=${{ matrix.shard }}/4
 
       - name: E2E tests (blocks, SSR)
-        if: ${{ !cancelled() }}
+        if: ${{ !cancelled() && matrix.shard == 1 }}
         run: npx playwright test -c apps/blocks-e2e/playwright.config.ts --project=chromium --workers=4 --retries=2 --reporter=line
 
       # What failed on the server: Angular logs it, the page still answers 200.
@@ -122,7 +167,7 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@v7
         with:
-          name: playwright-report-ssr
+          name: playwright-report-ssr-${{ matrix.shard }}
           path: |
             dist/.playwright/apps/showcase-e2e/
             dist/.playwright/apps/blocks-e2e/
