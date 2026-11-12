@@ -1,10 +1,10 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { ScButton, ScThemeModeToggle } from '@semantic-components/ui';
+import { Component, ViewEncapsulation, inject } from '@angular/core';
+import { ScButton, ScThemeManager } from '@semantic-components/ui';
 import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-navigation-theme-toggle-demo',
-  imports: [ScButton, ScThemeModeToggle, SiSunIcon, SiMoonIcon],
+  imports: [ScButton, SiSunIcon, SiMoonIcon],
   template: `
     <div class="flex items-center justify-between rounded-lg border p-4">
       <div class="space-y-0.5">
@@ -15,12 +15,11 @@ import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
       </div>
       <button
         scButton
-        scThemeModeToggle
         variant="outline"
         size="icon"
-        #toggle="scThemeModeToggle"
+        (click)="themeManager.toggleMode()"
       >
-        @if (toggle.isDark()) {
+        @if (themeManager.isDark()) {
           <svg siSunIcon></svg>
           <span class="sr-only">Switch to light theme</span>
         } @else {
@@ -33,4 +32,6 @@ import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class NavigationThemeToggleDemo {}
+export class NavigationThemeToggleDemo {
+  protected readonly themeManager = inject(ScThemeManager);
+}

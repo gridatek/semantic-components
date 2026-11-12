@@ -1,24 +1,20 @@
 import { Component, ViewEncapsulation, inject } from '@angular/core';
-import {
-  ScButton,
-  ScThemeManager,
-  ScThemeModeToggle,
-} from '@semantic-components/ui';
+import { ScButton, ScThemeManager } from '@semantic-components/ui';
 import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
 
+/** One click between light and dark: any button calling toggleMode(); its name follows the state. */
 @Component({
   selector: 'app-basic-theme-toggle-demo',
-  imports: [ScButton, ScThemeModeToggle, SiSunIcon, SiMoonIcon],
+  imports: [ScButton, SiSunIcon, SiMoonIcon],
   template: `
     <div class="flex items-center gap-4">
       <button
         scButton
-        scThemeModeToggle
         variant="outline"
         size="icon"
-        #toggle="scThemeModeToggle"
+        (click)="themeManager.toggleMode()"
       >
-        @if (toggle.isDark()) {
+        @if (themeManager.isDark()) {
           <svg siSunIcon></svg>
           <span class="sr-only">Switch to light theme</span>
         } @else {

@@ -24,16 +24,13 @@ import {
   ScNavigationMenuList,
   ScNavigationMenuTrigger,
   ScNavigationMenuTriggerIcon,
-  ScThemeModeToggle,
   cn,
 } from '@semantic-components/ui';
 import {
   SiChevronDownIcon,
   SiGithubIcon,
   SiMenuIcon,
-  SiMoonIcon,
   SiSearchIcon,
-  SiSunIcon,
   SiXIcon,
 } from '@semantic-icons/lucide-icons';
 import { CommandPaletteService } from '../../services/command-palette-service';
@@ -41,6 +38,7 @@ import { ComponentsService } from '../../services/components-service';
 import { GithubService } from '../../services/github-service';
 import { Logo } from '../logo/logo';
 import { PresetSheet } from '../preset-sheet/preset-sheet';
+import { ThemeMenu } from '../theme-menu/theme-menu';
 
 @Component({
   selector: 'app-navbar',
@@ -58,7 +56,7 @@ import { PresetSheet } from '../preset-sheet/preset-sheet';
     ScInputButton,
     ScKbd,
     ScLink,
-    ScThemeModeToggle,
+    ThemeMenu,
     ScNavigationMenu,
     ScNavigationMenuContent,
     ScNavigationMenuItem,
@@ -67,8 +65,6 @@ import { PresetSheet } from '../preset-sheet/preset-sheet';
     ScNavigationMenuTrigger,
     SiGithubIcon,
     SiSearchIcon,
-    SiSunIcon,
-    SiMoonIcon,
     SiMenuIcon,
     SiXIcon,
     Logo,
@@ -191,15 +187,7 @@ import { PresetSheet } from '../preset-sheet/preset-sheet';
           Get Started
         </a>
         <app-preset-sheet />
-        <button scThemeModeToggle #themeToggle="scThemeModeToggle">
-          @if (themeToggle.isDark()) {
-            <svg siSunIcon></svg>
-            <span class="sr-only">Switch to light theme</span>
-          } @else {
-            <svg siMoonIcon></svg>
-            <span class="sr-only">Switch to dark theme</span>
-          }
-        </button>
+        <app-theme-menu />
       </div>
 
       <button scNavbarToggle>

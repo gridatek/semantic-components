@@ -36,27 +36,20 @@ import {
   ScSidebarRail,
   ScSidebarTrigger,
 } from '@semantic-components/ui';
-import {
-  ScInputButton,
-  ScKbd,
-  ScSeparator,
-  ScThemeModeToggle,
-  cn,
-} from '@semantic-components/ui';
+import { ScInputButton, ScKbd, ScSeparator, cn } from '@semantic-components/ui';
 import {
   SiBookOpenTextIcon,
   SiBoxIcon,
   SiCookingPotIcon,
   SiDownloadIcon,
-  SiMoonIcon,
   SiPanelLeftIcon,
   SiSearchIcon,
-  SiSunIcon,
   SiWrenchIcon,
 } from '@semantic-icons/lucide-icons';
 import { filter } from 'rxjs';
 import { Logo } from '../../components/logo/logo';
 import { PresetSheet } from '../../components/preset-sheet/preset-sheet';
+import { ThemeMenu } from '../../components/theme-menu/theme-menu';
 import { Toc } from '../../components/toc/toc';
 import { TocService } from '../../components/toc/toc-service';
 import { CommandPaletteService } from '../../services/command-palette-service';
@@ -90,9 +83,7 @@ import { ConfigService } from '../../services/config-service';
     ScInputButton,
     ScKbd,
     ScSeparator,
-    ScThemeModeToggle,
-    SiSunIcon,
-    SiMoonIcon,
+    ThemeMenu,
     SiBookOpenTextIcon,
     SiBoxIcon,
     SiCookingPotIcon,
@@ -323,21 +314,7 @@ import { ConfigService } from '../../services/config-service';
         <div scSidebarFooter>
           <ul scSidebarMenu>
             <li scSidebarMenuItem>
-              <button
-                scSidebarMenuButton
-                variant="outline"
-                class="justify-center"
-                scThemeModeToggle
-                #themeToggle="scThemeModeToggle"
-              >
-                @if (themeToggle.isDark()) {
-                  <svg siSunIcon></svg>
-                  <span class="sr-only">Switch to light theme</span>
-                } @else {
-                  <svg siMoonIcon></svg>
-                  <span class="sr-only">Switch to dark theme</span>
-                }
-              </button>
+              <app-theme-menu inSidebar />
             </li>
           </ul>
         </div>

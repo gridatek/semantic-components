@@ -3,18 +3,16 @@ import { ScHeading } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicThemeToggleDemoContainer } from './demos/basic-theme-toggle-demo-container';
+import { MenuThemeDemoContainer } from './demos/menu-theme-demo-container';
 import { NavigationThemeToggleDemoContainer } from './demos/navigation-theme-toggle-demo-container';
 import { SettingsPanelThemeToggleDemoContainer } from './demos/settings-panel-theme-toggle-demo-container';
-import { SizesThemeToggleDemoContainer } from './demos/sizes-theme-toggle-demo-container';
 import { ThemeSelectDemoContainer } from './demos/theme-select-demo-container';
-import { VariantsThemeToggleDemoContainer } from './demos/variants-theme-toggle-demo-container';
 
 @Component({
   selector: 'app-theme-page',
   imports: [
     BasicThemeToggleDemoContainer,
-    VariantsThemeToggleDemoContainer,
-    SizesThemeToggleDemoContainer,
+    MenuThemeDemoContainer,
     ThemeSelectDemoContainer,
     NavigationThemeToggleDemoContainer,
     SettingsPanelThemeToggleDemoContainer,
@@ -27,8 +25,8 @@ import { VariantsThemeToggleDemoContainer } from './demos/variants-theme-toggle-
       <div class="space-y-2">
         <h1 scHeading>Theme</h1>
         <p class="text-muted-foreground">
-          A component for switching between light and dark themes with system
-          preference support.
+          Light, dark or the system&apos;s: the theme manager, with a button or
+          a menu of your own.
         </p>
         <app-component-badges path="theme" />
       </div>
@@ -36,8 +34,7 @@ import { VariantsThemeToggleDemoContainer } from './demos/variants-theme-toggle-
       <section class="space-y-8">
         <h2 scHeading appToc>Examples</h2>
         <app-basic-theme-toggle-demo-container />
-        <app-variants-theme-toggle-demo-container />
-        <app-sizes-theme-toggle-demo-container />
+        <app-menu-theme-demo-container />
         <app-theme-select-demo-container />
         <app-navigation-theme-toggle-demo-container />
         <app-settings-panel-theme-toggle-demo-container />

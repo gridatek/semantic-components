@@ -5272,17 +5272,10 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'variants-theme-toggle-demo',
+        path: 'menu-theme-demo',
         loadComponent: () =>
-          import('../pages/docs/theme/demos/variants-theme-toggle-demo').then(
-            (m) => m.VariantsThemeToggleDemo,
-          ),
-      },
-      {
-        path: 'sizes-theme-toggle-demo',
-        loadComponent: () =>
-          import('../pages/docs/theme/demos/sizes-theme-toggle-demo').then(
-            (m) => m.SizesThemeToggleDemo,
+          import('../pages/docs/theme/demos/menu-theme-demo').then(
+            (m) => m.MenuThemeDemo,
           ),
       },
       {

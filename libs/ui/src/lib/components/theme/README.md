@@ -5,16 +5,17 @@ Configurable theme management with mode switching (light/dark/system) and color 
 ## Architecture
 
 - **`ScThemeManager`** — Singleton service managing two independent axes: mode (light/dark/system) and color scheme. Handles persistence and system preference detection.
-- **`ScThemeModeToggle`** — A behavior-only directive that toggles mode on click. No styles — consumers compose it with their own styling (e.g., `ScButton`, `ScSidebarMenuButton`, or plain Tailwind classes).
 - **`SC_THEME_CONFIG`** — Injection token for customizing defaults and storage keys.
 
 ## Usage
 
-### With ScButton
+No part of its own: any control calls the manager.
+
+### One click (light ⇄ dark)
 
 ```html
-<button scButton scThemeModeToggle variant="outline" size="icon" #toggle="scThemeModeToggle">
-  @if (toggle.isDark()) {
+<button scButton variant="outline" size="icon" (click)="themeManager.toggleMode()">
+  @if (themeManager.isDark()) {
   <svg siSunIcon></svg>
   <span class="sr-only">Switch to light theme</span>
   } @else {
@@ -24,18 +25,28 @@ Configurable theme management with mode switching (light/dark/system) and color 
 </button>
 ```
 
-### With custom classes
+### A menu: Light, Dark, System
+
+The way back to the OS's theme, which a one-click button loses. The Menu's radio items, the mode as their value:
 
 ```html
-<button scThemeModeToggle #toggle="scThemeModeToggle" class="hover:bg-accent rounded-full p-2">
-  @if (toggle.isDark()) {
-  <svg siSunIcon></svg>
-  <span class="sr-only">Switch to light theme</span>
-  } @else {
-  <svg siMoonIcon></svg>
-  <span class="sr-only">Switch to dark theme</span>
-  }
-</button>
+<div scMenuProvider align="end">
+  <button scButton scMenuTrigger variant="outline" size="icon">
+    <svg siSunIcon></svg>
+    <span class="sr-only">Theme</span>
+  </button>
+  <ng-template scMenuPortal>
+    <div scMenu>
+      <ng-template scMenuContent>
+        <div scMenuRadioGroup [value]="themeManager.mode()" (valueChange)="setMode($event)">
+          <div scMenuRadioItem value="light">…Light</div>
+          <div scMenuRadioItem value="dark">…Dark</div>
+          <div scMenuRadioItem value="system">…System</div>
+        </div>
+      </ng-template>
+    </div>
+  </ng-template>
+</div>
 ```
 
 ### Using ScThemeManager directly
@@ -85,21 +96,6 @@ bootstrapApplication(AppComponent, {
   ],
 });
 ```
-
-## ScThemeModeToggle
-
-Behavior-only directive. Toggles mode on click. Consumers handle accessibility via `sr-only` spans or `aria-label`.
-
-**Selector:** `button[scThemeModeToggle]` | **Export:** `scThemeModeToggle`
-
-| Public Property | Type              | Description                  |
-| --------------- | ----------------- | ---------------------------- |
-| `isDark`        | `Signal<boolean>` | Whether dark mode is active  |
-| `isLight`       | `Signal<boolean>` | Whether light mode is active |
-
-**Host bindings:**
-
-- `(click)` — calls `toggleMode()`
 
 ## ScThemeManager
 

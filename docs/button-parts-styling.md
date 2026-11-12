@@ -28,7 +28,7 @@ Model: `libs/ui/src/lib/components/pagination/pagination-last.ts`.
 
 These add behaviour to whatever button the consumer writes, `scButton` or another part:
 
-- **Triggers that go on any button** — `scDialogTrigger`, `scSheetTrigger`, `scDrawerTrigger`, `scPopoverTrigger`, `scAlertDialogTrigger`, `scNativeDialogTrigger`, `scThemeModeToggle` (on a `scButton`, a `scSidebarMenuButton`, a menu item…).
+- **Triggers that go on any button** — `scDialogTrigger`, `scSheetTrigger`, `scDrawerTrigger`, `scPopoverTrigger`, `scAlertDialogTrigger`, `scNativeDialogTrigger` (on a `scButton`, a `scSidebarMenuButton`, a menu item…).
 
 And these keep a look of their own, as they are not buttons to the eye:
 
