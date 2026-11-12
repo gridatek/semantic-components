@@ -34,13 +34,14 @@ Open work found along the way, kept for later — tick an item when it's done. N
 ## Larger items
 
 - [ ] **Presets page: the other options** (the user, 2026-11-12) — `/presets` follows shadcn's [Create](https://ui.shadcn.com/create); only Style changes for now (saved, then a reload: a preset is set at start). Base Color, Theme, Chart Color, Heading, Font, Icon Library, Radius and Menu are cards, disabled. Also from Create: Shuffle, Open Preset, Get Code. Charts (`/charts`) and Typeset (`/typeset`) are Coming soon pages for now.
-- [ ] **Create demos: what porting them showed** (2026-11-12) — `/presets` shows all of shadcn's Create preview (both pages, `pages/presets/cards/`, the 15 home cards reused). Left over:
-  - The home cards were ported earlier without our charts or slider: Contribution History, Dividend Income, Power Usage and Analytics draw their bars/areas by hand, and Payout Threshold has a Progress where shadcn has a Slider. Port them again with `ui/charts` and `scSlider`, as the new cards do.
+- [ ] **Create demos: what porting them showed** (2026-11-12) — `/presets` shows all of shadcn's Create preview (both pages, `pages/presets/cards/`). Left over:
+  - shadcn has two sets of these cards: its home page's (`app/(app)/(root)/cards`, hand-drawn bars, Progress) and Create's (registry blocks, Recharts, Slider). The home page follows the first; `/presets` has Create's own ports (all but Distribute Track and New Milestone, the same in both).
   - Bar Chart has no `barSize` (Recharts' fixed bar width): Sleep Report's bars fill their band.
   - Live Audio Waveform is not a shadcn part (ElevenLabs UI's): an app-local canvas port (`live-waveform-canvas.ts`), not a lib part.
   - A table container that may scroll needs `tabindex="0" role="region" aria-label` by hand (as its README says); axe fails without it. Worth the container doing it itself when it overflows?
-  - Recent Transactions' income amount is `text-emerald-700` (shadcn's `500` fails contrast).
-  - The page is CSS columns, not shadcn's fixed 7-column grid: the order reads down each column.
+  - Contrast: Recent Transactions' income amount is `text-emerald-700` (shadcn's `500` fails), Power Usage's Solar Gen is plain text (shadcn's `text-chart-1` fails in neutral).
+  - Bar Chart has no `maxBarSize` either (Contribution History's bars are wider than shadcn's).
+  - The page keeps shadcn's columns, side by side as many as fit and wrapping (no sideways scroll); at 1440px only two fit.
 
 - [ ] **Typeset** (the user, 2026-11-12) — shadcn's [Typeset](https://ui.shadcn.com/docs/typeset): one CSS file that styles HTML and rendered markdown inside a `typeset` container, tuned by three variables (`--typeset-size`, `--typeset-leading`, `--typeset-flow`) and preset classes (`typeset-docs`, `typeset-chat`); `:where()` selectors so utilities win, `not-typeset` to opt out, no selectors that change as content streams in; and its builder page ([/typeset](https://ui.shadcn.com/typeset): measure, fonts, size, leading, flow, shuffle, get code). The showcase's `/typeset` page (in the header) says Coming soon until then.
 
