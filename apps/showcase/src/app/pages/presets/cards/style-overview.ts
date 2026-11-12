@@ -1,11 +1,11 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScCard, ScCardContent } from '@semantic-components/ui';
+import { ScCard, ScCardContent, ScFrame } from '@semantic-components/ui';
 import { storedPreset } from '../../../presets';
 
 /** The preset at a glance: its name and font, then the theme's colors. */
 @Component({
   selector: 'app-preview-style-overview',
-  imports: [ScCard, ScCardContent],
+  imports: [ScCard, ScCardContent, ScFrame],
   template: `
     <div scCard>
       <div scCardContent class="flex flex-col gap-6">
@@ -22,7 +22,8 @@ import { storedPreset } from '../../../presets';
           @for (variable of variables; track variable) {
             <li class="flex flex-col flex-wrap items-center gap-2">
               <div
-                class="after:border-border relative aspect-square w-full rounded-lg bg-(--color) after:absolute after:inset-0 after:rounded-lg after:border after:mix-blend-darken dark:after:mix-blend-lighten"
+                scFrame
+                class="aspect-square w-full bg-(--color)"
                 aria-hidden="true"
                 [style.--color]="'var(' + variable + ')'"
               ></div>

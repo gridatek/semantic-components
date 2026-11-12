@@ -7,12 +7,14 @@ import {
   ScCardFooter,
   ScCardHeader,
   ScCardTitle,
+  ScFrame,
 } from '@semantic-components/ui';
 
 /** A week's workout load: a day each, its load as a filled bar. */
 @Component({
   selector: 'app-preview-weekly-fitness-summary',
   imports: [
+    ScFrame,
     ScButton,
     ScCard,
     ScCardContent,
@@ -30,7 +32,7 @@ import {
       <div scCardContent class="flex flex-col gap-4">
         <ul class="grid grid-cols-7 gap-1.5" aria-label="Workout load by day">
           @for (day of week; track $index) {
-            <li class="ring-border rounded-md p-1.5 text-center ring">
+            <li scFrame class="p-1.5 text-center">
               <div class="text-muted-foreground text-sm" aria-hidden="true">
                 {{ day.day }}
               </div>

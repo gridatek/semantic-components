@@ -6,6 +6,7 @@ import {
   ScCardFooter,
   ScCardHeader,
   ScCardTitle,
+  ScFrame,
   ScSlider,
   ScToggleGroup,
   ScToggleGroupItem,
@@ -17,6 +18,7 @@ const POSITIONS: Record<string, number> = { open: 0, half: 50, closed: 100 };
 @Component({
   selector: 'app-preview-roller-shades',
   imports: [
+    ScFrame,
     ScCard,
     ScCardContent,
     ScCardDescription,
@@ -35,7 +37,8 @@ const POSITIONS: Record<string, number> = { open: 0, half: 50, closed: 100 };
       </div>
       <div scCardContent class="flex flex-col gap-4">
         <div
-          class="bg-muted flex h-32 flex-col overflow-hidden rounded-lg border"
+          scFrame
+          class="bg-muted flex h-32 flex-col overflow-hidden"
           aria-hidden="true"
         >
           <div

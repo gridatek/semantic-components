@@ -4,6 +4,7 @@ import {
   ScCard,
   ScCardContent,
   ScCardHeader,
+  ScFrame,
   ScInput,
   ScInputGroup,
   ScInputGroupAddon,
@@ -22,6 +23,7 @@ import { SiSearchIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-preview-release-catalog',
   imports: [
+    ScFrame,
     ScBadge,
     ScCard,
     ScCardContent,
@@ -73,7 +75,8 @@ import { SiSearchIcon } from '@semantic-icons/lucide-icons';
             <div scItem variant="muted" role="listitem">
               <div scItemMedia>
                 <div
-                  class="flex size-12 items-center justify-center rounded-lg border text-sm font-semibold"
+                  scFrame
+                  class="flex size-12 items-center justify-center text-sm font-semibold"
                 >
                   {{ holding.ticker }}
                 </div>

@@ -7,12 +7,14 @@ import {
   ScCardFooter,
   ScCardHeader,
   ScCardTitle,
+  ScFrame,
 } from '@semantic-components/ui';
 
 /** A deployment's variables, the secret ones masked. */
 @Component({
   selector: 'app-preview-environment-variables',
   imports: [
+    ScFrame,
     ScButton,
     ScCard,
     ScCardContent,
@@ -30,7 +32,8 @@ import {
       <div scCardContent class="flex flex-col gap-2">
         @for (env of variables; track env.key) {
           <div
-            class="ring-border flex items-center gap-2 rounded-md px-2.5 py-2 font-mono text-xs ring"
+            scFrame
+            class="flex items-center gap-2 px-2.5 py-2 font-mono text-xs"
           >
             <span class="font-medium">{{ env.key }}</span>
             <span class="text-muted-foreground ms-auto">

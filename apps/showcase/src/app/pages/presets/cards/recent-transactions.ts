@@ -7,6 +7,7 @@ import {
   ScCardDescription,
   ScCardHeader,
   ScCardTitle,
+  ScFrame,
   ScMenu,
   ScMenuContent,
   ScMenuItem,
@@ -33,6 +34,7 @@ import {
 @Component({
   selector: 'app-preview-recent-transactions',
   imports: [
+    ScFrame,
     ScButton,
     ScCard,
     ScCardAction,
@@ -81,7 +83,8 @@ import {
                 <tr scTableRow>
                   <td scTableCell class="w-10">
                     <div
-                      class="bg-muted flex size-10 items-center justify-center rounded-lg"
+                      scFrame
+                      class="bg-muted flex size-10 items-center justify-center"
                     >
                       @switch (t.icon) {
                         @case ('coffee') {

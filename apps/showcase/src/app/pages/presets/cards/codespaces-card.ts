@@ -17,6 +17,7 @@ import {
   ScEmptyTitle,
   ScField,
   ScFieldDescription,
+  ScFrame,
   ScInput,
   ScInputGroup,
   ScInputGroupAddon,
@@ -68,6 +69,7 @@ import {
 @Component({
   selector: 'app-preview-codespaces-card',
   imports: [
+    ScFrame,
     ScButton,
     ScCard,
     ScCardContent,
@@ -266,7 +268,7 @@ import {
                     </button>
                   }
                 </div>
-                <div class="bg-muted/30 rounded-md border p-2">
+                <div scFrame class="bg-muted/30 p-2">
                   @for (remote of remotes; track remote.value) {
                     <div scTabsPanel [value]="remote.value">
                       <ng-template scTabsContent>

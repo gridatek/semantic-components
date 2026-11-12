@@ -7,6 +7,7 @@ import {
   ScCardDescription,
   ScCardHeader,
   ScCardTitle,
+  ScFrame,
 } from '@semantic-components/ui';
 import { SiLockIcon } from '@semantic-icons/lucide-icons';
 
@@ -14,6 +15,7 @@ import { SiLockIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-preview-front-door',
   imports: [
+    ScFrame,
     ScBadge,
     ScCard,
     ScCardAction,
@@ -37,7 +39,8 @@ import { SiLockIcon } from '@semantic-icons/lucide-icons';
       </div>
       <div scCardContent>
         <div
-          class="bg-muted relative flex aspect-video items-center justify-center overflow-hidden rounded-lg bg-[repeating-linear-gradient(45deg,transparent,transparent_10px,var(--border)_10px,var(--border)_11px)]"
+          scFrame
+          class="bg-muted relative flex aspect-video items-center justify-center overflow-hidden bg-[repeating-linear-gradient(45deg,transparent,transparent_10px,var(--border)_10px,var(--border)_11px)]"
         >
           <span scBadge variant="destructive" class="absolute end-2 top-2">
             Live
