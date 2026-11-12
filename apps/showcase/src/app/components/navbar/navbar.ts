@@ -97,6 +97,18 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
           </li>
 
           <li scNavigationMenuItem>
+            <a
+              scNavigationMenuLink
+              routerLink="/docs/getting-started"
+              routerLinkActive
+              #docsRla="routerLinkActive"
+              [active]="docsRla.isActive"
+            >
+              Documentation
+            </a>
+          </li>
+
+          <li scNavigationMenuItem>
             <button scNavigationMenuTrigger>
               Components
               <svg siChevronDownIcon scNavigationMenuTriggerIcon></svg>
@@ -136,17 +148,6 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
             </div>
           </li>
 
-          <li scNavigationMenuItem>
-            <a
-              scNavigationMenuLink
-              routerLink="/docs/getting-started"
-              routerLinkActive
-              #docsRla="routerLinkActive"
-              [active]="docsRla.isActive"
-            >
-              Documentation
-            </a>
-          </li>
           <li scNavigationMenuItem>
             <a
               scNavigationMenuLink
