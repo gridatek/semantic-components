@@ -4,5 +4,5 @@
 export const frame = 'shadow-sm ring-1 ring-foreground/5';
 
 // A small box's frame (scFrame size="sm": a row, an icon's box): shadcn draws
-// these with rounded-md ring ring-border, square in sera.
-export const frameSm = 'rounded-none ring-1 ring-foreground/10';
+// these with rounded-md ring ring-border (the same here), square in sera.
+export const frameSm = 'rounded-none ring-1 ring-border';

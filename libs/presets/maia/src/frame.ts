@@ -4,5 +4,5 @@
 export const frame = 'rounded-2xl ring-1 ring-foreground/10';
 
 // A small box's frame (scFrame size="sm": a row, an icon's box): shadcn draws
-// these with rounded-md ring ring-border.
-export const frameSm = 'rounded-md ring-1 ring-foreground/10';
+// these with rounded-md ring ring-border (the same here).
+export const frameSm = 'rounded-md ring-1 ring-border';

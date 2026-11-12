@@ -613,7 +613,7 @@ export interface ScPreset {
   command: ScCommandStyles;
   /** scFrame: a box's frame — the style's card radius, ring and shadow. */
   frame: string;
-  /** scFrame size="sm": a small box's frame (a row, an icon's box) — shadcn's rounded-md, square in lyra and sera; the ring, no shadow. */
+  /** scFrame size="sm": a small box's frame (a row, an icon's box) — shadcn's rounded-md, square in lyra and sera; shadcn's ring-border line, no shadow. */
   frameSm: string;
   controlGroup: (props: {
     orientation?: ScControlGroupOrientation | null;
