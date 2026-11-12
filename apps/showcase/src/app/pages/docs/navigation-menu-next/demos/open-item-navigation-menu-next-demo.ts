@@ -38,6 +38,22 @@ import {
   ],
   template: `
     <div class="flex flex-col items-center gap-4">
+      <div class="flex items-center gap-2">
+        <button
+          scButton
+          variant="outline"
+          size="sm"
+          (click)="open.set('components')"
+        >
+          Open Components
+        </button>
+        <button scButton variant="outline" size="sm" (click)="open.set(null)">
+          Close
+        </button>
+        <p class="text-muted-foreground text-sm">
+          Open: {{ open() ?? 'none' }}
+        </p>
+      </div>
       <nav
         scNavigationMenuNext
         aria-label="Main, with its open item"
@@ -106,15 +122,15 @@ import {
             <div scNavigationMenuNextContent>
               <ul class="grid w-[200px]">
                 <li>
-                  <a scNavigationMenuNextLink href="#">
+                  <a scNavigationMenuNextLink routerLink="." fragment="backlog">
                     <svg siCircleAlertIcon></svg>
                     Backlog
                   </a>
-                  <a scNavigationMenuNextLink href="#">
+                  <a scNavigationMenuNextLink routerLink="." fragment="to-do">
                     <svg siCircleDashedIcon></svg>
                     To Do
                   </a>
-                  <a scNavigationMenuNextLink href="#">
+                  <a scNavigationMenuNextLink routerLink="." fragment="done">
                     <svg siCircleCheckIcon></svg>
                     Done
                   </a>
@@ -135,20 +151,6 @@ import {
           </li>
         </ul>
       </nav>
-      <div class="flex items-center gap-2">
-        <button
-          scButton
-          variant="outline"
-          size="sm"
-          (click)="open.set('components')"
-        >
-          Open Components
-        </button>
-        <button scButton variant="outline" size="sm" (click)="open.set(null)">
-          Close
-        </button>
-      </div>
-      <p class="text-muted-foreground text-sm">Open: {{ open() ?? 'none' }}</p>
     </div>
   `,
   host: { class: 'flex w-full justify-center' },

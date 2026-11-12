@@ -100,15 +100,15 @@ import {
             <div scNavigationMenuNextContent>
               <ul class="grid w-[200px]">
                 <li>
-                  <a scNavigationMenuNextLink href="#">
+                  <a scNavigationMenuNextLink routerLink="." fragment="backlog">
                     <svg siCircleAlertIcon></svg>
                     قائمة الانتظار
                   </a>
-                  <a scNavigationMenuNextLink href="#">
+                  <a scNavigationMenuNextLink routerLink="." fragment="to-do">
                     <svg siCircleDashedIcon></svg>
                     للقيام
                   </a>
-                  <a scNavigationMenuNextLink href="#">
+                  <a scNavigationMenuNextLink routerLink="." fragment="done">
                     <svg siCircleCheckIcon></svg>
                     منجز
                   </a>

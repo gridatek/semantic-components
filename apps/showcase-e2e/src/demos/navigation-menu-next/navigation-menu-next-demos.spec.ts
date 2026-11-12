@@ -191,14 +191,18 @@ test('Align: the panel under its trigger — centred, then at its end', async ({
   await expect
     .poll(async () => {
       const box = (await content.boundingBox())!;
-      return Math.round(box.x + box.width / 2 - (li.x + li.width / 2));
+      return Math.abs(
+        Math.round(box.x + box.width / 2 - (li.x + li.width / 2)),
+      );
     })
     .toBe(0);
   // The shared box with it.
   await expect
     .poll(async () => {
       const box = (await viewport(page).boundingBox())!;
-      return Math.round(box.x + box.width / 2 - (li.x + li.width / 2));
+      return Math.abs(
+        Math.round(box.x + box.width / 2 - (li.x + li.width / 2)),
+      );
     })
     .toBe(0);
 
@@ -208,7 +212,7 @@ test('Align: the panel under its trigger — centred, then at its end', async ({
   await expect
     .poll(async () => {
       const box = (await content.boundingBox())!;
-      return Math.round(box.x + box.width - (li.x + li.width));
+      return Math.abs(Math.round(box.x + box.width - (li.x + li.width)));
     })
     .toBe(0);
 });
