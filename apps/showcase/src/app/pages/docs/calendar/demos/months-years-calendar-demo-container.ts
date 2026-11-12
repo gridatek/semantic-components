@@ -32,7 +32,7 @@ import {
   SiChevronRightIcon,
 } from '@semantic-icons/lucide-icons';
 
-/** The heading is a button: days, then months, then years. startView="month" opens on the months. */
+/** The heading is a button: days, then months, then years. startView="month" opens on the months while it is empty. */
 @Component({
   selector: 'app-months-years-calendar-demo',
   imports: [
@@ -69,9 +69,8 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class MonthsYearsCalendarDemo {
-  readonly date = signal<ScCalendarValue>(
-    Temporal.PlainDate.from('2026-10-14'),
-  );
+  // Empty: startView applies (with a value it would open on its days).
+  readonly date = signal<ScCalendarValue>(null);
   readonly previousLabel = {
     day: 'Previous month',
     month: 'Previous year',

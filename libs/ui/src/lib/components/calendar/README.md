@@ -52,6 +52,10 @@ The header shows the heading itself — a button that zooms out. Write your own 
 
 Empty, it is `null` (Signal Forms' empty: `required` works). A `[formField]`: `disabled`, `invalid`, `touched` come from the form, and it is touched when focus leaves it.
 
+## Where it opens
+
+`startView` (`day`, `month` or `year`) is the view it opens on **while empty**: `year` for a birth date, far from today. With a value it opens on that value's days — the year is known, what you came back for is the day — and the heading still zooms out. It is read when the calendar is created (a popover's calendar: on each open), not when a value is picked.
+
 ## Days that cannot be picked
 
 - `minDate` / `maxDate` — kept in the month and year views too; the keys stop at them.

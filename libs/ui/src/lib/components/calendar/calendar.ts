@@ -14,6 +14,7 @@ import {
   model,
   output,
   signal,
+  untracked,
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
 import { cn } from 'cn';
@@ -110,7 +111,11 @@ export class ScCalendar implements FormValueControl<ScCalendarValue> {
   /** Always six weeks: the height holds still from month to month. */
   readonly fixedWeeks = input(false, { transform: booleanAttribute });
   readonly showWeekNumbers = input(false, { transform: booleanAttribute });
-  /** The view it opens on. */
+  /**
+   * The view it opens on while empty — `year` for a birth date, far from
+   * today. With a value it opens on that value's days: the year is known,
+   * what you came back for is the day.
+   */
   readonly startView = input<ScCalendarView>('day');
   /** Focus on its focused day as it appears — as when its popover opens. */
   readonly initialFocus = input(false, { transform: booleanAttribute });
@@ -123,7 +128,22 @@ export class ScCalendar implements FormValueControl<ScCalendarValue> {
   /** Your content for a day (`ng-template scCalendarDay`). */
   readonly dayTemplate = contentChild(ScCalendarDay);
 
-  readonly view = linkedSignal(() => this.startView());
+  /**
+   * The view shown: `startView` while empty, the days with a value — read
+   * when it is created (a popover's calendar on each open) or `startView`
+   * changes, not when a value is picked.
+   */
+  readonly view = linkedSignal<ScCalendarView, ScCalendarView>({
+    source: this.startView,
+    computation: (start) => (untracked(() => this.hasValue()) ? 'day' : start),
+  });
+  /** A day, days or a range picked. */
+  private readonly hasValue = computed(() => {
+    const value = this.value();
+    if (Array.isArray(value)) return value.length > 0;
+    if (value instanceof Temporal.PlainDate) return true;
+    return !!(value as ScCalendarRange | null)?.from;
+  });
   /** Where it opens: the (first) day picked, or today — within min and max. */
   private readonly initial = computed(() => {
     const value = this.value();

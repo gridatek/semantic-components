@@ -86,7 +86,9 @@ test('Segmented: part by part, the picker’s value', async ({ page }) => {
   await expect(part('day')).toHaveText('20');
 });
 
-test('Date of birth: opens on the years; 18 or older', async ({ page }) => {
+test('Date of birth: opens on the years — on the days once set; 18 or older', async ({
+  page,
+}) => {
   await page.goto(demo('birth'));
   await page.getByRole('button', { name: 'Choose your date of birth' }).click();
   const year = (y: number) =>
@@ -107,6 +109,12 @@ test('Date of birth: opens on the years; 18 or older', async ({ page }) => {
   await expect(calendar(page)).toHaveCount(0);
   await expect(picked(page)).toHaveText('May 14, 2001');
   await expect(page.getByLabel('Date of birth')).toHaveValue('05/14/2001');
+  // Reopened with a date: its days, the day focused — not the years.
+  await page.getByRole('button', { name: 'Choose your date of birth' }).click();
+  await expect(day(page, '2001-05-14')).toBeFocused();
+  await expect(page.locator('[data-slot="calendar-cell-year"]')).toHaveCount(0);
+  await page.keyboard.press('Escape');
+  await expect(calendar(page)).toHaveCount(0);
   // Typed: not 18 yet — marked.
   await page.getByLabel('Date of birth').fill('10/23/2008');
   await page.getByLabel('Date of birth').press('Enter');
