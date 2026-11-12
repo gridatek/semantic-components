@@ -19,7 +19,7 @@ import { ToolbarToggleDemo } from './toolbar-toggle-demo';
 })
 export class ToolbarToggleDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScToggle } from '@semantic-components/ui';
+import { ScFrame, ScToggle } from '@semantic-components/ui';
 import {
   SiBoldIcon,
   SiItalicIcon,
@@ -30,6 +30,7 @@ import {
 @Component({
   selector: 'app-toolbar-toggle-demo',
   imports: [
+    ScFrame,
     ScToggle,
     SiBoldIcon,
     SiItalicIcon,
@@ -37,7 +38,7 @@ import {
     SiStrikethroughIcon,
   ],
   template: \`
-    <div class="flex items-center gap-1 rounded-md border p-1">
+    <div scFrame class="flex items-center gap-1 p-1">
       <button scToggle [(pressed)]="bold">
         <svg siBoldIcon></svg>
         <span class="sr-only">Toggle bold</span>

@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScHeading, ScSeparator } from '@semantic-components/ui';
+import { ScFrame, ScHeading, ScSeparator } from '@semantic-components/ui';
 import {
   ScCodeBlock,
   ScCodeBlockActions,
@@ -23,6 +23,7 @@ interface Step {
 @Component({
   selector: 'app-i18n-page',
   imports: [
+    ScFrame,
     ScCodeBlock,
     ScCodeBlockHeader,
     ScCodeBlockTitle,
@@ -144,7 +145,7 @@ interface Step {
 
       <section class="space-y-4">
         <h2 scHeading appToc>ScI18n</h2>
-        <div class="overflow-x-auto rounded-lg border">
+        <div scFrame class="overflow-x-auto">
           <table class="w-full text-sm">
             <thead class="bg-muted/50">
               <tr>

@@ -23,6 +23,7 @@ import {
   ScCardTitle,
   ScCheckbox,
   ScCheckboxField,
+  ScFrame,
   ScInput,
   ScKbd,
   ScLabel,
@@ -48,6 +49,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-gallery',
   imports: [
+    ScFrame,
     ScAccordion,
     ScAccordionContent,
     ScAccordionHeader,
@@ -652,7 +654,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
               </div>
               <div scTabsPanel value="overview">
                 <ng-template scTabsContent>
-                  <div class="rounded-lg border p-4">
+                  <div scFrame class="p-4">
                     <h3 class="text-lg font-medium" i18n="@@gallery.overview">
                       Overview
                     </h3>
@@ -667,7 +669,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
               </div>
               <div scTabsPanel value="analytics">
                 <ng-template scTabsContent>
-                  <div class="rounded-lg border p-4">
+                  <div scFrame class="p-4">
                     <h3 class="text-lg font-medium" i18n="@@gallery.analytics">
                       Analytics
                     </h3>
@@ -682,7 +684,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
               </div>
               <div scTabsPanel value="reports">
                 <ng-template scTabsContent>
-                  <div class="rounded-lg border p-4">
+                  <div scFrame class="p-4">
                     <h3 class="text-lg font-medium" i18n="@@gallery.reports">
                       Reports
                     </h3>

@@ -23,6 +23,7 @@ import { FormField, form, minLength, required } from '@angular/forms/signals';
 import {
   ScField,
   ScFieldDescription,
+  ScFrame,
   ScLabel,
   ScOtpField,
   ScOtpFieldGroup,
@@ -35,6 +36,7 @@ import { SiMinusIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-verification-otp-field-demo',
   imports: [
+    ScFrame,
     ScField,
     FormField,
     ScFieldDescription,
@@ -46,7 +48,7 @@ import { SiMinusIcon } from '@semantic-icons/lucide-icons';
     SiMinusIcon,
   ],
   template: \`
-    <div class="max-w-sm rounded-lg border p-6">
+    <div scFrame class="max-w-sm p-6">
       <div scField>
         <label scLabel class="justify-center">Enter verification code</label>
         <p scFieldDescription class="text-center">

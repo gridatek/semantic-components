@@ -8,6 +8,7 @@ import {
   ScCardHeader,
   ScCardTitle,
   ScFieldDescription,
+  ScFrame,
   ScInput,
   ScLabel,
   ScLabelText,
@@ -25,6 +26,7 @@ import {
 @Component({
   selector: 'app-settings',
   imports: [
+    ScFrame,
     ScButton,
     ScCard,
     ScCardContent,
@@ -290,8 +292,9 @@ import {
                   <div scCardContent>
                     <div class="space-y-4">
                       <label
+                        scFrame
                         scSwitchField
-                        class="flex items-center justify-between rounded-lg border p-4"
+                        class="flex items-center justify-between p-4"
                       >
                         <div>
                           <p scLabelText i18n="@@common.emailNotifications">
@@ -308,8 +311,9 @@ import {
                       </label>
 
                       <label
+                        scFrame
                         scSwitchField
-                        class="flex items-center justify-between rounded-lg border p-4"
+                        class="flex items-center justify-between p-4"
                       >
                         <div>
                           <p scLabelText i18n="@@common.pushNotifications">
@@ -326,8 +330,9 @@ import {
                       </label>
 
                       <label
+                        scFrame
                         scSwitchField
-                        class="flex items-center justify-between rounded-lg border p-4"
+                        class="flex items-center justify-between p-4"
                       >
                         <div>
                           <p scLabelText i18n="@@settings.marketing">
@@ -344,8 +349,9 @@ import {
                       </label>
 
                       <label
+                        scFrame
                         scSwitchField
-                        class="flex items-center justify-between rounded-lg border p-4"
+                        class="flex items-center justify-between p-4"
                       >
                         <div>
                           <p scLabelText i18n="@@settings.security">

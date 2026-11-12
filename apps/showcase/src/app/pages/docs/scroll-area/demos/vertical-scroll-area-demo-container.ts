@@ -15,7 +15,7 @@ import { VerticalScrollAreaDemo } from './vertical-scroll-area-demo';
 })
 export class VerticalScrollAreaDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScScrollArea } from '@semantic-components/ui';
+import { ScFrame, ScScrollArea } from '@semantic-components/ui';
 
 interface Tag {
   id: string;
@@ -24,9 +24,9 @@ interface Tag {
 
 @Component({
   selector: 'app-vertical-scroll-area-demo',
-  imports: [ScScrollArea],
+  imports: [ScFrame, ScScrollArea],
   template: \`
-    <div scScrollArea class="h-72 w-48 rounded-md border">
+    <div scFrame scScrollArea class="h-72 w-48">
       <div class="p-4">
         <h4 class="mb-4 text-sm leading-none font-medium">Tags</h4>
         @for (tag of tags; track tag.id) {

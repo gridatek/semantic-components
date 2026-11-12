@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import {
+  ScFrame,
   ScSidebar,
   ScSidebarContent,
   ScSidebarFooter,
@@ -53,6 +54,7 @@ import {
 @Component({
   selector: 'app-dashboard',
   imports: [
+    ScFrame,
     ScSidebarProvider,
     ScSidebar,
     ScSidebarTrigger,
@@ -529,7 +531,7 @@ import {
                   Group sections with labels
                 </li>
               </ul>
-              <div class="bg-card rounded-lg border p-4">
+              <div scFrame class="bg-card p-4">
                 <h3 class="mb-2 font-semibold" i18n="@@dashboard.try">
                   Try these features:
                 </h3>

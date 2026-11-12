@@ -1,11 +1,11 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScScrollArea } from '@semantic-components/ui';
+import { ScFrame, ScScrollArea } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-horizontal-scroll-area-demo',
-  imports: [ScScrollArea],
+  imports: [ScFrame, ScScrollArea],
   template: `
-    <div scScrollArea class="w-96 rounded-md border whitespace-nowrap">
+    <div scFrame scScrollArea class="w-96 whitespace-nowrap">
       <div class="flex w-max space-x-4 p-4">
         @for (artwork of artworks; track artwork.artist) {
           <figure class="shrink-0">

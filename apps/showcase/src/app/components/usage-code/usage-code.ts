@@ -11,7 +11,7 @@ import {
   signal,
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ScButton } from '@semantic-components/ui';
+import { ScButton, ScFrame } from '@semantic-components/ui';
 import {
   ScCodeBlock,
   ScCodeBlockActions,
@@ -37,6 +37,7 @@ import { DevOnly } from '../dev-only/dev-only';
 @Component({
   selector: 'app-usage-code',
   imports: [
+    ScFrame,
     DevOnly,
     NgTemplateOutlet,
     ScButton,
@@ -100,10 +101,11 @@ import { DevOnly } from '../dev-only/dev-only';
       @if (demoUrl(); as url) {
         <app-dev-only>
           <iframe
+            scFrame
             [src]="frameSrc()"
             [title]="demoTitle()"
             loading="lazy"
-            class="h-[32rem] w-full rounded-md border"
+            class="h-[32rem] w-full"
           ></iframe>
         </app-dev-only>
       } @else if (demo(); as demo) {

@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import type { ScPresetName } from '@semantic-components/presets';
-import { ScHeading, ScSeparator } from '@semantic-components/ui';
+import { ScFrame, ScHeading, ScSeparator } from '@semantic-components/ui';
 import {
   ScCodeBlock,
   ScCodeBlockActions,
@@ -17,6 +17,7 @@ import { PRESETS } from '../../presets';
 @Component({
   selector: 'app-presets-page',
   imports: [
+    ScFrame,
     ScCodeBlock,
     ScCodeBlockHeader,
     ScCodeBlockTitle,
@@ -49,7 +50,7 @@ import { PRESETS } from '../../presets';
           The same button in each. To see the whole site in one, open the preset
           sheet (the palette button at the top).
         </p>
-        <ul class="divide-y rounded-lg border">
+        <ul scFrame class="divide-y">
           @for (name of names; track name) {
             <li class="flex flex-wrap items-center justify-between gap-4 p-4">
               <div class="grid gap-1">

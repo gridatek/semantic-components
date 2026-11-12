@@ -4,6 +4,7 @@ import {
   ScAvatarFallback,
   ScButton,
   ScFieldDescription,
+  ScFrame,
   ScInput,
   ScLabel,
   ScLabelText,
@@ -26,6 +27,7 @@ import {
 @Component({
   selector: 'app-settings-profile',
   imports: [
+    ScFrame,
     ScAvatar,
     ScAvatarFallback,
     ScButton,
@@ -148,7 +150,7 @@ import {
           </div>
 
           <!-- Profile Photo -->
-          <div class="rounded-lg border p-6">
+          <div scFrame class="p-6">
             <div class="space-y-6">
               <div>
                 <p class="text-sm font-medium" i18n="@@settingsProfile.photo">
@@ -294,8 +296,9 @@ Product designer with 8+ years of experience in SaaS applications. Passionate ab
 
             <div class="space-y-3">
               <label
+                scFrame
                 scSwitchField
-                class="flex items-center justify-between rounded-lg border p-4"
+                class="flex items-center justify-between p-4"
               >
                 <div>
                   <p scLabelText i18n="@@common.emailNotifications">
@@ -313,8 +316,9 @@ Product designer with 8+ years of experience in SaaS applications. Passionate ab
               </label>
 
               <label
+                scFrame
                 scSwitchField
-                class="flex items-center justify-between rounded-lg border p-4"
+                class="flex items-center justify-between p-4"
               >
                 <div>
                   <p scLabelText i18n="@@common.pushNotifications">
@@ -332,8 +336,9 @@ Product designer with 8+ years of experience in SaaS applications. Passionate ab
               </label>
 
               <label
+                scFrame
                 scSwitchField
-                class="flex items-center justify-between rounded-lg border p-4"
+                class="flex items-center justify-between p-4"
               >
                 <div>
                   <p scLabelText i18n="@@settingsProfile.digest">

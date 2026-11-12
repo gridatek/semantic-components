@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation, computed, input } from '@angular/core';
+import { ScFrame } from '@semantic-components/ui';
 import {
   SiCircleChevronDownIcon,
   SiLayoutDashboardIcon,
@@ -8,7 +9,12 @@ import { cn } from 'cn';
 
 @Component({
   selector: 'app-feature-grid',
-  imports: [SiLayoutDashboardIcon, SiCircleChevronDownIcon, SiMoonIcon],
+  imports: [
+    ScFrame,
+    SiLayoutDashboardIcon,
+    SiCircleChevronDownIcon,
+    SiMoonIcon,
+  ],
   template: `
     <section class="px-4 py-16 md:px-6 lg:px-8">
       <div class="mx-auto w-full max-w-7xl px-4 md:px-6 lg:px-8">
@@ -19,7 +25,7 @@ import { cn } from 'cn';
           Features
         </h2>
         <div class="grid gap-8 md:grid-cols-3">
-          <div class="bg-card rounded-lg border p-6">
+          <div scFrame class="bg-card p-6">
             <div
               class="bg-primary/10 mb-4 flex h-12 w-12 items-center justify-center rounded-lg"
             >
@@ -36,7 +42,7 @@ import { cn } from 'cn';
               smooth transitions.
             </p>
           </div>
-          <div class="bg-card rounded-lg border p-6">
+          <div scFrame class="bg-card p-6">
             <div
               class="bg-primary/10 mb-4 flex h-12 w-12 items-center justify-center rounded-lg"
             >
@@ -53,7 +59,7 @@ import { cn } from 'cn';
               support.
             </p>
           </div>
-          <div class="bg-card rounded-lg border p-6">
+          <div scFrame class="bg-card p-6">
             <div
               class="bg-primary/10 mb-4 flex h-12 w-12 items-center justify-center rounded-lg"
             >

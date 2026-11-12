@@ -15,13 +15,13 @@ import { BothScrollAreaDemo } from './both-scroll-area-demo';
 })
 export class BothScrollAreaDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScScrollArea } from '@semantic-components/ui';
+import { ScFrame, ScScrollArea } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-both-scroll-area-demo',
-  imports: [ScScrollArea],
+  imports: [ScFrame, ScScrollArea],
   template: \`
-    <div scScrollArea class="h-72 w-72 rounded-md border">
+    <div scFrame scScrollArea class="h-72 w-72">
       <div class="p-4" style="width: 500px;">
         <h4 class="mb-4 text-sm leading-none font-medium">
           Content with both scrollbars

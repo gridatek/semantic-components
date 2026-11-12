@@ -29,6 +29,7 @@ import {
   ScDialogProvider,
   ScDialogTitle,
   ScDialogTrigger,
+  ScFrame,
   ScInput,
   ScLabel,
   ScProgress,
@@ -56,6 +57,7 @@ import {
 @Component({
   selector: 'app-shadcn',
   imports: [
+    ScFrame,
     ScAvatar,
     ScAvatarFallback,
     ScBadge,
@@ -903,7 +905,8 @@ import {
                       <div class="space-y-4 pt-4">
                         @for (item of menuStarters; track item.name) {
                           <div
-                            class="flex items-start justify-between gap-4 rounded-lg border p-4"
+                            scFrame
+                            class="flex items-start justify-between gap-4 p-4"
                           >
                             <div class="flex-1 space-y-1">
                               <div class="flex items-center gap-2">

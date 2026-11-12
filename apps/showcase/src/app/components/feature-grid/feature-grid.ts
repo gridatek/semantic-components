@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation, computed, input } from '@angular/core';
+import { ScFrame } from '@semantic-components/ui';
 import {
   SiAccessibilityIcon,
   SiCodeXmlIcon,
@@ -15,6 +16,7 @@ import { cn } from 'cn';
 @Component({
   selector: 'app-feature-grid',
   imports: [
+    ScFrame,
     SiCodeXmlIcon,
     SiNotebookIcon,
     SiGrid2x2Icon,
@@ -40,7 +42,8 @@ import { cn } from 'cn';
         </div>
         <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
           <div
-            class="bg-card hover:border-foreground/20 space-y-4 rounded-xl border p-8 transition-colors"
+            scFrame
+            class="bg-card hover:ring-foreground/20 space-y-4 p-8 transition-colors"
           >
             <div
               class="bg-primary/10 flex size-12 items-center justify-center rounded-lg"
@@ -54,7 +57,8 @@ import { cn } from 'cn';
             </p>
           </div>
           <div
-            class="bg-card hover:border-foreground/20 space-y-4 rounded-xl border p-8 transition-colors"
+            scFrame
+            class="bg-card hover:ring-foreground/20 space-y-4 p-8 transition-colors"
           >
             <div
               class="bg-primary/10 flex size-12 items-center justify-center rounded-lg"
@@ -68,7 +72,8 @@ import { cn } from 'cn';
             </p>
           </div>
           <div
-            class="bg-card hover:border-foreground/20 space-y-4 rounded-xl border p-8 transition-colors"
+            scFrame
+            class="bg-card hover:ring-foreground/20 space-y-4 p-8 transition-colors"
           >
             <div
               class="bg-primary/10 flex size-12 items-center justify-center rounded-lg"
@@ -82,7 +87,8 @@ import { cn } from 'cn';
             </p>
           </div>
           <div
-            class="bg-card hover:border-foreground/20 space-y-4 rounded-xl border p-8 transition-colors"
+            scFrame
+            class="bg-card hover:ring-foreground/20 space-y-4 p-8 transition-colors"
           >
             <div
               class="bg-primary/10 flex size-12 items-center justify-center rounded-lg"
@@ -96,7 +102,8 @@ import { cn } from 'cn';
             </p>
           </div>
           <div
-            class="bg-card hover:border-foreground/20 space-y-4 rounded-xl border p-8 transition-colors"
+            scFrame
+            class="bg-card hover:ring-foreground/20 space-y-4 p-8 transition-colors"
           >
             <div
               class="bg-primary/10 flex size-12 items-center justify-center rounded-lg"
@@ -110,7 +117,8 @@ import { cn } from 'cn';
             </p>
           </div>
           <div
-            class="bg-card hover:border-foreground/20 space-y-4 rounded-xl border p-8 transition-colors"
+            scFrame
+            class="bg-card hover:ring-foreground/20 space-y-4 p-8 transition-colors"
           >
             <div
               class="bg-primary/10 flex size-12 items-center justify-center rounded-lg"
@@ -124,7 +132,8 @@ import { cn } from 'cn';
             </p>
           </div>
           <div
-            class="bg-card hover:border-foreground/20 space-y-4 rounded-xl border p-8 transition-colors"
+            scFrame
+            class="bg-card hover:ring-foreground/20 space-y-4 p-8 transition-colors"
           >
             <div
               class="bg-primary/10 flex size-12 items-center justify-center rounded-lg"
@@ -138,7 +147,8 @@ import { cn } from 'cn';
             </p>
           </div>
           <div
-            class="bg-card hover:border-foreground/20 space-y-4 rounded-xl border p-8 transition-colors"
+            scFrame
+            class="bg-card hover:ring-foreground/20 space-y-4 p-8 transition-colors"
           >
             <div
               class="bg-primary/10 flex size-12 items-center justify-center rounded-lg"
@@ -152,7 +162,8 @@ import { cn } from 'cn';
             </p>
           </div>
           <div
-            class="bg-card hover:border-foreground/20 space-y-4 rounded-xl border p-8 transition-colors"
+            scFrame
+            class="bg-card hover:ring-foreground/20 space-y-4 p-8 transition-colors"
           >
             <div
               class="bg-primary/10 flex size-12 items-center justify-center rounded-lg"

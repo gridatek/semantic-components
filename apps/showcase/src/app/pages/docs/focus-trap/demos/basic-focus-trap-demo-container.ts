@@ -23,6 +23,7 @@ import {
   ScButton,
   ScField,
   ScFocusTrap,
+  ScFrame,
   ScInput,
   ScLabel,
 } from '@semantic-components/ui';
@@ -33,7 +34,7 @@ import {
  */
 @Component({
   selector: 'app-basic-focus-trap-demo',
-  imports: [ScButton, ScField, ScFocusTrap, ScInput, ScLabel],
+  imports: [ScFrame, ScButton, ScField, ScFocusTrap, ScInput, ScLabel],
   template: \`
     <div class="flex w-72 flex-col items-start gap-4">
       <button
@@ -47,10 +48,11 @@ import {
 
       @if (open()) {
         <div
+          scFrame
           scFocusTrap
           role="group"
           aria-label="Name"
-          class="grid w-full gap-3 rounded-lg border p-4"
+          class="grid w-full gap-3 p-4"
         >
           <div scField>
             <label scLabel>First name</label>

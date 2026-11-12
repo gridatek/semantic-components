@@ -23,6 +23,7 @@ export class ConditionalButtonPatternDemoContainer {
 import { FormField, form } from '@angular/forms/signals';
 import {
   ScButtonPattern,
+  ScFrame,
   ScLabel,
   ScSwitch,
   ScSwitchField,
@@ -31,7 +32,14 @@ import {
 /** A button only while it can act: off, a plain row, out of the Tab order. */
 @Component({
   selector: 'app-conditional-button-pattern-demo',
-  imports: [FormField, ScButtonPattern, ScLabel, ScSwitch, ScSwitchField],
+  imports: [
+    ScFrame,
+    FormField,
+    ScButtonPattern,
+    ScLabel,
+    ScSwitch,
+    ScSwitchField,
+  ],
   template: \`
     <div class="flex w-72 flex-col gap-4">
       <div scSwitchField>
@@ -39,9 +47,10 @@ import {
         <label scLabel>Editable</label>
       </div>
       <div
+        scFrame
         [scButtonPattern]="editable()"
         (click)="edit()"
-        class="rounded-md border p-3 text-sm"
+        class="p-3 text-sm"
         [class.cursor-pointer]="editable()"
       >
         Shipping address
