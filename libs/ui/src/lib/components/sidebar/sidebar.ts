@@ -31,7 +31,14 @@ import { ScSidebarState } from './sidebar-state';
   template: `
     <ng-template #content><ng-content /></ng-template>
 
-    @if (state.isMobile()) {
+    <!-- Not collapsible: inline at every width, as shadcn's (a phone too). -->
+    @if (collapsible() === 'none') {
+      <div
+        class="bg-sidebar text-sidebar-foreground flex h-full w-(--sidebar-width) flex-col"
+      >
+        <ng-container [ngTemplateOutlet]="content" />
+      </div>
+    } @else if (state.isMobile()) {
       <div scSheetProvider [(open)]="state.openMobile" [side]="sheetSide()">
         <ng-template scSheetPortal>
           <div
@@ -50,12 +57,6 @@ import { ScSidebarState } from './sidebar-state';
           </div>
         </ng-template>
       </div>
-    } @else if (collapsible() === 'none') {
-      <div
-        class="bg-sidebar text-sidebar-foreground flex h-full w-(--sidebar-width) flex-col"
-      >
-        <ng-container [ngTemplateOutlet]="content" />
-      </div>
     } @else {
       <!-- Holds the sidebar's place in the page. -->
       <div data-slot="sidebar-gap" [class]="gapClass()"></div>
@@ -72,7 +73,7 @@ import { ScSidebarState } from './sidebar-state';
   `,
   host: {
     'data-slot': 'sidebar',
-    '[id]': 'state.isMobile() ? null : id',
+    '[id]': 'state.isMobile() && collapsible() !== "none" ? null : id',
     // An aside's name; a div has none (it would be ignored, or flagged).
     '[attr.aria-label]': 'aside && label() ? label() : null',
     '[attr.data-state]': 'state.state()',
