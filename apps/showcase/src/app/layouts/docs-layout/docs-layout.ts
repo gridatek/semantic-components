@@ -105,12 +105,15 @@ import { ConfigService } from '../../services/config-service';
   ],
   template: `
     <div scSidebarProvider class="min-h-svh">
+      <!-- Above the page's sticky header (z-10): its edge, the rail's hover
+        line, half over the page, isn't covered there. -->
       <aside
         scSidebar
         side="start"
         variant="sidebar"
         collapsible="icon"
         aria-label="Sidebar"
+        class="relative z-20"
       >
         <div scSidebarHeader>
           <ul scSidebarMenu>
