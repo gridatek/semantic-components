@@ -20,6 +20,7 @@ import { PriceNumberFieldDemo } from './price-number-field-demo';
 export default class PriceNumberFieldDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
+  ScFrame,
   ScLabel,
   ScNumberField,
   ScNumberFieldDecrement,
@@ -34,6 +35,7 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-price-number-field-demo',
   imports: [
+    ScFrame,
     ScLabel,
     ScNumberField,
     ScNumberFieldScrubArea,
@@ -70,9 +72,7 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
           </button>
         </div>
       </div>
-      <p class="bg-muted rounded-md p-4 text-sm">
-        Value: {{ price() ?? 'none' }}
-      </p>
+      <p scFrame class="bg-muted p-4 text-sm">Value: {{ price() ?? 'none' }}</p>
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },

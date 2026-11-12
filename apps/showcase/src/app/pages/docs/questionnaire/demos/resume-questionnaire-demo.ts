@@ -9,6 +9,7 @@ import {
 } from '@angular/forms/signals';
 import {
   ScButton,
+  ScFrame,
   ScInput,
   ScQuestionnaire,
   ScQuestionnaireActions,
@@ -41,6 +42,7 @@ const saved = () => ({
 @Component({
   selector: 'app-resume-questionnaire-demo',
   imports: [
+    ScFrame,
     JsonPipe,
     FormField,
     FormRoot,
@@ -181,7 +183,7 @@ const saved = () => ({
       </button>
     </form>
     @if (sent(); as answers) {
-      <div class="bg-muted rounded-md p-4 text-sm">
+      <div scFrame class="bg-muted p-4 text-sm">
         <p class="font-medium">Submitted</p>
         <pre class="mt-2 whitespace-pre-wrap">{{ answers | json }}</pre>
       </div>

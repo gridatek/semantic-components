@@ -20,6 +20,7 @@ import { LinksButtonsMarkerDemo } from './links-buttons-marker-demo';
 export class LinksButtonsMarkerDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
+  ScFrame,
   ScMarker,
   ScMarkerContent,
   ScMarkerIcon,
@@ -30,6 +31,7 @@ import { SiGitBranchIcon, SiRotateCcwIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-links-buttons-marker-demo',
   imports: [
+    ScFrame,
     ScMarker,
     ScMarkerIcon,
     ScMarkerContent,
@@ -47,7 +49,7 @@ import { SiGitBranchIcon, SiRotateCcwIcon } from '@semantic-icons/lucide-icons';
         <span scMarkerContent>Revert this change</span>
       </button>
       @if (reverted()) {
-        <p class="bg-muted rounded-md p-4 text-sm">Reverted.</p>
+        <p scFrame class="bg-muted p-4 text-sm">Reverted.</p>
       }
     </div>
   \`,

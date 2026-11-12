@@ -24,12 +24,13 @@ import {
   ScBubbleContent,
   ScBubbleReactions,
   ScButton,
+  ScFrame,
 } from '@semantic-components/ui';
 
 /** side (bottom, top) and align (end, start). They overlap the edge: leave room between rows (gap-12). Emoji: one image, named; buttons: named. */
 @Component({
   selector: 'app-reactions-bubble-demo',
-  imports: [ScBubble, ScBubbleContent, ScBubbleReactions, ScButton],
+  imports: [ScFrame, ScBubble, ScBubbleContent, ScBubbleReactions, ScButton],
   template: \`
     <div class="flex w-full max-w-sm flex-col gap-12 py-6">
       <div scBubble variant="muted" align="end">
@@ -85,7 +86,7 @@ import {
         </div>
       </div>
       @if (ran()) {
-        <p class="bg-muted rounded-md p-4 text-sm">Running the command…</p>
+        <p scFrame class="bg-muted p-4 text-sm">Running the command…</p>
       }
     </div>
   \`,

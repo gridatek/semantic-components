@@ -497,9 +497,7 @@ import {
               </p>
             </div>
           </div>
-          <div
-            class="bg-muted/50 min-h-screen flex-1 rounded-xl p-8 md:min-h-min"
-          >
+          <div scFrame class="bg-muted/50 min-h-screen flex-1 p-8 md:min-h-min">
             <div class="space-y-4">
               <h2 class="text-2xl font-bold" i18n="@@dashboard.welcome">
                 Welcome to the Sidebar Demo

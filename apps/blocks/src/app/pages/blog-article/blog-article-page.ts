@@ -8,6 +8,7 @@ import {
   ScCardContent,
   ScCardHeader,
   ScCardTitle,
+  ScFrame,
   ScSeparator,
 } from '@semantic-components/ui';
 import { LocalDatePipe } from '../../pipes/local-date';
@@ -15,6 +16,7 @@ import { LocalDatePipe } from '../../pipes/local-date';
 @Component({
   selector: 'app-blog-article',
   imports: [
+    ScFrame,
     LocalDatePipe,
     RouterLink,
     ScAvatar,
@@ -109,9 +111,9 @@ import { LocalDatePipe } from '../../pipes/local-date';
             Here is a simple example of how signals work:
           </p>
 
-          <pre
-            class="bg-muted overflow-x-auto rounded-lg p-4 font-mono text-sm"
-            >{{ codeExample }}</pre>
+          <pre scFrame class="bg-muted overflow-x-auto p-4 font-mono text-sm">{{
+            codeExample
+          }}</pre>
 
           <h2
             class="text-2xl font-semibold tracking-tight"

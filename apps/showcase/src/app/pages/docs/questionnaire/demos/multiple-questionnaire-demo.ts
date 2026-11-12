@@ -2,6 +2,7 @@ import { JsonPipe } from '@angular/common';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, FormRoot, form } from '@angular/forms/signals';
 import {
+  ScFrame,
   ScQuestionnaire,
   ScQuestionnaireActions,
   ScQuestionnaireChoice,
@@ -24,6 +25,7 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-multiple-questionnaire-demo',
   imports: [
+    ScFrame,
     JsonPipe,
     FormField,
     FormRoot,
@@ -102,7 +104,7 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
       </div>
     </form>
     @if (sent(); as answers) {
-      <div class="bg-muted rounded-md p-4 text-sm">
+      <div scFrame class="bg-muted p-4 text-sm">
         <p class="font-medium">Submitted</p>
         <pre class="mt-2 whitespace-pre-wrap">{{ answers | json }}</pre>
       </div>

@@ -22,6 +22,7 @@ export class SkipQuestionnaireDemoContainer {
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, FormRoot, form, required } from '@angular/forms/signals';
 import {
+  ScFrame,
   ScQuestionnaire,
   ScQuestionnaireActions,
   ScQuestionnaireChoice,
@@ -45,6 +46,7 @@ import {
 @Component({
   selector: 'app-skip-questionnaire-demo',
   imports: [
+    ScFrame,
     JsonPipe,
     FormField,
     FormRoot,
@@ -210,7 +212,7 @@ import {
       </div>
     </form>
     @if (sent(); as answers) {
-      <div class="bg-muted rounded-md p-4 text-sm">
+      <div scFrame class="bg-muted p-4 text-sm">
         <p class="font-medium">Submitted</p>
         <pre class="mt-2 whitespace-pre-wrap">{{ answers | json }}</pre>
       </div>

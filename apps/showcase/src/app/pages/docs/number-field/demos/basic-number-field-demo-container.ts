@@ -20,6 +20,7 @@ import { BasicNumberFieldDemo } from './basic-number-field-demo';
 export default class BasicNumberFieldDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
+  ScFrame,
   ScLabel,
   ScNumberField,
   ScNumberFieldDecrement,
@@ -34,6 +35,7 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-basic-number-field-demo',
   imports: [
+    ScFrame,
     ScLabel,
     ScNumberField,
     ScNumberFieldScrubArea,
@@ -69,7 +71,8 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
         </div>
       </div>
       <dl
-        class="bg-muted grid grid-cols-[auto_1fr] gap-x-3 rounded-md p-4 text-sm"
+        scFrame
+        class="bg-muted grid grid-cols-[auto_1fr] gap-x-3 p-4 text-sm"
       >
         <dt class="text-muted-foreground">Value</dt>
         <dd>{{ count() ?? 'none' }}</dd>

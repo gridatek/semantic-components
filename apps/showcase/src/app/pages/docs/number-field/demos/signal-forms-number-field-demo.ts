@@ -3,6 +3,7 @@ import { FormField, form, max, min, required } from '@angular/forms/signals';
 import {
   ScButton,
   ScFieldErrors,
+  ScFrame,
   ScLabel,
   ScNumberField,
   ScNumberFieldDecrement,
@@ -21,6 +22,7 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-signal-forms-number-field-demo',
   imports: [
+    ScFrame,
     FormField,
     ScButton,
     ScFieldErrors,
@@ -56,7 +58,7 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
 
       <button scButton type="submit">Order</button>
 
-      <pre class="bg-muted rounded-md p-4 text-xs">{{ state() }}</pre>
+      <pre scFrame class="bg-muted p-4 text-xs">{{ state() }}</pre>
     </form>
   `,
   host: { class: 'flex w-full justify-center' },

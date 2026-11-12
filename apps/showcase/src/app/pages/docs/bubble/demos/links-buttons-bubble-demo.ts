@@ -3,12 +3,13 @@ import {
   ScBubble,
   ScBubbleContent,
   ScBubbleGroup,
+  ScFrame,
 } from '@semantic-components/ui';
 
 /** scBubbleContent on a button or a link: the whole bubble is clickable, named by its text. */
 @Component({
   selector: 'app-links-buttons-bubble-demo',
-  imports: [ScBubbleGroup, ScBubble, ScBubbleContent],
+  imports: [ScFrame, ScBubbleGroup, ScBubble, ScBubbleContent],
   template: `
     <div class="flex w-full max-w-sm flex-col gap-8 py-6">
       <div scBubble variant="muted">
@@ -43,7 +44,7 @@ import {
         >
       </div>
       @if (chosen()) {
-        <p class="bg-muted rounded-md p-4 text-sm">You chose: {{ chosen() }}</p>
+        <p scFrame class="bg-muted p-4 text-sm">You chose: {{ chosen() }}</p>
       }
     </div>
   `,
