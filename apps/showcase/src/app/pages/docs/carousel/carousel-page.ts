@@ -12,7 +12,6 @@ import {
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { EntryInstall } from '../../../components/entry-install/entry-install';
-import { PackageManagerInstall } from '../../../components/package-manager-install/package-manager-install';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ApiCarouselDemoContainer } from './demos/api-carousel-demo-container';
 import { CarouselUsageDemoContainer } from './demos/carousel-usage-demo-container';
@@ -29,7 +28,6 @@ import { SpacingCarouselDemoContainer } from './demos/spacing-carousel-demo-cont
   imports: [
     Anatomy,
     EntryInstall,
-    PackageManagerInstall,
     CarouselUsageDemoContainer,
     SizesCarouselDemoContainer,
     SpacingCarouselDemoContainer,
@@ -117,14 +115,7 @@ import { SpacingCarouselDemoContainer } from './demos/spacing-carousel-demo-cont
         <app-spacing-carousel-demo-container />
         <app-orientation-carousel-demo-container />
         <app-api-carousel-demo-container />
-        <div class="space-y-4">
-          <p class="text-muted-foreground">
-            The Plugin example uses Embla&apos;s autoplay plugin, a package of
-            its own: install it where you use it.
-          </p>
-          <app-package-manager-install packages="embla-carousel-autoplay" />
-          <app-plugin-carousel-demo-container />
-        </div>
+        <app-plugin-carousel-demo-container />
         <app-multiple-carousel-demo-container />
         <app-images-carousel-demo-container />
         <app-rtl-carousel-demo-container />

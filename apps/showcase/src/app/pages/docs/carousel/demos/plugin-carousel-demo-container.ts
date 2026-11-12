@@ -1,16 +1,22 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { PackageManagerInstall } from '../../../../components/package-manager-install/package-manager-install';
 import { PluginCarouselDemo } from './plugin-carousel-demo';
 
 @Component({
   selector: 'app-plugin-carousel-demo-container',
-  imports: [DemoContainer, PluginCarouselDemo],
+  imports: [DemoContainer, PackageManagerInstall, PluginCarouselDemo],
   template: `
     <app-demo-container
       title="Plugin"
+      description="Embla's autoplay plugin, a package of its own: install it where you use it."
       demoUrl="/demos/carousel/plugin-carousel-demo"
       [code]="code"
     >
+      <app-package-manager-install
+        demoSetup
+        packages="embla-carousel-autoplay"
+      />
       <app-plugin-carousel-demo />
     </app-demo-container>
   `,

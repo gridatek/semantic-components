@@ -85,6 +85,9 @@ import { TocHeading } from '../toc/toc-heading';
         <p class="text-muted-foreground text-sm">{{ description() }}</p>
       }
 
+      <!-- What the demo needs first (an install step), between the description and the tabs. -->
+      <ng-content select="[demoSetup]" />
+
       <div scTabs class="w-full" value="preview">
         <div scTabsList>
           <button scTabsTab value="preview">Preview</button>
