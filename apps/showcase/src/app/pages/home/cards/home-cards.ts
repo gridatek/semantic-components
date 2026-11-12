@@ -1,11 +1,11 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { MessageScrollerUsageDemo } from '../../docs/message-scroller/demos/message-scroller-usage-demo';
 import { HomeAccountAccess } from './account-access';
 import { HomeAnalyticsCard } from './analytics-card';
 import { HomeClaimableBalance } from './claimable-balance';
 import { HomeContributionHistory } from './contribution-history';
 import { HomeDividendIncome } from './dividend-income';
 import { HomeEmptyDistributeTrack } from './empty-distribute-track';
+import { HomeNewChat } from './new-chat';
 import { HomeNewMilestone } from './new-milestone';
 import { HomeNotificationSettings } from './notification-settings';
 import { HomePayments } from './payments';
@@ -24,13 +24,13 @@ import { HomeUiElements } from './ui-elements';
 @Component({
   selector: 'app-home-cards',
   imports: [
-    MessageScrollerUsageDemo,
     HomeAccountAccess,
     HomeAnalyticsCard,
     HomeClaimableBalance,
     HomeContributionHistory,
     HomeDividendIncome,
     HomeEmptyDistributeTrack,
+    HomeNewChat,
     HomeNewMilestone,
     HomeNotificationSettings,
     HomePayments,
@@ -65,7 +65,7 @@ import { HomeUiElements } from './ui-elements';
         </div>
         <div class="hidden flex-col gap-(--gap) md:flex">
           <app-home-qr-connect />
-          <app-message-scroller-usage-demo />
+          <app-home-new-chat />
           <app-home-payments />
         </div>
         <div class="hidden flex-col gap-(--gap) min-[1900px]:flex">
