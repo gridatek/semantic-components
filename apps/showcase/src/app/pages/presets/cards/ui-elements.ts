@@ -141,17 +141,17 @@ import { SiChevronUpIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
             ></textarea>
           </div>
         </div>
-        <div class="flex items-center gap-2">
-          <div class="flex gap-2">
-            <span scBadge>Badge</span>
-            <span scBadge variant="secondary">Secondary</span>
-            <span scBadge variant="outline">Outline</span>
-          </div>
+        <div class="flex gap-2">
+          <span scBadge>Badge</span>
+          <span scBadge variant="secondary">Secondary</span>
+          <span scBadge variant="outline">Outline</span>
+        </div>
+        <div class="flex items-center gap-3">
           <div
             scRadioGroup
             [formField]="settings.fruit"
             aria-label="Fruit preference"
-            class="ms-auto flex w-fit flex-row gap-3"
+            class="flex w-fit flex-row gap-3"
           >
             <input scRadio value="apple" aria-label="Apple" />
             <input scRadio value="banana" aria-label="Banana" />
@@ -168,6 +168,11 @@ import { SiChevronUpIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
               [formField]="settings.textAlerts"
             />
           </div>
+          <input
+            scSwitch
+            aria-label="Enable compact notifications"
+            [formField]="settings.compact"
+          />
         </div>
         <div class="flex items-center gap-4">
           <div scAlertDialogProvider>
@@ -224,12 +229,6 @@ import { SiChevronUpIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
               </div>
             </ng-template>
           </div>
-          <input
-            scSwitch
-            class="ms-auto"
-            aria-label="Enable compact notifications"
-            [formField]="settings.compact"
-          />
         </div>
       </div>
     </div>
