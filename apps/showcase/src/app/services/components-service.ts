@@ -13,26 +13,27 @@ export class ComponentsService {
 
   readonly components = computed(() => this.componentsResource.value() ?? []);
 
-  readonly visibleComponents = computed(() => {
-    const all = this.configService.devMode()
+  /** Every page, or only those not hidden (`showHidden` in config.json). */
+  private readonly listed = computed(() =>
+    this.configService.showHidden()
       ? this.components()
-      : this.components().filter((c) => !c.hidden);
+      : this.components().filter((c) => !c.hidden),
+  );
+
+  readonly visibleComponents = computed(() => {
+    const all = this.listed();
     return all.filter(
       (c) => c.category !== 'Utilities' && c.category !== 'Recipes',
     );
   });
 
   readonly visibleUtilities = computed(() => {
-    const all = this.configService.devMode()
-      ? this.components()
-      : this.components().filter((c) => !c.hidden);
+    const all = this.listed();
     return all.filter((c) => c.category === 'Utilities');
   });
 
   readonly visibleRecipes = computed(() => {
-    const all = this.configService.devMode()
-      ? this.components()
-      : this.components().filter((c) => !c.hidden);
+    const all = this.listed();
     return all.filter((c) => c.category === 'Recipes');
   });
 }

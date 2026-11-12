@@ -33,7 +33,7 @@ jobs:
         run: npm i
 
       - name: Create production config
-        run: echo '{"devMode":false}' > apps/showcase/public/config.json
+        run: echo '{"devMode":false,"showHidden":false}' > apps/showcase/public/config.json
 
       - name: Build Angular app
         run: npx nx build showcase
@@ -64,7 +64,7 @@ jobs:
         run: npm i
 
       - name: Create dev config
-        run: echo '{"devMode":true}' > apps/showcase/public/config.json
+        run: echo '{"devMode":true,"showHidden":true}' > apps/showcase/public/config.json
 
       - name: Build Angular app
         run: npx nx build showcase
