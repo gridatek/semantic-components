@@ -574,6 +574,18 @@ export interface ScSidebarStyles {
 }
 
 /** A preset: the components' classes in one of shadcn's styles. */
+/** A navigation menu's parts that change from style to style. */
+export interface ScNavigationMenuStyles {
+  /** A trigger (and a top-level link): open while `aria-expanded`. */
+  trigger: string;
+  /** A link in a panel. */
+  link: string;
+  /** A panel's padding. */
+  content: string;
+  /** The shared box (or a panel's own): corners, background, shadow, ring. */
+  popup: string;
+}
+
 export interface ScPreset {
   accordion: ScAccordionStyles;
   alert: ScAlertStyles;
@@ -631,6 +643,7 @@ export interface ScPreset {
   /** A message scroller's rows: the gap between them. */
   messageScrollerContent: string;
   nativeSelect: ScNativeSelectStyles;
+  navigationMenu: ScNavigationMenuStyles;
   otpField: ScOtpFieldStyles;
   pagination: ScPaginationStyles;
   popover: ScPopoverStyles;

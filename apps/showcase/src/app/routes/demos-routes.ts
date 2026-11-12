@@ -5788,6 +5788,46 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/navigation-menu-next',
+    children: [
+      {
+        path: 'navigation-menu-next-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/navigation-menu-next/demos/navigation-menu-next-usage-demo').then(
+            (m) => m.NavigationMenuNextUsageDemo,
+          ),
+      },
+      {
+        path: 'open-item-navigation-menu-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/navigation-menu-next/demos/open-item-navigation-menu-next-demo').then(
+            (m) => m.OpenItemNavigationMenuNextDemo,
+          ),
+      },
+      {
+        path: 'separate-navigation-menu-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/navigation-menu-next/demos/separate-navigation-menu-next-demo').then(
+            (m) => m.SeparateNavigationMenuNextDemo,
+          ),
+      },
+      {
+        path: 'align-navigation-menu-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/navigation-menu-next/demos/align-navigation-menu-next-demo').then(
+            (m) => m.AlignNavigationMenuNextDemo,
+          ),
+      },
+      {
+        path: 'rtl-navigation-menu-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/navigation-menu-next/demos/rtl-navigation-menu-next-demo').then(
+            (m) => m.RtlNavigationMenuNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/sidebar',
     children: [
       {

@@ -39,6 +39,7 @@ import { menubar } from './menubar';
 import { message } from './message';
 import { messageScrollerContent } from './message-scroller';
 import { nativeSelect } from './native-select';
+import { navigationMenu } from './navigation-menu';
 import { otpField } from './otp-field';
 import { pagination } from './pagination';
 import { popover } from './popover';
@@ -104,6 +105,7 @@ export const maia: ScPreset = {
   message,
   messageScrollerContent,
   nativeSelect,
+  navigationMenu,
   otpField,
   pagination,
   popover,
