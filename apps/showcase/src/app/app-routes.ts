@@ -17,6 +17,11 @@ export const appRoutes: Route[] = [
         title: 'Semantic Components',
         loadComponent: () => import('./pages/home/home'),
       },
+      {
+        path: 'typeset',
+        title: 'Typeset - Semantic Components',
+        loadComponent: () => import('./pages/typeset/typeset'),
+      },
     ],
   },
 ];

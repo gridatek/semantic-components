@@ -1,7 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ScBadge, ScLink } from '@semantic-components/ui';
-import { SiArrowRightIcon } from '@semantic-icons/lucide-icons';
 import { HomeCards } from './cards/home-cards';
 
 /**
@@ -10,20 +9,14 @@ import { HomeCards } from './cards/home-cards';
  */
 @Component({
   selector: 'app-home',
-  imports: [RouterLink, ScBadge, ScLink, SiArrowRightIcon, HomeCards],
+  imports: [RouterLink, ScBadge, ScLink, HomeCards],
   template: `
     <section
       class="flex flex-col items-center gap-2 px-6 py-8 text-center md:py-16 lg:py-20 xl:gap-4"
     >
-      <a
-        scBadge
-        variant="secondary"
-        routerLink="/docs/components"
-        class="bg-muted"
-      >
-        Carousel, Navigation Menu and Date Picker
-        <svg siArrowRightIcon></svg>
-      </a>
+      <span scBadge variant="secondary" class="bg-muted">
+        Semantic Components
+      </span>
       <h1
         class="text-primary max-w-4xl text-3xl leading-tight font-semibold tracking-tight text-balance lg:leading-[1.1] xl:text-5xl xl:tracking-tighter"
       >

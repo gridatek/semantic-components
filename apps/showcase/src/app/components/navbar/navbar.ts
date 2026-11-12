@@ -73,16 +73,29 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
     ScNavigationMenuTriggerIcon,
   ],
   template: `
-    <header scNavbar #navbar="scNavbar">
+    <header scNavbar #navbar="scNavbar" class="border-b-0">
       <!-- Brand -->
       <a scNavbarBrand routerLink="/">
         <svg app-logo class="size-6"></svg>
-        <span class="hidden sm:inline">Semantic Components</span>
+        <span class="sr-only">Semantic Components</span>
       </a>
 
       <!-- Desktop Navigation -->
       <nav scNavigationMenu scNavbarNav aria-label="Main">
         <ul scNavigationMenuList>
+          <li scNavigationMenuItem>
+            <a
+              scNavigationMenuLink
+              routerLink="/"
+              routerLinkActive
+              [routerLinkActiveOptions]="{ exact: true }"
+              #homeRla="routerLinkActive"
+              [active]="homeRla.isActive"
+            >
+              Home
+            </a>
+          </li>
+
           <li scNavigationMenuItem>
             <button scNavigationMenuTrigger>
               Components
@@ -132,6 +145,40 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
               [active]="docsRla.isActive"
             >
               Documentation
+            </a>
+          </li>
+          <li scNavigationMenuItem>
+            <a
+              scNavigationMenuLink
+              routerLink="/docs/components/chart"
+              routerLinkActive
+              #chartsRla="routerLinkActive"
+              [active]="chartsRla.isActive"
+            >
+              Charts
+            </a>
+          </li>
+
+          <li scNavigationMenuItem>
+            <a
+              scNavigationMenuLink
+              routerLink="/typeset"
+              routerLinkActive
+              #typesetRla="routerLinkActive"
+              [active]="typesetRla.isActive"
+            >
+              Typeset
+            </a>
+          </li>
+          <li scNavigationMenuItem>
+            <a
+              scNavigationMenuLink
+              routerLink="/docs/getting-started/presets"
+              routerLinkActive
+              #presetsRla="routerLinkActive"
+              [active]="presetsRla.isActive"
+            >
+              Presets
             </a>
           </li>
         </ul>
@@ -203,6 +250,16 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
         <nav aria-label="Main">
           <a
             scNavbarMenuLink
+            routerLink="/"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            #mobileHomeRla="routerLinkActive"
+            [active]="mobileHomeRla.isActive"
+          >
+            Home
+          </a>
+          <a
+            scNavbarMenuLink
             routerLink="/docs/components"
             routerLinkActive="active"
             #mobileComponentsRla="routerLinkActive"
@@ -218,6 +275,33 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
             [active]="mobileDocsRla.isActive"
           >
             Documentation
+          </a>
+          <a
+            scNavbarMenuLink
+            routerLink="/docs/components/chart"
+            routerLinkActive="active"
+            #mobileChartsRla="routerLinkActive"
+            [active]="mobileChartsRla.isActive"
+          >
+            Charts
+          </a>
+          <a
+            scNavbarMenuLink
+            routerLink="/typeset"
+            routerLinkActive="active"
+            #mobileTypesetRla="routerLinkActive"
+            [active]="mobileTypesetRla.isActive"
+          >
+            Typeset
+          </a>
+          <a
+            scNavbarMenuLink
+            routerLink="/docs/getting-started/presets"
+            routerLinkActive="active"
+            #mobilePresetsRla="routerLinkActive"
+            [active]="mobilePresetsRla.isActive"
+          >
+            Presets
           </a>
         </nav>
       </div>
