@@ -18,9 +18,9 @@ import { storedPreset } from '../../../presets';
             preview of the typography styles.
           </p>
         </div>
-        <ul class="grid grid-cols-6 gap-3">
+        <ul class="grid grid-cols-4 gap-3">
           @for (variable of variables; track variable) {
-            <li class="flex flex-col flex-wrap items-center gap-2">
+            <li class="flex min-w-0 flex-col items-center gap-2">
               <div
                 scFrame
                 size="sm"
@@ -29,7 +29,7 @@ import { storedPreset } from '../../../presets';
                 [style.--color]="'var(' + variable + ')'"
               ></div>
               <span
-                class="hidden max-w-14 truncate font-mono text-[0.60rem] md:block"
+                class="hidden max-w-full truncate font-mono text-[0.60rem] md:block"
                 >{{ variable }}</span
               >
             </li>
