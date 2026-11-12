@@ -48,18 +48,37 @@ jobs:
       - name: Build
         run: npx nx affected -t build
 
-  # The e2e tests of the client-side apps, in four shards run side by side:
-  # the showcase's suite (over 3,000 tests) outgrew one job's 30 minutes, even
-  # on four workers. Each shard builds the app and runs its quarter
-  # (Playwright's `--shard`); the blocks' small suite runs in the first. Only
-  # when the change affects them.
+  # The e2e tests of the client-side apps, a job per group of Playwright
+  # projects run side by side (the showcase's suite outgrew one job's 30
+  # minutes): demos (two shards), pages, the presets two by two, the phones
+  # with the blocks. A job's name says which kind of test failed. Only when the
+  # change affects them.
   csr-e2e:
+    name: csr-e2e (${{ matrix.group }})
     runs-on: ubuntu-latest
     timeout-minutes: 30
     strategy:
       fail-fast: false
       matrix:
-        shard: [1, 2, 3, 4]
+        include:
+          - group: demos-1
+            projects: --project=demos --shard=1/2
+          - group: demos-2
+            projects: --project=demos --shard=2/2
+          - group: pages
+            projects: --project=pages
+          - group: presets-nova-vega
+            projects: --project=presets-nova --project=presets-vega
+          - group: presets-maia-lyra
+            projects: --project=presets-maia --project=presets-lyra
+          - group: presets-mira-luma
+            projects: --project=presets-mira --project=presets-luma
+          - group: presets-sera-rhea
+            projects: --project=presets-sera --project=presets-rhea
+          # The phones' tests, and the blocks' small suite.
+          - group: mobile
+            projects: --project=mobile
+            blocks: true
     steps:
       - uses: actions/checkout@v7
         with:
@@ -84,26 +103,26 @@ jobs:
           echo "blocks=$(echo "$projects" | grep -qw blocks-e2e && echo true || echo false)" >> "$GITHUB_OUTPUT"
 
       - name: Build
-        if: steps.affected.outputs.showcase == 'true' || (matrix.shard == 1 && steps.affected.outputs.blocks == 'true')
+        if: steps.affected.outputs.showcase == 'true' || (matrix.blocks && steps.affected.outputs.blocks == 'true')
         run: npx nx run-many -t build -p showcase blocks
 
       - name: Install Playwright Browsers
-        if: steps.affected.outputs.showcase == 'true' || (matrix.shard == 1 && steps.affected.outputs.blocks == 'true')
+        if: steps.affected.outputs.showcase == 'true' || (matrix.blocks && steps.affected.outputs.blocks == 'true')
         run: npx playwright install --with-deps chromium
 
-      - name: E2E tests (showcase, shard ${{ matrix.shard }}/4)
+      - name: E2E tests (showcase, ${{ matrix.group }})
         if: steps.affected.outputs.showcase == 'true'
-        run: npx playwright test -c apps/showcase-e2e/playwright.config.ts --shard=${{ matrix.shard }}/4
+        run: npx playwright test -c apps/showcase-e2e/playwright.config.ts ${{ matrix.projects }}
 
       - name: E2E tests (blocks)
-        if: ${{ !cancelled() && matrix.shard == 1 && steps.affected.outputs.blocks == 'true' }}
+        if: ${{ !cancelled() && matrix.blocks && steps.affected.outputs.blocks == 'true' }}
         run: npx playwright test -c apps/blocks-e2e/playwright.config.ts
 
       - name: Upload Playwright report
         if: failure()
         uses: actions/upload-artifact@v7
         with:
-          name: playwright-report-${{ matrix.shard }}
+          name: playwright-report-${{ matrix.group }}
           path: |
             dist/.playwright/apps/showcase-e2e/
             dist/.playwright/apps/blocks-e2e/
@@ -111,17 +130,36 @@ jobs:
 
   # The apps rendered on the server (the `ssr` build, on its Node server), then
   # hydrated: every e2e test again, plus `ssr.spec.ts` (every page hydrates),
-  # in Chromium, in four shards as `csr-e2e`. Not required: the apps stay
+  # in Chromium, in the same groups as `csr-e2e`. Not required: the apps stay
   # client-side by default. Its own Playwright flags: four workers, not the
   # preset's CI default of one (which made it run for hours), two retries, and
   # a reporter that shows progress.
   ssr:
+    name: ssr (${{ matrix.group }})
     runs-on: ubuntu-latest
     timeout-minutes: 45
     strategy:
       fail-fast: false
       matrix:
-        shard: [1, 2, 3, 4]
+        include:
+          - group: demos-1
+            projects: --project=demos --shard=1/2
+          - group: demos-2
+            projects: --project=demos --shard=2/2
+          - group: pages
+            projects: --project=pages
+          - group: presets-nova-vega
+            projects: --project=presets-nova --project=presets-vega
+          - group: presets-maia-lyra
+            projects: --project=presets-maia --project=presets-lyra
+          - group: presets-mira-luma
+            projects: --project=presets-mira --project=presets-luma
+          - group: presets-sera-rhea
+            projects: --project=presets-sera --project=presets-rhea
+          # The phones' tests, and the blocks' small suite.
+          - group: mobile
+            projects: --project=mobile
+            blocks: true
     env:
       SSR: true
     steps:
@@ -141,11 +179,11 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps chromium
 
-      - name: E2E tests (showcase, SSR, shard ${{ matrix.shard }}/4)
-        run: npx playwright test -c apps/showcase-e2e/playwright.config.ts --project=chromium --workers=4 --retries=2 --reporter=line --shard=${{ matrix.shard }}/4
+      - name: E2E tests (showcase, SSR, ${{ matrix.group }})
+        run: npx playwright test -c apps/showcase-e2e/playwright.config.ts ${{ matrix.projects }} --workers=4 --retries=2 --reporter=line
 
       - name: E2E tests (blocks, SSR)
-        if: ${{ !cancelled() && matrix.shard == 1 }}
+        if: ${{ !cancelled() && matrix.blocks }}
         run: npx playwright test -c apps/blocks-e2e/playwright.config.ts --project=chromium --workers=4 --retries=2 --reporter=line
 
       # What failed on the server: Angular logs it, the page still answers 200.
@@ -167,7 +205,7 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@v7
         with:
-          name: playwright-report-ssr-${{ matrix.shard }}
+          name: playwright-report-ssr-${{ matrix.group }}
           path: |
             dist/.playwright/apps/showcase-e2e/
             dist/.playwright/apps/blocks-e2e/

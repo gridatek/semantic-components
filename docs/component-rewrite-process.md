@@ -78,10 +78,11 @@ Wire it into the showcase:
 
   ```sh
   cd apps/showcase-e2e
-  npx playwright test src/demos/foo-next/ src/pages/foo-next-page.spec.ts --project=chromium --reporter=line --retries=0 --workers=1
+  npx playwright test src/demos/foo-next/ src/pages/foo-next-page.spec.ts --project=demos --project=pages --reporter=line --retries=0 --workers=1
+  npx playwright test src/presets/foo-next.spec.ts --project=presets-nova --project=presets-lyra --reporter=line --retries=0 --workers=1
   ```
 
-  For Firefox or WebKit: `ALL_BROWSERS=1 … --project=firefox`.
+  For Firefox or WebKit: `ALL_BROWSERS=1 … --project=demos-firefox`.
 
 - **Look at it in a browser**: screenshots of each demo with Playwright (in the scratchpad), and drive the interactions the tests don't cover. Fix what looks wrong before showing it.
 - No build (`nx build`): the dev server shows changes live.

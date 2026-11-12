@@ -42,7 +42,7 @@ So when a component's turn comes:
 1. Diff its `.tsx` across the eight styles: what differs goes into the preset, what's the same stays in the part.
 2. Write the preset files from the `.tsx` with a small script (one per component, kept out of the repo) — never by hand — so each class is shadcn's exactly.
 3. Leave out what our machinery does instead (below), and say so in the preset file's comment.
-4. A presets spec checks every style's classes on the rendered part (`apps/showcase-e2e/src/demos/<name>/<name>-presets.spec.ts`).
+4. A presets spec checks the style's classes on the rendered part (`apps/showcase-e2e/src/presets/<name>.spec.ts`, run once per `presets-…` project; read the preset with `presetStyles()`).
 
 ## RTL: what must stay physical
 

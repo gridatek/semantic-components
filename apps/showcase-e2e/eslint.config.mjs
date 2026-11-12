@@ -21,6 +21,7 @@ export default [
             'expectTargetSize',
             'expectRtl',
             'expectInlineOrder',
+            'expectClasses',
           ],
         },
       ],

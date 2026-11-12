@@ -9,15 +9,34 @@ on:
 permissions:
   contents: read
 
-# Every e2e test in every browser (Chromium, Firefox, WebKit, and the phones:
-# ALL_BROWSERS), both ways the apps can run — client-side (csr), and rendered on the
-# server (one job per browser engine) — side by side. The pull requests' CI
-# runs Chromium only.
+# The e2e tests in the browsers the pull requests' CI doesn't run (it runs
+# Chromium, every project): Firefox and WebKit (demos and pages; WebKit's
+# phone too: ALL_BROWSERS), both ways the apps can run — client-side (csr),
+# and rendered on the server — two shards per engine, side by side.
 jobs:
   # The apps as built by default (client-side).
   csr:
+    name: csr (${{ matrix.browser }} ${{ matrix.shard }})
     runs-on: ubuntu-latest
     timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - browser: firefox
+            shard: 1/2
+            showcase: --project=demos-firefox --project=pages-firefox
+            blocks: --project=firefox
+          - browser: firefox
+            shard: 2/2
+            showcase: --project=demos-firefox --project=pages-firefox
+          - browser: webkit
+            shard: 1/2
+            showcase: --project=demos-webkit --project=pages-webkit --project=mobile-webkit
+            blocks: --project=webkit
+          - browser: webkit
+            shard: 2/2
+            showcase: --project=demos-webkit --project=pages-webkit --project=mobile-webkit
     env:
       ALL_BROWSERS: true
     steps:
@@ -37,22 +56,22 @@ jobs:
         run: npx nx run-many -t build -p showcase blocks
 
       - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+        run: npx playwright install --with-deps ${{ matrix.browser }}
 
       # Four workers and a reporter that shows progress; the preset's two
-      # retries kept — across five browsers overnight, a flake is retried.
+      # retries kept — overnight, a flake is retried.
       - name: E2E tests (showcase)
-        run: npx playwright test -c apps/showcase-e2e/playwright.config.ts --workers=4 --reporter=line
+        run: npx playwright test -c apps/showcase-e2e/playwright.config.ts ${{ matrix.showcase }} --shard=${{ matrix.shard }} --workers=4 --reporter=line
 
       - name: E2E tests (blocks)
-        if: ${{ !cancelled() }}
-        run: npx playwright test -c apps/blocks-e2e/playwright.config.ts --workers=4 --reporter=line
+        if: ${{ !cancelled() && matrix.blocks }}
+        run: npx playwright test -c apps/blocks-e2e/playwright.config.ts ${{ matrix.blocks }} --workers=4 --reporter=line
 
       - name: Upload Playwright report
         if: failure()
         uses: actions/upload-artifact@v7
         with:
-          name: playwright-report
+          name: playwright-report-${{ matrix.browser }}-${{ strategy.job-index }}
           path: |
             dist/.playwright/apps/showcase-e2e/
             dist/.playwright/apps/blocks-e2e/
@@ -64,25 +83,27 @@ jobs:
   # per browser engine, side by side: all of them in one ran close to the
   # 60-minute limit.
   ssr:
-    name: ssr (${{ matrix.browser }})
+    name: ssr (${{ matrix.browser }} ${{ matrix.shard }})
     runs-on: ubuntu-latest
     timeout-minutes: 60
     strategy:
-      # One browser failing doesn't stop the others.
       fail-fast: false
       matrix:
         include:
-          # The engine's desktop project, and its phone where there is one
-          # (the showcase's `@mobile` tests; blocks has none).
-          - browser: chromium
-            showcase: --project=chromium --project=mobile-chromium
-            blocks: --project=chromium
           - browser: firefox
-            showcase: --project=firefox
+            shard: 1/2
+            showcase: --project=demos-firefox --project=pages-firefox
             blocks: --project=firefox
+          - browser: firefox
+            shard: 2/2
+            showcase: --project=demos-firefox --project=pages-firefox
           - browser: webkit
-            showcase: --project=webkit --project=mobile-webkit
+            shard: 1/2
+            showcase: --project=demos-webkit --project=pages-webkit --project=mobile-webkit
             blocks: --project=webkit
+          - browser: webkit
+            shard: 2/2
+            showcase: --project=demos-webkit --project=pages-webkit --project=mobile-webkit
     env:
       ALL_BROWSERS: true
       SSR: true
@@ -106,10 +127,10 @@ jobs:
 
       # Two retries, as `csr`: a flake is retried, and reported as flaky.
       - name: E2E tests (showcase, SSR)
-        run: npx playwright test -c apps/showcase-e2e/playwright.config.ts ${{ matrix.showcase }} --workers=4 --retries=2 --reporter=line
+        run: npx playwright test -c apps/showcase-e2e/playwright.config.ts ${{ matrix.showcase }} --shard=${{ matrix.shard }} --workers=4 --retries=2 --reporter=line
 
       - name: E2E tests (blocks, SSR)
-        if: ${{ !cancelled() }}
+        if: ${{ !cancelled() && matrix.blocks }}
         run: npx playwright test -c apps/blocks-e2e/playwright.config.ts ${{ matrix.blocks }} --workers=4 --retries=2 --reporter=line
 
       # What failed on the server: Angular logs it, the page still answers 200.
@@ -131,7 +152,7 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@v7
         with:
-          name: playwright-report-ssr-${{ matrix.browser }}
+          name: playwright-report-ssr-${{ matrix.browser }}-${{ strategy.job-index }}
           path: |
             dist/.playwright/apps/showcase-e2e/
             dist/.playwright/apps/blocks-e2e/

@@ -9,13 +9,15 @@ export * from '@playwright/test';
  * that isn't listening yet. Without SSR, Playwright's own.
  */
 export const test = base.extend({
-  page: async ({ page, baseURL }, use) => {
-    // The specs' preset: nova (the showcase opens in lyra). A spec that sets
-    // its own cookie (the presets' specs) replaces it.
+  page: async ({ page, baseURL }, use, testInfo) => {
+    // The specs' preset: their project's (presets-lyra…), else nova — the
+    // showcase opens in lyra. Read when the app starts.
+    const preset =
+      (testInfo.project.metadata as { preset?: string }).preset ?? 'nova';
     await page.context().addCookies([
       {
         name: 'sc-preset',
-        value: 'nova',
+        value: preset,
         url: baseURL ?? 'http://localhost:4200',
       },
     ]);

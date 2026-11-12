@@ -12,8 +12,8 @@
 npx nx run showcase-e2e:e2e
 npx nx run blocks-e2e:e2e
 
-# Single browser
-npx nx run showcase-e2e:e2e -- --project=chromium
+# One kind of test (a Playwright project)
+npx nx run showcase-e2e:e2e -- --project=demos
 
 # Single test file
 npx nx run showcase-e2e:e2e -- --grep "Button"
@@ -21,6 +21,21 @@ npx nx run showcase-e2e:e2e -- --grep "Button"
 # CI mode (parallel)
 npx nx run showcase-e2e:e2e-ci
 ```
+
+## Kinds of tests: folders and projects
+
+`apps/showcase-e2e/src` has a folder per kind of test, each a Playwright project (`playwright.config.ts`), not a separate Nx project:
+
+| Folder     | Project(s)                      | What it checks                                                                                                                                                                  |
+| ---------- | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `demos/`   | `demos`                         | behaviour: keys, clicks, state — in nova, desktop Chrome                                                                                                                        |
+| `pages/`   | `pages`                         | each docs page: sections, API reference, axe, the console (`console-clean.spec.ts`), the TOC, SSR hydration                                                                     |
+| `presets/` | `presets-nova` … `presets-rhea` | in that preset (the project's `metadata.preset`, set as the cookie by `test.ts`): each component's classes, and every visible docs page's axe, light and dark (`pages.spec.ts`) |
+| —          | `mobile`                        | the `@mobile` tests of `demos/` and `pages/`, on a phone (Pixel 7)                                                                                                              |
+
+A spec in `presets/` runs once per preset project: read the preset with `presetStyles()` / `presetName()` (`presets/preset.ts`), never loop over the presets. Specs elsewhere run in nova. Visual tests (`@visual`) will go in `presets/` too.
+
+CI (`ci.yml`) runs a job per group: demos (two shards), pages, the presets two by two, mobile with the blocks — for the client-side app (`csr-e2e`) and the server-rendered one (`ssr`). A job's name says which kind failed.
 
 ## Server-side rendering (SSR)
 
@@ -32,7 +47,7 @@ Both apps are static by default; SSR is the `ssr` build configuration. The CI jo
 | `npx nx serve showcase -c ssr`  | the dev server, with SSR (rebuilds as you edit)               | looking at SSR locally                |
 | `npx nx run showcase:serve-ssr` | the built app on its Node server (`dist/…/server/server.mjs`) | CI's `ssr` job — what production runs |
 
-The nightly workflow (`nightly-e2e.yml`) runs both ways — jobs `csr` and `ssr` — in every browser (`ALL_BROWSERS`: Chromium, Firefox, WebKit and the phones); the pull requests' CI runs Chromium only.
+The nightly workflow (`nightly-e2e.yml`) runs both ways — jobs `csr` and `ssr` — in the browsers CI doesn't (`ALL_BROWSERS`): Firefox and WebKit (`demos-firefox`, `pages-firefox`, `demos-webkit`, `pages-webkit`, the iPhone `mobile-webkit`), two shards each; the pull requests' CI runs Chromium, every project.
 
 `serve-ssr` needs a build first (`npx nx build showcase -c ssr`); with `SSR=1`, the Playwright config starts it instead of `serve-static`. Its log goes to `dist/ssr-showcase.log` (`dist/ssr-blocks.log`). The same for `blocks`.
 
