@@ -79,6 +79,45 @@ import { FocusTrapUsageDemoContainer } from './demos/focus-trap-usage-demo-conta
         </ul>
       </section>
 
+      <section class="space-y-4">
+        <h2 scHeading appToc>Why not cdkTrapFocus</h2>
+        <p class="text-muted-foreground">
+          It is the CDK&apos;s focus trap underneath (FocusTrapFactory), with
+          two changes:
+        </p>
+        <ul class="text-muted-foreground list-inside list-disc space-y-1">
+          <li>
+            <strong class="text-foreground">Giving focus back.</strong>
+            <code>cdkTrapFocus</code>
+            (with
+            <code>cdkTrapFocusAutoCapture</code>
+            ) always focuses the element that had focus before. A popover that
+            opens a dialog, then closes, would pull focus out of the dialog,
+            back to its own trigger. This one gives it back only when it is
+            still inside, or lost to the page — as the CDK&apos;s Dialog does.
+          </li>
+          <li>
+            <strong class="text-foreground"
+              >Not trapped, still moving in.</strong
+            >
+            <code>[scFocusTrap]="false"</code>
+            moves focus in and back, but lets Tab leave — Base UI&apos;s
+            Popover, not modal by default. With the CDK, its restore would still
+            be unconditional.
+          </li>
+          <li>
+            <strong class="text-foreground">On by default.</strong>
+            Focus moves in without an extra input; with the CDK each overlay
+            must add
+            <code>cdkTrapFocusAutoCapture</code>
+            .
+          </li>
+        </ul>
+        <p class="text-muted-foreground">
+          The Dialog, Alert Dialog, Sheet, Drawer and Popover use it.
+        </p>
+      </section>
+
       <section class="space-y-8">
         <h2 scHeading appToc>Examples</h2>
         <app-basic-focus-trap-demo-container />

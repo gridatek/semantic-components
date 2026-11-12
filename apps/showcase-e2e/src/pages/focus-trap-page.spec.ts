@@ -8,6 +8,7 @@ test.describe('Focus Trap Page', () => {
       'Usage',
       'Anatomy',
       'How It Works',
+      'Why not cdkTrapFocus',
       'Examples',
       'API reference',
     ]);

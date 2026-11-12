@@ -9,3 +9,13 @@ Traps focus in an overlay — the dialog, alert dialog, drawer, sheet and popove
 ```html
 <div scFocusTrap>…</div>
 ```
+
+## Why not `cdkTrapFocus`
+
+It is the CDK's focus trap underneath (`FocusTrapFactory`), with two changes:
+
+- **Giving focus back.** `cdkTrapFocus` (with `cdkTrapFocusAutoCapture`) always focuses the element that had focus before. A popover that opens a dialog, then closes, would pull focus out of the dialog, back to its own trigger. This one gives it back only when it is still inside, or lost to the page — as the CDK's Dialog does.
+- **Not trapped, still moving in.** `[scFocusTrap]="false"` moves focus in and back, but lets Tab leave — Base UI's Popover, not modal by default. With the CDK, its restore would still be unconditional.
+- **On by default.** Focus moves in without an extra input; with the CDK each overlay must add `cdkTrapFocusAutoCapture`.
+
+The Dialog, Alert Dialog, Sheet, Drawer and Popover use it.
