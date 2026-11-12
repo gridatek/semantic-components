@@ -26,6 +26,10 @@ test.describe('Presets Page', () => {
   test("shadcn's Create demos, both pages, at work", async ({ page }) => {
     const messages: string[] = [];
     page.on('console', (m) => {
+      // The avatars are GitHub's, as in shadcn's demos: GitHub sometimes
+      // refuses a burst of them (403), which is the network, not the page.
+      const external = !m.location().url.startsWith('http://localhost');
+      if (m.text().startsWith('Failed to load resource') && external) return;
       if (m.type() === 'warning' || m.type() === 'error')
         messages.push(m.text().split('\n')[0]);
     });
