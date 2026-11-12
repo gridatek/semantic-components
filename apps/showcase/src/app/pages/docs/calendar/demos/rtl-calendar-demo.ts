@@ -33,7 +33,7 @@ import {
         locale="ar"
         [(value)]="date"
         scFrame
-        class="[--cell-size:--spacing(9)]"
+        class="[--cell-size:--spacing(12)]"
       >
         <div scCalendarHeader>
           <button scCalendarPrevious>

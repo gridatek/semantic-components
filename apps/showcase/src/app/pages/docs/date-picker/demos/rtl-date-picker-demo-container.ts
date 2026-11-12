@@ -79,6 +79,7 @@ import {
                 scCalendar
                 initialFocus
                 locale="ar"
+                class="[--cell-size:--spacing(12)]"
                 aria-label="اختر تاريخًا"
                 [mode]="dp.mode()"
                 [value]="dp.draft()"
