@@ -8,6 +8,7 @@ import { RangeDatePickerDemo } from './range-date-picker-demo';
   template: `
     <app-demo-container
       title="Range"
+      description='A range over two months: written as one span ("Oct 12 – 18, 2026"), closed once both ends are picked.'
       [code]="code"
       demoUrl="/demos/date-picker/range-date-picker-demo"
     >

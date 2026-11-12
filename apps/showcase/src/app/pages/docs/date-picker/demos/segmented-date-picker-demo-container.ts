@@ -8,6 +8,7 @@ import { SegmentedDatePickerDemo } from './segmented-date-picker-demo';
   template: `
     <app-demo-container
       title="Segmented"
+      description="scSegmentedDateInput in the picker: typed part by part, the picker’s value — or picked. The button in the field opens the calendar."
       [code]="code"
       demoUrl="/demos/date-picker/segmented-date-picker-demo"
     >

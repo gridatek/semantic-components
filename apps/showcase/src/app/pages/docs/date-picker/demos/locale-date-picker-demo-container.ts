@@ -8,6 +8,7 @@ import { LocaleDatePickerDemo } from './locale-date-picker-demo';
   template: `
     <app-demo-container
       title="Locale"
+      description='locale="fr-FR" and a long format: the value, the calendar and the typed order (jj/mm/aaaa) in French.'
       [code]="code"
       demoUrl="/demos/date-picker/locale-date-picker-demo"
     >

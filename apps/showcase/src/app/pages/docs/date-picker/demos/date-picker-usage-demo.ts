@@ -19,7 +19,7 @@ import {
 
 /** A button showing the day, opening the calendar — focus on its day. A pick closes it, focus back on the button; Escape closes it too. */
 @Component({
-  selector: 'app-basic-date-picker-demo',
+  selector: 'app-date-picker-usage-demo',
   imports: [
     ScDatePicker,
     ScDatePickerTrigger,
@@ -73,6 +73,6 @@ import {
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class BasicDatePickerDemo {
+export class DatePickerUsageDemo {
   readonly date = signal<ScCalendarValue>(null);
 }

@@ -1,23 +1,19 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { BasicDatePickerDemo } from './basic-date-picker-demo';
+import { UsageCode } from '../../../../components/usage-code/usage-code';
+import { DatePickerUsageDemo } from './date-picker-usage-demo';
 
 @Component({
-  selector: 'app-basic-date-picker-demo-container',
-  imports: [DemoContainer, BasicDatePickerDemo],
+  selector: 'app-date-picker-usage-demo-container',
+  imports: [UsageCode, DatePickerUsageDemo],
   template: `
-    <app-demo-container
-      title="Basic"
-      [code]="code"
-      demoUrl="/demos/date-picker/basic-date-picker-demo"
-    >
-      <app-basic-date-picker-demo />
-    </app-demo-container>
+    <app-usage-code [code]="code">
+      <ng-template><app-date-picker-usage-demo /></ng-template>
+    </app-usage-code>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class BasicDatePickerDemoContainer {
+export class DatePickerUsageDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCalendar,
@@ -39,7 +35,7 @@ import {
 
 /** A button showing the day, opening the calendar — focus on its day. A pick closes it, focus back on the button; Escape closes it too. */
 @Component({
-  selector: 'app-basic-date-picker-demo',
+  selector: 'app-date-picker-usage-demo',
   imports: [
     ScDatePicker,
     ScDatePickerTrigger,
@@ -93,7 +89,7 @@ import {
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class BasicDatePickerDemo {
+export class DatePickerUsageDemo {
   readonly date = signal<ScCalendarValue>(null);
 }`;
 }

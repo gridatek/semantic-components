@@ -8,6 +8,7 @@ import { TypedDatePickerDemo } from './typed-date-picker-demo';
   template: `
     <app-demo-container
       title="Typed"
+      description="Typed, or picked: the locale’s numeric order (here 10/14/2026) or ISO, read on Enter or leaving; text that is not a day stays, marked. The button in the field opens the calendar."
       [code]="code"
       demoUrl="/demos/date-picker/typed-date-picker-demo"
     >

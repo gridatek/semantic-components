@@ -8,6 +8,7 @@ import { BirthDatePickerDemo } from './birth-date-picker-demo';
   template: `
     <app-demo-container
       title="Date of birth"
+      description='startView="year" on the calendar: it opens on the years — a year, then its month, then its day. 18 or older: maxDate is today minus 18 years.'
       [code]="code"
       demoUrl="/demos/date-picker/birth-date-picker-demo"
     >

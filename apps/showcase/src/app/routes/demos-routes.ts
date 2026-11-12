@@ -1860,10 +1860,17 @@ export const demosRoutes: Route[] = [
     path: 'demos/date-picker',
     children: [
       {
-        path: 'basic-date-picker-demo',
+        path: 'date-picker-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/date-picker/demos/basic-date-picker-demo').then(
-            (m) => m.BasicDatePickerDemo,
+          import('../pages/docs/date-picker/demos/date-picker-usage-demo').then(
+            (m) => m.DatePickerUsageDemo,
+          ),
+      },
+      {
+        path: 'rtl-date-picker-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-picker/demos/rtl-date-picker-demo').then(
+            (m) => m.RtlDatePickerDemo,
           ),
       },
       {

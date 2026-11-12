@@ -8,6 +8,7 @@ import { MultipleDatePickerDemo } from './multiple-date-picker-demo';
   template: `
     <app-demo-container
       title="Multiple"
+      description="Several days, written as a list in the app’s language; it stays open while you pick."
       [code]="code"
       demoUrl="/demos/date-picker/multiple-date-picker-demo"
     >

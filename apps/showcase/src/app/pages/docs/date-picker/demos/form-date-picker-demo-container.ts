@@ -8,6 +8,7 @@ import { FormDatePickerDemo } from './form-date-picker-demo';
   template: `
     <app-demo-container
       title="In a form"
+      description="A [formField]: required, from the schema; marked once the calendar has closed — the trigger, then its field."
       [code]="code"
       demoUrl="/demos/date-picker/form-date-picker-demo"
     >

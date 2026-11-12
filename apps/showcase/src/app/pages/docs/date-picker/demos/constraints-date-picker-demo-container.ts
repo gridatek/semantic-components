@@ -8,6 +8,7 @@ import { ConstraintsDatePickerDemo } from './constraints-date-picker-demo';
   template: `
     <app-demo-container
       title="Constraints"
+      description="minDate, maxDate and unavailable days on the picker — given to its calendar, and kept for typed days too: weekends cannot be picked."
       [code]="code"
       demoUrl="/demos/date-picker/constraints-date-picker-demo"
     >

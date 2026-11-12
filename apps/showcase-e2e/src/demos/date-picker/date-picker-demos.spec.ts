@@ -1,7 +1,10 @@
 import { collectErrors, press } from '../../interaction';
 import { type Page, expect, test } from '../../test';
 
-const demo = (name: string) => `/demos/date-picker/${name}-date-picker-demo`;
+const demo = (name: string) =>
+  name === 'usage'
+    ? '/demos/date-picker/date-picker-usage-demo'
+    : `/demos/date-picker/${name}-date-picker-demo`;
 const trigger = (page: Page) =>
   page.locator('[data-slot="date-picker-trigger"]');
 const calendar = (page: Page) => page.locator('[data-slot="calendar"]');
@@ -20,8 +23,8 @@ test.afterEach(() => {
   expect(errors).toEqual([]);
 });
 
-test('Basic: focus on the day; a pick closes, focus back', async ({ page }) => {
-  await page.goto(demo('basic'));
+test('Usage: focus on the day; a pick closes, focus back', async ({ page }) => {
+  await page.goto(demo('usage'));
   await expect(trigger(page)).toHaveAttribute('data-placeholder');
   await expect(trigger(page)).toHaveAttribute('aria-haspopup', 'dialog');
   await trigger(page).click();
