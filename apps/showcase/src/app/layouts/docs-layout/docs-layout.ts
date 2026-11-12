@@ -50,6 +50,7 @@ import {
 import { cn } from 'cn';
 import { filter } from 'rxjs';
 import { Logo } from '../../components/logo/logo';
+import { PageNav, type PageNavItem } from '../../components/page-nav/page-nav';
 import { PresetSheet } from '../../components/preset-sheet/preset-sheet';
 import { ThemeMenu } from '../../components/theme-menu/theme-menu';
 import { Toc } from '../../components/toc/toc';
@@ -86,6 +87,7 @@ import { ConfigService } from '../../services/config-service';
     ScKbd,
     ScSeparator,
     ThemeMenu,
+    PageNav,
     SiBookOpenTextIcon,
     SiBoxIcon,
     SiCookingPotIcon,
@@ -349,6 +351,7 @@ import { ConfigService } from '../../services/config-service';
         <div class="flex flex-1">
           <div #contentArea class="min-w-0 flex-1 p-6">
             <router-outlet />
+            <app-page-nav [pages]="pages()" />
           </div>
 
           <aside class="hidden w-56 shrink-0 border-l xl:block">
@@ -388,6 +391,20 @@ export class DocsLayout {
   readonly utilities = this.componentsService.visibleUtilities;
   readonly recipes = this.componentsService.visibleRecipes;
   protected readonly devMode = this.config.devMode;
+
+  /** Every docs page, in the sidebar's order: the bottom's previous and next. */
+  protected readonly pages = computed<PageNavItem[]>(() => [
+    { name: 'Introduction', path: '/docs/getting-started/introduction' },
+    { name: 'Components', path: '/docs/components' },
+    { name: 'Prerequisites', path: '/docs/getting-started/prerequisites' },
+    { name: 'UI', path: '/docs/getting-started/ui' },
+    { name: 'Presets', path: '/docs/getting-started/presets' },
+    { name: 'Internationalization', path: '/docs/getting-started/i18n' },
+    { name: 'MCP Server', path: '/docs/getting-started/mcp-server' },
+    ...[...this.components(), ...this.utilities(), ...this.recipes()].map(
+      (item) => ({ name: item.name, path: '/docs/components/' + item.path }),
+    ),
+  ]);
 
   constructor() {
     afterNextRender(() => {
