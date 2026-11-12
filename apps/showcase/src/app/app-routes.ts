@@ -23,6 +23,11 @@ export const appRoutes: Route[] = [
         loadComponent: () => import('./pages/presets/presets'),
       },
       {
+        path: 'charts',
+        title: 'Charts - Semantic Components',
+        loadComponent: () => import('./pages/charts/charts'),
+      },
+      {
         path: 'typeset',
         title: 'Typeset - Semantic Components',
         loadComponent: () => import('./pages/typeset/typeset'),

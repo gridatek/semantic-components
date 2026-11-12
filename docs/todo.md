@@ -33,7 +33,7 @@ Open work found along the way, kept for later — tick an item when it's done. N
 
 ## Larger items
 
-- [ ] **Presets page: the other options** (the user, 2026-11-12) — `/presets` follows shadcn's [Create](https://ui.shadcn.com/create); only Style changes for now (saved, then a reload: a preset is set at start). Base Color, Theme, Chart Color, Heading, Font, Icon Library, Radius and Menu are cards, disabled. Also from Create: Shuffle, Open Preset, Get Code. Next pages of the header: Charts (`/charts`, now linked to the hidden Chart docs page) and Typeset.
+- [ ] **Presets page: the other options** (the user, 2026-11-12) — `/presets` follows shadcn's [Create](https://ui.shadcn.com/create); only Style changes for now (saved, then a reload: a preset is set at start). Base Color, Theme, Chart Color, Heading, Font, Icon Library, Radius and Menu are cards, disabled. Also from Create: Shuffle, Open Preset, Get Code. Charts (`/charts`) and Typeset (`/typeset`) are Coming soon pages for now.
 - [ ] **Create demos: what porting them showed** (2026-11-12) — `/presets` shows all of shadcn's Create preview (both pages, `pages/presets/cards/`, the 15 home cards reused). Left over:
   - The home cards were ported earlier without our charts or slider: Contribution History, Dividend Income, Power Usage and Analytics draw their bars/areas by hand, and Payout Threshold has a Progress where shadcn has a Slider. Port them again with `ui/charts` and `scSlider`, as the new cards do.
   - Bar Chart has no `barSize` (Recharts' fixed bar width): Sleep Report's bars fill their band.

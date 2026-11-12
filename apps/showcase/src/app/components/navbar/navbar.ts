@@ -150,7 +150,7 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
           <li scNavigationMenuItem>
             <a
               scNavigationMenuLink
-              routerLink="/docs/components/chart"
+              routerLink="/charts"
               routerLinkActive
               #chartsRla="routerLinkActive"
               [active]="chartsRla.isActive"
@@ -278,7 +278,7 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
           </a>
           <a
             scNavbarMenuLink
-            routerLink="/docs/components/chart"
+            routerLink="/charts"
             routerLinkActive="active"
             #mobileChartsRla="routerLinkActive"
             [active]="mobileChartsRla.isActive"
