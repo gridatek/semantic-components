@@ -11,6 +11,7 @@ import { bubble } from './bubble';
 import { button } from './button';
 import { calendar } from './calendar';
 import { card } from './card';
+import { carousel } from './carousel';
 import { checkbox } from './checkbox';
 import { codeBlock } from './code-block';
 import { combobox } from './combobox';
@@ -76,6 +77,7 @@ export const lyra: ScPreset = {
   button,
   calendar,
   card,
+  carousel,
   checkbox,
   codeBlock,
   combobox,

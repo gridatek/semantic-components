@@ -593,6 +593,8 @@ export interface ScPreset {
   /** A calendar's root: its padding, --cell-size and --cell-radius. */
   calendar: string;
   card: ScCardStyles;
+  /** A carousel's previous and next buttons: their corners. */
+  carousel: string;
   checkbox: ScCheckboxStyles;
   codeBlock: ScCodeBlockStyles;
   /** scFrame: a box's frame — the style's card radius, ring and shadow. */

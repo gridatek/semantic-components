@@ -200,6 +200,12 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/carousel/carousel-page'),
       },
       {
+        path: 'carousel-next',
+        title: 'Carousel Next - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/carousel-next/carousel-next-page'),
+      },
+      {
         path: 'chart',
         title: 'Chart - Semantic Components',
         loadComponent: () => import('../pages/docs/chart/chart-page'),

@@ -183,6 +183,14 @@
     "category": "Media"
   },
   {
+    "name": "Carousel Next",
+    "path": "carousel-next",
+    "description": "A slideshow for cycling through elements.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Media"
+  },
+  {
     "name": "Chart",
     "path": "chart",
     "description": "The parts every chart is made of, as shadcn/ui's: rows and series' names and colors, a plot with its grid, axes and cursor, a tooltip and a legend.",

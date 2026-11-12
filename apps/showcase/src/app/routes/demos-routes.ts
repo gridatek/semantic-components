@@ -917,6 +917,74 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/carousel-next',
+    children: [
+      {
+        path: 'carousel-next-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/carousel-next/demos/carousel-next-usage-demo').then(
+            (m) => m.CarouselNextUsageDemo,
+          ),
+      },
+      {
+        path: 'sizes-carousel-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/carousel-next/demos/sizes-carousel-next-demo').then(
+            (m) => m.SizesCarouselNextDemo,
+          ),
+      },
+      {
+        path: 'spacing-carousel-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/carousel-next/demos/spacing-carousel-next-demo').then(
+            (m) => m.SpacingCarouselNextDemo,
+          ),
+      },
+      {
+        path: 'orientation-carousel-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/carousel-next/demos/orientation-carousel-next-demo').then(
+            (m) => m.OrientationCarouselNextDemo,
+          ),
+      },
+      {
+        path: 'api-carousel-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/carousel-next/demos/api-carousel-next-demo').then(
+            (m) => m.ApiCarouselNextDemo,
+          ),
+      },
+      {
+        path: 'plugin-carousel-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/carousel-next/demos/plugin-carousel-next-demo').then(
+            (m) => m.PluginCarouselNextDemo,
+          ),
+      },
+      {
+        path: 'multiple-carousel-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/carousel-next/demos/multiple-carousel-next-demo').then(
+            (m) => m.MultipleCarouselNextDemo,
+          ),
+      },
+      {
+        path: 'images-carousel-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/carousel-next/demos/images-carousel-next-demo').then(
+            (m) => m.ImagesCarouselNextDemo,
+          ),
+      },
+      {
+        path: 'rtl-carousel-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/carousel-next/demos/rtl-carousel-next-demo').then(
+            (m) => m.RtlCarouselNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/area-chart',
     children: [
       {

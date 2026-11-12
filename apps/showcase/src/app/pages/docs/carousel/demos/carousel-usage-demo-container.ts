@@ -19,7 +19,7 @@ import { ScCard, ScCardContent } from '@semantic-components/ui';
 import {
   ScCarousel,
   ScCarouselItem,
-  ScCarouselNext,
+  ScCarouselOldNext,
   ScCarouselPrevious,
   ScCarouselTrack,
   ScCarouselViewport,
@@ -37,7 +37,7 @@ import {
     ScCarouselTrack,
     ScCarouselItem,
     ScCarouselPrevious,
-    ScCarouselNext,
+    ScCarouselOldNext,
     ScCard,
     ScCardContent,
     SiChevronLeftIcon,
