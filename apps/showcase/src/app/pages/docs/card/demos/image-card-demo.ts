@@ -33,7 +33,7 @@ import {
         height="1067"
         priority
         alt="Mountains at dawn"
-        class="aspect-video w-full object-cover"
+        class="h-auto w-full"
       />
       <div scCardHeader>
         <h4 scCardTitle>Design systems meetup</h4>

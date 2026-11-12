@@ -25,14 +25,8 @@ import {
     <div class="flex w-full max-w-md flex-col gap-6">
       <div scItemGroup class="gap-4">
         <a scItem variant="outline" href="#image">
-          <div scItemMedia variant="image">
-            <img
-              ngSrc="/images/gallery/cafe-thumb.jpg"
-              width="40"
-              height="40"
-              alt=""
-              priority
-            />
+          <div scItemMedia variant="image" class="relative">
+            <img ngSrc="/images/gallery/cafe-thumb.jpg" fill alt="" priority />
           </div>
           <div scItemBody>
             <div scItemTitle>Midnight City Lights</div>
@@ -43,13 +37,8 @@ import {
           </div>
         </a>
         <a scItem variant="outline" href="#image">
-          <div scItemMedia variant="image">
-            <img
-              ngSrc="/images/gallery/coast-thumb.jpg"
-              width="40"
-              height="40"
-              alt=""
-            />
+          <div scItemMedia variant="image" class="relative">
+            <img ngSrc="/images/gallery/coast-thumb.jpg" fill alt="" />
           </div>
           <div scItemBody>
             <div scItemTitle>Coffee Shop Conversations</div>
@@ -60,13 +49,8 @@ import {
           </div>
         </a>
         <a scItem variant="outline" href="#image">
-          <div scItemMedia variant="image">
-            <img
-              ngSrc="/images/gallery/forest-thumb.jpg"
-              width="40"
-              height="40"
-              alt=""
-            />
+          <div scItemMedia variant="image" class="relative">
+            <img ngSrc="/images/gallery/forest-thumb.jpg" fill alt="" />
           </div>
           <div scItemBody>
             <div scItemTitle>Digital Rain</div>

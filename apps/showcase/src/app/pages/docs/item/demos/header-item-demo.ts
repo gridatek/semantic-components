@@ -26,14 +26,17 @@ import {
       <div scItemGroup class="grid grid-cols-3 gap-4">
         <div scItem variant="outline">
           <div scItemHeader>
-            <img
-              ngSrc="/images/gallery/mountains-thumb.jpg"
-              width="128"
-              height="128"
-              alt=""
-              priority
-              class="aspect-square w-full rounded-sm object-cover"
-            />
+            <div
+              class="relative aspect-square w-full overflow-hidden rounded-sm"
+            >
+              <img
+                ngSrc="/images/gallery/mountains-thumb.jpg"
+                fill
+                alt=""
+                priority
+                class="object-cover"
+              />
+            </div>
           </div>
           <div scItemBody>
             <div scItemTitle>v0-1.5-sm</div>
@@ -42,13 +45,16 @@ import {
         </div>
         <div scItem variant="outline">
           <div scItemHeader>
-            <img
-              ngSrc="/images/gallery/gorge-thumb.jpg"
-              width="128"
-              height="128"
-              alt=""
-              class="aspect-square w-full rounded-sm object-cover"
-            />
+            <div
+              class="relative aspect-square w-full overflow-hidden rounded-sm"
+            >
+              <img
+                ngSrc="/images/gallery/gorge-thumb.jpg"
+                fill
+                alt=""
+                class="object-cover"
+              />
+            </div>
           </div>
           <div scItemBody>
             <div scItemTitle>v0-1.5-lg</div>
@@ -57,13 +63,16 @@ import {
         </div>
         <div scItem variant="outline">
           <div scItemHeader>
-            <img
-              ngSrc="/images/gallery/coast-thumb.jpg"
-              width="128"
-              height="128"
-              alt=""
-              class="aspect-square w-full rounded-sm object-cover"
-            />
+            <div
+              class="relative aspect-square w-full overflow-hidden rounded-sm"
+            >
+              <img
+                ngSrc="/images/gallery/coast-thumb.jpg"
+                fill
+                alt=""
+                class="object-cover"
+              />
+            </div>
           </div>
           <div scItemBody>
             <div scItemTitle>v0-2.0-mini</div>
