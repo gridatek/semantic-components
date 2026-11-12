@@ -873,38 +873,52 @@ export const demosRoutes: Route[] = [
     path: 'demos/carousel',
     children: [
       {
-        path: 'default-carousel-demo',
+        path: 'carousel-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/carousel/demos/default-carousel-demo').then(
-            (m) => m.DefaultCarouselDemo,
+          import('../pages/docs/carousel/demos/carousel-usage-demo').then(
+            (m) => m.CarouselUsageDemo,
           ),
       },
       {
-        path: 'cards-carousel-demo',
+        path: 'sizes-carousel-demo',
         loadComponent: () =>
-          import('../pages/docs/carousel/demos/cards-carousel-demo').then(
-            (m) => m.CardsCarouselDemo,
+          import('../pages/docs/carousel/demos/sizes-carousel-demo').then(
+            (m) => m.SizesCarouselDemo,
           ),
       },
       {
-        path: 'third-width-carousel-demo',
+        path: 'spacing-carousel-demo',
         loadComponent: () =>
-          import('../pages/docs/carousel/demos/third-width-carousel-demo').then(
-            (m) => m.ThirdWidthCarouselDemo,
+          import('../pages/docs/carousel/demos/spacing-carousel-demo').then(
+            (m) => m.SpacingCarouselDemo,
           ),
       },
       {
-        path: 'half-width-carousel-demo',
+        path: 'orientation-carousel-demo',
         loadComponent: () =>
-          import('../pages/docs/carousel/demos/half-width-carousel-demo').then(
-            (m) => m.HalfWidthCarouselDemo,
+          import('../pages/docs/carousel/demos/orientation-carousel-demo').then(
+            (m) => m.OrientationCarouselDemo,
           ),
       },
       {
-        path: 'vertical-carousel-demo',
+        path: 'api-carousel-demo',
         loadComponent: () =>
-          import('../pages/docs/carousel/demos/vertical-carousel-demo').then(
-            (m) => m.VerticalCarouselDemo,
+          import('../pages/docs/carousel/demos/api-carousel-demo').then(
+            (m) => m.ApiCarouselDemo,
+          ),
+      },
+      {
+        path: 'plugin-carousel-demo',
+        loadComponent: () =>
+          import('../pages/docs/carousel/demos/plugin-carousel-demo').then(
+            (m) => m.PluginCarouselDemo,
+          ),
+      },
+      {
+        path: 'multiple-carousel-demo',
+        loadComponent: () =>
+          import('../pages/docs/carousel/demos/multiple-carousel-demo').then(
+            (m) => m.MultipleCarouselDemo,
           ),
       },
       {
@@ -914,72 +928,11 @@ export const demosRoutes: Route[] = [
             (m) => m.ImagesCarouselDemo,
           ),
       },
-    ],
-  },
-  {
-    path: 'demos/carousel-next',
-    children: [
       {
-        path: 'carousel-next-usage-demo',
+        path: 'rtl-carousel-demo',
         loadComponent: () =>
-          import('../pages/docs/carousel-next/demos/carousel-next-usage-demo').then(
-            (m) => m.CarouselNextUsageDemo,
-          ),
-      },
-      {
-        path: 'sizes-carousel-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/carousel-next/demos/sizes-carousel-next-demo').then(
-            (m) => m.SizesCarouselNextDemo,
-          ),
-      },
-      {
-        path: 'spacing-carousel-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/carousel-next/demos/spacing-carousel-next-demo').then(
-            (m) => m.SpacingCarouselNextDemo,
-          ),
-      },
-      {
-        path: 'orientation-carousel-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/carousel-next/demos/orientation-carousel-next-demo').then(
-            (m) => m.OrientationCarouselNextDemo,
-          ),
-      },
-      {
-        path: 'api-carousel-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/carousel-next/demos/api-carousel-next-demo').then(
-            (m) => m.ApiCarouselNextDemo,
-          ),
-      },
-      {
-        path: 'plugin-carousel-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/carousel-next/demos/plugin-carousel-next-demo').then(
-            (m) => m.PluginCarouselNextDemo,
-          ),
-      },
-      {
-        path: 'multiple-carousel-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/carousel-next/demos/multiple-carousel-next-demo').then(
-            (m) => m.MultipleCarouselNextDemo,
-          ),
-      },
-      {
-        path: 'images-carousel-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/carousel-next/demos/images-carousel-next-demo').then(
-            (m) => m.ImagesCarouselNextDemo,
-          ),
-      },
-      {
-        path: 'rtl-carousel-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/carousel-next/demos/rtl-carousel-next-demo').then(
-            (m) => m.RtlCarouselNextDemo,
+          import('../pages/docs/carousel/demos/rtl-carousel-demo').then(
+            (m) => m.RtlCarouselDemo,
           ),
       },
     ],

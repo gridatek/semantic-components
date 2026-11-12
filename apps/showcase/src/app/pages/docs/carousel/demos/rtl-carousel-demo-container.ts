@@ -1,29 +1,29 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { VerticalCarouselDemo } from './vertical-carousel-demo';
+import { RtlCarouselDemo } from './rtl-carousel-demo';
 
 @Component({
-  selector: 'app-vertical-carousel-demo-container',
-  imports: [DemoContainer, VerticalCarouselDemo],
+  selector: 'app-rtl-carousel-demo-container',
+  imports: [DemoContainer, RtlCarouselDemo],
   template: `
     <app-demo-container
-      title="Vertical"
-      demoUrl="/demos/carousel/vertical-carousel-demo"
+      title="RTL"
+      demoUrl="/demos/carousel/rtl-carousel-demo"
       [code]="code"
     >
-      <app-vertical-carousel-demo />
+      <app-rtl-carousel-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class VerticalCarouselDemoContainer {
+export class RtlCarouselDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScCard, ScCardContent } from '@semantic-components/ui';
 import {
   ScCarousel,
   ScCarouselItem,
-  ScCarouselOldNext,
+  ScCarouselNext,
   ScCarouselPrevious,
   ScCarouselTrack,
   ScCarouselViewport,
@@ -33,45 +33,45 @@ import {
   SiChevronRightIcon,
 } from '@semantic-icons/lucide-icons';
 
+/** In a right-to-left page: the slides run from the right, the buttons and their icons mirrored, ← goes on. */
 @Component({
-  selector: 'app-vertical-carousel-demo',
+  selector: 'app-rtl-carousel-demo',
   imports: [
     ScCarousel,
-    ScCarouselViewport,
-    ScCarouselTrack,
     ScCarouselItem,
+    ScCarouselNext,
     ScCarouselPrevious,
-    ScCarouselOldNext,
+    ScCarouselTrack,
+    ScCarouselViewport,
     ScCard,
     ScCardContent,
     SiChevronLeftIcon,
     SiChevronRightIcon,
   ],
   template: \`
-    <div class="py-12">
+    <div dir="rtl" lang="ar" class="flex w-full justify-center">
       <div
         scCarousel
-        aria-roledescription="carousel"
-        aria-label="Vertical carousel"
-        orientation="vertical"
-        [options]="{ align: 'start' }"
-        class="w-full max-w-xs"
+        aria-roledescription="عرض شرائح"
+        aria-label="أرقام"
+        class="w-full max-w-[12rem] sm:max-w-xs"
       >
         <div scCarouselViewport>
-          <div scCarouselTrack class="-mt-1 h-[270px]">
-            @for (index of items; track index) {
+          <div scCarouselTrack>
+            @for (n of slides; track n) {
               <div
                 scCarouselItem
-                aria-roledescription="slide"
-                class="basis-1/2 pt-1"
+                #slide="scCarouselItem"
+                aria-roledescription="شريحة"
+                [attr.aria-label]="slide.index() + 1 + ' من ' + slide.count()"
               >
                 <div class="p-1">
                   <div scCard>
                     <div
                       scCardContent
-                      class="flex items-center justify-center p-6"
+                      class="flex aspect-square items-center justify-center p-6"
                     >
-                      <span class="text-3xl font-semibold">{{ index }}</span>
+                      <span class="text-4xl font-semibold">{{ n }}</span>
                     </div>
                   </div>
                 </div>
@@ -81,11 +81,11 @@ import {
         </div>
         <button scCarouselPrevious>
           <svg siChevronLeftIcon></svg>
-          <span class="sr-only">Previous slide</span>
+          <span class="sr-only">الشريحة السابقة</span>
         </button>
         <button scCarouselNext>
           <svg siChevronRightIcon></svg>
-          <span class="sr-only">Next slide</span>
+          <span class="sr-only">الشريحة التالية</span>
         </button>
       </div>
     </div>
@@ -93,7 +93,7 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class VerticalCarouselDemo {
-  readonly items = [1, 2, 3, 4, 5];
+export class RtlCarouselDemo {
+  readonly slides = ['١', '٢', '٣', '٤', '٥'];
 }`;
 }

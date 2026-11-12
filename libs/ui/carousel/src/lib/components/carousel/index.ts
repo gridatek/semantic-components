@@ -1,13 +1,12 @@
 export { ScCarousel } from './carousel';
 export type {
-  ScCarouselOrientation,
-  ScCarouselOptions,
   ScCarouselApi,
+  ScCarouselOptions,
+  ScCarouselOrientation,
   ScCarouselPlugin,
 } from './carousel';
-export { ScCarouselViewport } from './carousel-viewport';
-export { ScCarouselTrack } from './carousel-track';
 export { ScCarouselItem } from './carousel-item';
+export { ScCarouselNext } from './carousel-next';
 export { ScCarouselPrevious } from './carousel-previous';
-// Until the new Carousel replaces this one: its root is ScCarouselNext.
-export { ScCarouselNext as ScCarouselOldNext } from './carousel-next';
+export { ScCarouselTrack } from './carousel-track';
+export { ScCarouselViewport } from './carousel-viewport';

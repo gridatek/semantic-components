@@ -23,7 +23,7 @@ const PRESETS: Record<string, ScPreset> = {
   rhea,
 };
 
-test.describe('Carousel Next in every preset', () => {
+test.describe('Carousel in every preset', () => {
   // A docs page and axe, twice: slow under load.
   test.slow();
 
@@ -37,7 +37,7 @@ test.describe('Carousel Next in every preset', () => {
       await context.addCookies([
         { name: 'sc-preset', value: preset, url: baseURL! },
       ]);
-      await page.goto('/demos/carousel-next/carousel-next-usage-demo');
+      await page.goto('/demos/carousel/carousel-usage-demo');
       const wanted = twMerge(
         styles.button({ variant: 'outline', size: 'icon-sm' }),
         styles.carousel,
@@ -56,7 +56,7 @@ test.describe('Carousel Next in every preset', () => {
           .toEqual([]);
       }
 
-      await page.goto('/docs/components/carousel-next');
+      await page.goto('/docs/components/carousel');
       await expectNoA11yViolations(page);
       await expectNoA11yViolations(page, { dark: true });
     });

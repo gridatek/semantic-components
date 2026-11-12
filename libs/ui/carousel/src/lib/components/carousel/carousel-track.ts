@@ -2,6 +2,7 @@ import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { ScCarousel } from './carousel';
 
+/** The row (or column, vertical) of slides that moves in the viewport. */
 @Directive({
   selector: 'div[scCarouselTrack]',
   host: {

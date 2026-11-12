@@ -3,7 +3,7 @@ import { ScCard, ScCardContent } from '@semantic-components/ui';
 import {
   ScCarousel,
   ScCarouselItem,
-  ScCarouselOldNext,
+  ScCarouselNext,
   ScCarouselPrevious,
   ScCarouselTrack,
   ScCarouselViewport,
@@ -13,60 +13,64 @@ import {
   SiChevronRightIcon,
 } from '@semantic-icons/lucide-icons';
 
+/** shadcn's demo: five cards, a slide each; the arrows (or ← →) move between them. */
 @Component({
   selector: 'app-carousel-usage-demo',
   imports: [
     ScCarousel,
-    ScCarouselViewport,
-    ScCarouselTrack,
     ScCarouselItem,
+    ScCarouselNext,
     ScCarouselPrevious,
-    ScCarouselOldNext,
+    ScCarouselTrack,
+    ScCarouselViewport,
     ScCard,
     ScCardContent,
     SiChevronLeftIcon,
     SiChevronRightIcon,
   ],
   template: `
-    <div class="mx-auto w-full max-w-[12rem] sm:max-w-xs">
-      <div
-        scCarousel
-        aria-roledescription="carousel"
-        aria-label="Usage carousel"
-        class="w-full"
-      >
-        <div scCarouselViewport>
-          <div scCarouselTrack>
-            @for (index of items; track index) {
-              <div scCarouselItem aria-roledescription="slide">
-                <div class="p-1">
-                  <div scCard>
-                    <div
-                      scCardContent
-                      class="flex aspect-square items-center justify-center p-6"
-                    >
-                      <span class="text-4xl font-semibold">{{ index }}</span>
-                    </div>
+    <div
+      scCarousel
+      aria-roledescription="carousel"
+      aria-label="Numbers"
+      class="w-full max-w-[12rem] sm:max-w-xs"
+    >
+      <div scCarouselViewport>
+        <div scCarouselTrack>
+          @for (n of slides; track n) {
+            <div
+              scCarouselItem
+              #slide="scCarouselItem"
+              aria-roledescription="slide"
+              [attr.aria-label]="slide.index() + 1 + ' of ' + slide.count()"
+            >
+              <div class="p-1">
+                <div scCard>
+                  <div
+                    scCardContent
+                    class="flex aspect-square items-center justify-center p-6"
+                  >
+                    <span class="text-4xl font-semibold">{{ n }}</span>
                   </div>
                 </div>
               </div>
-            }
-          </div>
+            </div>
+          }
         </div>
-        <button scCarouselPrevious>
-          <svg siChevronLeftIcon></svg>
-          <span class="sr-only">Previous slide</span>
-        </button>
-        <button scCarouselNext>
-          <svg siChevronRightIcon></svg>
-          <span class="sr-only">Next slide</span>
-        </button>
       </div>
+      <button scCarouselPrevious>
+        <svg siChevronLeftIcon></svg>
+        <span class="sr-only">Previous slide</span>
+      </button>
+      <button scCarouselNext>
+        <svg siChevronRightIcon></svg>
+        <span class="sr-only">Next slide</span>
+      </button>
     </div>
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
 export class CarouselUsageDemo {
-  readonly items = [1, 2, 3, 4, 5];
+  readonly slides = [1, 2, 3, 4, 5];
 }

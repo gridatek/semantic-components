@@ -1,23 +1,23 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { PluginCarouselNextDemo } from './plugin-carousel-next-demo';
+import { PluginCarouselDemo } from './plugin-carousel-demo';
 
 @Component({
-  selector: 'app-plugin-carousel-next-demo-container',
-  imports: [DemoContainer, PluginCarouselNextDemo],
+  selector: 'app-plugin-carousel-demo-container',
+  imports: [DemoContainer, PluginCarouselDemo],
   template: `
     <app-demo-container
       title="Plugin"
-      demoUrl="/demos/carousel-next/plugin-carousel-next-demo"
+      demoUrl="/demos/carousel/plugin-carousel-demo"
       [code]="code"
     >
-      <app-plugin-carousel-next-demo />
+      <app-plugin-carousel-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class PluginCarouselNextDemoContainer {
+export class PluginCarouselDemoContainer {
   readonly code = `import {
   Component,
   ViewEncapsulation,
@@ -27,12 +27,12 @@ export class PluginCarouselNextDemoContainer {
 } from '@angular/core';
 import { ScButton, ScCard, ScCardContent } from '@semantic-components/ui';
 import {
+  ScCarousel,
+  ScCarouselItem,
   ScCarouselNext,
-  ScCarouselNextItem,
-  ScCarouselNextNext,
-  ScCarouselNextPrevious,
-  ScCarouselNextTrack,
-  ScCarouselNextViewport,
+  ScCarouselPrevious,
+  ScCarouselTrack,
+  ScCarouselViewport,
 } from '@semantic-components/ui/carousel';
 import {
   SiChevronLeftIcon,
@@ -44,14 +44,14 @@ import Autoplay from 'embla-carousel-autoplay';
 
 /** Autoplay (embla-carousel-autoplay): it stops on hover, focus and drag, and a button pauses it (WCAG 2.2.2); its name follows the state. */
 @Component({
-  selector: 'app-plugin-carousel-next-demo',
+  selector: 'app-plugin-carousel-demo',
   imports: [
+    ScCarousel,
+    ScCarouselItem,
     ScCarouselNext,
-    ScCarouselNextItem,
-    ScCarouselNextNext,
-    ScCarouselNextPrevious,
-    ScCarouselNextTrack,
-    ScCarouselNextViewport,
+    ScCarouselPrevious,
+    ScCarouselTrack,
+    ScCarouselViewport,
     ScButton,
     ScCard,
     ScCardContent,
@@ -65,19 +65,19 @@ import Autoplay from 'embla-carousel-autoplay';
       class="flex w-full max-w-[12rem] flex-col items-center gap-2 sm:max-w-xs"
     >
       <div
-        scCarouselNext
-        #carousel="scCarouselNext"
+        scCarousel
+        #carousel="scCarousel"
         [plugins]="plugins"
         aria-roledescription="carousel"
         aria-label="Autoplay"
         class="w-full"
       >
-        <div scCarouselNextViewport>
-          <div scCarouselNextTrack>
+        <div scCarouselViewport>
+          <div scCarouselTrack>
             @for (n of slides; track n) {
               <div
-                scCarouselNextItem
-                #slide="scCarouselNextItem"
+                scCarouselItem
+                #slide="scCarouselItem"
                 aria-roledescription="slide"
                 [attr.aria-label]="slide.index() + 1 + ' of ' + slide.count()"
               >
@@ -95,11 +95,11 @@ import Autoplay from 'embla-carousel-autoplay';
             }
           </div>
         </div>
-        <button scCarouselNextPrevious>
+        <button scCarouselPrevious>
           <svg siChevronLeftIcon></svg>
           <span class="sr-only">Previous slide</span>
         </button>
-        <button scCarouselNextNext>
+        <button scCarouselNext>
           <svg siChevronRightIcon></svg>
           <span class="sr-only">Next slide</span>
         </button>
@@ -118,7 +118,7 @@ import Autoplay from 'embla-carousel-autoplay';
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class PluginCarouselNextDemo {
+export class PluginCarouselDemo {
   readonly slides = [1, 2, 3, 4, 5];
   private readonly autoplay = Autoplay({
     delay: 2000,
@@ -127,7 +127,7 @@ export class PluginCarouselNextDemo {
   });
   readonly plugins = [this.autoplay];
   readonly playing = signal(false);
-  private readonly carousel = viewChild.required(ScCarouselNext);
+  private readonly carousel = viewChild.required(ScCarousel);
 
   constructor() {
     // The button's state from the plugin's events (it stops by itself too):

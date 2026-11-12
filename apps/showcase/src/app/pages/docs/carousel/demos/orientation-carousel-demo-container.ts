@@ -1,44 +1,48 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { UsageCode } from '../../../../components/usage-code/usage-code';
-import { CarouselNextUsageDemo } from './carousel-next-usage-demo';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { OrientationCarouselDemo } from './orientation-carousel-demo';
 
 @Component({
-  selector: 'app-carousel-next-usage-demo-container',
-  imports: [UsageCode, CarouselNextUsageDemo],
+  selector: 'app-orientation-carousel-demo-container',
+  imports: [DemoContainer, OrientationCarouselDemo],
   template: `
-    <app-usage-code [code]="code">
-      <ng-template><app-carousel-next-usage-demo /></ng-template>
-    </app-usage-code>
+    <app-demo-container
+      title="Orientation"
+      demoUrl="/demos/carousel/orientation-carousel-demo"
+      [code]="code"
+    >
+      <app-orientation-carousel-demo />
+    </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class CarouselNextUsageDemoContainer {
+export class OrientationCarouselDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScCard, ScCardContent } from '@semantic-components/ui';
 import {
+  ScCarousel,
+  ScCarouselItem,
   ScCarouselNext,
-  ScCarouselNextItem,
-  ScCarouselNextNext,
-  ScCarouselNextPrevious,
-  ScCarouselNextTrack,
-  ScCarouselNextViewport,
+  ScCarouselPrevious,
+  ScCarouselTrack,
+  ScCarouselViewport,
 } from '@semantic-components/ui/carousel';
 import {
   SiChevronLeftIcon,
   SiChevronRightIcon,
 } from '@semantic-icons/lucide-icons';
 
-/** shadcn's demo: five cards, a slide each; the arrows (or ← →) move between them. */
+/** Vertical: the slides in a column, the buttons above and below; ↑ and ↓ move. */
 @Component({
-  selector: 'app-carousel-next-usage-demo',
+  selector: 'app-orientation-carousel-demo',
   imports: [
+    ScCarousel,
+    ScCarouselItem,
     ScCarouselNext,
-    ScCarouselNextItem,
-    ScCarouselNextNext,
-    ScCarouselNextPrevious,
-    ScCarouselNextTrack,
-    ScCarouselNextViewport,
+    ScCarouselPrevious,
+    ScCarouselTrack,
+    ScCarouselViewport,
     ScCard,
     ScCardContent,
     SiChevronLeftIcon,
@@ -46,17 +50,20 @@ import {
   ],
   template: \`
     <div
-      scCarouselNext
+      scCarousel
       aria-roledescription="carousel"
-      aria-label="Numbers"
-      class="w-full max-w-[12rem] sm:max-w-xs"
+      aria-label="Vertical"
+      class="my-14 w-full max-w-xs"
+      orientation="vertical"
+      [options]="{ align: 'start' }"
     >
-      <div scCarouselNextViewport>
-        <div scCarouselNextTrack>
+      <div scCarouselViewport>
+        <div scCarouselTrack class="-mt-1 h-[270px]">
           @for (n of slides; track n) {
             <div
-              scCarouselNextItem
-              #slide="scCarouselNextItem"
+              scCarouselItem
+              #slide="scCarouselItem"
+              class="basis-1/2 pt-1"
               aria-roledescription="slide"
               [attr.aria-label]="slide.index() + 1 + ' of ' + slide.count()"
             >
@@ -64,9 +71,9 @@ import {
                 <div scCard>
                   <div
                     scCardContent
-                    class="flex aspect-square items-center justify-center p-6"
+                    class="flex aspect-auto items-center justify-center p-6"
                   >
-                    <span class="text-4xl font-semibold">{{ n }}</span>
+                    <span class="text-3xl font-semibold">{{ n }}</span>
                   </div>
                 </div>
               </div>
@@ -74,11 +81,11 @@ import {
           }
         </div>
       </div>
-      <button scCarouselNextPrevious>
+      <button scCarouselPrevious>
         <svg siChevronLeftIcon></svg>
         <span class="sr-only">Previous slide</span>
       </button>
-      <button scCarouselNextNext>
+      <button scCarouselNext>
         <svg siChevronRightIcon></svg>
         <span class="sr-only">Next slide</span>
       </button>
@@ -87,7 +94,7 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class CarouselNextUsageDemo {
+export class OrientationCarouselDemo {
   readonly slides = [1, 2, 3, 4, 5];
 }`;
 }

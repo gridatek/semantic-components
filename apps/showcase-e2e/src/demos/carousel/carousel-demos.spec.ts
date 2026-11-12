@@ -1,16 +1,16 @@
 import type { Page } from '@playwright/test';
 import { expect, test } from '../../test';
 
-const demo = (name: string) => `/demos/carousel-next/${name}`;
+const demo = (name: string) => `/demos/carousel/${name}`;
 
 /**
  * The slides wholly in the viewport, by their names ("1 of 5"…): their
  * content, since the gap before it (their padding) is outside by design.
  */
 async function shown(page: Page): Promise<string[]> {
-  return page.locator('[scCarouselNextViewport]').evaluate((viewport) => {
+  return page.locator('[scCarouselViewport]').evaluate((viewport) => {
     const box = viewport.getBoundingClientRect();
-    return [...viewport.querySelectorAll('[scCarouselNextItem]')]
+    return [...viewport.querySelectorAll('[scCarouselItem]')]
       .filter((slide) => {
         const r = (slide.firstElementChild ?? slide).getBoundingClientRect();
         return (
@@ -24,7 +24,7 @@ async function shown(page: Page): Promise<string[]> {
   });
 }
 
-test.describe('Carousel Next demos', () => {
+test.describe('Carousel demos', () => {
   test.beforeEach(async ({ page }) => {
     // Embla's motion: the tests read where it settles.
     await page.emulateMedia({ reducedMotion: 'reduce' });
@@ -33,7 +33,7 @@ test.describe('Carousel Next demos', () => {
   test('usage: a named region of named slides; the buttons move and stop at the ends', async ({
     page,
   }) => {
-    await page.goto(demo('carousel-next-usage-demo'));
+    await page.goto(demo('carousel-usage-demo'));
     const region = page.getByRole('region', { name: 'Numbers' });
     await expect(region).toHaveAttribute('aria-roledescription', 'carousel');
     const slides = region.getByRole('group');
@@ -58,7 +58,7 @@ test.describe('Carousel Next demos', () => {
   });
 
   test('keys: → and ← move with focus inside', async ({ page }) => {
-    await page.goto(demo('carousel-next-usage-demo'));
+    await page.goto(demo('carousel-usage-demo'));
     await page.getByRole('button', { name: 'Next slide' }).focus();
     await page.keyboard.press('ArrowRight');
     await expect.poll(() => shown(page)).toEqual(['2 of 5']);
@@ -69,7 +69,7 @@ test.describe('Carousel Next demos', () => {
   });
 
   test('vertical: ↓ and ↑ move; → does nothing', async ({ page }) => {
-    await page.goto(demo('orientation-carousel-next-demo'));
+    await page.goto(demo('orientation-carousel-demo'));
     await expect(page.getByRole('region')).toHaveAttribute(
       'data-orientation',
       'vertical',
@@ -86,17 +86,14 @@ test.describe('Carousel Next demos', () => {
   test('RTL: from the right; ← goes on, → goes back; the icons mirrored', async ({
     page,
   }) => {
-    await page.goto(demo('rtl-carousel-next-demo'));
-    const viewport = page.locator('[scCarouselNextViewport]');
-    const first = page.locator('[scCarouselNextItem]').first();
+    await page.goto(demo('rtl-carousel-demo'));
+    const viewport = page.locator('[scCarouselViewport]');
+    const first = page.locator('[scCarouselItem]').first();
     // The first slide fills the viewport, the second waits on its left.
     await expect
       .poll(async () => {
         const v = await viewport.boundingBox();
-        const s = await page
-          .locator('[scCarouselNextItem]')
-          .nth(1)
-          .boundingBox();
+        const s = await page.locator('[scCarouselItem]').nth(1).boundingBox();
         return s!.x + s!.width <= v!.x + 1;
       })
       .toBe(true);
@@ -120,7 +117,7 @@ test.describe('Carousel Next demos', () => {
   });
 
   test('API: [(activeIndex)] and count()', async ({ page }) => {
-    await page.goto(demo('api-carousel-next-demo'));
+    await page.goto(demo('api-carousel-demo'));
     const status = page.locator('p', { hasText: 'Slide' });
     await expect(status).toHaveText('Slide 1 of 5');
     await page.getByRole('button', { name: 'Next slide' }).click();
@@ -132,7 +129,7 @@ test.describe('Carousel Next demos', () => {
   test('plugin: autoplay moves on; Pause stops it and becomes Play', async ({
     page,
   }) => {
-    await page.goto(demo('plugin-carousel-next-demo'));
+    await page.goto(demo('plugin-carousel-demo'));
     const pause = page.getByRole('button', { name: 'Pause' });
     await expect(pause).toBeVisible();
     // Autoplay every 2s.
@@ -152,7 +149,7 @@ test.describe('Carousel Next demos', () => {
   test('images: loops round, each slide an image named by its alt', async ({
     page,
   }) => {
-    await page.goto(demo('images-carousel-next-demo'));
+    await page.goto(demo('images-carousel-demo'));
     await expect(page.getByRole('img')).toHaveCount(5);
     await expect(
       page.getByRole('img', { name: 'Mountains under a clear sky' }),
@@ -165,7 +162,7 @@ test.describe('Carousel Next demos', () => {
 
   test('sizes: two slides in view, aligned to the start', async ({ page }) => {
     await page.setViewportSize({ width: 900, height: 600 });
-    await page.goto(demo('sizes-carousel-next-demo'));
+    await page.goto(demo('sizes-carousel-demo'));
     await expect.poll(() => shown(page)).toEqual(['1 of 5', '2 of 5']);
     await page.getByRole('button', { name: 'Next slide' }).click();
     await expect.poll(() => shown(page)).toEqual(['2 of 5', '3 of 5']);
@@ -173,7 +170,7 @@ test.describe('Carousel Next demos', () => {
 
   test('multiple: the buttons hidden on a phone', async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 700 });
-    await page.goto(demo('multiple-carousel-next-demo'));
+    await page.goto(demo('multiple-carousel-demo'));
     await expect(page.getByRole('group')).toHaveCount(5);
     await expect(page.getByRole('button', { name: 'Next slide' })).toBeHidden();
   });

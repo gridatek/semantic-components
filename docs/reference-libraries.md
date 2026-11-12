@@ -630,6 +630,20 @@ Rewritten 2026-11-11 (the user: "check what other libs do"): built beside the ol
 - **Left out**: re-sorting by score (fights `@for`), grid, virtualization, a built-in ⌘K listener, nested pages (an example), shadcn's check icon, cmdk's Loading.
 - **Examples**: shadcn's Demo (the Usage), Basic, Shortcuts, Groups, Scrollable, Dialog (⌘J with `scHotkey`); ours: Keywords, Async search, Pages, Links; RTL.
 
+## Carousel: rewritten
+
+Rewritten 2026-11-12: built beside the old one as Carousel Next, switched in (no users outside its page). Still on Embla (`embla-carousel`, an optional peer of the `@semantic-components/ui/carousel` entry point). A shadcn component, so no web research: shadcn's reference app (`carousel.tsx` in each style) and its 8 examples.
+
+- **The `carousel` preset key** (a string): the buttons' corners — `rounded-full` in nova, vega, maia, mira and luma, `rounded-2xl` in rhea, none in lyra and sera (the preset's button keeps its own); the old one hard-coded `rounded-full`.
+- **Embla restarts** when `options`, `plugins` or `orientation` change (the old one read them once); its `direction` from the page's `dir` unless given.
+- **Keys follow direction**: ← and → mirrored right to left, ↑ and ↓ when vertical (shadcn's: ← → only, never mirrored).
+- **Names are the consumer's**: the region's and each slide's `aria-roledescription` and `aria-label` (shadcn hard-codes "carousel" and "slide"). The slide gives `index()` and `count()` for "2 of 5", right from the first render: slides register with the root, so no Embla is needed (the server too).
+- **exportAs**: `api()` (Embla's), `count()` (positions), `canScrollPrev()` / `canScrollNext()` — shadcn's `setApi`.
+- **Icons are the consumer's**, turned 180° right to left by the buttons (shadcn's `rtl:rotate-180` on its own icons).
+- **Every part a directive**: the root, the viewport and the buttons only projected their content.
+- **Examples**: shadcn's Demo (the Usage), Sizes, Spacing, Orientation, API, Plugin (with a pause button, WCAG 2.2.2, and the `embla-carousel-autoplay` install step), Multiple, RTL; ours: Images (local photos, `NgOptimizedImage`). Dropped: the old Default, Cards, Third and Half width, Vertical.
+- **Autoplay's events come before its state**: `autoplay:play` / `autoplay:stop` are emitted before `isPlaying()` changes, so the Plugin example follows the events.
+
 ## Native Select: rewritten
 
 Rewritten 2026-11-11: built beside the old one as Native Select Next, switched in. Its users (the PDF Viewer, two Theme examples) moved to the container, chevron and option parts. shadcn's Native Select (`native-select.tsx` in each style, its docs' examples); Base UI has none.

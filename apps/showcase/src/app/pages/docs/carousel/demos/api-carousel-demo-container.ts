@@ -1,32 +1,32 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { ApiCarouselNextDemo } from './api-carousel-next-demo';
+import { ApiCarouselDemo } from './api-carousel-demo';
 
 @Component({
-  selector: 'app-api-carousel-next-demo-container',
-  imports: [DemoContainer, ApiCarouselNextDemo],
+  selector: 'app-api-carousel-demo-container',
+  imports: [DemoContainer, ApiCarouselDemo],
   template: `
     <app-demo-container
       title="API"
-      demoUrl="/demos/carousel-next/api-carousel-next-demo"
+      demoUrl="/demos/carousel/api-carousel-demo"
       [code]="code"
     >
-      <app-api-carousel-next-demo />
+      <app-api-carousel-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ApiCarouselNextDemoContainer {
+export class ApiCarouselDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScCard, ScCardContent } from '@semantic-components/ui';
 import {
+  ScCarousel,
+  ScCarouselItem,
   ScCarouselNext,
-  ScCarouselNextItem,
-  ScCarouselNextNext,
-  ScCarouselNextPrevious,
-  ScCarouselNextTrack,
-  ScCarouselNextViewport,
+  ScCarouselPrevious,
+  ScCarouselTrack,
+  ScCarouselViewport,
 } from '@semantic-components/ui/carousel';
 import {
   SiChevronLeftIcon,
@@ -35,14 +35,14 @@ import {
 
 /** The slide shown, both ways ([(activeIndex)]), and how many positions (count(), from exportAs). */
 @Component({
-  selector: 'app-api-carousel-next-demo',
+  selector: 'app-api-carousel-demo',
   imports: [
+    ScCarousel,
+    ScCarouselItem,
     ScCarouselNext,
-    ScCarouselNextItem,
-    ScCarouselNextNext,
-    ScCarouselNextPrevious,
-    ScCarouselNextTrack,
-    ScCarouselNextViewport,
+    ScCarouselPrevious,
+    ScCarouselTrack,
+    ScCarouselViewport,
     ScCard,
     ScCardContent,
     SiChevronLeftIcon,
@@ -51,19 +51,19 @@ import {
   template: \`
     <div class="w-full max-w-[12rem] sm:max-w-xs">
       <div
-        scCarouselNext
-        #carousel="scCarouselNext"
+        scCarousel
+        #carousel="scCarousel"
         [(activeIndex)]="current"
         aria-roledescription="carousel"
         aria-label="Numbers with their position"
         class="w-full"
       >
-        <div scCarouselNextViewport>
-          <div scCarouselNextTrack>
+        <div scCarouselViewport>
+          <div scCarouselTrack>
             @for (n of slides; track n) {
               <div
-                scCarouselNextItem
-                #slide="scCarouselNextItem"
+                scCarouselItem
+                #slide="scCarouselItem"
                 aria-roledescription="slide"
                 [attr.aria-label]="slide.index() + 1 + ' of ' + slide.count()"
               >
@@ -81,11 +81,11 @@ import {
             }
           </div>
         </div>
-        <button scCarouselNextPrevious>
+        <button scCarouselPrevious>
           <svg siChevronLeftIcon></svg>
           <span class="sr-only">Previous slide</span>
         </button>
-        <button scCarouselNextNext>
+        <button scCarouselNext>
           <svg siChevronRightIcon></svg>
           <span class="sr-only">Next slide</span>
         </button>
@@ -98,7 +98,7 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ApiCarouselNextDemo {
+export class ApiCarouselDemo {
   readonly slides = [1, 2, 3, 4, 5];
   readonly current = signal(0);
 }`;

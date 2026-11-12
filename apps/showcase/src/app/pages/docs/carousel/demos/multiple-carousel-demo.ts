@@ -1,28 +1,28 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ScCard, ScCardContent } from '@semantic-components/ui';
 import {
+  ScCarousel,
+  ScCarouselItem,
   ScCarouselNext,
-  ScCarouselNextItem,
-  ScCarouselNextNext,
-  ScCarouselNextPrevious,
-  ScCarouselNextTrack,
-  ScCarouselNextViewport,
+  ScCarouselPrevious,
+  ScCarouselTrack,
+  ScCarouselViewport,
 } from '@semantic-components/ui/carousel';
 import {
   SiChevronLeftIcon,
   SiChevronRightIcon,
 } from '@semantic-icons/lucide-icons';
 
-/** Several slides in view: a basis on each item (half, a third from lg), aligned to the start. */
+/** More slides in view as the screen grows; the buttons hidden on phones (swipe there). */
 @Component({
-  selector: 'app-sizes-carousel-next-demo',
+  selector: 'app-multiple-carousel-demo',
   imports: [
+    ScCarousel,
+    ScCarouselItem,
     ScCarouselNext,
-    ScCarouselNextItem,
-    ScCarouselNextNext,
-    ScCarouselNextPrevious,
-    ScCarouselNextTrack,
-    ScCarouselNextViewport,
+    ScCarouselPrevious,
+    ScCarouselTrack,
+    ScCarouselViewport,
     ScCard,
     ScCardContent,
     SiChevronLeftIcon,
@@ -30,19 +30,19 @@ import {
   ],
   template: `
     <div
-      scCarouselNext
+      scCarousel
       aria-roledescription="carousel"
-      aria-label="Sizes"
-      class="w-full max-w-[12rem] sm:max-w-xs md:max-w-sm"
+      aria-label="Several in view"
+      class="mx-auto max-w-xs sm:max-w-sm"
       [options]="{ align: 'start' }"
     >
-      <div scCarouselNextViewport>
-        <div scCarouselNextTrack>
+      <div scCarouselViewport>
+        <div scCarouselTrack>
           @for (n of slides; track n) {
             <div
-              scCarouselNextItem
-              #slide="scCarouselNextItem"
-              class="basis-1/2 lg:basis-1/3"
+              scCarouselItem
+              #slide="scCarouselItem"
+              class="sm:basis-1/2 lg:basis-1/3"
               aria-roledescription="slide"
               [attr.aria-label]="slide.index() + 1 + ' of ' + slide.count()"
             >
@@ -60,11 +60,11 @@ import {
           }
         </div>
       </div>
-      <button scCarouselNextPrevious>
+      <button scCarouselPrevious class="hidden sm:inline-flex">
         <svg siChevronLeftIcon></svg>
         <span class="sr-only">Previous slide</span>
       </button>
-      <button scCarouselNextNext>
+      <button scCarouselNext class="hidden sm:inline-flex">
         <svg siChevronRightIcon></svg>
         <span class="sr-only">Next slide</span>
       </button>
@@ -73,6 +73,6 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class SizesCarouselNextDemo {
+export class MultipleCarouselDemo {
   readonly slides = [1, 2, 3, 4, 5];
 }

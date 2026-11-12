@@ -1,373 +1,52 @@
 # Carousel
 
-A carousel component built with Embla Carousel, featuring smooth animations, touch/swipe gestures, and plugin support.
+A slideshow with motion and swipe, built on [Embla](https://www.embla-carousel.com) (`embla-carousel`, an optional peer used only by the `@semantic-components/ui/carousel` entry point). shadcn's Carousel: its parts, look and examples.
 
 ## Usage
 
 ```html
-<div scCarousel aria-roledescription="carousel" aria-label="Images" class="w-full max-w-xs">
+<div scCarousel aria-roledescription="carousel" aria-label="Numbers" class="w-full max-w-xs">
   <div scCarouselViewport>
     <div scCarouselTrack>
-      <div scCarouselItem aria-roledescription="slide">Slide 1</div>
-      <div scCarouselItem aria-roledescription="slide">Slide 2</div>
-      <div scCarouselItem aria-roledescription="slide">Slide 3</div>
+      @for (n of slides; track n) {
+      <div scCarouselItem #slide="scCarouselItem" aria-roledescription="slide" [attr.aria-label]="slide.index() + 1 + ' of ' + slide.count()">…</div>
+      }
     </div>
   </div>
   <button scCarouselPrevious>
-    <svg si-chevron-left-icon></svg>
+    <svg siChevronLeftIcon></svg>
     <span class="sr-only">Previous slide</span>
   </button>
   <button scCarouselNext>
-    <svg si-chevron-right-icon></svg>
+    <svg siChevronRightIcon></svg>
     <span class="sr-only">Next slide</span>
   </button>
 </div>
 ```
 
-## Architecture
-
-The carousel uses a three-layer structure inspired by Embla Carousel's architecture:
-
-1. **ScCarousel** - The outer container that manages state, API, and keyboard navigation
-2. **ScCarouselViewport** - The overflow container (`overflow-hidden`) that Embla binds to
-3. **ScCarouselTrack** - The flex container that slides within the viewport
-4. **ScCarouselItem** - Individual slides on the track
-
-```
-┌─ ScCarousel (relative positioning, manages state)
-│  ├─ ScCarouselViewport (overflow-hidden, viewport for Embla)
-│  │  └─ ScCarouselTrack (flex container, the sliding track)
-│  │     ├─ ScCarouselItem (slide 1)
-│  │     ├─ ScCarouselItem (slide 2)
-│  │     └─ ScCarouselItem (slide 3)
-│  ├─ ScCarouselPrevious (navigation button)
-│  └─ ScCarouselNext (navigation button)
-```
-
-## Components
-
-### ScCarousel
-
-Main carousel container that manages state and keyboard navigation.
-
-**Selector:** `div[scCarousel]`
-
-**Inputs:**
-
-| Input         | Type                         | Default        | Description                    |
-| ------------- | ---------------------------- | -------------- | ------------------------------ |
-| `orientation` | `'horizontal' \| 'vertical'` | `'horizontal'` | Scroll direction               |
-| `options`     | `ScCarouselOptions`          | `{}`           | Embla carousel options         |
-| `plugins`     | `ScCarouselPlugin[]`         | `[]`           | Embla plugins (e.g., autoplay) |
-| `class`       | `string`                     | `''`           | Additional CSS classes         |
-
-### ScCarouselViewport
-
-The overflow container (viewport) that Embla binds to. This provides the visible window for the carousel.
-
-**Selector:** `div[scCarouselViewport]`
-
-**Inputs:**
-
-| Input   | Type     | Default | Description            |
-| ------- | -------- | ------- | ---------------------- |
-| `class` | `string` | `''`    | Additional CSS classes |
-
-### ScCarouselTrack
-
-The flex container (track) that moves within the viewport and holds carousel items. This is the element that slides left/right or up/down.
-
-**Selector:** `div[scCarouselTrack]`
-
-**Inputs:**
-
-| Input   | Type     | Default | Description            |
-| ------- | -------- | ------- | ---------------------- |
-| `class` | `string` | `''`    | Additional CSS classes |
-
-### ScCarouselItem
-
-Individual carousel slide.
-
-**Selector:** `div[scCarouselItem]`
-
-**Inputs:**
-
-| Input   | Type     | Default | Description            |
-| ------- | -------- | ------- | ---------------------- |
-| `class` | `string` | `''`    | Additional CSS classes |
-
-### ScCarouselPrevious
-
-Previous slide navigation button. Content must be provided by the user (icon + screen reader text).
-
-**Selector:** `button[scCarouselPrevious]`
-
-**Inputs:**
-
-| Input   | Type     | Default | Description            |
-| ------- | -------- | ------- | ---------------------- |
-| `class` | `string` | `''`    | Additional CSS classes |
-
-**Example:**
-
-```html
-<button scCarouselPrevious>
-  <svg si-chevron-left-icon></svg>
-  <span class="sr-only">Previous slide</span>
-</button>
-```
-
-### ScCarouselNext
-
-Next slide navigation button. Content must be provided by the user (icon + screen reader text).
-
-**Selector:** `button[scCarouselNext]`
-
-**Inputs:**
-
-| Input   | Type     | Default | Description            |
-| ------- | -------- | ------- | ---------------------- |
-| `class` | `string` | `''`    | Additional CSS classes |
-
-**Example:**
-
-```html
-<button scCarouselNext>
-  <svg si-chevron-right-icon></svg>
-  <span class="sr-only">Next slide</span>
-</button>
-```
-
-## Examples
-
-### Default
-
-```html
-<div scCarousel aria-roledescription="carousel" aria-label="Images" class="w-full max-w-xs">
-  <div scCarouselViewport>
-    <div scCarouselTrack>
-      @for (i of [1, 2, 3, 4, 5]; track i) {
-      <div scCarouselItem aria-roledescription="slide">
-        <div class="p-1">
-          <div class="flex aspect-square items-center justify-center rounded-lg border">{{ i }}</div>
-        </div>
-      </div>
-      }
-    </div>
-  </div>
-  <button scCarouselPrevious>
-    <svg si-chevron-left-icon></svg>
-    <span class="sr-only">Previous slide</span>
-  </button>
-  <button scCarouselNext>
-    <svg si-chevron-right-icon></svg>
-    <span class="sr-only">Next slide</span>
-  </button>
-</div>
-```
-
-### With Loop
-
-```typescript
-import { Component } from '@angular/core';
-
-@Component({
-  template: `
-    <div scCarousel aria-roledescription="carousel" aria-label="Images" [options]="{ loop: true }" class="w-full max-w-xs">
-      <div scCarouselViewport>
-        <div scCarouselTrack>
-          @for (i of [1, 2, 3, 4, 5]; track i) {
-            <div scCarouselItem aria-roledescription="slide">{{ i }}</div>
-          }
-        </div>
-      </div>
-      <button scCarouselPrevious>
-        <svg si-chevron-left-icon></svg>
-        <span class="sr-only">Previous slide</span>
-      </button>
-      <button scCarouselNext>
-        <svg si-chevron-right-icon></svg>
-        <span class="sr-only">Next slide</span>
-      </button>
-    </div>
-  `,
-})
-export class MyComponent {}
-```
-
-### With Autoplay
-
-```typescript
-import { Component } from '@angular/core';
-import Autoplay from 'embla-carousel-autoplay';
-
-@Component({
-  template: `
-    <div scCarousel aria-roledescription="carousel" aria-label="Images" [plugins]="plugins" class="w-full max-w-xs">
-      <div scCarouselViewport>
-        <div scCarouselTrack>
-          @for (i of items; track i) {
-            <div scCarouselItem aria-roledescription="slide">{{ i }}</div>
-          }
-        </div>
-      </div>
-      <button scCarouselPrevious>
-        <svg si-chevron-left-icon></svg>
-        <span class="sr-only">Previous slide</span>
-      </button>
-      <button scCarouselNext>
-        <svg si-chevron-right-icon></svg>
-        <span class="sr-only">Next slide</span>
-      </button>
-    </div>
-  `,
-})
-export class MyComponent {
-  plugins = [Autoplay({ delay: 2000, stopOnInteraction: true })];
-  items = [1, 2, 3, 4, 5];
-}
-```
-
-### Partial Items (Multiple Visible)
-
-```html
-<div scCarousel aria-roledescription="carousel" aria-label="Images" [options]="{ align: 'start' }" class="w-full max-w-lg">
-  <div scCarouselViewport>
-    <div scCarouselTrack>
-      @for (i of items; track i) {
-      <div scCarouselItem aria-roledescription="slide" class="basis-1/3">
-        <!-- Shows 3 items at a time -->
-      </div>
-      }
-    </div>
-  </div>
-</div>
-```
-
-### Vertical Orientation
-
-```html
-<div scCarousel aria-roledescription="carousel" aria-label="Images" orientation="vertical" [options]="{ align: 'start' }" class="w-full max-w-xs">
-  <div scCarouselViewport>
-    <div scCarouselTrack class="-mt-1 h-[270px]">
-      @for (i of items; track i) {
-      <div scCarouselItem aria-roledescription="slide" class="basis-1/2 pt-1">
-        <div class="p-1">
-          <div class="bg-card flex items-center justify-center rounded-lg border p-6">
-            <span class="text-3xl font-semibold">{{ i }}</span>
-          </div>
-        </div>
-      </div>
-      }
-    </div>
-  </div>
-  <button scCarouselPrevious>
-    <svg si-chevron-left-icon></svg>
-    <span class="sr-only">Previous slide</span>
-  </button>
-  <button scCarouselNext>
-    <svg si-chevron-right-icon></svg>
-    <span class="sr-only">Next slide</span>
-  </button>
-</div>
-```
-
-## State Management
-
-`activeIndex` is the single source of truth for the current slide. All state flows through it:
-
-```
-                    activeIndex (model)
-                   /                   \
-                  /                     \
-    Parent sets index              Embla fires 'select'
-          |                              |
-          v                              v
-    effect() guards &              syncFromEmbla() updates
-    calls embla.scrollTo()         activeIndex + canScroll*
-```
-
-### Data flow
-
-1. **Parent → Carousel**: Parent binds `[activeIndex]`. The `effect()` detects the change, checks if embla is already at that index (guards against no-op), and calls `embla.scrollTo()`.
-2. **Carousel → Parent**: User swipes or clicks prev/next. Embla fires the `select` event, `syncFromEmbla()` reads `selectedScrollSnap()` and updates `activeIndex`, which emits via `activeIndexChange`.
-3. **Internal navigation**: `scrollPrev()`/`scrollNext()` call embla directly. Embla fires `select`, which syncs back to `activeIndex` — same path as (2).
-
-### Why the guard matters
-
-The `effect()` checks `embla.selectedScrollSnap() !== index` before calling `scrollTo()`. Without this, path (2) would trigger a redundant `scrollTo()` call on every user interaction:
-
-```
-swipe → select event → set activeIndex → effect fires → scrollTo (redundant)
-```
-
-The guard breaks this cycle by recognizing embla is already at the correct index.
-
-## Features
-
-- **Embla Carousel**: Powered by Embla for smooth, physics-based animations
-- **Touch/Swipe**: Native touch and mouse drag support
-- **Horizontal/Vertical**: Supports both orientations
-- **Keyboard Navigation**: Arrow keys for navigation
-- **Plugin System**: Extend with plugins (autoplay, auto-scroll, etc.)
-- **Flexible Options**: Loop, alignment, slide spacing, and more
-- **Responsive**: Flexible sizing with basis classes
-- **Navigation Buttons**: Prev/next with auto-disable at boundaries
-- **Accessible**: ARIA roles and roledescription
-
-## Keyboard Navigation
-
-- `ArrowLeft`: Navigate to previous slide
-- `ArrowRight`: Navigate to next slide
+## Parts
+
+| Part                 | Selector                     | What it does                                                                                                                                                                                                                        |
+| -------------------- | ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ScCarousel`         | `div[scCarousel]`            | The region (`role="region"`). `orientation`, `options`, `plugins`, `[(activeIndex)]`. exportAs `scCarousel`: `api()`, `count()` (positions), `canScrollPrev()`, `canScrollNext()`, `scrollPrev()`, `scrollNext()`, `slides()`.      |
+| `ScCarouselViewport` | `div[scCarouselViewport]`    | Embla's viewport (`overflow-hidden`).                                                                                                                                                                                               |
+| `ScCarouselTrack`    | `div[scCarouselTrack]`       | The row of slides (a column, vertical): `-ms-4` / `-mt-4` to match the slides' gap.                                                                                                                                                 |
+| `ScCarouselItem`     | `div[scCarouselItem]`        | A slide (`role="group"`): `basis-full`, its gap as `ps-4` / `pt-4`. exportAs `scCarouselItem`: `index()` and `count()`, right from the first render (the slides register with the root, in page order).                             |
+| `ScCarouselPrevious` | `button[scCarouselPrevious]` | The preset's button (`variant` outline, `size` icon-sm) plus the preset's `carousel` corners, outside the start (above, vertical); disabled when it can't move. The icon is the consumer's, turned 180° right to left (horizontal). |
+| `ScCarouselNext`     | `button[scCarouselNext]`     | The same, outside the end (below, vertical).                                                                                                                                                                                        |
+
+## Behaviour
+
+- **Embla starts in the browser** (after the first render), and again when `options`, `plugins` or `orientation` change. Its `direction` is the root's computed direction unless `options` give one, so a right-to-left page needs nothing more.
+- **Keys**, with focus inside: ← and → (mirrored right to left), ↑ and ↓ when vertical. No modifiers.
+- **`[(activeIndex)]`** is the scroll snap shown, both ways. `count()` is the number of snaps (fewer than the slides when several are in view).
+- **Plugins** (autoplay…) go in `plugins`; each is a package of its own (`embla-carousel-autoplay`), installed where it is used. With autoplay, give a pause button (WCAG 2.2.2); the plugin emits `autoplay:play` / `autoplay:stop` before its `isPlaying()` changes, so follow the events.
 
 ## Accessibility
 
-- `role="region"` with `aria-roledescription="carousel"` on container
-- `role="group"` with `aria-roledescription="slide"` on items
-- Screen reader text on navigation buttons
-- Disabled state for navigation at boundaries
+- The consumer writes every word: the region's `aria-label` and `aria-roledescription`, each slide's `aria-roledescription` and `aria-label` ("2 of 5"), the buttons' names (an `sr-only` span).
+- The buttons are disabled at either end (not when `loop`).
 
-## Carousel Options
+## Preset
 
-The `options` input accepts all [Embla Carousel options](https://www.embla-carousel.com/api/options/):
-
-- `align`: `'start' | 'center' | 'end'` - Slide alignment
-- `loop`: `boolean` - Enable infinite loop
-- `skipSnaps`: `boolean` - Skip slides that can't be scrolled to
-- `dragFree`: `boolean` - Enable free scroll without snap points
-- `slidesToScroll`: `number | 'auto'` - Number of slides to scroll
-- `containScroll`: `'trimSnaps' | 'keepSnaps'` - Contain scroll behavior
-- And many more...
-
-## Plugins
-
-The carousel supports all Embla plugins via the `plugins` input:
-
-### Autoplay
-
-```bash
-npm install embla-carousel-autoplay
-```
-
-```typescript
-import Autoplay from 'embla-carousel-autoplay';
-
-export class MyComponent {
-  plugins = [
-    Autoplay({
-      delay: 3000,
-      stopOnInteraction: true,
-      stopOnMouseEnter: true,
-    }),
-  ];
-}
-```
-
-### Other Available Plugins
-
-- **embla-carousel-auto-scroll**: Automatic scrolling
-- **embla-carousel-class-names**: Dynamic class names on slides
-- **embla-carousel-fade**: Fade transition effect
-
-See [Embla Carousel Plugins](https://www.embla-carousel.com/plugins/) for more.
+`carousel` (a string): the buttons' corners — `rounded-full` in nova, vega, maia, mira and luma; `rounded-2xl` in rhea; none in lyra and sera (the preset's button keeps its own).

@@ -1,28 +1,28 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ScCard, ScCardContent } from '@semantic-components/ui';
 import {
+  ScCarousel,
+  ScCarouselItem,
   ScCarouselNext,
-  ScCarouselNextItem,
-  ScCarouselNextNext,
-  ScCarouselNextPrevious,
-  ScCarouselNextTrack,
-  ScCarouselNextViewport,
+  ScCarouselPrevious,
+  ScCarouselTrack,
+  ScCarouselViewport,
 } from '@semantic-components/ui/carousel';
 import {
   SiChevronLeftIcon,
   SiChevronRightIcon,
 } from '@semantic-icons/lucide-icons';
 
-/** The gap between slides: the item's start padding, the track's negative margin to match. */
+/** Vertical: the slides in a column, the buttons above and below; ↑ and ↓ move. */
 @Component({
-  selector: 'app-spacing-carousel-next-demo',
+  selector: 'app-orientation-carousel-demo',
   imports: [
+    ScCarousel,
+    ScCarouselItem,
     ScCarouselNext,
-    ScCarouselNextItem,
-    ScCarouselNextNext,
-    ScCarouselNextPrevious,
-    ScCarouselNextTrack,
-    ScCarouselNextViewport,
+    ScCarouselPrevious,
+    ScCarouselTrack,
+    ScCarouselViewport,
     ScCard,
     ScCardContent,
     SiChevronLeftIcon,
@@ -30,18 +30,20 @@ import {
   ],
   template: `
     <div
-      scCarouselNext
+      scCarousel
       aria-roledescription="carousel"
-      aria-label="Spacing"
-      class="w-full max-w-[12rem] sm:max-w-xs md:max-w-sm"
+      aria-label="Vertical"
+      class="my-14 w-full max-w-xs"
+      orientation="vertical"
+      [options]="{ align: 'start' }"
     >
-      <div scCarouselNextViewport>
-        <div scCarouselNextTrack class="-ms-1">
+      <div scCarouselViewport>
+        <div scCarouselTrack class="-mt-1 h-[270px]">
           @for (n of slides; track n) {
             <div
-              scCarouselNextItem
-              #slide="scCarouselNextItem"
-              class="basis-1/2 ps-1 lg:basis-1/3"
+              scCarouselItem
+              #slide="scCarouselItem"
+              class="basis-1/2 pt-1"
               aria-roledescription="slide"
               [attr.aria-label]="slide.index() + 1 + ' of ' + slide.count()"
             >
@@ -49,9 +51,9 @@ import {
                 <div scCard>
                   <div
                     scCardContent
-                    class="flex aspect-square items-center justify-center p-6"
+                    class="flex aspect-auto items-center justify-center p-6"
                   >
-                    <span class="text-2xl font-semibold">{{ n }}</span>
+                    <span class="text-3xl font-semibold">{{ n }}</span>
                   </div>
                 </div>
               </div>
@@ -59,11 +61,11 @@ import {
           }
         </div>
       </div>
-      <button scCarouselNextPrevious>
+      <button scCarouselPrevious>
         <svg siChevronLeftIcon></svg>
         <span class="sr-only">Previous slide</span>
       </button>
-      <button scCarouselNextNext>
+      <button scCarouselNext>
         <svg siChevronRightIcon></svg>
         <span class="sr-only">Next slide</span>
       </button>
@@ -72,6 +74,6 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class SpacingCarouselNextDemo {
+export class OrientationCarouselDemo {
   readonly slides = [1, 2, 3, 4, 5];
 }

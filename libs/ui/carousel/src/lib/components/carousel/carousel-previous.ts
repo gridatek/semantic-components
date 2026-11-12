@@ -1,27 +1,21 @@
-import {
-  Component,
-  ViewEncapsulation,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { ScButtonVariants, cn, injectPreset } from '@semantic-components/ui';
 import { ScCarousel } from './carousel';
 
-@Component({
+/** To the previous slide: the preset's button (outline, icon-sm), outside the carousel's start (above, vertical); disabled at the first. Write its icon and name it. */
+@Directive({
   selector: 'button[scCarouselPrevious]',
-  template: ` <ng-content /> `,
   host: {
     type: 'button',
     '[class]': 'class()',
     '[disabled]': '!carousel.canScrollPrev()',
-    '[attr.aria-disabled]': '!carousel.canScrollPrev() || null',
     '(click)': 'carousel.scrollPrev()',
   },
-  encapsulation: ViewEncapsulation.None,
 })
 export class ScCarouselPrevious {
   private readonly buttonStyles = injectPreset().button;
+  /** The preset's corners for these buttons. */
+  private readonly corners = injectPreset().carousel;
 
   readonly carousel = inject(ScCarousel);
 
@@ -34,9 +28,10 @@ export class ScCarouselPrevious {
     const isHorizontal = this.carousel.orientation() === 'horizontal';
     return cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
-      'rounded-full absolute touch-manipulation',
+      'absolute touch-manipulation',
+      this.corners,
       isHorizontal
-        ? 'inset-y-0 -start-12 my-auto'
+        ? 'inset-y-0 -start-12 my-auto rtl:[&_svg]:rotate-180'
         : '-top-12 start-1/2 -translate-x-1/2 rtl:translate-x-1/2 rotate-90',
       this.classInput(),
     );

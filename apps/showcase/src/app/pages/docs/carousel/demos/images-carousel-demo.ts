@@ -1,9 +1,10 @@
+import { NgOptimizedImage } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScCard, ScCardContent } from '@semantic-components/ui';
+import { ScAspectRatio, ScFrame } from '@semantic-components/ui';
 import {
   ScCarousel,
   ScCarouselItem,
-  ScCarouselOldNext,
+  ScCarouselNext,
   ScCarouselPrevious,
   ScCarouselTrack,
   ScCarouselViewport,
@@ -13,57 +14,61 @@ import {
   SiChevronRightIcon,
 } from '@semantic-icons/lucide-icons';
 
+/** Photos, each named by its alt; loops round. */
 @Component({
   selector: 'app-images-carousel-demo',
   imports: [
+    NgOptimizedImage,
     ScCarousel,
-    ScCarouselViewport,
-    ScCarouselTrack,
     ScCarouselItem,
+    ScCarouselNext,
     ScCarouselPrevious,
-    ScCarouselOldNext,
-    ScCard,
-    ScCardContent,
+    ScCarouselTrack,
+    ScCarouselViewport,
+    ScAspectRatio,
+    ScFrame,
     SiChevronLeftIcon,
     SiChevronRightIcon,
   ],
   template: `
-    <div class="mx-auto w-full max-w-[12rem] sm:max-w-xs">
-      <div
-        scCarousel
-        aria-roledescription="carousel"
-        aria-label="Images carousel"
-        class="w-full"
-      >
-        <div scCarouselViewport>
-          <div scCarouselTrack>
-            @for (image of images; track image.alt) {
-              <div scCarouselItem aria-roledescription="slide">
-                <div class="p-1">
-                  <div scCard>
-                    <div
-                      scCardContent
-                      class="flex aspect-video items-center justify-center p-6"
-                    >
-                      <span class="text-muted-foreground text-sm">
-                        {{ image.alt }}
-                      </span>
-                    </div>
-                  </div>
-                </div>
+    <div
+      scCarousel
+      aria-roledescription="carousel"
+      aria-label="Places"
+      class="w-full max-w-[12rem] sm:max-w-sm"
+      [options]="{ loop: true }"
+    >
+      <div scCarouselViewport>
+        <div scCarouselTrack>
+          @for (image of images; track image.src) {
+            <div
+              scCarouselItem
+              #slide="scCarouselItem"
+              aria-roledescription="slide"
+              [attr.aria-label]="slide.index() + 1 + ' of ' + slide.count()"
+            >
+              <div scAspectRatio scFrame [ratio]="4 / 3">
+                <img
+                  [ngSrc]="image.src"
+                  fill
+                  [priority]="$first"
+                  sizes="(min-width: 640px) 40vw, 50vw"
+                  [alt]="image.alt"
+                  class="object-cover"
+                />
               </div>
-            }
-          </div>
+            </div>
+          }
         </div>
-        <button scCarouselPrevious>
-          <svg siChevronLeftIcon></svg>
-          <span class="sr-only">Previous slide</span>
-        </button>
-        <button scCarouselNext>
-          <svg siChevronRightIcon></svg>
-          <span class="sr-only">Next slide</span>
-        </button>
       </div>
+      <button scCarouselPrevious>
+        <svg siChevronLeftIcon></svg>
+        <span class="sr-only">Previous slide</span>
+      </button>
+      <button scCarouselNext>
+        <svg siChevronRightIcon></svg>
+        <span class="sr-only">Next slide</span>
+      </button>
     </div>
   `,
   host: { class: 'flex w-full justify-center' },
@@ -71,9 +76,13 @@ import {
 })
 export class ImagesCarouselDemo {
   readonly images = [
-    { alt: 'Image 1' },
-    { alt: 'Image 2' },
-    { alt: 'Image 3' },
-    { alt: 'Image 4' },
+    {
+      src: '/images/gallery/mountains.jpg',
+      alt: 'Mountains under a clear sky',
+    },
+    { src: '/images/gallery/coast.jpg', alt: 'A rocky coast' },
+    { src: '/images/gallery/forest.jpg', alt: 'A forest path' },
+    { src: '/images/gallery/gorge.jpg', alt: 'A river in a gorge' },
+    { src: '/images/gallery/cafe.jpg', alt: 'A street cafe' },
   ];
 }
