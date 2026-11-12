@@ -55,7 +55,7 @@ import {
             scCalendar
             #cal="scCalendar"
             aria-label="Payment date"
-            class="w-full [--cell-size:--spacing(8)] md:[--cell-size:--spacing(10)]"
+            class="w-full [--cell-size:--spacing(8)]"
             [(value)]="date"
           >
             <div scCalendarHeader>

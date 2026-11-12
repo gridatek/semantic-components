@@ -34,19 +34,19 @@ const MONDAY = Temporal.PlainDate.from('2024-01-01');
     <ng-content />
     <table
       role="grid"
-      class="border-collapse"
+      class="w-full border-collapse"
       [attr.aria-label]="calendar.monthHeading(month())"
       (keydown)="calendar.onDayKeydown($event)"
     >
       <thead>
-        <tr class="flex">
+        <tr class="flex w-full">
           @if (calendar.showWeekNumbers()) {
-            <td class="w-(--cell-size)"></td>
+            <td class="w-(--cell-size) shrink-0"></td>
           }
           @for (name of weekdays(); track name.long) {
             <th
               scope="col"
-              class="text-muted-foreground w-(--cell-size) text-[0.8rem] font-normal"
+              class="text-muted-foreground min-w-(--cell-size) flex-1 text-[0.8rem] font-normal"
             >
               <span aria-hidden="true">{{ name.short }}</span>
               <span class="sr-only">{{ name.long }}</span>
@@ -56,18 +56,18 @@ const MONDAY = Temporal.PlainDate.from('2024-01-01');
       </thead>
       <tbody>
         @for (week of weeks(); track week[0].key) {
-          <tr class="mt-1 flex">
+          <tr class="mt-1 flex w-full">
             @if (calendar.showWeekNumbers()) {
               <th
                 scope="row"
-                class="text-muted-foreground grid w-(--cell-size) place-items-center text-[0.8rem] font-normal"
+                class="text-muted-foreground grid w-(--cell-size) shrink-0 place-items-center text-[0.8rem] font-normal"
               >
                 {{ weekNumber(week) }}
               </th>
             }
             @for (day of week; track day.key) {
               @if (day.blank) {
-                <td class="size-(--cell-size)"></td>
+                <td class="aspect-square min-w-(--cell-size) flex-1"></td>
               } @else {
                 <td
                   data-slot="calendar-cell"
@@ -107,7 +107,7 @@ const MONDAY = Temporal.PlainDate.from('2024-01-01');
       </tbody>
     </table>
   `,
-  host: { 'data-slot': 'calendar-month' },
+  host: { 'data-slot': 'calendar-month', class: 'w-full' },
   encapsulation: ViewEncapsulation.None,
 })
 export class ScCalendarMonth {
@@ -197,7 +197,7 @@ export class ScCalendarMonth {
     const range = calendar.rangePart(day.date);
     const today = day.date.equals(calendar.today());
     return cn(
-      'relative flex size-(--cell-size) cursor-pointer flex-col items-center justify-center rounded-(--cell-radius) text-sm outline-none select-none',
+      'relative flex aspect-square min-w-(--cell-size) flex-1 cursor-pointer flex-col items-center justify-center rounded-(--cell-radius) text-sm outline-none select-none',
       'hover:bg-muted hover:text-foreground',
       'focus-visible:ring-ring/50 focus-visible:ring-3',
       today && !selected && 'bg-muted text-foreground',
