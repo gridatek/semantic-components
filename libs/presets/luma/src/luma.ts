@@ -49,6 +49,7 @@ import { resizable } from './resizable';
 import { scrollArea } from './scroll-area';
 import { select } from './select';
 import { sheet } from './sheet';
+import { sidebar } from './sidebar';
 import { skeleton } from './skeleton';
 import { slider } from './slider';
 import { switchStyles } from './switch';
@@ -112,6 +113,7 @@ export const luma: ScPreset = {
   scrollArea,
   select,
   sheet,
+  sidebar,
   skeleton,
   slider,
   switch: switchStyles,

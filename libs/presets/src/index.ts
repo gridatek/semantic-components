@@ -537,6 +537,42 @@ export interface ScComboboxStyles {
   chipsInput: string;
 }
 
+export type ScSidebarMenuButtonVariant = 'default' | 'outline';
+export type ScSidebarMenuButtonSize = 'default' | 'sm' | 'lg';
+
+/** A sidebar's parts that change from style to style. */
+export interface ScSidebarStyles {
+  /** Inside the sidebar: its background; floating, its corners and ring. */
+  inner: string;
+  /** The page beside it: a raised card with the inset variant. */
+  inset: string;
+  /** A search input in it, over the preset's input. */
+  input: string;
+  header: string;
+  /** The scrolling part between header and footer. */
+  content: string;
+  group: string;
+  groupLabel: string;
+  groupAction: string;
+  groupContent: string;
+  /** The list of a menu's items. */
+  menu: string;
+  /** A menu item's button or link: its variant and size. */
+  menuButton: (props: {
+    variant?: ScSidebarMenuButtonVariant | null;
+    size?: ScSidebarMenuButtonSize | null;
+  }) => string;
+  /** A button at a menu item's end. */
+  menuAction: string;
+  /** A count at a menu item's end. */
+  menuBadge: string;
+  /** A loading row; its icon. */
+  menuSkeleton: string;
+  menuSkeletonIcon: string;
+  /** A sub-menu's button or link. */
+  menuSubButton: string;
+}
+
 /** A preset: the components' classes in one of shadcn's styles. */
 export interface ScPreset {
   accordion: ScAccordionStyles;
@@ -604,6 +640,7 @@ export interface ScPreset {
   scrollArea: ScScrollAreaStyles;
   select: ScSelectStyles;
   sheet: ScSheetStyles;
+  sidebar: ScSidebarStyles;
   slider: ScSliderStyles;
   switch: ScSwitchStyles;
   /** A placeholder while content loads. */

@@ -585,6 +585,17 @@ Rewritten 2026-11-10: built beside the old one as Slider Next, switched in. shad
 - **One thumb**: shadcn's Range and Multiple are left out (Range Slider is ours, in its turn).
 - **shadcn's examples**: Demo (the Usage), Controlled, Disabled, Vertical, RTL; ours kept: Form, Custom color.
 
+## Sidebar: rewriting
+
+Built 2026-11-12 beside the one of 2026-10-30 as Sidebar Next (the user: "sidebar avec next process"). shadcn's own component (Base UI has none), so no web research: its `sidebar.tsx` in the 8 styles, its docs and 14 examples.
+
+- **The `sidebar` preset key** (15 strings and the menu button's `cva`): the styles differ on 2 to 17 lines — corners (lyra, sera square; luma, rhea `rounded-xl` items, `rounded-2xl` floating and inset), spacing (`px-3 py-2`, `gap-0.5` items, `gap-2` groups in luma, rhea, sera), lyra's `text-xs`, sera's uppercase labels, the input's background, the large button's height. The frame (gap, container, rail), the provider, footer, separator and sub-menu are the same everywhere: in the parts. Adapted: the menu button's `data-[sidebar=menu-action]` reads our `data-slot`; rhea's `hsl(var(--sidebar-border))` is `var(--sidebar-border)` (our colours are oklch).
+- **The tooltip** (the user's choice, A): `[tooltip]` stays (shadcn's API), now built from the Tooltip's own `scTooltip` and `scTooltipArrow` — they read a context token (`SC_TOOLTIP_CONTEXT`) the provider gives, and the sidebar's panel gives too. The copied panel classes are gone. Its button is described by it while it shows (a signal: before, the attribute didn't follow).
+- **The scrollbar shown** (the user's choice, A — Base UI over shadcn): `no-scrollbar` left out of the content, `hideScrollbar` brings it back.
+- **No lifecycle hook**: the provider's `ngOnInit` is an effect that reads the saved state once.
+- **Kept from October**: `side` start / end, `aside` a named landmark, the cookie and `localStorage`, the shortcut, the phone sheet, `aria-expanded` / `aria-controls`.
+- **Examples**: shadcn's Demo (the Usage), Header, Footer, Group, Collapsible group, Group action, Menu, Menu action, Sub-menu, Collapsible menu, Menu badge, Skeleton (its server-component example, as a loading state), Controlled; ours: Collapse to icons, Floating, Inset; RTL.
+
 ## Combobox: rewritten
 
 Rewritten 2026-11-11: built beside the old one as Combobox Next, switched in 2026-11-12. The Phone Input's country picker moved onto it (a trigger with the search inside the popup; `namedByField` off, as the field's label is the number's). A shadcn component with a Base UI one, so no web research: Base UI's docs (`combobox.md`), shadcn's `combobox.tsx` in the 8 styles and its 12 examples.

@@ -28,6 +28,7 @@ import {
   placedSide,
   sideInWords,
 } from '../../utils/overlay-positions';
+import { SC_TOOLTIP_CONTEXT, type ScTooltipContext } from './tooltip-context';
 import { ScTooltipGroup } from './tooltip-group';
 import { ScTooltipPortal } from './tooltip-portal';
 import { ScTooltipTrigger } from './tooltip-trigger';
@@ -41,7 +42,10 @@ export type ScTooltipSide = ScOverlayLogicalSide;
  */
 @Component({
   selector: 'div[scTooltipProvider]',
-  providers: [{ provide: Directionality, useClass: ScElementDirectionality }],
+  providers: [
+    { provide: Directionality, useClass: ScElementDirectionality },
+    { provide: SC_TOOLTIP_CONTEXT, useExisting: ScTooltipProvider },
+  ],
   imports: [OverlayModule, NgTemplateOutlet],
   template: `
     <ng-content />
@@ -66,7 +70,7 @@ export type ScTooltipSide = ScOverlayLogicalSide;
   },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScTooltipProvider {
+export class ScTooltipProvider implements ScTooltipContext {
   private readonly direction = inject(Directionality);
   private readonly group = inject(ScTooltipGroup, { optional: true });
 

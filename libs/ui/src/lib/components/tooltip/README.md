@@ -30,6 +30,8 @@ A short label shown when the pointer rests on a control or the keyboard reaches 
 | `ScTooltipArrow`    | `span[scTooltipArrow]`         | Your arrow, on the side towards the trigger                                                                                                                                 |
 | `ScTooltipGroup`    | `[scTooltipGroup]`             | Tooltips side by side (a toolbar): once one has shown, the next opens at once and the one before closes (`timeout`, 400)                                                    |
 
+`scTooltip` and `scTooltipArrow` read `SC_TOOLTIP_CONTEXT` (its id, its side, keep open / hide soon): the provider gives it, and a component that shows a tooltip of its own can too — the Sidebar's collapsed menu buttons use these parts, not copies.
+
 ## Keyboard and screen readers
 
 - A tooltip is a visual aid: name the trigger itself (its text, or `sr-only` text). While open it is the trigger's description (`role="tooltip"`, `aria-describedby`).

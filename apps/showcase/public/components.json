@@ -971,6 +971,14 @@
     "category": "Navigation"
   },
   {
+    "name": "Sidebar Next",
+    "path": "sidebar-next",
+    "description": "A sidebar beside the page: it collapses, to icons or off the screen, and is a sheet on phones.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Navigation"
+  },
+  {
     "name": "Signature Pad",
     "path": "signature-pad",
     "description": "A signature pad: pressure ink, drawn or typed, a value to store and redraw, trimmed PNG and SVG export.",

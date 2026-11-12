@@ -1,5 +1,6 @@
 export * from './tooltip';
 export * from './tooltip-arrow';
+export * from './tooltip-context';
 export * from './tooltip-group';
 export * from './tooltip-portal';
 export * from './tooltip-provider';

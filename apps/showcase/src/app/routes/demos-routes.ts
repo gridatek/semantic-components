@@ -5774,6 +5774,130 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/sidebar-next',
+    children: [
+      {
+        path: 'sidebar-next-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/sidebar-next/demos/sidebar-next-usage-demo').then(
+            (m) => m.SidebarNextUsageDemo,
+          ),
+      },
+      {
+        path: 'header-sidebar-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/sidebar-next/demos/header-sidebar-next-demo').then(
+            (m) => m.HeaderSidebarNextDemo,
+          ),
+      },
+      {
+        path: 'footer-sidebar-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/sidebar-next/demos/footer-sidebar-next-demo').then(
+            (m) => m.FooterSidebarNextDemo,
+          ),
+      },
+      {
+        path: 'group-sidebar-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/sidebar-next/demos/group-sidebar-next-demo').then(
+            (m) => m.GroupSidebarNextDemo,
+          ),
+      },
+      {
+        path: 'collapsible-group-sidebar-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/sidebar-next/demos/collapsible-group-sidebar-next-demo').then(
+            (m) => m.CollapsibleGroupSidebarNextDemo,
+          ),
+      },
+      {
+        path: 'group-action-sidebar-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/sidebar-next/demos/group-action-sidebar-next-demo').then(
+            (m) => m.GroupActionSidebarNextDemo,
+          ),
+      },
+      {
+        path: 'menu-sidebar-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/sidebar-next/demos/menu-sidebar-next-demo').then(
+            (m) => m.MenuSidebarNextDemo,
+          ),
+      },
+      {
+        path: 'menu-action-sidebar-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/sidebar-next/demos/menu-action-sidebar-next-demo').then(
+            (m) => m.MenuActionSidebarNextDemo,
+          ),
+      },
+      {
+        path: 'sub-menu-sidebar-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/sidebar-next/demos/sub-menu-sidebar-next-demo').then(
+            (m) => m.SubMenuSidebarNextDemo,
+          ),
+      },
+      {
+        path: 'collapsible-menu-sidebar-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/sidebar-next/demos/collapsible-menu-sidebar-next-demo').then(
+            (m) => m.CollapsibleMenuSidebarNextDemo,
+          ),
+      },
+      {
+        path: 'menu-badge-sidebar-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/sidebar-next/demos/menu-badge-sidebar-next-demo').then(
+            (m) => m.MenuBadgeSidebarNextDemo,
+          ),
+      },
+      {
+        path: 'skeleton-sidebar-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/sidebar-next/demos/skeleton-sidebar-next-demo').then(
+            (m) => m.SkeletonSidebarNextDemo,
+          ),
+      },
+      {
+        path: 'controlled-sidebar-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/sidebar-next/demos/controlled-sidebar-next-demo').then(
+            (m) => m.ControlledSidebarNextDemo,
+          ),
+      },
+      {
+        path: 'icon-sidebar-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/sidebar-next/demos/icon-sidebar-next-demo').then(
+            (m) => m.IconSidebarNextDemo,
+          ),
+      },
+      {
+        path: 'floating-sidebar-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/sidebar-next/demos/floating-sidebar-next-demo').then(
+            (m) => m.FloatingSidebarNextDemo,
+          ),
+      },
+      {
+        path: 'inset-sidebar-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/sidebar-next/demos/inset-sidebar-next-demo').then(
+            (m) => m.InsetSidebarNextDemo,
+          ),
+      },
+      {
+        path: 'rtl-sidebar-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/sidebar-next/demos/rtl-sidebar-next-demo').then(
+            (m) => m.RtlSidebarNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/sidebar',
     children: [
       {
