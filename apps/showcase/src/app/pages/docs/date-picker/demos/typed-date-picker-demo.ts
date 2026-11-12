@@ -1,3 +1,4 @@
+import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCalendar,
@@ -27,6 +28,7 @@ import {
 @Component({
   selector: 'app-typed-date-picker-demo',
   imports: [
+    CdkOverlayOrigin,
     ScInputGroup,
     ScInputGroupAddon,
     ScDatePicker,
@@ -50,8 +52,8 @@ import {
     <div scField class="w-64">
       <label scLabel>Start date</label>
       <div scDatePicker #dp="scDatePicker" [(value)]="date">
-        <div scPopoverProvider [origin]="trigger.overlayOrigin" align="end">
-          <div scInputGroup>
+        <div scPopoverProvider [origin]="anchor" align="start">
+          <div scInputGroup cdkOverlayOrigin #anchor="cdkOverlayOrigin">
             <input scDateInput placeholder="MM/DD/YYYY" />
             <div scInputGroupAddon align="inline-end">
               <button scDatePickerTrigger #trigger="scDatePickerTrigger">

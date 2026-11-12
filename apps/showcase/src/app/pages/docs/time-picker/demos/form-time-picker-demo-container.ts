@@ -18,7 +18,8 @@ import { FormTimePickerDemo } from './form-time-picker-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class FormTimePickerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  readonly code = `import { CdkOverlayOrigin } from '@angular/cdk/overlay';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, FormRoot, form, required } from '@angular/forms/signals';
 import {
   ScButton,
@@ -41,6 +42,7 @@ import { SiClockIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-form-time-picker-demo',
   imports: [
+    CdkOverlayOrigin,
     FormField,
     FormRoot,
     ScTimePicker,
@@ -63,8 +65,8 @@ import { SiClockIcon } from '@semantic-icons/lucide-icons';
       <div scField>
         <label scLabel>Table at</label>
         <div scTimePicker>
-          <div scPopoverProvider [origin]="trigger.overlayOrigin" align="end">
-            <div scInputGroup>
+          <div scPopoverProvider [origin]="anchor" align="start">
+            <div scInputGroup cdkOverlayOrigin #anchor="cdkOverlayOrigin">
               <div scTimeInput [formField]="tableForm.at"></div>
               <div scInputGroupAddon align="inline-end">
                 <button scTimePickerTrigger #trigger="scTimePickerTrigger">

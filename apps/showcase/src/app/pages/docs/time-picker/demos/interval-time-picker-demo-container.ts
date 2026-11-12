@@ -18,7 +18,8 @@ import { IntervalTimePickerDemo } from './interval-time-picker-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class IntervalTimePickerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  readonly code = `import { CdkOverlayOrigin } from '@angular/cdk/overlay';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScField,
   ScInputGroup,
@@ -38,6 +39,7 @@ import { SiClockIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-interval-time-picker-demo',
   imports: [
+    CdkOverlayOrigin,
     ScTimePicker,
     ScTimePickerTrigger,
     ScTimePickerList,
@@ -55,8 +57,8 @@ import { SiClockIcon } from '@semantic-icons/lucide-icons';
     <div scField class="w-44">
       <label scLabel>Pickup</label>
       <div scTimePicker [interval]="15">
-        <div scPopoverProvider [origin]="trigger.overlayOrigin" align="end">
-          <div scInputGroup>
+        <div scPopoverProvider [origin]="anchor" align="start">
+          <div scInputGroup cdkOverlayOrigin #anchor="cdkOverlayOrigin">
             <div
               scTimeInput
               [step]="{ minutes: 15 }"

@@ -1,3 +1,4 @@
+import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCalendar,
@@ -25,6 +26,7 @@ import {
 @Component({
   selector: 'app-typed-date-range-picker-demo',
   imports: [
+    CdkOverlayOrigin,
     ScDatePicker,
     ScDatePickerTrigger,
     ScPopoverProvider,
@@ -46,8 +48,13 @@ import {
     <div class="grid w-80 gap-2">
       <p scLabelText id="stay-label">Stay</p>
       <div scDatePicker #dp="scDatePicker" mode="range" [(value)]="range">
-        <div scPopoverProvider [origin]="trigger.overlayOrigin" align="end">
-          <div scInputGroup aria-labelledby="stay-label">
+        <div scPopoverProvider [origin]="anchor" align="start">
+          <div
+            scInputGroup
+            cdkOverlayOrigin
+            #anchor="cdkOverlayOrigin"
+            aria-labelledby="stay-label"
+          >
             <input
               scDateInput
               part="start"

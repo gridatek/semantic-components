@@ -1,3 +1,4 @@
+import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScField,
@@ -18,6 +19,7 @@ import { SiClockIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-locale-time-picker-demo',
   imports: [
+    CdkOverlayOrigin,
     ScTimePicker,
     ScTimePickerTrigger,
     ScTimePickerList,
@@ -35,8 +37,8 @@ import { SiClockIcon } from '@semantic-icons/lucide-icons';
     <div scField class="w-44">
       <label scLabel>Heure de départ</label>
       <div scTimePicker>
-        <div scPopoverProvider [origin]="trigger.overlayOrigin" align="end">
-          <div scInputGroup>
+        <div scPopoverProvider [origin]="anchor" align="start">
+          <div scInputGroup cdkOverlayOrigin #anchor="cdkOverlayOrigin">
             <div scTimeInput locale="fr-FR" [(value)]="time"></div>
             <div scInputGroupAddon align="inline-end">
               <button scTimePickerTrigger #trigger="scTimePickerTrigger">

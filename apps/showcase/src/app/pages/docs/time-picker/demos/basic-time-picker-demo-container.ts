@@ -18,7 +18,8 @@ import { BasicTimePickerDemo } from './basic-time-picker-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicTimePickerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  readonly code = `import { CdkOverlayOrigin } from '@angular/cdk/overlay';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScField,
   ScInputGroup,
@@ -38,6 +39,7 @@ import { SiClockIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-basic-time-picker-demo',
   imports: [
+    CdkOverlayOrigin,
     ScTimePicker,
     ScTimePickerTrigger,
     ScTimePickerList,
@@ -55,8 +57,8 @@ import { SiClockIcon } from '@semantic-icons/lucide-icons';
     <div scField class="w-44">
       <label scLabel>Meeting</label>
       <div scTimePicker>
-        <div scPopoverProvider [origin]="trigger.overlayOrigin" align="end">
-          <div scInputGroup>
+        <div scPopoverProvider [origin]="anchor" align="start">
+          <div scInputGroup cdkOverlayOrigin #anchor="cdkOverlayOrigin">
             <div scTimeInput [(value)]="time"></div>
             <div scInputGroupAddon align="inline-end">
               <button scTimePickerTrigger #trigger="scTimePickerTrigger">

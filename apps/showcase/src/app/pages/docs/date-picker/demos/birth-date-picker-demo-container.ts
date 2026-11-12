@@ -18,7 +18,8 @@ import { BirthDatePickerDemo } from './birth-date-picker-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BirthDatePickerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  readonly code = `import { CdkOverlayOrigin } from '@angular/cdk/overlay';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCalendar,
   ScCalendarHeader,
@@ -47,6 +48,7 @@ import {
 @Component({
   selector: 'app-birth-date-picker-demo',
   imports: [
+    CdkOverlayOrigin,
     ScInputGroup,
     ScInputGroupAddon,
     ScDatePicker,
@@ -70,8 +72,8 @@ import {
     <div scField class="w-64">
       <label scLabel>Date of birth</label>
       <div scDatePicker #dp="scDatePicker" [maxDate]="adult" [(value)]="date">
-        <div scPopoverProvider [origin]="trigger.overlayOrigin" align="end">
-          <div scInputGroup>
+        <div scPopoverProvider [origin]="anchor" align="start">
+          <div scInputGroup cdkOverlayOrigin #anchor="cdkOverlayOrigin">
             <input scDateInput placeholder="MM/DD/YYYY" />
             <div scInputGroupAddon align="inline-end">
               <button scDatePickerTrigger #trigger="scDatePickerTrigger">

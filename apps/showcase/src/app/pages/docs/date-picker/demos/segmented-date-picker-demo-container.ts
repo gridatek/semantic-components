@@ -18,7 +18,8 @@ import { SegmentedDatePickerDemo } from './segmented-date-picker-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SegmentedDatePickerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  readonly code = `import { CdkOverlayOrigin } from '@angular/cdk/overlay';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCalendar,
   ScCalendarHeader,
@@ -47,6 +48,7 @@ import {
 @Component({
   selector: 'app-segmented-date-picker-demo',
   imports: [
+    CdkOverlayOrigin,
     ScInputGroup,
     ScInputGroupAddon,
     ScDatePicker,
@@ -70,8 +72,8 @@ import {
     <div scField class="w-64">
       <label scLabel>Start date</label>
       <div scDatePicker #dp="scDatePicker" [(value)]="date">
-        <div scPopoverProvider [origin]="trigger.overlayOrigin" align="end">
-          <div scInputGroup>
+        <div scPopoverProvider [origin]="anchor" align="start">
+          <div scInputGroup cdkOverlayOrigin #anchor="cdkOverlayOrigin">
             <div scSegmentedDateInput></div>
             <div scInputGroupAddon align="inline-end">
               <button scDatePickerTrigger #trigger="scDatePickerTrigger">
