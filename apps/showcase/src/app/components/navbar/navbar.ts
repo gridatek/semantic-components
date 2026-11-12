@@ -132,10 +132,6 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
               Documentation
             </a>
           </li>
-
-          <li scNavigationMenuItem>
-            <a scNavigationMenuLink routerLink="/customize">Customize</a>
-          </li>
         </ul>
       </nav>
 
@@ -220,15 +216,6 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
             [active]="mobileDocsRla.isActive"
           >
             Documentation
-          </a>
-          <a
-            scNavbarMenuLink
-            routerLink="/customize"
-            routerLinkActive="active"
-            #mobileCustomizeRla="routerLinkActive"
-            [active]="mobileCustomizeRla.isActive"
-          >
-            Customize
           </a>
         </nav>
       </div>

@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { ScHeading, ScLink, ScSeparator } from '@semantic-components/ui';
+import { ScHeading, ScSeparator } from '@semantic-components/ui';
 import {
   ScCodeBlock,
   ScCodeBlockActions,
@@ -23,12 +22,10 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
     ScCodeBlockActions,
     ScCodeBlockCopy,
     ScCodeBlockContent,
-    RouterLink,
     TocHeading,
     SiCheckIcon,
     SiCopyIcon,
     ScSeparator,
-    ScLink,
     ScHeading,
     PackageManagerInstall,
     ButtonUsageDemoContainer,
@@ -166,9 +163,7 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
           on
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
             >&lt;html&gt;</code
-          >. Try them live on the
-          <a scLink routerLink="/customize">Customize page</a>
-          .
+          >.
         </p>
         <p class="text-muted-foreground">
           Use the shipped file as-is, or drop it and author your own — any CSS
