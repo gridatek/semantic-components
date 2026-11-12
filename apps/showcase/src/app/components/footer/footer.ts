@@ -1,44 +1,21 @@
 import { Component, ViewEncapsulation, computed, input } from '@angular/core';
-import { ScLink } from '@semantic-components/ui';
-import { SiGithubIcon, SiHeartIcon } from '@semantic-icons/lucide-icons';
 import { cn } from 'cn';
-import { Logo } from '../logo/logo';
 
+/** The site's footer, as shadcn's: one line — who it is for, where the code is. */
 @Component({
   selector: 'app-footer',
-  imports: [Logo, ScLink, SiGithubIcon, SiHeartIcon],
   template: `
-    <footer class="border-t px-4 py-8 md:px-6 lg:px-8">
-      <div
-        class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 md:flex-row"
-      >
-        <div class="flex items-center gap-2">
-          <svg app-logo class="size-5"></svg>
-          <span class="font-semibold">Semantic Components</span>
-        </div>
-        <div class="flex items-center gap-4">
-          <p class="text-muted-foreground text-sm">
-            Built with
-            <svg
-              siHeartIcon
-              class="inline size-4 fill-red-500 text-red-500"
-              aria-label="heart"
-            ></svg>
-            for the Angular community. Open source.
-          </p>
-          <a
-            scLink
-            variant="ghost"
-            size="icon"
-            href="https://github.com/gridatek/semantic-components"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <svg siGithubIcon></svg>
-            <span class="sr-only">GitHub</span>
-          </a>
-        </div>
-      </div>
+    <footer class="px-4 py-6 md:px-6 lg:px-8">
+      <p class="text-muted-foreground text-center text-sm text-balance">
+        Built for the Angular community. The source code is available on
+        <a
+          href="https://github.com/gridatek/semantic-components"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-foreground font-medium underline underline-offset-4"
+          >GitHub</a
+        >.
+      </p>
     </footer>
   `,
   host: {
