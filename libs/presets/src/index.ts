@@ -609,10 +609,12 @@ export interface ScPreset {
   carousel: string;
   checkbox: ScCheckboxStyles;
   codeBlock: ScCodeBlockStyles;
-  /** scFrame: a box's frame — the style's card radius, ring and shadow. */
   combobox: ScComboboxStyles;
   command: ScCommandStyles;
+  /** scFrame: a box's frame — the style's card radius, ring and shadow. */
   frame: string;
+  /** scFrame size="sm": a small box's frame (a row, an icon's box) — shadcn's rounded-md, square in lyra and sera; the ring, no shadow. */
+  frameSm: string;
   controlGroup: (props: {
     orientation?: ScControlGroupOrientation | null;
   }) => string;

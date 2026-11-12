@@ -23,6 +23,7 @@ import { storedPreset } from '../../../presets';
             <li class="flex flex-col flex-wrap items-center gap-2">
               <div
                 scFrame
+                size="sm"
                 class="aspect-square w-full bg-(--color)"
                 aria-hidden="true"
                 [style.--color]="'var(' + variable + ')'"

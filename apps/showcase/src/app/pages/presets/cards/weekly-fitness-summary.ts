@@ -32,7 +32,7 @@ import {
       <div scCardContent class="flex flex-col gap-4">
         <ul class="grid grid-cols-7 gap-1.5" aria-label="Workout load by day">
           @for (day of week; track $index) {
-            <li scFrame class="p-1.5 text-center">
+            <li scFrame size="sm" class="p-1.5 text-center">
               <div class="text-muted-foreground text-sm" aria-hidden="true">
                 {{ day.day }}
               </div>

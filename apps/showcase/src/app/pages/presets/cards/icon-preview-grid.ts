@@ -49,22 +49,22 @@ import {
         <div
           class="grid grid-cols-8 place-items-center gap-4 *:flex *:size-8 *:items-center *:justify-center *:[&_svg]:size-4"
         >
-          <span scFrame><svg siCopyIcon></svg></span>
-          <span scFrame><svg siCircleAlertIcon></svg></span>
-          <span scFrame><svg siTrashIcon></svg></span>
-          <span scFrame><svg siShareIcon></svg></span>
-          <span scFrame><svg siShoppingBagIcon></svg></span>
-          <span scFrame><svg siEllipsisIcon></svg></span>
-          <span scFrame><svg siLoaderCircleIcon></svg></span>
-          <span scFrame><svg siPlusIcon></svg></span>
-          <span scFrame><svg siMinusIcon></svg></span>
-          <span scFrame><svg siArrowLeftIcon></svg></span>
-          <span scFrame><svg siArrowRightIcon></svg></span>
-          <span scFrame><svg siCheckIcon></svg></span>
-          <span scFrame><svg siChevronDownIcon></svg></span>
-          <span scFrame><svg siChevronRightIcon></svg></span>
-          <span scFrame><svg siSearchIcon></svg></span>
-          <span scFrame><svg siSettingsIcon></svg></span>
+          <span scFrame size="sm"><svg siCopyIcon></svg></span>
+          <span scFrame size="sm"><svg siCircleAlertIcon></svg></span>
+          <span scFrame size="sm"><svg siTrashIcon></svg></span>
+          <span scFrame size="sm"><svg siShareIcon></svg></span>
+          <span scFrame size="sm"><svg siShoppingBagIcon></svg></span>
+          <span scFrame size="sm"><svg siEllipsisIcon></svg></span>
+          <span scFrame size="sm"><svg siLoaderCircleIcon></svg></span>
+          <span scFrame size="sm"><svg siPlusIcon></svg></span>
+          <span scFrame size="sm"><svg siMinusIcon></svg></span>
+          <span scFrame size="sm"><svg siArrowLeftIcon></svg></span>
+          <span scFrame size="sm"><svg siArrowRightIcon></svg></span>
+          <span scFrame size="sm"><svg siCheckIcon></svg></span>
+          <span scFrame size="sm"><svg siChevronDownIcon></svg></span>
+          <span scFrame size="sm"><svg siChevronRightIcon></svg></span>
+          <span scFrame size="sm"><svg siSearchIcon></svg></span>
+          <span scFrame size="sm"><svg siSettingsIcon></svg></span>
         </div>
       </div>
     </div>

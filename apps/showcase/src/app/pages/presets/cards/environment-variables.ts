@@ -33,6 +33,7 @@ import {
         @for (env of variables; track env.key) {
           <div
             scFrame
+            size="sm"
             class="flex items-center gap-2 px-2.5 py-2 font-mono text-xs"
           >
             <span class="font-medium">{{ env.key }}</span>

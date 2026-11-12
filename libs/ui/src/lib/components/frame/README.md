@@ -12,14 +12,16 @@ A frame round a box, in the app's preset: the style's card radius, ring and shad
 
 - Only the look. Clipping its content is the box's: the aspect ratio clips (`overflow-hidden`), the table's container scrolls. On a plain box with an image, add `overflow-hidden` yourself.
 - Use it instead of a hand-written frame (`rounded-md border`), which suits few styles.
+- `size="sm"` for a small box (a row, an icon's box, a swatch): the card's corners would make it a pill in the rounder styles (maia, luma). It takes the preset's `frameSm`: shadcn's `rounded-md` for such boxes, square in lyra and sera; the ring, no shadow.
 
 ## API reference
 
 ### ScFrame — `[scFrame]`
 
-| Input   | Type     | Default | Description                     |
-| ------- | -------- | ------- | ------------------------------- |
-| `class` | `string` | `''`    | Classes merged over the preset. |
+| Input   | Type                | Default     | Description                            |
+| ------- | ------------------- | ----------- | -------------------------------------- |
+| `size`  | `'default' \| 'sm'` | `'default'` | `sm`: a small box's frame (`frameSm`). |
+| `class` | `string`            | `''`        | Classes merged over the preset.        |
 
 ## Styles
 

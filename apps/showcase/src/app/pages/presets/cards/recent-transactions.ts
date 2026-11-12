@@ -84,6 +84,7 @@ import {
                   <td scTableCell class="w-10">
                     <div
                       scFrame
+                      size="sm"
                       class="bg-muted flex size-10 items-center justify-center"
                     >
                       @switch (t.icon) {

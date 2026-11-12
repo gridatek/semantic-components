@@ -76,6 +76,7 @@ import { SiSearchIcon } from '@semantic-icons/lucide-icons';
               <div scItemMedia>
                 <div
                   scFrame
+                  size="sm"
                   class="flex size-12 items-center justify-center text-sm font-semibold"
                 >
                   {{ holding.ticker }}

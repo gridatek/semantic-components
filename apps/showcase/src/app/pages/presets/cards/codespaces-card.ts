@@ -268,7 +268,7 @@ import {
                     </button>
                   }
                 </div>
-                <div scFrame class="bg-muted/30 p-2">
+                <div scFrame size="sm" class="bg-muted/30 p-2">
                   @for (remote of remotes; track remote.value) {
                     <div scTabsPanel [value]="remote.value">
                       <ng-template scTabsContent>

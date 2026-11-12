@@ -22,7 +22,7 @@ import { dialog } from './dialog';
 import { drawer } from './drawer';
 import { empty } from './empty';
 import { field } from './field';
-import { frame } from './frame';
+import { frame, frameSm } from './frame';
 import { input } from './input';
 import {
   inputGroup,
@@ -84,6 +84,7 @@ export const luma: ScPreset = {
   combobox,
   command,
   frame,
+  frameSm,
   controlGroup,
   controlGroupText,
   dialog,
