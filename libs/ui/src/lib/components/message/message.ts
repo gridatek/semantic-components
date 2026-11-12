@@ -10,6 +10,8 @@ import { injectPreset } from '../../config/preset';
 @Directive({
   selector: 'div[scMessage]',
   host: {
+    // align is our input: the HTML attribute would align the text in a div.
+    '[attr.align]': 'null',
     'data-slot': 'message',
     '[attr.data-align]': 'align()',
     '[class]': 'class()',

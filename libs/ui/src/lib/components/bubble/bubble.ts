@@ -45,6 +45,8 @@ const bubbleVariants = cva(
 @Directive({
   selector: 'div[scBubble]',
   host: {
+    // align is our input: the HTML attribute would align the text in a div.
+    '[attr.align]': 'null',
     'data-slot': 'bubble',
     '[attr.data-align]': 'align()',
     '[attr.data-variant]': 'variant()',

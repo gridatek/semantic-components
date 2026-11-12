@@ -11,6 +11,8 @@ import { injectPreset } from '../../config/preset';
 @Directive({
   selector: 'div[scInputGroupAddon]',
   host: {
+    // align is our input: the HTML attribute would align the text in a div.
+    '[attr.align]': 'null',
     role: 'group',
     '[attr.data-align]': 'align()',
     '[class]': 'class()',

@@ -67,6 +67,8 @@ export type ScTooltipSide = ScOverlayLogicalSide;
     }
   `,
   host: {
+    // align is our input: the HTML attribute would align the text in a div.
+    '[attr.align]': 'null',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
