@@ -18,13 +18,13 @@ import { ScCalendar } from './calendar';
   template: `
     <table
       role="grid"
-      class="border-collapse"
+      class="w-full border-collapse"
       [attr.aria-label]="year()"
       (keydown)="onKeydown($event)"
     >
       <tbody>
         @for (row of rows(); track $index) {
-          <tr class="flex">
+          <tr class="flex w-full">
             @for (month of row; track month.toString()) {
               <td
                 data-slot="calendar-cell-month"
@@ -44,7 +44,7 @@ import { ScCalendar } from './calendar';
       </tbody>
     </table>
   `,
-  host: { 'data-slot': 'calendar-months' },
+  host: { 'data-slot': 'calendar-months', class: 'w-full' },
   encapsulation: ViewEncapsulation.None,
 })
 export class ScCalendarMonths {
@@ -135,7 +135,7 @@ export class ScCalendarMonths {
   protected cellClass(month: Temporal.PlainYearMonth): string {
     const picked = this.isFocused(month);
     return cn(
-      'flex h-[calc(var(--cell-size)*1.5)] w-[calc(var(--cell-size)*7/3)] cursor-pointer items-center justify-center rounded-(--cell-radius) text-sm outline-none select-none',
+      'flex h-[calc(var(--cell-size)*1.5)] min-w-[calc(var(--cell-size)*7/3)] flex-1 cursor-pointer items-center justify-center rounded-(--cell-radius) text-sm outline-none select-none',
       'hover:bg-muted hover:text-foreground',
       'focus-visible:ring-ring/50 focus-visible:ring-3',
       this.isCurrent(month) && !picked && 'bg-muted text-foreground',
