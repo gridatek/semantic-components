@@ -62,7 +62,7 @@ import { PreviewCards } from './cards/preview-cards';
       <section
         aria-label="Options"
         scFrame
-        class="bg-card text-card-foreground shrink-0 p-3 md:sticky md:top-4 md:w-52"
+        class="bg-card text-card-foreground shrink-0 p-3 md:sticky md:top-18 md:max-h-[calc(100svh-5.5rem)] md:w-52 md:overflow-y-auto"
       >
         <ul
           class="flex gap-2.5 overflow-x-auto py-px md:flex-col md:gap-3 md:overflow-visible"
