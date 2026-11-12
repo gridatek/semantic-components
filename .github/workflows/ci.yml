@@ -15,7 +15,7 @@ permissions:
 
 jobs:
   # The apps as built by default, rendered in the browser (client-side: CSR):
-  # lint, unit tests and build — only what the change affects. Their e2e tests
+  # lint, translations and build — only what the change affects. Their e2e tests
   # are the `csr-e2e` job.
   csr:
     runs-on: ubuntu-latest
@@ -41,9 +41,6 @@ jobs:
 
       - name: Translations
         run: npx nx affected -t check-i18n
-
-      - name: Unit tests
-        run: npx nx affected -t test
 
       - name: Build
         run: npx nx affected -t build

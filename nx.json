@@ -12,10 +12,6 @@
       "dependsOn": ["^build"],
       "inputs": ["production", "^production"]
     },
-    "@angular/build:unit-test": {
-      "cache": true,
-      "inputs": ["default", "^production"]
-    },
     "@nx/angular:package": {
       "cache": true,
       "dependsOn": ["^build"],
@@ -51,7 +47,7 @@
       "e2eTestRunner": "playwright",
       "linter": "eslint",
       "style": "css",
-      "unitTestRunner": "vitest-angular"
+      "unitTestRunner": "none"
     },
     "@nx/angular:library": {
       "linter": "eslint",

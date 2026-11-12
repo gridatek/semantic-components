@@ -24,7 +24,7 @@ npx playwright test -c apps/showcase-e2e/playwright.config.ts --project=presets-
 
 ## Kinds of tests: folders and projects
 
-**Playwright is the only test tool** (the user, 2026-11-12): the Vitest unit tests are to be ported and Vitest removed (see _Still to do_). `apps/showcase-e2e` stays one Nx project — `nx affected` decides when it runs — and its `src` has a folder per kind of test, each a **Playwright project** in `playwright.config.ts` (not a separate Nx project):
+**Playwright is the only test tool** (the user, 2026-11-12): Vitest and its unit tests are gone (see _Still to do_). `apps/showcase-e2e` stays one Nx project — `nx affected` decides when it runs — and its `src` has a folder per kind of test, each a **Playwright project** in `playwright.config.ts` (not a separate Nx project):
 
 | Folder        | Project(s)                      | What it checks                                                                                                                |
 | ------------- | ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
@@ -65,7 +65,7 @@ npx playwright test src/presets/foo.spec.ts --project=presets-nova --project=pre
 
 | Workflow             | Jobs                                                                                                                                                                                                                       |
 | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ci.yml` — `csr`     | lint, translations, unit tests, build (affected)                                                                                                                                                                           |
+| `ci.yml` — `csr`     | lint, translations, build (affected)                                                                                                                                                                                       |
 | `ci.yml` — `csr-e2e` | 8 jobs: `demos-1`, `demos-2` (`--shard`), `pages`, `presets-nova-vega`, `presets-maia-lyra`, `presets-mira-luma`, `presets-sera-rhea`, `mobile` (+ the blocks' suite) — each only when the change affects the e2e projects |
 | `ci.yml` — `ssr`     | the same 8 groups against the server-rendered build (not required)                                                                                                                                                         |
 | `nightly-e2e.yml`    | Firefox and WebKit (CI runs Chromium), two shards each, client-side and server-rendered                                                                                                                                    |
@@ -89,7 +89,7 @@ This layout is a step, not the end: the suite will grow (visual tests, more comp
 
 - **`mobile/`**: move the 87 `@mobile` tests out of the demos and page specs into `src/mobile` (55 of them sit inside `describe` blocks, with their `beforeEach`); then the `mobile` project is a folder like the others, not a tag.
 - **Visual tests**: `@visual`, in `presets/` — see above.
-- **Vitest out**: the 64 tests in `apps/showcase/src/app/*.spec.ts` (forms, the toaster, QR Code, the intersection observer, query-param state) move to Playwright, against their demos; then Vitest, jsdom, the `test` targets and CI's _Unit tests_ step go.
+- **The unit tests to port**: Vitest went on 2026-11-12 (`vitest`, `jsdom`, the showcase's `test` target and `tsconfig.spec.json`, CI's _Unit tests_ step) with its 64 tests, not yet in Playwright: `checkbox-group-form`, `field-errors`, `field-label`, `form-control-invalid`, `radio-form`, `text-control-form-state` (forms: a field's errors, its label, invalid states), `toaster`, `qr-code`, `intersection-observer`, `query-param-state` and `query-param-state-demo` — `apps/showcase/src/app/<name>.spec.ts` in git history (before the commit that removes them). Port what still matters as behaviour tests in `demos/`.
 - **Measure**: the first CI runs give each group's time — the base for the next split.
 
 ## Server-side rendering (SSR)
