@@ -173,7 +173,7 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
           <li scNavigationMenuItem>
             <a
               scNavigationMenuLink
-              routerLink="/docs/getting-started/presets"
+              routerLink="/presets"
               routerLinkActive
               #presetsRla="routerLinkActive"
               [active]="presetsRla.isActive"
@@ -296,7 +296,7 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
           </a>
           <a
             scNavbarMenuLink
-            routerLink="/docs/getting-started/presets"
+            routerLink="/presets"
             routerLinkActive="active"
             #mobilePresetsRla="routerLinkActive"
             [active]="mobilePresetsRla.isActive"

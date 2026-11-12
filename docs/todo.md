@@ -33,6 +33,8 @@ Open work found along the way, kept for later — tick an item when it's done. N
 
 ## Larger items
 
+- [ ] **Presets page: the other options** (the user, 2026-11-12) — `/presets` follows shadcn's [Create](https://ui.shadcn.com/create); only Style changes for now (saved, then a reload: a preset is set at start). Base Color, Theme, Chart Color, Heading, Font, Icon Library, Radius and Menu are cards, disabled. Also from Create: Shuffle, Open Preset, Get Code. Next pages of the header: Charts (`/charts`, now linked to the hidden Chart docs page) and Typeset.
+
 - [ ] **Typeset** (the user, 2026-11-12) — shadcn's [Typeset](https://ui.shadcn.com/docs/typeset): one CSS file that styles HTML and rendered markdown inside a `typeset` container, tuned by three variables (`--typeset-size`, `--typeset-leading`, `--typeset-flow`) and preset classes (`typeset-docs`, `typeset-chat`); `:where()` selectors so utilities win, `not-typeset` to opt out, no selectors that change as content streams in; and its builder page ([/typeset](https://ui.shadcn.com/typeset): measure, fonts, size, leading, flow, shuffle, get code). The showcase's `/typeset` page (in the header) says Coming soon until then.
 
 - [ ] **Navigation Menu: vertical and nested** (the user, 2026-11-12: later) — Base UI's `orientation="vertical"` (↑ ↓ between items, panels to the side) and a menu inside a panel (its own panels opening to the side, Base UI's "Nested submenus" examples). Not in shadcn's examples.
