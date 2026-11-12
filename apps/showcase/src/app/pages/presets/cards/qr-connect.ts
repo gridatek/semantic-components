@@ -31,7 +31,7 @@ import { ScQrCode } from '@semantic-components/ui/qr-code';
         <div scFrame class="bg-white p-4">
           <svg
             scQrCode
-            value="https://ledger.app/connect/jd-4829"
+            value="https://github.com/gridatek/semantic-components"
             [quietZone]="0"
             class="size-40 text-black"
             aria-label="Connect device QR code"
