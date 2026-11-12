@@ -28,11 +28,12 @@ const KEY = 'sc-preset';
 
 /**
  * The preset chosen in the sheet, read when the app starts (a preset is set
- * once): its cookie, nova without one (or on the server).
+ * once): its cookie, lyra without one (or on the server) — the showcase
+ * opens in lyra, not in shadcn's default look (nova).
  */
 export function storedPreset(): ScPresetName {
   const name = readStorage(KEY);
-  return name && name in PRESETS ? (name as ScPresetName) : 'nova';
+  return name && name in PRESETS ? (name as ScPresetName) : 'lyra';
 }
 
 /** Saves the preset for the next start. */

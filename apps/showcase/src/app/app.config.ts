@@ -22,7 +22,7 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideSemanticComponents(
       {
-        // The one picked in the preset sheet (nova by default).
+        // The one picked in the preset sheet (lyra by default).
         preset: PRESETS[storedPreset()],
         // Alt+T moves focus to the toasts (the toaster's template names it); Escape goes back.
         toaster: { hotkey: ['altKey', 'KeyT'] },

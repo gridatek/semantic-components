@@ -9,7 +9,16 @@ export * from '@playwright/test';
  * that isn't listening yet. Without SSR, Playwright's own.
  */
 export const test = base.extend({
-  page: async ({ page }, use) => {
+  page: async ({ page, baseURL }, use) => {
+    // The specs' preset: nova (the showcase opens in lyra). A spec that sets
+    // its own cookie (the presets' specs) replaces it.
+    await page.context().addCookies([
+      {
+        name: 'sc-preset',
+        value: 'nova',
+        url: baseURL ?? 'http://localhost:4200',
+      },
+    ]);
     if (process.env['SSR']) {
       // The app marks <html> once hydrated and stable (main-ssr.ts).
       const hydrated = () =>
