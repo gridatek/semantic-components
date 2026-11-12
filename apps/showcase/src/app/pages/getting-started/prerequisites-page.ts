@@ -116,7 +116,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
           animations.
         </p>
         <app-package-manager-install
-          packages="shadcn class-variance-authority clsx tailwind-merge tw-animate-css"
+          packages="shadcn class-variance-authority cn tw-animate-css"
         />
       </section>
 

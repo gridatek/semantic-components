@@ -7,7 +7,7 @@ import { nova } from '@semantic-components/presets/nova';
 import { rhea } from '@semantic-components/presets/rhea';
 import { sera } from '@semantic-components/presets/sera';
 import { vega } from '@semantic-components/presets/vega';
-import { twMerge } from 'tailwind-merge';
+import { twMerge } from 'cn';
 import { expectNoA11yViolations } from '../../axe';
 import { type Locator, expect, test } from '../../test';
 

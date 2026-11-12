@@ -6,7 +6,7 @@ The Semantic Components library: components, layouts, utilities, and `cn()`.
 
 - **Components**: Button, Link, Dialog, Sidebar, and many more
 - **Layouts**: Auth layout, Sidebar layout, Stacked layout
-- **Utils**: `cn()` (Tailwind class merging via `clsx` + `tailwind-merge`)
+- **Utils**: `cn()` (Tailwind class merging: shadcn's `cn` engine, `clsx` + `tailwind-merge` in one)
 - **Presets**: the components' classes come from the app's preset
   (`provideSemanticComponents({ preset })`, from `@semantic-components/presets`;
   nova by default)

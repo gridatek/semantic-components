@@ -23,5 +23,5 @@ ncu -u "/@tiptap*/"
 ## tailwindcss
 
 ```bash
-ncu -u tailwindcss @tailwindcss/postcss postcss tailwind-merge
+ncu -u tailwindcss @tailwindcss/postcss postcss cn
 ```
