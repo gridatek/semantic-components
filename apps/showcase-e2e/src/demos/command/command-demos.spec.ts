@@ -155,6 +155,21 @@ test('Groups: a run item closes the dialog', async ({ page }) => {
   await expect(page.getByText('Ran Profile.')).toBeVisible();
 });
 
+test('Dialog: Mod+J opens and closes it; the key written for the platform', async ({
+  page,
+}) => {
+  await page.goto(demo('dialog'));
+  const isMac = await page.evaluate(() => /Mac/.test(navigator.userAgent));
+  await expect(page.locator('kbd').first()).toHaveText(
+    isMac ? '⌘ J' : 'Ctrl+J',
+  );
+  await page.keyboard.press('ControlOrMeta+j');
+  await expect(page.getByRole('dialog')).toBeVisible();
+  await expect(page.getByRole('combobox')).toBeFocused();
+  await page.keyboard.press('ControlOrMeta+j');
+  await expect(page.getByRole('dialog')).toBeHidden();
+});
+
 test('Scrollable: the highlighted item kept in view', async ({ page }) => {
   await page.goto(demo('scrollable'));
   await page.getByRole('button', { name: 'Open Menu' }).click();

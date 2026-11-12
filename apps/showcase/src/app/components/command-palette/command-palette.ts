@@ -1,3 +1,4 @@
+import { injectHotkey } from '@tanstack/angular-hotkeys';
 import {
   Component,
   ViewEncapsulation,
@@ -23,7 +24,6 @@ import {
   ScDialogPortal,
   ScDialogProvider,
   ScDialogTitle,
-  ScHotkey,
 } from '@semantic-components/ui';
 import {
   SiBoxIcon,
@@ -56,7 +56,6 @@ import { ComponentsService } from '../../services/components-service';
     ScDialog,
     ScDialogTitle,
     ScDialogDescription,
-    ScHotkey,
     SiBoxIcon,
     SiFileTextIcon,
     SiSearchIcon,
@@ -64,11 +63,6 @@ import { ComponentsService } from '../../services/components-service';
   ],
   template: `
     <div scDialogProvider [(open)]="commandPaletteService.open">
-      <span
-        scHotkey="mod+k"
-        (scHotkeyPressed)="toggleOpen()"
-        class="hidden"
-      ></span>
       <ng-template scDialogPortal>
         <div scDialog scCommandDialog>
           <h2 scDialogTitle class="sr-only">Search the docs</h2>
@@ -156,6 +150,11 @@ export class CommandPalette {
     { name: 'Prerequisites', path: '/docs/getting-started/prerequisites' },
     { name: 'Components', path: '/docs/components' },
   ];
+
+  constructor() {
+    // Mod+K: ⌘K on a Mac, Ctrl+K elsewhere — in a field too.
+    injectHotkey('Mod+K', () => this.toggleOpen());
+  }
 
   toggleOpen(): void {
     this.commandPaletteService.toggle();

@@ -628,7 +628,7 @@ Rewritten 2026-11-11 (the user: "check what other libs do"): built beside the ol
 - **Taken**: shadcn's parts and look (the `command` preset key, 13 strings); cmdk's built-in filter (text, `value`, `keywords`; `filter`, `shouldFilter`, `forceMount`), its hiding of empty groups and of separators while searching, its ARIA and vim bindings, Alt+arrows between groups; Bits UI's link items; Base UI's `loopFocus`, `highlightItemOnHover`, the first match always highlighted, a status live region (cmdk announces nothing).
 - **Ours**: the CDK's `ActiveDescendantKeyManager`, not Aria (the user's choice, A): no `ng-template` wrapper, no coalesced keys (checked on Aria 22.2.6), hidden items skipped. Home/End stay the search's (cmdk takes them for the list). The search applied as typed, so an Enter right after typing never runs a hidden item (a bug found while building).
 - **Left out**: re-sorting by score (fights `@for`), grid, virtualization, a built-in ⌘K listener, nested pages (an example), shadcn's check icon, cmdk's Loading.
-- **Examples**: shadcn's Demo (the Usage), Basic, Shortcuts, Groups, Scrollable, Dialog (⌘J with `scHotkey`); ours: Keywords, Async search, Pages, Links; RTL.
+- **Examples**: shadcn's Demo (the Usage), Basic, Shortcuts, Groups, Scrollable, Dialog (⌘J with TanStack Hotkeys, `injectHotkey`); ours: Keywords, Async search, Pages, Links; RTL.
 
 ## Navigation Menu: rewritten again
 

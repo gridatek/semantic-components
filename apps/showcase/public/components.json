@@ -455,15 +455,6 @@
     "hidden": true
   },
   {
-    "name": "Hotkey",
-    "path": "hotkey",
-    "description": "A directive that runs an action on a keyboard shortcut and writes the shortcut for the platform.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Utilities",
-    "hidden": true
-  },
-  {
     "name": "Image Annotator",
     "path": "image-annotator",
     "description": "Annotate an image: shapes over it — selected, moved, resized, restyled — with keyboard, kept as data, exported as an image.",

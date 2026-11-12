@@ -3866,18 +3866,6 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/hotkey',
-    children: [
-      {
-        path: 'basic-hotkey-demo',
-        loadComponent: () =>
-          import('../pages/docs/hotkey/demos/basic-hotkey-demo').then(
-            (m) => m.BasicHotkeyDemo,
-          ),
-      },
-    ],
-  },
-  {
     path: 'demos/number-field',
     children: [
       {

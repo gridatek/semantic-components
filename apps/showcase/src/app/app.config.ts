@@ -1,3 +1,4 @@
+import { provideHotkeys } from '@tanstack/angular-hotkeys';
 import {
   FullscreenOverlayContainer,
   OverlayContainer,
@@ -29,6 +30,8 @@ export const appConfig: ApplicationConfig = {
       // Code blocks highlighted with Shiki, each language loaded when first shown.
       withCodeHighlighter(),
     ),
+    // Keyboard shortcuts (the docs search, Mod+K): TanStack Hotkeys.
+    provideHotkeys(),
     // Overlays (dialogs, menus, tooltips) stay visible in fullscreen, e.g. in
     // the PDF viewer's presentation mode.
     { provide: OverlayContainer, useClass: FullscreenOverlayContainer },

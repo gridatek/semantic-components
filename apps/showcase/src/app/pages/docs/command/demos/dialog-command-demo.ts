@@ -1,3 +1,7 @@
+import {
+  injectFormatForDisplay,
+  injectHotkey,
+} from '@tanstack/angular-hotkeys';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
@@ -19,7 +23,6 @@ import {
   ScDialogProvider,
   ScDialogTitle,
   ScDialogTrigger,
-  ScHotkey,
   ScKbd,
 } from '@semantic-components/ui';
 import {
@@ -32,7 +35,7 @@ import {
   SiUserIcon,
 } from '@semantic-icons/lucide-icons';
 
-/** Opened from anywhere by a key (Ctrl+J, ⌘J on a Mac): your listener (scHotkey), not the command's. */
+/** Opened from anywhere by a key (⌘J on a Mac, Ctrl+J elsewhere): your listener — here TanStack Hotkeys — not the command's. */
 @Component({
   selector: 'app-dialog-command-demo',
   imports: [
@@ -55,7 +58,6 @@ import {
     ScDialogProvider,
     ScDialogTitle,
     ScDialogTrigger,
-    ScHotkey,
     ScKbd,
     SiCalculatorIcon,
     SiCalendarIcon,
@@ -70,13 +72,7 @@ import {
       <div scDialogProvider [(open)]="open">
         <p class="text-muted-foreground text-sm">
           Press
-          <kbd
-            scKbd
-            scHotkey="mod+j"
-            #hk="scHotkey"
-            (scHotkeyPressed)="open.set(!open())"
-            >{{ hk.displayKey() }}</kbd
-          >
+          <kbd scKbd>{{ format('Mod+J') }}</kbd>
           or
           <button scButton scDialogTrigger variant="link" class="h-auto p-0">
             open it
@@ -151,6 +147,12 @@ import {
 })
 export class DialogCommandDemo {
   protected readonly open = signal(false);
+  /** The shortcut as this platform writes it. */
+  protected readonly format = injectFormatForDisplay();
+
+  constructor() {
+    injectHotkey('Mod+J', () => this.open.update((open) => !open));
+  }
 
   protected ran(name: string): void {
     this.open.set(false);

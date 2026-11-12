@@ -1,3 +1,4 @@
+import { injectFormatForDisplay } from '@tanstack/angular-hotkeys';
 import {
   Component,
   ViewEncapsulation,
@@ -145,7 +146,7 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
         >
           <svg siSearchIcon></svg>
           <span class="flex-1 text-start">Search...</span>
-          <kbd scKbd>&#8984;K</kbd>
+          <kbd scKbd>{{ format('Mod+K') }}</kbd>
         </button>
         <a
           scLink
@@ -228,6 +229,8 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
   encapsulation: ViewEncapsulation.None,
 })
 export default class Navbar {
+  /** A shortcut as this platform writes it (⌘K, Ctrl+K). */
+  protected readonly format = injectFormatForDisplay();
   readonly classInput = input<string>('', { alias: 'class' });
   protected readonly class = computed(() => cn('block', this.classInput()));
 

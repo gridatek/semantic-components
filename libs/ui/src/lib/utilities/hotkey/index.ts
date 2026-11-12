@@ -1,1 +1,0 @@
-export { ScHotkey } from './hotkey';

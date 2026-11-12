@@ -1,3 +1,4 @@
+import { injectFormatForDisplay } from '@tanstack/angular-hotkeys';
 import {
   Component,
   DestroyRef,
@@ -136,7 +137,7 @@ import { ConfigService } from '../../services/config-service';
               Search...
             </span>
             <kbd scKbd class="group-data-[collapsible=icon]:hidden">
-              &#8984;K
+              {{ format('Mod+K') }}
             </kbd>
           </button>
         </div>
@@ -368,6 +369,8 @@ import { ConfigService } from '../../services/config-service';
   encapsulation: ViewEncapsulation.None,
 })
 export class DocsLayout {
+  /** A shortcut as this platform writes it (⌘K, Ctrl+K). */
+  protected readonly format = injectFormatForDisplay();
   readonly classInput = input<string>('', { alias: 'class' });
   protected readonly class = computed(() => cn('block', this.classInput()));
 

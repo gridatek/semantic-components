@@ -70,4 +70,4 @@ Our own engine on the CDK's `ActiveDescendantKeyManager`, not Angular Aria's Com
 
 ## Left out
 
-Re-sorting by score; a grid (Base UI's `grid`, Bits UI's `columns`); virtualization; a built-in ⌘K listener (the Dialog example's `scHotkey`); nested pages (the Pages example, app code as cmdk and kbar show it); shadcn's check icon on items (choosing a value is Select's and Combobox's); cmdk's Loading part (your text, announced by the status).
+Re-sorting by score; a grid (Base UI's `grid`, Bits UI's `columns`); virtualization; a built-in ⌘K listener (the Dialog example uses TanStack Hotkeys); nested pages (the Pages example, app code as cmdk and kbar show it); shadcn's check icon on items (choosing a value is Select's and Combobox's); cmdk's Loading part (your text, announced by the status).
