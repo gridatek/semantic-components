@@ -25,13 +25,7 @@ import {
   SiTypeIcon,
 } from '@semantic-icons/lucide-icons';
 import { PRESETS, storePreset, storedPreset } from '../../presets';
-import { HomeClaimableBalance } from '../home/cards/claimable-balance';
-import { HomeContributionHistory } from '../home/cards/contribution-history';
-import { HomeEmptyDistributeTrack } from '../home/cards/empty-distribute-track';
-import { HomePayments } from '../home/cards/payments';
-import { HomePayoutThreshold } from '../home/cards/payout-threshold';
-import { HomeQrConnect } from '../home/cards/qr-connect';
-import { HomeSavingsTargets } from '../home/cards/savings-targets';
+import { PreviewCards } from './cards/preview-cards';
 
 /**
  * Presets, as shadcn's Create: the options as cards on the left, the
@@ -41,13 +35,7 @@ import { HomeSavingsTargets } from '../home/cards/savings-targets';
 @Component({
   selector: 'app-presets',
   imports: [
-    HomeClaimableBalance,
-    HomeContributionHistory,
-    HomeEmptyDistributeTrack,
-    HomePayments,
-    HomePayoutThreshold,
-    HomeQrConnect,
-    HomeSavingsTargets,
+    PreviewCards,
     ScFrame,
     ScMenu,
     ScMenuContent,
@@ -156,21 +144,7 @@ import { HomeSavingsTargets } from '../home/cards/savings-targets';
       </section>
 
       <div scFrame class="bg-muted min-w-0 flex-1 p-4 md:p-6">
-        <div class="grid items-start gap-6 lg:grid-cols-2 xl:grid-cols-3">
-          <div class="flex flex-col gap-6">
-            <app-home-contribution-history />
-            <app-home-empty-distribute-track />
-            <app-home-qr-connect />
-          </div>
-          <div class="flex flex-col gap-6">
-            <app-home-payout-threshold />
-            <app-home-claimable-balance />
-          </div>
-          <div class="hidden flex-col gap-6 xl:flex">
-            <app-home-savings-targets />
-            <app-home-payments />
-          </div>
-        </div>
+        <app-preview-cards />
       </div>
     </div>
   `,
