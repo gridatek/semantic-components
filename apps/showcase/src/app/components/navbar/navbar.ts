@@ -88,9 +88,7 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
               <svg siChevronDownIcon scNavigationMenuTriggerIcon></svg>
             </button>
             <div scNavigationMenuContent>
-              <ul
-                class="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]"
-              >
+              <ul class="grid w-96 gap-1 md:w-[32rem] md:grid-cols-2">
                 @for (component of featuredComponents(); track component.path) {
                   <li>
                     <a
@@ -98,14 +96,10 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
                       class="flex-col items-start gap-1"
                       [routerLink]="'/docs/components/' + component.path"
                     >
-                      <div class="text-sm leading-none font-medium">
-                        {{ component.name }}
-                      </div>
-                      <p
-                        class="text-muted-foreground line-clamp-2 text-sm leading-snug"
-                      >
+                      <span class="font-medium">{{ component.name }}</span>
+                      <span class="text-muted-foreground line-clamp-2">
                         {{ component.description }}
-                      </p>
+                      </span>
                     </a>
                   </li>
                 }
@@ -115,12 +109,10 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
                     class="flex-col items-start gap-1"
                     routerLink="/docs/components"
                   >
-                    <div class="text-sm leading-none font-medium">View All</div>
-                    <p
-                      class="text-muted-foreground line-clamp-2 text-sm leading-snug"
-                    >
+                    <span class="font-medium">View All</span>
+                    <span class="text-muted-foreground line-clamp-2">
                       See all available components.
-                    </p>
+                    </span>
                   </a>
                 </li>
               </ul>
@@ -128,7 +120,13 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
           </li>
 
           <li scNavigationMenuItem>
-            <a scNavigationMenuLink routerLink="/docs/getting-started">
+            <a
+              scNavigationMenuLink
+              routerLink="/docs/getting-started"
+              routerLinkActive
+              #docsRla="routerLinkActive"
+              [active]="docsRla.isActive"
+            >
               Documentation
             </a>
           </li>
