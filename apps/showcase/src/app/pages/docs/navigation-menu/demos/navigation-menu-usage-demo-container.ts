@@ -1,13 +1,29 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { UsageCode } from '../../../../components/usage-code/usage-code';
+import { NavigationMenuUsageDemo } from './navigation-menu-usage-demo';
+
+@Component({
+  selector: 'app-navigation-menu-usage-demo-container',
+  imports: [UsageCode, NavigationMenuUsageDemo],
+  template: `
+    <app-usage-code [code]="code">
+      <ng-template><app-navigation-menu-usage-demo /></ng-template>
+    </app-usage-code>
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class NavigationMenuUsageDemoContainer {
+  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import {
-  ScNavigationMenuNext,
-  ScNavigationMenuNextContent,
-  ScNavigationMenuNextItem,
-  ScNavigationMenuNextLink,
-  ScNavigationMenuNextList,
-  ScNavigationMenuNextTrigger,
-  ScNavigationMenuNextTriggerIcon,
+  ScNavigationMenu,
+  ScNavigationMenuContent,
+  ScNavigationMenuItem,
+  ScNavigationMenuLink,
+  ScNavigationMenuList,
+  ScNavigationMenuTrigger,
+  ScNavigationMenuTriggerIcon,
 } from '@semantic-components/ui';
 import {
   SiChevronDownIcon,
@@ -16,41 +32,37 @@ import {
   SiCircleDashedIcon,
 } from '@semantic-icons/lucide-icons';
 
-/** Without the shared box ([viewport]="false"): each panel its own, under its trigger. */
+/** shadcn's demo: panels of links under their triggers, sharing one box; a link on its own (Docs), active on its pages. */
 @Component({
-  selector: 'app-separate-navigation-menu-next-demo',
+  selector: 'app-navigation-menu-usage-demo',
   imports: [
     RouterLink,
     RouterLinkActive,
-    ScNavigationMenuNext,
-    ScNavigationMenuNextContent,
-    ScNavigationMenuNextItem,
-    ScNavigationMenuNextLink,
-    ScNavigationMenuNextList,
-    ScNavigationMenuNextTrigger,
-    ScNavigationMenuNextTriggerIcon,
+    ScNavigationMenu,
+    ScNavigationMenuContent,
+    ScNavigationMenuItem,
+    ScNavigationMenuLink,
+    ScNavigationMenuList,
+    ScNavigationMenuTrigger,
+    ScNavigationMenuTriggerIcon,
     SiChevronDownIcon,
     SiCircleAlertIcon,
     SiCircleCheckIcon,
     SiCircleDashedIcon,
   ],
-  template: `
-    <nav
-      scNavigationMenuNext
-      aria-label="Main, separate panels"
-      [viewport]="false"
-    >
-      <ul scNavigationMenuNextList>
-        <li scNavigationMenuNextItem value="getting-started">
-          <button scNavigationMenuNextTrigger>
+  template: \`
+    <nav scNavigationMenu aria-label="Main">
+      <ul scNavigationMenuList>
+        <li scNavigationMenuItem value="getting-started">
+          <button scNavigationMenuTrigger>
             Getting started
-            <svg siChevronDownIcon scNavigationMenuNextTriggerIcon></svg>
+            <svg siChevronDownIcon scNavigationMenuTriggerIcon></svg>
           </button>
-          <div scNavigationMenuNextContent>
+          <div scNavigationMenuContent>
             <ul class="w-96">
               @for (page of gettingStarted; track page.link) {
                 <li>
-                  <a scNavigationMenuNextLink [routerLink]="page.link">
+                  <a scNavigationMenuLink [routerLink]="page.link">
                     <div class="flex flex-col gap-1 text-sm">
                       <div class="leading-none font-medium">
                         {{ page.title }}
@@ -65,18 +77,18 @@ import {
             </ul>
           </div>
         </li>
-        <li scNavigationMenuNextItem value="components" class="hidden md:flex">
-          <button scNavigationMenuNextTrigger>
+        <li scNavigationMenuItem value="components" class="hidden md:flex">
+          <button scNavigationMenuTrigger>
             Components
-            <svg siChevronDownIcon scNavigationMenuNextTriggerIcon></svg>
+            <svg siChevronDownIcon scNavigationMenuTriggerIcon></svg>
           </button>
-          <div scNavigationMenuNextContent>
+          <div scNavigationMenuContent>
             <ul
               class="grid w-[400px] gap-2 md:w-[500px] md:grid-cols-2 lg:w-[600px]"
             >
               @for (component of components; track component.link) {
                 <li>
-                  <a scNavigationMenuNextLink [routerLink]="component.link">
+                  <a scNavigationMenuLink [routerLink]="component.link">
                     <div class="flex flex-col gap-1 text-sm">
                       <div class="leading-none font-medium">
                         {{ component.title }}
@@ -91,23 +103,23 @@ import {
             </ul>
           </div>
         </li>
-        <li scNavigationMenuNextItem value="with-icon">
-          <button scNavigationMenuNextTrigger>
+        <li scNavigationMenuItem value="with-icon">
+          <button scNavigationMenuTrigger>
             With Icon
-            <svg siChevronDownIcon scNavigationMenuNextTriggerIcon></svg>
+            <svg siChevronDownIcon scNavigationMenuTriggerIcon></svg>
           </button>
-          <div scNavigationMenuNextContent>
+          <div scNavigationMenuContent>
             <ul class="grid w-[200px]">
               <li>
-                <a scNavigationMenuNextLink routerLink="." fragment="backlog">
+                <a scNavigationMenuLink routerLink="." fragment="backlog">
                   <svg siCircleAlertIcon></svg>
                   Backlog
                 </a>
-                <a scNavigationMenuNextLink routerLink="." fragment="to-do">
+                <a scNavigationMenuLink routerLink="." fragment="to-do">
                   <svg siCircleDashedIcon></svg>
                   To Do
                 </a>
-                <a scNavigationMenuNextLink routerLink="." fragment="done">
+                <a scNavigationMenuLink routerLink="." fragment="done">
                   <svg siCircleCheckIcon></svg>
                   Done
                 </a>
@@ -115,9 +127,9 @@ import {
             </ul>
           </div>
         </li>
-        <li scNavigationMenuNextItem>
+        <li scNavigationMenuItem>
           <a
-            scNavigationMenuNextLink
+            scNavigationMenuLink
             routerLink="/docs/getting-started"
             routerLinkActive
             #docs="routerLinkActive"
@@ -128,11 +140,11 @@ import {
         </li>
       </ul>
     </nav>
-  `,
+  \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class SeparateNavigationMenuNextDemo {
+export class NavigationMenuUsageDemo {
   readonly gettingStarted = [
     {
       link: '/docs/getting-started/introduction',
@@ -183,4 +195,5 @@ export class SeparateNavigationMenuNextDemo {
       text: 'A short hint on hover or keyboard focus.',
     },
   ];
+}`;
 }

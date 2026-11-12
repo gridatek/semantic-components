@@ -736,12 +736,6 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/navigation-menu/navigation-menu-page'),
       },
       {
-        path: 'navigation-menu-next',
-        title: 'Navigation Menu Next - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/navigation-menu-next/navigation-menu-next-page'),
-      },
-      {
         path: 'sidebar',
         title: 'Sidebar - Semantic Components',
         loadComponent: () => import('../pages/docs/sidebar/sidebar-page'),

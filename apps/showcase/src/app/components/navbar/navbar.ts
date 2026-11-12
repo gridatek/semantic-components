@@ -88,31 +88,34 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
               <svg siChevronDownIcon scNavigationMenuTriggerIcon></svg>
             </button>
             <div scNavigationMenuContent>
-              <ul class="grid w-96 gap-1 md:w-[32rem] md:grid-cols-2">
+              <ul
+                class="grid w-[400px] gap-2 md:w-[500px] md:grid-cols-2 lg:w-[600px]"
+              >
                 @for (component of featuredComponents(); track component.path) {
                   <li>
                     <a
                       scNavigationMenuLink
-                      class="flex-col items-start gap-1"
                       [routerLink]="'/docs/components/' + component.path"
                     >
-                      <span class="font-medium">{{ component.name }}</span>
-                      <span class="text-muted-foreground line-clamp-2">
-                        {{ component.description }}
-                      </span>
+                      <div class="flex flex-col gap-1 text-sm">
+                        <div class="leading-none font-medium">
+                          {{ component.name }}
+                        </div>
+                        <div class="text-muted-foreground line-clamp-2">
+                          {{ component.description }}
+                        </div>
+                      </div>
                     </a>
                   </li>
                 }
                 <li>
-                  <a
-                    scNavigationMenuLink
-                    class="flex-col items-start gap-1"
-                    routerLink="/docs/components"
-                  >
-                    <span class="font-medium">View All</span>
-                    <span class="text-muted-foreground line-clamp-2">
-                      See all available components.
-                    </span>
+                  <a scNavigationMenuLink routerLink="/docs/components">
+                    <div class="flex flex-col gap-1 text-sm">
+                      <div class="leading-none font-medium">View All</div>
+                      <div class="text-muted-foreground line-clamp-2">
+                        See all available components.
+                      </div>
+                    </div>
                   </a>
                 </li>
               </ul>

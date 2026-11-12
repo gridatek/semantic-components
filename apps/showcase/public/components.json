@@ -701,14 +701,6 @@
     "category": "Navigation"
   },
   {
-    "name": "Navigation Menu Next",
-    "path": "navigation-menu-next",
-    "description": "Site navigation with panels: opened by hover, click or keyboard; one shared box that moves between items.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Navigation"
-  },
-  {
     "name": "Notification Center",
     "path": "notification-center",
     "description": "Notifications you put together from parts: by day, titled in your language, with an unread count for the bell.",

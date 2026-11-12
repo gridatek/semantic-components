@@ -56,7 +56,7 @@ import {
               <svg siChevronDownIcon scNavigationMenuTriggerIcon></svg>
             </button>
             <div scNavigationMenuContent>
-              <ul class="grid w-72 gap-1 p-2">
+              <ul class="grid w-72 gap-1">
                 @for (product of products; track product) {
                   <li>
                     <a scNavigationMenuLink href="#">{{ product }}</a>

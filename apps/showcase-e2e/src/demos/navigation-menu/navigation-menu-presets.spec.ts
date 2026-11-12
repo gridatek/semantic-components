@@ -36,7 +36,7 @@ async function expectClasses(target: Locator, wanted: string, what: string) {
     .toEqual([]);
 }
 
-test.describe('Navigation Menu Next in every preset', () => {
+test.describe('Navigation Menu in every preset', () => {
   // A docs page and axe, twice: slow under load.
   test.slow();
 
@@ -50,9 +50,7 @@ test.describe('Navigation Menu Next in every preset', () => {
       await context.addCookies([
         { name: 'sc-preset', value: preset, url: baseURL! },
       ]);
-      await page.goto(
-        '/demos/navigation-menu-next/navigation-menu-next-usage-demo',
-      );
+      await page.goto('/demos/navigation-menu/navigation-menu-usage-demo');
       const n = styles.navigationMenu;
       await expectClasses(
         page.getByRole('button', { name: 'Getting started' }),
@@ -60,13 +58,13 @@ test.describe('Navigation Menu Next in every preset', () => {
         `${preset} trigger`,
       );
       await expectClasses(
-        page.locator('[scNavigationMenuNextContent]').first(),
+        page.locator('[scNavigationMenuContent]').first(),
         n.content,
         `${preset} content`,
       );
       // The panel's links: the preset's, but for the transition (the part's).
       await expectClasses(
-        page.locator('[scNavigationMenuNextContent] a').first(),
+        page.locator('[scNavigationMenuContent] a').first(),
         n.link.replace(/\btransition-all\b/, ''),
         `${preset} link`,
       );
@@ -76,7 +74,7 @@ test.describe('Navigation Menu Next in every preset', () => {
         `${preset} box`,
       );
 
-      await page.goto('/docs/components/navigation-menu-next');
+      await page.goto('/docs/components/navigation-menu');
       await expectNoA11yViolations(page);
       await expectNoA11yViolations(page, { dark: true });
     });

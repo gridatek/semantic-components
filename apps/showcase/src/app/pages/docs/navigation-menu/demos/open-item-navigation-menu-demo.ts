@@ -2,13 +2,13 @@ import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import {
   ScButton,
-  ScNavigationMenuNext,
-  ScNavigationMenuNextContent,
-  ScNavigationMenuNextItem,
-  ScNavigationMenuNextLink,
-  ScNavigationMenuNextList,
-  ScNavigationMenuNextTrigger,
-  ScNavigationMenuNextTriggerIcon,
+  ScNavigationMenu,
+  ScNavigationMenuContent,
+  ScNavigationMenuItem,
+  ScNavigationMenuLink,
+  ScNavigationMenuList,
+  ScNavigationMenuTrigger,
+  ScNavigationMenuTriggerIcon,
 } from '@semantic-components/ui';
 import {
   SiChevronDownIcon,
@@ -19,18 +19,18 @@ import {
 
 /** The open item both ways, [(value)]: its value, or null. */
 @Component({
-  selector: 'app-open-item-navigation-menu-next-demo',
+  selector: 'app-open-item-navigation-menu-demo',
   imports: [
     RouterLink,
     RouterLinkActive,
     ScButton,
-    ScNavigationMenuNext,
-    ScNavigationMenuNextContent,
-    ScNavigationMenuNextItem,
-    ScNavigationMenuNextLink,
-    ScNavigationMenuNextList,
-    ScNavigationMenuNextTrigger,
-    ScNavigationMenuNextTriggerIcon,
+    ScNavigationMenu,
+    ScNavigationMenuContent,
+    ScNavigationMenuItem,
+    ScNavigationMenuLink,
+    ScNavigationMenuList,
+    ScNavigationMenuTrigger,
+    ScNavigationMenuTriggerIcon,
     SiChevronDownIcon,
     SiCircleAlertIcon,
     SiCircleCheckIcon,
@@ -55,21 +55,21 @@ import {
         </p>
       </div>
       <nav
-        scNavigationMenuNext
+        scNavigationMenu
         aria-label="Main, with its open item"
         [(value)]="open"
       >
-        <ul scNavigationMenuNextList>
-          <li scNavigationMenuNextItem value="getting-started">
-            <button scNavigationMenuNextTrigger>
+        <ul scNavigationMenuList>
+          <li scNavigationMenuItem value="getting-started">
+            <button scNavigationMenuTrigger>
               Getting started
-              <svg siChevronDownIcon scNavigationMenuNextTriggerIcon></svg>
+              <svg siChevronDownIcon scNavigationMenuTriggerIcon></svg>
             </button>
-            <div scNavigationMenuNextContent>
+            <div scNavigationMenuContent>
               <ul class="w-96">
                 @for (page of gettingStarted; track page.link) {
                   <li>
-                    <a scNavigationMenuNextLink [routerLink]="page.link">
+                    <a scNavigationMenuLink [routerLink]="page.link">
                       <div class="flex flex-col gap-1 text-sm">
                         <div class="leading-none font-medium">
                           {{ page.title }}
@@ -84,22 +84,18 @@ import {
               </ul>
             </div>
           </li>
-          <li
-            scNavigationMenuNextItem
-            value="components"
-            class="hidden md:flex"
-          >
-            <button scNavigationMenuNextTrigger>
+          <li scNavigationMenuItem value="components" class="hidden md:flex">
+            <button scNavigationMenuTrigger>
               Components
-              <svg siChevronDownIcon scNavigationMenuNextTriggerIcon></svg>
+              <svg siChevronDownIcon scNavigationMenuTriggerIcon></svg>
             </button>
-            <div scNavigationMenuNextContent>
+            <div scNavigationMenuContent>
               <ul
                 class="grid w-[400px] gap-2 md:w-[500px] md:grid-cols-2 lg:w-[600px]"
               >
                 @for (component of components; track component.link) {
                   <li>
-                    <a scNavigationMenuNextLink [routerLink]="component.link">
+                    <a scNavigationMenuLink [routerLink]="component.link">
                       <div class="flex flex-col gap-1 text-sm">
                         <div class="leading-none font-medium">
                           {{ component.title }}
@@ -114,23 +110,23 @@ import {
               </ul>
             </div>
           </li>
-          <li scNavigationMenuNextItem value="with-icon">
-            <button scNavigationMenuNextTrigger>
+          <li scNavigationMenuItem value="with-icon">
+            <button scNavigationMenuTrigger>
               With Icon
-              <svg siChevronDownIcon scNavigationMenuNextTriggerIcon></svg>
+              <svg siChevronDownIcon scNavigationMenuTriggerIcon></svg>
             </button>
-            <div scNavigationMenuNextContent>
+            <div scNavigationMenuContent>
               <ul class="grid w-[200px]">
                 <li>
-                  <a scNavigationMenuNextLink routerLink="." fragment="backlog">
+                  <a scNavigationMenuLink routerLink="." fragment="backlog">
                     <svg siCircleAlertIcon></svg>
                     Backlog
                   </a>
-                  <a scNavigationMenuNextLink routerLink="." fragment="to-do">
+                  <a scNavigationMenuLink routerLink="." fragment="to-do">
                     <svg siCircleDashedIcon></svg>
                     To Do
                   </a>
-                  <a scNavigationMenuNextLink routerLink="." fragment="done">
+                  <a scNavigationMenuLink routerLink="." fragment="done">
                     <svg siCircleCheckIcon></svg>
                     Done
                   </a>
@@ -138,9 +134,9 @@ import {
               </ul>
             </div>
           </li>
-          <li scNavigationMenuNextItem>
+          <li scNavigationMenuItem>
             <a
-              scNavigationMenuNextLink
+              scNavigationMenuLink
               routerLink="/docs/getting-started"
               routerLinkActive
               #docs="routerLinkActive"
@@ -156,7 +152,7 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class OpenItemNavigationMenuNextDemo {
+export class OpenItemNavigationMenuDemo {
   readonly open = signal<string | null>(null);
 
   readonly gettingStarted = [

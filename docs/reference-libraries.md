@@ -630,6 +630,18 @@ Rewritten 2026-11-11 (the user: "check what other libs do"): built beside the ol
 - **Left out**: re-sorting by score (fights `@for`), grid, virtualization, a built-in ⌘K listener, nested pages (an example), shadcn's check icon, cmdk's Loading.
 - **Examples**: shadcn's Demo (the Usage), Basic, Shortcuts, Groups, Scrollable, Dialog (⌘J with `scHotkey`); ours: Keywords, Async search, Pages, Links; RTL.
 
+## Navigation Menu: rewritten again
+
+Rewritten 2026-11-12 (the user: "navigation-menu with next process"): built beside the one of 2026-10-29 as Navigation Menu Next, switched in. Its users kept their markup (same part names); the showcase header and the blocks navbar now write their panels as the Usage does (the user: "follow our example and dogfood"). A shadcn component, so no web research: shadcn's reference app (`navigation-menu.tsx` in each style), its 2 examples, Base UI's Navigation Menu docs.
+
+- **The `navigationMenu` preset key** (`trigger`, `link`, `content`, `popup`), generated from the 8 styles: corners (lyra and sera square, luma `rounded-3xl`), padding (maia, luma, sera `p-2.5 pe-3`, links `p-3`), text (lyra `text-xs`, mira `text-xs/relaxed`), focus ring, the box's shadow and ring. Base UI's `data-popup-open:` is `aria-expanded:` (our trigger's); shadcn's `in-data-[slot=navigation-menu-content]:` link classes are resolved into `link`. The old one had nova's classes in the parts.
+- **`align`** (`start`, `center`, `end`; shadcn's root prop): the panel and the shared box line up under the trigger. Centred by `transform`, apart from the slide's `translate`.
+- **`closeOnClick` on links** (default true — Base UI's is false: a page shown without reloading would keep the menu open; the user left it to me).
+- **Kept**: the disclosure pattern, panels inside their items and always in the page (Tab order, crawlers), the shared box, the slide from the side you came from, the keyboard.
+- **`data-slot` only on the link** (the panel styles its links by it).
+- **Examples**: shadcn's Demo (the Usage, its links to real showcase pages; With Icon's `href="#"` became `routerLink="." fragment`: `#` resolves against the base href), Open Item, Separate Panels, Align, RTL.
+- **Left for later** (the user): Base UI's vertical orientation and nested menus (docs/todo.md).
+
 ## Carousel: rewritten
 
 Rewritten 2026-11-12: built beside the old one as Carousel Next, switched in (no users outside its page). Still on Embla (`embla-carousel`, an optional peer of the `@semantic-components/ui/carousel` entry point). A shadcn component, so no web research: shadcn's reference app (`carousel.tsx` in each style) and its 8 examples.

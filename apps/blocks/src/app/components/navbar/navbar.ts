@@ -101,105 +101,97 @@ import {
               <svg siChevronDownIcon scNavigationMenuTriggerIcon></svg>
             </button>
             <div scNavigationMenuContent>
-              <ul class="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2">
+              <ul
+                class="grid w-[400px] gap-2 md:w-[500px] md:grid-cols-2 lg:w-[600px]"
+              >
                 <li>
-                  <a
-                    scNavigationMenuLink
-                    class="flex-col items-start gap-1"
-                    routerLink="/dashboard"
-                  >
-                    <div
-                      class="text-sm leading-none font-medium"
-                      i18n="@@navbar.dashboard"
-                    >
-                      Dashboard
+                  <a scNavigationMenuLink routerLink="/dashboard">
+                    <div class="flex flex-col gap-1 text-sm">
+                      <div
+                        class="leading-none font-medium"
+                        i18n="@@navbar.dashboard"
+                      >
+                        Dashboard
+                      </div>
+                      <div
+                        class="text-muted-foreground line-clamp-2"
+                        i18n="@@navbar.dashboard.description"
+                      >
+                        Sidebar layout with navigation
+                      </div>
                     </div>
-                    <p
-                      class="text-muted-foreground line-clamp-2 text-sm leading-snug"
-                      i18n="@@navbar.dashboard.description"
-                    >
-                      Sidebar layout with navigation
-                    </p>
                   </a>
                 </li>
                 <li>
-                  <a
-                    scNavigationMenuLink
-                    class="flex-col items-start gap-1"
-                    routerLink="/settings"
-                  >
-                    <div
-                      class="text-sm leading-none font-medium"
-                      i18n="@@navbar.settings"
-                    >
-                      Settings
+                  <a scNavigationMenuLink routerLink="/settings">
+                    <div class="flex flex-col gap-1 text-sm">
+                      <div
+                        class="leading-none font-medium"
+                        i18n="@@navbar.settings"
+                      >
+                        Settings
+                      </div>
+                      <div
+                        class="text-muted-foreground line-clamp-2"
+                        i18n="@@navbar.settings.description"
+                      >
+                        Account and profile management
+                      </div>
                     </div>
-                    <p
-                      class="text-muted-foreground line-clamp-2 text-sm leading-snug"
-                      i18n="@@navbar.settings.description"
-                    >
-                      Account and profile management
-                    </p>
                   </a>
                 </li>
                 <li>
-                  <a
-                    scNavigationMenuLink
-                    class="flex-col items-start gap-1"
-                    routerLink="/gallery"
-                  >
-                    <div
-                      class="text-sm leading-none font-medium"
-                      i18n="@@navbar.gallery"
-                    >
-                      Gallery
+                  <a scNavigationMenuLink routerLink="/gallery">
+                    <div class="flex flex-col gap-1 text-sm">
+                      <div
+                        class="leading-none font-medium"
+                        i18n="@@navbar.gallery"
+                      >
+                        Gallery
+                      </div>
+                      <div
+                        class="text-muted-foreground line-clamp-2"
+                        i18n="@@navbar.gallery.description"
+                      >
+                        Component showcase reference
+                      </div>
                     </div>
-                    <p
-                      class="text-muted-foreground line-clamp-2 text-sm leading-snug"
-                      i18n="@@navbar.gallery.description"
-                    >
-                      Component showcase reference
-                    </p>
                   </a>
                 </li>
                 <li>
-                  <a
-                    scNavigationMenuLink
-                    class="flex-col items-start gap-1"
-                    routerLink="/data-table"
-                  >
-                    <div
-                      class="text-sm leading-none font-medium"
-                      i18n="@@navbar.dataTable"
-                    >
-                      Data Table
+                  <a scNavigationMenuLink routerLink="/data-table">
+                    <div class="flex flex-col gap-1 text-sm">
+                      <div
+                        class="leading-none font-medium"
+                        i18n="@@navbar.dataTable"
+                      >
+                        Data Table
+                      </div>
+                      <div
+                        class="text-muted-foreground line-clamp-2"
+                        i18n="@@navbar.dataTable.description"
+                      >
+                        Advanced table with sorting and filtering
+                      </div>
                     </div>
-                    <p
-                      class="text-muted-foreground line-clamp-2 text-sm leading-snug"
-                      i18n="@@navbar.dataTable.description"
-                    >
-                      Advanced table with sorting and filtering
-                    </p>
                   </a>
                 </li>
                 <li>
-                  <a
-                    scNavigationMenuLink
-                    class="flex-col items-start gap-1"
-                    routerLink="/chat"
-                  >
-                    <div
-                      class="text-sm leading-none font-medium"
-                      i18n="@@navbar.chat"
-                    >
-                      Chat
+                  <a scNavigationMenuLink routerLink="/chat">
+                    <div class="flex flex-col gap-1 text-sm">
+                      <div
+                        class="leading-none font-medium"
+                        i18n="@@navbar.chat"
+                      >
+                        Chat
+                      </div>
+                      <div
+                        class="text-muted-foreground line-clamp-2"
+                        i18n="@@navbar.chat.description"
+                      >
+                        An assistant's steps and streamed replies
+                      </div>
                     </div>
-                    <p
-                      class="text-muted-foreground line-clamp-2 text-sm leading-snug"
-                      i18n="@@navbar.chat.description"
-                    >
-                      An assistant's steps and streamed replies
-                    </p>
                   </a>
                 </li>
               </ul>

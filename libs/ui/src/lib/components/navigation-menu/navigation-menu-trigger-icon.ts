@@ -2,11 +2,10 @@ import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '../../utils';
 import { ScNavigationMenuItem } from './navigation-menu-item';
 
-/** Your chevron (down) after the trigger's text: turns over while open. */
+/** Your chevron (down) after the trigger's text: turned over while open; hidden from screen readers. */
 @Directive({
   selector: 'svg[scNavigationMenuTriggerIcon]',
   host: {
-    'data-slot': 'navigation-menu-trigger-icon',
     'aria-hidden': 'true',
     '[class]': 'class()',
   },

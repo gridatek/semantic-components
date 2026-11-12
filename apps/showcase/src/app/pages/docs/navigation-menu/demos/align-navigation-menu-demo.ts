@@ -1,34 +1,15 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { OpenItemNavigationMenuNextDemo } from './open-item-navigation-menu-next-demo';
-
-@Component({
-  selector: 'app-open-item-navigation-menu-next-demo-container',
-  imports: [DemoContainer, OpenItemNavigationMenuNextDemo],
-  template: `
-    <app-demo-container
-      title="Open Item"
-      demoUrl="/demos/navigation-menu-next/open-item-navigation-menu-next-demo"
-      [code]="code"
-    >
-      <app-open-item-navigation-menu-next-demo />
-    </app-demo-container>
-  `,
-  host: { class: 'block w-full' },
-  encapsulation: ViewEncapsulation.None,
-})
-export class OpenItemNavigationMenuNextDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import {
   ScButton,
-  ScNavigationMenuNext,
-  ScNavigationMenuNextContent,
-  ScNavigationMenuNextItem,
-  ScNavigationMenuNextLink,
-  ScNavigationMenuNextList,
-  ScNavigationMenuNextTrigger,
-  ScNavigationMenuNextTriggerIcon,
+  ScNavigationMenu,
+  type ScNavigationMenuAlign,
+  ScNavigationMenuContent,
+  ScNavigationMenuItem,
+  ScNavigationMenuLink,
+  ScNavigationMenuList,
+  ScNavigationMenuTrigger,
+  ScNavigationMenuTriggerIcon,
 } from '@semantic-components/ui';
 import {
   SiChevronDownIcon,
@@ -37,59 +18,52 @@ import {
   SiCircleDashedIcon,
 } from '@semantic-icons/lucide-icons';
 
-/** The open item both ways, [(value)]: its value, or null. */
+/** Where a panel lines up under its trigger: its start, centre or end (shadcn's align). */
 @Component({
-  selector: 'app-open-item-navigation-menu-next-demo',
+  selector: 'app-align-navigation-menu-demo',
   imports: [
     RouterLink,
     RouterLinkActive,
     ScButton,
-    ScNavigationMenuNext,
-    ScNavigationMenuNextContent,
-    ScNavigationMenuNextItem,
-    ScNavigationMenuNextLink,
-    ScNavigationMenuNextList,
-    ScNavigationMenuNextTrigger,
-    ScNavigationMenuNextTriggerIcon,
+    ScNavigationMenu,
+    ScNavigationMenuContent,
+    ScNavigationMenuItem,
+    ScNavigationMenuLink,
+    ScNavigationMenuList,
+    ScNavigationMenuTrigger,
+    ScNavigationMenuTriggerIcon,
     SiChevronDownIcon,
     SiCircleAlertIcon,
     SiCircleCheckIcon,
     SiCircleDashedIcon,
   ],
-  template: \`
+  template: `
     <div class="flex flex-col items-center gap-4">
       <div class="flex items-center gap-2">
-        <button
-          scButton
-          variant="outline"
-          size="sm"
-          (click)="open.set('components')"
-        >
-          Open Components
-        </button>
-        <button scButton variant="outline" size="sm" (click)="open.set(null)">
-          Close
-        </button>
-        <p class="text-muted-foreground text-sm">
-          Open: {{ open() ?? 'none' }}
-        </p>
+        @for (option of aligns; track option) {
+          <button
+            scButton
+            variant="outline"
+            size="sm"
+            [attr.aria-pressed]="align() === option"
+            (click)="align.set(option)"
+          >
+            {{ option }}
+          </button>
+        }
       </div>
-      <nav
-        scNavigationMenuNext
-        aria-label="Main, with its open item"
-        [(value)]="open"
-      >
-        <ul scNavigationMenuNextList>
-          <li scNavigationMenuNextItem value="getting-started">
-            <button scNavigationMenuNextTrigger>
+      <nav scNavigationMenu aria-label="Main, aligned" [align]="align()">
+        <ul scNavigationMenuList>
+          <li scNavigationMenuItem value="getting-started">
+            <button scNavigationMenuTrigger>
               Getting started
-              <svg siChevronDownIcon scNavigationMenuNextTriggerIcon></svg>
+              <svg siChevronDownIcon scNavigationMenuTriggerIcon></svg>
             </button>
-            <div scNavigationMenuNextContent>
+            <div scNavigationMenuContent>
               <ul class="w-96">
                 @for (page of gettingStarted; track page.link) {
                   <li>
-                    <a scNavigationMenuNextLink [routerLink]="page.link">
+                    <a scNavigationMenuLink [routerLink]="page.link">
                       <div class="flex flex-col gap-1 text-sm">
                         <div class="leading-none font-medium">
                           {{ page.title }}
@@ -104,22 +78,18 @@ import {
               </ul>
             </div>
           </li>
-          <li
-            scNavigationMenuNextItem
-            value="components"
-            class="hidden md:flex"
-          >
-            <button scNavigationMenuNextTrigger>
+          <li scNavigationMenuItem value="components" class="hidden md:flex">
+            <button scNavigationMenuTrigger>
               Components
-              <svg siChevronDownIcon scNavigationMenuNextTriggerIcon></svg>
+              <svg siChevronDownIcon scNavigationMenuTriggerIcon></svg>
             </button>
-            <div scNavigationMenuNextContent>
+            <div scNavigationMenuContent>
               <ul
                 class="grid w-[400px] gap-2 md:w-[500px] md:grid-cols-2 lg:w-[600px]"
               >
                 @for (component of components; track component.link) {
                   <li>
-                    <a scNavigationMenuNextLink [routerLink]="component.link">
+                    <a scNavigationMenuLink [routerLink]="component.link">
                       <div class="flex flex-col gap-1 text-sm">
                         <div class="leading-none font-medium">
                           {{ component.title }}
@@ -134,23 +104,23 @@ import {
               </ul>
             </div>
           </li>
-          <li scNavigationMenuNextItem value="with-icon">
-            <button scNavigationMenuNextTrigger>
+          <li scNavigationMenuItem value="with-icon">
+            <button scNavigationMenuTrigger>
               With Icon
-              <svg siChevronDownIcon scNavigationMenuNextTriggerIcon></svg>
+              <svg siChevronDownIcon scNavigationMenuTriggerIcon></svg>
             </button>
-            <div scNavigationMenuNextContent>
+            <div scNavigationMenuContent>
               <ul class="grid w-[200px]">
                 <li>
-                  <a scNavigationMenuNextLink routerLink="." fragment="backlog">
+                  <a scNavigationMenuLink routerLink="." fragment="backlog">
                     <svg siCircleAlertIcon></svg>
                     Backlog
                   </a>
-                  <a scNavigationMenuNextLink routerLink="." fragment="to-do">
+                  <a scNavigationMenuLink routerLink="." fragment="to-do">
                     <svg siCircleDashedIcon></svg>
                     To Do
                   </a>
-                  <a scNavigationMenuNextLink routerLink="." fragment="done">
+                  <a scNavigationMenuLink routerLink="." fragment="done">
                     <svg siCircleCheckIcon></svg>
                     Done
                   </a>
@@ -158,9 +128,9 @@ import {
               </ul>
             </div>
           </li>
-          <li scNavigationMenuNextItem>
+          <li scNavigationMenuItem>
             <a
-              scNavigationMenuNextLink
+              scNavigationMenuLink
               routerLink="/docs/getting-started"
               routerLinkActive
               #docs="routerLinkActive"
@@ -172,12 +142,17 @@ import {
         </ul>
       </nav>
     </div>
-  \`,
+  `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class OpenItemNavigationMenuNextDemo {
-  readonly open = signal<string | null>(null);
+export class AlignNavigationMenuDemo {
+  readonly aligns: readonly ScNavigationMenuAlign[] = [
+    'start',
+    'center',
+    'end',
+  ];
+  readonly align = signal<ScNavigationMenuAlign>('center');
 
   readonly gettingStarted = [
     {
@@ -229,5 +204,4 @@ export class OpenItemNavigationMenuNextDemo {
       text: 'A short hint on hover or keyboard focus.',
     },
   ];
-}`;
 }

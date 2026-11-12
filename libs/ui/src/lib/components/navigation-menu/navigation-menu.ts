@@ -12,7 +12,11 @@ import {
   numberAttribute,
   signal,
 } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
+
+/** Where a panel lines up under its trigger. */
+export type ScNavigationMenuAlign = 'start' | 'center' | 'end';
 
 /** An item of the menu, as the menu knows it. */
 export interface ScNavigationMenuItemRef {
@@ -24,7 +28,7 @@ export interface ScNavigationMenuItemRef {
   readonly content: () => HTMLElement | null;
 }
 
-/** The shared panel's place and size, in px from the menu's top left. */
+/** The shared box's place and size, in px from the menu's top left. */
 interface ScNavigationMenuBox {
   readonly left: number;
   readonly top: number;
@@ -35,12 +39,13 @@ interface ScNavigationMenuBox {
 const FOCUSABLE = 'a[href], button:not([disabled])';
 
 /**
- * Site navigation with panels (WAI-ARIA disclosure navigation, not a `menu`):
- * a trigger opens its item's panel on hover, click, Enter or Space. One
- * panel at a time, `[(value)]`; with `viewport` (default) they share one box
- * that moves and resizes from item to item. Tab follows the page (a trigger,
- * then its links); ←/→ move between the top-level items, Home/End, ↓ goes
- * into the open panel, Escape closes it. A click outside, or the focus
+ * Site navigation with panels (a WAI-ARIA disclosure navigation, not a
+ * `menu`): a trigger opens its item's panel on hover, click, Enter or Space.
+ * One panel at a time, `[(value)]`; with `viewport` (default) they share one
+ * box that moves and resizes from item to item, lined up by `align`. Tab
+ * follows the page (a trigger, then its links); ← → move between the
+ * top-level items (mirrored right to left), Home and End; ↓ goes into the open
+ * panel, ↑ ↓ within it, Escape closes it. A click outside, or the focus
  * leaving, closes it too. Name it (`aria-label`).
  */
 @Component({
@@ -50,7 +55,6 @@ const FOCUSABLE = 'a[href], button:not([disabled])';
     @if (viewport()) {
       <div
         aria-hidden="true"
-        data-slot="navigation-menu-viewport"
         [attr.data-state]="value() === null ? 'closed' : 'open'"
         [class]="viewportClass"
         [style.left.px]="box()?.left"
@@ -62,7 +66,6 @@ const FOCUSABLE = 'a[href], button:not([disabled])';
     <ng-content />
   `,
   host: {
-    'data-slot': 'navigation-menu',
     '[attr.data-viewport]': 'viewport()',
     '[class]': 'class()',
     '(keydown)': 'onKeydown($event)',
@@ -73,6 +76,8 @@ const FOCUSABLE = 'a[href], button:not([disabled])';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScNavigationMenu {
+  /** The preset's look, for the parts. */
+  readonly styles = injectPreset().navigationMenu;
   readonly element = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -82,8 +87,10 @@ export class ScNavigationMenu {
   readonly delay = input(50, { transform: numberAttribute });
   /** ms after the pointer leaves before the panel closes. */
   readonly closeDelay = input(50, { transform: numberAttribute });
-  /** One shared box for the panels, moving from item to item; `false`: each under its trigger. */
+  /** One shared box for the panels, moving from item to item; `false`: each panel its own. */
   readonly viewport = input(true, { transform: booleanAttribute });
+  /** Where a panel lines up under its trigger: its start (default), centre or end. */
+  readonly align = input<ScNavigationMenuAlign>('start');
 
   private readonly itemsSignal = signal<readonly ScNavigationMenuItemRef[]>([]);
   readonly items = this.itemsSignal.asReadonly();
@@ -109,7 +116,8 @@ export class ScNavigationMenu {
   );
 
   protected readonly viewportClass = cn(
-    'bg-popover pointer-events-none absolute z-40 rounded-lg shadow ring-1 ring-foreground/10',
+    this.styles.popup,
+    'pointer-events-none absolute z-40',
     'transition-[left,top,width,height,opacity,scale,visibility] duration-[0.35s] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none',
     'data-[state=closed]:invisible data-[state=closed]:scale-90 data-[state=closed]:opacity-0 data-[state=closed]:duration-150',
   );
@@ -117,7 +125,7 @@ export class ScNavigationMenu {
   constructor() {
     inject(DestroyRef).onDestroy(() => clearTimeout(this.timer));
 
-    // The shared box follows the open panel: its item's place, its size.
+    // The shared box follows the open panel: lined up as the panel is, its size.
     afterRenderEffect({
       read: () => {
         const open = this.items().find((item) => item.value() === this.value());
@@ -126,8 +134,20 @@ export class ScNavigationMenu {
         const li = open.element;
         const width = content.offsetWidth;
         const rtl = getComputedStyle(this.element).direction === 'rtl';
+        const start = rtl
+          ? li.offsetLeft + li.offsetWidth - width
+          : li.offsetLeft;
+        const end = rtl
+          ? li.offsetLeft
+          : li.offsetLeft + li.offsetWidth - width;
+        const align = this.align();
         const next: ScNavigationMenuBox = {
-          left: rtl ? li.offsetLeft + li.offsetWidth - width : li.offsetLeft,
+          left:
+            align === 'center'
+              ? li.offsetLeft + (li.offsetWidth - width) / 2
+              : align === 'end'
+                ? end
+                : start,
           top: li.offsetTop + content.offsetTop,
           width,
           height: content.offsetHeight,
@@ -145,6 +165,7 @@ export class ScNavigationMenu {
     });
   }
 
+  /** @internal An item, from its directive: until it goes. */
   register(item: ScNavigationMenuItemRef): () => void {
     this.itemsSignal.update((items) => [...items, item]);
     return () =>

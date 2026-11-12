@@ -5758,10 +5758,17 @@ export const demosRoutes: Route[] = [
     path: 'demos/navigation-menu',
     children: [
       {
-        path: 'basic-navigation-menu-demo',
+        path: 'navigation-menu-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/navigation-menu/demos/basic-navigation-menu-demo').then(
-            (m) => m.BasicNavigationMenuDemo,
+          import('../pages/docs/navigation-menu/demos/navigation-menu-usage-demo').then(
+            (m) => m.NavigationMenuUsageDemo,
+          ),
+      },
+      {
+        path: 'open-item-navigation-menu-demo',
+        loadComponent: () =>
+          import('../pages/docs/navigation-menu/demos/open-item-navigation-menu-demo').then(
+            (m) => m.OpenItemNavigationMenuDemo,
           ),
       },
       {
@@ -5772,10 +5779,10 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'controlled-navigation-menu-demo',
+        path: 'align-navigation-menu-demo',
         loadComponent: () =>
-          import('../pages/docs/navigation-menu/demos/controlled-navigation-menu-demo').then(
-            (m) => m.ControlledNavigationMenuDemo,
+          import('../pages/docs/navigation-menu/demos/align-navigation-menu-demo').then(
+            (m) => m.AlignNavigationMenuDemo,
           ),
       },
       {
@@ -5783,46 +5790,6 @@ export const demosRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/navigation-menu/demos/rtl-navigation-menu-demo').then(
             (m) => m.RtlNavigationMenuDemo,
-          ),
-      },
-    ],
-  },
-  {
-    path: 'demos/navigation-menu-next',
-    children: [
-      {
-        path: 'navigation-menu-next-usage-demo',
-        loadComponent: () =>
-          import('../pages/docs/navigation-menu-next/demos/navigation-menu-next-usage-demo').then(
-            (m) => m.NavigationMenuNextUsageDemo,
-          ),
-      },
-      {
-        path: 'open-item-navigation-menu-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/navigation-menu-next/demos/open-item-navigation-menu-next-demo').then(
-            (m) => m.OpenItemNavigationMenuNextDemo,
-          ),
-      },
-      {
-        path: 'separate-navigation-menu-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/navigation-menu-next/demos/separate-navigation-menu-next-demo').then(
-            (m) => m.SeparateNavigationMenuNextDemo,
-          ),
-      },
-      {
-        path: 'align-navigation-menu-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/navigation-menu-next/demos/align-navigation-menu-next-demo').then(
-            (m) => m.AlignNavigationMenuNextDemo,
-          ),
-      },
-      {
-        path: 'rtl-navigation-menu-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/navigation-menu-next/demos/rtl-navigation-menu-next-demo').then(
-            (m) => m.RtlNavigationMenuNextDemo,
           ),
       },
     ],

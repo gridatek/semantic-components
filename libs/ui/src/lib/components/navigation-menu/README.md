@@ -1,18 +1,8 @@
 # Navigation Menu
 
-Site navigation with panels, as shadcn's (nova, built on Base UI): a trigger opens its item's panel on hover, click, Enter or Space; one panel at a time, in a shared box that moves and resizes from item to item while the content slides in from the side you came from. It follows the WAI-ARIA disclosure navigation pattern — not `role="menu"`.
+Site navigation with panels of links: shadcn's Navigation Menu (its look in each style, the `navigationMenu` preset key), Base UI's parts and behaviour, built as a WAI-ARIA disclosure navigation (not a `menu`).
 
-## Features
-
-- **Hover or press** — `delay` / `closeDelay` (50 ms, as Base UI); a click keeps a hover-opened panel open, a second click closes it
-- **One shared box** (`viewport`, default) — or each panel under its trigger (`[viewport]="false"`)
-- **`[(value)]`** — the open item
-- **Tab order of the page** — a panel is written inside its item, after its trigger
-- **Keyboard** — ←/→ between the top-level items (mirrored in RTL), Home/End, ↓ into the open panel (opening it first), ↓/↑ between a panel's links, Escape back to the trigger
-- **Closes by itself** — Escape, a link followed, a click outside, the focus leaving its item
-- **Current page** — `active` on a link: `aria-current="page"`
-
-## Quick Start
+## Usage
 
 ```html
 <nav scNavigationMenu aria-label="Main">
@@ -23,70 +13,42 @@ Site navigation with panels, as shadcn's (nova, built on Base UI): a trigger ope
         <svg siChevronDownIcon scNavigationMenuTriggerIcon></svg>
       </button>
       <div scNavigationMenuContent>
-        <ul class="grid w-96 gap-1 md:grid-cols-2">
-          <li><a scNavigationMenuLink routerLink="/docs/dialog">Dialog</a></li>
-          <li><a scNavigationMenuLink routerLink="/docs/tabs">Tabs</a></li>
+        <ul class="grid w-[400px] gap-2 md:grid-cols-2">
+          <li><a scNavigationMenuLink routerLink="/docs/components/tabs">Tabs</a></li>
         </ul>
       </div>
     </li>
     <li scNavigationMenuItem>
-      <a scNavigationMenuLink routerLink="/docs" active>Docs</a>
+      <a scNavigationMenuLink routerLink="/docs" routerLinkActive #docs="routerLinkActive" [active]="docs.isActive">Docs</a>
     </li>
   </ul>
 </nav>
 ```
 
-**Rules**
+## Parts
 
-- Name the `nav` (`aria-label`).
-- Write each panel inside its item, after the trigger; lay out its inside as you like.
-- A panel's links are `scNavigationMenuLink`: they close the menu when followed and get the panel's arrow keys.
+| Part                          | Selector                           | What it does                                                                                                                                                                          |
+| ----------------------------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ScNavigationMenu`            | `nav[scNavigationMenu]`            | `[(value)]` (the open item, or `null`), `delay` / `closeDelay` (50 ms), `viewport` (one shared box, default), `align` (`start`, `center`, `end`). Draws the shared box (a component). |
+| `ScNavigationMenuList`        | `ul[scNavigationMenuList]`         | The top-level row.                                                                                                                                                                    |
+| `ScNavigationMenuItem`        | `li[scNavigationMenuItem]`         | `value`; a link, or a trigger and its panel. Registers with the menu.                                                                                                                 |
+| `ScNavigationMenuTrigger`     | `button[scNavigationMenuTrigger]`  | Hover or press; `aria-expanded`, `aria-controls`; the preset's `trigger`.                                                                                                             |
+| `ScNavigationMenuTriggerIcon` | `svg[scNavigationMenuTriggerIcon]` | Your chevron, turned over while open, `aria-hidden`.                                                                                                                                  |
+| `ScNavigationMenuContent`     | `div[scNavigationMenuContent]`     | The panel, inside its item: the preset's `content` padding (and `popup` without the shared box); lined up by `align`; invisible while closed.                                         |
+| `ScNavigationMenuLink`        | `a[scNavigationMenuLink]`          | `active` (`aria-current="page"`), `closeOnClick` (true). Top level: the trigger's look; in a panel: the preset's `link`.                                                              |
 
-## API
+## Behaviour
 
-### ScNavigationMenu — `nav[scNavigationMenu]`
+- **Hover** opens after `delay` (at once when another is open), leaving closes after `closeDelay`; a click keeps a hover-opened panel open, a second click closes it.
+- **Keyboard**: Tab follows the page (a trigger, then its panel's links); ← → between top-level items (mirrored right to left), Home, End; ↓ into the open panel, ↑ ↓ within it; Escape closes and returns to the trigger. The focus leaving, or a click outside, closes it.
+- **Panels stay in the page** (Tab order, search engines): closed, they are `invisible`. So they animate with CSS transitions, not `animate.enter` / `animate.leave` — those only run when an element comes or goes.
+- **The shared box** follows the open panel's place and size; panels slide in from the side you came from.
+- **Links close the menu** by default (`closeOnClick`; Base UI's default is off): a page shown without reloading would otherwise keep it open.
 
-`exportAs: 'scNavigationMenu'`.
+## Preset
 
-| Input        | Type                       | Default | Description                                                                      |
-| ------------ | -------------------------- | ------- | -------------------------------------------------------------------------------- |
-| `value`      | `string \| null` (two-way) | `null`  | The open item                                                                    |
-| `delay`      | `number`                   | `50`    | ms the pointer rests on a trigger before it opens (at once when another is open) |
-| `closeDelay` | `number`                   | `50`    | ms after the pointer leaves before it closes                                     |
-| `viewport`   | `boolean`                  | `true`  | One shared box for the panels; `false`: each its own                             |
-| `class`      | `string`                   | `''`    | Additional CSS classes                                                           |
-
-### ScNavigationMenuList — `ul[scNavigationMenuList]`
-
-The top-level items, in a row.
-
-### ScNavigationMenuItem — `li[scNavigationMenuItem]`
-
-`value`: its name in the menu's `value` (made up if left out).
-
-### ScNavigationMenuTrigger — `button[scNavigationMenuTrigger]`
-
-Opens its item's panel. `aria-expanded`, `aria-controls`, `data-state="open|closed"`.
-
-### ScNavigationMenuTriggerIcon — `svg[scNavigationMenuTriggerIcon]`
-
-Your chevron (down): turns over while open. `aria-hidden`.
-
-### ScNavigationMenuContent — `div[scNavigationMenuContent]`
-
-The panel: always in the page; closed, `invisible` (out of the tab order and the accessibility tree). `data-state`, `data-side="start|end"` (where it rests from the open one).
-
-### ScNavigationMenuLink — `a[scNavigationMenuLink]`
-
-At the top level it looks like a trigger; in a panel, a row. `active`: `aria-current="page"`, `data-active`.
-
-## Accessibility
-
-- Disclosure navigation: buttons with `aria-expanded` and `aria-controls`, links with `aria-current`; no `menu` role (site navigation needs no menubar focus model).
-- The panels are in the page after their triggers: Tab reaches their links in order.
-- Escape closes and gives the trigger back the focus; the focus leaving an item closes its panel.
-- Motion off under `prefers-reduced-motion`.
+`navigationMenu`: `trigger` (Base UI's open state as `aria-expanded:`), `link` (shadcn's in-panel classes resolved), `content` (padding), `popup` (corners, background, shadow, ring) — from `shadcn-reference/presets/<style>/navigation-menu.tsx`.
 
 ## Left out
 
-Nested submenus, a vertical orientation, the arrow indicator.
+Base UI's Portal, Positioner, Backdrop and Arrow (panels sit in their items, no overlay), `keepMounted` (always mounted), `onOpenChangeComplete`; vertical orientation and nested menus (later).

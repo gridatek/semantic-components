@@ -13,15 +13,15 @@ import { ScNavigationMenuItem } from './navigation-menu-item';
 
 /**
  * An item's panel, inside the item after its trigger: shown under it while
- * open. Always in the page (for the Tab order, and crawlers); closed, it is
- * `invisible` — out of the tab order and the accessibility tree. Between
- * items it slides in from the side you came from. Lay out its inside as you
- * like (a grid of `scNavigationMenuLink`s).
+ * open, lined up by the menu's `align`. Always in the page (the Tab order,
+ * and crawlers); closed, it is `invisible` — out of the tab order and the
+ * accessibility tree. Between items it slides in from the side you came
+ * from. Lay out its inside as you like (a grid of
+ * `scNavigationMenuLink`s).
  */
 @Directive({
   selector: 'div[scNavigationMenuContent]',
   host: {
-    'data-slot': 'navigation-menu-content',
     '[id]': 'item.contentId',
     '[attr.data-state]': 'item.open() ? "open" : "closed"',
     '[attr.data-side]': 'item.side()',
@@ -34,9 +34,17 @@ export class ScNavigationMenuContent {
   protected readonly item = inject(ScNavigationMenuItem);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
-    cn(
-      'text-popover-foreground absolute start-0 top-full z-50 mt-2 w-max p-1',
+  protected readonly class = computed(() => {
+    const align = this.menu.align();
+    return cn(
+      'text-popover-foreground absolute top-full z-50 mt-2 w-max',
+      this.menu.styles.content,
+      // Lined up under its trigger. Centred by `transform`, apart from the
+      // slide's `translate`.
+      align === 'start' && 'start-0',
+      align === 'end' && 'end-0',
+      align === 'center' &&
+        'start-1/2 [transform:translateX(-50%)] rtl:[transform:translateX(50%)]',
       // A bridge over the gap: the pointer crossing it stays on the item.
       'before:absolute before:inset-x-0 before:-top-2 before:h-2',
       'transition-[opacity,translate,scale,visibility] duration-[0.35s] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none',
@@ -49,12 +57,12 @@ export class ScNavigationMenuContent {
       'rtl:data-[state=closed]:data-[side=start]:translate-x-12 rtl:data-[state=closed]:data-[side=end]:-translate-x-12',
       !this.item.side() && 'data-[state=closed]:scale-95',
       // Without the shared box: its own.
-      !this.menu.viewport() &&
-        'bg-popover rounded-lg shadow ring-1 ring-foreground/10',
+      !this.menu.viewport() && this.menu.styles.popup,
+      // Its links show focus by their background (shadcn's).
       '**:data-[slot=navigation-menu-link]:focus:ring-0 **:data-[slot=navigation-menu-link]:focus:outline-none',
       this.classInput(),
-    ),
-  );
+    );
+  });
 
   constructor() {
     const element = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;

@@ -1,4 +1,5 @@
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import {
   ScNavigationMenu,
   ScNavigationMenuContent,
@@ -10,12 +11,17 @@ import {
 } from '@semantic-components/ui';
 import {
   SiChevronDownIcon,
-  SiSparklesIcon,
+  SiCircleAlertIcon,
+  SiCircleCheckIcon,
+  SiCircleDashedIcon,
 } from '@semantic-icons/lucide-icons';
 
+/** Without the shared box ([viewport]="false"): each panel its own, under its trigger. */
 @Component({
   selector: 'app-separate-navigation-menu-demo',
   imports: [
+    RouterLink,
+    RouterLinkActive,
     ScNavigationMenu,
     ScNavigationMenuContent,
     ScNavigationMenuItem,
@@ -24,10 +30,12 @@ import {
     ScNavigationMenuTrigger,
     ScNavigationMenuTriggerIcon,
     SiChevronDownIcon,
-    SiSparklesIcon,
+    SiCircleAlertIcon,
+    SiCircleCheckIcon,
+    SiCircleDashedIcon,
   ],
   template: `
-    <nav scNavigationMenu aria-label="Main, separate" [viewport]="false">
+    <nav scNavigationMenu aria-label="Main, separate panels" [viewport]="false">
       <ul scNavigationMenuList>
         <li scNavigationMenuItem value="getting-started">
           <button scNavigationMenuTrigger>
@@ -35,72 +43,81 @@ import {
             <svg siChevronDownIcon scNavigationMenuTriggerIcon></svg>
           </button>
           <div scNavigationMenuContent>
-            <ul class="grid w-96 gap-1 md:w-[28rem] md:grid-cols-[.75fr_1fr]">
-              <li class="row-span-3">
-                <a
-                  scNavigationMenuLink
-                  href="#"
-                  class="from-muted/50 to-muted h-full flex-col items-start justify-end bg-linear-to-b p-4"
-                  (click)="$event.preventDefault()"
-                >
-                  <svg siSparklesIcon class="size-6"></svg>
-                  <span class="mt-2 text-base font-medium"
-                    >Semantic Components</span
-                  >
-                  <span class="text-muted-foreground text-sm leading-tight">
-                    Accessible Angular components, styled with Tailwind.
-                  </span>
-                </a>
-              </li>
-              @for (page of guides; track page.title) {
+            <ul class="w-96">
+              @for (page of gettingStarted; track page.link) {
                 <li>
-                  <a
-                    scNavigationMenuLink
-                    href="#"
-                    class="flex-col items-start gap-1"
-                    (click)="$event.preventDefault()"
-                  >
-                    <span class="font-medium">{{ page.title }}</span>
-                    <span class="text-muted-foreground line-clamp-2">
-                      {{ page.text }}
-                    </span>
+                  <a scNavigationMenuLink [routerLink]="page.link">
+                    <div class="flex flex-col gap-1 text-sm">
+                      <div class="leading-none font-medium">
+                        {{ page.title }}
+                      </div>
+                      <div class="text-muted-foreground line-clamp-2">
+                        {{ page.text }}
+                      </div>
+                    </div>
                   </a>
                 </li>
               }
             </ul>
           </div>
         </li>
-        <li scNavigationMenuItem value="components">
+        <li scNavigationMenuItem value="components" class="hidden md:flex">
           <button scNavigationMenuTrigger>
             Components
             <svg siChevronDownIcon scNavigationMenuTriggerIcon></svg>
           </button>
           <div scNavigationMenuContent>
-            <ul class="grid w-96 gap-1 md:w-[32rem] md:grid-cols-2">
-              @for (component of components; track component.title) {
+            <ul
+              class="grid w-[400px] gap-2 md:w-[500px] md:grid-cols-2 lg:w-[600px]"
+            >
+              @for (component of components; track component.link) {
                 <li>
-                  <a
-                    scNavigationMenuLink
-                    href="#"
-                    class="flex-col items-start gap-1"
-                    (click)="$event.preventDefault()"
-                  >
-                    <span class="font-medium">{{ component.title }}</span>
-                    <span class="text-muted-foreground line-clamp-2">
-                      {{ component.text }}
-                    </span>
+                  <a scNavigationMenuLink [routerLink]="component.link">
+                    <div class="flex flex-col gap-1 text-sm">
+                      <div class="leading-none font-medium">
+                        {{ component.title }}
+                      </div>
+                      <div class="text-muted-foreground line-clamp-2">
+                        {{ component.text }}
+                      </div>
+                    </div>
                   </a>
                 </li>
               }
+            </ul>
+          </div>
+        </li>
+        <li scNavigationMenuItem value="with-icon">
+          <button scNavigationMenuTrigger>
+            With Icon
+            <svg siChevronDownIcon scNavigationMenuTriggerIcon></svg>
+          </button>
+          <div scNavigationMenuContent>
+            <ul class="grid w-[200px]">
+              <li>
+                <a scNavigationMenuLink routerLink="." fragment="backlog">
+                  <svg siCircleAlertIcon></svg>
+                  Backlog
+                </a>
+                <a scNavigationMenuLink routerLink="." fragment="to-do">
+                  <svg siCircleDashedIcon></svg>
+                  To Do
+                </a>
+                <a scNavigationMenuLink routerLink="." fragment="done">
+                  <svg siCircleCheckIcon></svg>
+                  Done
+                </a>
+              </li>
             </ul>
           </div>
         </li>
         <li scNavigationMenuItem>
           <a
             scNavigationMenuLink
-            href="#"
-            [active]="docs()"
-            (click)="$event.preventDefault(); docs.set(true)"
+            routerLink="/docs/getting-started"
+            routerLinkActive
+            #docs="routerLinkActive"
+            [active]="docs.isActive"
           >
             Docs
           </a>
@@ -108,38 +125,58 @@ import {
       </ul>
     </nav>
   `,
-  host: { class: 'flex w-full justify-center p-4' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
 export class SeparateNavigationMenuDemo {
-  readonly guides = [
+  readonly gettingStarted = [
     {
+      link: '/docs/getting-started/introduction',
       title: 'Introduction',
-      text: 'Components you import and use as they are.',
+      text: 'Accessible Angular components, styled with Tailwind.',
     },
     {
+      link: '/docs/getting-started/prerequisites',
       title: 'Installation',
-      text: 'How to install the library and set up its theme.',
+      text: 'How to install dependencies and structure your app.',
     },
     {
+      link: '/docs/components/typography',
       title: 'Typography',
-      text: 'Styles for headings, paragraphs, lists and more.',
+      text: 'Styles for headings, paragraphs, lists…',
     },
   ];
+
   readonly components = [
     {
+      link: '/docs/components/alert-dialog',
       title: 'Alert Dialog',
-      text: 'A modal dialog that interrupts with important content.',
+      text: 'A modal dialog that interrupts with important content and expects a response.',
     },
-    { title: 'Hover Card', text: 'A preview of the content behind a link.' },
-    { title: 'Progress', text: 'How far a task has gone.' },
     {
+      link: '/docs/components/preview-card',
+      title: 'Preview Card',
+      text: 'A preview of the content behind a link.',
+    },
+    {
+      link: '/docs/components/progress',
+      title: 'Progress',
+      text: 'How far a task has gone, as a bar.',
+    },
+    {
+      link: '/docs/components/scroll-area',
       title: 'Scroll Area',
       text: 'Scrolling, styled the same in every browser.',
     },
-    { title: 'Tabs', text: 'Layered sections of content, one at a time.' },
-    { title: 'Tooltip', text: 'A short hint on hover or focus.' },
+    {
+      link: '/docs/components/tabs',
+      title: 'Tabs',
+      text: 'Layered sections of content, shown one at a time.',
+    },
+    {
+      link: '/docs/components/tooltip',
+      title: 'Tooltip',
+      text: 'A short hint on hover or keyboard focus.',
+    },
   ];
-  /** The page shown, in this demo: the Docs link marks it. */
-  readonly docs = signal(false);
 }

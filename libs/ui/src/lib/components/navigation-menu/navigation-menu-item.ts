@@ -15,13 +15,13 @@ import {
 } from './navigation-menu';
 
 /**
- * A top-level item: a link, or a trigger and its panel (`scNavigationMenuContent`,
- * written inside the item, after the trigger — the Tab order).
+ * A top-level item: a link, or a trigger and its panel
+ * (`scNavigationMenuContent`, written inside the item after the trigger —
+ * the Tab order).
  */
 @Directive({
   selector: 'li[scNavigationMenuItem]',
   host: {
-    'data-slot': 'navigation-menu-item',
     '[class]': 'class()',
     '(mouseenter)': 'menu.hoverOpen(trigger() ? value() : null)',
   },
@@ -62,10 +62,12 @@ export class ScNavigationMenuItem implements ScNavigationMenuItemRef {
     inject(DestroyRef).onDestroy(this.menu.register(this));
   }
 
+  /** @internal */
   setTrigger(element: HTMLElement | null): void {
     this.triggerElement.set(element);
   }
 
+  /** @internal */
   setContent(element: HTMLElement | null): void {
     this.contentElement.set(element);
   }
