@@ -162,8 +162,8 @@ import {
               </div>
             </ng-template>
           </div>
-          <div scMenuProvider side="top" align="end" class="ms-auto">
-            <div scControlGroup aria-label="Conversation">
+          <div scMenuProvider side="top" align="end">
+            <div scControlGroup aria-label="Conversation" class="ms-auto">
               <button scButton variant="outline">Button Group</button>
               <button scButton scMenuTrigger variant="outline" size="icon">
                 <svg siChevronUpIcon></svg>
