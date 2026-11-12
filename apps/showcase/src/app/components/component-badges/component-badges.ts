@@ -5,8 +5,8 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
 import { ScBadge } from '@semantic-components/ui';
+import { cn } from 'cn';
 import { ComponentItem } from '../../data/components';
 import { ComponentsService } from '../../services/components-service';
 import { ComponentStatusBadge } from '../component-status-badge/component-status-badge';

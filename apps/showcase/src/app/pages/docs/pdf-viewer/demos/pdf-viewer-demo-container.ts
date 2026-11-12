@@ -89,7 +89,6 @@ import {
   ScTooltipPortal,
   ScTooltipProvider,
   ScTooltipTrigger,
-  cn,
 } from '@semantic-components/ui';
 import {
   type ScPdfDocumentProperties,
@@ -223,6 +222,7 @@ import {
   SiZoomInIcon,
   SiZoomOutIcon,
 } from '@semantic-icons/lucide-icons';
+import { cn } from 'cn';
 
 /** Your names for the standard paper sizes. */
 const PAPER_NAMES: Record<ScPdfPaperSize, string> = {

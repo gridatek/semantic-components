@@ -7,8 +7,9 @@ import {
   inject,
   input,
 } from '@angular/core';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { bindInput, cn } from '../../utils';
+import { bindInput } from '../../utils';
 import { openOnTypeahead } from '../select/select-typeahead';
 import { SC_MULTISELECT, SC_MULTISELECT_TRIGGER } from './multiselect-tokens';
 

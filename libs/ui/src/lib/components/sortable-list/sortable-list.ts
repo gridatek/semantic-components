@@ -9,11 +9,11 @@ import {
   input,
   model,
 } from '@angular/core';
+import { cn } from 'cn';
 import {
   ScSortable,
   type ScSortableOrientation,
 } from '../../utilities/sortable';
-import { cn } from '../../utils/cn/cn';
 import { ScSortableListItem } from './sortable-list-item';
 
 /** How a list is laid out: down, along, or as a grid. */

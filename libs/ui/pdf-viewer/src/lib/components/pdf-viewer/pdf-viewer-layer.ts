@@ -1,5 +1,6 @@
 import { Directive, computed, effect, inject, input } from '@angular/core';
-import { ScCheckbox, cn } from '@semantic-components/ui';
+import { ScCheckbox } from '@semantic-components/ui';
+import { cn } from 'cn';
 import { SC_PDF_VIEWER } from './pdf-viewer';
 import type { ScPdfLayer } from './pdf-viewer-types';
 

@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn } from '../../utils';
 
 /**
  * One chunk of the code's inputs, joined into one box (separate boxes in

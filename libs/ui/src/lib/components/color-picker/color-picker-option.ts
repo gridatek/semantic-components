@@ -6,8 +6,8 @@ import {
   inject,
   input,
 } from '@angular/core';
+import { cn } from 'cn';
 import { ɵwarnIfUnnamed } from '../../utils/accessible-name/accessible-name';
-import { cn } from '../../utils/cn/cn';
 import { sameRgba } from './color';
 import { ScColorPicker } from './color-picker';
 import { CHECKERBOARD } from './color-picker-slider';

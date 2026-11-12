@@ -7,7 +7,7 @@ import {
   input,
   numberAttribute,
 } from '@angular/core';
-import { cn } from '../../utils/cn/cn';
+import { cn } from 'cn';
 import { ScMasonryGrid } from './masonry-grid';
 
 /**

@@ -1,6 +1,7 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { cn, injectPreset } from '@semantic-components/ui';
+import { injectPreset } from '@semantic-components/ui';
 import { SC_EDITOR } from '@semantic-components/ui/editor';
+import { cn } from 'cn';
 import {
   type ScEditorSearchFlag as Option,
   editorSearch,

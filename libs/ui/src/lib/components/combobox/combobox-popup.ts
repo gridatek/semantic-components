@@ -8,8 +8,8 @@ import {
   inject,
   input,
 } from '@angular/core';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn } from '../../utils';
 import { ScPortalOutlet } from '../portal-outlet/portal-outlet';
 import { ScComboboxBase } from './combobox-base';
 import { ScComboboxListContent } from './combobox-list-content';

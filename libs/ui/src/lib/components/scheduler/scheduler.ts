@@ -10,7 +10,7 @@ import {
   model,
   signal,
 } from '@angular/core';
-import { cn } from '../../utils/cn/cn';
+import { cn } from 'cn';
 import { ScSchedulerEventTemplate } from './scheduler-event-template';
 import { daysFrom, monthWeeks, startOfWeek } from './scheduler-layout';
 import { ScSchedulerMoreTemplate } from './scheduler-more-template';

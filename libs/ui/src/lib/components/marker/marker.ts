@@ -1,7 +1,7 @@
 import { Directive, ElementRef, computed, inject, input } from '@angular/core';
 import { cva } from 'class-variance-authority';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn } from '../../utils';
 
 export type ScMarkerVariant = 'default' | 'separator' | 'border';
 

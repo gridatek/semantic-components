@@ -14,7 +14,7 @@ import {
   signal,
   untracked,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from 'cn';
 import type { PDFDocumentLoadingTask, PDFDocumentProxy } from 'pdfjs-dist';
 import {
   AnnotationMode,

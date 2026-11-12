@@ -5,7 +5,7 @@ import {
   forwardRef,
   inject,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 import { ScCalendar } from './calendar';
 
 /**

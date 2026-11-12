@@ -9,8 +9,8 @@ import {
   signal,
   untracked,
 } from '@angular/core';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn } from '../../utils';
 import { SC_FIELD } from '../field';
 import { SC_NUMBER_FIELD } from './number-field';
 import { isNumberCharacter } from './number-field-format';

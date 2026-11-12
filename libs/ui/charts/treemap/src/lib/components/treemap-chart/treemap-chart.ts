@@ -6,7 +6,6 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
 import {
   SC_CHART_SERIES,
   type ScChartLabelPoint,
@@ -15,6 +14,7 @@ import {
   ScChartState,
   numberOf,
 } from '@semantic-components/ui/charts';
+import { cn } from 'cn';
 import { hierarchy, treemap, treemapSquarify } from 'd3-hierarchy';
 
 interface ScTreemapChartNode {

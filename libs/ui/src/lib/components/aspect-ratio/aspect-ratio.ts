@@ -1,5 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 
 /**
  * Keeps its content to a ratio of width to height. The ratio goes through a

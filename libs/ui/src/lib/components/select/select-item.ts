@@ -8,8 +8,9 @@ import {
   inject,
   input,
 } from '@angular/core';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn, setInput, useActiveOption } from '../../utils';
+import { setInput, useActiveOption } from '../../utils';
 import { SC_SELECT } from './select-tokens';
 
 /** An option. Its label is `label`, or its text. */

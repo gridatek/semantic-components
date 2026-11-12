@@ -1,5 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 
 /** A step's detail after its title: a count, a duration, a file. */
 @Directive({

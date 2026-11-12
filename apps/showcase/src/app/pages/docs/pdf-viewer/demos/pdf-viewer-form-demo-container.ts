@@ -37,7 +37,6 @@ import {
   ScTooltipPortal,
   ScTooltipProvider,
   ScTooltipTrigger,
-  cn,
 } from '@semantic-components/ui';
 import {
   ScPdfViewer,
@@ -57,6 +56,7 @@ import {
   SiLoaderCircleIcon,
   SiPrinterIcon,
 } from '@semantic-icons/lucide-icons';
+import { cn } from 'cn';
 
 /**
  * A fillable form: the total is computed by the document's own script, and

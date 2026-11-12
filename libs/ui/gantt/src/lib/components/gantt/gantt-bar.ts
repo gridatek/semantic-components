@@ -10,8 +10,8 @@ import {
   output,
   signal,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
 import { ScDataTableRow } from '@semantic-components/ui/data-table';
+import { cn } from 'cn';
 import { ScGantt } from './gantt';
 import {
   type ScGanttBarRef,

@@ -15,12 +15,12 @@ import {
   untracked,
   viewChild,
 } from '@angular/core';
+import { cn } from 'cn';
 import {
   type ScPlacementBox,
   type ScPlacementSide,
   spotlightPlacement,
 } from '../../utilities/spotlight-placement';
-import { cn } from '../../utils/cn/cn';
 
 /**
  * One element in the spotlight: the page dimmed but for it, your content in

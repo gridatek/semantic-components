@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn } from '../../utils';
 
 /** Text (and its icons) in a group's addon, in the preset's look. */
 @Directive({

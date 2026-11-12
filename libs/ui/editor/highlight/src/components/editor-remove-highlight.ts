@@ -1,9 +1,10 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { cn, injectPreset } from '@semantic-components/ui';
+import { injectPreset } from '@semantic-components/ui';
 import {
   SC_EDITOR,
   ɵassertEditorFeature,
 } from '@semantic-components/ui/editor';
+import { cn } from 'cn';
 
 /**
  * Removes the highlight at the selection, in your highlight popover

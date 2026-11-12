@@ -9,7 +9,7 @@ import {
   input,
   signal,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from 'cn';
 import { ScGantt } from './gantt';
 
 /** A link's path, from a bar's end to the start of the bar that follows it. */

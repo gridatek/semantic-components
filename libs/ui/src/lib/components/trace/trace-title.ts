@@ -1,5 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 
 /**
  * What a step did, as a sentence — its status too ("Failed to run the

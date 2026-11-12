@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn } from '../../utils';
 
 /**
  * An input or a textarea with addons — icons, text, buttons — in one box: the

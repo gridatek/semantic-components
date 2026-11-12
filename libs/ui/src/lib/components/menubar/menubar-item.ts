@@ -16,8 +16,9 @@ import {
   input,
   viewChild,
 } from '@angular/core';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn, setInput } from '../../utils';
+import { setInput } from '../../utils';
 import { ScElementDirectionality } from '../../utils/element-directionality';
 import { ScMenuPortal } from '../menu';
 import { useDefaultSearchTerm } from '../menu/menu-search-term';

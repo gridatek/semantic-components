@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn } from '../../utils';
 
 /** The page beside the sidebar (`main`); with the `inset` variant, a raised card. */
 @Directive({

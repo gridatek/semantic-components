@@ -9,8 +9,8 @@ import {
   signal,
 } from '@angular/core';
 import { FormField } from '@angular/forms/signals';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn } from '../../utils';
 import { SC_FIELD, type ScFieldContext } from '../field/field';
 
 /**

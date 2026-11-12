@@ -1,7 +1,7 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
 import { Directive, computed, inject, input } from '@angular/core';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn } from '../../utils';
 import { SC_FIELD } from '../field';
 import { SC_SELECT } from './select-tokens';
 

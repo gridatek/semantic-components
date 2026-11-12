@@ -5,7 +5,7 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { cn } from '../../utils/cn/cn';
+import { cn } from 'cn';
 import { ScBarcodeScanner } from './barcode-scanner';
 
 /**

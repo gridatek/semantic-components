@@ -1,5 +1,5 @@
 import { Directive, computed, input, signal } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 
 /** Options together: a `group`, named by its label. */
 @Directive({

@@ -1,7 +1,7 @@
 import { Tab } from '@angular/aria/tabs';
 import { Directive, computed, input } from '@angular/core';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn } from '../../utils';
 
 /**
  * A tab (role tab), on your button: its text and icons are yours. A disabled

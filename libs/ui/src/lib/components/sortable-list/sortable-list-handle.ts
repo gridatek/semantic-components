@@ -1,5 +1,5 @@
 import { Directive, ElementRef, computed, inject, input } from '@angular/core';
-import { cn } from '../../utils/cn/cn';
+import { cn } from 'cn';
 
 /**
  * Where an item is gripped — your grip icon, in it: with a handle, only it

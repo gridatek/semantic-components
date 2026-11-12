@@ -18,8 +18,9 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
+import { cn } from 'cn';
 import { ScFocusTrap } from '../../utilities';
-import { cn, elementDirection } from '../../utils';
+import { elementDirection } from '../../utils';
 import {
   type ScOverlayLogicalSide,
   type ScOverlaySide,

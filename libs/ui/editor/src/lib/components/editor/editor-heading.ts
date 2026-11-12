@@ -1,6 +1,7 @@
 import { ToolbarWidget } from '@angular/aria/toolbar';
 import { Directive, computed, inject, input } from '@angular/core';
-import { bindInput, cn, injectPreset } from '@semantic-components/ui';
+import { bindInput, injectPreset } from '@semantic-components/ui';
+import { cn } from 'cn';
 import { SC_EDITOR } from './editor';
 
 export type ScEditorHeadingLevel =

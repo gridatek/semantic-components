@@ -7,7 +7,7 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from 'cn';
 import { ScChartState, numberOf } from './chart-state';
 import type { ScChartIndicator } from './chart-types';
 

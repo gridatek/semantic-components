@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn } from '../../utils';
 
 /** A group's title (a `button`, to open and close a collapsible group). Fades out when collapsed to icons. */
 @Directive({

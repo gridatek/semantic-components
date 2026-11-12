@@ -1,6 +1,6 @@
 import { Toolbar } from '@angular/aria/toolbar';
 import { Directive, computed, input } from '@angular/core';
-import { cn } from '../../utils/cn/cn';
+import { cn } from 'cn';
 
 /**
  * A row of category buttons (`scEmojiPickerCategoryButton` for each of

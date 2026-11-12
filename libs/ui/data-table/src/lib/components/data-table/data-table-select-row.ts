@@ -1,5 +1,5 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from 'cn';
 import { syncDataTableCheckbox } from './data-table-checkbox';
 import { ScDataTableTreeGrid } from './data-table-tree-grid';
 import type { ScDataTableSelectableRow } from './data-table-types';

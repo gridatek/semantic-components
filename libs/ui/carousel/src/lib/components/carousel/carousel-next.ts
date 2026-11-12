@@ -1,5 +1,6 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { ScButtonVariants, cn, injectPreset } from '@semantic-components/ui';
+import { ScButtonVariants, injectPreset } from '@semantic-components/ui';
+import { cn } from 'cn';
 import { ScCarousel } from './carousel';
 
 /** To the next slide: the preset's button (outline, icon-sm), outside the carousel's end (below, vertical); disabled at the last. Write its icon and name it. */

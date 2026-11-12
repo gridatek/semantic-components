@@ -6,7 +6,8 @@ import {
   input,
   signal,
 } from '@angular/core';
-import { cn, ɵwarnIfUnnamed } from '../../utils';
+import { cn } from 'cn';
+import { ɵwarnIfUnnamed } from '../../utils';
 import { SC_RATING } from './rating';
 
 // Token for rating item group context

@@ -1,5 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
-import { cn } from '../../utils/cn/cn';
+import { cn } from 'cn';
 
 /** The center's title — a heading of yours (`h2`, `h3`…). */
 @Directive({

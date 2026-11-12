@@ -17,7 +17,6 @@ import {
   ScTooltipPortal,
   ScTooltipProvider,
   ScTooltipTrigger,
-  cn,
 } from '@semantic-components/ui';
 import {
   type ScPdfPageColors,
@@ -38,6 +37,7 @@ import {
   SiArrowRightIcon,
   SiLoaderCircleIcon,
 } from '@semantic-icons/lucide-icons';
+import { cn } from 'cn';
 
 /** Your reading modes: the pages' text and lines, on a background. */
 const READING_MODES: Record<string, ScPdfPageColors | null> = {

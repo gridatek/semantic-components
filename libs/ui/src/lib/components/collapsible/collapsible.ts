@@ -6,7 +6,7 @@ import {
   model,
   signal,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 
 /**
  * A disclosure: a trigger that shows and hides a panel (Base UI's

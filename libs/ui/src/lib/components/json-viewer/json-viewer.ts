@@ -11,7 +11,7 @@ import {
   numberAttribute,
   signal,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 import { ScTree } from '../tree/tree';
 import { ScTreeItem } from '../tree/tree-item';
 import { ScTreeItemGroup } from '../tree/tree-item-group';

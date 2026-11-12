@@ -1,7 +1,7 @@
 import { Directive, ElementRef, computed, inject, input } from '@angular/core';
 import type { ScInputGroupAddonAlign } from '@semantic-components/presets';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn } from '../../utils';
 
 /**
  * Icons, text or buttons beside a group's control, placed by `align`. Write it

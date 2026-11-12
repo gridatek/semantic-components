@@ -10,8 +10,8 @@ import {
   signal,
   untracked,
 } from '@angular/core';
+import { cn } from 'cn';
 import { startWith } from 'rxjs';
-import { cn } from '../../utils/cn/cn';
 import { SC_STEPPER, ScStepperOrientation } from './stepper-types';
 
 /**

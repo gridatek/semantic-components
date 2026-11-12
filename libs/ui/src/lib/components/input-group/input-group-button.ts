@@ -3,8 +3,8 @@ import type {
   ScButtonVariant,
   ScInputGroupButtonSize,
 } from '@semantic-components/presets';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn } from '../../utils';
 
 /**
  * A button inside an input group's addon: the preset's button (ghost by

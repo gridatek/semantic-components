@@ -1,5 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
-import { cn, injectPreset } from '@semantic-components/ui';
+import { injectPreset } from '@semantic-components/ui';
+import { cn } from 'cn';
 
 /** The block's title — a file name, a language; an icon of yours before it. */
 @Directive({

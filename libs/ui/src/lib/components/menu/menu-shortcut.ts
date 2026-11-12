@@ -1,5 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 import { injectMenuStyles } from './menu-styles';
 
 /** The keyboard hint at the end of an item; the text is yours. */

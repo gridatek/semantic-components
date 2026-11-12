@@ -11,8 +11,8 @@ import type {
   ScButtonSize,
   ScButtonVariant,
 } from '@semantic-components/presets';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn } from '../../utils';
 
 /** A button's look: its variant and size, the classes the preset's. */
 export interface ScButtonVariants {

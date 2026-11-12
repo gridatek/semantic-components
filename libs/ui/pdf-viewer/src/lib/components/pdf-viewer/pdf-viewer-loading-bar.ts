@@ -1,5 +1,6 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { ScProgress, bindInput, cn } from '@semantic-components/ui';
+import { ScProgress, bindInput } from '@semantic-components/ui';
+import { cn } from 'cn';
 import { SC_PDF_VIEWER } from './pdf-viewer';
 
 /**

@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation, computed, input } from '@angular/core';
-import { cn } from '../../utils/cn/cn';
+import { cn } from 'cn';
 
 /** The viewfinder: four corners, where to hold the code. Decorative; size and place it with classes. */
 @Component({

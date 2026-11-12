@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation, computed, input } from '@angular/core';
-import { cn } from '../../utils/cn/cn';
+import { cn } from 'cn';
 
 /**
  * Guide lines in the selection — thirds by default (`columns`, `rows`):

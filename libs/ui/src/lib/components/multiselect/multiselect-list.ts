@@ -9,7 +9,8 @@ import {
   input,
   untracked,
 } from '@angular/core';
-import { bindInput, cn } from '../../utils';
+import { cn } from 'cn';
+import { bindInput } from '../../utils';
 import { SC_MULTISELECT } from './multiselect-tokens';
 
 const sameValues = (a: readonly string[], b: readonly string[]) =>

@@ -1,5 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from 'cn';
 import { dataTablePinnedClasses, dataTablePinning } from './data-table-pinning';
 import type { ScDataTableCellColumn } from './data-table-types';
 

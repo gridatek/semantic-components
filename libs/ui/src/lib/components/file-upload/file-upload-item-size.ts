@@ -6,7 +6,7 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 import { ScFileUploadItem } from './file-upload-item';
 
 const UNITS = ['byte', 'kilobyte', 'megabyte', 'gigabyte'] as const;

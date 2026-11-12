@@ -1,5 +1,5 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 import { toastColors } from './toast-colors';
 import { SC_TOAST_CONTEXT } from './toast-context';
 

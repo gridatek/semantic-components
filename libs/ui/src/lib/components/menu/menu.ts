@@ -10,7 +10,7 @@ import {
   input,
   signal,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 import { SC_CONTEXT_MENU } from '../context-menu/context-menu-types';
 import { SC_MENU } from './menu-context';
 import { ScMenuPortal } from './menu-portal';

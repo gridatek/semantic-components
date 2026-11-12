@@ -7,8 +7,8 @@ import {
   inject,
   input,
 } from '@angular/core';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn } from '../../utils';
 import { SC_TOAST_CONTEXT } from './toast-context';
 import {
   SC_TOAST_LAYOUT,

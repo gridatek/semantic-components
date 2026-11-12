@@ -1,6 +1,6 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
 import { Directive, computed, effect, inject, input } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 import { ScPasswordField } from './password-field';
 
 /**

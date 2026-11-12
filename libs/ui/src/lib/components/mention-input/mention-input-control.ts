@@ -1,7 +1,7 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
 import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { Directive, ElementRef, computed, inject, input } from '@angular/core';
-import { cn } from '../../utils/cn/cn';
+import { cn } from 'cn';
 import { SC_FIELD } from '../field/field';
 import { ScMentionInputState } from './mention-input-state';
 

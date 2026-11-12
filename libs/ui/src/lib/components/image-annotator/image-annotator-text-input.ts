@@ -9,7 +9,7 @@ import {
   input,
   untracked,
 } from '@angular/core';
-import { cn } from '../../utils/cn/cn';
+import { cn } from 'cn';
 import { ScImageAnnotator } from './image-annotator';
 import { fontSize } from './image-annotator-geometry';
 

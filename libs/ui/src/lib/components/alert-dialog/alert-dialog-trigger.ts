@@ -1,5 +1,5 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 import { ScAlertDialogProvider } from './alert-dialog-provider';
 
 @Directive({

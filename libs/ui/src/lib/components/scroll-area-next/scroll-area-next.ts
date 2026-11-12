@@ -7,7 +7,8 @@ import {
   input,
   signal,
 } from '@angular/core';
-import { cn, elementDirection } from '../../utils';
+import { cn } from 'cn';
+import { elementDirection } from '../../utils';
 
 /** A scroll area's axis: its scrollbar's orientation. */
 export type ScScrollAreaNextOrientation = 'vertical' | 'horizontal';

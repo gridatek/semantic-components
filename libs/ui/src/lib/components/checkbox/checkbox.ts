@@ -10,8 +10,8 @@ import {
   model,
 } from '@angular/core';
 import type { FormCheckboxControl } from '@angular/forms/signals';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn } from '../../utils';
 import { SC_FIELD } from '../field';
 import { ScCheckboxGroup } from './checkbox-group';
 

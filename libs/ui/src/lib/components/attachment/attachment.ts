@@ -3,8 +3,8 @@ import type {
   ScAttachmentOrientation,
   ScAttachmentSize,
 } from '@semantic-components/presets';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn } from '../../utils';
 
 export type ScAttachmentState =
   'idle' | 'uploading' | 'processing' | 'error' | 'done';

@@ -17,7 +17,7 @@ import {
   RouterLinkActive,
   RouterOutlet,
 } from '@angular/router';
-import { cn } from '@semantic-components/ui';
+import { cn } from 'cn';
 import { filter } from 'rxjs';
 import { Toc } from '../../components/toc/toc';
 import { TocService } from '../../components/toc/toc-service';

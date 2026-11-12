@@ -7,7 +7,7 @@ import {
   input,
   signal,
 } from '@angular/core';
-import { cn } from '../../utils/cn/cn';
+import { cn } from 'cn';
 import type { ScDockItem } from './dock-item';
 
 /**

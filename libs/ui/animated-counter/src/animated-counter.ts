@@ -13,7 +13,7 @@ import {
   signal,
   untracked,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from 'cn';
 import { type AnimationPlaybackControls, animate } from 'motion';
 
 /** How a change is shown: the number counting, or each digit rolling. */

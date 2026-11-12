@@ -1,5 +1,5 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { cn } from '../../utils/cn/cn';
+import { cn } from 'cn';
 import { ScTimeline } from './timeline';
 
 /** Across the line from the content — a date facing its event. Optional. */

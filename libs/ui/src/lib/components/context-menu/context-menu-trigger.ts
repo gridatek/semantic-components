@@ -1,5 +1,5 @@
 import { Directive, ElementRef, computed, inject, input } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 
 /**
  * The area that opens the context menu. It is focusable so keyboard users can

@@ -5,7 +5,7 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 import { SC_SELECT } from './select-tokens';
 
 /**

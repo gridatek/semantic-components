@@ -1,5 +1,5 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 import { ScDrawerProvider } from './drawer-provider';
 
 /** Opens the drawer, on any button: behaviour only, the look is the button's. */

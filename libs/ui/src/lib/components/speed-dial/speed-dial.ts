@@ -12,7 +12,7 @@ import {
   model,
   signal,
 } from '@angular/core';
-import { cn } from '../../utils/cn/cn';
+import { cn } from 'cn';
 
 /**
  * Where the actions open: in a line (`up`, `down`, `left`, `right`), or on a

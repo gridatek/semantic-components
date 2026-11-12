@@ -9,8 +9,8 @@ import type {
   ScSidebarMenuButtonSize,
   ScSidebarMenuButtonVariant,
 } from '@semantic-components/presets';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn } from '../../utils';
 import { ScSidebarMenuTooltip } from './sidebar-menu-tooltip';
 import { ScSidebarState } from './sidebar-state';
 

@@ -13,8 +13,8 @@ import {
 } from '@angular/core';
 import { FormField } from '@angular/forms/signals';
 import { type VariantProps, cva } from 'class-variance-authority';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn } from '../../utils';
 
 const fieldVariants = cva('', {
   variants: {

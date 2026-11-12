@@ -6,7 +6,7 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 import { ScProgress } from './progress';
 
 /** The time one slide across an indeterminate bar takes (ms). */

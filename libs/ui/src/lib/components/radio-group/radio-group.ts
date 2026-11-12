@@ -10,8 +10,8 @@ import {
   output,
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn } from '../../utils';
 
 /**
  * A group of radios, one picked: the group holds the choice — a [formField]

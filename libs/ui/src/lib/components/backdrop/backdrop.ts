@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation, computed, input } from '@angular/core';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn } from '../../utils';
 
 /**
  * A dimmed, blurred layer behind an overlay. It fades in when shown and out

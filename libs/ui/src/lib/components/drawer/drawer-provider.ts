@@ -20,8 +20,9 @@ import {
   untracked,
   viewChild,
 } from '@angular/core';
+import { cn } from 'cn';
 import { ScFocusTrap } from '../../utilities';
-import { cn, elementDirection } from '../../utils';
+import { elementDirection } from '../../utils';
 import { ScBackdrop } from '../backdrop';
 import { ScDrawerPortal } from './drawer-portal';
 

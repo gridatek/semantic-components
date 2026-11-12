@@ -34,7 +34,6 @@ import {
   ScTooltipPortal,
   ScTooltipProvider,
   ScTooltipTrigger,
-  cn,
 } from '@semantic-components/ui';
 import {
   ScPdfViewer,
@@ -52,6 +51,7 @@ import {
   SiLoaderCircleIcon,
   SiPresentationIcon,
 } from '@semantic-icons/lucide-icons';
+import { cn } from 'cn';
 
 /**
  * Presentation mode, and the view options it overrides while it's on

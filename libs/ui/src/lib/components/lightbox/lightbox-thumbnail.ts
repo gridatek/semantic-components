@@ -1,6 +1,6 @@
 import { Directive, computed, inject, input } from '@angular/core';
+import { cn } from 'cn';
 import { ɵwarnIfUnnamed } from '../../utils/accessible-name/accessible-name';
-import { cn } from '../../utils/cn/cn';
 import { ScLightbox } from './lightbox';
 
 /**

@@ -7,7 +7,7 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 // Imported here (below the class) to avoid circular dependency at class-definition time.
 // The forwardRef(() => ...) above defers resolution until runtime.
 import { ScRangeSliderEndThumb } from './range-slider-end-thumb';

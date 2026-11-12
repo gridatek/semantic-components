@@ -8,7 +8,7 @@ import {
   input,
   signal,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 import { SC_SCROLL_AREA } from './scroll-area-types';
 
 const MIN_THUMB_SIZE = 20;

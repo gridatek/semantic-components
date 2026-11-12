@@ -6,7 +6,7 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 import { ScNavigationMenu } from './navigation-menu';
 import { ScNavigationMenuItem } from './navigation-menu-item';
 

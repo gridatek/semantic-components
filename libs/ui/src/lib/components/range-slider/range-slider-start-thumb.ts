@@ -1,6 +1,6 @@
 import { Directive, computed, inject, input, model } from '@angular/core';
 import { FormValueControl } from '@angular/forms/signals';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 import { ScRangeSlider } from './range-slider';
 import { START_THUMB_CLASSES } from './range-slider-thumb-base';
 

@@ -1,8 +1,8 @@
 import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { Directive, computed, inject, input } from '@angular/core';
 import type { ScInputGroupButtonSize } from '@semantic-components/presets';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn } from '../../utils';
 import { type ScButtonVariants } from '../button';
 import { ScInputGroup } from '../input-group';
 import { ScPopoverProvider } from '../popover';

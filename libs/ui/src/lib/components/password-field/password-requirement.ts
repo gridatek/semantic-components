@@ -1,5 +1,5 @@
 import { Directive, booleanAttribute, computed, input } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 
 /**
  * A rule — "At least 8 characters" — met or not (`met`, `data-met`): your

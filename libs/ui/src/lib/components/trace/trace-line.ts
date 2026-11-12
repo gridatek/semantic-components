@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn } from '../../utils';
 
 /** Where a step is: still running, failed, waiting — done when not set. */
 export type ScTraceLineStatus = 'running' | 'error' | 'pending';

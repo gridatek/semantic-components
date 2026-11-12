@@ -5,7 +5,7 @@ import {
   input,
   model,
 } from '@angular/core';
-import { cn } from '../../utils/cn/cn';
+import { cn } from 'cn';
 
 @Component({
   selector: 'div[scNativeDialogProvider]',

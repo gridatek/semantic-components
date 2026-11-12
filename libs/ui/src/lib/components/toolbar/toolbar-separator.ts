@@ -1,6 +1,6 @@
 import { Toolbar } from '@angular/aria/toolbar';
 import { Directive, computed, inject, input } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 
 @Directive({
   selector: 'div[scToolbarSeparator]',

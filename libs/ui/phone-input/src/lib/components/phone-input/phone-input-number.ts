@@ -7,7 +7,8 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { SC_FIELD, cn, injectPreset } from '@semantic-components/ui';
+import { SC_FIELD, injectPreset } from '@semantic-components/ui';
+import { cn } from 'cn';
 import { PHONE_SEPARATOR } from './phone-input-text';
 import { SC_PHONE_INPUT } from './phone-input-types';
 

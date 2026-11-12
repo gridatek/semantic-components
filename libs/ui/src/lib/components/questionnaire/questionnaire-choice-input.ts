@@ -7,7 +7,7 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 import { ScQuestionnaire } from './questionnaire';
 import { ScQuestionnaireChoice } from './questionnaire-choice';
 import { ScQuestionnaireItem } from './questionnaire-item';

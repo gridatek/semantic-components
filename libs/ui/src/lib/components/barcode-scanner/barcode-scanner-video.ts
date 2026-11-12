@@ -1,5 +1,5 @@
 import { Directive, ElementRef, computed, inject, input } from '@angular/core';
-import { cn } from '../../utils/cn/cn';
+import { cn } from 'cn';
 import { ScBarcodeScanner } from './barcode-scanner';
 
 /** Your `video`: the camera, filling the scanner (the front one, mirrored). */

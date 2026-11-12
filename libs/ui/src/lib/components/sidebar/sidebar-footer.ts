@@ -1,5 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 
 /** The bottom of the sidebar: the user, settings… */
 @Directive({

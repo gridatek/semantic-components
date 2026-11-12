@@ -13,7 +13,7 @@ import {
   output,
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 import type { ScCalendarRange } from '../calendar';
 import { ScDatePicker } from '../date-picker/date-picker';
 import { SC_FIELD } from '../field';

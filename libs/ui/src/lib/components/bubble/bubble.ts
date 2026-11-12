@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
 import { cva } from 'class-variance-authority';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 
 export type ScBubbleVariant =
   | 'default'

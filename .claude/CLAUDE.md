@@ -42,7 +42,7 @@ You are an expert in TypeScript, Angular, and scalable web application developme
   protected readonly class = computed(() => cn('block', this.classInput()));
   ```
 
-  - Import `cn` from `@semantic-components/ui`.
+  - Import `cn` from the `cn` package (shadcn's): `import { cn } from 'cn'`.
   - Simple demo components can use static `host: { class: 'block' }` instead.
 
 - A part on a `button` styles itself: the preset's button, `private readonly buttonStyles = injectPreset().button;` then `this.buttonStyles({ variant, size })` (a toggle: `injectPreset().toggle`), `variant` and `size` inputs whose defaults suit its place, plus only the classes that are its own (position, visibility). No class list that copies a button look, and consumers add no `scButton`. Model: `pagination-last.ts`. Exceptions, which only add behaviour: triggers that go on any button (`scDialogTrigger`, `scDrawerTrigger`, `scSheetTrigger`…), controls over media (the lightbox's), and items in lists or grids. See [docs/button-parts-styling.md](../docs/button-parts-styling.md)

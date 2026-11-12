@@ -8,7 +8,7 @@ import {
   input,
   model,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 import { ScRatingItem } from './rating-item';
 
 // Token for rating context

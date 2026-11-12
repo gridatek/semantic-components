@@ -1,5 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
-import { cn, ɵwarnIfUnnamed } from '../../utils';
+import { cn } from 'cn';
+import { ɵwarnIfUnnamed } from '../../utils';
 
 /**
  * Something loading, on your icon's `svg` (`siLoaderCircleIcon`…): a status,

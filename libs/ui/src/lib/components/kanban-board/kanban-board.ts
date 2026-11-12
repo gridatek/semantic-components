@@ -9,8 +9,8 @@ import {
   input,
   model,
 } from '@angular/core';
+import { cn } from 'cn';
 import { ScSortable } from '../../utilities/sortable';
-import { cn } from '../../utils/cn/cn';
 import { ScKanbanCard } from './kanban-card';
 import { ScKanbanColumn } from './kanban-column';
 

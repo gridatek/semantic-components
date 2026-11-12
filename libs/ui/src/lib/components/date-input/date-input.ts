@@ -14,8 +14,8 @@ import {
   untracked,
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn } from '../../utils';
 import type { ScCalendarRange } from '../calendar';
 import { ScDatePicker } from '../date-picker/date-picker';
 import { SC_FIELD } from '../field';

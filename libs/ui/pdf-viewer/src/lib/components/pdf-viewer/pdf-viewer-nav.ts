@@ -1,5 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from 'cn';
 
 /** Groups the page navigation controls (`role="group"`); give it an `aria-label`. */
 @Directive({

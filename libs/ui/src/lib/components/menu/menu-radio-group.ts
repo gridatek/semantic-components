@@ -1,5 +1,5 @@
 import { Directive, computed, input, model, signal } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 import { SC_MENU_GROUP } from './menu-context';
 
 /** Radio items, one of them on: `[(value)]`, the chosen item's value. */

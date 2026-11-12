@@ -1,6 +1,7 @@
 import { Directive, computed, inject, input } from '@angular/core';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn, ɵwarnIfUnnamed } from '../../utils';
+import { ɵwarnIfUnnamed } from '../../utils';
 import type { ScButtonVariants } from '../button/button';
 import { ScPasswordField } from './password-field';
 

@@ -1,5 +1,5 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { cn } from '../../utils/cn/cn';
+import { cn } from 'cn';
 import { ScColorPicker } from './color-picker';
 import { CHECKERBOARD } from './color-picker-slider';
 

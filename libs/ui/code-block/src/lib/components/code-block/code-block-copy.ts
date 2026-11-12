@@ -1,11 +1,8 @@
 import { CdkCopyToClipboard } from '@angular/cdk/clipboard';
 import { Directive, computed, inject, input } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import {
-  type ScButtonVariants,
-  cn,
-  injectPreset,
-} from '@semantic-components/ui';
+import { type ScButtonVariants, injectPreset } from '@semantic-components/ui';
+import { cn } from 'cn';
 import { concat, delay, filter, of, switchMap } from 'rxjs';
 
 /**

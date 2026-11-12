@@ -9,7 +9,7 @@ import {
   output,
   untracked,
 } from '@angular/core';
-import { cn } from '../../utils/cn/cn';
+import { cn } from 'cn';
 import {
   SC_EMOJIBASE_URL,
   SC_EMOJI_SKIN_TONES,

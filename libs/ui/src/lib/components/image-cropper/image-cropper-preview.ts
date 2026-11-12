@@ -8,7 +8,7 @@ import {
   input,
   signal,
 } from '@angular/core';
-import { cn } from '../../utils/cn/cn';
+import { cn } from 'cn';
 import type { ScImageCropperSize } from './image-cropper-geometry';
 
 /**

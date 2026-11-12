@@ -8,7 +8,8 @@ import {
   input,
   untracked,
 } from '@angular/core';
-import { bindInput, cn } from '../../utils';
+import { cn } from 'cn';
+import { bindInput } from '../../utils';
 import { SC_AUTOCOMPLETE, SC_AUTOCOMPLETE_INPUT } from './autocomplete-tokens';
 
 @Directive({

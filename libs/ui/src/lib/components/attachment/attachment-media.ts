@@ -1,7 +1,7 @@
 import { Directive, computed, input } from '@angular/core';
 import type { ScAttachmentMediaVariant } from '@semantic-components/presets';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn } from '../../utils';
 
 @Directive({
   selector: 'div[scAttachmentMedia]',

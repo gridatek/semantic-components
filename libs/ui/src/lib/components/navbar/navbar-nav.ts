@@ -1,5 +1,5 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { cn } from '../../utils/cn/cn';
+import { cn } from 'cn';
 import { ScNavbar } from './navbar';
 
 const SHOWN = { sm: 'sm:flex', md: 'md:flex', lg: 'lg:flex' } as const;

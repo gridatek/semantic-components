@@ -1,6 +1,6 @@
 import { Directive, computed, input, signal } from '@angular/core';
+import { cn } from 'cn';
 import { ɵwarnIfUnnamed } from '../../utils/accessible-name/accessible-name';
-import { cn } from '../../utils/cn/cn';
 
 /** What the group knows of an option. */
 export interface ScColorPickerSwatchesOption {

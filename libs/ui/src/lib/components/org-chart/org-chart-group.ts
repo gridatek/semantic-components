@@ -9,8 +9,8 @@ import {
   inject,
   input,
 } from '@angular/core';
+import { cn } from 'cn';
 import { setInput } from '../../utils/bind-input/bind-input';
-import { cn } from '../../utils/cn/cn';
 import { ScTreeItemGroupRef } from '../tree/tree-item-group-ref';
 import {
   SC_TREE_ITEM_GROUP,

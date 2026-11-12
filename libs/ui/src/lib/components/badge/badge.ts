@@ -1,7 +1,7 @@
 import { Directive, computed, input } from '@angular/core';
 import type { ScBadgeVariant } from '@semantic-components/presets';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn } from '../../utils';
 
 /** A badge's look: its variant, the classes the preset's. */
 export interface ScBadgeVariants {

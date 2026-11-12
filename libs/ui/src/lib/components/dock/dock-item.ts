@@ -7,8 +7,8 @@ import {
   input,
   signal,
 } from '@angular/core';
+import { cn } from 'cn';
 import { ɵwarnIfUnnamed } from '../../utils/accessible-name/accessible-name';
-import { cn } from '../../utils/cn/cn';
 import { ScDock } from './dock';
 
 /**

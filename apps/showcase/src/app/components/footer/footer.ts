@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation, computed, input } from '@angular/core';
-import { ScLink, cn } from '@semantic-components/ui';
+import { ScLink } from '@semantic-components/ui';
 import { SiGithubIcon, SiHeartIcon } from '@semantic-icons/lucide-icons';
+import { cn } from 'cn';
 import { Logo } from '../logo/logo';
 
 @Component({

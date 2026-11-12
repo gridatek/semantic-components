@@ -32,7 +32,6 @@ import {
   ScSelectPortal,
   ScSelectTrigger,
   ScSelectValue,
-  cn,
 } from '@semantic-components/ui';
 import { ScI18n } from '@semantic-components/ui/i18n';
 import {
@@ -43,6 +42,7 @@ import {
   SiMountainIcon,
   SiXIcon,
 } from '@semantic-icons/lucide-icons';
+import { cn } from 'cn';
 
 @Component({
   selector: 'app-navbar',

@@ -7,7 +7,8 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { cn, useActiveOption } from '../../utils';
+import { cn } from 'cn';
+import { useActiveOption } from '../../utils';
 import { SC_MULTISELECT } from './multiselect-tokens';
 
 @Directive({

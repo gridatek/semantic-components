@@ -6,7 +6,7 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 import { ScPasswordStrength } from './password-strength';
 
 /** The strength in your words — "Weak", "Strong": the meter's value (`aria-valuetext`). */

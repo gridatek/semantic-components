@@ -12,7 +12,8 @@ import {
   signal,
   untracked,
 } from '@angular/core';
-import { cn, ɵwarnIfUnnamed } from '@semantic-components/ui';
+import { ɵwarnIfUnnamed } from '@semantic-components/ui';
+import { cn } from 'cn';
 import EmblaCarousel, {
   type EmblaCarouselType,
   type EmblaOptionsType,

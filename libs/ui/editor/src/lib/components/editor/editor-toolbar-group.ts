@@ -1,6 +1,6 @@
 import { ToolbarWidgetGroup } from '@angular/aria/toolbar';
 import { Directive, computed, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from 'cn';
 
 @Directive({
   selector: 'div[scEditorToolbarGroup]',

@@ -12,8 +12,8 @@ import {
   numberAttribute,
   signal,
 } from '@angular/core';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn } from '../../utils';
 
 /** Where a panel lines up under its trigger. */
 export type ScNavigationMenuAlign = 'start' | 'center' | 'end';

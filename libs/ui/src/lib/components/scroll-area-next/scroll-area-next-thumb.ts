@@ -1,6 +1,6 @@
 import { Directive, computed, inject, input } from '@angular/core';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn } from '../../utils';
 import { ScScrollAreaNext } from './scroll-area-next';
 import { ScScrollAreaNextScrollbar } from './scroll-area-next-scrollbar';
 

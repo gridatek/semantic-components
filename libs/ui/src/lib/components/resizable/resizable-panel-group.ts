@@ -10,7 +10,8 @@ import {
   model,
   untracked,
 } from '@angular/core';
-import { cn, elementDirection } from '../../utils';
+import { cn } from 'cn';
+import { elementDirection } from '../../utils';
 import { ScResizablePanel } from './resizable-panel';
 
 /** Which way its panels sit, and so the way they resize. */

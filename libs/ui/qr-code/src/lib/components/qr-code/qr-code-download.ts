@@ -1,9 +1,6 @@
 import { DOCUMENT, Directive, computed, inject, input } from '@angular/core';
-import {
-  type ScButtonVariants,
-  cn,
-  injectPreset,
-} from '@semantic-components/ui';
+import { type ScButtonVariants, injectPreset } from '@semantic-components/ui';
+import { cn } from 'cn';
 import { ScQrCode } from './qr-code';
 
 export type ScQrCodeDownloadFormat = 'png' | 'svg';

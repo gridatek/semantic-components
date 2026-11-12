@@ -1,7 +1,7 @@
 import { Directive, computed, input } from '@angular/core';
 import type { ScAlertVariant } from '@semantic-components/presets';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn } from '../../utils';
 
 /** An alert's look: its variant, the classes the preset's. */
 export interface ScAlertVariants {

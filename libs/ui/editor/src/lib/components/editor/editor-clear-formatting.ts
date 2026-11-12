@@ -1,6 +1,7 @@
 import { ToolbarWidget } from '@angular/aria/toolbar';
 import { Directive, computed, inject, input } from '@angular/core';
-import { bindInput, cn, injectPreset } from '@semantic-components/ui';
+import { bindInput, injectPreset } from '@semantic-components/ui';
+import { cn } from 'cn';
 import { SC_EDITOR } from './editor';
 
 /** Clears the selection’s formatting (marks and blocks). Write its icon and name it (`aria-label` or visually hidden text). */

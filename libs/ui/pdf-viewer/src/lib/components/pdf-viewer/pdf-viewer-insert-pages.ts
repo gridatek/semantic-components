@@ -6,11 +6,8 @@ import {
   input,
   output,
 } from '@angular/core';
-import {
-  type ScButtonVariants,
-  cn,
-  injectPreset,
-} from '@semantic-components/ui';
+import { type ScButtonVariants, injectPreset } from '@semantic-components/ui';
+import { cn } from 'cn';
 import { SC_PDF_VIEWER } from './pdf-viewer';
 
 /**

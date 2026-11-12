@@ -8,7 +8,8 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { SC_FIELD, cn } from '@semantic-components/ui';
+import { SC_FIELD } from '@semantic-components/ui';
+import { cn } from 'cn';
 import { SC_EDITOR, type ScEditorContentLayout } from './editor';
 
 /**

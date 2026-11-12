@@ -14,7 +14,7 @@ import {
   untracked,
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 import { ScElementDirectionality } from '../../utils/element-directionality';
 import { ScPortalOutlet } from '../portal-outlet/portal-outlet';
 import { ScMultiselectPortal } from './multiselect-portal';

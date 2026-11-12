@@ -6,8 +6,8 @@ import {
   inject,
   input,
 } from '@angular/core';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn } from '../../utils';
 import { ScAlertDialogProvider } from './alert-dialog-provider';
 
 /** The alert dialog's panel: animates in when shown and out when it goes (`animate.enter` / `animate.leave`). */

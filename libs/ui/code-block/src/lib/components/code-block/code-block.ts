@@ -1,6 +1,7 @@
 import { Directive, computed, input } from '@angular/core';
 import type { ScCodeBlockVariant } from '@semantic-components/presets';
-import { cn, injectPreset } from '@semantic-components/ui';
+import { injectPreset } from '@semantic-components/ui';
+import { cn } from 'cn';
 
 export type ScCodeBlockVariants = { variant?: ScCodeBlockVariant | null };
 

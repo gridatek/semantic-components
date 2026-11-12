@@ -10,7 +10,7 @@ import {
   output,
   signal,
 } from '@angular/core';
-import { cn } from '../../utils/cn/cn';
+import { cn } from 'cn';
 
 /**
  * Observes when the host element enters or leaves a viewport (or a custom root).

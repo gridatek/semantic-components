@@ -20,7 +20,8 @@ import {
   untracked,
   viewChild,
 } from '@angular/core';
-import { cn, setInput } from '../../utils';
+import { cn } from 'cn';
+import { setInput } from '../../utils';
 import { ScElementDirectionality } from '../../utils/element-directionality';
 import { injectMenuHighlight } from './menu-highlight';
 import { ScMenuPortal } from './menu-portal';

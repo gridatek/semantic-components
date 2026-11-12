@@ -6,7 +6,7 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 import { SC_MENU_GROUP } from './menu-context';
 import { injectMenuStyles } from './menu-styles';
 

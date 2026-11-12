@@ -1,11 +1,12 @@
 import type { ChainedCommands } from '@tiptap/core';
 import { ToolbarWidget } from '@angular/aria/toolbar';
 import { Directive, computed, inject, input } from '@angular/core';
-import { bindInput, cn, injectPreset } from '@semantic-components/ui';
+import { bindInput, injectPreset } from '@semantic-components/ui';
 import {
   SC_EDITOR,
   ɵassertEditorFeature,
 } from '@semantic-components/ui/editor';
+import { cn } from 'cn';
 
 /** What `select` / `can` do to a table. */
 export type ScEditorTableAction =

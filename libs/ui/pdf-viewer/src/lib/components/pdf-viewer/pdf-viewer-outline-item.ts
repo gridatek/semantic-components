@@ -7,7 +7,7 @@ import {
   input,
   untracked,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from 'cn';
 import { SC_PDF_VIEWER } from './pdf-viewer';
 import type { ScPdfOutlineItem } from './pdf-viewer-types';
 

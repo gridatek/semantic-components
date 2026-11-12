@@ -7,7 +7,7 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from 'cn';
 import { line } from 'd3-shape';
 import { curveOf } from '../chart/chart-curve';
 import {

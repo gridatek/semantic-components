@@ -1,5 +1,5 @@
 import { Directive, computed, input, model, output } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 
 export type ScPaginationPage =
   | { type: 'page'; value: number }

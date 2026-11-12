@@ -1,5 +1,5 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { cn } from '../../utils/cn/cn';
+import { cn } from 'cn';
 import { ScEmojiPicker } from './emoji-picker';
 import { SC_EMOJI_FONT_FAMILY, skinToneVariation } from './emoji-picker-data';
 

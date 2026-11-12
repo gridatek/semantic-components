@@ -10,8 +10,8 @@ import type {
   ScToggleSize,
   ScToggleVariant,
 } from '@semantic-components/presets';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn } from '../../utils';
 import { SC_TOGGLE_VALUES } from './toggle-values';
 
 /** A toggle's look: its variant and size, the classes the preset's. */

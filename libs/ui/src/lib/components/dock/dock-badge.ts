@@ -1,5 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
-import { cn } from '../../utils/cn/cn';
+import { cn } from 'cn';
 
 /** A count on an item's corner ("3"). Read as part of the item's name: add words if needed ("3 unread"). */
 @Directive({

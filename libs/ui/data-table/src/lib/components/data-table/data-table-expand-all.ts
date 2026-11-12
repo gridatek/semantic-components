@@ -1,6 +1,7 @@
 import { Directive, computed, input } from '@angular/core';
-import { cn, injectPreset } from '@semantic-components/ui';
+import { injectPreset } from '@semantic-components/ui';
 import type { ScButtonVariants } from '@semantic-components/ui';
+import { cn } from 'cn';
 import type { ScDataTableExpandAllTable } from './data-table-types';
 
 /**

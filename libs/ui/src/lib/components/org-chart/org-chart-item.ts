@@ -11,8 +11,8 @@ import {
   input,
   signal,
 } from '@angular/core';
+import { cn } from 'cn';
 import { setInput } from '../../utils/bind-input/bind-input';
-import { cn } from '../../utils/cn/cn';
 import { ScAriaTreeItem } from '../tree/aria-tree-item';
 import { ScOrgChart } from './org-chart';
 import { ScOrgChartCard } from './org-chart-card';

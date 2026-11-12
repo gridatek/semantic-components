@@ -1,8 +1,8 @@
 import { Toolbar } from '@angular/aria/toolbar';
 import { Directionality } from '@angular/cdk/bidi';
 import { Directive, computed, inject, input } from '@angular/core';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn } from '../../utils';
 import { ScElementDirectionality } from '../../utils/element-directionality/element-directionality';
 
 /**

@@ -1,5 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 
 /** What the group needs of a tooltip. */
 export interface ScTooltipGroupMember {

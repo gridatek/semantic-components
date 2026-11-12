@@ -8,8 +8,9 @@ import {
   inject,
   input,
 } from '@angular/core';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { bindInput, cn } from '../../utils';
+import { bindInput } from '../../utils';
 import { SC_FIELD } from '../field';
 import { SC_SELECT, SC_SELECT_TRIGGER } from './select-tokens';
 import { openOnTypeahead } from './select-typeahead';

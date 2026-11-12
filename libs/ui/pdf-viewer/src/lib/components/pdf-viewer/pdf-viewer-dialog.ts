@@ -6,7 +6,8 @@ import {
   input,
   untracked,
 } from '@angular/core';
-import { ScDialogProvider, cn } from '@semantic-components/ui';
+import { ScDialogProvider } from '@semantic-components/ui';
+import { cn } from 'cn';
 import { SC_PDF_VIEWER } from './pdf-viewer';
 
 /** The viewer's dialogs. */

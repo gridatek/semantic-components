@@ -11,8 +11,8 @@ import {
   signal,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn } from '../../utils';
 import { ScElementDirectionality } from '../../utils/element-directionality';
 
 /** How far it is scrolled from each edge (whole px). */

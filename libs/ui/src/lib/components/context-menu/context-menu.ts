@@ -18,7 +18,7 @@ import {
   untracked,
   viewChild,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 import { ScElementDirectionality } from '../../utils/element-directionality';
 import { SC_MENU, type ScMenuContext } from '../menu/menu-context';
 import { ScMenuPortal } from '../menu/menu-portal';

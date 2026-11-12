@@ -1,5 +1,5 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { cn } from '../../utils/cn/cn';
+import { cn } from 'cn';
 import { SC_STEPPER, SC_STEPPER_ITEM } from './stepper-types';
 
 /** The line after step `step`; filled once that step is completed. */

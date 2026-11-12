@@ -1,7 +1,7 @@
 import { Directive, computed, input } from '@angular/core';
 import { cva } from 'class-variance-authority';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn } from '../../utils';
 
 // The same in every style: where the row sits. Its look is the preset's.
 const position = cva('', {

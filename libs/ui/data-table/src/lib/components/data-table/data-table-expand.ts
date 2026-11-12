@@ -1,6 +1,7 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { cn, injectPreset, ɵwarnIfUnnamed } from '@semantic-components/ui';
+import { injectPreset, ɵwarnIfUnnamed } from '@semantic-components/ui';
 import type { ScButtonVariants } from '@semantic-components/ui';
+import { cn } from 'cn';
 import { ScDataTableTreeGrid } from './data-table-tree-grid';
 import type { ScDataTableTreeRow } from './data-table-types';
 

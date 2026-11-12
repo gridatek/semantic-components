@@ -7,8 +7,8 @@ import {
   input,
   signal,
 } from '@angular/core';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn } from '../../utils';
 import { SC_SELECT } from './select-tokens';
 
 /**

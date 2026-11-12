@@ -36,7 +36,7 @@ import {
   ScSidebarRail,
   ScSidebarTrigger,
 } from '@semantic-components/ui';
-import { ScInputButton, ScKbd, ScSeparator, cn } from '@semantic-components/ui';
+import { ScInputButton, ScKbd, ScSeparator } from '@semantic-components/ui';
 import {
   SiBookOpenTextIcon,
   SiBoxIcon,
@@ -46,6 +46,7 @@ import {
   SiSearchIcon,
   SiWrenchIcon,
 } from '@semantic-icons/lucide-icons';
+import { cn } from 'cn';
 import { filter } from 'rxjs';
 import { Logo } from '../../components/logo/logo';
 import { PresetSheet } from '../../components/preset-sheet/preset-sheet';

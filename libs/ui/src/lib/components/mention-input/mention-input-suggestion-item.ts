@@ -5,7 +5,7 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { cn } from '../../utils/cn/cn';
+import { cn } from 'cn';
 import { ScMentionInputState } from './mention-input-state';
 import type { ScMentionUser } from './mention-input-types';
 

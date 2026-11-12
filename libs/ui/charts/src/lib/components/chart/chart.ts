@@ -1,5 +1,5 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from 'cn';
 import { ScChartState } from './chart-state';
 import type { ScChartConfig, ScChartDatum } from './chart-types';
 

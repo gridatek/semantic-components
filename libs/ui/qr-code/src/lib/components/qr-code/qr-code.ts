@@ -7,7 +7,8 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { cn, ɵwarnIfUnnamed } from '@semantic-components/ui';
+import { ɵwarnIfUnnamed } from '@semantic-components/ui';
+import { cn } from 'cn';
 import { encode } from 'uqr';
 
 /** Error correction: how much of the code can be damaged and still read. */

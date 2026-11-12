@@ -9,8 +9,8 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
 import { SC_EDITOR } from '@semantic-components/ui/editor';
+import { cn } from 'cn';
 
 let nextKey = 0;
 

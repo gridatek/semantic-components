@@ -1,5 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
-import { cn, ɵwarnIfUnnamed } from '@semantic-components/ui';
+import { ɵwarnIfUnnamed } from '@semantic-components/ui';
+import { cn } from 'cn';
 import { syncDataTableCheckbox } from './data-table-checkbox';
 import type { ScDataTableSelectAllTable } from './data-table-types';
 

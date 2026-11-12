@@ -1,6 +1,6 @@
 import { Tree } from '@angular/aria/tree';
 import { Directive, computed, inject, input } from '@angular/core';
-import { cn } from '../../utils/cn/cn';
+import { cn } from 'cn';
 
 /** Which way the chart grows: `down` (reports below), `across` (reports at the inline end). */
 export type ScOrgChartDirection = 'down' | 'across';

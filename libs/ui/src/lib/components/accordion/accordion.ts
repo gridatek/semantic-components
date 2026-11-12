@@ -7,8 +7,9 @@ import {
   input,
   model,
 } from '@angular/core';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { bindInput, cn } from '../../utils';
+import { bindInput } from '../../utils';
 
 /**
  * An accordion: items whose panels open and close under their heading. Holds

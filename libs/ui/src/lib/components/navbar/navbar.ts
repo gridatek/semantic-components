@@ -13,8 +13,8 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router } from '@angular/router';
+import { cn } from 'cn';
 import { filter } from 'rxjs';
-import { cn } from '../../utils/cn/cn';
 
 /** The width from which the links show and the toggle hides. */
 export type ScNavbarExpand = 'sm' | 'md' | 'lg';

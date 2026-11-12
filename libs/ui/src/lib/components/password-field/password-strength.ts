@@ -7,7 +7,8 @@ import {
   input,
   numberAttribute,
 } from '@angular/core';
-import { cn, ɵwarnIfUnnamed } from '../../utils';
+import { cn } from 'cn';
+import { ɵwarnIfUnnamed } from '../../utils';
 
 /** The fill of each strength, from weak to strong — 3:1 on the background. */
 const COLORS = [

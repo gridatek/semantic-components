@@ -8,7 +8,7 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { cn } from '../../utils/cn/cn';
+import { cn } from 'cn';
 import { ScScheduler } from './scheduler';
 import { eventsOn } from './scheduler-layout';
 import { schedulerEventInjector } from './scheduler-types';

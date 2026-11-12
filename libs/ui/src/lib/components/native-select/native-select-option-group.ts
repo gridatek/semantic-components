@@ -1,5 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 
 /** A group of options under its `label`: the system's colours, as the options. */
 @Directive({

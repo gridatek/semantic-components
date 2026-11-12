@@ -16,12 +16,12 @@ import {
   untracked,
   viewChild,
 } from '@angular/core';
+import { cn } from 'cn';
 import {
   type ScPlacementBox,
   type ScPlacementSide,
   spotlightPlacement,
 } from '../../utilities/spotlight-placement';
-import { cn } from '../../utils/cn/cn';
 import { ScTourGuideStep } from './tour-guide-step';
 
 /**

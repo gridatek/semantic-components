@@ -7,7 +7,8 @@ import {
   numberAttribute,
   signal,
 } from '@angular/core';
-import { cn, ɵwarnIfUnnamed } from '../../utils';
+import { cn } from 'cn';
+import { ɵwarnIfUnnamed } from '../../utils';
 
 /** Where a task is: not known yet, under way, or done. */
 export type ScProgressState = 'indeterminate' | 'loading' | 'complete';

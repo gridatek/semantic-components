@@ -10,8 +10,9 @@ import {
   signal,
   untracked,
 } from '@angular/core';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn, setInput } from '../../utils';
+import { setInput } from '../../utils';
 import { ScAccordion } from './accordion';
 import {
   SC_ACCORDION_ITEM,

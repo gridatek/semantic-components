@@ -6,7 +6,8 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { cn, setInput } from '../../utils';
+import { cn } from 'cn';
+import { setInput } from '../../utils';
 import { SC_TREE_ITEM } from './tree-item';
 import { ScTreeItemGroupRef } from './tree-item-group-ref';
 import { SC_TREE_ITEM_GROUP, type ScTreeItemGroupContext } from './tree-tokens';

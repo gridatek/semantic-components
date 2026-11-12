@@ -8,7 +8,7 @@ import {
   signal,
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
-import { cn } from '../../utils/cn/cn';
+import { cn } from 'cn';
 import type { ScTransferListPane } from './transfer-list-pane';
 
 /** An item: yours, with an id and a label (for search and typeahead). */

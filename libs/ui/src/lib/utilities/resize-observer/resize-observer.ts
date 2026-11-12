@@ -9,7 +9,7 @@ import {
   output,
   signal,
 } from '@angular/core';
-import { cn } from '../../utils/cn/cn';
+import { cn } from 'cn';
 
 /**
  * The host element's size, as signals: for what a template builds only when

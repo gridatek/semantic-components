@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation, computed, input } from '@angular/core';
-import { ScStackedLayout, cn } from '@semantic-components/ui';
+import { ScStackedLayout } from '@semantic-components/ui';
+import { cn } from 'cn';
 import { Footer } from '../footer/footer';
 import Navbar from '../navbar/navbar';
 

@@ -7,7 +7,8 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { cn, setInput } from '../../utils';
+import { cn } from 'cn';
+import { setInput } from '../../utils';
 import { ScAriaTreeItem } from './aria-tree-item';
 import { ScTree } from './tree';
 import { ScTreeItemGroup } from './tree-item-group';

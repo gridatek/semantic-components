@@ -1,5 +1,5 @@
 import { Directive, computed, input, signal } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 import { SC_MENU_GROUP } from './menu-context';
 
 /** A titled section of items (role group), named by its label. */

@@ -1,5 +1,5 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 import { ScNavigationMenuItem } from './navigation-menu-item';
 
 /** Your chevron (down) after the trigger's text: turned over while open; hidden from screen readers. */

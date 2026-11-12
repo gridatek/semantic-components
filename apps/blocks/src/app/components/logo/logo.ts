@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation, computed, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
 import { SiCommandIcon } from '@semantic-icons/lucide-icons';
+import { cn } from 'cn';
 
 @Component({
   selector: 'app-logo',

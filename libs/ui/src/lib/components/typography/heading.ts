@@ -1,6 +1,6 @@
 import { Directive, ElementRef, computed, inject, input } from '@angular/core';
 import { type VariantProps, cva } from 'class-variance-authority';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 
 export const headingVariants = cva('scroll-m-20 tracking-tight', {
   variants: {

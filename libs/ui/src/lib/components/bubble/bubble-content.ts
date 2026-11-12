@@ -1,6 +1,6 @@
 import { Directive, ElementRef, computed, inject, input } from '@angular/core';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn } from '../../utils';
 
 /**
  * The bubble's text, in the preset's look. On a `button` or an `a` the whole

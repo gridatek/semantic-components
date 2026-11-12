@@ -1,7 +1,7 @@
 import { Directive, computed, input } from '@angular/core';
 import type { ScEmptyMediaVariant } from '@semantic-components/presets';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn } from '../../utils';
 
 /** Your icon, avatar or image above the title; `icon` frames an icon. */
 @Directive({

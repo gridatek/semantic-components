@@ -20,8 +20,9 @@ import {
   model,
   signal,
 } from '@angular/core';
+import { cn } from 'cn';
 import { ScFocusTrap } from '../../utilities/focus-trap';
-import { ScOpenDelay, cn } from '../../utils';
+import { ScOpenDelay } from '../../utils';
 import { ScElementDirectionality } from '../../utils/element-directionality';
 import {
   type ScOverlayAlign,

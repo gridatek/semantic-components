@@ -6,7 +6,8 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { ScPagination, bindInput, cn } from '@semantic-components/ui';
+import { ScPagination, bindInput } from '@semantic-components/ui';
+import { cn } from 'cn';
 import type { ScDataTablePaginationTable } from './data-table-types';
 
 /**

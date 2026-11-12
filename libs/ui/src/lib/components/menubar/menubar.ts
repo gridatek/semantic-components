@@ -8,8 +8,9 @@ import {
   input,
   signal,
 } from '@angular/core';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn, elementDirection } from '../../utils';
+import { elementDirection } from '../../utils';
 
 @Directive({
   selector: '[scMenubar]',

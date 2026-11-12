@@ -1,5 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
-import { cn } from '../../utils/cn/cn';
+import { cn } from 'cn';
 
 /** Your "Sign here" line, at the bottom of the surface: write its text (and a ×). */
 @Directive({

@@ -7,7 +7,8 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { cn, ɵwarnIfUnnamed } from '../../utils';
+import { cn } from 'cn';
+import { ɵwarnIfUnnamed } from '../../utils';
 import { SC_RATING } from './rating';
 import { SC_RATING_GROUP } from './rating-group';
 import { ScRatingIcon } from './rating-icon';

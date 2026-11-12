@@ -1,5 +1,5 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { cn } from '../../utils/cn/cn';
+import { cn } from 'cn';
 import { ScEmojiPickerState } from './emoji-picker-state';
 
 /** Shown over the list while the emojis load (write a spinner or text). */

@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation, computed, input } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 
 @Component({
   selector: 'div[scCalendarFooter]',

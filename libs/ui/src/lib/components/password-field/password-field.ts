@@ -6,7 +6,7 @@ import {
   model,
   signal,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 import { ScField } from '../field';
 
 /**

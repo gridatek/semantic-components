@@ -1,7 +1,7 @@
 import { Option } from '@angular/aria/listbox';
 import { Directive, computed, inject, input } from '@angular/core';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn } from '../../utils';
 
 /** Round your check icon, in an option: shown only on a selected one. */
 @Directive({

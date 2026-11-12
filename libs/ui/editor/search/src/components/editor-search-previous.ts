@@ -1,10 +1,7 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import {
-  type ScButtonVariants,
-  cn,
-  injectPreset,
-} from '@semantic-components/ui';
+import { type ScButtonVariants, injectPreset } from '@semantic-components/ui';
 import { SC_EDITOR } from '@semantic-components/ui/editor';
+import { cn } from 'cn';
 import { editorSearch } from './editor-search-state';
 
 /**

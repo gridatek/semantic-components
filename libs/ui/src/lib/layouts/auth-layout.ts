@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation, computed, input } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { cn } from '../utils/cn/cn';
+import { cn } from 'cn';
 
 @Component({
   selector: 'div[scAuthLayout]',

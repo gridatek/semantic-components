@@ -1,5 +1,5 @@
 import { Directive, computed, forwardRef, inject, input } from '@angular/core';
-import { cn } from '../../utils/cn/cn';
+import { cn } from 'cn';
 import { ScOrgChartItem } from './org-chart-item';
 
 /** Your chevron, in a card: turned while the person's reports are shown. */

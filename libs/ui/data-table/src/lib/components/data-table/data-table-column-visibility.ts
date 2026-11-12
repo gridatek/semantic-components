@@ -1,5 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from 'cn';
 import { syncDataTableCheckbox } from './data-table-checkbox';
 import type { ScDataTableHideableColumn } from './data-table-types';
 

@@ -1,5 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
-import { cn } from '../../utils/cn/cn';
+import { cn } from 'cn';
 
 /** A notification's buttons and links (Reply, Mark as read, Dismiss…). */
 @Directive({

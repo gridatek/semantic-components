@@ -9,7 +9,7 @@ import {
   numberAttribute,
   untracked,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 import {
   type ScMessageScrollerPosition,
   type ScMessageScrollerScrollOptions,

@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn } from '../../utils';
 
 /** How the group lays out the input and its buttons. */
 export type ScNumberFieldGroupVariant = 'split' | 'stacked';

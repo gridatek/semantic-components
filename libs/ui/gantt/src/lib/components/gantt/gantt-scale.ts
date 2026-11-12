@@ -6,7 +6,7 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from 'cn';
 import { ScGantt } from './gantt';
 import { daysBetween } from './gantt-types';
 

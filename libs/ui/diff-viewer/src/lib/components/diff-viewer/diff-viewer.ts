@@ -11,11 +11,11 @@ import {
   model,
   signal,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
 import {
   SC_CODE_HIGHLIGHTER,
   type ScCodeToken,
 } from '@semantic-components/ui/code-block';
+import { cn } from 'cn';
 import {
   type ScDiffFold,
   type ScDiffLine,

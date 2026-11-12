@@ -1,7 +1,7 @@
 import { Directive, computed, input } from '@angular/core';
 import type { ScItemMediaVariant } from '@semantic-components/presets';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn } from '../../utils';
 
 /** Your icon, avatar or image, at the item's start. */
 @Directive({

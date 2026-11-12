@@ -6,8 +6,8 @@ import {
   inject,
   input,
 } from '@angular/core';
+import { cn } from 'cn';
 import { useActiveOption } from '../../utils/active-option/active-option';
-import { cn } from '../../utils/cn/cn';
 import { ScTransferListPane } from './transfer-list-pane';
 
 /**

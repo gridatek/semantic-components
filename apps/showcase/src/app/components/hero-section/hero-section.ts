@@ -1,7 +1,8 @@
 import { Component, ViewEncapsulation, computed, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ScLink, cn } from '@semantic-components/ui';
+import { ScLink } from '@semantic-components/ui';
 import { SiGithubIcon, SiStarIcon } from '@semantic-icons/lucide-icons';
+import { cn } from 'cn';
 
 @Component({
   selector: 'app-hero-section',

@@ -42,7 +42,8 @@ import {
   untracked,
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
-import { SC_FIELD, cn } from '@semantic-components/ui';
+import { SC_FIELD } from '@semantic-components/ui';
+import { cn } from 'cn';
 import { codeEditorHighlight } from './code-editor-highlight';
 
 /** CodeMirror in the theme's colors: the code block's look. */

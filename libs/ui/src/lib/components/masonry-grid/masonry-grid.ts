@@ -9,7 +9,7 @@ import {
   input,
   signal,
 } from '@angular/core';
-import { cn } from '../../utils/cn/cn';
+import { cn } from 'cn';
 
 /** An item, as the grid places it. */
 export interface ScMasonryGridEntry {

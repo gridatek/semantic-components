@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation, computed, input } from '@angular/core';
-import { ScButton, ScInput, ScSpinner, cn } from '@semantic-components/ui';
+import { ScButton, ScInput, ScSpinner } from '@semantic-components/ui';
 import {
   ScPdfViewer,
   ScPdfViewerCanvas,
@@ -12,6 +12,7 @@ import {
   ScPdfViewerToolbar,
 } from '@semantic-components/ui/pdf-viewer';
 import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
+import { cn } from 'cn';
 
 /**
  * pdf.js's open parameters: in the fragment of `src` (applied on load), or

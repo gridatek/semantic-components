@@ -1,6 +1,7 @@
 import { Directive, ElementRef, computed, inject, input } from '@angular/core';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn, ɵwarnIfUnnamed } from '../../utils';
+import { ɵwarnIfUnnamed } from '../../utils';
 import { ScButtonVariants } from '../button/button';
 import { ScMessageScrollerState } from './message-scroller-state';
 

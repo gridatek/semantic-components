@@ -1,5 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
-import { cn } from '../../utils/cn/cn';
+import { cn } from 'cn';
 
 /** A list of notifications: write a `li[scNotification]` for each of `visible()` (or of a section). */
 @Directive({

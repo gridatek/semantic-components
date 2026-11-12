@@ -1,5 +1,5 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from 'cn';
 import { ScCarousel } from './carousel';
 
 /** The row (or column, vertical) of slides that moves in the viewport. */

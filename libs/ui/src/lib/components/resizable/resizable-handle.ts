@@ -6,7 +6,7 @@ import {
   input,
   signal,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 import { type ScResizablePanel } from './resizable-panel';
 import { ScResizablePanelGroup } from './resizable-panel-group';
 

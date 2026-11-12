@@ -8,7 +8,7 @@ import {
   input,
   signal,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 import {
   ScScrollAreaNext,
   type ScScrollAreaNextOrientation,

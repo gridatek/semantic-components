@@ -1,5 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 
 /** An option: the system's colours, so the browser's list reads in dark mode too. */
 @Directive({

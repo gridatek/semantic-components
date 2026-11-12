@@ -1,5 +1,5 @@
 import { Directive, ElementRef, computed, inject, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from 'cn';
 
 /** The window the slides move in (Embla's viewport): what overflows is clipped. */
 @Directive({

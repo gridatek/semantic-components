@@ -14,10 +14,10 @@ import {
   signal,
   untracked,
 } from '@angular/core';
+import { cn } from 'cn';
 import {
   type ScOverlayAlign,
   buildOverlayPositionsWithFallback,
-  cn,
   setInput,
 } from '../../utils';
 import { ScElementDirectionality } from '../../utils/element-directionality';

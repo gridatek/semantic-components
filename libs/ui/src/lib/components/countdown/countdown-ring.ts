@@ -5,7 +5,7 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { cn } from '../../utils/cn/cn';
+import { cn } from 'cn';
 import { ScCountdown } from './countdown';
 
 /** A timer's time left as a ring that empties. Decorative; size it with classes, put the digits in it. */

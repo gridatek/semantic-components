@@ -7,7 +7,7 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { cn } from '../../utils/cn/cn';
+import { cn } from 'cn';
 import { ScSortableList } from './sortable-list';
 import { ScSortableListHandle } from './sortable-list-handle';
 

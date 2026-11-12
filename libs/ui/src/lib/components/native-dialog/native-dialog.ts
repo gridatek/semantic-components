@@ -10,7 +10,7 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { cn } from '../../utils/cn/cn';
+import { cn } from 'cn';
 import { ScNativeDialogContent } from './native-dialog-content';
 import { ScNativeDialogProvider } from './native-dialog-provider';
 

@@ -1,5 +1,5 @@
 import { Directive, ElementRef, computed, inject, input } from '@angular/core';
-import { cn } from '../../utils/cn/cn';
+import { cn } from 'cn';
 import { ScLightbox } from './lightbox';
 
 /** How far a swipe goes before it counts, in pixels. */

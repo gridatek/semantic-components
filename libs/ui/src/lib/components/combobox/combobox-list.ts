@@ -11,8 +11,9 @@ import {
   input,
   untracked,
 } from '@angular/core';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { bindInput, cn } from '../../utils';
+import { bindInput } from '../../utils';
 import { ScComboboxBase } from './combobox-base';
 
 function sameItems<T>(a: readonly T[], b: readonly T[]): boolean {

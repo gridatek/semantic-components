@@ -13,7 +13,7 @@ import {
   signal,
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 import { ScOtpFieldInput } from './otp-field-input';
 
 /** Which characters the code accepts. */

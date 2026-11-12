@@ -1,5 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 
 /** An item's sub-menu, indented with a line. Hidden when collapsed to icons. */
 @Directive({

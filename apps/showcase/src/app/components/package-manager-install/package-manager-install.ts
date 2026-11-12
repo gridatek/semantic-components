@@ -11,7 +11,6 @@ import {
   ScTabsList,
   ScTabsPanel,
   ScTabsTab,
-  cn,
 } from '@semantic-components/ui';
 import {
   ScCodeBlock,
@@ -25,6 +24,7 @@ import {
   SiCopyIcon,
   SiTerminalIcon,
 } from '@semantic-icons/lucide-icons';
+import { cn } from 'cn';
 import { PackageManagerService } from './package-manager-service';
 
 @Component({

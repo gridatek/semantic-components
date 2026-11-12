@@ -1,6 +1,6 @@
 import { Tree } from '@angular/aria/tree';
 import { Directive, computed, inject, input } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 
 /**
  * A tree of expandable items (`role="tree"`), built on `@angular/aria`'s

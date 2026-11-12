@@ -11,8 +11,8 @@ import {
   signal,
   untracked,
 } from '@angular/core';
+import { cn } from 'cn';
 import { ScStorage } from '../../utilities/storage/storage';
-import { cn } from '../../utils';
 import { ScSidebarState } from './sidebar-state';
 
 const MOBILE_QUERY = '(max-width: 767.98px)';

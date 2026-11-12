@@ -11,8 +11,8 @@ import {
   signal,
   untracked,
 } from '@angular/core';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn } from '../../utils';
 import type { ScCommandItem } from './command-item';
 
 /** Whether an item matches the search: its text, its `value` and its `keywords`. */

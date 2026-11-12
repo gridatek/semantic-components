@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation, computed, input } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { cn } from '@semantic-components/ui';
+import { cn } from 'cn';
 
 @Component({
   selector: 'app-root',

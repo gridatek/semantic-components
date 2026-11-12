@@ -1,7 +1,7 @@
 import { Directive, computed, input } from '@angular/core';
 import type { ScItemSize, ScItemVariant } from '@semantic-components/presets';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn } from '../../utils';
 
 /**
  * A row of content — media, a title and description, actions — in the

@@ -9,8 +9,8 @@ import {
   signal,
   untracked,
 } from '@angular/core';
+import { cn } from 'cn';
 import { ɵwarnIfUnnamed } from '../../utils/accessible-name/accessible-name';
-import { cn } from '../../utils/cn/cn';
 
 /** A track of the playlist: yours, with at least its file. */
 export interface ScAudioPlayerTrack {

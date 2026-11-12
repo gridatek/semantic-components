@@ -10,7 +10,8 @@ import {
   input,
   untracked,
 } from '@angular/core';
-import { bindInput, cn } from '../../utils';
+import { cn } from 'cn';
+import { bindInput } from '../../utils';
 import { ScTimePicker } from './time-picker';
 
 /**

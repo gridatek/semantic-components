@@ -7,7 +7,8 @@ import {
   input,
   untracked,
 } from '@angular/core';
-import { ScSlider, ScSwitch, ScToggleGroup, cn } from '@semantic-components/ui';
+import { ScSlider, ScSwitch, ScToggleGroup } from '@semantic-components/ui';
+import { cn } from 'cn';
 import { SC_PDF_VIEWER } from './pdf-viewer';
 import type { ScPdfViewerSettingKey } from './pdf-viewer-types';
 

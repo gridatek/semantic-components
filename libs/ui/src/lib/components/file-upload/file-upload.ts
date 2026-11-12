@@ -8,7 +8,7 @@ import {
   signal,
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 
 /** Why a file was kept out: not an accepted type, too large, one too many. */
 export type ScFileUploadRejectionReason = 'type' | 'size' | 'count';

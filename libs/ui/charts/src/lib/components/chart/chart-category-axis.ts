@@ -7,7 +7,7 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from 'cn';
 import { ScChartState } from './chart-state';
 
 /** About a character's width, in px, at the axis' size: to space the labels. */

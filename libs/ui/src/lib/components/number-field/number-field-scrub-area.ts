@@ -8,7 +8,7 @@ import {
   input,
   signal,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 import { SC_NUMBER_FIELD } from './number-field';
 
 export const SC_NUMBER_FIELD_SCRUB_AREA =

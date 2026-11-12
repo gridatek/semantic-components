@@ -6,7 +6,7 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { cn } from '../../utils/cn/cn';
+import { cn } from 'cn';
 
 export const SC_NOTIFICATION_SECTION =
   new InjectionToken<ScNotificationSection>('SC_NOTIFICATION_SECTION');

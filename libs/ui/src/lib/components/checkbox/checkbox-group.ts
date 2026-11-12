@@ -9,7 +9,7 @@ import {
   output,
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 
 /**
  * Checkboxes sharing one value: the ticked ones' values, as an array — a

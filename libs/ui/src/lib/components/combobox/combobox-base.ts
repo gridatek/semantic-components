@@ -17,7 +17,7 @@ import {
   signal,
   untracked,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 import { SC_FIELD } from '../field';
 
 /** What the root needs of its input: the Aria combobox on it, and its element. */

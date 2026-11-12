@@ -10,7 +10,7 @@ import {
   input,
   untracked,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 import { ScPopoverProvider } from '../popover';
 import { ScTimeInput } from '../time-input';
 import { ScTimePickerTrigger } from './time-picker-trigger';

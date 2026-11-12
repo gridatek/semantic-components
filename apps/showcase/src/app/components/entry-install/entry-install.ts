@@ -1,5 +1,4 @@
 import { Component, ViewEncapsulation, computed, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
 import {
   ScCodeBlock,
   ScCodeBlockActions,
@@ -9,6 +8,7 @@ import {
   ScCodeBlockTitle,
 } from '@semantic-components/ui/code-block';
 import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
+import { cn } from 'cn';
 import { PackageManagerInstall } from '../package-manager-install/package-manager-install';
 
 /**

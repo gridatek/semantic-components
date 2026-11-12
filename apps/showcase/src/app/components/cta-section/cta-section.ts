@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation, computed, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ScLink, cn } from '@semantic-components/ui';
+import { ScLink } from '@semantic-components/ui';
+import { cn } from 'cn';
 
 @Component({
   selector: 'app-cta-section',

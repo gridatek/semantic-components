@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn } from '../../utils/cn/cn';
 
 /**
  * A row in a conversation: an avatar beside a column of bubbles. `align="end"`

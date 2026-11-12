@@ -5,7 +5,7 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 import { ScCalendar } from './calendar';
 import { ScCalendarHeading } from './calendar-heading';
 

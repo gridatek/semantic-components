@@ -1,9 +1,9 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
 import {
   SC_EDITOR,
   ɵassertEditorFeature,
 } from '@semantic-components/ui/editor';
+import { cn } from 'cn';
 import { editorSearch } from './editor-search-state';
 
 /**

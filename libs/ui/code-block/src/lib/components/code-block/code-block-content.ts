@@ -10,7 +10,8 @@ import {
   signal,
 } from '@angular/core';
 import type { ScCodeBlockLineVariant } from '@semantic-components/presets';
-import { cn, injectPreset } from '@semantic-components/ui';
+import { injectPreset } from '@semantic-components/ui';
+import { cn } from 'cn';
 import { SC_CODE_HIGHLIGHTER, type ScCodeToken } from './code-highlighter';
 
 export type { ScCodeBlockLineVariant } from '@semantic-components/presets';

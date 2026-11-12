@@ -24,7 +24,6 @@ import {
   ScNavigationMenuList,
   ScNavigationMenuTrigger,
   ScNavigationMenuTriggerIcon,
-  cn,
 } from '@semantic-components/ui';
 import {
   SiChevronDownIcon,
@@ -33,6 +32,7 @@ import {
   SiSearchIcon,
   SiXIcon,
 } from '@semantic-icons/lucide-icons';
+import { cn } from 'cn';
 import { CommandPaletteService } from '../../services/command-palette-service';
 import { ComponentsService } from '../../services/components-service';
 import { GithubService } from '../../services/github-service';

@@ -1,7 +1,7 @@
 import { AccordionPanel, AccordionTrigger } from '@angular/aria/accordion';
 import { Directive, computed, inject, input } from '@angular/core';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn } from '../../utils';
 import { SC_ACCORDION_ITEM } from './accordion-item-context';
 
 /**

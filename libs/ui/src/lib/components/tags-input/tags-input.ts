@@ -14,7 +14,7 @@ import {
   signal,
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
-import { cn } from '../../utils/cn/cn';
+import { cn } from 'cn';
 import { ScTagsInputItem } from './tags-input-item';
 
 /** Whether a tag goes in: it, and the tags already there. */

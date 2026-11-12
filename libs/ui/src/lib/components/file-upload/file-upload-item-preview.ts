@@ -7,7 +7,7 @@ import {
   input,
   signal,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 import { ScFileUploadItem } from './file-upload-item';
 
 /** An image's thumbnail; for other files, your icon. */

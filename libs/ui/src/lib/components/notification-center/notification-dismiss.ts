@@ -1,7 +1,7 @@
 import { Directive, computed, inject, input } from '@angular/core';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
 import { ɵwarnIfUnnamed } from '../../utils/accessible-name/accessible-name';
-import { cn } from '../../utils/cn/cn';
 import { type ScButtonVariants } from '../button/button';
 import { SC_NOTIFICATION } from './notification';
 import { SC_NOTIFICATION_CENTER } from './notification-center';

@@ -1,7 +1,7 @@
 import { Directive, computed, inject, input } from '@angular/core';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
 import { ɵwarnIfUnnamed } from '../../utils/accessible-name/accessible-name';
-import { cn } from '../../utils/cn/cn';
 import { type ScButtonVariants } from '../button/button';
 import { ScScheduler } from './scheduler';
 

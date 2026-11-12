@@ -24,7 +24,6 @@ import {
   ScDialogProvider,
   ScDialogTitle,
   ScHotkey,
-  cn,
 } from '@semantic-components/ui';
 import {
   SiBoxIcon,
@@ -32,6 +31,7 @@ import {
   SiSearchIcon,
   SiWrenchIcon,
 } from '@semantic-icons/lucide-icons';
+import { cn } from 'cn';
 import { CommandPaletteService } from '../../services/command-palette-service';
 import { ComponentsService } from '../../services/components-service';
 

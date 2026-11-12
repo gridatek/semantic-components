@@ -14,7 +14,8 @@ import {
   untracked,
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
-import { cn, injectPreset } from '@semantic-components/ui';
+import { injectPreset } from '@semantic-components/ui';
+import { cn } from 'cn';
 import {
   AsYouType,
   getCountryCallingCode,

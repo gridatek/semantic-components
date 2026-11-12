@@ -1,6 +1,6 @@
 import { Directive, computed, inject, input } from '@angular/core';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn } from '../../utils';
 import { ScButtonVariants } from '../button/button';
 import { ScCalendar } from './calendar';
 

@@ -6,7 +6,7 @@ import {
   input,
   viewChild,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 import { ScScrollBar } from './scroll-area-scrollbar';
 import { SC_SCROLL_AREA, type ScScrollAreaContext } from './scroll-area-types';
 

@@ -8,7 +8,7 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 import { ScResizablePanelGroup } from './resizable-panel-group';
 
 /**

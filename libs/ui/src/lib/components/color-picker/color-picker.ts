@@ -12,7 +12,7 @@ import {
   untracked,
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
-import { cn } from '../../utils/cn/cn';
+import { cn } from 'cn';
 import {
   type ScColorFormat,
   type ScHsva,

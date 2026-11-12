@@ -7,9 +7,9 @@ import {
   input,
   untracked,
 } from '@angular/core';
+import { cn } from 'cn';
 import { ɵwarnIfUnnamed } from '../../utils/accessible-name/accessible-name';
 import { bindInput } from '../../utils/bind-input/bind-input';
-import { cn } from '../../utils/cn/cn';
 import { ScTransferListPane } from './transfer-list-pane';
 
 /**

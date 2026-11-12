@@ -1,6 +1,6 @@
 import { ToolbarWidget } from '@angular/aria/toolbar';
 import { Directive, computed, inject, input } from '@angular/core';
-import { cn } from '../../utils/cn/cn';
+import { cn } from 'cn';
 import { ScEmojiPickerState } from './emoji-picker-state';
 import type { ScEmojiListCategory } from './emoji-picker-types';
 

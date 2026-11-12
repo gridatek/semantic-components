@@ -1,5 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 
 /** The breadcrumb's navigation; its name is yours (`aria-label`). */
 @Directive({

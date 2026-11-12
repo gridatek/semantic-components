@@ -15,8 +15,8 @@ import {
   model,
   viewChild,
 } from '@angular/core';
+import { cn } from 'cn';
 import { ScFocusTrap } from '../../utilities';
-import { cn } from '../../utils';
 import { ScBackdrop } from '../backdrop';
 import { ScAlertDialogPortal } from './alert-dialog-portal';
 

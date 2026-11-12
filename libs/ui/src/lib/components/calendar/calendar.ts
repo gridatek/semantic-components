@@ -16,8 +16,8 @@ import {
   signal,
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn } from '../../utils';
 import { ScCalendarDay } from './calendar-day';
 import { ScCalendarMonth } from './calendar-month';
 import { ScCalendarMonths } from './calendar-months';

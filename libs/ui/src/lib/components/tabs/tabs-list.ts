@@ -11,8 +11,9 @@ import {
   untracked,
 } from '@angular/core';
 import type { ScTabsListVariant } from '@semantic-components/presets';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { bindInput, cn, elementDirection, setInput } from '../../utils';
+import { bindInput, elementDirection, setInput } from '../../utils';
 import { ScTabs } from './tabs';
 
 /** The list of tabs (role tablist): one tab stop, the arrows inside. */

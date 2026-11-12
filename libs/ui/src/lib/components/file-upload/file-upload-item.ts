@@ -1,5 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 
 /** A chosen file: its preview, name, size, and a way to remove it. */
 @Directive({

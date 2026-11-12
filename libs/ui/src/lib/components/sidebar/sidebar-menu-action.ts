@@ -1,6 +1,6 @@
 import { Directive, booleanAttribute, computed, input } from '@angular/core';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn } from '../../utils';
 
 /**
  * A button at a menu item's end (more…): your icon and its name (`sr-only`).

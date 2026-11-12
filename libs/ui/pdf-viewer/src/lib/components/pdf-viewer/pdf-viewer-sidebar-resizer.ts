@@ -7,7 +7,7 @@ import {
   input,
   signal,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from 'cn';
 import { SC_PDF_VIEWER } from './pdf-viewer';
 
 const MIN_WIDTH = 150;

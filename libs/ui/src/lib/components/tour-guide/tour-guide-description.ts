@@ -1,6 +1,6 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
 import { DestroyRef, Directive, computed, inject, input } from '@angular/core';
-import { cn } from '../../utils/cn/cn';
+import { cn } from 'cn';
 import { ScTourGuide } from './tour-guide';
 
 /** A step's text: the tour describes its dialog with it. */

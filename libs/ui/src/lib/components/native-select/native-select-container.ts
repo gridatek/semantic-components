@@ -1,5 +1,5 @@
 import { Directive, computed, contentChild, input } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 import { ScNativeSelect } from './native-select';
 
 /**

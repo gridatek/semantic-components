@@ -17,7 +17,8 @@ import {
   signal,
   untracked,
 } from '@angular/core';
-import { ScOpenDelay, cn } from '../../utils';
+import { cn } from 'cn';
+import { ScOpenDelay } from '../../utils';
 import { ScElementDirectionality } from '../../utils/element-directionality';
 import {
   type ScOverlayAlign,

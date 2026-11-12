@@ -1,5 +1,5 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 import { ScSheetProvider } from './sheet-provider';
 
 /** Opens the sheet, on any button: behaviour only, the look is the button's. */

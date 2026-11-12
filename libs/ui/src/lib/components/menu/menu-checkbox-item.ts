@@ -7,7 +7,8 @@ import {
   input,
   model,
 } from '@angular/core';
-import { cn, setInput } from '../../utils';
+import { cn } from 'cn';
+import { setInput } from '../../utils';
 import { SC_MENU_CHECKABLE } from './menu-context';
 import { injectMenuHighlight } from './menu-highlight';
 import { useDefaultSearchTerm } from './menu-search-term';

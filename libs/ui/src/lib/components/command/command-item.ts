@@ -11,8 +11,8 @@ import {
   output,
   signal,
 } from '@angular/core';
+import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { cn } from '../../utils';
 import { ScCommand } from './command';
 import { ScCommandGroup } from './command-group';
 

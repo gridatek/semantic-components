@@ -10,7 +10,8 @@ import {
   output,
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
-import { bindInput, cn } from '../../utils';
+import { cn } from 'cn';
+import { bindInput } from '../../utils';
 import { SC_TOGGLE_VALUES, type ScToggleValues } from '../toggle/toggle-values';
 
 /**

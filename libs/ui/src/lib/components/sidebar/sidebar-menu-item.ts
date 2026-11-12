@@ -1,5 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from 'cn';
 
 /** An item: its button, and an action, a badge or a sub-menu. */
 @Directive({

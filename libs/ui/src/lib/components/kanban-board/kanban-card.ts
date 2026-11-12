@@ -6,7 +6,7 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { cn } from '../../utils/cn/cn';
+import { cn } from 'cn';
 import { ScKanbanBoard } from './kanban-board';
 import { ScKanbanColumn } from './kanban-column';
 

@@ -7,8 +7,8 @@ import {
   input,
   untracked,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
 import { SC_EDITOR } from '@semantic-components/ui/editor';
+import { cn } from 'cn';
 import { editorSearch } from './editor-search-state';
 
 /**
