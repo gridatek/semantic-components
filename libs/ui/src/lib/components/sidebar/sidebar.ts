@@ -11,6 +11,7 @@ import {
   input,
   signal,
 } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 import { ScSheet, ScSheetPortal, ScSheetProvider } from '../sheet';
 import { ScSidebarState } from './sidebar-state';
@@ -139,10 +140,7 @@ export class ScSidebar {
     ),
   );
 
-  protected readonly innerClass = cn(
-    'flex size-full flex-col bg-sidebar',
-    'group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:shadow-sm group-data-[variant=floating]:ring-1 group-data-[variant=floating]:ring-sidebar-border',
-  );
+  protected readonly innerClass = cn(injectPreset().sidebar.inner);
 
   constructor() {
     this.state.sidebarId.set(this.id);

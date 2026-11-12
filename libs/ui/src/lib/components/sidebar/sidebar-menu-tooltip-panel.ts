@@ -1,43 +1,44 @@
 import { Component, computed, input, output } from '@angular/core';
-import { injectPreset } from '../../config/preset';
-import { cn } from '../../utils';
+import {
+  SC_TOOLTIP_CONTEXT,
+  ScTooltip,
+  ScTooltipArrow,
+  type ScTooltipContext,
+} from '../tooltip';
 
 /**
- * The text of a collapsed menu button, in the tooltip's look (the preset's
- * `tooltip`): created by `ScSidebarMenuTooltip`, not used on its own.
+ * The text of a collapsed menu button, as a tooltip: the Tooltip's own parts
+ * (`scTooltip`, `scTooltipArrow`), given their context here in place of a
+ * `scTooltipProvider`. Created by `ScSidebarMenuTooltip`, not used on its
+ * own.
  */
 @Component({
   selector: 'div[scSidebarMenuTooltipPanel]',
-  template: `{{ text()
-    }}<span
-      aria-hidden="true"
-      [attr.data-side]="side()"
-      [class]="arrowClass()"
-    ></span>`,
-  host: {
-    'data-slot': 'tooltip',
-    role: 'tooltip',
-    '[id]': 'id()',
-    '[attr.data-side]': 'side()',
-    '[class]': 'class()',
-    '(pointerenter)': 'hovered.emit(true)',
-    '(pointerleave)': 'hovered.emit(false)',
-    'animate.enter': 'animate-in fade-in-0 zoom-in-95',
-    'animate.leave': 'animate-out fade-out-0 zoom-out-95',
-  },
+  imports: [ScTooltip, ScTooltipArrow],
+  providers: [
+    {
+      provide: SC_TOOLTIP_CONTEXT,
+      useExisting: ScSidebarMenuTooltipPanel,
+    },
+  ],
+  template: ` <div scTooltip>{{ text() }}<span scTooltipArrow></span></div> `,
 })
-export class ScSidebarMenuTooltipPanel {
-  private readonly styles = injectPreset().tooltip;
-
+export class ScSidebarMenuTooltipPanel implements ScTooltipContext {
   readonly text = input('');
-  readonly id = input('');
+  readonly idInput = input('', { alias: 'id' });
   readonly side = input<'left' | 'right'>('right');
   readonly hovered = output<boolean>();
 
-  protected readonly class = computed(() =>
-    cn('relative duration-100', this.styles.popup),
-  );
-  protected readonly arrowClass = computed(() =>
-    cn('absolute', this.styles.arrow),
-  );
+  get id(): string {
+    return this.idInput();
+  }
+  readonly placedSide = computed<string>(() => this.side());
+
+  keepOpen(): void {
+    this.hovered.emit(true);
+  }
+
+  hideSoon(): void {
+    this.hovered.emit(false);
+  }
 }

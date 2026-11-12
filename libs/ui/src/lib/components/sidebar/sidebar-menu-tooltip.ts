@@ -10,6 +10,7 @@ import {
   effect,
   inject,
   input,
+  signal,
   untracked,
 } from '@angular/core';
 import { buildOverlayPositionsWithFallback } from '../../utils/overlay-positions';
@@ -23,16 +24,15 @@ const HOVER_BRIDGE = 100;
 
 /**
  * A menu button's label, shown beside it while the sidebar is collapsed to
- * icons (there its text is hidden) — the menu button's `tooltip`. Our
- * Tooltip's look and behaviour (the preset's `tooltip`, the delay, focus,
- * Escape, hoverable), as text: the Tooltip itself is markup, which a
- * directive on your button can't write. Exported because a public part hosts
- * it; not for use on its own. (docs/todo.md: to think about.)
+ * icons (there its text is hidden) — the menu button's `tooltip`. It shows
+ * the Tooltip's own parts (in its panel), opened and closed as the Tooltip
+ * is: the delay, focus, Escape, hoverable. Exported because a public part
+ * hosts it; not for use on its own.
  */
 @Directive({
   selector: '[scSidebarMenuTooltip]',
   host: {
-    '[attr.aria-describedby]': 'ref ? id : null',
+    '[attr.aria-describedby]': 'shown() ? id : null',
     '(pointerenter)': 'onPointerEnter($event)',
     '(pointerleave)': 'onPointerLeave($event)',
     '(focus)': 'onFocus($event)',
@@ -51,6 +51,8 @@ export class ScSidebarMenuTooltip {
 
   protected readonly id = inject(_IdGenerator).getId('sc-sidebar-tooltip-');
   protected ref: OverlayRef | null = null;
+  /** Showing: its button is described by it. */
+  protected readonly shown = signal(false);
   private panel: ComponentRef<ScSidebarMenuTooltipPanel> | null = null;
   private timer: ReturnType<typeof setTimeout> | undefined;
 
@@ -95,6 +97,7 @@ export class ScSidebarMenuTooltip {
     // Towards the page: the inline end (the left in right to left).
     const rtl = getComputedStyle(element).direction === 'rtl';
     const side = rtl ? 'left' : 'right';
+    this.shown.set(true);
     this.ref = this.overlay.create({
       positionStrategy: this.overlay
         .position()
@@ -129,6 +132,7 @@ export class ScSidebarMenuTooltip {
     clearTimeout(this.timer);
     this.ref?.dispose();
     this.ref = null;
+    this.shown.set(false);
     this.panel = null;
   }
 }

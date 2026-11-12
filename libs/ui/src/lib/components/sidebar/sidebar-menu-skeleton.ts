@@ -5,6 +5,7 @@ import {
   computed,
   input,
 } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 import { ScSkeleton } from '../skeleton';
 
@@ -16,7 +17,7 @@ let count = 0;
   imports: [ScSkeleton],
   template: `
     @if (showIcon()) {
-      <div scSkeleton class="size-4 rounded-md"></div>
+      <div scSkeleton [class]="styles.menuSkeletonIcon"></div>
     }
     <div
       scSkeleton
@@ -31,6 +32,7 @@ let count = 0;
   encapsulation: ViewEncapsulation.None,
 })
 export class ScSidebarMenuSkeleton {
+  protected readonly styles = injectPreset().sidebar;
   readonly classInput = input<string>('', { alias: 'class' });
   readonly showIcon = input(false, { transform: booleanAttribute });
 
@@ -38,6 +40,6 @@ export class ScSidebarMenuSkeleton {
   protected readonly width = `${50 + ((count++ * 37) % 41)}%`;
 
   protected readonly class = computed(() =>
-    cn('flex h-8 items-center gap-2 rounded-md px-2', this.classInput()),
+    cn(this.styles.menuSkeleton, this.classInput()),
   );
 }

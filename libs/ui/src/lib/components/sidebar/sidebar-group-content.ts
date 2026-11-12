@@ -1,4 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 
 /** A group's menu. */
@@ -10,9 +11,10 @@ import { cn } from '../../utils';
   },
 })
 export class ScSidebarGroupContent {
+  private readonly styles = injectPreset().sidebar;
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('w-full text-sm', this.classInput()),
+    cn(this.styles.groupContent, this.classInput()),
   );
 }

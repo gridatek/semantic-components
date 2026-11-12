@@ -12,13 +12,10 @@ import { cn } from '../../utils';
 })
 export class ScSidebarInput {
   private readonly inputStyles = injectPreset().input;
+  private readonly sidebarStyles = injectPreset().sidebar;
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn(
-      this.inputStyles,
-      'h-8 w-full bg-background shadow-none',
-      this.classInput(),
-    ),
+    cn(this.inputStyles, this.sidebarStyles.input, this.classInput()),
   );
 }

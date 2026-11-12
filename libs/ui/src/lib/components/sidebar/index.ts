@@ -3,10 +3,7 @@ export { ScSidebarState } from './sidebar-state';
 export { ScSidebar } from './sidebar';
 export { ScSidebarTrigger } from './sidebar-trigger';
 export { ScSidebarRail } from './sidebar-rail';
-export {
-  ScSidebarMenuButton,
-  type ScSidebarMenuButtonVariants,
-} from './sidebar-menu-button';
+export { ScSidebarMenuButton } from './sidebar-menu-button';
 export { ScSidebarMenuTooltip } from './sidebar-menu-tooltip';
 export { ScSidebarMenuAction } from './sidebar-menu-action';
 export { ScSidebarMenuSubButton } from './sidebar-menu-sub-button';

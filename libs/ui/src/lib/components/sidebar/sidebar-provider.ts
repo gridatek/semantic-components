@@ -2,7 +2,6 @@ import {
   DOCUMENT,
   DestroyRef,
   Directive,
-  type OnInit,
   afterNextRender,
   computed,
   effect,
@@ -10,6 +9,7 @@ import {
   input,
   model,
   signal,
+  untracked,
 } from '@angular/core';
 import { ScStorage } from '../../utilities/storage/storage';
 import { cn } from '../../utils';
@@ -36,7 +36,7 @@ const MOBILE_QUERY = '(max-width: 767.98px)';
     '(window:keydown)': 'onKeydown($event)',
   },
 })
-export class ScSidebarProvider implements OnInit {
+export class ScSidebarProvider {
   readonly state = inject(ScSidebarState);
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -64,6 +64,17 @@ export class ScSidebarProvider implements OnInit {
   );
 
   constructor() {
+    // The saved state, read once its key is known (an input): before the
+    // first render, so the page is drawn as it was left.
+    effect(() => {
+      const name = this.storageKey();
+      untracked(() => {
+        if (this.restored()) return;
+        const saved = name ? this.storage.get(name) : null;
+        if (saved !== null) this.open.set(saved === 'true');
+        this.restored.set(true);
+      });
+    });
     effect(() => this.state.open.set(this.open()));
     effect(() => this.open.set(this.state.open()));
     effect(() => {
@@ -83,13 +94,6 @@ export class ScSidebarProvider implements OnInit {
       mobile.addEventListener('change', update);
       destroyRef.onDestroy(() => mobile.removeEventListener('change', update));
     });
-  }
-
-  ngOnInit(): void {
-    const name = this.storageKey();
-    const saved = name ? this.storage.get(name) : null;
-    if (saved !== null) this.open.set(saved === 'true');
-    this.restored.set(true);
   }
 
   protected onKeydown(event: KeyboardEvent): void {

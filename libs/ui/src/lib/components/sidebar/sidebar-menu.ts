@@ -1,4 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
+import { injectPreset } from '../../config/preset';
 import { cn } from '../../utils';
 
 /** A list of menu items. */
@@ -10,9 +11,10 @@ import { cn } from '../../utils';
   },
 })
 export class ScSidebarMenu {
+  private readonly styles = injectPreset().sidebar;
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('flex w-full min-w-0 flex-col gap-0', this.classInput()),
+    cn(this.styles.menu, this.classInput()),
   );
 }
