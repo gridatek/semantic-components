@@ -151,6 +151,18 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
           <li scNavigationMenuItem>
             <a
               scNavigationMenuLink
+              routerLink="/ai-elements"
+              routerLinkActive
+              #aiElementsRla="routerLinkActive"
+              [active]="aiElementsRla.isActive"
+            >
+              AI Elements
+            </a>
+          </li>
+
+          <li scNavigationMenuItem>
+            <a
+              scNavigationMenuLink
               routerLink="/charts"
               routerLinkActive
               #chartsRla="routerLinkActive"
@@ -276,6 +288,15 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
             [active]="mobileDocsRla.isActive"
           >
             Documentation
+          </a>
+          <a
+            scNavbarMenuLink
+            routerLink="/ai-elements"
+            routerLinkActive="active"
+            #mobileAiElementsRla="routerLinkActive"
+            [active]="mobileAiElementsRla.isActive"
+          >
+            AI Elements
           </a>
           <a
             scNavbarMenuLink

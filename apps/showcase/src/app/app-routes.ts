@@ -25,6 +25,11 @@ export const appRoutes: Route[] = [
         loadComponent: () => import('./pages/presets/presets'),
       },
       {
+        path: 'ai-elements',
+        title: 'AI Elements - Semantic Components',
+        loadComponent: () => import('./pages/ai-elements/ai-elements'),
+      },
+      {
         path: 'charts',
         title: 'Charts - Semantic Components',
         loadComponent: () => import('./pages/charts/charts'),
