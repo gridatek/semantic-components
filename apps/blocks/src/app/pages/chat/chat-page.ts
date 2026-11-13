@@ -36,6 +36,7 @@ import {
 import {
   SiArrowDownIcon,
   SiArrowUpIcon,
+  SiBrainIcon,
   SiChevronRightIcon,
   SiFileTextIcon,
   SiLoaderCircleIcon,
@@ -52,10 +53,18 @@ interface ChatStep {
   readonly output?: string;
 }
 
+/** The agent's thinking: open while it runs, unless the person chose. */
+interface ChatReasoning {
+  readonly text: string;
+  readonly running: boolean;
+  readonly choice?: boolean;
+}
+
 interface ChatMessage {
   readonly id: string;
   readonly role: 'user' | 'assistant';
   readonly text: string;
+  readonly reasoning?: ChatReasoning;
   readonly steps?: readonly ChatStep[];
 }
 
@@ -94,6 +103,7 @@ const WORD_TIME = 50;
     ScTraceTitle,
     SiArrowDownIcon,
     SiArrowUpIcon,
+    SiBrainIcon,
     SiChevronRightIcon,
     SiFileTextIcon,
     SiLoaderCircleIcon,
@@ -132,8 +142,58 @@ const WORD_TIME = 50;
                       [alignment]="message.role === 'user' ? 'end' : 'start'"
                     >
                       <div scMessageContent class="gap-3">
-                        @if (message.steps?.length) {
+                        @if (message.reasoning || message.steps?.length) {
                           <div scTrace>
+                            @if (message.reasoning; as reasoning) {
+                              @if (reasoning.text) {
+                                <div
+                                  scCollapsible
+                                  scTraceCollapsible
+                                  [open]="reasoning.choice ?? reasoning.running"
+                                  (openChange)="
+                                    updateReasoning(message.id, {
+                                      choice: $event,
+                                    })
+                                  "
+                                >
+                                  <button
+                                    scCollapsibleTrigger
+                                    scTraceCollapsibleTrigger
+                                  >
+                                    <span
+                                      scTraceLine
+                                      [status]="
+                                        reasoning.running
+                                          ? 'running'
+                                          : undefined
+                                      "
+                                    >
+                                      <span scTraceIcon>
+                                        <svg siBrainIcon></svg>
+                                      </span>
+                                      <span scTraceTitle>{{
+                                        reasoning.running ? thinking : thought
+                                      }}</span>
+                                    </span>
+                                    <span scTraceCollapsibleIcon>
+                                      <svg siChevronRightIcon></svg>
+                                    </span>
+                                  </button>
+                                  <div scCollapsiblePanel>
+                                    <div scTraceCollapsiblePanelContent>
+                                      {{ reasoning.text }}
+                                    </div>
+                                  </div>
+                                </div>
+                              } @else {
+                                <span scTraceLine status="running">
+                                  <span scTraceIcon>
+                                    <svg siBrainIcon></svg>
+                                  </span>
+                                  <span scTraceTitle>{{ thinking }}</span>
+                                </span>
+                              }
+                            }
                             @for (step of message.steps; track $index) {
                               @if (step.output) {
                                 <div scCollapsible scTraceCollapsible>
@@ -246,6 +306,10 @@ export default class ChatPage {
   private timer: ReturnType<typeof setTimeout> | undefined;
   private sent = 0;
 
+  /** The reasoning line's title, while it thinks and once done. */
+  protected readonly thinking = $localize`:@@chat.thinking:Thinking`;
+  protected readonly thought = $localize`:@@chat.thought:Thought`;
+
   readonly messages = signal<readonly ChatMessage[]>([
     {
       id: 'q1',
@@ -255,6 +319,10 @@ export default class ChatPage {
     {
       id: 'a1',
       role: 'assistant',
+      reasoning: {
+        text: $localize`:@@chat.a1.thought:The question is about an agent's steps. Search the docs for steps and tool calls, then read the page that matches.`,
+        running: false,
+      },
       steps: [
         {
           kind: 'search',
@@ -291,7 +359,7 @@ export default class ChatPage {
     (key.target as HTMLTextAreaElement).form?.requestSubmit();
   }
 
-  /** Your message, then a reply: its search running, then its words. */
+  /** Your message, then a reply: its thinking, its search, then its words. */
   private send(): void {
     const text = this.model().text.trim();
     if (!text || this.streaming()) return;
@@ -305,46 +373,77 @@ export default class ChatPage {
         id: reply,
         role: 'assistant',
         text: '',
-        steps: [
-          {
-            kind: 'search',
-            status: 'running',
-            title: $localize`:@@chat.reply.searching:Searching the docs…`,
-          },
-        ],
+        reasoning: { text: '', running: true },
       },
     ]);
     this.streaming.set(true);
+    const thought =
+      $localize`:@@chat.reply.thought:A question about this page. Check how the conversation is built before answering: the scroller, the messages and the steps.`.split(
+        ' ',
+      );
     const words =
       $localize`:@@chat.reply:This page is built with the Message Scroller: your message stays near the top while this reply arrives below it, and the conversation follows the end until you scroll away. Each step of the reply is a Trace line above it.`.split(
         ' ',
       );
-    this.timer = setTimeout(() => {
-      this.updateReply(reply, () => ({
-        steps: [
-          {
-            kind: 'search',
-            title: $localize`:@@chat.reply.searched:Searched the docs`,
-            detail: $localize`:@@chat.reply.results:2 results`,
-          },
-        ],
-      }));
-      this.stream(reply, words, 0);
-    }, 900);
+    this.after(300, () =>
+      this.stream(
+        thought,
+        (text) => this.updateReasoning(reply, { text }),
+        () => {
+          this.updateReasoning(reply, { running: false });
+          this.updateReply(reply, () => ({
+            steps: [
+              {
+                kind: 'search',
+                status: 'running',
+                title: $localize`:@@chat.reply.searching:Searching the docs…`,
+              },
+            ],
+          }));
+          this.after(900, () => {
+            this.updateReply(reply, () => ({
+              steps: [
+                {
+                  kind: 'search',
+                  title: $localize`:@@chat.reply.searched:Searched the docs`,
+                  detail: $localize`:@@chat.reply.results:2 results`,
+                },
+              ],
+            }));
+            this.stream(
+              words,
+              (text) => this.updateReply(reply, () => ({ text })),
+              () => this.streaming.set(false),
+            );
+          });
+        },
+      ),
+    );
   }
 
-  private stream(reply: string, words: string[], next: number): void {
+  /** Writes the words one at a time, then calls `done`. */
+  private stream(
+    words: readonly string[],
+    write: (text: string) => void,
+    done: () => void,
+    next = 0,
+  ): void {
     if (next === words.length) {
-      this.streaming.set(false);
+      done();
       return;
     }
-    this.updateReply(reply, (message) => ({
-      text: message.text ? `${message.text} ${words[next]}` : words[next],
+    write(words.slice(0, next + 1).join(' '));
+    this.after(WORD_TIME, () => this.stream(words, write, done, next + 1));
+  }
+
+  private after(time: number, run: () => void): void {
+    this.timer = setTimeout(run, time);
+  }
+
+  protected updateReasoning(id: string, change: Partial<ChatReasoning>): void {
+    this.updateReply(id, (message) => ({
+      reasoning: { text: '', running: false, ...message.reasoning, ...change },
     }));
-    this.timer = setTimeout(
-      () => this.stream(reply, words, next + 1),
-      WORD_TIME,
-    );
   }
 
   private updateReply(

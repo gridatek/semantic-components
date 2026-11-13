@@ -52,6 +52,7 @@ import {
   SiDownloadIcon,
   SiPanelLeftIcon,
   SiSearchIcon,
+  SiSparklesIcon,
   SiWrenchIcon,
 } from '@semantic-icons/lucide-icons';
 import { cn } from 'cn';
@@ -108,6 +109,7 @@ import { ConfigService } from '../../services/config-service';
     SiDownloadIcon,
     SiPanelLeftIcon,
     SiSearchIcon,
+    SiSparklesIcon,
     SiWrenchIcon,
     Logo,
     Toc,
@@ -346,6 +348,27 @@ import { ConfigService } from '../../services/config-service';
                     </ul>
                   </li>
                 }
+                <li scSidebarMenuItem>
+                  <a scSidebarMenuButton>
+                    <svg siSparklesIcon></svg>
+                    <span>AI Elements</span>
+                  </a>
+                  <ul scSidebarMenuSub>
+                    @for (item of aiElements; track item.path) {
+                      <li scSidebarMenuSubItem>
+                        <a
+                          scSidebarMenuSubButton
+                          [routerLink]="'/docs/ai-elements/' + item.path"
+                          routerLinkActive
+                          #aiRla="routerLinkActive"
+                          [active]="aiRla.isActive"
+                        >
+                          <span>{{ item.name }}</span>
+                        </a>
+                      </li>
+                    }
+                  </ul>
+                </li>
               </ul>
             </div>
           </div>
@@ -443,6 +466,8 @@ export class DocsLayout {
   readonly components = this.componentsService.visibleComponents;
   readonly utilities = this.componentsService.visibleUtilities;
   readonly recipes = this.componentsService.visibleRecipes;
+  /** shadcn's AI Elements: patterns built from the components. */
+  protected readonly aiElements = [{ name: 'Reasoning', path: 'reasoning' }];
   protected readonly devMode = this.config.devMode;
 
   /** The page shown: its path, without query or fragment. */
@@ -490,6 +515,10 @@ export class DocsLayout {
     ...[...this.components(), ...this.utilities(), ...this.recipes()].map(
       (item) => ({ name: item.name, path: '/docs/components/' + item.path }),
     ),
+    ...this.aiElements.map((item) => ({
+      name: item.name,
+      path: '/docs/ai-elements/' + item.path,
+    })),
   ]);
 
   constructor() {

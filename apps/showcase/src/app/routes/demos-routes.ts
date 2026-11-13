@@ -2,6 +2,39 @@ import { Route } from '@angular/router';
 
 export const demosRoutes: Route[] = [
   {
+    path: 'demos/ai-elements',
+    children: [
+      {
+        path: 'reasoning-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/reasoning/demos/reasoning-usage-demo').then(
+            (m) => m.ReasoningUsageDemo,
+          ),
+      },
+      {
+        path: 'duration-reasoning-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/reasoning/demos/duration-reasoning-demo').then(
+            (m) => m.DurationReasoningDemo,
+          ),
+      },
+      {
+        path: 'parts-reasoning-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/reasoning/demos/parts-reasoning-demo').then(
+            (m) => m.PartsReasoningDemo,
+          ),
+      },
+      {
+        path: 'rtl-reasoning-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/reasoning/demos/rtl-reasoning-demo').then(
+            (m) => m.RtlReasoningDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/accordion',
     children: [
       {
