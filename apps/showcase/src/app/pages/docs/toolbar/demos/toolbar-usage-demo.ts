@@ -94,7 +94,9 @@ import {
         </ng-template>
       </div>
       <div scToolbarSeparator></div>
-      <a scToolbarWidget scLink size="sm" href="#">Edited 51m ago</a>
+      <a scToolbarWidget scLink variant="link" size="sm" href="#"
+        >Edited 51m ago</a
+      >
     </div>
   `,
   host: { class: 'flex w-full justify-center' },

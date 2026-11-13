@@ -88,6 +88,7 @@ interface ScFileTreeItem {
       } @else {
         <a
           scLink
+          variant="link"
           href="#"
           size="sm"
           class="text-foreground w-full justify-start gap-2"

@@ -12,7 +12,7 @@ A row of controls of any kind — buttons, toggles, selects, links, an input —
   </div>
   <div scToolbarSeparator></div>
   <button scToolbarWidget scButton variant="ghost" size="sm">Save</button>
-  <a scToolbarWidget scLink size="sm" href="…">Edited 51m ago</a>
+  <a scToolbarWidget scLink variant="link" size="sm" href="…">Edited 51m ago</a>
 </div>
 ```
 

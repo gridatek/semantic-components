@@ -3175,6 +3175,13 @@ export const demosRoutes: Route[] = [
     path: 'demos/link',
     children: [
       {
+        path: 'in-text-link-demo',
+        loadComponent: () =>
+          import('../pages/docs/link/demos/in-text-link-demo').then(
+            (m) => m.InTextLinkDemo,
+          ),
+      },
+      {
         path: 'link-usage-demo',
         loadComponent: () =>
           import('../pages/docs/link/demos/link-usage-demo').then(

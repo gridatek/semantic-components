@@ -14,6 +14,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { DisabledLinkDemoContainer } from './demos/disabled-link-demo-container';
 import { ExternalLinkDemoContainer } from './demos/external-link-demo-container';
+import { InTextLinkDemoContainer } from './demos/in-text-link-demo-container';
 import { LinkUsageDemoContainer } from './demos/link-usage-demo-container';
 import { RouterLinkDemoContainer } from './demos/router-link-demo-container';
 import { RtlLinkDemoContainer } from './demos/rtl-link-demo-container';
@@ -26,6 +27,7 @@ import { WithIconLinkDemoContainer } from './demos/with-icon-link-demo-container
   imports: [
     Anatomy,
     LinkUsageDemoContainer,
+    InTextLinkDemoContainer,
     VariantsLinkDemoContainer,
     SizeLinkDemoContainer,
     WithIconLinkDemoContainer,
@@ -50,8 +52,8 @@ import { WithIconLinkDemoContainer } from './demos/with-icon-link-demo-container
         <h1 scHeading>Link</h1>
         <p class="text-muted-foreground">
           A link: it goes somewhere, so it stays a link — opened in a new tab,
-          copied, announced as a link. In the preset&apos;s link look, or a
-          button&apos;s (variant).
+          copied, announced as a link. A link in text by default — underlined,
+          the text&apos;s colour and size — or a button&apos;s look (variant).
         </p>
         <app-component-badges path="link" />
       </div>
@@ -79,6 +81,7 @@ import { WithIconLinkDemoContainer } from './demos/with-icon-link-demo-container
 
       <section class="space-y-8">
         <h2 scHeading appToc>Examples</h2>
+        <app-in-text-link-demo-container />
         <app-variants-link-demo-container />
         <app-size-link-demo-container />
         <app-with-icon-link-demo-container />
@@ -94,8 +97,12 @@ import { WithIconLinkDemoContainer } from './demos/with-icon-link-demo-container
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">ScLink</code>
           is a directive on a native
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">a[scLink]</code>:
-          its classes are the preset&apos;s button. Its address is the
-          link&apos;s own:
+          in text (the default), its classes are the preset&apos;s
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">link</code>
+          (its corners and focus ring); in a button&apos;s look, the
+          preset&apos;s button, as
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">scButton</code
+          >&apos;s. Its address is the link&apos;s own:
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">href</code>, or
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">routerLink</code
           >.
@@ -158,16 +165,17 @@ export default class LinkPage {
   protected readonly inputs = [
     {
       name: 'variant',
-      type: "'default' | 'button' | 'outline' | 'secondary' | 'ghost' | 'destructive'",
+      type: "'default' | 'link' | 'button' | 'outline' | 'secondary' | 'ghost' | 'destructive'",
       default: "'default'",
       description:
-        "Its look: a link (default), or a button's — button the primary one, or outline, secondary, ghost, destructive.",
+        "Its look: a link in text (default), or a button's, inherited from the Button — link the Button's link variant (its box, for a link among buttons), button the primary one, or outline, secondary, ghost, destructive.",
     },
     {
       name: 'size',
       type: "'xs' | 'sm' | 'default' | 'lg' | 'icon-xs' | 'icon-sm' | 'icon' | 'icon-lg'",
       default: "'default'",
-      description: "Its size: the button's sizes.",
+      description:
+        "A button look's size: the button's sizes. A link in text takes the size of its text.",
     },
     {
       name: 'disabled',

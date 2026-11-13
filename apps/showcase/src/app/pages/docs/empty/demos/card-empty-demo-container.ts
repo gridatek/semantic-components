@@ -67,7 +67,7 @@ import { SiArrowUpRightIcon, SiFolderIcon } from '@semantic-icons/lucide-icons';
               <a scLink variant="button" href="#card">Create project</a>
               <button scButton variant="outline">Import project</button>
             </div>
-            <a scLink href="#card" class="text-muted-foreground">
+            <a scLink variant="link" href="#card" class="text-muted-foreground">
               Learn more <svg siArrowUpRightIcon></svg>
             </a>
           </div>

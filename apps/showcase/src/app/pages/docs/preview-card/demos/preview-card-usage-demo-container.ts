@@ -36,6 +36,7 @@ import {
     <div scPreviewCardProvider>
       <a
         scLink
+        variant="link"
         href="https://nextjs.org"
         scPreviewCardTrigger
         [delay]="10"

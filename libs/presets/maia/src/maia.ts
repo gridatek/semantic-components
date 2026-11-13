@@ -33,6 +33,7 @@ import {
 import { item } from './item';
 import { kbd } from './kbd';
 import { label } from './label';
+import { link } from './link';
 import { marker } from './marker';
 import { menu } from './menu';
 import { menubar } from './menubar';
@@ -100,6 +101,7 @@ export const maia: ScPreset = {
   inputGroupText,
   item,
   kbd,
+  link,
   label,
   menu,
   menubar,

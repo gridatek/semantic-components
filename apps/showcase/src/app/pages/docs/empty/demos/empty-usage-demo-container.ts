@@ -60,7 +60,13 @@ import {
           <button scButton variant="outline">Import Project</button>
         </div>
       </div>
-      <a scLink size="sm" href="#usage" class="text-muted-foreground">
+      <a
+        scLink
+        variant="link"
+        size="sm"
+        href="#usage"
+        class="text-muted-foreground"
+      >
         Learn More <svg siArrowUpRightIcon></svg>
       </a>
     </div>

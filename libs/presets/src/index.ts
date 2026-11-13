@@ -639,6 +639,8 @@ export interface ScPreset {
   item: ScItemStyles;
   /** A key. */
   kbd: string;
+  /** A link in text (`a[scLink]`, its default look): its corners and focus ring. */
+  link: string;
   label: ScLabelStyles;
   marker: ScMarkerStyles;
   menu: ScMenuStyles;
