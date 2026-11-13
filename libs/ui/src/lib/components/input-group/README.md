@@ -32,7 +32,7 @@ import { ScInputGroup, ScInputGroupAddon, ScInputGroupButton, ScInputGroupText }
 </div>
 ```
 
-The group on a `div`, the control in it — `scInput`, `scTextarea`, or one of yours with `data-slot="control"` — then its addons. Write the addons after the control, so Tab reaches the control first; their `side` sets where they show. The group draws the border and the ring, and gives its control the look of being inside (no border, ring or corners of its own).
+The group on a `div`, the control in it — `scInput`, `scTextarea`, or one of yours with `data-slot="control"` — then its addons. Write the addons after the control, so Tab reaches the control first; their `side` sets where they show. The group draws the border and the ring, and gives its control the look of being inside (no border, ring or corners of its own). It looks disabled when its control is disabled — not when a button in it is: a composer's Send, disabled while the field is empty, leaves the field as it is (shadcn dims the group for any disabled descendant).
 
 ## API reference
 

@@ -222,6 +222,7 @@ const efforts = [
             size="icon-sm"
             variant="default"
             class="rounded-full"
+            [disabled]="!canSend()"
           >
             <svg siArrowUpIcon></svg>
             <span class="sr-only">Send</span>
@@ -249,15 +250,15 @@ export class PromptInputUsageDemo {
   private readonly message = signal({ text: '' });
   protected readonly composer = form(this.message, () => undefined, {
     submission: {
-      // An empty message sends nothing. (Send isn't disabled: a disabled
-      // button dims the whole input group.)
       action: async () => {
-        if (!this.message().text.trim()) return;
         this.message.set({ text: '' });
         this.files.set([]);
       },
     },
   });
+  protected readonly canSend = computed(
+    () => this.message().text.trim().length > 0,
+  );
 
   /** Enter sends; Shift+Enter starts a new line. */
   protected sendOnEnter(event: Event): void {

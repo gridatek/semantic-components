@@ -3,6 +3,7 @@ import {
   Component,
   DestroyRef,
   ViewEncapsulation,
+  computed,
   inject,
   input,
   signal,
@@ -569,7 +570,7 @@ export class ChatReasoningRow {
               variant="default"
               size="icon-sm"
               class="ms-auto"
-              [disabled]="busy()"
+              [disabled]="busy() || empty()"
             >
               <svg siArrowUpIcon></svg>
               <span class="sr-only">Send</span>
@@ -601,6 +602,7 @@ export class ChatUsageDemo {
   protected readonly busy = signal(false);
 
   private readonly model = signal({ text: TURNS[0].question });
+  protected readonly empty = computed(() => !this.model().text.trim());
   protected readonly composer = form(this.model, () => undefined, {
     submission: { action: async () => this.send() },
   });

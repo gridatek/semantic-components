@@ -71,10 +71,8 @@ import { RtlPromptInputDemoContainer } from './demos/rtl-prompt-input-demo-conta
       <section class="space-y-4">
         <h2 scHeading appToc>Keyboard</h2>
         <p class="text-muted-foreground">
-          Enter sends the message; Shift+Enter adds a new line. Send isn&apos;t
-          disabled while the field is empty — an empty message sends nothing —
-          because a disabled button dims the whole Input Group (a gap in the
-          library, noted in the todo).
+          Enter sends the message; Shift+Enter adds a new line. Send is disabled
+          while the field is empty.
         </p>
       </section>
 
