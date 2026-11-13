@@ -7,11 +7,7 @@ import { nova } from '@semantic-components/presets/nova';
 import { rhea } from '@semantic-components/presets/rhea';
 import { sera } from '@semantic-components/presets/sera';
 import { vega } from '@semantic-components/presets/vega';
-import {
-  type ScStorage,
-  readStorage,
-  writeStorage,
-} from '@semantic-components/ui';
+import { type ScStorage, writeStorage } from '@semantic-components/ui';
 
 /**
  * Every preset, for the showcase's /presets page. An app with one preset
@@ -31,19 +27,10 @@ export const PRESETS: Record<ScPresetName, ScPreset> = {
 const KEY = 'sc-preset';
 
 /**
- * The preset chosen in the sheet, read when the app starts (a preset is set
- * once): its cookie, lyra without one (or on the server) — the showcase
- * opens in lyra, not in shadcn's default look (nova).
- */
-export function storedPreset(): ScPresetName {
-  const name = readStorage(KEY);
-  return name && name in PRESETS ? (name as ScPresetName) : 'lyra';
-}
-
-/**
- * The preset chosen, from `ScStorage`: its cookie in the browser and, on the
- * server, the request's — so a server-rendered page is drawn in it (the
- * browser can't change the classes hydration keeps). Lyra without one.
+ * The preset chosen on /presets, from `ScStorage`: its cookie in the browser
+ * and, on the server, the request's — so a server-rendered page is drawn in it
+ * (the browser can't change the classes hydration keeps). Lyra without one:
+ * the showcase opens in lyra, not in shadcn's default look (nova).
  */
 export function presetFrom(storage: ScStorage): ScPresetName {
   const name = storage.get(KEY);
