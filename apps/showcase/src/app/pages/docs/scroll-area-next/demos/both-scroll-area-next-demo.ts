@@ -2,11 +2,11 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScFrame,
   ScScrollAreaNext,
-  ScScrollAreaNextContent,
   ScScrollAreaNextCorner,
   ScScrollAreaNextScrollbar,
   ScScrollAreaNextThumb,
   ScScrollAreaNextViewport,
+  ScScrollAreaNextViewportContent,
 } from '@semantic-components/ui';
 
 /** Content wider and taller than the box: a scrollbar each way, the corner where they meet. */
@@ -15,7 +15,7 @@ import {
   imports: [
     ScFrame,
     ScScrollAreaNext,
-    ScScrollAreaNextContent,
+    ScScrollAreaNextViewportContent,
     ScScrollAreaNextCorner,
     ScScrollAreaNextScrollbar,
     ScScrollAreaNextThumb,
@@ -24,7 +24,10 @@ import {
   template: `
     <div scScrollAreaNext scFrame class="h-64 w-80 max-w-full">
       <div scScrollAreaNextViewport>
-        <div scScrollAreaNextContent class="grid w-max grid-cols-10 gap-3 p-4">
+        <div
+          scScrollAreaNextViewportContent
+          class="grid w-max grid-cols-10 gap-3 p-4"
+        >
           @for (cell of cells; track cell) {
             <div
               class="bg-muted text-muted-foreground flex size-16 items-center justify-center rounded-md text-sm"

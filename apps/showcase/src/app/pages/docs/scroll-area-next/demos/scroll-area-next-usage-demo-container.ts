@@ -18,10 +18,10 @@ export class ScrollAreaNextUsageDemoContainer {
 import {
   ScFrame,
   ScScrollAreaNext,
-  ScScrollAreaNextContent,
   ScScrollAreaNextScrollbar,
   ScScrollAreaNextThumb,
   ScScrollAreaNextViewport,
+  ScScrollAreaNextViewportContent,
   ScSeparator,
 } from '@semantic-components/ui';
 
@@ -30,7 +30,7 @@ import {
   imports: [
     ScFrame,
     ScScrollAreaNext,
-    ScScrollAreaNextContent,
+    ScScrollAreaNextViewportContent,
     ScScrollAreaNextScrollbar,
     ScScrollAreaNextThumb,
     ScScrollAreaNextViewport,
@@ -39,7 +39,7 @@ import {
   template: \`
     <div scScrollAreaNext scFrame class="h-72 w-48">
       <div scScrollAreaNextViewport>
-        <div scScrollAreaNextContent class="p-4">
+        <div scScrollAreaNextViewportContent class="p-4">
           <p class="mb-4 text-sm leading-none font-medium">Tags</p>
           @for (tag of tags; track tag) {
             <div class="text-sm">{{ tag }}</div>

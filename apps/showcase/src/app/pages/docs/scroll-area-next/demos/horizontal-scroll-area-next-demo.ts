@@ -3,10 +3,10 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScFrame,
   ScScrollAreaNext,
-  ScScrollAreaNextContent,
   ScScrollAreaNextScrollbar,
   ScScrollAreaNextThumb,
   ScScrollAreaNextViewport,
+  ScScrollAreaNextViewportContent,
 } from '@semantic-components/ui';
 
 /** A row wider than the box: a horizontal scrollbar. */
@@ -16,7 +16,7 @@ import {
     NgOptimizedImage,
     ScFrame,
     ScScrollAreaNext,
-    ScScrollAreaNextContent,
+    ScScrollAreaNextViewportContent,
     ScScrollAreaNextScrollbar,
     ScScrollAreaNextThumb,
     ScScrollAreaNextViewport,
@@ -24,7 +24,7 @@ import {
   template: `
     <div scScrollAreaNext scFrame class="w-96 max-w-full whitespace-nowrap">
       <div scScrollAreaNextViewport>
-        <div scScrollAreaNextContent class="flex w-max gap-4 p-4">
+        <div scScrollAreaNextViewportContent class="flex w-max gap-4 p-4">
           @for (place of places; track place) {
             <figure class="shrink-0">
               <img

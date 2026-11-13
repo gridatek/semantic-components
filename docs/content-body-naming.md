@@ -48,7 +48,7 @@ Native Dialog shows the whole shape: `scNativeDialogProvider` → `dialog[scNati
 - [x] `ScAccordionContent` → `ScAccordionPanelContent` (`ng-template`, inside `scAccordionPanel`).
 - [x] `ScTabsContent` → `ScTabsPanelContent` (`ng-template`, inside `scTabsPanel`).
 - [ ] `ScTraceCollapsibleContent` (`div`, a step's details inside `scCollapsiblePanel`): the name to find.
-- [ ] `ScScrollAreaNextContent` (`div`, what scrolls inside `scScrollAreaNextViewport`) → `ScScrollAreaNextViewportContent`? Or left as it is: the Scroll Area rewrite decides.
+- [x] `ScScrollAreaNextContent` → `ScScrollAreaNextViewportContent` (`div`, what scrolls inside `scScrollAreaNextViewport`).
 
 ### 3. Beside something else (an icon, an avatar, actions) → Body?
 

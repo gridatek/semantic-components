@@ -21,7 +21,7 @@ test.describe('Scroll Area Next Page', () => {
     await expect(table.getByRole('row').locator('td:first-child')).toHaveText([
       'ScScrollAreaNext',
       'ScScrollAreaNextViewport',
-      'ScScrollAreaNextContent',
+      'ScScrollAreaNextViewportContent',
       'ScScrollAreaNextScrollbar, ScScrollAreaNextThumb',
       'ScScrollAreaNextCorner',
     ]);

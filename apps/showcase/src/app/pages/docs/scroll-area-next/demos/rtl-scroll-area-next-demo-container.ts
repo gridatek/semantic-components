@@ -23,10 +23,10 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScFrame,
   ScScrollAreaNext,
-  ScScrollAreaNextContent,
   ScScrollAreaNextScrollbar,
   ScScrollAreaNextThumb,
   ScScrollAreaNextViewport,
+  ScScrollAreaNextViewportContent,
   ScSeparator,
 } from '@semantic-components/ui';
 
@@ -37,7 +37,7 @@ import {
     Dir,
     ScFrame,
     ScScrollAreaNext,
-    ScScrollAreaNextContent,
+    ScScrollAreaNextViewportContent,
     ScScrollAreaNextScrollbar,
     ScScrollAreaNextThumb,
     ScScrollAreaNextViewport,
@@ -47,7 +47,7 @@ import {
     <div dir="rtl" lang="ar">
       <div scScrollAreaNext scFrame class="h-72 w-48">
         <div scScrollAreaNextViewport>
-          <div scScrollAreaNextContent class="p-4">
+          <div scScrollAreaNextViewportContent class="p-4">
             <p class="mb-4 text-sm leading-none font-medium">العلامات</p>
             @for (tag of tags; track tag) {
               <div class="text-sm">{{ tag }}</div>

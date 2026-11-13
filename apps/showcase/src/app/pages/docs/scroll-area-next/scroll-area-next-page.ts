@@ -140,14 +140,14 @@ export default class ScrollAreaNextPage {
   protected readonly anatomy = {
     imports: [
       'import {',
-      '  ScScrollAreaNext, ScScrollAreaNextViewport, ScScrollAreaNextContent,',
+      '  ScScrollAreaNext, ScScrollAreaNextViewport, ScScrollAreaNextViewportContent,',
       '  ScScrollAreaNextScrollbar, ScScrollAreaNextThumb, ScScrollAreaNextCorner,',
       "} from '@semantic-components/ui';",
     ].join('\n'),
     markup: [
       '<div scScrollAreaNext>',
       '  <div scScrollAreaNextViewport>',
-      '    <div scScrollAreaNextContent>…</div>',
+      '    <div scScrollAreaNextViewportContent>…</div>',
       '  </div>',
       '  <div scScrollAreaNextScrollbar orientation="…">',
       '    <div scScrollAreaNextThumb></div>',
@@ -171,8 +171,8 @@ export default class ScrollAreaNextPage {
         'What scrolls: its own scrollbar hidden, in the tab order while it overflows; --scroll-area-overflow-{x,y}-{start,end}.',
     },
     {
-      name: 'ScScrollAreaNextContent',
-      selector: 'div[scScrollAreaNextContent]',
+      name: 'ScScrollAreaNextViewportContent',
+      selector: 'div[scScrollAreaNextViewportContent]',
       description: 'The content: at least as wide as what it holds.',
     },
     {

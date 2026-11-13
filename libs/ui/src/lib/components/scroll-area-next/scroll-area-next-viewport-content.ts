@@ -3,13 +3,14 @@ import { cn } from 'cn';
 
 /**
  * What scrolls, inside the viewport: at least as wide as its content, so a
- * row wider than the box overflows sideways. As Base UI's ScrollArea.Content.
+ * row wider than the box overflows sideways. Base UI's ScrollArea.Content,
+ * named after the viewport it sits in (docs/content-body-naming.md).
  */
 @Directive({
-  selector: 'div[scScrollAreaNextContent]',
+  selector: 'div[scScrollAreaNextViewportContent]',
   host: { '[class]': 'class()' },
 })
-export class ScScrollAreaNextContent {
+export class ScScrollAreaNextViewportContent {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() => cn('min-w-fit', this.classInput()));
