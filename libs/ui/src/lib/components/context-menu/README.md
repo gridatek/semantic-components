@@ -36,7 +36,7 @@ A menu at the pointer, opened by a right-click on an area — a long press on to
 
 The area's look and text are yours; the part makes it focusable, shows its focus, and stops text selection on a long press.
 
-The menu opens at the pointer: at its reading end, 4px down (`side`: `'end'`, `'start'`, `'top'`, `'bottom'`), mirrored right to left, at the other side if there is no room. It takes the area's direction and language.
+The menu opens at the pointer: at its reading end, 4px down (`side`: `'inline-end'` default, `'inline-start'`, `'top'`, `'bottom'` — logical, mirrored right to left; or `'left'` / `'right'`, which stay put), at the other side if there is no room. It takes the area's direction and language.
 
 ## Keyboard
 
@@ -44,10 +44,10 @@ A right-click opens the menu with nothing highlighted, until the pointer moves o
 
 ## API reference
 
-| Part                   | Selector                 | Inputs                                                                                                                                                                   |
-| ---------------------- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `ScContextMenu`        | `div[scContextMenu]`     | `open` (`[(open)]`: opened here, at the area's centre), `side` (`'end'`, `'start'`, `'top'`, `'bottom'`), `class` — holds the area and the menu; catches the right-click |
-| `ScContextMenuTrigger` | `[scContextMenuTrigger]` | `class` — the area (focusable)                                                                                                                                           |
+| Part                   | Selector                 | Inputs                                                                                                                                                                                                                           |
+| ---------------------- | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ScContextMenu`        | `div[scContextMenu]`     | `open` (`[(open)]`: opened here, at the area's centre), `side` (`'inline-end'` default, `'inline-start'`, `'top'`, `'bottom'`; physical `'left'`, `'right'` too), `class` — holds the area and the menu; catches the right-click |
+| `ScContextMenuTrigger` | `[scContextMenuTrigger]` | `class` — the area (focusable)                                                                                                                                                                                                   |
 
 The menu: in a `scMenuPortal`, rendered while it is open, made of the Menu's parts (see the Menu's README).
 

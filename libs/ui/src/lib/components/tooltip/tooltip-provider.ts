@@ -27,7 +27,6 @@ import {
   buildOverlayPositionsWithFallback,
   physicalSide,
   placedSide,
-  sideInWords,
 } from '../../utils/overlay-positions';
 import { SC_TOOLTIP_CONTEXT, type ScTooltipContext } from './tooltip-context';
 import { ScTooltipGroup } from './tooltip-group';
@@ -38,8 +37,8 @@ import { ScTooltipTrigger } from './tooltip-trigger';
 export type ScTooltipSide = ScOverlayLogicalSide;
 
 /**
- * A tooltip and its trigger: `[(open)]`, where it goes (`side`, `align`,
- * `offset`) and when (`delay`, `closeDelay`). As Base UI's Tooltip.Root.
+ * A tooltip and its trigger: `[(open)]`, where it goes (`side`, `alignment`,
+ * `sideOffset`, `alignmentOffset`) and when (`delay`, `closeDelay`). As Base UI's Tooltip.Root.
  */
 @Component({
   selector: 'div[scTooltipProvider]',
@@ -83,7 +82,10 @@ export class ScTooltipProvider implements ScTooltipContext {
   /** Along that side: `start`, `center`, `end` (logical). */
   readonly alignment = input<ScOverlayAlign>('center');
   /** The gap from the trigger (px). */
-  readonly offset = input(4);
+  /** Its distance from the trigger's side, in px (Base UI's `sideOffset`). */
+  readonly sideOffset = input(4);
+  /** Moved along that side, in px, toward its end (Base UI's `alignOffset`). */
+  readonly alignmentOffset = input(0);
   /** How long the pointer rests on the trigger before it opens (ms). */
   readonly delay = input(600);
   /** How long it stays once the pointer has left (ms). */
@@ -102,19 +104,16 @@ export class ScTooltipProvider implements ScTooltipContext {
     buildOverlayPositionsWithFallback(
       physicalSide(this.side(), this.direction.value),
       this.alignment(),
-      this.offset(),
+      this.sideOffset(),
       this.direction.value,
+      this.alignmentOffset(),
     ),
   );
 
-  /** The side it was placed on, after any flip — in the words asked for. */
+  /** The side it was placed on, after any flip, as the screen sees it (`data-side`: physical). */
   private readonly placed = signal<ScOverlaySide | null>(null);
-  readonly placedSide = computed(() =>
-    sideInWords(
-      this.placed() ?? physicalSide(this.side(), this.direction.value),
-      this.side(),
-      this.direction.value,
-    ),
+  readonly placedSide = computed(
+    () => this.placed() ?? physicalSide(this.side(), this.direction.value),
   );
 
   protected readonly class = computed(() => cn('contents', this.classInput()));

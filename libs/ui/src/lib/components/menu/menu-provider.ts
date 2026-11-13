@@ -65,7 +65,10 @@ export class ScMenuProvider implements ScMenuContext {
   readonly open = model(false);
   readonly side = input<ScMenuSide>('bottom');
   readonly alignment = input<ScMenuAlign>('start');
-  readonly offset = input(4);
+  /** Its distance from the trigger's side, in px (Base UI's `sideOffset`). */
+  readonly sideOffset = input(4);
+  /** Moved along that side, in px, toward its end (Base UI's `alignOffset`). */
+  readonly alignmentOffset = input(0);
   readonly originInput = input<CdkOverlayOrigin | undefined>(undefined, {
     alias: 'origin',
   });
@@ -86,8 +89,9 @@ export class ScMenuProvider implements ScMenuContext {
     buildOverlayPositionsWithFallback(
       this.side(),
       this.alignment(),
-      this.offset(),
+      this.sideOffset(),
       this.directionality.value,
+      this.alignmentOffset(),
     ),
   );
 

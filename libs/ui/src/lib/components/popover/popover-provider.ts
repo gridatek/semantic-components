@@ -31,7 +31,6 @@ import {
   buildOverlayPositionsWithFallback,
   physicalSide,
   placedSide,
-  sideInWords,
 } from '../../utils/overlay-positions';
 import { ScPopoverPortal } from './popover-portal';
 import { ScPopoverTrigger } from './popover-trigger';
@@ -48,7 +47,7 @@ export type ScPopoverModal = boolean | 'trap-focus';
 
 /**
  * A popover and its trigger: `[(open)]`, `modal`, where it goes (`side`,
- * `align`, `offset`; `origin` for another anchor than the trigger). As Base
+ * `alignment`, `sideOffset`, `alignmentOffset`; `origin` for another anchor than the trigger). As Base
  * UI's Popover.Root.
  */
 @Component({
@@ -102,7 +101,10 @@ export class ScPopoverProvider {
   /** Along that side: `start`, `center`, `end` (logical). */
   readonly alignment = input<ScOverlayAlign>('center');
   /** The gap from the anchor (px). */
-  readonly offset = input(4);
+  /** Its distance from the trigger's side, in px (Base UI's `sideOffset`). */
+  readonly sideOffset = input(4);
+  /** Moved along that side, in px, toward its end (Base UI's `alignOffset`). */
+  readonly alignmentOffset = input(0);
   /** Another anchor than the trigger (an input group…). */
   readonly originInput = input<CdkOverlayOrigin | undefined>(undefined, {
     alias: 'origin',
@@ -125,19 +127,16 @@ export class ScPopoverProvider {
     buildOverlayPositionsWithFallback(
       physicalSide(this.side(), this.direction.value),
       this.alignment(),
-      this.offset(),
+      this.sideOffset(),
       this.direction.value,
+      this.alignmentOffset(),
     ),
   );
 
-  /** The side it was placed on, after any flip — in the words asked for. */
+  /** The side it was placed on, after any flip, as the screen sees it (`data-side`: physical). */
   private readonly placed = signal<ScOverlaySide | null>(null);
-  readonly placedSide = computed(() =>
-    sideInWords(
-      this.placed() ?? physicalSide(this.side(), this.direction.value),
-      this.side(),
-      this.direction.value,
-    ),
+  readonly placedSide = computed(
+    () => this.placed() ?? physicalSide(this.side(), this.direction.value),
   );
 
   /** Modal: the page behind doesn't scroll; otherwise it follows its anchor. */

@@ -189,7 +189,7 @@ export default class ContextMenuPage {
       name: 'ScContextMenu',
       selector: 'div[scContextMenu]',
       description:
-        "Holds the area and its menu: catches the right-click and opens the menu there. [(open)]; side: 'end' (default), 'start', 'top' or 'bottom'.",
+        "Holds the area and its menu: catches the right-click and opens the menu there. [(open)]; side: 'inline-end' (default), 'inline-start', 'top' or 'bottom' — logical; 'left' or 'right' stay put right to left.",
     },
     {
       name: 'ScContextMenuTrigger',

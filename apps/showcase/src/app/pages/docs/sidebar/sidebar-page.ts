@@ -250,7 +250,7 @@ export default class SidebarPage {
       name: 'ScSidebar',
       selector: 'aside[scSidebar], div[scSidebar]',
       description:
-        "The sidebar. side ('start', 'end'), variant ('sidebar', 'floating', 'inset'), collapsible ('offcanvas', 'icon', 'none'); aria-label names the aside, and the sheet on phones.",
+        "The sidebar. side ('inline-start' default, 'inline-end'; or 'left', 'right', which stay put), variant ('sidebar', 'floating', 'inset'), collapsible ('offcanvas', 'icon', 'none'); aria-label names the aside, and the sheet on phones.",
     },
     {
       name: 'ScSidebarInset',

@@ -1,5 +1,9 @@
-/** Where a card goes around its target: logical, `start`/`end` follow the direction. */
-export type ScPlacementSide = 'top' | 'bottom' | 'start' | 'end';
+/**
+ * Where a card goes around its target: logical (`inline-start`, `inline-end`
+ * follow the direction) or physical (`left`, `right` stay put).
+ */
+export type ScPlacementSide =
+  'top' | 'bottom' | 'left' | 'right' | 'inline-start' | 'inline-end';
 
 export interface ScPlacementBox {
   readonly top: number;
@@ -24,8 +28,10 @@ const EDGE = 8;
 const OPPOSITE: Record<ScPlacementSide, ScPlacementSide> = {
   top: 'bottom',
   bottom: 'top',
-  start: 'end',
-  end: 'start',
+  left: 'right',
+  right: 'left',
+  'inline-start': 'inline-end',
+  'inline-end': 'inline-start',
 };
 
 /**
@@ -65,11 +71,11 @@ export function spotlightPlacement(options: {
     height: target.height + padding * 2,
   };
   const physical = (side: ScPlacementSide) =>
-    side === 'start'
+    side === 'inline-start'
       ? rtl
         ? 'right'
         : 'left'
-      : side === 'end'
+      : side === 'inline-end'
         ? rtl
           ? 'left'
           : 'right'
@@ -110,8 +116,11 @@ export function spotlightPlacement(options: {
   const order: ScPlacementSide[] = [
     wanted,
     OPPOSITE[wanted],
-    ...(['bottom', 'top', 'end', 'start'] as const).filter(
-      (side) => side !== wanted && side !== OPPOSITE[wanted],
+    // The others, compared on screen: `right` and `inline-end` can be one.
+    ...(['bottom', 'top', 'inline-end', 'inline-start'] as const).filter(
+      (side) =>
+        physical(side) !== physical(wanted) &&
+        physical(side) !== physical(OPPOSITE[wanted]),
     ),
   ];
   const side = order.find(fits) ?? wanted;

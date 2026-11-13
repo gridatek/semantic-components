@@ -31,23 +31,3 @@ export function placedSide(
   const toEnd = originX === 'end' && overlayX === 'start';
   return toEnd !== (direction === 'rtl') ? 'right' : 'left';
 }
-
-/**
- * The side placed, in the words asked for: a logical side asked, a logical
- * side given (`data-side`, which the presets read).
- */
-export function sideInWords(
-  placed: ScOverlaySide,
-  asked: ScOverlayLogicalSide,
-  direction: Direction,
-): ScOverlayLogicalSide {
-  if (
-    (asked !== 'inline-start' && asked !== 'inline-end') ||
-    placed === 'top' ||
-    placed === 'bottom'
-  )
-    return placed;
-  return (placed === 'left') !== (direction === 'rtl')
-    ? 'inline-start'
-    : 'inline-end';
-}

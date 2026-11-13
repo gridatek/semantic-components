@@ -16,6 +16,9 @@ import { injectPreset } from '../../config/preset';
 import { ScSheet, ScSheetPortal, ScSheetProvider } from '../sheet';
 import { ScSidebarState } from './sidebar-state';
 
+/** Where the sidebar sits: logical (flips right to left) or physical. */
+export type ScSidebarSide = 'inline-start' | 'inline-end' | 'left' | 'right';
+
 /**
  * The sidebar: beside the page on wide screens — collapsed off the screen
  * (`offcanvas`), to icons (`icon`) or never (`none`) — and a sheet over it
@@ -89,8 +92,12 @@ export class ScSidebar {
   protected readonly state = inject(ScSidebarState);
 
   readonly classInput = input<string>('', { alias: 'class' });
-  /** Where it sits on the line: at its start (left, or right in right-to-left) or its end. */
-  readonly side = input<'start' | 'end'>('start');
+  /**
+   * Where it sits: `inline-start` (default) or `inline-end` of the line, which
+   * flip right to left; or `left` / `right`, which stay put. `data-side` is the
+   * word given: the CSS does the rest, no direction read in script.
+   */
+  readonly side = input<ScSidebarSide>('inline-start');
   readonly variant = input<'sidebar' | 'floating' | 'inset'>('sidebar');
   readonly collapsible = input<'offcanvas' | 'icon' | 'none'>('offcanvas');
   /** Names the sheet on phones. */
@@ -104,7 +111,11 @@ export class ScSidebar {
   /** The direction, read in the browser (the sheet only shows there). */
   private readonly rtl = signal(false);
   protected readonly sheetSide = computed(() =>
-    (this.side() === 'start') !== this.rtl() ? 'left' : 'right',
+    this.side() === 'left' || this.side() === 'right'
+      ? this.side()
+      : (this.side() === 'inline-start') !== this.rtl()
+        ? 'left'
+        : 'right',
   );
 
   private readonly floating = computed(
@@ -132,12 +143,14 @@ export class ScSidebar {
 
   protected readonly containerClass = computed(() =>
     cn(
-      'fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[inset-inline-start,inset-inline-end,width] duration-200 ease-linear md:flex',
-      'data-[side=start]:start-0 data-[side=start]:group-data-[collapsible=offcanvas]:start-[calc(var(--sidebar-width)*-1)]',
-      'data-[side=end]:end-0 data-[side=end]:group-data-[collapsible=offcanvas]:end-[calc(var(--sidebar-width)*-1)]',
+      'fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[inset-inline-start,inset-inline-end,left,right,width] duration-200 ease-linear md:flex',
+      'data-[side=inline-start]:start-0 data-[side=inline-start]:group-data-[collapsible=offcanvas]:start-[calc(var(--sidebar-width)*-1)]',
+      'data-[side=inline-end]:end-0 data-[side=inline-end]:group-data-[collapsible=offcanvas]:end-[calc(var(--sidebar-width)*-1)]',
+      'data-[side=left]:left-0 data-[side=left]:group-data-[collapsible=offcanvas]:left-[calc(var(--sidebar-width)*-1)]',
+      'data-[side=right]:right-0 data-[side=right]:group-data-[collapsible=offcanvas]:right-[calc(var(--sidebar-width)*-1)]',
       this.floating()
         ? 'p-2 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+(--spacing(4))+2px)]'
-        : 'group-data-[collapsible=icon]:w-(--sidebar-width-icon) group-data-[side=start]:border-e group-data-[side=end]:border-s',
+        : 'group-data-[collapsible=icon]:w-(--sidebar-width-icon) group-data-[side=inline-start]:border-e group-data-[side=inline-end]:border-s group-data-[side=left]:border-r group-data-[side=right]:border-l',
     ),
   );
 

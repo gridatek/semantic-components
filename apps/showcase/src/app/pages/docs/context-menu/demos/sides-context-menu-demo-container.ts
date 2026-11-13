@@ -70,7 +70,7 @@ import {
           </div>
         </ng-template>
       </div>
-      <div scContextMenu side="end" class="w-full max-w-xs">
+      <div scContextMenu side="inline-end" class="w-full max-w-xs">
         <div
           scContextMenuTrigger
           scFrame
@@ -120,7 +120,7 @@ import {
           </div>
         </ng-template>
       </div>
-      <div scContextMenu side="start" class="w-full max-w-xs">
+      <div scContextMenu side="inline-start" class="w-full max-w-xs">
         <div
           scContextMenuTrigger
           scFrame

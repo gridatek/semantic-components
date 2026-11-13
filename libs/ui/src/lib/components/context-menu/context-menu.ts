@@ -20,12 +20,17 @@ import {
 } from '@angular/core';
 import { cn } from 'cn';
 import { ScElementDirectionality } from '../../utils/element-directionality';
+import {
+  type ScOverlayLogicalSide,
+  physicalSide,
+} from '../../utils/overlay-positions';
 import { SC_MENU, type ScMenuContext } from '../menu/menu-context';
 import { ScMenuPortal } from '../menu/menu-portal';
 import { ScContextMenuTrigger } from './context-menu-trigger';
 import { SC_CONTEXT_MENU } from './context-menu-types';
 
-export type ScContextMenuSide = 'top' | 'bottom' | 'start' | 'end';
+/** Logical (`inline-start`, `inline-end`: they flip right to left) or physical. */
+export type ScContextMenuSide = ScOverlayLogicalSide;
 
 /**
  * Holds a context menu: the area (its trigger) and the menu, in a portal.
@@ -84,10 +89,11 @@ export class ScContextMenu implements ScMenuContext {
   /** Open or not; `[(open)]`. Opened here, the menu is at the area's centre. */
   readonly open = model(false);
   /**
-   * Where the menu opens from the pointer: at its reading end (default), its
-   * start, above or below it — at another side if there is no room.
+   * Where the menu opens from the pointer: at its reading end
+   * (`inline-end`, default), its start (`inline-start`), above or below it;
+   * `left` / `right` stay put right to left — at another side if no room.
    */
-  readonly side = input<ScContextMenuSide>('end');
+  readonly side = input<ScContextMenuSide>('inline-end');
 
   /** Opened by a pointer: no item highlighted until it moves or a key. */
   readonly quiet = signal(false);
@@ -180,16 +186,14 @@ export class ScContextMenu implements ScMenuContext {
       overlayY: 'bottom',
       offsetY: -(p.offsetY ?? 0),
     });
-    switch (this.side()) {
-      case 'start':
-        return [start, end, up(start), up(end)];
-      case 'top':
-        return [top, bottom];
-      case 'bottom':
-        return [bottom, top];
-      default:
-        return [end, start, up(end), up(start)];
-    }
+    const side = physicalSide(this.side(), this.direction());
+    if (side === 'top') return [top, bottom];
+    if (side === 'bottom') return [bottom, top];
+    // CDK's end is the right left to right, the left right to left.
+    const toEnd = (side === 'right') === (this.direction() === 'ltr');
+    return toEnd
+      ? [end, start, up(end), up(start)]
+      : [start, end, up(start), up(end)];
   });
 
   protected onContextMenu(event: MouseEvent): void {

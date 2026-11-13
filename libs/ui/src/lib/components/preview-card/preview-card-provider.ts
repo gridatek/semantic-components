@@ -25,7 +25,6 @@ import {
   buildOverlayPositionsWithFallback,
   physicalSide,
   placedSide,
-  sideInWords,
 } from '../../utils/overlay-positions';
 import { ScPreviewCardPortal } from './preview-card-portal';
 import { ScPreviewCardTrigger } from './preview-card-trigger';
@@ -34,8 +33,8 @@ import { ScPreviewCardTrigger } from './preview-card-trigger';
 export type ScPreviewCardSide = ScOverlayLogicalSide;
 
 /**
- * A preview card and its trigger: `[(open)]`, where it goes (`side`, `align`,
- * `offset`; `origin` for another anchor than the trigger). A preview of the
+ * A preview card and its trigger: `[(open)]`, where it goes (`side`, `alignment`,
+ * `sideOffset`, `alignmentOffset`; `origin` for another anchor than the trigger). A preview of the
  * link's destination for sighted mouse and keyboard users — nothing in it is
  * reached by the keyboard or a screen reader. As Base UI's PreviewCard.Root.
  */
@@ -78,7 +77,10 @@ export class ScPreviewCardProvider {
   /** Along that side: `start`, `center`, `end` (logical). */
   readonly alignment = input<ScOverlayAlign>('center');
   /** The gap from the trigger (px). */
-  readonly offset = input(4);
+  /** Its distance from the trigger's side, in px (Base UI's `sideOffset`). */
+  readonly sideOffset = input(4);
+  /** Moved along that side, in px, toward its end (Base UI's `alignOffset`). */
+  readonly alignmentOffset = input(0);
   /** Another anchor than the trigger. */
   readonly originInput = input<CdkOverlayOrigin | undefined>(undefined, {
     alias: 'origin',
@@ -98,19 +100,16 @@ export class ScPreviewCardProvider {
     buildOverlayPositionsWithFallback(
       physicalSide(this.side(), this.direction.value),
       this.alignment(),
-      this.offset(),
+      this.sideOffset(),
       this.direction.value,
+      this.alignmentOffset(),
     ),
   );
 
-  /** The side it was placed on, after any flip — in the words asked for. */
+  /** The side it was placed on, after any flip, as the screen sees it (`data-side`: physical). */
   private readonly placed = signal<ScOverlaySide | null>(null);
-  readonly placedSide = computed(() =>
-    sideInWords(
-      this.placed() ?? physicalSide(this.side(), this.direction.value),
-      this.side(),
-      this.direction.value,
-    ),
+  readonly placedSide = computed(
+    () => this.placed() ?? physicalSide(this.side(), this.direction.value),
   );
 
   protected readonly class = computed(() => cn('contents', this.classInput()));

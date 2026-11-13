@@ -59,7 +59,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
         <h2 scTourGuideTitle>Search</h2>
         <p scTourGuideDescription>Find anything.</p>
       </ng-template>
-      <ng-template scTourGuideStep [for]="menu" side="end">
+      <ng-template scTourGuideStep [for]="menu" side="inline-end">
         <h2 scTourGuideTitle>Sections</h2>
         <p scTourGuideDescription>Move around.</p>
       </ng-template>

@@ -107,7 +107,7 @@ import {
     <div scSidebarProvider class="min-h-svh">
       <aside
         scSidebar
-        side="start"
+        side="inline-start"
         variant="sidebar"
         collapsible="icon"
         aria-label="Navigation"

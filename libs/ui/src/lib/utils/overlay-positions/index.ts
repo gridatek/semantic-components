@@ -4,4 +4,4 @@ export {
   buildOverlayPositionsWithFallback,
 } from './overlay-positions';
 export type { ScOverlayLogicalSide } from './overlay-side';
-export { physicalSide, placedSide, sideInWords } from './overlay-side';
+export { physicalSide, placedSide } from './overlay-side';

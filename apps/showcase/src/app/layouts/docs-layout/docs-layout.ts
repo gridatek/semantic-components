@@ -118,7 +118,7 @@ import { ConfigService } from '../../services/config-service';
         line, half over the page, isn't covered there. -->
       <aside
         scSidebar
-        side="start"
+        side="inline-start"
         variant="sidebar"
         collapsible="icon"
         aria-label="Sidebar"

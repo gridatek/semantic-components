@@ -5,7 +5,7 @@ An app's side panel, as shadcn's, in the look of the app's preset (the `sidebar`
 ## Features
 
 - **Variants** — `sidebar`, `floating`, `inset` (the page a raised card)
-- **`side`** — `start` or `end` of the line: right-to-left just works
+- **`side`** — `inline-start` or `inline-end` of the line: right-to-left just works (or `left` / `right`, which stay put)
 - **`[(open)]`**, kept between visits (`storageKey`: a cookie the server reads too, plus `localStorage`)
 - **Ctrl/⌘+B** (`shortcut`, `null` to turn off)
 - **Phones** — a sheet: a named dialog, the focus kept inside, Escape closes it and gives the trigger back the focus; following a link closes it
@@ -86,12 +86,12 @@ Our Collapsible around an item:
 
 ### ScSidebar — `aside[scSidebar]`, `div[scSidebar]`
 
-| Input         | Type                                 | Default       | Description               |
-| ------------- | ------------------------------------ | ------------- | ------------------------- |
-| `side`        | `'start' \| 'end'`                   | `'start'`     | Its side of the line      |
-| `variant`     | `'sidebar' \| 'floating' \| 'inset'` | `'sidebar'`   | Its look                  |
-| `collapsible` | `'offcanvas' \| 'icon' \| 'none'`    | `'offcanvas'` | How it collapses          |
-| `aria-label`  | `string`                             | —             | Names the sheet on phones |
+| Input         | Type                                                  | Default          | Description                                                                                    |
+| ------------- | ----------------------------------------------------- | ---------------- | ---------------------------------------------------------------------------------------------- |
+| `side`        | `'inline-start' \| 'inline-end' \| 'left' \| 'right'` | `'inline-start'` | Its side of the line: logical (flips right to left) or physical; `data-side` is the word given |
+| `variant`     | `'sidebar' \| 'floating' \| 'inset'`                  | `'sidebar'`      | Its look                                                                                       |
+| `collapsible` | `'offcanvas' \| 'icon' \| 'none'`                     | `'offcanvas'`    | How it collapses                                                                               |
+| `aria-label`  | `string`                                              | —                | Names the sheet on phones                                                                      |
 
 `data-state="expanded|collapsed"`, `data-collapsible`, `data-variant`, `data-side` for styling.
 

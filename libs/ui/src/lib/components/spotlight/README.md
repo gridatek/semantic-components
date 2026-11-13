@@ -31,7 +31,7 @@ One element lit, the page dimmed, your content beside it in a native dialog — 
 
 ## Placement
 
-The card goes on `side` (`top`, `bottom`, `start`, `end` — logical), flips when there is no room, then shifts to stay on screen; `data-side` says where. The element is scrolled into view (smoothly; at once for reduced motion); everything follows scrolling, resizing and the element changing size. It appears in place, then moves smoothly. Without `for`, the card is centred.
+The card goes on `side` (`top`, `bottom`, `inline-start`, `inline-end` — logical; or `left`, `right`, which stay put right to left), flips when there is no room, then shifts to stay on screen; `data-side` says where. The element is scrolled into view (smoothly; at once for reduced motion); everything follows scrolling, resizing and the element changing size. It appears in place, then moves smoothly. Without `for`, the card is centred.
 
 Shared with Tour Guide: `spotlightPlacement()` (`@semantic-components/ui`).
 

@@ -35,7 +35,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
       #spot="scSpotlight"
       [for]="avatar"
       [padding]="6"
-      side="end"
+      side="inline-end"
       dimClass="rounded-full shadow-[0_0_0_200vmax_rgb(0_0_0/0.75)]"
     >
       <button scSpotlightClose>

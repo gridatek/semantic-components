@@ -38,7 +38,7 @@ import {
     ScPreviewCardTrigger,
   ],
   template: \`
-    <div scPreviewCardProvider [offset]="8">
+    <div scPreviewCardProvider [sideOffset]="8">
       <p class="text-base text-balance">
         The trail ends at a
         <a

@@ -89,7 +89,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
         <h2 scTourGuideTitle>Search everything</h2>
         <p scTourGuideDescription>Projects, people and files, from here.</p>
       </ng-template>
-      <ng-template scTourGuideStep [for]="menu" side="end">
+      <ng-template scTourGuideStep [for]="menu" side="inline-end">
         <h2 scTourGuideTitle>Your sections</h2>
         <p scTourGuideDescription>
           Inbox, projects and reports are always on the side.
