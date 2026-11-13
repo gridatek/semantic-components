@@ -18,12 +18,14 @@ A series as bars: one per category, side by side with the other series' — or o
 
 ## ScChartBar — `g[scChartBar]`
 
-| Input    | Type                                             | Default                                                            |
-| -------- | ------------------------------------------------ | ------------------------------------------------------------------ |
-| `key`    | `string` (required): the series' key in the rows | —                                                                  |
-| `stack`  | `string                                          | null`: bars of a stack on one another                              | `null` |
-| `radius` | `number                                          | [topStart, topEnd, bottomEnd, bottomStart]` — below 0, upside down | `4`    |
-| `fill`   | `string`: instead of its color, `url(#gradient)` | `''`                                                               |
+| Input        | Type                                                                      | Default                                                            |
+| ------------ | ------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| `key`        | `string` (required): the series' key in the rows                          | —                                                                  |
+| `stack`      | `string                                                                   | null`: bars of a stack on one another                              | `null` |
+| `radius`     | `number                                                                   | [topStart, topEnd, bottomEnd, bottomStart]` — below 0, upside down | `4`    |
+| `fill`       | `string`: instead of its color, `url(#gradient)`                          | `''`                                                               |
+| `barSize`    | `number`: its width in pixels, centered in its slot (Recharts' `barSize`) | the slot's                                                         |
+| `maxBarSize` | `number`: its widest, in pixels (Recharts' `maxBarSize`)                  | —                                                                  |
 
 With bars in the plot, each category is a band: the cursor fills it, and the areas and lines of the same plot sit in its middle.
 

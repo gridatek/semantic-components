@@ -91,6 +91,10 @@ export class ScChartBar implements ScChartSeriesLabels {
   readonly radius = input<ScChartRadius>(4);
   /** Instead of its color: `url(#gradient)`. */
   readonly fill = input('');
+  /** Its width in pixels, centered in its slot (Recharts' `barSize`); the slot's by default. */
+  readonly barSize = input<number | undefined>(undefined);
+  /** Its widest, in pixels (Recharts' `maxBarSize`): a narrower slot keeps its width. */
+  readonly maxBarSize = input<number | undefined>(undefined);
 
   protected readonly color = computed(() => `var(--color-${this.key()})`);
 
@@ -99,8 +103,15 @@ export class ScChartBar implements ScChartSeriesLabels {
     const values = this.state.valueScale();
     const vertical = this.state.vertical();
     const slots = this.state.barSlots();
-    const offset = slots(this.stack() ?? `\u0000${this.key()}`) ?? 0;
-    const thickness = slots.bandwidth();
+    const slot = slots.bandwidth();
+    const thickness = Math.min(
+      this.barSize() ?? slot,
+      this.maxBarSize() ?? Number.POSITIVE_INFINITY,
+    );
+    // Narrower than its slot: centered in it.
+    const offset =
+      (slots(this.stack() ?? `\u0000${this.key()}`) ?? 0) +
+      (slot - thickness) / 2;
     const radius = this.radius();
     const [ts, te, be, bs] =
       typeof radius === 'number'

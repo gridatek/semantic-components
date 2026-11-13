@@ -38,11 +38,9 @@ Open work found along the way, kept for later — tick an item when it's done. N
 - [ ] **Presets page: the other options** (the user, 2026-11-12) — `/presets` follows shadcn's [Create](https://ui.shadcn.com/create); only Style changes for now (saved, then a reload: a preset is set at start). Base Color, Theme, Chart Color, Heading, Font, Icon Library, Radius and Menu are cards, disabled. Also from Create: Shuffle, Open Preset, Get Code. Charts (`/charts`) and Typeset (`/typeset`) are Coming soon pages for now.
 - [ ] **Create demos: what porting them showed** (2026-11-12) — `/presets` shows all of shadcn's Create preview (both pages, `pages/presets/cards/`). Left over:
   - shadcn has two sets of these cards: its home page's (`app/(app)/(root)/cards`, hand-drawn bars, Progress) and Create's (registry blocks, Recharts, Slider). The home page follows the first; `/presets` has Create's own ports (all but Distribute Track and New Milestone, the same in both).
-  - Bar Chart has no `barSize` (Recharts' fixed bar width): Sleep Report's bars fill their band.
   - Live Audio Waveform is not a shadcn part (ElevenLabs UI's): an app-local canvas port (`live-waveform-canvas.ts`), not a lib part.
   - A table container that may scroll needs `tabindex="0" role="region" aria-label` by hand (as its README says); axe fails without it. Worth the container doing it itself when it overflows?
   - Contrast: Recent Transactions' income amount is `text-emerald-700` (shadcn's `500` fails), Power Usage's Solar Gen is plain text (shadcn's `text-chart-1` fails in neutral).
-  - Bar Chart has no `maxBarSize` either (Contribution History's bars are wider than shadcn's).
   - The page keeps shadcn's columns, side by side as many as fit and wrapping (no sideways scroll); at 1440px only two fit.
 
 - [ ] **Typeset** (the user, 2026-11-12) — shadcn's [Typeset](https://ui.shadcn.com/docs/typeset): one CSS file that styles HTML and rendered markdown inside a `typeset` container, tuned by three variables (`--typeset-size`, `--typeset-leading`, `--typeset-flow`) and preset classes (`typeset-docs`, `typeset-chat`); `:where()` selectors so utilities win, `not-typeset` to opt out, no selectors that change as content streams in; and its builder page ([/typeset](https://ui.shadcn.com/typeset): measure, fonts, size, leading, flow, shuffle, get code). The showcase's `/typeset` page (in the header) says Coming soon until then.
@@ -55,7 +53,7 @@ Open work found along the way, kept for later — tick an item when it's done. N
 - [ ] **SSR: 16 components still throw on the server**; the CI `ssr` job may fail because of them.
 - [ ] **Charts** (see [reference-libraries.md](reference-libraries.md#charts)):
   - [ ] Animations, as Recharts: series appearing and changing data (`isAnimationActive`, duration, easing); honour `prefers-reduced-motion`.
-  - [ ] Recharts parts we don't have: `Brush`, `ReferenceLine`, `ReferenceArea`, `ErrorBar`, axis `domain` — checked against shadcn's examples first.
+  - [ ] Recharts parts we don't have: `Brush`, `ReferenceLine`, `ReferenceArea`, `ErrorBar`, axis `domain`. Checked 2026-11-13: none is used in shadcn's chart examples (78 files) nor in its Create cards — later, only if a real need comes (the shadcn scope). The two Create used, `barSize` and `maxBarSize` on the bar, are done.
   - [ ] Treemap and sankey without `d3-hierarchy` / `d3-sankey` (their own layouts, as Recharts) — or keep their entry points.
 - [ ] **Tree Table** (see [reference-libraries.md](reference-libraries.md#tree-table)):
   - [ ] Children loaded when a row opens.

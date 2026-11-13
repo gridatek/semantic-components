@@ -55,7 +55,12 @@ import {
             [margin]="{ left: 0, right: 0, top: 8, bottom: 0 }"
           >
             <g scChartCategoryAxis />
-            <g scChartBar key="amount" [radius]="[6, 6, 0, 0]" />
+            <g
+              scChartBar
+              key="amount"
+              [radius]="[6, 6, 0, 0]"
+              [maxBarSize]="40"
+            />
           </svg>
           <div scChartTooltip hideLabel class="min-w-40"></div>
         </div>
