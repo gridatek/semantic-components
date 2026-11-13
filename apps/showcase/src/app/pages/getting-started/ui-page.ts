@@ -146,79 +146,6 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
       <div scSeparator></div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Optional: Preset color schemes</h2>
-        <p class="text-muted-foreground">
-          The UI library ships a small set of opt-in color schemes (<code
-            class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >red</code
-          >, <code class="bg-muted rounded px-1.5 py-0.5 text-sm">rose</code>,
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">orange</code>,
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">green</code>,
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">blue</code>,
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">yellow</code>,
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">violet</code>)
-          that override
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">--primary</code>
-          and related tokens. Import them in addition to the default styles:
-        </p>
-        <div scCodeBlock>
-          <div scCodeBlockHeader>
-            <div scCodeBlockTitle>css</div>
-            <div scCodeBlockActions>
-              <button
-                [scCodeBlockCopy]="colorSchemesCode"
-                #copyColorSchemes="scCodeBlockCopy"
-              >
-                @if (copyColorSchemes.copied()) {
-                  <svg siCheckIcon></svg>
-                } @else {
-                  <svg siCopyIcon></svg>
-                }
-                <span class="sr-only">Copy to clipboard</span>
-              </button>
-            </div>
-          </div>
-          <pre
-            scCodeBlockContent
-            [code]="colorSchemesCode"
-            language="css"
-          ></pre>
-        </div>
-        <p class="text-muted-foreground">
-          Activate a scheme at runtime via
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >ScThemeManager.setColorScheme('blue')</code
-          >, or statically by setting
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >data-theme="blue"</code
-          >
-          on
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >&lt;html&gt;</code
-          >.
-        </p>
-        <p class="text-muted-foreground">
-          Use the shipped file as-is, or drop it and author your own — any CSS
-          rule matching
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >[data-theme='my-scheme']</code
-          >
-          (and its
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >[data-theme='my-scheme'].dark</code
-          >
-          variant) that overrides the token variables will work the same way.
-          This lets you add new palettes (e.g.
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">teal</code>) or
-          customize tokens beyond
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">--primary</code>
-          without forking the library.
-        </p>
-      </section>
-
-      <div scSeparator></div>
-
-      <section class="space-y-4">
         <h2 scHeading appToc>Usage</h2>
         <p class="text-muted-foreground">
           Import and use components in your Angular templates:
@@ -412,7 +339,4 @@ import { provideSemanticComponents } from '@semantic-components/ui';
 export const appConfig: ApplicationConfig = {
   providers: [provideSemanticComponents({ preset: lyra })],
 };`;
-
-  readonly colorSchemesCode =
-    '@import "@semantic-components/ui/styles/color-schemes.css";';
 }
