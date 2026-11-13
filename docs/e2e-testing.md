@@ -106,6 +106,16 @@ The nightly workflow (`nightly-e2e.yml`) runs both ways — jobs `csr` and `ssr`
 
 `serve-ssr` needs a build first (`npx nx build showcase -c ssr`); with `SSR=1`, the Playwright config starts it instead of `serve-static`. Its log goes to `dist/ssr-showcase.log` (`dist/ssr-blocks.log`). The same for `blocks`.
 
+**One spec locally, under SSR:** build, start the server on a free port, and point the tests at it (`BASE_URL` set, the config starts no server of its own). Restart the server after each rebuild.
+
+```sh
+npx nx build showcase --configuration=ssr
+PORT=4400 node dist/apps/showcase/server/server.mjs   # in another terminal
+SSR=1 BASE_URL=http://localhost:4400 npx playwright test -c apps/showcase-e2e/playwright.config.ts src/demos/spinner --project=demos --workers=1 --retries=0
+```
+
+What fails only here is mostly code that runs on the server without a browser (`matchMedia`, `window`), or a page drawn differently on the server than in the browser (a preset or theme read from browser-only state, where hydration keeps the server's classes).
+
 **Import `test` from `src/test.ts`,** not from `@playwright/test` (it re-exports the rest). In the SSR job its `page.goto` and `page.reload` wait until the page has hydrated — until `<html data-hydrated>`, which the `ssr` build's browser entry (`main-ssr.ts`) sets once the app is hydrated and stable (`ApplicationRef.whenStable()`; Angular has no "hydrated" event, only a dev-mode console message): a page drawn by the server is visible before Angular listens, and a fill or click in between is lost — or replayed. Without SSR, Playwright's own. Anything that must be in place before the app starts (`dir="rtl"`…) goes in `page.addInitScript`, not an `evaluate` after `goto`.
 
 **Allowed hosts:** the built server answers only the hosts listed in the `ssr` configuration's `security.allowedHosts` (Angular's protection against server-side request forgery) — `localhost`, for the tests. Any other host gets `400 Bad Request` with "URL with hostname … is not allowed", and every test fails. The dev server skips this check, so it only shows up on the built server. A deployment adds its own domain to the list.
