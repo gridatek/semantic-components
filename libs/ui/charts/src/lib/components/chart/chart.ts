@@ -27,7 +27,7 @@ export class ScChart {
 
   protected readonly class = computed(() =>
     cn(
-      'relative flex aspect-video flex-col justify-center text-xs',
+      'relative flex aspect-video min-h-0 flex-col justify-center text-xs',
       this.classInput(),
     ),
   );

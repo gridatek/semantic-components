@@ -46,7 +46,7 @@ import {
           scChartPlot
           categoryKey="month"
           aria-label="Visitors, January to June"
-          [margin]="{ left: 0, right: 0 }"
+          [margin]="{ top: 5, right: 0, bottom: 0, left: 0 }"
         >
           <g scChartArea key="visitors" curve="linear" [fillOpacity]="0.4" />
         </svg>
