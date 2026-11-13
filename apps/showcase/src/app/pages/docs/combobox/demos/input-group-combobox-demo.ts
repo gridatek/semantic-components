@@ -56,7 +56,7 @@ import {
           placeholder="Select a timezone"
           aria-label="Timezone"
         />
-        <div scInputGroupAddon alignment="inline-end">
+        <div scInputGroupAddon side="inline-end">
           <button scComboboxTrigger>
             <svg siChevronDownIcon></svg>
             <span class="sr-only">Show the list</span>

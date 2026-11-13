@@ -21,8 +21,9 @@ export type ScButtonSize =
 
 export type ScControlGroupOrientation = 'horizontal' | 'vertical';
 
-export type ScInputGroupAddonAlign =
-  'inline-start' | 'inline-end' | 'block-start' | 'block-end';
+/** An Input Group addon's side of its control: before, after (logical), above, below. */
+export type ScInputGroupAddonSide =
+  'inline-start' | 'inline-end' | 'top' | 'bottom';
 
 export type ScInputGroupButtonSize = 'xs' | 'sm' | 'icon-xs' | 'icon-sm';
 
@@ -630,7 +631,7 @@ export interface ScPreset {
   input: string;
   /** The group, and what it gives its input or textarea (`[data-slot=control]`). */
   inputGroup: string;
-  inputGroupAddon: (props: { align?: ScInputGroupAddonAlign | null }) => string;
+  inputGroupAddon: (props: { side?: ScInputGroupAddonSide | null }) => string;
   /** Over the preset's button, in an input group. */
   inputGroupButton: (props: { size?: ScInputGroupButtonSize | null }) => string;
   inputGroupText: string;

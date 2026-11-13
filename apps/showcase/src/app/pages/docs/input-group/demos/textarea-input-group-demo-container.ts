@@ -54,14 +54,14 @@ import {
         aria-label="Code"
         class="min-h-[200px] font-mono"
       ></textarea>
-      <div scInputGroupAddon alignment="block-end" class="border-t">
+      <div scInputGroupAddon side="bottom" class="border-t">
         <span scInputGroupText>Line 1, Column 1</span>
         <button scInputGroupButton variant="default" size="sm" class="ms-auto">
           Run
           <svg siCornerDownLeftIcon></svg>
         </button>
       </div>
-      <div scInputGroupAddon alignment="block-start" class="border-b">
+      <div scInputGroupAddon side="top" class="border-b">
         <span scInputGroupText class="font-mono font-medium">
           <svg siFileCodeIcon></svg>
           script.js

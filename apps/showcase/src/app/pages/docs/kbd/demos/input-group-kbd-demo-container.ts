@@ -38,7 +38,7 @@ import { SiSearchIcon } from '@semantic-icons/lucide-icons';
         <div scInputGroupAddon>
           <svg siSearchIcon></svg>
         </div>
-        <div scInputGroupAddon alignment="inline-end">
+        <div scInputGroupAddon side="inline-end">
           <kbd scKbd>⌘<span class="sr-only"> Command</span></kbd>
           <kbd scKbd>K</kbd>
         </div>

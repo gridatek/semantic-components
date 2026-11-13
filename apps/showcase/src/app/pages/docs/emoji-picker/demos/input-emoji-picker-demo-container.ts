@@ -99,7 +99,7 @@ import {
             [value]="text()"
             (input)="text.set(message.value)"
           />
-          <div scInputGroupAddon alignment="inline-end">
+          <div scInputGroupAddon side="inline-end">
             <button scButton variant="ghost" size="icon-xs" scPopoverTrigger>
               <svg siSmileIcon></svg>
               <span class="sr-only">Insert an emoji</span>

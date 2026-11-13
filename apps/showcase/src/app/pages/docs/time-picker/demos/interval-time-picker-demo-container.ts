@@ -66,7 +66,7 @@ import { SiClockIcon } from '@semantic-icons/lucide-icons';
               [maxTime]="close"
               [(value)]="time"
             ></div>
-            <div scInputGroupAddon alignment="inline-end">
+            <div scInputGroupAddon side="inline-end">
               <button scTimePickerTrigger #trigger="scTimePickerTrigger">
                 <svg siClockIcon></svg>
                 <span class="sr-only">Choose a time</span>

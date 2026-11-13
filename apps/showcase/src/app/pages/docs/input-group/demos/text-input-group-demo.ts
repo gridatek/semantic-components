@@ -28,7 +28,7 @@ import {
         <div scInputGroupAddon>
           <span scInputGroupText>$</span>
         </div>
-        <div scInputGroupAddon alignment="inline-end">
+        <div scInputGroupAddon side="inline-end">
           <span scInputGroupText>USD</span>
         </div>
       </div>
@@ -42,7 +42,7 @@ import {
         <div scInputGroupAddon>
           <span scInputGroupText>https://</span>
         </div>
-        <div scInputGroupAddon alignment="inline-end">
+        <div scInputGroupAddon side="inline-end">
           <span scInputGroupText>.com</span>
         </div>
       </div>
@@ -52,7 +52,7 @@ import {
           placeholder="Enter your username"
           aria-label="Username"
         />
-        <div scInputGroupAddon alignment="inline-end">
+        <div scInputGroupAddon side="inline-end">
           <span scInputGroupText>&#64;company.com</span>
         </div>
       </div>
@@ -62,7 +62,7 @@ import {
           placeholder="Enter your message"
           aria-label="Message"
         ></textarea>
-        <div scInputGroupAddon alignment="block-end">
+        <div scInputGroupAddon side="bottom">
           <span scInputGroupText class="text-muted-foreground text-xs">
             120 characters left
           </span>

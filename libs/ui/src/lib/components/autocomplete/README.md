@@ -34,11 +34,11 @@ The popup is anchored to the `scAutocomplete` element, so wrap the input in what
 ```html
 <div scAutocomplete class="w-52" [formField]="searchForm.query">
   <div scInputGroup>
-    <div scInputGroupAddon alignment="inline-start">
+    <div scInputGroupAddon side="inline-start">
       <svg siSearchIcon></svg>
     </div>
     <input scInput scAutocompleteInput aria-label="Select a country" placeholder="Select a country" />
-    <div scInputGroupAddon alignment="inline-end">
+    <div scInputGroupAddon side="inline-end">
       <button scAutocompleteClear><svg siXIcon></svg><span class="sr-only">Clear</span></button>
     </div>
   </div>

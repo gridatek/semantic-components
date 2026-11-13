@@ -278,7 +278,7 @@ import {
                           }}</label>
                           <div scInputGroup>
                             <input scInput readonly [value]="remote.url" />
-                            <div scInputGroupAddon alignment="inline-end">
+                            <div scInputGroupAddon side="inline-end">
                               <button
                                 scInputGroupButton
                                 variant="ghost"

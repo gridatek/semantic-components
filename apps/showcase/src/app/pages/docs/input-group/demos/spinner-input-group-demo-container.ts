@@ -42,7 +42,7 @@ import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
     <div class="grid w-full max-w-sm gap-4">
       <div scInputGroup>
         <input scInput placeholder="Searching..." aria-label="Search" />
-        <div scInputGroupAddon alignment="inline-end">
+        <div scInputGroupAddon side="inline-end">
           <svg scSpinner siLoaderCircleIcon aria-label="Loading"></svg>
         </div>
       </div>
@@ -54,7 +54,7 @@ import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
       </div>
       <div scInputGroup>
         <input scInput placeholder="Saving changes..." aria-label="Title" />
-        <div scInputGroupAddon alignment="inline-end">
+        <div scInputGroupAddon side="inline-end">
           <span scInputGroupText>Saving...</span>
           <svg scSpinner siLoaderCircleIcon aria-label="Loading"></svg>
         </div>
@@ -64,7 +64,7 @@ import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
         <div scInputGroupAddon>
           <svg scSpinner siLoaderCircleIcon aria-label="Loading"></svg>
         </div>
-        <div scInputGroupAddon alignment="inline-end">
+        <div scInputGroupAddon side="inline-end">
           <span scInputGroupText class="text-muted-foreground">
             Please wait...
           </span>

@@ -35,7 +35,7 @@ import { SiCopyIcon, SiFileCodeIcon } from '@semantic-icons/lucide-icons';
         <label scLabel>Name</label>
         <div scInputGroup class="h-auto">
           <input scInput placeholder="Enter your name" />
-          <div scInputGroupAddon alignment="block-start">
+          <div scInputGroupAddon side="top">
             <span scInputGroupText>Full Name</span>
           </div>
         </div>
@@ -49,7 +49,7 @@ import { SiCopyIcon, SiFileCodeIcon } from '@semantic-icons/lucide-icons';
             placeholder="console.log('Hello, world!');"
             class="font-mono text-sm"
           ></textarea>
-          <div scInputGroupAddon alignment="block-start">
+          <div scInputGroupAddon side="top">
             <svg siFileCodeIcon class="text-muted-foreground"></svg>
             <span scInputGroupText class="font-mono">script.js</span>
             <button scInputGroupButton size="icon-xs" class="ms-auto">

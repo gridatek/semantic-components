@@ -207,7 +207,7 @@ export default class ComboboxPage {
       '<div scCombobox #cb="scCombobox" [formField]="…">',
       '  <div scInputGroup>',
       '    <input scInput scComboboxInput />',
-      '    <div scInputGroupAddon alignment="inline-end">',
+      '    <div scInputGroupAddon side="inline-end">',
       '      <button scComboboxTrigger>…</button>',
       '      <button scComboboxClear>…</button>',
       '    </div>',

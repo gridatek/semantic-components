@@ -129,7 +129,7 @@ import {
           <label scLabel>Or share invite link</label>
           <div scInputGroup>
             <input scInput readonly [value]="link" />
-            <div scInputGroupAddon alignment="inline-end">
+            <div scInputGroupAddon side="inline-end">
               <button scInputGroupButton size="icon-xs">
                 <svg siCopyIcon></svg>
                 <span class="sr-only">Copy link</span>

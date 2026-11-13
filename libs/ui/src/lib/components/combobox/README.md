@@ -10,7 +10,7 @@ The input is the field, in our input group; the popup hangs from it.
 <div scCombobox #cb="scCombobox" [formField]="form.framework" class="w-56">
   <div scInputGroup>
     <input scInput scComboboxInput placeholder="Select a framework" aria-label="Framework" />
-    <div scInputGroupAddon alignment="inline-end">
+    <div scInputGroupAddon side="inline-end">
       <button scComboboxTrigger><svg siChevronDownIcon></svg><span class="sr-only">Show the list</span></button>
       <button scComboboxClear><svg siXIcon></svg><span class="sr-only">Clear</span></button>
     </div>

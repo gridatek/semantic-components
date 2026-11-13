@@ -40,7 +40,7 @@ import { SiClockIcon } from '@semantic-icons/lucide-icons';
         <div scPopoverProvider [origin]="anchor" alignment="start">
           <div scInputGroup cdkOverlayOrigin #anchor="cdkOverlayOrigin">
             <div scTimeInput locale="fr-FR" [(value)]="time"></div>
-            <div scInputGroupAddon alignment="inline-end">
+            <div scInputGroupAddon side="inline-end">
               <button scTimePickerTrigger #trigger="scTimePickerTrigger">
                 <svg siClockIcon></svg>
                 <span class="sr-only">Choisir une heure</span>

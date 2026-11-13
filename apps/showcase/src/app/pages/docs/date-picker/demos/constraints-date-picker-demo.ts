@@ -59,7 +59,7 @@ import {
             aria-label="Delivery date"
             placeholder="MM/DD/YYYY"
           />
-          <div scInputGroupAddon alignment="inline-end">
+          <div scInputGroupAddon side="inline-end">
             <button scDatePickerTrigger #trigger="scDatePickerTrigger">
               <svg siCalendarIcon></svg>
               <span class="sr-only">Choose a delivery date</span>

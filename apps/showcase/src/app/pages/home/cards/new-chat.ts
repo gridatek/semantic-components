@@ -270,7 +270,7 @@ type Segment = { code: boolean; text: string };
                 }
               </span>
             </div>
-            <div scInputGroupAddon alignment="block-end" class="pt-1">
+            <div scInputGroupAddon side="bottom" class="pt-1">
               <div scMenuProvider side="top" alignment="start">
                 <button
                   scInputGroupButton

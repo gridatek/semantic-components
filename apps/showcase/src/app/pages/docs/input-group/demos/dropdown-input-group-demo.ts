@@ -36,7 +36,7 @@ import {
     <div class="grid w-full max-w-sm gap-4">
       <div scInputGroup>
         <input scInput placeholder="Enter file name" aria-label="File name" />
-        <div scInputGroupAddon alignment="inline-end">
+        <div scInputGroupAddon side="inline-end">
           <div scMenuProvider alignment="end">
             <button scInputGroupButton scMenuTrigger size="icon-xs">
               <svg siEllipsisIcon></svg>
@@ -60,7 +60,7 @@ import {
           placeholder="Enter search query"
           aria-label="Search query"
         />
-        <div scInputGroupAddon alignment="inline-end">
+        <div scInputGroupAddon side="inline-end">
           <div scMenuProvider alignment="end">
             <button scInputGroupButton scMenuTrigger class="pe-1.5! text-xs">
               Search In...

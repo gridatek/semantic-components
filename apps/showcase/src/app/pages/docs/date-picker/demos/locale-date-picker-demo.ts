@@ -58,7 +58,7 @@ import {
             aria-label="Date d’arrivée"
             placeholder="jj/mm/aaaa"
           />
-          <div scInputGroupAddon alignment="inline-end">
+          <div scInputGroupAddon side="inline-end">
             <button scDatePickerTrigger #trigger="scDatePickerTrigger">
               <svg siCalendarIcon></svg>
               <span class="sr-only">Choisir une date</span>

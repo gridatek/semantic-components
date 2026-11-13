@@ -12,7 +12,7 @@ import { injectPreset } from '../../config/preset';
     <div data-slot="input-group" [class]="groupClass">
       <span
         data-slot="input-group-addon"
-        data-align="inline-start"
+        data-side="inline-start"
         [class]="addonClass"
       >
         <ng-content select="svg" />
@@ -36,7 +36,7 @@ export class ScCommandInputGroup {
     this.preset.command.inputGroup,
   );
   protected readonly addonClass = cn(
-    this.preset.inputGroupAddon({ align: 'inline-start' }),
+    this.preset.inputGroupAddon({ side: 'inline-start' }),
     this.preset.command.inputIcon,
   );
 

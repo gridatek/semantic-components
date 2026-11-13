@@ -25,14 +25,14 @@ import { ScInputGroup, ScInputGroupAddon, ScInputGroupButton, ScInputGroupText }
   <div scInputGroupAddon>
     <svg></svg>
   </div>
-  <div scInputGroupAddon alignment="inline-end">
+  <div scInputGroupAddon side="inline-end">
     <span scInputGroupText>Text</span>
     <button scInputGroupButton>Button</button>
   </div>
 </div>
 ```
 
-The group on a `div`, the control in it — `scInput`, `scTextarea`, or one of yours with `data-slot="control"` — then its addons. Write the addons after the control, so Tab reaches the control first; `alignment` sets where they show. The group draws the border and the ring, and gives its control the look of being inside (no border, ring or corners of its own).
+The group on a `div`, the control in it — `scInput`, `scTextarea`, or one of yours with `data-slot="control"` — then its addons. Write the addons after the control, so Tab reaches the control first; their `side` sets where they show. The group draws the border and the ring, and gives its control the look of being inside (no border, ring or corners of its own).
 
 ## API reference
 
@@ -50,10 +50,10 @@ The box: `role="group"`, the border, the ring when its control has focus, red wh
 
 Icons, text or buttons beside the control (`injectPreset().inputGroupAddon`). A click on it, not on its buttons, focuses the control.
 
-| Input       | Type                                                             | Default          | Description                                                                                                                                                       |
-| ----------- | ---------------------------------------------------------------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `alignment` | `'inline-start' \| 'inline-end' \| 'block-start' \| 'block-end'` | `'inline-start'` | Before or after the control (an input), above or below it (a textarea) — logical: `inline-start` is the reading start, flipped right to left; no `left` / `right` |
-| `class`     | `string`                                                         | `''`             | Classes merged over the preset (`cn`: a later class wins)                                                                                                         |
+| Input   | Type                                                  | Default          | Description                                                                                                                                                                                                                                                                   |
+| ------- | ----------------------------------------------------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `side`  | `'inline-start' \| 'inline-end' \| 'top' \| 'bottom'` | `'inline-start'` | Its side of the control: before or after it (an input; logical: `inline-start` is the reading start, flipped right to left), above or below it (a textarea). shadcn's `align`, with `top` / `bottom` for its `block-start` / `block-end`: the same words as every `side` here |
+| `class` | `string`                                              | `''`             | Classes merged over the preset (`cn`: a later class wins)                                                                                                                                                                                                                     |
 
 ### ScInputGroupButton — `button[scInputGroupButton]`
 
@@ -85,7 +85,7 @@ Text in an addon, with its icons (`injectPreset().inputGroupText`).
   <div scInputGroupAddon>
     <span scInputGroupText>$</span>
   </div>
-  <div scInputGroupAddon alignment="inline-end">
+  <div scInputGroupAddon side="inline-end">
     <span scInputGroupText>USD</span>
   </div>
 </div>
@@ -96,7 +96,7 @@ Text in an addon, with its icons (`injectPreset().inputGroupText`).
 ```html
 <div scInputGroup>
   <input scInput value="https://x.com/shadcn" aria-label="Profile URL" readonly />
-  <div scInputGroupAddon alignment="inline-end">
+  <div scInputGroupAddon side="inline-end">
     <button scInputGroupButton size="icon-xs" (click)="copy()">
       <svg siCopyIcon></svg>
       <span class="sr-only">Copy</span>
@@ -110,7 +110,7 @@ Text in an addon, with its icons (`injectPreset().inputGroupText`).
 ```html
 <div scInputGroup>
   <textarea scTextarea aria-label="Code"></textarea>
-  <div scInputGroupAddon alignment="block-end" class="border-t">
+  <div scInputGroupAddon side="bottom" class="border-t">
     <span scInputGroupText>Line 1, Column 1</span>
     <button scInputGroupButton variant="default" size="sm" class="ms-auto">Run</button>
   </div>

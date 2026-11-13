@@ -63,7 +63,7 @@ import {
           aria-label="Profile URL"
           readonly
         />
-        <div scInputGroupAddon alignment="inline-end">
+        <div scInputGroupAddon side="inline-end">
           <button scInputGroupButton size="icon-xs" (click)="copy()">
             @if (copied()) {
               <svg siCheckIcon></svg>
@@ -100,7 +100,7 @@ import {
           <span scInputGroupText>https://</span>
         </div>
         <input scInput aria-label="Website" />
-        <div scInputGroupAddon alignment="inline-end">
+        <div scInputGroupAddon side="inline-end">
           <button
             scInputGroupButton
             size="icon-xs"

@@ -56,7 +56,7 @@ Typed, in a field — the input and the trigger in an input group; there the tri
     <div scPopoverProvider [origin]="anchor" alignment="start">
       <div scInputGroup cdkOverlayOrigin #anchor="cdkOverlayOrigin">
         <input scDateInput placeholder="MM/DD/YYYY" />
-        <div scInputGroupAddon alignment="inline-end">
+        <div scInputGroupAddon side="inline-end">
           <button scDatePickerTrigger #trigger="scDatePickerTrigger">
             <svg siCalendarIcon></svg>
             <span class="sr-only">Choose a date</span>

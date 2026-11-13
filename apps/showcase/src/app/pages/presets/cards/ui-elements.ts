@@ -127,7 +127,7 @@ import { SiChevronUpIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
           <div scField>
             <div scInputGroup>
               <input scInput placeholder="Name" aria-label="Name" />
-              <div scInputGroupAddon alignment="inline-end">
+              <div scInputGroupAddon side="inline-end">
                 <span scInputGroupText><svg siSearchIcon></svg></span>
               </div>
             </div>

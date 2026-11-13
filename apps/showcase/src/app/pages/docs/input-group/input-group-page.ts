@@ -187,7 +187,7 @@ export default class InputGroupPage {
       '  <div scInputGroupAddon>',
       '    <svg></svg>',
       '  </div>',
-      '  <div scInputGroupAddon alignment="inline-end">',
+      '  <div scInputGroupAddon side="inline-end">',
       '    <span scInputGroupText>Text</span>',
       '    <button scInputGroupButton>Button</button>',
       '  </div>',
@@ -217,11 +217,11 @@ export default class InputGroupPage {
         'Icons, text or buttons beside the control. A click on it, not on its buttons, focuses the control.',
       inputs: [
         {
-          name: 'alignment',
-          type: "'inline-start' | 'inline-end' | 'block-start' | 'block-end'",
+          name: 'side',
+          type: "'inline-start' | 'inline-end' | 'top' | 'bottom'",
           default: "'inline-start'",
           description:
-            'Before or after the control (an input), above or below it (a textarea). Logical: inline-start is the reading start, flipped right to left; no left / right.',
+            "Its side of the control: before or after it (an input; logical: inline-start is the reading start, flipped right to left), above or below it (a textarea). shadcn's align, with top / bottom for its block-start / block-end.",
         },
         this.classRow,
       ],

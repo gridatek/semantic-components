@@ -60,7 +60,7 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
           placeholder="Select a framework"
           aria-label="Framework"
         />
-        <div scInputGroupAddon alignment="inline-end">
+        <div scInputGroupAddon side="inline-end">
           <button scComboboxTrigger>
             <svg siChevronDownIcon></svg>
             <span class="sr-only">Show the list</span>
