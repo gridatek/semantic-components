@@ -28,9 +28,12 @@ test('Usage: a named status, announced (no longer hidden by its icon)', async ({
 
 test('Size: its size-* class', async ({ page }) => {
   await page.goto(demo('size'));
+  // Its layout width: the bounding box of a turning spinner is wider.
   const widths = await page
     .getByRole('status')
-    .evaluateAll((all) => all.map((s) => s.getBoundingClientRect().width));
+    .evaluateAll((all) =>
+      all.map((s) => parseFloat(getComputedStyle(s).width)),
+    );
   expect(widths).toEqual([12, 16, 24, 32]);
 });
 

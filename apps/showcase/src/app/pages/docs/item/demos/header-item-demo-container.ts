@@ -71,6 +71,7 @@ import {
               <img
                 ngSrc="/images/gallery/gorge-thumb.jpg"
                 fill
+                priority
                 alt=""
                 class="object-cover"
               />
@@ -89,6 +90,7 @@ import {
               <img
                 ngSrc="/images/gallery/coast-thumb.jpg"
                 fill
+                priority
                 alt=""
                 class="object-cover"
               />
