@@ -131,6 +131,32 @@ test('Multiple: picking adds and removes, the list stays open; chips by keyboard
   await expect(input).toBeFocused();
 });
 
+test('Multiple: a press on a chip or its remove button keeps the input focused and the list open', async ({
+  page,
+}) => {
+  await page.goto(demo('multiple'));
+  const input = page.getByRole('combobox', { name: 'Frameworks' });
+  const list = page.getByRole('listbox');
+  // Closed: a press on a chip opens the list, focus in the input (Base UI's).
+  await chips(page)
+    .first()
+    .click({ position: { x: 8, y: 8 } });
+  await expect(input).toBeFocused();
+  await expect(list).toBeVisible();
+  // Open: a press on the chip again leaves it open.
+  await chips(page)
+    .first()
+    .click({ position: { x: 8, y: 8 } });
+  await expect(list).toBeVisible();
+  await expect(input).toBeFocused();
+  // Its remove button takes the value off; the list stays open, focus stays.
+  await page.getByRole('option', { name: 'Astro' }).click();
+  await page.getByRole('button', { name: 'Remove Next.js' }).click();
+  await expect(chips(page)).toHaveText([/Astro/]);
+  await expect(list).toBeVisible();
+  await expect(input).toBeFocused();
+});
+
 test('Multiple: a selected value your filter hides stays selected', async ({
   page,
 }) => {

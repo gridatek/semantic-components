@@ -44,7 +44,7 @@ Angular Aria's listbox moves through every option it is given, so the options yo
 ## Three layouts
 
 - **The input is the field** (above): `input scInput scComboboxInput` in a `scInputGroup`, the trigger (a chevron) and the clear button at its end.
-- **Several values**: `<div scCombobox multiple [(value)]="values">`, with `scComboboxChips` holding a `scComboboxChip` (and its `scComboboxChipRemove`) for each value, then the `scComboboxInput`. Picking adds or removes and keeps the list open.
+- **Several values**: `<div scCombobox multiple [(value)]="values">`, with `scComboboxChips` holding a `scComboboxChip` (and its `scComboboxChipRemove`) for each value, then the `scComboboxInput`. Picking adds or removes and keeps the list open. A press on a chip, or beside the chips, keeps the focus in the input and opens the list; a chip's remove button takes its value off without closing it (Base UI's).
 - **A trigger, the search inside the popup**: `button scComboboxTrigger` holding a `scComboboxValue` — with no input beside it, the trigger takes the field's look by itself (outline, as wide as the combobox); in the popup, the input, then the list in an `ng-template scComboboxListContent` — Angular Aria renders a combobox's list from a template, and here that combobox is the search beside it. In a `scField`, the label names the trigger (with the value it shows) and the popup, and a click on it focuses the trigger. Without a field, name them yourself: `aria-labelledby="label-id value-id"` on the trigger (an `aria-label` alone leaves the text it shows out of its name), `aria-label` on the popup.
 
   ```html

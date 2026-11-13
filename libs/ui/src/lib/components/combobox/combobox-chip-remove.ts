@@ -18,6 +18,8 @@ import { ScComboboxChip } from './combobox-chip';
     tabindex: '-1',
     '[disabled]': 'root.disabled() || root.readonly()',
     '[class]': 'class()',
+    // Pressed, it takes no focus: the input keeps it, the list stays open.
+    '(mousedown)': '$event.preventDefault()',
     '(click)': 'root.remove(chip.value())',
   },
 })

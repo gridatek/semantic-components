@@ -21,7 +21,7 @@ import { ScComboboxBase } from './combobox-base';
   host: {
     'data-slot': 'combobox-chips',
     '[class]': 'class()',
-    '(click)': 'onClick($event)',
+    '(mousedown)': 'onPress($event)',
     '(keydown)': 'onKeydown($event)',
   },
 })
@@ -42,9 +42,19 @@ export class ScComboboxChips {
     inject(DestroyRef).onDestroy(() => this.root.chipsElement.set(undefined));
   }
 
-  /** A click beside the chips: into the input. */
-  protected onClick(event: Event): void {
-    if (event.target === this.element) this.root.focus();
+  /**
+   * A press on a chip or beside them, not on a control (a remove button, the
+   * input): the input keeps its focus — the list stays open — and opens it, as
+   * Base UI's chips do.
+   */
+  protected onPress(event: MouseEvent): void {
+    const target = event.target as Element;
+    const control = target.closest('button, a, input, select, textarea');
+    if (control && this.element.contains(control)) return;
+    event.preventDefault();
+    if (this.root.disabled() || this.root.readonly()) return;
+    this.root.focus();
+    if (this.root.openOnInputClick()) this.root.show();
   }
 
   /** On a chip's remove button: the arrows move, Backspace and Delete remove. */
