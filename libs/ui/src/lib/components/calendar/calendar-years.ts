@@ -106,7 +106,7 @@ export class ScCalendarYears {
   protected cellClass(year: number): string {
     const picked = year === this.focusedYear();
     return cn(
-      'flex h-[calc(var(--cell-size)*1.5)] min-w-0 flex-1 cursor-pointer items-center justify-center rounded-(--cell-radius) text-sm outline-none select-none',
+      'flex h-[calc(var(--cell-size)*1.5)] w-[calc(var(--cell-size)*7/3)] min-w-0 flex-auto cursor-pointer items-center justify-center rounded-(--cell-radius) text-sm outline-none select-none',
       'hover:bg-muted hover:text-foreground',
       'focus-visible:ring-ring/50 focus-visible:ring-3',
       year === this.calendar.today().year &&
