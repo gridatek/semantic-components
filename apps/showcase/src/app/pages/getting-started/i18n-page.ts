@@ -42,16 +42,25 @@ interface Step {
       <div class="space-y-2">
         <h1 scHeading>Internationalization</h1>
         <p class="text-muted-foreground">
-          Angular's own i18n, translated in the browser: one build for every
-          locale.
+          The components have no text of their own: your templates hold it, so
+          they translate with the rest of your app, whichever way you translate
+          it.
+        </p>
+        <p class="text-muted-foreground">
+          Angular's i18n works in two ways. Its usual one builds the app once
+          per language (<code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >ng build --localize</code
+          >: an
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">/en/</code>, an
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">/fr/</code>…).
+          The other builds it once, and the browser loads the language's
+          translations when the app starts. This page sets up the second, with
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
             >&#64;semantic-components/ui/i18n</code
-          >
-          picks the locale, loads its translations before the app starts, and
-          sets the page's language and direction. The components have no text of
-          their own: your templates hold it, so they translate with the rest of
-          your app. The blocks app is built this way, in English, French and
-          Arabic.
+          >: it picks the language, loads its translations before the app
+          starts, and sets the page's language and direction (right to left for
+          Arabic). One build to deploy; changing language reloads the page. The
+          blocks app works this way, in English, French and Arabic.
         </p>
       </div>
 
