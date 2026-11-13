@@ -40,9 +40,9 @@ import {
     ScPreviewCardTrigger,
   ],
   template: \`
-    <div dir="rtl" lang="ar" class="max-w-sm py-6 text-sm leading-relaxed">
+    <p dir="rtl" lang="ar" class="max-w-sm py-6 text-sm leading-relaxed">
       يبثّ Next.js المسار على دفعات، فتظهر الصفحة قبل أن ينتهي كل طلب.
-      <div scPreviewCardProvider class="inline">
+      <span scPreviewCardProvider>
         <a
           scLink
           scPreviewCardTrigger
@@ -73,8 +73,8 @@ import {
             <span class="text-muted-foreground text-xs">nextjs.org</span>
           </div>
         </ng-template>
-      </div>
-    </div>
+      </span>
+    </p>
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,

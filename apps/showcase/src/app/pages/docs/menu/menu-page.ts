@@ -203,7 +203,7 @@ export default class MenuPage {
   protected readonly parts = [
     {
       name: 'ScMenuProvider',
-      selector: 'div[scMenuProvider]',
+      selector: 'div[scMenuProvider], span[scMenuProvider]',
       description:
         "Holds the menu: [(open)]; side ('bottom' or 'top'), align, offset. Renders it in an overlay, with the trigger's direction and language.",
     },

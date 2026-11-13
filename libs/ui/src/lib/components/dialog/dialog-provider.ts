@@ -22,7 +22,7 @@ import { ScBackdrop } from '../backdrop';
 import { ScDialogPortal } from './dialog-portal';
 
 @Component({
-  selector: 'div[scDialogProvider]',
+  selector: 'div[scDialogProvider], span[scDialogProvider]',
   imports: [OverlayModule, ScBackdrop, ScFocusTrap, NgTemplateOutlet],
   template: `
     <ng-content />

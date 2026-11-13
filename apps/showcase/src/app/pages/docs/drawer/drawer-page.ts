@@ -178,7 +178,7 @@ export default class DrawerPage {
   protected readonly parts = [
     {
       name: 'ScDrawerProvider',
-      selector: 'div[scDrawerProvider]',
+      selector: 'div[scDrawerProvider], span[scDrawerProvider]',
       description:
         "[(open)], swipeDirection ('down', 'up', 'left', 'right', 'inline-start', 'inline-end'), snapPoints and [(snapPoint)], modal (true, 'trap-focus', false), disablePointerDismissal.",
     },

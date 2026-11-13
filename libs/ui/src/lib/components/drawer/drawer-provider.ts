@@ -47,7 +47,7 @@ export type ScDrawerModal = boolean | 'trap-focus';
  * As Base UI's Drawer.
  */
 @Component({
-  selector: 'div[scDrawerProvider]',
+  selector: 'div[scDrawerProvider], span[scDrawerProvider]',
   imports: [OverlayModule, ScBackdrop, ScFocusTrap, NgTemplateOutlet],
   template: `
     <ng-content />

@@ -176,7 +176,7 @@ export default class DialogPage {
   protected readonly parts = [
     {
       name: 'ScDialogProvider',
-      selector: 'div[scDialogProvider]',
+      selector: 'div[scDialogProvider], span[scDialogProvider]',
       description:
         '[(open)]. Renders the dialog over the page, centred, over the backdrop; Escape and a click outside close it.',
     },

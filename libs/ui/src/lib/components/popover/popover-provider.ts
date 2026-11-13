@@ -50,7 +50,7 @@ export type ScPopoverModal = boolean | 'trap-focus';
  * UI's Popover.Root.
  */
 @Component({
-  selector: 'div[scPopoverProvider]',
+  selector: 'div[scPopoverProvider], span[scPopoverProvider]',
   imports: [OverlayModule, NgTemplateOutlet, ScFocusTrap],
   template: `
     <ng-content />

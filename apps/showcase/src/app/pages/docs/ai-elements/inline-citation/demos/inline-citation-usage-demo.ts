@@ -55,7 +55,7 @@ const sources = {
     ScPreviewCardTrigger,
   ],
   template: `
-    <div scPreviewCardProvider class="inline">
+    <span scPreviewCardProvider>
       <a
         scLink
         scPreviewCardTrigger
@@ -77,7 +77,7 @@ const sources = {
           <span class="text-muted-foreground text-xs">{{ host() }}</span>
         </div>
       </ng-template>
-    </div>
+    </span>
   `,
   host: { class: 'contents' },
   encapsulation: ViewEncapsulation.None,
@@ -97,12 +97,12 @@ export class Citation {
     <div
       class="mx-auto flex max-w-sm flex-col gap-3 py-6 text-sm leading-relaxed"
     >
-      <div>
+      <p>
         Next.js streams a route in chunks, so the page shows up before every
         request finishes.
         <app-citation [source]="sources.streaming" />
-      </div>
-      <div>
+      </p>
+      <p>
         Wrap a slow part of the page in a Suspense boundary and React sends the
         fallback first. When the data resolves, the finished HTML streams into
         the same response and replaces the fallback, with no extra request from
@@ -111,14 +111,14 @@ export class Citation {
         Server Components help here, because their code never ships to the
         browser.
         <app-citation [source]="sources.serverComponents" />
-      </div>
-      <div>
+      </p>
+      <p>
         A loading.tsx file does the same for a whole route segment.
         <app-citation [source]="sources.loading" />
         It all runs over chunked transfer encoding, so there is nothing extra to
         set up.
         <app-citation [source]="sources.chunked" />
-      </div>
+      </p>
     </div>
   `,
   host: { class: 'flex w-full justify-center' },

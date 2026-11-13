@@ -179,7 +179,7 @@ export default class AlertDialogPage {
   protected readonly parts = [
     {
       name: 'ScAlertDialogProvider',
-      selector: 'div[scAlertDialogProvider]',
+      selector: 'div[scAlertDialogProvider], span[scAlertDialogProvider]',
       description:
         'Holds the state: [(open)] (default false). Puts the dialog in an overlay, over a backdrop, while open.',
     },

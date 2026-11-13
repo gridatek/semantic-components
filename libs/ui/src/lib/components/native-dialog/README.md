@@ -15,7 +15,7 @@ Unlike `ScDialog` (which uses CDK Overlay), `ScNativeDialog` leverages the brows
 
 ## Components
 
-- `ScNativeDialogProvider` - Wrapper that manages the `open` state
+- `ScNativeDialogProvider` - Wrapper that manages the `open` state (`div[scNativeDialogProvider], span[scNativeDialogProvider]`: on a `span`, it fits in running text — inside a `<p>`; it renders `display: contents` either way)
 - `ScNativeDialogTrigger` - Button directive that opens the dialog
 - `ScNativeDialog` - Component on `<dialog>` that controls the native element
 - `ScNativeDialogContent` - Directive on `ng-template` for lazy content rendering

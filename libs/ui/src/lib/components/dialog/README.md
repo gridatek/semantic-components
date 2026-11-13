@@ -41,13 +41,15 @@ Narrow it with a `max-w` of your own (`class="sm:max-w-md"`), or set a width (`c
 
 ## API reference
 
-| Part                                   | Selector                                       | Inputs                                                                                                                                   |
-| -------------------------------------- | ---------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| `ScDialogProvider`                     | `div[scDialogProvider]`                        | `open` (`[(open)]`), `class` — renders the dialog centred over the backdrop                                                              |
-| `ScDialogTrigger`                      | `button[scDialogTrigger]`                      | `class` — opens it; behaviour only                                                                                                       |
-| `ScDialogPortal`, `ScDialog`           | `ng-template[scDialogPortal]`, `div[scDialog]` | `class` — role `dialog`, modal; named by its title, described by its description; takes the direction and language of where it is opened |
-| `ScDialogClose`                        | `button[scDialogClose]`                        | `class`, `variant` (`ghost`), `size` (`icon-sm`), `type` — closes it; the preset's button                                                |
-| `ScDialogHeader`, `ScDialogFooter`     | `div[…]`                                       | `class`                                                                                                                                  |
-| `ScDialogTitle`, `ScDialogDescription` | `h2[scDialogTitle]`, `p[scDialogDescription]`  | `class`                                                                                                                                  |
+| Part                                   | Selector                                        | Inputs                                                                                                                                   |
+| -------------------------------------- | ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `ScDialogProvider`                     | `div[scDialogProvider], span[scDialogProvider]` | `open` (`[(open)]`), `class` — renders the dialog centred over the backdrop                                                              |
+| `ScDialogTrigger`                      | `button[scDialogTrigger]`                       | `class` — opens it; behaviour only                                                                                                       |
+| `ScDialogPortal`, `ScDialog`           | `ng-template[scDialogPortal]`, `div[scDialog]`  | `class` — role `dialog`, modal; named by its title, described by its description; takes the direction and language of where it is opened |
+| `ScDialogClose`                        | `button[scDialogClose]`                         | `class`, `variant` (`ghost`), `size` (`icon-sm`), `type` — closes it; the preset's button                                                |
+| `ScDialogHeader`, `ScDialogFooter`     | `div[…]`                                        | `class`                                                                                                                                  |
+| `ScDialogTitle`, `ScDialogDescription` | `h2[scDialogTitle]`, `p[scDialogDescription]`   | `class`                                                                                                                                  |
+
+`scDialogProvider`: On a `span`, it fits in running text — inside a `<p>`, where a `div` is not allowed; it renders `display: contents` either way.
 
 Every part's classes are the preset's (`injectPreset().dialog`: `content`, `close` — the ✕'s place and fill —, `header`, `footer`, `title`, `description`): shadcn's Dialog, in each style. The backdrop is the shared `backdrop` key.

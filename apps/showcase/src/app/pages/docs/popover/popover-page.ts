@@ -180,7 +180,7 @@ export default class PopoverPage {
   protected readonly parts = [
     {
       name: 'ScPopoverProvider',
-      selector: 'div[scPopoverProvider]',
+      selector: 'div[scPopoverProvider], span[scPopoverProvider]',
       description:
         "[(open)], modal (false, 'trap-focus', true), side ('bottom', 'top', 'left', 'right', 'inline-start', 'inline-end'), align ('start', 'center', 'end'), offset (4), origin (another anchor).",
     },

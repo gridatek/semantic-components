@@ -29,7 +29,7 @@ export type ScMenuSide = 'top' | 'bottom';
 
 /** Holds the menu: open or not, where it opens; renders it in an overlay. */
 @Component({
-  selector: 'div[scMenuProvider]',
+  selector: 'div[scMenuProvider], span[scMenuProvider]',
   providers: [{ provide: SC_MENU, useExisting: ScMenuProvider }],
   imports: [OverlayModule, NgTemplateOutlet],
   template: `

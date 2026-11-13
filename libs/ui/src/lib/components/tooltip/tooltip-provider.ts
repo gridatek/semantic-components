@@ -40,7 +40,7 @@ export type ScTooltipSide = ScOverlayLogicalSide;
  * `sideOffset`, `alignmentOffset`) and when (`delay`, `closeDelay`). As Base UI's Tooltip.Root.
  */
 @Component({
-  selector: 'div[scTooltipProvider]',
+  selector: 'div[scTooltipProvider], span[scTooltipProvider]',
   providers: [{ provide: SC_TOOLTIP_CONTEXT, useExisting: ScTooltipProvider }],
   imports: [OverlayModule, NgTemplateOutlet],
   template: `

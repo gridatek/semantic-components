@@ -28,7 +28,7 @@ A panel at the edge of the screen that a swipe dismisses — or moves between it
 
 | Part                  | Selector                                        | What it does                                                                                                                                                                                       |
 | --------------------- | ----------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ScDrawerProvider`    | `div[scDrawerProvider]`                         | `[(open)]`, `swipeDirection` (`down`, `up`, `left`, `right`, `inline-start`, `inline-end`), `snapPoints` and `[(snapPoint)]`, `modal` (`true`, `'trap-focus'`, `false`), `disablePointerDismissal` |
+| `ScDrawerProvider`    | `div[scDrawerProvider], span[scDrawerProvider]` | `[(open)]`, `swipeDirection` (`down`, `up`, `left`, `right`, `inline-start`, `inline-end`), `snapPoints` and `[(snapPoint)]`, `modal` (`true`, `'trap-focus'`, `false`), `disablePointerDismissal` |
 | `ScDrawerTrigger`     | `button[scDrawerTrigger]`                       | Opens and closes it, on any button (`aria-haspopup`, `aria-expanded`)                                                                                                                              |
 | `ScDrawerPortal`      | `ng-template[scDrawerPortal]`                   | The content, rendered while open                                                                                                                                                                   |
 | `ScDrawer`            | `div[scDrawer]`                                 | The panel: `role="dialog"`, `aria-modal` when modal, named and described; `data-swipe-direction`, `data-swipe-axis`, `data-snap-points`, `data-nested-drawer-open`, `data-swiping`                 |
@@ -38,6 +38,8 @@ A panel at the edge of the screen that a swipe dismisses — or moves between it
 | `ScDrawerDescription` | `p[scDrawerDescription]`                        | Describes it                                                                                                                                                                                       |
 | `ScDrawerFooter`      | `div[scDrawerFooter]`                           | Its actions, at the bottom                                                                                                                                                                         |
 | `ScDrawerClose`       | `button[scDrawerClose]`                         | Closes it: the preset's button, outline by default                                                                                                                                                 |
+
+`scDrawerProvider`: On a `span`, it fits in running text — inside a `<p>`, where a `div` is not allowed; it renders `display: contents` either way.
 
 ## Swiping
 

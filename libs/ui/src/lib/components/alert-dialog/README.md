@@ -58,7 +58,7 @@ Each part takes `class`, merged over the preset.
 
 | Part                                             | Selector                                                     | Description                                                                                     |
 | ------------------------------------------------ | ------------------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
-| `ScAlertDialogProvider`                          | `div[scAlertDialogProvider]`                                 | The state: `[(open)]` (default `false`). The dialog in an overlay, over a backdrop, while open. |
+| `ScAlertDialogProvider`                          | `div[scAlertDialogProvider], span[scAlertDialogProvider]`    | The state: `[(open)]` (default `false`). The dialog in an overlay, over a backdrop, while open. |
 | `ScAlertDialogTrigger`                           | `button[scAlertDialogTrigger]`                               | Opens it; behaviour only, on any button (`scButton` for the look).                              |
 | `ScAlertDialogPortal`                            | `ng-template[scAlertDialogPortal]`                           | The dialog's template.                                                                          |
 | `ScAlertDialog`                                  | `div[scAlertDialog]`                                         | The dialog. Input `size`: `'default'` or `'sm'` (narrower, centered, two buttons side by side). |
@@ -67,6 +67,8 @@ Each part takes `class`, merged over the preset.
 | `ScAlertDialogTitle`, `ScAlertDialogDescription` | `h2[scAlertDialogTitle]`, `p[scAlertDialogDescription]`      | Name and describe the dialog.                                                                   |
 | `ScAlertDialogFooter`                            | `div[scAlertDialogFooter]`                                   | The buttons: stacked on a phone, in a row beyond.                                               |
 | `ScAlertDialogCancel`, `ScAlertDialogAction`     | `button[scAlertDialogCancel]`, `button[scAlertDialogAction]` | Close it. The preset's buttons: inputs `variant` (`'outline'`, `'default'`) and `size`.         |
+
+`scAlertDialogProvider`: On a `span`, it fits in running text — inside a `<p>`, where a `div` is not allowed; it renders `display: contents` either way.
 
 ## Styles
 

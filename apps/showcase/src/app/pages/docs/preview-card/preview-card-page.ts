@@ -159,7 +159,7 @@ export default class PreviewCardPage {
   protected readonly parts = [
     {
       name: 'ScPreviewCardProvider',
-      selector: 'div[scPreviewCardProvider]',
+      selector: 'div[scPreviewCardProvider], span[scPreviewCardProvider]',
       description:
         "[(open)], side ('bottom', 'top', 'left', 'right', 'inline-start', 'inline-end'), align, offset, origin.",
     },

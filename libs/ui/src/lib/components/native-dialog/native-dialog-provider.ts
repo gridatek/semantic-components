@@ -8,7 +8,7 @@ import {
 import { cn } from 'cn';
 
 @Component({
-  selector: 'div[scNativeDialogProvider]',
+  selector: 'div[scNativeDialogProvider], span[scNativeDialogProvider]',
   template: ` <ng-content /> `,
   host: {
     '[class]': 'class()',

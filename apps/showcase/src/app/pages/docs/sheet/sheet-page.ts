@@ -162,7 +162,7 @@ export default class SheetPage {
   protected readonly parts = [
     {
       name: 'ScSheetProvider',
-      selector: 'div[scSheetProvider]',
+      selector: 'div[scSheetProvider], span[scSheetProvider]',
       description:
         "[(open)], side ('inline-end' by default — the reading end: the right, the left in RTL; 'inline-start', 'top', 'bottom', 'left', 'right').",
     },

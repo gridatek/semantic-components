@@ -21,7 +21,7 @@ import { ScBackdrop } from '../backdrop';
 import { ScAlertDialogPortal } from './alert-dialog-portal';
 
 @Component({
-  selector: 'div[scAlertDialogProvider]',
+  selector: 'div[scAlertDialogProvider], span[scAlertDialogProvider]',
   imports: [OverlayModule, ScBackdrop, ScFocusTrap, NgTemplateOutlet],
   template: `
     <ng-content />

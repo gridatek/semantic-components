@@ -170,7 +170,7 @@ export default class TooltipPage {
   protected readonly parts = [
     {
       name: 'ScTooltipProvider',
-      selector: 'div[scTooltipProvider]',
+      selector: 'div[scTooltipProvider], span[scTooltipProvider]',
       description:
         "[(open)], side ('top', 'bottom', 'left', 'right', 'inline-start', 'inline-end'), align ('start', 'center', 'end'), offset (4), delay (600), closeDelay (0), disabled.",
     },

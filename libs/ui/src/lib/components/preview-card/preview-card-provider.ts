@@ -38,7 +38,7 @@ export type ScPreviewCardSide = ScOverlayLogicalSide;
  * reached by the keyboard or a screen reader. As Base UI's PreviewCard.Root.
  */
 @Component({
-  selector: 'div[scPreviewCardProvider]',
+  selector: 'div[scPreviewCardProvider], span[scPreviewCardProvider]',
   imports: [OverlayModule, NgTemplateOutlet],
   template: `
     <ng-content />

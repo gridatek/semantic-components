@@ -39,7 +39,7 @@ export type ScSheetSide = ScOverlayLogicalSide;
  * backdrop closes it. As shadcn's Sheet (Base UI's Dialog).
  */
 @Component({
-  selector: 'div[scSheetProvider]',
+  selector: 'div[scSheetProvider], span[scSheetProvider]',
   imports: [OverlayModule, ScBackdrop, ScFocusTrap, NgTemplateOutlet],
   template: `
     <ng-content />
