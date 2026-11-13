@@ -12,8 +12,8 @@ import {
   ScSheetTrigger,
   ScTrace,
   ScTraceCollapsible,
-  ScTraceCollapsibleContent,
   ScTraceCollapsibleIcon,
+  ScTraceCollapsiblePanelContent,
   ScTraceCollapsibleTrigger,
   ScTraceDescription,
   ScTraceIcon,
@@ -47,7 +47,7 @@ import {
     ScSheetTrigger,
     ScTrace,
     ScTraceCollapsible,
-    ScTraceCollapsibleContent,
+    ScTraceCollapsiblePanelContent,
     ScTraceCollapsibleIcon,
     ScTraceCollapsibleTrigger,
     ScTraceDescription,
@@ -72,7 +72,7 @@ import {
           <span scTraceCollapsibleIcon><svg siChevronRightIcon></svg></span>
         </button>
         <div scCollapsiblePanel>
-          <div scTraceCollapsibleContent>
+          <div scTraceCollapsiblePanelContent>
             <div scTrace>
               @for (file of files; track file.path) {
                 <div scSheetProvider>

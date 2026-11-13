@@ -12,8 +12,8 @@ import {
   ScCollapsibleTrigger,
   ScTrace,
   ScTraceCollapsible,
-  ScTraceCollapsibleContent,
   ScTraceCollapsibleIcon,
+  ScTraceCollapsiblePanelContent,
   ScTraceCollapsibleTrigger,
   ScTraceIcon,
   ScTraceLine,
@@ -47,7 +47,7 @@ interface ScDemoToolCall {
     ScCollapsibleTrigger,
     ScTrace,
     ScTraceCollapsible,
-    ScTraceCollapsibleContent,
+    ScTraceCollapsiblePanelContent,
     ScTraceCollapsibleIcon,
     ScTraceCollapsibleTrigger,
     ScTraceIcon,
@@ -87,7 +87,7 @@ interface ScDemoToolCall {
                 ></span>
               </button>
               <div scCollapsiblePanel>
-                <div scTraceCollapsibleContent>
+                <div scTraceCollapsiblePanelContent>
                   <div
                     scCodeBlock
                     size="sm"

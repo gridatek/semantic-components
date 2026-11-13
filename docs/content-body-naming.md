@@ -47,7 +47,7 @@ Native Dialog shows the whole shape: `scNativeDialogProvider` → `dialog[scNati
 
 - [x] `ScAccordionContent` → `ScAccordionPanelContent` (`ng-template`, inside `scAccordionPanel`).
 - [x] `ScTabsContent` → `ScTabsPanelContent` (`ng-template`, inside `scTabsPanel`).
-- [ ] `ScTraceCollapsibleContent` (`div`, a step's details inside `scCollapsiblePanel`): the name to find.
+- [x] `ScTraceCollapsibleContent` → `ScTraceCollapsiblePanelContent` (`div`, a step's details inside `scCollapsiblePanel`; its own element because the panel's height animates — shadcn's inner div).
 - [x] `ScScrollAreaNextContent` → `ScScrollAreaNextViewportContent` (`div`, what scrolls inside `scScrollAreaNextViewport`).
 
 ### 3. Beside something else (an icon, an avatar, actions) → Body?

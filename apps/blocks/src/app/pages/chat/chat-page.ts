@@ -24,8 +24,8 @@ import {
   ScTextarea,
   ScTrace,
   ScTraceCollapsible,
-  ScTraceCollapsibleContent,
   ScTraceCollapsibleIcon,
+  ScTraceCollapsiblePanelContent,
   ScTraceCollapsibleTrigger,
   ScTraceDescription,
   ScTraceIcon,
@@ -85,7 +85,7 @@ const WORD_TIME = 50;
     ScTextarea,
     ScTrace,
     ScTraceCollapsible,
-    ScTraceCollapsibleContent,
+    ScTraceCollapsiblePanelContent,
     ScTraceCollapsibleIcon,
     ScTraceCollapsibleTrigger,
     ScTraceDescription,
@@ -152,7 +152,7 @@ const WORD_TIME = 50;
                                     </span>
                                   </button>
                                   <div scCollapsiblePanel>
-                                    <div scTraceCollapsibleContent>
+                                    <div scTraceCollapsiblePanelContent>
                                       {{ step.output }}
                                     </div>
                                   </div>

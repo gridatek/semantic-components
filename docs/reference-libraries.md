@@ -456,7 +456,7 @@ An agent's steps (`div[scTrace]`; built 2026-10-29, restyled 2026-11-05): shadcn
 
 **Taken:**
 
-- **Each preset's look**, as the `trace` key (`root`, `line`, `icon`, `collapsibleIcon`, `collapsibleTrigger`, `collapsibleContent`), with our contrast fixes (a pending step dims its icon only) and the output at the lines' size.
+- **Each preset's look**, as the `trace` key (`root`, `line`, `icon`, `collapsibleIcon`, `collapsibleTrigger`, `collapsiblePanelContent`), with our contrast fixes (a pending step dims its icon only) and the output at the lines' size.
 - **All the examples**; the Usage, Reasoning and Tool ones without the AI SDK: Usage a static turn, Reasoning and Tool replay their states on a timer (a Replay button), in a live region.
 - **Open state** through the Collapsible's `[(open)]`, "open while running, your click wins" as `choice() ?? running()`.
 

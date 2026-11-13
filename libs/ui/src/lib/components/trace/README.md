@@ -44,7 +44,7 @@ A step that opens on its output — on the [Collapsible](../collapsible/README.m
     <span scTraceCollapsibleIcon><svg siChevronRightIcon></svg></span>
   </button>
   <div scCollapsiblePanel>
-    <div scTraceCollapsibleContent>v24.18.0</div>
+    <div scTraceCollapsiblePanelContent>v24.18.0</div>
   </div>
 </div>
 ```
@@ -53,17 +53,17 @@ Open at first with `[open]="true"` on the `scCollapsible`.
 
 ## Parts
 
-| Part                                | What it does                                                                                                                               |
-| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `div[scTrace]`                      | The steps, in a column; a link or a button around a line gets its focus ring                                                               |
-| `span[scTraceLine]`                 | A step. `status`: `running` (its title shimmers, unless motion is reduced), `error` (red), `pending` (its icon dimmed); done when not set  |
-| `span[scTraceIcon]`                 | Your SVG, sized; hidden from screen readers. After the title: a trailing icon (an arrow for a new tab)                                     |
-| `span[scTraceTitle]`                | What the step did, as a sentence; truncated on one line                                                                                    |
-| `span[scTraceDescription]`          | A detail after the title: a count, a duration, a file                                                                                      |
-| `div[scTraceCollapsible]`           | With `scCollapsible`: a step that opens                                                                                                    |
-| `button[scTraceCollapsibleTrigger]` | With `scCollapsibleTrigger`: the line as the button, looking like the line; red when its line failed                                       |
-| `span[scTraceCollapsibleIcon]`      | Your chevron pointing to the end (`siChevronRightIcon`): turned down when open, mirrored in right-to-left when closed                      |
-| `div[scTraceCollapsibleContent]`    | Inside `scCollapsiblePanel`: the output, indented under the line, muted — a block with its own background inside it sets `text-foreground` |
+| Part                                  | What it does                                                                                                                               |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `div[scTrace]`                        | The steps, in a column; a link or a button around a line gets its focus ring                                                               |
+| `span[scTraceLine]`                   | A step. `status`: `running` (its title shimmers, unless motion is reduced), `error` (red), `pending` (its icon dimmed); done when not set  |
+| `span[scTraceIcon]`                   | Your SVG, sized; hidden from screen readers. After the title: a trailing icon (an arrow for a new tab)                                     |
+| `span[scTraceTitle]`                  | What the step did, as a sentence; truncated on one line                                                                                    |
+| `span[scTraceDescription]`            | A detail after the title: a count, a duration, a file                                                                                      |
+| `div[scTraceCollapsible]`             | With `scCollapsible`: a step that opens                                                                                                    |
+| `button[scTraceCollapsibleTrigger]`   | With `scCollapsibleTrigger`: the line as the button, looking like the line; red when its line failed                                       |
+| `span[scTraceCollapsibleIcon]`        | Your chevron pointing to the end (`siChevronRightIcon`): turned down when open, mirrored in right-to-left when closed                      |
+| `div[scTraceCollapsiblePanelContent]` | Inside `scCollapsiblePanel`: the output, indented under the line, muted — a block with its own background inside it sets `text-foreground` |
 
 ## Keyboard and screen readers
 

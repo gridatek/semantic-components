@@ -7,18 +7,18 @@ import { injectPreset } from '../../config/preset';
  * Muted: a block with its own background inside sets `text-foreground`.
  */
 @Directive({
-  selector: 'div[scTraceCollapsibleContent]',
+  selector: 'div[scTraceCollapsiblePanelContent]',
   host: {
-    'data-slot': 'trace-collapsible-content',
+    'data-slot': 'trace-collapsible-panel-content',
     '[class]': 'class()',
   },
 })
-export class ScTraceCollapsibleContent {
+export class ScTraceCollapsiblePanelContent {
   private readonly styles = injectPreset().trace;
   readonly classInput = input<string>('', { alias: 'class' });
 
   // Not shadcn's: text-sm, the lines' size, not the page's.
   protected readonly class = computed(() =>
-    cn(this.styles.collapsibleContent, this.classInput()),
+    cn(this.styles.collapsiblePanelContent, this.classInput()),
   );
 }

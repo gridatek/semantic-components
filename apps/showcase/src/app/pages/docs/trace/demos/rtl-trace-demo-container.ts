@@ -26,8 +26,8 @@ import {
   ScCollapsibleTrigger,
   ScTrace,
   ScTraceCollapsible,
-  ScTraceCollapsibleContent,
   ScTraceCollapsibleIcon,
+  ScTraceCollapsiblePanelContent,
   ScTraceCollapsibleTrigger,
   ScTraceDescription,
   ScTraceIcon,
@@ -51,7 +51,7 @@ import {
     ScCollapsibleTrigger,
     ScTrace,
     ScTraceCollapsible,
-    ScTraceCollapsibleContent,
+    ScTraceCollapsiblePanelContent,
     ScTraceCollapsibleIcon,
     ScTraceCollapsibleTrigger,
     ScTraceDescription,
@@ -84,7 +84,7 @@ import {
           <span scTraceCollapsibleIcon><svg siChevronRightIcon></svg></span>
         </button>
         <div scCollapsiblePanel>
-          <div scTraceCollapsibleContent>v24.18.0</div>
+          <div scTraceCollapsiblePanelContent>v24.18.0</div>
         </div>
       </div>
       <span scTraceLine status="error">

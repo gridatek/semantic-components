@@ -1,6 +1,6 @@
 export { ScTrace } from './trace';
 export { ScTraceCollapsible } from './trace-collapsible';
-export { ScTraceCollapsibleContent } from './trace-collapsible-content';
+export { ScTraceCollapsiblePanelContent } from './trace-collapsible-panel-content';
 export { ScTraceCollapsibleIcon } from './trace-collapsible-icon';
 export { ScTraceCollapsibleTrigger } from './trace-collapsible-trigger';
 export { ScTraceDescription } from './trace-description';

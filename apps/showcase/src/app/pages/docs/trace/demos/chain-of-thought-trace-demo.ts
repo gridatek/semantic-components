@@ -6,8 +6,8 @@ import {
   ScCollapsibleTrigger,
   ScTrace,
   ScTraceCollapsible,
-  ScTraceCollapsibleContent,
   ScTraceCollapsibleIcon,
+  ScTraceCollapsiblePanelContent,
   ScTraceCollapsibleTrigger,
   ScTraceIcon,
   ScTraceLine,
@@ -33,7 +33,7 @@ import {
     ScCollapsibleTrigger,
     ScTrace,
     ScTraceCollapsible,
-    ScTraceCollapsibleContent,
+    ScTraceCollapsiblePanelContent,
     ScTraceCollapsibleIcon,
     ScTraceCollapsibleTrigger,
     ScTraceIcon,
@@ -55,7 +55,7 @@ import {
           <span scTraceCollapsibleIcon><svg siChevronRightIcon></svg></span>
         </button>
         <div scCollapsiblePanel>
-          <div scTraceCollapsibleContent>
+          <div scTraceCollapsiblePanelContent>
             <div scTrace>
               <div scCollapsible scTraceCollapsible>
                 <button scCollapsibleTrigger scTraceCollapsibleTrigger>
@@ -70,7 +70,10 @@ import {
                   ></span>
                 </button>
                 <div scCollapsiblePanel>
-                  <div scTraceCollapsibleContent class="flex flex-wrap gap-1.5">
+                  <div
+                    scTraceCollapsiblePanelContent
+                    class="flex flex-wrap gap-1.5"
+                  >
                     <span scBadge variant="secondary">vercel.com</span>
                     <span scBadge variant="secondary">github.com</span>
                   </div>
@@ -94,7 +97,7 @@ import {
                   ></span>
                 </button>
                 <div scCollapsiblePanel>
-                  <div scTraceCollapsibleContent>
+                  <div scTraceCollapsiblePanelContent>
                     <div scCodeBlock size="sm">
                       <pre
                         scCodeBlockContent

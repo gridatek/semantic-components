@@ -259,7 +259,7 @@ export interface ScTraceStyles {
   /** The chevron after a collapsible line, turned while open. */
   collapsibleIcon: string;
   collapsibleTrigger: string;
-  collapsibleContent: string;
+  collapsiblePanelContent: string;
 }
 
 /** A marker's parts that change from style to style. */

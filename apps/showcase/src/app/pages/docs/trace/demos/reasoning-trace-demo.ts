@@ -13,8 +13,8 @@ import {
   ScCollapsibleTrigger,
   ScTrace,
   ScTraceCollapsible,
-  ScTraceCollapsibleContent,
   ScTraceCollapsibleIcon,
+  ScTraceCollapsiblePanelContent,
   ScTraceCollapsibleTrigger,
   ScTraceIcon,
   ScTraceLine,
@@ -36,7 +36,7 @@ import {
     ScCollapsibleTrigger,
     ScTrace,
     ScTraceCollapsible,
-    ScTraceCollapsibleContent,
+    ScTraceCollapsiblePanelContent,
     ScTraceCollapsibleIcon,
     ScTraceCollapsibleTrigger,
     ScTraceIcon,
@@ -70,7 +70,7 @@ import {
               <span scTraceCollapsibleIcon><svg siChevronRightIcon></svg></span>
             </button>
             <div scCollapsiblePanel>
-              <div scTraceCollapsibleContent class="whitespace-pre-wrap">
+              <div scTraceCollapsiblePanelContent class="whitespace-pre-wrap">
                 {{ thought() }}
               </div>
             </div>

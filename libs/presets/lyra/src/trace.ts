@@ -10,6 +10,6 @@ export const trace: ScTraceStyles = {
     'flex size-3.5 shrink-0 items-center justify-center [&_svg]:pointer-events-none [&_svg:not([class*=size-])]:size-3.5 transition-transform group-aria-expanded/trace-collapsible-trigger:rotate-90 rtl:group-not-aria-expanded/trace-collapsible-trigger:-scale-x-100',
   collapsibleTrigger:
     'group/trace-collapsible-trigger flex w-fit max-w-full min-w-0 cursor-pointer items-center gap-1 rounded-none text-start text-muted-foreground transition-colors outline-none hover:text-foreground focus-visible:ring-1 focus-visible:ring-ring/50 has-[[data-status=error]]:text-destructive',
-  collapsibleContent:
+  collapsiblePanelContent:
     'mt-2 mb-1 ms-[calc(--spacing(1.75)-1px)] min-w-0 border-s pe-1 ps-3.75 leading-relaxed wrap-break-word text-muted-foreground text-xs',
 };

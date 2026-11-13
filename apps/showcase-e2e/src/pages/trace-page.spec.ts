@@ -25,7 +25,7 @@ test.describe('Trace Page', () => {
       'ScTraceTitle, ScTraceDescription',
       'ScTraceCollapsible, ScTraceCollapsibleTrigger',
       'ScTraceCollapsibleIcon',
-      'ScTraceCollapsibleContent',
+      'ScTraceCollapsiblePanelContent',
     ]);
   });
 

@@ -187,7 +187,7 @@ export default class TracePage {
       'import {',
       '  ScTrace, ScTraceLine, ScTraceIcon, ScTraceTitle, ScTraceDescription,',
       '  ScTraceCollapsible, ScTraceCollapsibleTrigger, ScTraceCollapsibleIcon,',
-      '  ScTraceCollapsibleContent,',
+      '  ScTraceCollapsiblePanelContent,',
       '  ScCollapsible, ScCollapsibleTrigger, ScCollapsiblePanel,',
       "} from '@semantic-components/ui';",
     ].join('\n'),
@@ -204,7 +204,7 @@ export default class TracePage {
       '      <span scTraceCollapsibleIcon>…</span>',
       '    </button>',
       '    <div scCollapsiblePanel>',
-      '      <div scTraceCollapsibleContent>…</div>',
+      '      <div scTraceCollapsiblePanelContent>…</div>',
       '    </div>',
       '  </div>',
       '</div>',
@@ -248,8 +248,8 @@ export default class TracePage {
       description: 'Your chevron after the line, turned while open.',
     },
     {
-      name: 'ScTraceCollapsibleContent',
-      selector: 'div[scTraceCollapsibleContent]',
+      name: 'ScTraceCollapsiblePanelContent',
+      selector: 'div[scTraceCollapsiblePanelContent]',
       description: 'The output, muted, under a line at its start.',
     },
   ];

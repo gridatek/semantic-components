@@ -25,8 +25,8 @@ import {
   ScCollapsibleTrigger,
   ScTrace,
   ScTraceCollapsible,
-  ScTraceCollapsibleContent,
   ScTraceCollapsibleIcon,
+  ScTraceCollapsiblePanelContent,
   ScTraceCollapsibleTrigger,
   ScTraceIcon,
   ScTraceLine,
@@ -47,7 +47,7 @@ import {
     ScCollapsibleTrigger,
     ScTrace,
     ScTraceCollapsible,
-    ScTraceCollapsibleContent,
+    ScTraceCollapsiblePanelContent,
     ScTraceCollapsibleIcon,
     ScTraceCollapsibleTrigger,
     ScTraceIcon,
@@ -68,7 +68,7 @@ import {
           <span scTraceCollapsibleIcon><svg siChevronRightIcon></svg></span>
         </button>
         <div scCollapsiblePanel>
-          <div scTraceCollapsibleContent>
+          <div scTraceCollapsiblePanelContent>
             <div scTrace>
               <a
                 href="https://angular.dev/guide/signals"

@@ -21,8 +21,8 @@ import {
   ScCollapsibleTrigger,
   ScTrace,
   ScTraceCollapsible,
-  ScTraceCollapsibleContent,
   ScTraceCollapsibleIcon,
+  ScTraceCollapsiblePanelContent,
   ScTraceCollapsibleTrigger,
   ScTraceDescription,
   ScTraceIcon,
@@ -50,7 +50,7 @@ import {
     ScCollapsibleTrigger,
     ScTrace,
     ScTraceCollapsible,
-    ScTraceCollapsibleContent,
+    ScTraceCollapsiblePanelContent,
     ScTraceCollapsibleIcon,
     ScTraceCollapsibleTrigger,
     ScTraceDescription,
@@ -78,7 +78,7 @@ import {
           <span scTraceCollapsibleIcon><svg siChevronRightIcon></svg></span>
         </button>
         <div scCollapsiblePanel>
-          <div scTraceCollapsibleContent class="whitespace-pre-wrap">
+          <div scTraceCollapsiblePanelContent class="whitespace-pre-wrap">
             I should read the deploy logs before changing the cache.
           </div>
         </div>
@@ -96,7 +96,7 @@ import {
           <span scTraceCollapsibleIcon><svg siChevronRightIcon></svg></span>
         </button>
         <div scCollapsiblePanel>
-          <div scTraceCollapsibleContent>
+          <div scTraceCollapsiblePanelContent>
             <div scCodeBlock size="sm">
               <pre
                 scCodeBlockContent
@@ -119,7 +119,7 @@ import {
           <span scTraceCollapsibleIcon><svg siChevronRightIcon></svg></span>
         </button>
         <div scCollapsiblePanel>
-          <div scTraceCollapsibleContent>
+          <div scTraceCollapsiblePanelContent>
             <div scTrace>
               <span scTraceLine>
                 <span scTraceIcon><svg siFilePenIcon></svg></span>

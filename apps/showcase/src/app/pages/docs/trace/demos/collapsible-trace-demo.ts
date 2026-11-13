@@ -5,8 +5,8 @@ import {
   ScCollapsibleTrigger,
   ScTrace,
   ScTraceCollapsible,
-  ScTraceCollapsibleContent,
   ScTraceCollapsibleIcon,
+  ScTraceCollapsiblePanelContent,
   ScTraceCollapsibleTrigger,
   ScTraceIcon,
   ScTraceLine,
@@ -26,7 +26,7 @@ import {
     ScCollapsibleTrigger,
     ScTrace,
     ScTraceCollapsible,
-    ScTraceCollapsibleContent,
+    ScTraceCollapsiblePanelContent,
     ScTraceCollapsibleIcon,
     ScTraceCollapsibleTrigger,
     ScTraceIcon,
@@ -47,7 +47,7 @@ import {
           <span scTraceCollapsibleIcon><svg siChevronRightIcon></svg></span>
         </button>
         <div scCollapsiblePanel>
-          <div scTraceCollapsibleContent>v24.18.0</div>
+          <div scTraceCollapsiblePanelContent>v24.18.0</div>
         </div>
       </div>
       <div scCollapsible [open]="true" scTraceCollapsible>
@@ -59,7 +59,7 @@ import {
           <span scTraceCollapsibleIcon><svg siChevronRightIcon></svg></span>
         </button>
         <div scCollapsiblePanel>
-          <div scTraceCollapsibleContent>
+          <div scTraceCollapsiblePanelContent>
             <ul class="list-inside list-disc">
               <li>src/main.ts</li>
               <li>src/app/app.config.ts</li>

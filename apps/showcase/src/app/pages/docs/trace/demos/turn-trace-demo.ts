@@ -5,8 +5,8 @@ import {
   ScCollapsibleTrigger,
   ScTrace,
   ScTraceCollapsible,
-  ScTraceCollapsibleContent,
   ScTraceCollapsibleIcon,
+  ScTraceCollapsiblePanelContent,
   ScTraceCollapsibleTrigger,
   ScTraceDescription,
   ScTraceIcon,
@@ -33,7 +33,7 @@ import {
     ScCollapsibleTrigger,
     ScTrace,
     ScTraceCollapsible,
-    ScTraceCollapsibleContent,
+    ScTraceCollapsiblePanelContent,
     ScTraceCollapsibleIcon,
     ScTraceCollapsibleTrigger,
     ScTraceDescription,
@@ -57,7 +57,7 @@ import {
           <span scTraceCollapsibleIcon><svg siChevronRightIcon></svg></span>
         </button>
         <div scCollapsiblePanel>
-          <div scTraceCollapsibleContent class="flex flex-col gap-2">
+          <div scTraceCollapsiblePanelContent class="flex flex-col gap-2">
             <div scTrace>
               <div scCollapsible scTraceCollapsible>
                 <button scCollapsibleTrigger scTraceCollapsibleTrigger>
@@ -71,7 +71,10 @@ import {
                   ></span>
                 </button>
                 <div scCollapsiblePanel>
-                  <div scTraceCollapsibleContent class="whitespace-pre-wrap">
+                  <div
+                    scTraceCollapsiblePanelContent
+                    class="whitespace-pre-wrap"
+                  >
                     I should check which package managers are installed before I
                     scaffold anything.
                   </div>
@@ -88,7 +91,7 @@ import {
                   ></span>
                 </button>
                 <div scCollapsiblePanel>
-                  <div scTraceCollapsibleContent>
+                  <div scTraceCollapsiblePanelContent>
                     <div scTrace>
                       <span scTraceLine>
                         <span scTraceIcon><svg siTerminalIcon></svg></span>
@@ -107,7 +110,7 @@ import {
                           ></span>
                         </button>
                         <div scCollapsiblePanel>
-                          <div scTraceCollapsibleContent>
+                          <div scTraceCollapsiblePanelContent>
                             <div scCodeBlock size="sm" variant="destructive">
                               <pre
                                 scCodeBlockContent
