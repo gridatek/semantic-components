@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, ViewEncapsulation, inject } from '@angular/core';
+import { Component, ViewEncapsulation, computed, inject } from '@angular/core';
 import type { ScPresetName } from '@semantic-components/presets';
 import {
   ScFrame,
@@ -11,6 +11,8 @@ import {
   ScMenuRadioGroup,
   ScMenuRadioItem,
   ScMenuTrigger,
+  ScThemeManager,
+  type ScThemeMode,
 } from '@semantic-components/ui';
 import {
   SiBaselineIcon,
@@ -18,10 +20,13 @@ import {
   SiChartColumnIcon,
   SiCheckIcon,
   SiCircleIcon,
+  SiMonitorIcon,
+  SiMoonIcon,
   SiPaintBucketIcon,
   SiPaletteIcon,
   SiShapesIcon,
   SiSquareRoundCornerIcon,
+  SiSunIcon,
   SiTypeIcon,
 } from '@semantic-icons/lucide-icons';
 import { PRESETS, storePreset, storedPreset } from '../../presets';
@@ -35,6 +40,9 @@ import { PreviewCards } from './cards/preview-cards';
 @Component({
   selector: 'app-presets',
   imports: [
+    SiSunIcon,
+    SiMoonIcon,
+    SiMonitorIcon,
     PreviewCards,
     ScFrame,
     ScMenu,
@@ -89,6 +97,47 @@ import { PreviewCards } from './cards/preview-cards';
                       @for (name of names; track name) {
                         <div scMenuRadioItem [value]="name">
                           <span class="capitalize">{{ name }}</span>
+                          <span scMenuItemIndicator>
+                            <svg siCheckIcon></svg>
+                          </span>
+                        </div>
+                      }
+                    </div>
+                  </ng-template>
+                </div>
+              </ng-template>
+            </div>
+          </li>
+          <li>
+            <div scMenuProvider align="start">
+              <button scMenuTrigger scFrame type="button" [class]="card">
+                <span class="flex flex-col">
+                  <span class="text-muted-foreground text-xs">Mode</span>
+                  <span class="text-sm font-medium">{{ modeLabel() }}</span>
+                </span>
+                @switch (themeManager.mode()) {
+                  @case ('light') {
+                    <svg siSunIcon [class]="icon"></svg>
+                  }
+                  @case ('dark') {
+                    <svg siMoonIcon [class]="icon"></svg>
+                  }
+                  @default {
+                    <svg siMonitorIcon [class]="icon"></svg>
+                  }
+                }
+              </button>
+              <ng-template scMenuPortal>
+                <div scMenu class="w-48">
+                  <ng-template scMenuContent>
+                    <div
+                      scMenuRadioGroup
+                      [value]="themeManager.mode()"
+                      (valueChange)="setMode($event)"
+                    >
+                      @for (mode of modes; track mode.value) {
+                        <div scMenuRadioItem [value]="mode.value">
+                          {{ mode.label }}
                           <span scMenuItemIndicator>
                             <svg siCheckIcon></svg>
                           </span>
@@ -157,6 +206,21 @@ export default class Presets {
 
   protected readonly names = Object.keys(PRESETS) as ScPresetName[];
   protected readonly current = storedPreset();
+
+  protected readonly themeManager = inject(ScThemeManager);
+  protected readonly modes: readonly { value: ScThemeMode; label: string }[] = [
+    { value: 'light', label: 'Light' },
+    { value: 'dark', label: 'Dark' },
+    { value: 'system', label: 'System' },
+  ];
+  protected readonly modeLabel = computed(
+    () => this.modes.find((m) => m.value === this.themeManager.mode())?.label,
+  );
+
+  protected setMode(value: string | null): void {
+    const mode = this.modes.find((m) => m.value === value);
+    if (mode) this.themeManager.setMode(mode.value);
+  }
 
   /** An option's card: its name and value, an icon at the end. */
   protected readonly card =
