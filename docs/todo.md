@@ -33,6 +33,8 @@ Open work found along the way, kept for later — tick an item when it's done. N
 
 ## Larger items
 
+- [ ] **`protected` → `private` for template-only members** (the rule in .claude/CLAUDE.md, the user 2026-11-13) — Angular 22.2 lets a template read TS `private` members (checked on 22.2.6 with `strictTemplates`). About 3,700 `protected` members in `libs` and `apps`. For each: `private` when only its own class and template use it; it stays `protected` when a subclass reads it (parts that extend another part, e.g. the overlay parts on CDK or Aria bases). Go folder by folder, then type-check (`ngc`, plus the lib's declaration emit) and lint. `noUnusedLocals` stays off, or every template-only member is reported as unused.
+
 - [ ] **Inputs named like HTML attributes** (2026-11-13) — `align` was renamed `alignment` everywhere (the browser read `align="end"` on a `div` as text alignment; see why-semantic-components.md, Tradeoffs). Look for other inputs sharing a name with an HTML attribute on their host (`width`, `height`, `color`, `hidden`, `title`…).
 - [ ] **Presets page: the other options** (the user, 2026-11-12) — `/presets` follows shadcn's [Create](https://ui.shadcn.com/create); only Style changes for now (saved, then a reload: a preset is set at start). Base Color, Theme, Chart Color, Heading, Font, Icon Library, Radius and Menu are cards, disabled. Also from Create: Shuffle, Open Preset, Get Code. Charts (`/charts`) and Typeset (`/typeset`) are Coming soon pages for now.
 - [ ] **Create demos: what porting them showed** (2026-11-12) — `/presets` shows all of shadcn's Create preview (both pages, `pages/presets/cards/`). Left over:

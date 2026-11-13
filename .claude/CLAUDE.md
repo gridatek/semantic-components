@@ -49,6 +49,7 @@ You are an expert in TypeScript, Angular, and scalable web application developme
 - A part's own classes that depend on its state (orientation, side, axis…) are plain classes chosen in its `computed()` — `this.orientation() === 'vertical' ? 'w-px self-stretch' : 'h-px w-full'` — never `data-[orientation=vertical]:…` variants on itself. A `data-[…]:` class outranks the consumer's plain class in specificity (class + attribute), and `cn` doesn't see them as conflicting, so the consumer's `h-4 self-center` silently loses. Data variants stay for styling by state from elsewhere (`group-data-…`, `in-data-…`, a parent's `*:data-…`) and in the preset strings taken from shadcn.
 - Keep components small and focused on a single responsibility
 - Use `input()` and `output()` functions instead of decorators
+- Members used only by the template are `private` (Angular 22.2+ reads them), not `protected`. `protected` is kept for members a subclass reads. TS `private`, never ES `#field` (not supported in templates). The project leaves `noUnusedLocals` off: TypeScript doesn't see template uses, so it would report these members as unused.
 - Use `computed()` for derived state
 - Do NOT set `changeDetection` in `@Component` — `OnPush` is the default in Angular v22+. Never use `ChangeDetectionStrategy.Eager` (or its deprecated alias `Default`)
 - Set `encapsulation: ViewEncapsulation.None` in `@Component` decorator
