@@ -60,13 +60,17 @@ test('Disabled: out of reach, a press does nothing', async ({ page }) => {
 
 test('Toolbar: each toggle on its own', async ({ page }) => {
   await page.goto(demo('toolbar'));
-  await page.getByRole('button', { name: 'Toggle bold' }).click();
-  await expect(
-    page.getByRole('button', { name: 'Toggle bold' }),
-  ).toHaveAttribute('aria-pressed', 'true');
-  await expect(
-    page.getByRole('button', { name: 'Toggle italic' }),
-  ).toHaveAttribute('aria-pressed', 'false');
+  const bold = page.getByRole('button', { name: 'Toggle bold' });
+  const italic = page.getByRole('button', { name: 'Toggle italic' });
+  // Bold starts pressed; pressing italic leaves it so.
+  await expect(bold).toHaveAttribute('aria-pressed', 'true');
+  await expect(italic).toHaveAttribute('aria-pressed', 'false');
+  await italic.click();
+  await expect(italic).toHaveAttribute('aria-pressed', 'true');
+  await expect(bold).toHaveAttribute('aria-pressed', 'true');
+  await bold.click();
+  await expect(bold).toHaveAttribute('aria-pressed', 'false');
+  await expect(italic).toHaveAttribute('aria-pressed', 'true');
 });
 
 test('RTL: the icon at the start, on the right', async ({ page }) => {

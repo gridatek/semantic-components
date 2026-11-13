@@ -76,7 +76,8 @@ export class LiveWaveformCanvas {
       this.frame = requestAnimationFrame(loop);
     });
     inject(DestroyRef).onDestroy(() => {
-      cancelAnimationFrame(this.frame);
+      // A frame only if one was asked for — never on the server, which has none.
+      if (this.frame) cancelAnimationFrame(this.frame);
       this.closeMic();
     });
   }

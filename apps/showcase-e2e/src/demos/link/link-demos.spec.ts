@@ -27,7 +27,7 @@ test('Usage: a real link, with its own href, a button look', async ({
   await expect(page.getByRole('button')).toHaveCount(0);
 });
 
-test('Variants: six links, six looks', async ({ page }) => {
+test('Variants: seven links, seven looks', async ({ page }) => {
   await page.goto(demo('variants'));
   // Transitions off: a look read mid-transition isn't its own.
   await page.addStyleTag({
@@ -36,19 +36,21 @@ test('Variants: six links, six looks', async ({ page }) => {
   const links = page.getByRole('link');
   await expect(links).toHaveText([
     'Default',
+    'Link',
     'Button',
     'Outline',
     'Secondary',
     'Ghost',
     'Destructive',
   ]);
+  // The default is underlined in text; the link variant only on hover.
   const looks = await links.evaluateAll((all) =>
     all.map((el) => {
       const style = getComputedStyle(el);
-      return `${style.backgroundColor} ${style.color} ${style.borderColor}`;
+      return `${style.backgroundColor} ${style.color} ${style.borderColor} ${style.textDecorationLine}`;
     }),
   );
-  expect(new Set(looks).size).toBe(6);
+  expect(new Set(looks).size).toBe(7);
 });
 
 test('Size: the button sizes, an icon link named by hidden text', async ({
