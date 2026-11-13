@@ -18,7 +18,7 @@ import { ScCalendar } from './calendar';
   template: `
     <table
       role="grid"
-      class="w-full border-collapse"
+      class="w-[calc(var(--cell-size)*7)] max-w-full min-w-full table-fixed border-collapse"
       [attr.aria-label]="year()"
       (keydown)="onKeydown($event)"
     >
@@ -135,7 +135,7 @@ export class ScCalendarMonths {
   protected cellClass(month: Temporal.PlainYearMonth): string {
     const picked = this.isFocused(month);
     return cn(
-      'flex h-[calc(var(--cell-size)*1.5)] w-[calc(var(--cell-size)*7/3)] min-w-0 flex-auto cursor-pointer items-center justify-center rounded-(--cell-radius) text-sm outline-none select-none',
+      'flex h-[calc(var(--cell-size)*1.5)] min-w-0 flex-1 cursor-pointer items-center justify-center rounded-(--cell-radius) text-sm outline-none select-none',
       'hover:bg-muted hover:text-foreground',
       'focus-visible:ring-ring/50 focus-visible:ring-3',
       this.isCurrent(month) && !picked && 'bg-muted text-foreground',

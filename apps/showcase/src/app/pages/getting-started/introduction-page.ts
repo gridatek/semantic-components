@@ -378,7 +378,7 @@ export default class IntroductionPage {
     {
       name: 'Internationalization',
       path: '/docs/getting-started/i18n',
-      description: 'one build for every language.',
+      description: 'one build for all languages using Angular localize.',
     },
     {
       name: 'Right to left',
