@@ -5,6 +5,7 @@ import {
 } from '@angular/cdk/overlay';
 import {
   ApplicationConfig,
+  inject,
   provideBrowserGlobalErrorListeners,
 } from '@angular/core';
 import {
@@ -12,24 +13,36 @@ import {
   withInMemoryScrolling,
   withRouterConfig,
 } from '@angular/router';
-import { provideSemanticComponents } from '@semantic-components/ui';
+import {
+  SC_CONFIG,
+  ScStorage,
+  provideSemanticComponents,
+} from '@semantic-components/ui';
 import { withCodeHighlighter } from '@semantic-components/ui/code-block';
 import { appRoutes } from './app-routes';
-import { PRESETS, storedPreset } from './presets';
+import { PRESETS, presetFrom } from './presets';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideSemanticComponents(
       {
-        // The one picked on /presets (lyra by default).
-        preset: PRESETS[storedPreset()],
         // Alt+T moves focus to the toasts (the toaster's template names it); Escape goes back.
         toaster: { hotkey: ['altKey', 'KeyT'] },
       },
       // Code blocks highlighted with Shiki, each language loaded when first shown.
       withCodeHighlighter(),
     ),
+    // The preset picked on /presets (lyra by default): its cookie, read from
+    // the request when the server renders — a page is drawn in it from the
+    // first paint, and hydration keeps those classes.
+    {
+      provide: SC_CONFIG,
+      useFactory: () => ({
+        toaster: { hotkey: ['altKey', 'KeyT'] },
+        preset: PRESETS[presetFrom(inject(ScStorage))],
+      }),
+    },
     // Keyboard shortcuts (the docs search, Mod+K): TanStack Hotkeys.
     provideHotkeys(),
     // Overlays (dialogs, menus, tooltips) stay visible in fullscreen, e.g. in

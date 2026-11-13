@@ -1,6 +1,11 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { ScCard, ScCardBody, ScFrame } from '@semantic-components/ui';
-import { storedPreset } from '../../../presets';
+import { Component, ViewEncapsulation, inject } from '@angular/core';
+import {
+  ScCard,
+  ScCardBody,
+  ScFrame,
+  ScStorage,
+} from '@semantic-components/ui';
+import { presetFrom } from '../../../presets';
 
 /** The preset at a glance: its name and font, then the theme's colors. */
 @Component({
@@ -42,7 +47,7 @@ import { storedPreset } from '../../../presets';
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviewStyleOverview {
-  protected readonly preset = storedPreset();
+  protected readonly preset = presetFrom(inject(ScStorage));
   protected readonly variables = [
     '--background',
     '--foreground',

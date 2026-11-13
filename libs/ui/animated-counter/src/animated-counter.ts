@@ -153,9 +153,9 @@ export class ScAnimatedCounter {
   private moveTo(value: number): void {
     this.controls?.stop();
     const from = this.shown() ?? this.from();
-    const still = this.document.defaultView?.matchMedia(
+    const still = this.document.defaultView?.matchMedia?.(
       '(prefers-reduced-motion: reduce)',
-    ).matches;
+    )?.matches;
     // Rolling, the digits move by themselves (CSS); still, at once.
     if (this.effect() === 'roll' || still || from === value) {
       this.shown.set(value);

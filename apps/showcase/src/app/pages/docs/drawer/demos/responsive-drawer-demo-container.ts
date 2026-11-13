@@ -161,8 +161,9 @@ export class ResponsiveDrawerDemo {
   protected readonly desktop = signal(false);
 
   constructor() {
+    // No matchMedia on the server (its window has none): the phone's drawer there.
     const query =
-      inject(DOCUMENT).defaultView?.matchMedia('(min-width: 768px)');
+      inject(DOCUMENT).defaultView?.matchMedia?.('(min-width: 768px)');
     if (!query) return;
     this.desktop.set(query.matches);
     const change = (event: MediaQueryListEvent) =>

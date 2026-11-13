@@ -458,7 +458,12 @@ export class ScMessageScrollerState {
     if (!restore || !viewport || !restore.element.isConnected) return false;
     const moved = topIn(restore.element, viewport) - restore.viewportTop;
     if (Math.abs(moved) <= SAME) return false;
-    viewport.scrollTop += moved;
+    // Rows shorter than the viewport left room under them, which the new rows
+    // took: less to scroll than they moved. The spacer gives the difference.
+    const goal = viewport.scrollTop + moved;
+    const room = viewport.scrollHeight - viewport.clientHeight;
+    if (goal > room) this.setSpacer(this.spacerHeight + goal - room);
+    viewport.scrollTop = goal;
     restore.viewportTop = topIn(restore.element, viewport);
     this.scheduleCommit();
     this.scheduleVisibility();

@@ -123,7 +123,7 @@ export class PositionMessageScrollerDemo {
       text:
         'Where you say: at the end, at the start, or — here — at the last question, so a long answer reads from its beginning. ' +
         'With "last-anchor", the last row with scrollAnchor opens near the top, the previous message peeking above it. '.repeat(
-          4,
+          8,
         ),
     },
   ];

@@ -11,6 +11,7 @@ import {
   ScMenuRadioGroup,
   ScMenuRadioItem,
   ScMenuTrigger,
+  ScStorage,
   ScThemeManager,
   type ScThemeMode,
 } from '@semantic-components/ui';
@@ -29,7 +30,7 @@ import {
   SiSunIcon,
   SiTypeIcon,
 } from '@semantic-icons/lucide-icons';
-import { PRESETS, storePreset, storedPreset } from '../../presets';
+import { PRESETS, presetFrom, storePreset } from '../../presets';
 import { PreviewCards } from './cards/preview-cards';
 
 /**
@@ -207,7 +208,7 @@ export default class Presets {
   private readonly window = inject(DOCUMENT).defaultView;
 
   protected readonly names = Object.keys(PRESETS) as ScPresetName[];
-  protected readonly current = storedPreset();
+  protected readonly current = presetFrom(inject(ScStorage));
 
   protected readonly themeManager = inject(ScThemeManager);
   protected readonly modes: readonly { value: ScThemeMode; label: string }[] = [
