@@ -51,12 +51,11 @@ export class ScChartGrid {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly horizontal = input(true, { transform: booleanAttribute });
   readonly vertical = input(false, { transform: booleanAttribute });
-  /** About how many value lines. */
-  readonly tickCount = input(5);
 
   private readonly valueLines = computed(() => {
     const scale = this.state.valueScale();
-    return scale.ticks(this.tickCount()).map((tick) => scale(tick));
+    // At the value axis's ticks, as Recharts' grid.
+    return this.state.valueTicks().map((tick) => scale(tick));
   });
 
   private readonly categoryLines = computed(() => {

@@ -7,6 +7,7 @@ import {
   scalePoint,
 } from 'd3-scale';
 import { stack, stackOffsetDiverging, stackOffsetExpand } from 'd3-shape';
+import { scChartNiceTicks } from './chart-nice-ticks';
 import type {
   ScChartConfig,
   ScChartDatum,
@@ -75,11 +76,12 @@ const padded = (low: number, high: number): [number, number] => {
 /** The room an axis along the bottom takes, in px. */
 const AXIS_HEIGHT = 24;
 
-const DEFAULT_MARGIN: ScChartMargin = {
-  top: 8,
-  right: 16,
-  bottom: 8,
-  left: 16,
+/** Recharts' margin when the plot gives none. */
+export const SC_CHART_DEFAULT_MARGIN: ScChartMargin = {
+  top: 5,
+  right: 5,
+  bottom: 5,
+  left: 5,
 };
 
 /**
@@ -101,6 +103,8 @@ export class ScChartState {
   /** The axes, while there are: each one's width input (its room on the side). */
   readonly categoryAxis = signal<Signal<number> | null>(null);
   readonly valueAxis = signal<Signal<number> | null>(null);
+  /** The value axis's tick count (5 without one): it sets the domain, as in Recharts. */
+  readonly valueTickCount = signal(5);
 
   /** Categories down the side, values across. */
   readonly vertical = computed(() => this.plot()?.layout() === 'vertical');
@@ -126,7 +130,7 @@ export class ScChartState {
    * side takes its width, the one along the bottom its height.
    */
   readonly area = computed(() => {
-    const margin = this.plot()?.margin() ?? DEFAULT_MARGIN;
+    const margin = this.plot()?.margin() ?? SC_CHART_DEFAULT_MARGIN;
     const [side, below] = this.vertical()
       ? [this.categoryAxis(), this.valueAxis()]
       : [this.valueAxis(), this.categoryAxis()];
@@ -202,15 +206,13 @@ export class ScChartState {
     return result;
   });
 
-  /** Where each value is: up from the bottom, or across from the side. */
-  readonly valueScale = computed(() => {
-    const { left, top, right, bottom } = this.area();
-    const range: [number, number] = this.vertical()
-      ? [left, right]
-      : [bottom, top];
+  /**
+   * The value axis's ticks, Recharts' nice ones (from 0): their first and last
+   * are the value scale's domain. A scatter's: the scale's own ticks.
+   */
+  readonly valueTicks = computed<number[]>(() => {
     if (this.stackOffset() === 'expand')
-      return scaleLinear().domain([0, 1]).range(range);
-    // A scatter's: its values' own range, not from 0.
+      return scChartNiceTicks(0, 1, this.valueTickCount());
     const scatter = this.xKey() !== null;
     let low = scatter ? Infinity : 0;
     let high = scatter ? -Infinity : 0;
@@ -221,9 +223,26 @@ export class ScChartState {
       }
     if (!Number.isFinite(low)) [low, high] = [0, 0];
     if (high === low) high = low + 1;
+    // A scatter's: its values' own range, not from 0.
+    if (scatter)
+      return scaleLinear()
+        .domain(padded(low, high))
+        .nice()
+        .ticks(this.valueTickCount());
+    return scChartNiceTicks(low, high, this.valueTickCount());
+  });
+
+  /** Where each value is: up from the bottom, or across from the side. */
+  readonly valueScale = computed(() => {
+    const { left, top, right, bottom } = this.area();
+    const range: [number, number] = this.vertical()
+      ? [left, right]
+      : [bottom, top];
+    if (this.stackOffset() === 'expand')
+      return scaleLinear().domain([0, 1]).range(range);
+    const ticks = this.valueTicks();
     return scaleLinear()
-      .domain(scatter ? padded(low, high) : [low, high])
-      .nice()
+      .domain([ticks[0], ticks[ticks.length - 1]])
       .range(range);
   });
 

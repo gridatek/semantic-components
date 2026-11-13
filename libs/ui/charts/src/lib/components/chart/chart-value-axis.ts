@@ -4,6 +4,7 @@ import {
   LOCALE_ID,
   ViewEncapsulation,
   computed,
+  effect,
   inject,
   input,
 } from '@angular/core';
@@ -43,7 +44,7 @@ export class ScChartValueAxis {
   readonly classInput = input<string>('', { alias: 'class' });
   /** Beside the plot: the room its labels take, in px. */
   readonly width = input(40);
-  /** About how many ticks. */
+  /** How many ticks (Recharts' `tickCount`): they also set the value domain. */
   readonly tickCount = input(5);
   readonly tickFormatter = input<((value: number) => string) | null>(null);
 
@@ -55,7 +56,7 @@ export class ScChartValueAxis {
     const format =
       this.tickFormatter() ?? ((v: number) => this.numbers.format(v));
     const vertical = this.vertical();
-    return scale.ticks(this.tickCount()).map((value) => ({
+    return this.state.valueTicks().map((value) => ({
       value,
       label: format(value),
       x: vertical ? scale(value) : left - 8,
@@ -69,6 +70,10 @@ export class ScChartValueAxis {
 
   constructor() {
     this.state.valueAxis.set(this.width);
-    inject(DestroyRef).onDestroy(() => this.state.valueAxis.set(null));
+    effect(() => this.state.valueTickCount.set(this.tickCount()));
+    inject(DestroyRef).onDestroy(() => {
+      this.state.valueAxis.set(null);
+      this.state.valueTickCount.set(5);
+    });
   }
 }

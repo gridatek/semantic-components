@@ -8,7 +8,7 @@ import {
   input,
 } from '@angular/core';
 import { cn } from 'cn';
-import { ScChartState } from './chart-state';
+import { SC_CHART_DEFAULT_MARGIN, ScChartState } from './chart-state';
 import type {
   ScChartLayout,
   ScChartMargin,
@@ -46,8 +46,11 @@ export class ScChartPlot {
   readonly classInput = input<string>('', { alias: 'class' });
   /** The key of each row's category (`month`). */
   readonly categoryKey = input.required<string>();
-  /** Room around the drawing, in px. */
-  readonly margin = input<Partial<ScChartMargin>>({});
+  /**
+   * Room around the drawing, in px, as Recharts: 5 on each side without one;
+   * the sides a given one leaves out are 0.
+   */
+  readonly margin = input<Partial<ScChartMargin> | undefined>(undefined);
   /** `expand`: each category's stacks to 100%. */
   readonly stackOffset = input<ScChartStackOffset>('none');
   /** `vertical`: the categories down the side, the bars across. */
@@ -71,13 +74,12 @@ export class ScChartPlot {
   constructor() {
     this.state.plot.set({
       categoryKey: this.categoryKey,
-      margin: computed(() => ({
-        top: 8,
-        right: 16,
-        bottom: 8,
-        left: 16,
-        ...this.margin(),
-      })),
+      margin: computed(() => {
+        const margin = this.margin();
+        return margin
+          ? { top: 0, right: 0, bottom: 0, left: 0, ...margin }
+          : SC_CHART_DEFAULT_MARGIN;
+      }),
       stackOffset: this.stackOffset,
       layout: this.layout,
       startAngle: this.startAngle,
