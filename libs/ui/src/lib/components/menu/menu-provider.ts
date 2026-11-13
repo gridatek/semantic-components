@@ -51,8 +51,6 @@ export type ScMenuSide = 'top' | 'bottom';
     }
   `,
   host: {
-    // align is our input: the HTML attribute would align the text in a div.
-    '[attr.align]': 'null',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
@@ -66,7 +64,7 @@ export class ScMenuProvider implements ScMenuContext {
   /** Open or not; `[(open)]`. */
   readonly open = model(false);
   readonly side = input<ScMenuSide>('bottom');
-  readonly align = input<ScMenuAlign>('start');
+  readonly alignment = input<ScMenuAlign>('start');
   readonly offset = input(4);
   readonly originInput = input<CdkOverlayOrigin | undefined>(undefined, {
     alias: 'origin',
@@ -87,7 +85,7 @@ export class ScMenuProvider implements ScMenuContext {
   protected readonly positions = computed(() =>
     buildOverlayPositionsWithFallback(
       this.side(),
-      this.align(),
+      this.alignment(),
       this.offset(),
       this.directionality.value,
     ),

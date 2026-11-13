@@ -26,7 +26,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
       <div scBubble variant="muted">
         <div scBubbleContent>How can I help you today?</div>
       </div>
-      <div scBubble variant="muted" align="end">
+      <div scBubble variant="muted" alignment="end">
         <div scBubbleContent>
           <div
             scCollapsible

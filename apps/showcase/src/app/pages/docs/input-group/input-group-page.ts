@@ -187,7 +187,7 @@ export default class InputGroupPage {
       '  <div scInputGroupAddon>',
       '    <svg></svg>',
       '  </div>',
-      '  <div scInputGroupAddon align="inline-end">',
+      '  <div scInputGroupAddon alignment="inline-end">',
       '    <span scInputGroupText>Text</span>',
       '    <button scInputGroupButton>Button</button>',
       '  </div>',
@@ -217,7 +217,7 @@ export default class InputGroupPage {
         'Icons, text or buttons beside the control. A click on it, not on its buttons, focuses the control.',
       inputs: [
         {
-          name: 'align',
+          name: 'alignment',
           type: "'inline-start' | 'inline-end' | 'block-start' | 'block-end'",
           default: "'inline-start'",
           description:

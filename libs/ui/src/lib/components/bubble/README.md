@@ -14,7 +14,7 @@ import { ScBubble, ScBubbleContent, ScBubbleGroup, ScBubbleReactions } from '@se
   <div scBubble variant="muted">
     <div scBubbleContent>Are we still on for tomorrow?</div>
   </div>
-  <div scBubble align="end">
+  <div scBubble alignment="end">
     <div scBubbleContent>Yes — 10am works.</div>
     <div scBubbleReactions role="img" aria-label="Reaction: thumbs up">
       <span>👍</span>
@@ -36,7 +36,7 @@ CSS classes via the `cn` utility.
 | -------- | --------------------------------------------------------------------------------------------------- |
 | Selector | `div[scBubble]`                                                                                     |
 | Inputs   | `variant`: `default` \| `secondary` \| `muted` \| `tinted` \| `outline` \| `ghost` \| `destructive` |
-|          | `align`: `start` (default) \| `end`                                                                 |
+|          | `alignment`: `start` (default) \| `end`                                                             |
 
 `align="end"` pushes the bubble to the inline end, for your own messages. A
 bubble also follows `data-align` on a surrounding message. It is at most 80%
@@ -56,11 +56,11 @@ named by its text, with a hover colour and a focus ring.
 
 ### ScBubbleReactions
 
-| Property | Details                             |
-| -------- | ----------------------------------- |
-| Selector | `div[scBubbleReactions]`            |
-| Inputs   | `side`: `bottom` (default) \| `top` |
-|          | `align`: `end` (default) \| `start` |
+| Property | Details                                 |
+| -------- | --------------------------------------- |
+| Selector | `div[scBubbleReactions]`                |
+| Inputs   | `side`: `bottom` (default) \| `top`     |
+|          | `alignment`: `end` (default) \| `start` |
 
 Overlaps the bubble's edge: leave room between rows (the demos use `gap-12`).
 A row of emoji is one image — `role="img"` and an `aria-label` ("Reactions:
@@ -73,5 +73,5 @@ trigger): name each.
 | -------- | -------------------- |
 | Selector | `div[scBubbleGroup]` |
 
-Consecutive bubbles from the same sender, closer together. `align` goes on each
+Consecutive bubbles from the same sender, closer together. `alignment` goes on each
 bubble.

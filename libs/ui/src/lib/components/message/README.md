@@ -36,10 +36,10 @@ the `cn` utility.
 
 ### ScMessage
 
-| Property | Details                             |
-| -------- | ----------------------------------- |
-| Selector | `div[scMessage]`                    |
-| Inputs   | `align`: `start` (default) \| `end` |
+| Property | Details                                 |
+| -------- | --------------------------------------- |
+| Selector | `div[scMessage]`                        |
+| Inputs   | `alignment`: `start` (default) \| `end` |
 
 `align="end"` reverses the row so the avatar sits on the inline end. It is
 published as `data-align`, which `ScBubble` and `ScMessageContent` both read —

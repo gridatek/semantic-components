@@ -63,8 +63,6 @@ export type ScPreviewCardSide = ScOverlayLogicalSide;
     }
   `,
   host: {
-    // align is our input: the HTML attribute would align the text in a div.
-    '[attr.align]': 'null',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
@@ -78,7 +76,7 @@ export class ScPreviewCardProvider {
   /** Which side of the trigger it goes on; flips when there is no room. */
   readonly side = input<ScPreviewCardSide>('bottom');
   /** Along that side: `start`, `center`, `end` (logical). */
-  readonly align = input<ScOverlayAlign>('center');
+  readonly alignment = input<ScOverlayAlign>('center');
   /** The gap from the trigger (px). */
   readonly offset = input(4);
   /** Another anchor than the trigger. */
@@ -99,7 +97,7 @@ export class ScPreviewCardProvider {
   protected readonly positions = computed(() =>
     buildOverlayPositionsWithFallback(
       physicalSide(this.side(), this.direction.value),
-      this.align(),
+      this.alignment(),
       this.offset(),
       this.direction.value,
     ),

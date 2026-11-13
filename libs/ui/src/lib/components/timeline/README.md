@@ -30,7 +30,7 @@ ol[scTimeline] (orientation: vertical | horizontal · align: start | end | alter
 
 ## Layout
 
-- `vertical`, `align`: `start` (content after the line), `end` (before it), `alternate` (in turn, the line in the middle). The items share one grid (subgrid): the line is straight, whatever the opposite's width.
+- `vertical`, `alignment`: `start` (content after the line), `end` (before it), `alternate` (in turn, the line in the middle). The items share one grid (subgrid): the line is straight, whatever the opposite's width.
 - `horizontal`: a row — the opposite above each marker, the content below; it scrolls sideways when narrow, and takes focus to be scrolled from the keyboard (name it).
 - Logical sides: right-to-left follows.
 

@@ -36,7 +36,7 @@ import { SiSearchIcon } from '@semantic-icons/lucide-icons';
       <div scInputGroupAddon>
         <svg siSearchIcon class="text-muted-foreground"></svg>
       </div>
-      <div scInputGroupAddon align="inline-end">
+      <div scInputGroupAddon alignment="inline-end">
         <kbd scKbd>&#8984;K</kbd>
       </div>
     </div>

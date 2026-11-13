@@ -45,7 +45,7 @@ import { SiSearchIcon } from '@semantic-icons/lucide-icons';
       <label scLabel>Search</label>
       <div scInputGroup>
         <input scInput placeholder="Search..." />
-        <div scInputGroupAddon align="inline-start">
+        <div scInputGroupAddon alignment="inline-start">
           <svg siSearchIcon class="text-muted-foreground"></svg>
         </div>
       </div>

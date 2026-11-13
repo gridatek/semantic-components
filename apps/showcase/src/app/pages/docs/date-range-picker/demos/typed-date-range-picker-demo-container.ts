@@ -68,7 +68,7 @@ import {
     <div class="grid w-80 gap-2">
       <p scLabelText id="stay-label">Stay</p>
       <div scDatePicker #dp="scDatePicker" mode="range" [(value)]="range">
-        <div scPopoverProvider [origin]="anchor" align="start">
+        <div scPopoverProvider [origin]="anchor" alignment="start">
           <div
             scInputGroup
             cdkOverlayOrigin
@@ -88,7 +88,7 @@ import {
               aria-label="Check-out"
               placeholder="MM/DD/YYYY"
             />
-            <div scInputGroupAddon align="inline-end">
+            <div scInputGroupAddon alignment="inline-end">
               <button scDatePickerTrigger #trigger="scDatePickerTrigger">
                 <svg siCalendarIcon></svg>
                 <span class="sr-only">Choose dates</span>

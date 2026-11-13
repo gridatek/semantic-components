@@ -29,7 +29,7 @@ import {
           </div>
         </div>
       </div>
-      <div scMessage align="end">
+      <div scMessage alignment="end">
         <div scMessageContent>
           <div scBubble>
             <div scBubbleContent>

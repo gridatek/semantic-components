@@ -95,7 +95,7 @@ const minutesAgo = (minutes: number) =>
       <button scButton variant="ghost" size="sm" (click)="receive()">
         Send a test notification
       </button>
-      <div scPopoverProvider align="end">
+      <div scPopoverProvider alignment="end">
         <button
           scButton
           variant="outline"

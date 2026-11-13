@@ -34,7 +34,7 @@ import {
       <div scBubble>
         <div scBubbleContent>This is the default primary bubble.</div>
       </div>
-      <div scBubble variant="secondary" align="end">
+      <div scBubble variant="secondary" alignment="end">
         <div scBubbleContent>This is the secondary variant.</div>
       </div>
       <div scBubble variant="muted">
@@ -45,7 +45,7 @@ import {
           <span>👍</span>
         </div>
       </div>
-      <div scBubble variant="tinted" align="end">
+      <div scBubble variant="tinted" alignment="end">
         <div scBubbleContent>
           This one is tinted. The tint is a softer color derived from the
           primary color.
@@ -54,7 +54,7 @@ import {
       <div scBubble variant="outline">
         <div scBubbleContent>We can also use an outlined variant.</div>
       </div>
-      <div scBubble variant="destructive" align="end">
+      <div scBubble variant="destructive" alignment="end">
         <div scBubbleContent>Or a destructive variant with a reaction.</div>
         <div scBubbleReactions role="img" aria-label="Reaction: fire">
           <span>🔥</span>

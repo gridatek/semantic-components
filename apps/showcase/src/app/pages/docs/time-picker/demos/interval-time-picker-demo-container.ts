@@ -57,7 +57,7 @@ import { SiClockIcon } from '@semantic-icons/lucide-icons';
     <div scField class="w-44">
       <label scLabel>Pickup</label>
       <div scTimePicker [interval]="15">
-        <div scPopoverProvider [origin]="anchor" align="start">
+        <div scPopoverProvider [origin]="anchor" alignment="start">
           <div scInputGroup cdkOverlayOrigin #anchor="cdkOverlayOrigin">
             <div
               scTimeInput
@@ -66,7 +66,7 @@ import { SiClockIcon } from '@semantic-icons/lucide-icons';
               [maxTime]="close"
               [(value)]="time"
             ></div>
-            <div scInputGroupAddon align="inline-end">
+            <div scInputGroupAddon alignment="inline-end">
               <button scTimePickerTrigger #trigger="scTimePickerTrigger">
                 <svg siClockIcon></svg>
                 <span class="sr-only">Choose a time</span>

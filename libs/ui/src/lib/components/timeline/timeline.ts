@@ -11,7 +11,7 @@ import { cn } from 'cn';
   host: {
     'data-slot': 'timeline',
     '[attr.data-orientation]': 'orientation()',
-    '[attr.data-align]': 'align()',
+    '[attr.data-align]': 'alignment()',
     // Across, it scrolls sideways: reachable from the keyboard (name it).
     '[attr.tabindex]': 'orientation() === "horizontal" ? 0 : null',
     '[class]': 'class()',
@@ -22,7 +22,7 @@ export class ScTimeline {
 
   readonly orientation = input<'vertical' | 'horizontal'>('vertical');
   /** Where the content is, down the line: after it, before it, or in turn. */
-  readonly align = input<'start' | 'end' | 'alternate'>('start');
+  readonly alignment = input<'start' | 'end' | 'alternate'>('start');
 
   protected readonly class = computed(() =>
     cn(
@@ -35,7 +35,7 @@ export class ScTimeline {
               start: 'grid-cols-[auto_auto_1fr]',
               end: 'grid-cols-[1fr_auto_auto]',
               alternate: 'grid-cols-[1fr_auto_1fr]',
-            }[this.align()],
+            }[this.alignment()],
           ],
       this.classInput(),
     ),

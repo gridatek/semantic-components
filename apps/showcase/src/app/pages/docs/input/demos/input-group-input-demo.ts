@@ -28,7 +28,7 @@ import { SiInfoIcon } from '@semantic-icons/lucide-icons';
         <div scInputGroupAddon>
           <span scInputGroupText>https://</span>
         </div>
-        <div scInputGroupAddon align="inline-end">
+        <div scInputGroupAddon alignment="inline-end">
           <svg siInfoIcon></svg>
         </div>
       </div>

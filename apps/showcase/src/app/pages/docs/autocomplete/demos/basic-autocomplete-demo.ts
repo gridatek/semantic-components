@@ -43,7 +43,7 @@ import {
   template: `
     <div scAutocomplete class="w-52" [formField]="searchForm.query">
       <div scInputGroup>
-        <div scInputGroupAddon align="inline-start">
+        <div scInputGroupAddon alignment="inline-start">
           <svg siSearchIcon></svg>
         </div>
         <input
@@ -52,7 +52,7 @@ import {
           aria-label="Select a country"
           placeholder="Select a country"
         />
-        <div scInputGroupAddon align="inline-end">
+        <div scInputGroupAddon alignment="inline-end">
           <button scAutocompleteClear>
             <svg siXIcon></svg>
             <span class="sr-only">Clear</span>

@@ -16,12 +16,12 @@ import {
         <div scBubbleContent>How can I help you today?</div>
       </div>
       <div scBubbleGroup>
-        <div scBubble variant="tinted" align="end">
+        <div scBubble variant="tinted" alignment="end">
           <button scBubbleContent (click)="chosen.set('I forgot my password')">
             I forgot my password
           </button>
         </div>
-        <div scBubble variant="tinted" align="end">
+        <div scBubble variant="tinted" alignment="end">
           <button
             scBubbleContent
             (click)="chosen.set('I need help with my subscription')"
@@ -29,7 +29,7 @@ import {
             I need help with my subscription
           </button>
         </div>
-        <div scBubble variant="tinted" align="end">
+        <div scBubble variant="tinted" alignment="end">
           <button
             scBubbleContent
             (click)="chosen.set('Something else. Talk to a human.')"

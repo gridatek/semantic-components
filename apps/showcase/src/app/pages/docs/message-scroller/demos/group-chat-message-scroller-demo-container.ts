@@ -78,7 +78,7 @@ import { SiArrowDownIcon } from '@semantic-icons/lucide-icons';
                   <div scMessageScrollerItem [messageId]="message.id">
                     <div
                       scMessage
-                      [align]="message.author === 'You' ? 'end' : 'start'"
+                      [alignment]="message.author === 'You' ? 'end' : 'start'"
                     >
                       <div scMessageContent>
                         @if (message.author !== 'You') {

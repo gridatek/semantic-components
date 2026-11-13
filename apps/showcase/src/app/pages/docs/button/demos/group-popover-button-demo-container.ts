@@ -56,7 +56,7 @@ import { SiBotIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     SiChevronDownIcon,
   ],
   template: \`
-    <div scPopoverProvider align="end">
+    <div scPopoverProvider alignment="end">
       <div scControlGroup aria-label="Copilot">
         <button scButton variant="outline">
           <svg siBotIcon></svg>

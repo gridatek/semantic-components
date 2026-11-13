@@ -52,7 +52,7 @@ import {
           </button>
         }
       </div>
-      <nav scNavigationMenu aria-label="Main, aligned" [align]="align()">
+      <nav scNavigationMenu aria-label="Main, aligned" [alignment]="align()">
         <ul scNavigationMenuList>
           <li scNavigationMenuItem value="getting-started">
             <button scNavigationMenuTrigger>

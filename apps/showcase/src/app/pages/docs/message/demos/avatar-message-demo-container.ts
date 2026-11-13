@@ -57,7 +57,7 @@ import {
           </div>
         </div>
       </div>
-      <div scMessage align="end">
+      <div scMessage alignment="end">
         <div scMessageAvatar>
           <span scAvatar><span scAvatarFallback>ME</span></span>
         </div>

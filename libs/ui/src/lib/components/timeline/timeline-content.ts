@@ -24,7 +24,7 @@ export class ScTimelineContent {
       end: 'col-start-1 pe-4 text-end',
       alternate:
         'col-start-3 ps-4 group-even/item:col-start-1 group-even/item:ps-0 group-even/item:pe-4 group-even/item:text-end',
-    }[this.timeline.align()];
+    }[this.timeline.alignment()];
     return cn('row-start-1 min-w-0 space-y-1', side, this.classInput());
   });
 }

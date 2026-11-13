@@ -43,7 +43,7 @@ import {
           aria-label="Profile URL"
           readonly
         />
-        <div scInputGroupAddon align="inline-end">
+        <div scInputGroupAddon alignment="inline-end">
           <button scInputGroupButton size="icon-xs" (click)="copy()">
             @if (copied()) {
               <svg siCheckIcon></svg>
@@ -56,7 +56,7 @@ import {
       </div>
       <div scInputGroup class="[--radius:9999px]">
         <div scInputGroupAddon>
-          <div scPopoverProvider align="start">
+          <div scPopoverProvider alignment="start">
             <button
               scInputGroupButton
               scPopoverTrigger
@@ -80,7 +80,7 @@ import {
           <span scInputGroupText>https://</span>
         </div>
         <input scInput aria-label="Website" />
-        <div scInputGroupAddon align="inline-end">
+        <div scInputGroupAddon alignment="inline-end">
           <button
             scInputGroupButton
             size="icon-xs"

@@ -46,12 +46,12 @@ import { SiArrowDownIcon } from '@semantic-icons/lucide-icons';
                 >
                   <div
                     scMessage
-                    [align]="message.role === 'user' ? 'end' : 'start'"
+                    [alignment]="message.role === 'user' ? 'end' : 'start'"
                   >
                     <div scMessageContent>
                       <div
                         scBubble
-                        [align]="message.role === 'user' ? 'end' : 'start'"
+                        [alignment]="message.role === 'user' ? 'end' : 'start'"
                         [variant]="
                           message.role === 'user' ? 'default' : 'muted'
                         "

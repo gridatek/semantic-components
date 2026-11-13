@@ -158,7 +158,7 @@ export default class MessagePage {
     ].join('\n'),
     markup: [
       '<div scMessageGroup>',
-      '  <div scMessage align="…">',
+      '  <div scMessage alignment="…">',
       '    <div scMessageAvatar>…</div>',
       '    <div scMessageContent>',
       '      <div scMessageHeader>…</div>',

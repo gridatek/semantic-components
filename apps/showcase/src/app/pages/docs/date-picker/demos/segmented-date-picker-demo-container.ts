@@ -73,10 +73,10 @@ import {
     <div scField class="w-64">
       <label scLabel>Start date</label>
       <div scDatePicker #dp="scDatePicker" [(value)]="date">
-        <div scPopoverProvider [origin]="anchor" align="start">
+        <div scPopoverProvider [origin]="anchor" alignment="start">
           <div scInputGroup cdkOverlayOrigin #anchor="cdkOverlayOrigin">
             <div scSegmentedDateInput></div>
-            <div scInputGroupAddon align="inline-end">
+            <div scInputGroupAddon alignment="inline-end">
               <button scDatePickerTrigger #trigger="scDatePickerTrigger">
                 <svg siCalendarIcon></svg>
                 <span class="sr-only">Choose a date</span>

@@ -38,7 +38,7 @@ import {
     SiSunIcon,
   ],
   template: `
-    <div scMenuProvider align="end">
+    <div scMenuProvider alignment="end">
       <button scButton scMenuTrigger variant="outline" size="icon">
         @switch (themeManager.mode()) {
           @case ('light') {

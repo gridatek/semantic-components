@@ -5,7 +5,7 @@ Rich content in a panel beside its trigger — a dialog, modal or not, opened by
 ## Usage
 
 ```html
-<div scPopoverProvider align="start">
+<div scPopoverProvider alignment="start">
   <button scButton scPopoverTrigger variant="outline">Open Popover</button>
   <ng-template scPopoverPortal>
     <div scPopover class="w-64">
@@ -21,16 +21,16 @@ Rich content in a panel beside its trigger — a dialog, modal or not, opened by
 
 ## Parts
 
-| Part                   | Selector                       | What it does                                                                                                                                                    |
-| ---------------------- | ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ScPopoverProvider`    | `div[scPopoverProvider]`       | `[(open)]`, `modal` (`false`, `'trap-focus'`, `true`), `side` (`bottom`, `top`, `left`, `right`, `inline-start`, `inline-end`), `align`, `offset` (4), `origin` |
-| `ScPopoverTrigger`     | `button[scPopoverTrigger]`     | Toggles it (`aria-haspopup`, `aria-expanded`, `aria-controls`); `openOnHover`, `delay` (300), `closeDelay` (0)                                                  |
-| `ScPopoverPortal`      | `ng-template[scPopoverPortal]` | The content, rendered while open                                                                                                                                |
-| `ScPopover`            | `div[scPopover]`               | The popover: `role="dialog"`, named by its title, described by its description, `data-side`, animated                                                           |
-| `ScPopoverHeader`      | `div[scPopoverHeader]`         | Its title and description, together                                                                                                                             |
-| `ScPopoverTitle`       | `[scPopoverTitle]`             | Names it; the heading level is yours                                                                                                                            |
-| `ScPopoverDescription` | `p[scPopoverDescription]`      | Describes it                                                                                                                                                    |
-| `ScPopoverClose`       | `button[scPopoverClose]`       | Closes it: the preset's button (ghost, icon-xs); name it                                                                                                        |
+| Part                   | Selector                       | What it does                                                                                                                                                        |
+| ---------------------- | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ScPopoverProvider`    | `div[scPopoverProvider]`       | `[(open)]`, `modal` (`false`, `'trap-focus'`, `true`), `side` (`bottom`, `top`, `left`, `right`, `inline-start`, `inline-end`), `alignment`, `offset` (4), `origin` |
+| `ScPopoverTrigger`     | `button[scPopoverTrigger]`     | Toggles it (`aria-haspopup`, `aria-expanded`, `aria-controls`); `openOnHover`, `delay` (300), `closeDelay` (0)                                                      |
+| `ScPopoverPortal`      | `ng-template[scPopoverPortal]` | The content, rendered while open                                                                                                                                    |
+| `ScPopover`            | `div[scPopover]`               | The popover: `role="dialog"`, named by its title, described by its description, `data-side`, animated                                                               |
+| `ScPopoverHeader`      | `div[scPopoverHeader]`         | Its title and description, together                                                                                                                                 |
+| `ScPopoverTitle`       | `[scPopoverTitle]`             | Names it; the heading level is yours                                                                                                                                |
+| `ScPopoverDescription` | `p[scPopoverDescription]`      | Describes it                                                                                                                                                        |
+| `ScPopoverClose`       | `button[scPopoverClose]`       | Closes it: the preset's button (ghost, icon-xs); name it                                                                                                            |
 
 `origin` anchors it on something else than the trigger — an input group, as the date pickers do (their own trigger sets `open`).
 

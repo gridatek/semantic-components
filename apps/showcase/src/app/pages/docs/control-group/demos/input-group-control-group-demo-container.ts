@@ -67,7 +67,7 @@ import { SiAudioLinesIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
             [disabled]="voice()"
             aria-label="Message"
           />
-          <div scInputGroupAddon align="inline-end">
+          <div scInputGroupAddon alignment="inline-end">
             <div scTooltipProvider>
               <button
                 scButton

@@ -30,7 +30,7 @@ import { SiEyeOffIcon } from '@semantic-icons/lucide-icons';
           placeholder="Enter password"
           autocomplete="current-password"
         />
-        <div scInputGroupAddon align="inline-end">
+        <div scInputGroupAddon alignment="inline-end">
           <svg siEyeOffIcon></svg>
         </div>
       </div>

@@ -73,10 +73,10 @@ import {
     <div scField class="w-64">
       <label scLabel>Date of birth</label>
       <div scDatePicker #dp="scDatePicker" [maxDate]="adult" [(value)]="date">
-        <div scPopoverProvider [origin]="anchor" align="start">
+        <div scPopoverProvider [origin]="anchor" alignment="start">
           <div scInputGroup cdkOverlayOrigin #anchor="cdkOverlayOrigin">
             <input scDateInput placeholder="MM/DD/YYYY" />
-            <div scInputGroupAddon align="inline-end">
+            <div scInputGroupAddon alignment="inline-end">
               <button scDatePickerTrigger #trigger="scDatePickerTrigger">
                 <svg siCalendarIcon></svg>
                 <span class="sr-only">Choose your date of birth</span>

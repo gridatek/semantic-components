@@ -45,17 +45,15 @@ const bubbleVariants = cva(
 @Directive({
   selector: 'div[scBubble]',
   host: {
-    // align is our input: the HTML attribute would align the text in a div.
-    '[attr.align]': 'null',
     'data-slot': 'bubble',
-    '[attr.data-align]': 'align()',
+    '[attr.data-align]': 'alignment()',
     '[attr.data-variant]': 'variant()',
     '[class]': 'class()',
   },
 })
 export class ScBubble {
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly align = input<'start' | 'end'>('start');
+  readonly alignment = input<'start' | 'end'>('start');
   readonly variant = input<ScBubbleVariant>('default');
 
   protected readonly class = computed(() =>

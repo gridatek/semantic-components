@@ -52,7 +52,7 @@ import {
         <label scLabel>Amount</label>
         <div scInputGroup class="h-auto">
           <input scInput placeholder="Enter amount" inputmode="decimal" />
-          <div scInputGroupAddon align="block-end">
+          <div scInputGroupAddon alignment="block-end">
             <span scInputGroupText>USD</span>
           </div>
         </div>
@@ -62,7 +62,7 @@ import {
         <label scLabel>Comment</label>
         <div scInputGroup>
           <textarea scTextarea placeholder="Write a comment..."></textarea>
-          <div scInputGroupAddon align="block-end">
+          <div scInputGroupAddon alignment="block-end">
             <span scInputGroupText>0/280</span>
             <button
               scInputGroupButton

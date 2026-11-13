@@ -56,11 +56,11 @@ import { SiLoaderCircleIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
         <div scInputGroupAddon>
           <svg siSearchIcon></svg>
         </div>
-        <div scInputGroupAddon align="inline-end">١٢ نتيجة</div>
+        <div scInputGroupAddon alignment="inline-end">١٢ نتيجة</div>
       </div>
       <div scInputGroup>
         <input scInput placeholder="جارٍ البحث..." aria-label="بحث جارٍ" />
-        <div scInputGroupAddon align="inline-end">
+        <div scInputGroupAddon alignment="inline-end">
           <svg scSpinner siLoaderCircleIcon aria-label="جارٍ التحميل"></svg>
         </div>
       </div>
@@ -68,7 +68,7 @@ import { SiLoaderCircleIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
         <label scLabel>تعليق</label>
         <div scInputGroup>
           <textarea scTextarea placeholder="اكتب تعليقًا..."></textarea>
-          <div scInputGroupAddon align="block-end">
+          <div scInputGroupAddon alignment="block-end">
             <span scInputGroupText>٠/٢٨٠</span>
             <button
               scInputGroupButton

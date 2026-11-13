@@ -207,12 +207,14 @@ type Segment = { code: boolean; text: string };
                   >
                     <div
                       scMessage
-                      [align]="message.role === 'user' ? 'end' : 'start'"
+                      [alignment]="message.role === 'user' ? 'end' : 'start'"
                     >
                       <div scMessageContent>
                         <div
                           scBubble
-                          [align]="message.role === 'user' ? 'end' : 'start'"
+                          [alignment]="
+                            message.role === 'user' ? 'end' : 'start'
+                          "
                           [variant]="
                             message.role === 'user' ? 'muted' : 'ghost'
                           "
@@ -268,8 +270,8 @@ type Segment = { code: boolean; text: string };
                 }
               </span>
             </div>
-            <div scInputGroupAddon align="block-end" class="pt-1">
-              <div scMenuProvider side="top" align="start">
+            <div scInputGroupAddon alignment="block-end" class="pt-1">
+              <div scMenuProvider side="top" alignment="start">
                 <button
                   scInputGroupButton
                   scMenuTrigger

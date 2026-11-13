@@ -166,7 +166,7 @@ export default class BubblePage {
     ].join('\n'),
     markup: [
       '<div scBubbleGroup>',
-      '  <div scBubble variant="…" align="…">',
+      '  <div scBubble variant="…" alignment="…">',
       '    <div scBubbleContent>…</div>',
       '    <div scBubbleReactions role="img" aria-label="…">…</div>',
       '  </div>',

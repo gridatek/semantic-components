@@ -127,7 +127,7 @@ import { SiChevronUpIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
           <div scField>
             <div scInputGroup>
               <input scInput placeholder="Name" aria-label="Name" />
-              <div scInputGroupAddon align="inline-end">
+              <div scInputGroupAddon alignment="inline-end">
                 <span scInputGroupText><svg siSearchIcon></svg></span>
               </div>
             </div>
@@ -195,7 +195,7 @@ import { SiChevronUpIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
               </div>
             </ng-template>
           </div>
-          <div scMenuProvider side="top" align="end">
+          <div scMenuProvider side="top" alignment="end">
             <div scControlGroup aria-label="Conversation">
               <button scButton variant="outline">Button Group</button>
               <button scButton scMenuTrigger variant="outline" size="icon">

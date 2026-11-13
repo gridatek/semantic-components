@@ -45,7 +45,7 @@ import {
   ],
   template: \`
     <div dir="rtl" lang="ar" class="flex flex-wrap gap-2">
-      <div scPopoverProvider align="start">
+      <div scPopoverProvider alignment="start">
         <button scButton scPopoverTrigger variant="outline">افتح</button>
         <ng-template scPopoverPortal>
           <div scPopover>

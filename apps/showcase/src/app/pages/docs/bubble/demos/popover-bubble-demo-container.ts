@@ -53,7 +53,7 @@ import { SiInfoIcon } from '@semantic-icons/lucide-icons';
   ],
   template: \`
     <div class="flex w-full max-w-sm flex-col gap-8 py-6">
-      <div scBubble align="end">
+      <div scBubble alignment="end">
         <div scBubbleContent>Run the build script.</div>
       </div>
       <div scBubble variant="destructive">

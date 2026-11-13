@@ -60,7 +60,7 @@ import { SiAudioLinesIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
       <div scControlGroup>
         <div scInputGroup>
           <input scInput placeholder="Send a message..." aria-label="Message" />
-          <div scInputGroupAddon align="inline-end">
+          <div scInputGroupAddon alignment="inline-end">
             <div scTooltipProvider>
               <button scButton variant="ghost" size="icon-xs" scTooltipTrigger>
                 <svg siAudioLinesIcon></svg>

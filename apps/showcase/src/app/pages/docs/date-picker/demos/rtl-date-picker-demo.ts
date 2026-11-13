@@ -43,7 +43,11 @@ import {
         locale="ar"
         class="w-fit"
       >
-        <div scPopoverProvider [origin]="trigger.overlayOrigin" align="start">
+        <div
+          scPopoverProvider
+          [origin]="trigger.overlayOrigin"
+          alignment="start"
+        >
           <button
             scDatePickerTrigger
             #trigger="scDatePickerTrigger"

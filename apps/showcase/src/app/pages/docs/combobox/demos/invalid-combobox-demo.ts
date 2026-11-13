@@ -54,7 +54,7 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
       >
         <div scInputGroup>
           <input scInput scComboboxInput placeholder="Select a framework" />
-          <div scInputGroupAddon align="inline-end">
+          <div scInputGroupAddon alignment="inline-end">
             <button scComboboxTrigger>
               <svg siChevronDownIcon></svg>
               <span class="sr-only">Show the list</span>

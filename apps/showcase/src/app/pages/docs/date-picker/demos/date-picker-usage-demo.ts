@@ -36,7 +36,7 @@ import {
   ],
   template: `
     <div scDatePicker #dp="scDatePicker" [(value)]="date" class="w-fit">
-      <div scPopoverProvider [origin]="trigger.overlayOrigin" align="start">
+      <div scPopoverProvider [origin]="trigger.overlayOrigin" alignment="start">
         <button scDatePickerTrigger #trigger="scDatePickerTrigger" class="w-64">
           <svg siCalendarIcon></svg>
           <span>{{ dp.text() || 'Pick a date' }}</span>

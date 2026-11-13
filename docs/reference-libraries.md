@@ -636,6 +636,7 @@ Rewritten 2026-11-12 (the user: "navigation-menu with next process"): built besi
 
 - **The `navigationMenu` preset key** (`trigger`, `link`, `content`, `popup`), generated from the 8 styles: corners (lyra and sera square, luma `rounded-3xl`), padding (maia, luma, sera `p-2.5 pe-3`, links `p-3`), text (lyra `text-xs`, mira `text-xs/relaxed`), focus ring, the box's shadow and ring. Base UI's `data-popup-open:` is `aria-expanded:` (our trigger's); shadcn's `in-data-[slot=navigation-menu-content]:` link classes are resolved into `link`. The old one had nova's classes in the parts.
 - **`align`** (`start`, `center`, `end`; shadcn's root prop): the panel and the shared box line up under the trigger. Centred by `transform`, apart from the slide's `translate`.
+- **`alignment`, not `align`** (the user, 2026-11-13): Base UI and shadcn name it `align`; ours is `alignment` on every part that had it, since `align` on a `div` is an HTML attribute the browser reads as text alignment.
 - **`closeOnClick` on checkbox and radio items** (2026-11-13): Base UI's `Menu.CheckboxItem` / `Menu.RadioItem` prop, default false (`Menu.Item`'s is true) — the same here; the showcase's theme and preset menus set it.
 - **`closeOnClick` on links** (default true — Base UI's is false: a page shown without reloading would keep the menu open; the user left it to me).
 - **Kept**: the disclosure pattern, panels inside their items and always in the page (Tab order, crawlers), the shared box, the slide from the side you came from, the keyboard.

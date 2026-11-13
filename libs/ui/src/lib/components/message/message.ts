@@ -10,17 +10,15 @@ import { injectPreset } from '../../config/preset';
 @Directive({
   selector: 'div[scMessage]',
   host: {
-    // align is our input: the HTML attribute would align the text in a div.
-    '[attr.align]': 'null',
     'data-slot': 'message',
-    '[attr.data-align]': 'align()',
+    '[attr.data-align]': 'alignment()',
     '[class]': 'class()',
   },
 })
 export class ScMessage {
   private readonly styles = injectPreset().message;
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly align = input<'start' | 'end'>('start');
+  readonly alignment = input<'start' | 'end'>('start');
 
   protected readonly class = computed(() =>
     cn(this.styles.root, this.classInput()),

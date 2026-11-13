@@ -77,7 +77,7 @@ import { SiChevronDownIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
             <ng-template scComboboxPortal>
               <div scComboboxPopup aria-label="Country" class="min-w-72">
                 <div scInputGroup>
-                  <div scInputGroupAddon align="inline-start">
+                  <div scInputGroupAddon alignment="inline-start">
                     <svg siSearchIcon></svg>
                   </div>
                   <input

@@ -30,7 +30,7 @@ No part of its own: any control calls the manager.
 The way back to the OS's theme, which a one-click button loses. The Menu's radio items, the mode as their value:
 
 ```html
-<div scMenuProvider align="end">
+<div scMenuProvider alignment="end">
   <button scButton scMenuTrigger variant="outline" size="icon">
     <svg siSunIcon></svg>
     <span class="sr-only">Theme</span>

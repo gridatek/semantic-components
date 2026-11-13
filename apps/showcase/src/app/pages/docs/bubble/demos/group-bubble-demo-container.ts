@@ -36,17 +36,17 @@ import {
         <div scBubbleContent>Can you tell me what&apos;s the issue?</div>
       </div>
       <div scBubbleGroup>
-        <div scBubble align="end">
+        <div scBubble alignment="end">
           <div scBubbleContent>You tell me!</div>
         </div>
-        <div scBubble align="end">
+        <div scBubble alignment="end">
           <div scBubbleContent>It worked yesterday. You broke it!</div>
         </div>
-        <div scBubble align="end">
+        <div scBubble alignment="end">
           <div scBubbleContent>Find the bug and fix it.</div>
           <div
             scBubbleReactions
-            align="start"
+            alignment="start"
             role="img"
             aria-label="Reaction: eyes"
           >

@@ -21,14 +21,14 @@ A short label shown when the pointer rests on a control or the keyboard reaches 
 
 ## Parts
 
-| Part                | Selector                       | What it does                                                                                                                                                                |
-| ------------------- | ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ScTooltipProvider` | `div[scTooltipProvider]`       | `[(open)]`, `side` (`top`, `bottom`, `left`, `right`, `inline-start`, `inline-end`; flips without room), `align`, `offset` (4), `delay` (600), `closeDelay` (0), `disabled` |
-| `ScTooltipTrigger`  | `[scTooltipTrigger]`           | Your control: the pointer's hover opens it after the delay, keyboard focus at once; leaving, blur, a click and Escape close it; `aria-describedby` while open               |
-| `ScTooltipPortal`   | `ng-template[scTooltipPortal]` | The content, rendered while open                                                                                                                                            |
-| `ScTooltip`         | `div[scTooltip]`               | The tooltip: `role="tooltip"`, `data-side`, the preset's look; the pointer can move onto it; animates in and out                                                            |
-| `ScTooltipArrow`    | `span[scTooltipArrow]`         | Your arrow, on the side towards the trigger                                                                                                                                 |
-| `ScTooltipGroup`    | `[scTooltipGroup]`             | Tooltips side by side (a toolbar): once one has shown, the next opens at once and the one before closes (`timeout`, 400)                                                    |
+| Part                | Selector                       | What it does                                                                                                                                                                    |
+| ------------------- | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ScTooltipProvider` | `div[scTooltipProvider]`       | `[(open)]`, `side` (`top`, `bottom`, `left`, `right`, `inline-start`, `inline-end`; flips without room), `alignment`, `offset` (4), `delay` (600), `closeDelay` (0), `disabled` |
+| `ScTooltipTrigger`  | `[scTooltipTrigger]`           | Your control: the pointer's hover opens it after the delay, keyboard focus at once; leaving, blur, a click and Escape close it; `aria-describedby` while open                   |
+| `ScTooltipPortal`   | `ng-template[scTooltipPortal]` | The content, rendered while open                                                                                                                                                |
+| `ScTooltip`         | `div[scTooltip]`               | The tooltip: `role="tooltip"`, `data-side`, the preset's look; the pointer can move onto it; animates in and out                                                                |
+| `ScTooltipArrow`    | `span[scTooltipArrow]`         | Your arrow, on the side towards the trigger                                                                                                                                     |
+| `ScTooltipGroup`    | `[scTooltipGroup]`             | Tooltips side by side (a toolbar): once one has shown, the next opens at once and the one before closes (`timeout`, 400)                                                        |
 
 `scTooltip` and `scTooltipArrow` read `SC_TOOLTIP_CONTEXT` (its id, its side, keep open / hide soon): the provider gives it, and a component that shows a tooltip of its own can too — the Sidebar's collapsed menu buttons use these parts, not copies.
 

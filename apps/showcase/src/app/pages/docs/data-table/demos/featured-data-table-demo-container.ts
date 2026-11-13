@@ -342,7 +342,7 @@ const SAMPLE_DATA: User[] = [
           class="max-w-sm"
         />
 
-        <div scPopoverProvider align="end">
+        <div scPopoverProvider alignment="end">
           <button scButton variant="outline" scPopoverTrigger>
             <svg siColumns3Icon></svg>
             Columns
@@ -460,7 +460,7 @@ const SAMPLE_DATA: User[] = [
                         {{ formatDate(row.original.createdAt) }}
                       }
                       @case ('actions') {
-                        <div scMenuProvider align="end">
+                        <div scMenuProvider alignment="end">
                           <button
                             scButton
                             scMenuTrigger

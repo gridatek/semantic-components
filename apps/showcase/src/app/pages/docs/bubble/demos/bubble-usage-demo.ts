@@ -11,7 +11,7 @@ import {
   imports: [ScBubbleGroup, ScBubble, ScBubbleContent, ScBubbleReactions],
   template: `
     <div class="flex w-full max-w-sm flex-col gap-8 py-6">
-      <div scBubble align="end">
+      <div scBubble alignment="end">
         <div scBubbleContent>Hey there! What&apos;s up?</div>
       </div>
       <div scBubbleGroup>
@@ -28,7 +28,7 @@ import {
           </div>
         </div>
       </div>
-      <div scBubble align="end">
+      <div scBubble alignment="end">
         <div scBubbleContent>Sure. Hit me with your best demo.</div>
       </div>
       <div scBubble variant="muted">

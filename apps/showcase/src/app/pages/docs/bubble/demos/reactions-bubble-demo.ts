@@ -13,13 +13,13 @@ import {
   imports: [ScFrame, ScBubble, ScBubbleContent, ScBubbleReactions, ScButton],
   template: `
     <div class="flex w-full max-w-sm flex-col gap-12 py-6">
-      <div scBubble variant="muted" align="end">
+      <div scBubble variant="muted" alignment="end">
         <div scBubbleContent>
           I don&apos;t need tests, I know my code works.
         </div>
         <div
           scBubbleReactions
-          align="start"
+          alignment="start"
           role="img"
           aria-label="Reactions: thumbs up, surprised"
         >
@@ -42,14 +42,14 @@ import {
           <span>+2</span>
         </div>
       </div>
-      <div scBubble align="end">
+      <div scBubble alignment="end">
         <div scBubbleContent>
           Tests passed on the first try. All 142 of them. Looking good!
         </div>
         <div
           scBubbleReactions
           side="top"
-          align="start"
+          alignment="start"
           role="img"
           aria-label="Reactions: party popper, clapping hands"
         >

@@ -603,7 +603,7 @@ const INK_COLORS = [
             </select>
             <svg siChevronDownIcon scNativeSelectIcon></svg>
           </div>
-          <div scPopoverProvider side="bottom" align="start">
+          <div scPopoverProvider side="bottom" alignment="start">
             <div scTooltipProvider side="bottom">
               <button
                 scButton
@@ -731,7 +731,7 @@ const INK_COLORS = [
               </ng-template>
             </div>
           </div>
-          <div scPopoverProvider side="bottom" align="end">
+          <div scPopoverProvider side="bottom" alignment="end">
             <div scTooltipProvider side="bottom">
               <button
                 scButton
@@ -881,7 +881,7 @@ const INK_COLORS = [
           <div
             scPopoverProvider
             side="bottom"
-            align="end"
+            alignment="end"
             [(open)]="signaturesOpen"
           >
             <div scTooltipProvider side="bottom">
@@ -982,7 +982,7 @@ const INK_COLORS = [
             </ng-template>
           </div>
 
-          <div scMenuProvider side="bottom" align="end">
+          <div scMenuProvider side="bottom" alignment="end">
             <div scTooltipProvider side="bottom">
               <button
                 scButton

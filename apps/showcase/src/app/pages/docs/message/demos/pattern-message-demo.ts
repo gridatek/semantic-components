@@ -41,7 +41,7 @@ import {
   ],
   template: `
     <div class="flex w-full max-w-sm flex-col gap-8 py-6" aria-live="polite">
-      <div scMessage align="end">
+      <div scMessage alignment="end">
         <div scMessageContent>
           <div scBubble variant="muted">
             <div scBubbleContent>

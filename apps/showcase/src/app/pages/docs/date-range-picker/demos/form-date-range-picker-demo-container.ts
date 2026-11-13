@@ -76,7 +76,11 @@ import {
           mode="range"
           [formField]="bookingForm.stay"
         >
-          <div scPopoverProvider [origin]="trigger.overlayOrigin" align="start">
+          <div
+            scPopoverProvider
+            [origin]="trigger.overlayOrigin"
+            alignment="start"
+          >
             <button
               id="stay"
               scDatePickerTrigger

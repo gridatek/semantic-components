@@ -105,7 +105,7 @@ import { cn } from 'cn';
               / {{ viewer.totalPages() }}
             }
           </span>
-          <div scPopoverProvider side="bottom" align="start">
+          <div scPopoverProvider side="bottom" alignment="start">
             <div scTooltipProvider>
               <button
                 scButton

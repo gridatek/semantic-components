@@ -24,11 +24,9 @@ const position = cva('', {
 @Directive({
   selector: 'div[scBubbleReactions]',
   host: {
-    // align is our input: the HTML attribute would align the text in a div.
-    '[attr.align]': 'null',
     'data-slot': 'bubble-reactions',
     '[attr.data-side]': 'side()',
-    '[attr.data-align]': 'align()',
+    '[attr.data-align]': 'alignment()',
     '[class]': 'class()',
   },
 })
@@ -36,12 +34,12 @@ export class ScBubbleReactions {
   private readonly styles = injectPreset().bubble;
   readonly classInput = input<string>('', { alias: 'class' });
   readonly side = input<'top' | 'bottom'>('bottom');
-  readonly align = input<'start' | 'end'>('end');
+  readonly alignment = input<'start' | 'end'>('end');
 
   protected readonly class = computed(() =>
     cn(
       this.styles.reactions,
-      position({ side: this.side(), align: this.align() }),
+      position({ side: this.side(), align: this.alignment() }),
       this.classInput(),
     ),
   );

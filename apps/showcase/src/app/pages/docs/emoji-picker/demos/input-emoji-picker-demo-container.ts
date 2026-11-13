@@ -89,7 +89,7 @@ import {
   ],
   template: \`
     <div class="w-full max-w-sm">
-      <div scPopoverProvider [origin]="origin" align="end">
+      <div scPopoverProvider [origin]="origin" alignment="end">
         <div scInputGroup cdkOverlayOrigin #origin="cdkOverlayOrigin">
           <input
             #message
@@ -99,7 +99,7 @@ import {
             [value]="text()"
             (input)="text.set(message.value)"
           />
-          <div scInputGroupAddon align="inline-end">
+          <div scInputGroupAddon alignment="inline-end">
             <button scButton variant="ghost" size="icon-xs" scPopoverTrigger>
               <svg siSmileIcon></svg>
               <span class="sr-only">Insert an emoji</span>

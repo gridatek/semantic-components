@@ -7,7 +7,7 @@ import {
   ScPopoverTrigger,
 } from '@semantic-components/ui';
 
-/** align: start, center (default), end — logical: start is the reading start. */
+/** alignment: start, center (default), end — logical: start is the reading start. */
 @Component({
   selector: 'app-alignments-popover-demo',
   imports: [
@@ -19,7 +19,7 @@ import {
   ],
   template: `
     <div class="flex gap-6">
-      <div scPopoverProvider align="start">
+      <div scPopoverProvider alignment="start">
         <button scButton scPopoverTrigger variant="outline" size="sm">
           Start
         </button>
@@ -27,7 +27,7 @@ import {
           <div scPopover class="w-40">Aligned to start</div>
         </ng-template>
       </div>
-      <div scPopoverProvider align="center">
+      <div scPopoverProvider alignment="center">
         <button scButton scPopoverTrigger variant="outline" size="sm">
           Center
         </button>
@@ -35,7 +35,7 @@ import {
           <div scPopover class="w-40">Aligned to center</div>
         </ng-template>
       </div>
-      <div scPopoverProvider align="end">
+      <div scPopoverProvider alignment="end">
         <button scButton scPopoverTrigger variant="outline" size="sm">
           End
         </button>

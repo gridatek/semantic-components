@@ -129,7 +129,7 @@ const WORD_TIME = 50;
                   >
                     <div
                       scMessage
-                      [align]="message.role === 'user' ? 'end' : 'start'"
+                      [alignment]="message.role === 'user' ? 'end' : 'start'"
                     >
                       <div scMessageContent class="gap-3">
                         @if (message.steps?.length) {
@@ -185,7 +185,9 @@ const WORD_TIME = 50;
                         @if (message.text) {
                           <div
                             scBubble
-                            [align]="message.role === 'user' ? 'end' : 'start'"
+                            [alignment]="
+                              message.role === 'user' ? 'end' : 'start'
+                            "
                             [variant]="
                               message.role === 'user' ? 'default' : 'muted'
                             "

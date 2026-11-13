@@ -35,7 +35,7 @@ export class ScNavigationMenuContent {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() => {
-    const align = this.menu.align();
+    const align = this.menu.alignment();
     return cn(
       'text-popover-foreground absolute top-full z-50 mt-2 w-max',
       this.menu.styles.content,

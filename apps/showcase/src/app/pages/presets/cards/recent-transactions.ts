@@ -126,7 +126,7 @@ import {
                     >
                   </td>
                   <td scTableCell class="w-8">
-                    <div scMenuProvider align="end">
+                    <div scMenuProvider alignment="end">
                       <button
                         scButton
                         scMenuTrigger

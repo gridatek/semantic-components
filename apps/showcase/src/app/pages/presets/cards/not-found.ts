@@ -53,7 +53,7 @@ import { SiSearchIcon } from '@semantic-icons/lucide-icons';
                 aria-label="Search pages"
               />
               <div scInputGroupAddon><svg siSearchIcon></svg></div>
-              <div scInputGroupAddon align="inline-end">
+              <div scInputGroupAddon alignment="inline-end">
                 <kbd scKbd>/</kbd>
               </div>
             </div>

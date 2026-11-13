@@ -161,7 +161,7 @@ export default class PopoverPage {
       "} from '@semantic-components/ui';",
     ].join('\n'),
     markup: [
-      '<div scPopoverProvider side="…" align="…">',
+      '<div scPopoverProvider side="…" alignment="…">',
       '  <button scButton scPopoverTrigger>…</button>',
       '  <ng-template scPopoverPortal>',
       '    <div scPopover>',

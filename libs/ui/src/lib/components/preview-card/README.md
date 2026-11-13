@@ -15,12 +15,12 @@ A preview of a link's destination, shown on hover or keyboard focus — shadcn's
 
 ## Parts
 
-| Part                    | Selector                                                  | What it does                                                                                                         |
-| ----------------------- | --------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| `ScPreviewCardProvider` | `div[scPreviewCardProvider]`                              | `[(open)]`, `side` (`bottom`, `top`, `left`, `right`, `inline-start`, `inline-end`), `align`, `offset` (4), `origin` |
-| `ScPreviewCardTrigger`  | `a[scPreviewCardTrigger]`, `button[scPreviewCardTrigger]` | Your link (or button): `delay` (600), `closeDelay` (300); `data-popup-open` while open                               |
-| `ScPreviewCardPortal`   | `ng-template[scPreviewCardPortal]`                        | The content, rendered while open                                                                                     |
-| `ScPreviewCard`         | `div[scPreviewCard]`                                      | The card in the preset's look; `data-side` as placed (after a flip); animates in and out                             |
+| Part                    | Selector                                                  | What it does                                                                                                             |
+| ----------------------- | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `ScPreviewCardProvider` | `div[scPreviewCardProvider]`                              | `[(open)]`, `side` (`bottom`, `top`, `left`, `right`, `inline-start`, `inline-end`), `alignment`, `offset` (4), `origin` |
+| `ScPreviewCardTrigger`  | `a[scPreviewCardTrigger]`, `button[scPreviewCardTrigger]` | Your link (or button): `delay` (600), `closeDelay` (300); `data-popup-open` while open                                   |
+| `ScPreviewCardPortal`   | `ng-template[scPreviewCardPortal]`                        | The content, rendered while open                                                                                         |
+| `ScPreviewCard`         | `div[scPreviewCard]`                                      | The card in the preset's look; `data-side` as placed (after a flip); animates in and out                                 |
 
 ## Keyboard and screen readers
 

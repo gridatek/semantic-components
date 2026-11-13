@@ -108,7 +108,7 @@ export class UsersTable {
 Use `scDataTableColumnVisibility` checkboxes in a `scPopover` (it positions itself, flips when there's no room, and handles Escape and outside clicks):
 
 ```html
-<div scPopoverProvider align="end">
+<div scPopoverProvider alignment="end">
   <button scButton variant="outline" scPopoverTrigger>
     <svg siColumns3Icon></svg>
     Columns

@@ -37,7 +37,7 @@ import {
         placeholder="Autoresize textarea..."
         class="flex field-sizing-content min-h-16 w-full resize-none rounded-md bg-transparent px-3 py-2.5 text-base outline-none md:text-sm"
       ></textarea>
-      <div scInputGroupAddon align="block-end">
+      <div scInputGroupAddon alignment="block-end">
         <button scInputGroupButton variant="default" size="sm" class="ms-auto">
           Submit
         </button>

@@ -44,7 +44,7 @@ import {
     ScTimelineTime,
   ],
   template: \`
-    <ol scTimeline align="alternate" class="w-full max-w-2xl">
+    <ol scTimeline alignment="alternate" class="w-full max-w-2xl">
       @for (event of history; track event.title) {
         <li scTimelineItem>
           <div scTimelineOpposite>

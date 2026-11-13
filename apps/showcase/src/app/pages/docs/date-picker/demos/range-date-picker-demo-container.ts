@@ -63,7 +63,7 @@ import {
       [(value)]="stay"
       class="w-fit"
     >
-      <div scPopoverProvider [origin]="trigger.overlayOrigin" align="start">
+      <div scPopoverProvider [origin]="trigger.overlayOrigin" alignment="start">
         <button scDatePickerTrigger #trigger="scDatePickerTrigger" class="w-72">
           <svg siCalendarIcon></svg>
           <span>{{ dp.text() || 'Pick your dates' }}</span>

@@ -103,7 +103,7 @@ interface Task {
               >
                 <div class="flex items-start gap-2">
                   <span class="flex-1 font-medium">{{ task.title }}</span>
-                  <div scMenuProvider align="end">
+                  <div scMenuProvider alignment="end">
                     <button
                       scButton
                       scMenuTrigger

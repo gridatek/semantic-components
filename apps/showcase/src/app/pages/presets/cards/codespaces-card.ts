@@ -154,7 +154,7 @@ import {
                       <div scTooltip>Create a codespace on main</div>
                     </ng-template>
                   </div>
-                  <div scMenuProvider align="end">
+                  <div scMenuProvider alignment="end">
                     <button
                       scButton
                       scMenuTrigger
@@ -278,7 +278,7 @@ import {
                           }}</label>
                           <div scInputGroup>
                             <input scInput readonly [value]="remote.url" />
-                            <div scInputGroupAddon align="inline-end">
+                            <div scInputGroupAddon alignment="inline-end">
                               <button
                                 scInputGroupButton
                                 variant="ghost"

@@ -43,7 +43,7 @@ import {
     SiVolumeOffIcon,
   ],
   template: `
-    <div scMenuProvider align="end">
+    <div scMenuProvider alignment="end">
       <div scControlGroup aria-label="Follow">
         <button scButton variant="outline">Follow</button>
         <button scButton scMenuTrigger variant="outline" class="ps-2!">

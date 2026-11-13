@@ -50,7 +50,11 @@ import {
       <div scField>
         <label scLabel for="arrival">Arrival</label>
         <div scDatePicker #dp="scDatePicker" [formField]="bookingForm.arrival">
-          <div scPopoverProvider [origin]="trigger.overlayOrigin" align="start">
+          <div
+            scPopoverProvider
+            [origin]="trigger.overlayOrigin"
+            alignment="start"
+          >
             <button
               id="arrival"
               scDatePickerTrigger

@@ -77,7 +77,7 @@ import {
             </li>
             <li scBreadcrumbSeparator><svg siChevronRightIcon></svg></li>
             <li scBreadcrumbItem>
-              <div scMenuProvider align="start">
+              <div scMenuProvider alignment="start">
                 <button scButton scMenuTrigger variant="ghost" size="icon-sm">
                   <svg siEllipsisIcon></svg>
                   <span class="sr-only">Account options</span>

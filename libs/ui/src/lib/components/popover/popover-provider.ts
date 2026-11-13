@@ -81,8 +81,6 @@ export type ScPopoverModal = boolean | 'trap-focus';
     }
   `,
   host: {
-    // align is our input: the HTML attribute would align the text in a div.
-    '[attr.align]': 'null',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
@@ -102,7 +100,7 @@ export class ScPopoverProvider {
   /** Which side of the anchor it goes on; flips when there is no room. */
   readonly side = input<ScPopoverSide>('bottom');
   /** Along that side: `start`, `center`, `end` (logical). */
-  readonly align = input<ScOverlayAlign>('center');
+  readonly alignment = input<ScOverlayAlign>('center');
   /** The gap from the anchor (px). */
   readonly offset = input(4);
   /** Another anchor than the trigger (an input group…). */
@@ -126,7 +124,7 @@ export class ScPopoverProvider {
   protected readonly positions = computed(() =>
     buildOverlayPositionsWithFallback(
       physicalSide(this.side(), this.direction.value),
-      this.align(),
+      this.alignment(),
       this.offset(),
       this.direction.value,
     ),

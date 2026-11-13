@@ -76,7 +76,7 @@ interface Country {
             placeholder="Select a country"
             aria-label="Country"
           />
-          <div scInputGroupAddon align="inline-end">
+          <div scInputGroupAddon alignment="inline-end">
             <button scComboboxTrigger>
               <svg siChevronDownIcon></svg>
               <span class="sr-only">Show the list</span>

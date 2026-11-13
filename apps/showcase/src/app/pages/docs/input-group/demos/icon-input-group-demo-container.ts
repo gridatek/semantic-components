@@ -75,7 +75,7 @@ import {
         <div scInputGroupAddon>
           <svg siCreditCardIcon></svg>
         </div>
-        <div scInputGroupAddon align="inline-end">
+        <div scInputGroupAddon alignment="inline-end">
           <svg siCheckIcon></svg>
         </div>
       </div>
@@ -86,7 +86,7 @@ import {
           aria-label="Saved card number"
           inputmode="numeric"
         />
-        <div scInputGroupAddon align="inline-end">
+        <div scInputGroupAddon alignment="inline-end">
           <svg siStarIcon></svg>
           <svg siInfoIcon></svg>
         </div>

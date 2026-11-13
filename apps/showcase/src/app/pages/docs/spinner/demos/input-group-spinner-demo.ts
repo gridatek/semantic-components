@@ -38,7 +38,7 @@ import {
           aria-label="Message"
           disabled
         />
-        <div scInputGroupAddon align="inline-end">
+        <div scInputGroupAddon alignment="inline-end">
           <svg scSpinner siLoaderCircleIcon aria-label="Sending"></svg>
         </div>
       </div>
@@ -48,7 +48,7 @@ import {
           placeholder="Send a message..."
           aria-label="Message"
         ></textarea>
-        <div scInputGroupAddon align="block-end">
+        <div scInputGroupAddon alignment="block-end">
           <svg scSpinner siLoaderCircleIcon aria-label="Validating"></svg>
           Validating...
           <button scInputGroupButton variant="default" class="ms-auto">

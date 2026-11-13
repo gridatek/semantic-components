@@ -55,7 +55,7 @@ import {
     <div
       scMenuProvider
       [side]="inSidebar() ? 'top' : 'bottom'"
-      [align]="inSidebar() ? 'start' : 'end'"
+      [alignment]="inSidebar() ? 'start' : 'end'"
     >
       @if (inSidebar()) {
         <button

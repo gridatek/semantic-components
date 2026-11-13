@@ -17,14 +17,14 @@ import {
           <span>👍</span>
         </div>
       </div>
-      <div scBubble align="end">
+      <div scBubble alignment="end">
         <div scBubbleContent>بالتأكيد. أرني أفضل عرض لديك.</div>
       </div>
       <div scBubble variant="muted">
         <div scBubbleContent>أنت تقرأ عرضًا يعرض نفسه.</div>
         <div
           scBubbleReactions
-          align="start"
+          alignment="start"
           role="img"
           aria-label="تفاعلات: نار، عيون"
         >

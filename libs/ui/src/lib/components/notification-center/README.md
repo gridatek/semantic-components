@@ -123,7 +123,7 @@ Put `scNotificationCenter` around the popover, so the trigger can show the count
 
 ```html
 <div scNotificationCenter #center="scNotificationCenter" [(notifications)]="notifications">
-  <div scPopoverProvider align="end">
+  <div scPopoverProvider alignment="end">
     <button scButton variant="outline" size="icon" scPopoverTrigger>
       <svg siBellIcon></svg>
       <span scNotificationCount [max]="9"></span>

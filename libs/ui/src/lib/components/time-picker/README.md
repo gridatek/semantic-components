@@ -25,10 +25,10 @@ The value, the locale and the limits are the time input's: put `[formField]` on 
 <div scField>
   <label scLabel>Meeting</label>
   <div scTimePicker>
-    <div scPopoverProvider [origin]="anchor" align="start">
+    <div scPopoverProvider [origin]="anchor" alignment="start">
       <div scInputGroup cdkOverlayOrigin #anchor="cdkOverlayOrigin">
         <div scTimeInput [formField]="form.meeting"></div>
-        <div scInputGroupAddon align="inline-end">
+        <div scInputGroupAddon alignment="inline-end">
           <button scTimePickerTrigger #trigger="scTimePickerTrigger">
             <svg siClockIcon></svg>
             <span class="sr-only">Choose a time</span>

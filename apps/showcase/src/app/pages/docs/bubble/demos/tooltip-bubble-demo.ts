@@ -32,7 +32,7 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
       <div scBubble variant="secondary">
         <div scBubbleContent>Did you remove the stale route?</div>
       </div>
-      <div scBubble align="end">
+      <div scBubble alignment="end">
         <div scBubbleContent>Yes, removed it from the registry.</div>
         <div scBubbleReactions>
           <div scTooltipProvider>

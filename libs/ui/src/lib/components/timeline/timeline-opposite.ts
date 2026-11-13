@@ -25,7 +25,7 @@ export class ScTimelineOpposite {
       end: 'col-start-3 ps-4',
       alternate:
         'col-start-1 pe-4 text-end group-even/item:col-start-3 group-even/item:pe-0 group-even/item:ps-4 group-even/item:text-start',
-    }[this.timeline.align()];
+    }[this.timeline.alignment()];
     return cn(
       'text-muted-foreground row-start-1 pt-0.5 text-sm',
       side,

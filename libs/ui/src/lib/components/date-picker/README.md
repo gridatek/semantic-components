@@ -28,7 +28,7 @@ The calendar is the [calendar](../calendar/README.md), written in full: its head
 
 ```html
 <div scDatePicker #dp="scDatePicker" [(value)]="date">
-  <div scPopoverProvider [origin]="trigger.overlayOrigin" align="start">
+  <div scPopoverProvider [origin]="trigger.overlayOrigin" alignment="start">
     <button scDatePickerTrigger #trigger="scDatePickerTrigger">
       <svg siCalendarIcon></svg>
       <span>{{ dp.text() || 'Pick a date' }}</span>
@@ -53,10 +53,10 @@ Typed, in a field — the input and the trigger in an input group; there the tri
 <div scField>
   <label scLabel>Start date</label>
   <div scDatePicker #dp="scDatePicker" [formField]="form.start">
-    <div scPopoverProvider [origin]="anchor" align="start">
+    <div scPopoverProvider [origin]="anchor" alignment="start">
       <div scInputGroup cdkOverlayOrigin #anchor="cdkOverlayOrigin">
         <input scDateInput placeholder="MM/DD/YYYY" />
-        <div scInputGroupAddon align="inline-end">
+        <div scInputGroupAddon alignment="inline-end">
           <button scDatePickerTrigger #trigger="scDatePickerTrigger">
             <svg siCalendarIcon></svg>
             <span class="sr-only">Choose a date</span>

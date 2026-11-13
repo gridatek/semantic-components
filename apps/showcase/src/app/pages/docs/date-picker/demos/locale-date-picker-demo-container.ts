@@ -72,14 +72,14 @@ import {
       [(value)]="date"
       class="w-64"
     >
-      <div scPopoverProvider [origin]="anchor" align="start">
+      <div scPopoverProvider [origin]="anchor" alignment="start">
         <div scInputGroup cdkOverlayOrigin #anchor="cdkOverlayOrigin">
           <input
             scDateInput
             aria-label="Date d’arrivée"
             placeholder="jj/mm/aaaa"
           />
-          <div scInputGroupAddon align="inline-end">
+          <div scInputGroupAddon alignment="inline-end">
             <button scDatePickerTrigger #trigger="scDatePickerTrigger">
               <svg siCalendarIcon></svg>
               <span class="sr-only">Choisir une date</span>

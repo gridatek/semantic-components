@@ -27,7 +27,7 @@ import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
   ],
   template: `
     <div class="flex w-full max-w-sm flex-col gap-8 py-6">
-      <div scMessage align="end">
+      <div scMessage alignment="end">
         <div scMessageContent>
           <div scBubble>
             <div scBubbleContent>Why did the deploy fail?</div>

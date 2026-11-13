@@ -50,7 +50,7 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
           placeholder="Select a timezone"
           aria-label="Timezone"
         />
-        <div scInputGroupAddon align="inline-end">
+        <div scInputGroupAddon alignment="inline-end">
           <button scComboboxTrigger>
             <svg siChevronDownIcon></svg>
             <span class="sr-only">Show the list</span>

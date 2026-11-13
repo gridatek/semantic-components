@@ -77,7 +77,7 @@ import { PreviewCards } from './cards/preview-cards';
           class="flex gap-2.5 overflow-x-auto py-px md:flex-col md:gap-3 md:overflow-visible"
         >
           <li>
-            <div scMenuProvider align="start">
+            <div scMenuProvider alignment="start">
               <button scMenuTrigger scFrame type="button" [class]="card">
                 <span class="flex flex-col">
                   <span class="text-muted-foreground text-xs">Style</span>
@@ -110,7 +110,7 @@ import { PreviewCards } from './cards/preview-cards';
             </div>
           </li>
           <li>
-            <div scMenuProvider align="start">
+            <div scMenuProvider alignment="start">
               <button scMenuTrigger scFrame type="button" [class]="card">
                 <span class="flex flex-col">
                   <span class="text-muted-foreground text-xs">Mode</span>

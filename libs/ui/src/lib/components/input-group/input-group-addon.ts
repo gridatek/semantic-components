@@ -11,10 +11,8 @@ import { injectPreset } from '../../config/preset';
 @Directive({
   selector: 'div[scInputGroupAddon]',
   host: {
-    // align is our input: the HTML attribute would align the text in a div.
-    '[attr.align]': 'null',
     role: 'group',
-    '[attr.data-align]': 'align()',
+    '[attr.data-align]': 'alignment()',
     '[class]': 'class()',
     '(click)': 'focusControl($event)',
   },
@@ -24,10 +22,10 @@ export class ScInputGroupAddon {
   private readonly element = inject<ElementRef<HTMLElement>>(ElementRef);
 
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly align = input<ScInputGroupAddonAlign>('inline-start');
+  readonly alignment = input<ScInputGroupAddonAlign>('inline-start');
 
   protected readonly class = computed(() =>
-    cn(this.styles({ align: this.align() }), this.classInput()),
+    cn(this.styles({ align: this.alignment() }), this.classInput()),
   );
 
   protected focusControl(event: MouseEvent): void {

@@ -90,7 +90,7 @@ export class ScNavigationMenu {
   /** One shared box for the panels, moving from item to item; `false`: each panel its own. */
   readonly viewport = input(true, { transform: booleanAttribute });
   /** Where a panel lines up under its trigger: its start (default), centre or end. */
-  readonly align = input<ScNavigationMenuAlign>('start');
+  readonly alignment = input<ScNavigationMenuAlign>('start');
 
   private readonly itemsSignal = signal<readonly ScNavigationMenuItemRef[]>([]);
   readonly items = this.itemsSignal.asReadonly();
@@ -140,7 +140,7 @@ export class ScNavigationMenu {
         const end = rtl
           ? li.offsetLeft
           : li.offsetLeft + li.offsetWidth - width;
-        const align = this.align();
+        const align = this.alignment();
         const next: ScNavigationMenuBox = {
           left:
             align === 'center'
