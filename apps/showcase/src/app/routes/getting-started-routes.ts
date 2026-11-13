@@ -45,6 +45,11 @@ export const gettingStartedRoutes: Route[] = [
         loadComponent: () => import('../pages/getting-started/i18n-page'),
       },
       {
+        path: 'rtl',
+        title: 'Right to left - Semantic Components',
+        loadComponent: () => import('../pages/getting-started/rtl-page'),
+      },
+      {
         path: 'mcp-server',
         title: 'MCP Server - Semantic Components',
         loadComponent: () => import('../pages/getting-started/mcp-server-page'),

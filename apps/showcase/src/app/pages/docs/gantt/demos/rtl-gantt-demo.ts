@@ -5,6 +5,7 @@ import {
   rowExpandingFeature,
   tableFeatures,
 } from '@tanstack/angular-table';
+import { Dir } from '@angular/cdk/bidi';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScTable,
@@ -78,6 +79,7 @@ const columns = columnHelper.columns([
 @Component({
   selector: 'app-rtl-gantt-demo',
   imports: [
+    Dir,
     ScTable,
     ScTableBody,
     ScTableCell,

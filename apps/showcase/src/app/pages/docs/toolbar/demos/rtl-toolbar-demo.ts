@@ -1,3 +1,4 @@
+import { Dir } from '@angular/cdk/bidi';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
@@ -16,6 +17,7 @@ import {
 @Component({
   selector: 'app-rtl-toolbar-demo',
   imports: [
+    Dir,
     ScButton,
     ScToggle,
     ScToolbar,

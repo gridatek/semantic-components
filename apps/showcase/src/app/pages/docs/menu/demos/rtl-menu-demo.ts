@@ -1,3 +1,4 @@
+import { Dir } from '@angular/cdk/bidi';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
@@ -25,6 +26,7 @@ import { SiCheckIcon, SiChevronRightIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-rtl-menu-demo',
   imports: [
+    Dir,
     ScButton,
     ScMenu,
     ScMenuCheckboxItem,

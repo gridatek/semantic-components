@@ -1,3 +1,4 @@
+import { Dir } from '@angular/cdk/bidi';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScPagination,
@@ -18,6 +19,7 @@ import {
 @Component({
   selector: 'app-rtl-pagination-demo',
   imports: [
+    Dir,
     ScPagination,
     ScPaginationEllipsis,
     ScPaginationItem,

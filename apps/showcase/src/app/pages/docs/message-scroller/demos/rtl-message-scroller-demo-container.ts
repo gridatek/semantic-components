@@ -18,7 +18,8 @@ import { RtlMessageScrollerDemo } from './rtl-message-scroller-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlMessageScrollerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScBubble,
   ScBubbleContent,
@@ -36,6 +37,7 @@ import { SiArrowDownIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-rtl-message-scroller-demo',
   imports: [
+    Dir,
     ScFrame,
     ScBubble,
     ScBubbleContent,

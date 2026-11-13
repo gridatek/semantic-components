@@ -18,7 +18,8 @@ import { RtlCodeBlockDemo } from './rtl-code-block-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlCodeBlockDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCodeBlock,
   ScCodeBlockActions,
@@ -37,6 +38,7 @@ import {
 @Component({
   selector: 'app-rtl-code-block-demo',
   imports: [
+    Dir,
     ScCodeBlock,
     ScCodeBlockHeader,
     ScCodeBlockTitle,

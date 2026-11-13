@@ -1,3 +1,4 @@
+import { Directionality } from '@angular/cdk/bidi';
 import { Overlay, OverlayModule, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 import { NgTemplateOutlet } from '@angular/common';
@@ -17,7 +18,6 @@ import {
 } from '@angular/core';
 import { cn } from 'cn';
 import { ScFocusTrap } from '../../utilities';
-import { elementDirection } from '../../utils';
 import { ScBackdrop } from '../backdrop';
 import { ScDialogPortal } from './dialog-portal';
 
@@ -46,7 +46,8 @@ export class ScDialogProvider {
    * The direction and language of where the dialog was opened from: it is
    * rendered at the end of the page, outside them.
    */
-  readonly direction = (): 'ltr' | 'rtl' => elementDirection(this.host);
+  private readonly directionality = inject(Directionality);
+  readonly direction = (): 'ltr' | 'rtl' => this.directionality.valueSignal();
   readonly lang = (): string | null =>
     this.host.closest('[lang]')?.getAttribute('lang') ?? null;
 

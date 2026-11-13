@@ -1,8 +1,6 @@
 import { TabList } from '@angular/aria/tabs';
 import {
   Directive,
-  ElementRef,
-  afterNextRender,
   booleanAttribute,
   computed,
   effect,
@@ -13,7 +11,7 @@ import {
 import type { ScTabsListVariant } from '@semantic-components/presets';
 import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { bindInput, elementDirection, setInput } from '../../utils';
+import { bindInput, setInput } from '../../utils';
 import { ScTabs } from './tabs';
 
 /** The list of tabs (role tablist): one tab stop, the arrows inside. */
@@ -69,11 +67,5 @@ export class ScTabsList {
       if (selected !== untracked(this.tabs.value))
         this.tabs.value.set(selected);
     });
-    // Aria reads the document's direction; the list's area may differ (a
-    // right-to-left section): its arrows then follow the area.
-    const host = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
-    afterNextRender(() =>
-      this.tabList.textDirection.set(elementDirection(host)),
-    );
   }
 }

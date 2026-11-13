@@ -18,14 +18,15 @@ import { RtlToggleDemo } from './rtl-toggle-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlToggleDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScToggle } from '@semantic-components/ui';
 import { SiBookmarkIcon } from '@semantic-icons/lucide-icons';
 
 /** In a right-to-left page: the icon at the start, on the right. */
 @Component({
   selector: 'app-rtl-toggle-demo',
-  imports: [ScToggle, SiBookmarkIcon],
+  imports: [Dir, ScToggle, SiBookmarkIcon],
   template: \`
     <div dir="rtl" lang="ar">
       <button scToggle variant="outline" size="sm" [(pressed)]="bookmarked">

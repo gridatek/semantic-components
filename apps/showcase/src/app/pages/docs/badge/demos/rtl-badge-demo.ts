@@ -1,3 +1,4 @@
+import { Dir } from '@angular/cdk/bidi';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ScBadge } from '@semantic-components/ui';
 import { SiBadgeCheckIcon } from '@semantic-icons/lucide-icons';
@@ -5,7 +6,7 @@ import { SiBadgeCheckIcon } from '@semantic-icons/lucide-icons';
 /** Right to left: the badges from the right, the icon at the start (right). */
 @Component({
   selector: 'app-rtl-badge-demo',
-  imports: [ScBadge, SiBadgeCheckIcon],
+  imports: [Dir, ScBadge, SiBadgeCheckIcon],
   template: `
     <div dir="rtl" lang="ar" class="flex w-full flex-wrap justify-center gap-2">
       <span scBadge>شارة</span>

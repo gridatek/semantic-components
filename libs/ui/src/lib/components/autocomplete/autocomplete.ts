@@ -1,5 +1,4 @@
 import { ComboboxPopup } from '@angular/aria/combobox';
-import { Directionality } from '@angular/cdk/bidi';
 import { OverlayModule } from '@angular/cdk/overlay';
 import {
   Component,
@@ -17,7 +16,6 @@ import {
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
 import { cn } from 'cn';
-import { ScElementDirectionality } from '../../utils/element-directionality';
 import { ScPortalOutlet } from '../portal-outlet/portal-outlet';
 import { ScAutocompletePortal } from './autocomplete-portal';
 import { SC_AUTOCOMPLETE, SC_AUTOCOMPLETE_INPUT } from './autocomplete-tokens';
@@ -43,10 +41,7 @@ const positions = [
   selector: 'div[scAutocomplete]',
   exportAs: 'scAutocomplete',
   imports: [ComboboxPopup, OverlayModule, ScPortalOutlet],
-  providers: [
-    { provide: Directionality, useClass: ScElementDirectionality },
-    { provide: SC_AUTOCOMPLETE, useExisting: ScAutocomplete },
-  ],
+  providers: [{ provide: SC_AUTOCOMPLETE, useExisting: ScAutocomplete }],
   template: `
     <ng-content />
     @if (control(); as control) {

@@ -1,4 +1,3 @@
-import { Directionality } from '@angular/cdk/bidi';
 import { CdkScrollable } from '@angular/cdk/scrolling';
 import {
   DestroyRef,
@@ -13,7 +12,6 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { ScElementDirectionality } from '../../utils/element-directionality';
 
 /** How far it is scrolled from each edge (whole px). */
 interface ScScrollAreaNext2Edges {
@@ -40,8 +38,6 @@ const sameEdges = (a: ScScrollAreaNext2Edges, b: ScScrollAreaNext2Edges) =>
  */
 @Directive({
   selector: 'div[scScrollAreaNext2]',
-  // Its direction, not the page's: start and end in a right-to-left box.
-  providers: [{ provide: Directionality, useClass: ScElementDirectionality }],
   hostDirectives: [CdkScrollable],
   host: {
     '[attr.tabindex]': 'overflows() ? 0 : null',

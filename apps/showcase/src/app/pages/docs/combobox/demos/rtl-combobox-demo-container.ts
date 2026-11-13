@@ -18,7 +18,8 @@ import { RtlComboboxDemo } from './rtl-combobox-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlComboboxDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCombobox,
   ScComboboxEmpty,
@@ -40,6 +41,7 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-rtl-combobox-demo',
   imports: [
+    Dir,
     ScCombobox,
     ScComboboxEmpty,
     ScComboboxInput,

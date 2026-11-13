@@ -1,3 +1,4 @@
+import { Dir } from '@angular/cdk/bidi';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScProgress,
@@ -11,6 +12,7 @@ import {
 @Component({
   selector: 'app-rtl-progress-demo',
   imports: [
+    Dir,
     ScProgress,
     ScProgressCircle,
     ScProgressLabel,

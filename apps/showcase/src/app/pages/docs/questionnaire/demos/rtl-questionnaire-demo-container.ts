@@ -18,7 +18,8 @@ import { RtlQuestionnaireDemo } from './rtl-questionnaire-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlQuestionnaireDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, FormRoot, form, required } from '@angular/forms/signals';
 import {
   ScQuestionnaire,
@@ -42,6 +43,7 @@ import {
 @Component({
   selector: 'app-rtl-questionnaire-demo',
   imports: [
+    Dir,
     FormField,
     FormRoot,
     ScQuestionnaire,

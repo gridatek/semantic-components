@@ -18,7 +18,8 @@ import { RtlCollapsibleDemo } from './rtl-collapsible-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlCollapsibleDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
   ScCollapsible,
@@ -32,6 +33,7 @@ import { SiChevronsUpDownIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-rtl-collapsible-demo',
   imports: [
+    Dir,
     ScButton,
     ScCollapsible,
     ScCollapsiblePanel,

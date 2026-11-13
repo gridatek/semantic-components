@@ -1,3 +1,4 @@
+import { Dir } from '@angular/cdk/bidi';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCodeBlock,
@@ -17,6 +18,7 @@ import {
 @Component({
   selector: 'app-rtl-code-block-demo',
   imports: [
+    Dir,
     ScCodeBlock,
     ScCodeBlockHeader,
     ScCodeBlockTitle,

@@ -19,7 +19,6 @@ import {
 } from '@angular/core';
 import { cn } from 'cn';
 import { ScOpenDelay } from '../../utils';
-import { ScElementDirectionality } from '../../utils/element-directionality';
 import {
   type ScOverlayAlign,
   type ScOverlayLogicalSide,
@@ -42,10 +41,7 @@ export type ScTooltipSide = ScOverlayLogicalSide;
  */
 @Component({
   selector: 'div[scTooltipProvider]',
-  providers: [
-    { provide: Directionality, useClass: ScElementDirectionality },
-    { provide: SC_TOOLTIP_CONTEXT, useExisting: ScTooltipProvider },
-  ],
+  providers: [{ provide: SC_TOOLTIP_CONTEXT, useExisting: ScTooltipProvider }],
   imports: [OverlayModule, NgTemplateOutlet],
   template: `
     <ng-content />

@@ -18,7 +18,8 @@ import { RtlMarkerDemo } from './rtl-marker-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlMarkerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScMarker,
   ScMarkerContent,
@@ -30,6 +31,7 @@ import { SiGitBranchIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-rtl-marker-demo',
   imports: [
+    Dir,
     ScMarker,
     ScMarkerIcon,
     ScMarkerContent,

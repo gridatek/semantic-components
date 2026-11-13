@@ -1,3 +1,4 @@
+import { Dir } from '@angular/cdk/bidi';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ScCard, ScCardContent } from '@semantic-components/ui';
 import {
@@ -17,6 +18,7 @@ import {
 @Component({
   selector: 'app-rtl-carousel-demo',
   imports: [
+    Dir,
     ScCarousel,
     ScCarouselItem,
     ScCarouselNext,

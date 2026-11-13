@@ -18,7 +18,8 @@ import { RtlPasswordFieldDemo } from './rtl-password-field-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlPasswordFieldDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
   ScLabel,
@@ -39,6 +40,7 @@ import {
 @Component({
   selector: 'app-rtl-password-field-demo',
   imports: [
+    Dir,
     FormField,
     ScLabel,
     ScPasswordCapsLock,

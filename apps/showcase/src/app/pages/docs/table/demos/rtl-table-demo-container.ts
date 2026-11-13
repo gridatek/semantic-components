@@ -18,7 +18,8 @@ import { RtlTableDemo } from './rtl-table-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlTableDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScTable,
   ScTableBody,
@@ -34,6 +35,7 @@ import {
 @Component({
   selector: 'app-rtl-table-demo',
   imports: [
+    Dir,
     ScTable,
     ScTableBody,
     ScTableCaption,

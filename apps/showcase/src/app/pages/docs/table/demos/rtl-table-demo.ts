@@ -1,3 +1,4 @@
+import { Dir } from '@angular/cdk/bidi';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScTable,
@@ -14,6 +15,7 @@ import {
 @Component({
   selector: 'app-rtl-table-demo',
   imports: [
+    Dir,
     ScTable,
     ScTableBody,
     ScTableCaption,

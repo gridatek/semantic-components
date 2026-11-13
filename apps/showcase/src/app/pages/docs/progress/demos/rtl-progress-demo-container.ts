@@ -18,7 +18,8 @@ import { RtlProgressDemo } from './rtl-progress-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlProgressDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScProgress,
   ScProgressCircle,
@@ -31,6 +32,7 @@ import {
 @Component({
   selector: 'app-rtl-progress-demo',
   imports: [
+    Dir,
     ScProgress,
     ScProgressCircle,
     ScProgressLabel,

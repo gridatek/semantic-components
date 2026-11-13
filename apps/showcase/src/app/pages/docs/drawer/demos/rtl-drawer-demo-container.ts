@@ -18,7 +18,8 @@ import { RtlDrawerDemo } from './rtl-drawer-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlDrawerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScDrawer,
@@ -37,6 +38,7 @@ import {
 @Component({
   selector: 'app-rtl-drawer-demo',
   imports: [
+    Dir,
     ScButton,
     ScDrawer,
     ScDrawerClose,

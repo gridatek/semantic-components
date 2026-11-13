@@ -1,3 +1,4 @@
+import { Dir } from '@angular/cdk/bidi';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
@@ -28,6 +29,7 @@ import {
 @Component({
   selector: 'app-rtl-breadcrumb-demo',
   imports: [
+    Dir,
     RouterLink,
     ScBreadcrumb,
     ScBreadcrumbEllipsis,

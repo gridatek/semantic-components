@@ -1,3 +1,4 @@
+import { Dir } from '@angular/cdk/bidi';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScAvatar,
@@ -15,6 +16,7 @@ import {
 @Component({
   selector: 'app-rtl-message-demo',
   imports: [
+    Dir,
     ScAvatar,
     ScAvatarFallback,
     ScBubble,

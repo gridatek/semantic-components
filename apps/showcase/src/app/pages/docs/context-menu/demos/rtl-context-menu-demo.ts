@@ -1,3 +1,4 @@
+import { Dir } from '@angular/cdk/bidi';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScContextMenu,
@@ -29,6 +30,7 @@ import {
 @Component({
   selector: 'app-rtl-context-menu-demo',
   imports: [
+    Dir,
     ScContextMenu,
     ScContextMenuTrigger,
     ScFrame,

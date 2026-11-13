@@ -17,7 +17,6 @@ import {
 } from '@angular/core';
 import { cn } from 'cn';
 import { ScOpenDelay } from '../../utils';
-import { ScElementDirectionality } from '../../utils/element-directionality';
 import {
   type ScOverlayAlign,
   type ScOverlayLogicalSide,
@@ -40,7 +39,6 @@ export type ScPreviewCardSide = ScOverlayLogicalSide;
  */
 @Component({
   selector: 'div[scPreviewCardProvider]',
-  providers: [{ provide: Directionality, useClass: ScElementDirectionality }],
   imports: [OverlayModule, NgTemplateOutlet],
   template: `
     <ng-content />

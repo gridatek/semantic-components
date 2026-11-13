@@ -18,7 +18,8 @@ import { RtlAlertDialogDemo } from './rtl-alert-dialog-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlAlertDialogDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScAlertDialog,
   ScAlertDialogAction,
@@ -42,6 +43,7 @@ import { SiCircleFadingPlusIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-rtl-alert-dialog-demo',
   imports: [
+    Dir,
     ScAlertDialog,
     ScAlertDialogAction,
     ScAlertDialogCancel,

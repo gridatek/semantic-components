@@ -1,3 +1,4 @@
+import { Dir } from '@angular/cdk/bidi';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
 import {
@@ -7,7 +8,7 @@ import {
 
 @Component({
   selector: 'app-rtl-button-demo',
-  imports: [ScButton, SiArrowLeftIcon, SiArrowRightIcon],
+  imports: [Dir, ScButton, SiArrowLeftIcon, SiArrowRightIcon],
   template: `
     <div dir="rtl" lang="ar" class="flex flex-wrap items-center gap-2">
       <button scButton>إرسال</button>

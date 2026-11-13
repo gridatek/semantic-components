@@ -714,7 +714,7 @@ Rewritten 2026-11-10, in place. shadcn has none; Base UI's Toolbar for the featu
 - **Parts**: `scToolbar` (Aria `Toolbar`), `scToolbarWidget` (Aria `ToolbarWidget`, on any element), `scToolbarWidgetGroup` (Aria `ToolbarWidgetGroup`), `scToolbarSeparator`. A widget's look and state are the part beside it — `scButton`, `scToggle`, `scLink`, `scInput`, a trigger — Base UI's `render` done the Angular way.
 - **Toggles in a widget group**: the group holds their pressed values (an array, `multiple`, `FormValueControl`), `scToggle` with a `value` reads it (the `SC_TOGGLE_VALUES` token). Gone: `ScToolbarToggle`, `ScToolbarToggleGroup`, the toolbar-level `values`.
 - **Base UI's features kept**: `loopFocus` (Aria's `wrap`), disabled widgets still focusable (Aria's `softDisabled`, Base UI's `focusableWhenDisabled`), a group with `disabled`, the input last.
-- **Fixed on the way**: `scLink` in a toolbar takes the widget's roving tabindex (its own binding made it a second Tab stop); `ScElementDirectionality` sets the CDK's `valueSignal` from the element (Aria reads it): the arrows mirrored in a `dir="rtl"` section.
+- **Fixed on the way**: `scLink` in a toolbar takes the widget's roving tabindex (its own binding made it a second Tab stop); the arrows mirrored in a `dir="rtl"` section (since 2026-11-13: CDK's `Dir` on the section, Aria reads its `Directionality`).
 - **Look**: the preset's `frame` (each style's card corners and ring), `p-1 gap-1`.
 - **Examples**: Base UI's Usage (alignment toggles, $ and % buttons, a font Select, a link), With Menu, With Tooltip, With input; ours: Vertical, Disabled, RTL.
 

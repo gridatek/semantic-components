@@ -18,7 +18,8 @@ import { RtlRadioGroupDemo } from './rtl-radio-group-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlRadioGroupDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
   ScFieldDescription,
@@ -32,6 +33,7 @@ import {
 @Component({
   selector: 'app-rtl-radio-group-demo',
   imports: [
+    Dir,
     FormField,
     ScFieldDescription,
     ScLabel,

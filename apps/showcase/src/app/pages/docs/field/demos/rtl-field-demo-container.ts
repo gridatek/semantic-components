@@ -18,7 +18,8 @@ import { RtlFieldDemo } from './rtl-field-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlFieldDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
   ScCheckbox,
@@ -65,6 +66,7 @@ const MONTHS = [
 @Component({
   selector: 'app-rtl-field-demo',
   imports: [
+    Dir,
     ScButton,
     ScCheckbox,
     ScCheckboxField,

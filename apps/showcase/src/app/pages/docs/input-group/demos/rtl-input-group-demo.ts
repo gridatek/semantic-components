@@ -1,3 +1,4 @@
+import { Dir } from '@angular/cdk/bidi';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScField,
@@ -16,6 +17,7 @@ import { SiLoaderCircleIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-rtl-input-group-demo',
   imports: [
+    Dir,
     ScField,
     ScFieldDescription,
     ScInput,

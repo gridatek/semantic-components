@@ -18,7 +18,8 @@ import { RtlEmptyDemo } from './rtl-empty-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlEmptyDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScEmpty,
@@ -34,6 +35,7 @@ import { SiFolderCodeIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-rtl-empty-demo',
   imports: [
+    Dir,
     ScButton,
     ScEmpty,
     ScEmptyBody,

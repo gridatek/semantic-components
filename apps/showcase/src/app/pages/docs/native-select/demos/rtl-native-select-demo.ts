@@ -1,3 +1,4 @@
+import { Dir } from '@angular/cdk/bidi';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScField,
@@ -13,6 +14,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-rtl-native-select-demo',
   imports: [
+    Dir,
     ScField,
     ScLabel,
     ScNativeSelect,

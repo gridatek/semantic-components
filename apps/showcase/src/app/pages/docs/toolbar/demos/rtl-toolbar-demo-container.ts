@@ -18,7 +18,8 @@ import { RtlToolbarDemo } from './rtl-toolbar-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlToolbarDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
   ScToggle,
@@ -36,6 +37,7 @@ import {
 @Component({
   selector: 'app-rtl-toolbar-demo',
   imports: [
+    Dir,
     ScButton,
     ScToggle,
     ScToolbar,

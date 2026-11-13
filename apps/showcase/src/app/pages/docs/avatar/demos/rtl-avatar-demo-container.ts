@@ -18,7 +18,8 @@ import { RtlAvatarDemo } from './rtl-avatar-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlAvatarDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScAvatar,
   ScAvatarBadge,
@@ -32,6 +33,7 @@ import {
 @Component({
   selector: 'app-rtl-avatar-demo',
   imports: [
+    Dir,
     ScAvatar,
     ScAvatarBadge,
     ScAvatarFallback,

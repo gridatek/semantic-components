@@ -1,3 +1,4 @@
+import { Dir } from '@angular/cdk/bidi';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCheckbox,
@@ -8,7 +9,7 @@ import {
 /** In a right-to-left page: the checkboxes at the right, the parent first. */
 @Component({
   selector: 'app-rtl-checkbox-group-demo',
-  imports: [ScCheckbox, ScCheckboxField, ScCheckboxGroup],
+  imports: [Dir, ScCheckbox, ScCheckboxField, ScCheckboxGroup],
   template: `
     <div dir="rtl" lang="ar">
       <div

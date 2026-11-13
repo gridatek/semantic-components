@@ -18,7 +18,8 @@ import { RtlTraceDemo } from './rtl-trace-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlTraceDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCollapsible,
   ScCollapsiblePanel,
@@ -44,6 +45,7 @@ import {
 @Component({
   selector: 'app-rtl-trace-demo',
   imports: [
+    Dir,
     ScCollapsible,
     ScCollapsiblePanel,
     ScCollapsibleTrigger,

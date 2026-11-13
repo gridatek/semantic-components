@@ -18,7 +18,8 @@ import { RtlCardDemo } from './rtl-card-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlCardDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   FormField,
   FormRoot,
@@ -46,6 +47,7 @@ import {
 @Component({
   selector: 'app-rtl-card-demo',
   imports: [
+    Dir,
     FormField,
     FormRoot,
     ScButton,

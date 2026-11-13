@@ -1,3 +1,4 @@
+import { Dir } from '@angular/cdk/bidi';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScAlert,
@@ -12,6 +13,7 @@ import { SiCircleCheckIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-rtl-alert-demo',
   imports: [
+    Dir,
     ScAlert,
     ScAlertAction,
     ScAlertDescription,

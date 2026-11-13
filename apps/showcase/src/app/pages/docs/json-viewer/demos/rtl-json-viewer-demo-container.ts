@@ -18,12 +18,13 @@ import { RtlJsonViewerDemo } from './rtl-json-viewer-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlJsonViewerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { ScJsonViewer } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-rtl-json-viewer-demo',
-  imports: [ScJsonViewer],
+  imports: [Dir, ScJsonViewer],
   template: \`
     <ul
       scJsonViewer

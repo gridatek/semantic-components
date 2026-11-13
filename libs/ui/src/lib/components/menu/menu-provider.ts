@@ -20,7 +20,6 @@ import {
   buildOverlayPositionsWithFallback,
   setInput,
 } from '../../utils';
-import { ScElementDirectionality } from '../../utils/element-directionality';
 import { SC_MENU, type ScMenuContext } from './menu-context';
 import { ScMenuPortal } from './menu-portal';
 import { ScMenuTrigger } from './menu-trigger';
@@ -31,10 +30,7 @@ export type ScMenuSide = 'top' | 'bottom';
 /** Holds the menu: open or not, where it opens; renders it in an overlay. */
 @Component({
   selector: 'div[scMenuProvider]',
-  providers: [
-    { provide: Directionality, useClass: ScElementDirectionality },
-    { provide: SC_MENU, useExisting: ScMenuProvider },
-  ],
+  providers: [{ provide: SC_MENU, useExisting: ScMenuProvider }],
   imports: [OverlayModule, NgTemplateOutlet],
   template: `
     <ng-content />

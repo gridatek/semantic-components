@@ -18,7 +18,8 @@ import { RtlNativeSelectDemo } from './rtl-native-select-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlNativeSelectDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScField,
   ScLabel,
@@ -33,6 +34,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-rtl-native-select-demo',
   imports: [
+    Dir,
     ScField,
     ScLabel,
     ScNativeSelect,

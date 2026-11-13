@@ -18,7 +18,8 @@ import { RtlPaginationDemo } from './rtl-pagination-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlPaginationDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScPagination,
   ScPaginationEllipsis,
@@ -38,6 +39,7 @@ import {
 @Component({
   selector: 'app-rtl-pagination-demo',
   imports: [
+    Dir,
     ScPagination,
     ScPaginationEllipsis,
     ScPaginationItem,

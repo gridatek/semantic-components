@@ -18,7 +18,8 @@ import { RtlInputGroupDemo } from './rtl-input-group-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlInputGroupDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScField,
   ScFieldDescription,
@@ -36,6 +37,7 @@ import { SiLoaderCircleIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-rtl-input-group-demo',
   imports: [
+    Dir,
     ScField,
     ScFieldDescription,
     ScInput,

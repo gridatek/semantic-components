@@ -18,7 +18,8 @@ import { RtlCarouselDemo } from './rtl-carousel-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlCarouselDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { ScCard, ScCardContent } from '@semantic-components/ui';
 import {
   ScCarousel,
@@ -37,6 +38,7 @@ import {
 @Component({
   selector: 'app-rtl-carousel-demo',
   imports: [
+    Dir,
     ScCarousel,
     ScCarouselItem,
     ScCarouselNext,

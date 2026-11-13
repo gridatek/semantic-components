@@ -1,3 +1,4 @@
+import { Dir } from '@angular/cdk/bidi';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScAlertDialog,
@@ -22,6 +23,7 @@ import { SiCircleFadingPlusIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-rtl-alert-dialog-demo',
   imports: [
+    Dir,
     ScAlertDialog,
     ScAlertDialogAction,
     ScAlertDialogCancel,

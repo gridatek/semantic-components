@@ -29,6 +29,6 @@ A widget is `scToolbarWidget` beside the part that gives it its look: `scButton`
 
 ## Keyboard
 
-One Tab stop; the arrow keys move between the widgets — Left and Right mirrored right to left (the toolbar's own direction: `ScElementDirectionality`, a `dir="rtl"` section too), Up and Down when vertical — Home and End to the ends, wrapping (`loopFocus`). A disabled widget stays reachable, announced as disabled (`softDisabled`). An input: one at most, last — Left and Right also move its text cursor.
+One Tab stop; the arrow keys move between the widgets — Left and Right mirrored right to left (CDK's `Directionality`: the page's, or a `dir="rtl"` section's with CDK's `Dir` directive), Up and Down when vertical — Home and End to the ends, wrapping (`loopFocus`). A disabled widget stays reachable, announced as disabled (`softDisabled`). An input: one at most, last — Left and Right also move its text cursor.
 
 A toggle group on its own, outside a toolbar, is the Toggle Group (`scToggleGroup`): its own Tab stop and keys, Base UI's.

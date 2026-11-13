@@ -18,7 +18,8 @@ import { RtlScrollAreaNext2Demo } from './rtl-scroll-area-next2-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlScrollAreaNext2DemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScFrame,
   ScScrollAreaNext2,
@@ -28,7 +29,7 @@ import {
 /** In a right-to-left page: the browser puts the scrollbar on the left. */
 @Component({
   selector: 'app-rtl-scroll-area-next2-demo',
-  imports: [ScFrame, ScScrollAreaNext2, ScSeparator],
+  imports: [Dir, ScFrame, ScScrollAreaNext2, ScSeparator],
   template: \`
     <div dir="rtl" lang="ar">
       <div scScrollAreaNext2 scFrame class="h-72 w-48">

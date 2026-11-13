@@ -258,6 +258,17 @@ import { ConfigService } from '../../services/config-service';
                     <li scSidebarMenuSubItem>
                       <a
                         scSidebarMenuSubButton
+                        routerLink="/docs/getting-started/rtl"
+                        routerLinkActive
+                        #rtlRla="routerLinkActive"
+                        [active]="rtlRla.isActive"
+                      >
+                        <span>Right to left</span>
+                      </a>
+                    </li>
+                    <li scSidebarMenuSubItem>
+                      <a
+                        scSidebarMenuSubButton
                         routerLink="/docs/getting-started/mcp-server"
                         routerLinkActive
                         #mcpServerRla="routerLinkActive"
@@ -474,6 +485,7 @@ export class DocsLayout {
       path: '/docs/getting-started/custom-preset',
     },
     { name: 'Internationalization', path: '/docs/getting-started/i18n' },
+    { name: 'Right to left', path: '/docs/getting-started/rtl' },
     { name: 'MCP Server', path: '/docs/getting-started/mcp-server' },
     ...[...this.components(), ...this.utilities(), ...this.recipes()].map(
       (item) => ({ name: item.name, path: '/docs/components/' + item.path }),

@@ -18,7 +18,8 @@ import { RtlPopoverDemo } from './rtl-popover-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlPopoverDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScPopover,
@@ -34,6 +35,7 @@ import {
 @Component({
   selector: 'app-rtl-popover-demo',
   imports: [
+    Dir,
     ScButton,
     ScPopover,
     ScPopoverDescription,

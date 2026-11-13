@@ -18,7 +18,8 @@ import { RtlControlGroupDemo } from './rtl-control-group-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlControlGroupDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, FormRoot, form } from '@angular/forms/signals';
 import {
   ScButton,
@@ -44,6 +45,7 @@ import {
 @Component({
   selector: 'app-rtl-control-group-demo',
   imports: [
+    Dir,
     FormField,
     FormRoot,
     ScButton,

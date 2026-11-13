@@ -1,10 +1,11 @@
+import { Dir } from '@angular/cdk/bidi';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ScKbd, ScKbdGroup } from '@semantic-components/ui';
 
 /** In a right-to-left page: the keys in reading order, from the right. */
 @Component({
   selector: 'app-rtl-kbd-demo',
-  imports: [ScKbd, ScKbdGroup],
+  imports: [Dir, ScKbd, ScKbdGroup],
   template: `
     <div dir="rtl" lang="ar" class="flex flex-col items-center gap-4">
       <kbd scKbdGroup>

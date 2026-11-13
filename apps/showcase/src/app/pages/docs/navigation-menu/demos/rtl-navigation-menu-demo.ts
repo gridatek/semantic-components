@@ -1,3 +1,4 @@
+import { Dir } from '@angular/cdk/bidi';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import {
@@ -20,6 +21,7 @@ import {
 @Component({
   selector: 'app-rtl-navigation-menu-demo',
   imports: [
+    Dir,
     RouterLink,
     RouterLinkActive,
     ScNavigationMenu,

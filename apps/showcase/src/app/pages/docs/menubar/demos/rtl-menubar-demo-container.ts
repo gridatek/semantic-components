@@ -18,7 +18,8 @@ import { RtlMenubarDemo } from './rtl-menubar-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlMenubarDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScMenu,
   ScMenuCheckboxItem,
@@ -45,6 +46,7 @@ import { SiCheckIcon, SiChevronRightIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-rtl-menubar-demo',
   imports: [
+    Dir,
     ScMenubar,
     ScMenubarItem,
     ScMenu,

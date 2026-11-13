@@ -19,7 +19,8 @@ import { RtlDatePickerDemo } from './rtl-date-picker-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlDatePickerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCalendar,
   ScCalendarHeader,
@@ -42,6 +43,7 @@ import {
 @Component({
   selector: 'app-rtl-date-picker-demo',
   imports: [
+    Dir,
     ScDatePicker,
     ScDatePickerTrigger,
     ScPopoverProvider,

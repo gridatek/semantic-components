@@ -18,14 +18,15 @@ import { RtlSpinnerDemo } from './rtl-spinner-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlSpinnerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { ScBadge, ScButton, ScSpinner } from '@semantic-components/ui';
 import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
 
 /** In a right-to-left page: before the text, on the right. */
 @Component({
   selector: 'app-rtl-spinner-demo',
-  imports: [ScBadge, ScButton, ScSpinner, SiLoaderCircleIcon],
+  imports: [Dir, ScBadge, ScButton, ScSpinner, SiLoaderCircleIcon],
   template: \`
     <div dir="rtl" lang="ar" class="flex flex-col items-center gap-4">
       <button scButton disabled size="sm">

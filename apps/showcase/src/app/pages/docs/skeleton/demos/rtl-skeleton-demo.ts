@@ -1,10 +1,11 @@
+import { Dir } from '@angular/cdk/bidi';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ScSkeleton } from '@semantic-components/ui';
 
 /** In a right-to-left page: the picture at the right, the lines from the right. */
 @Component({
   selector: 'app-rtl-skeleton-demo',
-  imports: [ScSkeleton],
+  imports: [Dir, ScSkeleton],
   template: `
     <div dir="rtl" lang="ar">
       <div class="flex items-center gap-4">

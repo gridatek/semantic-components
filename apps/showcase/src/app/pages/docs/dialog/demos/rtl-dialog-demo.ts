@@ -1,3 +1,4 @@
+import { Dir } from '@angular/cdk/bidi';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
@@ -22,6 +23,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-rtl-dialog-demo',
   imports: [
+    Dir,
     ScButton,
     ScDialogProvider,
     ScDialogTrigger,

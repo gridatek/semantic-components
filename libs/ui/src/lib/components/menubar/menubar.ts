@@ -1,16 +1,7 @@
 import { MenuBar } from '@angular/aria/menu';
-import {
-  Directive,
-  ElementRef,
-  afterNextRender,
-  computed,
-  inject,
-  input,
-  signal,
-} from '@angular/core';
+import { Directive, computed, inject, input, signal } from '@angular/core';
 import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { elementDirection } from '../../utils';
 
 @Directive({
   selector: '[scMenubar]',
@@ -32,15 +23,6 @@ export class ScMenubar {
   protected readonly class = computed(() =>
     cn(this.styles.bar, this.classInput()),
   );
-
-  constructor() {
-    // Aria reads the document's direction; the bar's area may differ (a
-    // right-to-left section): its arrows then follow the area.
-    const host = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
-    afterNextRender(() =>
-      this.menubar.textDirection.set(elementDirection(host)),
-    );
-  }
 
   onFocusIn() {
     this.rendered.set(true);

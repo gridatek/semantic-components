@@ -1,3 +1,4 @@
+import { Dir } from '@angular/cdk/bidi';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, FormRoot, form } from '@angular/forms/signals';
 import {
@@ -24,6 +25,7 @@ import {
 @Component({
   selector: 'app-rtl-control-group-demo',
   imports: [
+    Dir,
     FormField,
     FormRoot,
     ScButton,

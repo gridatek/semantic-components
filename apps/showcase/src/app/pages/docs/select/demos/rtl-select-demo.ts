@@ -1,3 +1,4 @@
+import { Dir } from '@angular/cdk/bidi';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScSelect,
@@ -19,6 +20,7 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-rtl-select-demo',
   imports: [
+    Dir,
     ScSelect,
     ScSelectGroup,
     ScSelectGroupLabel,

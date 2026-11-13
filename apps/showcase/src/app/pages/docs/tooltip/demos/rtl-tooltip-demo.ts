@@ -1,3 +1,4 @@
+import { Dir } from '@angular/cdk/bidi';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
@@ -12,6 +13,7 @@ import {
 @Component({
   selector: 'app-rtl-tooltip-demo',
   imports: [
+    Dir,
     ScButton,
     ScTooltip,
     ScTooltipArrow,

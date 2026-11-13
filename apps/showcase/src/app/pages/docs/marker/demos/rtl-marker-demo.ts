@@ -1,3 +1,4 @@
+import { Dir } from '@angular/cdk/bidi';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScMarker,
@@ -10,6 +11,7 @@ import { SiGitBranchIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-rtl-marker-demo',
   imports: [
+    Dir,
     ScMarker,
     ScMarkerIcon,
     ScMarkerContent,

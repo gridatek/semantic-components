@@ -18,7 +18,8 @@ import { RtlAttachmentDemo } from './rtl-attachment-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlAttachmentDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScAttachment,
   ScAttachmentAction,
@@ -39,6 +40,7 @@ import {
 @Component({
   selector: 'app-rtl-attachment-demo',
   imports: [
+    Dir,
     ScAttachment,
     ScAttachmentMedia,
     ScAttachmentContent,

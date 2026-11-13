@@ -18,7 +18,8 @@ import { DemoContainer } from '../../../../components/demo-container/demo-contai
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlNavbarDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScNavbar,
   ScNavbarBrand,
@@ -37,6 +38,7 @@ import {
 @Component({
   selector: 'app-rtl-navbar-demo',
   imports: [
+    Dir,
     ScNavbar,
     ScNavbarBrand,
     ScNavbarLink,

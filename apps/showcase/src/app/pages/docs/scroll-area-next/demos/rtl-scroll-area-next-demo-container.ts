@@ -18,7 +18,8 @@ import { RtlScrollAreaNextDemo } from './rtl-scroll-area-next-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlScrollAreaNextDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScFrame,
   ScScrollAreaNext,
@@ -33,6 +34,7 @@ import {
 @Component({
   selector: 'app-rtl-scroll-area-next-demo',
   imports: [
+    Dir,
     ScFrame,
     ScScrollAreaNext,
     ScScrollAreaNextContent,

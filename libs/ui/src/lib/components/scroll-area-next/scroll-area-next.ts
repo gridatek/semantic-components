@@ -1,14 +1,13 @@
+import { Directionality } from '@angular/cdk/bidi';
 import {
   DestroyRef,
   Directive,
-  ElementRef,
   computed,
   inject,
   input,
   signal,
 } from '@angular/core';
 import { cn } from 'cn';
-import { elementDirection } from '../../utils';
 
 /** A scroll area's axis: its scrollbar's orientation. */
 export type ScScrollAreaNextOrientation = 'vertical' | 'horizontal';
@@ -59,8 +58,7 @@ const SCROLLING = 500;
   },
 })
 export class ScScrollAreaNext {
-  private readonly host =
-    inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
+  private readonly directionality = inject(Directionality);
   readonly classInput = input<string>('', { alias: 'class' });
 
   /** The scrolling element, registered by the viewport. */
@@ -158,6 +156,6 @@ export class ScScrollAreaNext {
   }
 
   isRtl(): boolean {
-    return elementDirection(this.host) === 'rtl';
+    return this.directionality.value === 'rtl';
   }
 }

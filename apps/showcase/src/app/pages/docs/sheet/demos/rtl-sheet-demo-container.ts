@@ -18,7 +18,8 @@ import { RtlSheetDemo } from './rtl-sheet-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlSheetDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScSheet,
@@ -36,6 +37,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-rtl-sheet-demo',
   imports: [
+    Dir,
     ScButton,
     ScSheet,
     ScSheetClose,

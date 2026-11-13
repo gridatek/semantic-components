@@ -23,7 +23,6 @@ import {
 import { cn } from 'cn';
 import { ScFocusTrap } from '../../utilities/focus-trap';
 import { ScOpenDelay } from '../../utils';
-import { ScElementDirectionality } from '../../utils/element-directionality';
 import {
   type ScOverlayAlign,
   type ScOverlayLogicalSide,
@@ -52,7 +51,6 @@ export type ScPopoverModal = boolean | 'trap-focus';
  */
 @Component({
   selector: 'div[scPopoverProvider]',
-  providers: [{ provide: Directionality, useClass: ScElementDirectionality }],
   imports: [OverlayModule, NgTemplateOutlet, ScFocusTrap],
   template: `
     <ng-content />

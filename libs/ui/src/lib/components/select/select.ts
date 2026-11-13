@@ -1,5 +1,4 @@
 import { ComboboxPopup } from '@angular/aria/combobox';
-import { Directionality } from '@angular/cdk/bidi';
 import {
   type ConnectedOverlayPositionChange,
   type ConnectedPosition,
@@ -20,7 +19,6 @@ import {
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
 import { cn } from 'cn';
-import { ScElementDirectionality } from '../../utils/element-directionality';
 import { SC_FIELD } from '../field';
 import { ScPortalOutlet } from '../portal-outlet/portal-outlet';
 import { ScSelectLabel } from './select-label';
@@ -60,10 +58,7 @@ const positions: ConnectedPosition[] = [
   selector: 'div[scSelect]',
   exportAs: 'scSelect',
   imports: [ComboboxPopup, OverlayModule, ScPortalOutlet],
-  providers: [
-    { provide: Directionality, useClass: ScElementDirectionality },
-    { provide: SC_SELECT, useExisting: ScSelect },
-  ],
+  providers: [{ provide: SC_SELECT, useExisting: ScSelect }],
   template: `
     <ng-content />
     @if (trigger(); as trigger) {

@@ -1,5 +1,4 @@
 import { ComboboxPopup } from '@angular/aria/combobox';
-import { Directionality } from '@angular/cdk/bidi';
 import { OverlayModule } from '@angular/cdk/overlay';
 import {
   Component,
@@ -9,7 +8,6 @@ import {
   model,
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
-import { ScElementDirectionality } from '../../utils/element-directionality';
 import { ScPortalOutlet } from '../portal-outlet/portal-outlet';
 import { ScComboboxBase } from './combobox-base';
 import { ScComboboxPortal } from './combobox-portal';
@@ -24,10 +22,7 @@ import { scComboboxTemplate } from './combobox-template';
   selector: 'div[scCombobox][multiple]',
   exportAs: 'scCombobox',
   imports: [ComboboxPopup, OverlayModule, ScPortalOutlet],
-  providers: [
-    { provide: Directionality, useClass: ScElementDirectionality },
-    { provide: ScComboboxBase, useExisting: ScComboboxMultiple },
-  ],
+  providers: [{ provide: ScComboboxBase, useExisting: ScComboboxMultiple }],
   template: scComboboxTemplate,
   host: {
     'data-slot': 'combobox',

@@ -18,7 +18,8 @@ import { RtlBreadcrumbDemo } from './rtl-breadcrumb-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlBreadcrumbDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
   ScBreadcrumb,
@@ -48,6 +49,7 @@ import {
 @Component({
   selector: 'app-rtl-breadcrumb-demo',
   imports: [
+    Dir,
     RouterLink,
     ScBreadcrumb,
     ScBreadcrumbEllipsis,

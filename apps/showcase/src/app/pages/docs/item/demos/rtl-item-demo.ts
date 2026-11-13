@@ -1,3 +1,4 @@
+import { Dir } from '@angular/cdk/bidi';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
@@ -18,6 +19,7 @@ import {
 @Component({
   selector: 'app-rtl-item-demo',
   imports: [
+    Dir,
     ScButton,
     ScItem,
     ScItemActions,

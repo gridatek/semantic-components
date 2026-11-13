@@ -18,7 +18,8 @@ import { RtlOtpFieldDemo } from './rtl-otp-field-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlOtpFieldDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
   ScField,
@@ -34,6 +35,7 @@ import { SiMinusIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-rtl-otp-field-demo',
   imports: [
+    Dir,
     ScField,
     FormField,
     ScLabel,

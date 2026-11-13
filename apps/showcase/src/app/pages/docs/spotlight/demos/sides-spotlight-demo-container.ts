@@ -21,10 +21,10 @@ export class SidesSpotlightDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
-  type ScSpotlightSide,
   ScSpotlight,
   ScSpotlightClose,
   ScSpotlightDescription,
+  type ScSpotlightSide,
   ScSpotlightTitle,
 } from '@semantic-components/ui';
 import { SiXIcon } from '@semantic-icons/lucide-icons';

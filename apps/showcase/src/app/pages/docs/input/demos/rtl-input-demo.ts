@@ -1,3 +1,4 @@
+import { Dir } from '@angular/cdk/bidi';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScField,
@@ -9,7 +10,7 @@ import {
 
 @Component({
   selector: 'app-rtl-input-demo',
-  imports: [ScField, ScFieldDescription, ScFieldGroup, ScInput, ScLabel],
+  imports: [Dir, ScField, ScFieldDescription, ScFieldGroup, ScInput, ScLabel],
   template: `
     <div dir="rtl" lang="ar" scFieldGroup class="w-full max-w-xs">
       <div scField>

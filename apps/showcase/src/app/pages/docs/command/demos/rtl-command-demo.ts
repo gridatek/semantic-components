@@ -1,3 +1,4 @@
+import { Dir } from '@angular/cdk/bidi';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCommand,
@@ -27,6 +28,7 @@ import {
 @Component({
   selector: 'app-rtl-command-demo',
   imports: [
+    Dir,
     ScCommand,
     ScCommandEmpty,
     ScCommandGroup,

@@ -19,14 +19,12 @@ import {
 import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
 import { setInput } from '../../utils';
-import { ScElementDirectionality } from '../../utils/element-directionality';
 import { ScMenuPortal } from '../menu';
 import { useDefaultSearchTerm } from '../menu/menu-search-term';
 import { ScMenubar } from './menubar';
 
 @Component({
   selector: '[scMenubarItem]',
-  providers: [{ provide: Directionality, useClass: ScElementDirectionality }],
   exportAs: 'scMenubarItem',
   imports: [OverlayModule, NgTemplateOutlet],
   hostDirectives: [

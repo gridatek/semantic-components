@@ -18,7 +18,8 @@ import { RtlLinkDemo } from './rtl-link-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlLinkDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { ScLink } from '@semantic-components/ui';
 import {
   SiArrowLeftIcon,
@@ -27,7 +28,7 @@ import {
 
 @Component({
   selector: 'app-rtl-link-demo',
-  imports: [ScLink, SiArrowLeftIcon, SiArrowRightIcon],
+  imports: [Dir, ScLink, SiArrowLeftIcon, SiArrowRightIcon],
   template: \`
     <div dir="rtl" lang="ar" class="flex flex-wrap items-center gap-2">
       <a scLink variant="button" href="/docs/components/button">الأزرار</a>

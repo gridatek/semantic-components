@@ -18,7 +18,8 @@ import { RtlCommandDemo } from './rtl-command-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlCommandDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCommand,
   ScCommandEmpty,
@@ -47,6 +48,7 @@ import {
 @Component({
   selector: 'app-rtl-command-demo',
   imports: [
+    Dir,
     ScCommand,
     ScCommandEmpty,
     ScCommandGroup,

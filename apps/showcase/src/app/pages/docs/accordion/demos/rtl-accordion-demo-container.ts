@@ -18,7 +18,8 @@ import { RtlAccordionDemo } from './rtl-accordion-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlAccordionDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScAccordion,
   ScAccordionContent,
@@ -34,6 +35,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-rtl-accordion-demo',
   imports: [
+    Dir,
     ScAccordion,
     ScAccordionItem,
     ScAccordionHeader,

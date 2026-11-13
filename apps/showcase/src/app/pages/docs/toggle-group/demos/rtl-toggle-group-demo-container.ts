@@ -18,13 +18,14 @@ import { RtlToggleGroupDemo } from './rtl-toggle-group-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlToggleGroupDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
 
 /** In a right-to-left page: the first item at the right; the arrows mirrored. */
 @Component({
   selector: 'app-rtl-toggle-group-demo',
-  imports: [ScToggleGroup, ScToggleGroupItem],
+  imports: [Dir, ScToggleGroup, ScToggleGroupItem],
   template: \`
     <div dir="rtl" lang="ar">
       <div scToggleGroup variant="outline" aria-label="العرض" [(value)]="view">

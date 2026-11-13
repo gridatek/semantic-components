@@ -18,13 +18,14 @@ import { RtlSeparatorDemo } from './rtl-separator-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlSeparatorDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { ScSeparator } from '@semantic-components/ui';
 
 /** In a right-to-left page: the text from the right; the line is the same. */
 @Component({
   selector: 'app-rtl-separator-demo',
-  imports: [ScSeparator],
+  imports: [Dir, ScSeparator],
   template: \`
     <div dir="rtl" lang="ar">
       <div class="flex max-w-sm flex-col gap-4 text-sm">

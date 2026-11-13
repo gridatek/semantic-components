@@ -18,7 +18,8 @@ import { RtlResizableDemo } from './rtl-resizable-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlResizableDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScFrame,
   ScResizableHandle,
@@ -31,6 +32,7 @@ import {
 @Component({
   selector: 'app-rtl-resizable-demo',
   imports: [
+    Dir,
     ScFrame,
     ScResizableHandle,
     ScResizableHandleGrip,

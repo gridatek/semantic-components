@@ -18,7 +18,8 @@ import { RtlTabsDemo } from './rtl-tabs-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlTabsDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCard,
   ScCardContent,
@@ -36,6 +37,7 @@ import {
 @Component({
   selector: 'app-rtl-tabs-demo',
   imports: [
+    Dir,
     ScTabs,
     ScTabsList,
     ScTabsTab,

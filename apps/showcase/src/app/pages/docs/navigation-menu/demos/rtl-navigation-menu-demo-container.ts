@@ -18,7 +18,8 @@ import { RtlNavigationMenuDemo } from './rtl-navigation-menu-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlNavigationMenuDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import {
   ScNavigationMenu,
@@ -40,6 +41,7 @@ import {
 @Component({
   selector: 'app-rtl-navigation-menu-demo',
   imports: [
+    Dir,
     RouterLink,
     RouterLinkActive,
     ScNavigationMenu,

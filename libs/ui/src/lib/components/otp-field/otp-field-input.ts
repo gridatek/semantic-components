@@ -1,7 +1,7 @@
+import { Directionality } from '@angular/cdk/bidi';
 import { Directive, ElementRef, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { elementDirection } from '../../utils/element-directionality/element-directionality';
 import { SC_FIELD } from '../field';
 import { ScOtpField } from './otp-field';
 
@@ -36,6 +36,7 @@ import { ScOtpField } from './otp-field';
   },
 })
 export class ScOtpFieldInput {
+  private readonly directionality = inject(Directionality);
   private readonly styles = injectPreset().otpField;
   protected readonly otp = inject(ScOtpField);
   private readonly field = inject(SC_FIELD, { optional: true });
@@ -116,7 +117,7 @@ export class ScOtpFieldInput {
         // The input on that side: right to left, the next one is on the left.
         const forward =
           (event.key === 'ArrowRight') !==
-          (elementDirection(this.element) === 'rtl');
+          (this.directionality.value === 'rtl');
         otp.focusInput(index + (forward ? 1 : -1));
         break;
       }

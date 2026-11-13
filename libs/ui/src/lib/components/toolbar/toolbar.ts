@@ -1,9 +1,7 @@
 import { Toolbar } from '@angular/aria/toolbar';
-import { Directionality } from '@angular/cdk/bidi';
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { ScElementDirectionality } from '../../utils/element-directionality/element-directionality';
 
 /**
  * A toolbar: Angular Aria's Toolbar — one Tab stop, the arrow keys move
@@ -13,8 +11,6 @@ import { ScElementDirectionality } from '../../utils/element-directionality/elem
  */
 @Directive({
   selector: 'div[scToolbar]',
-  // Its own direction (a dir="rtl" section too): the arrows mirrored there.
-  providers: [{ provide: Directionality, useClass: ScElementDirectionality }],
   hostDirectives: [
     {
       directive: Toolbar,

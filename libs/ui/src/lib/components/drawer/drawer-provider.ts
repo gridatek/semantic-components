@@ -1,4 +1,5 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
+import { Directionality } from '@angular/cdk/bidi';
 import { Overlay, OverlayModule, type OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 import { NgTemplateOutlet } from '@angular/common';
@@ -22,7 +23,6 @@ import {
 } from '@angular/core';
 import { cn } from 'cn';
 import { ScFocusTrap } from '../../utilities';
-import { elementDirection } from '../../utils';
 import { ScBackdrop } from '../backdrop';
 import { ScDrawerPortal } from './drawer-portal';
 
@@ -99,7 +99,8 @@ export class ScDrawerProvider {
    * The direction and language of where the drawer was opened from: it is
    * rendered at the end of the page, outside them.
    */
-  readonly direction = (): 'ltr' | 'rtl' => elementDirection(this.host);
+  private readonly directionality = inject(Directionality);
+  readonly direction = (): 'ltr' | 'rtl' => this.directionality.valueSignal();
   readonly lang = (): string | null =>
     this.host.closest('[lang]')?.getAttribute('lang') ?? null;
 

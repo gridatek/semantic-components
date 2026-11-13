@@ -1,3 +1,4 @@
+import { Directionality } from '@angular/cdk/bidi';
 import {
   Directive,
   ElementRef,
@@ -11,7 +12,6 @@ import {
   untracked,
 } from '@angular/core';
 import { cn } from 'cn';
-import { elementDirection } from '../../utils';
 import { ScResizablePanel } from './resizable-panel';
 
 /** Which way its panels sit, and so the way they resize. */
@@ -34,6 +34,7 @@ const round = (n: number) => Math.round(n * 100) / 100;
   },
 })
 export class ScResizablePanelGroup {
+  private readonly directionality = inject(Directionality);
   private readonly element =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
   readonly classInput = input<string>('', { alias: 'class' });
@@ -95,8 +96,7 @@ export class ScResizablePanelGroup {
   /** Right to left, horizontally: a drag or an arrow the other way. */
   reversed(): boolean {
     return (
-      this.orientation() === 'horizontal' &&
-      elementDirection(this.element) === 'rtl'
+      this.orientation() === 'horizontal' && this.directionality.value === 'rtl'
     );
   }
 

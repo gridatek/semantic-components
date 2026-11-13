@@ -18,7 +18,8 @@ import { RtlCalendarDemo } from './rtl-calendar-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlCalendarDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCalendar,
   ScCalendarHeader,
@@ -36,6 +37,7 @@ import {
 @Component({
   selector: 'app-rtl-calendar-demo',
   imports: [
+    Dir,
     ScCalendar,
     ScCalendarHeader,
     ScCalendarNext,

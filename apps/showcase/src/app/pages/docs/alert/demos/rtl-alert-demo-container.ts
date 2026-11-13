@@ -18,7 +18,8 @@ import { RtlAlertDemo } from './rtl-alert-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlAlertDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScAlert,
   ScAlertAction,
@@ -32,6 +33,7 @@ import { SiCircleCheckIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-rtl-alert-demo',
   imports: [
+    Dir,
     ScAlert,
     ScAlertAction,
     ScAlertDescription,

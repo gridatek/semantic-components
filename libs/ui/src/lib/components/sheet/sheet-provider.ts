@@ -21,7 +21,6 @@ import {
 } from '@angular/core';
 import { cn } from 'cn';
 import { ScFocusTrap } from '../../utilities';
-import { ScElementDirectionality } from '../../utils/element-directionality';
 import {
   type ScOverlayLogicalSide,
   type ScOverlaySide,
@@ -41,7 +40,6 @@ export type ScSheetSide = ScOverlayLogicalSide;
  */
 @Component({
   selector: 'div[scSheetProvider]',
-  providers: [{ provide: Directionality, useClass: ScElementDirectionality }],
   imports: [OverlayModule, ScBackdrop, ScFocusTrap, NgTemplateOutlet],
   template: `
     <ng-content />

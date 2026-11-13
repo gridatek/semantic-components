@@ -18,7 +18,8 @@ import { RtlButtonDemo } from './rtl-button-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlButtonDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
 import {
   SiArrowLeftIcon,
@@ -27,7 +28,7 @@ import {
 
 @Component({
   selector: 'app-rtl-button-demo',
-  imports: [ScButton, SiArrowLeftIcon, SiArrowRightIcon],
+  imports: [Dir, ScButton, SiArrowLeftIcon, SiArrowRightIcon],
   template: \`
     <div dir="rtl" lang="ar" class="flex flex-wrap items-center gap-2">
       <button scButton>إرسال</button>

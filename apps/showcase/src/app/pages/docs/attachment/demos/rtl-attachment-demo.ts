@@ -1,3 +1,4 @@
+import { Dir } from '@angular/cdk/bidi';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScAttachment,
@@ -19,6 +20,7 @@ import {
 @Component({
   selector: 'app-rtl-attachment-demo',
   imports: [
+    Dir,
     ScAttachment,
     ScAttachmentMedia,
     ScAttachmentContent,

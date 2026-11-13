@@ -22,7 +22,6 @@ import {
 } from '@angular/core';
 import { cn } from 'cn';
 import { setInput } from '../../utils';
-import { ScElementDirectionality } from '../../utils/element-directionality';
 import { injectMenuHighlight } from './menu-highlight';
 import { ScMenuPortal } from './menu-portal';
 import { useDefaultSearchTerm } from './menu-search-term';
@@ -39,7 +38,6 @@ export type ScMenuItemVariant = 'default' | 'destructive';
  */
 @Component({
   selector: '[scMenuItem]',
-  providers: [{ provide: Directionality, useClass: ScElementDirectionality }],
   exportAs: 'scMenuItem',
   imports: [OverlayModule, NgTemplateOutlet],
   hostDirectives: [

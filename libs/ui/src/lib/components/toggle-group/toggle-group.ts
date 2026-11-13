@@ -1,4 +1,5 @@
 import { FocusKeyManager, type FocusableOption } from '@angular/cdk/a11y';
+import { Directionality } from '@angular/cdk/bidi';
 import {
   Directive,
   ElementRef,
@@ -14,7 +15,6 @@ import {
 import type { FormValueControl } from '@angular/forms/signals';
 import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { elementDirection } from '../../utils/element-directionality/element-directionality';
 import type { ScToggleVariants } from '../toggle/toggle';
 
 /** What the group needs from its items: to focus one, and know its value. */
@@ -53,6 +53,7 @@ export interface ScToggleGroupItemRef extends FocusableOption {
   },
 })
 export class ScToggleGroup<T = unknown> implements FormValueControl<T[]> {
+  private readonly directionality = inject(Directionality);
   private readonly styles = injectPreset().toggleGroup;
   private readonly element =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
@@ -139,7 +140,7 @@ export class ScToggleGroup<T = unknown> implements FormValueControl<T[]> {
     } else {
       this.keys
         .withVerticalOrientation(false)
-        .withHorizontalOrientation(elementDirection(this.element));
+        .withHorizontalOrientation(this.directionality.value);
     }
     if (['Home', 'End'].includes(event.key)) this.keys.withHomeAndEnd(true);
     this.keys.onKeydown(event);

@@ -1,3 +1,4 @@
+import { Dir } from '@angular/cdk/bidi';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCollapsible,
@@ -24,6 +25,7 @@ import {
 @Component({
   selector: 'app-rtl-trace-demo',
   imports: [
+    Dir,
     ScCollapsible,
     ScCollapsiblePanel,
     ScCollapsibleTrigger,

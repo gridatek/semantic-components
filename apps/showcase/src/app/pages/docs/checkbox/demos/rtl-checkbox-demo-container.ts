@@ -18,7 +18,8 @@ import { RtlCheckboxDemo } from './rtl-checkbox-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlCheckboxDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
   ScCheckbox,
@@ -35,6 +36,7 @@ import {
 @Component({
   selector: 'app-rtl-checkbox-demo',
   imports: [
+    Dir,
     FormField,
     ScCheckbox,
     ScCheckboxField,

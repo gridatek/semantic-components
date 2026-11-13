@@ -18,7 +18,8 @@ import { RtlItemDemo } from './rtl-item-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlItemDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScItem,
@@ -38,6 +39,7 @@ import {
 @Component({
   selector: 'app-rtl-item-demo',
   imports: [
+    Dir,
     ScButton,
     ScItem,
     ScItemActions,

@@ -25,6 +25,7 @@ export class RtlTreeTableDemoContainer {
   rowExpandingFeature,
   tableFeatures,
 } from '@tanstack/angular-table';
+import { Dir } from '@angular/cdk/bidi';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScTable,
@@ -102,6 +103,7 @@ const FILES: FileNode[] = [
 @Component({
   selector: 'app-rtl-tree-table-demo',
   imports: [
+    Dir,
     ScTable,
     ScTableBody,
     ScTableCell,

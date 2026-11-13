@@ -1,3 +1,4 @@
+import { Dir } from '@angular/cdk/bidi';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScNavbar,
@@ -17,6 +18,7 @@ import {
 @Component({
   selector: 'app-rtl-navbar-demo',
   imports: [
+    Dir,
     ScNavbar,
     ScNavbarBrand,
     ScNavbarLink,

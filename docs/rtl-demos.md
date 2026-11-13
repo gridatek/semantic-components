@@ -5,7 +5,7 @@ Every component has a demo in right-to-left, with Arabic written in the demo —
 ## The demo
 
 - **Name**: `rtl-<component>-demo` (`rtl-button-demo`), titled **RTL**, last on the component's page.
-- **Container**: the demo's root is `<div dir="rtl" lang="ar">` — `dir` mirrors the layout, `lang` lets screen readers and fonts (Noto Sans Arabic, after Geist) treat the text as Arabic.
+- **Container**: the demo's root is `<div dir="rtl" lang="ar">` — `dir` mirrors the layout, `lang` lets screen readers and fonts (Noto Sans Arabic, after Geist) treat the text as Arabic. The demo imports CDK's `Dir` (`@angular/cdk/bidi`): a right-to-left box in a left-to-right page, it gives the parts inside its direction (sides, popups, arrow keys). An app right to left on `<html>` doesn't need it (the Right to left docs page).
 - **Text**: Arabic in the template, the same content as the basic demo. Numbers, dates and times through `Intl` with an Arabic locale (`ar`, or `ar-MA`, `ar-EG`… for Western digits or a region's habits).
 - **Nothing else**: no CSS of the demo's own for direction — a component that needs one is the bug to fix.
 
@@ -14,7 +14,7 @@ Every component has a demo in right-to-left, with Arabic written in the demo —
 - **Logical properties only**: `ms-*`, `pe-*`, `start-*`, `end-*`, `border-s`, `text-start`, `rounded-e-*` — a physical one (`ml-*`, `left-*`, `text-left`) is a bug ([shadcn-style-reference.md](shadcn-style-reference.md)).
 - **Icons that point** (chevrons, arrows, "next", "back") flip: `rtl:rotate-180` or `rtl:-scale-x-100`. Icons that don't point (search, close, check) don't.
 - **Keys along the line reverse**: ArrowLeft goes to the next item, ArrowRight to the previous one (tabs, radio groups, sliders, menus across, carousels). Up and Down don't change.
-- **Overlays open on the right side**: `start` / `end` alignment, not `left` / `right`. A part with a connected overlay provides `ScElementDirectionality` (`libs/ui/src/lib/utils/element-directionality`): CDK alone reads the document's direction, so under a `dir="rtl"` container its `start` would still be the left. `side="left"` / `"right"` stay physical (as Base UI's); `align` is logical.
+- **Overlays open on the right side**: `start` / `end` alignment, not `left` / `right`. The parts read CDK's `Directionality`: the document's, or the demo's `Dir` — without it, under a `dir="rtl"` container, `start` would still be the left. `side="left"` / `"right"` stay physical (as Base UI's); `align` is logical.
 - **Text**: Arabic joins its letters — nothing that cuts it into letters (letter-spacing, `truncate` in the middle of a word is fine).
 
 ## The test

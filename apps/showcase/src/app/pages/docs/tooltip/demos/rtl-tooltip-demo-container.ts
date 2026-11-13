@@ -18,7 +18,8 @@ import { RtlTooltipDemo } from './rtl-tooltip-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlTooltipDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScTooltip,
@@ -32,6 +33,7 @@ import {
 @Component({
   selector: 'app-rtl-tooltip-demo',
   imports: [
+    Dir,
     ScButton,
     ScTooltip,
     ScTooltipArrow,

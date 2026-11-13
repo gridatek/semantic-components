@@ -18,7 +18,8 @@ import { RtlSelectDemo } from './rtl-select-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlSelectDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScSelect,
   ScSelectGroup,
@@ -39,6 +40,7 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-rtl-select-demo',
   imports: [
+    Dir,
     ScSelect,
     ScSelectGroup,
     ScSelectGroupLabel,

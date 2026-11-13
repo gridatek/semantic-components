@@ -18,7 +18,8 @@ import { RtlTextareaDemo } from './rtl-textarea-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlTextareaDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScField,
   ScFieldDescription,
@@ -29,7 +30,7 @@ import {
 /** In a right-to-left page: its text from the right. */
 @Component({
   selector: 'app-rtl-textarea-demo',
-  imports: [ScField, ScFieldDescription, ScLabel, ScTextarea],
+  imports: [Dir, ScField, ScFieldDescription, ScLabel, ScTextarea],
   template: \`
     <div dir="rtl" lang="ar" class="flex w-full justify-center">
       <div scField class="w-full max-w-xs">

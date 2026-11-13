@@ -18,14 +18,15 @@ import { RtlAspectRatioDemo } from './rtl-aspect-ratio-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlAspectRatioDemoContainer {
-  readonly code = `import { NgOptimizedImage } from '@angular/common';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { NgOptimizedImage } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ScAspectRatio, ScFrame } from '@semantic-components/ui';
 
 /** Right to left: the ratio doesn't change; the caption reads from the right. */
 @Component({
   selector: 'app-rtl-aspect-ratio-demo',
-  imports: [NgOptimizedImage, ScAspectRatio, ScFrame],
+  imports: [Dir, NgOptimizedImage, ScAspectRatio, ScFrame],
   template: \`
     <figure dir="rtl" lang="ar" class="grid w-full max-w-sm gap-2">
       <div scAspectRatio scFrame [ratio]="16 / 9">

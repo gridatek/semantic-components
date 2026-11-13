@@ -1,3 +1,4 @@
+import { Dir } from '@angular/cdk/bidi';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScBubble,
@@ -16,6 +17,7 @@ import { SiArrowDownIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-rtl-message-scroller-demo',
   imports: [
+    Dir,
     ScFrame,
     ScBubble,
     ScBubbleContent,

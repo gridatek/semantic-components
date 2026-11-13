@@ -1,3 +1,4 @@
+import { Dir } from '@angular/cdk/bidi';
 import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
@@ -19,6 +20,7 @@ import {
 @Component({
   selector: 'app-rtl-password-field-demo',
   imports: [
+    Dir,
     FormField,
     ScLabel,
     ScPasswordCapsLock,

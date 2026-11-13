@@ -1,3 +1,4 @@
+import { Dir } from '@angular/cdk/bidi';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
@@ -16,6 +17,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-rtl-sheet-demo',
   imports: [
+    Dir,
     ScButton,
     ScSheet,
     ScSheetClose,

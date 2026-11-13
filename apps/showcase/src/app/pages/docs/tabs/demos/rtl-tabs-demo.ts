@@ -1,3 +1,4 @@
+import { Dir } from '@angular/cdk/bidi';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCard,
@@ -16,6 +17,7 @@ import {
 @Component({
   selector: 'app-rtl-tabs-demo',
   imports: [
+    Dir,
     ScTabs,
     ScTabsList,
     ScTabsTab,

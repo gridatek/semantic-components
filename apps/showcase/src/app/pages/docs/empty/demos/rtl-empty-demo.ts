@@ -1,3 +1,4 @@
+import { Dir } from '@angular/cdk/bidi';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
@@ -14,6 +15,7 @@ import { SiFolderCodeIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-rtl-empty-demo',
   imports: [
+    Dir,
     ScButton,
     ScEmpty,
     ScEmptyBody,

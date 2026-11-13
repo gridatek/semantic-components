@@ -1,3 +1,4 @@
+import { Dir } from '@angular/cdk/bidi';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, FormRoot, form, required } from '@angular/forms/signals';
 import {
@@ -22,6 +23,7 @@ import {
 @Component({
   selector: 'app-rtl-questionnaire-demo',
   imports: [
+    Dir,
     FormField,
     FormRoot,
     ScQuestionnaire,

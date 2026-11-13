@@ -18,13 +18,14 @@ import { RtlSliderDemo } from './rtl-slider-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlSliderDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScSlider } from '@semantic-components/ui';
 
 /** In a right-to-left page: the value grows to the left, the arrows mirrored. */
 @Component({
   selector: 'app-rtl-slider-demo',
-  imports: [ScSlider],
+  imports: [Dir, ScSlider],
   template: \`
     <div dir="rtl" lang="ar" class="w-full max-w-xs">
       <input scSlider [(value)]="volume" aria-label="مستوى الصوت" />

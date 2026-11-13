@@ -18,7 +18,8 @@ import { RtlMessageDemo } from './rtl-message-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlMessageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScAvatar,
   ScAvatarFallback,
@@ -35,6 +36,7 @@ import {
 @Component({
   selector: 'app-rtl-message-demo',
   imports: [
+    Dir,
     ScAvatar,
     ScAvatarFallback,
     ScBubble,

@@ -1,3 +1,4 @@
+import { Dir } from '@angular/cdk/bidi';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCombobox,
@@ -20,6 +21,7 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-rtl-combobox-demo',
   imports: [
+    Dir,
     ScCombobox,
     ScComboboxEmpty,
     ScComboboxInput,

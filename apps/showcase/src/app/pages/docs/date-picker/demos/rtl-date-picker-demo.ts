@@ -1,3 +1,4 @@
+import { Dir } from '@angular/cdk/bidi';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCalendar,
@@ -21,6 +22,7 @@ import {
 @Component({
   selector: 'app-rtl-date-picker-demo',
   imports: [
+    Dir,
     ScDatePicker,
     ScDatePickerTrigger,
     ScPopoverProvider,

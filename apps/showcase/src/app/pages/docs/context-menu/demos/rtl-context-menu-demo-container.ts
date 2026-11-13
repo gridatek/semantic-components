@@ -18,7 +18,8 @@ import { RtlContextMenuDemo } from './rtl-context-menu-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlContextMenuDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScContextMenu,
   ScContextMenuTrigger,
@@ -49,6 +50,7 @@ import {
 @Component({
   selector: 'app-rtl-context-menu-demo',
   imports: [
+    Dir,
     ScContextMenu,
     ScContextMenuTrigger,
     ScFrame,

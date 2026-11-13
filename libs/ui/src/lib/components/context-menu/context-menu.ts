@@ -19,7 +19,6 @@ import {
   viewChild,
 } from '@angular/core';
 import { cn } from 'cn';
-import { ScElementDirectionality } from '../../utils/element-directionality';
 import {
   type ScOverlayLogicalSide,
   physicalSide,
@@ -46,7 +45,6 @@ export type ScContextMenuSide = ScOverlayLogicalSide;
   providers: [
     { provide: SC_CONTEXT_MENU, useExisting: ScContextMenu },
     { provide: SC_MENU, useExisting: ScContextMenu },
-    { provide: Directionality, useClass: ScElementDirectionality },
   ],
   imports: [MenuTrigger, OverlayModule, NgTemplateOutlet],
   template: `

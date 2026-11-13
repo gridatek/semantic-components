@@ -1,3 +1,4 @@
+import { Dir } from '@angular/cdk/bidi';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScAccordion,
@@ -14,6 +15,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-rtl-accordion-demo',
   imports: [
+    Dir,
     ScAccordion,
     ScAccordionItem,
     ScAccordionHeader,

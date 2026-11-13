@@ -1,3 +1,4 @@
+import { Dir } from '@angular/cdk/bidi';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   FormField,
@@ -26,6 +27,7 @@ import {
 @Component({
   selector: 'app-rtl-card-demo',
   imports: [
+    Dir,
     FormField,
     FormRoot,
     ScButton,

@@ -1,3 +1,4 @@
+import { Dir } from '@angular/cdk/bidi';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScFrame,
@@ -13,6 +14,7 @@ import {
 @Component({
   selector: 'app-rtl-scroll-area-next-demo',
   imports: [
+    Dir,
     ScFrame,
     ScScrollAreaNext,
     ScScrollAreaNextContent,

@@ -1,3 +1,4 @@
+import { Dir } from '@angular/cdk/bidi';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScSidebar,
@@ -25,6 +26,7 @@ import {
 @Component({
   selector: 'app-rtl-sidebar-demo',
   imports: [
+    Dir,
     ScSidebar,
     ScSidebarContent,
     ScSidebarGroup,

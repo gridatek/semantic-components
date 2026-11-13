@@ -16,7 +16,8 @@ import { DemoContainer } from '../../../../components/demo-container/demo-contai
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlSidebarDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScSidebar,
   ScSidebarContent,
@@ -43,6 +44,7 @@ import {
 @Component({
   selector: 'app-rtl-sidebar-demo',
   imports: [
+    Dir,
     ScSidebar,
     ScSidebarContent,
     ScSidebarGroup,

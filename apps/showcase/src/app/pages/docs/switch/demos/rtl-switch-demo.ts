@@ -1,3 +1,4 @@
+import { Dir } from '@angular/cdk/bidi';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
@@ -10,7 +11,14 @@ import {
 /** In a right-to-left page: the switch at the left, its thumb moving left when on. */
 @Component({
   selector: 'app-rtl-switch-demo',
-  imports: [FormField, ScFieldDescription, ScLabel, ScSwitch, ScSwitchField],
+  imports: [
+    Dir,
+    FormField,
+    ScFieldDescription,
+    ScLabel,
+    ScSwitch,
+    ScSwitchField,
+  ],
   template: `
     <div dir="rtl" lang="ar" scSwitchField class="max-w-sm">
       <label scLabel>المشاركة عبر الأجهزة</label>

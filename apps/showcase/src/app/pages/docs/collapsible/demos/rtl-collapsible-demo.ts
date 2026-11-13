@@ -1,3 +1,4 @@
+import { Dir } from '@angular/cdk/bidi';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
@@ -12,6 +13,7 @@ import { SiChevronsUpDownIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-rtl-collapsible-demo',
   imports: [
+    Dir,
     ScButton,
     ScCollapsible,
     ScCollapsiblePanel,

@@ -1,3 +1,4 @@
+import { Dir } from '@angular/cdk/bidi';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
@@ -14,6 +15,7 @@ import { SiMinusIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-rtl-otp-field-demo',
   imports: [
+    Dir,
     ScField,
     FormField,
     ScLabel,
