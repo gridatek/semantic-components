@@ -100,7 +100,7 @@ export class ScContextMenu implements ScMenuContext {
   private readonly directionality = inject(Directionality);
   private readonly host =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
-  readonly direction = (): Direction => this.directionality.value;
+  readonly direction = (): Direction => this.directionality.valueSignal();
   readonly lang = (): string | null =>
     this.host.closest('[lang]')?.getAttribute('lang') ?? null;
 

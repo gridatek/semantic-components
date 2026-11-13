@@ -98,10 +98,10 @@ export class ScPreviewCardProvider {
 
   protected readonly positions = computed(() =>
     buildOverlayPositionsWithFallback(
-      physicalSide(this.side(), this.direction.value),
+      physicalSide(this.side(), this.direction.valueSignal()),
       this.alignment(),
       this.sideOffset(),
-      this.direction.value,
+      this.direction.valueSignal(),
       this.alignmentOffset(),
     ),
   );
@@ -109,7 +109,8 @@ export class ScPreviewCardProvider {
   /** The side it was placed on, after any flip, as the screen sees it (`data-side`: physical). */
   private readonly placed = signal<ScOverlaySide | null>(null);
   readonly placedSide = computed(
-    () => this.placed() ?? physicalSide(this.side(), this.direction.value),
+    () =>
+      this.placed() ?? physicalSide(this.side(), this.direction.valueSignal()),
   );
 
   protected readonly class = computed(() => cn('contents', this.classInput()));
@@ -141,6 +142,6 @@ export class ScPreviewCardProvider {
   }
 
   protected onPositionChange(change: ConnectedOverlayPositionChange): void {
-    this.placed.set(placedSide(change, this.direction.value));
+    this.placed.set(placedSide(change, this.direction.valueSignal()));
   }
 }

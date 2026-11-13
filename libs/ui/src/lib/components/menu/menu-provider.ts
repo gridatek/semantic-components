@@ -74,7 +74,7 @@ export class ScMenuProvider implements ScMenuContext {
   });
 
   readonly quiet = signal(false);
-  readonly direction = () => this.directionality.value;
+  readonly direction = () => this.directionality.valueSignal();
   readonly lang = () =>
     this.host.closest('[lang]')?.getAttribute('lang') ?? null;
 
@@ -90,7 +90,7 @@ export class ScMenuProvider implements ScMenuContext {
       this.side(),
       this.alignment(),
       this.sideOffset(),
-      this.directionality.value,
+      this.directionality.valueSignal(),
       this.alignmentOffset(),
     ),
   );

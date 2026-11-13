@@ -125,10 +125,10 @@ export class ScPopoverProvider {
 
   protected readonly positions = computed(() =>
     buildOverlayPositionsWithFallback(
-      physicalSide(this.side(), this.direction.value),
+      physicalSide(this.side(), this.direction.valueSignal()),
       this.alignment(),
       this.sideOffset(),
-      this.direction.value,
+      this.direction.valueSignal(),
       this.alignmentOffset(),
     ),
   );
@@ -136,7 +136,8 @@ export class ScPopoverProvider {
   /** The side it was placed on, after any flip, as the screen sees it (`data-side`: physical). */
   private readonly placed = signal<ScOverlaySide | null>(null);
   readonly placedSide = computed(
-    () => this.placed() ?? physicalSide(this.side(), this.direction.value),
+    () =>
+      this.placed() ?? physicalSide(this.side(), this.direction.valueSignal()),
   );
 
   /** Modal: the page behind doesn't scroll; otherwise it follows its anchor. */
@@ -217,6 +218,6 @@ export class ScPopoverProvider {
   }
 
   protected onPositionChange(change: ConnectedOverlayPositionChange): void {
-    this.placed.set(placedSide(change, this.direction.value));
+    this.placed.set(placedSide(change, this.direction.valueSignal()));
   }
 }

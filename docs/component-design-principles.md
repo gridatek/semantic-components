@@ -227,6 +227,17 @@ No lifecycle hooks (`ngOnInit`, `ngOnChanges`, `ngAfterViewInit`, `ngAfterConten
 
 An input's value isn't read in the constructor (it isn't bound yet): read it in a `computed()` or `effect()`. The avatar's image is a model: it checks in its constructor whether the picture already loaded (the element and its `src` exist then).
 
+## Sides and Directions: Logical Outside, Physical Inside
+
+A rule (the user, 2026-11-13). The consumer speaks logical first — `side="inline-start"`, `alignment="end"`, which flip right to left — and may say physical (`left`, `right`) for a side that stays put. Inside, the library works only in physical sides:
+
+- **Convert as soon as possible**, in one place: `physicalSide(side, direction)` (`utils/overlay-positions`), in the first `computed()` that needs the side. Positions, flips, fallbacks, fits and `data-side` all use the physical result; no code past that point checks for `inline-start`.
+- **The direction is a signal**: CDK's `Directionality.valueSignal()`, from `ScElementDirectionality` provided on the part (`providers: [{ provide: Directionality, useClass: ScElementDirectionality }]`), so a `dir="rtl"` box counts, not only the document. Never a plain `.value` inside a `computed()`, and never a DOM read of `direction` there; an event handler reading the current `.value` is fine.
+- **`data-side` is physical** — the side the box landed on, after a flip (`top`, `right`, `bottom`, `left`). The presets carry rules for those four only: no `data-[side=inline-…]` and no logical slide utilities (tw-animate's `start` / `end` slides build invalid CSS anyway).
+- **The one exception: a part placed by CSS** — the Sidebar. Nothing to convert in script: its `data-side` is the word given, and its CSS uses logical utilities (`start-0`, `border-e`), right in both directions before any script runs, server-rendered pages included. Converting it would need the direction in the browser, and the page would jump on first paint.
+
+Names: `side` is the edge (`top`, `bottom`, `inline-start`, `inline-end`, `left`, `right`); `alignment` is the place along it (`start`, `center`, `end`); their offsets `sideOffset` and `alignmentOffset`. `start` / `end` never name a side.
+
 ## Component Structure Template
 
 A part is a `@Directive` on the consumer's element — a `@Component` only when it needs a template of its own, encapsulation or a CDK base class. It sets no text (no default label: the consumer writes it), and a `data-slot` only when another component styles by it ([data-slot-pattern.md](data-slot-pattern.md)).
