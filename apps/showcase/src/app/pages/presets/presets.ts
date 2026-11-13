@@ -34,7 +34,8 @@ import { PreviewCards } from './cards/preview-cards';
 
 /**
  * Presets, as shadcn's Create: the options as cards on the left, the
- * components in that look on the right. Only the style can change for now:
+ * components in that look on the right. Only the style and the mode change
+ * for now. The style:
  * a preset is set when the app starts, so picking one saves it and reloads.
  */
 @Component({
@@ -189,7 +190,8 @@ import { PreviewCards } from './cards/preview-cards';
           }
         </ul>
         <p class="text-muted-foreground mt-3 px-1 text-xs">
-          Only the style can change for now; more options are coming.
+          Only the style and the mode can change for now; more options are
+          coming.
         </p>
       </section>
 
