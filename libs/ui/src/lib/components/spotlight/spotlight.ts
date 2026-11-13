@@ -18,9 +18,12 @@ import {
 import { cn } from 'cn';
 import {
   type ScPlacementBox,
-  type ScPlacementSide,
   spotlightPlacement,
 } from '../../utilities/spotlight-placement';
+import {
+  type ScOverlayLogicalSide,
+  type ScOverlaySide,
+} from '../../utils/overlay-positions';
 
 /**
  * One element in the spotlight: the page dimmed but for it, your content in
@@ -28,6 +31,9 @@ import {
  * inert); or `interactive`: the element stays usable through the cutout.
  * Escape, or a click on the dim, closes.
  */
+/** Where the card goes: the library's sides (`inline-start` / `inline-end` follow the direction). */
+export type ScSpotlightSide = ScOverlayLogicalSide;
+
 @Component({
   selector: '[scSpotlight]',
   exportAs: 'scSpotlight',
@@ -96,7 +102,7 @@ export class ScSpotlight {
   /** The element in the spotlight; none, the card is centred. */
   readonly for = input<Element | null>(null);
   /** Where the card goes; it flips when there is no room. */
-  readonly side = input<ScPlacementSide>('bottom');
+  readonly side = input<ScSpotlightSide>('bottom');
   /** The room around the element, in pixels. */
   readonly padding = input(8);
   /** The element stays usable through the cutout; the page is not inert. */
@@ -119,7 +125,7 @@ export class ScSpotlight {
     height: 0,
   });
   protected readonly cardAt = signal({ top: 0, left: 0 });
-  protected readonly placed = signal<ScPlacementSide | 'center'>('center');
+  protected readonly placed = signal<ScOverlaySide | 'center'>('center');
   private readonly viewport = signal({ width: 0, height: 0 });
 
   /** Placed once since opening: from then on, its moves are animated. */
@@ -280,7 +286,7 @@ export class ScSpotlight {
       viewport,
       side: this.side(),
       padding: this.padding(),
-      rtl: getComputedStyle(view).direction === 'rtl',
+      direction: getComputedStyle(view).direction === 'rtl' ? 'rtl' : 'ltr',
     });
     this.lit.set(placed.spotlight);
     this.cardAt.set(placed.card);

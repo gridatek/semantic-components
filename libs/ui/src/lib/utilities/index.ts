@@ -7,5 +7,4 @@ export * from './intersection-observer';
 export * from './resize-observer';
 export * from './query-param-state';
 // Internal helpers: only the types public inputs use.
-export type { ScPlacementSide } from './spotlight-placement';
 export type { ScSortableOrientation } from './sortable';

@@ -40,7 +40,7 @@ Put only the steps and the footer in the tour; the targets are anywhere (templat
 ## Steps
 
 - `[for]`: the target element; none, the card is centred and all is dimmed (a welcome, a farewell).
-- `side`: `top`, `bottom` (default), `inline-start`, `inline-end` — logical (or `left`, `right`, which stay put right to left); if there is no room, the opposite, then the others; then shifted to stay on screen. `data-side` on the card says which.
+- `side`: `top`, `bottom` (default), `inline-start`, `inline-end` — logical (or `left`, `right`, which stay put right to left); if there is no room, the opposite, then the others; then shifted to stay on screen. `data-side` on the card says which, physical (`top`, `right`, `bottom`, `left`), or `center` with no target.
 - `padding`: the room around the target in the spotlight.
 - Each step: its target scrolled into view (smoothly; at once for reduced motion), the spotlight and the card placed — again when the page scrolls, resizes or the target changes size — and focus on the card.
 

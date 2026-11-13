@@ -21,7 +21,7 @@ export class SidesSpotlightDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
-  type ScPlacementSide,
+  type ScSpotlightSide,
   ScSpotlight,
   ScSpotlightClose,
   ScSpotlightDescription,
@@ -77,6 +77,6 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
 })
 export class SidesSpotlightDemo {
   readonly sides = ['top', 'bottom', 'inline-start', 'inline-end'] as const;
-  readonly side$ = signal<ScPlacementSide>('bottom');
+  readonly side$ = signal<ScSpotlightSide>('bottom');
 }`;
 }

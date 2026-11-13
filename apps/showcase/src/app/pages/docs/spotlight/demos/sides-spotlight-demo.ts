@@ -1,10 +1,10 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
-  type ScPlacementSide,
   ScSpotlight,
   ScSpotlightClose,
   ScSpotlightDescription,
+  type ScSpotlightSide,
   ScSpotlightTitle,
 } from '@semantic-components/ui';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
@@ -57,5 +57,5 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
 })
 export class SidesSpotlightDemo {
   readonly sides = ['top', 'bottom', 'inline-start', 'inline-end'] as const;
-  readonly side$ = signal<ScPlacementSide>('bottom');
+  readonly side$ = signal<ScSpotlightSide>('bottom');
 }

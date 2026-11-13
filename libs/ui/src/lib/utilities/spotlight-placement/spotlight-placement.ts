@@ -1,9 +1,9 @@
-/**
- * Where a card goes around its target: logical (`inline-start`, `inline-end`
- * follow the direction) or physical (`left`, `right` stay put).
- */
-export type ScPlacementSide =
-  'top' | 'bottom' | 'left' | 'right' | 'inline-start' | 'inline-end';
+import type { Direction } from '@angular/cdk/bidi';
+import {
+  type ScOverlayLogicalSide,
+  type ScOverlaySide,
+  physicalSide,
+} from '../../utils/overlay-positions';
 
 export interface ScPlacementBox {
   readonly top: number;
@@ -17,37 +17,41 @@ export interface ScSpotlightPlacement {
   readonly spotlight: ScPlacementBox;
   /** Where the card goes. */
   readonly card: { readonly top: number; readonly left: number };
-  /** The side it took — or `center`, with no target. */
-  readonly side: ScPlacementSide | 'center';
+  /**
+   * The side it landed on, as the screen sees it (`data-side`: physical, as
+   * the popups') — or `center`, with no target.
+   */
+  readonly side: ScOverlaySide | 'center';
 }
 
-/** Room kept between the card, its target and the screen's edges. */
-const GAP = 12;
+/** The card's distance from its target (the overlays' `sideOffset`). */
+const SIDE_OFFSET = 12;
+/** Room kept between the card and the screen's edges. */
 const EDGE = 8;
 
-const OPPOSITE: Record<ScPlacementSide, ScPlacementSide> = {
+const OPPOSITE: Record<ScOverlaySide, ScOverlaySide> = {
   top: 'bottom',
   bottom: 'top',
   left: 'right',
   right: 'left',
-  'inline-start': 'inline-end',
-  'inline-end': 'inline-start',
 };
 
 /**
- * A spotlight on `target`, and a card beside it: on `side`, or — without
- * room — the opposite, then the others; then shifted to stay on screen.
- * Without a target, the card is centred. In viewport pixels.
+ * A spotlight on `target`, and a card beside it: on `side` (the library's
+ * sides — `inline-start` / `inline-end` follow the direction, `left` / `right`
+ * stay put), or, without room, the opposite, then the others; then shifted to
+ * stay on screen. Without a target, the card is centred. In viewport pixels.
+ * Worked out physically: the side is turned to the screen's first.
  */
 export function spotlightPlacement(options: {
   target: DOMRect | null;
   card: { width: number; height: number };
   viewport: { width: number; height: number };
-  side: ScPlacementSide;
+  side: ScOverlayLogicalSide;
   padding: number;
-  rtl: boolean;
+  direction: Direction;
 }): ScSpotlightPlacement {
-  const { target, card, viewport, padding, rtl } = options;
+  const { target, card, viewport, padding } = options;
   if (!target) {
     return {
       spotlight: {
@@ -70,57 +74,44 @@ export function spotlightPlacement(options: {
     width: target.width + padding * 2,
     height: target.height + padding * 2,
   };
-  const physical = (side: ScPlacementSide) =>
-    side === 'inline-start'
-      ? rtl
-        ? 'right'
-        : 'left'
-      : side === 'inline-end'
-        ? rtl
-          ? 'left'
-          : 'right'
-        : side;
-  const at = (side: ScPlacementSide) => {
-    switch (physical(side)) {
+  const at = (side: ScOverlaySide) => {
+    switch (side) {
       case 'top':
         return {
-          top: lit.top - GAP - card.height,
+          top: lit.top - SIDE_OFFSET - card.height,
           left: lit.left + lit.width / 2 - card.width / 2,
         };
       case 'bottom':
         return {
-          top: lit.top + lit.height + GAP,
+          top: lit.top + lit.height + SIDE_OFFSET,
           left: lit.left + lit.width / 2 - card.width / 2,
         };
       case 'left':
         return {
           top: lit.top + lit.height / 2 - card.height / 2,
-          left: lit.left - GAP - card.width,
+          left: lit.left - SIDE_OFFSET - card.width,
         };
       default:
         return {
           top: lit.top + lit.height / 2 - card.height / 2,
-          left: lit.left + lit.width + GAP,
+          left: lit.left + lit.width + SIDE_OFFSET,
         };
     }
   };
-  const fits = (side: ScPlacementSide) => {
+  const fits = (side: ScOverlaySide) => {
     const { top, left } = at(side);
-    const across = physical(side) === 'top' || physical(side) === 'bottom';
-    return across
+    return side === 'top' || side === 'bottom'
       ? top >= EDGE && top + card.height <= viewport.height - EDGE
       : left >= EDGE && left + card.width <= viewport.width - EDGE;
   };
 
-  const wanted = options.side;
-  const order: ScPlacementSide[] = [
+  // The side asked, then its opposite, then the others.
+  const wanted = physicalSide(options.side, options.direction);
+  const order: ScOverlaySide[] = [
     wanted,
     OPPOSITE[wanted],
-    // The others, compared on screen: `right` and `inline-end` can be one.
-    ...(['bottom', 'top', 'inline-end', 'inline-start'] as const).filter(
-      (side) =>
-        physical(side) !== physical(wanted) &&
-        physical(side) !== physical(OPPOSITE[wanted]),
+    ...(['bottom', 'top', 'right', 'left'] as const).filter(
+      (side) => side !== wanted && side !== OPPOSITE[wanted],
     ),
   ];
   const side = order.find(fits) ?? wanted;

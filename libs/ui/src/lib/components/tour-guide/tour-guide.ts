@@ -1,3 +1,4 @@
+import type { Direction } from '@angular/cdk/bidi';
 import { DOCUMENT, NgTemplateOutlet } from '@angular/common';
 import {
   Component,
@@ -19,9 +20,9 @@ import {
 import { cn } from 'cn';
 import {
   type ScPlacementBox,
-  type ScPlacementSide,
   spotlightPlacement,
 } from '../../utilities/spotlight-placement';
+import { type ScOverlaySide } from '../../utils/overlay-positions';
 import { ScTourGuideStep } from './tour-guide-step';
 
 /**
@@ -115,7 +116,7 @@ export class ScTourGuide {
     height: 0,
   });
   protected readonly cardAt = signal({ top: 0, left: 0 });
-  protected readonly placed = signal<ScPlacementSide | 'center'>('center');
+  protected readonly placed = signal<ScOverlaySide | 'center'>('center');
 
   /** Placed once since opening: from then on, its moves are animated. */
   protected readonly settled = signal(false);
@@ -262,7 +263,7 @@ export class ScTourGuide {
       viewport: { width: view.clientWidth, height: view.clientHeight },
       side: step?.side() ?? 'bottom',
       padding: step?.padding() ?? 0,
-      rtl: this.direction() === 'rtl',
+      direction: this.direction(),
     });
     this.spotlight.set(placed.spotlight);
     this.cardAt.set(placed.card);
@@ -272,7 +273,9 @@ export class ScTourGuide {
       requestAnimationFrame(() => this.settled.set(this.open()));
   }
 
-  private direction(): string {
-    return getComputedStyle(this.document.documentElement).direction;
+  private direction(): Direction {
+    return getComputedStyle(this.document.documentElement).direction === 'rtl'
+      ? 'rtl'
+      : 'ltr';
   }
 }
