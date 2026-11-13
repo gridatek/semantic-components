@@ -32,11 +32,11 @@ CSS classes via the `cn` utility.
 
 ### ScBubble
 
-| Property | Details                                                                                             |
-| -------- | --------------------------------------------------------------------------------------------------- |
-| Selector | `div[scBubble]`                                                                                     |
-| Inputs   | `variant`: `default` \| `secondary` \| `muted` \| `tinted` \| `outline` \| `ghost` \| `destructive` |
-|          | `alignment`: `start` (default) \| `end`                                                             |
+| Property | Details                                                                                                                     |
+| -------- | --------------------------------------------------------------------------------------------------------------------------- |
+| Selector | `div[scBubble]`                                                                                                             |
+| Inputs   | `variant`: `default` \| `secondary` \| `muted` \| `tinted` \| `outline` \| `ghost` \| `destructive`                         |
+|          | `alignment`: `start` (default) \| `end` (logical: `start` is the reading start, flipped right to left; no `left` / `right`) |
 
 `align="end"` pushes the bubble to the inline end, for your own messages. A
 bubble also follows `data-align` on a surrounding message. It is at most 80%
@@ -56,11 +56,11 @@ named by its text, with a hover colour and a focus ring.
 
 ### ScBubbleReactions
 
-| Property | Details                                 |
-| -------- | --------------------------------------- |
-| Selector | `div[scBubbleReactions]`                |
-| Inputs   | `side`: `bottom` (default) \| `top`     |
-|          | `alignment`: `end` (default) \| `start` |
+| Property | Details                                                                                                                     |
+| -------- | --------------------------------------------------------------------------------------------------------------------------- |
+| Selector | `div[scBubbleReactions]`                                                                                                    |
+| Inputs   | `side`: `bottom` (default) \| `top`                                                                                         |
+|          | `alignment`: `end` (default) \| `start` (logical: `start` is the reading start, flipped right to left; no `left` / `right`) |
 
 Overlaps the bubble's edge: leave room between rows (the demos use `gap-12`).
 A row of emoji is one image — `role="img"` and an `aria-label` ("Reactions:

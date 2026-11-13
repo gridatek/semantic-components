@@ -221,7 +221,7 @@ export default class InputGroupPage {
           type: "'inline-start' | 'inline-end' | 'block-start' | 'block-end'",
           default: "'inline-start'",
           description:
-            'Before or after the control (an input), above or below it (a textarea).',
+            'Before or after the control (an input), above or below it (a textarea). Logical: inline-start is the reading start, flipped right to left; no left / right.',
         },
         this.classRow,
       ],

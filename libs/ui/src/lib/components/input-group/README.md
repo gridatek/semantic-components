@@ -50,10 +50,10 @@ The box: `role="group"`, the border, the ring when its control has focus, red wh
 
 Icons, text or buttons beside the control (`injectPreset().inputGroupAddon`). A click on it, not on its buttons, focuses the control.
 
-| Input       | Type                                                             | Default          | Description                                                            |
-| ----------- | ---------------------------------------------------------------- | ---------------- | ---------------------------------------------------------------------- |
-| `alignment` | `'inline-start' \| 'inline-end' \| 'block-start' \| 'block-end'` | `'inline-start'` | Before or after the control (an input), above or below it (a textarea) |
-| `class`     | `string`                                                         | `''`             | Classes merged over the preset (`cn`: a later class wins)              |
+| Input       | Type                                                             | Default          | Description                                                                                                                                                       |
+| ----------- | ---------------------------------------------------------------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `alignment` | `'inline-start' \| 'inline-end' \| 'block-start' \| 'block-end'` | `'inline-start'` | Before or after the control (an input), above or below it (a textarea) — logical: `inline-start` is the reading start, flipped right to left; no `left` / `right` |
+| `class`     | `string`                                                         | `''`             | Classes merged over the preset (`cn`: a later class wins)                                                                                                         |
 
 ### ScInputGroupButton — `button[scInputGroupButton]`
 

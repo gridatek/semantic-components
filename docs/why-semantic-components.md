@@ -202,7 +202,7 @@ This library makes deliberate choices that prioritize the future of Angular over
 - **OnPush only.** All components use OnPush change detection, the Angular v22+ default.
 - **Signal-based forms only.** Form integrations are designed around signals, not `NgModel` or reactive forms.
 - **No NgModules.** Everything is standalone. There are no module exports, no `forRoot()`, no compatibility shims for module-based apps.
-- **Input names that aren't HTML attributes.** A part is a directive on your own element, so a static input stays in the DOM as an attribute. Where shadcn and Base UI say `align`, ours is `alignment` (Menu, Tooltip, Popover, Preview Card, Navigation Menu, Input Group addon, Bubble, Message, Timeline): `align` is an old HTML attribute that browsers read as text alignment on a `div`.
+- **Input names that aren't HTML attributes.** A part is a directive on your own element, so a static input stays in the DOM as an attribute. Where shadcn and Base UI say `align`, ours is `alignment` (Menu, Tooltip, Popover, Preview Card, Navigation Menu, Input Group addon, Bubble, Message, Timeline): `align` is an old HTML attribute that browsers read as text alignment on a `div`. Its values are logical only (`start`, `center`, `end`; the addon's `inline-start`…): `start` is the reading start, flipped right to left — no `left` / `right`.
 
 ---
 
