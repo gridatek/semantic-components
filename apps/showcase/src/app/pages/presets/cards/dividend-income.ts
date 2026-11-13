@@ -68,7 +68,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
               </div>
               <div
                 scChart
-                class="hidden h-8 w-24 md:block"
+                class="hidden h-8 w-24 md:flex"
                 [config]="config"
                 [data]="holding.data"
               >

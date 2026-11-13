@@ -63,7 +63,7 @@ export class ScChartPlot {
 
   protected readonly class = computed(() =>
     cn(
-      'min-h-0 w-full flex-1 overflow-visible rounded-md outline-none focus-visible:ring-3 focus-visible:ring-ring/50',
+      'h-full min-h-0 w-full flex-1 overflow-visible rounded-md outline-none focus-visible:ring-3 focus-visible:ring-ring/50',
       this.classInput(),
     ),
   );
