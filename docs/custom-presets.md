@@ -38,15 +38,12 @@ Let a consumer restyle the whole library with their own preset, once the library
 
 - Colors, radius and fonts are the theme's CSS variables (`styles.css`), not the preset: the docs must say which to change for what. A preset says how parts are drawn; the theme, in which colors.
 
-## Switching presets without a reload
+## Presets are fixed at start (decided, 2026-11-13)
 
-- Today a preset is fixed at start: each part reads its classes once, when it is created (`private readonly styles = injectPreset().card`), and keeps them. Swapping the preset later wouldn't change the parts already on screen, so `/presets` and the preset sheet save the name in a cookie and reload.
-- To switch at runtime: the preset becomes a signal in the setup (`SC_CONFIG`), and every part reads it inside its `computed()` classes instead of keeping it in a field. About a hundred parts: a mechanical change, but library-wide, and each part's classes then depend on one more signal.
-- It would also let `/presets` preview a consumer's preset (an object with functions — the `cva` variants — can't be saved in a cookie and rebuilt after a reload), and let an app offer a style picker to its users.
-
-## In the showcase
-
-- `/presets` could load a custom preset (paste or upload the object?) to preview it with all the Create demos. Needs a runtime preset switch, which we don't have (a preset is fixed at start).
+- An app picks its preset once, when it starts; it doesn't change it while running. A runtime switch is not planned: no app needs it, and offering several presets would grow the app's JavaScript and CSS (every preset's classes generated).
+- Only our showcase switches (/presets, the preset sheet): it saves the name in a cookie and reloads — enough there.
+- Why it needs the reload: each part reads its classes once, when it is created (`private readonly styles = injectPreset().card`). Switching live would mean the preset as a signal and every part reading it in its `computed()`: about a hundred parts. Cheap at run time, but not worth it for the showcase alone.
+- So a consumer's own preset is previewed in their own app, not on /presets (an object with functions — the `cva` variants — can't be saved in a cookie and rebuilt after a reload).
 
 ## Open questions
 
