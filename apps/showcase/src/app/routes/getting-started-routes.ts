@@ -34,6 +34,12 @@ export const gettingStartedRoutes: Route[] = [
         loadComponent: () => import('../pages/getting-started/presets-page'),
       },
       {
+        path: 'custom-preset',
+        title: 'Custom preset - Semantic Components',
+        loadComponent: () =>
+          import('../pages/getting-started/custom-preset-page'),
+      },
+      {
         path: 'i18n',
         title: 'Internationalization - Semantic Components',
         loadComponent: () => import('../pages/getting-started/i18n-page'),

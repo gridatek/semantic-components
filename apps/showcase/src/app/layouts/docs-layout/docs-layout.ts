@@ -236,6 +236,17 @@ import { ConfigService } from '../../services/config-service';
                     <li scSidebarMenuSubItem>
                       <a
                         scSidebarMenuSubButton
+                        routerLink="/docs/getting-started/custom-preset"
+                        routerLinkActive
+                        #customPresetRla="routerLinkActive"
+                        [active]="customPresetRla.isActive"
+                      >
+                        <span>Custom preset</span>
+                      </a>
+                    </li>
+                    <li scSidebarMenuSubItem>
+                      <a
+                        scSidebarMenuSubButton
                         routerLink="/docs/getting-started/i18n"
                         routerLinkActive
                         #i18nRla="routerLinkActive"
@@ -458,6 +469,10 @@ export class DocsLayout {
     { name: 'Prerequisites', path: '/docs/getting-started/prerequisites' },
     { name: 'UI', path: '/docs/getting-started/ui' },
     { name: 'Presets', path: '/docs/getting-started/presets' },
+    {
+      name: 'Custom preset',
+      path: '/docs/getting-started/custom-preset',
+    },
     { name: 'Internationalization', path: '/docs/getting-started/i18n' },
     { name: 'MCP Server', path: '/docs/getting-started/mcp-server' },
     ...[...this.components(), ...this.utilities(), ...this.recipes()].map(
