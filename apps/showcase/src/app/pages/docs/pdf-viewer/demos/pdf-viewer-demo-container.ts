@@ -77,9 +77,9 @@ import {
   ScSwitch,
   ScSwitchField,
   ScTabs,
-  ScTabsContent,
   ScTabsList,
   ScTabsPanel,
+  ScTabsPanelContent,
   ScTabsTab,
   ScTextarea,
   ScToggleGroup,
@@ -396,7 +396,7 @@ const INK_COLORS = [
     ScTabsList,
     ScTabsTab,
     ScTabsPanel,
-    ScTabsContent,
+    ScTabsPanelContent,
     ScDialogProvider,
     ScDialogPortal,
     ScDialog,
@@ -1187,7 +1187,7 @@ const INK_COLORS = [
                   value="thumbnails"
                   class="flex-1 overflow-y-auto"
                 >
-                  <ng-template scTabsContent>
+                  <ng-template scTabsPanelContent>
                     <div
                       role="toolbar"
                       aria-label="Organise pages"
@@ -1339,7 +1339,7 @@ const INK_COLORS = [
 
                 <!-- Outline -->
                 <div scTabsPanel value="outline" class="flex-1 overflow-y-auto">
-                  <ng-template scTabsContent>
+                  <ng-template scTabsPanelContent>
                     @if (viewer.outline().length === 0) {
                       <p class="text-muted-foreground p-4 text-center text-sm">
                         No outline in this document.
@@ -1408,7 +1408,7 @@ const INK_COLORS = [
                   value="attachments"
                   class="flex-1 overflow-y-auto"
                 >
-                  <ng-template scTabsContent>
+                  <ng-template scTabsPanelContent>
                     @if (viewer.attachments().length === 0) {
                       <p class="text-muted-foreground p-4 text-center text-sm">
                         No attachments in this document.
@@ -1438,7 +1438,7 @@ const INK_COLORS = [
 
                 <!-- Layers -->
                 <div scTabsPanel value="layers" class="flex-1 overflow-y-auto">
-                  <ng-template scTabsContent>
+                  <ng-template scTabsPanelContent>
                     @if (viewer.layers().length === 0) {
                       <p class="text-muted-foreground p-4 text-center text-sm">
                         No layers in this document.
@@ -1460,7 +1460,7 @@ const INK_COLORS = [
 
                 <!-- Comments -->
                 <div scTabsPanel value="comments" class="min-h-0 flex-1">
-                  <ng-template scTabsContent>
+                  <ng-template scTabsPanelContent>
                     <div class="flex h-full flex-col">
                       <div
                         class="flex items-center justify-between gap-2 border-b px-3 py-2"
@@ -1941,7 +1941,7 @@ const INK_COLORS = [
                 </div>
 
                 <div scTabsPanel value="type">
-                  <ng-template scTabsContent>
+                  <ng-template scTabsPanelContent>
                     <input
                       scInput
                       scPdfViewerSignatureName
@@ -1952,7 +1952,7 @@ const INK_COLORS = [
                 </div>
 
                 <div scTabsPanel value="draw">
-                  <ng-template scTabsContent>
+                  <ng-template scTabsPanelContent>
                     <div class="grid gap-3">
                       <div class="relative h-36">
                         @if (!signature.strokes().length) {
@@ -1984,7 +1984,7 @@ const INK_COLORS = [
                 </div>
 
                 <div scTabsPanel value="image">
-                  <ng-template scTabsContent>
+                  <ng-template scTabsPanelContent>
                     <div
                       class="flex h-36 flex-col items-center justify-center gap-2 rounded-lg border bg-white"
                     >

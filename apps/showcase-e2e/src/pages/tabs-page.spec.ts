@@ -23,7 +23,7 @@ test.describe('Tabs Page', () => {
       'ScTabsList',
       'ScTabsTab',
       'ScTabsPanel',
-      'ScTabsContent',
+      'ScTabsPanelContent',
     ]);
   });
 

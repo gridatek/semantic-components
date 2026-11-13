@@ -21,9 +21,9 @@ export class IconsTabsDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScTabs,
-  ScTabsContent,
   ScTabsList,
   ScTabsPanel,
+  ScTabsPanelContent,
   ScTabsTab,
 } from '@semantic-components/ui';
 import { SiAppWindowIcon, SiCodeIcon } from '@semantic-icons/lucide-icons';
@@ -36,7 +36,7 @@ import { SiAppWindowIcon, SiCodeIcon } from '@semantic-icons/lucide-icons';
     ScTabsList,
     ScTabsTab,
     ScTabsPanel,
-    ScTabsContent,
+    ScTabsPanelContent,
     SiAppWindowIcon,
     SiCodeIcon,
   ],
@@ -53,10 +53,10 @@ import { SiAppWindowIcon, SiCodeIcon } from '@semantic-icons/lucide-icons';
         </button>
       </div>
       <div scTabsPanel value="preview" class="text-muted-foreground p-2">
-        <ng-template scTabsContent> The rendered page. </ng-template>
+        <ng-template scTabsPanelContent> The rendered page. </ng-template>
       </div>
       <div scTabsPanel value="code" class="text-muted-foreground p-2">
-        <ng-template scTabsContent> Its source. </ng-template>
+        <ng-template scTabsPanelContent> Its source. </ng-template>
       </div>
     </div>
   \`,

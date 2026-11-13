@@ -5,7 +5,7 @@ import { injectPreset } from '../../config/preset';
 
 /**
  * A tab's panel (role tabpanel), named by its tab, shown while its tab is
- * selected. Its content goes in an `ng-template scTabsContent` (Angular
+ * selected. Its content goes in an `ng-template scTabsPanelContent` (Angular
  * Aria's way): created when the panel is shown.
  */
 @Directive({

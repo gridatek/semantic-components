@@ -21,9 +21,9 @@ export class TabsCodeBlockDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScTabs,
-  ScTabsContent,
   ScTabsList,
   ScTabsPanel,
+  ScTabsPanelContent,
   ScTabsTab,
 } from '@semantic-components/ui';
 import {
@@ -44,7 +44,7 @@ import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
     ScTabsList,
     ScTabsTab,
     ScTabsPanel,
-    ScTabsContent,
+    ScTabsPanelContent,
     ScCodeBlock,
     ScCodeBlockHeader,
     ScCodeBlockTitle,
@@ -61,7 +61,7 @@ import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
         <button scTabsTab value="template">hello.html</button>
       </div>
       <div scTabsPanel value="component">
-        <ng-template scTabsContent>
+        <ng-template scTabsPanelContent>
           <div scCodeBlock>
             <div scCodeBlockHeader>
               <div scCodeBlockTitle>src/app/hello.ts</div>
@@ -91,7 +91,7 @@ import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
         </ng-template>
       </div>
       <div scTabsPanel value="template">
-        <ng-template scTabsContent>
+        <ng-template scTabsPanelContent>
           <div scCodeBlock>
             <div scCodeBlockHeader>
               <div scCodeBlockTitle>src/app/hello.html</div>

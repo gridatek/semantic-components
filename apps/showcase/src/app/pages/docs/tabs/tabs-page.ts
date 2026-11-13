@@ -61,7 +61,7 @@ import { VerticalTabsDemoContainer } from './demos/vertical-tabs-demo-container'
         <p class="text-muted-foreground">
           Every part is a directive on your element; the tabs&apos; text and
           icons are yours. A panel&apos;s content goes in an ng-template
-          scTabsContent.
+          scTabsPanelContent.
         </p>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
@@ -72,7 +72,7 @@ import { VerticalTabsDemoContainer } from './demos/vertical-tabs-demo-container'
           Angular Aria, which the tabs are built on, renders a panel only
           through its template: content written straight in a panel is not
           allowed (Aria reports it in development). So every panel&apos;s
-          content goes in an ng-template scTabsContent.
+          content goes in an ng-template scTabsPanelContent.
         </p>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
@@ -167,7 +167,7 @@ export default class TabsPage {
     imports: [
       'import {',
       '  ScTabs, ScTabsList, ScTabsTab, ScTabsPanel,',
-      '  ScTabsContent,',
+      '  ScTabsPanelContent,',
       "} from '@semantic-components/ui';",
     ].join('\n'),
     markup: [
@@ -176,7 +176,7 @@ export default class TabsPage {
       '    <button scTabsTab value="…">…</button>',
       '  </div>',
       '  <div scTabsPanel value="…">',
-      '    <ng-template scTabsContent>…</ng-template>',
+      '    <ng-template scTabsPanelContent>…</ng-template>',
       '  </div>',
       '</div>',
     ].join('\n'),
@@ -207,8 +207,8 @@ export default class TabsPage {
         'A tab’s panel (role tabpanel), named by its tab: value. Shown while its tab is selected.',
     },
     {
-      name: 'ScTabsContent',
-      selector: 'ng-template[scTabsContent]',
+      name: 'ScTabsPanelContent',
+      selector: 'ng-template[scTabsPanelContent]',
       description: 'In a panel: its content, created when the panel is shown.',
     },
   ];

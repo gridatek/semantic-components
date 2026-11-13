@@ -1,16 +1,16 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScTabs,
-  ScTabsContent,
   ScTabsList,
   ScTabsPanel,
+  ScTabsPanelContent,
   ScTabsTab,
 } from '@semantic-components/ui';
 
 /** variant="line": the selected tab underlined, no box. */
 @Component({
   selector: 'app-line-tabs-demo',
-  imports: [ScTabs, ScTabsList, ScTabsTab, ScTabsPanel, ScTabsContent],
+  imports: [ScTabs, ScTabsList, ScTabsTab, ScTabsPanel, ScTabsPanelContent],
   template: `
     <div scTabs value="overview">
       <div scTabsList variant="line">
@@ -19,13 +19,15 @@ import {
         <button scTabsTab value="reports">Reports</button>
       </div>
       <div scTabsPanel value="overview" class="text-muted-foreground p-2">
-        <ng-template scTabsContent> Your key metrics at a glance. </ng-template>
+        <ng-template scTabsPanelContent>
+          Your key metrics at a glance.
+        </ng-template>
       </div>
       <div scTabsPanel value="analytics" class="text-muted-foreground p-2">
-        <ng-template scTabsContent> Trends and engagement. </ng-template>
+        <ng-template scTabsPanelContent> Trends and engagement. </ng-template>
       </div>
       <div scTabsPanel value="reports" class="text-muted-foreground p-2">
-        <ng-template scTabsContent> Reports ready to export. </ng-template>
+        <ng-template scTabsPanelContent> Reports ready to export. </ng-template>
       </div>
     </div>
   `,

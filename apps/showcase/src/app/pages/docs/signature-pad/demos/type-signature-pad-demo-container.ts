@@ -27,9 +27,9 @@ import {
   ScSignaturePadSurface,
   ScSignaturePadText,
   ScTabs,
-  ScTabsContent,
   ScTabsList,
   ScTabsPanel,
+  ScTabsPanelContent,
   ScTabsTab,
 } from '@semantic-components/ui';
 
@@ -46,7 +46,7 @@ import {
     ScTabsList,
     ScTabsTab,
     ScTabsPanel,
-    ScTabsContent,
+    ScTabsPanelContent,
     ScLabel,
   ],
   template: \`
@@ -57,14 +57,14 @@ import {
           <button scTabsTab value="type">Type</button>
         </div>
         <div scTabsPanel value="draw">
-          <ng-template scTabsContent>
+          <ng-template scTabsPanelContent>
             <div scSignaturePadSurface aria-label="Signature">
               <div scSignaturePadLine>× Sign here</div>
             </div>
           </ng-template>
         </div>
         <div scTabsPanel value="type">
-          <ng-template scTabsContent>
+          <ng-template scTabsPanelContent>
             <label scLabel for="signature-name" class="mb-2">
               Type your name
             </label>

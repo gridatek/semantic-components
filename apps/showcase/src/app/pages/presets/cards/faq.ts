@@ -12,9 +12,9 @@ import {
   ScCardBody,
   ScCardFooter,
   ScTabs,
-  ScTabsContent,
   ScTabsList,
   ScTabsPanel,
+  ScTabsPanelContent,
   ScTabsTab,
 } from '@semantic-components/ui';
 import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
@@ -40,7 +40,7 @@ interface ScFaqQuestion {
     ScCardBody,
     ScCardFooter,
     ScTabs,
-    ScTabsContent,
+    ScTabsPanelContent,
     ScTabsList,
     ScTabsPanel,
     ScTabsTab,
@@ -59,7 +59,7 @@ interface ScFaqQuestion {
           </div>
           @for (topic of topics; track topic.value) {
             <div scTabsPanel [value]="topic.value">
-              <ng-template scTabsContent>
+              <ng-template scTabsPanelContent>
                 <div scAccordion [value]="['0']">
                   @for (item of topic.questions; track $index) {
                     <div scAccordionItem [value]="'' + $index">

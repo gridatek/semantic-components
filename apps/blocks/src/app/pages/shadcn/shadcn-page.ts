@@ -37,9 +37,9 @@ import {
   ScProgressTrack,
   ScSeparator,
   ScTabs,
-  ScTabsContent,
   ScTabsList,
   ScTabsPanel,
+  ScTabsPanelContent,
   ScTabsTab,
 } from '@semantic-components/ui';
 import {
@@ -88,7 +88,7 @@ import {
     ScProgressTrack,
     ScSeparator,
     ScTabsTab,
-    ScTabsContent,
+    ScTabsPanelContent,
     ScTabsList,
     ScTabsPanel,
     ScTabs,
@@ -901,7 +901,7 @@ import {
                     </button>
                   </div>
                   <div scTabsPanel value="starters">
-                    <ng-template scTabsContent>
+                    <ng-template scTabsPanelContent>
                       <div class="space-y-4 pt-4">
                         @for (item of menuStarters; track item.name) {
                           <div
@@ -946,7 +946,7 @@ import {
                     </ng-template>
                   </div>
                   <div scTabsPanel value="mains">
-                    <ng-template scTabsContent>
+                    <ng-template scTabsPanelContent>
                       <div
                         class="text-muted-foreground flex h-32 items-center justify-center text-sm"
                         i18n="@@shadcn.menu.mainsSoon"
@@ -956,7 +956,7 @@ import {
                     </ng-template>
                   </div>
                   <div scTabsPanel value="desserts">
-                    <ng-template scTabsContent>
+                    <ng-template scTabsPanelContent>
                       <div
                         class="text-muted-foreground flex h-32 items-center justify-center text-sm"
                         i18n="@@shadcn.menu.dessertsSoon"
@@ -966,7 +966,7 @@ import {
                     </ng-template>
                   </div>
                   <div scTabsPanel value="drinks">
-                    <ng-template scTabsContent>
+                    <ng-template scTabsPanelContent>
                       <div
                         class="text-muted-foreground flex h-32 items-center justify-center text-sm"
                         i18n="@@shadcn.menu.drinksSoon"

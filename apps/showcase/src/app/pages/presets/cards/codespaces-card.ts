@@ -39,9 +39,9 @@ import {
   ScSeparator,
   ScSpinner,
   ScTabs,
-  ScTabsContent,
   ScTabsList,
   ScTabsPanel,
+  ScTabsPanelContent,
   ScTabsTab,
   ScTooltip,
   ScTooltipPortal,
@@ -102,7 +102,7 @@ import {
     ScSeparator,
     ScSpinner,
     ScTabs,
-    ScTabsContent,
+    ScTabsPanelContent,
     ScTabsList,
     ScTabsPanel,
     ScTabsTab,
@@ -133,7 +133,7 @@ import {
             <button scTabsTab value="local" class="flex-1">Local</button>
           </div>
           <div scTabsPanel value="codespaces">
-            <ng-template scTabsContent>
+            <ng-template scTabsPanelContent>
               <div scItem size="sm" class="px-1 pt-2">
                 <div scItemBody>
                   <div scItemTitle>Codespaces</div>
@@ -255,7 +255,7 @@ import {
             </ng-template>
           </div>
           <div scTabsPanel value="local">
-            <ng-template scTabsContent>
+            <ng-template scTabsPanelContent>
               <div scTabs value="https">
                 <div
                   scTabsList
@@ -271,7 +271,7 @@ import {
                 <div scFrame size="sm" class="bg-muted/30 p-2">
                   @for (remote of remotes; track remote.value) {
                     <div scTabsPanel [value]="remote.value">
-                      <ng-template scTabsContent>
+                      <ng-template scTabsPanelContent>
                         <div scField class="gap-2">
                           <label scLabel class="sr-only">{{
                             remote.name

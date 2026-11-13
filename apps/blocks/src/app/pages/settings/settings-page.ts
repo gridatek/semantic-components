@@ -16,9 +16,9 @@ import {
   ScSwitch,
   ScSwitchField,
   ScTabs,
-  ScTabsContent,
   ScTabsList,
   ScTabsPanel,
+  ScTabsPanelContent,
   ScTabsTab,
   ScTextarea,
 } from '@semantic-components/ui';
@@ -42,7 +42,7 @@ import {
     ScSwitch,
     ScSwitchField,
     ScTabsTab,
-    ScTabsContent,
+    ScTabsPanelContent,
     ScTabsList,
     ScTabsPanel,
     ScTabs,
@@ -87,7 +87,7 @@ import {
           </div>
 
           <div scTabsPanel value="profile">
-            <ng-template scTabsContent>
+            <ng-template scTabsPanelContent>
               <div class="space-y-6 pt-6">
                 <div scCard>
                   <div scCardHeader>
@@ -164,7 +164,7 @@ import {
           </div>
 
           <div scTabsPanel value="account">
-            <ng-template scTabsContent>
+            <ng-template scTabsPanelContent>
               <div class="space-y-6 pt-6">
                 <div scCard>
                   <div scCardHeader>
@@ -275,7 +275,7 @@ import {
           </div>
 
           <div scTabsPanel value="notifications">
-            <ng-template scTabsContent>
+            <ng-template scTabsPanelContent>
               <div class="space-y-6 pt-6">
                 <div scCard>
                   <div scCardHeader>
@@ -374,7 +374,7 @@ import {
           </div>
 
           <div scTabsPanel value="appearance">
-            <ng-template scTabsContent>
+            <ng-template scTabsPanelContent>
               <div class="space-y-6 pt-6">
                 <div scCard>
                   <div scCardHeader>

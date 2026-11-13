@@ -16,9 +16,9 @@ import {
   ScButton,
   ScFrame,
   ScTabs,
-  ScTabsContent,
   ScTabsList,
   ScTabsPanel,
+  ScTabsPanelContent,
   ScTabsTab,
 } from '@semantic-components/ui';
 import {
@@ -56,7 +56,7 @@ import { TocHeading } from '../toc/toc-heading';
     ScTabsList,
     ScTabsTab,
     ScTabsPanel,
-    ScTabsContent,
+    ScTabsPanelContent,
     SiCheckIcon,
     SiCopyIcon,
     SiExternalLinkIcon,
@@ -95,7 +95,7 @@ import { TocHeading } from '../toc/toc-heading';
         </div>
 
         <div scTabsPanel scFrame value="preview" [class]="previewClass()">
-          <ng-template scTabsContent>
+          <ng-template scTabsPanelContent>
             @if (framed()) {
               <!--
                 Full-page demos (e.g. a sidebar layout) run in their own
@@ -124,7 +124,7 @@ import { TocHeading } from '../toc/toc-heading';
         </div>
 
         <div scTabsPanel value="code">
-          <ng-template scTabsContent>
+          <ng-template scTabsPanelContent>
             <div scCodeBlock>
               <div scCodeBlockHeader>
                 <div scCodeBlockTitle>{{ language() }}</div>

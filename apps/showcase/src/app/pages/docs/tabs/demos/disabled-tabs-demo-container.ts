@@ -21,16 +21,16 @@ export class DisabledTabsDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScTabs,
-  ScTabsContent,
   ScTabsList,
   ScTabsPanel,
+  ScTabsPanelContent,
   ScTabsTab,
 } from '@semantic-components/ui';
 
 /** A disabled tab: reached by the arrows, not selected. */
 @Component({
   selector: 'app-disabled-tabs-demo',
-  imports: [ScTabs, ScTabsList, ScTabsTab, ScTabsPanel, ScTabsContent],
+  imports: [ScTabs, ScTabsList, ScTabsTab, ScTabsPanel, ScTabsPanelContent],
   template: \`
     <div scTabs value="home">
       <div scTabsList>
@@ -38,10 +38,10 @@ import {
         <button scTabsTab value="settings" disabled>Disabled</button>
       </div>
       <div scTabsPanel value="home" class="text-muted-foreground p-2">
-        <ng-template scTabsContent> The home tab. </ng-template>
+        <ng-template scTabsPanelContent> The home tab. </ng-template>
       </div>
       <div scTabsPanel value="settings" class="text-muted-foreground p-2">
-        <ng-template scTabsContent> Not reachable. </ng-template>
+        <ng-template scTabsPanelContent> Not reachable. </ng-template>
       </div>
     </div>
   \`,

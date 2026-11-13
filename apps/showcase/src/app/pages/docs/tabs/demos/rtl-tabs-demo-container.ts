@@ -27,9 +27,9 @@ import {
   ScCardHeader,
   ScCardTitle,
   ScTabs,
-  ScTabsContent,
   ScTabsList,
   ScTabsPanel,
+  ScTabsPanelContent,
   ScTabsTab,
 } from '@semantic-components/ui';
 
@@ -42,7 +42,7 @@ import {
     ScTabsList,
     ScTabsTab,
     ScTabsPanel,
-    ScTabsContent,
+    ScTabsPanelContent,
     ScCard,
     ScCardHeader,
     ScCardTitle,
@@ -59,7 +59,7 @@ import {
           <button scTabsTab value="settings">الإعدادات</button>
         </div>
         <div scTabsPanel value="overview">
-          <ng-template scTabsContent>
+          <ng-template scTabsPanelContent>
             <div scCard>
               <div scCardHeader>
                 <div scCardTitle>نظرة عامة</div>
@@ -75,7 +75,7 @@ import {
           </ng-template>
         </div>
         <div scTabsPanel value="analytics">
-          <ng-template scTabsContent>
+          <ng-template scTabsPanelContent>
             <div scCard>
               <div scCardHeader>
                 <div scCardTitle>التحليلات</div>
@@ -91,7 +91,7 @@ import {
           </ng-template>
         </div>
         <div scTabsPanel value="reports">
-          <ng-template scTabsContent>
+          <ng-template scTabsPanelContent>
             <div scCard>
               <div scCardHeader>
                 <div scCardTitle>التقارير</div>
@@ -107,7 +107,7 @@ import {
           </ng-template>
         </div>
         <div scTabsPanel value="settings">
-          <ng-template scTabsContent>
+          <ng-template scTabsPanelContent>
             <div scCard>
               <div scCardHeader>
                 <div scCardTitle>الإعدادات</div>

@@ -11,10 +11,10 @@ Tabs and their panels, one shown at a time. In the look of the app's preset (sha
     <button scTabsTab value="password">Password</button>
   </div>
   <div scTabsPanel value="account">
-    <ng-template scTabsContent>Make changes to your account here.</ng-template>
+    <ng-template scTabsPanelContent>Make changes to your account here.</ng-template>
   </div>
   <div scTabsPanel value="password">
-    <ng-template scTabsContent>Change your password here.</ng-template>
+    <ng-template scTabsPanelContent>Change your password here.</ng-template>
   </div>
 </div>
 ```
@@ -27,7 +27,7 @@ Tabs and their panels, one shown at a time. In the look of the app's preset (sha
     <button scTabsTab></button>
   </div>
   <div scTabsPanel>
-    <ng-template scTabsContent></ng-template>
+    <ng-template scTabsPanelContent></ng-template>
   </div>
 </div>
 ```
@@ -42,13 +42,13 @@ Tab enters the list on the selected tab, then goes on to its panel. ArrowLeft an
 
 ## API reference
 
-| Part            | Selector                     | Inputs                                                                                                            |
-| --------------- | ---------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| `ScTabs`        | `[scTabs]`                   | `value` (`[(value)]`), `orientation` (`'horizontal'`, `'vertical'`), `class`                                      |
-| `ScTabsList`    | `[scTabsList]`               | `variant` (`'default'`, `'line'`), `activateOnFocus` (default off), `wrap` (default on), `class` — role `tablist` |
-| `ScTabsTab`     | `button[scTabsTab]`          | `value`, `disabled` (reached, not selected: `aria-disabled`), `class` — role `tab`                                |
-| `ScTabsPanel`   | `[scTabsPanel]`              | `value`, `class` — role `tabpanel`, named by its tab                                                              |
-| `ScTabsContent` | `ng-template[scTabsContent]` | — the panel's content                                                                                             |
+| Part                 | Selector                          | Inputs                                                                                                            |
+| -------------------- | --------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `ScTabs`             | `[scTabs]`                        | `value` (`[(value)]`), `orientation` (`'horizontal'`, `'vertical'`), `class`                                      |
+| `ScTabsList`         | `[scTabsList]`                    | `variant` (`'default'`, `'line'`), `activateOnFocus` (default off), `wrap` (default on), `class` — role `tablist` |
+| `ScTabsTab`          | `button[scTabsTab]`               | `value`, `disabled` (reached, not selected: `aria-disabled`), `class` — role `tab`                                |
+| `ScTabsPanel`        | `[scTabsPanel]`                   | `value`, `class` — role `tabpanel`, named by its tab                                                              |
+| `ScTabsPanelContent` | `ng-template[scTabsPanelContent]` | — the panel's content                                                                                             |
 
 Every part's classes are the preset's (`injectPreset().tabs`: `root`, `list` by variant, `trigger`, `panel`): shadcn's Tabs, in each style.
 

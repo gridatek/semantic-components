@@ -7,9 +7,9 @@ import {
 } from '@angular/core';
 import {
   ScTabs,
-  ScTabsContent,
   ScTabsList,
   ScTabsPanel,
+  ScTabsPanelContent,
   ScTabsTab,
 } from '@semantic-components/ui';
 import {
@@ -42,7 +42,7 @@ import { PackageManagerService } from './package-manager-service';
     ScTabsList,
     ScTabsTab,
     ScTabsPanel,
-    ScTabsContent,
+    ScTabsPanelContent,
   ],
   template: `
     <div
@@ -72,7 +72,7 @@ import { PackageManagerService } from './package-manager-service';
         </div>
         @for (entry of commands(); track entry.id) {
           <div scTabsPanel [value]="entry.id">
-            <ng-template scTabsContent>
+            <ng-template scTabsPanelContent>
               <pre
                 scCodeBlockContent
                 [code]="entry.command"
