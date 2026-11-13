@@ -31,7 +31,7 @@ jobs:
           cache: 'npm'
 
       # The base and head of nx affected: the last green commit, and this one.
-      - uses: nrwl/nx-set-shas@v4
+      - uses: nrwl/nx-set-shas@v5
 
       - name: Install dependencies
         run: npm i
@@ -86,7 +86,7 @@ jobs:
           node-version: 26
           cache: 'npm'
 
-      - uses: nrwl/nx-set-shas@v4
+      - uses: nrwl/nx-set-shas@v5
 
       - name: Install dependencies
         run: npm i
