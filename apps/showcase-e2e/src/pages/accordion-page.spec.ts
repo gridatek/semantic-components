@@ -24,7 +24,7 @@ test.describe('Accordion Page', () => {
       'ScAccordionHeader',
       'ScAccordionTrigger',
       'ScAccordionTriggerIcon',
-      'ScAccordionPanel, ScAccordionContent',
+      'ScAccordionPanel, ScAccordionPanelContent',
     ]);
   });
 

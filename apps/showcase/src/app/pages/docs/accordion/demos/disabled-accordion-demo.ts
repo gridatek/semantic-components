@@ -1,10 +1,10 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScAccordion,
-  ScAccordionContent,
   ScAccordionHeader,
   ScAccordionItem,
   ScAccordionPanel,
+  ScAccordionPanelContent,
   ScAccordionTrigger,
   ScAccordionTriggerIcon,
 } from '@semantic-components/ui';
@@ -20,7 +20,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     ScAccordionTrigger,
     ScAccordionTriggerIcon,
     ScAccordionPanel,
-    ScAccordionContent,
+    ScAccordionPanelContent,
     SiChevronDownIcon,
   ],
   template: `
@@ -33,7 +33,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
           </button>
         </h3>
         <div scAccordionPanel>
-          <ng-template scAccordionContent>
+          <ng-template scAccordionPanelContent>
             Yes, you can view your complete account history including all
             transactions, plan changes, and support tickets in the Account
             History section of your dashboard.
@@ -48,7 +48,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
           </button>
         </h3>
         <div scAccordionPanel>
-          <ng-template scAccordionContent>
+          <ng-template scAccordionPanelContent>
             This section contains information about premium features. Upgrade
             your plan to access this content.
           </ng-template>
@@ -62,7 +62,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
           </button>
         </h3>
         <div scAccordionPanel>
-          <ng-template scAccordionContent>
+          <ng-template scAccordionPanelContent>
             You can update your email address in your account settings. You’ll
             receive a verification email at your new address to confirm the
             change.

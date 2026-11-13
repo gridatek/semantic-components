@@ -12,7 +12,7 @@ import { injectPreset } from '../../config/preset';
 import { SC_ACCORDION_ITEM } from './accordion-item-context';
 
 /**
- * An item's panel (role region, named by its trigger). Its content, in an `ng-template scAccordionContent`, is created when it
+ * An item's panel (role region, named by its trigger). Its content, in an `ng-template scAccordionPanelContent`, is created when it
  * first opens and kept: closed, the panel is inert and its height animates to
  * nothing.
  *

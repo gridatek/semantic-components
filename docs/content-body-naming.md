@@ -45,7 +45,7 @@ Native Dialog shows the whole shape: `scNativeDialogProvider` → `dialog[scNati
 
 ### 2. A nested part's content → named after that part
 
-- [ ] `ScAccordionContent` → `ScAccordionPanelContent` (`ng-template`, inside `scAccordionPanel`).
+- [x] `ScAccordionContent` → `ScAccordionPanelContent` (`ng-template`, inside `scAccordionPanel`).
 - [ ] `ScTabsContent` → `ScTabsPanelContent` (`ng-template`, inside `scTabsPanel`).
 - [ ] `ScTraceCollapsibleContent` (`div`, a step's details inside `scCollapsiblePanel`): the name to find.
 - [ ] `ScScrollAreaNextContent` (`div`, what scrolls inside `scScrollAreaNextViewport`) → `ScScrollAreaNextViewportContent`? Or left as it is: the Scroll Area rewrite decides.

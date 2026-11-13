@@ -22,10 +22,10 @@ export class RtlAccordionDemoContainer {
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScAccordion,
-  ScAccordionContent,
   ScAccordionHeader,
   ScAccordionItem,
   ScAccordionPanel,
+  ScAccordionPanelContent,
   ScAccordionTrigger,
   ScAccordionTriggerIcon,
 } from '@semantic-components/ui';
@@ -42,7 +42,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     ScAccordionTrigger,
     ScAccordionTriggerIcon,
     ScAccordionPanel,
-    ScAccordionContent,
+    ScAccordionPanelContent,
     SiChevronDownIcon,
   ],
   template: \`
@@ -56,7 +56,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
             </button>
           </h3>
           <div scAccordionPanel>
-            <ng-template scAccordionContent>
+            <ng-template scAccordionPanelContent>
               انقر على 'نسيت كلمة المرور' في صفحة تسجيل الدخول، أدخل عنوان بريدك
               الإلكتروني، وسنرسل لك رابطًا لإعادة تعيين كلمة المرور. سينتهي
               صلاحية الرابط خلال 24 ساعة.
@@ -71,7 +71,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
             </button>
           </h3>
           <div scAccordionPanel>
-            <ng-template scAccordionContent>
+            <ng-template scAccordionPanelContent>
               نعم، يمكنك ترقية أو تخفيض خطتك في أي وقت من إعدادات حسابك. ستظهر
               التغييرات في دورة الفوترة التالية.
             </ng-template>
@@ -85,7 +85,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
             </button>
           </h3>
           <div scAccordionPanel>
-            <ng-template scAccordionContent>
+            <ng-template scAccordionPanelContent>
               نقبل جميع بطاقات الائتمان الرئيسية و PayPal والتحويلات المصرفية.
               تتم معالجة جميع المدفوعات بأمان من خلال شركاء الدفع لدينا.
             </ng-template>

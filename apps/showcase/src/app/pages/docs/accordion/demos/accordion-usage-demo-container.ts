@@ -17,10 +17,10 @@ export class AccordionUsageDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScAccordion,
-  ScAccordionContent,
   ScAccordionHeader,
   ScAccordionItem,
   ScAccordionPanel,
+  ScAccordionPanelContent,
   ScAccordionTrigger,
   ScAccordionTriggerIcon,
 } from '@semantic-components/ui';
@@ -35,7 +35,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     ScAccordionTrigger,
     ScAccordionTriggerIcon,
     ScAccordionPanel,
-    ScAccordionContent,
+    ScAccordionPanelContent,
     SiChevronDownIcon,
   ],
   template: \`
@@ -48,7 +48,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
           </button>
         </h3>
         <div scAccordionPanel>
-          <ng-template scAccordionContent>
+          <ng-template scAccordionPanelContent>
             We offer standard (5-7 days), express (2-3 days), and overnight
             shipping. Free shipping on international orders.
           </ng-template>
@@ -62,7 +62,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
           </button>
         </h3>
         <div scAccordionPanel>
-          <ng-template scAccordionContent>
+          <ng-template scAccordionPanelContent>
             Returns accepted within 30 days. Items must be unused and in
             original packaging. Refunds processed within 5-7 business days.
           </ng-template>
@@ -76,7 +76,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
           </button>
         </h3>
         <div scAccordionPanel>
-          <ng-template scAccordionContent>
+          <ng-template scAccordionPanelContent>
             Reach us via email, live chat, or phone. We respond within 24 hours
             during business days.
           </ng-template>

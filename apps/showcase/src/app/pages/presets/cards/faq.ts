@@ -1,10 +1,10 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScAccordion,
-  ScAccordionContent,
   ScAccordionHeader,
   ScAccordionItem,
   ScAccordionPanel,
+  ScAccordionPanelContent,
   ScAccordionTrigger,
   ScAccordionTriggerIcon,
   ScButton,
@@ -29,7 +29,7 @@ interface ScFaqQuestion {
   selector: 'app-preview-faq',
   imports: [
     ScAccordion,
-    ScAccordionContent,
+    ScAccordionPanelContent,
     ScAccordionHeader,
     ScAccordionItem,
     ScAccordionPanel,
@@ -70,7 +70,7 @@ interface ScFaqQuestion {
                         </button>
                       </h3>
                       <div scAccordionPanel>
-                        <ng-template scAccordionContent>{{
+                        <ng-template scAccordionPanelContent>{{
                           item.a
                         }}</ng-template>
                       </div>

@@ -21,10 +21,10 @@ export class MultipleAccordionDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScAccordion,
-  ScAccordionContent,
   ScAccordionHeader,
   ScAccordionItem,
   ScAccordionPanel,
+  ScAccordionPanelContent,
   ScAccordionTrigger,
   ScAccordionTriggerIcon,
 } from '@semantic-components/ui';
@@ -40,7 +40,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     ScAccordionTrigger,
     ScAccordionTriggerIcon,
     ScAccordionPanel,
-    ScAccordionContent,
+    ScAccordionPanelContent,
     SiChevronDownIcon,
   ],
   template: \`
@@ -53,7 +53,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
           </button>
         </h3>
         <div scAccordionPanel>
-          <ng-template scAccordionContent>
+          <ng-template scAccordionPanelContent>
             Manage how you receive notifications. You can enable email alerts
             for updates or push notifications for mobile devices.
           </ng-template>
@@ -67,7 +67,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
           </button>
         </h3>
         <div scAccordionPanel>
-          <ng-template scAccordionContent>
+          <ng-template scAccordionPanelContent>
             Control your privacy settings and security preferences. Enable
             two-factor authentication, manage connected devices, review active
             sessions, and configure data sharing preferences. You can also
@@ -83,7 +83,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
           </button>
         </h3>
         <div scAccordionPanel>
-          <ng-template scAccordionContent>
+          <ng-template scAccordionPanelContent>
             View your current plan, payment history, and upcoming invoices.
             Update your payment method, change your subscription tier, or cancel
             your subscription.

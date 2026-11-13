@@ -73,8 +73,8 @@ import { RtlAccordionDemoContainer } from './demos/rtl-accordion-demo-container'
         <p class="text-muted-foreground">
           Angular Aria, which the accordion is built on, renders a panel only
           through its template: a panel&apos;s content goes in an ng-template
-          scAccordionContent. It is created when the panel first opens, then
-          kept — so the panel animates as it closes. Until then the
+          scAccordionPanelContent. It is created when the panel first opens,
+          then kept — so the panel animates as it closes. Until then the
           browser&apos;s find-in-page doesn&apos;t see it.
         </p>
       </section>
@@ -155,7 +155,7 @@ export default class AccordionPage {
       'import {',
       '  ScAccordion, ScAccordionItem, ScAccordionHeader,',
       '  ScAccordionTrigger, ScAccordionTriggerIcon,',
-      '  ScAccordionPanel, ScAccordionContent,',
+      '  ScAccordionPanel, ScAccordionPanelContent,',
       "} from '@semantic-components/ui';",
     ].join('\n'),
     markup: [
@@ -168,7 +168,7 @@ export default class AccordionPage {
       '      </button>',
       '    </h3>',
       '    <div scAccordionPanel>',
-      '      <ng-template scAccordionContent>…</ng-template>',
+      '      <ng-template scAccordionPanelContent>…</ng-template>',
       '    </div>',
       '  </div>',
       '</div>',
@@ -204,8 +204,8 @@ export default class AccordionPage {
       description: 'Your chevron: at the trigger’s end, turned while open.',
     },
     {
-      name: 'ScAccordionPanel, ScAccordionContent',
-      selector: '[scAccordionPanel], ng-template[scAccordionContent]',
+      name: 'ScAccordionPanel, ScAccordionPanelContent',
+      selector: '[scAccordionPanel], ng-template[scAccordionPanelContent]',
       description:
         'The panel (role region, named by its trigger) and its content, in a template.',
     },

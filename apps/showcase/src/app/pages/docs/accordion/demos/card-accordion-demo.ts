@@ -1,10 +1,10 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScAccordion,
-  ScAccordionContent,
   ScAccordionHeader,
   ScAccordionItem,
   ScAccordionPanel,
+  ScAccordionPanelContent,
   ScAccordionTrigger,
   ScAccordionTriggerIcon,
   ScCard,
@@ -25,7 +25,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     ScAccordionTrigger,
     ScAccordionTriggerIcon,
     ScAccordionPanel,
-    ScAccordionContent,
+    ScAccordionPanelContent,
     ScCard,
     ScCardHeader,
     ScCardTitle,
@@ -52,7 +52,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
               </button>
             </h3>
             <div scAccordionPanel>
-              <ng-template scAccordionContent>
+              <ng-template scAccordionPanelContent>
                 We offer three subscription tiers: Starter ($9/month),
                 Professional ($29/month), and Enterprise ($99/month). Each plan
                 includes increasing storage limits, API access, priority
@@ -68,7 +68,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
               </button>
             </h3>
             <div scAccordionPanel>
-              <ng-template scAccordionContent>
+              <ng-template scAccordionPanelContent>
                 Billing occurs automatically at the start of each billing cycle.
                 We accept all major credit cards, PayPal, and ACH transfers for
                 enterprise customers. You'll receive an invoice via email after
@@ -84,7 +84,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
               </button>
             </h3>
             <div scAccordionPanel>
-              <ng-template scAccordionContent>
+              <ng-template scAccordionPanelContent>
                 You can cancel your subscription anytime from your account
                 settings. There are no cancellation fees or penalties. Your
                 access will continue until the end of your current billing

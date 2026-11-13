@@ -21,10 +21,10 @@ export class BordersAccordionDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScAccordion,
-  ScAccordionContent,
   ScAccordionHeader,
   ScAccordionItem,
   ScAccordionPanel,
+  ScAccordionPanelContent,
   ScAccordionTrigger,
   ScAccordionTriggerIcon,
   ScFrame,
@@ -41,7 +41,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     ScAccordionTrigger,
     ScAccordionTriggerIcon,
     ScAccordionPanel,
-    ScAccordionContent,
+    ScAccordionPanelContent,
     ScFrame,
     SiChevronDownIcon,
   ],
@@ -59,7 +59,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
           </button>
         </h3>
         <div scAccordionPanel>
-          <ng-template scAccordionContent>
+          <ng-template scAccordionPanelContent>
             We offer monthly and annual subscription plans. Billing is charged
             at the beginning of each cycle, and you can cancel anytime. All
             plans include automatic backups, 24/7 support, and unlimited team
@@ -79,7 +79,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
           </button>
         </h3>
         <div scAccordionPanel>
-          <ng-template scAccordionContent>
+          <ng-template scAccordionPanelContent>
             Yes. We use end-to-end encryption, SOC 2 Type II compliance, and
             regular third-party security audits. All data is encrypted at rest
             and in transit using industry-standard protocols.
@@ -98,7 +98,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
           </button>
         </h3>
         <div scAccordionPanel>
-          <ng-template scAccordionContent>
+          <ng-template scAccordionPanelContent>
             We integrate with 500+ popular tools including Slack, Zapier,
             Salesforce, HubSpot, and more. You can also build custom
             integrations using our REST API and webhooks.

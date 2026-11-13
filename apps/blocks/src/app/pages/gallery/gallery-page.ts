@@ -1,10 +1,10 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScAccordion,
-  ScAccordionContent,
   ScAccordionHeader,
   ScAccordionItem,
   ScAccordionPanel,
+  ScAccordionPanelContent,
   ScAccordionTrigger,
   ScAccordionTriggerIcon,
   ScAlert,
@@ -51,7 +51,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   imports: [
     ScFrame,
     ScAccordion,
-    ScAccordionContent,
+    ScAccordionPanelContent,
     ScAccordionHeader,
     ScAccordionItem,
     ScAccordionPanel,
@@ -718,7 +718,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
                   </button>
                 </h3>
                 <div scAccordionPanel>
-                  <ng-template scAccordionContent>
+                  <ng-template scAccordionPanelContent>
                     <ng-container i18n="@@gallery.faq.accessible.answer">
                       Yes. It adheres to the WAI-ARIA design pattern.
                     </ng-container>
@@ -733,7 +733,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
                   </button>
                 </h3>
                 <div scAccordionPanel>
-                  <ng-template scAccordionContent>
+                  <ng-template scAccordionPanelContent>
                     <ng-container i18n="@@gallery.faq.styled.answer">
                       Yes. It comes with default styles that match the other
                       components' aesthetic.
@@ -749,7 +749,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
                   </button>
                 </h3>
                 <div scAccordionPanel>
-                  <ng-template scAccordionContent>
+                  <ng-template scAccordionPanelContent>
                     <ng-container i18n="@@gallery.faq.animated.answer">
                       Yes. It's animated by default, but you can disable it if
                       you prefer.

@@ -1,10 +1,10 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScAccordion,
-  ScAccordionContent,
   ScAccordionHeader,
   ScAccordionItem,
   ScAccordionPanel,
+  ScAccordionPanelContent,
   ScAccordionTrigger,
   ScAccordionTriggerIcon,
 } from '@semantic-components/ui';
@@ -20,7 +20,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     ScAccordionTrigger,
     ScAccordionTriggerIcon,
     ScAccordionPanel,
-    ScAccordionContent,
+    ScAccordionPanelContent,
     SiChevronDownIcon,
   ],
   template: `
@@ -33,7 +33,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
           </button>
         </h3>
         <div scAccordionPanel>
-          <ng-template scAccordionContent>
+          <ng-template scAccordionPanelContent>
             Click on 'Forgot Password' on the login page, enter your email
             address, and we'll send you a link to reset your password. The link
             will expire in 24 hours.
@@ -48,7 +48,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
           </button>
         </h3>
         <div scAccordionPanel>
-          <ng-template scAccordionContent>
+          <ng-template scAccordionPanelContent>
             Yes, you can upgrade or downgrade your plan at any time from your
             account settings. Changes will be reflected in your next billing
             cycle.
@@ -63,7 +63,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
           </button>
         </h3>
         <div scAccordionPanel>
-          <ng-template scAccordionContent>
+          <ng-template scAccordionPanelContent>
             We accept all major credit cards, PayPal, and bank transfers. All
             payments are processed securely through our payment partners.
           </ng-template>
