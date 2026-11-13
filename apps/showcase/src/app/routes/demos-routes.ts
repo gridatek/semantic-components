@@ -5,6 +5,370 @@ export const demosRoutes: Route[] = [
     path: 'demos/ai-elements',
     children: [
       {
+        path: 'tool-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/tool/demos/tool-usage-demo').then(
+            (m) => m.ToolUsageDemo,
+          ),
+      },
+      {
+        path: 'states-tool-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/tool/demos/states-tool-demo').then(
+            (m) => m.StatesToolDemo,
+          ),
+      },
+      {
+        path: 'sheet-tool-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/tool/demos/sheet-tool-demo').then(
+            (m) => m.SheetToolDemo,
+          ),
+      },
+      {
+        path: 'rtl-tool-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/tool/demos/rtl-tool-demo').then(
+            (m) => m.RtlToolDemo,
+          ),
+      },
+      {
+        path: 'test-results-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/test-results/demos/test-results-usage-demo').then(
+            (m) => m.TestResultsUsageDemo,
+          ),
+      },
+      {
+        path: 'suites-test-results-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/test-results/demos/suites-test-results-demo').then(
+            (m) => m.SuitesTestResultsDemo,
+          ),
+      },
+      {
+        path: 'rtl-test-results-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/test-results/demos/rtl-test-results-demo').then(
+            (m) => m.RtlTestResultsDemo,
+          ),
+      },
+      {
+        path: 'terminal-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/terminal/demos/terminal-usage-demo').then(
+            (m) => m.TerminalUsageDemo,
+          ),
+      },
+      {
+        path: 'exit-code-terminal-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/terminal/demos/exit-code-terminal-demo').then(
+            (m) => m.ExitCodeTerminalDemo,
+          ),
+      },
+      {
+        path: 'rtl-terminal-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/terminal/demos/rtl-terminal-demo').then(
+            (m) => m.RtlTerminalDemo,
+          ),
+      },
+      {
+        path: 'task-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/task/demos/task-usage-demo').then(
+            (m) => m.TaskUsageDemo,
+          ),
+      },
+      {
+        path: 'steps-task-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/task/demos/steps-task-demo').then(
+            (m) => m.StepsTaskDemo,
+          ),
+      },
+      {
+        path: 'rtl-task-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/task/demos/rtl-task-demo').then(
+            (m) => m.RtlTaskDemo,
+          ),
+      },
+      {
+        path: 'suggestion-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/suggestion/demos/suggestion-usage-demo').then(
+            (m) => m.SuggestionUsageDemo,
+          ),
+      },
+      {
+        path: 'rtl-suggestion-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/suggestion/demos/rtl-suggestion-demo').then(
+            (m) => m.RtlSuggestionDemo,
+          ),
+      },
+      {
+        path: 'subagent-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/subagent/demos/subagent-usage-demo').then(
+            (m) => m.SubagentUsageDemo,
+          ),
+      },
+      {
+        path: 'running-subagent-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/subagent/demos/running-subagent-demo').then(
+            (m) => m.RunningSubagentDemo,
+          ),
+      },
+      {
+        path: 'details-subagent-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/subagent/demos/details-subagent-demo').then(
+            (m) => m.DetailsSubagentDemo,
+          ),
+      },
+      {
+        path: 'rtl-subagent-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/subagent/demos/rtl-subagent-demo').then(
+            (m) => m.RtlSubagentDemo,
+          ),
+      },
+      {
+        path: 'stack-trace-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/stack-trace/demos/stack-trace-usage-demo').then(
+            (m) => m.StackTraceUsageDemo,
+          ),
+      },
+      {
+        path: 'muted-frames-stack-trace-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/stack-trace/demos/muted-frames-stack-trace-demo').then(
+            (m) => m.MutedFramesStackTraceDemo,
+          ),
+      },
+      {
+        path: 'rtl-stack-trace-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/stack-trace/demos/rtl-stack-trace-demo').then(
+            (m) => m.RtlStackTraceDemo,
+          ),
+      },
+      {
+        path: 'sources-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/sources/demos/sources-usage-demo').then(
+            (m) => m.SourcesUsageDemo,
+          ),
+      },
+      {
+        path: 'rtl-sources-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/sources/demos/rtl-sources-demo').then(
+            (m) => m.RtlSourcesDemo,
+          ),
+      },
+      {
+        path: 'queue-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/queue/demos/queue-usage-demo').then(
+            (m) => m.QueueUsageDemo,
+          ),
+      },
+      {
+        path: 'descriptions-queue-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/queue/demos/descriptions-queue-demo').then(
+            (m) => m.DescriptionsQueueDemo,
+          ),
+      },
+      {
+        path: 'rtl-queue-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/queue/demos/rtl-queue-demo').then(
+            (m) => m.RtlQueueDemo,
+          ),
+      },
+      {
+        path: 'prompt-input-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/prompt-input/demos/prompt-input-usage-demo').then(
+            (m) => m.PromptInputUsageDemo,
+          ),
+      },
+      {
+        path: 'rtl-prompt-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/prompt-input/demos/rtl-prompt-input-demo').then(
+            (m) => m.RtlPromptInputDemo,
+          ),
+      },
+      {
+        path: 'plan-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/plan/demos/plan-usage-demo').then(
+            (m) => m.PlanUsageDemo,
+          ),
+      },
+      {
+        path: 'details-plan-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/plan/demos/details-plan-demo').then(
+            (m) => m.DetailsPlanDemo,
+          ),
+      },
+      {
+        path: 'rtl-plan-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/plan/demos/rtl-plan-demo').then(
+            (m) => m.RtlPlanDemo,
+          ),
+      },
+      {
+        path: 'model-selector-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/model-selector/demos/model-selector-usage-demo').then(
+            (m) => m.ModelSelectorUsageDemo,
+          ),
+      },
+      {
+        path: 'rtl-model-selector-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/model-selector/demos/rtl-model-selector-demo').then(
+            (m) => m.RtlModelSelectorDemo,
+          ),
+      },
+      {
+        path: 'message-pattern-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/message/demos/message-pattern-usage-demo').then(
+            (m) => m.MessagePatternUsageDemo,
+          ),
+      },
+      {
+        path: 'rtl-message-pattern-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/message/demos/rtl-message-pattern-demo').then(
+            (m) => m.RtlMessagePatternDemo,
+          ),
+      },
+      {
+        path: 'inline-citation-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/inline-citation/demos/inline-citation-usage-demo').then(
+            (m) => m.InlineCitationUsageDemo,
+          ),
+      },
+      {
+        path: 'rtl-inline-citation-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/inline-citation/demos/rtl-inline-citation-demo').then(
+            (m) => m.RtlInlineCitationDemo,
+          ),
+      },
+      {
+        path: 'file-tree-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/file-tree/demos/file-tree-usage-demo').then(
+            (m) => m.FileTreeUsageDemo,
+          ),
+      },
+      {
+        path: 'rtl-file-tree-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/file-tree/demos/rtl-file-tree-demo').then(
+            (m) => m.RtlFileTreeDemo,
+          ),
+      },
+      {
+        path: 'context-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/context/demos/context-usage-demo').then(
+            (m) => m.ContextUsageDemo,
+          ),
+      },
+      {
+        path: 'rtl-context-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/context/demos/rtl-context-demo').then(
+            (m) => m.RtlContextDemo,
+          ),
+      },
+      {
+        path: 'confirmation-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/confirmation/demos/confirmation-usage-demo').then(
+            (m) => m.ConfirmationUsageDemo,
+          ),
+      },
+      {
+        path: 'rtl-confirmation-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/confirmation/demos/rtl-confirmation-demo').then(
+            (m) => m.RtlConfirmationDemo,
+          ),
+      },
+      {
+        path: 'checkpoint-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/checkpoint/demos/checkpoint-usage-demo').then(
+            (m) => m.CheckpointUsageDemo,
+          ),
+      },
+      {
+        path: 'rtl-checkpoint-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/checkpoint/demos/rtl-checkpoint-demo').then(
+            (m) => m.RtlCheckpointDemo,
+          ),
+      },
+      {
+        path: 'chat-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/chat/demos/chat-usage-demo').then(
+            (m) => m.ChatUsageDemo,
+          ),
+      },
+      {
+        path: 'rtl-chat-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/chat/demos/rtl-chat-demo').then(
+            (m) => m.RtlChatDemo,
+          ),
+      },
+      {
+        path: 'chain-of-thought-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/chain-of-thought/demos/chain-of-thought-usage-demo').then(
+            (m) => m.ChainOfThoughtUsageDemo,
+          ),
+      },
+      {
+        path: 'steps-chain-of-thought-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/chain-of-thought/demos/steps-chain-of-thought-demo').then(
+            (m) => m.StepsChainOfThoughtDemo,
+          ),
+      },
+      {
+        path: 'search-results-chain-of-thought-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/chain-of-thought/demos/search-results-chain-of-thought-demo').then(
+            (m) => m.SearchResultsChainOfThoughtDemo,
+          ),
+      },
+      {
+        path: 'rtl-chain-of-thought-demo',
+        loadComponent: () =>
+          import('../pages/docs/ai-elements/chain-of-thought/demos/rtl-chain-of-thought-demo').then(
+            (m) => m.RtlChainOfThoughtDemo,
+          ),
+      },
+      {
         path: 'reasoning-usage-demo',
         loadComponent: () =>
           import('../pages/docs/ai-elements/reasoning/demos/reasoning-usage-demo').then(

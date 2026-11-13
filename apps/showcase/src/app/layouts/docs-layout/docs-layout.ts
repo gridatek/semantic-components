@@ -467,7 +467,29 @@ export class DocsLayout {
   readonly utilities = this.componentsService.visibleUtilities;
   readonly recipes = this.componentsService.visibleRecipes;
   /** shadcn's AI Elements: patterns built from the components. */
-  protected readonly aiElements = [{ name: 'Reasoning', path: 'reasoning' }];
+  protected readonly aiElements = [
+    { name: 'Chain of Thought', path: 'chain-of-thought' },
+    { name: 'Chat', path: 'chat' },
+    { name: 'Checkpoint', path: 'checkpoint' },
+    { name: 'Confirmation', path: 'confirmation' },
+    { name: 'Context', path: 'context' },
+    { name: 'File Tree', path: 'file-tree' },
+    { name: 'Inline Citation', path: 'inline-citation' },
+    { name: 'Message', path: 'message' },
+    { name: 'Model Selector', path: 'model-selector' },
+    { name: 'Plan', path: 'plan' },
+    { name: 'Prompt Input', path: 'prompt-input' },
+    { name: 'Queue', path: 'queue' },
+    { name: 'Reasoning', path: 'reasoning' },
+    { name: 'Sources', path: 'sources' },
+    { name: 'Stack Trace', path: 'stack-trace' },
+    { name: 'Subagent', path: 'subagent' },
+    { name: 'Suggestion', path: 'suggestion' },
+    { name: 'Task', path: 'task' },
+    { name: 'Terminal', path: 'terminal' },
+    { name: 'Test Results', path: 'test-results' },
+    { name: 'Tool', path: 'tool' },
+  ];
   protected readonly devMode = this.config.devMode;
 
   /** The page shown: its path, without query or fragment. */
