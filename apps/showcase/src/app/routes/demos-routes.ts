@@ -3400,6 +3400,13 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
+        path: 'disabled-input-group-demo',
+        loadComponent: () =>
+          import('../pages/docs/input-group/demos/disabled-input-group-demo').then(
+            (m) => m.DisabledInputGroupDemo,
+          ),
+      },
+      {
         path: 'custom-input-group-demo',
         loadComponent: () =>
           import('../pages/docs/input-group/demos/custom-input-group-demo').then(

@@ -127,6 +127,21 @@ A control of yours joins by carrying `data-slot="control"`: the group rings it w
 </div>
 ```
 
+### Disabled
+
+Disable the control (with Signal Forms, `disabled()` in the schema): the group looks disabled with it. A disabled button in the group — Send, while the message is empty — leaves the group as it is.
+
+```html
+<div scInputGroup>
+  <input scInput aria-label="Search" [formField]="searchForm.query" />
+  <div scInputGroupAddon><svg siSearchIcon></svg></div>
+</div>
+```
+
+```ts
+protected readonly searchForm = form(this.search, (s) => disabled(s.query));
+```
+
 ### Dropdown, Kbd, Spinner, RTL
 
 A menu's trigger (`scMenuTrigger`) on a `scInputGroupButton`; a `kbd[scKbd]` or a `svg[scSpinner]` in an addon. In right to left, `inline-start` is the right side.

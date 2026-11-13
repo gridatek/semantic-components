@@ -16,6 +16,7 @@ import { BlockEndInputGroupDemoContainer } from './demos/block-end-input-group-d
 import { BlockStartInputGroupDemoContainer } from './demos/block-start-input-group-demo-container';
 import { ButtonInputGroupDemoContainer } from './demos/button-input-group-demo-container';
 import { CustomInputGroupDemoContainer } from './demos/custom-input-group-demo-container';
+import { DisabledInputGroupDemoContainer } from './demos/disabled-input-group-demo-container';
 import { DropdownInputGroupDemoContainer } from './demos/dropdown-input-group-demo-container';
 import { IconInputGroupDemoContainer } from './demos/icon-input-group-demo-container';
 import { InlineEndInputGroupDemoContainer } from './demos/inline-end-input-group-demo-container';
@@ -51,6 +52,7 @@ interface ScApiRow {
     SpinnerInputGroupDemoContainer,
     TextareaInputGroupDemoContainer,
     CustomInputGroupDemoContainer,
+    DisabledInputGroupDemoContainer,
     RtlInputGroupDemoContainer,
     TocHeading,
     ComponentBadges,
@@ -114,6 +116,7 @@ interface ScApiRow {
         <app-spinner-input-group-demo-container />
         <app-textarea-input-group-demo-container />
         <app-custom-input-group-demo-container />
+        <app-disabled-input-group-demo-container />
         <app-rtl-input-group-demo-container />
       </section>
 
