@@ -95,7 +95,7 @@ import { PreviewCards } from './cards/preview-cards';
                       (valueChange)="choose($event)"
                     >
                       @for (name of names; track name) {
-                        <div scMenuRadioItem [value]="name">
+                        <div scMenuRadioItem closeOnClick [value]="name">
                           <span class="capitalize">{{ name }}</span>
                           <span scMenuItemIndicator>
                             <svg siCheckIcon></svg>
@@ -136,7 +136,7 @@ import { PreviewCards } from './cards/preview-cards';
                       (valueChange)="setMode($event)"
                     >
                       @for (mode of modes; track mode.value) {
-                        <div scMenuRadioItem [value]="mode.value">
+                        <div scMenuRadioItem closeOnClick [value]="mode.value">
                           {{ mode.label }}
                           <span scMenuItemIndicator>
                             <svg siCheckIcon></svg>

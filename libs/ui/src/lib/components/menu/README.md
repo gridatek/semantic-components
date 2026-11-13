@@ -58,7 +58,7 @@ The menu takes its trigger's direction and language (`dir`, `lang`); its submenu
 
 ## Keyboard
 
-On the trigger, Enter, Space or ArrowDown opens the menu on its first item, ArrowUp on its last. A click opens it with nothing highlighted, until the pointer moves or a key is pressed. The arrows move, Home and End go to the ends, a letter goes to the item it starts. The arrow toward the reading end, Enter or Space opens a submenu on its first item; the other arrow closes it. A checkbox or radio item toggles and the menu stays open. Escape closes and gives focus back to the trigger; Tab closes and moves on. A disabled item is reached, not chosen.
+On the trigger, Enter, Space or ArrowDown opens the menu on its first item, ArrowUp on its last. A click opens it with nothing highlighted, until the pointer moves or a key is pressed. The arrows move, Home and End go to the ends, a letter goes to the item it starts. The arrow toward the reading end, Enter or Space opens a submenu on its first item; the other arrow closes it. A checkbox or radio item toggles and the menu stays open, unless it has `closeOnClick` (Base UI's, off by default for these two): then it closes as a plain item does, focus back on the trigger. Escape closes and gives focus back to the trigger; Tab closes and moves on. A disabled item is reached, not chosen.
 
 ## API reference
 
@@ -69,8 +69,8 @@ On the trigger, Enter, Space or ArrowDown opens the menu on its first item, Arro
 | `ScMenuPortal`, `ScMenuContent`       | `ng-template[scMenuPortal]`, `ng-template[scMenuContent]` | — the menu, rendered while open; its items, once it has opened                                                         |
 | `ScMenu`                              | `div[scMenu]`                                             | `wrap`, `disabled`, `typeaheadDelay`, `expansionDelay`, `class`; output `itemSelected`                                 |
 | `ScMenuItem`                          | `[scMenuItem]`                                            | `value`, `disabled`, `variant` (`'default'`, `'destructive'`), `inset`, `class`                                        |
-| `ScMenuCheckboxItem`                  | `[scMenuCheckboxItem]`                                    | `checked` (`[(checked)]`), `disabled`, `inset`, `class`                                                                |
-| `ScMenuRadioGroup`, `ScMenuRadioItem` | `[scMenuRadioGroup]`, `[scMenuRadioItem]`                 | group: `value` (`[(value)]`); item: `value`, `disabled`, `inset`; `class`                                              |
+| `ScMenuCheckboxItem`                  | `[scMenuCheckboxItem]`                                    | `checked` (`[(checked)]`), `disabled`, `inset`, `closeOnClick`, `class`                                                |
+| `ScMenuRadioGroup`, `ScMenuRadioItem` | `[scMenuRadioGroup]`, `[scMenuRadioItem]`                 | group: `value` (`[(value)]`); item: `value`, `disabled`, `inset`, `closeOnClick`; `class`                              |
 | `ScMenuItemIndicator`                 | `span[scMenuItemIndicator]`                               | `class` — shown when its item is on                                                                                    |
 | `ScMenuGroup`, `ScMenuLabel`          | `[scMenuGroup]`, `[scMenuLabel]`                          | `class`; label: `inset` — a `group` named by its label                                                                 |
 | `ScMenuSubmenuIcon`                   | `svg[scMenuSubmenuIcon]`                                  | `class` — your icon for an item that opens a submenu: at its end, turned right to left                                 |

@@ -80,7 +80,7 @@ import {
               (valueChange)="setMode($event)"
             >
               @for (mode of modes; track mode.value) {
-                <div scMenuRadioItem [value]="mode.value">
+                <div scMenuRadioItem closeOnClick [value]="mode.value">
                   <span scMenuItemIndicator><svg siCheckIcon></svg></span>
                   {{ mode.label }}
                 </div>

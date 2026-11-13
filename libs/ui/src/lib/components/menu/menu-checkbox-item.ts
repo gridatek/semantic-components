@@ -16,7 +16,7 @@ import { injectMenuStyles } from './menu-styles';
 
 /**
  * An item that is on or off (menuitemcheckbox), `[(checked)]`. A click, Enter
- * or Space toggles it, and the menu stays open.
+ * or Space toggles it, and the menu stays open (`closeOnClick` closes it).
  */
 @Directive({
   selector: '[scMenuCheckboxItem]',
@@ -51,6 +51,10 @@ export class ScMenuCheckboxItem {
   readonly inset = input<boolean, unknown>(false, {
     transform: booleanAttribute,
   });
+  /** Closes the menu once chosen (Base UI's `closeOnClick`; it stays open by default). */
+  readonly closeOnClick = input<boolean, unknown>(false, {
+    transform: booleanAttribute,
+  });
 
   protected readonly class = computed(() =>
     cn('group/menu-item', this.styles().checkboxItem, this.classInput()),
@@ -63,7 +67,8 @@ export class ScMenuCheckboxItem {
 
   /** Toggles, without the menu's own handling (which would close it). */
   protected toggle(event: Event): void {
-    event.stopPropagation();
+    // Stopped, the menu's own handling doesn't close it.
+    if (!this.closeOnClick()) event.stopPropagation();
     if (this.menuItem.disabled()) return;
     this.checked.update((checked) => !checked);
   }
@@ -71,8 +76,9 @@ export class ScMenuCheckboxItem {
   protected onKeydown(event: KeyboardEvent): void {
     this.highlight.keydown(event);
     if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault();
       this.toggle(event);
+      // Left to the menu, the key closes it.
+      if (!this.closeOnClick()) event.preventDefault();
     }
   }
 }
