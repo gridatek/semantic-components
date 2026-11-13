@@ -89,8 +89,9 @@ test('Collapsed: an ellipsis for the steps left out, not read', async ({
   await page.goto(demo('ellipsis'));
   const ellipsis = page.locator('[scBreadcrumbEllipsis]');
   await expect(ellipsis).toHaveAttribute('aria-hidden', 'true');
+  // Two links to follow; the current page is a disabled link (shadcn's).
   await expect(
-    page.getByRole('navigation', { name: 'Folder path' }).getByRole('link'),
+    page.getByRole('navigation', { name: 'Folder path' }).locator('a[href]'),
   ).toHaveCount(2);
 });
 

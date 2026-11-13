@@ -23,12 +23,13 @@ test.describe('Button Page', () => {
       page.getByRole('heading', { name: 'API reference' }),
     ).toBeVisible();
     const table = page.getByRole('region', { name: 'ScButton inputs' });
-    await expect(table.getByRole('row')).toHaveCount(6);
+    await expect(table.getByRole('row')).toHaveCount(7);
     await expect(table.getByRole('row').locator('td:first-child')).toHaveText([
       'variant',
       'size',
       'type',
       'disabled',
+      'softDisabled',
       'class',
     ]);
     await expect(

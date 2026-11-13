@@ -27,6 +27,8 @@ const pages = [
 test.describe('Docs pages in their preset', () => {
   for (const path of pages)
     test(`${path}: no axe violation, light and dark`, async ({ page }) => {
+      // Two full axe runs on a whole page (the Sidebar's: about 35s).
+      test.slow();
       await page.goto(path);
       await expect(page.locator('h1').first()).toBeVisible();
       await expectNoA11yViolations(page);

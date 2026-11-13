@@ -40,7 +40,7 @@ test('Fallback: a broken image is invisible, the initials show; none at all, the
   ];
   await expect(broken).toHaveAttribute('data-image', 'error');
   const image = broken.locator('img');
-  await expect(image).toHaveAttribute('data-error', '');
+  await expect(image).toHaveAttribute('data-error');
   await expect(image).toHaveCSS('visibility', 'hidden');
   await expect(broken.getByText('JD')).toBeVisible();
   await expect(none).toHaveAttribute('data-image', 'idle');

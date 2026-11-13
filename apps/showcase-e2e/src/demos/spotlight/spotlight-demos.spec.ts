@@ -74,9 +74,16 @@ test.describe('Interactive', () => {
 
 test('Sides: as asked, flipped without room', async ({ page }) => {
   await page.goto(demo('sides'));
-  for (const side of ['top', 'bottom', 'start', 'end']) {
-    await page.getByRole('button', { name: side, exact: true }).click();
-    await expect(card(page)).toHaveAttribute('data-side', side);
+  // Asked logical, placed physical: in left to right, inline-start is the left.
+  const sides = [
+    ['top', 'top'],
+    ['bottom', 'bottom'],
+    ['inline-start', 'left'],
+    ['inline-end', 'right'],
+  ];
+  for (const [asked, placed] of sides) {
+    await page.getByRole('button', { name: asked, exact: true }).click();
+    await expect(card(page)).toHaveAttribute('data-side', placed);
     await page.keyboard.press('Escape');
     await expect.poll(() => isOpen(page)).toBe(false);
   }

@@ -19,7 +19,7 @@ test.describe('Input Group Page', () => {
     await page.goto('/docs/components/input-group');
     for (const [part, inputs] of [
       ['ScInputGroup', ['class']],
-      ['ScInputGroupAddon', ['align', 'class']],
+      ['ScInputGroupAddon', ['side', 'class']],
       ['ScInputGroupButton', ['variant', 'size', 'type', 'disabled', 'class']],
       ['ScInputGroupText', ['class']],
     ] as const) {

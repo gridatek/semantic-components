@@ -4,7 +4,9 @@ import { type Locator, type Page, expect, test } from '../../test';
 const demo = (name: string) =>
   `/demos/infinite-scroll/${name}-infinite-scroll-demo`;
 const scroller = (page: Page) => page.locator('.overflow-y-auto').first();
-const status = (page: Page) => page.getByRole('status');
+// The feed's status line (a spinner inside it is a status of its own).
+const status = (page: Page) =>
+  page.locator('[data-slot=infinite-scroll-status]');
 
 /** Scrolls the box to its end (or start). */
 const scrollTo = (box: Locator, where: 'end' | 'start') =>
