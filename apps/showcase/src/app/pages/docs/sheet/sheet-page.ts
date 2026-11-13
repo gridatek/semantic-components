@@ -164,7 +164,7 @@ export default class SheetPage {
       name: 'ScSheetProvider',
       selector: 'div[scSheetProvider]',
       description:
-        "[(open)], side ('right', 'left', 'top', 'bottom', 'inline-start', 'inline-end').",
+        "[(open)], side ('inline-end' by default — the reading end: the right, the left in RTL; 'inline-start', 'top', 'bottom', 'left', 'right').",
     },
     {
       name: 'ScSheetTrigger',

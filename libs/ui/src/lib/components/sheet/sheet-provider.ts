@@ -64,8 +64,8 @@ export class ScSheetProvider {
   readonly classInput = input<string>('', { alias: 'class' });
   /** Shown or not; the panel and backdrop animate in and out. */
   readonly open = model(false);
-  /** The edge it comes from. */
-  readonly side = input<ScSheetSide>('right');
+  /** The edge it comes from; the reading end by default (the right, the left in RTL). */
+  readonly side = input<ScSheetSide>('inline-end');
 
   /**
    * The direction and language of where the sheet was opened from: it is

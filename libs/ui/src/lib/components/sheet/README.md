@@ -29,17 +29,17 @@ A dialog at the edge of the screen, sliding in from its side — shadcn's Sheet 
 
 ## Parts
 
-| Part                 | Selector                     | What it does                                                                                            |
-| -------------------- | ---------------------------- | ------------------------------------------------------------------------------------------------------- |
-| `ScSheetProvider`    | `div[scSheetProvider]`       | `[(open)]`, `side` (`right`, `left`, `top`, `bottom`, `inline-start`, `inline-end`)                     |
-| `ScSheetTrigger`     | `button[scSheetTrigger]`     | Opens it, on any button (`aria-haspopup`, `aria-expanded`)                                              |
-| `ScSheetPortal`      | `ng-template[scSheetPortal]` | The content, rendered while open                                                                        |
-| `ScSheet`            | `div[scSheet]`               | The panel: `role="dialog"`, `aria-modal`, named and described, `data-side`; slides in and out           |
-| `ScSheetHeader`      | `div[scSheetHeader]`         | Its title and description                                                                               |
-| `ScSheetTitle`       | `h2[scSheetTitle]`           | Names it                                                                                                |
-| `ScSheetDescription` | `p[scSheetDescription]`      | Describes it                                                                                            |
-| `ScSheetFooter`      | `div[scSheetFooter]`         | Its actions, at the bottom                                                                              |
-| `ScSheetClose`       | `button[scSheetClose]`       | Closes it: the preset's button (ghost, icon-sm); straight in the panel, the panel puts it in its corner |
+| Part                 | Selector                     | What it does                                                                                                                              |
+| -------------------- | ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `ScSheetProvider`    | `div[scSheetProvider]`       | `[(open)]`, `side` (`inline-end` default — the reading end: the right, the left in RTL; `inline-start`, `top`, `bottom`, `left`, `right`) |
+| `ScSheetTrigger`     | `button[scSheetTrigger]`     | Opens it, on any button (`aria-haspopup`, `aria-expanded`)                                                                                |
+| `ScSheetPortal`      | `ng-template[scSheetPortal]` | The content, rendered while open                                                                                                          |
+| `ScSheet`            | `div[scSheet]`               | The panel: `role="dialog"`, `aria-modal`, named and described, `data-side`; slides in and out                                             |
+| `ScSheetHeader`      | `div[scSheetHeader]`         | Its title and description                                                                                                                 |
+| `ScSheetTitle`       | `h2[scSheetTitle]`           | Names it                                                                                                                                  |
+| `ScSheetDescription` | `p[scSheetDescription]`      | Describes it                                                                                                                              |
+| `ScSheetFooter`      | `div[scSheetFooter]`         | Its actions, at the bottom                                                                                                                |
+| `ScSheetClose`       | `button[scSheetClose]`       | Closes it: the preset's button (ghost, icon-sm); straight in the panel, the panel puts it in its corner                                   |
 
 ## Keyboard and screen readers
 
