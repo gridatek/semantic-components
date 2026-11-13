@@ -1,6 +1,10 @@
 import { MenuTrigger } from '@angular/aria/menu';
 import { type Direction, Directionality } from '@angular/cdk/bidi';
-import { type ConnectedPosition, OverlayModule } from '@angular/cdk/overlay';
+import {
+  CdkConnectedOverlay,
+  type ConnectedPosition,
+  OverlayModule,
+} from '@angular/cdk/overlay';
 import { DOCUMENT, NgTemplateOutlet } from '@angular/common';
 import {
   Component,
@@ -21,6 +25,7 @@ import {
 import { cn } from 'cn';
 import {
   type ScOverlayLogicalSide,
+  followOverlaySize,
   physicalSide,
 } from '../../utils/overlay-positions';
 import { SC_MENU, type ScMenuContext } from '../menu/menu-context';
@@ -108,6 +113,7 @@ export class ScContextMenu implements ScMenuContext {
   private readonly trigger = contentChild(ScContextMenuTrigger);
   protected readonly menuPortal = contentChild.required(ScMenuPortal);
   private readonly cursor = viewChild(MenuTrigger);
+  private readonly overlay = viewChild(CdkConnectedOverlay);
   private readonly expanded = computed(
     () => this.cursor()?.expanded() ?? false,
   );
@@ -120,6 +126,8 @@ export class ScContextMenu implements ScMenuContext {
   private returnFocus: HTMLElement | null = null;
 
   constructor() {
+    // Its items render after it opens: placed again as it grows (the flip).
+    followOverlaySize(this.overlay, this.expanded);
     // [(open)] follows the menu…
     effect(() => {
       const expanded = this.expanded();

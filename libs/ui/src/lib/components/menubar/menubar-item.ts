@@ -18,7 +18,7 @@ import {
 } from '@angular/core';
 import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { setInput } from '../../utils';
+import { followOverlaySize, setInput } from '../../utils';
 import { ScMenuPortal } from '../menu';
 import { useDefaultSearchTerm } from '../menu/menu-search-term';
 import { ScMenubar } from './menubar';
@@ -104,6 +104,8 @@ export class ScMenubarItem {
   );
 
   constructor() {
+    // Its items render after it opens: placed again as it grows (the flip).
+    followOverlaySize(this.connectedOverlay, this.rendered);
     useDefaultSearchTerm(this.menuItem as MenuItem<unknown>);
 
     effect(() => {

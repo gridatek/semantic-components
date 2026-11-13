@@ -21,7 +21,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { cn } from 'cn';
-import { setInput } from '../../utils';
+import { followOverlaySize, setInput } from '../../utils';
 import { injectMenuHighlight } from './menu-highlight';
 import { ScMenuPortal } from './menu-portal';
 import { useDefaultSearchTerm } from './menu-search-term';
@@ -151,6 +151,8 @@ export class ScMenuItem {
   private readonly focusFirst = signal(false);
 
   constructor() {
+    // Its items render after it opens: placed again as it grows (the flip).
+    followOverlaySize(this.overlay, this.submenuOpen);
     useDefaultSearchTerm(this.menuItem as MenuItem<unknown>);
     this.measureSubmenu();
     effect(() => {

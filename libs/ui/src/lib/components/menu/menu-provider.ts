@@ -1,5 +1,9 @@
 import { Directionality } from '@angular/cdk/bidi';
-import { CdkOverlayOrigin, OverlayModule } from '@angular/cdk/overlay';
+import {
+  CdkConnectedOverlay,
+  CdkOverlayOrigin,
+  OverlayModule,
+} from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import {
   Component,
@@ -13,11 +17,13 @@ import {
   model,
   signal,
   untracked,
+  viewChild,
 } from '@angular/core';
 import { cn } from 'cn';
 import {
   type ScOverlayAlign,
   buildOverlayPositionsWithFallback,
+  followOverlaySize,
   setInput,
 } from '../../utils';
 import { SC_MENU, type ScMenuContext } from './menu-context';
@@ -97,7 +103,11 @@ export class ScMenuProvider implements ScMenuContext {
 
   protected readonly class = computed(() => cn('contents', this.classInput()));
 
+  private readonly overlay = viewChild(CdkConnectedOverlay);
+
   constructor() {
+    // Its items render after it opens: placed again as it grows (the flip).
+    followOverlaySize(this.overlay, this.expanded);
     // The trigger opens this menu.
     effect(() => {
       const trigger = this.triggerChild()?.trigger;

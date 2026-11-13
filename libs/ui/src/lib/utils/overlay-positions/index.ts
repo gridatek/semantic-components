@@ -5,3 +5,4 @@ export {
 } from './overlay-positions';
 export type { ScOverlayLogicalSide } from './overlay-side';
 export { physicalSide, placedSide } from './overlay-side';
+export { followOverlaySize } from './overlay-follow-size';
