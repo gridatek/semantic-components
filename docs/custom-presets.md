@@ -41,7 +41,7 @@ Let a consumer restyle the whole library with their own preset, once the library
 ## Presets are fixed at start (decided, 2026-11-13)
 
 - An app picks its preset once, when it starts; it doesn't change it while running. A runtime switch is not planned: no app needs it, and offering several presets would grow the app's JavaScript and CSS (every preset's classes generated).
-- Only our showcase switches (/presets, the preset sheet): it saves the name in a cookie and reloads — enough there.
+- Only our showcase switches (on /presets): it saves the name in a cookie and reloads — enough there.
 - Why it needs the reload: each part reads its classes once, when it is created (`private readonly styles = injectPreset().card`). Switching live would mean the preset as a signal and every part reading it in its `computed()`: about a hundred parts. Cheap at run time, but not worth it for the showcase alone.
 - So a consumer's own preset is previewed in their own app, not on /presets (an object with functions — the `cva` variants — can't be saved in a cookie and rebuilt after a reload).
 

@@ -140,7 +140,7 @@ const STYLES: { name: ScPresetName; description: string }[] = [
         </p>
         <div class="flex flex-wrap gap-2">
           <a scLink variant="button" size="sm" routerLink="/presets">
-            See them on real screens
+            Pick one for the whole site
           </a>
           <a
             scLink

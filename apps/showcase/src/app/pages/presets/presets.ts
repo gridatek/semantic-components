@@ -190,8 +190,8 @@ import { PreviewCards } from './cards/preview-cards';
           }
         </ul>
         <p class="text-muted-foreground mt-3 px-1 text-xs">
-          Only the style and the mode can change for now; more options are
-          coming.
+          The style and the mode you pick here apply to the whole site. Only
+          these two can change for now; more options are coming.
         </p>
       </section>
 

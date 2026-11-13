@@ -38,13 +38,11 @@ import { CommandPaletteService } from '../../services/command-palette-service';
 import { ComponentsService } from '../../services/components-service';
 import { GithubService } from '../../services/github-service';
 import { Logo } from '../logo/logo';
-import { PresetSheet } from '../preset-sheet/preset-sheet';
 import { ThemeMenu } from '../theme-menu/theme-menu';
 
 @Component({
   selector: 'app-navbar',
   imports: [
-    PresetSheet,
     RouterLink,
     RouterLinkActive,
     ScNavbar,
@@ -244,7 +242,6 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
         >
           Get Started
         </a>
-        <app-preset-sheet />
         <app-theme-menu />
       </div>
 

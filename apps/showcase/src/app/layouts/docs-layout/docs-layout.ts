@@ -59,7 +59,6 @@ import { cn } from 'cn';
 import { filter, map } from 'rxjs';
 import { Logo } from '../../components/logo/logo';
 import { PageNav, type PageNavItem } from '../../components/page-nav/page-nav';
-import { PresetSheet } from '../../components/preset-sheet/preset-sheet';
 import { ThemeMenu } from '../../components/theme-menu/theme-menu';
 import { Toc } from '../../components/toc/toc';
 import { TocService } from '../../components/toc/toc-service';
@@ -70,7 +69,6 @@ import { ConfigService } from '../../services/config-service';
 @Component({
   selector: 'app-docs-layout',
   imports: [
-    PresetSheet,
     RouterOutlet,
     RouterLink,
     RouterLinkActive,
@@ -419,9 +417,6 @@ import { ConfigService } from '../../services/config-service';
               }
             </ol>
           </nav>
-          <div class="ms-auto">
-            <app-preset-sheet />
-          </div>
         </header>
 
         <div class="flex flex-1">

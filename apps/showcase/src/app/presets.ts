@@ -10,7 +10,7 @@ import { vega } from '@semantic-components/presets/vega';
 import { readStorage, writeStorage } from '@semantic-components/ui';
 
 /**
- * Every preset, for the showcase's preset sheet. An app with one preset
+ * Every preset, for the showcase's /presets page. An app with one preset
  * imports only its own; the showcase shows them all.
  */
 export const PRESETS: Record<ScPresetName, ScPreset> = {
