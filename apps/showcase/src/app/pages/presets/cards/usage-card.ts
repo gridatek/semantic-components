@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardHeader,
   ScCardTitle,
   ScItem,
@@ -19,7 +19,7 @@ const CIRCUMFERENCE = 2 * Math.PI * 42.5;
   selector: 'app-preview-usage-card',
   imports: [
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardHeader,
     ScCardTitle,
     ScItem,
@@ -34,7 +34,7 @@ const CIRCUMFERENCE = 2 * Math.PI * 42.5;
       <div scCardHeader>
         <h2 scCardTitle class="px-1 text-sm">5 days remaining in cycle</h2>
       </div>
-      <div scCardContent>
+      <div scCardBody>
         <div scItemGroup class="gap-0" role="list">
           @for (item of items; track item.name) {
             <div role="listitem">

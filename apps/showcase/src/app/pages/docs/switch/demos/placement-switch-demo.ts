@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScFieldDescription,
   ScFieldGroup,
   ScLabelText,
@@ -14,7 +14,7 @@ import {
   selector: 'app-placement-switch-demo',
   imports: [
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScFieldDescription,
     ScFieldGroup,
     ScLabelText,
@@ -23,7 +23,7 @@ import {
   ],
   template: `
     <div scCard class="w-full max-w-md">
-      <div scCardContent>
+      <div scCardBody>
         <div scFieldGroup>
           <label scSwitchField>
             <p scLabelText>Marketing emails</p>

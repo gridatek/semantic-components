@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardFooter,
   ScCardHeader,
@@ -25,7 +25,7 @@ import {
   selector: 'app-preview-power-usage',
   imports: [
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardDescription,
     ScCardFooter,
     ScCardHeader,
@@ -46,7 +46,7 @@ import {
         <h2 scCardTitle>Power Usage</h2>
         <p scCardDescription>Whole Home</p>
       </div>
-      <div scCardContent class="flex flex-col gap-4">
+      <div scCardBody class="flex flex-col gap-4">
         <div scChart class="h-[140px] w-full" [config]="config" [data]="data">
           <svg
             scChartPlot

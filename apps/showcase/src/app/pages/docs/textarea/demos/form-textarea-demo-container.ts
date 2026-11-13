@@ -22,7 +22,7 @@ export class FormTextareaDemoContainer {
 import { FormField, email, form, required } from '@angular/forms/signals';
 import {
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardHeader,
   ScCardTitle,
   ScField,
@@ -43,7 +43,7 @@ interface ContactForm {
   imports: [
     FormField,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardHeader,
     ScCardTitle,
     ScField,
@@ -56,7 +56,7 @@ interface ContactForm {
       <div scCardHeader>
         <h4 scCardTitle class="text-base">Contact Us</h4>
       </div>
-      <div scCardContent class="grid gap-4">
+      <div scCardBody class="grid gap-4">
         <div class="grid grid-cols-2 gap-4">
           <div scField>
             <label scLabel>Name</label>

@@ -3,7 +3,7 @@ import { FormField, form } from '@angular/forms/signals';
 import {
   ScButton,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardFooter,
   ScField,
   ScFieldGroup,
@@ -23,7 +23,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     FormField,
     ScButton,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardFooter,
     ScField,
     ScFieldGroup,
@@ -37,7 +37,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   ],
   template: `
     <div scCard>
-      <div scCardContent>
+      <div scCardBody>
         <div scFieldGroup>
           <div scField>
             <label scLabel>Topic</label>

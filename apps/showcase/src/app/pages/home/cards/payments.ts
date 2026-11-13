@@ -8,7 +8,7 @@ import {
   ScBreadcrumbSeparator,
   ScButton,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardHeader,
   ScItem,
   ScItemBody,
@@ -44,7 +44,7 @@ import {
     ScBreadcrumbSeparator,
     ScButton,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardHeader,
     ScItem,
     ScItemBody,
@@ -100,7 +100,7 @@ import {
           </ol>
         </nav>
       </div>
-      <div scCardContent>
+      <div scCardBody>
         <div scItemGroup role="list">
           <div role="listitem" class="w-full">
             <a scItem variant="muted" href="#">

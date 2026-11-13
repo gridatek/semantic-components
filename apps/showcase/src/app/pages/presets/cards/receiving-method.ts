@@ -4,7 +4,7 @@ import {
   ScButton,
   ScCard,
   ScCardAction,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardFooter,
   ScCardHeader,
@@ -32,7 +32,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
     ScButton,
     ScCard,
     ScCardAction,
-    ScCardContent,
+    ScCardBody,
     ScCardDescription,
     ScCardFooter,
     ScCardHeader,
@@ -63,7 +63,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
           </button>
         </div>
       </div>
-      <div scCardContent>
+      <div scCardBody>
         <div scFieldGroup>
           <div scField>
             <label scLabel>Account Holder Name</label>

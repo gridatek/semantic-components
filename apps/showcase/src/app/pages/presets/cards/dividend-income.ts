@@ -3,7 +3,7 @@ import {
   ScButton,
   ScCard,
   ScCardAction,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardHeader,
   ScCardTitle,
@@ -29,7 +29,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
     ScButton,
     ScCard,
     ScCardAction,
-    ScCardContent,
+    ScCardBody,
     ScCardDescription,
     ScCardHeader,
     ScCardTitle,
@@ -58,7 +58,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
           </button>
         </div>
       </div>
-      <div scCardContent>
+      <div scCardBody>
         <div scItemGroup role="list">
           @for (holding of holdings; track holding.name) {
             <div scItem variant="muted" role="listitem">

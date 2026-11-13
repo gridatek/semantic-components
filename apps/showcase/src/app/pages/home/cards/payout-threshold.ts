@@ -3,7 +3,7 @@ import {
   ScButton,
   ScCard,
   ScCardAction,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardFooter,
   ScCardHeader,
@@ -42,7 +42,7 @@ import {
     ScButton,
     ScCard,
     ScCardAction,
-    ScCardContent,
+    ScCardBody,
     ScCardDescription,
     ScCardFooter,
     ScCardHeader,
@@ -85,7 +85,7 @@ import {
           </button>
         </div>
       </div>
-      <div scCardContent>
+      <div scCardBody>
         <div scFieldGroup>
           <div scField>
             <div

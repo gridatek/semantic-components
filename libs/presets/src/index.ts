@@ -86,7 +86,8 @@ export interface ScCardStyles {
   header: string;
   title: string;
   description: string;
-  content: string;
+  /** The section between the header and the footer (shadcn's CardContent). */
+  body: string;
   footer: string;
 }
 

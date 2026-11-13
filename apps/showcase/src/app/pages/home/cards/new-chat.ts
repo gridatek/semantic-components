@@ -12,7 +12,7 @@ import {
   ScButton,
   ScCard,
   ScCardAction,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardFooter,
   ScCardHeader,
@@ -103,7 +103,7 @@ type Segment = { code: boolean; text: string };
     ScButton,
     ScCard,
     ScCardAction,
-    ScCardContent,
+    ScCardBody,
     ScCardDescription,
     ScCardFooter,
     ScCardHeader,
@@ -172,7 +172,7 @@ type Segment = { code: boolean; text: string };
           </div>
         </div>
       </div>
-      <div scCardContent class="flex-1 overflow-hidden p-0">
+      <div scCardBody class="flex-1 overflow-hidden p-0">
         @if (messages().length === 0) {
           <div scEmpty class="h-full">
             <div scEmptyHeader>

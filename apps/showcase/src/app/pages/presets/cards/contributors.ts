@@ -5,7 +5,7 @@ import {
   ScAvatarImage,
   ScBadge,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardFooter,
   ScCardHeader,
   ScCardTitle,
@@ -20,7 +20,7 @@ import {
     ScAvatarImage,
     ScBadge,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardFooter,
     ScCardHeader,
     ScCardTitle,
@@ -32,7 +32,7 @@ import {
           Contributors <span scBadge variant="secondary">312</span>
         </h2>
       </div>
-      <div scCardContent>
+      <div scCardBody>
         <ul class="flex flex-wrap gap-2" aria-label="Contributors">
           @for (username of usernames; track username) {
             <li>

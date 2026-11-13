@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardFooter,
   ScItem,
@@ -15,7 +15,7 @@ import { SiImageIcon } from '@semantic-icons/lucide-icons';
   imports: [
     ScButton,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardDescription,
     ScCardFooter,
     ScItem,
@@ -23,7 +23,7 @@ import { SiImageIcon } from '@semantic-icons/lucide-icons';
   ],
   template: `
     <div scCard>
-      <div scCardContent class="flex flex-col gap-3">
+      <div scCardBody class="flex flex-col gap-3">
         <label
           for="preview-cover-art"
           class="text-muted-foreground text-center text-xs tracking-wider uppercase"

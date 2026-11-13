@@ -46,8 +46,8 @@ test.describe('Card in its preset', () => {
       `${preset} description`,
     );
     await expectClasses(
-      card.locator('[scCardContent]'),
-      styles.card.content,
+      card.locator('[scCardBody]'),
+      styles.card.body,
       `${preset} content`,
     );
     await expectClasses(

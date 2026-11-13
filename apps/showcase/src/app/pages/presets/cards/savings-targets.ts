@@ -4,7 +4,7 @@ import {
   ScButton,
   ScCard,
   ScCardAction,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardFooter,
   ScCardHeader,
@@ -40,7 +40,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     ScButton,
     ScCard,
     ScCardAction,
-    ScCardContent,
+    ScCardBody,
     ScCardDescription,
     ScCardFooter,
     ScCardHeader,
@@ -77,7 +77,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
             <button scButton variant="outline" size="sm">New Goal</button>
           </div>
         </div>
-        <div scCardContent>
+        <div scCardBody>
           <div scItemGroup role="list" class="gap-3">
             @for (goal of goals; track goal.name) {
               <div
@@ -126,7 +126,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
         <div scCardHeader>
           <h2 scCardTitle>Buy Investment</h2>
         </div>
-        <div scCardContent class="flex flex-1 flex-col gap-3">
+        <div scCardBody class="flex flex-1 flex-col gap-3">
           <div scFieldGroup class="flex-1">
             <div scField>
               <label scLabel>Amount to Invest</label>

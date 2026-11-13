@@ -3,7 +3,7 @@ import { FormField, form } from '@angular/forms/signals';
 import {
   ScButton,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardFooter,
   ScCardHeader,
@@ -23,7 +23,7 @@ import {
     FormField,
     ScButton,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardDescription,
     ScCardFooter,
     ScCardHeader,
@@ -43,7 +43,7 @@ import {
           Choose which email and push alerts you want to receive.
         </p>
       </div>
-      <div scCardContent>
+      <div scCardBody>
         <div scFieldGroup>
           @for (n of notifications; track n.id) {
             <div scField orientation="horizontal">

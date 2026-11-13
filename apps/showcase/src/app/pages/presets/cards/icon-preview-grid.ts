@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScCard, ScCardContent, ScFrame } from '@semantic-components/ui';
+import { ScCard, ScCardBody, ScFrame } from '@semantic-components/ui';
 import {
   SiArrowLeftIcon,
   SiArrowRightIcon,
@@ -25,7 +25,7 @@ import {
   imports: [
     ScFrame,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     SiArrowLeftIcon,
     SiArrowRightIcon,
     SiCheckIcon,
@@ -45,7 +45,7 @@ import {
   ],
   template: `
     <div scCard>
-      <div scCardContent>
+      <div scCardBody>
         <div
           class="grid grid-cols-8 place-items-center gap-4 *:flex *:size-8 *:items-center *:justify-center *:[&_svg]:size-4"
         >

@@ -10,7 +10,7 @@ export const card: ScCardStyles = {
   title:
     'font-heading text-base leading-normal font-medium group-data-[size=sm]/card:text-sm',
   description: 'text-sm text-muted-foreground',
-  content: 'flex flex-col gap-3 px-(--card-spacing)',
+  body: 'flex flex-col gap-3 px-(--card-spacing)',
   footer:
     'flex items-center rounded-b-xl px-(--card-spacing) [.border-t]:pt-(--card-spacing)',
 };

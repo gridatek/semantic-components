@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardFooter,
   ScCardHeader,
@@ -17,7 +17,7 @@ import {
     ScFrame,
     ScButton,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardDescription,
     ScCardFooter,
     ScCardHeader,
@@ -29,7 +29,7 @@ import {
         <h2 scCardTitle>Environment Variables</h2>
         <p scCardDescription>Production · 8 variables</p>
       </div>
-      <div scCardContent class="flex flex-col gap-2">
+      <div scCardBody class="flex flex-col gap-2">
         @for (env of variables; track env.key) {
           <div
             scFrame

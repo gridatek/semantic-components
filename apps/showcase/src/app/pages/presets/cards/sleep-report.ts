@@ -3,7 +3,7 @@ import {
   ScBadge,
   ScButton,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardFooter,
   ScCardHeader,
@@ -24,7 +24,7 @@ import {
     ScBadge,
     ScButton,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardDescription,
     ScCardFooter,
     ScCardHeader,
@@ -40,7 +40,7 @@ import {
         <h2 scCardTitle>Sleep Report</h2>
         <p scCardDescription>Last night · 7h 24m</p>
       </div>
-      <div scCardContent class="flex flex-col gap-3">
+      <div scCardBody class="flex flex-col gap-3">
         <div scChart class="h-32 w-full" [config]="config" [data]="data">
           <svg
             scChartPlot

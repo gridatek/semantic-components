@@ -3,7 +3,7 @@ import { FormField, form } from '@angular/forms/signals';
 import {
   ScButton,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardFooter,
   ScCardHeader,
@@ -31,7 +31,7 @@ import {
     FormField,
     ScButton,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardDescription,
     ScCardFooter,
     ScCardHeader,
@@ -55,7 +55,7 @@ import {
         <h2 scCardTitle>Account Access</h2>
         <p scCardDescription>Update your credentials or re-authenticate.</p>
       </div>
-      <div scCardContent>
+      <div scCardBody>
         <div scFieldGroup>
           <div scField>
             <label scLabel>Email Address</label>

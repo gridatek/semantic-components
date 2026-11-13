@@ -1,6 +1,6 @@
 # Card
 
-A box of related content: a header with its title, description and action, the content, a footer. In the look of the app's preset.
+A box of related content: a header with its title, description and action, the body, a footer. In the look of the app's preset.
 
 ## Usage
 
@@ -13,7 +13,7 @@ A box of related content: a header with its title, description and action, the c
       <button scButton variant="link">Sign Up</button>
     </div>
   </div>
-  <div scCardContent>…</div>
+  <div scCardBody>…</div>
   <div scCardFooter class="flex-col gap-2">
     <button scButton class="w-full">Login</button>
   </div>
@@ -22,7 +22,7 @@ A box of related content: a header with its title, description and action, the c
 
 ## Anatomy
 
-shadcn's parts, each a directive on your element:
+shadcn's parts, each a directive on your element — its `CardContent` is `scCardBody` here: the section between the header and the footer is a body, and `…Content` names a component's whole content ([content-body-naming.md](../../../../../../docs/content-body-naming.md)).
 
 ```html
 <div scCard>
@@ -31,13 +31,13 @@ shadcn's parts, each a directive on your element:
     <p scCardDescription></p>
     <div scCardAction></div>
   </div>
-  <div scCardContent></div>
+  <div scCardBody></div>
   <div scCardFooter></div>
 </div>
 ```
 
 - The title is the heading you choose, at the level that fits your page.
-- One variable, `--card-spacing`, sets the gap between the sections and the inset of every part: from the preset, smaller with `size="sm"`, yours with a class (`[--card-spacing:--spacing(6)]`). Edge to edge: `-mx-(--card-spacing)`, and `-mb-(--card-spacing)` on the content above a footer.
+- One variable, `--card-spacing`, sets the gap between the sections and the inset of every part: from the preset, smaller with `size="sm"`, yours with a class (`[--card-spacing:--spacing(6)]`). Edge to edge: `-mx-(--card-spacing)`, and `-mb-(--card-spacing)` on the body above a footer.
 - An image as the first child sits at the top, no padding above it, in the card's corners.
 - The action goes to the end of the header, beside the title and the description.
 - The footer's look is the preset's: a muted band with a line above in nova, a line in lyra, none in the others (`border-t` adds one, with its spacing).
@@ -53,7 +53,7 @@ Each part takes `class`, merged over the preset.
 | `ScCardTitle`       | `[scCardTitle]`       | The title, on a heading of yours.                          |
 | `ScCardDescription` | `[scCardDescription]` | Muted text under the title.                                |
 | `ScCardAction`      | `div[scCardAction]`   | A button or badge at the end of the header.                |
-| `ScCardContent`     | `div[scCardContent]`  | The content, inset by `--card-spacing`.                    |
+| `ScCardBody`        | `div[scCardBody]`     | The body, inset by `--card-spacing`.                       |
 | `ScCardFooter`      | `div[scCardFooter]`   | Actions at the bottom, in a row; its look from the preset. |
 
 ## Styles

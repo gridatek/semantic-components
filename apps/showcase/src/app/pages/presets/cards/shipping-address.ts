@@ -3,7 +3,7 @@ import { FormField, form } from '@angular/forms/signals';
 import {
   ScButton,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardFooter,
   ScCardHeader,
@@ -40,7 +40,7 @@ interface ScShippingOption {
     FormField,
     ScButton,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardDescription,
     ScCardFooter,
     ScCardHeader,
@@ -71,7 +71,7 @@ interface ScShippingOption {
         <h2 scCardTitle>Shipping Address</h2>
         <p scCardDescription>Where should we deliver?</p>
       </div>
-      <div scCardContent>
+      <div scCardBody>
         <div scFieldGroup>
           <div scField>
             <label scLabel>Street address</label>

@@ -4,7 +4,7 @@ import {
   ScButton,
   ScCard,
   ScCardAction,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardFooter,
   ScCardHeader,
@@ -32,7 +32,7 @@ const ITEMS = [
     ScButton,
     ScCard,
     ScCardAction,
-    ScCardContent,
+    ScCardBody,
     ScCardDescription,
     ScCardFooter,
     ScCardHeader,
@@ -54,7 +54,7 @@ const ITEMS = [
           <span scBadge variant="secondary">Pending</span>
         </div>
       </div>
-      <div scCardContent>
+      <div scCardBody>
         <div
           scTableContainer
           tabindex="0"

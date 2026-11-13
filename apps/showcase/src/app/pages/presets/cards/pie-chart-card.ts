@@ -3,7 +3,7 @@ import {
   ScBadge,
   ScCard,
   ScCardAction,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardFooter,
   ScCardHeader,
@@ -40,7 +40,7 @@ const TOP = DATA.reduce((max, row) =>
     ScBadge,
     ScCard,
     ScCardAction,
-    ScCardContent,
+    ScCardBody,
     ScCardDescription,
     ScCardFooter,
     ScCardHeader,
@@ -64,7 +64,7 @@ const TOP = DATA.reduce((max, row) =>
           <span scBadge variant="outline">{{ topLabel }}</span>
         </div>
       </div>
-      <div scCardContent class="pt-0">
+      <div scCardBody class="pt-0">
         <div
           scChart
           class="mx-auto aspect-square max-h-[190px]"

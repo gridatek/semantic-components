@@ -15,7 +15,7 @@ import {
   ScCalendarNext,
   ScCalendarPrevious,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardFooter,
   ScCardHeader,
@@ -67,7 +67,7 @@ import {
     ScCalendarNext,
     ScCalendarPrevious,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardDescription,
     ScCardFooter,
     ScCardHeader,
@@ -142,7 +142,7 @@ import {
                     Enter your credentials to access your account.
                   </p>
                 </div>
-                <div scCardContent class="space-y-4">
+                <div scCardBody class="space-y-4">
                   <div class="space-y-2">
                     <label scLabel for="login-email" i18n="@@shadcn.email"
                       >Email</label
@@ -394,7 +394,7 @@ import {
                 </div>
                 <div class="space-y-2">
                   <div scCard size="sm">
-                    <div scCardContent class="space-y-2">
+                    <div scCardBody class="space-y-2">
                       <p
                         class="text-sm font-medium"
                         i18n="@@shadcn.kanban.onboarding"
@@ -415,7 +415,7 @@ import {
                     </div>
                   </div>
                   <div scCard size="sm">
-                    <div scCardContent class="space-y-2">
+                    <div scCardBody class="space-y-2">
                       <p
                         class="text-sm font-medium"
                         i18n="@@shadcn.kanban.apiDocs"
@@ -436,7 +436,7 @@ import {
                     </div>
                   </div>
                   <div scCard size="sm">
-                    <div scCardContent class="space-y-2">
+                    <div scCardBody class="space-y-2">
                       <p class="text-sm font-medium" i18n="@@shadcn.kanban.ci">
                         Set up CI/CD pipeline
                       </p>
@@ -466,7 +466,7 @@ import {
                 </div>
                 <div class="space-y-2">
                   <div scCard size="sm">
-                    <div scCardContent class="space-y-2">
+                    <div scCardBody class="space-y-2">
                       <p
                         class="text-sm font-medium"
                         i18n="@@shadcn.kanban.auth"
@@ -487,7 +487,7 @@ import {
                     </div>
                   </div>
                   <div scCard size="sm">
-                    <div scCardContent class="space-y-2">
+                    <div scCardBody class="space-y-2">
                       <p
                         class="text-sm font-medium"
                         i18n="@@shadcn.kanban.models"
@@ -520,7 +520,7 @@ import {
                 </div>
                 <div class="space-y-2">
                   <div scCard size="sm">
-                    <div scCardContent class="space-y-2">
+                    <div scCardBody class="space-y-2">
                       <p
                         class="text-sm font-medium"
                         i18n="@@shadcn.kanban.loginLayout"
@@ -541,7 +541,7 @@ import {
                     </div>
                   </div>
                   <div scCard size="sm">
-                    <div scCardContent class="space-y-2">
+                    <div scCardBody class="space-y-2">
                       <p
                         class="text-sm font-medium"
                         i18n="@@shadcn.kanban.tests"
@@ -588,7 +588,7 @@ import {
                   </div>
                   <h3 scCardTitle class="text-3xl">7,100</h3>
                 </div>
-                <div scCardContent>
+                <div scCardBody>
                   <p class="text-muted-foreground text-xs">
                     <span class="font-medium text-emerald-500">+18%</span>
                     <ng-container i18n="@@shadcn.analytics.fromLastMonth"
@@ -610,7 +610,7 @@ import {
                   </div>
                   <h3 scCardTitle class="text-3xl">4,830</h3>
                 </div>
-                <div scCardContent>
+                <div scCardBody>
                   <p class="text-muted-foreground text-xs">
                     <span class="text-muted-foreground font-medium">68%</span>
                     <ng-container i18n="@@shadcn.analytics.ofTotal"
@@ -632,7 +632,7 @@ import {
                   </div>
                   <h3 scCardTitle class="text-3xl">+24.3%</h3>
                 </div>
-                <div scCardContent>
+                <div scCardBody>
                   <p class="text-muted-foreground text-xs">
                     <span class="font-medium text-emerald-500">+6.1pp</span>
                     <ng-container i18n="@@shadcn.analytics.fromLastQuarter"
@@ -654,7 +654,7 @@ import {
                     Cumulative users over 12 months
                   </p>
                 </div>
-                <div scCardContent>
+                <div scCardBody>
                   <div class="flex h-48 items-end gap-2">
                     @for (height of userGrowthData; track $index) {
                       <div
@@ -687,7 +687,7 @@ import {
                     Average signups per weekday
                   </p>
                 </div>
-                <div scCardContent>
+                <div scCardBody>
                   <div class="flex h-48 items-end gap-2">
                     @for (day of signupsByDay; track $index) {
                       <div class="flex flex-1 flex-col items-center gap-1">
@@ -718,7 +718,7 @@ import {
                   Latest user actions
                 </p>
               </div>
-              <div scCardContent class="space-y-4">
+              <div scCardBody class="space-y-4">
                 @for (activity of recentActivity; track activity.name) {
                   <div class="flex items-center gap-4">
                     <span scAvatar size="sm">
@@ -751,7 +751,7 @@ import {
             </h2>
             <div scSeparator aria-hidden="true"></div>
             <div scCard>
-              <div scCardContent class="space-y-6">
+              <div scCardBody class="space-y-6">
                 <!-- Artist Header -->
                 <div class="flex items-start gap-6">
                   <div
@@ -872,7 +872,7 @@ import {
                   </span>
                 </div>
               </div>
-              <div scCardContent>
+              <div scCardBody>
                 <div scTabs value="starters">
                   <div scTabsList class="grid w-full grid-cols-4">
                     <button
@@ -996,7 +996,7 @@ import {
                   Recent team events
                 </p>
               </div>
-              <div scCardContent>
+              <div scCardBody>
                 <div class="relative space-y-6">
                   <div
                     class="bg-border absolute top-0 bottom-0 left-[19px] w-px"
@@ -1253,7 +1253,7 @@ import {
                   </span>
                 </div>
               </div>
-              <div scCardContent>
+              <div scCardBody>
                 <div class="grid grid-cols-3 gap-4">
                   <div class="space-y-1">
                     <p
@@ -1294,7 +1294,7 @@ import {
                     Income vs Expense
                   </h3>
                 </div>
-                <div scCardContent>
+                <div scCardBody>
                   <div class="flex h-48 items-end gap-3">
                     @for (month of incomeExpenseData; track month.label) {
                       <div class="flex flex-1 flex-col items-center gap-1">
@@ -1344,7 +1344,7 @@ import {
                     Spending Breakdown
                   </h3>
                 </div>
-                <div scCardContent class="space-y-4">
+                <div scCardBody class="space-y-4">
                   @for (category of spendingBreakdown; track category.name) {
                     <div class="flex items-center justify-between">
                       <div class="flex items-center gap-2">
@@ -1368,7 +1368,7 @@ import {
               <div scCardHeader>
                 <h3 scCardTitle i18n="@@shadcn.finance.budget">Budget</h3>
               </div>
-              <div scCardContent class="space-y-4">
+              <div scCardBody class="space-y-4">
                 @for (budget of budgetItems; track budget.name) {
                   <div class="space-y-2">
                     <div class="flex items-center justify-between text-sm">
@@ -1405,7 +1405,7 @@ import {
                   Recent Transactions
                 </h3>
               </div>
-              <div scCardContent class="space-y-4">
+              <div scCardBody class="space-y-4">
                 @for (tx of recentTransactions; track tx.name) {
                   <div class="flex items-center gap-4">
                     <div
@@ -1446,7 +1446,7 @@ import {
             <div class="grid gap-6 md:grid-cols-2">
               <!-- Doctor Info -->
               <div scCard>
-                <div scCardContent class="space-y-6">
+                <div scCardBody class="space-y-6">
                   <div class="flex items-start gap-4">
                     <span scAvatar size="lg">
                       <span scAvatarFallback>EC</span>
@@ -1519,7 +1519,7 @@ import {
 
               <!-- Calendar -->
               <div scCard>
-                <div scCardContent>
+                <div scCardBody>
                   <div class="w-fit rounded-md">
                     <div
                       scCalendar

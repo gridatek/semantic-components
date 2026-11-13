@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardFooter,
   ScCardHeader,
@@ -26,7 +26,7 @@ import {
   imports: [
     ScButton,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardDescription,
     ScCardFooter,
     ScCardHeader,
@@ -46,7 +46,7 @@ import {
         <h2 scCardTitle>Contribution History</h2>
         <p scCardDescription>Last 6 months of activity</p>
       </div>
-      <div scCardContent>
+      <div scCardBody>
         <div scChart class="h-[200px] w-full" [config]="config" [data]="data">
           <svg
             scChartPlot
@@ -65,7 +65,7 @@ import {
           <div scChartTooltip hideLabel class="min-w-40"></div>
         </div>
       </div>
-      <div scCardContent>
+      <div scCardBody>
         <div class="grid w-full grid-cols-1 gap-3 md:grid-cols-2">
           @for (plan of plans; track plan.label) {
             <div scItem variant="muted" class="flex-col items-stretch">

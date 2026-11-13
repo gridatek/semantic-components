@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardFooter,
   ScCardHeader,
@@ -22,7 +22,7 @@ import {
   imports: [
     ScButton,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardDescription,
     ScCardFooter,
     ScCardHeader,
@@ -41,7 +41,7 @@ import {
         <h2 scCardTitle>Notifications</h2>
         <p scCardDescription>Choose what you want to be notified about.</p>
       </div>
-      <div scCardContent>
+      <div scCardBody>
         <div
           scCheckboxGroup
           scFieldGroup

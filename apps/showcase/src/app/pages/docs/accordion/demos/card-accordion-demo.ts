@@ -8,7 +8,7 @@ import {
   ScAccordionTrigger,
   ScAccordionTriggerIcon,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardHeader,
   ScCardTitle,
@@ -30,7 +30,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     ScCardHeader,
     ScCardTitle,
     ScCardDescription,
-    ScCardContent,
+    ScCardBody,
     SiChevronDownIcon,
   ],
   template: `
@@ -42,7 +42,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
           cancellations.
         </p>
       </div>
-      <div scCardContent>
+      <div scCardBody>
         <div scAccordion [value]="['plans']">
           <div scAccordionItem value="plans">
             <h3 scAccordionHeader>

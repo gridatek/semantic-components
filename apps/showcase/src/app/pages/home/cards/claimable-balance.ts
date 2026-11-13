@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScBadge,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardFooter,
   ScCardHeader,
@@ -18,7 +18,7 @@ import {
   imports: [
     ScBadge,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardDescription,
     ScCardFooter,
     ScCardHeader,
@@ -39,7 +39,7 @@ import {
           Pending Setup
         </span>
       </div>
-      <div scCardContent class="flex flex-1 flex-col justify-end">
+      <div scCardBody class="flex flex-1 flex-col justify-end">
         <div scItem variant="muted" class="flex-col items-stretch">
           <div scItemBody class="gap-3">
             <div class="flex items-center justify-between">

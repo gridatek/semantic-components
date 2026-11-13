@@ -6,7 +6,7 @@ import {
   ScCalendarNext,
   ScCalendarPrevious,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardHeader,
   ScCardTitle,
@@ -31,7 +31,7 @@ import {
     ScCalendarNext,
     ScCalendarPrevious,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardDescription,
     ScCardHeader,
     ScCardTitle,
@@ -49,7 +49,7 @@ import {
         <h2 scCardTitle>Upcoming Payments</h2>
         <p scCardDescription>Select a date to view scheduled payments.</p>
       </div>
-      <div scCardContent class="flex flex-col gap-4">
+      <div scCardBody class="flex flex-col gap-4">
         <div scItem variant="outline" class="justify-center">
           <div
             scCalendar

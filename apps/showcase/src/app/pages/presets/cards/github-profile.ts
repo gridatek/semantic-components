@@ -3,7 +3,7 @@ import { FormField, form } from '@angular/forms/signals';
 import {
   ScButton,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardFooter,
   ScCardHeader,
@@ -28,7 +28,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     FormField,
     ScButton,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardDescription,
     ScCardFooter,
     ScCardHeader,
@@ -51,7 +51,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
         <h2 scCardTitle>Profile</h2>
         <p scCardDescription>Manage your profile information.</p>
       </div>
-      <div scCardContent>
+      <div scCardBody>
         <div scFieldGroup>
           <div scField>
             <label scLabel>Name</label>

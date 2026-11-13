@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardFooter,
   ScCardHeader,
@@ -17,7 +17,7 @@ import { LiveWaveformCanvas } from './live-waveform-canvas';
     LiveWaveformCanvas,
     ScButton,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardDescription,
     ScCardFooter,
     ScCardHeader,
@@ -31,7 +31,7 @@ import { LiveWaveformCanvas } from './live-waveform-canvas';
           Real-time microphone input visualization with audio reactivity
         </p>
       </div>
-      <div scCardContent>
+      <div scCardBody>
         <app-live-waveform-canvas
           [active]="active()"
           [processing]="processing()"

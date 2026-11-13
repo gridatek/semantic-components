@@ -5,7 +5,7 @@ import {
   ScAvatarFallback,
   ScBadge,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardHeader,
   ScCardTitle,
@@ -22,7 +22,7 @@ import { LocalDatePipe } from '../../pipes/local-date';
     ScAvatarFallback,
     ScBadge,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardDescription,
     ScCardHeader,
     ScCardTitle,
@@ -66,7 +66,7 @@ import { LocalDatePipe } from '../../pipes/local-date';
                 component architecture and improve performance.
               </p>
             </div>
-            <div scCardContent>
+            <div scCardBody>
               <div class="flex items-center gap-3">
                 <span scAvatar size="sm">
                   <span scAvatarFallback>AJ</span>
@@ -103,7 +103,7 @@ import { LocalDatePipe } from '../../pipes/local-date';
                   in your components.
                 </p>
               </div>
-              <div scCardContent>
+              <div scCardBody>
                 <div class="flex items-center gap-3">
                   <span scAvatar size="sm">
                     <span scAvatarFallback>AJ</span>
@@ -144,7 +144,7 @@ import { LocalDatePipe } from '../../pipes/local-date';
                   everyone, including keyboard and screen reader users.
                 </p>
               </div>
-              <div scCardContent>
+              <div scCardBody>
                 <div class="flex items-center gap-3">
                   <span scAvatar size="sm">
                     <span scAvatarFallback>SR</span>
@@ -181,7 +181,7 @@ import { LocalDatePipe } from '../../pipes/local-date';
                   your team and product.
                 </p>
               </div>
-              <div scCardContent>
+              <div scCardBody>
                 <div class="flex items-center gap-3">
                   <span scAvatar size="sm">
                     <span scAvatarFallback>MC</span>
@@ -222,7 +222,7 @@ import { LocalDatePipe } from '../../pipes/local-date';
                   and a refreshed design language.
                 </p>
               </div>
-              <div scCardContent>
+              <div scCardBody>
                 <div class="flex items-center gap-3">
                   <span scAvatar size="sm">
                     <span scAvatarFallback>TK</span>

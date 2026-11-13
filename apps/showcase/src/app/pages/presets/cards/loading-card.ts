@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardHeader,
   ScSkeleton,
 } from '@semantic-components/ui';
@@ -9,14 +9,14 @@ import {
 /** A card still loading: its shapes in skeletons. */
 @Component({
   selector: 'app-preview-loading-card',
-  imports: [ScCard, ScCardContent, ScCardHeader, ScSkeleton],
+  imports: [ScCard, ScCardBody, ScCardHeader, ScSkeleton],
   template: `
     <div scCard aria-busy="true">
       <div scCardHeader>
         <div scSkeleton class="h-5 w-32"></div>
         <div scSkeleton class="h-4 w-48"></div>
       </div>
-      <div scCardContent class="flex flex-col gap-4">
+      <div scCardBody class="flex flex-col gap-4">
         <div scSkeleton class="h-32 w-full"></div>
         <div class="flex flex-col gap-2">
           <div scSkeleton class="h-4 w-full"></div>

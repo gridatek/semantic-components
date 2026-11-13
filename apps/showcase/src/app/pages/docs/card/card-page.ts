@@ -157,7 +157,7 @@ export default class CardPage {
     imports: [
       'import {',
       '  ScCard, ScCardHeader, ScCardTitle, ScCardDescription,',
-      '  ScCardAction, ScCardContent, ScCardFooter,',
+      '  ScCardAction, ScCardBody, ScCardFooter,',
       "} from '@semantic-components/ui';",
     ].join('\n'),
     markup: [
@@ -167,7 +167,7 @@ export default class CardPage {
       '    <p scCardDescription>…</p>',
       '    <div scCardAction>…</div>',
       '  </div>',
-      '  <div scCardContent>…</div>',
+      '  <div scCardBody>…</div>',
       '  <div scCardFooter>…</div>',
       '</div>',
     ].join('\n'),
@@ -202,8 +202,8 @@ export default class CardPage {
       description: 'A button or badge at the end of the header.',
     },
     {
-      name: 'ScCardContent',
-      selector: 'div[scCardContent]',
+      name: 'ScCardBody',
+      selector: 'div[scCardBody]',
       description: 'The content, inset by --card-spacing.',
     },
     {

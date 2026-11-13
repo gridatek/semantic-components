@@ -5,7 +5,7 @@ import {
   ScBadge,
   ScButton,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardFooter,
   ScCardHeader,
@@ -27,7 +27,7 @@ import { SiCircleCheckIcon } from '@semantic-icons/lucide-icons';
     ScBadge,
     ScButton,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardDescription,
     ScCardFooter,
     ScCardHeader,
@@ -52,7 +52,7 @@ import { SiCircleCheckIcon } from '@semantic-icons/lucide-icons';
           <a href="#" class="underline underline-offset-4">AI Product Terms</a>.
         </p>
       </div>
-      <div scCardContent class="flex flex-col gap-4">
+      <div scCardBody class="flex flex-col gap-4">
         <div scItemGroup class="gap-0" role="list">
           <div scItem size="xs" class="px-0" role="listitem">
             <div scItemMedia variant="icon" class="self-start">

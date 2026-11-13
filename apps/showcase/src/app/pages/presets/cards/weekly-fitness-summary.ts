@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardFooter,
   ScCardHeader,
@@ -17,7 +17,7 @@ import {
     ScFrame,
     ScButton,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardDescription,
     ScCardFooter,
     ScCardHeader,
@@ -29,7 +29,7 @@ import {
         <h2 scCardTitle>Weekly Fitness Summary</h2>
         <p scCardDescription>Calories and workout load by day</p>
       </div>
-      <div scCardContent class="flex flex-col gap-4">
+      <div scCardBody class="flex flex-col gap-4">
         <ul class="grid grid-cols-7 gap-1.5" aria-label="Workout load by day">
           @for (day of week; track $index) {
             <li scFrame size="sm" class="p-1.5 text-center">

@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScEmpty,
   ScEmptyBody,
   ScEmptyDescription,
@@ -16,7 +16,7 @@ import {
   imports: [
     ScButton,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScEmpty,
     ScEmptyBody,
     ScEmptyDescription,
@@ -25,7 +25,7 @@ import {
   ],
   template: `
     <div scCard>
-      <div scCardContent>
+      <div scCardBody>
         <div scEmpty class="h-48">
           <div scEmptyHeader>
             <h2 scEmptyTitle>Get alerted for anomalies</h2>

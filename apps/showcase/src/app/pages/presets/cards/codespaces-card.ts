@@ -8,7 +8,7 @@ import {
 import {
   ScButton,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScEmpty,
   ScEmptyBody,
   ScEmptyDescription,
@@ -72,7 +72,7 @@ import {
     ScFrame,
     ScButton,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScEmpty,
     ScEmptyBody,
     ScEmptyDescription,
@@ -124,7 +124,7 @@ import {
   ],
   template: `
     <div scCard>
-      <div scCardContent>
+      <div scCardBody>
         <div scTabs value="codespaces">
           <div scTabsList class="w-full">
             <button scTabsTab value="codespaces" class="flex-1">

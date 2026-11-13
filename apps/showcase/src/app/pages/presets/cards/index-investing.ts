@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardHeader,
   ScCardTitle,
@@ -10,20 +10,14 @@ import {
 /** A short explainer, a link in its text. */
 @Component({
   selector: 'app-preview-index-investing',
-  imports: [
-    ScCard,
-    ScCardContent,
-    ScCardDescription,
-    ScCardHeader,
-    ScCardTitle,
-  ],
+  imports: [ScCard, ScCardBody, ScCardDescription, ScCardHeader, ScCardTitle],
   template: `
     <div scCard>
       <div scCardHeader>
         <h2 scCardTitle>Dollar-Cost Averaging</h2>
         <p scCardDescription>A strategy for building wealth over time.</p>
       </div>
-      <div scCardContent>
+      <div scCardBody>
         <p scCardDescription class="mt-3 text-sm leading-relaxed">
           <a href="#" class="hover:text-primary underline underline-offset-4"
             >Over time</a

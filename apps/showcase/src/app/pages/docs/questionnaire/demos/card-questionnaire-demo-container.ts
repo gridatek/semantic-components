@@ -24,7 +24,7 @@ import { FormField, FormRoot, form, required } from '@angular/forms/signals';
 import {
   ScCard,
   ScCardAction,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardFooter,
   ScCardHeader,
@@ -56,7 +56,7 @@ import {
     FormRoot,
     ScCard,
     ScCardAction,
-    ScCardContent,
+    ScCardBody,
     ScCardDescription,
     ScCardFooter,
     ScCardHeader,
@@ -101,7 +101,7 @@ import {
               </div>
             </div>
           </div>
-          <div scCardContent>
+          <div scCardBody>
             <div scQuestionnaireChoices>
               <label scQuestionnaireChoice>
                 <input
@@ -157,7 +157,7 @@ import {
               </div>
             </div>
           </div>
-          <div scCardContent>
+          <div scCardBody>
             <div scQuestionnaireChoices>
               <label scQuestionnaireChoice>
                 <input

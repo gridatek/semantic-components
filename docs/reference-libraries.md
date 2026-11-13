@@ -183,7 +183,7 @@ A box of related content (`div[scCard]`). A shadcn component; Base UI has no car
 **Taken:**
 
 - **The parts, `size` and `--card-spacing`**, each preset's look; the examples, our way (Signal Forms, a local image, the Toggle Group).
-- **`ScCardContent`**, shadcn's name (was `ScCardBody`; the user, 2026-11-04 — the library's Body/Content naming is still open).
+- **`ScCardBody`**, not shadcn's `CardContent` (the user, 2026-11-13: a section between a header and a footer is a Body — docs/content-body-naming.md).
 - **Not**: the old Form, Notification and Stats demos (the user: replaced by better ones; stats are the Stat Card's).
 
 ## Badge
@@ -768,7 +768,7 @@ Restyled 2026-11-07: shadcn's Label and FieldLabel in each style, and its two ex
 Restyled 2026-11-06 (the parts stay): shadcn's Calendar (react-day-picker) in each style, and its examples.
 
 - **The `calendar` preset key**: the root — padding, `--cell-size` (6 to 8 spacing units) and `--cell-radius` (`radius-md`, `4xl` in maia and luma, `2xl` rhea, 0 sera, none in lyra) — from each style's `calendar.tsx`; the cells, the weekdays, the month and year views (as wide as a week) and the arrows (ghost, a cell square) take them. Today, hover and the range's middle in `muted`, as shadcn's.
-- **No background in a card's content or a popover**: `data-slot="card-content"` and `data-slot="popover"` added for it (docs/data-slot-pattern.md).
+- **No background in a card's content or a popover**: `data-slot="card-body"` and `data-slot="popover"` added for it (docs/data-slot-pattern.md).
 - **shadcn's examples added**: Demo (the Usage), Basic, Booked dates (`unavailable`), Custom days (a price, bigger cells), Presets and Time (composed in a Card), Week numbers, RTL. Its Caption (month and year dropdowns) is our heading's zoom instead — "Months and years", `startView="month"` (the user, 2026-11-06: dropdowns are hard to use). Its Hijri example is left for later (other calendar systems: docs/todo.md).
 
 ## Progress: restyled

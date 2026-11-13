@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScEmpty,
   ScEmptyBody,
   ScEmptyDescription,
@@ -19,7 +19,7 @@ import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
   imports: [
     ScButton,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScEmpty,
     ScEmptyBody,
     ScEmptyDescription,
@@ -31,7 +31,7 @@ import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
   ],
   template: `
     <div scCard>
-      <div scCardContent class="p-0">
+      <div scCardBody class="p-0">
         <div scEmpty class="p-4">
           <div scEmptyHeader>
             <div scEmptyMedia variant="icon">

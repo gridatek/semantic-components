@@ -23,7 +23,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardHeader,
   ScCardTitle,
   ScCollapsible,
@@ -50,7 +50,7 @@ interface ScFileTreeItem {
     NgTemplateOutlet,
     ScButton,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardHeader,
     ScCardTitle,
     ScCollapsible,
@@ -66,7 +66,7 @@ interface ScFileTreeItem {
       <div scCardHeader>
         <h3 scCardTitle>Explorer</h3>
       </div>
-      <div scCardContent>
+      <div scCardBody>
         <div class="flex flex-col gap-1">
           @for (item of tree; track item.name) {
             <ng-container

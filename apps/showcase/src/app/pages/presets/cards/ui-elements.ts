@@ -14,7 +14,7 @@ import {
   ScBadge,
   ScButton,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCheckbox,
   ScControlGroup,
   ScField,
@@ -69,7 +69,7 @@ import { SiChevronUpIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
     ScBadge,
     ScButton,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCheckbox,
     ScControlGroup,
     ScField,
@@ -96,7 +96,7 @@ import { SiChevronUpIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
   ],
   template: `
     <div scCard class="w-full">
-      <div scCardContent class="flex flex-col gap-6">
+      <div scCardBody class="flex flex-col gap-6">
         <div class="flex flex-col gap-4">
           <div class="flex flex-wrap gap-2">
             <button scButton>Button</button>

@@ -6,7 +6,7 @@ import {
   ScCalendarPrevious,
   type ScCalendarValue,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardFooter,
   ScField,
   ScFieldGroup,
@@ -27,7 +27,7 @@ import {
     ScCalendarNext,
     ScCalendarPrevious,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardFooter,
     ScField,
     ScFieldGroup,
@@ -38,7 +38,7 @@ import {
   ],
   template: `
     <div scCard class="w-fit">
-      <div scCardContent>
+      <div scCardBody>
         <div
           scCalendar
           #cal="scCalendar"

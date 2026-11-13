@@ -31,7 +31,7 @@ export class PluginCarouselDemoContainer {
   signal,
   viewChild,
 } from '@angular/core';
-import { ScButton, ScCard, ScCardContent } from '@semantic-components/ui';
+import { ScButton, ScCard, ScCardBody } from '@semantic-components/ui';
 import {
   ScCarousel,
   ScCarouselItem,
@@ -60,7 +60,7 @@ import Autoplay from 'embla-carousel-autoplay';
     ScCarouselViewport,
     ScButton,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     SiChevronLeftIcon,
     SiChevronRightIcon,
     SiPauseIcon,
@@ -90,7 +90,7 @@ import Autoplay from 'embla-carousel-autoplay';
                 <div class="p-1">
                   <div scCard>
                     <div
-                      scCardContent
+                      scCardBody
                       class="flex aspect-square items-center justify-center p-6"
                     >
                       <span class="text-4xl font-semibold">{{ n }}</span>

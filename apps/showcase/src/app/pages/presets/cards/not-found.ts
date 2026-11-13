@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScEmpty,
   ScEmptyBody,
   ScEmptyDescription,
@@ -21,7 +21,7 @@ import { SiSearchIcon } from '@semantic-icons/lucide-icons';
   imports: [
     ScButton,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScEmpty,
     ScEmptyBody,
     ScEmptyDescription,
@@ -35,7 +35,7 @@ import { SiSearchIcon } from '@semantic-icons/lucide-icons';
   ],
   template: `
     <div scCard>
-      <div scCardContent>
+      <div scCardBody>
         <div scEmpty class="h-72">
           <div scEmptyHeader>
             <h2 scEmptyTitle>404 - Not Found</h2>

@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardFooter,
   ScCardHeader,
@@ -37,7 +37,7 @@ const DELTA = Math.round(((DESKTOP - MOBILE) / MOBILE) * 100);
   imports: [
     ScButton,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardDescription,
     ScCardFooter,
     ScCardHeader,
@@ -59,7 +59,7 @@ const DELTA = Math.round(((DESKTOP - MOBILE) / MOBILE) * 100);
           volume and mix across platforms and devices at a glance.
         </p>
       </div>
-      <div scCardContent class="flex flex-col gap-4 pt-0">
+      <div scCardBody class="flex flex-col gap-4 pt-0">
         <div scChart class="h-[180px] w-full" [config]="config" [data]="data">
           <svg
             scChartPlot

@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScItem,
   ScItemActions,
   ScItemGroup,
@@ -16,7 +16,7 @@ import {
   selector: 'app-preview-shortcuts',
   imports: [
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScItem,
     ScItemActions,
     ScItemGroup,
@@ -27,7 +27,7 @@ import {
   ],
   template: `
     <div scCard>
-      <div scCardContent>
+      <div scCardBody>
         <div class="flex flex-col gap-3">
           <h2 class="text-sm font-medium">Shortcuts</h2>
           <div scItemGroup class="text-muted-foreground gap-2" role="list">

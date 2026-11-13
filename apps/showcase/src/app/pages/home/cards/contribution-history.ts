@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardFooter,
   ScCardHeader,
@@ -18,7 +18,7 @@ import {
   imports: [
     ScButton,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardDescription,
     ScCardFooter,
     ScCardHeader,
@@ -33,7 +33,7 @@ import {
         <h2 scCardTitle>Contribution History</h2>
         <p scCardDescription>Last 6 months of activity</p>
       </div>
-      <div scCardContent>
+      <div scCardBody>
         <div
           class="flex h-[200px] w-full items-end gap-3"
           role="img"
@@ -53,7 +53,7 @@ import {
           }
         </div>
       </div>
-      <div scCardContent>
+      <div scCardBody>
         <div class="grid w-full grid-cols-1 gap-3 xl:grid-cols-2">
           <div scItem variant="muted" class="flex-col items-stretch">
             <div scItemBody class="gap-1">

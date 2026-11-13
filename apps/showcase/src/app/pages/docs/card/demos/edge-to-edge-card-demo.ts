@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardFooter,
   ScCardHeader,
@@ -19,7 +19,7 @@ import {
   imports: [
     ScButton,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardDescription,
     ScCardFooter,
     ScCardHeader,
@@ -33,7 +33,7 @@ import {
           Review the terms before accepting the agreement.
         </p>
       </div>
-      <div scCardContent class="-mb-(--card-spacing)">
+      <div scCardBody class="-mb-(--card-spacing)">
         <div
           tabindex="0"
           role="region"

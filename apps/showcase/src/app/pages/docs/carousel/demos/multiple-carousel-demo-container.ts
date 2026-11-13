@@ -19,7 +19,7 @@ import { MultipleCarouselDemo } from './multiple-carousel-demo';
 })
 export class MultipleCarouselDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScCard, ScCardContent } from '@semantic-components/ui';
+import { ScCard, ScCardBody } from '@semantic-components/ui';
 import {
   ScCarousel,
   ScCarouselItem,
@@ -44,7 +44,7 @@ import {
     ScCarouselTrack,
     ScCarouselViewport,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     SiChevronLeftIcon,
     SiChevronRightIcon,
   ],
@@ -69,7 +69,7 @@ import {
               <div class="p-1">
                 <div scCard>
                   <div
-                    scCardContent
+                    scCardBody
                     class="flex aspect-square items-center justify-center p-6"
                   >
                     <span class="text-3xl font-semibold">{{ n }}</span>

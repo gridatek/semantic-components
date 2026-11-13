@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCollapsible,
   ScCollapsiblePanel,
   ScCollapsibleTrigger,
@@ -15,7 +15,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   imports: [
     ScButton,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCollapsible,
     ScCollapsiblePanel,
     ScCollapsibleTrigger,
@@ -23,7 +23,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   ],
   template: `
     <div scCard class="w-full max-w-sm">
-      <div scCardContent>
+      <div scCardBody>
         <div scCollapsible class="data-open:bg-muted rounded-md">
           <button scButton scCollapsibleTrigger variant="ghost" class="w-full">
             Product details

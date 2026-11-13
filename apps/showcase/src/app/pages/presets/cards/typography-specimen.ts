@@ -3,7 +3,7 @@ import { FormField, form } from '@angular/forms/signals';
 import {
   ScButton,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardFooter,
   ScDialog,
   ScDialogClose,
@@ -46,7 +46,7 @@ import {
     FormField,
     ScButton,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardFooter,
     ScDialog,
     ScDialogClose,
@@ -81,7 +81,7 @@ import {
   ],
   template: `
     <div scCard>
-      <div scCardContent class="flex flex-col gap-2">
+      <div scCardBody class="flex flex-col gap-2">
         <p class="text-muted-foreground text-xs font-medium uppercase">
           Inherit - Geist
         </p>

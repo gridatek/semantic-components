@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardHeader,
   ScCardTitle,
@@ -19,7 +19,7 @@ import { SiMaximizeIcon, SiMinimizeIcon } from '@semantic-icons/lucide-icons';
   imports: [
     ScButton,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardDescription,
     ScCardHeader,
     ScCardTitle,
@@ -36,7 +36,7 @@ import { SiMaximizeIcon, SiMinimizeIcon } from '@semantic-icons/lucide-icons';
         <h3 scCardTitle>Radius</h3>
         <p scCardDescription>Set the corner radius of the element.</p>
       </div>
-      <div scCardContent>
+      <div scCardBody>
         <div scCollapsible [(open)]="open" class="flex items-start gap-2">
           <div class="grid w-full grid-cols-2 gap-2">
             <input scInput aria-label="Radius, top start" placeholder="0" />

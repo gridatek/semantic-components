@@ -1,13 +1,13 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScCard, ScCardContent, ScSkeleton } from '@semantic-components/ui';
+import { ScCard, ScCardBody, ScSkeleton } from '@semantic-components/ui';
 
 /** A post still loading: an avatar, lines and buttons as skeletons. */
 @Component({
   selector: 'app-preview-skeleton-loading',
-  imports: [ScCard, ScCardContent, ScSkeleton],
+  imports: [ScCard, ScCardBody, ScSkeleton],
   template: `
     <div scCard aria-busy="true">
-      <div scCardContent class="flex flex-col gap-4">
+      <div scCardBody class="flex flex-col gap-4">
         <div class="flex items-center gap-3">
           <div scSkeleton class="size-10 rounded-full"></div>
           <div class="flex flex-1 flex-col gap-2">

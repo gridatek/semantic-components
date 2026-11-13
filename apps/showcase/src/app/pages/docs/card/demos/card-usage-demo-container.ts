@@ -26,7 +26,7 @@ import {
   ScButton,
   ScCard,
   ScCardAction,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardFooter,
   ScCardHeader,
@@ -46,7 +46,7 @@ import {
     ScButton,
     ScCard,
     ScCardAction,
-    ScCardContent,
+    ScCardBody,
     ScCardDescription,
     ScCardFooter,
     ScCardHeader,
@@ -66,7 +66,7 @@ import {
           <button scButton variant="link">Sign Up</button>
         </div>
       </div>
-      <div scCardContent>
+      <div scCardBody>
         <form id="login-form" [formRoot]="loginForm">
           <div scFieldGroup>
             <div scField>

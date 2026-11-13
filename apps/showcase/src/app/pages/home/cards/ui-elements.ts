@@ -14,7 +14,7 @@ import {
   ScBadge,
   ScButton,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCheckbox,
   ScControlGroup,
   ScField,
@@ -61,7 +61,7 @@ import {
     ScBadge,
     ScButton,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCheckbox,
     ScControlGroup,
     ScField,
@@ -89,7 +89,7 @@ import {
   ],
   template: `
     <div scCard class="w-full">
-      <div scCardContent class="flex flex-col gap-6">
+      <div scCardBody class="flex flex-col gap-6">
         <div class="flex gap-2">
           <button scButton>
             Button

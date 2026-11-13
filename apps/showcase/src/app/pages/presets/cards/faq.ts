@@ -9,7 +9,7 @@ import {
   ScAccordionTriggerIcon,
   ScButton,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardFooter,
   ScTabs,
   ScTabsContent,
@@ -37,7 +37,7 @@ interface ScFaqQuestion {
     ScAccordionTriggerIcon,
     ScButton,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardFooter,
     ScTabs,
     ScTabsContent,
@@ -48,7 +48,7 @@ interface ScFaqQuestion {
   ],
   template: `
     <div scCard>
-      <div scCardContent>
+      <div scCardBody>
         <div scTabs value="general">
           <div scTabsList class="w-full">
             @for (topic of topics; track topic.value) {

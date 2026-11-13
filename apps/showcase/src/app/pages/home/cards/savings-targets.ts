@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardFooter,
   ScCardHeader,
@@ -21,7 +21,7 @@ import {
   selector: 'app-home-savings-targets',
   imports: [
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardDescription,
     ScCardFooter,
     ScCardHeader,
@@ -44,7 +44,7 @@ import {
           you are to each savings goal.
         </p>
       </div>
-      <div scCardContent>
+      <div scCardBody>
         <div scItemGroup role="list" class="gap-3">
           <div
             scItem

@@ -16,7 +16,7 @@ import {
   ScBadge,
   ScButton,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardFooter,
   ScCardHeader,
@@ -66,7 +66,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     ScBadge,
     ScButton,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardDescription,
     ScCardFooter,
     ScCardHeader,
@@ -190,7 +190,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
                     Card description with supporting text.
                   </p>
                 </div>
-                <div scCardContent>
+                <div scCardBody>
                   <p
                     class="text-muted-foreground text-sm"
                     i18n="@@gallery.cardBody"
@@ -215,7 +215,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
                     You have 3 unread messages.
                   </p>
                 </div>
-                <div scCardContent>
+                <div scCardBody>
                   <div class="flex items-center gap-4">
                     <span scAvatar>
                       <span scAvatarFallback>JD</span>

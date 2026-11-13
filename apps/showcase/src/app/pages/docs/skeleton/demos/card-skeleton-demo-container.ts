@@ -21,7 +21,7 @@ export class CardSkeletonDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardHeader,
   ScSkeleton,
 } from '@semantic-components/ui';
@@ -29,14 +29,14 @@ import {
 /** A card while its content loads: in the card’s own parts. */
 @Component({
   selector: 'app-card-skeleton-demo',
-  imports: [ScCard, ScCardContent, ScCardHeader, ScSkeleton],
+  imports: [ScCard, ScCardBody, ScCardHeader, ScSkeleton],
   template: \`
     <div scCard class="w-full max-w-xs">
       <div scCardHeader>
         <div scSkeleton class="h-4 w-2/3"></div>
         <div scSkeleton class="h-4 w-1/2"></div>
       </div>
-      <div scCardContent>
+      <div scCardBody>
         <div scSkeleton class="aspect-video w-full"></div>
       </div>
     </div>

@@ -3,7 +3,7 @@ import {
   ScBadge,
   ScButton,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardTitle,
 } from '@semantic-components/ui';
@@ -23,7 +23,7 @@ import {
     ScBadge,
     ScButton,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardDescription,
     ScCardTitle,
     ScChart,
@@ -35,14 +35,14 @@ import {
   template: `
     <div class="grid grid-cols-2 gap-3">
       <div scCard>
-        <div scCardContent>
+        <div scCardBody>
           <p scCardDescription>Card Balance</p>
           <h2 scCardTitle class="text-2xl tabular-nums">US$12.94</h2>
           <p scCardDescription class="tabular-nums">US$11,337.06 Available</p>
         </div>
       </div>
       <div scCard class="flex flex-col justify-between">
-        <div scCardContent class="flex flex-1 flex-col justify-between">
+        <div scCardBody class="flex flex-1 flex-col justify-between">
           <div class="flex flex-col gap-1">
             <p scCardDescription>Payment Due</p>
             <h2 scCardTitle class="text-2xl">1 Apr</h2>
@@ -53,7 +53,7 @@ import {
         </div>
       </div>
       <div scCard class="col-span-2">
-        <div scCardContent class="flex flex-col gap-2">
+        <div scCardBody class="flex flex-col gap-2">
           <div class="flex items-center justify-between">
             <p scCardDescription>Yearly Activity</p>
             <span scBadge variant="secondary">+US$0.25 Daily Cash</span>

@@ -3,7 +3,7 @@ import { FormField, form } from '@angular/forms/signals';
 import {
   ScButton,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardFooter,
   ScCardHeader,
@@ -41,7 +41,7 @@ import {
     FormField,
     ScButton,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardDescription,
     ScCardFooter,
     ScCardHeader,
@@ -75,7 +75,7 @@ import {
         <h2 scCardTitle>Invite Team</h2>
         <p scCardDescription>Add members to your workspace</p>
       </div>
-      <div scCardContent class="flex flex-col gap-4">
+      <div scCardBody class="flex flex-col gap-4">
         <div class="flex flex-col gap-3">
           @for (invite of team.invites; track $index; let i = $index) {
             <div class="flex items-center gap-2">

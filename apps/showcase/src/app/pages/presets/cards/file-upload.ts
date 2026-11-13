@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardHeader,
   ScCardTitle,
@@ -21,7 +21,7 @@ import { SiCloudUploadIcon } from '@semantic-icons/lucide-icons';
   imports: [
     ScButton,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardDescription,
     ScCardHeader,
     ScCardTitle,
@@ -39,7 +39,7 @@ import { SiCloudUploadIcon } from '@semantic-icons/lucide-icons';
         <h2 scCardTitle>File Upload</h2>
         <p scCardDescription>Drag and drop or browse</p>
       </div>
-      <div scCardContent>
+      <div scCardBody>
         <div scEmpty class="border">
           <div scEmptyHeader>
             <div scEmptyMedia variant="icon">

@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardHeader,
   ScCardTitle,
   ScInput,
@@ -22,7 +22,7 @@ import {
   imports: [
     ScButton,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardHeader,
     ScCardTitle,
     ScInput,
@@ -118,7 +118,7 @@ import {
               </h2>
             </div>
 
-            <div scCardContent class="space-y-4">
+            <div scCardBody class="space-y-4">
               <div class="space-y-2">
                 <label scLabel for="name" i18n="@@contact.name">Name</label>
                 <input

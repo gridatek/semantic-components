@@ -3,7 +3,7 @@ import {
   ScBadge,
   ScCard,
   ScCardAction,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardHeader,
   ScCardTitle,
@@ -19,7 +19,7 @@ import { SiLockIcon } from '@semantic-icons/lucide-icons';
     ScBadge,
     ScCard,
     ScCardAction,
-    ScCardContent,
+    ScCardBody,
     ScCardDescription,
     ScCardHeader,
     ScCardTitle,
@@ -37,7 +37,7 @@ import { SiLockIcon } from '@semantic-icons/lucide-icons';
           </div>
         </div>
       </div>
-      <div scCardContent>
+      <div scCardBody>
         <div
           scFrame
           class="bg-muted relative flex aspect-video items-center justify-center overflow-hidden bg-[repeating-linear-gradient(45deg,transparent,transparent_10px,var(--border)_10px,var(--border)_11px)]"

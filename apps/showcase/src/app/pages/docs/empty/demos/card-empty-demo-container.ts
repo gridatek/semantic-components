@@ -22,7 +22,7 @@ export class CardEmptyDemoContainer {
 import {
   ScButton,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScEmpty,
   ScEmptyBody,
   ScEmptyDescription,
@@ -39,7 +39,7 @@ import { SiArrowUpRightIcon, SiFolderIcon } from '@semantic-icons/lucide-icons';
   imports: [
     ScButton,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScEmpty,
     ScEmptyBody,
     ScEmptyDescription,
@@ -52,7 +52,7 @@ import { SiArrowUpRightIcon, SiFolderIcon } from '@semantic-icons/lucide-icons';
   ],
   template: \`
     <div scCard class="w-full max-w-md">
-      <div scCardContent>
+      <div scCardBody>
         <div scEmpty>
           <div scEmptyHeader>
             <div scEmptyMedia variant="icon"><svg siFolderIcon></svg></div>

@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardFooter,
   ScSeparator,
 } from '@semantic-components/ui';
@@ -19,7 +19,7 @@ import {
   selector: 'app-preview-savings-progress',
   imports: [
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardFooter,
     ScChart,
     ScChartCenter,
@@ -30,7 +30,7 @@ import {
   ],
   template: `
     <div scCard>
-      <div scCardContent>
+      <div scCardBody>
         <div
           scChart
           class="mx-auto aspect-square max-h-[220px]"

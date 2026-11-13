@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardFooter,
   ScCardHeader,
@@ -29,7 +29,7 @@ import {
     ScFrame,
     ScButton,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardDescription,
     ScCardFooter,
     ScCardHeader,
@@ -114,7 +114,7 @@ import {
                       Update your profile details below.
                     </p>
                   </div>
-                  <div scCardContent>
+                  <div scCardBody>
                     <div class="space-y-4">
                       <div class="space-y-2">
                         <label
@@ -175,7 +175,7 @@ import {
                       Update your password to keep your account secure.
                     </p>
                   </div>
-                  <div scCardContent>
+                  <div scCardBody>
                     <div class="space-y-4">
                       <div class="space-y-2">
                         <label
@@ -244,7 +244,7 @@ import {
                       Irreversible and destructive actions.
                     </p>
                   </div>
-                  <div scCardContent>
+                  <div scCardBody>
                     <div class="flex items-center justify-between">
                       <div>
                         <p
@@ -289,7 +289,7 @@ import {
                       Choose how you want to be notified.
                     </p>
                   </div>
-                  <div scCardContent>
+                  <div scCardBody>
                     <div class="space-y-4">
                       <label
                         scFrame
@@ -383,7 +383,7 @@ import {
                       Select your preferred theme for the application.
                     </p>
                   </div>
-                  <div scCardContent>
+                  <div scCardBody>
                     <div class="grid grid-cols-3 gap-4">
                       <button
                         scButton

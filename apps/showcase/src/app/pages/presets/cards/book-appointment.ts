@@ -5,7 +5,7 @@ import {
   ScAlertTitle,
   ScButton,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardFooter,
   ScCardHeader,
@@ -26,7 +26,7 @@ import {
     ScAlertTitle,
     ScButton,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardDescription,
     ScCardFooter,
     ScCardHeader,
@@ -43,7 +43,7 @@ import {
         <h2 scCardTitle>Book Appointment</h2>
         <p scCardDescription>Dr. Sarah Chen · Cardiology</p>
       </div>
-      <div scCardContent class="flex flex-col gap-4">
+      <div scCardBody class="flex flex-col gap-4">
         <div scFieldGroup>
           <div scField>
             <p scLabelText id="preview-slots-label">

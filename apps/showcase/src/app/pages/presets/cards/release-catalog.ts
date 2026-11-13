@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScBadge,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardHeader,
   ScFrame,
   ScInput,
@@ -26,7 +26,7 @@ import { SiSearchIcon } from '@semantic-icons/lucide-icons';
     ScFrame,
     ScBadge,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardHeader,
     ScInput,
     ScInputGroup,
@@ -69,7 +69,7 @@ import { SiSearchIcon } from '@semantic-icons/lucide-icons';
           </div>
         </div>
       </div>
-      <div scCardContent>
+      <div scCardBody>
         <div scItemGroup role="list">
           @for (holding of holdings; track holding.ticker) {
             <div scItem variant="muted" role="listitem">

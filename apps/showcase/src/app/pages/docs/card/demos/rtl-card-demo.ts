@@ -11,7 +11,7 @@ import {
   ScButton,
   ScCard,
   ScCardAction,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardFooter,
   ScCardHeader,
@@ -33,7 +33,7 @@ import {
     ScButton,
     ScCard,
     ScCardAction,
-    ScCardContent,
+    ScCardBody,
     ScCardDescription,
     ScCardFooter,
     ScCardHeader,
@@ -56,7 +56,7 @@ import {
             <button scButton variant="link">إنشاء حساب</button>
           </div>
         </div>
-        <div scCardContent>
+        <div scCardBody>
           <form id="login-form-rtl" [formRoot]="loginForm">
             <div scFieldGroup>
               <div scField>

@@ -24,7 +24,7 @@ test.describe('Card Page', () => {
       'ScCardTitle',
       'ScCardDescription',
       'ScCardAction',
-      'ScCardContent',
+      'ScCardBody',
       'ScCardFooter',
     ]);
   });

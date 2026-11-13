@@ -39,7 +39,7 @@ Native Dialog shows the whole shape: `scNativeDialogProvider` → `dialog[scNati
 
 ### 1. A section between a header and a footer → Body
 
-- [ ] `ScCardContent` → `ScCardBody` (`div[scCardContent]`). shadcn names it CardContent; we differ, and say why in the README.
+- [x] `ScCardContent` → `ScCardBody` (`div[scCardContent]`). shadcn names it CardContent; we differ, and say why in the README.
 - [ ] `ScSidebarContent` → `ScSidebarBody` (`div[scSidebarContent], nav[scSidebarContent]`): the scrolling middle, between the Sidebar's header and footer.
 - [ ] `ScSidebarGroupContent` → `ScSidebarGroupBody`? (`div[scSidebarGroupContent]`): the group's menu, under its label. A closer call: the label is a header only loosely.
 

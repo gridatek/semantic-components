@@ -45,7 +45,7 @@ ScPaginationContent;
 </div>
 ```
 
-It doesn't name one part among others, as the part between a header and a footer: that is one section of the component, and needs a name saying which. (`ScCardContent`, shadcn's name, doesn't follow this yet: its name, with the parts named `…Body`, is still to be found.)
+It doesn't name one part among others, as the part between a header and a footer: that is one section of the component, and needs a name saying which. (Being replaced by the rule in [content-body-naming.md](content-body-naming.md): a section is a Body — `ScCardBody`, 2026-11-13.)
 
 ### Attribute selectors, prefixed `sc`
 

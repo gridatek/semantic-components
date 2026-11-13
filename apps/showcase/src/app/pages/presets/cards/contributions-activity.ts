@@ -3,7 +3,7 @@ import { FormField, form } from '@angular/forms/signals';
 import {
   ScButton,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardFooter,
   ScCardHeader,
@@ -25,7 +25,7 @@ import {
     FormField,
     ScButton,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardDescription,
     ScCardFooter,
     ScCardHeader,
@@ -47,7 +47,7 @@ import {
           Manage your contributions and activity visibility.
         </p>
       </div>
-      <div scCardContent>
+      <div scCardBody>
         <fieldset scFieldset>
           <legend scLegend class="sr-only">Contributions &amp; activity</legend>
           <div scFieldGroup>

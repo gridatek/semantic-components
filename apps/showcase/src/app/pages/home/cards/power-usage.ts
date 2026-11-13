@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardHeader,
   ScCardTitle,
@@ -13,7 +13,7 @@ import {
   selector: 'app-home-power-usage',
   imports: [
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardDescription,
     ScCardHeader,
     ScCardTitle,
@@ -25,7 +25,7 @@ import {
         <h2 scCardTitle>Power Usage</h2>
         <p scCardDescription>Whole Home</p>
       </div>
-      <div scCardContent class="flex flex-col gap-4">
+      <div scCardBody class="flex flex-col gap-4">
         <div
           class="flex h-[140px] w-full items-end gap-2"
           role="img"

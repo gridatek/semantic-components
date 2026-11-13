@@ -10,7 +10,7 @@ import { RouterLink } from '@angular/router';
 import {
   ScButton,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardFooter,
   ScCardHeader,
@@ -31,7 +31,7 @@ import { Logo } from '../../components/logo/logo';
     RouterLink,
     ScButton,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardDescription,
     ScCardFooter,
     ScCardHeader,
@@ -57,7 +57,7 @@ import { Logo } from '../../components/logo/logo';
             Enter your email address and we'll send you a reset link.
           </p>
         </div>
-        <div scCardContent>
+        <div scCardBody>
           <form [formRoot]="forgotPasswordForm">
             <div scFieldGroup>
               <div scField>

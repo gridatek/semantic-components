@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import {
   ScButton,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardFooter,
   ScCardHeader,
@@ -20,7 +20,7 @@ import {
   imports: [
     ScButton,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardDescription,
     ScCardFooter,
     ScCardHeader,
@@ -52,7 +52,7 @@ import {
             A summary of your team&apos;s activity, every Monday.
           </p>
         </div>
-        <div scCardContent>
+        <div scCardBody>
           <p class="text-sm">
             Mentions, merged pull requests and upcoming deadlines, in one email.
           </p>

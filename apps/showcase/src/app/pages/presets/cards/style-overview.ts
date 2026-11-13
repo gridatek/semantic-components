@@ -1,14 +1,14 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScCard, ScCardContent, ScFrame } from '@semantic-components/ui';
+import { ScCard, ScCardBody, ScFrame } from '@semantic-components/ui';
 import { storedPreset } from '../../../presets';
 
 /** The preset at a glance: its name and font, then the theme's colors. */
 @Component({
   selector: 'app-preview-style-overview',
-  imports: [ScCard, ScCardContent, ScFrame],
+  imports: [ScCard, ScCardBody, ScFrame],
   template: `
     <div scCard>
-      <div scCardContent class="flex flex-col gap-6">
+      <div scCardBody class="flex flex-col gap-6">
         <div class="flex flex-col gap-1">
           <h2 class="font-heading text-2xl font-medium capitalize">
             {{ preset }} - Geist

@@ -3,7 +3,7 @@ import { FormField, form } from '@angular/forms/signals';
 import {
   ScButton,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardFooter,
   ScCardHeader,
   ScCardTitle,
@@ -28,7 +28,7 @@ import {
     FormField,
     ScButton,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardFooter,
     ScCardHeader,
     ScCardTitle,
@@ -48,7 +48,7 @@ import {
       <div scCardHeader>
         <h2 scCardTitle>Social Links</h2>
       </div>
-      <div scCardContent>
+      <div scCardBody>
         <div scFieldGroup>
           <div scField>
             <label scLabel>Spotify Artist URL</label>

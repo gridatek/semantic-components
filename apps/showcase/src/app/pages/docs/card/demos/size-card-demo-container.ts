@@ -22,7 +22,7 @@ export class SizeCardDemoContainer {
 import {
   ScButton,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardFooter,
   ScCardHeader,
@@ -36,7 +36,7 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
   imports: [
     ScButton,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardDescription,
     ScCardFooter,
     ScCardHeader,
@@ -49,7 +49,7 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
         <h4 scCardTitle>Scheduled reports</h4>
         <p scCardDescription>Weekly snapshots. No more manual exports.</p>
       </div>
-      <div scCardContent>
+      <div scCardBody>
         <ul class="grid gap-2 py-2 text-sm">
           @for (item of items; track item) {
             <li class="flex gap-2">

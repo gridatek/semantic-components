@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardHeader,
   ScCardTitle,
@@ -24,7 +24,7 @@ import {
     ScCardHeader,
     ScCardTitle,
     ScCardDescription,
-    ScCardContent,
+    ScCardBody,
   ],
   template: `
     <div scTabs value="overview" class="w-full max-w-sm">
@@ -44,7 +44,7 @@ import {
                 progress across all your active projects.
               </p>
             </div>
-            <div scCardContent class="text-muted-foreground text-sm">
+            <div scCardBody class="text-muted-foreground text-sm">
               You have 12 active projects and 3 pending tasks.
             </div>
           </div>
@@ -60,7 +60,7 @@ import {
                 and identify growth opportunities.
               </p>
             </div>
-            <div scCardContent class="text-muted-foreground text-sm">
+            <div scCardBody class="text-muted-foreground text-sm">
               Page views are up 25% compared to last month.
             </div>
           </div>
@@ -76,7 +76,7 @@ import {
                 multiple formats for analysis.
               </p>
             </div>
-            <div scCardContent class="text-muted-foreground text-sm">
+            <div scCardBody class="text-muted-foreground text-sm">
               You have 5 reports ready and available to export.
             </div>
           </div>
@@ -92,7 +92,7 @@ import {
                 experience to fit your needs.
               </p>
             </div>
-            <div scCardContent class="text-muted-foreground text-sm">
+            <div scCardBody class="text-muted-foreground text-sm">
               Configure notifications, security, and themes.
             </div>
           </div>

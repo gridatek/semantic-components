@@ -7,7 +7,7 @@ import {
   ScCalendarPrevious,
   type ScCalendarValue,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardFooter,
 } from '@semantic-components/ui';
 import {
@@ -25,14 +25,14 @@ import {
     ScCalendarNext,
     ScCalendarPrevious,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardFooter,
     SiChevronLeftIcon,
     SiChevronRightIcon,
   ],
   template: `
     <div scCard class="w-fit max-w-[300px]">
-      <div scCardContent>
+      <div scCardBody>
         <div
           scCalendar
           #cal="scCalendar"

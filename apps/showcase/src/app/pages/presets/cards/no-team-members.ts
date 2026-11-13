@@ -6,7 +6,7 @@ import {
   ScAvatarImage,
   ScButton,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScEmpty,
   ScEmptyBody,
   ScEmptyDescription,
@@ -25,7 +25,7 @@ import {
     ScAvatarImage,
     ScButton,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScEmpty,
     ScEmptyBody,
     ScEmptyDescription,
@@ -35,7 +35,7 @@ import {
   ],
   template: `
     <div scCard>
-      <div scCardContent>
+      <div scCardBody>
         <div scEmpty class="h-56 border">
           <div scEmptyHeader>
             <div scEmptyMedia>

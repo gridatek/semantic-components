@@ -21,7 +21,7 @@ export class FormCheckboxDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardHeader,
   ScCardTitle,
   ScCheckbox,
@@ -35,7 +35,7 @@ import {
   selector: 'app-form-checkbox-demo',
   imports: [
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardHeader,
     ScCardTitle,
     ScCheckbox,
@@ -48,7 +48,7 @@ import {
       <div scCardHeader>
         <h3 scCardTitle>Notification Preferences</h3>
       </div>
-      <div scCardContent>
+      <div scCardBody>
         <div scFieldGroup class="gap-3">
           <div scCheckboxField>
             <input scCheckbox [(checked)]="email" />

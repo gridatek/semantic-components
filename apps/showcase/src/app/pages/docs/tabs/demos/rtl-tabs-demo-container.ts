@@ -22,7 +22,7 @@ export class RtlTabsDemoContainer {
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardHeader,
   ScCardTitle,
@@ -47,7 +47,7 @@ import {
     ScCardHeader,
     ScCardTitle,
     ScCardDescription,
-    ScCardContent,
+    ScCardBody,
   ],
   template: \`
     <div dir="rtl" lang="ar" class="flex w-full justify-center">
@@ -68,7 +68,7 @@ import {
                   جميع مشاريعك النشطة.
                 </p>
               </div>
-              <div scCardContent class="text-muted-foreground text-sm">
+              <div scCardBody class="text-muted-foreground text-sm">
                 لديك ١٢ مشروعًا نشطًا و٣ مهام معلقة.
               </div>
             </div>
@@ -84,7 +84,7 @@ import {
                   النمو.
                 </p>
               </div>
-              <div scCardContent class="text-muted-foreground text-sm">
+              <div scCardBody class="text-muted-foreground text-sm">
                 زادت مشاهدات الصفحة بنسبة ٢٥٪ مقارنة بالشهر الماضي.
               </div>
             </div>
@@ -100,7 +100,7 @@ import {
                   للتحليل.
                 </p>
               </div>
-              <div scCardContent class="text-muted-foreground text-sm">
+              <div scCardBody class="text-muted-foreground text-sm">
                 لديك ٥ تقارير جاهزة ومتاحة للتصدير.
               </div>
             </div>
@@ -115,7 +115,7 @@ import {
                   إدارة تفضيلات حسابك وخياراته. تخصيص تجربتك لتناسب احتياجاتك.
                 </p>
               </div>
-              <div scCardContent class="text-muted-foreground text-sm">
+              <div scCardBody class="text-muted-foreground text-sm">
                 تكوين الإشعارات والأمان والسمات.
               </div>
             </div>

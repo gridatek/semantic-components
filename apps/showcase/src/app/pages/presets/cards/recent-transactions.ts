@@ -3,7 +3,7 @@ import {
   ScButton,
   ScCard,
   ScCardAction,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardHeader,
   ScCardTitle,
@@ -38,7 +38,7 @@ import {
     ScButton,
     ScCard,
     ScCardAction,
-    ScCardContent,
+    ScCardBody,
     ScCardDescription,
     ScCardHeader,
     ScCardTitle,
@@ -70,7 +70,7 @@ import {
           <button scButton variant="outline" size="sm">View All</button>
         </div>
       </div>
-      <div scCardContent>
+      <div scCardBody>
         <div
           scTableContainer
           tabindex="0"

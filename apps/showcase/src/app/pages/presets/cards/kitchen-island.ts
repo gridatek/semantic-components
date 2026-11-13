@@ -3,7 +3,7 @@ import { FormField, disabled, form } from '@angular/forms/signals';
 import {
   ScCard,
   ScCardAction,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardHeader,
   ScCardTitle,
@@ -41,7 +41,7 @@ const SCENES: Record<string, Record<ScLightLevel, number>> = {
     FormField,
     ScCard,
     ScCardAction,
-    ScCardContent,
+    ScCardBody,
     ScCardDescription,
     ScCardHeader,
     ScCardTitle,
@@ -73,7 +73,7 @@ const SCENES: Record<string, Record<ScLightLevel, number>> = {
           />
         </div>
       </div>
-      <div scCardContent class="flex flex-col gap-4">
+      <div scCardBody class="flex flex-col gap-4">
         <div
           scToggleGroup
           variant="outline"

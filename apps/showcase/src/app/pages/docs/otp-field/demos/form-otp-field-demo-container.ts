@@ -23,7 +23,7 @@ import { FormField, form, minLength, required } from '@angular/forms/signals';
 import {
   ScButton,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardFooter,
   ScCardHeader,
@@ -47,7 +47,7 @@ import { SiMinusIcon, SiRefreshCwIcon } from '@semantic-icons/lucide-icons';
     FormField,
     ScButton,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardDescription,
     ScCardFooter,
     ScCardHeader,
@@ -71,7 +71,7 @@ import { SiMinusIcon, SiRefreshCwIcon } from '@semantic-icons/lucide-icons';
           <span class="font-medium">m&#64;example.com</span>.
         </p>
       </div>
-      <div scCardContent>
+      <div scCardBody>
         <div scField>
           <div class="flex items-center justify-between">
             <label scLabel>Verification code</label>

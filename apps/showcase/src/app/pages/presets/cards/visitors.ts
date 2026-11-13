@@ -3,7 +3,7 @@ import {
   ScBadge,
   ScCard,
   ScCardAction,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardHeader,
   ScCardTitle,
@@ -35,7 +35,7 @@ const TREND = Math.round(((LATEST - PREVIOUS) / PREVIOUS) * 100);
     ScBadge,
     ScCard,
     ScCardAction,
-    ScCardContent,
+    ScCardBody,
     ScCardDescription,
     ScCardHeader,
     ScCardTitle,
@@ -55,7 +55,7 @@ const TREND = Math.round(((LATEST - PREVIOUS) / PREVIOUS) * 100);
           </span>
         </div>
       </div>
-      <div scCardContent class="px-0">
+      <div scCardBody class="px-0">
         <div scChart class="h-48 w-full" [config]="config" [data]="data">
           <svg
             scChartPlot

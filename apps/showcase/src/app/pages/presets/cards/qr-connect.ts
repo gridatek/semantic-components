@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardFooter,
   ScCardHeader,
@@ -17,7 +17,7 @@ import { ScQrCode } from '@semantic-components/ui/qr-code';
   imports: [
     ScButton,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardDescription,
     ScCardFooter,
     ScCardHeader,
@@ -27,7 +27,7 @@ import { ScQrCode } from '@semantic-components/ui/qr-code';
   ],
   template: `
     <div scCard>
-      <div scCardContent class="flex justify-center pt-6">
+      <div scCardBody class="flex justify-center pt-6">
         <div scFrame class="bg-white p-4">
           <svg
             scQrCode

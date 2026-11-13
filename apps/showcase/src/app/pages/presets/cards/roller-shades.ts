@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import {
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardFooter,
   ScCardHeader,
@@ -20,7 +20,7 @@ const POSITIONS: Record<string, number> = { open: 0, half: 50, closed: 100 };
   imports: [
     ScFrame,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardDescription,
     ScCardFooter,
     ScCardHeader,
@@ -35,7 +35,7 @@ const POSITIONS: Record<string, number> = { open: 0, half: 50, closed: 100 };
         <h2 scCardTitle>Living Room</h2>
         <p scCardDescription>Roller Shades</p>
       </div>
-      <div scCardContent class="flex flex-col gap-4">
+      <div scCardBody class="flex flex-col gap-4">
         <div
           scFrame
           class="bg-muted flex h-32 flex-col overflow-hidden"
