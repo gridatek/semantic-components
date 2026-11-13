@@ -1,14 +1,19 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { ScHeading, ScSeparator } from '@semantic-components/ui';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { ScButton, ScHeading, ScSeparator } from '@semantic-components/ui';
 import {
   ScCodeBlock,
   ScCodeBlockActions,
   ScCodeBlockContent,
   ScCodeBlockCopy,
+  ScCodeBlockFooter,
   ScCodeBlockHeader,
   ScCodeBlockTitle,
 } from '@semantic-components/ui/code-block';
-import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
+import {
+  SiCheckIcon,
+  SiChevronDownIcon,
+  SiCopyIcon,
+} from '@semantic-icons/lucide-icons';
 import { PackageManagerInstall } from '../../components/package-manager-install/package-manager-install';
 import { TocHeading } from '../../components/toc/toc-heading';
 import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo-container';
@@ -22,6 +27,9 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
     ScCodeBlockActions,
     ScCodeBlockCopy,
     ScCodeBlockContent,
+    ScCodeBlockFooter,
+    ScButton,
+    SiChevronDownIcon,
     TocHeading,
     SiCheckIcon,
     SiCopyIcon,
@@ -77,7 +85,31 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
               </button>
             </div>
           </div>
-          <pre scCodeBlockContent [code]="stylesCode" language="css"></pre>
+          <pre
+            scCodeBlockContent
+            id="ui-styles-code"
+            [code]="stylesCode"
+            language="css"
+            [class]="
+              stylesExpanded() ? '' : 'scroll-fade-y max-h-64 overflow-y-hidden'
+            "
+          ></pre>
+          <div scCodeBlockFooter class="justify-center">
+            <button
+              scButton
+              variant="ghost"
+              size="xs"
+              aria-controls="ui-styles-code"
+              [attr.aria-expanded]="stylesExpanded()"
+              (click)="stylesExpanded.set(!stylesExpanded())"
+            >
+              <svg
+                siChevronDownIcon
+                class="transition-transform in-aria-expanded:rotate-180"
+              ></svg>
+              {{ stylesExpanded() ? 'Show less' : 'Show more' }}
+            </button>
+          </div>
         </div>
         <p class="text-muted-foreground">
           The components use nova. For another preset, give it when the app
@@ -198,6 +230,8 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
   encapsulation: ViewEncapsulation.None,
 })
 export default class UiPage {
+  /** styles.css: its first lines, or all of it. */
+  protected readonly stylesExpanded = signal(false);
   readonly stylesCode = `@import url('@angular/cdk/overlay-prebuilt.css');
 @import 'tailwindcss';
 @import 'tw-animate-css';
