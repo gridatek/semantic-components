@@ -119,6 +119,7 @@ An input or a textarea with addons in one box (`div[scInputGroup]`). A shadcn co
 
 - **The parts and behaviour**, with a button part of our own selector (`button[scInputGroupButton]`) on the preset's button.
 - **Not the input and textarea parts**: the group shapes `scInput` / `scTextarea` itself, so there is one input, not two.
+- **Not shadcn's `align` on the addon** (the user, 2026-11-13): it picks an edge of the control, so it is `side` — `inline-start`, `inline-end`, `top`, `bottom` (shadcn's `block-start` / `block-end`), the words of every `side` here; `alignment` stays for a place along an edge.
 
 ## Select
 

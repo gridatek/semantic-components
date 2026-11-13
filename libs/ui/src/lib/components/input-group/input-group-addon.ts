@@ -9,6 +9,11 @@ import { injectPreset } from '../../config/preset';
  * (`top`, `bottom`). Write it after the control: Tab reaches the control
  * first; `side` sets where it shows. A click on it (not on its buttons)
  * focuses the control.
+ *
+ * Not shadcn's `align` (`block-start` / `block-end`), on purpose: it picks an
+ * edge of the control, not a place along one, so it is a `side`, with the
+ * words every `side` of the library uses; `alignment` (start, center, end)
+ * means along an edge, here as on the overlays.
  */
 @Directive({
   selector: 'div[scInputGroupAddon]',

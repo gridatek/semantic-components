@@ -131,6 +131,10 @@ A control of yours joins by carrying `data-slot="control"`: the group rings it w
 
 A menu's trigger (`scMenuTrigger`) on a `scInputGroupButton`; a `kbd[scKbd]` or a `svg[scSpinner]` in an addon. In right to left, `inline-start` is the right side.
 
+## Not shadcn's `align`
+
+shadcn places an addon with `align` (`inline-start`, `inline-end`, `block-start`, `block-end`). Here it is `side` (`inline-start`, `inline-end`, `top`, `bottom`), on purpose: the addon picks an edge of its control — before, after, above or below it — which is what `side` means across the library (Tooltip, Popover, Sheet, Sidebar…), with the same words. `alignment` (`start`, `center`, `end`) is kept for a place along an edge. Porting shadcn's code: `align="inline-end"` → `side="inline-end"`, `align="block-start"` → `side="top"`, `align="block-end"` → `side="bottom"`.
+
 ## Accessibility
 
 - The control is named by a label or `aria-label` — `scInput` warns in development without one; the group is `role="group"`.
