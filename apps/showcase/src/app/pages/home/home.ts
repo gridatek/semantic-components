@@ -30,7 +30,7 @@ import { HomeCards } from './cards/home-cards';
         <a scLink variant="button" routerLink="/docs/getting-started">
           Get Started
         </a>
-        <a scLink variant="secondary" routerLink="/docs/components">
+        <a scLink variant="secondary" routerLink="/components">
           View Components
         </a>
       </div>

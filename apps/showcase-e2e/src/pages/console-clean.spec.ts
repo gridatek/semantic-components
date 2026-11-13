@@ -16,6 +16,7 @@ const components: { path: string; hidden?: boolean }[] = JSON.parse(
 
 const pages = [
   '/docs/getting-started/introduction',
+  '/components',
   '/docs/components',
   '/docs/getting-started/prerequisites',
   '/docs/getting-started/ui',

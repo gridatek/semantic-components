@@ -135,7 +135,7 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
                   </li>
                 }
                 <li>
-                  <a scNavigationMenuLink routerLink="/docs/components">
+                  <a scNavigationMenuLink routerLink="/components">
                     <div class="flex flex-col gap-1 text-sm">
                       <div class="leading-none font-medium">View All</div>
                       <div class="text-muted-foreground line-clamp-2">
@@ -273,7 +273,7 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
           </a>
           <a
             scNavbarMenuLink
-            routerLink="/docs/components"
+            routerLink="/components"
             routerLinkActive="active"
             #mobileComponentsRla="routerLinkActive"
             [active]="mobileComponentsRla.isActive"

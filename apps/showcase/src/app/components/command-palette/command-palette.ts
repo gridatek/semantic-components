@@ -148,7 +148,7 @@ export class CommandPalette {
   protected readonly pages = [
     { name: 'Introduction', path: '/docs/getting-started/introduction' },
     { name: 'Prerequisites', path: '/docs/getting-started/prerequisites' },
-    { name: 'Components', path: '/docs/components' },
+    { name: 'Components', path: '/components' },
   ];
 
   constructor() {

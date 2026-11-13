@@ -17,7 +17,7 @@ test.describe('Home Page', () => {
     ).toHaveAttribute('href', '/docs/getting-started');
     await expect(
       page.getByRole('link', { name: 'View Components' }),
-    ).toHaveAttribute('href', '/docs/components');
+    ).toHaveAttribute('href', '/components');
     // The cards: parts working, not pictures of them.
     await expect(
       page.getByRole('heading', { name: 'Savings Targets' }),

@@ -69,9 +69,9 @@ import { ComponentsService } from '../../../services/components-service';
             [routerLink]="'/docs/components/' + item.path"
             class="group hover:bg-accent relative p-6 transition-colors"
           >
-            <h3 class="leading-none font-semibold tracking-tight">
+            <h2 class="text-base leading-none font-semibold tracking-tight">
               {{ item.name }}
-            </h3>
+            </h2>
             <p class="text-muted-foreground mt-2 text-sm">
               {{ item.description }}
             </p>
