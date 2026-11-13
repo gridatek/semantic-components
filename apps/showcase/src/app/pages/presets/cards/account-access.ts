@@ -99,6 +99,6 @@ import {
 })
 export class PreviewAccountAccess {
   protected readonly access = form(
-    signal({ email: 'artist@studio.inc', password: 'password123' }),
+    signal({ email: 'artist@studio.inc', password: '' }),
   );
 }
