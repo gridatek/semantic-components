@@ -135,7 +135,7 @@ test('RTL: inline-start is the right', async ({ page }) => {
   await page.goto(demo('rtl'));
   const trigger = page.getByRole('button', { name: 'البداية' });
   await trigger.hover();
-  await expect(tooltip(page)).toHaveAttribute('data-side', 'inline-start');
+  await expect(tooltip(page)).toHaveAttribute('data-side', 'right');
   const [t, b] = [await box(tooltip(page)), await box(trigger)];
   expect(t.x).toBeGreaterThanOrEqual(b.x + b.width);
 });

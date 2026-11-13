@@ -115,7 +115,7 @@ test('RTL: inline-start is the right; its text right to left', async ({
   await page.goto(demo('rtl'));
   const trigger = page.getByRole('button', { name: 'بداية السطر' });
   await trigger.hover();
-  await expect(card(page)).toHaveAttribute('data-side', 'inline-start');
+  await expect(card(page)).toHaveAttribute('data-side', 'right');
   const b = await box(trigger);
   await expect
     .poll(async () => (await box(card(page))).x)

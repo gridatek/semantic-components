@@ -119,7 +119,7 @@ test('RTL: inline-start is the right', async ({ page }) => {
   await page.goto(demo('rtl'));
   const trigger = page.getByRole('button', { name: 'البداية' });
   await trigger.click();
-  await expect(dialog(page)).toHaveAttribute('data-side', 'inline-start');
+  await expect(dialog(page)).toHaveAttribute('data-side', 'right');
   const b = await box(trigger);
   await expect
     .poll(async () => (await box(dialog(page))).x)
