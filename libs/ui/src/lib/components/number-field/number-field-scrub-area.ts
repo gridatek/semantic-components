@@ -61,10 +61,12 @@ export class ScNumberFieldScrubArea {
   protected readonly class = computed(() =>
     cn(
       'touch-none select-none',
+      // Its children too: a label has the browser's own `cursor: default`,
+      // which would show over the text instead.
       this.orientation() === 'vertical'
-        ? 'cursor-ns-resize'
-        : 'cursor-ew-resize',
-      'data-disabled:cursor-not-allowed data-disabled:opacity-50',
+        ? 'cursor-ns-resize *:cursor-ns-resize'
+        : 'cursor-ew-resize *:cursor-ew-resize',
+      'data-disabled:cursor-not-allowed data-disabled:*:cursor-not-allowed data-disabled:opacity-50',
       this.classInput(),
     ),
   );
