@@ -23,6 +23,8 @@ export type ScChartBarCorners = 'all' | 'end' | 'base' | 'none';
 
 interface ScBarChartBar {
   index: number;
+  /** Its colour: its key's, or its category's (`colorBy`). */
+  color: string;
   /**
    * What is drawn, in the bar's own box (an `svg` its size, which hides what
    * overflows): the bar, longer past the side left square.
@@ -59,7 +61,7 @@ function shapeOf(
 /**
  * A series as bars: one per category, side by side with the other series' —
  * or on one another, within a `stack`. Below 0, downwards; across, in a
- * `vertical` layout. In `--color-<key>`. Labels: a `g[scChartLabels]` inside.
+ * `vertical` layout. In `--color-<key>`, or each bar its category's (`colorBy`). Labels: a `g[scChartLabels]` inside.
  */
 @Component({
   selector: 'g[scChartBar]',
@@ -82,7 +84,7 @@ function shapeOf(
           [attr.y]="bar.shape.y"
           [attr.width]="bar.shape.width"
           [attr.height]="bar.shape.height"
-          [attr.fill]="fill() || color()"
+          [attr.fill]="fill() || bar.color"
         />
       </svg:svg>
     }
@@ -103,6 +105,8 @@ export class ScChartBar implements ScChartSeriesLabels {
   readonly key = input.required<string>();
   /** Bars of a stack are drawn on one another. */
   readonly stack = input<string | null>(null);
+  /** Its color: its key's, or each row's category's (a colour per bar, from the config). */
+  readonly colorBy = input<'key' | 'category'>('key');
   /**
    * Its rounded corners: all, its end's two (`end`: the top of a column),
    * its base's two (`base`), or none — turned with it below 0 or across.
@@ -136,6 +140,8 @@ export class ScChartBar implements ScChartSeriesLabels {
     // Past the square side by half its thickness: more than any corner can be
     // (a rect's rx is at most half its width).
     const past = thickness / 2;
+    const names = this.state.categories();
+    const byCategory = this.colorBy() === 'category';
     return (this.state.extents().get(this.key()) ?? []).map(
       ([low, high], index) => {
         const a = values(low);
@@ -158,6 +164,7 @@ export class ScChartBar implements ScChartSeriesLabels {
         return {
           index,
           up,
+          color: byCategory ? `var(--color-${names[index]})` : this.color(),
           ...box,
           shape: shapeOf(box, corners, vertical, up, past),
         };
@@ -171,6 +178,7 @@ export class ScChartBar implements ScChartSeriesLabels {
     const unregister = this.state.register({
       key: this.key,
       kind: 'bar',
+      colorBy: this.colorBy,
       stack: this.stack,
     });
     inject(DestroyRef).onDestroy(unregister);

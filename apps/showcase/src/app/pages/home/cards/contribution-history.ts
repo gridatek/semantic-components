@@ -1,3 +1,4 @@
+import { DecimalPipe } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
@@ -11,11 +12,24 @@ import {
   ScItemBody,
   ScItemDescription,
 } from '@semantic-components/ui';
+import {
+  ScChart,
+  ScChartBar,
+  ScChartCategoryAxis,
+  type ScChartConfig,
+  ScChartPlot,
+  ScChartTooltip,
+  ScChartTooltipIndicator,
+  ScChartTooltipItem,
+  ScChartTooltipName,
+  ScChartTooltipValue,
+} from '@semantic-components/ui/charts';
 
-/** A bar per month, then what comes next. */
+/** A bar per month, each its own colour (a chart: the preset's corners), then what comes next. */
 @Component({
   selector: 'app-home-contribution-history',
   imports: [
+    DecimalPipe,
     ScButton,
     ScCard,
     ScCardBody,
@@ -23,6 +37,15 @@ import {
     ScCardFooter,
     ScCardHeader,
     ScCardTitle,
+    ScChart,
+    ScChartBar,
+    ScChartCategoryAxis,
+    ScChartPlot,
+    ScChartTooltip,
+    ScChartTooltipIndicator,
+    ScChartTooltipItem,
+    ScChartTooltipName,
+    ScChartTooltipValue,
     ScItem,
     ScItemBody,
     ScItemDescription,
@@ -34,23 +57,25 @@ import {
         <p scCardDescription>Last 6 months of activity</p>
       </div>
       <div scCardBody>
-        <div
-          class="flex h-[200px] w-full items-end gap-3"
-          role="img"
-          aria-label="Last 6 months of contribution activity"
-        >
-          @for (item of months; track item.month; let i = $index) {
-            <div class="flex h-full flex-1 flex-col justify-end gap-2">
-              <div
-                class="min-h-2 rounded-lg"
-                [style.height.%]="(item.amount / max) * 100"
-                [style.background-color]="'var(--chart-' + (i + 1) + ')'"
-              ></div>
-              <span class="text-muted-foreground text-center text-xs">{{
-                item.month
-              }}</span>
-            </div>
-          }
+        <div scChart class="h-[200px] w-full" [config]="config" [data]="data">
+          <svg
+            scChartPlot
+            categoryKey="month"
+            aria-label="Contributions, December to April"
+            [margin]="{ left: 0, right: 0, top: 0, bottom: 0 }"
+          >
+            <g scChartCategoryAxis />
+            <g scChartBar key="amount" colorBy="category" />
+          </svg>
+          <div scChartTooltip #tooltip="scChartTooltip">
+            @for (item of tooltip.payload(); track item.dataKey) {
+              <div scChartTooltipItem [item]="item">
+                <span scChartTooltipIndicator></span>
+                <span scChartTooltipName>{{ item.name }}</span>
+                <span scChartTooltipValue>{{ item.value | number }}</span>
+              </div>
+            }
+          </div>
         </div>
       </div>
       <div scCardBody>
@@ -94,12 +119,19 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class HomeContributionHistory {
-  protected readonly months = [
+  protected readonly data = [
     { month: 'Dec', amount: 800 },
     { month: 'Jan', amount: 1100 },
     { month: 'Feb', amount: 900 },
     { month: 'Mar', amount: 1300 },
     { month: 'Apr', amount: 750 },
   ];
-  protected readonly max = Math.max(...this.months.map((m) => m.amount));
+  /** A colour per month (`colorBy="category"`), each named for the tooltip. */
+  protected readonly config: ScChartConfig = {
+    Dec: { label: 'December', color: 'var(--chart-1)' },
+    Jan: { label: 'January', color: 'var(--chart-2)' },
+    Feb: { label: 'February', color: 'var(--chart-3)' },
+    Mar: { label: 'March', color: 'var(--chart-4)' },
+    Apr: { label: 'April', color: 'var(--chart-5)' },
+  };
 }

@@ -34,14 +34,15 @@ A series as bars: one per category, side by side with the other series' — or o
 
 ## ScChartBar — `g[scChartBar]`
 
-| Input        | Type                                                                      | Default                               |
-| ------------ | ------------------------------------------------------------------------- | ------------------------------------- |
-| `key`        | `string` (required): the series' key in the rows                          | —                                     |
-| `stack`      | `string                                                                   | null`: bars of a stack on one another | `null` |
-| `corners`    | `all`                                                                     | `end`                                 | `base` | `none` — the rounded ones: the bar's end's two (a column's top), its base's two; how round is the style's (see [Corners](#corners)) | `all` |
-| `fill`       | `string`: instead of its color, `url(#gradient)`                          | `''`                                  |
-| `barSize`    | `number`: its width in pixels, centered in its slot (Recharts' `barSize`) | the slot's                            |
-| `maxBarSize` | `number`: its widest, in pixels (Recharts' `maxBarSize`)                  | —                                     |
+| Input        | Type                                                                                                                                                                  | Default    |
+| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| `key`        | `string` (required): the series' key in the rows                                                                                                                      | —          |
+| `stack`      | `string \| null`: bars of a stack on one another                                                                                                                      | `null`     |
+| `corners`    | `all` \| `end` \| `base` \| `none`: the rounded ones — the bar's end's two (a column's top), its base's two; how round is the style's (see [Corners](#corners))       | `all`      |
+| `colorBy`    | `key` \| `category`: its key's colour, or each bar its row's category's (`--color-<category>`, from the config) — the tooltip and the legend then name the categories | `key`      |
+| `fill`       | `string`: instead of its color, `url(#gradient)`                                                                                                                      | `''`       |
+| `barSize`    | `number`: its width in pixels, centered in its slot (Recharts' `barSize`)                                                                                             | the slot's |
+| `maxBarSize` | `number`: its widest, in pixels (Recharts' `maxBarSize`)                                                                                                              | —          |
 
 With bars in the plot, each category is a band: the cursor fills it, and the areas and lines of the same plot sit in its middle.
 
