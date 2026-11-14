@@ -25,6 +25,7 @@ import {
   placedSide,
 } from '@semantic-components/ui';
 import { cn } from 'cn';
+import { type ScChartAnimationEasing } from './chart-animation';
 import { ScChartState, numberOf } from './chart-state';
 import type { ScChartBox } from './chart-state';
 import { ScChartTooltipPortal } from './chart-tooltip-portal';
@@ -83,6 +84,11 @@ export class ScChartTooltipProvider {
   readonly sideOffset = input(10);
   /** Moved along that side, in px (Recharts' `offset`, the other way). */
   readonly alignmentOffset = input(10);
+  /** It glides from place to place, as Recharts' (not with reduced motion): the tooltip animates it. */
+  readonly isAnimationActive = input(true);
+  /** How long a glide takes, in ms. */
+  readonly animationDuration = input(400);
+  readonly animationEasing = input<ScChartAnimationEasing>('ease');
 
   protected readonly portal = contentChild.required(ScChartTooltipPortal);
 
@@ -144,8 +150,8 @@ export class ScChartTooltipProvider {
    * the keyboard reached (its box). Measured only once a category is active
    * — in the browser, then.
    */
-  protected readonly origin =
-    computed<FlexibleConnectedPositionStrategyOrigin | null>(() => {
+  readonly origin = computed<FlexibleConnectedPositionStrategyOrigin | null>(
+    () => {
       const index = this.state.activeIndex();
       if (index === null) return null;
       const pointer = this.state.pointer();
@@ -162,7 +168,8 @@ export class ScChartTooltipProvider {
         width: box.width * sx,
         height: box.height * sy,
       };
-    });
+    },
+  );
 
   protected readonly positions = computed(() =>
     buildOverlayPositionsWithFallback(
