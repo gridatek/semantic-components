@@ -72,8 +72,10 @@ import { TableCheckboxDemoContainer } from './demos/table-checkbox-demo-containe
         <h2 scHeading appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           A native checkbox input that draws its own box and mark: alone (a
-          table row), or in a checkbox field beside its text. A [formField] or
-          [(checked)] binds it.
+          table row), or in a horizontal field beside its text — the field is
+          the label, a label is inside the field, or the field is inside a label
+          (a choice card: the whole card clicks). A [formField] or [(checked)]
+          binds it.
         </p>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
@@ -160,11 +162,31 @@ import { TableCheckboxDemoContainer } from './demos/table-checkbox-demo-containe
 })
 export default class CheckboxPage {
   protected readonly anatomy = {
-    imports: "import { ScCheckbox, ScField } from '@semantic-components/ui';",
+    imports:
+      "import { ScCheckbox, ScField, ScFieldContentWrapper, ScFieldDescription, ScFieldTitle, ScLabel } from '@semantic-components/ui';",
     markup: [
+      '<!-- The field is the label: the control and its text -->',
       '<label scField orientation="horizontal">',
       '  <input scCheckbox [formField]="…" />',
       '  …',
+      '</label>',
+      '',
+      '<!-- A label inside the field, with a description -->',
+      '<div scField orientation="horizontal">',
+      '  <input scCheckbox id="…" [formField]="…" />',
+      '  <label scLabel for="…">…</label>',
+      '  <p scFieldDescription>…</p>',
+      '</div>',
+      '',
+      '<!-- The field inside a label: a choice card, the whole card clicks -->',
+      '<label scLabel>',
+      '  <div scField orientation="horizontal">',
+      '    <input scCheckbox [formField]="…" />',
+      '    <div scFieldContentWrapper>',
+      '      <div scFieldTitle>…</div>',
+      '      <p scFieldDescription>…</p>',
+      '    </div>',
+      '  </div>',
       '</label>',
     ].join('\n'),
   };

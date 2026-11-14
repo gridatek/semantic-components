@@ -68,8 +68,10 @@ import { SwitchUsageDemoContainer } from './demos/switch-usage-demo-container';
         <h2 scHeading appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           A native checkbox with role="switch" that draws its track and thumb:
-          alone, or in a switch field beside its text. A [formField] or
-          [(checked)] binds it.
+          alone, or in a horizontal field beside its text — the field is the
+          label, a label is inside the field, or the field is inside a label (a
+          choice card: the whole card clicks). Written first, the switch is at
+          the start; last, at the end. A [formField] or [(checked)] binds it.
         </p>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
@@ -154,11 +156,31 @@ import { SwitchUsageDemoContainer } from './demos/switch-usage-demo-container';
 })
 export default class SwitchPage {
   protected readonly anatomy = {
-    imports: "import { ScSwitch, ScField } from '@semantic-components/ui';",
+    imports:
+      "import { ScSwitch, ScField, ScFieldContentWrapper, ScFieldDescription, ScFieldTitle, ScLabel } from '@semantic-components/ui';",
     markup: [
+      '<!-- The field is the label: the control and its text -->',
       '<label scField orientation="horizontal">',
       '  <input scSwitch [formField]="…" />',
       '  …',
+      '</label>',
+      '',
+      '<!-- A label inside the field, with a description -->',
+      '<div scField orientation="horizontal">',
+      '  <label scLabel for="…">…</label>',
+      '  <p scFieldDescription>…</p>',
+      '  <input scSwitch id="…" [formField]="…" />',
+      '</div>',
+      '',
+      '<!-- The field inside a label: a choice card, the whole card clicks -->',
+      '<label scLabel>',
+      '  <div scField orientation="horizontal">',
+      '    <div scFieldContentWrapper>',
+      '      <div scFieldTitle>…</div>',
+      '      <p scFieldDescription>…</p>',
+      '    </div>',
+      '    <input scSwitch [formField]="…" />',
+      '  </div>',
       '</label>',
     ].join('\n'),
   };
