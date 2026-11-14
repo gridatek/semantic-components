@@ -1,4 +1,4 @@
-import { Directive, computed, inject, input } from '@angular/core';
+import { DestroyRef, Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
 import { SC_NUMBER_FIELD_SCRUB_AREA } from './number-field-scrub-area';
 
@@ -19,6 +19,14 @@ import { SC_NUMBER_FIELD_SCRUB_AREA } from './number-field-scrub-area';
 })
 export class ScNumberFieldScrubAreaCursor {
   protected readonly scrubArea = inject(SC_NUMBER_FIELD_SCRUB_AREA);
+
+  constructor() {
+    // Its area locks the pointer only when a cursor part can stand in for it.
+    this.scrubArea.cursors.update((n) => n + 1);
+    inject(DestroyRef).onDestroy(() =>
+      this.scrubArea.cursors.update((n) => n - 1),
+    );
+  }
 
   readonly classInput = input<string>('', { alias: 'class' });
 

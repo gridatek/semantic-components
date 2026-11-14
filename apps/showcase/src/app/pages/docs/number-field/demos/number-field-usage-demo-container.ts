@@ -41,7 +41,7 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
   ],
   template: \`
     <div scNumberField class="w-40" [(value)]="quantity" [min]="1" [max]="10">
-      <div scNumberFieldScrubArea>
+      <div scNumberFieldScrubArea [pixelSensitivity]="10">
         <label scLabel>Quantity</label>
       </div>
       <div scNumberFieldGroup>

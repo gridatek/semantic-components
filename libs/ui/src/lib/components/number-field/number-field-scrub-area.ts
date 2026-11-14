@@ -55,12 +55,21 @@ export class ScNumberFieldScrubArea {
   /** The pointer is locked: the cursor part shows instead of it. */
   readonly locked = signal(false);
   /** Where the (virtual) cursor is. */
+  /**
+   * Cursor parts inside it (they register): only then is the pointer
+   * locked — without one, locking would hide the mouse with nothing in its
+   * place; the real pointer drags instead.
+   */
+  readonly cursors = signal(0);
   readonly cursorX = signal(0);
   readonly cursorY = signal(0);
 
   protected readonly class = computed(() =>
     cn(
-      'touch-none select-none',
+      // As wide as its label, as Base UI's (a span): only the text scrubs,
+      // not the empty row beside it. A max width: the field gives its
+      // children `*:w-full`, which a width of its own wouldn't beat.
+      'max-w-fit touch-none select-none',
       // Its children too: a label has the browser's own `cursor: default`,
       // which would show over the text instead.
       this.orientation() === 'vertical'
@@ -92,8 +101,13 @@ export class ScNumberFieldScrubArea {
     let travelled = 0;
     const vertical = this.orientation() === 'vertical';
 
-    // A mouse: lock the pointer (the cursor part takes its place).
-    if (event.pointerType === 'mouse' && this.element.requestPointerLock) {
+    // A mouse, with a cursor part: lock the pointer (the part takes its
+    // place, and no screen edge stops the drag).
+    if (
+      event.pointerType === 'mouse' &&
+      this.cursors() > 0 &&
+      this.element.requestPointerLock
+    ) {
       Promise.resolve(this.element.requestPointerLock())
         .then(() =>
           this.locked.set(document.pointerLockElement === this.element),
