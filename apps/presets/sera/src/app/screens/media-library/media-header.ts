@@ -72,7 +72,7 @@ import { MediaStore, UPLOAD_ACCEPT } from './media-store';
           Media Library
         </h1>
       </div>
-      <div class="flex gap-2 sm:ms-auto md:gap-4">
+      <div class="flex flex-wrap justify-center gap-2 sm:ms-auto md:gap-4">
         @if (view()) {
           <div
             scToggleGroup

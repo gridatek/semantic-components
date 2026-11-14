@@ -3,6 +3,7 @@
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';
 @import '../../../../libs/ui/src/lib/styles/index.css';
+@import '../../../../libs/ui/editor/src/lib/styles/index.css';
 
 /*
  * Sera as shadcn shows it (shadcn-ui/ui, apps/v4/app/(app)/(styles)/sera,
@@ -168,4 +169,23 @@
   html {
     @apply font-sans;
   }
+}
+
+/*
+ * An article's text — in Edit Article's editor and its preview — as
+ * shadcn's screen sets it: loose lines, wide gaps, Sera's headings.
+ */
+.article-text :is(p, li) {
+  line-height: 2;
+}
+
+.article-text p:not(:first-child) {
+  margin-top: 2rem;
+}
+
+.article-text :is(h1, h2, h3, h4) {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
 }

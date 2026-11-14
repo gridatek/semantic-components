@@ -56,7 +56,7 @@ import { SiArrowLeftIcon, SiEyeIcon } from '@semantic-icons/lucide-icons';
             Preview
             <svg siEyeIcon data-icon="inline-end"></svg>
           </button>
-          <button scButton (click)="submit.emit()">Submit Draft</button>
+          <button scButton (click)="submitDraft.emit()">Submit Draft</button>
         </div>
       </div>
     </header>
@@ -70,5 +70,5 @@ export class EditHeader {
   /** What the draft is at: "Saved", "Unsaved changes"… */
   readonly state = input('');
   readonly preview = output();
-  readonly submit = output();
+  readonly submitDraft = output();
 }

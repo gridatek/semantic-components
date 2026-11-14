@@ -33,7 +33,7 @@ import {
   SiVideoIcon,
 } from '@semantic-icons/lucide-icons';
 import { cn } from 'cn';
-import { type Asset, found, isImage } from './media-data';
+import { found, isImage } from './media-data';
 import { MediaStore } from './media-store';
 
 const PAGE_SIZE = 8;

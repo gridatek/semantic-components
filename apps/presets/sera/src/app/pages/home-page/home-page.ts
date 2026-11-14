@@ -2,7 +2,6 @@ import { Component, ViewEncapsulation, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
   ScCard,
-  ScCardBody,
   ScCardDescription,
   ScCardFooter,
   ScCardHeader,
@@ -61,7 +60,6 @@ const PRINCIPLES = [
   imports: [
     RouterLink,
     ScCard,
-    ScCardBody,
     ScCardDescription,
     ScCardFooter,
     ScCardHeader,

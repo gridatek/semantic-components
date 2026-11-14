@@ -184,38 +184,54 @@ const BLOCK_LABEL: Partial<Record<Block, string>> = {
       </div>
       <div scEditorSeparator class="mx-2"></div>
       <div scEditorToolbarGroup>
-        <button scEditorBold value="bold">
+        <button scEditorBold value="bold" class="size-8 min-w-8 px-0">
           <svg siBoldIcon></svg><span class="sr-only">Bold</span>
         </button>
-        <button scEditorItalic value="italic">
+        <button scEditorItalic value="italic" class="size-8 min-w-8 px-0">
           <svg siItalicIcon></svg><span class="sr-only">Italic</span>
         </button>
-        <button scEditorUnderline value="underline">
+        <button scEditorUnderline value="underline" class="size-8 min-w-8 px-0">
           <svg siUnderlineIcon></svg><span class="sr-only">Underline</span>
         </button>
         <button
           scEditorStrikethrough
           value="strikethrough"
-          class="max-md:hidden"
+          class="size-8 min-w-8 px-0 max-md:hidden"
         >
           <svg siStrikethroughIcon></svg
           ><span class="sr-only">Strikethrough</span>
         </button>
-        <button scEditorCode value="code" class="max-md:hidden">
+        <button
+          scEditorCode
+          value="code"
+          class="size-8 min-w-8 px-0 max-md:hidden"
+        >
           <svg siCodeXmlIcon></svg><span class="sr-only">Code</span>
         </button>
       </div>
       <div scEditorSeparator class="mx-2 max-md:hidden"></div>
       <div scEditorToolbarGroup class="max-md:hidden">
-        <button scEditorAlignLeft value="align-left">
+        <button
+          scEditorAlignLeft
+          value="align-left"
+          class="size-8 min-w-8 px-0"
+        >
           <svg siTextAlignStartIcon></svg
           ><span class="sr-only">Align Left</span>
         </button>
-        <button scEditorAlignCenter value="align-center">
+        <button
+          scEditorAlignCenter
+          value="align-center"
+          class="size-8 min-w-8 px-0"
+        >
           <svg siTextAlignCenterIcon></svg
           ><span class="sr-only">Align Center</span>
         </button>
-        <button scEditorAlignRight value="align-right">
+        <button
+          scEditorAlignRight
+          value="align-right"
+          class="size-8 min-w-8 px-0"
+        >
           <svg siTextAlignEndIcon></svg><span class="sr-only">Align Right</span>
         </button>
       </div>
@@ -225,6 +241,7 @@ const BLOCK_LABEL: Partial<Record<Block, string>> = {
           <button
             scEditorLink
             scPopoverTrigger
+            class="size-8 min-w-8 px-0"
             value="link"
             #link="scEditorLink"
             (click)="editLink(link.href())"
@@ -264,15 +281,15 @@ const BLOCK_LABEL: Partial<Record<Block, string>> = {
             </div>
           </ng-template>
         </div>
-        <button scEditorImage value="image">
+        <button scEditorImage value="image" class="size-8 min-w-8 px-0">
           <svg siImageIcon></svg><span class="sr-only">Image</span>
         </button>
       </div>
       <div scEditorToolbarGroup class="ms-auto">
-        <button scEditorUndo value="undo">
+        <button scEditorUndo value="undo" class="size-8 min-w-8 px-0">
           <svg siUndoIcon></svg><span class="sr-only">Undo</span>
         </button>
-        <button scEditorRedo value="redo">
+        <button scEditorRedo value="redo" class="size-8 min-w-8 px-0">
           <svg siRedoIcon></svg><span class="sr-only">Redo</span>
         </button>
       </div>

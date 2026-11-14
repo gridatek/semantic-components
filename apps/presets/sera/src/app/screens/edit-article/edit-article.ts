@@ -81,7 +81,7 @@ import { EditorToolbar } from './editor-toolbar';
         [isNew]="!article()"
         [state]="state()"
         (preview)="previewOpen.set(true)"
-        (submit)="submit()"
+        (submitDraft)="submit()"
       />
       <div scSeparator class="hidden sm:block"></div>
       <div class="w-full px-(--page-gutter) py-(--gap)">
@@ -181,15 +181,25 @@ export class EditArticle {
   private readonly upload: ScEditorUploadHandler = (file) =>
     Promise.resolve(URL.createObjectURL(file));
 
-  /** Saves the draft — a new one or a draft goes to revision — and lists it. */
+  /**
+   * Saves the draft — a new one or a draft goes to revision, its first draft
+   * submitted — and lists it.
+   */
   private submit(): void {
     const article = this.article();
     const status: Status =
       !article || article.status === 'drafting'
         ? 'in-revision'
         : article.status;
+    // Submitted: a first draft, so its first two milestones are reached.
+    const model = this.model();
+    const milestones = {
+      ...model.milestones,
+      outline: true,
+      'first-draft': true,
+    };
     const saved = this.store.save(
-      draftOf(this.model(), article, status),
+      draftOf({ ...model, milestones }, article, status),
       article?.id ?? null,
     );
     this.toaster.show({
