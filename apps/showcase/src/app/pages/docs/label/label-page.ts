@@ -60,7 +60,9 @@ import { RtlLabelDemoContainer } from './demos/rtl-label-demo-container';
         <h2 scHeading appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           A directive on your label; its text is yours. In a field it names the
-          field&apos;s control by itself; around a field it makes a choice card.
+          field&apos;s control by itself. It can also hold a field as its child
+          (a horizontal scField with its control, title and description): a
+          choice card, the whole card picks — bordered, tinted when checked.
         </p>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
@@ -140,10 +142,24 @@ import { RtlLabelDemoContainer } from './demos/rtl-label-demo-container';
 })
 export default class LabelPage {
   protected readonly anatomy = {
-    imports: "import { ScLabel, ScLabelText } from '@semantic-components/ui';",
+    imports:
+      "import { ScField, ScFieldContentWrapper, ScFieldDescription, ScFieldTitle, ScLabel, ScLabelText } from '@semantic-components/ui';",
     markup: [
+      '<!-- Beside its control, or in a field -->',
       '<label scLabel>…</label>',
       '',
+      '<!-- A field as its child: a choice card, the whole card clicks -->',
+      '<label scLabel>',
+      '  <div scField orientation="horizontal">',
+      '    <div scFieldContentWrapper>',
+      '      <div scFieldTitle>…</div>',
+      '      <p scFieldDescription>…</p>',
+      '    </div>',
+      '    <input scCheckbox />',
+      '  </div>',
+      '</label>',
+      '',
+      '<!-- Its text inside another label (a switch field’s) -->',
       '<label …>',
       '  <p scLabelText>…</p>',
       '</label>',

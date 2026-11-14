@@ -28,9 +28,7 @@ import {
             You can enable or disable notifications at any time.
           </p>
         </div>
-        <div scField orientation="horizontal">
-          <input scCheckbox />
-        </div>
+        <input scCheckbox />
       </div>
     </label>
   `,

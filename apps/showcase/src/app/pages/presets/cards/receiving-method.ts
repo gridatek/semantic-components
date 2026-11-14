@@ -76,9 +76,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
             >
               <label scLabel>
                 <div scField orientation="horizontal" class="pb-2.5">
-                  <div scField orientation="horizontal">
-                    <input scRadio value="bank" />
-                  </div>
+                  <input scRadio value="bank" />
                   <div scFieldContentWrapper>
                     <div scFieldTitle>Bank Transfer</div>
                     <p scFieldDescription>SWIFT / IBAN</p>
@@ -87,9 +85,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
               </label>
               <label scLabel>
                 <div scField orientation="horizontal" class="pb-2.5">
-                  <div scField orientation="horizontal">
-                    <input scRadio value="paypal" />
-                  </div>
+                  <input scRadio value="paypal" />
                   <div scFieldContentWrapper>
                     <div scFieldTitle>PayPal</div>
                     <p scFieldDescription class="line-clamp-1">

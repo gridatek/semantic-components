@@ -36,9 +36,7 @@ import {
             <div scFieldTitle>Plus</div>
             <p scFieldDescription>For individuals and small teams.</p>
           </div>
-          <div scField orientation="horizontal">
-            <input scRadio value="plus" />
-          </div>
+          <input scRadio value="plus" />
         </div>
       </label>
       <label scLabel>
@@ -47,9 +45,7 @@ import {
             <div scFieldTitle>Pro</div>
             <p scFieldDescription>For growing businesses.</p>
           </div>
-          <div scField orientation="horizontal">
-            <input scRadio value="pro" />
-          </div>
+          <input scRadio value="pro" />
         </div>
       </label>
       <label scLabel>
@@ -58,9 +54,7 @@ import {
             <div scFieldTitle>Enterprise</div>
             <p scFieldDescription>For large teams and enterprises.</p>
           </div>
-          <div scField orientation="horizontal">
-            <input scRadio value="enterprise" />
-          </div>
+          <input scRadio value="enterprise" />
         </div>
       </label>
     </div>

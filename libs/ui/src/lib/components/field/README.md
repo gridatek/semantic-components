@@ -266,6 +266,20 @@ Around a checkbox, a radio or a switch (they tell the field, `SC_FIELD_CHOICE`),
     Description      Description
 ```
 
+Inside a `label[scLabel]`, a field is a choice card: the label is its parent, the whole card picks, bordered and tinted when checked (the label preset's `field` key). The field then has no `role="group"` — it is the label's control and texts:
+
+```html
+<label scLabel>
+  <div scField orientation="horizontal">
+    <div scFieldContentWrapper>
+      <div scFieldTitle>Enable notifications</div>
+      <p scFieldDescription>You can enable or disable notifications at any time.</p>
+    </div>
+    <input scCheckbox />
+  </div>
+</label>
+```
+
 This replaces the separate checkbox, radio and switch fields (merged 2026-11-14).
 
 ### Responsive

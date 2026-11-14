@@ -63,9 +63,7 @@ import {
                 <div scFieldTitle>Kubernetes</div>
                 <p scFieldDescription>Run GPU workloads on a K8s cluster.</p>
               </div>
-              <div scField orientation="horizontal">
-                <input scRadio value="kubernetes" />
-              </div>
+              <input scRadio value="kubernetes" />
             </div>
           </label>
           <label scLabel>
@@ -74,9 +72,7 @@ import {
                 <div scFieldTitle>Virtual Machine</div>
                 <p scFieldDescription>Access a cluster to run GPU workloads.</p>
               </div>
-              <div scField orientation="horizontal">
-                <input scRadio value="vm" />
-              </div>
+              <input scRadio value="vm" />
             </div>
           </label>
         </div>

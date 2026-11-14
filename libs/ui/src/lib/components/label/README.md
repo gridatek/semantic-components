@@ -29,7 +29,7 @@ Around a field, it is a choice card — the whole card picks:
       <div scFieldTitle>Enable notifications</div>
       <p scFieldDescription>You can enable or disable notifications at any time.</p>
     </div>
-    <div scField orientation="horizontal"><input scCheckbox /></div>
+    <input scCheckbox />
   </div>
 </label>
 ```
