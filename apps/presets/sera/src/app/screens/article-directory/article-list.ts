@@ -1,4 +1,13 @@
-import { Component, ViewEncapsulation, computed, input } from '@angular/core';
+import {
+  Component,
+  ViewEncapsulation,
+  computed,
+  inject,
+  input,
+  linkedSignal,
+  signal,
+} from '@angular/core';
+import { FormField, form } from '@angular/forms/signals';
 import { RouterLink } from '@angular/router';
 import {
   ScBadge,
@@ -9,6 +18,7 @@ import {
   ScInput,
   ScInputGroup,
   ScInputGroupAddon,
+  ScLink,
   ScPagination,
   ScPaginationItem,
   ScPaginationLink,
@@ -33,7 +43,16 @@ import {
   SiSearchIcon,
 } from '@semantic-icons/lucide-icons';
 import { cn } from 'cn';
-import { type Status, articlesOf } from './articles-data';
+import { ArticleStore } from './article-store';
+import {
+  STATUS_LABEL,
+  type Status,
+  issueLabel,
+  progressOf,
+  wordProgress,
+} from './articles-data';
+
+const PAGE_SIZE = 8;
 
 const BADGE_VARIANT = {
   'in-revision': 'outline',
@@ -50,12 +69,13 @@ const DOT_CLASS: Record<Status, string> = {
 };
 
 /**
- * The articles: a search, a table (status badges, progress), pages. shadcn's
- * three static pages are our Pagination's own: 24 articles, 8 a page.
+ * The articles: a search (title, author), a table (status badges, progress),
+ * 8 a page. An issue's only with `issue`.
  */
 @Component({
   selector: 'app-article-list',
   imports: [
+    FormField,
     RouterLink,
     ScBadge,
     ScCard,
@@ -65,6 +85,7 @@ const DOT_CLASS: Record<Status, string> = {
     ScInput,
     ScInputGroup,
     ScInputGroupAddon,
+    ScLink,
     ScPagination,
     ScPaginationItem,
     ScPaginationLink,
@@ -88,7 +109,13 @@ const DOT_CLASS: Record<Status, string> = {
   ],
   template: `
     <div scCard>
-      <div scCardHeader>
+      <div scCardHeader class="gap-3">
+        @if (issue(); as issue) {
+          <p class="text-muted-foreground text-sm">
+            {{ issueName(issue) }} only ·
+            <a scLink routerLink="/articles">All issues</a>
+          </p>
+        }
         <div scInputGroup>
           <div scInputGroupAddon>
             <svg siSearchIcon></svg>
@@ -98,6 +125,7 @@ const DOT_CLASS: Record<Status, string> = {
             type="search"
             placeholder="Search articles..."
             aria-label="Search articles"
+            [formField]="search.query"
           />
         </div>
       </div>
@@ -114,7 +142,7 @@ const DOT_CLASS: Record<Status, string> = {
               </tr>
             </thead>
             <tbody scTableBody>
-              @for (row of articles(); track row.id) {
+              @for (row of rows(); track row.id) {
                 <tr scTableRow>
                   <td scTableCell>
                     <div class="flex flex-col gap-1">
@@ -125,28 +153,38 @@ const DOT_CLASS: Record<Status, string> = {
                         {{ row.title }}
                       </a>
                       <p class="text-muted-foreground text-xs">
-                        {{ row.wordProgress }}
+                        {{ words(row) }}
                       </p>
                     </div>
                   </td>
                   <td scTableCell>{{ row.author }}</td>
-                  <td scTableCell>{{ row.issue }}</td>
+                  <td scTableCell>{{ issueName(row.issue) }}</td>
                   <td scTableCell>
                     <span scBadge [variant]="badgeVariant[row.status]">
                       <span [class]="dot(row.status)"></span>
-                      {{ row.statusLabel }}
+                      {{ statusLabel[row.status] }}
                     </span>
                   </td>
                   <td scTableCell>
                     <div
                       scProgress
-                      [value]="row.progress"
-                      [attr.aria-label]="row.progress + '% complete'"
+                      [value]="progress(row)"
+                      [attr.aria-label]="progress(row) + '% complete'"
                       class="flex flex-row-reverse items-center **:data-[slot=progress-track]:w-16"
                     >
-                      <span scProgressValueText>{{ row.progress }}%</span>
+                      <span scProgressValueText>{{ progress(row) }}%</span>
                       <div scProgressTrack><div scProgressRange></div></div>
                     </div>
+                  </td>
+                </tr>
+              } @empty {
+                <tr scTableRow class="hover:bg-transparent">
+                  <td
+                    scTableCell
+                    colspan="5"
+                    class="text-muted-foreground py-10 text-center"
+                  >
+                    No articles match “{{ search.query().value() }}”.
                   </td>
                 </tr>
               }
@@ -159,8 +197,9 @@ const DOT_CLASS: Record<Status, string> = {
           scPagination
           aria-label="Article pages"
           #pagination="scPagination"
-          [totalItems]="24"
-          [pageSize]="8"
+          [totalItems]="matches().length"
+          [pageSize]="pageSize"
+          [(currentPage)]="page"
         >
           <ul scPaginationList>
             <li scPaginationItem>
@@ -193,12 +232,45 @@ const DOT_CLASS: Record<Status, string> = {
   encapsulation: ViewEncapsulation.None,
 })
 export class ArticleList {
+  private readonly store = inject(ArticleStore);
+
   /** An issue's id: its articles only; all of them without one. */
   readonly issue = input<string | null>(null);
-  protected readonly articles = computed(() => articlesOf(this.issue()));
-  protected readonly badgeVariant = BADGE_VARIANT;
 
-  protected dot(status: Status): string {
+  private readonly search = form(signal({ query: '' }));
+  private readonly pageSize = PAGE_SIZE;
+  private readonly badgeVariant = BADGE_VARIANT;
+  private readonly statusLabel = STATUS_LABEL;
+
+  /** The issue's articles whose title or author has the query. */
+  private readonly matches = computed(() => {
+    const query = this.search.query().value().trim().toLowerCase();
+    return this.store
+      .of(this.issue())
+      .filter(
+        (article) =>
+          !query ||
+          article.title.toLowerCase().includes(query) ||
+          article.author.toLowerCase().includes(query),
+      );
+  });
+
+  /** Back to the first page when the search or the issue changes. */
+  private readonly page = linkedSignal({
+    source: () => [this.issue(), this.search.query().value()],
+    computation: () => 1,
+  });
+
+  private readonly rows = computed(() => {
+    const start = (this.page() - 1) * PAGE_SIZE;
+    return this.matches().slice(start, start + PAGE_SIZE);
+  });
+
+  private readonly issueName = issueLabel;
+  private readonly words = wordProgress;
+  private readonly progress = progressOf;
+
+  private dot(status: Status): string {
     return cn('size-1.5 rounded-full', DOT_CLASS[status]);
   }
 }

@@ -10,7 +10,7 @@ import {
   SiTrendingUpIcon,
 } from '@semantic-icons/lucide-icons';
 
-interface Metric {
+export interface Metric {
   label: string;
   value: string;
   comparison: string;
@@ -18,7 +18,7 @@ interface Metric {
   trend: 'up' | 'down';
 }
 
-const METRICS: Metric[] = [
+export const METRICS: Metric[] = [
   {
     label: 'Total visitors',
     value: '248.5k',

@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
   ScCard,
@@ -14,28 +14,26 @@ import {
   SiArrowRightIcon,
   SiMoveRightIcon,
 } from '@semantic-icons/lucide-icons';
-import {
-  ISSUES,
-  articlesOf,
-} from '../../screens/article-directory/articles-data';
+import { ArticleStore } from '../../screens/article-directory/article-store';
+import { ISSUES } from '../../screens/article-directory/articles-data';
 
 /** The site's pages, presented. */
 const PAGES = [
   {
     path: '/dashboard',
-    title: 'Dashboard',
+    title: 'Audience Analytics',
     description:
       'Audience analytics for the editorial team: visitors, readers, traffic and the most read pieces.',
   },
   {
     path: '/articles',
-    title: 'Articles',
+    title: 'Article Directory',
     description:
       'Every piece in the pipeline, from drafting to published — open one to edit it.',
   },
   {
     path: '/media',
-    title: 'Media',
+    title: 'Media Library',
     description:
       'The photography, video and documents of each issue, as a grid or a table.',
   },
@@ -177,22 +175,20 @@ const PRINCIPLES = [
           </div>
         }
       </div>
-      <a scLink class="w-fit" routerLink="/screens">
-        See all six screens, as shadcn shows them
-      </a>
     </section>
   `,
   host: { class: 'block' },
   encapsulation: ViewEncapsulation.None,
 })
 export default class HomePage {
+  private readonly store = inject(ArticleStore);
   protected readonly pages = PAGES;
   protected readonly issues = ISSUES;
   protected readonly principles = PRINCIPLES;
 
   /** "4 articles", "1 article", "No articles yet". */
   protected countText(issue: string): string {
-    const count = articlesOf(issue).length;
+    const count = this.store.of(issue).length;
     if (!count) return 'No articles yet';
     return `${count} ${count === 1 ? 'article' : 'articles'}`;
   }

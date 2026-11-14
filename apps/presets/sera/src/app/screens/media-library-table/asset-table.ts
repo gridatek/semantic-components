@@ -1,4 +1,14 @@
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+import {
+  Component,
+  ViewEncapsulation,
+  computed,
+  inject,
+  input,
+  linkedSignal,
+  output,
+  signal,
+} from '@angular/core';
+import { FormField, form } from '@angular/forms/signals';
 import {
   ScBadge,
   ScButton,
@@ -39,15 +49,27 @@ import {
   SiSearchIcon,
   SiVideoIcon,
 } from '@semantic-icons/lucide-icons';
-import { ASSETS } from '../media-library/media-data';
+import { AssetActions } from '../media-library/asset-actions';
+import {
+  type Asset,
+  type AssetFilters,
+  found,
+  isImage,
+  matches,
+} from '../media-library/media-data';
+import { MediaStore } from '../media-library/media-store';
+
+const PAGE_SIZE = 8;
 
 /**
- * The assets as rows: a press on a row (or its checkbox) selects it. Lucide's
- * newer name: EllipsisVertical (MoreVertical).
+ * The assets as rows: a search (name, tags), the filters applied beside, 8 a
+ * page; a press on a row (or its checkbox) selects it; each row's menu
+ * previews (in the grid), downloads or deletes it.
  */
 @Component({
   selector: 'app-asset-table',
   imports: [
+    FormField,
     ScBadge,
     ScButton,
     ScCard,
@@ -87,7 +109,13 @@ import { ASSETS } from '../media-library/media-data';
   ],
   template: `
     <div scCard>
-      <div scCardHeader>
+      <div scCardHeader class="gap-3">
+        @if (filters()) {
+          <p class="text-muted-foreground text-sm" role="status">
+            Filtered: {{ matching().length }} of {{ store.assets().length }}
+            assets
+          </p>
+        }
         <div scInputGroup class="w-full">
           <div scInputGroupAddon>
             <svg siSearchIcon></svg>
@@ -96,6 +124,7 @@ import { ASSETS } from '../media-library/media-data';
             scInput
             placeholder="Search files, tags, or metadata..."
             aria-label="Search files, tags, or metadata"
+            [formField]="search.query"
           />
         </div>
       </div>
@@ -122,7 +151,7 @@ import { ASSETS } from '../media-library/media-data';
               </tr>
             </thead>
             <tbody scTableBody>
-              @for (asset of assets; track asset.id) {
+              @for (asset of rows(); track asset.id) {
                 <tr
                   scTableRow
                   class="cursor-pointer"
@@ -140,8 +169,15 @@ import { ASSETS } from '../media-library/media-data';
                   </td>
                   <td scTableCell>
                     <div
-                      class="bg-muted/60 ring-border/70 relative flex aspect-4/3 w-16 items-center justify-center ring-1 ring-inset"
+                      class="bg-muted/60 ring-border/70 relative flex aspect-4/3 w-16 items-center justify-center overflow-hidden ring-1 ring-inset"
                     >
+                      @if (asset.url && isImage(asset)) {
+                        <img
+                          alt=""
+                          class="absolute inset-0 size-full object-cover"
+                          [src]="asset.url"
+                        />
+                      }
                       @if (asset.duration) {
                         <span
                           class="bg-foreground/90 text-background absolute end-1 bottom-1 px-1 text-[0.5rem] font-semibold tracking-wider"
@@ -207,15 +243,31 @@ import { ASSETS } from '../media-library/media-data';
                         >
                       </button>
                       <ng-template scMenuPortal>
-                        <div scMenu>
+                        <div scMenu (itemSelected)="act($event, asset)">
                           <ng-template scMenuContent>
-                            <div scMenuItem>Preview</div>
-                            <div scMenuItem>Download</div>
-                            <div scMenuItem variant="destructive">Delete</div>
+                            <div scMenuItem value="preview">Preview</div>
+                            <div scMenuItem value="download">Download</div>
+                            <div
+                              scMenuItem
+                              value="delete"
+                              variant="destructive"
+                            >
+                              Delete
+                            </div>
                           </ng-template>
                         </div>
                       </ng-template>
                     </div>
+                  </td>
+                </tr>
+              } @empty {
+                <tr scTableRow class="hover:bg-transparent">
+                  <td
+                    scTableCell
+                    colspan="9"
+                    class="text-muted-foreground py-10 text-center"
+                  >
+                    No assets match.
                   </td>
                 </tr>
               }
@@ -228,8 +280,9 @@ import { ASSETS } from '../media-library/media-data';
           scPagination
           aria-label="Asset pages"
           #pagination="scPagination"
-          [totalItems]="36"
-          [pageSize]="12"
+          [totalItems]="matching().length"
+          [pageSize]="pageSize"
+          [(currentPage)]="page"
         >
           <ul scPaginationList>
             <li scPaginationItem>
@@ -262,8 +315,44 @@ import { ASSETS } from '../media-library/media-data';
   encapsulation: ViewEncapsulation.None,
 })
 export class AssetTable {
-  protected readonly assets = ASSETS;
-  private readonly selectedIds = signal<ReadonlySet<string>>(new Set(['1']));
+  protected readonly store = inject(MediaStore);
+  private readonly actions = inject(AssetActions);
+
+  /** The filters applied; null, none. */
+  readonly filters = input<AssetFilters | null>(null);
+  /** Preview chosen in a row's menu: show it, in the grid. */
+  readonly preview = output<Asset>();
+
+  private readonly search = form(signal({ query: '' }));
+  private readonly pageSize = PAGE_SIZE;
+  private readonly today = Temporal.Now.plainDateISO();
+
+  protected readonly matching = computed(() => {
+    const query = this.search.query().value();
+    const filters = this.filters();
+    return this.store
+      .assets()
+      .filter(
+        (asset) =>
+          found(asset, query) &&
+          (!filters || matches(asset, filters, this.today)),
+      );
+  });
+
+  /** Back to the first page when the search or the filters change. */
+  private readonly page = linkedSignal({
+    source: () => [this.search.query().value(), this.filters()],
+    computation: () => 1,
+  });
+
+  private readonly rows = computed(() => {
+    const start = (this.page() - 1) * PAGE_SIZE;
+    return this.matching().slice(start, start + PAGE_SIZE);
+  });
+
+  private readonly selectedIds = signal<ReadonlySet<string>>(
+    new Set([this.store.assets()[0]?.id ?? '']),
+  );
 
   protected isSelected(id: string): boolean {
     return this.selectedIds().has(id);
@@ -276,5 +365,13 @@ export class AssetTable {
       else next.add(id);
       return next;
     });
+  }
+
+  private readonly isImage = isImage;
+
+  private act(action: unknown, asset: Asset): void {
+    if (action === 'preview') this.preview.emit(asset);
+    else if (action === 'download') this.actions.download(asset);
+    else if (action === 'delete') this.actions.delete(asset);
   }
 }

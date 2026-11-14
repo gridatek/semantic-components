@@ -1,4 +1,11 @@
-import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import {
+  Component,
+  ViewEncapsulation,
+  computed,
+  inject,
+  signal,
+} from '@angular/core';
 import {
   ScButton,
   ScMenu,
@@ -9,12 +16,16 @@ import {
   ScMenuRadioGroup,
   ScMenuRadioItem,
   ScMenuTrigger,
+  ScToaster,
 } from '@semantic-components/ui';
 import {
   SiCheckIcon,
   SiChevronDownIcon,
   SiDownloadIcon,
 } from '@semantic-icons/lucide-icons';
+import { download } from '../../shared/download';
+import { ArticleStore } from '../article-directory/article-store';
+import { reportCsv } from './readership';
 
 const DATE_RANGES = [
   { label: 'Last 7 days', value: 'last-7-days' },
@@ -82,7 +93,7 @@ const DATE_RANGES = [
             </div>
           </ng-template>
         </div>
-        <button scButton>
+        <button scButton (click)="exportReport()">
           <svg siDownloadIcon data-icon="inline-start"></svg>
           <span class="lg:hidden">Export</span>
           <span class="hidden lg:inline">Export Report</span>
@@ -94,6 +105,10 @@ const DATE_RANGES = [
   encapsulation: ViewEncapsulation.None,
 })
 export class AnalyticsHeader {
+  private readonly document = inject(DOCUMENT);
+  private readonly store = inject(ArticleStore);
+  private readonly toaster = inject(ScToaster);
+
   protected readonly ranges = DATE_RANGES;
   protected readonly range = signal('last-30-days');
   protected readonly rangeLabel = computed(
@@ -101,4 +116,16 @@ export class AnalyticsHeader {
       DATE_RANGES.find((option) => option.value === this.range())?.label ??
       'Last 30 days',
   );
+
+  /** The report as a CSV file: audience-report-last-30-days.csv. */
+  private exportReport(): void {
+    const name = `audience-report-${this.range()}.csv`;
+    const csv = reportCsv(this.rangeLabel(), this.store.read());
+    download(this.document, name, new Blob([csv], { type: 'text/csv' }));
+    this.toaster.show({
+      variant: 'success',
+      title: 'Report exported',
+      description: name,
+    });
+  }
 }

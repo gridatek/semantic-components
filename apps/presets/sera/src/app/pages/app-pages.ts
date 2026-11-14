@@ -2,21 +2,19 @@ import {
   Component,
   ViewEncapsulation,
   computed,
+  inject,
   input,
   signal,
 } from '@angular/core';
 import { ArticleDirectory } from '../screens/article-directory/article-directory';
-import {
-  ARTICLES,
-  articlesOf,
-} from '../screens/article-directory/articles-data';
+import { ArticleStore } from '../screens/article-directory/article-store';
 import { AudienceAnalytics } from '../screens/audience-analytics/audience-analytics';
 import { EditArticle } from '../screens/edit-article/edit-article';
 import { EmptyState } from '../screens/empty-state/empty-state';
 import { MediaLibraryTable } from '../screens/media-library-table/media-library-table';
 import { MediaLibrary } from '../screens/media-library/media-library';
 
-/** The site's pages: shadcn's screens, wired to the routes and to each other. */
+/** The site's pages: the screens, on the routes, over the stores. */
 
 @Component({
   selector: 'app-dashboard-page',
@@ -42,14 +40,15 @@ export class DashboardPage {}
   encapsulation: ViewEncapsulation.None,
 })
 export class ArticlesPage {
+  private readonly store = inject(ArticleStore);
   /** The query's `issue`. */
   readonly issue = input<string | undefined>();
-  protected readonly hasArticles = computed(
-    () => articlesOf(this.issue() ?? null).length > 0,
+  private readonly hasArticles = computed(
+    () => this.store.of(this.issue() ?? null).length > 0,
   );
 }
 
-/** An article to edit (`:id`), or a new one (`new`). */
+/** An article to edit (`:id`), or a new one (`new`, or an id not found). */
 @Component({
   selector: 'app-edit-article-page',
   imports: [EditArticle],
@@ -58,11 +57,10 @@ export class ArticlesPage {
   encapsulation: ViewEncapsulation.None,
 })
 export class EditArticlePage {
+  private readonly store = inject(ArticleStore);
   /** The route's `id`. */
   readonly id = input.required<string>();
-  protected readonly article = computed(
-    () => ARTICLES.find((article) => article.id === this.id()) ?? null,
-  );
+  private readonly article = computed(() => this.store.get(this.id()));
 }
 
 /** The media, as a grid (its details beside) or a table (its filters beside). */

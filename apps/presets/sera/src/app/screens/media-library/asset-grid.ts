@@ -1,4 +1,12 @@
-import { Component, ViewEncapsulation, model } from '@angular/core';
+import {
+  Component,
+  ViewEncapsulation,
+  computed,
+  inject,
+  linkedSignal,
+  signal,
+} from '@angular/core';
+import { FormField, form } from '@angular/forms/signals';
 import {
   ScBadge,
   ScCard,
@@ -25,15 +33,19 @@ import {
   SiVideoIcon,
 } from '@semantic-icons/lucide-icons';
 import { cn } from 'cn';
-import { ASSETS, type Asset } from './media-data';
+import { type Asset, found, isImage } from './media-data';
+import { MediaStore } from './media-store';
+
+const PAGE_SIZE = 8;
 
 /**
- * The assets as tiles: a press selects one (`[(selected)]`, its id). shadcn's
- * three static pages are our Pagination's own: 36 assets, 12 a page.
+ * The assets as tiles: a search (name, tags), 8 a page; a press selects one
+ * (the store's `selectedId`). An upload shows its image.
  */
 @Component({
   selector: 'app-asset-grid',
   imports: [
+    FormField,
     ScBadge,
     ScCard,
     ScCardBody,
@@ -67,12 +79,13 @@ import { ASSETS, type Asset } from './media-data';
             scInput
             placeholder="Search files, tags, or metadata..."
             aria-label="Search files, tags, or metadata"
+            [formField]="search.query"
           />
         </div>
       </div>
       <div scCardBody>
         <div class="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
-          @for (asset of assets; track asset.id) {
+          @for (asset of rows(); track asset.id) {
             <button
               type="button"
               class="group focus-visible:[&>div:first-child]:ring-ring flex flex-col gap-2.5 text-start outline-none focus-visible:[&>div:first-child]:ring-2"
@@ -80,6 +93,13 @@ import { ASSETS, type Asset } from './media-data';
               (click)="selected.set(asset.id)"
             >
               <div [class]="tile(asset.id === selected())">
+                @if (asset.url && isImage(asset)) {
+                  <img
+                    alt=""
+                    class="absolute start-0.5 top-0.5 size-[calc(100%-4px)] object-cover"
+                    [src]="asset.url"
+                  />
+                }
                 @if (asset.id === selected()) {
                   <div
                     class="bg-foreground text-background absolute start-2 top-2 flex size-5 items-center justify-center"
@@ -132,6 +152,10 @@ import { ASSETS, type Asset } from './media-data';
                 </p>
               </div>
             </button>
+          } @empty {
+            <p class="text-muted-foreground col-span-full py-10 text-center">
+              No assets match “{{ search.query().value() }}”.
+            </p>
           }
         </div>
       </div>
@@ -140,8 +164,9 @@ import { ASSETS, type Asset } from './media-data';
           scPagination
           aria-label="Asset pages"
           #pagination="scPagination"
-          [totalItems]="36"
-          [pageSize]="12"
+          [totalItems]="matches().length"
+          [pageSize]="pageSize"
+          [(currentPage)]="page"
         >
           <ul scPaginationList>
             <li scPaginationItem>
@@ -174,9 +199,29 @@ import { ASSETS, type Asset } from './media-data';
   encapsulation: ViewEncapsulation.None,
 })
 export class AssetGrid {
-  /** The selected asset's id. */
-  readonly selected = model.required<string>();
-  protected readonly assets: Asset[] = ASSETS;
+  private readonly store = inject(MediaStore);
+
+  private readonly selected = this.store.selectedId;
+  private readonly search = form(signal({ query: '' }));
+  private readonly pageSize = PAGE_SIZE;
+
+  private readonly matches = computed(() => {
+    const query = this.search.query().value();
+    return this.store.assets().filter((asset) => found(asset, query));
+  });
+
+  /** Back to the first page when the search changes. */
+  private readonly page = linkedSignal({
+    source: () => this.search.query().value(),
+    computation: () => 1,
+  });
+
+  private readonly rows = computed(() => {
+    const start = (this.page() - 1) * PAGE_SIZE;
+    return this.matches().slice(start, start + PAGE_SIZE);
+  });
+
+  private readonly isImage = isImage;
 
   protected tile(selected: boolean): string {
     return cn(

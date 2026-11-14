@@ -2,16 +2,16 @@ import {
   Component,
   ViewEncapsulation,
   computed,
+  inject,
   model,
-  signal,
 } from '@angular/core';
 import { ScSeparator } from '@semantic-components/ui';
 import { AssetDetails } from './asset-details';
 import { AssetGrid } from './asset-grid';
-import { ASSETS } from './media-data';
 import { MediaHeader } from './media-header';
+import { MediaStore } from './media-store';
 
-/** shadcn's Sera screen "Media Library" (sera/media-library): the assets, and the selected one's details. */
+/** Media Library (shadcn's sera/media-library): the assets, and the selected one's details. */
 @Component({
   selector: 'app-media-library',
   imports: [AssetDetails, AssetGrid, MediaHeader, ScSeparator],
@@ -24,8 +24,10 @@ import { MediaHeader } from './media-header';
       <div
         class="grid w-full grid-cols-1 items-start gap-(--gap) px-(--page-gutter) py-(--gap) xl:grid-cols-[minmax(0,1fr)_320px]"
       >
-        <app-asset-grid [(selected)]="selectedId" />
-        <app-asset-details [asset]="selectedAsset()" />
+        <app-asset-grid />
+        @if (selected(); as asset) {
+          <app-asset-details [asset]="asset" />
+        }
       </div>
     </div>
   `,
@@ -33,10 +35,14 @@ import { MediaHeader } from './media-header';
   encapsulation: ViewEncapsulation.None,
 })
 export class MediaLibrary {
-  /** Grid or table, two-way: the header's switch. Left out, none (shadcn's). */
+  private readonly store = inject(MediaStore);
+
+  /** Grid or table, two-way: the header's switch. */
   readonly view = model<'grid' | 'table' | null>(null);
-  protected readonly selectedId = signal(ASSETS[0].id);
-  protected readonly selectedAsset = computed(
-    () => ASSETS.find((asset) => asset.id === this.selectedId()) ?? ASSETS[0],
+
+  /** The selected asset, or the first when it was deleted. */
+  private readonly selected = computed(
+    () =>
+      this.store.get(this.store.selectedId()) ?? this.store.assets()[0] ?? null,
   );
 }

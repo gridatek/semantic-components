@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, input, output } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
   ScBadge,
@@ -8,10 +8,7 @@ import {
   ScBreadcrumbList,
   ScButton,
 } from '@semantic-components/ui';
-import {
-  SiArrowLeftIcon,
-  SiExternalLinkIcon,
-} from '@semantic-icons/lucide-icons';
+import { SiArrowLeftIcon, SiEyeIcon } from '@semantic-icons/lucide-icons';
 
 /** Back to the articles, the title, the draft's state and its actions. */
 @Component({
@@ -25,7 +22,7 @@ import {
     ScBreadcrumbList,
     ScButton,
     SiArrowLeftIcon,
-    SiExternalLinkIcon,
+    SiEyeIcon,
   ],
   template: `
     <header
@@ -49,17 +46,17 @@ import {
         <h1
           class="font-heading line-clamp-1 text-3xl tracking-wide uppercase md:text-3xl lg:text-4xl"
         >
-          Edit Article
+          {{ isNew() ? 'New Article' : 'Edit Article' }}
         </h1>
       </div>
       <div class="flex items-center gap-2 md:gap-4">
-        <span scBadge title="2 minutes ago">Autosaved</span>
+        <span scBadge role="status">{{ state() }}</span>
         <div class="flex items-center gap-2 md:gap-4">
-          <button scButton variant="link">
+          <button scButton variant="link" (click)="preview.emit()">
             Preview
-            <svg siExternalLinkIcon data-icon="inline-end"></svg>
+            <svg siEyeIcon data-icon="inline-end"></svg>
           </button>
-          <button scButton>Submit Draft</button>
+          <button scButton (click)="submit.emit()">Submit Draft</button>
         </div>
       </div>
     </header>
@@ -67,4 +64,11 @@ import {
   host: { class: 'block' },
   encapsulation: ViewEncapsulation.None,
 })
-export class EditHeader {}
+export class EditHeader {
+  /** A new article: its title says so. */
+  readonly isNew = input(false);
+  /** What the draft is at: "Saved", "Unsaved changes"… */
+  readonly state = input('');
+  readonly preview = output();
+  readonly submit = output();
+}

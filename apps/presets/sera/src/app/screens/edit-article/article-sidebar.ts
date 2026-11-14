@@ -1,9 +1,5 @@
-import {
-  Component,
-  ViewEncapsulation,
-  input,
-  linkedSignal,
-} from '@angular/core';
+import { Component, ViewEncapsulation, computed, input } from '@angular/core';
+import { type FieldTree, FormField } from '@angular/forms/signals';
 import {
   ScCard,
   ScCardBody,
@@ -36,33 +32,23 @@ import {
   ScTextarea,
 } from '@semantic-components/ui';
 import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
-import { type Article } from '../article-directory/articles-data';
+import {
+  ISSUES,
+  MILESTONES,
+  countWords,
+} from '../article-directory/articles-data';
+import { type ArticleModel } from './article-model';
 
-interface Milestone {
-  id: string;
-  name: string;
-  complete: boolean;
-}
-
-const MILESTONES: Milestone[] = [
-  { id: 'outline', name: 'Outline & Commissioning', complete: true },
-  { id: 'first-draft', name: 'First Draft Submitted', complete: true },
-  { id: 'review', name: 'Review & Revisions', complete: false },
-  { id: 'copy-edit', name: 'Final Copy Edit', complete: false },
-  { id: 'layout', name: 'Art Direction & Layout', complete: false },
-];
-
-const ISSUES = [
-  { label: 'Spring Issue 2024', value: 'spring-2024' },
-  { label: 'Summer Issue 2024', value: 'summer-2024' },
-  { label: 'Autumn Issue 2024', value: 'autumn-2024' },
-  { label: 'Winter Issue 2024', value: 'winter-2024' },
-];
+const ISSUE_ITEMS = ISSUES.map((issue) => ({
+  value: issue.id,
+  label: issue.label,
+}));
 
 /** The article's details, its publication milestones, its word count. */
 @Component({
   selector: 'app-article-sidebar',
   imports: [
+    FormField,
     ScCard,
     ScCardBody,
     ScCardHeader,
@@ -104,7 +90,7 @@ const ISSUES = [
         <div scCardBody>
           <div scFieldGroup>
             <div scField>
-              <div scSelect [(value)]="issue" [items]="issues">
+              <div scSelect [formField]="fields().issue" [items]="issues">
                 <div scSelectLabel>Issue</div>
                 <div scSelectTrigger>
                   <span scSelectValue></span>
@@ -130,7 +116,7 @@ const ISSUES = [
             </div>
             <div scField>
               <label scLabel>Author</label>
-              <input scInput [value]="article()?.author ?? ''" />
+              <input scInput [formField]="fields().author" />
             </div>
           </div>
         </div>
@@ -150,8 +136,7 @@ const ISSUES = [
                     <input
                       scCheckbox
                       [id]="'milestone-' + milestone.id"
-                      [name]="milestone.id"
-                      [checked]="milestone.complete"
+                      [formField]="fields().milestones[milestone.id]"
                     />
                     <label scLabel [for]="'milestone-' + milestone.id">
                       {{ milestone.name }}
@@ -165,6 +150,7 @@ const ISSUES = [
               <textarea
                 scTextarea
                 placeholder="This article needs to be revised for clarity and accuracy."
+                [formField]="fields().note"
               ></textarea>
             </div>
           </div>
@@ -176,9 +162,12 @@ const ISSUES = [
           <h2 scCardTitle>Word Count</h2>
         </div>
         <div scCardBody>
-          <div scProgress [value]="70">
-            <span scProgressLabel>1,402 / 2,000 words</span>
-            <span scProgressValueText>70%</span>
+          <div scProgress [value]="percent()">
+            <span scProgressLabel>
+              {{ words().toLocaleString('en-US') }} /
+              {{ targetWords().toLocaleString('en-US') }} words
+            </span>
+            <span scProgressValueText>{{ percent() }}%</span>
             <div scProgressTrack><div scProgressRange></div></div>
           </div>
         </div>
@@ -189,14 +178,18 @@ const ISSUES = [
   encapsulation: ViewEncapsulation.None,
 })
 export class ArticleSidebar {
-  protected readonly milestones = MILESTONES;
-  protected readonly issues = ISSUES;
-  /** The article whose details these are; null, a new one. */
-  readonly article = input<Article | null>(null);
+  /** Edit Article's form. */
+  readonly fields = input.required<FieldTree<ArticleModel>>();
+  /** The length asked for. */
+  readonly targetWords = input(2000);
 
-  /** Its issue ("Summer 2024" → summer-2024), Summer's for a new one. */
-  protected readonly issue = linkedSignal(() => {
-    const issue = this.article()?.issue;
-    return issue ? issue.toLowerCase().replace(' ', '-') : 'summer-2024';
-  });
+  private readonly issues = ISSUE_ITEMS;
+  private readonly milestones = MILESTONES;
+
+  private readonly words = computed(() =>
+    countWords(this.fields().body().value()),
+  );
+  private readonly percent = computed(() =>
+    Math.min(100, Math.round((this.words() / this.targetWords()) * 100)),
+  );
 }

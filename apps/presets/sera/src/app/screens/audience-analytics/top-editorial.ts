@@ -1,4 +1,11 @@
-import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
+import {
+  Component,
+  ViewEncapsulation,
+  computed,
+  inject,
+  signal,
+} from '@angular/core';
+import { Router } from '@angular/router';
 import {
   ScButton,
   ScCard,
@@ -21,6 +28,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScToaster,
   ScToggleGroup,
   ScToggleGroupItem,
 } from '@semantic-components/ui';
@@ -29,100 +37,15 @@ import {
   SiEllipsisIcon,
   SiLoaderCircleIcon,
 } from '@semantic-icons/lucide-icons';
+import { ArticleStore } from '../article-directory/article-store';
+import { type Article } from '../article-directory/articles-data';
+import { type Metric, compact, duration, ranked } from './readership';
 
-interface Editorial {
-  rank: number;
-  title: string;
-  author: string;
-  published: string;
-  pageviews: string;
-  avgTime: string;
-}
-
-const EDITORIALS: Editorial[] = [
-  {
-    rank: 1,
-    title: 'The New Vanguard of Minimalist Architecture',
-    author: 'Elena Rostova',
-    published: 'Oct 12',
-    pageviews: '45.2k',
-    avgTime: '04:15',
-  },
-  {
-    rank: 2,
-    title: 'Autumn Sartorial Code: Deconstructed Classics',
-    author: 'Julian Vance',
-    published: 'Oct 05',
-    pageviews: '38.9k',
-    avgTime: '03:42',
-  },
-  {
-    rank: 3,
-    title: 'Interview: Director Sofia Coppola on The Aesthetics of Isolation',
-    author: 'Marcus Trent',
-    published: 'Sep 28',
-    pageviews: '31.4k',
-    avgTime: '06:20',
-  },
-  {
-    rank: 4,
-    title: "Sourcing Ceramics from Kyoto's Oldest Kilns",
-    author: 'Sarah Lin',
-    published: 'Oct 18',
-    pageviews: '22.1k',
-    avgTime: '02:55',
-  },
-  {
-    rank: 5,
-    title: 'Field Notes from Copenhagen Design Week',
-    author: 'Noah Bennett',
-    published: 'Oct 21',
-    pageviews: '19.7k',
-    avgTime: '03:18',
-  },
-  {
-    rank: 6,
-    title: "A Studio Visit with Milan's Most Elusive Lighting Designer",
-    author: 'Claire Duval',
-    published: 'Oct 09',
-    pageviews: '17.4k',
-    avgTime: '04:02',
-  },
-  {
-    rank: 7,
-    title: 'Collecting the New Avant-Garde in Contemporary Furniture',
-    author: 'Tommy Rhodes',
-    published: 'Sep 30',
-    pageviews: '15.9k',
-    avgTime: '03:36',
-  },
-  {
-    rank: 8,
-    title: "Inside Lisbon's Quiet Culinary Renaissance",
-    author: 'Amara Iqbal',
-    published: 'Oct 14',
-    pageviews: '14.2k',
-    avgTime: '05:08',
-  },
-  {
-    rank: 9,
-    title: 'Why Slow Interiors Are Defining the Next Luxury Wave',
-    author: 'Henry Vale',
-    published: 'Oct 03',
-    pageviews: '12.7k',
-    avgTime: '03:11',
-  },
-  {
-    rank: 10,
-    title: 'The Return of Print: Independent Magazine Covers to Watch',
-    author: 'Mina Okafor',
-    published: 'Sep 26',
-    pageviews: '11.3k',
-    avgTime: '02:49',
-  },
-];
-
-/** The most read articles: five, then all ten after "Load more" (2 s). */
+/**
+ * The most read articles, by views, read time or shares: five, then all after
+ * "Load more" (2 s). Their menu edits, unpublishes or deletes them — the
+ * store's, so the directory follows.
+ */
 @Component({
   selector: 'app-top-editorial',
   imports: [
@@ -167,6 +90,7 @@ const EDITORIALS: Editorial[] = [
             aria-label="Top editorials metric selector"
             class="w-full sm:ms-auto sm:w-fit"
             [(value)]="metric"
+            (valueChange)="keepOne($event)"
           >
             <button scToggleGroupItem value="views" class="flex-1">
               Views
@@ -194,14 +118,15 @@ const EDITORIALS: Editorial[] = [
                 <th scTableHeaderCell>Published</th>
                 <th scTableHeaderCell>Page Views</th>
                 <th scTableHeaderCell>Read Time</th>
+                <th scTableHeaderCell>Shares</th>
                 <th scTableHeaderCell class="text-end">Actions</th>
               </tr>
             </thead>
             <tbody scTableBody>
-              @for (row of rows(); track row.rank) {
+              @for (row of rows(); track row.id; let index = $index) {
                 <tr scTableRow>
                   <td scTableCell class="translate-y-1 align-text-top">
-                    {{ row.rank }}
+                    {{ index + 1 }}
                   </td>
                   <td scTableCell>
                     <div class="flex flex-col gap-2">
@@ -217,9 +142,14 @@ const EDITORIALS: Editorial[] = [
                       </p>
                     </div>
                   </td>
-                  <td scTableCell>{{ row.published }}</td>
-                  <td scTableCell>{{ row.pageviews }}</td>
-                  <td scTableCell>{{ row.avgTime }}</td>
+                  <td scTableCell>{{ row.readership?.published }}</td>
+                  <td scTableCell>
+                    {{ count(row.readership?.pageviews ?? 0) }}
+                  </td>
+                  <td scTableCell>
+                    {{ time(row.readership?.readSeconds ?? 0) }}
+                  </td>
+                  <td scTableCell>{{ count(row.readership?.shares ?? 0) }}</td>
                   <td scTableCell class="text-end">
                     <div scMenuProvider alignment="end">
                       <button
@@ -234,11 +164,17 @@ const EDITORIALS: Editorial[] = [
                         >
                       </button>
                       <ng-template scMenuPortal>
-                        <div scMenu>
+                        <div scMenu (itemSelected)="act($event, row)">
                           <ng-template scMenuContent>
-                            <div scMenuItem>Edit</div>
-                            <div scMenuItem>Publish</div>
-                            <div scMenuItem variant="destructive">Delete</div>
+                            <div scMenuItem value="edit">Edit</div>
+                            <div scMenuItem value="unpublish">Unpublish</div>
+                            <div
+                              scMenuItem
+                              value="delete"
+                              variant="destructive"
+                            >
+                              Delete
+                            </div>
                           </ng-template>
                         </div>
                       </ng-template>
@@ -278,21 +214,62 @@ const EDITORIALS: Editorial[] = [
   encapsulation: ViewEncapsulation.None,
 })
 export class TopEditorial {
-  protected readonly metric = signal(['views']);
+  private readonly store = inject(ArticleStore);
+  private readonly toaster = inject(ScToaster);
+  private readonly router = inject(Router);
+
+  protected readonly metric = signal<string[]>(['views']);
   private readonly visible = signal(5);
   protected readonly loading = signal(false);
-  protected readonly rows = computed(() => EDITORIALS.slice(0, this.visible()));
+
+  private readonly ranked = computed(() =>
+    ranked(this.store.read(), (this.metric()[0] ?? 'views') as Metric),
+  );
+  protected readonly rows = computed(() =>
+    this.ranked().slice(0, this.visible()),
+  );
   protected readonly hasMore = computed(
-    () => this.visible() < EDITORIALS.length,
+    () => this.visible() < this.ranked().length,
   );
 
-  /** All ten, after a pretend fetch — as shadcn's. */
+  private readonly count = compact;
+  private readonly time = duration;
+
+  /** All of them, after a pretend fetch — as shadcn's. */
   protected loadMore(): void {
     if (!this.hasMore() || this.loading()) return;
     this.loading.set(true);
     setTimeout(() => {
-      this.visible.set(EDITORIALS.length);
+      this.visible.set(this.ranked().length);
       this.loading.set(false);
     }, 2000);
+  }
+
+  /** One metric is always on: pressing the current one again keeps it. */
+  private keepOne(values: string[]): void {
+    if (!values.length) this.metric.set(['views']);
+  }
+
+  private act(action: unknown, article: Article): void {
+    if (action === 'edit') {
+      void this.router.navigate(['/articles', article.id]);
+    } else if (action === 'unpublish') {
+      this.store.setStatus(article.id, 'final-edit');
+      this.toaster.show({
+        title: 'Unpublished',
+        description: `“${article.title}” is back in final edit.`,
+        action: {
+          label: 'Undo',
+          onClick: () => this.store.setStatus(article.id, 'published'),
+        },
+      });
+    } else if (action === 'delete') {
+      const restore = this.store.remove(article.id);
+      this.toaster.show({
+        title: 'Article deleted',
+        description: `“${article.title}”`,
+        action: { label: 'Undo', onClick: restore },
+      });
+    }
   }
 }

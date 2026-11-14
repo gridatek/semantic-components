@@ -5,7 +5,7 @@ import {
   ScBreadcrumbItem,
   ScBreadcrumbLink,
   ScBreadcrumbList,
-  ScButton,
+  ScLink,
 } from '@semantic-components/ui';
 import { SiArrowLeftIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
 
@@ -18,7 +18,7 @@ import { SiArrowLeftIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
     ScBreadcrumbItem,
     ScBreadcrumbLink,
     ScBreadcrumbList,
-    ScButton,
+    ScLink,
     SiArrowLeftIcon,
     SiPlusIcon,
   ],
@@ -47,10 +47,10 @@ import { SiArrowLeftIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
           Article Directory
         </h1>
       </div>
-      <button scButton class="sm:ms-auto">
+      <a scLink variant="button" class="sm:ms-auto" routerLink="/articles/new">
         <svg siPlusIcon data-icon="inline-start"></svg>
         New Article
-      </button>
+      </a>
     </header>
   `,
   host: { class: 'block' },

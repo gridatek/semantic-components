@@ -1,5 +1,6 @@
-// shadcn's Sera media assets (sera/media-library/data.ts), shared by the Media
-// Library and Media Library Table screens.
+// The media at start: shadcn's Sera assets (sera/media-library/data.ts) —
+// samples, without files. The Media Library reads and changes them through
+// `MediaStore`; uploads join them, with their file.
 export type AssetType = 'JPEG' | 'PNG' | 'WEBP' | 'MP4' | 'PDF';
 
 export interface Asset {
@@ -15,6 +16,8 @@ export interface Asset {
   uploadedOn: string;
   tags: string[];
   usedIn: { title: string; role: string }[];
+  /** The file's address, for an upload: a sample has none. */
+  url?: string;
 }
 
 export const ASSETS: Asset[] = [
@@ -188,3 +191,121 @@ export const ASSETS: Asset[] = [
     ],
   },
 ];
+
+/** What a type is, for the filters. */
+export type AssetKind = 'images' | 'video' | 'documents' | 'audio';
+
+const KIND: Record<AssetType, AssetKind> = {
+  JPEG: 'images',
+  PNG: 'images',
+  WEBP: 'images',
+  MP4: 'video',
+  PDF: 'documents',
+};
+
+export function kindOf(asset: Asset): AssetKind {
+  return KIND[asset.type];
+}
+
+/** "4.2 MB" → 4.2. */
+export function sizeInMb(asset: Asset): number {
+  return parseFloat(asset.size) || 0;
+}
+
+const MONTHS = [
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec',
+];
+
+/** "Oct 24, 2024" → 2024-10-24. */
+export function uploadedOn(asset: Asset): Temporal.PlainDate | null {
+  const match = /^(\w{3}) (\d{1,2}), (\d{4})$/.exec(asset.uploadedOn);
+  if (!match) return null;
+  const month = MONTHS.indexOf(match[1]) + 1;
+  if (!month) return null;
+  return Temporal.PlainDate.from({
+    year: Number(match[3]),
+    month,
+    day: Number(match[2]),
+  });
+}
+
+/** 2024-10-24 → "Oct 24" and "Oct 24, 2024", as the samples write them. */
+export function dateTexts(date: Temporal.PlainDate): {
+  short: string;
+  long: string;
+} {
+  const short = `${MONTHS[date.month - 1]} ${`${date.day}`.padStart(2, '0')}`;
+  return { short, long: `${short}, ${date.year}` };
+}
+
+/** The filters of the Media Library's table, once applied. */
+export interface AssetFilters {
+  kinds: AssetKind[];
+  /** Within the last day, week or month; any. */
+  uploaded: 'any' | '24h' | 'week' | 'month';
+  /** A custom range: before `uploaded` when set. */
+  from: Temporal.PlainDate | null;
+  to: Temporal.PlainDate | null;
+  minMb: number;
+  /** null: no maximum. */
+  maxMb: number | null;
+  /** Any of them. */
+  tags: string[];
+}
+
+export function matches(
+  asset: Asset,
+  filters: AssetFilters,
+  today: Temporal.PlainDate,
+): boolean {
+  if (!filters.kinds.includes(kindOf(asset))) return false;
+  const size = sizeInMb(asset);
+  if (size < filters.minMb) return false;
+  if (filters.maxMb !== null && size > filters.maxMb) return false;
+  if (
+    filters.tags.length &&
+    !filters.tags.some((tag) => asset.tags.includes(tag))
+  ) {
+    return false;
+  }
+  const date = uploadedOn(asset);
+  if (!date) return true;
+  const compare = Temporal.PlainDate.compare;
+  if (filters.from) {
+    const to = filters.to ?? filters.from;
+    return compare(date, filters.from) >= 0 && compare(date, to) <= 0;
+  }
+  const since = {
+    any: null,
+    '24h': today.subtract({ days: 1 }),
+    week: today.subtract({ weeks: 1 }),
+    month: today.subtract({ months: 1 }),
+  }[filters.uploaded];
+  return !since || compare(date, since) >= 0;
+}
+
+/** Its name or one of its tags has the query. */
+export function found(asset: Asset, query: string): boolean {
+  const q = query.trim().toLowerCase();
+  return (
+    !q ||
+    asset.name.toLowerCase().includes(q) ||
+    asset.tags.some((tag) => tag.includes(q))
+  );
+}
+
+/** An image (JPEG, PNG, WEBP): its file can be shown. */
+export function isImage(asset: Asset): boolean {
+  return kindOf(asset) === 'images';
+}

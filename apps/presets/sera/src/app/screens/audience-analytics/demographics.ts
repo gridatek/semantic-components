@@ -7,22 +7,39 @@ import {
   ScCardFooter,
   ScCardHeader,
   ScCardTitle,
+  ScDialog,
+  ScDialogClose,
+  ScDialogDescription,
+  ScDialogHeader,
+  ScDialogPortal,
+  ScDialogProvider,
+  ScDialogTitle,
+  ScDialogTrigger,
   ScProgress,
   ScProgressLabel,
   ScProgressRange,
   ScProgressTrack,
   ScProgressValueText,
 } from '@semantic-components/ui';
-import { SiMoveRightIcon } from '@semantic-icons/lucide-icons';
+import { SiMoveRightIcon, SiXIcon } from '@semantic-icons/lucide-icons';
 
-const AGES = [
+export const AGES = [
   { age: '18 - 24', percentage: 22 },
   { age: '25 - 34', percentage: 64 },
   { age: '35 - 44', percentage: 12 },
   { age: '45+', percentage: 5 },
 ];
 
-/** The readers by age, as bars. */
+/** Where the readers come from: the demographics card's "View all sources". */
+export const SOURCES = [
+  { source: 'Search', percentage: 38 },
+  { source: 'Newsletter', percentage: 24 },
+  { source: 'Direct', percentage: 17 },
+  { source: 'Social', percentage: 14 },
+  { source: 'Referral', percentage: 7 },
+];
+
+/** The readers by age, as bars; their sources in a dialog. */
 @Component({
   selector: 'app-demographics',
   imports: [
@@ -33,12 +50,21 @@ const AGES = [
     ScCardFooter,
     ScCardHeader,
     ScCardTitle,
+    ScDialog,
+    ScDialogClose,
+    ScDialogDescription,
+    ScDialogHeader,
+    ScDialogPortal,
+    ScDialogProvider,
+    ScDialogTitle,
+    ScDialogTrigger,
     ScProgress,
     ScProgressLabel,
     ScProgressRange,
     ScProgressTrack,
     ScProgressValueText,
     SiMoveRightIcon,
+    SiXIcon,
   ],
   template: `
     <div scCard class="h-full">
@@ -56,10 +82,35 @@ const AGES = [
         }
       </div>
       <div scCardFooter>
-        <button scButton variant="link" class="w-full">
-          View all source
-          <svg siMoveRightIcon data-icon="inline-end"></svg>
-        </button>
+        <div scDialogProvider>
+          <button scButton scDialogTrigger variant="link" class="w-full">
+            View all sources
+            <svg siMoveRightIcon data-icon="inline-end"></svg>
+          </button>
+          <ng-template scDialogPortal>
+            <div scDialog>
+              <button scDialogClose>
+                <svg siXIcon></svg>
+                <span class="sr-only">Close</span>
+              </button>
+              <div scDialogHeader>
+                <h2 scDialogTitle>Reader Sources</h2>
+                <p scDialogDescription>
+                  Where this period's readers came from.
+                </p>
+              </div>
+              <div class="flex flex-col gap-6">
+                @for (item of sources; track item.source) {
+                  <div scProgress [value]="item.percentage">
+                    <span scProgressLabel>{{ item.source }}</span>
+                    <span scProgressValueText>{{ item.percentage }}%</span>
+                    <div scProgressTrack><div scProgressRange></div></div>
+                  </div>
+                }
+              </div>
+            </div>
+          </ng-template>
+        </div>
       </div>
     </div>
   `,
@@ -68,4 +119,5 @@ const AGES = [
 })
 export class Demographics {
   protected readonly ages = AGES;
+  private readonly sources = SOURCES;
 }

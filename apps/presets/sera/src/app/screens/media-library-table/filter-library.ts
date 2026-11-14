@@ -1,4 +1,13 @@
-import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  ViewEncapsulation,
+  computed,
+  inject,
+  output,
+  signal,
+} from '@angular/core';
+import { FormField, form, max, min } from '@angular/forms/signals';
 import {
   ScButton,
   ScCalendar,
@@ -46,12 +55,14 @@ import {
   SiChevronRightIcon,
   SiXIcon,
 } from '@semantic-icons/lucide-icons';
+import { type AssetFilters, type AssetKind } from '../media-library/media-data';
+import { MediaStore } from '../media-library/media-store';
 
-const FILE_TYPES = [
-  { id: 'images', label: 'Images (JPEG, PNG, WEBP)', checked: true },
-  { id: 'video', label: 'Video (MP4, MOV)', checked: false },
-  { id: 'documents', label: 'Documents (PDF)', checked: false },
-  { id: 'audio', label: 'Audio (MP3, WAV)', checked: false },
+const FILE_TYPES: { id: AssetKind; label: string }[] = [
+  { id: 'images', label: 'Images (JPEG, PNG, WEBP)' },
+  { id: 'video', label: 'Video (MP4, MOV)' },
+  { id: 'documents', label: 'Documents (PDF)' },
+  { id: 'audio', label: 'Audio (MP3, WAV)' },
 ];
 
 const DATE_OPTIONS = [
@@ -59,25 +70,6 @@ const DATE_OPTIONS = [
   { value: '24h', label: 'Past 24 hours' },
   { value: 'week', label: 'Past week' },
   { value: 'month', label: 'Past month' },
-];
-
-const TAGS = [
-  'architecture',
-  'brutalism',
-  'ceramics',
-  'design-week',
-  'editorial',
-  'exterior',
-  'film',
-  'food',
-  'furniture',
-  'interior',
-  'kyoto',
-  'minimalism',
-  'print',
-  'sustainability',
-  'summer-issue',
-  'video',
 ];
 
 /** shadcn's "LLL dd, y": Nov 01, 2026. */
@@ -88,10 +80,36 @@ const day = (date: Temporal.PlainDate) =>
     year: 'numeric',
   });
 
-/** The library's filters: type, date, size, tags. */
+/** The slider's steps: 5 MB each; its end, 500+ MB, is no maximum. */
+const MB_PER_STEP = 5;
+
+interface FilterModel {
+  kinds: Record<AssetKind, boolean>;
+  uploaded: AssetFilters['uploaded'];
+  range: ScCalendarValue;
+  sizeMin: number;
+  sizeMax: number;
+  tags: string[];
+}
+
+/** No filter: everything shown. */
+const ALL = (): FilterModel => ({
+  kinds: { images: true, video: true, documents: true, audio: true },
+  uploaded: 'any',
+  range: null,
+  sizeMin: 0,
+  sizeMax: 100,
+  tags: [],
+});
+
+/**
+ * The library's filters — type, date, size, tags — as one form: Apply hands
+ * them to the table, Reset clears them.
+ */
 @Component({
   selector: 'app-filter-library',
   imports: [
+    FormField,
     ScButton,
     ScCalendar,
     ScCalendarHeader,
@@ -136,7 +154,7 @@ const day = (date: Temporal.PlainDate) =>
   template: `
     <div scCard>
       <div scCardHeader class="border-b">
-        <h2 scCardTitle>Filter Library</h2>
+        <h2 scCardTitle tabindex="-1" class="outline-none">Filter Library</h2>
       </div>
       <div scCardBody>
         <div scFieldGroup>
@@ -148,7 +166,7 @@ const day = (date: Temporal.PlainDate) =>
                   <input
                     scCheckbox
                     [id]="'type-' + type.id"
-                    [checked]="type.checked"
+                    [formField]="filterForm.kinds[type.id]"
                   />
                   <label scLabel [for]="'type-' + type.id">
                     {{ type.label }}
@@ -160,7 +178,11 @@ const day = (date: Temporal.PlainDate) =>
 
           <fieldset scFieldset>
             <legend scLegend>Date Uploaded</legend>
-            <div scRadioGroup aria-label="Date uploaded" [(value)]="uploaded">
+            <div
+              scRadioGroup
+              aria-label="Date uploaded"
+              [formField]="filterForm.uploaded"
+            >
               @for (option of dateOptions; track option.value) {
                 <div scField orientation="horizontal">
                   <input
@@ -199,7 +221,7 @@ const day = (date: Temporal.PlainDate) =>
                     mode="range"
                     aria-label="Custom range"
                     [numberOfMonths]="2"
-                    [(value)]="range"
+                    [formField]="filterForm.range"
                   >
                     <div scCalendarHeader>
                       <button scCalendarPrevious>
@@ -230,23 +252,19 @@ const day = (date: Temporal.PlainDate) =>
                 <input
                   scRangeSliderStartThumb
                   aria-label="Minimum size"
-                  [min]="0"
-                  [max]="100"
-                  [(value)]="sizeMin"
+                  [formField]="filterForm.sizeMin"
                 />
                 <input
                   scRangeSliderEndThumb
                   aria-label="Maximum size"
-                  [min]="0"
-                  [max]="100"
-                  [(value)]="sizeMax"
+                  [formField]="filterForm.sizeMax"
                 />
               </div>
               <div
                 class="flex items-center justify-between text-xs font-medium"
               >
-                <span>Min: 0 MB</span>
-                <span>Max: 300 MB</span>
+                <span>Min: {{ minText() }}</span>
+                <span>Max: {{ maxText() }}</span>
               </div>
             </div>
           </fieldset>
@@ -259,10 +277,10 @@ const day = (date: Temporal.PlainDate) =>
                 multiple
                 autoHighlight
                 #cb="scCombobox"
-                [(value)]="tags"
+                [formField]="filterForm.tags"
               >
                 <div scComboboxChips>
-                  @for (tag of tags(); track tag) {
+                  @for (tag of filterForm.tags().value(); track tag) {
                     <span scComboboxChip [value]="tag">
                       {{ tag }}
                       <button scComboboxChipRemove>
@@ -293,8 +311,10 @@ const day = (date: Temporal.PlainDate) =>
         </div>
       </div>
       <div scCardFooter class="flex flex-col gap-2 border-t">
-        <button scButton class="w-full">Apply Filters</button>
-        <button scButton variant="ghost" class="w-full">Reset</button>
+        <button scButton class="w-full" (click)="apply()">Apply Filters</button>
+        <button scButton variant="ghost" class="w-full" (click)="reset()">
+          Reset
+        </button>
       </div>
     </div>
   `,
@@ -302,27 +322,71 @@ const day = (date: Temporal.PlainDate) =>
   encapsulation: ViewEncapsulation.None,
 })
 export class FilterLibrary {
-  protected readonly fileTypes = FILE_TYPES;
-  protected readonly dateOptions = DATE_OPTIONS;
-  protected readonly uploaded = signal('any');
-  protected readonly sizeMin = signal(0);
-  protected readonly sizeMax = signal(60);
-  protected readonly tags = signal<string[]>(['architecture', 'brutalism']);
+  private readonly element = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly store = inject(MediaStore);
 
-  /** This month's first day, three weeks on — as shadcn's. */
-  private readonly start = Temporal.Now.plainDateISO().with({ day: 1 });
-  protected readonly range = signal<ScCalendarValue>({
-    from: this.start,
-    to: this.start.add({ days: 21 }),
+  /** The tags of the library's assets, A to Z. */
+  private readonly tags = computed(() =>
+    [...new Set(this.store.assets().flatMap((asset) => asset.tags))].sort(),
+  );
+
+  /** Apply: the filters; Reset: null, none. */
+  readonly applied = output<AssetFilters | null>();
+
+  private readonly fileTypes = FILE_TYPES;
+  private readonly dateOptions = DATE_OPTIONS;
+
+  private readonly model = signal(ALL());
+  private readonly filterForm = form(this.model, (path) => {
+    min(path.sizeMin, 0);
+    max(path.sizeMin, 100);
+    min(path.sizeMax, 0);
+    max(path.sizeMax, 100);
   });
 
-  protected readonly rangeText = computed(() => {
-    const { from, to } = (this.range() ?? {}) as Partial<ScCalendarRange>;
+  private readonly minText = computed(
+    () => `${this.model().sizeMin * MB_PER_STEP} MB`,
+  );
+  private readonly maxText = computed(() => {
+    const size = this.model().sizeMax;
+    return size === 100 ? '500+ MB' : `${size * MB_PER_STEP} MB`;
+  });
+
+  private readonly rangeText = computed(() => {
+    const { from, to } = (this.model().range ?? {}) as Partial<ScCalendarRange>;
     if (!from) return 'Pick a date range';
     return to ? `${day(from)} – ${day(to)}` : day(from);
   });
 
-  protected matching(query: string): string[] {
-    return TAGS.filter((tag) => scComboboxMatches(tag, query));
+  /** Brings the filters into view, focused: the header's Filters. */
+  focus(): void {
+    const title = this.element.nativeElement.querySelector<HTMLElement>(
+      '[data-slot=card-title], h2',
+    );
+    title?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    title?.focus({ preventScroll: true });
+  }
+
+  private matching(query: string): string[] {
+    return this.tags().filter((tag) => scComboboxMatches(tag, query));
+  }
+
+  private apply(): void {
+    const model = this.model();
+    const { from, to } = (model.range ?? {}) as Partial<ScCalendarRange>;
+    this.applied.emit({
+      kinds: FILE_TYPES.filter((type) => model.kinds[type.id]).map((t) => t.id),
+      uploaded: model.uploaded,
+      from: from ?? null,
+      to: to ?? null,
+      minMb: model.sizeMin * MB_PER_STEP,
+      maxMb: model.sizeMax === 100 ? null : model.sizeMax * MB_PER_STEP,
+      tags: model.tags,
+    });
+  }
+
+  private reset(): void {
+    this.model.set(ALL());
+    this.applied.emit(null);
   }
 }

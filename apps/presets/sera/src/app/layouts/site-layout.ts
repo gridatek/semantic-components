@@ -16,8 +16,8 @@ import { SiMenuIcon, SiXIcon } from '@semantic-icons/lucide-icons';
 import { ThemeMenu } from './theme-menu';
 
 /**
- * The Sera website (not shadcn's: its screens have no navigation): a header
- * — the mark, the pages, a menu on a phone — the page, a footer.
+ * The Sera website: a header — the mark, the pages, the theme, a menu on a
+ * phone — the page, a footer.
  */
 @Component({
   selector: 'app-site-layout',
@@ -112,8 +112,8 @@ import { ThemeMenu } from './theme-menu';
         <div class="flex max-w-sm flex-col gap-2">
           <p class="font-heading text-lg tracking-wide uppercase">Sera</p>
           <p class="text-muted-foreground text-sm">
-            shadcn's editorial style, built with Semantic Components: the same
-            screens, colours and type, our components.
+            An editorial workspace: audience analytics, an article directory
+            with its editor, a media library.
           </p>
         </div>
         <nav aria-label="Footer" class="flex flex-col gap-2 text-sm">
@@ -123,9 +123,6 @@ import { ThemeMenu } from './theme-menu';
               page.label
             }}</a>
           }
-          <a scLink class="w-fit" routerLink="/screens"
-            >All screens, as shadcn shows them</a
-          >
         </nav>
       </div>
       <div scSeparator></div>
@@ -139,8 +136,8 @@ import { ThemeMenu } from './theme-menu';
 })
 export default class SiteLayout {
   protected readonly pages = [
-    { path: '/dashboard', label: 'Dashboard' },
-    { path: '/articles', label: 'Articles' },
-    { path: '/media', label: 'Media' },
+    { path: '/dashboard', label: 'Audience Analytics' },
+    { path: '/articles', label: 'Article Directory' },
+    { path: '/media', label: 'Media Library' },
   ];
 }
