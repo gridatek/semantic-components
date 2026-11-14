@@ -248,6 +248,19 @@ class RtlWithoutDir {}
             screen readers pronounce the text in that language.
           </li>
           <li>
+            Popups render at the end of the page, outside the box. They get its
+            direction through
+            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">Dir</code>, not
+            its
+            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">lang</code>:
+            write
+            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+              >dir="rtl" lang="ar"</code
+            >
+            again on the content you put in a portal (a select's popup, a
+            dialog, a preview card).
+          </li>
+          <li>
             Dates, numbers and the week's first day follow
             <code class="bg-muted rounded px-1.5 py-0.5 text-sm">LOCALE_ID</code
             >: provide it on the section's component, as above — every part
