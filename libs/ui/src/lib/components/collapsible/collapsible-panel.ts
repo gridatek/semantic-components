@@ -22,7 +22,6 @@ import { ScCollapsible } from './collapsible';
 @Directive({
   selector: 'div[scCollapsiblePanel]',
   host: {
-    'data-slot': 'collapsible-content',
     '[id]': 'id()',
     '[attr.hidden]': 'hidden()',
     '[attr.data-open]': 'collapsible.open() ? "" : null',

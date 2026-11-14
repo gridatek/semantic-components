@@ -22,12 +22,8 @@ test('Usage: the trigger opens and closes its panel (aria-expanded, aria-control
   await expect(trigger).toHaveAttribute('aria-expanded', 'false');
   await expect(details).toBeHidden();
   // aria-controls names its panel.
-  const panel = page.locator('[data-slot=collapsible-content]');
+  const panel = page.locator(`#${await trigger.getAttribute('aria-controls')}`);
   await expect(panel).toContainText('Shipping address');
-  await expect(trigger).toHaveAttribute(
-    'aria-controls',
-    (await panel.getAttribute('id')) ?? 'missing',
-  );
 
   await trigger.click();
   await expect(trigger).toHaveAttribute('aria-expanded', 'true');
@@ -59,13 +55,12 @@ test('Hidden until found: closed, hidden="until-found"; a find match opens it', 
   page,
 }) => {
   await page.goto(demo('hidden-until-found'));
-  const panel = page.locator('[data-slot=collapsible-content]');
+  const trigger = page.getByRole('button', { name: 'Shipping details' });
+  const panel = page.locator(`#${await trigger.getAttribute('aria-controls')}`);
   await expect(panel).toHaveAttribute('hidden', 'until-found');
   // What find-in-page does on a match inside it.
   await panel.evaluate((el) => el.dispatchEvent(new Event('beforematch')));
-  await expect(
-    page.getByRole('button', { name: 'Shipping details' }),
-  ).toHaveAttribute('aria-expanded', 'true');
+  await expect(trigger).toHaveAttribute('aria-expanded', 'true');
   await expect(panel).not.toHaveAttribute('hidden');
 });
 
