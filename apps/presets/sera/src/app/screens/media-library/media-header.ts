@@ -78,6 +78,7 @@ import { MediaStore, UPLOAD_ACCEPT } from './media-store';
             scToggleGroup
             variant="outline"
             aria-label="View"
+            [spacing]="0"
             class="bg-background"
             [(value)]="values"
             (valueChange)="choose($event)"

@@ -286,9 +286,9 @@ const PAGE_SIZE = 8;
         >
           <ul scPaginationList>
             <li scPaginationItem>
-              <button scPaginationPrevious size="icon">
-                <svg siChevronLeftIcon></svg>
-                <span class="sr-only">Previous page</span>
+              <button scPaginationPrevious>
+                <svg siChevronLeftIcon data-icon="inline-start"></svg>
+                Previous
               </button>
             </li>
             @for (item of pagination.pages(); track item.value) {
@@ -301,9 +301,9 @@ const PAGE_SIZE = 8;
               }
             }
             <li scPaginationItem>
-              <button scPaginationNext size="icon">
-                <svg siChevronRightIcon></svg>
-                <span class="sr-only">Next page</span>
+              <button scPaginationNext>
+                Next
+                <svg siChevronRightIcon data-icon="inline-end"></svg>
               </button>
             </li>
           </ul>

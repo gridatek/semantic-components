@@ -203,24 +203,24 @@ const DOT_CLASS: Record<Status, string> = {
         >
           <ul scPaginationList>
             <li scPaginationItem>
-              <button scPaginationPrevious size="icon-sm">
-                <svg siChevronLeftIcon></svg>
-                <span class="sr-only">Previous page</span>
+              <button scPaginationPrevious>
+                <svg siChevronLeftIcon data-icon="inline-start"></svg>
+                Previous
               </button>
             </li>
             @for (item of pagination.pages(); track item.value) {
               @if (item.type === 'page') {
                 <li scPaginationItem>
-                  <button scPaginationLink size="icon-sm" [page]="item.value">
+                  <button scPaginationLink [page]="item.value">
                     {{ item.value }}
                   </button>
                 </li>
               }
             }
             <li scPaginationItem>
-              <button scPaginationNext size="icon-sm">
-                <svg siChevronRightIcon></svg>
-                <span class="sr-only">Next page</span>
+              <button scPaginationNext>
+                Next
+                <svg siChevronRightIcon data-icon="inline-end"></svg>
               </button>
             </li>
           </ul>

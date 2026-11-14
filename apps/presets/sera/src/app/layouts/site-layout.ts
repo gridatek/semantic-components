@@ -47,13 +47,11 @@ import { ThemeMenu } from './theme-menu';
       aria-label="Sera"
       class="px-(--page-gutter) md:px-(--page-gutter)"
     >
-      <a scNavbarBrand routerLink="/" class="gap-2">
+      <a scNavbarBrand routerLink="/">
         <span
-          class="bg-primary text-primary-foreground font-heading flex size-7 items-center justify-center text-base"
-          aria-hidden="true"
-          >S</span
+          class="bg-primary text-primary-foreground font-heading flex h-8 items-center px-3 text-lg tracking-wide uppercase"
+          >Sera</span
         >
-        <span class="font-heading text-lg tracking-wide uppercase">Sera</span>
       </a>
 
       <nav scNavbarNav aria-label="Main">
