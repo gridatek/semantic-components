@@ -32,7 +32,9 @@ import type {
     '[attr.viewBox]': 'viewBox()',
     '[class]': 'class()',
     '(pointermove)': 'onPointerMove($event)',
-    '(pointerleave)': 'onLeave()',
+    // A tap moves nothing: its press points.
+    '(pointerdown)': 'onPointerMove($event)',
+    '(pointerleave)': 'onPointerLeave($event)',
     '(focus)': 'onFocus()',
     '(blur)': 'onLeave()',
     '(keydown)': 'onKeydown($event)',
@@ -110,7 +112,11 @@ export class ScChartPlot {
   }
 
   protected onPointerMove(event: PointerEvent): void {
-    this.state.pointer.set({ x: event.clientX, y: event.clientY });
+    this.state.pointer.set({
+      x: event.clientX,
+      y: event.clientY,
+      type: event.pointerType,
+    });
     const box = this.host.getBoundingClientRect();
     const px = ((event.clientX - box.left) * this.state.width()) / box.width;
     const py = ((event.clientY - box.top) * this.state.height()) / box.height;
@@ -123,9 +129,15 @@ export class ScChartPlot {
   }
 
   protected onFocus(): void {
-    this.state.pointer.set(null);
+    // Focused by a tap: what it pointed at stays.
+    if (this.state.pointer()) return;
     if (this.state.activeIndex() === null && this.state.data().length)
       this.state.activeIndex.set(0);
+  }
+
+  /** A finger lifted "leaves": what it tapped stays, until a tap elsewhere (blur). */
+  protected onPointerLeave(event: PointerEvent): void {
+    if (event.pointerType !== 'touch') this.onLeave();
   }
 
   protected onLeave(): void {

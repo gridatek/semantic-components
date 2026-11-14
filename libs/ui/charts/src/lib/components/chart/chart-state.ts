@@ -128,7 +128,12 @@ export class ScChartState {
   /** The category pointed at, or reached by the keyboard. */
   readonly activeIndex = signal<number | null>(null);
   /** Where the pointer is, on the screen (client px); null with the keyboard. */
-  readonly pointer = signal<{ x: number; y: number } | null>(null);
+  readonly pointer = signal<{
+    x: number;
+    y: number;
+    /** `mouse`, `pen` or `touch`: a finger hides more, and the tooltip goes above it. */
+    type: string;
+  } | null>(null);
   /** The plot's element: the tooltip measures the item it goes beside. */
   readonly plotElement = signal<Element | null>(null);
 

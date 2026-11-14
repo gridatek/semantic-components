@@ -102,7 +102,7 @@ You write what they show, from their state — Recharts' `content`, as parts: `l
 </div>
 ```
 
-- **Where it goes**: in a CDK overlay (the end of the page), so it can leave a small card — beside the pointer, 10px right and down as Recharts'; with the keyboard, beside the item reached (a bar's end, a point; a series can give its own box). It flips and stays in the window where there is no room, and closes on scroll. Its box carries the series' colors (`--color-<key>`), which the chart sets on itself.
+- **Where it goes**: in a CDK overlay (the end of the page), so it can leave a small card — beside the pointer, 10px from the arrow's drawing (Recharts' offset, so it doesn't touch the cursor); above a finger with touch, centred; with the keyboard, beside the item reached (a bar's end, a point; a series can give its own box). It flips and stays in the window where there is no room, and closes on scroll. Its box carries the series' colors (`--color-<key>`), which the chart sets on itself.
 - **Closed, it is not there**; `label()` and `payload()` keep the last category shown (the first before any), so what you write from them always has one to format.
 - **The values are raw numbers**: `| number` writes them in the app's locale (its `LOCALE_ID`).
 - **The tooltip's box** is the preset's (`chart.tooltip`): its corners, border or ring, shadow — shadcn's, style by style. Your `class` adds to it.
@@ -110,6 +110,7 @@ You write what they show, from their state — Recharts' `content`, as parts: `l
 
 ## Keyboard and screen readers
 
+- A tap points like the pointer: the tapped category shows until a tap elsewhere.
 - The plot is one tab stop (`role="group"`, named by its `aria-label`): on focus, the first category; ←/→ (↑/↓), Home and End move between categories; Escape closes the tooltip.
 - The provider keeps a polite live region in the chart: as the keyboard moves, screen readers hear what the tooltip shows — your text, as you formatted it. The indicators are hidden from them.
 - The axes, grid and cursor are hidden from assistive technology: the tooltip says what they show.

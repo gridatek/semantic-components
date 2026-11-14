@@ -31,6 +31,11 @@ import type { ScChartBox } from './chart-state';
 import { ScChartTooltipPortal } from './chart-tooltip-portal';
 import type { ScChartTooltipPayload } from './chart-types';
 
+/** The arrow cursor's drawing, down and right of its tip (px): the tooltip keeps clear of it. */
+const CURSOR = { width: 12, height: 19 };
+/** A fingertip's reach around a touch (px). */
+const FINGER = 40;
+
 /**
  * A chart's tooltip: its content (`ng-template scChartTooltipPortal`) in a CDK
  * overlay while a category is active — beside the pointer, or, with the
@@ -155,7 +160,17 @@ export class ScChartTooltipProvider {
       const index = this.state.activeIndex();
       if (index === null) return null;
       const pointer = this.state.pointer();
-      if (pointer) return { x: pointer.x, y: pointer.y, width: 0, height: 0 };
+      // What the pointer covers, so the tooltip doesn't: a finger around the
+      // touch; the arrow, down and right of its tip.
+      if (pointer)
+        return pointer.type === 'touch'
+          ? {
+              x: pointer.x - FINGER / 2,
+              y: pointer.y - FINGER / 2,
+              width: FINGER,
+              height: FINGER,
+            }
+          : { x: pointer.x, y: pointer.y, ...CURSOR };
       const plot = this.state.plotElement();
       if (!plot) return null;
       const rect = plot.getBoundingClientRect();
@@ -171,14 +186,23 @@ export class ScChartTooltipProvider {
     },
   );
 
+  /** Beside the pointer (or item) as asked; above a finger, centred: below it, it would be hidden. */
   protected readonly positions = computed(() =>
-    buildOverlayPositionsWithFallback(
-      physicalSide(this.side(), this.direction.valueSignal()),
-      this.alignment(),
-      this.sideOffset(),
-      this.direction.valueSignal(),
-      this.alignmentOffset(),
-    ),
+    this.state.pointer()?.type === 'touch'
+      ? buildOverlayPositionsWithFallback(
+          'top',
+          'center',
+          this.sideOffset(),
+          this.direction.valueSignal(),
+          0,
+        )
+      : buildOverlayPositionsWithFallback(
+          physicalSide(this.side(), this.direction.valueSignal()),
+          this.alignment(),
+          this.sideOffset(),
+          this.direction.valueSignal(),
+          this.alignmentOffset(),
+        ),
   );
 
   /** The side it was placed on, after any flip (`data-side`: physical). */
