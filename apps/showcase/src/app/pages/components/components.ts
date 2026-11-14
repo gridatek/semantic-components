@@ -120,6 +120,7 @@ export default class Components {
     'Navigation',
     'Layout',
     'Data Display',
+    'Charts',
     'Feedback',
     'Overlay',
     'Media',
@@ -131,7 +132,7 @@ export default class Components {
 
   readonly filteredComponents = computed(() => {
     const [category] = this.filterCategory();
-    const visible = this.componentsService.visibleComponents();
+    const visible = this.componentsService.visibleCatalog();
     const items =
       category && category !== 'All'
         ? visible.filter((item) => item.category === category)

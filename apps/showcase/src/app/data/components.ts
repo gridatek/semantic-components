@@ -8,6 +8,7 @@ export type ComponentCategory =
   | 'Navigation'
   | 'Layout'
   | 'Data Display'
+  | 'Charts'
   | 'Feedback'
   | 'Overlay'
   | 'Media'

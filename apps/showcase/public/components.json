@@ -38,7 +38,7 @@
     "description": "Series as areas, filled down to 0 or stacked — to 100% if you like — with natural, linear, step or monotone edges; gradients of your own.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Data Display",
+    "category": "Charts",
     "hidden": true
   },
   {
@@ -111,10 +111,10 @@
   {
     "name": "Bar Chart",
     "path": "bar-chart",
-    "description": "Series as bars: side by side, stacked, below 0; each corner's radius of your choice.",
+    "description": "Series as bars: side by side, stacked, below 0; rounded as the style rounds them (corners), coloured by series or by category; they grow in as they appear.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Data Display",
+    "category": "Charts",
     "hidden": true
   },
   {
@@ -188,7 +188,7 @@
     "description": "The parts every chart is made of, as shadcn/ui's: rows and series' names and colors, a plot with its grid, axes and cursor, a tooltip and a legend.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Data Display",
+    "category": "Charts",
     "hidden": true
   },
   {
@@ -442,7 +442,7 @@
     "description": "A series as stages, top to bottom, each as wide as its value, narrowing to the next.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Data Display",
+    "category": "Charts",
     "hidden": true
   },
   {
@@ -571,7 +571,7 @@
     "description": "Series as lines through their values: natural, linear, step or monotone; dots if you like.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Data Display",
+    "category": "Charts",
     "hidden": true
   },
   {
@@ -766,7 +766,7 @@
     "description": "A series as slices of a whole, each in its category's color: a pie, a donut with your text in its center, rings.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Data Display",
+    "category": "Charts",
     "hidden": true
   },
   {
@@ -825,7 +825,7 @@
     "description": "Series as polygons over the categories, each on its spoke: filled or outlined, with dots, on a polygon or circle grid.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Data Display",
+    "category": "Charts",
     "hidden": true
   },
   {
@@ -834,7 +834,7 @@
     "description": "A series as radial bars: a ring per row, its value as an arc — on a track, stacked, on a half circle with your text in its center.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Data Display",
+    "category": "Charts",
     "hidden": true
   },
   {
@@ -877,7 +877,7 @@
     "description": "Flows between nodes, each as thick as its value, the nodes in columns.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Data Display",
+    "category": "Charts",
     "hidden": true
   },
   {
@@ -886,7 +886,7 @@
     "description": "Points at two values, x and y — sized by a third: a bubble chart.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Data Display",
+    "category": "Charts",
     "hidden": true
   },
   {
@@ -1067,7 +1067,7 @@
     "description": "A series in two rings: its rows' groups inside, the rows around them.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Data Display",
+    "category": "Charts",
     "hidden": true
   },
   {
@@ -1237,7 +1237,7 @@
     "description": "A series as boxes, each as large as its value — in groups if you like.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Data Display",
+    "category": "Charts",
     "hidden": true
   },
   {

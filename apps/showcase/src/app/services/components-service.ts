@@ -20,12 +20,36 @@ export class ComponentsService {
       : this.components().filter((c) => !c.hidden),
   );
 
+  /** The components, charts aside (the sidebar lists those apart). */
   readonly visibleComponents = computed(() => {
     const all = this.listed();
     return all.filter(
-      (c) => c.category !== 'Utilities' && c.category !== 'Recipes',
+      (c) =>
+        c.category !== 'Utilities' &&
+        c.category !== 'Recipes' &&
+        c.category !== 'Charts',
     );
   });
+
+  /** The charts: the shared parts (Chart), then each type. */
+  readonly visibleCharts = computed(() => {
+    const all = this.listed();
+    return all
+      .filter((c) => c.category === 'Charts')
+      .sort((a, b) =>
+        a.path === 'chart'
+          ? -1
+          : b.path === 'chart'
+            ? 1
+            : a.name.localeCompare(b.name),
+      );
+  });
+
+  /** What the components pages list: the components and the charts. */
+  readonly visibleCatalog = computed(() => [
+    ...this.visibleComponents(),
+    ...this.visibleCharts(),
+  ]);
 
   readonly visibleUtilities = computed(() => {
     const all = this.listed();

@@ -47,6 +47,7 @@ import { ScInputButton, ScKbd, ScSeparator } from '@semantic-components/ui';
 import {
   SiBookOpenTextIcon,
   SiBoxIcon,
+  SiChartColumnIcon,
   SiChevronRightIcon,
   SiCookingPotIcon,
   SiDownloadIcon,
@@ -103,6 +104,7 @@ import { ConfigService } from '../../services/config-service';
     PageNav,
     SiBookOpenTextIcon,
     SiBoxIcon,
+    SiChartColumnIcon,
     SiCookingPotIcon,
     SiDownloadIcon,
     SiPanelLeftIcon,
@@ -300,6 +302,29 @@ import { ConfigService } from '../../services/config-service';
                     }
                   </ul>
                 </li>
+                @if (charts().length > 0) {
+                  <li scSidebarMenuItem>
+                    <a scSidebarMenuButton>
+                      <svg siChartColumnIcon></svg>
+                      <span>Charts</span>
+                    </a>
+                    <ul scSidebarMenuSub>
+                      @for (item of charts(); track item.path) {
+                        <li scSidebarMenuSubItem>
+                          <a
+                            scSidebarMenuSubButton
+                            [routerLink]="'/docs/components/' + item.path"
+                            routerLinkActive
+                            #chartRla="routerLinkActive"
+                            [active]="chartRla.isActive"
+                          >
+                            <span>{{ item.name }}</span>
+                          </a>
+                        </li>
+                      }
+                    </ul>
+                  </li>
+                }
                 @if (utilities().length > 0) {
                   <li scSidebarMenuItem>
                     <a scSidebarMenuButton>
@@ -459,6 +484,7 @@ export class DocsLayout {
     viewChild.required<ElementRef<HTMLElement>>('contentArea');
 
   readonly components = this.componentsService.visibleComponents;
+  readonly charts = this.componentsService.visibleCharts;
   readonly utilities = this.componentsService.visibleUtilities;
   readonly recipes = this.componentsService.visibleRecipes;
   /** shadcn's AI Elements: patterns built from the components. */
@@ -529,9 +555,15 @@ export class DocsLayout {
     { name: 'Internationalization', path: '/docs/getting-started/i18n' },
     { name: 'Right to left', path: '/docs/getting-started/rtl' },
     { name: 'MCP Server', path: '/docs/getting-started/mcp-server' },
-    ...[...this.components(), ...this.utilities(), ...this.recipes()].map(
-      (item) => ({ name: item.name, path: '/docs/components/' + item.path }),
-    ),
+    ...[
+      ...this.components(),
+      ...this.charts(),
+      ...this.utilities(),
+      ...this.recipes(),
+    ].map((item) => ({
+      name: item.name,
+      path: '/docs/components/' + item.path,
+    })),
     ...this.aiElements.map((item) => ({
       name: item.name,
       path: '/docs/ai-elements/' + item.path,
