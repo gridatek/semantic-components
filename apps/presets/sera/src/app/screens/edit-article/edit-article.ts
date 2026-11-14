@@ -19,7 +19,7 @@ import { EditorToolbar } from './editor-toolbar';
     >
       <app-edit-header />
       <div scSeparator class="hidden sm:block"></div>
-      <div class="w-full p-(--gap)">
+      <div class="w-full px-(--page-gutter) py-(--gap)">
         <div
           class="grid grid-cols-1 items-start gap-6 xl:grid-cols-[minmax(0,1fr)_300px]"
         >

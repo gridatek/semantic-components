@@ -22,7 +22,7 @@ import { MediaHeader } from './media-header';
       <app-media-header [(view)]="view" />
       <div scSeparator class="hidden sm:block"></div>
       <div
-        class="grid w-full grid-cols-1 items-start gap-(--gap) p-(--gap) xl:grid-cols-[minmax(0,1fr)_320px]"
+        class="grid w-full grid-cols-1 items-start gap-(--gap) px-(--page-gutter) py-(--gap) xl:grid-cols-[minmax(0,1fr)_320px]"
       >
         <app-asset-grid [(selected)]="selectedId" />
         <app-asset-details [asset]="selectedAsset()" />

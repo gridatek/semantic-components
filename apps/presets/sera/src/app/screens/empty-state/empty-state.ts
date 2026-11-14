@@ -13,7 +13,7 @@ import { EmptyHeader } from './empty-header';
     >
       <app-empty-header />
       <div scSeparator class="hidden sm:block"></div>
-      <div class="w-full p-(--gap)">
+      <div class="w-full px-(--page-gutter) py-(--gap)">
         <app-empty-directory />
       </div>
     </div>

@@ -42,7 +42,7 @@ import {
   ],
   template: `
     <header
-      class="mx-auto flex w-full flex-col items-center justify-center gap-(--gap) px-(--gap) py-(--gap) sm:flex-row sm:justify-between"
+      class="flex w-full flex-col items-center justify-center gap-(--gap) px-(--page-gutter) py-(--gap) sm:flex-row sm:justify-between"
     >
       <div class="flex flex-col gap-2 text-center sm:text-start">
         <nav scBreadcrumb aria-label="Breadcrumb">

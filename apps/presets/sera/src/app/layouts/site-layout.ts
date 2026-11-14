@@ -3,6 +3,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import {
   ScLink,
   ScNavbar,
+  ScNavbarActions,
   ScNavbarBrand,
   ScNavbarLink,
   ScNavbarMenu,
@@ -12,6 +13,7 @@ import {
   ScSeparator,
 } from '@semantic-components/ui';
 import { SiMenuIcon, SiXIcon } from '@semantic-icons/lucide-icons';
+import { ThemeMenu } from './theme-menu';
 
 /**
  * The Sera website (not shadcn's: its screens have no navigation): a header
@@ -23,20 +25,28 @@ import { SiMenuIcon, SiXIcon } from '@semantic-icons/lucide-icons';
     RouterLink,
     RouterLinkActive,
     RouterOutlet,
+    ScLink,
     ScNavbar,
+    ScNavbarActions,
     ScNavbarBrand,
     ScNavbarLink,
     ScNavbarMenu,
     ScNavbarMenuLink,
     ScNavbarNav,
-    ScLink,
     ScNavbarToggle,
     ScSeparator,
     SiMenuIcon,
     SiXIcon,
+    ThemeMenu,
   ],
   template: `
-    <header scNavbar #navbar="scNavbar" sticky aria-label="Sera">
+    <header
+      scNavbar
+      #navbar="scNavbar"
+      sticky
+      aria-label="Sera"
+      class="px-(--page-gutter) md:px-(--page-gutter)"
+    >
       <a scNavbarBrand routerLink="/" class="gap-2">
         <span
           class="bg-primary text-primary-foreground font-heading flex size-7 items-center justify-center text-base"
@@ -59,6 +69,10 @@ import { SiMenuIcon, SiXIcon } from '@semantic-icons/lucide-icons';
           </a>
         }
       </nav>
+
+      <div scNavbarActions>
+        <app-theme-menu />
+      </div>
 
       <button scNavbarToggle>
         @if (navbar.open()) {
@@ -93,7 +107,7 @@ import { SiMenuIcon, SiXIcon } from '@semantic-icons/lucide-icons';
 
     <footer class="bg-background border-t">
       <div
-        class="mx-auto flex w-full max-w-6xl flex-col gap-8 px-4 py-12 md:flex-row md:justify-between md:px-6"
+        class="flex w-full flex-col gap-8 px-(--page-gutter) py-12 md:flex-row md:justify-between"
       >
         <div class="flex max-w-sm flex-col gap-2">
           <p class="font-heading text-lg tracking-wide uppercase">Sera</p>
@@ -115,9 +129,7 @@ import { SiMenuIcon, SiXIcon } from '@semantic-icons/lucide-icons';
         </nav>
       </div>
       <div scSeparator></div>
-      <p
-        class="text-muted-foreground mx-auto w-full max-w-6xl px-4 py-6 text-xs md:px-6"
-      >
+      <p class="text-muted-foreground w-full px-(--page-gutter) py-6 text-xs">
         Design: shadcn/ui's Sera (MIT). Components: Semantic Components.
       </p>
     </footer>

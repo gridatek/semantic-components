@@ -105,8 +105,8 @@ const TRAFFIC = [
 export class TrafficOverview {
   protected readonly data = TRAFFIC;
   protected readonly config: ScChartConfig = {
-    views: { label: 'Views', color: 'var(--chart-5)' },
-    unique: { label: 'Unique', color: 'var(--chart-1)' },
+    views: { label: 'Views', color: 'var(--traffic-views)' },
+    unique: { label: 'Unique', color: 'var(--traffic-unique)' },
   };
 
   /** "Oct 1": the day, as shadcn writes it. */

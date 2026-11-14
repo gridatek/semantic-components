@@ -27,7 +27,9 @@ import { TrafficOverview } from './traffic-overview';
     >
       <app-analytics-header />
       <div scSeparator class="hidden sm:block"></div>
-      <div class="grid w-full grid-cols-12 gap-(--gap) p-(--gap)">
+      <div
+        class="grid w-full grid-cols-12 gap-(--gap) px-(--page-gutter) py-(--gap)"
+      >
         <app-metrics-grid />
         <app-traffic-overview
           class="col-span-full md:col-span-6 lg:col-span-8"

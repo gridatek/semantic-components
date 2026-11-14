@@ -3,7 +3,7 @@
 shadcn's Sera, rebuilt with Semantic Components as a small website: the same screens, colours and fonts, our components. This is an app — not the presets library (`libs/presets`), whose `sera` preset it uses.
 
 - **Source**: shadcn-ui/ui, `apps/v4/app/(app)/(styles)/sera` (MIT): six screens on `base-sera` — Audience Analytics, Article Directory, Empty State, Edit Article, Media Library, Media Library Table.
-- **Look**: the Sera preset (`app.config.ts`); shadcn's `taupe` theme (light only, as its screens), square corners, and its fonts — Playfair Display for headings, Noto Sans for the text — in `styles.css` and `index.html`.
+- **Look**: the Sera preset (`app.config.ts`); shadcn's `taupe` theme, light and dark, square corners, and its fonts — Playfair Display for headings, Noto Sans for the text — in `styles.css` and `index.html`.
 - **Charts**: the library's, as they are (Recharts' API).
 
 ```sh
@@ -12,7 +12,7 @@ npx nx serve sera   # http://localhost:4202
 
 ## The website
 
-A header (the Sera mark, the pages; a menu on a phone), the page, a footer — `layouts/site-layout.ts`. Not shadcn's: its screens have no navigation; the pages link to each other through them.
+A header (the Sera mark, the pages, the theme — Light, Dark, System, the library's `ScThemeManager`; a menu on a phone), the page, a footer — `layouts/site-layout.ts`. One width for every page: content up to 1400px, its sides the screens' `--gap` (1rem, 1.5rem from md, 2rem from xl) — `px-(--page-gutter)` on each full-width part (`styles.css`). Not shadcn's: its screens have no navigation; the pages link to each other through them.
 
 | Route           | Page                                                                                         | From (`src/app/`)                                        |
 | --------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
@@ -31,7 +31,8 @@ Each screen also has its own route, full page and without the site — to compar
 
 Each follows shadcn's file of the same name, with our parts. Where they differ, on purpose:
 
-- **No dark mode**, as shadcn's screens (its theme switcher is commented out).
+- **Dark mode from the header's menu**: shadcn's `.dark` taupe colours; its page has the switcher commented out. The traffic chart's colours follow shadcn's `theme: { light, dark }` through `--traffic-views` / `--traffic-unique`.
+- **One page width**: shadcn's screens are full width with their own `container`; here every page's content is on the same 1400px column.
 - **Dates with `Temporal`**, not `Date` and date-fns.
 - **Pagination keeps its own state**: shadcn's three static pages are `totalItems` / `pageSize`; Previous is disabled on page 1.
 - **One `h1` per screen**: Edit Article's article title is an `h2` (shadcn's is an `h1` under the page's `h1`).

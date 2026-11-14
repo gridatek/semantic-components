@@ -6,13 +6,13 @@
 
 /*
  * Sera as shadcn shows it (shadcn-ui/ui, apps/v4/app/(app)/(styles)/sera,
- * style.css): its `taupe` theme — warm greys, square corners, light only — and its fonts,
+ * style.css): its `taupe` theme — warm greys, square corners — and its fonts,
  * Playfair Display for headings and Noto Sans for the text (index.html loads
  * them). The components are ours, in the Sera preset (app.config.ts).
  */
 
-/* No dark mode, as shadcn's screens: `dark:` classes only under a `.dark`
-   class (none here), not the system's dark mode. */
+/* Dark under a `.dark` class on <html> (ScThemeManager: the header's
+   Light / Dark / System menu), not the system's on its own. */
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -58,8 +58,32 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-/* shadcn's `theme-taupe` (light: its screens have no dark mode), as the
-   whole app's theme. */
+/*
+ * One width for every page: content up to --page-max, its sides --gap from
+ * the edge (shadcn's screens' gap: 1rem, 1.5rem from md, 2rem from xl).
+ * px-(--page-gutter) on a full-width element: its background to the edges,
+ * its content on that column — the header, the sections, the screens alike.
+ */
+:root {
+  --page-max: 1400px;
+  --gap: 1rem;
+  --page-gutter: max(
+    var(--gap),
+    calc((100% - var(--page-max)) / 2 + var(--gap))
+  );
+}
+@media (width >= 48rem) {
+  :root {
+    --gap: 1.5rem;
+  }
+}
+@media (width >= 80rem) {
+  :root {
+    --gap: 2rem;
+  }
+}
+
+/* shadcn's `theme-taupe`, light and dark, as the whole app's theme. */
 :root {
   --radius: 0;
   --background: oklch(1 0 0);
@@ -93,6 +117,45 @@
   --sidebar-accent-foreground: oklch(0.214 0.009 43.1);
   --sidebar-border: oklch(0.922 0.005 34.3);
   --sidebar-ring: oklch(0.714 0.014 41.2);
+  /* The traffic chart's lines (shadcn's theme: { light, dark }). */
+  --traffic-views: var(--chart-5);
+  --traffic-unique: var(--chart-1);
+}
+
+.dark {
+  --background: oklch(0.147 0.004 49.3);
+  --foreground: oklch(0.986 0.002 67.8);
+  --card: oklch(0.214 0.009 43.1);
+  --card-foreground: oklch(0.986 0.002 67.8);
+  --popover: oklch(0.214 0.009 43.1);
+  --popover-foreground: oklch(0.986 0.002 67.8);
+  --primary: oklch(0.922 0.005 34.3);
+  --primary-foreground: oklch(0.214 0.009 43.1);
+  --secondary: oklch(0.268 0.011 36.5);
+  --secondary-foreground: oklch(0.986 0.002 67.8);
+  --muted: oklch(0.268 0.011 36.5);
+  --muted-foreground: oklch(0.714 0.014 41.2);
+  --accent: oklch(0.268 0.011 36.5);
+  --accent-foreground: oklch(0.986 0.002 67.8);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.547 0.021 43.1);
+  --chart-1: oklch(0.868 0.007 39.5);
+  --chart-2: oklch(0.547 0.021 43.1);
+  --chart-3: oklch(0.438 0.017 39.3);
+  --chart-4: oklch(0.367 0.016 35.7);
+  --chart-5: oklch(0.268 0.011 36.5);
+  --sidebar: oklch(0.214 0.009 43.1);
+  --sidebar-foreground: oklch(0.986 0.002 67.8);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.986 0.002 67.8);
+  --sidebar-accent: oklch(0.268 0.011 36.5);
+  --sidebar-accent-foreground: oklch(0.986 0.002 67.8);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.547 0.021 43.1);
+  --traffic-views: var(--chart-1);
+  --traffic-unique: var(--chart-2);
 }
 
 @layer base {

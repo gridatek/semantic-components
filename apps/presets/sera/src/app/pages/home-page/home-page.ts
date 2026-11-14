@@ -75,7 +75,7 @@ const PRINCIPLES = [
   ],
   template: `
     <section
-      class="mx-auto flex w-full max-w-6xl flex-col items-start gap-6 px-4 py-20 md:px-6 md:py-28"
+      class="flex w-full flex-col items-start gap-6 px-(--page-gutter) py-20 md:py-28"
     >
       <p
         class="text-muted-foreground text-xs font-semibold tracking-widest uppercase"
@@ -106,7 +106,7 @@ const PRINCIPLES = [
 
     <section aria-labelledby="inside" class="bg-muted w-full py-16">
       <!-- The band full width; its column as the other sections'. -->
-      <div class="mx-auto flex w-full max-w-6xl flex-col gap-8 px-4 md:px-6">
+      <div class="flex w-full flex-col gap-8 px-(--page-gutter)">
         <h2 id="inside" class="font-heading text-3xl tracking-wide uppercase">
           Inside
         </h2>
@@ -131,7 +131,7 @@ const PRINCIPLES = [
 
     <section
       aria-labelledby="issues"
-      class="mx-auto flex w-full max-w-6xl flex-col gap-8 px-4 py-16 md:px-6"
+      class="flex w-full flex-col gap-8 px-(--page-gutter) py-16"
     >
       <h2 id="issues" class="font-heading text-3xl tracking-wide uppercase">
         Issues
@@ -160,7 +160,7 @@ const PRINCIPLES = [
 
     <section
       aria-labelledby="style"
-      class="mx-auto flex w-full max-w-6xl flex-col gap-8 px-4 py-16 md:px-6"
+      class="flex w-full flex-col gap-8 px-(--page-gutter) py-16"
     >
       <h2 id="style" class="font-heading text-3xl tracking-wide uppercase">
         The style

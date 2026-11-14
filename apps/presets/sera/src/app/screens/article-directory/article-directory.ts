@@ -13,7 +13,7 @@ import { DirectoryHeader } from './directory-header';
     >
       <app-directory-header />
       <div scSeparator class="hidden sm:block"></div>
-      <div class="w-full p-(--gap)">
+      <div class="w-full px-(--page-gutter) py-(--gap)">
         <app-article-list [issue]="issue()" />
       </div>
     </div>

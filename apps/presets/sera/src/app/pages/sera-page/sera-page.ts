@@ -31,7 +31,7 @@ import { MediaLibrary } from '../../screens/media-library/media-library';
   ],
   template: `
     <header
-      class="mx-auto flex w-full flex-col items-start gap-2 px-4 py-12 md:px-6"
+      class="flex w-full flex-col items-start gap-2 px-(--page-gutter) py-12"
     >
       <h1 class="font-heading text-[2.875rem] leading-tight tracking-tight">
         Introducing Sera
