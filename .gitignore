@@ -50,3 +50,5 @@ __screenshots__/
 .nx/polygraph
 .nx/self-healing
 .nx/migrate-runs
+# The showcase's local settings (deploy.yml writes its own; see config.json.example)
+apps/showcase/public/config.json
