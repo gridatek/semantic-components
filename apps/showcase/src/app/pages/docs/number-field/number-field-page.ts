@@ -147,9 +147,10 @@ export default class NumberFieldPage {
     ].join('\n'),
     markup: [
       '<div scNumberField [(value)]="…">',
-      '  <label scLabel scNumberFieldScrubArea>…',
+      '  <div scNumberFieldScrubArea>',
+      '    <label scLabel>…</label>',
       '    <span scNumberFieldScrubAreaCursor>…</span>',
-      '  </label>',
+      '  </div>',
       '  <div scNumberFieldGroup>',
       '    <button scNumberFieldDecrement>…</button>',
       '    <input scNumberFieldInput />',
