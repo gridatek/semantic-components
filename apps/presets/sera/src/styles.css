@@ -1,5 +1,7 @@
 @import url('@angular/cdk/overlay-prebuilt.css');
 @import 'tailwindcss';
+/* The e2e specs' selectors aren't classes (`[data-slot=…]:visible` made invalid CSS). */
+@source not '../../../showcase-e2e';
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';
 @import '../../../../libs/ui/src/lib/styles/index.css';

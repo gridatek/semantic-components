@@ -14,6 +14,18 @@
         "command": "node scripts/validate-demo-code.mjs"
       }
     },
+    "sync-blocks-preset": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node scripts/sync-blocks-preset.mjs"
+      }
+    },
+    "validate-blocks-preset": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node scripts/sync-blocks-preset.mjs --check"
+      }
+    },
     "local-registry": {
       "executor": "@nx/js:verdaccio",
       "options": {
