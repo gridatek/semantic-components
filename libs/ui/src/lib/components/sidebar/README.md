@@ -10,7 +10,7 @@ An app's side panel, as shadcn's, in the look of the app's preset (the `sidebar`
 - **Ctrl/⌘+B** (`shortcut`, `null` to turn off)
 - **Phones** — a sheet: a named dialog, the focus kept inside, Escape closes it and gives the trigger back the focus; following a link closes it
 - **Collapsed to icons** — each button keeps its name (its hidden text); `tooltip` shows it in the Tooltip's own parts (`scTooltip`, `scTooltipArrow`), only then
-- **Its scrollbar shown** — the content shows a thin scrollbar when it has more than fits; `hideScrollbar` hides it (shadcn's look)
+- **Its scrollbar shown** — the content shows a thin scrollbar when it has more than fits, its room kept (`scrollbar-gutter: stable`) so the menus don't shift as it comes and goes; `hideScrollbar` hides it (shadcn's look)
 - **Landmarks you choose** — on an `aside`, the whole sidebar is a named landmark (complementary), header and footer included; on a `div`, none. Either way the navigation is the named `nav` you put in it
 
 ## Quick Start

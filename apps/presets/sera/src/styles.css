@@ -164,6 +164,8 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    /* Not shadcn's: lets heights animate to and from auto (collapsible, accordion). */
+    interpolate-size: allow-keywords;
   }
   body {
     @apply bg-background text-foreground;

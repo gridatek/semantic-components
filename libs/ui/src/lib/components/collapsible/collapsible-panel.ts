@@ -1,20 +1,23 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   Directive,
+  afterNextRender,
   booleanAttribute,
   computed,
   effect,
   inject,
   input,
   linkedSignal,
+  signal,
 } from '@angular/core';
 import { cn } from 'cn';
 import { ScCollapsible } from './collapsible';
 
 /**
- * The content its trigger shows and hides, written inside it. Closed, it is
- * hidden and its height animates to nothing; with `hiddenUntilFound`, the
- * browser's find-in-page still searches it, and a match opens it.
+ * The content its trigger shows and hides, written inside it. It opens and
+ * closes with shadcn's animation (tw-animate's collapsible-down / -up, its
+ * height to and from auto); closed, it is hidden — with `hiddenUntilFound`,
+ * the browser's find-in-page still searches it, and a match opens it.
  */
 @Directive({
   selector: 'div[scCollapsiblePanel]',
@@ -26,7 +29,7 @@ import { ScCollapsible } from './collapsible';
     '[attr.data-closed]': 'collapsible.open() ? null : ""',
     '[class]': 'class()',
     '(beforematch)': 'collapsible.open.set(true)',
-    '(transitionend)': 'onTransitionEnd($event)',
+    '(animationend)': 'onAnimationEnd($event)',
   },
 })
 export class ScCollapsiblePanel {
@@ -42,17 +45,20 @@ export class ScCollapsiblePanel {
 
   protected readonly id = computed(() => this.idInput() || this.fallbackId);
 
+  /** After its first render: what is open or closed then doesn't animate. */
+  private readonly rendered = signal(false);
+
   /**
-   * Just closed, searchable: its height still on the way to nothing. Its
-   * hidden="until-found" waits for that — it would make its height 0 at once
-   * (the browser gives it size containment), where hidden="" lets the
-   * transition keep its display until the end.
+   * Just closed: its height on the way to nothing. The hidden attribute waits
+   * for the end — it would hide it at once (display: none, or the size
+   * containment of hidden="until-found").
    */
   private readonly closing = linkedSignal<boolean, boolean>({
     source: () => this.collapsible.open(),
     computation: (open, previous) =>
-      !open && previous?.source === true && this.hiddenUntilFound(),
+      !open && previous?.source === true && this.rendered(),
   });
+
   /**
    * Closed: the hidden attribute (Tailwind's base keeps it display: none over
    * any display class); searchable, the browser's hidden="until-found".
@@ -64,10 +70,11 @@ export class ScCollapsiblePanel {
 
   protected readonly class = computed(() =>
     cn(
-      // Open and close: the height, to and from auto (the global
-      // interpolate-size), and the display the hidden attribute sets.
-      'overflow-hidden transition-[height,display] transition-discrete duration-200 ease-out starting:h-0 motion-reduce:transition-none',
-      this.collapsible.open() ? 'h-auto' : 'h-0',
+      'overflow-hidden',
+      // shadcn's: tw-animate's keyframes, to and from height: auto (the
+      // global interpolate-size: allow-keywords).
+      this.rendered() &&
+        'data-open:animate-collapsible-down data-closed:animate-collapsible-up motion-reduce:animate-none',
       this.classInput(),
     ),
   );
@@ -75,7 +82,8 @@ export class ScCollapsiblePanel {
   constructor() {
     // Its id for the trigger's aria-controls.
     effect(() => this.collapsible.panelId.set(this.id()));
-    // No transition to end it (reduced motion, none of yours): hidden anyway.
+    afterNextRender(() => this.rendered.set(true));
+    // No animation to end it (reduced motion, yours off): hidden anyway.
     effect((onCleanup) => {
       if (!this.closing()) return;
       const timer = setTimeout(() => this.closing.set(false), 400);
@@ -83,8 +91,8 @@ export class ScCollapsiblePanel {
     });
   }
 
-  protected onTransitionEnd(event: TransitionEvent): void {
-    if (event.target === event.currentTarget && event.propertyName === 'height')
+  protected onAnimationEnd(event: AnimationEvent): void {
+    if (event.target === event.currentTarget && !this.collapsible.open())
       this.closing.set(false);
   }
 }

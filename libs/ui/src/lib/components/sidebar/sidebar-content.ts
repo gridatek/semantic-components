@@ -19,7 +19,11 @@ export class ScSidebarContent {
   protected readonly class = computed(() =>
     cn(
       this.styles.content,
-      this.hideScrollbar() ? 'no-scrollbar' : '[scrollbar-width:thin]',
+      // Its scrollbar's room kept: the menus don't shift when it comes and
+      // goes (a group opening past the bottom, closing back).
+      this.hideScrollbar()
+        ? 'no-scrollbar'
+        : '[scrollbar-width:thin] [scrollbar-gutter:stable]',
       this.classInput(),
     ),
   );
