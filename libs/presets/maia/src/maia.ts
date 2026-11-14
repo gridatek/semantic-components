@@ -12,6 +12,7 @@ import { button } from './button';
 import { calendar } from './calendar';
 import { card } from './card';
 import { carousel } from './carousel';
+import { chart } from './chart';
 import { checkbox } from './checkbox';
 import { codeBlock } from './code-block';
 import { combobox } from './combobox';
@@ -80,6 +81,7 @@ export const maia: ScPreset = {
   calendar,
   card,
   carousel,
+  chart,
   checkbox,
   codeBlock,
   combobox,

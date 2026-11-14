@@ -7,6 +7,7 @@ import {
   inject,
   input,
 } from '@angular/core';
+import { injectPreset } from '@semantic-components/ui';
 import { cn } from 'cn';
 import { ScChartState, numberOf } from './chart-state';
 import type { ScChartIndicator } from './chart-types';
@@ -68,6 +69,7 @@ interface ScChartTooltipRow {
 })
 export class ScChartTooltip {
   private readonly state = inject(ScChartState);
+  private readonly tooltipStyles = injectPreset().chart.tooltip;
   private readonly numbers = new Intl.NumberFormat(inject(LOCALE_ID));
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -150,7 +152,9 @@ export class ScChartTooltip {
 
   protected readonly class = computed(() =>
     cn(
-      'border-border/50 bg-background pointer-events-none absolute z-10 grid min-w-32 items-start gap-1.5 rounded-lg border px-2.5 py-1.5 text-xs shadow-xl data-[state=closed]:invisible',
+      // Its place: the preset's box (shadcn's, per style), over the plot.
+      'pointer-events-none absolute z-10 data-[state=closed]:invisible',
+      this.tooltipStyles,
       this.classInput(),
     ),
   );

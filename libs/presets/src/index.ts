@@ -79,6 +79,12 @@ export interface ScBreadcrumbStyles {
   ellipsis: string;
 }
 
+/** A chart's parts that change from style to style: only the tooltip's box, as shadcn's. */
+export interface ScChartStyles {
+  /** The tooltip: its corners, border or ring, background and shadow. */
+  tooltip: string;
+}
+
 /** A card's parts that change from style to style (its action is the same in all). */
 export interface ScCardStyles {
   /** The card: its text, background and `--card-spacing` (its radius, ring and shadow are `frame`). */
@@ -609,6 +615,7 @@ export interface ScPreset {
   card: ScCardStyles;
   /** A carousel's previous and next buttons: their corners. */
   carousel: string;
+  chart: ScChartStyles;
   checkbox: ScCheckboxStyles;
   codeBlock: ScCodeBlockStyles;
   combobox: ScComboboxStyles;
