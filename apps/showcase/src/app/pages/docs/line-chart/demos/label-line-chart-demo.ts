@@ -1,3 +1,4 @@
+import { DecimalPipe } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScChart,
@@ -9,6 +10,11 @@ import {
   ScChartLine,
   ScChartPlot,
   ScChartTooltip,
+  ScChartTooltipIndicator,
+  ScChartTooltipItem,
+  ScChartTooltipLabel,
+  ScChartTooltipName,
+  ScChartTooltipValue,
 } from '@semantic-components/ui/charts';
 
 @Component({
@@ -22,6 +28,12 @@ import {
     ScChartLine,
     ScChartLabels,
     ScChartTooltip,
+    DecimalPipe,
+    ScChartTooltipLabel,
+    ScChartTooltipIndicator,
+    ScChartTooltipItem,
+    ScChartTooltipName,
+    ScChartTooltipValue,
   ],
   template: `
     <div scChart [config]="config" [data]="data">
@@ -38,7 +50,16 @@ import {
           <g scChartLabels [offset]="12" />
         </g>
       </svg>
-      <div scChartTooltip indicator="line"></div>
+      <div scChartTooltip #tooltip="scChartTooltip">
+        <div scChartTooltipLabel>{{ tooltip.label() }}</div>
+        @for (item of tooltip.payload(); track item.dataKey) {
+          <div scChartTooltipItem [item]="item">
+            <span scChartTooltipIndicator variant="line"></span>
+            <span scChartTooltipName>{{ item.name }}</span>
+            <span scChartTooltipValue>{{ item.value | number }}</span>
+          </div>
+        }
+      </div>
     </div>
   `,
   host: { class: 'block w-full max-w-xl' },

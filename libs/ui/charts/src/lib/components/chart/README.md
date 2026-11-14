@@ -15,8 +15,24 @@ Recharts' API, shadcn's look, our drawing: before fixing a bug, writing these do
     <g scChartBar key="desktop" stack="a" [radius]="[0, 0, 4, 4]" />
     <g scChartBar key="mobile" stack="a" [radius]="[4, 4, 0, 0]" />
   </svg>
-  <div scChartTooltip indicator="dashed"></div>
-  <div scChartLegend></div>
+  <div scChartTooltip #tooltip="scChartTooltip">
+    <div scChartTooltipLabel>{{ tooltip.label() }}</div>
+    @for (item of tooltip.payload(); track item.dataKey) {
+    <div scChartTooltipItem [item]="item">
+      <span scChartTooltipIndicator variant="dashed"></span>
+      <span scChartTooltipName>{{ item.name }}</span>
+      <span scChartTooltipValue>{{ item.value | number }}</span>
+    </div>
+    }
+  </div>
+  <div scChartLegend #legend="scChartLegend">
+    @for (item of legend.payload(); track item.dataKey) {
+    <div scChartLegendItem [item]="item">
+      <span scChartLegendIndicator></span>
+      {{ item.name }}
+    </div>
+    }
+  </div>
 </div>
 ```
 
@@ -37,27 +53,53 @@ Each row has its category (`categoryKey`) and a value per series. The config nam
 
 The series have their own folders: [area](../area-chart/README.md), [bar](../bar-chart/README.md), [line](../line-chart/README.md), [pie](../pie-chart/README.md), [radial](../radial-chart/README.md), [radar](../radar-chart/README.md), [scatter](../scatter-chart/README.md), [funnel](../funnel-chart/README.md), [treemap](../../../../treemap/src/lib/components/treemap-chart/README.md), [sunburst](../sunburst-chart/README.md), [sankey](../../../../sankey/src/lib/components/sankey-chart/README.md). Treemap and sankey are entry points of their own (`@semantic-components/ui/charts/treemap`, `…/sankey`): they need one more d3 library each (`d3-hierarchy`, `d3-sankey`), which the other charts shouldn't.
 
-| Part                       | Inputs                                                                                                                                                                                                                                                                                                                                             |
-| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `div[scChart]`             | `data`, `config`                                                                                                                                                                                                                                                                                                                                   |
-| `svg[scChartPlot]`         | `categoryKey` (required), `margin` (as Recharts: 5 on each side without one; the sides a given one leaves out are 0), `layout` (`horizontal` \| `vertical`: categories down the side, bars across), `stackOffset` (`none` \| `expand`: to 100%); polar charts: `startAngle`, `endAngle` (degrees, 0 at the top, clockwise); name it (`aria-label`) |
-| `g[scChartGrid]`           | `horizontal` (true), `vertical` (false) — its lines at the value axis's ticks, as Recharts' grid                                                                                                                                                                                                                                                   |
-| `g[scChartCategoryAxis]`   | The categories, under the plot (beside it, laid out `vertical`): `tickFormatter(category, index)`, `width` (60, beside) — evenly skipped when they don't fit                                                                                                                                                                                       |
-| `g[scChartValueAxis]`      | The values, beside the plot (under it, laid out `vertical`): `width` (40), `tickCount` (5: Recharts' nice ticks, which also set the value domain — 0 to 320 for values up to 305), `tickFormatter(value)` — the app's locale by default                                                                                                            |
-| `g[scChartCursor]`         | — a band behind bars, a line across points                                                                                                                                                                                                                                                                                                         |
-| `g[scChartPolarGrid]`      | Polar charts: `shape` (`polygon` \| `circle`), `ringCount` (4), `spokes` (true)                                                                                                                                                                                                                                                                    |
-| `g[scChartPolarAngleAxis]` | A radar's categories around it: `tickFormatter(category, index)`                                                                                                                                                                                                                                                                                   |
-| `g[scChartCenter]`         | A polar chart's center: your SVG at (0, 0) — a donut's total                                                                                                                                                                                                                                                                                       |
-| `g[scChartLabels]`         | Inside a series: its values written on the chart — `position` (`outside` \| `inside` \| `start`), `offset` (8), `formatter(value, category, index)`                                                                                                                                                                                                |
-| `div[scChartTooltip]`      | `indicator` (`dot` \| `line` \| `dashed`), `hideLabel`, `hideIndicator`, `labelFormatter`, `valueFormatter`                                                                                                                                                                                                                                        |
-| `div[scChartLegend]`       | — each series' color and name                                                                                                                                                                                                                                                                                                                      |
+| Part                                              | Inputs                                                                                                                                                                                                                                                                                                                                             |
+| ------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `div[scChart]`                                    | `data`, `config`                                                                                                                                                                                                                                                                                                                                   |
+| `svg[scChartPlot]`                                | `categoryKey` (required), `margin` (as Recharts: 5 on each side without one; the sides a given one leaves out are 0), `layout` (`horizontal` \| `vertical`: categories down the side, bars across), `stackOffset` (`none` \| `expand`: to 100%); polar charts: `startAngle`, `endAngle` (degrees, 0 at the top, clockwise); name it (`aria-label`) |
+| `g[scChartGrid]`                                  | `horizontal` (true), `vertical` (false) — its lines at the value axis's ticks, as Recharts' grid                                                                                                                                                                                                                                                   |
+| `g[scChartCategoryAxis]`                          | The categories, under the plot (beside it, laid out `vertical`): `tickFormatter(category, index)`, `width` (60, beside) — evenly skipped when they don't fit                                                                                                                                                                                       |
+| `g[scChartValueAxis]`                             | The values, beside the plot (under it, laid out `vertical`): `width` (40), `tickCount` (5: Recharts' nice ticks, which also set the value domain — 0 to 320 for values up to 305), `tickFormatter(value)` — the app's locale by default                                                                                                            |
+| `g[scChartCursor]`                                | — a band behind bars, a line across points                                                                                                                                                                                                                                                                                                         |
+| `g[scChartPolarGrid]`                             | Polar charts: `shape` (`polygon` \| `circle`), `ringCount` (4), `spokes` (true)                                                                                                                                                                                                                                                                    |
+| `g[scChartPolarAngleAxis]`                        | A radar's categories around it: `tickFormatter(category, index)`                                                                                                                                                                                                                                                                                   |
+| `g[scChartCenter]`                                | A polar chart's center: your SVG at (0, 0) — a donut's total                                                                                                                                                                                                                                                                                       |
+| `g[scChartLabels]`                                | Inside a series: its values written on the chart — `position` (`outside` \| `inside` \| `start`), `offset` (8), `formatter(value, category, index)`                                                                                                                                                                                                |
+| `div[scChartTooltip]`                             | The tooltip's box beside the active category, in the preset's look (`exportAs: scChartTooltip`): `active()`, `label()` (the category), `payload()` (an item per series: `dataKey`, `name`, `value`, `color`) — see [Tooltip and legend](#tooltip-and-legend)                                                                                       |
+| `[scChartTooltipLabel]`                           | The tooltip's title: write the category                                                                                                                                                                                                                                                                                                            |
+| `[scChartTooltipItem]`                            | A row: `item` (one of `payload()`) — its indicator takes its colour                                                                                                                                                                                                                                                                                |
+| `[scChartTooltipIndicator]`                       | The row's mark: `variant` (`dot`                                                                                                                                                                                                                                                                                                                   | `line` | `dashed`) |
+| `[scChartTooltipName]`, `[scChartTooltipValue]`   | The row's name (muted) and value (at its end, tabular figures): write them                                                                                                                                                                                                                                                                         |
+| `div[scChartLegend]`                              | The legend's row (`exportAs: scChartLegend`): `payload()` — the series, or a pie's categories, a sunburst's groups, a sankey's nodes (`dataKey`, `name`, `color`)                                                                                                                                                                                  |
+| `[scChartLegendItem]`, `[scChartLegendIndicator]` | An entry: `item` (one of `payload()`), and its colour swatch                                                                                                                                                                                                                                                                                       |
 
 Series with the same `stack` are drawn on one another; values below 0 go down (diverging stacks).
+
+## Tooltip and legend
+
+You write what they show, from their state — Recharts' `content`, as parts: `label()` and `payload()` on the tooltip, `payload()` on the legend, with Recharts' names. A part you leave out isn't there: no label (a pie's single value), no indicator. The text is yours, so formatting is too — a pipe or a function of yours:
+
+```html
+<div scChartTooltip #tooltip="scChartTooltip">
+  <div scChartTooltipLabel>{{ day(tooltip.label()) }}</div>
+  @for (item of tooltip.payload(); track item.dataKey) {
+  <div scChartTooltipItem [item]="item">
+    <span scChartTooltipIndicator variant="line"></span>
+    <span scChartTooltipName>{{ item.name }}</span>
+    <span scChartTooltipValue>{{ item.value | currency: 'EUR' }}</span>
+  </div>
+  }
+</div>
+```
+
+- **The values are raw numbers**: `| number` writes them in the app's locale (its `LOCALE_ID`).
+- **The tooltip's box** is the preset's (`chart.tooltip`): its corners, border or ring, shadow — shadcn's, style by style. Your `class` adds to it.
+- **Names and colours** come from the chart's `config`; a pie's slice, a radial bar are named and coloured by their category.
 
 ## Keyboard and screen readers
 
 - The plot is one tab stop (`role="group"`, named by its `aria-label`): on focus, the first category; ←/→ (↑/↓), Home and End move between categories; Escape closes the tooltip.
-- The tooltip is a polite live region: as the keyboard moves, screen readers hear the category and its values.
+- The tooltip is a polite live region: as the keyboard moves, screen readers hear what you wrote in it — the category and its values. The indicators are hidden from them.
 - The axes, grid and cursor are hidden from assistive technology: the tooltip says what they show.
 
 ## Labels

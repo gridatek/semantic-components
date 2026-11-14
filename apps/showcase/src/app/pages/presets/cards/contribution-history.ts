@@ -1,3 +1,4 @@
+import { DecimalPipe } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
@@ -18,6 +19,10 @@ import {
   type ScChartConfig,
   ScChartPlot,
   ScChartTooltip,
+  ScChartTooltipIndicator,
+  ScChartTooltipItem,
+  ScChartTooltipName,
+  ScChartTooltipValue,
 } from '@semantic-components/ui/charts';
 
 /** Six months of contributions as bars, then what comes next. */
@@ -36,6 +41,11 @@ import {
     ScChartCategoryAxis,
     ScChartPlot,
     ScChartTooltip,
+    DecimalPipe,
+    ScChartTooltipIndicator,
+    ScChartTooltipItem,
+    ScChartTooltipName,
+    ScChartTooltipValue,
     ScItem,
     ScItemBody,
     ScItemDescription,
@@ -62,7 +72,15 @@ import {
               [maxBarSize]="40"
             />
           </svg>
-          <div scChartTooltip hideLabel class="min-w-40"></div>
+          <div scChartTooltip #tooltip="scChartTooltip" class="min-w-40">
+            @for (item of tooltip.payload(); track item.dataKey) {
+              <div scChartTooltipItem [item]="item">
+                <span scChartTooltipIndicator></span>
+                <span scChartTooltipName>{{ item.name }}</span>
+                <span scChartTooltipValue>{{ item.value | number }}</span>
+              </div>
+            }
+          </div>
         </div>
       </div>
       <div scCardBody>

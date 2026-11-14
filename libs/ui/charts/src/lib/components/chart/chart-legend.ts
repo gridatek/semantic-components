@@ -1,44 +1,28 @@
-import {
-  Component,
-  ViewEncapsulation,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
 import { ScChartState } from './chart-state';
+import type { ScChartLegendPayload } from './chart-types';
 
 /**
- * The series of the plot — or, for a pie's slices and radial bars, the
- * categories; a sunburst's groups, a sankey's nodes: each one's color and
- * name (the chart's `config`).
+ * The legend's row. Its `payload()` is what it lists — the series of the plot
+ * or, for a pie's slices and radial bars, the categories; a sunburst's
+ * groups, a sankey's nodes — each with its name (the chart's `config`) and
+ * colour. You write an item per entry, with `scChartLegendItem`.
  */
-@Component({
+@Directive({
   selector: 'div[scChartLegend]',
-  template: `
-    @for (item of items(); track item.key) {
-      <div class="flex items-center gap-1.5">
-        <div
-          aria-hidden="true"
-          class="size-2 shrink-0 rounded-[2px]"
-          [style.background-color]="item.color"
-        ></div>
-        {{ item.name }}
-      </div>
-    }
-  `,
+  exportAs: 'scChartLegend',
   host: {
     'data-slot': 'chart-legend',
     '[class]': 'class()',
   },
-  encapsulation: ViewEncapsulation.None,
 })
 export class ScChartLegend {
   private readonly state = inject(ScChartState);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly items = computed(() => {
+  readonly payload = computed<ScChartLegendPayload[]>(() => {
     const config = this.state.config();
     // A series' own list (groups, nodes); a pie's slices, radial bars: their
     // categories.
@@ -46,13 +30,13 @@ export class ScChartLegend {
       .series()
       .find((s) => s.legend)
       ?.legend?.();
-    const names =
+    const keys =
       own ??
       (this.state.categoryKeys().size
         ? [...new Set(this.state.categories())]
         : this.state.keys());
-    return names.map((key) => ({
-      key,
+    return keys.map((key) => ({
+      dataKey: key,
       name: config[key]?.label ?? key,
       color: `var(--color-${key})`,
     }));

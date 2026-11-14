@@ -14,7 +14,9 @@ tooltip and legend around it. Ours (`ui/charts`) take Recharts' API — composab
 parts, their option names, their chart types — and shadcn's look, but the
 drawing is our own: d3 for the maths (scales, shapes, stacks, the treemap and
 sankey layouts), Angular templates and signals for the SVG. Recharts' code isn't
-used; it's React.
+used; it's React. The tooltip's and legend's contents are Recharts' `content`
+as parts: you write them from their `label()` and `payload()` (Recharts' names),
+where shadcn's `ChartTooltipContent` takes props.
 
 | Library                                          | What to read                                                                                                                                                                                                                               |
 | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |

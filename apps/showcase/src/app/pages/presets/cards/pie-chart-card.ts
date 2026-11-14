@@ -1,3 +1,4 @@
+import { DecimalPipe } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScBadge,
@@ -17,9 +18,15 @@ import {
   ScChartCenter,
   type ScChartConfig,
   ScChartLegend,
+  ScChartLegendIndicator,
+  ScChartLegendItem,
   ScChartPie,
   ScChartPlot,
   ScChartTooltip,
+  ScChartTooltipIndicator,
+  ScChartTooltipItem,
+  ScChartTooltipName,
+  ScChartTooltipValue,
 } from '@semantic-components/ui/charts';
 
 const DATA = [
@@ -48,6 +55,13 @@ const TOP = DATA.reduce((max, row) =>
     ScChart,
     ScChartCenter,
     ScChartLegend,
+    DecimalPipe,
+    ScChartTooltipIndicator,
+    ScChartTooltipItem,
+    ScChartTooltipName,
+    ScChartTooltipValue,
+    ScChartLegendItem,
+    ScChartLegendIndicator,
     ScChartPie,
     ScChartPlot,
     ScChartTooltip,
@@ -93,8 +107,23 @@ const TOP = DATA.reduce((max, row) =>
               </text>
             </g>
           </svg>
-          <div scChartTooltip hideLabel></div>
-          <div scChartLegend class="translate-y-2"></div>
+          <div scChartTooltip #tooltip="scChartTooltip">
+            @for (item of tooltip.payload(); track item.dataKey) {
+              <div scChartTooltipItem [item]="item">
+                <span scChartTooltipIndicator></span>
+                <span scChartTooltipName>{{ item.name }}</span>
+                <span scChartTooltipValue>{{ item.value | number }}</span>
+              </div>
+            }
+          </div>
+          <div scChartLegend #legend="scChartLegend" class="translate-y-2">
+            @for (item of legend.payload(); track item.dataKey) {
+              <div scChartLegendItem [item]="item">
+                <span scChartLegendIndicator></span>
+                {{ item.name }}
+              </div>
+            }
+          </div>
         </div>
       </div>
       <div scCardFooter class="flex-col items-stretch gap-2">

@@ -18,7 +18,8 @@ import { LabelSunburstChartDemo } from './label-sunburst-chart-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class LabelSunburstChartDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { DecimalPipe } from '@angular/common';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScChart,
   type ScChartConfig,
@@ -26,6 +27,11 @@ import {
   ScChartPlot,
   ScChartSunburst,
   ScChartTooltip,
+  ScChartTooltipIndicator,
+  ScChartTooltipItem,
+  ScChartTooltipLabel,
+  ScChartTooltipName,
+  ScChartTooltipValue,
 } from '@semantic-components/ui/charts';
 
 @Component({
@@ -36,6 +42,12 @@ import {
     ScChartSunburst,
     ScChartLabels,
     ScChartTooltip,
+    DecimalPipe,
+    ScChartTooltipLabel,
+    ScChartTooltipIndicator,
+    ScChartTooltipItem,
+    ScChartTooltipName,
+    ScChartTooltipValue,
   ],
   template: \`
     <div
@@ -54,7 +66,16 @@ import {
           <g scChartLabels position="outside" [formatter]="name" />
         </g>
       </svg>
-      <div scChartTooltip></div>
+      <div scChartTooltip #tooltip="scChartTooltip">
+        <div scChartTooltipLabel>{{ tooltip.label() }}</div>
+        @for (item of tooltip.payload(); track item.dataKey) {
+          <div scChartTooltipItem [item]="item">
+            <span scChartTooltipIndicator></span>
+            <span scChartTooltipName>{{ item.name }}</span>
+            <span scChartTooltipValue>{{ item.value | number }}</span>
+          </div>
+        }
+      </div>
     </div>
   \`,
   host: { class: 'block w-full max-w-xl' },

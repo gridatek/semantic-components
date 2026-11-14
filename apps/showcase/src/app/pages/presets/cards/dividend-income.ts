@@ -1,3 +1,4 @@
+import { DecimalPipe } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
@@ -19,6 +20,10 @@ import {
   type ScChartConfig,
   ScChartPlot,
   ScChartTooltip,
+  ScChartTooltipIndicator,
+  ScChartTooltipItem,
+  ScChartTooltipName,
+  ScChartTooltipValue,
 } from '@semantic-components/ui/charts';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
@@ -37,6 +42,11 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
     ScChartBar,
     ScChartPlot,
     ScChartTooltip,
+    DecimalPipe,
+    ScChartTooltipIndicator,
+    ScChartTooltipItem,
+    ScChartTooltipName,
+    ScChartTooltipValue,
     ScItem,
     ScItemBody,
     ScItemDescription,
@@ -80,7 +90,15 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
                 >
                   <g scChartBar key="value" [radius]="[3, 3, 0, 0]" />
                 </svg>
-                <div scChartTooltip hideLabel></div>
+                <div scChartTooltip #tooltip="scChartTooltip">
+                  @for (item of tooltip.payload(); track item.dataKey) {
+                    <div scChartTooltipItem [item]="item">
+                      <span scChartTooltipIndicator></span>
+                      <span scChartTooltipName>{{ item.name }}</span>
+                      <span scChartTooltipValue>{{ item.value | number }}</span>
+                    </div>
+                  }
+                </div>
               </div>
               <span
                 class="hidden text-sm font-semibold tabular-nums md:block"

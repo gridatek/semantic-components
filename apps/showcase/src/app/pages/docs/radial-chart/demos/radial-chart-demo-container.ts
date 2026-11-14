@@ -18,18 +18,33 @@ import { RadialChartDemo } from './radial-chart-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RadialChartDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { DecimalPipe } from '@angular/common';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScChart,
   type ScChartConfig,
   ScChartPlot,
   ScChartRadialBar,
   ScChartTooltip,
+  ScChartTooltipIndicator,
+  ScChartTooltipItem,
+  ScChartTooltipName,
+  ScChartTooltipValue,
 } from '@semantic-components/ui/charts';
 
 @Component({
   selector: 'app-radial-chart-demo',
-  imports: [ScChart, ScChartPlot, ScChartRadialBar, ScChartTooltip],
+  imports: [
+    ScChart,
+    ScChartPlot,
+    ScChartRadialBar,
+    ScChartTooltip,
+    DecimalPipe,
+    ScChartTooltipIndicator,
+    ScChartTooltipItem,
+    ScChartTooltipName,
+    ScChartTooltipValue,
+  ],
   template: \`
     <div
       scChart
@@ -46,7 +61,15 @@ import {
           [cornerRadius]="6"
         />
       </svg>
-      <div scChartTooltip hideLabel></div>
+      <div scChartTooltip #tooltip="scChartTooltip">
+        @for (item of tooltip.payload(); track item.dataKey) {
+          <div scChartTooltipItem [item]="item">
+            <span scChartTooltipIndicator></span>
+            <span scChartTooltipName>{{ item.name }}</span>
+            <span scChartTooltipValue>{{ item.value | number }}</span>
+          </div>
+        }
+      </div>
     </div>
   \`,
   host: { class: 'block w-full max-w-xl' },

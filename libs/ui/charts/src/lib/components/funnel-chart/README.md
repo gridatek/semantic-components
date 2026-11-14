@@ -9,7 +9,15 @@ A series as a funnel: a stage per row, top to bottom, each as wide as its value 
       <g scChartLabels position="inside" />
     </g>
   </svg>
-  <div scChartTooltip hideLabel></div>
+  <div scChartTooltip #tooltip="scChartTooltip">
+    @for (item of tooltip.payload(); track item.dataKey) {
+    <div scChartTooltipItem [item]="item">
+      <span scChartTooltipIndicator></span>
+      <span scChartTooltipName>{{ item.name }}</span>
+      <span scChartTooltipValue>{{ item.value | number }}</span>
+    </div>
+    }
+  </div>
 </div>
 ```
 

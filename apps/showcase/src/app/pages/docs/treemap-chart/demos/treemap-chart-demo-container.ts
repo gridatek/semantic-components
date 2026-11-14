@@ -18,13 +18,18 @@ import { TreemapChartDemo } from './treemap-chart-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class TreemapChartDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { DecimalPipe } from '@angular/common';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScChart,
   type ScChartConfig,
   ScChartLabels,
   ScChartPlot,
   ScChartTooltip,
+  ScChartTooltipIndicator,
+  ScChartTooltipItem,
+  ScChartTooltipName,
+  ScChartTooltipValue,
 } from '@semantic-components/ui/charts';
 import { ScChartTreemap } from '@semantic-components/ui/charts/treemap';
 
@@ -36,6 +41,11 @@ import { ScChartTreemap } from '@semantic-components/ui/charts/treemap';
     ScChartTreemap,
     ScChartLabels,
     ScChartTooltip,
+    DecimalPipe,
+    ScChartTooltipIndicator,
+    ScChartTooltipItem,
+    ScChartTooltipName,
+    ScChartTooltipValue,
   ],
   template: \`
     <div scChart class="aspect-video max-h-72" [config]="config" [data]="data">
@@ -49,7 +59,15 @@ import { ScChartTreemap } from '@semantic-components/ui/charts/treemap';
           />
         </g>
       </svg>
-      <div scChartTooltip hideLabel></div>
+      <div scChartTooltip #tooltip="scChartTooltip">
+        @for (item of tooltip.payload(); track item.dataKey) {
+          <div scChartTooltipItem [item]="item">
+            <span scChartTooltipIndicator></span>
+            <span scChartTooltipName>{{ item.name }}</span>
+            <span scChartTooltipValue>{{ item.value | number }}</span>
+          </div>
+        }
+      </div>
     </div>
   \`,
   host: { class: 'block w-full max-w-xl' },

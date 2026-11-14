@@ -18,14 +18,22 @@ import { GroupedTreemapChartDemo } from './grouped-treemap-chart-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class GroupedTreemapChartDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { DecimalPipe } from '@angular/common';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScChart,
   type ScChartConfig,
   ScChartLabels,
   ScChartLegend,
+  ScChartLegendIndicator,
+  ScChartLegendItem,
   ScChartPlot,
   ScChartTooltip,
+  ScChartTooltipIndicator,
+  ScChartTooltipItem,
+  ScChartTooltipLabel,
+  ScChartTooltipName,
+  ScChartTooltipValue,
 } from '@semantic-components/ui/charts';
 import { ScChartTreemap } from '@semantic-components/ui/charts/treemap';
 
@@ -38,6 +46,14 @@ import { ScChartTreemap } from '@semantic-components/ui/charts/treemap';
     ScChartLabels,
     ScChartTooltip,
     ScChartLegend,
+    DecimalPipe,
+    ScChartTooltipLabel,
+    ScChartTooltipIndicator,
+    ScChartTooltipItem,
+    ScChartTooltipName,
+    ScChartTooltipValue,
+    ScChartLegendItem,
+    ScChartLegendIndicator,
   ],
   template: \`
     <div scChart class="aspect-video max-h-80" [config]="config" [data]="data">
@@ -55,8 +71,24 @@ import { ScChartTreemap } from '@semantic-components/ui/charts/treemap';
           />
         </g>
       </svg>
-      <div scChartTooltip></div>
-      <div scChartLegend></div>
+      <div scChartTooltip #tooltip="scChartTooltip">
+        <div scChartTooltipLabel>{{ tooltip.label() }}</div>
+        @for (item of tooltip.payload(); track item.dataKey) {
+          <div scChartTooltipItem [item]="item">
+            <span scChartTooltipIndicator></span>
+            <span scChartTooltipName>{{ item.name }}</span>
+            <span scChartTooltipValue>{{ item.value | number }}</span>
+          </div>
+        }
+      </div>
+      <div scChartLegend #legend="scChartLegend">
+        @for (item of legend.payload(); track item.dataKey) {
+          <div scChartLegendItem [item]="item">
+            <span scChartLegendIndicator></span>
+            {{ item.name }}
+          </div>
+        }
+      </div>
     </div>
   \`,
   host: { class: 'block w-full max-w-xl' },

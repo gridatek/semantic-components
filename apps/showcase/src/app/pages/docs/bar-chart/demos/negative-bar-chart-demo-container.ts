@@ -18,7 +18,8 @@ import { NegativeBarChartDemo } from './negative-bar-chart-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class NegativeBarChartDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { DecimalPipe } from '@angular/common';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScChart,
   ScChartBar,
@@ -28,6 +29,10 @@ import {
   ScChartGrid,
   ScChartPlot,
   ScChartTooltip,
+  ScChartTooltipItem,
+  ScChartTooltipLabel,
+  ScChartTooltipName,
+  ScChartTooltipValue,
 } from '@semantic-components/ui/charts';
 
 @Component({
@@ -40,6 +45,11 @@ import {
     ScChartCursor,
     ScChartBar,
     ScChartTooltip,
+    DecimalPipe,
+    ScChartTooltipLabel,
+    ScChartTooltipItem,
+    ScChartTooltipName,
+    ScChartTooltipValue,
   ],
   template: \`
     <div scChart [config]="config" [data]="data">
@@ -53,7 +63,15 @@ import {
         <g scChartCursor />
         <g scChartBar key="change" />
       </svg>
-      <div scChartTooltip hideIndicator></div>
+      <div scChartTooltip #tooltip="scChartTooltip">
+        <div scChartTooltipLabel>{{ tooltip.label() }}</div>
+        @for (item of tooltip.payload(); track item.dataKey) {
+          <div scChartTooltipItem [item]="item">
+            <span scChartTooltipName>{{ item.name }}</span>
+            <span scChartTooltipValue>{{ item.value | number }}</span>
+          </div>
+        }
+      </div>
     </div>
   \`,
   host: { class: 'block w-full max-w-xl' },

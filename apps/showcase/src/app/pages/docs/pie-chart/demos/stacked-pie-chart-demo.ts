@@ -1,3 +1,4 @@
+import { DecimalPipe } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScChart,
@@ -5,11 +6,27 @@ import {
   ScChartPie,
   ScChartPlot,
   ScChartTooltip,
+  ScChartTooltipIndicator,
+  ScChartTooltipItem,
+  ScChartTooltipLabel,
+  ScChartTooltipName,
+  ScChartTooltipValue,
 } from '@semantic-components/ui/charts';
 
 @Component({
   selector: 'app-stacked-pie-chart-demo',
-  imports: [ScChart, ScChartPlot, ScChartPie, ScChartTooltip],
+  imports: [
+    ScChart,
+    ScChartPlot,
+    ScChartPie,
+    ScChartTooltip,
+    DecimalPipe,
+    ScChartTooltipLabel,
+    ScChartTooltipIndicator,
+    ScChartTooltipItem,
+    ScChartTooltipName,
+    ScChartTooltipValue,
+  ],
   template: `
     <div
       scChart
@@ -25,7 +42,16 @@ import {
         <g scChartPie key="desktop" [outerRadius]="0.6" />
         <g scChartPie key="mobile" [innerRadius]="0.7" />
       </svg>
-      <div scChartTooltip></div>
+      <div scChartTooltip #tooltip="scChartTooltip">
+        <div scChartTooltipLabel>{{ tooltip.label() }}</div>
+        @for (item of tooltip.payload(); track item.dataKey) {
+          <div scChartTooltipItem [item]="item">
+            <span scChartTooltipIndicator></span>
+            <span scChartTooltipName>{{ item.name }}</span>
+            <span scChartTooltipValue>{{ item.value | number }}</span>
+          </div>
+        }
+      </div>
     </div>
   `,
   host: { class: 'block w-full max-w-xl' },

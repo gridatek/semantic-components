@@ -1,3 +1,4 @@
+import { DecimalPipe } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCard,
@@ -18,6 +19,10 @@ import {
   type ScChartConfig,
   ScChartPlot,
   ScChartTooltip,
+  ScChartTooltipIndicator,
+  ScChartTooltipItem,
+  ScChartTooltipName,
+  ScChartTooltipValue,
 } from '@semantic-components/ui/charts';
 
 /** A home's power: usage by hour, now and solar, the battery. */
@@ -35,6 +40,11 @@ import {
     ScChartCategoryAxis,
     ScChartPlot,
     ScChartTooltip,
+    DecimalPipe,
+    ScChartTooltipIndicator,
+    ScChartTooltipItem,
+    ScChartTooltipName,
+    ScChartTooltipValue,
     ScProgress,
     ScProgressRange,
     ScProgressTrack,
@@ -57,7 +67,15 @@ import {
             <g scChartCategoryAxis class="text-xs" />
             <g scChartBar key="usage" [radius]="[4, 4, 0, 0]" />
           </svg>
-          <div scChartTooltip hideLabel></div>
+          <div scChartTooltip #tooltip="scChartTooltip">
+            @for (item of tooltip.payload(); track item.dataKey) {
+              <div scChartTooltipItem [item]="item">
+                <span scChartTooltipIndicator></span>
+                <span scChartTooltipName>{{ item.name }}</span>
+                <span scChartTooltipValue>{{ item.value | number }}</span>
+              </div>
+            }
+          </div>
         </div>
         <div scSeparator aria-hidden="true"></div>
         <dl class="grid grid-cols-2 gap-4">

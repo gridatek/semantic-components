@@ -1,3 +1,4 @@
+import { DecimalPipe } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScBadge,
@@ -14,6 +15,10 @@ import {
   type ScChartConfig,
   ScChartPlot,
   ScChartTooltip,
+  ScChartTooltipIndicator,
+  ScChartTooltipItem,
+  ScChartTooltipName,
+  ScChartTooltipValue,
 } from '@semantic-components/ui/charts';
 
 /** A card account: its balance, the payment due, a year's activity. */
@@ -31,6 +36,11 @@ import {
     ScChartCategoryAxis,
     ScChartPlot,
     ScChartTooltip,
+    DecimalPipe,
+    ScChartTooltipIndicator,
+    ScChartTooltipItem,
+    ScChartTooltipName,
+    ScChartTooltipValue,
   ],
   template: `
     <div class="grid grid-cols-2 gap-3">
@@ -72,7 +82,15 @@ import {
               />
               <g scChartBar key="amount" [radius]="[3, 3, 0, 0]" />
             </svg>
-            <div scChartTooltip hideLabel></div>
+            <div scChartTooltip #tooltip="scChartTooltip">
+              @for (item of tooltip.payload(); track item.dataKey) {
+                <div scChartTooltipItem [item]="item">
+                  <span scChartTooltipIndicator></span>
+                  <span scChartTooltipName>{{ item.name }}</span>
+                  <span scChartTooltipValue>{{ item.value | number }}</span>
+                </div>
+              }
+            </div>
           </div>
         </div>
       </div>

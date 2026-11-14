@@ -18,15 +18,22 @@ import { FunnelChartDemo } from './funnel-chart-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class FunnelChartDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { DecimalPipe } from '@angular/common';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScChart,
   type ScChartConfig,
   ScChartFunnel,
   ScChartLabels,
   ScChartLegend,
+  ScChartLegendIndicator,
+  ScChartLegendItem,
   ScChartPlot,
   ScChartTooltip,
+  ScChartTooltipIndicator,
+  ScChartTooltipItem,
+  ScChartTooltipName,
+  ScChartTooltipValue,
 } from '@semantic-components/ui/charts';
 
 @Component({
@@ -38,6 +45,13 @@ import {
     ScChartLabels,
     ScChartTooltip,
     ScChartLegend,
+    DecimalPipe,
+    ScChartTooltipIndicator,
+    ScChartTooltipItem,
+    ScChartTooltipName,
+    ScChartTooltipValue,
+    ScChartLegendItem,
+    ScChartLegendIndicator,
   ],
   template: \`
     <div
@@ -55,8 +69,23 @@ import {
           <g scChartLabels position="inside" class="fill-background" />
         </g>
       </svg>
-      <div scChartTooltip hideLabel></div>
-      <div scChartLegend class="flex-wrap"></div>
+      <div scChartTooltip #tooltip="scChartTooltip">
+        @for (item of tooltip.payload(); track item.dataKey) {
+          <div scChartTooltipItem [item]="item">
+            <span scChartTooltipIndicator></span>
+            <span scChartTooltipName>{{ item.name }}</span>
+            <span scChartTooltipValue>{{ item.value | number }}</span>
+          </div>
+        }
+      </div>
+      <div scChartLegend #legend="scChartLegend" class="flex-wrap">
+        @for (item of legend.payload(); track item.dataKey) {
+          <div scChartLegendItem [item]="item">
+            <span scChartLegendIndicator></span>
+            {{ item.name }}
+          </div>
+        }
+      </div>
     </div>
   \`,
   host: { class: 'block w-full max-w-xl' },

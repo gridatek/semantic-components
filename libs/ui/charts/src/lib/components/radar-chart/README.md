@@ -10,8 +10,24 @@ Series as polygons over the categories, each value on its category's spoke, fill
     <g scChartRadar key="desktop" />
     <g scChartRadar key="mobile" />
   </svg>
-  <div scChartTooltip indicator="line"></div>
-  <div scChartLegend></div>
+  <div scChartTooltip #tooltip="scChartTooltip">
+    <div scChartTooltipLabel>{{ tooltip.label() }}</div>
+    @for (item of tooltip.payload(); track item.dataKey) {
+    <div scChartTooltipItem [item]="item">
+      <span scChartTooltipIndicator variant="line"></span>
+      <span scChartTooltipName>{{ item.name }}</span>
+      <span scChartTooltipValue>{{ item.value | number }}</span>
+    </div>
+    }
+  </div>
+  <div scChartLegend #legend="scChartLegend">
+    @for (item of legend.payload(); track item.dataKey) {
+    <div scChartLegendItem [item]="item">
+      <span scChartLegendIndicator></span>
+      {{ item.name }}
+    </div>
+    }
+  </div>
 </div>
 ```
 

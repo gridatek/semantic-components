@@ -1,3 +1,4 @@
+import { DecimalPipe } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScChart,
@@ -6,9 +7,16 @@ import {
   ScChartCursor,
   ScChartGrid,
   ScChartLegend,
+  ScChartLegendIndicator,
+  ScChartLegendItem,
   ScChartLine,
   ScChartPlot,
   ScChartTooltip,
+  ScChartTooltipIndicator,
+  ScChartTooltipItem,
+  ScChartTooltipLabel,
+  ScChartTooltipName,
+  ScChartTooltipValue,
   ScChartValueAxis,
 } from '@semantic-components/ui/charts';
 
@@ -24,6 +32,14 @@ import {
     ScChartLine,
     ScChartTooltip,
     ScChartLegend,
+    DecimalPipe,
+    ScChartTooltipLabel,
+    ScChartTooltipIndicator,
+    ScChartTooltipItem,
+    ScChartTooltipName,
+    ScChartTooltipValue,
+    ScChartLegendItem,
+    ScChartLegendIndicator,
   ],
   template: `
     <div scChart [config]="config" [data]="data">
@@ -39,8 +55,24 @@ import {
         <g scChartLine key="desktop" curve="monotone" />
         <g scChartLine key="mobile" curve="monotone" />
       </svg>
-      <div scChartTooltip indicator="line"></div>
-      <div scChartLegend></div>
+      <div scChartTooltip #tooltip="scChartTooltip">
+        <div scChartTooltipLabel>{{ tooltip.label() }}</div>
+        @for (item of tooltip.payload(); track item.dataKey) {
+          <div scChartTooltipItem [item]="item">
+            <span scChartTooltipIndicator variant="line"></span>
+            <span scChartTooltipName>{{ item.name }}</span>
+            <span scChartTooltipValue>{{ item.value | number }}</span>
+          </div>
+        }
+      </div>
+      <div scChartLegend #legend="scChartLegend">
+        @for (item of legend.payload(); track item.dataKey) {
+          <div scChartLegendItem [item]="item">
+            <span scChartLegendIndicator></span>
+            {{ item.name }}
+          </div>
+        }
+      </div>
     </div>
   `,
   host: { class: 'block w-full max-w-xl' },

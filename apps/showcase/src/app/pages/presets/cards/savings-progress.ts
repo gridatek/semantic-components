@@ -1,3 +1,4 @@
+import { DecimalPipe } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCard,
@@ -12,6 +13,10 @@ import {
   ScChartPie,
   ScChartPlot,
   ScChartTooltip,
+  ScChartTooltipIndicator,
+  ScChartTooltipItem,
+  ScChartTooltipName,
+  ScChartTooltipValue,
 } from '@semantic-components/ui/charts';
 
 /** A savings goal as a donut, its total in the middle, then the details. */
@@ -26,6 +31,11 @@ import {
     ScChartPie,
     ScChartPlot,
     ScChartTooltip,
+    DecimalPipe,
+    ScChartTooltipIndicator,
+    ScChartTooltipItem,
+    ScChartTooltipName,
+    ScChartTooltipValue,
     ScSeparator,
   ],
   template: `
@@ -59,7 +69,15 @@ import {
               </text>
             </g>
           </svg>
-          <div scChartTooltip hideLabel></div>
+          <div scChartTooltip #tooltip="scChartTooltip">
+            @for (item of tooltip.payload(); track item.dataKey) {
+              <div scChartTooltipItem [item]="item">
+                <span scChartTooltipIndicator></span>
+                <span scChartTooltipName>{{ item.name }}</span>
+                <span scChartTooltipValue>{{ item.value | number }}</span>
+              </div>
+            }
+          </div>
         </div>
       </div>
       <div scCardFooter class="flex-col gap-0">

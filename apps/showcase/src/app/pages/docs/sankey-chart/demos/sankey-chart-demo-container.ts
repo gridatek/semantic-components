@@ -18,18 +18,35 @@ import { SankeyChartDemo } from './sankey-chart-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SankeyChartDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { DecimalPipe } from '@angular/common';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScChart,
   type ScChartConfig,
   ScChartPlot,
   ScChartTooltip,
+  ScChartTooltipIndicator,
+  ScChartTooltipItem,
+  ScChartTooltipLabel,
+  ScChartTooltipName,
+  ScChartTooltipValue,
 } from '@semantic-components/ui/charts';
 import { ScChartSankey } from '@semantic-components/ui/charts/sankey';
 
 @Component({
   selector: 'app-sankey-chart-demo',
-  imports: [ScChart, ScChartPlot, ScChartSankey, ScChartTooltip],
+  imports: [
+    ScChart,
+    ScChartPlot,
+    ScChartSankey,
+    ScChartTooltip,
+    DecimalPipe,
+    ScChartTooltipLabel,
+    ScChartTooltipIndicator,
+    ScChartTooltipItem,
+    ScChartTooltipName,
+    ScChartTooltipValue,
+  ],
   template: \`
     <div scChart class="aspect-video max-h-80" [config]="config" [data]="data">
       <svg
@@ -39,7 +56,16 @@ import { ScChartSankey } from '@semantic-components/ui/charts/sankey';
       >
         <g scChartSankey key="visitors" />
       </svg>
-      <div scChartTooltip></div>
+      <div scChartTooltip #tooltip="scChartTooltip">
+        <div scChartTooltipLabel>{{ tooltip.label() }}</div>
+        @for (item of tooltip.payload(); track item.dataKey) {
+          <div scChartTooltipItem [item]="item">
+            <span scChartTooltipIndicator></span>
+            <span scChartTooltipName>{{ item.name }}</span>
+            <span scChartTooltipValue>{{ item.value | number }}</span>
+          </div>
+        }
+      </div>
     </div>
   \`,
   host: { class: 'block w-full max-w-xl' },

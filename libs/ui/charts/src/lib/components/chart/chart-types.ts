@@ -25,3 +25,22 @@ export interface ScChartMargin {
 
 /** A tooltip's mark beside each value. */
 export type ScChartIndicator = 'dot' | 'line' | 'dashed';
+
+/** A series at the tooltip's category (Recharts' tooltip payload). */
+export interface ScChartTooltipPayload {
+  /** The series' key in the data. */
+  dataKey: string;
+  /** Its name: the chart's `config` label, or its key. */
+  name: string;
+  /** The raw value: format it in your template. */
+  value: number;
+  /** Its colour, as CSS. */
+  color: string;
+}
+
+/** An entry of the legend (Recharts' legend payload): a series, a category, a group or a node. */
+export interface ScChartLegendPayload {
+  dataKey: string;
+  name: string;
+  color: string;
+}

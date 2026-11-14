@@ -1,118 +1,73 @@
-import {
-  Component,
-  LOCALE_ID,
-  ViewEncapsulation,
-  booleanAttribute,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { injectPreset } from '@semantic-components/ui';
 import { cn } from 'cn';
 import { ScChartState, numberOf } from './chart-state';
-import type { ScChartIndicator } from './chart-types';
-
-interface ScChartTooltipRow {
-  key: string;
-  name: string;
-  value: string;
-  color: string;
-}
+import type { ScChartTooltipPayload } from './chart-types';
 
 /**
- * The values of the category pointed at (or reached by the keyboard): its
- * name, then each series' — named by the chart's `config`, in the app's
- * locale or through `valueFormatter`. A polite live region: screen readers
- * hear the values as the keyboard moves.
+ * The tooltip's box, beside the category pointed at (or reached by the
+ * keyboard): the preset's look, a polite live region. You write what is in it
+ * from its state — `label()`, the category; `payload()`, an item per series
+ * (Recharts' names) — with `scChartTooltipLabel` and `scChartTooltipItem`.
  */
-@Component({
+@Directive({
   selector: 'div[scChartTooltip]',
-  template: `
-    @if (content(); as c) {
-      @if (!hideLabel()) {
-        <div class="font-medium">{{ c.label }}</div>
-      }
-      <div class="grid gap-1.5">
-        @for (row of c.rows; track row.key) {
-          <div class="flex w-full items-stretch gap-2">
-            @if (!hideIndicator()) {
-              <div
-                aria-hidden="true"
-                [class]="indicatorClass()"
-                [style.--color-bg]="row.color"
-                [style.--color-border]="row.color"
-              ></div>
-            }
-            <div
-              class="flex flex-1 items-center justify-between gap-4 leading-none"
-            >
-              <span class="text-muted-foreground">{{ row.name }}</span>
-              <span class="text-foreground font-mono font-medium tabular-nums">
-                {{ row.value }}
-              </span>
-            </div>
-          </div>
-        }
-      </div>
-    }
-  `,
+  exportAs: 'scChartTooltip',
   host: {
     'data-slot': 'chart-tooltip',
     role: 'status',
-    '[attr.data-state]': 'content() ? "open" : "closed"',
+    '[attr.data-state]': 'active() ? "open" : "closed"',
     '[style.left.px]': 'position().left',
     '[style.top.px]': 'position().top',
     '[style.translate]': 'position().translate',
     '[class]': 'class()',
   },
-  encapsulation: ViewEncapsulation.None,
 })
 export class ScChartTooltip {
   private readonly state = inject(ScChartState);
   private readonly tooltipStyles = injectPreset().chart.tooltip;
-  private readonly numbers = new Intl.NumberFormat(inject(LOCALE_ID));
 
   readonly classInput = input<string>('', { alias: 'class' });
-  /** The mark beside each value. */
-  readonly indicator = input<ScChartIndicator>('dot');
-  readonly hideLabel = input(false, { transform: booleanAttribute });
-  readonly hideIndicator = input(false, { transform: booleanAttribute });
-  /** The category's name (`'2024-04-01'` → `'Apr 1'`). */
-  readonly labelFormatter = input<((category: string) => string) | null>(null);
-  /** A value, as shown. */
-  readonly valueFormatter = input<
-    ((value: number, key: string) => string) | null
-  >(null);
 
-  protected readonly content = computed(() => {
+  /** The active category, when its row exists. */
+  private readonly index = computed(() => {
     const index = this.state.activeIndex();
-    const row = index === null ? undefined : this.state.data()[index];
-    if (index === null || !row) return null;
+    return index !== null && this.state.data()[index] ? index : null;
+  });
+
+  /** A category is pointed at: the tooltip shows. */
+  readonly active = computed(() => this.index() !== null);
+
+  /** The category's name, as in the data. */
+  readonly label = computed(() => {
+    const index = this.index();
+    return index === null ? '' : (this.state.categories()[index] ?? '');
+  });
+
+  /** Each series' value at the category, with its name and colour. */
+  readonly payload = computed<ScChartTooltipPayload[]>(() => {
+    const index = this.index();
+    if (index === null) return [];
+    const row = this.state.data()[index];
     const category = this.state.categories()[index];
     const config = this.state.config();
-    const format =
-      this.valueFormatter() ?? ((value: number) => this.numbers.format(value));
     const byCategory = this.state.categoryKeys();
     const keys = this.state.keys();
     const series = this.state.series();
-    const rows: ScChartTooltipRow[] = keys.map((key) => {
+    return keys.map((key) => {
       const own = series.find((s) => s.key() === key)?.colorOf?.(index);
       // A pie's slice, a radial bar: colored by its category — and named by
       // it too, when it is the only series (else by its series, the category
-      // in the title).
+      // in the label).
       const colorKey = byCategory.has(key) ? category : key;
       const nameKey = keys.length === 1 ? colorKey : key;
       return {
-        key,
+        dataKey: key,
         name: config[nameKey]?.label ?? nameKey,
-        value: format(numberOf(row[key]), key),
+        value: numberOf(row[key]),
         color: own ?? `var(--color-${colorKey})`,
       };
     });
-    return {
-      label: this.labelFormatter()?.(category) ?? category,
-      rows,
-    };
   });
 
   /** Beside the category, on the side with room. */
@@ -121,8 +76,7 @@ export class ScChartTooltip {
     const along = this.state.center(index);
     const { x: dx, y: dy } = this.state.offset();
     const { left, top, right } = this.state.area();
-    // Beside its category, on the side with room: right or left of a column,
-    // under or over a row.
+    // Right or left of a column, under or over a row.
     return this.state.vertical()
       ? {
           left: dx + (left + right) / 2,
@@ -139,16 +93,6 @@ export class ScChartTooltip {
             along > this.state.width() / 2 ? 'calc(-100% - 24px) 0' : null,
         };
   });
-
-  protected readonly indicatorClass = computed(() =>
-    cn(
-      'shrink-0 rounded-[2px] border-(--color-border) bg-(--color-bg)',
-      this.indicator() === 'dot' && 'size-2.5 self-center',
-      this.indicator() === 'line' && 'w-1',
-      this.indicator() === 'dashed' &&
-        'w-0 border-[1.5px] border-dashed bg-transparent',
-    ),
-  );
 
   protected readonly class = computed(() =>
     cn(

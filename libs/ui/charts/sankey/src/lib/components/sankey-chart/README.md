@@ -9,7 +9,16 @@ Its own entry point, so the other charts don't need `d3-sankey`: `import { ScCha
   <svg scChartPlot categoryKey="flow" aria-label="Where visitors come from and go">
     <g scChartSankey key="visitors" />
   </svg>
-  <div scChartTooltip></div>
+  <div scChartTooltip #tooltip="scChartTooltip">
+    <div scChartTooltipLabel>{{ tooltip.label() }}</div>
+    @for (item of tooltip.payload(); track item.dataKey) {
+    <div scChartTooltipItem [item]="item">
+      <span scChartTooltipIndicator></span>
+      <span scChartTooltipName>{{ item.name }}</span>
+      <span scChartTooltipValue>{{ item.value | number }}</span>
+    </div>
+    }
+  </div>
 </div>
 ```
 

@@ -36,7 +36,7 @@ import { TooltipChartDemoContainer } from './demos/tooltip-chart-demo-container'
           entry="charts"
           library="d3-scale d3-shape"
           href="https://d3js.org"
-          names="ScChart, ScChartPlot, ScChartTooltip, ScChartLegend"
+          names="ScChart, ScChartPlot, ScChartTooltip, ScChartTooltipLabel, ScChartTooltipItem, ScChartTooltipIndicator, ScChartTooltipName, ScChartTooltipValue, ScChartLegend, ScChartLegendItem, ScChartLegendIndicator"
         />
       </section>
 
@@ -46,8 +46,10 @@ import { TooltipChartDemoContainer } from './demos/tooltip-chart-demo-container'
           Each series' name and color come from the chart's config; its color is
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
             >--color-&lt;key&gt;</code
-          >, for your own SVG too. The tooltip marks each value with a dot, a
-          line or a dash.
+          >, for your own SVG too. You write what the tooltip and the legend
+          show, from their state (the category, an item per series): each part
+          you leave out isn't there, and the text and its format are yours. The
+          tooltip marks each value with a dot, a line or a dash.
         </p>
         <app-tooltip-chart-demo-container />
       </section>

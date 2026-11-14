@@ -7,7 +7,16 @@ A series as a sunburst: its rows' groups (`groupKey`) as an inner ring, each its
   <svg scChartPlot categoryKey="name" aria-label="Sales by region and country">
     <g scChartSunburst key="sales" groupKey="region" />
   </svg>
-  <div scChartTooltip></div>
+  <div scChartTooltip #tooltip="scChartTooltip">
+    <div scChartTooltipLabel>{{ tooltip.label() }}</div>
+    @for (item of tooltip.payload(); track item.dataKey) {
+    <div scChartTooltipItem [item]="item">
+      <span scChartTooltipIndicator></span>
+      <span scChartTooltipName>{{ item.name }}</span>
+      <span scChartTooltipValue>{{ item.value | number }}</span>
+    </div>
+    }
+  </div>
 </div>
 ```
 

@@ -18,7 +18,8 @@ import { StackedBarChartDemo } from './stacked-bar-chart-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class StackedBarChartDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  readonly code = `import { DecimalPipe } from '@angular/common';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScChart,
   ScChartBar,
@@ -27,8 +28,15 @@ import {
   ScChartCursor,
   ScChartGrid,
   ScChartLegend,
+  ScChartLegendIndicator,
+  ScChartLegendItem,
   ScChartPlot,
   ScChartTooltip,
+  ScChartTooltipIndicator,
+  ScChartTooltipItem,
+  ScChartTooltipLabel,
+  ScChartTooltipName,
+  ScChartTooltipValue,
 } from '@semantic-components/ui/charts';
 
 @Component({
@@ -42,6 +50,14 @@ import {
     ScChartBar,
     ScChartTooltip,
     ScChartLegend,
+    DecimalPipe,
+    ScChartTooltipLabel,
+    ScChartTooltipIndicator,
+    ScChartTooltipItem,
+    ScChartTooltipName,
+    ScChartTooltipValue,
+    ScChartLegendItem,
+    ScChartLegendIndicator,
   ],
   template: \`
     <div scChart [config]="config" [data]="data">
@@ -56,8 +72,24 @@ import {
         <g scChartBar key="desktop" stack="a" [radius]="[0, 0, 4, 4]" />
         <g scChartBar key="mobile" stack="a" [radius]="[4, 4, 0, 0]" />
       </svg>
-      <div scChartTooltip></div>
-      <div scChartLegend></div>
+      <div scChartTooltip #tooltip="scChartTooltip">
+        <div scChartTooltipLabel>{{ tooltip.label() }}</div>
+        @for (item of tooltip.payload(); track item.dataKey) {
+          <div scChartTooltipItem [item]="item">
+            <span scChartTooltipIndicator></span>
+            <span scChartTooltipName>{{ item.name }}</span>
+            <span scChartTooltipValue>{{ item.value | number }}</span>
+          </div>
+        }
+      </div>
+      <div scChartLegend #legend="scChartLegend">
+        @for (item of legend.payload(); track item.dataKey) {
+          <div scChartLegendItem [item]="item">
+            <span scChartLegendIndicator></span>
+            {{ item.name }}
+          </div>
+        }
+      </div>
     </div>
   \`,
   host: { class: 'block w-full max-w-xl' },

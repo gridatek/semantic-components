@@ -10,8 +10,23 @@ A series as a pie: a slice per row, its share of the total, in its category's co
       <text text-anchor="middle" class="fill-foreground text-3xl font-bold">{{ total }}</text>
     </g>
   </svg>
-  <div scChartTooltip hideLabel></div>
-  <div scChartLegend></div>
+  <div scChartTooltip #tooltip="scChartTooltip">
+    @for (item of tooltip.payload(); track item.dataKey) {
+    <div scChartTooltipItem [item]="item">
+      <span scChartTooltipIndicator></span>
+      <span scChartTooltipName>{{ item.name }}</span>
+      <span scChartTooltipValue>{{ item.value | number }}</span>
+    </div>
+    }
+  </div>
+  <div scChartLegend #legend="scChartLegend">
+    @for (item of legend.payload(); track item.dataKey) {
+    <div scChartLegendItem [item]="item">
+      <span scChartLegendIndicator></span>
+      {{ item.name }}
+    </div>
+    }
+  </div>
 </div>
 ```
 

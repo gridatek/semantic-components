@@ -1,3 +1,4 @@
+import { DecimalPipe } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
@@ -15,8 +16,15 @@ import {
   type ScChartConfig,
   ScChartGrid,
   ScChartLegend,
+  ScChartLegendIndicator,
+  ScChartLegendItem,
   ScChartPlot,
   ScChartTooltip,
+  ScChartTooltipIndicator,
+  ScChartTooltipItem,
+  ScChartTooltipLabel,
+  ScChartTooltipName,
+  ScChartTooltipValue,
 } from '@semantic-components/ui/charts';
 
 const DATA = [
@@ -47,6 +55,14 @@ const DELTA = Math.round(((DESKTOP - MOBILE) / MOBILE) * 100);
     ScChartCategoryAxis,
     ScChartGrid,
     ScChartLegend,
+    DecimalPipe,
+    ScChartTooltipLabel,
+    ScChartTooltipIndicator,
+    ScChartTooltipItem,
+    ScChartTooltipName,
+    ScChartTooltipValue,
+    ScChartLegendItem,
+    ScChartLegendIndicator,
     ScChartPlot,
     ScChartTooltip,
   ],
@@ -72,8 +88,24 @@ const DELTA = Math.round(((DESKTOP - MOBILE) / MOBILE) * 100);
             <g scChartBar key="desktop" [radius]="[6, 6, 0, 0]" />
             <g scChartBar key="mobile" [radius]="[6, 6, 0, 0]" />
           </svg>
-          <div scChartTooltip indicator="dashed"></div>
-          <div scChartLegend></div>
+          <div scChartTooltip #tooltip="scChartTooltip">
+            <div scChartTooltipLabel>{{ tooltip.label() }}</div>
+            @for (item of tooltip.payload(); track item.dataKey) {
+              <div scChartTooltipItem [item]="item">
+                <span scChartTooltipIndicator variant="dashed"></span>
+                <span scChartTooltipName>{{ item.name }}</span>
+                <span scChartTooltipValue>{{ item.value | number }}</span>
+              </div>
+            }
+          </div>
+          <div scChartLegend #legend="scChartLegend">
+            @for (item of legend.payload(); track item.dataKey) {
+              <div scChartLegendItem [item]="item">
+                <span scChartLegendIndicator></span>
+                {{ item.name }}
+              </div>
+            }
+          </div>
         </div>
         <dl class="divide-border/60 grid w-full grid-cols-3 divide-x">
           @for (stat of stats; track stat.label) {
