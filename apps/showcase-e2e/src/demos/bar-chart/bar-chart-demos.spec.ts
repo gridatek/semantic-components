@@ -1,5 +1,5 @@
 import { collectErrors, press } from '../../interaction';
-import { type Page, expect, test } from '../../test';
+import { type Locator, type Page, expect, test } from '../../test';
 
 const demo = (name: string) => `/demos/bar-chart/${name}-chart-demo`;
 const tooltip = (page: Page) => page.locator('[data-slot=chart-tooltip]');
@@ -16,7 +16,7 @@ test.afterEach(() => {
 
 test('Bar: the pointer shows its month', async ({ page }) => {
   await page.goto(demo('bar'));
-  const bars = page.locator('[data-slot=chart-bar] path');
+  const bars = page.locator('[data-slot=chart-bar] > svg');
   await expect(bars).toHaveCount(6);
   await bars.nth(2).hover();
   await expect(tooltip(page)).toHaveAttribute('data-state', 'open');
@@ -28,12 +28,20 @@ test('Stacked bar: each month, one on the other; a legend', async ({
   page,
 }) => {
   await page.goto(demo('stacked-bar'));
-  const desktop = page.locator('[data-slot=chart-bar][data-key=desktop] path');
-  const mobile = page.locator('[data-slot=chart-bar][data-key=mobile] path');
+  const desktop = page.locator('[data-slot=chart-bar][data-key=desktop] > svg');
+  const mobile = page.locator('[data-slot=chart-bar][data-key=mobile] > svg');
   await expect(desktop).toHaveCount(6);
   await expect(mobile).toHaveCount(6);
-  const below = await desktop.first().boundingBox();
-  const above = await mobile.first().boundingBox();
+  // Each bar's own box (its svg's geometry): a bar rounded on one side
+  // draws past its square one, hidden, which the browser's box includes.
+  const geometry = (bar: Locator) =>
+    bar.evaluate((svg) => ({
+      x: Number(svg.getAttribute('x')),
+      y: Number(svg.getAttribute('y')),
+      height: Number(svg.getAttribute('height')),
+    }));
+  const below = await geometry(desktop.first());
+  const above = await geometry(mobile.first());
   // Mobile on Desktop: same column, ending where it starts.
   expect(Math.round(above?.x ?? 0)).toBe(Math.round(below?.x ?? 1));
   expect(
@@ -46,7 +54,7 @@ test('Stacked bar: each month, one on the other; a legend', async ({
 
 test('Negative bar: below zero, downwards', async ({ page }) => {
   await page.goto(demo('negative-bar'));
-  const bars = page.locator('[data-slot=chart-bar] path');
+  const bars = page.locator('[data-slot=chart-bar] > svg');
   const february = await bars.nth(1).boundingBox(); // +205
   const march = await bars.nth(2).boundingBox(); // −207
   // March starts where February ends: at zero.
@@ -57,7 +65,7 @@ test('Negative bar: below zero, downwards', async ({ page }) => {
 
 test('Horizontal: bars across, the months down the side', async ({ page }) => {
   await page.goto(demo('horizontal-bar'));
-  const bars = page.locator('[data-slot=chart-bar] path');
+  const bars = page.locator('[data-slot=chart-bar] > svg');
   await expect(bars).toHaveCount(6);
   const january = await bars.nth(0).boundingBox();
   const february = await bars.nth(1).boundingBox();
@@ -83,7 +91,7 @@ test('Labels: each value above its bar', async ({ page }) => {
   await expect(labels).toHaveCount(6);
   await expect(labels.nth(1)).toHaveText('305');
   const bar = await page
-    .locator('[data-slot=chart-bar] path')
+    .locator('[data-slot=chart-bar] > svg')
     .nth(1)
     .boundingBox();
   const label = await labels.nth(1).boundingBox();
@@ -110,7 +118,7 @@ test('Custom labels: the month inside its bar, the value beyond', async ({
           [...document.querySelectorAll(selector)].map((element) =>
             element.getBoundingClientRect(),
           );
-        const [bar] = boxes('[data-slot=chart-bar] path');
+        const [bar] = boxes('[data-slot=chart-bar] > svg');
         const [names, values] = [
           ...document.querySelectorAll('[data-slot=chart-labels]'),
         ].map((labels) =>

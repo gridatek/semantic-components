@@ -1,4 +1,3 @@
-import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   Component,
   DestroyRef,
@@ -24,7 +23,10 @@ export type ScChartBarCorners = 'all' | 'end' | 'base' | 'none';
 
 interface ScBarChartBar {
   index: number;
-  /** What is drawn: the bar, longer past its square side (clipped there). */
+  /**
+   * What is drawn, in the bar's own box (an `svg` its size, which hides what
+   * overflows): the bar, longer past the side left square.
+   */
   shape: { x: number; y: number; width: number; height: number };
   x: number;
   y: number;
@@ -34,33 +36,24 @@ interface ScBarChartBar {
   up: boolean;
 }
 
-/** The rect drawn for a bar: its box, longer past the side left square. */
+/** The rect drawn in a bar's box: the box, longer past the side left square. */
 function shapeOf(
-  box: { x: number; y: number; width: number; height: number },
+  { width, height }: { width: number; height: number },
   corners: ScChartBarCorners,
   vertical: boolean,
   up: boolean,
   past: number,
 ): ScBarChartBar['shape'] {
-  if (corners === 'all' || corners === 'none') return box;
+  if (corners === 'all' || corners === 'none')
+    return { x: 0, y: 0, width, height };
   // The square side: its base (rounded at its end), or its end.
   const squareAtBase = corners === 'end';
   // Where the base is on screen: left of a bar across (up), under a column (up).
   const baseIsStart = vertical ? up : !up;
   const extendStart = squareAtBase === baseIsStart;
   return vertical
-    ? {
-        x: extendStart ? box.x - past : box.x,
-        y: box.y,
-        width: box.width + past,
-        height: box.height,
-      }
-    : {
-        x: box.x,
-        y: extendStart ? box.y - past : box.y,
-        width: box.width,
-        height: box.height + past,
-      };
+    ? { x: extendStart ? -past : 0, y: 0, width: width + past, height }
+    : { x: 0, y: extendStart ? -past : 0, width, height: height + past };
 }
 
 /**
@@ -72,22 +65,15 @@ function shapeOf(
   selector: 'g[scChartBar]',
   providers: [{ provide: SC_CHART_SERIES, useExisting: ScChartBar }],
   template: `
-    @if (clipped()) {
-      <svg:defs>
-        <svg:clipPath [id]="clipId">
-          @for (bar of bars(); track bar.index) {
-            <svg:rect
-              [attr.x]="bar.x"
-              [attr.y]="bar.y"
-              [attr.width]="bar.width"
-              [attr.height]="bar.height"
-            />
-          }
-        </svg:clipPath>
-      </svg:defs>
-    }
-    <svg:g [attr.clip-path]="clipped() ? 'url(#' + clipId + ')' : null">
-      @for (bar of bars(); track bar.index) {
+    @for (bar of bars(); track bar.index) {
+      <!-- The bar's box: what overflows it (a square side's corners) is hidden. -->
+      <svg:svg
+        overflow="hidden"
+        [attr.x]="bar.x"
+        [attr.y]="bar.y"
+        [attr.width]="bar.width"
+        [attr.height]="bar.height"
+      >
         <svg:rect
           [class]="
             corners() === 'none' ? '' : '[rx:var(--chart-bar-radius,0px)]'
@@ -98,8 +84,8 @@ function shapeOf(
           [attr.height]="bar.shape.height"
           [attr.fill]="fill() || color()"
         />
-      }
-    </svg:g>
+      </svg:svg>
+    }
     <ng-content />
   `,
   host: {
@@ -111,8 +97,6 @@ function shapeOf(
 })
 export class ScChartBar implements ScChartSeriesLabels {
   private readonly state = inject(ScChartState);
-  /** The clip at the bars' square sides. */
-  protected readonly clipId = inject(_IdGenerator).getId('sc-chart-bar-clip-');
 
   readonly classInput = input<string>('', { alias: 'class' });
   /** The series' key in the rows. */
@@ -133,12 +117,6 @@ export class ScChartBar implements ScChartSeriesLabels {
   readonly maxBarSize = input<number | undefined>(undefined);
 
   protected readonly color = computed(() => `var(--color-${this.key()})`);
-
-  /** Rounded on one side only: drawn longer past the other, clipped there. */
-  protected readonly clipped = computed(() => {
-    const corners = this.corners();
-    return corners === 'end' || corners === 'base';
-  });
 
   protected readonly bars = computed<ScBarChartBar[]>(() => {
     const categories = this.state.categoryScale();
