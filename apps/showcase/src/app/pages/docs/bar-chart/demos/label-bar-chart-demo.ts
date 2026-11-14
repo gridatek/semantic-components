@@ -44,7 +44,7 @@ import {
         <g scChartGrid />
         <g scChartCategoryAxis [tickFormatter]="short" />
         <g scChartCursor />
-        <g scChartBar key="desktop" [radius]="8">
+        <g scChartBar key="desktop">
           <g scChartLabels />
         </g>
       </svg>

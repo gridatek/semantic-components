@@ -80,7 +80,7 @@ import {
                 class="text-[10px]"
                 [tickFormatter]="initial"
               />
-              <g scChartBar key="amount" [radius]="[3, 3, 0, 0]" />
+              <g scChartBar key="amount" corners="end" />
             </svg>
             <div scChartTooltip #tooltip="scChartTooltip">
               @for (item of tooltip.payload(); track item.dataKey) {

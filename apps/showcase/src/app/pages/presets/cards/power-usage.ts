@@ -65,7 +65,7 @@ import {
             [margin]="{ left: 0, right: 0, top: 4, bottom: 0 }"
           >
             <g scChartCategoryAxis class="text-xs" />
-            <g scChartBar key="usage" [radius]="[4, 4, 0, 0]" />
+            <g scChartBar key="usage" corners="end" />
           </svg>
           <div scChartTooltip #tooltip="scChartTooltip">
             @for (item of tooltip.payload(); track item.dataKey) {

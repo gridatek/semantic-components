@@ -59,7 +59,7 @@ import {
         aria-label="Desktop visitors, January to June"
       >
         <g scChartCursor />
-        <g scChartBar key="desktop" [radius]="4">
+        <g scChartBar key="desktop">
           <g scChartLabels position="start" [formatter]="name" />
           <g scChartLabels />
         </g>

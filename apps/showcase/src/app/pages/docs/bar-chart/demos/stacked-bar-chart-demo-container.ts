@@ -69,8 +69,8 @@ import {
         <g scChartGrid />
         <g scChartCategoryAxis [tickFormatter]="short" />
         <g scChartCursor />
-        <g scChartBar key="desktop" stack="a" [radius]="[0, 0, 4, 4]" />
-        <g scChartBar key="mobile" stack="a" [radius]="[4, 4, 0, 0]" />
+        <g scChartBar key="desktop" stack="a" corners="base" />
+        <g scChartBar key="mobile" stack="a" corners="end" />
       </svg>
       <div scChartTooltip #tooltip="scChartTooltip">
         <div scChartTooltipLabel>{{ tooltip.label() }}</div>

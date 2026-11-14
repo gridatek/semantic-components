@@ -88,7 +88,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
                   [attr.aria-label]="holding.name + ' dividends by quarter'"
                   [margin]="{ top: 0, right: 0, bottom: 0, left: 0 }"
                 >
-                  <g scChartBar key="value" [radius]="[3, 3, 0, 0]" />
+                  <g scChartBar key="value" corners="end" />
                 </svg>
                 <div scChartTooltip #tooltip="scChartTooltip">
                   @for (item of tooltip.payload(); track item.dataKey) {

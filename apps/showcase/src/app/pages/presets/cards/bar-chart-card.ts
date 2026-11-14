@@ -85,8 +85,8 @@ const DELTA = Math.round(((DESKTOP - MOBILE) / MOBILE) * 100);
           >
             <g scChartGrid class="[&_line]:[stroke-dasharray:3_3]" />
             <g scChartCategoryAxis [tickFormatter]="short" />
-            <g scChartBar key="desktop" [radius]="[6, 6, 0, 0]" />
-            <g scChartBar key="mobile" [radius]="[6, 6, 0, 0]" />
+            <g scChartBar key="desktop" corners="end" />
+            <g scChartBar key="mobile" corners="end" />
           </svg>
           <div scChartTooltip #tooltip="scChartTooltip">
             <div scChartTooltipLabel>{{ tooltip.label() }}</div>

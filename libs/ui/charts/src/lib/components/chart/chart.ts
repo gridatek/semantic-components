@@ -1,4 +1,5 @@
 import { Directive, computed, inject, input } from '@angular/core';
+import { injectPreset } from '@semantic-components/ui';
 import { cn } from 'cn';
 import { ScChartState } from './chart-state';
 import type { ScChartConfig, ScChartDatum } from './chart-types';
@@ -20,6 +21,8 @@ import type { ScChartConfig, ScChartDatum } from './chart-types';
 })
 export class ScChart {
   readonly state = inject(ScChartState);
+  /** The preset's: how round the bars are (`--chart-bar-radius`). */
+  private readonly chartStyles = injectPreset().chart.chart;
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly data = input<readonly ScChartDatum[]>([]);
@@ -28,6 +31,7 @@ export class ScChart {
   protected readonly class = computed(() =>
     cn(
       'relative flex aspect-video min-h-0 flex-col justify-center text-xs',
+      this.chartStyles,
       this.classInput(),
     ),
   );

@@ -41,7 +41,7 @@ import {
         <g scChartGrid />
         <g scChartCategoryAxis [tickFormatter]="short" />
         <g scChartCursor />
-        <g scChartBar key="desktop" [radius]="8" />
+        <g scChartBar key="desktop" />
       </svg>
       <div scChartTooltip #tooltip="scChartTooltip">
         @for (item of tooltip.payload(); track item.dataKey) {

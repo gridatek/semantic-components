@@ -1,3 +1,4 @@
+import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   Component,
   DestroyRef,
@@ -15,44 +16,51 @@ import {
 } from '../chart/chart-series';
 import { ScChartState, numberOf } from '../chart/chart-state';
 
-/** Corners' radii: top start, top end, bottom end, bottom start. */
-export type ScChartRadius = number | readonly [number, number, number, number];
-
-/** A rectangle with each corner's own radius (clamped to fit). */
-function roundedRect(
-  x: number,
-  y: number,
-  width: number,
-  height: number,
-  [tl, tr, br, bl]: readonly [number, number, number, number],
-): string {
-  const max = Math.min(width, height) / 2;
-  const [a, b, c, d] = [tl, tr, br, bl].map((r) =>
-    Math.max(0, Math.min(r, max)),
-  );
-  return [
-    `M${x + a},${y}`,
-    `H${x + width - b}`,
-    `A${b},${b} 0 0 1 ${x + width},${y + b}`,
-    `V${y + height - c}`,
-    `A${c},${c} 0 0 1 ${x + width - c},${y + height}`,
-    `H${x + d}`,
-    `A${d},${d} 0 0 1 ${x},${y + height - d}`,
-    `V${y + a}`,
-    `A${a},${a} 0 0 1 ${x + a},${y}`,
-    'Z',
-  ].join('');
-}
+/**
+ * Which corners are rounded — by how much is the style's (`--chart-bar-radius`,
+ * set by the preset): all, the bar's end's two, its base's two, or none.
+ */
+export type ScChartBarCorners = 'all' | 'end' | 'base' | 'none';
 
 interface ScBarChartBar {
   index: number;
-  path: string;
+  /** What is drawn: the bar, longer past its square side (clipped there). */
+  shape: { x: number; y: number; width: number; height: number };
   x: number;
   y: number;
   width: number;
   height: number;
   /** Its value is at or above its base. */
   up: boolean;
+}
+
+/** The rect drawn for a bar: its box, longer past the side left square. */
+function shapeOf(
+  box: { x: number; y: number; width: number; height: number },
+  corners: ScChartBarCorners,
+  vertical: boolean,
+  up: boolean,
+  past: number,
+): ScBarChartBar['shape'] {
+  if (corners === 'all' || corners === 'none') return box;
+  // The square side: its base (rounded at its end), or its end.
+  const squareAtBase = corners === 'end';
+  // Where the base is on screen: left of a bar across (up), under a column (up).
+  const baseIsStart = vertical ? up : !up;
+  const extendStart = squareAtBase === baseIsStart;
+  return vertical
+    ? {
+        x: extendStart ? box.x - past : box.x,
+        y: box.y,
+        width: box.width + past,
+        height: box.height,
+      }
+    : {
+        x: box.x,
+        y: extendStart ? box.y - past : box.y,
+        width: box.width,
+        height: box.height + past,
+      };
 }
 
 /**
@@ -64,9 +72,34 @@ interface ScBarChartBar {
   selector: 'g[scChartBar]',
   providers: [{ provide: SC_CHART_SERIES, useExisting: ScChartBar }],
   template: `
-    @for (bar of bars(); track bar.index) {
-      <svg:path [attr.d]="bar.path" [attr.fill]="fill() || color()" />
+    @if (clipped()) {
+      <svg:defs>
+        <svg:clipPath [id]="clipId">
+          @for (bar of bars(); track bar.index) {
+            <svg:rect
+              [attr.x]="bar.x"
+              [attr.y]="bar.y"
+              [attr.width]="bar.width"
+              [attr.height]="bar.height"
+            />
+          }
+        </svg:clipPath>
+      </svg:defs>
     }
+    <svg:g [attr.clip-path]="clipped() ? 'url(#' + clipId + ')' : null">
+      @for (bar of bars(); track bar.index) {
+        <svg:rect
+          [class]="
+            corners() === 'none' ? '' : '[rx:var(--chart-bar-radius,0px)]'
+          "
+          [attr.x]="bar.shape.x"
+          [attr.y]="bar.shape.y"
+          [attr.width]="bar.shape.width"
+          [attr.height]="bar.shape.height"
+          [attr.fill]="fill() || color()"
+        />
+      }
+    </svg:g>
     <ng-content />
   `,
   host: {
@@ -78,6 +111,8 @@ interface ScBarChartBar {
 })
 export class ScChartBar implements ScChartSeriesLabels {
   private readonly state = inject(ScChartState);
+  /** The clip at the bars' square sides. */
+  protected readonly clipId = inject(_IdGenerator).getId('sc-chart-bar-clip-');
 
   readonly classInput = input<string>('', { alias: 'class' });
   /** The series' key in the rows. */
@@ -85,10 +120,11 @@ export class ScChartBar implements ScChartSeriesLabels {
   /** Bars of a stack are drawn on one another. */
   readonly stack = input<string | null>(null);
   /**
-   * Its corners' radius — one, or each: `[4, 4, 0, 0]` (its end's two, then
-   * its base's). Below 0 or across, turned with it.
+   * Its rounded corners: all, its end's two (`end`: the top of a column),
+   * its base's two (`base`), or none — turned with it below 0 or across.
+   * How round is the style's: the preset sets `--chart-bar-radius`.
    */
-  readonly radius = input<ScChartRadius>(4);
+  readonly corners = input<ScChartBarCorners>('all');
   /** Instead of its color: `url(#gradient)`. */
   readonly fill = input('');
   /** Its width in pixels, centered in its slot (Recharts' `barSize`); the slot's by default. */
@@ -97,6 +133,12 @@ export class ScChartBar implements ScChartSeriesLabels {
   readonly maxBarSize = input<number | undefined>(undefined);
 
   protected readonly color = computed(() => `var(--color-${this.key()})`);
+
+  /** Rounded on one side only: drawn longer past the other, clipped there. */
+  protected readonly clipped = computed(() => {
+    const corners = this.corners();
+    return corners === 'end' || corners === 'base';
+  });
 
   protected readonly bars = computed<ScBarChartBar[]>(() => {
     const categories = this.state.categoryScale();
@@ -112,11 +154,10 @@ export class ScChartBar implements ScChartSeriesLabels {
     const offset =
       (slots(this.stack() ?? `\u0000${this.key()}`) ?? 0) +
       (slot - thickness) / 2;
-    const radius = this.radius();
-    const [ts, te, be, bs] =
-      typeof radius === 'number'
-        ? ([radius, radius, radius, radius] as const)
-        : radius;
+    const corners = this.corners();
+    // Past the square side by half its thickness: more than any corner can be
+    // (a rect's rx is at most half its width).
+    const past = thickness / 2;
     return (this.state.extents().get(this.key()) ?? []).map(
       ([low, high], index) => {
         const a = values(low);
@@ -136,20 +177,11 @@ export class ScChartBar implements ScChartSeriesLabels {
               width: thickness,
               height: Math.abs(a - b),
             };
-        // Screen corners (top left, top right, bottom right, bottom left) from
-        // its end's and its base's: turned a quarter across, mirrored below 0.
-        const corners: readonly [number, number, number, number] = vertical
-          ? up
-            ? [bs, ts, te, be]
-            : [ts, bs, be, te]
-          : up
-            ? [ts, te, be, bs]
-            : [bs, be, te, ts];
         return {
           index,
           up,
           ...box,
-          path: roundedRect(box.x, box.y, box.width, box.height, corners),
+          shape: shapeOf(box, corners, vertical, up, past),
         };
       },
     );
