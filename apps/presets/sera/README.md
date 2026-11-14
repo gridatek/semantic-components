@@ -10,6 +10,10 @@ shadcn's Sera, rebuilt with Semantic Components as a small website: the same scr
 npx nx serve sera   # http://localhost:4202
 ```
 
+`/screens` — shadcn's six screens on one page, in the site (light, 1440px wide):
+
+![The six Sera screens: Audience Analytics, Article Directory, Empty State, Edit Article, Media Library and Media Library Table, in the site's header and footer](screenshots/screens.png)
+
 ## The website
 
 A header (the Sera mark, the pages, the theme — Light, Dark, System, the library's `ScThemeManager`; a menu on a phone), the page, a footer — `layouts/site-layout.ts`. One width for every page: content up to 1400px, its sides the screens' `--gap` (1rem, 1.5rem from md, 2rem from xl) — `px-(--page-gutter)` on each full-width part (`styles.css`). Not shadcn's: its screens have no navigation; the pages link to each other through them.
