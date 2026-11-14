@@ -92,6 +92,7 @@ You write what they show, from their state — Recharts' `content`, as parts: `l
 </div>
 ```
 
+- **Closed, it keeps what it showed last** (the first category before any): what you write from `label()` always has a category to format; the box is hidden then, from screen readers too. `active()` says whether it shows.
 - **The values are raw numbers**: `| number` writes them in the app's locale (its `LOCALE_ID`).
 - **The tooltip's box** is the preset's (`chart.tooltip`): its corners, border or ring, shadow — shadcn's, style by style. Your `class` adds to it.
 - **Names and colours** come from the chart's `config`; a pie's slice, a radial bar are named and coloured by their category.

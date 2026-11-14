@@ -1,4 +1,10 @@
-import { Directive, computed, inject, input } from '@angular/core';
+import {
+  Directive,
+  computed,
+  inject,
+  input,
+  linkedSignal,
+} from '@angular/core';
 import { injectPreset } from '@semantic-components/ui';
 import { cn } from 'cn';
 import { ScChartState, numberOf } from './chart-state';
@@ -29,14 +35,24 @@ export class ScChartTooltip {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  /** The active category, when its row exists. */
-  private readonly index = computed(() => {
+  /** A category is pointed at, and its row exists: the tooltip shows. */
+  readonly active = computed(() => {
     const index = this.state.activeIndex();
-    return index !== null && this.state.data()[index] ? index : null;
+    return index !== null && !!this.state.data()[index];
   });
 
-  /** A category is pointed at: the tooltip shows. */
-  readonly active = computed(() => this.index() !== null);
+  /**
+   * The category shown: the active one — closed, the last one shown (the
+   * first before any), so what you write from it always has a category; the
+   * box is invisible then, to screen readers too.
+   */
+  private readonly index = linkedSignal<number | null, number | null>({
+    source: () => this.state.activeIndex(),
+    computation: (index, previous) => {
+      const shown = index ?? previous?.value ?? 0;
+      return this.state.data()[shown] ? shown : null;
+    },
+  });
 
   /** The category's name, as in the data. */
   readonly label = computed(() => {
