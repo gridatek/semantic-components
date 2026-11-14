@@ -1,5 +1,6 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, input } from '@angular/core';
 import { ScSeparator } from '@semantic-components/ui';
+import { ARTICLES, type Article } from '../article-directory/articles-data';
 import { ArticleSidebar } from './article-sidebar';
 import { EditHeader } from './edit-header';
 import { EditorToolbar } from './editor-toolbar';
@@ -30,44 +31,48 @@ import { EditorToolbar } from './editor-toolbar';
               <h2
                 class="font-heading text-4xl leading-12 font-medium tracking-wide uppercase"
               >
-                The Future of Sustainable Architecture
+                {{ article()?.title ?? 'Untitled Article' }}
               </h2>
-              <p>
-                As cities continue to expand at an unprecedented rate, the
-                architectural paradigm is shifting from mere expansion to
-                sustainable integration. The concrete jungles of the 20th
-                century are making way for structures that breathe, adapt, and
-                give back to their environments.
-              </p>
-              <p>
-                Historically, urban development has been a zero-sum game with
-                nature.
-              </p>
-              <h3 class="font-heading text-2xl tracking-wide uppercase">
-                The Living Building Challenge
-              </h3>
-              <p>
-                Sterling's latest project in downtown Seattle is a testament to
-                this new philosophy. "We are no longer designing static
-                structures," Sterling explained during a recent site visit. "We
-                are engineering localized ecosystems."
-              </p>
-              <p>
-                The building features a facade of responsive biomaterials that
-                adjust their porosity based on humidity and temperature,
-                significantly reducing the need for artificial climate control.
-                Rainwater is not merely channeled away but captured, filtered
-                through a series of integrated rooftop wetlands, and reused
-                within the building's greywater system.
-              </p>
-              <p class="text-muted-foreground text-sm">
-                This shift requires more than just innovative materials; it
-                demands a fundamental change in how we value space. Check with
-                engineering team for specific stats.
-              </p>
+              @if (article()) {
+                <p>
+                  As cities continue to expand at an unprecedented rate, the
+                  architectural paradigm is shifting from mere expansion to
+                  sustainable integration. The concrete jungles of the 20th
+                  century are making way for structures that breathe, adapt, and
+                  give back to their environments.
+                </p>
+                <p>
+                  Historically, urban development has been a zero-sum game with
+                  nature.
+                </p>
+                <h3 class="font-heading text-2xl tracking-wide uppercase">
+                  The Living Building Challenge
+                </h3>
+                <p>
+                  Sterling's latest project in downtown Seattle is a testament
+                  to this new philosophy. "We are no longer designing static
+                  structures," Sterling explained during a recent site visit.
+                  "We are engineering localized ecosystems."
+                </p>
+                <p>
+                  The building features a facade of responsive biomaterials that
+                  adjust their porosity based on humidity and temperature,
+                  significantly reducing the need for artificial climate
+                  control. Rainwater is not merely channeled away but captured,
+                  filtered through a series of integrated rooftop wetlands, and
+                  reused within the building's greywater system.
+                </p>
+                <p class="text-muted-foreground text-sm">
+                  This shift requires more than just innovative materials; it
+                  demands a fundamental change in how we value space. Check with
+                  engineering team for specific stats.
+                </p>
+              } @else {
+                <p class="text-muted-foreground">Start writing…</p>
+              }
             </div>
           </section>
-          <app-article-sidebar />
+          <app-article-sidebar [article]="article()" />
         </div>
       </div>
     </div>
@@ -75,4 +80,10 @@ import { EditorToolbar } from './editor-toolbar';
   host: { class: 'block' },
   encapsulation: ViewEncapsulation.None,
 })
-export class EditArticle {}
+export class EditArticle {
+  /**
+   * The article being edited: its title and details (the text is shadcn's,
+   * the same for every one). shadcn's first by default; null, a new one.
+   */
+  readonly article = input<Article | null>(ARTICLES[0]);
+}

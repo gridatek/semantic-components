@@ -1,4 +1,5 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, computed, input } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   ScBadge,
   ScCard,
@@ -32,93 +33,7 @@ import {
   SiSearchIcon,
 } from '@semantic-icons/lucide-icons';
 import { cn } from 'cn';
-
-type Status = 'in-revision' | 'final-edit' | 'drafting' | 'published';
-
-interface Article {
-  title: string;
-  wordProgress: string;
-  author: string;
-  issue: string;
-  status: Status;
-  statusLabel: string;
-  progress: number;
-}
-
-const ARTICLES: Article[] = [
-  {
-    title: 'The Future of Sustainable Architecture',
-    wordProgress: '1.4k / 2.6k words',
-    author: 'Elena Rostova',
-    issue: 'Summer 2024',
-    status: 'in-revision',
-    statusLabel: 'In revision',
-    progress: 45,
-  },
-  {
-    title: "Brutalism's Second Act",
-    wordProgress: '2.1k / 2.5k words',
-    author: 'Marcus Chen',
-    issue: 'Summer 2024',
-    status: 'final-edit',
-    statusLabel: 'Final edit',
-    progress: 90,
-  },
-  {
-    title: 'The Typography of Public Spaces',
-    wordProgress: '0.5k / 1.5k words',
-    author: 'Sarah Jenkins',
-    issue: 'Autumn 2024',
-    status: 'drafting',
-    statusLabel: 'Drafting',
-    progress: 20,
-  },
-  {
-    title: 'Rethinking Urban Canopies',
-    wordProgress: '1.8k / 1.8k words',
-    author: "David O'Connor",
-    issue: 'Summer 2024',
-    status: 'published',
-    statusLabel: 'Published',
-    progress: 100,
-  },
-  {
-    title: 'Light, Glass, and the Modern Museum',
-    wordProgress: '1.2k / 2.0k words',
-    author: 'Amara Osei',
-    issue: 'Autumn 2024',
-    status: 'in-revision',
-    statusLabel: 'In revision',
-    progress: 55,
-  },
-  {
-    title: 'Concrete Utopias: Housing in the 21st Century',
-    wordProgress: '3.0k / 3.0k words',
-    author: 'Tomás Herrera',
-    issue: 'Summer 2024',
-    status: 'published',
-    statusLabel: 'Published',
-    progress: 100,
-  },
-  {
-    title: 'Designing for Silence',
-    wordProgress: '0.8k / 2.2k words',
-    author: 'Ingrid Solberg',
-    issue: 'Winter 2024',
-    status: 'drafting',
-    statusLabel: 'Drafting',
-    progress: 30,
-  },
-  {
-    title: 'The Invisible Infrastructure of Cities',
-    wordProgress: '2.4k / 2.8k words',
-    author: 'James Whitfield',
-    issue: 'Autumn 2024',
-    status: 'final-edit',
-    statusLabel: 'Final edit',
-    progress: 85,
-  },
-];
+import { type Status, articlesOf } from './articles-data';
 
 const BADGE_VARIANT = {
   'in-revision': 'outline',
@@ -141,6 +56,7 @@ const DOT_CLASS: Record<Status, string> = {
 @Component({
   selector: 'app-article-list',
   imports: [
+    RouterLink,
     ScBadge,
     ScCard,
     ScCardBody,
@@ -198,15 +114,16 @@ const DOT_CLASS: Record<Status, string> = {
               </tr>
             </thead>
             <tbody scTableBody>
-              @for (row of articles; track row.title) {
+              @for (row of articles(); track row.id) {
                 <tr scTableRow>
                   <td scTableCell>
                     <div class="flex flex-col gap-1">
-                      <p
-                        class="font-heading text-foreground text-xl tracking-tight"
+                      <a
+                        class="font-heading text-foreground text-xl tracking-tight underline-offset-4 hover:underline"
+                        [routerLink]="['/articles', row.id]"
                       >
                         {{ row.title }}
-                      </p>
+                      </a>
                       <p class="text-muted-foreground text-xs">
                         {{ row.wordProgress }}
                       </p>
@@ -276,7 +193,9 @@ const DOT_CLASS: Record<Status, string> = {
   encapsulation: ViewEncapsulation.None,
 })
 export class ArticleList {
-  protected readonly articles = ARTICLES;
+  /** An issue's id: its articles only; all of them without one. */
+  readonly issue = input<string | null>(null);
+  protected readonly articles = computed(() => articlesOf(this.issue()));
   protected readonly badgeVariant = BADGE_VARIANT;
 
   protected dot(status: Status): string {

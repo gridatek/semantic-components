@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   ScBadge,
-  ScButton,
   ScCard,
   ScCardBody,
   ScEmpty,
@@ -10,6 +10,7 @@ import {
   ScEmptyHeader,
   ScEmptyMedia,
   ScEmptyTitle,
+  ScLink,
   ScSeparator,
 } from '@semantic-components/ui';
 import { SiFileTextIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
@@ -50,8 +51,8 @@ const STAGES: Stage[] = [
 @Component({
   selector: 'app-empty-directory',
   imports: [
+    RouterLink,
     ScBadge,
-    ScButton,
     ScCard,
     ScCardBody,
     ScEmpty,
@@ -60,6 +61,7 @@ const STAGES: Stage[] = [
     ScEmptyHeader,
     ScEmptyMedia,
     ScEmptyTitle,
+    ScLink,
     ScSeparator,
     SiFileTextIcon,
     SiPlusIcon,
@@ -88,10 +90,10 @@ const STAGES: Stage[] = [
             </div>
           </div>
           <div scEmptyBody>
-            <button scButton>
+            <a scLink variant="button" routerLink="/articles/new">
               <svg siPlusIcon data-icon="inline-start"></svg>
               Create first article
-            </button>
+            </a>
           </div>
         </div>
         <div scSeparator class="max-w-2xl"></div>

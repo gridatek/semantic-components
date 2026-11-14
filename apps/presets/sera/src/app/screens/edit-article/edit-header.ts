@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   ScBadge,
   ScBreadcrumb,
@@ -16,6 +17,7 @@ import {
 @Component({
   selector: 'app-edit-header',
   imports: [
+    RouterLink,
     ScBadge,
     ScBreadcrumb,
     ScBreadcrumbItem,
@@ -33,7 +35,11 @@ import {
         <nav scBreadcrumb aria-label="Breadcrumb">
           <ol scBreadcrumbList>
             <li scBreadcrumbItem>
-              <a scBreadcrumbLink href="#" class="flex items-center gap-1.5">
+              <a
+                scBreadcrumbLink
+                routerLink="/articles"
+                class="flex items-center gap-1.5"
+              >
                 <svg siArrowLeftIcon class="size-3.5"></svg>
                 Back to articles
               </a>

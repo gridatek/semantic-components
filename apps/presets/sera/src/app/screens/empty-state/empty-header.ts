@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   ScBreadcrumb,
   ScBreadcrumbItem,
@@ -12,6 +13,7 @@ import { SiArrowLeftIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-empty-header',
   imports: [
+    RouterLink,
     ScBreadcrumb,
     ScBreadcrumbItem,
     ScBreadcrumbLink,
@@ -28,7 +30,11 @@ import { SiArrowLeftIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
         <nav scBreadcrumb aria-label="Breadcrumb">
           <ol scBreadcrumbList>
             <li scBreadcrumbItem>
-              <a scBreadcrumbLink href="#" class="flex items-center gap-1.5">
+              <a
+                scBreadcrumbLink
+                routerLink="/dashboard"
+                class="flex items-center gap-1.5"
+              >
                 <svg siArrowLeftIcon class="size-3.5"></svg>
                 Editorial Dashboard
               </a>

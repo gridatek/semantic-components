@@ -1,27 +1,33 @@
 # Sera
 
-shadcn's Sera announcement, rebuilt with Semantic Components: the same pages, colours and fonts, our components. This is an app of screens — not the presets library (`libs/presets`), whose `sera` preset it uses.
+shadcn's Sera, rebuilt with Semantic Components as a small website: the same screens, colours and fonts, our components. This is an app — not the presets library (`libs/presets`), whose `sera` preset it uses.
 
 - **Source**: shadcn-ui/ui, `apps/v4/app/(app)/(styles)/sera` (MIT): six screens on `base-sera` — Audience Analytics, Article Directory, Empty State, Edit Article, Media Library, Media Library Table.
-- **Look**: the Sera preset (`app.config.ts`); shadcn's `taupe` theme, light and dark, square corners, and its fonts — Playfair Display for headings, Noto Sans for the text — in `styles.css` and `index.html`.
+- **Look**: the Sera preset (`app.config.ts`); shadcn's `taupe` theme (light only, as its screens), square corners, and its fonts — Playfair Display for headings, Noto Sans for the text — in `styles.css` and `index.html`.
 - **Charts**: the library's, as they are (Recharts' API).
 
 ```sh
 npx nx serve sera   # http://localhost:4202
 ```
 
-## Screens
+## The website
 
-`/` is shadcn's page: the header, then the six screens. Each also has its own route, full page — to compare with shadcn's and to take screenshots:
+A header (the Sera mark, the pages; a menu on a phone), the page, a footer — `layouts/site-layout.ts`. Not shadcn's: its screens have no navigation; the pages link to each other through them.
 
-| Route                  | Screen              | Folder (`src/app/screens/`) |
-| ---------------------- | ------------------- | --------------------------- |
-| `/audience-analytics`  | Audience Analytics  | `audience-analytics/`       |
-| `/article-directory`   | Article Directory   | `article-directory/`        |
-| `/empty-state`         | Empty State         | `empty-state/`              |
-| `/edit-article`        | Edit Article        | `edit-article/`             |
-| `/media-library`       | Media Library       | `media-library/`            |
-| `/media-library-table` | Media Library Table | `media-library-table/`      |
+| Route           | Page                                                                                         | From (`src/app/`)                                        |
+| --------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
+| `/`             | **Introducing Sera**: the hero, the pages, the issues, the style                             | `pages/home-page/`                                       |
+| `/dashboard`    | Audience analytics                                                                           | `screens/audience-analytics/`                            |
+| `/articles`     | The articles; `?issue=` filters them — an issue without any (Spring 2025) is the empty state | `screens/article-directory/`, `screens/empty-state/`     |
+| `/articles/:id` | An article to edit (`new`: a blank one); its title opens it from the list                    | `screens/edit-article/`                                  |
+| `/media`        | The media, as a grid or a table (a switch in the header)                                     | `screens/media-library/`, `screens/media-library-table/` |
+| `/screens`      | shadcn's announcement as it is: its header, then the six screens                             | `pages/sera-page/`                                       |
+
+The breadcrumbs lead to the pages ("Editorial Dashboard", "Back to articles", "Asset management"); "Create first article" opens a new one. The pages are in `pages/app-pages.ts`; the articles and issues in `screens/article-directory/articles-data.ts`, the media in `screens/media-library/media-data.ts`.
+
+## The screens alone
+
+Each screen also has its own route, full page and without the site — to compare with shadcn's and to take screenshots: `/audience-analytics`, `/article-directory`, `/empty-state`, `/edit-article`, `/media-library`, `/media-library-table`.
 
 Each follows shadcn's file of the same name, with our parts. Where they differ, on purpose:
 
@@ -33,3 +39,4 @@ Each follows shadcn's file of the same name, with our parts. Where they differ, 
 - **Lucide's newer names**: Funnel, Ellipsis, EllipsisVertical, CodeXml, TextAlignStart/Center/End.
 - **The traffic chart's dashed line, dotted grid and marked point** are classes on our chart parts (no `strokeDasharray` or `ReferenceDot` input).
 - **The size filter** is our Range Slider (two thumbs); our Slider has one.
+- **Links where shadcn's go nowhere**: the breadcrumbs, the article titles, "Create first article"; the media header's grid/table switch, only on the site.

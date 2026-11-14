@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, input } from '@angular/core';
 import { ScSeparator } from '@semantic-components/ui';
 import { ArticleList } from './article-list';
 import { DirectoryHeader } from './directory-header';
@@ -14,11 +14,14 @@ import { DirectoryHeader } from './directory-header';
       <app-directory-header />
       <div scSeparator class="hidden sm:block"></div>
       <div class="w-full p-(--gap)">
-        <app-article-list />
+        <app-article-list [issue]="issue()" />
       </div>
     </div>
   `,
   host: { class: 'block' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ArticleDirectory {}
+export class ArticleDirectory {
+  /** An issue's id: its articles only. */
+  readonly issue = input<string | null>(null);
+}

@@ -1,4 +1,9 @@
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+import {
+  Component,
+  ViewEncapsulation,
+  input,
+  linkedSignal,
+} from '@angular/core';
 import {
   ScCard,
   ScCardBody,
@@ -31,6 +36,7 @@ import {
   ScTextarea,
 } from '@semantic-components/ui';
 import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
+import { type Article } from '../article-directory/articles-data';
 
 interface Milestone {
   id: string;
@@ -124,7 +130,7 @@ const ISSUES = [
             </div>
             <div scField>
               <label scLabel>Author</label>
-              <input scInput value="Elena Rostova" />
+              <input scInput [value]="article()?.author ?? ''" />
             </div>
           </div>
         </div>
@@ -185,5 +191,12 @@ const ISSUES = [
 export class ArticleSidebar {
   protected readonly milestones = MILESTONES;
   protected readonly issues = ISSUES;
-  protected readonly issue = signal('summer-2024');
+  /** The article whose details these are; null, a new one. */
+  readonly article = input<Article | null>(null);
+
+  /** Its issue ("Summer 2024" → summer-2024), Summer's for a new one. */
+  protected readonly issue = linkedSignal(() => {
+    const issue = this.article()?.issue;
+    return issue ? issue.toLowerCase().replace(' ', '-') : 'summer-2024';
+  });
 }
