@@ -66,8 +66,8 @@ import { PreviewWeeklyFitnessSummary } from './weekly-fitness-summary';
 
 /**
  * Every demo of shadcn's Create preview, made with our parts, in shadcn's
- * columns (registry blocks preview-02, then preview): side by side as many as
- * fit, the rest wrapping under them, so the page never scrolls sideways.
+ * order (registry blocks preview-02, then preview), in three columns at most:
+ * one, two or three as the frame fits, every card at a column's width.
  */
 @Component({
   selector: 'app-preview-cards',
@@ -138,106 +138,78 @@ import { PreviewWeeklyFitnessSummary } from './weekly-fitness-summary';
     PreviewUpcomingPayments,
   ],
   template: `
-    <div class="flex flex-wrap items-start gap-6">
-      <div class="flex min-w-0 grow basis-80 flex-col gap-6">
-        <app-preview-contribution-history />
-        <app-home-empty-distribute-track />
-        <app-preview-qr-connect />
-        <app-preview-dividend-income />
-        <app-preview-index-investing />
-        <app-preview-syncing-state />
-      </div>
-      <div class="flex min-w-0 grow basis-80 flex-col gap-6">
-        <app-preview-payout-threshold />
-        <app-preview-claimable-balance />
-        <app-preview-preferences />
-        <app-preview-savings-progress />
-        <app-preview-kitchen-island />
-      </div>
-      <div class="flex min-w-0 grow-2 basis-[41.5rem] flex-col gap-6">
-        <app-preview-savings-targets />
-        <app-preview-recent-transactions />
-        <div class="grid items-start gap-6 sm:grid-cols-2">
-          <div class="flex flex-col gap-6">
-            <app-preview-sidebar-nav />
-            <app-preview-faq />
-          </div>
-          <div class="flex flex-col gap-6">
-            <app-preview-payments />
-            <app-preview-front-door />
-          </div>
-        </div>
-        <app-preview-release-catalog />
-      </div>
-      <div class="flex min-w-0 grow basis-80 flex-col gap-6">
-        <app-preview-account-access />
-        <app-preview-card-overview />
-        <app-preview-transfer-funds />
-        <app-preview-cover-art />
-        <app-preview-loading-card />
-      </div>
-      <div class="flex min-w-0 grow basis-80 flex-col gap-6">
-        <app-preview-receiving-method />
-        <app-preview-power-usage />
-        <app-preview-empty-connect-bank />
-        <app-preview-upcoming-payments />
-        <app-preview-roller-shades />
-      </div>
-      <div class="flex min-w-0 grow basis-80 flex-col gap-6">
-        <app-preview-stock-performance />
-        <app-preview-empty-explore-catalog />
-        <app-home-new-milestone />
-        <app-preview-social-links />
-        <app-preview-notification-settings />
-      </div>
-      <div class="flex min-w-0 grow basis-80 flex-col gap-6">
-        <app-preview-style-overview />
-        <app-preview-typography-specimen />
-        <app-preview-codespaces-card />
-        <app-preview-invoice />
-      </div>
-      <div class="flex min-w-0 grow basis-80 flex-col gap-6">
-        <app-preview-icon-preview-grid />
-        <app-preview-ui-elements />
-        <app-preview-observability-card />
-        <app-preview-shipping-address />
-      </div>
-      <div class="flex min-w-0 grow basis-80 flex-col gap-6">
-        <app-preview-environment-variables />
-        <app-preview-bar-chart-card />
-        <app-preview-invite-team />
-        <app-preview-activate-agent-dialog />
-      </div>
-      <div class="flex min-w-0 grow basis-80 flex-col gap-6">
-        <app-preview-skeleton-loading />
-        <app-preview-pie-chart-card />
-        <app-preview-no-team-members />
-        <app-preview-report-bug />
-        <app-preview-contributors />
-      </div>
-      <div class="flex min-w-0 grow basis-80 flex-col gap-6">
-        <app-preview-feedback-form />
-        <app-preview-book-appointment />
-        <app-preview-sleep-report />
-        <app-preview-github-profile />
-      </div>
-      <div class="flex min-w-0 grow basis-80 flex-col gap-6">
-        <app-preview-weekly-fitness-summary />
-        <app-preview-file-upload />
-        <app-preview-analytics-card />
-        <app-preview-usage-card />
-        <app-preview-shortcuts />
-      </div>
-      <div class="flex min-w-0 grow basis-80 flex-col gap-6">
-        <app-preview-anomaly-alert />
-        <app-preview-live-waveform />
-        <app-preview-visitors />
-        <app-preview-contributions-activity />
-        <app-preview-not-found />
-      </div>
+    <!-- Three columns at most, as many as the frame (not the window) fits:
+      each card whole, in the order shadcn's Create shows them. -->
+    <div
+      class="columns-1 gap-6 *:mb-6 *:break-inside-avoid @3xl:columns-2 @6xl:columns-3"
+    >
+      <app-preview-contribution-history />
+      <app-home-empty-distribute-track />
+      <app-preview-qr-connect />
+      <app-preview-dividend-income />
+      <app-preview-index-investing />
+      <app-preview-syncing-state />
+      <app-preview-payout-threshold />
+      <app-preview-claimable-balance />
+      <app-preview-preferences />
+      <app-preview-savings-progress />
+      <app-preview-kitchen-island />
+      <app-preview-savings-targets />
+      <app-preview-recent-transactions />
+      <app-preview-sidebar-nav />
+      <app-preview-faq />
+      <app-preview-payments />
+      <app-preview-front-door />
+      <app-preview-release-catalog />
+      <app-preview-account-access />
+      <app-preview-card-overview />
+      <app-preview-transfer-funds />
+      <app-preview-cover-art />
+      <app-preview-loading-card />
+      <app-preview-receiving-method />
+      <app-preview-power-usage />
+      <app-preview-empty-connect-bank />
+      <app-preview-upcoming-payments />
+      <app-preview-roller-shades />
+      <app-preview-stock-performance />
+      <app-preview-empty-explore-catalog />
+      <app-home-new-milestone />
+      <app-preview-social-links />
+      <app-preview-notification-settings />
+      <app-preview-style-overview />
+      <app-preview-typography-specimen />
+      <app-preview-codespaces-card />
+      <app-preview-invoice />
+      <app-preview-icon-preview-grid />
+      <app-preview-ui-elements />
+      <app-preview-observability-card />
+      <app-preview-shipping-address />
+      <app-preview-environment-variables />
+      <app-preview-bar-chart-card />
+      <app-preview-invite-team />
+      <app-preview-activate-agent-dialog />
+      <app-preview-skeleton-loading />
+      <app-preview-pie-chart-card />
+      <app-preview-no-team-members />
+      <app-preview-report-bug />
+      <app-preview-contributors />
+      <app-preview-feedback-form />
+      <app-preview-book-appointment />
+      <app-preview-sleep-report />
+      <app-preview-github-profile />
+      <app-preview-weekly-fitness-summary />
+      <app-preview-file-upload />
+      <app-preview-analytics-card />
+      <app-preview-usage-card />
+      <app-preview-shortcuts />
+      <app-preview-anomaly-alert />
+      <app-preview-live-waveform />
+      <app-preview-visitors />
+      <app-preview-contributions-activity />
+      <app-preview-not-found />
     </div>
   `,
-  host: { class: 'block' },
+  host: { class: '@container block' },
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviewCards {}
