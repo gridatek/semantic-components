@@ -3,6 +3,7 @@ import {
   DestroyRef,
   Directive,
   Injector,
+  afterNextRender,
   booleanAttribute,
   computed,
   effect,
@@ -21,6 +22,16 @@ export type ScCommandFilter = (
   search: string,
   keywords: readonly string[],
 ) => boolean;
+
+/** Items in the page's order; one not in the page yet keeps its place. */
+const byPageOrder = (items: readonly ScCommandItem[]): ScCommandItem[] =>
+  [...items].sort((a, b) => {
+    if (!a.element.isConnected || !b.element.isConnected) return 0;
+    return a.element.compareDocumentPosition(b.element) &
+      Node.DOCUMENT_POSITION_FOLLOWING
+      ? -1
+      : 1;
+  });
 
 /** Lower case, without accents: "Éclair" is found by "ecla". */
 const normalize = (text: string) =>
@@ -86,9 +97,10 @@ export class ScCommand {
   /** The highlighted item. */
   readonly active = this.activeSignal.asReadonly();
 
+  private readonly injector = inject(Injector);
   private readonly keyManager = new ActiveDescendantKeyManager(
     this.itemsSignal,
-    inject(Injector),
+    this.injector,
   ).skipPredicate((item) => !item.shown() || item.disabled);
 
   protected readonly class = computed(() =>
@@ -169,15 +181,33 @@ export class ScCommand {
     event.preventDefault();
   }
 
-  /** @internal Registers an item, in the page's order. */
+  /**
+   * @internal Registers an item, in the page's order. An item created with a
+   * new view (a page switched, results arrived) registers before the view is
+   * in the page, and two detached elements have no order — browsers answer
+   * at random (WebKit) or by memory address: added last for now (creation
+   * order, the template's), sorted once rendered.
+   */
   register(item: ScCommandItem): void {
-    this.itemsSignal.update((items) =>
-      [...items, item].sort((a, b) =>
-        a.element.compareDocumentPosition(b.element) &
-        Node.DOCUMENT_POSITION_FOLLOWING
-          ? -1
-          : 1,
-      ),
+    if (!item.element.isConnected) {
+      this.itemsSignal.update((items) => [...items, item]);
+      this.sortOnceRendered();
+      return;
+    }
+    this.itemsSignal.update((items) => byPageOrder([...items, item]));
+  }
+
+  private sortPending = false;
+
+  private sortOnceRendered(): void {
+    if (this.sortPending) return;
+    this.sortPending = true;
+    afterNextRender(
+      () => {
+        this.sortPending = false;
+        this.itemsSignal.update(byPageOrder);
+      },
+      { injector: this.injector },
     );
   }
 

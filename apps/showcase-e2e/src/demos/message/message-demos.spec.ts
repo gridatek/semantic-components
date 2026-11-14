@@ -1,5 +1,5 @@
 import { type Page } from '@playwright/test';
-import { collectErrors } from '../../interaction';
+import { allowClipboard, collectErrors } from '../../interaction';
 import { box } from '../../looks';
 import { expectNoHorizontalScroll } from '../../mobile';
 import { expectRtl } from '../../rtl';
@@ -77,9 +77,8 @@ test('Status: the message in progress announced', async ({ page }) => {
 
 test('Pattern: Copy becomes Copied; feedback pressed and released', async ({
   page,
-  context,
 }) => {
-  await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+  await allowClipboard(page);
   await page.goto(demo('pattern'));
   const reply = messages(page).nth(1);
   await reply.getByRole('button', { name: 'Copy' }).click();

@@ -220,8 +220,18 @@ test('Standalone: shown with no trigger, nothing highlighted until used; one tab
   await expect(page.getByText('Chosen: Message')).toBeVisible();
   await expect.poll(() => openMenuCount(page)).toBe(1);
   await expect(menu).toBeVisible();
-  // Tab leaves it; the highlight goes with the focus.
+  // Tab leaves it; the highlight goes with the focus. A button after it to
+  // go to: past the page's last stop, headless Firefox keeps the focus
+  // where it was (there is no browser UI to take it).
+  await page.evaluate(() => {
+    const after = document.createElement('button');
+    after.textContent = 'After the menu';
+    document.body.append(after);
+  });
   await press(page, 'Tab');
+  await expect(
+    page.getByRole('button', { name: 'After the menu' }),
+  ).toBeFocused();
   await expect(highlighted(page)).toHaveCount(0);
   // The pointer highlights what it is over, and chooses.
   await page.getByRole('menuitem', { name: 'Paste' }).click();

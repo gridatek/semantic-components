@@ -1,5 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { fromOtherSite } from '../interaction';
 import { expect, test } from '../test';
 
 /**
@@ -36,14 +37,18 @@ test.describe('Console clean', () => {
         messages.push(`error: ${e.message.split('\n')[0]}`),
       );
       page.on('console', (m) => {
+        if (fromOtherSite(m, page)) return;
         if (m.type() === 'warning' || m.type() === 'error')
           messages.push(`${m.type()}: ${m.text().split('\n')[0]}`);
       });
       await page.goto(path);
       await expect(page.locator('h1').first()).toBeVisible();
       // The development checks look once the app is stable. Waiting for
-      // nothing to arrive: there is no state to poll for.
-      await page.waitForLoadState('networkidle');
+      // nothing to arrive: there is no state to poll for. Not forever: a page
+      // loading images (or Firefox) may never get there — as in axe.ts.
+      await page
+        .waitForLoadState('networkidle', { timeout: 10_000 })
+        .catch(() => undefined);
       // eslint-disable-next-line playwright/no-wait-for-timeout
       await page.waitForTimeout(500);
       expect(messages).toEqual([]);

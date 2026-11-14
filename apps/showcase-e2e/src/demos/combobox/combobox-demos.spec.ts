@@ -1,6 +1,6 @@
 import { type Locator, type Page } from '@playwright/test';
 import { collectErrors } from '../../interaction';
-import { box } from '../../looks';
+import { box, expectScrollbarWidth } from '../../looks';
 import { expect, test } from '../../test';
 
 const demo = (name: string) => `/demos/combobox/${name}-combobox-demo`;
@@ -304,7 +304,7 @@ test('Popup: Down opens it with an empty search; Escape and a click outside clos
   await expect(search).toHaveValue('');
   await expect(options(page)).toHaveCount(12);
   // A long list: its scrollbar shows (thin).
-  await expect(page.getByRole('listbox')).toHaveCSS('scrollbar-width', 'thin');
+  await expectScrollbarWidth(page.getByRole('listbox'), 'thin');
   await page.keyboard.press('Escape');
   await expect(page.getByRole('dialog')).toBeHidden();
   await expect(trigger).toBeFocused();

@@ -1,4 +1,4 @@
-import type { Locator, Page } from '@playwright/test';
+import { type Locator, type Page, expect } from '@playwright/test';
 
 /**
  * Reading how things look: computed styles and boxes, with transitions off so
@@ -38,4 +38,18 @@ export async function box(locator: Locator) {
   const found = await locator.boundingBox();
   if (!found) throw new Error(`not visible: ${locator}`);
   return found;
+}
+
+/**
+ * Its `scrollbar-width`. Not in Firefox: Playwright's headless Firefox
+ * draws no scrollbars, and computes `scrollbar-width: none` for every
+ * element — even one that sets `thin` inline.
+ */
+export async function expectScrollbarWidth(
+  locator: Locator,
+  width: 'auto' | 'thin' | 'none',
+): Promise<void> {
+  const browser = locator.page().context().browser()?.browserType().name();
+  if (browser === 'firefox') return;
+  await expect(locator).toHaveCSS('scrollbar-width', width);
 }

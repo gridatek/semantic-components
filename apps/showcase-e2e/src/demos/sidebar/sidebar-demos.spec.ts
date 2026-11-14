@@ -1,4 +1,5 @@
 import { collectErrors, press } from '../../interaction';
+import { expectScrollbarWidth } from '../../looks';
 import { type Page, expect, test } from '../../test';
 
 const demo = (name: string) => `/demos/sidebar/${name}-sidebar-demo`;
@@ -77,8 +78,8 @@ test.describe('wide', () => {
 
   test('Usage: the content shows a thin scrollbar', async ({ page }) => {
     await page.goto(usage);
-    await expect(page.locator('[data-slot=sidebar-content]')).toHaveCSS(
-      'scrollbar-width',
+    await expectScrollbarWidth(
+      page.locator('[data-slot=sidebar-content]'),
       'thin',
     );
   });

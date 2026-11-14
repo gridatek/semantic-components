@@ -1,6 +1,6 @@
 import { type Page } from '@playwright/test';
 import { collectErrors, press } from '../../interaction';
-import { box } from '../../looks';
+import { box, expectScrollbarWidth } from '../../looks';
 import { expect, test } from '../../test';
 
 const demo = (name: string) =>
@@ -28,7 +28,7 @@ test('Usage: overflows down only; the browser’s scrollbar in the preset’s lo
   await expect(a).not.toHaveAttribute('data-overflow-y-start');
   await expect(a).toHaveCSS('overflow-y', 'auto');
   // Chromium draws ::-webkit-scrollbar: no scrollbar-width / -color set.
-  await expect(a).toHaveCSS('scrollbar-width', 'auto');
+  await expectScrollbarWidth(a, 'auto');
   const thumb = await a.evaluate((el) => {
     const s = getComputedStyle(el, '::-webkit-scrollbar-thumb');
     return { radius: s.borderTopLeftRadius, color: s.backgroundColor };

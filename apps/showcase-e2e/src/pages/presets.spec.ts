@@ -1,4 +1,5 @@
 import { expectNoA11yViolations } from '../axe';
+import { fromOtherSite } from '../interaction';
 import { expect, test } from '../test';
 
 test.describe('Presets Page', () => {
@@ -26,10 +27,8 @@ test.describe('Presets Page', () => {
   test("shadcn's Create demos, both pages, at work", async ({ page }) => {
     const messages: string[] = [];
     page.on('console', (m) => {
-      // The avatars are GitHub's, as in shadcn's demos: GitHub sometimes
-      // refuses a burst of them (403), which is the network, not the page.
-      const external = !m.location().url.startsWith('http://localhost');
-      if (m.text().startsWith('Failed to load resource') && external) return;
+      // The avatars are GitHub's, as in shadcn's demos.
+      if (fromOtherSite(m, page)) return;
       if (m.type() === 'warning' || m.type() === 'error')
         messages.push(m.text().split('\n')[0]);
     });
@@ -60,6 +59,9 @@ test.describe('Presets Page', () => {
   });
 
   test('no accessibility violations, light and dark', async ({ page }) => {
+    // The largest page, checked twice: more than 30 s on CI in Firefox and
+    // WebKit.
+    test.slow();
     await page.goto('/presets');
     await expectNoA11yViolations(page);
     await expectNoA11yViolations(page, { dark: true });

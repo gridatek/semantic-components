@@ -166,7 +166,7 @@ export class ViewEditorDemo {
 <p style="text-align: right">Aligned right.</p>
 <p style="text-align: justify">Justified: the lines of this paragraph stretch from one side of the column to the other, so both edges are straight, as on a printed page.</p>
 <h6>Media and blocks</h6>
-<img src="https://picsum.photos/id/1015/800/400" alt="A river between mountains">
+<img src="/images/gallery/mountains.jpg" alt="Mountains">
 <blockquote><p>The display is the editor's document, without the editor.</p></blockquote>
 <pre><code>&lt;article [scEditorView]="post.body"&gt;&lt;/article&gt;</code></pre>
 <hr>

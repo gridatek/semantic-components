@@ -1,4 +1,9 @@
-import { type Locator, type Page, expect } from '@playwright/test';
+import {
+  type ConsoleMessage,
+  type Locator,
+  type Page,
+  expect,
+} from '@playwright/test';
 
 /**
  * Focuses an element once it can take focus. A `<div>` made focusable by a
@@ -26,12 +31,35 @@ export async function type(page: Page, text: string): Promise<void> {
   await page.keyboard.type(text, { delay: 50 });
 }
 
+/**
+ * A message about another site's resource, not our page: Firefox logs the
+ * cookies refused to an image from github.com (the avatars) as console
+ * errors, and GitHub sometimes refuses a burst of them (403).
+ */
+export function fromOtherSite(m: ConsoleMessage, page: Page): boolean {
+  const from = m.location().url;
+  if (!/^https?:/.test(from)) return false;
+  return new URL(from).origin !== new URL(page.url()).origin;
+}
+
+/**
+ * Lets the page write to the clipboard. Chromium needs the permission;
+ * Firefox and WebKit allow a write after a click, and don't know these
+ * permissions (`grantPermissions` throws there).
+ */
+export async function allowClipboard(page: Page): Promise<void> {
+  const context = page.context();
+  if (context.browser()?.browserType().name() !== 'chromium') return;
+  await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+}
+
 /** Collects page errors and `console.error` messages for later assertion. */
 export function collectErrors(page: Page): string[] {
   const errors: string[] = [];
   page.on('pageerror', (e) => errors.push(e.message.split('\n')[0]));
   page.on('console', (m) => {
-    if (m.type() === 'error') errors.push(m.text().split('\n')[0]);
+    if (m.type() === 'error' && !fromOtherSite(m, page))
+      errors.push(m.text().split('\n')[0]);
   });
   return errors;
 }

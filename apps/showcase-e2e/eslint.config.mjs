@@ -22,6 +22,7 @@ export default [
             'expectRtl',
             'expectInlineOrder',
             'expectClasses',
+            'expectScrollbarWidth',
           ],
         },
       ],

@@ -139,6 +139,8 @@ test.describe('Carousel demos', () => {
     await pause.click();
     const play = page.getByRole('button', { name: 'Play' });
     await expect(play).toBeVisible();
+    // Paused mid-scroll, it ends that one: on a slide, then nothing more.
+    await expect.poll(() => shown(page)).toHaveLength(1);
     const stopped = await shown(page);
     await page.waitForTimeout(2600);
     expect(await shown(page)).toEqual(stopped);
