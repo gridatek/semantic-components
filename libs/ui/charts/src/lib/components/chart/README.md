@@ -15,15 +15,19 @@ Recharts' API, shadcn's look, our drawing: before fixing a bug, writing these do
     <g scChartBar key="desktop" stack="a" corners="base" />
     <g scChartBar key="mobile" stack="a" corners="end" />
   </svg>
-  <div scChartTooltip #tooltip="scChartTooltip">
-    <div scChartTooltipLabel>{{ tooltip.label() }}</div>
-    @for (item of tooltip.payload(); track item.dataKey) {
-    <div scChartTooltipItem [item]="item">
-      <span scChartTooltipIndicator variant="dashed"></span>
-      <span scChartTooltipName>{{ item.name }}</span>
-      <span scChartTooltipValue>{{ item.value | number }}</span>
-    </div>
-    }
+  <div scChartTooltipProvider>
+    <ng-template scChartTooltipPortal>
+      <div scChartTooltip #tooltip="scChartTooltip">
+        <div scChartTooltipLabel>{{ tooltip.label() }}</div>
+        @for (item of tooltip.payload(); track item.dataKey) {
+        <div scChartTooltipItem [item]="item">
+          <span scChartTooltipIndicator variant="dashed"></span>
+          <span scChartTooltipName>{{ item.name }}</span>
+          <span scChartTooltipValue>{{ item.value | number }}</span>
+        </div>
+        }
+      </div>
+    </ng-template>
   </div>
   <div scChartLegend #legend="scChartLegend">
     @for (item of legend.payload(); track item.dataKey) {
@@ -80,15 +84,19 @@ Series with the same `stack` are drawn on one another; values below 0 go down (d
 You write what they show, from their state — Recharts' `content`, as parts: `label()` and `payload()` on the tooltip, `payload()` on the legend, with Recharts' names. A part you leave out isn't there: no label (a pie's single value), no indicator. The text is yours, so formatting is too — a pipe or a function of yours:
 
 ```html
-<div scChartTooltip #tooltip="scChartTooltip">
-  <div scChartTooltipLabel>{{ day(tooltip.label()) }}</div>
-  @for (item of tooltip.payload(); track item.dataKey) {
-  <div scChartTooltipItem [item]="item">
-    <span scChartTooltipIndicator variant="line"></span>
-    <span scChartTooltipName>{{ item.name }}</span>
-    <span scChartTooltipValue>{{ item.value | currency: 'EUR' }}</span>
-  </div>
-  }
+<div scChartTooltipProvider>
+  <ng-template scChartTooltipPortal>
+    <div scChartTooltip #tooltip="scChartTooltip">
+      <div scChartTooltipLabel>{{ day(tooltip.label()) }}</div>
+      @for (item of tooltip.payload(); track item.dataKey) {
+      <div scChartTooltipItem [item]="item">
+        <span scChartTooltipIndicator variant="line"></span>
+        <span scChartTooltipName>{{ item.name }}</span>
+        <span scChartTooltipValue>{{ item.value | currency: 'EUR' }}</span>
+      </div>
+      }
+    </div>
+  </ng-template>
 </div>
 ```
 

@@ -16,7 +16,7 @@ import type { ScChartConfig, ScChartDatum } from './chart-types';
   host: {
     'data-slot': 'chart',
     '[class]': 'class()',
-    '[style]': 'colors()',
+    '[style]': 'state.colors()',
   },
 })
 export class ScChart {
@@ -33,15 +33,6 @@ export class ScChart {
       'relative flex aspect-video min-h-0 flex-col justify-center text-xs',
       this.chartStyles,
       this.classInput(),
-    ),
-  );
-
-  /** Each series' color, as `--color-<key>`. */
-  protected readonly colors = computed(() =>
-    Object.fromEntries(
-      Object.entries(this.config())
-        .filter(([, series]) => series.color)
-        .map(([key, series]) => [`--color-${key}`, series.color]),
     ),
   );
 

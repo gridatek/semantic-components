@@ -23,6 +23,8 @@ import {
   ScChartTooltipIndicator,
   ScChartTooltipItem,
   ScChartTooltipName,
+  ScChartTooltipPortal,
+  ScChartTooltipProvider,
   ScChartTooltipValue,
 } from '@semantic-components/ui/charts';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
@@ -42,6 +44,8 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
     ScChartBar,
     ScChartPlot,
     ScChartTooltip,
+    ScChartTooltipPortal,
+    ScChartTooltipProvider,
     DecimalPipe,
     ScChartTooltipIndicator,
     ScChartTooltipItem,
@@ -90,14 +94,20 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
                 >
                   <g scChartBar key="value" corners="end" />
                 </svg>
-                <div scChartTooltip #tooltip="scChartTooltip">
-                  @for (item of tooltip.payload(); track item.dataKey) {
-                    <div scChartTooltipItem [item]="item">
-                      <span scChartTooltipIndicator></span>
-                      <span scChartTooltipName>{{ item.name }}</span>
-                      <span scChartTooltipValue>{{ item.value | number }}</span>
+                <div scChartTooltipProvider>
+                  <ng-template scChartTooltipPortal>
+                    <div scChartTooltip #tooltip="scChartTooltip">
+                      @for (item of tooltip.payload(); track item.dataKey) {
+                        <div scChartTooltipItem [item]="item">
+                          <span scChartTooltipIndicator></span>
+                          <span scChartTooltipName>{{ item.name }}</span>
+                          <span scChartTooltipValue>{{
+                            item.value | number
+                          }}</span>
+                        </div>
+                      }
                     </div>
-                  }
+                  </ng-template>
                 </div>
               </div>
               <span

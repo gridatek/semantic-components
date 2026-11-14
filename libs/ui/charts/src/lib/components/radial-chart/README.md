@@ -11,14 +11,18 @@ A series as radial bars: a ring per row, the first innermost, its value as an ar
       <text text-anchor="middle" class="fill-foreground text-2xl font-bold">{{ total }}</text>
     </g>
   </svg>
-  <div scChartTooltip #tooltip="scChartTooltip">
-    @for (item of tooltip.payload(); track item.dataKey) {
-    <div scChartTooltipItem [item]="item">
-      <span scChartTooltipIndicator></span>
-      <span scChartTooltipName>{{ item.name }}</span>
-      <span scChartTooltipValue>{{ item.value | number }}</span>
-    </div>
-    }
+  <div scChartTooltipProvider>
+    <ng-template scChartTooltipPortal>
+      <div scChartTooltip #tooltip="scChartTooltip">
+        @for (item of tooltip.payload(); track item.dataKey) {
+        <div scChartTooltipItem [item]="item">
+          <span scChartTooltipIndicator></span>
+          <span scChartTooltipName>{{ item.name }}</span>
+          <span scChartTooltipValue>{{ item.value | number }}</span>
+        </div>
+        }
+      </div>
+    </ng-template>
   </div>
 </div>
 ```

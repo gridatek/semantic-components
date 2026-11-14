@@ -43,6 +43,19 @@ export interface ScChartSeries {
   readonly colorBy?: Signal<'key' | 'category'>;
   /** What its legend lists, when not its key or categories: a sunburst's groups, a sankey's nodes. */
   readonly legend?: Signal<readonly string[]>;
+  /**
+   * Where its row's item is, in the plot (px): what the tooltip goes beside
+   * when the keyboard reaches it — a slice, a box. Left out: the category's.
+   */
+  readonly anchor?: (index: number) => ScChartBox | null;
+}
+
+/** A box in the plot, in px. */
+export interface ScChartBox {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
 }
 
 /** What the container gives: the rows and the series' names and colors. */
@@ -114,9 +127,25 @@ export class ScChartState {
 
   /** The category pointed at, or reached by the keyboard. */
   readonly activeIndex = signal<number | null>(null);
+  /** Where the pointer is, on the screen (client px); null with the keyboard. */
+  readonly pointer = signal<{ x: number; y: number } | null>(null);
+  /** The plot's element: the tooltip measures the item it goes beside. */
+  readonly plotElement = signal<Element | null>(null);
 
   readonly data = computed(() => this.source()?.data() ?? []);
   readonly config = computed(() => this.source()?.config() ?? {});
+
+  /**
+   * Each series' color, as `--color-<key>`: on the chart, and on the tooltip,
+   * whose overlay is outside it.
+   */
+  readonly colors = computed(() =>
+    Object.fromEntries(
+      Object.entries(this.config())
+        .filter(([, series]) => series.color)
+        .map(([key, series]) => [`--color-${key}`, series.color]),
+    ),
+  );
   readonly stackOffset = computed(() => this.plot()?.stackOffset() ?? 'none');
 
   /** Each category's name, from the plot's `categoryKey`. */

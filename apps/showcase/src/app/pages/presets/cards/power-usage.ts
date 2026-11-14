@@ -22,6 +22,8 @@ import {
   ScChartTooltipIndicator,
   ScChartTooltipItem,
   ScChartTooltipName,
+  ScChartTooltipPortal,
+  ScChartTooltipProvider,
   ScChartTooltipValue,
 } from '@semantic-components/ui/charts';
 
@@ -40,6 +42,8 @@ import {
     ScChartCategoryAxis,
     ScChartPlot,
     ScChartTooltip,
+    ScChartTooltipPortal,
+    ScChartTooltipProvider,
     DecimalPipe,
     ScChartTooltipIndicator,
     ScChartTooltipItem,
@@ -67,14 +71,18 @@ import {
             <g scChartCategoryAxis class="text-xs" />
             <g scChartBar key="usage" corners="end" />
           </svg>
-          <div scChartTooltip #tooltip="scChartTooltip">
-            @for (item of tooltip.payload(); track item.dataKey) {
-              <div scChartTooltipItem [item]="item">
-                <span scChartTooltipIndicator></span>
-                <span scChartTooltipName>{{ item.name }}</span>
-                <span scChartTooltipValue>{{ item.value | number }}</span>
+          <div scChartTooltipProvider>
+            <ng-template scChartTooltipPortal>
+              <div scChartTooltip #tooltip="scChartTooltip">
+                @for (item of tooltip.payload(); track item.dataKey) {
+                  <div scChartTooltipItem [item]="item">
+                    <span scChartTooltipIndicator></span>
+                    <span scChartTooltipName>{{ item.name }}</span>
+                    <span scChartTooltipValue>{{ item.value | number }}</span>
+                  </div>
+                }
               </div>
-            }
+            </ng-template>
           </div>
         </div>
         <div scSeparator aria-hidden="true"></div>

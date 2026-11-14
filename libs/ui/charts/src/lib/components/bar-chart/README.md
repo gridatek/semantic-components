@@ -11,15 +11,19 @@ A series as bars: one per category, side by side with the other series' — or o
     <g scChartBar key="desktop" stack="a" corners="base" />
     <g scChartBar key="mobile" stack="a" corners="end" />
   </svg>
-  <div scChartTooltip #tooltip="scChartTooltip">
-    <div scChartTooltipLabel>{{ tooltip.label() }}</div>
-    @for (item of tooltip.payload(); track item.dataKey) {
-    <div scChartTooltipItem [item]="item">
-      <span scChartTooltipIndicator></span>
-      <span scChartTooltipName>{{ item.name }}</span>
-      <span scChartTooltipValue>{{ item.value | number }}</span>
-    </div>
-    }
+  <div scChartTooltipProvider>
+    <ng-template scChartTooltipPortal>
+      <div scChartTooltip #tooltip="scChartTooltip">
+        <div scChartTooltipLabel>{{ tooltip.label() }}</div>
+        @for (item of tooltip.payload(); track item.dataKey) {
+        <div scChartTooltipItem [item]="item">
+          <span scChartTooltipIndicator></span>
+          <span scChartTooltipName>{{ item.name }}</span>
+          <span scChartTooltipValue>{{ item.value | number }}</span>
+        </div>
+        }
+      </div>
+    </ng-template>
   </div>
   <div scChartLegend #legend="scChartLegend">
     @for (item of legend.payload(); track item.dataKey) {

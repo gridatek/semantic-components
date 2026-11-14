@@ -10,15 +10,19 @@ A series as a scatter: a point per row at its x (`xKey`) and y (`key`) values, b
     <g scChartValueAxis />
     <g scChartScatter key="weight" xKey="height" />
   </svg>
-  <div scChartTooltip #tooltip="scChartTooltip">
-    <div scChartTooltipLabel>{{ tooltip.label() }}</div>
-    @for (item of tooltip.payload(); track item.dataKey) {
-    <div scChartTooltipItem [item]="item">
-      <span scChartTooltipIndicator></span>
-      <span scChartTooltipName>{{ item.name }}</span>
-      <span scChartTooltipValue>{{ item.value | number }}</span>
-    </div>
-    }
+  <div scChartTooltipProvider>
+    <ng-template scChartTooltipPortal>
+      <div scChartTooltip #tooltip="scChartTooltip">
+        <div scChartTooltipLabel>{{ tooltip.label() }}</div>
+        @for (item of tooltip.payload(); track item.dataKey) {
+        <div scChartTooltipItem [item]="item">
+          <span scChartTooltipIndicator></span>
+          <span scChartTooltipName>{{ item.name }}</span>
+          <span scChartTooltipValue>{{ item.value | number }}</span>
+        </div>
+        }
+      </div>
+    </ng-template>
   </div>
 </div>
 ```

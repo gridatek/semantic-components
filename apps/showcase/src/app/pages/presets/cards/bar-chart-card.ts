@@ -24,6 +24,8 @@ import {
   ScChartTooltipItem,
   ScChartTooltipLabel,
   ScChartTooltipName,
+  ScChartTooltipPortal,
+  ScChartTooltipProvider,
   ScChartTooltipValue,
 } from '@semantic-components/ui/charts';
 
@@ -65,6 +67,8 @@ const DELTA = Math.round(((DESKTOP - MOBILE) / MOBILE) * 100);
     ScChartLegendIndicator,
     ScChartPlot,
     ScChartTooltip,
+    ScChartTooltipPortal,
+    ScChartTooltipProvider,
   ],
   template: `
     <div scCard>
@@ -88,15 +92,19 @@ const DELTA = Math.round(((DESKTOP - MOBILE) / MOBILE) * 100);
             <g scChartBar key="desktop" corners="end" />
             <g scChartBar key="mobile" corners="end" />
           </svg>
-          <div scChartTooltip #tooltip="scChartTooltip">
-            <div scChartTooltipLabel>{{ tooltip.label() }}</div>
-            @for (item of tooltip.payload(); track item.dataKey) {
-              <div scChartTooltipItem [item]="item">
-                <span scChartTooltipIndicator variant="dashed"></span>
-                <span scChartTooltipName>{{ item.name }}</span>
-                <span scChartTooltipValue>{{ item.value | number }}</span>
+          <div scChartTooltipProvider>
+            <ng-template scChartTooltipPortal>
+              <div scChartTooltip #tooltip="scChartTooltip">
+                <div scChartTooltipLabel>{{ tooltip.label() }}</div>
+                @for (item of tooltip.payload(); track item.dataKey) {
+                  <div scChartTooltipItem [item]="item">
+                    <span scChartTooltipIndicator variant="dashed"></span>
+                    <span scChartTooltipName>{{ item.name }}</span>
+                    <span scChartTooltipValue>{{ item.value | number }}</span>
+                  </div>
+                }
               </div>
-            }
+            </ng-template>
           </div>
           <div scChartLegend #legend="scChartLegend">
             @for (item of legend.payload(); track item.dataKey) {

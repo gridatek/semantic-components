@@ -26,6 +26,8 @@ import {
   ScChartTooltipIndicator,
   ScChartTooltipItem,
   ScChartTooltipName,
+  ScChartTooltipPortal,
+  ScChartTooltipProvider,
   ScChartTooltipValue,
 } from '@semantic-components/ui/charts';
 
@@ -65,6 +67,8 @@ const TOP = DATA.reduce((max, row) =>
     ScChartPie,
     ScChartPlot,
     ScChartTooltip,
+    ScChartTooltipPortal,
+    ScChartTooltipProvider,
     ScProgress,
     ScProgressRange,
     ScProgressTrack,
@@ -107,14 +111,18 @@ const TOP = DATA.reduce((max, row) =>
               </text>
             </g>
           </svg>
-          <div scChartTooltip #tooltip="scChartTooltip">
-            @for (item of tooltip.payload(); track item.dataKey) {
-              <div scChartTooltipItem [item]="item">
-                <span scChartTooltipIndicator></span>
-                <span scChartTooltipName>{{ item.name }}</span>
-                <span scChartTooltipValue>{{ item.value | number }}</span>
+          <div scChartTooltipProvider>
+            <ng-template scChartTooltipPortal>
+              <div scChartTooltip #tooltip="scChartTooltip">
+                @for (item of tooltip.payload(); track item.dataKey) {
+                  <div scChartTooltipItem [item]="item">
+                    <span scChartTooltipIndicator></span>
+                    <span scChartTooltipName>{{ item.name }}</span>
+                    <span scChartTooltipValue>{{ item.value | number }}</span>
+                  </div>
+                }
               </div>
-            }
+            </ng-template>
           </div>
           <div scChartLegend #legend="scChartLegend" class="translate-y-2">
             @for (item of legend.payload(); track item.dataKey) {

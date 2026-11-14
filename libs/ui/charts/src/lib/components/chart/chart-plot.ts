@@ -72,6 +72,7 @@ export class ScChartPlot {
   );
 
   constructor() {
+    this.state.plotElement.set(this.host);
     this.state.plot.set({
       categoryKey: this.categoryKey,
       margin: computed(() => {
@@ -109,6 +110,7 @@ export class ScChartPlot {
   }
 
   protected onPointerMove(event: PointerEvent): void {
+    this.state.pointer.set({ x: event.clientX, y: event.clientY });
     const box = this.host.getBoundingClientRect();
     const px = ((event.clientX - box.left) * this.state.width()) / box.width;
     const py = ((event.clientY - box.top) * this.state.height()) / box.height;
@@ -121,11 +123,13 @@ export class ScChartPlot {
   }
 
   protected onFocus(): void {
+    this.state.pointer.set(null);
     if (this.state.activeIndex() === null && this.state.data().length)
       this.state.activeIndex.set(0);
   }
 
   protected onLeave(): void {
+    this.state.pointer.set(null);
     if (this.host.ownerDocument.activeElement !== this.host)
       this.state.activeIndex.set(null);
   }
@@ -148,6 +152,7 @@ export class ScChartPlot {
                 : undefined;
     if (next === undefined) return;
     event.preventDefault();
+    this.state.pointer.set(null);
     this.state.activeIndex.set(next);
   }
 }

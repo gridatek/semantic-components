@@ -17,6 +17,8 @@ export { ScChartPolarAngleAxis } from './chart-polar-angle-axis';
 export { ScChartPolarGrid } from './chart-polar-grid';
 export { ScChartLabels } from './chart-labels';
 export { ScChartTooltip } from './chart-tooltip';
+export { ScChartTooltipPortal } from './chart-tooltip-portal';
+export { ScChartTooltipProvider } from './chart-tooltip-provider';
 export { ScChartTooltipIndicator } from './chart-tooltip-indicator';
 export { ScChartTooltipItem } from './chart-tooltip-item';
 export { ScChartTooltipLabel } from './chart-tooltip-label';
@@ -30,7 +32,12 @@ export {
   type ScChartSeriesLabels,
   anchorAt,
 } from './chart-series';
-export { ScChartState, type ScChartSeries, numberOf } from './chart-state';
+export {
+  type ScChartBox,
+  ScChartState,
+  type ScChartSeries,
+  numberOf,
+} from './chart-state';
 export type {
   ScChartConfig,
   ScChartCurve,
