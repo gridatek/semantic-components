@@ -2,6 +2,7 @@ import {
   Component,
   DestroyRef,
   InjectionToken,
+  LOCALE_ID,
   ViewEncapsulation,
   booleanAttribute,
   computed,
@@ -82,8 +83,8 @@ export class ScNumberField implements FormValueControl<number | null> {
   readonly largeStep = input(10);
   /** Steps land on multiples of `step` (from `min`, or 0). */
   readonly snapOnStep = input(false, { transform: booleanAttribute });
-  /** The locale the value is written and read in (the browser's by default). */
-  readonly locale = input<string | undefined>(undefined);
+  /** The locale: `LOCALE_ID` — the app's, or one provided for this section. */
+  private readonly locale = inject(LOCALE_ID);
   /** How the value is written (currency, percent, unit, decimals…). */
   readonly format = input<Intl.NumberFormatOptions>({});
   /** The mouse wheel steps the value while the input has focus. */
@@ -131,7 +132,7 @@ export class ScNumberField implements FormValueControl<number | null> {
   }
 
   readonly formatter = computed(() =>
-    numberFormatter(this.locale(), this.format()),
+    numberFormatter(this.locale, this.format()),
   );
 
   /** The value as written, for `aria-valuetext` and the input. */

@@ -164,7 +164,7 @@ export default class NumberFieldPage {
       name: 'ScNumberField',
       selector: 'div[scNumberField]',
       description:
-        'The value and its rules: [(value)] (a number, or null); min, max; step (1), smallStep (0.1, with Alt), largeStep (10, with Shift or Page Up / Down); snapOnStep; locale and format (Intl.NumberFormat options: currencies, percents, units); allowWheelScrub; disabled. A Signal Forms control ([formField]: min, max, required, disabled from the schema); with a name, a hidden input submits the plain number.',
+        'The value and its rules: [(value)] (a number, or null); min, max; step (1), smallStep (0.1, with Alt), largeStep (10, with Shift or Page Up / Down); snapOnStep; format (Intl.NumberFormat options: currencies, percents, units; in LOCALE_ID); allowWheelScrub; disabled. A Signal Forms control ([formField]: min, max, required, disabled from the schema); with a name, a hidden input submits the plain number.',
     },
     {
       name: 'ScNumberFieldGroup',

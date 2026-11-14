@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import {
   ScStatCard,
   ScStatCardChange,
@@ -7,7 +7,7 @@ import {
   ScStatCardValue,
 } from '@semantic-components/ui';
 
-/** Any Intl.NumberFormat options — compact, a unit, a currency — in the card’s locale: here, German. */
+/** Any Intl.NumberFormat options — compact, a unit, a currency — in LOCALE_ID: provided here as German. */
 @Component({
   selector: 'app-formats-stat-card-demo',
   imports: [
@@ -18,7 +18,7 @@ import {
     ScStatCardDescription,
   ],
   template: `
-    <dl scStatCard locale="de-DE" class="w-56">
+    <dl scStatCard class="w-56">
       <dt scStatCardLabel>Downloads</dt>
       <dd
         scStatCardValue
@@ -32,7 +32,7 @@ import {
       ></dd>
       <dd scStatCardDescription>diese Woche</dd>
     </dl>
-    <dl scStatCard locale="de-DE" class="w-56">
+    <dl scStatCard class="w-56">
       <dt scStatCardLabel>Speicher</dt>
       <dd
         scStatCardValue
@@ -46,7 +46,7 @@ import {
       ></dd>
       <dd scStatCardDescription>seit gestern</dd>
     </dl>
-    <dl scStatCard locale="de-DE" class="w-56">
+    <dl scStatCard class="w-56">
       <dt scStatCardLabel>Bestellwert</dt>
       <dd
         scStatCardValue
@@ -61,6 +61,7 @@ import {
       <dd scStatCardDescription>zum Vormonat</dd>
     </dl>
   `,
+  providers: [{ provide: LOCALE_ID, useValue: 'de-DE' }],
   host: { class: 'flex w-full flex-wrap justify-center gap-4' },
   encapsulation: ViewEncapsulation.None,
 })

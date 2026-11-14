@@ -5,7 +5,7 @@ Days, months and years in the app's language — every word from `Intl`, the wee
 ## Architecture
 
 ```
-div[scCalendar] (mode, [(value)] / [formField], minDate, maxDate, unavailable, locale,
+div[scCalendar] (mode, [(value)] / [formField], minDate, maxDate, unavailable,
 │                    firstDayOfWeek, numberOfMonths, showOutsideDays, fixedWeeks,
 │                    showWeekNumbers, startView, disabled)
 │  heading() · view() · focused() · previous() · next() · zoomOut() · goToToday() · clear()
@@ -63,7 +63,7 @@ Empty, it is `null` (Signal Forms' empty: `required` works). A `[formField]`: `d
 
 ## Language
 
-- `locale` (the app's by default): the day and month names, the heading, each day's full date — all from `Intl`.
+- The locale is `LOCALE_ID` (the app's, or one provided for a section): the day and month names, the heading, each day's full date — all from `Intl`.
 - `firstDayOfWeek` (1 Monday – 7 Sunday): the locale's by default (`Intl.Locale` week info).
 
 ## Keyboard

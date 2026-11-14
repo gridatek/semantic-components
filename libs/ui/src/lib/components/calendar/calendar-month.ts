@@ -1,6 +1,7 @@
 import { NgTemplateOutlet } from '@angular/common';
 import {
   Component,
+  LOCALE_ID,
   ViewEncapsulation,
   computed,
   forwardRef,
@@ -117,12 +118,13 @@ const MONDAY = Temporal.PlainDate.from('2024-01-01');
 })
 export class ScCalendarMonth {
   protected readonly calendar = inject(forwardRef(() => ScCalendar));
+  private readonly locale = inject(LOCALE_ID);
 
   readonly month = input.required<Temporal.PlainYearMonth>();
 
   /** The week's days, from its first: short, and in full. */
   protected readonly weekdays = computed(() => {
-    const locale = this.calendar.locale();
+    const locale = this.locale;
     const start = this.calendar.weekStart();
     return Array.from({ length: 7 }, (_, i) => {
       const day = MONDAY.add({ days: (start - 1 + i) % 7 });
@@ -169,11 +171,11 @@ export class ScCalendarMonth {
   }
 
   protected number(date: Temporal.PlainDate): string {
-    return date.toLocaleString(this.calendar.locale(), { day: 'numeric' });
+    return date.toLocaleString(this.locale, { day: 'numeric' });
   }
 
   protected fullDate(date: Temporal.PlainDate): string {
-    return date.toLocaleString(this.calendar.locale(), { dateStyle: 'full' });
+    return date.toLocaleString(this.locale, { dateStyle: 'full' });
   }
 
   protected context(day: ScCalendarDay) {

@@ -46,8 +46,8 @@ import { StepTimeClockDemoContainer } from './demos/step-time-clock-demo-contain
       <section class="space-y-4">
         <h2 scHeading appToc>24 hours</h2>
         <p class="text-muted-foreground">
-          locale="fr-FR": 24 hours — 13 to 00 on an inner ring. hourCycle
-          overrides the locale’s 12 or 24.
+          LOCALE_ID provided as 'fr-FR': 24 hours — 13 to 00 on an inner ring.
+          hourCycle overrides the locale’s 12 or 24.
         </p>
         <app-locale-time-clock-demo-container />
       </section>

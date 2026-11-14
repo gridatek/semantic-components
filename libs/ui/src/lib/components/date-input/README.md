@@ -5,7 +5,7 @@ A date, typed — two ways:
 - **`ScDateInput`** (`input[scDateInput]`): a text input — the locale's numeric order or ISO, read on Enter or leaving.
 - **`ScSegmentedDateInput`** (`div[scSegmentedDateInput]`): part by part — month, day, year — each a spin button.
 
-Both are a `[formField]` with a `Temporal.PlainDate | null` value. In a [date picker](../date-picker/README.md) either one is the picker's value — a range's end with `part="start"` / `part="end"` — and takes the picker's locale and limits; put `[formField]` on the picker.
+Both are a `[formField]` with a `Temporal.PlainDate | null` value. In a [date picker](../date-picker/README.md) either one is the picker's value — a range's end with `part="start"` / `part="end"` — and takes the picker's limits; put `[formField]` on the picker.
 
 ## Usage
 
@@ -43,15 +43,14 @@ Leaving the year with two digits typed makes it this century's (`27` → 2027). 
 
 ## Inputs (both)
 
-| Input                              | Type                                    | Default                    |
-| ---------------------------------- | --------------------------------------- | -------------------------- |
-| `value`                            | `Temporal.PlainDate \| null` (model)    | `null`                     |
-| `locale`                           | `string \| undefined`                   | the picker's, or the app's |
-| `minDate` / `maxDate`              | `Temporal.PlainDate \| undefined`       | — (in a picker: its own)   |
-| `unavailable`                      | `(date: Temporal.PlainDate) => boolean` | `() => false`              |
-| `part`                             | `'start' \| 'end' \| undefined`         | — (in a picker's range)    |
-| `disabled` / `invalid` / `touched` | `boolean`                               | `false`                    |
-| `id` / `class`                     | `string`                                | the field's id             |
+| Input                              | Type                                    | Default                  |
+| ---------------------------------- | --------------------------------------- | ------------------------ |
+| `value`                            | `Temporal.PlainDate \| null` (model)    | `null`                   |
+| `minDate` / `maxDate`              | `Temporal.PlainDate \| undefined`       | — (in a picker: its own) |
+| `unavailable`                      | `(date: Temporal.PlainDate) => boolean` | `() => false`            |
+| `part`                             | `'start' \| 'end' \| undefined`         | — (in a picker's range)  |
+| `disabled` / `invalid` / `touched` | `boolean`                               | `false`                  |
+| `id` / `class`                     | `string`                                | the field's id           |
 
 | Output  | When                                                            |
 | ------- | --------------------------------------------------------------- |

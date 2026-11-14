@@ -1,5 +1,5 @@
 import { CdkOverlayOrigin } from '@angular/cdk/overlay';
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCalendar,
   ScCalendarHeader,
@@ -21,7 +21,7 @@ import {
   SiChevronRightIcon,
 } from '@semantic-icons/lucide-icons';
 
-/** locale="fr-FR" and a long format: the value, the calendar and the typed order (jj/mm/aaaa) in French. */
+/** LOCALE_ID provided as 'fr-FR', and a long format: the value, the calendar and the typed order (jj/mm/aaaa) in French. */
 @Component({
   selector: 'app-locale-date-picker-demo',
   imports: [
@@ -46,7 +46,6 @@ import {
     <div
       scDatePicker
       #dp="scDatePicker"
-      locale="fr-FR"
       [format]="{ dateStyle: 'long' }"
       [(value)]="date"
       class="w-64"
@@ -74,7 +73,6 @@ import {
               [mode]="dp.mode()"
               [value]="dp.draft()"
               (valueChange)="dp.pick($event)"
-              locale="fr-FR"
             >
               <div scCalendarHeader>
                 <button scCalendarPrevious>
@@ -95,6 +93,7 @@ import {
       {{ dp.text() || 'Nothing picked.' }}
     </p>
   `,
+  providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })

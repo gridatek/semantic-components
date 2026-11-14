@@ -50,7 +50,7 @@ import { SegmentedLocaleDateInputDemoContainer } from './demos/segmented-locale-
       <section class="space-y-4">
         <h2 scHeading appToc>Locale</h2>
         <p class="text-muted-foreground">
-          locale="fr-FR": typed day first (14/10/2026).
+          LOCALE_ID provided as 'fr-FR': typed day first (14/10/2026).
         </p>
         <app-locale-date-input-demo-container />
       </section>
@@ -92,7 +92,8 @@ import { SegmentedLocaleDateInputDemoContainer } from './demos/segmented-locale-
       <section class="space-y-4">
         <h2 scHeading appToc>Segmented, French</h2>
         <p class="text-muted-foreground">
-          locale="fr-FR": day, month, year — the parts named in French.
+          LOCALE_ID provided as 'fr-FR': day, month, year — the parts named in
+          French.
         </p>
         <app-segmented-locale-date-input-demo-container />
       </section>

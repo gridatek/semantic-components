@@ -49,8 +49,8 @@ export class ScDatePicker implements FormValueControl<ScCalendarValue> {
   readonly mode = input<ScCalendarMode>('single');
   /** How a day is written; `dateStyle: 'medium'` by default. */
   readonly format = input<Intl.DateTimeFormatOptions>({ dateStyle: 'medium' });
-  /** The language it is written in; the app's by default. */
-  readonly locale = input(inject(LOCALE_ID));
+  /** The locale: `LOCALE_ID` — the app's, or one provided for this section. */
+  private readonly locale = inject(LOCALE_ID);
   /** The first day that can be picked — give it to the calendar too. */
   readonly minDate = input<Temporal.PlainDate | undefined>(undefined);
   /** The last day that can be picked — give it to the calendar too. */
@@ -85,7 +85,7 @@ export class ScDatePicker implements FormValueControl<ScCalendarValue> {
   readonly canApply = computed(() => this.isDone(this.draft(), true));
 
   private readonly formatter = computed(
-    () => new Intl.DateTimeFormat(this.locale(), this.format()),
+    () => new Intl.DateTimeFormat(this.locale, this.format()),
   );
 
   /** The value, as written: a day, a range, or a list of days — or empty. */
@@ -98,7 +98,7 @@ export class ScDatePicker implements FormValueControl<ScCalendarValue> {
       const days = [...(value as readonly Temporal.PlainDate[])].sort(
         Temporal.PlainDate.compare,
       );
-      return new Intl.ListFormat(this.locale(), {
+      return new Intl.ListFormat(this.locale, {
         type: 'conjunction',
       }).format(days.map((day) => formatter.format(day)));
     }

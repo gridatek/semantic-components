@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScFrame,
   ScLabel,
@@ -30,7 +30,6 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
     <div class="w-56 space-y-4">
       <div
         scNumberField
-        locale="de-DE"
         [(value)]="price"
         [min]="0"
         [step]="0.5"
@@ -55,6 +54,7 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
       <p scFrame class="bg-muted p-4 text-sm">Value: {{ price() ?? 'none' }}</p>
     </div>
   `,
+  providers: [{ provide: LOCALE_ID, useValue: 'de-DE' }],
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })

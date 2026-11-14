@@ -47,8 +47,8 @@ import { SecondsTimeInputDemoContainer } from './demos/seconds-time-input-demo-c
       <section class="space-y-4">
         <h2 scHeading appToc>Locale</h2>
         <p class="text-muted-foreground">
-          locale="fr-FR": 24 hours, the parts named in French. hourCycle
-          overrides the locale’s 12 or 24 hours.
+          LOCALE_ID provided as 'fr-FR': 24 hours, the parts named in French.
+          hourCycle overrides the locale’s 12 or 24 hours.
         </p>
         <app-locale-time-input-demo-container />
       </section>

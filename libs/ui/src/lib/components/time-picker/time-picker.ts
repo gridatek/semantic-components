@@ -2,6 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import {
   Directive,
   ElementRef,
+  LOCALE_ID,
   computed,
   contentChild,
   effect,
@@ -63,9 +64,11 @@ export class ScTimePicker {
     return times;
   });
 
+  private readonly locale = inject(LOCALE_ID);
+
   private readonly formatter = computed(() => {
     const input = this.timeInput();
-    return new Intl.DateTimeFormat(input.locale(), {
+    return new Intl.DateTimeFormat(this.locale, {
       hour: 'numeric',
       minute: '2-digit',
       hourCycle: input.twelveHours() ? 'h12' : 'h23',

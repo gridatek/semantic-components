@@ -15,8 +15,8 @@ import { cn } from 'cn';
 })
 export class ScStatCard {
   readonly classInput = input<string>('', { alias: 'class' });
-  /** The language its numbers are written in. */
-  readonly locale = input(inject(LOCALE_ID));
+  /** The locale: `LOCALE_ID` — the app's, or one provided for this section. */
+  private readonly locale = inject(LOCALE_ID);
 
   protected readonly class = computed(() =>
     cn(

@@ -39,8 +39,8 @@ export class ScTimeClock implements FormValueControl<Temporal.PlainTime | null> 
   readonly value = model<Temporal.PlainTime | null>(null);
   /** Hours or minutes on the dial. */
   readonly view = model<ScTimeClockView>('hours');
-  /** The language: its numbers, its 12 or 24 hours; the app's by default. */
-  readonly locale = input(inject(LOCALE_ID));
+  /** The locale: `LOCALE_ID` — the app's, or one provided for this section. */
+  private readonly locale = inject(LOCALE_ID);
   /** 12 or 24 hours; the locale's by default. */
   readonly hourCycle = input<'h12' | 'h23' | undefined>(undefined);
   /** Minutes between the minutes that can be picked. */
@@ -61,7 +61,7 @@ export class ScTimeClock implements FormValueControl<Temporal.PlainTime | null> 
   readonly twelveHours = computed(() => {
     const cycle =
       this.hourCycle() ??
-      new Intl.DateTimeFormat(this.locale(), {
+      new Intl.DateTimeFormat(this.locale, {
         hour: 'numeric',
       }).resolvedOptions().hourCycle;
     return cycle === 'h11' || cycle === 'h12';
@@ -69,7 +69,7 @@ export class ScTimeClock implements FormValueControl<Temporal.PlainTime | null> 
 
   private readonly formatter = computed(
     () =>
-      new Intl.DateTimeFormat(this.locale(), {
+      new Intl.DateTimeFormat(this.locale, {
         hour: 'numeric',
         minute: '2-digit',
         hourCycle: this.twelveHours() ? 'h12' : 'h23',
@@ -111,7 +111,7 @@ export class ScTimeClock implements FormValueControl<Temporal.PlainTime | null> 
 
   /** Each part's name, in the locale's words. */
   readonly names = computed(() => {
-    const names = new Intl.DisplayNames(this.locale(), {
+    const names = new Intl.DisplayNames(this.locale, {
       type: 'dateTimeField',
     });
     return { hours: names.of('hour') ?? '', minutes: names.of('minute') ?? '' };
@@ -119,8 +119,8 @@ export class ScTimeClock implements FormValueControl<Temporal.PlainTime | null> 
 
   /** The numbers on the dial, in the locale's digits. */
   readonly number = computed(() => {
-    const plain = new Intl.NumberFormat(this.locale(), { useGrouping: false });
-    const padded = new Intl.NumberFormat(this.locale(), {
+    const plain = new Intl.NumberFormat(this.locale, { useGrouping: false });
+    const padded = new Intl.NumberFormat(this.locale, {
       minimumIntegerDigits: 2,
       useGrouping: false,
     });

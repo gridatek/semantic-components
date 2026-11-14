@@ -74,8 +74,8 @@ export class ScAnimatedCounter {
   readonly value = input.required<number>();
   /** How it is written: currency, percent, compact, a unit, decimals… */
   readonly format = input<Intl.NumberFormatOptions>({});
-  /** The language it is written in; the app's by default. */
-  readonly locale = input(inject(LOCALE_ID));
+  /** The locale: `LOCALE_ID` — the app's, or one provided for this section. */
+  private readonly locale = inject(LOCALE_ID);
   readonly effect = input<ScAnimatedCounterEffect>('count');
   /** How long a change takes, in milliseconds. */
   readonly duration = input(1000);
@@ -91,7 +91,7 @@ export class ScAnimatedCounter {
   private controls: AnimationPlaybackControls | null = null;
 
   private readonly formatter = computed(
-    () => new Intl.NumberFormat(this.locale(), this.format()),
+    () => new Intl.NumberFormat(this.locale, this.format()),
   );
 
   /** The value, as written — what screen readers get. */
@@ -108,7 +108,7 @@ export class ScAnimatedCounter {
 
   /** The digits 0–9, in the app's language. */
   protected readonly glyphs = computed(() => {
-    const format = new Intl.NumberFormat(this.locale());
+    const format = new Intl.NumberFormat(this.locale);
     return Array.from({ length: 10 }, (_, digit) => format.format(digit));
   });
 

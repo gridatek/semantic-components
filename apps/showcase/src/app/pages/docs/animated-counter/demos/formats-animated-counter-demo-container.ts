@@ -18,11 +18,11 @@ import { FormatsAnimatedCounterDemo } from './formats-animated-counter-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class FormatsAnimatedCounterDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  readonly code = `import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
 import { ScAnimatedCounter } from '@semantic-components/ui/animated-counter';
 
-/** Any Intl.NumberFormat options, in the counter’s locale — here, German: euros, a percent, compact. */
+/** Any Intl.NumberFormat options, in LOCALE_ID — provided here as German: euros, a percent, compact. */
 @Component({
   selector: 'app-formats-animated-counter-demo',
   imports: [ScAnimatedCounter, ScButton],
@@ -31,7 +31,6 @@ import { ScAnimatedCounter } from '@semantic-components/ui/animated-counter';
       <div class="rounded-xl border p-4">
         <span
           scAnimatedCounter
-          locale="de-DE"
           [value]="sales()"
           [format]="{ style: 'currency', currency: 'EUR' }"
           class="text-xl font-semibold"
@@ -41,7 +40,6 @@ import { ScAnimatedCounter } from '@semantic-components/ui/animated-counter';
       <div class="rounded-xl border p-4">
         <span
           scAnimatedCounter
-          locale="de-DE"
           [value]="share()"
           [format]="{ style: 'percent', maximumFractionDigits: 1 }"
           class="text-xl font-semibold"
@@ -51,7 +49,6 @@ import { ScAnimatedCounter } from '@semantic-components/ui/animated-counter';
       <div class="rounded-xl border p-4">
         <span
           scAnimatedCounter
-          locale="de-DE"
           [value]="views()"
           [format]="{ notation: 'compact' }"
           class="text-xl font-semibold"
@@ -61,6 +58,7 @@ import { ScAnimatedCounter } from '@semantic-components/ui/animated-counter';
     </div>
     <button scButton variant="outline" (click)="next()">Next month</button>
   \`,
+  providers: [{ provide: LOCALE_ID, useValue: 'de-DE' }],
   host: { class: 'flex w-full flex-col items-center gap-4' },
   encapsulation: ViewEncapsulation.None,
 })

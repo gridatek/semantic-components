@@ -54,8 +54,8 @@ import { TextStatCardDemoContainer } from './demos/text-stat-card-demo-container
       <section class="space-y-4">
         <h2 scHeading appToc>Formats</h2>
         <p class="text-muted-foreground">
-          Any Intl.NumberFormat options — compact, a unit, a currency — in the
-          card’s locale: here, German.
+          Any Intl.NumberFormat options — compact, a unit, a currency — in
+          LOCALE_ID: provided here as German.
         </p>
         <app-formats-stat-card-demo-container />
       </section>

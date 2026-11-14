@@ -5,7 +5,7 @@ A time picked on a clock face — the hour, then the minute — by pointer (mous
 ## Architecture
 
 ```
-div[scTimeClock] ([(value)] / [formField], [(view)], locale, hourCycle,
+div[scTimeClock] ([(value)] / [formField], [(view)], hourCycle,
 │                 step, minTime, maxTime, autoAdvance, disabled)
 │  text() · hourText() · minuteText() · period() · setHour() · setMinute() · setPeriod()
 ├── div[scTimeClockHeader]  — the hour and the minute (buttons: the view), AM / PM in 12 hours
@@ -45,7 +45,6 @@ An empty clock starts from now.
 | ---------------------------------- | ------------------------------------------- | ------------ |
 | `value`                            | `Temporal.PlainTime \| null` (model)        | `null`       |
 | `view`                             | `'hours' \| 'minutes'` (model)              | `'hours'`    |
-| `locale`                           | `string`                                    | `LOCALE_ID`  |
 | `hourCycle`                        | `'h12' \| 'h23' \| undefined`               | the locale's |
 | `step`                             | `number` (minutes)                          | `1`          |
 | `minTime` / `maxTime`              | `Temporal.PlainTime \| undefined`           | —            |

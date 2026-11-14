@@ -1,6 +1,7 @@
 import {
   Directive,
   ElementRef,
+  LOCALE_ID,
   computed,
   effect,
   inject,
@@ -54,8 +55,8 @@ export class ScEmojiPicker {
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
   readonly classInput = input<string>('', { alias: 'class' });
-  /** The language of the emojis' names and of the search (Emojibase's). */
-  readonly locale = input('en');
+  /** The locale: `LOCALE_ID` — the app's, or one provided for this section. */
+  private readonly locale = inject(LOCALE_ID);
   /** Emojis per row. */
   readonly columns = input(10);
   /** The skin tone emojis are shown in. */
@@ -116,7 +117,7 @@ export class ScEmojiPicker {
     let request = 0;
     effect(() => {
       const data = this.data();
-      const locale = this.locale();
+      const locale = this.locale;
       const url = this.emojibaseUrl();
       const version = this.emojiVersion();
       untracked(() => {

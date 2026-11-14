@@ -1,5 +1,6 @@
 import {
   Component,
+  LOCALE_ID,
   ViewEncapsulation,
   computed,
   inject,
@@ -23,6 +24,7 @@ import { ScStatCard } from './stat-card';
 })
 export class ScStatCardValue {
   private readonly card = inject(ScStatCard);
+  private readonly locale = inject(LOCALE_ID);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly value = input<number | null>(null);
@@ -32,7 +34,7 @@ export class ScStatCardValue {
     const value = this.value();
     return value === null
       ? ''
-      : new Intl.NumberFormat(this.card.locale(), this.format()).format(value);
+      : new Intl.NumberFormat(this.locale, this.format()).format(value);
   });
 
   protected readonly class = computed(() =>

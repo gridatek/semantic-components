@@ -5,7 +5,7 @@ One figure on a description list — its label, its value written by `Intl.Numbe
 ## Architecture
 
 ```
-dl[scStatCard] (locale — the app's)
+dl[scStatCard]
 ├── dt[scStatCardLabel]          — what the figure is
 │   └── svg[scStatCardIcon]      — your icon, at the label's end
 ├── dd[scStatCardValue]          — value + format (Intl.NumberFormatOptions); or your text
@@ -28,7 +28,7 @@ dl[scStatCard] (locale — the app's)
 
 ## Numbers
 
-- The value and the change are written by `Intl.NumberFormat` in the card's `locale` (`LOCALE_ID` by default), with your `format`: currency, percent, a unit, compact notation…
+- The value and the change are written by `Intl.NumberFormat` in `LOCALE_ID` (the app's, or one provided for a section), with your `format`: currency, percent, a unit, compact notation…
 - Without a `value`, the value part shows your text ("All systems normal").
 - The change always shows its sign (`+20.1%`, `−4.3%`, `0`).
 

@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScEmojiPicker,
   ScEmojiPickerAnnouncer,
@@ -47,7 +47,6 @@ import { SiLoaderCircleIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
     <div
       scEmojiPicker
       class="rounded-lg border shadow-md"
-      locale="fr"
       [(skinTone)]="skinTone"
       #picker="scEmojiPicker"
     >
@@ -119,6 +118,7 @@ import { SiLoaderCircleIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
       </div>
     </div>
   `,
+  providers: [{ provide: LOCALE_ID, useValue: 'fr' }],
   host: { class: 'flex w-full flex-col items-center' },
   encapsulation: ViewEncapsulation.None,
 })

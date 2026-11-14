@@ -5,7 +5,7 @@ A day, a range or several days, picked in a calendar in a popover — or typed, 
 ## Architecture
 
 ```
-div[scDatePicker] (mode, [(value)] / [formField], format, locale,
+div[scDatePicker] (mode, [(value)] / [formField], format,
 │                  minDate, maxDate, unavailable, confirm, disabled)
 │  text() · hasValue() · draft() · canApply() · pick(value) · apply() · cancel() · canPick(date)
 ├── input[scDateInput] (part)  — typed: the locale's numeric order, or ISO; a range: part="start" / "end"
@@ -79,7 +79,6 @@ Typed, in a field — the input and the trigger in an input group; there the tri
 | `value`                            | `ScCalendarValue` (model)                   | `null`                    |
 | `mode`                             | `'single' \| 'multiple' \| 'range'`         | `'single'`                |
 | `format`                           | `Intl.DateTimeFormatOptions`                | `{ dateStyle: 'medium' }` |
-| `locale`                           | `string`                                    | `LOCALE_ID`               |
 | `minDate` / `maxDate`              | `Temporal.PlainDate \| undefined`           | —                         |
 | `unavailable`                      | `(date: Temporal.PlainDate) => boolean`     | `() => false`             |
 | `confirm`                          | `boolean` — picks are a draft until applied | `false`                   |

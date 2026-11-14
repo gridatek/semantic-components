@@ -18,26 +18,27 @@ import { SegmentedLocaleDateInputDemo } from './segmented-locale-date-input-demo
   encapsulation: ViewEncapsulation.None,
 })
 export class SegmentedLocaleDateInputDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  readonly code = `import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScField,
   ScLabel,
   ScSegmentedDateInput,
 } from '@semantic-components/ui';
 
-/** locale="fr-FR": day, month, year — the parts named in French. */
+/** LOCALE_ID provided as 'fr-FR': day, month, year — the parts named in French. */
 @Component({
   selector: 'app-segmented-locale-date-input-demo',
   imports: [ScSegmentedDateInput, ScField, ScLabel],
   template: \`
     <div scField class="w-40">
       <label scLabel>Date d’arrivée</label>
-      <div scSegmentedDateInput locale="fr-FR" [(value)]="date"></div>
+      <div scSegmentedDateInput [(value)]="date"></div>
     </div>
     <p class="text-muted-foreground text-sm" data-testid="picked">
       {{ date()?.toString() ?? 'No date.' }}
     </p>
   \`,
+  providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })

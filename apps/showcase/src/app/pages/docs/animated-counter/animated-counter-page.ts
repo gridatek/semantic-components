@@ -65,7 +65,7 @@ import { VisibleAnimatedCounterDemoContainer } from './demos/visible-animated-co
       <section class="space-y-4">
         <h2 scHeading appToc>Formats</h2>
         <p class="text-muted-foreground">
-          Any Intl.NumberFormat options, in the counter’s locale — here, German:
+          Any Intl.NumberFormat options, in LOCALE_ID — provided here as German:
           euros, a percent, compact.
         </p>
         <app-formats-animated-counter-demo-container />

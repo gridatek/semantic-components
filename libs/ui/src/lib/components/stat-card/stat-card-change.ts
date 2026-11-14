@@ -1,5 +1,6 @@
 import {
   Component,
+  LOCALE_ID,
   ViewEncapsulation,
   computed,
   inject,
@@ -30,6 +31,7 @@ export type ScStatCardGood = 'up' | 'down';
 })
 export class ScStatCardChange {
   private readonly card = inject(ScStatCard);
+  private readonly locale = inject(LOCALE_ID);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly value = input.required<number>();
@@ -48,7 +50,7 @@ export class ScStatCardChange {
   });
 
   protected readonly text = computed(() =>
-    new Intl.NumberFormat(this.card.locale(), {
+    new Intl.NumberFormat(this.locale, {
       ...this.format(),
       signDisplay: 'exceptZero',
     }).format(this.value()),

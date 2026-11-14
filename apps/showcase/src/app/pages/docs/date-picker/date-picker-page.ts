@@ -204,7 +204,7 @@ export default class DatePickerPage {
       name: 'ScDatePicker',
       selector: 'div[scDatePicker]',
       description:
-        "Holds the value: [(value)] (a day, days or a range — the calendar's); mode ('single', 'multiple', 'range'); format (Intl options, dateStyle medium) and locale; minDate, maxDate, unavailable; confirm (picks a draft until Apply); a [formField] (disabled, invalid, touched). exportAs scDatePicker: text() (the value as written), draft(), pick(), apply(), cancel().",
+        "Holds the value: [(value)] (a day, days or a range — the calendar's); mode ('single', 'multiple', 'range'); format (Intl options, dateStyle medium, in LOCALE_ID); minDate, maxDate, unavailable; confirm (picks a draft until Apply); a [formField] (disabled, invalid, touched). exportAs scDatePicker: text() (the value as written), draft(), pick(), apply(), cancel().",
     },
     {
       name: 'ScDatePickerTrigger',

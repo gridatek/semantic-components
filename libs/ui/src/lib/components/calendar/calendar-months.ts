@@ -1,5 +1,6 @@
 import {
   Component,
+  LOCALE_ID,
   ViewEncapsulation,
   computed,
   forwardRef,
@@ -49,6 +50,7 @@ import { ScCalendar } from './calendar';
 })
 export class ScCalendarMonths {
   protected readonly calendar = inject(forwardRef(() => ScCalendar));
+  private readonly locale = inject(LOCALE_ID);
 
   protected readonly year = computed(() => this.calendar.focused().year);
 
@@ -84,16 +86,14 @@ export class ScCalendarMonths {
   protected short(month: Temporal.PlainYearMonth): string {
     return month
       .toPlainDate({ day: 1 })
-      .toLocaleString(this.calendar.locale(), { month: 'short' });
+      .toLocaleString(this.locale, { month: 'short' });
   }
 
   protected long(month: Temporal.PlainYearMonth): string {
-    return month
-      .toPlainDate({ day: 1 })
-      .toLocaleString(this.calendar.locale(), {
-        month: 'long',
-        year: 'numeric',
-      });
+    return month.toPlainDate({ day: 1 }).toLocaleString(this.locale, {
+      month: 'long',
+      year: 'numeric',
+    });
   }
 
   protected pick(month: Temporal.PlainYearMonth): void {

@@ -9,7 +9,7 @@ div[scTimePicker] (interval)
 │  times() · label(time) · pick(time)
 └── div[scPopoverProvider]
     ├── div[scInputGroup]
-    │   ├── div[scTimeInput] ([formField], locale, hourCycle, minTime, maxTime…)
+    │   ├── div[scTimeInput] ([formField], hourCycle, minTime, maxTime…)
     │   └── div[scInputGroupAddon]
     │       └── button[scTimePickerTrigger] — your icon and its name
     └── ng-template[scPopoverPortal]
@@ -17,7 +17,7 @@ div[scTimePicker] (interval)
             └── div[scTimePickerList] — the times (a listbox): name it
 ```
 
-The value, the locale and the limits are the time input's: put `[formField]` on it; the picker reads them from there.
+The value and the limits are the time input's (the locale is `LOCALE_ID`): put `[formField]` on it; the picker reads them from there.
 
 ## Usage
 

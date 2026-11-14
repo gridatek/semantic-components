@@ -106,8 +106,6 @@ export class ScSegmentedDateInput implements FormValueControl<Temporal.PlainDate
   readonly value = model<Temporal.PlainDate | null>(null);
   /** In a date picker's range: the end it is. */
   readonly part = input<'start' | 'end' | undefined>(undefined);
-  /** The language: the order and the separators; the app's (or the picker's) by default. */
-  readonly locale = input<string | undefined>(undefined);
   /** The first day; an earlier one is marked invalid. */
   readonly minDate = input<Temporal.PlainDate | undefined>(undefined);
   /** The last day; a later one is marked invalid. */
@@ -124,10 +122,8 @@ export class ScSegmentedDateInput implements FormValueControl<Temporal.PlainDate
   /** Focus left it (Signal Forms marks it touched). */
   readonly touch = output<void>();
 
-  private readonly appLocale = inject(LOCALE_ID);
-  protected readonly language = computed(
-    () => this.locale() ?? this.picker?.locale() ?? this.appLocale,
-  );
+  /** The locale: `LOCALE_ID` — the app's, or one provided for this section. */
+  private readonly language = inject(LOCALE_ID);
   /** Disabled — or its date picker is. */
   readonly isDisabled = computed(
     () => this.disabled() || !!this.picker?.disabled(),
@@ -160,7 +156,7 @@ export class ScSegmentedDateInput implements FormValueControl<Temporal.PlainDate
 
   private readonly formatter = computed(
     () =>
-      new Intl.DateTimeFormat(this.language(), {
+      new Intl.DateTimeFormat(this.language, {
         year: 'numeric',
         month: '2-digit',
         day: '2-digit',
@@ -180,7 +176,7 @@ export class ScSegmentedDateInput implements FormValueControl<Temporal.PlainDate
 
   /** Each part's name, in the locale's words. */
   protected readonly names = computed(() => {
-    const names = new Intl.DisplayNames(this.language(), {
+    const names = new Intl.DisplayNames(this.language, {
       type: 'dateTimeField',
     });
     return {
@@ -192,20 +188,20 @@ export class ScSegmentedDateInput implements FormValueControl<Temporal.PlainDate
 
   private readonly twoDigits = computed(
     () =>
-      new Intl.NumberFormat(this.language(), {
+      new Intl.NumberFormat(this.language, {
         minimumIntegerDigits: 2,
         useGrouping: false,
       }),
   );
   private readonly fourDigits = computed(
     () =>
-      new Intl.NumberFormat(this.language(), {
+      new Intl.NumberFormat(this.language, {
         minimumIntegerDigits: 4,
         useGrouping: false,
       }),
   );
   private readonly monthName = computed(
-    () => new Intl.DateTimeFormat(this.language(), { month: 'long' }),
+    () => new Intl.DateTimeFormat(this.language, { month: 'long' }),
   );
 
   /** The parts typed so far: the day's — kept while one is still empty. */

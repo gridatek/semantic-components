@@ -18,19 +18,19 @@ import { LocaleTimeClockDemo } from './locale-time-clock-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class LocaleTimeClockDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  readonly code = `import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScTimeClock,
   ScTimeClockDial,
   ScTimeClockHeader,
 } from '@semantic-components/ui';
 
-/** locale="fr-FR": 24 hours — 13 to 00 on an inner ring. hourCycle overrides the locale’s 12 or 24. */
+/** LOCALE_ID provided as 'fr-FR': 24 hours — 13 to 00 on an inner ring. hourCycle overrides the locale’s 12 or 24. */
 @Component({
   selector: 'app-locale-time-clock-demo',
   imports: [ScTimeClock, ScTimeClockHeader, ScTimeClockDial],
   template: \`
-    <div scTimeClock #clock="scTimeClock" locale="fr-FR" [(value)]="time">
+    <div scTimeClock #clock="scTimeClock" [(value)]="time">
       <div scTimeClockHeader></div>
       <div
         scTimeClockDial
@@ -41,6 +41,7 @@ import {
       {{ time()?.toString() ?? 'No time.' }}
     </p>
   \`,
+  providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })

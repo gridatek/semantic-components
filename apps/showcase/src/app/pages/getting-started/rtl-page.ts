@@ -251,9 +251,9 @@ class RtlWithoutDir {}
             Dates, numbers and the week's first day follow
             <code class="bg-muted rounded px-1.5 py-0.5 text-sm">LOCALE_ID</code
             >: provide it on the section's component, as above — every part
-            inside reads it, in its overlays too, without a
+            inside reads it, in its overlays too. The parts have no
             <code class="bg-muted rounded px-1.5 py-0.5 text-sm">locale</code>
-            on each.
+            input.
           </li>
         </ul>
       </section>

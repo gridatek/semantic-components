@@ -146,7 +146,15 @@ interface Step {
           >). Angular's
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">LOCALE_ID</code>
           follows the locale, and with it the components' dates, numbers and
-          calendars.
+          calendars. They have no
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">locale</code>
+          input: a section in another locale provides
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">LOCALE_ID</code>
+          on its component —
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >providers: [&#123; provide: LOCALE_ID, useValue: 'fr' &#125;]</code
+          >
+          — and every part inside follows it.
         </p>
       </section>
 

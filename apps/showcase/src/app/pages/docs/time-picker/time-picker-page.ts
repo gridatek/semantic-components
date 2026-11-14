@@ -52,8 +52,8 @@ import { LocaleTimePickerDemoContainer } from './demos/locale-time-picker-demo-c
       <section class="space-y-4">
         <h2 scHeading appToc>Locale</h2>
         <p class="text-muted-foreground">
-          The input’s locale and hour cycle write the list too: here French, 24
-          hours.
+          LOCALE_ID and the input’s hour cycle write the list too: here French,
+          24 hours.
         </p>
         <app-locale-time-picker-demo-container />
       </section>

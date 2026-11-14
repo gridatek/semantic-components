@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCalendar,
   ScCalendarHeader,
@@ -12,7 +12,7 @@ import {
   SiChevronRightIcon,
 } from '@semantic-icons/lucide-icons';
 
-/** locale="fr-FR": the days, months and heading in French, the week from Monday — as the locale has it — and showWeekNumbers. */
+/** LOCALE_ID provided as 'fr-FR': the days, months and heading in French, the week from Monday — as the locale has it — and showWeekNumbers. */
 @Component({
   selector: 'app-locale-calendar-demo',
   imports: [
@@ -29,7 +29,6 @@ import {
       scCalendar
       #cal="scCalendar"
       aria-label="Calendrier"
-      locale="fr-FR"
       showWeekNumbers
       [(value)]="date"
       scFrame
@@ -46,6 +45,7 @@ import {
       </div>
     </div>
   `,
+  providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })

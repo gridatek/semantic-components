@@ -102,8 +102,8 @@ export class ScCalendar implements FormValueControl<ScCalendarValue> {
   readonly unavailable = input<(date: Temporal.PlainDate) => boolean>(
     () => false,
   );
-  /** The language of its words; the app's by default. */
-  readonly locale = input(inject(LOCALE_ID));
+  /** The locale: `LOCALE_ID` — the app's, or one provided for this section. */
+  private readonly locale = inject(LOCALE_ID);
   /** The week's first day, 1 (Monday) – 7 (Sunday); the locale's by default. */
   readonly firstDayOfWeek = input<number | undefined>(undefined);
   readonly numberOfMonths = input(1);
@@ -186,7 +186,7 @@ export class ScCalendar implements FormValueControl<ScCalendarValue> {
   readonly weekStart = computed(() => {
     const given = this.firstDayOfWeek();
     if (given) return given;
-    const locale = new Intl.Locale(this.locale()) as Intl.Locale & {
+    const locale = new Intl.Locale(this.locale) as Intl.Locale & {
       getWeekInfo?: () => { firstDay: number };
       weekInfo?: { firstDay: number };
     };
@@ -195,7 +195,7 @@ export class ScCalendar implements FormValueControl<ScCalendarValue> {
 
   /** What is shown: the month(s), the year, or the years. */
   readonly heading = computed(() => {
-    const locale = this.locale();
+    const locale = this.locale;
     const view = this.view();
     const first = this.first();
     if (view === 'year') {
@@ -236,7 +236,7 @@ export class ScCalendar implements FormValueControl<ScCalendarValue> {
   );
 
   monthHeading(month: Temporal.PlainYearMonth): string {
-    return month.toPlainDate({ day: 1 }).toLocaleString(this.locale(), {
+    return month.toPlainDate({ day: 1 }).toLocaleString(this.locale, {
       month: 'long',
       year: 'numeric',
     });

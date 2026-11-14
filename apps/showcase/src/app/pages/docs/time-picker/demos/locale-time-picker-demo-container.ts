@@ -19,7 +19,7 @@ import { LocaleTimePickerDemo } from './locale-time-picker-demo';
 })
 export class LocaleTimePickerDemoContainer {
   readonly code = `import { CdkOverlayOrigin } from '@angular/cdk/overlay';
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScField,
   ScInputGroup,
@@ -35,7 +35,7 @@ import {
 } from '@semantic-components/ui';
 import { SiClockIcon } from '@semantic-icons/lucide-icons';
 
-/** The input’s locale and hour cycle write the list too: here French, 24 hours. */
+/** LOCALE_ID and the input’s hour cycle write the list too: here French, 24 hours. */
 @Component({
   selector: 'app-locale-time-picker-demo',
   imports: [
@@ -59,7 +59,7 @@ import { SiClockIcon } from '@semantic-icons/lucide-icons';
       <div scTimePicker>
         <div scPopoverProvider [origin]="anchor" alignment="start">
           <div scInputGroup cdkOverlayOrigin #anchor="cdkOverlayOrigin">
-            <div scTimeInput locale="fr-FR" [(value)]="time"></div>
+            <div scTimeInput [(value)]="time"></div>
             <div scInputGroupAddon side="inline-end">
               <button scTimePickerTrigger #trigger="scTimePickerTrigger">
                 <svg siClockIcon></svg>
@@ -79,6 +79,7 @@ import { SiClockIcon } from '@semantic-icons/lucide-icons';
       {{ time()?.toString() ?? 'No time.' }}
     </p>
   \`,
+  providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })

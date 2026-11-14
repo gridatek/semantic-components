@@ -53,7 +53,6 @@ export class ScDateInput implements FormValueControl<Temporal.PlainDate | null> 
   private readonly element =
     inject<ElementRef<HTMLInputElement>>(ElementRef).nativeElement;
   private readonly fallbackId = inject(_IdGenerator).getId('sc-date-input-');
-  private readonly appLocale = inject(LOCALE_ID);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly idInput = input('', { alias: 'id' });
@@ -61,8 +60,6 @@ export class ScDateInput implements FormValueControl<Temporal.PlainDate | null> 
   readonly value = model<Temporal.PlainDate | null>(null);
   /** In a date picker's range: the end it is. */
   readonly part = input<'start' | 'end' | undefined>(undefined);
-  /** The language: the numeric order; the picker's, or the app's, by default. */
-  readonly locale = input<string | undefined>(undefined);
   /** The first day; an earlier one is not read (in a picker: the picker's). */
   readonly minDate = input<Temporal.PlainDate | undefined>(undefined);
   /** The last day; a later one is not read (in a picker: the picker's). */
@@ -101,14 +98,13 @@ export class ScDateInput implements FormValueControl<Temporal.PlainDate | null> 
     () => this.field?.descriptionIds().join(' ') || null,
   );
 
-  private readonly language = computed(
-    () => this.locale() ?? this.picker?.locale() ?? this.appLocale,
-  );
+  /** The locale: `LOCALE_ID` — the app's, or one provided for this section. */
+  private readonly language = inject(LOCALE_ID);
 
   /** The locale's numeric day: 2 digits, 2 digits, 4 digits — in its order. */
   private readonly numeric = computed(
     () =>
-      new Intl.DateTimeFormat(this.language(), {
+      new Intl.DateTimeFormat(this.language, {
         year: 'numeric',
         month: '2-digit',
         day: '2-digit',

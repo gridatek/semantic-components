@@ -31,7 +31,6 @@ It writes its own parts — from `Intl.DateTimeFormat#formatToParts` — so ther
 | Input                              | Type                                 | Default      |
 | ---------------------------------- | ------------------------------------ | ------------ |
 | `value`                            | `Temporal.PlainTime \| null` (model) | `null`       |
-| `locale`                           | `string`                             | `LOCALE_ID`  |
 | `hourCycle`                        | `'h12' \| 'h23' \| undefined`        | the locale's |
 | `granularity`                      | `'hour' \| 'minute' \| 'second'`     | `'minute'`   |
 | `step`                             | `{ hours?, minutes?, seconds? }`     | 1 each       |

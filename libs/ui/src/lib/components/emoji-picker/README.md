@@ -5,7 +5,7 @@ An emoji picker assembled from parts, modelled on [Frimousse](https://frimousse.
 - **One scrolling list** of every category, with sticky headers, **virtualised**: only the rows in view are drawn.
 - **Keyboard first**: typing filters, the arrow keys move an active emoji from the search field (focus stays there) and Enter picks it; the active emoji is announced to screen readers and can be previewed.
 - **Skin tones**, applied to the whole list.
-- **28 languages**: the emojis' names and the search come from [Emojibase](https://emojibase.dev) in the picker's `locale`.
+- **28 languages**: the emojis' names and the search come from [Emojibase](https://emojibase.dev) in `LOCALE_ID` (the app's, or one provided for a section).
 - **No ▯ boxes**: emojis newer than the system can draw are left out.
 - Category navigation and recently used emojis, if you want them.
 
@@ -76,7 +76,7 @@ In a popover, put it in a `scPopover` (with `p-0`) opened by your `scButton`; th
 
 ## `scEmojiPicker`
 
-- **Inputs**: `locale` (`'en'`; Emojibase's 28 languages), `columns` (`10`), `emojiVersion` (the newest Emoji version to show; by default the newest the system draws), `emojibaseUrl` (where Emojibase's data is fetched from — jsDelivr by default; host the `emojibase-data` package's locale folders yourself if you like), `data` (your own `ScEmojiData` instead), `sticky` (`true`), `maxRecent` (`20`), `recentLabel` (the name of a first category of the recent emojis — none without it).
+- **Inputs**: `columns` (`10`), `emojiVersion` (the newest Emoji version to show; by default the newest the system draws), `emojibaseUrl` (where Emojibase's data is fetched from — jsDelivr by default; host the `emojibase-data` package's locale folders yourself if you like), `data` (your own `ScEmojiData` instead), `sticky` (`true`), `maxRecent` (`20`), `recentLabel` (the name of a first category of the recent emojis — none without it).
 - **Two-way**: `skinTone` (`'none' | 'light' | 'medium-light' | 'medium' | 'medium-dark' | 'dark'`), `recent` (`ScEmoji[]`, latest first — keep it to restore it).
 - **Output**: `emojiSelect` (`{ emoji, label }`).
 - **State for your text**: `loading()`, `failed()`, `empty()`, `search()`, `activeEmoji()`, `categories()`, `currentCategory()`, `skinToneNames()`.
