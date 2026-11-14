@@ -189,7 +189,7 @@ export default class NumberFieldPage {
       name: 'ScNumberFieldScrubArea',
       selector: '[scNumberFieldScrubArea]',
       description:
-        "Drag on it to change the value: direction ('horizontal'), one step per pixelSensitivity (2) pixels; with a mouse, the pointer is locked.",
+        "Drag on it to change the value: orientation ('horizontal'), one step per pixelSensitivity (2) pixels; with a mouse, the pointer is locked.",
     },
     {
       name: 'ScNumberFieldScrubAreaCursor',

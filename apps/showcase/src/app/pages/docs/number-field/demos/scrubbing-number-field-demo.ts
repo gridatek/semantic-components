@@ -71,7 +71,11 @@ import {
         [max]="180"
         [format]="{ style: 'unit', unit: 'degree' }"
       >
-        <div scNumberFieldScrubArea direction="vertical" [pixelSensitivity]="4">
+        <div
+          scNumberFieldScrubArea
+          orientation="vertical"
+          [pixelSensitivity]="4"
+        >
           <label scLabel>Rotation (drag up or down)</label>
           <span scNumberFieldScrubAreaCursor
             ><svg siMoveVerticalIcon></svg

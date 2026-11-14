@@ -43,8 +43,11 @@ export class ScNumberFieldScrubArea {
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
   readonly classInput = input<string>('', { alias: 'class' });
-  /** Drag left–right, or up–down (up increases). */
-  readonly direction = input<'horizontal' | 'vertical'>('horizontal');
+  /**
+   * Drag left–right, or up–down (up increases). Base UI's `direction`: an
+   * axis, so `orientation` here, as everywhere in the library.
+   */
+  readonly orientation = input<'horizontal' | 'vertical'>('horizontal');
   /** Pixels of movement per step. */
   readonly pixelSensitivity = input(2);
 
@@ -58,7 +61,9 @@ export class ScNumberFieldScrubArea {
   protected readonly class = computed(() =>
     cn(
       'touch-none select-none',
-      this.direction() === 'vertical' ? 'cursor-ns-resize' : 'cursor-ew-resize',
+      this.orientation() === 'vertical'
+        ? 'cursor-ns-resize'
+        : 'cursor-ew-resize',
       'data-disabled:cursor-not-allowed data-disabled:opacity-50',
       this.classInput(),
     ),
@@ -83,7 +88,7 @@ export class ScNumberFieldScrubArea {
     let lastX = event.clientX;
     let lastY = event.clientY;
     let travelled = 0;
-    const vertical = this.direction() === 'vertical';
+    const vertical = this.orientation() === 'vertical';
 
     // A mouse: lock the pointer (the cursor part takes its place).
     if (event.pointerType === 'mouse' && this.element.requestPointerLock) {
