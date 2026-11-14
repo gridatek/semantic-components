@@ -4,6 +4,33 @@ import { type Locator, type Page, expect, test } from '../../test';
 const demo = (name: string) => `/demos/bar-chart/${name}-chart-demo`;
 const tooltip = (page: Page) => page.locator('[data-slot=chart-tooltip]');
 
+/** The bars grow when they appear (Recharts' entrance): wait until they stand still. */
+async function settled(page: Page): Promise<void> {
+  const sizes = () =>
+    page
+      .locator('[data-slot=chart-bar] > svg')
+      .evaluateAll((bars) =>
+        bars
+          .map(
+            (bar) =>
+              `${bar.getAttribute('width')}x${bar.getAttribute('height')}`,
+          )
+          .join(),
+      );
+  let last = '';
+  await expect
+    .poll(
+      async () => {
+        const now = await sizes();
+        const still = now === last && now !== '';
+        last = now;
+        return still;
+      },
+      { intervals: [100] },
+    )
+    .toBe(true);
+}
+
 let errors: string[];
 
 test.beforeEach(({ page }) => {
@@ -32,6 +59,7 @@ test('Stacked bar: each month, one on the other; a legend', async ({
   const mobile = page.locator('[data-slot=chart-bar][data-key=mobile] > svg');
   await expect(desktop).toHaveCount(6);
   await expect(mobile).toHaveCount(6);
+  await settled(page);
   // Each bar's own box (its svg's geometry): a bar rounded on one side
   // draws past its square one, hidden, which the browser's box includes.
   const geometry = (bar: Locator) =>
@@ -54,6 +82,7 @@ test('Stacked bar: each month, one on the other; a legend', async ({
 
 test('Negative bar: below zero, downwards', async ({ page }) => {
   await page.goto(demo('negative-bar'));
+  await settled(page);
   const bars = page.locator('[data-slot=chart-bar] > svg');
   const february = await bars.nth(1).boundingBox(); // +205
   const march = await bars.nth(2).boundingBox(); // −207
@@ -67,6 +96,7 @@ test('Horizontal: bars across, the months down the side', async ({ page }) => {
   await page.goto(demo('horizontal-bar'));
   const bars = page.locator('[data-slot=chart-bar] > svg');
   await expect(bars).toHaveCount(6);
+  await settled(page);
   const january = await bars.nth(0).boundingBox();
   const february = await bars.nth(1).boundingBox();
   // Across: wider than high, one under the other, from the same start.
@@ -90,6 +120,7 @@ test('Labels: each value above its bar', async ({ page }) => {
   const labels = page.locator('[data-slot=chart-labels] text');
   await expect(labels).toHaveCount(6);
   await expect(labels.nth(1)).toHaveText('305');
+  await settled(page);
   const bar = await page
     .locator('[data-slot=chart-bar] > svg')
     .nth(1)

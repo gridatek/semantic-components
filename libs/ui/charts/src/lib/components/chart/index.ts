@@ -1,4 +1,10 @@
 export { ScChart } from './chart';
+export {
+  type ScChartAnimationEasing,
+  type ScChartEntranceOptions,
+  scChartEasing,
+  scChartEntrance,
+} from './chart-animation';
 export { ScChartCategoryAxis } from './chart-category-axis';
 export { ScChartCenter } from './chart-center';
 export { ScChartCursor } from './chart-cursor';

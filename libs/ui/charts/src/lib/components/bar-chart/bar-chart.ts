@@ -8,6 +8,10 @@ import {
 } from '@angular/core';
 import { cn } from 'cn';
 import {
+  type ScChartAnimationEasing,
+  scChartEntrance,
+} from '../chart/chart-animation';
+import {
   SC_CHART_SERIES,
   type ScChartLabelPoint,
   type ScChartLabelPosition,
@@ -119,6 +123,20 @@ export class ScChartBar implements ScChartSeriesLabels {
   readonly barSize = input<number | undefined>(undefined);
   /** Its widest, in pixels (Recharts' `maxBarSize`): a narrower slot keeps its width. */
   readonly maxBarSize = input<number | undefined>(undefined);
+  /** Its bars grow from their base when it appears (Recharts'); not with reduced motion. */
+  readonly isAnimationActive = input(true);
+  /** The wait before they grow, in ms. */
+  readonly animationBegin = input(0);
+  /** How long they grow, in ms. */
+  readonly animationDuration = input(400);
+  readonly animationEasing = input<ScChartAnimationEasing>('ease');
+
+  /** Its entrance: 0 to 1 once, after its first render. */
+  private readonly entrance = scChartEntrance({
+    begin: this.animationBegin,
+    duration: this.animationDuration,
+    easing: this.animationEasing,
+  });
 
   protected readonly color = computed(() => `var(--color-${this.key()})`);
 
@@ -142,10 +160,12 @@ export class ScChartBar implements ScChartSeriesLabels {
     const past = thickness / 2;
     const names = this.state.categories();
     const byCategory = this.colorBy() === 'category';
+    // Growing from its base: its end on the way to its value.
+    const grown = this.isAnimationActive() ? this.entrance() : 1;
     return (this.state.extents().get(this.key()) ?? []).map(
       ([low, high], index) => {
         const a = values(low);
-        const b = values(high);
+        const b = values(low + (high - low) * grown);
         const up = high >= low;
         const start = (categories(index) ?? 0) + offset;
         const box = vertical
