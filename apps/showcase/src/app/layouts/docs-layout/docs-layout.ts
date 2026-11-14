@@ -25,6 +25,9 @@ import {
   ScBreadcrumbList,
   ScBreadcrumbPage,
   ScBreadcrumbSeparator,
+  ScCollapsible,
+  ScCollapsiblePanel,
+  ScCollapsibleTrigger,
   ScSidebar,
   ScSidebarContent,
   ScSidebarFooter,
@@ -113,6 +116,9 @@ import { ConfigService } from '../../services/config-service';
     SiWrenchIcon,
     Logo,
     Toc,
+    ScCollapsible,
+    ScCollapsiblePanel,
+    ScCollapsibleTrigger,
   ],
   template: `
     <div scSidebarProvider class="min-h-svh">
@@ -165,232 +171,351 @@ import { ConfigService } from '../../services/config-service';
             <div scSidebarGroupLabel>Documentation</div>
             <div scSidebarGroupContent>
               <ul scSidebarMenu>
-                <li scSidebarMenuItem>
-                  <a scSidebarMenuButton>
+                <li
+                  scSidebarMenuItem
+                  scCollapsible
+                  routerLinkActive
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  #groupSemanticComponents="routerLinkActive"
+                  [open]="groupSemanticComponents.isActive"
+                >
+                  <button
+                    scSidebarMenuButton
+                    scCollapsibleTrigger
+                    class="[&[aria-expanded=true]>svg:last-child]:rotate-90"
+                  >
                     <svg siBookOpenTextIcon></svg>
                     <span>Semantic Components</span>
-                  </a>
-                  <ul scSidebarMenuSub>
-                    <li scSidebarMenuSubItem>
-                      <a
-                        scSidebarMenuSubButton
-                        routerLink="/docs/getting-started/introduction"
-                        routerLinkActive
-                        #introRla="routerLinkActive"
-                        [active]="introRla.isActive"
-                      >
-                        <span>Introduction</span>
-                      </a>
-                    </li>
-                    <li scSidebarMenuSubItem>
-                      <a
-                        scSidebarMenuSubButton
-                        routerLink="/docs/components"
-                        [routerLinkActiveOptions]="{ exact: true }"
-                        routerLinkActive
-                        #componentsListRla="routerLinkActive"
-                        [active]="componentsListRla.isActive"
-                      >
-                        <span>Components</span>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li scSidebarMenuItem>
-                  <a scSidebarMenuButton>
-                    <svg siDownloadIcon></svg>
-                    <span>Installation</span>
-                  </a>
-                  <ul scSidebarMenuSub>
-                    <li scSidebarMenuSubItem>
-                      <a
-                        scSidebarMenuSubButton
-                        routerLink="/docs/getting-started/prerequisites"
-                        routerLinkActive
-                        #prerequisitesRla="routerLinkActive"
-                        [active]="prerequisitesRla.isActive"
-                      >
-                        <span>Prerequisites</span>
-                      </a>
-                    </li>
-                    <li scSidebarMenuSubItem>
-                      <a
-                        scSidebarMenuSubButton
-                        routerLink="/docs/getting-started/ui"
-                        routerLinkActive
-                        #coreRla="routerLinkActive"
-                        [active]="coreRla.isActive"
-                      >
-                        <span>UI</span>
-                      </a>
-                    </li>
-                    <li scSidebarMenuSubItem>
-                      <a
-                        scSidebarMenuSubButton
-                        routerLink="/docs/getting-started/presets"
-                        routerLinkActive
-                        #presetsRla="routerLinkActive"
-                        [active]="presetsRla.isActive"
-                      >
-                        <span>Presets</span>
-                      </a>
-                    </li>
-                    <li scSidebarMenuSubItem>
-                      <a
-                        scSidebarMenuSubButton
-                        routerLink="/docs/getting-started/custom-preset"
-                        routerLinkActive
-                        #customPresetRla="routerLinkActive"
-                        [active]="customPresetRla.isActive"
-                      >
-                        <span>Custom preset</span>
-                      </a>
-                    </li>
-                    <li scSidebarMenuSubItem>
-                      <a
-                        scSidebarMenuSubButton
-                        routerLink="/docs/getting-started/i18n"
-                        routerLinkActive
-                        #i18nRla="routerLinkActive"
-                        [active]="i18nRla.isActive"
-                      >
-                        <span>Internationalization</span>
-                      </a>
-                    </li>
-                    <li scSidebarMenuSubItem>
-                      <a
-                        scSidebarMenuSubButton
-                        routerLink="/docs/getting-started/rtl"
-                        routerLinkActive
-                        #rtlRla="routerLinkActive"
-                        [active]="rtlRla.isActive"
-                      >
-                        <span>Right to left</span>
-                      </a>
-                    </li>
-                    <li scSidebarMenuSubItem>
-                      <a
-                        scSidebarMenuSubButton
-                        routerLink="/docs/getting-started/mcp-server"
-                        routerLinkActive
-                        #mcpServerRla="routerLinkActive"
-                        [active]="mcpServerRla.isActive"
-                      >
-                        <span>MCP Server</span>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li scSidebarMenuItem>
-                  <a scSidebarMenuButton>
-                    <svg siBoxIcon></svg>
-                    <span>Components</span>
-                  </a>
-                  <ul scSidebarMenuSub>
-                    @for (item of components(); track item.path) {
+                    <svg
+                      siChevronRightIcon
+                      class="ms-auto transition-transform rtl:-scale-x-100"
+                    ></svg>
+                  </button>
+                  <div scCollapsiblePanel hiddenUntilFound>
+                    <ul scSidebarMenuSub>
                       <li scSidebarMenuSubItem>
                         <a
                           scSidebarMenuSubButton
-                          [routerLink]="'/docs/components/' + item.path"
+                          routerLink="/docs/getting-started/introduction"
                           routerLinkActive
-                          #rla="routerLinkActive"
-                          [active]="rla.isActive"
+                          #introRla="routerLinkActive"
+                          [active]="introRla.isActive"
                         >
-                          <span>{{ item.name }}</span>
+                          <span>Introduction</span>
                         </a>
                       </li>
-                    }
-                  </ul>
+                      <li scSidebarMenuSubItem>
+                        <a
+                          scSidebarMenuSubButton
+                          routerLink="/docs/components"
+                          [routerLinkActiveOptions]="{ exact: true }"
+                          routerLinkActive
+                          #componentsListRla="routerLinkActive"
+                          [active]="componentsListRla.isActive"
+                        >
+                          <span>Components</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
                 </li>
-                @if (charts().length > 0) {
-                  <li scSidebarMenuItem>
-                    <a scSidebarMenuButton>
-                      <svg siChartColumnIcon></svg>
-                      <span>Charts</span>
-                    </a>
+                <li
+                  scSidebarMenuItem
+                  scCollapsible
+                  routerLinkActive
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  #groupInstallation="routerLinkActive"
+                  [open]="groupInstallation.isActive"
+                >
+                  <button
+                    scSidebarMenuButton
+                    scCollapsibleTrigger
+                    class="[&[aria-expanded=true]>svg:last-child]:rotate-90"
+                  >
+                    <svg siDownloadIcon></svg>
+                    <span>Installation</span>
+                    <svg
+                      siChevronRightIcon
+                      class="ms-auto transition-transform rtl:-scale-x-100"
+                    ></svg>
+                  </button>
+                  <div scCollapsiblePanel hiddenUntilFound>
                     <ul scSidebarMenuSub>
-                      @for (item of charts(); track item.path) {
+                      <li scSidebarMenuSubItem>
+                        <a
+                          scSidebarMenuSubButton
+                          routerLink="/docs/getting-started/prerequisites"
+                          routerLinkActive
+                          #prerequisitesRla="routerLinkActive"
+                          [active]="prerequisitesRla.isActive"
+                        >
+                          <span>Prerequisites</span>
+                        </a>
+                      </li>
+                      <li scSidebarMenuSubItem>
+                        <a
+                          scSidebarMenuSubButton
+                          routerLink="/docs/getting-started/ui"
+                          routerLinkActive
+                          #coreRla="routerLinkActive"
+                          [active]="coreRla.isActive"
+                        >
+                          <span>UI</span>
+                        </a>
+                      </li>
+                      <li scSidebarMenuSubItem>
+                        <a
+                          scSidebarMenuSubButton
+                          routerLink="/docs/getting-started/presets"
+                          routerLinkActive
+                          #presetsRla="routerLinkActive"
+                          [active]="presetsRla.isActive"
+                        >
+                          <span>Presets</span>
+                        </a>
+                      </li>
+                      <li scSidebarMenuSubItem>
+                        <a
+                          scSidebarMenuSubButton
+                          routerLink="/docs/getting-started/custom-preset"
+                          routerLinkActive
+                          #customPresetRla="routerLinkActive"
+                          [active]="customPresetRla.isActive"
+                        >
+                          <span>Custom preset</span>
+                        </a>
+                      </li>
+                      <li scSidebarMenuSubItem>
+                        <a
+                          scSidebarMenuSubButton
+                          routerLink="/docs/getting-started/i18n"
+                          routerLinkActive
+                          #i18nRla="routerLinkActive"
+                          [active]="i18nRla.isActive"
+                        >
+                          <span>Internationalization</span>
+                        </a>
+                      </li>
+                      <li scSidebarMenuSubItem>
+                        <a
+                          scSidebarMenuSubButton
+                          routerLink="/docs/getting-started/rtl"
+                          routerLinkActive
+                          #rtlRla="routerLinkActive"
+                          [active]="rtlRla.isActive"
+                        >
+                          <span>Right to left</span>
+                        </a>
+                      </li>
+                      <li scSidebarMenuSubItem>
+                        <a
+                          scSidebarMenuSubButton
+                          routerLink="/docs/getting-started/mcp-server"
+                          routerLinkActive
+                          #mcpServerRla="routerLinkActive"
+                          [active]="mcpServerRla.isActive"
+                        >
+                          <span>MCP Server</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                <li
+                  scSidebarMenuItem
+                  scCollapsible
+                  routerLinkActive
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  #groupComponents="routerLinkActive"
+                  [open]="groupComponents.isActive"
+                >
+                  <button
+                    scSidebarMenuButton
+                    scCollapsibleTrigger
+                    class="[&[aria-expanded=true]>svg:last-child]:rotate-90"
+                  >
+                    <svg siBoxIcon></svg>
+                    <span>Components</span>
+                    <svg
+                      siChevronRightIcon
+                      class="ms-auto transition-transform rtl:-scale-x-100"
+                    ></svg>
+                  </button>
+                  <div scCollapsiblePanel hiddenUntilFound>
+                    <ul scSidebarMenuSub>
+                      @for (item of components(); track item.path) {
                         <li scSidebarMenuSubItem>
                           <a
                             scSidebarMenuSubButton
                             [routerLink]="'/docs/components/' + item.path"
                             routerLinkActive
-                            #chartRla="routerLinkActive"
-                            [active]="chartRla.isActive"
+                            #rla="routerLinkActive"
+                            [active]="rla.isActive"
                           >
                             <span>{{ item.name }}</span>
                           </a>
                         </li>
                       }
                     </ul>
+                  </div>
+                </li>
+                @if (charts().length > 0) {
+                  <li
+                    scSidebarMenuItem
+                    scCollapsible
+                    routerLinkActive
+                    [routerLinkActiveOptions]="{ exact: true }"
+                    #groupCharts="routerLinkActive"
+                    [open]="groupCharts.isActive"
+                  >
+                    <button
+                      scSidebarMenuButton
+                      scCollapsibleTrigger
+                      class="[&[aria-expanded=true]>svg:last-child]:rotate-90"
+                    >
+                      <svg siChartColumnIcon></svg>
+                      <span>Charts</span>
+                      <svg
+                        siChevronRightIcon
+                        class="ms-auto transition-transform rtl:-scale-x-100"
+                      ></svg>
+                    </button>
+                    <div scCollapsiblePanel hiddenUntilFound>
+                      <ul scSidebarMenuSub>
+                        @for (item of charts(); track item.path) {
+                          <li scSidebarMenuSubItem>
+                            <a
+                              scSidebarMenuSubButton
+                              [routerLink]="'/docs/components/' + item.path"
+                              routerLinkActive
+                              #chartRla="routerLinkActive"
+                              [active]="chartRla.isActive"
+                            >
+                              <span>{{ item.name }}</span>
+                            </a>
+                          </li>
+                        }
+                      </ul>
+                    </div>
                   </li>
                 }
                 @if (utilities().length > 0) {
-                  <li scSidebarMenuItem>
-                    <a scSidebarMenuButton>
+                  <li
+                    scSidebarMenuItem
+                    scCollapsible
+                    routerLinkActive
+                    [routerLinkActiveOptions]="{ exact: true }"
+                    #groupUtilities="routerLinkActive"
+                    [open]="groupUtilities.isActive"
+                  >
+                    <button
+                      scSidebarMenuButton
+                      scCollapsibleTrigger
+                      class="[&[aria-expanded=true]>svg:last-child]:rotate-90"
+                    >
                       <svg siWrenchIcon></svg>
                       <span>Utilities</span>
-                    </a>
-                    <ul scSidebarMenuSub>
-                      @for (item of utilities(); track item.path) {
-                        <li scSidebarMenuSubItem>
-                          <a
-                            scSidebarMenuSubButton
-                            [routerLink]="'/docs/components/' + item.path"
-                            routerLinkActive
-                            #utilRla="routerLinkActive"
-                            [active]="utilRla.isActive"
-                          >
-                            <span>{{ item.name }}</span>
-                          </a>
-                        </li>
-                      }
-                    </ul>
+                      <svg
+                        siChevronRightIcon
+                        class="ms-auto transition-transform rtl:-scale-x-100"
+                      ></svg>
+                    </button>
+                    <div scCollapsiblePanel hiddenUntilFound>
+                      <ul scSidebarMenuSub>
+                        @for (item of utilities(); track item.path) {
+                          <li scSidebarMenuSubItem>
+                            <a
+                              scSidebarMenuSubButton
+                              [routerLink]="'/docs/components/' + item.path"
+                              routerLinkActive
+                              #utilRla="routerLinkActive"
+                              [active]="utilRla.isActive"
+                            >
+                              <span>{{ item.name }}</span>
+                            </a>
+                          </li>
+                        }
+                      </ul>
+                    </div>
                   </li>
                 }
                 @if (recipes().length > 0) {
-                  <li scSidebarMenuItem>
-                    <a scSidebarMenuButton>
+                  <li
+                    scSidebarMenuItem
+                    scCollapsible
+                    routerLinkActive
+                    [routerLinkActiveOptions]="{ exact: true }"
+                    #groupRecipes="routerLinkActive"
+                    [open]="groupRecipes.isActive"
+                  >
+                    <button
+                      scSidebarMenuButton
+                      scCollapsibleTrigger
+                      class="[&[aria-expanded=true]>svg:last-child]:rotate-90"
+                    >
                       <svg siCookingPotIcon></svg>
                       <span>Recipes</span>
-                    </a>
+                      <svg
+                        siChevronRightIcon
+                        class="ms-auto transition-transform rtl:-scale-x-100"
+                      ></svg>
+                    </button>
+                    <div scCollapsiblePanel hiddenUntilFound>
+                      <ul scSidebarMenuSub>
+                        @for (item of recipes(); track item.path) {
+                          <li scSidebarMenuSubItem>
+                            <a
+                              scSidebarMenuSubButton
+                              [routerLink]="'/docs/components/' + item.path"
+                              routerLinkActive
+                              #recipeRla="routerLinkActive"
+                              [active]="recipeRla.isActive"
+                            >
+                              <span>{{ item.name }}</span>
+                            </a>
+                          </li>
+                        }
+                      </ul>
+                    </div>
+                  </li>
+                }
+                <li
+                  scSidebarMenuItem
+                  scCollapsible
+                  routerLinkActive
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  #groupAIElements="routerLinkActive"
+                  [open]="groupAIElements.isActive"
+                >
+                  <button
+                    scSidebarMenuButton
+                    scCollapsibleTrigger
+                    class="[&[aria-expanded=true]>svg:last-child]:rotate-90"
+                  >
+                    <svg siSparklesIcon></svg>
+                    <span>AI Elements</span>
+                    <svg
+                      siChevronRightIcon
+                      class="ms-auto transition-transform rtl:-scale-x-100"
+                    ></svg>
+                  </button>
+                  <div scCollapsiblePanel hiddenUntilFound>
                     <ul scSidebarMenuSub>
-                      @for (item of recipes(); track item.path) {
+                      @for (item of aiElements; track item.path) {
                         <li scSidebarMenuSubItem>
                           <a
                             scSidebarMenuSubButton
-                            [routerLink]="'/docs/components/' + item.path"
+                            [routerLink]="'/docs/ai-elements/' + item.path"
                             routerLinkActive
-                            #recipeRla="routerLinkActive"
-                            [active]="recipeRla.isActive"
+                            #aiRla="routerLinkActive"
+                            [active]="aiRla.isActive"
                           >
                             <span>{{ item.name }}</span>
                           </a>
                         </li>
                       }
                     </ul>
-                  </li>
-                }
-                <li scSidebarMenuItem>
-                  <a scSidebarMenuButton>
-                    <svg siSparklesIcon></svg>
-                    <span>AI Elements</span>
-                  </a>
-                  <ul scSidebarMenuSub>
-                    @for (item of aiElements; track item.path) {
-                      <li scSidebarMenuSubItem>
-                        <a
-                          scSidebarMenuSubButton
-                          [routerLink]="'/docs/ai-elements/' + item.path"
-                          routerLinkActive
-                          #aiRla="routerLinkActive"
-                          [active]="aiRla.isActive"
-                        >
-                          <span>{{ item.name }}</span>
-                        </a>
-                      </li>
-                    }
-                  </ul>
+                  </div>
                 </li>
               </ul>
             </div>
