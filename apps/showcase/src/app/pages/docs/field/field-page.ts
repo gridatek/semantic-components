@@ -78,7 +78,11 @@ import { TextareaFieldDemoContainer } from './demos/textarea-field-demo-containe
         <h2 scHeading appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           Every part is a directive on your element. A field links its label,
-          its description and its errors to its control by itself.
+          its description and its errors to its control by itself. Horizontal,
+          around a checkbox, a radio or a switch, it lays them out itself: the
+          control at the start (written first) or the end (written last), the
+          description under the label. A label can be the field (the whole line
+          clicks) or hold one (a choice card).
         </p>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
@@ -206,7 +210,7 @@ export default class FieldPage {
       name: 'ScField',
       selector: 'div[scField], label[scField]',
       description:
-        "A control with its label, description and errors, linked; orientation ('vertical', 'horizontal', 'responsive'); data-invalid, data-disabled.",
+        "A control with its label, description and errors, linked; orientation ('vertical', 'horizontal', 'responsive'; horizontal around a checkbox, radio or switch, a grid: the control at the start or the end, the description under the label); on a label, the label's text, dimmed with a disabled control; data-invalid, data-disabled.",
     },
     {
       name: 'ScFieldContentWrapper, ScFieldTitle',

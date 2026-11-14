@@ -1,6 +1,6 @@
 # Checkbox
 
-A native checkbox that draws itself (`appearance-none`): its box, and its check or minus as its `::before` — the style's icon (lucide, hugeicons or phosphor) as a CSS mask. In the look of the app's preset: the `checkbox` key's `item` and `mark`. Alone (a table row), in a checkbox field beside its text, or in any field.
+A native checkbox that draws itself (`appearance-none`): its box, and its check or minus as its `::before` — the style's icon (lucide, hugeicons or phosphor) as a CSS mask. In the look of the app's preset: the `checkbox` key's `item` and `mark`. Alone (a table row), or in a field: `scField orientation="horizontal"` lays it out beside its text (the field is the label, a label is inside it, or it is inside a label — a choice card).
 
 ## Usage
 
