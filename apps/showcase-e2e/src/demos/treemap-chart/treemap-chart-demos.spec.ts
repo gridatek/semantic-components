@@ -19,7 +19,7 @@ test('Treemap: a box per browser; the pointer names it', async ({ page }) => {
   const boxes = page.locator('[data-slot=chart-treemap] rect');
   await expect(boxes).toHaveCount(4);
   await boxes.nth(1).hover();
-  await expect(tooltip(page)).toHaveAttribute('data-state', 'open');
+  await expect(tooltip(page)).toBeVisible();
   await expect(tooltip(page)).toContainText('Safari');
   await expect(tooltip(page)).toContainText('200');
   await expect(

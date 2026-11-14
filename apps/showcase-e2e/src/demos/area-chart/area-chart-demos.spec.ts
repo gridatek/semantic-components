@@ -24,10 +24,10 @@ test('Area: the keyboard moves through the months; the tooltip says them', async
   await expect(
     page.locator('[data-slot=chart-area] path').first(),
   ).toHaveAttribute('d', /^M/);
-  await expect(tooltip(page)).toHaveAttribute('data-state', 'closed');
+  await expect(tooltip(page)).toHaveCount(0);
 
   await plot.focus();
-  await expect(tooltip(page)).toHaveAttribute('data-state', 'open');
+  await expect(tooltip(page)).toBeVisible();
   await expect(tooltip(page)).toContainText('January');
   await expect(tooltip(page)).toContainText('186');
   await press(page, 'ArrowRight');
@@ -36,7 +36,7 @@ test('Area: the keyboard moves through the months; the tooltip says them', async
   await press(page, 'End');
   await expect(tooltip(page)).toContainText('June');
   await press(page, 'Escape');
-  await expect(tooltip(page)).toHaveAttribute('data-state', 'closed');
+  await expect(tooltip(page)).toHaveCount(0);
 });
 
 test('Expanded area: shares, to 100%', async ({ page }) => {

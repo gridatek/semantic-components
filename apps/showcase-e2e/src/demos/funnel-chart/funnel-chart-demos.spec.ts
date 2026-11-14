@@ -19,7 +19,7 @@ test('Funnel: a stage per step; the pointer names it', async ({ page }) => {
   const stages = page.locator('[data-slot=chart-funnel] path');
   await expect(stages).toHaveCount(4);
   await stages.nth(2).hover();
-  await expect(tooltip(page)).toHaveAttribute('data-state', 'open');
+  await expect(tooltip(page)).toBeVisible();
   await expect(tooltip(page)).toContainText('Trial');
   await expect(tooltip(page)).toContainText('540');
   await expect(page.locator('[data-slot=chart-legend]')).toContainText('Paid');

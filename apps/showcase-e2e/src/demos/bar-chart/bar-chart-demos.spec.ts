@@ -46,7 +46,7 @@ test('Bar: the pointer shows its month', async ({ page }) => {
   const bars = page.locator('[data-slot=chart-bar] > svg');
   await expect(bars).toHaveCount(6);
   await bars.nth(2).hover();
-  await expect(tooltip(page)).toHaveAttribute('data-state', 'open');
+  await expect(tooltip(page)).toBeVisible();
   await expect(tooltip(page)).toContainText('237'); // March
   await expect(page.locator('[data-slot=chart-cursor] rect')).toHaveCount(1);
 });

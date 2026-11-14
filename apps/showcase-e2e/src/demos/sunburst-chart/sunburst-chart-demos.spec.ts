@@ -21,7 +21,7 @@ test('Sunburst: groups inside, countries around; the pointer names them', async 
   const slices = page.locator('[data-slot=chart-sunburst] path');
   await expect(slices).toHaveCount(10);
   await slices.nth(3 + 3).hover();
-  await expect(tooltip(page)).toHaveAttribute('data-state', 'open');
+  await expect(tooltip(page)).toBeVisible();
   await expect(tooltip(page)).toContainText('USA');
   await expect(tooltip(page)).toContainText('320');
   await expect(page.locator('[data-slot=chart-legend]')).toContainText(

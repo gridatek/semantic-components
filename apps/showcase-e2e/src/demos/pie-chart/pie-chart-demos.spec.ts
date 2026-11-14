@@ -19,7 +19,7 @@ test('Pie: a slice per browser; the pointer names it', async ({ page }) => {
   const slices = page.locator('[data-slot=chart-pie] path');
   await expect(slices).toHaveCount(5);
   await slices.nth(1).hover();
-  await expect(tooltip(page)).toHaveAttribute('data-state', 'open');
+  await expect(tooltip(page)).toBeVisible();
   await expect(tooltip(page)).toContainText('Safari');
   await expect(tooltip(page)).toContainText('200');
   await expect(page.locator('[data-slot=chart-legend]')).toContainText(
