@@ -20,15 +20,15 @@ import { RtlLabelDemo } from './rtl-label-demo';
 export class RtlLabelDemoContainer {
   readonly code = `import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
-import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui';
+import { ScCheckbox, ScField, ScLabel } from '@semantic-components/ui';
 
 /** In a right-to-left page: the box at the right, the text after it. */
 @Component({
   selector: 'app-rtl-label-demo',
-  imports: [Dir, ScCheckbox, ScCheckboxField, ScLabel],
+  imports: [Dir, ScCheckbox, ScLabel, ScField],
   template: \`
     <div dir="rtl" lang="ar">
-      <div scCheckboxField>
+      <div scField orientation="horizontal">
         <input scCheckbox />
         <label scLabel>قبول الشروط والأحكام</label>
       </div>

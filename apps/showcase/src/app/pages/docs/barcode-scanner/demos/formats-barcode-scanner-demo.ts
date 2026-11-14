@@ -7,8 +7,8 @@ import {
   ScBarcodeScannerOverlay,
   ScBarcodeScannerToggle,
   ScBarcodeScannerVideo,
+  ScField,
   ScRadio,
-  ScRadioField,
   ScRadioGroup,
 } from '@semantic-components/ui';
 import { SiCameraIcon, SiCameraOffIcon } from '@semantic-icons/lucide-icons';
@@ -23,11 +23,11 @@ import { SiCameraIcon, SiCameraOffIcon } from '@semantic-icons/lucide-icons';
     ScBarcodeScannerFinder,
     ScBarcodeScannerToggle,
     ScRadioGroup,
-    ScRadioField,
     ScRadio,
     FormField,
     SiCameraIcon,
     SiCameraOffIcon,
+    ScField,
   ],
   template: `
     <div class="flex items-center gap-4 text-sm">
@@ -39,7 +39,7 @@ import { SiCameraIcon, SiCameraOffIcon } from '@semantic-icons/lucide-icons';
         aria-labelledby="formats-label"
       >
         @for (kind of kinds; track kind.id) {
-          <label scRadioField>
+          <label scField orientation="horizontal">
             <input scRadio [value]="kind.id" />
             {{ kind.label }}
           </label>

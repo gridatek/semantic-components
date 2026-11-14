@@ -26,7 +26,7 @@ import {
   ScButton,
   ScButtonPattern,
   ScCheckbox,
-  ScCheckboxField,
+  ScField,
   ScFrame,
   ScInput,
   ScProgress,
@@ -70,7 +70,6 @@ import type { User } from './user-service';
     ScBadge,
     ScButton,
     ScCheckbox,
-    ScCheckboxField,
     ScInput,
     ScProgress,
     ScProgressRange,
@@ -98,6 +97,7 @@ import type { User } from './user-service';
     DataTableToolbar,
     DataTablePagination,
     DataTableColumnPinning,
+    ScField,
   ],
   host: { class: 'block' },
   template: `
@@ -122,7 +122,7 @@ import type { User } from './user-service';
                 >
                   @if (!header.isPlaceholder) {
                     @if (header.column.id === 'select') {
-                      <label scCheckboxField>
+                      <label scField orientation="horizontal">
                         <input
                           type="checkbox"
                           scCheckbox
@@ -242,7 +242,7 @@ import type { User } from './user-service';
                     />
                   } @else {
                     @if (cell.column.id === 'select') {
-                      <label scCheckboxField>
+                      <label scField orientation="horizontal">
                         <input
                           type="checkbox"
                           scCheckbox

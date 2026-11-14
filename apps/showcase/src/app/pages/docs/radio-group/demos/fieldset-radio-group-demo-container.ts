@@ -21,11 +21,11 @@ export class FieldsetRadioGroupDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
+  ScField,
   ScFieldDescription,
   ScFieldset,
   ScLegend,
   ScRadio,
-  ScRadioField,
   ScRadioGroup,
 } from '@semantic-components/ui';
 
@@ -38,8 +38,8 @@ import {
     ScFieldset,
     ScLegend,
     ScRadio,
-    ScRadioField,
     ScRadioGroup,
+    ScField,
   ],
   template: \`
     <fieldset scFieldset class="w-full max-w-xs">
@@ -48,15 +48,15 @@ import {
         Yearly and lifetime plans offer significant savings.
       </p>
       <div scRadioGroup [formField]="planForm.plan">
-        <label scRadioField>
+        <label scField orientation="horizontal">
           <input scRadio value="monthly" />
           Monthly ($9.99/month)
         </label>
-        <label scRadioField>
+        <label scField orientation="horizontal">
           <input scRadio value="yearly" />
           Yearly ($99.99/year)
         </label>
-        <label scRadioField>
+        <label scField orientation="horizontal">
           <input scRadio value="lifetime" />
           Lifetime ($299.99)
         </label>

@@ -3,7 +3,7 @@ import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
   ScCheckbox,
-  ScCheckboxField,
+  ScField,
   ScFieldGroup,
   ScFrame,
   ScLabel,
@@ -16,19 +16,19 @@ import {
     FormField,
     JsonPipe,
     ScCheckbox,
-    ScCheckboxField,
     ScFieldGroup,
     ScFrame,
     ScLabel,
+    ScField,
   ],
   template: `
     <div class="flex w-64 flex-col gap-4">
       <div scFieldGroup class="gap-3">
-        <div scCheckboxField>
+        <div scField orientation="horizontal">
           <input scCheckbox [formField]="emailForm.newsletter" />
           <label scLabel>Subscribe to newsletter</label>
         </div>
-        <div scCheckboxField>
+        <div scField orientation="horizontal">
           <input scCheckbox [formField]="emailForm.marketing" />
           <label scLabel>Receive marketing emails</label>
         </div>

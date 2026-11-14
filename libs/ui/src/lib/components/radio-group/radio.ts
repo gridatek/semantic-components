@@ -10,11 +10,12 @@ import {
 } from '@angular/core';
 import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { SC_FIELD } from '../field';
+import { SC_FIELD, SC_FIELD_CHOICE } from '../field';
 import { ScRadioGroup } from './radio-group';
 
 @Directive({
   selector: 'input[scRadio]',
+  providers: [{ provide: SC_FIELD_CHOICE, useExisting: ScRadio }],
   host: {
     // Its own type: the markup needs none.
     type: 'radio',

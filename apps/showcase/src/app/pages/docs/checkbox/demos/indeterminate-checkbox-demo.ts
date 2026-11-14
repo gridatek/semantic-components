@@ -1,17 +1,13 @@
 import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
-import {
-  ScCheckbox,
-  ScCheckboxField,
-  ScFieldGroup,
-} from '@semantic-components/ui';
+import { ScCheckbox, ScField, ScFieldGroup } from '@semantic-components/ui';
 
 /** A "select all" over a few items: a minus when only some are checked. */
 @Component({
   selector: 'app-indeterminate-checkbox-demo',
-  imports: [ScCheckbox, ScCheckboxField, ScFieldGroup],
+  imports: [ScCheckbox, ScFieldGroup, ScField],
   template: `
     <div scFieldGroup class="w-56 gap-3">
-      <label scCheckboxField>
+      <label scField orientation="horizontal">
         <input
           scCheckbox
           [checked]="allSelected()"
@@ -22,7 +18,7 @@ import {
       </label>
       <div class="flex flex-col gap-3 ps-6">
         @for (item of items(); track item.name; let i = $index) {
-          <label scCheckboxField>
+          <label scField orientation="horizontal">
             <input
               scCheckbox
               [checked]="item.checked"

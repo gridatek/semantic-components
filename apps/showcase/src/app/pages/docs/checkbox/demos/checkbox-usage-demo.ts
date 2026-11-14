@@ -2,7 +2,6 @@ import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
   ScCheckbox,
-  ScCheckboxField,
   ScField,
   ScFieldContentWrapper,
   ScFieldDescription,
@@ -17,7 +16,6 @@ import {
   imports: [
     FormField,
     ScCheckbox,
-    ScCheckboxField,
     ScField,
     ScFieldContentWrapper,
     ScFieldDescription,
@@ -27,18 +25,18 @@ import {
   ],
   template: `
     <div scFieldGroup class="max-w-sm">
-      <div scCheckboxField>
+      <div scField orientation="horizontal">
         <input scCheckbox [formField]="termsForm.terms" />
         <label scLabel>Accept terms and conditions</label>
       </div>
-      <div scCheckboxField>
+      <div scField orientation="horizontal">
         <input scCheckbox [formField]="termsForm.agreed" />
         <label scLabel>Accept terms and conditions</label>
         <p scFieldDescription>
           By clicking this checkbox, you agree to the terms.
         </p>
       </div>
-      <div scCheckboxField>
+      <div scField orientation="horizontal">
         <input scCheckbox disabled />
         <label scLabel>Enable notifications</label>
       </div>

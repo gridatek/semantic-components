@@ -82,9 +82,9 @@ import { SwitchUsageDemoContainer } from './demos/switch-usage-demo-container';
             off; Tab reaches it, Space toggles it.
           </li>
           <li>
-            Name it by its text: a label round both (label scSwitchField), or a
-            scLabel in a div field; a switch with no text by aria-label. Its
-            name stays the same as it toggles.
+            Name it by its text: a label round both (label scField
+            orientation="horizontal"), or a scLabel in a div field; a switch
+            with no text by aria-label. Its name stays the same as it toggles.
           </li>
           <li>
             A description is read with its switch; invalid once touched
@@ -154,10 +154,9 @@ import { SwitchUsageDemoContainer } from './demos/switch-usage-demo-container';
 })
 export default class SwitchPage {
   protected readonly anatomy = {
-    imports:
-      "import { ScSwitch, ScSwitchField } from '@semantic-components/ui';",
+    imports: "import { ScSwitch, ScField } from '@semantic-components/ui';",
     markup: [
-      '<label scSwitchField>',
+      '<label scField orientation="horizontal">',
       '  <input scSwitch [formField]="…" />',
       '  …',
       '</label>',
@@ -165,12 +164,6 @@ export default class SwitchPage {
   };
 
   protected readonly parts = [
-    {
-      name: 'ScSwitchField',
-      selector: 'label[scSwitchField], div[scSwitchField]',
-      description:
-        "A switch beside its text (a label), or its label and description (a div): the switch first, at the start; last, at the end. The preset's label look, normal weight. Optional.",
-    },
     {
       name: 'ScSwitch',
       selector: 'input[scSwitch]',

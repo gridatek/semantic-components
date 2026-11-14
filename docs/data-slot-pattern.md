@@ -62,7 +62,7 @@ The following `data-slot` values are currently in use:
 A parent uses a child's `data-slot` **only for layout and spacing** — grid placement, gaps, alignment, layout that depends on which children are there. Each component owns its own look (colors, borders, typography, focus rings, transitions).
 
 ```typescript
-// ScCheckboxField — places its children in a 2-column grid
+// ScField, horizontal around a checkbox, radio or switch — places its children in a 2-column grid
 cn(
   'grid grid-cols-[1rem_1fr] items-start gap-x-2 gap-y-1',
   '*:data-[slot=checkbox]:col-start-1 *:data-[slot=checkbox]:row-start-1',
@@ -78,7 +78,7 @@ cn(
 A slot that exists can also be used by a consumer, from a parent's `class` — an escape hatch, visible in the template:
 
 ```html
-<div scCheckboxField class="*:data-[slot=label]:text-blue-600">
+<div scField orientation="horizontal" class="*:data-[slot=label]:text-blue-600">
   <input scCheckbox id="custom" />
   <label scLabel for="custom">Custom styled label</label>
 </div>

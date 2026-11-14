@@ -6,10 +6,10 @@ import {
   signal,
 } from '@angular/core';
 import {
+  ScField,
   ScInput,
   ScSpinner,
   ScSwitch,
-  ScSwitchField,
   ScToggleGroup,
   ScToggleGroupItem,
   ScTooltip,
@@ -67,7 +67,6 @@ const READING_MODES: Record<string, ScPdfPageColors | null> = {
     ScInput,
     ScSpinner,
     ScSwitch,
-    ScSwitchField,
     ScToggleGroup,
     ScToggleGroupItem,
     ScTooltipProvider,
@@ -78,6 +77,7 @@ const READING_MODES: Record<string, ScPdfPageColors | null> = {
     SiArrowLeftIcon,
     SiArrowRightIcon,
     SiLoaderCircleIcon,
+    ScField,
   ],
   template: `
     <div
@@ -132,7 +132,7 @@ const READING_MODES: Record<string, ScPdfPageColors | null> = {
             <button scToggleGroupItem value="sepia">Sepia</button>
             <button scToggleGroupItem value="dark">Dark</button>
           </div>
-          <label scSwitchField class="text-sm">
+          <label scField orientation="horizontal" class="text-sm">
             Caret browsing
             <input
               scSwitch

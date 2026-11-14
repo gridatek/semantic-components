@@ -1,17 +1,17 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScLabelText, ScSwitch, ScSwitchField } from '@semantic-components/ui';
+import { ScField, ScLabelText, ScSwitch } from '@semantic-components/ui';
 
 /** Text inside another label (a switch’s): scLabelText, a label’s look without a second label. */
 @Component({
   selector: 'app-label-text-label-demo',
-  imports: [ScLabelText, ScSwitch, ScSwitchField],
+  imports: [ScLabelText, ScSwitch, ScField],
   template: `
     <div class="space-y-4">
-      <label scSwitchField>
+      <label scField orientation="horizontal">
         <input scSwitch [(checked)]="airplaneMode" />
         <p scLabelText>Airplane Mode</p>
       </label>
-      <label scSwitchField>
+      <label scField orientation="horizontal">
         <input scSwitch [(checked)]="wifi" />
         <p scLabelText>Wi-Fi</p>
       </label>

@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCheckbox,
-  ScCheckboxField,
+  ScField,
   ScFieldDescription,
   ScFieldGroup,
   ScFieldSeparator,
@@ -15,13 +15,13 @@ import {
   selector: 'app-checkbox-field-demo',
   imports: [
     ScCheckbox,
-    ScCheckboxField,
     ScFieldDescription,
     ScFieldGroup,
     ScFieldSeparator,
     ScFieldset,
     ScLabel,
     ScLegend,
+    ScField,
   ],
   template: `
     <div scFieldGroup class="w-full max-w-xs">
@@ -33,26 +33,26 @@ import {
           Select the items you want to show on the desktop.
         </p>
         <div scFieldGroup class="gap-3">
-          <div scCheckboxField>
+          <div scField orientation="horizontal">
             <input scCheckbox [(checked)]="hardDisks" />
             <label scLabel class="font-normal">Hard disks</label>
           </div>
-          <div scCheckboxField>
+          <div scField orientation="horizontal">
             <input scCheckbox />
             <label scLabel class="font-normal">External disks</label>
           </div>
-          <div scCheckboxField>
+          <div scField orientation="horizontal">
             <input scCheckbox />
             <label scLabel class="font-normal">CDs, DVDs, and iPods</label>
           </div>
-          <div scCheckboxField>
+          <div scField orientation="horizontal">
             <input scCheckbox />
             <label scLabel class="font-normal">Connected servers</label>
           </div>
         </div>
       </fieldset>
       <div scFieldSeparator></div>
-      <div scCheckboxField>
+      <div scField orientation="horizontal">
         <input scCheckbox [(checked)]="sync" />
         <label scLabel>Sync Desktop &amp; Documents folders</label>
         <p scFieldDescription>

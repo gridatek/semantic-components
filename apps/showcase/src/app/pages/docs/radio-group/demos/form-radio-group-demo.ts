@@ -1,9 +1,9 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
+  ScField,
   ScFrame,
   ScRadio,
-  ScRadioField,
   ScRadioGroup,
 } from '@semantic-components/ui';
 
@@ -13,21 +13,21 @@ interface NotificationFormModel {
 
 @Component({
   selector: 'app-form-radio-group-demo',
-  imports: [ScFrame, ScRadioGroup, ScRadioField, ScRadio, FormField],
+  imports: [ScFrame, ScRadioGroup, ScRadio, FormField, ScField],
   template: `
     <div scFrame class="max-w-md p-6">
       <div class="space-y-4">
         <h4 class="font-semibold">Notification Preferences</h4>
         <div scRadioGroup [formField]="notificationForm.notify">
-          <label scRadioField>
+          <label scField orientation="horizontal">
             <input scRadio value="all" />
             All new messages
           </label>
-          <label scRadioField>
+          <label scField orientation="horizontal">
             <input scRadio value="mentions" />
             Direct messages and mentions
           </label>
-          <label scRadioField>
+          <label scField orientation="horizontal">
             <input scRadio value="none" />
             Nothing
           </label>

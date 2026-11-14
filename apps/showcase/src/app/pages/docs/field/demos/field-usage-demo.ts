@@ -2,7 +2,6 @@ import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
   ScCheckbox,
-  ScCheckboxField,
   ScField,
   ScFieldDescription,
   ScFieldGroup,
@@ -31,7 +30,6 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   imports: [
     ScButton,
     ScCheckbox,
-    ScCheckboxField,
     ScField,
     ScFieldDescription,
     ScFieldGroup,
@@ -132,7 +130,7 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
             The billing address associated with your payment method
           </p>
           <div scFieldGroup>
-            <div scCheckboxField>
+            <div scField orientation="horizontal">
               <input scCheckbox [(checked)]="sameAsShipping" />
               <label scLabel class="font-normal"
                 >Same as shipping address</label

@@ -27,7 +27,6 @@ import {
   ScFieldTitle,
   ScLabel,
   ScRadio,
-  ScRadioField,
   ScRadioGroup,
 } from '@semantic-components/ui';
 
@@ -42,7 +41,6 @@ import {
     ScFieldTitle,
     ScLabel,
     ScRadio,
-    ScRadioField,
     ScRadioGroup,
   ],
   template: \`
@@ -58,7 +56,7 @@ import {
             <div scFieldTitle>Plus</div>
             <p scFieldDescription>For individuals and small teams.</p>
           </div>
-          <div scRadioField>
+          <div scField orientation="horizontal">
             <input scRadio value="plus" />
           </div>
         </div>
@@ -69,7 +67,7 @@ import {
             <div scFieldTitle>Pro</div>
             <p scFieldDescription>For growing businesses.</p>
           </div>
-          <div scRadioField>
+          <div scField orientation="horizontal">
             <input scRadio value="pro" />
           </div>
         </div>
@@ -80,7 +78,7 @@ import {
             <div scFieldTitle>Enterprise</div>
             <p scFieldDescription>For large teams and enterprises.</p>
           </div>
-          <div scRadioField>
+          <div scField orientation="horizontal">
             <input scRadio value="enterprise" />
           </div>
         </div>

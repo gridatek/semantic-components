@@ -22,25 +22,18 @@ export class RtlSwitchDemoContainer {
 import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
+  ScField,
   ScFieldDescription,
   ScLabel,
   ScSwitch,
-  ScSwitchField,
 } from '@semantic-components/ui';
 
 /** In a right-to-left page: the switch at the left, its thumb moving left when on. */
 @Component({
   selector: 'app-rtl-switch-demo',
-  imports: [
-    Dir,
-    FormField,
-    ScFieldDescription,
-    ScLabel,
-    ScSwitch,
-    ScSwitchField,
-  ],
+  imports: [Dir, FormField, ScFieldDescription, ScLabel, ScSwitch, ScField],
   template: \`
-    <div dir="rtl" lang="ar" scSwitchField class="max-w-sm">
+    <div dir="rtl" lang="ar" scField orientation="horizontal" class="max-w-sm">
       <label scLabel>المشاركة عبر الأجهزة</label>
       <p scFieldDescription>
         يتم مشاركة التركيز عبر الأجهزة، ويتم إيقاف تشغيله عند مغادرة التطبيق.

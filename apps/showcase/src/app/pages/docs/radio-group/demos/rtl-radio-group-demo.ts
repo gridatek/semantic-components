@@ -2,10 +2,10 @@ import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
+  ScField,
   ScFieldDescription,
   ScLabel,
   ScRadio,
-  ScRadioField,
   ScRadioGroup,
 } from '@semantic-components/ui';
 
@@ -18,8 +18,8 @@ import {
     ScFieldDescription,
     ScLabel,
     ScRadio,
-    ScRadioField,
     ScRadioGroup,
+    ScField,
   ],
   template: `
     <div dir="rtl" lang="ar">
@@ -29,17 +29,17 @@ import {
         aria-label="التباعد"
         class="w-fit"
       >
-        <div scRadioField>
+        <div scField orientation="horizontal">
           <input scRadio value="default" />
           <label scLabel>افتراضي</label>
           <p scFieldDescription>تباعد قياسي لمعظم حالات الاستخدام.</p>
         </div>
-        <div scRadioField>
+        <div scField orientation="horizontal">
           <input scRadio value="comfortable" />
           <label scLabel>مريح</label>
           <p scFieldDescription>مساحة أكبر بين العناصر.</p>
         </div>
-        <div scRadioField>
+        <div scField orientation="horizontal">
           <input scRadio value="compact" />
           <label scLabel>مضغوط</label>
           <p scFieldDescription>تباعد أدنى للتخطيطات الكثيفة.</p>

@@ -9,7 +9,7 @@ import {
 import {
   ScButton,
   ScCheckbox,
-  ScCheckboxField,
+  ScField,
   ScInput,
 } from '@semantic-components/ui';
 import {
@@ -25,10 +25,10 @@ import type { User } from './user-service';
   imports: [
     ScButton,
     ScCheckbox,
-    ScCheckboxField,
     ScInput,
     ScDataTableColumnVisibility,
     ScDataTableGlobalFilter,
+    ScField,
   ],
   host: { class: 'mb-4 flex flex-wrap items-center gap-4' },
   template: `
@@ -58,7 +58,7 @@ import type { User } from './user-service';
       >
       @for (column of table().getAllLeafColumns(); track column.id) {
         @if (column.id !== 'select' && column.id !== 'expand') {
-          <label scCheckboxField class="text-sm">
+          <label scField orientation="horizontal" class="text-sm">
             <input
               type="checkbox"
               scCheckbox

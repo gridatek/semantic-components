@@ -21,7 +21,7 @@ export class HandleSortableListDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import {
   ScCheckbox,
-  ScCheckboxField,
+  ScField,
   ScLabel,
   ScSortableList,
   type ScSortableListAnnouncement,
@@ -43,9 +43,9 @@ interface Item {
     ScSortableListItem,
     ScSortableListHandle,
     ScCheckbox,
-    ScCheckboxField,
     ScLabel,
     SiGripVerticalIcon,
+    ScField,
   ],
   template: \`
     <p id="handle-sortable-help" class="sr-only">
@@ -67,7 +67,7 @@ interface Item {
           class="flex items-center gap-3 px-3 py-2"
         >
           <span scSortableListHandle><svg siGripVerticalIcon></svg></span>
-          <div scCheckboxField>
+          <div scField orientation="horizontal">
             <input
               scCheckbox
               [checked]="done().has(item.id)"

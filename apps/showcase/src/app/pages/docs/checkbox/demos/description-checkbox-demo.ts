@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
   ScCheckbox,
-  ScCheckboxField,
+  ScField,
   ScFieldDescription,
   ScLabel,
 } from '@semantic-components/ui';
@@ -10,15 +10,9 @@ import {
 /** A description under the label, read with the checkbox. */
 @Component({
   selector: 'app-description-checkbox-demo',
-  imports: [
-    FormField,
-    ScCheckbox,
-    ScCheckboxField,
-    ScFieldDescription,
-    ScLabel,
-  ],
+  imports: [FormField, ScCheckbox, ScFieldDescription, ScLabel, ScField],
   template: `
-    <div scCheckboxField class="w-72">
+    <div scField orientation="horizontal" class="w-72">
       <input scCheckbox [formField]="termsForm.terms" />
       <label scLabel>Accept terms and conditions</label>
       <p scFieldDescription>

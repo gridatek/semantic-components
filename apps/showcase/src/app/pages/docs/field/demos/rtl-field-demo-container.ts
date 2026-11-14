@@ -23,7 +23,6 @@ import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
   ScCheckbox,
-  ScCheckboxField,
   ScField,
   ScFieldDescription,
   ScFieldGroup,
@@ -69,7 +68,6 @@ const MONTHS = [
     Dir,
     ScButton,
     ScCheckbox,
-    ScCheckboxField,
     ScField,
     ScFieldDescription,
     ScFieldGroup,
@@ -171,7 +169,7 @@ const MONTHS = [
               عنوان الفوترة المرتبط بطريقة الدفع الخاصة بك
             </p>
             <div scFieldGroup>
-              <div scCheckboxField>
+              <div scField orientation="horizontal">
                 <input scCheckbox [(checked)]="sameAsShipping" />
                 <label scLabel class="font-normal">نفس عنوان الشحن</label>
               </div>

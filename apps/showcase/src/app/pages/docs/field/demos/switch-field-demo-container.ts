@@ -19,14 +19,14 @@ import { SwitchFieldDemo } from './switch-field-demo';
 })
 export class SwitchFieldDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScLabelText, ScSwitch, ScSwitchField } from '@semantic-components/ui';
+import { ScField, ScLabelText, ScSwitch } from '@semantic-components/ui';
 
 /** A switch after its text: the whole row toggles it. */
 @Component({
   selector: 'app-switch-field-demo',
-  imports: [ScLabelText, ScSwitch, ScSwitchField],
+  imports: [ScLabelText, ScSwitch, ScField],
   template: \`
-    <label scSwitchField class="w-fit">
+    <label scField orientation="horizontal" class="w-fit">
       <p scLabelText>Multi-factor authentication</p>
       <input scSwitch />
     </label>

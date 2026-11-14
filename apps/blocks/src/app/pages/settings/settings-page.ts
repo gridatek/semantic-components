@@ -7,6 +7,7 @@ import {
   ScCardFooter,
   ScCardHeader,
   ScCardTitle,
+  ScField,
   ScFieldDescription,
   ScFrame,
   ScInput,
@@ -14,7 +15,6 @@ import {
   ScLabelText,
   ScSeparator,
   ScSwitch,
-  ScSwitchField,
   ScTabs,
   ScTabsList,
   ScTabsPanel,
@@ -40,13 +40,13 @@ import {
     ScLabel,
     ScSeparator,
     ScSwitch,
-    ScSwitchField,
     ScTabsTab,
     ScTabsPanelContent,
     ScTabsList,
     ScTabsPanel,
     ScTabs,
     ScTextarea,
+    ScField,
   ],
   template: `
     <div class="bg-background min-h-screen">
@@ -293,7 +293,8 @@ import {
                     <div class="space-y-4">
                       <label
                         scFrame
-                        scSwitchField
+                        scField
+                        orientation="horizontal"
                         class="flex items-center justify-between p-4"
                       >
                         <div>
@@ -312,7 +313,8 @@ import {
 
                       <label
                         scFrame
-                        scSwitchField
+                        scField
+                        orientation="horizontal"
                         class="flex items-center justify-between p-4"
                       >
                         <div>
@@ -331,7 +333,8 @@ import {
 
                       <label
                         scFrame
-                        scSwitchField
+                        scField
+                        orientation="horizontal"
                         class="flex items-center justify-between p-4"
                       >
                         <div>
@@ -350,7 +353,8 @@ import {
 
                       <label
                         scFrame
-                        scSwitchField
+                        scField
+                        orientation="horizontal"
                         class="flex items-center justify-between p-4"
                       >
                         <div>

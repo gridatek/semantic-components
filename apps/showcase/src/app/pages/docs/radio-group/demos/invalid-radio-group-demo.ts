@@ -1,11 +1,11 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form, required } from '@angular/forms/signals';
 import {
+  ScField,
   ScFieldDescription,
   ScFieldset,
   ScLegend,
   ScRadio,
-  ScRadioField,
   ScRadioGroup,
 } from '@semantic-components/ui';
 
@@ -18,23 +18,23 @@ import {
     ScFieldset,
     ScLegend,
     ScRadio,
-    ScRadioField,
     ScRadioGroup,
+    ScField,
   ],
   template: `
     <fieldset scFieldset class="w-full max-w-xs">
       <legend scLegend variant="label">Notification Preferences</legend>
       <p scFieldDescription>Choose how you want to receive notifications.</p>
       <div scRadioGroup [formField]="notifyForm.notify">
-        <label scRadioField>
+        <label scField orientation="horizontal">
           <input scRadio value="email" />
           Email only
         </label>
-        <label scRadioField>
+        <label scField orientation="horizontal">
           <input scRadio value="sms" />
           SMS only
         </label>
-        <label scRadioField>
+        <label scField orientation="horizontal">
           <input scRadio value="both" />
           Both Email &amp; SMS
         </label>

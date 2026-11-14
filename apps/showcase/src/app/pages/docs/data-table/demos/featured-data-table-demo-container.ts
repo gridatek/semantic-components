@@ -36,7 +36,7 @@ import {
   ScBadge,
   ScButton,
   ScCheckbox,
-  ScCheckboxField,
+  ScField,
   ScFrame,
   ScInput,
   ScMenu,
@@ -264,7 +264,6 @@ const SAMPLE_DATA: User[] = [
     ScBadge,
     ScButton,
     ScCheckbox,
-    ScCheckboxField,
     ScInput,
     ScMenu,
     ScMenuContent,
@@ -329,6 +328,7 @@ const SAMPLE_DATA: User[] = [
     SiEllipsisIcon,
     SiEyeIcon,
     SiTrash2Icon,
+    ScField,
   ],
   template: \`
     <div class="w-full max-w-4xl space-y-4">
@@ -350,7 +350,7 @@ const SAMPLE_DATA: User[] = [
           <ng-template scPopoverPortal>
             <div scPopover aria-label="Toggle columns" class="w-44 gap-1 p-2">
               @for (column of hideableColumns(); track column.id) {
-                <label scCheckboxField>
+                <label scField orientation="horizontal">
                   <input
                     type="checkbox"
                     scCheckbox
@@ -381,7 +381,7 @@ const SAMPLE_DATA: User[] = [
                   >
                     @switch (header.column.id) {
                       @case ('select') {
-                        <label scCheckboxField>
+                        <label scField orientation="horizontal">
                           <input
                             type="checkbox"
                             scCheckbox
@@ -427,7 +427,7 @@ const SAMPLE_DATA: User[] = [
                   <td scTableCell scDataTableCell [column]="cell.column">
                     @switch (cell.column.id) {
                       @case ('select') {
-                        <label scCheckboxField>
+                        <label scField orientation="horizontal">
                           <input
                             type="checkbox"
                             scCheckbox

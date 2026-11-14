@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
   ScCheckbox,
-  ScCheckboxField,
+  ScField,
   ScFieldDescription,
   ScFieldGroup,
   ScFieldset,
@@ -15,11 +15,11 @@ import {
   imports: [
     FormField,
     ScCheckbox,
-    ScCheckboxField,
     ScFieldDescription,
     ScFieldGroup,
     ScFieldset,
     ScLegend,
+    ScField,
   ],
   template: `
     <fieldset scFieldset class="w-full max-w-sm">
@@ -28,19 +28,19 @@ import {
         Select the items you want to show on the desktop.
       </p>
       <div scFieldGroup class="gap-3">
-        <label scCheckboxField>
+        <label scField orientation="horizontal">
           <input scCheckbox [formField]="desktopForm.hardDisks" />
           Hard disks
         </label>
-        <label scCheckboxField>
+        <label scField orientation="horizontal">
           <input scCheckbox [formField]="desktopForm.externalDisks" />
           External disks
         </label>
-        <label scCheckboxField>
+        <label scField orientation="horizontal">
           <input scCheckbox [formField]="desktopForm.media" />
           CDs, DVDs, and iPods
         </label>
-        <label scCheckboxField>
+        <label scField orientation="horizontal">
           <input scCheckbox [formField]="desktopForm.servers" />
           Connected servers
         </label>

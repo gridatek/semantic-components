@@ -1,14 +1,14 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScSwitch, ScSwitchField } from '@semantic-components/ui';
+import { ScField, ScSwitch } from '@semantic-components/ui';
 import { ScCodeBlock } from '@semantic-components/ui/code-block';
 import { ScDiffViewer } from '@semantic-components/ui/diff-viewer';
 
 /** ignoreWhitespace: lines that differ only in spaces and tabs count as unchanged (ignoreCase, the same for letter case). */
 @Component({
   selector: 'app-whitespace-diff-viewer-demo',
-  imports: [ScCodeBlock, ScDiffViewer, ScSwitch, ScSwitchField],
+  imports: [ScCodeBlock, ScDiffViewer, ScSwitch, ScField],
   template: `
-    <label scSwitchField class="mb-3">
+    <label scField orientation="horizontal" class="mb-3">
       <input scSwitch [checked]="ignore()" (change)="ignore.set(!ignore())" />
       Ignore whitespace
     </label>

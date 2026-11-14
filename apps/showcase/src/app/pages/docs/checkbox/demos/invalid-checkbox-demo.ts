@@ -1,13 +1,13 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form, required } from '@angular/forms/signals';
-import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui';
+import { ScCheckbox, ScField, ScLabel } from '@semantic-components/ui';
 
 /** A required checkbox, touched and not checked: marked invalid (Signal Forms). */
 @Component({
   selector: 'app-invalid-checkbox-demo',
-  imports: [FormField, ScCheckbox, ScCheckboxField, ScLabel],
+  imports: [FormField, ScCheckbox, ScLabel, ScField],
   template: `
-    <div scCheckboxField class="w-56">
+    <div scField orientation="horizontal" class="w-56">
       <input scCheckbox [formField]="termsForm.terms" />
       <label scLabel>Accept terms and conditions</label>
     </div>

@@ -168,10 +168,10 @@ import { RtlRadioGroupDemoContainer } from './demos/rtl-radio-group-demo-contain
 export default class RadioGroupPage {
   protected readonly anatomy = {
     imports:
-      "import { ScRadioGroup, ScRadioField, ScRadio } from '@semantic-components/ui';",
+      "import { ScRadioGroup, ScRadio, ScField } from '@semantic-components/ui';",
     markup: [
       '<div scRadioGroup [formField]="…" aria-label="…">',
-      '  <label scRadioField>',
+      '  <label scField orientation="horizontal">',
       '    <input scRadio value="…" />',
       '    …',
       '  </label>',
@@ -185,12 +185,6 @@ export default class RadioGroupPage {
       selector: 'div[scRadioGroup]',
       description:
         "role=\"radiogroup\"; the choice: value (a [formField], or two-way); orientation ('vertical', 'horizontal'); disabled. Checks the radio whose value matches, names its radios alike; invalid once touched.",
-    },
-    {
-      name: 'ScRadioField',
-      selector: 'label[scRadioField], div[scRadioField]',
-      description:
-        "A radio beside its text (a label), or its label and description (a div); the preset's label look, normal weight.",
     },
     {
       name: 'ScRadio',

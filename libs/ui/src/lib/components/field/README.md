@@ -240,6 +240,34 @@ Labels and inputs on the same line:
 [Label] [Input]
 ```
 
+Around a checkbox, a radio or a switch (they tell the field, `SC_FIELD_CHOICE`), a grid: the control first, it is at the start; last, at the end. The description goes under the label, no wrapper needed. A `label` holding its control and text is a field too — the whole line clicks, its text in the label's look, dimmed with a disabled control:
+
+```html
+<label scField orientation="horizontal">
+  <input scCheckbox [formField]="form.terms" />
+  Accept terms and conditions
+</label>
+
+<div scField orientation="horizontal">
+  <input scCheckbox id="terms" [formField]="form.terms" />
+  <label scLabel for="terms">Accept terms and conditions</label>
+  <p scFieldDescription>You agree to our terms of service.</p>
+</div>
+
+<label scField orientation="horizontal">
+  <p scLabelText>Marketing emails</p>
+  <p scFieldDescription>Receive emails about new products.</p>
+  <input scSwitch [(checked)]="marketing" />
+</label>
+```
+
+```
+[x] Label            Label          [switch]
+    Description      Description
+```
+
+This replaces the separate checkbox, radio and switch fields (merged 2026-11-14).
+
 ### Responsive
 
 Vertical on mobile, horizontal on larger screens using container queries:

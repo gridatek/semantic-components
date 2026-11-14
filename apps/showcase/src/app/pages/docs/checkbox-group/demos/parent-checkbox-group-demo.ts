@@ -1,14 +1,10 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
-import {
-  ScCheckbox,
-  ScCheckboxField,
-  ScCheckboxGroup,
-} from '@semantic-components/ui';
+import { ScCheckbox, ScCheckboxGroup, ScField } from '@semantic-components/ui';
 
 /** A parent checkbox: ticks all of allValues or none, mixed when only some are. */
 @Component({
   selector: 'app-parent-checkbox-group-demo',
-  imports: [ScCheckbox, ScCheckboxField, ScCheckboxGroup],
+  imports: [ScCheckbox, ScCheckboxGroup, ScField],
   template: `
     <div
       scCheckboxGroup
@@ -16,20 +12,20 @@ import {
       [allValues]="allApples"
       [(value)]="apples"
     >
-      <label scCheckboxField>
+      <label scField orientation="horizontal">
         <input scCheckbox parent />
         Apples
       </label>
       <div class="flex flex-col gap-3 ps-6">
-        <label scCheckboxField>
+        <label scField orientation="horizontal">
           <input scCheckbox value="fuji-apple" />
           Fuji
         </label>
-        <label scCheckboxField>
+        <label scField orientation="horizontal">
           <input scCheckbox value="gala-apple" />
           Gala
         </label>
-        <label scCheckboxField>
+        <label scField orientation="horizontal">
           <input scCheckbox value="granny-smith-apple" />
           Granny Smith
         </label>

@@ -6,11 +6,11 @@ One choice among several: native radios in the look of the app's preset (the `ra
 
 ```html
 <div scRadioGroup [formField]="spacingForm.spacing" aria-label="Spacing">
-  <label scRadioField>
+  <label scField orientation="horizontal">
     <input scRadio value="default" />
     Default
   </label>
-  <label scRadioField>
+  <label scField orientation="horizontal">
     <input scRadio value="comfortable" />
     Comfortable
   </label>
@@ -21,11 +21,10 @@ A radio field with a description is a `div`: `<label scLabel>` and `<p scFieldDe
 
 ## Parts
 
-| Part           | Selector                                 | What it does                                                                                                                                                                                                    |
-| -------------- | ---------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ScRadioGroup` | `div[scRadioGroup]`                      | `role="radiogroup"`; the choice: `value` (a `[formField]`, or two-way); `orientation`; `disabled`. Checks the radio whose value matches, names its radios alike, invalid once touched (focus leaving the group) |
-| `ScRadioField` | `label[scRadioField], div[scRadioField]` | A radio beside its text (a label), or its label and description (a div); the preset's label look, normal weight                                                                                                 |
-| `ScRadio`      | `input[scRadio]`                         | A native radio (its own `type`), in the preset's look: `value` (its option, any type), `disabled`                                                                                                               |
+| Part           | Selector            | What it does                                                                                                                                                                                                    |
+| -------------- | ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ScRadioGroup` | `div[scRadioGroup]` | `role="radiogroup"`; the choice: `value` (a `[formField]`, or two-way); `orientation`; `disabled`. Checks the radio whose value matches, names its radios alike, invalid once touched (focus leaving the group) |
+| `ScRadio`      | `input[scRadio]`    | A native radio (its own `type`), in the preset's look: `value` (its option, any type), `disabled`                                                                                                               |
 
 ## Why the group holds the choice
 
@@ -36,7 +35,7 @@ So the group is the control: `ScRadioGroup` implements `FormValueControl`, Signa
 ```html
 <!-- The Angular way: still works, with type="radio" on each -->
 <div scRadioGroup aria-label="Spacing">
-  <label scRadioField>
+  <label scField orientation="horizontal">
     <input type="radio" scRadio value="default" [formField]="form.spacing" />
     Default
   </label>

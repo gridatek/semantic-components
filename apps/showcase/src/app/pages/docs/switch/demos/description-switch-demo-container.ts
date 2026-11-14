@@ -21,18 +21,18 @@ export class DescriptionSwitchDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
+  ScField,
   ScFieldDescription,
   ScLabel,
   ScSwitch,
-  ScSwitchField,
 } from '@semantic-components/ui';
 
 /** A description under the label, read with the switch; the switch at the end. */
 @Component({
   selector: 'app-description-switch-demo',
-  imports: [FormField, ScFieldDescription, ScLabel, ScSwitch, ScSwitchField],
+  imports: [FormField, ScFieldDescription, ScLabel, ScSwitch, ScField],
   template: \`
-    <div scSwitchField class="max-w-sm">
+    <div scField orientation="horizontal" class="max-w-sm">
       <label scLabel>Share across devices</label>
       <p scFieldDescription>
         Focus is shared across devices, and turns off when you leave the app.

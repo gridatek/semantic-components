@@ -5,7 +5,7 @@ A native checkbox that draws itself (`appearance-none`): its box, and its check 
 ## Usage
 
 ```html
-<label scCheckboxField>
+<label scField orientation="horizontal">
   <input scCheckbox [formField]="form.terms" />
   Accept terms and conditions
 </label>
@@ -15,10 +15,9 @@ A native checkbox that draws itself (`appearance-none`): its box, and its check 
 
 ## Parts
 
-| Part              | Selector                                       | What it does                                                                                                |
-| ----------------- | ---------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| `ScCheckboxField` | `label[scCheckboxField], div[scCheckboxField]` | A checkbox beside its text (the `label` preset, normal weight), or its label and description; optional      |
-| `ScCheckbox`      | `input[scCheckbox]`                            | The native input, drawn: `checked` (model, or `[formField]`), `indeterminate` (a property only), `disabled` |
+| Part         | Selector            | What it does                                                                                                |
+| ------------ | ------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `ScCheckbox` | `input[scCheckbox]` | The native input, drawn: `checked` (model, or `[formField]`), `indeterminate` (a property only), `disabled` |
 
 ## Custom mark
 
@@ -44,9 +43,9 @@ Base UI's `data-checked` is `:checked` here, and `:indeterminate` is filled too.
 <fieldset scFieldset>
   <legend scLegend>Allowed network protocols</legend>
   <div scCheckboxGroup [formField]="form.protocols" [allValues]="['http', 'https', 'ssh']">
-    <label scCheckboxField><input scCheckbox parent /> All</label>
-    <label scCheckboxField><input scCheckbox value="http" /> HTTP</label>
-    <label scCheckboxField><input scCheckbox value="https" /> HTTPS</label>
+    <label scField orientation="horizontal"><input scCheckbox parent /> All</label>
+    <label scField orientation="horizontal"><input scCheckbox value="http" /> HTTP</label>
+    <label scField orientation="horizontal"><input scCheckbox value="https" /> HTTPS</label>
   </div>
 </fieldset>
 ```

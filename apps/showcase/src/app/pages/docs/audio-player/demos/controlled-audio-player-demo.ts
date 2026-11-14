@@ -5,8 +5,8 @@ import {
   ScAudioPlayerMedia,
   ScAudioPlayerSeek,
   ScButton,
+  ScField,
   ScRadio,
-  ScRadioField,
   ScRadioGroup,
 } from '@semantic-components/ui';
 
@@ -17,11 +17,11 @@ import {
     FormField,
     ScButton,
     ScRadioGroup,
-    ScRadioField,
     ScRadio,
     ScAudioPlayer,
     ScAudioPlayerMedia,
     ScAudioPlayerSeek,
+    ScField,
   ],
   template: `
     <div
@@ -83,7 +83,7 @@ import {
           aria-labelledby="repeat-label"
         >
           @for (mode of modes; track mode) {
-            <label scRadioField>
+            <label scField orientation="horizontal">
               <input scRadio [value]="mode" />
               {{ mode }}
             </label>

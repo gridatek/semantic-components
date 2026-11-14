@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
-import { ScRadio, ScRadioField, ScRadioGroup } from '@semantic-components/ui';
+import { ScField, ScRadio, ScRadioGroup } from '@semantic-components/ui';
 
 interface FilterFormModel {
   filter: string;
@@ -8,18 +8,18 @@ interface FilterFormModel {
 
 @Component({
   selector: 'app-horizontal-radio-group-demo',
-  imports: [ScRadioGroup, ScRadioField, ScRadio, FormField],
+  imports: [ScRadioGroup, ScRadio, FormField, ScField],
   template: `
     <div scRadioGroup [formField]="filterForm.filter" orientation="horizontal">
-      <label scRadioField>
+      <label scField orientation="horizontal">
         <input scRadio value="all" />
         All
       </label>
-      <label scRadioField>
+      <label scField orientation="horizontal">
         <input scRadio value="unread" />
         Unread
       </label>
-      <label scRadioField>
+      <label scField orientation="horizontal">
         <input scRadio value="archived" />
         Archived
       </label>

@@ -1,27 +1,23 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
-import {
-  ScCheckbox,
-  ScCheckboxField,
-  ScCheckboxGroup,
-} from '@semantic-components/ui';
+import { ScCheckbox, ScCheckboxGroup, ScField } from '@semantic-components/ui';
 
 /** Checkboxes sharing one value: the ticked ones, as an array. */
 @Component({
   selector: 'app-checkbox-group-usage-demo',
-  imports: [ScCheckbox, ScCheckboxField, ScCheckboxGroup],
+  imports: [ScCheckbox, ScCheckboxGroup, ScField],
   template: `
     <div class="flex flex-col gap-3">
       <p id="apples-label" class="text-sm font-medium">Apples</p>
       <div scCheckboxGroup aria-labelledby="apples-label" [(value)]="apples">
-        <label scCheckboxField>
+        <label scField orientation="horizontal">
           <input scCheckbox value="fuji-apple" />
           Fuji
         </label>
-        <label scCheckboxField>
+        <label scField orientation="horizontal">
           <input scCheckbox value="gala-apple" />
           Gala
         </label>
-        <label scCheckboxField>
+        <label scField orientation="horizontal">
           <input scCheckbox value="granny-smith-apple" />
           Granny Smith
         </label>

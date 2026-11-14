@@ -22,7 +22,7 @@ import {
   ScCardHeader,
   ScCardTitle,
   ScCheckbox,
-  ScCheckboxField,
+  ScField,
   ScFrame,
   ScInput,
   ScKbd,
@@ -72,7 +72,6 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     ScCardHeader,
     ScCardTitle,
     ScCheckbox,
-    ScCheckboxField,
     ScInput,
     ScKbd,
     ScLabel,
@@ -93,6 +92,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     ScToggle,
     ScToggleGroup,
     SiChevronDownIcon,
+    ScField,
   ],
   template: `
     <div class="bg-background min-h-screen">
@@ -357,13 +357,13 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
             </h2>
             <div scSeparator aria-hidden="true"></div>
             <div class="space-y-3">
-              <div scCheckboxField>
+              <div scField orientation="horizontal">
                 <input scCheckbox id="terms" />
                 <label scLabel for="terms" i18n="@@gallery.acceptTerms"
                   >Accept terms and conditions</label
                 >
               </div>
-              <div scCheckboxField>
+              <div scField orientation="horizontal">
                 <input scCheckbox id="newsletter" />
                 <label scLabel for="newsletter" i18n="@@gallery.newsletter"
                   >Subscribe to newsletter</label

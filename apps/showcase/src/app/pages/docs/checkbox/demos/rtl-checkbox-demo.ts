@@ -3,7 +3,6 @@ import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
   ScCheckbox,
-  ScCheckboxField,
   ScField,
   ScFieldContentWrapper,
   ScFieldDescription,
@@ -19,7 +18,6 @@ import {
     Dir,
     FormField,
     ScCheckbox,
-    ScCheckboxField,
     ScField,
     ScFieldContentWrapper,
     ScFieldDescription,
@@ -29,16 +27,16 @@ import {
   ],
   template: `
     <div dir="rtl" lang="ar" scFieldGroup class="max-w-sm">
-      <div scCheckboxField>
+      <div scField orientation="horizontal">
         <input scCheckbox [formField]="termsForm.terms" />
         <label scLabel>قبول الشروط والأحكام</label>
       </div>
-      <div scCheckboxField>
+      <div scField orientation="horizontal">
         <input scCheckbox [formField]="termsForm.agreed" />
         <label scLabel>قبول الشروط والأحكام</label>
         <p scFieldDescription>بالنقر على هذا المربع، فإنك توافق على الشروط.</p>
       </div>
-      <div scCheckboxField>
+      <div scField orientation="horizontal">
         <input scCheckbox disabled />
         <label scLabel>تفعيل الإشعارات</label>
       </div>

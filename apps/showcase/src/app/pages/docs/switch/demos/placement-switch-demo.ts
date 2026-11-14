@@ -2,11 +2,11 @@ import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCard,
   ScCardBody,
+  ScField,
   ScFieldDescription,
   ScFieldGroup,
   ScLabelText,
   ScSwitch,
-  ScSwitchField,
 } from '@semantic-components/ui';
 
 /** The switch first, it is at the start; last, at the end — a settings list. */
@@ -19,27 +19,27 @@ import {
     ScFieldGroup,
     ScLabelText,
     ScSwitch,
-    ScSwitchField,
+    ScField,
   ],
   template: `
     <div scCard class="w-full max-w-md">
       <div scCardBody>
         <div scFieldGroup>
-          <label scSwitchField>
+          <label scField orientation="horizontal">
             <p scLabelText>Marketing emails</p>
             <p scFieldDescription>
               Receive emails about new products and features.
             </p>
             <input scSwitch [(checked)]="marketing" />
           </label>
-          <label scSwitchField>
+          <label scField orientation="horizontal">
             <p scLabelText>Security emails</p>
             <p scFieldDescription>
               Receive emails about your account security.
             </p>
             <input scSwitch [(checked)]="security" />
           </label>
-          <label scSwitchField>
+          <label scField orientation="horizontal">
             <input scSwitch [(checked)]="updates" />
             <p scLabelText>Product updates</p>
             <p scFieldDescription>

@@ -22,11 +22,11 @@ export class SignalFormsSwitchDemoContainer {
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
+  ScField,
   ScFieldGroup,
   ScFrame,
   ScLabel,
   ScSwitch,
-  ScSwitchField,
 } from '@semantic-components/ui';
 
 /** Bound with [formField]: the form's values follow. */
@@ -39,16 +39,16 @@ import {
     ScFrame,
     ScLabel,
     ScSwitch,
-    ScSwitchField,
+    ScField,
   ],
   template: \`
     <div class="flex w-64 flex-col gap-4">
       <div scFieldGroup class="gap-3">
-        <div scSwitchField>
+        <div scField orientation="horizontal">
           <label scLabel>Notifications</label>
           <input scSwitch [formField]="settingsForm.notifications" />
         </div>
-        <div scSwitchField>
+        <div scField orientation="horizontal">
           <label scLabel>Dark mode</label>
           <input scSwitch [formField]="settingsForm.darkMode" />
         </div>

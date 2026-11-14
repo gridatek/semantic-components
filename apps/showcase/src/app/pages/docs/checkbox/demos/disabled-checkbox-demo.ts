@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCheckbox,
-  ScCheckboxField,
+  ScField,
   ScFieldGroup,
   ScLabel,
 } from '@semantic-components/ui';
@@ -9,14 +9,14 @@ import {
 /** Disabled, unchecked and checked: dimmed, out of the Tab order. */
 @Component({
   selector: 'app-disabled-checkbox-demo',
-  imports: [ScCheckbox, ScCheckboxField, ScFieldGroup, ScLabel],
+  imports: [ScCheckbox, ScFieldGroup, ScLabel, ScField],
   template: `
     <div scFieldGroup class="w-56">
-      <div scCheckboxField>
+      <div scField orientation="horizontal">
         <input scCheckbox disabled />
         <label scLabel>Enable notifications</label>
       </div>
-      <div scCheckboxField>
+      <div scField orientation="horizontal">
         <input scCheckbox [checked]="true" disabled />
         <label scLabel>Sync settings</label>
       </div>

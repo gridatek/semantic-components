@@ -1,8 +1,8 @@
 import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
+  ScField,
   ScRadio,
-  ScRadioField,
   ScRadioGroup,
   ScVideoPlayer,
   ScVideoPlayerBar,
@@ -77,9 +77,9 @@ import {
     SiMinimizeIcon,
     SiLoaderCircleIcon,
     ScRadioGroup,
-    ScRadioField,
     ScRadio,
     FormField,
+    ScField,
   ],
   template: `
     <div
@@ -247,12 +247,12 @@ import {
         orientation="horizontal"
         aria-labelledby="captions-label"
       >
-        <label scRadioField>
+        <label scField orientation="horizontal">
           <input scRadio value="off" />
           Off
         </label>
         @for (track of player.tracks(); track track.id) {
-          <label scRadioField>
+          <label scField orientation="horizontal">
             <input scRadio [value]="track.id" />
             {{ track.label }}
           </label>

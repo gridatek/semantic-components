@@ -29,13 +29,13 @@ export class EventConfettiDemoContainer {
   untracked,
   viewChild,
 } from '@angular/core';
-import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui';
+import { ScCheckbox, ScField, ScLabel } from '@semantic-components/ui';
 import { ScConfetti } from '@semantic-components/ui/confetti';
 
 /** The service, on an event — no button: when the last task is ticked, a burst from the list. */
 @Component({
   selector: 'app-event-confetti-demo',
-  imports: [ScCheckbox, ScCheckboxField, ScLabel],
+  imports: [ScCheckbox, ScLabel, ScField],
   template: \`
     <div class="grid w-full max-w-sm gap-3">
       <ul
@@ -45,7 +45,7 @@ import { ScConfetti } from '@semantic-components/ui/confetti';
       >
         @for (task of tasks(); track task.label; let i = $index) {
           <li>
-            <div scCheckboxField>
+            <div scField orientation="horizontal">
               <input
                 scCheckbox
                 [checked]="task.done"

@@ -19,7 +19,6 @@ import {
   ScLabel,
   ScLegend,
   ScRadio,
-  ScRadioField,
   ScRadioGroup,
 } from '@semantic-components/ui';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
@@ -47,7 +46,6 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
     ScLabel,
     ScLegend,
     ScRadio,
-    ScRadioField,
     ScRadioGroup,
     SiXIcon,
   ],
@@ -78,7 +76,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
             >
               <label scLabel>
                 <div scField orientation="horizontal" class="pb-2.5">
-                  <div scRadioField>
+                  <div scField orientation="horizontal">
                     <input scRadio value="bank" />
                   </div>
                   <div scFieldContentWrapper>
@@ -89,7 +87,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
               </label>
               <label scLabel>
                 <div scField orientation="horizontal" class="pb-2.5">
-                  <div scRadioField>
+                  <div scField orientation="horizontal">
                     <input scRadio value="paypal" />
                   </div>
                   <div scFieldContentWrapper>

@@ -21,7 +21,6 @@ export class ChoiceCardLabelDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCheckbox,
-  ScCheckboxField,
   ScField,
   ScFieldContentWrapper,
   ScFieldDescription,
@@ -34,7 +33,6 @@ import {
   selector: 'app-choice-card-label-demo',
   imports: [
     ScCheckbox,
-    ScCheckboxField,
     ScField,
     ScFieldContentWrapper,
     ScFieldDescription,
@@ -50,7 +48,7 @@ import {
             You can enable or disable notifications at any time.
           </p>
         </div>
-        <div scCheckboxField>
+        <div scField orientation="horizontal">
           <input scCheckbox />
         </div>
       </div>

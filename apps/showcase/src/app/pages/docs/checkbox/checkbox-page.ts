@@ -86,9 +86,9 @@ import { TableCheckboxDemoContainer } from './demos/table-checkbox-demo-containe
             mark are its own (CSS), nothing extra for screen readers.
           </li>
           <li>
-            Name it by its text: a label round both (label scCheckboxField), or
-            a scLabel in a div field; a checkbox with no text (a table row) by
-            aria-label.
+            Name it by its text: a label round both (label scField
+            orientation="horizontal"), or a scLabel in a div field; a checkbox
+            with no text (a table row) by aria-label.
           </li>
           <li>
             Indeterminate is announced as mixed; a description is read with its
@@ -160,10 +160,9 @@ import { TableCheckboxDemoContainer } from './demos/table-checkbox-demo-containe
 })
 export default class CheckboxPage {
   protected readonly anatomy = {
-    imports:
-      "import { ScCheckbox, ScCheckboxField } from '@semantic-components/ui';",
+    imports: "import { ScCheckbox, ScField } from '@semantic-components/ui';",
     markup: [
-      '<label scCheckboxField>',
+      '<label scField orientation="horizontal">',
       '  <input scCheckbox [formField]="…" />',
       '  …',
       '</label>',
@@ -171,12 +170,6 @@ export default class CheckboxPage {
   };
 
   protected readonly parts = [
-    {
-      name: 'ScCheckboxField',
-      selector: 'label[scCheckboxField], div[scCheckboxField]',
-      description:
-        "A checkbox beside its text (a label), or its label and description (a div); the preset's label look, normal weight. Optional.",
-    },
     {
       name: 'ScCheckbox',
       selector: 'input[scCheckbox]',

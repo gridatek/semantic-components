@@ -1,21 +1,21 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
-import { ScRadio, ScRadioField, ScRadioGroup } from '@semantic-components/ui';
+import { ScField, ScRadio, ScRadioGroup } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-custom-theme-radio-group-demo',
-  imports: [ScRadioGroup, ScRadioField, ScRadio, FormField],
+  imports: [ScRadioGroup, ScRadio, FormField, ScField],
   template: `
     <div
       class="space-y-3"
       style="--primary: oklch(0.6 0.25 280); --primary-foreground: oklch(0.985 0 0);"
     >
       <div scRadioGroup [formField]="themeForm.selected">
-        <label scRadioField>
+        <label scField orientation="horizontal">
           <input scRadio value="option1" />
           Option 1
         </label>
-        <label scRadioField>
+        <label scField orientation="horizontal">
           <input scRadio value="option2" />
           Option 2
         </label>

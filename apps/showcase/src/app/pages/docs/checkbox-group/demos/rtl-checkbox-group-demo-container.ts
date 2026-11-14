@@ -20,16 +20,12 @@ import { RtlCheckboxGroupDemo } from './rtl-checkbox-group-demo';
 export class RtlCheckboxGroupDemoContainer {
   readonly code = `import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
-import {
-  ScCheckbox,
-  ScCheckboxField,
-  ScCheckboxGroup,
-} from '@semantic-components/ui';
+import { ScCheckbox, ScCheckboxGroup, ScField } from '@semantic-components/ui';
 
 /** In a right-to-left page: the checkboxes at the right, the parent first. */
 @Component({
   selector: 'app-rtl-checkbox-group-demo',
-  imports: [Dir, ScCheckbox, ScCheckboxField, ScCheckboxGroup],
+  imports: [Dir, ScCheckbox, ScCheckboxGroup, ScField],
   template: \`
     <div dir="rtl" lang="ar">
       <div
@@ -38,20 +34,20 @@ import {
         [allValues]="allApples"
         [(value)]="apples"
       >
-        <label scCheckboxField>
+        <label scField orientation="horizontal">
           <input scCheckbox parent />
           التفاح
         </label>
         <div class="flex flex-col gap-3 ps-6">
-          <label scCheckboxField>
+          <label scField orientation="horizontal">
             <input scCheckbox value="fuji-apple" />
             فوجي
           </label>
-          <label scCheckboxField>
+          <label scField orientation="horizontal">
             <input scCheckbox value="gala-apple" />
             غالا
           </label>
-          <label scCheckboxField>
+          <label scField orientation="horizontal">
             <input scCheckbox value="granny-smith-apple" />
             غراني سميث
           </label>

@@ -3,8 +3,8 @@ import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form, minLength } from '@angular/forms/signals';
 import {
   ScCheckbox,
-  ScCheckboxField,
   ScCheckboxGroup,
+  ScField,
   ScFieldDescription,
   ScFieldset,
   ScFrame,
@@ -18,12 +18,12 @@ import {
     FormField,
     JsonPipe,
     ScCheckbox,
-    ScCheckboxField,
     ScCheckboxGroup,
     ScFieldDescription,
     ScFieldset,
     ScFrame,
     ScLegend,
+    ScField,
   ],
   template: `
     <div class="flex w-72 flex-col gap-4">
@@ -31,15 +31,15 @@ import {
         <legend scLegend variant="label">Allowed network protocols</legend>
         <p scFieldDescription>Pick at least one.</p>
         <div scCheckboxGroup [formField]="networkForm.protocols">
-          <label scCheckboxField>
+          <label scField orientation="horizontal">
             <input scCheckbox value="http" />
             HTTP
           </label>
-          <label scCheckboxField>
+          <label scField orientation="horizontal">
             <input scCheckbox value="https" />
             HTTPS
           </label>
-          <label scCheckboxField>
+          <label scField orientation="horizontal">
             <input scCheckbox value="ssh" />
             SSH
           </label>

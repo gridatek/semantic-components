@@ -3,7 +3,6 @@ import { FormField, disabled, form, required } from '@angular/forms/signals';
 import {
   ScButton,
   ScCheckbox,
-  ScCheckboxField,
   ScField,
   ScFieldDescription,
   ScFieldErrors,
@@ -39,7 +38,6 @@ interface PostModel {
     FormField,
     ScButton,
     ScCheckbox,
-    ScCheckboxField,
     ScField,
     ScFieldDescription,
     ScFieldErrors,
@@ -94,7 +92,7 @@ interface PostModel {
         <p scFieldErrors></p>
       </div>
 
-      <div scCheckboxField>
+      <div scField orientation="horizontal">
         <input scCheckbox [formField]="postForm.locked" />
         <label scLabel>Lock the post</label>
       </div>

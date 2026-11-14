@@ -19,14 +19,14 @@ import { StateSwitchDemo } from './state-switch-demo';
 })
 export class StateSwitchDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScSwitch, ScSwitchField } from '@semantic-components/ui';
+import { ScField, ScSwitch } from '@semantic-components/ui';
 
 /** Its state in its text: two-way, [(checked)]. */
 @Component({
   selector: 'app-state-switch-demo',
-  imports: [ScSwitch, ScSwitchField],
+  imports: [ScSwitch, ScField],
   template: \`
-    <label scSwitchField>
+    <label scField orientation="horizontal">
       <input scSwitch [(checked)]="notifications" />
       Notifications: {{ notifications() ? 'On' : 'Off' }}
     </label>

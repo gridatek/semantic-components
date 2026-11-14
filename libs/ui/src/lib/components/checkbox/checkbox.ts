@@ -12,7 +12,7 @@ import {
 import type { FormCheckboxControl } from '@angular/forms/signals';
 import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { SC_FIELD } from '../field';
+import { SC_FIELD, SC_FIELD_CHOICE } from '../field';
 import { ScCheckboxGroup } from './checkbox-group';
 
 /**
@@ -23,6 +23,7 @@ import { ScCheckboxGroup } from './checkbox-group';
  */
 @Directive({
   selector: 'input[scCheckbox]',
+  providers: [{ provide: SC_FIELD_CHOICE, useExisting: ScCheckbox }],
   host: {
     // Its own type: the markup needs none.
     type: 'checkbox',

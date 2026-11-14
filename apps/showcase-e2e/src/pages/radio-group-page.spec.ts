@@ -20,7 +20,6 @@ test.describe('Radio Group Page', () => {
     const table = page.getByRole('region', { name: 'Radio Group parts' });
     await expect(table.getByRole('row').locator('td:first-child')).toHaveText([
       'ScRadioGroup',
-      'ScRadioField',
       'ScRadio',
     ]);
   });

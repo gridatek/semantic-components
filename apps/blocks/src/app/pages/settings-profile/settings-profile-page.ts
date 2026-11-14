@@ -3,6 +3,7 @@ import {
   ScAvatar,
   ScAvatarFallback,
   ScButton,
+  ScField,
   ScFieldDescription,
   ScFrame,
   ScInput,
@@ -10,7 +11,6 @@ import {
   ScLabelText,
   ScSeparator,
   ScSwitch,
-  ScSwitchField,
   ScTextarea,
 } from '@semantic-components/ui';
 import {
@@ -37,7 +37,6 @@ import {
     ScLabel,
     ScSeparator,
     ScSwitch,
-    ScSwitchField,
     ScTextarea,
     SiCircleUserRoundIcon,
     SiCreditCardIcon,
@@ -47,6 +46,7 @@ import {
     SiUsersIcon,
     SiCircleCheckIcon,
     SiAtSignIcon,
+    ScField,
   ],
   template: `
     <div class="bg-background flex min-h-screen">
@@ -297,7 +297,8 @@ Product designer with 8+ years of experience in SaaS applications. Passionate ab
             <div class="space-y-3">
               <label
                 scFrame
-                scSwitchField
+                scField
+                orientation="horizontal"
                 class="flex items-center justify-between p-4"
               >
                 <div>
@@ -317,7 +318,8 @@ Product designer with 8+ years of experience in SaaS applications. Passionate ab
 
               <label
                 scFrame
-                scSwitchField
+                scField
+                orientation="horizontal"
                 class="flex items-center justify-between p-4"
               >
                 <div>
@@ -337,7 +339,8 @@ Product designer with 8+ years of experience in SaaS applications. Passionate ab
 
               <label
                 scFrame
-                scSwitchField
+                scField
+                orientation="horizontal"
                 class="flex items-center justify-between p-4"
               >
                 <div>

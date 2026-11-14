@@ -2,26 +2,19 @@ import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
   ScButtonPattern,
+  ScField,
   ScFrame,
   ScLabel,
   ScSwitch,
-  ScSwitchField,
 } from '@semantic-components/ui';
 
 /** A button only while it can act: off, a plain row, out of the Tab order. */
 @Component({
   selector: 'app-conditional-button-pattern-demo',
-  imports: [
-    ScFrame,
-    FormField,
-    ScButtonPattern,
-    ScLabel,
-    ScSwitch,
-    ScSwitchField,
-  ],
+  imports: [ScFrame, FormField, ScButtonPattern, ScLabel, ScSwitch, ScField],
   template: `
     <div class="flex w-72 flex-col gap-4">
-      <div scSwitchField>
+      <div scField orientation="horizontal">
         <input scSwitch [formField]="settings.editable" />
         <label scLabel>Editable</label>
       </div>

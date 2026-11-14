@@ -19,16 +19,12 @@ import { NestedParentCheckboxGroupDemo } from './nested-parent-checkbox-group-de
 })
 export class NestedParentCheckboxGroupDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
-import {
-  ScCheckbox,
-  ScCheckboxField,
-  ScCheckboxGroup,
-} from '@semantic-components/ui';
+import { ScCheckbox, ScCheckboxGroup, ScField } from '@semantic-components/ui';
 
 /** A parent inside a group: Manage Users heads its own group; the top parent is mixed while it is partly ticked. */
 @Component({
   selector: 'app-nested-parent-checkbox-group-demo',
-  imports: [ScCheckbox, ScCheckboxField, ScCheckboxGroup],
+  imports: [ScCheckbox, ScCheckboxGroup, ScField],
   template: \`
     <div
       scCheckboxGroup
@@ -37,16 +33,16 @@ import {
       [value]="main()"
       (valueChange)="setMain($event)"
     >
-      <label scCheckboxField>
+      <label scField orientation="horizontal">
         <input scCheckbox parent [indeterminate]="managementPartly()" />
         User Permissions
       </label>
       <div class="flex flex-col gap-3 ps-6">
-        <label scCheckboxField>
+        <label scField orientation="horizontal">
           <input scCheckbox value="view-dashboard" />
           View Dashboard
         </label>
-        <label scCheckboxField>
+        <label scField orientation="horizontal">
           <input scCheckbox value="access-reports" />
           Access Reports
         </label>
@@ -57,24 +53,24 @@ import {
           [value]="management()"
           (valueChange)="setManagement($event)"
         >
-          <label scCheckboxField>
+          <label scField orientation="horizontal">
             <input scCheckbox parent />
             Manage Users
           </label>
           <div class="flex flex-col gap-3 ps-6">
-            <label scCheckboxField>
+            <label scField orientation="horizontal">
               <input scCheckbox value="create-user" />
               Create User
             </label>
-            <label scCheckboxField>
+            <label scField orientation="horizontal">
               <input scCheckbox value="edit-user" />
               Edit User
             </label>
-            <label scCheckboxField>
+            <label scField orientation="horizontal">
               <input scCheckbox value="delete-user" />
               Delete User
             </label>
-            <label scCheckboxField>
+            <label scField orientation="horizontal">
               <input scCheckbox value="assign-roles" />
               Assign Roles
             </label>

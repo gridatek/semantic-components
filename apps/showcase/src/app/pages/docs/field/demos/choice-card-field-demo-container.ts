@@ -30,7 +30,6 @@ import {
   ScLabel,
   ScLegend,
   ScRadio,
-  ScRadioField,
   ScRadioGroup,
 } from '@semantic-components/ui';
 
@@ -48,7 +47,6 @@ import {
     ScLabel,
     ScLegend,
     ScRadio,
-    ScRadioField,
     ScRadioGroup,
   ],
   template: \`
@@ -65,7 +63,7 @@ import {
                 <div scFieldTitle>Kubernetes</div>
                 <p scFieldDescription>Run GPU workloads on a K8s cluster.</p>
               </div>
-              <div scRadioField>
+              <div scField orientation="horizontal">
                 <input scRadio value="kubernetes" />
               </div>
             </div>
@@ -76,7 +74,7 @@ import {
                 <div scFieldTitle>Virtual Machine</div>
                 <p scFieldDescription>Access a cluster to run GPU workloads.</p>
               </div>
-              <div scRadioField>
+              <div scField orientation="horizontal">
                 <input scRadio value="vm" />
               </div>
             </div>

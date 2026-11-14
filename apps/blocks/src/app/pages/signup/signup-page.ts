@@ -16,7 +16,6 @@ import {
   ScCardHeader,
   ScCardTitle,
   ScCheckbox,
-  ScCheckboxField,
   ScField,
   ScFieldGroup,
   ScInput,
@@ -41,7 +40,6 @@ import { Logo } from '../../components/logo/logo';
     ScCardHeader,
     ScCardTitle,
     ScCheckbox,
-    ScCheckboxField,
     ScField,
     ScFieldGroup,
     ScInput,
@@ -125,7 +123,7 @@ import { Logo } from '../../components/logo/logo';
                 />
               </div>
 
-              <div scCheckboxField>
+              <div scField orientation="horizontal">
                 <input scCheckbox id="terms" />
                 <label
                   scLabel

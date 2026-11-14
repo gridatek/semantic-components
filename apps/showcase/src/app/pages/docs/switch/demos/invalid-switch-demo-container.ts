@@ -21,18 +21,18 @@ export class InvalidSwitchDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form, required } from '@angular/forms/signals';
 import {
+  ScField,
   ScFieldDescription,
   ScLabel,
   ScSwitch,
-  ScSwitchField,
 } from '@semantic-components/ui';
 
 /** A required switch, touched and off: marked invalid (Signal Forms). */
 @Component({
   selector: 'app-invalid-switch-demo',
-  imports: [FormField, ScFieldDescription, ScLabel, ScSwitch, ScSwitchField],
+  imports: [FormField, ScFieldDescription, ScLabel, ScSwitch, ScField],
   template: \`
-    <div scSwitchField class="max-w-sm">
+    <div scField orientation="horizontal" class="max-w-sm">
       <label scLabel>Accept terms and conditions</label>
       <p scFieldDescription>
         You must accept the terms and conditions to continue.

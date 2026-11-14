@@ -139,11 +139,11 @@ import { RtlCheckboxGroupDemoContainer } from './demos/rtl-checkbox-group-demo-c
 export default class CheckboxGroupPage {
   protected readonly anatomy = {
     imports:
-      "import { ScCheckbox, ScCheckboxField, ScCheckboxGroup } from '@semantic-components/ui';",
+      "import { ScCheckbox, ScCheckboxGroup, ScField } from '@semantic-components/ui';",
     markup: [
       '<div scCheckboxGroup [formField]="…" [allValues]="…" aria-label="…">',
-      '  <label scCheckboxField><input scCheckbox parent /> …</label>',
-      '  <label scCheckboxField><input scCheckbox value="…" /> …</label>',
+      '  <label scField orientation="horizontal"><input scCheckbox parent /> …</label>',
+      '  <label scField orientation="horizontal"><input scCheckbox value="…" /> …</label>',
       '</div>',
     ].join('\n'),
   };
@@ -160,11 +160,6 @@ export default class CheckboxGroupPage {
       selector: 'input[scCheckbox]',
       description:
         "In a group: value, its option (any type), ticked in the group's value; or parent, ticking all of allValues or none (mixed when only some are).",
-    },
-    {
-      name: 'ScCheckboxField',
-      selector: 'label[scCheckboxField], div[scCheckboxField]',
-      description: 'A checkbox beside its text, as on the Checkbox page.',
     },
   ];
 }

@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
   ScCheckbox,
-  ScCheckboxField,
+  ScField,
   ScFieldGroup,
   ScFieldset,
   ScLegend,
@@ -15,14 +15,7 @@ import {
  */
 @Component({
   selector: 'app-custom-mark-checkbox-demo',
-  imports: [
-    FormField,
-    ScCheckbox,
-    ScCheckboxField,
-    ScFieldGroup,
-    ScFieldset,
-    ScLegend,
-  ],
+  imports: [FormField, ScCheckbox, ScFieldGroup, ScFieldset, ScLegend, ScField],
   template: `
     <fieldset
       scFieldset
@@ -31,15 +24,15 @@ import {
     >
       <legend scLegend variant="label">Favorite colors</legend>
       <div scFieldGroup class="gap-3">
-        <label scCheckboxField>
+        <label scField orientation="horizontal">
           <input scCheckbox [formField]="colorsForm.red" />
           Red
         </label>
-        <label scCheckboxField>
+        <label scField orientation="horizontal">
           <input scCheckbox [formField]="colorsForm.green" />
           Green
         </label>
-        <label scCheckboxField>
+        <label scField orientation="horizontal">
           <input scCheckbox [formField]="colorsForm.blue" />
           Blue
         </label>

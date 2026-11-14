@@ -1,10 +1,10 @@
 import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import {
+  ScField,
   ScSortableList,
   type ScSortableListAnnouncement,
   ScSortableListItem,
   ScSwitch,
-  ScSwitchField,
 } from '@semantic-components/ui';
 
 interface Item {
@@ -15,9 +15,9 @@ interface Item {
 /** disabled: shown in order, but not moved — the items are not Tab stops then. */
 @Component({
   selector: 'app-disabled-sortable-list-demo',
-  imports: [ScSortableList, ScSortableListItem, ScSwitch, ScSwitchField],
+  imports: [ScSortableList, ScSortableListItem, ScSwitch, ScField],
   template: `
-    <label scSwitchField>
+    <label scField orientation="horizontal">
       <input scSwitch [(checked)]="locked" />
       Locked
     </label>

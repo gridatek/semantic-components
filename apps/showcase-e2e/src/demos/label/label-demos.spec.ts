@@ -49,7 +49,7 @@ test('Choice card: the whole card picks; checked, it is tinted', async ({
 test('RTL: the box at the right, the text after it', async ({ page }) => {
   await page.goto(demo('rtl'));
   const [box, label] = [
-    await boxOf(page.locator('[scCheckboxField]')),
+    await boxOf(page.locator('[scField orientation="horizontal"]')),
     await boxOf(page.locator('label[scLabel]')),
   ];
   expect(label.x).toBeLessThan(box.x + box.width);

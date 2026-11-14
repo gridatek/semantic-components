@@ -29,7 +29,7 @@ export class SelectionTreeTableDemoContainer {
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCheckbox,
-  ScCheckboxField,
+  ScField,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -109,7 +109,6 @@ const FILES: FileNode[] = [
   selector: 'app-selection-tree-table-demo',
   imports: [
     ScCheckbox,
-    ScCheckboxField,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -125,13 +124,14 @@ const FILES: FileNode[] = [
     SiChevronRightIcon,
     SiFileIcon,
     SiFolderIcon,
+    ScField,
   ],
   template: \`
     <table scTable scDataTableTreeGrid [table]="table" aria-label="Files">
       <thead scTableHeader>
         <tr scTableRow>
           <th scTableHeaderCell class="w-10">
-            <label scCheckboxField>
+            <label scField orientation="horizontal">
               <input
                 type="checkbox"
                 scCheckbox
@@ -150,7 +150,7 @@ const FILES: FileNode[] = [
         @for (row of table.getRowModel().rows; track row.id) {
           <tr scTableRow scDataTableRow [row]="row">
             <td scTableCell>
-              <label scCheckboxField>
+              <label scField orientation="horizontal">
                 <input
                   type="checkbox"
                   scCheckbox

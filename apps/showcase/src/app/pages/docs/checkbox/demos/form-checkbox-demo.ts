@@ -5,7 +5,7 @@ import {
   ScCardHeader,
   ScCardTitle,
   ScCheckbox,
-  ScCheckboxField,
+  ScField,
   ScFieldGroup,
   ScLabel,
 } from '@semantic-components/ui';
@@ -19,9 +19,9 @@ import {
     ScCardHeader,
     ScCardTitle,
     ScCheckbox,
-    ScCheckboxField,
     ScFieldGroup,
     ScLabel,
+    ScField,
   ],
   template: `
     <div scCard class="w-full max-w-md">
@@ -30,15 +30,15 @@ import {
       </div>
       <div scCardBody>
         <div scFieldGroup class="gap-3">
-          <div scCheckboxField>
+          <div scField orientation="horizontal">
             <input scCheckbox [(checked)]="email" />
             <label scLabel>Email notifications</label>
           </div>
-          <div scCheckboxField>
+          <div scField orientation="horizontal">
             <input scCheckbox [(checked)]="sms" />
             <label scLabel>SMS notifications</label>
           </div>
-          <div scCheckboxField>
+          <div scField orientation="horizontal">
             <input scCheckbox [(checked)]="push" />
             <label scLabel>Push notifications</label>
           </div>

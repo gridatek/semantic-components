@@ -1,11 +1,11 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui';
+import { ScCheckbox, ScField, ScLabel } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-label-usage-demo',
-  imports: [ScCheckbox, ScCheckboxField, ScLabel],
+  imports: [ScCheckbox, ScLabel, ScField],
   template: `
-    <div scCheckboxField>
+    <div scField orientation="horizontal">
       <input scCheckbox />
       <label scLabel>Accept terms and conditions</label>
     </div>

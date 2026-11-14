@@ -60,7 +60,7 @@ export class UsersTable {
       @for (header of headerGroup.headers; track header.id) {
       <th scTableHeaderCell scDataTableHeaderCell [column]="header.column">
         @if (header.column.id === 'select') {
-        <label scCheckboxField>
+        <label scField orientation="horizontal">
           <input type="checkbox" scCheckbox scDataTableSelectAll aria-label="Select all rows" [table]="table" />
         </label>
         } @else {
@@ -85,7 +85,7 @@ export class UsersTable {
       @for (cell of row.getVisibleCells(); track cell.id) {
       <td scTableCell scDataTableCell [column]="cell.column">
         @if (cell.column.id === 'select') {
-        <label scCheckboxField>
+        <label scField orientation="horizontal">
           <input type="checkbox" scCheckbox scDataTableSelectRow [row]="row" [attr.aria-label]="'Select ' + row.original.name" />
         </label>
         } @else { {{ cell.getValue() }} }
@@ -116,7 +116,7 @@ Use `scDataTableColumnVisibility` checkboxes in a `scPopover` (it positions itse
   <ng-template scPopoverPortal>
     <div scPopover aria-label="Toggle columns">
       @for (column of hideableColumns(); track column.id) {
-      <label scCheckboxField>
+      <label scField orientation="horizontal">
         <input type="checkbox" scCheckbox scDataTableColumnVisibility [column]="column" />
         {{ columnLabel(column) }}
       </label>

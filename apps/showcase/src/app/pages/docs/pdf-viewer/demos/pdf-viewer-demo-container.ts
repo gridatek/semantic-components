@@ -31,7 +31,6 @@ import {
 import {
   ScButton,
   ScCheckbox,
-  ScCheckboxField,
   ScDialog,
   ScDialogClose,
   ScDialogDescription,
@@ -69,13 +68,11 @@ import {
   ScProgressRange,
   ScProgressTrack,
   ScRadio,
-  ScRadioField,
   ScRadioGroup,
   ScSeparator,
   ScSlider,
   ScSpinner,
   ScSwitch,
-  ScSwitchField,
   ScTabs,
   ScTabsList,
   ScTabsPanel,
@@ -365,13 +362,10 @@ const INK_COLORS = [
     ScLabel,
     ScFieldDescription,
     ScCheckbox,
-    ScCheckboxField,
     ScRadioGroup,
-    ScRadioField,
     ScRadio,
     ScSlider,
     ScSwitch,
-    ScSwitchField,
     ScProgress,
     ScProgressRange,
     ScProgressTrack,
@@ -780,7 +774,7 @@ const INK_COLORS = [
                         [max]="24"
                       />
                     </div>
-                    <label scSwitchField>
+                    <label scField orientation="horizontal">
                       Show all
                       <input scSwitch scPdfViewerSetting="highlightShowAll" />
                     </label>
@@ -1048,7 +1042,7 @@ const INK_COLORS = [
                 <div scTooltip>Next match<span scTooltipArrow></span></div>
               </ng-template>
             </div>
-            <label scCheckboxField class="ms-2 text-sm">
+            <label scField orientation="horizontal" class="ms-2 text-sm">
               <input
                 scCheckbox
                 [checked]="viewer.findHighlightAll()"
@@ -1056,7 +1050,7 @@ const INK_COLORS = [
               />
               Highlight all
             </label>
-            <label scCheckboxField class="text-sm">
+            <label scField orientation="horizontal" class="text-sm">
               <input
                 scCheckbox
                 [checked]="viewer.findMatchCase()"
@@ -1067,7 +1061,7 @@ const INK_COLORS = [
               />
               Match case
             </label>
-            <label scCheckboxField class="text-sm">
+            <label scField orientation="horizontal" class="text-sm">
               <input
                 scCheckbox
                 [checked]="viewer.findMatchDiacritics()"
@@ -1078,7 +1072,7 @@ const INK_COLORS = [
               />
               Match diacritics
             </label>
-            <label scCheckboxField class="text-sm">
+            <label scField orientation="horizontal" class="text-sm">
               <input
                 scCheckbox
                 [checked]="viewer.findEntireWord()"
@@ -1447,7 +1441,7 @@ const INK_COLORS = [
                       <ul class="grid gap-2 p-3" aria-label="Layers">
                         @for (layer of viewer.layers(); track layer.id) {
                           <li>
-                            <label scCheckboxField>
+                            <label scField orientation="horizontal">
                               <input scCheckbox [scPdfViewerLayer]="layer" />
                               {{ layer.name }}
                             </label>
@@ -1873,7 +1867,7 @@ const INK_COLORS = [
               </div>
               <form scPdfViewerAltTextForm #altForm="scPdfViewerAltTextForm">
                 <div scRadioGroup aria-label="Alternative text">
-                  <div scRadioField>
+                  <div scField orientation="horizontal">
                     <input
                       type="radio"
                       scRadio
@@ -1884,7 +1878,7 @@ const INK_COLORS = [
                       One or two sentences about the subject, setting or action.
                     </p>
                   </div>
-                  <div scRadioField>
+                  <div scField orientation="horizontal">
                     <input
                       type="radio"
                       scRadio
@@ -2026,7 +2020,7 @@ const INK_COLORS = [
                 />
               </div>
 
-              <label scCheckboxField>
+              <label scField orientation="horizontal">
                 <input scCheckbox [(checked)]="signature.saveForReuse" />
                 Save signature for later
               </label>

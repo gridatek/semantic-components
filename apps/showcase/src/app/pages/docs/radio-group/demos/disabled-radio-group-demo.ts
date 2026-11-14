@@ -1,11 +1,11 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
-import { ScRadio, ScRadioField, ScRadioGroup } from '@semantic-components/ui';
+import { ScField, ScRadio, ScRadioGroup } from '@semantic-components/ui';
 
 /** One choice disabled: dimmed, skipped by the arrows. (A whole field: disabled in its form.) */
 @Component({
   selector: 'app-disabled-radio-group-demo',
-  imports: [FormField, ScRadio, ScRadioField, ScRadioGroup],
+  imports: [FormField, ScRadio, ScRadioGroup, ScField],
   template: `
     <div
       scRadioGroup
@@ -13,15 +13,15 @@ import { ScRadio, ScRadioField, ScRadioGroup } from '@semantic-components/ui';
       aria-label="Options"
       class="w-fit"
     >
-      <label scRadioField>
+      <label scField orientation="horizontal">
         <input scRadio value="option1" disabled />
         Disabled
       </label>
-      <label scRadioField>
+      <label scField orientation="horizontal">
         <input scRadio value="option2" />
         Option 2
       </label>
-      <label scRadioField>
+      <label scField orientation="horizontal">
         <input scRadio value="option3" />
         Option 3
       </label>

@@ -1,13 +1,13 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
-import { ScLabel, ScSwitch, ScSwitchField } from '@semantic-components/ui';
+import { ScField, ScLabel, ScSwitch } from '@semantic-components/ui';
 
 /** A switch beside its label. */
 @Component({
   selector: 'app-switch-usage-demo',
-  imports: [FormField, ScLabel, ScSwitch, ScSwitchField],
+  imports: [FormField, ScLabel, ScSwitch, ScField],
   template: `
-    <div scSwitchField>
+    <div scField orientation="horizontal">
       <input scSwitch [formField]="modeForm.airplane" />
       <label scLabel>Airplane Mode</label>
     </div>

@@ -8,8 +8,8 @@ import {
   ScColorPickerField,
   ScColorPickerSlider,
   ScColorPickerSwatch,
+  ScField,
   ScRadio,
-  ScRadioField,
   ScRadioGroup,
 } from '@semantic-components/ui';
 
@@ -24,9 +24,9 @@ import {
     ScColorPickerSwatch,
     ScColorPickerField,
     ScRadioGroup,
-    ScRadioField,
     ScRadio,
     FormField,
+    ScField,
   ],
   template: `
     <div class="flex items-center gap-4 text-sm">
@@ -38,7 +38,7 @@ import {
         aria-labelledby="format-label"
       >
         @for (format of formats; track format) {
-          <label scRadioField>
+          <label scField orientation="horizontal">
             <input scRadio [value]="format" />
             {{ format }}
           </label>

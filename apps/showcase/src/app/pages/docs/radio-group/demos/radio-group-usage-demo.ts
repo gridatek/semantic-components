@@ -1,10 +1,10 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
-import { ScRadio, ScRadioField, ScRadioGroup } from '@semantic-components/ui';
+import { ScField, ScRadio, ScRadioGroup } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-radio-group-usage-demo',
-  imports: [FormField, ScRadio, ScRadioField, ScRadioGroup],
+  imports: [FormField, ScRadio, ScRadioGroup, ScField],
   template: `
     <div
       scRadioGroup
@@ -12,15 +12,15 @@ import { ScRadio, ScRadioField, ScRadioGroup } from '@semantic-components/ui';
       aria-label="Spacing"
       class="w-fit"
     >
-      <label scRadioField>
+      <label scField orientation="horizontal">
         <input scRadio value="default" />
         Default
       </label>
-      <label scRadioField>
+      <label scField orientation="horizontal">
         <input scRadio value="comfortable" />
         Comfortable
       </label>
-      <label scRadioField>
+      <label scField orientation="horizontal">
         <input scRadio value="compact" />
         Compact
       </label>

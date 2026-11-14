@@ -7,7 +7,7 @@ This document explains how field components auto-generate IDs and provide them t
 Connecting a `<label>` to its control requires matching `id` and `for` attributes:
 
 ```html
-<div scCheckboxField>
+<div scField orientation="horizontal">
   <input scCheckbox id="terms" />
   <label scLabel for="terms">Accept terms</label>
 </div>
@@ -20,7 +20,7 @@ This is tedious, error-prone, and creates maintenance overhead — especially wh
 Field components auto-generate an ID and share it with their children via the `SC_FIELD` token. Labels read this token automatically. No manual `id` or `for` needed:
 
 ```html
-<div scCheckboxField>
+<div scField orientation="horizontal">
   <input scCheckbox />
   <label scLabel>Accept terms</label>
 </div>
@@ -29,7 +29,7 @@ Field components auto-generate an ID and share it with their children via the `S
 The generated DOM:
 
 ```html
-<div scCheckboxField>
+<div scField orientation="horizontal">
   <input type="checkbox" id="sc-checkbox-field-0" />
   <label for="sc-checkbox-field-0">Accept terms</label>
 </div>
@@ -44,9 +44,9 @@ Each field component generates a unique ID using Angular CDK's `_IdGenerator` an
 ```typescript
 // checkbox-field.ts
 @Component({
-  providers: [{ provide: SC_FIELD, useExisting: ScCheckboxField }],
+  providers: [{ provide: SC_FIELD, useExisting: ScField }],
 })
-export class ScCheckboxField {
+export class ScField {
   readonly id = input(inject(_IdGenerator).getId('sc-checkbox-field-'));
 }
 ```
@@ -91,7 +91,7 @@ export class ScLabel {
 ### The Full Chain
 
 ```
-ScCheckboxField
+ScField
   │
   ├─ generates id: "sc-checkbox-field-0"
   └─ provides SC_FIELD ─┬─► ScLabel reads SC_FIELD
@@ -124,7 +124,7 @@ Both the `<input>` and the `<label>` point to the same ID without any manual wir
 Consumers can override the auto-generated ID at the field level:
 
 ```html
-<div scCheckboxField id="accept-terms">
+<div scField orientation="horizontal" id="accept-terms">
   <input scCheckbox />
   <label scLabel>Accept terms</label>
 </div>
@@ -135,7 +135,7 @@ Both the input and label will use `accept-terms`.
 Or override at the control level for full manual control:
 
 ```html
-<div scCheckboxField>
+<div scField orientation="horizontal">
   <input scCheckbox id="my-checkbox" />
   <label scLabel for="my-checkbox">Accept terms</label>
 </div>

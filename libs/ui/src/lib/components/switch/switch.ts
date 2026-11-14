@@ -11,7 +11,7 @@ import {
 import type { FormCheckboxControl } from '@angular/forms/signals';
 import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { SC_FIELD } from '../field';
+import { SC_FIELD, SC_FIELD_CHOICE } from '../field';
 
 /** A switch's size: shadcn's two. */
 export type ScSwitchSize = 'default' | 'sm';
@@ -23,6 +23,7 @@ export type ScSwitchSize = 'default' | 'sm';
  */
 @Directive({
   selector: 'input[scSwitch]',
+  providers: [{ provide: SC_FIELD_CHOICE, useExisting: ScSwitch }],
   host: {
     // A checkbox shown as a switch: its own type and role, the markup needs neither.
     type: 'checkbox',
