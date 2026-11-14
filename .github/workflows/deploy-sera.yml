@@ -1,0 +1,46 @@
+name: Deploy Sera to Cloudflare Pages
+
+# The Sera template (apps/presets/sera), started by hand: Actions → Deploy Sera
+# to Cloudflare Pages → Run workflow. The same secrets as the showcase's
+# deploy: CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID.
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy-sera:
+    runs-on: ubuntu-latest
+    name: Deploy Sera
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 26
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm i
+
+      - name: Build Angular app
+        run: npx nx build sera
+
+      # The first run creates the Pages project; later runs find it there.
+      - name: Create the Pages project
+        uses: cloudflare/wrangler-action@v4
+        continue-on-error: true
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages project create semantic-components-sera --production-branch=main
+
+      # A single-page app: with no 404.html, Pages serves index.html for
+      # every route (/dashboard, /articles/…), and the router takes over.
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist/apps/presets/sera/browser --project-name=semantic-components-sera --branch=main
