@@ -36,7 +36,7 @@ import { TooltipChartDemoContainer } from './demos/tooltip-chart-demo-container'
           entry="charts"
           library="d3-scale d3-shape"
           href="https://d3js.org"
-          names="ScChart, ScChartPlot, ScChartTooltip, ScChartTooltipLabel, ScChartTooltipItem, ScChartTooltipIndicator, ScChartTooltipName, ScChartTooltipValue, ScChartLegend, ScChartLegendItem, ScChartLegendIndicator"
+          names="ScChart, ScChartPlot, ScChartTooltipProvider, ScChartTooltipPortal, ScChartTooltip, ScChartTooltipLabel, ScChartTooltipItem, ScChartTooltipIndicator, ScChartTooltipName, ScChartTooltipValue, ScChartLegend, ScChartLegendItem, ScChartLegendIndicator"
         />
       </section>
 
