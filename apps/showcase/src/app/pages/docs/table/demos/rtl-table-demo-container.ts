@@ -19,7 +19,7 @@ import { RtlTableDemo } from './rtl-table-demo';
 })
 export class RtlTableDemoContainer {
   readonly code = `import { Dir } from '@angular/cdk/bidi';
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import {
   ScTable,
   ScTableBody,
@@ -74,6 +74,7 @@ import {
       </div>
     </div>
   \`,
+  providers: [{ provide: LOCALE_ID, useValue: 'ar' }],
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })

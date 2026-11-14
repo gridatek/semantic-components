@@ -1,5 +1,5 @@
 import { Dir } from '@angular/cdk/bidi';
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import {
   ScPagination,
   ScPaginationEllipsis,
@@ -77,6 +77,7 @@ import {
       </ul>
     </nav>
   `,
+  providers: [{ provide: LOCALE_ID, useValue: 'ar' }],
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })

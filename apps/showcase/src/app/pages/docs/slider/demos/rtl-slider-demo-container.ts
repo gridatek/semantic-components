@@ -19,7 +19,7 @@ import { RtlSliderDemo } from './rtl-slider-demo';
 })
 export class RtlSliderDemoContainer {
   readonly code = `import { Dir } from '@angular/cdk/bidi';
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import { ScSlider } from '@semantic-components/ui';
 
 /** In a right-to-left page: the value grows to the left, the arrows mirrored. */
@@ -31,6 +31,7 @@ import { ScSlider } from '@semantic-components/ui';
       <input scSlider [(value)]="volume" aria-label="مستوى الصوت" />
     </div>
   \`,
+  providers: [{ provide: LOCALE_ID, useValue: 'ar' }],
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })

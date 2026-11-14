@@ -19,7 +19,7 @@ import { RtlComboboxDemo } from './rtl-combobox-demo';
 })
 export class RtlComboboxDemoContainer {
   readonly code = `import { Dir } from '@angular/cdk/bidi';
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import {
   ScCombobox,
   ScComboboxEmpty,
@@ -90,6 +90,7 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
       </div>
     </div>
   \`,
+  providers: [{ provide: LOCALE_ID, useValue: 'ar' }],
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })

@@ -1,5 +1,5 @@
 import { Dir } from '@angular/cdk/bidi';
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import { ScBadge } from '@semantic-components/ui';
 import { SiBadgeCheckIcon } from '@semantic-icons/lucide-icons';
 
@@ -18,6 +18,7 @@ import { SiBadgeCheckIcon } from '@semantic-icons/lucide-icons';
       <span scBadge variant="outline">محدد</span>
     </div>
   `,
+  providers: [{ provide: LOCALE_ID, useValue: 'ar' }],
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })

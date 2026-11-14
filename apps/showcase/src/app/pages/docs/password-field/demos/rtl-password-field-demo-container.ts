@@ -19,7 +19,13 @@ import { RtlPasswordFieldDemo } from './rtl-password-field-demo';
 })
 export class RtlPasswordFieldDemoContainer {
   readonly code = `import { Dir } from '@angular/cdk/bidi';
-import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
+import {
+  Component,
+  LOCALE_ID,
+  ViewEncapsulation,
+  computed,
+  signal,
+} from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
   ScLabel,
@@ -84,6 +90,7 @@ import {
       </div>
     </div>
   \`,
+  providers: [{ provide: LOCALE_ID, useValue: 'ar' }],
   host: { class: 'flex w-full flex-col items-center gap-4' },
   encapsulation: ViewEncapsulation.None,
 })

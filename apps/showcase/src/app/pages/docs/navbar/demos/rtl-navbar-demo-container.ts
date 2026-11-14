@@ -19,7 +19,7 @@ import { DemoContainer } from '../../../../components/demo-container/demo-contai
 })
 export class RtlNavbarDemoContainer {
   readonly code = `import { Dir } from '@angular/cdk/bidi';
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScNavbar,
   ScNavbarBrand,
@@ -95,6 +95,7 @@ import {
       </header>
     </div>
   \`,
+  providers: [{ provide: LOCALE_ID, useValue: 'ar' }],
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlNavbarDemo {

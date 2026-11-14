@@ -19,7 +19,7 @@ import { RtlSpinnerDemo } from './rtl-spinner-demo';
 })
 export class RtlSpinnerDemoContainer {
   readonly code = `import { Dir } from '@angular/cdk/bidi';
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import { ScBadge, ScButton, ScSpinner } from '@semantic-components/ui';
 import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
 
@@ -49,6 +49,7 @@ import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
       </span>
     </div>
   \`,
+  providers: [{ provide: LOCALE_ID, useValue: 'ar' }],
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })

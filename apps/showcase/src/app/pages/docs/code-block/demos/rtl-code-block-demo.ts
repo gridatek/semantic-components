@@ -1,5 +1,5 @@
 import { Dir } from '@angular/cdk/bidi';
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import {
   ScCodeBlock,
   ScCodeBlockActions,
@@ -60,6 +60,7 @@ import {
       </div>
     </div>
   `,
+  providers: [{ provide: LOCALE_ID, useValue: 'ar' }],
   host: { class: 'block w-full max-w-md' },
   encapsulation: ViewEncapsulation.None,
 })

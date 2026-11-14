@@ -247,6 +247,14 @@ class RtlWithoutDir {}
             <code class="bg-muted rounded px-1.5 py-0.5 text-sm">dir</code>:
             screen readers pronounce the text in that language.
           </li>
+          <li>
+            Dates, numbers and the week's first day follow
+            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">LOCALE_ID</code
+            >: provide it on the section's component, as above — every part
+            inside reads it, in its overlays too, without a
+            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">locale</code>
+            on each.
+          </li>
         </ul>
       </section>
     </div>
@@ -264,10 +272,13 @@ export default class RtlPage {
     title: 'quote.ts',
     language: 'typescript',
     code: `import { Dir } from '@angular/cdk/bidi';
+import { LOCALE_ID } from '@angular/core';
 
 @Component({
   selector: 'app-quote',
   imports: [Dir, ScTooltipProvider, ScTooltipTrigger /* … */],
+  // Its dates and numbers in Arabic too: every part inside reads LOCALE_ID.
+  providers: [{ provide: LOCALE_ID, useValue: 'ar' }],
   template: \`
     <div dir="rtl" lang="ar">
       <div scTooltipProvider side="inline-start">…</div>

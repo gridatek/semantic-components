@@ -19,7 +19,7 @@ import { RtlCardDemo } from './rtl-card-demo';
 })
 export class RtlCardDemoContainer {
   readonly code = `import { Dir } from '@angular/cdk/bidi';
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import {
   FormField,
   FormRoot,
@@ -114,6 +114,7 @@ import {
       </div>
     </div>
   \`,
+  providers: [{ provide: LOCALE_ID, useValue: 'ar' }],
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })

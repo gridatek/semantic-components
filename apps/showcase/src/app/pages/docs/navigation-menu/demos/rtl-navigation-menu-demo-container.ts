@@ -19,7 +19,7 @@ import { RtlNavigationMenuDemo } from './rtl-navigation-menu-demo';
 })
 export class RtlNavigationMenuDemoContainer {
   readonly code = `import { Dir } from '@angular/cdk/bidi';
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import {
   ScNavigationMenu,
@@ -149,6 +149,7 @@ import {
       </nav>
     </div>
   \`,
+  providers: [{ provide: LOCALE_ID, useValue: 'ar' }],
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })

@@ -19,7 +19,7 @@ import { RtlKbdDemo } from './rtl-kbd-demo';
 })
 export class RtlKbdDemoContainer {
   readonly code = `import { Dir } from '@angular/cdk/bidi';
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import { ScKbd, ScKbdGroup } from '@semantic-components/ui';
 
 /** In a right-to-left page: the keys in reading order, from the right. */
@@ -41,6 +41,7 @@ import { ScKbd, ScKbdGroup } from '@semantic-components/ui';
       </kbd>
     </div>
   \`,
+  providers: [{ provide: LOCALE_ID, useValue: 'ar' }],
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })

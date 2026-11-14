@@ -19,7 +19,7 @@ import { RtlMessageScrollerDemo } from './rtl-message-scroller-demo';
 })
 export class RtlMessageScrollerDemoContainer {
   readonly code = `import { Dir } from '@angular/cdk/bidi';
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import {
   ScBubble,
   ScBubbleContent,
@@ -90,6 +90,7 @@ import { SiArrowDownIcon } from '@semantic-icons/lucide-icons';
       </div>
     </div>
   \`,
+  providers: [{ provide: LOCALE_ID, useValue: 'ar' }],
   host: { class: 'mx-auto block w-full max-w-md' },
   encapsulation: ViewEncapsulation.None,
 })

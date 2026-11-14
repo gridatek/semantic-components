@@ -19,7 +19,7 @@ import { RtlProgressDemo } from './rtl-progress-demo';
 })
 export class RtlProgressDemoContainer {
   readonly code = `import { Dir } from '@angular/cdk/bidi';
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import {
   ScProgress,
   ScProgressCircle,
@@ -55,6 +55,7 @@ import {
       </div>
     </div>
   \`,
+  providers: [{ provide: LOCALE_ID, useValue: 'ar' }],
   host: { class: 'flex w-full flex-col items-center gap-4' },
   encapsulation: ViewEncapsulation.None,
 })

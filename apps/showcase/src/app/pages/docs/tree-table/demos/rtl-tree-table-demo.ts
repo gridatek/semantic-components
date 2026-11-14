@@ -6,7 +6,7 @@ import {
   tableFeatures,
 } from '@tanstack/angular-table';
 import { Dir } from '@angular/cdk/bidi';
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import {
   ScTable,
   ScTableBody,
@@ -133,6 +133,7 @@ const FILES: FileNode[] = [
       </table>
     </div>
   `,
+  providers: [{ provide: LOCALE_ID, useValue: 'ar' }],
   host: { class: 'flex w-full max-w-2xl flex-col gap-4' },
   encapsulation: ViewEncapsulation.None,
 })

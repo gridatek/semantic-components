@@ -19,7 +19,7 @@ import { RtlToggleGroupDemo } from './rtl-toggle-group-demo';
 })
 export class RtlToggleGroupDemoContainer {
   readonly code = `import { Dir } from '@angular/cdk/bidi';
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
 
 /** In a right-to-left page: the first item at the right; the arrows mirrored. */
@@ -35,6 +35,7 @@ import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
       </div>
     </div>
   \`,
+  providers: [{ provide: LOCALE_ID, useValue: 'ar' }],
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })

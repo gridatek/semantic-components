@@ -1,6 +1,6 @@
 import { Dir } from '@angular/cdk/bidi';
 import { NgOptimizedImage } from '@angular/common';
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import { ScAspectRatio, ScFrame } from '@semantic-components/ui';
 
 /** Right to left: the ratio doesn't change; the caption reads from the right. */
@@ -23,6 +23,7 @@ import { ScAspectRatio, ScFrame } from '@semantic-components/ui';
       </figcaption>
     </figure>
   `,
+  providers: [{ provide: LOCALE_ID, useValue: 'ar' }],
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })

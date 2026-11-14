@@ -19,7 +19,7 @@ import { RtlSkeletonDemo } from './rtl-skeleton-demo';
 })
 export class RtlSkeletonDemoContainer {
   readonly code = `import { Dir } from '@angular/cdk/bidi';
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import { ScSkeleton } from '@semantic-components/ui';
 
 /** In a right-to-left page: the picture at the right, the lines from the right. */
@@ -37,6 +37,7 @@ import { ScSkeleton } from '@semantic-components/ui';
       </div>
     </div>
   \`,
+  providers: [{ provide: LOCALE_ID, useValue: 'ar' }],
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })

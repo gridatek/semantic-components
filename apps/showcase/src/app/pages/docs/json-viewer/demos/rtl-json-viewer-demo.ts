@@ -1,5 +1,5 @@
 import { Dir } from '@angular/cdk/bidi';
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import { ScJsonViewer } from '@semantic-components/ui';
 
 @Component({
@@ -15,6 +15,7 @@ import { ScJsonViewer } from '@semantic-components/ui';
       [data]="user"
     ></ul>
   `,
+  providers: [{ provide: LOCALE_ID, useValue: 'ar' }],
   host: { class: 'block w-full max-w-md' },
   encapsulation: ViewEncapsulation.None,
 })

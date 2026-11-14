@@ -19,7 +19,7 @@ import { RtlContextMenuDemo } from './rtl-context-menu-demo';
 })
 export class RtlContextMenuDemoContainer {
   readonly code = `import { Dir } from '@angular/cdk/bidi';
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScContextMenu,
   ScContextMenuTrigger,
@@ -184,6 +184,7 @@ import {
       </div>
     </div>
   \`,
+  providers: [{ provide: LOCALE_ID, useValue: 'ar' }],
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })

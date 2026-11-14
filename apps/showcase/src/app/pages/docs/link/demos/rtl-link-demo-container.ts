@@ -19,7 +19,7 @@ import { RtlLinkDemo } from './rtl-link-demo';
 })
 export class RtlLinkDemoContainer {
   readonly code = `import { Dir } from '@angular/cdk/bidi';
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import { ScLink } from '@semantic-components/ui';
 import {
   SiArrowLeftIcon,
@@ -50,6 +50,7 @@ import {
       </a>
     </div>
   \`,
+  providers: [{ provide: LOCALE_ID, useValue: 'ar' }],
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })

@@ -1,5 +1,5 @@
 import { Dir } from '@angular/cdk/bidi';
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
 
 /** Right to left: the row starts on the right and scrolls toward the left. */
@@ -19,6 +19,7 @@ import { ScButton } from '@semantic-components/ui';
       }
     </div>
   `,
+  providers: [{ provide: LOCALE_ID, useValue: 'ar' }],
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })

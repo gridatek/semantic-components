@@ -1,5 +1,5 @@
 import { Dir } from '@angular/cdk/bidi';
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCalendar,
   ScCalendarHeader,
@@ -38,13 +38,7 @@ import {
   ],
   template: `
     <div dir="rtl" lang="ar" class="flex flex-col items-center gap-2">
-      <div
-        scDatePicker
-        #dp="scDatePicker"
-        [(value)]="date"
-        locale="ar"
-        class="w-fit"
-      >
+      <div scDatePicker #dp="scDatePicker" [(value)]="date" class="w-fit">
         <div
           scPopoverProvider
           [origin]="trigger.overlayOrigin"
@@ -63,7 +57,6 @@ import {
               <div
                 scCalendar
                 initialFocus
-                locale="ar"
                 class="[--cell-size:--spacing(12)]"
                 aria-label="اختر تاريخًا"
                 [mode]="dp.mode()"
@@ -90,6 +83,7 @@ import {
       </p>
     </div>
   `,
+  providers: [{ provide: LOCALE_ID, useValue: 'ar' }],
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })

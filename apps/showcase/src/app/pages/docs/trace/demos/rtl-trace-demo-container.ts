@@ -19,7 +19,7 @@ import { RtlTraceDemo } from './rtl-trace-demo';
 })
 export class RtlTraceDemoContainer {
   readonly code = `import { Dir } from '@angular/cdk/bidi';
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import {
   ScCollapsible,
   ScCollapsiblePanel,
@@ -93,6 +93,7 @@ import {
       </span>
     </div>
   \`,
+  providers: [{ provide: LOCALE_ID, useValue: 'ar' }],
   host: { class: 'block w-full max-w-md' },
   encapsulation: ViewEncapsulation.None,
 })

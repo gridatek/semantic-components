@@ -19,7 +19,7 @@ import { RtlTerminalDemo } from './rtl-terminal-demo';
 })
 export class RtlTerminalDemoContainer {
   readonly code = `import { Dir } from '@angular/cdk/bidi';
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import {
   ScCollapsible,
   ScCollapsiblePanel,
@@ -81,6 +81,7 @@ import { SiTerminalIcon } from '@semantic-icons/lucide-icons';
       </div>
     </div>
   \`,
+  providers: [{ provide: LOCALE_ID, useValue: 'ar' }],
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })

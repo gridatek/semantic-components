@@ -6,7 +6,7 @@ import {
   tableFeatures,
 } from '@tanstack/angular-table';
 import { Dir } from '@angular/cdk/bidi';
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScTable,
   ScTableBody,
@@ -139,6 +139,7 @@ const columns = columnHelper.columns([
       </table>
     </div>
   `,
+  providers: [{ provide: LOCALE_ID, useValue: 'ar' }],
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })

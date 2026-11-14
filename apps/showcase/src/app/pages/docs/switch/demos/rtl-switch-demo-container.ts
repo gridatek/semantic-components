@@ -19,7 +19,7 @@ import { RtlSwitchDemo } from './rtl-switch-demo';
 })
 export class RtlSwitchDemoContainer {
   readonly code = `import { Dir } from '@angular/cdk/bidi';
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
   ScFieldDescription,
@@ -48,6 +48,7 @@ import {
       <input scSwitch [formField]="focusForm.share" />
     </div>
   \`,
+  providers: [{ provide: LOCALE_ID, useValue: 'ar' }],
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
