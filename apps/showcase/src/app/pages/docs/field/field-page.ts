@@ -170,7 +170,7 @@ export default class FieldPage {
   protected readonly anatomy = {
     imports: [
       'import {',
-      '  ScFieldset, ScLegend, ScFieldGroup, ScField, ScFieldBody, ScFieldTitle,',
+      '  ScFieldset, ScLegend, ScFieldGroup, ScField, ScFieldContentWrapper, ScFieldTitle,',
       '  ScFieldDescription, ScFieldErrors, ScFieldSeparator, ScLabel,',
       "} from '@semantic-components/ui';",
     ].join('\n'),
@@ -209,8 +209,8 @@ export default class FieldPage {
         "A control with its label, description and errors, linked; orientation ('vertical', 'horizontal', 'responsive'); data-invalid, data-disabled.",
     },
     {
-      name: 'ScFieldBody, ScFieldTitle',
-      selector: '[scFieldBody], [scFieldTitle]',
+      name: 'ScFieldContentWrapper, ScFieldTitle',
+      selector: '[scFieldContentWrapper], [scFieldTitle]',
       description:
         'A label (or title) and its description together, beside a control.',
     },

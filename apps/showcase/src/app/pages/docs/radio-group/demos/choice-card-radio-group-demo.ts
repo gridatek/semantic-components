@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
   ScField,
-  ScFieldBody,
+  ScFieldContentWrapper,
   ScFieldDescription,
   ScFieldTitle,
   ScLabel,
@@ -17,7 +17,7 @@ import {
   imports: [
     FormField,
     ScField,
-    ScFieldBody,
+    ScFieldContentWrapper,
     ScFieldDescription,
     ScFieldTitle,
     ScLabel,
@@ -34,7 +34,7 @@ import {
     >
       <label scLabel>
         <div scField orientation="horizontal">
-          <div scFieldBody>
+          <div scFieldContentWrapper>
             <div scFieldTitle>Plus</div>
             <p scFieldDescription>For individuals and small teams.</p>
           </div>
@@ -45,7 +45,7 @@ import {
       </label>
       <label scLabel>
         <div scField orientation="horizontal">
-          <div scFieldBody>
+          <div scFieldContentWrapper>
             <div scFieldTitle>Pro</div>
             <p scFieldDescription>For growing businesses.</p>
           </div>
@@ -56,7 +56,7 @@ import {
       </label>
       <label scLabel>
         <div scField orientation="horizontal">
-          <div scFieldBody>
+          <div scFieldContentWrapper>
             <div scFieldTitle>Enterprise</div>
             <p scFieldDescription>For large teams and enterprises.</p>
           </div>

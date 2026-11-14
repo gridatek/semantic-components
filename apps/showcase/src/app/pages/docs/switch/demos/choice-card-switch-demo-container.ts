@@ -22,7 +22,7 @@ export class ChoiceCardSwitchDemoContainer {
 import { FormField, form } from '@angular/forms/signals';
 import {
   ScField,
-  ScFieldBody,
+  ScFieldContentWrapper,
   ScFieldDescription,
   ScFieldGroup,
   ScFieldTitle,
@@ -36,7 +36,7 @@ import {
   imports: [
     FormField,
     ScField,
-    ScFieldBody,
+    ScFieldContentWrapper,
     ScFieldDescription,
     ScFieldGroup,
     ScFieldTitle,
@@ -47,7 +47,7 @@ import {
     <div scFieldGroup class="w-full max-w-sm">
       <label scLabel>
         <div scField orientation="horizontal">
-          <div scFieldBody>
+          <div scFieldContentWrapper>
             <div scFieldTitle>Share across devices</div>
             <p scFieldDescription>
               Focus is shared across devices, and turns off when you leave the
@@ -59,7 +59,7 @@ import {
       </label>
       <label scLabel>
         <div scField orientation="horizontal">
-          <div scFieldBody>
+          <div scFieldContentWrapper>
             <div scFieldTitle>Enable notifications</div>
             <p scFieldDescription>
               Receive notifications when focus mode is enabled or disabled.

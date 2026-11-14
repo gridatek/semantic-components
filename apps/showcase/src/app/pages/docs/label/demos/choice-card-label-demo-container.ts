@@ -23,7 +23,7 @@ import {
   ScCheckbox,
   ScCheckboxField,
   ScField,
-  ScFieldBody,
+  ScFieldContentWrapper,
   ScFieldDescription,
   ScFieldTitle,
   ScLabel,
@@ -36,7 +36,7 @@ import {
     ScCheckbox,
     ScCheckboxField,
     ScField,
-    ScFieldBody,
+    ScFieldContentWrapper,
     ScFieldDescription,
     ScFieldTitle,
     ScLabel,
@@ -44,7 +44,7 @@ import {
   template: \`
     <label scLabel class="w-full max-w-sm">
       <div scField orientation="horizontal">
-        <div scFieldBody>
+        <div scFieldContentWrapper>
           <div scFieldTitle>Enable notifications</div>
           <p scFieldDescription>
             You can enable or disable notifications at any time.

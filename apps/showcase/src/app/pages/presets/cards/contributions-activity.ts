@@ -10,7 +10,7 @@ import {
   ScCardTitle,
   ScCheckbox,
   ScField,
-  ScFieldBody,
+  ScFieldContentWrapper,
   ScFieldDescription,
   ScFieldGroup,
   ScFieldset,
@@ -32,7 +32,7 @@ import {
     ScCardTitle,
     ScCheckbox,
     ScField,
-    ScFieldBody,
+    ScFieldContentWrapper,
     ScFieldDescription,
     ScFieldGroup,
     ScFieldset,
@@ -53,7 +53,7 @@ import {
           <div scFieldGroup>
             <div scField orientation="horizontal">
               <input scCheckbox [formField]="settings.private" />
-              <div scFieldBody>
+              <div scFieldContentWrapper>
                 <label scLabel>Make profile private and hide activity</label>
                 <p scFieldDescription>
                   Enabling this will hide your contributions and activity from

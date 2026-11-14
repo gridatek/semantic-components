@@ -11,6 +11,10 @@ XProvider          the parent of X: holds the state, unstyled (display: contents
       ├─ XHeader   a section
       ├─ XBody     a section
       └─ XFooter   a section
+
+X
+├─ (a control, an icon, an avatar…)
+└─ XContentWrapper  some of X's children grouped beside another part
 ```
 
 - **XProvider**, not XContainer: the parent holds the state and gives it to the parts inside (open or not, the side, the ids that tie a trigger to its popup), and is ignored by the content's CSS (`display: contents`). "Container" suggests a styled box. A **Container** is a real box (`ScTableContainer`: the scroll box).
@@ -19,6 +23,7 @@ XProvider          the parent of X: holds the state, unstyled (display: contents
   - X's direct child, an element holding the whole content.
 - **Header, Body, Footer** are the sections inside the content. The main section is **Body**, never Content.
 - A nested part names its content after itself: a panel's template is `XPanelContent`, not `XContent`.
+- **XContentWrapper** (the user, 2026-11-14) groups some of X's children — not all of them — beside another part: a field's title and description beside its checkbox. It has no meaning of its own (no role), only layout. Other libraries name this element the same two ways: Content (shadcn's `FieldContent`, Chakra's `CheckboxCard.Content`) and Wrapper (Mantine's `labelWrapper`: "contains label, description and error"; Nuxt UI's `wrapper` slot); Headless UI and Base UI have none. `ContentWrapper` keeps shadcn's word and says it is a wrapper, not the whole content.
 
 This replaces the older rule in [component-design-principles.md](component-design-principles.md) ("`Content`: only for content rendered later"), which is to be rewritten from this one once the cases are settled.
 
@@ -30,7 +35,8 @@ This replaces the older rule in [component-design-principles.md](component-desig
 | Containers: `ScTableContainer`, `ScNativeSelectContainer`                                                                                                                                                                         | Styled boxes, not parents to ignore     |
 | `ScMenuContent`, `ScMarqueeContent`, `ScComboboxListContent`, `ScNativeDialogContent`                                                                                                                                             | `ng-template` holding the whole content |
 | `ScNavigationMenuContent`, `ScMessageScrollerContent`                                                                                                                                                                             | Direct child holding the whole content  |
-| `ScEmptyBody`, `ScFieldBody`, `ScItemBody`, `ScNativeDialogBody`                                                                                                                                                                  | Sections named Body                     |
+| `ScEmptyBody`, `ScItemBody`, `ScNativeDialogBody`                                                                                                                                                                                 | Sections named Body                     |
+| `ScFieldContentWrapper` (was `ScFieldBody`, 2026-11-14)                                                                                                                                                                           | Some children grouped beside a control  |
 | `ScTableBody`                                                                                                                                                                                                                     | HTML's own name (`tbody`)               |
 
 Native Dialog shows the whole shape: `scNativeDialogProvider` → `dialog[scNativeDialog]` → `ng-template[scNativeDialogContent]` → Header / Body / Footer.
@@ -50,9 +56,9 @@ Native Dialog shows the whole shape: `scNativeDialogProvider` → `dialog[scNati
 - [x] `ScTraceCollapsibleContent` → `ScTraceCollapsiblePanelContent` (`div`, a step's details inside `scCollapsiblePanel`; its own element because the panel's height animates — shadcn's inner div).
 - [x] `ScScrollAreaNextContent` → `ScScrollAreaNextViewportContent` (`div`, what scrolls inside `scScrollAreaNextViewport`).
 
-### 3. Beside something else (an icon, an avatar, actions) → Body?
+### 3. Beside something else (an icon, an avatar, actions) → Body, or ContentWrapper?
 
-Not the whole content of X: the main section, beside another part. Check each one before renaming.
+Not the whole content of X: the main section, beside another part. Check each one before renaming — those that only group children beside another part may become `XContentWrapper`, as the Field's did.
 
 - [ ] `ScAttachmentContent` (`div`): title and description, between `scAttachmentMedia` and `scAttachmentActions`.
 - [ ] `ScBubbleContent` (`div`, `button`, `a`): the bubble's text in its look, beside `scBubbleReactions`.

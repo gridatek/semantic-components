@@ -25,7 +25,7 @@ import {
   ScCheckbox,
   ScCheckboxField,
   ScField,
-  ScFieldBody,
+  ScFieldContentWrapper,
   ScFieldDescription,
   ScFieldGroup,
   ScFieldTitle,
@@ -41,7 +41,7 @@ import {
     ScCheckbox,
     ScCheckboxField,
     ScField,
-    ScFieldBody,
+    ScFieldContentWrapper,
     ScFieldDescription,
     ScFieldGroup,
     ScFieldTitle,
@@ -65,7 +65,7 @@ import {
       <label scLabel>
         <div scField orientation="horizontal">
           <input scCheckbox [formField]="termsForm.notifications" />
-          <div scFieldBody>
+          <div scFieldContentWrapper>
             <div scFieldTitle>تفعيل الإشعارات</div>
             <p scFieldDescription>
               يمكنك تفعيل أو إلغاء تفعيل الإشعارات في أي وقت.

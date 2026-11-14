@@ -10,7 +10,7 @@ import {
   ScCheckbox,
   ScCheckboxGroup,
   ScField,
-  ScFieldBody,
+  ScFieldContentWrapper,
   ScFieldDescription,
   ScFieldGroup,
   ScLabel,
@@ -30,7 +30,7 @@ import {
     ScCheckbox,
     ScCheckboxGroup,
     ScField,
-    ScFieldBody,
+    ScFieldContentWrapper,
     ScFieldDescription,
     ScFieldGroup,
     ScLabel,
@@ -51,14 +51,14 @@ import {
         >
           <div scField orientation="horizontal">
             <input scCheckbox parent />
-            <div scFieldBody>
+            <div scFieldContentWrapper>
               <label scLabel>Select all</label>
             </div>
           </div>
           @for (n of notifications; track n.id) {
             <div scField orientation="horizontal">
               <input scCheckbox [value]="n.id" />
-              <div scFieldBody>
+              <div scFieldContentWrapper>
                 <label scLabel>{{ n.label }}</label>
                 <p scFieldDescription>{{ n.description }}</p>
               </div>

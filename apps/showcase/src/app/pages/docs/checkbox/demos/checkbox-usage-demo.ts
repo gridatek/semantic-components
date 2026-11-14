@@ -4,7 +4,7 @@ import {
   ScCheckbox,
   ScCheckboxField,
   ScField,
-  ScFieldBody,
+  ScFieldContentWrapper,
   ScFieldDescription,
   ScFieldGroup,
   ScFieldTitle,
@@ -19,7 +19,7 @@ import {
     ScCheckbox,
     ScCheckboxField,
     ScField,
-    ScFieldBody,
+    ScFieldContentWrapper,
     ScFieldDescription,
     ScFieldGroup,
     ScFieldTitle,
@@ -45,7 +45,7 @@ import {
       <label scLabel>
         <div scField orientation="horizontal">
           <input scCheckbox [formField]="termsForm.notifications" />
-          <div scFieldBody>
+          <div scFieldContentWrapper>
             <div scFieldTitle>Enable notifications</div>
             <p scFieldDescription>
               You can enable or disable notifications at any time.

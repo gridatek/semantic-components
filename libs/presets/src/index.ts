@@ -393,7 +393,7 @@ export interface ScFieldStyles {
   /** A field (its orientation's layout is the part's). */
   field: string;
   /** Its title and description beside a control (shadcn's FieldContent). */
-  body: string;
+  contentWrapper: string;
   title: string;
   description: string;
   separator: string;

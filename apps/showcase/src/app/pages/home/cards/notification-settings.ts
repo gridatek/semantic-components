@@ -10,7 +10,7 @@ import {
   ScCardTitle,
   ScCheckbox,
   ScField,
-  ScFieldBody,
+  ScFieldContentWrapper,
   ScFieldDescription,
   ScFieldGroup,
   ScLabel,
@@ -30,7 +30,7 @@ import {
     ScCardTitle,
     ScCheckbox,
     ScField,
-    ScFieldBody,
+    ScFieldContentWrapper,
     ScFieldDescription,
     ScFieldGroup,
     ScLabel,
@@ -48,7 +48,7 @@ import {
           @for (n of notifications; track n.id) {
             <div scField orientation="horizontal">
               <input scCheckbox [formField]="settings[n.id]" />
-              <div scFieldBody>
+              <div scFieldContentWrapper>
                 <label scLabel>{{ n.label }}</label>
                 <p scFieldDescription>{{ n.description }}</p>
               </div>

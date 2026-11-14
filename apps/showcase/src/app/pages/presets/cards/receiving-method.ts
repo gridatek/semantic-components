@@ -10,7 +10,7 @@ import {
   ScCardHeader,
   ScCardTitle,
   ScField,
-  ScFieldBody,
+  ScFieldContentWrapper,
   ScFieldDescription,
   ScFieldGroup,
   ScFieldTitle,
@@ -38,7 +38,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
     ScCardHeader,
     ScCardTitle,
     ScField,
-    ScFieldBody,
+    ScFieldContentWrapper,
     ScFieldDescription,
     ScFieldGroup,
     ScFieldTitle,
@@ -81,7 +81,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
                   <div scRadioField>
                     <input scRadio value="bank" />
                   </div>
-                  <div scFieldBody>
+                  <div scFieldContentWrapper>
                     <div scFieldTitle>Bank Transfer</div>
                     <p scFieldDescription>SWIFT / IBAN</p>
                   </div>
@@ -92,7 +92,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
                   <div scRadioField>
                     <input scRadio value="paypal" />
                   </div>
-                  <div scFieldBody>
+                  <div scFieldContentWrapper>
                     <div scFieldTitle>PayPal</div>
                     <p scFieldDescription class="line-clamp-1">
                       Instant Payout

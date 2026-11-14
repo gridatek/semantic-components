@@ -10,7 +10,7 @@ import {
   ScCardHeader,
   ScCardTitle,
   ScField,
-  ScFieldBody,
+  ScFieldContentWrapper,
   ScFieldDescription,
   ScFieldGroup,
   ScFieldSeparator,
@@ -49,7 +49,7 @@ import {
     ScCardHeader,
     ScCardTitle,
     ScField,
-    ScFieldBody,
+    ScFieldContentWrapper,
     ScFieldDescription,
     ScFieldGroup,
     ScFieldSeparator,
@@ -117,7 +117,7 @@ import {
           </div>
           <div scFieldSeparator class="-my-4"></div>
           <div scField orientation="horizontal">
-            <div scFieldBody>
+            <div scFieldContentWrapper>
               <label scLabel>Public Statistics</label>
               <p scFieldDescription>
                 Allow others to see your total stream count and listening
@@ -128,7 +128,7 @@ import {
           </div>
           <div scFieldSeparator class="-my-4"></div>
           <div scField orientation="horizontal">
-            <div scFieldBody>
+            <div scFieldContentWrapper>
               <label scLabel>Email Notifications</label>
               <p scFieldDescription>
                 Monthly royalty reports and distribution updates

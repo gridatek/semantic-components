@@ -3,17 +3,17 @@ import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
 
 @Directive({
-  selector: '[scFieldBody]',
+  selector: '[scFieldContentWrapper]',
   host: {
-    'data-slot': 'field-body',
+    'data-slot': 'field-content-wrapper',
     '[class]': 'class()',
   },
 })
-export class ScFieldBody {
+export class ScFieldContentWrapper {
   private readonly styles = injectPreset().field;
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn(this.styles.body, this.classInput()),
+    cn(this.styles.contentWrapper, this.classInput()),
   );
 }

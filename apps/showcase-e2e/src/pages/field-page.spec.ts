@@ -22,7 +22,7 @@ test.describe('Field Page', () => {
       'ScFieldset, ScLegend',
       'ScFieldGroup',
       'ScField',
-      'ScFieldBody, ScFieldTitle',
+      'ScFieldContentWrapper, ScFieldTitle',
       'ScFieldDescription, ScFieldErrors',
       'ScFieldSeparator',
     ]);

@@ -25,7 +25,7 @@ Around a field, it is a choice card — the whole card picks:
 ```html
 <label scLabel>
   <div scField orientation="horizontal">
-    <div scFieldBody>
+    <div scFieldContentWrapper>
       <div scFieldTitle>Enable notifications</div>
       <p scFieldDescription>You can enable or disable notifications at any time.</p>
     </div>

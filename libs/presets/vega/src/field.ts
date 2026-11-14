@@ -1,7 +1,7 @@
 import type { ScFieldStyles } from '@semantic-components/presets';
 
 // shadcn's field in vega (shadcn-reference/presets/vega/field.tsx): FieldContent is our
-// field body, FieldError our field errors.
+// field content wrapper, FieldError our field errors.
 export const field: ScFieldStyles = {
   set: 'flex flex-col gap-6 has-[>[data-slot=checkbox-group]]:gap-3 has-[>[data-slot=radio-group]]:gap-3',
   legend:
@@ -9,7 +9,8 @@ export const field: ScFieldStyles = {
   group:
     'group/field-group @container/field-group flex w-full flex-col gap-7 data-[slot=checkbox-group]:gap-3 *:data-[slot=field-group]:gap-4',
   field: 'group/field flex w-full gap-3 data-[invalid=true]:text-destructive',
-  body: 'group/field-body flex flex-1 flex-col gap-1 leading-snug',
+  contentWrapper:
+    'group/field-content-wrapper flex flex-1 flex-col gap-1 leading-snug',
   title:
     'flex w-fit items-center gap-2 text-sm font-medium group-data-[disabled=true]/field:opacity-50',
   description:

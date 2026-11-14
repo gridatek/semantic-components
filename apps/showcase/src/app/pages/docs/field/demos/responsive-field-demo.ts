@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScField,
-  ScFieldBody,
+  ScFieldContentWrapper,
   ScFieldDescription,
   ScFieldGroup,
   ScFieldset,
@@ -17,7 +17,7 @@ import {
   imports: [
     ScButton,
     ScField,
-    ScFieldBody,
+    ScFieldContentWrapper,
     ScFieldDescription,
     ScFieldGroup,
     ScFieldset,
@@ -32,7 +32,7 @@ import {
         <p scFieldDescription>Fill in your profile information.</p>
         <div scFieldGroup>
           <div scField orientation="responsive">
-            <div scFieldBody>
+            <div scFieldContentWrapper>
               <label scLabel>Name</label>
               <p scFieldDescription>
                 Provide your full name for identification

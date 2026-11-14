@@ -10,7 +10,7 @@ In the look of the app's preset (`field` key: each part's spacing and text, shad
 - `ScFieldset` - Fieldset container for grouping related fields
 - `ScLegend` - Legend element for fieldsets
 - `ScFieldGroup` - Container for multiple fields
-- `ScFieldBody` - Content wrapper for field elements
+- `ScFieldContentWrapper` - The title and description beside a control, grouped (shadcn's FieldContent)
 - `ScFieldLabel` - Label element
 - `ScFieldTitle` - Alternative title element (non-label)
 - `ScFieldDescription` - Description/help text
@@ -66,7 +66,7 @@ import { ScField, ScFieldLabel, ScFieldDescription } from '@semantic-components/
   template: `
     <div scField [orientation]="'responsive'">
       <label scFieldLabel for="name">Name</label>
-      <div scFieldBody>
+      <div scFieldContentWrapper>
         <input id="name" type="text" />
         <p scFieldDescription>Enter your full name.</p>
       </div>
@@ -218,7 +218,7 @@ Automatically reads errors from the parent `ScField`'s `FormField`. No inputs re
 
 ### Other Components
 
-All other components (`ScFieldset`, `ScFieldGroup`, `ScFieldBody`, `ScFieldLabel`, `ScFieldTitle`, `ScFieldDescription`, `ScFieldSeparator`) accept a `class` input for additional styling.
+All other components (`ScFieldset`, `ScFieldGroup`, `ScFieldContentWrapper`, `ScFieldLabel`, `ScFieldTitle`, `ScFieldDescription`, `ScFieldSeparator`) accept a `class` input for additional styling.
 
 ## Layout Orientations
 
@@ -278,5 +278,5 @@ Active data-slots in field components:
 
 - `data-slot="field"` — used by `label.ts`, `checkbox-field.ts`, `radio-field.ts`, `switch-field.ts` for layout detection
 - `data-slot="field-group"` — used by `field-group.ts` for nested group gap
-- `data-slot="field-body"` — used by `field.ts` to adjust alignment
+- `data-slot="field-content-wrapper"` — used by `field.ts` to adjust alignment
 - `data-slot="field-description"` — used by `checkbox-field.ts`, `radio-field.ts`, `switch-field.ts` for bold label and grid positioning

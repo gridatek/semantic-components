@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
   ScField,
-  ScFieldBody,
+  ScFieldContentWrapper,
   ScFieldDescription,
   ScFieldGroup,
   ScFieldTitle,
@@ -20,7 +20,7 @@ import {
   imports: [
     FormField,
     ScField,
-    ScFieldBody,
+    ScFieldContentWrapper,
     ScFieldDescription,
     ScFieldGroup,
     ScFieldTitle,
@@ -41,7 +41,7 @@ import {
         <div scRadioGroup [formField]="envForm.environment">
           <label scLabel>
             <div scField orientation="horizontal">
-              <div scFieldBody>
+              <div scFieldContentWrapper>
                 <div scFieldTitle>Kubernetes</div>
                 <p scFieldDescription>Run GPU workloads on a K8s cluster.</p>
               </div>
@@ -52,7 +52,7 @@ import {
           </label>
           <label scLabel>
             <div scField orientation="horizontal">
-              <div scFieldBody>
+              <div scFieldContentWrapper>
                 <div scFieldTitle>Virtual Machine</div>
                 <p scFieldDescription>Access a cluster to run GPU workloads.</p>
               </div>
