@@ -629,6 +629,8 @@ export interface ScPreset {
   frame: string;
   /** scFrame size="sm": a small box's frame (a row, an icon's box) — shadcn's rounded-md, square in lyra and sera; shadcn's ring-border line, no shadow. */
   frameSm: string;
+  /** scFrame size="xs": a tiny box's corners only (a meter's track and fill, a swatch) — shadcn's rounded-sm, square in lyra and sera; no ring, no shadow. */
+  frameXs: string;
   controlGroup: (props: {
     orientation?: ScControlGroupOrientation | null;
   }) => string;

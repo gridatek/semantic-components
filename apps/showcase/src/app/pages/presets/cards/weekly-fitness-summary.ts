@@ -38,11 +38,15 @@ import {
               </div>
               <span class="sr-only">{{ day.name }}: {{ day.load }}%</span>
               <div
-                class="bg-muted relative mt-1 h-16 overflow-hidden rounded-sm"
+                scFrame
+                size="xs"
+                class="bg-muted relative mt-1 h-16 overflow-hidden"
                 aria-hidden="true"
               >
                 <div
-                  class="bg-chart-3 absolute inset-x-0 bottom-0 rounded-sm"
+                  scFrame
+                  size="xs"
+                  class="bg-chart-3 absolute inset-x-0 bottom-0"
                   [style.height.%]="day.load"
                 ></div>
               </div>
