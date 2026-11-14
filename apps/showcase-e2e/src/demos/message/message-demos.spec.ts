@@ -8,6 +8,10 @@ import { expect, test } from '../../test';
 const demo = (name: string) => `/demos/message/${name}-message-demo`;
 const messages = (page: Page) => page.locator('[data-slot="message"]');
 
+// At the end: Chromium from Playwright 1.65 writes justify-content's
+// flex-end as flow-end — the same place, read either way.
+const END = /^(flex|flow)-end$/;
+
 let errors: string[];
 
 test.beforeEach(({ page }) => {
@@ -31,7 +35,7 @@ test('Usage: theirs at the start, yours at the end, its footer too', async ({
   expect(b.x).toBeGreaterThan(a.x);
   // The footer at the end of your message (justify-end).
   const footer = mine.locator('[data-slot="message-footer"]');
-  await expect(footer).toHaveCSS('justify-content', 'flex-end');
+  await expect(footer).toHaveCSS('justify-content', END);
 });
 
 test('Avatar: at the bottom of its message', async ({ page }) => {
@@ -65,7 +69,7 @@ test('Actions: named; a failed message’s retry at its end', async ({
     await expect(page.getByRole('button', { name, exact: true })).toBeVisible();
   await expect(
     messages(page).nth(1).locator('[data-slot="message-footer"]'),
-  ).toHaveCSS('justify-content', 'flex-end');
+  ).toHaveCSS('justify-content', END);
 });
 
 test('Status: the message in progress announced', async ({ page }) => {
