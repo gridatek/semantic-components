@@ -117,6 +117,7 @@ export class ScChartPlot {
         const box = this.host.getBoundingClientRect();
         if (box.width > 0) this.state.width.set(box.width);
         if (box.height > 0) this.state.height.set(box.height);
+        if (box.width > 0 && box.height > 0) this.state.measured.set(true);
         // Laid out at last (a chart rendered before it was in the page has
         // no styles to read until then): the preset's corner radius in px.
         if (box.width > 0 && chart) this.state.barRadius.set(radiusOf(chart));

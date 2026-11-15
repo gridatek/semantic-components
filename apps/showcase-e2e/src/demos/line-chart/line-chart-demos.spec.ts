@@ -131,3 +131,24 @@ test('RTL: mirrored — the months from the right, the values on the right; ← 
   await press(page, 'ArrowLeft');
   await expect(tooltip(page)).toContainText('فبراير');
 });
+
+test('RTL entrance: drawn from the right, in place — not moved there as the chart measures itself', async ({
+  page,
+}) => {
+  await page.goto(demo('rtl-line'));
+  // Where the line starts (January, on the right), frame by frame, as it draws.
+  const starts = await page.evaluate(async () => {
+    const xs: number[] = [];
+    const end = performance.now() + 800;
+    while (performance.now() < end) {
+      const path = document.querySelector<SVGPathElement>(
+        '[data-slot=chart-line] path',
+      );
+      if (path?.getAttribute('d')) xs.push(path.getPointAtLength(0).x);
+      await new Promise((done) => requestAnimationFrame(done));
+    }
+    return xs;
+  });
+  expect(starts.length).toBeGreaterThan(5);
+  expect(Math.max(...starts) - Math.min(...starts)).toBeLessThan(2);
+});

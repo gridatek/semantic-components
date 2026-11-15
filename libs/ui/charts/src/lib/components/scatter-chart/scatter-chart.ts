@@ -130,6 +130,7 @@ export class ScChartScatter implements ScChartSeriesLabels {
    */
   private readonly moving = scChartTransition({
     items: this.targets,
+    ready: this.state.measured,
     active: this.isAnimationActive,
     matchBy: this.animationMatchBy,
     begin: this.animationBegin,

@@ -155,6 +155,12 @@ export const scChartInterpolate = (a: number, b: number, time: number) =>
 export interface ScChartTransitionOptions<T> extends ScChartEntranceOptions {
   /** The shapes as they are now (no entrance applied). */
   items: () => readonly T[];
+  /**
+   * The shapes are where they belong (the chart has measured itself): until
+   * then, and at that first measure, they are drawn as they are — a guessed
+   * size is no change to animate.
+   */
+  ready?: () => boolean;
   active: () => boolean;
   matchBy: () => ScChartAnimationMatchBy;
   /** The shapes part-way: Recharts' step for this series. */
@@ -197,10 +203,19 @@ export function scChartTransition<T extends ScChartMatchable>(
   const reduced = !!view.matchMedia?.('(prefers-reduced-motion: reduce)')
     .matches;
   let previous: readonly T[] | null = null;
+  let settled = false;
   let frame = 0;
   effect(() => {
     const next = options.items();
+    const ready = options.ready?.() ?? true;
     untracked(() => {
+      // Before the chart is measured, and at that first measure: no change,
+      // only shapes finding their place.
+      if (!ready || !settled) {
+        settled = ready;
+        previous = next;
+        return;
+      }
       const current = run();
       const from =
         current && time() < 1 ? options.interpolate(current, time()) : previous;

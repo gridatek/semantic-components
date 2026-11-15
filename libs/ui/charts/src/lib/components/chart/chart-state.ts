@@ -132,6 +132,8 @@ export class ScChartState {
   /** The plot's size, in px (a guess until measured, and on the server). */
   readonly width = signal(320);
   readonly height = signal(200);
+  /** The plot has measured itself: its shapes are where they belong. */
+  readonly measured = signal(false);
   /** Where the plot is in the chart, in px: for the tooltip. */
   readonly offset = signal({ x: 0, y: 0 });
   /** The axes, while there are: their room, direction and side. */

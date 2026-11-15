@@ -167,6 +167,7 @@ export class ScChartPie implements ScChartSeriesLabels {
   /** Its slices moving to their new angles when they change. */
   private readonly moving = scChartTransition({
     items: this.targets,
+    ready: this.state.measured,
     active: this.isAnimationActive,
     matchBy: this.animationMatchBy,
     begin: this.animationBegin,
