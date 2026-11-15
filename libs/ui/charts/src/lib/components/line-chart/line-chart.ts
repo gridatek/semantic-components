@@ -204,6 +204,7 @@ export class ScChartLine implements ScChartSeriesLabels {
     if (this.drawn() < 1 || this.moving.animating()) return [];
     const rows = this.state.data();
     const vertical = this.state.vertical();
+    const backwards = this.state.valueReversed();
     return this.targets().map((p, index) => {
       const value = numberOf(rows[index]?.[this.key()]);
       if (position === 'inside')
@@ -212,18 +213,20 @@ export class ScChartLine implements ScChartSeriesLabels {
         ? {
             index,
             value,
-            x: p.x + offset,
+            // Beyond its value: the way the values run (leftwards, reversed).
+            x: p.x + (backwards ? -offset : offset),
             y: p.y,
-            anchor: 'start',
+            anchor: backwards ? 'end' : 'start',
             baseline: 'middle',
           }
         : {
             index,
             value,
             x: p.x,
-            y: p.y - offset,
+            // Beyond its value: above it, or below when the values run down.
+            y: p.y + (backwards ? offset : -offset),
             anchor: 'middle',
-            baseline: 'auto',
+            baseline: backwards ? 'hanging' : 'auto',
           };
     });
   }

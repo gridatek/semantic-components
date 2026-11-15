@@ -6,11 +6,13 @@ import { TocHeading } from '../../../components/toc/toc-heading';
 import { LabelLineChartDemoContainer } from './demos/label-line-chart-demo-container';
 import { LineChartDemoContainer } from './demos/line-chart-demo-container';
 import { MultipleLineChartDemoContainer } from './demos/multiple-line-chart-demo-container';
+import { RtlLineChartDemoContainer } from './demos/rtl-line-chart-demo-container';
 import { StepLineChartDemoContainer } from './demos/step-line-chart-demo-container';
 
 @Component({
   selector: 'app-line-chart-page',
   imports: [
+    RtlLineChartDemoContainer,
     LabelLineChartDemoContainer,
     LineChartDemoContainer,
     MultipleLineChartDemoContainer,
@@ -49,6 +51,7 @@ import { StepLineChartDemoContainer } from './demos/step-line-chart-demo-contain
         <app-multiple-line-chart-demo-container />
         <app-step-line-chart-demo-container />
         <app-label-line-chart-demo-container />
+        <app-rtl-line-chart-demo-container />
       </section>
     </div>
   `,

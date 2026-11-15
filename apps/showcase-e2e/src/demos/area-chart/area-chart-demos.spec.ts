@@ -132,3 +132,27 @@ test.describe('reduced motion, on a change', () => {
     ).toBeLessThanOrEqual(2);
   });
 });
+
+test('RTL: mirrored — the months from the right, the values on the right; ← to the next', async ({
+  page,
+}) => {
+  await page.goto(demo('rtl-area'));
+  // Where each label of an axis is, left to right on the screen.
+  const xs = (slot: string) =>
+    page
+      .locator(`[data-slot=${slot}] text`)
+      .evaluateAll((texts) =>
+        texts.map((text) => text.getBoundingClientRect().x),
+      );
+  const categories = await xs('chart-category-axis');
+  // The first category (or the smallest x value) furthest right.
+  expect(categories[0]).toBeGreaterThan(categories[categories.length - 1]);
+  // The value axis right of every category.
+  const values = await xs('chart-value-axis');
+  expect(Math.min(...values)).toBeGreaterThan(Math.max(...categories));
+  // The arrows go the way it's drawn: ← to the next.
+  await page.locator('[data-slot=chart-plot]').focus();
+  await expect(tooltip(page)).toContainText('يناير');
+  await press(page, 'ArrowLeft');
+  await expect(tooltip(page)).toContainText('فبراير');
+});

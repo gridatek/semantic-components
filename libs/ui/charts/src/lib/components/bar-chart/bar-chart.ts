@@ -44,6 +44,8 @@ interface ScBarChartBar {
   height: number;
   /** Its value is at or above its base. */
   up: boolean;
+  /** On screen, its end is further along than its base (rightwards, or down). */
+  forward: boolean;
 }
 
 /** A bar before it's boxed: where it runs, across and along the values. */
@@ -92,15 +94,16 @@ function shapeOf(
   { width, height }: { width: number; height: number },
   corners: ScChartBarCorners,
   vertical: boolean,
-  up: boolean,
+  forward: boolean,
   past: number,
 ): ScBarChartBar['shape'] {
   if (corners === 'all' || corners === 'none')
     return { x: 0, y: 0, width, height };
   // The square side: its base (rounded at its end), or its end.
   const squareAtBase = corners === 'end';
-  // Where the base is on screen: left of a bar across (up), under a column (up).
-  const baseIsStart = vertical ? up : !up;
+  // Where the base is on screen: first (left, or top) when the bar runs on
+  // from it — whichever way the values run.
+  const baseIsStart = forward;
   const extendStart = squareAtBase === baseIsStart;
   return vertical
     ? { x: extendStart ? -past : 0, y: 0, width: width + past, height }
@@ -254,14 +257,18 @@ export class ScChartBar implements ScChartSeriesLabels {
             width: bar.thickness,
             height: Math.abs(a - b),
           };
+      // Which way it runs on screen: from its base towards its value.
+      const forward =
+        bar.end === bar.base ? vertical === bar.up : bar.end > bar.base;
       // Past the square side by half its thickness: more than any corner can
       // be (a rect's rx is at most half its width).
       return {
         index: bar.index,
         up: bar.up,
+        forward,
         color: bar.color,
         ...box,
-        shape: shapeOf(box, corners, vertical, bar.up, bar.thickness / 2),
+        shape: shapeOf(box, corners, vertical, forward, bar.thickness / 2),
       };
     });
   });
@@ -301,35 +308,31 @@ export class ScChartBar implements ScChartSeriesLabels {
           anchor: 'middle',
           baseline: 'middle',
         };
-      // Its end (outside, beyond it) or its base (start, within it).
+      // Its end (outside, beyond it) or its base (start, within it), both
+      // the way it runs on screen.
       const atEnd = position === 'outside';
-      // Both run the bar's way: beyond its end, or in from its base.
-      const forward = bar.up;
+      const step = bar.forward ? offset : -offset;
       if (vertical) {
-        const edge = bar.up ? bar.x + bar.width : bar.x;
-        const base = bar.up ? bar.x : bar.x + bar.width;
+        const end = bar.forward ? bar.x + bar.width : bar.x;
+        const base = bar.forward ? bar.x : bar.x + bar.width;
         return {
           index: bar.index,
           value,
-          x: atEnd
-            ? edge + (bar.up ? offset : -offset)
-            : base + (bar.up ? offset : -offset),
+          x: (atEnd ? end : base) + step,
           y: middle.y,
-          anchor: forward ? 'start' : 'end',
+          anchor: bar.forward ? 'start' : 'end',
           baseline: 'middle',
         };
       }
-      const edge = bar.up ? bar.y : bar.y + bar.height;
-      const base = bar.up ? bar.y + bar.height : bar.y;
+      const end = bar.forward ? bar.y + bar.height : bar.y;
+      const base = bar.forward ? bar.y : bar.y + bar.height;
       return {
         index: bar.index,
         value,
         x: middle.x,
-        y: atEnd
-          ? edge + (bar.up ? -offset : offset)
-          : base + (bar.up ? -offset : offset),
+        y: (atEnd ? end : base) + step,
         anchor: 'middle',
-        baseline: forward ? 'auto' : 'hanging',
+        baseline: bar.forward ? 'hanging' : 'auto',
       };
     });
   }

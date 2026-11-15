@@ -1365,6 +1365,13 @@ export const demosRoutes: Route[] = [
             (m) => m.InteractiveAreaChartDemo,
           ),
       },
+      {
+        path: 'rtl-area-chart-demo',
+        loadComponent: () =>
+          import('../pages/docs/area-chart/demos/rtl-area-chart-demo').then(
+            (m) => m.RtlAreaChartDemo,
+          ),
+      },
     ],
   },
   {
@@ -1419,6 +1426,13 @@ export const demosRoutes: Route[] = [
             (m) => m.CustomLabelBarChartDemo,
           ),
       },
+      {
+        path: 'rtl-bar-chart-demo',
+        loadComponent: () =>
+          import('../pages/docs/bar-chart/demos/rtl-bar-chart-demo').then(
+            (m) => m.RtlBarChartDemo,
+          ),
+      },
     ],
   },
   {
@@ -1450,6 +1464,13 @@ export const demosRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/line-chart/demos/label-line-chart-demo').then(
             (m) => m.LabelLineChartDemo,
+          ),
+      },
+      {
+        path: 'rtl-line-chart-demo',
+        loadComponent: () =>
+          import('../pages/docs/line-chart/demos/rtl-line-chart-demo').then(
+            (m) => m.RtlLineChartDemo,
           ),
       },
     ],
@@ -3985,6 +4006,13 @@ export const demosRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/scatter-chart/demos/bubble-scatter-chart-demo').then(
             (m) => m.BubbleScatterChartDemo,
+          ),
+      },
+      {
+        path: 'rtl-scatter-chart-demo',
+        loadComponent: () =>
+          import('../pages/docs/scatter-chart/demos/rtl-scatter-chart-demo').then(
+            (m) => m.RtlScatterChartDemo,
           ),
       },
     ],

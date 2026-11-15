@@ -14,6 +14,7 @@ export {
   scChartTransition,
 } from './chart-animation';
 export { ScChartCategoryAxis } from './chart-category-axis';
+export type { ScChartsConfig } from './chart-config';
 export { ScChartCenter } from './chart-center';
 export { ScChartCursor } from './chart-cursor';
 export { ScChartGrid } from './chart-grid';
@@ -41,6 +42,8 @@ export {
   anchorAt,
 } from './chart-series';
 export {
+  type ScChartAxis,
+  type ScChartAxisSide,
   type ScChartBox,
   ScChartState,
   type ScChartSeries,

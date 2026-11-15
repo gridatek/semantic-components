@@ -4,11 +4,13 @@ import { ComponentBadges } from '../../../components/component-badges/component-
 import { EntryInstall } from '../../../components/entry-install/entry-install';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BubbleScatterChartDemoContainer } from './demos/bubble-scatter-chart-demo-container';
+import { RtlScatterChartDemoContainer } from './demos/rtl-scatter-chart-demo-container';
 import { ScatterChartDemoContainer } from './demos/scatter-chart-demo-container';
 
 @Component({
   selector: 'app-scatter-chart-page',
   imports: [
+    RtlScatterChartDemoContainer,
     ScatterChartDemoContainer,
     BubbleScatterChartDemoContainer,
     TocHeading,
@@ -42,6 +44,7 @@ import { ScatterChartDemoContainer } from './demos/scatter-chart-demo-container'
         <h2 scHeading appToc>Examples</h2>
         <app-scatter-chart-demo-container />
         <app-bubble-scatter-chart-demo-container />
+        <app-rtl-scatter-chart-demo-container />
       </section>
     </div>
   `,

@@ -29,6 +29,8 @@ export const appConfig: ApplicationConfig = {
       {
         // Alt+T moves focus to the toasts (the toaster's template names it); Escape goes back.
         toaster: { hotkey: ['altKey', 'KeyT'] },
+        // Charts mirror themselves in right to left (the RTL examples).
+        charts: { followDirection: true },
       },
       // Code blocks highlighted with Shiki, each language loaded when first shown.
       withCodeHighlighter(),
@@ -40,6 +42,7 @@ export const appConfig: ApplicationConfig = {
       provide: SC_CONFIG,
       useFactory: () => ({
         toaster: { hotkey: ['altKey', 'KeyT'] },
+        charts: { followDirection: true },
         preset: PRESETS[presetFrom(inject(ScStorage))],
       }),
     },

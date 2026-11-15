@@ -9,11 +9,13 @@ import { HorizontalBarChartDemoContainer } from './demos/horizontal-bar-chart-de
 import { LabelBarChartDemoContainer } from './demos/label-bar-chart-demo-container';
 import { MultipleBarChartDemoContainer } from './demos/multiple-bar-chart-demo-container';
 import { NegativeBarChartDemoContainer } from './demos/negative-bar-chart-demo-container';
+import { RtlBarChartDemoContainer } from './demos/rtl-bar-chart-demo-container';
 import { StackedBarChartDemoContainer } from './demos/stacked-bar-chart-demo-container';
 
 @Component({
   selector: 'app-bar-chart-page',
   imports: [
+    RtlBarChartDemoContainer,
     CustomLabelBarChartDemoContainer,
     LabelBarChartDemoContainer,
     HorizontalBarChartDemoContainer,
@@ -58,6 +60,7 @@ import { StackedBarChartDemoContainer } from './demos/stacked-bar-chart-demo-con
         <app-horizontal-bar-chart-demo-container />
         <app-label-bar-chart-demo-container />
         <app-custom-label-bar-chart-demo-container />
+        <app-rtl-bar-chart-demo-container />
       </section>
     </div>
   `,

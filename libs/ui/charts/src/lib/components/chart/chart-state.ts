@@ -1,4 +1,6 @@
-import { Service, type Signal, computed, signal } from '@angular/core';
+import { Directionality } from '@angular/cdk/bidi';
+import { Service, type Signal, computed, inject, signal } from '@angular/core';
+import { SC_CONFIG } from '@semantic-components/ui';
 import {
   type ScaleBand,
   type ScalePoint,
@@ -7,6 +9,7 @@ import {
   scalePoint,
 } from 'd3-scale';
 import { stack, stackOffsetDiverging, stackOffsetExpand } from 'd3-shape';
+import './chart-config';
 import { scChartNiceTicks } from './chart-nice-ticks';
 import type {
   ScChartConfig,
@@ -56,6 +59,19 @@ export interface ScChartBox {
   y: number;
   width: number;
   height: number;
+}
+
+/** Which side an axis beside the plot is on (Recharts' `orientation`). */
+export type ScChartAxisSide = 'left' | 'right';
+
+/** What an axis tells the chart: its room, and how it runs. */
+export interface ScChartAxis {
+  /** Beside the plot: the room its labels take, in px. */
+  readonly width: Signal<number>;
+  /** It runs backwards (Recharts'): unset, the chart's default. */
+  readonly reversed: Signal<boolean | undefined>;
+  /** Beside the plot: its side (Recharts'); unset, the chart's default. */
+  readonly orientation: Signal<ScChartAxisSide | undefined>;
 }
 
 /** What the container gives: the rows and the series' names and colors. */
@@ -113,14 +129,49 @@ export class ScChartState {
   readonly height = signal(200);
   /** Where the plot is in the chart, in px: for the tooltip. */
   readonly offset = signal({ x: 0, y: 0 });
-  /** The axes, while there are: each one's width input (its room on the side). */
-  readonly categoryAxis = signal<Signal<number> | null>(null);
-  readonly valueAxis = signal<Signal<number> | null>(null);
+  /** The axes, while there are: their room, direction and side. */
+  readonly categoryAxis = signal<ScChartAxis | null>(null);
+  readonly valueAxis = signal<ScChartAxis | null>(null);
   /** The value axis's tick count (5 without one): it sets the domain, as in Recharts. */
   readonly valueTickCount = signal(5);
 
   /** Categories down the side, values across. */
   readonly vertical = computed(() => this.plot()?.layout() === 'vertical');
+
+  private readonly direction = inject(Directionality);
+  private readonly followDirection =
+    inject(SC_CONFIG).charts?.followDirection ?? false;
+  /**
+   * Mirrored by default: the app follows the direction
+   * (`charts.followDirection`) and this chart's is right to left. Charts
+   * with axes only: shapes (pies, radars, funnels…) read the same both ways.
+   */
+  readonly mirrored = computed(
+    () => this.followDirection && this.direction.valueSignal() === 'rtl',
+  );
+  /**
+   * The categories run backwards (a scatter's x values too): the axis's own
+   * `reversed`, else mirrored across (from the right).
+   */
+  readonly categoryReversed = computed(
+    () =>
+      this.categoryAxis()?.reversed() ??
+      (this.mirrored() && !this.vertical() && !this.shaped()),
+  );
+  /**
+   * The values run backwards: the axis's own `reversed`, else mirrored
+   * across (bars from the right, in a `vertical` layout).
+   */
+  readonly valueReversed = computed(
+    () =>
+      this.valueAxis()?.reversed() ??
+      (this.mirrored() && this.vertical() && !this.shaped()),
+  );
+  /** The side of the axis beside the plot: its own `orientation`, else the right when mirrored. */
+  readonly sideAxisSide = computed<ScChartAxisSide>(() => {
+    const axis = this.vertical() ? this.categoryAxis() : this.valueAxis();
+    return axis?.orientation() ?? (this.mirrored() ? 'right' : 'left');
+  });
 
   /** Polar charts: the room the labels around them take, set by them. */
   readonly polarPadding = signal(0);
@@ -168,9 +219,15 @@ export class ScChartState {
     const [side, below] = this.vertical()
       ? [this.categoryAxis(), this.valueAxis()]
       : [this.valueAxis(), this.categoryAxis()];
-    const left = margin.left + (side?.() ?? 0);
+    // The axis beside it: on its left, or its right.
+    const room = side?.width() ?? 0;
+    const onRight = this.sideAxisSide() === 'right';
+    const left = margin.left + (onRight ? 0 : room);
     const top = margin.top;
-    const right = Math.max(left, this.width() - margin.right);
+    const right = Math.max(
+      left,
+      this.width() - margin.right - (onRight ? room : 0),
+    );
     const bottom = Math.max(
       top,
       this.height() - margin.bottom - (below ? AXIS_HEIGHT : 0),
@@ -187,9 +244,12 @@ export class ScChartState {
   readonly categoryScale = computed<ScaleBand<number> | ScalePoint<number>>(
     () => {
       const { left, top, right, bottom } = this.area();
-      const range: [number, number] = this.vertical()
+      const forward: [number, number] = this.vertical()
         ? [top, bottom]
         : [left, right];
+      const range: [number, number] = this.categoryReversed()
+        ? [forward[1], forward[0]]
+        : forward;
       const indices = this.data().map((_, index) => index);
       return this.banded()
         ? scaleBand<number>()
@@ -269,9 +329,12 @@ export class ScChartState {
   /** Where each value is: up from the bottom, or across from the side. */
   readonly valueScale = computed(() => {
     const { left, top, right, bottom } = this.area();
-    const range: [number, number] = this.vertical()
+    const forward: [number, number] = this.vertical()
       ? [left, right]
       : [bottom, top];
+    const range: [number, number] = this.valueReversed()
+      ? [forward[1], forward[0]]
+      : forward;
     if (this.stackOffset() === 'expand')
       return scaleLinear().domain([0, 1]).range(range);
     const ticks = this.valueTicks();
@@ -312,7 +375,7 @@ export class ScChartState {
     return scaleLinear()
       .domain(padded(low, high === low ? low + 1 : high))
       .nice()
-      .range([left, right]);
+      .range(this.categoryReversed() ? [right, left] : [left, right]);
   });
 
   /** The middle of a category, along its axis — a scatter's x — in px. */

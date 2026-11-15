@@ -69,6 +69,9 @@ export class ScChartPlot {
   protected readonly class = computed(() =>
     cn(
       'h-full min-h-0 w-full flex-1 overflow-visible rounded-md outline-none focus-visible:ring-3 focus-visible:ring-ring/50',
+      // Its text anchored as placed (start: from the point rightwards), in a
+      // right-to-left page too: SVG's start follows the direction.
+      '[direction:ltr]',
       this.classInput(),
     ),
   );
@@ -150,18 +153,27 @@ export class ScChartPlot {
     const last = this.state.data().length - 1;
     if (last < 0) return;
     const current = this.state.activeIndex() ?? 0;
-    const next =
-      event.key === 'ArrowRight' || event.key === 'ArrowDown'
-        ? Math.min(last, current + 1)
-        : event.key === 'ArrowLeft' || event.key === 'ArrowUp'
-          ? Math.max(0, current - 1)
-          : event.key === 'Home'
-            ? 0
-            : event.key === 'End'
-              ? last
-              : event.key === 'Escape'
-                ? null
-                : undefined;
+    // The arrows go the way the categories are drawn: from the right when
+    // they run backwards across (mirrored), up when backwards down the side.
+    const backwards = this.state.categoryReversed();
+    const across = !this.state.vertical();
+    const forward =
+      event.key === (across && backwards ? 'ArrowLeft' : 'ArrowRight') ||
+      event.key === (!across && backwards ? 'ArrowUp' : 'ArrowDown');
+    const back =
+      event.key === (across && backwards ? 'ArrowRight' : 'ArrowLeft') ||
+      event.key === (!across && backwards ? 'ArrowDown' : 'ArrowUp');
+    const next = forward
+      ? Math.min(last, current + 1)
+      : back
+        ? Math.max(0, current - 1)
+        : event.key === 'Home'
+          ? 0
+          : event.key === 'End'
+            ? last
+            : event.key === 'Escape'
+              ? null
+              : undefined;
     if (next === undefined) return;
     event.preventDefault();
     this.state.pointer.set(null);

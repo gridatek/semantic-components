@@ -172,6 +172,18 @@ export class ScChartScatter implements ScChartSeriesLabels {
       kind: 'scatter',
       stack: computed(() => null),
       xKey: this.xKey,
+      // The keyboard's item: its point (not a category's band: its x is a value).
+      anchor: (index) => {
+        const dot = this.dots().find((d) => d.index === index);
+        return dot
+          ? {
+              x: dot.x - dot.r,
+              y: dot.y - dot.r,
+              width: dot.r * 2,
+              height: dot.r * 2,
+            }
+          : null;
+      },
     });
     inject(DestroyRef).onDestroy(unregister);
   }
