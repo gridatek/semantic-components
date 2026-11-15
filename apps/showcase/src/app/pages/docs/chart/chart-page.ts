@@ -232,12 +232,12 @@ export default class ChartPage {
     {
       selector: 'g[scChartCategoryAxis]',
       description:
-        "The categories, under the plot (beside it, laid out vertical): tickFormatter(category, index), width (60, beside) — evenly skipped when they don't fit. reversed: the categories from the right (from the bottom, vertical); orientation (left, right): its side, beside — both unset by default: the chart's (see Right to left)",
+        "The categories, under the plot (beside it, laid out vertical): tickFormatter(category, index), width (60, beside) — evenly skipped when they don't fit. reversed: the categories from the right (from the bottom, vertical); orientation (left, right): its side, beside — both unset by default: the chart's (see Right to left). orientation also top or bottom along the plot (top: the labels above it); hide: no room, no labels (Recharts').",
     },
     {
       selector: 'g[scChartValueAxis]',
       description:
-        "The values, beside the plot (under it, laid out vertical): width (40), tickCount (5: Recharts' nice ticks, which also set the value domain — 0 to 320 for values up to 305), tickFormatter(value) — the app's locale by default. reversed: the values down from the top (from the right, vertical); orientation (left, right): its side — both unset by default: the chart's (see Right to left)",
+        "The values, beside the plot (under it, laid out vertical): width (40), tickCount (5: Recharts' nice ticks, which also set the value domain — 0 to 320 for values up to 305), tickFormatter(value) — the app's locale by default. reversed: the values down from the top (from the right, vertical); orientation (left, right): its side — both unset by default: the chart's (see Right to left). domain ([0, 100]): its values' range, fixed (Recharts') — else from the data; hide: no room, no labels, its domain still holding.",
     },
     {
       selector: 'g[scChartCursor]',
