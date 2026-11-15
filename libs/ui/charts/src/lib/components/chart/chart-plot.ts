@@ -132,6 +132,22 @@ export class ScChartPlot {
       const observer = new ResizeObserver(measure);
       observer.observe(this.host);
       destroyRef.onDestroy(() => observer.disconnect());
+      // First seen: a third of it in view, once.
+      const View = this.host.ownerDocument.defaultView?.IntersectionObserver;
+      if (!View) {
+        this.state.seen.set(true);
+        return;
+      }
+      const seen = new View(
+        (entries) => {
+          if (!entries.some((entry) => entry.isIntersecting)) return;
+          this.state.seen.set(true);
+          seen.disconnect();
+        },
+        { threshold: 0.3 },
+      );
+      seen.observe(this.host);
+      destroyRef.onDestroy(() => seen.disconnect());
     });
   }
 

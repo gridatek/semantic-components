@@ -134,6 +134,11 @@ export class ScChartState {
   readonly height = signal(200);
   /** The plot has measured itself: its shapes are where they belong. */
   readonly measured = signal(false);
+  /**
+   * The plot has been seen (a third of it in view, once): the series enter
+   * then — not while out of view (further down a page, in a closed panel).
+   */
+  readonly seen = signal(false);
   /** Where the plot is in the chart, in px: for the tooltip. */
   readonly offset = signal({ x: 0, y: 0 });
   /** The axes, while there are: their room, direction and side. */

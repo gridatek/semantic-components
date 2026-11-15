@@ -48,3 +48,25 @@ test.describe('Charts Page', () => {
     await expectNoA11yViolations(page, { dark: true });
   });
 });
+
+test('A chart enters when it is first seen, not while out of view', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1280, height: 720 });
+  await page.goto('/charts');
+  // The last line chart: far down the page.
+  const line = page.locator('[data-slot=chart-line] path').last();
+  await expect(line).toBeAttached();
+  const below = await line.evaluate(
+    (path) => path.getBoundingClientRect().top > window.innerHeight,
+  );
+  expect(below).toBe(true);
+  // Long past its entrance's length (1.5s): still waiting, undrawn.
+  // eslint-disable-next-line playwright/no-wait-for-timeout
+  await page.waitForTimeout(2000);
+  await expect(line).toHaveAttribute('stroke-dasharray', /^0 1$/);
+  // Seen: it draws itself, then is whole.
+  await line.scrollIntoViewIfNeeded();
+  await expect(line).not.toHaveAttribute('stroke-dasharray', /^0 1$/);
+  await expect(line).not.toHaveAttribute('stroke-dasharray');
+});

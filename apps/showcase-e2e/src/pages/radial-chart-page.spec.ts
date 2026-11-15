@@ -38,6 +38,9 @@ test.describe('Radial Chart Page', () => {
       '[data-slot=chart]:has([data-slot=chart-radial-bar])',
     );
     await expect(charts).toHaveCount(5);
+    // Each enters once seen: scrolled to, as a reader would.
+    for (const chart of await charts.all())
+      await chart.scrollIntoViewIfNeeded();
     // Each chart's second bar (the first is a whole ring): more than its two
     // edges' arcs — a small one at each rounded corner.
     await expect

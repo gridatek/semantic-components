@@ -82,6 +82,8 @@ test.describe('Presets Page', () => {
     const plot = page.getByRole('group', {
       name: 'Sleep stages by hour, 10pm to 6am',
     });
+    // Seen, it enters: scrolled to, as a reader would.
+    await plot.scrollIntoViewIfNeeded();
     await expect(plot).toBeVisible();
     // Per hour, the topmost drawn segment (the highest on screen): rounded.
     await expect

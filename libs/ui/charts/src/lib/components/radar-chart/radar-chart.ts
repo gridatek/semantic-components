@@ -89,6 +89,7 @@ export class ScChartRadar {
 
   /** Its entrance: 0 to 1 once, after its first render. */
   private readonly entrance = scChartEntrance({
+    start: this.state.seen,
     begin: this.animationBegin,
     duration: this.animationDuration,
     easing: this.animationEasing,

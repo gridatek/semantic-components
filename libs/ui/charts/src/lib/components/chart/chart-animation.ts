@@ -52,11 +52,17 @@ export interface ScChartEntranceOptions {
   begin: () => number;
   duration: () => number;
   easing: () => ScChartAnimationEasing;
+  /**
+   * When it may start (the chart's `seen`: first in view) — at once after
+   * the first render without one.
+   */
+  start?: () => boolean;
 }
 
 /**
  * A series' entrance (Recharts' animation on mount): its progress, 0 to 1,
- * eased, after the first render in the browser. 1 from the start on the
+ * eased, after the first render in the browser — or once `start` says so
+ * (the chart first seen). 1 from the start on the
  * server, and when the user asks for reduced motion. Call it in a
  * constructor; whether to use it (`isAnimationActive`) is the series'.
  */
@@ -71,7 +77,7 @@ export function scChartEntrance(
   if (progress() === 1 || !view) return progress.asReadonly();
 
   let frame = 0;
-  afterNextRender(() => {
+  const run = () => {
     const ease = scChartEasing(options.easing());
     const duration = Math.max(0, options.duration());
     const start = view.performance.now() + Math.max(0, options.begin());
@@ -81,7 +87,17 @@ export function scChartEntrance(
       if (time < 1) frame = view.requestAnimationFrame(step);
     };
     frame = view.requestAnimationFrame(step);
-  });
+  };
+  const may = options.start;
+  if (may) {
+    // Once it may (first seen): never again.
+    let started = false;
+    effect(() => {
+      if (started || !may()) return;
+      started = true;
+      untracked(run);
+    });
+  } else afterNextRender(run);
   inject(DestroyRef).onDestroy(() => view.cancelAnimationFrame(frame));
   return progress.asReadonly();
 }
