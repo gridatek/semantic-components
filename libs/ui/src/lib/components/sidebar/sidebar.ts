@@ -1,15 +1,14 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
+import { Directionality } from '@angular/cdk/bidi';
 import { NgTemplateOutlet } from '@angular/common';
 import {
   Component,
   DestroyRef,
   ElementRef,
   ViewEncapsulation,
-  afterNextRender,
   computed,
   inject,
   input,
-  signal,
 } from '@angular/core';
 import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
@@ -108,12 +107,12 @@ export class ScSidebar {
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
   /** On an `aside`: a landmark, named by its `aria-label`. */
   protected readonly aside = this.element.tagName === 'ASIDE';
-  /** The direction, read in the browser (the sheet only shows there). */
-  private readonly rtl = signal(false);
+  private readonly direction = inject(Directionality);
   protected readonly sheetSide = computed(() =>
     this.side() === 'left' || this.side() === 'right'
       ? this.side()
-      : (this.side() === 'inline-start') !== this.rtl()
+      : (this.side() === 'inline-start') !==
+          (this.direction.valueSignal() === 'rtl')
         ? 'left'
         : 'right',
   );
@@ -158,9 +157,6 @@ export class ScSidebar {
 
   constructor() {
     this.state.sidebarId.set(this.id);
-    afterNextRender(() =>
-      this.rtl.set(getComputedStyle(this.element).direction === 'rtl'),
-    );
     inject(DestroyRef).onDestroy(() => this.state.sidebarId.set(null));
   }
 }

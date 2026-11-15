@@ -38,6 +38,15 @@ test.describe('Console clean', () => {
       );
       page.on('console', (m) => {
         if (fromOtherSite(m, page)) return;
+        // Firefox's guess at a flash of unstyled content in a demo's iframe
+        // (dev mode only) still loading its stylesheets: not the library's.
+        if (
+          m
+            .text()
+            .includes('Layout was forced before the page was fully loaded') &&
+          new URL(m.location().url || page.url()).pathname.startsWith('/demos/')
+        )
+          return;
         if (m.type() === 'warning' || m.type() === 'error')
           messages.push(`${m.type()}: ${m.text().split('\n')[0]}`);
       });
