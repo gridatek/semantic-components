@@ -1,4 +1,5 @@
 import { expectNoA11yViolations } from '../axe';
+import { fromOtherSite } from '../interaction';
 import { expect, test } from '../test';
 
 test.describe('Charts Page', () => {
@@ -7,7 +8,12 @@ test.describe('Charts Page', () => {
   }) => {
     const messages: string[] = [];
     page.on('console', (m) => {
-      if (m.type() === 'warning' || m.type() === 'error')
+      // Another site's resource isn't ours: GitHub's API refuses a burst of
+      // requests (403) in CI, and the navbar asks it for the stars.
+      if (
+        (m.type() === 'warning' || m.type() === 'error') &&
+        !fromOtherSite(m, page)
+      )
         messages.push(m.text().split('\n')[0]);
     });
     await page.goto('/charts');
