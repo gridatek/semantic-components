@@ -66,8 +66,11 @@ export interface ScChartBox {
   height: number;
 }
 
-/** Which side an axis beside the plot is on (Recharts' `orientation`). */
-export type ScChartAxisSide = 'left' | 'right';
+/**
+ * Which side of the plot an axis is on (Recharts' `orientation`): left or
+ * right beside it, top or bottom along it.
+ */
+export type ScChartAxisSide = 'left' | 'right' | 'top' | 'bottom';
 
 /** What an axis tells the chart: its room, and how it runs. */
 export interface ScChartAxis {
@@ -75,8 +78,12 @@ export interface ScChartAxis {
   readonly width: Signal<number>;
   /** It runs backwards (Recharts'): unset, the chart's default. */
   readonly reversed: Signal<boolean | undefined>;
-  /** Beside the plot: its side (Recharts'); unset, the chart's default. */
+  /** Its side (Recharts'); unset, the chart's default. */
   readonly orientation: Signal<ScChartAxisSide | undefined>;
+  /** Hidden (Recharts' `hide`): no room, nothing drawn; its settings still hold. */
+  readonly hide?: Signal<boolean>;
+  /** Its values' range, fixed (Recharts' `domain`): else from the data. */
+  readonly domain?: Signal<readonly [number, number] | undefined>;
 }
 
 /** What the container gives: the rows and the series' names and colors. */
@@ -181,9 +188,14 @@ export class ScChartState {
       (this.mirrored() && this.vertical() && !this.shaped()),
   );
   /** The side of the axis beside the plot: its own `orientation`, else the right when mirrored. */
-  readonly sideAxisSide = computed<ScChartAxisSide>(() => {
+  readonly sideAxisSide = computed<'left' | 'right'>(() => {
     const axis = this.vertical() ? this.categoryAxis() : this.valueAxis();
-    return axis?.orientation() ?? (this.mirrored() ? 'right' : 'left');
+    const side = axis?.orientation();
+    return side === 'left' || side === 'right'
+      ? side
+      : this.mirrored()
+        ? 'right'
+        : 'left';
   });
 
   /** Polar charts: the room the labels around them take, set by them. */
@@ -239,18 +251,21 @@ export class ScChartState {
     const [side, below] = this.vertical()
       ? [this.categoryAxis(), this.valueAxis()]
       : [this.valueAxis(), this.categoryAxis()];
-    // The axis beside it: on its left, or its right.
-    const room = side?.width() ?? 0;
+    // The axis beside it: on its left, or its right; hidden, no room.
+    const room = side && !side.hide?.() ? side.width() : 0;
     const onRight = this.sideAxisSide() === 'right';
     const left = margin.left + (onRight ? 0 : room);
-    const top = margin.top;
+    // The one along it: under it, or above (`top`).
+    const along = below && !below.hide?.() ? AXIS_HEIGHT : 0;
+    const above = below?.orientation() === 'top';
+    const top = margin.top + (above ? along : 0);
     const right = Math.max(
       left,
       this.width() - margin.right - (onRight ? room : 0),
     );
     const bottom = Math.max(
       top,
-      this.height() - margin.bottom - (below ? AXIS_HEIGHT : 0),
+      this.height() - margin.bottom - (above ? 0 : along),
     );
     return { left, top, right, bottom };
   });
@@ -325,6 +340,9 @@ export class ScChartState {
    * are the value scale's domain. A scatter's: the scale's own ticks.
    */
   readonly valueTicks = computed<number[]>(() => {
+    // Its range fixed by the value axis (Recharts' domain): ticks within it.
+    const fixed = this.valueAxis()?.domain?.();
+    if (fixed) return scaleLinear().domain(fixed).ticks(this.valueTickCount());
     if (this.stackOffset() === 'expand')
       return scChartNiceTicks(0, 1, this.valueTickCount());
     const scatter = this.xKey() !== null;
@@ -357,9 +375,10 @@ export class ScChartState {
       : forward;
     if (this.stackOffset() === 'expand')
       return scaleLinear().domain([0, 1]).range(range);
+    const fixed = this.valueAxis()?.domain?.();
     const ticks = this.valueTicks();
     return scaleLinear()
-      .domain([ticks[0], ticks[ticks.length - 1]])
+      .domain(fixed ?? [ticks[0], ticks[ticks.length - 1]])
       .range(range);
   });
 

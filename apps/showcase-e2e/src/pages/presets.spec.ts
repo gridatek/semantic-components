@@ -108,4 +108,40 @@ test.describe('Presets Page', () => {
       )
       .toEqual([true, true, true, true, true, true, true, true, true]);
   });
+
+  test('Weekly Fitness Summary: a bar chart — each day out of 100, its load on hover or with the keys', async ({
+    page,
+  }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto('/presets');
+    const plot = page.getByRole('group', {
+      name: 'Workout load by day, Monday to Sunday',
+    });
+    await plot.scrollIntoViewIfNeeded();
+    // A bar per day, each over its track (the whole 0 to 100).
+    const chart = page.locator('[data-slot=chart]', { has: plot });
+    await expect(chart.locator('[data-slot=chart-bar] > svg')).toHaveCount(7);
+    await expect(chart.locator('[data-slot=chart-bar] > rect')).toHaveCount(7);
+    // Out of 100, not of the week's best day: Friday (91) short of its track.
+    const friday = await chart.evaluate((element) => {
+      const bar = element.querySelectorAll('[data-slot=chart-bar] > svg')[4];
+      const track = element.querySelectorAll('[data-slot=chart-bar] > rect')[4];
+      return (
+        Number(bar.getAttribute('height')) /
+        Number(track.getAttribute('height'))
+      );
+    });
+    expect(friday).toBeCloseTo(0.91, 2);
+    // The days' initials on top; their loads said by the tooltip.
+    await expect(
+      chart.locator('[data-slot=chart-category-axis] text').first(),
+    ).toHaveText('M');
+    await plot.focus();
+    await expect(page.locator('[data-slot=chart-tooltip]')).toContainText(
+      'Monday',
+    );
+    await expect(page.locator('[data-slot=chart-tooltip]')).toContainText(
+      '84%',
+    );
+  });
 });

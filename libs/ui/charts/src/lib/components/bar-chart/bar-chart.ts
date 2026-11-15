@@ -48,6 +48,8 @@ interface ScBarChartBar {
   forward: boolean;
   /** Its rounded corners here: in a stack, only where the stack ends. */
   corners: ScChartBarCorners;
+  /** Its slot's whole range of values, behind it (`background`). */
+  track: { x: number; y: number; width: number; height: number };
 }
 
 /** A bar before it's boxed: where it runs, across and along the values. */
@@ -143,6 +145,16 @@ function shapeOf(
   providers: [{ provide: SC_CHART_SERIES, useExisting: ScChartBar }],
   template: `
     @for (bar of bars(); track bar.index) {
+      @if (trackClass(); as track) {
+        <!-- Its slot's whole range, behind it (Recharts' background). -->
+        <svg:rect
+          [class]="track"
+          [attr.x]="bar.track.x"
+          [attr.y]="bar.track.y"
+          [attr.width]="bar.track.width"
+          [attr.height]="bar.track.height"
+        />
+      }
       <!-- The bar's box: what overflows it (a square side's corners) is hidden. -->
       <svg:svg
         overflow="hidden"
@@ -194,6 +206,22 @@ export class ScChartBar implements ScChartSeriesLabels {
   readonly corners = input<ScChartBarCorners>('all');
   /** Instead of its color: `url(#gradient)`. */
   readonly fill = input('');
+  /**
+   * A track behind each bar, its slot's whole range of values (Recharts'
+   * `background`): `true` for the muted one, or your classes
+   * (`fill-secondary`) — its corners the bars'.
+   */
+  readonly background = input<boolean | string>(false);
+  /** The track's classes, when there is one. */
+  private readonly trackClass = computed(() => {
+    const background = this.background();
+    if (background === false || background === 'false') return null;
+    return cn(
+      'fill-muted',
+      this.corners() === 'none' ? '' : '[rx:var(--chart-bar-radius,0px)]',
+      typeof background === 'string' ? background : '',
+    );
+  });
   /** Its width in pixels, centered in its slot (Recharts' `barSize`); the slot's by default. */
   readonly barSize = input<number | undefined>(undefined);
   /** Its widest, in pixels (Recharts' `maxBarSize`): a narrower slot keeps its width. */
@@ -296,6 +324,7 @@ export class ScChartBar implements ScChartSeriesLabels {
   });
 
   protected readonly bars = computed<ScBarChartBar[]>(() => {
+    const values = this.state.valueScale();
     const vertical = this.state.vertical();
     const corners = this.corners();
     // Growing from its base: its end on the way to its value.
@@ -321,6 +350,21 @@ export class ScChartBar implements ScChartSeriesLabels {
         bar.end === bar.base ? vertical === bar.up : bar.end > bar.base;
       // In a stack, rounded only where the stack ends.
       const here = cornersIn(corners, bar.outer, bar.inner);
+      // Its slot's whole range of values (the value scale's), behind it.
+      const [r0, r1] = values.range();
+      const track = vertical
+        ? {
+            x: Math.min(r0, r1),
+            y: bar.start,
+            width: Math.abs(r1 - r0),
+            height: bar.thickness,
+          }
+        : {
+            x: bar.start,
+            y: Math.min(r0, r1),
+            width: bar.thickness,
+            height: Math.abs(r1 - r0),
+          };
       // Past the square side by half its thickness: more than any corner can
       // be (a rect's rx is at most half its width).
       return {
@@ -328,6 +372,7 @@ export class ScChartBar implements ScChartSeriesLabels {
         up: bar.up,
         forward,
         corners: here,
+        track,
         color: bar.color,
         ...box,
         shape: shapeOf(box, here, vertical, forward, bar.thickness / 2),

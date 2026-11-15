@@ -3,6 +3,7 @@ import {
   DestroyRef,
   LOCALE_ID,
   ViewEncapsulation,
+  booleanAttribute,
   computed,
   effect,
   inject,
@@ -59,10 +60,18 @@ export class ScChartValueAxis {
   >(undefined, { transform: optionalBoolean });
   /** Beside the plot: its side (Recharts'). Unset: the chart's default — the right when mirrored. */
   readonly orientation = input<ScChartAxisSide | undefined>(undefined);
+  /** Hidden (Recharts' `hide`): no room, no labels — its domain still holds. */
+  readonly hide = input(false, { transform: booleanAttribute });
+  /**
+   * Its values' range, fixed (Recharts' `domain`): `[0, 100]` for shares of a
+   * whole. Unset: from the data, Recharts' nice ticks.
+   */
+  readonly domain = input<readonly [number, number] | undefined>(undefined);
 
   protected readonly vertical = this.state.vertical;
 
   protected readonly ticks = computed(() => {
+    if (this.hide()) return [];
     const scale = this.state.valueScale();
     const { left, right, bottom } = this.state.area();
     // Beside the plot: on its left, or its right (labels away from it).
@@ -85,6 +94,8 @@ export class ScChartValueAxis {
 
   constructor() {
     this.state.valueAxis.set({
+      hide: this.hide,
+      domain: this.domain,
       width: this.width,
       reversed: this.reversed,
       orientation: this.orientation,

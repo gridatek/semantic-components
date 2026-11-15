@@ -199,6 +199,13 @@ export default class BarChartPage {
       description: 'instead of its color, url(#gradient)',
     },
     {
+      name: 'background',
+      type: 'boolean | string',
+      default: 'false',
+      description:
+        "A track behind each bar, its slot's whole range of values (Recharts' background): true for the muted one, or your classes (fill-secondary); its corners the bars'.",
+    },
+    {
       name: 'barSize',
       type: 'number',
       default: "the slot's",

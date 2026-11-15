@@ -38,20 +38,21 @@ A series as bars: one per category, side by side with the other series' — or o
 
 ## ScChartBar — `g[scChartBar]`
 
-| Input               | Type                                                                                                                                                                  | Default    |
-| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
-| `key`               | `string` (required): the series' key in the rows                                                                                                                      | —          |
-| `stack`             | `string \| null`: bars of a stack on one another                                                                                                                      | `null`     |
-| `corners`           | `all` \| `end` \| `base` \| `none`: the rounded ones — the bar's end's two (a column's top), its base's two; how round is the style's (see [Corners](#corners))       | `all`      |
-| `colorBy`           | `key` \| `category`: its key's colour, or each bar its row's category's (`--color-<category>`, from the config) — the tooltip and the legend then name the categories | `key`      |
-| `fill`              | `string`: instead of its color, `url(#gradient)`                                                                                                                      | `''`       |
-| `barSize`           | `number`: its width in pixels, centered in its slot (Recharts' `barSize`)                                                                                             | the slot's |
-| `maxBarSize`        | `number`: its widest, in pixels (Recharts' `maxBarSize`)                                                                                                              | —          |
-| `isAnimationActive` | `boolean`: its bars grow from their base when it appears (Recharts' entrance)                                                                                         | `true`     |
-| `animationBegin`    | `number`: the wait before they grow, in ms                                                                                                                            | `0`        |
-| `animationDuration` | `number`: how long they grow, in ms                                                                                                                                   | `400`      |
-| `animationEasing`   | `ease`, `ease-in`, `ease-out`, `ease-in-out`, `linear`                                                                                                                | `ease`     |
-| `animationMatchBy`  | `'index'` (by position, stretched), `'append'` (the first with the first) or `(row, index) => key`: how its shapes before and after a change are paired (Recharts')   | `'append'` |
+| Input               | Type                                                                                                                                                                                          | Default    |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| `key`               | `string` (required): the series' key in the rows                                                                                                                                              | —          |
+| `stack`             | `string \| null`: bars of a stack on one another                                                                                                                                              | `null`     |
+| `corners`           | `all` \| `end` \| `base` \| `none`: the rounded ones — the bar's end's two (a column's top), its base's two; how round is the style's (see [Corners](#corners))                               | `all`      |
+| `colorBy`           | `key` \| `category`: its key's colour, or each bar its row's category's (`--color-<category>`, from the config) — the tooltip and the legend then name the categories                         | `key`      |
+| `fill`              | `string`: instead of its color, `url(#gradient)`                                                                                                                                              | `''`       |
+| `background`        | `boolean \| string`: a track behind each bar, its slot's whole range of values (Recharts' `background`) — `true` for the muted one, or your classes (`fill-secondary`); its corners the bars' | `false`    |
+| `barSize`           | `number`: its width in pixels, centered in its slot (Recharts' `barSize`)                                                                                                                     | the slot's |
+| `maxBarSize`        | `number`: its widest, in pixels (Recharts' `maxBarSize`)                                                                                                                                      | —          |
+| `isAnimationActive` | `boolean`: its bars grow from their base when it appears (Recharts' entrance)                                                                                                                 | `true`     |
+| `animationBegin`    | `number`: the wait before they grow, in ms                                                                                                                                                    | `0`        |
+| `animationDuration` | `number`: how long they grow, in ms                                                                                                                                                           | `400`      |
+| `animationEasing`   | `ease`, `ease-in`, `ease-out`, `ease-in-out`, `linear`                                                                                                                                        | `ease`     |
+| `animationMatchBy`  | `'index'` (by position, stretched), `'append'` (the first with the first) or `(row, index) => key`: how its shapes before and after a change are paired (Recharts')                           | `'append'` |
 
 With bars in the plot, each category is a band: the cursor fills it, and the areas and lines of the same plot sit in its middle.
 

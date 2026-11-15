@@ -3,6 +3,7 @@ import {
   DestroyRef,
   LOCALE_ID,
   ViewEncapsulation,
+  booleanAttribute,
   computed,
   inject,
   input,
@@ -29,7 +30,9 @@ const LINE = 16;
         [attr.x]="tick.x"
         [attr.y]="tick.y"
         [attr.text-anchor]="tick.anchor"
-        [attr.dominant-baseline]="vertical() ? 'middle' : 'hanging'"
+        [attr.dominant-baseline]="
+          vertical() ? 'middle' : above() ? 'auto' : 'hanging'
+        "
       >
         {{ tick.label }}
       </svg:text>
@@ -62,12 +65,21 @@ export class ScChartCategoryAxis {
     boolean | undefined,
     boolean | string | null | undefined
   >(undefined, { transform: optionalBoolean });
-  /** Beside the plot (`vertical` layout): its side (Recharts'). Unset: the chart's default. */
+  /**
+   * Its side (Recharts'): `top` or `bottom` (the default) along the plot;
+   * `left` or `right` beside it, laid out `vertical`. Unset: the chart's.
+   */
   readonly orientation = input<ScChartAxisSide | undefined>(undefined);
+  /** Hidden (Recharts' `hide`): no room, no labels — the categories still placed. */
+  readonly hide = input(false, { transform: booleanAttribute });
+
+  /** Along the top: its labels above the plot. */
+  protected readonly above = computed(() => this.orientation() === 'top');
 
   protected readonly vertical = this.state.vertical;
 
   protected readonly ticks = computed(() => {
+    if (this.hide()) return [];
     // A scatter's: the x values, at their ticks.
     if (this.state.xKey()) {
       const scale = this.state.xScale();
@@ -77,7 +89,7 @@ export class ScChartCategoryAxis {
         index,
         label: format(this.numbers.format(value), index),
         x: scale(value),
-        y: bottom + 8,
+        y: this.above() ? top - 8 : bottom + 8,
         anchor: 'middle',
       }));
     }
@@ -106,7 +118,13 @@ export class ScChartCategoryAxis {
               y: along,
               anchor: onRight ? 'start' : 'end',
             }
-          : { index, label, x: along, y: bottom + 8, anchor: 'middle' };
+          : {
+              index,
+              label,
+              x: along,
+              y: this.above() ? top - 8 : bottom + 8,
+              anchor: 'middle',
+            };
       })
       .filter((tick) => tick.index % every === 0);
   });
@@ -117,6 +135,7 @@ export class ScChartCategoryAxis {
 
   constructor() {
     this.state.categoryAxis.set({
+      hide: this.hide,
       width: this.width,
       reversed: this.reversed,
       orientation: this.orientation,
