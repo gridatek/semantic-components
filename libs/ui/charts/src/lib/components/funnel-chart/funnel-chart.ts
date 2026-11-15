@@ -9,7 +9,10 @@ import {
 import { cn } from 'cn';
 import {
   type ScChartAnimationEasing,
+  type ScChartAnimationMatchBy,
+  scChartInterpolate as between,
   scChartEntrance,
+  scChartTransition,
 } from '../chart/chart-animation';
 import {
   SC_CHART_SERIES,
@@ -66,13 +69,18 @@ export class ScChartFunnel implements ScChartSeriesLabels {
   readonly key = input.required<string>();
   /** The space between stages, in px. */
   readonly gap = input(2);
-  /** Its stages grow out of their centers when it appears (Recharts'); not with reduced motion. */
+  /**
+   * Its stages grow out of their centers when it appears, and move to their
+   * new places when its data changes (Recharts'); not with reduced motion.
+   */
   readonly isAnimationActive = input(true);
   /** The wait before they grow, in ms. */
   readonly animationBegin = input(400);
   /** How long they grow, in ms. */
   readonly animationDuration = input(1500);
   readonly animationEasing = input<ScChartAnimationEasing>('ease');
+  /** How its stages before and after a change are paired (Recharts'): the first with the first. */
+  readonly animationMatchBy = input<ScChartAnimationMatchBy>('append');
 
   /** Its entrance: 0 to 1 once, after its first render. */
   private readonly entrance = scChartEntrance({
@@ -86,26 +94,72 @@ export class ScChartFunnel implements ScChartSeriesLabels {
 
   protected readonly active = this.state.activeIndex;
 
-  protected readonly stages = computed<ScFunnelChartStage[]>(() => {
+  /** Its stages where they belong now: their center, half widths and half height. */
+  private readonly targets = computed(() => {
     const rows = this.state.data();
     const values = rows.map((row) => numberOf(row[this.key()]));
     const max = Math.max(1, ...values);
     const { left, top, right, bottom } = this.state.area();
-    const cx = (left + right) / 2;
     const width = right - left;
     const height = (bottom - top) / Math.max(1, rows.length);
     const gap = this.gap();
-    const categories = this.state.categories();
-    // Growing: each stage out of its own center, its widths and height.
-    const grown = this.grown();
+    const matchBy = this.animationMatchBy();
     return values.map((value, index) => {
-      const half = ((width * value) / max / 2) * grown;
       const next = index + 1 < values.length ? values[index + 1] : value * 0.6;
-      const narrow = ((width * next) / max / 2) * grown;
-      const cy = top + (index + 0.5) * height;
-      const reach = (height / 2 - gap / 2) * grown;
-      const y0 = cy - reach;
-      const y1 = cy + reach;
+      return {
+        index,
+        id: typeof matchBy === 'function' ? matchBy(rows[index], index) : null,
+        cx: (left + right) / 2,
+        cy: top + (index + 0.5) * height,
+        half: (width * value) / max / 2,
+        narrow: (width * next) / max / 2,
+        reach: height / 2 - gap / 2,
+      };
+    });
+  });
+
+  /**
+   * Its stages moving to their new places when they change (Recharts'):
+   * matched ones from where they were, new ones out of their center.
+   */
+  private readonly moving = scChartTransition({
+    items: this.targets,
+    active: this.isAnimationActive,
+    matchBy: this.animationMatchBy,
+    begin: this.animationBegin,
+    duration: this.animationDuration,
+    easing: this.animationEasing,
+    interpolate: (items, time) =>
+      items.flatMap((item) => {
+        if (item.status === 'removed') return [];
+        const { next } = item;
+        const prev =
+          item.status === 'matched'
+            ? item.prev
+            : { ...next, half: 0, narrow: 0, reach: 0 };
+        return [
+          {
+            ...next,
+            cx: between(prev.cx, next.cx, time),
+            cy: between(prev.cy, next.cy, time),
+            half: between(prev.half, next.half, time),
+            narrow: between(prev.narrow, next.narrow, time),
+            reach: between(prev.reach, next.reach, time),
+          },
+        ];
+      }),
+  });
+
+  protected readonly stages = computed<ScFunnelChartStage[]>(() => {
+    const categories = this.state.categories();
+    // Growing in: each stage out of its own center, its widths and height.
+    const grown = this.grown();
+    return this.moving.items().map((stage) => {
+      const { index, cx, cy } = stage;
+      const half = stage.half * grown;
+      const narrow = stage.narrow * grown;
+      const y0 = cy - stage.reach * grown;
+      const y1 = cy + stage.reach * grown;
       return {
         index,
         cx,
@@ -151,8 +205,8 @@ export class ScChartFunnel implements ScChartSeriesLabels {
     position: ScChartLabelPosition,
     offset: number,
   ): ScChartLabelPoint[] {
-    // Once they've grown (Recharts').
-    if (this.grown() < 1) return [];
+    // Once they've grown and are still (Recharts').
+    if (this.grown() < 1 || this.moving.animating()) return [];
     const rows = this.state.data();
     return this.stages().map((stage) => {
       const value = numberOf(rows[stage.index]?.[this.key()]);

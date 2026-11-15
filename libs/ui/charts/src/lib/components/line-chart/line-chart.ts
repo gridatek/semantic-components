@@ -11,7 +11,11 @@ import { cn } from 'cn';
 import { line } from 'd3-shape';
 import {
   type ScChartAnimationEasing,
+  type ScChartAnimationItem,
+  type ScChartAnimationMatchBy,
+  scChartInterpolate as between,
   scChartEntrance,
+  scChartTransition,
 } from '../chart/chart-animation';
 import { curveOf } from '../chart/chart-curve';
 import {
@@ -26,6 +30,40 @@ import type { ScChartCurve } from '../chart/chart-types';
 interface ScLineChartPoint {
   x: number;
   y: number;
+  /** Its row's key, to match it by (`animationMatchBy`). */
+  id?: string | number | null;
+}
+
+/**
+ * Recharts' line step: matched points move; new ones come in, gone ones go
+ * out, along the categories by the matched points' average shift.
+ */
+function stepPoints(vertical: boolean) {
+  const along = (p: ScLineChartPoint) => (vertical ? p.y : p.x);
+  const moved = (p: ScLineChartPoint, by: number) =>
+    vertical ? { ...p, y: p.y + by } : { ...p, x: p.x + by };
+  return (
+    items: readonly ScChartAnimationItem<ScLineChartPoint>[],
+    time: number,
+  ): ScLineChartPoint[] => {
+    const matched = items.filter((item) => item.status === 'matched');
+    const shift = matched.length
+      ? matched.reduce(
+          (sum, item) => sum + along(item.next) - along(item.prev),
+          0,
+        ) / matched.length
+      : 0;
+    return items.map((item) => {
+      if (item.status === 'matched')
+        return {
+          ...item.next,
+          x: between(item.prev.x, item.next.x, time),
+          y: between(item.prev.y, item.next.y, time),
+        };
+      if (item.status === 'added') return moved(item.next, -shift * (1 - time));
+      return moved(item.prev, shift * time);
+    });
+  };
 }
 
 /** A series as a line through its values (`key`), in `--color-<key>`. */
@@ -82,13 +120,18 @@ export class ScChartLine implements ScChartSeriesLabels {
   readonly dots = input(false, { transform: booleanAttribute });
   /** A dot where the pointer is. */
   readonly activeDot = input(true, { transform: booleanAttribute });
-  /** Its line draws itself when it appears (Recharts'); not with reduced motion. */
+  /**
+   * Its line draws itself when it appears, and moves to its new place when
+   * its data changes (Recharts'); not with reduced motion.
+   */
   readonly isAnimationActive = input(true);
-  /** The wait before it draws, in ms. */
+  /** The wait before it draws or moves, in ms. */
   readonly animationBegin = input(0);
-  /** How long it draws, in ms. */
+  /** How long it draws or moves, in ms. */
   readonly animationDuration = input(1500);
   readonly animationEasing = input<ScChartAnimationEasing>('ease');
+  /** How its points before and after a change are paired (Recharts'): by position, stretched. */
+  readonly animationMatchBy = input<ScChartAnimationMatchBy>('index');
 
   /** Its entrance: 0 to 1 once, after its first render. */
   private readonly entrance = scChartEntrance({
@@ -103,11 +146,30 @@ export class ScChartLine implements ScChartSeriesLabels {
 
   protected readonly color = computed(() => `var(--color-${this.key()})`);
 
-  protected readonly points = computed<ScLineChartPoint[]>(() =>
-    (this.state.extents().get(this.key()) ?? []).map(([, value], i) =>
-      this.state.at(i, value),
-    ),
-  );
+  /** Its points where they belong now. */
+  private readonly targets = computed<ScLineChartPoint[]>(() => {
+    const rows = this.state.data();
+    const matchBy = this.animationMatchBy();
+    return (this.state.extents().get(this.key()) ?? []).map(([, value], i) => ({
+      ...this.state.at(i, value),
+      id: typeof matchBy === 'function' ? matchBy(rows[i], i) : null,
+    }));
+  });
+
+  /** Its points moving to their new places when they change. */
+  private readonly moving = scChartTransition({
+    items: this.targets,
+    active: this.isAnimationActive,
+    matchBy: this.animationMatchBy,
+    begin: this.animationBegin,
+    duration: this.animationDuration,
+    easing: this.animationEasing,
+    interpolate: (items, time) =>
+      stepPoints(this.state.vertical())(items, time),
+  });
+
+  /** What is drawn: its points, moving or still. */
+  protected readonly points = this.moving.items;
 
   protected readonly path = computed(
     () =>
@@ -120,7 +182,7 @@ export class ScChartLine implements ScChartSeriesLabels {
 
   protected readonly activePoint = computed(() => {
     const index = this.state.activeIndex();
-    return this.activeDot() && index !== null ? this.points()[index] : null;
+    return this.activeDot() && index !== null ? this.targets()[index] : null;
   });
 
   protected readonly class = computed(() => cn(this.classInput()));
@@ -138,11 +200,11 @@ export class ScChartLine implements ScChartSeriesLabels {
     position: ScChartLabelPosition,
     offset: number,
   ): ScChartLabelPoint[] {
-    // Once the line is drawn, as its dots (Recharts').
-    if (this.drawn() < 1) return [];
+    // Once the line is drawn and still, as its dots (Recharts').
+    if (this.drawn() < 1 || this.moving.animating()) return [];
     const rows = this.state.data();
     const vertical = this.state.vertical();
-    return this.points().map((p, index) => {
+    return this.targets().map((p, index) => {
       const value = numberOf(rows[index]?.[this.key()]);
       if (position === 'inside')
         return { index, value, ...p, anchor: 'middle', baseline: 'middle' };

@@ -10,7 +10,11 @@ import { cn } from 'cn';
 import { arc, pie } from 'd3-shape';
 import {
   type ScChartAnimationEasing,
+  type ScChartAnimationItem,
+  type ScChartAnimationMatchBy,
+  scChartInterpolate as between,
   scChartEntrance,
+  scChartTransition,
 } from '../chart/chart-animation';
 import {
   SC_CHART_SERIES,
@@ -29,6 +33,38 @@ interface ScPieChartSlice {
   middle: number;
   inner: number;
   outer: number;
+}
+
+/** A slice's angles, before it's drawn. */
+interface ScPieChartAngles {
+  index: number;
+  /** Its row's key, to match it by (`animationMatchBy`). */
+  id: string | number | null;
+  start: number;
+  end: number;
+  pad: number;
+}
+
+/**
+ * Recharts' pie step: the slices one after another from the first's start,
+ * each its angle on the way from its old one (a new one's from 0); gone ones
+ * leave.
+ */
+function stepSlices(
+  items: readonly ScChartAnimationItem<ScPieChartAngles>[],
+  time: number,
+): ScPieChartAngles[] {
+  const first = items.find((item) => item.status !== 'removed');
+  let angle = first ? first.next.start : 0;
+  return items.flatMap((item) => {
+    if (item.status === 'removed') return [];
+    const span = item.next.end - item.next.start;
+    const from =
+      item.status === 'matched' ? item.prev.end - item.prev.start : 0;
+    const start = angle;
+    angle += between(from, span, time);
+    return [{ ...item.next, start, end: angle }];
+  });
 }
 
 /** A point at an angle (0 at the top, clockwise) and a radius, around (0, 0). */
@@ -82,13 +118,19 @@ export class ScChartPie implements ScChartSeriesLabels {
   readonly strokeWidth = input(2);
   /** How far the slice pointed at grows, in px. */
   readonly activeOffset = input(6);
-  /** It sweeps round from its start angle when it appears (Recharts'); not with reduced motion. */
+  /**
+   * It sweeps round from its start angle when it appears, and its slices
+   * move to their new angles when its data changes (Recharts'); not with
+   * reduced motion.
+   */
   readonly isAnimationActive = input(true);
   /** The wait before it sweeps, in ms. */
   readonly animationBegin = input(400);
-  /** How long it sweeps, in ms. */
+  /** How long it sweeps or changes, in ms. */
   readonly animationDuration = input(1500);
   readonly animationEasing = input<ScChartAnimationEasing>('ease');
+  /** How its slices before and after a change are paired (Recharts'): the first with the first. */
+  readonly animationMatchBy = input<ScChartAnimationMatchBy>('append');
 
   /** Its entrance: 0 to 1 once, after its first render. */
   private readonly entrance = scChartEntrance({
@@ -100,26 +142,58 @@ export class ScChartPie implements ScChartSeriesLabels {
     this.isAnimationActive() ? this.entrance() : 1,
   );
 
+  /** Its slices' angles where they belong now. */
+  private readonly targets = computed<ScPieChartAngles[]>(() => {
+    const rows = this.state.data();
+    const key = this.key();
+    const matchBy = this.animationMatchBy();
+    const [start, end] = this.state.angles();
+    return pie<number>()
+      .value((index) => numberOf(rows[index][key]))
+      .sort(null)
+      .startAngle(start)
+      .endAngle(end)
+      .padAngle((this.padAngle() * Math.PI) / 180)(rows.map((_, i) => i))
+      .map((a) => ({
+        index: a.data,
+        id:
+          typeof matchBy === 'function' ? matchBy(rows[a.data], a.data) : null,
+        start: a.startAngle,
+        end: a.endAngle,
+        pad: a.padAngle,
+      }));
+  });
+
+  /** Its slices moving to their new angles when they change. */
+  private readonly moving = scChartTransition({
+    items: this.targets,
+    active: this.isAnimationActive,
+    matchBy: this.animationMatchBy,
+    begin: this.animationBegin,
+    duration: this.animationDuration,
+    easing: this.animationEasing,
+    interpolate: stepSlices,
+  });
+
   protected readonly transform = computed(() => {
     const { cx, cy } = this.state.circle();
     return `translate(${cx},${cy})`;
   });
 
   protected readonly slices = computed<ScPieChartSlice[]>(() => {
-    const rows = this.state.data();
-    const key = this.key();
     const categories = this.state.categories();
-    const [start, full] = this.state.angles();
-    // Sweeping: the slices share the arc drawn so far.
-    const end = start + (full - start) * this.swept();
+    const [origin] = this.state.angles();
+    // Sweeping in: the slices share the arc drawn so far.
+    const swept = this.swept();
+    const at = (angle: number) => origin + (angle - origin) * swept;
     const { radius } = this.state.circle();
     const active = this.state.activeIndex();
-    const arcs = pie<number>()
-      .value((index) => numberOf(rows[index][key]))
-      .sort(null)
-      .startAngle(start)
-      .endAngle(end)
-      .padAngle((this.padAngle() * Math.PI) / 180)(rows.map((_, i) => i));
+    const arcs = this.moving.items().map((slice) => ({
+      data: slice.index,
+      startAngle: at(slice.start),
+      endAngle: at(slice.end),
+      padAngle: slice.pad,
+    }));
     return arcs.map((a) => ({
       index: a.data,
       middle: (a.startAngle + a.endAngle) / 2,
@@ -171,8 +245,8 @@ export class ScChartPie implements ScChartSeriesLabels {
     position: ScChartLabelPosition,
     offset: number,
   ): ScChartLabelPoint[] {
-    // Once it's whole (Recharts').
-    if (this.swept() < 1) return [];
+    // Once it's whole and still (Recharts').
+    if (this.swept() < 1 || this.moving.animating()) return [];
     const rows = this.state.data();
     return this.slices().map((slice) => {
       const value = numberOf(rows[slice.index]?.[this.key()]);

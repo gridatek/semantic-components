@@ -12,7 +12,11 @@ import { cn } from 'cn';
 import { area, line } from 'd3-shape';
 import {
   type ScChartAnimationEasing,
+  type ScChartAnimationItem,
+  type ScChartAnimationMatchBy,
+  scChartInterpolate as between,
   scChartEntrance,
+  scChartTransition,
 } from '../chart/chart-animation';
 import { curveOf } from '../chart/chart-curve';
 import {
@@ -31,6 +35,29 @@ interface ScAreaChartPoint {
   /** Its base: 0, or the series under it. */
   bx: number;
   by: number;
+  /** Its row's key, to match it by (`animationMatchBy`). */
+  id?: string | number | null;
+}
+
+/** Recharts' area step: matched points move, with their base; new ones are there at once; gone ones go. */
+function stepArea(
+  items: readonly ScChartAnimationItem<ScAreaChartPoint>[],
+  time: number,
+): ScAreaChartPoint[] {
+  return items.flatMap((item) => {
+    if (item.status === 'removed') return [];
+    if (item.status === 'added') return [item.next];
+    const { prev, next } = item;
+    return [
+      {
+        ...next,
+        x: between(prev.x, next.x, time),
+        y: between(prev.y, next.y, time),
+        bx: between(prev.bx, next.bx, time),
+        by: between(prev.by, next.by, time),
+      },
+    ];
+  });
 }
 
 /**
@@ -98,13 +125,18 @@ export class ScChartArea implements ScChartSeriesLabels {
   readonly fillOpacity = input(0.4);
   /** A dot where the pointer is. */
   readonly activeDot = input(true, { transform: booleanAttribute });
-  /** It unveils itself from its first category when it appears (Recharts'); not with reduced motion. */
+  /**
+   * It unveils itself from its first category when it appears, and moves to
+   * its new place when its data changes (Recharts'); not with reduced motion.
+   */
   readonly isAnimationActive = input(true);
-  /** The wait before it unveils, in ms. */
+  /** The wait before it unveils or moves, in ms. */
   readonly animationBegin = input(0);
-  /** How long it unveils, in ms. */
+  /** How long it unveils or moves, in ms. */
   readonly animationDuration = input(1500);
   readonly animationEasing = input<ScChartAnimationEasing>('ease');
+  /** How its points before and after a change are paired (Recharts'): by position, stretched. */
+  readonly animationMatchBy = input<ScChartAnimationMatchBy>('index');
 
   /** Its entrance: 0 to 1 once, after its first render. */
   private readonly entrance = scChartEntrance({
@@ -119,13 +151,38 @@ export class ScChartArea implements ScChartSeriesLabels {
 
   protected readonly color = computed(() => `var(--color-${this.key()})`);
 
-  private readonly points = computed<ScAreaChartPoint[]>(() =>
-    (this.state.extents().get(this.key()) ?? []).map(([low, high], i) => {
-      const value = this.state.at(i, high);
-      const below = this.state.at(i, low);
-      return { x: value.x, y: value.y, bx: below.x, by: below.y };
-    }),
-  );
+  /** Its points where they belong now. */
+  private readonly targets = computed<ScAreaChartPoint[]>(() => {
+    const rows = this.state.data();
+    const matchBy = this.animationMatchBy();
+    return (this.state.extents().get(this.key()) ?? []).map(
+      ([low, high], i) => {
+        const value = this.state.at(i, high);
+        const below = this.state.at(i, low);
+        return {
+          x: value.x,
+          y: value.y,
+          bx: below.x,
+          by: below.y,
+          id: typeof matchBy === 'function' ? matchBy(rows[i], i) : null,
+        };
+      },
+    );
+  });
+
+  /** Its points moving to their new places when they change. */
+  private readonly moving = scChartTransition({
+    items: this.targets,
+    active: this.isAnimationActive,
+    matchBy: this.animationMatchBy,
+    begin: this.animationBegin,
+    duration: this.animationDuration,
+    easing: this.animationEasing,
+    interpolate: stepArea,
+  });
+
+  /** What is drawn: its points, moving or still. */
+  private readonly points = this.moving.items;
 
   protected readonly areaPath = computed(() => {
     const vertical = this.state.vertical();
@@ -176,7 +233,7 @@ export class ScChartArea implements ScChartSeriesLabels {
 
   protected readonly activePoint = computed(() => {
     const index = this.state.activeIndex();
-    return this.activeDot() && index !== null ? this.points()[index] : null;
+    return this.activeDot() && index !== null ? this.targets()[index] : null;
   });
 
   protected readonly class = computed(() => cn(this.classInput()));
@@ -194,11 +251,11 @@ export class ScChartArea implements ScChartSeriesLabels {
     position: ScChartLabelPosition,
     offset: number,
   ): ScChartLabelPoint[] {
-    // Once it's whole (Recharts').
-    if (this.shown() < 1) return [];
+    // Once it's whole and still (Recharts').
+    if (this.shown() < 1 || this.moving.animating()) return [];
     const rows = this.state.data();
     const vertical = this.state.vertical();
-    return this.points().map((p, index) => {
+    return this.targets().map((p, index) => {
       const value = numberOf(rows[index]?.[this.key()]);
       if (position === 'inside')
         return {

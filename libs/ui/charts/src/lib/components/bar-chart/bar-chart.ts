@@ -9,7 +9,11 @@ import {
 import { cn } from 'cn';
 import {
   type ScChartAnimationEasing,
+  type ScChartAnimationItem,
+  type ScChartAnimationMatchBy,
+  scChartInterpolate as between,
   scChartEntrance,
+  scChartTransition,
 } from '../chart/chart-animation';
 import {
   SC_CHART_SERIES,
@@ -40,6 +44,47 @@ interface ScBarChartBar {
   height: number;
   /** Its value is at or above its base. */
   up: boolean;
+}
+
+/** A bar before it's boxed: where it runs, across and along the values. */
+interface ScBarChartTarget {
+  index: number;
+  /** Its row's key, to match it by (`animationMatchBy`). */
+  id: string | number | null;
+  color: string;
+  up: boolean;
+  /** Across: where it starts, and its thickness. */
+  start: number;
+  thickness: number;
+  /** Along the values: its base and its end. */
+  base: number;
+  end: number;
+}
+
+/** Recharts' bar step: matched bars move, new ones grow from their base, gone ones shrink to it. */
+function stepBars(
+  items: readonly ScChartAnimationItem<ScBarChartTarget>[],
+  time: number,
+): ScBarChartTarget[] {
+  return items.map((item) => {
+    if (item.status === 'added')
+      return {
+        ...item.next,
+        end: between(item.next.base, item.next.end, time),
+      };
+    if (item.status === 'removed')
+      return {
+        ...item.prev,
+        end: between(item.prev.end, item.prev.base, time),
+      };
+    return {
+      ...item.next,
+      start: between(item.prev.start, item.next.start, time),
+      thickness: between(item.prev.thickness, item.next.thickness, time),
+      base: between(item.prev.base, item.next.base, time),
+      end: between(item.prev.end, item.next.end, time),
+    };
+  });
 }
 
 /** The rect drawn in a bar's box: the box, longer past the side left square. */
@@ -123,13 +168,18 @@ export class ScChartBar implements ScChartSeriesLabels {
   readonly barSize = input<number | undefined>(undefined);
   /** Its widest, in pixels (Recharts' `maxBarSize`): a narrower slot keeps its width. */
   readonly maxBarSize = input<number | undefined>(undefined);
-  /** Its bars grow from their base when it appears (Recharts'); not with reduced motion. */
+  /**
+   * Its bars grow from their base when it appears, and move to their new
+   * places when its data changes (Recharts'); not with reduced motion.
+   */
   readonly isAnimationActive = input(true);
-  /** The wait before they grow, in ms. */
+  /** The wait before they grow or move, in ms. */
   readonly animationBegin = input(0);
-  /** How long they grow, in ms. */
+  /** How long they grow or move, in ms. */
   readonly animationDuration = input(400);
   readonly animationEasing = input<ScChartAnimationEasing>('ease');
+  /** How its bars before and after a change are paired (Recharts'): the first with the first. */
+  readonly animationMatchBy = input<ScChartAnimationMatchBy>('append');
 
   /** Its entrance: 0 to 1 once, after its first render. */
   private readonly entrance = scChartEntrance({
@@ -140,10 +190,10 @@ export class ScChartBar implements ScChartSeriesLabels {
 
   protected readonly color = computed(() => `var(--color-${this.key()})`);
 
-  protected readonly bars = computed<ScBarChartBar[]>(() => {
+  /** Its bars where they belong now: no entrance, no change under way. */
+  private readonly targets = computed<ScBarChartTarget[]>(() => {
     const categories = this.state.categoryScale();
     const values = this.state.valueScale();
-    const vertical = this.state.vertical();
     const slots = this.state.barSlots();
     const slot = slots.bandwidth();
     const thickness = Math.min(
@@ -154,42 +204,66 @@ export class ScChartBar implements ScChartSeriesLabels {
     const offset =
       (slots(this.stack() ?? `\u0000${this.key()}`) ?? 0) +
       (slot - thickness) / 2;
-    const corners = this.corners();
-    // Past the square side by half its thickness: more than any corner can be
-    // (a rect's rx is at most half its width).
-    const past = thickness / 2;
     const names = this.state.categories();
+    const rows = this.state.data();
     const byCategory = this.colorBy() === 'category';
+    const matchBy = this.animationMatchBy();
+    return (this.state.extents().get(this.key()) ?? []).map(
+      ([low, high], index) => ({
+        index,
+        id: typeof matchBy === 'function' ? matchBy(rows[index], index) : null,
+        color: byCategory ? `var(--color-${names[index]})` : this.color(),
+        up: high >= low,
+        start: (categories(index) ?? 0) + offset,
+        thickness,
+        base: values(low),
+        end: values(high),
+      }),
+    );
+  });
+
+  /** Its bars moving to their new places when they change. */
+  private readonly moving = scChartTransition({
+    items: this.targets,
+    active: this.isAnimationActive,
+    matchBy: this.animationMatchBy,
+    begin: this.animationBegin,
+    duration: this.animationDuration,
+    easing: this.animationEasing,
+    interpolate: stepBars,
+  });
+
+  protected readonly bars = computed<ScBarChartBar[]>(() => {
+    const vertical = this.state.vertical();
+    const corners = this.corners();
     // Growing from its base: its end on the way to its value.
     const grown = this.isAnimationActive() ? this.entrance() : 1;
-    return (this.state.extents().get(this.key()) ?? []).map(
-      ([low, high], index) => {
-        const a = values(low);
-        const b = values(low + (high - low) * grown);
-        const up = high >= low;
-        const start = (categories(index) ?? 0) + offset;
-        const box = vertical
-          ? {
-              x: Math.min(a, b),
-              y: start,
-              width: Math.abs(a - b),
-              height: thickness,
-            }
-          : {
-              x: start,
-              y: Math.min(a, b),
-              width: thickness,
-              height: Math.abs(a - b),
-            };
-        return {
-          index,
-          up,
-          color: byCategory ? `var(--color-${names[index]})` : this.color(),
-          ...box,
-          shape: shapeOf(box, corners, vertical, up, past),
-        };
-      },
-    );
+    return this.moving.items().map((bar) => {
+      const a = bar.base;
+      const b = between(bar.base, bar.end, grown);
+      const box = vertical
+        ? {
+            x: Math.min(a, b),
+            y: bar.start,
+            width: Math.abs(a - b),
+            height: bar.thickness,
+          }
+        : {
+            x: bar.start,
+            y: Math.min(a, b),
+            width: bar.thickness,
+            height: Math.abs(a - b),
+          };
+      // Past the square side by half its thickness: more than any corner can
+      // be (a rect's rx is at most half its width).
+      return {
+        index: bar.index,
+        up: bar.up,
+        color: bar.color,
+        ...box,
+        shape: shapeOf(box, corners, vertical, bar.up, bar.thickness / 2),
+      };
+    });
   });
 
   protected readonly class = computed(() => cn(this.classInput()));
@@ -208,6 +282,9 @@ export class ScChartBar implements ScChartSeriesLabels {
     position: ScChartLabelPosition,
     offset: number,
   ): ScChartLabelPoint[] {
+    // Once its bars are still (Recharts').
+    const still = !this.isAnimationActive() || this.entrance() === 1;
+    if (!still || this.moving.animating()) return [];
     const rows = this.state.data();
     const vertical = this.state.vertical();
     return this.bars().map((bar) => {

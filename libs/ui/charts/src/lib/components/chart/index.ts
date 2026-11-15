@@ -1,9 +1,17 @@
 export { ScChart } from './chart';
 export {
   type ScChartAnimationEasing,
+  type ScChartAnimationItem,
+  type ScChartAnimationMatchBy,
   type ScChartEntranceOptions,
+  type ScChartMatchable,
+  type ScChartTransition,
+  type ScChartTransitionOptions,
   scChartEasing,
   scChartEntrance,
+  scChartInterpolate,
+  scChartMatchItems,
+  scChartTransition,
 } from './chart-animation';
 export { ScChartCategoryAxis } from './chart-category-axis';
 export { ScChartCenter } from './chart-center';

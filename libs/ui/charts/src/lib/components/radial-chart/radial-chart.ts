@@ -11,7 +11,10 @@ import { cn } from 'cn';
 import { arc } from 'd3-shape';
 import {
   type ScChartAnimationEasing,
+  type ScChartAnimationMatchBy,
+  scChartInterpolate as between,
   scChartEntrance,
+  scChartTransition,
 } from '../chart/chart-animation';
 import {
   SC_CHART_SERIES,
@@ -91,13 +94,18 @@ export class ScChartRadialBar implements ScChartSeriesLabels {
   readonly cornerRadius = input(0);
   /** Each ring's full length behind it. */
   readonly track = input(false, { transform: booleanAttribute });
-  /** Its arcs grow along their rings when it appears (Recharts'); not with reduced motion. */
+  /**
+   * Its arcs grow along their rings when it appears, and move to their new
+   * angles when its data changes (Recharts'); not with reduced motion.
+   */
   readonly isAnimationActive = input(true);
   /** The wait before they grow, in ms. */
   readonly animationBegin = input(0);
   /** How long they grow, in ms. */
   readonly animationDuration = input(1500);
   readonly animationEasing = input<ScChartAnimationEasing>('ease');
+  /** How its arcs before and after a change are paired (Recharts'): the first with the first. */
+  readonly animationMatchBy = input<ScChartAnimationMatchBy>('append');
 
   /** Its entrance: 0 to 1 once, after its first render. */
   private readonly entrance = scChartEntrance({
@@ -114,27 +122,68 @@ export class ScChartRadialBar implements ScChartSeriesLabels {
     return `translate(${cx},${cy})`;
   });
 
-  protected readonly rings = computed<ScRadialChartRing[]>(() => {
-    const extent = this.state.extents().get(this.key()) ?? [];
+  /** Its arcs' angles where they belong now. */
+  private readonly targets = computed(() => {
     const share = this.state.share();
+    const [start, end] = this.state.angles();
+    const at = (value: number) => start + (end - start) * share(value);
+    const rows = this.state.data();
+    const matchBy = this.animationMatchBy();
+    return (this.state.extents().get(this.key()) ?? []).map(
+      ([low, high], index) => ({
+        index,
+        id: typeof matchBy === 'function' ? matchBy(rows[index], index) : null,
+        from: at(low),
+        to: at(high),
+      }),
+    );
+  });
+
+  /**
+   * Its arcs moving to their new angles when they change (Recharts'): matched
+   * ones from where they were, new ones growing from their start.
+   */
+  private readonly moving = scChartTransition({
+    items: this.targets,
+    active: this.isAnimationActive,
+    matchBy: this.animationMatchBy,
+    begin: this.animationBegin,
+    duration: this.animationDuration,
+    easing: this.animationEasing,
+    interpolate: (items, time) =>
+      items.flatMap((item) => {
+        if (item.status === 'removed') return [];
+        const { next } = item;
+        return item.status === 'matched'
+          ? [
+              {
+                ...next,
+                from: between(item.prev.from, next.from, time),
+                to: between(item.prev.to, next.to, time),
+              },
+            ]
+          : [{ ...next, to: between(next.from, next.to, time) }];
+      }),
+  });
+
+  protected readonly rings = computed<ScRadialChartRing[]>(() => {
+    const arcs = this.moving.items();
     const [start, end] = this.state.angles();
     const { radius } = this.state.circle();
     const inner = radius * this.innerRadius();
     const outer = radius * this.outerRadius();
-    const step = (outer - inner) / Math.max(1, extent.length);
-    const gap = extent.length > 1 ? step * 0.2 : 0;
+    const step = (outer - inner) / Math.max(1, arcs.length);
+    const gap = arcs.length > 1 ? step * 0.2 : 0;
     const categories = this.state.categories();
     const grown = this.grown();
-    return extent.map(([low, high], index) => {
+    return arcs.map(({ index, from, to: value }) => {
       const shape = arc()
         .innerRadius(inner + index * step + gap / 2)
         .outerRadius(inner + (index + 1) * step - gap / 2)
         .cornerRadius(this.cornerRadius());
-      const at = (value: number) => start + (end - start) * share(value);
       const angles = { innerRadius: 0, outerRadius: 0, padAngle: 0 };
-      // Growing: its end on the way from its start to its value.
-      const from = at(low);
-      const to = from + (at(high) - from) * grown;
+      // Growing in: its end on the way from its start to its value.
+      const to = between(from, value, grown);
       return {
         index,
         from,
@@ -175,8 +224,8 @@ export class ScChartRadialBar implements ScChartSeriesLabels {
     position: ScChartLabelPosition,
     offset: number,
   ): ScChartLabelPoint[] {
-    // Once they've grown (Recharts').
-    if (this.grown() < 1) return [];
+    // Once they've grown and are still (Recharts').
+    if (this.grown() < 1 || this.moving.animating()) return [];
     const rows = this.state.data();
     return this.rings().map((ring) => {
       const value = numberOf(rows[ring.index]?.[this.key()]);
