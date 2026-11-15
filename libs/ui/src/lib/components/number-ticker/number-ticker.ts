@@ -145,7 +145,12 @@ export class ScNumberTicker {
       if (!this.started()) return;
       untracked(() => this.moveTo(value));
     });
+    // In the browser only (the server's window has no animation frames):
+    // its frames stopped with it.
     afterNextRender(() => {
+      destroyRef.onDestroy(() =>
+        this.document.defaultView?.cancelAnimationFrame?.(this.frame),
+      );
       if (this.start() === 'now') {
         this.started.set(true);
         return;
@@ -159,20 +164,22 @@ export class ScNumberTicker {
       seen.observe(this.host);
       destroyRef.onDestroy(() => seen.disconnect());
     });
-    destroyRef.onDestroy(() =>
-      this.document.defaultView?.cancelAnimationFrame(this.frame),
-    );
   }
 
   private moveTo(value: number): void {
     const view = this.document.defaultView;
-    view?.cancelAnimationFrame(this.frame);
+    view?.cancelAnimationFrame?.(this.frame);
     const from = this.shown() ?? this.from();
     const still = view?.matchMedia?.(
       '(prefers-reduced-motion: reduce)',
     )?.matches;
     // Rolling, the digits move by themselves (CSS); still, at once.
-    if (!view || this.effect() === 'roll' || still || from === value) {
+    if (
+      !view?.requestAnimationFrame ||
+      this.effect() === 'roll' ||
+      still ||
+      from === value
+    ) {
       this.shown.set(value);
       return;
     }
