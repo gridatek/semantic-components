@@ -159,7 +159,8 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
 export default class UiPage {
   /** styles.css: its first lines, or all of it. */
   protected readonly stylesExpanded = signal(false);
-  readonly stylesCode = `@import url('@angular/cdk/overlay-prebuilt.css');
+  readonly stylesCode = `@import url('@angular/cdk/a11y-prebuilt.css');
+@import url('@angular/cdk/overlay-prebuilt.css');
 @import 'tailwindcss';
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';

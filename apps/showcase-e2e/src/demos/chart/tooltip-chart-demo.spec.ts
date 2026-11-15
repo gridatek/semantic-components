@@ -20,6 +20,18 @@ test('Tooltip: its indicator, as chosen; a legend', async ({ page }) => {
   expect(errors).toEqual([]);
 });
 
+test('Tooltip: announced, never shown twice — the live region hidden', async ({
+  page,
+}) => {
+  await page.goto('/demos/chart/tooltip-chart-demo');
+  await page.locator('[data-slot=chart-plot]').focus();
+  // The CDK's announcer writes the tooltip there: for screen readers only.
+  const region = page.locator('.cdk-live-announcer-element');
+  await expect(region).toContainText('January');
+  await expect(region).toHaveCSS('position', 'absolute');
+  await expect(region).toHaveCSS('width', '1px');
+});
+
 test('Tooltip: one indicator always chosen — the pressed one stays pressed', async ({
   page,
 }) => {
