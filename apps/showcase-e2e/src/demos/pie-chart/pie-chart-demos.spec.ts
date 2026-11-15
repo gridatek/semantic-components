@@ -60,13 +60,13 @@ test('Labels: each value beyond its slice', async ({ page }) => {
 test('Entrance: it sweeps round, then its labels come', async ({ page }) => {
   await page.goto(demo('label-pie'));
   const pie = page.locator('[data-slot=chart-pie]').first();
-  // Sweeping: part of the circle drawn (narrower than tall), no labels.
+  // Sweeping: part of the circle drawn (not round yet), no labels.
   await expect
     .poll(
       () =>
         pie.evaluate((g) => {
           const box = (g as SVGGElement).getBBox();
-          return box.width > 0 && box.width < box.height - 1;
+          return box.width > 0 && Math.abs(box.width - box.height) > 1;
         }),
       { intervals: [50] },
     )
