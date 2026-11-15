@@ -4,11 +4,13 @@ import { ComponentBadges } from '../../../components/component-badges/component-
 import { EntryInstall } from '../../../components/entry-install/entry-install';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { LabelSunburstChartDemoContainer } from './demos/label-sunburst-chart-demo-container';
+import { RtlSunburstChartDemoContainer } from './demos/rtl-sunburst-chart-demo-container';
 import { SunburstChartDemoContainer } from './demos/sunburst-chart-demo-container';
 
 @Component({
   selector: 'app-sunburst-chart-page',
   imports: [
+    RtlSunburstChartDemoContainer,
     SunburstChartDemoContainer,
     LabelSunburstChartDemoContainer,
     TocHeading,
@@ -43,6 +45,7 @@ import { SunburstChartDemoContainer } from './demos/sunburst-chart-demo-containe
         <h2 scHeading appToc>Examples</h2>
         <app-sunburst-chart-demo-container />
         <app-label-sunburst-chart-demo-container />
+        <app-rtl-sunburst-chart-demo-container />
       </section>
     </div>
   `,

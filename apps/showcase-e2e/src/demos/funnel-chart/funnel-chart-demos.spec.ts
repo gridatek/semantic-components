@@ -73,3 +73,18 @@ test.describe('keyboard', () => {
     await expect.poll(at).not.toBe(first);
   });
 });
+
+test('RTL: in Arabic, not mirrored — → still to the next', async ({ page }) => {
+  await page.goto(demo('rtl-funnel'));
+  await expect(page.locator('[data-slot=chart]')).toHaveAttribute('dir', 'rtl');
+  // Named in Arabic.
+  await expect(page.locator('[data-slot=chart-plot]')).toHaveAttribute(
+    'aria-label',
+    /[\u0600-\u06FF]/,
+  );
+  // A shape reads the same both ways: the arrows as drawn.
+  await page.locator('[data-slot=chart-plot]').focus();
+  await expect(tooltip(page)).toContainText('زيارة');
+  await press(page, 'ArrowRight');
+  await expect(tooltip(page)).toContainText('تسجيل');
+});

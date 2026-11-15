@@ -224,9 +224,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
           <a scItem variant="outline" class="items-start" routerLink="/charts">
             <div scItemMedia variant="icon"><svg siChartColumnIcon></svg></div>
             <div scItemBody>
-              <div scItemTitle>
-                Charts <span scBadge variant="secondary">Coming soon</span>
-              </div>
+              <div scItemTitle>Charts</div>
               <p scItemDescription class="line-clamp-none">
                 Area, bar, line, pie, radar and radial charts to copy.
               </p>

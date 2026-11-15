@@ -5,10 +5,12 @@ import { EntryInstall } from '../../../components/entry-install/entry-install';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { FunnelChartDemoContainer } from './demos/funnel-chart-demo-container';
 import { LabelFunnelChartDemoContainer } from './demos/label-funnel-chart-demo-container';
+import { RtlFunnelChartDemoContainer } from './demos/rtl-funnel-chart-demo-container';
 
 @Component({
   selector: 'app-funnel-chart-page',
   imports: [
+    RtlFunnelChartDemoContainer,
     FunnelChartDemoContainer,
     LabelFunnelChartDemoContainer,
     TocHeading,
@@ -43,6 +45,7 @@ import { LabelFunnelChartDemoContainer } from './demos/label-funnel-chart-demo-c
         <h2 scHeading appToc>Examples</h2>
         <app-funnel-chart-demo-container />
         <app-label-funnel-chart-demo-container />
+        <app-rtl-funnel-chart-demo-container />
       </section>
     </div>
   `,

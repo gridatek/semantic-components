@@ -6,11 +6,13 @@ import { TocHeading } from '../../../components/toc/toc-heading';
 import { GridRadialChartDemoContainer } from './demos/grid-radial-chart-demo-container';
 import { LabelRadialChartDemoContainer } from './demos/label-radial-chart-demo-container';
 import { RadialChartDemoContainer } from './demos/radial-chart-demo-container';
+import { RtlRadialChartDemoContainer } from './demos/rtl-radial-chart-demo-container';
 import { StackedRadialChartDemoContainer } from './demos/stacked-radial-chart-demo-container';
 
 @Component({
   selector: 'app-radial-chart-page',
   imports: [
+    RtlRadialChartDemoContainer,
     LabelRadialChartDemoContainer,
     RadialChartDemoContainer,
     StackedRadialChartDemoContainer,
@@ -49,6 +51,7 @@ import { StackedRadialChartDemoContainer } from './demos/stacked-radial-chart-de
         <app-stacked-radial-chart-demo-container />
         <app-grid-radial-chart-demo-container />
         <app-label-radial-chart-demo-container />
+        <app-rtl-radial-chart-demo-container />
       </section>
     </div>
   `,

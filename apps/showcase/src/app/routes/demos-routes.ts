@@ -3989,6 +3989,13 @@ export const demosRoutes: Route[] = [
             (m) => m.LabelPieChartDemo,
           ),
       },
+      {
+        path: 'rtl-pie-chart-demo',
+        loadComponent: () =>
+          import('../pages/docs/pie-chart/demos/rtl-pie-chart-demo').then(
+            (m) => m.RtlPieChartDemo,
+          ),
+      },
     ],
   },
   {
@@ -4034,6 +4041,13 @@ export const demosRoutes: Route[] = [
             (m) => m.LabelFunnelChartDemo,
           ),
       },
+      {
+        path: 'rtl-funnel-chart-demo',
+        loadComponent: () =>
+          import('../pages/docs/funnel-chart/demos/rtl-funnel-chart-demo').then(
+            (m) => m.RtlFunnelChartDemo,
+          ),
+      },
     ],
   },
   {
@@ -4051,6 +4065,13 @@ export const demosRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/treemap-chart/demos/grouped-treemap-chart-demo').then(
             (m) => m.GroupedTreemapChartDemo,
+          ),
+      },
+      {
+        path: 'rtl-treemap-chart-demo',
+        loadComponent: () =>
+          import('../pages/docs/treemap-chart/demos/rtl-treemap-chart-demo').then(
+            (m) => m.RtlTreemapChartDemo,
           ),
       },
     ],
@@ -4072,6 +4093,13 @@ export const demosRoutes: Route[] = [
             (m) => m.LabelSunburstChartDemo,
           ),
       },
+      {
+        path: 'rtl-sunburst-chart-demo',
+        loadComponent: () =>
+          import('../pages/docs/sunburst-chart/demos/rtl-sunburst-chart-demo').then(
+            (m) => m.RtlSunburstChartDemo,
+          ),
+      },
     ],
   },
   {
@@ -4082,6 +4110,13 @@ export const demosRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/sankey-chart/demos/sankey-chart-demo').then(
             (m) => m.SankeyChartDemo,
+          ),
+      },
+      {
+        path: 'rtl-sankey-chart-demo',
+        loadComponent: () =>
+          import('../pages/docs/sankey-chart/demos/rtl-sankey-chart-demo').then(
+            (m) => m.RtlSankeyChartDemo,
           ),
       },
     ],
@@ -4108,6 +4143,13 @@ export const demosRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/radar-chart/demos/lines-radar-chart-demo').then(
             (m) => m.LinesRadarChartDemo,
+          ),
+      },
+      {
+        path: 'rtl-radar-chart-demo',
+        loadComponent: () =>
+          import('../pages/docs/radar-chart/demos/rtl-radar-chart-demo').then(
+            (m) => m.RtlRadarChartDemo,
           ),
       },
     ],
@@ -4141,6 +4183,13 @@ export const demosRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/radial-chart/demos/label-radial-chart-demo').then(
             (m) => m.LabelRadialChartDemo,
+          ),
+      },
+      {
+        path: 'rtl-radial-chart-demo',
+        loadComponent: () =>
+          import('../pages/docs/radial-chart/demos/rtl-radial-chart-demo').then(
+            (m) => m.RtlRadialChartDemo,
           ),
       },
     ],

@@ -4,11 +4,13 @@ import { ComponentBadges } from '../../../components/component-badges/component-
 import { EntryInstall } from '../../../components/entry-install/entry-install';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { GroupedTreemapChartDemoContainer } from './demos/grouped-treemap-chart-demo-container';
+import { RtlTreemapChartDemoContainer } from './demos/rtl-treemap-chart-demo-container';
 import { TreemapChartDemoContainer } from './demos/treemap-chart-demo-container';
 
 @Component({
   selector: 'app-treemap-chart-page',
   imports: [
+    RtlTreemapChartDemoContainer,
     TreemapChartDemoContainer,
     GroupedTreemapChartDemoContainer,
     TocHeading,
@@ -43,6 +45,7 @@ import { TreemapChartDemoContainer } from './demos/treemap-chart-demo-container'
         <h2 scHeading appToc>Examples</h2>
         <app-treemap-chart-demo-container />
         <app-grouped-treemap-chart-demo-container />
+        <app-rtl-treemap-chart-demo-container />
       </section>
     </div>
   `,

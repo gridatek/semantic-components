@@ -6,10 +6,12 @@ import { TocHeading } from '../../../components/toc/toc-heading';
 import { LinesRadarChartDemoContainer } from './demos/lines-radar-chart-demo-container';
 import { MultipleRadarChartDemoContainer } from './demos/multiple-radar-chart-demo-container';
 import { RadarChartDemoContainer } from './demos/radar-chart-demo-container';
+import { RtlRadarChartDemoContainer } from './demos/rtl-radar-chart-demo-container';
 
 @Component({
   selector: 'app-radar-chart-page',
   imports: [
+    RtlRadarChartDemoContainer,
     RadarChartDemoContainer,
     MultipleRadarChartDemoContainer,
     LinesRadarChartDemoContainer,
@@ -46,6 +48,7 @@ import { RadarChartDemoContainer } from './demos/radar-chart-demo-container';
         <app-radar-chart-demo-container />
         <app-multiple-radar-chart-demo-container />
         <app-lines-radar-chart-demo-container />
+        <app-rtl-radar-chart-demo-container />
       </section>
     </div>
   `,

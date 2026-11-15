@@ -6,11 +6,13 @@ import { TocHeading } from '../../../components/toc/toc-heading';
 import { DonutChartDemoContainer } from './demos/donut-chart-demo-container';
 import { LabelPieChartDemoContainer } from './demos/label-pie-chart-demo-container';
 import { PieChartDemoContainer } from './demos/pie-chart-demo-container';
+import { RtlPieChartDemoContainer } from './demos/rtl-pie-chart-demo-container';
 import { StackedPieChartDemoContainer } from './demos/stacked-pie-chart-demo-container';
 
 @Component({
   selector: 'app-pie-chart-page',
   imports: [
+    RtlPieChartDemoContainer,
     LabelPieChartDemoContainer,
     PieChartDemoContainer,
     DonutChartDemoContainer,
@@ -49,6 +51,7 @@ import { StackedPieChartDemoContainer } from './demos/stacked-pie-chart-demo-con
         <app-donut-chart-demo-container />
         <app-stacked-pie-chart-demo-container />
         <app-label-pie-chart-demo-container />
+        <app-rtl-pie-chart-demo-container />
       </section>
     </div>
   `,

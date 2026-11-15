@@ -3,11 +3,13 @@ import { ScHeading } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { EntryInstall } from '../../../components/entry-install/entry-install';
 import { TocHeading } from '../../../components/toc/toc-heading';
+import { RtlSankeyChartDemoContainer } from './demos/rtl-sankey-chart-demo-container';
 import { SankeyChartDemoContainer } from './demos/sankey-chart-demo-container';
 
 @Component({
   selector: 'app-sankey-chart-page',
   imports: [
+    RtlSankeyChartDemoContainer,
     SankeyChartDemoContainer,
     TocHeading,
     ComponentBadges,
@@ -40,6 +42,7 @@ import { SankeyChartDemoContainer } from './demos/sankey-chart-demo-container';
       <section class="space-y-8">
         <h2 scHeading appToc>Examples</h2>
         <app-sankey-chart-demo-container />
+        <app-rtl-sankey-chart-demo-container />
       </section>
     </div>
   `,
