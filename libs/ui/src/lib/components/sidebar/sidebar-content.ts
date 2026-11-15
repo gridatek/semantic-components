@@ -20,10 +20,12 @@ export class ScSidebarContent {
     cn(
       this.styles.content,
       // Its scrollbar's room kept: the menus don't shift when it comes and
-      // goes (a group opening past the bottom, closing back).
+      // goes (a group opening past the bottom, closing back). Over the rail
+      // (z-20), whose inner half covers the scrollbar: the pointer grabs the
+      // scrollbar, the rail keeps its outer half.
       this.hideScrollbar()
         ? 'no-scrollbar'
-        : '[scrollbar-width:thin] [scrollbar-gutter:stable]',
+        : 'relative z-30 [scrollbar-width:thin] [scrollbar-gutter:stable]',
       this.classInput(),
     ),
   );
