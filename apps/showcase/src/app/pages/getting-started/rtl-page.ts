@@ -268,6 +268,26 @@ class RtlWithoutDir {}
             <code class="bg-muted rounded px-1.5 py-0.5 text-sm">locale</code>
             input.
           </li>
+          <li>
+            Charts are not mirrored by default, as in Recharts: their legend and
+            tooltip follow the direction, their plot doesn't. To mirror them —
+            the categories from the right, the values on the right, the arrows
+            the way they're drawn — set
+            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+              >charts: &#123; followDirection: true &#125;</code
+            >
+            in
+            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+              >provideSemanticComponents</code
+            >
+            (a bilingual app: mirrored in Arabic only), or an axis's own
+            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">reversed</code>
+            and
+            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+              >orientation</code
+            >
+            — which win.
+          </li>
         </ul>
       </section>
     </div>
