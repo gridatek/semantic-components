@@ -19,7 +19,7 @@ import { TooltipChartDemo } from './tooltip-chart-demo';
 })
 export class TooltipChartDemoContainer {
   readonly code = `import { DecimalPipe } from '@angular/common';
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
 import {
   ScChart,
@@ -73,8 +73,8 @@ import {
       size="sm"
       aria-label="Tooltip indicator"
       class="mb-3"
-      [value]="[indicator()]"
-      (valueChange)="choose($event[0])"
+      [value]="choice()"
+      (valueChange)="choose($event)"
     >
       <button scToggleGroupItem value="dot">Dot</button>
       <button scToggleGroupItem value="line">Line</button>
@@ -132,13 +132,20 @@ export class TooltipChartDemo {
     desktop: { label: 'Desktop', color: 'var(--chart-1)' },
     mobile: { label: 'Mobile', color: 'var(--chart-2)' },
   };
-  readonly indicator = signal<ScChartIndicator>('dot');
+  /** The pressed indicator: always one. */
+  readonly choice = signal<ScChartIndicator[]>(['dot']);
+  readonly indicator = computed(() => this.choice()[0]);
   /** January → Jan. */
   readonly short = (month: string) => month.slice(0, 3);
 
-  choose(value: string | string[] | null): void {
-    if (value === 'dot' || value === 'line' || value === 'dashed')
-      this.indicator.set(value);
+  choose(value: readonly unknown[]): void {
+    const [chosen] = value;
+    // The pressed one released: kept (a new array, so the group hears it).
+    this.choice.set(
+      chosen === 'dot' || chosen === 'line' || chosen === 'dashed'
+        ? [chosen]
+        : [...this.choice()],
+    );
   }
 }`;
 }

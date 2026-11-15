@@ -19,3 +19,22 @@ test('Tooltip: its indicator, as chosen; a legend', async ({ page }) => {
   await expect(mark).toHaveCSS('width', '4px');
   expect(errors).toEqual([]);
 });
+
+test('Tooltip: one indicator always chosen — the pressed one stays pressed', async ({
+  page,
+}) => {
+  await page.goto('/demos/chart/tooltip-chart-demo');
+  const dashed = page.getByRole('button', { name: 'Dashed', exact: true });
+  await dashed.click();
+  await expect(dashed).toHaveAttribute('aria-pressed', 'true');
+  // Clicked again: still the choice, not none. Read once the page has
+  // drawn the click (true is already there before it).
+  await dashed.click();
+  await page.evaluate(
+    () =>
+      new Promise((done) =>
+        requestAnimationFrame(() => requestAnimationFrame(done)),
+      ),
+  );
+  await expect(dashed).toHaveAttribute('aria-pressed', 'true');
+});
