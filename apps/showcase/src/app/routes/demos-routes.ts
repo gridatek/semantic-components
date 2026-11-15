@@ -1338,6 +1338,13 @@ export const demosRoutes: Route[] = [
     path: 'demos/area-chart',
     children: [
       {
+        path: 'area-chart-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/area-chart/demos/area-chart-usage-demo').then(
+            (m) => m.AreaChartUsageDemo,
+          ),
+      },
+      {
         path: 'area-chart-demo',
         loadComponent: () =>
           import('../pages/docs/area-chart/demos/area-chart-demo').then(
@@ -1377,6 +1384,13 @@ export const demosRoutes: Route[] = [
   {
     path: 'demos/bar-chart',
     children: [
+      {
+        path: 'bar-chart-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/bar-chart/demos/bar-chart-usage-demo').then(
+            (m) => m.BarChartUsageDemo,
+          ),
+      },
       {
         path: 'bar-chart-demo',
         loadComponent: () =>
@@ -1439,6 +1453,13 @@ export const demosRoutes: Route[] = [
     path: 'demos/line-chart',
     children: [
       {
+        path: 'line-chart-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/line-chart/demos/line-chart-usage-demo').then(
+            (m) => m.LineChartUsageDemo,
+          ),
+      },
+      {
         path: 'line-chart-demo',
         loadComponent: () =>
           import('../pages/docs/line-chart/demos/line-chart-demo').then(
@@ -1479,6 +1500,13 @@ export const demosRoutes: Route[] = [
   {
     path: 'demos/chart',
     children: [
+      {
+        path: 'chart-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/chart/demos/chart-usage-demo').then(
+            (m) => m.ChartUsageDemo,
+          ),
+      },
       {
         path: 'tooltip-chart-demo',
         loadComponent: () =>
@@ -3962,6 +3990,13 @@ export const demosRoutes: Route[] = [
     path: 'demos/pie-chart',
     children: [
       {
+        path: 'pie-chart-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/pie-chart/demos/pie-chart-usage-demo').then(
+            (m) => m.PieChartUsageDemo,
+          ),
+      },
+      {
         path: 'pie-chart-demo',
         loadComponent: () =>
           import('../pages/docs/pie-chart/demos/pie-chart-demo').then(
@@ -4002,6 +4037,13 @@ export const demosRoutes: Route[] = [
     path: 'demos/scatter-chart',
     children: [
       {
+        path: 'scatter-chart-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/scatter-chart/demos/scatter-chart-usage-demo').then(
+            (m) => m.ScatterChartUsageDemo,
+          ),
+      },
+      {
         path: 'scatter-chart-demo',
         loadComponent: () =>
           import('../pages/docs/scatter-chart/demos/scatter-chart-demo').then(
@@ -4027,6 +4069,13 @@ export const demosRoutes: Route[] = [
   {
     path: 'demos/funnel-chart',
     children: [
+      {
+        path: 'funnel-chart-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/funnel-chart/demos/funnel-chart-usage-demo').then(
+            (m) => m.FunnelChartUsageDemo,
+          ),
+      },
       {
         path: 'funnel-chart-demo',
         loadComponent: () =>
@@ -4054,6 +4103,13 @@ export const demosRoutes: Route[] = [
     path: 'demos/treemap-chart',
     children: [
       {
+        path: 'treemap-chart-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/treemap-chart/demos/treemap-chart-usage-demo').then(
+            (m) => m.TreemapChartUsageDemo,
+          ),
+      },
+      {
         path: 'treemap-chart-demo',
         loadComponent: () =>
           import('../pages/docs/treemap-chart/demos/treemap-chart-demo').then(
@@ -4079,6 +4135,13 @@ export const demosRoutes: Route[] = [
   {
     path: 'demos/sunburst-chart',
     children: [
+      {
+        path: 'sunburst-chart-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/sunburst-chart/demos/sunburst-chart-usage-demo').then(
+            (m) => m.SunburstChartUsageDemo,
+          ),
+      },
       {
         path: 'sunburst-chart-demo',
         loadComponent: () =>
@@ -4106,6 +4169,13 @@ export const demosRoutes: Route[] = [
     path: 'demos/sankey-chart',
     children: [
       {
+        path: 'sankey-chart-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/sankey-chart/demos/sankey-chart-usage-demo').then(
+            (m) => m.SankeyChartUsageDemo,
+          ),
+      },
+      {
         path: 'sankey-chart-demo',
         loadComponent: () =>
           import('../pages/docs/sankey-chart/demos/sankey-chart-demo').then(
@@ -4124,6 +4194,13 @@ export const demosRoutes: Route[] = [
   {
     path: 'demos/radar-chart',
     children: [
+      {
+        path: 'radar-chart-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/radar-chart/demos/radar-chart-usage-demo').then(
+            (m) => m.RadarChartUsageDemo,
+          ),
+      },
       {
         path: 'radar-chart-demo',
         loadComponent: () =>
@@ -4157,6 +4234,13 @@ export const demosRoutes: Route[] = [
   {
     path: 'demos/radial-chart',
     children: [
+      {
+        path: 'radial-chart-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/radial-chart/demos/radial-chart-usage-demo').then(
+            (m) => m.RadialChartUsageDemo,
+          ),
+      },
       {
         path: 'radial-chart-demo',
         loadComponent: () =>

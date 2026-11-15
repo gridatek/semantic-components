@@ -1,0 +1,126 @@
+import { Component, ViewEncapsulation } from '@angular/core';
+import { UsageCode } from '../../../../components/usage-code/usage-code';
+import { SankeyChartUsageDemo } from './sankey-chart-usage-demo';
+
+@Component({
+  selector: 'app-sankey-chart-usage-demo-container',
+  imports: [UsageCode, SankeyChartUsageDemo],
+  template: `
+    <app-usage-code [code]="code">
+      <ng-template><app-sankey-chart-usage-demo /></ng-template>
+    </app-usage-code>
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class SankeyChartUsageDemoContainer {
+  readonly code = `import { DecimalPipe } from '@angular/common';
+import { Component, ViewEncapsulation } from '@angular/core';
+import {
+  ScChart,
+  type ScChartConfig,
+  ScChartPlot,
+  ScChartTooltip,
+  ScChartTooltipIndicator,
+  ScChartTooltipItem,
+  ScChartTooltipLabel,
+  ScChartTooltipName,
+  ScChartTooltipPortal,
+  ScChartTooltipProvider,
+  ScChartTooltipValue,
+} from '@semantic-components/ui/charts';
+import { ScChartSankey } from '@semantic-components/ui/charts/sankey';
+
+@Component({
+  selector: 'app-sankey-chart-usage-demo',
+  imports: [
+    ScChart,
+    ScChartPlot,
+    ScChartSankey,
+    ScChartTooltip,
+    ScChartTooltipPortal,
+    ScChartTooltipProvider,
+    DecimalPipe,
+    ScChartTooltipLabel,
+    ScChartTooltipIndicator,
+    ScChartTooltipItem,
+    ScChartTooltipName,
+    ScChartTooltipValue,
+  ],
+  template: \`
+    <div scChart class="aspect-video max-h-80" [config]="config" [data]="data">
+      <svg
+        scChartPlot
+        categoryKey="flow"
+        aria-label="Where visitors come from and where they go"
+      >
+        <g scChartSankey key="visitors" />
+      </svg>
+      <div scChartTooltipProvider>
+        <ng-template scChartTooltipPortal>
+          <div scChartTooltip #tooltip="scChartTooltip">
+            <div scChartTooltipLabel>{{ tooltip.label() }}</div>
+            @for (item of tooltip.payload(); track item.dataKey) {
+              <div scChartTooltipItem [item]="item">
+                <span scChartTooltipIndicator></span>
+                <span scChartTooltipName>{{ item.name }}</span>
+                <span scChartTooltipValue>{{ item.value | number }}</span>
+              </div>
+            }
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  \`,
+  host: { class: 'block w-full max-w-xl' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class SankeyChartUsageDemo {
+  readonly data = [
+    {
+      flow: 'Search → Pricing',
+      source: 'search',
+      target: 'pricing',
+      visitors: 420,
+    },
+    { flow: 'Search → Docs', source: 'search', target: 'docs', visitors: 310 },
+    {
+      flow: 'Social → Pricing',
+      source: 'social',
+      target: 'pricing',
+      visitors: 180,
+    },
+    { flow: 'Social → Docs', source: 'social', target: 'docs', visitors: 90 },
+    {
+      flow: 'Direct → Pricing',
+      source: 'direct',
+      target: 'pricing',
+      visitors: 150,
+    },
+    {
+      flow: 'Pricing → Sign up',
+      source: 'pricing',
+      target: 'signup',
+      visitors: 380,
+    },
+    {
+      flow: 'Pricing → Left',
+      source: 'pricing',
+      target: 'left',
+      visitors: 370,
+    },
+    { flow: 'Docs → Sign up', source: 'docs', target: 'signup', visitors: 160 },
+    { flow: 'Docs → Left', source: 'docs', target: 'left', visitors: 240 },
+  ];
+  readonly config: ScChartConfig = {
+    visitors: { label: 'Visitors' },
+    search: { label: 'Search', color: 'var(--chart-1)' },
+    social: { label: 'Social', color: 'var(--chart-2)' },
+    direct: { label: 'Direct', color: 'var(--chart-3)' },
+    pricing: { label: 'Pricing', color: 'var(--chart-4)' },
+    docs: { label: 'Docs', color: 'var(--chart-5)' },
+    signup: { label: 'Sign up', color: 'var(--chart-1)' },
+    left: { label: 'Left', color: 'var(--chart-3)' },
+  };
+}`;
+}
