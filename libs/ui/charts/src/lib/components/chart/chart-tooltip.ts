@@ -1,3 +1,4 @@
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 import {
   Directive,
   ElementRef,
@@ -57,14 +58,14 @@ export class ScChartTooltip {
   );
 
   constructor() {
-    // Its text, once written, to the provider's live region.
+    // What it shows, said to screen readers (the CDK's live region, always
+    // in the page: its own comes and goes with the overlay). innerText keeps
+    // its parts apart, where textContent runs them on.
+    const announcer = inject(LiveAnnouncer);
     afterRenderEffect(() => {
       this.label();
       this.payload();
-      // As shown: innerText spaces its parts (textContent runs them on).
-      this.provider.announcement.set(
-        this.host.innerText.replace(/\s+/g, ' ').trim(),
-      );
+      void announcer.announce(this.host.innerText, 'polite');
     });
     // Its glide, as Recharts': each time its overlay moves it (the CDK, at
     // once), it slides there from where it was seen — through flips too.

@@ -42,15 +42,13 @@ const FINGER = 40;
  * keyboard, beside the item reached; flipped and kept in the window where
  * there is no room. Recharts' place by default: right of the pointer, 10px
  * along and down. It holds the tooltip's state — `active()`, `label()`,
- * `payload()` — and says it to screen readers (a polite live region, in the
- * chart: what the tooltip shows).
+ * `payload()`.
  */
 @Component({
   selector: 'div[scChartTooltipProvider]',
   imports: [OverlayModule, NgTemplateOutlet],
   template: `
     <ng-content />
-    <div class="sr-only" role="status">{{ announcement() }}</div>
 
     @if (origin(); as origin) {
       <ng-template
@@ -146,9 +144,6 @@ export class ScChartTooltipProvider {
       };
     });
   });
-
-  /** What screen readers hear: the tooltip's text, as it shows it. */
-  readonly announcement = signal('');
 
   /**
    * What it goes beside, on the screen: the pointer (a point), or the item
@@ -261,6 +256,5 @@ export class ScChartTooltipProvider {
   /** Closed by a scroll: nothing is pointed at any more. */
   protected onDetach(): void {
     if (this.active()) this.state.activeIndex.set(null);
-    this.announcement.set('');
   }
 }
