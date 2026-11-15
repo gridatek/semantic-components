@@ -46,6 +46,8 @@ interface ScBarChartBar {
   up: boolean;
   /** On screen, its end is further along than its base (rightwards, or down). */
   forward: boolean;
+  /** Its rounded corners here: in a stack, only where the stack ends. */
+  corners: ScChartBarCorners;
 }
 
 /** A bar before it's boxed: where it runs, across and along the values. */
@@ -61,6 +63,24 @@ interface ScBarChartTarget {
   /** Along the values: its base and its end. */
   base: number;
   end: number;
+  /** In its stack, here: no bar beyond its end (outer), none under its base (inner). */
+  outer: boolean;
+  inner: boolean;
+}
+
+/**
+ * A bar's corners where it is in its stack: the stack rounds as one bar —
+ * its end's corners on the outermost bar, its base's on the innermost,
+ * whichever series they are in each category.
+ */
+function cornersIn(
+  corners: ScChartBarCorners,
+  outer: boolean,
+  inner: boolean,
+): ScChartBarCorners {
+  const end = (corners === 'all' || corners === 'end') && outer;
+  const base = (corners === 'all' || corners === 'base') && inner;
+  return end && base ? 'all' : end ? 'end' : base ? 'base' : 'none';
 }
 
 /** Recharts' bar step: matched bars move, new ones grow from their base, gone ones shrink to it. */
@@ -130,7 +150,7 @@ function shapeOf(
       >
         <svg:rect
           [class]="
-            corners() === 'none' ? '' : '[rx:var(--chart-bar-radius,0px)]'
+            bar.corners === 'none' ? '' : '[rx:var(--chart-bar-radius,0px)]'
           "
           [attr.x]="bar.shape.x"
           [attr.y]="bar.shape.y"
@@ -162,6 +182,8 @@ export class ScChartBar implements ScChartSeriesLabels {
   /**
    * Its rounded corners: all, its end's two (`end`: the top of a column),
    * its base's two (`base`), or none — turned with it below 0 or across.
+   * In a `stack`, the stack's: rounded as one bar, wherever it ends in each
+   * category (a series at 0 there leaves its corners to the next).
    * How round is the style's: the preset sets `--chart-bar-radius`.
    */
   readonly corners = input<ScChartBarCorners>('all');
@@ -211,18 +233,48 @@ export class ScChartBar implements ScChartSeriesLabels {
     const rows = this.state.data();
     const byCategory = this.colorBy() === 'category';
     const matchBy = this.animationMatchBy();
-    return (this.state.extents().get(this.key()) ?? []).map(
-      ([low, high], index) => ({
+    const extents = this.state.extents();
+    // The other bars of its stack: what lies beyond its end, or under its base.
+    const stack = this.stack();
+    const others =
+      stack === null
+        ? []
+        : this.state
+            .series()
+            .filter(
+              (s) =>
+                s.kind === 'bar' &&
+                s.stack() === stack &&
+                s.key() !== this.key(),
+            )
+            .map((s) => extents.get(s.key()) ?? []);
+    const near = 1e-9;
+    return (extents.get(this.key()) ?? []).map(([low, high], index) => {
+      const up = high >= low;
+      const shown = others
+        .map((extent) => extent[index])
+        .filter((pair) => pair && pair[0] !== pair[1]);
+      // Up: a bar above starts at or past its end; one under ends at or
+      // before its base. Down (below 0): the same, the other way.
+      const outer = !shown.some(([l, h]) =>
+        up ? h > l && l >= high - near : h < l && l <= high + near,
+      );
+      const inner = !shown.some(([l, h]) =>
+        up ? h > l && h <= low + near : h < l && h >= low - near,
+      );
+      return {
         index,
+        outer,
+        inner,
         id: typeof matchBy === 'function' ? matchBy(rows[index], index) : null,
         color: byCategory ? `var(--color-${names[index]})` : this.color(),
-        up: high >= low,
+        up,
         start: (categories(index) ?? 0) + offset,
         thickness,
         base: values(low),
         end: values(high),
-      }),
-    );
+      };
+    });
   });
 
   /** Its bars moving to their new places when they change. */
@@ -260,15 +312,18 @@ export class ScChartBar implements ScChartSeriesLabels {
       // Which way it runs on screen: from its base towards its value.
       const forward =
         bar.end === bar.base ? vertical === bar.up : bar.end > bar.base;
+      // In a stack, rounded only where the stack ends.
+      const here = cornersIn(corners, bar.outer, bar.inner);
       // Past the square side by half its thickness: more than any corner can
       // be (a rect's rx is at most half its width).
       return {
         index: bar.index,
         up: bar.up,
         forward,
+        corners: here,
         color: bar.color,
         ...box,
-        shape: shapeOf(box, corners, vertical, forward, bar.thickness / 2),
+        shape: shapeOf(box, here, vertical, forward, bar.thickness / 2),
       };
     });
   });

@@ -63,6 +63,8 @@ The plot's `layout="vertical"` puts the categories down the side and the bars ac
 
 `corners` says which corners are rounded; how round they are is the style's: the preset sets `--chart-bar-radius` on the chart (its `chart.chart`), from the theme's `--radius` — nova, vega and mira `--radius-sm` (6px with the default radius), maia `--radius-lg`, luma and rhea `--radius-xl`, lyra and sera square. So the bars follow the theme's radius too. Set it yourself on a chart: `class="[--chart-bar-radius:4px]"`.
 
+In a `stack`, the corners are the stack's: it rounds as one bar, wherever it ends in each category. `corners="end"` on every series of a stack rounds the top of each column, whichever series is on top there — a series at 0 in a category leaves its corners to the next one down (shadcn rounds per series, so a column whose top series is 0 is square there). `all` rounds the stack's both ends.
+
 Each bar is an `<svg>` of its size holding a `<rect>` whose `rx` is that variable (a CSS property in SVG 2: never more than half its width). Rounded on one side only (`end`, `base`), the rect is longer past the other side and its `<svg>` hides the overflow, so that side stays square. The `<svg>`'s `x`, `y`, `width` and `height` are the bar's; the browser's box of it (`getBoundingClientRect`) includes the hidden part. What this leaves out: different radii on one bar's corners (Recharts' `radius={[6, 4, 0, 0]}`).
 
 ## Entrance

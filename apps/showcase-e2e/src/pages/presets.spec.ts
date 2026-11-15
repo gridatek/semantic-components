@@ -66,4 +66,44 @@ test.describe('Presets Page', () => {
     await expectNoA11yViolations(page);
     await expectNoA11yViolations(page, { dark: true });
   });
+
+  test('Nova, Sleep Report: each stack rounded at its top, whichever stage is there', async ({
+    page,
+    baseURL,
+  }) => {
+    await page.context().addCookies([
+      {
+        name: 'sc-preset',
+        value: 'nova',
+        url: baseURL ?? 'http://localhost:4200',
+      },
+    ]);
+    await page.goto('/presets');
+    const plot = page.getByRole('group', {
+      name: 'Sleep stages by hour, 10pm to 6am',
+    });
+    await expect(plot).toBeVisible();
+    // Per hour, the topmost drawn segment (the highest on screen): rounded.
+    await expect
+      .poll(() =>
+        plot.evaluate((svg) => {
+          const tops = new Map<string, { y: number; rx: string }>();
+          for (const box of svg.querySelectorAll(
+            '[data-slot=chart-bar] > svg',
+          )) {
+            const height = Number(box.getAttribute('height'));
+            if (height <= 0) continue;
+            const x = box.getAttribute('x') ?? '';
+            const y = Number(box.getAttribute('y'));
+            const rect = box.querySelector('rect');
+            const rx = rect ? getComputedStyle(rect).rx : '0px';
+            const top = tops.get(x);
+            if (!top || y < top.y) tops.set(x, { y, rx });
+          }
+          // Square: no rx (auto) or 0px.
+          return [...tops.values()].map((top) => parseFloat(top.rx) > 0);
+        }),
+      )
+      .toEqual([true, true, true, true, true, true, true, true, true]);
+  });
 });

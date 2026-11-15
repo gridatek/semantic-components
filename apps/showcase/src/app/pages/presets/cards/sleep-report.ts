@@ -64,8 +64,8 @@ import {
             aria-label="Sleep stages by hour, 10pm to 6am"
             [margin]="{ left: 0, right: 0, top: 0, bottom: 0 }"
           >
-            <g scChartBar key="deep" stack="a" corners="none" [barSize]="16" />
-            <g scChartBar key="light" stack="a" corners="none" [barSize]="16" />
+            <g scChartBar key="deep" stack="a" corners="end" [barSize]="16" />
+            <g scChartBar key="light" stack="a" corners="end" [barSize]="16" />
             <g scChartBar key="rem" stack="a" corners="end" [barSize]="16" />
           </svg>
           <div scChartTooltipProvider>
