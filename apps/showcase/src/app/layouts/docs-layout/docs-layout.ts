@@ -62,13 +62,19 @@ import {
 import { cn } from 'cn';
 import { filter, map } from 'rxjs';
 import { Logo } from '../../components/logo/logo';
-import { PageNav, type PageNavItem } from '../../components/page-nav/page-nav';
+import { PageNav } from '../../components/page-nav/page-nav';
 import { ThemeMenu } from '../../components/theme-menu/theme-menu';
 import { Toc } from '../../components/toc/toc';
 import { TocService } from '../../components/toc/toc-service';
+import {
+  aiElementPages,
+  installationPages,
+  introductionPages,
+} from '../../data/docs-nav';
 import { CommandPaletteService } from '../../services/command-palette-service';
 import { ComponentsService } from '../../services/components-service';
 import { ConfigService } from '../../services/config-service';
+import { DocsNavService } from '../../services/docs-nav-service';
 
 @Component({
   selector: 'app-docs-layout',
@@ -193,29 +199,20 @@ import { ConfigService } from '../../services/config-service';
                   </button>
                   <div scCollapsiblePanel hiddenUntilFound>
                     <ul scSidebarMenuSub>
-                      <li scSidebarMenuSubItem>
-                        <a
-                          scSidebarMenuSubButton
-                          routerLink="/docs/getting-started/introduction"
-                          routerLinkActive
-                          #introRla="routerLinkActive"
-                          [active]="introRla.isActive"
-                        >
-                          <span>Introduction</span>
-                        </a>
-                      </li>
-                      <li scSidebarMenuSubItem>
-                        <a
-                          scSidebarMenuSubButton
-                          routerLink="/docs/components"
-                          [routerLinkActiveOptions]="{ exact: true }"
-                          routerLinkActive
-                          #componentsListRla="routerLinkActive"
-                          [active]="componentsListRla.isActive"
-                        >
-                          <span>Components</span>
-                        </a>
-                      </li>
+                      @for (page of introductionPages; track page.path) {
+                        <li scSidebarMenuSubItem>
+                          <a
+                            scSidebarMenuSubButton
+                            [routerLink]="page.path"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            routerLinkActive
+                            #pageRla="routerLinkActive"
+                            [active]="pageRla.isActive"
+                          >
+                            <span>{{ page.name }}</span>
+                          </a>
+                        </li>
+                      }
                     </ul>
                   </div>
                 </li>
@@ -241,83 +238,20 @@ import { ConfigService } from '../../services/config-service';
                   </button>
                   <div scCollapsiblePanel hiddenUntilFound>
                     <ul scSidebarMenuSub>
-                      <li scSidebarMenuSubItem>
-                        <a
-                          scSidebarMenuSubButton
-                          routerLink="/docs/getting-started/prerequisites"
-                          routerLinkActive
-                          #prerequisitesRla="routerLinkActive"
-                          [active]="prerequisitesRla.isActive"
-                        >
-                          <span>Prerequisites</span>
-                        </a>
-                      </li>
-                      <li scSidebarMenuSubItem>
-                        <a
-                          scSidebarMenuSubButton
-                          routerLink="/docs/getting-started/ui"
-                          routerLinkActive
-                          #coreRla="routerLinkActive"
-                          [active]="coreRla.isActive"
-                        >
-                          <span>UI</span>
-                        </a>
-                      </li>
-                      <li scSidebarMenuSubItem>
-                        <a
-                          scSidebarMenuSubButton
-                          routerLink="/docs/getting-started/presets"
-                          routerLinkActive
-                          #presetsRla="routerLinkActive"
-                          [active]="presetsRla.isActive"
-                        >
-                          <span>Presets</span>
-                        </a>
-                      </li>
-                      <li scSidebarMenuSubItem>
-                        <a
-                          scSidebarMenuSubButton
-                          routerLink="/docs/getting-started/custom-preset"
-                          routerLinkActive
-                          #customPresetRla="routerLinkActive"
-                          [active]="customPresetRla.isActive"
-                        >
-                          <span>Custom preset</span>
-                        </a>
-                      </li>
-                      <li scSidebarMenuSubItem>
-                        <a
-                          scSidebarMenuSubButton
-                          routerLink="/docs/getting-started/i18n"
-                          routerLinkActive
-                          #i18nRla="routerLinkActive"
-                          [active]="i18nRla.isActive"
-                        >
-                          <span>Internationalization</span>
-                        </a>
-                      </li>
-                      <li scSidebarMenuSubItem>
-                        <a
-                          scSidebarMenuSubButton
-                          routerLink="/docs/getting-started/rtl"
-                          routerLinkActive
-                          #rtlRla="routerLinkActive"
-                          [active]="rtlRla.isActive"
-                        >
-                          <span>Right to left</span>
-                        </a>
-                      </li>
-                      <li scSidebarMenuSubItem>
-                        <a
-                          scSidebarMenuSubButton
-                          routerLink="/docs/getting-started/mcp-server"
-                          routerLinkActive
-                          #mcpServerRla="routerLinkActive"
-                          [active]="mcpServerRla.isActive"
-                        >
-                          <span>MCP Server</span>
-                        </a>
-                      </li>
+                      @for (page of installationPages; track page.path) {
+                        <li scSidebarMenuSubItem>
+                          <a
+                            scSidebarMenuSubButton
+                            [routerLink]="page.path"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            routerLinkActive
+                            #pageRla="routerLinkActive"
+                            [active]="pageRla.isActive"
+                          >
+                            <span>{{ page.name }}</span>
+                          </a>
+                        </li>
+                      }
                     </ul>
                   </div>
                 </li>
@@ -501,16 +435,17 @@ import { ConfigService } from '../../services/config-service';
                   </button>
                   <div scCollapsiblePanel hiddenUntilFound>
                     <ul scSidebarMenuSub>
-                      @for (item of aiElements; track item.path) {
+                      @for (page of aiElementPages; track page.path) {
                         <li scSidebarMenuSubItem>
                           <a
                             scSidebarMenuSubButton
-                            [routerLink]="'/docs/ai-elements/' + item.path"
+                            [routerLink]="page.path"
+                            [routerLinkActiveOptions]="{ exact: true }"
                             routerLinkActive
-                            #aiRla="routerLinkActive"
-                            [active]="aiRla.isActive"
+                            #pageRla="routerLinkActive"
+                            [active]="pageRla.isActive"
                           >
-                            <span>{{ item.name }}</span>
+                            <span>{{ page.name }}</span>
                           </a>
                         </li>
                       }
@@ -612,30 +547,9 @@ export class DocsLayout {
   readonly charts = this.componentsService.visibleCharts;
   readonly utilities = this.componentsService.visibleUtilities;
   readonly recipes = this.componentsService.visibleRecipes;
-  /** shadcn's AI Elements: patterns built from the components. */
-  protected readonly aiElements = [
-    { name: 'Chain of Thought', path: 'chain-of-thought' },
-    { name: 'Chat', path: 'chat' },
-    { name: 'Checkpoint', path: 'checkpoint' },
-    { name: 'Confirmation', path: 'confirmation' },
-    { name: 'Context', path: 'context' },
-    { name: 'File Tree', path: 'file-tree' },
-    { name: 'Inline Citation', path: 'inline-citation' },
-    { name: 'Message', path: 'message' },
-    { name: 'Model Selector', path: 'model-selector' },
-    { name: 'Plan', path: 'plan' },
-    { name: 'Prompt Input', path: 'prompt-input' },
-    { name: 'Queue', path: 'queue' },
-    { name: 'Reasoning', path: 'reasoning' },
-    { name: 'Sources', path: 'sources' },
-    { name: 'Stack Trace', path: 'stack-trace' },
-    { name: 'Subagent', path: 'subagent' },
-    { name: 'Suggestion', path: 'suggestion' },
-    { name: 'Task', path: 'task' },
-    { name: 'Terminal', path: 'terminal' },
-    { name: 'Test Results', path: 'test-results' },
-    { name: 'Tool', path: 'tool' },
-  ];
+  private readonly introductionPages = introductionPages;
+  private readonly installationPages = installationPages;
+  private readonly aiElementPages = aiElementPages;
   protected readonly devMode = this.config.devMode;
 
   /** The page shown: its path, without query or fragment. */
@@ -667,33 +581,7 @@ export class DocsLayout {
   );
 
   /** Every docs page, in the sidebar's order: the bottom's previous and next. */
-  protected readonly pages = computed<PageNavItem[]>(() => [
-    { name: 'Introduction', path: '/docs/getting-started/introduction' },
-    { name: 'Components', path: '/docs/components' },
-    { name: 'Prerequisites', path: '/docs/getting-started/prerequisites' },
-    { name: 'UI', path: '/docs/getting-started/ui' },
-    { name: 'Presets', path: '/docs/getting-started/presets' },
-    {
-      name: 'Custom preset',
-      path: '/docs/getting-started/custom-preset',
-    },
-    { name: 'Internationalization', path: '/docs/getting-started/i18n' },
-    { name: 'Right to left', path: '/docs/getting-started/rtl' },
-    { name: 'MCP Server', path: '/docs/getting-started/mcp-server' },
-    ...[
-      ...this.components(),
-      ...this.charts(),
-      ...this.utilities(),
-      ...this.recipes(),
-    ].map((item) => ({
-      name: item.name,
-      path: '/docs/components/' + item.path,
-    })),
-    ...this.aiElements.map((item) => ({
-      name: item.name,
-      path: '/docs/ai-elements/' + item.path,
-    })),
-  ]);
+  protected readonly pages = inject(DocsNavService).pages;
 
   constructor() {
     afterNextRender(() => {

@@ -33,9 +33,9 @@ import {
 } from '@semantic-icons/lucide-icons';
 import { cn } from 'cn';
 import { CommandPaletteService } from '../../services/command-palette-service';
-import { ComponentsService } from '../../services/components-service';
+import { DocsNavService } from '../../services/docs-nav-service';
 
-/** The docs' search (Ctrl+K, ⌘K on a Mac): pages, components and utilities, by name or description. */
+/** The docs' search (Ctrl+K, ⌘K on a Mac): the sidebar's pages, in its groups, by name or description. */
 @Component({
   selector: 'app-command-palette',
   imports: [
@@ -67,7 +67,7 @@ import { ComponentsService } from '../../services/components-service';
         <div scDialog scCommandDialog>
           <h2 scDialogTitle class="sr-only">Search the docs</h2>
           <p scDialogDescription class="sr-only">
-            Pages, components and utilities, by name or description.
+            The docs' pages, by name or description.
           </p>
           <div scCommand #cmd="scCommand">
             <div scCommandInputGroup>
@@ -80,51 +80,35 @@ import { ComponentsService } from '../../services/components-service';
             </div>
             <div scCommandList aria-label="Results">
               <div scCommandEmpty>No results found.</div>
-              <div scCommandGroup>
-                <div scCommandGroupLabel>Pages</div>
-                @for (page of pages; track page.path) {
-                  <a scCommandItem [routerLink]="page.path" (select)="close()">
-                    <svg siFileTextIcon></svg>
-                    <span>{{ page.name }}</span>
-                  </a>
+              @for (group of nav.groups(); track group.label) {
+                @if (!$first) {
+                  <div scCommandSeparator></div>
                 }
-              </div>
-              <div scCommandSeparator></div>
-              <div scCommandGroup>
-                <div scCommandGroupLabel>Components</div>
-                @for (
-                  component of componentsService.visibleComponents();
-                  track component.path
-                ) {
-                  <a
-                    scCommandItem
-                    [routerLink]="'/docs/components/' + component.path"
-                    [keywords]="[component.description]"
-                    (select)="close()"
-                  >
-                    <svg siBoxIcon></svg>
-                    <span>{{ component.name }}</span>
-                  </a>
-                }
-              </div>
-              <div scCommandSeparator></div>
-              <div scCommandGroup>
-                <div scCommandGroupLabel>Utilities</div>
-                @for (
-                  utility of componentsService.visibleUtilities();
-                  track utility.path
-                ) {
-                  <a
-                    scCommandItem
-                    [routerLink]="'/docs/components/' + utility.path"
-                    [keywords]="[utility.description]"
-                    (select)="close()"
-                  >
-                    <svg siWrenchIcon></svg>
-                    <span>{{ utility.name }}</span>
-                  </a>
-                }
-              </div>
+                <div scCommandGroup>
+                  <div scCommandGroupLabel>{{ group.label }}</div>
+                  @for (page of group.pages; track page.path) {
+                    <a
+                      scCommandItem
+                      [routerLink]="page.path"
+                      [keywords]="page.description ? [page.description] : []"
+                      (select)="close()"
+                    >
+                      @switch (group.kind) {
+                        @case ('page') {
+                          <svg siFileTextIcon></svg>
+                        }
+                        @case ('utility') {
+                          <svg siWrenchIcon></svg>
+                        }
+                        @default {
+                          <svg siBoxIcon></svg>
+                        }
+                      }
+                      <span>{{ page.name }}</span>
+                    </a>
+                  }
+                </div>
+              }
             </div>
             <div scCommandStatus>{{ cmd.count() }} results</div>
           </div>
@@ -142,14 +126,9 @@ export class CommandPalette {
 
   protected readonly class = computed(() => cn('block', this.classInput()));
 
-  protected readonly componentsService = inject(ComponentsService);
+  /** The sidebar's groups, the same pages. */
+  private readonly nav = inject(DocsNavService);
   protected readonly commandPaletteService = inject(CommandPaletteService);
-
-  protected readonly pages = [
-    { name: 'Introduction', path: '/docs/getting-started/introduction' },
-    { name: 'Prerequisites', path: '/docs/getting-started/prerequisites' },
-    { name: 'Components', path: '/components' },
-  ];
 
   constructor() {
     // Mod+K: ⌘K on a Mac, Ctrl+K elsewhere — in a field too.
