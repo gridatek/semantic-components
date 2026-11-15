@@ -51,6 +51,11 @@ export interface ScChartSeries {
    * when the keyboard reaches it — a slice, a box. Left out: the category's.
    */
   readonly anchor?: (index: number) => ScChartBox | null;
+  /**
+   * Radial bars: their rings' middles, from the center (px) — the polar
+   * grid's circles go there, as Recharts' (a ring per category).
+   */
+  readonly rings?: Signal<readonly number[]>;
 }
 
 /** A box in the plot, in px. */

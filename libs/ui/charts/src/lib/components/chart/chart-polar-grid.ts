@@ -59,10 +59,18 @@ export class ScChartPolarGrid {
 
   protected readonly ringList = computed(() => {
     const { cx, cy, radius } = this.state.circle();
-    const count = Math.max(1, this.ringCount());
     const spokes = this.state.data().map((_, i) => this.state.spokeAngle(i));
-    return Array.from({ length: count }, (_, ring) => {
-      const r = (radius * (ring + 1)) / count;
+    // Radial bars: through each ring's middle (Recharts' circles at the
+    // categories); else rings evenly out to the edge.
+    const rings = this.state
+      .series()
+      .find((s) => s.rings)
+      ?.rings?.();
+    const count = Math.max(1, this.ringCount());
+    const radii =
+      rings ??
+      Array.from({ length: count }, (_, ring) => (radius * (ring + 1)) / count);
+    return radii.map((r) => {
       return {
         cx,
         cy,
@@ -79,6 +87,27 @@ export class ScChartPolarGrid {
 
   protected readonly spokeList = computed(() => {
     const { cx, cy, radius } = this.state.circle();
+    // Radial bars: at the values' ticks along the ring (Recharts' radial
+    // lines on the angle axis); else to each category.
+    const rings = this.state
+      .series()
+      .find((s) => s.rings)
+      ?.rings?.();
+    if (rings?.length) {
+      const share = this.state.share();
+      const [start, end] = this.state.angles();
+      // From the hole's edge (half a ring inside the first), as Recharts'
+      // from the chart's inner radius: the hole stays empty.
+      const half = rings.length > 1 ? (rings[1] - rings[0]) / 2 : 0;
+      const inner = Math.max(0, rings[0] - half);
+      return share
+        .ticks(5)
+        .map((value) => start + (end - start) * share(value))
+        .map((angle) => {
+          const from = this.state.point(angle, inner);
+          return { cx: from.x, cy: from.y, ...this.state.point(angle, radius) };
+        });
+    }
     return this.state.data().map((_, index) => ({
       cx,
       cy,

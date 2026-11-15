@@ -204,6 +204,7 @@ export class ScChartRadialBar implements ScChartSeriesLabels {
       kind: 'radial',
       stack: this.stack,
       colorBy: this.colorBy,
+      rings: computed(() => this.rings().map((ring) => ring.radius)),
       // The keyboard's item: its arc's end.
       anchor: (index) => {
         const ring = this.rings().find((r) => r.index === index);

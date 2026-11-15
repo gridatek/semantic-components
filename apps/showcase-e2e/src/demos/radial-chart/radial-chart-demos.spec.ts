@@ -110,3 +110,27 @@ test('RTL: in Arabic, not mirrored — → still to the next', async ({ page }) 
   await press(page, 'ArrowRight');
   await expect(tooltip(page)).toContainText('Safari');
 });
+
+test('Grid: a circle through the middle of each ring, as Recharts', async ({
+  page,
+}) => {
+  await page.goto(demo('grid-radial'));
+  const arcs = page.locator(
+    '[data-slot=chart-radial-bar] path:not(.fill-muted)',
+  );
+  await expect(arcs).toHaveCount(5);
+  // Each ring's middle: halfway between its inner and outer edges, from the
+  // center (the arcs' common middle).
+  const circles = page.locator('[data-slot=chart-polar-grid] circle');
+  await expect(circles).toHaveCount(5);
+  const radii = await circles.evaluateAll((all) =>
+    all.map((circle) => Number(circle.getAttribute('r'))),
+  );
+  // Evenly spaced: a ring's width apart.
+  const step = radii[1] - radii[0];
+  expect(step).toBeGreaterThan(0);
+  for (let i = 1; i < radii.length; i++)
+    expect(radii[i] - radii[i - 1]).toBeCloseTo(step, 1);
+  // The first through the first ring: half a ring out from the hole.
+  expect(radii[0]).toBeGreaterThan(step / 2);
+});
