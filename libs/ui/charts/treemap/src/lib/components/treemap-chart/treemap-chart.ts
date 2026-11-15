@@ -1,3 +1,4 @@
+import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   Component,
   DestroyRef,
@@ -58,6 +59,17 @@ const MIN_LABEL_HEIGHT = 24;
   selector: 'g[scChartTreemap]',
   providers: [{ provide: SC_CHART_SERIES, useExisting: ScChartTreemap }],
   template: `
+    <!-- Sliding in: within the plot, not across the page. -->
+    @if (entering(); as area) {
+      <svg:clipPath [attr.id]="clipId">
+        <svg:rect
+          [attr.x]="area.left"
+          [attr.y]="area.top"
+          [attr.width]="area.right - area.left"
+          [attr.height]="area.bottom - area.top"
+        />
+      </svg:clipPath>
+    }
     @for (group of groups(); track group.name) {
       <svg:text
         class="fill-muted-foreground"
@@ -87,6 +99,7 @@ const MIN_LABEL_HEIGHT = 24;
   host: {
     'data-slot': 'chart-treemap',
     '[attr.data-key]': 'key()',
+    '[attr.clip-path]': "entering() ? 'url(#' + clipId + ')' : null",
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
@@ -116,6 +129,14 @@ export class ScChartTreemap implements ScChartSeriesLabels {
     duration: this.animationDuration,
     easing: this.animationEasing,
   });
+  /** Its clip while it enters: unique in the page. */
+  private readonly clipId = inject(_IdGenerator).getId(
+    'sc-chart-treemap-clip-',
+  );
+  /** While its boxes slide in: the plot's area, to clip them to. */
+  private readonly entering = computed(() =>
+    this.isAnimationActive() && this.entrance() < 1 ? this.state.area() : null,
+  );
   /** Mirrored (right to left, the app following it): laid out from the right. */
   private readonly mirrored = this.state.mirrored;
 

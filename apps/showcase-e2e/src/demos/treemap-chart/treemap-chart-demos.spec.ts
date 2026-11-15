@@ -16,7 +16,7 @@ test.afterEach(() => {
 
 test('Treemap: a box per browser; the pointer names it', async ({ page }) => {
   await page.goto(demo('treemap'));
-  const boxes = page.locator('[data-slot=chart-treemap] rect');
+  const boxes = page.locator('[data-slot=chart-treemap] > rect');
   await expect(boxes).toHaveCount(4);
   await boxes.nth(1).hover();
   await expect(tooltip(page)).toBeVisible();
@@ -31,7 +31,7 @@ test('Groups: boxes under their folders; the keyboard moves through them', async
   page,
 }) => {
   await page.goto(demo('grouped-treemap'));
-  await expect(page.locator('[data-slot=chart-treemap] rect')).toHaveCount(7);
+  await expect(page.locator('[data-slot=chart-treemap] > rect')).toHaveCount(7);
   await expect(page.locator('[data-slot=chart-treemap] > text')).toHaveText([
     'src',
     'assets',
@@ -45,7 +45,7 @@ test('Groups: boxes under their folders; the keyboard moves through them', async
 
 test('Entrance: the boxes slide in from the left', async ({ page }) => {
   await page.goto(demo('treemap'));
-  const box = page.locator('[data-slot=chart-treemap] rect').first();
+  const box = page.locator('[data-slot=chart-treemap] > rect').first();
   const x = () => box.evaluate((rect) => Number(rect.getAttribute('x')));
   // Past the left edge at first, then at its place.
   const first = await x();
@@ -106,10 +106,37 @@ test("Corners: the style's — square in Lyra, rounded in Nova", async ({
       },
     ]);
     await page.goto(demo('treemap'));
-    const box = page.locator('[data-slot=chart-treemap] rect').first();
+    const box = page.locator('[data-slot=chart-treemap] > rect').first();
     await expect(box).toBeAttached();
     return box.evaluate((rect) => getComputedStyle(rect).rx);
   };
   expect(await rx('lyra')).toBe('0px');
   expect(parseFloat(await rx('nova'))).toBeGreaterThan(0);
+});
+
+test('Entrance: the boxes slide in within the chart, not across the page', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1280, height: 720 });
+  await page.goto(demo('treemap'));
+  // The plot there (its entrance waits for it to be seen).
+  await page.locator('[data-slot=chart-plot]').waitFor();
+  // Every frame of the entrance: what is drawn just left of the plot.
+  const outside = await page.evaluate(async () => {
+    const plot = document.querySelector('[data-slot=chart-plot]');
+    if (!plot) return -1;
+    let hits = 0;
+    const end = performance.now() + 1200;
+    while (performance.now() < end) {
+      const box = plot.getBoundingClientRect();
+      const there = document.elementFromPoint(
+        Math.max(1, box.left - 20),
+        box.top + box.height / 2,
+      );
+      if (there?.closest('[data-slot=chart-treemap]')) hits++;
+      await new Promise((done) => requestAnimationFrame(done));
+    }
+    return hits;
+  });
+  expect(outside).toBe(0);
 });
