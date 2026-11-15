@@ -163,10 +163,15 @@ test('Dialog: Mod+J opens and closes it; the key written for the platform', asyn
   await expect(page.locator('kbd').first()).toHaveText(
     isMac ? '⌘ J' : 'Ctrl+J',
   );
-  await page.keyboard.press('ControlOrMeta+j');
+  // The page's platform, not the machine's (Playwright's WebKit says it's a
+  // Mac everywhere; ControlOrMeta follows the machine).
+  const mod = await page.evaluate(() =>
+    /Mac/.test(navigator.userAgent) ? 'Meta+j' : 'Control+j',
+  );
+  await page.keyboard.press(mod);
   await expect(page.getByRole('dialog')).toBeVisible();
   await expect(page.getByRole('combobox')).toBeFocused();
-  await page.keyboard.press('ControlOrMeta+j');
+  await page.keyboard.press(mod);
   await expect(page.getByRole('dialog')).toBeHidden();
 });
 

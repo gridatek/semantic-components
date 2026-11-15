@@ -1,4 +1,5 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
+import { Directionality } from '@angular/cdk/bidi';
 import {
   Directive,
   ElementRef,
@@ -40,6 +41,7 @@ export type ScSliderOrientation = 'horizontal' | 'vertical';
     '[style.--sc-slider-value]': 'fraction()',
     '[class]': 'class()',
     '(input)': 'onInput()',
+    '(keydown)': 'onKeydown($event)',
   },
 })
 export class ScSlider implements FormValueControl<number> {
@@ -110,6 +112,40 @@ export class ScSlider implements FormValueControl<number> {
       this.classInput(),
     ),
   );
+
+  private readonly direction = inject(Directionality);
+
+  /**
+   * Right to left, across: ← raises it, → lowers it.
+   *
+   * FIXME(webkit): a workaround. Chrome and Firefox flip a native range's
+   * arrows right to left by themselves; Safari (WebKit) doesn't, its arrows
+   * stay left to right. Check again with each WebKit release; drop it once
+   * Safari flips them (specs: "RTL" in the slider and range slider demos).
+   */
+  protected onKeydown(event: KeyboardEvent): void {
+    if (
+      this.orientation() !== 'horizontal' ||
+      this.direction.value !== 'rtl' ||
+      (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') ||
+      event.altKey ||
+      event.ctrlKey ||
+      event.metaKey
+    )
+      return;
+    event.preventDefault();
+    const step = (event.key === 'ArrowLeft' ? 1 : -1) * this.step();
+    const next = Math.min(
+      this.resolvedMax(),
+      Math.max(this.resolvedMin(), this.value() + step),
+    );
+    if (next === this.value()) return;
+    this.value.set(next);
+    // As a native change would: for listeners on the input.
+    this.element.value = String(next);
+    this.element.dispatchEvent(new Event('input', { bubbles: true }));
+    this.element.dispatchEvent(new Event('change', { bubbles: true }));
+  }
 
   protected onInput(): void {
     this.value.set(this.element.valueAsNumber);

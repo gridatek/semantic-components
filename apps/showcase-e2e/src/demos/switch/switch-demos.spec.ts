@@ -118,5 +118,7 @@ test('RTL: on, its thumb moves to the left', async ({ page }) => {
   await page.goto(demo('rtl'));
   const share = page.getByRole('switch', { name: 'المشاركة عبر الأجهزة' });
   await expect(share).toBeChecked();
-  expect(await thumbX(share)).toMatch(/^calc\(-100%/);
+  // Once it has slid there (a transition: WebKit sets it after the first
+  // render, and reads the way through it).
+  await expect.poll(() => thumbX(share)).toMatch(/^calc\(-100%/);
 });

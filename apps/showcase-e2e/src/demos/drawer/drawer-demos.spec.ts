@@ -10,14 +10,23 @@ const drawer = (page: Page) => page.getByRole('dialog');
 const settled = (d: Locator) =>
   expect.poll(() => d.evaluate((el) => el.getAnimations().length)).toBe(0);
 
-/** Drags a mouse from the middle of `from` by (dx, dy), in steps. */
+/**
+ * Drags a mouse from the middle of `from` by (dx, dy), in 10 steps a frame
+ * apart, as a hand would: WebKit's come a millisecond apart otherwise, and
+ * any drag reads as a flick.
+ */
 async function drag(page: Page, from: Locator, dx: number, dy: number) {
   const b = await box(from);
   const x = b.x + b.width / 2;
   const y = b.y + b.height / 2;
   await page.mouse.move(x, y);
   await page.mouse.down();
-  await page.mouse.move(x + dx, y + dy, { steps: 10 });
+  for (let i = 1; i <= 10; i++) {
+    await page.mouse.move(x + (dx * i) / 10, y + (dy * i) / 10);
+    await page.evaluate(
+      () => new Promise((done) => requestAnimationFrame(done)),
+    );
+  }
   await page.mouse.up();
 }
 

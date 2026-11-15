@@ -1,12 +1,14 @@
 import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import {
   Directive,
+  ElementRef,
   booleanAttribute,
   computed,
   inject,
   input,
 } from '@angular/core';
 import { cn } from 'cn';
+import { ɵfocusOnPress } from '../../utils';
 import { ScPopoverProvider } from './popover-provider';
 
 /**
@@ -30,6 +32,8 @@ import { ScPopoverProvider } from './popover-provider';
 export class ScPopoverTrigger {
   protected readonly popover = inject(ScPopoverProvider);
   readonly overlayOrigin = inject(CdkOverlayOrigin);
+  private readonly element =
+    inject<ElementRef<HTMLButtonElement>>(ElementRef).nativeElement;
   readonly classInput = input<string>('', { alias: 'class' });
 
   /** The pointer's hover opens it too. */
@@ -42,6 +46,7 @@ export class ScPopoverTrigger {
   protected readonly class = computed(() => cn(this.classInput()));
 
   protected toggle(): void {
+    ɵfocusOnPress(this.element);
     this.popover.timing.cancel();
     // Opened by hover, a click keeps it open (it isn't the pointer's any more).
     if (this.popover.openedByHover && this.popover.open()) {

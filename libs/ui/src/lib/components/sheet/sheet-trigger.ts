@@ -1,5 +1,6 @@
-import { Directive, computed, inject, input } from '@angular/core';
+import { Directive, ElementRef, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
+import { ɵfocusOnPress } from '../../utils';
 import { ScSheetProvider } from './sheet-provider';
 
 /** Opens the sheet, on any button: behaviour only, the look is the button's. */
@@ -9,12 +10,19 @@ import { ScSheetProvider } from './sheet-provider';
     '[attr.aria-haspopup]': '"dialog"',
     '[attr.aria-expanded]': 'sheet.open()',
     '[class]': 'class()',
-    '(click)': 'sheet.open.set(true)',
+    '(click)': 'openSheet()',
   },
 })
 export class ScSheetTrigger {
   protected readonly sheet = inject(ScSheetProvider);
+  private readonly element =
+    inject<ElementRef<HTMLButtonElement>>(ElementRef).nativeElement;
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() => cn(this.classInput()));
+
+  protected openSheet(): void {
+    ɵfocusOnPress(this.element);
+    this.sheet.open.set(true);
+  }
 }

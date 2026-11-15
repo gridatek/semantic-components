@@ -18,12 +18,12 @@ test('Usage: it pulses; your shape wins over the preset’s corners', async ({
   const avatar = page.locator('[scSkeleton]').first();
   await expect(avatar).toHaveCSS('animation-name', 'pulse');
   // rounded-full over the preset's corners: a circle. Its radius is
-  // calc(infinity * 1px), each browser's largest length: Chromium's
-  // 3.35544e+07px, Firefox's and WebKit's 3.40282e38px.
-  await expect(avatar).toHaveCSS(
-    'border-radius',
-    /^(9999|3\.35544e\+07|3\.40282e\+?38)px$/,
+  // calc(infinity * 1px), each browser's largest length, as each writes it:
+  // Chromium's 3.35544e+07px, Firefox's 3.40282e38px, WebKit's in full.
+  const radius = await avatar.evaluate((el) =>
+    parseFloat(getComputedStyle(el).borderTopLeftRadius),
   );
+  expect(radius).toBeGreaterThanOrEqual(9999);
 });
 
 test('Reduced motion: it stands still', async ({ page }) => {

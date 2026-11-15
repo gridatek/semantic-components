@@ -1,5 +1,6 @@
-import { Directive, computed, inject, input } from '@angular/core';
+import { Directive, ElementRef, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
+import { ɵfocusOnPress } from '../../utils';
 import { ScAlertDialogProvider } from './alert-dialog-provider';
 
 @Directive({
@@ -14,11 +15,14 @@ import { ScAlertDialogProvider } from './alert-dialog-provider';
 })
 export class ScAlertDialogTrigger {
   readonly alertDialogProvider = inject(ScAlertDialogProvider);
+  private readonly element =
+    inject<ElementRef<HTMLButtonElement>>(ElementRef).nativeElement;
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() => cn('', this.classInput()));
 
   openDialog(): void {
+    ɵfocusOnPress(this.element);
     this.alertDialogProvider.open.set(true);
   }
 }

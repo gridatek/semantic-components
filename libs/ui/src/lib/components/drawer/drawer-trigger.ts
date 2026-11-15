@@ -1,5 +1,6 @@
-import { Directive, computed, inject, input } from '@angular/core';
+import { Directive, ElementRef, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
+import { ɵfocusOnPress } from '../../utils';
 import { ScDrawerProvider } from './drawer-provider';
 
 /** Opens the drawer, on any button: behaviour only, the look is the button's. */
@@ -10,12 +11,19 @@ import { ScDrawerProvider } from './drawer-provider';
     '[attr.aria-expanded]': 'drawer.open()',
     '[attr.aria-controls]': 'drawer.open() ? drawer.id : null',
     '[class]': 'class()',
-    '(click)': 'drawer.open.set(!drawer.open())',
+    '(click)': 'toggle()',
   },
 })
 export class ScDrawerTrigger {
   protected readonly drawer = inject(ScDrawerProvider);
+  private readonly element =
+    inject<ElementRef<HTMLButtonElement>>(ElementRef).nativeElement;
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() => cn(this.classInput()));
+
+  protected toggle(): void {
+    ɵfocusOnPress(this.element);
+    this.drawer.open.update((open) => !open);
+  }
 }
