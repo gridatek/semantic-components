@@ -86,3 +86,24 @@ test('RTL: in Arabic, not mirrored — → still to the next', async ({ page }) 
   await press(page, 'ArrowRight');
   await expect(tooltip(page)).toContainText('Safari');
 });
+
+test("Corners: the style's — square in Lyra, rounded in Nova", async ({
+  page,
+  baseURL,
+}) => {
+  const rx = async (preset: string) => {
+    await page.context().addCookies([
+      {
+        name: 'sc-preset',
+        value: preset,
+        url: baseURL ?? 'http://localhost:4200',
+      },
+    ]);
+    await page.goto(demo('treemap'));
+    const box = page.locator('[data-slot=chart-treemap] rect').first();
+    await expect(box).toBeAttached();
+    return box.evaluate((rect) => getComputedStyle(rect).rx);
+  };
+  expect(await rx('lyra')).toBe('0px');
+  expect(parseFloat(await rx('nova'))).toBeGreaterThan(0);
+});

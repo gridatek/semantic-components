@@ -42,6 +42,8 @@ Its own entry point, so the other charts don't need `d3-hierarchy`: `import { Sc
 
 With a `groupKey`, the legend lists the groups: give them their colors in the config (`folder name: { label, color }`).
 
+Its boxes' corners are the style's, as the bars': the preset sets `--chart-bar-radius` (square in Lyra and Sera, rounded in the others).
+
 ## Entrance
 
 As Recharts', each box slides in from just past the plot's left edge to its place when the chart appears — each its own distance, in the same time — with its label and its group's name: 1500ms, `linear`. Not on the server (it draws it whole), nor when the user asks for reduced motion. Only the first appearance: new data is drawn at once, as Recharts' treemap does.
