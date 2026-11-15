@@ -33,7 +33,7 @@ test('Stacked radial: a half circle, both series in one ring', async ({
   page,
 }) => {
   await page.goto(demo('stacked-radial'));
-  await expect(page.locator('[data-slot=chart-center]')).toContainText('1830');
+  await expect(page.locator('[data-slot=chart-center]')).toContainText('1,830');
   const plot = page.getByRole('group', {
     name: 'Visitors in January, by device',
   });

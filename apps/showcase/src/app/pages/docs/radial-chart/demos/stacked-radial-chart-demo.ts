@@ -3,6 +3,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScChart,
   ScChartCenter,
+  ScChartCenterValue,
   type ScChartConfig,
   ScChartPlot,
   ScChartRadialBar,
@@ -22,6 +23,7 @@ import {
     ScChartPlot,
     ScChartRadialBar,
     ScChartCenter,
+    ScChartCenterValue,
     ScChartTooltip,
     ScChartTooltipPortal,
     ScChartTooltipProvider,
@@ -47,13 +49,15 @@ import {
         <g scChartRadialBar key="desktop" stack="a" [innerRadius]="0.75" />
         <g scChartRadialBar key="mobile" stack="a" [innerRadius]="0.75" />
         <g scChartCenter>
+          <!-- Counting up as the arcs grow (a radial's: at once). -->
           <text
+            scChartCenterValue
             text-anchor="middle"
             dy="-1.2em"
             class="fill-foreground text-2xl font-bold"
-          >
-            {{ total }}
-          </text>
+            [value]="total"
+            [animationBegin]="0"
+          ></text>
           <text text-anchor="middle" dy="0.2em" class="fill-muted-foreground">
             Visitors
           </text>

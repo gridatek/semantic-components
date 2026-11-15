@@ -9,6 +9,7 @@ import {
 import {
   ScChart,
   ScChartCenter,
+  ScChartCenterValue,
   type ScChartConfig,
   ScChartPie,
   ScChartPlot,
@@ -30,6 +31,7 @@ import {
     ScCardFooter,
     ScChart,
     ScChartCenter,
+    ScChartCenterValue,
     ScChartPie,
     ScChartPlot,
     ScChartTooltip,
@@ -63,13 +65,22 @@ import {
               [strokeWidth]="0"
             />
             <g scChartCenter>
-              <text text-anchor="middle" dominant-baseline="middle">
-                <tspan x="0" y="-12" class="fill-foreground text-2xl font-bold">
-                  $24,000
-                </tspan>
-                <tspan x="0" y="12" class="fill-muted-foreground text-xs">
-                  80% of $30,000
-                </tspan>
+              <text
+                scChartCenterValue
+                text-anchor="middle"
+                dominant-baseline="middle"
+                y="-12"
+                class="fill-foreground text-2xl font-bold"
+                [value]="24000"
+                [format]="dollars"
+              ></text>
+              <text
+                text-anchor="middle"
+                dominant-baseline="middle"
+                y="12"
+                class="fill-muted-foreground text-xs"
+              >
+                80% of $30,000
               </text>
             </g>
           </svg>
@@ -107,6 +118,13 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviewSavingsProgress {
+  /** Dollars, no cents: $24,000. */
+  protected readonly dollars: Intl.NumberFormatOptions = {
+    style: 'currency',
+    currency: 'USD',
+    maximumFractionDigits: 0,
+  };
+
   protected readonly data = [
     { name: 'saved', value: 24000 },
     { name: 'remaining', value: 6000 },

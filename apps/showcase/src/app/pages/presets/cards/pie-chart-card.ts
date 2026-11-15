@@ -16,6 +16,7 @@ import {
 import {
   ScChart,
   ScChartCenter,
+  ScChartCenterValue,
   type ScChartConfig,
   ScChartLegend,
   ScChartLegendIndicator,
@@ -56,6 +57,7 @@ const TOP = DATA.reduce((max, row) =>
     ScCardTitle,
     ScChart,
     ScChartCenter,
+    ScChartCenterValue,
     ScChartLegend,
     DecimalPipe,
     ScChartTooltipIndicator,
@@ -101,13 +103,21 @@ const TOP = DATA.reduce((max, row) =>
               [strokeWidth]="5"
             />
             <g scChartCenter>
-              <text text-anchor="middle" dominant-baseline="middle">
-                <tspan x="0" y="-8" class="fill-foreground text-2xl font-bold">
-                  {{ total }}
-                </tspan>
-                <tspan x="0" y="12" class="fill-muted-foreground text-xs">
-                  Visitors
-                </tspan>
+              <text
+                scChartCenterValue
+                text-anchor="middle"
+                dominant-baseline="middle"
+                y="-8"
+                class="fill-foreground text-2xl font-bold"
+                [value]="total"
+              ></text>
+              <text
+                text-anchor="middle"
+                dominant-baseline="middle"
+                y="12"
+                class="fill-muted-foreground text-xs"
+              >
+                Visitors
               </text>
             </g>
           </svg>
@@ -165,7 +175,8 @@ export class PreviewPieChartCard {
     firefox: { label: 'Firefox', color: 'var(--chart-3)' },
     edge: { label: 'Edge', color: 'var(--chart-4)' },
   };
-  protected readonly total = TOTAL.toLocaleString('en-US');
+  /** The total: written by its counter, in the app's locale. */
+  protected readonly total = TOTAL;
   protected readonly topLabel = this.config[TOP.browser]?.label ?? 'Top';
   protected readonly topShare = Math.round((TOP.visitors / TOTAL) * 100);
 }

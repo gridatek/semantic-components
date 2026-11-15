@@ -3,6 +3,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScChart,
   ScChartCenter,
+  ScChartCenterValue,
   type ScChartConfig,
   ScChartPie,
   ScChartPlot,
@@ -22,6 +23,7 @@ import {
     ScChartPlot,
     ScChartPie,
     ScChartCenter,
+    ScChartCenterValue,
     ScChartTooltip,
     ScChartTooltipPortal,
     ScChartTooltipProvider,
@@ -47,9 +49,13 @@ import {
           [strokeWidth]="0"
         />
         <g scChartCenter>
-          <text text-anchor="middle" class="fill-foreground text-3xl font-bold">
-            {{ total }}
-          </text>
+          <!-- Counting up as the donut sweeps in. -->
+          <text
+            scChartCenterValue
+            text-anchor="middle"
+            class="fill-foreground text-3xl font-bold"
+            [value]="total"
+          ></text>
           <text text-anchor="middle" dy="1.6em" class="fill-muted-foreground">
             Visitors
           </text>

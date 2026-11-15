@@ -14,6 +14,7 @@ export {
   scChartTransition,
 } from './chart-animation';
 export { ScChartCategoryAxis } from './chart-category-axis';
+export { ScChartCenterValue } from './chart-center-value';
 export type { ScChartsConfig } from './chart-config';
 export { ScChartCenter } from './chart-center';
 export { ScChartCursor } from './chart-cursor';

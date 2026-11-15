@@ -172,3 +172,30 @@ test("Corners: a pie's and a donut's slices the style's — square in Lyra, roun
   expect(arcs(await shapeIn('lyra', 'pie'))).toBe(1);
   expect(arcs(await shapeIn('nova', 'pie'))).toBeGreaterThan(1);
 });
+
+test('Donut: its total counts up with the sweep — read as the total all along', async ({
+  page,
+}) => {
+  await page.goto(demo('donut'));
+  const total = page.locator('[data-slot=chart-center-value]');
+  // On its way: under 925, its name the total all along.
+  await expect(total).toHaveAttribute('aria-label', '925');
+  await expect
+    .poll(async () => Number((await total.textContent())?.replace(/\D/g, '')), {
+      intervals: [50],
+    })
+    .toBeLessThan(925);
+  // There: the total.
+  await expect(total).toHaveText('925');
+});
+
+test.describe('reduced motion, the total', () => {
+  test.use({ reducedMotion: 'reduce' });
+
+  test('Donut: its total there at once', async ({ page }) => {
+    await page.goto(demo('donut'));
+    await expect(page.locator('[data-slot=chart-center-value]')).toHaveText(
+      '925',
+    );
+  });
+});
