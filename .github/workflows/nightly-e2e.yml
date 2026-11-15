@@ -52,10 +52,10 @@ jobs:
 
       # Built first: the e2e server (serve-static) then starts from the cache,
       # within Playwright's start timeout.
-      # The showcase's settings aren't in git (.gitignore): the tests' own,
-      # every page listed, hidden ones too.
+      # The showcase's settings aren't in git: the tests' own
+      # (scripts/showcase-config.mjs).
       - name: Create showcase config
-        run: echo '{"devMode":true,"showHidden":true}' > apps/showcase/public/config.json
+        run: node scripts/showcase-config.mjs test
 
       - name: Build
         run: npx nx run-many -t build -p showcase blocks
@@ -123,10 +123,10 @@ jobs:
       - name: Install dependencies
         run: npm i
 
-      # The showcase's settings aren't in git (.gitignore): the tests' own,
-      # every page listed, hidden ones too.
+      # The showcase's settings aren't in git: the tests' own
+      # (scripts/showcase-config.mjs).
       - name: Create showcase config
-        run: echo '{"devMode":true,"showHidden":true}' > apps/showcase/public/config.json
+        run: node scripts/showcase-config.mjs test
 
       - name: Build (SSR)
         run: npx nx run-many -t build -p showcase blocks -c ssr

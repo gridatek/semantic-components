@@ -4,6 +4,7 @@
 
 - **Framework:** Playwright (via `@nx/playwright`)
 - **Test suites:** `apps/showcase-e2e/` and `apps/blocks-e2e/`
+- **The showcase's settings** (`apps/showcase/public/config.json`) aren't in git. The tests need every page listed, hidden ones too: after cloning, run `node scripts/showcase-config.mjs test`. Without the file, hidden pages don't show and their tests fail. Every workflow writes it the same way before building (`test`; `deploy.yml`: `prod` and `dev`).
 
 ## Running Tests
 
