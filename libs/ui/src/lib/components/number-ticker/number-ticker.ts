@@ -1,5 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import {
+  ApplicationRef,
   Component,
   DestroyRef,
   ElementRef,
@@ -139,6 +140,7 @@ export class ScNumberTicker {
 
   constructor() {
     const destroyRef = inject(DestroyRef);
+    const app = inject(ApplicationRef);
     // A new value: moved to, once started.
     effect(() => {
       const value = this.value();
@@ -147,22 +149,30 @@ export class ScNumberTicker {
     });
     // In the browser only (the server's window has no animation frames):
     // its frames stopped with it.
+    // Started once the app is stable: hydration waits for it, and counting
+    // changes the view every frame — many at once kept it from ever being
+    // stable on a slow machine (NG0506).
     afterNextRender(() => {
-      destroyRef.onDestroy(() =>
-        this.document.defaultView?.cancelAnimationFrame?.(this.frame),
-      );
-      if (this.start() === 'now') {
-        this.started.set(true);
-        return;
-      }
-      // Started when first seen.
-      const seen = new IntersectionObserver(([entry]) => {
-        if (!entry.isIntersecting) return;
-        seen.disconnect();
-        this.started.set(true);
+      let destroyed = false;
+      destroyRef.onDestroy(() => {
+        destroyed = true;
+        this.document.defaultView?.cancelAnimationFrame?.(this.frame);
       });
-      seen.observe(this.host);
-      destroyRef.onDestroy(() => seen.disconnect());
+      void app.whenStable().then(() => {
+        if (destroyed) return;
+        if (this.start() === 'now') {
+          this.started.set(true);
+          return;
+        }
+        // Started when first seen.
+        const seen = new IntersectionObserver(([entry]) => {
+          if (!entry.isIntersecting) return;
+          seen.disconnect();
+          this.started.set(true);
+        });
+        seen.observe(this.host);
+        destroyRef.onDestroy(() => seen.disconnect());
+      });
     });
   }
 

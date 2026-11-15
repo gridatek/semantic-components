@@ -1,5 +1,6 @@
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import {
+  ApplicationRef,
   DestroyRef,
   PLATFORM_ID,
   type Signal,
@@ -42,7 +43,14 @@ export function scChartEntrance(
   if (progress() === 1 || !view) return progress.asReadonly();
 
   let frame = 0;
-  const run = () => {
+  let destroyed = false;
+  const app = inject(ApplicationRef);
+  // Once the app is stable: hydration waits for it, and an entrance changes
+  // the view every frame — a page of charts entering at once kept it from
+  // ever being stable on a slow machine (NG0506).
+  const run = () => void app.whenStable().then(sweep);
+  const sweep = () => {
+    if (destroyed) return;
     const ease = scEasing(options.easing());
     const duration = Math.max(0, options.duration());
     const start = view.performance.now() + Math.max(0, options.begin());
@@ -63,7 +71,10 @@ export function scChartEntrance(
       untracked(run);
     });
   } else afterNextRender(run);
-  inject(DestroyRef).onDestroy(() => view.cancelAnimationFrame(frame));
+  inject(DestroyRef).onDestroy(() => {
+    destroyed = true;
+    view.cancelAnimationFrame(frame);
+  });
   return progress.asReadonly();
 }
 
