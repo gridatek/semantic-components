@@ -1,21 +1,32 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ScHeading } from '@semantic-components/ui';
+import { Anatomy } from '../../../components/anatomy/anatomy';
+import {
+  type ApiInput,
+  ApiTable,
+} from '../../../components/api-table/api-table';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { CardNumberTickerDemoContainer } from './demos/card-number-ticker-demo-container';
-import { CountNumberTickerDemoContainer } from './demos/count-number-ticker-demo-container';
+import { ChartNumberTickerDemoContainer } from './demos/chart-number-ticker-demo-container';
 import { FormatsNumberTickerDemoContainer } from './demos/formats-number-ticker-demo-container';
+import { NumberTickerUsageDemoContainer } from './demos/number-ticker-usage-demo-container';
 import { RollNumberTickerDemoContainer } from './demos/roll-number-ticker-demo-container';
+import { RtlNumberTickerDemoContainer } from './demos/rtl-number-ticker-demo-container';
 import { VisibleNumberTickerDemoContainer } from './demos/visible-number-ticker-demo-container';
 
 @Component({
   selector: 'app-number-ticker-page',
   imports: [
-    CountNumberTickerDemoContainer,
+    NumberTickerUsageDemoContainer,
     RollNumberTickerDemoContainer,
     FormatsNumberTickerDemoContainer,
     VisibleNumberTickerDemoContainer,
     CardNumberTickerDemoContainer,
+    ChartNumberTickerDemoContainer,
+    RtlNumberTickerDemoContainer,
+    Anatomy,
+    ApiTable,
     TocHeading,
     ComponentBadges,
     ScHeading,
@@ -33,51 +44,119 @@ import { VisibleNumberTickerDemoContainer } from './demos/visible-number-ticker-
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Count</h2>
-        <p class="text-muted-foreground">
-          The number counts to its new value, easing out. Screen readers get
-          only the value; with reduced motion, it is there at once.
-        </p>
-        <app-count-number-ticker-demo-container />
+        <h2 scHeading appToc>Usage</h2>
+        <app-number-ticker-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Roll</h2>
+        <h2 scHeading appToc>Anatomy</h2>
         <p class="text-muted-foreground">
-          effect="roll": each digit rolls to its new place, like an odometer —
-          the separators and the currency stay still.
+          One part, on the element that holds the number — a span, a heading, an
+          SVG text. It writes the number; you style it.
         </p>
+        <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Accessibility</h2>
+        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+          <li>
+            Screen readers get the value, never the numbers on the way: a hidden
+            text with it, the moving digits hidden from them — on an SVG text,
+            an image named by it.
+          </li>
+          <li>
+            A change isn't announced: put the ticker in a live region (an
+            aria-live parent) if its new value must be heard.
+          </li>
+          <li>
+            With reduced motion (prefers-reduced-motion), the new value is there
+            at once; the digits don't roll.
+          </li>
+        </ul>
+      </section>
+
+      <section class="space-y-8">
+        <h2 scHeading appToc>Examples</h2>
         <app-roll-number-ticker-demo-container />
-      </section>
-
-      <section class="space-y-4">
-        <h2 scHeading appToc>Formats</h2>
-        <p class="text-muted-foreground">
-          Any Intl.NumberFormat options, in LOCALE_ID — provided here as German:
-          euros, a percent, compact.
-        </p>
         <app-formats-number-ticker-demo-container />
-      </section>
-
-      <section class="space-y-4">
-        <h2 scHeading appToc>When seen</h2>
-        <p class="text-muted-foreground">
-          start="visible": landing-page figures that count up from zero when
-          they are first scrolled into view.
-        </p>
         <app-visible-number-ticker-demo-container />
+        <app-card-number-ticker-demo-container />
+        <app-chart-number-ticker-demo-container />
+        <app-rtl-number-ticker-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>In a stat card</h2>
-        <p class="text-muted-foreground">
-          In the stat card’s value: the figure moves to its new value as the
-          data comes in.
-        </p>
-        <app-card-number-ticker-demo-container />
+        <h2 scHeading appToc>API reference</h2>
+        <app-api-table label="ScNumberTicker inputs" [inputs]="inputs" />
       </section>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,
 })
-export default class NumberTickerPage {}
+export default class NumberTickerPage {
+  protected readonly anatomy = {
+    imports: "import { ScNumberTicker } from '@semantic-components/ui';",
+    markup: '<span scNumberTicker [value]="…"></span>',
+  };
+
+  protected readonly inputs: ApiInput[] = [
+    {
+      name: 'value',
+      type: 'number',
+      default: '—',
+      description: 'The number (required): a new one is moved to.',
+    },
+    {
+      name: 'effect',
+      type: "'count' | 'roll'",
+      default: "'count'",
+      description:
+        'Counting to it, or each digit rolling (an odometer; on HTML only).',
+    },
+    {
+      name: 'format',
+      type: 'Intl.NumberFormatOptions',
+      default: '{}',
+      description:
+        'How it is written — currency, percent, compact, a unit, decimals — in LOCALE_ID.',
+    },
+    {
+      name: 'duration',
+      type: 'number',
+      default: '1000',
+      description: 'How long a change takes, in ms.',
+    },
+    {
+      name: 'delay',
+      type: 'number',
+      default: '0',
+      description: 'The wait before it moves, in ms (a chart’s: its series’).',
+    },
+    {
+      name: 'easing',
+      type: "'ease' | 'ease-in' | 'ease-out' | 'ease-in-out' | 'linear'",
+      default: "'ease-out'",
+      description: 'How it moves: CSS’s timing names.',
+    },
+    {
+      name: 'from',
+      type: 'number',
+      default: '0',
+      description: 'Where the first move starts from.',
+    },
+    {
+      name: 'start',
+      type: "'now' | 'visible'",
+      default: "'now'",
+      description:
+        'When the first move starts: at once, or when it is first seen.',
+    },
+    {
+      name: 'class',
+      type: 'string',
+      default: "''",
+      description: 'Merged over its own classes.',
+    },
+  ];
+}

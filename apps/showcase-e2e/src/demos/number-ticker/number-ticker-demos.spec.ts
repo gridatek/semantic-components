@@ -20,10 +20,10 @@ test.afterEach(() => {
   expect(errors).toEqual([]);
 });
 
-test('Count: counts on the way; readers get only the value', async ({
+test('Usage: counts on the way; readers get only the value', async ({
   page,
 }) => {
-  await page.goto(demo('count'));
+  await page.goto('/demos/number-ticker/number-ticker-usage-demo');
   await expect(seen(page)).toHaveText('0');
   await expect(seen(page)).toHaveAttribute('aria-hidden', 'true');
   await page.getByRole('button', { name: '+100' }).click();
@@ -40,9 +40,9 @@ test('Count: counts on the way; readers get only the value', async ({
   await expect(seen(page)).toHaveText('0');
 });
 
-test('Count: reduced motion — there at once', async ({ page }) => {
+test('Usage: reduced motion — there at once', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
-  await page.goto(demo('count'));
+  await page.goto('/demos/number-ticker/number-ticker-usage-demo');
   await page.getByRole('button', { name: '+100' }).click();
   await expect(seen(page)).toHaveText('100', { timeout: 150 });
 });
@@ -96,4 +96,29 @@ test('In a stat card: the figure moves on refresh', async ({ page }) => {
   await page.getByRole('button', { name: 'Refresh' }).click();
   await expect(said(page)).toHaveText('1,421');
   await expect(seen(page)).toHaveText('1,421');
+});
+
+test('In a chart’s center: on an SVG text, counting up — named by its value', async ({
+  page,
+}) => {
+  await page.goto(demo('chart'));
+  const total = counters(page);
+  // On SVG: an image named by the value; the text the number on its way.
+  await expect(total).toHaveAttribute('role', 'img');
+  await expect(total).toHaveAttribute('aria-label', '925');
+  await expect
+    .poll(async () => Number((await total.textContent())?.replace(/\D/g, '')), {
+      intervals: [50],
+    })
+    .toBeLessThan(925);
+  await expect(total).toHaveText('925');
+});
+
+test('RTL: Arabic digits, rolling', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto(demo('rtl'));
+  // ar-EG writes Arabic-Indic digits: ٤٬٨٢٠.
+  await expect(said(page)).toHaveText('٤٬٨٢٠');
+  await page.getByRole('button', { name: 'زيادة' }).click();
+  await expect(said(page)).toHaveText('٦٬٠٧٠');
 });

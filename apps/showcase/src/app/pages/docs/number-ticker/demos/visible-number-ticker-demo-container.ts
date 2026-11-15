@@ -8,6 +8,7 @@ import { VisibleNumberTickerDemo } from './visible-number-ticker-demo';
   template: `
     <app-demo-container
       title="When seen"
+      description='start="visible": landing-page figures that count up from zero when they are first scrolled into view.'
       [code]="code"
       demoUrl="/demos/number-ticker/visible-number-ticker-demo"
     >

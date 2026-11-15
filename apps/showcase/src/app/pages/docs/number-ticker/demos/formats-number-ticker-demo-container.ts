@@ -8,6 +8,7 @@ import { FormatsNumberTickerDemo } from './formats-number-ticker-demo';
   template: `
     <app-demo-container
       title="Formats"
+      description="Any Intl.NumberFormat options, in LOCALE_ID — provided here as German: euros, a percent, compact."
       [code]="code"
       demoUrl="/demos/number-ticker/formats-number-ticker-demo"
     >

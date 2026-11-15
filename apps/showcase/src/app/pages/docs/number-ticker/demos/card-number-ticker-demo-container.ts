@@ -8,6 +8,7 @@ import { CardNumberTickerDemo } from './card-number-ticker-demo';
   template: `
     <app-demo-container
       title="In a stat card"
+      description="In the stat card’s value: the figure moves to its new value as the data comes in."
       [code]="code"
       demoUrl="/demos/number-ticker/card-number-ticker-demo"
     >

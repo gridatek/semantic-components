@@ -571,10 +571,24 @@ export const demosRoutes: Route[] = [
     path: 'demos/number-ticker',
     children: [
       {
-        path: 'count-number-ticker-demo',
+        path: 'number-ticker-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/number-ticker/demos/count-number-ticker-demo').then(
-            (m) => m.CountNumberTickerDemo,
+          import('../pages/docs/number-ticker/demos/number-ticker-usage-demo').then(
+            (m) => m.NumberTickerUsageDemo,
+          ),
+      },
+      {
+        path: 'chart-number-ticker-demo',
+        loadComponent: () =>
+          import('../pages/docs/number-ticker/demos/chart-number-ticker-demo').then(
+            (m) => m.ChartNumberTickerDemo,
+          ),
+      },
+      {
+        path: 'rtl-number-ticker-demo',
+        loadComponent: () =>
+          import('../pages/docs/number-ticker/demos/rtl-number-ticker-demo').then(
+            (m) => m.RtlNumberTickerDemo,
           ),
       },
       {

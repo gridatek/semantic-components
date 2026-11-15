@@ -8,6 +8,7 @@ import { RollNumberTickerDemo } from './roll-number-ticker-demo';
   template: `
     <app-demo-container
       title="Roll"
+      description='effect="roll": each digit rolls to its new place, like an odometer — the separators and the currency stay still.'
       [code]="code"
       demoUrl="/demos/number-ticker/roll-number-ticker-demo"
     >
